@@ -1,29 +1,29 @@
 [
   {
-    "label": "Mean value theorem for integrals",
-    "section": "Mean Value Theorem for Integrals",
+    "label": "Statement of the integral mean value theorem",
+    "section": "Statement",
     "subgoals": [
-      "State f(c) equals the average value",
-      "Solve f(c) = average for c",
-      "Check f(x) = x on [0,4] gives c = 2"
+      "Read integral of f over [a,b] as f(c)(b-a)",
+      "Rewrite as integral of (f(x)-f(c)) = 0",
+      "Flag continuity as the only hypothesis on f"
     ]
   },
   {
-    "label": "Computing the average value",
-    "section": "Computing definite integrals",
+    "label": "The average value of a function",
+    "section": "The average value of a function",
     "subgoals": [
-      "Divide the integral by (b - a)",
-      "Evaluate x^2 on [0,2] to 4/3",
-      "Evaluate 3x on [1,3] to 6"
+      "Divide the integral by (b-a) for the mean mu",
+      "Evaluate integral of sqrt(x) over [0,9] to 18, mean 2",
+      "Solve sqrt(c)=2 to locate c=4"
     ]
   },
   {
-    "label": "Integral properties",
-    "section": "Properties",
+    "label": "Worked averages and weights",
+    "section": "Some examples",
     "subgoals": [
-      "Apply linearity to split the integrand",
-      "Split intervals additively",
-      "Use properties before averaging"
+      "Solve sin c=2/pi for two symmetric points c1, c2",
+      "Weight x^2 by x on [0,2] to shift c to sqrt(2)",
+      "Contrast with unweighted mean 4/3 at c=2/sqrt(3)"
     ]
   }
 ]

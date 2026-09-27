@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definitions",
+    "section": "Definitions",
+    "subgoals": [
+      "Test distinct inputs for a collision f(a) = f(b)",
+      "Exhibit a collision pair to refute injectivity",
+      "Name a missed codomain value to refute surjectivity"
+    ]
+  },
+  {
+    "label": "Four functions on the integers",
+    "section": "Four functions on the integers",
+    "subgoals": [
+      "Classify the doubling map on Z",
+      "Locate where the squaring map on Z collides",
+      "Sort the four maps into the four injectivity classes"
+    ]
+  },
+  {
+    "label": "Behaviour under composition",
+    "section": "Behaviour under composition",
+    "subgoals": [
+      "Compose two injections and verify the result is injective",
+      "Trace a missed value through the outer map",
+      "Show a non-injective inner map breaks the composite"
+    ]
+  }
+]

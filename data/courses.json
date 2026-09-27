@@ -60,14 +60,14 @@
     "name": "Algebra II",
     "grade": "10th-11th",
     "description": "Advanced functions: quadratics, logarithms, trigonometry, and polynomials. Complex numbers and sequences.",
-    "targets": ["alg.log.properties", "trig.basics.sin_cos_def", "trig.func.sine", "trig.func.tangent", "alg.poly.special", "alg.seq.geometric"]
+    "targets": ["alg.log.properties", "trig.basics.sin_cos_def", "trig.func.sine", "trig.func.tangent", "alg.func.power", "alg.func.irrational", "alg.func.injectivity", "alg.poly.special", "alg.seq.geometric"]
   },
   {
     "id": "pc",
     "name": "Precalculus",
     "grade": "11th-12th",
     "description": "Advanced trigonometry, complex numbers, vectors, matrices, limits, and sequences.",
-    "targets": ["trig.adv.law_cosines", "trig.func.arcsine", "trig.func.arctangent", "complex.adv.polar", "linalg.vector.concept", "calc.limit.concept"]
+    "targets": ["trig.adv.law_cosines", "trig.func.arcsine", "trig.func.arctangent", "precalc.func.floor_ceiling", "precalc.func.heaviside", "complex.adv.polar", "linalg.vector.concept", "calc.limit.concept"]
   },
   {
     "id": "calc1",
@@ -109,7 +109,7 @@
     "name": "Probability & Statistics",
     "grade": "college",
     "description": "Descriptive statistics, probability, distributions, and inference.",
-    "targets": ["stat.data.mean", "stat.prob.compound", "stat.dist.binomial", "stat.dist.normal", "stat.infer.confidence"]
+    "targets": ["stat.data.mean", "stat.prob.compound", "stat.dist.binomial", "stat.dist.normal", "stat.func.gaussian", "stat.infer.confidence"]
   },
   {
     "id": "nt",

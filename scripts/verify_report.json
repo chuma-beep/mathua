@@ -6783,6 +6783,426 @@
   "latex": "(0,0)"
  },
  {
+  "file": "data/lessons/algebrica/functions/arccosine-function.md",
+  "line": 7,
+  "verdict": "SKIP",
+  "reason": "tuple or multi-argument form",
+  "latex": "\\arccos : [-1, 1] \\to [0, \\pi]"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccosine-function.md",
+  "line": 15,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "\\begin{align}\n\\cos(\\arccos(x)) &= x \\quad \\forall x \\in [-1, 1] \\\\[6pt]\n\\arccos(\\cos(\\theta)) &= \\theta \\quad \\iff \\quad \\theta \\in [0, \\pi]\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccosine-function.md",
+  "line": 38,
+  "verdict": "SKIP",
+  "reason": "solve-for (not an identity)",
+  "latex": "\\arcsin(x) + \\arccos(x) = \\frac{\\pi}{2}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccosine-function.md",
+  "line": 53,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\arccos(x) = -i\\mathrm{Log}\\left(x + i\\sqrt{1 - x^2}\\right)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccosine-function.md",
+  "line": 67,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\frac{d}{dx}\\arccos(x) = -\\frac{1}{\\sqrt{1 - x^2}}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccosine-function.md",
+  "line": 71,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "\\lim_{x \\to 1^-} -\\frac{1}{\\sqrt{1 - x^2}} = -\\infty \\qquad \\lim_{x \\to -1^+} -\\frac{1}{\\sqrt{1 - x^2}} = -\\infty"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccosine-function.md",
+  "line": 79,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\arccos(x) \\ dx = x\\arccos(x) + \\int \\frac{x}{\\sqrt{1 - x^2}} \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccosine-function.md",
+  "line": 83,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\arccos(x) \\ dx = x\\arccos(x) - \\sqrt{1 - x^2} + c"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccosine-function.md",
+  "line": 87,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_{-1}^{1} \\arccos(x) \\ dx = \\pi \\qquad \\int_0^1 \\arccos(x) \\ dx = 1"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccosine-function.md",
+  "line": 95,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\frac{d^2}{dx^2}\\arccos(x) = -\\frac{x}{\\left(1 - x^2\\right)^{3/2}}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccosine-function.md",
+  "line": 103,
+  "verdict": "SKIP",
+  "reason": "mixed-number/binomial",
+  "latex": "-\\frac{1}{\\sqrt{1 - t^2}} = -\\sum_{n=0}^{\\infty} \\frac{1}{4^n}\\binom{2n}{n}t^{2n}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccosine-function.md",
+  "line": 109,
+  "verdict": "SKIP",
+  "reason": "ellipsis schema",
+  "latex": "\\arccos(x) = \\frac{\\pi}{2} - \\sum_{n=0}^{\\infty} \\frac{1}{4^n}\\binom{2n}{n}\\frac{x^{2n+1}}{2n+1} = \\frac{\\pi}{2} - x - \\frac{x^3}{6} - \\frac{3x^5}{40} - \\frac{5x^7}{112} - \\cdots"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccosine-function.md",
+  "line": 115,
+  "verdict": "SKIP",
+  "reason": "mixed-number/binomial",
+  "latex": "\\sum_{n=0}^{\\infty} \\frac{1}{4^n}\\binom{2n}{n}\\frac{1}{2n+1} = \\frac{\\pi}{2}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccotangent-function.md",
+  "line": 7,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "\\mathrm{arccot} : \\mathbb{R} \\to (0, \\pi)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccotangent-function.md",
+  "line": 15,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "\\begin{align}\n\\cot(\\mathrm{arccot}(x)) &= x \\quad \\forall x \\in \\mathbb{R} \\\\[6pt]\n\\mathrm{arccot}(\\cot(\\theta)) &= \\theta \\quad \\iff \\quad \\theta \\in (0, \\pi)\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccotangent-function.md",
+  "line": 42,
+  "verdict": "SKIP",
+  "reason": "disjoint variables",
+  "latex": "i\\frac{u - 1}{u + 1} = x"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccotangent-function.md",
+  "line": 46,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\mathrm{arccot}(x) = \\frac{\\pi}{2} - \\frac{i}{2}\\mathrm{Log}\\left(\\frac{1 - ix}{1 + ix}\\right)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccotangent-function.md",
+  "line": 54,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\lim_{x \\to +\\infty} \\mathrm{arccot}(x) = 0 \\qquad \\lim_{x \\to -\\infty} \\mathrm{arccot}(x) = \\pi"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccotangent-function.md",
+  "line": 60,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\lim_{x \\to 0} \\frac{\\mathrm{arccot}(x) - \\frac{\\pi}{2}}{x} = -1"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccotangent-function.md",
+  "line": 64,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\lim_{x \\to +\\infty} x\\mathrm{arccot}(x) = 1"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccotangent-function.md",
+  "line": 72,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\frac{d}{dx}\\mathrm{arccot}(x) = -\\frac{1}{1 + x^2}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccotangent-function.md",
+  "line": 76,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\left|\\mathrm{arccot}(a) - \\mathrm{arccot}(b)\\right| \\leq |a - b| \\quad \\forall a, b \\in \\mathbb{R}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccotangent-function.md",
+  "line": 82,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\mathrm{arccot}(x) = \\int_x^{+\\infty} \\frac{dt}{1 + t^2}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccotangent-function.md",
+  "line": 88,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\mathrm{arccot}(x) \\ dx = x\\mathrm{arccot}(x) + \\int \\frac{x}{1 + x^2} \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccotangent-function.md",
+  "line": 92,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\mathrm{arccot}(x) \\ dx = x\\mathrm{arccot}(x) + \\frac{1}{2}\\ln\\left(1 + x^2\\right) + C"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccotangent-function.md",
+  "line": 96,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_{-1}^{1} \\mathrm{arccot}(x) \\ dx = \\pi \\qquad \\int_0^1 \\mathrm{arccot}(x) \\ dx = \\frac{\\pi}{4} + \\frac{\\ln 2}{2}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccotangent-function.md",
+  "line": 104,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\frac{d^2}{dx^2}\\mathrm{arccot}(x) = \\frac{2x}{\\left(1 + x^2\\right)^2}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccotangent-function.md",
+  "line": 112,
+  "verdict": "SKIP",
+  "reason": "waived: geometric series needs |t|<1 (sampled at boundary t=1)",
+  "latex": "-\\frac{1}{1 + t^2} = -\\sum_{n=0}^{\\infty} (-1)^n t^{2n}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccotangent-function.md",
+  "line": 116,
+  "verdict": "SKIP",
+  "reason": "ellipsis schema",
+  "latex": "\\mathrm{arccot}(x) = \\frac{\\pi}{2} - \\sum_{n=0}^{\\infty} (-1)^n \\frac{x^{2n+1}}{2n+1} = \\frac{\\pi}{2} - x + \\frac{x^3}{3} - \\frac{x^5}{5} + \\cdots"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccotangent-function.md",
+  "line": 122,
+  "verdict": "SKIP",
+  "reason": "ellipsis schema",
+  "latex": "\\mathrm{arccot}(x) = \\frac{1}{x} - \\frac{1}{3x^3} + \\frac{1}{5x^5} - \\frac{1}{7x^7} + \\cdots"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arccotangent-function.md",
+  "line": 126,
+  "verdict": "SKIP",
+  "reason": "ellipsis schema",
+  "latex": "\\mathrm{arccot}(x) = \\pi + \\frac{1}{x} - \\frac{1}{3x^3} + \\frac{1}{5x^5} - \\frac{1}{7x^7} + \\cdots \\quad (x \\leq -1)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arcsine-function.md",
+  "line": 7,
+  "verdict": "SKIP",
+  "reason": "tuple or multi-argument form",
+  "latex": "\\arcsin : [-1, 1] \\to \\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arcsine-function.md",
+  "line": 15,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "\\begin{align}\n\\sin(\\arcsin(x)) &= x \\quad \\forall x \\in [-1, 1] \\\\[6pt]\n\\arcsin(\\sin(\\theta)) &= \\theta \\quad \\iff \\quad \\theta \\in \\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arcsine-function.md",
+  "line": 38,
+  "verdict": "SKIP",
+  "reason": "solve-for (not an identity)",
+  "latex": "\\arcsin(x) + \\arccos(x) = \\frac{\\pi}{2}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arcsine-function.md",
+  "line": 65,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\frac{d}{dx}\\arcsin(x) = \\frac{1}{\\sqrt{1 - x^2}}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arcsine-function.md",
+  "line": 69,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "\\lim_{x \\to 1^-} \\frac{1}{\\sqrt{1 - x^2}} = +\\infty \\qquad \\lim_{x \\to -1^+} \\frac{1}{\\sqrt{1 - x^2}} = +\\infty"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arcsine-function.md",
+  "line": 77,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\arcsin(x) \\ dx = x\\arcsin(x) - \\int \\frac{x}{\\sqrt{1 - x^2}} \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arcsine-function.md",
+  "line": 81,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\arcsin(x) \\ dx = x\\arcsin(x) + \\sqrt{1 - x^2} + c"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arcsine-function.md",
+  "line": 85,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_0^1 \\arcsin(x) \\ dx = \\frac{\\pi}{2} - 1"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arcsine-function.md",
+  "line": 93,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\frac{d^2}{dx^2}\\arcsin(x) = \\frac{x}{\\left(1 - x^2\\right)^{3/2}}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arcsine-function.md",
+  "line": 101,
+  "verdict": "SKIP",
+  "reason": "mixed-number/binomial",
+  "latex": "\\frac{1}{\\sqrt{1 - t^2}} = \\sum_{n=0}^{\\infty} \\frac{1}{4^n}\\binom{2n}{n}t^{2n}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arcsine-function.md",
+  "line": 107,
+  "verdict": "SKIP",
+  "reason": "ellipsis schema",
+  "latex": "\\arcsin(x) = \\sum_{n=0}^{\\infty} \\frac{1}{4^n}\\binom{2n}{n}\\frac{x^{2n+1}}{2n+1} = x + \\frac{x^3}{6} + \\frac{3x^5}{40} + \\frac{5x^7}{112} + \\cdots"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arcsine-function.md",
+  "line": 113,
+  "verdict": "SKIP",
+  "reason": "mixed-number/binomial",
+  "latex": "\\sum_{n=0}^{\\infty} \\frac{1}{4^n}\\binom{2n}{n}\\frac{1}{2n+1} = \\frac{\\pi}{2}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arctangent-function.md",
+  "line": 7,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "\\arctan : \\mathbb{R} \\to \\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arctangent-function.md",
+  "line": 40,
+  "verdict": "SKIP",
+  "reason": "disjoint variables",
+  "latex": "-i\\frac{u - 1}{u + 1} = x"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arctangent-function.md",
+  "line": 44,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\arctan(x) = -\\frac{i}{2}\\mathrm{Log}\\left(\\frac{1 + ix}{1 - ix}\\right)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arctangent-function.md",
+  "line": 73,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\frac{d}{dx}\\arctan(x) = \\frac{1}{1 + x^2}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arctangent-function.md",
+  "line": 81,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\arctan(x) = \\int_0^x \\frac{dt}{1 + t^2}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arctangent-function.md",
+  "line": 85,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_{-\\infty}^{+\\infty} \\frac{dx}{1 + x^2} = \\pi"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arctangent-function.md",
+  "line": 89,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\arctan(x) \\ dx = x\\arctan(x) - \\int \\frac{x}{1 + x^2} \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arctangent-function.md",
+  "line": 93,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\frac{1}{2}\\int \\frac{1}{u} \\ du"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arctangent-function.md",
+  "line": 96,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\arctan(x) \\ dx = x\\arctan(x) - \\frac{1}{2}\\ln\\left(1 + x^2\\right) + C"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arctangent-function.md",
+  "line": 100,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_0^1 \\arctan(x) \\ dx = \\frac{\\pi}{4} - \\frac{\\ln 2}{2}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arctangent-function.md",
+  "line": 106,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\frac{d^2}{dx^2}\\arctan(x) = -\\frac{2x}{\\left(1 + x^2\\right)^2}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arctangent-function.md",
+  "line": 114,
+  "verdict": "SKIP",
+  "reason": "waived: geometric series needs |t|<1 (sampled at boundary t=1)",
+  "latex": "\\frac{1}{1 + t^2} = \\sum_{n=0}^{\\infty} (-1)^n t^{2n}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arctangent-function.md",
+  "line": 118,
+  "verdict": "SKIP",
+  "reason": "ellipsis schema",
+  "latex": "\\arctan(x) = \\sum_{n=0}^{\\infty} (-1)^n \\frac{x^{2n+1}}{2n+1} = x - \\frac{x^3}{3} + \\frac{x^5}{5} - \\frac{x^7}{7} + \\cdots"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arctangent-function.md",
+  "line": 122,
+  "verdict": "SKIP",
+  "reason": "ellipsis schema",
+  "latex": "\\sum_{n=0}^{\\infty} \\frac{(-1)^n}{2n+1} = 1 - \\frac{1}{3} + \\frac{1}{5} - \\frac{1}{7} + \\cdots = \\frac{\\pi}{4}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arctangent-function.md",
+  "line": 126,
+  "verdict": "SKIP",
+  "reason": "no claim",
+  "latex": "\\dfrac{1}{2N+3}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arctangent-function.md",
+  "line": 127,
+  "verdict": "SKIP",
+  "reason": "solve-for (not an identity)",
+  "latex": "\\pi_N = 4\\sum_{n=0}^{N}\\dfrac{(-1)^n}{2n+1}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/arctangent-function.md",
+  "line": 131,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "|\\pi - \\pi_N| < \\dfrac{4}{2N+3}"
+ },
+ {
   "file": "data/lessons/algebrica/functions/composite-functions.md",
   "line": 7,
   "verdict": "SKIP",
@@ -7127,87 +7547,108 @@
  },
  {
   "file": "data/lessons/algebrica/functions/cosecant-function.md",
-  "line": 16,
+  "line": 30,
   "verdict": "SKIP",
-  "reason": "definitional binding",
-  "latex": "x = k\\pi \\qquad k \\in \\mathbb{Z}"
+  "reason": "parse: Exception",
+  "latex": "\\csc^2(x) = 1 + \\cot^2(x)"
  },
  {
   "file": "data/lessons/algebrica/functions/cosecant-function.md",
-  "line": 45,
+  "line": 42,
   "verdict": "SKIP",
-  "reason": "equation to solve",
-  "latex": "1. \\quad \\lim_{x \\to 0^+} \\csc(x) = +\\infty"
+  "reason": "parse: Exception",
+  "latex": "\\lim_{x \\to 0^+} \\csc(x) = +\\infty"
  },
  {
   "file": "data/lessons/algebrica/functions/cosecant-function.md",
-  "line": 45,
+  "line": 46,
   "verdict": "SKIP",
-  "reason": "equation to solve",
-  "latex": "2. \\quad \\lim_{x \\to \\pi/2} \\csc(x) = 1"
- },
- {
-  "file": "data/lessons/algebrica/functions/cosecant-function.md",
-  "line": 45,
-  "verdict": "SKIP",
-  "reason": "equation to solve",
-  "latex": "3. \\quad \\lim_{x \\to k\\pi^-} \\csc(x) = -\\infty"
- },
- {
-  "file": "data/lessons/algebrica/functions/cosecant-function.md",
-  "line": 45,
-  "verdict": "SKIP",
-  "reason": "equation to solve",
-  "latex": "4. \\quad \\lim_{x \\to k\\pi^+} \\csc(x) = +\\infty"
+  "reason": "parse: Exception",
+  "latex": "\\lim_{x \\to 0^-} \\csc(x) = -\\infty"
  },
  {
   "file": "data/lessons/algebrica/functions/cosecant-function.md",
   "line": 50,
   "verdict": "SKIP",
-  "reason": "no claim",
-  "latex": "5\\. \\quad \\frac{d}{dx}\\csc(x) = -\\csc(x)\\cot(x)"
+  "reason": "differential relation",
+  "latex": "\\frac{d}{dx}\\csc(x) = -\\csc(x)\\cot(x)"
  },
  {
   "file": "data/lessons/algebrica/functions/cosecant-function.md",
-  "line": 57,
+  "line": 54,
   "verdict": "SKIP",
   "reason": "differential relation",
-  "latex": "6\\. \\int \\csc(x)\\, dx = -\\,\\ln\\\\!\\left|\\, \\csc(x) + \\cot(x) \\,\\right| + c"
+  "latex": "\\int \\csc(x) \\ dx = -\\ln\\left|\\csc(x) + \\cot(x)\\right| + c"
  },
  {
   "file": "data/lessons/algebrica/functions/cosine-function.md",
-  "line": 27,
+  "line": 34,
   "verdict": "SKIP",
   "reason": "differential relation",
-  "latex": "\\frac{d}{dx} \\cos(x) = -\\sin(x)"
+  "latex": "\\frac{d}{dx}\\cos(x) = -\\sin(x)"
  },
  {
   "file": "data/lessons/algebrica/functions/cosine-function.md",
-  "line": 30,
+  "line": 38,
   "verdict": "SKIP",
   "reason": "differential relation",
-  "latex": "\\int \\cos(x) dx = \\sin(x) + c"
+  "latex": "\\begin{align}\n\\frac{d^2}{dx^2}\\cos(x) &= -\\cos(x) \\\\[6pt]\n\\frac{d^3}{dx^3}\\cos(x) &= \\sin(x) \\\\[6pt]\n\\frac{d^4}{dx^4}\\cos(x) &= \\cos(x)\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/cosine-function.md",
+  "line": 48,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\frac{d^n}{dx^n}\\cos(x) = \\cos\\left(x + \\frac{n\\pi}{2}\\right)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/cosine-function.md",
+  "line": 52,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\cos(x) \\ dx = \\sin(x) + c"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/cosine-function.md",
+  "line": 64,
+  "verdict": "SKIP",
+  "reason": "ellipsis schema",
+  "latex": "\\cos(x) = \\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n}}{(2n)!} = 1 - \\frac{x^2}{2!} + \\frac{x^4}{4!} - \\frac{x^6}{6!} + \\cdots"
  },
  {
   "file": "data/lessons/algebrica/functions/cotangent-function.md",
-  "line": 26,
+  "line": 36,
   "verdict": "SKIP",
   "reason": "parse: Exception",
-  "latex": "\\lim_{x\\to0^+} \\cot(x) = +\\infty \\quad \\text{and} \\quad \\lim_{x\\to0^-} \\cot(x) = -\\infty"
+  "latex": "\\lim_{x \\to 0^+} \\cot(x) = +\\infty"
  },
  {
   "file": "data/lessons/algebrica/functions/cotangent-function.md",
-  "line": 30,
+  "line": 40,
   "verdict": "SKIP",
-  "reason": "differential relation",
-  "latex": "\\frac{d}{dx} \\cot(x) = -\\csc^2(x)"
+  "reason": "parse: Exception",
+  "latex": "\\lim_{x \\to 0^-} \\cot(x) = -\\infty"
  },
  {
   "file": "data/lessons/algebrica/functions/cotangent-function.md",
-  "line": 33,
+  "line": 44,
   "verdict": "SKIP",
   "reason": "differential relation",
-  "latex": "\\int \\cot(x) dx = \\ln |\\sin(x)| + c"
+  "latex": "\\frac{d}{dx}\\cot(x) = -\\csc^2(x)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/cotangent-function.md",
+  "line": 48,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\cot(x) \\ dx = \\ln|\\sin(x)| + c"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/cotangent-function.md",
+  "line": 60,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "\\mathrm{arccot} : \\mathbb{R} \\to \\left(0, \\pi\\right)"
  },
  {
   "file": "data/lessons/algebrica/functions/determining-the-domain-of-a-function.md",
@@ -7637,6 +8078,216 @@
   "latex": "S = \\int_{0}^{a} |f(x)| \\, dx"
  },
  {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 5,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "\\lfloor x \\rfloor = \\max\\{\\ n \\in \\mathbb{Z} \\mid n \\le x \\ \\} \\qquad \\lceil x \\rceil = \\min\\{\\ n \\in \\mathbb{Z} \\mid x \\le n \\ \\}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 13,
+  "verdict": "SKIP",
+  "reason": "implication",
+  "latex": "\\lfloor x \\rfloor = n \\iff n \\le x < n + 1"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 17,
+  "verdict": "SKIP",
+  "reason": "implication",
+  "latex": "\\lceil x \\rceil = n \\iff n - 1 < x \\le n"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 49,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "\\{x\\} = x - \\lfloor x \\rfloor"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 55,
+  "verdict": "SKIP",
+  "reason": "undecidable inequality",
+  "latex": "0 \\le \\{x\\} < 1"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 75,
+  "verdict": "SKIP",
+  "reason": "implication",
+  "latex": "\\left\\lfloor x + \\frac{1}{2} \\right\\rfloor = n \\iff n \\le x + \\frac{1}{2} < n + 1 \\iff n - \\frac{1}{2} \\le x < n + \\frac{1}{2}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 99,
+  "verdict": "SKIP",
+  "reason": "environment: cases",
+  "latex": "\\lceil x \\rceil - \\lfloor x \\rfloor =\n\\begin{cases}\n0 & \\text{if } x \\in \\mathbb{Z} \\\\[6pt]\n1 & \\text{if } x \\notin \\mathbb{Z}\n\\end{cases}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 121,
+  "verdict": "SKIP",
+  "reason": "waived: braces parsed as sets; hypotheses n-integer/m-positive live in prose",
+  "latex": "\\lfloor x + y \\rfloor = \\lfloor x \\rfloor + \\lfloor y \\rfloor + \\lfloor \\{x\\} + \\{y\\} \\rfloor"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 127,
+  "verdict": "SKIP",
+  "reason": "no claim",
+  "latex": "\\lfloor x \\rfloor + \\lfloor y \\rfloor \\le \\lfloor x + y \\rfloor \\le \\lfloor x \\rfloor + \\lfloor y \\rfloor + 1"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 135,
+  "verdict": "SKIP",
+  "reason": "unknown macro: \\iff",
+  "latex": "\\begin{align}\n\\lfloor x \\rfloor < n &\\iff x < n \\\\[6pt]\nn \\le \\lfloor x \\rfloor &\\iff n \\le x \\\\[6pt]\nn < \\lceil x \\rceil &\\iff n < x \\\\[6pt]\n\\lceil x \\rceil \\le n &\\iff x \\le n\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 146,
+  "verdict": "SKIP",
+  "reason": "implication",
+  "latex": "n < \\lceil x \\rceil \\iff n < -\\lfloor -x \\rfloor \\iff \\lfloor -x \\rfloor < -n \\iff -x < -n \\iff n < x"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 169,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "\\begin{align}\n\\lim_{x \\to n^-} \\lfloor x \\rfloor &= n - 1 \\\\[6pt]\n\\lim_{x \\to n^+} \\lfloor x \\rfloor &= n = \\lfloor n \\rfloor\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 186,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_0^m \\lfloor x \\rfloor \\ dx = \\sum_{k=0}^{m-1} k = \\frac{m(m-1)}{2}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 194,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "q = \\left\\lfloor \\frac{a}{d} \\right\\rfloor \\qquad r = a - d \\left\\lfloor \\frac{a}{d} \\right\\rfloor"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 200,
+  "verdict": "SKIP",
+  "reason": "unknown macro: \\bmod",
+  "latex": "a \\bmod d = a - d \\left\\lfloor \\frac{a}{d} \\right\\rfloor"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 210,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "n = \\left\\lfloor \\frac{n}{2} \\right\\rfloor + \\left\\lceil \\frac{n}{2} \\right\\rceil"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 224,
+  "verdict": "SKIP",
+  "reason": "waived: braces parsed as sets; hypotheses n-integer/m-positive live in prose",
+  "latex": "\\left\\lceil \\frac{n}{m} \\right\\rceil = \\left\\lfloor \\frac{n + m - 1}{m} \\right\\rfloor"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 234,
+  "verdict": "SKIP",
+  "reason": "no claim",
+  "latex": "\\left\\lfloor \\frac{x}{k} \\right\\rfloor"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 242,
+  "verdict": "SKIP",
+  "reason": "no claim",
+  "latex": "\\left\\lfloor \\frac{n}{k} \\right\\rfloor - \\left\\lfloor \\frac{n-1}{k} \\right\\rfloor"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 248,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "D(n) = \\sum_{k=2}^{\\lfloor \\sqrt{n} \\rfloor} \\left( \\left\\lfloor \\frac{n}{k} \\right\\rfloor - \\left\\lfloor \\frac{n-1}{k} \\right\\rfloor \\right)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 258,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "n = \\sum_{k=0}^{d-1} a_k b^k"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 264,
+  "verdict": "SKIP",
+  "reason": "undecidable inequality",
+  "latex": "b^{d-1} \\le n < b^d"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 270,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "d = \\lfloor \\log_b n \\rfloor + 1"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 276,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "d = \\lceil \\log_b (n+1) \\rceil"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 290,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\lfloor f(x) \\rfloor = \\lfloor f(\\lfloor x \\rfloor) \\rfloor"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 324,
+  "verdict": "SKIP",
+  "reason": "unevaluated sum",
+  "latex": "\\lfloor nx \\rfloor = \\sum_{k=0}^{n-1} \\left\\lfloor x + \\frac{k}{n} \\right\\rfloor"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 332,
+  "verdict": "SKIP",
+  "reason": "no claim",
+  "latex": "2 \\lfloor x \\rfloor \\le \\lfloor 2x \\rfloor \\le 2 \\lfloor x \\rfloor + 1"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 340,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "v_p(n!) = \\sum_{k \\ge 1} \\left\\lfloor \\frac{n}{p^k} \\right\\rfloor"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 346,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\begin{align}\nv_p(n!) &= \\sum_{m=1}^{n} v_p(m) \\\\[6pt]\n&= \\sum_{k \\ge 1} \\#\\{\\ 1 \\le m \\le n \\mid p^k \\mid m \\ \\} \\\\[6pt]\n&= \\sum_{k \\ge 1} \\left\\lfloor \\frac{n}{p^k} \\right\\rfloor\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/floor-and-ceiling-functions.md",
+  "line": 371,
+  "verdict": "SKIP",
+  "reason": "ellipsis schema",
+  "latex": "\\begin{align}\nv_p(n!) &= \\sum_{i=1}^r a_i (1 + p + \\cdots + p^{i-1}) \\\\[6pt]\n&= \\sum_{i=1}^r a_i \\frac{p^i - 1}{p - 1} \\\\[6pt]\n&= \\frac{n - s_p(n)}{p - 1}\n\\end{align}"
+ },
+ {
   "file": "data/lessons/algebrica/functions/functions.md",
   "line": 5,
   "verdict": "SKIP",
@@ -7861,6 +8512,370 @@
   "latex": "\\left(\\frac{f}{g}\\right)(x) = \\frac{f(x)}{g(x)}"
  },
  {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 5,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "f(x) = ae^{-\\frac{(x-b)^{2}}{2c^{2}}}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 22,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "g(t) = e^{-\\frac{t^{2}}{2}}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 30,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "f'(x) = -\\frac{a(x-b)}{c^{2}}e^{-\\frac{(x-b)^{2}}{2c^{2}}} = -\\frac{x-b}{c^{2}}f(x)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 40,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\begin{align}\nf''(x) &= -\\frac{1}{c^{2}}f(x) - \\frac{x-b}{c^{2}}f'(x) \\\\[6pt]\n&= -\\frac{1}{c^{2}}f(x) + \\frac{(x-b)^{2}}{c^{4}}f(x) \\\\[6pt]\n&= \\frac{f(x)}{c^{2}}\\left(\\frac{(x-b)^{2}}{c^{2}} - 1\\right)\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 50,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "x = b - c \\qquad x = b + c"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 54,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "f(b \\pm c) = ae^{-\\frac{1}{2}} \\approx 0.6065a"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 62,
+  "verdict": "SKIP",
+  "reason": "solve-for (not an identity)",
+  "latex": "e^{-\\frac{(x-b)^{2}}{2c^{2}}} = \\frac{1}{2}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 66,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "x = b \\pm c\\sqrt{2\\ln 2}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 70,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "\\mathrm{FWHM} = 2c\\sqrt{2\\ln 2} \\approx 2.3548c"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 78,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "I = \\int_{-\\infty}^{+\\infty} e^{-x^{2}} \\ dx = \\sqrt{\\pi}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 82,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "I^{2} = \\left(\\int_{-\\infty}^{+\\infty} e^{-x^{2}} \\ dx\\right)\\left(\\int_{-\\infty}^{+\\infty} e^{-y^{2}} \\ dy\\right) = \\iint_{\\mathbb{R}^{2}} e^{-(x^{2}+y^{2})} \\ dx \\ dy"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 90,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "I^{2} = \\int_{0}^{2\\pi} \\int_{0}^{+\\infty} e^{-r^{2}} r \\ dr \\ d\\theta"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 94,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_{0}^{+\\infty} e^{-r^{2}} r \\ dr = \\frac{1}{2}\\int_{0}^{+\\infty} e^{-u} \\ du = \\frac{1}{2}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 98,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "I^{2} = \\int_{0}^{2\\pi} \\frac{1}{2} \\ d\\theta = \\pi"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 122,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "f(x) = \\frac{1}{c\\sqrt{2\\pi}}e^{-\\frac{(x-b)^{2}}{2c^{2}}}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 130,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\mathrm{erf}(x) = \\frac{2}{\\sqrt{\\pi}}\\int_{0}^{x} e^{-t^{2}} \\ dt"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 136,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\Phi(z) = \\frac{1}{2}\\left(1 + \\mathrm{erf}\\left(\\frac{z}{\\sqrt{2}}\\right)\\right)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 144,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "J(\\lambda) = \\int_{-\\infty}^{+\\infty} e^{-\\lambda x^{2}} \\ dx = \\sqrt{\\frac{\\pi}{\\lambda}}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 148,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_{-\\infty}^{+\\infty} x^{2}e^{-\\lambda x^{2}} \\ dx = -J'(\\lambda) = \\frac{1}{2}\\sqrt{\\frac{\\pi}{\\lambda^{3}}}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 156,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\frac{1}{\\sqrt{2\\pi}}\\int_{-\\infty}^{+\\infty} x^{2}e^{-\\frac{x^{2}}{2}} \\ dx = \\frac{1}{\\sqrt{2\\pi}}\\sqrt{2\\pi} = 1"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 160,
+  "verdict": "SKIP",
+  "reason": "ellipsis schema",
+  "latex": "E(X^{2n}) = (2n-1)!! = 1 \\cdot 3 \\cdot 5 \\cdots (2n-1)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 164,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\Gamma\\left(\\frac{1}{2}\\right) = 2\\int_{0}^{+\\infty} e^{-u^{2}} \\ du = \\sqrt{\\pi}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 172,
+  "verdict": "SKIP",
+  "reason": "disjoint variables",
+  "latex": "\\frac{1}{c_3^{2}} = \\frac{1}{c_1^{2}} + \\frac{1}{c_2^{2}} \\qquad b_3 = c_3^{2}\\left(\\frac{b_1}{c_1^{2}} + \\frac{b_2}{c_2^{2}}\\right)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 178,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "b = b_1 + b_2 \\qquad c = \\sqrt{c_1^{2} + c_2^{2}}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 186,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "f(x) = 5e^{-2(x-3)^{2}}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 192,
+  "verdict": "SKIP",
+  "reason": "solve-for (not an identity)",
+  "latex": "x = 3 - \\frac{1}{2} = 2.5 \\qquad x = 3 + \\frac{1}{2} = 3.5"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 196,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "\\mathrm{FWHM} = 2c\\sqrt{2\\ln 2} = \\sqrt{2\\ln 2} \\approx 1.177"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 200,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_{-\\infty}^{+\\infty} 5e^{-2(x-3)^{2}} \\ dx = 5 \\cdot \\frac{1}{2} \\cdot \\sqrt{2\\pi} = \\frac{5\\sqrt{2\\pi}}{2} \\approx 6.267"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/gaussian-function.md",
+  "line": 204,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\frac{2}{5\\sqrt{2\\pi}}f(x) = \\frac{2}{\\sqrt{2\\pi}}e^{-2(x-3)^{2}}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/heaviside-function.md",
+  "line": 5,
+  "verdict": "SKIP",
+  "reason": "environment: cases",
+  "latex": "H(x) =\n\\begin{cases}\n0 & \\text{if } x < 0 \\\\[6pt]\n\\dfrac{1}{2} & \\text{if } x = 0 \\\\[8pt]\n1 & \\text{if } x > 0\n\\end{cases}\n\\quad \\forall \\ x \\in \\mathbb{R}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/heaviside-function.md",
+  "line": 17,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "H(-3) = 0 \\qquad H(0) = \\frac{1}{2} \\qquad H(5) = 1"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/heaviside-function.md",
+  "line": 43,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "\\begin{align}\n\\lim_{x \\to 0^-} H(x) &= 0 \\\\[6pt]\n\\lim_{x \\to 0^+} H(x) &= 1\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/heaviside-function.md",
+  "line": 56,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\begin{align}\n\\lim_{x \\to -\\infty} H(x) &= 0 \\\\[6pt]\n\\lim_{x \\to +\\infty} H(x) &= 1\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/heaviside-function.md",
+  "line": 75,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\frac{d}{dx} H(x) = \\delta(x)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/heaviside-function.md",
+  "line": 87,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_0^x H(t) \\ dt = xH(x)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/heaviside-function.md",
+  "line": 93,
+  "verdict": "SKIP",
+  "reason": "environment: cases",
+  "latex": "\\int_a^b H(x) \\ dx =\n\\begin{cases}\n0 & \\text{if } b \\leq 0 \\\\[6pt]\nb & \\text{if } a < 0 < b \\\\[6pt]\nb-a & \\text{if } 0 \\leq a\n\\end{cases}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/heaviside-function.md",
+  "line": 108,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "R(x) = xH(x)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/heaviside-function.md",
+  "line": 118,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "R(x) = \\frac{x+|x|}{2}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/heaviside-function.md",
+  "line": 126,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "H(x) = \\frac{1+\\mathrm{sgn}(x)}{2}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/heaviside-function.md",
+  "line": 130,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\mathrm{sgn}(x) = 2H(x)-1"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/heaviside-function.md",
+  "line": 136,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "|x| = x\\left(2H(x)-1\\right)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/heaviside-function.md",
+  "line": 144,
+  "verdict": "SKIP",
+  "reason": "environment: cases",
+  "latex": "H(x-a) =\n\\begin{cases}\n0 & \\text{if } x < a \\\\[6pt]\n\\dfrac{1}{2} & \\text{if } x = a \\\\[8pt]\n1 & \\text{if } x > a\n\\end{cases}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/heaviside-function.md",
+  "line": 155,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "f(x) = f_1(x) + \\left(f_2(x)-f_1(x)\\right)H(x-a)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/heaviside-function.md",
+  "line": 159,
+  "verdict": "SKIP",
+  "reason": "environment: cases",
+  "latex": "f(x) =\n\\begin{cases}\n2 & \\text{if } x < 3 \\\\[6pt]\nx^2 & \\text{if } x > 3\n\\end{cases}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/heaviside-function.md",
+  "line": 173,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "p(x) = H(x-a)-H(x-b)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/heaviside-function.md",
+  "line": 181,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "f(x) = f_1(x) + \\left(f_2(x)-f_1(x)\\right)H(x-a) + \\left(f_3(x)-f_2(x)\\right)H(x-b)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/heaviside-function.md",
+  "line": 189,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "V(t) = 120H(t-5)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/heaviside-function.md",
+  "line": 195,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "V(t) = 2tH(t)-2(t-60)H(t-60)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/heaviside-function.md",
+  "line": 203,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\mathcal{L}\\{f(t)\\}(s) = \\int_0^{+\\infty} f(t)e^{-st} \\ dt"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/heaviside-function.md",
+  "line": 207,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\mathcal{L}\\{H(t-a)\\}(s) = \\int_a^{+\\infty} e^{-st} \\ dt"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/heaviside-function.md",
+  "line": 211,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int_a^{M} e^{-st} \\ dt &= \\frac{e^{-as}-e^{-Ms}}{s} \\\\[6pt]\n\\lim_{M \\to +\\infty} \\frac{e^{-as}-e^{-Ms}}{s} &= \\frac{e^{-as}}{s}\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/heaviside-function.md",
+  "line": 226,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\mathcal{L}\\{H(t-a)f(t-a)\\}(s) = e^{-as}F(s)"
+ },
+ {
   "file": "data/lessons/algebrica/functions/increasing-and-decreasing-functions.md",
   "line": 17,
   "verdict": "SKIP",
@@ -7945,6 +8960,146 @@
   "latex": "x \\in (-1,0) \\cup (1,+\\infty)"
  },
  {
+  "file": "data/lessons/algebrica/functions/injective-surjective-and-bijective-functions.md",
+  "line": 5,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "f^{-1}(\\{\\ y\\ \\}) = \\{\\ x \\in A \\mid f(x) = y \\ \\}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/injective-surjective-and-bijective-functions.md",
+  "line": 19,
+  "verdict": "SKIP",
+  "reason": "implication",
+  "latex": "\\forall x_1, x_2 \\in A, \\quad f(x_1) = f(x_2) \\ \\Rightarrow \\ x_1 = x_2"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/injective-surjective-and-bijective-functions.md",
+  "line": 25,
+  "verdict": "SKIP",
+  "reason": "implication",
+  "latex": "\\forall x_1, x_2 \\in A, \\quad x_1 \\neq x_2 \\ \\Rightarrow \\ f(x_1) \\neq f(x_2)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/injective-surjective-and-bijective-functions.md",
+  "line": 37,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "\\forall y \\in B, \\ \\exists x \\in A \\ \\text{ such that } \\ f(x) = y"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/injective-surjective-and-bijective-functions.md",
+  "line": 43,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "f(A) = B"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/injective-surjective-and-bijective-functions.md",
+  "line": 55,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "\\forall y \\in B, \\ \\exists! x \\in A \\ \\text{ such that } \\ f(x) = y"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/injective-surjective-and-bijective-functions.md",
+  "line": 75,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "f(n) = n(n - 1)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/injective-surjective-and-bijective-functions.md",
+  "line": 85,
+  "verdict": "SKIP",
+  "reason": "tuple or multi-argument form",
+  "latex": "t(n) = n + 3, \\quad d(n) = 2n, \\quad h(n) = \\left\\lfloor \\frac{n}{2} \\right\\rfloor, \\quad q(n) = n^2"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/injective-surjective-and-bijective-functions.md",
+  "line": 104,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "G_f = \\{\\ (x, f(x)) \\mid x \\in A \\ \\}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/injective-surjective-and-bijective-functions.md",
+  "line": 140,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "g(x) = \\frac{x}{1 + |x|}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/injective-surjective-and-bijective-functions.md",
+  "line": 148,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "g^{-1}(y) = \\frac{y}{1 - |y|}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/injective-surjective-and-bijective-functions.md",
+  "line": 156,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "\\exp \\colon \\mathbb{R} \\to \\mathbb{R} \\quad \\text{and} \\quad \\exp \\colon \\mathbb{R} \\to (0, +\\infty)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/injective-surjective-and-bijective-functions.md",
+  "line": 164,
+  "verdict": "SKIP",
+  "reason": "tuple or multi-argument form",
+  "latex": "\\tilde{f} \\colon A \\to f(A), \\quad \\tilde{f}(x) = f(x)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/injective-surjective-and-bijective-functions.md",
+  "line": 170,
+  "verdict": "SKIP",
+  "reason": "unknown macro: \\circ",
+  "latex": "f = \\iota \\circ \\tilde{f}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/injective-surjective-and-bijective-functions.md",
+  "line": 180,
+  "verdict": "SKIP",
+  "reason": "tuple or multi-argument form",
+  "latex": "\\cos|_{[0, \\pi]} \\colon [0, \\pi] \\to [-1, 1]"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/injective-surjective-and-bijective-functions.md",
+  "line": 198,
+  "verdict": "SKIP",
+  "reason": "unknown macro: \\circ",
+  "latex": "g \\circ f = \\mathrm{id}_A \\quad \\text{and} \\quad f \\circ g = \\mathrm{id}_B"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/injective-surjective-and-bijective-functions.md",
+  "line": 204,
+  "verdict": "SKIP",
+  "reason": "unknown macro: \\circ",
+  "latex": "g_1 = g_1 \\circ \\mathrm{id}_B = g_1 \\circ (f \\circ g_2) = (g_1 \\circ f) \\circ g_2 = \\mathrm{id}_A \\circ g_2 = g_2"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/injective-surjective-and-bijective-functions.md",
+  "line": 214,
+  "verdict": "SKIP",
+  "reason": "environment: cases",
+  "latex": "s(n) = n + 1, \\qquad p(n) = \\begin{cases} n - 1 & \\text{if } n \\geq 1 \\\\[6pt] 0 & \\text{if } n = 0 \\end{cases}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/injective-surjective-and-bijective-functions.md",
+  "line": 226,
+  "verdict": "SKIP",
+  "reason": "unknown macro: \\circ",
+  "latex": "(g \\circ f)^{-1} = f^{-1} \\circ g^{-1}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/injective-surjective-and-bijective-functions.md",
+  "line": 240,
+  "verdict": "SKIP",
+  "reason": "ellipsis schema",
+  "latex": "m(m - 1) \\cdots (m - n + 1) = \\frac{m!}{(m - n)!}"
+ },
+ {
   "file": "data/lessons/algebrica/functions/inverse-function.md",
   "line": 19,
   "verdict": "SKIP",
@@ -8027,6 +9182,174 @@
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\bigl(f^{-1}\\bigr)'(y) = \\frac{1}{f’\\\\!\\bigl(f^{-1}(y)\\bigr)}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/irrational-functions.md",
+  "line": 5,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "y = \\sqrt[n]{f(x)} = f(x)^{1/n} \\qquad n \\in \\mathbb{N}, \\ n \\geq 2"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/irrational-functions.md",
+  "line": 9,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "y = \\sqrt{x^2 - 4} \\qquad y = \\sqrt[3]{\\frac{x + 1}{x}} \\qquad y = \\sqrt[5]{x^3}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/irrational-functions.md",
+  "line": 19,
+  "verdict": "SKIP",
+  "reason": "solve-for (not an identity)",
+  "latex": "y^2 - x = 0"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/irrational-functions.md",
+  "line": 29,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "D = \\mathrm{dom}(f) \\qquad (n \\ \\text{odd})"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/irrational-functions.md",
+  "line": 33,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "D = \\{\\ x \\in \\mathrm{dom}(f) \\mid f(x) \\geq 0 \\ \\}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/irrational-functions.md",
+  "line": 37,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "y = \\sqrt{\\frac{x - 3}{x + 1}}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/irrational-functions.md",
+  "line": 41,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "(-\\infty, -1) \\cup 3, +\\infty)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/irrational-functions.md",
+  "line": 55,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "y' = \\frac{1}{2\\sqrt{x}} \\qquad y'' = -\\frac{1}{4x^{3/2}}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/irrational-functions.md",
+  "line": 65,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "y' = \\frac{1}{3\\sqrt[3]{x^2}} \\qquad y'' = -\\frac{2}{9\\sqrt[3]{x^5}}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/irrational-functions.md",
+  "line": 71,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "y' = \\frac{2}{3\\sqrt[3]{x}}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/irrational-functions.md",
+  "line": 83,
+  "verdict": "SKIP",
+  "reason": "dependent variable",
+  "latex": "\\sqrt[nk]{x^{mk}} = \\sqrt[n]{x^m}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/irrational-functions.md",
+  "line": 95,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\frac{d}{dx}\\sqrt[n]{f(x)} = \\frac{f'(x)}{n\\sqrt[n]{f(x)^{n-1}}}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/irrational-functions.md",
+  "line": 111,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "y = \\sqrt{ax^2 + bx + c}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/irrational-functions.md",
+  "line": 115,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "y = \\pm\\sqrt{a}\\left(x + \\frac{b}{2a}\\right)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/irrational-functions.md",
+  "line": 134,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "f(x) = \\sqrt{\\frac{x - 1}{x + 2}}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/irrational-functions.md",
+  "line": 138,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "D = (-\\infty, -2) \\cup 1, +\\infty)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/irrational-functions.md",
+  "line": 146,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "\\lim_{x \\to \\pm\\infty} f(x) = 1"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/irrational-functions.md",
+  "line": 150,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "\\lim_{x \\to -2^-} f(x) = +\\infty"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/irrational-functions.md",
+  "line": 158,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "g'(x) = \\frac{(x + 2) - (x - 1)}{(x + 2)^2} = \\frac{3}{(x + 2)^2}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/irrational-functions.md",
+  "line": 162,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "f'(x) = \\frac{g'(x)}{2\\sqrt{g(x)}} = \\frac{3}{2(x + 2)^2}\\sqrt{\\frac{x + 2}{x - 1}}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/irrational-functions.md",
+  "line": 170,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "[0, 1) \\cup (1, +\\infty)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/irrational-functions.md",
+  "line": 178,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "f(x) = \\sqrt{x^2 - 4x}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/irrational-functions.md",
+  "line": 182,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "D = (-\\infty, 0] \\cup 4, +\\infty)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/irrational-functions.md",
+  "line": 203,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "f'(x) = \\frac{2x - 4}{2\\sqrt{x^2 - 4x}} = \\frac{x - 2}{\\sqrt{x^2 - 4x}}"
  },
  {
   "file": "data/lessons/algebrica/functions/logarithmic-function.md",
@@ -8232,6 +9555,125 @@
   "latex": "\\int f(x) \\,dx = \\frac{a_n}{n+1}\\,x^{n+1} + \\frac{a_{n-1}}{n}\\,x^n + \\dotsb + a_1 x + a_0 x + c"
  },
  {
+  "file": "data/lessons/algebrica/functions/power-function.md",
+  "line": 5,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "f(x) = x^a \\qquad a \\in \\mathbb{R}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/power-function.md",
+  "line": 53,
+  "verdict": "SKIP",
+  "reason": "no valid sample",
+  "latex": "\\lim_{x \\to -\\infty} x^n = \\lim_{x \\to +\\infty} x^n = +\\infty"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/power-function.md",
+  "line": 75,
+  "verdict": "SKIP",
+  "reason": "solve-for (not an identity)",
+  "latex": "\\lim_{x \\to -\\infty} x^n = -\\infty \\qquad \\lim_{x \\to +\\infty} x^n = +\\infty"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/power-function.md",
+  "line": 93,
+  "verdict": "SKIP",
+  "reason": "solve-for (not an identity)",
+  "latex": "\\begin{align}\n\\lim_{x \\to 0^{+}} x^{-n} &= +\\infty \\\\[6pt]\n\\lim_{x \\to \\pm\\infty} x^{-n} &= 0\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/power-function.md",
+  "line": 110,
+  "verdict": "SKIP",
+  "reason": "environment: cases",
+  "latex": "\\lim_{x \\to 0^{+}} x^{a} =\n\\begin{cases}\n0 & \\text{if } a > 0 \\\\[6pt]\n+\\infty & \\text{if } a < 0\n\\end{cases}\n\\qquad\n\\lim_{x \\to +\\infty} x^{a} =\n\\begin{cases}\n+\\infty & \\text{if } a > 0 \\\\[6pt]\n0 & \\text{if } a < 0\n\\end{cases}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/power-function.md",
+  "line": 128,
+  "verdict": "SKIP",
+  "reason": "conditional inequality",
+  "latex": "x^{a} > x^{b} \\quad \\text{for } 0 < x < 1, \\qquad x^{a} < x^{b} \\quad \\text{for } x > 1"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/power-function.md",
+  "line": 160,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\frac{d^{2}}{dx^{2}}x^{a} = a(a-1)x^{a-2}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/power-function.md",
+  "line": 174,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\frac{1}{x} \\ dx = \\ln|x| + c"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/power-function.md",
+  "line": 180,
+  "verdict": "SKIP",
+  "reason": "solve-for (not an identity)",
+  "latex": "\\lim_{x \\to +\\infty}\\frac{x^{a}}{x^{b}} = \\lim_{x \\to +\\infty}x^{a-b} = 0"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/power-function.md",
+  "line": 184,
+  "verdict": "SKIP",
+  "reason": "implication",
+  "latex": "\\ln x = o(x^{a}) \\qquad x^{a} = o(c^{x}) \\qquad x \\to +\\infty"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/power-function.md",
+  "line": 192,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "f(\\lambda x) = (\\lambda x)^{a} = \\lambda^{a}f(x)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/power-function.md",
+  "line": 196,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "g(x + h) = c^{x+h} = c^{h}g(x)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/power-function.md",
+  "line": 204,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "f(x) = x^{5/3} = \\sqrt[3]{x^{5}}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/power-function.md",
+  "line": 222,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "f'(0) = \\lim_{h \\to 0}\\frac{h^{5/3}}{h} = \\lim_{h \\to 0}h^{2/3} = 0"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/power-function.md",
+  "line": 230,
+  "verdict": "SKIP",
+  "reason": "dependent variable",
+  "latex": "f''(x) = \\frac{10}{9}x^{-1/3} = \\frac{10}{9\\sqrt[3]{x}}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/power-function.md",
+  "line": 238,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\lim_{x \\to -\\infty}f(x) = -\\infty \\qquad \\lim_{x \\to +\\infty}f(x) = +\\infty"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/power-function.md",
+  "line": 242,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "f^{-1}(x) = x^{3/5}"
+ },
+ {
   "file": "data/lessons/algebrica/functions/rational-functions.md",
   "line": 7,
   "verdict": "SKIP",
@@ -8359,45 +9801,38 @@
  },
  {
   "file": "data/lessons/algebrica/functions/secant-function.md",
-  "line": 16,
+  "line": 30,
   "verdict": "SKIP",
-  "reason": "definitional binding",
-  "latex": "x = \\frac{\\pi}{2} + k\\pi \\qquad k \\in \\mathbb{Z}"
+  "reason": "parse: Exception",
+  "latex": "\\sec^2(x) = 1 + \\tan^2(x)"
  },
  {
   "file": "data/lessons/algebrica/functions/secant-function.md",
-  "line": 45,
+  "line": 42,
   "verdict": "SKIP",
-  "reason": "equation to solve",
-  "latex": "1. \\quad \\lim_{x \\to 0} \\sec(x) = 1"
+  "reason": "parse: Exception",
+  "latex": "\\lim_{x \\to \\frac{\\pi}{2}^-} \\sec(x) = +\\infty"
  },
  {
   "file": "data/lessons/algebrica/functions/secant-function.md",
-  "line": 45,
+  "line": 46,
   "verdict": "SKIP",
-  "reason": "equation to solve",
-  "latex": "2. \\quad \\lim_{x \\to \\frac{\\pi}{2}^-} \\sec(x) = +\\infty"
- },
- {
-  "file": "data/lessons/algebrica/functions/secant-function.md",
-  "line": 45,
-  "verdict": "SKIP",
-  "reason": "equation to solve",
-  "latex": "3. \\quad \\lim_{x \\to \\frac{\\pi}{2}^+} \\sec(x) = -\\infty"
+  "reason": "parse: Exception",
+  "latex": "\\lim_{x \\to \\frac{\\pi}{2}^+} \\sec(x) = -\\infty"
  },
  {
   "file": "data/lessons/algebrica/functions/secant-function.md",
   "line": 50,
   "verdict": "SKIP",
-  "reason": "no claim",
-  "latex": "4\\. \\quad \\frac{d}{dx}\\sec(x) = \\sec(x)\\tan(x)"
+  "reason": "differential relation",
+  "latex": "\\frac{d}{dx}\\sec(x) = \\sec(x)\\tan(x)"
  },
  {
   "file": "data/lessons/algebrica/functions/secant-function.md",
-  "line": 57,
+  "line": 54,
   "verdict": "SKIP",
   "reason": "differential relation",
-  "latex": "5\\. \\int \\sec(x)\\, dx = \\ln\\\\!\\left|\\, \\sec(x) + \\tan(x) \\,\\right| + c"
+  "latex": "\\int \\sec(x) \\ dx = \\ln\\left|\\sec(x) + \\tan(x)\\right| + c"
  },
  {
   "file": "data/lessons/algebrica/functions/sigmoid-function.md",
@@ -8667,59 +10102,87 @@
  },
  {
   "file": "data/lessons/algebrica/functions/sine-function.md",
-  "line": 26,
+  "line": 32,
   "verdict": "SKIP",
-  "reason": "equation to solve",
-  "latex": "\\text{1.} \\quad \\lim_{x \\to 0} \\frac{\\sin(x)}{x} = 1"
+  "reason": "differential relation",
+  "latex": "\\frac{d}{dx}\\sin(x) = \\cos(x)"
  },
  {
   "file": "data/lessons/algebrica/functions/sine-function.md",
-  "line": 31,
+  "line": 36,
   "verdict": "SKIP",
-  "reason": "no claim",
-  "latex": "2\\. \\quad \\frac{d}{dx}\\,\\sin(x) = \\cos(x)"
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\frac{d^2}{dx^2}\\sin(x) &= -\\sin(x) \\\\[6pt]\n\\frac{d^3}{dx^3}\\sin(x) &= -\\cos(x) \\\\[6pt]\n\\frac{d^4}{dx^4}\\sin(x) &= \\sin(x)\n\\end{align}"
  },
  {
   "file": "data/lessons/algebrica/functions/sine-function.md",
-  "line": 34,
+  "line": 46,
   "verdict": "SKIP",
-  "reason": "equation to solve",
-  "latex": "3. \\quad \\int \\sin(x) dx = -\\cos(x) + c"
+  "reason": "differential relation",
+  "latex": "\\frac{d^n}{dx^n}\\sin(x) = \\sin\\left(x + \\frac{n\\pi}{2}\\right)"
  },
  {
   "file": "data/lessons/algebrica/functions/sine-function.md",
-  "line": 39,
+  "line": 50,
   "verdict": "SKIP",
-  "reason": "equation to solve",
-  "latex": "4. \\quad \\sin(x) = \\frac{e^{ix} - e^{-ix}}{2i}"
+  "reason": "differential relation",
+  "latex": "\\int \\sin(x) \\ dx = -\\cos(x) + c"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/sine-function.md",
+  "line": 62,
+  "verdict": "SKIP",
+  "reason": "continued RHS fragment",
+  "latex": "\\begin{align}\n\\text{increase:} \\quad & \\left(-\\frac{\\pi}{2} + 2k\\pi, \\frac{\\pi}{2} + 2k\\pi\\right) \\\\[6pt]\n\\text{decrease:} \\quad & \\left(\\frac{\\pi}{2} + 2k\\pi, \\frac{3\\pi}{2} + 2k\\pi\\right)\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/sine-function.md",
+  "line": 73,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\frac{d^2}{dx^2}\\sin(x) = -\\sin(x)"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/sine-function.md",
+  "line": 81,
+  "verdict": "SKIP",
+  "reason": "ellipsis schema",
+  "latex": "\\sin(x) = \\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n+1}}{(2n+1)!} = x - \\frac{x^3}{3!} + \\frac{x^5}{5!} - \\frac{x^7}{7!} + \\cdots"
  },
  {
   "file": "data/lessons/algebrica/functions/tangent-function.md",
-  "line": 29,
+  "line": 36,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\lim_{x \\to \\frac{\\pi}{2}^-} \\tan(x) = +\\infty"
  },
  {
   "file": "data/lessons/algebrica/functions/tangent-function.md",
-  "line": 29,
+  "line": 40,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "\\lim_{x \\to \\frac{\\pi}{2}^+} \\tan(x) = -\\infty"
  },
  {
   "file": "data/lessons/algebrica/functions/tangent-function.md",
-  "line": 32,
+  "line": 44,
   "verdict": "SKIP",
   "reason": "differential relation",
-  "latex": "\\frac{d}{dx} \\tan(x) = \\sec^2(x)"
+  "latex": "\\frac{d}{dx}\\tan(x) = \\sec^2(x)"
  },
  {
   "file": "data/lessons/algebrica/functions/tangent-function.md",
-  "line": 35,
+  "line": 48,
   "verdict": "SKIP",
   "reason": "differential relation",
-  "latex": "\\int \\tan(x) dx = -\\ln |\\cos(x)| + c"
+  "latex": "\\int \\tan(x) \\ dx = -\\ln|\\cos(x)| + c"
+ },
+ {
+  "file": "data/lessons/algebrica/functions/tangent-function.md",
+  "line": 60,
+  "verdict": "SKIP",
+  "reason": "set membership",
+  "latex": "\\arctan : \\mathbb{R} \\to \\left(-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right)"
  },
  {
   "file": "data/lessons/algebrica/functions/uniform-continuity.md",
@@ -14974,196 +16437,196 @@
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 7,
+  "line": 9,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int \\sin^3 x dx \\quad \\text{or} \\quad \\int \\sin^5 x dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 11,
+  "line": 13,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "I_n=\\int\\sin^nx \\ dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 17,
+  "line": 19,
   "verdict": "SKIP",
   "reason": "unresolved function",
   "latex": "I_n=g_n(x)+\\lambda_nI_{n-k} \\tag{1}"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 39,
+  "line": 41,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int x^3e^x \\ dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 43,
+  "line": 45,
   "verdict": "SKIP",
   "reason": "definitional binding",
   "latex": "\\begin{align}\nJ_3 &= x^3e^x-3J_2 \\\\[6pt]\nJ_2 &= x^2e^x-2J_1 \\\\[6pt]\nJ_1 &= xe^x-J_0 \\\\[6pt]\nJ_0 &= e^x\n\\end{align}"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 54,
+  "line": 56,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int x^3e^x \\ dx=e^x(x^3-3x^2+6x-6)+c"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 58,
+  "line": 60,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int x^ne^{ax} \\ dx=e^{ax}\\sum_{k=0}^{n}(-1)^k\\frac{n!}{(n-k)!}\\frac{x^{n-k}}{a^{k+1}}+c \\tag{3}"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 76,
+  "line": 78,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "S_n=-\\sin^{n-1}x\\cos x+(n-1)\\int\\sin^{n-2}x\\cos^2x \\ dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 80,
+  "line": 82,
   "verdict": "SKIP",
   "reason": "definitional binding",
   "latex": "S_n=-\\sin^{n-1}x\\cos x+(n-1)S_{n-2}-(n-1)S_n"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 92,
+  "line": 94,
   "verdict": "SKIP",
   "reason": "definitional binding",
   "latex": "\\begin{align}\nS_4 &= -\\frac{\\sin^3x\\cos x}{4}+\\frac{3}{4}S_2 \\\\[6pt]\nS_2 &= -\\frac{\\sin x\\cos x}{2}+\\frac{1}{2}S_0 \\\\[6pt]\nS_0 &= x\n\\end{align}"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 102,
+  "line": 104,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int\\sin^4x \\ dx=-\\frac{\\sin^3x\\cos x}{4}-\\frac{3\\sin x\\cos x}{8}+\\frac{3x}{8}+c"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 114,
+  "line": 116,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\begin{align}\nT_n &= \\int\\tan^{n-2}x(\\sec^2x-1) \\ dx \\\\[6pt]\n    &= \\int\\tan^{n-2}x\\sec^2x \\ dx-T_{n-2}\n\\end{align}"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 127,
+  "line": 129,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int\\tan^4x \\ dx=\\frac{\\tan^3x}{3}-\\tan x+x+c"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 141,
+  "line": 143,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int\\ln^3x \\ dx=x\\ln^3x-3x\\ln^2x+6x\\ln x-6x+c"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 153,
+  "line": 155,
   "verdict": "SKIP",
   "reason": "solve-for (not an identity)",
   "latex": "I_1=\\frac{1}{a}\\arctan\\frac{x}{a}"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 157,
+  "line": 159,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "I_n=\\frac{x}{(x^2+a^2)^n}+2n\\int\\frac{x^2}{(x^2+a^2)^{n+1}} \\ dx"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 161,
+  "line": 163,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int\\frac{x^2}{(x^2+a^2)^{n+1}} \\ dx=I_n-a^2I_{n+1}"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 165,
+  "line": 167,
   "verdict": "SKIP",
   "reason": "solve-for (not an identity)",
   "latex": "I_n=x(x^2+a^2)^{-n}+2nI_n-2na^2I_{n+1}"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 169,
+  "line": 171,
   "verdict": "SKIP",
   "reason": "solve-for (not an identity)",
   "latex": "I_{n+1}=\\frac{1}{2na^2}\\left[\\frac{x}{(x^2+a^2)^n}+(2n-1)I_n\\right] \\tag{8}"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 173,
+  "line": 175,
   "verdict": "SKIP",
   "reason": "solve-for (not an identity)",
   "latex": "I_n=\\frac{1}{2(n-1)a^2}\\left[\\frac{x}{(x^2+a^2)^{n-1}}+(2n-3)I_{n-1}\\right]"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 177,
+  "line": 179,
   "verdict": "SKIP",
   "reason": "solve-for (not an identity)",
   "latex": "I_2=\\frac{x}{2a^2(x^2+a^2)}+\\frac{1}{2a^3}\\arctan\\frac{x}{a}+c"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 181,
+  "line": 183,
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\frac{A_1x+B_1}{x^2+bx+c}+\\frac{A_2x+B_2}{(x^2+bx+c)^2}+\\dots+\\frac{A_kx+B_k}{(x^2+bx+c)^k}"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 187,
+  "line": 189,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int\\frac{2x+3}{(x^2+4)^2} \\ dx=\\int\\frac{2x}{(x^2+4)^2} \\ dx+3\\int\\frac{dx}{(x^2+4)^2}"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 191,
+  "line": 193,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "I_2=x/\\big(8(x^2+4)\\big)+\\frac{1}{16}\\arctan(x/2)."
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 195,
+  "line": 197,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int\\frac{2x+3}{(x^2+4)^2} \\ dx=\\frac{3x-8}{8(x^2+4)}+\\frac{3}{16}\\arctan\\frac{x}{2}+c"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 201,
+  "line": 203,
   "verdict": "SKIP",
   "reason": "evaluation-bar notation",
   "latex": "\\int_a^b u \\ dv=\\Big[uv\\Big]_a^b-\\int_a^b v \\ du"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 211,
+  "line": 213,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int_0^{\\pi/2}\\sin^4x \\ dx=\\frac{3}{4}\\cdot\\frac{1}{2}\\cdot\\frac{\\pi}{2}=\\frac{3\\pi}{16}"
  },
  {
   "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
-  "line": 213,
+  "line": 215,
   "verdict": "SKIP",
   "reason": "differential relation",
   "latex": "\\int_0^{\\pi/2}\\sin^5x \\ dx=\\frac{4}{5}\\cdot\\frac{2}{3}=\\frac{8}{15}"

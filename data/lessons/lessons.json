@@ -2441,7 +2441,7 @@
   },
   {
     "concept_id": "calc.integral.mvt",
-    "source": "algebrica/integrals/definite-integrals.md"
+    "source": "algebrica/integrals/mean-value-theorem-for-integrals.md"
   },
   {
     "concept_id": "calc.integral.work",
@@ -2602,5 +2602,29 @@
   {
     "concept_id": "calc.integral.reduction",
     "source": "algebrica/integrals/reduction-formulas-for-integrals.md"
+  },
+  {
+    "concept_id": "precalc.func.floor_ceiling",
+    "source": "algebrica/functions/floor-and-ceiling-functions.md"
+  },
+  {
+    "concept_id": "precalc.func.heaviside",
+    "source": "algebrica/functions/heaviside-function.md"
+  },
+  {
+    "concept_id": "alg.func.injectivity",
+    "source": "algebrica/functions/injective-surjective-and-bijective-functions.md"
+  },
+  {
+    "concept_id": "alg.func.power",
+    "source": "algebrica/functions/power-function.md"
+  },
+  {
+    "concept_id": "alg.func.irrational",
+    "source": "algebrica/functions/irrational-functions.md"
+  },
+  {
+    "concept_id": "stat.func.gaussian",
+    "source": "algebrica/functions/gaussian-function.md"
   }
 ]

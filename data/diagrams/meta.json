@@ -1764,5 +1764,65 @@
   "source": "algebrica",
   "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/functions/svg/arccotangent-function-1.svg",
   "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/floor-and-ceiling-functions-1.svg": {
+  "concepts": [
+   "precalc.func.floor_ceiling"
+  ],
+  "title": "Floor and ceiling functions",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/functions/svg/floor-and-ceiling-functions-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/heaviside-function-1.svg": {
+  "concepts": [
+   "precalc.func.heaviside"
+  ],
+  "title": "Heaviside step function",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/functions/svg/heaviside-function-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/injective-surjective-and-bijective-functions-1.svg": {
+  "concepts": [
+   "alg.func.injectivity"
+  ],
+  "title": "Injective, surjective, bijective maps",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/functions/svg/injective-surjective-and-bijective-functions-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/power-function-1.svg": {
+  "concepts": [
+   "alg.func.power"
+  ],
+  "title": "Power function family",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/functions/svg/power-function-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/irrational-functions-1.svg": {
+  "concepts": [
+   "alg.func.irrational"
+  ],
+  "title": "Root function graphs",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/functions/svg/irrational-functions-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/gaussian-function-1.svg": {
+  "concepts": [
+   "stat.func.gaussian"
+  ],
+  "title": "Gaussian function bell curve",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/functions/svg/gaussian-function-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
  }
 }

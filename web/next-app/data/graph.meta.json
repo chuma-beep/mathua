@@ -1,10 +1,10 @@
 {
-  "conceptCount": 641,
-  "connectionCount": 847,
+  "conceptCount": 657,
+  "connectionCount": 875,
   "domainCount": 17,
   "domainCounts": {
     "abstract_algebra": 32,
-    "algebra": 84,
+    "algebra": 87,
     "arithmetic": 46,
     "calculus": 128,
     "complex_numbers": 26,
@@ -16,10 +16,10 @@
     "machine_learning": 25,
     "number_theory": 25,
     "prealgebra": 40,
-    "precalculus": 23,
-    "statistics": 36,
+    "precalculus": 25,
+    "statistics": 37,
     "topology": 30,
-    "trigonometry": 22
+    "trigonometry": 32
   },
   "layoutVersion": 2
 }

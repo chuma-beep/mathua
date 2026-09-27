@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Rounding down and rounding up",
+    "section": "Rounding down and rounding up",
+    "subgoals": [
+      "Evaluate the floor of a positive decimal",
+      "Evaluate the ceiling of a negative decimal",
+      "Pin down both values at an integer input"
+    ]
+  },
+  {
+    "label": "Comparing a floor or a ceiling with an integer",
+    "section": "Comparing a floor or a ceiling with an integer",
+    "subgoals": [
+      "Split the comparison into cases n <= x < n+1",
+      "Solve floor(x) = 3 as a half-open interval",
+      "Solve ceiling(x) = -1 as a half-open interval"
+    ]
+  },
+  {
+    "label": "Division with remainder",
+    "section": "Division with remainder",
+    "subgoals": [
+      "Compute the quotient as floor(a/b)",
+      "Read the remainder off a - bq",
+      "Check the remainder lies in [0, b)"
+    ]
+  }
+]
