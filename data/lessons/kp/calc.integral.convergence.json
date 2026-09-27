@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Cauchy criterion",
+    "section": "The Cauchy criterion",
+    "subgoals": [
+      "Test tail integrals over [u,v] against epsilon",
+      "Read absolute convergence as Cauchy on |f|",
+      "Apply the criterion to sin(x)/x^p tails"
+    ]
+  },
+  {
+    "label": "Dirichlet's test",
+    "section": "Dirichlet's test",
+    "subgoals": [
+      "Bound the accumulation F(t) of sin x by 2",
+      "Pair bounded F with decreasing g to 0",
+      "Conclude integral of sin(x)/x^p converges for p>0"
+    ]
+  },
+  {
+    "label": "Integrals involving the sine function",
+    "section": "Integrals involving the sine function",
+    "subgoals": [
+      "Sort p>1 as absolute, 0<p<=1 as conditional, p<=0 as divergent",
+      "Split |sin x|/x^p via the sin^2 identity for 0<p<=1",
+      "Reduce Fresnel sin(x^2) to p=1/2 via t=x^2"
+    ]
+  }
+]

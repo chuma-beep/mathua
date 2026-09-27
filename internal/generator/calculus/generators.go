@@ -138,6 +138,10 @@ func Register(reg *generator.Registry) {
 	reg.Register("calc.limit.sine_limit", &sineLimitGen{})
 	reg.Register("calc.limit.exp_limit", &expLimitGen{})
 	reg.Register("calc.seq.bounded", &boundedSeqGen{})
+	reg.Register("calc.integral.convergence", &convergenceGen{})
+	reg.Register("calc.integral.irrational", &irrationalIntegralGen{})
+	reg.Register("calc.integral.strategy", &strategyGen{})
+	reg.Register("calc.integral.reduction", &reductionGen{})
 }
 
 type limitConceptGen struct{}
@@ -2362,6 +2366,112 @@ func (g *boundedSeqGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		{"Is a bounded sequence always convergent?", "no", "\\((-1)^{n}\\) is bounded yet oscillates: boundedness is necessary, not sufficient."},
 	}
 	e := table[rand.Intn(len(table))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type convergenceGen struct{}
+
+func (g *convergenceGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q, a, e string
+	}
+	tableEasy := []entry{
+		{"The integral \\(\\int_{1}^{\\infty} \\frac{\\sin x}{x^{2}} \\, dx\\) converges absolutely, conditionally, or diverges? (enter absolute, conditional, or diverges)", "absolute", "For \\(p=2>1\\), \\(|\\sin x|/x^{2} \\le 1/x^{2}\\) and the p-integral converges: absolute convergence."},
+		{"The integral \\(\\int_{1}^{\\infty} \\frac{\\sin x}{\\sqrt{x}} \\, dx\\) converges absolutely, conditionally, or diverges? (enter absolute, conditional, or diverges)", "conditional", "Dirichlet: \\(\\int_{1}^{t}\\sin x\\,dx\\) is bounded by 2 and \\(x^{-1/2}\\) decreases to 0, so it converges; but \\(p=1/2<1\\) so the absolute integral diverges."},
+		{"The integral \\(\\int_{1}^{\\infty} \\sin x \\, dx\\) converges absolutely, conditionally, or diverges? (enter absolute, conditional, or diverges)", "diverges", "Here \\(p=0\\le 0\\): the Cauchy criterion fails on the humps \\(I_{k}=[2k\\pi+\\pi/6,2k\\pi+5\\pi/6]\\), each contributing at least \\(\\pi/3\\)."},
+		{"What bounds \\(\\left|\\int_{1}^{t} \\sin x \\, dx\\right|\\) for all \\(t\\)? (enter a number)", "2", "\\(\\left|\\int_{1}^{t}\\sin x\\,dx\\right| = |\\cos 1 - \\cos t| \\le 2\\): the bounded accumulation Dirichlet's test needs."},
+		{"The Cauchy principal value of \\(\\int_{-\\infty}^{\\infty} \\frac{2x}{1+x^{2}} \\, dx\\) is what? (enter a number)", "0", "Symmetric bounds give \\(\\int_{-R}^{R} = 0\\) for this odd function, so the principal value is 0 (the improper integral itself diverges)."},
+	}
+	tableHard := []entry{
+		{"The integral of \\(|\\sin x|/x^{p}\\) over \\([1,\\infty)\\) converges for \\(p\\) above what threshold? (enter a number)", "1", "Absolute convergence needs \\(p>1\\) by comparison with \\(1/x^{p}\\); at \\(p\\le 1\\) the sine-squared split shows divergence."},
+		{"In Abel's test, \\(g\\) must be monotone and what? (enter bounded or vanishing)", "bounded", "Abel drops Dirichlet's \\(g\\to 0\\) but keeps monotonicity and adds boundedness, writing \\(g = h + L\\) with \\(h\\to 0\\)."},
+		{"The Fresnel integral \\(\\int_{0}^{\\infty} \\sin(x^{2}) \\, dx\\) converges absolutely or conditionally? (enter absolute or conditional)", "conditional", "With \\(t=x^{2}\\) it becomes half of the \\(p=1/2\\) sine family: convergent, but the absolute integral diverges."},
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type irrationalIntegralGen struct{}
+
+func (g *irrationalIntegralGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q, a, e string
+	}
+	tableEasy := []entry{
+		{"What substitution rationalizes \\(\\int \\frac{dx}{\\sqrt{x}+\\sqrt[3]{x}}\\)? (enter as x = ...)", "x = t^6", "Indices 2 and 3 have lcm 6: with \\(x=t^{6}\\), \\(\\sqrt{x}=t^{3}\\) and \\(\\sqrt[3]{x}=t^{2}\\), and \\(dx=6t^{5}dt\\)."},
+		{"With \\(x=t^{6}\\), \\(dx\\) equals what? (enter in terms of t, with dt)", "6t^5 dt", "Differentiating \\(x=t^{6}\\) gives \\(dx = 6t^{5}dt\\)."},
+		{"What exponent \\(m\\) rationalizes \\(\\sqrt{ax+b}\\) and \\(\\sqrt[3]{ax+b}\\) together? (enter a number)", "6", "Take \\(m\\) as the lcm of the indices: \\(m=6\\) makes both roots integer powers of \\(t\\)."},
+		{"Which Euler substitution applies when \\(a>0\\)? (enter first, second, or third)", "first", "For \\(a>0\\), set \\(\\sqrt{ax^{2}+bx+c} = t - x\\sqrt{a}\\): squaring cancels \\(ax^{2}\\) and leaves \\(x\\) rational in \\(t\\)."},
+	}
+	tableHard := []entry{
+		{"Which Euler substitution needs \\(c>0\\)? (enter first, second, or third)", "second", "For \\(c>0\\), set \\(\\sqrt{ax^{2}+bx+c} = xt+\\sqrt{c}\\): squaring cancels the constant term."},
+		{"Which Euler substitution needs two distinct real roots? (enter first, second, or third)", "third", "With roots \\(\\alpha,\\beta\\), set \\(\\sqrt{ax^{2}+bx+c} = t(x-\\alpha)\\): dividing by \\(x-\\alpha\\) leaves a first-degree equation."},
+		{"What is the antiderivative of \\(\\frac{1}{\\sqrt{x^{2}+1}}\\)? (enter it)", "ln(x+sqrt(x^2+1))", "The \\(a>0\\) completing-the-square formula gives \\(\\ln|x+\\sqrt{x^{2}+1}|\\)."},
+		{"For \\(\\int \\frac{x^{2}}{\\sqrt{x^{2}+1}} \\, dx\\), the undetermined-coefficient polynomial \\(S_{1}(x)\\) has what degree? (enter a number)", "1", "The ansatz is \\(S_{n-1}\\sqrt{Q} + \\lambda\\int dx/\\sqrt{Q}\\): for numerator degree 2, \\(S_{1}(x)=Ax+B\\) has degree 1."},
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type strategyGen struct{}
+
+func (g *strategyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q, a, e string
+	}
+	tableEasy := []entry{
+		{"Which technique for \\(\\int x e^{x^{2}} \\, dx\\)? (enter substitution, parts, or partial-fractions)", "substitution", "The integrand is \\(f(g)g'\\): \\(u=x^{2}\\) gives \\(\\int e^{u}du/2\\). An inner function with its derivative means substitution."},
+		{"Which technique for \\(\\int x e^{x} \\, dx\\)? (enter substitution, parts, or partial-fractions)", "parts", "A product of unrelated families (algebraic times exponential) with no composite derivative: LIATE picks \\(u=x\\)."},
+		{"Which technique for \\(\\int \\frac{1}{x(x+1)} \\, dx\\)? (enter substitution, parts, or partial-fractions)", "partial-fractions", "A proper rational function: split \\(1/(x(x+1)) = 1/x - 1/(x+1)\\) and integrate term by term."},
+		{"Which technique for \\(\\int \\sin^{3}x \\cos x \\, dx\\)? (enter substitution, parts, or partial-fractions)", "substitution", "Composite power form: \\(u=\\sin x\\) gives \\(\\int u^{3}du = \\sin^{4}x/4\\)."},
+	}
+	tableHard := []entry{
+		{"Which technique for \\(\\int \\arctan x \\, dx\\)? (enter substitution, parts, or partial-fractions)", "parts", "A single inverse-trig factor is a product with 1: take \\(u=\\arctan x\\), \\(dv=dx\\)."},
+		{"Which technique for \\(\\int \\frac{x+5}{x^{2}-x-6} \\, dx\\)? (enter substitution, parts, or partial-fractions)", "partial-fractions", "The denominator factors as \\((x-3)(x+2)\\) with positive discriminant: two logarithmic terms."},
+		{"Which technique for \\(\\int \\frac{e^{\\arctan x}}{1+x^{2}} \\, dx\\)? (enter substitution, parts, or partial-fractions)", "substitution", "The derivative of \\(\\arctan x\\) is present: \\(\\int e^{u}du = e^{u}\\) with \\(u=\\arctan x\\)."},
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+}
+
+type reductionGen struct{}
+
+func (g *reductionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		q, a, e string
+	}
+	tableEasy := []entry{
+		{"The recurrence \\(J_{n} = \\frac{x^{n}e^{ax}}{a} - \\frac{n}{a}J_{n-1}\\) lowers \\(n\\) by how much? (enter a number)", "1", "Each integration by parts differentiates \\(x^{n}\\) once: the index drops by 1 until \\(J_{0}=e^{ax}/a\\)."},
+		{"The recurrence \\(S_{n} = -\\frac{\\sin^{n-1}x\\cos x}{n} + \\frac{n-1}{n}S_{n-2}\\) lowers \\(n\\) by how much? (enter a number)", "2", "The trigonometric identity rejoins the family two indices down; even and odd chains end at \\(S_{0}=x\\) and \\(S_{1}=-\\cos x\\)."},
+		{"What is \\(S_{0} = \\int \\sin^{0}x \\, dx\\)? (enter it)", "x", "The empty product integrates to \\(x\\): base case of the even sine chain."},
+		{"What is \\(T_{1} = \\int \\tan x \\, dx\\)? (enter it)", "-ln|cos(x)|", "Base case of the odd tangent chain: \\(\\int\\tan x\\,dx = -\\ln|\\cos x|\\)."},
+	}
+	tableHard := []entry{
+		{"Evaluate \\(\\int_{0}^{\\pi/2} \\sin^{4}x \\, dx\\). (enter in terms of pi)", "3*pi/16", "Wallis recurrence: \\(\\frac{3}{4}\\cdot\\frac{1}{2}\\cdot\\frac{\\pi}{2} = 3\\pi/16\\)."},
+		{"Evaluate \\(\\int_{0}^{\\pi/2} \\sin^{5}x \\, dx\\). (enter a fraction)", "8/15", "Wallis recurrence down the odd chain: \\(\\frac{4}{5}\\cdot\\frac{2}{3} = 8/15\\)."},
+		{"What is \\(I_{1} = \\int \\frac{dx}{x^{2}+a^{2}}\\)? (enter in terms of arctan)", "(1/a)*arctan(x/a)", "Base case of the quadratic-denominator family: \\(I_{1} = \\frac{1}{a}\\arctan\\frac{x}{a}\\)."},
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
 

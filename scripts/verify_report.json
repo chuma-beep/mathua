@@ -10339,6 +10339,230 @@
   "latex": "L = \\int_0^{2\\pi} 2r\\sin(t/2)\\, dt"
  },
  {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 5,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_a^{+\\infty} f(x) \\ dx := \\lim_{t \\to +\\infty} \\int_a^t f(x) \\ dx \\tag{1}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 13,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "F(t):=\\int_a^t f(x) \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 17,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_a^{+\\infty}f(x) \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 21,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\left|\\int_u^v f(x) \\ dx\\right|\\lt\\varepsilon \\qquad v\\gt u\\gt c \\tag{2}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 30,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_a^b f(x) \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 34,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\left|\\int_u^v f(x) \\ dx\\right|\\lt\\varepsilon \\qquad a\\lt u\\lt v\\lt a+\\delta \\tag{3}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 38,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\left|\\int_u^v f(x) \\ dx\\right|\\leq\\int_u^v|f(x)| \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 46,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "F(t)=\\int_a^t f(x) \\ dx \\tag{4}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 54,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_a^{+\\infty}f(x)g(x) \\ dx \\tag{5}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 62,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_u^v f(x)g(x) \\ dx=g(u)\\int_u^{\\xi}f(x) \\ dx+g(v)\\int_{\\xi}^v f(x) \\ dx \\tag{6}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 66,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\left|\\int_u^{\\xi}f(x) \\ dx\\right|=|F(\\xi)-F(u)|\\leq2K"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 68,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\left|\\int_{\\xi}^v f(x) \\ dx\\right|=|F(v)-F(\\xi)|\\leq2K"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 72,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\left|\\int_u^v f(x)g(x) \\ dx\\right|\\leq2K\\big(|g(u)|+|g(v)|\\big)"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 76,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\left|\\int_u^v f(x)g(x) \\ dx\\right|\\leq2K\\left(|g(u)|+|g(v)|\\right)\\lt2K\\left(\\frac{\\varepsilon}{4K}+\\frac{\\varepsilon}{4K}\\right)=\\varepsilon"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 84,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_a^{+\\infty}f(x) \\ dx \\tag{7}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 88,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_a^{+\\infty}f(x)g(x) \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 92,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_a^{+\\infty}f(x)h(x) \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 95,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "f(x)g(x)=f(x)h(x)+Lf(x)"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 103,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_1^{+\\infty}\\frac{\\sin x}{x^p} \\ dx \\tag{8}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 107,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\left|\\int_1^t\\sin x \\ dx\\right|=|\\cos1-\\cos t|\\leq2"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 119,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_1^T\\frac{|\\sin x|}{x^p} \\ dx\\geq\\frac{1}{2}\\int_1^T\\frac{dx}{x^p}-\\frac{1}{2}\\int_1^T\\frac{\\cos2x}{x^p} \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 125,
+  "verdict": "SKIP",
+  "reason": "tuple or multi-argument form",
+  "latex": "I_k=[2k\\pi+\\pi/6,\\ 2k\\pi+5\\pi/6]"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 129,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_{I_k}\\frac{\\sin x}{x^p} \\ dx\\geq\\frac{1}{2}\\cdot\\frac{2\\pi}{3}=\\frac{\\pi}{3}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 145,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_0^{+\\infty}\\sin(x^2) \\ dx=\\int_0^{+\\infty}\\cos(x^2) \\ dx=\\frac{1}{2}\\sqrt{\\frac{\\pi}{2}}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 149,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_0^{+\\infty}\\sin(x^2) \\ dx \\tag{9}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 153,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_1^T\\sin(x^2) \\ dx=\\frac{1}{2}\\int_1^{T^2}\\frac{\\sin t}{\\sqrt t} \\ dt"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 159,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_0^{+\\infty}\\sin(x^2) \\ dx=\\int_0^{+\\infty}\\cos(x^2) \\ dx=\\frac{1}{2}\\sqrt{\\frac{\\pi}{2}}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 169,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\mathrm{p.v.}\\int_{-\\infty}^{+\\infty}f(x) \\ dx:=\\lim_{R\\to+\\infty}\\int_{-R}^{R}f(x) \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 173,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "f(x)=\\frac{2x}{1+x^2}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 177,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_{-\\infty}^{+\\infty}\\frac{2x}{1+x^2} \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 181,
+  "verdict": "SKIP",
+  "reason": "implication",
+  "latex": "\\int_0^R f(x) \\ dx=\\ln(1+R^2) \\to +\\infty"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/convergence-tests-for-improper-integrals.md",
+  "line": 183,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_{-R}^R f(x) \\ dx=0"
+ },
+ {
   "file": "data/lessons/algebrica/integrals/definite-integrals.md",
   "line": 8,
   "verdict": "SKIP",
@@ -12495,6 +12719,412 @@
   "latex": "\\int \\frac{1}{\\sin x}\\,dx = \\int \\csc x\\,dx = \\ln|\\csc x - \\cot x| + c"
  },
  {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 7,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int R\\big(x,\\sqrt[n]{\\varphi(x)}\\big) \\ dx=\\int R\\big(\\chi(t),\\psi(t)\\big)\\chi'(t) \\ dt"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 13,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int\\frac{dx}{\\sqrt{1-x^4}}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 21,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int R\\left(x,\\sqrt[n]{\\frac{ax+b}{cx+d}}\\right) \\tag{1}dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 25,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "\\sqrt{\\frac{2x+4}{x+2}}=\\sqrt2 \\qquad x\\neq-2"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 29,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "t=\\sqrt[n]{\\frac{ax+b}{cx+d}}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 33,
+  "verdict": "SKIP",
+  "reason": "disjoint variables",
+  "latex": "t^n=\\frac{ax+b}{cx+d}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 37,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "x=\\frac{b-dt^n}{ct^n-a}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 41,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "dx=\\frac{n(ad-bc)t^{n-1}}{(ct^n-a)^2} \\ dt"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 49,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int R\\big(x,\\sqrt[n]{ax+b}\\big) \\ dx \\qquad t=\\sqrt[n]{ax+b}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 55,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int R\\big(x,\\sqrt[n_1]{ax+b},\\dots,\\sqrt[n_j]{ax+b}\\big) \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 61,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int\\frac{dx}{\\sqrt x+\\sqrt[3]x}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 65,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int\\frac{6t^5}{t^3+t^2} \\ dt=6\\int\\frac{t^3}{t+1} \\ dt"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 77,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int\\frac{dx}{\\sqrt x+\\sqrt[3]x}=2\\sqrt x-3\\sqrt[3]x+6\\sqrt[6]x-6\\ln\\big(\\sqrt[6]x+1\\big)+k"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 83,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int\\sqrt{\\frac{x}{1-x}} \\ dx \\qquad 0\\leq x<1"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 87,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "x=\\frac{t^2}{1+t^2} \\qquad dx=\\frac{2t}{(1+t^2)^2} \\ dt"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 91,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int t\\cdot\\frac{2t}{(1+t^2)^2} \\ dt=2\\int\\frac{t^2}{(1+t^2)^2} \\ dt"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 95,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int\\frac{dt}{(1+t^2)^2}=\\frac{t}{2(1+t^2)}+\\frac{1}{2}\\arctan t"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 99,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int\\sqrt{\\frac{x}{1-x}} \\ dx=\\arctan\\sqrt{\\frac{x}{1-x}}-\\sqrt{x(1-x)}+k"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 105,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int R\\big(x,\\sqrt{ax^2+bx+c}\\big) \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 109,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "4aQ(x)=(2ax+b)^2-D"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 113,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int\\frac{dx}{\\sqrt{ax^2+bx+c}}=\\frac{1}{\\sqrt a}\\ln\\left|2ax+b+2\\sqrt a\\sqrt{ax^2+bx+c}\\right|+k"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 117,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int\\frac{dx}{\\sqrt{ax^2+bx+c}}=-\\frac{1}{\\sqrt{-a}}\\arcsin\\frac{2ax+b}{\\sqrt{b^2-4ac}}+k"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 121,
+  "verdict": "SKIP",
+  "reason": "undetermined coefficients",
+  "latex": "mx+n=\\frac{m}{2a}(2ax+b)+\\left(n-\\frac{mb}{2a}\\right)"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 125,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int\\frac{mx+n}{\\sqrt{ax^2+bx+c}} \\ dx=\\frac{m}{a}\\sqrt{ax^2+bx+c}+\\left(n-\\frac{mb}{2a}\\right)\\int\\frac{dx}{\\sqrt{ax^2+bx+c}}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 135,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "\\sqrt{ax^2+bx+c}=t-x\\sqrt a"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 139,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "x=\\frac{t^2-c}{2\\sqrt at+b}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 143,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "dx=\\frac{2\\big(\\sqrt at^2+bt+\\sqrt ac\\big)}{(2\\sqrt at+b)^2} \n\\ dt"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 146,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "\\sqrt{ax^2+bx+c}=\\frac{\\sqrt at^2+bt+\\sqrt ac}{2\\sqrt at+b}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 152,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "\\sqrt{ax^2+bx+c}=xt+\\sqrt c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 156,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "x=\\frac{2\\sqrt ct-b}{a-t^2}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 162,
+  "verdict": "SKIP",
+  "reason": "undetermined coefficients",
+  "latex": "ax^2+bx+c=a(x-\\alpha)(x-\\beta)"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 166,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\sqrt{ax^2+bx+c}=t(x-\\alpha)"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 170,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "x=\\frac{a\\beta-\\alpha t^2}{a-t^2}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 178,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int\\frac{dx}{x\\sqrt{x^2+x+1}}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 182,
+  "verdict": "SKIP",
+  "reason": "undetermined coefficients",
+  "latex": "\\sqrt{x^2+x+1}=xt+1"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 186,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "x=\\frac{2t-1}{1-t^2}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 190,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "dx=\\frac{2\\big(t^2-t+1\\big)}{(1-t^2)^2} \\ dt"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 192,
+  "verdict": "SKIP",
+  "reason": "undetermined coefficients",
+  "latex": "\\sqrt{x^2+x+1}=xt+1=\\frac{t^2-t+1}{1-t^2}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 196,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int\\frac{dx}{x\\sqrt{x^2+x+1}} &= \\int\\frac{1-t^2}{2t-1}\\cdot\\frac{1-t^2}{t^2-t+1}\\cdot\\frac{2\\big(t^2-t+1\\big)}{(1-t^2)^2} \\ dt \\\\[6pt]\n&= \\int\\frac{2}{2t-1} \\ dt\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 205,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int\\frac{dx}{x\\sqrt{x^2+x+1}}=\\ln\\left|\\frac{2\\sqrt{x^2+x+1}-x-2}{x}\\right|+k"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 213,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int\\frac{P_n(x)}{\\sqrt{Q(x)}} \\ dx=S_{n-1}(x)\\sqrt{Q(x)}+\\lambda\\int\\frac{dx}{\\sqrt{Q(x)}}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 217,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "P_n(x)=S_{n-1}'(x)Q(x)+\\frac{1}{2}S_{n-1}(x)Q'(x)+\\lambda"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 221,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int\\frac{x^2}{\\sqrt{x^2+1}} \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 225,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "x^2=A\\big(x^2+1\\big)+\\frac{1}{2}(Ax+B)(2x)+\\lambda=2Ax^2+Bx+(A+\\lambda)"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 229,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int\\frac{x^2}{\\sqrt{x^2+1}} \\ dx=\\frac{x}{2}\\sqrt{x^2+1}-\\frac{1}{2}\\ln\\big(x+\\sqrt{x^2+1}\\big)+k"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 241,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int x^m\\big(a+bx^n\\big)^p \\ dx=\\frac{1}{n}\\int z^{\\frac{m+1}{n}-1}(a+bz)^p \\ dz"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 245,
+  "verdict": "SKIP",
+  "reason": "no claim",
+  "latex": "p \\qquad \\frac{m+1}{n} \\qquad \\frac{m+1}{n}+p"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 257,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int\\frac{\\sqrt[3]{1+\\sqrt[4]x}}{\\sqrt x} \\ dx \\qquad x>0"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 261,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "x=\\big(t^3-1\\big)^4"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 263,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "dx=12t^2\\big(t^3-1\\big)^3 \\ dt"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 265,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "\\sqrt x=\\big(t^3-1\\big)^2"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 269,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int\\frac{t\\cdot12t^2\\big(t^3-1\\big)^3}{\\big(t^3-1\\big)^2} \\ dt &= 12\\int\\big(t^6-t^3\\big) \\ dt \\\\[6pt]\n&= \\frac{12t^7}{7}-3t^4\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 278,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int\\frac{\\sqrt[3]{1+\\sqrt[4]x}}{\\sqrt x} \\ dx=\\frac{12}{7}\\big(1+\\sqrt[4]x\\big)^{7/3}-3\\big(1+\\sqrt[4]x\\big)^{4/3}+k"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 286,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int\\frac{dx}{x^4\\sqrt{1+x^2}} \\qquad x>0"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 290,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "dx=-t\\big(t^2-1\\big)^{-3/2} \\ dt"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 292,
+  "verdict": "SKIP",
+  "reason": "disjoint variables",
+  "latex": "\\sqrt{1+x^2}=\\frac{t}{\\sqrt{t^2-1}}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 296,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int\\frac{dx}{x^4\\sqrt{1+x^2}} &= \\int\\big(t^2-1\\big)^2\\cdot\\frac{\\sqrt{t^2-1}}{t}\\cdot\\Big({-t}\\big(t^2-1\\big)^{-3/2}\\Big) \\ dt \\\\[6pt]\n&= -\\int\\big(t^2-1\\big) \\ dt \\\\[6pt]\n&= t-\\frac{t^3}{3}\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integrals-of-irrational-functions.md",
+  "line": 306,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int\\frac{dx}{x^4\\sqrt{1+x^2}}=\\frac{\\big(2x^2-1\\big)\\sqrt{1+x^2}}{3x^3}+k"
+ },
+ {
   "file": "data/lessons/algebrica/integrals/integration-by-parts.md",
   "line": 8,
   "verdict": "SKIP",
@@ -13083,6 +13713,1161 @@
   "latex": "\\begin{align*}\n      a^2 - x^2 &\\rightarrow x = a\\sin u \\\\\\\\[3pt]\n      a^2 + x^2 &\\rightarrow x = a\\tan u \\\\\\\\[3pt]\n      x^2 - a^2 &\\rightarrow x = a\\sec u\n      \\end{align*}"
  },
  {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 9,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int xe^x \\ dx = \\frac{x^2}{2}e^x - \\int \\frac{x^2}{2}e^x \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 25,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int 0 \\ dx = c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 29,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int 1 \\ dx = \\int dx = x + c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 41,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\frac{d}{dx}\\left(\\frac{x^{n+1}}{n+1}\\right) = \\frac{(n+1)x^{n}}{n+1} = x^{n}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 45,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\frac{1}{x} \\ dx = \\ln|x| + c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 56,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int 0 \\ dx = c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 57,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int dx = x + c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 59,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\dfrac{1}{x} \\ dx = \\ln \\lvert x \\rvert + c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 60,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int e^x \\ dx = e^x + c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 61,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int a^x \\ dx = \\dfrac{a^x}{\\ln a} + c \\quad a > 0, \\ a \\neq 1"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 62,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\sin x \\ dx = -\\cos x + c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 63,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\cos x \\ dx = \\sin x + c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 64,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\dfrac{1}{\\cos^2 x} \\ dx = \\tan x + c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 65,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\dfrac{1}{\\sin^2 x} \\ dx = -\\cot x + c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 66,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\dfrac{1}{1 + x^2} \\ dx = \\arctan x + c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 67,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\dfrac{1}{\\sqrt{1 - x^2}} \\ dx = \\arcsin x + c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 68,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\sinh x \\ dx = \\cosh x + c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 69,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\cosh x \\ dx = \\sinh x + c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 78,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int [\\alpha f(x) + \\beta g(x)] \\ dx = \\alpha F(x) + \\beta G(x) + c \\qquad \\alpha, \\beta \\in \\mathbb{R}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 84,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\left(6x^5 - 4\\sqrt[3]{x} + \\frac{7}{x}\\right) \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 100,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int x^2 \\ dx = \\frac{x^3}{3} + c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 112,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\frac{(x+1)^2}{x} \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 114,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int \\frac{(x+1)^2}{x} \\ dx &= \\int \\frac{x^2 + 2x + 1}{x} \\ dx \\\\[6pt]\n&= \\int \\left(x + 2 + \\frac{1}{x}\\right) \\ dx \\\\[6pt]\n&= \\frac{x^2}{2} + 2x + \\ln|x| + c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 126,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\frac{2x^4 - 3}{x^2} \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 150,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int x(x^2+1)^5 \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 166,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\frac{x^2}{\\sqrt{x^3+8}} \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 182,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\sin^3 x \\cos x \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 184,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int \\sin^3 x \\cos x \\ dx &= \\int (\\sin x)^3 (\\sin x)' \\ dx \\\\[6pt]\n&= \\frac{\\sin^4 x}{4} + c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 197,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\frac{f'(x)}{f(x)} \\ dx = \\ln|f(x)| + c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 211,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\frac{dx}{2x+7}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 213,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int \\frac{dx}{2x+7} &= \\frac{1}{2}\\int \\frac{2 \\ dx}{2x+7} \\\\[6pt]\n&= \\frac{1}{2}\\ln|2x+7| + c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 226,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\tan x \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 228,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int \\tan x \\ dx &= \\int \\frac{\\sin x}{\\cos x} \\ dx \\\\[6pt]\n&= -\\int \\frac{-\\sin x}{\\cos x} \\ dx \\\\[6pt]\n&= -\\ln|\\cos x| + c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 242,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\frac{\\cos x}{1 + \\sin x} \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 244,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int \\frac{\\cos x}{1 + \\sin x} \\ dx &= \\int \\frac{(1 + \\sin x)'}{1 + \\sin x} \\ dx \\\\[6pt]\n&= \\ln|1 + \\sin x| + c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 257,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\frac{dx}{\\sin x \\cos x}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 259,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int \\frac{dx}{\\sin x \\cos x} &= \\int \\frac{1/\\cos^2 x}{\\sin x \\cos x / \\cos^2 x} \\ dx \\\\[6pt]\n&= \\int \\frac{1/\\cos^2 x}{\\tan x} \\ dx \\\\[6pt]\n&= \\int \\frac{(\\tan x)'}{\\tan x} \\ dx \\\\[12pt]\n&= \\ln|\\tan x| + c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 274,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int g(f(x))f'(x) \\ dx=F(f(x))+c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 282,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\dfrac{f'(x)}{f(x)} \\ dx = \\ln \\lvert f(x) \\rvert + c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 283,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int e^{f(x)} f'(x) \\ dx = e^{f(x)} + c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 284,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\sin(f(x))f'(x) \\ dx = -\\cos(f(x)) + c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 285,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\cos(f(x))f'(x) \\ dx = \\sin(f(x)) + c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 286,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\dfrac{f'(x)}{1 + [f(x)]^2} \\ dx = \\arctan f(x) + c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 287,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\dfrac{f'(x)}{\\sqrt{1 - [f(x)]^2}} \\ dx = \\arcsin f(x) + c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 292,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\frac{e^{\\arctan x}}{1+x^2} \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 294,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int \\frac{e^{\\arctan x}}{1+x^2} \\ dx &= \\int e^{\\arctan x}(\\arctan x)' \\ dx \\\\[6pt]\n&= e^{\\arctan x} + c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 307,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int f(g(x)) g'(x) \\ dx = \\int f(u) \\ du \\qquad u = g(x), \\quad du = g'(x) \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 323,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\frac{x}{\\sqrt{x+4}} \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 325,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "u = x + 4 \\qquad x = u - 4 \\qquad dx = du"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 327,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int \\frac{x}{\\sqrt{x+4}} \\ dx &= \\int \\frac{u-4}{\\sqrt{u}} \\ du \\\\[6pt]\n&= \\int \\left(u^{1/2} - 4u^{-1/2}\\right) \\ du \\\\[6pt]\n&= \\frac{2}{3}u^{3/2} - 8u^{1/2} + c \\\\[6pt]\n&= \\frac{2}{3}(x+4)^{3/2} - 8\\sqrt{x+4} + c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 342,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\frac{dx}{e^x + 1}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 344,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "u = e^x \\qquad du = e^x \\ dx \\qquad dx = \\frac{du}{u}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 346,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int \\frac{dx}{e^x + 1} &= \\int \\frac{du}{u(u+1)} \\\\[6pt]\n&= \\int \\left(\\frac{1}{u} - \\frac{1}{u+1}\\right) \\ du \\\\[6pt]\n&= \\ln|u| - \\ln|u+1| + c \\\\[6pt]\n&= x - \\ln(e^x + 1) + c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 363,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\frac{dx}{\\sqrt{x}(1+x)}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 365,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "u = \\sqrt{x} \\qquad x = u^2 \\qquad dx = 2u \\ du"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 367,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int \\frac{dx}{\\sqrt{x}(1+x)} &= \\int \\frac{2u \\ du}{u(1+u^2)} \\\\[6pt]\n&= 2\\int \\frac{du}{1+u^2} \\\\[6pt]\n&= 2\\arctan u + c \\\\[6pt]\n&= 2\\arctan \\sqrt{x} + c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 385,
+  "verdict": "SKIP",
+  "reason": "ellipsis schema",
+  "latex": "\\int R\\left(x, \\sqrt[n_1]{x}, \\ldots, \\sqrt[n_r]{x}\\right) \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 385,
+  "verdict": "SKIP",
+  "reason": "tuple or multi-argument form",
+  "latex": "x = t^{\\mu}, \\quad \\mu = \\mathrm{lcm}(n_1, \\ldots, n_r)"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 386,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int R\\left(x, \\sqrt[n]{\\frac{\\alpha x + \\beta}{\\gamma x + \\delta}}\\right) \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 386,
+  "verdict": "SKIP",
+  "reason": "disjoint variables",
+  "latex": "\\frac{\\alpha x + \\beta}{\\gamma x + \\delta} = t^n"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 387,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int R\\left(e^{ax}\\right) \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 387,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "t = e^{ax}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 388,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int R(\\cos x)\\sin x \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 388,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "t = \\cos x"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 389,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int R(\\sin x)\\cos x \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 389,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "t = \\sin x"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 390,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int R\\left(\\sin^2 x, \\cos^2 x, \\tan x\\right) \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 390,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "t = \\tan x"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 391,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int R(\\sin x, \\cos x) \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 391,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "t = \\tan\\frac{x}{2}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 396,
+  "verdict": "SKIP",
+  "reason": "disjoint variables",
+  "latex": "\\sin^2 x = \\frac{t^2}{1+t^2} \\qquad \\cos^2 x = \\frac{1}{1+t^2} \\qquad dx = \\frac{dt}{1+t^2}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 400,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\frac{dx}{1+\\sin^2 x}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 402,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int \\frac{dx}{1+\\sin^2 x} &= \\int \\frac{1}{1 + \\frac{t^2}{1+t^2}} \\cdot \\frac{dt}{1+t^2} \\\\[6pt]\n&= \\int \\frac{dt}{1+2t^2} \\\\[6pt]\n&= \\frac{1}{\\sqrt{2}}\\arctan\\left(\\sqrt{2}t\\right) + c \\\\[6pt]\n&= \\frac{1}{\\sqrt{2}}\\arctan\\left(\\sqrt{2}\\tan x\\right) + c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 413,
+  "verdict": "SKIP",
+  "reason": "no claim",
+  "latex": "\\frac{1}{\\sqrt{2}}\\arctan(\\sqrt{2}\\tan x)+c."
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 421,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int f(x)g'(x) \\ dx = f(x)g(x) - \\int f'(x)g(x) \\ dx + c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 425,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int u \\ dv = uv - \\int v \\ du + c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 433,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\arctan x \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 435,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "u = \\arctan x \\qquad du = \\frac{dx}{1+x^2} \\qquad dv = dx \\qquad v = x"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 437,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int \\arctan x \\ dx &= x\\arctan x - \\int \\frac{x}{1+x^2} \\ dx \\\\[6pt]\n&= x\\arctan x - \\frac{1}{2}\\int \\frac{2x}{1+x^2} \\ dx \\\\[6pt]\n&= x\\arctan x - \\frac{1}{2}\\ln(1+x^2) + c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 453,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\sin\\sqrt{x} \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 455,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "t = \\sqrt{x} \\qquad x = t^2 \\qquad dx = 2t \\ dt"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 457,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int \\sin\\sqrt{x} \\ dx &= 2\\int t\\sin t \\ dt \\\\[6pt]\n&= 2\\left(-t\\cos t + \\int \\cos t \\ dt\\right) \\\\[6pt]\n&= 2\\left(-t\\cos t + \\sin t\\right) + c \\\\[12pt]\n&= 2\\sin\\sqrt{x} - 2\\sqrt{x}\\cos\\sqrt{x} + c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 483,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int x^3e^x \\ dx=e^x(x^3-3x^2+6x-6)+c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 495,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "I=\\int e^x\\cos x \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 499,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\nI &= e^x\\sin x-\\int e^x\\sin x \\ dx \\\\[6pt]\n  &= e^x\\sin x+e^x\\cos x-I\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 508,
+  "verdict": "SKIP",
+  "reason": "solve-for (not an identity)",
+  "latex": "I=\\frac{e^x(\\sin x+\\cos x)}{2}+c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 518,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\frac{x+5}{x^2-x-6} \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 520,
+  "verdict": "SKIP",
+  "reason": "undetermined coefficients",
+  "latex": "\\frac{x+5}{(x-3)(x+2)} = \\frac{A}{x-3} + \\frac{B}{x+2} \\qquad A = \\frac{8}{5}, \\quad B = -\\frac{3}{5}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 522,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int \\frac{x+5}{x^2-x-6} \\ dx &= \\frac{8}{5}\\int \\frac{dx}{x-3} - \\frac{3}{5}\\int \\frac{dx}{x+2} \\\\[6pt]\n&= \\frac{8}{5}\\ln|x-3| - \\frac{3}{5}\\ln|x+2| + c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 535,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\frac{2x+5}{x^2+6x+9} \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 537,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "u = x+3 \\qquad x = u-3 \\qquad dx = du"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 539,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int \\frac{2x+5}{x^2+6x+9} \\ dx &= \\int \\frac{2u-1}{u^2} \\ du \\\\[6pt]\n&= 2\\int \\frac{du}{u} - \\int u^{-2} \\ du \\\\[6pt]\n&= 2\\ln|u| + \\frac{1}{u} + c \\\\[6pt]\n&= 2\\ln|x+3| + \\frac{1}{x+3} + c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 554,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\frac{dx}{x^2+4x+13}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 556,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int \\frac{dx}{x^2+4x+13} &= \\int \\frac{dx}{(x+2)^2 + 9} \\\\[6pt]\n&= \\frac{1}{9}\\int \\frac{dx}{\\left(\\frac{x+2}{3}\\right)^2 + 1} \\\\[6pt]\n&= \\frac{1}{9} \\cdot 3\\int \\frac{du}{u^2+1} \\qquad u = \\frac{x+2}{3} \\\\[6pt]\n&= \\frac{1}{3}\\arctan\\frac{x+2}{3} + c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 571,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\frac{x}{x^2+2x+5} \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 573,
+  "verdict": "SKIP",
+  "reason": "waived: Lagrange prime notation unparseable by scalar sampler (derivative is correct)",
+  "latex": "(x^2+2x+5)' = 2x+2 \\qquad x = \\frac{1}{2}(2x+2) - 1"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 575,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int \\frac{x}{x^2+2x+5} \\ dx &= \\frac{1}{2}\\int \\frac{2x+2}{x^2+2x+5} \\ dx - \\int \\frac{dx}{(x+1)^2+4} \\\\[6pt]\n&= \\frac{1}{2}\\ln(x^2+2x+5) - \\frac{1}{2}\\arctan\\frac{x+1}{2} + c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 590,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int \\frac{dx}{\\sqrt{a^2-x^2}} &= \\arcsin\\frac{x}{a} + c \\qquad a>0 \\\\[6pt]\n\\int \\frac{dx}{\\sqrt{x^2+k}} &= \\ln\\left|x + \\sqrt{x^2+k}\\right| + c \\qquad k\\neq 0\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 601,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\frac{dx}{\\sqrt{5-4x-x^2}}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 603,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int \\frac{dx}{\\sqrt{5-4x-x^2}} &= \\int \\frac{dx}{\\sqrt{9-(x+2)^2}} \\\\[6pt]\n&= \\arcsin\\frac{x+2}{3} + c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 620,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\frac{x^2}{x^2+1} \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 622,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int \\frac{x^2}{x^2+1} \\ dx &= \\int \\frac{x^2 + 1 - 1}{x^2+1} \\ dx \\\\[6pt]\n&= \\int \\left(1 - \\frac{1}{x^2+1}\\right) \\ dx \\\\[6pt]\n&= x - \\arctan x + c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 636,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\frac{dx}{1+\\sin x}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 661,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int\\frac{dx}{\\sqrt{x+1}+\\sqrt{x}} &= \\int\\left(\\sqrt{x+1}-\\sqrt{x}\\right) \\ dx \\\\[6pt]\n&= \\frac{2}{3}(x+1)^{3/2}-\\frac{2}{3}x^{3/2}+c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 674,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\sin^3 x \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 676,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int \\sin^3 x \\ dx &= \\int (1-\\cos^2 x)\\sin x \\ dx \\\\[6pt]\n&= \\int \\sin x \\ dx - \\int \\cos^2 x \\sin x \\ dx \\\\[6pt]\n&= -\\cos x + \\frac{\\cos^3 x}{3} + c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 688,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\sin 3x \\cos x \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 690,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int \\sin 3x \\cos x \\ dx &= \\frac{1}{2}\\int \\left(\\sin 4x + \\sin 2x\\right) \\ dx \\\\[6pt]\n&= -\\frac{\\cos 4x}{8} - \\frac{\\cos 2x}{4} + c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 703,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int \\cos^2 x \\ dx &= \\frac{1}{2}\\int (1 + \\cos 2x) \\ dx \\\\[6pt]\n&= \\frac{x}{2} + \\frac{\\sin 2x}{4} + c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 714,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int\\sin^n x \\ dx &= -\\frac{\\sin^{n-1}x\\cos x}{n}+\\frac{n-1}{n}\\int\\sin^{n-2}x \\ dx+c \\\\[6pt]\n\\int\\cos^n x \\ dx &= \\frac{\\sin x\\cos^{n-1}x}{n}+\\frac{n-1}{n}\\int\\cos^{n-2}x \\ dx+c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 727,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int\\tan^3x\\sec x \\ dx &= \\int\\tan^2x(\\tan x\\sec x) \\ dx \\\\[6pt]\n&= \\int(u^2-1) \\ du \\qquad u=\\sec x \\\\[6pt]\n&= \\frac{\\sec^3x}{3}-\\sec x+c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 741,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int e^x[f(x) + f'(x)] \\ dx = e^x f(x) + c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 745,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int e^x\\left(\\ln x + \\frac{1}{x}\\right) \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 747,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int e^x\\left(\\ln x + \\frac{1}{x}\\right) \\ dx &= \\int \\left[e^x\\ln x + e^x(\\ln x)'\\right] \\ dx \\\\[6pt]\n&= \\int \\left(e^x\\ln x\\right)' \\ dx \\\\[6pt]\n&= e^x\\ln x + c\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 759,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\left(e^{ax}Q(x)\\right)'=e^{ax}\\left[Q'(x)+aQ(x)\\right]"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 763,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int e^x(x^2+1) \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 767,
+  "verdict": "SKIP",
+  "reason": "disjoint variables",
+  "latex": "Q+Q'=Ax^2+(B+2A)x+(C+B)"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 771,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int e^x(x^2+1) \\ dx=e^x(x^2-2x+3)+c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 777,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\frac{f'(x)g(x)-f(x)g'(x)}{[g(x)]^2} \\ dx=\\frac{f(x)}{g(x)}+c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 797,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_{-1}^{1} \\frac{x^3\\cos x}{1+x^2} \\ dx = 0"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 805,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n\\int_a^b f(x) \\ dx &= \\int_a^b f(a+b-x) \\ dx \\\\[6pt]\n&= \\frac{1}{2}\\int_a^b\\left[f(x)+f(a+b-x)\\right] \\ dx\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 814,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "I=\\int_0^1\\frac{x}{x^2+(1-x)^2} \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 818,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\n2I &= \\int_0^1\\frac{dx}{x^2+(1-x)^2} \\\\[6pt]\n   &= \\left[\\arctan(2x-1)\\right]_0^1 \\\\[6pt]\n   &= \\frac{\\pi}{2}\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 832,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_0^{+\\infty}f(x) \\ dx=\\int_0^{+\\infty}\\frac{f(1/x)}{x^2} \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 836,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "I=\\int_0^{+\\infty}\\frac{\\ln x}{1+x^2} \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 840,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\nI &= \\int_0^{+\\infty}\\frac{\\ln(1/x)}{1+1/x^2}\\frac{dx}{x^2} \\\\[6pt]\n  &= -\\int_0^{+\\infty}\\frac{\\ln x}{1+x^2} \\ dx \\\\[12pt]\n  &= -I\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 854,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_{0}^{2\\pi} \\sin^2 x \\ dx = \\int_{0}^{2\\pi} \\cos^2 x \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 858,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_{0}^{2\\pi} \\left(\\sin^2 x + \\cos^2 x\\right) \\ dx = \\int_{0}^{2\\pi} dx = 2\\pi"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 883,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int e^{-x^2} \\ dx \\qquad \\int \\frac{\\sin x}{x} \\ dx \\qquad \\int \\frac{dx}{\\ln x}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 895,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "I(b) = \\int_{0}^{+\\infty} \\frac{\\sin x}{x}e^{-bx} \\ dx \\qquad b > 0"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 899,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\nI'(b) &= \\int_{0}^{+\\infty} \\frac{\\partial}{\\partial b}\\left(\\frac{\\sin x}{x}e^{-bx}\\right) \\ dx \\\\[6pt]\n&= -\\int_{0}^{+\\infty} e^{-bx}\\sin x \\ dx \\\\[6pt]\n&= -\\frac{1}{b^2+1}\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/integration-strategies.md",
+  "line": 909,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_{0}^{+\\infty} \\frac{\\sin x}{x} \\ dx = \\lim_{b \\to 0^+} \\left(\\frac{\\pi}{2} - \\arctan b\\right) = \\frac{\\pi}{2}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 7,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_a^b f(x) \\ dx = f(c)(b - a) \\tag{1}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 11,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_a^b (f(x) - f(c)) \\ dx = 0 \\tag{2}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 23,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "m = f(x_m) \\qquad M = f(x_M)"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 27,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "m(b - a) \\leq \\int_a^b f(x) \\ dx \\leq M(b - a)"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 31,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "m \\leq \\frac{1}{b - a} \\int_a^b f(x) \\ dx \\leq M \\tag{3}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 35,
+  "verdict": "SKIP",
+  "reason": "no claim",
+  "latex": "f(x_m) \\le \\mu \\le f(x_M)"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 47,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_a^b (M - f(x)) \\ dx = M(b - a) - \\mu(b - a) = 0 \\tag{4}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 51,
+  "verdict": "SKIP",
+  "reason": "unbound function in inequality",
+  "latex": "M - f(x) \\geq \\frac{1}{2}(M - f(x_0))"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 55,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_a^b (M - f(x)) \\ dx \\geq \\int_J (M - f(x)) \\ dx \\geq \\frac{M - f(x_0)}{2} \\ell > 0"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 63,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\mu = \\frac{1}{b - a} \\int_a^b f(x) \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 67,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "\\frac{1}{n} \\sum_{k=1}^{n} f(x_k) = \\frac{1}{b - a} \\sum_{k=1}^{n} f(x_k) \\Delta x"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 73,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\mu = \\frac{1}{t_2 - t_1} \\int_{t_1}^{t_2} v(t) \\ dt"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 81,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "f'(c) = \\frac{f(b) - f(a)}{b - a} \\tag{5}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 85,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "f(c) = \\frac{1}{b - a} \\int_a^b f(x) \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 89,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_a^b f(x) \\ dx = F(b) - F(a)"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 93,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "F(b) - F(a) = F'(c)(b - a)"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 101,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\inf_{[a, b]} f \\leq \\frac{1}{b - a} \\int_a^b f(x) \\ dx \\leq \\sup_{[a, b]} f"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 105,
+  "verdict": "SKIP",
+  "reason": "environment: cases",
+  "latex": "f(x) = \\begin{cases} 0 & \\text{if } 0 \\leq x < 1 \\\\[6pt] 1 & \\text{if } 1 \\leq x \\leq 2 \\end{cases}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 118,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_a^b f(x) g(x) \\ dx = f(c) \\int_a^b g(x) \\ dx \\tag{6}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 122,
+  "verdict": "SKIP",
+  "reason": "unbound function in inequality",
+  "latex": "m g(x) \\leq f(x) g(x) \\leq M g(x)"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 126,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "m \\int_a^b g(x) \\ dx \\leq \\int_a^b f(x) g(x) \\ dx \\leq M \\int_a^b g(x) \\ dx \\tag{7}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 133,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "f(c) = \\frac{1}{G} \\int_a^b f(x) g(x) \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 141,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_a^b f(x) g(x) \\ dx = g(a) \\int_a^{\\xi} f(x) \\ dx + g(b) \\int_{\\xi}^b f(x) \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 149,
+  "verdict": "SKIP",
+  "reason": "evaluation-bar notation",
+  "latex": "\\int_0^9 \\sqrt{x} \\ dx = \\left[ \\frac{2}{3} x^{3/2} \\right]_0^9 = \\frac{2}{3} \\cdot 27 = 18"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 153,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\mu = \\frac{1}{9} \\int_0^9 \\sqrt{x} \\ dx = \\frac{18}{9} = 2"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 163,
+  "verdict": "SKIP",
+  "reason": "evaluation-bar notation",
+  "latex": "\\int_0^{\\pi} \\sin x \\ dx = \\left[ -\\cos x \\right]_0^{\\pi} = -\\cos \\pi + \\cos 0 = 1 + 1 = 2"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 167,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "\\mu = \\frac{2}{\\pi} \\approx 0.6366"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 171,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "c_1 = \\arcsin \\frac{2}{\\pi} \\approx 0.690"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 173,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "c_2 = \\pi - \\arcsin \\frac{2}{\\pi} \\approx 2.451"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 182,
+  "verdict": "SKIP",
+  "reason": "evaluation-bar notation",
+  "latex": "\\int_0^2 x^2 \\cdot x \\ dx = \\left[ \\frac{x^4}{4} \\right]_0^2 = 4"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 184,
+  "verdict": "SKIP",
+  "reason": "evaluation-bar notation",
+  "latex": "\\int_0^2 x \\ dx = \\left[ \\frac{x^2}{2} \\right]_0^2 = 2"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 188,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "c = \\sqrt{2} \\approx 1.414"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/mean-value-theorem-for-integrals.md",
+  "line": 192,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\frac{1}{2} \\int_0^2 x^2 \\ dx = \\frac{1}{2} \\cdot \\frac{8}{3} = \\frac{4}{3}"
+ },
+ {
   "file": "data/lessons/algebrica/integrals/numerical-integration.md",
   "line": 9,
   "verdict": "SKIP",
@@ -13186,6 +14971,202 @@
   "verdict": "SKIP",
   "reason": "no claim",
   "latex": "\\int_0^1 e^{-x^2}\\\\\\\\\\,dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 7,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int \\sin^3 x dx \\quad \\text{or} \\quad \\int \\sin^5 x dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 11,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "I_n=\\int\\sin^nx \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 17,
+  "verdict": "SKIP",
+  "reason": "unresolved function",
+  "latex": "I_n=g_n(x)+\\lambda_nI_{n-k} \\tag{1}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 39,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int x^3e^x \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 43,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "\\begin{align}\nJ_3 &= x^3e^x-3J_2 \\\\[6pt]\nJ_2 &= x^2e^x-2J_1 \\\\[6pt]\nJ_1 &= xe^x-J_0 \\\\[6pt]\nJ_0 &= e^x\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 54,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int x^3e^x \\ dx=e^x(x^3-3x^2+6x-6)+c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 58,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int x^ne^{ax} \\ dx=e^{ax}\\sum_{k=0}^{n}(-1)^k\\frac{n!}{(n-k)!}\\frac{x^{n-k}}{a^{k+1}}+c \\tag{3}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 76,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "S_n=-\\sin^{n-1}x\\cos x+(n-1)\\int\\sin^{n-2}x\\cos^2x \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 80,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "S_n=-\\sin^{n-1}x\\cos x+(n-1)S_{n-2}-(n-1)S_n"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 92,
+  "verdict": "SKIP",
+  "reason": "definitional binding",
+  "latex": "\\begin{align}\nS_4 &= -\\frac{\\sin^3x\\cos x}{4}+\\frac{3}{4}S_2 \\\\[6pt]\nS_2 &= -\\frac{\\sin x\\cos x}{2}+\\frac{1}{2}S_0 \\\\[6pt]\nS_0 &= x\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 102,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int\\sin^4x \\ dx=-\\frac{\\sin^3x\\cos x}{4}-\\frac{3\\sin x\\cos x}{8}+\\frac{3x}{8}+c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 114,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\begin{align}\nT_n &= \\int\\tan^{n-2}x(\\sec^2x-1) \\ dx \\\\[6pt]\n    &= \\int\\tan^{n-2}x\\sec^2x \\ dx-T_{n-2}\n\\end{align}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 127,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int\\tan^4x \\ dx=\\frac{\\tan^3x}{3}-\\tan x+x+c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 141,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int\\ln^3x \\ dx=x\\ln^3x-3x\\ln^2x+6x\\ln x-6x+c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 153,
+  "verdict": "SKIP",
+  "reason": "solve-for (not an identity)",
+  "latex": "I_1=\\frac{1}{a}\\arctan\\frac{x}{a}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 157,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "I_n=\\frac{x}{(x^2+a^2)^n}+2n\\int\\frac{x^2}{(x^2+a^2)^{n+1}} \\ dx"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 161,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int\\frac{x^2}{(x^2+a^2)^{n+1}} \\ dx=I_n-a^2I_{n+1}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 165,
+  "verdict": "SKIP",
+  "reason": "solve-for (not an identity)",
+  "latex": "I_n=x(x^2+a^2)^{-n}+2nI_n-2na^2I_{n+1}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 169,
+  "verdict": "SKIP",
+  "reason": "solve-for (not an identity)",
+  "latex": "I_{n+1}=\\frac{1}{2na^2}\\left[\\frac{x}{(x^2+a^2)^n}+(2n-1)I_n\\right] \\tag{8}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 173,
+  "verdict": "SKIP",
+  "reason": "solve-for (not an identity)",
+  "latex": "I_n=\\frac{1}{2(n-1)a^2}\\left[\\frac{x}{(x^2+a^2)^{n-1}}+(2n-3)I_{n-1}\\right]"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 177,
+  "verdict": "SKIP",
+  "reason": "solve-for (not an identity)",
+  "latex": "I_2=\\frac{x}{2a^2(x^2+a^2)}+\\frac{1}{2a^3}\\arctan\\frac{x}{a}+c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 181,
+  "verdict": "SKIP",
+  "reason": "no claim",
+  "latex": "\\frac{A_1x+B_1}{x^2+bx+c}+\\frac{A_2x+B_2}{(x^2+bx+c)^2}+\\dots+\\frac{A_kx+B_k}{(x^2+bx+c)^k}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 187,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int\\frac{2x+3}{(x^2+4)^2} \\ dx=\\int\\frac{2x}{(x^2+4)^2} \\ dx+3\\int\\frac{dx}{(x^2+4)^2}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 191,
+  "verdict": "SKIP",
+  "reason": "parse: Exception",
+  "latex": "I_2=x/\\big(8(x^2+4)\\big)+\\frac{1}{16}\\arctan(x/2)."
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 195,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int\\frac{2x+3}{(x^2+4)^2} \\ dx=\\frac{3x-8}{8(x^2+4)}+\\frac{3}{16}\\arctan\\frac{x}{2}+c"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 201,
+  "verdict": "SKIP",
+  "reason": "evaluation-bar notation",
+  "latex": "\\int_a^b u \\ dv=\\Big[uv\\Big]_a^b-\\int_a^b v \\ du"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 211,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_0^{\\pi/2}\\sin^4x \\ dx=\\frac{3}{4}\\cdot\\frac{1}{2}\\cdot\\frac{\\pi}{2}=\\frac{3\\pi}{16}"
+ },
+ {
+  "file": "data/lessons/algebrica/integrals/reduction-formulas-for-integrals.md",
+  "line": 213,
+  "verdict": "SKIP",
+  "reason": "differential relation",
+  "latex": "\\int_0^{\\pi/2}\\sin^5x \\ dx=\\frac{4}{5}\\cdot\\frac{2}{3}=\\frac{8}{15}"
  },
  {
   "file": "data/lessons/algebrica/integrals/riemann-integrability-criteria.md",

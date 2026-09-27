@@ -95,6 +95,8 @@ WAIVERS: list[tuple[str, str, str]] = [
      "radical-isolation derivation (equation steps, not identities)"),
     ("lines-planes-conic-sections/lines.md", "\\begin{align} &2x + 1 = -x + 4",
      "intersection solve-track (solving the system)"),
+    ("integrals/integration-strategies.md", "(x^2+2x+5)' = 2x+2",
+     "Lagrange prime notation unparseable by scalar sampler (derivative is correct)"),
     ("algebraic-structures/dihedral-groups.md", "(r^a s^i)(r^b s^j)",
      "noncommutative dihedral generators (scalar sampling misfires)"),
     ("algebraic-structures/dihedral-groups.md", "(r^ks)(r^ks)",

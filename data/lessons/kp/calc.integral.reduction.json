@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Products of powers of x with exponentials",
+    "section": "Products of powers of $x$ with $e^{ax}$, $\\sin x$, and $\\cos x$",
+    "subgoals": [
+      "Set u=x^n, dv=e^(ax)dx to lower the degree by one",
+      "Unroll J_3=x^3e^x-3J_2 down to J_0=e^x",
+      "Evaluate integral of x^3e^x as e^x(x^3-3x^2+6x-6)"
+    ]
+  },
+  {
+    "label": "Powers of sine and cosine",
+    "section": "Powers of sine and cosine",
+    "subgoals": [
+      "Split sin^n via cos^2=1-sin^2 to rejoin the family",
+      "Anchor at S_0=x and S_1=-cos x",
+      "Evaluate integral of sin^4x to -sin^3x cos x/4-3sin x cos x/8+3x/8"
+    ]
+  },
+  {
+    "label": "Recurrences for definite integrals",
+    "section": "Recurrences for definite integrals",
+    "subgoals": [
+      "Drop the boundary term -sin^(n-1)x cos x/n on [0,pi/2]",
+      "Iterate (n-1)/n down to base cases pi/2 and 1",
+      "Evaluate integral of sin^4x over [0,pi/2] as 3pi/16"
+    ]
+  }
+]

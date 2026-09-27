@@ -2441,7 +2441,7 @@
   },
   {
     "concept_id": "calc.integral.mvt",
-    "source": "algebrica/integrals/definite-integrals.md"
+    "source": "algebrica/integrals/mean-value-theorem-for-integrals.md"
   },
   {
     "concept_id": "calc.integral.work",
@@ -2546,5 +2546,21 @@
   {
     "concept_id": "complex.adv.logarithm",
     "source": "algebrica/complex-numbers/complex-logarithm.md"
+  },
+  {
+    "concept_id": "calc.integral.convergence",
+    "source": "algebrica/integrals/convergence-tests-for-improper-integrals.md"
+  },
+  {
+    "concept_id": "calc.integral.irrational",
+    "source": "algebrica/integrals/integrals-of-irrational-functions.md"
+  },
+  {
+    "concept_id": "calc.integral.strategy",
+    "source": "algebrica/integrals/integration-strategies.md"
+  },
+  {
+    "concept_id": "calc.integral.reduction",
+    "source": "algebrica/integrals/reduction-formulas-for-integrals.md"
   }
 ]

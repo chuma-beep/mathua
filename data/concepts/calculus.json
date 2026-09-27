@@ -1780,5 +1780,61 @@
     "streak": 3,
     "avg_time_seconds": 60
    }
+  },
+  {
+   "id": "calc.integral.convergence",
+   "label": "Convergence tests for improper integrals",
+   "domain": "calculus",
+   "subdomain": "calculus.integrals",
+   "grading_type": "symbolic",
+   "prerequisites": [
+    "calc.integral.improper"
+   ],
+   "mastery_threshold": {
+    "streak": 3,
+    "avg_time_seconds": 120
+   }
+  },
+  {
+   "id": "calc.integral.irrational",
+   "label": "Integrals of irrational functions",
+   "domain": "calculus",
+   "subdomain": "calculus.integrals",
+   "grading_type": "symbolic",
+   "prerequisites": [
+    "calc.integral.substitution"
+   ],
+   "mastery_threshold": {
+    "streak": 3,
+    "avg_time_seconds": 120
+   }
+  },
+  {
+   "id": "calc.integral.strategy",
+   "label": "Integration strategies (method selection)",
+   "domain": "calculus",
+   "subdomain": "calculus.integrals",
+   "grading_type": "multiple_choice",
+   "prerequisites": [
+    "calc.integral.parts"
+   ],
+   "mastery_threshold": {
+    "streak": 10,
+    "avg_time_seconds": 25.0
+   }
+  },
+  {
+   "id": "calc.integral.reduction",
+   "label": "Reduction formulas for integrals",
+   "domain": "calculus",
+   "subdomain": "calculus.integrals",
+   "grading_type": "symbolic",
+   "prerequisites": [
+    "calc.integral.parts"
+   ],
+   "mastery_threshold": {
+    "streak": 3,
+    "avg_time_seconds": 120
+   }
   }
 ]
