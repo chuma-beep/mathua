@@ -84,6 +84,9 @@ type Question struct {
 	AttemptID   string          `json:"attempt_id,omitempty"`
 	Lesson      *lessons.Lesson `json:"lesson,omitempty"`
 	Diagram     string          `json:"diagram,omitempty"`
+	// GradingType lets every answer host (study, review, quiz, diagnostic)
+	// show the right input hint/keyboard. Empty means "unknown".
+	GradingType string `json:"grading_type,omitempty"`
 }
 
 type AnswerResult struct {
@@ -97,6 +100,9 @@ type AnswerResult struct {
 	ExpectedAnswer string         `json:"expected_answer"`
 	Halted         bool           `json:"halted,omitempty"`
 	Remedial       []string       `json:"remedial,omitempty"`
+	// Ungraded marks a grader infrastructure fault: the answer was NOT
+	// evaluated and nothing was recorded. Clients should retry, not penalize.
+	Ungraded bool `json:"ungraded,omitempty"`
 }
 
 type Engine struct {
@@ -456,6 +462,7 @@ func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
 			ConceptID:   cid,
 			ConceptName: c.Label,
 			Question:    prob.Question,
+			GradingType: e.gradingTypeFor(cid),
 			IsReview:    false,
 			AttemptID:   as.attemptID,
 			Lesson:      lesson,
@@ -522,6 +529,7 @@ func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
 		ConceptID:   next.Concept.ID,
 		ConceptName: next.Concept.Label,
 		Question:    prob.Question,
+		GradingType: e.gradingTypeFor(next.Concept.ID),
 		IsReview:    next.IsReview,
 		AttemptID:   as.attemptID,
 		Lesson:      lesson,
@@ -605,6 +613,7 @@ func (e *Engine) NextReviewQuestion(sessionID, studentID string) (*Question, err
 		ConceptID:   next.Concept.ID,
 		ConceptName: next.Concept.Label,
 		Question:    prob.Question,
+		GradingType: e.gradingTypeFor(next.Concept.ID),
 		IsReview:    true,
 		AttemptID:   as.attemptID,
 		Lesson:      lesson,
@@ -878,6 +887,15 @@ func (e *Engine) GradeAnswer(conceptID, expectedAnswer, userAnswer string) grade
 	return e.gradeAnswer(conceptID, expectedAnswer, userAnswer)
 }
 
+// gradingTypeFor returns a concept's grading_type ("" if unknown), so served
+// questions can tell every answer host which input to show.
+func (e *Engine) gradingTypeFor(conceptID string) string {
+	if c := e.dag.Concept(conceptID); c != nil {
+		return c.GradingType
+	}
+	return ""
+}
+
 func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, elapsedSeconds float64) (*AnswerResult, error) {
 	// Narrow critical section: snapshot the active question under lock, mark
 	// answered to reject concurrent duplicates, then release before blocking
@@ -918,6 +936,16 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 	e.mu.Unlock()
 
 	gr := e.gradeAnswer(sessionFields.conceptID, sessionFields.expectedAnswer, answer)
+	if gr.Unavailable {
+		// Grader infrastructure fault — never a student miss. Re-arm the
+		// pending question so the client can retry, and record nothing.
+		e.mu.Lock()
+		if cur := e.sessions[sessionID]; cur == as {
+			as.answered = false
+		}
+		e.mu.Unlock()
+		return &AnswerResult{Ungraded: true, Feedback: gr.Feedback}, nil
+	}
 
 	progress, err := e.repo.GetProgress(studentID, sessionFields.conceptID)
 	if err != nil {
@@ -934,13 +962,15 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 
 	progress.Attempts++
 	progress.LastAttempted = ptrTime(nowUTC())
+	// AvgResponseTime reflects every attempt, not just correct ones; excluding
+	// misses biases the average low and inflates mastery readiness.
+	totalTime := progress.AvgResponseTime*float64(progress.Attempts-1) + elapsedSeconds
+	progress.AvgResponseTime = totalTime / float64(progress.Attempts)
 	if gr.Correct {
 		progress.Streak++
 		if progress.Streak > progress.BestStreak {
 			progress.BestStreak = progress.Streak
 		}
-		totalTime := progress.AvgResponseTime*float64(progress.Attempts-1) + elapsedSeconds
-		progress.AvgResponseTime = totalTime / float64(progress.Attempts)
 	} else {
 		progress.Streak = 0
 	}
@@ -1054,6 +1084,10 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 	taskType := TaskLesson
 	if sessionFields.isReview {
 		taskType = TaskReview
+	} else if strings.HasSuffix(sessionFields.conceptID, ".word") {
+		// ADR-002: word problems are TaskMultistep 15 everywhere (practice and
+		// study), not the flat TaskLesson 10.
+		taskType = TaskMultistep
 	}
 	xp := computeXPForTask(gr.Correct, elapsedSeconds, sessionFields.timeThreshold, progress.Streak, taskType)
 
@@ -1206,6 +1240,10 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 	if dontKnow {
 		gr = grader.Result{Correct: false}
 	}
+	if gr.Unavailable {
+		// Grader infrastructure fault — never a student miss; record nothing.
+		return &AnswerResult{Ungraded: true, Feedback: gr.Feedback}, nil
+	}
 
 	progress, err := e.repo.GetProgress(studentID, conceptID)
 	if err != nil {
@@ -1221,13 +1259,15 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 	}
 	progress.Attempts++
 	progress.LastAttempted = ptrTime(nowUTC())
+	// AvgResponseTime reflects every attempt, not just correct ones; excluding
+	// misses biases the average low and inflates mastery readiness.
+	totalTime := progress.AvgResponseTime*float64(progress.Attempts-1) + elapsedSeconds
+	progress.AvgResponseTime = totalTime / float64(progress.Attempts)
 	if gr.Correct {
 		progress.Streak++
 		if progress.Streak > progress.BestStreak {
 			progress.BestStreak = progress.Streak
 		}
-		totalTime := progress.AvgResponseTime*float64(progress.Attempts-1) + elapsedSeconds
-		progress.AvgResponseTime = totalTime / float64(progress.Attempts)
 	} else {
 		progress.Streak = 0
 	}
@@ -1743,6 +1783,7 @@ func (e *Engine) StartGoalDiagnostic(studentID string, conceptIDs []string) (*di
 		ConceptID:   cid,
 		ConceptName: label,
 		Question:    prob.Question,
+		GradingType: e.gradingTypeFor(cid),
 	}, nil
 }
 
@@ -1893,6 +1934,7 @@ func (e *Engine) PracticeConcept(sessionID, studentID, conceptID string) (*Quest
 		ConceptID:   conceptID,
 		ConceptName: c.Label,
 		Question:    prob.Question,
+		GradingType: e.gradingTypeFor(conceptID),
 		AttemptID:   as.attemptID,
 		Lesson:      lesson,
 	}, nil
@@ -2185,6 +2227,7 @@ func (e *Engine) GetCurrentQuestion(sessionID, studentID string) (*Question, err
 		ConceptID:   as.conceptID,
 		ConceptName: as.conceptName,
 		Question:    as.questionText,
+		GradingType: e.gradingTypeFor(as.conceptID),
 		IsReview:    as.isReview,
 		AttemptID:   as.attemptID,
 		Lesson:      lesson,

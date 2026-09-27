@@ -143,6 +143,12 @@ export default function LessonQuiz({ conceptId, limit = 5 }: LessonQuizProps) {
     dispatch({ type: 'checkStart', index: i })
     try {
       const res = await submitStudyAnswer(conceptId, userAnswer, q.answer, elapsed, q.question)
+      // Grader unavailable: never counts as a miss; leave the answer so the
+      // student can retry.
+      if (res.ungraded) {
+        checkingRef.current[i] = false
+        return
+      }
       dispatch({ type: 'gradeServer', index: i, correct: res.correct, xp: res.xp ?? 0 })
     } catch {
       // Fallback to local grading if server unreachable

@@ -47,6 +47,7 @@ export default function ReviewHost() {
     conceptId: string
     conceptName: string
     attemptId: string
+    gradingType: string
   } | null>(null)
 
   async function startReview() {
@@ -65,7 +66,7 @@ export default function ReviewHost() {
       setReviewConceptName(res.question.concept_name)
       reviewAttemptId.current = res.question.attempt_id ?? ''
       reviewShownAt.current = Date.now()
-      setAnswerFormat(formatForGradingType())
+      setAnswerFormat(formatForGradingType(res.question.grading_type))
       setReviewCount(1)
       setReviewAccuracy({ correct: 0, total: 0 })
       setReviewXp(0)
@@ -98,6 +99,12 @@ export default function ReviewHost() {
       const answer = reviewAnswerInput.trim()
       const elapsed = Math.max(0.5, (Date.now() - (reviewShownAt.current ?? Date.now())) / 1000)
       const data = await submitReviewAnswer(reviewSessionId.current, answer, elapsed, reviewAttemptId.current)
+      // Grader unavailable: never counts as a miss; ask the student to retry.
+      if (data.result?.ungraded) {
+        setSubmitError({ message: 'Grading is temporarily unavailable — please try again.' })
+        setLoading(false)
+        return
+      }
       const correct = data.result?.correct || false
       const feedback = data.result?.feedback || (correct ? 'Correct!' : 'Not quite.')
       const xp = data.result?.xp ?? 0
@@ -118,6 +125,7 @@ export default function ReviewHost() {
         conceptId: data.next_question.concept_id,
         conceptName: data.next_question.concept_name,
         attemptId: data.next_question.attempt_id ?? '',
+        gradingType: data.next_question.grading_type ?? '',
       }
       setLoading(false)
     } catch (e) {
@@ -126,12 +134,13 @@ export default function ReviewHost() {
     }
   }
 
-  function applyReviewQuestion(question: string, cid: string, name: string, attemptId: string) {
+  function applyReviewQuestion(question: string, cid: string, name: string, attemptId: string, gradingType: string) {
     setReviewQuestion(question)
     reviewConceptId.current = cid
     reviewShownAt.current = Date.now()
     setReviewConceptName(name)
     reviewAttemptId.current = attemptId
+    setAnswerFormat(formatForGradingType(gradingType))
     setReviewCount(prev => prev + 1)
     setReviewLastResult(null)
     setReviewAnswerInput('')
@@ -149,7 +158,7 @@ export default function ReviewHost() {
     const staged = pendingReviewNext.current
     if (!staged) return
     pendingReviewNext.current = null
-    applyReviewQuestion(staged.question, staged.conceptId, staged.conceptName, staged.attemptId)
+    applyReviewQuestion(staged.question, staged.conceptId, staged.conceptName, staged.attemptId, staged.gradingType)
   }
 
   if (phase === 'intro') {
