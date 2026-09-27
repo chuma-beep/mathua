@@ -19,6 +19,7 @@ const QuestionSchema = z.object({
   attempt_id: z.string().optional(),
   lesson: z.object({ Title: z.string(), Body: z.string(), Concepts: z.array(z.string()) }).optional(),
   diagram: z.string().optional(),
+  grading_type: z.string().optional(),
 })
 
 const StartSessionResSchema = z.object({
@@ -36,6 +37,7 @@ const AnswerResultSchema = z.object({
   required_streak: z.number(),
   xp: z.number(),
   expected_answer: z.string(),
+  ungraded: z.boolean().optional(),
 })
 
 const AnswerResSchema = z.object({
@@ -168,6 +170,7 @@ export interface Question {
     Concepts: string[]
   }
   diagram?: string
+  grading_type?: string
 }
 
 export interface AnswerRes {
@@ -185,6 +188,7 @@ export interface AnswerResult {
   required_streak: number
   xp: number
   expected_answer: string
+  ungraded?: boolean
 }
 
 export interface GraphRes {
@@ -1037,6 +1041,7 @@ export interface StudyAnswerRes {
 	required_streak?: number
 	xp: number
 	expected_answer?: string
+	ungraded?: boolean
 }
 
 interface StudyAnswerBody {
