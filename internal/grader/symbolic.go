@@ -2,20 +2,8 @@ package grader
 
 import "strings"
 
-type symbolicGrader struct{}
-
-func (g *symbolicGrader) grade(expected, answer string) Result {
-	e := normaliseSymbolic(expected)
-	a := normaliseSymbolic(answer)
-	if e == "" || a == "" {
-		return emptyResult()
-	}
-	if e == a {
-		return Result{Correct: true, Score: 1}
-	}
-	return Result{Correct: false, Score: 0, Feedback: "Incorrect"}
-}
-
+// normaliseSymbolic canonicalises an expression string for the exact-match
+// fast path in gradeSymPy: whitespace-insensitive, `**` and `^` unified.
 func normaliseSymbolic(s string) string {
 	s = strings.ReplaceAll(s, " ", "")
 	s = strings.ReplaceAll(s, "**", "^")
