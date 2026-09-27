@@ -1,6 +1,7 @@
 'use client'
 
 import dynamic from 'next/dynamic'
+import Image from 'next/image'
 import {
   bodyStyle,
   codeBlockStyle,
@@ -453,6 +454,19 @@ export function MeasuringLearningSection() {
         </table>
       </div>
 
+      <div style={{
+        border: '0.5px solid var(--border)',
+        padding: '1rem',
+        background: 'var(--surface)',
+      }}>
+        <Image
+          src="/figures/efficacy-overview.svg"
+          alt="First-pass and second-pass rates across all learners, with Math Academy parity markers"
+          width={1198}
+          height={778}
+          style={{ maxWidth: '100%', height: 'auto', display: 'block' }}
+        />
+      </div>
       <p style={bodyStyle}>
         These are usage metrics, not an efficacy claim: no control group, no
         randomisation. Compare within a student over weeks, not across learners
@@ -461,10 +475,12 @@ export function MeasuringLearningSection() {
         100% by accident.
       </p>
       <p style={{ fontFamily: monoFont, fontSize: '12px', color: 'var(--text-muted)', lineHeight: 1.7 }}>
-        Product-wide figures are withheld until the attempt log reaches reporting
-        volume. This section describes the method — your live numbers are on your{' '}
+        The figure above refreshes weekly from the live product-wide log — read
+        it with its sample size, which rides in the caption. Early numbers move
+        a lot; that is normal, not a verdict. Your live per-student numbers are
+        on your{' '}
         <a href="/profile#efficacy" className="link-underline" style={{ color: 'var(--accent-blue)' }}>Profile</a>,
-        and the evidence figure with regeneration commands lives in{' '}
+        and the full methodology with regeneration commands lives in{' '}
         <a href="/docs/efficacy" className="link-underline" style={{ color: 'var(--accent-blue)' }}>Docs</a>.
       </p>
     </section>
