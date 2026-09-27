@@ -10,6 +10,7 @@ import (
 var (
 	commaRe      = regexp.MustCompile(`,`)
 	plusZeroRe   = regexp.MustCompile(`^\+`)
+	andRe        = regexp.MustCompile(`(?i)(\d)\s*and\s*(\d)`)
 	mixedRe      = regexp.MustCompile(`^(-?\d+)\s+(\d+/\d+)$`)
 	fractionRe   = regexp.MustCompile(`^(-?\d+)/(\d+)$`)
 	leadingDotRe = regexp.MustCompile(`^(-?)\.`)
@@ -54,7 +55,14 @@ func parseNumeric(s string) (float64, bool, bool) {
 		return 0, false, false
 	}
 
-	// Mixed number: "1 1/2" — check before stripping whitespace
+	// Accept the spoken form of a mixed number: "4 and 1/10" / "2and3/10"
+	// normalize to "4 1/10" before matching. (The English reading is how
+	// students naturally type it, and matches the worked explanation.)
+	s = andRe.ReplaceAllString(s, "$1 $2")
+
+	// Mixed number: "1 1/2" — check before stripping whitespace. A negative
+	// whole number subtracts its fraction ("-1 1/2" = -(1 + 1/2) = -1.5), not
+	// adds it ("-1 1/2" must not parse as -1 + 0.5).
 	if m := mixedRe.FindStringSubmatch(s); m != nil {
 		whole := new(big.Rat)
 		whole.SetString(m[1])
@@ -62,7 +70,13 @@ func parseNumeric(s string) (float64, bool, bool) {
 		if _, ok := frac.SetString(m[2]); !ok {
 			return 0, false, false
 		}
-		val, _ := new(big.Rat).Add(whole, frac).Float64() // aislop-ignore-line ai-slop/swallowed-exception -- Float64's 2nd result is an exactness flag, not an error
+		total := new(big.Rat)
+		if whole.Sign() < 0 {
+			total.Sub(whole, frac)
+		} else {
+			total.Add(whole, frac)
+		}
+		val, _ := total.Float64() // aislop-ignore-line ai-slop/swallowed-exception -- Float64's 2nd result is an exactness flag, not an error
 		return val, true, true
 	}
 

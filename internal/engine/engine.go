@@ -155,50 +155,72 @@ func New(repo storage.Repository, dag *concepts.DAG, reg *generator.Registry, ll
 	}
 }
 
+// SetStudyExpected stores a single server-side expected answer for a concept
+// (question key ""). Prefer SetStudyExpectedBatch for multi-question sets.
 func (e *Engine) SetStudyExpected(studentID, conceptID, expected string) {
+	e.SetStudyExpectedBatch(studentID, conceptID, map[string]string{"": expected})
+}
+
+// SetStudyExpectedBatch stores the server-side expected answers for a served
+// practice set, keyed by question text. Anchoring *every* question (not just
+// the first) is what stops a later question from being graded against the
+// first question's answer. Best-effort durable write-through for restarts.
+func (e *Engine) SetStudyExpectedBatch(studentID, conceptID string, byQuestion map[string]string) {
+	if len(byQuestion) == 0 {
+		return
+	}
 	key := studentID + "|" + conceptID
+	blob, err := json.Marshal(byQuestion)
+	if err != nil {
+		log.Printf("warning: marshal study expected %s: %v", key, err)
+		return
+	}
 	e.mu.Lock()
 	if e.studyExpected == nil {
 		e.studyExpected = make(map[string]string)
 	}
-	e.studyExpected[key] = expected
+	e.studyExpected[key] = string(blob)
 	e.mu.Unlock()
-	// Write-through to durable storage so a restart doesn't silently drop
-	// the H1b anti-cheat anchor (Fix 6). Best-effort: memory is the fast
-	// path, the row is the fallback.
 	if e.repo != nil {
 		exp := time.Now().UTC().Add(studyExpectedTTL).Format(time.RFC3339)
-		if err := e.repo.UpsertServerSession(serverSessionStudyExpected, key, expected, exp); err != nil {
+		if err := e.repo.UpsertServerSession(serverSessionStudyExpected, key, string(blob), exp); err != nil {
 			log.Printf("warning: persist study expected %s: %v", key, err)
 		}
 	}
 }
 
-func (e *Engine) popStudyExpected(studentID, conceptID string) (string, bool) {
+// studyExpectedFor returns the server-side expected answer for a specific
+// served question. Falls back to the single-anchor ("") form for callers that
+// store one answer, and to the durable row after a restart.
+func (e *Engine) studyExpectedFor(studentID, conceptID, question string) (string, bool) {
 	key := studentID + "|" + conceptID
 	e.mu.Lock()
-	val, ok := e.studyExpected[key]
-	if ok {
-		delete(e.studyExpected, key)
-	}
+	blob, ok := e.studyExpected[key]
 	e.mu.Unlock()
-	if ok {
-		if e.repo != nil {
-			_ = e.repo.DeleteServerSession(serverSessionStudyExpected, key)
-		}
-		return val, true
-	}
-	// Restart fallback: answer against the durable row, then consume it.
-	if e.repo != nil {
+	if !ok && e.repo != nil {
 		if v, exp, found, err := e.repo.GetServerSession(serverSessionStudyExpected, key); err == nil && found {
 			if exp == "" || isFutureRFC3339(exp) {
-				_ = e.repo.DeleteServerSession(serverSessionStudyExpected, key)
-				return v, true
+				blob, ok = v, true
 			}
-			_ = e.repo.DeleteServerSession(serverSessionStudyExpected, key)
 		} else if err != nil {
 			log.Printf("warning: read study expected %s: %v", key, err)
 		}
+	}
+	if !ok {
+		return "", false
+	}
+	var byQuestion map[string]string
+	if err := json.Unmarshal([]byte(blob), &byQuestion); err != nil {
+		// Legacy anchor: a bare expected string.
+		return blob, true
+	}
+	if question != "" {
+		if a, found := byQuestion[question]; found {
+			return a, true
+		}
+	}
+	if a, found := byQuestion[""]; found {
+		return a, true
 	}
 	return "", false
 }
@@ -847,6 +869,15 @@ func (e *Engine) gradeAnswer(conceptID string, expectedAnswer, userAnswer string
 	return e.gr.Grade(gradingType, expectedAnswer, userAnswer)
 }
 
+// GradeAnswer is the single canonical grading entry point: it honours a
+// generator's custom GradedGenerator, then falls back to the type router
+// (Go graders + SymPy). Every server path must use this so custom-grader
+// concepts (e.g. "5 R 3", "3 sqrt(2)", matrices, ratios) grade identically
+// everywhere instead of being mis-graded by the bare router.
+func (e *Engine) GradeAnswer(conceptID, expectedAnswer, userAnswer string) grader.Result {
+	return e.gradeAnswer(conceptID, expectedAnswer, userAnswer)
+}
+
 func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, elapsedSeconds float64) (*AnswerResult, error) {
 	// Narrow critical section: snapshot the active question under lock, mark
 	// answered to reject concurrent duplicates, then release before blocking
@@ -1134,7 +1165,7 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 		return nil, fmt.Errorf("%w: %q", ErrUnknownConcept, conceptID)
 	}
 	if useStudyExpected {
-		if stored, ok := e.popStudyExpected(studentID, conceptID); ok && stored != "" {
+		if stored, ok := e.studyExpectedFor(studentID, conceptID, questionText); ok && stored != "" {
 			expected = stored
 		}
 	}
@@ -1722,6 +1753,23 @@ func (e *Engine) ApplyGoalResults(studentID string, session *diagnostic.Session)
 	session.Unlock()
 	batch := make([]*storage.ConceptProgress, 0, len(attempts))
 	for _, att := range attempts {
+		// The diagnostic seeds placement; it must not destroy existing mastery.
+		// UpsertProgressBatch overwrites every column, so load the current row
+		// and only seed concepts that are still unseen. A concept the student
+		// has already started/advanced is left completely untouched.
+		existing, err := e.repo.GetProgress(studentID, att.ConceptID)
+		if err != nil {
+			return fmt.Errorf("load diagnostic progress %s: %w", att.ConceptID, err)
+		}
+		if existing == nil {
+			existing = &storage.ConceptProgress{
+				StudentID:  studentID,
+				ConceptID:  att.ConceptID,
+				SM2EFactor: 2.5,
+			}
+		} else if existing.Status != string(mastery.StatusUnseen) && existing.Status != "" {
+			continue
+		}
 		status := string(mastery.StatusUnseen)
 		weakness := 1.0
 		if att.Correct && att.Fast {
@@ -1733,12 +1781,9 @@ func (e *Engine) ApplyGoalResults(studentID string, session *diagnostic.Session)
 		} else {
 			weakness = 0.8
 		}
-		batch = append(batch, &storage.ConceptProgress{
-			StudentID:     studentID,
-			ConceptID:     att.ConceptID,
-			Status:        status,
-			WeaknessScore: weakness,
-		})
+		existing.Status = status
+		existing.WeaknessScore = weakness
+		batch = append(batch, existing)
 	}
 	if err := e.repo.UpsertProgressBatch(batch); err != nil {
 		return fmt.Errorf("save diagnostic progress: %w", err)

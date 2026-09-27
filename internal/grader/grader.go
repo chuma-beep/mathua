@@ -18,4 +18,8 @@ type Result struct {
 	Correct  bool
 	Score    float64
 	Feedback string
+	// Unavailable is set when the grader could not be run at all (e.g. the
+	// SymPy runtime is missing or errored). Callers must NOT record this as a
+	// student miss: "we couldn't evaluate" is not "you were wrong".
+	Unavailable bool
 }

@@ -76,13 +76,32 @@ func TestNumeric_Grade_Fractions(t *testing.T) {
 
 func TestNumeric_Grade_MixedNumbers(t *testing.T) {
 	r := NewRouter()
-	res := r.Grade(GradingNumeric, "1 1/2", "1.5")
-	if !res.Correct {
-		t.Error("expected 1 1/2 == 1.5 to be correct")
+	correct := []struct{ expected, answer string }{
+		{"1 1/2", "1.5"},
+		{"1 1/2", "3/2"},
+		// spoken "and" form (reported bug: "4 and 1/10" was rejected)
+		{"4 1/10", "4 and 1/10"},
+		{"4 1/10", "4and1/10"},
+		{"2 3/10", "2 and 3/10"},
+		{"4 1/10", "4.1"},
+		{"4 1/10", "41/10"},
+		// negative mixed number: -(1 + 1/2) = -1.5, not -0.5
+		{"-1 1/2", "-1.5"},
+		{"-1 1/2", "-3/2"},
 	}
-	res = r.Grade(GradingNumeric, "1 1/2", "3/2")
-	if !res.Correct {
-		t.Error("expected 1 1/2 == 3/2 to be correct")
+	for _, tc := range correct {
+		if res := r.Grade(GradingNumeric, tc.expected, tc.answer); !res.Correct {
+			t.Errorf("expected %q == %q to be correct", tc.expected, tc.answer)
+		}
+	}
+	wrong := []struct{ expected, answer string }{
+		{"4 1/10", "4"},    // must not drop the fraction
+		{"-1 1/2", "-0.5"}, // must not add the fraction to a negative whole
+	}
+	for _, tc := range wrong {
+		if res := r.Grade(GradingNumeric, tc.expected, tc.answer); res.Correct {
+			t.Errorf("expected %q != %q to be incorrect", tc.expected, tc.answer)
+		}
 	}
 }
 
@@ -411,5 +430,30 @@ func TestRouter_FeedbackIncorrect(t *testing.T) {
 	res := r.Grade(GradingNumeric, "42", "99")
 	if res.Feedback == "" {
 		t.Error("expected feedback for incorrect answer")
+	}
+}
+
+// The expression/symbolic fast paths must not depend on the SymPy subprocess:
+// identical expressions and constant-value expressions grade in Go.
+func TestExpression_GoFastPaths(t *testing.T) {
+	r := NewRouter()
+	for _, tc := range []struct{ expected, answer string }{
+		{"5^4", "5^4"},    // exact match (the reported "You: 5^4 · Correct: 5^4" ✗)
+		{"5^4", "625"},    // constant equivalence
+		{"(2+3)^2", "25"}, // constant equivalence with parentheses
+		{"2^3 * 5", "40"}, // exponent + product
+		{"3/4", "0.75"},   // rational constant
+	} {
+		if res := r.Grade(GradingExpression, tc.expected, tc.answer); !res.Correct {
+			t.Errorf("expected %q == %q to be correct", tc.expected, tc.answer)
+		}
+	}
+	for _, tc := range []struct{ expected, answer string }{
+		{"5^4", "626"},
+		{"2^3*5", "45"},
+	} {
+		if res := r.Grade(GradingExpression, tc.expected, tc.answer); res.Correct {
+			t.Errorf("expected %q != %q to be incorrect", tc.expected, tc.answer)
+		}
 	}
 }

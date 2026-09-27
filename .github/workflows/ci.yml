@@ -20,7 +20,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install sympy latex2sympy2 antlr4-python3-runtime==4.7.2
+      - run: pip install -r grading/requirements.txt latex2sympy2 antlr4-python3-runtime==4.7.2
       - run: go mod tidy
       - run: go build ./...
       - run: go test ./...
@@ -73,7 +73,7 @@ jobs:
       - run: npm test
       - run: npm run build
       - run: npx playwright install --with-deps chromium
-      # Sharded single-worker e2e: the 580-node graph + 3D suites crash
+      # Sharded single-worker e2e: the 657-node graph + 3D suites crash
       # Chromium ("session closed") when two heavy specs share a runner.
       - run: npx playwright test --shard=1/2
         env:
@@ -82,9 +82,18 @@ jobs:
         env:
           PW_WORKERS: 1
 
+  docker:
+    name: Build production image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # The Dockerfile's grading self-test fails the build if SymPy cannot
+      # grade, so this gates deploy on a working production grading runtime.
+      - run: docker build -t mathua:ci .
+
   deploy:
     name: Deploy to Fly.io
-    needs: [test, web]
+    needs: [test, web, docker]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push' && vars.DEPLOY_ENABLED == 'true'
     runs-on: ubuntu-latest
     steps:
