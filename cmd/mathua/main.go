@@ -37,6 +37,7 @@ import (
 	"github.com/chuma-beep/mathua/internal/generator/trigonometry"
 	"github.com/chuma-beep/mathua/internal/lessons"
 	"github.com/chuma-beep/mathua/internal/planning"
+	"github.com/chuma-beep/mathua/internal/repair"
 	"github.com/chuma-beep/mathua/internal/server"
 	"github.com/chuma-beep/mathua/internal/storage"
 )
@@ -45,6 +46,8 @@ func main() {
 	serve := flag.Bool("serve", false, "run web server")
 	port := flag.Int("port", 8080, "web server port")
 	noAuth := flag.Bool("no-auth", false, "disable authentication (dev mode)")
+	repairGrading := flag.Bool("repair-grading", false, "re-grade persisted attempts, repair grader false negatives, then exit")
+	repairDryRun := flag.Bool("repair-grading-dry-run", false, "report grading repairs without writing, then exit")
 	flag.Parse()
 
 	dag, err := concepts.LoadDir("data/concepts")
@@ -128,6 +131,17 @@ func main() {
 
 	planner, _ := planning.Load("data/courses.json", dag)
 	eng := engine.New(repo, dag, reg, ll, planner)
+
+	// Data repair: re-grade persisted attempts and fix grader false negatives
+	// (streak/weakness corruption). Exit without starting the server.
+	if *repairGrading || *repairDryRun {
+		if _, err := repair.Run(eng, repo, dag, *repairDryRun, os.Stdout); err != nil {
+			eng.Close()
+			log.Fatalf("repair-grading: %v", err)
+		}
+		eng.Close()
+		return
+	}
 	if ll != nil {
 		fmt.Printf("%d lessons loaded\n", ll.Count())
 	}
