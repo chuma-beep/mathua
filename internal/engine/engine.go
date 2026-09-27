@@ -1698,10 +1698,6 @@ func (e *Engine) NextDiagnosticQuestion(s *diagnostic.Session) (*generator.Probl
 	return e.diag.NextQuestion(s)
 }
 
-func (e *Engine) SubmitDiagnosticAnswer(s *diagnostic.Session, conceptID string, correct, fast bool) {
-	e.diag.RecordAnswer(s, conceptID, correct, fast)
-}
-
 // SubmitDiagnosticAnswerTimed is the MA-parity path: elapsed seconds + the
 // per-concept threshold drive automaticity weighting, with the student's
 // accommodations (extra_time) applied to the threshold.

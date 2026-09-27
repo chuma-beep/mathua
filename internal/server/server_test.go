@@ -1327,19 +1327,18 @@ func TestQuizMiss_RemedialAndGateDue(t *testing.T) {
 	}
 }
 
-// Batch 2: diagnostic end-to-end — start, answer to completion, report
-// carries placement, frontier, gaps, and completion estimates.
+// Batch 2: goal diagnostic end-to-end — start, answer to completion, report
+// carries placement, frontier, gaps, and completion estimates. (The legacy
+// client-graded /api/diagnostic* endpoint was removed; it trusted a client
+// `correct` flag and was unused by the frontend.)
 
-func TestDiagnostic_FullFlowReport(t *testing.T) {
-	_, mux, _ := guestServer(t)
+func TestGoalDiagnostic_FullFlowReport(t *testing.T) {
+	_, mux := twoConceptServer(t)
 
-	rec := httptest.NewRecorder()
-	mux.ServeHTTP(rec, httptest.NewRequest("POST", "/api/diagnostic", nil))
-	if rec.Code != 200 {
-		t.Fatalf("start: %d %s", rec.Code, rec.Body.String())
+	code, start := postJSON(t, mux, "/api/goal/diagnostic", `{"name":"tester","concept_ids":["a","b"]}`)
+	if code != 200 {
+		t.Fatalf("start: %d %v", code, start)
 	}
-	var start map[string]interface{}
-	_ = json.Unmarshal(rec.Body.Bytes(), &start)
 	sid, _ := start["session_id"].(string)
 	cid, _ := start["concept_id"].(string)
 	if sid == "" || cid == "" {
@@ -1348,15 +1347,11 @@ func TestDiagnostic_FullFlowReport(t *testing.T) {
 
 	var done map[string]interface{}
 	for i := 0; i < 60; i++ {
-		body, _ := json.Marshal(map[string]interface{}{
-			"session_id": sid, "concept_id": cid, "correct": true, "fast": true,
-		})
-		rec = httptest.NewRecorder()
-		mux.ServeHTTP(rec, httptest.NewRequest("POST", "/api/diagnostic/answer", bytes.NewReader(body)))
-		if rec.Code != 200 {
-			t.Fatalf("answer %d: %d %s", i, rec.Code, rec.Body.String())
+		body := `{"session_id":"` + sid + `","concept_id":"` + cid + `","answer":"0","elapsed":5.0}`
+		code, done = postJSON(t, mux, "/api/goal/diagnostic/answer", body)
+		if code != 200 {
+			t.Fatalf("answer %d: %d %v", i, code, done)
 		}
-		_ = json.Unmarshal(rec.Body.Bytes(), &done)
 		if d, _ := done["done"].(bool); d {
 			break
 		}
@@ -1376,9 +1371,6 @@ func TestDiagnostic_FullFlowReport(t *testing.T) {
 		if _, ok := rep[key]; !ok {
 			t.Errorf("expected report key %q, got %v", key, rep)
 		}
-	}
-	if _, ok := done["frontier"]; !ok {
-		t.Errorf("expected frontier index, got %v", done)
 	}
 }
 

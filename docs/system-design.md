@@ -339,7 +339,7 @@ The web server exposes a REST API through Go's standard `net/http` package. No e
 | `logRequest` | Logs method and path |
 | `authMiddleware` | Reads `Authorization: Bearer <token>`, validates `HS256` JWT (`auth.go:98`), injects `studentID` into context |
 | `authLimiter` | Token-bucket rate limiter (5 rate, 10 burst, 1 min window) on auth endpoints `server.go:70` |
-| `writeLimiter` | 20 burst, 3s window on write endpoints (`/api/session`, `/api/answer`, `/api/study/answer`, `/api/quiz/*`, `/api/diagnostic`, `/api/goal/*`, `/api/reviews/*`) `server.go:69` |
+| `writeLimiter` | 20 burst, 3s window on write endpoints (`/api/session`, `/api/answer`, `/api/study/answer`, `/api/quiz/*`, `/api/goal/*`, `/api/reviews/*`) `server.go:69` |
 | `shareLimiter` | 10 burst, 6s window on `GET /api/share/*` `server.go:69` |
 
 ### All Routes
@@ -364,8 +364,6 @@ The web server exposes a REST API through Go's standard `net/http` package. No e
 | GET | `/api/courses/{id}` | auth | Course detail + progress |
 | POST | `/api/courses/{id}/diagnostic` | auth | Set course + activate path |
 | GET | `/api/transcript` | auth | Transcript JSON or `?format=csv` |
-| POST | `/api/diagnostic` | write: writeLimiter | Start CAT diagnostic |
-| POST | `/api/diagnostic/answer` | write: writeLimiter | Submit diagnostic answer (correct+fast) |
 | POST | `/api/goal` | auth | Prerequisite chain for concept_ids |
 | POST | `/api/goal/diagnostic` | write: writeLimiter, optional | Start goal diagnostic |
 | POST | `/api/goal/diagnostic/answer` | write: writeLimiter, optional | Submit goal diagnostic answer (graded via stored problem) |

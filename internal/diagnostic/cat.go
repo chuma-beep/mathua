@@ -399,7 +399,7 @@ func (e *Engine) RecordAnswer(s *Session, conceptID string, correct, fast bool) 
 // the student has not yet learned the topic well enough"), while fast
 // correct answers keep the +0.1 automaticity bonus. Incorrect answers are
 // unaffected by timing. elapsed < 0 preserves legacy fast/not-fast-only
-// behavior (tests, /api/diagnostic/answer).
+// behavior (legacy tests; the goal diagnostic is the only route).
 func (e *Engine) RecordAnswerTimed(s *Session, conceptID string, correct bool, elapsed, timeThresh float64) {
 	e.recordTimed(s, conceptID, correct, elapsed, timeThresh, false)
 }
