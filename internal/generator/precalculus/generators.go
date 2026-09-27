@@ -30,6 +30,8 @@ var all = []struct {
 	{"precalc.polar.graph", &polarGraphGen{}},
 	{"precalc.parametric.graph", &parametricGraphGen{}},
 	{"precalc.func.piecewise", &piecewiseGen{}},
+	{"precalc.func.floor_ceiling", &floorCeilingGen{}},
+	{"precalc.func.heaviside", &heavisideGen{}},
 	{"precalc.func.arith_combine", &arithCombineGen{}},
 	{"precalc.parametric.equations", &parametricEqGen{}},
 	{"precalc.binomial_theorem", &binomialTheoremGen{}},
@@ -908,4 +910,61 @@ func abs(n int) int {
 		return -n
 	}
 	return n
+}
+
+type floorCeilingGen struct{}
+
+func (g *floorCeilingGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	tableEasy := []entry{
+		{"What is floor(3.7)? (enter a number)", "3", "Greatest integer at most 3.7."},
+		{"What is ceil(3.2)? (enter a number)", "4", "Least integer at least 3.2."},
+		{"What is floor(-2.3)? (enter a number)", "-3", "Greatest integer at most -2.3 (more negative)."},
+		{"What is ceil(-2.8)? (enter a number)", "-2", "Least integer at least -2.8 (toward zero)."},
+		{"Is floor(x) <= x always? (yes/no)", "yes", "Floor rounds down by definition."},
+	}
+	tableHard := []entry{
+		{"What is floor(sqrt(50))? (enter a number)", "7", "7^2=49 <= 50 < 64 = 8^2."},
+		{"What is ceil(pi)? (enter a number)", "4", "Smallest integer at least 3.14159."},
+		{"How many integers n satisfy floor(n/2) = 3? (enter a number)", "2", "n = 6 and n = 7."},
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
+}
+
+type heavisideGen struct{}
+
+func (g *heavisideGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	tableEasy := []entry{
+		{"What is H(3) for the Heaviside step? (enter a number)", "1", "Positive argument: step is up."},
+		{"What is H(-2) for the Heaviside step? (enter a number)", "0", "Negative argument: step is down."},
+		{"Is the Heaviside step right-continuous at 0? (yes/no)", "yes", "Right limit equals the (usual) value 1."},
+		{"Does H model an on/off switch at 0? (yes/no)", "yes", "0 before, 1 after: the canonical switch."},
+	}
+	tableHard := []entry{
+		{"What is H(100) for the Heaviside step? (enter a number)", "1", "Positive argument: step is up."},
+		{"Is the Heaviside step differentiable at 0? (yes/no)", "no", "Jump discontinuity: no derivative there (distributionally a delta)."},
+		{"What is H(10) * H(-10)? (enter a number)", "0", "1 times 0."},
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
 }

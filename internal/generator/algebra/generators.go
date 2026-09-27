@@ -76,6 +76,9 @@ func Register(reg *generator.Registry) {
 	reg.Register("alg.eq.trinomial", &eqTrinomialGen{})
 	reg.Register("alg.func.absolute_value", &funcAbsValGen{})
 	reg.Register("alg.func.composite", &funcCompositeGen{})
+	reg.Register("alg.func.injectivity", &injectivityGen{})
+	reg.Register("alg.func.power", &powerFuncGen{})
+	reg.Register("alg.func.irrational", &irrationalFuncGen{})
 	reg.Register("alg.func.dirichlet", &funcDirichletGen{})
 	reg.Register("alg.func.domain", &funcDomainGen{})
 	reg.Register("alg.func.even_odd", &funcEvenOddGen{})
@@ -1625,4 +1628,88 @@ func (g *gaussianElimGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		Answer:      fmt.Sprintf("[[%d,%d,%d],[0,%d,%d]]", a, b, e1, d-c*b/a, e2-c*e1/a),
 		Explanation: fmt.Sprintf("The augmented matrix [[%d,%d,%d],[%d,%d,%d]] can be reduced.", a, b, e1, c, d, e2),
 	}
+}
+
+type injectivityGen struct{}
+
+func (g *injectivityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	tableEasy := []entry{
+		{"Is f(x) = 2x + 3 injective? (yes/no)", "yes", "Strictly monotonic: distinct inputs give distinct outputs."},
+		{"Is f(x) = x^2 injective on all of R? (yes/no)", "no", "f(-1) = f(1) = 1."},
+		{"Is f(x) = x^3 bijective from R to R? (yes/no)", "yes", "Strictly increasing and unbounded both ways."},
+		{"A function passes inputs through one-to-one mapping. At most how many preimages can one output have? (enter a number)", "1", "Injective means at most one."},
+	}
+	tableHard := []entry{
+		{"Is f(x) = e^x surjective onto R? (yes/no)", "no", "Range is (0, inf): negatives never hit."},
+		{"If f is bijective, how many inverses does each output have? (enter a number)", "1", "Exactly one: bijective is one-to-one and onto."},
+		{"Is the composition of two injective functions injective? (yes/no)", "yes", "Distinct inputs stay distinct through both maps."},
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
+}
+
+type powerFuncGen struct{}
+
+func (g *powerFuncGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	tableEasy := []entry{
+		{"What is 2^5? (enter a number)", "32", "2·2·2·2·2 = 32."},
+		{"For x^a with a > 0, is the function increasing for x > 0? (yes/no)", "yes", "Positive exponent: larger base gives larger value."},
+		{"What is 10^3? (enter a number)", "1000", "1 followed by 3 zeros."},
+		{"Is x^2 an even function? (yes/no)", "yes", "(-x)^2 = x^2."},
+	}
+	tableHard := []entry{
+		{"What is 3^4? (enter a number)", "81", "3·3·3·3 = 81."},
+		{"For 0 < a < 1, is x^a increasing or decreasing for x > 0? (type increasing or decreasing)", "increasing", "Still increasing, just slower (concave)."},
+		{"What is (-2)^3? (enter a number)", "-8", "Odd power preserves the sign."},
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
+}
+
+type irrationalFuncGen struct{}
+
+func (g *irrationalFuncGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	type entry struct {
+		question string
+		answer   string
+		reason   string
+	}
+	tableEasy := []entry{
+		{"What is sqrt(49)? (enter a number)", "7", "7·7 = 49."},
+		{"What is cbrt(-8)? (enter a number)", "-2", "(-2)^3 = -8; odd roots take negatives."},
+		{"Is sqrt(x) defined at x = -1 over the reals? (yes/no)", "no", "No real square of a negative."},
+		{"Does sqrt(x^2) = |x| hold for all real x? (yes/no)", "yes", "Principal root is nonnegative by definition."},
+	}
+	tableHard := []entry{
+		{"What is sqrt(144)? (enter a number)", "12", "12·12 = 144."},
+		{"What is cbrt(27)? (enter a number)", "3", "3·3·3 = 27."},
+		{"Is 4th-root(x) defined for negative x over the reals? (yes/no)", "no", "Even roots need nonnegative radicands."},
+	}
+	pool := tableEasy
+	if scale > 3 {
+		pool = append(tableEasy, tableHard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
 }

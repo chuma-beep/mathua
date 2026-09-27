@@ -107,3 +107,25 @@ func TestCanonPoly(t *testing.T) {
 		}
 	}
 }
+
+func fuzzGen(t *testing.T, gen generator.Generator) {
+	t.Helper()
+	gr := grader.NewRouter()
+	for i := 0; i < 100; i++ {
+		d := rand.Float64()
+		p := gen.Generate(generator.GeneratorContext{Difficulty: d})
+		if p.Question == "" || p.Answer == "" || p.Explanation == "" {
+			t.Errorf("empty field at difficulty=%.2f: q=%q a=%q e=%q", d, p.Question, p.Answer, p.Explanation)
+		}
+		res := gr.Grade(grader.GradingNumeric, p.Answer, p.Answer)
+		if !res.Correct {
+			res2 := gr.Grade(grader.GradingMultipleChoice, p.Answer, p.Answer)
+			if !res2.Correct {
+				t.Errorf("self-grade failed for %q (answer=%q)", p.Question, p.Answer)
+			}
+		}
+	}
+}
+
+func TestFloorCeilingGen(t *testing.T) { fuzzGen(t, &floorCeilingGen{}) }
+func TestHeavisideGen(t *testing.T)    { fuzzGen(t, &heavisideGen{}) }

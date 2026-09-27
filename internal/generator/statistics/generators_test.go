@@ -71,3 +71,4 @@ func TestFuzz(t *testing.T) {
 		})
 	}
 }
+func TestGaussianFuncGen(t *testing.T) { fuzzGen(t, &gaussianFuncGen{}) }

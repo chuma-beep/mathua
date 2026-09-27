@@ -62,3 +62,6 @@ func TestFuzz(t *testing.T) {
 		})
 	}
 }
+func TestInjectivityGen(t *testing.T)    { fuzzGen(t, &injectivityGen{}) }
+func TestPowerFuncGen(t *testing.T)      { fuzzGen(t, &powerFuncGen{}) }
+func TestIrrationalFuncGen(t *testing.T) { fuzzGen(t, &irrationalFuncGen{}) }
