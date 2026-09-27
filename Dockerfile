@@ -27,7 +27,7 @@ RUN CGO_ENABLED=1 go build -o /mathua ./cmd/mathua
 FROM debian:bookworm-slim
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libsqlite3-0 ca-certificates python3 python3-venv && rm -rf /var/lib/apt/lists/*
+    libsqlite3-0 ca-certificates curl python3 python3-venv && rm -rf /var/lib/apt/lists/*
 
 # SymPy grading runtime. findSymPyService resolves ./grading/sympy_service.py
 # from WORKDIR /app, and execs `python3`, so the venv must be first on PATH.
@@ -56,5 +56,8 @@ ENV PORT=8080
 ENV DATABASE_URL=/data/mathua.db
 
 EXPOSE 8080
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
+    CMD curl -fsS http://localhost:8080/api/health || exit 1
 
 CMD ["/mathua", "-serve", "-port", "8080"]
