@@ -149,7 +149,7 @@ A validator runs on every pull request. It checks invariants before any merge ca
 3. **No dup IDs, no empty label/domain, valid `mastery_threshold`** (`loader.go:303`)
 4. **No singleton `interference_group`** (`loader.go:321`), valid `grading_type` enum (9 values `loader.go:297`), `variants` `0.1–1.0` difficulty
 
-A second audit guards the lesson corpus (`python3 scripts/audit_lessons.py:191`). It fails on: DAG concepts with no lesson, stale `lessons.json` ids, lesson files missing on disk, orphaned sources, KP shard sections that do not resolve (641 files ×3 =1923 KPs), diagram mappings that point at missing assets or non-existent concepts (`engine.go:497` 181 diagrams), stale course targets, `grading_type`/`threshold` sanity, and `enrichment.json` wiring.
+A second audit guards the lesson corpus (`python3 scripts/audit_lessons.py:191`). It fails on: DAG concepts with no lesson, stale `lessons.json` ids, lesson files missing on disk, orphaned sources, KP shard sections that do not resolve (657 files ×3 =1971 KPs), diagram mappings that point at missing assets or non-existent concepts (`engine.go:497` 181 diagrams), stale course targets, `grading_type`/`threshold` sanity, and `enrichment.json` wiring.
 
 ## Submitting a pull request
 
@@ -159,6 +159,7 @@ A second audit guards the lesson corpus (`python3 scripts/audit_lessons.py:191`)
 4. (Optional) Write a lesson and register it in `data/lessons/lessons.json`.
 5. (Recommended) Add KP shards under `data/lessons/kp/`.
 6. Run `go test ./...`, `go run scripts/validate_graph.go`, and `python3 scripts/audit_lessons.py` locally.
+7. Content waves change the corpus size — run `python3 scripts/counts.py --write` to refresh the counts in the docs (CI runs `--check` and fails on drift).
 7. Open a PR. The CI pipeline runs the validator and all tests automatically.
 8. A maintainer reviews the concept ordering, thresholds, and generator quality.
 
