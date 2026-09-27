@@ -208,18 +208,18 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/auth/reset/request", logRequest(cors(s.authLimiter.middleware(s.handleResetRequest))))
 	mux.HandleFunc("/api/auth/reset/complete", logRequest(cors(s.authLimiter.middleware(s.handleResetComplete))))
 	mux.HandleFunc("/api/auth/google", logRequest(cors(s.authLimiter.middleware(s.handleGoogleOneTap))))
-	mux.HandleFunc("/api/auth/google/login", logRequest(cors(s.handleGoogleLogin)))
-	mux.HandleFunc("/api/auth/google/callback", logRequest(cors(s.handleGoogleCallback)))
-	mux.HandleFunc("/api/auth/google/connect", logRequest(cors(s.authMiddleware(s.handleGoogleConnect))))
+	mux.HandleFunc("/api/auth/google/login", logRequest(cors(s.authLimiter.middleware(s.handleGoogleLogin))))
+	mux.HandleFunc("/api/auth/google/callback", logRequest(cors(s.authLimiter.middleware(s.handleGoogleCallback))))
+	mux.HandleFunc("/api/auth/google/connect", logRequest(cors(s.authLimiter.middleware(s.authMiddleware(s.handleGoogleConnect)))))
 	// Generic OAuth providers (github/facebook/microsoft/apple).
-	mux.HandleFunc("/api/auth/github/login", logRequest(cors(s.handleOAuthLogin)))
-	mux.HandleFunc("/api/auth/github/callback", logRequest(cors(s.handleOAuthCallback)))
-	mux.HandleFunc("/api/auth/facebook/login", logRequest(cors(s.handleOAuthLogin)))
-	mux.HandleFunc("/api/auth/facebook/callback", logRequest(cors(s.handleOAuthCallback)))
-	mux.HandleFunc("/api/auth/microsoft/login", logRequest(cors(s.handleOAuthLogin)))
-	mux.HandleFunc("/api/auth/microsoft/callback", logRequest(cors(s.handleOAuthCallback)))
-	mux.HandleFunc("/api/auth/apple/login", logRequest(cors(s.handleOAuthLogin)))
-	mux.HandleFunc("/api/auth/apple/callback", logRequest(cors(s.handleOAuthCallback)))
+	mux.HandleFunc("/api/auth/github/login", logRequest(cors(s.authLimiter.middleware(s.handleOAuthLogin))))
+	mux.HandleFunc("/api/auth/github/callback", logRequest(cors(s.authLimiter.middleware(s.handleOAuthCallback))))
+	mux.HandleFunc("/api/auth/facebook/login", logRequest(cors(s.authLimiter.middleware(s.handleOAuthLogin))))
+	mux.HandleFunc("/api/auth/facebook/callback", logRequest(cors(s.authLimiter.middleware(s.handleOAuthCallback))))
+	mux.HandleFunc("/api/auth/microsoft/login", logRequest(cors(s.authLimiter.middleware(s.handleOAuthLogin))))
+	mux.HandleFunc("/api/auth/microsoft/callback", logRequest(cors(s.authLimiter.middleware(s.handleOAuthCallback))))
+	mux.HandleFunc("/api/auth/apple/login", logRequest(cors(s.authLimiter.middleware(s.handleOAuthLogin))))
+	mux.HandleFunc("/api/auth/apple/callback", logRequest(cors(s.authLimiter.middleware(s.handleOAuthCallback))))
 	mux.HandleFunc("/api/auth/link-token", logRequest(cors(s.authMiddleware(s.handleLinkToken))))
 	mux.HandleFunc("/api/auth/identities", logRequest(cors(s.authMiddleware(s.handleIdentities))))
 	mux.HandleFunc("/api/auth/identities/", logRequest(cors(s.authMiddleware(s.handleIdentityDelete))))
@@ -235,7 +235,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/answer", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleAnswer)))))
 	mux.HandleFunc("/api/progress/", logRequest(cors(s.optionalAuthMiddleware(s.handleProgress))))
 	mux.HandleFunc("/api/scores/", logRequest(cors(s.optionalAuthMiddleware(s.handleScores))))
-	mux.HandleFunc("/api/config", logRequest(cors(s.handleConfig)))
+	mux.HandleFunc("/api/config", logRequest(cors(getOnly(s.handleConfig))))
 	mux.HandleFunc("/api/graph", logRequest(cors(s.handleGraph)))
 	mux.HandleFunc("/api/leaderboard", logRequest(cors(s.handleLeaderboard)))
 	mux.HandleFunc("/api/leagues", logRequest(cors(s.authMiddleware(s.handleLeagues))))
@@ -279,11 +279,11 @@ func (s *Server) Register(mux *http.ServeMux) {
 	})))))
 	mux.HandleFunc("/api/reports/", logRequest(cors(s.optionalAuthMiddleware(s.handleUpdateReport))))
 	mux.HandleFunc("/api/admin/login", logRequest(cors(s.authLimiter.middleware(s.handleAdminLogin))))
-	mux.HandleFunc("/api/admin/logout", logRequest(cors(s.handleAdminLogout)))
+	mux.HandleFunc("/api/admin/logout", logRequest(cors(s.authLimiter.middleware(s.handleAdminLogout))))
 	mux.HandleFunc("/api/quiz/session", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleQuizSession)))))
 	mux.HandleFunc("/api/quiz/answer", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleQuizAnswer)))))
 	mux.HandleFunc("/api/quiz/skip", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleQuizSkip)))))
-	mux.HandleFunc("/api/health", logRequest(cors(s.handleHealth)))
+	mux.HandleFunc("/api/health", logRequest(cors(getOnly(s.handleHealth))))
 	mux.HandleFunc("/api/activity", logRequest(cors(s.authMiddleware(s.handleActivity))))
 	mux.HandleFunc("/api/efficacy", logRequest(cors(s.authMiddleware(s.handleEfficacy))))
 	mux.HandleFunc("/api/efficacy/all", logRequest(cors(s.shareLimiter.middleware(s.handleEfficacyAll))))
@@ -318,6 +318,17 @@ func (s *Server) ownsStudentID(r *http.Request, sid string) bool {
 		return strings.HasPrefix(sid, "guest_")
 	}
 	return true
+}
+
+// getOnly rejects non-GET requests for read-only endpoints (health/config).
+func getOnly(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodGet {
+			http.Error(w, `{"error":"method not allowed"}`, http.StatusMethodNotAllowed)
+			return
+		}
+		next(w, r)
+	}
 }
 
 func (s *Server) authMiddleware(next http.HandlerFunc) http.HandlerFunc {
