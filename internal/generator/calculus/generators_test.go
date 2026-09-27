@@ -144,6 +144,10 @@ func TestBoundedSeqGen(t *testing.T)               { fuzzGen(t, &boundedSeqGen{}
 func TestDiscMethodGen(t *testing.T)               { fuzzGen(t, &discMethodGen{}) }
 func TestWasherMethodGen(t *testing.T)             { fuzzGen(t, &washerMethodGen{}) }
 func TestShellMethodGen(t *testing.T)              { fuzzGen(t, &shellMethodGen{}) }
+func TestConvergenceGen(t *testing.T)              { fuzzGen(t, &convergenceGen{}) }
+func TestIrrationalIntegralGen(t *testing.T)       { fuzzGen(t, &irrationalIntegralGen{}) }
+func TestStrategyGen(t *testing.T)                 { fuzzGen(t, &strategyGen{}) }
+func TestReductionGen(t *testing.T)                { fuzzGen(t, &reductionGen{}) }
 
 func TestFuzz(t *testing.T) {
 	reg := generator.NewRegistry()

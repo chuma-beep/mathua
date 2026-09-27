@@ -2572,6 +2572,20 @@
   },
   {
     "domain": "calculus",
+    "grading_type": "symbolic",
+    "id": "calc.integral.irrational",
+    "label": "Integrals of irrational functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 120,
+      "streak": 3
+    },
+    "prerequisites": [
+      "calc.integral.substitution"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calculus",
     "grading_type": "numeric",
     "id": "calc.integral.definite",
     "label": "Definite integrals and area",
@@ -2581,6 +2595,48 @@
     },
     "prerequisites": [
       "calc.integral.power_rule"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calculus",
+    "grading_type": "numeric",
+    "id": "calc.integral.disc",
+    "label": "Disc method for volumes of revolution",
+    "mastery_threshold": {
+      "avg_time_seconds": 120,
+      "streak": 3
+    },
+    "prerequisites": [
+      "calc.integral.definite"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calculus",
+    "grading_type": "numeric",
+    "id": "calc.integral.shell",
+    "label": "Shell method for volumes of revolution",
+    "mastery_threshold": {
+      "avg_time_seconds": 120,
+      "streak": 3
+    },
+    "prerequisites": [
+      "calc.integral.definite"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calculus",
+    "grading_type": "numeric",
+    "id": "calc.integral.washer",
+    "label": "Washer method for volumes of revolution",
+    "mastery_threshold": {
+      "avg_time_seconds": 120,
+      "streak": 3
+    },
+    "prerequisites": [
+      "calc.integral.definite"
     ],
     "subdomain": "calculus.integrals"
   },
@@ -2673,6 +2729,34 @@
       "calc.deriv.product_rule"
     ],
     "subdomain": "calculus.advanced"
+  },
+  {
+    "domain": "calculus",
+    "grading_type": "multiple_choice",
+    "id": "calc.integral.strategy",
+    "label": "Integration strategies (method selection)",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.parts"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calculus",
+    "grading_type": "symbolic",
+    "id": "calc.integral.reduction",
+    "label": "Reduction formulas for integrals",
+    "mastery_threshold": {
+      "avg_time_seconds": 120,
+      "streak": 3
+    },
+    "prerequisites": [
+      "calc.integral.parts"
+    ],
+    "subdomain": "calculus.integrals"
   },
   {
     "domain": "calculus",
@@ -2982,6 +3066,20 @@
     },
     "prerequisites": [
       "calc.integral.definite"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calculus",
+    "grading_type": "symbolic",
+    "id": "calc.integral.convergence",
+    "label": "Convergence tests for improper integrals",
+    "mastery_threshold": {
+      "avg_time_seconds": 120,
+      "streak": 3
+    },
+    "prerequisites": [
+      "calc.integral.improper"
     ],
     "subdomain": "calculus.integrals"
   },

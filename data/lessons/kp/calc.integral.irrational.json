@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Radicals of linear fractional expressions",
+    "section": "Radicals of linear fractional expressions",
+    "subgoals": [
+      "Set t^n=(ax+b)/(cx+d) and solve x=(b-dt^n)/(ct^n-a)",
+      "Take m=lcm of indices for mixed roots of ax+b",
+      "Rationalize dx/(sqrt(x)+cbrt(x)) via x=t^6"
+    ]
+  },
+  {
+    "label": "The square root of a quadratic trinomial",
+    "section": "The square root of a quadratic trinomial",
+    "subgoals": [
+      "Complete the square via 4aQ=(2ax+b)^2-D",
+      "Split (mx+n)/sqrt(Q) along Q' and a constant",
+      "Evaluate integral of dx/sqrt(x^2+1) as ln|x+sqrt(x^2+1)|"
+    ]
+  },
+  {
+    "label": "The Euler substitutions",
+    "section": "The Euler substitutions",
+    "subgoals": [
+      "Pick first/second/third Euler by sign of a, c, discriminant",
+      "Rationalize dx/(x sqrt(x^2+x+1)) via sqrt(...)=xt+1",
+      "Read the antiderivative as ln|(2sqrt(x^2+x+1)-x-2)/x|"
+    ]
+  }
+]

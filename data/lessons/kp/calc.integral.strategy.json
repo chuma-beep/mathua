@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The composite power rule",
+    "section": "The composite power rule",
+    "subgoals": [
+      "Spot f(x)^n times f'(x) up to a constant factor",
+      "Compensate half of f' for x(x^2+1)^5",
+      "Evaluate integral of x^2/sqrt(x^3+8) as (2/3)sqrt(x^3+8)"
+    ]
+  },
+  {
+    "label": "The logarithmic derivative",
+    "section": "The logarithmic derivative",
+    "subgoals": [
+      "Match numerator to f' over f",
+      "Insert 1/a for linear denominators ax+b",
+      "Evaluate integral of tan x as -ln|cos x|"
+    ]
+  },
+  {
+    "label": "Choosing an integration method",
+    "section": "Choosing an integration method",
+    "subgoals": [
+      "Simplify first: expand, divide, split fractions",
+      "Route products to parts via LIATE, rationals to partial fractions",
+      "Differentiate the result to check the antiderivative"
+    ]
+  }
+]
