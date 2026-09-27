@@ -91,9 +91,36 @@ jobs:
       # grade, so this gates deploy on a working production grading runtime.
       - run: docker build -t mathua:ci .
 
+  postgres:
+    name: Postgres parity
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: pg
+          POSTGRES_PASSWORD: pg
+          POSTGRES_DB: mathua
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.27'
+          cache: false
+      - run: go test ./internal/storage/... -run TestParity -v
+        env:
+          TEST_POSTGRES_DSN: postgres://pg:pg@localhost:5432/mathua?sslmode=disable
+
   deploy:
     name: Deploy to Fly.io
-    needs: [test, web, docker]
+    needs: [test, web, docker, postgres]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push' && vars.DEPLOY_ENABLED == 'true'
     runs-on: ubuntu-latest
     steps:
