@@ -1,7 +1,7 @@
 'use client'
 
 import { useTheme } from '../../hooks/useTheme'
-import { useState, useEffect, useMemo, useCallback, Suspense } from 'react'
+import { useState, useEffect, useMemo, useCallback, useRef, Suspense } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Header from '../../components/Header'
@@ -204,6 +204,17 @@ function GraphContent() {
     return new Map(source.map(c => [c.id, c] as const))
   }, [concepts])
 
+  // A deep link (?concept=) wins over the persisted/default domain filter, but
+  // only once: afterwards the user's chip choice is authoritative.
+  const deepLinkHandled = useRef(false)
+  useEffect(() => {
+    if (deepLinkHandled.current || concepts.length === 0) return
+    deepLinkHandled.current = true
+    if (!conceptParam || !activeDomain) return
+    const c = conceptById.get(conceptParam)
+    if (c && c.domain !== activeDomain) setActiveDomain(null)
+  }, [conceptParam, activeDomain, conceptById, concepts.length])
+
   if (!mounted) return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />
 
   return (
@@ -284,6 +295,7 @@ function GraphContent() {
           onPathNodes={onPathNodes}
           selectedId={selectedId}
           onSelectionChange={handleSelectionChange}
+          focusDomain={activeDomain}
           onNodeSelect={(nodeId) => {
             const c = conceptById.get(nodeId)
             if (c) push(`/concept?id=${encodeURIComponent(c.id)}`)

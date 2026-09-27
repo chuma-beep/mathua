@@ -123,6 +123,41 @@ describe('ConceptGraphFlow', () => {
   })
 })
 
+describe('ConceptGraphFlow domain focus', () => {
+  const many = [
+    { id: 'a1', label: 'Alpha One', domain: 'domA', prerequisites: [] },
+    { id: 'a2', label: 'Alpha Two', domain: 'domA', prerequisites: ['a1'] },
+    { id: 'b1', label: 'Beta One', domain: 'domB', prerequisites: ['a1'] },
+    { id: 'b2', label: 'Beta Two', domain: 'domB', prerequisites: ['b1'] },
+    { id: 'c1', label: 'Gamma One', domain: 'domC', prerequisites: [] },
+  ]
+
+  function renderedLabels(container: HTMLElement): string[] {
+    return Array.from(container.querySelectorAll('.concept-node')).map(n =>
+      n.getAttribute('aria-label') ?? ''
+    )
+  }
+
+  it('mounts only the focused domain plus its one-hop neighbourhood', () => {
+    const { container } = render(<ConceptGraphFlow concepts={many} focusDomain="domA" />)
+    const labels = renderedLabels(container)
+    expect(labels.some(l => l.startsWith('Alpha One'))).toBe(true)
+    expect(labels.some(l => l.startsWith('Alpha Two'))).toBe(true)
+    expect(labels.some(l => l.startsWith('Beta One'))).toBe(true) // dependent of a1
+    expect(labels.some(l => l.startsWith('Beta Two'))).toBe(false) // two hops out
+    expect(labels.some(l => l.startsWith('Gamma One'))).toBe(false)
+  })
+
+  it('keeps a selected concept visible even outside the focused domain', () => {
+    const { container } = render(
+      <ConceptGraphFlow concepts={many} focusDomain="domA" selectedId="c1" />
+    )
+    const labels = renderedLabels(container)
+    expect(labels.some(l => l.startsWith('Gamma One'))).toBe(true)
+    expect(labels.some(l => l.startsWith('Beta Two'))).toBe(false)
+  })
+})
+
 describe('ConceptGraphFlow keyboard controls', () => {
   beforeEach(() => {
     reactFlowMocks.zoomIn.mockClear()
