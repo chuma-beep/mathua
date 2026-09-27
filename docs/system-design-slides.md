@@ -109,7 +109,7 @@ stdout: {"id": "...", "correct": true, "feedback": ""}
 
 ---
 
-## 9. API Layer (25 Routes)
+## 9. API Layer
 
 | Group | Endpoints |
 |-------|-----------|
@@ -136,7 +136,7 @@ Middleware: CORS, logging, JWT auth, rate limiting (5/min on auth).
 
 ![width:1000](diagrams/system-design-cat-diagnostic-dark.svg)
 
-Binary search on topologically sorted DAG. ~20-35 questions vs 284.
+Binary search on topologically sorted DAG. ~20-35 questions vs 657.
 
 ---
 

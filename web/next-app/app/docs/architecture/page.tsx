@@ -221,7 +221,7 @@ export default function ArchitecturePage() {
         <h2 style={h2Style}>V. Computerised Adaptive Testing</h2>
         <p style={bodyStyle}>
           The diagnostic engine finds a student&apos;s starting point using binary search on
-          the topologically sorted concept graph. This reduces the assessment from 284 questions
+          the topologically sorted concept graph. This reduces the assessment from 657 questions
           (one per concept) to approximately 20-35.
         </p>
 

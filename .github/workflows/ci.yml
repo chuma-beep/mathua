@@ -27,6 +27,7 @@ jobs:
       - run: make lint-go
       - run: go run scripts/validate_graph.go
       - run: python3 scripts/audit_lessons.py
+      - run: python3 scripts/counts.py --check
       - run: go test ./internal/generator/... -run TestFuzz -count 100 -timeout 120s
       - run: python scripts/verify_examples.py
       - run: python scripts/lint_prose_display.py
