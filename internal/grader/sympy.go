@@ -6,11 +6,15 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"math"
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strings"
 	"sync"
 	"time"
+
+	"github.com/chuma-beep/mathua/internal/verify"
 )
 
 var sympyServicePath string
@@ -108,7 +112,45 @@ func ensureSympyLocked() error {
 	return nil
 }
 
+// constEvalNumeric evaluates an expression containing only numbers and
+// arithmetic operators (no variables, no functions). `^` is treated as a power.
+// Returns false when the expression is not a plain constant.
+func constEvalNumeric(expr string) (float64, bool) {
+	e := strings.TrimSpace(expr)
+	if e == "" {
+		return 0, false
+	}
+	for _, r := range e {
+		if !strings.ContainsRune("0123456789.+-*/^() ", r) {
+			return 0, false
+		}
+	}
+	e = strings.ReplaceAll(e, "^", "**")
+	v, err := verify.Eval(e)
+	if err != nil {
+		return 0, false
+	}
+	return v, true
+}
+
 func gradeSymPy(expected, answer string) Result {
+	// Fast path: exact match after normalization needs no CAS at all, and
+	// guarantees that expected == answer is graded correct even if the SymPy
+	// runtime is unavailable (the reported "You: 5^4 · Correct: 5^4" ✗ bug).
+	if normaliseSymbolic(expected) == normaliseSymbolic(answer) {
+		return Result{Correct: true, Score: 1}
+	}
+	// Constant numeric expressions are evaluated in Go, so numeric-valued
+	// symbolic answers (5^4 vs 625) never depend on the subprocess either.
+	if ev, ok := constEvalNumeric(expected); ok {
+		if av, ok2 := constEvalNumeric(answer); ok2 {
+			if math.Abs(ev-av) < 1e-9 {
+				return Result{Correct: true, Score: 1}
+			}
+			return Result{Correct: false, Score: 0, Feedback: "Not equivalent"}
+		}
+	}
+
 	// Semaphore to bound concurrent grading (avoid fork bomb if pool restarts)
 	select {
 	case sympySem <- struct{}{}:
@@ -121,7 +163,7 @@ func gradeSymPy(expected, answer string) Result {
 		case sympySem <- struct{}{}:
 			defer func() { <-sympySem }()
 		case <-ctxSem.Done():
-			return Result{Correct: false, Score: 0, Feedback: "Grading service busy"}
+			return Result{Correct: false, Score: 0, Feedback: "Grading service busy", Unavailable: true}
 		}
 	}
 
@@ -133,7 +175,7 @@ func gradeSymPy(expected, answer string) Result {
 	defer sympyMu.Unlock()
 
 	if err := ensureSympyLocked(); err != nil {
-		return Result{Correct: false, Score: 0, Feedback: "Grading service not found"}
+		return Result{Correct: false, Score: 0, Feedback: "Grading service not found", Unavailable: true}
 	}
 
 	req := sympyRequest{
@@ -161,10 +203,10 @@ func gradeSymPy(expected, answer string) Result {
 				sympyCmd.Wait()
 			}
 			sympyCmd = nil
-			return Result{Correct: false, Score: 0, Feedback: "Grading service write error"}
+			return Result{Correct: false, Score: 0, Feedback: "Grading service write error", Unavailable: true}
 		}
 	case <-ctx.Done():
-		return Result{Correct: false, Score: 0, Feedback: "Grading service timed out"}
+		return Result{Correct: false, Score: 0, Feedback: "Grading service timed out", Unavailable: true}
 	}
 
 	// Read response with timeout
@@ -190,20 +232,20 @@ func gradeSymPy(expected, answer string) Result {
 			}
 			sympyCmd = nil
 			if scanErr && ctx.Err() == nil {
-				return Result{Correct: false, Score: 0, Feedback: "Grading service response error"}
+				return Result{Correct: false, Score: 0, Feedback: "Grading service response error", Unavailable: true}
 			}
 			if ctx.Err() != nil {
-				return Result{Correct: false, Score: 0, Feedback: "Grading service timed out"}
+				return Result{Correct: false, Score: 0, Feedback: "Grading service timed out", Unavailable: true}
 			}
-			return Result{Correct: false, Score: 0, Feedback: "Grading service error"}
+			return Result{Correct: false, Score: 0, Feedback: "Grading service error", Unavailable: true}
 		}
 	case <-ctx.Done():
-		return Result{Correct: false, Score: 0, Feedback: "Grading service timed out"}
+		return Result{Correct: false, Score: 0, Feedback: "Grading service timed out", Unavailable: true}
 	}
 
 	var resp sympyResponse
 	if err := json.Unmarshal([]byte(line), &resp); err != nil {
-		return Result{Correct: false, Score: 0, Feedback: "Grading service response error"}
+		return Result{Correct: false, Score: 0, Feedback: "Grading service response error", Unavailable: true}
 	}
 	if resp.Correct {
 		return Result{Correct: true, Score: 1}

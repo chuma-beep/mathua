@@ -27,13 +27,29 @@ RUN CGO_ENABLED=1 go build -o /mathua ./cmd/mathua
 FROM debian:bookworm-slim
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libsqlite3-0 ca-certificates && rm -rf /var/lib/apt/lists/*
+    libsqlite3-0 ca-certificates python3 python3-venv && rm -rf /var/lib/apt/lists/*
+
+# SymPy grading runtime. findSymPyService resolves ./grading/sympy_service.py
+# from WORKDIR /app, and execs `python3`, so the venv must be first on PATH.
+COPY grading/requirements.txt /app/grading/requirements.txt
+RUN python3 -m venv /opt/venv \
+    && /opt/venv/bin/pip install --no-cache-dir --disable-pip-version-check \
+        -r /app/grading/requirements.txt
+ENV PATH=/opt/venv/bin:$PATH
 
 COPY --from=builder /mathua /mathua
 COPY data/concepts/ /app/data/concepts/
 COPY data/lessons/ /app/data/lessons/
 COPY data/courses.json /app/data/courses.json
 COPY --from=webbuilder /app/web/next-app/out /app/web/next-app/out
+COPY grading/sympy_service.py /app/grading/sympy_service.py
+
+# Build-time grading self-test: if SymPy cannot grade, the image does not build,
+# so a broken grading runtime can never be deployed. `5^4` and `625` are
+# equivalent but not string-equal, so this exercises the real equivalence path.
+RUN printf '%s\n' '{"id":"1","expected":"5^4","answer":"625"}' \
+      | python3 /app/grading/sympy_service.py \
+      | grep -q '"correct": true'
 
 WORKDIR /app
 ENV PORT=8080

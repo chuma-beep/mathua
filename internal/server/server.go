@@ -968,25 +968,14 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 	correct := false
 	explanation := ""
 	session.Lock()
-	gt := "numeric"
-	if concept != nil {
-		gt = concept.GradingType
-	}
 	expected := session.LastProblem.Answer
 	expExplanation := session.LastProblem.Explanation
 	questionText := session.LastProblem.Question
 	session.Unlock()
-	graderRouter := s.eng.GetGrader()
 	if req.DontKnow {
 		s.eng.SubmitDiagnosticDontKnow(session, req.ConceptID, req.Elapsed, timeThresh)
 	} else {
-		if graderRouter != nil {
-			grResult := graderRouter.Grade(grader.GradingType(gt), expected, req.Answer)
-			correct = grResult.Correct
-		} else {
-			correct = expected == req.Answer
-		}
-
+		correct = s.eng.GradeAnswer(req.ConceptID, expected, req.Answer).Correct
 		s.eng.SubmitDiagnosticAnswerTimed(session, req.ConceptID, correct, req.Elapsed, timeThresh)
 	}
 	explanation = expExplanation
@@ -1686,10 +1675,14 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 			}
 			questions[i] = qInfo{Question: q.Question, Answer: q.Answer, Explanation: q.Explanation, Source: src}
 		}
-		if studentID, _ := r.Context().Value(authStudentKey{}).(string); len(dbQs) > 0 && s.ownsStudentID(r, studentID) {
-			s.eng.SetStudyExpected(studentID, conceptID, dbQs[0].Answer)
-		} else if sid := r.URL.Query().Get("student_id"); len(dbQs) > 0 && s.ownsStudentID(r, sid) {
-			s.eng.SetStudyExpected(sid, conceptID, dbQs[0].Answer)
+		qa := make(map[string]string, len(dbQs))
+		for _, q := range dbQs {
+			qa[q.Question] = q.Answer
+		}
+		if studentID, _ := r.Context().Value(authStudentKey{}).(string); s.ownsStudentID(r, studentID) {
+			s.eng.SetStudyExpectedBatch(studentID, conceptID, qa)
+		} else if sid := r.URL.Query().Get("student_id"); s.ownsStudentID(r, sid) {
+			s.eng.SetStudyExpectedBatch(sid, conceptID, qa)
 		}
 		writeJSON(w, map[string]interface{}{"questions": questions, "concept_id": conceptID})
 		return
@@ -1706,11 +1699,16 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 		writeError(w, err.Error(), 404)
 		return
 	}
-	// H1b: store server-side expected for study cheat prevention when student is known
-	if studentID, _ := r.Context().Value(authStudentKey{}).(string); len(problems) > 0 && s.ownsStudentID(r, studentID) {
-		s.eng.SetStudyExpected(studentID, conceptID, problems[0].Answer)
-	} else if sid := r.URL.Query().Get("student_id"); len(problems) > 0 && s.ownsStudentID(r, sid) {
-		s.eng.SetStudyExpected(sid, conceptID, problems[0].Answer)
+	// H1b: store server-side expecteds for the whole served set (not just the
+	// first question) so each question is graded against its own answer.
+	qa := make(map[string]string, len(problems))
+	for _, p := range problems {
+		qa[p.Question] = p.Answer
+	}
+	if studentID, _ := r.Context().Value(authStudentKey{}).(string); s.ownsStudentID(r, studentID) {
+		s.eng.SetStudyExpectedBatch(studentID, conceptID, qa)
+	} else if sid := r.URL.Query().Get("student_id"); s.ownsStudentID(r, sid) {
+		s.eng.SetStudyExpectedBatch(sid, conceptID, qa)
 	}
 	questions := make([]qInfo, len(problems))
 	for i, p := range problems {
@@ -2349,14 +2347,13 @@ func (s *Server) handleStudyAnswer(w http.ResponseWriter, r *http.Request) {
 	if studentID == "" {
 		studentID = req.StudentID
 	}
+	if studentID != "" && !s.ownsStudentID(r, studentID) {
+		writeError(w, "student_id not permitted", 403)
+		return
+	}
 	// Allow unauthenticated without student_id: grade only, no persistence.
 	if studentID == "" {
-		concept := s.eng.GetDAG().Concept(req.ConceptID)
-		gt := "numeric"
-		if concept != nil {
-			gt = concept.GradingType
-		}
-		gr := s.eng.GetGrader().Grade(grader.GradingType(gt), req.Expected, req.Answer)
+		gr := s.eng.GradeAnswer(req.ConceptID, req.Expected, req.Answer)
 		writeJSON(w, map[string]interface{}{
 			"correct":  gr.Correct,
 			"feedback": gr.Feedback,
@@ -2415,6 +2412,10 @@ func (s *Server) handleQuizSession(w http.ResponseWriter, r *http.Request) {
 	studentID := authStudentID
 	if studentID == "" {
 		studentID = req.StudentID
+	}
+	if studentID != "" && !s.ownsStudentID(r, studentID) {
+		writeError(w, "student_id not permitted", 403)
+		return
 	}
 	// Build quiz picking diverse recent weak concepts; fallback to DAG order
 	var quizConcepts []*concepts.Concept
@@ -2528,18 +2529,19 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 			studentID = sess.StudentID
 		}
 	}
+	if studentID != "" && !s.ownsStudentID(r, studentID) {
+		writeError(w, "student_id not permitted", 403)
+		return
+	}
 	if authStudentID != "" && sess.StudentID != "" && sess.StudentID != authStudentID {
 		writeError(w, "quiz session does not belong to authenticated user", 403)
 		return
 	}
-	// Grade via DAG grading_type
-	concept := s.eng.GetDAG().Concept(req.ConceptID)
-	gt := "numeric"
-	if concept != nil {
-		gt = concept.GradingType
-	}
+	// Grade via the canonical engine grader (custom GradedGenerator → router),
+	// the same dispatch SubmitQuizAnswer uses, so the response, the recorded
+	// answer, and the XP/mastery update can never disagree.
 	expected := sess.LastProblem.Answer
-	gr := s.eng.GetGrader().Grade(grader.GradingType(gt), expected, req.Answer)
+	gr := s.eng.GradeAnswer(req.ConceptID, expected, req.Answer)
 	feedback := gr.Feedback
 	if req.DontKnow {
 		// Admitted unknown: forced miss, teaching content as feedback.
@@ -2667,6 +2669,10 @@ func (s *Server) handleQuizSkip(w http.ResponseWriter, r *http.Request) {
 		if studentID == "" {
 			studentID = sess.StudentID
 		}
+	}
+	if studentID != "" && !s.ownsStudentID(r, studentID) {
+		writeError(w, "student_id not permitted", 403)
+		return
 	}
 	if authStudentID != "" && sess.StudentID != "" && sess.StudentID != authStudentID {
 		writeError(w, "quiz session does not belong to authenticated user", 403)

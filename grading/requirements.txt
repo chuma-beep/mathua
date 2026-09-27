@@ -1,0 +1,4 @@
+# SymPy grading runtime — pinned so dev, CI, and the production image grade
+# identically. Installed into /opt/venv in the Dockerfile; CI installs the same
+# file. Bump deliberately and re-run the grader + image smoke tests.
+sympy==1.14.0

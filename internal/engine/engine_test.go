@@ -632,12 +632,28 @@ func TestEngine_StudyExpected_SurvivesRestart(t *testing.T) {
 	e1.SetStudyExpected("stu1", "a", "42")
 	// Simulated restart: fresh engine, empty memory map, same store.
 	e2 := New(e1.repo, e1.dag, e1.registry, nil, nil)
-	if v, ok := e2.popStudyExpected("stu1", "a"); !ok || v != "42" {
+	if v, ok := e2.studyExpectedFor("stu1", "a", ""); !ok || v != "42" {
 		t.Fatalf("expected durable expected=42, got %q ok=%v", v, ok)
 	}
-	// Single-use: second pop misses everywhere.
-	if _, ok := e2.popStudyExpected("stu1", "a"); ok {
-		t.Error("expected consumed anchor to miss on second pop")
+	// The anchor stays available until TTL so a re-answer still grades.
+	if v, ok := e2.studyExpectedFor("stu1", "a", ""); !ok || v != "42" {
+		t.Error("expected anchor to remain available for re-answers")
+	}
+}
+
+func TestEngine_StudyExpectedBatch_PerQuestion(t *testing.T) {
+	e := testEngine(t)
+	// Distinct questions on the same concept must each grade against their own
+	// answer — the bug was anchoring only the first question.
+	e.SetStudyExpectedBatch("stu1", "a", map[string]string{"Q1": "5^4", "Q2": "625"})
+	if v, ok := e.studyExpectedFor("stu1", "a", "Q1"); !ok || v != "5^4" {
+		t.Errorf("Q1 expected 5^4, got %q ok=%v", v, ok)
+	}
+	if v, ok := e.studyExpectedFor("stu1", "a", "Q2"); !ok || v != "625" {
+		t.Errorf("Q2 expected 625, got %q ok=%v", v, ok)
+	}
+	if _, ok := e.studyExpectedFor("stu1", "a", "Q3"); ok {
+		t.Error("unserved question should have no anchor")
 	}
 }
 
