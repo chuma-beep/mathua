@@ -1414,12 +1414,12 @@ func (s *PostgresStore) SetLeague(studentID, tier, week string, moved int) error
 func (s *PostgresStore) GetDailyActivity(studentID string, days int) ([]DailyActivity, error) {
 	// For postgres, use now() - interval
 	rows, err := s.db.Query(`
-		SELECT date(timestamp)::text as day,
+		SELECT date(timestamp::timestamptz)::text as day,
 		       COUNT(*) as total,
 		       COALESCE(SUM(correct), 0) as correct_count,
 		       COALESCE(STRING_AGG(DISTINCT concept_id, ','), '') as concepts
 		FROM attempts
-		WHERE student_id = $1 AND timestamp >= now() - ($2 || ' days')::interval
+		WHERE student_id = $1 AND timestamp::timestamptz >= now() - ($2 || ' days')::interval
 		GROUP BY day
 		ORDER BY day
 	`, studentID, fmt.Sprintf("%d", days))
