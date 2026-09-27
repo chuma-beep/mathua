@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Write tan(x) as sin(x)/cos(x) and read off period pi",
+      "Mark vertical asymptotes where cosine vanishes at pi/2 + k*pi",
+      "Approximate tan(x) by x for small angles near the origin"
+    ]
+  },
+  {
+    "label": "Properties",
+    "section": "Properties",
+    "subgoals": [
+      "Exclude pi/2 + k*pi from the domain with range all of R",
+      "Apply oddness tan(-x) = -tan(x) across branches",
+      "Find roots at n*pi and increase on each (-pi/2 + k*pi, pi/2 + k*pi)"
+    ]
+  },
+  {
+    "label": "Limits, derivatives, and integrals of the tangent function",
+    "section": "Limits, derivatives, and integrals of the tangent function",
+    "subgoals": [
+      "Take one-sided limits at pi/2 to get +infinity and -infinity",
+      "Differentiate tan(x) to sec^2(x) on its domain",
+      "Integrate tan(x) to -ln|cos(x)| + c"
+    ]
+  }
+]

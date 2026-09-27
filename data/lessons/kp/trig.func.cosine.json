@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Read the period 2pi and amplitude 1 off the wave graph",
+      "Track the fall from 1 to -1 on [0, pi] for the arccosine branch",
+      "Pair cosine with sine as the two fundamental periodic models"
+    ]
+  },
+  {
+    "label": "Properties",
+    "section": "Properties",
+    "subgoals": [
+      "List domain R with range [-1, 1] from the unit circle",
+      "Apply evenness cos(-x) = cos(x) to mirror values",
+      "Locate roots at pi/2 + n*pi and minima at pi + 2k*pi"
+    ]
+  },
+  {
+    "label": "Limits, derivatives, and integrals of the cosine function",
+    "section": "Limits, derivatives, and integrals of the cosine function",
+    "subgoals": [
+      "Evaluate the limit (1 - cos(x))/x = 0 at the origin",
+      "Differentiate cos(x) to -sin(x) and cycle four derivatives back",
+      "Integrate cos(x) to sin(x) + c and cross-check with Euler form"
+    ]
+  }
+]

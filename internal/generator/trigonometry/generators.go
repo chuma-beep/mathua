@@ -33,6 +33,16 @@ func Register(reg *generator.Registry) {
 	reg.Register("trig.hyperbolic.tanh_coth", &tanhCothGen{})
 	reg.Register("trig.ident.identities", &trigIdentGen{})
 	reg.Register("trig.ineq.basic", &trigIneqGen{})
+	reg.Register("trig.func.sine", &sineFuncGen{})
+	reg.Register("trig.func.cosine", &cosineFuncGen{})
+	reg.Register("trig.func.tangent", &tangentFuncGen{})
+	reg.Register("trig.func.cotangent", &cotangentFuncGen{})
+	reg.Register("trig.func.secant", &secantFuncGen{})
+	reg.Register("trig.func.cosecant", &cosecantFuncGen{})
+	reg.Register("trig.func.arcsine", &arcsineFuncGen{})
+	reg.Register("trig.func.arccosine", &arccosineFuncGen{})
+	reg.Register("trig.func.arctangent", &arctangentFuncGen{})
+	reg.Register("trig.func.arccotangent", &arccotangentFuncGen{})
 }
 
 type radiansGen struct{}
@@ -740,4 +750,257 @@ func (g *trigIneqGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		Answer:      e.answer,
 		Explanation: e.exp,
 	}
+}
+
+// ----- P3.1 trig functions wave: each function as a real function of a real
+// variable (domain, parity, asymptotes, limits, derivatives, integrals).
+// Easy pools are fully typed (no yes/no recognition); hard rows unlock at
+// scale > 3. All answers are ASCII-safe short forms.
+
+type funcEntry struct {
+	question string
+	answer   string
+	exp      string
+}
+
+func funcPool(ctx generator.GeneratorContext, easy, hard []funcEntry) generator.Problem {
+	scale := int(1 + ctx.Difficulty*4)
+	pool := easy
+	if scale > 3 {
+		pool = append(easy, hard...)
+	}
+	e := pool[rand.Intn(len(pool))]
+	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.exp}
+}
+
+// sine as a real function
+type sineFuncGen struct{}
+
+func (g *sineFuncGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	easy := []funcEntry{
+		{"What is the period of \\(y = \\sin(x)\\)? (type like 2pi)", "2pi", "The sine wave repeats every \\(2\\pi\\) radians."},
+		{"What is the maximum value of \\(y = \\sin(x)\\)? (enter a number)", "1", "The sine function oscillates between \\(-1\\) and \\(1\\); the maximum is \\(1\\)."},
+		{"What is the minimum value of \\(y = \\sin(x)\\)? (enter a number)", "-1", "The sine function oscillates between \\(-1\\) and \\(1\\); the minimum is \\(-1\\)."},
+		{"What is \\(\\sin(0)\\)? (enter a number)", "0", "\\(\\sin(0) = 0\\): the wave starts at the origin."},
+		{"Is \\(\\sin(x)\\) odd, even, or neither? (type one word)", "odd", "\\(\\sin(-x) = -\\sin(x)\\), so sine is odd."},
+		{"What is the derivative of \\(\\sin(x)\\)?", "cos(x)", "\\(d/dx \\sin(x) = \\cos(x)\\)."},
+		{"What is the indefinite integral of \\(\\sin(x)\\)?", "-cos(x)", "Since \\(d/dx(-\\cos(x)) = \\sin(x)\\), the integral is \\(-\\cos(x) + c\\)."},
+		{"What is the limit of \\(\\sin(x)/x\\) as \\(x \\to 0\\)? (enter a number)", "1", "Near the origin the sine curve matches \\(y = x\\), so the ratio tends to \\(1\\)."},
+	}
+	hard := []funcEntry{
+		{"What is \\(\\sin(\\pi/2)\\)? (enter a number)", "1", "\\(\\sin(\\pi/2) = 1\\): the first maximum of the wave."},
+		{"What is the second derivative of \\(\\sin(x)\\)?", "-sin(x)", "Differentiating twice: \\(\\cos(x) \\to -\\sin(x)\\)."},
+		{"What is the first term of the Maclaurin series of \\(\\sin(x)\\)?", "x", "\\(\\sin(x) = x - x^3/3! + \\cdots\\): only odd powers appear."},
+		{"What is \\(\\sin(\\pi)\\)? (enter a number)", "0", "\\(\\sin(\\pi) = 0\\): a root at every \\(n\\pi\\)."},
+	}
+	return funcPool(ctx, easy, hard)
+}
+
+// cosine as a real function
+type cosineFuncGen struct{}
+
+func (g *cosineFuncGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	easy := []funcEntry{
+		{"What is the period of \\(y = \\cos(x)\\)? (type like 2pi)", "2pi", "The cosine wave repeats every \\(2\\pi\\) radians."},
+		{"What is the maximum value of \\(y = \\cos(x)\\)? (enter a number)", "1", "The cosine function oscillates between \\(-1\\) and \\(1\\); the maximum is \\(1\\)."},
+		{"What is the minimum value of \\(y = \\cos(x)\\)? (enter a number)", "-1", "The cosine function oscillates between \\(-1\\) and \\(1\\); the minimum is \\(-1\\)."},
+		{"What is \\(\\cos(0)\\)? (enter a number)", "1", "\\(\\cos(0) = 1\\): the wave starts at its peak."},
+		{"Is \\(\\cos(x)\\) odd, even, or neither? (type one word)", "even", "\\(\\cos(-x) = \\cos(x)\\), so cosine is even."},
+		{"What is the derivative of \\(\\cos(x)\\)?", "-sin(x)", "\\(d/dx \\cos(x) = -\\sin(x)\\)."},
+		{"What is the indefinite integral of \\(\\cos(x)\\)?", "sin(x)", "Since \\(d/dx(\\sin(x)) = \\cos(x)\\), the integral is \\(\\sin(x) + c\\)."},
+		{"What is the limit of \\((1 - \\cos(x))/x\\) as \\(x \\to 0\\)? (enter a number)", "0", "Near the origin \\(1 - \\cos(x)\\) vanishes faster than \\(x\\), so the ratio tends to \\(0\\)."},
+	}
+	hard := []funcEntry{
+		{"What is \\(\\cos(\\pi)\\)? (enter a number)", "-1", "\\(\\cos(\\pi) = -1\\): the first minimum of the wave."},
+		{"What is the second derivative of \\(\\cos(x)\\)?", "-cos(x)", "Differentiating twice: \\(-\\sin(x) \\to -\\cos(x)\\)."},
+		{"What is the constant term of the Maclaurin series of \\(\\cos(x)\\)? (enter a number)", "1", "\\(\\cos(x) = 1 - x^2/2! + \\cdots\\): only even powers appear."},
+		{"Evaluate the integral of \\(\\cos(x)\\) from \\(0\\) to \\(\\pi/2\\). (enter a number)", "1", "\\(\\sin(\\pi/2) - \\sin(0) = 1 - 0 = 1\\)."},
+	}
+	return funcPool(ctx, easy, hard)
+}
+
+// tangent as a real function
+type tangentFuncGen struct{}
+
+func (g *tangentFuncGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	easy := []funcEntry{
+		{"What is the period of \\(y = \\tan(x)\\)? (type like pi)", "pi", "Tangent repeats every \\(\\pi\\) radians, with one branch per period."},
+		{"What is \\(\\tan(0)\\)? (enter a number)", "0", "\\(\\tan(0) = \\sin(0)/\\cos(0) = 0/1 = 0\\)."},
+		{"Is \\(\\tan(x)\\) odd, even, or neither? (type one word)", "odd", "\\(\\tan(-x) = -\\tan(x)\\), so tangent is odd."},
+		{"What is the derivative of \\(\\tan(x)\\)?", "sec^2(x)", "\\(d/dx \\tan(x) = \\sec^{2}(x)\\)."},
+		{"What is the indefinite integral of \\(\\tan(x)\\)?", "-ln|cos(x)|", "The integral is \\(-\\ln|\\cos(x)| + c\\)."},
+		{"At which \\(x\\) in \\([0, \\pi)\\) is \\(\\tan(x)\\) undefined? (type like pi/2)", "pi/2", "Cosine vanishes at \\(\\pi/2\\), so tangent has a vertical asymptote there."},
+		{"What is the range of \\(\\tan(x)\\)? (type: all reals)", "all reals", "Each branch of tangent covers every real value."},
+		{"Is \\(\\tan(x)\\) increasing or decreasing on each branch? (type one word)", "increasing", "Tangent is strictly increasing on every interval \\((-\\pi/2 + k\\pi, \\pi/2 + k\\pi)\\)."},
+	}
+	hard := []funcEntry{
+		{"What is \\(\\tan(\\pi/4)\\)? (enter a number)", "1", "\\(\\tan(\\pi/4) = \\sin(\\pi/4)/\\cos(\\pi/4) = 1\\)."},
+		{"What is \\(\\tan(-\\pi/4)\\)? (enter a number)", "-1", "Tangent is odd, so \\(\\tan(-\\pi/4) = -\\tan(\\pi/4) = -1\\)."},
+		{"What is the limit of \\(\\tan(x)/x\\) as \\(x \\to 0\\)? (enter a number)", "1", "Near the origin the tangent curve matches \\(y = x\\), so the ratio tends to \\(1\\)."},
+		{"What is the limit of \\(\\tan(x)\\) as \\(x \\to \\pi/2\\) from the left? (type +infinity or -infinity)", "+infinity", "From the left the cosine is positive and tends to zero, so tangent grows without bound."},
+	}
+	return funcPool(ctx, easy, hard)
+}
+
+// cotangent as a real function
+type cotangentFuncGen struct{}
+
+func (g *cotangentFuncGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	zeros := []funcEntry{
+		{"Name a point in \\([0, \\pi]\\) where \\(\\cot(x)\\) is undefined (type 0 or pi)", "0", "Sine vanishes at \\(0\\), so cotangent has a vertical asymptote there."},
+		{"Name a point in \\([0, \\pi]\\) where \\(\\cot(x)\\) is undefined (type 0 or pi)", "pi", "Sine vanishes at \\(\\pi\\), so cotangent has a vertical asymptote there."},
+	}
+	easy := []funcEntry{
+		{"What is the period of \\(y = \\cot(x)\\)? (type like pi)", "pi", "Cotangent repeats every \\(\\pi\\) radians, with one branch per period."},
+		{"Is \\(\\cot(x)\\) odd, even, or neither? (type one word)", "odd", "\\(\\cot(-x) = -\\cot(x)\\), so cotangent is odd."},
+		{"What is the derivative of \\(\\cot(x)\\)?", "-csc^2(x)", "\\(d/dx \\cot(x) = -\\csc^{2}(x)\\)."},
+		{"What is the indefinite integral of \\(\\cot(x)\\)?", "ln|sin(x)|", "The integral is \\(\\ln|\\sin(x)| + c\\)."},
+		{"What is \\(\\cot(\\pi/2)\\)? (enter a number)", "0", "\\(\\cot(\\pi/2) = \\cos(\\pi/2)/\\sin(\\pi/2) = 0/1 = 0\\)."},
+		{"What is the range of \\(\\cot(x)\\)? (type: all reals)", "all reals", "Each branch of cotangent covers every real value."},
+	}
+	easy = append(easy, zeros...)
+	hard := []funcEntry{
+		{"What is \\(\\cot(\\pi/4)\\)? (enter a number)", "1", "\\(\\cot(\\pi/4) = \\cos(\\pi/4)/\\sin(\\pi/4) = 1\\)."},
+		{"What is the limit of \\(x\\cot(x)\\) as \\(x \\to 0\\)? (enter a number)", "1", "Since \\(\\cot(x) = \\cos(x)/\\sin(x)\\) and \\(\\sin(x)/x \\to 1\\), the product tends to \\(1\\)."},
+		{"Is \\(\\cot(x)\\) increasing or decreasing on each branch? (type one word)", "decreasing", "Cotangent is strictly decreasing on every interval \\((k\\pi, \\pi + k\\pi)\\)."},
+	}
+	return funcPool(ctx, easy, hard)
+}
+
+// secant as a real function
+type secantFuncGen struct{}
+
+func (g *secantFuncGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	recips := []funcEntry{
+		{"If \\(\\cos(\\theta) = 1/2\\), what is \\(\\sec(\\theta)\\)? (enter a number)", "2", "Secant is the reciprocal of cosine: \\(1/(1/2) = 2\\)."},
+		{"If \\(\\cos(\\theta) = 1/3\\), what is \\(\\sec(\\theta)\\)? (enter a number)", "3", "Secant is the reciprocal of cosine: \\(1/(1/3) = 3\\)."},
+		{"If \\(\\cos(\\theta) = 1/4\\), what is \\(\\sec(\\theta)\\)? (enter a number)", "4", "Secant is the reciprocal of cosine: \\(1/(1/4) = 4\\)."},
+		{"If \\(\\cos(\\theta) = 1/5\\), what is \\(\\sec(\\theta)\\)? (enter a number)", "5", "Secant is the reciprocal of cosine: \\(1/(1/5) = 5\\)."},
+	}
+	easy := []funcEntry{
+		{"What is \\(\\sec(0)\\)? (enter a number)", "1", "\\(\\sec(0) = 1/\\cos(0) = 1/1 = 1\\): the least positive value."},
+		{"What is the period of \\(y = \\sec(x)\\)? (type like 2pi)", "2pi", "Secant inherits the \\(2\\pi\\) period of cosine."},
+		{"Is \\(\\sec(x)\\) odd, even, or neither? (type one word)", "even", "\\(\\sec(-x) = \\sec(x)\\), so secant is even."},
+		{"What is the derivative of \\(\\sec(x)\\)?", "sec(x)tan(x)", "\\(d/dx \\sec(x) = \\sec(x)\\tan(x)\\)."},
+		{"At which \\(x\\) in \\([0, \\pi]\\) is \\(\\sec(x)\\) undefined? (type like pi/2)", "pi/2", "Cosine vanishes at \\(\\pi/2\\), so secant has a vertical asymptote there."},
+	}
+	easy = append(easy, recips...)
+	hard := []funcEntry{
+		{"What is \\(\\sec(\\pi/3)\\)? (enter a number)", "2", "\\(\\sec(\\pi/3) = 1/\\cos(\\pi/3) = 1/(1/2) = 2\\)."},
+		{"What is \\(\\sec^{2}(x) - \\tan^{2}(x)\\)? (enter a number)", "1", "Dividing \\(\\sin^{2}+\\cos^{2}=1\\) by \\(\\cos^{2}\\) gives \\(\\sec^{2} - \\tan^{2} = 1\\)."},
+		{"What is the indefinite integral of \\(\\sec(x)\\)?", "ln|sec(x)+tan(x)|", "The integral is \\(\\ln|\\sec(x)+\\tan(x)| + c\\)."},
+	}
+	return funcPool(ctx, easy, hard)
+}
+
+// cosecant as a real function
+type cosecantFuncGen struct{}
+
+func (g *cosecantFuncGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	recips := []funcEntry{
+		{"If \\(\\sin(\\theta) = 1/2\\), what is \\(\\csc(\\theta)\\)? (enter a number)", "2", "Cosecant is the reciprocal of sine: \\(1/(1/2) = 2\\)."},
+		{"If \\(\\sin(\\theta) = 1/3\\), what is \\(\\csc(\\theta)\\)? (enter a number)", "3", "Cosecant is the reciprocal of sine: \\(1/(1/3) = 3\\)."},
+		{"If \\(\\sin(\\theta) = 1/4\\), what is \\(\\csc(\\theta)\\)? (enter a number)", "4", "Cosecant is the reciprocal of sine: \\(1/(1/4) = 4\\)."},
+	}
+	easy := []funcEntry{
+		{"What is \\(\\csc(\\pi/2)\\)? (enter a number)", "1", "\\(\\csc(\\pi/2) = 1/\\sin(\\pi/2) = 1/1 = 1\\): the least positive value."},
+		{"What is the period of \\(y = \\csc(x)\\)? (type like 2pi)", "2pi", "Cosecant inherits the \\(2\\pi\\) period of sine."},
+		{"Is \\(\\csc(x)\\) odd, even, or neither? (type one word)", "odd", "\\(\\csc(-x) = -\\csc(x)\\), so cosecant is odd."},
+		{"What is the derivative of \\(\\csc(x)\\)?", "-csc(x)cot(x)", "\\(d/dx \\csc(x) = -\\csc(x)\\cot(x)\\)."},
+		{"At which \\(x\\) in \\([0, \\pi]\\) is \\(\\csc(x)\\) undefined? (type 0 or pi)", "0", "Sine vanishes at \\(0\\), so cosecant has a vertical asymptote there."},
+	}
+	easy = append(easy, recips...)
+	hard := []funcEntry{
+		{"What is \\(\\csc(\\pi/6)\\)? (enter a number)", "2", "\\(\\csc(\\pi/6) = 1/\\sin(\\pi/6) = 1/(1/2) = 2\\)."},
+		{"What is \\(\\csc^{2}(x) - \\cot^{2}(x)\\)? (enter a number)", "1", "Dividing \\(\\sin^{2}+\\cos^{2}=1\\) by \\(\\sin^{2}\\) gives \\(\\csc^{2} - \\cot^{2} = 1\\)."},
+		{"What is the indefinite integral of \\(\\csc(x)\\)?", "-ln|csc(x)+cot(x)|", "The integral is \\(-\\ln|\\csc(x)+\\cot(x)| + c\\)."},
+	}
+	return funcPool(ctx, easy, hard)
+}
+
+// arcsine as a real function
+type arcsineFuncGen struct{}
+
+func (g *arcsineFuncGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	easy := []funcEntry{
+		{"What is the domain of \\(\\arcsin(x)\\)? (type like [-1,1])", "[-1,1]", "Arcsine accepts exactly the sine values: \\([-1, 1]\\)."},
+		{"What is the range of \\(\\arcsin(x)\\)? (type like [-pi/2,pi/2])", "[-pi/2,pi/2]", "The restricted sine branch maps \\([-\\pi/2, \\pi/2]\\) onto \\([-1, 1]\\)."},
+		{"What is \\(\\arcsin(0)\\)? (enter a number)", "0", "\\(\\arcsin(0) = 0\\): the only root of the function."},
+		{"What is \\(\\arcsin(1)\\)? (type like pi/2)", "pi/2", "\\(\\arcsin(1) = \\pi/2\\): the maximum, at the right endpoint."},
+		{"Is \\(\\arcsin(x)\\) odd, even, or neither? (type one word)", "odd", "\\(\\arcsin(-x) = -\\arcsin(x)\\), so arcsine is odd."},
+		{"What is the derivative of \\(\\arcsin(x)\\)?", "1/sqrt(1-x^2)", "\\(d/dx \\arcsin(x) = 1/\\sqrt{1-x^{2}}\\) on \\((-1, 1)\\)."},
+		{"Is \\(\\arcsin(x)\\) increasing or decreasing on its domain? (type one word)", "increasing", "The derivative \\(1/\\sqrt{1-x^{2}}\\) is positive on \\((-1, 1)\\)."},
+	}
+	hard := []funcEntry{
+		{"What is \\(\\arcsin(-1)\\)? (type like -pi/2)", "-pi/2", "\\(\\arcsin(-1) = -\\pi/2\\): the minimum, at the left endpoint."},
+		{"What is \\(\\sin(\\arcsin(1/2))\\)? (enter a fraction like 1/2)", "1/2", "Applying sine after arcsine returns the argument: \\(1/2\\)."},
+		{"What is \\(\\arcsin(x) + \\arccos(x)\\)? (type like pi/2)", "pi/2", "The complementary inverse pair sums to \\(\\pi/2\\) for every \\(x\\)."},
+		{"Evaluate the integral of \\(\\arcsin(x)\\) from \\(0\\) to \\(1\\). (type like pi/2 - 1)", "pi/2 - 1", "The antiderivative \\(x\\arcsin(x) + \\sqrt{1-x^{2}}\\) gives \\(\\pi/2 - 1\\)."},
+	}
+	return funcPool(ctx, easy, hard)
+}
+
+// arccosine as a real function
+type arccosineFuncGen struct{}
+
+func (g *arccosineFuncGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	easy := []funcEntry{
+		{"What is the domain of \\(\\arccos(x)\\)? (type like [-1,1])", "[-1,1]", "Arccosine accepts exactly the cosine values: \\([-1, 1]\\)."},
+		{"What is the range of \\(\\arccos(x)\\)? (type like [0,pi])", "[0,pi]", "The restricted cosine branch maps \\([0, \\pi]\\) onto \\([-1, 1]\\)."},
+		{"What is \\(\\arccos(1)\\)? (enter a number)", "0", "\\(\\arccos(1) = 0\\): the only root of the function."},
+		{"What is \\(\\arccos(0)\\)? (type like pi/2)", "pi/2", "\\(\\arccos(0) = \\pi/2\\): the midpoint value."},
+		{"Is \\(\\arccos(x)\\) odd, even, or neither? (type one word)", "neither", "\\(\\arccos(-x) = \\pi - \\arccos(x)\\): neither even nor odd."},
+		{"What is the derivative of \\(\\arccos(x)\\)?", "-1/sqrt(1-x^2)", "\\(d/dx \\arccos(x) = -1/\\sqrt{1-x^{2}}\\) on \\((-1, 1)\\)."},
+		{"Is \\(\\arccos(x)\\) increasing or decreasing on its domain? (type one word)", "decreasing", "The derivative \\(-1/\\sqrt{1-x^{2}}\\) is negative on \\((-1, 1)\\)."},
+	}
+	hard := []funcEntry{
+		{"What is \\(\\arccos(-1)\\)? (type like pi)", "pi", "\\(\\arccos(-1) = \\pi\\): the maximum, at the left endpoint."},
+		{"What is \\(\\cos(\\arccos(1/2))\\)? (enter a fraction like 1/2)", "1/2", "Applying cosine after arccosine returns the argument: \\(1/2\\)."},
+		{"Evaluate the integral of \\(\\arccos(x)\\) from \\(-1\\) to \\(1\\). (type like pi)", "pi", "Point symmetry about \\((0, \\pi/2)\\) makes the area \\(2 \\times \\pi/2 = \\pi\\)."},
+	}
+	return funcPool(ctx, easy, hard)
+}
+
+// arctangent as a real function
+type arctangentFuncGen struct{}
+
+func (g *arctangentFuncGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	easy := []funcEntry{
+		{"What is the domain of \\(\\arctan(x)\\)? (type: all reals)", "all reals", "Every real number is a tangent value, so the domain is all of \\(\\mathbb{R}\\)."},
+		{"What is the range of \\(\\arctan(x)\\)? (type like (-pi/2,pi/2))", "(-pi/2,pi/2)", "The principal tangent branch maps \\((-\\pi/2, \\pi/2)\\) onto \\(\\mathbb{R}\\)."},
+		{"What is \\(\\arctan(0)\\)? (enter a number)", "0", "\\(\\arctan(0) = 0\\): the only root of the function."},
+		{"What is \\(\\arctan(1)\\)? (type like pi/4)", "pi/4", "\\(\\tan(\\pi/4) = 1\\), so \\(\\arctan(1) = \\pi/4\\)."},
+		{"Is \\(\\arctan(x)\\) odd, even, or neither? (type one word)", "odd", "\\(\\arctan(-x) = -\\arctan(x)\\), so arctangent is odd."},
+		{"What is the limit of \\(\\arctan(x)\\) as \\(x \\to +\\infty\\)? (type like pi/2)", "pi/2", "The graph has the horizontal asymptote \\(y = \\pi/2\\)."},
+		{"What is the derivative of \\(\\arctan(x)\\)?", "1/(1+x^2)", "\\(d/dx \\arctan(x) = 1/(1+x^{2})\\) on all of \\(\\mathbb{R}\\)."},
+	}
+	hard := []funcEntry{
+		{"What is \\(\\arctan(-1)\\)? (type like -pi/4)", "-pi/4", "Arctangent is odd, so \\(\\arctan(-1) = -\\arctan(1) = -\\pi/4\\)."},
+		{"What is the limit of \\(\\arctan(x)\\) as \\(x \\to -\\infty\\)? (type like -pi/2)", "-pi/2", "The graph has the horizontal asymptote \\(y = -\\pi/2\\)."},
+		{"Is \\(\\arctan(x)\\) increasing or decreasing on its domain? (type one word)", "increasing", "The derivative \\(1/(1+x^{2})\\) is positive everywhere."},
+		{"Evaluate the integral of \\(1/(1+x^2)\\) from \\(-\\infty\\) to \\(+\\infty\\). (type like pi)", "pi", "The integral representation of arctangent gives \\(\\pi/2 - (-\\pi/2) = \\pi\\)."},
+	}
+	return funcPool(ctx, easy, hard)
+}
+
+// arccotangent as a real function
+type arccotangentFuncGen struct{}
+
+func (g *arccotangentFuncGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	easy := []funcEntry{
+		{"What is the domain of \\(\\mathrm{arccot}(x)\\)? (type: all reals)", "all reals", "Every real number is a cotangent value, so the domain is all of \\(\\mathbb{R}\\)."},
+		{"What is the range of \\(\\mathrm{arccot}(x)\\)? (type like (0,pi))", "(0,pi)", "The principal cotangent branch maps \\((0, \\pi)\\) onto \\(\\mathbb{R}\\)."},
+		{"What is \\(\\mathrm{arccot}(0)\\)? (type like pi/2)", "pi/2", "The cotangent vanishes at \\(\\pi/2\\), so \\(\\mathrm{arccot}(0) = \\pi/2\\)."},
+		{"Is \\(\\mathrm{arccot}(x)\\) odd, even, or neither? (type one word)", "neither", "\\(\\mathrm{arccot}(-x) = \\pi - \\mathrm{arccot}(x)\\): neither even nor odd."},
+		{"What is the derivative of \\(\\mathrm{arccot}(x)\\)?", "-1/(1+x^2)", "\\(d/dx \\mathrm{arccot}(x) = -1/(1+x^{2})\\) on all of \\(\\mathbb{R}\\)."},
+		{"What is the limit of \\(\\mathrm{arccot}(x)\\) as \\(x \\to +\\infty\\)? (enter a number)", "0", "The graph has the horizontal asymptote \\(y = 0\\)."},
+		{"Is \\(\\mathrm{arccot}(x)\\) increasing or decreasing on its domain? (type one word)", "decreasing", "The derivative \\(-1/(1+x^{2})\\) is negative everywhere."},
+	}
+	hard := []funcEntry{
+		{"What is \\(\\mathrm{arccot}(1)\\)? (type like pi/4)", "pi/4", "The cotangent equals \\(1\\) at \\(\\pi/4\\), so \\(\\mathrm{arccot}(1) = \\pi/4\\)."},
+		{"What is the limit of \\(\\mathrm{arccot}(x)\\) as \\(x \\to -\\infty\\)? (type like pi)", "pi", "The graph has the horizontal asymptote \\(y = \\pi\\)."},
+		{"What is \\(\\arctan(x) + \\mathrm{arccot}(x)\\)? (type like pi/2)", "pi/2", "The complementary inverse pair sums to \\(\\pi/2\\) for every real \\(x\\)."},
+		{"What is \\(\\mathrm{arccot}(-1)\\)? (type like 3pi/4)", "3pi/4", "By symmetry \\(\\mathrm{arccot}(-1) = \\pi - \\pi/4 = 3\\pi/4\\)."},
+	}
+	return funcPool(ctx, easy, hard)
 }

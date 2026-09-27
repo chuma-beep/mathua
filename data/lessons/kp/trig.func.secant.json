@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Write sec(x) as 1/cos(x) wherever cosine is nonzero",
+      "Mark vertical asymptotes at pi/2 + k*pi from the cosine zeros",
+      "Bound the range to (-infinity, -1] union [1, +infinity)"
+    ]
+  },
+  {
+    "label": "Properties",
+    "section": "Properties",
+    "subgoals": [
+      "Exclude pi/2 + k*pi from the domain of the secant",
+      "Apply evenness sec(-x) = sec(x) to mirror branches",
+      "Take the least positive value sec(0) = 1 at the origin"
+    ]
+  },
+  {
+    "label": "Limits, derivatives, and integrals of the secant function",
+    "section": "Limits, derivatives, and integrals of the secant function",
+    "subgoals": [
+      "Link secant to tangent with sec^2(x) = 1 + tan^2(x)",
+      "Differentiate sec(x) to sec(x)*tan(x) on its domain",
+      "Integrate sec(x) to ln|sec(x) + tan(x)| + c"
+    ]
+  }
+]

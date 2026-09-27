@@ -319,5 +319,151 @@
       "streak": 3,
       "avg_time_seconds": 120
     }
+  },
+  {
+    "id": "trig.func.sine",
+    "label": "Sine function: properties, derivatives, and integrals",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.functions",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "trig.basics.sin_cos_def",
+      "alg.func.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "trig.func.cosine",
+    "label": "Cosine function: properties, derivatives, and integrals",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.functions",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "trig.func.sine"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "trig.func.tangent",
+    "label": "Tangent function: asymptotes, derivative, and integral",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.functions",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "trig.basics.tan_def",
+      "trig.func.sine"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "trig.func.cotangent",
+    "label": "Cotangent function: asymptotes, derivative, and integral",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.functions",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "trig.func.tangent"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "trig.func.secant",
+    "label": "Secant function: reciprocal properties and calculus",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.functions",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "trig.basics.reciprocal",
+      "trig.func.cosine"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "trig.func.cosecant",
+    "label": "Cosecant function: reciprocal properties and calculus",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.functions",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "trig.basics.reciprocal",
+      "trig.func.sine"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "trig.func.arcsine",
+    "label": "Arcsine function: inverse properties and calculus",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.functions",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "trig.adv.inverse",
+      "trig.func.sine"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "trig.func.arccosine",
+    "label": "Arccosine function: inverse properties and calculus",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.functions",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "trig.func.arcsine"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "trig.func.arctangent",
+    "label": "Arctangent function: asymptotes and calculus",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.functions",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "trig.adv.arctan",
+      "trig.func.tangent"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "trig.func.arccotangent",
+    "label": "Arccotangent function: asymptotes and calculus",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.functions",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "trig.func.arctangent"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
   }
 ]

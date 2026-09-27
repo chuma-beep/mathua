@@ -1,40 +1,62 @@
-> Content sourced from [Algebrica](https://algebrica.org/tangent-function/) — CC BY-NC 4.0
+## Introduction
 
-## Tangent function
+> The geometric construction of the tangent from the unit circle is developed in tangent and cotangent. Here, the tangent is treated as a real function of a real variable.
 
-The tangent function \\(f(x) = \tan(x)\\) assigns to each angle \\(x\\), expressed in radians, its corresponding [tangent](<../tangent-and-cotangent>) value. Its graph is a periodic curve with a period of \\(\pi\\) and features vertical [asymptotes](<../asymptotes/>) where the cosine of \\(x\\) equals zero, specifically at \\(x = \pi/2 + k\pi\\) for \\(k \in \mathbb{Z}\\). The function \\(f(x) = \tan(x)\\) has a [domain](<../determining-the-domain-of-a-function/>) of all real numbers except these points, and its range is all real numbers.
+The tangent function $f(x) = \tan(x)$ assigns to each angle $x,$ measured in radians, its corresponding tangent value. Its graph is a periodic curve with period $\pi$ and has vertical asymptotes where the cosine of $x$ vanishes, at $x = \pi/2 + k\pi$ with $k \in \mathbb{Z}.$ The domain is the set of all real numbers except these points, and the range is all of $\mathbb{R}.$
 
-![](/diagrams/algebrica/tangent-function.png)
+![IMG. 1](/diagrams/algebrica/tangent-and-cotangent-4.svg)
 
-A useful way to read this graph is to keep in mind that the tangent is defined as  
-\\[\tan(x) = \frac{\sin(x)}{\cos(x)} \\] Thinking of it as a ratio helps make sense of the curve: the tangent varies gently where the underlying [sine and cosine](<../sine-and-cosine/>) change smoothly, while it rises or falls sharply as the cosine approaches zero, shaping the overall appearance of the graph.
 
-###### The graph also shows that near the origin the tangent function behaves almost like a straight line: for small values of \\(x\\), \\( \tan(x) \\) increases smoothly before its growth becomes more pronounced as it approaches the discontinuities.
+The tangent is the ratio of sine and cosine so it varies slowly where both change smoothly and grows or decreases without bound as the cosine approaches zero:
+
+$$\tan(x) = \frac{\sin(x)}{\cos(x)}$$
+
+ Near the origin the curve is almost a straight line, with $\tan(x)$ close to $x$ for small $x,$ and it steepens as $x$ approaches the first discontinuity.
 
 ## Properties
 
-  * [Domain](<../determining-the-domain-of-a-function/>): \\( { x \in \mathbb{R} : x \neq \frac{\pi}{2} + k\pi \text{ for all } k \in \mathbb{Z} } \\)
-  * Range: \\( y \in \mathbb{R} \\)
-  * Periodicity: periodic in \\( x \\) with period \\( \pi \\)
-  * Parity: [odd](<../even-and-odd-functions/>), \\( \tan(-x) = -\tan(x) \\)
-  * Roots: \\(x = \pi n, \qquad n \in \mathbb{Z}\\)
-  * [Integer](<../integers/>) root: \\(x = 0\\)
+The following properties of the tangent function follow from its definition as the ratio of sine to cosine.
 
++ Domain: $\{\ x \in \mathbb{R} \mid x \neq \frac{\pi}{2} + k\pi \ \text{ for all } k \in \mathbb{Z} \ \}$
++ Range: $y \in \mathbb{R}$
++ Periodicity: periodic in $x$ with period $\pi$
++ Parity: odd, with $\tan(-x) = -\tan(x)$
++ Monotonicity: increasing on each interval $\left(-\frac{\pi}{2} + k\pi, \frac{\pi}{2} + k\pi\right)$ with $k \in \mathbb{Z}$
++ Roots: $x = n\pi$ with $n \in \mathbb{Z}$
++ The only integer value among the roots is $x = 0,$ since $n\pi$ is irrational for every $n \neq 0.$
 
 ## Limits, derivatives, and integrals of the tangent function
 
-The tangent of \\( x \\) is defined as the ratio between the [sine and cosine](<../sine-and-cosine>) of the angle \\( x \\). \\[\tan(x) = \frac{\sin(x)}{\cos(x)} \\]
+A remarkable limit describes the tangent in a neighbourhood of the origin:
 
+$$\lim_{x \to 0} \frac{\tan(x)}{x} = 1$$
 
-A useful limit to remember is: \\[\lim_{x \to 0} \frac{\tan(x)}{x} = 1\\] which shows that, near the origin, the tangent behaves almost like the function \\(x\\). The behaviour of the tangent near its first vertical asymptote is also well described by limits. As \\(x\\) approaches \\(\pi/2\\) from the left, the function grows without bound: \\[\lim_{x \to \frac{\pi}{2}^-} \tan(x) = +\infty \\] Coming from the right, the values instead diverge negatively: \\[\lim_{x \to \frac{\pi}{2}^+} \tan(x) = -\infty \\]
+The behaviour near the first vertical asymptote is described by one-sided limits. As $x$ approaches $\pi/2$ from the left the cosine is positive and tends to zero, so the function grows without bound,
 
+$$\lim_{x \to \frac{\pi}{2}^-} \tan(x) = +\infty$$
 
-The function is [continuous](<../continuous-functions/>) and differentiable on its domain. The [derivative](<../derivatives>) is: \\[\frac{d}{dx} \tan(x) = \sec^2(x) \\]
+while from the right the cosine is negative and the values diverge to negative infinity,
 
+$$\lim_{x \to \frac{\pi}{2}^+} \tan(x) = -\infty$$
 
-The [indefinite integral](<../indefinite-integrals/>) is: \\[\int \tan(x) dx = -\ln |\cos(x)| + c \\]
+The function is continuous and differentiable on its domain. Its derivative is:
 
-##### A comprehensive overview of trigonometric integrals, together with the most useful transformation and substitution techniques for handling more complex cases, is available in the page on [trigonometric function integrals](<../integral-of-trigonometric-functions/>).
+$$\frac{d}{dx}\tan(x) = \sec^2(x)$$
 
+The indefinite integral is:
 
-An alternative form of the function \\( \tan(x) \\) using imaginary numbers is given by Euler’s formula. Here, \\( e^{ix} \\) is the [exponential function](<../exponential-function>) with base \\( e \\) and \\( i \\) is the [imaginary](<../complex-numbers>) unit: \\[\tan(x) = \frac{e^{ix} - e^{-ix}}{i \left(e^{ix} + e^{-ix}\right)} \\]
+$$\int \tan(x) \ dx = -\ln|\cos(x)| + c$$
+
+> A broader treatment of trigonometric integrals, with the transformation and substitution techniques for the more complex cases, is given in trigonometric function integrals.
+
+The tangent function can also be written using imaginary numbers. With $e^{ix}$ the exponential function of base $e$ and $i$ the imaginary unit, Euler's formula gives:
+
+$$\tan(x) = \frac{e^{ix} - e^{-ix}}{i\left(e^{ix} + e^{-ix}\right)}$$
+
+## Inverse function
+
+On its whole domain the tangent is not injective, because the period $\pi$ makes it repeat every value in each branch. Restricted to the open interval $\left(-\frac{\pi}{2}, \frac{\pi}{2}\right),$ where it is continuous and strictly increasing, the tangent is a bijection onto $\mathbb{R}$ and admits an inverse function, the arctangent function:
+
+$$\arctan : \mathbb{R} \to \left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$$
+
+On this restricted domain $\arctan(\tan(x)) = x,$ and $\tan(\arctan(y)) = y$ for every real $y.$

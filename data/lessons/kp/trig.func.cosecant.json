@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Write csc(x) as 1/sin(x) wherever sine is nonzero",
+      "Mark vertical asymptotes at k*pi from the sine zeros",
+      "Bound the range to (-infinity, -1] union [1, +infinity)"
+    ]
+  },
+  {
+    "label": "Properties",
+    "section": "Properties",
+    "subgoals": [
+      "Exclude k*pi from the domain of the cosecant",
+      "Apply oddness csc(-x) = -csc(x) across branches",
+      "Take the least positive value csc(pi/2) = 1 at the sine peak"
+    ]
+  },
+  {
+    "label": "Limits, derivatives, and integrals of the cosecant function",
+    "section": "Limits, derivatives, and integrals of the cosecant function",
+    "subgoals": [
+      "Link cosecant to cotangent with csc^2(x) = 1 + cot^2(x)",
+      "Differentiate csc(x) to -csc(x)*cot(x) on its domain",
+      "Integrate csc(x) to -ln|csc(x) + cot(x)| + c"
+    ]
+  }
+]

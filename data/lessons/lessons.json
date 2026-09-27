@@ -2441,7 +2441,7 @@
   },
   {
     "concept_id": "calc.integral.mvt",
-    "source": "algebrica/integrals/mean-value-theorem-for-integrals.md"
+    "source": "algebrica/integrals/definite-integrals.md"
   },
   {
     "concept_id": "calc.integral.work",
@@ -2546,6 +2546,46 @@
   {
     "concept_id": "complex.adv.logarithm",
     "source": "algebrica/complex-numbers/complex-logarithm.md"
+  },
+  {
+    "concept_id": "trig.func.sine",
+    "source": "algebrica/functions/sine-function.md"
+  },
+  {
+    "concept_id": "trig.func.cosine",
+    "source": "algebrica/functions/cosine-function.md"
+  },
+  {
+    "concept_id": "trig.func.tangent",
+    "source": "algebrica/functions/tangent-function.md"
+  },
+  {
+    "concept_id": "trig.func.cotangent",
+    "source": "algebrica/functions/cotangent-function.md"
+  },
+  {
+    "concept_id": "trig.func.secant",
+    "source": "algebrica/functions/secant-function.md"
+  },
+  {
+    "concept_id": "trig.func.cosecant",
+    "source": "algebrica/functions/cosecant-function.md"
+  },
+  {
+    "concept_id": "trig.func.arcsine",
+    "source": "algebrica/functions/arcsine-function.md"
+  },
+  {
+    "concept_id": "trig.func.arccosine",
+    "source": "algebrica/functions/arccosine-function.md"
+  },
+  {
+    "concept_id": "trig.func.arctangent",
+    "source": "algebrica/functions/arctangent-function.md"
+  },
+  {
+    "concept_id": "trig.func.arccotangent",
+    "source": "algebrica/functions/arccotangent-function.md"
   },
   {
     "concept_id": "calc.integral.convergence",

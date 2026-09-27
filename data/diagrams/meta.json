@@ -1664,5 +1664,105 @@
   "source": "local",
   "upstream": null,
   "license": "Mathua (own work)"
+ },
+ "/diagrams/algebrica/sine-and-cosine-3.svg": {
+  "concepts": [
+   "trig.func.sine"
+  ],
+  "title": "Sine function graph",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/trigonometry/svg/sine-and-cosine-3.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/sine-and-cosine-4.svg": {
+  "concepts": [
+   "trig.func.cosine"
+  ],
+  "title": "Cosine function graph",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/trigonometry/svg/sine-and-cosine-4.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/tangent-and-cotangent-4.svg": {
+  "concepts": [
+   "trig.func.tangent"
+  ],
+  "title": "Tangent function graph",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/trigonometry/svg/tangent-and-cotangent-4.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/tangent-and-cotangent-5.svg": {
+  "concepts": [
+   "trig.func.cotangent"
+  ],
+  "title": "Cotangent function graph",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/trigonometry/svg/tangent-and-cotangent-5.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/secant-and-cosecant-3.svg": {
+  "concepts": [
+   "trig.func.secant"
+  ],
+  "title": "Secant function graph",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/trigonometry/svg/secant-and-cosecant-3.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/secant-and-cosecant-4.svg": {
+  "concepts": [
+   "trig.func.cosecant"
+  ],
+  "title": "Cosecant function graph",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/trigonometry/svg/secant-and-cosecant-4.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/arcsine-function-1.svg": {
+  "concepts": [
+   "trig.func.arcsine"
+  ],
+  "title": "Arcsine function graph",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/functions/svg/arcsine-function-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/arccosine-function-1.svg": {
+  "concepts": [
+   "trig.func.arccosine"
+  ],
+  "title": "Arccosine function graph",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/functions/svg/arccosine-function-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/arctangent-function-1.svg": {
+  "concepts": [
+   "trig.func.arctangent"
+  ],
+  "title": "Arctangent function graph",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/functions/svg/arctangent-function-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/arccotangent-function-1.svg": {
+  "concepts": [
+   "trig.func.arccotangent"
+  ],
+  "title": "Arccotangent function graph",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/functions/svg/arccotangent-function-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
  }
 }

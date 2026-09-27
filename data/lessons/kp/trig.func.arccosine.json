@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Restrict cosine to [0, pi] to get a bijection onto [-1, 1]",
+      "Invert the restricted branch to arccos: [-1, 1] to [0, pi]",
+      "Reduce arccos(cos(theta)) to theta only inside the branch"
+    ]
+  },
+  {
+    "label": "Properties",
+    "section": "Properties",
+    "subgoals": [
+      "List domain [-1, 1] with range [0, pi]",
+      "Reflect with arccos(-x) = pi - arccos(x) about (0, pi/2)",
+      "Pair arccosine with arcsine via arcsin(x) + arccos(x) = pi/2"
+    ]
+  },
+  {
+    "label": "Limits, derivatives, and integrals of the arccosine function",
+    "section": "Limits, derivatives, and integrals of the arccosine function",
+    "subgoals": [
+      "Track strict decrease from pi at x = -1 to 0 at x = 1",
+      "Differentiate arccos(x) to -1/sqrt(1 - x^2) on (-1, 1)",
+      "Integrate arccos(x) to x*arccos(x) - sqrt(1 - x^2) + c"
+    ]
+  }
+]
