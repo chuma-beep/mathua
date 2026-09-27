@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Read the period 2pi and amplitude 1 off the wave graph",
+      "Keep angles in radians so sin(x) tracks x near the origin",
+      "Pair sine with cosine as the two fundamental periodic models"
+    ]
+  },
+  {
+    "label": "Properties",
+    "section": "Properties",
+    "subgoals": [
+      "List domain R with range [-1, 1] from the unit circle",
+      "Apply oddness sin(-x) = -sin(x) to reflect values",
+      "Locate roots at n*pi and maxima at pi/2 + 2k*pi"
+    ]
+  },
+  {
+    "label": "Limits, derivatives, and integrals of the sine function",
+    "section": "Limits, derivatives, and integrals of the sine function",
+    "subgoals": [
+      "Evaluate the limit sin(x)/x = 1 at the origin",
+      "Differentiate sin(x) to cos(x) and cycle four derivatives back",
+      "Integrate sin(x) to -cos(x) + c and cross-check with Euler form"
+    ]
+  }
+]

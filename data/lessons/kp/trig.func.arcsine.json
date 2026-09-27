@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Restrict sine to [-pi/2, pi/2] to get a bijection onto [-1, 1]",
+      "Invert the restricted branch to arcsin: [-1, 1] to [-pi/2, pi/2]",
+      "Reduce arcsin(sin(theta)) to theta only inside the branch"
+    ]
+  },
+  {
+    "label": "Properties",
+    "section": "Properties",
+    "subgoals": [
+      "List domain [-1, 1] with range [-pi/2, pi/2]",
+      "Apply oddness arcsin(-x) = -arcsin(x) about the origin",
+      "Pair arcsine with arccosine via arcsin(x) + arccos(x) = pi/2"
+    ]
+  },
+  {
+    "label": "Limits, derivatives, and integrals of the arcsine function",
+    "section": "Limits, derivatives, and integrals of the arcsine function",
+    "subgoals": [
+      "Evaluate the limit arcsin(x)/x = 1 at the origin",
+      "Differentiate arcsin(x) to 1/sqrt(1 - x^2) on (-1, 1)",
+      "Integrate arcsin(x) to x*arcsin(x) + sqrt(1 - x^2) + c"
+    ]
+  }
+]

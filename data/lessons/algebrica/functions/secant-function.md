@@ -1,70 +1,60 @@
-> Content sourced from [Algebrica](https://algebrica.org/secant-function/) — CC BY-NC 4.0
+## Introduction
 
-## Secant function
+> The geometric construction of the secant from the unit circle is developed in secant and cosecant. Here, the secant is treated as a real function of a real variable.
 
-The [secant](<../secant-and-cosecant/>) function \\(f(x) = \sec(x)\\) is defined as the reciprocal of the [cosine function](<../cosine-function/>). For any real angle \\(x\\) (measured in radians), the secant takes the value:
+The secant function $f(x) = \sec(x)$ assigns to each angle $x,$ measured in radians, the reciprocal of its cosine value, defined wherever $\cos(x) \neq 0.$ Its graph is a periodic curve with period $2\pi$ and has vertical asymptotes where the cosine of $x$ vanishes, at $x = \pi/2 + k\pi$ with $k \in \mathbb{Z}.$ The domain is the set of all real numbers except these points, and the range is $(-\infty, -1] \cup [1, +\infty).$
 
-\\[\sec(x) = \frac{1}{\cos(x)} \\]
-
-as long as the \\(\cos(x) \neq 0)\\). This reciprocal relationship means that the behaviour of the secant function is entirely determined by the properties of the cosine function.
-
-###### This section focuses on the analytical properties of the secant function. For a geometric interpretation based on the [unit circle](<../unit-circle/>), including how the secant arises from the extension of the radius and the corresponding right–triangle construction, see the dedicated entry.
+![IMG. 1](/diagrams/algebrica/secant-and-cosecant-3.svg)
 
 
-Its graph is a periodic curve with period \\(2\pi\\). Because cosine reaches the value zero at isolated and regularly spaced points, the secant function exhibits vertical [asymptotes](<../asymptotes/>) at:
+The secant is the reciprocal of the cosine, so it stays bounded where the cosine is near $\pm 1$ and grows without bound as the cosine approaches zero:
 
-\\[x = \frac{\pi}{2} + k\pi \qquad k \in \mathbb{Z} \\]
+$$\sec(x) = \frac{1}{\cos(x)}$$
 
-where the reciprocal \\(1/\cos(x)\\) becomes undefined.
+Because the cosine never exceeds 1 in absolute value, its reciprocal never falls between $-1$ and 1, and each branch reaches a single extremum of 1 or $-1$ where the cosine equals $\pm 1$ before diverging toward the neighbouring asymptotes.
 
-![Secant graph with asymptotic behaviour.](/diagrams/algebrica/secant-1-1.png)
+## Properties
 
-These asymptotes separate the graph into distinct branches in which the function grows without bound as the angle approaches any of these points. The [domain](<../determining-the-domain-of-a-function/>) of \\(\sec(x)\\) is therefore the set of all real numbers except the points where \\(\cos(x)=0\\). Its range consists of the unbounded intervals \\((-\infty, -1] \cup [1, \infty)\\) reflecting the fact that the cosine function never takes values whose absolute value exceeds 1, making its reciprocal always greater than or equal to 1 in magnitude.
+The following properties of the secant function follow from its definition as the reciprocal of the cosine.
 
-## Key properties
++ Domain: $\{\ x \in \mathbb{R} \mid x \neq \frac{\pi}{2} + k\pi \ \text{ for all } k \in \mathbb{Z} \ \}$
++ Range: $y \in (-\infty, -1] \cup [1, +\infty)$
++ Periodicity: periodic in $x$ with period $2\pi$
++ Parity: even, with $\sec(-x) = \sec(x)$
++ The graph has vertical asymptotes at $x = \frac{\pi}{2} + k\pi$ with $k \in \mathbb{Z}$
 
-  * Domain: \\( { x \in \mathbb{R} : \cos(x) \neq 0 } = { x \in \mathbb{R} : x \neq \pi/2 + k\pi \text{ for all } k \in \mathbb{Z} } .\\)
-  * Range: \\( y \in (-\infty, -1] \cup [1, \infty) .\\)
-  * Periodicity: periodic in \\( x \\) with period \\( 2\pi .\\)
-  * Parity: [even](<../even-and-odd-functions/>), \\( \sec(-x) = \sec(x) .\\)
-  * The graph has vertical asymptotes at \\( x = \frac{\pi}{2} + k\pi .\\)
+## Relation with the tangent
 
+The secant and the tangent are tied by a Pythagorean identity. Dividing $\sin^2(x) + \cos^2(x) = 1$ by $\cos^2(x)$ and using the reciprocal definitions gives:
 
-## Additional identity
+$$\sec^2(x) = 1 + \tan^2(x)$$
 
-There is a simple but meaningful relation that ties the secant and the [tangent](<../tangent-function/>) together. Starting from the [pythagorean identity](<../pythagorean-identity/>) for sine and cosine and rewriting everything in terms of cosine, we arrive at:
-
-\\[\sec^{2}(x) = 1 + \tan^{2}(x) \\]
-
-This identity shows how closely the two functions are linked: when the tangent becomes large, the secant grows as well, and both share the same vertical asymptotes. It is a handy relation that often appears in calculus, especially when dealing with derivatives, integrals, or trigonometric equations involving reciprocal functions.
+The two functions share the same vertical asymptotes, and the secant grows together with the tangent.
 
 ## Limits, derivatives, and integrals of the secant function
 
-Several limits help illustrate how the secant function behaves near key points of its domain. When the angle approaches values where the cosine is close to one, the secant remains bounded and approaches a finite value. As the angle nears those points at which the cosine tends to zero, the reciprocal grows without bound, giving rise to the vertical asymptotes characteristic of the function. These behaviours can be summarised through the following limits:
+Near the origin the cosine reaches its maximum, so the secant takes its least positive value:
 
-\\[1. \quad \lim_{x \to 0} \sec(x) = 1\\] \\[2. \quad \lim_{x \to \frac{\pi}{2}^-} \sec(x) = +\infty\\] \\[3. \quad \lim_{x \to \frac{\pi}{2}^+} \sec(x) = -\infty\\]
+$$\lim_{x \to 0} \sec(x) = 1$$
 
+The behaviour near the first vertical asymptote is described by one-sided limits. As $x$ approaches $\pi/2$ from the left the cosine is positive and tends to zero, so the function grows without bound,
 
-The secant function is [continuous](<../continuous-functions/>) and differentiable at every point where it is defined, that is, on the entire real line except at the angles where the cosine function vanishes. Within this domain it varies smoothly, and its rate of change follows from differentiating the reciprocal of the cosine. Using standard differentiation rules gives the derivative:
+$$\lim_{x \to \frac{\pi}{2}^-} \sec(x) = +\infty$$
 
-\\[4\. \quad \frac{d}{dx}\sec(x) = \sec(x)\tan(x) \\]
+while from the right the cosine is negative and the values diverge to negative infinity,
 
-which expresses how the secant function grows or decreases depending on the combined behaviour of \\(\sec(x)\\) and \\(\tan(x)\\) at each point of its domain.
+$$\lim_{x \to \frac{\pi}{2}^+} \sec(x) = -\infty$$
 
+The function is continuous and differentiable on its domain. Its derivative is:
 
-The antiderivative of the secant function can be obtained by a classical substitution that rewrites the integrand in a form suitable for logarithmic integration. This procedure leads to a compact expression involving both the secant and the tangent functions. The result is the following [indefinite integral](<../indefinite-integral/>):
+$$\frac{d}{dx}\sec(x) = \sec(x)\tan(x)$$
 
-\\[5\. \int \sec(x)\, dx = \ln\\!\left|\, \sec(x) + \tan(x) \,\right| + c \\]
+The indefinite integral is:
 
-##### A comprehensive overview of trigonometric integrals, together with the most useful transformation and substitution techniques for handling more complex cases, is available in the page on [trigonometric function integrals](<../integral-of-trigonometric-functions/>).
+$$\int \sec(x) \ dx = \ln\left|\sec(x) + \tan(x)\right| + c$$
 
+> A broader treatment of trigonometric integrals, with the transformation and substitution techniques for the more complex cases, is given in trigonometric function integrals.
 
-An alternative expression for the function \\(\sec(x)\\) can be obtained by rewriting the cosine in exponential form through [Euler’s](<../euler-number-limit-sequence/>) identity. This approach highlights the connection between trigonometric and complex exponential functions, and it often proves useful in contexts such as Fourier analysis or complex integration. Using the identity:
+The secant function can also be written using imaginary numbers. With $e^{ix}$ the exponential function of base $e$ and $i$ the imaginary unit, Euler's formula gives:
 
-\\[6\. \quad \cos(x) = \frac{e^{ix} + e^{-ix}}{2} \\]
-
-the secant function can be expressed as the reciprocal of this quantity, which yields:
-
-\\[7\. \quad \sec(x) = \frac{2}{\,e^{ix} + e^{-ix}\,} \\]
-
-This formulation emphasises the analytic structure of \\(\sec(x)\\) and provides a bridge between its trigonometric definition and its complex exponential representation.
+$$\sec(x) = \frac{2}{e^{ix} + e^{-ix}}$$

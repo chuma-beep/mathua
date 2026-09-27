@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Restrict tangent to (-pi/2, pi/2) to get a bijection onto R",
+      "Invert the principal branch to arctan: R to (-pi/2, pi/2)",
+      "Reduce arctan(tan(theta)) to theta only inside the branch"
+    ]
+  },
+  {
+    "label": "Limits and horizontal asymptotes",
+    "section": "Limits and horizontal asymptotes",
+    "subgoals": [
+      "Take limits at +infinity and -infinity to get pi/2 and -pi/2",
+      "Draw horizontal asymptotes y = pi/2 and y = -pi/2",
+      "Evaluate the limit arctan(x)/x = 1 at the origin"
+    ]
+  },
+  {
+    "label": "Derivative and integrals of the arctangent function",
+    "section": "Derivative and integrals of the arctangent function",
+    "subgoals": [
+      "Differentiate arctan(x) to 1/(1 + x^2) on all of R",
+      "Represent arctan(x) as the integral of 1/(1 + t^2) from 0 to x",
+      "Integrate arctan(x) to x*arctan(x) - ln(1 + x^2)/2 + C"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Restrict cotangent to (0, pi) to get a bijection onto R",
+      "Invert the principal branch to arccot: R to (0, pi)",
+      "Reduce arccot(cot(theta)) to theta only inside the branch"
+    ]
+  },
+  {
+    "label": "Limits and horizontal asymptotes",
+    "section": "Limits and horizontal asymptotes",
+    "subgoals": [
+      "Take limits at +infinity and -infinity to get 0 and pi",
+      "Draw horizontal asymptotes y = 0 and y = pi",
+      "Pair arccotangent with arctangent via arctan(x) + arccot(x) = pi/2"
+    ]
+  },
+  {
+    "label": "Derivative and integrals of the arccotangent function",
+    "section": "Derivative and integrals of the arccotangent function",
+    "subgoals": [
+      "Differentiate arccot(x) to -1/(1 + x^2) on all of R",
+      "Track strict decrease with centre of symmetry at (0, pi/2)",
+      "Integrate arccot(x) to x*arccot(x) + ln(1 + x^2)/2 + C"
+    ]
+  }
+]

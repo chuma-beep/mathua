@@ -1,39 +1,62 @@
-> Content sourced from [Algebrica](https://algebrica.org/cotangent-function/) — CC BY-NC 4.0
+## Introduction
 
-## Cotangent function
+> The geometric construction of the cotangent from the unit circle is developed in tangent and cotangent. Here, the cotangent is treated as a real function of a real variable.
 
-The cotangent function \\( f(x) = \cot(x) \\) assigns to each angle \\( x \\), expressed in radians, its corresponding [cotangent](<../tangent-and-cotangent>) value. Its graph is a periodic curve with a period of \\( \pi \\) and features vertical [asymptotes](<../asymptotes>) where the sine of \\( x \\) equals zero, specifically at \\( x = k\pi \\) for \\( k \in \mathbb{Z} \\). The function \\( f(x) = \cot(x) \\) has a [domain](<../determining-the-domain-of-a-function/>) of all real numbers except these points, and its range is all real numbers.
+The cotangent function $f(x) = \cot(x)$ assigns to each angle $x,$ measured in radians, its corresponding cotangent value. Its graph is a periodic curve with period $\pi$ and has vertical asymptotes where the sine of $x$ vanishes, at $x = k\pi$ with $k \in \mathbb{Z}.$ The domain is the set of all real numbers except these points, and the range is all of $\mathbb{R}.$
 
-![](/diagrams/algebrica/cotangent-chart-1.png)
-
-  * Domain: \\( { x \in \mathbb{R} : x \neq k\pi \text{ for all } k \in \mathbb{Z} } \\)
-  * Range: \\( y \in \mathbb{R} \\)
-  * Periodicity: periodic in \\( x \\) with period \\( \pi \\)
-  * Parity: odd, \\( \cot(-x) = -\cot(x) \\)
+![IMG. 1](/diagrams/algebrica/tangent-and-cotangent-5.svg)
 
 
-  * The cotangent of \\( x \\) is defined as the ratio between the [cosine and sine](<../sine-and-cosine>) of the angle \\( x \\). \\[\cot(x) = \frac{\cos(x)}{\sin(x)} \\]
+The cotangent is the ratio of cosine and sine so it diverges where the sine approaches zero and crosses the horizontal axis where the cosine vanishes:
 
+$$\cot(x) = \frac{\cos(x)}{\sin(x)}$$
 
-  * Roots: \\( x = \frac{\pi}{2} + \pi n, \quad n \in \mathbb{Z} \\)
-  * Fundamental root: \\( x = \frac{\pi}{2} \\)
+On the interval $(0, \pi)$ the curve descends from $+\infty$ near $x = 0$ to $-\infty$ near $x = \pi,$ crossing zero at $x = \pi/2.$
 
+## Properties
 
-  * Notable limits:
+The following properties of the cotangent function follow from its definition as the ratio of cosine to sine.
 
-\\[\lim\limits_{x \to 0} x \cot(x) = 1 \\]
++ Domain: $\{\ x \in \mathbb{R} \mid x \neq k\pi \ \text{ for all } k \in \mathbb{Z} \ \}$
++ Range: $y \in \mathbb{R}$
++ Periodicity: periodic in $x$ with period $\pi$
++ Parity: odd, with $\cot(-x) = -\cot(x)$
++ Monotonicity: decreasing on each interval $\left(k\pi, \pi + k\pi\right)$ with $k \in \mathbb{Z}$
++ Roots: $x = \frac{\pi}{2} + n\pi$ with $n \in \mathbb{Z}$
++ No root is an integer, since $\frac{\pi}{2} + n\pi$ is irrational for every $n \in \mathbb{Z}.$
 
-\\[\lim_{x\to0^+} \cot(x) = +\infty \quad \text{and} \quad \lim_{x\to0^-} \cot(x) = -\infty \\]
+## Limits, derivatives, and integrals of the cotangent function
 
+A remarkable limit describes the cotangent in a neighbourhood of the origin:
 
-  * The function is [continuous](<../continuous-functions/>) and differentiable on its domain.
-  * [Derivative](<../derivatives>): \\[\frac{d}{dx} \cot(x) = -\csc^2(x) \\]
+$$\lim_{x \to 0} x\cot(x) = 1$$
 
+The behaviour near the asymptote at the origin is described by one-sided limits. As $x$ approaches 0 from the right the sine is positive and tends to zero while the cosine tends to 1, so the function grows without bound,
 
-  * [Indefinite integral](<../indefinite-integrals/>): \\[\int \cot(x) dx = \ln |\sin(x)| + c \\]
+$$\lim_{x \to 0^+} \cot(x) = +\infty$$
 
+while from the left the sine is negative and the values diverge to negative infinity,
 
-##### A comprehensive overview of trigonometric integrals, together with the most useful transformation and substitution techniques for handling more complex cases, is available in the page on [trigonometric function integrals](<../integral-of-trigonometric-functions/>).
+$$\lim_{x \to 0^-} \cot(x) = -\infty$$
 
+The function is continuous and differentiable on its domain. Its derivative is:
 
-  * An alternative form of the function \\( \cot(x) \\) using imaginary numbers is given by Euler’s formula. Here, \\( e^{ix} \\) is the [exponential function](<../exponential-function>) with base \\( e \\) and \\( i \\) is the [imaginary](<../complex-numbers>) unit. By expressing sine and cosine as \\[\sin(x) = \frac{e^{ix} - e^{-ix}}{2i} \quad \text{and} \quad \cos(x) = \frac{e^{ix} + e^{-ix}}{2} \\] we obtain the cotangent function as \\[\cot(x) = \frac{\cos(x)}{\sin(x)} = i \frac{e^{ix} + e^{-ix}}{e^{ix} - e^{-ix}}. \\]
+$$\frac{d}{dx}\cot(x) = -\csc^2(x)$$
+
+The indefinite integral is:
+
+$$\int \cot(x) \ dx = \ln|\sin(x)| + c$$
+
+> A broader treatment of trigonometric integrals, with the transformation and substitution techniques for the more complex cases, is given in trigonometric function integrals.
+
+The cotangent function can also be written using imaginary numbers. With $e^{ix}$ the exponential function of base $e$ and $i$ the imaginary unit, Euler's formula gives:
+
+$$\cot(x) = \frac{i\left(e^{ix} + e^{-ix}\right)}{e^{ix} - e^{-ix}}$$
+
+## Inverse function
+
+On its whole domain the cotangent is not injective, because the period $\pi$ makes it repeat every value in each branch. Restricted to the open interval $\left(0, \pi\right),$ where it is continuous and strictly decreasing, the cotangent is a bijection onto $\mathbb{R}$ and admits an inverse function, the arccotangent:
+
+$$\mathrm{arccot} : \mathbb{R} \to \left(0, \pi\right)$$
+
+On this restricted domain $\mathrm{arccot}(\cot(x)) = x,$ and $\cot(\mathrm{arccot}(y)) = y$ for every real $y.$

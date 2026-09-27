@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Introduction",
+    "section": "Introduction",
+    "subgoals": [
+      "Write cot(x) as cos(x)/sin(x) and read off period pi",
+      "Mark vertical asymptotes where sine vanishes at k*pi",
+      "Descend from +infinity to -infinity on (0, pi) through pi/2"
+    ]
+  },
+  {
+    "label": "Properties",
+    "section": "Properties",
+    "subgoals": [
+      "Exclude k*pi from the domain with range all of R",
+      "Apply oddness cot(-x) = -cot(x) across branches",
+      "Find roots at pi/2 + n*pi and decrease on each (k*pi, pi + k*pi)"
+    ]
+  },
+  {
+    "label": "Limits, derivatives, and integrals of the cotangent function",
+    "section": "Limits, derivatives, and integrals of the cotangent function",
+    "subgoals": [
+      "Take one-sided limits at 0 to get +infinity and -infinity",
+      "Differentiate cot(x) to -csc^2(x) on its domain",
+      "Integrate cot(x) to ln|sin(x)| + c"
+    ]
+  }
+]
