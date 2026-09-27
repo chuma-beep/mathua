@@ -56,7 +56,7 @@ DATABASE_URL=postgres://user:pass@host/mathua ./bin/mathua --serve --port 8080
 cp .env.example .env  # edit JWT_SECRET / CORS_ALLOWED_ORIGINS if needed
 ```
 
-> **Requirements:** Go 1.21+. Python 3.8+ with `sympy` (optional — enables mathematical expression equivalence grading for algebra and beyond).
+> **Requirements:** Go 1.26+ (module targets `go 1.26.6`; CI/Docker build with 1.27). Python 3.11+ with `sympy` (pinned in `grading/requirements.txt`) grades `symbolic`/`polynomial`/`expression`/`complex` answers — **required for those ~32% of concepts**; the production Docker image installs it and fails the build if grading is unavailable. Runs without Python only for the pure-Go grading types.
 >
 > **Env:** `DATABASE_URL` (`sqlite:mathua.db` default, or `postgres://` for production via `pgx` `postgres.go:7` / `main.go:57`), `PORT` (default `8080`), `JWT_SECRET` (hex 32 bytes or raw ≥32 chars — **required in production**, else random per run and tokens invalidate on restart `internal/auth/auth.go:22`), `CORS_ALLOWED_ORIGINS` (comma-separated allowlist, empty = allow all dev; supports `*` wildcard suffix like `https://*.vercel.app` for previews `internal/server/server.go:32`), `ADMIN_PASSWORD` (optional — shared password for the `/admin/reports` login; unset = triage 404s, reporting still works; min 12 chars, 24h sessions). On Fly: `fly secrets set JWT_SECRET=$(openssl rand -hex 32) CORS_ALLOWED_ORIGINS=https://mathua.vercel.app,https://*.vercel.app ADMIN_PASSWORD=$(openssl rand -base64 24)`. See `.env.example`.
 

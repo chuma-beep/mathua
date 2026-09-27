@@ -71,7 +71,7 @@ Quality from: correctness + response time ratio.
 
 ![width:1000](diagrams/system-design-grading-pipeline-dark.svg)
 
-6+ grading strategies dispatched by grading type. SymPy for symbolic math.
+9 grading types: 6 pure-Go graders, SymPy (shipped in the image) for symbolic/polynomial/expression.
 
 ---
 
@@ -85,7 +85,7 @@ Quality from: correctness + response time ratio.
 | **Ordering** | ordering | Positional exact match |
 | **Tuple** | tuple | Comma-separated, positional |
 | **Complex** | complex | Polar form, delegates to SymPy |
-| **Symbolic** | fallback | String normalization |
+| **SymPy** | symbolic, polynomial, expression | Python subprocess; shipped in image, no Go fallback |
 
 ---
 
@@ -105,7 +105,7 @@ stdin:  {"id": "...", "expected": "x^2+2x+1", "answer": "(x+1)^2"}
 stdout: {"id": "...", "correct": true, "feedback": ""}
 ```
 
-10s timeout, 500 char limit. Falls back to Go symbolic grader.
+10s timeout, 500 char limit. SymPy is shipped in the image; no Go fallback.
 
 ---
 
@@ -226,7 +226,7 @@ Repository interface
   │     PRAGMA busy_timeout=5000
   │
   └── PostgresStore (production web)
-        Not yet implemented
+        Implemented (storage/postgres.go)
 ```
 
 Same schema, same interface. Transparent swap via `DATABASE_URL`.

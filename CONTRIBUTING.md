@@ -18,7 +18,7 @@ DATABASE_URL=postgres://... ./mathua --serve --port 8080
 
 The concept graph lives in per-domain files under `data/concepts/`. Generators live in `internal/generator/`. Here are the kinds of contributions that move the needle:
 
-- New concepts — the single most impactful thing you can add. Concepts using `polynomial` or `expression` grading require Python 3.8+ and `sympy` for full equivalence checking (falls back to string comparison if unavailable).
+- New concepts — the single most impactful thing you can add. Concepts using `polynomial`, `expression`, `symbolic`, or `complex` grading are checked for equivalence by a pinned SymPy service (`grading/sympy_service.py`, version in `grading/requirements.txt`) that the production image ships; there is no pure-Go equivalence fallback, so run `go test ./...` and the grader tests with SymPy installed.
 - New generators — make existing or new concepts produce better problems.
 - Bug fixes in the scheduling engine or graders.
 - Documentation and diagram improvements.

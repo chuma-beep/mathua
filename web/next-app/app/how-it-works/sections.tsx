@@ -325,19 +325,20 @@ export function SymbolicGradingSection() {
         <code style={mutedCodeStyle}>(x+2)(x+3)</code>,{' '}
         <code style={mutedCodeStyle}>2x&#178; + 3x - 5</code>{' '}
         where numeric comparison is no longer sufficient. Mathua uses a mixed Go/Python
-        grading system: a Go router dispatches to six grader types, and mathematical
-        equivalence for algebra, calculus, differential equations and trigonometry is
-        handled by a Python subprocess running{' '}
-        <code style={inlineCodeStyle}>sympy</code>.
+        grading system: the router dispatches nine grading types — six pure-Go graders — and
+        mathematical equivalence for algebra, calculus, differential equations and
+        trigonometry is handled by a Python subprocess running{' '}
+        <code style={inlineCodeStyle}>sympy</code>, bundled into the production image.
       </p>
       <p style={bodyStyle}>
         The <code style={inlineCodeStyle}>Router</code> selects the
         grader by <code style={mutedCodeStyle}>grading_type</code>.
-        Concepts with type <code style={mutedCodeStyle}>polynomial</code> or{' '}
+        Concepts with type <code style={mutedCodeStyle}>symbolic</code>,{' '}
+        <code style={mutedCodeStyle}>polynomial</code> or{' '}
         <code style={mutedCodeStyle}>expression</code> route to{' '}
-        <code style={inlineCodeStyle}>sympyGrade()</code>, which
-        spawns a long-lived Python 3 subprocess. If Python or SymPy are not installed, it
-        falls back to a pure-Go string normaliser (symbolic grader).
+        <code style={inlineCodeStyle}>gradeSymPy</code>, which
+        runs a long-lived Python 3 subprocess. The production image installs SymPy
+        (pinned) and fails the build if it cannot grade, so there is no fallback path.
       </p>
       <GradingFlow />
       <pre style={{ ...codeBlockStyle, whiteSpace: 'pre', overflowX: 'auto' }}>
@@ -346,26 +347,29 @@ func (r *Router) Grade(t GradingType, expected, answer string) Result {
     switch t {
     case GradingNumeric:
         return r.numeric.grade(expected, answer)
-    case GradingPolynomial, GradingExpression:
-        return r.sympyGrade(expected, answer)
+    case GradingPolynomial, GradingExpression, GradingSymbolic:
+        return gradeSymPy(expected, answer) // Python subprocess
     case GradingMultipleChoice:
         return r.choice.grade(expected, answer)
     case GradingComparison:
         return r.comparison.grade(expected, answer)
     case GradingOrdering:
         return r.ordering.grade(expected, answer)
+    case GradingTuple:
+        return r.tuple.grade(expected, answer)
+    case GradingComplex:
+        return r.complex.grade(expected, answer)
     }
 }
 
-func (r *Router) sympyGrade(expected, answer string) Result {
-    if r.sympy == nil {
-        var err error
-        r.sympy, err = newSympyGrader()
-        if err != nil {
-            return r.symbolic.grade(expected, answer) // fallback
+// internal/engine/engine.go — a generator may override the router:
+func (e *Engine) gradeAnswer(conceptID, expected, answer string) grader.Result {
+    if gen, err := e.registry.Get(conceptID); err == nil {
+        if gg, ok := gen.(generator.GradedGenerator); ok {
+            return gg.Grade(expected, answer)
         }
     }
-    return r.sympy.grade(expected, answer)
+    return e.gr.Grade(gradingTypeOf(conceptID), expected, answer)
 }`}
       </pre>
       <p style={bodyStyle}>
