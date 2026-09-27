@@ -196,16 +196,18 @@ export default function ArchitecturePage() {
           tuple graders do positional exact matching.
         </p>
         <p style={bodyStyle}>
-          For symbolic math -- polynomial and expression grading -- Mathua spawns a long-lived
-          Python subprocess running SymPy. The Go client sends a JSON pair over stdin; SymPy parses
-          both into expression trees and checks equivalence via simplify(expected - answer) == 0.
-          If Python/SymPy are not installed, grading falls back gracefully to a pure-Go symbolic
-          string normalizer. The subprocess has a 10-second timeout and 500-character input limit.
+          For symbolic math -- symbolic, polynomial and expression grading -- Mathua runs a
+          long-lived Python subprocess with SymPy. The Go client sends a JSON pair over stdin;
+          SymPy parses both into expression trees and checks equivalence via
+          simplify(expected - answer) == 0. Python and SymPy ship in the production image
+          (pinned in grading/requirements.txt) and are verified at image build time, so there
+          is no fallback path. The subprocess has a 10-second timeout and 500-character limit.
         </p>
         <p style={bodyStyle}>
           The complex grader preprocesses polar form, handles plus-minus notation and delegates to
-          SymPy. In total there are 8 grading strategies: numeric, multiple choice, comparison,
-          ordering, tuple, complex, symbolic (fallback) and SymPy (polynomial/expression).
+          SymPy. In total there are nine grading types: numeric, multiple choice, comparison,
+          ordering, tuple and complex (pure Go) plus symbolic, polynomial and expression
+          (SymPy).
         </p>
 
         <div style={calloutStyle}>

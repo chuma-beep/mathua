@@ -18,9 +18,10 @@ Mathua is a single Go binary with a web delivery mode. The engine core serves a 
 │  Mastery Tracking · Scoring                   │
 ├──────────────────────────────────────────────┤
 │  Grading                                       │
-│  Numeric · Choice · Comparison · Ordering (Go)  │
-│  Symbolic (Go) — fallback                       │
-│  Polynomial & Expression → SymPy (Python)       │
+│  Numeric · Choice · Comparison · Ordering ·    │
+│  Tuple · Complex (pure Go)                     │
+│  Symbolic · Polynomial · Expression → SymPy    │
+│  (Python, shipped in the image)                │
 ├──────────────────────────────────────────────┤
 │  Storage                                       │
 │  SQLite (local) · PostgreSQL (web)            │
@@ -44,17 +45,18 @@ The web server exposes a REST API through Go's standard `net/http` package. No e
 - **Mastery & Spaced Repetition** — Tracks mastery via streak and response time. Simplified SM-2 algorithm schedules reviews.
 - **Scoring** — Two scores: lifetime topic score (permanent) and weekly score (resets every Monday).
 
-### Grading — Six strategies
+### Grading — nine types, six Go graders + SymPy
 
-Six grader types handled by a single `Router`:
+The `grading_type` on each concept selects the grader. Nine enum values are dispatched through a single `Router`; six are pure Go, three route to SymPy:
 
 - **Numeric** — integer, float, fraction, mixed number, scientific notation (pure Go).
 - **Choice** — case-insensitive multiple-choice matching.
 - **Comparison** — comparison operators (`>`, `<`, `=`, `>=`, `<=`).
 - **Ordering** — ordered sequences separated by delimiters.
-- **Symbolic** — string normalisation fallback for when SymPy is unavailable.
+- **Tuple** — coordinate/n-tuple parsing.
+- **Complex** — `a + bi` forms.
 
-**Polynomial and Expression** — `polynomial` and `expression` grading types route through a long-lived Python subprocess running `grading/sympy_service.py`. The Go client sends a JSON expression pair over stdin; SymPy parses both into expression trees and tests equivalence via `simplify(expected - answer) == 0`. If Python/SymPy are not installed, grading falls back gracefully to the pure-Go `symbolic` string normaliser.
+**Symbolic, Polynomial, Expression** — routed through a long-lived Python subprocess running `grading/sympy_service.py`. The Go client sends a JSON expression pair over stdin; SymPy parses both into expression trees and tests equivalence (`simplify(expected - answer) == 0`, with expand/factor/trigsimp/radsimp/powsimp and numerical verification). Python and SymPy are **installed in the production image** (pinned in `grading/requirements.txt`) and verified at image build time, so grading is available in production. There is **no pure-Go equivalence fallback** for these types; the router does not use the unused `symbolicGrader`.
 
 ### Storage — SQLite and Postgres
 

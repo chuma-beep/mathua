@@ -33,7 +33,7 @@ Mathua follows a five-layer architecture. All layers are compiled into a single 
 | **UI** | React/Next.js (static export) | Rendering, user interaction, client state |
 | **API** | `net/http` (Go stdlib) | REST endpoints, JWT auth, rate limiting, CORS |
 | **Core Engine** | Go | DAG loading, SM-2 scheduling, problem generation, mastery tracking, scoring, weakness propagation, CAT diagnostic |
-| **Grading** | Go + SymPy (Python subprocess) | 6+ grading strategies dispatched by grading type |
+| **Grading** | Go + SymPy (Python subprocess, shipped in the image) | 9 grading types: 6 pure-Go graders + SymPy for symbolic/polynomial/expression |
 | **Storage** | SQLite (local/dev), PostgreSQL (production) | Persistence via `Repository` interface |
 
 The architecture is streamlined with a single UI delivery method through the REST API.
@@ -301,14 +301,15 @@ The grading system uses a strategy pattern with a central Router that dispatches
 
 | Grader | Grading Types | Implementation |
 |--------|--------------|----------------|
-| **Numeric** | `numeric` | Parses integers, decimals, fractions (`3/4`), mixed numbers (`1 1/2`), scientific notation (`1e2`). Strips commas and leading `+`. Uses `big.Rat` for exact rational arithmetic. Float tolerance `1e-9`. |
+| **Numeric** | `numeric` | Parses integers, decimals, fractions (`3/4`), mixed numbers (`1 1/2`, also the spoken `1 and 1/2`), scientific notation (`1e2`). Strips commas and leading `+`. Uses `big.Rat` for exact rational arithmetic. Float tolerance `1e-9`. Negative mixed numbers subtract their fraction (`-1 1/2` = -1.5). |
 | **Multiple Choice** | `multiple_choice` | Case-insensitive equality + single-letter matching (e.g., `"B"` matches `"Option B"`). |
 | **Comparison** | `comparison` | Operator matching: `>`, `<`, `=`, `>=`, `<=`, `!=`, `==`. |
 | **Ordering** | `ordering` | Splits on whitespace/comma/semicolon/pipe. Positional exact match (order-sensitive). |
 | **Tuple** | `tuple` | Strips parentheses and semicolons, splits on comma. Positional exact match. |
 | **Complex** | `complex` | Preprocesses polar form `r(cos + i sin)`, handles `±`, converts `i` → `I`, delegates to SymPy. |
-| **Symbolic (fallback)** | (various) | String equality after normalizing spaces and `**` → `^`. Used when SymPy is unavailable. |
-| **SymPy** | `polynomial`, `expression` | Long-lived Python subprocess. Sends JSON via stdin, reads JSON from stdout. |
+| **SymPy** | `symbolic`, `polynomial`, `expression` (and `complex`) | Long-lived Python subprocess. Sends JSON via stdin, reads JSON from stdout. |
+
+There is no pure-Go fallback for the SymPy types: the production image installs Python + SymPy from `grading/requirements.txt` and the build fails if grading is unavailable, so this path is always present.
 
 ### SymPy Subprocess Integration
 
@@ -322,7 +323,7 @@ For symbolic math (polynomial simplification, expression equivalence), Mathua sp
 6. **Output**: JSON line on stdout `{id, correct, feedback}`
 7. **Safeguards**: 10-second `SIGALRM` timeout, 500-character input limit, character allowlist
 
-If Python/SymPy are not installed, grading falls back gracefully to the pure-Go symbolic string normalizer.
+The service is bundled into the production image (pinned `grading/requirements.txt`) and self-tested at build time; there is no pure-Go fallback for these types.
 
 ---
 
