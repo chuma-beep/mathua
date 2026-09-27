@@ -12,6 +12,7 @@ import DiagnosticResults from '../../components/DiagnosticResults'
 import Loading from '../../components/Loading'
 import type { DiagnosticProgress, GoalPlanRes } from '../../lib/api'
 import type { AnswerFormat } from '../../lib/answerFormat'
+import ChoiceOptions from '../../components/ChoiceOptions'
 import { domainLabels, type DomainInfo } from './domains'
 import { Input } from '@/components/ui/input'
 
@@ -214,6 +215,7 @@ export function DiagnosticStep({
               <KatexContent className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap break-words">{question}</KatexContent>
             </div>
           </div>
+          <ChoiceOptions question={question} value={answerInput} onPick={onInputChange} disabled={loading || lastResult !== null} />
           <form
             onSubmit={e => { e.preventDefault(); onSubmit() }}
             className="flex flex-col sm:flex-row gap-3 min-w-0"

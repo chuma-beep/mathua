@@ -11,6 +11,7 @@ import SymbolPalette from '../../components/SymbolPalette'
 import ReportButton from '../../components/ReportButton'
 import { startQuizSession, submitQuizAnswer, skipQuizQuestion } from '../../lib/api'
 import { formatForGradingType, type AnswerFormat } from '../../lib/answerFormat'
+import ChoiceOptions from '../../components/ChoiceOptions'
 import SubmitErrorBlock, {
   MAX_SKIPS,
   toSubmitError,
@@ -305,6 +306,7 @@ export default function QuizHost() {
           <div className="bg-mathua-code border border-mathua-border rounded-none p-4 sm:p-6 text-center mb-4">
             <KatexContent className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap break-words">{quizQuestion}</KatexContent>
           </div>
+          <ChoiceOptions question={quizQuestion} value={quizAnswerInput} onPick={setQuizAnswerInput} disabled={loading} />
           {!quizLastResult ? (
             <>
               <form onSubmit={e => { e.preventDefault(); void submitQuizAnswerFn(false) }} className="flex flex-col sm:flex-row gap-3 min-w-0">
