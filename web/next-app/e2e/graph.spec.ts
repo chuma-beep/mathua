@@ -15,7 +15,7 @@ test('graph renders the full fallback concept set', async ({ page }) => {
 test('search selects a concept and syncs the URL param', async ({ page }) => {
   await page.route('**/api/**', route => route.fulfill({ status: 404, body: 'not found' }))
   await page.goto('/graph')
-  // wait for graph shell first (heavy dagre layout for 580 nodes can be slow on CI)
+  // wait for graph shell first
   await expect(page.locator('[data-testid="graph-wrapper"]')).toBeVisible({ timeout: 45_000 })
   await expect(page.locator('.react-flow__node').first()).toBeVisible({ timeout: 45_000 })
   const input = page.locator('input[placeholder="Search concepts…"]')

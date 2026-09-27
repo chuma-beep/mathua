@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState, useEffect, useCallback, useRef } from 'react'
+import { useMemo, useState, useEffect, useCallback, useRef, memo, type MouseEvent as ReactMouseEvent } from 'react'
 import {
   ReactFlow,
   ReactFlowProvider,
@@ -23,6 +23,7 @@ import '@xyflow/react/dist/base.css'
 import Fuse from 'fuse.js'
 import dagre from 'dagre'
 import type { MasteryStatus } from '../lib/graphStatus'
+import { precomputedLayout, type FlowPoint } from '../lib/flowLayout'
 
 export type { MasteryStatus }
 
@@ -42,6 +43,8 @@ interface ConceptGraphFlowProps {
   onNodeSelect?: (id: string) => void
   selectedId?: string | null
   onSelectionChange?: (id: string | null) => void
+  /** When set, mount only this domain plus its one-hop neighbourhood. */
+  focusDomain?: string | null
 }
 
 const STATUS_COLORS: Record<MasteryStatus, string> = {
@@ -82,7 +85,7 @@ type ConceptNodeData = {
 
 type ConceptFlowNode = Node<ConceptNodeData, 'concept'>
 
-function ConceptNode({ id, data }: NodeProps<ConceptFlowNode>) {
+const ConceptNode = memo(function ConceptNode({ id, data }: NodeProps<ConceptFlowNode>) {
   const statusColor = STATUS_COLORS[data.status] ?? STATUS_COLORS.unseen
   const pulseClass =
     data.status === 'mastered'
@@ -190,7 +193,7 @@ function ConceptNode({ id, data }: NodeProps<ConceptFlowNode>) {
       </div>
     </div>
   )
-}
+})
 
 const nodeTypes = { concept: ConceptNode }
 
@@ -201,7 +204,7 @@ type FlowEdgeData = {
 
 type ConceptFlowEdge = Edge<FlowEdgeData, 'flowedge'>
 
-function FlowEdge({ sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition, data, markerEnd }: EdgeProps<ConceptFlowEdge>) {
+const FlowEdge = memo(function FlowEdge({ sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition, data, markerEnd }: EdgeProps<ConceptFlowEdge>) {
   const [path] = getSmoothStepPath({
     sourceX,
     sourceY,
@@ -224,11 +227,22 @@ function FlowEdge({ sourceX, sourceY, targetX, targetY, sourcePosition, targetPo
       }}
     />
   )
-}
+})
 
 const edgeTypes = { flowedge: FlowEdge }
 
-function layoutWithDagre(concepts: GraphConcept[]): Map<string, { x: number; y: number }> {
+// Stable object identities: React Flow re-renders on new prop references, so
+// these must not be recreated per render (see React Flow performance guide).
+const DEFAULT_EDGE_OPTIONS = { type: 'flowedge' as const }
+const FIT_VIEW_OPTIONS = { padding: 0.15, maxZoom: 1 }
+const MINIMAP_STYLE = { background: 'var(--surface-elevated)' }
+const CONTROLS_STYLE = {
+  background: 'var(--surface-elevated)',
+  borderColor: 'var(--border)',
+  color: 'var(--text-primary)',
+}
+
+function layoutWithDagre(concepts: GraphConcept[]): Map<string, FlowPoint> {
   const g = new dagre.graphlib.Graph()
   g.setGraph({ rankdir: 'LR', nodesep: 16, ranksep: 70, marginx: 20, marginy: 20 })
   g.setDefaultEdgeLabel(() => ({}))
@@ -241,6 +255,7 @@ function layoutWithDagre(concepts: GraphConcept[]): Map<string, { x: number; y: 
   }
   dagre.layout(g)
 
+  const byId = new Map(concepts.map(c => [c.id, c]))
   const domainOrder: string[] = []
   const seenDomains = new Set<string>()
   for (const c of concepts) {
@@ -259,18 +274,18 @@ function layoutWithDagre(concepts: GraphConcept[]): Map<string, { x: number; y: 
     byRank.get(rank)!.push(c.id)
   }
 
-  const positions = new Map<string, { x: number; y: number }>()
-  byRank.forEach((ids) => {
+  const positions = new Map<string, FlowPoint>()
+  byRank.forEach(ids => {
     ids.sort((a, b) => {
-      const ca = concepts.find(x => x.id === a)!
-      const cb = concepts.find(x => x.id === b)!
+      const ca = byId.get(a)!
+      const cb = byId.get(b)!
       const d = domainOrder.indexOf(ca.domain) - domainOrder.indexOf(cb.domain)
       return d !== 0 ? d : ca.label.localeCompare(cb.label)
     })
     let prevDomain: string | null = null
     let y = 0
     for (const id of ids) {
-      const c = concepts.find(x => x.id === id)!
+      const c = byId.get(id)!
       if (prevDomain !== null && c.domain !== prevDomain) y += 28
       positions.set(id, { x: g.node(id).x - 90, y })
       prevDomain = c.domain
@@ -299,19 +314,21 @@ function SearchOverlay({
 
   const fuse = useMemo(
     () =>
-      new Fuse(concepts, {
-        keys: [
-          { name: 'label', weight: 2 },
-          { name: 'domain', weight: 1 },
-        ],
-        threshold: 0.4,
-        minMatchCharLength: 2,
-      }),
-    [concepts]
+      open
+        ? new Fuse(concepts, {
+            keys: [
+              { name: 'label', weight: 2 },
+              { name: 'domain', weight: 1 },
+            ],
+            threshold: 0.4,
+            minMatchCharLength: 2,
+          })
+        : null,
+    [concepts, open]
   )
 
   const results = useMemo<SearchResult[]>(() => {
-    if (!query.trim()) return []
+    if (!fuse || !query.trim()) return []
     return fuse
       .search(query.trim())
       .slice(0, 8)
@@ -624,6 +641,7 @@ function GraphInner({
   onNodeSelect,
   selectedId,
   onSelectionChange,
+  focusDomain = null,
 }: ConceptGraphFlowProps) {
   const [isMobile, setIsMobile] = useState(false)
   const [internalSelected, setInternalSelected] = useState<string | null>(selectedId ?? null)
@@ -798,32 +816,89 @@ function GraphInner({
     return { upstream, downstream }
   }, [effectiveSelected, conceptById, dependentsMap])
 
-  const layout = useMemo(() => layoutWithDagre(concepts), [concepts])
+  const layout = useMemo(
+    () => precomputedLayout(concepts.map(c => c.id)) ?? layoutWithDagre(concepts),
+    [concepts]
+  )
+
+  // Mounted set: when a domain is focused, render that domain plus its one-hop
+  // prerequisite/dependent neighbourhood. null means "everything".
+  const mountedIds = useMemo(() => {
+    if (!focusDomain) return null
+    // Freeze the member set first: neighbours are computed from members only,
+    // so the one-hop boundary never chains into two hops.
+    const memberIds = new Set<string>()
+    for (const c of concepts) {
+      if (c.domain === focusDomain) memberIds.add(c.id)
+    }
+    const ids = new Set(memberIds)
+    for (const c of concepts) {
+      if (c.domain !== focusDomain) continue
+      for (const p of c.prerequisites) {
+        if (conceptById.has(p)) ids.add(p)
+      }
+    }
+    for (const [pid, deps] of dependentsMap) {
+      if (!memberIds.has(pid)) continue
+      for (const d of deps) {
+        if (conceptById.has(d)) ids.add(d)
+      }
+    }
+    // A deep-linked or selected concept must stay visible even when it falls
+    // outside the focused domain, along with its direct context.
+    if (effectiveSelected) {
+      ids.add(effectiveSelected)
+      for (const p of conceptById.get(effectiveSelected)?.prerequisites ?? []) {
+        if (conceptById.has(p)) ids.add(p)
+      }
+      for (const d of dependentsMap.get(effectiveSelected) ?? []) {
+        if (conceptById.has(d)) ids.add(d)
+      }
+    }
+    return ids
+  }, [focusDomain, concepts, conceptById, dependentsMap, effectiveSelected])
+
+  const onPathSet = useMemo(() => (onPathNodes ? new Set(onPathNodes) : null), [onPathNodes])
+
+  // Reuse previous node/edge objects when their rendered fields are unchanged,
+  // so selecting a concept only re-renders the nodes/edges that actually
+  // change (React Flow skips identical references).
+  const prevNodesRef = useRef(new Map<string, { key: string; node: ConceptFlowNode }>())
 
   const flowNodes = useMemo<ConceptFlowNode[]>(() => {
-    return concepts.map(c => {
+    const cache = prevNodesRef.current
+    const next = new Map<string, { key: string; node: ConceptFlowNode }>()
+    const out: ConceptFlowNode[] = []
+    for (const c of concepts) {
+      if (mountedIds && !mountedIds.has(c.id)) continue
       const inNeighborhood =
         !neighborhood ||
         c.id === effectiveSelected ||
         neighborhood.upstream.has(c.id) ||
         neighborhood.downstream.has(c.id)
-      return {
-        id: c.id,
-        type: 'concept' as const,
-        position: layout.get(c.id) ?? { x: 0, y: 0 },
-        data: {
-          label: c.label,
-          domain: c.domain,
-          status: conceptStatuses?.[c.id] ?? 'unseen',
-          progress: conceptProgress?.[c.id],
-          onPath: onPathNodes?.includes(c.id) ?? false,
-          dimmed: !inNeighborhood,
-          selected: c.id === effectiveSelected,
-          onSelect: select,
-        },
+      const position = layout.get(c.id) ?? { x: 0, y: 0 }
+      const data: ConceptNodeData = {
+        label: c.label,
+        domain: c.domain,
+        status: conceptStatuses?.[c.id] ?? 'unseen',
+        progress: conceptProgress?.[c.id],
+        onPath: onPathSet?.has(c.id) ?? false,
+        dimmed: !inNeighborhood,
+        selected: c.id === effectiveSelected,
+        onSelect: select,
       }
-    })
-  }, [concepts, conceptStatuses, conceptProgress, onPathNodes, neighborhood, effectiveSelected, layout, select])
+      const key = `${position.x},${position.y}|${data.status}|${data.progress ?? ''}|${data.onPath ? 1 : 0}|${data.dimmed ? 1 : 0}|${data.selected ? 1 : 0}`
+      const prev = cache.get(c.id)
+      const node: ConceptFlowNode =
+        prev && prev.key === key
+          ? prev.node
+          : { id: c.id, type: 'concept' as const, position, data }
+      out.push(node)
+      next.set(c.id, { key, node })
+    }
+    prevNodesRef.current = next
+    return out
+  }, [concepts, conceptStatuses, conceptProgress, mountedIds, onPathSet, neighborhood, effectiveSelected, layout, select])
 
   const knownIds = useMemo(() => new Set(concepts.map(c => c.id)), [concepts])
 
@@ -837,25 +912,41 @@ function GraphInner({
     return list
   }, [concepts, knownIds])
 
+  const prevEdgesRef = useRef(new Map<string, { key: string; edge: ConceptFlowEdge }>())
+
   const flowEdges = useMemo<ConceptFlowEdge[]>(() => {
-    return allEdgesList.map(({ source, target }) => {
+    const cache = prevEdgesRef.current
+    const next = new Map<string, { key: string; edge: ConceptFlowEdge }>()
+    const out: ConceptFlowEdge[] = []
+    for (const { source, target } of allEdgesList) {
+      if (mountedIds && (!mountedIds.has(source) || !mountedIds.has(target))) continue
       const highlighted = !!effectiveSelected && (source === effectiveSelected || target === effectiveSelected)
       const variant: FlowEdgeData['variant'] = highlighted
         ? 'flow'
         : ambientActive
           ? 'ambient'
           : 'plain'
-      return {
-        id: `${source}->${target}`,
-        source,
-        target,
-        type: 'flowedge' as const,
-        data: { variant, highlighted },
-        zIndex: highlighted ? 1 : 0,
-        markerEnd: highlighted ? { type: MarkerType.ArrowClosed, width: 12, height: 12 } : undefined,
-      }
-    })
-  }, [allEdgesList, effectiveSelected, ambientActive])
+      const id = `${source}->${target}`
+      const key = `${variant}|${highlighted ? 1 : 0}`
+      const prev = cache.get(id)
+      const edge: ConceptFlowEdge =
+        prev && prev.key === key
+          ? prev.edge
+          : {
+              id,
+              source,
+              target,
+              type: 'flowedge' as const,
+              data: { variant, highlighted },
+              zIndex: highlighted ? 1 : 0,
+              markerEnd: highlighted ? { type: MarkerType.ArrowClosed, width: 12, height: 12 } : undefined,
+            }
+      out.push(edge)
+      next.set(id, { key, edge })
+    }
+    prevEdgesRef.current = next
+    return out
+  }, [allEdgesList, mountedIds, effectiveSelected, ambientActive])
 
   useEffect(() => {
     if (!effectiveSelected || isMobile) return
@@ -867,6 +958,28 @@ function GraphInner({
   const handlePaneClick = useCallback(() => {
     select(null)
   }, [select])
+
+  const handleNodeClick = useCallback(
+    (_: ReactMouseEvent, node: ConceptFlowNode) => select(node.id),
+    [select]
+  )
+
+  const minimapNodeColor = useCallback((node: Node) => {
+    const n = node as ConceptFlowNode
+    return STATUS_COLORS[n.data?.status] ?? STATUS_COLORS.unseen
+  }, [])
+
+  // Re-fit when the mounted set changes (domain focus), but not on first paint
+  // — React Flow's fitView prop already handles the initial view.
+  const firstFocusRef = useRef(true)
+  useEffect(() => {
+    if (firstFocusRef.current) {
+      firstFocusRef.current = false
+      return
+    }
+    const raf = requestAnimationFrame(() => fitView({ ...FIT_VIEW_OPTIONS, duration: 300 }))
+    return () => cancelAnimationFrame(raf)
+  }, [focusDomain, fitView])
 
   const toggleAmbient = useCallback(() => {
     setAmbientOn(prev => {
@@ -935,12 +1048,12 @@ function GraphInner({
           edges={flowEdges}
           nodeTypes={nodeTypes}
           edgeTypes={edgeTypes}
-          onNodeClick={(_, node) => select(node.id)}
+          onNodeClick={handleNodeClick}
           onPaneClick={handlePaneClick}
           onSelectionChange={handleRFSelectionChange}
-          defaultEdgeOptions={{ type: 'flowedge' }}
+          defaultEdgeOptions={DEFAULT_EDGE_OPTIONS}
           fitView
-          fitViewOptions={{ padding: 0.15, maxZoom: 1 }}
+          fitViewOptions={FIT_VIEW_OPTIONS}
           minZoom={0.03}
           maxZoom={2.5}
           onlyRenderVisibleElements
@@ -955,27 +1068,16 @@ function GraphInner({
             size={1}
             color={theme === 'dark' ? '#2a2a30' : '#d4d4d8'}
           />
-          <Controls
-            showInteractive={false}
-            style={{ background: 'var(--surface-elevated)', borderColor: 'var(--border)', color: 'var(--text-primary)' }}
-          />
+          <Controls showInteractive={false} style={CONTROLS_STYLE} />
           <MiniMap
             pannable
             zoomable
             maskColor={theme === 'dark' ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.6)'}
-            style={{ background: 'var(--surface-elevated)' }}
-            nodeColor={node => {
-              const n = node as ConceptFlowNode
-              return STATUS_COLORS[n.data?.status] ?? STATUS_COLORS.unseen
-            }}
+            style={MINIMAP_STYLE}
+            nodeColor={minimapNodeColor}
           />
         </ReactFlow>
-        <SearchOverlay
-          concepts={concepts}
-          onSelect={id => {
-            select(id)
-          }}
-        />
+        <SearchOverlay concepts={concepts} onSelect={select} />
         <ListToggleButton open={listOpen} onToggle={() => setListOpen(o => !o)} />
         {listOpen && (
           <ListView
