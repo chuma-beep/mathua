@@ -24,7 +24,7 @@ export function formatForGradingType(gradingType?: string): AnswerFormat {
     case 'ordering':
       return { hint: 'Answer in order, separated by commas', inputMode: 'text' }
     case 'tuple':
-      return { hint: 'Answer as a pair, e.g. (2, 3)', inputMode: 'text' }
+      return { hint: 'Separate values with commas, e.g. 2, 3 or (2, 3)', inputMode: 'text' }
     case 'complex':
       return { hint: 'Answer as a + bi', inputMode: 'text' }
     default:
