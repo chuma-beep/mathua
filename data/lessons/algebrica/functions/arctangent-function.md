@@ -123,7 +123,10 @@ $$\sum_{n=0}^{\infty} \frac{(-1)^n}{2n+1} = 1 - \frac{1}{3} + \frac{1}{5} - \fra
 
 By oddness, the series also converges at $x = -1,$ where its sum is $-\pi/4.$ Its interval of convergence is therefore $[-1, 1].$ By the alternating-series estimate, the error after the term of index $N$ is smaller in absolute value than the first term omitted:
 
-$$\dfrac{1}{2N+3}$$If
+$$\dfrac{1}{2N+3}$$
+
+If
+
 $$\pi_N = 4\sum_{n=0}^{N}\dfrac{(-1)^n}{2n+1}$$
 
 then

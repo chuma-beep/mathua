@@ -7190,14 +7190,14 @@
  },
  {
   "file": "data/lessons/algebrica/functions/arctangent-function.md",
-  "line": 127,
+  "line": 130,
   "verdict": "SKIP",
   "reason": "solve-for (not an identity)",
   "latex": "\\pi_N = 4\\sum_{n=0}^{N}\\dfrac{(-1)^n}{2n+1}"
  },
  {
   "file": "data/lessons/algebrica/functions/arctangent-function.md",
-  "line": 131,
+  "line": 134,
   "verdict": "SKIP",
   "reason": "parse: Exception",
   "latex": "|\\pi - \\pi_N| < \\dfrac{4}{2N+3}"
