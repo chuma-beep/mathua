@@ -52,11 +52,11 @@ $$ a_n = \sum_{k=0}^{n} \frac{1}{k!} \prod_{j=0}^{k-1} \left(1 - \frac{j}{n}\rig
 
 15.It remains to show that the sequence is bounded. Since $a_1 = 2$ and the sequence is strictly increasing, we have $a_n > 2$ for all $n \geq 1$. It therefore suffices to establish an upper bound. We claim that $a_n < 3$ for all $n \in \mathbb{N}$.
 
-16.Starting from the expansion derived in the previous section, and observing that each factor $\left(1 - \frac{j}{n}\right)$ is at most $1$, we obtain the following estimate:
+16.Starting from the expansion derived in the previous section, and observing that each factor $\left(1 - \frac{j}{n}\right)$ is at most 1, we obtain the following estimate:
 
 $$ a_n = \sum_{k=0}^{n} \frac{1}{k!} \prod_{j=0}^{k-1} \left(1 - \frac{j}{n}\right) < \sum_{k=0}^{n} \frac{1}{k!} $$
 
-17.To bound this sum from above, we use the inequality $k! \geq 2^{k-1}$, which holds for all $k \geq 1$ and follows from the fact that each of the $k-1$ factors in $2 \cdot 3 \cdots k$ is at least $2$. This gives:
+17.To bound this sum from above, we use the inequality $k! \geq 2^{k-1}$, which holds for all $k \geq 1$ and follows from the fact that each of the $k-1$ factors in $2 \cdot 3 \cdots k$ is at least 2. This gives:
 
 $$ \sum_{k=0}^{n} \frac{1}{k!} \leq 1 + \sum_{k=1}^{n} \frac{1}{2^{k-1}} = 1 + \sum_{k=0}^{n-1} \frac{1}{2^k} $$
 

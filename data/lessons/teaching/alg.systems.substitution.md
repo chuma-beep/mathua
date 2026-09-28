@@ -8,7 +8,7 @@ when one equation already isolates a variable — or isolates one cheaply.
 ## Isolate one variable
 
 Pick the equation where a variable stands almost alone: a lone \(x\), a lone
-\(y\), or anything with coefficient \(1\) or \(-1\). Solve that equation for
+\(y\), or anything with coefficient 1 or -1. Solve that equation for
 the variable, keeping the expression exact. For \(x + 2y = 7\), isolating
 \(x\) gives \(x = 7 - 2y\). Do not round or approximate; the expression must
 stay exact to feed the next step.
