@@ -1824,5 +1824,25 @@
   "source": "algebrica",
   "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/functions/svg/gaussian-function-1.svg",
   "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/euler-number-limit-sequence-1.svg": {
+  "concepts": [
+   "calc.seq.euler"
+  ],
+  "title": "Euler number as a limit of a sequence",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/sequences/svg/euler-number-limit-sequence-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
+ },
+ "/diagrams/algebrica/trigonometric-inequalities-1.svg": {
+  "concepts": [
+   "trig.ineq.basic"
+  ],
+  "title": "Trigonometric inequalities",
+  "description": "",
+  "source": "algebrica",
+  "upstream": "https://github.com/antoniolupetti/algebrica/blob/main/inequalities/svg/trigonometric-inequalities-1.svg",
+  "license": "CC BY-NC 4.0 (Antonio Lupetti / Algebrica) \u2014 modification with attribution"
  }
 }

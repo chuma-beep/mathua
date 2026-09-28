@@ -128,12 +128,12 @@ def clean_markdown(md):
     return md.strip() + "\n"
 
 
-def scrape_entry(entry_url, cat_dir):
+def scrape_entry(entry_url, cat_dir, overwrite=False):
     slug = slug_from_url(entry_url)
     fname = slug + ".md"
     fpath = os.path.join(cat_dir, fname)
 
-    if os.path.exists(fpath):
+    if os.path.exists(fpath) and not overwrite:
         print(f"  SKIP (exists): {slug}")
         return
 

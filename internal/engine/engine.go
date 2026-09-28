@@ -730,6 +730,7 @@ var conceptDiagrams = map[string]string{
 	"alg.quad.complex":           "/diagrams/algebrica/quad-eq-complex-roots.png",
 	"alg.quad.parametric":        "/diagrams/algebrica/quadratic-equations-params-6.png",
 	"trig.eq.basic":              "/diagrams/algebrica/trigonometric-equations-1.png",
+	"trig.ineq.basic":            "/diagrams/algebrica/trigonometric-inequalities-1.svg",
 
 	// Calculus (G3)
 	"calc.limit.asymptotes":            "/diagrams/algebrica/asymptotes-1.svg",
@@ -745,6 +746,7 @@ var conceptDiagrams = map[string]string{
 	"calc.deriv.applications":          "/diagrams/algebrica/velocity-1-1.png",
 	"calc.seq.convergence":             "/diagrams/algebrica/sequences-conv-1.png",
 	"calc.seq.cauchy":                  "/diagrams/algebrica/cauchy-sequence-1.svg",
+	"calc.seq.euler":                   "/diagrams/algebrica/euler-number-limit-sequence-1.svg",
 	"calc.series.harmonic":             "/diagrams/algebrica/harmonic-series-1-2.png",
 	"calc.series.function_series":      "/diagrams/algebrica/sequence-functions-1.png",
 	"calc.series.cauchy_criterion":     "/diagrams/algebrica/series-cauchy-1.png",

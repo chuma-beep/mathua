@@ -1,29 +1,29 @@
 [
   {
-    "label": "Consistency criterion",
-    "section": "Statement of the theorem",
+    "label": "Row operations",
+    "section": "What is Gaussian elimination",
     "subgoals": [
-      "Compute the rank",
-      "Compare with the augmented rank",
-      "Decide consistency"
+      "Write the augmented matrix",
+      "Swap, scale, and add rows",
+      "Aim for one variable fewer per step"
     ]
   },
   {
-    "label": "Geometric interpretation",
-    "section": "Geometric interpretation",
+    "label": "Eliminate in order",
+    "section": "The process involves the following steps:",
     "subgoals": [
-      "Interpret rows as lines",
-      "See intersections",
-      "Classify the solutions"
+      "Clear x_1 below the first row",
+      "Clear x_2 below the second row",
+      "Back-substitute from the last row"
     ]
   },
   {
-    "label": "Parametric systems",
-    "section": "Discussion of a parametric system",
+    "label": "Worked 3x3 system",
+    "section": "Example",
     "subgoals": [
-      "Eliminate one variable",
-      "Solve for the other",
-      "State the parameter range"
+      "Read the triangular form",
+      "Solve for the last variable first",
+      "Substitute back up the rows"
     ]
   }
 ]

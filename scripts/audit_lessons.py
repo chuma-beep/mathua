@@ -241,8 +241,11 @@ def main():
         except Exception as e:
             errors.append(f"enrichment audit failed: {e}")
 
-    # 10. Stub lessons: teaching/ sources too short to carry a worked
-    # example (template cluster: <=12 non-blank lines). Ratcheted against
+    # 10. Stub lessons: files too short to teach, plus files carrying
+    # generator/SEO boilerplate without a body ("shown in the conceptual map"
+    # with ~30 words, or teaching placeholders with the concept id in the
+    # prose). Scans teaching/** recursively (placeholders hid in
+    # teaching/fractions/) and algebrica/. Ratcheted against
     # scripts/audit_baseline.json — waves shrink it to empty; new stubs fail.
     # 11. Placeholder KP subgoals: generic "Review X / Work the example /
     # Verify" filler instead of moves naming the actual computation.
@@ -252,14 +255,42 @@ def main():
     except Exception:
         baseline = {}
     stub_now, ph_now = [], []
+    STUB_SIGNS = (
+        "shown in the conceptual map",
+        "Word problem introduction for",
+        "Strategy for solving",
+        "Practice problems for",
+    )
+
+    def prose_words(path):
+        words = 0
+        with open(path, encoding="utf-8") as f:
+            for line in f:
+                s = line.strip()
+                if not s or s.startswith(">"):
+                    continue
+                words += len(re.findall(r"[A-Za-z]{2,}", s))
+        return words
+
     if os.path.isdir(LESSONS):
-        for name in sorted(os.listdir(os.path.join(LESSONS, "teaching"))):
-            if not name.endswith(".md"):
+        for root, _dirs, files in os.walk(LESSONS):
+            if "kp" in root.split(os.sep):
                 continue
-            p = os.path.join(LESSONS, "teaching", name)
-            n = sum(1 for line in open(p, encoding="utf-8") if line.strip())
-            if n <= 12:
-                stub_now.append(f"teaching/{name}")
+            for name in sorted(files):
+                if not name.endswith(".md"):
+                    continue
+                p = os.path.join(root, name)
+                try:
+                    with open(p, encoding="utf-8") as f:
+                        text = f.read()
+                except OSError:
+                    continue
+                n = prose_words(p)
+                sig = any(sig in text for sig in STUB_SIGNS)
+                # Word-count gate plus signature: full lessons that merely quote
+                # the phrase run 800+ words and are excluded by the n < 200 arm.
+                if (sig and n < 200) or n < 40:
+                    stub_now.append(os.path.relpath(p, LESSONS))
     kp_dir = os.path.join(LESSONS, "kp")
     if os.path.isdir(kp_dir):
         for name in sorted(os.listdir(kp_dir)):
