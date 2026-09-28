@@ -271,3 +271,26 @@ func TestCanonicalizeCurrencyPairs(t *testing.T) {
 		t.Errorf("math/currency mix wrong: %q", got2)
 	}
 }
+
+func TestCanonicalizeFactorialAndListsAreMath(t *testing.T) {
+	// Factorials are math, never currency — even though 7! matches the
+	// trailing-punctuation shape of an excited price.
+	for _, in := range []string{
+		`Consider the ratio between \\(7!\\) and \\(4!\\).`,
+		`oval has $750!$ flowers`,
+	} {
+		got := Canonicalize(in, Algebrica)
+		if strings.Contains(got, `\$`) {
+			t.Errorf("factorial escaped as prose: %q -> %q", in, got)
+		}
+	}
+	// Letterless comma lists are math; wordy prose pairings stay escaped.
+	got := Canonicalize(`Choosing the objects \\(1, 2, 3\\) is fine.`, Algebrica)
+	if strings.Contains(got, `\$`) {
+		t.Errorf("comma list escaped as prose: %q", got)
+	}
+	got = Canonicalize(`costs $5, saves $10 and pays $20 total`, ORCCA)
+	if !strings.Contains(got, `\$5,`) {
+		t.Errorf("prose pairing must stay escaped: %q", got)
+	}
+}
