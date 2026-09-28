@@ -1,15 +1,20 @@
 import type { Metadata, Viewport } from 'next'
 import Script from 'next/script'
-import { JetBrains_Mono, Space_Grotesk } from 'next/font/google'
+import localFont from 'next/font/local'
 import { Toaster } from '@/components/ui/sonner'
 import ServiceWorkerRegistrar from '@/components/ServiceWorkerRegistrar'
 import { SITE_URL } from '@/lib/site'
 import './globals.css'
 
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500'],
-  style: ['normal', 'italic'],
+// Self-hosted variable fonts (vendored from Google Fonts 2026-09-28:
+// JetBrains Mono v24 + Space Grotesk v22, latin subsets). next/font/google
+// fetches at build time and fails the build without network — vendoring
+// keeps Vercel/Docker builds hermetic.
+const jetbrainsMono = localFont({
+  src: [
+    { path: './fonts/jetbrains-mono-latin-normal.woff2', weight: '400 500', style: 'normal' },
+    { path: './fonts/jetbrains-mono-latin-italic.woff2', weight: '400 500', style: 'italic' },
+  ],
   display: 'swap',
   // Only the faces a page actually renders are fetched; preloading the
   // families costs ~105KB on the landing page.
@@ -18,9 +23,8 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 // Space Grotesk ships no italic face — only normal weights are requested.
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  weight: ['400', '500', '700'],
+const spaceGrotesk = localFont({
+  src: [{ path: './fonts/space-grotesk-latin.woff2', weight: '400 500 700', style: 'normal' }],
   display: 'swap',
   preload: false,
   variable: '--font-space-grotesk',
