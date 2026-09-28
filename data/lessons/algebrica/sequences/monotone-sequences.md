@@ -42,7 +42,7 @@ $$ \lim_{n \to \infty} a_n = \inf\\\\{a_n : n \in \mathbb{N}\\\\} $$
 
 $$ a_n = 1 - \frac{1}{n} $$
 
-13.Each term satisfies $a_n < a_{n+1}$, since subtracting a smaller quantity from $1$ yields a larger result as $n$ increases. The sequence is therefore strictly increasing. It is also bounded above by $1$, since $a_n < 1$ for every finite $n$. By the monotone convergence theorem, the sequence converges, and its limit equals the supremum of its range.
+13.Each term satisfies $a_n < a_{n+1}$, since subtracting a smaller quantity from 1 yields a larger result as $n$ increases. The sequence is therefore strictly increasing. It is also bounded above by 1, since $a_n < 1$ for every finite $n$. By the monotone convergence theorem, the sequence converges, and its limit equals the supremum of its range.
 
 $$ \lim_{n \to \infty} \left(1 - \frac{1}{n}\right) = 1 $$
 

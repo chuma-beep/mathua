@@ -156,7 +156,7 @@ $$\frac{\pi}{6} + 2n\pi < 2x - \frac{\pi}{3} < \frac{5\pi}{6} + 2n\pi$$
 
 $$\frac{\pi}{2} + 2n\pi < 2x < \frac{7\pi}{6} + 2n\pi$$
 
-37.Dividing every term by $2$, which scales all expressions uniformly without altering the direction of the inequalities, one obtains the following.
+37.Dividing every term by 2, which scales all expressions uniformly without altering the direction of the inequalities, one obtains the following.
 
 $$\frac{\pi}{4} + n\pi < x < \frac{7\pi}{12} + n\pi$$
 
@@ -211,7 +211,7 @@ $$\pi + 2n\pi < x < 2\pi + 2n\pi, \quad x \neq \frac{3\pi}{2} + 2n\pi, \quad n \
 
 $$\sin^2 x - \sin x \cos x < 0$$
 
-50.Dividing by $\cos^2 x$ converts a homogeneous inequality of degree two into an inequality in $\tan x$ alone. Since $\cos^2 x > 0$ wherever $\cos x \neq 0$, the division preserves the direction of the inequality on each branch of the tangent. The points where $\cos x = 0$, namely $x = \pi/2 + n\pi$, must be examined separately, because there the division is not permitted. At these points $\sin^2 x = 1$ and $\sin x \cos x = 0$, so the left-hand side equals $1$ and the strict inequality fails; these points are therefore not solutions and can be excluded from the outset.
+50.Dividing by $\cos^2 x$ converts a homogeneous inequality of degree two into an inequality in $\tan x$ alone. Since $\cos^2 x > 0$ wherever $\cos x \neq 0$, the division preserves the direction of the inequality on each branch of the tangent. The points where $\cos x = 0$, namely $x = \pi/2 + n\pi$, must be examined separately, because there the division is not permitted. At these points $\sin^2 x = 1$ and $\sin x \cos x = 0$, so the left-hand side equals 1 and the strict inequality fails; these points are therefore not solutions and can be excluded from the outset.
 
 51.Dividing through by $\cos^2 x$, the inequality becomes the following.
 
