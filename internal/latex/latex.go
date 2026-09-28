@@ -146,10 +146,14 @@ func repairBraces(s string) string {
 // rawDollarRe finds a dollar not already escaped (no backslash before it).
 var rawDollarRe = regexp.MustCompile(`(^|[^\\])\$`)
 
-// hasDigitRe / proseMathMarkerRe support the Inline prose-shape rule.
+// hasDigitRe / proseMathMarkerRe / hasLetterRe support the Inline prose-shape
+// rule. `!` is a marker because factorials (7!) are math, never currency —
+// the worst case for an excited price ($5!) is rendering as math "5!", which
+// is visually identical, instead of leaking literal "$5!$" text.
 var (
 	hasDigitRe        = regexp.MustCompile(`\d`)
-	proseMathMarkerRe = regexp.MustCompile(`[\\^_{}\[\]+\-=*/<>()]`)
+	proseMathMarkerRe = regexp.MustCompile(`[\\^_{}\[\]+\-=*/<>()!]`)
+	hasLetterRe       = regexp.MustCompile(`[A-Za-z]`)
 )
 
 // escapeDollars escapes every unescaped dollar in a Prose region. Already
@@ -287,12 +291,15 @@ func canonicalizeOnce(s string, a Adapter) string {
 		case latexnorm.Inline:
 			// A scanner-validated pair can still be prose: word-problem
 			// prices ($5, saves $10) pair on one line but carry no math
-			// markers. Digits + no markers + (pure numeric or containing a
-			// space) means currency/prose; anything else is math.
+			// markers. Digits + no markers + pure numeric means
+			// currency/prose; a space only counts when the span also has a
+			// letter, so letterless lists (1, 2, 3) and factorial-adjacent
+			// text stay math. Anything else is math.
 			content := r.Content
 			if hasDigitRe.MatchString(content) &&
 				!proseMathMarkerRe.MatchString(content) &&
-				(pureCurrencyRe.MatchString(content) || strings.Contains(content, " ")) {
+				(pureCurrencyRe.MatchString(content) ||
+					(strings.Contains(content, " ") && hasLetterRe.MatchString(content))) {
 				b.WriteString(`\$` + content + `\$`)
 				continue
 			}
