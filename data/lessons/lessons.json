@@ -349,7 +349,7 @@
   },
   {
     "concept_id": "alg.systems.elimination",
-    "source": "algebrica/linear-systems/rouche-capelli-theorem.md"
+    "source": "algebrica/linear-systems/solving-linear-systems-using-gaussian-elimination.md"
   },
   {
     "concept_id": "alg.systems.gaussian",
@@ -357,7 +357,7 @@
   },
   {
     "concept_id": "alg.systems.substitution",
-    "source": "algebrica/linear-systems/rouche-capelli-theorem.md"
+    "source": "teaching/alg.systems.substitution.md"
   },
   {
     "concept_id": "alg.systems.word",

@@ -1,29 +1,29 @@
 [
   {
-    "label": "Consistency criterion",
-    "section": "Statement of the theorem",
+    "label": "Isolate a variable",
+    "section": "Isolate one variable",
     "subgoals": [
-      "Check system consistency",
-      "Decide the solution type",
-      "Prepare the method"
+      "Pick the equation with a lone variable",
+      "Solve for it keeping the expression exact",
+      "Prefer coefficient 1 or -1"
     ]
   },
   {
-    "label": "Geometric interpretation",
-    "section": "Geometric interpretation",
+    "label": "Substitute and solve",
+    "section": "Substitute and solve",
     "subgoals": [
-      "Read rows as lines",
-      "Find the intersection",
-      "Verify the point"
+      "Replace the variable in the other equation",
+      "Solve the one-variable equation",
+      "Back-substitute for the remaining variable"
     ]
   },
   {
-    "label": "Solve by substitution",
-    "section": "",
+    "label": "Check the pair",
+    "section": "Check in both equations",
     "subgoals": [
-      "Solve one equation for a variable",
-      "Substitute into the other",
-      "Back-substitute"
+      "Test the pair in the first equation",
+      "Test the pair in the second equation",
+      "Rework the same steps on a failed check"
     ]
   }
 ]
