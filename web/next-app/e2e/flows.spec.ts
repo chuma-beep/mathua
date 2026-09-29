@@ -81,14 +81,12 @@ test('quiz gate banner appears at 50 XP on profile and links to quiz host', asyn
   await page.route('**/api/courses**', route => route.fulfill({ json: { courses: [] } }))
   await page.route('**/api/transcript**', route => route.fulfill({ json: { courses: [] } }))
   await page.route('**/api/efficacy**', route => route.fulfill({ json: { concepts_touched: 10, first_pass_rate: 0.8, second_pass_rate: 1, avg_attempts_per_concept: 1.2, total_attempts: 12 } }))
+  await page.route('**/api/efficacy/trend**', route => route.fulfill({ json: { weeks: [], total_students: 0, returning_students: 0, retention_rate: 0, first_pass_trend: 0 } }))
   await page.route('**/api/leagues**', route => route.fulfill({ json: { week: '2026-W35', leagues: [] } }))
   await page.route('**/api/settings**', route => route.fulfill({ json: {} }))
 
   await page.goto('/profile')
   await expect(page.getByText('Quiz due').first()).toBeVisible({ timeout: 30_000 })
-  // TEMP-CI-DEBUG: ground truth on what the quiz section actually renders.
-  const bodyText = await page.locator('body').innerText()
-  console.log('DEBUG-QUIZ-TEXT:' + JSON.stringify((bodyText.match(/.{0,20}XP reached.{0,60}/) || ['NONE'])[0]))
   await expect(page.getByText('50 XP reached: mastery check recommended').first()).toBeVisible()
   await expect(page.getByRole('link', { name: 'Take Test' }).first()).toBeVisible()
 })

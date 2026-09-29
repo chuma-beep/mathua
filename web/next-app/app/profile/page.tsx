@@ -411,11 +411,11 @@ export default function ProfilePage() {
 
         {/* Quiz gate — backend signal, lifetime fallback */}
         {scores && (scores.quiz_due ?? scores.xp_total >= 50) && (
-          <div className="mt-6 w-full max-w-full min-w-0 overflow-hidden border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-            <div className="w-full sm:flex-1 min-w-0 overflow-hidden">
-              <div className="flex flex-col items-start gap-1.5 sm:flex-row sm:items-center sm:gap-2 min-w-0">
+          <div className="mt-6 w-full min-w-0 overflow-hidden border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+            <div className="w-full sm:flex-1 min-w-0">
+              <div className="flex flex-col items-start gap-1.5 sm:flex-row sm:items-center sm:gap-2 flex-wrap">
                 <span className="shrink-0 bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">Quiz due</span>
-                <span className="min-w-0 break-words [overflow-wrap:anywhere] leading-snug font-mono text-[11px] sm:text-xs text-mathua-primary">50 XP reached: mastery check recommended</span>
+                <span className="break-words font-mono text-[11px] sm:text-xs text-mathua-primary">50 XP reached: mastery check recommended</span>
               </div>
               <div className="mt-2 h-1 bg-mathua-code overflow-hidden">
                 <div className="h-full bg-mathua-blue" style={{ width: `${Math.min(((scores.xp_since_quiz ?? scores.xp_total) / 50) * 100, 100)}%` }} />
@@ -489,7 +489,7 @@ export default function ProfilePage() {
                 </div>
               ))}
             </div>
-            {efficacyTrend && efficacyTrend.weeks.length > 0 && (
+            {efficacyTrend && (efficacyTrend.weeks ?? []).length > 0 && (
               <div className="mt-4 border border-mathua-border bg-mathua-surface p-3 min-w-0">
                 <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1 mb-2">
                   <span className="font-mono text-[10px] uppercase text-mathua-muted">First-pass by week</span>
@@ -498,7 +498,7 @@ export default function ProfilePage() {
                   </span>
                 </div>
                 <div className="flex items-end gap-1 h-12">
-                  {efficacyTrend.weeks.slice(-12).map(w => (
+                  {(efficacyTrend.weeks ?? []).slice(-12).map(w => (
                     <div
                       key={w.week_start}
                       className="flex-1 min-w-0"
