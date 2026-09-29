@@ -744,6 +744,94 @@ export async function setDailyXPGoal(goal: number): Promise<void> {
 	if (!res.ok) throw new Error(`Set goal failed: ${res.status}`)
 }
 
+// ── Destinations & study plans ──
+
+export interface DestinationStatus {
+	id: string
+	name: string
+	description: string
+	total: number
+	mastered: number
+	pct: number
+}
+
+export async function getDestinations(): Promise<DestinationStatus[]> {
+	const res = await authedFetch(`${API_BASE}/api/destinations`, { headers: { ...getAuthHeaders() } })
+	if (!res.ok) throw new Error(`Destinations fetch failed: ${res.status}`)
+	const data = await res.json()
+	return data.destinations ?? []
+}
+
+export interface WorkloadEstimate {
+	total: number
+	mastered: number
+	remaining: string[]
+	xp_remaining: number
+	time_min_remaining: number
+	reviews_due: number
+	quizzes_ahead: number
+	assessment_min: number
+	diagnostic_min: number
+	days: number
+	finish_date: string
+	required_per_day: number
+	feasible: boolean
+	lines: { learning: number; assessment: number; diagnostic: number }
+}
+
+export interface EstimateRes {
+	destination: string
+	estimate: WorkloadEstimate
+	pace: { rate: number; source: 'measured' | 'goal'; adherence: number; active_days: number; trailing_days: number }
+	probes: string[]
+	plan_delta_days?: number
+}
+
+export interface EstimateParams {
+	daily_goal?: number
+	deadline_days?: number
+	rest_days?: number
+	diagnostic_min?: number
+}
+
+export async function getEstimate(destId: string, params: EstimateParams = {}): Promise<EstimateRes> {
+	const q = new URLSearchParams()
+	if (params.daily_goal) q.set('daily_goal', String(params.daily_goal))
+	if (params.deadline_days) q.set('deadline_days', String(params.deadline_days))
+	if (params.rest_days !== undefined) q.set('rest_days', String(params.rest_days))
+	if (params.diagnostic_min) q.set('diagnostic_min', String(params.diagnostic_min))
+	const res = await authedFetch(`${API_BASE}/api/destinations/${encodeURIComponent(destId)}/estimate?${q.toString()}`, {
+		headers: { ...getAuthHeaders() },
+	})
+	if (!res.ok) throw new Error(`Estimate fetch failed: ${res.status}`)
+	return res.json()
+}
+
+export interface StudyPlan {
+	destination: string
+	daily_goal: number
+	deadline_days: number
+	rest_days: number
+	xp_remaining: number
+	created: string
+}
+
+export async function savePlan(body: { destination: string; daily_goal: number; deadline_days: number; rest_days: number }): Promise<StudyPlan> {
+	const res = await authedFetch(`${API_BASE}/api/plans`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+		body: JSON.stringify(body),
+	})
+	if (!res.ok) throw new Error(`Save plan failed: ${res.status}`)
+	return res.json()
+}
+
+export async function getCurrentPlan(): Promise<{ plan: StudyPlan | null; delta_days?: number; xp_remaining?: number }> {
+	const res = await authedFetch(`${API_BASE}/api/plans/current`, { headers: { ...getAuthHeaders() } })
+	if (!res.ok) return { plan: null }
+	return res.json()
+}
+
 export async function getWeaknesses(): Promise<WeaknessRes> {
   const res = await authedFetch(`${API_BASE}/api/weaknesses`, {
     headers: { ...getAuthHeaders() },
