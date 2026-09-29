@@ -387,7 +387,7 @@ function LoginInner() {
       <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
         <section className="pt-8 max-w-md mx-auto mt-8 sm:mt-12 min-w-0 overflow-hidden">
           <span className="flex mb-4">
-            <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">Back</Link>
+            <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-blue">Back</Link>
           </span>
           <SectionHeader label="Account" title={state.tab === 'login' ? 'Welcome back' : 'Create account'} />
           {authDisabled && (
@@ -416,7 +416,7 @@ function LoginInner() {
                   />
                 </div>
                 {resetMsg && <p className="text-mathua-red text-xs">{resetMsg}</p>}
-                <button type="submit" disabled={resetBusy} className="w-full border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 font-medium text-sm disabled:opacity-50 inline-flex items-center justify-center gap-2">
+                <button type="submit" disabled={resetBusy} className="w-full border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-12 font-medium text-sm disabled:opacity-50 inline-flex items-center justify-center gap-2">
                   {resetBusy ? (<><Loading inline size={13} /> Saving…</>) : 'Set new password'}
                 </button>
               </form>
@@ -436,7 +436,7 @@ function LoginInner() {
                   />
                 </div>
                 {forgotMsg && <p className="font-mono text-xs text-mathua-secondary">{forgotMsg}</p>}
-                <button type="submit" disabled={forgotBusy} className="w-full border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 font-medium text-sm disabled:opacity-50 inline-flex items-center justify-center gap-2">
+                <button type="submit" disabled={forgotBusy} className="w-full border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-12 font-medium text-sm disabled:opacity-50 inline-flex items-center justify-center gap-2">
                   {forgotBusy ? (<><Loading inline size={13} /> Sending…</>) : 'Send reset link'}
                 </button>
                 <button type="button" onClick={() => { setForgotMode(false); setForgotMsg('') }} className="w-full text-mathua-muted text-xs hover:text-mathua-secondary">
@@ -515,7 +515,7 @@ function LoginInner() {
                   aria-label={state.showPassword ? 'Hide password' : 'Show password'}
                   aria-pressed={state.showPassword}
                   title={state.showPassword ? 'Hide password' : 'Show password'}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 mt-0.5 text-mathua-muted hover:text-mathua-primary"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 mt-0.5 text-mathua-muted hover:text-mathua-blue"
                 >
                   <EyeIcon off={state.showPassword} />
                 </button>
@@ -523,7 +523,7 @@ function LoginInner() {
               {state.fieldErrors.password && <p id="password-error" className="text-mathua-red text-xs mt-1">{state.fieldErrors.password}</p>}
             </div>
             {state.error && <p className="text-mathua-red text-xs">{state.error}</p>}
-            <button type="submit" disabled={state.loading || authDisabled} data-testid="auth-submit" className="w-full border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 font-medium text-sm disabled:opacity-50">
+            <button type="submit" disabled={state.loading || authDisabled} data-testid="auth-submit" className="w-full border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-12 font-medium text-sm disabled:opacity-50">
               {state.loading ? (<><Loading inline size={13} /> Loading…</>) : state.tab === 'signup' ? 'Create Account' : 'Login'}
             </button>
             <div className="flex items-center gap-3 my-2">

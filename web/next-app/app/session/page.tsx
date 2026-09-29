@@ -30,7 +30,7 @@ function SessionContent() {
             <div className="max-w-2xl mx-auto mt-6 min-w-0 overflow-hidden text-center">
               <Link
                 href={`/learn?concept=${encodeURIComponent(concept)}`}
-                className="inline-block border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-8 h-12 font-mono text-sm leading-[48px]"
+                className="inline-block border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-8 h-12 font-mono text-sm leading-[48px]"
               >
                 Start learning →
               </Link>
@@ -49,21 +49,21 @@ function SessionContent() {
             {/* Option 1: Diagnostic (Recommended) */}
             <Link
               href="/onboard"
-              className="group relative flex flex-col border-2 border-mathua-blue bg-mathua-surface p-6 text-left hover:bg-mathua-blue hover:text-white transition-colors"
+              className="group relative flex flex-col border-2 border-mathua-blue bg-mathua-surface p-6 text-left hover:bg-mathua-blue/10 transition-colors"
             >
               <span className="absolute -top-3 left-4 bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
                 Recommended
               </span>
-              <span className="font-mono text-[11px] uppercase tracking-wider text-mathua-blue group-hover:text-white/80">
+              <span className="font-mono text-[11px] uppercase tracking-wider text-mathua-blue">
                 Option 1
               </span>
-              <h3 className="font-serif text-xl font-medium text-mathua-primary group-hover:text-white mt-1">
+              <h3 className="font-serif text-xl font-medium text-mathua-primary mt-1">
                 Take a diagnostic test
               </h3>
-              <p className="font-mono text-xs text-mathua-secondary group-hover:text-white/80 mt-2 leading-relaxed">
+              <p className="font-mono text-xs text-mathua-secondary mt-2 leading-relaxed">
                 A diagnostic test to find your starting point and get a personalized recommendation.
               </p>
-              <span className="mt-4 inline-flex items-center font-mono text-xs text-mathua-blue group-hover:text-white">
+              <span className="mt-4 inline-flex items-center font-mono text-xs text-mathua-blue">
                 Start diagnostic test →
               </span>
             </Link>

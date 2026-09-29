@@ -289,7 +289,7 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
                     </ol>
                   </details>
                 )}
-                <button type="button" onClick={startPracticing} className="mt-5 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2.5 font-mono text-xs min-h-[44px]">Start practicing →</button>
+                <button type="button" onClick={startPracticing} className="mt-5 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-6 py-2.5 font-mono text-xs min-h-[44px]">Start practicing →</button>
               </div>
             )
           }
@@ -323,7 +323,7 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
                 <p className="font-mono text-xs text-green-400">✓ Complete — {totalCorrect}/{totalAnswered} correct · +{totalXP} XP · {est.band}</p>
                 <p className="mt-2 font-mono text-[11px] text-mathua-secondary">Scroll up to review anything. Reviews are scheduled automatically.</p>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  {returnTo && <Link href={`/learn?concept=${encodeURIComponent(returnTo)}`} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-5 py-2 font-mono text-xs inline-flex items-center min-h-[40px]">← Back to {returnTo}</Link>}
+                  {returnTo && <Link href={`/learn?concept=${encodeURIComponent(returnTo)}`} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-5 py-2 font-mono text-xs inline-flex items-center min-h-[40px]">← Back to {returnTo}</Link>}
                   <Link href="/profile" className="border border-mathua-border px-5 py-2 font-mono text-xs text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue inline-flex items-center min-h-[40px]">Next up →</Link>
                   <Link href={`/study?concept=${encodeURIComponent(conceptId)}`} className="border border-mathua-border px-5 py-2 font-mono text-xs text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue inline-flex items-center min-h-[40px]">Reference</Link>
                 </div>
@@ -340,7 +340,7 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
                 <form onSubmit={ev => { ev.preventDefault(); handleCheck(qe.key) }} className="mt-3 flex flex-col sm:flex-row gap-2">
                   <label htmlFor={`learn-answer-${qe.key}`} className="sr-only">Your answer</label>
                   <Input id={`learn-answer-${qe.key}`} value={qe.answer} onChange={ev => setEntry(qe.key, { answer: ev.target.value })} placeholder="Your answer…" inputMode={format.inputMode} className="sm:flex-1 bg-mathua-bg" />
-                  <button type="submit" disabled={qe.checking || !qe.answer.trim()} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 h-12 text-sm font-mono disabled:opacity-50 w-auto self-end sm:self-auto shrink-0">Check</button>
+                  <button type="submit" disabled={qe.checking || !qe.answer.trim()} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-6 h-12 text-sm font-mono disabled:opacity-50 w-auto self-end sm:self-auto shrink-0">Check</button>
                 </form>
               )}
               {!locked && <p className="mt-2 font-mono text-[11px] text-mathua-muted">{format.hint}</p>}

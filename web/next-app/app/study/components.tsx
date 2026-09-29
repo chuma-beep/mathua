@@ -53,7 +53,7 @@ export function QuizGateBanner({ scores }: { scores: Scores | null }) {
         </div>
       </div>
       {done ? (
-        <Link href="/goals?quiz=1" className="shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">
+        <Link href="/goals?quiz=1" className="shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">
           Take Test →
         </Link>
       ) : null}
@@ -616,7 +616,7 @@ export function LessonDetail({
       <div className="mt-8 text-center">
         <Link
           href={`#practice`}
-          className="inline-block border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white h-12 px-8 font-medium text-sm leading-[48px]"
+          className="inline-block border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 h-12 px-8 font-medium text-sm leading-[48px]"
         >
           Practice these concepts ↓
         </Link>

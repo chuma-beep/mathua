@@ -108,7 +108,7 @@ export default function LeaderboardPage() {
       <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
       <section className="pt-8 min-w-0 overflow-hidden">
         <span className="flex mb-4">
-          <button type="button" onClick={() => { if (window.history.length > 1) window.history.back() }} className="text-mathua-secondary text-sm hover:text-mathua-primary">
+          <button type="button" onClick={() => { if (window.history.length > 1) window.history.back() }} className="text-mathua-secondary text-sm hover:text-mathua-blue">
             ← Back
           </button>
         </span>

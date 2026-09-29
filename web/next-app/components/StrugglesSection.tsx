@@ -86,7 +86,7 @@ export default function StrugglesSection({ weaknesses }: Props) {
           </div>
           <Link
             href="/review"
-            className="shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none px-3 h-8 font-mono text-[11px] inline-flex items-center justify-center min-h-[32px]"
+            className="shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none px-3 h-8 font-mono text-[11px] inline-flex items-center justify-center min-h-[32px]"
           >
             Review now →
           </Link>

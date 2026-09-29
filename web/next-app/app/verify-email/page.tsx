@@ -47,7 +47,7 @@ function VerifyEmailInner() {
               <>
                 <p className="font-mono text-sm text-mathua-green">Email verified.</p>
                 <p className="text-mathua-secondary text-sm mt-2">Your logins now merge into one account.</p>
-                <Link href="/profile" className="inline-block mt-6 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px]">
+                <Link href="/profile" className="inline-block mt-6 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-6 py-2 font-mono text-xs min-h-[36px]">
                   Continue to profile →
                 </Link>
               </>

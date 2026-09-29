@@ -33,7 +33,7 @@ export default function DiagnosePage() {
       <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
       <section className="pt-8 min-w-0 overflow-hidden">
         <span className="flex mb-4">
-          <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">
+          <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-blue">
             ← Back
           </Link>
         </span>
@@ -88,7 +88,7 @@ export default function DiagnosePage() {
         <div className="flex gap-3 justify-center max-sm:flex-col max-sm:items-center min-w-0">
           <Link
             href="/onboard"
-            className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-10 min-h-[36px] px-6 text-[13px] font-medium transition-colors flex items-center justify-center w-full sm:w-auto max-w-[280px]"
+            className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-10 min-h-[36px] px-6 text-[13px] font-medium transition-colors flex items-center justify-center w-full sm:w-auto max-w-[280px]"
           >
             Start diagnostic test
           </Link>

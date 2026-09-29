@@ -55,7 +55,7 @@ export default function SubmitErrorBlock({
             type="button"
             onClick={onRetry}
             disabled={retrying}
-            className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-4 h-10 font-mono text-xs disabled:opacity-50"
+            className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-4 h-10 font-mono text-xs disabled:opacity-50"
           >
             {retrying ? 'Retrying…' : 'Retry'}
           </button>

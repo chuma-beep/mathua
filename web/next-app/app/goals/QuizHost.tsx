@@ -224,7 +224,7 @@ export default function QuizHost() {
               type="button"
               onClick={() => { void startQuiz() }}
               disabled={loading}
-              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm disabled:opacity-50"
+              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-12 px-8 font-medium text-sm disabled:opacity-50"
             >
               Start quiz →
             </button>
@@ -250,7 +250,7 @@ export default function QuizHost() {
             <SectionHeader label="Quiz" title="No questions available" />
             <p className="font-mono text-sm text-mathua-secondary mt-4">There are no quiz questions available right now, try again later.</p>
             <div className="mt-6 flex gap-3 justify-center">
-              <button type="button" onClick={startQuiz} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 text-sm">Try again →</button>
+              <button type="button" onClick={startQuiz} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-12 px-8 text-sm">Try again →</button>
               <Link href="/profile" className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none h-12 px-8 text-sm inline-flex items-center">Back to Profile →</Link>
             </div>
           </>
@@ -276,11 +276,11 @@ export default function QuizHost() {
               </div>
             )}
             <div className="mt-6 flex gap-3 justify-center">
-              <button type="button" onClick={startQuiz} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 text-sm">Retake Quiz →</button>
+              <button type="button" onClick={startQuiz} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-12 px-8 text-sm">Retake Quiz →</button>
               <Link href="/profile" className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none h-12 px-8 text-sm inline-flex items-center">Back to Profile →</Link>
             </div>
             <div className="mt-3 text-center">
-              <Link href="/progress-card" className="font-mono text-xs text-mathua-muted hover:text-mathua-primary">View progress card →</Link>
+              <Link href="/progress-card" className="font-mono text-xs text-mathua-muted hover:text-mathua-blue">View progress card →</Link>
             </div>
           </>
         )}
@@ -312,7 +312,7 @@ export default function QuizHost() {
               <form onSubmit={e => { e.preventDefault(); void submitQuizAnswerFn(false) }} className="flex flex-col sm:flex-row gap-3 min-w-0">
                 <label htmlFor="quiz-answer" className="sr-only">Your answer</label>
                 <Input ref={quizInputRef} id="quiz-answer" type="text" value={quizAnswerInput} onChange={e => setQuizAnswerInput(e.target.value)} placeholder="Your answer..." enterKeyHint="go" inputMode={answerFormat.inputMode} disabled={loading} className="sm:flex-1" />
-                <button type="submit" disabled={!quizAnswerInput.trim() || loading} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-6 font-medium text-sm disabled:opacity-50 shrink-0 w-auto self-end sm:self-auto">Check Answer</button>
+                <button type="submit" disabled={!quizAnswerInput.trim() || loading} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-12 px-6 font-medium text-sm disabled:opacity-50 shrink-0 w-auto self-end sm:self-auto">Check Answer</button>
               </form>
               <div className="mt-2 flex items-center justify-between gap-2">
                 <p className="font-mono text-[11px] text-mathua-muted">{answerFormat.hint}</p>
@@ -363,7 +363,7 @@ export default function QuizHost() {
               type="button"
               autoFocus
               onClick={goNextQuiz}
-              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm shrink-0"
+              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-12 px-8 font-medium text-sm shrink-0"
             >
               Next →
             </button>
