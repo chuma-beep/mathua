@@ -30,10 +30,6 @@ vi.mock('../lib/api', async importOriginal => ({
   submitReport: submitReportMock,
 }))
 
-vi.mock('../components/LessonQuiz', () => ({
-  default: () => <div data-testid="quiz-stub" />,
-}))
-
 vi.mock('next/image', () => ({
   default: (props: Record<string, unknown>) => <img alt="" {...props} />,
 }))
