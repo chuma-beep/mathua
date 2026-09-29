@@ -66,17 +66,13 @@ test('study → learn → answer → XP persists (Study seam)', async ({ page })
   await expect(page.getByText('+1 XP').first()).toBeVisible({ timeout: 20_000 })
 })
 
-test('quiz gate banner appears at 50 XP and links to quiz host', async ({ page }) => {
-  const LESSONS = { arithmetic: [LESSON] }
-  await page.addInitScript(() => localStorage.setItem('mathua_guest_id', 'guest_e2e_quiz'))
-  await page.route('**/api/lessons**', route => {
-    const url = route.request().url()
-    if (url.includes('/practice') || url.includes('/kp')) return route.fulfill({ json: { questions: [], concept_id: 'arith.add.single', kps: [] } })
-    if (url.includes('/body')) return route.fulfill({ json: { title: LESSON.title, body: LESSON.body } })
-    return route.fulfill({ json: { lessons: LESSONS } })
+test('quiz gate banner appears at 50 XP on profile and links to quiz host', async ({ page }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem('mathua_token', 'fake-token')
+    localStorage.setItem('mathua_user', JSON.stringify({ student_id: 's1', name: 'Tester', username: 'tester', concepts_mastered: 15, current_streak: 5, level: 'Student', diagnostic_completed: true }))
   })
   await page.route('**/api/scores/**', route =>
-    route.fulfill({ json: { lifetime_points: 1500, weekly_score: 100, speed_bonus: 0, concepts_mastered: 15, current_streak: 5, level: 'Student', xp_total: 50, xp_today: 10, daily_xp_goal: 30, spaced_reps: {}, avg_learning_speed: 1.1 } }),
+    route.fulfill({ json: { lifetime_points: 1500, weekly_score: 100, speed_bonus: 0, concepts_mastered: 15, current_streak: 5, level: 'Student', xp_total: 50, xp_today: 10, daily_xp_goal: 10, quiz_due: true, xp_since_quiz: 50, spaced_reps: {}, avg_learning_speed: 1.1 } }),
   )
   await page.route('**/api/progress/**', route => route.fulfill({ json: {} }))
   await page.route('**/api/activity**', route => route.fulfill({ json: [] }))
@@ -86,9 +82,11 @@ test('quiz gate banner appears at 50 XP and links to quiz host', async ({ page }
   await page.route('**/api/transcript**', route => route.fulfill({ json: { courses: [] } }))
   await page.route('**/api/efficacy**', route => route.fulfill({ json: { concepts_touched: 10, first_pass_rate: 0.8, second_pass_rate: 1, avg_attempts_per_concept: 1.2, total_attempts: 12 } }))
   await page.route('**/api/leagues**', route => route.fulfill({ json: { week: '2026-W35', leagues: [] } }))
+  await page.route('**/api/settings**', route => route.fulfill({ json: {} }))
 
-  await page.goto('/study')
+  await page.goto('/profile')
   await expect(page.getByText('Quiz due').first()).toBeVisible({ timeout: 30_000 })
+  await expect(page.getByText('50 XP reached: mastery check recommended').first()).toBeVisible()
   await expect(page.getByRole('link', { name: 'Take Test' }).first()).toBeVisible()
 })
 
