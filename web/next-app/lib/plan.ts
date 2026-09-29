@@ -4,7 +4,7 @@
 
 export const GOAL_MIN = 1
 export const GOAL_MAX = 10000
-export const GOAL_PRESETS = [15, 30, 60, 100]
+export const GOAL_PRESETS = [5, 10, 20, 30]
 
 export function clampGoal(v: number): number {
   if (!Number.isFinite(v)) return 30

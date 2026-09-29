@@ -81,7 +81,7 @@ export default function DailyGoalControl({ current, onSaved }: { current: number
           Set
         </button>
       </form>
-      <p className="mt-2 font-mono text-[11px] text-mathua-muted">≈ {Math.max(1, Math.round(current / 10))} questions/day at ~10 XP each. Changing your target never moves quiz eligibility or mastery.</p>
+      <p className="mt-2 font-mono text-[11px] text-mathua-muted">≈ {Math.max(1, Math.round(current / 2))} questions/day at ~2 XP each. Changing your target never moves quiz eligibility or mastery.</p>
       {msg && <p className="mt-1 font-mono text-[11px] text-mathua-secondary">{msg}</p>}
     </div>
   )

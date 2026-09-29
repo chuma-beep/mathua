@@ -33,7 +33,7 @@ test('study → learn → answer → XP persists (Study seam)', async ({ page })
     return route.fulfill({ json: { lessons: { arithmetic: [LESSON] } } })
   })
   await page.route('**/api/study/answer', route =>
-    route.fulfill({ json: { correct: true, feedback: 'Correct!', xp: 10, expected_answer: '4', halted: false } }),
+    route.fulfill({ json: { correct: true, feedback: 'Correct!', xp: 1, expected_answer: '4', halted: false } }),
   )
   await page.route('**/api/scores/**', route =>
     route.fulfill({ json: { lifetime_points: 100, weekly_score: 10, speed_bonus: 0, concepts_mastered: 1, current_streak: 1, level: 'Novice', xp_total: 10, xp_today: 10, daily_xp_goal: 30, spaced_reps: {}, avg_learning_speed: 1.0 } }),
@@ -63,10 +63,10 @@ test('study → learn → answer → XP persists (Study seam)', async ({ page })
   expect(inputBox?.height).toBe(48)
   await input.fill('4')
   await page.getByRole('button', { name: 'Check', exact: true }).first().click()
-  await expect(page.getByText('+10 XP').first()).toBeVisible({ timeout: 20_000 })
+  await expect(page.getByText('+1 XP').first()).toBeVisible({ timeout: 20_000 })
 })
 
-test('quiz gate banner appears at 150 XP and links to quiz host', async ({ page }) => {
+test('quiz gate banner appears at 50 XP and links to quiz host', async ({ page }) => {
   const LESSONS = { arithmetic: [LESSON] }
   await page.addInitScript(() => localStorage.setItem('mathua_guest_id', 'guest_e2e_quiz'))
   await page.route('**/api/lessons**', route => {
@@ -76,7 +76,7 @@ test('quiz gate banner appears at 150 XP and links to quiz host', async ({ page 
     return route.fulfill({ json: { lessons: LESSONS } })
   })
   await page.route('**/api/scores/**', route =>
-    route.fulfill({ json: { lifetime_points: 1500, weekly_score: 100, speed_bonus: 0, concepts_mastered: 15, current_streak: 5, level: 'Student', xp_total: 150, xp_today: 30, daily_xp_goal: 30, spaced_reps: {}, avg_learning_speed: 1.1 } }),
+    route.fulfill({ json: { lifetime_points: 1500, weekly_score: 100, speed_bonus: 0, concepts_mastered: 15, current_streak: 5, level: 'Student', xp_total: 50, xp_today: 10, daily_xp_goal: 30, spaced_reps: {}, avg_learning_speed: 1.1 } }),
   )
   await page.route('**/api/progress/**', route => route.fulfill({ json: {} }))
   await page.route('**/api/activity**', route => route.fulfill({ json: [] }))
@@ -103,7 +103,7 @@ test('quiz reuse host at /goals?quiz=1 starts actionable quiz (guest unlimited r
   let sawDontKnow = false
   await page.route('**/api/quiz/answer', route => {
     if (route.request().postDataJSON()?.dont_know === true) sawDontKnow = true
-    return route.fulfill({ json: { done: false, correct: true, feedback: 'Correct!', xp: 20, concept_id: 'arith.sub.single', concept_name: 'Single-digit subtraction', question: '8 - 3 = ?', grading_type: 'numeric' } })
+    return route.fulfill({ json: { done: false, correct: true, feedback: 'Correct!', xp: 3, concept_id: 'arith.sub.single', concept_name: 'Single-digit subtraction', question: '8 - 3 = ?', grading_type: 'numeric' } })
   })
 
   await page.goto('/goals?quiz=1')
@@ -117,7 +117,7 @@ test('quiz reuse host at /goals?quiz=1 starts actionable quiz (guest unlimited r
   await input.fill('8')
   await page.getByRole('button', { name: 'Check Answer' }).first().click()
   await expect(page.getByText('Correct').first()).toBeVisible({ timeout: 20_000 })
-  await expect(page.getByText('+20 XP').first()).toBeVisible()
+  await expect(page.getByText('+3 XP').first()).toBeVisible()
   // Manual advance: feedback holds until Next reveals the staged question.
   await page.getByRole('button', { name: 'Next →' }).click()
   await expect(page.getByText('8 - 3 = ?').first()).toBeVisible({ timeout: 20_000 })

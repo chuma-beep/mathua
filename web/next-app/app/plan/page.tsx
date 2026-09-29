@@ -16,10 +16,10 @@ function PlanContent() {
   const [dests, setDests] = useState<DestinationStatus[]>([])
   const [destId, setDestId] = useState('')
   const [mode, setMode] = useState<'effort' | 'deadline'>('effort')
-  const [dailyGoal, setDailyGoal] = useState(50)
+  const [dailyGoal, setDailyGoal] = useState(10)
   const [deadlineDays, setDeadlineDays] = useState(90)
   const [restDays, setRestDays] = useState(1)
-  const [whatIf, setWhatIf] = useState(50)
+  const [whatIf, setWhatIf] = useState(10)
   const [est, setEst] = useState<EstimateRes | null>(null)
   const [saved, setSaved] = useState<StudyPlan | null>(null)
   const [error, setError] = useState('')
@@ -111,7 +111,7 @@ function PlanContent() {
         <div className="mt-3">
           <label htmlFor="plan-goal" className="font-mono text-[11px] uppercase tracking-wider text-mathua-muted">Daily XP target</label>
           <div className="mt-1 flex gap-2">
-            {[10, 50, 100, 200].map(p => (
+            {[5, 10, 20, 50].map(p => (
               <button key={p} type="button" onClick={() => setDailyGoal(p)} aria-pressed={dailyGoal === p} className={`flex-1 border px-2 py-2 font-mono text-xs min-h-[40px] ${dailyGoal === p ? 'border-mathua-blue text-mathua-blue' : 'border-mathua-border text-mathua-secondary'}`}>{p}</button>
             ))}
             <input id="plan-goal" value={dailyGoal} onChange={ev => setDailyGoal(clampGoal(Number(ev.target.value) || 0))} inputMode="numeric" className="w-20 bg-mathua-surface border border-mathua-border px-2 py-2 font-mono text-xs text-mathua-primary text-center" aria-label="Custom daily XP target" />
@@ -173,7 +173,7 @@ function PlanContent() {
           )}
           <div className="mt-4">
             <label htmlFor="plan-whatif" className="font-mono text-[11px] uppercase tracking-wider text-mathua-muted">What if {whatIf} XP/day? {whatIfDays > 0 && <span className="text-mathua-primary">→ ≈ {Math.ceil(whatIfDays)} days</span>}</label>
-            <input id="plan-whatif" type="range" min={10} max={200} step={5} value={whatIf} onChange={ev => setWhatIf(Number(ev.target.value))} className="mt-1 w-full" />
+            <input id="plan-whatif" type="range" min={2} max={60} step={1} value={whatIf} onChange={ev => setWhatIf(Number(ev.target.value))} className="mt-1 w-full" />
           </div>
           <button type="button" onClick={handleSave} disabled={saving} className="mt-4 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2.5 font-mono text-xs min-h-[44px] disabled:opacity-50">
             {saving ? 'Saving…' : saved ? 'Update my plan' : 'Plan my learning'}

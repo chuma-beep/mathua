@@ -302,13 +302,13 @@ function GoalsContent() {
               </div>
               {/* Quiz CTA — actionable after diagnostic, also reachable via ?quiz=1 */}
               <div className="mt-6 text-center">
-                <button type="button" onClick={() => setStep('quiz')} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm">Take Quiz (150 XP gate) →</button>
+                <button type="button" onClick={() => setStep('quiz')} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm">Take Quiz (50 XP gate) →</button>
                 <p className="font-mono text-xs text-mathua-muted mt-2">Guest allowed, unlimited retake</p>
               </div>
             </>
           )}
 
-          {/* === QUIZ — actionable every 150 XP, own grading path, guest unlimited === */}
+          {/* === QUIZ — actionable every 50 XP, own grading path, guest unlimited === */}
           {step === 'quiz' && <QuizHost />}
         </section>
       </div>

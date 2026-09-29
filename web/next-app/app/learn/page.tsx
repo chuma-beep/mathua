@@ -51,7 +51,7 @@ function LearnEntry() {
         activity,
         diagnosticCompleted,
         conceptsMastered: scores?.concepts_mastered ?? 0,
-        catalog: conceptCatalog.map(c => ({ id: c.id, label: c.label, prerequisites: c.prerequisites ?? [] })),
+        catalog: conceptCatalog.map(c => ({ id: c.id, label: c.label, prerequisites: c.prerequisites ?? [], avgTimeSeconds: c.mastery_threshold?.avg_time_seconds })),
       }),
     [dueReviews, weaknesses, progress, activity, diagnosticCompleted, scores?.concepts_mastered],
   )
