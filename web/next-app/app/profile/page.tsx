@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { useTheme } from '../../hooks/useTheme'
-import { getUserInfo, ensureGuestId, ensureGuestToken, getGuestId } from '../../lib/auth'
+import { getUserInfo, ensureGuestId, ensureGuestToken, getGuestId, isLoggedIn } from '../../lib/auth'
 import { ensureDicebearAvatar, resolveAvatar } from '../../lib/dicebear'
 import { getActivity, getProgress, getWeaknesses, getDueReviews, getEfficacy, getEfficacyTrend, getScores, getSettings } from '../../lib/api'
 import type { DailyActivity, Scores, WeaknessRes, ConceptProgress, EfficacyReport, EfficacyTrend } from '../../lib/api'
@@ -333,7 +333,7 @@ export default function ProfilePage() {
           avatarPreset={avatarPreset}
         />
 
-        {effScores && (
+        {effScores && !isLoggedIn() && (
           <DailyGoalControl
             current={effScores.daily_xp_goal}
             onSaved={g => {
@@ -344,6 +344,16 @@ export default function ProfilePage() {
               }
             }}
           />
+        )}
+        {effScores && isLoggedIn() && (
+          <div className="mt-4 flex items-center justify-between gap-3 border border-mathua-border bg-mathua-surface p-4">
+            <p className="font-mono text-xs text-mathua-secondary">
+              Daily XP target · <span className="text-mathua-primary">{effScores.daily_xp_goal}/day</span>
+            </p>
+            <Link href="/settings" className="shrink-0 font-mono text-[11px] text-mathua-blue hover:text-mathua-blue-hover">
+              Change →
+            </Link>
+          </div>
         )}
         <Link href="/plan" className="mt-3 inline-block font-mono text-xs text-mathua-blue">Plan your learning → finish-date estimates</Link>
 

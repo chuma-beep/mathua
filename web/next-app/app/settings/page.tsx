@@ -7,8 +7,9 @@ import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
 import DangerZone from '../../components/DangerZone'
+import DailyGoalControl from '../../components/DailyGoalControl'
 import Footer from '../../components/Footer'
-import { getSettings, updateSettings, updateProfileName, changePassword, uploadAvatar, deleteAvatar, avatarImageUrl, getIdentities, deleteIdentity, createLinkToken, requestEmailVerification, startOAuthLogin, getConfig, OAUTH_LABELS, type OAuthProvider, enableShare, disableShare, type UserSettings } from '../../lib/api'
+import { getSettings, getScores, updateSettings, updateProfileName, changePassword, uploadAvatar, deleteAvatar, avatarImageUrl, getIdentities, deleteIdentity, createLinkToken, requestEmailVerification, startOAuthLogin, getConfig, OAUTH_LABELS, type OAuthProvider, enableShare, disableShare, type UserSettings } from '../../lib/api'
 import { isLoggedIn, getUserInfo, setUserInfo } from '../../lib/auth'
 import { DICEBEAR_STYLES, dicebearUrl, randomDicebear, type DicebearPick } from '../../lib/dicebear'
 import { Switch } from '../../components/ui/switch'
@@ -19,6 +20,7 @@ import Avatar from '../../components/Avatar'
 export default function SettingsPage() {
   const { push } = useRouter()
   const [settings, setSettings] = useState<UserSettings>({})
+  const [dailyGoal, setDailyGoal] = useState(10)
   const [saved, setSaved] = useState(false)
   const [loading, setLoading] = useState(true)
   const [, setShareToken] = useState('')
@@ -62,6 +64,10 @@ export default function SettingsPage() {
       setLoading(false)
     })
     getIdentities().then(setIdentities).catch(() => {})
+    const info = getUserInfo()
+    if (info?.student_id) {
+      getScores(info.student_id).then(s => setDailyGoal(s.daily_xp_goal)).catch(() => {})
+    }
     getConfig().then(cfg => {
       if (cfg && Array.isArray(cfg.providers)) {
         setProviders(cfg.providers.filter((p): p is OAuthProvider => p in OAUTH_LABELS))
@@ -390,6 +396,16 @@ export default function SettingsPage() {
                   onCheckedChange={handleCheckedChange}
                   aria-label="Toggle answer timer"
                 />
+              </div>
+
+              <div className="border-t border-mathua-border pt-6 min-w-0">
+                <span className="font-mono text-sm text-mathua-primary">Daily XP target</span>
+                <p className="text-mathua-muted text-xs mt-1">
+                  How much you aim to earn each day. See finish-date estimates in <Link href="/plan" className="text-mathua-blue hover:text-mathua-blue-hover">Plan</Link>.
+                </p>
+                <div className="mt-3">
+                  <DailyGoalControl current={dailyGoal} onSaved={setDailyGoal} bare />
+                </div>
               </div>
 
               <div className="border-t border-mathua-border pt-6 min-w-0">
