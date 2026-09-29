@@ -618,8 +618,8 @@ func TestDataMigrations_RunOnce(t *testing.T) {
 		}
 		return out
 	}
-	if v := versions(); !v[1] || !v[2] {
-		t.Fatalf("expected versions 1,2 recorded, got %v", v)
+	if v := versions(); !v[1] || !v[2] || !v[3] {
+		t.Fatalf("expected versions 1,2,3 recorded, got %v", v)
 	}
 	// Legacy row simulation: reset v1 and plant a 150 goal, re-migrate.
 	st, _ := store.CreateStudent("legacy")
@@ -638,6 +638,21 @@ func TestDataMigrations_RunOnce(t *testing.T) {
 	}
 	if v := versions(); !v[1] {
 		t.Error("expected version 1 re-recorded")
+	}
+	// v3 small-awards rescale: reset v3, plant a 90 goal, re-migrate → 30.
+	st3, _ := store.CreateStudent("rescaled")
+	if _, err := store.db.Exec("UPDATE students SET daily_xp_goal = 90 WHERE id = ?", st3.ID); err != nil {
+		t.Fatalf("plant goal: %v", err)
+	}
+	if _, err := store.db.Exec("DELETE FROM schema_migrations WHERE version = 3"); err != nil {
+		t.Fatalf("reset version: %v", err)
+	}
+	if err := store.Migrate(); err != nil {
+		t.Fatalf("re-migrate: %v", err)
+	}
+	got3, err := store.GetStudent(st3.ID)
+	if err != nil || got3 == nil || got3.DailyXPGoal != 30 {
+		t.Errorf("expected proportional rescale to 30, got %+v err=%v", got3, err)
 	}
 	// Second Migrate is a no-op for data (idempotent, no every-boot writes).
 	if err := store.Migrate(); err != nil {
