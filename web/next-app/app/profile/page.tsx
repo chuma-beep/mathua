@@ -15,6 +15,7 @@ import ProfileSkeleton from '../../components/skeletons/ProfileSkeleton'
 import { AppSidebar } from '../../components/app-sidebar'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '../../components/ui/sidebar'
 import TaskShelf from '../../components/TaskShelf'
+import DailyGoalControl, { getGuestGoal } from '../../components/DailyGoalControl'
 import { selectNextUp, selectShelf } from '../../lib/nextUp'
 import { concepts as conceptCatalog } from '../../lib/conceptData'
 
@@ -41,6 +42,7 @@ export default function ProfilePage() {
   const [efficacyTrend, setEfficacyTrend] = useState<EfficacyTrend | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [goalOverride, setGoalOverride] = useState<number | null>(null)
   const [avatarUrl, setAvatarUrl] = useState<string | undefined>(undefined)
   const [avatarPreset, setAvatarPreset] = useState<number | null>(null)
 
@@ -59,6 +61,18 @@ export default function ProfilePage() {
 
   // Task shelf (primary surface): eligible candidates via the v1 fixed
   // policy; selectNextUp stays as the always-satisfiable fallback.
+  // Guest daily-goal override (server default applies otherwise).
+  useEffect(() => {
+    if (mounted && !getUserInfo()) {
+      setGoalOverride(getGuestGoal())
+    }
+  }, [mounted])
+
+  const effScores = useMemo(
+    () => (scores && goalOverride ? { ...scores, daily_xp_goal: goalOverride } : scores),
+    [scores, goalOverride],
+  )
+
   const shelf = useMemo(
     () =>
       selectShelf({
@@ -313,11 +327,25 @@ export default function ProfilePage() {
         {/* Profile stats — mobile-first */}
         <ProfileStats
           name={user.name}
-          scores={scores}
+          scores={effScores ?? scores}
           avatarSeed={user.student_id}
           avatarUrl={avatarPreset !== null ? undefined : avatarUrl}
           avatarPreset={avatarPreset}
         />
+
+        {effScores && (
+          <DailyGoalControl
+            current={effScores.daily_xp_goal}
+            onSaved={g => {
+              setGoalOverride(g)
+              const sid = user.student_id || getGuestId() || ''
+              if (sid) {
+                getScores(sid).then(setScores).catch(() => {})
+              }
+            }}
+          />
+        )}
+        <Link href="/plan" className="mt-3 inline-block font-mono text-xs text-mathua-blue">Plan your learning → finish-date estimates</Link>
 
         <TaskShelf items={shelf} />
 
