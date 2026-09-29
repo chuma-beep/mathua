@@ -383,9 +383,9 @@ export default function ProfilePage() {
           </div>
         )}
 
-        {/* Diagnostic CTA — shown only until the first completion, then it
-            disappears entirely (retake stays reachable by direct URL). */}
-        {!user.diagnostic_completed && nextUp.kind !== 'diagnostic' && (
+        {/* Diagnostic CTA — new users only: hidden once completed or once
+            the learner is no longer new. Retake stays URL-reachable. */}
+        {!user.diagnostic_completed && scores.concepts_mastered === 0 && nextUp.kind !== 'diagnostic' && (
         <section className="mt-6 w-full max-w-full min-w-0 overflow-hidden border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           <div className="w-full sm:flex-1 min-w-0 overflow-hidden">
             <div className="flex flex-col items-start gap-1.5 sm:flex-row sm:items-center sm:gap-2 min-w-0">

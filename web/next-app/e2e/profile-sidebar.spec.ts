@@ -35,8 +35,32 @@ test('profile sidebar renders nav without duplicating main CTAs', async ({ page 
   await expect(sidebar.getByText('On this page', { exact: true })).toHaveCount(0)
   // Due-review count surfaces as a badge, not a second CTA
   await expect(sidebar.locator('[data-sidebar="menu-badge"]')).toHaveText('3')
-  // Main column keeps its own cards (test user already completed Diagnostic → Retake)
-  await expect(page.getByText(/diagnostic test →/i).first()).toBeVisible()
+  // Main column keeps its own cards — but the diagnostic CTA is gone for a
+  // user who already completed it (one-time prompt, retake via direct URL).
+  await expect(page.getByText(/diagnostic test →/i)).toHaveCount(0)
+})
+
+async function loginAsIncomplete(page: Page, mastered: number) {
+  await page.addInitScript((m: number) => {
+    localStorage.setItem('mathua_token', 'fake-token')
+    localStorage.setItem('mathua_user', JSON.stringify({ student_id: 's1', name: 'Tester', username: 'tester', concepts_mastered: m, current_streak: 0, level: 'Novice', diagnostic_completed: false }))
+  }, mastered)
+  await page.route('**/api/scores/**', route =>
+    route.fulfill({ json: { lifetime_points: 0, weekly_score: 0, speed_bonus: 0, concepts_mastered: mastered, current_streak: 0, level: 'Novice', xp_total: 0, xp_today: 0, daily_xp_goal: 10 } }),
+  )
+}
+
+test('profile shows diagnostic CTA to brand-new users', async ({ page }) => {
+  await loginAsIncomplete(page, 0)
+  await page.goto('/profile')
+  await expect(page.getByRole('link', { name: 'Start diagnostic test →' }).first()).toBeVisible({ timeout: 30_000 })
+})
+
+test('profile hides diagnostic CTA from non-new users who skipped it', async ({ page }) => {
+  await loginAsIncomplete(page, 5)
+  await page.goto('/profile')
+  await expect(page.getByTestId('profile-sidebar')).toBeVisible({ timeout: 30_000 })
+  await expect(page.getByText(/diagnostic test →/i)).toHaveCount(0)
 })
 
 test('profile sidebar collapses to icons via trigger', async ({ page }) => {
