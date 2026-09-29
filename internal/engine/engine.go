@@ -23,6 +23,7 @@ import (
 	"github.com/chuma-beep/mathua/internal/scheduler"
 	"github.com/chuma-beep/mathua/internal/scoring"
 	"github.com/chuma-beep/mathua/internal/storage"
+	"github.com/chuma-beep/mathua/internal/xp"
 )
 
 type activeSession struct {
@@ -1434,40 +1435,15 @@ func sourceForTaskType(taskType string) string {
 }
 
 // taskBaseXP maps MA task types to base XP (10/5/15/20).
+// Single source of truth lives in internal/xp; this delegates to it.
 func taskBaseXP(taskType string) int {
-	switch taskType {
-	case TaskReview:
-		return 5
-	case TaskMultistep:
-		return 15
-	case TaskQuiz:
-		return 20
-	case TaskLesson:
-		fallthrough
-	default:
-		return 10
-	}
+	return xp.BaseXP(taskType)
 }
 
 // computeXPForTask is the MA-differed XP calculator (10/5/15/20).
+// Delegates to internal/xp so estimators share the exact award math.
 func computeXPForTask(correct bool, elapsed, timeThreshold float64, streak int, taskType string) int {
-	if !correct {
-		return 0
-	}
-	base := taskBaseXP(taskType)
-	ratio := elapsed / timeThreshold
-	if ratio <= 0 {
-		ratio = 0.01
-	}
-	timeMultiplier := 2.0 - ratio
-	if timeMultiplier < 0.5 {
-		timeMultiplier = 0.5
-	}
-	if timeMultiplier > 1.5 {
-		timeMultiplier = 1.5
-	}
-	streakMultiplier := 1.0 + float64(min(streak, 10))*0.1
-	return int(float64(base) * timeMultiplier * streakMultiplier)
+	return xp.Award(correct, elapsed, timeThreshold, streak, taskType)
 }
 
 // QuizXP awards TaskQuiz 20 for actionable quiz path (own grading path per Q3).
