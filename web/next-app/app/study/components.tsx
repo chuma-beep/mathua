@@ -7,8 +7,9 @@ import SectionHeader from '../../components/SectionHeader'
 import KatexContent from '../../components/KatexContent'
 import SearchBar from '../../components/SearchBar'
 import ReportButton from '../../components/ReportButton'
+import ReportMenu from '../../components/ReportMenu'
 import MasteryBadge from '../../components/MasteryBadge'
-import { getLessonKPs, type LessonInfo, type LessonKpsRes, type KpInfo } from '../../lib/api'
+import { getLessonKPs, type LessonInfo, type LessonKpsRes } from '../../lib/api'
 import { stripMathDelimiters } from '../../lib/lessonMath'
 import { conceptLabels, domainIcon, domainLabels, lessonProgress } from './domains'
 
@@ -327,40 +328,56 @@ export function LessonDetail({
     return () => { cancelled = true }
   }, [lesson])
 
-  // Single pass: collect only concepts that actually have KP shards.
-  const kpSections: { cid: string; kps: NonNullable<LessonKpsRes['kps']>; diagram: LessonKpsRes['diagram'] }[] = []
+  // Collapse pass: multi-concept lessons share sources, so identical
+  // worked bodies (and diagram assets) recur. Each unique body renders
+  // once, with combined labels — repeats are dropped silently, never
+  // pointed at. Empty bodies never dedupe.
+  interface ExampleBlock {
+    key: string
+    label: string
+    also: string[]
+    subgoals: string[]
+    body: string
+    cid: string
+    k: number
+    diagram: string | null
+  }
+  const blocks: ExampleBlock[] = []
+  const seenBodies = new Map<string, ExampleBlock>()
+  const seenDiagrams = new Set<string>()
   for (const cid of lesson.concepts.slice(0, 3)) {
     const kps = kpMap[cid]?.kps ?? []
-    if (kps.length > 0) kpSections.push({ cid, kps, diagram: kpMap[cid]?.diagram })
-  }
-  const hasKps = kpSections.length > 0
-
-  // Dedupe pass: multi-concept lessons share sources, so the same worked
-  // body (and sometimes the same diagram asset) recurs per concept.
-  // First occurrence renders fully with an anchor; repeats keep their
-  // label + subgoals and point back. Empty bodies never dedupe.
-  const seenBodies = new Map<string, { cid: string; k: number; label: string }>()
-  const seenDiagrams = new Map<string, string>()
-  const annotated = kpSections.map(({ cid, kps, diagram }) => {
-    let diagramDupOf: string | undefined
-    if (diagram) {
-      const first = seenDiagrams.get(diagram)
-      if (first) diagramDupOf = first
-      else seenDiagrams.set(diagram, cid)
-    }
-    const akps: { kp: KpInfo; k: number; anchor: string; dupOf?: { cid: string; k: number; label: string } }[] =
-      kps.map((kp, k) => {
-        const anchor = `lesson-kp-${cid}-${k}`
-        const body = kp.worked_example ?? ''
-        if (!body) return { kp, k, anchor }
+    if (kps.length === 0) continue
+    const diagram = kpMap[cid]?.diagram ?? null
+    kps.forEach((kp, k) => {
+      const body = kp.worked_example ?? ''
+      const anchor = `lesson-kp-${cid}-${k}`
+      if (body) {
         const key = `${normSection(kp.section ?? '')}::${hashBody(body)}`
         const first = seenBodies.get(key)
-        if (first) return { kp, k, anchor, dupOf: first }
-        seenBodies.set(key, { cid, k, label: kp.label })
-        return { kp, k, anchor }
-      })
-    return { cid, diagram, diagramDupOf, kps: akps }
-  })
+        if (first) {
+          first.also.push(kp.label)
+          return
+        }
+      }
+      const block: ExampleBlock = {
+        key: anchor,
+        label: kp.label,
+        also: [],
+        subgoals: kp.subgoals ?? [],
+        body,
+        cid,
+        k,
+        diagram: null,
+      }
+      if (body) seenBodies.set(`${normSection(kp.section ?? '')}::${hashBody(body)}`, block)
+      if (diagram && !seenDiagrams.has(diagram)) {
+        seenDiagrams.add(diagram)
+        block.diagram = diagram
+      }
+      blocks.push(block)
+    })
+  }
 
   return (
     <div className="max-w-7xl mx-auto mt-8 mb-16">
@@ -415,93 +432,79 @@ export function LessonDetail({
         </div>
       )}
 
-      {hasKps ? (
-        <div className="space-y-5">
-          {annotated.map(({ cid, kps, diagram, diagramDupOf }) => {
-            return (
-              <div key={cid} className="w-full max-w-full min-w-0 overflow-hidden">
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
-                    Worked example
-                  </span>
-                  <span className="font-mono text-[10px] text-mathua-muted">{cid}</span>
-                </div>
-                {diagram && !diagramDupOf && (
-                  <div id={`lesson-diagram-${cid}`} className="mb-3 border border-mathua-border bg-mathua-surface p-3 flex items-center gap-3 flex-wrap min-w-0 overflow-hidden">
-                    <div className="shrink-0 min-w-0 max-w-full">
-                      <LessonDiagram src={diagram} alt={`Worked diagram for ${conceptLabels.get(cid) || cid}`} />
-                    </div>
-                    <div className="min-w-0">
-                      <div className="font-mono text-[10px] uppercase tracking-wider text-mathua-muted mb-1">
-                        Concept diagram
-                      </div>
-                      <ReportButton
-                        conceptId={cid}
-                        lessonId={lesson.title}
-                        kind="diagram"
-                        question={diagram}
-                        label="Report diagram problem"
-                      />
-                    </div>
-                  </div>
-                )}
-                {diagram && diagramDupOf && (
-                  <p className="font-mono text-[11px] text-mathua-muted mb-3">
-                    Same diagram as {conceptLabels.get(diagramDupOf) || diagramDupOf} ↑{' '}
-                    <a href={`#lesson-diagram-${diagramDupOf}`} className="link-underline" style={{ color: 'var(--accent-blue)' }}>
-                      jump
-                    </a>
-                  </p>
-                )}
-                {kps.map(({ kp, k, anchor, dupOf }) => (
-                  <div key={`${cid}-${kp.label}`} id={anchor} className="border border-mathua-border bg-mathua-surface p-4 mb-3 w-full max-w-full min-w-0 overflow-hidden scroll-mt-20">
-                    <p className="font-mono text-xs text-mathua-primary">
-                      {k + 1}. {stripMathDelimiters(kp.label)}
-                    </p>
-                    {kp.subgoals.length > 0 && (
-                      <ul className="mt-2 space-y-1">
-                        {kp.subgoals.map((sg) => (
-                          <li
-                            key={sg}
-                            className="font-mono text-[11px] text-mathua-secondary pl-3 relative before:content-['–'] before:absolute before:left-0"
-                          >
-                            {stripMathDelimiters(sg)}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                    {dupOf ? (
-                      <p className="font-mono text-[11px] text-mathua-muted mt-2">
-                        Same worked example as {conceptLabels.get(dupOf.cid) || dupOf.cid} ↑{' '}
-                        <a href={`#lesson-kp-${dupOf.cid}-${dupOf.k}`} className="link-underline" style={{ color: 'var(--accent-blue)' }}>
-                          jump
-                        </a>
-                      </p>
-                    ) : (
-                    <details className="mt-2">
-                      <summary className="font-mono text-[10px] text-mathua-blue uppercase tracking-wider cursor-pointer">
-                        Worked example
-                      </summary>
-                      <div className="mt-2 flex flex-col md:flex-row gap-4 items-start">
-                        <div className="bg-mathua-code border border-mathua-border p-3 text-sm flex-1 min-w-0 overflow-hidden">
-                          <KatexContent>{kp.worked_example}</KatexContent>
+      {blocks.length > 0 ? (
+        <div className="mb-8">
+          <h3 className="font-mono text-[11px] text-mathua-muted mb-3 border-b border-mathua-border pb-2 uppercase tracking-wider">
+            Worked examples ({blocks.length})
+          </h3>
+          <div className="space-y-3">
+            {blocks.map((b, i) => (
+              <div key={b.key} id={b.key} className="border border-mathua-border bg-mathua-surface p-4 w-full max-w-full min-w-0 overflow-hidden scroll-mt-20">
+                <div className="flex items-start gap-2 min-w-0">
+                  <div className="flex-1 min-w-0">
+                    {b.body ? (
+                      <details open={i === 0}>
+                        <summary className="font-mono text-xs text-mathua-primary cursor-pointer">
+                          {i + 1}. {stripMathDelimiters(b.label)}
+                          {b.also.length > 0 && (
+                            <span className="text-mathua-muted"> · also {b.also.map(stripMathDelimiters).join(', ')}</span>
+                          )}
+                        </summary>
+                        {b.diagram && (
+                          <div className="mt-3">
+                            <LessonDiagram src={b.diagram} alt={`Worked diagram for ${conceptLabels.get(b.cid) || b.cid}`} />
+                          </div>
+                        )}
+                        {b.subgoals.length > 0 && (
+                          <ul className="mt-2 space-y-1">
+                            {b.subgoals.map((sg) => (
+                              <li
+                                key={sg}
+                                className="font-mono text-[11px] text-mathua-secondary pl-3 relative before:content-['–'] before:absolute before:left-0"
+                              >
+                                {stripMathDelimiters(sg)}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                        <div className="mt-2 bg-mathua-code border border-mathua-border p-3 text-sm overflow-hidden">
+                          <KatexContent>{b.body}</KatexContent>
                         </div>
-                      </div>
-                    </details>
+                      </details>
+                    ) : (
+                      <>
+                        <p className="font-mono text-xs text-mathua-primary">
+                          {i + 1}. {stripMathDelimiters(b.label)}
+                          {b.also.length > 0 && (
+                            <span className="text-mathua-muted"> · also {b.also.map(stripMathDelimiters).join(', ')}</span>
+                          )}
+                        </p>
+                        {b.subgoals.length > 0 && (
+                          <ul className="mt-2 space-y-1">
+                            {b.subgoals.map((sg) => (
+                              <li
+                                key={sg}
+                                className="font-mono text-[11px] text-mathua-secondary pl-3 relative before:content-['–'] before:absolute before:left-0"
+                              >
+                                {stripMathDelimiters(sg)}
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </>
                     )}
-                    <div className="mt-2 flex justify-end gap-3">
-                      <ReportButton
-                        conceptId={cid}
-                        lessonId={lesson.title}
-                        kind="worked_example"
-                        question={`${kp.label}: ${kp.worked_example}`}
-                      />
-                    </div>
                   </div>
-                ))}
+                  <ReportMenu
+                    conceptId={b.cid}
+                    lessonId={lesson.title}
+                    kind={b.diagram ? 'diagram' : 'worked_example'}
+                    question={b.diagram ?? `${b.label}: ${b.body}`.slice(0, 2000)}
+                    blockId={`${b.cid}/${b.k}`}
+                  />
+                </div>
               </div>
-            )
-          })}
+            ))}
+          </div>
         </div>
       ) : (
         <div className="bg-mathua-surface border border-mathua-border p-4 sm:p-6 md:p-8 lg:p-10 w-full max-w-full min-w-0 overflow-hidden">
@@ -517,11 +520,12 @@ export function LessonDetail({
             <KatexContent>{lesson.body}</KatexContent>
           </div>
           <div className="mt-3 flex justify-end">
-            <ReportButton
+            <ReportMenu
               conceptId={lesson.concepts[0]}
               lessonId={lesson.title}
               kind="lesson_body"
               question={lesson.body?.slice(0, 2000)}
+              blockId={`${lesson.concepts[0] ?? 'lesson'}/body`}
             />
           </div>
         </div>

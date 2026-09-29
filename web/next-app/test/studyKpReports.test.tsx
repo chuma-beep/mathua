@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor, within } from '@testing-library/react'
 import type { KpInfo } from '../lib/api'
 
 interface KpStub {
@@ -34,12 +34,6 @@ vi.mock('next/image', () => ({
   default: (props: Record<string, unknown>) => <img alt="" {...props} />,
 }))
 
-vi.mock('next/link', () => ({
-  default: ({ children, href }: { children: React.ReactNode; href: string }) => (
-    <a href={href}>{children}</a>
-  ),
-}))
-
 import { LessonDetail } from '../app/study/components'
 
 const lesson = {
@@ -49,50 +43,57 @@ const lesson = {
   prerequisites: [],
 }
 
-describe('study KP report buttons', () => {
+async function openFirstMenu() {
+  // Wait for the full list: findAllByRole resolves on the first match,
+  // which can hand back a node replaced by a later block's render.
+  await screen.findByText(/KP two/)
+  const menuButtons = await screen.findAllByRole('button', { name: /Report options/ })
+  fireEvent.click(menuButtons[0])
+}
+
+describe('study KP report menus', () => {
   beforeEach(() => {
     submitReportMock.mockClear()
     getDiagram.value = '/diagrams/algebrica/example.svg'
   })
 
-  it('hoists the diagram report to one labeled button per concept', async () => {
+  it('shows one icon menu per example block, diagram attached once', async () => {
     render(<LessonDetail lesson={lesson} domain={null} onBack={() => {}} />)
+    await screen.findByText(/KP two/)
 
-    // One diagram button total (not one per KP card), with a distinct label.
-    const diagramButtons = await screen.findAllByText('Report diagram problem')
-    expect(diagramButtons).toHaveLength(1)
+    // No visible report text until a ⋯ menu opens.
+    expect(screen.queryByText('Report a problem')).toBeNull()
+    const menus = await screen.findAllByRole('button', { name: /Report options/ })
+    expect(menus).toHaveLength(2)
 
-    // Each KP card keeps exactly its worked-example button.
-    expect(screen.getAllByText('Report a problem')).toHaveLength(2)
-
-    // Diagram image renders once beside it.
+    // Diagram image renders once beside the first block.
     expect(screen.getByAltText('Worked diagram for c1')).toBeTruthy()
   })
 
-  it('sends concept, kind, and asset path so admins can locate the problem', async () => {
+  it('sends concept, kind, block id, and asset path so admins can locate the problem', async () => {
     render(<LessonDetail lesson={lesson} domain={null} onBack={() => {}} />)
-    fireEvent.click(await screen.findByText('Report diagram problem'))
+    await openFirstMenu()
+    fireEvent.click(screen.getByText('Report a problem'))
     fireEvent.click(screen.getByText('Send report'))
     await waitFor(() => expect(submitReportMock).toHaveBeenCalledTimes(1))
     const payload = (submitReportMock.mock.calls[0] as unknown[])[0] as Record<string, unknown>
     expect(payload).toMatchObject({
       concept_id: 'c1',
       kind: 'diagram',
-      question: '/diagrams/algebrica/example.svg',
     })
+    expect(String(payload.question)).toMatch(/\[block c1\/0\].*example\.svg/)
   })
 
-  it('omits the diagram block entirely when a concept has no diagram', async () => {
+  it('omits the diagram from blocks when a concept has none', async () => {
     getDiagram.value = null
     render(<LessonDetail lesson={lesson} domain={null} onBack={() => {}} />)
     await screen.findByText(/KP one/)
-    expect(screen.queryByText('Report diagram problem')).toBeNull()
-    // Worked-example buttons are unaffected.
-    expect(screen.getAllByText('Report a problem')).toHaveLength(2)
+    expect(screen.queryByAltText(/Worked diagram/)).toBeNull()
+    expect(await screen.findAllByRole('button', { name: /Report options/ })).toHaveLength(2)
   })
 })
 
-describe('study KP dedupe across concepts', () => {
+describe('study KP collapse across concepts', () => {
   const twoConceptLesson = { ...lesson, concepts: ['c1', 'c2'] }
 
   beforeEach(() => {
@@ -100,7 +101,7 @@ describe('study KP dedupe across concepts', () => {
     kpOverride.value = null
   })
 
-  it('renders a shared worked-example body once and points repeats back', async () => {
+  it('renders a shared worked-example body once with combined labels', async () => {
     kpOverride.value = {
       c1: {
         kps: [{ label: 'KP one', section: 'S1', subgoals: [], worked_example: 'shared body' }],
@@ -116,13 +117,12 @@ describe('study KP dedupe across concepts', () => {
     }
     render(<LessonDetail lesson={twoConceptLesson} domain={null} onBack={() => {}} />)
     await screen.findByText(/KP fresh/)
-    // Full "Worked example" expanders: one for the shared body, one fresh.
-    // (Per-concept header badges also read "Worked example"; count summaries.)
-    const summaries = document.querySelectorAll('details > summary')
-    expect(summaries).toHaveLength(2)
-    // The repeat keeps its label and points back instead of re-rendering.
+    // Two unique bodies → two collapsible blocks, no pointer links.
+    expect(document.querySelectorAll('details > summary')).toHaveLength(2)
+    expect(screen.queryByText(/Same worked example as/)).toBeNull()
+    expect(screen.getAllByText('shared body')).toHaveLength(1)
+    // The repeat's label survives as a combined "also" label.
     expect(screen.getByText(/KP repeat/)).toBeTruthy()
-    expect(screen.getByText(/Same worked example as/)).toBeTruthy()
   })
 
   it('renders distinct bodies fully with no pointers', async () => {
@@ -142,7 +142,7 @@ describe('study KP dedupe across concepts', () => {
     expect(screen.queryByText(/Same worked example as/)).toBeNull()
   })
 
-  it('renders a shared diagram once and points repeats back', async () => {
+  it('renders a shared diagram once with no pointers', async () => {
     kpOverride.value = {
       c1: {
         kps: [{ label: 'KP one', section: 'S1', subgoals: [], worked_example: 'first body' }],
@@ -155,11 +155,11 @@ describe('study KP dedupe across concepts', () => {
     }
     render(<LessonDetail lesson={twoConceptLesson} domain={null} onBack={() => {}} />)
     await screen.findByText(/KP two/)
-    expect(screen.getAllByText('Report diagram problem')).toHaveLength(1)
-    expect(screen.getByText(/Same diagram as/)).toBeTruthy()
+    expect(screen.getAllByAltText(/Worked diagram/)).toHaveLength(1)
+    expect(screen.queryByText(/Same diagram as/)).toBeNull()
   })
 
-  it('renders distinct diagrams fully with no pointers', async () => {
+  it('renders distinct diagrams on their own blocks', async () => {
     kpOverride.value = {
       c1: {
         kps: [{ label: 'KP one', section: 'S1', subgoals: [], worked_example: 'first body' }],
@@ -172,7 +172,7 @@ describe('study KP dedupe across concepts', () => {
     }
     render(<LessonDetail lesson={twoConceptLesson} domain={null} onBack={() => {}} />)
     await screen.findByText(/KP two/)
-    expect(screen.getAllByText('Report diagram problem')).toHaveLength(2)
+    expect(screen.getAllByAltText(/Worked diagram/)).toHaveLength(2)
     expect(screen.queryByText(/Same diagram as/)).toBeNull()
   })
 })
