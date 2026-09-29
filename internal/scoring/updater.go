@@ -24,7 +24,7 @@ type Scores struct {
 	SpacedReps       map[string]float64 `json:"spaced_reps,omitempty"`
 	AvgLearningSpeed float64            `json:"avg_learning_speed"`
 	PausedUntil      string             `json:"paused_until,omitempty"`
-	// Batch 1: Quiz 150 XP gate signal (MA verbatim).
+	// Quiz gate signal: XP earned since last completed quiz.
 	XPSinceQuiz int  `json:"xp_since_quiz"`
 	QuizDue     bool `json:"quiz_due"`
 }
@@ -64,7 +64,7 @@ func (u *Updater) Compute(studentID string) (*Scores, error) {
 	level := levels.Compute(mastered)
 	streak := computeCurrentStreak(progress)
 	xpTotal, xpToday, _ := u.repo.GetXP(studentID)
-	dailyGoal := 30
+	dailyGoal := 10
 	if st, err := u.repo.GetStudent(studentID); err == nil && st != nil && st.DailyXPGoal > 0 {
 		dailyGoal = st.DailyXPGoal
 	}
@@ -90,7 +90,7 @@ func (u *Updater) Compute(studentID string) (*Scores, error) {
 		avgSpeed = speedSum / float64(speedCount)
 	}
 
-	// Batch 1: XP earned since last completed quiz drives the 150 XP gate.
+	// XP earned since last completed quiz drives the quiz gate.
 	xpSinceQuiz := xpTotal
 	if last, err := u.repo.LastQuizCompletion(studentID); err == nil && last != nil {
 		xpSinceQuiz = xpTotal - last.XPTotal
@@ -113,8 +113,8 @@ func (u *Updater) Compute(studentID string) (*Scores, error) {
 		AvgLearningSpeed: math.Round(avgSpeed*100) / 100,
 		PausedUntil:      pausedUntil(u, studentID),
 		XPSinceQuiz:      xpSinceQuiz,
-		// 150 mirrors engine.QuizGateXP (import cycle forbids sharing).
-		QuizDue: xpSinceQuiz >= 150,
+		// 50 mirrors engine.QuizGateXP (import cycle forbids sharing).
+		QuizDue: xpSinceQuiz >= 50,
 	}, nil
 }
 

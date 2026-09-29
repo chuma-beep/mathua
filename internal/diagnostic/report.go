@@ -38,7 +38,7 @@ func (e *Engine) Report(s *Session) *DiagnosticReport {
 		GapsByDomain:        map[string][]string{},
 		MasteryLevels:       map[string]float64{},
 		Confidence:          map[string]float64{},
-		CompletionEstimates: map[int]string{150: "≈5 days", 300: "≈10 days", 900: "≈30 days"},
+		CompletionEstimates: map[int]string{50: "≈5 days", 100: "≈10 days", 300: "≈30 days"},
 		TotalQuestions:      s.totalAsked,
 	}
 

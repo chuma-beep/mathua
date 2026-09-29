@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS students (
     xp_today             INTEGER NOT NULL DEFAULT 0,
     xp_date              TEXT,
     diagnostic_completed INTEGER NOT NULL DEFAULT 0,
-    daily_xp_goal        INTEGER NOT NULL DEFAULT 30,
+    daily_xp_goal        INTEGER NOT NULL DEFAULT 10,
     settings             TEXT NOT NULL DEFAULT '{}',
     league               TEXT NOT NULL DEFAULT 'bronze',
     league_week          TEXT NOT NULL DEFAULT '',
@@ -214,7 +214,7 @@ func pgAuthMigrate(db *sql.DB) error {
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS xp_today INTEGER NOT NULL DEFAULT 0",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS xp_date TEXT",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS diagnostic_completed INTEGER NOT NULL DEFAULT 0",
-		"ALTER TABLE students ADD COLUMN IF NOT EXISTS daily_xp_goal INTEGER NOT NULL DEFAULT 30",
+		"ALTER TABLE students ADD COLUMN IF NOT EXISTS daily_xp_goal INTEGER NOT NULL DEFAULT 10",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS settings TEXT NOT NULL DEFAULT '{}'",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS league TEXT NOT NULL DEFAULT 'bronze'",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS league_week TEXT NOT NULL DEFAULT ''",
@@ -290,6 +290,9 @@ func pgAuthMigrate(db *sql.DB) error {
 				SELECT lower(username) FROM students WHERE username IS NOT NULL AND username != ''
 				GROUP BY lower(username) HAVING COUNT(*) > 1
 			)`},
+		// v3 small-awards economy: proportional rescale preserves intent
+		// (30→10, 150→50, 100→33); goals already at/below 10 are untouched.
+		3: {"UPDATE students SET daily_xp_goal = GREATEST(1, ROUND(daily_xp_goal / 3.0)) WHERE daily_xp_goal > 10"},
 	}
 	for v := 1; v <= len(dataMigrations); v++ {
 		if err := runOncePostgres(db, v, dataMigrations[v]); err != nil {

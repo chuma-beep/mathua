@@ -56,8 +56,8 @@ func TestEstimateXPCollapse(t *testing.T) {
 	if xa != xb {
 		t.Errorf("XP for a differs by accuracy: %v vs %v (must collapse to streak x base)", xa, xb)
 	}
-	if xa != 4*10 {
-		t.Errorf("XP for a = %v, want 4*10=40", xa)
+	if xa != 4*1 {
+		t.Errorf("XP for a = %v, want 4*1=4", xa)
 	}
 }
 
@@ -70,8 +70,8 @@ func TestEstimateWordBase(t *testing.T) {
 	}
 	est := EstimateWorkload(path, nil, nil, EstimateOpts{DailyXPRate: 50})
 	for _, c := range est.Costs {
-		if c.ConceptID == "c.word" && c.XP != 2*15 {
-			t.Errorf("c.word XP = %v, want 2*15=30", c.XP)
+		if c.ConceptID == "c.word" && c.XP != 2*1 {
+			t.Errorf("c.word XP = %v, want 2*1=2", c.XP)
 		}
 	}
 }
@@ -112,7 +112,7 @@ func TestEstimateQuizzes(t *testing.T) {
 		t.Fatal(err)
 	}
 	est := EstimateWorkload(path, nil, nil, EstimateOpts{DailyXPRate: 50})
-	// XP: a=40 + b=40 + c.word=30 = 110 -> 1 quiz.
+	// XP: a=4 + b=4 + c.word=2 = 10 -> 1 quiz.
 	if est.QuizzesAhead != 1 {
 		t.Errorf("quizzes = %d, want 1 for 110 XP", est.QuizzesAhead)
 	}
@@ -131,17 +131,17 @@ func TestEstimateDeadline(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	// XP: 80 over 10 days, no rest -> 8/day, feasible under cap 50.
+	// XP: 8 over 10 days, no rest -> 0.8/day, feasible under cap 50.
 	est := EstimateWorkload(path, nil, nil, EstimateOpts{DailyXPRate: 50, DeadlineDays: 10, FeasibleCap: 50})
-	if est.RequiredPerDay != 8 {
-		t.Errorf("required/day = %v, want 8", est.RequiredPerDay)
+	if est.RequiredPerDay != 0.8 {
+		t.Errorf("required/day = %v, want 0.8", est.RequiredPerDay)
 	}
 	if !est.Feasible {
 		t.Errorf("should be feasible under cap 50")
 	}
-	tight := EstimateWorkload(path, nil, nil, EstimateOpts{DailyXPRate: 50, DeadlineDays: 2, FeasibleCap: 30})
+	tight := EstimateWorkload(path, nil, nil, EstimateOpts{DailyXPRate: 50, DeadlineDays: 2, FeasibleCap: 3})
 	if tight.Feasible {
-		t.Errorf("40/day over 2 days should be infeasible under cap 30, got required=%v", tight.RequiredPerDay)
+		t.Errorf("4/day over 2 days should be infeasible under cap 3, got required=%v", tight.RequiredPerDay)
 	}
 }
 

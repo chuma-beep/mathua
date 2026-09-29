@@ -23,7 +23,7 @@ import (
 	"github.com/chuma-beep/mathua/internal/scheduler"
 	"github.com/chuma-beep/mathua/internal/scoring"
 	"github.com/chuma-beep/mathua/internal/storage"
-	"github.com/chuma-beep/mathua/internal/xp"
+	xppolicy "github.com/chuma-beep/mathua/internal/xp"
 )
 
 type activeSession struct {
@@ -134,8 +134,9 @@ type Engine struct {
 	quizRemedial map[string][]string
 }
 
-// QuizGateXP is the MA-verbatim mastery-check interval (CONTEXT.md Q3 lock).
-const QuizGateXP = 150
+// QuizGateXP is the mastery-check interval (rescaled 150 -> 50 with the
+// small-awards economy; cadence preserved at roughly every 5 lessons).
+const QuizGateXP = 50
 
 // maxQuizRemedial caps the per-student quiz remedial queue.
 const maxQuizRemedial = 10
@@ -285,7 +286,7 @@ func (e *Engine) CourseCatalog(studentID string) ([]CourseStatus, error) {
 	if err != nil {
 		return nil, err
 	}
-	goal := 30
+	goal := 10
 	if st, err := e.repo.GetStudent(studentID); err == nil && st != nil && st.DailyXPGoal > 0 {
 		goal = st.DailyXPGoal
 	}
@@ -1130,7 +1131,7 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 	if !gr.Correct && elapsedSeconds < 2.0 {
 		as.rushCount++
 		if as.rushCount >= 2 {
-			xp = -5
+			xp = xppolicy.RushPenalty
 		}
 	}
 	if xp != 0 {
@@ -1376,7 +1377,7 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 			halted = true
 		}
 		if elapsedSeconds < 2.0 && e.studyMisses[missKey] >= 2 && !dontKnow {
-			xp = -5
+			xp = xppolicy.RushPenalty
 		}
 		// Batch 1: immediate remedial enqueue on quiz miss — missed concept
 		// plus its key prerequisites surface first in Study after the quiz.
@@ -1437,13 +1438,13 @@ func sourceForTaskType(taskType string) string {
 // taskBaseXP maps MA task types to base XP (10/5/15/20).
 // Single source of truth lives in internal/xp; this delegates to it.
 func taskBaseXP(taskType string) int {
-	return xp.BaseXP(taskType)
+	return xppolicy.BaseXP(taskType)
 }
 
 // computeXPForTask is the MA-differed XP calculator (10/5/15/20).
 // Delegates to internal/xp so estimators share the exact award math.
 func computeXPForTask(correct bool, elapsed, timeThreshold float64, streak int, taskType string) int {
-	return xp.Award(correct, elapsed, timeThreshold, streak, taskType)
+	return xppolicy.Award(correct, elapsed, timeThreshold, streak, taskType)
 }
 
 // QuizXP awards TaskQuiz 20 for actionable quiz path (own grading path per Q3).
@@ -1488,7 +1489,7 @@ func (e *Engine) QuizXPSince(studentID string) (int, error) {
 	return since, nil
 }
 
-// QuizDue reports whether the 150 XP mastery-check gate is reached.
+// QuizDue reports whether the mastery-check gate is reached.
 func (e *Engine) QuizDue(studentID string) (bool, error) {
 	since, err := e.QuizXPSince(studentID)
 	if err != nil {

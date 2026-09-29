@@ -203,8 +203,8 @@ func TestEngine_Report_Fields(t *testing.T) {
 	if rep.Confidence[s.LastConceptID] < 0.5 {
 		t.Errorf("expected confidence >= 0.5 after probing, got %f", rep.Confidence[s.LastConceptID])
 	}
-	if rep.CompletionEstimates[150] == "" {
-		t.Error("expected completion estimate for 150 XP")
+	if rep.CompletionEstimates[50] == "" {
+		t.Error("expected completion estimate for 50 XP")
 	}
 }
 
@@ -291,7 +291,7 @@ func TestEngine_Report_CompletionEstimates(t *testing.T) {
 	s := e.Start()
 	answer(t, e, s, true, true)
 	rep := e.Report(s)
-	for _, xp := range []int{150, 300, 900} {
+	for _, xp := range []int{50, 100, 300} {
 		if rep.CompletionEstimates[xp] == "" {
 			t.Errorf("expected completion estimate for %d XP", xp)
 		}

@@ -3,7 +3,6 @@ package planning
 import (
 	"math"
 	"sort"
-	"strings"
 	"time"
 
 	"github.com/chuma-beep/mathua/internal/concepts"
@@ -36,7 +35,7 @@ const (
 	defaultDecayDays = 30
 	minAccuracy      = 0.2
 	maxAccuracy      = 0.95
-	quizGateXP       = 150
+	quizGateXP       = 50
 	quizQuestions    = 5
 	quizSecPerQ      = 30.0
 	dontKnowTimeFrac = 0.3
@@ -77,13 +76,11 @@ type WorkloadEstimate struct {
 	} `json:"lines"`
 }
 
-// taskBaseFor maps a concept to its XP task base: word problems are
-// multistep everywhere (ADR-002), everything else is a plain lesson.
-func taskBaseFor(conceptID string) float64 {
-	if strings.HasSuffix(conceptID, ".word") {
-		return float64(xp.BaseXP(xp.TaskMultistep))
-	}
-	return float64(xp.BaseXP(xp.TaskLesson))
+// taskBaseFor maps a concept to its XP task base via the shared effort
+// calibration (neutral difficulty — the estimator prices typical work,
+// and the award path applies the same function, so estimates track reality).
+func taskBaseFor(c *concepts.Concept) float64 {
+	return float64(xp.EffortBase(thresholdSec(c), 0.5))
 }
 
 // accuracy returns the decisive correct rate, excluding don't-knows, with a
@@ -155,7 +152,7 @@ func EstimateWorkload(path *Path, progress map[string]*storage.ConceptProgress, 
 		est.TimeMinRemaining += cost.TimeMin
 	}
 
-	// Assessment line: one 150 XP-gate quiz per 150 XP of learning effort.
+	// Assessment line: one gate-interval quiz per 50 XP of learning effort.
 	// Quizzes grant XP, so they are time cost only — never XP debt.
 	if est.XPRemaining > 0 {
 		est.QuizzesAhead = int(math.Ceil(est.XPRemaining / quizGateXP))
@@ -215,7 +212,7 @@ func learningCost(c *concepts.Concept, p *storage.ConceptProgress, s AttemptStat
 	}
 	acc := accuracy(s)
 	attempts := float64(remaining) / acc
-	base := taskBaseFor(c.ID)
+	base := taskBaseFor(c)
 	cost := ConceptCost{
 		ConceptID: c.ID,
 		XP:        float64(remaining) * base,
@@ -241,7 +238,7 @@ func reviewCost(c *concepts.Concept, p *storage.ConceptProgress, s AttemptStats)
 		}
 	}
 	acc := accuracy(s)
-	base := float64(xp.BaseXP(xp.TaskReview))
+	base := taskBaseFor(c) / 2 // reviews cost half: known material
 	return ConceptCost{
 		ConceptID: c.ID,
 		XP:        2 * base * acc,

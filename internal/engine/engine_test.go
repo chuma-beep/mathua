@@ -451,8 +451,8 @@ func TestEngine_NegativeXP_AfterSecondRush(t *testing.T) {
 	}
 	q2, _ := e.NextQuestion(sess.ID, st.ID)
 	res2, _ := e.SubmitAnswer(sess.ID, st.ID, q2.AttemptID, "wrong", 1.0)
-	if res2.XP != -5 {
-		t.Errorf("expected -5 XP second rush, got %d", res2.XP)
+	if res2.XP != -1 {
+		t.Errorf("expected -1 XP second rush, got %d", res2.XP)
 	}
 }
 
@@ -489,7 +489,7 @@ func TestEngine_Accommodation_ExtraTimeScalesThreshold(t *testing.T) {
 func TestEngine_StudyPath_NegativeXPOnRush(t *testing.T) {
 	e := testEngine(t)
 	st, _ := e.CreateStudent("study_rush")
-	// First incorrect rush → 0; second incorrect rush → -5
+	// First incorrect rush → 0; second incorrect rush → -1
 	r1, err := e.SubmitStudyAnswer(st.ID, "a", "wrong", "42", 1.0, "")
 	if err != nil {
 		t.Fatalf("study submit 1: %v", err)
@@ -501,8 +501,8 @@ func TestEngine_StudyPath_NegativeXPOnRush(t *testing.T) {
 	if err != nil {
 		t.Fatalf("study submit 2: %v", err)
 	}
-	if r2.XP != -5 {
-		t.Errorf("expected -5 XP second study rush, got %d", r2.XP)
+	if r2.XP != -1 {
+		t.Errorf("expected -1 XP second study rush, got %d", r2.XP)
 	}
 	if !r2.Halted {
 		t.Error("expected halted flag after 2 consecutive study misses")
@@ -713,7 +713,7 @@ func TestEngine_QuizMiss_EnqueuesRemedial(t *testing.T) {
 	}
 }
 
-// Batch 1: 150 XP gate — due at 150 since last completion, reset on record.
+// Quiz gate — due at 50 XP since last completion, reset on record.
 
 func TestEngine_QuizGate_DueAndReset(t *testing.T) {
 	e := testEngine(t)
@@ -722,20 +722,20 @@ func TestEngine_QuizGate_DueAndReset(t *testing.T) {
 	if err != nil || due {
 		t.Fatalf("expected not due at 0 XP, due=%v err=%v", due, err)
 	}
-	if err := e.repo.AddXP(st.ID, 149); err != nil {
+	if err := e.repo.AddXP(st.ID, 49); err != nil {
 		t.Fatalf("add xp: %v", err)
 	}
 	if due, _ := e.QuizDue(st.ID); due {
-		t.Error("expected not due at 149 XP since quiz")
+		t.Error("expected not due at 49 XP since quiz")
 	}
 	if err := e.repo.AddXP(st.ID, 1); err != nil {
 		t.Fatalf("add xp: %v", err)
 	}
-	if since, _ := e.QuizXPSince(st.ID); since != 150 {
-		t.Errorf("expected 150 since, got %d", since)
+	if since, _ := e.QuizXPSince(st.ID); since != 50 {
+		t.Errorf("expected 50 since, got %d", since)
 	}
 	if due, _ := e.QuizDue(st.ID); !due {
-		t.Error("expected due at 150 XP since quiz")
+		t.Error("expected due at 50 XP since quiz")
 	}
 	if err := e.RecordQuizCompletion(st.ID); err != nil {
 		t.Fatalf("record completion: %v", err)
