@@ -1109,6 +1109,44 @@ func (s *PostgresStore) DeleteActiveSession(sessionID string) error {
 	return nil
 }
 
+// ResetProgress mirrors the SQLite twin (see Repository docs for scope).
+func (s *PostgresStore) ResetProgress(studentID string) error {
+	tx, err := s.db.Begin()
+	if err != nil {
+		return fmt.Errorf("begin progress reset: %w", err)
+	}
+	exec := func(stmt string, args ...interface{}) error {
+		if _, err := tx.Exec(stmt, args...); err != nil {
+			tx.Rollback()
+			return err
+		}
+		return nil
+	}
+	stmts := []struct {
+		q    string
+		args []interface{}
+	}{
+		{"DELETE FROM attempts WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM active_sessions WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM sessions WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM concept_progress WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM student_topic_speed WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM quiz_completions WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM server_sessions WHERE kind IN ('study_expected','study_plan') AND (key = $1 OR key LIKE $1 || '|%')", []interface{}{studentID}},
+		{`UPDATE students SET xp_total = 0, xp_today = 0, diagnostic_completed = 0,
+			league = 'bronze', league_week = '', league_moved = 0 WHERE id = $1`, []interface{}{studentID}},
+	}
+	for _, st := range stmts {
+		if err := exec(st.q, st.args...); err != nil {
+			return fmt.Errorf("reset progress: %w", err)
+		}
+	}
+	if err := tx.Commit(); err != nil {
+		return fmt.Errorf("commit progress reset: %w", err)
+	}
+	return nil
+}
+
 // Attempts
 
 func (s *PostgresStore) RecordAttempt(entry AttemptEntry) error {
