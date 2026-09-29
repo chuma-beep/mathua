@@ -6,7 +6,6 @@ import Link from 'next/link'
 import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
-import Footer from '../../components/Footer'
 import KatexContent from '../../components/KatexContent'
 import { stripMathDelimiters } from '../../lib/lessonMath'
 import { subdomainLeaf } from '../../lib/conceptDisplay'
@@ -67,7 +66,6 @@ function ConceptContent() {
           <Loading label="LOADING CONCEPT" />
         </div>
         <BottomTabs />
-        <Footer />
       </>
     )
   }
@@ -83,7 +81,6 @@ function ConceptContent() {
           </button>
         </div>
         <BottomTabs />
-        <Footer />
       </>
     )
   }
@@ -328,7 +325,6 @@ function ConceptContent() {
 
       </div>
 
-      <Footer />
       <BottomTabs />
     </>
   )
@@ -337,7 +333,7 @@ function ConceptContent() {
 export default function ConceptPage() {
   return (
     <Suspense fallback={
-      <><Header /><div className="max-w-container mx-auto px-4 sm:px-6 pt-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 text-center overflow-x-hidden min-w-0"><Loading label="LOADING CONCEPT" /></div><Footer /></>
+      <><Header /><div className="max-w-container mx-auto px-4 sm:px-6 pt-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 text-center overflow-x-hidden min-w-0"><Loading label="LOADING CONCEPT" /></div></>
     }>
       <ConceptContent />
     </Suspense>

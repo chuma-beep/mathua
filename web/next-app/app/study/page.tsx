@@ -5,12 +5,11 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
-import Footer from '../../components/Footer'
 import StudySkeleton from '../../components/skeletons/StudySkeleton'
-import { getLessons, getLessonBody, getScores, type LessonInfo, type LessonsRes, type Scores } from '../../lib/api'
-import { getUserInfo, getGuestId } from '../../lib/auth'
+import { getLessons, getLessonBody, type LessonInfo, type LessonsRes } from '../../lib/api'
+import { getUserInfo } from '../../lib/auth'
 import { conceptLabels, domainOrder, lessonProgress } from './domains'
-import { DomainDrillDown, DomainOverview, LessonDetail, QuizGateBanner } from './components'
+import { DomainDrillDown, DomainOverview, LessonDetail } from './components'
 
 let lessonsCache: { key: string; res: LessonsRes } | null = null
 function getLessonsCached(studentId?: string): Promise<LessonsRes> {
@@ -36,7 +35,6 @@ function StudyContent() {
   const [selectedLesson, setSelectedLesson] = useState<LessonInfo | null>(null)
   const [selectedDomain, setSelectedDomain] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
-  const [scores, setScores] = useState<Scores | null>(null)
 
   useEffect(() => {
     const user = getUserInfo()
@@ -45,10 +43,6 @@ function StudyContent() {
       setLessonsByDomain(res.lessons)
       setLoading(false)
     }).catch((e) => { console.error('getLessons failed:', e); setLoading(false) })
-    const sid = studentId || getGuestId() || ''
-    if (sid) {
-      getScores(sid).then(setScores).catch(() => {})
-    }
   }, [])
 
   // O(1) lookups for URL → state sync (replaces find-in-loop).
@@ -169,7 +163,6 @@ function StudyContent() {
           <StudySkeleton />
         </div>
         <BottomTabs />
-        <Footer />
       </>
     )
   }
@@ -192,15 +185,12 @@ function StudyContent() {
               </Link>
             </span>
           )}
-
-          <QuizGateBanner scores={scores} />
-
           {selectedLesson ? (
             // ── Lesson Detail ──
             <>
               {bodyError && (
                 <div role="alert" className="mb-4 flex flex-wrap items-center gap-3 border border-mathua-red bg-mathua-surface px-4 py-3">
-                  <span className="font-mono text-xs text-mathua-red">Couldn&apos;t load the lesson text, practice below still works.</span>
+                  <span className="font-mono text-xs text-mathua-red">Couldn&apos;t load the lesson text.</span>
                   <button
                     type="button"
                     onClick={() => setBodyRetry(n => n + 1)}
@@ -287,7 +277,6 @@ function StudyContent() {
         </section>
       </div>
 
-      <Footer />
       <BottomTabs />
     </>
   )
@@ -296,7 +285,7 @@ function StudyContent() {
 export default function StudyPage() {
   return (
     <Suspense fallback={
-      <><Header /><div className="pt-20 lg:pt-0"><StudySkeleton /></div><Footer /></>
+      <><Header /><div className="pt-20 lg:pt-0"><StudySkeleton /></div></>
     }>
       <StudyContent />
     </Suspense>
