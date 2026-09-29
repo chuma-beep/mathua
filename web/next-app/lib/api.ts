@@ -1020,8 +1020,12 @@ export interface LessonKpsRes {
 	diagram?: string
 }
 
-export async function getLessonPractice(conceptId: string, count = 5): Promise<LessonPracticeRes> {
-	const res = await authedFetch(`${API_BASE}/api/lessons/${encodeURIComponent(conceptId)}/practice?count=${count}`)
+export async function getLessonPractice(conceptId: string, count = 5, opts?: { seed?: number; exclude?: string[]; difficulty?: number }): Promise<LessonPracticeRes> {
+	const params = new URLSearchParams({ count: String(count) })
+	if (opts?.seed) params.set('seed', String(opts.seed))
+	if (opts?.difficulty !== undefined) params.set('difficulty', String(opts.difficulty))
+	for (const ex of opts?.exclude ?? []) params.append('exclude', ex)
+	const res = await authedFetch(`${API_BASE}/api/lessons/${encodeURIComponent(conceptId)}/practice?${params.toString()}`)
 	if (!res.ok) throw new Error(`Lesson practice fetch failed: ${res.status}`)
 	return res.json()
 }
@@ -1029,6 +1033,19 @@ export async function getLessonPractice(conceptId: string, count = 5): Promise<L
 export async function getLessonKPs(conceptId: string): Promise<LessonKpsRes> {
 	const res = await authedFetch(`${API_BASE}/api/lessons/${encodeURIComponent(conceptId)}/kp`, { cache: 'no-store' })
 	if (!res.ok) return { concept_id: conceptId, kps: [] }
+	return res.json()
+}
+
+export interface ReadinessRes {
+	concept_id: string
+	ready: boolean
+	weak: { id: string; label: string; status: string; mastery_pct: number }[]
+	missing: { id: string; label: string; status: string; mastery_pct: number }[]
+}
+
+export async function getLessonReadiness(conceptId: string): Promise<ReadinessRes> {
+	const res = await authedFetch(`${API_BASE}/api/lessons/${encodeURIComponent(conceptId)}/readiness`, { cache: 'no-store' })
+	if (!res.ok) return { concept_id: conceptId, ready: true, weak: [], missing: [] }
 	return res.json()
 }
 
