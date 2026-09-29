@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, fireEvent, waitFor, within } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import type { KpInfo } from '../lib/api'
 
 interface KpStub {
@@ -7,10 +7,14 @@ interface KpStub {
   diagram: string
 }
 
+interface KpOverrides {
+  [conceptId: string]: KpStub
+}
+
 const { submitReportMock, getDiagram, kpOverride } = vi.hoisted(() => ({
   submitReportMock: vi.fn(async () => {}),
   getDiagram: { value: '/diagrams/algebrica/example.svg' as string | null },
-  kpOverride: { value: null as null | Record<string, KpStub> },
+  kpOverride: { value: null as null | KpOverrides },
 }))
 
 vi.mock('../lib/api', async importOriginal => ({
@@ -31,7 +35,7 @@ vi.mock('../lib/api', async importOriginal => ({
 }))
 
 vi.mock('next/image', () => ({
-  default: (props: Record<string, unknown>) => <img alt="" {...props} />,
+  default: (props: { src?: string; alt?: string }) => <img alt={props.alt ?? ''} {...props} />,
 }))
 
 import { LessonDetail } from '../app/study/components'
@@ -76,11 +80,12 @@ describe('study KP report menus', () => {
     fireEvent.click(screen.getByText('Report a problem'))
     fireEvent.click(screen.getByText('Send report'))
     await waitFor(() => expect(submitReportMock).toHaveBeenCalledTimes(1))
-    const payload = (submitReportMock.mock.calls[0] as unknown[])[0] as Record<string, unknown>
+    const payload = (submitReportMock.mock.calls[0] as unknown[])[0] as { concept_id?: string; kind?: string; question?: string }
     expect(payload).toMatchObject({
       concept_id: 'c1',
       kind: 'diagram',
     })
+    expect(payload.question).toMatch(/\[block c1\/0\].*example\.svg/)
     expect(String(payload.question)).toMatch(/\[block c1\/0\].*example\.svg/)
   })
 
