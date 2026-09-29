@@ -14,8 +14,9 @@ import StrugglesSection from '../../components/StrugglesSection'
 import ProfileSkeleton from '../../components/skeletons/ProfileSkeleton'
 import { AppSidebar } from '../../components/app-sidebar'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '../../components/ui/sidebar'
-import NextUpCard from '../../components/NextUpCard'
-import { selectNextUp } from '../../lib/nextUp'
+import TaskShelf from '../../components/TaskShelf'
+import { selectNextUp, selectShelf } from '../../lib/nextUp'
+import { concepts as conceptCatalog } from '../../lib/conceptData'
 
 interface UserInfo {
   student_id: string
@@ -52,6 +53,22 @@ export default function ProfilePage() {
         activity,
         diagnosticCompleted: user?.diagnostic_completed ?? false,
         conceptsMastered: scores?.concepts_mastered ?? 0,
+      }),
+    [dueReviews, weaknesses, progress, activity, user?.diagnostic_completed, scores?.concepts_mastered],
+  )
+
+  // Task shelf (primary surface): eligible candidates via the v1 fixed
+  // policy; selectNextUp stays as the always-satisfiable fallback.
+  const shelf = useMemo(
+    () =>
+      selectShelf({
+        dueReviews,
+        weaknesses,
+        progress,
+        activity,
+        diagnosticCompleted: user?.diagnostic_completed ?? false,
+        conceptsMastered: scores?.concepts_mastered ?? 0,
+        catalog: conceptCatalog.map(c => ({ id: c.id, label: c.label, prerequisites: c.prerequisites ?? [] })),
       }),
     [dueReviews, weaknesses, progress, activity, user?.diagnostic_completed, scores?.concepts_mastered],
   )
@@ -302,7 +319,7 @@ export default function ProfilePage() {
           avatarPreset={avatarPreset}
         />
 
-        <NextUpCard next={nextUp} />
+        <TaskShelf items={shelf} />
 
         {(scores.concepts_mastered === 0 && !user.diagnostic_completed) && (
           <section className="mt-6 border border-mathua-border bg-mathua-surface p-4">

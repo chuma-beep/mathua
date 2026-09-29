@@ -33,7 +33,7 @@ describe('selectNextUp', () => {
       progress: { 'frac.add': { status: 'learning', streak: 1 } },
     })
     expect(n.kind).toBe('weakness')
-    expect(n.href).toBe('/study?concept=frac.add')
+    expect(n.href).toBe('/learn?concept=frac.add')
   })
 
   it('skips mastered weaknesses', () => {
@@ -59,7 +59,7 @@ describe('selectNextUp', () => {
       ],
     })
     expect(n.kind).toBe('resume')
-    expect(n.href).toBe('/study?concept=alg.lin')
+    expect(n.href).toBe('/learn?concept=alg.lin')
   })
 
   it('sends brand-new users to Diagnostic', () => {
