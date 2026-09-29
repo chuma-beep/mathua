@@ -130,6 +130,13 @@ func main() {
 	}
 
 	planner, _ := planning.Load("data/courses.json", dag)
+	if planner != nil {
+		if ds, err := planning.LoadDestinations("data/destinations.json"); err != nil {
+			log.Printf("warning: destinations unavailable: %v", err)
+		} else {
+			planner.SetDestinations(ds)
+		}
+	}
 	eng := engine.New(repo, dag, reg, ll, planner)
 
 	// Data repair: re-grade persisted attempts and fix grader false negatives

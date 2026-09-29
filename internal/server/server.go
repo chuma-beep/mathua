@@ -244,6 +244,10 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/share/", logRequest(cors(s.shareLimiter.middleware(s.handleShareReport))))
 	mux.HandleFunc("/api/courses", logRequest(cors(s.authMiddleware(s.handleCourses))))
 	mux.HandleFunc("/api/courses/", logRequest(cors(s.authMiddleware(s.handleCourseRoute))))
+	mux.HandleFunc("/api/destinations", logRequest(cors(s.authMiddleware(s.handleDestinations))))
+	mux.HandleFunc("/api/destinations/", logRequest(cors(s.authMiddleware(s.handleDestinationEstimate))))
+	mux.HandleFunc("/api/plans", logRequest(cors(s.authMiddleware(s.handlePlanSave))))
+	mux.HandleFunc("/api/plans/current", logRequest(cors(s.authMiddleware(s.handlePlanCurrent))))
 	mux.HandleFunc("/api/transcript", logRequest(cors(s.authMiddleware(s.handleTranscript))))
 	mux.HandleFunc("/api/attempts", logRequest(cors(s.authMiddleware(s.handleAttempts))))
 	mux.HandleFunc("/api/goal", logRequest(cors(s.authMiddleware(s.handleGoal))))
@@ -2127,6 +2131,119 @@ func (s *Server) handleCourseRoute(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	s.handleCourseDetail(w, r)
+}
+
+// GET /api/destinations — destination bundles with per-student progress.
+func (s *Server) handleDestinations(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	list, err := s.eng.Destinations(studentID)
+	if err != nil {
+		writeError(w, "failed to load destinations", 500)
+		return
+	}
+	writeJSON(w, map[string]interface{}{"destinations": list})
+}
+
+// GET /api/destinations/{id}/estimate — two-track workload estimate.
+// Query: daily_goal (default stored goal), deadline_days (-1 none),
+// rest_days (0-6), diagnostic_min. Pure estimator: never mutates mastery,
+// quiz eligibility, or XP.
+func (s *Server) handleDestinationEstimate(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	rest := strings.TrimPrefix(r.URL.Path, "/api/destinations/")
+	rest = strings.TrimSuffix(rest, "/")
+	parts := strings.SplitN(rest, "/", 2)
+	if len(parts) != 2 || parts[1] != "estimate" || parts[0] == "" {
+		http.Error(w, `{"error":"not found"}`, 404)
+		return
+	}
+	q := r.URL.Query()
+	dailyGoal := 0
+	if v, err := strconv.Atoi(q.Get("daily_goal")); err == nil && v > 0 {
+		dailyGoal = v
+	}
+	if dailyGoal == 0 {
+		if st, err := s.repo.GetStudent(studentID); err == nil && st != nil && st.DailyXPGoal > 0 {
+			dailyGoal = st.DailyXPGoal
+		} else {
+			dailyGoal = 30
+		}
+	}
+	deadlineDays := -1
+	if v, err := strconv.Atoi(q.Get("deadline_days")); err == nil && v > 0 {
+		deadlineDays = v
+	}
+	restDays := 0
+	if v, err := strconv.Atoi(q.Get("rest_days")); err == nil && v >= 0 {
+		restDays = v
+	}
+	diagMin := 0.0
+	if v, err := strconv.ParseFloat(q.Get("diagnostic_min"), 64); err == nil && v > 0 {
+		diagMin = v
+	}
+	resp, err := s.eng.DestinationEstimate(studentID, parts[0], dailyGoal, deadlineDays, restDays, diagMin)
+	if err != nil {
+		writeError(w, err.Error(), 404)
+		return
+	}
+	writeJSON(w, resp)
+}
+
+// POST /api/plans — snapshot the current estimate as the ahead/behind baseline.
+func (s *Server) handlePlanSave(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	var req struct {
+		Destination  string `json:"destination"`
+		DailyGoal    int    `json:"daily_goal"`
+		DeadlineDays int    `json:"deadline_days"`
+		RestDays     int    `json:"rest_days"`
+	}
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeError(w, "invalid request", 400)
+		return
+	}
+	if req.Destination == "" {
+		writeError(w, "destination required", 400)
+		return
+	}
+	snap, err := s.eng.SavePlan(studentID, req.Destination, req.DailyGoal, req.DeadlineDays, req.RestDays)
+	if err != nil {
+		writeError(w, err.Error(), 400)
+		return
+	}
+	writeJSON(w, snap)
+}
+
+// GET /api/plans/current — saved baseline plus fresh ahead/behind delta.
+func (s *Server) handlePlanCurrent(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	snap, ok := s.eng.GetPlan(studentID)
+	if !ok {
+		writeJSON(w, map[string]interface{}{"plan": nil})
+		return
+	}
+	resp, err := s.eng.DestinationEstimate(studentID, snap.Destination, snap.DailyGoal, snap.DeadlineDays, snap.RestDays, 0)
+	if err != nil {
+		writeJSON(w, map[string]interface{}{"plan": snap})
+		return
+	}
+	writeJSON(w, map[string]interface{}{"plan": snap, "delta_days": resp.PlanDelta, "xp_remaining": resp.Estimate.XPRemaining})
 }
 
 // GET /api/courses/{id} — one course with the student's progress.
