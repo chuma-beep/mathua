@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
+import DangerZone from '../../components/DangerZone'
 import Footer from '../../components/Footer'
 import { getSettings, updateSettings, updateProfileName, changePassword, uploadAvatar, deleteAvatar, avatarImageUrl, getIdentities, deleteIdentity, createLinkToken, requestEmailVerification, startOAuthLogin, getConfig, OAUTH_LABELS, type OAuthProvider, enableShare, disableShare, type UserSettings } from '../../lib/api'
 import { isLoggedIn, getUserInfo, setUserInfo } from '../../lib/auth'
@@ -338,7 +339,7 @@ export default function SettingsPage() {
         <Header />
         <div className="max-w-container mx-auto px-4 sm:px-6 py-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-20 text-center overflow-x-hidden min-w-0">
           <p className="font-mono text-xs text-mathua-secondary mb-4">Settings needs an account: your preferences are stored per account.</p>
-          <Link href="/login" className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Sign in</Link>
+          <Link href="/login" className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Sign in</Link>
         </div>
         <BottomTabs />
         <Footer />
@@ -413,7 +414,7 @@ export default function SettingsPage() {
                     <button
                       type="button"
                       onClick={() => handlePause(null)}
-                      className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none px-4 h-9 text-xs font-mono"
+                      className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none px-4 h-9 text-xs font-mono"
                     >
                       Resume now
                     </button>
@@ -441,7 +442,7 @@ export default function SettingsPage() {
                   <button
                     type="submit"
                     disabled={nameBusy}
-                    className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none px-4 h-10 text-xs font-mono disabled:opacity-50 shrink-0 inline-flex items-center gap-2"
+                    className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none px-4 h-10 text-xs font-mono disabled:opacity-50 shrink-0 inline-flex items-center gap-2"
                   >
                     {nameBusy ? (<><Loading inline size={11} /> Saving…</>) : 'Save profile'}
                   </button>
@@ -517,7 +518,7 @@ export default function SettingsPage() {
                   <button
                     type="button"
                     onClick={handleSurprise}
-                    className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none px-4 h-9 text-xs font-mono inline-flex items-center gap-2"
+                    className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none px-4 h-9 text-xs font-mono inline-flex items-center gap-2"
                   >
                     <Dices className="size-4" aria-hidden />
                     Surprise me
@@ -526,7 +527,7 @@ export default function SettingsPage() {
                     type="button"
                     onClick={handleSaveImage}
                     disabled={!pendingDiffers || imageBusy}
-                    className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none px-4 h-9 text-xs font-mono disabled:opacity-50 inline-flex items-center gap-2"
+                    className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none px-4 h-9 text-xs font-mono disabled:opacity-50 inline-flex items-center gap-2"
                   >
                     {imageBusy ? (<><Loading inline size={11} /> Saving…</>) : 'Save image'}
                   </button>
@@ -589,7 +590,7 @@ export default function SettingsPage() {
                   type="button"
                   onClick={handleChangePassword}
                   disabled={cpBusy}
-                  className="mt-3 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none px-4 h-10 text-xs font-mono disabled:opacity-50 inline-flex items-center gap-2"
+                  className="mt-3 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none px-4 h-10 text-xs font-mono disabled:opacity-50 inline-flex items-center gap-2"
                 >
                   {cpBusy ? (<><Loading inline size={11} /> Saving…</>) : 'Change password'}
                 </button>
@@ -678,7 +679,7 @@ export default function SettingsPage() {
                     type="button"
                     onClick={() => handleShare(true)}
                     disabled={shareBusy}
-                    className="mt-3 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none px-4 h-9 text-xs font-mono disabled:opacity-50"
+                    className="mt-3 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none px-4 h-9 text-xs font-mono disabled:opacity-50"
                   >
                     {shareBusy ? 'Generating…' : 'Enable share link'}
                   </button>
@@ -696,6 +697,10 @@ export default function SettingsPage() {
                 {saveError}
               </p>
             )}
+          </div>
+
+          <div className="mt-8">
+            <DangerZone />
           </div>
         </section>
       </div>
