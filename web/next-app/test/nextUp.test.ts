@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { selectNextUp, type NextUpInput } from '../lib/nextUp'
+import { selectNextUp, isNewUser, type NextUpInput } from '../lib/nextUp'
 
 const base: NextUpInput = {
   dueReviews: 0,
@@ -68,9 +68,28 @@ describe('selectNextUp', () => {
     expect(n.href).toBe('/onboard')
   })
 
+  it('does not send active-but-unmastered users to Diagnostic', () => {
+    const n = selectNextUp({
+      ...base,
+      activity: [{ date: '2026-09-28', questions: 12, correct: 10, concepts: ['arith.add'] }],
+    })
+    expect(n.kind).not.toBe('diagnostic')
+  })
+
   it('falls back to Study library', () => {
     const n = selectNextUp({ ...base, conceptsMastered: 4, diagnosticCompleted: true })
     expect(n.kind).toBe('browse')
     expect(n.href).toBe('/study')
+  })
+})
+
+describe('isNewUser', () => {
+  it('requires zero mastery and zero attempts', () => {
+    expect(isNewUser({ conceptsMastered: 0, activity: [] })).toBe(true)
+    expect(isNewUser({ conceptsMastered: 1, activity: [] })).toBe(false)
+    expect(isNewUser({
+      conceptsMastered: 0,
+      activity: [{ date: '2026-09-28', questions: 5, correct: 4, concepts: ['arith.add'] }],
+    })).toBe(false)
   })
 })

@@ -63,6 +63,16 @@ test('profile hides diagnostic CTA from non-new users who skipped it', async ({ 
   await expect(page.getByText(/diagnostic test →/i)).toHaveCount(0)
 })
 
+test('profile hides diagnostic CTA from active-but-unmastered users', async ({ page }) => {
+  await loginAsIncomplete(page, 0)
+  await page.route('**/api/activity**', route =>
+    route.fulfill({ json: [{ date: '2026-09-28', questions: 53, correct: 44, concepts: ['arith.add'] }] }),
+  )
+  await page.goto('/profile')
+  await expect(page.getByTestId('profile-sidebar')).toBeVisible({ timeout: 30_000 })
+  await expect(page.getByText(/diagnostic test →/i)).toHaveCount(0)
+})
+
 test('profile sidebar collapses to icons via trigger', async ({ page }) => {
   await loginAs(page)
   await page.goto('/profile')

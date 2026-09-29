@@ -84,8 +84,7 @@ describe('selectShelf', () => {
     expect(hard?.xp).toBe(2)
   })
 
-  it('is always satisfiable for brand-new users', () => {
-    const items = selectShelf({
+  it('is always satisfiable for brand-new users', () => {    const items = selectShelf({
       dueReviews: 0,
       weaknesses: { by_domain: {} },
       progress: {},
@@ -105,5 +104,14 @@ describe('selectShelf', () => {
     })
     expect(items).toHaveLength(1)
     expect(items[0].kind).toBe('browse')
+  })
+
+  it('omits diagnostic for active-but-unmastered learners', () => {
+    const items = selectShelf({
+      ...base,
+      activity: [{ date: '2026-09-28', questions: 53, correct: 44, concepts: ['arith.add'] }],
+    })
+    expect(items.length).toBeGreaterThan(0)
+    expect(items.some(i => i.kind === 'diagnostic')).toBe(false)
   })
 })
