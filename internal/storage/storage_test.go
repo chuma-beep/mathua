@@ -689,3 +689,70 @@ func TestQuizCompletion_RoundTrip(t *testing.T) {
 		t.Fatalf("expected latest xp_total 300, got %+v err=%v", got, err)
 	}
 }
+
+func TestResetProgress_RoundTrip(t *testing.T) {
+	store := newTestStore(t)
+	st, _ := store.CreateStudent("resetter")
+	sess, _ := store.CreateSession(st.ID)
+	if err := store.UpsertProgress(&ConceptProgress{StudentID: st.ID, ConceptID: "a", Status: "PRACTICING", Streak: 3}); err != nil {
+		t.Fatalf("seed progress: %v", err)
+	}
+	if err := store.RecordAttempt(AttemptEntry{SessionID: sess.ID, StudentID: st.ID, ConceptID: "a", Answer: "1", Expected: "2", Correct: false, ElapsedSeconds: 4, Timestamp: time.Now().UTC()}); err != nil {
+		t.Fatalf("seed attempt: %v", err)
+	}
+	if err := store.UpsertTopicSpeed(&TopicSpeed{StudentID: st.ID, ConceptID: "a", EFactor: 2.5, Interval: 1, Repetitions: 1, LearningSpeed: 1.0}); err != nil {
+		t.Fatalf("seed speed: %v", err)
+	}
+	if err := store.RecordQuizCompletion(st.ID, 60); err != nil {
+		t.Fatalf("seed quiz: %v", err)
+	}
+	if err := store.AddXP(st.ID, 42); err != nil {
+		t.Fatalf("seed xp: %v", err)
+	}
+	if err := store.UpsertServerSession("study_expected", st.ID+"|a", `{"q":"1"}`, time.Now().UTC().Add(time.Hour).Format(time.RFC3339)); err != nil {
+		t.Fatalf("seed anchor: %v", err)
+	}
+	if err := store.UpsertServerSession("study_plan", st.ID, `{"destination":"d"}`, time.Now().UTC().Add(time.Hour).Format(time.RFC3339)); err != nil {
+		t.Fatalf("seed plan: %v", err)
+	}
+	if err := store.UpsertServerSession("admin_login", st.ID, "tok", time.Now().UTC().Add(time.Hour).Format(time.RFC3339)); err != nil {
+		t.Fatalf("seed admin: %v", err)
+	}
+
+	if err := store.ResetProgress(st.ID); err != nil {
+		t.Fatalf("reset: %v", err)
+	}
+
+	if p, _ := store.GetAllProgress(st.ID); len(p) != 0 {
+		t.Errorf("progress survives: %d rows", len(p))
+	}
+	if a, _ := store.GetAttemptsForStudent(st.ID); len(a) != 0 {
+		t.Errorf("attempts survive: %d rows", len(a))
+	}
+	if s, _ := store.GetAllTopicSpeeds(st.ID); len(s) != 0 {
+		t.Errorf("speeds survive: %d rows", len(s))
+	}
+	if q, _ := store.LastQuizCompletion(st.ID); q != nil {
+		t.Errorf("quiz completion survives: %+v", q)
+	}
+	if _, _, found, _ := store.GetServerSession("study_expected", st.ID+"|a"); found {
+		t.Error("study anchor survives")
+	}
+	if _, _, found, _ := store.GetServerSession("study_plan", st.ID); found {
+		t.Error("study plan evidence survives")
+	}
+	if _, _, found, _ := store.GetServerSession("admin_login", st.ID); !found {
+		t.Error("admin session wrongly wiped")
+	}
+	got, err := store.GetStudent(st.ID)
+	if err != nil || got == nil {
+		t.Fatalf("account must survive: %v", err)
+	}
+	if got.XPTotal != 0 || got.XPToday != 0 || got.DiagnosticCompleted || got.Name != "resetter" {
+		t.Errorf("student row wrong after reset: %+v", got)
+	}
+	// Idempotent: second reset is a no-op success.
+	if err := store.ResetProgress(st.ID); err != nil {
+		t.Errorf("second reset: %v", err)
+	}
+}

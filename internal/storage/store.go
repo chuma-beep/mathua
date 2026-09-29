@@ -291,6 +291,12 @@ type Repository interface {
 	// UpdateAttemptCorrect flips a recorded attempt's correctness. Used by the
 	// grading data-repair pass to fix false negatives.
 	UpdateAttemptCorrect(id int64, correct bool) error
+	// ResetProgress wipes one student's learning record in a single
+	// transaction: attempts, sessions, progress, topic speeds, quiz
+	// completions, study-scoped server sessions, plus XP, diagnostic flag,
+	// and league fields on the student row. Account, credentials,
+	// settings, avatar, course, and plan prefs survive.
+	ResetProgress(studentID string) error
 	GetSessionAttempts(studentID, sessionID string) ([]AttemptEntry, error)
 	GetAttemptsForStudent(studentID string) ([]AttemptEntry, error)
 	GetAllAttempts() ([]AttemptEntry, error)

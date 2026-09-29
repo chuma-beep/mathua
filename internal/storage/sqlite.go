@@ -976,6 +976,45 @@ func (s *SQLiteStore) DeleteActiveSession(sessionID string) error {
 	return nil
 }
 
+// ResetProgress wipes one student's learning record (see Repository docs
+// for the exact scope). One transaction, child tables first.
+func (s *SQLiteStore) ResetProgress(studentID string) error {
+	tx, err := s.db.Begin()
+	if err != nil {
+		return fmt.Errorf("begin progress reset: %w", err)
+	}
+	exec := func(stmt string, args ...interface{}) error {
+		if _, err := tx.Exec(stmt, args...); err != nil {
+			tx.Rollback()
+			return err
+		}
+		return nil
+	}
+	stmts := []struct {
+		q    string
+		args []interface{}
+	}{
+		{"DELETE FROM attempts WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM active_sessions WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM sessions WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM concept_progress WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM student_topic_speed WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM quiz_completions WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM server_sessions WHERE kind IN ('study_expected','study_plan') AND (key = ? OR key LIKE ? || '|%')", []interface{}{studentID, studentID}},
+		{`UPDATE students SET xp_total = 0, xp_today = 0, diagnostic_completed = 0,
+			league = 'bronze', league_week = '', league_moved = 0 WHERE id = ?`, []interface{}{studentID}},
+	}
+	for _, st := range stmts {
+		if err := exec(st.q, st.args...); err != nil {
+			return fmt.Errorf("reset progress: %w", err)
+		}
+	}
+	if err := tx.Commit(); err != nil {
+		return fmt.Errorf("commit progress reset: %w", err)
+	}
+	return nil
+}
+
 // Attempts
 
 func (s *SQLiteStore) RecordAttempt(entry AttemptEntry) error {
