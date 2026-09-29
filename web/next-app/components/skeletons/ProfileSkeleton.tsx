@@ -39,7 +39,7 @@ export default function ProfileSkeleton() {
         </div>
       </div>
 
-      {/* NextUpCard banner */}
+      {/* TaskShelf banner */}
       <Skeleton className="mt-6 h-[72px] w-full border border-mathua-border" />
 
       {/* Activity heatmap */}
