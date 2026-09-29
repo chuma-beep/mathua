@@ -23,12 +23,13 @@ const KP = {
   diagram: '/diagrams/algebrica/number-line-real.svg',
 }
 
-test('study → answer → XP persists (Study seam)', async ({ page }) => {
+test('study → learn → answer → XP persists (Study seam)', async ({ page }) => {
   await page.route('**/api/lessons**', route => {
     const url = route.request().url()
     if (url.includes('/practice')) return route.fulfill({ json: PRACTICE })
     if (url.includes('/kp')) return route.fulfill({ json: KP })
     if (url.includes('/body')) return route.fulfill({ json: { title: LESSON.title, body: LESSON.body } })
+    if (url.includes('/readiness')) return route.fulfill({ json: { concept_id: 'arith.add.single', ready: true, weak: [], missing: [] } })
     return route.fulfill({ json: { lessons: { arithmetic: [LESSON] } } })
   })
   await page.route('**/api/study/answer', route =>
@@ -50,13 +51,18 @@ test('study → answer → XP persists (Study seam)', async ({ page }) => {
   await expect(page.getByText('Worked example').first()).toBeVisible()
   await expect(page.getByText('Use addition notation').first()).toBeVisible()
 
+  // Study is reference-only: practice lives in /learn behind Start learning.
+  await page.getByRole('link', { name: 'Start learning →' }).first().click()
+  await expect(page).toHaveURL(/\/learn\?concept=arith\.add\.single/)
+  await page.getByRole('button', { name: 'Start practicing →' }).click()
+
   const input = page.locator('input[placeholder*="Your answer"]').first()
   await expect(input).toBeVisible({ timeout: 20_000 })
   // Answer input is the standard 48px control at all widths.
   const inputBox = await input.boundingBox()
   expect(inputBox?.height).toBe(48)
   await input.fill('4')
-  await page.getByRole('button', { name: 'Check Answer' }).first().click()
+  await page.getByRole('button', { name: 'Check', exact: true }).first().click()
   await expect(page.getByText('+10 XP').first()).toBeVisible({ timeout: 20_000 })
 })
 
