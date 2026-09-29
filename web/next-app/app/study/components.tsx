@@ -8,7 +8,7 @@ import KatexContent from '../../components/KatexContent'
 import SearchBar from '../../components/SearchBar'
 import ReportButton from '../../components/ReportButton'
 import MasteryBadge from '../../components/MasteryBadge'
-import { getLessonKPs, type LessonInfo, type Scores, type LessonKpsRes, type KpInfo } from '../../lib/api'
+import { getLessonKPs, type LessonInfo, type LessonKpsRes, type KpInfo } from '../../lib/api'
 import { stripMathDelimiters } from '../../lib/lessonMath'
 import { conceptLabels, domainIcon, domainLabels, lessonProgress } from './domains'
 
@@ -28,37 +28,6 @@ function hashBody(s: string): string {
   let h = 5381
   for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) >>> 0
   return h.toString(36)
-}
-
-export function QuizGateBanner({ scores }: { scores: Scores | null }) {
-  // Prefer backend gate (xp since last completion); fall back to
-  // lifetime total so old mocks/e2e without the new fields still gate.
-  const xp = scores?.xp_since_quiz ?? scores?.xp_total ?? 0
-  const done = scores?.quiz_due ?? xp >= 50
-  const goal = 50 // small-awards economy: quiz roughly every 5 lessons
-  const pct = Math.min((xp / goal) * 100, 100)
-  return (
-    <div className={`mt-6 border p-4 flex flex-col sm:flex-row items-center justify-between gap-3 ${done ? 'border-mathua-blue bg-mathua-surface' : 'border-mathua-border bg-mathua-surface'}`}>
-      <div className="min-w-0 flex-1">
-        <div className="flex items-center gap-2">
-          <span className={`px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider ${done ? 'bg-mathua-blue text-white' : 'bg-mathua-border text-mathua-muted'}`}>
-            {done ? 'Quiz due' : '50 XP gate'}
-          </span>
-          <span className="font-mono text-xs text-mathua-primary truncate">
-            {done ? '50 XP reached — take your mastery check' : `${xp} / ${goal} XP toward next quiz`}
-          </span>
-        </div>
-        <div className="mt-2 h-1 bg-mathua-code overflow-hidden">
-          <div className={`h-full transition-all ${done ? 'bg-mathua-blue' : 'bg-mathua-blue/60'}`} style={{ width: `${pct}%` }} />
-        </div>
-      </div>
-      {done ? (
-        <Link href="/goals?quiz=1" className="shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">
-          Take Test →
-        </Link>
-      ) : null}
-    </div>
-  )
 }
 
 // ── Domain Overview ─────────────────────────────────────
@@ -433,22 +402,12 @@ export function LessonDetail({
               <Link
                 key={p.id}
                 href={`/concept?id=${encodeURIComponent(p.id)}`}
-                className="bg-mathua-surface border border-mathua-border p-3 hover:border-mathua-blue transition-colors block"
+                className="bg-mathua-surface border border-mathua-border p-3 hover:border-mathua-blue transition-colors flex items-center gap-2"
               >
-                <div className="flex items-center gap-2">
-                  <MasteryBadge status={p.status} size="sm" />
-                  <div className="font-mono text-xs text-mathua-primary">{p.label}</div>
-                </div>
-                <div className="flex items-center gap-2 mt-1.5">
-                  <div className="flex-1 h-1 bg-mathua-bg overflow-hidden">
-                    <div
-                      className="h-full bg-mathua-blue transition-all"
-                      style={{ width: `${Math.round(p.mastery_pct * 100)}%` }}
-                    />
-                  </div>
-                  <span className="font-mono text-[10px] text-mathua-muted">
-                    {Math.round(p.mastery_pct * 100)}%
-                  </span>
+                <MasteryBadge status={p.status} size="sm" />
+                <div className="font-mono text-xs text-mathua-primary truncate">{p.label}</div>
+                <div className="ml-auto font-mono text-[10px] text-mathua-muted shrink-0">
+                  {p.status === 'MASTERED' ? 'mastered' : p.status === 'UNSEEN' || !p.status ? 'not started' : 'in progress'}
                 </div>
               </Link>
             ))}
@@ -573,7 +532,7 @@ export function LessonDetail({
           Learn
         </span>
         <span className="font-mono text-[10px] text-mathua-muted">
-          attempt-first loop — practice lives in /learn, not here
+          interactive loop, one concept at a time
         </span>
       </div>
       {lesson.concepts.slice(0, 3).map(cid => (
@@ -613,14 +572,6 @@ export function LessonDetail({
         </div>
       )}
 
-      <div className="mt-8 text-center">
-        <Link
-          href={`#practice`}
-          className="inline-block border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 h-12 px-8 font-medium text-sm leading-[48px]"
-        >
-          Practice these concepts ↓
-        </Link>
-      </div>
     </div>
   )
 }
