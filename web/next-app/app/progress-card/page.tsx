@@ -124,7 +124,7 @@ export default function ProgressCardPage() {
                       type="button"
                       onClick={() => { void load(attempts.length, true) }}
                       disabled={loadingMore}
-                      className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 h-11 font-mono text-xs disabled:opacity-50"
+                      className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-6 h-11 font-mono text-xs disabled:opacity-50"
                     >
                       {loadingMore ? 'Loading…' : 'Load more'}
                     </button>

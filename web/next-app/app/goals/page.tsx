@@ -83,7 +83,7 @@ function GoalConfirmReview({
         <button
           type="button"
           onClick={onCancel}
-          className="font-mono text-xs text-mathua-muted hover:text-mathua-primary min-h-[44px] px-4"
+          className="font-mono text-xs text-mathua-muted hover:text-mathua-blue min-h-[44px] px-4"
         >
           ← Back
         </button>
@@ -209,7 +209,7 @@ function GoalsContent() {
       <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
         <section className="pt-8 min-w-0 overflow-hidden">
           <span className="flex mb-4">
-            <button type="button" onClick={() => { if (window.history.length > 1) window.history.back(); else push('/profile') }} className="text-mathua-secondary text-sm hover:text-mathua-primary">← Back</button>
+            <button type="button" onClick={() => { if (window.history.length > 1) window.history.back(); else push('/profile') }} className="text-mathua-secondary text-sm hover:text-mathua-blue">← Back</button>
           </span>
 
           {/* === STEP 1: Goal Selection === */}
@@ -258,7 +258,7 @@ function GoalsContent() {
                   type="button"
                   onClick={() => setConfirming(true)}
                   disabled={selectedConceptIds().length === 0}
-                  className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 min-h-[44px] px-6 sm:px-10 font-medium text-sm disabled:opacity-50 max-w-full"
+                  className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-12 min-h-[44px] px-6 sm:px-10 font-medium text-sm disabled:opacity-50 max-w-full"
                 >
                   {`Start diagnostic test (${selectedConceptIds().length} concepts selected)`}
                 </button>
@@ -302,7 +302,7 @@ function GoalsContent() {
               </div>
               {/* Quiz CTA — actionable after diagnostic, also reachable via ?quiz=1 */}
               <div className="mt-6 text-center">
-                <button type="button" onClick={() => setStep('quiz')} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm">Take Quiz (50 XP gate) →</button>
+                <button type="button" onClick={() => setStep('quiz')} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-12 px-8 font-medium text-sm">Take Quiz (50 XP gate) →</button>
                 <p className="font-mono text-xs text-mathua-muted mt-2">Guest allowed, unlimited retake</p>
               </div>
             </>

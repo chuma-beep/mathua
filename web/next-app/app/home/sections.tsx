@@ -145,7 +145,7 @@ export function HeroSection({ theme, onGetStarted }: { theme: 'dark' | 'light'; 
           </button>
           <a
             href="https://github.com/chuma-beep/mathua"
-            className="inline-flex w-full min-h-[44px] items-center justify-center border border-mathua-border px-6 py-3 text-sm font-medium text-mathua-primary transition-colors hover:border-mathua-blue hover:bg-mathua-blue hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mathua-blue sm:w-auto"
+            className="inline-flex w-full min-h-[44px] items-center justify-center border border-mathua-border px-6 py-3 text-sm font-medium text-mathua-primary transition-colors hover:border-mathua-blue hover:bg-mathua-blue/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mathua-blue sm:w-auto"
           >
             View on GitHub
           </a>

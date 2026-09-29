@@ -374,7 +374,7 @@ export default function DiagnosticHost({
                 <button
                   type="submit"
                   disabled={!answerInput.trim() || loading}
-                  className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-6 font-medium text-sm disabled:opacity-50 shrink-0 w-auto self-end sm:self-auto"
+                  className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-12 px-6 font-medium text-sm disabled:opacity-50 shrink-0 w-auto self-end sm:self-auto"
                 >
                   Check Answer
                 </button>
@@ -440,7 +440,7 @@ export default function DiagnosticHost({
               type="button"
               autoFocus
               onClick={goNext}
-              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm shrink-0"
+              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-12 px-8 font-medium text-sm shrink-0"
             >
               Next →
             </button>
@@ -454,7 +454,7 @@ export default function DiagnosticHost({
                 type="button"
                 onClick={() => { setLoading(true); void fetchPlan() }}
                 disabled={loading}
-                className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-4 h-10 font-mono text-xs disabled:opacity-50"
+                className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-4 h-10 font-mono text-xs disabled:opacity-50"
               >
                 {loading ? 'Loading…' : 'Load plan'}
               </button>

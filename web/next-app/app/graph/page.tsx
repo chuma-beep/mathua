@@ -223,7 +223,7 @@ function GraphContent() {
       <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
       <section className="pt-8 min-w-0 overflow-hidden">
         <span className="flex justify-between mb-4">
-          <button type="button" onClick={() => { if (window.history.length > 1) window.history.back() }} className="text-mathua-secondary text-sm hover:text-mathua-primary">
+          <button type="button" onClick={() => { if (window.history.length > 1) window.history.back() }} className="text-mathua-secondary text-sm hover:text-mathua-blue">
             ← Back
           </button>
         </span>
@@ -252,7 +252,7 @@ function GraphContent() {
             className={`font-mono text-[10px] uppercase px-3 min-h-[36px] py-1.5 border transition-colors min-w-0 truncate ${
               activeDomain === null
                 ? 'bg-mathua-blue text-white border-mathua-blue'
-                : 'border-mathua-border text-mathua-muted hover:text-mathua-primary hover:border-mathua-secondary'
+                : 'border-mathua-border text-mathua-muted hover:text-mathua-blue hover:border-mathua-secondary'
             }`}
           >
             All
@@ -265,7 +265,7 @@ function GraphContent() {
               className={`font-mono text-[10px] uppercase px-3 min-h-[36px] py-1.5 border transition-colors min-w-0 truncate ${
                 activeDomain === d
                   ? 'bg-mathua-blue text-white border-mathua-blue'
-                  : 'border-mathua-border text-mathua-muted hover:text-mathua-primary hover:border-mathua-secondary'
+                  : 'border-mathua-border text-mathua-muted hover:text-mathua-blue hover:border-mathua-secondary'
               }`}
             >
               {domainLabels[d] || d}

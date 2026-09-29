@@ -274,7 +274,7 @@ function ConceptContent() {
                       <div className="mt-6 flex justify-center">
                         <Link
                           href={`/learn?concept=${encodeURIComponent(conceptId)}`}
-                          className="inline-block border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm leading-[48px] max-w-full truncate"
+                          className="inline-block border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-12 px-8 font-medium text-sm leading-[48px] max-w-full truncate"
                         >
                           Start learning →
                         </Link>
@@ -310,7 +310,7 @@ function ConceptContent() {
                   <>
                     <Link
                       href={href}
-                      className="inline-block border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm leading-[48px] max-w-full truncate"
+                      className="inline-block border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-12 px-8 font-medium text-sm leading-[48px] max-w-full truncate"
                     >
                       {caption}
                     </Link>

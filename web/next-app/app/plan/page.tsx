@@ -175,7 +175,7 @@ function PlanContent() {
             <label htmlFor="plan-whatif" className="font-mono text-[11px] uppercase tracking-wider text-mathua-muted">What if {whatIf} XP/day? {whatIfDays > 0 && <span className="text-mathua-primary">→ ≈ {Math.ceil(whatIfDays)} days</span>}</label>
             <input id="plan-whatif" type="range" min={2} max={60} step={1} value={whatIf} onChange={ev => setWhatIf(Number(ev.target.value))} className="mt-1 w-full" />
           </div>
-          <button type="button" onClick={handleSave} disabled={saving} className="mt-4 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2.5 font-mono text-xs min-h-[44px] disabled:opacity-50">
+          <button type="button" onClick={handleSave} disabled={saving} className="mt-4 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-6 py-2.5 font-mono text-xs min-h-[44px] disabled:opacity-50">
             {saving ? 'Saving…' : saved ? 'Update my plan' : 'Plan my learning'}
           </button>
           <p className="mt-3 font-mono text-[11px] text-mathua-muted">Illustrative estimate from Mathua&apos;s measured curriculum workload — actual completion depends on pace, reviews, and checks. It never changes quiz eligibility or mastery rules.</p>

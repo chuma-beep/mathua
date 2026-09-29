@@ -138,7 +138,7 @@ export function WelcomeStep({
           type="button"
           onClick={onStart}
           disabled={selectedCount === 0 || loading}
-          className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 min-h-[44px] px-6 sm:px-10 font-medium text-sm disabled:opacity-50 max-w-full"
+          className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-12 min-h-[44px] px-6 sm:px-10 font-medium text-sm disabled:opacity-50 max-w-full"
         >
           {loading ? (<><Loading inline size={13} /> Loading…</>) : `Start diagnostic test (${selectedCount} concepts)`}
         </button>
@@ -236,7 +236,7 @@ export function DiagnosticStep({
             <button
               type="submit"
               disabled={!answerInput.trim() || loading || lastResult !== null}
-              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 min-h-[36px] px-6 font-medium text-sm disabled:opacity-50 shrink-0 w-auto self-end sm:self-auto"
+              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-12 min-h-[36px] px-6 font-medium text-sm disabled:opacity-50 shrink-0 w-auto self-end sm:self-auto"
             >
               Check Answer
             </button>
@@ -300,7 +300,7 @@ export function DiagnosticStep({
               type="button"
               autoFocus
               onClick={onNext}
-              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm shrink-0"
+              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-12 px-8 font-medium text-sm shrink-0"
             >
               Next →
             </button>
@@ -314,7 +314,7 @@ export function DiagnosticStep({
                 type="button"
                 onClick={onRetryPlan}
                 disabled={loading}
-                className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-4 h-10 font-mono text-xs disabled:opacity-50"
+                className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-4 h-10 font-mono text-xs disabled:opacity-50"
               >
                 {loading ? 'Loading…' : 'Load results'}
               </button>
