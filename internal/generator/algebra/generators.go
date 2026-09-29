@@ -234,7 +234,21 @@ func (g *parallelPerpGen) Generate(ctx generator.GeneratorContext) generator.Pro
 type multiStepEqGen struct{}
 
 func (g *multiStepEqGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*8)
+	d := ctx.Difficulty
+	// Staged ladder: plain ax+b=c → larger/subtraction → parentheses probe.
+	if d >= 0.75 {
+		a := rand.Intn(4) + 2
+		x := rand.Intn(8) + 2
+		b := rand.Intn(8) + 1
+		inner := x + b
+		c := a * inner
+		return generator.Problem{
+			Question:    fmt.Sprintf("Solve: \\(%d(x + %d) = %d\\)", a, b, c),
+			Answer:      fmt.Sprintf("%d", x),
+			Explanation: fmt.Sprintf("Given %d(x + %d) = %d. Step 1: divide both sides by %d: x + %d = %d. Step 2: subtract %d: x = %d. Answer: %d", a, b, c, a, b, inner, b, x, x),
+		}
+	}
+	scale := int(1 + d*8)
 	x := rand.Intn(scale*2) + 2
 	a := rand.Intn(scale) + 2
 	b := rand.Intn(scale*2) + 2
@@ -242,14 +256,21 @@ func (g *multiStepEqGen) Generate(ctx generator.GeneratorContext) generator.Prob
 	return generator.Problem{
 		Question:    fmt.Sprintf("Solve: \\(%dx + %d = %d\\)", a, b, c),
 		Answer:      fmt.Sprintf("%d", x),
-		Explanation: fmt.Sprintf("\\(%dx + %d = %d\\) → \\(%dx = %d\\) → \\(x = %d\\)", a, b, c, a, c-b, x),
+		Explanation: fmt.Sprintf("Given %dx + %d = %d. Step 1: subtract %d: %dx = %d. Step 2: divide by %d: x = %d. Answer: %d", a, b, c, b, a, c-b, a, x, x),
 	}
 }
 
 type varsBothSidesGen struct{}
 
 func (g *varsBothSidesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*7)
+	// Staged ladder: small coefficients → larger spread → bigger solutions.
+	coefMax := 5
+	if ctx.Difficulty >= 0.7 {
+		coefMax = 9
+	} else if ctx.Difficulty >= 0.45 {
+		coefMax = 7
+	}
+	scale := coefMax
 	x := rand.Intn(scale*2) + 2
 	a := rand.Intn(scale) + 2
 	c := rand.Intn(scale) + 1

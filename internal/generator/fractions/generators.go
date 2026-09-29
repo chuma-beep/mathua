@@ -243,11 +243,17 @@ func (g *fracOpSameDenGen) Generate(ctx generator.GeneratorContext) generator.Pr
 type fracOpDiffDenGen struct{ op string }
 
 func (g *fracOpDiffDenGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*5)
-	aDen := rand.Intn(max(3, scale*2)) + 2
-	bDen := rand.Intn(max(3, scale*2)) + 2
+	// Staged ladder: small dens → medium → large LCMs that need simplifying.
+	denMax := 6
+	if ctx.Difficulty >= 0.7 {
+		denMax = 12
+	} else if ctx.Difficulty >= 0.45 {
+		denMax = 9
+	}
+	aDen := rand.Intn(denMax-2) + 2
+	bDen := rand.Intn(denMax-2) + 2
 	for aDen == bDen {
-		bDen = rand.Intn(max(3, scale*2)) + 2
+		bDen = rand.Intn(denMax-2) + 2
 	}
 	cm := lcm(aDen, bDen)
 	aNum := rand.Intn(aDen-1) + 1
@@ -269,18 +275,24 @@ func (g *fracOpDiffDenGen) Generate(ctx generator.GeneratorContext) generator.Pr
 	return generator.Problem{
 		Question:    fmt.Sprintf("\\(\\frac{%d}{%d} %s \\frac{%d}{%d} =\\) ?", aNum, aDen, g.op, bNum, bDen),
 		Answer:      fmt.Sprintf("%d/%d", rn, rd),
-		Explanation: fmt.Sprintf("LCM(%d,%d)=%d: %d/%d %s %d/%d = %d/%d", aDen, bDen, cm, aScaled, cm, g.op, bScaled, cm, rn, rd),
+		Explanation: fmt.Sprintf("Given %d/%d %s %d/%d. Step 1: common denominator LCM(%d,%d)=%d. Step 2: convert to %d/%d %s %d/%d. Step 3: combine = %d/%d. Answer: %d/%d", aNum, aDen, g.op, bNum, bDen, aDen, bDen, cm, aScaled, cm, g.op, bScaled, cm, rn, rd, rn, rd),
 	}
 }
 
 type fracWordGen struct{ op string }
 
 func (g *fracWordGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*5)
-	aDen := rand.Intn(max(1, scale*2)) + 2
-	bDen := rand.Intn(max(1, scale*2)) + 2
+	// Staged ladder mirrors frac.add.diff dens so word problems scale too.
+	denMax := 6
+	if ctx.Difficulty >= 0.7 {
+		denMax = 12
+	} else if ctx.Difficulty >= 0.45 {
+		denMax = 9
+	}
+	aDen := rand.Intn(denMax-2) + 2
+	bDen := rand.Intn(denMax-2) + 2
 	for aDen == bDen {
-		bDen = rand.Intn(max(1, scale*2)) + 2
+		bDen = rand.Intn(denMax-2) + 2
 	}
 	cm := lcm(aDen, bDen)
 	aNum := rand.Intn(aDen-1) + 1
@@ -292,7 +304,7 @@ func (g *fracWordGen) Generate(ctx generator.GeneratorContext) generator.Problem
 	return generator.Problem{
 		Question:    fmt.Sprintf("You eat \\(\\frac{%d}{%d}\\) of a pizza. Your friend eats \\(\\frac{%d}{%d}\\). How much pizza was eaten total?", aNum, aDen, bNum, bDen),
 		Answer:      fmt.Sprintf("%d/%d", rn, rd),
-		Explanation: fmt.Sprintf("%d/%d + %d/%d = %d/%d of the pizza.", aNum, aDen, bNum, bDen, rn, rd),
+		Explanation: fmt.Sprintf("Given %d/%d + %d/%d. Step 1: common denominator LCM(%d,%d)=%d → %d/%d + %d/%d. Step 2: add tops = %d/%d. Answer: %d/%d of the pizza", aNum, aDen, bNum, bDen, aDen, bDen, cm, aS, cm, bS, cm, rn, rd, rn, rd),
 	}
 }
 
@@ -371,7 +383,7 @@ func (g *fracMixedConvertGen) Generate(ctx generator.GeneratorContext) generator
 		return generator.Problem{
 			Question:    fmt.Sprintf("Convert \\(%d \\frac{%d}{%d}\\) to an improper fraction.", whole, num, den),
 			Answer:      fmt.Sprintf("%d/%d", improper, den),
-			Explanation: fmt.Sprintf("%d x %d + %d = %d, so %d %d/%d = %d/%d", whole, den, num, improper, whole, num, den, improper, den),
+			Explanation: fmt.Sprintf("Given %d %d/%d. Step 1: multiply whole part: %d × %d = %d. Step 2: add numerator: %d + %d = %d. Answer: %d/%d", whole, num, den, whole, den, whole*den, whole*den, num, improper, improper, den),
 		}
 	}
 	improper := whole*den + num
@@ -379,7 +391,7 @@ func (g *fracMixedConvertGen) Generate(ctx generator.GeneratorContext) generator
 	return generator.Problem{
 		Question:    fmt.Sprintf("Convert \\(\\frac{%d}{%d}\\) to a mixed number.", improper, den),
 		Answer:      fmt.Sprintf("%d %d/%d", w, r, d),
-		Explanation: fmt.Sprintf("%d / %d = %d remainder %d, so %d/%d = %d %d/%d", improper, den, w, r, improper, den, w, r, d),
+		Explanation: fmt.Sprintf("Given %d/%d. Step 1: divide: %d ÷ %d = %d remainder %d. Step 2: whole part %d, fraction %d/%d. Answer: %d %d/%d", improper, den, improper, den, w, r, w, r, d, w, r, d),
 	}
 }
 

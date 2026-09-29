@@ -103,21 +103,28 @@ func (g *addGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	return generator.Problem{
 		Question:    fmt.Sprintf("\\(%d + %d = ?\\)", a, b),
 		Answer:      fmt.Sprintf("%d", a+b),
-		Explanation: fmt.Sprintf("%d + %d = %d", a, b, a+b),
+		Explanation: fmt.Sprintf("Given %d + %d. Step 1: start at %d. Step 2: count up %d → %d. Answer: %d", a, b, a, b, a+b, a+b),
 	}
 }
 
 type addWordGen struct{}
 
 func (g *addWordGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	a := rand.Intn(50) + 1
-	b := rand.Intn(50) + 1
+	// Staged ladder: small counts → two-digit sums.
+	maxN := 20
+	if ctx.Difficulty >= 0.7 {
+		maxN = 50
+	} else if ctx.Difficulty >= 0.45 {
+		maxN = 35
+	}
+	a := rand.Intn(maxN) + 1
+	b := rand.Intn(maxN) + 1
 	items := []string{"apples", "marbles", "stickers", "crayons", "pencils"}
 	item := items[rand.Intn(len(items))]
 	return generator.Problem{
 		Question:    fmt.Sprintf("You have %d %s. Your friend gives you %d more. How many do you have now?", a, item, b),
 		Answer:      fmt.Sprintf("%d", a+b),
-		Explanation: fmt.Sprintf("%d + %d = %d %s", a, b, a+b, item),
+		Explanation: fmt.Sprintf("Given %d + %d %s. Step 1: start at %d. Step 2: count up %d → %d. Answer: %d %s", a, b, item, a, b, a+b, a+b, item),
 	}
 }
 
@@ -339,14 +346,20 @@ type divRemainderGen struct{}
 var remainderRe = regexp.MustCompile(`^(-?\d+)\s*R\s*(\d+)$`)
 
 func (g *divRemainderGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*5)
-	b := rand.Intn(max(1, scale*2)) + 2
+	// Staged ladder: small divisor → larger divisor and quotient.
+	divMax := 5
+	if ctx.Difficulty >= 0.7 {
+		divMax = 12
+	} else if ctx.Difficulty >= 0.45 {
+		divMax = 8
+	}
+	b := rand.Intn(divMax-1) + 2
 	r := rand.Intn(b-1) + 1
-	a := b*(rand.Intn(max(1, scale*2))+1) + r
+	a := b*(rand.Intn(divMax)+1) + r
 	return generator.Problem{
 		Question:    fmt.Sprintf("\\(%d \\div %d = ?\\) (give answer with remainder: Q R)", a, b),
 		Answer:      fmt.Sprintf("%d R %d", a/b, r),
-		Explanation: fmt.Sprintf("%d / %d = %d remainder %d", a, b, a/b, r),
+		Explanation: fmt.Sprintf("Given %d ÷ %d. Step 1: %d × %d = %d (largest multiple ≤ %d). Step 2: remainder %d − %d = %d. Answer: %d R %d", a, b, b, a/b, (a/b)*b, a, a, (a/b)*b, r, a/b, r),
 	}
 }
 
@@ -372,7 +385,7 @@ func (g *divLongGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 	return generator.Problem{
 		Question:    fmt.Sprintf("\\(%d \\div %d = ?\\)", a, b),
 		Answer:      fmt.Sprintf("%d", q),
-		Explanation: fmt.Sprintf("%d / %d = %d", a, b, q),
+		Explanation: fmt.Sprintf("Given %d ÷ %d. Step 1: ask how many %ds fit in %d. Step 2: %d × %d = %d. Answer: %d", a, b, b, a, b, q, a, q),
 	}
 }
 
