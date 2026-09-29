@@ -3,27 +3,43 @@ package engine
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"time"
 
 	"github.com/chuma-beep/mathua/internal/planning"
 )
 
-// serverSessionStudyPlan is the server_sessions kind for saved study plans
-// (destination + rate + deadline snapshot for ahead/behind tracking).
+// serverSessionStudyPlan is the server_sessions kind for plan evidence
+// (ahead/behind baselines). Prefs live separately so a progress reset
+// clears evidence while keeping the learner's choices.
 const serverSessionStudyPlan = "study_plan"
 
-// planSnapshotTTL bounds a saved plan: plans older than a term are stale.
-const planSnapshotTTL = 90 * 24 * time.Hour
+// serverSessionStudyPlanPrefs holds destination/deadline/pace choices.
+// Choices are not evidence: reset never touches this record.
+const serverSessionStudyPlanPrefs = "study_plan_prefs"
 
-// StudyPlanSnapshot is the persisted plan baseline. The frontier is never
-// stored — it derives live from knowledge state on every estimate.
+// planSnapshotTTL bounds plan evidence: baselines older than a term are stale.
+// Prefs live longer (a year) because choices outlive any single baseline.
+const planSnapshotTTL = 90 * 24 * time.Hour
+const planPrefsTTL = 365 * 24 * time.Hour
+
+// StudyPlanPrefs are the learner's choices: destination, deadline, pace.
+// Kept across progress resets; changing destination is a separate Plan action.
+type StudyPlanPrefs struct {
+	Destination  string `json:"destination"`
+	DeadlineDays int    `json:"deadline_days"`
+	RestDays     int    `json:"rest_days"`
+	// ResetAt marks a progress reset (RFC3339); empty otherwise. Drives the
+	// neutral fresh-start estimate state until a new baseline is saved.
+	ResetAt string `json:"reset_at,omitempty"`
+}
+
+// StudyPlanSnapshot is the persisted evidence baseline. The frontier is
+// never stored — it derives live from knowledge state on every estimate.
 type StudyPlanSnapshot struct {
-	Destination  string  `json:"destination"`
-	DailyGoal    int     `json:"daily_goal"`
-	DeadlineDays int     `json:"deadline_days"`
-	RestDays     int     `json:"rest_days"`
-	XPRemaining  float64 `json:"xp_remaining"`
-	Created      string  `json:"created"`
+	Destination string  `json:"destination"`
+	XPRemaining float64 `json:"xp_remaining"`
+	Created     string  `json:"created"`
 }
 
 // DestinationStatus is one destination with the student's progress.
@@ -132,6 +148,9 @@ type DestinationEstimateResponse struct {
 	Pace        *PaceEstimate              `json:"pace"`
 	Probes      []string                   `json:"probes"`
 	PlanDelta   *float64                   `json:"plan_delta_days,omitempty"`
+	// FreshStart is true after a progress reset with no new baseline yet:
+	// the UI shows a neutral state instead of a behind-schedule figure.
+	FreshStart bool `json:"fresh_start,omitempty"`
 }
 
 // DestinationEstimate prices a destination's remaining workload on both
@@ -145,7 +164,7 @@ func (e *Engine) DestinationEstimate(studentID, destID string, dailyGoal, deadli
 		return nil, err
 	}
 	if dailyGoal <= 0 {
-		dailyGoal = 30
+		dailyGoal = 10
 	}
 	if restDays < 0 {
 		restDays = 0
@@ -181,23 +200,30 @@ func (e *Engine) DestinationEstimate(studentID, destID string, dailyGoal, deadli
 	if snap, ok := e.GetPlan(studentID); ok && snap.Destination == destID && pace.Rate > 0 {
 		delta := (snap.XPRemaining - est.XPRemaining) / pace.Rate
 		resp.PlanDelta = &delta
+	} else if prefs, ok := e.GetPlanPrefs(studentID); ok && prefs.Destination == destID && prefs.ResetAt != "" {
+		resp.FreshStart = true
 	}
 	return resp, nil
 }
 
-// SavePlan persists the current estimate as the ahead/behind baseline.
+// SavePlan persists the current estimate as the ahead/behind baseline and
+// records the learner's choices. Saving clears any fresh-start marker.
 func (e *Engine) SavePlan(studentID, destID string, dailyGoal, deadlineDays, restDays int) (*StudyPlanSnapshot, error) {
 	resp, err := e.DestinationEstimate(studentID, destID, dailyGoal, deadlineDays, restDays, 0)
 	if err != nil {
 		return nil, err
 	}
-	snap := &StudyPlanSnapshot{
+	if err := e.savePlanPrefs(studentID, &StudyPlanPrefs{
 		Destination:  destID,
-		DailyGoal:    dailyGoal,
 		DeadlineDays: deadlineDays,
 		RestDays:     restDays,
-		XPRemaining:  resp.Estimate.XPRemaining,
-		Created:      time.Now().UTC().Format(time.RFC3339),
+	}); err != nil {
+		return nil, err
+	}
+	snap := &StudyPlanSnapshot{
+		Destination: destID,
+		XPRemaining: resp.Estimate.XPRemaining,
+		Created:     time.Now().UTC().Format(time.RFC3339),
 	}
 	blob, err := json.Marshal(snap)
 	if err != nil {
@@ -208,6 +234,48 @@ func (e *Engine) SavePlan(studentID, destID string, dailyGoal, deadlineDays, res
 		return nil, err
 	}
 	return snap, nil
+}
+
+// savePlanPrefs persists destination/deadline/pace choices (no evidence).
+func (e *Engine) savePlanPrefs(studentID string, prefs *StudyPlanPrefs) error {
+	blob, err := json.Marshal(prefs)
+	if err != nil {
+		return err
+	}
+	exp := time.Now().UTC().Add(planPrefsTTL).Format(time.RFC3339)
+	return e.repo.UpsertServerSession(serverSessionStudyPlanPrefs, studentID, string(blob), exp)
+}
+
+// GetPlanPrefs returns the learner's saved choices, migrating legacy
+// single-record plans exactly once: prefs fields copy out of the old
+// evidence row (presence of the prefs record marks migration done).
+func (e *Engine) GetPlanPrefs(studentID string) (*StudyPlanPrefs, bool) {
+	if e.repo == nil {
+		return nil, false
+	}
+	if v, exp, found, err := e.repo.GetServerSession(serverSessionStudyPlanPrefs, studentID); err == nil && found && v != "" && (exp == "" || isFutureRFC3339(exp)) {
+		var prefs StudyPlanPrefs
+		if err := json.Unmarshal([]byte(v), &prefs); err == nil {
+			return &prefs, true
+		}
+	}
+	// Legacy single record: split choices out, leave evidence in place.
+	type legacy struct {
+		Destination  string `json:"destination"`
+		DeadlineDays int    `json:"deadline_days"`
+		RestDays     int    `json:"rest_days"`
+	}
+	if v, exp, found, err := e.repo.GetServerSession(serverSessionStudyPlan, studentID); err == nil && found && v != "" && (exp == "" || isFutureRFC3339(exp)) {
+		var leg legacy
+		if err := json.Unmarshal([]byte(v), &leg); err == nil && leg.Destination != "" {
+			prefs := &StudyPlanPrefs{Destination: leg.Destination, DeadlineDays: leg.DeadlineDays, RestDays: leg.RestDays}
+			if err := e.savePlanPrefs(studentID, prefs); err != nil {
+				log.Printf("warning: plan prefs migration for %s: %v", studentID, err)
+			}
+			return prefs, true
+		}
+	}
+	return nil, false
 }
 
 // GetPlan returns the saved plan baseline, if any and unexpired.
