@@ -70,12 +70,23 @@ export default function SearchBar({ items, onSelect, placeholder = 'Search lesso
         <label htmlFor="site-search" className="sr-only">{placeholder}</label>
         <input
           id="site-search"
-          type="search"
+          type="text"
+          role="searchbox"
           value={query}
           onChange={e => { setQuery(e.target.value); setShowResults(true) }}
-          onFocus={() => setShowResults(true)}
+          onFocus={e => {
+            setShowResults(true)
+            // Coarse pointers open the software keyboard, which can bury
+            // the dropdown — bring the field into view first.
+            if (window.matchMedia?.('(pointer: coarse)').matches) {
+              e.currentTarget.scrollIntoView({ block: 'start' })
+            }
+          }}
+          onKeyDown={e => { if (e.key === 'Escape') setShowResults(false) }}
+          aria-expanded={showResults && !!query.trim()}
           placeholder={placeholder}
           enterKeyHint="search"
+          autoComplete="off"
           className="w-full h-11 pl-10 pr-4 border border-mathua-border bg-mathua-surface text-sm font-mono text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue rounded-none"
         />
         {query && (
@@ -90,7 +101,7 @@ export default function SearchBar({ items, onSelect, placeholder = 'Search lesso
         )}
       </form>
       {showResults && query.trim() && (
-        <div className="absolute top-full left-0 right-0 mt-1 border border-mathua-border bg-mathua-surface z-50 max-h-80 overflow-y-auto">
+        <div role="listbox" aria-label="Search results" className="absolute top-full left-0 right-0 mt-1 border border-mathua-border bg-mathua-surface z-50 max-h-[50dvh] overflow-y-auto touch-pan-y overscroll-contain">
           {results.length === 0 ? (
             <div className="p-3 text-xs font-mono text-mathua-muted text-center">
               No results found
