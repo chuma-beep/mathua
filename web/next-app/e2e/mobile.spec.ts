@@ -243,15 +243,17 @@ test('double-clicking Check Answer fires exactly one POST', async ({ page }) => 
     if (req.method() === 'POST' && (req.url().includes('/api/study/answer') || req.url().includes('/api/quiz/answer'))) answerPosts++
   })
 
-  // Mock Study seam: LessonQuiz → SubmitAnswer (CONTEXT.md Seam) — same as flows.spec.ts:26
+  // Mock Study seam: Study links into /learn (attempt-first feed) → SubmitAnswer.
   const LESSON = { title: 'Addition Basics', body: '# Addition Basics\nLearn', concepts: ['arith.add.single'] }
   const PRACTICE = { questions: [{ question: '5+4=?', answer: '9', explanation: '', source: 'curated' }], concept_id: 'arith.add.single' }
   const KP = { concept_id: 'arith.add.single', kps: [{ label: 'Use addition notation', section: 'Use Addition Notation', subgoals: [], worked_example: 'Add' }], diagram: '' }
+  const READY = { concept_id: 'arith.add.single', ready: true, weak: [], missing: [] }
   await page.route('**/api/lessons**', route => {
     const url = route.request().url()
     if (url.includes('/practice')) return route.fulfill({ json: PRACTICE })
     if (url.includes('/kp')) return route.fulfill({ json: KP })
     if (url.includes('/body')) return route.fulfill({ json: { title: LESSON.title, body: LESSON.body } })
+    if (url.includes('/readiness')) return route.fulfill({ json: READY })
     return route.fulfill({ json: { lessons: { arithmetic: [LESSON] } } })
   })
   await page.route('**/api/study/answer', r => r.fulfill({ json: { correct: true, feedback: 'Correct!', xp: 10, expected_answer: '9' } }))
@@ -265,6 +267,10 @@ test('double-clicking Check Answer fires exactly one POST', async ({ page }) => 
   await page.route('**/api/efficacy**', r => r.fulfill({ json: { concepts_touched: 1, first_pass_rate: 1, second_pass_rate: 1, avg_attempts_per_concept: 1, total_attempts: 1 } }))
 
   await page.goto('/study?lesson=' + encodeURIComponent(LESSON.title))
+  await expect(page.getByText('5+4=?')).toHaveCount(0)
+  await page.getByRole('link', { name: 'Start learning →' }).first().click()
+  await expect(page).toHaveURL(/\/learn\?concept=arith\.add\.single/)
+  await page.getByRole('button', { name: 'Start practicing →' }).click()
   await expect(page.getByText('5+4=?')).toBeVisible({ timeout: 30_000 })
 
   const input = page.locator('input[placeholder*="Your answer"]').first()
@@ -274,7 +280,7 @@ test('double-clicking Check Answer fires exactly one POST', async ({ page }) => 
   const inputBox = await input.boundingBox()
   expect(inputBox?.height).toBe(48)
   // Submit hugs its label instead of stretching to the column width.
-  const submit = page.getByRole('button', { name: /Submit|Check Answer/ }).first()
+  const submit = page.getByRole('button', { name: 'Check', exact: true }).first()
   const submitBox = await submit.boundingBox()
   expect(submitBox?.height).toBe(48)
   expect(submitBox?.width ?? 0).toBeLessThan(inputBox?.width ?? 0)
