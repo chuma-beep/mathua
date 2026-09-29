@@ -383,16 +383,17 @@ export default function ProfilePage() {
           </div>
         )}
 
-        {/* Diagnostic CTA — suppressed when NextUp hero already covers diagnostic */}
-        {nextUp.kind !== 'diagnostic' && (
+        {/* Diagnostic CTA — shown only until the first completion, then it
+            disappears entirely (retake stays reachable by direct URL). */}
+        {!user.diagnostic_completed && nextUp.kind !== 'diagnostic' && (
         <section className="mt-6 w-full max-w-full min-w-0 overflow-hidden border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           <div className="w-full sm:flex-1 min-w-0 overflow-hidden">
             <div className="flex flex-col items-start gap-1.5 sm:flex-row sm:items-center sm:gap-2 min-w-0">
               <span className="shrink-0 bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
-                {user.diagnostic_completed ? 'Retake' : 'Recommended'}
+                Recommended
               </span>
               <span className="min-w-0 break-words [overflow-wrap:anywhere] leading-snug font-mono text-[11px] sm:text-xs text-mathua-primary">
-                {user.diagnostic_completed ? 'Retake diagnostic to refresh recommendation' : 'Take a diagnostic to get a recommendation on where to start'}
+                Take a diagnostic to get a recommendation on where to start
               </span>
             </div>
             <p className="font-mono text-xs text-mathua-secondary mt-1 break-words [overflow-wrap:anywhere]">
@@ -403,7 +404,7 @@ export default function ProfilePage() {
             href="/onboard"
             className="w-full sm:w-auto sm:shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap"
           >
-            {user.diagnostic_completed ? 'Retake diagnostic test →' : 'Start diagnostic test →'}
+            Start diagnostic test →
           </Link>
         </section>
         )}
