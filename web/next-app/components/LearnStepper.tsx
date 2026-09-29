@@ -349,6 +349,9 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
                   <p className={`font-mono text-xs ${qe.feedback.correct ? 'text-green-400' : 'text-red-400'}`}>
                     {qe.feedback.correct ? `✓ ${qe.feedback.xp ? `+${qe.feedback.xp} XP` : 'Correct'}` : '✗ Not quite — the method:'} <span className="text-mathua-muted">you answered “{qe.answer}”</span>
                   </p>
+                  <p className="mt-1.5 font-mono text-xs text-mathua-primary">
+                    Expected: <KatexContent>{qe.q.answer}</KatexContent>
+                  </p>
                   {!qe.feedback.correct && (
                     <KatexContent className="mt-1.5 text-xs font-mono text-mathua-secondary whitespace-pre-wrap">{qe.feedback.text}</KatexContent>
                   )}
