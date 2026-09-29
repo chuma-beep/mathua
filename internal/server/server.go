@@ -259,6 +259,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/goal/plan", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleGoalPlan)))))
 	mux.HandleFunc("/api/weaknesses", logRequest(cors(s.authMiddleware(s.handleWeaknesses))))
 	mux.HandleFunc("/api/goals/xp", logRequest(cors(s.authMiddleware(s.handleSetDailyXPGoal))))
+	mux.HandleFunc("/api/account/reset", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleAccountReset)))))
 	mux.HandleFunc("/api/settings", logRequest(cors(s.authMiddleware(s.handleSettings))))
 	mux.HandleFunc("/api/avatar", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleAvatar)))))
 	mux.HandleFunc("/api/avatar/me", logRequest(cors(s.authMiddleware(s.handleAvatarMe))))
@@ -2227,23 +2228,60 @@ func (s *Server) handlePlanSave(w http.ResponseWriter, r *http.Request) {
 }
 
 // GET /api/plans/current — saved baseline plus fresh ahead/behind delta.
+// Prefs (destination/deadline/pace) come from the kept prefs record; the
+// daily rate reads live so goal changes apply without re-saving.
 func (s *Server) handlePlanCurrent(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		http.Error(w, `{"error":"method not allowed"}`, 405)
 		return
 	}
 	studentID, _ := r.Context().Value(authStudentKey{}).(string)
-	snap, ok := s.eng.GetPlan(studentID)
-	if !ok {
+	prefs, prefsOK := s.eng.GetPlanPrefs(studentID)
+	snap, snapOK := s.eng.GetPlan(studentID)
+	if !prefsOK && !snapOK {
 		writeJSON(w, map[string]interface{}{"plan": nil})
 		return
 	}
-	resp, err := s.eng.DestinationEstimate(studentID, snap.Destination, snap.DailyGoal, snap.DeadlineDays, snap.RestDays, 0)
+	dest := ""
+	deadline, rest := -1, 0
+	if prefsOK {
+		dest, deadline, rest = prefs.Destination, prefs.DeadlineDays, prefs.RestDays
+	}
+	if dest == "" && snapOK {
+		dest = snap.Destination
+	}
+	goal := 10
+	if st, err := s.repo.GetStudent(studentID); err == nil && st != nil && st.DailyXPGoal > 0 {
+		goal = st.DailyXPGoal
+	}
+	resp, err := s.eng.DestinationEstimate(studentID, dest, goal, deadline, rest, 0)
 	if err != nil {
-		writeJSON(w, map[string]interface{}{"plan": snap})
+		writeJSON(w, map[string]interface{}{"plan": snap, "prefs": prefs})
 		return
 	}
-	writeJSON(w, map[string]interface{}{"plan": snap, "delta_days": resp.PlanDelta, "xp_remaining": resp.Estimate.XPRemaining})
+	writeJSON(w, map[string]interface{}{"plan": snap, "prefs": prefs, "delta_days": resp.PlanDelta, "fresh_start": resp.FreshStart, "xp_remaining": resp.Estimate.XPRemaining})
+}
+
+// POST /api/account/reset — wipe learning record after typed confirmation.
+// Body: { "phrase": "reset my progress" }. Retry-safe; see engine docs.
+func (s *Server) handleAccountReset(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	var req struct {
+		Phrase string `json:"phrase"`
+	}
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeError(w, "invalid request", 400)
+		return
+	}
+	if err := s.eng.ResetAccountProgress(studentID, req.Phrase); err != nil {
+		writeError(w, "confirmation phrase does not match", 400)
+		return
+	}
+	writeJSON(w, map[string]interface{}{"reset": true})
 }
 
 // GET /api/courses/{id} — one course with the student's progress.
