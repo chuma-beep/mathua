@@ -418,7 +418,7 @@ export default function ProfilePage() {
                 <span className="min-w-0 break-words [overflow-wrap:anywhere] leading-snug font-mono text-[11px] sm:text-xs text-mathua-primary">50 XP reached: mastery check recommended</span>
               </div>
               <div className="mt-2 h-1 bg-mathua-code overflow-hidden">
-                <div className="h-full bg-mathua-blue" style={{ width: `${Math.min(((scores.xp_since_quiz ?? scores.xp_total) / 150) * 100, 100)}%` }} />
+                <div className="h-full bg-mathua-blue" style={{ width: `${Math.min(((scores.xp_since_quiz ?? scores.xp_total) / 50) * 100, 100)}%` }} />
               </div>
             </div>
             <Link href="/goals?quiz=1" className="w-full sm:w-auto sm:shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap">
