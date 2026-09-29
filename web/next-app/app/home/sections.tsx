@@ -403,7 +403,7 @@ const FAQS = [
     a: 'Fluency requires retrieval under time pressure. Knowing the answer is not enough; you must know it fast, or the foundation will not hold the next concept.',
   },
   {
-    q: 'What happens every 150 XP?',
+    q: 'What happens every 50 XP?',
     a: 'A mastery-check quiz verifies retention across your recent concepts before new material continues.',
   },
   {

@@ -256,7 +256,7 @@ test('double-clicking Check Answer fires exactly one POST', async ({ page }) => 
     if (url.includes('/readiness')) return route.fulfill({ json: READY })
     return route.fulfill({ json: { lessons: { arithmetic: [LESSON] } } })
   })
-  await page.route('**/api/study/answer', r => r.fulfill({ json: { correct: true, feedback: 'Correct!', xp: 10, expected_answer: '9' } }))
+  await page.route('**/api/study/answer', r => r.fulfill({ json: { correct: true, feedback: 'Correct!', xp: 1, expected_answer: '9' } }))
   await page.route('**/api/scores/**', r => r.fulfill({ json: { lifetime_points: 100, weekly_score: 10, speed_bonus: 0, concepts_mastered: 1, current_streak: 1, level: 'Novice', xp_total: 10, xp_today: 10, daily_xp_goal: 30 } }))
   await page.route('**/api/progress/**', r => r.fulfill({ json: {} }))
   await page.route('**/api/activity**', r => r.fulfill({ json: [] }))

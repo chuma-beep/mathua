@@ -12,7 +12,7 @@ test('review: start → answer → done', async ({ page }) => {
     route.fulfill({ json: { student_id: 's1', session_id: 'r1', question: { concept_id: 'arith.add.single', concept_name: 'Single-digit addition', question: '2 + 3 = ?', is_review: true, attempt_id: 'a1' } } }),
   )
   await page.route('**/api/reviews/answer', route =>
-    route.fulfill({ json: { result: { correct: true, feedback: 'Correct!', new_status: 'PRACTICING', explanation: '', streak: 1, required_streak: 2, xp: 5, expected_answer: '5' }, next_question: null, done: true } }),
+    route.fulfill({ json: { result: { correct: true, feedback: 'Correct!', new_status: 'PRACTICING', explanation: '', streak: 1, required_streak: 2, xp: 1, expected_answer: '5' }, next_question: null, done: true } }),
   )
 
   await page.goto('/review')

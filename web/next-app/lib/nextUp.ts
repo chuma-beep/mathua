@@ -136,6 +136,7 @@ export interface CatalogEntry {
   id: string
   label: string
   prerequisites?: string[]
+  avgTimeSeconds?: number
 }
 
 export interface ShelfInput extends NextUpInput {
@@ -147,6 +148,7 @@ export interface ShelfCandidate {
   id: string
   label: string
   weakness: number
+  avgTimeSeconds?: number
 }
 
 // SelectionPolicy turns eligible candidates into a shelf. The v1 fixed
@@ -154,14 +156,21 @@ export interface ShelfCandidate {
 // readiness, urgency, value, difficulty, diversity, pace, and relevance.
 export type SelectionPolicy = (cands: ShelfCandidate[], input: ShelfInput) => ShelfItem[]
 
-function xpFor(id: string, kind: ShelfItem['kind']): number {
-  if (kind === 'review') return 5
-  if (kind === 'diagnostic' || kind === 'browse') return 0
-  return id.endsWith('.word') ? 15 : 10
+// effortBase mirrors internal/xp EffortBase at neutral difficulty so shelf
+// labels track the award path (10s→1, 60s→1, 120s→2, 300s→5).
+function effortBase(avgTimeSeconds?: number): number {
+  const t = avgTimeSeconds && avgTimeSeconds > 0 ? avgTimeSeconds : 10
+  return Math.min(5, Math.max(1, Math.round((t / 60) * 1.0)))
 }
 
-function learnItem(kind: ShelfItem['kind'], badge: string, id: string, label: string, detail: string, cta: string): ShelfItem {
-  return { kind, badge, title: label, detail, href: `/learn?concept=${encodeURIComponent(id)}`, cta, xp: xpFor(id, kind) }
+function xpFor(entry: { id: string; avgTimeSeconds?: number }, kind: ShelfItem['kind']): number {
+  if (kind === 'review') return Math.max(1, Math.round(effortBase(entry.avgTimeSeconds) / 2))
+  if (kind === 'diagnostic' || kind === 'browse') return 0
+  return effortBase(entry.avgTimeSeconds)
+}
+
+function learnItem(kind: ShelfItem['kind'], badge: string, c: ShelfCandidate, detail: string, cta: string): ShelfItem {
+  return { kind, badge, title: c.label, detail, href: `/learn?concept=${encodeURIComponent(c.id)}`, cta, xp: xpFor(c, kind) }
 }
 
 // buildCandidates lists eligible concepts: available (prereqs mastered),
@@ -189,6 +198,7 @@ export function buildCandidates(input: ShelfInput): ShelfCandidate[] {
       id: c.id,
       label: w?.label ?? c.label,
       weakness: w?.weakness ?? 0,
+      avgTimeSeconds: c.avgTimeSeconds,
     })
   }
   out.sort((a, b) => b.weakness - a.weakness || (a.id < b.id ? -1 : 1))
@@ -219,18 +229,18 @@ export const fixedWeightPolicy: SelectionPolicy = (cands, input) => {
     take({
       kind: 'review', badge: 'Due now',
       title: `${input.dueReviews} concept${input.dueReviews !== 1 ? 's' : ''} due for review`,
-      detail: 'Spaced repetition — review before decay', href: '/review', cta: 'Review →', xp: 5,
+      detail: 'Spaced repetition — review before decay', href: '/review', cta: 'Review →', xp: 1,
     })
   }
   for (const n of news.slice(0, 2)) {
-    take(learnItem('new', 'New', n.id, n.label, 'Frontier concept — learn it next', 'Continue →'), n.id)
+    take(learnItem('new', 'New', n, 'Frontier concept — learn it next', 'Continue →'), n.id)
   }
   for (const w of weaks.slice(0, 1)) {
-    take(learnItem('weakness', 'Recommended', w.id, w.label, 'Weakest eligible concept — targeted session', 'Continue →'), w.id)
+    take(learnItem('weakness', 'Recommended', w, 'Weakest eligible concept — targeted session', 'Continue →'), w.id)
   }
   for (const r of resumes.slice(0, 1)) {
     if (items.length >= 5) break
-    take(learnItem('resume', 'Continue', r.id, r.label, 'Pick up where you left off', 'Continue →'), r.id)
+    take(learnItem('resume', 'Continue', r, 'Pick up where you left off', 'Continue →'), r.id)
   }
   if (items.length === 0) {
     take({ kind: 'browse', badge: 'Study', title: 'Browse the Study library', detail: 'Pick a Lesson — worked example first, then answer', href: '/study', cta: 'Browse Study →', xp: 0 })

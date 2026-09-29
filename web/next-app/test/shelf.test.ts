@@ -2,11 +2,11 @@ import { describe, it, expect } from 'vitest'
 import { selectShelf, buildCandidates, type ShelfInput } from '../lib/nextUp'
 
 const catalog = [
-  { id: 'a', label: 'A', prerequisites: [] as string[] },
-  { id: 'b', label: 'B', prerequisites: ['a'] },
-  { id: 'c', label: 'C', prerequisites: ['a'] },
-  { id: 'd.word', label: 'D word', prerequisites: ['b', 'c'] },
-  { id: 'e', label: 'E', prerequisites: ['z-locked'] },
+  { id: 'a', label: 'A', prerequisites: [] as string[], avgTimeSeconds: 10 },
+  { id: 'b', label: 'B', prerequisites: ['a'], avgTimeSeconds: 120 },
+  { id: 'c', label: 'C', prerequisites: ['a'], avgTimeSeconds: 10 },
+  { id: 'd.word', label: 'D word', prerequisites: ['b', 'c'], avgTimeSeconds: 30 },
+  { id: 'e', label: 'E', prerequisites: ['z-locked'], avgTimeSeconds: 10 },
 ]
 
 const base: ShelfInput = {
@@ -60,7 +60,7 @@ describe('selectShelf', () => {
     expect(new Set(hrefs).size).toBe(hrefs.length)
   })
 
-  it('prices word items at multistep XP', () => {
+  it('prices items from effort calibration', () => {
     const items = selectShelf({
       ...base,
       progress: {
@@ -69,8 +69,19 @@ describe('selectShelf', () => {
         c: { status: 'MASTERED', streak: 3 },
       },
     })
-    const word = items.find(i => i.href.includes('d.word'))
-    expect(word?.xp).toBe(15)
+    // d.word (30s) calibrates to 1 XP; only it is eligible.
+    expect(items).toHaveLength(1)
+    expect(items[0].href).toContain('d.word')
+    expect(items[0].xp).toBe(1)
+  })
+
+  it('prices a 120s concept at 2 XP', () => {
+    const items = selectShelf({
+      ...base,
+      progress: { a: { status: 'MASTERED', streak: 3 } },
+    })
+    const hard = items.find(i => i.href.includes('concept=b'))
+    expect(hard?.xp).toBe(2)
   })
 
   it('is always satisfiable for brand-new users', () => {
