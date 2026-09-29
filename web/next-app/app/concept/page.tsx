@@ -10,7 +10,6 @@ import Footer from '../../components/Footer'
 import KatexContent from '../../components/KatexContent'
 import { stripMathDelimiters } from '../../lib/lessonMath'
 import { subdomainLeaf } from '../../lib/conceptDisplay'
-import LessonQuiz from '../../components/LessonQuiz'
 import ReportButton from '../../components/ReportButton'
 import { getConceptDetail, type ConceptDetailRes } from '../../lib/api'
 import Loading from '../../components/Loading'
@@ -222,10 +221,15 @@ function ConceptContent() {
                 <div className="border border-mathua-border bg-mathua-surface rounded-none px-4 py-3 flex items-center gap-3 flex-wrap">
                   <span className="font-mono text-[10px] uppercase tracking-wider text-green-400">● Practice ready</span>
                   <span className="font-mono text-xs text-mathua-muted">
-                    No written lesson for this concept yet — practice it right now below.
+                    No written lesson for this concept yet — learn it in the loop.
                   </span>
+                  <Link
+                    href={`/learn?concept=${encodeURIComponent(conceptId)}`}
+                    className="ml-auto font-mono text-xs text-mathua-blue hover:underline whitespace-nowrap"
+                  >
+                    Start learning →
+                  </Link>
                 </div>
-                <LessonQuiz conceptId={conceptId} />
               </div>
             )}
 
@@ -267,16 +271,23 @@ function ConceptContent() {
                       <div id="lesson-body" className="w-full max-w-full min-w-0 overflow-hidden">
                         <KatexContent>{detail.lesson.body}</KatexContent>
                       </div>
-                      <div className="mt-3 flex justify-end">
-                        <ReportButton
-                          conceptId={conceptId}
-                          lessonId={detail.lesson.title}
-                          kind="lesson_body"
-                          question={detail.lesson.body?.slice(0, 2000)}
-                        />
+                      <div className="mt-6 flex justify-center">
+                        <Link
+                          href={`/learn?concept=${encodeURIComponent(conceptId)}`}
+                          className="inline-block border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white rounded-none h-12 px-8 font-medium text-sm leading-[48px] max-w-full truncate"
+                        >
+                          Start learning →
+                        </Link>
                       </div>
                     </div>
-                    <LessonQuiz conceptId={conceptId} />
+                    <div className="mt-3 flex justify-end">
+                      <ReportButton
+                        conceptId={conceptId}
+                        lessonId={detail.lesson.title}
+                        kind="lesson_body"
+                        question={detail.lesson.body?.slice(0, 2000)}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -291,10 +302,10 @@ function ConceptContent() {
                   : undefined
                 const href = nextPrereq
                   ? `/concept?id=${encodeURIComponent(nextPrereq.id)}`
-                  : `/session?concept=${encodeURIComponent(conceptId)}`
+                  : `/learn?concept=${encodeURIComponent(conceptId)}`
                 const caption = nextPrereq
                   ? `Start with ${nextPrereq.label}`
-                  : `Start practicing ${detail.concept.label}`
+                  : `Start learning →`
                 return (
                   <>
                     <Link
