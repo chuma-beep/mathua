@@ -166,10 +166,16 @@ function PlanContent() {
             <div className="flex justify-between"><dt>Diagnostic + planning time</dt><dd className="text-mathua-primary">≈ {e.diagnostic_min} min</dd></div>
             <div className="flex justify-between"><dt>Initial estimate coverage</dt><dd className="text-mathua-primary">{est?.probes.length} probe topics</dd></div>
           </dl>
-          {est?.plan_delta_days !== undefined && est.plan_delta_days !== null && (
-            <p className="mt-3 font-mono text-xs text-mathua-blue">
-              {(est.plan_delta_days >= 0 ? '≈' + Math.abs(est.plan_delta_days).toFixed(0) + ' days ahead of' : '≈' + Math.abs(est.plan_delta_days).toFixed(0) + ' days behind') + ' your saved plan'}
+          {est?.fresh_start ? (
+            <p className="mt-3 font-mono text-xs text-mathua-secondary">
+              Fresh start — complete a few questions and your estimate will sharpen. No behind-schedule figure until a new baseline lands.
             </p>
+          ) : (
+            est?.plan_delta_days !== undefined && est.plan_delta_days !== null && (
+              <p className="mt-3 font-mono text-xs text-mathua-blue">
+                {(est.plan_delta_days >= 0 ? '≈' + Math.abs(est.plan_delta_days).toFixed(0) + ' days ahead of' : '≈' + Math.abs(est.plan_delta_days).toFixed(0) + ' days behind') + ' your saved plan'}
+              </p>
+            )
           )}
           <div className="mt-4">
             <label htmlFor="plan-whatif" className="font-mono text-[11px] uppercase tracking-wider text-mathua-muted">What if {whatIf} XP/day? {whatIfDays > 0 && <span className="text-mathua-primary">→ ≈ {Math.ceil(whatIfDays)} days</span>}</label>

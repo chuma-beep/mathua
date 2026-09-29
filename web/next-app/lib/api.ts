@@ -785,6 +785,7 @@ export interface EstimateRes {
 	pace: { rate: number; source: 'measured' | 'goal'; adherence: number; active_days: number; trailing_days: number }
 	probes: string[]
 	plan_delta_days?: number
+	fresh_start?: boolean
 }
 
 export interface EstimateParams {
@@ -830,6 +831,18 @@ export async function getCurrentPlan(): Promise<{ plan: StudyPlan | null; delta_
 	const res = await authedFetch(`${API_BASE}/api/plans/current`, { headers: { ...getAuthHeaders() } })
 	if (!res.ok) return { plan: null }
 	return res.json()
+}
+
+export async function resetAccount(phrase: string): Promise<void> {
+	const res = await authedFetch(`${API_BASE}/api/account/reset`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+		body: JSON.stringify({ phrase }),
+	})
+	if (!res.ok) {
+		const msg = await res.text().catch(() => '')
+		throw new Error(msg || `Reset failed: ${res.status}`)
+	}
 }
 
 export async function getWeaknesses(): Promise<WeaknessRes> {
