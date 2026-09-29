@@ -24,6 +24,15 @@ function isMastered(p: ConceptProgress | undefined): boolean {
   return (p?.status ?? '').toLowerCase() === 'mastered'
 }
 
+// New means no evidence of learning at all: nothing mastered and no
+// answered questions. A struggling newcomer with attempts but zero
+// mastery still counts as new; anyone with a history does not, even if
+// they never took the diagnostic.
+export function isNewUser(input: { conceptsMastered: number; activity: DailyActivity[] }): boolean {
+  if (input.conceptsMastered !== 0) return false
+  return !input.activity.some(day => day.questions > 0)
+}
+
 function topWeakness(input: NextUpInput): { id: string; label: string } | null {
   const entries = input.weaknesses?.by_domain ?? {}
   let best: { id: string; label: string; weakness: number } | null = null
@@ -97,7 +106,7 @@ export function selectNextUp(input: NextUpInput): NextUp {
     }
   }
 
-  if (input.conceptsMastered === 0 && !input.diagnosticCompleted) {
+  if (isNewUser(input) && !input.diagnosticCompleted) {
     return {
       kind: 'diagnostic',
       badge: 'Recommended',
@@ -222,7 +231,7 @@ export const fixedWeightPolicy: SelectionPolicy = (cands, input) => {
   const weaks = cands.filter(c => c.kind === 'weakness')
   const resumes = cands.filter(c => c.kind === 'resume')
 
-  if (input.conceptsMastered === 0 && !input.diagnosticCompleted) {
+  if (isNewUser(input) && !input.diagnosticCompleted) {
     take({ kind: 'diagnostic', badge: 'Recommended', title: 'Find your frontier', detail: 'Adaptive diagnostic — where to start', href: '/onboard', cta: 'Start →', xp: 0 })
   }
   if (input.dueReviews > 0) {

@@ -16,7 +16,7 @@ import { AppSidebar } from '../../components/app-sidebar'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '../../components/ui/sidebar'
 import TaskShelf from '../../components/TaskShelf'
 import DailyGoalControl, { getGuestGoal } from '../../components/DailyGoalControl'
-import { selectNextUp, selectShelf } from '../../lib/nextUp'
+import { selectNextUp, selectShelf, isNewUser } from '../../lib/nextUp'
 import { concepts as conceptCatalog } from '../../lib/conceptData'
 
 interface UserInfo {
@@ -72,6 +72,9 @@ export default function ProfilePage() {
     () => (scores && goalOverride ? { ...scores, daily_xp_goal: goalOverride } : scores),
     [scores, goalOverride],
   )
+
+  // New = nothing mastered and no answered questions anywhere.
+  const isNew = scores != null && isNewUser({ conceptsMastered: scores.concepts_mastered, activity })
 
   const shelf = useMemo(
     () =>
@@ -223,7 +226,7 @@ export default function ProfilePage() {
               <Link href="/session" className="w-full sm:w-auto border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap">Try as guest →</Link>
             </div>
           </div>
-          {(Object.keys(progress).length === 0 && activity.length === 0) && (
+          {(Object.keys(progress).length === 0 && !activity.some(d => d.questions > 0)) && (
             <section className="mt-6 border border-mathua-border bg-mathua-surface p-4">
               <h3 className="font-mono text-[11px] text-mathua-muted uppercase tracking-wider mb-3">What to do first</h3>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -359,7 +362,7 @@ export default function ProfilePage() {
 
         <TaskShelf items={shelf} />
 
-        {(scores.concepts_mastered === 0 && !user.diagnostic_completed) && (
+        {(isNew && !user.diagnostic_completed) && (
           <section className="mt-6 border border-mathua-border bg-mathua-surface p-4">
             <h3 className="font-mono text-[11px] text-mathua-muted uppercase tracking-wider mb-3">What to do first</h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -395,7 +398,7 @@ export default function ProfilePage() {
 
         {/* Diagnostic CTA — new users only: hidden once completed or once
             the learner is no longer new. Retake stays URL-reachable. */}
-        {!user.diagnostic_completed && scores.concepts_mastered === 0 && nextUp.kind !== 'diagnostic' && (
+        {!user.diagnostic_completed && isNew && nextUp.kind !== 'diagnostic' && (
         <section className="mt-6 w-full max-w-full min-w-0 overflow-hidden border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           <div className="w-full sm:flex-1 min-w-0 overflow-hidden">
             <div className="flex flex-col items-start gap-1.5 sm:flex-row sm:items-center sm:gap-2 min-w-0">
