@@ -25,9 +25,10 @@ type Path struct {
 }
 
 type Planner struct {
-	dag     *concepts.DAG
-	courses []*Course
-	byID    map[string]*Course
+	dag      *concepts.DAG
+	courses  []*Course
+	byID     map[string]*Course
+	destByID map[string]*Destination
 }
 
 func Load(coursesPath string, dag *concepts.DAG) (*Planner, error) {
