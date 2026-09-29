@@ -15,7 +15,7 @@ export function getGuestGoal(): number | null {
 
 // DailyGoalControl: presets + custom target. Authed users write through to
 // the server; guests persist locally. Calls back so the page can refresh.
-export default function DailyGoalControl({ current, onSaved }: { current: number; onSaved: (goal: number) => void }) {
+export default function DailyGoalControl({ current, onSaved, bare }: { current: number; onSaved: (goal: number) => void; bare?: boolean }) {
   const [custom, setCustom] = useState('')
   const [busy, setBusy] = useState(false)
   const [msg, setMsg] = useState('')
@@ -41,7 +41,7 @@ export default function DailyGoalControl({ current, onSaved }: { current: number
   }
 
   return (
-    <div className="mt-4 border border-mathua-border bg-mathua-surface p-4">
+    <div className={bare ? undefined : 'mt-4 border border-mathua-border bg-mathua-surface p-4'}>
       <p className="font-mono text-[11px] uppercase tracking-wider text-mathua-muted">Daily XP target · currently {current}/day</p>
       <div className="mt-2 flex flex-wrap gap-2">
         {GOAL_PRESETS.map(p => (
