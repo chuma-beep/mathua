@@ -22,6 +22,7 @@ import (
 	"github.com/chuma-beep/mathua/internal/concepts"
 	"github.com/chuma-beep/mathua/internal/diagnostic"
 	"github.com/chuma-beep/mathua/internal/engine"
+	"github.com/chuma-beep/mathua/internal/generator"
 	"github.com/chuma-beep/mathua/internal/grader"
 	"github.com/chuma-beep/mathua/internal/mastery"
 	"github.com/chuma-beep/mathua/internal/quiz"
@@ -1537,11 +1538,53 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 	}
 	path := strings.TrimPrefix(r.URL.Path, "/api/lessons/")
 	parts := strings.SplitN(path, "/", 2)
-	if len(parts) < 2 || (parts[1] != "practice" && parts[1] != "kp") {
+	if len(parts) < 2 || (parts[1] != "practice" && parts[1] != "kp" && parts[1] != "readiness") {
 		http.Error(w, `{"error":"not found"}`, 404)
 		return
 	}
 	conceptID := parts[0]
+
+	// GET /api/lessons/{id}/readiness — soft prereq banner data (P2).
+	// Returns {ready, weak[], missing[]} so the /learn UI can suggest
+	// prerequisite review without hard-redirecting.
+	if parts[1] == "readiness" {
+		var rawProgress map[string]*storage.ConceptProgress
+		if sid, _ := r.Context().Value(authStudentKey{}).(string); s.ownsStudentID(r, sid) {
+			if p, err := s.eng.GetProgress(sid); err == nil {
+				rawProgress = make(map[string]*storage.ConceptProgress)
+				for cid, cp := range p {
+					rawProgress[cid] = cp
+				}
+			}
+		} else if sid := r.URL.Query().Get("student_id"); s.ownsStudentID(r, sid) {
+			if p, err := s.eng.GetProgress(sid); err == nil {
+				rawProgress = make(map[string]*storage.ConceptProgress)
+				for cid, cp := range p {
+					rawProgress[cid] = cp
+				}
+			}
+		}
+		prereqs := s.eng.LessonPrerequisites([]string{conceptID}, rawProgress)
+		weak := []engine.PrereqInfo{}
+		missing := []engine.PrereqInfo{}
+		for _, p := range prereqs {
+			if p.Status == string(mastery.StatusMastered) {
+				continue
+			}
+			if p.Status == string(mastery.StatusUnseen) || p.Status == "" {
+				missing = append(missing, p)
+			} else {
+				weak = append(weak, p)
+			}
+		}
+		writeJSON(w, map[string]interface{}{
+			"concept_id": conceptID,
+			"ready":      len(weak) == 0 && len(missing) == 0,
+			"weak":       weak,
+			"missing":    missing,
+		})
+		return
+	}
 
 	// GET /api/lessons/{id}/kp — knowledge-point shards with worked examples.
 	if parts[1] == "kp" {
@@ -1587,6 +1630,29 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 			count = n
 		}
 	}
+	// P1 fresh variants: optional seed for a different parameter set, and
+	// exclude[] question texts the client already saw (miss => new variant,
+	// never re-serve identical text). difficulty (0.3-1.0) steps the
+	// generator's staged ladder; defaults to 0.5.
+	var seed int64
+	if s := r.URL.Query().Get("seed"); s != "" {
+		fmt.Sscanf(s, "%d", &seed)
+	}
+	diff := 0.5
+	if d := r.URL.Query().Get("difficulty"); d != "" {
+		var v float64
+		if _, err := fmt.Sscanf(d, "%f", &v); err == nil && v >= 0 && v <= 1 {
+			diff = v
+		}
+	}
+	excluded := make(map[string]bool)
+	for _, ex := range r.URL.Query()["exclude"] {
+		for _, part := range strings.Split(ex, "\n") {
+			if part != "" {
+				excluded[part] = true
+			}
+		}
+	}
 
 	type qInfo struct {
 		Question    string `json:"question"`
@@ -1595,41 +1661,63 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 		Source      string `json:"source,omitempty"`
 	}
 
-	// Try DB first
-	dbQs, err := s.eng.GetQuestions(conceptID, count)
+	// Try DB first (filtered by exclude so retries vary)
+	dbQs, err := s.eng.GetQuestions(conceptID, count+len(excluded)+5)
 	if err == nil && len(dbQs) > 0 {
-		questions := make([]qInfo, len(dbQs))
-		for i, q := range dbQs {
-			src := q.Source
-			if src == "" {
-				src = "curated"
-			}
-			questions[i] = qInfo{Question: q.Question, Answer: q.Answer, Explanation: q.Explanation, Source: src}
-		}
-		qa := make(map[string]string, len(dbQs))
+		filtered := dbQs[:0]
 		for _, q := range dbQs {
-			qa[q.Question] = q.Answer
+			if !excluded[q.Question] {
+				filtered = append(filtered, q)
+			}
+			if len(filtered) >= count {
+				break
+			}
 		}
-		if studentID, _ := r.Context().Value(authStudentKey{}).(string); s.ownsStudentID(r, studentID) {
-			s.eng.SetStudyExpectedBatch(studentID, conceptID, qa)
-		} else if sid := r.URL.Query().Get("student_id"); s.ownsStudentID(r, sid) {
-			s.eng.SetStudyExpectedBatch(sid, conceptID, qa)
+		if len(filtered) > 0 {
+			dbQs = filtered
+			questions := make([]qInfo, len(dbQs))
+			for i, q := range dbQs {
+				src := q.Source
+				if src == "" {
+					src = "curated"
+				}
+				questions[i] = qInfo{Question: q.Question, Answer: q.Answer, Explanation: q.Explanation, Source: src}
+			}
+			qa := make(map[string]string, len(dbQs))
+			for _, q := range dbQs {
+				qa[q.Question] = q.Answer
+			}
+			if studentID, _ := r.Context().Value(authStudentKey{}).(string); s.ownsStudentID(r, studentID) {
+				s.eng.SetStudyExpectedBatch(studentID, conceptID, qa)
+			} else if sid := r.URL.Query().Get("student_id"); s.ownsStudentID(r, sid) {
+				s.eng.SetStudyExpectedBatch(sid, conceptID, qa)
+			}
+			writeJSON(w, map[string]interface{}{"questions": questions, "concept_id": conceptID})
+			return
 		}
-		writeJSON(w, map[string]interface{}{"questions": questions, "concept_id": conceptID})
-		return
 	}
 
-	// Fallback to generator
+	// Fallback to generator (seeded + exclude-filtered for fresh variants)
 	reg := s.eng.GetGeneratorRegistry()
 	if reg == nil {
 		writeJSON(w, map[string]interface{}{"questions": []interface{}{}})
 		return
 	}
-	problems, err := reg.BatchGenerate(conceptID, count, 0.5)
+	problems, err := reg.BatchGenerateContext(conceptID, count+len(excluded)+5, generator.GeneratorContext{Difficulty: diff, Seed: seed})
 	if err != nil {
 		writeError(w, err.Error(), 404)
 		return
 	}
+	fresh := problems[:0]
+	for _, p := range problems {
+		if !excluded[p.Question] {
+			fresh = append(fresh, p)
+		}
+		if len(fresh) >= count {
+			break
+		}
+	}
+	problems = fresh
 	// H1b: store server-side expecteds for the whole served set (not just the
 	// first question) so each question is graded against its own answer.
 	qa := make(map[string]string, len(problems))

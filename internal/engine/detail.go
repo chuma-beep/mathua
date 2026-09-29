@@ -235,6 +235,67 @@ func (e *Engine) LessonDependents(conceptIDs []string, progress map[string]*stor
 	return deps
 }
 
+// MasteryPct derives a continuous 0..1 mastery score from stored progress.
+// Derive-only: no migration, Machine.Next() remains the writer.
+// Bands: UNSEEN 0, LEARNING ~0.3, PRACTICING ~0.6, MASTERED 1.0, refined by
+// streak/threshold ratio and decayed at read time via EffectiveStatus.
+func MasteryPct(p *storage.ConceptProgress, reqStreak int, daysSinceReview float64, decayDays float64) float64 {
+	base := 0.0
+	if p != nil {
+		switch mastery.Status(p.Status) {
+		case mastery.StatusMastered:
+			base = 1.0
+		case mastery.StatusPracticing:
+			base = 0.6
+		case mastery.StatusLearning:
+			base = 0.3
+		default:
+			base = 0.0
+		}
+		if reqStreak > 0 && p.Streak > 0 {
+			ratio := float64(p.Streak) / float64(reqStreak)
+			if ratio > 1 {
+				ratio = 1
+			}
+			// Blend status band with streak progress so partial streaks show.
+			if base < ratio {
+				base = base*0.5 + ratio*0.5
+			} else {
+				base = ratio
+				if base > 1 {
+					base = 1
+				}
+			}
+		}
+		if p.Status == string(mastery.StatusMastered) && mastery.EffectiveStatus(mastery.StatusMastered, daysSinceReview, decayDays) == "DECAYING" {
+			base = 0.8
+		}
+	}
+	if base < 0 {
+		return 0
+	}
+	if base > 1 {
+		return 1
+	}
+	return base
+}
+
+// MasteryBand labels a MasteryPct for UI display.
+func MasteryBand(pct float64) string {
+	switch {
+	case pct >= 0.95:
+		return "well retained"
+	case pct >= 0.7:
+		return "strong"
+	case pct >= 0.35:
+		return "developing"
+	case pct > 0:
+		return "barely understood"
+	default:
+		return "unseen"
+	}
+}
+
 // LessonDependentsByDomain groups dependents by their concept domain.
 func (e *Engine) LessonDependentsByDomain(conceptIDs []string, progress map[string]*storage.ConceptProgress) map[string][]PrereqInfo {
 	deps := e.LessonDependents(conceptIDs, progress)
