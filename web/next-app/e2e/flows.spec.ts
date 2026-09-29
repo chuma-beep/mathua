@@ -86,6 +86,9 @@ test('quiz gate banner appears at 50 XP on profile and links to quiz host', asyn
 
   await page.goto('/profile')
   await expect(page.getByText('Quiz due').first()).toBeVisible({ timeout: 30_000 })
+  // TEMP-CI-DEBUG: ground truth on what the quiz section actually renders.
+  const bodyText = await page.locator('body').innerText()
+  console.log('DEBUG-QUIZ-TEXT:' + JSON.stringify((bodyText.match(/.{0,20}XP reached.{0,60}/) || ['NONE'])[0]))
   await expect(page.getByText('50 XP reached: mastery check recommended').first()).toBeVisible()
   await expect(page.getByRole('link', { name: 'Take Test' }).first()).toBeVisible()
 })
