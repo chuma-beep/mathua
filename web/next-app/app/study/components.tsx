@@ -6,7 +6,6 @@ import LessonDiagram from '../../components/LessonDiagram'
 import SectionHeader from '../../components/SectionHeader'
 import KatexContent from '../../components/KatexContent'
 import SearchBar from '../../components/SearchBar'
-import LessonQuiz from '../../components/LessonQuiz'
 import ReportButton from '../../components/ReportButton'
 import MasteryBadge from '../../components/MasteryBadge'
 import { getLessonKPs, type LessonInfo, type Scores, type LessonKpsRes, type KpInfo } from '../../lib/api'
@@ -552,7 +551,7 @@ export function LessonDetail({
               Worked example
             </span>
             <span className="font-mono text-[10px] text-mathua-muted">
-              study this first, then practice below
+              study this first, then start learning below
             </span>
           </div>
           <div className="w-full max-w-full min-w-0 overflow-hidden">
@@ -571,14 +570,25 @@ export function LessonDetail({
 
       <div id="practice" className="mt-2 flex items-center gap-2 scroll-mt-24">
         <span className="bg-mathua-border text-mathua-primary px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
-          Practice
+          Learn
         </span>
         <span className="font-mono text-[10px] text-mathua-muted">
-          2 in a row to advance
+          attempt-first loop — practice lives in /learn, not here
         </span>
       </div>
       {lesson.concepts.slice(0, 3).map(cid => (
-        <LessonQuiz key={cid} conceptId={cid} limit={4} />
+        <Link
+          key={cid}
+          href={`/learn?concept=${encodeURIComponent(cid)}`}
+          className="mt-3 flex items-center justify-between gap-3 border border-mathua-border bg-mathua-surface p-4 hover:border-mathua-blue transition-colors"
+        >
+          <span className="font-mono text-xs text-mathua-primary truncate">
+            {conceptLabels.get(cid) || cid}
+          </span>
+          <span className="shrink-0 font-mono text-xs text-mathua-blue">
+            Start learning →
+          </span>
+        </Link>
       ))}
 
       {lesson.dependents && lesson.dependents.length > 0 && (

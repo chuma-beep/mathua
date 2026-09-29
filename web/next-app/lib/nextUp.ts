@@ -69,7 +69,7 @@ export function selectNextUp(input: NextUpInput): NextUp {
       title: `${input.dueReviews} concept${input.dueReviews !== 1 ? 's' : ''} due for review`,
       detail: 'Spaced repetition — review before decay',
       href: '/review',
-      cta: 'Review now →',
+      cta: 'Review →',
     }
   }
 
@@ -79,9 +79,9 @@ export function selectNextUp(input: NextUpInput): NextUp {
       kind: 'weakness',
       badge: 'Recommended',
       title: `Study ${weak.label}`,
-      detail: 'Weakest concept — guided Learn session',
+      detail: 'Weakest concept — targeted session',
       href: `/learn?concept=${encodeURIComponent(weak.id)}`,
-      cta: 'Start learning →',
+      cta: 'Continue →',
     }
   }
 
@@ -219,14 +219,14 @@ export const fixedWeightPolicy: SelectionPolicy = (cands, input) => {
     take({
       kind: 'review', badge: 'Due now',
       title: `${input.dueReviews} concept${input.dueReviews !== 1 ? 's' : ''} due for review`,
-      detail: 'Spaced repetition — review before decay', href: '/review', cta: 'Review now →', xp: 5,
+      detail: 'Spaced repetition — review before decay', href: '/review', cta: 'Review →', xp: 5,
     })
   }
   for (const n of news.slice(0, 2)) {
-    take(learnItem('new', 'New', n.id, n.label, 'Frontier concept — learn it next', 'Start learning →'), n.id)
+    take(learnItem('new', 'New', n.id, n.label, 'Frontier concept — learn it next', 'Continue →'), n.id)
   }
   for (const w of weaks.slice(0, 1)) {
-    take(learnItem('weakness', 'Recommended', w.id, w.label, 'Weakest eligible concept — targeted session', 'Practice →'), w.id)
+    take(learnItem('weakness', 'Recommended', w.id, w.label, 'Weakest eligible concept — targeted session', 'Continue →'), w.id)
   }
   for (const r of resumes.slice(0, 1)) {
     if (items.length >= 5) break
