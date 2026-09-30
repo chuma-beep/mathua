@@ -44,6 +44,7 @@ vi.mock('../lib/api', () => ({
   avatarImageUrl: () => 'https://x/avatar',
   enableShare: vi.fn(),
   disableShare: vi.fn(),
+  getScores: () => Promise.resolve({ daily_xp_goal: 10 }),
 }))
 
 vi.mock('../lib/auth', () => ({
