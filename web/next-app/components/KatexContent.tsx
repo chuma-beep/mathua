@@ -169,6 +169,9 @@ export default function KatexContent({ children, className = '' }: { children: s
           macros: lessonMacros,
         }], rehypeKatexFallback]}
         components={{
+          // react-markdown passes its hast `node` as a prop to every component
+          // override: spreading it would render node="[object Object]" on each
+          // heading, so it is destructured out and dropped here.
           a: ({ children }) => <>{children}</>,
           code: ({ children }) => (
             <code className="bg-mathua-code px-1 rounded-none text-mathua-secondary">
@@ -188,15 +191,18 @@ export default function KatexContent({ children, className = '' }: { children: s
             // eslint-disable-next-line @next/next/no-img-element
             return <img src={url} alt={alt || file} loading="lazy" className="max-w-full h-auto my-4 mx-auto" />
           },
-          h1: ({ children, ...props }) => {
+          h1: ({ children, node: _h1node, ...props }) => {
+            void _h1node
             const text = extractText(children)
             return <h1 id={headingId(text)} {...props}>{children}</h1>
           },
-          h2: ({ children, ...props }) => {
+          h2: ({ children, node: _h2node, ...props }) => {
+            void _h2node
             const text = extractText(children)
             return <h2 id={headingId(text)} {...props}>{children}</h2>
           },
-          h3: ({ children, ...props }) => {
+          h3: ({ children, node: _h3node, ...props }) => {
+            void _h3node
             const text = extractText(children)
             return <h3 id={headingId(text)} {...props}>{children}</h3>
           },

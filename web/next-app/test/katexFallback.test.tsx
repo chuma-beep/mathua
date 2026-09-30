@@ -39,4 +39,22 @@ describe('KatexContent KaTeX fallback', () => {
       err.mockRestore()
     }
   })
+
+  it('does not leak react-markdown node objects onto headings', () => {
+    const err = vi.spyOn(console, 'error').mockImplementation(() => {})
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {})
+    try {
+      const { container } = render(<KatexContent>{'# Title One\n\n## Title Two\n\n### Title Three\n'}</KatexContent>)
+      for (const tag of ['h1', 'h2', 'h3']) {
+        const el = container.querySelector(tag)
+        expect(el).not.toBeNull()
+        expect(el?.hasAttribute('node')).toBe(false)
+        expect(el?.innerHTML).not.toContain('[object Object]')
+      }
+      expect(container.querySelector('h1')?.id).toBe('title-one')
+    } finally {
+      err.mockRestore()
+      warn.mockRestore()
+    }
+  })
 })
