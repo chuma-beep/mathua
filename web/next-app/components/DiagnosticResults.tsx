@@ -108,7 +108,7 @@ export default function DiagnosticResults({ plan, onStartPractice }: Props) {
                       <p className="font-mono text-[10px] uppercase text-mathua-red mb-1">Needs review</p>
                       <div className="flex flex-wrap gap-1.5">
                         {weak.map((c) => (
-                          <Link key={c.id} href={`/concept?id=${encodeURIComponent(c.id)}`} className="text-xs font-mono border border-mathua-border px-2 py-1 hover:border-mathua-blue hover:text-mathua-blue">
+                          <Link key={c.id} href={`/study?concept=${encodeURIComponent(c.id)}`} className="text-xs font-mono border border-mathua-border px-2 py-1 hover:border-mathua-blue hover:text-mathua-blue">
                             {c.label}
                           </Link>
                         ))}

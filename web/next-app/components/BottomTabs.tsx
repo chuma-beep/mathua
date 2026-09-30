@@ -20,7 +20,7 @@ import Avatar from './Avatar'
 const TABS: { label: string; href: string; icon: LucideIcon }[] = [
   { label: 'Home', href: '/', icon: House },
   { label: 'Study', href: '/study', icon: BookOpen },
-  { label: 'Start', href: '/session', icon: Play },
+  { label: 'Learn', href: '/learn', icon: Play },
   { label: 'Profile', href: '/profile', icon: User },
   { label: 'Graph', href: '/graph', icon: Network },
 ]

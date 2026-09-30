@@ -397,7 +397,7 @@ export function LessonDetail({
             return (
               <Link
                 key={cid}
-                href={`/concept?id=${encodeURIComponent(cid)}`}
+                href={`/study?concept=${encodeURIComponent(cid)}`}
                 className="inline-flex items-center gap-1.5 border border-mathua-border px-2.5 py-1.5 min-h-[36px] text-xs font-mono text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue transition-colors max-w-full"
               >
                 <MasteryBadge status={p?.status} size="sm" />
@@ -417,7 +417,7 @@ export function LessonDetail({
             {lesson.prerequisites.map((p) => (
               <Link
                 key={p.id}
-                href={`/concept?id=${encodeURIComponent(p.id)}`}
+                href={`/study?concept=${encodeURIComponent(p.id)}`}
                 className="bg-mathua-surface border border-mathua-border p-3 hover:border-mathua-blue transition-colors flex items-center gap-2"
               >
                 <MasteryBadge status={p.status} size="sm" />
@@ -562,7 +562,7 @@ export function LessonDetail({
             {lesson.dependents.map((d) => (
               <Link
                 key={d.id}
-                href={`/concept?id=${encodeURIComponent(d.id)}`}
+                href={`/study?concept=${encodeURIComponent(d.id)}`}
                 className="bg-mathua-surface border border-mathua-border p-3 hover:border-mathua-blue transition-colors block"
               >
                 <div className="flex items-center gap-2">

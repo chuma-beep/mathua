@@ -39,7 +39,7 @@ import { signOut } from '../lib/auth'
 // Lucide icons (fixed size-4 box) so the collapsed 44px icon rail stays even.
 const NAV_ITEMS: { label: string; href: string; icon: LucideIcon }[] = [
   { label: 'Study', href: '/study', icon: BookOpen },
-  { label: 'Start', href: '/session', icon: Play },
+  { label: 'Learn', href: '/learn', icon: Play },
   { label: 'Graph', href: '/graph', icon: Network },
   { label: 'Leaderboard', href: '/leaderboard', icon: Trophy },
   { label: 'Progress', href: '/progress-card', icon: ChartNoAxesColumn },
@@ -132,7 +132,7 @@ export function AppSidebar({
                         <span className="group-data-[collapsible=icon]:hidden">{item.label}</span>
                       </Link>
                     </SidebarMenuButton>
-                    {item.href === '/session' && dueReviews > 0 && (
+                    {item.href === '/learn' && dueReviews > 0 && (
                       <SidebarMenuBadge>{dueReviews}</SidebarMenuBadge>
                     )}
                   </SidebarMenuItem>

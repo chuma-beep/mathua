@@ -8,7 +8,7 @@ export type HeaderLink = NavLink
 
 // Single source of truth for site navigation (Header + BottomTabs).
 //
-// Bottom tabs are the primary mobile nav (Home, Study, Start, Profile,
+// Bottom tabs are the primary mobile nav (Home, Study, Learn, Profile,
 // Graph). The desktop header row shows the full link set. The mobile
 // compass menu shows ONLY overflow links not already in the tabs, so no
 // destination appears twice on one screen.
@@ -21,7 +21,7 @@ export const DISPLAY_LINKS: NavLink[] = [
 
 export const LOGGED_IN_LINKS: NavLink[] = [
   { label: 'Profile', href: '/profile' },
-  { label: 'Start', href: '/session' },
+  { label: 'Learn', href: '/learn' },
   { label: 'Settings', href: '/settings' },
 ]
 
@@ -31,7 +31,7 @@ export const LOGGED_OUT_LINKS: NavLink[] = [{ label: 'Login', href: '/login' }]
 export const TAB_HREFS: ReadonlySet<string> = new Set([
   '/',
   '/study',
-  '/session',
+  '/learn',
   '/profile',
   '/graph',
 ])

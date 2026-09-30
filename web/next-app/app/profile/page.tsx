@@ -14,9 +14,9 @@ import StrugglesSection from '../../components/StrugglesSection'
 import ProfileSkeleton from '../../components/skeletons/ProfileSkeleton'
 import { AppSidebar } from '../../components/app-sidebar'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '../../components/ui/sidebar'
-import TaskShelf from '../../components/TaskShelf'
+import NextUpSummary from '../../components/NextUpSummary'
 import DailyGoalControl, { getGuestGoal } from '../../components/DailyGoalControl'
-import { selectNextUp, selectShelf, isNewUser } from '../../lib/nextUp'
+import { selectNextUp, selectShelfHead, isNewUser } from '../../lib/nextUp'
 import { concepts as conceptCatalog } from '../../lib/conceptData'
 
 interface UserInfo {
@@ -76,9 +76,11 @@ export default function ProfilePage() {
   // New = nothing mastered and no answered questions anywhere.
   const isNew = scores != null && isNewUser({ conceptsMastered: scores.concepts_mastered, activity })
 
-  const shelf = useMemo(
+  // Next head (compact summary only): Learn owns the full NextUpCard.
+  // Profile names the head item and links to /learn — no shelf here.
+  const head = useMemo(
     () =>
-      selectShelf({
+      selectShelfHead({
         dueReviews,
         weaknesses,
         progress,
@@ -223,7 +225,7 @@ export default function ProfilePage() {
             <p className="font-mono text-xs text-mathua-secondary mb-4">Sign in to track XP, streaks and mastery. Your activity heatmap will appear here once you start practicing.</p>
             <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-center">
               <Link href="/login" className="w-full sm:w-auto border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap">Sign in</Link>
-              <Link href="/session" className="w-full sm:w-auto border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap">Try as guest →</Link>
+              <Link href="/learn" className="w-full sm:w-auto border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap">Try as guest →</Link>
             </div>
           </div>
           {(Object.keys(progress).length === 0 && !activity.some(d => d.questions > 0)) && (
@@ -243,7 +245,7 @@ export default function ProfilePage() {
                 <div className="border border-mathua-border p-3 bg-mathua-surface-elevated">
                   <div className="font-mono text-xs text-mathua-blue mb-1">3. Practice → see XP</div>
                   <p className="font-mono text-[11px] text-mathua-secondary">2 in a row to advance · XP shows on Profile</p>
-                  <Link href="/study" className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover mt-2 inline-block">Start Study →</Link>
+                  <Link href="/learn" className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover mt-2 inline-block">Continue learning →</Link>
                 </div>
               </div>
             </section>
@@ -360,7 +362,7 @@ export default function ProfilePage() {
         )}
         <Link href="/plan" className="mt-3 inline-block font-mono text-xs text-mathua-blue">Plan your learning → finish-date estimates</Link>
 
-        <TaskShelf items={shelf} />
+        <NextUpSummary shelf={head} />
 
         {(isNew && !user.diagnostic_completed) && (
           <section className="mt-6 border border-mathua-border bg-mathua-surface p-4">
@@ -379,7 +381,7 @@ export default function ProfilePage() {
               <div className="border border-mathua-border p-3 bg-mathua-surface-elevated">
                 <div className="font-mono text-xs text-mathua-blue mb-1">3. Practice → see XP</div>
                 <p className="font-mono text-[11px] text-mathua-secondary">2 in a row to advance · XP shows below</p>
-                <Link href="/study" className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover mt-2 inline-block">Start Study →</Link>
+                <Link href="/learn" className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover mt-2 inline-block">Continue learning →</Link>
               </div>
             </div>
           </section>

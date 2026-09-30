@@ -56,7 +56,7 @@ export default function ProgressCardList({ attempts }: { attempts: AttemptRecord
             </KatexContent>
           )}
           <Link
-            href={`/concept?id=${encodeURIComponent(a.concept_id)}`}
+            href={`/study?concept=${encodeURIComponent(a.concept_id)}`}
             className="mt-2 inline-block font-mono text-[11px] text-mathua-blue hover:text-mathua-blue-hover"
           >
             {a.concept_name || a.concept_id} →

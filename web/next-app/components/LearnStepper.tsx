@@ -5,7 +5,9 @@ import Link from 'next/link'
 import KatexContent from './KatexContent'
 import ChoiceOptions from './ChoiceOptions'
 import { Input } from '@/components/ui/input'
-import { getLessonKPs, getLessonPractice, getLessonReadiness, submitStudyAnswer, type KpInfo, type PracticeQuestion, type ReadinessRes } from '../lib/api'
+import { getLessonKPs, getLessonPractice, getLessonReadiness, submitStudyAnswer, getActivity, getDueReviews, getProgress, getScores, getWeaknesses, type KpInfo, type PracticeQuestion, type ReadinessRes, type DailyActivity, type Scores, type WeaknessRes, type ConceptProgress } from '../lib/api'
+import { getUserInfo } from '../lib/auth'
+import { selectShelfHead, type Shelf } from '../lib/nextUp'
 import { REQUIRED_IN_A_ROW, masteryEstimate, type Attempt } from '../lib/progression'
 import { formatForGradingType } from '../lib/answerFormat'
 import { concepts } from '../lib/conceptData'
@@ -53,6 +55,12 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
   const [misses, setMisses] = useState(0)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(true)
+  // Next head for the done state: re-fetched on entering done (after the
+  // scheduler ingests the last answer), so Continue names what will load.
+  // No navigation until the click — learner disposes via the alternatives.
+  const [nextShelf, setNextShelf] = useState<Shelf | null>(null)
+  const [nextLoading, setNextLoading] = useState(false)
+  const nextFetchedRef = useRef(false)
   const seenRef = useRef<string[]>([])
   const bottomRef = useRef<HTMLDivElement>(null)
   const reduceMotion = useRef(false)
@@ -98,8 +106,42 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
     setConsecutive(0)
     setMisses(0)
     setBannerDismissed(false)
+    setNextShelf(null)
+    setNextLoading(false)
+    nextFetchedRef.current = false
     load()
   }, [load])
+
+  // Re-fetch the ranked head on entering done: the scheduler has just
+  // ingested the last answer, so the head may have moved. Fetch in place —
+  // navigation waits for the Continue click (deterministic for e2e).
+  const hasDone = entries.some(e => e.kind === 'done')
+  useEffect(() => {
+    if (!hasDone || nextFetchedRef.current) return
+    nextFetchedRef.current = true
+    setNextLoading(true)
+    const info = getUserInfo()
+    const sid = info?.student_id ?? ''
+    Promise.all([
+      getActivity().catch(() => [] as DailyActivity[]),
+      sid ? getProgress(sid).catch(() => ({} as Record<string, ConceptProgress>)) : Promise.resolve({} as Record<string, ConceptProgress>),
+      getWeaknesses().catch(() => ({ by_domain: {} } as WeaknessRes)),
+      getDueReviews().catch(() => ({ count: 0 })),
+      sid ? getScores(sid).catch(() => null) : Promise.resolve(null),
+    ]).then(([a, p, w, r, s]) => {
+      setNextShelf(selectShelfHead({
+        dueReviews: r.count ?? 0,
+        weaknesses: w,
+        progress: p,
+        activity: a,
+        diagnosticCompleted: info?.diagnostic_completed ?? false,
+        conceptsMastered: (s as Scores | null)?.concepts_mastered ?? 0,
+        catalog: concepts.map(c => ({ id: c.id, label: c.label, prerequisites: c.prerequisites ?? [], avgTimeSeconds: c.mastery_threshold?.avg_time_seconds })),
+      }))
+    }).catch(() => {
+      nextFetchedRef.current = false
+    }).finally(() => setNextLoading(false))
+  }, [hasDone])
 
   // Take the next question: buffer first, fetching when empty.
   async function takeNext(diff: number): Promise<PracticeQuestion | null> {
@@ -324,9 +366,34 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
                 <p className="mt-2 font-mono text-[11px] text-mathua-secondary">Scroll up to review anything. Reviews are scheduled automatically.</p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {returnTo && <Link href={`/learn?concept=${encodeURIComponent(returnTo)}`} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-5 py-2 font-mono text-xs inline-flex items-center min-h-[40px]">← Back to {returnTo}</Link>}
-                  <Link href="/profile" className="border border-mathua-border px-5 py-2 font-mono text-xs text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue inline-flex items-center min-h-[40px]">Next up →</Link>
+                  {nextLoading && <span className="font-mono text-xs text-mathua-muted inline-flex items-center min-h-[40px]">Finding what&apos;s next…</span>}
+                  {!nextLoading && nextShelf && (
+                    <Link href={nextShelf.next.href} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-5 py-2 font-mono text-xs inline-flex items-center min-h-[40px]">Continue: {nextShelf.next.title} →</Link>
+                  )}
+                  {!nextLoading && !nextShelf && (
+                    <Link href="/profile" className="border border-mathua-border px-5 py-2 font-mono text-xs text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue inline-flex items-center min-h-[40px]">Next up →</Link>
+                  )}
                   <Link href={`/study?concept=${encodeURIComponent(conceptId)}`} className="border border-mathua-border px-5 py-2 font-mono text-xs text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue inline-flex items-center min-h-[40px]">Reference</Link>
                 </div>
+                {!nextLoading && nextShelf && nextShelf.alternatives.length > 0 && (
+                  <details className="mt-3 border border-mathua-border">
+                    <summary className="font-mono text-[11px] text-mathua-secondary cursor-pointer px-4 py-2.5">
+                      Or pick something else ({nextShelf.alternatives.length})
+                    </summary>
+                    <div className="px-4 pb-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {nextShelf.alternatives.map((it, i) => (
+                        <Link
+                          key={`${it.kind}:${it.href}:${i}`}
+                          href={it.href}
+                          className="border border-mathua-border p-3 hover:border-mathua-blue transition-colors block min-w-0"
+                        >
+                          <div className="font-mono text-xs text-mathua-primary truncate">{it.title}</div>
+                          <div className="mt-1 font-mono text-[11px] text-mathua-blue">{it.cta}</div>
+                        </Link>
+                      ))}
+                    </div>
+                  </details>
+                )}
               </div>
             )
           }
