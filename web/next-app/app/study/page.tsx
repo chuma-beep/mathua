@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useMemo, Suspense } from 'react'
+import { useState, useEffect, useMemo, Suspense, type MouseEvent as ReactMouseEvent } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Header from '../../components/Header'
@@ -12,6 +12,7 @@ import { conceptLabels, domainOrder, lessonProgress } from './domains'
 import { DomainDrillDown, DomainOverview, LessonDetail } from './components'
 import { concepts as conceptCatalog } from '../../lib/conceptData'
 import { topoRank } from '../../lib/topoRank'
+import { planConceptNavigation } from '../../lib/conceptTarget'
 
 let lessonsCache: { key: string; res: LessonsRes } | null = null
 function getLessonsCached(studentId?: string): Promise<LessonsRes> {
@@ -25,7 +26,7 @@ function getLessonsCached(studentId?: string): Promise<LessonsRes> {
 
 function StudyContent() {
   const searchParams = useSearchParams()
-  const { push } = useRouter()
+  const { push, replace } = useRouter()
   const lessonParam = searchParams.get('lesson')
   const domainParam = searchParams.get('domain')
   const conceptParam = searchParams.get('concept')
@@ -78,7 +79,29 @@ function StudyContent() {
     return m
   }, [lessonsByDomain])
 
-  // URL → state sync
+  // Concept reveal: the URL is the state. Chips navigate (push across
+  // lessons, replace for in-lesson jumps) and bump this request; the
+  // LessonDetail effect opens + scrolls to the matching block. Direct loads
+  // and /concept redirects arrive via the URL-sync effect below.
+  const [revealReq, setRevealReq] = useState<{ cid: string; n: number } | null>(null)
+  const bumpReveal = (cid: string) =>
+    setRevealReq((r) => ({ cid, n: r?.cid === cid ? r.n + 1 : 1 }))
+
+  const handleConceptSelect = (cid: string, e: ReactMouseEvent<HTMLAnchorElement>): void => {
+    // New-tab/middle clicks keep default link behavior.
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return
+    e.preventDefault()
+    const nav = planConceptNavigation(cid, lessonByConcept, selectedLesson?.title ?? null, conceptParam)
+    if (nav.action === 'reveal') {
+      // Re-click: URL unchanged, so the URL-sync effect won't fire.
+      bumpReveal(cid)
+    } else if (nav.action === 'replace') {
+      replace(nav.href, { scroll: false })
+    } else {
+      push(nav.href)
+    }
+    // Cross-URL reveal comes from the URL-sync effect below.
+  }
   useEffect(() => {
     if (lessonParam) {
       setSelectedLesson(lessonByTitle.get(lessonParam) ?? null)
@@ -86,7 +109,13 @@ function StudyContent() {
     }
     if (conceptParam && Object.keys(lessonsByDomain).length > 0) {
       const found = lessonByConcept.get(conceptParam)
-      if (found) { setSelectedLesson(found); return }
+      if (found) {
+        setSelectedLesson(found)
+        // Direct loads, redirects, and chip navigations land here: reveal
+        // the concept's block once LessonDetail has its KP shards.
+        bumpReveal(conceptParam)
+        return
+      }
     }
 
     if (domainParam && lessonsByDomain[domainParam]) {
@@ -216,6 +245,8 @@ function StudyContent() {
               <LessonDetail
               lesson={hydratedLesson ?? selectedLesson}
               domain={selectedDomain}
+              revealReq={revealReq}
+              onConceptSelect={handleConceptSelect}
               onBack={() => {
                 setSelectedLesson(null)
                 const url = selectedDomain
