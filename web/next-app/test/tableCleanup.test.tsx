@@ -66,6 +66,20 @@ describe('rehypeCollapseEmptyColumns (unit)', () => {
     expect(body).toContain('Count the total number of blocks.')
   })
 
+  it('keeps columns that hold images, svg, or rendered math', () => {
+    const tree = el('root', [
+      tableOf([
+        [td([text('Model the first number.')]), td([el('img', [], { src: 'blocks.png', alt: 'blocks' })])],
+        [td([text('Count the total.')]), td([el('svg')])],
+        [td([text('Add.')]), td([el('span', [text('x')], { className: ['katex'] })])],
+      ]),
+    ])
+    runPlugin(tree)
+    const tables = tablesOf(tree)
+    expect(tables).toHaveLength(1)
+    expect(cellsOf(tables[0]).map((r) => r.length)).toEqual([2, 2, 2])
+  })
+
   it('keeps a table with an empty corner cell (column has other content)', () => {
     const tree = el('root', [
       tableOf([
