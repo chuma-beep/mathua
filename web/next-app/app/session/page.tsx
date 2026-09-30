@@ -1,110 +1,26 @@
 'use client'
 
-import Link from 'next/link'
-import { Suspense } from 'react'
-import { useSearchParams } from 'next/navigation'
-import Header from '../../components/Header'
-import BottomTabs from '../../components/BottomTabs'
-import SectionHeader from '../../components/SectionHeader'
-import Footer from '../../components/Footer'
+import { Suspense, useEffect } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 
-function SessionContent() {
+// Deprecated route (PR6): the /session chooser pointed at /study instead of
+// the Learn loop. /learn (no concept) loads the Next head directly, so this
+// stub forwards old links and bookmarks, then deletes itself in a later
+// release along with /concept.
+function SessionRedirect() {
+  const router = useRouter()
   const searchParams = useSearchParams()
-  const concept = searchParams.get('concept')
-  return (
-    <>
-      <Header />
-      <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
-        <section className="pt-8 min-w-0 overflow-hidden">
-          <span className="flex mb-4">
-            <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-primary">
-              ← Back
-            </Link>
-          </span>
-
-          <SectionHeader label="Start" title="Where would you like to start?" />
-          <p className="text-mathua-secondary text-sm leading-relaxed text-center max-w-[600px] mx-auto mt-4">
-            Take a diagnostic test to get a recommendation on where to start, or jump straight into Study.
-          </p>
-          {concept && (
-            <div className="max-w-2xl mx-auto mt-6 min-w-0 overflow-hidden text-center">
-              <Link
-                href={`/learn?concept=${encodeURIComponent(concept)}`}
-                className="inline-block border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-8 h-12 font-mono text-sm leading-[48px]"
-              >
-                Start learning →
-              </Link>
-              <div className="mt-4 text-center">
-                <Link
-                  href={`/concept?id=${encodeURIComponent(concept)}`}
-                  className="font-mono text-xs text-mathua-blue hover:underline"
-                >
-                  Open the lesson for {concept} →
-                </Link>
-              </div>
-            </div>
-          )}
-
-          <div className="max-w-2xl mx-auto mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {/* Option 1: Diagnostic (Recommended) */}
-            <Link
-              href="/onboard"
-              className="group relative flex flex-col border-2 border-mathua-blue bg-mathua-surface p-6 text-left hover:bg-mathua-blue/10 transition-colors"
-            >
-              <span className="absolute -top-3 left-4 bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
-                Recommended
-              </span>
-              <span className="font-mono text-[11px] uppercase tracking-wider text-mathua-blue">
-                Option 1
-              </span>
-              <h3 className="font-serif text-xl font-medium text-mathua-primary mt-1">
-                Take a diagnostic test
-              </h3>
-              <p className="font-mono text-xs text-mathua-secondary mt-2 leading-relaxed">
-                A diagnostic test to find your starting point and get a personalized recommendation.
-              </p>
-              <span className="mt-4 inline-flex items-center font-mono text-xs text-mathua-blue">
-                Start diagnostic test →
-              </span>
-            </Link>
-
-            {/* Option 2: Study */}
-            <Link
-              href="/study"
-              className="flex flex-col border border-mathua-border bg-mathua-surface p-6 text-left hover:border-mathua-blue hover:text-mathua-blue transition-colors"
-            >
-              <span className="font-mono text-[11px] uppercase tracking-wider text-mathua-muted">
-                Option 2
-              </span>
-              <h3 className="font-serif text-xl font-medium text-mathua-primary mt-1">
-                Go to Study
-              </h3>
-              <p className="font-mono text-xs text-mathua-secondary mt-2 leading-relaxed">
-                Browse the corpus directly: lessons first, then practice. Progress and XP are still recorded.
-              </p>
-              <span className="mt-4 inline-flex items-center font-mono text-xs text-mathua-blue">
-                Open Study →
-              </span>
-            </Link>
-          </div>
-
-          <p className="text-mathua-muted text-xs font-mono text-center mt-6">
-            You can switch anytime. The diagnostic test never deletes progress.
-          </p>
-        </section>
-
-      </div>
-
-      <Footer />
-      <BottomTabs />
-    </>
-  )
+  useEffect(() => {
+    const concept = searchParams.get('concept')
+    router.replace(concept ? `/learn?concept=${encodeURIComponent(concept)}` : '/learn')
+  }, [router, searchParams])
+  return null
 }
 
 export default function SessionPage() {
   return (
     <Suspense>
-      <SessionContent />
+      <SessionRedirect />
     </Suspense>
   )
 }

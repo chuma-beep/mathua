@@ -7,10 +7,10 @@ import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
 import Footer from '../../components/Footer'
 import LearnStepper from '../../components/LearnStepper'
-import TaskShelf from '../../components/TaskShelf'
+import NextUpCard from '../../components/NextUpCard'
 import { getActivity, getDueReviews, getProgress, getScores, getWeaknesses, type DailyActivity, type Scores, type WeaknessRes, type ConceptProgress } from '../../lib/api'
 import { getUserInfo, getGuestId } from '../../lib/auth'
-import { selectShelf } from '../../lib/nextUp'
+import { selectShelfHead } from '../../lib/nextUp'
 import { concepts as conceptCatalog } from '../../lib/conceptData'
 
 function LearnEntry() {
@@ -44,7 +44,7 @@ function LearnEntry() {
 
   const shelf = useMemo(
     () =>
-      selectShelf({
+      selectShelfHead({
         dueReviews,
         weaknesses,
         progress,
@@ -63,7 +63,7 @@ function LearnEntry() {
   return (
     <div className="mt-6 mb-16 px-4">
       <div className="max-w-2xl mx-auto">
-        <TaskShelf items={shelf} />
+        <NextUpCard shelf={shelf} />
         <Link href="/profile" className="mt-4 inline-block font-mono text-xs text-mathua-secondary hover:text-mathua-blue">← Profile</Link>
       </div>
     </div>

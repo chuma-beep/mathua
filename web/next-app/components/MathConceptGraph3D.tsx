@@ -990,13 +990,13 @@ function InfoPanelBody({ concept, color, prereqConcepts, unlockedBy, isMobile }:
       <ChipList title="unlocks" items={unlockedBy} isMobile={isMobile} />
       <div style={{ marginTop: '10px', display: 'flex', gap: '8px' }}>
         <a
-          href={`/concept?id=${encodeURIComponent(concept.id)}`}
+          href={`/study?concept=${encodeURIComponent(concept.id)}`}
           style={{ color: '#60a5fa', fontSize: '12px', fontFamily: monoFont, textDecoration: 'none' }}
         >
           Study →
         </a>
         <a
-          href={`/session?concept=${encodeURIComponent(concept.id)}`}
+          href={`/learn?concept=${encodeURIComponent(concept.id)}`}
           style={{ color: 'var(--accent-teal)', fontSize: '12px', fontFamily: monoFont, textDecoration: 'none' }}
         >
           Practice →

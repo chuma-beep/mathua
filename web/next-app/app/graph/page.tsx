@@ -233,12 +233,12 @@ function GraphContent() {
         ) : connected && !loggedIn ? (
           <p className="text-mathua-secondary text-sm text-center max-w-[600px] mx-auto mt-4 mb-8">
             Sign in or{' '}
-            <Link href="/session" className="text-mathua-blue hover:underline">start learning</Link>
+            <Link href="/learn" className="text-mathua-blue hover:underline">start learning</Link>
             {' '}to track your progress across the concept map.
           </p>
         ) : (
           <p className="text-mathua-secondary text-sm text-center max-w-[600px] mx-auto mt-4 mb-8">
-            <Link href="/session" className="text-mathua-blue hover:underline">Start learning</Link>
+            <Link href="/learn" className="text-mathua-blue hover:underline">Start learning</Link>
             {' '}to track your progress across the concept map.
           </p>
         )}
@@ -298,7 +298,7 @@ function GraphContent() {
           focusDomain={activeDomain}
           onNodeSelect={(nodeId) => {
             const c = conceptById.get(nodeId)
-            if (c) push(`/concept?id=${encodeURIComponent(c.id)}`)
+            if (c) push(`/study?concept=${encodeURIComponent(c.id)}`)
           }}
         />
       </div>

@@ -29,7 +29,7 @@ describe('AppSidebar', () => {
   it('renders Navigate group without a Diagnostic entry (no CTA duplication)', () => {
     renderSidebar()
     expect(screen.getByText('Navigate')).toBeInTheDocument()
-    for (const label of ['Study', 'Start', 'Graph', 'Leaderboard', 'Progress', 'Settings']) {
+    for (const label of ['Study', 'Learn', 'Graph', 'Leaderboard', 'Progress', 'Settings']) {
       expect(screen.getByText(label)).toBeInTheDocument()
     }
     expect(screen.queryByText('Diagnostic')).toBeNull()
@@ -68,7 +68,7 @@ describe('AppSidebar', () => {
   it('nav buttons render fixed-size Lucide icons (even collapsed rail)', () => {
     renderSidebar()
     const sidebar = screen.getByTestId('profile-sidebar')
-    const hrefs = ['/study', '/session', '/graph', '/leaderboard', '/progress-card', '/settings']
+    const hrefs = ['/study', '/learn', '/graph', '/leaderboard', '/progress-card', '/settings']
     expect(hrefs).toHaveLength(6)
     for (const href of hrefs) {
       const link = sidebar.querySelector(`a[href="${href}"]`)!
@@ -84,7 +84,7 @@ describe('AppSidebar', () => {
     const sidebar = screen.getByTestId('profile-sidebar')
     // Every text label next to an icon carries the collapse-hide class;
     // tooltips (not visible text) carry the label when collapsed.
-    const labels = ['Mathua', 'Study', 'Start', 'Graph', 'Leaderboard', 'Progress', 'Settings', 'Docs', 'Contribute', "Creator's note", 'Sign out']
+    const labels = ['Mathua', 'Study', 'Learn', 'Graph', 'Leaderboard', 'Progress', 'Settings', 'Docs', 'Contribute', "Creator's note", 'Sign out']
     for (const label of labels) {
       const el = screen.getByText(label, { exact: true })
       expect(sidebar.contains(el)).toBe(true)
