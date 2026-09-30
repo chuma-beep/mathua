@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, type MouseEvent as ReactMouseEvent } from 'react'
 import Link from 'next/link'
 import LessonDiagram from '../../components/LessonDiagram'
 import SectionHeader from '../../components/SectionHeader'
@@ -309,23 +309,51 @@ export function LessonDetail({
   lesson,
   domain,
   onBack,
+  revealReq,
+  onConceptSelect,
 }: {
   lesson: LessonInfo
   domain: string | null
   onBack: () => void
+  revealReq?: { cid: string; n: number } | null
+  onConceptSelect?: (cid: string, e: ReactMouseEvent<HTMLAnchorElement>) => void
 }) {
   // KP-aware: fetch knowledge-point shards for the lesson's concepts.
   const [kpMap, setKpMap] = useState<Record<string, LessonKpsRes>>({})
+  // Concepts whose shard fetch settled (success or failure): the reveal
+  // effect waits for these so it never falls back while blocks are still
+  // loading. Only the first 3 concepts can ever produce blocks.
+  const [settled, setSettled] = useState<Record<string, boolean>>({})
   useEffect(() => {
     if (!lesson.concepts?.length) return
     let cancelled = false
     lesson.concepts.slice(0, 3).forEach(cid => {
       getLessonKPs(cid).then(res => {
-        if (!cancelled && res.kps?.length) setKpMap(prev => ({ ...prev, [cid]: res }))
-      }).catch(() => {})
+        if (cancelled) return
+        if (res.kps?.length) setKpMap(prev => ({ ...prev, [cid]: res }))
+        setSettled(prev => ({ ...prev, [cid]: true }))
+      }).catch(() => {
+        if (!cancelled) setSettled(prev => ({ ...prev, [cid]: true }))
+      })
     })
     return () => { cancelled = true }
   }, [lesson])
+
+  // Concept reveal state: controlled <details> openness (seeded with the
+  // first block, as before), a short-lived highlight on the revealed block
+  // or header, and a guard so each reveal request runs once.
+  const [openKeys, setOpenKeys] = useState<Set<string> | null>(null)
+  const [highlight, setHighlight] = useState<string | null>(null)
+  const revealedRef = useRef<string | null>(null)
+  const highlightTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const topRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    setOpenKeys(null)
+    setSettled({})
+    setHighlight(null)
+    revealedRef.current = null
+    if (highlightTimer.current) clearTimeout(highlightTimer.current)
+  }, [lesson.title])
 
   // Collapse pass: multi-concept lessons share sources, so identical
   // worked bodies (and diagram assets) recur. Each unique body renders
@@ -378,6 +406,63 @@ export function LessonDetail({
     })
   }
 
+  // Seed: first block open, matching the previous uncontrolled default.
+  useEffect(() => {
+    if (openKeys === null && blocks.length > 0) {
+      setOpenKeys(new Set([blocks[0].key]))
+    }
+  }, [blocks, openKeys])
+
+  const flashHighlight = (key: string): void => {
+    setHighlight(key)
+    if (highlightTimer.current) clearTimeout(highlightTimer.current)
+    highlightTimer.current = setTimeout(() => setHighlight(null), 1800)
+  }
+
+  const scrollToKey = (key: string | null): void => {
+    const reduce = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+    const target = key ? document.getElementById(key) : topRef.current
+    target?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })
+  }
+
+  // rAF is unavailable in some test DOMs; setTimeout keeps the same
+  // paint-then-scroll ordering there.
+  const afterPaint = (fn: () => void): void => {
+    if (typeof requestAnimationFrame !== 'undefined') requestAnimationFrame(fn)
+    else setTimeout(fn, 0)
+  }
+
+  // One effect keyed on the reveal request (URL state): resolve is already
+  // done by the page — here open the concept's blocks and scroll to the
+  // first. Waits for the concept's shard fetch so a slow load never falls
+  // back spuriously. Concepts beyond the first 3 can never have blocks.
+  useEffect(() => {
+    if (!revealReq) return
+    const key = `${revealReq.cid}:${revealReq.n}`
+    if (revealedRef.current === key) return
+    const inScope = lesson.concepts.slice(0, 3).includes(revealReq.cid)
+    if (inScope && !settled[revealReq.cid]) return
+    revealedRef.current = key
+    const matches = blocks.filter((b) => b.cid === revealReq.cid)
+    if (matches.length > 0) {
+      const keys = matches.map((m) => m.key)
+      setOpenKeys((prev) => new Set([...(prev ?? []), ...keys]))
+      // The details element exists regardless of open state; paint first.
+      afterPaint(() => {
+        scrollToKey(matches[0].key)
+        flashHighlight(matches[0].key)
+      })
+    } else {
+      // No block for this concept: lesson top + header highlight so the
+      // chip never silently does nothing.
+      afterPaint(() => {
+        scrollToKey(null)
+        flashHighlight('header')
+      })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  })
+
   return (
     <div className="max-w-7xl mx-auto mt-8 mb-16">
       <button
@@ -387,7 +472,9 @@ export function LessonDetail({
       >
         ← {domain ? domainLabels[domain] || domain : 'All domains'}
       </button>
+      <div ref={topRef} className={highlight === 'header' ? 'ring-1 ring-mathua-blue rounded-none transition-shadow' : 'transition-shadow'}>
       <SectionHeader label="Lesson" title={lesson.title} />
+      </div>
 
       <div className="bg-mathua-surface border border-mathua-border p-4 sm:p-6 mt-6 mb-6 min-w-0 overflow-hidden">
         <div className="flex items-center gap-2 sm:gap-3 flex-wrap min-w-0">
@@ -398,6 +485,7 @@ export function LessonDetail({
               <Link
                 key={cid}
                 href={`/study?concept=${encodeURIComponent(cid)}`}
+                onClick={(e) => onConceptSelect?.(cid, e)}
                 className="inline-flex items-center gap-1.5 border border-mathua-border px-2.5 py-1.5 min-h-[36px] text-xs font-mono text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue transition-colors max-w-full"
               >
                 <MasteryBadge status={p?.status} size="sm" />
@@ -438,11 +526,22 @@ export function LessonDetail({
           </h3>
           <div className="space-y-3">
             {blocks.map((b, i) => (
-              <div key={b.key} id={b.key} className="border border-mathua-border bg-mathua-surface p-4 w-full max-w-full min-w-0 overflow-hidden scroll-mt-20">
+              <div key={b.key} id={b.key} className={`border border-mathua-border bg-mathua-surface p-4 w-full max-w-full min-w-0 overflow-hidden scroll-mt-20 transition-shadow ${highlight === b.key ? 'ring-1 ring-mathua-blue' : ''}`}>
                 <div className="flex items-start gap-2 min-w-0">
                   <div className="flex-1 min-w-0">
                     {b.body ? (
-                      <details open={i === 0}>
+                      <details
+                        open={openKeys?.has(b.key) ?? i === 0}
+                        onToggle={(e) => {
+                          const open = e.currentTarget.open
+                          setOpenKeys((prev) => {
+                            const next = new Set(prev ?? (blocks[0] ? [blocks[0].key] : []))
+                            if (open) next.add(b.key)
+                            else next.delete(b.key)
+                            return next
+                          })
+                        }}
+                      >
                         <summary className="font-mono text-xs text-mathua-primary cursor-pointer">
                           {i + 1}. {stripMathDelimiters(b.label)}
                           {b.also.length > 0 && (
