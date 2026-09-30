@@ -24,7 +24,7 @@ test('profile sidebar renders nav without duplicating main CTAs', async ({ page 
   await page.goto('/profile')
   const sidebar = page.getByTestId('profile-sidebar')
   await expect(sidebar).toBeVisible({ timeout: 30_000 })
-  for (const label of ['Study', 'Start', 'Graph', 'Leaderboard', 'Settings']) {
+  for (const label of ['Study', 'Learn', 'Graph', 'Leaderboard', 'Settings']) {
     await expect(sidebar.getByText(label, { exact: true }).first()).toBeVisible()
   }
   // No CTA duplication: Diagnostic / Quiz / Review live in main-column cards only
@@ -127,7 +127,7 @@ test('profile sidebar collapses to icons only at large viewport', async ({ page 
     const link = sidebar.locator(`a[href="${href}"]`).first()
     await expect(link.locator('svg').first()).toBeVisible()
   }
-  for (const label of ['Mathua', 'Study', 'Start', 'Graph', 'Leaderboard', 'Settings', 'Sign out']) {
+  for (const label of ['Mathua', 'Study', 'Learn', 'Graph', 'Leaderboard', 'Settings', 'Sign out']) {
     await expect(sidebar.locator(`span:text-is("${label}")`).first()).toBeHidden()
   }
 })
