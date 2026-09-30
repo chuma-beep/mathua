@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Loading from '../../components/Loading'
 import { loadPositionEntries } from '../../lib/graphPositions'
 import {
@@ -23,6 +23,31 @@ const MathConceptGraph3D = dynamic(() => import('../../components/MathConceptGra
     </div>
   ),
 })
+
+// Error boundary scoped to the WebGL hero graph. A chunk-load failure
+// (stale deploy, flaky network, no WebGL) must never take down the page:
+// fall back to the static SVG poster, which carries the same data.
+export function GraphErrorBoundary({ children, fallback }: { children: React.ReactNode; fallback: React.ReactNode }) {
+  return <GraphErrorBoundaryInner fallback={fallback}>{children}</GraphErrorBoundaryInner>
+}
+
+class GraphErrorBoundaryInner extends React.Component<{ children: React.ReactNode; fallback: React.ReactNode }, { failed: boolean }> {
+  state = { failed: false }
+
+  static getDerivedStateFromError() {
+    return { failed: true }
+  }
+
+  componentDidCatch(error: Error) {
+    // eslint-disable-next-line no-console
+    console.error('hero graph failed, showing poster fallback:', error.message)
+  }
+
+  render() {
+    if (this.state.failed) return this.props.fallback
+    return this.props.children
+  }
+}
 
 export function LazyGraphMount({ children, fallback }: { children: React.ReactNode; fallback?: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -161,7 +186,9 @@ export function HeroSection({ theme, onGetStarted }: { theme: 'dark' | 'light'; 
         </div>
         <div className="w-full max-w-full min-w-0 overflow-hidden">
           <LazyGraphMount fallback={<GraphPoster />}>
-            <MathConceptGraph3D theme={theme} />
+            <GraphErrorBoundary fallback={<GraphPoster />}>
+              <MathConceptGraph3D theme={theme} />
+            </GraphErrorBoundary>
           </LazyGraphMount>
         </div>
         <p className="mt-2 font-mono text-[11px] text-mathua-muted sm:hidden">
