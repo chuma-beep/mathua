@@ -10,6 +10,8 @@ import { getLessons, getLessonBody, type LessonInfo, type LessonsRes } from '../
 import { getUserInfo } from '../../lib/auth'
 import { conceptLabels, domainOrder, lessonProgress } from './domains'
 import { DomainDrillDown, DomainOverview, LessonDetail } from './components'
+import { concepts as conceptCatalog } from '../../lib/conceptData'
+import { topoRank } from '../../lib/topoRank'
 
 let lessonsCache: { key: string; res: LessonsRes } | null = null
 function getLessonsCached(studentId?: string): Promise<LessonsRes> {
@@ -40,7 +42,18 @@ function StudyContent() {
     const user = getUserInfo()
     const studentId = user?.student_id
     getLessonsCached(studentId).then(res => {
-      setLessonsByDomain(res.lessons)
+      // PR7: within-domain lessons follow topo (prereq) order, not title
+      // order. Copy — never mutate the cached response.
+      const rank = topoRank(conceptCatalog)
+      const lessonRank = (l: LessonInfo) =>
+        Math.min(...l.concepts.map(c => rank.get(c) ?? Number.MAX_SAFE_INTEGER))
+      const ordered: Record<string, LessonInfo[]> = {}
+      for (const [domain, lessons] of Object.entries(res.lessons)) {
+        ordered[domain] = [...lessons].sort(
+          (a, b) => lessonRank(a) - lessonRank(b) || (a.title < b.title ? -1 : 1),
+        )
+      }
+      setLessonsByDomain(ordered)
       setLoading(false)
     }).catch((e) => { console.error('getLessons failed:', e); setLoading(false) })
   }, [])
