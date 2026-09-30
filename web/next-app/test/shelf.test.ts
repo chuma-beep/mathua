@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { selectShelf, buildCandidates, type ShelfInput } from '../lib/nextUp'
+import { selectShelf, selectShelfHead, buildCandidates, upcomingLocked, type ShelfInput } from '../lib/nextUp'
 
 const catalog = [
   { id: 'a', label: 'A', prerequisites: [] as string[], avgTimeSeconds: 10 },
@@ -113,5 +113,58 @@ describe('selectShelf', () => {
     })
     expect(items.length).toBeGreaterThan(0)
     expect(items.some(i => i.kind === 'diagnostic')).toBe(false)
+  })
+
+  it('drops excluded concept ids from candidates', () => {
+    const input = {
+      ...base,
+      progress: { a: { status: 'MASTERED', streak: 3 }, b: { status: 'learning', streak: 1 } },
+    }
+    expect(buildCandidates(input).map(c => c.id)).toContain('b')
+    expect(buildCandidates({ ...input, excludeConceptIds: ['b'] }).map(c => c.id)).not.toContain('b')
+  })
+
+  it('keeps a valid resume when nothing is excluded (entry/profile behavior)', () => {
+    const input = {
+      ...base,
+      progress: { a: { status: 'MASTERED', streak: 3 }, b: { status: 'learning', streak: 1 } },
+    }
+    const cands = buildCandidates(input)
+    expect(cands.find(c => c.id === 'b')?.kind).toBe('resume')
+    const items = selectShelf(input)
+    expect(items.some(i => i.href.includes('concept=b'))).toBe(true)
+  })
+
+  it('never heads an excluded concept and falls back to browse when empty', () => {
+    const head = selectShelfHead({
+      ...base,
+      progress: { a: { status: 'MASTERED', streak: 3 }, b: { status: 'learning', streak: 1 } },
+      excludeConceptIds: ['b', 'c'],
+    })
+    expect(head.next.kind).toBe('browse')
+    expect([head.next, ...head.alternatives].every(i => !i.href.includes('concept=b') && !i.href.includes('concept=c'))).toBe(true)
+  })
+})
+
+describe('upcomingLocked', () => {
+  it('lists locked successors with missing prerequisite labels', () => {
+    const locked = upcomingLocked(catalog, { a: { status: 'MASTERED', streak: 3 } }, 'b')
+    // d.word needs b (done here: unmastered) and c (unmastered) → locked.
+    expect(locked.map(l => l.id)).toEqual(['d.word'])
+    expect(locked[0].missing).toEqual(['B', 'C'])
+  })
+
+  it('omits mastered and fully-eligible successors', () => {
+    const locked = upcomingLocked(
+      catalog,
+      { a: { status: 'MASTERED', streak: 3 }, b: { status: 'MASTERED', streak: 3 }, c: { status: 'MASTERED', streak: 3 } },
+      'b'
+    )
+    // d.word is fully eligible now (already a `new` candidate) → not listed.
+    expect(locked).toHaveLength(0)
+  })
+
+  it('ignores non-successors', () => {
+    expect(upcomingLocked(catalog, {}, 'c').map(l => l.id)).not.toContain('b')
   })
 })

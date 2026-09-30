@@ -18,6 +18,11 @@ export interface NextUpInput {
   activity: DailyActivity[]
   diagnosticCompleted: boolean
   conceptsMastered: number
+  // Concept ids to skip when ranking. Named apart from the ?exclude=
+  // question-variant URL param to avoid confusion. Passed only by the Learn
+  // done re-fetch so a finished-but-unmastered concept never heads its own
+  // shelf; entry/profile surfaces omit it and keep prior behavior.
+  excludeConceptIds?: string[]
 }
 
 function isMastered(p: ConceptProgress | undefined): boolean {
@@ -35,9 +40,11 @@ export function isNewUser(input: { conceptsMastered: number; activity: DailyActi
 
 function topWeakness(input: NextUpInput): { id: string; label: string } | null {
   const entries = input.weaknesses?.by_domain ?? {}
+  const excluded = new Set(input.excludeConceptIds ?? [])
   let best: { id: string; label: string; weakness: number } | null = null
   for (const items of Object.values(entries)) {
     for (const it of items) {
+      if (excluded.has(it.id)) continue
       if (isMastered(input.progress[it.id])) continue
       if (!best || it.weakness > best.weakness) best = it
     }
@@ -46,10 +53,12 @@ function topWeakness(input: NextUpInput): { id: string; label: string } | null {
 }
 
 function mostRecentInProgress(input: NextUpInput): string | null {
+  const excluded = new Set(input.excludeConceptIds ?? [])
   for (let i = input.activity.length - 1; i >= 0; i--) {
     const day = input.activity[i]
     for (let j = day.concepts.length - 1; j >= 0; j--) {
       const cid = day.concepts[j]
+      if (excluded.has(cid)) continue
       const p = input.progress[cid]
       // In progress = has a progress record but not yet mastered
       if (p && !isMastered(p)) return cid
@@ -210,7 +219,9 @@ export function buildCandidates(input: ShelfInput): ShelfCandidate[] {
     for (const cid of day.concepts) recent.add(cid)
   }
   const out: ShelfCandidate[] = []
+  const excluded = new Set(input.excludeConceptIds ?? [])
   for (const c of input.catalog) {
+    if (excluded.has(c.id)) continue
     if (isMastered(input.progress[c.id])) continue
     if (!(c.prerequisites ?? []).every(pid => isMastered(input.progress[pid]))) continue
     const w = weakById.get(c.id)
@@ -224,6 +235,36 @@ export function buildCandidates(input: ShelfInput): ShelfCandidate[] {
     })
   }
   out.sort((a, b) => b.weakness - a.weakness || (a.id < b.id ? -1 : 1))
+  return out
+}
+
+export interface LockedSuccessor {
+  id: string
+  label: string
+  missing: string[]
+}
+
+// upcomingLocked lists direct DAG successors of a concept that are still
+// locked (at least one prerequisite unmastered), each with its missing
+// prerequisite labels resolved from the catalog. Fully-eligible successors
+// already surface as `new` shelf items and are not duplicated here. Used by
+// the Learn done card so the learner sees the forward path plus its
+// prerequisites even before this concept is mastered.
+export function upcomingLocked(
+  catalog: CatalogEntry[],
+  progress: Record<string, ConceptProgress>,
+  conceptId: string
+): LockedSuccessor[] {
+  const labels = new Map(catalog.map(c => [c.id, c.label]))
+  const out: LockedSuccessor[] = []
+  for (const c of catalog) {
+    if (!(c.prerequisites ?? []).includes(conceptId)) continue
+    if (isMastered(progress[c.id])) continue
+    const missing = (c.prerequisites ?? []).filter(pid => !isMastered(progress[pid]))
+    if (missing.length === 0) continue // eligible — already a `new` candidate
+    out.push({ id: c.id, label: c.label, missing: missing.map(pid => labels.get(pid) ?? pid) })
+  }
+  out.sort((a, b) => (a.id < b.id ? -1 : 1))
   return out
 }
 

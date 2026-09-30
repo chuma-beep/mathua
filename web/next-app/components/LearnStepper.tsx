@@ -7,7 +7,7 @@ import ChoiceOptions from './ChoiceOptions'
 import { Input } from '@/components/ui/input'
 import { getLessonKPs, getLessonPractice, getLessonReadiness, submitStudyAnswer, getActivity, getDueReviews, getProgress, getScores, getWeaknesses, type KpInfo, type PracticeQuestion, type ReadinessRes, type DailyActivity, type Scores, type WeaknessRes, type ConceptProgress } from '../lib/api'
 import { getUserInfo } from '../lib/auth'
-import { selectShelfHead, type Shelf } from '../lib/nextUp'
+import { selectShelfHead, upcomingLocked, type Shelf, type LockedSuccessor } from '../lib/nextUp'
 import { REQUIRED_IN_A_ROW, masteryEstimate, type Attempt } from '../lib/progression'
 import { formatForGradingType } from '../lib/answerFormat'
 import { concepts } from '../lib/conceptData'
@@ -42,6 +42,27 @@ interface Props {
 let keySeq = 1
 const nextKey = () => keySeq++
 
+// Shelf re-fetch budget on the done card: past this the failure branch
+// (Practice again + Back to Profile) renders instead of a stale spinner.
+const SHELF_TIMEOUT_MS = 8000
+
+function catalogEntries() {
+  return concepts.map(c => ({ id: c.id, label: c.label, prerequisites: c.prerequisites ?? [], avgTimeSeconds: c.mastery_threshold?.avg_time_seconds }))
+}
+
+// Concept id carried by a shelf href, if any (/learn?concept=X). Compared
+// instead of raw href strings: live URLs may carry &seed=/&difficulty=/
+// &exclude= while the stepper still won't reset, so only a real concept
+// change may render a navigating <Link>. Exported for unit tests.
+export function headConceptId(href: string): string | null {
+  try {
+    const c = new URL(href, 'http://localhost').searchParams.get('concept')
+    return c && c.length > 0 ? c : null
+  } catch {
+    return null
+  }
+}
+
 export default function LearnStepper({ conceptId, returnTo }: Props) {
   const [entries, setEntries] = useState<Entry[]>([])
   const [kps, setKps] = useState<KpInfo[]>([])
@@ -60,6 +81,7 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
   // No navigation until the click — learner disposes via the alternatives.
   const [nextShelf, setNextShelf] = useState<Shelf | null>(null)
   const [nextLoading, setNextLoading] = useState(false)
+  const [shelfProgress, setShelfProgress] = useState<Record<string, ConceptProgress>>({})
   const nextFetchedRef = useRef(false)
   const seenRef = useRef<string[]>([])
   const bottomRef = useRef<HTMLDivElement>(null)
@@ -112,9 +134,30 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
     load()
   }, [load])
 
+  // Deliberate same-concept restart with fresh variants. Rendered as the
+  // secondary action on the done card — never a silent fallback.
+  const practiceAgain = useCallback(() => {
+    setEntries([])
+    setKpIndex(0)
+    setHistory([])
+    setDifficulty(0.4)
+    setConsecutive(0)
+    setMisses(0)
+    setBannerDismissed(false)
+    setError('')
+    seenRef.current = []
+    setNextShelf(null)
+    setNextLoading(false)
+    nextFetchedRef.current = false
+    load()
+  }, [load])
+
   // Re-fetch the ranked head on entering done: the scheduler has just
   // ingested the last answer, so the head may have moved. Fetch in place —
   // navigation waits for the Continue click (deterministic for e2e).
+  // A slow network must not strand the card: past the timeout the failure
+  // branch (Practice again + Back to Profile) renders instead of a stale
+  // spinner, and never a self-link.
   const hasDone = entries.some(e => e.kind === 'done')
   useEffect(() => {
     if (!hasDone || nextFetchedRef.current) return
@@ -122,21 +165,34 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
     setNextLoading(true)
     const info = getUserInfo()
     const sid = info?.student_id ?? ''
-    Promise.all([
-      getActivity().catch(() => [] as DailyActivity[]),
-      sid ? getProgress(sid).catch(() => ({} as Record<string, ConceptProgress>)) : Promise.resolve({} as Record<string, ConceptProgress>),
-      getWeaknesses().catch(() => ({ by_domain: {} } as WeaknessRes)),
-      getDueReviews().catch(() => ({ count: 0 })),
-      sid ? getScores(sid).catch(() => null) : Promise.resolve(null),
+    const timeout = new Promise<never>((_, reject) => {
+      window.setTimeout(() => reject(new Error('shelf-timeout')), SHELF_TIMEOUT_MS)
+    })
+    Promise.race([
+      Promise.all([
+        getActivity().catch(() => [] as DailyActivity[]),
+        sid ? getProgress(sid).catch(() => ({} as Record<string, ConceptProgress>)) : Promise.resolve({} as Record<string, ConceptProgress>),
+        getWeaknesses().catch(() => ({ by_domain: {} } as WeaknessRes)),
+        getDueReviews().catch(() => ({ count: 0 })),
+        sid ? getScores(sid).catch(() => null) : Promise.resolve(null),
+      ]),
+      timeout,
     ]).then(([a, p, w, r, s]) => {
+      const progress = p as Record<string, ConceptProgress>
+      setShelfProgress(progress)
       setNextShelf(selectShelfHead({
         dueReviews: r.count ?? 0,
         weaknesses: w,
-        progress: p,
+        progress,
         activity: a,
         diagnosticCompleted: info?.diagnostic_completed ?? false,
         conceptsMastered: (s as Scores | null)?.concepts_mastered ?? 0,
-        catalog: concepts.map(c => ({ id: c.id, label: c.label, prerequisites: c.prerequisites ?? [], avgTimeSeconds: c.mastery_threshold?.avg_time_seconds })),
+        catalog: catalogEntries(),
+        // Never head the concept just finished: it is unmastered by
+        // definition here, so without this it would resume itself and the
+        // Continue link would point at the current page (scroll-to-top dead
+        // end). Passed only by this done re-fetch.
+        excludeConceptIds: [conceptId],
       }))
     }).catch(() => {
       nextFetchedRef.current = false
@@ -360,6 +416,13 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
             )
           }
           if (e.kind === 'done') {
+            const headId = nextShelf ? headConceptId(nextShelf.next.href) : null
+            // Only a real concept change may render a navigating <Link>: the
+            // stepper keys everything off conceptId, so a same-concept href
+            // (however many query params it carries) would scroll to top and
+            // strand the learner.
+            const canContinue = !nextLoading && nextShelf && headId !== null && headId !== conceptId
+            const upcoming: LockedSuccessor[] = upcomingLocked(catalogEntries(), shelfProgress, conceptId)
             return (
               <div key={e.key} className="border border-green-500/40 bg-mathua-surface p-6">
                 <p className="font-mono text-xs text-green-400">✓ Complete — {totalCorrect}/{totalAnswered} correct · +{totalXP} XP · {est.band}</p>
@@ -367,12 +430,13 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
                 <div className="mt-4 flex flex-wrap gap-2">
                   {returnTo && <Link href={`/learn?concept=${encodeURIComponent(returnTo)}`} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-5 py-2 font-mono text-xs inline-flex items-center min-h-[40px]">← Back to {returnTo}</Link>}
                   {nextLoading && <span className="font-mono text-xs text-mathua-muted inline-flex items-center min-h-[40px]">Finding what&apos;s next…</span>}
-                  {!nextLoading && nextShelf && (
-                    <Link href={nextShelf.next.href} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-5 py-2 font-mono text-xs inline-flex items-center min-h-[40px]">Continue: {nextShelf.next.title} →</Link>
+                  {canContinue && nextShelf && (
+                    <Link href={nextShelf.next.href} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-5 py-2 font-mono text-xs inline-flex items-center min-h-[40px]">{nextShelf.next.badge}: {nextShelf.next.title} →</Link>
                   )}
                   {!nextLoading && !nextShelf && (
-                    <Link href="/profile" className="border border-mathua-border px-5 py-2 font-mono text-xs text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue inline-flex items-center min-h-[40px]">Next up →</Link>
+                    <Link href="/profile" className="border border-mathua-border px-5 py-2 font-mono text-xs text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue inline-flex items-center min-h-[40px]">Back to Profile</Link>
                   )}
+                  <button type="button" onClick={practiceAgain} className="border border-mathua-border px-5 py-2 font-mono text-xs text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue inline-flex items-center min-h-[40px]">Practice again</button>
                   <Link href={`/study?concept=${encodeURIComponent(conceptId)}`} className="border border-mathua-border px-5 py-2 font-mono text-xs text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue inline-flex items-center min-h-[40px]">Reference</Link>
                 </div>
                 {!nextLoading && nextShelf && nextShelf.alternatives.length > 0 && (
@@ -393,6 +457,25 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
                       ))}
                     </div>
                   </details>
+                )}
+                {upcoming.length > 0 && (
+                  <div className="mt-3 border border-mathua-border">
+                    <p className="font-mono text-[11px] text-mathua-secondary px-4 py-2.5">
+                      Coming up — unlocks once this concept is mastered
+                    </p>
+                    <div className="px-4 pb-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {upcoming.map(u => (
+                        <Link
+                          key={u.id}
+                          href={`/learn?concept=${encodeURIComponent(u.id)}`}
+                          className="border border-mathua-border p-3 hover:border-mathua-blue transition-colors block min-w-0"
+                        >
+                          <div className="font-mono text-xs text-mathua-primary truncate">{u.label}</div>
+                          <div className="mt-1 font-mono text-[11px] text-mathua-muted">Needs: {u.missing.join(', ')}</div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
                 )}
               </div>
             )

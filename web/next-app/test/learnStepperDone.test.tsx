@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, fireEvent, within } from '@testing-library/react'
-import LearnStepper from '../components/LearnStepper'
+import LearnStepper, { headConceptId } from '../components/LearnStepper'
 import {
   getLessonKPs,
   getLessonPractice,
@@ -92,11 +92,17 @@ describe('LearnStepper done state (PR5)', () => {
     // Closure card with mastery feedback…
     expect(await screen.findByText(/Complete — 2\/2 correct/)).toBeTruthy()
 
-    // …and a Continue naming the head re-fetched AFTER the last answer.
-    const cont = await screen.findByRole('link', { name: /^Continue:/ })
+    // …and a Continue naming the head re-fetched AFTER the last answer,
+    // labeled with the reason so the jump reads as intentional.
+    const cont = await screen.findByRole('link', { name: /^New: / })
     const href = cont.getAttribute('href')!
     expect(href).toMatch(/^\/learn\?concept=/)
+    // The finished concept is excluded from its own shelf: no self-link.
+    expect(href).not.toContain(`concept=${encodeURIComponent(CID)}`)
     expect(submitStudyAnswer).toHaveBeenCalledTimes(2)
+
+    // Practice again is always offered as the secondary action.
+    expect(screen.getByRole('button', { name: 'Practice again' })).toBeTruthy()
 
     // Alternatives stay available in done — learner disposes, no bounce.
     expect(screen.getByText(/Or pick something else/)).toBeTruthy()
@@ -124,7 +130,55 @@ describe('LearnStepper done state (PR5)', () => {
     // Per-call catch defaults keep the head satisfiable (browse fallback),
     // so done still offers Continue — never a dead end.
     expect(await screen.findByText(/Complete — 2\/2 correct/)).toBeTruthy()
-    const cont = await screen.findByRole('link', { name: /^Continue:/ })
+    const cont = await screen.findByRole('link', { name: /^(New|Due now|Recommended|Continue|Study): / })
     expect(cont.getAttribute('href')!).toMatch(/^\/learn\?concept=|^\/study$|^\/onboard$/)
   }, 15000)
+
+  it('guards same-concept heads by id even when query params differ', () => {
+    expect(headConceptId(`/learn?concept=${CID}&seed=42&difficulty=0.7&exclude=a`)).toBe(CID)
+    expect(headConceptId('/learn?concept=other.id')).toBe('other.id')
+    expect(headConceptId('/review')).toBeNull()
+    expect(headConceptId('/study')).toBeNull()
+    expect(headConceptId('not a url at all')).toBeNull()
+  })
+
+  it('falls back to Practice again plus Back to Profile on shelf timeout', async () => {
+    vi.useFakeTimers()
+    try {
+      const hang = () => new Promise<never>(() => {})
+      vi.mocked(getActivity).mockImplementation(hang)
+      vi.mocked(getProgress).mockImplementation(hang)
+      vi.mocked(getWeaknesses).mockImplementation(hang)
+      vi.mocked(getDueReviews).mockImplementation(hang)
+      vi.mocked(getScores).mockImplementation(hang)
+      render(<LearnStepper conceptId={CID} />)
+      await vi.advanceTimersByTimeAsync(10)
+
+      fireEvent.click(screen.getByRole('button', { name: 'Start practicing →' }))
+      await vi.advanceTimersByTimeAsync(10)
+
+      for (let i = 0; i < 2; i++) {
+        const inputs = screen.getAllByPlaceholderText(/Your answer/)
+        const input = inputs[inputs.length - 1]
+        fireEvent.change(input, { target: { value: '5' } })
+        const card = input.closest('div[class*="border"]') ?? document.body
+        fireEvent.click(within(card as HTMLElement).getByRole('button', { name: 'Check' }))
+        await vi.advanceTimersByTimeAsync(500)
+      }
+
+      expect(screen.getByText(/Complete — 2\/2 correct/)).toBeTruthy()
+      // Shelf fetch hangs: past the timeout the failure branch renders.
+      await vi.advanceTimersByTimeAsync(9000)
+      expect(screen.getByRole('button', { name: 'Practice again' })).toBeTruthy()
+      const profile = screen.getByRole('link', { name: 'Back to Profile' })
+      expect(profile.getAttribute('href')).toBe('/profile')
+      // No self-link anywhere on the done card.
+      for (const link of screen.getAllByRole('link')) {
+        const href = link.getAttribute('href') ?? ''
+        expect(href.startsWith('/learn') && href.includes(`concept=${CID}`)).toBe(false)
+      }
+    } finally {
+      vi.useRealTimers()
+    }
+  }, 30000)
 })
