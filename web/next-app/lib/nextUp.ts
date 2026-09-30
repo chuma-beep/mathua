@@ -66,8 +66,9 @@ function mostRecentInProgress(input: NextUpInput): string | null {
  * 4) brand-new user without Diagnostic → Diagnostic entry
  * 5) fallback → Study library
  *
- * selectNextUp is the single-directive fallback. The task shelf
- * (selectShelf) is the primary surface: the algorithm proposes, the
+ * selectNextUp is the single-directive fallback, folded into selectShelfHead:
+ * when a policy returns no items the head falls back to this. The task shelf
+ * (selectShelfHead) is the primary surface: the algorithm proposes, the
  * learner disposes.
  */
 export function selectNextUp(input: NextUpInput): NextUp {
@@ -127,7 +128,19 @@ export function selectNextUp(input: NextUpInput): NextUp {
   }
 }
 
-// ── Task shelf: algorithm proposes (eligible only), learner disposes ──
+// ── Ranked shelf: item 0 is the Next head, the rest are alternatives ──
+// The DAG + scheduler stay the source of truth (eligible set, interleave,
+// 70/30 review/new). The UI commits to one head item so the learner sees
+// "next", not "eligible". Learner still disposes via the alternatives.
+
+export interface Shelf {
+  next: ShelfItem
+  alternatives: ShelfItem[]
+}
+
+function shelfItemFromNextUp(n: NextUp): ShelfItem {
+  return { kind: n.kind, badge: n.badge, title: n.title, detail: n.detail, href: n.href, cta: n.cta, xp: 0 }
+}
 
 export type ShelfKind = 'new' | 'review' | 'weakness' | 'resume' | 'diagnostic' | 'browse'
 
@@ -257,8 +270,23 @@ export const fixedWeightPolicy: SelectionPolicy = (cands, input) => {
   return items.slice(0, 5)
 }
 
-// selectShelf is the primary task surface. Policy is injectable; v1 ships
-// the fixed-weight policy.
+// selectShelfHead is the primary task surface: a ranked shelf whose item 0
+// is the Next head. Policy is injectable; v1 ships the fixed-weight policy.
+// Always satisfiable: an empty policy result falls back to selectNextUp
+// (single-directive fallback folded in as the head, alternatives empty).
+export function selectShelfHead(input: ShelfInput, policy: SelectionPolicy = fixedWeightPolicy): Shelf {
+  const items = policy(buildCandidates(input), input).slice(0, 5)
+  if (items.length === 0) {
+    return { next: shelfItemFromNextUp(selectNextUp(input)), alternatives: [] }
+  }
+  const [next, ...alternatives] = items
+  return { next, alternatives }
+}
+
+// selectShelf is a flat wrapper over selectShelfHead (head + alternatives).
+// Kept for tests and any external callers. UI code should use
+// selectShelfHead with NextUpCard.
 export function selectShelf(input: ShelfInput, policy: SelectionPolicy = fixedWeightPolicy): ShelfItem[] {
-  return policy(buildCandidates(input), input)
+  const head = selectShelfHead(input, policy)
+  return [head.next, ...head.alternatives]
 }
