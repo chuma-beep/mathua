@@ -6,6 +6,7 @@ import rehypeKatex from 'rehype-katex'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 import rehypeSanitize, { defaultSchema } from 'rehype-sanitize'
+import rehypeCollapseEmptyColumns from '../lib/rehypeCollapseEmptyColumns'
 import 'katex/dist/katex.min.css'
 import { lessonMacros, prepareLessonMath } from '../lib/lessonMath'
 
@@ -159,7 +160,7 @@ export default function KatexContent({ children, className = '' }: { children: s
     <div className={`mathua-lesson katex-content text-sm leading-relaxed ${className}`}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeRaw, [rehypeSanitize, sanitizeSchema], [rehypeKatex, {
+        rehypePlugins={[rehypeRaw, rehypeCollapseEmptyColumns, [rehypeSanitize, sanitizeSchema], [rehypeKatex, {
           throwOnError: false,
           trust: false,
           strict: 'warn',
