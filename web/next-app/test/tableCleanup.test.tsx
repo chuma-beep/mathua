@@ -254,3 +254,92 @@ describe('KatexContent table cleanup (integration)', () => {
     }
   })
 })
+
+// Mirror of Go extractSection (internal/lessons/lesson.go): heading up to
+// the next heading at the same or higher level, so the test renders exactly
+// what GET /api/lessons/{id}/kp serves as worked_example.
+function extractSection(body: string, heading: string): string {
+  const norm = (s: string): string =>
+    s
+      .replace(/\\\\[()[\]]|\\[()[\]]|\$\$?/g, '')
+      .split(/\s+/)
+      .join(' ')
+      .trim()
+  const want = norm(heading)
+  const lines = body.split('\n')
+  let start = -1
+  let startLevel = 0
+  for (let i = 0; i < lines.length; i++) {
+    const t = lines[i].trim()
+    if (!t || !t.startsWith('#')) continue
+    let level = 0
+    while (level < t.length && t[level] === '#') level++
+    const name = norm(t.slice(level))
+    if (start < 0) {
+      if (name === want) {
+        start = i
+        startLevel = level
+      }
+      continue
+    }
+    if (level <= startLevel && name !== want) return lines.slice(start, i).join('\n')
+  }
+  if (start < 0) throw new Error(`section not found: ${heading}`)
+  return lines.slice(start).join('\n')
+}
+
+// Prod gap guard for /learn?concept=arith.add.single: LearnStepper renders
+// each KP worked_example under `whitespace-pre-wrap` (LearnStepper.tsx:325),
+// which renders surviving whitespace-only text nodes as blank lines —
+// invisible to emptyColumnCount. Covers every KP section in the shard
+// (KP 0 "Use Addition Notation" plus the gap-bearing "Model Addition of
+// Whole Numbers"), asserting both table cleanliness and no blank-line runs.
+describe('Learn KP sections (pre-wrap blank lines)', () => {
+  it('renders each arith.add.single KP section with no empty columns and no blank-line runs', () => {
+    const restore = silence()
+    try {
+      const kpFile = path.join(__dirname, '../../../data/lessons/kp/arith.add.single.json')
+      const kps = JSON.parse(fs.readFileSync(kpFile, 'utf8')) as { section: string }[]
+      expect(kps.length).toBeGreaterThan(0)
+      const mdFile = path.join(__dirname, '../../../data/lessons/teaching/arith.add.single.md')
+      const md = fs.readFileSync(mdFile, 'utf8')
+      for (const kp of kps) {
+        const body = extractSection(md, kp.section)
+        const { container, unmount } = render(
+          <KatexContent className="mt-3 text-sm text-mathua-primary whitespace-pre-wrap">{body}</KatexContent>
+        )
+        try {
+          expect(emptyColumnCount(container)).toBe(0)
+          const text = container.textContent ?? ''
+          const blankRun = text.split('\n').reduce<{ cur: number; max: number }>(
+            (acc, line) => {
+              const cur = /^\s*$/.test(line) ? acc.cur + 1 : 0
+              return { cur, max: Math.max(acc.max, cur) }
+            },
+            { cur: 0, max: 0 }
+          )
+          expect(blankRun.max).toBeLessThan(2)
+          for (const p of container.querySelectorAll('p')) {
+            const empty = (p.textContent ?? '').trim() === '' && p.querySelector('img, svg') === null
+            expect(empty).toBe(false)
+          }
+          expect(container.innerHTML.match(/<br\s*\/?>(\s*<br\s*\/?>)+/i)).toBeNull()
+        } finally {
+          unmount()
+        }
+      }
+      // The gap section itself must keep its prose after cleanup.
+      const gap = extractSection(md, kps[1].section)
+      const { container: gapContainer, unmount: gapUnmount } = render(
+        <KatexContent className="mt-3 text-sm text-mathua-primary whitespace-pre-wrap">{gap}</KatexContent>
+      )
+      try {
+        expect(gapContainer.textContent).toContain('We start by modeling the first number with 3 blocks.')
+      } finally {
+        gapUnmount()
+      }
+    } finally {
+      restore()
+    }
+  })
+})
