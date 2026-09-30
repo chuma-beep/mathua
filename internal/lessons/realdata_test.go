@@ -88,6 +88,45 @@ func TestRealDataKPSectionsResolve(t *testing.T) {
 	}
 }
 
+// Guard: lesson ownership is 1:1 — every concept resolves to exactly one
+// distinct lesson, and it is the server pick (Loader.Lesson). The Study
+// client resolves ?concept= first-wins over the domain-grouped lessons; as
+// long as this holds, first-wins IS the server pick and chips always land
+// on a lesson that actually serves the concept. If content ever maps one
+// concept to several sources, this fails and forces the `primary` field
+// follow-up (client cannot replicate reverse-lex source order).
+func TestRealDataSingleLessonPerConcept(t *testing.T) {
+	lib, err := Load("../../data/lessons")
+	if err != nil {
+		t.Skipf("dataset not present: %v", err)
+	}
+	owners := map[string]map[*Lesson]bool{}
+	for _, l := range lib.All() {
+		for _, c := range l.Concepts {
+			if owners[c] == nil {
+				owners[c] = map[*Lesson]bool{}
+			}
+			owners[c][l] = true
+		}
+	}
+	checked := 0
+	for cid, set := range owners {
+		checked++
+		if len(set) != 1 {
+			t.Errorf("%s: served by %d distinct lessons, want 1", cid, len(set))
+			continue
+		}
+		for l := range set {
+			if l != lib.Lesson(cid) {
+				t.Errorf("%s: sole lesson is not the server pick", cid)
+			}
+		}
+	}
+	if checked == 0 {
+		t.Fatal("no lessons checked")
+	}
+}
+
 // Guard: every served lesson title must be plain renderable text — the
 // title slots (study list/detail, concept page) never run math or markdown.
 // Catches paragraph-titles (deep-note H6 picked by a naive first-heading
