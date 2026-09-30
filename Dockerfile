@@ -5,6 +5,13 @@ COPY web/next-app/package.json web/next-app/package-lock.json ./web/next-app/
 RUN cd web/next-app && npm ci
 
 COPY web/next-app ./web/next-app
+# Stamp a unique service-worker version per image build so every deploy
+# migrates clients off older caches (see public/sw.js). Without this, a
+# static SW version lets browsers keep serving stale hashed JS forever.
+# The grep guard fails the build loudly if the stamp pattern drifts.
+RUN STAMP="build-$(date -u +%Y%m%dT%H%M%SZ)" && \
+    sed -i "s/^const VERSION = '[^']*'/const VERSION = 'v2-${STAMP}'/" ./web/next-app/public/sw.js && \
+    grep -q "^const VERSION = 'v2-build-[0-9]\{8\}T" ./web/next-app/public/sw.js
 # Single-binary: same origin => relative fetches. Empty API base bakes fetch('/api/...') 
 # which works on any Fly hostname (mathua.fly.dev, mathua-xxx.fly.dev). For split Vercel+Fly,
 # set build arg NEXT_PUBLIC_API_URL=https://mathua.fly.dev

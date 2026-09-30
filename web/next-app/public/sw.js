@@ -6,8 +6,15 @@
  *   - GET /api/*: network-first with cache fallback (read-only endpoints;
  *     non-GET requests are never intercepted so answer submissions fail
  *     loudly instead of silently succeeding from a stale cache)
+ *
+ * VERSION is stamped at image build time (Dockerfile rewrites the line below
+ * with a UTC timestamp) so every deploy ships byte-different sw.js: browsers
+ * install the new worker, and activate purges all caches from older builds.
+ * A static version would let clients run stale hashed JS indefinitely — old
+ * chunks 404 on fresh images while this worker keeps serving its cached
+ * copies (cache-first), pinning the client on pre-fix rendering forever.
  */
-const VERSION = 'v2'
+const VERSION = 'v2-local'
 const SHELL_CACHE = `mathua-shell-${VERSION}`
 const ASSET_CACHE = `mathua-assets-${VERSION}`
 const DATA_CACHE = `mathua-data-${VERSION}`
