@@ -99,6 +99,7 @@ export const ConceptProgressSchema = z.object({
   best_streak: z.number().optional(),
   avg_response_time: z.number().optional(),
   attempts: z.number().optional(),
+  completed: z.boolean().optional(),
 })
 
 const ProgressMapSchema = z.record(z.string(), ConceptProgressSchema)
@@ -242,6 +243,9 @@ export interface ConceptProgress {
   best_streak?: number
   avg_response_time?: number
   attempts?: number
+  // Set by the lesson-completion endpoint (PR1, server-owned). Optional so
+  // pre-PR1 payloads keep validating; unlock rules treat absent as false.
+  completed?: boolean
 }
 
 export async function startSession(): Promise<StartSessionRes> {

@@ -29,6 +29,15 @@ function isMastered(p: ConceptProgress | undefined): boolean {
   return (p?.status ?? '').toLowerCase() === 'mastered'
 }
 
+// A prerequisite is satisfied when mastered OR completed (lesson-completion
+// unlocks successors; mastery still gates the quiz). Same rule as the
+// server's Available(); absent `completed` (pre-PR1 payloads) behaves exactly
+// as before.
+function prereqSatisfied(progress: Record<string, ConceptProgress>, pid: string): boolean {
+  const p = progress[pid]
+  return isMastered(p) || p?.completed === true
+}
+
 // New means no evidence of learning at all: nothing mastered and no
 // answered questions. A struggling newcomer with attempts but zero
 // mastery still counts as new; anyone with a history does not, even if
@@ -223,7 +232,7 @@ export function buildCandidates(input: ShelfInput): ShelfCandidate[] {
   for (const c of input.catalog) {
     if (excluded.has(c.id)) continue
     if (isMastered(input.progress[c.id])) continue
-    if (!(c.prerequisites ?? []).every(pid => isMastered(input.progress[pid]))) continue
+    if (!(c.prerequisites ?? []).every(pid => prereqSatisfied(input.progress, pid))) continue
     const w = weakById.get(c.id)
     const inProgress = input.progress[c.id] !== undefined || recent.has(c.id)
     out.push({
@@ -260,9 +269,66 @@ export function upcomingLocked(
   for (const c of catalog) {
     if (!(c.prerequisites ?? []).includes(conceptId)) continue
     if (isMastered(progress[c.id])) continue
-    const missing = (c.prerequisites ?? []).filter(pid => !isMastered(progress[pid]))
+    const missing = (c.prerequisites ?? []).filter(pid => !prereqSatisfied(progress, pid))
     if (missing.length === 0) continue // eligible — already a `new` candidate
     out.push({ id: c.id, label: c.label, missing: missing.map(pid => labels.get(pid) ?? pid) })
+  }
+  out.sort((a, b) => (a.id < b.id ? -1 : 1))
+  return out
+}
+
+// Concept id carried by a shelf href, if any (/learn?concept=X). Shared by
+// the Learn done guard and the Profile dedupe filters so "same concept" is
+// decided on ids, never on raw href strings (query params vary).
+export function hrefConceptId(href: string): string | null {
+  try {
+    const c = new URL(href, 'http://localhost').searchParams.get('concept')
+    return c && c.length > 0 ? c : null
+  } catch {
+    return null
+  }
+}
+
+export interface RecentUnlock {
+  id: string
+  label: string
+  via: string
+}
+
+// Lookback for "recently unlocked" rows on Profile. Named (not inlined) so
+// tests and the Profile section share one value.
+export const RECENT_UNLOCK_DAYS = 7
+
+// recentlyUnlocked lists successors unlocked by recently-active concepts:
+// for each concept touched in the last `recentDays` days, its successors
+// whose prerequisites are now all satisfied (mastered or completed) and
+// that remain unmastered. Recency is derived client-side from activity, so
+// no endpoint is needed; the `completed` flag (PR1 payload) sharpens the
+// unlock rule when present.
+export function recentlyUnlocked(input: {
+  catalog: CatalogEntry[]
+  progress: Record<string, ConceptProgress>
+  activity: DailyActivity[]
+  recentDays: number
+}): RecentUnlock[] {
+  const cutoff = Date.now() - input.recentDays * 86400000
+  const recent = new Set<string>()
+  for (const day of input.activity) {
+    const t = new Date(day.date).getTime()
+    if (!Number.isFinite(t) || t < cutoff) continue
+    for (const cid of day.concepts ?? []) recent.add(cid)
+  }
+  const labels = new Map(input.catalog.map(c => [c.id, c.label]))
+  const out: RecentUnlock[] = []
+  const seen = new Set<string>()
+  for (const cid of recent) {
+    for (const c of input.catalog) {
+      if (!(c.prerequisites ?? []).includes(cid)) continue
+      if (seen.has(c.id) || isMastered(input.progress[c.id])) continue
+      if (!(c.prerequisites ?? []).every(pid => prereqSatisfied(input.progress, pid))) continue
+      seen.add(c.id)
+      out.push({ id: c.id, label: c.label, via: labels.get(cid) ?? cid })
+    }
   }
   out.sort((a, b) => (a.id < b.id ? -1 : 1))
   return out

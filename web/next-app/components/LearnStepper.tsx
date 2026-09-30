@@ -7,7 +7,7 @@ import ChoiceOptions from './ChoiceOptions'
 import { Input } from '@/components/ui/input'
 import { getLessonKPs, getLessonPractice, getLessonReadiness, submitStudyAnswer, getActivity, getDueReviews, getProgress, getScores, getWeaknesses, type KpInfo, type PracticeQuestion, type ReadinessRes, type DailyActivity, type Scores, type WeaknessRes, type ConceptProgress } from '../lib/api'
 import { getUserInfo } from '../lib/auth'
-import { selectShelfHead, upcomingLocked, type Shelf, type LockedSuccessor } from '../lib/nextUp'
+import { selectShelfHead, upcomingLocked, hrefConceptId, type Shelf, type LockedSuccessor } from '../lib/nextUp'
 import { REQUIRED_IN_A_ROW, masteryEstimate, type Attempt } from '../lib/progression'
 import { formatForGradingType } from '../lib/answerFormat'
 import { concepts } from '../lib/conceptData'
@@ -50,18 +50,11 @@ function catalogEntries() {
   return concepts.map(c => ({ id: c.id, label: c.label, prerequisites: c.prerequisites ?? [], avgTimeSeconds: c.mastery_threshold?.avg_time_seconds }))
 }
 
-// Concept id carried by a shelf href, if any (/learn?concept=X). Compared
-// instead of raw href strings: live URLs may carry &seed=/&difficulty=/
-// &exclude= while the stepper still won't reset, so only a real concept
-// change may render a navigating <Link>. Exported for unit tests.
-export function headConceptId(href: string): string | null {
-  try {
-    const c = new URL(href, 'http://localhost').searchParams.get('concept')
-    return c && c.length > 0 ? c : null
-  } catch {
-    return null
-  }
-}
+// The done guard compares concept ids, never raw href strings: live URLs may
+// carry &seed=/&difficulty=/&exclude= while the stepper still won't reset,
+// so only a real concept change may render a navigating <Link>. Shared with
+// Profile dedupe via lib/nextUp; re-exported under the guard's name for tests.
+export { hrefConceptId as headConceptId }
 
 export default function LearnStepper({ conceptId, returnTo }: Props) {
   const [entries, setEntries] = useState<Entry[]>([])
@@ -416,7 +409,7 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
             )
           }
           if (e.kind === 'done') {
-            const headId = nextShelf ? headConceptId(nextShelf.next.href) : null
+            const headId = nextShelf ? hrefConceptId(nextShelf.next.href) : null
             // Only a real concept change may render a navigating <Link>: the
             // stepper keys everything off conceptId, so a same-concept href
             // (however many query params it carries) would scroll to top and
