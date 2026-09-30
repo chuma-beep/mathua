@@ -227,7 +227,6 @@ The sum of any number $a$ and 0 is the number.
 
 $$
 \begin{matrix}
- \\
 {a + 0 = a} \\
 {0 + a = a}
 \end{matrix}
@@ -288,13 +287,13 @@ Add:
 
 #### Solution
 
-- |      |           |
+|      |           |
   |------|-----------|
   | ⓐ    |           |
   | Add. | $8 + 7$ |
   |      | 15    |
 
-- |      |           |
+|      |           |
   |------|-----------|
   | ⓑ    |           |
   | Add. | $7 + 8$ |
@@ -355,8 +354,6 @@ Add: $32 + 54.$
 Add: $25 + 74.$
 
 In the previous example, the sum of the ones and the sum of the tens were both less than 10. But what happens if the sum is 10 or more? Let’s use our $\text{base-10}$ model to find out. Figure 1.10 shows the addition of 17 and 26 again.
-
-*Figure 1.10*
 
 When we add the ones, $7 + 6,$ we get 13 ones. Because we have more than 10 ones, we can exchange 10 of the ones for 1 ten. Now we have 4 tens and 3 ones. Without using the model, we show this as a small red 1 above the digits in the tens place.
 
@@ -746,17 +743,7 @@ We are asked to find the total number of points on the tests.
 | Write a phrase. | the sum of points on the tests |
 | Translate to math notation. | $87 + 93 + 68 + 95 + 89$ |
 | Then we simplify by adding. |  |
-| Since there are several numbers, we will write them vertically. | \$\begin{array}{l}
- \\
- \\
- \\
-{\quad\overset{3}{8}7} \\
-{\quad 93} \\
-{\quad 68} \\
-{\quad 95} \\
-{\underset{\text{\_\_\_\_}}{+89}} \\
-{ 432}
-\end{array}\$ |
+| Since there are several numbers, we will write them vertically. | $\begin{array}{l} {\quad\overset{3}{8}7} \\ {\quad 93} \\ {\quad 68} \\ {\quad 95} \\ {\underset{\text{\_\_\_\_}}{+89}} \\ {432} \end{array}$ |
 | Write a sentence to answer the question. | Hao earned a total of 432 points. |
 
 Notice that we added *points*, so the sum is 432 *points*. It is important to include the appropriate units in all answers to applications problems.
