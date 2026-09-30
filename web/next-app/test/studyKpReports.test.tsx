@@ -123,7 +123,9 @@ describe('study KP collapse across concepts', () => {
     render(<LessonDetail lesson={twoConceptLesson} domain={null} onBack={() => {}} />)
     await screen.findByText(/KP fresh/)
     // Two unique bodies → two collapsible blocks, no pointer links.
-    expect(document.querySelectorAll('details > summary')).toHaveLength(2)
+    // (Scoped to the worked-example blocks: the Start disclosure below
+    // renders its own <details>.)
+    expect(document.querySelectorAll('[data-testid="worked-example-blocks"] details > summary')).toHaveLength(2)
     expect(screen.queryByText(/Same worked example as/)).toBeNull()
     expect(screen.getAllByText('shared body')).toHaveLength(1)
     // The repeat's label survives as a combined "also" label.
@@ -143,7 +145,7 @@ describe('study KP collapse across concepts', () => {
     }
     render(<LessonDetail lesson={twoConceptLesson} domain={null} onBack={() => {}} />)
     await screen.findByText(/KP two/)
-    expect(document.querySelectorAll('details > summary')).toHaveLength(2)
+    expect(document.querySelectorAll('[data-testid="worked-example-blocks"] details > summary')).toHaveLength(2)
     expect(screen.queryByText(/Same worked example as/)).toBeNull()
   })
 

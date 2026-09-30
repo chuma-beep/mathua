@@ -74,4 +74,19 @@ describe('selectShelfHead', () => {
     expect(head.next.href).toBe('/study')
     expect(head.alternatives).toHaveLength(0)
   })
+
+  it('selectNextUp fallback skips excluded ids in weakness and resume picks', () => {
+    const input = {
+      ...base,
+      progress: { a: { status: 'MASTERED', streak: 3 }, b: { status: 'learning', streak: 1 } },
+      weaknesses: { by_domain: { d: [{ id: 'b', label: 'B', weakness: 0.9 }] } },
+      activity: [{ date: '2026-09-30', questions: 5, correct: 4, concepts: ['b'] }],
+    }
+    const headed = selectShelfHead(input, () => [])
+    expect(headed.next.kind).toBe('weakness')
+    expect(headed.next.href).toContain('concept=b')
+    const skipped = selectShelfHead({ ...input, excludeConceptIds: ['b'] }, () => [])
+    expect(skipped.next.kind).toBe('browse')
+    expect(skipped.next.href).not.toContain('concept=b')
+  })
 })

@@ -318,6 +318,9 @@ export function LessonDetail({
   revealReq?: { cid: string; n: number } | null
   onConceptSelect?: (cid: string, e: ReactMouseEvent<HTMLAnchorElement>) => void
 }) {
+  // One lesson source can map to several concept ids — or repeat one — so
+  // dedupe once: chips, blocks, fetches, and Start targets never repeat.
+  const conceptIds = [...new Set(lesson.concepts)]
   // KP-aware: fetch knowledge-point shards for the lesson's concepts.
   const [kpMap, setKpMap] = useState<Record<string, LessonKpsRes>>({})
   // Concepts whose shard fetch settled (success or failure): the reveal
@@ -327,7 +330,7 @@ export function LessonDetail({
   useEffect(() => {
     if (!lesson.concepts?.length) return
     let cancelled = false
-    lesson.concepts.slice(0, 3).forEach(cid => {
+    conceptIds.slice(0, 3).forEach(cid => {
       getLessonKPs(cid).then(res => {
         if (cancelled) return
         if (res.kps?.length) setKpMap(prev => ({ ...prev, [cid]: res }))
@@ -372,7 +375,7 @@ export function LessonDetail({
   const blocks: ExampleBlock[] = []
   const seenBodies = new Map<string, ExampleBlock>()
   const seenDiagrams = new Set<string>()
-  for (const cid of lesson.concepts.slice(0, 3)) {
+  for (const cid of conceptIds.slice(0, 3)) {
     const kps = kpMap[cid]?.kps ?? []
     if (kps.length === 0) continue
     const diagram = kpMap[cid]?.diagram ?? null
@@ -383,7 +386,12 @@ export function LessonDetail({
         const key = `${normSection(kp.section ?? '')}::${hashBody(body)}`
         const first = seenBodies.get(key)
         if (first) {
-          first.also.push(kp.label)
+          // Same worked body under a repeated label: record once. Without
+          // this the "also" list reads "also X, X" for multi-concept lessons.
+          const norm = (l: string) => stripMathDelimiters(l).toLowerCase()
+          if (![first.label, ...first.also].some(l => norm(l) === norm(kp.label))) {
+            first.also.push(kp.label)
+          }
           return
         }
       }
@@ -440,7 +448,7 @@ export function LessonDetail({
     if (!revealReq) return
     const key = `${revealReq.cid}:${revealReq.n}`
     if (revealedRef.current === key) return
-    const inScope = lesson.concepts.slice(0, 3).includes(revealReq.cid)
+    const inScope = conceptIds.slice(0, 3).includes(revealReq.cid)
     if (inScope && !settled[revealReq.cid]) return
     revealedRef.current = key
     const matches = blocks.filter((b) => b.cid === revealReq.cid)
@@ -463,6 +471,15 @@ export function LessonDetail({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   })
 
+  // One primary Start per lesson (head within this lesson's concepts),
+  // the rest under a disclosure — same head-plus-alternatives pattern as
+  // the shelf. First unmastered in lesson order heads; all-mastered falls
+  // back to re-practicing the first.
+  const learnTargets = conceptIds.slice(0, 3)
+  const isMasteredStatus = (cid: string) => (lesson.progress?.[cid]?.status ?? '').toUpperCase() === 'MASTERED'
+  const headCid = learnTargets.find(cid => !isMasteredStatus(cid)) ?? learnTargets[0]
+  const restCids = learnTargets.filter(cid => cid !== headCid)
+
   return (
     <div className="max-w-7xl mx-auto mt-8 mb-16">
       <button
@@ -479,7 +496,7 @@ export function LessonDetail({
       <div className="bg-mathua-surface border border-mathua-border p-4 sm:p-6 mt-6 mb-6 min-w-0 overflow-hidden">
         <div className="flex items-center gap-2 sm:gap-3 flex-wrap min-w-0">
           <span className="text-mathua-muted text-xs font-mono shrink-0">Concepts:</span>
-          {lesson.concepts.map((cid) => {
+          {conceptIds.map((cid) => {
             const p = lesson.progress?.[cid]
             return (
               <Link
@@ -520,7 +537,7 @@ export function LessonDetail({
       )}
 
       {blocks.length > 0 ? (
-        <div className="mb-8">
+        <div className="mb-8" data-testid="worked-example-blocks">
           <h3 className="font-mono text-[11px] text-mathua-muted mb-3 border-b border-mathua-border pb-2 uppercase tracking-wider">
             Worked examples ({blocks.length})
           </h3>
@@ -637,20 +654,39 @@ export function LessonDetail({
           interactive loop, one concept at a time
         </span>
       </div>
-      {lesson.concepts.slice(0, 3).map(cid => (
+      {headCid && (
         <Link
-          key={cid}
-          href={`/learn?concept=${encodeURIComponent(cid)}`}
+          key={headCid}
+          href={`/learn?concept=${encodeURIComponent(headCid)}`}
           className="mt-3 flex items-center justify-between gap-3 border border-mathua-border bg-mathua-surface p-4 hover:border-mathua-blue transition-colors"
         >
           <span className="font-mono text-xs text-mathua-primary truncate">
-            {conceptLabels.get(cid) || cid}
+            {conceptLabels.get(headCid) || headCid}
           </span>
           <span className="shrink-0 font-mono text-xs text-mathua-blue">
             Start learning →
           </span>
         </Link>
-      ))}
+      )}
+      {restCids.length > 0 && (
+        <details className="mt-3 border border-mathua-border">
+          <summary className="font-mono text-[11px] text-mathua-secondary cursor-pointer px-4 py-2.5">
+            Or pick something else ({restCids.length})
+          </summary>
+          <div className="px-4 pb-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {restCids.map(cid => (
+              <Link
+                key={cid}
+                href={`/learn?concept=${encodeURIComponent(cid)}`}
+                className="border border-mathua-border p-3 hover:border-mathua-blue transition-colors block min-w-0"
+              >
+                <div className="font-mono text-xs text-mathua-primary truncate">{conceptLabels.get(cid) || cid}</div>
+                <div className="mt-1 font-mono text-[11px] text-mathua-blue">Start learning →</div>
+              </Link>
+            ))}
+          </div>
+        </details>
+      )}
 
       {lesson.dependents && lesson.dependents.length > 0 && (
         <div className="mt-6 mb-8">

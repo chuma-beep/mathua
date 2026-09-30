@@ -77,8 +77,7 @@ describe('resolveConceptTarget / planConceptNavigation', () => {
   })
 })
 
-describe('LessonDetail concept reveal', () => {
-  it('chip click delegates navigation to the page handler', () => {
+describe('LessonDetail concept reveal', () => {  it('chip click delegates navigation to the page handler', () => {
     const onConceptSelect = vi.fn()
     render(<LessonDetail lesson={lesson} domain={null} onBack={() => {}} onConceptSelect={onConceptSelect} />)
     const links = screen.getAllByRole('link') as HTMLAnchorElement[]
@@ -129,5 +128,61 @@ describe('LessonDetail concept reveal', () => {
       expect(document.querySelector('.ring-mathua-blue')).not.toBeNull()
     })
     expect(scrollIntoViewMock).toHaveBeenCalled()
+  })
+})
+
+describe('LessonDetail dedupe and single Start', () => {
+  it('renders each concept chip once for repeated concept ids', () => {
+    render(
+      <LessonDetail
+        lesson={{ ...lesson, concepts: ['a', 'a', 'b'] }}
+        domain={null}
+        onBack={() => {}}
+      />,
+    )
+    const links = screen.getAllByRole('link') as HTMLAnchorElement[]
+    expect(links.filter((l) => l.getAttribute('href') === '/study?concept=a')).toHaveLength(1)
+    expect(links.filter((l) => l.getAttribute('href') === '/study?concept=b')).toHaveLength(1)
+  })
+
+  it('collapses repeated worked-example labels instead of also X, X', async () => {
+    vi.mocked(getLessonKPs).mockImplementation(async (cid: string) => ({
+      concept_id: cid,
+      kps: [
+        { label: 'Same steps', section: 'S', subgoals: [], worked_example: 'shared $x$' },
+        { label: 'Same steps', section: 'S', subgoals: [], worked_example: 'shared $x$' },
+      ],
+      diagram: '',
+    }))
+    render(<LessonDetail lesson={lesson} domain={null} onBack={() => {}} />)
+    await screen.findByText(/Same steps/)
+    expect(screen.queryByText(/· also/)).toBeNull()
+  })
+
+  it('shows one primary Start for the first unmastered concept', () => {
+    render(
+      <LessonDetail
+        lesson={{ ...lesson, progress: { a: { status: 'MASTERED', streak: 3 } } }}
+        domain={null}
+        onBack={() => {}}
+      />,
+    )
+    const links = screen.getAllByRole('link') as HTMLAnchorElement[]
+    const starts = links.filter((l) => (l.getAttribute('href') ?? '').startsWith('/learn?concept='))
+    // Primary heads b (a is mastered); a remains only under the disclosure.
+    expect(starts.filter((l) => l.getAttribute('href') === '/learn?concept=b')).toHaveLength(1)
+    expect(screen.getByText('Or pick something else (1)')).toBeTruthy()
+    expect(starts.filter((l) => l.getAttribute('href') === '/learn?concept=a')).toHaveLength(1)
+    // Exactly one primary row; the rest live in the disclosure.
+    expect(document.querySelectorAll('a.justify-between')).toHaveLength(1)
+  })
+
+  it('heads the first concept when nothing is mastered', () => {
+    render(<LessonDetail lesson={lesson} domain={null} onBack={() => {}} />)
+    const links = screen.getAllByRole('link') as HTMLAnchorElement[]
+    const starts = links.filter((l) => (l.getAttribute('href') ?? '').startsWith('/learn?concept='))
+    expect(starts.filter((l) => l.getAttribute('href') === '/learn?concept=a')).toHaveLength(1)
+    expect(starts.filter((l) => l.getAttribute('href') === '/learn?concept=b')).toHaveLength(1)
+    expect(screen.getByText('Or pick something else (1)')).toBeTruthy()
   })
 })
