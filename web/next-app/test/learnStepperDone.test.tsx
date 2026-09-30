@@ -1,0 +1,130 @@
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { render, screen, fireEvent, within } from '@testing-library/react'
+import LearnStepper from '../components/LearnStepper'
+import {
+  getLessonKPs,
+  getLessonPractice,
+  getLessonReadiness,
+  submitStudyAnswer,
+  getActivity,
+  getProgress,
+  getWeaknesses,
+  getDueReviews,
+  getScores,
+} from '../lib/api'
+import { getUserInfo } from '../lib/auth'
+
+vi.mock('../lib/api', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('../lib/api')>()
+  return {
+    ...mod,
+    getLessonKPs: vi.fn(),
+    getLessonPractice: vi.fn(),
+    getLessonReadiness: vi.fn(),
+    submitStudyAnswer: vi.fn(),
+    getActivity: vi.fn(),
+    getProgress: vi.fn(),
+    getWeaknesses: vi.fn(),
+    getDueReviews: vi.fn(),
+    getScores: vi.fn(),
+  }
+})
+
+vi.mock('../lib/auth', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('../lib/auth')>()
+  return { ...mod, getUserInfo: vi.fn() }
+})
+
+// jsdom has no scrollIntoView; the stepper calls it after each append.
+Element.prototype.scrollIntoView = vi.fn() as unknown as typeof Element.prototype.scrollIntoView
+
+const CID = 'arith.add.single'
+
+const QS = [
+  { question: '2 + 3 = ?', answer: '5', explanation: 'Add them.' },
+  { question: '4 + 1 = ?', answer: '5', explanation: 'Add them.' },
+  { question: '1 + 6 = ?', answer: '7', explanation: 'Add them.' },
+]
+
+beforeEach(() => {
+  vi.mocked(getLessonKPs).mockResolvedValue({
+    concept_id: CID,
+    kps: [{ label: 'Add single digits', subgoals: [], worked_example: '2 + 3 = 5' }],
+  })
+  vi.mocked(getLessonPractice).mockResolvedValue({ questions: QS, concept_id: CID })
+  vi.mocked(getLessonReadiness).mockResolvedValue({ concept_id: CID, ready: true, weak: [], missing: [] })
+  vi.mocked(submitStudyAnswer).mockImplementation(async (_cid, answer, expected) => ({
+    correct: answer.trim() === expected.trim(),
+    feedback: 'Correct!',
+    explanation: '',
+    xp: 1,
+  }))
+  // Shelf head fetch on done: an experienced learner, nothing due.
+  vi.mocked(getUserInfo).mockReturnValue({ student_id: 's1', diagnostic_completed: true } as ReturnType<typeof getUserInfo>)
+  vi.mocked(getActivity).mockResolvedValue([])
+  vi.mocked(getProgress).mockResolvedValue({})
+  vi.mocked(getWeaknesses).mockResolvedValue({ by_domain: {} })
+  vi.mocked(getDueReviews).mockResolvedValue({ count: 0 })
+  vi.mocked(getScores).mockResolvedValue({ concepts_mastered: 3 } as Awaited<ReturnType<typeof getScores>>)
+})
+
+async function answerCurrent(value: string) {
+  const inputs = await screen.findAllByPlaceholderText(/Your answer/)
+  const input = inputs[inputs.length - 1]
+  fireEvent.change(input, { target: { value } })
+  const card = input.closest('div[class*="border"]') ?? document.body
+  fireEvent.click(within(card as HTMLElement).getByRole('button', { name: 'Check' }))
+}
+
+describe('LearnStepper done state (PR5)', () => {
+  it('learn → answer ×2 → done → Continue names the re-fetched head', async () => {
+    render(<LearnStepper conceptId={CID} />)
+
+    // Intro → first question.
+    fireEvent.click(await screen.findByRole('button', { name: 'Start practicing →' }))
+    expect(await screen.findByText('2 + 3 = ?')).toBeTruthy()
+
+    // Two in a row advances the single KP → done (REQUIRED_IN_A_ROW = 2).
+    await answerCurrent('5')
+    expect(await screen.findByText('4 + 1 = ?')).toBeTruthy()
+    await answerCurrent('5')
+
+    // Closure card with mastery feedback…
+    expect(await screen.findByText(/Complete — 2\/2 correct/)).toBeTruthy()
+
+    // …and a Continue naming the head re-fetched AFTER the last answer.
+    const cont = await screen.findByRole('link', { name: /^Continue:/ })
+    const href = cont.getAttribute('href')!
+    expect(href).toMatch(/^\/learn\?concept=/)
+    expect(submitStudyAnswer).toHaveBeenCalledTimes(2)
+
+    // Alternatives stay available in done — learner disposes, no bounce.
+    expect(screen.getByText(/Or pick something else/)).toBeTruthy()
+
+    // No auto-advance: only explicit navigation, Reference still offered.
+    expect(screen.getByRole('link', { name: 'Reference' }).getAttribute('href')).toBe(
+      `/study?concept=${encodeURIComponent(CID)}`,
+    )
+  }, 15000)
+
+  it('still offers Continue when shelf APIs fail (fail-soft defaults)', async () => {
+    vi.mocked(getActivity).mockRejectedValue(new Error('offline'))
+    vi.mocked(getWeaknesses).mockRejectedValue(new Error('offline'))
+    vi.mocked(getDueReviews).mockRejectedValue(new Error('offline'))
+    vi.mocked(getScores).mockRejectedValue(new Error('offline'))
+    vi.mocked(getProgress).mockRejectedValue(new Error('offline'))
+    render(<LearnStepper conceptId={CID} />)
+
+    fireEvent.click(await screen.findByRole('button', { name: 'Start practicing →' }))
+    expect(await screen.findByText('2 + 3 = ?')).toBeTruthy()
+    await answerCurrent('5')
+    expect(await screen.findByText('4 + 1 = ?')).toBeTruthy()
+    await answerCurrent('5')
+
+    // Per-call catch defaults keep the head satisfiable (browse fallback),
+    // so done still offers Continue — never a dead end.
+    expect(await screen.findByText(/Complete — 2\/2 correct/)).toBeTruthy()
+    const cont = await screen.findByRole('link', { name: /^Continue:/ })
+    expect(cont.getAttribute('href')!).toMatch(/^\/learn\?concept=|^\/study$|^\/onboard$/)
+  }, 15000)
+})
