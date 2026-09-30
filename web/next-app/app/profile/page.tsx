@@ -16,7 +16,7 @@ import { AppSidebar } from '../../components/app-sidebar'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '../../components/ui/sidebar'
 import NextUpSummary from '../../components/NextUpSummary'
 import DailyGoalControl, { getGuestGoal } from '../../components/DailyGoalControl'
-import { selectNextUp, selectShelfHead, isNewUser } from '../../lib/nextUp'
+import { selectNextUp, selectShelfHead, isNewUser, recentlyUnlocked, hrefConceptId, RECENT_UNLOCK_DAYS } from '../../lib/nextUp'
 import { concepts as conceptCatalog } from '../../lib/conceptData'
 
 interface UserInfo {
@@ -91,6 +91,30 @@ export default function ProfilePage() {
       }),
     [dueReviews, weaknesses, progress, activity, user?.diagnostic_completed, scores?.concepts_mastered],
   )
+
+
+  // Recently unlocked: successors unlocked by recently-active concepts
+  // (recency derived client-side from activity — no endpoint needed). Head
+  // and queue destinations are filtered so no two items share an href and
+  // nothing re-links the head concept.
+  const unlockRows = useMemo(() => {
+    const rows = recentlyUnlocked({
+      catalog: conceptCatalog.map(c => ({ id: c.id, label: c.label, prerequisites: c.prerequisites ?? [] })),
+      progress,
+      activity,
+      recentDays: RECENT_UNLOCK_DAYS,
+    })
+    const headCid = hrefConceptId(head.next.href)
+    const seen = new Set([head.next.href, ...head.alternatives.map(a => a.href)])
+    return rows.filter(r => {
+      const href = `/learn?concept=${encodeURIComponent(r.id)}`
+      if (seen.has(href)) return false
+      const cid = hrefConceptId(href)
+      if (cid !== null && cid === headCid) return false
+      seen.add(href)
+      return true
+    }).slice(0, 5)
+  }, [head, progress, activity])
 
 
   useEffect(() => {
@@ -398,6 +422,60 @@ export default function ProfilePage() {
           </div>
         )}
 
+        {dueReviews > 0 && (
+          <Link
+            href="/review"
+            className="mt-6 flex w-full min-w-0 flex-col gap-2 bg-mathua-surface border border-yellow-500/40 px-4 py-3 hover:border-yellow-500 transition-colors sm:flex-row sm:items-center sm:justify-between"
+          >
+            <span className="font-mono text-xs text-yellow-400 min-w-0 break-words [overflow-wrap:anywhere] leading-snug">
+              ⏳ {dueReviews} concept{dueReviews !== 1 ? 's' : ''} due for review
+            </span>
+            <span className="font-mono text-[11px] text-yellow-400 border border-yellow-500/60 px-3 py-1.5 shrink-0 inline-flex items-center justify-center min-h-[36px] w-full sm:w-auto text-center whitespace-nowrap">
+              Review Now →
+            </span>
+          </Link>
+        )}
+
+        {unlockRows.length > 0 && (
+          <section aria-label="Recently unlocked" className="mt-6 w-full max-w-full min-w-0 overflow-hidden border border-mathua-border bg-mathua-surface p-4">
+            <h3 className="font-mono text-[11px] text-mathua-muted uppercase tracking-wider mb-3">
+              Recently unlocked
+            </h3>
+            <ul className="space-y-1.5">
+              {unlockRows.map(r => (
+                <li key={r.id}>
+                  <Link
+                    href={`/learn?concept=${encodeURIComponent(r.id)}`}
+                    className="flex items-baseline gap-2 font-mono text-[11px] text-mathua-secondary hover:text-mathua-blue min-w-0"
+                  >
+                    <span className="shrink-0 uppercase tracking-wider text-mathua-muted">Unlocked</span>
+                    <span className="truncate">{r.label}</span>
+                    <span className="ml-auto shrink-0 text-mathua-muted">via {r.via}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {/* Quiz gate — backend signal, lifetime fallback */}
+        {scores && (scores.quiz_due ?? scores.xp_total >= 50) && (
+          <div className="mt-6 w-full min-w-0 overflow-hidden border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+            <div className="w-full sm:flex-1 min-w-0">
+              <div className="flex flex-col items-start gap-1.5 sm:flex-row sm:items-center sm:gap-2 flex-wrap">
+                <span className="shrink-0 bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">Quiz due</span>
+                <span className="break-words font-mono text-[11px] sm:text-xs text-mathua-primary">50 XP reached: mastery check recommended</span>
+              </div>
+              <div className="mt-2 h-1 bg-mathua-code overflow-hidden">
+                <div className="h-full bg-mathua-blue" style={{ width: `${Math.min(((scores.xp_since_quiz ?? scores.xp_total) / 50) * 100, 100)}%` }} />
+              </div>
+            </div>
+            <Link href="/goals?quiz=1" className="w-full sm:w-auto sm:shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap">
+              Take Test →
+            </Link>
+          </div>
+        )}
+
         {/* Diagnostic CTA — new users only: hidden once completed or once
             the learner is no longer new. Retake stays URL-reachable. */}
         {!user.diagnostic_completed && isNew && nextUp.kind !== 'diagnostic' && (
@@ -424,51 +502,7 @@ export default function ProfilePage() {
         </section>
         )}
 
-        {/* Quiz gate — backend signal, lifetime fallback */}
-        {scores && (scores.quiz_due ?? scores.xp_total >= 50) && (
-          <div className="mt-6 w-full min-w-0 overflow-hidden border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-            <div className="w-full sm:flex-1 min-w-0">
-              <div className="flex flex-col items-start gap-1.5 sm:flex-row sm:items-center sm:gap-2 flex-wrap">
-                <span className="shrink-0 bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">Quiz due</span>
-                <span className="break-words font-mono text-[11px] sm:text-xs text-mathua-primary">50 XP reached: mastery check recommended</span>
-              </div>
-              <div className="mt-2 h-1 bg-mathua-code overflow-hidden">
-                <div className="h-full bg-mathua-blue" style={{ width: `${Math.min(((scores.xp_since_quiz ?? scores.xp_total) / 50) * 100, 100)}%` }} />
-              </div>
-            </div>
-            <Link href="/goals?quiz=1" className="w-full sm:w-auto sm:shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap">
-              Take Test →
-            </Link>
-          </div>
-        )}
-
-        {dueReviews > 0 && (
-          <Link
-            href="/review"
-            className="mt-6 flex w-full min-w-0 flex-col gap-2 bg-mathua-surface border border-yellow-500/40 px-4 py-3 hover:border-yellow-500 transition-colors sm:flex-row sm:items-center sm:justify-between"
-          >
-            <span className="font-mono text-xs text-yellow-400 min-w-0 break-words [overflow-wrap:anywhere] leading-snug">
-              ⏳ {dueReviews} concept{dueReviews !== 1 ? 's' : ''} due for review
-            </span>
-            <span className="font-mono text-[11px] text-yellow-400 border border-yellow-500/60 px-3 py-1.5 shrink-0 inline-flex items-center justify-center min-h-[36px] w-full sm:w-auto text-center whitespace-nowrap">
-              Review Now →
-            </span>
-          </Link>
-        )}
-
-        {/* Activity heatmap — centered, GitHub-style, full-width on mobile */}
-        <section id="activity" className="mt-8 flex min-w-0 flex-col items-stretch scroll-mt-28">
-          <h2 className="font-serif text-[1.05rem] font-normal text-mathua-primary mb-4 w-full">
-            Activity
-          </h2>
-          <div className="w-full max-w-full min-w-0 flex justify-center overflow-hidden">
-            <div className="w-full max-w-full min-w-0">
-              <ActivityHeatmap data={activity} />
-            </div>
-          </div>
-        </section>
-
-        {/* Domain progress + Struggles — mobile-first: CTA on top, stacked */}
+        {/* Domain progress — mastered / completed / locked per domain */}
         <section id="domains" className="mt-8 min-w-0 scroll-mt-28">
           <div className="grid grid-cols-1 gap-4 min-w-0">
             <DomainProgress progress={progress} />
@@ -481,6 +515,18 @@ export default function ProfilePage() {
             <Link href="/progress-card" className="font-mono text-xs text-mathua-blue hover:text-mathua-blue-hover">
               View progress card →
             </Link>
+          </div>
+        </section>
+
+        {/* Activity heatmap — centered, GitHub-style, full-width on mobile */}
+        <section id="activity" className="mt-8 flex min-w-0 flex-col items-stretch scroll-mt-28">
+          <h2 className="font-serif text-[1.05rem] font-normal text-mathua-primary mb-4 w-full">
+            Activity
+          </h2>
+          <div className="w-full max-w-full min-w-0 flex justify-center overflow-hidden">
+            <div className="w-full max-w-full min-w-0">
+              <ActivityHeatmap data={activity} />
+            </div>
           </div>
         </section>
 

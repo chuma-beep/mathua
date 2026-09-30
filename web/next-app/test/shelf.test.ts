@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { selectShelf, selectShelfHead, buildCandidates, upcomingLocked, type ShelfInput } from '../lib/nextUp'
+import { selectShelf, selectShelfHead, buildCandidates, upcomingLocked, recentlyUnlocked, hrefConceptId, type ShelfInput } from '../lib/nextUp'
 
 const catalog = [
   { id: 'a', label: 'A', prerequisites: [] as string[], avgTimeSeconds: 10 },
@@ -166,5 +166,87 @@ describe('upcomingLocked', () => {
 
   it('ignores non-successors', () => {
     expect(upcomingLocked(catalog, {}, 'c').map(l => l.id)).not.toContain('b')
+  })
+})
+
+describe('completion unlock rule (PR1 client half)', () => {
+  it('treats a completed prerequisite as satisfied', () => {
+    const cands = buildCandidates({
+      ...base,
+      progress: {
+        a: { status: 'MASTERED', streak: 3 },
+        b: { status: 'learning', streak: 1, completed: true },
+        c: { status: 'MASTERED', streak: 3 },
+      },
+    })
+    // d.word needs b + c: b is completed-not-mastered, c mastered → eligible.
+    expect(cands.map(c => c.id)).toContain('d.word')
+  })
+
+  it('keeps locked successors locked without completion', () => {
+    const cands = buildCandidates({
+      ...base,
+      progress: {
+        a: { status: 'MASTERED', streak: 3 },
+        b: { status: 'learning', streak: 1 },
+        c: { status: 'MASTERED', streak: 3 },
+      },
+    })
+    expect(cands.map(c => c.id)).not.toContain('d.word')
+  })
+})
+
+describe('hrefConceptId', () => {
+  it('parses the concept id regardless of extra params', () => {
+    expect(hrefConceptId('/learn?concept=a.b&seed=42&difficulty=0.7')).toBe('a.b')
+    expect(hrefConceptId('/learn?concept=a.b')).toBe('a.b')
+    expect(hrefConceptId('/review')).toBeNull()
+    expect(hrefConceptId('/study')).toBeNull()
+  })
+})
+
+describe('recentlyUnlocked', () => {
+  const today = new Date().toISOString().slice(0, 10)
+  const old = new Date(Date.now() - 30 * 86400000).toISOString().slice(0, 10)
+
+  it('lists successors unlocked by recently-active concepts', () => {
+    const rows = recentlyUnlocked({
+      catalog,
+      progress: {
+        a: { status: 'MASTERED', streak: 3 },
+        b: { status: 'learning', streak: 2, completed: true },
+        c: { status: 'MASTERED', streak: 3 },
+      },
+      activity: [{ date: today, questions: 5, correct: 4, concepts: ['b'] }],
+      recentDays: 7,
+    })
+    expect(rows.map(r => r.id)).toEqual(['d.word'])
+    expect(rows[0].via).toBe('B')
+  })
+
+  it('ignores stale activity and mastered successors', () => {
+    const rows = recentlyUnlocked({
+      catalog,
+      progress: {
+        a: { status: 'MASTERED', streak: 3 },
+        b: { status: 'learning', streak: 2, completed: true },
+        c: { status: 'MASTERED', streak: 3 },
+        'd.word': { status: 'MASTERED', streak: 10 },
+      },
+      activity: [{ date: old, questions: 5, correct: 4, concepts: ['b'] }],
+      recentDays: 7,
+    })
+    expect(rows).toHaveLength(0)
+  })
+
+  it('omits successors whose prerequisites are still unmet', () => {
+    const rows = recentlyUnlocked({
+      catalog,
+      progress: { a: { status: 'MASTERED', streak: 3 } },
+      activity: [{ date: today, questions: 5, correct: 4, concepts: ['b'] }],
+      recentDays: 7,
+    })
+    // d.word needs c too, which is untouched → still locked.
+    expect(rows).toHaveLength(0)
   })
 })

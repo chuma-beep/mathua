@@ -30,18 +30,31 @@ const DOMAIN_LABELS = {
 } satisfies Record<string, string>
 
 interface Props {
-  progress: Record<string, { status: string }>
+  progress: Record<string, { status: string; completed?: boolean }>
+}
+
+function isMasteredStatus(status?: string): boolean {
+  return (status ?? '').toLowerCase() === 'mastered'
+}
+
+function prereqMet(progress: Record<string, { status: string; completed?: boolean }>, pid: string): boolean {
+  const p = progress[pid]
+  return isMasteredStatus(p?.status) || p?.completed === true
 }
 
 export default function DomainProgress({ progress }: Props) {
   const domains = useMemo(() => {
-    const byDomain = new Map<string, { total: number; mastered: number; learning: number }>()
-    for (const c of conceptsData as { id: string; domain: string }[]) {
-      const entry = byDomain.get(c.domain) || { total: 0, mastered: 0, learning: 0 }
+    const byDomain = new Map<string, { total: number; mastered: number; learning: number; completed: number; locked: number }>()
+    for (const c of conceptsData as { id: string; domain: string; prerequisites?: string[] }[]) {
+      const entry = byDomain.get(c.domain) || { total: 0, mastered: 0, learning: 0, completed: 0, locked: 0 }
       entry.total++
       const p = progress[c.id]
-      if (p?.status === 'MASTERED') entry.mastered++
-      else if (p?.status === 'LEARNING' || p?.status === 'PRACTICING') entry.learning++
+      if (isMasteredStatus(p?.status)) entry.mastered++
+      else if (p?.completed === true) entry.completed++
+      else {
+        if (p?.status === 'LEARNING' || p?.status === 'PRACTICING') entry.learning++
+        if (!(c.prerequisites ?? []).every(pid => prereqMet(progress, pid))) entry.locked++
+      }
       byDomain.set(c.domain, entry)
     }
 
@@ -76,11 +89,11 @@ export default function DomainProgress({ progress }: Props) {
                   style={{ width: `${pct}%` }}
                 />
               </div>
-              <div className="hidden sm:block w-[70px] text-right shrink-0 text-mathua-muted text-[11px]">
-                {d.mastered}/{d.total} · {pct}%
+              <div className="hidden sm:block w-[190px] text-right shrink-0 text-mathua-muted text-[11px]">
+                {d.mastered}/{d.total} · {pct}% · {d.completed} done · {d.locked} locked
               </div>
               <div className="sm:hidden w-full text-right text-mathua-muted text-[10px] leading-none">
-                {d.mastered}/{d.total} · {pct}%
+                {d.mastered}/{d.total} · {pct}% · {d.completed} done · {d.locked} locked
               </div>
             </div>
           )
