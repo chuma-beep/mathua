@@ -50,6 +50,32 @@ def flatten_html(html: str) -> str:
         t.decompose()
     for t in content.find_all(["video", "svg", "img", "button", "input"]):
         t.decompose()
+    # Media often lived in table cells (base-block figures in a right-hand
+    # column). Decomposing them leaves <td></td> behind, which renders as
+    # wide vertical whitespace. Drop cells left empty and columns left
+    # entirely empty so pandoc never emits blank-column tables.
+    for table in content.find_all("table"):
+        rows = [tr for tr in table.find_all("tr")]
+        if not rows:
+            continue
+        if any(cell.get("colspan") or cell.get("rowspan") for tr in rows for cell in tr.find_all(["td", "th"], recursive=False)):
+            continue  # spanning layout: column indexes would be guesses
+        cells_per_row = [tr.find_all(["td", "th"], recursive=False) for tr in rows]
+        ncols = max((len(c) for c in cells_per_row), default=0)
+        for i in range(ncols - 1, -1, -1):
+            column = [cells[i] for cells in cells_per_row if len(cells) > i]
+            if column and all(not c.get_text(strip=True) and not c.find(["img", "svg", "video"]) for c in column):
+                for c in column:
+                    c.decompose()
+        # Rows/cells emptied by the column drop carry no content: remove
+        # them, and the table itself if nothing remains.
+        for tr in rows:
+            if tr.find_parent("table") is not table:
+                continue
+            if not tr.get_text(strip=True) and not tr.find(["img", "svg", "video"]):
+                tr.decompose()
+        if not table.get_text(strip=True):
+            table.decompose()
     for name in ("div", "span", "a", "section", "main", "article", "header", "footer"):
         for t in content.find_all(name):
             t.unwrap()
