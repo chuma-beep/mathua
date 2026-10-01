@@ -136,6 +136,8 @@ export interface AnswerResult {
   xp: number
   expected_answer: string
   ungraded?: boolean
+  /** One sentence naming the mistake, when it is certain. Empty otherwise. */
+  diagnosis?: string
 }
 
 export interface GraphRes {
@@ -1044,6 +1046,8 @@ export interface StudyAnswerRes {
 	xp: number
 	expected_answer?: string
 	ungraded?: boolean
+	/** One sentence naming the mistake, when it is certain. Empty otherwise. */
+	diagnosis?: string
 }
 
 interface StudyAnswerBody {
@@ -1151,6 +1155,8 @@ export interface QuizAnswerRes {
   done: boolean
   correct?: boolean
   feedback?: string
+  /** One sentence naming the mistake, when it is certain. Empty otherwise. */
+  diagnosis?: string
   // The served instance's worked solution, on both verdicts.
   explanation?: string
   xp?: number

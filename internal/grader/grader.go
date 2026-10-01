@@ -22,4 +22,8 @@ type Result struct {
 	// SymPy runtime is missing or errored). Callers must NOT record this as a
 	// student miss: "we couldn't evaluate" is not "you were wrong".
 	Unavailable bool
+	// Diagnosis names the mistake in one sentence when the submitted answer
+	// makes it determinable, and is empty otherwise. It is a description of
+	// what happened, produced only after grading, and never affects Correct.
+	Diagnosis string
 }

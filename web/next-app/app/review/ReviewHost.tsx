@@ -34,7 +34,7 @@ export default function ReviewHost() {
   const [reviewConceptName, setReviewConceptName] = useState('')
   const [reviewCount, setReviewCount] = useState(0)
   const [reviewAnswerInput, setReviewAnswerInput] = useState('')
-  const [reviewLastResult, setReviewLastResult] = useState<{ correct: boolean; feedback: string; explanation?: string; xp?: number } | null>(null)
+  const [reviewLastResult, setReviewLastResult] = useState<{ correct: boolean; feedback: string; explanation?: string; diagnosis?: string; xp?: number } | null>(null)
   const [reviewAccuracy, setReviewAccuracy] = useState({ correct: 0, total: 0 })
   const [reviewXp, setReviewXp] = useState(0)
   const [submitError, setSubmitError] = useState<SubmitError | null>(null)
@@ -111,7 +111,7 @@ export default function ReviewHost() {
       const xp = data.result?.xp ?? 0
       setReviewAccuracy(prev => ({ correct: prev.correct + (correct ? 1 : 0), total: prev.total + 1 }))
       setReviewXp(prev => prev + xp)
-      setReviewLastResult({ correct, feedback, explanation: data.result?.explanation, xp })
+      setReviewLastResult({ correct, feedback, explanation: data.result?.explanation, diagnosis: data.result?.diagnosis, xp })
       if (data.done || !data.next_question) {
         setFinished(true)
         setTimeout(() => {
@@ -271,6 +271,10 @@ export default function ReviewHost() {
                 <KatexContent className="text-mathua-secondary text-sm text-left whitespace-pre-wrap">{reviewLastResult.explanation}</KatexContent>
               ) : (
                 <KatexContent className="text-mathua-secondary text-sm">{reviewLastResult.feedback}</KatexContent>
+              )}
+              {/* Names the mistake when it is certain; empty otherwise. */}
+              {reviewLastResult.diagnosis && (
+                <p className="mt-2 text-center font-mono text-[11px] text-mathua-muted">{reviewLastResult.diagnosis}</p>
               )}
             </div>
           )}

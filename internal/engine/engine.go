@@ -113,6 +113,9 @@ type AnswerResult struct {
 	// Ungraded marks a grader infrastructure fault: the answer was NOT
 	// evaluated and nothing was recorded. Clients should retry, not penalize.
 	Ungraded bool `json:"ungraded,omitempty"`
+	// Diagnosis names the mistake in one sentence, when it can be determined
+	// with certainty. Empty most of the time, and never before grading.
+	Diagnosis string `json:"diagnosis,omitempty"`
 }
 
 type Engine struct {
@@ -912,17 +915,27 @@ func diagramForConcept(id string) string {
 
 // gradeAnswer uses the generator's own grader when available, otherwise falls back to the type-based router.
 func (e *Engine) gradeAnswer(conceptID string, expectedAnswer, userAnswer string) grader.Result {
-	if gen, err := e.registry.Get(conceptID); err == nil {
-		if gg, ok := gen.(generator.GradedGenerator); ok {
-			return gg.Grade(expectedAnswer, userAnswer)
-		}
-	}
-	c := e.dag.Concept(conceptID)
 	gradingType := grader.GradingNumeric
-	if c != nil {
+	if c := e.dag.Concept(conceptID); c != nil {
 		gradingType = grader.GradingType(c.GradingType)
 	}
-	return e.gr.Grade(gradingType, expectedAnswer, userAnswer)
+	var res grader.Result
+	if gen, err := e.registry.Get(conceptID); err == nil {
+		if gg, ok := gen.(generator.GradedGenerator); ok {
+			res = gg.Grade(expectedAnswer, userAnswer)
+		}
+	}
+	if res == (grader.Result{}) {
+		res = e.gr.Grade(gradingType, expectedAnswer, userAnswer)
+	}
+	// Diagnosis is applied here rather than inside the graders so it covers a
+	// custom GradedGenerator as well as the type router. It never touches
+	// Correct: it describes a miss after the fact, and is empty whenever the
+	// mistake cannot be named with certainty.
+	if !res.Correct && !res.Unavailable {
+		res.Diagnosis = grader.Diagnose(gradingType, expectedAnswer, userAnswer)
+	}
+	return res
 }
 
 // GradeAnswer is the single canonical grading entry point: it honours a
@@ -1206,6 +1219,7 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 	return &AnswerResult{
 		Correct:        gr.Correct,
 		Feedback:       gr.Feedback,
+		Diagnosis:      gr.Diagnosis,
 		NewStatus:      newStatus,
 		Explanation:    explanation,
 		Streak:         progress.Streak,
@@ -1466,6 +1480,7 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 	return &AnswerResult{
 		Correct:        gr.Correct,
 		Feedback:       gr.Feedback,
+		Diagnosis:      gr.Diagnosis,
 		NewStatus:      newStatus,
 		Explanation:    explanation,
 		Streak:         progress.Streak,

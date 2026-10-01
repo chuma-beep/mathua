@@ -38,7 +38,7 @@ export default function QuizHost() {
   const [quizConceptName, setQuizConceptName] = useState('')
   const [quizCount, setQuizCount] = useState(0)
   const [quizAnswerInput, setQuizAnswerInput] = useState('')
-  const [quizLastResult, setQuizLastResult] = useState<{ correct: boolean; feedback: string; explanation?: string; xp?: number } | null>(null)
+  const [quizLastResult, setQuizLastResult] = useState<{ correct: boolean; feedback: string; explanation?: string; diagnosis?: string; xp?: number } | null>(null)
   const [quizAccuracy, setQuizAccuracy] = useState({ correct: 0, total: 0 })
   const [quizTimeLimit, setQuizTimeLimit] = useState(0)
   const [quizRemaining, setQuizRemaining] = useState(0)
@@ -126,7 +126,7 @@ export default function QuizHost() {
       const correct = data.correct || false
       const feedback = data.feedback || (correct ? 'Correct!' : 'Not quite.')
       setQuizAccuracy(prev => ({ correct: prev.correct + (correct ? 1 : 0), total: prev.total + 1 }))
-      setQuizLastResult({ correct, feedback, explanation: data.explanation, xp: data.xp })
+      setQuizLastResult({ correct, feedback, explanation: data.explanation, diagnosis: data.diagnosis, xp: data.xp })
       if (data.remedial?.length) {
         setQuizRemedial(prev => Array.from(new Set([...prev, ...(data.remedial ?? [])])))
       }
@@ -348,6 +348,10 @@ export default function QuizHost() {
                 <KatexContent className="text-mathua-secondary text-sm whitespace-pre-wrap text-left">{quizLastResult.explanation}</KatexContent>
               ) : (
                 <KatexContent className="text-mathua-secondary text-sm">{quizLastResult.feedback}</KatexContent>
+              )}
+              {/* Names the mistake when it is certain; empty otherwise. */}
+              {quizLastResult.diagnosis && (
+                <p className="mt-2 font-mono text-[11px] text-mathua-muted">{quizLastResult.diagnosis}</p>
               )}
             </div>
           )}

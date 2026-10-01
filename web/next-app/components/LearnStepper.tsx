@@ -24,7 +24,7 @@ interface QEntry {
   answer: string
   checking: boolean
   servedAt: number
-  feedback: { correct: boolean; text: string; xp: number } | null
+  feedback: { correct: boolean; text: string; diagnosis?: string; xp: number } | null
 }
 
 type Entry =
@@ -260,7 +260,15 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
         setConsecutive(next)
         setMisses(0)
         setDifficulty(nextDiff)
-        setEntry(key, { checking: false, feedback: { correct: true, text: res.explanation ?? entry.q.explanation, xp: res.xp ?? 0 } })
+        setEntry(key, {
+          checking: false,
+          feedback: {
+            correct: true,
+            text: res.explanation ?? entry.q.explanation,
+            diagnosis: res.diagnosis,
+            xp: res.xp ?? 0,
+          },
+        })
         const est = masteryEstimate(nextHistory)
         const advance = est.decision === 'advance' || next >= REQUIRED_IN_A_ROW
         appendAfter(350, async () => {
@@ -295,7 +303,15 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
         setConsecutive(0)
         setMisses(m)
         setDifficulty(nextDiff)
-        setEntry(key, { checking: false, feedback: { correct: false, text: res.explanation || entry.q.explanation, xp: 0 } })
+        setEntry(key, {
+          checking: false,
+          feedback: {
+            correct: false,
+            text: res.explanation || entry.q.explanation,
+            diagnosis: res.diagnosis,
+            xp: 0,
+          },
+        })
         appendAfter(350, async () => {
           if (m >= 3) {
             // Safety net only: note + easier question below, prereq links.
@@ -517,6 +533,12 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
                       reasoning that made it right. Guarded on a non-empty
                       string so a server that returns nothing leaves no empty
                       section behind. */}
+                  {/* The mistake, when it can be named with certainty. It is
+                      a description of what happened, never a hint about what
+                      to do, and it is empty far more often than not. */}
+                  {qe.feedback.diagnosis && (
+                    <p data-diagnosis className="mt-2 font-mono text-[11px] text-mathua-muted">{qe.feedback.diagnosis}</p>
+                  )}
                   {qe.feedback.text && (
                     <div className="mt-1.5">
                       <p className="font-mono text-[11px] uppercase tracking-wider text-mathua-muted">
