@@ -1,0 +1,15 @@
+{
+  "concept": "arith.sqrt.simplify",
+  "setup": "You are simplifying $\\sqrt{[[n]]}$.",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "Split [[n]] into a perfect square and what is left: [[n]] = [[square]]² × [[b]]."
+    },
+    {
+      "fact": "square",
+      "say": "The square root splits the same way: $\\sqrt{[[square]]^2 \\times [[b]]} = [[square]]\\sqrt{[[b]]}$."
+    }
+  ],
+  "answer": "So $\\sqrt{[[n]]} = [[square]]\\sqrt{[[b]]}$, pulling out the [[square]] that was hiding inside the root."
+}

@@ -1,0 +1,15 @@
+{
+  "concept": "arith.factor.find",
+  "setup": "A factor of [[n]] is a number that divides into [[n]] exactly, with nothing left over.",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "Start at 1: it divides everything, so 1 is always a factor of [[n]]."
+    },
+    {
+      "fact": "factors",
+      "say": "Work upwards from 1 to [[n]], keeping each number that divides [[n]] with no remainder. The ones that survive are [[factors]]."
+    }
+  ],
+  "answer": "The factors of [[n]] are [[factors]]."
+}

@@ -1,0 +1,15 @@
+{
+  "concept": "arith.mult.concept",
+  "setup": "There are [[groups]] equal groups with [[per_group]] in each.",
+  "steps": [
+    {
+      "fact": "groups",
+      "say": "Count by [[per_group]] at a time, once for each of the [[groups]] groups."
+    },
+    {
+      "fact": "total",
+      "say": "[[groups]] × [[per_group]] = [[total]]."
+    }
+  ],
+  "answer": "[[groups]] groups of [[per_group]] is [[total]]."
+}

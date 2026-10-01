@@ -1,0 +1,15 @@
+{
+  "concept": "arith.order_ops.full",
+  "setup": "You are evaluating [[q]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Brackets are the very first step in PEMDAS, so settle $([[a]] + [[b]])$ before anything outside it is touched."
+    },
+    {
+      "fact": "c",
+      "say": "Then the multiplication carries that bracketed total into [[c]]."
+    }
+  ],
+  "answer": "[[q]] = [[result]]."
+}

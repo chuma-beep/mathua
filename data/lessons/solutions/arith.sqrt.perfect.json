@@ -1,0 +1,15 @@
+{
+  "concept": "arith.sqrt.perfect",
+  "setup": "You are finding $\\sqrt{[[radicand]]}$.",
+  "steps": [
+    {
+      "fact": "r",
+      "say": "A square root is the number that squares to the number under the root. Here [[r]] × [[r]] = [[radicand]]."
+    },
+    {
+      "fact": "r",
+      "say": "So [[r]] is exactly the number being looked for."
+    }
+  ],
+  "answer": "$\\sqrt{[[radicand]]} = [[r]]$, because [[r]]² = [[radicand]]."
+}

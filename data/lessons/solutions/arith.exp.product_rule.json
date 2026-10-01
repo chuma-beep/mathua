@@ -1,0 +1,15 @@
+{
+  "concept": "arith.exp.product_rule",
+  "setup": "You are simplifying $[[base]]^{[[e1]]} \\times [[base]]^{[[e2]]}$.",
+  "steps": [
+    {
+      "fact": "e1",
+      "say": "Both powers have the same base [[base]], so the exponents combine by adding: [[e1]] + [[e2]] = [[sum_exp]]."
+    },
+    {
+      "fact": "sum_exp",
+      "say": "That is the product rule — it works because each power is repeated multiplication, so multiplying them stacks all the copies together."
+    }
+  ],
+  "answer": "The product is $[[base]]^{[[sum_exp]]}$."
+}

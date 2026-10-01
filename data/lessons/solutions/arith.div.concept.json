@@ -1,0 +1,15 @@
+{
+  "concept": "arith.div.concept",
+  "setup": "You have [[total]] items to share into [[groups]] equal groups.",
+  "steps": [
+    {
+      "fact": "groups",
+      "say": "The number of groups is [[groups]], so each group holds the same number."
+    },
+    {
+      "fact": "per_group",
+      "say": "[[total]] ÷ [[groups]] = [[per_group]] — check by multiplying back: [[groups]] × [[per_group]] = [[total]]."
+    }
+  ],
+  "answer": "Each group holds [[per_group]] items."
+}

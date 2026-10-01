@@ -1,0 +1,19 @@
+{
+  "concept": "arith.factor.lcm",
+  "setup": "You are finding the smallest number that both [[a]] and [[b]] divide into exactly.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The LCM is a multiple of [[a]] and a multiple of [[b]], so it has to be at least as large as each."
+    },
+    {
+      "fact": "gcd",
+      "say": "There is a shortcut: LCM = ([[a]] × [[b]]) ÷ GCF. The two numbers share a factor of [[gcd]], which is counted twice unless it is divided back out once."
+    },
+    {
+      "fact": "lcm",
+      "say": "So the LCM is [[lcm]]."
+    }
+  ],
+  "answer": "The least common multiple of [[a]] and [[b]] is [[lcm]]."
+}

@@ -1,0 +1,15 @@
+{
+  "concept": "arith.div.word",
+  "setup": "You have [[total]] [[item]] shared equally among [[people]] [[person]].",
+  "steps": [
+    {
+      "fact": "people",
+      "say": "The number being shared among is [[people]], so each gets the same amount."
+    },
+    {
+      "fact": "quotient",
+      "say": "[[total]] ÷ [[people]] = [[quotient]] [[item]] each. Check: [[people]] × [[quotient]] = [[total]]."
+    }
+  ],
+  "answer": "Each [[person]] gets [[quotient]] [[item]]."
+}

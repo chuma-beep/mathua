@@ -1,0 +1,19 @@
+{
+  "concept": "arith.order_ops.nested",
+  "setup": "You are evaluating [[q]].",
+  "steps": [
+    {
+      "fact": "e",
+      "say": "Work strictly inside-out. First the power: $([[b]])^{[[e]]}$ is [[b]] multiplied by itself [[e]] times."
+    },
+    {
+      "fact": "c",
+      "say": "Next the multiplication, with [[c]] and the power."
+    },
+    {
+      "fact": "a",
+      "say": "Only now, with everything else a single value, does the outside addition of [[a]] happen."
+    }
+  ],
+  "answer": "[[q]] = [[result]]."
+}

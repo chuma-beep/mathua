@@ -1,0 +1,15 @@
+{
+  "concept": "arith.mult.triple",
+  "setup": "You are multiplying [[a]] by [[b]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Because [[a]] is a whole number, the easiest route is repeated addition: [[b]] added together [[a]] times."
+    },
+    {
+      "fact": "total",
+      "say": "[[a]] × [[b]] = [[total]]."
+    }
+  ],
+  "answer": "[[a]] × [[b]] = [[total]]."
+}

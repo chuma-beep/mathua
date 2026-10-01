@@ -1,0 +1,15 @@
+{
+  "concept": "arith.div.remainder",
+  "setup": "You are dividing [[dividend]] by [[divisor]], and the division does not come out even.",
+  "steps": [
+    {
+      "fact": "divisor",
+      "say": "Find the largest number of times [[divisor]] fits inside [[dividend]]: that is [[quotient]] times, using [[used]] and leaving something over."
+    },
+    {
+      "fact": "remainder",
+      "say": "What is left is [[dividend]] − [[used]] = [[remainder]]. It must be smaller than [[divisor]], or another [[divisor]] would have fitted."
+    }
+  ],
+  "answer": "The quotient is [[quotient]] with a remainder of [[remainder]]."
+}

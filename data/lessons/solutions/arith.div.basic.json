@@ -1,0 +1,15 @@
+{
+  "concept": "arith.div.basic",
+  "setup": "You are dividing [[dividend]] by [[divisor]].",
+  "steps": [
+    {
+      "fact": "divisor",
+      "say": "Ask how many groups of [[divisor]] fit inside [[dividend]] — that count is the quotient."
+    },
+    {
+      "fact": "quotient",
+      "say": "[[dividend]] ÷ [[divisor]] = [[quotient]]. Check it: [[divisor]] × [[quotient]] = [[dividend]]."
+    }
+  ],
+  "answer": "[[dividend]] ÷ [[divisor]] = [[quotient]]."
+}

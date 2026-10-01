@@ -1,0 +1,19 @@
+{
+  "concept": "arith.add.double",
+  "setup": "You are adding the two-digit numbers [[a]] and [[b]].",
+  "steps": [
+    {
+      "fact": "ones_a",
+      "say": "Start with the ones column: [[ones_a]] and [[ones_b]]."
+    },
+    {
+      "fact": "sum",
+      "say": "If those reach 10 or more, the extra ten is a carry — it adds one to the tens column on the left, and the ones column keeps only what is left over."
+    },
+    {
+      "fact": "sum",
+      "say": "Now the tens column, with that carry added, gives the tens digit of [[sum]]."
+    }
+  ],
+  "answer": "Column by column, [[a]] + [[b]] = [[sum]]."
+}

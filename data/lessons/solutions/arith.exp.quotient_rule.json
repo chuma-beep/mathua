@@ -1,0 +1,15 @@
+{
+  "concept": "arith.exp.quotient_rule",
+  "setup": "You are simplifying $\\frac{[[base]]^{[[e1]]}}{[[base]]^{[[e2]]}}$.",
+  "steps": [
+    {
+      "fact": "e1",
+      "say": "The powers share the base [[base]], so the exponents combine by subtracting: [[e1]] − [[e2]] = [[diff_exp]]."
+    },
+    {
+      "fact": "diff_exp",
+      "say": "Dividing stacks the multiplication in the top against the bottom, so the leftover copies are the difference."
+    }
+  ],
+  "answer": "The quotient is $[[base]]^{[[diff_exp]]}$."
+}

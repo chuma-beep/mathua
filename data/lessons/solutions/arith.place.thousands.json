@@ -1,0 +1,19 @@
+{
+  "concept": "arith.place.thousands",
+  "setup": "The number [[n]] is built from digits, and each digit's value depends on where it sits.",
+  "steps": [
+    {
+      "fact": "digit",
+      "say": "The digit in the [[label]] place of [[n]] is [[digit]]. A digit on its own is not a value — its value is the digit times the size of its place."
+    },
+    {
+      "fact": "place_unit",
+      "say": "The [[label]] place is worth [[place_unit]] each: one unit in that place is a whole thousand."
+    },
+    {
+      "fact": "value",
+      "say": "So the value is [[digit]] × [[place_unit]] = [[value]]."
+    }
+  ],
+  "answer": "The [[label]] digit is [[digit]], and it is worth [[value]]."
+}

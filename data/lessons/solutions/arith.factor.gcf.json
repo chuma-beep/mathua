@@ -1,0 +1,19 @@
+{
+  "concept": "arith.factor.gcf",
+  "setup": "You are finding the largest number that divides both [[a]] and [[b]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The GCF must divide [[a]] exactly, so it is one of [[a]]'s factors."
+    },
+    {
+      "fact": "b",
+      "say": "It must also divide [[b]], so the answer is the biggest number in both factor lists."
+    },
+    {
+      "fact": "gcd",
+      "say": "That common number is [[gcd]]."
+    }
+  ],
+  "answer": "The greatest common factor of [[a]] and [[b]] is [[gcd]]."
+}

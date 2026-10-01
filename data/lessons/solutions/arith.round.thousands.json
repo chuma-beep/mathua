@@ -1,0 +1,19 @@
+{
+  "concept": "arith.round.thousands",
+  "setup": "You are rounding [[n]] to the nearest [[to]].",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "Write the number down: [[n]]."
+    },
+    {
+      "fact": "remainder",
+      "say": "See what is left over after the [[to]]s: [[n]] leaves [[remainder]]."
+    },
+    {
+      "fact": "rounded",
+      "say": "If the leftover is half of [[to]] or more, round up to the next [[to]]; if less, round down. That gives [[rounded]]."
+    }
+  ],
+  "answer": "Rounded to the nearest [[to]], [[n]] becomes [[rounded]]."
+}

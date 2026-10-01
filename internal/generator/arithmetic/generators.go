@@ -104,6 +104,7 @@ func (g *addGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		Question:    fmt.Sprintf("\\(%d + %d = ?\\)", a, b),
 		Answer:      fmt.Sprintf("%d", a+b),
 		Explanation: fmt.Sprintf("Given %d + %d. Step 1: start at %d. Step 2: count up %d → %d. Answer: %d", a, b, a, b, a+b, a+b),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "sum": strconv.Itoa(a + b), "ones_a": strconv.Itoa(a % 10), "ones_b": strconv.Itoa(b % 10)},
 	}
 }
 
@@ -125,6 +126,7 @@ func (g *addWordGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 		Question:    fmt.Sprintf("You have %d %s. Your friend gives you %d more. How many do you have now?", a, item, b),
 		Answer:      fmt.Sprintf("%d", a+b),
 		Explanation: fmt.Sprintf("Given %d + %d %s. Step 1: start at %d. Step 2: count up %d → %d. Answer: %d %s", a, b, item, a, b, a+b, a+b, item),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "sum": strconv.Itoa(a + b), "item": item},
 	}
 }
 
@@ -144,6 +146,7 @@ func (g *subGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		Question:    fmt.Sprintf("\\(%d - %d = ?\\)", a, b),
 		Answer:      fmt.Sprintf("%d", a-b),
 		Explanation: fmt.Sprintf("%d - %d = %d", a, b, a-b),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "diff": strconv.Itoa(a - b)},
 	}
 }
 
@@ -164,6 +167,7 @@ func (g *subBorrowGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		Question:    fmt.Sprintf("\\(%d - %d = ?\\)", a, b),
 		Answer:      fmt.Sprintf("%d", a-b),
 		Explanation: fmt.Sprintf("%d - %d = %d (borrowing required)", a, b, a-b),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "diff": strconv.Itoa(a - b), "tens_a": strconv.Itoa(tensA), "ones_a": strconv.Itoa(onesA), "tens_b": strconv.Itoa(tensB), "ones_b": strconv.Itoa(onesB), "ones_after_borrow": strconv.Itoa(onesA + 10), "ones_diff": strconv.Itoa(onesA + 10 - onesB), "tens_left": strconv.Itoa(tensA - 1 - tensB)},
 	}
 }
 
@@ -179,6 +183,7 @@ func (g *subWordGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 		Question:    fmt.Sprintf("You have %d %s. You give away %d. How many are left?", a, item, b),
 		Answer:      fmt.Sprintf("%d", a-b),
 		Explanation: fmt.Sprintf("%d - %d = %d %s left", a, b, a-b, item),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "diff": strconv.Itoa(a - b), "item": item},
 	}
 }
 
@@ -218,6 +223,7 @@ func (g *placeValueGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Question:    fmt.Sprintf("In the number %d, what is the value of the digit in the %s place?", n, g.label),
 		Answer:      fmt.Sprintf("%d", value),
 		Explanation: fmt.Sprintf("The %s digit is %d, value = %d x %d = %d", g.label, digit, digit, placeUnit, value),
+		Facts:       map[string]string{"n": strconv.Itoa(n), "digit": strconv.Itoa(digit), "place_unit": strconv.Itoa(placeUnit), "value": strconv.Itoa(value), "label": g.label},
 	}
 }
 
@@ -238,6 +244,7 @@ func (g *roundGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		Question:    fmt.Sprintf("Round %d to the nearest %d.", n, to),
 		Answer:      fmt.Sprintf("%d", rounded),
 		Explanation: fmt.Sprintf("%d rounded to nearest %d is %d.", n, to, rounded),
+		Facts:       map[string]string{"n": strconv.Itoa(n), "to": strconv.Itoa(to), "rounded": strconv.Itoa(rounded), "remainder": strconv.Itoa(n % to)},
 	}
 }
 
@@ -251,6 +258,7 @@ func (g *multConceptGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("%d groups of %d = ?", a, b),
 		Answer:      fmt.Sprintf("%d", a*b),
 		Explanation: fmt.Sprintf("%d groups of %d means %d x %d = %d", a, b, a, b, a*b),
+		Facts:       map[string]string{"groups": strconv.Itoa(a), "per_group": strconv.Itoa(b), "total": strconv.Itoa(a * b)},
 	}
 }
 
@@ -269,6 +277,7 @@ func (g *multByGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		Question:    fmt.Sprintf("\\(%d \\times %d = ?\\)", f, n),
 		Answer:      fmt.Sprintf("%d", f*n),
 		Explanation: fmt.Sprintf("%d x %d = %d", f, n, f*n),
+		Facts:       map[string]string{"factor": strconv.Itoa(f), "n": strconv.Itoa(n), "total": strconv.Itoa(f * n)},
 	}
 }
 
@@ -282,6 +291,7 @@ func (g *multTablesGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Question:    fmt.Sprintf("\\(%d \\times %d = ?\\)", a, b),
 		Answer:      fmt.Sprintf("%d", a*b),
 		Explanation: fmt.Sprintf("%d x %d = %d", a, b, a*b),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "total": strconv.Itoa(a * b)},
 	}
 }
 
@@ -297,6 +307,7 @@ func (g *multGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		Question:    fmt.Sprintf("\\(%d \\times %d = ?\\)", a, b),
 		Answer:      fmt.Sprintf("%d", a*b),
 		Explanation: fmt.Sprintf("%d x %d = %d", a, b, a*b),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "total": strconv.Itoa(a * b)},
 	}
 }
 
@@ -312,6 +323,7 @@ func (g *multWordGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		Question:    fmt.Sprintf("You have %d bags with %d %s each. How many %s in total?", a, b, item, item),
 		Answer:      fmt.Sprintf("%d", a*b),
 		Explanation: fmt.Sprintf("%d x %d = %d %s", a, b, a*b, item),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "total": strconv.Itoa(a * b), "item": item},
 	}
 }
 
@@ -325,6 +337,7 @@ func (g *divConceptGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Question:    fmt.Sprintf("You have %d items. You split them into %d equal groups. How many in each group?", total, a),
 		Answer:      fmt.Sprintf("%d", b),
 		Explanation: fmt.Sprintf("%d / %d = %d in each group", total, a, b),
+		Facts:       map[string]string{"total": strconv.Itoa(total), "groups": strconv.Itoa(a), "per_group": strconv.Itoa(b)},
 	}
 }
 
@@ -338,6 +351,7 @@ func (g *divBasicGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		Question:    fmt.Sprintf("\\(%d \\div %d = ?\\)", a, b),
 		Answer:      fmt.Sprintf("%d", a/b),
 		Explanation: fmt.Sprintf("%d / %d = %d", a, b, a/b),
+		Facts:       map[string]string{"dividend": strconv.Itoa(a), "divisor": strconv.Itoa(b), "quotient": strconv.Itoa(a / b)},
 	}
 }
 
@@ -360,6 +374,7 @@ func (g *divRemainderGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		Question:    fmt.Sprintf("\\(%d \\div %d = ?\\) (give answer with remainder: Q R)", a, b),
 		Answer:      fmt.Sprintf("%d R %d", a/b, r),
 		Explanation: fmt.Sprintf("Given %d ÷ %d. Step 1: %d × %d = %d (largest multiple ≤ %d). Step 2: remainder %d − %d = %d. Answer: %d R %d", a, b, b, a/b, (a/b)*b, a, a, (a/b)*b, r, a/b, r),
+		Facts:       map[string]string{"dividend": strconv.Itoa(a), "divisor": strconv.Itoa(b), "quotient": strconv.Itoa(a / b), "remainder": strconv.Itoa(r), "used": strconv.Itoa((a / b) * b)},
 	}
 }
 
@@ -386,6 +401,7 @@ func (g *divLongGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 		Question:    fmt.Sprintf("\\(%d \\div %d = ?\\)", a, b),
 		Answer:      fmt.Sprintf("%d", q),
 		Explanation: fmt.Sprintf("Given %d ÷ %d. Step 1: ask how many %ds fit in %d. Step 2: %d × %d = %d. Answer: %d", a, b, b, a, b, q, a, q),
+		Facts:       map[string]string{"dividend": strconv.Itoa(a), "divisor": strconv.Itoa(b), "quotient": strconv.Itoa(q)},
 	}
 }
 
@@ -404,6 +420,7 @@ func (g *divWordGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 		Question:    fmt.Sprintf("You have %d %s shared equally among %d %s. How many does each person get?", a, item, b, person),
 		Answer:      fmt.Sprintf("%d", q),
 		Explanation: fmt.Sprintf("%d / %d = %d %s per person", a, b, q, item),
+		Facts:       map[string]string{"total": strconv.Itoa(a), "people": strconv.Itoa(b), "quotient": strconv.Itoa(q), "item": item, "person": person},
 	}
 }
 
@@ -443,6 +460,7 @@ func (g *factorFindGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Question:    fmt.Sprintf("List all factors of %d. Answer with numbers separated by commas.", n),
 		Answer:      strings.Join(fStr, ","),
 		Explanation: fmt.Sprintf("Factors of %d: %v", n, factors),
+		Facts:       map[string]string{"n": strconv.Itoa(n), "factors": strings.Join(fStr, ", ")},
 	}
 }
 
@@ -475,6 +493,7 @@ func (g *primeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 			Question:    fmt.Sprintf("Is %d prime?", p),
 			Answer:      "yes",
 			Explanation: fmt.Sprintf("%d is prime — only divisible by 1 and itself.", p),
+			Facts:       map[string]string{"p": strconv.Itoa(p)},
 		}
 	}
 	c := composites[rand.Intn(min(len(composites), scale*3))]
@@ -482,6 +501,8 @@ func (g *primeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		Question:    fmt.Sprintf("Is %d prime?", c),
 		Answer:      "no",
 		Explanation: fmt.Sprintf("%d is composite.", c),
+		// Same key as the prime branch: one schema covers both verdicts.
+		Facts: map[string]string{"p": strconv.Itoa(c)},
 	}
 }
 
@@ -499,6 +520,7 @@ func (g *primeFactGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		Question:    fmt.Sprintf("Find the prime factorization of %d.", n),
 		Answer:      strings.Join(fStr, ","),
 		Explanation: fmt.Sprintf("%d = %s", n, strings.Join(fStr, " x ")),
+		Facts:       map[string]string{"n": strconv.Itoa(n), "factors": strings.Join(fStr, " × ")},
 	}
 }
 
@@ -527,6 +549,7 @@ func (g *gcfGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		Question:    fmt.Sprintf("Find the GCF of %d and %d.", a, b),
 		Answer:      fmt.Sprintf("%d", result),
 		Explanation: fmt.Sprintf("GCF(%d, %d) = %d", a, b, result),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "gcd": strconv.Itoa(result)},
 	}
 }
 
@@ -541,6 +564,7 @@ func (g *lcmGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		Question:    fmt.Sprintf("Find the LCM of %d and %d.", a, b),
 		Answer:      fmt.Sprintf("%d", l),
 		Explanation: fmt.Sprintf("LCM(%d, %d) = %d", a, b, l),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "lcm": strconv.Itoa(l), "gcd": strconv.Itoa(mathutil.GCD(a, b))},
 	}
 }
 
@@ -566,6 +590,7 @@ func (g *compositeGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		Question:    fmt.Sprintf("Is %d composite?", n),
 		Answer:      ans,
 		Explanation: exp,
+		Facts:       map[string]string{"n": strconv.Itoa(n), "ans": ans, "is_composite": strconv.FormatBool(isComposite)},
 	}
 }
 
@@ -579,6 +604,7 @@ func (g *expConceptGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Question:    fmt.Sprintf("What is the value of \\(%d^{%d}\\)?", base, exp),
 		Answer:      fmt.Sprintf("%d", mathutil.IntPow(base, exp)),
 		Explanation: fmt.Sprintf("\\(%d^{%d} = %s = %d\\)", base, exp, strings.Repeat(fmt.Sprintf("%d \\times ", base), exp-1)+fmt.Sprintf("%d", base), mathutil.IntPow(base, exp)),
+		Facts:       map[string]string{"base": strconv.Itoa(base), "exp": strconv.Itoa(exp), "value": strconv.Itoa(mathutil.IntPow(base, exp))},
 	}
 }
 
@@ -595,6 +621,7 @@ func (g *expEvalGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 		Question:    fmt.Sprintf("\\(%d^{%d} =\\) ?", base, exp),
 		Answer:      fmt.Sprintf("%d", mathutil.IntPow(base, exp)),
 		Explanation: fmt.Sprintf("\\(%d^{%d} = %d\\)", base, exp, mathutil.IntPow(base, exp)),
+		Facts:       map[string]string{"base": strconv.Itoa(base), "exp": strconv.Itoa(exp), "value": strconv.Itoa(mathutil.IntPow(base, exp))},
 	}
 }
 
@@ -609,6 +636,7 @@ func (g *expProductRuleGen) Generate(ctx generator.GeneratorContext) generator.P
 		Question:    fmt.Sprintf("Simplify: \\(%d^{%d} \\times %d^{%d}\\)", base, e1, base, e2),
 		Answer:      fmt.Sprintf("%d^%d", base, e1+e2),
 		Explanation: fmt.Sprintf("\\(%d^{%d} \\times %d^{%d} = %d^{%d+%d} = %d^{%d}\\)", base, e1, base, e2, base, e1, e2, base, e1+e2),
+		Facts:       map[string]string{"base": strconv.Itoa(base), "e1": strconv.Itoa(e1), "e2": strconv.Itoa(e2), "sum_exp": strconv.Itoa(e1 + e2)},
 	}
 }
 
@@ -626,6 +654,7 @@ func (g *expQuotientRuleGen) Generate(ctx generator.GeneratorContext) generator.
 		Question:    fmt.Sprintf("Simplify: \\(\\frac{%d^{%d}}{%d^{%d}}\\)", base, e1, base, e2),
 		Answer:      fmt.Sprintf("%d^%d", base, e1-e2),
 		Explanation: fmt.Sprintf("\\(\\frac{%d^{%d}}{%d^{%d}} = %d^{%d-%d} = %d^{%d}\\)", base, e1, base, e2, base, e1, e2, base, e1-e2),
+		Facts:       map[string]string{"base": strconv.Itoa(base), "e1": strconv.Itoa(e1), "e2": strconv.Itoa(e2), "diff_exp": strconv.Itoa(e1 - e2)},
 	}
 }
 
@@ -640,6 +669,7 @@ func (g *expPowerRuleGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		Question:    fmt.Sprintf("Simplify: \\((%d^{%d})^{%d}\\)", base, e1, e2),
 		Answer:      fmt.Sprintf("%d^%d", base, e1*e2),
 		Explanation: fmt.Sprintf("\\((%d^{%d})^{%d} = %d^{%d \\times %d} = %d^{%d}\\)", base, e1, e2, base, e1, e2, base, e1*e2),
+		Facts:       map[string]string{"base": strconv.Itoa(base), "e1": strconv.Itoa(e1), "e2": strconv.Itoa(e2), "prod_exp": strconv.Itoa(e1 * e2)},
 	}
 }
 
@@ -655,6 +685,7 @@ func (g *sqrtPerfectGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("\\(\\sqrt{%d} =\\) ?", r*r),
 		Answer:      fmt.Sprintf("%d", r),
 		Explanation: fmt.Sprintf("\\(\\sqrt{%d} = %d\\) because \\(%d \\times %d = %d\\)", r*r, r, r, r, r*r),
+		Facts:       map[string]string{"r": strconv.Itoa(r), "radicand": strconv.Itoa(r * r)},
 	}
 }
 
@@ -672,6 +703,7 @@ func (g *sqrtSimplifyGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		Question:    fmt.Sprintf("Simplify: \\(\\sqrt{%d}\\)", n),
 		Answer:      fmt.Sprintf("%d sqrt(%d)", square, b),
 		Explanation: fmt.Sprintf("\\(\\sqrt{%d} = \\sqrt{%d \\times %d} = \\sqrt{%d} \\times \\sqrt{%d} = %d \\sqrt{%d}\\)", n, square*square, b, square*square, b, square, b),
+		Facts:       map[string]string{"n": strconv.Itoa(n), "square": strconv.Itoa(square), "b": strconv.Itoa(b)},
 	}
 }
 
@@ -707,6 +739,7 @@ func (g *negNumberLineGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Question:    fmt.Sprintf("What is the opposite of %d?", a),
 		Answer:      fmt.Sprintf("%d", -a),
 		Explanation: fmt.Sprintf("The opposite of %d is %d.", a, -a),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "opposite": strconv.Itoa(-a)},
 	}
 }
 
@@ -720,6 +753,7 @@ func (g *negAddSubGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		Question:    fmt.Sprintf("\\(%d + (%d) = ?\\)", a, b),
 		Answer:      fmt.Sprintf("%d", a+b),
 		Explanation: fmt.Sprintf("%d + (%d) = %d", a, b, a+b),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "sum": strconv.Itoa(a + b), "b_neg": strconv.Itoa(-b)},
 	}
 }
 
@@ -739,6 +773,7 @@ func (g *negMultDivGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Question:    fmt.Sprintf("\\(%d \\times %d = ?\\)", a, b),
 		Answer:      fmt.Sprintf("%d", a*b),
 		Explanation: fmt.Sprintf("(%d) x (%d) = %d", a, b, a*b),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "product": strconv.Itoa(a * b)},
 	}
 }
 
@@ -754,15 +789,21 @@ func (g *orderOpsGen) Generate(ctx generator.GeneratorContext) generator.Problem
 	c := rand.Intn(max(1, scale)) + 1
 	var q string
 	var result int
+	// e and shape are hoisted so one authored schema can cover all three
+	// shapes; e is 0 when the drawn expression has no power in it.
+	e := 0
+	shape := "flat"
 	if !g.parens && !g.exponents {
 		// 3 + 4 x 2
 		q = fmt.Sprintf("%d + %d \\times %d", a, b, c)
 		result = a + b*c
 	} else if g.parens && !g.exponents {
+		shape = "brackets"
 		q = fmt.Sprintf("(%d + %d) \\times %d", a, b, c)
 		result = (a + b) * c
 	} else {
-		e := rand.Intn(3) + 2
+		shape = "nested"
+		e = rand.Intn(3) + 2
 		q = fmt.Sprintf("%d + (%d)^%d \\times %d", a, b, e, c)
 		result = a + mathutil.IntPow(b, e)*c
 	}
@@ -770,6 +811,7 @@ func (g *orderOpsGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		Question:    fmt.Sprintf("Evaluate: \\(%s\\)", q),
 		Answer:      fmt.Sprintf("%d", result),
 		Explanation: fmt.Sprintf("%s = %d (PEMDAS)", q, result),
+		Facts:       map[string]string{"q": q, "result": strconv.Itoa(result), "a": strconv.Itoa(a), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "e": strconv.Itoa(e), "shape": shape},
 	}
 }
 
@@ -788,5 +830,6 @@ func (g *decIntroGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		Question:    fmt.Sprintf("Write %d.%d as a mixed number.", ones, tenths),
 		Answer:      fmt.Sprintf("%d %d/10", ones, tenths),
 		Explanation: fmt.Sprintf("\\(%d.%d = %d\\ \\text{and}\\ \\frac{%d}{10}\\)", ones, tenths, ones, tenths),
+		Facts:       map[string]string{"ones": strconv.Itoa(ones), "tenths": strconv.Itoa(tenths)},
 	}
 }

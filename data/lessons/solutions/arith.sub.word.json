@@ -1,0 +1,15 @@
+{
+  "concept": "arith.sub.word",
+  "setup": "You have [[a]] [[item]] and give away [[b]] of them.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "You start with [[a]] [[item]]."
+    },
+    {
+      "fact": "diff",
+      "say": "Giving away [[b]] means counting down by [[b]], leaving [[diff]]."
+    }
+  ],
+  "answer": "There are [[diff]] [[item]] left."
+}

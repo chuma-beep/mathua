@@ -1,0 +1,15 @@
+{
+  "concept": "arith.neg.number_line",
+  "setup": "You are finding the opposite of [[a]] on a number line.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The opposite is the same distance from zero but on the other side, which means the sign flips."
+    },
+    {
+      "fact": "opposite",
+      "say": "So the opposite of [[a]] is [[opposite]]."
+    }
+  ],
+  "answer": "The opposite of [[a]] is [[opposite]]."
+}

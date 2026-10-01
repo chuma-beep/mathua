@@ -1,0 +1,15 @@
+{
+  "concept": "arith.mult.word",
+  "setup": "There are [[a]] bags with [[b]] [[item]] in each bag.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Take [[b]] for each of the [[a]] bags."
+    },
+    {
+      "fact": "total",
+      "say": "[[a]] × [[b]] = [[total]]."
+    }
+  ],
+  "answer": "There are [[total]] [[item]] in total."
+}
