@@ -7,18 +7,52 @@ import (
 	"sync"
 
 	"github.com/chuma-beep/mathua/internal/latex"
+	"github.com/chuma-beep/mathua/internal/solutions"
 )
 
 type Registry struct {
-	mu     sync.RWMutex
-	gens   map[string]Generator
-	randMu sync.Mutex
+	mu        sync.RWMutex
+	gens      map[string]Generator
+	solutions *solutions.Loader
+	randMu    sync.Mutex
 }
 
 func NewRegistry() *Registry {
 	return &Registry{
 		gens: make(map[string]Generator),
 	}
+}
+
+// SetSolutions attaches the corpus solution schemas. Optional: with none
+// attached every problem keeps the generator's own Explanation, which is what
+// the registry did before schemas existed.
+func (r *Registry) SetSolutions(l *solutions.Loader) {
+	r.mu.Lock()
+	r.solutions = l
+	r.mu.Unlock()
+}
+
+// explain assembles the explanation for a served problem: a corpus schema
+// interpolated with the instance's facts where one exists, otherwise the
+// generator's own Explanation. Interpolation happens before canonicalisation so
+// that any LaTeX a fact contributes is normalised exactly like the question's.
+func (r *Registry) explain(conceptID string, p Problem) string {
+	r.mu.RLock()
+	loader := r.solutions
+	r.mu.RUnlock()
+	if loader == nil {
+		return latex.Canonicalize(p.Explanation, latex.Generators)
+	}
+	// Copy: the generator owns p.Facts and reuse of a Problem must not see
+	// the always-present entries we add below.
+	facts := make(map[string]string, len(p.Facts)+1)
+	for k, v := range p.Facts {
+		facts[k] = v
+	}
+	// The graded answer is a fact every schema may reference, so an authored
+	// explanation never has to restate it in prose to close.
+	facts["answer"] = p.Answer
+	return latex.Canonicalize(loader.Assemble(conceptID, facts, p.Explanation), latex.Generators)
 }
 
 func (r *Registry) Register(conceptID string, gen Generator) error {
@@ -88,7 +122,7 @@ func (r *Registry) GenerateContext(conceptID string, ctx GeneratorContext) (Prob
 	}
 	p := gen.Generate(ctx)
 	p.Question = latex.Canonicalize(p.Question, latex.Generators)
-	p.Explanation = latex.Canonicalize(p.Explanation, latex.Generators)
+	p.Explanation = r.explain(conceptID, p)
 	for _, w := range latex.Validate(p.Question+"\n"+p.Explanation, latex.Generators) {
 		fmt.Printf("latex warning in generator %q: %s\n", conceptID, w)
 	}
@@ -127,7 +161,7 @@ func (r *Registry) BatchGenerateContext(conceptID string, count int, ctx Generat
 	for i := 0; i < maxAttempts && len(problems) < count; i++ {
 		p := gen.Generate(ctx)
 		p.Question = latex.Canonicalize(p.Question, latex.Generators)
-		p.Explanation = latex.Canonicalize(p.Explanation, latex.Generators)
+		p.Explanation = r.explain(conceptID, p)
 		for _, w := range latex.Validate(p.Question+"\n"+p.Explanation, latex.Generators) {
 			fmt.Printf("latex warning in generator %q (batch): %s\n", conceptID, w)
 		}
