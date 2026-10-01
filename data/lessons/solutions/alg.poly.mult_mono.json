@@ -1,0 +1,15 @@
+{
+  "concept": "alg.poly.mult_mono",
+  "setup": "You are multiplying [[a]]x by ([[b]]x + [[c]]).",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Multiplying a monomial by a sum means distributing it into every term inside — here by [[a]]."
+    },
+    {
+      "fact": "ab",
+      "say": "The first term gives [[a]] × [[b]]x = [[ab]]x²; the second gives [[a]] × [[c]] = [[ac]]x."
+    }
+  ],
+  "answer": "So it expands to [[ab]]x² + [[ac]]x."
+}

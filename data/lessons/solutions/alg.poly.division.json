@@ -1,0 +1,15 @@
+{
+  "concept": "alg.poly.division",
+  "setup": "You are dividing ([[a]]x² + [[ra]]x) by x.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "A polynomial divides term by term as long as every term carries the factor: each x² becomes an x."
+    },
+    {
+      "fact": "ra",
+      "say": "So [[a]]x² / x = [[a]]x, and [[ra]]x / x = [[ra]]."
+    }
+  ],
+  "answer": "So the quotient is [[a]]x + [[ra]]."
+}

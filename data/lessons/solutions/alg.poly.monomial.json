@@ -1,0 +1,11 @@
+{
+  "concept": "alg.poly.monomial",
+  "setup": "The monomial is [[a]]x^[[n]].",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "A monomial has exactly one term, so its degree is simply the exponent on the variable — [[n]]. The coefficient [[a]] has no effect on it."
+    }
+  ],
+  "answer": "So the degree is [[n]]."
+}

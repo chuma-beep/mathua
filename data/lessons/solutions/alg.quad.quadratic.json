@@ -1,0 +1,27 @@
+{
+  "concept": "alg.quad.quadratic",
+  "setup": "This is a question about the structure of a quadratic.",
+  "steps": [
+    {
+      "fact": "is_standard",
+      "say": "A quadratic is ax² + bx + c = 0 with a ≠ 0. Here the leading coefficient is 1, so b and c can be read straight off the expression — and b is [[b]].",
+      "optional": true
+    },
+    {
+      "fact": "lo",
+      "say": "The quadratic formula gives x = (−b ± √(b² − 4ac)) / 2a, which here is (−b ± √(b² − 4c)) / 2. Its two values are [[r1]] and [[r2]], and the smaller is [[lo]].",
+      "optional": true
+    },
+    {
+      "fact": "disc",
+      "say": "The discriminant b² − 4ac is the one number that settles the number and type of roots: above 0 gives two real, exactly 0 gives one, below 0 gives two complex. Here it is [[disc]].",
+      "optional": true
+    },
+    {
+      "fact": "parabola",
+      "say": "A graph of ax² + bx + c is the shape the leading coefficient stretches, flips or squashes but never unbends — a parabola.",
+      "optional": true
+    }
+  ],
+  "answer": "So the answer is [[answer]]."
+}

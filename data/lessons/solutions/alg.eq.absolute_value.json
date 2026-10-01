@@ -1,0 +1,15 @@
+{
+  "concept": "alg.eq.absolute_value",
+  "setup": "You are solving |x + [[b]]| = [[a]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The absolute value of something equals [[a]] in exactly two cases: the thing is [[a]], or it is −[[a]]. Split the equation in two rather than guessing one."
+    },
+    {
+      "fact": "r1",
+      "say": "Solving each gives x = [[r1]] or x = [[r2]]."
+    }
+  ],
+  "answer": "So the solutions are [[r1]] and [[r2]]."
+}

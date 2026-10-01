@@ -1,0 +1,15 @@
+{
+  "concept": "alg.poly.special",
+  "setup": "You are squaring ([[a]]x + [[b]]).",
+  "steps": [
+    {
+      "fact": "a2",
+      "say": "(A + B)² is A² + 2AB + B², and the middle term is doubled because every cross term appears twice in the full FOIL."
+    },
+    {
+      "fact": "mid",
+      "say": "So ([[a]]x)² = [[a2]]x², twice gives 2 × [[a]] × [[b]] = [[mid]], and [[b]]² = [[b2]]."
+    }
+  ],
+  "answer": "So it expands to [[a2]]x² + [[mid]]x + [[b2]]."
+}

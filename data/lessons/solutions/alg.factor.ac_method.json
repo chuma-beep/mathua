@@ -1,0 +1,15 @@
+{
+  "concept": "alg.factor.ac_method",
+  "setup": "You are factoring x² + [[b]]x + [[c]].",
+  "steps": [
+    {
+      "fact": "c",
+      "say": "Multiply the leading coefficient by the constant — here 1 × [[c]] = [[c]] — and find two numbers multiplying to that and adding to [[b]]."
+    },
+    {
+      "fact": "r1",
+      "say": "They are [[r1]] and [[r2]], and the fact that they both come out positive is what makes the factorable case."
+    }
+  ],
+  "answer": "So it factors as (x + [[r1]])(x + [[r2]])."
+}

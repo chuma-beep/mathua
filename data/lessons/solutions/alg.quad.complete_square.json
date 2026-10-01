@@ -1,0 +1,15 @@
+{
+  "concept": "alg.quad.complete_square",
+  "setup": "The expression is x² + [[b]]x + __ and you need a perfect square.",
+  "steps": [
+    {
+      "fact": "b",
+      "say": "(x + k)² expands to x² + 2kx + k², so the middle coefficient [[b]] is twice the number you need, which is [[b]]/2 = [[r]]."
+    },
+    {
+      "fact": "r2",
+      "say": "The missing constant is that number squared: [[r]]² = [[r2]]."
+    }
+  ],
+  "answer": "So the number to put in the blank is [[r2]]."
+}

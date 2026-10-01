@@ -1,0 +1,23 @@
+{
+  "concept": "alg.poly.foil",
+  "setup": "You are multiplying ([[a]]x + [[b]]) by ([[c]]x + [[d]]).",
+  "steps": [
+    {
+      "fact": "ac",
+      "say": "FOIL is just distributing four times, and the initials name the order: First (outer × outer) gives [[ac]]x²."
+    },
+    {
+      "fact": "ad",
+      "say": "Outer × inner gives [[ad]]x; inner × outer gives [[bc]]x."
+    },
+    {
+      "fact": "bd",
+      "say": "Last, inner × inner, gives the constant [[bd]]."
+    },
+    {
+      "fact": "mid",
+      "say": "The two x terms share the same power, so they combine: [[ad]] + [[bc]] = [[mid]]."
+    }
+  ],
+  "answer": "So the product is [[ac]]x² + [[mid]]x + [[bd]]."
+}

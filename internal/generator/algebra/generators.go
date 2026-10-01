@@ -407,6 +407,7 @@ func (g *polyConceptGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("What is the degree of \\(%dx^{%d} + 3x + 1\\)?", coeff, exp),
 		Answer:      fmt.Sprintf("%d", exp),
 		Explanation: fmt.Sprintf("The highest exponent is %d, so the degree is %d.", exp, exp),
+		Facts:       map[string]string{"coeff": strconv.Itoa(coeff), "exp": strconv.Itoa(exp)},
 	}
 }
 
@@ -420,6 +421,7 @@ func (g *polyAddSubGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Question:    fmt.Sprintf("Simplify: \\((%dx^{2} + %dx) + (%dx^{2} + %dx)\\)", a, c, b, c),
 		Answer:      fmt.Sprintf("%dx^2 + %dx", a+b, 2*c),
 		Explanation: fmt.Sprintf("\\(%dx^{2} + %dx^{2} = %dx^{2}\\); \\(%dx + %dx = %dx\\)", a, b, a+b, c, c, 2*c),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "a2": strconv.Itoa(a + b), "c1": strconv.Itoa(2 * c)},
 	}
 }
 
@@ -433,6 +435,7 @@ func (g *polyMultMonoGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		Question:    fmt.Sprintf("Simplify: \\(%dx(%dx + %d)\\)", a, b, c),
 		Answer:      fmt.Sprintf("%dx^2 + %dx", a*b, a*c),
 		Explanation: fmt.Sprintf("\\(%dx(%dx) + %dx(%d) = %dx^{2} + %dx\\)", a, b, a, c, a*b, a*c),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "ab": strconv.Itoa(a * b), "ac": strconv.Itoa(a * c)},
 	}
 }
 
@@ -448,6 +451,7 @@ func (g *polyFoilGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		Answer:   fmt.Sprintf("%dx^2 + %dx + %d", a*c, a*d+b*c, b*d),
 		Explanation: fmt.Sprintf("FOIL: \\(%dx^{2} + %dx + %dx + %d = %dx^{2} + %dx + %d\\)",
 			a*c, a*d, b*c, b*d, a*c, a*d+b*c, b*d),
+		Facts: map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "d": strconv.Itoa(d), "ac": strconv.Itoa(a * c), "ad": strconv.Itoa(a * d), "bc": strconv.Itoa(b * c), "bd": strconv.Itoa(b * d), "mid": strconv.Itoa(a*d + b*c)},
 	}
 }
 
@@ -461,6 +465,7 @@ func (g *polySpecialGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Answer:   fmt.Sprintf("%dx^2 + %dx + %d", a*a, 2*a*b, b*b),
 		Explanation: fmt.Sprintf("\\((%dx)^{2} + 2(%dx)(%d) + %d^{2} = %dx^{2} + %dx + %d\\)",
 			a, a, b, b, a*a, 2*a*b, b*b),
+		Facts: map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "a2": strconv.Itoa(a * a), "mid": strconv.Itoa(2 * a * b), "b2": strconv.Itoa(b * b)},
 	}
 }
 
@@ -478,6 +483,7 @@ func (g *factorGCFGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		Question:    fmt.Sprintf("Factor: \\(%dx + %d\\)", a, b),
 		Answer:      fmt.Sprintf("%d(%dx + %d)", f, a/f, b/f),
 		Explanation: fmt.Sprintf("GCF is \\(%d\\): \\(%dx + %d = %d(%dx + %d)\\)", f, a, b, f, a/f, b/f),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "gcf": strconv.Itoa(f), "out_a": strconv.Itoa(a / f), "out_b": strconv.Itoa(b / f)},
 	}
 }
 
@@ -492,6 +498,7 @@ func (g *factorTrinomialGen) Generate(ctx generator.GeneratorContext) generator.
 		Question:    fmt.Sprintf("Factor: \\(x^{2} + %dx + %d\\)", b, c),
 		Answer:      fmt.Sprintf("(x + %d)(x + %d)", r1, r2),
 		Explanation: fmt.Sprintf("Find two numbers that multiply to %d and add to %d: %d and %d.", c, b, r1, r2),
+		Facts:       map[string]string{"q": formatQuadratic(b, c), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "r1": strconv.Itoa(r1), "r2": strconv.Itoa(r2)},
 	}
 }
 
@@ -503,6 +510,7 @@ func (g *factorDiffSquaresGen) Generate(ctx generator.GeneratorContext) generato
 		Question:    fmt.Sprintf("Factor: \\(x^{2} - %d\\)", a*a),
 		Answer:      fmt.Sprintf("(x + %d)(x - %d)", a, a),
 		Explanation: fmt.Sprintf("\\(x^{2} - %d = (x + %d)(x - %d)\\)", a*a, a, a),
+		Facts:       map[string]string{"a2": strconv.Itoa(a * a), "a": strconv.Itoa(a)},
 	}
 }
 
@@ -518,6 +526,7 @@ func (g *factorACMethodGen) Generate(ctx generator.GeneratorContext) generator.P
 		Question:    fmt.Sprintf("Factor: \\(x^{2} + %dx + %d\\)", b, c),
 		Answer:      fmt.Sprintf("(x + %d)(x + %d)", r1, r2),
 		Explanation: fmt.Sprintf("Find numbers multiplying to %d and adding to %d: %d and %d.", c, b, r1, r2),
+		Facts:       map[string]string{"q": formatQuadratic(b, c), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "r1": strconv.Itoa(r1), "r2": strconv.Itoa(r2)},
 	}
 }
 
@@ -537,6 +546,7 @@ func (g *quadSolveFactorGen) Generate(ctx generator.GeneratorContext) generator.
 		Question:    fmt.Sprintf("Solve: %s = 0", q),
 		Answer:      fmt.Sprintf("%d,%d", r1, r2),
 		Explanation: fmt.Sprintf("Factors: \\((x %+d)(x %+d) = 0\\), so \\(x = %d\\) or \\(x = %d\\)", -r1, -r2, r1, r2),
+		Facts:       map[string]string{"q": q, "r1": strconv.Itoa(r1), "r2": strconv.Itoa(r2)},
 	}
 }
 
@@ -549,6 +559,7 @@ func (g *quadCompleteSquareGen) Generate(ctx generator.GeneratorContext) generat
 		Question:    fmt.Sprintf("Complete the square: \\(x^{2} + %dx + \\_\\_)\\) to make a perfect square.", b),
 		Answer:      fmt.Sprintf("%d", r*r),
 		Explanation: fmt.Sprintf("\\(\\left(\\frac{b}{2}\\right)^{2} = \\left(\\frac{%d}{2}\\right)^{2} = %d\\)", b, r*r),
+		Facts:       map[string]string{"b": strconv.Itoa(b), "r": strconv.Itoa(r), "r2": strconv.Itoa(r * r)},
 	}
 }
 
@@ -564,6 +575,7 @@ func (g *quadFormulaGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("Solve using quadratic formula: %s = 0", q),
 		Answer:      fmt.Sprintf("%d,%d", r1, r2),
 		Explanation: fmt.Sprintf("\\(x = \\frac{%d \\pm \\sqrt{%d - 4(%d)}}{2} = %d\\) or \\(%d\\)", b, b*b, c, r1, r2),
+		Facts:       map[string]string{"q": q, "b": strconv.Itoa(b), "c": strconv.Itoa(c), "b2": strconv.Itoa(b * b), "four_c": strconv.Itoa(4 * c), "disc": strconv.Itoa(b*b - 4*c), "r1": strconv.Itoa(r1), "r2": strconv.Itoa(r2)},
 	}
 }
 
@@ -583,6 +595,7 @@ func (g *quadDiscriminantGen) Generate(ctx generator.GeneratorContext) generator
 		Question:    fmt.Sprintf("How many real solutions? \\(x^{2} + %dx + %d = 0\\)", b, c),
 		Answer:      count,
 		Explanation: fmt.Sprintf("Discriminant: \\(%d^{2} - 4(%d) = %d\\). %s solutions.", b, c, disc, count),
+		Facts:       map[string]string{"b": strconv.Itoa(b), "c": strconv.Itoa(c), "b2": strconv.Itoa(b * b), "four_c": strconv.Itoa(4 * c), "disc": strconv.Itoa(disc), "count": count},
 	}
 }
 
@@ -1014,6 +1027,7 @@ func (g *eqAbsValGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		Question:    fmt.Sprintf("Solve: \\(|x + %d| = %d\\)", b, a),
 		Answer:      fmt.Sprintf("%d,%d", a-b, -a-b),
 		Explanation: fmt.Sprintf("\\(x + %d = %d\\) or \\(x + %d = -%d\\) → \\(x = %d\\) or \\(x = %d\\)", b, a, b, a, a-b, -a-b),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "r1": strconv.Itoa(a - b), "r2": strconv.Itoa(-a - b)},
 	}
 }
 
@@ -1027,6 +1041,7 @@ func (g *eqBinomialGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Question:    fmt.Sprintf("Solve: \\(x^{%d} = %d\\)", r, rhs),
 		Answer:      fmt.Sprintf("%d", k),
 		Explanation: fmt.Sprintf("\\(x^{%d} = %d\\) → \\(x = %d^{\\frac{1}{%d}} = %d\\)", r, rhs, rhs, r, k),
+		Facts:       map[string]string{"r": strconv.Itoa(r), "rhs": strconv.Itoa(rhs), "k": strconv.Itoa(k)},
 	}
 }
 
@@ -1073,6 +1088,7 @@ func (g *eqIrrationalGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		Question:    fmt.Sprintf("Solve: \\(\\sqrt{x} = %d\\)", x),
 		Answer:      fmt.Sprintf("%d", k),
 		Explanation: fmt.Sprintf("Square both sides: \\(x = %d^{2} = %d\\)", x, k),
+		Facts:       map[string]string{"x": strconv.Itoa(x), "k": strconv.Itoa(k)},
 	}
 }
 
@@ -1102,6 +1118,7 @@ func (g *eqPolyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		Question:    fmt.Sprintf("Solve polynomial: %s = 0", q),
 		Answer:      fmt.Sprintf("%d,%d", r1, r2),
 		Explanation: fmt.Sprintf("\\((x %+d)(x %+d) = 0\\) → \\(x = %d\\) or \\(x = %d\\)", -r1, -r2, r1, r2),
+		Facts:       map[string]string{"q": q, "r1": strconv.Itoa(r1), "r2": strconv.Itoa(r2)},
 	}
 }
 
@@ -1116,6 +1133,7 @@ func (g *eqRationalGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Question:    fmt.Sprintf("Solve: \\(%dx/%d = %d\\)", a, b, rhs),
 		Answer:      fmt.Sprintf("%d", x),
 		Explanation: fmt.Sprintf("Multiply both sides by %d: \\(%dx = %d\\) → \\(x = %d\\)", b, a, rhs*b, x),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "rhs": strconv.Itoa(rhs), "ax": strconv.Itoa(rhs * b), "x": strconv.Itoa(x)},
 	}
 }
 
@@ -1128,6 +1146,7 @@ func (g *eqTrinomialGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("Solve: \\(x^{2} + %dx + %d = 0\\)", 2*r, r*r),
 		Answer:      fmt.Sprintf("%d", -r),
 		Explanation: fmt.Sprintf("\\((x + %d)^{2} = 0\\) → \\(x = %d\\)", r, -r),
+		Facts:       map[string]string{"r": strconv.Itoa(r), "coef": strconv.Itoa(2 * r), "const": strconv.Itoa(r * r), "x": strconv.Itoa(-r)},
 	}
 }
 
@@ -1381,6 +1400,7 @@ func (g *ineqQuadraticGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Question:    fmt.Sprintf("What is the largest integer \\(x\\) with \\(x^{2} - %d < 0\\)? (enter a number)", r*r),
 		Answer:      fmt.Sprintf("%d", r-1),
 		Explanation: fmt.Sprintf("\\(x^{2} - %d < 0\\) → \\((x-%d)(x+%d) < 0\\) → \\(-%d < x < %d\\), so the largest integer is \\(%d\\)", r*r, r, r, r, r, r-1),
+		Facts:       map[string]string{"r2": strconv.Itoa(r * r), "r": strconv.Itoa(r), "x": strconv.Itoa(r - 1)},
 	}
 }
 
@@ -1458,6 +1478,7 @@ func (g *polyDivisionGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		Question:    fmt.Sprintf("Simplify: \\((%dx^{2} + %dx) / x\\)", a, r*a),
 		Answer:      fmt.Sprintf("%dx + %d", a, r*a),
 		Explanation: fmt.Sprintf("Divide each term: \\(%dx^{2}/x = %dx\\), \\(%dx/x = %d\\)", a, a, r*a, r*a),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "r": strconv.Itoa(r), "ra": strconv.Itoa(r * a)},
 	}
 }
 
@@ -1470,6 +1491,7 @@ func (g *polyMonomialGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		Question:    fmt.Sprintf("What is the degree of \\(%dx^{%d}\\)?", a, n),
 		Answer:      fmt.Sprintf("%d", n),
 		Explanation: fmt.Sprintf("The monomial \\(%dx^{%d}\\) has degree %d.", a, n, n),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "n": strconv.Itoa(n)},
 	}
 }
 
@@ -1484,6 +1506,7 @@ func (g *polyRootsGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		Question:    fmt.Sprintf("Find the roots of \\(x^{2} + %dx + %d = 0\\).", b, c),
 		Answer:      fmt.Sprintf("%d,%d", r1, r2),
 		Explanation: fmt.Sprintf("\\((x %+d)(x %+d) = 0\\) → roots are \\(%d\\) and \\(%d\\)", -r1, -r2, r1, r2),
+		Facts:       map[string]string{"q": formatQuadratic(b, c), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "r1": strconv.Itoa(r1), "r2": strconv.Itoa(r2)},
 	}
 }
 
@@ -1498,6 +1521,7 @@ func (g *synthDivGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		Question:    fmt.Sprintf("Use synthetic division to divide \\((%dx^{2} + %dx)\\) by \\((x - %d)\\). What is the quotient?", a, b, r),
 		Answer:      fmt.Sprintf("%dx + %d", a, b+a*r),
 		Explanation: fmt.Sprintf("Synthetic division by \\(%d\\) gives coefficients %d and %d → \\(%dx + %d\\)", r, a, b+a*r, a, b+a*r),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "r": strconv.Itoa(r), "out_a": strconv.Itoa(a), "out_b": strconv.Itoa(b + a*r)},
 	}
 }
 
@@ -1512,6 +1536,7 @@ func (g *vietaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		Question:    fmt.Sprintf("For \\(x^{2} + %dx + %d = 0\\), what is the sum of the roots?", b, c),
 		Answer:      fmt.Sprintf("%d", r1+r2),
 		Explanation: fmt.Sprintf("By Vieta: sum of roots = \\(%d\\). Roots are \\(%d\\) and \\(%d\\), sum = \\(%d\\)", -b, r1, r2, r1+r2),
+		Facts:       map[string]string{"q": formatQuadratic(b, c), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "sum": strconv.Itoa(r1 + r2), "neg_b": strconv.Itoa(-b), "r1": strconv.Itoa(r1), "r2": strconv.Itoa(r2)},
 	}
 }
 
@@ -1534,18 +1559,21 @@ func (g *quadComplexGen) Generate(ctx generator.GeneratorContext) generator.Prob
 				Question:    fmt.Sprintf("What is the discriminant of \\(x^{2} + %dx + %d = 0\\)? (enter a number)", b, c),
 				Answer:      fmt.Sprintf("%d", disc),
 				Explanation: fmt.Sprintf("Discriminant = \\(%d^{2} - 4(%d) = %d - %d = %d < 0\\) → two complex (non-real) solutions.", b, c, b*b, 4*c, disc),
+				Facts:       map[string]string{"b": strconv.Itoa(b), "c": strconv.Itoa(c), "b2": strconv.Itoa(b * b), "four_c": strconv.Itoa(4 * c), "disc": strconv.Itoa(disc), "want_disc": "yes"},
 			}
 		}
 		return generator.Problem{
 			Question:    fmt.Sprintf("How many complex (non-real) solutions does \\(x^{2} + %dx + %d = 0\\) have? (enter a number)", b, c),
 			Answer:      "2",
 			Explanation: fmt.Sprintf("Discriminant = \\(%d^{2} - 4(%d) = %d < 0\\), so both solutions are complex (non-real).", b, c, disc),
+			Facts:       map[string]string{"b": strconv.Itoa(b), "c": strconv.Itoa(c), "b2": strconv.Itoa(b * b), "four_c": strconv.Itoa(4 * c), "disc": strconv.Itoa(disc), "want_complex": "yes"},
 		}
 	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("How many real solutions does \\(x^{2} + %dx + %d = 0\\) have?", b, c),
 		Answer:      "0",
 		Explanation: fmt.Sprintf("Discriminant = \\(%d^{2} - 4(%d) = %d - %d = %d < 0\\) → two complex (non-real) solutions.", b, c, b*b, 4*c, disc),
+		Facts:       map[string]string{"b": strconv.Itoa(b), "c": strconv.Itoa(c), "b2": strconv.Itoa(b * b), "four_c": strconv.Itoa(4 * c), "disc": strconv.Itoa(disc), "want_real": "yes"},
 	}
 }
 
@@ -1557,6 +1585,7 @@ func (g *quadIncompleteGen) Generate(ctx generator.GeneratorContext) generator.P
 		Question:    fmt.Sprintf("Solve: \\(x^{2} - %d = 0\\)", k*k),
 		Answer:      fmt.Sprintf("%d,%d", k, -k),
 		Explanation: fmt.Sprintf("\\(x^{2} = %d\\) → \\(x = \\pm \\sqrt{%d} = \\pm %d\\)", k*k, k*k, k),
+		Facts:       map[string]string{"k2": strconv.Itoa(k * k), "k": strconv.Itoa(k)},
 	}
 }
 
@@ -1568,6 +1597,7 @@ func (g *quadParametricGen) Generate(ctx generator.GeneratorContext) generator.P
 		Question:    fmt.Sprintf("For what value(s) of \\(k\\) does \\(x^{2} + %dx + %d = 0\\) have exactly one solution?", 2*p, p*p),
 		Answer:      fmt.Sprintf("%d", p),
 		Explanation: fmt.Sprintf("Discriminant = 0: \\((%d)^{2} - 4(%d) = %d - %d = 0\\) → \\(k = %d\\)", 2*p, p*p, 4*p*p, 4*p*p, p),
+		Facts:       map[string]string{"coef": strconv.Itoa(2 * p), "const": strconv.Itoa(p * p), "k": strconv.Itoa(p)},
 	}
 }
 
@@ -1584,6 +1614,7 @@ func (g *quadQuadraticGen) Generate(ctx generator.GeneratorContext) generator.Pr
 			Question:    fmt.Sprintf("For \\(x^{2} + %dx + %d = 0\\) in standard form \\(ax^{2} + bx + c = 0\\), what is \\(b\\)? (enter a number)", b, c),
 			Answer:      fmt.Sprintf("%d", b),
 			Explanation: fmt.Sprintf("Standard form is \\(ax^{2} + bx + c = 0\\) with \\(a \\neq 0\\); here \\(a=1\\), \\(b=%d\\), \\(c=%d\\)", b, c),
+			Facts:       map[string]string{"b": strconv.Itoa(b), "c": strconv.Itoa(c), "is_standard": "yes"},
 		}
 	case 1:
 		r1 := rand.Intn(6) + 2
@@ -1595,6 +1626,7 @@ func (g *quadQuadraticGen) Generate(ctx generator.GeneratorContext) generator.Pr
 			Question:    fmt.Sprintf("Solve with the quadratic formula: %s = 0. What is the smaller root? (enter a number)", formatQuadratic(b, c)),
 			Answer:      fmt.Sprintf("%d", lo),
 			Explanation: fmt.Sprintf("\\(x = [-b \\pm \\sqrt{b^{2}-4ac}]/(2a)\\) gives \\(x = %d\\) or \\(x = %d\\); the smaller root is \\(%d\\). The formula solves \\(ax^{2} + bx + c = 0\\).", r1, r2, lo),
+			Facts:       map[string]string{"q": formatQuadratic(b, c), "r1": strconv.Itoa(r1), "r2": strconv.Itoa(r2), "lo": strconv.Itoa(lo)},
 		}
 	case 2:
 		b := rand.Intn(5) + 2
@@ -1604,12 +1636,14 @@ func (g *quadQuadraticGen) Generate(ctx generator.GeneratorContext) generator.Pr
 			Question:    fmt.Sprintf("For \\(x^{2} + %dx + %d = 0\\), what is the discriminant \\(b^{2} - 4ac\\)? (enter a number)", b, c),
 			Answer:      fmt.Sprintf("%d", disc),
 			Explanation: fmt.Sprintf("The discriminant \\(b^{2}-4ac = %d\\) determines the number and type of solutions: \\(> 0\\): two real; \\(= 0\\): one real; \\(< 0\\): two complex.", disc),
+			Facts:       map[string]string{"b": strconv.Itoa(b), "c": strconv.Itoa(c), "disc": strconv.Itoa(disc)},
 		}
 	default:
 		return generator.Problem{
 			Question:    "The graph of a quadratic function is a ____.",
 			Answer:      "parabola",
 			Explanation: "\\(f(x) = ax^{2} + bx + c\\) graphs as a parabola.",
+			Facts:       map[string]string{"parabola": "yes"},
 		}
 	}
 }

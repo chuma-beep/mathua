@@ -1,0 +1,15 @@
+{
+  "concept": "alg.factor.gcf",
+  "setup": "You are factoring [[a]]x + [[b]].",
+  "steps": [
+    {
+      "fact": "gcf",
+      "say": "Before anything else, look for a factor common to every term. Both coefficients share [[gcf]]."
+    },
+    {
+      "fact": "out_a",
+      "say": "Dividing each term by it gives [[out_a]]x + [[out_b]], and [[a]]x + [[b]] = [[gcf]] times that."
+    }
+  ],
+  "answer": "So it factors as [[gcf]]([[out_a]]x + [[out_b]])."
+}

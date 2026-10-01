@@ -1,0 +1,15 @@
+{
+  "concept": "alg.quad.discriminant",
+  "setup": "The quadratic is x² + [[b]]x + [[c]] = 0.",
+  "steps": [
+    {
+      "fact": "b2",
+      "say": "The discriminant b² − 4ac decides how many real roots there are, without solving anything: [[b2]] − [[four_c]] = [[disc]]."
+    },
+    {
+      "fact": "count",
+      "say": "Above 0 gives two real roots, exactly 0 gives one, and below 0 gives none."
+    }
+  ],
+  "answer": "So there are [[count]] solutions."
+}

@@ -1,0 +1,15 @@
+{
+  "concept": "alg.quad.incomplete",
+  "setup": "You are solving x² − [[k2]] = 0.",
+  "steps": [
+    {
+      "fact": "k2",
+      "say": "Move the constant across to get x² = [[k2]], and since [[k2]] is a perfect square the square root is exact: √[[k2]] = [[k]]."
+    },
+    {
+      "fact": "k",
+      "say": "A square root has two signs, which is where the ± comes from."
+    }
+  ],
+  "answer": "So the solutions are [[k]] and −[[k]]."
+}

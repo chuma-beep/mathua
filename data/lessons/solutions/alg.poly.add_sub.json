@@ -1,0 +1,15 @@
+{
+  "concept": "alg.poly.add_sub",
+  "setup": "You are adding [[a]]x² + [[c]]x to [[b]]x² + [[c]]x.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Like terms are terms with the same variable part, so the two x² terms combine: [[a]] + [[b]] = [[a2]]."
+    },
+    {
+      "fact": "c1",
+      "say": "The two x terms combine the same way: [[c]] + [[c]] = [[c1]]."
+    }
+  ],
+  "answer": "So it simplifies to [[a2]]x² + [[c1]]x."
+}
