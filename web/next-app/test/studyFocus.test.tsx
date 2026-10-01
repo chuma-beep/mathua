@@ -170,9 +170,11 @@ describe('LessonDetail dedupe and single Start', () => {
     const links = screen.getAllByRole('link') as HTMLAnchorElement[]
     const starts = links.filter((l) => (l.getAttribute('href') ?? '').startsWith('/learn?concept='))
     // Primary heads b (a is mastered); a remains only under the disclosure.
-    expect(starts.filter((l) => l.getAttribute('href') === '/learn?concept=b')).toHaveLength(1)
+    // Every Start link carries ?return= so the learner can come back to the
+    // concept they were reading.
+    expect(starts.filter((l) => l.getAttribute('href') === '/learn?concept=b&return=b')).toHaveLength(1)
     expect(screen.getByText('Or pick something else (1)')).toBeTruthy()
-    expect(starts.filter((l) => l.getAttribute('href') === '/learn?concept=a')).toHaveLength(1)
+    expect(starts.filter((l) => l.getAttribute('href') === '/learn?concept=a&return=a')).toHaveLength(1)
     // Exactly one primary row; the rest live in the disclosure.
     expect(document.querySelectorAll('a.justify-between')).toHaveLength(1)
   })
@@ -181,8 +183,44 @@ describe('LessonDetail dedupe and single Start', () => {
     render(<LessonDetail lesson={lesson} domain={null} onBack={() => {}} />)
     const links = screen.getAllByRole('link') as HTMLAnchorElement[]
     const starts = links.filter((l) => (l.getAttribute('href') ?? '').startsWith('/learn?concept='))
-    expect(starts.filter((l) => l.getAttribute('href') === '/learn?concept=a')).toHaveLength(1)
-    expect(starts.filter((l) => l.getAttribute('href') === '/learn?concept=b')).toHaveLength(1)
+    expect(starts.filter((l) => l.getAttribute('href') === '/learn?concept=a&return=a')).toHaveLength(1)
+    expect(starts.filter((l) => l.getAttribute('href') === '/learn?concept=b&return=b')).toHaveLength(1)
     expect(screen.getByText('Or pick something else (1)')).toBeTruthy()
+  })
+})
+
+// The Study → Learn → Study round trip. Without a way back, a learner who
+// clicked "Start learning" to check something had no way to return to the lesson
+// they were reading, and `?return=` — which Learn already understood — was
+// only ever set by Learn's own prerequisite links.
+describe('LessonDetail Learn round trip', () => {
+  it('offers a way back to practice when the learner arrived from Learn', () => {
+    render(
+      <LessonDetail
+        lesson={lesson}
+        domain={null}
+        fromConcept="arith.add.single"
+        onBack={() => {}}
+      />,
+    )
+    // Both the primary row and each alternative offer the way back.
+    expect(screen.getAllByText(/Back to practice/).length).toBeGreaterThan(1)
+    expect(screen.queryByText('Start learning →')).toBeNull()
+    // And the label says which concept, not just "practice".
+    expect(screen.getByText(/Back to [A-Z]/)).toBeTruthy()
+  })
+
+  it('offers only Start when the learner arrived from navigation', () => {
+    render(<LessonDetail lesson={lesson} domain={null} onBack={() => {}} />)
+    expect(screen.getAllByText('Start learning →').length).toBeGreaterThan(0)
+    expect(screen.queryByText(/Back to practice/)).toBeNull()
+  })
+
+  it('does not claim there is an interactive loop on the page', () => {
+    // This section contains links and nothing else; describing it as the loop
+    // invited a learner to look for a question that is not here.
+    render(<LessonDetail lesson={lesson} domain={null} onBack={() => {}} />)
+    expect(screen.queryByText(/interactive loop/)).toBeNull()
+    expect(screen.queryByText(/answer questions on any of these/)).toBeTruthy()
   })
 })

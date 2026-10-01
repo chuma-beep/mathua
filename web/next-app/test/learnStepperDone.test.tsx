@@ -110,8 +110,9 @@ describe('LearnStepper done state (PR5)', () => {
     expect(screen.getByText(/Or pick something else/)).toBeTruthy()
 
     // No auto-advance: only explicit navigation, Reference still offered.
+    // It carries ?from= so the reference page can offer a way back here.
     expect(screen.getByRole('link', { name: 'Reference' }).getAttribute('href')).toBe(
-      `/study?concept=${encodeURIComponent(CID)}`,
+      `/study?concept=${encodeURIComponent(CID)}&from=${encodeURIComponent(CID)}`,
     )
   }, 15000)
 

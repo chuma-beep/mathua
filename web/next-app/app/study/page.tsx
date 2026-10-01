@@ -31,6 +31,9 @@ function StudyContent() {
   const lessonParam = searchParams.get('lesson')
   const domainParam = searchParams.get('domain')
   const conceptParam = searchParams.get('concept')
+  // Set by the Reference link in Learn, so the page can offer a way back to the
+  // question the learner was answering instead of only onwards into Learn.
+  const fromParam = searchParams.get('from') || ''
 
   const [lessonsByDomain, setLessonsByDomain] = useState<Record<string, LessonInfo[]>>({})
   const [selectedBody, setSelectedBody] = useState<string | null>(null)
@@ -249,6 +252,7 @@ function StudyContent() {
               <LessonDetail
               lesson={hydratedLesson ?? selectedLesson}
               domain={selectedDomain}
+              fromConcept={fromParam}
               revealReq={revealReq}
               onConceptSelect={handleConceptSelect}
               onBack={() => {
