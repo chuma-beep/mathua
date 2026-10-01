@@ -4,9 +4,11 @@ import (
 	"errors"
 	"sync"
 	"testing"
+	"time"
 
 	"github.com/chuma-beep/mathua/internal/concepts"
 	"github.com/chuma-beep/mathua/internal/generator"
+	"github.com/chuma-beep/mathua/internal/mastery"
 	"github.com/chuma-beep/mathua/internal/storage"
 )
 
@@ -936,5 +938,112 @@ func TestEngine_Diagnosis(t *testing.T) {
 				t.Errorf("unexpected diagnosis %q — %s", res.Diagnosis, tc.why)
 			}
 		})
+	}
+}
+
+// Decay is never persisted — the row stays MASTERED forever and the downgrade
+// happens on read. Before GetProgress applied it, /api/progress reported a
+// stale concept as mastered while the scheduler treated it as DECAYING and
+// scheduled it for review: two parts of the app disagreeing about one fact, and
+// the learner seeing the flattering half.
+func TestGetProgress_AppliesDecayOnRead(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("decay")
+	if err := e.repo.UpsertProgress(&storage.ConceptProgress{
+		StudentID: st.ID, ConceptID: "a", Status: string(mastery.StatusMastered), Streak: 3,
+	}); err != nil {
+		t.Fatalf("seed: %v", err)
+	}
+
+	// No LastReviewed at all: we cannot claim it is fresh.
+	got, err := e.GetProgress(st.ID)
+	if err != nil {
+		t.Fatalf("get: %v", err)
+	}
+	if got["a"].Status != "DECAYING" {
+		t.Errorf("status = %q, want DECAYING for a review with no timestamp", got["a"].Status)
+	}
+
+	// Reviewed just now: still mastered.
+	now := time.Now().UTC()
+	if err := e.repo.UpsertProgress(&storage.ConceptProgress{
+		StudentID: st.ID, ConceptID: "a", Status: string(mastery.StatusMastered), Streak: 3,
+		LastReviewed: &now,
+	}); err != nil {
+		t.Fatalf("seed recent: %v", err)
+	}
+	got, err = e.GetProgress(st.ID)
+	if err != nil {
+		t.Fatalf("get: %v", err)
+	}
+	if got["a"].Status != string(mastery.StatusMastered) {
+		t.Errorf("status = %q, want MASTERED for a fresh review", got["a"].Status)
+	}
+
+	// Reviewed past the threshold.
+	stale := now.AddDate(0, 0, -15)
+	if err := e.repo.UpsertProgress(&storage.ConceptProgress{
+		StudentID: st.ID, ConceptID: "a", Status: string(mastery.StatusMastered), Streak: 3,
+		LastReviewed: &stale,
+	}); err != nil {
+		t.Fatalf("seed stale: %v", err)
+	}
+	got, err = e.GetProgress(st.ID)
+	if err != nil {
+		t.Fatalf("get: %v", err)
+	}
+	if got["a"].Status != "DECAYING" {
+		t.Errorf("status = %q, want DECAYING 15 days after the last review", got["a"].Status)
+	}
+
+	// The row itself is untouched: decay is a read-time view, never persisted.
+	raw, err := e.repo.GetProgress(st.ID, "a")
+	if err != nil {
+		t.Fatalf("raw: %v", err)
+	}
+	if raw.Status != string(mastery.StatusMastered) {
+		t.Errorf("stored status = %q, want it left as MASTERED", raw.Status)
+	}
+}
+
+// An unmastered status must pass through untouched whatever its timestamp.
+func TestGetProgress_LeavesOtherStatusesAlone(t *testing.T) {
+	d, err := concepts.Build([]concepts.Concept{
+		{ID: "u", Label: "U", Domain: "d", GradingType: "numeric", Prerequisites: []string{},
+			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 60}},
+		{ID: "l", Label: "L", Domain: "d", GradingType: "numeric", Prerequisites: []string{},
+			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 60}},
+		{ID: "p", Label: "P", Domain: "d", GradingType: "numeric", Prerequisites: []string{},
+			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 60}},
+	})
+	if err != nil {
+		t.Fatalf("build: %v", err)
+	}
+	store, err := storage.NewSQLiteStore(":memory:")
+	if err != nil {
+		t.Fatalf("store: %v", err)
+	}
+	t.Cleanup(func() { store.Close() })
+	e := New(store, d, generator.NewRegistry(), nil, nil)
+	st, _ := e.CreateStudent("decay2")
+
+	// Ancient review timestamps: decay must not touch a status that was never
+	// mastery in the first place.
+	long := time.Now().UTC().AddDate(0, 0, -400)
+	for id, status := range map[string]string{"u": "UNSEEN", "l": "LEARNING", "p": "PRACTICING"} {
+		if err := store.UpsertProgress(&storage.ConceptProgress{
+			StudentID: st.ID, ConceptID: id, Status: status, Streak: 1, LastReviewed: &long,
+		}); err != nil {
+			t.Fatalf("seed %s: %v", id, err)
+		}
+	}
+	got, err := e.GetProgress(st.ID)
+	if err != nil {
+		t.Fatalf("get: %v", err)
+	}
+	for id, want := range map[string]string{"u": "UNSEEN", "l": "LEARNING", "p": "PRACTICING"} {
+		if got[id].Status != want {
+			t.Errorf("%s status = %q, want %q unchanged", id, got[id].Status, want)
+		}
 	}
 }
