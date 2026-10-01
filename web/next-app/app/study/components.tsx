@@ -35,14 +35,12 @@ function hashBody(s: string): string {
 export function DomainOverview({
   domains,
   lessonsByDomain,
-  domainAgg,
   allLessons,
   onSelectDomain,
   onSelectLesson,
 }: {
   domains: string[]
   lessonsByDomain: Record<string, LessonInfo[]>
-  domainAgg: Record<string, { mastered: number; total: number; pct: number }>
   allLessons: { title: string; body: string; domain: string; concepts: string[]; conceptLabels: string[] }[]
   onSelectDomain: (d: string) => void
   onSelectLesson: (lesson: LessonInfo) => void
@@ -77,31 +75,19 @@ export function DomainOverview({
       <div className="space-y-2">
         {visibleDomains.map((domain, idx) => {
           const lessons = lessonsByDomain[domain]
-          const agg = domainAgg[domain]
           const label = domainLabels[domain] || domain
           const icon = domainIcon(domain)
-          const allMastered = agg.total > 0 && agg.mastered === agg.total
 
           return (
             <button
               type="button"
               key={domain}
               onClick={() => onSelectDomain(domain)}
-              className={`w-full text-left transition-all duration-200 group ${
-                allMastered ? 'opacity-50 hover:opacity-70' : ''
-              } animate-fadeIn`}
+              className="w-full text-left transition-all duration-200 group animate-fadeIn"
               style={{ animationDelay: `${idx * 30}ms` }}
             >
               <div className="flex items-stretch border border-mathua-border hover:shadow-card-hover transition-shadow bg-mathua-surface-elevated">
-                <div
-                  className={`w-[3px] shrink-0 transition-colors ${
-                    allMastered
-                      ? 'bg-mathua-green'
-                      : agg.total > 0 && agg.mastered > 0
-                      ? 'bg-mathua-blue'
-                      : 'bg-mathua-border group-hover:bg-mathua-blue'
-                  }`}
-                />
+                <div className="w-[3px] shrink-0 bg-mathua-border group-hover:bg-mathua-blue transition-colors" />
 
                 <div className="flex-1 min-w-0 p-3 sm:p-4 overflow-hidden">
                   <div className="flex items-center gap-2 sm:gap-3 min-w-0">
@@ -116,28 +102,6 @@ export function DomainOverview({
                     </span>
                   </div>
 
-                  {agg.total > 0 && (
-                    <div className="mt-2 pl-9">
-                      <div className="h-[3px] bg-mathua-code">
-                        <div
-                          className={`h-full transition-all duration-500 ${
-                            allMastered ? 'bg-mathua-green' : 'bg-mathua-blue'
-                          }`}
-                          style={{ width: `${agg.pct}%` }}
-                        />
-                      </div>
-                      <div className="flex items-center gap-2 mt-1">
-                        <span className="font-mono text-[10px] text-mathua-muted">
-                          {agg.mastered} / {agg.total} concepts mastered
-                        </span>
-                        <span className={`font-mono text-[10px] ${
-                          allMastered ? 'text-mathua-green' : 'text-mathua-blue'
-                        }`}>
-                          {agg.pct}%
-                        </span>
-                      </div>
-                    </div>
-                  )}
                 </div>
 
                 <div className="hidden sm:flex items-center pr-4 shrink-0">
@@ -188,13 +152,11 @@ export function DomainOverview({
 export function DomainDrillDown({
   domain,
   lessons,
-  agg,
   onBack,
   onSelectLesson,
 }: {
   domain: string
   lessons: LessonInfo[]
-  agg?: { mastered: number; total: number; pct: number }
   onBack: () => void
   onSelectLesson: (lesson: LessonInfo) => void
 }) {
@@ -216,44 +178,19 @@ export function DomainDrillDown({
         <SectionHeader label="Domain" title={label} className="flex-1" />
       </div>
 
-      {agg && agg.total > 0 && (
-        <div className="border border-mathua-border p-4 mb-6 bg-mathua-surface">
-          <div className="flex items-center gap-3 mb-2">
-            <span className="font-mono text-[11px] text-mathua-muted">Domain progress</span>
-            <span className="font-mono text-[11px] text-mathua-blue">
-              {agg.mastered} / {agg.total} concepts
-            </span>
-            <span className={`font-mono text-[11px] ${
-              agg.mastered === agg.total ? 'text-mathua-green' : 'text-mathua-blue'
-            }`}>
-              {agg.pct}%
-            </span>
-          </div>
-          <div className="h-[3px] bg-mathua-code">
-            <div
-              className={`h-full transition-all duration-500 ${
-                agg.mastered === agg.total ? 'bg-mathua-green' : 'bg-mathua-blue'
-              }`}
-              style={{ width: `${agg.pct}%` }}
-            />
-          </div>
-        </div>
-      )}
-
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
         {lessons.map((lesson, i) => {
-          const { mastered, total } = lessonProgress(lesson)
-          const pct = total > 0 ? Math.round((mastered / total) * 100) : 0
-          const allDone = total > 0 && mastered === total
+          // Only the corpus size is shown here; how much of it this learner has
+          // done belongs on Profile, and the per-concept status inside
+          // LessonDetail is what actually helps someone decide where to read.
+          const { total } = lessonProgress(lesson)
 
           return (
             <button
               type="button"
               key={lesson.title}
               onClick={() => onSelectLesson(lesson)}
-              className={`text-left transition-all duration-200 group animate-fadeIn ${
-                allDone ? 'opacity-50 hover:opacity-70' : ''
-              }`}
+              className="text-left transition-all duration-200 group animate-fadeIn"
               style={{ animationDelay: `${i * 30}ms` }}
             >
               <div className="border border-mathua-border hover:shadow-card-hover transition-shadow bg-mathua-surface-elevated p-3 sm:p-4 min-w-0 overflow-hidden">
@@ -270,30 +207,7 @@ export function DomainDrillDown({
                   <span className="font-mono text-[10px] text-mathua-muted">
                     {total} concept{total !== 1 ? 's' : ''}
                   </span>
-                  {lesson.progress && (
-                    <>
-                      <div className="flex-1 h-[3px] bg-mathua-code max-w-[120px]">
-                        <div
-                          className={`h-full transition-all ${
-                            allDone ? 'bg-mathua-green' : 'bg-mathua-blue'
-                          }`}
-                          style={{ width: `${pct}%` }}
-                        />
-                      </div>
-                      <span className="font-mono text-[10px] text-mathua-muted">
-                        {mastered}/{total}
-                      </span>
-                    </>
-                  )}
                 </div>
-
-                {lesson.progress && (
-                  <div className="flex items-center gap-1 mt-2">
-                    {lesson.concepts.map((cid) => (
-                      <MasteryBadge key={cid} status={lesson.progress?.[cid]?.status} size="sm" />
-                    ))}
-                  </div>
-                )}
               </div>
             </button>
           )

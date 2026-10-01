@@ -167,7 +167,9 @@ function StudyContent() {
     })
   }, [lessonsByDomain])
 
-  // Aggregate progress per domain
+  // Aggregate progress per domain. Not rendered anywhere on Study — it survives
+  // only to decide whether to offer the "Start here" orientation to a learner
+  // who has not mastered anything anywhere. Progression itself lives on Profile.
   const domainAgg = useMemo(() => {
     const agg: Record<string, { mastered: number; total: number; pct: number }> = {}
     for (const [domain, lessons] of Object.entries(lessonsByDomain)) {
@@ -263,7 +265,6 @@ function StudyContent() {
             <DomainDrillDown
               domain={selectedDomain}
               lessons={lessonsByDomain[selectedDomain] || []}
-              agg={domainAgg[selectedDomain]}
               onBack={() => {
                 setSelectedDomain(null)
                 push('/study')
@@ -307,7 +308,6 @@ function StudyContent() {
               <DomainOverview
                 domains={sortedDomains}
                 lessonsByDomain={lessonsByDomain}
-                domainAgg={domainAgg}
                 allLessons={allLessons}
                 onSelectDomain={(d) => {
                   setSelectedDomain(d)
