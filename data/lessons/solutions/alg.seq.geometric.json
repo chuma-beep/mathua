@@ -1,0 +1,15 @@
+{
+  "concept": "alg.seq.geometric",
+  "setup": "The sequence is geometric and you want term [[n]].",
+  "steps": [
+    {
+      "fact": "r",
+      "say": "A geometric sequence multiplies by a constant ratio each step, so the n-th term is the first term multiplied by the ratio taken [[nm1]] times."
+    },
+    {
+      "fact": "an",
+      "say": "That gives [[a1]] × [[r]]^[[nm1]] = [[an]]."
+    }
+  ],
+  "answer": "So a([[n]]) = [[an]]."
+}

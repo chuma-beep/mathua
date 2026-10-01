@@ -1,0 +1,15 @@
+{
+  "concept": "alg.conic.ellipse",
+  "setup": "You are asked for the [[label]] axis length.",
+  "steps": [
+    {
+      "fact": "val2",
+      "say": "In an ellipse each denominator is the *square* of its axis length, so the value wanted is the square root of that denominator."
+    },
+    {
+      "fact": "val",
+      "say": "That is √[[val2]] = [[val]]."
+    }
+  ],
+  "answer": "So the [[label]] axis length is [[val]]."
+}

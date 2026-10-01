@@ -1,0 +1,17 @@
+{
+  "concept": "alg.conic.hyperbola",
+  "setup": "The hyperbola is written with one positive and one negative term.",
+  "steps": [
+    {
+      "fact": "is_horizontal",
+      "say": "A hyperbola's transverse axis is the one whose term carries the positive sign, so here it runs along the x-axis.",
+      "optional": true
+    },
+    {
+      "fact": "is_vertical",
+      "say": "A hyperbola's transverse axis is the one whose term carries the positive sign, so here it runs along the y-axis.",
+      "optional": true
+    }
+  ],
+  "answer": "So the transverse axis is [[answer]]."
+}

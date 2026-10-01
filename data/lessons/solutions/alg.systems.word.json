@@ -1,0 +1,19 @@
+{
+  "concept": "alg.systems.word",
+  "setup": "Two numbers add to [[sum]] and differ by [[diff]].",
+  "steps": [
+    {
+      "fact": "sum",
+      "say": "Write the two facts as equations: x + y = [[sum]] and x − y = [[diff]]."
+    },
+    {
+      "fact": "two_x",
+      "say": "Adding them cancels y on the left and adds the right-hand sides: 2x = [[two_x]]."
+    },
+    {
+      "fact": "big",
+      "say": "That gives x = [[big]], and substituting back gives the other number as [[small]]."
+    }
+  ],
+  "answer": "So the numbers are [[small]] and [[big]]."
+}

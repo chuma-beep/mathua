@@ -28,6 +28,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"regexp"
 	"sort"
 	"strings"
 )
@@ -242,6 +243,14 @@ func render(s *Schema, facts map[string]string, strictFacts bool) (string, []str
 	return b.String(), nil
 }
 
+// placeholderRe matches a placeholder's contents: a snake_case fact name. The
+// restriction is not cosmetic — the row-echelon form a systems question is
+// graded against is literally written [[a,b,c],[0,d,e]], so an unrestricted
+// [[...]] would chew up the answer it is supposed to be embedding. A typo like
+// [[Num]] is therefore left as literal text and caught by the leak test rather
+// than silently treated as a fact.
+var placeholderRe = regexp.MustCompile(`^[a-z_][a-z0-9_]*$`)
+
 // lookup substitutes every [[name]] in text. An unresolved name is left
 // verbatim so a partially-resolved render is visibly wrong in tests and logs
 // rather than silently plausible.
@@ -262,6 +271,13 @@ func lookup(text string, facts map[string]string, note func(string)) string {
 			return b.String()
 		}
 		name := text[i+2 : i+j]
+		if !placeholderRe.MatchString(name) {
+			// Not a placeholder (matrix notation, or a malformed name): pass the
+			// whole span through untouched.
+			b.WriteString(text[:i+j+2])
+			text = text[i+j+2:]
+			continue
+		}
 		b.WriteString(text[:i])
 		if v, ok := facts[name]; ok {
 			b.WriteString(v)
@@ -270,5 +286,28 @@ func lookup(text string, facts map[string]string, note func(string)) string {
 			b.WriteString(text[i : i+j+2])
 		}
 		text = text[i+j+2:]
+	}
+}
+
+// Unresolved returns the placeholder-looking spans still present in text after
+// assembly — that is, a test for a schema that referenced a fact its generator
+// does not publish. Matrix notation such as [[4,3,6],[0,1,1]] is not a
+// placeholder and is not reported.
+func Unresolved(text string) []string {
+	var out []string
+	for i := 0; ; {
+		j := strings.Index(text[i:], "[[")
+		if j < 0 {
+			return out
+		}
+		i += j
+		k := strings.Index(text[i:], "]]")
+		if k < 0 {
+			return out
+		}
+		if name := text[i+2 : i+k]; placeholderRe.MatchString(name) {
+			out = append(out, name)
+		}
+		i += k + 2
 	}
 }

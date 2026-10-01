@@ -1,0 +1,22 @@
+{
+  "concept": "alg.conic.parabola",
+  "setup": "The parabola is in the form that opens along one axis.",
+  "steps": [
+    {
+      "fact": "four_p",
+      "say": "The sign of 4p decides the direction: positive opens one way, negative the other. Here 4p = [[four_p]].",
+      "optional": true
+    },
+    {
+      "fact": "is_vertical_axis",
+      "say": "In (x − h)² = 4p(y − k) the vertex sits at (h, k) and the curve opens vertically — up when p is positive, down when negative.",
+      "optional": true
+    },
+    {
+      "fact": "is_horizontal_axis",
+      "say": "In (y − k)² = 4p(x − h) the vertex sits at (h, k) and the curve opens horizontally — right when p is positive, left when negative.",
+      "optional": true
+    }
+  ],
+  "answer": "So it opens [[answer]]."
+}

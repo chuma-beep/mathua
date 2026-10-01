@@ -1,0 +1,15 @@
+{
+  "concept": "alg.seq.arithmetic",
+  "setup": "The sequence is arithmetic and you want term [[n]].",
+  "steps": [
+    {
+      "fact": "d",
+      "say": "An arithmetic sequence moves by a constant amount each step, so the n-th term is the first term plus that amount taken [[nm1]] times — the n−1 is there because term 1 already used none of them."
+    },
+    {
+      "fact": "an",
+      "say": "That gives [[a1]] + ([[nm1]])([[d]]) = [[an]]."
+    }
+  ],
+  "answer": "So a([[n]]) = [[an]]."
+}

@@ -1,0 +1,15 @@
+{
+  "concept": "alg.systems.substitution",
+  "setup": "y = [[y]] and x + y = [[sum]].",
+  "steps": [
+    {
+      "fact": "y",
+      "say": "Substitution works when one equation already gives a variable outright. Here y is already [[y]], so put that in place of y in the other equation."
+    },
+    {
+      "fact": "x",
+      "say": "That gives x + [[y]] = [[sum]], so x = [[x]]."
+    }
+  ],
+  "answer": "The solution is ([[x]], [[y]])."
+}

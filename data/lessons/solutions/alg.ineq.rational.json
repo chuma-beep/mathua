@@ -1,0 +1,15 @@
+{
+  "concept": "alg.ineq.rational",
+  "setup": "You want the smallest integer x with 1/(x − [[a]]) > 0.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The numerator 1 is positive and always will be, so the fraction is positive exactly when its denominator is. That also means x = [[a]] is excluded, where the fraction is undefined."
+    },
+    {
+      "fact": "ans",
+      "say": "So x − [[a]] > 0, and the smallest whole number above that is [[ans]]."
+    }
+  ],
+  "answer": "So the answer is [[ans]]."
+}

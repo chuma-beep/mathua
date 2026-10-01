@@ -1,0 +1,32 @@
+{
+  "concept": "alg.ineq.sign_analysis",
+  "setup": "f(x) = (x + [[r]])(x − [[r]]).",
+  "steps": [
+    {
+      "fact": "is_zeros",
+      "say": "A zero is where the whole product is zero, which happens when either factor is zero.",
+      "optional": true
+    },
+    {
+      "fact": "lo",
+      "say": "x + [[r]] = 0 gives x = [[lo]], and x − [[r]] = 0 gives x = [[hi]].",
+      "optional": true
+    },
+    {
+      "fact": "is_between",
+      "say": "Between the two roots the first factor is positive and the second negative, so their product is negative.",
+      "optional": true
+    },
+    {
+      "fact": "is_below",
+      "say": "Below both roots each factor is negative, and a product of two negatives is positive.",
+      "optional": true
+    },
+    {
+      "fact": "is_above",
+      "say": "Above both roots each factor is positive, so the product is positive.",
+      "optional": true
+    }
+  ],
+  "answer": "So the answer is [[answer]]."
+}
