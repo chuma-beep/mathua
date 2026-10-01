@@ -995,6 +995,72 @@ func TestIdentitiesEndpoints(t *testing.T) {
 	}
 }
 
+// The practice endpoint is what writes the server-side answer anchor, and it
+// keys that anchor by student. It could not: /api/lessons/ was registered
+// without auth middleware, so the bearer token was never resolved into the
+// request context, and the only other route to an anchor was a student_id the
+// client does not send on that call. The anchor was therefore never written
+// for anyone, and every study answer was graded against the client's own
+// expected answer — the exact cheat the anchor was added to prevent.
+func TestPractice_WritesTheStudyAnchor(t *testing.T) {
+	_, mux, _ := guestServer(t)
+	token, studentID := quizGuest(t, mux)
+
+	rec := httptest.NewRecorder()
+	get := httptest.NewRequest("GET", "/api/lessons/a/practice?count=1", nil)
+	get.Header.Set("Authorization", "Bearer "+token)
+	mux.ServeHTTP(rec, get)
+	if rec.Code != 200 {
+		t.Fatalf("practice: %d %s", rec.Code, rec.Body.String())
+	}
+	var set struct {
+		Questions []struct{ Question, Answer, Explanation string } `json:"questions"`
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &set); err != nil {
+		t.Fatalf("decode practice: %v", err)
+	}
+	if len(set.Questions) == 0 {
+		t.Fatal("expected a served question")
+	}
+	question := set.Questions[0].Question
+	answer := set.Questions[0].Answer
+
+	// A deliberately wrong answer for that exact question. Before the
+	// middleware it came back 409 (no anchor); now it grades, and the answer it
+	// graded against is the served one rather than whatever the client claimed.
+	body, _ := json.Marshal(map[string]interface{}{
+		"concept_id": "a",
+		"answer":     "definitely wrong",
+		"expected":   "also wrong",
+		"elapsed":    5.0,
+		"question":   question,
+		"student_id": studentID,
+	})
+	rec = httptest.NewRecorder()
+	post := httptest.NewRequest("POST", "/api/study/answer", bytes.NewReader(body))
+	post.Header.Set("Authorization", "Bearer "+token)
+	mux.ServeHTTP(rec, post)
+	if rec.Code == 409 {
+		t.Fatalf("practice did not write an anchor: %s", rec.Body.String())
+	}
+	if rec.Code != 200 {
+		t.Fatalf("study answer: %d %s", rec.Code, rec.Body.String())
+	}
+	var res struct {
+		Correct        bool   `json:"correct"`
+		ExpectedAnswer string `json:"expected_answer"`
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &res); err != nil {
+		t.Fatalf("decode answer: %v", err)
+	}
+	if res.Correct {
+		t.Error("a wrong answer graded correct")
+	}
+	if res.ExpectedAnswer != answer {
+		t.Errorf("expected_answer = %q, want the served %q", res.ExpectedAnswer, answer)
+	}
+}
+
 func TestStudyAnswer_UnknownConcept(t *testing.T) {
 	s := testServer(t)
 	mux := http.NewServeMux()

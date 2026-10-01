@@ -270,9 +270,15 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/reviews/due", logRequest(cors(s.authMiddleware(s.handleDueReviews))))
 	mux.HandleFunc("/api/reviews/session", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleReviewsSession)))))
 	mux.HandleFunc("/api/reviews/answer", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleReviewsAnswer)))))
-	mux.HandleFunc("/api/lessons", logRequest(cors(s.handleLessons)))
-	mux.HandleFunc("/api/lessons/body", logRequest(cors(s.handleLessonBody)))
-	mux.HandleFunc("/api/lessons/", logRequest(cors(s.handleLessonConcept)))
+	// The lesson routes stay publicly readable — Study is reference and is
+	// indexed — so auth is optional, but it must be *present*: the practice
+	// branch writes the server-side answer anchor, and it can only key that
+	// anchor by student once the bearer token has been resolved into the
+	// request context. Without the middleware here the anchor was never
+	// written, and every study answer fell back to the client's own expected.
+	mux.HandleFunc("/api/lessons", logRequest(cors(s.optionalAuthMiddleware(s.handleLessons))))
+	mux.HandleFunc("/api/lessons/body", logRequest(cors(s.optionalAuthMiddleware(s.handleLessonBody))))
+	mux.HandleFunc("/api/lessons/", logRequest(cors(s.optionalAuthMiddleware(s.handleLessonConcept))))
 	mux.HandleFunc("/api/concepts/", logRequest(cors(s.handleConceptDetail)))
 	mux.HandleFunc("/api/study/answer", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleStudyAnswer)))))
 	mux.HandleFunc("/api/reports", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(func(w http.ResponseWriter, r *http.Request) {
