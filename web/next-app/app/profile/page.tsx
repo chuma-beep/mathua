@@ -5,18 +5,15 @@ import Link from 'next/link'
 import { useTheme } from '../../hooks/useTheme'
 import { getUserInfo, ensureGuestId, ensureGuestToken, getGuestId, isLoggedIn } from '../../lib/auth'
 import { ensureDicebearAvatar, resolveAvatar } from '../../lib/dicebear'
-import { getActivity, getProgress, getWeaknesses, getDueReviews, getEfficacy, getEfficacyTrend, getScores, getSettings } from '../../lib/api'
-import type { DailyActivity, Scores, WeaknessRes, ConceptProgress, EfficacyReport, EfficacyTrend } from '../../lib/api'
+import { getActivity, getProgress, getWeaknesses, getDueReviews, getScores, getSettings } from '../../lib/api'
+import type { DailyActivity, Scores, WeaknessRes, ConceptProgress } from '../../lib/api'
 import ProfileStats from '../../components/ProfileStats'
-import ActivityHeatmap from '../../components/ActivityHeatmap'
-import DomainProgress from '../../components/DomainProgress'
-import StrugglesSection from '../../components/StrugglesSection'
 import ProfileSkeleton from '../../components/skeletons/ProfileSkeleton'
 import { AppSidebar } from '../../components/app-sidebar'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '../../components/ui/sidebar'
 import NextUpSummary from '../../components/NextUpSummary'
 import DailyGoalControl, { getGuestGoal } from '../../components/DailyGoalControl'
-import { selectNextUp, selectShelfHead, isNewUser, recentlyUnlocked, hrefConceptId, RECENT_UNLOCK_DAYS } from '../../lib/nextUp'
+import { selectNextUp, selectShelfHead, isNewUser } from '../../lib/nextUp'
 import { concepts as conceptCatalog } from '../../lib/conceptData'
 
 interface UserInfo {
@@ -38,8 +35,6 @@ export default function ProfilePage() {
   const [progress, setProgress] = useState<Record<string, ConceptProgress>>({})
   const [weaknesses, setWeaknesses] = useState<WeaknessRes | null>(null)
   const [dueReviews, setDueReviews] = useState(0)
-  const [efficacy, setEfficacy] = useState<EfficacyReport | null>(null)
-  const [efficacyTrend, setEfficacyTrend] = useState<EfficacyTrend | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [goalOverride, setGoalOverride] = useState<number | null>(null)
@@ -91,30 +86,6 @@ export default function ProfilePage() {
       }),
     [dueReviews, weaknesses, progress, activity, user?.diagnostic_completed, scores?.concepts_mastered],
   )
-
-
-  // Recently unlocked: successors unlocked by recently-active concepts
-  // (recency derived client-side from activity — no endpoint needed). Head
-  // and queue destinations are filtered so no two items share an href and
-  // nothing re-links the head concept.
-  const unlockRows = useMemo(() => {
-    const rows = recentlyUnlocked({
-      catalog: conceptCatalog.map(c => ({ id: c.id, label: c.label, prerequisites: c.prerequisites ?? [] })),
-      progress,
-      activity,
-      recentDays: RECENT_UNLOCK_DAYS,
-    })
-    const headCid = hrefConceptId(head.next.href)
-    const seen = new Set([head.next.href, ...head.alternatives.map(a => a.href)])
-    return rows.filter(r => {
-      const href = `/learn?concept=${encodeURIComponent(r.id)}`
-      if (seen.has(href)) return false
-      const cid = hrefConceptId(href)
-      if (cid !== null && cid === headCid) return false
-      seen.add(href)
-      return true
-    }).slice(0, 5)
-  }, [head, progress, activity])
 
 
   useEffect(() => {
@@ -169,8 +140,6 @@ export default function ProfilePage() {
           setProgress(progressRes)
           setWeaknesses(weaknessesRes)
           getDueReviews().then(r => setDueReviews(r.count)).catch(() => {})
-          getEfficacy().then(setEfficacy).catch(() => {})
-          getEfficacyTrend().then(setEfficacyTrend).catch(() => {})
         } else {
           // Guest: fetch progress via ephemeral guest_id so Study answers are visible
           const guestId = getGuestId() || ''
@@ -250,6 +219,7 @@ export default function ProfilePage() {
             <div className="flex flex-col sm:flex-row flex-wrap gap-3 justify-center">
               <Link href="/login" className="w-full sm:w-auto border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap">Sign in</Link>
               <Link href="/learn" className="w-full sm:w-auto border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap">Try as guest →</Link>
+              <Link href="/progress" className="w-full sm:w-auto border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap">See your progress →</Link>
             </div>
           </div>
           {(Object.keys(progress).length === 0 && !activity.some(d => d.questions > 0)) && (
@@ -274,14 +244,6 @@ export default function ProfilePage() {
               </div>
             </section>
           )}
-          <section className="mt-8 flex min-w-0 flex-col items-stretch">
-            <h2 className="font-serif text-[1.05rem] font-normal text-mathua-primary mb-4 w-full">Activity</h2>
-            <div className="w-full max-w-full min-w-0 flex justify-center overflow-hidden">
-              <div className="w-full max-w-full min-w-0">
-                <ActivityHeatmap data={activity} />
-              </div>
-            </div>
-          </section>
           {/* Diagnostic CTA — guest */}
           <section className="mt-6 w-full max-w-full min-w-0 overflow-hidden border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
             <div className="w-full sm:flex-1 min-w-0 overflow-hidden">
@@ -294,11 +256,6 @@ export default function ProfilePage() {
             <Link href="/onboard" className="w-full sm:w-auto sm:shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap">Start diagnostic test →</Link>
           </section>
 
-          <section className="mt-10">
-            <div className="grid grid-cols-1 gap-4 lg:gap-6 min-w-0">
-              <DomainProgress progress={progress} />
-            </div>
-          </section>
           </div>
         </SidebarInset>
       </SidebarProvider>
@@ -374,17 +331,14 @@ export default function ProfilePage() {
             }}
           />
         )}
-        {effScores && isLoggedIn() && (
-          <div className="mt-4 flex items-center justify-between gap-3 border border-mathua-border bg-mathua-surface p-4">
-            <p className="font-mono text-xs text-mathua-secondary">
-              Daily XP target · <span className="text-mathua-primary">{effScores.daily_xp_goal}/day</span>
-            </p>
-            <Link href="/settings" className="shrink-0 font-mono text-[11px] text-mathua-blue hover:text-mathua-blue-hover">
-              Change →
-            </Link>
-          </div>
-        )}
-        <Link href="/plan" className="mt-3 inline-block font-mono text-xs text-mathua-blue">Plan your learning → finish-date estimates</Link>
+        <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 font-mono text-xs">
+          <Link href="/progress" className="text-mathua-blue hover:text-mathua-blue-hover">
+            See your progress →
+          </Link>
+          <Link href="/plan" className="text-mathua-blue hover:text-mathua-blue-hover">
+            Plan your learning → finish-date estimates
+          </Link>
+        </div>
 
         <NextUpSummary shelf={head} />
 
@@ -411,27 +365,6 @@ export default function ProfilePage() {
           </section>
         )}
 
-        {/* Activity heatmap — centered, GitHub-style, full-width on mobile */}
-        <section id="activity" className="mt-8 flex min-w-0 flex-col items-stretch scroll-mt-28">
-          <h2 className="font-serif text-[1.05rem] font-normal text-mathua-primary mb-4 w-full">
-            Activity
-          </h2>
-          <div className="w-full max-w-full min-w-0 flex justify-center overflow-hidden">
-            <div className="w-full max-w-full min-w-0">
-              <ActivityHeatmap data={activity} />
-            </div>
-          </div>
-        </section>
-
-        <section id="struggles" className="mt-8 min-w-0 scroll-mt-28">
-          <StrugglesSection weaknesses={weaknesses} />
-          <div className="mt-3 text-center">
-            <Link href="/progress-card" className="font-mono text-xs text-mathua-blue hover:text-mathua-blue-hover">
-              View progress card →
-            </Link>
-          </div>
-        </section>
-
         {scores.paused_until && (
           <div className="mt-6 w-full max-w-full min-w-0 overflow-hidden border border-mathua-border bg-mathua-surface p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
             <p className="font-mono text-xs text-mathua-primary min-w-0 break-words [overflow-wrap:anywhere] leading-snug">
@@ -455,28 +388,6 @@ export default function ProfilePage() {
               Review Now →
             </span>
           </Link>
-        )}
-
-        {unlockRows.length > 0 && (
-          <section aria-label="Recently unlocked" className="mt-6 w-full max-w-full min-w-0 overflow-hidden border border-mathua-border bg-mathua-surface p-4">
-            <h3 className="font-mono text-[11px] text-mathua-muted uppercase tracking-wider mb-3">
-              Recently unlocked
-            </h3>
-            <ul className="space-y-1.5">
-              {unlockRows.map(r => (
-                <li key={r.id}>
-                  <Link
-                    href={`/learn?concept=${encodeURIComponent(r.id)}`}
-                    className="flex items-baseline gap-2 font-mono text-[11px] text-mathua-secondary hover:text-mathua-blue min-w-0"
-                  >
-                    <span className="shrink-0 uppercase tracking-wider text-mathua-muted">Unlocked</span>
-                    <span className="truncate">{r.label}</span>
-                    <span className="ml-auto shrink-0 text-mathua-muted">via {r.via}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </section>
         )}
 
         {/* Quiz gate — backend signal, lifetime fallback */}
@@ -522,62 +433,6 @@ export default function ProfilePage() {
           </Link>
         </section>
         )}
-
-        {/* Domain progress — mastered / completed / locked per domain */}
-        {/* Efficacy — first-pass / second-pass instrumentation */}
-        {efficacy && efficacy.concepts_touched > 0 && (
-          <section id="efficacy" className="mt-10 min-w-0 scroll-mt-28">
-            <h2 className="font-serif text-[1.05rem] font-normal text-mathua-primary mb-4">
-              Efficacy
-            </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 min-w-0">
-              {[
-                { label: 'First-pass', value: `${Math.round(efficacy.first_pass_rate * 100)}%`, hint: 'correct on attempt 1' },
-                { label: 'Second-pass', value: `${Math.round(efficacy.second_pass_rate * 100)}%`, hint: 'correct within 2 tries' },
-                { label: 'Avg attempts', value: efficacy.avg_attempts_per_concept.toFixed(2), hint: 'per concept' },
-                { label: 'Concepts', value: String(efficacy.concepts_touched), hint: `${efficacy.total_attempts} attempts` },
-              ].map(m => (
-                <div key={m.label} className="border border-mathua-border bg-mathua-surface p-3 min-w-0">
-                  <div className="font-mono text-[10px] uppercase text-mathua-muted">{m.label}</div>
-                  <div className="font-mono text-xl text-mathua-blue mt-1 truncate">{m.value}</div>
-                  <div className="font-mono text-[10px] text-mathua-secondary mt-0.5 truncate">{m.hint}</div>
-                </div>
-              ))}
-            </div>
-            {efficacyTrend && (efficacyTrend.weeks ?? []).length > 0 && (
-              <div className="mt-4 border border-mathua-border bg-mathua-surface p-3 min-w-0">
-                <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1 mb-2">
-                  <span className="font-mono text-[10px] uppercase text-mathua-muted">First-pass by week</span>
-                  <span className="font-mono text-[10px] text-mathua-muted">
-                    {efficacyTrend.total_students} learner{efficacyTrend.total_students !== 1 ? 's' : ''} · {Math.round(efficacyTrend.retention_rate * 100)}% returning
-                  </span>
-                </div>
-                <div className="flex items-end gap-1 h-12">
-                  {(efficacyTrend.weeks ?? []).slice(-12).map(w => (
-                    <div
-                      key={w.week_start}
-                      className="flex-1 min-w-0"
-                      title={`${w.week_start}: ${Math.round(w.first_pass_rate * 100)}% first-pass (${w.active_students} active)`}
-                    >
-                      <div
-                        className="w-full bg-mathua-blue"
-                        style={{ height: `${Math.max(2, Math.round(w.first_pass_rate * 48))}px` }}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </section>
-        )}
-
-        <section id="domains" className="mt-8 min-w-0 scroll-mt-28">
-          <div className="grid grid-cols-1 gap-4 min-w-0">
-            <DomainProgress progress={progress} />
-          </div>
-        </section>
-
-
           </div>
         </div>
       </SidebarInset>
