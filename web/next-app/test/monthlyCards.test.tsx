@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import MonthlyCards from '../components/MonthlyCards'
 
 function iso(year: number, month: number, day: number): string {
@@ -10,11 +10,16 @@ function entry(year: number, month: number, day: number, questions = 5) {
   return { date: iso(year, month, day), questions, correct: 4, concepts: ['a'] }
 }
 
-describe('MonthlyCards', () => {
-  it('renders only active months plus the current anchor, newest first', () => {
+const MONTHS = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December',
+]
+
+describe('MonthlyCards strip', () => {
+  it('renders active months plus the current anchor, oldest first', () => {
     const now = new Date()
     const old = new Date(now.getFullYear(), now.getMonth() - 4, 1)
-    render(
+    const { container } = render(
       <MonthlyCards
         data={[
           entry(old.getFullYear(), old.getMonth(), 3),
@@ -22,36 +27,35 @@ describe('MonthlyCards', () => {
         ]}
       />
     )
-    const buttons = screen.getAllByRole('button')
-    expect(buttons).toHaveLength(2)
-    // Newest (current anchor) first.
-    expect(buttons[0].getAttribute('aria-label')).toContain(String(now.getFullYear()))
+    const strip = container.querySelector('[data-testid="month-strip"]')
+    expect(strip).not.toBeNull()
+    expect(strip?.className).toMatch(/overflow-x-auto/)
+    const headings = Array.from(strip?.querySelectorAll('p') ?? []).map((p) => p.textContent ?? '')
+    expect(headings).toHaveLength(2)
+    // Oldest left, current anchor right.
+    expect(headings[0]).toContain(MONTHS[old.getMonth()])
+    expect(headings[1]).toContain(MONTHS[now.getMonth()])
   })
 
   it('renders a single current-month card for empty data', () => {
-    render(<MonthlyCards data={[]} />)
-    expect(screen.getAllByRole('button')).toHaveLength(1)
+    const { container } = render(<MonthlyCards data={[]} />)
+    const strip = container.querySelector('[data-testid="month-strip"]')
+    expect(strip?.querySelectorAll('p').length).toBe(1)
   })
 
-  it('expands same-month-different-year independently', () => {
+  it('shows every grid without toggles', () => {
     const now = new Date()
-    const month = now.getMonth()
     render(
       <MonthlyCards
         data={[
-          entry(now.getFullYear() - 1, month, 3),
-          entry(now.getFullYear(), month, 5),
+          entry(now.getFullYear() - 1, now.getMonth(), 3),
+          entry(now.getFullYear(), now.getMonth(), 5),
         ]}
       />
     )
-    const buttons = screen.getAllByRole('button')
-    expect(buttons).toHaveLength(2)
-    // Newest expanded by default; exactly one open.
-    expect(buttons.filter((b) => b.getAttribute('aria-expanded') === 'true')).toHaveLength(1)
-    // Opening the older year closes the newer one — never both.
-    fireEvent.click(buttons[1])
-    expect(buttons.filter((b) => b.getAttribute('aria-expanded') === 'true')).toHaveLength(1)
-    expect(buttons[1].getAttribute('aria-expanded')).toBe('true')
+    expect(screen.queryByRole('button')).toBeNull()
+    // Both months' grids visible: tooltips from each year present.
+    expect(document.querySelectorAll('div[title*="q,"]').length).toBeGreaterThan(0)
   })
 
   it('shows heat cells without day numbers, tooltips intact', () => {
