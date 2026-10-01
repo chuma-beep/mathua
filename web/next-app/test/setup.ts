@@ -47,6 +47,27 @@ if (typeof window !== 'undefined' && typeof window.matchMedia !== 'function') {
   })
 }
 
+// jsdom has no IntersectionObserver — the landing's reveal-on-scroll sections and
+// the CountUp component both need one. A no-op that reports intersecting keeps
+// the content rendered rather than invisible, which is what a test wants.
+if (typeof globalThis.IntersectionObserver === 'undefined') {
+  class NoopIntersectionObserver {
+    readonly root = null
+    readonly rootMargin = ''
+    readonly thresholds: readonly number[] = []
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+    takeRecords(): IntersectionObserverEntry[] {
+      return []
+    }
+  }
+  Object.defineProperty(globalThis, 'IntersectionObserver', {
+    value: NoopIntersectionObserver,
+    configurable: true,
+  })
+}
+
 afterEach(() => {
   cleanup()
 })
