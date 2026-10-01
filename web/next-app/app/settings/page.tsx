@@ -8,6 +8,7 @@ import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
 import DangerZone from '../../components/DangerZone'
 import DailyGoalControl from '../../components/DailyGoalControl'
+import PlanEditor from '../../components/PlanEditor'
 import Footer from '../../components/Footer'
 import { getSettings, getScores, updateSettings, updateProfileName, changePassword, uploadAvatar, deleteAvatar, avatarImageUrl, getIdentities, deleteIdentity, createLinkToken, requestEmailVerification, startOAuthLogin, getConfig, OAUTH_LABELS, type OAuthProvider, enableShare, disableShare, type UserSettings } from '../../lib/api'
 import { isLoggedIn, getUserInfo, setUserInfo } from '../../lib/auth'
@@ -405,6 +406,16 @@ export default function SettingsPage() {
                 </p>
                 <div className="mt-3">
                   <DailyGoalControl current={dailyGoal} onSaved={setDailyGoal} bare />
+                </div>
+              </div>
+
+              <div className="border-t border-mathua-border pt-6 min-w-0">
+                <span className="font-mono text-sm text-mathua-primary">Learning plan</span>
+                <p className="text-mathua-muted text-xs mt-1">
+                  Destination, pace, and rest days. Full workload estimates live in <Link href="/plan" className="text-mathua-blue hover:text-mathua-blue-hover">Plan</Link>.
+                </p>
+                <div className="mt-2">
+                  <PlanEditor compact />
                 </div>
               </div>
 

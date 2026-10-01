@@ -45,11 +45,16 @@ vi.mock('../lib/api', () => ({
   enableShare: vi.fn(),
   disableShare: vi.fn(),
   getScores: () => Promise.resolve({ daily_xp_goal: 10 }),
+  getDestinations: () => Promise.resolve([]),
+  getEstimate: () => Promise.reject(new Error('offline')),
+  savePlan: vi.fn(),
+  getCurrentPlan: () => Promise.resolve({ plan: null }),
 }))
 
 vi.mock('../lib/auth', () => ({
   isLoggedIn: () => true,
   getUserInfo: () => mockUser,
+  getGuestId: () => '',
   setUserInfo: (info: typeof mockUser) => setUserInfoMock(info),
 }))
 
