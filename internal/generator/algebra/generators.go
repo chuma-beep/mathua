@@ -180,7 +180,7 @@ func (g *linearGraphGen) Generate(ctx generator.GeneratorContext) generator.Prob
 	x := rand.Intn(5) + 1
 	y := m*x + b
 	return generator.Problem{
-		Question:    fmt.Sprintf("Given \\(y = %s\\), find \\(y\\) when \\(x = %d\\).", formatLinear(m, b), x),
+		Question:    fmt.Sprintf("Given \\(%s\\), find \\(y\\) when \\(x = %d\\).", formatLinear(m, b), x),
 		Answer:      fmt.Sprintf("%d", y),
 		Explanation: fmt.Sprintf("\\(y = %d(%d) + %d = %d + %d = %d\\)", m, x, b, m*x, b, y),
 		Facts:       map[string]string{"m": strconv.Itoa(m), "b": strconv.Itoa(b), "x": strconv.Itoa(x), "mx": strconv.Itoa(m * x), "y": strconv.Itoa(y)},
@@ -613,6 +613,7 @@ func (g *funcConceptGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("If \\(f(x) = %dx + %d\\), what is \\(f(%d)\\)?", a, b, x),
 		Answer:      fmt.Sprintf("%d", a*x+b),
 		Explanation: fmt.Sprintf("\\(f(%d) = %d(%d) + %d = %d\\)", x, a, x, b, a*x+b),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "x": strconv.Itoa(x), "ax": strconv.Itoa(a * x), "y": strconv.Itoa(a*x + b)},
 	}
 }
 
@@ -627,6 +628,7 @@ func (g *funcNotationGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		Question:    fmt.Sprintf("\\(f(x) = %dx + %d\\). Find \\(x\\) when \\(f(x) = %d\\).", a, b, y),
 		Answer:      fmt.Sprintf("%d", x),
 		Explanation: fmt.Sprintf("\\(%dx + %d = %d\\) → \\(%dx = %d\\) → \\(x = %d\\)", a, b, y, a, y-b, x),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "y": strconv.Itoa(y), "rhs": strconv.Itoa(y - b), "x": strconv.Itoa(x)},
 	}
 }
 
@@ -641,6 +643,7 @@ func (g *funcEvaluateGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		Question:    fmt.Sprintf("\\(f(x) = %dx + %d\\). Find \\(f(%d)\\).", a, b, x),
 		Answer:      fmt.Sprintf("%d", c),
 		Explanation: fmt.Sprintf("\\(f(%d) = %d(%d) + %d = %d\\)", x, a, x, b, c),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "x": strconv.Itoa(x), "ax": strconv.Itoa(a * x), "c": strconv.Itoa(c)},
 	}
 }
 
@@ -659,12 +662,14 @@ func (g *funcLinearGen) Generate(ctx generator.GeneratorContext) generator.Probl
 				Question:    fmt.Sprintf("What is the slope of \\(%s\\)? (enter a number)", formatLinear(m, b)),
 				Answer:      fmt.Sprintf("%d", m),
 				Explanation: fmt.Sprintf("In \\(y = mx + b\\), the slope is \\(%d\\).", m),
+				Facts:       map[string]string{"m": strconv.Itoa(m), "b": strconv.Itoa(b), "is_slope": "yes"},
 			}
 		}
 		return generator.Problem{
 			Question:    fmt.Sprintf("What is the y-intercept of \\(%s\\)? (enter a number)", formatLinear(m, b)),
 			Answer:      fmt.Sprintf("%d", b),
 			Explanation: fmt.Sprintf("In \\(y = mx + b\\), the y-intercept is \\(%d\\).", b),
+			Facts:       map[string]string{"m": strconv.Itoa(m), "b": strconv.Itoa(b), "is_intercept": "yes"},
 		}
 	}
 	if rand.Intn(2) == 0 {
@@ -674,9 +679,10 @@ func (g *funcLinearGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		}
 		b := rand.Intn(10) - 5
 		return generator.Problem{
-			Question:    fmt.Sprintf("Is \\(y = %s\\) a function? (yes/no)", formatLinear(m, b)),
+			Question:    fmt.Sprintf("Is \\(%s\\) a function? (yes/no)", formatLinear(m, b)),
 			Answer:      "yes",
 			Explanation: fmt.Sprintf("Linear equations always define functions (passes vertical line test)."),
+			Facts:       map[string]string{"m": strconv.Itoa(m), "b": strconv.Itoa(b), "is_linear_yes": "yes"},
 		}
 	}
 	c := rand.Intn(5) + 1
@@ -684,6 +690,7 @@ func (g *funcLinearGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Question:    fmt.Sprintf("Is \\(x = %d\\) a function? (yes/no)", c),
 		Answer:      "no",
 		Explanation: fmt.Sprintf("x = %d is a vertical line — it fails the vertical line test.", c),
+		Facts:       map[string]string{"c": strconv.Itoa(c), "is_vertical": "yes"},
 	}
 }
 
@@ -696,6 +703,7 @@ func (g *funcQuadGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		Question:    fmt.Sprintf("\\(f(x) = %dx^{2} + %d\\). Find \\(f(2)\\).", a, b),
 		Answer:      fmt.Sprintf("%d", 4*a+b),
 		Explanation: fmt.Sprintf("\\(f(2) = %d(4) + %d = %d + %d = %d\\)", a, b, 4*a, b, 4*a+b),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "four_a": strconv.Itoa(4 * a), "y": strconv.Itoa(4*a + b)},
 	}
 }
 
@@ -712,6 +720,7 @@ func (g *algExpConceptGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Question:    fmt.Sprintf("If \\(f(x) = %d^{x}\\), find \\(f(%d)\\).", a, x),
 		Answer:      fmt.Sprintf("%d", mathutil.IntPow(a, x)),
 		Explanation: fmt.Sprintf("\\(%d^{%d} = %d\\)", a, x, mathutil.IntPow(a, x)),
+		Facts:       map[string]string{"base": strconv.Itoa(a), "x": strconv.Itoa(x), "val": strconv.Itoa(mathutil.IntPow(a, x))},
 	}
 }
 
@@ -724,6 +733,7 @@ func (g *algExpEvaluateGen) Generate(ctx generator.GeneratorContext) generator.P
 		Question:    fmt.Sprintf("Evaluate: \\(%d^{%d}\\)", a, x),
 		Answer:      fmt.Sprintf("%d", mathutil.IntPow(a, x)),
 		Explanation: fmt.Sprintf("\\(%d^{%d} = %d\\)", a, x, mathutil.IntPow(a, x)),
+		Facts:       map[string]string{"base": strconv.Itoa(a), "x": strconv.Itoa(x), "val": strconv.Itoa(mathutil.IntPow(a, x))},
 	}
 }
 
@@ -737,6 +747,7 @@ func (g *logConceptGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Question:    fmt.Sprintf("Write as a logarithm: \\(%d^{%d} = %d\\)", base, exp, val),
 		Answer:      fmt.Sprintf("log_%d(%d) = %d", base, val, exp),
 		Explanation: fmt.Sprintf("\\(\\log_{%d}(%d) = %d\\)", base, val, exp),
+		Facts:       map[string]string{"base": strconv.Itoa(base), "exp": strconv.Itoa(exp), "val": strconv.Itoa(val)},
 	}
 }
 
@@ -750,6 +761,7 @@ func (g *logEvaluateGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("Evaluate: \\(\\log_{%d}(%d)\\)", base, val),
 		Answer:      fmt.Sprintf("%d", exp),
 		Explanation: fmt.Sprintf("\\(%d^{%d} = %d\\), so \\(\\log_{%d}(%d) = %d\\)", base, exp, val, base, val, exp),
+		Facts:       map[string]string{"base": strconv.Itoa(base), "exp": strconv.Itoa(exp), "val": strconv.Itoa(val)},
 	}
 }
 
@@ -763,6 +775,7 @@ func (g *logPropertiesGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Question:    fmt.Sprintf("Simplify: \\(\\log_{%d}(%d \\times %d)\\)", base, a, b),
 		Answer:      fmt.Sprintf("log_%d(%d) + log_%d(%d)", base, a, base, b),
 		Explanation: fmt.Sprintf("log_b(xy) = log_b(x) + log_b(y)."),
+		Facts:       map[string]string{"base": strconv.Itoa(base), "a": strconv.Itoa(a), "b": strconv.Itoa(b)},
 	}
 }
 
@@ -1056,6 +1069,7 @@ func (g *eqExpGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		Question:    fmt.Sprintf("Solve: \\(%d^{x-%d} = %d\\)", b, p, rhs),
 		Answer:      fmt.Sprintf("%d", e+p),
 		Explanation: fmt.Sprintf("\\(%d^{x-%d} = %d^{%d}\\) → \\(x-%d = %d\\) → \\(x = %d\\)", b, p, b, e+p, p, e, e+p),
+		Facts:       map[string]string{"base": strconv.Itoa(b), "p": strconv.Itoa(p), "rhs": strconv.Itoa(rhs), "e": strconv.Itoa(e), "x": strconv.Itoa(e + p)},
 	}
 }
 
@@ -1102,6 +1116,7 @@ func (g *eqLogGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		Question:    fmt.Sprintf("Solve: \\(\\log_{%d}(x) = %d\\)", b, e),
 		Answer:      fmt.Sprintf("%d", v),
 		Explanation: fmt.Sprintf("\\(\\log_{%d}(x) = %d\\) → \\(x = %d^{%d} = %d\\)", b, e, b, e, v),
+		Facts:       map[string]string{"base": strconv.Itoa(b), "e": strconv.Itoa(e), "v": strconv.Itoa(v)},
 	}
 }
 
@@ -1160,6 +1175,7 @@ func (g *funcAbsValGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Question:    fmt.Sprintf("If \\(f(x) = |x|\\), what is \\(f(%d)\\)?", x),
 		Answer:      fmt.Sprintf("%d", mathutil.Abs(x)),
 		Explanation: fmt.Sprintf("\\(|%d| = %d\\)", x, mathutil.Abs(x)),
+		Facts:       map[string]string{"x": strconv.Itoa(x), "abs": strconv.Itoa(mathutil.Abs(x))},
 	}
 }
 
@@ -1173,6 +1189,7 @@ func (g *funcCompositeGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Question:    fmt.Sprintf("If \\(f(x) = %dx\\) and \\(g(x) = x + %d\\), what is \\(f(g(%d))\\)?", a, b, x),
 		Answer:      fmt.Sprintf("%d", a*(x+b)),
 		Explanation: fmt.Sprintf("\\(g(%d) = %d+%d = %d\\). \\(f(g(%d)) = f(%d) = %d \\times %d = %d\\)", x, x, b, x+b, x, x+b, a, x+b, a*(x+b)),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "x": strconv.Itoa(x), "gx": strconv.Itoa(x + b), "y": strconv.Itoa(a * (x + b))},
 	}
 }
 
@@ -1267,6 +1284,7 @@ func (g *funcInverseGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("If \\(f(x) = %dx + %d\\), what is \\(f^{-1}(x)\\)?", a, b),
 		Answer:      fmt.Sprintf("(x %+d)/%d", -b, a),
 		Explanation: fmt.Sprintf("\\(y = %dx + %d\\) → \\(x = \\frac{y %+d}{%d}\\) → \\(f^{-1}(x) = \\frac{x %+d}{%d}\\)", a, b, -b, a, -b, a),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "neg_b": strconv.Itoa(-b)},
 	}
 }
 
@@ -1281,6 +1299,7 @@ func (g *monotonicityGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		Question:    fmt.Sprintf("Is \\(f(x) = %dx\\) increasing or decreasing on \\(\\mathbb{R}\\)?", a),
 		Answer:      map[bool]string{true: "increasing", false: "decreasing"}[a > 0],
 		Explanation: fmt.Sprintf("Slope = \\(%d\\). %s slope means the function is %s.", a, map[bool]string{true: "Positive", false: "Negative"}[a > 0], map[bool]string{true: "increasing", false: "decreasing"}[a > 0]),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "dir": map[bool]string{true: "increasing", false: "decreasing"}[a > 0], "sign": map[bool]string{true: "positive", false: "negative"}[a > 0]},
 	}
 }
 
@@ -1293,6 +1312,7 @@ func (g *funcRationalGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		Question:    fmt.Sprintf("What is the vertical asymptote of \\(f(x) = \\frac{%d}{x-%d}\\)?", a, b),
 		Answer:      fmt.Sprintf("%d", b),
 		Explanation: fmt.Sprintf("The denominator is zero at x = %d, so there is a vertical asymptote at x = %d.", b, b),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b)},
 	}
 }
 
@@ -1331,6 +1351,7 @@ func (g *funcSignGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		Question:    fmt.Sprintf("What is the sign of \\(f(x) = x\\) at \\(x = %d\\)?", x),
 		Answer:      ans,
 		Explanation: fmt.Sprintf("At x = %d, f(x) = %d, which is %s.", x, x, ans),
+		Facts:       map[string]string{"x": strconv.Itoa(x), "ans": ans},
 	}
 }
 
@@ -1389,6 +1410,7 @@ func (g *ineqLogGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 		Question:    fmt.Sprintf("What is the smallest integer \\(x\\) with \\(\\log_{%d}(x) > %d\\)? (enter a number)", b, e),
 		Answer:      fmt.Sprintf("%d", v+1),
 		Explanation: fmt.Sprintf("\\(\\log_{%d}(x) > %d\\) → \\(x > %d^{%d} = %d\\) (base > 1 preserves inequality), so the smallest integer is \\(%d\\)", b, e, b, e, v, v+1),
+		Facts:       map[string]string{"base": strconv.Itoa(b), "e": strconv.Itoa(e), "v": strconv.Itoa(v), "x": strconv.Itoa(v + 1)},
 	}
 }
 

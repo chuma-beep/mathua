@@ -1,0 +1,15 @@
+{
+  "concept": "alg.eq.exponential",
+  "setup": "You are solving [[base]]^(x − [[p]]) = [[rhs]].",
+  "steps": [
+    {
+      "fact": "rhs",
+      "say": "The right side is a power of the same base — [[base]]^[[x]] — and that is what lets the exponents be equated directly."
+    },
+    {
+      "fact": "x",
+      "say": "So x − [[p]] = [[x]], which gives x = [[x]]."
+    }
+  ],
+  "answer": "So x = [[x]]."
+}

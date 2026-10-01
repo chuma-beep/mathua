@@ -1,0 +1,15 @@
+{
+  "concept": "alg.func.evaluate",
+  "setup": "f(x) = [[a]]x + [[b]], and you want f([[x]]).",
+  "steps": [
+    {
+      "fact": "ax",
+      "say": "Substitute [[x]] for x: [[a]] × [[x]] = [[ax]]."
+    },
+    {
+      "fact": "c",
+      "say": "Adding the constant [[b]] gives [[c]]."
+    }
+  ],
+  "answer": "So f([[x]]) = [[c]]."
+}

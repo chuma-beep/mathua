@@ -1,0 +1,15 @@
+{
+  "concept": "alg.exp.evaluate",
+  "setup": "You are evaluating [[base]]^[[x]].",
+  "steps": [
+    {
+      "fact": "x",
+      "say": "A power is repeated multiplication, so count [[x]] copies of [[base]]."
+    },
+    {
+      "fact": "val",
+      "say": "The product is [[val]]."
+    }
+  ],
+  "answer": "So [[base]]^[[x]] = [[val]]."
+}

@@ -1,0 +1,11 @@
+{
+  "concept": "alg.func.rational",
+  "setup": "f(x) = [[a]]/(x − [[b]]).",
+  "steps": [
+    {
+      "fact": "b",
+      "say": "A vertical asymptote is where the graph shoots off to infinity, and a fraction blows up exactly when its denominator reaches zero. Setting x − [[b]] = 0 gives x = [[b]]."
+    }
+  ],
+  "answer": "So the vertical asymptote is x = [[b]]."
+}

@@ -1,0 +1,15 @@
+{
+  "concept": "alg.ineq.logarithmic",
+  "setup": "You want the smallest integer x with log base [[base]] of x > [[e]].",
+  "steps": [
+    {
+      "fact": "v",
+      "say": "Converting to exponent form gives x > [[base]]^[[e]] = [[v]]. The inequality keeps its direction because the base is greater than 1 — a base under 1 would flip it."
+    },
+    {
+      "fact": "x",
+      "say": "The smallest whole number above that is [[x]]."
+    }
+  ],
+  "answer": "So the answer is [[x]]."
+}

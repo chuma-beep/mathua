@@ -1,0 +1,15 @@
+{
+  "concept": "alg.func.notation",
+  "setup": "f(x) = [[a]]x + [[b]], and you want the x that makes f(x) = [[y]].",
+  "steps": [
+    {
+      "fact": "y",
+      "say": "Working out a function goes forwards; finding which input gives an output goes backwards, so treat f(x) = [[y]] as the equation [[a]]x + [[b]] = [[y]] and solve it."
+    },
+    {
+      "fact": "x",
+      "say": "Subtracting [[b]] gives [[a]]x = [[rhs]], and dividing by [[a]] isolates x."
+    }
+  ],
+  "answer": "So x = [[x]]."
+}

@@ -1,0 +1,15 @@
+{
+  "concept": "alg.func.sign",
+  "setup": "f(x) = x, and you want its sign at x = [[x]].",
+  "steps": [
+    {
+      "fact": "x",
+      "say": "At x = [[x]] the function takes the value [[x]] itself, since it is the identity."
+    },
+    {
+      "fact": "ans",
+      "say": "A [[ans]] value is on one side of zero; which side is the whole question."
+    }
+  ],
+  "answer": "So the sign is [[ans]]."
+}
