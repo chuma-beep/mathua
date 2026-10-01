@@ -260,6 +260,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/weaknesses", logRequest(cors(s.authMiddleware(s.handleWeaknesses))))
 	mux.HandleFunc("/api/goals/xp", logRequest(cors(s.authMiddleware(s.handleSetDailyXPGoal))))
 	mux.HandleFunc("/api/account/reset", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleAccountReset)))))
+	mux.HandleFunc("/api/account", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleAccountDelete)))))
 	mux.HandleFunc("/api/settings", logRequest(cors(s.authMiddleware(s.handleSettings))))
 	mux.HandleFunc("/api/avatar", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleAvatar)))))
 	mux.HandleFunc("/api/avatar/me", logRequest(cors(s.authMiddleware(s.handleAvatarMe))))
@@ -2284,6 +2285,46 @@ func (s *Server) handleAccountReset(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, map[string]interface{}{"reset": true})
 }
 
+// DELETE /api/account — delete the student and every owned row after typed
+// confirmation, plus the current password for password accounts (OAuth-only
+// and guest rows need the phrase alone). Irreversible.
+func (s *Server) handleAccountDelete(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodDelete {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	var req struct {
+		Phrase   string `json:"phrase"`
+		Password string `json:"password"`
+	}
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeError(w, "invalid request", 400)
+		return
+	}
+	st, err := s.repo.GetStudent(studentID)
+	if err != nil || st == nil {
+		writeError(w, "student not found", 404)
+		return
+	}
+	if st.PasswordHash != "" {
+		if strings.TrimSpace(req.Password) == "" {
+			writeError(w, "current password is required", 401)
+			return
+		}
+		if err := s.auth.CheckPassword(studentID, req.Password); err != nil {
+			writeError(w, "current password is incorrect", 401)
+			return
+		}
+	}
+	if err := s.eng.DeleteAccount(studentID, req.Phrase); err != nil {
+		writeError(w, "confirmation phrase does not match", 400)
+		return
+	}
+	log.Printf("auth: account deleted for student %s", studentID)
+	writeJSON(w, map[string]interface{}{"deleted": true})
+}
+
 // GET /api/courses/{id} — one course with the student's progress.
 func (s *Server) handleCourseDetail(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
@@ -3337,6 +3378,7 @@ func (s *Server) handleMe(w http.ResponseWriter, r *http.Request) {
 		"avatar_url":           st.AvatarURL,
 		"email":                st.Email,
 		"email_verified":       st.EmailVerified,
+		"has_password":         st.PasswordHash != "",
 	})
 }
 

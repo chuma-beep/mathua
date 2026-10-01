@@ -1,10 +1,32 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import DangerZone, { attemptsToCSV } from '../components/DangerZone'
+import DeleteAccount from '../components/DeleteAccount'
+import { getMe, deleteAccount } from '../lib/api'
+import { getUserInfo, signOut, clearGuest } from '../lib/auth'
+
+const pushMock = vi.fn()
 
 vi.mock('next/navigation', () => ({
-  useRouter: () => ({ push: vi.fn() }),
+  useRouter: () => ({ push: pushMock }),
 }))
+
+vi.mock('../lib/api', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('../lib/api')>()
+  return { ...mod, getMe: vi.fn(), deleteAccount: vi.fn(), getAttempts: vi.fn() }
+})
+
+vi.mock('../lib/auth', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('../lib/auth')>()
+  return { ...mod, getUserInfo: vi.fn(), signOut: vi.fn(), clearGuest: vi.fn() }
+})
+
+beforeEach(() => {
+  pushMock.mockClear()
+  vi.mocked(getUserInfo).mockReturnValue(null)
+  vi.mocked(getMe).mockResolvedValue({ student_id: 's1', name: 'A', has_password: false })
+  vi.mocked(deleteAccount).mockResolvedValue(undefined)
+})
 
 describe('DangerZone', () => {
   it('keeps reset disabled until the exact phrase is typed', () => {
@@ -34,5 +56,62 @@ describe('attemptsToCSV', () => {
     expect(lines[0]).toBe('timestamp,concept_id,question,answer,expected,correct,elapsed_seconds,source')
     expect(lines).toHaveLength(3)
     expect(lines[2]).toContain('"x ""y"""')
+  })
+})
+
+describe('DeleteAccount', () => {
+  it('keeps delete disabled until the exact phrase is typed', () => {
+    render(<DeleteAccount />)
+    const button = screen.getByRole('button', { name: /Delete my account/ })
+    expect(button).toBeDisabled()
+    fireEvent.change(screen.getByLabelText(/Type.*to confirm/i), { target: { value: 'delete' } })
+    expect(button).toBeDisabled()
+    fireEvent.change(screen.getByLabelText(/Type.*to confirm/i), { target: { value: 'delete my account' } })
+    expect(button).not.toBeDisabled()
+  })
+
+  it('requires the current password only for password accounts', async () => {
+    vi.mocked(getMe).mockResolvedValue({ student_id: 's1', name: 'A', has_password: true })
+    render(<DeleteAccount />)
+    expect(await screen.findByLabelText('Current password')).toBeTruthy()
+    fireEvent.change(screen.getByLabelText(/Type.*to confirm/i), { target: { value: 'delete my account' } })
+    // Phrase alone is not enough while the password is empty.
+    expect(screen.getByRole('button', { name: /^Delete my account$/ })).toBeDisabled()
+    fireEvent.change(screen.getByLabelText('Current password'), { target: { value: 'secret' } })
+    expect(screen.getByRole('button', { name: /^Delete my account$/ })).not.toBeDisabled()
+  })
+
+  it('omits the password field for OAuth-only rows', async () => {
+    render(<DeleteAccount />)
+    await screen.findByText(/Delete account/)
+    expect(screen.queryByLabelText('Current password')).toBeNull()
+  })
+
+  it('deletes, signs out fully, and lands on /', async () => {
+    vi.mocked(getMe).mockResolvedValue({ student_id: 's1', name: 'A', has_password: true })
+    render(<DeleteAccount />)
+    await screen.findByLabelText('Current password')
+    fireEvent.change(screen.getByLabelText(/Type.*to confirm/i), { target: { value: 'delete my account' } })
+    fireEvent.change(screen.getByLabelText('Current password'), { target: { value: 'secret' } })
+    fireEvent.click(screen.getByRole('button', { name: /^Delete my account$/ }))
+    await screen.findByText('Deleting…')
+    expect(vi.mocked(deleteAccount)).toHaveBeenCalledWith({ phrase: 'delete my account', password: 'secret' })
+    expect(vi.mocked(signOut)).toHaveBeenCalled()
+    expect(vi.mocked(clearGuest)).toHaveBeenCalled()
+    expect(pushMock).toHaveBeenCalledWith('/')
+  })
+
+  it('surfaces server errors without navigating', async () => {
+    vi.mocked(deleteAccount).mockRejectedValue(new Error('current password is incorrect'))
+    render(<DeleteAccount />)
+    fireEvent.change(screen.getByLabelText(/Type.*to confirm/i), { target: { value: 'delete my account' } })
+    fireEvent.click(screen.getByRole('button', { name: /^Delete my account$/ }))
+    expect(await screen.findByText('current password is incorrect')).toBeTruthy()
+    expect(pushMock).not.toHaveBeenCalled()
+  })
+
+  it('states total scope: nothing is kept', () => {
+    render(<DeleteAccount />)
+    expect(screen.getByText(/Nothing — deletion is total/i)).toBeTruthy()
   })
 })

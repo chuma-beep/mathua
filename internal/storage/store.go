@@ -297,6 +297,11 @@ type Repository interface {
 	// and league fields on the student row. Account, credentials,
 	// settings, avatar, course, and plan prefs survive.
 	ResetProgress(studentID string) error
+	// DeleteAccount removes one student and every owned row in a single
+	// transaction: credential-adjacent tables, learning evidence, sessions,
+	// study plans and prefs, filed reports, and the student row itself.
+	// Irreversible; the caller confirms explicitly.
+	DeleteAccount(studentID string) error
 	GetSessionAttempts(studentID, sessionID string) ([]AttemptEntry, error)
 	GetAttemptsForStudent(studentID string) ([]AttemptEntry, error)
 	GetAllAttempts() ([]AttemptEntry, error)

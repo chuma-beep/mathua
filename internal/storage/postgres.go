@@ -1180,6 +1180,49 @@ func (s *PostgresStore) ResetProgress(studentID string) error {
 	return nil
 }
 
+// DeleteAccount mirrors the SQLite twin (see Repository docs for scope).
+func (s *PostgresStore) DeleteAccount(studentID string) error {
+	tx, err := s.db.Begin()
+	if err != nil {
+		return fmt.Errorf("begin account delete: %w", err)
+	}
+	exec := func(stmt string, args ...interface{}) error {
+		if _, err := tx.Exec(stmt, args...); err != nil {
+			tx.Rollback()
+			return err
+		}
+		return nil
+	}
+	stmts := []struct {
+		q    string
+		args []interface{}
+	}{
+		{"DELETE FROM email_verifications WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM password_resets WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM link_tokens WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM identities WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM avatar_images WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM attempts WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM active_sessions WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM sessions WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM concept_progress WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM student_topic_speed WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM quiz_completions WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM server_sessions WHERE kind IN ('study_expected','study_plan','study_plan_prefs') AND (key = $1 OR key LIKE $1 || '|%')", []interface{}{studentID}},
+		{"DELETE FROM question_reports WHERE reporter_id = $1", []interface{}{studentID}},
+		{"DELETE FROM students WHERE id = $1", []interface{}{studentID}},
+	}
+	for _, st := range stmts {
+		if err := exec(st.q, st.args...); err != nil {
+			return fmt.Errorf("delete account: %w", err)
+		}
+	}
+	if err := tx.Commit(); err != nil {
+		return fmt.Errorf("commit account delete: %w", err)
+	}
+	return nil
+}
+
 // Attempts
 
 func (s *PostgresStore) RecordAttempt(entry AttemptEntry) error {

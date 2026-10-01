@@ -49,6 +49,8 @@ vi.mock('../lib/api', () => ({
   getEstimate: () => Promise.reject(new Error('offline')),
   savePlan: vi.fn(),
   getCurrentPlan: () => Promise.resolve({ plan: null }),
+  getMe: () => Promise.resolve({ student_id: 's1', name: 'A', has_password: true }),
+  deleteAccount: vi.fn(),
 }))
 
 vi.mock('../lib/auth', () => ({

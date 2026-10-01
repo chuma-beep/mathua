@@ -849,6 +849,32 @@ export async function resetAccount(phrase: string): Promise<void> {
 	}
 }
 
+const MeSchema = z.object({
+	student_id: z.string(),
+	name: z.string(),
+	has_password: z.boolean().optional(),
+})
+
+export type MeInfo = z.infer<typeof MeSchema>
+
+export async function getMe(): Promise<MeInfo> {
+	const res = await authedFetch(`${API_BASE}/api/auth/me`, { headers: { ...getAuthHeaders() } })
+	if (!res.ok) throw new Error(`Me fetch failed: ${res.status}`)
+	return validateResponse(MeSchema, await res.json(), 'getMe')
+}
+
+export async function deleteAccount(body: { phrase: string; password?: string }): Promise<void> {
+	const res = await authedFetch(`${API_BASE}/api/account`, {
+		method: 'DELETE',
+		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+		body: JSON.stringify(body),
+	})
+	if (!res.ok) {
+		const msg = await res.text().catch(() => '')
+		throw new Error(msg || `Delete failed: ${res.status}`)
+	}
+}
+
 export async function getWeaknesses(): Promise<WeaknessRes> {
   const res = await authedFetch(`${API_BASE}/api/weaknesses`, {
     headers: { ...getAuthHeaders() },
