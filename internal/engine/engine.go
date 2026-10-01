@@ -1641,8 +1641,42 @@ func computeXP(correct bool, elapsed, timeThreshold float64, streak int, isRevie
 	return computeXPForTask(correct, elapsed, timeThreshold, streak, taskType)
 }
 
+// decayDays matches the scheduler's threshold (scheduler.effectiveState), so
+// a concept reads the same way to the learner and to the thing that decides
+// what to serve them next.
+const decayDays = 14
+
+// GetProgress returns the learner's progress with decay applied at read time.
+//
+// The database stores MASTERED forever — decay is deliberately not persisted
+// (mastery.EffectiveStatus) — so the raw row claims a concept is mastered long
+// after its review went stale. That made Profile count it as mastered while the
+// scheduler simultaneously treated it as DECAYING and scheduled it for review:
+// two parts of the app disagreeing about the same fact, with nothing to show
+// for it. ConceptProgress carries no last_reviewed for the client to correct
+// it with, so it has to happen here.
+//
+// Every reader goes through this: /api/progress, the Study catalog, readiness,
+// and the due-review count.
 func (e *Engine) GetProgress(studentID string) (map[string]*storage.ConceptProgress, error) {
-	return e.repo.GetAllProgress(studentID)
+	progress, err := e.repo.GetAllProgress(studentID)
+	if err != nil {
+		return nil, err
+	}
+	now := time.Now().UTC()
+	for _, p := range progress {
+		if mastery.Status(p.Status) != mastery.StatusMastered {
+			continue
+		}
+		// No review timestamp means we cannot claim it is fresh, so treat it as
+		// fully decayed rather than pretending it was reviewed just now.
+		days := 999.0
+		if p.LastReviewed != nil {
+			days = now.Sub(*p.LastReviewed).Hours() / 24
+		}
+		p.Status = string(mastery.EffectiveStatus(mastery.StatusMastered, days, decayDays))
+	}
+	return progress, nil
 }
 
 func (e *Engine) GetScores(studentID string) (*scoring.Scores, error) {

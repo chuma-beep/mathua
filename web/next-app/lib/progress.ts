@@ -12,13 +12,24 @@ export function isMastered(p: ConceptProgress | undefined): boolean {
   return (p?.status ?? '').toLowerCase() === 'mastered'
 }
 
-// prereqMet: a prerequisite is satisfied when mastered OR completed. The
-// lesson-completion endpoint sets `completed`, which unlocks successors, while
-// mastery still gates the quiz. Same rule as the server's Available(); an
-// absent `completed` (pre-PR1 payload) behaves exactly as before.
+// countsAsMastered is mastery for the purpose of unlocking successors. DECAYING
+// qualifies, because the server says it does: scheduler.prereqsMet rejects
+// only what is neither MASTERED nor DECAYING. Treating a decayed prerequisite
+// as unmet would relock a learner's whole downstream path and disagree with the
+// scheduler that chose to serve them the concept in the first place.
+function countsAsMastered(p: ConceptProgress | undefined): boolean {
+  const status = (p?.status ?? '').toUpperCase()
+  return status === 'MASTERED' || status === 'DECAYING'
+}
+
+// prereqMet: a prerequisite is satisfied when it counts as mastered OR
+// completed. The lesson-completion endpoint sets `completed`, which unlocks
+// successors, while mastery still gates the quiz. Same rule as the server's
+// Available(); an absent `completed` (pre-PR1 payload) behaves exactly as
+// before.
 export function prereqMet(progress: Record<string, ConceptProgress>, pid: string): boolean {
   const p = progress[pid]
-  return isMastered(p) || p?.completed === true
+  return countsAsMastered(p) || p?.completed === true
 }
 
 export interface CatalogueConcept {

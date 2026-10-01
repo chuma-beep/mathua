@@ -101,3 +101,32 @@ describe('countOverall', () => {
     expect(got.unlocked).toBeGreaterThanOrEqual(0)
   })
 })
+
+// Decay is computed at read time by the server, so a stale concept arrives as
+// DECAYING rather than MASTERED. The two rules then have to disagree in a
+// specific way: DECAYING is not mastery, but it does still unlock successors.
+describe('decay', () => {
+  it('is not mastery', () => {
+    expect(isMastered(p('MASTERED'))).toBe(true)
+    expect(isMastered(p('DECAYING'))).toBe(false)
+  })
+
+  it('still satisfies a prerequisite, matching scheduler.prereqsMet', () => {
+    // If this were false, serving a decayed concept would relock everything
+    // downstream of it and disagree with the scheduler that chose to serve it.
+    expect(prereqMet({ a: p('DECAYING') }, 'a')).toBe(true)
+    expect(prereqMet({ a: p('MASTERED') }, 'a')).toBe(true)
+    expect(prereqMet({ a: p('LEARNING') }, 'a')).toBe(false)
+  })
+
+  it('does not change the locked count when a concept decays', () => {
+    const fresh = countByDomain(catalogue, { a: p('MASTERED'), b: p('PRACTICING') })
+    const stale = countByDomain(catalogue, { a: p('DECAYING'), b: p('PRACTICING') })
+    expect(stale.get('x')?.locked).toBe(fresh.get('x')?.locked)
+  })
+
+  it('does lower the mastered count, which is the point of reporting it', () => {
+    expect(countOverall(catalogue, { a: p('MASTERED') }).mastered).toBe(1)
+    expect(countOverall(catalogue, { a: p('DECAYING') }).mastered).toBe(0)
+  })
+})
