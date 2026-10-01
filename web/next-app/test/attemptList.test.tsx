@@ -1,12 +1,12 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
-import ProgressCardList from '../components/ProgressCardList'
-import ProgressCardPage from '../app/progress-card/page'
+import AttemptList from '../components/AttemptList'
+import HistoryPage from '../app/history/page'
 import type { AttemptRecord } from '../lib/api'
 
 // next/navigation stub for tests without a router
 vi.mock('next/navigation', () => ({
-  usePathname: () => '/progress-card',
+  usePathname: () => '/history',
   useRouter: () => ({ push: () => {} }),
 }))
 
@@ -49,9 +49,9 @@ const rows: AttemptRecord[] = [
   },
 ]
 
-describe('ProgressCardList', () => {
+describe('AttemptList', () => {
   it('renders verdicts, corrections, and concept links', () => {
-    render(<ProgressCardList attempts={rows} />)
+    render(<AttemptList attempts={rows} />)
     expect(screen.getAllByText('2 + 2 = ?').length).toBe(2)
     expect(screen.getByText(/You: 5/)).toBeInTheDocument()
     expect(screen.getByText(/Correct: 4/)).toBeInTheDocument()
@@ -60,21 +60,21 @@ describe('ProgressCardList', () => {
   })
 
   it('marks legacy rows without question text', () => {
-    render(<ProgressCardList attempts={[{ ...rows[0], question: '' }]} />)
+    render(<AttemptList attempts={[{ ...rows[0], question: '' }]} />)
     expect(screen.getByText(/question unavailable/i)).toBeInTheDocument()
   })
 
   it('explains the empty state', () => {
-    render(<ProgressCardList attempts={[]} />)
+    render(<AttemptList attempts={[]} />)
     expect(screen.getByText(/no answered questions yet/i)).toBeInTheDocument()
   })
 })
 
-describe('ProgressCardPage', () => {
+describe('HistoryPage', () => {
   it('defaults to missed filter and switches to all', async () => {
     const { getAttempts } = await import('../lib/api')
     vi.mocked(getAttempts).mockResolvedValue({ attempts: rows, total: 2 })
-    render(<ProgressCardPage />)
+    render(<HistoryPage />)
     await screen.findByText('Showing 2 of 2')
     expect(vi.mocked(getAttempts)).toHaveBeenCalledWith(
       expect.objectContaining({ incorrect_only: true }),
@@ -89,7 +89,7 @@ describe('ProgressCardPage', () => {
   it('filters by source', async () => {
     const { getAttempts } = await import('../lib/api')
     vi.mocked(getAttempts).mockResolvedValue({ attempts: [rows[1]], total: 1 })
-    render(<ProgressCardPage />)
+    render(<HistoryPage />)
     await screen.findByText('Showing 1 of 1')
     fireEvent.click(screen.getByRole('button', { name: 'quiz' }))
     await screen.findByText('Showing 1 of 1')

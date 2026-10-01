@@ -193,7 +193,7 @@ test('progress card: rows with corrections, missed filter, source filter', async
     localStorage.setItem('mathua_token', 'fake-token')
     localStorage.setItem('mathua_user', JSON.stringify({ student_id: 's1', name: 'Tester', username: 'tester', concepts_mastered: 1, current_streak: 1, level: 'Novice', diagnostic_completed: true }))
   })
-  await page.goto('/progress-card')
+  await page.goto('/history')
   await expect(page.getByText('Answered questions').first()).toBeVisible({ timeout: 30_000 })
   // Default: missed only.
   await expect(page.getByText('Showing 1 of 1').first()).toBeVisible()

@@ -11,7 +11,7 @@ import Loading from '../../components/Loading'
 import ProfileStats from '../../components/ProfileStats'
 import ActivityHeatmap from '../../components/ActivityHeatmap'
 import DomainProgress from '../../components/DomainProgress'
-import ProgressCardList from '../../components/ProgressCardList'
+import AttemptList from '../../components/AttemptList'
 import { getShareReport, type ShareReport } from '../../lib/api'
 
 function ShareContent() {
@@ -95,7 +95,7 @@ function ShareContent() {
                 <h2 className="font-serif text-[1.05rem] font-normal text-mathua-primary mb-4 w-full">
                   Progress card
                 </h2>
-                <ProgressCardList attempts={(report.attempts ?? []).slice(0, 100)} />
+                <AttemptList attempts={(report.attempts ?? []).slice(0, 100)} />
                 {(report.attempts ?? []).length > 100 && (
                   <p className="font-mono text-[11px] text-mathua-muted mt-3 text-center">
                     Showing latest 100 of {(report.attempts ?? []).length}

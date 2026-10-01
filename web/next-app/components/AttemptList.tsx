@@ -12,7 +12,7 @@ function shortDate(iso: string): string {
 }
 
 // One reviewed answer: the question, what you gave, what was right.
-export default function ProgressCardList({ attempts }: { attempts: AttemptRecord[] }) {
+export default function AttemptList({ attempts }: { attempts: AttemptRecord[] }) {
   if (attempts.length === 0) {
     return (
       <p className="font-mono text-xs text-mathua-muted text-center py-8">

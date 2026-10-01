@@ -7,14 +7,14 @@ import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import Loading from '../../components/Loading'
-import ProgressCardList from '../../components/ProgressCardList'
+import AttemptList from '../../components/AttemptList'
 import { getAttempts, type AttemptRecord } from '../../lib/api'
 
 const PAGE_SIZE = 50
 
 const SOURCES = ['all', 'diagnostic', 'quiz', 'practice', 'review'] as const
 
-export default function ProgressCardPage() {
+export default function HistoryPage() {
   const [incorrectOnly, setIncorrectOnly] = useState(true)
   const [source, setSource] = useState<(typeof SOURCES)[number]>('all')
   const [attempts, setAttempts] = useState<AttemptRecord[]>([])
@@ -58,9 +58,9 @@ export default function ProgressCardPage() {
               ← Back
             </Link>
           </span>
-          <SectionHeader label="Progress card" title="Answered questions" />
+          <SectionHeader label="History" title="Every question you've answered" />
           <p className="text-mathua-secondary text-sm text-center max-w-[600px] mx-auto mt-2 mb-6 px-2">
-            The questions are listed on each row, and you can see your answers and compare them with the correct answer.
+            Every question you have answered, with your answer next to the correct one and the worked solution. Filter to the ones you missed to see what is worth revisiting.
           </p>
 
           <div className="max-w-2xl mx-auto min-w-0">
@@ -103,7 +103,7 @@ export default function ProgressCardPage() {
 
             {loading ? (
               <div className="text-center py-8">
-                <Loading label="LOADING PROGRESS" />
+                <Loading label="LOADING HISTORY" />
               </div>
             ) : error ? (
               <div className="text-center py-8">
@@ -117,7 +117,7 @@ export default function ProgressCardPage() {
                 <p className="font-mono text-[11px] text-mathua-muted mb-3">
                   Showing {attempts.length} of {total}
                 </p>
-                <ProgressCardList attempts={attempts} />
+                <AttemptList attempts={attempts} />
                 {attempts.length < total && (
                   <div className="text-center mt-6">
                     <button
