@@ -1,0 +1,15 @@
+{
+  "concept": "alg.eq.literal",
+  "setup": "You must solve for y in [[a]]x + [[b]]y = z.",
+  "steps": [
+    {
+      "fact": "b",
+      "say": "The [[b]]y term has y multiplied by [[b]], so isolate it by moving the x term across: [[b]]y = z − [[a]]x."
+    },
+    {
+      "fact": "a",
+      "say": "Then divide both sides by [[a]]'s partner [[b]] — dividing by what y is multiplied by is what actually frees y."
+    }
+  ],
+  "answer": "So y = (z − [[a]]x)/[[b]]."
+}

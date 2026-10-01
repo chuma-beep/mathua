@@ -1,0 +1,17 @@
+{
+  "concept": "alg.linear.parallel_perp",
+  "setup": "The given line has slope [[m]], and the line in question is related to it.",
+  "steps": [
+    {
+      "fact": "parallel",
+      "say": "Parallel lines never meet and run in exactly the same direction, so their slopes are equal — not merely alike, equal.",
+      "optional": true
+    },
+    {
+      "fact": "perp",
+      "say": "Perpendicular lines meet at a right angle, and the slopes of two lines meeting at a right angle are negative reciprocals: flip the sign and turn the fraction upside down.",
+      "optional": true
+    }
+  ],
+  "answer": "So the slope is [[answer]]."
+}

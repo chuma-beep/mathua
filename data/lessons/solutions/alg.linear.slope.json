@@ -1,0 +1,15 @@
+{
+  "concept": "alg.linear.slope",
+  "setup": "The two points are ([[x1]], [[y1]]) and ([[x2]], [[y2]]).",
+  "steps": [
+    {
+      "fact": "dy",
+      "say": "Slope is rise over run — how far the line climbs for each step across. Rise is the change in y, [[y2]] − [[y1]] = [[dy]]; run is the change in x, [[x2]] − [[x1]] = [[dx]]."
+    },
+    {
+      "fact": "slope",
+      "say": "Rise over run is therefore [[dy]]/[[dx]], which in lowest terms is [[slope]]."
+    }
+  ],
+  "answer": "The slope is [[slope]]."
+}

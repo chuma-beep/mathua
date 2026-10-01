@@ -1,0 +1,19 @@
+{
+  "concept": "alg.linear.standard_form",
+  "setup": "The point is ([[x]], [[y]]) and the equation is [[a]]x + [[b]]y = [[c]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "A point is a solution only if it makes the equation true. Substitute the coordinates for x and y and see whether the two sides come out equal."
+    },
+    {
+      "fact": "ax",
+      "say": "[[a]] × [[x]] = [[ax]] and [[b]] × [[y]] = [[by]]."
+    },
+    {
+      "fact": "total",
+      "say": "Those add to [[total]]."
+    }
+  ],
+  "answer": "So the point is a solution: [[verdict]]."
+}

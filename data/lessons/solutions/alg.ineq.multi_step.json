@@ -1,0 +1,15 @@
+{
+  "concept": "alg.ineq.multi_step",
+  "setup": "The inequality is [[a]]x + [[b]] > [[c]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The moves that solve an equation work on an inequality too, and the greater-than sign keeps its direction because both sides shifted by the same amount."
+    },
+    {
+      "fact": "rhs",
+      "say": "Subtracting [[b]] leaves [[a]]x > [[rhs]]; dividing by [[a]] isolates x."
+    }
+  ],
+  "answer": "So the solution is x = [[x]]."
+}

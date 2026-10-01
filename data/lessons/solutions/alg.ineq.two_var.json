@@ -1,0 +1,15 @@
+{
+  "concept": "alg.ineq.two_var",
+  "setup": "You are testing whether ([[tx]], [[ty]]) satisfies y [[op]] [[m]]x + [[b]].",
+  "steps": [
+    {
+      "fact": "tx",
+      "say": "A point solves a two-variable inequality only if it satisfies it. Substitute the point's x into the right-hand side to find the y the line asks for."
+    },
+    {
+      "fact": "expected",
+      "say": "At x = [[tx]] the right side is [[m]] × [[tx]] + [[b]] = [[expected]]."
+    }
+  ],
+  "answer": "So the point does not satisfy it: [[ans]]."
+}

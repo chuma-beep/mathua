@@ -3,6 +3,7 @@ package algebra
 import (
 	"fmt"
 	"math/rand"
+	"strconv"
 	"strings"
 
 	"github.com/chuma-beep/mathua/internal/generator"
@@ -133,6 +134,7 @@ func (g *slopeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		Question:    fmt.Sprintf("Find the slope between \\((%d,%d)\\) and \\((%d,%d)\\).", x1, y1, x2, y2),
 		Answer:      fracOrInt(num, den),
 		Explanation: fmt.Sprintf("\\(m = \\frac{%d - %d}{%d - %d} = \\frac{%d}{%d} = %s\\).", y2, y1, x2, x1, dy, dx, fracOrInt(num, den)),
+		Facts:       map[string]string{"x1": strconv.Itoa(x1), "y1": strconv.Itoa(y1), "x2": strconv.Itoa(x2), "y2": strconv.Itoa(y2), "dy": strconv.Itoa(dy), "dx": strconv.Itoa(dx), "slope": fracOrInt(num, den)},
 	}
 }
 
@@ -151,6 +153,7 @@ func (g *slopeInterceptGen) Generate(ctx generator.GeneratorContext) generator.P
 			Question:    fmt.Sprintf("Write the equation of a line with slope \\(%d/%d\\) and \\(y\\)-intercept %d (\\(y = mx + b\\)).", m, n, b),
 			Answer:      fmt.Sprintf("y = (%d/%d)x + %d", m, n, b),
 			Explanation: fmt.Sprintf("\\(y = \\frac{%d}{%d}x + %d\\)", m, n, b),
+			Facts:       map[string]string{"m_num": strconv.Itoa(m), "m_den": strconv.Itoa(n), "b": strconv.Itoa(b), "which": "fraction"},
 		}
 	}
 	m := rand.Intn(int(1+ctx.Difficulty*5)) + 1
@@ -162,6 +165,7 @@ func (g *slopeInterceptGen) Generate(ctx generator.GeneratorContext) generator.P
 		Question:    fmt.Sprintf("Write the equation of a line with slope %d and \\(y\\)-intercept %d (\\(y = mx + b\\)).", m, b),
 		Answer:      formatLinear(m, b),
 		Explanation: fmt.Sprintf("\\(y = %dx + %d\\)", m, b),
+		Facts:       map[string]string{"m_num": strconv.Itoa(m), "m_den": "1", "b": strconv.Itoa(b), "which": "integer"},
 	}
 }
 
@@ -179,6 +183,7 @@ func (g *linearGraphGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("Given \\(y = %s\\), find \\(y\\) when \\(x = %d\\).", formatLinear(m, b), x),
 		Answer:      fmt.Sprintf("%d", y),
 		Explanation: fmt.Sprintf("\\(y = %d(%d) + %d = %d + %d = %d\\)", m, x, b, m*x, b, y),
+		Facts:       map[string]string{"m": strconv.Itoa(m), "b": strconv.Itoa(b), "x": strconv.Itoa(x), "mx": strconv.Itoa(m * x), "y": strconv.Itoa(y)},
 	}
 }
 
@@ -195,12 +200,14 @@ func (g *stdFormGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 			Question:    fmt.Sprintf("Is \\((%d,%d)\\) a solution to \\(%dx + %dy = %d\\)?", x, y, a, b, c),
 			Answer:      "yes",
 			Explanation: fmt.Sprintf("\\(%d(%d) + %d(%d) = %d + %d = %d\\). Yes!", a, x, b, y, a*x, b*y, c),
+			Facts:       map[string]string{"x": strconv.Itoa(x), "y": strconv.Itoa(y), "a": strconv.Itoa(a), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "ax": strconv.Itoa(a * x), "by": strconv.Itoa(b * y), "total": strconv.Itoa(a*x + b*y), "verdict": "yes"},
 		}
 	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Is \\((%d,%d)\\) a solution to \\(%dx + %dy = %d\\)?", x+1, y, a, b, c),
 		Answer:      "no",
 		Explanation: fmt.Sprintf("\\(%d(%d) + %d(%d) = %d + %d = %d\\), not \\(%d\\). No!", a, x+1, b, y, a*(x+1), b*y, a*(x+1)+b*y, c),
+		Facts:       map[string]string{"x": strconv.Itoa(x + 1), "y": strconv.Itoa(y), "a": strconv.Itoa(a), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "ax": strconv.Itoa(a * (x + 1)), "by": strconv.Itoa(b * y), "total": strconv.Itoa(a*(x+1) + b*y), "verdict": "no"},
 	}
 }
 
@@ -217,6 +224,7 @@ func (g *parallelPerpGen) Generate(ctx generator.GeneratorContext) generator.Pro
 			Question:    fmt.Sprintf("A line parallel to \\(y = %dx + 3\\) has slope:", m),
 			Answer:      fmt.Sprintf("%d", m),
 			Explanation: fmt.Sprintf("Parallel lines have equal slopes. Slope = %d.", m),
+			Facts:       map[string]string{"m": strconv.Itoa(m), "which": "parallel"},
 		}
 	}
 	perp := reduce(-1, m)
@@ -224,6 +232,7 @@ func (g *parallelPerpGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		Question:    fmt.Sprintf("A line perpendicular to \\(y = %dx + 3\\) has slope:", m),
 		Answer:      fracOrInt(perp.num, perp.den),
 		Explanation: fmt.Sprintf("Perpendicular slopes are negative reciprocals: \\(-\\frac{1}{%d} = %s\\)", m, fracOrInt(perp.num, perp.den)),
+		Facts:       map[string]string{"m": strconv.Itoa(m), "which": "perpendicular", "perp": fracOrInt(perp.num, perp.den)},
 	}
 }
 
@@ -246,6 +255,7 @@ func (g *multiStepEqGen) Generate(ctx generator.GeneratorContext) generator.Prob
 			Question:    fmt.Sprintf("Solve: \\(%d(x + %d) = %d\\)", a, b, c),
 			Answer:      fmt.Sprintf("%d", x),
 			Explanation: fmt.Sprintf("Given %d(x + %d) = %d. Step 1: divide both sides by %d: x + %d = %d. Step 2: subtract %d: x = %d. Answer: %d", a, b, c, a, b, inner, b, x, x),
+			Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "inner": strconv.Itoa(inner), "x": strconv.Itoa(x), "which": "distributed"},
 		}
 	}
 	scale := int(1 + d*8)
@@ -257,6 +267,7 @@ func (g *multiStepEqGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("Solve: \\(%dx + %d = %d\\)", a, b, c),
 		Answer:      fmt.Sprintf("%d", x),
 		Explanation: fmt.Sprintf("Given %dx + %d = %d. Step 1: subtract %d: %dx = %d. Step 2: divide by %d: x = %d. Answer: %d", a, b, c, b, a, c-b, a, x, x),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "ax": strconv.Itoa(c - b), "x": strconv.Itoa(x), "which": "axb"},
 	}
 }
 
@@ -283,6 +294,7 @@ func (g *varsBothSidesGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Question:    fmt.Sprintf("Solve: \\(%dx + %d = %dx + %d\\)", a, b, c, d),
 		Answer:      fmt.Sprintf("%d", x),
 		Explanation: fmt.Sprintf("\\(%dx + %d = %dx + %d\\) → \\(%dx = %d\\) → \\(x = %d\\)", a, b, c, d, a-c, d-b, x),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "d": strconv.Itoa(d), "diff": strconv.Itoa(a - c), "rhs": strconv.Itoa(d - b), "x": strconv.Itoa(x)},
 	}
 }
 
@@ -295,6 +307,7 @@ func (g *literalEqGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		Question:    fmt.Sprintf("Solve for \\(y\\): \\(%dx + %dy = z\\)", a, b),
 		Answer:      fmt.Sprintf("y = (z - %dx)/%d", a, b),
 		Explanation: fmt.Sprintf("\\(%dy = z - %dx\\) → \\(y = \\frac{z - %dx}{%d}\\)", b, a, a, b),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b)},
 	}
 }
 
@@ -309,6 +322,7 @@ func (g *multiStepIneqGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Question:    fmt.Sprintf("Solve: \\(%dx + %d > %d\\)", a, b, c),
 		Answer:      fmt.Sprintf("%d", x),
 		Explanation: fmt.Sprintf("\\(%dx + %d > %d\\) → \\(%dx > %d\\) → \\(x > %d\\), so \\(x \\ge %d\\)", a, b, c, a, c-b, c-b, x),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "rhs": strconv.Itoa(c - b), "x": strconv.Itoa(x)},
 	}
 }
 
@@ -329,6 +343,7 @@ func (g *compoundIneqGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		Question:    fmt.Sprintf("Solve: \\(%d < %dx + %d < %d\\)", a, b, c, d),
 		Answer:      fmt.Sprintf("%d", x),
 		Explanation: fmt.Sprintf("\\(%d < %dx + %d < %d\\) → \\(%.1f < x < %.1f\\) → \\(x = %d\\)", a, b, c, d, float64(a-c)/float64(b), float64(d-c)/float64(b), x),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "d": strconv.Itoa(d), "lo": fmt.Sprintf("%.1f", float64(a-c)/float64(b)), "hi": fmt.Sprintf("%.1f", float64(d-c)/float64(b)), "x": strconv.Itoa(x)},
 	}
 }
 
@@ -898,6 +913,7 @@ func (g *ineqTwoVarGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Question:    fmt.Sprintf("Is \\((%d,%d)\\) a solution to \\(y %s %dx + %d\\)?", testX, testY, op, m, b),
 		Answer:      ans,
 		Explanation: fmt.Sprintf("At x=%d: y should be %s %d. y=%d %s %d = %t.", testX, op, expected, testY, op, expected, satisfies),
+		Facts:       map[string]string{"tx": strconv.Itoa(testX), "ty": strconv.Itoa(testY), "op": op, "m": strconv.Itoa(m), "b": strconv.Itoa(b), "expected": strconv.Itoa(expected), "ans": ans},
 	}
 }
 
