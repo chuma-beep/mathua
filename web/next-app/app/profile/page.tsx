@@ -411,6 +411,27 @@ export default function ProfilePage() {
           </section>
         )}
 
+        <section id="struggles" className="mt-8 min-w-0 scroll-mt-28">
+          <StrugglesSection weaknesses={weaknesses} />
+          <div className="mt-3 text-center">
+            <Link href="/progress-card" className="font-mono text-xs text-mathua-blue hover:text-mathua-blue-hover">
+              View progress card →
+            </Link>
+          </div>
+        </section>
+
+        {/* Activity heatmap — centered, GitHub-style, full-width on mobile */}
+        <section id="activity" className="mt-8 flex min-w-0 flex-col items-stretch scroll-mt-28">
+          <h2 className="font-serif text-[1.05rem] font-normal text-mathua-primary mb-4 w-full">
+            Activity
+          </h2>
+          <div className="w-full max-w-full min-w-0 flex justify-center overflow-hidden">
+            <div className="w-full max-w-full min-w-0">
+              <ActivityHeatmap data={activity} />
+            </div>
+          </div>
+        </section>
+
         {scores.paused_until && (
           <div className="mt-6 w-full max-w-full min-w-0 overflow-hidden border border-mathua-border bg-mathua-surface p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
             <p className="font-mono text-xs text-mathua-primary min-w-0 break-words [overflow-wrap:anywhere] leading-snug">
@@ -506,27 +527,6 @@ export default function ProfilePage() {
         <section id="domains" className="mt-8 min-w-0 scroll-mt-28">
           <div className="grid grid-cols-1 gap-4 min-w-0">
             <DomainProgress progress={progress} />
-          </div>
-        </section>
-
-        <section id="struggles" className="mt-8 min-w-0 scroll-mt-28">
-          <StrugglesSection weaknesses={weaknesses} />
-          <div className="mt-3 text-center">
-            <Link href="/progress-card" className="font-mono text-xs text-mathua-blue hover:text-mathua-blue-hover">
-              View progress card →
-            </Link>
-          </div>
-        </section>
-
-        {/* Activity heatmap — centered, GitHub-style, full-width on mobile */}
-        <section id="activity" className="mt-8 flex min-w-0 flex-col items-stretch scroll-mt-28">
-          <h2 className="font-serif text-[1.05rem] font-normal text-mathua-primary mb-4 w-full">
-            Activity
-          </h2>
-          <div className="w-full max-w-full min-w-0 flex justify-center overflow-hidden">
-            <div className="w-full max-w-full min-w-0">
-              <ActivityHeatmap data={activity} />
-            </div>
           </div>
         </section>
 
