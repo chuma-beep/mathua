@@ -1,0 +1,15 @@
+{
+  "concept": "pct.ops.increase",
+  "setup": "You are finding a [[p]]% increase on [[orig]].",
+  "steps": [
+    {
+      "fact": "orig",
+      "say": "A [[p]]% increase is the original plus that percent *of the original* — not a percent of some other amount."
+    },
+    {
+      "fact": "inc",
+      "say": "[[p]]% of [[orig]] is [[inc]], so the new amount is [[orig]] + [[inc]]."
+    }
+  ],
+  "answer": "The increased amount is [[result]]."
+}

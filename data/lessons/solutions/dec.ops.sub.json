@@ -1,0 +1,15 @@
+{
+  "concept": "dec.ops.sub",
+  "setup": "You are subtracting [[b]] from [[a]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Line the decimal points up so each column means the same place value; without that alignment the columns are not comparable."
+    },
+    {
+      "fact": "result",
+      "say": "Work right to left, borrowing where a column is too small: [[a]] − [[b]] = [[result]]."
+    }
+  ],
+  "answer": "The difference is [[result]]."
+}

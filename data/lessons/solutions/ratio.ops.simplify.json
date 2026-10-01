@@ -1,0 +1,15 @@
+{
+  "concept": "ratio.ops.simplify",
+  "setup": "You are simplifying [[a]]:[[b]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "A ratio is a fraction, and a fraction is simplified the same way: divide top and bottom by their common factor [[d]]."
+    },
+    {
+      "fact": "out_a",
+      "say": "[[a]] ÷ [[d]] = [[out_a]], and [[b]] ÷ [[d]] = [[out_b]]."
+    }
+  ],
+  "answer": "In simplest form it is [[out_a]]:[[out_b]]."
+}

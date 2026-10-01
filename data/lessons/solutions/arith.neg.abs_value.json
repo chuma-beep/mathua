@@ -1,0 +1,15 @@
+{
+  "concept": "arith.neg.abs_value",
+  "setup": "You are finding the absolute value of [[n]].",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "Absolute value is distance from zero, and distance is never negative — so the sign is dropped and only the size is kept."
+    },
+    {
+      "fact": "abs",
+      "say": "[[n]] is [[n]] units from zero."
+    }
+  ],
+  "answer": "The absolute value is [[abs]]."
+}

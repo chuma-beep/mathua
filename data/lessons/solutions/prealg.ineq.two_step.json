@@ -1,0 +1,15 @@
+{
+  "concept": "prealg.ineq.two_step",
+  "setup": "The inequality is [[q]].",
+  "steps": [
+    {
+      "fact": "q",
+      "say": "Collect the x terms on the left: [[a]]x < [[rhs]]."
+    },
+    {
+      "fact": "bound",
+      "say": "Dividing by [[a]] gives x < [[bound]]."
+    }
+  ],
+  "answer": "So x = [[x]]."
+}

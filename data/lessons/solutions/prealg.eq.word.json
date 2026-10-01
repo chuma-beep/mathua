@@ -1,0 +1,15 @@
+{
+  "concept": "prealg.eq.word",
+  "setup": "[[count]] [[item]] cost [[total]] in total, and each one costs the same.",
+  "steps": [
+    {
+      "fact": "count",
+      "say": "Let p be the price of one [[item]]. Then [[count]] of them cost [[count]] × p, which is the [[total]] paid."
+    },
+    {
+      "fact": "total",
+      "say": "So p = [[total]] ÷ [[count]]."
+    }
+  ],
+  "answer": "Each one costs [[cost]]."
+}

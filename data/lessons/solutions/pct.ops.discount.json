@@ -1,0 +1,15 @@
+{
+  "concept": "pct.ops.discount",
+  "setup": "The price is [[orig]] and the discount is [[p]]%.",
+  "steps": [
+    {
+      "fact": "p",
+      "say": "Find the discount first, as a part of the original price: [[p]]% of [[orig]] is [[disc]]."
+    },
+    {
+      "fact": "result",
+      "say": "The sale price is the original minus that: [[orig]] − [[disc]] = [[result]]."
+    }
+  ],
+  "answer": "The sale price is [[result]]."
+}

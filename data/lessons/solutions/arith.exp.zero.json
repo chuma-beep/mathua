@@ -1,0 +1,16 @@
+{
+  "concept": "arith.exp.zero",
+  "setup": "This is about the zeroth power of [[base]].",
+  "steps": [
+    {
+      "fact": "which",
+      "optional": true,
+      "say": "In the expression, the number being raised is the **base** and the small number above it is the **exponent**. Here the base is [[base]]."
+    },
+    {
+      "fact": "base",
+      "say": "Any non-zero number raised to the power 0 equals 1: the exponent is asking how many copies of the base to multiply together, and asking for zero of them leaves the empty product, which is 1."
+    }
+  ],
+  "answer": "So [[base]]^0 = 1, and the base is [[base]]."
+}

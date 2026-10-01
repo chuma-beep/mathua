@@ -1,0 +1,15 @@
+{
+  "concept": "prealg.expr.distribute",
+  "setup": "You are simplifying [[a]]([[b]]x + [[c]]).",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Distributing means multiplying the outside factor into every term inside the brackets — here by [[a]]."
+    },
+    {
+      "fact": "out_b",
+      "say": "[[a]] × [[b]]x = [[out_b]]x."
+    }
+  ],
+  "answer": "So it simplifies to [[out_b]]x + [[out_c]]."
+}

@@ -1,0 +1,11 @@
+{
+  "concept": "pct.basics.concept",
+  "setup": "You are writing [[p]] percent as a fraction.",
+  "steps": [
+    {
+      "fact": "p",
+      "say": "\"Percent\" means \"per hundred\", so [[p]] percent is [[p]] in every hundred — which is the fraction [[p]]/100."
+    }
+  ],
+  "answer": "It is [[p]]/100."
+}

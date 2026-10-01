@@ -1,0 +1,15 @@
+{
+  "concept": "prealg.eq.one_step_mult",
+  "setup": "The equation is [[coeff]]x = [[rhs]].",
+  "steps": [
+    {
+      "fact": "coeff",
+      "say": "x is being multiplied by [[coeff]], so undo it by dividing both sides by the same number."
+    },
+    {
+      "fact": "x",
+      "say": "That gives x = [[x]]."
+    }
+  ],
+  "answer": "So x = [[x]]."
+}

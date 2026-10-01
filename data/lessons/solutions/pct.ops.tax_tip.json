@@ -1,0 +1,15 @@
+{
+  "concept": "pct.ops.tax_tip",
+  "setup": "The [[item]] is [[amount]] and the rate is [[rate]]%.",
+  "steps": [
+    {
+      "fact": "rate",
+      "say": "The amount added is [[rate]]% of the [[item]], which is [[tip]]."
+    },
+    {
+      "fact": "item",
+      "say": "Add it to the original: [[amount]] + [[tip]]."
+    }
+  ],
+  "answer": "The total is [[result]]."
+}

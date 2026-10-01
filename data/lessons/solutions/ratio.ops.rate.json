@@ -1,0 +1,15 @@
+{
+  "concept": "ratio.ops.rate",
+  "setup": "The journey covers [[dist]] miles in [[time]] hours.",
+  "steps": [
+    {
+      "fact": "dist",
+      "say": "A unit rate is the distance per one unit of time, so divide the distance by the hours."
+    },
+    {
+      "fact": "speed",
+      "say": "[[dist]] ÷ [[time]] = [[speed]]."
+    }
+  ],
+  "answer": "The rate is [[speed]] miles per hour."
+}

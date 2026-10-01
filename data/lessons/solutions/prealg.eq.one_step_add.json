@@ -1,0 +1,15 @@
+{
+  "concept": "prealg.eq.one_step_add",
+  "setup": "The equation is x + [[b]] = [[rhs]].",
+  "steps": [
+    {
+      "fact": "b",
+      "say": "Whatever is on one side of the equals sign must be on the other too, so undo the addition by subtracting [[b]] from both sides — doing it to both sides is what keeps them equal."
+    },
+    {
+      "fact": "x",
+      "say": "That leaves x = [[x]]."
+    }
+  ],
+  "answer": "So x = [[x]]."
+}

@@ -1,0 +1,15 @@
+{
+  "concept": "arith.sci_notation.ops",
+  "setup": "Two numbers in scientific notation are being multiplied.",
+  "steps": [
+    {
+      "fact": "ea",
+      "say": "Multiplying the coefficients gives [[coeff]]."
+    },
+    {
+      "fact": "total_exp",
+      "say": "Multiplying powers of ten adds the exponents: [[ea]] + [[eb]] = [[total_exp]]."
+    }
+  ],
+  "answer": "The result is [[coeff]] × 10^[[total_exp]]."
+}

@@ -1,0 +1,15 @@
+{
+  "concept": "prealg.expr.like_terms",
+  "setup": "You are combining [[a]]x + [[b]]x + [[c]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Like terms are terms with the same variable part, so [[a]]x and [[b]]x combine by adding their coefficients: [[a]] + [[b]] = [[coef]]."
+    },
+    {
+      "fact": "c",
+      "say": "The constant [[c]] stands alone and is written as [[c]] itself."
+    }
+  ],
+  "answer": "So the result is [[coef]]x + [[c]]."
+}

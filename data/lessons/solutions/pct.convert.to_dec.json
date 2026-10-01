@@ -1,0 +1,11 @@
+{
+  "concept": "pct.convert.to_dec",
+  "setup": "You are converting [[p]]% to a decimal.",
+  "steps": [
+    {
+      "fact": "p",
+      "say": "Percent means out of a hundred, so dividing by 100 is the conversion: [[p]]/100 = [[dec]]."
+    }
+  ],
+  "answer": "So [[p]]% is the decimal [[dec]]."
+}

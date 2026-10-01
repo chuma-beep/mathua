@@ -1,0 +1,15 @@
+{
+  "concept": "dec.ops.mult",
+  "setup": "You are multiplying [[a]] by [[b]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Multiply as if they were whole numbers and count the total number of decimal places in the two factors together."
+    },
+    {
+      "fact": "result",
+      "say": "That gives [[result]], with the decimal point placed to match."
+    }
+  ],
+  "answer": "The product is [[result]]."
+}

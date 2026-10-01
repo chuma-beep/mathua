@@ -1,0 +1,15 @@
+{
+  "concept": "ratio.ops.proportion",
+  "setup": "The proportion is [[a]]/[[b]] = x/[[c]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Cross-multiply — multiply the tops together and the bottoms together, which is what keeps the two fractions equal: [[b]]x = [[a]] × [[c]] = [[bc]]."
+    },
+    {
+      "fact": "x",
+      "say": "Divide both sides by [[b]] to isolate x."
+    }
+  ],
+  "answer": "So x = [[x]]."
+}

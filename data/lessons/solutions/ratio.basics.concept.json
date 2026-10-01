@@ -1,0 +1,15 @@
+{
+  "concept": "ratio.basics.concept",
+  "setup": "The ratio asked for is [[a]] to [[b]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "A ratio compares two quantities of the same kind, and it is written [[a]]:[[b]] with no units."
+    },
+    {
+      "fact": "b",
+      "say": "Read it as \"[[a]] for every [[b]]\" — the same as the fraction [[a]]/[[b]]."
+    }
+  ],
+  "answer": "So the ratio is [[a]]:[[b]]."
+}
