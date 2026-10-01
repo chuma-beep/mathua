@@ -1,0 +1,19 @@
+{
+  "concept": "geo.circle.area",
+  "setup": "The circle has radius [[r]] (using π = 3.14).",
+  "steps": [
+    {
+      "fact": "r",
+      "say": "A circle's area is π × radius × radius, and the radius must be squared rather than doubled — squaring and doubling are different moves."
+    },
+    {
+      "fact": "r_sq",
+      "say": "[[r]]² = [[r_sq]]."
+    },
+    {
+      "fact": "area",
+      "say": "Multiplying by π gives [[area]]."
+    }
+  ],
+  "answer": "The area is [[area]] square units."
+}

@@ -1,0 +1,15 @@
+{
+  "concept": "geo.solid.volume_rect",
+  "setup": "The prism measures [[l]] by [[w]] by [[h]].",
+  "steps": [
+    {
+      "fact": "l",
+      "say": "Volume is the base area times the height — how much base there is, multiplied by how many layers of it stack up."
+    },
+    {
+      "fact": "w",
+      "say": "The base here is [[l]] by [[w]], and stacking it [[h]] high multiplies all three: [[volume]]."
+    }
+  ],
+  "answer": "The volume is [[volume]] cubic units."
+}

@@ -99,6 +99,40 @@ func TestAssemble_SkipsRatherThanGuessing(t *testing.T) {
 	}
 }
 
+// One generator often asks two different questions — find the complement of an
+// angle, or classify it — and a single schema covers both. Each question's
+// steps must apply only to the question it came from, without the other
+// question's steps leaking in or the schema being dropped.
+func TestRender_SkipsStepsWhoseFactIsAbsent(t *testing.T) {
+	s := &Schema{
+		Setup: "An angle of [[given]] degrees.",
+		Steps: []Step{
+			{Fact: "missing", Say: "A right angle is 90, so the other is 90 - [[given]] = [[missing]]."},
+			{Fact: "cls", Say: "[[given]] degrees falls in the range for [[cls]]."},
+		},
+		Answer: "So the answer is [[answer]].",
+	}
+	complement, missing := Render(s, map[string]string{"given": "40", "missing": "50", "answer": "50"})
+	if len(missing) > 0 {
+		t.Fatalf("unexpected missing: %v", missing)
+	}
+	if strings.Contains(complement, "falls in the range") {
+		t.Errorf("the classification step leaked into the complement question:\n%s", complement)
+	}
+	classify, missing := Render(s, map[string]string{"given": "120", "cls": "obtuse", "answer": "obtuse"})
+	if len(missing) > 0 {
+		t.Fatalf("unexpected missing: %v", missing)
+	}
+	if strings.Contains(classify, "A right angle is 90") {
+		t.Errorf("the complement step leaked into the classification question:\n%s", classify)
+	}
+	// The drift is still reported to the test even though the runtime copes.
+	got := Missing(s, map[string]string{"given": "40", "answer": "50"})
+	if len(got) != 2 || got[0] != "missing" || got[1] != "cls" {
+		t.Errorf("Missing should report both absent step facts, got %v", got)
+	}
+}
+
 func TestAssemble_NilLoaderIsTheFallback(t *testing.T) {
 	var l *Loader
 	if got := l.Assemble("anything", facts(), "FALLBACK"); got != "FALLBACK" {

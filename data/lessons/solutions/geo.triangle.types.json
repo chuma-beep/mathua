@@ -1,0 +1,15 @@
+{
+  "concept": "geo.triangle.types",
+  "setup": "The triangle's sides are [[s1]], [[s2]] and [[s3]].",
+  "steps": [
+    {
+      "fact": "s1",
+      "say": "Compare the three side lengths against each other. All three equal is equilateral; exactly two equal is isosceles; no two equal is scalene."
+    },
+    {
+      "fact": "kind",
+      "say": "Checking [[s1]], [[s2]] and [[s3]] against that rule gives [[kind]]."
+    }
+  ],
+  "answer": "By side length the triangle is [[kind]]."
+}

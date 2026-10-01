@@ -1,0 +1,11 @@
+{
+  "concept": "geo.basic.points_lines",
+  "setup": "The description given is: [[desc]].",
+  "steps": [
+    {
+      "fact": "desc",
+      "say": "Match the description to the term by counting what the figure has: how many endpoints, and whether it stops or continues."
+    }
+  ],
+  "answer": "That describes a [[term]]."
+}

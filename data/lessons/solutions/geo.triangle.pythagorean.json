@@ -1,0 +1,15 @@
+{
+  "concept": "geo.triangle.pythagorean",
+  "setup": "This is a right triangle and one side is unknown.",
+  "steps": [
+    {
+      "fact": "c",
+      "say": "The Pythagorean theorem says the two legs square and add to give the hypotenuse squared: a² + b² = c², with c always the side opposite the right angle."
+    },
+    {
+      "fact": "c",
+      "say": "Taking square roots of both sides is what turns the squared value back into the length: the square root of [[c_sq]] is [[c]]."
+    }
+  ],
+  "answer": "The missing length is [[c]]."
+}

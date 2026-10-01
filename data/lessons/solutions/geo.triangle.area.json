@@ -1,0 +1,19 @@
+{
+  "concept": "geo.triangle.area",
+  "setup": "The triangle has base [[base]] and height [[height]].",
+  "steps": [
+    {
+      "fact": "base",
+      "say": "A triangle covers exactly half the rectangle that would have the same base and height — the third vertex can sit anywhere along the line parallel to the base."
+    },
+    {
+      "fact": "product",
+      "say": "That rectangle is [[base]] × [[height]] = [[product]]."
+    },
+    {
+      "fact": "area",
+      "say": "Half of that is [[area]]."
+    }
+  ],
+  "answer": "The area is [[area]] square units."
+}

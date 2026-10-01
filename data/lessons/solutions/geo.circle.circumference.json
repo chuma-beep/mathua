@@ -1,0 +1,19 @@
+{
+  "concept": "geo.circle.circumference",
+  "setup": "The circle has radius [[r]] (using π = 3.14).",
+  "steps": [
+    {
+      "fact": "r",
+      "say": "The circumference is the distance once around the edge, and a radius is half of that across the middle — so the whole way round is two radii."
+    },
+    {
+      "fact": "twice_r",
+      "say": "That makes the multiplier [[twice_r]] rather than [[r]]."
+    },
+    {
+      "fact": "circ",
+      "say": "So the circumference is [[circ]]."
+    }
+  ],
+  "answer": "The circumference is [[circ]] units."
+}

@@ -1,0 +1,17 @@
+{
+  "concept": "geo.basic.angle_measure",
+  "setup": "The angle in question measures [[given]] degrees.",
+  "steps": [
+    {
+      "fact": "missing",
+      "say": "A straight angle is 180 degrees — a full turn of the arm from one ray to the opposite one — so the remainder is 180 − [[given]] = [[missing]].",
+      "optional": true
+    },
+    {
+      "fact": "cls",
+      "say": "Angles are named by their size: acute is under 90, right is exactly 90, obtuse is over 90 but under 180, and straight is 180. [[given]] degrees is therefore a [[cls]].",
+      "optional": true
+    }
+  ],
+  "answer": "So the answer is [[answer]]."
+}

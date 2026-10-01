@@ -1,0 +1,17 @@
+{
+  "concept": "geo.basic.angles",
+  "setup": "The angle in question measures [[given]] degrees.",
+  "steps": [
+    {
+      "fact": "missing",
+      "say": "A right angle is exactly 90 degrees, and the two parts of it must add to 90 — so the other angle is 90 − [[given]] = [[missing]].",
+      "optional": true
+    },
+    {
+      "fact": "cls",
+      "say": "Angles are named by their size: acute is under 90, right is exactly 90, obtuse is over 90 but under 180, and straight is 180. [[given]] degrees is therefore an [[cls]] angle.",
+      "optional": true
+    }
+  ],
+  "answer": "So the answer is [[answer]]."
+}

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"math/rand"
+	"strconv"
 
 	"github.com/chuma-beep/mathua/internal/generator"
 	"github.com/chuma-beep/mathua/internal/mathutil"
@@ -45,6 +46,7 @@ func (g *pointsLinesGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("What is: %s?", descs[i]),
 		Answer:      items[i],
 		Explanation: fmt.Sprintf("A %s is %s.", items[i], descs[i]),
+		Facts:       map[string]string{"term": items[i], "desc": descs[i]},
 	}
 }
 
@@ -59,6 +61,7 @@ func (g *angleTypesGen) Generate(ctx generator.GeneratorContext) generator.Probl
 			Question:    fmt.Sprintf("An angle measures %d degrees. How many degrees short of a right angle is it? (enter a number)", a),
 			Answer:      fmt.Sprintf("%d", 90-a),
 			Explanation: fmt.Sprintf("A right angle is 90 degrees, so 90 - %d = %d.", a, 90-a),
+			Facts:       map[string]string{"given": strconv.Itoa(a), "missing": strconv.Itoa(90 - a)},
 		}
 	}
 	type entry struct {
@@ -89,6 +92,7 @@ func (g *angleTypesGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Question:    fmt.Sprintf("An angle of %d degrees is classified as:", e.deg),
 		Answer:      e.cls,
 		Explanation: fmt.Sprintf("Acute < 90, right = 90, obtuse > 90 and < 180, straight = 180. %d is %s.", e.deg, e.cls),
+		Facts:       map[string]string{"given": strconv.Itoa(e.deg), "deg": strconv.Itoa(e.deg), "cls": e.cls},
 	}
 }
 
@@ -103,6 +107,7 @@ func (g *angleMeasureGen) Generate(ctx generator.GeneratorContext) generator.Pro
 			Question:    fmt.Sprintf("An angle measures %d degrees. How many more degrees are needed to reach a straight angle? (enter a number)", a),
 			Answer:      fmt.Sprintf("%d", 180-a),
 			Explanation: fmt.Sprintf("A straight angle is 180 degrees, so 180 - %d = %d.", a, 180-a),
+			Facts:       map[string]string{"given": strconv.Itoa(a), "missing": strconv.Itoa(180 - a)},
 		}
 	}
 	type entry struct {
@@ -133,6 +138,7 @@ func (g *angleMeasureGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		Question:    fmt.Sprintf("An angle of %d degrees is a:", e.deg),
 		Answer:      e.cls,
 		Explanation: fmt.Sprintf("%d degrees is %s.", e.deg, e.cls),
+		Facts:       map[string]string{"given": strconv.Itoa(e.deg), "deg": strconv.Itoa(e.deg), "cls": e.cls},
 	}
 }
 
@@ -145,6 +151,7 @@ func (g *complementaryGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Question:    fmt.Sprintf("Two angles are complementary. One is %d degrees. What is the other?", a),
 		Answer:      fmt.Sprintf("%d", 90-a),
 		Explanation: fmt.Sprintf("Complementary angles sum to 90. 90 - %d = %d.", a, 90-a),
+		Facts:       map[string]string{"given": strconv.Itoa(a), "missing": strconv.Itoa(90 - a)},
 	}
 }
 
@@ -157,6 +164,7 @@ func (g *verticalAnglesGen) Generate(ctx generator.GeneratorContext) generator.P
 		Question:    fmt.Sprintf("Two lines intersect. One angle is %d degrees. What is the vertical angle?", a),
 		Answer:      fmt.Sprintf("%d", a),
 		Explanation: fmt.Sprintf("Vertical angles are equal: %d = %d.", a, a),
+		Facts:       map[string]string{"a": strconv.Itoa(a)},
 	}
 }
 
@@ -175,6 +183,7 @@ func (g *triangleTypesGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Question:    fmt.Sprintf("A triangle has sides %d, %d, %d. By side length, it is:", sides[0], sides[1], sides[2]),
 		Answer:      ans,
 		Explanation: fmt.Sprintf("All 3 equal = equilateral. Two equal = isosceles. None equal = scalene."),
+		Facts:       map[string]string{"s1": strconv.Itoa(sides[0]), "s2": strconv.Itoa(sides[1]), "s3": strconv.Itoa(sides[2]), "kind": ans},
 	}
 }
 
@@ -189,6 +198,7 @@ func (g *triangleAnglesGen) Generate(ctx generator.GeneratorContext) generator.P
 		Question:    fmt.Sprintf("A triangle has angles %d and %d degrees. What is the third angle?", a, b),
 		Answer:      fmt.Sprintf("%d", c),
 		Explanation: fmt.Sprintf("Triangle angles sum to 180. 180 - %d - %d = %d.", a, b, c),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "sum": "180"},
 	}
 }
 
@@ -203,6 +213,7 @@ func (g *triangleAreaGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		Question:    fmt.Sprintf("Triangle: base = %d, height = %d. Find the area.", base, height),
 		Answer:      fmt.Sprintf("%d", area),
 		Explanation: fmt.Sprintf("\\(\\text{Area} = \\frac{\\text{base} \\times \\text{height}}{2} = \\frac{%d \\times %d}{2} = %d\\).", base, height, area),
+		Facts:       map[string]string{"base": strconv.Itoa(base), "height": strconv.Itoa(height), "product": strconv.Itoa(base * height), "area": strconv.Itoa(area)},
 	}
 }
 
@@ -237,6 +248,7 @@ func (g *pythagoreanGen) Generate(ctx generator.GeneratorContext) generator.Prob
 			Question:    fmt.Sprintf("Right triangle: hypotenuse \\(= %d\\) and one leg \\(= %d\\). Find the other leg. (enter a number)", t.c, known),
 			Answer:      fmt.Sprintf("%d", unknown),
 			Explanation: fmt.Sprintf("\\(\\text{leg}^{2} = %d^{2} - %d^{2} = %d - %d = %d\\), so \\(\\text{leg} = \\sqrt{%d} = %d\\).", t.c, known, t.c*t.c, known*known, unknown*unknown, unknown*unknown, unknown),
+			Facts:       map[string]string{"a": strconv.Itoa(t.a), "b": strconv.Itoa(t.b), "c": strconv.Itoa(t.c), "a_sq": strconv.Itoa(t.a * t.a), "b_sq": strconv.Itoa(t.b * t.b), "leg_sq": strconv.Itoa(t.a*t.a - t.b*t.b), "leg": strconv.Itoa(unknown), "c_sq": strconv.Itoa(t.c * t.c)},
 		}
 	}
 	pool := tableEasy
@@ -248,6 +260,7 @@ func (g *pythagoreanGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("Right triangle: legs \\(= %d\\) and \\(%d\\). Find the hypotenuse \\(c\\).", t.a, t.b),
 		Answer:      fmt.Sprintf("%d", t.c),
 		Explanation: fmt.Sprintf("\\(c^{2} = %d^{2} + %d^{2} = %d + %d = %d\\), so \\(c = \\sqrt{%d} = %d\\).", t.a, t.b, t.a*t.a, t.b*t.b, t.c*t.c, t.c*t.c, t.c),
+		Facts:       map[string]string{"a": strconv.Itoa(t.a), "b": strconv.Itoa(t.b), "c": strconv.Itoa(t.c), "a_sq": strconv.Itoa(t.a * t.a), "b_sq": strconv.Itoa(t.b * t.b), "c_sq": strconv.Itoa(t.c * t.c)},
 	}
 }
 
@@ -266,6 +279,7 @@ func (g *quadTypesGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		Question:    fmt.Sprintf("A quadrilateral with %s is a:", types[i].desc),
 		Answer:      types[i].name,
 		Explanation: types[i].desc + " describes a " + types[i].name + ".",
+		Facts:       map[string]string{"name": types[i].name, "desc": types[i].desc},
 	}
 }
 
@@ -280,6 +294,7 @@ func (g *quadAreaGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		Question:    fmt.Sprintf("Find the area of a %s with base %d and height %d.", shape, base, height),
 		Answer:      fmt.Sprintf("%d", base*height),
 		Explanation: fmt.Sprintf("\\(\\text{Area} = \\text{base} \\times \\text{height} = %d \\times %d = %d\\).", base, height, base*height),
+		Facts:       map[string]string{"shape": shape, "base": strconv.Itoa(base), "height": strconv.Itoa(height), "area": strconv.Itoa(base * height)},
 	}
 }
 
@@ -293,6 +308,7 @@ func (g *quadPerimGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		Question:    fmt.Sprintf("Rectangle: width = %d, height = %d. Find the perimeter.", w, h),
 		Answer:      fmt.Sprintf("%d", 2*(w+h)),
 		Explanation: fmt.Sprintf("\\(\\text{Perimeter} = 2(\\text{width} + \\text{height}) = 2(%d + %d) = %d\\).", w, h, 2*(w+h)),
+		Facts:       map[string]string{"w": strconv.Itoa(w), "h": strconv.Itoa(h), "sum": strconv.Itoa(w + h), "perimeter": strconv.Itoa(2 * (w + h))},
 	}
 }
 
@@ -306,6 +322,7 @@ func (g *circlePartsGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("The %s is the:", descs[i]),
 		Answer:      parts[i],
 		Explanation: descs[i] + " = " + parts[i] + ".",
+		Facts:       map[string]string{"term": parts[i], "desc": descs[i]},
 	}
 }
 
@@ -320,6 +337,7 @@ func (g *circumferenceGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Question:    fmt.Sprintf("Circle radius = %d. Find the circumference (use pi = 3.14).", r),
 		Answer:      fmt.Sprintf("%.0f", circ),
 		Explanation: fmt.Sprintf("\\(C = 2 \\pi r = 2 \\times 3.14 \\times %d = %.0f\\).", r, 2*3.14*float64(r)),
+		Facts:       map[string]string{"r": strconv.Itoa(r), "circ": fmt.Sprintf("%.0f", circ), "twice_r": strconv.Itoa(2 * r)},
 	}
 }
 
@@ -333,6 +351,7 @@ func (g *circleAreaGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Question:    fmt.Sprintf("Circle radius = %d. Find the area (use pi = 3.14).", r),
 		Answer:      fmt.Sprintf("%.0f", area),
 		Explanation: fmt.Sprintf("\\(A = \\pi r^{2} = 3.14 \\times %d^{2} = 3.14 \\times %d = %.0f\\).", r, r*r, 3.14*float64(r*r)),
+		Facts:       map[string]string{"r": strconv.Itoa(r), "r_sq": strconv.Itoa(r * r), "area": fmt.Sprintf("%.0f", area)},
 	}
 }
 
@@ -349,12 +368,14 @@ func (g *coordPlotGen) Generate(ctx generator.GeneratorContext) generator.Proble
 				Question:    fmt.Sprintf("What is the x-coordinate of the point \\((%d, %d)\\)? (enter a number)", x, y),
 				Answer:      fmt.Sprintf("%d", x),
 				Explanation: fmt.Sprintf("In (%d,%d) the first entry is the x-coordinate: %d.", x, y, x),
+				Facts:       map[string]string{"x": strconv.Itoa(x), "y": strconv.Itoa(y), "which": "x"},
 			}
 		}
 		return generator.Problem{
 			Question:    fmt.Sprintf("What is the y-coordinate of the point \\((%d, %d)\\)? (enter a number)", x, y),
 			Answer:      fmt.Sprintf("%d", y),
 			Explanation: fmt.Sprintf("In (%d,%d) the second entry is the y-coordinate: %d.", x, y, y),
+			Facts:       map[string]string{"x": strconv.Itoa(x), "y": strconv.Itoa(y), "which": "y"},
 		}
 	}
 	type entry struct{ x, y int }
@@ -383,6 +404,7 @@ func (g *coordPlotGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		Question:    fmt.Sprintf("What quadrant is the point \\((%d, %d)\\) in?", e.x, e.y),
 		Answer:      quad(e.x, e.y),
 		Explanation: fmt.Sprintf("(%d,%d) is in %s.", e.x, e.y, quad(e.x, e.y)),
+		Facts:       map[string]string{"x": strconv.Itoa(e.x), "y": strconv.Itoa(e.y), "quadrant": quad(e.x, e.y)},
 	}
 }
 
@@ -426,6 +448,7 @@ func (g *coordDistanceGen) Generate(ctx generator.GeneratorContext) generator.Pr
 			Question:    fmt.Sprintf("Find the distance between \\((%d,%d)\\) and \\((%d,%d)\\). (enter a number)", x1, y, x1+dx, y),
 			Answer:      fmt.Sprintf("%d", dx),
 			Explanation: fmt.Sprintf("Same y-coordinate, so the distance is \\(|%d-%d| = %d\\).", x1+dx, x1, dx),
+			Facts:       map[string]string{"x1": strconv.Itoa(x1), "x2": strconv.Itoa(x1 + dx), "y": strconv.Itoa(y), "dist": strconv.Itoa(dx), "dx": strconv.Itoa(dx), "dy": "0", "dx_sq": strconv.Itoa(dx * dx), "dy_sq": "0", "sum_sq": strconv.Itoa(dx * dx)},
 		}
 	}
 	pool := tableEasy
@@ -439,6 +462,7 @@ func (g *coordDistanceGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Question:    fmt.Sprintf("Find the distance between \\((%d,%d)\\) and \\((%d,%d)\\).", x1, y1, x1+t.dx, y1+t.dy),
 		Answer:      fmt.Sprintf("%d", t.dist),
 		Explanation: fmt.Sprintf("\\(\\sqrt{(%d-%d)^{2} + (%d-%d)^{2}} = \\sqrt{%d + %d} = \\sqrt{%d} = %d\\).", x1+t.dx, x1, y1+t.dy, y1, t.dx*t.dx, t.dy*t.dy, t.dx*t.dx+t.dy*t.dy, t.dist),
+		Facts:       map[string]string{"x1": strconv.Itoa(x1), "y1": strconv.Itoa(y1), "dx": strconv.Itoa(t.dx), "dy": strconv.Itoa(t.dy), "dx_sq": strconv.Itoa(t.dx * t.dx), "dy_sq": strconv.Itoa(t.dy * t.dy), "sum_sq": strconv.Itoa(t.dx*t.dx + t.dy*t.dy), "dist": strconv.Itoa(t.dist)},
 	}
 }
 
@@ -454,6 +478,7 @@ func (g *coordMidpointGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Question:    fmt.Sprintf("Find the midpoint of \\((%d,%d)\\) and \\((%d,%d)\\).", x1, y1, x2, y2),
 		Answer:      fmt.Sprintf("(%.1f, %.1f)", float64(x1+x2)/2, float64(y1+y2)/2),
 		Explanation: fmt.Sprintf("\\(\\text{Midpoint} = \\left(\\frac{%d+%d}{2}, \\frac{%d+%d}{2}\\right) = (%.1f, %.1f)\\).", x1, x2, y1, y2, float64(x1+x2)/2, float64(y1+y2)/2),
+		Facts:       map[string]string{"x1": strconv.Itoa(x1), "y1": strconv.Itoa(y1), "x2": strconv.Itoa(x2), "y2": strconv.Itoa(y2), "mid_x": fmt.Sprintf("%.1f", float64(x1+x2)/2), "mid_y": fmt.Sprintf("%.1f", float64(y1+y2)/2)},
 	}
 }
 
@@ -468,6 +493,7 @@ func (g *volumeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		Question:    fmt.Sprintf("Rectangular prism: length=%d width=%d height=%d. Find volume.", l, w, h),
 		Answer:      fmt.Sprintf("%d", l*w*h),
 		Explanation: fmt.Sprintf("\\(V = l \\times w \\times h = %d \\times %d \\times %d = %d\\).", l, w, h, l*w*h),
+		Facts:       map[string]string{"l": strconv.Itoa(l), "w": strconv.Itoa(w), "h": strconv.Itoa(h), "volume": strconv.Itoa(l * w * h)},
 	}
 }
 
@@ -483,6 +509,7 @@ func (g *surfaceAreaGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("Rectangular prism: length=%d width=%d height=%d. Find surface area.", l, w, h),
 		Answer:      fmt.Sprintf("%d", sa),
 		Explanation: fmt.Sprintf("\\(\\text{SA} = 2(lw + lh + wh) = 2(%d + %d + %d) = %d\\).", l*w, l*h, w*h, sa),
+		Facts:       map[string]string{"l": strconv.Itoa(l), "w": strconv.Itoa(w), "h": strconv.Itoa(h), "lw": strconv.Itoa(l * w), "lh": strconv.Itoa(l * h), "wh": strconv.Itoa(w * h), "sum": strconv.Itoa(l*w + l*h + w*h), "sa": strconv.Itoa(sa)},
 	}
 }
 
@@ -501,6 +528,7 @@ func (g *coordLinesGen) Generate(ctx generator.GeneratorContext) generator.Probl
 			Question:    fmt.Sprintf("What is the slope of the line through \\((%d,%d)\\) and \\((%d,%d)\\)? (enter a number)", x1, y1, x1+run, y1+rise),
 			Answer:      fmt.Sprintf("%d", slope),
 			Explanation: fmt.Sprintf("\\(\\text{Slope} = \\frac{%d-%d}{%d-%d} = \\frac{%d}{%d} = %d\\).", y1+rise, y1, x1+run, x1, rise, run, slope),
+			Facts:       map[string]string{"x1": strconv.Itoa(x1), "y1": strconv.Itoa(y1), "x2": strconv.Itoa(x1 + run), "y2": strconv.Itoa(y1 + rise), "rise": strconv.Itoa(rise), "run": strconv.Itoa(run), "slope": strconv.Itoa(slope), "dx": strconv.Itoa(run), "dy": strconv.Itoa(rise)},
 		}
 	}
 	x1 := rand.Intn(scale*2+4) - 3
@@ -555,6 +583,7 @@ func (g *coordLinesGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Question:    fmt.Sprintf("Find the equation of the line through \\((%d,%d)\\) and \\((%d,%d)\\).", x1, y1, x2, y2),
 		Answer:      answer,
 		Explanation: fmt.Sprintf("\\(\\text{Slope} = \\frac{%d-%d}{%d-%d} = \\frac{%d}{%d}\\). Line through \\((%d,%d)\\): \\(y - %d = \\frac{%d}{%d}(x - %d) \\to %s\\)", y2, y1, x2, x1, dy, dx, x1, y1, y1, dy, dx, x1, answer),
+		Facts:       map[string]string{"x1": strconv.Itoa(x1), "y1": strconv.Itoa(y1), "x2": strconv.Itoa(x2), "y2": strconv.Itoa(y2), "dx": strconv.Itoa(dx), "dy": strconv.Itoa(dy), "slope": answer},
 	}
 }
 
@@ -586,11 +615,13 @@ func (g *coordPolarGen) Generate(ctx generator.GeneratorContext) generator.Probl
 			Question:    fmt.Sprintf("Convert \\((r=%d, \\theta=%d^{\\circ})\\) to rectangular coordinates.", e.r, e.theta),
 			Answer:      fmt.Sprintf("(%d,%d)", e.x, e.y),
 			Explanation: fmt.Sprintf("\\(x = %d \\cdot \\cos(%d^{\\circ}) = %d\\), \\(y = %d \\cdot \\sin(%d^{\\circ}) = %d \\to (%d,%d)\\)", e.r, e.theta, e.x, e.r, e.theta, e.y, e.x, e.y),
+			Facts:       map[string]string{"r": strconv.Itoa(e.r), "theta": strconv.Itoa(e.theta), "x": strconv.Itoa(e.x), "y": strconv.Itoa(e.y)},
 		}
 	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Convert \\((%d,%d)\\) to polar coordinates \\((r > 0, 0 \\leq \\theta < 360)\\).", e.x, e.y),
 		Answer:      fmt.Sprintf("(%d,%d°)", e.r, e.theta),
 		Explanation: fmt.Sprintf("\\(r = \\sqrt{%d^{2}+%d^{2}} = %d\\), \\(\\theta = \\arctan\\left(\\frac{%d}{%d}\\right) = %d^{\\circ} \\to (%d,%d^{\\circ})\\)", e.x, e.y, e.r, e.y, e.x, e.theta, e.r, e.theta),
+		Facts:       map[string]string{"r": strconv.Itoa(e.r), "theta": strconv.Itoa(e.theta), "x": strconv.Itoa(e.x), "y": strconv.Itoa(e.y)},
 	}
 }

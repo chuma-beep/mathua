@@ -155,7 +155,11 @@ type subBorrowGen struct{}
 func (g *subBorrowGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
 	tensA := rand.Intn(max(1, scale*2)) + 1
-	onesA := rand.Intn(max(1, scale*2))
+	// onesA stays under 9 so that 10-onesA is always a positive bound. A zero
+	// or negative bound panics rand.Intn, and the old range reached 11 at
+	// difficulty 1.0 — which the Learn stepper does request, taking the handler
+	// down with a panic instead of serving a question.
+	onesA := rand.Intn(max(1, min(8, scale*2-1))) + 1
 	onesB := onesA + rand.Intn(10-onesA) + 1
 	tensB := rand.Intn(tensA)
 	if tensB == tensA {

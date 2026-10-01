@@ -1,0 +1,15 @@
+{
+  "concept": "geo.coord.midpoint",
+  "setup": "The segment runs from [[x1]], [[y1]] to [[x2]], [[y2]].",
+  "steps": [
+    {
+      "fact": "x1",
+      "say": "The midpoint is the point half way along, and \"half way along\" means averaging: add the two values and divide by 2, separately for each coordinate."
+    },
+    {
+      "fact": "mid_x",
+      "say": "Horizontally that is ([[x1]] + [[x2]])/2 = [[mid_x]]; vertically ([[y1]] + [[y2]])/2 = [[mid_y]]."
+    }
+  ],
+  "answer": "The midpoint is ([[mid_x]], [[mid_y]])."
+}

@@ -1,0 +1,11 @@
+{
+  "concept": "geo.basic.vertical",
+  "setup": "Two lines cross, and one of the four angles formed measures [[a]] degrees.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Opposite angles at a crossing are called vertical angles, and they are always equal to each other — the two on either side take [[a]] and its leftover, which are the same pair of numbers."
+    }
+  ],
+  "answer": "The vertical angle is also [[a]] degrees."
+}

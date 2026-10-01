@@ -1,0 +1,11 @@
+{
+  "concept": "geo.coord.plot",
+  "setup": "The point is [[x]], [[y]] on the plane.",
+  "steps": [
+    {
+      "fact": "x",
+      "say": "An ordered pair is read as (x, y): the first entry is the horizontal distance from the origin, the second is the vertical one."
+    }
+  ],
+  "answer": "The value asked for is [[answer]]."
+}
