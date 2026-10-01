@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
+import Footer from '../../components/Footer'
 import StudySkeleton from '../../components/skeletons/StudySkeleton'
 import { getLessons, getLessonBody, type LessonInfo, type LessonsRes } from '../../lib/api'
 import { getUserInfo } from '../../lib/auth'
@@ -205,6 +206,7 @@ function StudyContent() {
           <StudySkeleton />
         </div>
         <BottomTabs />
+        <Footer />
       </>
     )
   }
@@ -322,6 +324,7 @@ function StudyContent() {
       </div>
 
       <BottomTabs />
+      <Footer />
     </>
   )
 }
