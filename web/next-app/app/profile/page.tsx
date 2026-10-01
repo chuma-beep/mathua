@@ -411,15 +411,6 @@ export default function ProfilePage() {
           </section>
         )}
 
-        <section id="struggles" className="mt-8 min-w-0 scroll-mt-28">
-          <StrugglesSection weaknesses={weaknesses} />
-          <div className="mt-3 text-center">
-            <Link href="/progress-card" className="font-mono text-xs text-mathua-blue hover:text-mathua-blue-hover">
-              View progress card →
-            </Link>
-          </div>
-        </section>
-
         {/* Activity heatmap — centered, GitHub-style, full-width on mobile */}
         <section id="activity" className="mt-8 flex min-w-0 flex-col items-stretch scroll-mt-28">
           <h2 className="font-serif text-[1.05rem] font-normal text-mathua-primary mb-4 w-full">
@@ -429,6 +420,15 @@ export default function ProfilePage() {
             <div className="w-full max-w-full min-w-0">
               <ActivityHeatmap data={activity} />
             </div>
+          </div>
+        </section>
+
+        <section id="struggles" className="mt-8 min-w-0 scroll-mt-28">
+          <StrugglesSection weaknesses={weaknesses} />
+          <div className="mt-3 text-center">
+            <Link href="/progress-card" className="font-mono text-xs text-mathua-blue hover:text-mathua-blue-hover">
+              View progress card →
+            </Link>
           </div>
         </section>
 
@@ -524,12 +524,6 @@ export default function ProfilePage() {
         )}
 
         {/* Domain progress — mastered / completed / locked per domain */}
-        <section id="domains" className="mt-8 min-w-0 scroll-mt-28">
-          <div className="grid grid-cols-1 gap-4 min-w-0">
-            <DomainProgress progress={progress} />
-          </div>
-        </section>
-
         {/* Efficacy — first-pass / second-pass instrumentation */}
         {efficacy && efficacy.concepts_touched > 0 && (
           <section id="efficacy" className="mt-10 min-w-0 scroll-mt-28">
@@ -576,6 +570,12 @@ export default function ProfilePage() {
             )}
           </section>
         )}
+
+        <section id="domains" className="mt-8 min-w-0 scroll-mt-28">
+          <div className="grid grid-cols-1 gap-4 min-w-0">
+            <DomainProgress progress={progress} />
+          </div>
+        </section>
 
 
           </div>
