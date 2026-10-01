@@ -1,4 +1,5 @@
 import type { ConceptProgress, DailyActivity, WeaknessRes } from './api'
+import { isMastered, prereqMet } from './progress'
 
 export type NextUpKind = 'review' | 'weakness' | 'resume' | 'diagnostic' | 'browse'
 
@@ -23,19 +24,6 @@ export interface NextUpInput {
   // done re-fetch so a finished-but-unmastered concept never heads its own
   // shelf; entry/profile surfaces omit it and keep prior behavior.
   excludeConceptIds?: string[]
-}
-
-function isMastered(p: ConceptProgress | undefined): boolean {
-  return (p?.status ?? '').toLowerCase() === 'mastered'
-}
-
-// A prerequisite is satisfied when mastered OR completed (lesson-completion
-// unlocks successors; mastery still gates the quiz). Same rule as the
-// server's Available(); absent `completed` (pre-PR1 payloads) behaves exactly
-// as before.
-function prereqSatisfied(progress: Record<string, ConceptProgress>, pid: string): boolean {
-  const p = progress[pid]
-  return isMastered(p) || p?.completed === true
 }
 
 // New means no evidence of learning at all: nothing mastered and no
@@ -232,7 +220,7 @@ export function buildCandidates(input: ShelfInput): ShelfCandidate[] {
   for (const c of input.catalog) {
     if (excluded.has(c.id)) continue
     if (isMastered(input.progress[c.id])) continue
-    if (!(c.prerequisites ?? []).every(pid => prereqSatisfied(input.progress, pid))) continue
+    if (!(c.prerequisites ?? []).every(pid => prereqMet(input.progress, pid))) continue
     const w = weakById.get(c.id)
     const inProgress = input.progress[c.id] !== undefined || recent.has(c.id)
     out.push({
@@ -269,7 +257,7 @@ export function upcomingLocked(
   for (const c of catalog) {
     if (!(c.prerequisites ?? []).includes(conceptId)) continue
     if (isMastered(progress[c.id])) continue
-    const missing = (c.prerequisites ?? []).filter(pid => !prereqSatisfied(progress, pid))
+    const missing = (c.prerequisites ?? []).filter(pid => !prereqMet(progress, pid))
     if (missing.length === 0) continue // eligible — already a `new` candidate
     out.push({ id: c.id, label: c.label, missing: missing.map(pid => labels.get(pid) ?? pid) })
   }
@@ -325,7 +313,7 @@ export function recentlyUnlocked(input: {
     for (const c of input.catalog) {
       if (!(c.prerequisites ?? []).includes(cid)) continue
       if (seen.has(c.id) || isMastered(input.progress[c.id])) continue
-      if (!(c.prerequisites ?? []).every(pid => prereqSatisfied(input.progress, pid))) continue
+      if (!(c.prerequisites ?? []).every(pid => prereqMet(input.progress, pid))) continue
       seen.add(c.id)
       out.push({ id: c.id, label: c.label, via: labels.get(cid) ?? cid })
     }

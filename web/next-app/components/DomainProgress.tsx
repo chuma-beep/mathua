@@ -2,6 +2,8 @@
 
 import { useMemo } from 'react'
 import conceptsData from '../data/concepts.json'
+import { countByDomain, type CatalogueConcept } from '../lib/progress'
+import type { ConceptProgress } from '../lib/api'
 
 const DOMAIN_ORDER = [
 'arithmetic', 'fractions', 'prealgebra',
@@ -30,35 +32,16 @@ const DOMAIN_LABELS = {
 } satisfies Record<string, string>
 
 interface Props {
-  progress: Record<string, { status: string; completed?: boolean }>
-}
-
-function isMasteredStatus(status?: string): boolean {
-  return (status ?? '').toLowerCase() === 'mastered'
-}
-
-function prereqMet(progress: Record<string, { status: string; completed?: boolean }>, pid: string): boolean {
-  const p = progress[pid]
-  return isMasteredStatus(p?.status) || p?.completed === true
+  progress: Record<string, ConceptProgress>
 }
 
 export default function DomainProgress({ progress }: Props) {
   const domains = useMemo(() => {
-    const byDomain = new Map<string, { total: number; mastered: number; learning: number; completed: number; locked: number }>()
-    for (const c of conceptsData as { id: string; domain: string; prerequisites?: string[] }[]) {
-      const entry = byDomain.get(c.domain) || { total: 0, mastered: 0, learning: 0, completed: 0, locked: 0 }
-      entry.total++
-      const p = progress[c.id]
-      if (isMasteredStatus(p?.status)) entry.mastered++
-      else if (p?.completed === true) entry.completed++
-      else {
-        if (p?.status === 'LEARNING' || p?.status === 'PRACTICING') entry.learning++
-        if (!(c.prerequisites ?? []).every(pid => prereqMet(progress, pid))) entry.locked++
-      }
-      byDomain.set(c.domain, entry)
-    }
-
-    return DOMAIN_ORDER.flatMap((d) => {
+    const byDomain = countByDomain(
+      conceptsData as CatalogueConcept[],
+      progress,
+    )
+    return DOMAIN_ORDER.flatMap(d => {
       const e = byDomain.get(d)
       if (!e) return []
       return [{ domain: d, label: DOMAIN_LABELS[d] ?? d, ...e }]
