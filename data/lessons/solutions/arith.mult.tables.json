@@ -1,0 +1,15 @@
+{
+  "concept": "arith.mult.tables",
+  "setup": "You are multiplying [[a]] by [[b]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Take [[b]] groups of [[a]] — or [[a]] groups of [[b]]; the product is the same either way."
+    },
+    {
+      "fact": "total",
+      "say": "[[a]] × [[b]] = [[total]]."
+    }
+  ],
+  "answer": "[[a]] × [[b]] = [[total]]."
+}

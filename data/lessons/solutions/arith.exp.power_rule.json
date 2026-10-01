@@ -1,0 +1,15 @@
+{
+  "concept": "arith.exp.power_rule",
+  "setup": "You are simplifying $([[base]]^{[[e1]]})^{[[e2]]}$.",
+  "steps": [
+    {
+      "fact": "e1",
+      "say": "The inner power is [[base]] multiplied by itself [[e1]] times."
+    },
+    {
+      "fact": "e2",
+      "say": "Raising that to [[e2]] multiplies [[e1]] copies of [[e2]] copies — so the exponents multiply: [[e1]] × [[e2]] = [[prod_exp]]."
+    }
+  ],
+  "answer": "So $([[base]]^{[[e1]]})^{[[e2]]} = [[base]]^{[[prod_exp]]}$."
+}

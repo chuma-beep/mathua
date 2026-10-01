@@ -1,0 +1,15 @@
+{
+  "concept": "arith.exp.concept",
+  "setup": "You are evaluating [[base]] to the power [[exp]].",
+  "steps": [
+    {
+      "fact": "exp",
+      "say": "A power is repeated multiplication: [[base]] to the [[exp]] is [[base]] multiplied by itself [[exp]] times."
+    },
+    {
+      "fact": "value",
+      "say": "That product is [[value]]."
+    }
+  ],
+  "answer": "$[[base]]^{[[exp]]} = [[value]]$."
+}

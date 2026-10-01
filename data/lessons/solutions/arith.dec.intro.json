@@ -1,0 +1,15 @@
+{
+  "concept": "arith.dec.intro",
+  "setup": "You are reading the decimal [[ones]].[[tenths]].",
+  "steps": [
+    {
+      "fact": "tenths",
+      "say": "The digit after the point is in the tenths place, so [[tenths]] tenths is a fraction of one whole."
+    },
+    {
+      "fact": "ones",
+      "say": "Together that is [[ones]] and [[tenths]]/10."
+    }
+  ],
+  "answer": "[[ones]].[[tenths]] is the mixed number [[ones]] [[tenths]]/10."
+}

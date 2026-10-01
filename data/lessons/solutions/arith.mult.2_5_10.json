@@ -1,0 +1,15 @@
+{
+  "concept": "arith.mult.2_5_10",
+  "setup": "You are multiplying [[n]] by [[factor]].",
+  "steps": [
+    {
+      "fact": "factor",
+      "say": "Multiplying by [[factor]] means counting [[n]] that many times."
+    },
+    {
+      "fact": "total",
+      "say": "[[n]] × [[factor]] = [[total]]."
+    }
+  ],
+  "answer": "[[factor]] × [[n]] = [[total]]."
+}

@@ -1,0 +1,15 @@
+{
+  "concept": "arith.add.word",
+  "setup": "You start with [[a]] [[item]], and are given [[b]] more.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "You already have [[a]], so that is where the count starts."
+    },
+    {
+      "fact": "sum",
+      "say": "Receiving [[b]] more means counting up from [[a]] by [[b]], which lands on [[sum]]."
+    }
+  ],
+  "answer": "You now have [[sum]] [[item]]."
+}

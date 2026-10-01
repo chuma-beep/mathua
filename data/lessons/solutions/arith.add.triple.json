@@ -1,0 +1,19 @@
+{
+  "concept": "arith.add.triple",
+  "setup": "You are adding [[a]] and [[b]], both three-digit numbers.",
+  "steps": [
+    {
+      "fact": "ones_a",
+      "say": "Line the digits up by place value. Units: [[ones_a]] and [[ones_b]]."
+    },
+    {
+      "fact": "sum",
+      "say": "Add each column from the right, carrying any ten into the column on its left, until every column is done."
+    },
+    {
+      "fact": "sum",
+      "say": "The result is [[sum]]."
+    }
+  ],
+  "answer": "Adding in place-value columns, with carries where a column reaches ten, gives [[sum]]."
+}

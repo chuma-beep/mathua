@@ -1,0 +1,15 @@
+{
+  "concept": "arith.sub.single",
+  "setup": "You are subtracting [[b]] from [[a]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Start at [[a]] — that is how many you have to begin with."
+    },
+    {
+      "fact": "diff",
+      "say": "Take away [[b]], counting down. You land on [[diff]]."
+    }
+  ],
+  "answer": "[[a]] − [[b]] = [[diff]]."
+}

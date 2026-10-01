@@ -1,0 +1,15 @@
+{
+  "concept": "arith.div.long",
+  "setup": "You are dividing [[dividend]] by [[divisor]].",
+  "steps": [
+    {
+      "fact": "divisor",
+      "say": "Work in the same way as short division: bring digits down and ask how many [[divisor]]s fit at each step."
+    },
+    {
+      "fact": "quotient",
+      "say": "[[divisor]] × [[quotient]] = [[dividend]], so the quotient is [[quotient]]."
+    }
+  ],
+  "answer": "[[dividend]] ÷ [[divisor]] = [[quotient]]."
+}

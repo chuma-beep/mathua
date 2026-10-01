@@ -1,0 +1,15 @@
+{
+  "concept": "arith.neg.add_sub",
+  "setup": "You are adding [[a]] and the negative number [[b]].",
+  "steps": [
+    {
+      "fact": "b_neg",
+      "say": "Adding a negative is the same as subtracting its size: [[b]] is [[b_neg]] without the sign."
+    },
+    {
+      "fact": "sum",
+      "say": "So [[a]] + [[b]] works out as [[a]] − [[b_neg]] = [[sum]]."
+    }
+  ],
+  "answer": "[[a]] + [[b]] = [[sum]]."
+}

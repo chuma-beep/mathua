@@ -1,0 +1,15 @@
+{
+  "concept": "arith.neg.mult_div",
+  "setup": "You are multiplying [[a]] by [[b]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Multiplying by a negative flips the sign of the result, because each negative factor stands for \"the other way\" on the number line."
+    },
+    {
+      "fact": "product",
+      "say": "Signs first: the product is [[product]]."
+    }
+  ],
+  "answer": "[[a]] × [[b]] = [[product]]."
+}

@@ -1,0 +1,23 @@
+{
+  "concept": "arith.sub.borrow",
+  "setup": "You are subtracting [[b]] from [[a]], and the ones digits do not work without borrowing.",
+  "steps": [
+    {
+      "fact": "ones_a",
+      "say": "The ones digits are [[ones_a]] and [[ones_b]]. Since [[ones_b]] is larger, you cannot just take it away — a single one is not enough."
+    },
+    {
+      "fact": "tens_a",
+      "say": "Borrow: trade one ten from the tens column ([[tens_a]] tens) for ten ones. The ones column now has [[ones_a]] + 10, which does cover [[ones_b]]."
+    },
+    {
+      "fact": "ones_diff",
+      "say": "With [[ones_a]] + 10 = [[ones_after_borrow]] in the ones column, taking away [[ones_b]] leaves [[ones_diff]]."
+    },
+    {
+      "fact": "tens_left",
+      "say": "The borrowed ten has gone from the tens column, so that column is now [[tens_a]] − 1 = [[tens_left]]. Multiplying out gives the whole difference: [[a]] − [[b]] = [[diff]]."
+    }
+  ],
+  "answer": "Borrowing one ten from the tens column makes the ones column work, and [[a]] − [[b]] = [[diff]]."
+}

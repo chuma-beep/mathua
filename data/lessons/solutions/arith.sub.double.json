@@ -1,0 +1,15 @@
+{
+  "concept": "arith.sub.double",
+  "setup": "You are subtracting the two-digit number [[b]] from [[a]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Start at [[a]] and take away [[b]]."
+    },
+    {
+      "fact": "diff",
+      "say": "Counting down by [[b]] lands on [[diff]]."
+    }
+  ],
+  "answer": "[[a]] − [[b]] = [[diff]]."
+}

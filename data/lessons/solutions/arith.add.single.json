@@ -1,0 +1,15 @@
+{
+  "concept": "arith.add.single",
+  "setup": "You are adding [[a]] and [[b]].",
+  "steps": [
+    {
+      "fact": "sum",
+      "say": "The ones digits are [[ones_a]] and [[ones_b]]. They add to [[ones_a]] + [[ones_b]], and if that reaches 10 or more you write the extra ten on the left as a carry and keep only the ones digit here."
+    },
+    {
+      "fact": "sum",
+      "say": "So the answer is [[sum]]."
+    }
+  ],
+  "answer": "Adding [[a]] and [[b]] gives [[sum]]."
+}

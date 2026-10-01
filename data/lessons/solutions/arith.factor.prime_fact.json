@@ -1,0 +1,15 @@
+{
+  "concept": "arith.factor.prime_fact",
+  "setup": "You are breaking [[n]] down into primes.",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "Divide [[n]] by the smallest prime that fits, and keep dividing. Each factor you pull out must be prime — that is what makes the factorization unique."
+    },
+    {
+      "fact": "factors",
+      "say": "The prime factors multiply back to [[n]]: [[factors]]."
+    }
+  ],
+  "answer": "So [[n]] = [[factors]], and because every factor is prime this is the only such way."
+}

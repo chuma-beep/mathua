@@ -1,0 +1,15 @@
+{
+  "concept": "arith.order_ops.basic",
+  "setup": "You are evaluating [[q]].",
+  "steps": [
+    {
+      "fact": "b",
+      "say": "PEMDAS does multiplication and division before addition and subtraction, so the $\\times$ is done first: [[b]] × [[c]]."
+    },
+    {
+      "fact": "a",
+      "say": "Only then does the addition happen: [[a]] plus that product."
+    }
+  ],
+  "answer": "[[q]] = [[result]]."
+}

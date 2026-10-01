@@ -1,0 +1,15 @@
+{
+  "concept": "arith.factor.prime",
+  "setup": "You are deciding whether [[p]] is prime.",
+  "steps": [
+    {
+      "fact": "p",
+      "say": "A prime has exactly two factors: 1 and itself. To test [[p]], check whether anything between 2 and $\\sqrt{[[p]]}$ divides into it."
+    },
+    {
+      "fact": "p",
+      "say": "Nothing does, so [[p]] is prime."
+    }
+  ],
+  "answer": "[[p]] is prime: its only factors are 1 and [[p]]."
+}

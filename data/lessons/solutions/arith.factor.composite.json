@@ -1,0 +1,15 @@
+{
+  "concept": "arith.factor.composite",
+  "setup": "You are deciding whether [[n]] is composite.",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "A composite number has factors other than 1 and itself, so it can be split into two smaller factors multiplied together."
+    },
+    {
+      "fact": "ans",
+      "say": "Testing the divisors up to $\\sqrt{[[n]]}$ settles it: [[n]] is [[ans]] composite."
+    }
+  ],
+  "answer": "[[n]] is [[ans]] composite."
+}

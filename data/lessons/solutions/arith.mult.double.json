@@ -1,0 +1,15 @@
+{
+  "concept": "arith.mult.double",
+  "setup": "You are multiplying the two-digit number [[a]] by [[b]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Split [[a]] into its tens and ones, and multiply each part by [[b]]."
+    },
+    {
+      "fact": "total",
+      "say": "Adding the two parts gives [[total]]."
+    }
+  ],
+  "answer": "[[a]] × [[b]] = [[total]]."
+}
