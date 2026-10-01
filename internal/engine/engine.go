@@ -1116,9 +1116,14 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 		return nil, fmt.Errorf("record attempt: %w", err)
 	}
 
-	explanation := ""
-	if !gr.Correct {
-		explanation = sessionFields.explanation
+	// The active session already holds the explanation the generator produced
+	// for the question that was served (sessionFields.explanation, from
+	// Problem.Explanation). Return it on both branches: a correct answer still
+	// needs the reasoning that made it right. Grader feedback is empty on a
+	// correct grade, so gating on the verdict returned nothing at all there.
+	explanation := sessionFields.explanation
+	if explanation == "" {
+		explanation = gr.Feedback
 	}
 
 	taskType := TaskLesson
@@ -1381,9 +1386,18 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 		return nil, fmt.Errorf("save progress: %w", err)
 	}
 	e.PropagateWeakness(studentID)
+	// The explanation is the one the generator produced for the question this
+	// learner actually saw, held in the anchor written when it was served. It
+	// is returned whether the answer was right or wrong: a correct answer still
+	// needs the reasoning that made it right, and a wrong one needs the same
+	// reasoning to reconstruct the solution. Grader feedback is a status token
+	// ("Incorrect"), not teaching, so it is only a last resort for an anchor
+	// that predates the explanation being carried.
 	explanation := ""
-	if !gr.Correct && c != nil {
-		// Prefer generator explanation; fallback to grader feedback.
+	if anchor, found := e.studyAnchorFor(studentID, conceptID, questionText); found {
+		explanation = anchor.Explanation
+	}
+	if explanation == "" {
 		explanation = gr.Feedback
 	}
 	if err := e.repo.RecordAttempt(storage.AttemptEntry{
