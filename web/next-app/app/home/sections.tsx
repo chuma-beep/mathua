@@ -65,7 +65,7 @@ export function LazyGraphMount({ children, fallback }: { children: React.ReactNo
       entries => {
         if (!entries[0]?.isIntersecting) return
         obs.disconnect()
-        // Mount after the page is interactive: the WebGL context + 641-node
+        // Mount after the page is interactive: the WebGL context + 657-node
         // scene must not compete with hydration/first paint.
         if (typeof window.requestIdleCallback === 'function') {
           idleId = window.requestIdleCallback(() => setVisible(true), { timeout: 1500 })

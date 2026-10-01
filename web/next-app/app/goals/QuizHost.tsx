@@ -22,8 +22,9 @@ import { Input } from '@/components/ui/input'
 
 type Phase = 'loading' | 'intro' | 'quiz' | 'done'
 
-// Actionable quiz every 150 XP: timed closed-book, own grading path, guest
-// unlimited retake. Self-contained so the goals page only mounts it.
+// Actionable quiz every 50 XP (engine.QuizGateXP): timed closed-book, own
+// grading path, guest unlimited retake. Self-contained so the goals page only
+// mounts it.
 export default function QuizHost() {
   const [phase, setPhase] = useState<Phase>('intro')
   const [loading, setLoading] = useState(false)
@@ -257,7 +258,7 @@ export default function QuizHost() {
         ) : (
           <>
             <SectionHeader label="Quiz complete" title={`${quizAccuracy.correct}/${quizAccuracy.total} correct`} />
-            <p className="font-mono text-sm text-mathua-secondary mt-4">TaskQuiz 20 XP awarded per correct, retake anytime.</p>
+            <p className="font-mono text-sm text-mathua-secondary mt-4">XP awarded per correct answer, more for faster answers. Retake anytime.</p>
             {quizRemedial.length > 0 && (
               <div className="mt-6 border border-mathua-border bg-mathua-surface p-4 text-left">
                 <p className="font-mono text-xs uppercase tracking-wider text-mathua-muted mb-2">Focus next in Study</p>

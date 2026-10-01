@@ -37,12 +37,12 @@ export const QUIZ_BRIEFING: BriefingItem[] = [
     detail: 'Questions come from your recent lessons.',
   },
   {
-    title: 'Miss one and review it on the spot',
-    detail: 'A wrong answer opens a short review right away.',
+    title: 'A wrong answer shows you why',
+    detail: 'The worked solution appears straight away, and anything worth revisiting is listed when the quiz ends.',
   },
   {
-    title: '20 XP for each correct answer · retake anytime',
-    detail: 'No penalty for retaking.',
+    title: 'XP for each correct answer · retake anytime',
+    detail: 'Faster answers and longer streaks earn more. No penalty for retaking.',
   },
 ]
 
