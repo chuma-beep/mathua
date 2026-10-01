@@ -110,8 +110,81 @@ func exercise(t *testing.T, repo Repository, tag string) snapshot {
 	}
 }
 
-// TestParity_SQLiteVsPostgres runs one identical scenario against both stores
-// and requires the same observable result. Skipped unless TEST_POSTGRES_DSN is set.
+// TestDeleteAccount_RemovesEveryOwnedRow seeds one student across tables,
+// deletes, and requires every owned row gone plus the address reusable.
+// Runs against SQLite always and Postgres when TEST_POSTGRES_DSN is set.
+func TestDeleteAccount_RemovesEveryOwnedRow(t *testing.T) {
+	stores := map[string]Repository{"sq": newTestStore(t)}
+	if dsn := os.Getenv("TEST_POSTGRES_DSN"); dsn != "" {
+		pg, err := NewPostgresStore(dsn)
+		if err != nil {
+			t.Fatalf("open postgres: %v", err)
+		}
+		t.Cleanup(func() { pg.Close() })
+		stores["pg"] = pg
+	}
+	for tag, repo := range stores {
+		stu, err := repo.CreateUser(fmt.Sprintf("del-%s", tag), fmt.Sprintf("deluser-%s-%d", tag, time.Now().UnixNano()), "hash")
+		if err != nil {
+			t.Fatalf("[%s] create user: %v", tag, err)
+		}
+		if err := repo.SetEmail(stu.ID, "gone@example.com"); err != nil {
+			t.Fatalf("[%s] set email: %v", tag, err)
+		}
+		if err := repo.CreateIdentity("google", "gid-"+stu.ID, stu.ID, "gone@example.com", true); err != nil {
+			t.Fatalf("[%s] create identity: %v", tag, err)
+		}
+		sess, err := repo.CreateSession(stu.ID)
+		if err != nil {
+			t.Fatalf("[%s] create session: %v", tag, err)
+		}
+		if err := repo.UpsertProgress(&ConceptProgress{StudentID: stu.ID, ConceptID: "c1", Status: "LEARNING", Streak: 1}); err != nil {
+			t.Fatalf("[%s] upsert progress: %v", tag, err)
+		}
+		if err := repo.RecordAttempt(AttemptEntry{SessionID: sess.ID, StudentID: stu.ID, ConceptID: "c1", Answer: "1", Expected: "1", Correct: true, Timestamp: time.Now().UTC()}); err != nil {
+			t.Fatalf("[%s] record attempt: %v", tag, err)
+		}
+		if err := repo.RecordQuizCompletion(stu.ID, 60); err != nil {
+			t.Fatalf("[%s] quiz completion: %v", tag, err)
+		}
+		if _, err := repo.CreateReport(QuestionReport{ReporterID: stu.ID, ConceptID: "c1", Kind: "question", Question: "q", Status: "open", CreatedAt: time.Now().UTC()}); err != nil {
+			t.Fatalf("[%s] create report: %v", tag, err)
+		}
+		if err := repo.DeleteAccount(stu.ID); err != nil {
+			t.Fatalf("[%s] delete: %v", tag, err)
+		}
+		if got, err := repo.GetStudent(stu.ID); err != nil || got != nil {
+			t.Errorf("[%s] student row survives: %+v %v", tag, got, err)
+		}
+		if got, err := repo.GetProgress(stu.ID, "c1"); err != nil || got != nil {
+			t.Errorf("[%s] progress survives: %+v %v", tag, got, err)
+		}
+		if atts, err := repo.GetAttemptsForStudent(stu.ID); err != nil || len(atts) != 0 {
+			t.Errorf("[%s] attempts survive: %d %v", tag, len(atts), err)
+		}
+		if reps, err := repo.ListReports("all", 10, 0); err != nil {
+			t.Errorf("[%s] list reports: %v", tag, err)
+		} else {
+			for _, r := range reps {
+				if r.ReporterID == stu.ID {
+					t.Errorf("[%s] report survives", tag)
+				}
+			}
+		}
+		// Address reusable by a fresh account (one-email-one-account lives on).
+		other, err := repo.CreateUser("Next", fmt.Sprintf("next-%s-%d", tag, time.Now().UnixNano()), "hash")
+		if err != nil {
+			t.Fatalf("[%s] create next user: %v", tag, err)
+		}
+		if err := repo.SetEmail(other.ID, "gone@example.com"); err != nil {
+			t.Errorf("[%s] address not reusable: %v", tag, err)
+		}
+		// Retry-safe: second delete is a no-op success.
+		if err := repo.DeleteAccount(stu.ID); err != nil {
+			t.Errorf("[%s] repeat delete: %v", tag, err)
+		}
+	}
+}
 func TestParity_SQLiteVsPostgres(t *testing.T) {
 	pg := newPostgresStore(t)
 	if got := exercise(t, pg, "pg"); reflect.DeepEqual(got, snapshot{}) {

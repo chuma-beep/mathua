@@ -7,6 +7,7 @@ import Header from '../../components/Header'
 import BottomTabs from '../../components/BottomTabs'
 import SectionHeader from '../../components/SectionHeader'
 import DangerZone from '../../components/DangerZone'
+import DeleteAccount from '../../components/DeleteAccount'
 import DailyGoalControl from '../../components/DailyGoalControl'
 import PlanEditor from '../../components/PlanEditor'
 import { Input } from '@/components/ui/input'
@@ -729,6 +730,10 @@ export default function SettingsPage() {
 
           <div className="mt-8">
             <DangerZone />
+          </div>
+
+          <div className="mt-4">
+            <DeleteAccount />
           </div>
         </section>
       </div>

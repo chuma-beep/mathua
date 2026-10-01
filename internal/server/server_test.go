@@ -1392,3 +1392,86 @@ func TestEfficacyTrend_Endpoint(t *testing.T) {
 		}
 	}
 }
+
+func TestAccountDelete(t *testing.T) {
+	d, _ := concepts.Build([]concepts.Concept{
+		{ID: "a", Label: "A", Domain: "d", GradingType: "numeric", Prerequisites: []string{},
+			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 60}},
+	})
+	store, _ := storage.NewSQLiteStore(":memory:")
+	t.Cleanup(func() { store.Close() })
+	reg := generator.NewRegistry()
+	reg.Register("a", &testGen{})
+	authSvc := auth.New(store)
+	s := New(engine.New(store, d, reg, nil, nil), store, authSvc)
+	mux := http.NewServeMux()
+	s.Register(mux)
+	del := func(token, body string) *httptest.ResponseRecorder {
+		rec := httptest.NewRecorder()
+		req := httptest.NewRequest("DELETE", "/api/account", bytes.NewReader([]byte(body)))
+		if token != "" {
+			req.Header.Set("Authorization", "Bearer "+token)
+		}
+		mux.ServeHTTP(rec, req)
+		return rec
+	}
+
+	pwToken, pwSt, err := authSvc.Signup("Del", "deluser", "Engine!n1")
+	if err != nil || pwToken == "" {
+		t.Fatalf("signup: %v", err)
+	}
+	if err := store.SetEmail(pwSt.ID, "del@example.com"); err != nil {
+		t.Fatal(err)
+	}
+
+	// Wrong phrase → 400, account intact.
+	if rec := del(pwToken, `{"phrase":"nope","password":"Engine!n1"}`); rec.Code != 400 {
+		t.Fatalf("phrase: expected 400, got %d: %s", rec.Code, rec.Body.String())
+	}
+	// Password account, missing password → 401.
+	if rec := del(pwToken, `{"phrase":"delete my account"}`); rec.Code != 401 {
+		t.Fatalf("missing password: expected 401, got %d: %s", rec.Code, rec.Body.String())
+	}
+	// Wrong password → 401.
+	if rec := del(pwToken, `{"phrase":"delete my account","password":"Wrong!n9"}`); rec.Code != 401 {
+		t.Fatalf("wrong password: expected 401, got %d: %s", rec.Code, rec.Body.String())
+	}
+	// Correct → 200, rows gone, address reusable.
+	if rec := del(pwToken, `{"phrase":"delete my account","password":"Engine!n1"}`); rec.Code != 200 {
+		t.Fatalf("delete: expected 200, got %d: %s", rec.Code, rec.Body.String())
+	}
+	if got, _ := store.GetStudent(pwSt.ID); got != nil {
+		t.Error("student row survives")
+	}
+	if p, _ := store.GetAllProgress(pwSt.ID); len(p) != 0 {
+		t.Errorf("progress survives: %d", len(p))
+	}
+	// Retry → 404 (row already gone).
+	if rec := del(pwToken, `{"phrase":"delete my account","password":"Engine!n1"}`); rec.Code != 404 {
+		t.Fatalf("retry: expected 404, got %d: %s", rec.Code, rec.Body.String())
+	}
+	// Wrong method → 405 (token still verifies; the row is gone).
+	rec := httptest.NewRecorder()
+	req := httptest.NewRequest("POST", "/api/account", bytes.NewReader([]byte(`{}`)))
+	req.Header.Set("Authorization", "Bearer "+pwToken)
+	mux.ServeHTTP(rec, req)
+	if rec.Code != 405 {
+		t.Fatalf("method: expected 405, got %d", rec.Code)
+	}
+
+	// OAuth-only account: phrase alone suffices.
+	oauthSt, err := store.CreateGoogleUser("G", "gdel@example.com", "gid-del-acct", "")
+	if err != nil {
+		t.Fatal(err)
+	}
+	oauthTok, _, err := authSvc.LoginOrCreateOAuth(auth.OAuthProfile{Provider: "google", ProviderID: "gid-del-acct", Email: "gdel@example.com", EmailVerified: true, Name: "G"})
+	if err != nil || oauthTok == "" {
+		t.Fatalf("oauth login: %v", err)
+	}
+	if rec := del(oauthTok, `{"phrase":"delete my account"}`); rec.Code != 200 {
+		t.Fatalf("oauth delete: expected 200, got %d: %s", rec.Code, rec.Body.String())
+	}
+	if got, _ := store.GetStudent(oauthSt.ID); got != nil {
+		t.Error("oauth student row survives")
+	}
+}

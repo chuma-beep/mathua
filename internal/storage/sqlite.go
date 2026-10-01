@@ -1049,6 +1049,51 @@ func (s *SQLiteStore) ResetProgress(studentID string) error {
 	return nil
 }
 
+// DeleteAccount removes one student and every owned row (see Repository
+// docs for the exact scope). One transaction, child tables first, explicit
+// deletes rather than cascade reliance.
+func (s *SQLiteStore) DeleteAccount(studentID string) error {
+	tx, err := s.db.Begin()
+	if err != nil {
+		return fmt.Errorf("begin account delete: %w", err)
+	}
+	exec := func(stmt string, args ...interface{}) error {
+		if _, err := tx.Exec(stmt, args...); err != nil {
+			tx.Rollback()
+			return err
+		}
+		return nil
+	}
+	stmts := []struct {
+		q    string
+		args []interface{}
+	}{
+		{"DELETE FROM email_verifications WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM password_resets WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM link_tokens WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM identities WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM avatar_images WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM attempts WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM active_sessions WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM sessions WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM concept_progress WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM student_topic_speed WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM quiz_completions WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM server_sessions WHERE kind IN ('study_expected','study_plan','study_plan_prefs') AND (key = ? OR key LIKE ? || '|%')", []interface{}{studentID, studentID}},
+		{"DELETE FROM question_reports WHERE reporter_id = ?", []interface{}{studentID}},
+		{"DELETE FROM students WHERE id = ?", []interface{}{studentID}},
+	}
+	for _, st := range stmts {
+		if err := exec(st.q, st.args...); err != nil {
+			return fmt.Errorf("delete account: %w", err)
+		}
+	}
+	if err := tx.Commit(); err != nil {
+		return fmt.Errorf("commit account delete: %w", err)
+	}
+	return nil
+}
+
 // Attempts
 
 func (s *SQLiteStore) RecordAttempt(entry AttemptEntry) error {

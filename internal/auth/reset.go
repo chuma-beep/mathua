@@ -124,6 +124,26 @@ func (a *AuthService) CompletePasswordReset(token, newPassword string) (string, 
 	return tok, st, nil
 }
 
+// ErrPasswordMismatch marks a wrong current password (401, not 400/500).
+var ErrPasswordMismatch = errors.New("current password is incorrect")
+
+// CheckPassword verifies a password account's current password without
+// changing anything. Passwordless accounts (OAuth-only) get an error — the
+// caller skips the password step for them instead.
+func (a *AuthService) CheckPassword(studentID, password string) error {
+	st, err := a.repo.GetStudent(studentID)
+	if err != nil || st == nil {
+		return fmt.Errorf("load student: %w", err)
+	}
+	if st.PasswordHash == "" {
+		return errors.New("no password set on this account")
+	}
+	if err := bcrypt.CompareHashAndPassword([]byte(st.PasswordHash), []byte(password)); err != nil {
+		return ErrPasswordMismatch
+	}
+	return nil
+}
+
 // ChangePassword verifies the current password before setting the new one
 // (logged-in flow — no email involved).
 func (a *AuthService) ChangePassword(studentID, currentPassword, newPassword string) error {

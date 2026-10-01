@@ -99,6 +99,7 @@ export interface UserInfo {
   avatar_url?: string
   email?: string
   email_verified?: boolean
+  has_password?: boolean
 }
 
 export function setUserInfo(info: UserInfo) {
@@ -118,6 +119,14 @@ export function signOut() {
     const g = (window as GoogleAccountsWindow).google
     g?.accounts?.id?.disableAutoSelect?.()
   } catch { /* ignore */ }
+  window.dispatchEvent(new Event('auth-changed'))
+}
+
+// clearGuest wipes guest identity + session (used after account deletion,
+// where nothing — including the guest row — may survive).
+export function clearGuest() {
+  localStorage.removeItem(GUEST_KEY)
+  localStorage.removeItem(GUEST_TOKEN_KEY)
   window.dispatchEvent(new Event('auth-changed'))
 }
 

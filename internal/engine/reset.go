@@ -10,7 +10,14 @@ import (
 // Client-side gating is UX only; the server enforces this value.
 const ResetPhrase = "reset my progress"
 
+// DeletePhrase is the exact typed confirmation the account-deletion
+// endpoint requires. Separate from ResetPhrase so a reset confirmation can
+// never authorize a deletion.
+const DeletePhrase = "delete my account"
+
 var errResetPhraseMismatch = fmt.Errorf("confirmation phrase does not match")
+
+var errDeletePhraseMismatch = fmt.Errorf("confirmation phrase does not match")
 
 // ResetAccountProgress wipes one student's learning record and returns them
 // to a fresh start. Order matters and every step is retry-safe:
@@ -56,4 +63,35 @@ func (e *Engine) ResetAccountProgress(studentID, phrase string) error {
 	}
 	prefs.ResetAt = time.Now().UTC().Format(time.RFC3339)
 	return e.savePlanPrefs(studentID, prefs)
+}
+
+// DeleteAccount removes one student and every owned row, then drops their
+// in-memory engine state (same maps as the reset path). Order matters and
+// every step is retry-safe: the repository delete is one idempotent
+// transaction, and map deletes tolerate absence. Password verification (for
+// password accounts) happens in the server handler before this runs.
+func (e *Engine) DeleteAccount(studentID, phrase string) error {
+	if strings.TrimSpace(phrase) != DeletePhrase {
+		return errDeletePhraseMismatch
+	}
+	if err := e.repo.DeleteAccount(studentID); err != nil {
+		return err
+	}
+	e.mu.Lock()
+	delete(e.studySessions, studentID)
+	delete(e.quizRemedial, studentID)
+	delete(e.activePath, studentID)
+	prefix := studentID + "|"
+	for k := range e.studyMisses {
+		if strings.HasPrefix(k, prefix) {
+			delete(e.studyMisses, k)
+		}
+	}
+	for k := range e.studyExpected {
+		if strings.HasPrefix(k, prefix) {
+			delete(e.studyExpected, k)
+		}
+	}
+	e.mu.Unlock()
+	return nil
 }
