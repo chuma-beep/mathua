@@ -465,7 +465,7 @@ export default function SettingsPage() {
                     onChange={(e) => setDisplayName(e.target.value)}
                     placeholder="Your name"
                     enterKeyHint="done"
-                    className="flex-1"
+                    className="flex-1 h-14"
                   />
                   <button
                     type="submit"
@@ -487,7 +487,7 @@ export default function SettingsPage() {
                     onChange={(e) => setRecoveryEmail(e.target.value)}
                     placeholder="you@example.com"
                     autoComplete="email"
-                    className="flex-1"
+                    className="flex-1 h-14"
                   />
                 </div>
                 {userEmail !== '' && !userEmailVerified && (
