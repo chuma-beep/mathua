@@ -1,0 +1,15 @@
+{
+  "concept": "alg.eq.binomial",
+  "setup": "You are solving x^[[r]] = [[rhs]].",
+  "steps": [
+    {
+      "fact": "r",
+      "say": "To undo a power, raise both sides to the reciprocal of it — here 1/[[r]] — which is what the radical means."
+    },
+    {
+      "fact": "k",
+      "say": "[[rhs]]^(1/[[r]]) = [[k]]."
+    }
+  ],
+  "answer": "So x = [[k]]."
+}

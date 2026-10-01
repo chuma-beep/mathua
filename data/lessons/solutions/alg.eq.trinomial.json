@@ -1,0 +1,15 @@
+{
+  "concept": "alg.eq.trinomial",
+  "setup": "The quadratic is x² + [[coef]]x + [[const]] = 0.",
+  "steps": [
+    {
+      "fact": "r",
+      "say": "The constant is the square of the coefficient, which is the signature of a repeated root: x² + [[coef]]x + [[const]] is exactly (x + [[r]])²."
+    },
+    {
+      "fact": "x",
+      "say": "Setting that to zero gives x = [[x]]."
+    }
+  ],
+  "answer": "So the solution is x = [[x]]."
+}

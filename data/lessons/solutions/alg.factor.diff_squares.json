@@ -1,0 +1,11 @@
+{
+  "concept": "alg.factor.diff_squares",
+  "setup": "You are factoring x² − [[a2]].",
+  "steps": [
+    {
+      "fact": "a2",
+      "say": "A difference of two squares is a special case: a² − b² = (a + b)(a − b). Here the second term is a perfect square, [[a2]] = [[a]]²."
+    }
+  ],
+  "answer": "So it factors as (x + [[a]])(x − [[a]])."
+}

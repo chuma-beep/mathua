@@ -1,0 +1,15 @@
+{
+  "concept": "alg.eq.polynomial",
+  "setup": "You are solving [[q]] = 0.",
+  "steps": [
+    {
+      "fact": "r1",
+      "say": "Factor into two brackets and set each to zero, since a product is zero only when a factor is."
+    },
+    {
+      "fact": "r2",
+      "say": "That gives x = [[r1]] or x = [[r2]]."
+    }
+  ],
+  "answer": "So the solutions are [[r1]] and [[r2]]."
+}

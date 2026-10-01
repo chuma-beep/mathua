@@ -1,0 +1,27 @@
+{
+  "concept": "alg.quad.complex",
+  "setup": "The quadratic is x² + [[b]]x + [[c]] = 0.",
+  "steps": [
+    {
+      "fact": "disc",
+      "say": "The discriminant b² − 4ac is what decides this, with no solving: [[b2]] − [[four_c]] = [[disc]].",
+      "optional": true
+    },
+    {
+      "fact": "disc",
+      "say": "Above 0 gives two real roots, exactly 0 gives one, and below 0 gives two complex roots — real coefficients, non-real values.",
+      "optional": true
+    },
+    {
+      "fact": "want_complex",
+      "say": "Both roots are then complex, and a real-coefficient quadratic always has them in conjugate pairs, so the count is two.",
+      "optional": true
+    },
+    {
+      "fact": "want_real",
+      "say": "No root of a real-coefficient quadratic can be real when the discriminant is negative, so the count is zero.",
+      "optional": true
+    }
+  ],
+  "answer": "So the answer is [[answer]]."
+}

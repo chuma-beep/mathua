@@ -1,0 +1,15 @@
+{
+  "concept": "alg.poly.roots",
+  "setup": "You are finding the roots of [[q]] = 0.",
+  "steps": [
+    {
+      "fact": "r1",
+      "say": "A root is a value that makes the whole expression zero. Factoring the quadratic into two brackets turns that into two simpler questions, each of which is zero when one factor is."
+    },
+    {
+      "fact": "r2",
+      "say": "That gives the two roots [[r1]] and [[r2]]."
+    }
+  ],
+  "answer": "The roots are [[r1]] and [[r2]]."
+}

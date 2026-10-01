@@ -1,0 +1,15 @@
+{
+  "concept": "alg.poly.synthetic_division",
+  "setup": "You are dividing by (x − [[r]]).",
+  "steps": [
+    {
+      "fact": "r",
+      "say": "Synthetic division evaluates the coefficients at the number being divided by, [[r]], and carries the running values down the column — it is long division without the brackets."
+    },
+    {
+      "fact": "out_b",
+      "say": "The two coefficients that come out are [[out_a]] and [[out_b]]."
+    }
+  ],
+  "answer": "So the quotient is [[out_a]]x + [[out_b]]."
+}

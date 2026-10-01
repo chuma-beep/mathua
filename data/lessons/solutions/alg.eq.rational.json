@@ -1,0 +1,15 @@
+{
+  "concept": "alg.eq.rational",
+  "setup": "You are solving [[a]]x/[[b]] = [[rhs]].",
+  "steps": [
+    {
+      "fact": "b",
+      "say": "The fraction is x multiplied by [[a]]/[[b]], so multiply both sides by [[b]] to cancel the denominator — doing it to both sides is what keeps them equal."
+    },
+    {
+      "fact": "ax",
+      "say": "That leaves [[a]]x = [[ax]]."
+    }
+  ],
+  "answer": "So x = [[x]]."
+}

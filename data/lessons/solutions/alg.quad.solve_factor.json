@@ -1,0 +1,15 @@
+{
+  "concept": "alg.quad.solve_factor",
+  "setup": "You are solving [[q]] = 0.",
+  "steps": [
+    {
+      "fact": "r1",
+      "say": "A product is zero exactly when one of its factors is, so factor the quadratic and set each bracket to zero in turn."
+    },
+    {
+      "fact": "r2",
+      "say": "That gives x = [[r1]] or x = [[r2]]."
+    }
+  ],
+  "answer": "So the solutions are [[r1]] and [[r2]]."
+}

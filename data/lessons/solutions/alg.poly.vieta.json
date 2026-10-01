@@ -1,0 +1,15 @@
+{
+  "concept": "alg.poly.vieta",
+  "setup": "For [[q]] = 0, you want the sum of the roots.",
+  "steps": [
+    {
+      "fact": "neg_b",
+      "say": "Vieta's shortcut: the roots add to −b. Here −b is [[neg_b]], so the sum is [[neg_b]] without solving anything."
+    },
+    {
+      "fact": "r1",
+      "say": "Solving would give [[r1]] and [[r2]], and those do add to [[sum]]."
+    }
+  ],
+  "answer": "So the sum of the roots is [[sum]]."
+}

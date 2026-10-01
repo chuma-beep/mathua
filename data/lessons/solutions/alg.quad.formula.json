@@ -1,0 +1,19 @@
+{
+  "concept": "alg.quad.formula",
+  "setup": "You are solving [[q]] = 0 with the quadratic formula.",
+  "steps": [
+    {
+      "fact": "b",
+      "say": "The formula works on ax² + bx + c = 0; here a = 1, b = [[b]] and c = [[c]]."
+    },
+    {
+      "fact": "disc",
+      "say": "Under the square root goes b² − 4ac, which is [[b2]] − [[four_c]] = [[disc]]."
+    },
+    {
+      "fact": "r1",
+      "say": "With ± that gives the two roots [[r1]] and [[r2]]."
+    }
+  ],
+  "answer": "So the solutions are [[r1]] and [[r2]]."
+}

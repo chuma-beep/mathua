@@ -1,0 +1,11 @@
+{
+  "concept": "alg.poly.concept",
+  "setup": "The polynomial's leading term is [[coeff]]x^[[exp]].",
+  "steps": [
+    {
+      "fact": "exp",
+      "say": "The degree of a polynomial is the **highest** exponent in it — the steepest power, not the number of terms. Here the exponents run up to [[exp]]."
+    }
+  ],
+  "answer": "So the degree is [[exp]]."
+}

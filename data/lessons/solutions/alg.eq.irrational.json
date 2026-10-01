@@ -1,0 +1,15 @@
+{
+  "concept": "alg.eq.irrational",
+  "setup": "You are solving √x = [[x]].",
+  "steps": [
+    {
+      "fact": "x",
+      "say": "An equation with a square root on it is cleared by squaring both sides, which is the move that removes the root."
+    },
+    {
+      "fact": "k",
+      "say": "Squaring gives x = [[k]]."
+    }
+  ],
+  "answer": "So the solution is x = [[k]]."
+}

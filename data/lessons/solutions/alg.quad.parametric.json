@@ -1,0 +1,15 @@
+{
+  "concept": "alg.quad.parametric",
+  "setup": "You are choosing [[k]] so the quadratic has exactly one solution.",
+  "steps": [
+    {
+      "fact": "coef",
+      "say": "Exactly one solution means a repeated root, and a repeated root is the case where the discriminant is zero."
+    },
+    {
+      "fact": "k",
+      "say": "Setting b² − 4ac = 0 for [[coef]]x + [[const]] and solving gives [[k]]."
+    }
+  ],
+  "answer": "So the value is [[k]]."
+}

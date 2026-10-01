@@ -1,0 +1,15 @@
+{
+  "concept": "alg.factor.trinomial",
+  "setup": "You are factoring x² + [[b]]x + [[c]].",
+  "steps": [
+    {
+      "fact": "c",
+      "say": "The two brackets multiply to a constant [[c]] and a middle term [[b]], so find two numbers that multiply to [[c]] and add to [[b]]."
+    },
+    {
+      "fact": "r1",
+      "say": "They are [[r1]] and [[r2]]."
+    }
+  ],
+  "answer": "So it factors as (x + [[r1]])(x + [[r2]])."
+}

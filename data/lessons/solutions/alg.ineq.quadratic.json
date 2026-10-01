@@ -1,0 +1,15 @@
+{
+  "concept": "alg.ineq.quadratic",
+  "setup": "You are solving x² − [[r2]] < 0.",
+  "steps": [
+    {
+      "fact": "r2",
+      "say": "Factor the left side: (x − [[r]])(x + [[r]]). A product is negative exactly when its two factors have opposite signs, which is between the roots."
+    },
+    {
+      "fact": "r",
+      "say": "So the inequality holds for −[[r]] < x < [[r]]."
+    }
+  ],
+  "answer": "The largest integer that works is [[x]]."
+}
