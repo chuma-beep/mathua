@@ -173,7 +173,7 @@ export default function ReviewHost() {
               type="button"
               onClick={() => { void startReview() }}
               disabled={loading}
-              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-12 px-8 font-medium text-sm disabled:opacity-50"
+              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-12 px-8 font-medium text-sm disabled:opacity-50"
             >
               Start review →
             </button>
@@ -199,7 +199,7 @@ export default function ReviewHost() {
             <SectionHeader label="Review" title="All caught up" />
             <p className="font-mono text-sm text-mathua-secondary mt-4">Nothing is due for review right now. New reviews appear here as memories fade.</p>
             <div className="mt-6 flex gap-3 justify-center">
-              <Link href="/study" className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-12 px-8 text-sm inline-flex items-center">Open Study →</Link>
+              <Link href="/study" className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-12 px-8 text-sm inline-flex items-center">Open Study →</Link>
               <Link href="/profile" className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none h-12 px-8 text-sm inline-flex items-center">Back to Profile →</Link>
             </div>
           </>
@@ -208,7 +208,7 @@ export default function ReviewHost() {
             <SectionHeader label="Review complete" title={`${reviewAccuracy.correct}/${reviewAccuracy.total} correct`} />
             <p className="font-mono text-sm text-mathua-secondary mt-4">Reviews record progress like practice{reviewXp > 0 ? ` · +${reviewXp} XP this run` : ''}.</p>
             <div className="mt-6 flex gap-3 justify-center">
-              <button type="button" onClick={restartReview} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-12 px-8 text-sm">Review again →</button>
+              <button type="button" onClick={restartReview} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-12 px-8 text-sm">Review again →</button>
               <Link href="/profile" className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none h-12 px-8 text-sm inline-flex items-center">Back to Profile →</Link>
             </div>
             <div className="mt-3 text-center">
@@ -238,7 +238,7 @@ export default function ReviewHost() {
               <form onSubmit={e => { e.preventDefault(); void submitReviewFn() }} className="flex flex-col sm:flex-row gap-3 min-w-0">
                 <label htmlFor="review-answer" className="sr-only">Your answer</label>
                 <Input ref={reviewInputRef} id="review-answer" type="text" value={reviewAnswerInput} onChange={e => setReviewAnswerInput(e.target.value)} placeholder="Your answer..." enterKeyHint="go" inputMode={answerFormat.inputMode} disabled={loading} className="sm:flex-1" />
-                <button type="submit" disabled={!reviewAnswerInput.trim() || loading} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-12 px-6 font-medium text-sm disabled:opacity-50 shrink-0 w-auto self-end sm:self-auto">Check Answer</button>
+                <button type="submit" disabled={!reviewAnswerInput.trim() || loading} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-12 px-6 font-medium text-sm disabled:opacity-50 shrink-0 w-auto self-end sm:self-auto">Check Answer</button>
               </form>
               <div className="mt-2 flex items-center justify-between gap-2">
                 <p className="font-mono text-[11px] text-mathua-muted">{answerFormat.hint}</p>
@@ -283,7 +283,7 @@ export default function ReviewHost() {
               type="button"
               autoFocus
               onClick={goNext}
-              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-12 px-8 font-medium text-sm shrink-0"
+              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-12 px-8 font-medium text-sm shrink-0"
             >
               Next →
             </button>

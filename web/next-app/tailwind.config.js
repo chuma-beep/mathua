@@ -19,6 +19,12 @@ module.exports = {
 
           blue: 'var(--accent-blue)',
           'blue-hover': 'var(--accent-blue-hover)',
+          // Faint blue fill for badges, chips, and hover states. Declared
+          // explicitly because opacity modifiers (/10, /50, …) emit no CSS
+          // for var()-based colors in this Tailwind build — classes like
+          // bg-mathua-blue/10 silently do nothing (transparent bg, dead
+          // hover). color-mix shares the baseline of the oklch tokens above.
+          'blue-faint': 'color-mix(in srgb, var(--accent-blue) 10%, transparent)',
           teal: 'var(--accent-teal)',
           green: 'var(--accent-green)',
           red: 'var(--accent-red)',

@@ -174,7 +174,7 @@ export default function LeaderboardPage() {
                 <tr
                   key={`entry-${row.rank}`}
                   className={`border-b border-mathua-border last:border-b-0 ${
-                    i < 3 ? 'bg-mathua-blue/5' : ''
+                    i < 3 ? 'bg-mathua-blue-faint' : ''
                   }`}
                 >
                   <td className="p-2.5 sm:p-[14px_20px] font-mono text-sm text-mathua-muted">

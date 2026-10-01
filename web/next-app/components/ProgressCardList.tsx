@@ -25,7 +25,7 @@ export default function ProgressCardList({ attempts }: { attempts: AttemptRecord
       {attempts.map((a, i) => (
         <div
           key={`${a.timestamp}-${a.concept_id}-${i}`}
-          className={`border bg-mathua-surface p-4 min-w-0 ${a.correct ? 'border-mathua-border' : 'border-mathua-red/40'}`}
+          className={`border bg-mathua-surface p-4 min-w-0 ${a.correct ? 'border-mathua-border' : 'border-mathua-red'}`}
         >
           <div className="flex items-center justify-between gap-2 mb-2">
             <span className="font-mono text-[10px] uppercase tracking-wider text-mathua-muted">

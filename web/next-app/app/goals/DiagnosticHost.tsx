@@ -374,7 +374,7 @@ export default function DiagnosticHost({
                 <button
                   type="submit"
                   disabled={!answerInput.trim() || loading}
-                  className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-12 px-6 font-medium text-sm disabled:opacity-50 shrink-0 w-auto self-end sm:self-auto"
+                  className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-12 px-6 font-medium text-sm disabled:opacity-50 shrink-0 w-auto self-end sm:self-auto"
                 >
                   Check Answer
                 </button>
@@ -440,13 +440,13 @@ export default function DiagnosticHost({
               type="button"
               autoFocus
               onClick={goNext}
-              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-12 px-8 font-medium text-sm shrink-0"
+              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-12 px-8 font-medium text-sm shrink-0"
             >
               Next →
             </button>
           </div>
         ) : lastResult && finished && planError ? (
-          <div className="mb-6 border border-mathua-red/60 bg-mathua-surface p-4 text-left" role="alert">
+          <div className="mb-6 border border-mathua-red bg-mathua-surface p-4 text-left" role="alert">
             <p className="font-mono text-xs text-mathua-red">Couldn&apos;t load your plan.</p>
             <p className="mt-1 font-mono text-[11px] text-mathua-muted break-words [overflow-wrap:anywhere]">{planError}</p>
             <div className="mt-3">
@@ -454,7 +454,7 @@ export default function DiagnosticHost({
                 type="button"
                 onClick={() => { setLoading(true); void fetchPlan() }}
                 disabled={loading}
-                className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-4 h-10 font-mono text-xs disabled:opacity-50"
+                className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-4 h-10 font-mono text-xs disabled:opacity-50"
               >
                 {loading ? 'Loading…' : 'Load plan'}
               </button>

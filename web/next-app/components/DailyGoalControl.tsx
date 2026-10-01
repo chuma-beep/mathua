@@ -77,7 +77,7 @@ export default function DailyGoalControl({ current, onSaved, bare }: { current: 
           inputMode="numeric"
           className="flex-1 min-w-0 bg-mathua-bg border border-mathua-border px-3 py-2 font-mono text-xs text-mathua-primary"
         />
-        <button type="submit" disabled={busy || !custom.trim()} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-5 font-mono text-xs min-h-[40px] disabled:opacity-50">
+        <button type="submit" disabled={busy || !custom.trim()} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-5 font-mono text-xs min-h-[40px] disabled:opacity-50">
           Set
         </button>
       </form>

@@ -86,7 +86,7 @@ export default function StrugglesSection({ weaknesses }: Props) {
           </div>
           <Link
             href="/review"
-            className="shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none px-3 h-8 font-mono text-[11px] inline-flex items-center justify-center min-h-[32px]"
+            className="shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none px-3 h-8 font-mono text-[11px] inline-flex items-center justify-center min-h-[32px]"
           >
             Review now →
           </Link>
@@ -152,7 +152,7 @@ export default function StrugglesSection({ weaknesses }: Props) {
                       <span className="shrink-0 text-mathua-muted text-[11px]">{isOpen ? '▾' : '▸'}</span>
                     </button>
                     {isOpen && (
-                      <div className="px-3 pb-2 space-y-0.5 bg-mathua-surface-elevated/50">
+                      <div className="px-3 pb-2 space-y-0.5 bg-mathua-surface-elevated">
                         {items.slice(0, 8).map(item => {
                           const t = tierFor(item.weakness)
                           return (

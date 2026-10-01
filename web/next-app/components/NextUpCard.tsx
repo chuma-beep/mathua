@@ -18,7 +18,7 @@ export default function NextUpCard({ shelf }: { shelf: Shelf }) {
       </h2>
       <Link
         href={next.href}
-        className="border-2 border-mathua-blue bg-mathua-surface p-4 hover:bg-mathua-blue/10 transition-colors block min-w-0"
+        className="border-2 border-mathua-blue bg-mathua-surface p-4 hover:bg-mathua-blue-faint transition-colors block min-w-0"
       >
         <div className="flex items-center justify-between gap-2 min-w-0">
           <span className="shrink-0 bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
@@ -49,7 +49,7 @@ export default function NextUpCard({ shelf }: { shelf: Shelf }) {
                 className="border border-mathua-border bg-mathua-surface p-4 hover:border-mathua-blue transition-colors block min-w-0"
               >
                 <div className="flex items-center justify-between gap-2 min-w-0">
-                  <span className="shrink-0 bg-mathua-blue/10 text-mathua-blue px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
+                  <span className="shrink-0 bg-mathua-blue-faint text-mathua-blue px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
                     {it.badge}
                   </span>
                   {it.xp > 0 && (

@@ -120,7 +120,7 @@ export default function ReportButton(props: ReportButtonProps) {
         type="button"
         onClick={handleSubmit}
         disabled={sending}
-        className="mt-2 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 transition-colors px-3 h-9 text-xs font-mono disabled:opacity-50"
+        className="mt-2 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint transition-colors px-3 h-9 text-xs font-mono disabled:opacity-50"
       >
         {sending ? 'Sending…' : 'Send report'}
       </button>
