@@ -489,15 +489,16 @@ func TestEngine_Accommodation_ExtraTimeScalesThreshold(t *testing.T) {
 func TestEngine_StudyPath_NegativeXPOnRush(t *testing.T) {
 	e := testEngine(t)
 	st, _ := e.CreateStudent("study_rush")
+	e.SetStudyAnchor(st.ID, "a", "42")
 	// First incorrect rush → 0; second incorrect rush → -1
-	r1, err := e.SubmitStudyAnswer(st.ID, "a", "wrong", "42", 1.0, "")
+	r1, err := e.SubmitStudyAnswer(st.ID, "a", "wrong", 1.0, "")
 	if err != nil {
 		t.Fatalf("study submit 1: %v", err)
 	}
 	if r1.XP != 0 {
 		t.Errorf("expected 0 XP first study rush, got %d", r1.XP)
 	}
-	r2, err := e.SubmitStudyAnswer(st.ID, "a", "wrong", "42", 1.0, "")
+	r2, err := e.SubmitStudyAnswer(st.ID, "a", "wrong", 1.0, "")
 	if err != nil {
 		t.Fatalf("study submit 2: %v", err)
 	}
@@ -523,7 +524,7 @@ func TestEngine_StudyPath_ExplanationOnBothVerdicts(t *testing.T) {
 	})
 
 	// 7/4, not 1.25 — the numeric grader would (correctly) call 1.25 equal to 5/4.
-	miss, err := e.SubmitStudyAnswer(st.ID, "a", "7/4", "5/4", 5.0, question)
+	miss, err := e.SubmitStudyAnswer(st.ID, "a", "7/4", 5.0, question)
 	if err != nil {
 		t.Fatalf("submit miss: %v", err)
 	}
@@ -534,7 +535,7 @@ func TestEngine_StudyPath_ExplanationOnBothVerdicts(t *testing.T) {
 		t.Errorf("miss explanation = %q, want the served explanation %q", miss.Explanation, why)
 	}
 
-	hit, err := e.SubmitStudyAnswer(st.ID, "a", "5/4", "5/4", 5.0, question)
+	hit, err := e.SubmitStudyAnswer(st.ID, "a", "5/4", 5.0, question)
 	if err != nil {
 		t.Fatalf("submit correct: %v", err)
 	}
@@ -546,22 +547,40 @@ func TestEngine_StudyPath_ExplanationOnBothVerdicts(t *testing.T) {
 	}
 }
 
-// With no anchor (a legacy session, or a graded question that was never
-// served) the grader feedback is the fallback — it is a status token, but an
-// explanation is better than nothing and the caller renders the correct answer
-// alongside it.
-func TestEngine_StudyPath_ExplanationFallsBackToGraderFeedback(t *testing.T) {
+// No anchor means the server cannot grade, and it must refuse rather than
+// accept an expected answer from the caller. An ungradeable attempt is not a
+// miss: nothing is recorded, and the caller is told to re-serve.
+func TestEngine_StudyPath_RefusesWithoutAnchor(t *testing.T) {
 	e := testEngine(t)
-	st, _ := e.CreateStudent("study_expl_fallback")
-	res, err := e.SubmitStudyAnswer(st.ID, "a", "wrong", "42", 5.0, "")
+	st, _ := e.CreateStudent("study_no_anchor")
+	_, err := e.SubmitStudyAnswer(st.ID, "a", "42", 5.0, "a question that was never served")
+	if !errors.Is(err, ErrNoStudyAnchor) {
+		t.Fatalf("expected ErrNoStudyAnchor, got %v", err)
+	}
+	// Nothing recorded — no progress row means no streak, weakness or XP moved.
+	if p, _ := e.GetProgress(st.ID); len(p) != 0 {
+		t.Errorf("an ungradeable answer must record nothing, got %v", p)
+	}
+}
+
+// A caller-supplied expected answer must not rescue a missing anchor: the
+// whole point is that there is no longer a parameter to grade against.
+func TestEngine_StudyPath_AnchorWinsOverSuppliedAnswer(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("study_anchor_wins")
+	// The anchor says 42; a client claiming the expected is 7 would score 7.
+	e.SetStudyAnchorBatch(st.ID, "a", map[string]Anchor{
+		"Q1": {Answer: "42", Explanation: "The answer is 42."},
+	})
+	res, err := e.SubmitStudyAnswer(st.ID, "a", "42", 5.0, "Q1")
 	if err != nil {
 		t.Fatalf("submit: %v", err)
 	}
-	if res.Explanation == "" {
-		t.Error("expected a non-empty explanation even with no anchor")
+	if !res.Correct {
+		t.Error("expected the anchored answer to grade correct")
 	}
-	if res.Explanation == "Incorrect" && res.Correct {
-		t.Error("a correct answer must never be explained as Incorrect")
+	if res.ExpectedAnswer != "42" {
+		t.Errorf("ExpectedAnswer = %q, want the anchored 42", res.ExpectedAnswer)
 	}
 }
 
@@ -602,14 +621,16 @@ func TestEngine_Review_ExplanationOnCorrect(t *testing.T) {
 func TestEngine_Efficacy(t *testing.T) {
 	e := testEngine(t)
 	st, _ := e.CreateStudent("efficacy")
+	e.SetStudyAnchor(st.ID, "a", "42")
+	e.SetStudyAnchor(st.ID, "b", "99")
 	// Concept a: first attempt correct (first-pass hit), concept b: wrong then right.
-	if _, err := e.SubmitStudyAnswer(st.ID, "a", "42", "42", 5.0, ""); err != nil {
+	if _, err := e.SubmitStudyAnswer(st.ID, "a", "42", 5.0, ""); err != nil {
 		t.Fatalf("submit a: %v", err)
 	}
-	if _, err := e.SubmitStudyAnswer(st.ID, "b", "1", "99", 5.0, ""); err != nil {
+	if _, err := e.SubmitStudyAnswer(st.ID, "b", "1", 5.0, ""); err != nil {
 		t.Fatalf("submit b wrong: %v", err)
 	}
-	if _, err := e.SubmitStudyAnswer(st.ID, "b", "99", "99", 5.0, ""); err != nil {
+	if _, err := e.SubmitStudyAnswer(st.ID, "b", "99", 5.0, ""); err != nil {
 		t.Fatalf("submit b right: %v", err)
 	}
 	rep, err := e.Efficacy(st.ID)
@@ -639,15 +660,19 @@ func TestEngine_AggregateEfficacy(t *testing.T) {
 	e := testEngine(t)
 	st1, _ := e.CreateStudent("agg1")
 	st2, _ := e.CreateStudent("agg2")
+	for _, id := range []string{st1.ID, st2.ID} {
+		e.SetStudyAnchor(id, "a", "42")
+		e.SetStudyAnchor(id, "b", "99")
+	}
 	// agg1: a correct first try; b wrong then right.
-	_, _ = e.SubmitStudyAnswer(st1.ID, "a", "42", "42", 5.0, "")
-	_, _ = e.SubmitStudyAnswer(st1.ID, "b", "1", "99", 5.0, "")
-	_, _ = e.SubmitStudyAnswer(st1.ID, "b", "99", "99", 5.0, "")
+	_, _ = e.SubmitStudyAnswer(st1.ID, "a", "42", 5.0, "")
+	_, _ = e.SubmitStudyAnswer(st1.ID, "b", "1", 5.0, "")
+	_, _ = e.SubmitStudyAnswer(st1.ID, "b", "99", 5.0, "")
 	// agg2: a wrong then right; b wrong then right.
-	_, _ = e.SubmitStudyAnswer(st2.ID, "a", "1", "42", 5.0, "")
-	_, _ = e.SubmitStudyAnswer(st2.ID, "a", "42", "42", 5.0, "")
-	_, _ = e.SubmitStudyAnswer(st2.ID, "b", "1", "99", 5.0, "")
-	_, _ = e.SubmitStudyAnswer(st2.ID, "b", "99", "99", 5.0, "")
+	_, _ = e.SubmitStudyAnswer(st2.ID, "a", "1", 5.0, "")
+	_, _ = e.SubmitStudyAnswer(st2.ID, "a", "42", 5.0, "")
+	_, _ = e.SubmitStudyAnswer(st2.ID, "b", "1", 5.0, "")
+	_, _ = e.SubmitStudyAnswer(st2.ID, "b", "99", 5.0, "")
 
 	rep, err := e.AggregateEfficacy()
 	if err != nil {
@@ -703,7 +728,7 @@ func TestEngine_SubmitQuizAnswer_TaskQuizXP(t *testing.T) {
 func TestEngine_SubmitStudyAnswer_UnknownConcept(t *testing.T) {
 	e := testEngine(t)
 	st, _ := e.CreateStudent("lost")
-	if _, err := e.SubmitStudyAnswer(st.ID, "nope.not.real", "1", "1", 5.0, ""); !errors.Is(err, ErrUnknownConcept) {
+	if _, err := e.SubmitStudyAnswer(st.ID, "nope.not.real", "1", 5.0, ""); !errors.Is(err, ErrUnknownConcept) {
 		t.Errorf("expected ErrUnknownConcept, got %v", err)
 	}
 	if _, err := e.SubmitQuizAnswer(st.ID, "nope.not.real", "1", "1", 5.0, ""); !errors.Is(err, ErrUnknownConcept) {

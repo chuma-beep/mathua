@@ -5,7 +5,7 @@ import Link from 'next/link'
 import KatexContent from './KatexContent'
 import ChoiceOptions from './ChoiceOptions'
 import { Input } from '@/components/ui/input'
-import { getLessonKPs, getLessonPractice, getLessonReadiness, submitStudyAnswer, getActivity, getDueReviews, getProgress, getScores, getWeaknesses, type KpInfo, type PracticeQuestion, type ReadinessRes, type DailyActivity, type Scores, type WeaknessRes, type ConceptProgress } from '../lib/api'
+import { getLessonKPs, getLessonPractice, getLessonReadiness, submitStudyAnswer, getActivity, getDueReviews, getProgress, getScores, getWeaknesses, getErrorStatus, type KpInfo, type PracticeQuestion, type ReadinessRes, type DailyActivity, type Scores, type WeaknessRes, type ConceptProgress } from '../lib/api'
 import { getUserInfo } from '../lib/auth'
 import { selectShelfHead, upcomingLocked, hrefConceptId, type Shelf, type LockedSuccessor } from '../lib/nextUp'
 import { REQUIRED_IN_A_ROW, masteryEstimate, type Attempt } from '../lib/progression'
@@ -244,7 +244,7 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
     setEntry(key, { checking: true })
     const elapsed = Math.max(0.5, (Date.now() - entry.servedAt) / 1000)
     try {
-      const res = await submitStudyAnswer(conceptId, entry.answer.trim(), entry.q.answer, elapsed, entry.q.question)
+      const res = await submitStudyAnswer(conceptId, entry.answer.trim(), elapsed, entry.q.question)
       if (res.ungraded) {
         setEntry(key, { checking: false })
         return
@@ -307,18 +307,32 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
           }
         })
       }
-    } catch {
-      const correct = entry.answer.trim().toLowerCase() === entry.q.answer.trim().toLowerCase()
-      setHistory(prev => [...prev, { correct, difficulty, elapsed, variation: entry.q.question }])
-      setEntry(key, { checking: false, feedback: { correct, text: entry.q.explanation, xp: 0 } })
-      if (correct) {
-        setConsecutive(c => c + 1)
-        setDifficulty(d => Math.min(1.0, d + 0.15))
-      } else {
-        setConsecutive(0)
-        setMisses(m => m + 1)
-        setDifficulty(d => Math.max(0.3, d - 0.15))
+    } catch (e) {
+      // The server is the only grader. This never decides whether the answer
+      // was right — a network fault or an expired server-side record is not a
+      // miss, and grading locally would have made it one.
+      //
+      // 409 means the server has no record of this question, so resubmitting
+      // it could never succeed: re-serve instead, which writes a fresh record
+      // and leaves the learner with a question they can actually answer. Any
+      // other failure keeps the question and the learner's answer so a retry
+      // can succeed. Nothing was recorded either way — no attempt, streak,
+      // weakness or XP moved.
+      if (getErrorStatus(e) === 409) {
+        const fresh = await refill(difficulty, seenRef.current)
+        if (fresh.length > 0) {
+          seenRef.current = [...seenRef.current, fresh[0].question].slice(-20)
+          setEntry(key, { checking: false, q: fresh[0], answer: '', servedAt: Date.now() })
+          setBuffer(prev => [...prev, ...fresh.slice(1)].slice(0, 6))
+          setError('That question had expired on the server, so it could not be graded. Here is a fresh one — nothing was recorded.')
+          return
+        }
+        setError('That question had expired and no replacement could be loaded. Reload to continue.')
+        setEntry(key, { checking: false })
+        return
       }
+      setEntry(key, { checking: false })
+      setError('Could not reach the server to grade that answer. Check your connection and submit again — nothing was recorded.')
     }
   }
 

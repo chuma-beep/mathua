@@ -2525,8 +2525,14 @@ func (s *Server) handleConceptDetail(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, detail)
 }
 
-// POST /api/study/answer — Study seam: LessonQuiz → SubmitAnswer (CONTEXT.md Seam)
-// Body: { concept_id, answer, expected, elapsed, student_id? } student_id used for guest (mathua_guest_id)
+// POST /api/study/answer — Learn seam: LessonQuiz → SubmitAnswer (CONTEXT.md Seam)
+// Body: { concept_id, answer, elapsed, question, student_id? }
+// student_id is used only for a guest (mathua_guest_id).
+//
+// The request carries no expected answer and needs none: the answer and the
+// explanation both come from the server-side anchor written when the question
+// was served. An `expected` a client does send is ignored — there is nothing
+// left for it to grade against.
 func (s *Server) handleStudyAnswer(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, `{"error":"method not allowed"}`, 405)
@@ -2535,7 +2541,6 @@ func (s *Server) handleStudyAnswer(w http.ResponseWriter, r *http.Request) {
 	var req struct {
 		ConceptID string  `json:"concept_id"`
 		Answer    string  `json:"answer"`
-		Expected  string  `json:"expected"`
 		Elapsed   float64 `json:"elapsed"`
 		StudentID string  `json:"student_id"`
 		Question  string  `json:"question"`
@@ -2548,12 +2553,8 @@ func (s *Server) handleStudyAnswer(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "concept_id required", 400)
 		return
 	}
-	if req.Expected == "" {
-		writeError(w, "expected required", 400)
-		return
-	}
-	if len(req.Answer) > 4096 || len(req.Expected) > 4096 {
-		writeError(w, "answer or expected too long", 400)
+	if len(req.Answer) > 4096 {
+		writeError(w, "answer too long", 400)
 		return
 	}
 	if len(req.Question) > 4096 {
@@ -2573,14 +2574,12 @@ func (s *Server) handleStudyAnswer(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "student_id not permitted", 403)
 		return
 	}
-	// Allow unauthenticated without student_id: grade only, no persistence.
+	// An unidentifiable caller gets nothing: there is no answer to grade
+	// against and nowhere to record a result, and this used to be the one path
+	// that graded a study answer against the client's own expected. Every
+	// client sends a guest id or a token, so this is a malformed request.
 	if studentID == "" {
-		gr := s.eng.GradeAnswer(req.ConceptID, req.Expected, req.Answer)
-		writeJSON(w, map[string]interface{}{
-			"correct":  gr.Correct,
-			"feedback": gr.Feedback,
-			"xp":       0,
-		})
+		writeError(w, "student identity required", 400)
 		return
 	}
 	if req.Elapsed < 0 {
@@ -2593,10 +2592,17 @@ func (s *Server) handleStudyAnswer(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "answer submitted too quickly", 400)
 		return
 	}
-	res, err := s.eng.SubmitStudyAnswer(studentID, req.ConceptID, req.Answer, req.Expected, req.Elapsed, req.Question)
+	res, err := s.eng.SubmitStudyAnswer(studentID, req.ConceptID, req.Answer, req.Elapsed, req.Question)
 	if err != nil {
 		if errors.Is(err, engine.ErrUnknownConcept) {
 			writeError(w, "unknown concept", 404)
+			return
+		}
+		if errors.Is(err, engine.ErrNoStudyAnchor) {
+			// Not a wrong answer: nothing was recorded, no streak or weakness
+			// moved. 409 tells the client to re-serve, which is the only way
+			// this becomes gradeable again.
+			writeError(w, "no server-side record of this question; re-serve it", 409)
 			return
 		}
 		writeError(w, "failed to submit study answer", 500)
