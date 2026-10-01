@@ -14,6 +14,13 @@ build-all:
 test:
 	go test ./...
 
+# The browser suite runs against the static export, so it needs a fresh `out/`
+# first. CI shards this; locally it is one command. Nothing else runs it, which
+# is how a renamed button and a moved page reached main green on the unit suite.
+e2e:
+	cd web/next-app && rm -rf out && npx next build
+	cd web/next-app && npx playwright test
+
 validate:
 	go run scripts/validate_graph.go
 	python3 scripts/audit_lessons.py
