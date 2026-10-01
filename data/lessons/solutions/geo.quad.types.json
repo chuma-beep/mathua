@@ -1,0 +1,11 @@
+{
+  "concept": "geo.quad.types",
+  "setup": "The quadrilateral is described as having [[desc]].",
+  "steps": [
+    {
+      "fact": "desc",
+      "say": "Read the description for what it guarantees: whether all sides are equal, whether opposite sides are parallel, and whether the angles are right angles."
+    }
+  ],
+  "answer": "Those are the defining properties of a [[name]]."
+}

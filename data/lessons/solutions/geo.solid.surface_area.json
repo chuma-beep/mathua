@@ -1,0 +1,19 @@
+{
+  "concept": "geo.solid.surface_area",
+  "setup": "The prism measures [[l]] by [[w]] by [[h]].",
+  "steps": [
+    {
+      "fact": "l",
+      "say": "A closed rectangular prism has six faces, and they come as three matching pairs — so the surface area is twice the sum of the three different face areas."
+    },
+    {
+      "fact": "lw",
+      "say": "The three face areas are [[lw]], [[lh]] and [[wh]], which sum to [[sum]]."
+    },
+    {
+      "fact": "sa",
+      "say": "Doubling for both members of each pair gives [[sa]]."
+    }
+  ],
+  "answer": "The surface area is [[sa]] square units."
+}

@@ -106,6 +106,47 @@ func TestSchemasNeverLeakPlaceholders(t *testing.T) {
 	}
 }
 
+// TestNoGeneratorPanicsAtAnyDifficulty generates every concept across the whole
+// difficulty range and requires none of them to panic.
+//
+// This exists because arith.sub.borrow did: its ones digit was drawn from a
+// range that reached 11, and the next line called rand.Intn(10-onesA), which
+// panics on a non-positive bound. Only difficulty exactly 1.0 could reach it,
+// and the Learn stepper does request 1.0 once a learner is answering
+// correctly, so this was a reachable panic in an HTTP handler — a dropped
+// request rather than a wrong answer.
+//
+// A generator panicking takes the request down with it, and only one of the
+// twenty-five samples has to hit the bad draw, so the range is swept densely
+// enough to find a bound that goes bad on a minority path.
+func TestNoGeneratorPanicsAtAnyDifficulty(t *testing.T) {
+	reg := generator.NewRegistry()
+	registerAllDomains(reg)
+	ids := reg.Concepts()
+	if len(ids) == 0 {
+		t.Fatal("expected a populated registry")
+	}
+	const steps = 21
+	for _, id := range ids {
+		for i := range steps {
+			difficulty := float64(i) / float64(steps-1)
+			func() {
+				defer func() {
+					if r := recover(); r != nil {
+						t.Errorf("%s panics at difficulty %.2f: %v", id, difficulty, r)
+					}
+				}()
+				for seed := int64(1); seed <= 12; seed++ {
+					if _, err := reg.GenerateContext(id, generator.GeneratorContext{Difficulty: difficulty, Seed: seed}); err != nil {
+						t.Errorf("%s generate at difficulty %.2f: %v", id, difficulty, err)
+						return
+					}
+				}
+			}()
+		}
+	}
+}
+
 func contains(haystack []string, needle string) bool {
 	for _, h := range haystack {
 		if h == needle {

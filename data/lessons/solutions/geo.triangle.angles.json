@@ -1,0 +1,15 @@
+{
+  "concept": "geo.triangle.angles",
+  "setup": "Two angles of a triangle measure [[a]] and [[b]] degrees.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The interior angles of any triangle add to 180 degrees, whatever shape the triangle is."
+    },
+    {
+      "fact": "sum",
+      "say": "Subtract the two you know: 180 − [[a]] − [[b]] = [[c]]."
+    }
+  ],
+  "answer": "The third angle is [[c]] degrees."
+}

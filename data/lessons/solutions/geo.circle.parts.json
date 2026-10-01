@@ -1,0 +1,11 @@
+{
+  "concept": "geo.circle.parts",
+  "setup": "The description given is: [[desc]].",
+  "steps": [
+    {
+      "fact": "desc",
+      "say": "The circle's vocabulary is built around the centre: what reaches from the middle, what crosses through it, what goes all the way round, and what joins two points on the edge."
+    }
+  ],
+  "answer": "That is the [[term]]."
+}

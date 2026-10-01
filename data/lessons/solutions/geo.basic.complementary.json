@@ -1,0 +1,15 @@
+{
+  "concept": "geo.basic.complementary",
+  "setup": "One of a complementary pair measures [[given]] degrees.",
+  "steps": [
+    {
+      "fact": "given",
+      "say": "Complementary angles are the two halves of a right angle, so they always add to 90."
+    },
+    {
+      "fact": "missing",
+      "say": "The other is 90 − [[given]] = [[missing]]."
+    }
+  ],
+  "answer": "The complementary angle is [[missing]] degrees."
+}

@@ -1,0 +1,15 @@
+{
+  "concept": "geo.coord.polar",
+  "setup": "This is a conversion between polar and rectangular coordinates.",
+  "steps": [
+    {
+      "fact": "r",
+      "say": "Polar coordinates describe a point by its distance from the origin and its direction; rectangular coordinates describe the same point by horizontal and vertical distance."
+    },
+    {
+      "fact": "theta",
+      "say": "Going between them uses cos for the horizontal component and sin for the vertical one, with the angle measured from the positive x-axis."
+    }
+  ],
+  "answer": "The point is the same either way."
+}

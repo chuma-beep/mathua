@@ -1,0 +1,15 @@
+{
+  "concept": "geo.coord.distance",
+  "setup": "The two points are given and the distance is wanted.",
+  "steps": [
+    {
+      "fact": "dx",
+      "say": "For the ordinary case, take the horizontal change and the vertical change between the points: the horizontal move is [[dx]] and the vertical move is [[dy]]."
+    },
+    {
+      "fact": "dx_sq",
+      "say": "These are the legs of a right triangle, so the straight-line distance is the hypotenuse: √([[dx_sq]] + [[dy_sq]]) = √([[sum_sq]]) = [[dist]]."
+    }
+  ],
+  "answer": "The distance is [[dist]]."
+}

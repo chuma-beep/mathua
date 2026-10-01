@@ -1,0 +1,15 @@
+{
+  "concept": "geo.coord.lines",
+  "setup": "The line runs between the two given points.",
+  "steps": [
+    {
+      "fact": "dx",
+      "say": "Slope is rise over run: the vertical change is [[dy]] and the horizontal change is [[dx]]."
+    },
+    {
+      "fact": "slope",
+      "say": "That gives a slope of [[slope]]."
+    }
+  ],
+  "answer": "The slope is [[slope]]."
+}

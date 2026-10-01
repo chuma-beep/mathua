@@ -1,0 +1,15 @@
+{
+  "concept": "geo.quad.area",
+  "setup": "This is a [[shape]] with base [[base]] and height [[height]].",
+  "steps": [
+    {
+      "fact": "base",
+      "say": "For a [[shape]] the area is the same rectangle you'd get from base × height — a parallelogram's slanted side cuts off exactly what the missing corner adds back."
+    },
+    {
+      "fact": "area",
+      "say": "[[base]] × [[height]] = [[area]]."
+    }
+  ],
+  "answer": "The area is [[area]] square units."
+}

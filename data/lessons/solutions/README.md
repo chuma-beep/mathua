@@ -25,7 +25,7 @@ recomputes them, so an explanation cannot contradict the answer it explains.
       "say": "The bottoms differ, so put both over the smallest common multiple. LCM([[a_den]], [[b_den]]) = [[lcm]]."
     },
     {
-      "fact": "scale",
+      "fact": "b_scaled",
       "say": "That scales the numerators too: $[[b_num]]/[[b_den]]$ becomes $[[b_scaled]]/[[lcm]]$."
     }
   ],
@@ -37,8 +37,9 @@ recomputes them, so an explanation cannot contradict the answer it explains.
 |---|---|---|
 | `concept` | no | Concept id. Defaults to the filename. |
 | `setup` | no | Frames the problem, with values inlined. |
-| `steps[].fact` | yes | The named fact the step rests on. Must be published by the generator, or the whole schema is skipped. |
+| `steps[].fact` | yes | The named fact the step rests on. If the generator does not publish it, the step is skipped. |
 | `steps[].say` | yes | The authored prose for that step. |
+| `steps[].optional` | no | `true` when the step belongs to only one of the question shapes a multi-shape generator asks. Suppresses the drift report for a fact that is legitimately absent on the other shape. |
 | `answer` | **yes** | Closes on the final result. A schema with no `answer` is rejected at load. |
 
 ## Placeholders
@@ -55,12 +56,21 @@ Available in every schema:
 Everything else is a fact the concept's generator publishes. See each
 generator's `Problem{...}` literal for the names it sets.
 
+## One generator can ask two questions
+
+Some generators draw between a *recognition* question and a *production* one —
+classify this angle, or find its complement. One schema covers both, with each
+question's steps marked `"optional": true` so the step that does not apply is
+skipped instead of dragging the whole schema down. Leave the flag off a step
+whose absence would mean you and the generator have drifted apart: that case
+drops the schema, which is the point.
+
 ## Failure is always a fallback, never a guess
 
 A schema is used only if it renders completely. If the concept has no schema,
-a step's fact is gone, or any placeholder has no value behind it, the whole
-schema is skipped and the generator's own `Explanation` is served instead. The
-skip is logged. A learner is never shown a half-filled explanation.
+or any placeholder has no value behind it, the whole schema is skipped and the
+generator's own `Explanation` is served instead. The skip is logged. A learner
+is never shown a half-filled explanation.
 
 ## Checking a schema
 

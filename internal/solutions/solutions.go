@@ -15,10 +15,11 @@
 // ordinary prose, which makes the substitution unambiguous and leaves the
 // authored text readable as English with a few obvious slots.
 //
-// Assembly is fail-soft by construction. A concept with no schema, a step
-// whose fact the generator no longer publishes, or a placeholder with no fact
-// behind it all resolve to the generator's own Problem.Explanation. A learner
-// is never shown a half-filled or partly-invented explanation.
+// Assembly is fail-soft by construction. A concept with no schema, or a
+// placeholder with no fact behind it, resolves to the generator's own
+// Problem.Explanation. A step whose fact is absent is simply not rendered. A
+// learner is never shown a half-filled or partly-invented explanation, and the
+// contract test fails the build when a schema and its generator disagree.
 package solutions
 
 import (
@@ -47,12 +48,22 @@ type Schema struct {
 }
 
 // Step is one derivation step. Fact names the fact the step rests on, and Say
-// is the authored prose explaining it. Fact is load-bearing, not decoration:
-// a step whose fact is missing is a stale schema, and Assemble refuses the
-// whole schema rather than render a step that has lost its footing.
+// is the authored prose explaining it.
+//
+// Fact is load-bearing. A step is only rendered when its fact is present, so a
+// schema can cover both questions a multi-shape generator asks. Mark the step
+// optional when its absence is that design — "classify this angle" versus "find
+// the complement" — and leave it required when a missing fact would mean the
+// schema and its generator had drifted apart.
 type Step struct {
 	Fact string `json:"fact"`
 	Say  string `json:"say"`
+	// Optional marks a step that belongs to only one of the question shapes a
+	// multi-shape generator asks. When its fact is absent the step is skipped
+	// and nothing is reported, because its absence is the design rather than
+	// drift. A step without this flag must have its fact, and a missing one
+	// drops the whole schema — that is what catches a renamed fact.
+	Optional bool `json:"optional,omitempty"`
 }
 
 // Loader holds the schemas for every concept that has one. A nil *Loader is
@@ -153,13 +164,37 @@ func (l *Loader) Assemble(conceptID string, facts map[string]string, fallback st
 	return rendered
 }
 
-// Render substitutes [[name]] placeholders in a schema and reports any name it
-// could not resolve, in order of first appearance.
+// Render substitutes [[name]] placeholders in a schema and reports any
+// placeholder it could not resolve, in order of first appearance.
+//
+// A step whose declared fact is absent is skipped rather than rendered: one
+// generator often asks two different questions (find the complement of an
+// angle, or classify it) and a single schema covers both, with each question's
+// steps applying only to the one it came from. A step is never rendered
+// without its fact, because that would be a claim we cannot support.
+//
+// An unresolved *placeholder* is different: it means the schema and the
+// generator disagree about a name, and the whole schema is dropped. See
+// Assemble.
 //
 // It is exported so the contract test can assert that every placeholder in
 // every shipped schema resolves against a real generated problem, which is the
 // only thing keeping an authored schema and its generator in agreement.
 func Render(s *Schema, facts map[string]string) (string, []string) {
+	return render(s, facts, false)
+}
+
+// Missing lists everything a schema needs that facts does not supply: the
+// placeholder names it interpolates, plus the fact each step declares. Unlike
+// Render it treats an absent step fact as a finding, so the contract test is
+// told when a schema and its generator have drifted apart even though the
+// runtime degrades gracefully.
+func Missing(s *Schema, facts map[string]string) []string {
+	_, missing := render(s, facts, true)
+	return missing
+}
+
+func render(s *Schema, facts map[string]string, strictFacts bool) (string, []string) {
 	if s == nil {
 		return "", nil
 	}
@@ -171,21 +206,19 @@ func Render(s *Schema, facts map[string]string) (string, []string) {
 			missing = append(missing, name)
 		}
 	}
-	// A step's declared fact must still exist, or the step has lost its
-	// footing and rendering it would be a claim we cannot support.
-	for _, step := range s.Steps {
-		if step.Fact == "" {
-			continue
-		}
-		if _, ok := facts[step.Fact]; !ok {
-			note(step.Fact)
-		}
-	}
 	var b strings.Builder
 	if s.Setup != "" {
 		b.WriteString(lookup(s.Setup, facts, note))
 	}
 	for _, step := range s.Steps {
+		if step.Fact != "" {
+			if _, ok := facts[step.Fact]; !ok {
+				if strictFacts && !step.Optional {
+					note(step.Fact)
+				}
+				continue
+			}
+		}
 		say := lookup(step.Say, facts, note)
 		if say == "" {
 			continue
@@ -207,14 +240,6 @@ func Render(s *Schema, facts map[string]string) (string, []string) {
 		return "", missing
 	}
 	return b.String(), nil
-}
-
-// Missing lists the placeholder names a schema needs that facts does not
-// supply. The contract test uses it to report exactly which concepts still
-// need their generator to publish a fact.
-func Missing(s *Schema, facts map[string]string) []string {
-	_, missing := Render(s, facts)
-	return missing
 }
 
 // lookup substitutes every [[name]] in text. An unresolved name is left

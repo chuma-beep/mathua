@@ -1,0 +1,15 @@
+{
+  "concept": "geo.quad.perimeter",
+  "setup": "The rectangle measures [[w]] by [[h]].",
+  "steps": [
+    {
+      "fact": "w",
+      "say": "Perimeter is the distance all the way around the outside, which for a rectangle is two widths and two heights."
+    },
+    {
+      "fact": "sum",
+      "say": "Half of that is [[w]] + [[h]] = [[sum]], doubled for the other half."
+    }
+  ],
+  "answer": "The perimeter is [[perimeter]] units."
+}
