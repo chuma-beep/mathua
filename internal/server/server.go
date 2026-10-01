@@ -2379,6 +2379,7 @@ func (s *Server) handleStudyAnswer(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, map[string]interface{}{
 		"correct":         res.Correct,
 		"feedback":        res.Feedback,
+		"diagnosis":       res.Diagnosis,
 		"explanation":     res.Explanation,
 		"new_status":      res.NewStatus,
 		"streak":          res.Streak,
@@ -2733,7 +2734,7 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 		delete(s.quizSessions, req.SessionID)
 		delete(s.quizCreated, req.SessionID)
 		s.mu.Unlock()
-		writeJSON(w, map[string]interface{}{"done": true, "correct": gr.Correct, "feedback": feedback, "explanation": explanation, "xp": xp, "new_status": newStatus, "remedial": remedial, "retake_available": true})
+		writeJSON(w, map[string]interface{}{"done": true, "correct": gr.Correct, "feedback": feedback, "diagnosis": gr.Diagnosis, "explanation": explanation, "xp": xp, "new_status": newStatus, "remedial": remedial, "retake_available": true})
 		return
 	}
 	prob, cid, err := qEng.NextQuestion(sess)
@@ -2750,6 +2751,7 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 		"done":               false,
 		"correct":            gr.Correct,
 		"feedback":           feedback,
+		"diagnosis":          gr.Diagnosis,
 		"explanation":        explanation,
 		"xp":                 xp,
 		"new_status":         newStatus,

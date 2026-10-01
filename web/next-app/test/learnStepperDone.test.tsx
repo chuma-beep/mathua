@@ -229,6 +229,39 @@ describe('LearnStepper explanation after submission', () => {
     expect(screen.queryByText('Incorrect')).toBeNull()
   }, 15000)
 
+  it('names the mistake when the server can, and stays silent when it cannot', async () => {
+    // A diagnosis is a description of what happened, shown only after grading.
+    // It must never appear on a correct answer, and an empty one leaves nothing
+    // dangling.
+    vi.mocked(submitStudyAnswer).mockResolvedValue({
+      correct: false,
+      feedback: 'Incorrect',
+      diagnosis: 'You are exactly one away, so a count or a boundary is off by one.',
+      explanation: 'Start at 2 and count on 3 to reach 5.',
+      xp: 0,
+    })
+    render(<LearnStepper conceptId={CID} />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Skip the example →' }))
+    await answerCurrent('6')
+    expect(await screen.findByText(/off by one/)).toBeTruthy()
+  })
+
+  it('renders no diagnosis block when the diagnosis is empty', async () => {
+    vi.mocked(submitStudyAnswer).mockResolvedValue({
+      correct: false,
+      feedback: 'Incorrect',
+      diagnosis: '',
+      explanation: 'Start at 2 and count on 3 to reach 5.',
+      xp: 0,
+    })
+    render(<LearnStepper conceptId={CID} />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Skip the example →' }))
+    await answerCurrent('6')
+    expect(await screen.findByText(/Start at 2 and count on 3/)).toBeTruthy()
+    // The explanation renders; the empty diagnosis contributes no node.
+    expect(document.querySelectorAll('[data-diagnosis]')).toHaveLength(0)
+  })
+
   it('leaves no empty section when the server sends no explanation', async () => {
     vi.mocked(submitStudyAnswer).mockResolvedValue({ correct: true, feedback: 'Correct!', explanation: '', xp: 1 })
     render(<LearnStepper conceptId={CID} />)

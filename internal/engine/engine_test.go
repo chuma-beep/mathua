@@ -898,3 +898,43 @@ func TestEngine_TimeLimitFor_ScalesWithAccommodation(t *testing.T) {
 		t.Errorf("expected base 60s, got %v", got)
 	}
 }
+
+// A diagnosis names the mistake after grading. It must never change the verdict,
+// never appear on a correct answer, and stay empty when nothing can be said
+// with certainty. Concept "a" expects 42.
+func TestEngine_Diagnosis(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("diag")
+	// The study path grades against the server-side anchor, never a
+	// caller-supplied expected answer, so the test has to serve one.
+	e.SetStudyAnchor(st.ID, "a", "42")
+
+	cases := map[string]struct {
+		answer        string
+		wantCorrect   bool
+		wantDiagnosis bool
+		why           string
+	}{
+		"sign flipped": {"-42", false, true, "the magnitude is right, so the mistake is the sign"},
+		"off by one":   {"43", false, true, "43 is exactly one from 42"},
+		"unrelated":    {"17", false, false, "nothing distinguishes 17 from 42"},
+		"right answer": {"42", true, false, "a correct answer has no mistake to name"},
+	}
+	for name, tc := range cases {
+		t.Run(name, func(t *testing.T) {
+			res, err := e.SubmitStudyAnswer(st.ID, "a", tc.answer, 5.0, "")
+			if err != nil {
+				t.Fatalf("submit: %v", err)
+			}
+			if res.Correct != tc.wantCorrect {
+				t.Errorf("correct = %v, want %v — %s", res.Correct, tc.wantCorrect, tc.why)
+			}
+			if tc.wantDiagnosis && res.Diagnosis == "" {
+				t.Errorf("expected a diagnosis for %q, got none — %s", tc.answer, tc.why)
+			}
+			if !tc.wantDiagnosis && res.Diagnosis != "" {
+				t.Errorf("unexpected diagnosis %q — %s", res.Diagnosis, tc.why)
+			}
+		})
+	}
+}
