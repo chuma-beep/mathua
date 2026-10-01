@@ -626,34 +626,61 @@ func TestEngine_SubmitStudyAnswer_UnknownConcept(t *testing.T) {
 	}
 }
 
-func TestEngine_StudyExpected_SurvivesRestart(t *testing.T) {
+func TestEngine_StudyAnchor_SurvivesRestart(t *testing.T) {
 	e1 := testEngine(t)
 	// Reach into the shared :memory: store via a second engine instance.
-	e1.SetStudyExpected("stu1", "a", "42")
+	e1.SetStudyAnchor("stu1", "a", "42")
 	// Simulated restart: fresh engine, empty memory map, same store.
 	e2 := New(e1.repo, e1.dag, e1.registry, nil, nil)
-	if v, ok := e2.studyExpectedFor("stu1", "a", ""); !ok || v != "42" {
-		t.Fatalf("expected durable expected=42, got %q ok=%v", v, ok)
+	if got, ok := e2.studyAnchorFor("stu1", "a", ""); !ok || got.Answer != "42" {
+		t.Fatalf("expected durable answer=42, got %+v ok=%v", got, ok)
 	}
 	// The anchor stays available until TTL so a re-answer still grades.
-	if v, ok := e2.studyExpectedFor("stu1", "a", ""); !ok || v != "42" {
+	if _, ok := e2.studyAnchorFor("stu1", "a", ""); !ok {
 		t.Error("expected anchor to remain available for re-answers")
 	}
 }
 
-func TestEngine_StudyExpectedBatch_PerQuestion(t *testing.T) {
+func TestEngine_StudyAnchorBatch_PerQuestion(t *testing.T) {
 	e := testEngine(t)
 	// Distinct questions on the same concept must each grade against their own
-	// answer — the bug was anchoring only the first question.
-	e.SetStudyExpectedBatch("stu1", "a", map[string]string{"Q1": "5^4", "Q2": "625"})
-	if v, ok := e.studyExpectedFor("stu1", "a", "Q1"); !ok || v != "5^4" {
-		t.Errorf("Q1 expected 5^4, got %q ok=%v", v, ok)
+	// answer — the bug was anchoring only the first question — and each is owed
+	// its own explanation, not the set's first one.
+	e.SetStudyAnchorBatch("stu1", "a", map[string]Anchor{
+		"Q1": {Answer: "5^4", Explanation: "5^4 = 5·5·5·5 = 625."},
+		"Q2": {Answer: "625", Explanation: "Already in simplest form."},
+	})
+	if got, ok := e.studyAnchorFor("stu1", "a", "Q1"); !ok || got.Answer != "5^4" || got.Explanation != "5^4 = 5·5·5·5 = 625." {
+		t.Errorf("Q1 anchor = %+v ok=%v", got, ok)
 	}
-	if v, ok := e.studyExpectedFor("stu1", "a", "Q2"); !ok || v != "625" {
-		t.Errorf("Q2 expected 625, got %q ok=%v", v, ok)
+	if got, ok := e.studyAnchorFor("stu1", "a", "Q2"); !ok || got.Answer != "625" || got.Explanation != "Already in simplest form." {
+		t.Errorf("Q2 anchor = %+v ok=%v", got, ok)
 	}
-	if _, ok := e.studyExpectedFor("stu1", "a", "Q3"); ok {
+	if _, ok := e.studyAnchorFor("stu1", "a", "Q3"); ok {
 		t.Error("unserved question should have no anchor")
+	}
+}
+
+// A blob written before the explanation was carried must still grade: the
+// session it belongs to is in flight, and refusing it would turn a deploy into
+// a broken learner session. Only the two shapes that can actually be in
+// server_sessions are covered — every writer marshals a map, so a bare string
+// was never stored and the old fallback was dead too.
+func TestDecodeStudyAnchor_LegacyShapes(t *testing.T) {
+	for name, tc := range map[string]struct{ blob, key, answer string }{
+		"current":     {`{"Q1":{"answer":"42","explanation":"why"}}`, "Q1", "42"},
+		"perQuestion": {`{"Q1":"42"}`, "Q1", "42"},
+		"singleKey":   {`{"":"42"}`, "", "42"},
+	} {
+		t.Run(name, func(t *testing.T) {
+			got, ok := decodeStudyAnchor(tc.blob)[tc.key]
+			if !ok {
+				t.Fatalf("key %q missing from %s", tc.key, tc.blob)
+			}
+			if got.Answer != tc.answer {
+				t.Errorf("answer = %q, want %q", got.Answer, tc.answer)
+			}
+		})
 	}
 }
 

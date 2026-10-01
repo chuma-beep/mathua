@@ -60,11 +60,13 @@ var ErrUnknownConcept = fmt.Errorf("unknown concept")
 
 const (
 	// serverSessionStudyExpected is the server_sessions kind for H1b
-	// anti-cheat anchors. studyExpectedTTL bounds the durable row: a
-	// practice question answered within a day is normal; older rows are
-	// stale and treated as missing.
+	// anti-cheat anchors. The name is historical and deliberately unchanged:
+	// it is a persisted value referenced by the reset statements in both
+	// stores, and renaming it would buy nothing but churn there.
+	// studyAnchorTTL bounds the durable row: a practice question answered
+	// within a day is normal; older rows are stale and treated as missing.
 	serverSessionStudyExpected = "study_expected"
-	studyExpectedTTL           = 24 * time.Hour
+	studyAnchorTTL             = 24 * time.Hour
 )
 
 // isFutureRFC3339 reports whether exp (RFC3339 UTC) is still in the future.
@@ -126,8 +128,9 @@ type Engine struct {
 	studyMisses map[string]int
 	// PR 1.5: stable per-student session id for study/quiz attempt FK.
 	studySessions map[string]string
-	// H1b: server-side expected answers for study seam to prevent client cheat
-	studyExpected map[string]string
+	// H1b: server-side anchors for the study seam — the answer each served
+	// question must be graded against plus the explanation owed for it.
+	studyAnchor map[string]string
 	// Batch 1: immediate remedial queue from quiz misses (studentID → conceptIDs).
 	// In-memory by design, same as diag/quiz sessions: a restart just means
 	// a retake; weakness propagation (+0.2/miss) is the durable signal.
@@ -158,52 +161,68 @@ func New(repo storage.Repository, dag *concepts.DAG, reg *generator.Registry, ll
 		activePath:    make(map[string]map[string]bool),
 		studyMisses:   make(map[string]int),
 		studySessions: make(map[string]string),
-		studyExpected: make(map[string]string),
+		studyAnchor:   make(map[string]string),
 		quizRemedial:  make(map[string][]string),
 	}
 }
 
-// SetStudyExpected stores a single server-side expected answer for a concept
-// (question key ""). Prefer SetStudyExpectedBatch for multi-question sets.
-func (e *Engine) SetStudyExpected(studentID, conceptID, expected string) {
-	e.SetStudyExpectedBatch(studentID, conceptID, map[string]string{"": expected})
+// Anchor is the server-side record of one served question: the answer it must
+// be graded against, and the explanation the learner is owed for it. Both come
+// from the same generator call over the same values, so storing them together
+// is what lets a later submit address the exact instance the learner saw — the
+// only place in the system that knows which instance a question text refers to.
+type Anchor struct {
+	Answer      string `json:"answer"`
+	Explanation string `json:"explanation"`
 }
 
-// SetStudyExpectedBatch stores the server-side expected answers for a served
-// practice set, keyed by question text. Anchoring *every* question (not just
-// the first) is what stops a later question from being graded against the
-// first question's answer. Best-effort durable write-through for restarts.
-func (e *Engine) SetStudyExpectedBatch(studentID, conceptID string, byQuestion map[string]string) {
+// SetStudyAnchor stores a single anchor for a concept (question key "").
+// Prefer SetStudyAnchorBatch for multi-question sets.
+func (e *Engine) SetStudyAnchor(studentID, conceptID, expected string) {
+	e.SetStudyAnchorBatch(studentID, conceptID, map[string]Anchor{"": {Answer: expected}})
+}
+
+// SetStudyAnchorBatch stores the anchor for every question in a served set,
+// keyed by question text. Anchoring *every* question (not just the first) is
+// what stops a later question from being graded against the first one's answer;
+// carrying the explanation alongside is what lets the submit return the
+// solution for the question actually answered. Best-effort durable
+// write-through for restarts.
+//
+// The server_sessions kind deliberately stays "study_expected": the stored
+// value is an opaque JSON blob, and renaming the kind would touch every reset
+// statement in both stores plus their tests for no behavioural gain.
+func (e *Engine) SetStudyAnchorBatch(studentID, conceptID string, byQuestion map[string]Anchor) {
 	if len(byQuestion) == 0 {
 		return
 	}
 	key := studentID + "|" + conceptID
 	blob, err := json.Marshal(byQuestion)
 	if err != nil {
-		log.Printf("warning: marshal study expected %s: %v", key, err)
+		log.Printf("warning: marshal study anchor %s: %v", key, err)
 		return
 	}
 	e.mu.Lock()
-	if e.studyExpected == nil {
-		e.studyExpected = make(map[string]string)
+	if e.studyAnchor == nil {
+		e.studyAnchor = make(map[string]string)
 	}
-	e.studyExpected[key] = string(blob)
+	e.studyAnchor[key] = string(blob)
 	e.mu.Unlock()
 	if e.repo != nil {
-		exp := time.Now().UTC().Add(studyExpectedTTL).Format(time.RFC3339)
+		exp := time.Now().UTC().Add(studyAnchorTTL).Format(time.RFC3339)
 		if err := e.repo.UpsertServerSession(serverSessionStudyExpected, key, string(blob), exp); err != nil {
-			log.Printf("warning: persist study expected %s: %v", key, err)
+			log.Printf("warning: persist study anchor %s: %v", key, err)
 		}
 	}
 }
 
-// studyExpectedFor returns the server-side expected answer for a specific
-// served question. Falls back to the single-anchor ("") form for callers that
-// store one answer, and to the durable row after a restart.
-func (e *Engine) studyExpectedFor(studentID, conceptID, question string) (string, bool) {
+// studyAnchorFor returns the anchor for a specific served question. Falls back
+// to the single-anchor ("") form for callers that store one, and to the durable
+// row after a restart.
+func (e *Engine) studyAnchorFor(studentID, conceptID, question string) (Anchor, bool) {
 	key := studentID + "|" + conceptID
 	e.mu.Lock()
-	blob, ok := e.studyExpected[key]
+	blob, ok := e.studyAnchor[key]
 	e.mu.Unlock()
 	if !ok && e.repo != nil {
 		if v, exp, found, err := e.repo.GetServerSession(serverSessionStudyExpected, key); err == nil && found {
@@ -211,17 +230,13 @@ func (e *Engine) studyExpectedFor(studentID, conceptID, question string) (string
 				blob, ok = v, true
 			}
 		} else if err != nil {
-			log.Printf("warning: read study expected %s: %v", key, err)
+			log.Printf("warning: read study anchor %s: %v", key, err)
 		}
 	}
 	if !ok {
-		return "", false
+		return Anchor{}, false
 	}
-	var byQuestion map[string]string
-	if err := json.Unmarshal([]byte(blob), &byQuestion); err != nil {
-		// Legacy anchor: a bare expected string.
-		return blob, true
-	}
+	byQuestion := decodeStudyAnchor(blob)
 	if question != "" {
 		if a, found := byQuestion[question]; found {
 			return a, true
@@ -230,7 +245,28 @@ func (e *Engine) studyExpectedFor(studentID, conceptID, question string) (string
 	if a, found := byQuestion[""]; found {
 		return a, true
 	}
-	return "", false
+	return Anchor{}, false
+}
+
+// decodeStudyAnchor reads an anchor blob, tolerating the shape written before
+// the explanation was carried: {"q": "answer"}. A session opened before a
+// deploy therefore still grades; it simply has no explanation to return, and
+// the caller falls back. The final bare-string return is a defensive
+// last resort — every writer marshals a map, so no stored blob has that shape.
+func decodeStudyAnchor(blob string) map[string]Anchor {
+	var byQuestion map[string]Anchor
+	if err := json.Unmarshal([]byte(blob), &byQuestion); err == nil {
+		return byQuestion
+	}
+	var legacy map[string]string
+	if err := json.Unmarshal([]byte(blob), &legacy); err == nil {
+		byQuestion = make(map[string]Anchor, len(legacy))
+		for question, answer := range legacy {
+			byQuestion[question] = Anchor{Answer: answer}
+		}
+		return byQuestion
+	}
+	return map[string]Anchor{"": {Answer: blob}}
 }
 
 func (e *Engine) CreateStudent(name string) (*storage.Student, error) {
@@ -1172,9 +1208,10 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 // SubmitStudyAnswer records a Study-library answer (LessonQuiz seam per CONTEXT.md: Seam).
 // It grades via the concept's grading_type, updates mastery/SM-2/weakness/XP, and
 // awards TaskMultistep 15 for *.word else TaskLesson 10 (Q2 lock).
-// H1b: if a server-side expected was stored via SetStudyExpected (practice
-// generation), it is used instead of the client-supplied expected to prevent
-// trivial cheat (client sending expected==answer).
+// H1b: if a server-side anchor was stored via SetStudyAnchorBatch (practice
+// generation), its answer is used instead of the client-supplied expected to
+// prevent trivial cheat (client sending expected==answer). The same anchor
+// carries the explanation owed for that exact question.
 func (e *Engine) SubmitStudyAnswer(studentID, conceptID, answer, expected string, elapsedSeconds float64, questionText string) (*AnswerResult, error) {
 	taskType := TaskLesson
 	if strings.HasSuffix(conceptID, ".word") {
@@ -1185,7 +1222,7 @@ func (e *Engine) SubmitStudyAnswer(studentID, conceptID, answer, expected string
 
 // SubmitQuizAnswer is the single-path quiz grader: TaskQuiz base XP (20),
 // progress update, and exactly one AddXP — DB and response agree by
-// construction. Unlike SubmitStudyAnswer it never consults studyExpected:
+// construction. Unlike SubmitStudyAnswer it never consults the study anchor:
 // the quiz expected answer comes from the quiz session.
 func (e *Engine) SubmitQuizAnswer(studentID, conceptID, answer, expected string, elapsedSeconds float64, questionText string) (*AnswerResult, error) {
 	return e.submitAnswerWithTask(studentID, conceptID, answer, expected, elapsedSeconds, TaskQuiz, false, false, questionText)
@@ -1198,13 +1235,13 @@ func (e *Engine) SubmitQuizDontKnow(studentID, conceptID, expected string, elaps
 	return e.submitAnswerWithTask(studentID, conceptID, "", expected, elapsedSeconds, TaskQuiz, false, true, questionText)
 }
 
-func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected string, elapsedSeconds float64, taskType string, useStudyExpected bool, dontKnow bool, questionText string) (*AnswerResult, error) {
+func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected string, elapsedSeconds float64, taskType string, useAnchor bool, dontKnow bool, questionText string) (*AnswerResult, error) {
 	if e.dag.Concept(conceptID) == nil {
 		return nil, fmt.Errorf("%w: %q", ErrUnknownConcept, conceptID)
 	}
-	if useStudyExpected {
-		if stored, ok := e.studyExpectedFor(studentID, conceptID, questionText); ok && stored != "" {
-			expected = stored
+	if useAnchor {
+		if stored, ok := e.studyAnchorFor(studentID, conceptID, questionText); ok && stored.Answer != "" {
+			expected = stored.Answer
 		}
 	}
 	// Narrow lock: only protect studySessions lookup/creation and studyMisses update.

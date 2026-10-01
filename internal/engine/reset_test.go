@@ -35,7 +35,7 @@ func TestResetAccountProgress_ClearsState(t *testing.T) {
 	if err := e.repo.UpsertProgress(&storage.ConceptProgress{StudentID: st.ID, ConceptID: "a", Status: "PRACTICING", Streak: 3}); err != nil {
 		t.Fatal(err)
 	}
-	e.SetStudyExpected(st.ID, "a", "42")
+	e.SetStudyAnchor(st.ID, "a", "42")
 	e.studyMisses[st.ID+"|a"] = 2
 	if err := e.savePlanPrefs(st.ID, &StudyPlanPrefs{Destination: "math-for-ml", DeadlineDays: 90, RestDays: 1}); err != nil {
 		t.Fatal(err)
@@ -49,7 +49,7 @@ func TestResetAccountProgress_ClearsState(t *testing.T) {
 	if p, _ := e.repo.GetAllProgress(st.ID); len(p) != 0 {
 		t.Errorf("progress survives: %d", len(p))
 	}
-	if _, ok := e.studyExpectedFor(st.ID, "a", ""); ok {
+	if _, ok := e.studyAnchorFor(st.ID, "a", ""); ok {
 		t.Error("in-memory anchor survives")
 	}
 	if _, ok := e.studyMisses[st.ID+"|a"]; ok {

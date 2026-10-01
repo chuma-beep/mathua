@@ -1404,7 +1404,7 @@ func (s *Server) handleLessons(w http.ResponseWriter, r *http.Request) {
 	// Try to load progress if student_id is provided — only when the caller
 	// owns that ID (own Bearer identity or guest_ token). Foreign IDs are
 	// ignored: the catalog stays public, but no one's progress leaks and no
-	// victim's studyExpected can be poisoned through this param.
+	// victim's study anchor can be poisoned through this param.
 	var progressMap map[string]map[string]interface{}
 	if sid := r.URL.Query().Get("student_id"); s.ownsStudentID(r, sid) {
 		if p, err := s.eng.GetProgress(sid); err == nil && p != nil {
@@ -1689,14 +1689,14 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 				}
 				questions[i] = qInfo{Question: q.Question, Answer: q.Answer, Explanation: q.Explanation, Source: src}
 			}
-			qa := make(map[string]string, len(dbQs))
+			qa := make(map[string]engine.Anchor, len(dbQs))
 			for _, q := range dbQs {
-				qa[q.Question] = q.Answer
+				qa[q.Question] = engine.Anchor{Answer: q.Answer, Explanation: q.Explanation}
 			}
 			if studentID, _ := r.Context().Value(authStudentKey{}).(string); s.ownsStudentID(r, studentID) {
-				s.eng.SetStudyExpectedBatch(studentID, conceptID, qa)
+				s.eng.SetStudyAnchorBatch(studentID, conceptID, qa)
 			} else if sid := r.URL.Query().Get("student_id"); s.ownsStudentID(r, sid) {
-				s.eng.SetStudyExpectedBatch(sid, conceptID, qa)
+				s.eng.SetStudyAnchorBatch(sid, conceptID, qa)
 			}
 			writeJSON(w, map[string]interface{}{"questions": questions, "concept_id": conceptID})
 			return
@@ -1724,16 +1724,17 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	problems = fresh
-	// H1b: store server-side expecteds for the whole served set (not just the
-	// first question) so each question is graded against its own answer.
-	qa := make(map[string]string, len(problems))
+	// H1b: anchor the whole served set (not just the first question) so each
+	// question is graded against its own answer and answered with its own
+	// explanation. The two travel together: both come from one generator call.
+	qa := make(map[string]engine.Anchor, len(problems))
 	for _, p := range problems {
-		qa[p.Question] = p.Answer
+		qa[p.Question] = engine.Anchor{Answer: p.Answer, Explanation: p.Explanation}
 	}
 	if studentID, _ := r.Context().Value(authStudentKey{}).(string); s.ownsStudentID(r, studentID) {
-		s.eng.SetStudyExpectedBatch(studentID, conceptID, qa)
+		s.eng.SetStudyAnchorBatch(studentID, conceptID, qa)
 	} else if sid := r.URL.Query().Get("student_id"); s.ownsStudentID(r, sid) {
-		s.eng.SetStudyExpectedBatch(sid, conceptID, qa)
+		s.eng.SetStudyAnchorBatch(sid, conceptID, qa)
 	}
 	questions := make([]qInfo, len(problems))
 	for i, p := range problems {

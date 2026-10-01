@@ -30,7 +30,7 @@ func TestDeleteAccount_ClearsRowsAndMemory(t *testing.T) {
 	if err := e.repo.CreateIdentity("google", "gid-del", st.ID, "gone@example.com", true); err != nil {
 		t.Fatal(err)
 	}
-	e.SetStudyExpected(st.ID, "a", "42")
+	e.SetStudyAnchor(st.ID, "a", "42")
 	e.studyMisses[st.ID+"|a"] = 2
 	if err := e.savePlanPrefs(st.ID, &StudyPlanPrefs{Destination: "math-for-ml", DeadlineDays: 90, RestDays: 1}); err != nil {
 		t.Fatal(err)
@@ -48,7 +48,7 @@ func TestDeleteAccount_ClearsRowsAndMemory(t *testing.T) {
 		t.Errorf("progress survives: %d", len(p))
 	}
 	e.mu.Lock()
-	for k := range e.studyExpected {
+	for k := range e.studyAnchor {
 		if strings.HasPrefix(k, st.ID+"|") {
 			t.Errorf("memory anchor survives: %q", k)
 		}

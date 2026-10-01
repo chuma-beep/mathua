@@ -46,9 +46,9 @@ func (e *Engine) ResetAccountProgress(studentID, phrase string) error {
 			delete(e.studyMisses, k)
 		}
 	}
-	for k := range e.studyExpected {
+	for k := range e.studyAnchor {
 		if strings.HasPrefix(k, prefix) {
-			delete(e.studyExpected, k)
+			delete(e.studyAnchor, k)
 		}
 	}
 	e.mu.Unlock()
@@ -87,9 +87,9 @@ func (e *Engine) DeleteAccount(studentID, phrase string) error {
 			delete(e.studyMisses, k)
 		}
 	}
-	for k := range e.studyExpected {
+	for k := range e.studyAnchor {
 		if strings.HasPrefix(k, prefix) {
-			delete(e.studyExpected, k)
+			delete(e.studyAnchor, k)
 		}
 	}
 	e.mu.Unlock()
