@@ -1,0 +1,19 @@
+{
+  "setup": "You are multiplying $[[w1]] \\frac{[[n1]]}{[[den]]}$ by $[[w2]] \\frac{[[n2]]}{[[den]]}$.",
+  "steps": [
+    {
+      "fact": "a_improper",
+      "say": "The bottom is [[den]] on both, so each mixed number is really a fraction with denominator [[den]]: they are $\\frac{[[a_improper]]}{[[den]]}$ and $\\frac{[[b_improper]]}{[[den]]}$."
+    },
+    {
+      "fact": "raw_num",
+      "say": "Multiply across: [[a_improper]] × [[b_improper]] = [[raw_num]] on top."
+    },
+    {
+      "fact": "raw_den",
+      "say": "The bottoms give [[den]] × [[den]] = [[raw_den]]."
+    }
+  ],
+  "answer": "In lowest terms that is $\\frac{[[out_num]]}{[[out_den]]}$.",
+  "concept": "frac.mixed.mult"
+}

@@ -1,0 +1,15 @@
+{
+  "setup": "You are dividing $\\frac{[[a_num]]}{[[a_den]]}$ by $\\frac{[[b_num]]}{[[b_den]]}$.",
+  "steps": [
+    {
+      "fact": "flipped_num",
+      "say": "Dividing by a fraction means dividing by the **reciprocal** instead, so turn the second fraction upside down: $\\frac{[[b_num]]}{[[b_den]]}$ becomes $\\frac{[[flipped_num]]}{[[flipped_den]]}$."
+    },
+    {
+      "fact": "raw_num",
+      "say": "Now multiply straight across: [[a_num]] × [[flipped_num]] = [[raw_num]] on top, and [[a_den]] × [[flipped_den]] = [[raw_den]] underneath."
+    }
+  ],
+  "answer": "In lowest terms: $\\frac{[[out_num]]}{[[out_den]]}$. Sanity check — dividing by a fraction under 1 should leave you more than you started with.",
+  "concept": "frac.ops.div"
+}

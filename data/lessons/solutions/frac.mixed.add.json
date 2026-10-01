@@ -1,0 +1,19 @@
+{
+  "setup": "You are [[op_ing]] $[[w1]] \\frac{[[n1]]}{[[den]]}$ and $[[w2]] \\frac{[[n2]]}{[[den]]}$.",
+  "steps": [
+    {
+      "fact": "a_improper",
+      "say": "The mixed numbers have different wholes, so turn each into an improper fraction over the same bottom [[den]]: $[[w1]] \\frac{[[n1]]}{[[den]]} = \\frac{[[a_improper]]}{[[den]]}$ and $[[w2]] \\frac{[[n2]]}{[[den]]} = \\frac{[[b_improper]]}{[[den]]}$."
+    },
+    {
+      "fact": "result",
+      "say": "Now the bottoms match, so [[op]] the tops: [[a_improper]] [[op]] [[b_improper]] = [[result]], over [[den]]."
+    },
+    {
+      "fact": "whole",
+      "say": "[[result]] ÷ [[den]] is [[whole]] with [[rem]] left over."
+    }
+  ],
+  "answer": "So the sum is $[[whole]] \\frac{[[rem]]}{[[rem_den]]}$.",
+  "concept": "frac.mixed.add"
+}

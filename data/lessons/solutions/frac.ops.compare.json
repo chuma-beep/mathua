@@ -1,0 +1,19 @@
+{
+  "setup": "You are comparing $\\frac{[[a_num]]}{[[a_den]]}$ with $\\frac{[[b_num]]}{[[b_den]]}$.",
+  "steps": [
+    {
+      "fact": "a_val",
+      "say": "$\\frac{[[a_num]]}{[[a_den]]}$ works out to about [[a_val]]."
+    },
+    {
+      "fact": "b_val",
+      "say": "$\\frac{[[b_num]]}{[[b_den]]}$ works out to about [[b_val]]."
+    },
+    {
+      "fact": "op",
+      "say": "Since [[a_val]] and [[b_val]] are not equal, one is the larger. Cross-multiplying gives the same answer without decimals: [[a_num]] × [[b_den]] vs [[b_num]] × [[a_den]], and the sign is [[op]]."
+    }
+  ],
+  "answer": "So $\\frac{[[a_num]]}{[[a_den]]} [[op]] \\frac{[[b_num]]}{[[b_den]]}$.",
+  "concept": "frac.ops.compare"
+}

@@ -1,0 +1,19 @@
+{
+  "setup": "You are adding $\\frac{[[a_num]]}{[[a_den]]}$ and $\\frac{[[b_num]]}{[[b_den]]}$.",
+  "steps": [
+    {
+      "fact": "lcm",
+      "say": "The bottoms are different, so you cannot add the tops yet. Rewrite both fractions over the smallest number that both denominators divide into: LCM([[a_den]], [[b_den]]) = [[lcm]]."
+    },
+    {
+      "fact": "a_scaled",
+      "say": "$\\frac{[[a_num]]}{[[a_den]]}$ is already over [[lcm]], and $\\frac{[[b_num]]}{[[b_den]]}$ becomes $\\frac{[[b_scaled]]}{[[lcm]]}$ — the fraction is still worth the same, just written with a bigger whole."
+    },
+    {
+      "fact": "raw_num",
+      "say": "Now the bottoms match, so the tops can be added straight: [[a_scaled]] + [[b_scaled]] = [[raw_num]], out of [[raw_den]]."
+    }
+  ],
+  "answer": "In lowest terms that is $\\frac{[[out_num]]}{[[out_den]]}$ — divide [[raw_num]] and [[raw_den]] by their common factor if they have one.",
+  "concept": "frac.add.diff"
+}

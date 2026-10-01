@@ -1,0 +1,15 @@
+{
+  "setup": "You are comparing $\\frac{[[num]]}{[[den]]}$ against $\\frac{1}{2}$.",
+  "steps": [
+    {
+      "fact": "comp",
+      "say": "$\\frac{1}{2}$ means \"one half\", so the test is whether the fraction is above, below or exactly at one half. Writing it on the same denominator: $\\frac{1}{2} = \\frac{[[den]]/2}{[[den]]}$, and comparing gives $\\frac{[[num]]}{[[den]]} [[comp]] \\frac{1}{2}$."
+    },
+    {
+      "fact": "dec",
+      "say": "As a decimal check, $\\frac{[[num]]}{[[den]]} \\approx [[dec]]$, and one half is 0.5."
+    }
+  ],
+  "answer": "So it is **[[word]]** than one half.",
+  "concept": "frac.ops.benchmark"
+}

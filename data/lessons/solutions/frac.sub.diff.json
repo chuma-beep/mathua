@@ -1,0 +1,19 @@
+{
+  "setup": "You are subtracting $\\frac{[[b_num]]}{[[b_den]]}$ from $\\frac{[[a_num]]}{[[a_den]]}$.",
+  "steps": [
+    {
+      "fact": "lcm",
+      "say": "The bottoms are different, so put both over the smallest common multiple first: LCM([[a_den]], [[b_den]]) = [[lcm]]."
+    },
+    {
+      "fact": "a_scaled",
+      "say": "$\\frac{[[a_num]]}{[[a_den]]}$ stays as it is, and $\\frac{[[b_num]]}{[[b_den]]}$ becomes $\\frac{[[b_scaled]]}{[[lcm]]}$. (The bigger fraction is always written first, so the answer comes out positive.)"
+    },
+    {
+      "fact": "raw_num",
+      "say": "Now the bottoms match, so subtract the tops: [[a_scaled]] − [[b_scaled]] = [[raw_num]], out of [[raw_den]]."
+    }
+  ],
+  "answer": "In lowest terms that is $\\frac{[[out_num]]}{[[out_den]]}$ — divide [[raw_num]] and [[raw_den]] by their common factor if they have one.",
+  "concept": "frac.sub.diff"
+}

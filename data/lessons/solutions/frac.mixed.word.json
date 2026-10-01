@@ -1,0 +1,15 @@
+{
+  "setup": "You have $[[w1]] \\frac{[[n1]]}{[[den]]}$ meters of ribbon and buy $[[w2]] \\frac{[[n2]]}{[[den]]}$ meters more.",
+  "steps": [
+    {
+      "fact": "whole",
+      "say": "Both lengths are measured against the same denominator [[den]], so the wholes can be added directly: [[w1]] + [[w2]] = [[whole]]."
+    },
+    {
+      "fact": "rem",
+      "say": "The leftover sixteenths add to [[rem]] out of [[rem_den]]."
+    }
+  ],
+  "answer": "So the total is $[[whole]] \\frac{[[rem]]}{[[rem_den]]}$ meters.",
+  "concept": "frac.mixed.word"
+}

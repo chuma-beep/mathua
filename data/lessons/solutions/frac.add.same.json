@@ -1,0 +1,15 @@
+{
+  "setup": "You are [[op_ing]] $\\frac{[[a]]}{[[den]]}$ and $\\frac{[[b]]}{[[den]]}$. The bottoms already match.",
+  "steps": [
+    {
+      "fact": "raw_num",
+      "say": "When the denominators are the same you can add the numerators straight away: [[a]] + [[b]] = [[raw_num]]."
+    },
+    {
+      "fact": "out_den",
+      "say": "The denominator [[den]] does not change — it is still the size of one whole, and adding parts of the same whole keeps the same whole."
+    }
+  ],
+  "answer": "That is $\\frac{[[raw_num]]}{[[raw_den]]}$, in lowest terms $\\frac{[[out_num]]}{[[out_den]]}$.",
+  "concept": "frac.add.same"
+}

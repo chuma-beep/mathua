@@ -1,0 +1,15 @@
+{
+  "setup": "You are [[op_ing]] $\\frac{[[b]]}{[[den]]}$ from $\\frac{[[a]]}{[[den]]}$. The bottoms already match.",
+  "steps": [
+    {
+      "fact": "raw_num",
+      "say": "Same bottoms means you subtract the numerators directly: [[a]] − [[b]] = [[raw_num]]."
+    },
+    {
+      "fact": "out_den",
+      "say": "The denominator [[den]] stays as it is, for the same reason it did when adding: the size of one whole has not changed."
+    }
+  ],
+  "answer": "That is $\\frac{[[raw_num]]}{[[raw_den]]}$, in lowest terms $\\frac{[[out_num]]}{[[out_den]]}$.",
+  "concept": "frac.sub.same"
+}

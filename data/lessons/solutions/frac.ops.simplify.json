@@ -1,0 +1,19 @@
+{
+  "setup": "$\\frac{[[num]]}{[[den]]}$ has a common factor in the top and the bottom.",
+  "steps": [
+    {
+      "fact": "gcd",
+      "say": "Find the largest number that divides both [[num]] and [[den]]. That is [[gcd]] — the **greatest common divisor**, found by the Euclidean algorithm (repeatedly subtract the smaller from the larger)."
+    },
+    {
+      "fact": "out_num",
+      "say": "Divide the top: [[num]] ÷ [[gcd]] = [[out_num]]."
+    },
+    {
+      "fact": "out_den",
+      "say": "Divide the bottom: [[den]] ÷ [[gcd]] = [[out_den]]."
+    }
+  ],
+  "answer": "So $\\frac{[[num]]}{[[den]]} = \\frac{[[out_num]]}{[[out_den]]}$. This is lowest terms: [[out_num]] and [[out_den]] share no factor other than 1, because [[gcd]] was the largest one available.",
+  "concept": "frac.ops.simplify"
+}

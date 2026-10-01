@@ -1,0 +1,15 @@
+{
+  "setup": "In $\\frac{[[num]]}{[[den]]}$, the bar is split into [[den]] equal parts and [[num]] of them are taken.",
+  "steps": [
+    {
+      "fact": "den",
+      "say": "The number underneath is the **denominator**, and its only job is to say how many equal parts the whole is cut into. Here that is [[den]]."
+    },
+    {
+      "fact": "num",
+      "say": "The number on top is the **numerator**: how many of those parts are actually there. Here that is [[num]]."
+    }
+  ],
+  "answer": "So the fraction is read as \"[[num]] out of [[den]]\" — and the answer to this question is [[answer]].",
+  "concept": "frac.basics.parts"
+}
