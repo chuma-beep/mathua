@@ -509,6 +509,95 @@ func TestEngine_StudyPath_NegativeXPOnRush(t *testing.T) {
 	}
 }
 
+// The learner is owed the explanation for the question they actually saw, on
+// both verdicts. A miss used to render the grader's status token ("Incorrect")
+// and a correct answer got no explanation at all, because the return was gated
+// on !Correct and the value it returned was the grader feedback.
+func TestEngine_StudyPath_ExplanationOnBothVerdicts(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("study_expl")
+	const question = "3/4 + 1/2 = ?"
+	const why = "Given 3/4 + 1/2. Step 1: common denominator LCM(4,2)=4. Step 2: add tops = 5/4. Answer: 5/4."
+	e.SetStudyAnchorBatch(st.ID, "a", map[string]Anchor{
+		question: {Answer: "5/4", Explanation: why},
+	})
+
+	// 7/4, not 1.25 — the numeric grader would (correctly) call 1.25 equal to 5/4.
+	miss, err := e.SubmitStudyAnswer(st.ID, "a", "7/4", "5/4", 5.0, question)
+	if err != nil {
+		t.Fatalf("submit miss: %v", err)
+	}
+	if miss.Correct {
+		t.Fatal("expected the miss to grade incorrect")
+	}
+	if miss.Explanation != why {
+		t.Errorf("miss explanation = %q, want the served explanation %q", miss.Explanation, why)
+	}
+
+	hit, err := e.SubmitStudyAnswer(st.ID, "a", "5/4", "5/4", 5.0, question)
+	if err != nil {
+		t.Fatalf("submit correct: %v", err)
+	}
+	if !hit.Correct {
+		t.Fatal("expected the exact answer to grade correct")
+	}
+	if hit.Explanation != why {
+		t.Errorf("correct explanation = %q, want the same served explanation %q", hit.Explanation, why)
+	}
+}
+
+// With no anchor (a legacy session, or a graded question that was never
+// served) the grader feedback is the fallback — it is a status token, but an
+// explanation is better than nothing and the caller renders the correct answer
+// alongside it.
+func TestEngine_StudyPath_ExplanationFallsBackToGraderFeedback(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("study_expl_fallback")
+	res, err := e.SubmitStudyAnswer(st.ID, "a", "wrong", "42", 5.0, "")
+	if err != nil {
+		t.Fatalf("submit: %v", err)
+	}
+	if res.Explanation == "" {
+		t.Error("expected a non-empty explanation even with no anchor")
+	}
+	if res.Explanation == "Incorrect" && res.Correct {
+		t.Error("a correct answer must never be explained as Incorrect")
+	}
+}
+
+// The review path holds its explanation on the active session rather than the
+// study anchor, and it must return it on a correct answer too.
+func TestEngine_Review_ExplanationOnCorrect(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("review_expl")
+	sess, err := e.repo.CreateSession(st.ID)
+	if err != nil {
+		t.Fatalf("create session: %v", err)
+	}
+	q, err := e.NextQuestion(sess.ID, st.ID)
+	if err != nil {
+		t.Fatalf("next question: %v", err)
+	}
+	// Question carries no Expected on purpose — it is never sent to the client.
+	// Read it off the active session to submit a genuinely correct answer.
+	e.mu.Lock()
+	expected := e.sessions[sess.ID].expectedAnswer
+	e.mu.Unlock()
+	res, err := e.SubmitAnswer(sess.ID, st.ID, q.AttemptID, expected, 5.0)
+	if err != nil {
+		t.Fatalf("submit: %v", err)
+	}
+	if !res.Correct {
+		t.Fatal("expected the served expected answer to grade correct")
+	}
+	if res.Explanation == "" {
+		t.Error("a correct review answer must still carry its explanation")
+	}
+	if res.Explanation == res.Feedback {
+		t.Errorf("explanation (%q) should be the solution, not the verdict token", res.Explanation)
+	}
+}
+
 // Session 5: efficacy instrumentation — first-pass / second-pass rates.
 func TestEngine_Efficacy(t *testing.T) {
 	e := testEngine(t)
