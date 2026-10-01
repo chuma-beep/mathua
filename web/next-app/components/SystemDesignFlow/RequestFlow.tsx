@@ -19,18 +19,18 @@ import { themeColors } from '../FlowDiagram'
 const monoFont = "var(--font-jetbrains-mono), 'JetBrains Mono', monospace"
 
 const stepData = {
-  '1-client': { label: 'Client', desc: 'POST /api/answer\n{session_id, answer, elapsed}' },
+  '1-client': { label: 'Client', desc: 'POST /api/study/answer\n{concept_id, answer, question}' },
   '2-auth': { label: 'Auth Middleware', desc: 'Validate JWT\nExtract studentID\nInject into context' },
-  '3-handler': { label: 'Handler', desc: 'handleAnswer()\nCalls Engine.SubmitAnswer()' },
+  '3-handler': { label: 'Handler', desc: 'handleStudyAnswer()\nAnchor supplies expected\nCalls Engine.SubmitStudyAnswer()' },
   '4-grade': { label: 'Grader Router', desc: 'Dispatch by grading_type\nNumeric / SymPy / Choice / etc' },
   '5-mastery': { label: 'Mastery Machine', desc: 'State transition check\nUNSEEN -> LEARNING -> ...' },
   '6-sm2': { label: 'SM-2 Compute', desc: 'Compute quality (0-5)\nUpdate repetitions, interval, efactor' },
   '7-upsert': { label: 'Upsert Progress', desc: 'ON CONFLICT DO UPDATE\nSave all SM-2 fields' },
   '8-weakness': { label: 'Propagate Weakness', desc: 'If weakness > 0.3\nPropagate w*0.3 to dependents' },
-  '9-attempt': { label: 'Record Attempt', desc: 'INSERT INTO attempts\n{session, concept, answer, correct, time}' },
+  '9-attempt': { label: 'Record Attempt', desc: 'INSERT INTO attempts\n{session, concept, answer, correct,\ntime, explanation}' },
   '10-xp': { label: 'Compute XP', desc: 'base * timeMult * streakMult\nrepo.AddXP()' },
-  '11-next': { label: 'Next Question', desc: 'sched.Next() -> generator\nNew problem for next concept' },
-  '12-response': { label: 'Response', desc: 'JSON to client\n{result, next_question, done}' },
+  '11-next': { label: 'Next Question', desc: 'Client refetches practice\nNew problem, new anchor' },
+  '12-response': { label: 'Response', desc: 'JSON to client\n{correct, feedback, explanation, xp}' },
 } satisfies Record<string, { label: string; desc: string }>
 
 function FlowNode({ data }: { data: { label: string; stepId: string } }) {
