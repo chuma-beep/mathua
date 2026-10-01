@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, within } from '@testing-library/react'
 import { AppSidebar } from '../components/app-sidebar'
 import { SidebarProvider } from '../components/ui/sidebar'
 
@@ -35,6 +35,19 @@ describe('AppSidebar', () => {
     expect(screen.queryByText('Diagnostic')).toBeNull()
     expect(screen.queryByText('Take Test')).toBeNull()
     expect(screen.queryByText('Review Now')).toBeNull()
+  })
+
+  it('orders Learn before Study, matching lib/nav.ts', () => {
+    // The sidebar keeps its own list rather than importing nav.ts, because it
+    // is deliberately a subset (no Review, no Login, plus Progress). That
+    // makes the order a thing that can silently drift back to reference-first,
+    // so it is asserted rather than assumed.
+    renderSidebar()
+    const sidebar = screen.getByTestId('profile-sidebar')
+    const learn = within(sidebar).getByText('Learn', { exact: true })
+    const study = within(sidebar).getByText('Study', { exact: true })
+    // compareDocumentPosition: DOCUMENT_POSITION_FOLLOWING === 4
+    expect(learn.compareDocumentPosition(study) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
   })
 
   it('renders Resources group with Docs, Contribute, and Creator note links', () => {
