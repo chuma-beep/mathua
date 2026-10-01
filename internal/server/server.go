@@ -1144,7 +1144,11 @@ func (s *Server) handleLessons(w http.ResponseWriter, r *http.Request) {
 	}
 	ll := s.eng.GetLessonLoader()
 	if ll == nil {
-		writeJSON(w, map[string]interface{}{"lessons": []interface{}{}})
+		// An empty object, not an empty array: the client's LessonsResSchema is
+		// a record of domain → lessons, so returning [] rejects the whole
+		// response and turns a missing corpus into a load error rather than an
+		// empty catalog.
+		writeJSON(w, map[string]interface{}{"lessons": map[string]interface{}{}})
 		return
 	}
 	byDomain := ll.LessonsByDomain()
@@ -1159,12 +1163,23 @@ func (s *Server) handleLessons(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	// Try to load progress if student_id is provided — only when the caller
-	// owns that ID (own Bearer identity or guest_ token). Foreign IDs are
-	// ignored: the catalog stays public, but no one's progress leaks and no
-	// victim's study anchor can be poisoned through this param.
+	// Identity comes from the validated bearer token first, and only then from
+	// an explicit student_id. The readiness and practice branches below already
+	// resolve it this way; reading only the query param here meant a caller who
+	// simply sent its token — which is every guest, since authedFetch attaches
+	// the guest token — got the catalog back with no per-concept status at all.
+	// Preferring the validated identity also means a mismatched param can never
+	// select whose progress is returned.
+	//
+	// A foreign id is still ignored: the catalog stays public, but no one's
+	// progress leaks and no one's study anchor can be poisoned through this
+	// param.
+	sid, _ := r.Context().Value(authStudentKey{}).(string)
+	if sid == "" {
+		sid = r.URL.Query().Get("student_id")
+	}
 	var progressMap map[string]map[string]interface{}
-	if sid := r.URL.Query().Get("student_id"); s.ownsStudentID(r, sid) {
+	if s.ownsStudentID(r, sid) {
 		if p, err := s.eng.GetProgress(sid); err == nil && p != nil {
 			progressMap = make(map[string]map[string]interface{})
 			for cid, cp := range p {

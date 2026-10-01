@@ -5,9 +5,12 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
+	"fmt"
 	"mime/multipart"
 	"net/http"
 	"net/http/httptest"
+	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 	"time"
@@ -16,6 +19,7 @@ import (
 	"github.com/chuma-beep/mathua/internal/concepts"
 	"github.com/chuma-beep/mathua/internal/engine"
 	"github.com/chuma-beep/mathua/internal/generator"
+	"github.com/chuma-beep/mathua/internal/lessons"
 	"github.com/chuma-beep/mathua/internal/planning"
 	"github.com/chuma-beep/mathua/internal/storage"
 )
@@ -1524,4 +1528,144 @@ func TestAccountDelete(t *testing.T) {
 	if got, _ := store.GetStudent(oauthSt.ID); got != nil {
 		t.Error("oauth student row survives")
 	}
+}
+
+// GET /api/lessons resolved the caller's identity only from a student_id query
+// param. authedFetch attaches the guest token, but the Study page sends no such
+// param for a guest, so the one progression signal Study is still allowed to
+// render — the per-concept status words and badges inside LessonDetail — was
+// invisible to every signed-out learner who had in fact been practising.
+func TestLessons_ResolvesIdentityFromToken(t *testing.T) {
+	d, _ := concepts.Build([]concepts.Concept{
+		{ID: "a", Label: "A", Domain: "d", GradingType: "numeric", Prerequisites: []string{},
+			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 60}},
+	})
+	store, _ := storage.NewSQLiteStore(":memory:")
+	t.Cleanup(func() { store.Close() })
+	reg := generator.NewRegistry()
+	reg.Register("a", &testGen{})
+	ll := miniLessons(t, map[string]string{"a": "Lesson A\n\nBody."})
+	s := New(engine.New(store, d, reg, ll, nil), store, auth.New(store))
+	mux := http.NewServeMux()
+	s.Register(mux)
+
+	token, studentID := quizGuest(t, mux)
+
+	// Give the guest progress on concept "a" through the live answer path.
+	rec := httptest.NewRecorder()
+	practice := httptest.NewRequest("GET", "/api/lessons/a/practice?count=1", nil)
+	practice.Header.Set("Authorization", "Bearer "+token)
+	mux.ServeHTTP(rec, practice)
+	if rec.Code != 200 {
+		t.Fatalf("practice: %d %s", rec.Code, rec.Body.String())
+	}
+	var set struct {
+		Questions []struct{ Question, Answer string } `json:"questions"`
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &set); err != nil {
+		t.Fatalf("decode practice: %v", err)
+	}
+	if len(set.Questions) == 0 {
+		t.Fatal("expected a served question")
+	}
+	body, _ := json.Marshal(map[string]interface{}{
+		"concept_id": "a",
+		"answer":     set.Questions[0].Answer,
+		"elapsed":    5.0,
+		"question":   set.Questions[0].Question,
+		"student_id": studentID,
+	})
+	rec = httptest.NewRecorder()
+	answer := httptest.NewRequest("POST", "/api/study/answer", bytes.NewReader(body))
+	answer.Header.Set("Authorization", "Bearer "+token)
+	mux.ServeHTTP(rec, answer)
+	if rec.Code != 200 {
+		t.Fatalf("study answer: %d %s", rec.Code, rec.Body.String())
+	}
+
+	// Token only, no student_id param — exactly what the Study page sends.
+	rec = httptest.NewRecorder()
+	list := httptest.NewRequest("GET", "/api/lessons", nil)
+	list.Header.Set("Authorization", "Bearer "+token)
+	mux.ServeHTTP(rec, list)
+	if rec.Code != 200 {
+		t.Fatalf("lessons: %d %s", rec.Code, rec.Body.String())
+	}
+	own := catalogStatus(t, rec.Body.String())
+	if own == "" {
+		t.Fatalf("a token-only caller got no progress for concept a: %s", rec.Body.String())
+	}
+
+	// An anonymous caller still gets the public catalog with no progress at
+	// all — the catalog is not private, only the status is.
+	rec = httptest.NewRecorder()
+	anon := httptest.NewRequest("GET", "/api/lessons", nil)
+	mux.ServeHTTP(rec, anon)
+	if got := catalogStatus(t, rec.Body.String()); got != "" {
+		t.Errorf("an anonymous caller saw progress %q; the catalog must stay public and untracked", got)
+	}
+
+	// A mismatched param must not redirect whose progress is returned. The
+	// validated identity wins, so this is the caller's own status again.
+	rec = httptest.NewRecorder()
+	other := httptest.NewRequest("GET", "/api/lessons?student_id=someone-else", nil)
+	other.Header.Set("Authorization", "Bearer "+token)
+	mux.ServeHTTP(rec, other)
+	if rec.Code != 200 {
+		t.Fatalf("lessons with foreign param: %d %s", rec.Code, rec.Body.String())
+	}
+	if got := catalogStatus(t, rec.Body.String()); got != own {
+		t.Errorf("a foreign student_id changed whose progress was returned: got %q, want the caller's own %q", got, own)
+	}
+}
+
+// catalogStatus returns the reported status for concept "a" across every
+// lesson in a /api/lessons response, or "" when none carries progress.
+func catalogStatus(t *testing.T, body string) string {
+	t.Helper()
+	var catalog struct {
+		Lessons map[string][]struct {
+			Concepts []string                  `json:"concepts"`
+			Progress map[string]map[string]any `json:"progress"`
+		} `json:"lessons"`
+	}
+	if err := json.Unmarshal([]byte(body), &catalog); err != nil {
+		t.Fatalf("decode lessons: %v — body: %s", err, body)
+	}
+	for _, lessons := range catalog.Lessons {
+		for _, l := range lessons {
+			if cp, ok := l.Progress["a"]; ok {
+				if st, ok := cp["status"].(string); ok {
+					return st
+				}
+			}
+		}
+	}
+	return ""
+}
+
+// miniLessons builds a lesson loader over a temp dir so a test can exercise the
+// catalog path. The real corpus is 565 files; a unit test needs one.
+func miniLessons(t *testing.T, byConcept map[string]string) *lessons.Loader {
+	t.Helper()
+	dir := t.TempDir()
+	var mappings []map[string]string
+	i := 0
+	for cid, body := range byConcept {
+		name := fmt.Sprintf("lesson-%d.md", i)
+		i++
+		if err := os.WriteFile(filepath.Join(dir, name), []byte("# Lesson\n\n"+body), 0o600); err != nil {
+			t.Fatal(err)
+		}
+		mappings = append(mappings, map[string]string{"concept_id": cid, "source": name})
+	}
+	raw, _ := json.Marshal(mappings)
+	if err := os.WriteFile(filepath.Join(dir, "lessons.json"), raw, 0o600); err != nil {
+		t.Fatal(err)
+	}
+	ll, err := lessons.Load(dir)
+	if err != nil {
+		t.Fatalf("mini lessons: %v", err)
+	}
+	return ll
 }
