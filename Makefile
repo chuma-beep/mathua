@@ -17,7 +17,9 @@ test:
 validate:
 	go run scripts/validate_graph.go
 	python3 scripts/audit_lessons.py
+	python3 scripts/audit_solutions.py
 	python3 scripts/counts.py --check
+	go test ./internal/generator/ -run TestLearnerDomainsHaveSchemas
 
 lint-go:
 	go run github.com/curtbushko/go-ai-lint/cmd/go-ai-lint@v1.0.1-0.20260620203811-c6ce4ee5624f ./...

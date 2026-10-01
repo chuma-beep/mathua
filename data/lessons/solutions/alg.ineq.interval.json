@@ -1,0 +1,31 @@
+{
+  "concept": "alg.ineq.interval",
+  "setup": "This is a question about interval notation.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Interval notation says two things at once: which numbers are included, and how far the set runs. A square bracket means the endpoint is included, a round one means it is left out, and infinity always takes round brackets because it is never actually reached."
+    },
+    {
+      "fact": "a_left_closed",
+      "optional": true,
+      "say": "Here the lower endpoint is included and the upper one is not, so the left bracket is square and the right is round."
+    },
+    {
+      "fact": "a_right_unbounded",
+      "optional": true,
+      "say": "Here the set runs without limit to the right, so the right side is written as infinity, which always takes a round bracket."
+    },
+    {
+      "fact": "a_left_unbounded",
+      "optional": true,
+      "say": "Here the set runs without limit to the left, so the left side is written as minus infinity, again with a round bracket."
+    },
+    {
+      "fact": "a_both_open",
+      "optional": true,
+      "say": "Neither endpoint is included, so both brackets are round."
+    }
+  ],
+  "answer": "So the interval is [[answer]]."
+}
