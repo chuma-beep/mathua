@@ -1,0 +1,15 @@
+{
+  "concept": "alg.ineq.irrational",
+  "setup": "You want the smallest integer x with √x > [[x]].",
+  "steps": [
+    {
+      "fact": "x",
+      "say": "With x at least 0 — which the square root already implies — squaring both sides preserves the inequality, giving x > [[x]]² = [[x2]]."
+    },
+    {
+      "fact": "ans",
+      "say": "The smallest whole number above that is [[ans]]."
+    }
+  ],
+  "answer": "So the answer is [[ans]]."
+}

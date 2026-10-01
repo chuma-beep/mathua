@@ -1,0 +1,19 @@
+{
+  "concept": "alg.seq.sum_arith",
+  "setup": "An arithmetic series of [[n]] terms is given.",
+  "steps": [
+    {
+      "fact": "ends",
+      "say": "The sum of an arithmetic series is the number of terms times the average of the first and last. The last term works out to [[an]]."
+    },
+    {
+      "fact": "ends",
+      "say": "The two ends are [[a1]] and [[an]], which add to [[ends]]."
+    },
+    {
+      "fact": "sum",
+      "say": "So the sum is [[n]] × [[ends]] ÷ 2 = [[sum]]."
+    }
+  ],
+  "answer": "So the sum is [[sum]]."
+}

@@ -185,3 +185,33 @@ func TestLoad_MissingDirectoryIsEmpty(t *testing.T) {
 		t.Errorf("expected no concepts, got %v", l.Concepts())
 	}
 }
+
+// The row-echelon form a systems question is graded against is written
+// [[a,b,c],[0,d,e]]. An unrestricted [[...]] placeholder would eat that, so
+// contents must look like a fact name to be treated as one.
+func TestRender_LeavesMatrixNotationAlone(t *testing.T) {
+	s := &Schema{
+		Steps:  []Step{{Fact: "ans", Say: "The echelon form is [[2,1,7],[0,3,5]]."}},
+		Answer: "So the answer is [[answer]].",
+	}
+	got, missing := Render(s, map[string]string{"ans": "ok", "answer": "[[4,3,6],[0,1,1]]"})
+	if len(missing) > 0 {
+		t.Fatalf("unexpected missing: %v", missing)
+	}
+	if !strings.Contains(got, "[[2,1,7],[0,3,5]]") {
+		t.Errorf("matrix notation in a step was eaten:\n%s", got)
+	}
+	if !strings.Contains(got, "[[4,3,6],[0,1,1]]") {
+		t.Errorf("matrix notation in the answer was eaten:\n%s", got)
+	}
+	// A capitalised name is not a fact name either, so it survives verbatim.
+	// The leak test is what catches that typo, not the assembler — reporting it
+	// here would mean reporting every matrix span as missing.
+	got, missing = Render(&Schema{Answer: "[[Num]]"}, map[string]string{"Num": "7"})
+	if len(missing) > 0 {
+		t.Errorf("unexpected missing: %v", missing)
+	}
+	if !strings.Contains(got, "[[Num]]") {
+		t.Errorf("a capitalised name should be left literal, got %q", got)
+	}
+}

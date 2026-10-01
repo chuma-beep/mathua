@@ -1,0 +1,15 @@
+{
+  "concept": "alg.ineq.systems",
+  "setup": "You are testing whether ([[x]], [[y]]) satisfies y > [[a]]x + [[b]].",
+  "steps": [
+    {
+      "fact": "x",
+      "say": "A point satisfies an inequality only if it satisfies the statement, so work out the right-hand side at the point's x and compare."
+    },
+    {
+      "fact": "rhs",
+      "say": "At x = [[x]] the right side is [[a]] × [[x]] + [[b]] = [[rhs]]."
+    }
+  ],
+  "answer": "So the point satisfies it: [[ans]]."
+}

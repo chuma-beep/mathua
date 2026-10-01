@@ -1,0 +1,15 @@
+{
+  "concept": "alg.seq.sum_geo",
+  "setup": "A geometric series of [[n]] terms with ratio [[r]] is given.",
+  "steps": [
+    {
+      "fact": "rn",
+      "say": "A geometric sum is closed-form: the first term times (1 − rⁿ) over (1 − r). Here r to the power n is [[rn]]."
+    },
+    {
+      "fact": "sum",
+      "say": "So the sum is [[a1]] × (1 − [[rn]]) ÷ (1 − [[r]]) = [[sum]]."
+    }
+  ],
+  "answer": "So the sum is [[sum]]."
+}

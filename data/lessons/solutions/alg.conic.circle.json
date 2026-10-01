@@ -1,0 +1,15 @@
+{
+  "concept": "alg.conic.circle",
+  "setup": "The circle is written with a squared term on the right.",
+  "steps": [
+    {
+      "fact": "r2",
+      "say": "In standard form the right-hand side is the radius squared, so the radius is its square root: √[[r2]]."
+    },
+    {
+      "fact": "r",
+      "say": "That gives [[r]]."
+    }
+  ],
+  "answer": "So the radius is [[r]]."
+}

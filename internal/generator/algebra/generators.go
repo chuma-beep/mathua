@@ -360,6 +360,7 @@ func (g *sysSubstitutionGen) Generate(ctx generator.GeneratorContext) generator.
 		Question:    fmt.Sprintf("Solve: \\(y = %d\\),  \\(x + y = %d\\)", y, x+y),
 		Answer:      fmt.Sprintf("(%d,%d)", x, y),
 		Explanation: fmt.Sprintf("Substitute \\(y=%d\\): \\(x + %d = %d\\) → \\(x = %d\\). Solution: \\((%d,%d)\\)", y, y, x+y, x, x, y),
+		Facts:       map[string]string{"y": strconv.Itoa(y), "sum": strconv.Itoa(x + y), "x": strconv.Itoa(x)},
 	}
 }
 
@@ -377,6 +378,7 @@ func (g *sysEliminationGen) Generate(ctx generator.GeneratorContext) generator.P
 		Question:    fmt.Sprintf("Solve: \\(%dx + %dy = %d\\),  \\(%dx + %dy = %d\\)", a, b, eq1, c, b, eq2),
 		Answer:      fmt.Sprintf("(%d,%d)", x, y),
 		Explanation: fmt.Sprintf("Subtract: \\(%dx = %d\\) → \\(x = %d\\); \\(y = %d\\). Solution: \\((%d,%d)\\)", a-c, eq1-eq2, x, y, x, y),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "eq1": strconv.Itoa(eq1), "eq2": strconv.Itoa(eq2), "coef": strconv.Itoa(a - c), "rhs": strconv.Itoa(eq1 - eq2), "x": strconv.Itoa(x), "y": strconv.Itoa(y)},
 	}
 }
 
@@ -391,6 +393,7 @@ func (g *sysWordGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 		Question:    fmt.Sprintf("Two numbers sum to %d and differ by %d. Find both numbers (smaller first).", sum, diff),
 		Answer:      fmt.Sprintf("%d,%d", b, a),
 		Explanation: fmt.Sprintf("\\(x + y = %d\\), \\(x - y = %d\\). Add: \\(2x = %d\\) → \\(x = %d\\). \\(y = %d\\)", sum, diff, a+b, a, b),
+		Facts:       map[string]string{"sum": strconv.Itoa(sum), "diff": strconv.Itoa(diff), "two_x": strconv.Itoa(a + b), "big": strconv.Itoa(a), "small": strconv.Itoa(b)},
 	}
 }
 
@@ -794,6 +797,7 @@ func (g *seqArithGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		Question:    fmt.Sprintf("Arithmetic sequence: \\(%d, %d, %d, \\ldots\\) Find term \\(%d\\).", a1, a1+d, a1+2*d, n),
 		Answer:      fmt.Sprintf("%d", an),
 		Explanation: fmt.Sprintf("\\(a_{n} = a_{1} + (n-1)d = %d + (%d)(%d) = %d\\)", a1, n-1, d, an),
+		Facts:       map[string]string{"a1": strconv.Itoa(a1), "d": strconv.Itoa(d), "n": strconv.Itoa(n), "nm1": strconv.Itoa(n - 1), "an": strconv.Itoa(an)},
 	}
 }
 
@@ -808,6 +812,7 @@ func (g *seqGeomGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 		Question:    fmt.Sprintf("Geometric sequence: \\(%d, %d, %d, \\ldots\\) Find term \\(%d\\).", a1, a1*r, a1*r*r, n),
 		Answer:      fmt.Sprintf("%d", an),
 		Explanation: fmt.Sprintf("\\(a_{n} = a_{1} \\times r^{n-1} = %d \\times %d^{%d} = %d\\)", a1, r, n-1, an),
+		Facts:       map[string]string{"a1": strconv.Itoa(a1), "r": strconv.Itoa(r), "n": strconv.Itoa(n), "nm1": strconv.Itoa(n - 1), "an": strconv.Itoa(an)},
 	}
 }
 
@@ -820,9 +825,10 @@ func (g *seqSumArithGen) Generate(ctx generator.GeneratorContext) generator.Prob
 	an := a1 + (n-1)*d
 	sum := n * (a1 + an) / 2
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find sum of arithmetic series: \\(%d + %d + %d + \\cdots\\) (first \\(%d\\) terms).", a1, a1+d, a1+2*d, n),
+		Question:    fmt.Sprintf("Find sum of arithmetic series: \\(%d + %d + %d + \\cdots\\) (first %d terms).", a1, a1+d, a1+2*d, n),
 		Answer:      fmt.Sprintf("%d", sum),
 		Explanation: fmt.Sprintf("\\(S_{n} = \\frac{n(a_{1}+a_{n})}{2} = \\frac{%d(%d+%d)}{2} = %d\\)", n, a1, an, sum),
+		Facts:       map[string]string{"n": strconv.Itoa(n), "a1": strconv.Itoa(a1), "an": strconv.Itoa(an), "ends": strconv.Itoa(a1 + an), "sum": strconv.Itoa(sum)},
 	}
 }
 
@@ -837,9 +843,10 @@ func (g *seqSumGeoGen) Generate(ctx generator.GeneratorContext) generator.Proble
 	rn := mathutil.IntPow(r, n)
 	sum := a1 * (1 - rn) / (1 - r)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find sum of geometric series: \\(%d + %d + %d + \\cdots\\) (first \\(%d\\) terms, \\(r=%d\\)).", a1, a1*r, a1*r*r, n, r),
+		Question:    fmt.Sprintf("Find sum of geometric series: \\(%d + %d + %d + \\cdots\\) (first %d terms, \\(r=%d\\)).", a1, a1*r, a1*r*r, n, r),
 		Answer:      fmt.Sprintf("%d", sum),
 		Explanation: fmt.Sprintf("\\(S_{n} = \\frac{a_{1}(1-r^{n})}{1-r} = \\frac{%d(1-%d)}{1-%d} = %d\\)", a1, rn, r, sum),
+		Facts:       map[string]string{"a1": strconv.Itoa(a1), "r": strconv.Itoa(r), "n": strconv.Itoa(n), "rn": strconv.Itoa(rn), "sum": strconv.Itoa(sum)},
 	}
 }
 
@@ -954,6 +961,7 @@ func (g *conicCircleGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("What is the radius of \\((x%+d)^{2} + (y%+d)^{2} = %d\\)?", -h, -k, r2),
 		Answer:      fmt.Sprintf("%d", r),
 		Explanation: fmt.Sprintf("The radius is \\(\\sqrt{%d} = %d\\)", r2, r),
+		Facts:       map[string]string{"r2": strconv.Itoa(r2), "r": strconv.Itoa(r)},
 	}
 }
 
@@ -980,6 +988,7 @@ func (g *conicEllipseGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		Question:    fmt.Sprintf("What is the %s axis length of \\(\\frac{(x%+d)^{2}}{%d} + \\frac{(y%+d)^{2}}{%d} = 1\\)?", label, -h, a2, -k, b2),
 		Answer:      fmt.Sprintf("%d", val),
 		Explanation: fmt.Sprintf("The %s axis length is %d because \\(%s^{2} = %d\\)", label, val, label[:6], val*val),
+		Facts:       map[string]string{"label": label, "val": strconv.Itoa(val), "val2": strconv.Itoa(val * val)},
 	}
 }
 
@@ -999,12 +1008,14 @@ func (g *conicParabolaGen) Generate(ctx generator.GeneratorContext) generator.Pr
 			Question:    fmt.Sprintf("Parabola: \\((x%+d)^{2} = %d(y%+d)\\). Which direction does it open?", -h, 4*p, -k),
 			Answer:      map[bool]string{true: "up", false: "down"}[p > 0],
 			Explanation: fmt.Sprintf("If 4p > 0, opens up; if 4p < 0, opens down. Here 4p = %d.", 4*p),
+			Facts:       map[string]string{"p": strconv.Itoa(p), "four_p": strconv.Itoa(4 * p), "is_vertical_axis": "yes"},
 		}
 	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Parabola: \\((y%+d)^{2} = %d(x%+d)\\). Which direction does it open?", -k, 4*p, -h),
 		Answer:      map[bool]string{true: "right", false: "left"}[p > 0],
 		Explanation: fmt.Sprintf("If 4p > 0, opens right; if 4p < 0, opens left. Here 4p = %d.", 4*p),
+		Facts:       map[string]string{"p": strconv.Itoa(p), "four_p": strconv.Itoa(4 * p), "is_horizontal_axis": "yes"},
 	}
 }
 
@@ -1020,12 +1031,14 @@ func (g *conicHyperbolaGen) Generate(ctx generator.GeneratorContext) generator.P
 			Question:    fmt.Sprintf("Hyperbola: \\(\\frac{(x%+d)^{2}}{%d} - \\frac{(y%+d)^{2}}{%d} = 1\\). Which axis is transverse?", -h, a*a, -k, b*b),
 			Answer:      "horizontal (x-axis)",
 			Explanation: fmt.Sprintf("x term positive → horizontal transverse axis."),
+			Facts:       map[string]string{"is_horizontal": "yes"},
 		}
 	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Hyperbola: \\(\\frac{(y%+d)^{2}}{%d} - \\frac{(x%+d)^{2}}{%d} = 1\\). Which axis is transverse?", -k, a*a, -h, b*b),
 		Answer:      "vertical (y-axis)",
 		Explanation: fmt.Sprintf("y term positive → vertical transverse axis."),
+		Facts:       map[string]string{"is_vertical": "yes"},
 	}
 }
 
@@ -1365,6 +1378,7 @@ func (g *ineqAbsValGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Question:    fmt.Sprintf("What is the largest integer \\(x\\) with \\(|x| < %d\\)? (enter a number)", a),
 		Answer:      fmt.Sprintf("%d", a-1),
 		Explanation: fmt.Sprintf("\\(|x| < %d\\) means \\(-%d < x < %d\\), so the largest integer is \\(%d\\)", a, a, a, a-1),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "x": strconv.Itoa(a - 1)},
 	}
 }
 
@@ -1397,6 +1411,7 @@ func (g *ineqIrrationalGen) Generate(ctx generator.GeneratorContext) generator.P
 		Question:    fmt.Sprintf("What is the smallest integer \\(x\\) with \\(\\sqrt{x} > %d\\)? (enter a number)", x),
 		Answer:      fmt.Sprintf("%d", x*x+1),
 		Explanation: fmt.Sprintf("\\(\\sqrt{x} > %d\\) → \\(x > %d^{2} = %d\\) (x ≥ 0 implied), so the smallest integer is \\(%d\\)", x, x, x*x, x*x+1),
+		Facts:       map[string]string{"x": strconv.Itoa(x), "x2": strconv.Itoa(x * x), "ans": strconv.Itoa(x*x + 1)},
 	}
 }
 
@@ -1434,6 +1449,7 @@ func (g *ineqRationalGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		Question:    fmt.Sprintf("What is the smallest integer \\(x\\) with \\(\\frac{1}{x-%d} > 0\\)? (enter a number)", a),
 		Answer:      fmt.Sprintf("%d", a+1),
 		Explanation: fmt.Sprintf("The numerator 1 is always positive, so \\(\\frac{1}{x-%d} > 0\\) when \\(x-%d > 0\\) → \\(x > %d\\); the smallest integer is \\(%d\\)", a, a, a, a+1),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "ans": strconv.Itoa(a + 1)},
 	}
 }
 
@@ -1448,6 +1464,7 @@ func (g *signAnalysisGen) Generate(ctx generator.GeneratorContext) generator.Pro
 			Question:    fmt.Sprintf("What are the zeros of \\(f(x) = (x+%d)(x-%d)\\)? (enter like a,b with a<b)", r, r),
 			Answer:      fmt.Sprintf("%d,%d", -r, r),
 			Explanation: fmt.Sprintf("\\(x+%d = 0\\) gives \\(x = %d\\); \\(x-%d = 0\\) gives \\(x = %d\\).", r, -r, r, r),
+			Facts:       map[string]string{"r": strconv.Itoa(r), "lo": strconv.Itoa(-r), "hi": strconv.Itoa(r), "is_zeros": "yes"},
 		}
 	case 1:
 		// production: sign between the roots (unique answer).
@@ -1455,6 +1472,7 @@ func (g *signAnalysisGen) Generate(ctx generator.GeneratorContext) generator.Pro
 			Question:    fmt.Sprintf("Analyze the sign of \\(f(x) = (x+%d)(x-%d)\\) for \\(-%d < x < %d\\).", r, r, r, r),
 			Answer:      "negative",
 			Explanation: fmt.Sprintf("For \\(-%d < x < %d\\): \\((x+%d)\\) is positive but \\((x-%d)\\) is negative, product is negative.", r, r, r, r),
+			Facts:       map[string]string{"r": strconv.Itoa(r), "is_between": "yes"},
 		}
 	default:
 		if rand.Intn(2) == 0 {
@@ -1462,12 +1480,14 @@ func (g *signAnalysisGen) Generate(ctx generator.GeneratorContext) generator.Pro
 				Question:    fmt.Sprintf("Analyze the sign of \\(f(x) = (x+%d)(x-%d)\\) for \\(x < -%d\\).", r, r, r),
 				Answer:      "positive",
 				Explanation: fmt.Sprintf("For \\(x < -%d\\): both \\((x+%d)\\) and \\((x-%d)\\) are negative, product is positive.", r, r, r),
+				Facts:       map[string]string{"r": strconv.Itoa(r), "is_below": "yes"},
 			}
 		}
 		return generator.Problem{
 			Question:    fmt.Sprintf("Analyze the sign of \\(f(x) = (x+%d)(x-%d)\\) for \\(x > %d\\).", r, r, r),
 			Answer:      "positive",
 			Explanation: fmt.Sprintf("For \\(x > %d\\): both \\((x+%d)\\) and \\((x-%d)\\) are positive, product is positive.", r, r, r),
+			Facts:       map[string]string{"r": strconv.Itoa(r), "is_above": "yes"},
 		}
 	}
 }
@@ -1485,6 +1505,7 @@ func (g *ineqSystemsGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("Is \\((%d,%d)\\) a solution to \\(y > %dx + %d\\)?", x, y, a, b),
 		Answer:      ans,
 		Explanation: fmt.Sprintf("At \\(x=%d\\): RHS = \\(%d(%d)+%d = %d\\). \\(y=%d %s %d\\), so %s.", x, a, x, b, a*x+b, y, map[bool]string{true: ">", false: "≤"}[satisfies], a*x+b, ans),
+		Facts:       map[string]string{"x": strconv.Itoa(x), "y": strconv.Itoa(y), "a": strconv.Itoa(a), "b": strconv.Itoa(b), "rhs": strconv.Itoa(a*x + b), "ans": ans},
 	}
 }
 
@@ -1713,6 +1734,7 @@ func (g *gaussianElimGen) Generate(ctx generator.GeneratorContext) generator.Pro
 			Question:    fmt.Sprintf("Solve using elimination: \\(%dx + %dy = %d\\), \\(%dx + %dy = %d\\)", a, b, e1, c, d, e2),
 			Answer:      fmt.Sprintf("(%d,%d)", x, y),
 			Explanation: fmt.Sprintf("Solution: \\(x=%d\\), \\(y=%d\\)", x, y),
+			Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "d": strconv.Itoa(d), "e1": strconv.Itoa(e1), "e2": strconv.Itoa(e2), "x": strconv.Itoa(x), "y": strconv.Itoa(y), "is_solve": "yes"},
 		}
 	}
 	// Row echelon form question
@@ -1720,6 +1742,7 @@ func (g *gaussianElimGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		Question:    fmt.Sprintf("Put the system \\(%dx + %dy = %d\\), \\(%dx + %dy = %d\\) into row echelon form.", a, b, e1, c, d, e2),
 		Answer:      fmt.Sprintf("[[%d,%d,%d],[0,%d,%d]]", a, b, e1, d-c*b/a, e2-c*e1/a),
 		Explanation: fmt.Sprintf("The augmented matrix [[%d,%d,%d],[%d,%d,%d]] can be reduced.", a, b, e1, c, d, e2),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "d": strconv.Itoa(d), "e1": strconv.Itoa(e1), "e2": strconv.Itoa(e2), "is_echelon": "yes"},
 	}
 }
 

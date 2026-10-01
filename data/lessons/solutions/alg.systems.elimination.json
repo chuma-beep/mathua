@@ -1,0 +1,15 @@
+{
+  "concept": "alg.systems.elimination",
+  "setup": "The two equations are [[a]]x + [[b]]y = [[eq1]] and [[c]]x + [[b]]y = [[eq2]].",
+  "steps": [
+    {
+      "fact": "coef",
+      "say": "Both equations carry the same y coefficient, so subtracting one equation from the other cancels the y terms entirely — that is the whole point of choosing coefficients this way."
+    },
+    {
+      "fact": "rhs",
+      "say": "What is left is [[coef]]x = [[rhs]]."
+    }
+  ],
+  "answer": "So x = [[x]] and y = [[y]]."
+}

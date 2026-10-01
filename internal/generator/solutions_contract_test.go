@@ -96,8 +96,8 @@ func TestSchemasNeverLeakPlaceholders(t *testing.T) {
 				t.Errorf("%s: generate: %v", id, err)
 				break
 			}
-			if strings.Contains(p.Explanation, "[[") {
-				t.Errorf("%s: served explanation contains a raw placeholder:\n%s", id, p.Explanation)
+			if left := solutions.Unresolved(p.Explanation); len(left) > 0 {
+				t.Errorf("%s: served explanation still contains %v:\n%s", id, left, p.Explanation)
 			}
 			if p.Explanation == "" {
 				t.Errorf("%s: served explanation is empty", id)

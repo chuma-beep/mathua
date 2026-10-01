@@ -1,0 +1,15 @@
+{
+  "concept": "alg.ineq.absolute_value",
+  "setup": "You want the largest integer x with |x| < [[a]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The absolute value is the distance from zero, so less than [[a]] means the number lies strictly between −[[a]] and [[a]]."
+    },
+    {
+      "fact": "x",
+      "say": "The largest whole number short of that bound is [[x]]."
+    }
+  ],
+  "answer": "So the answer is [[x]]."
+}

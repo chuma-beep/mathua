@@ -1,0 +1,17 @@
+{
+  "concept": "alg.systems.gaussian",
+  "setup": "A two-equation system is given.",
+  "steps": [
+    {
+      "fact": "is_solve",
+      "say": "Elimination adds or subtracts whole equations so one variable cancels, then back-substitutes. Gaussian elimination is the same idea carried out on the augmented matrix.",
+      "optional": true
+    },
+    {
+      "fact": "is_echelon",
+      "say": "Writing the system as an augmented matrix puts the equations in rows and the coefficients and constants in columns, so the elimination steps become ordinary row operations. Row echelon form is the triangular result.",
+      "optional": true
+    }
+  ],
+  "answer": "So the answer is [[answer]]."
+}
