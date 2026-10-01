@@ -86,3 +86,47 @@ describe('stated concept count matches the corpus', () => {
     }
   })
 })
+
+// A label that misdescribes its destination is a small lie with a large
+// consequence: a learner who clicks it ends up somewhere they did not choose,
+// and blames the product. These assert the specific corrections rather than
+// generalising, because each one was a real mislabel.
+describe('navigation labels name where they actually go', () => {
+  const read = (p: string) => readFileSync(join(APP, p), 'utf-8')
+
+  it('does not label a link to /profile as "Next up"', () => {
+    const page = read(join('app', 'learn', 'page.tsx'))
+    expect(page).not.toMatch(/>← Next up</)
+  })
+
+  it('does not call the worked-example gate a start', () => {
+    // The loop has already begun by the time this button appears; it is the
+    // only way past the example, and calling it "Start practicing" implies the
+    // learner has not started.
+    const stepper = read(join('components', 'LearnStepper.tsx'))
+    expect(stepper).not.toMatch(/Start practicing →</)
+  })
+
+  it('does not print a raw concept id as a back-link label', () => {
+    const stepper = read(join('components', 'LearnStepper.tsx'))
+    expect(stepper).not.toMatch(/← Back to \{returnTo\}/)
+    expect(stepper).toMatch(/returnToLabel/)
+  })
+
+  it('does not end a finished review by offering the reference library', () => {
+    // Review is a Learn sub-mode; "nothing is due" is not a reason to send
+    // someone from doing into browsing.
+    const host = read(join('app', 'review', 'ReviewHost.tsx'))
+    const emptyState = host.slice(host.indexOf('All caught up'))
+    expect(emptyState).not.toMatch(/Open Study/)
+    expect(emptyState).toMatch(/href="\/learn"/)
+  })
+
+  it('renders the explanation as the body of a review result, not the verdict token', () => {
+    const host = read(join('app', 'review', 'ReviewHost.tsx'))
+    // "Incorrect" above the working is noise; the explanation is the body and
+    // feedback is only the fallback when there is no explanation.
+    expect(host).toMatch(/explanation \? \(/)
+    expect(host).not.toMatch(/text-mathua-muted text-xs mt-2/)
+  })
+})

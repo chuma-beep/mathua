@@ -80,6 +80,8 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
   const bottomRef = useRef<HTMLDivElement>(null)
   const reduceMotion = useRef(false)
   const format = formatForGradingType(concepts.find(c => c.id === conceptId)?.grading_type)
+  // A learner reading "← Back to frac.add.diff" is reading a storage key.
+  const returnToLabel = concepts.find(c => c.id === returnTo)?.label ?? returnTo
 
   useEffect(() => {
     reduceMotion.current = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
@@ -394,7 +396,7 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
                     </ol>
                   </details>
                 )}
-                <button type="button" onClick={startPracticing} className="mt-5 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-6 py-2.5 font-mono text-xs min-h-[44px]">Start practicing →</button>
+                <button type="button" onClick={startPracticing} className="mt-5 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-6 py-2.5 font-mono text-xs min-h-[44px]">Skip the example →</button>
               </div>
             )
           }
@@ -435,7 +437,7 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
                 <p className="font-mono text-xs text-green-400">✓ Complete — {totalCorrect}/{totalAnswered} correct · +{totalXP} XP · {est.band}</p>
                 <p className="mt-2 font-mono text-[11px] text-mathua-secondary">Scroll up to review anything. Reviews are scheduled automatically.</p>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  {returnTo && <Link href={`/learn?concept=${encodeURIComponent(returnTo)}`} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-5 py-2 font-mono text-xs inline-flex items-center min-h-[40px]">← Back to {returnTo}</Link>}
+                  {returnTo && <Link href={`/learn?concept=${encodeURIComponent(returnTo)}`} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-5 py-2 font-mono text-xs inline-flex items-center min-h-[40px]">← Back to {returnToLabel}</Link>}
                   {nextLoading && <span className="font-mono text-xs text-mathua-muted inline-flex items-center min-h-[40px]">Finding what&apos;s next…</span>}
                   {canContinue && nextShelf && (
                     <Link href={nextShelf.next.href} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-5 py-2 font-mono text-xs inline-flex items-center min-h-[40px]">{nextShelf.next.badge}: {nextShelf.next.title} →</Link>

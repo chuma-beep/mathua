@@ -199,7 +199,11 @@ export default function ReviewHost() {
             <SectionHeader label="Review" title="All caught up" />
             <p className="font-mono text-sm text-mathua-secondary mt-4">Nothing is due for review right now. New reviews appear here as memories fade.</p>
             <div className="mt-6 flex gap-3 justify-center">
-              <Link href="/study" className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-12 px-8 text-sm inline-flex items-center">Open Study →</Link>
+              {/* A review run is a Learn sub-mode that has finished. Sending
+                  the learner into the reference library at that point is the
+                  exact confusion this app is trying to avoid, so both exits go
+                  back to doing. */}
+              <Link href="/learn" className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-12 px-8 text-sm inline-flex items-center">Answer more questions →</Link>
               <Link href="/profile" className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none h-12 px-8 text-sm inline-flex items-center">Back to Profile →</Link>
             </div>
           </>
@@ -257,12 +261,17 @@ export default function ReviewHost() {
               </div>
             </>
           ) : (
-            <div className="animate-fadeIn text-center">
-              <p className={`text-base font-medium mb-2 ${reviewLastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}`}>{reviewLastResult.correct ? '✓ Correct!' : '✗ Not quite'}</p>
-              <KatexContent className="text-mathua-secondary text-sm">{reviewLastResult.feedback}</KatexContent>
+            <div className="animate-fadeIn">
+              <p className={`text-base font-medium mb-2 text-center ${reviewLastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}`}>{reviewLastResult.correct ? '✓ Correct!' : '✗ Not quite'}</p>
+              {/* The explanation is the solution for this instance and is the
+                  body of the result; `feedback` is the grader's verdict token
+                  ("Incorrect"), so showing it above the working is noise. Fall
+                  back to it only when there is no explanation at all. */}
               {reviewLastResult.explanation ? (
-                <KatexContent className="text-mathua-muted text-xs mt-2">{reviewLastResult.explanation}</KatexContent>
-              ) : null}
+                <KatexContent className="text-mathua-secondary text-sm text-left whitespace-pre-wrap">{reviewLastResult.explanation}</KatexContent>
+              ) : (
+                <KatexContent className="text-mathua-secondary text-sm">{reviewLastResult.feedback}</KatexContent>
+              )}
             </div>
           )}
         </div>
