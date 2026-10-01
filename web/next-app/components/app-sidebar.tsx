@@ -35,11 +35,15 @@ import Avatar from './Avatar'
 import { signOut } from '../lib/auth'
 
 // Navigate group: destinations only. Never Diagnostic / Quiz / Review —
-// those have dedicated cards in main content (no CTA duplication).
+// those have dedicated cards in main content (no CTA duplication). Review is
+// reachable from the header row and the mobile compass instead, which is where
+// the full destination list lives; putting it here as well would be exactly the
+// duplication this rule exists to prevent.
+// Order mirrors lib/nav.ts: Learn leads, then Study as the reference surface.
 // Lucide icons (fixed size-4 box) so the collapsed 44px icon rail stays even.
 const NAV_ITEMS: { label: string; href: string; icon: LucideIcon }[] = [
-  { label: 'Study', href: '/study', icon: BookOpen },
   { label: 'Learn', href: '/learn', icon: Play },
+  { label: 'Study', href: '/study', icon: BookOpen },
   { label: 'Graph', href: '/graph', icon: Network },
   { label: 'Leaderboard', href: '/leaderboard', icon: Trophy },
   { label: 'Progress', href: '/progress-card', icon: ChartNoAxesColumn },

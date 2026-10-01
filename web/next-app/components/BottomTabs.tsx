@@ -17,10 +17,13 @@ import { resolveAvatar } from '../lib/dicebear'
 import { getSettings } from '../lib/api'
 import Avatar from './Avatar'
 
+// Learn before Study: the tab bar is the mobile primary nav, and Learn is the
+// only tab that asks a question. Study stays — it is how a learner looks up a
+// concept they have just met. Order is mirrored in lib/nav.ts.
 const TABS: { label: string; href: string; icon: LucideIcon }[] = [
   { label: 'Home', href: '/', icon: House },
-  { label: 'Study', href: '/study', icon: BookOpen },
   { label: 'Learn', href: '/learn', icon: Play },
+  { label: 'Study', href: '/study', icon: BookOpen },
   { label: 'Profile', href: '/profile', icon: User },
   { label: 'Graph', href: '/graph', icon: Network },
 ]
