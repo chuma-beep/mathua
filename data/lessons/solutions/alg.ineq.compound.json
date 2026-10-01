@@ -1,0 +1,19 @@
+{
+  "concept": "alg.ineq.compound",
+  "setup": "The compound inequality is [[a]] < [[b]]x + [[c]] < [[d]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "A compound inequality is really two inequalities at once, and both are solved in exactly the same way: get the x terms alone, then divide by [[b]]."
+    },
+    {
+      "fact": "lo",
+      "say": "That gives [[lo]] < x < [[hi]]."
+    },
+    {
+      "fact": "x",
+      "say": "Only one whole number falls strictly between those bounds."
+    }
+  ],
+  "answer": "So the solution is x = [[x]]."
+}

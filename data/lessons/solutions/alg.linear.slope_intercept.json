@@ -1,0 +1,15 @@
+{
+  "concept": "alg.linear.slope_intercept",
+  "setup": "You are writing the equation of a line in the form y = mx + b.",
+  "steps": [
+    {
+      "fact": "m_num",
+      "say": "In y = mx + b the m is the slope and the b is the y-intercept — the point where the line crosses the y-axis, which is the value of y when x is 0."
+    },
+    {
+      "fact": "which",
+      "say": "So the two numbers you were given go straight into those two slots, unchanged."
+    }
+  ],
+  "answer": "The equation is y = ([[m_num]]/[[m_den]])x + [[b]]."
+}

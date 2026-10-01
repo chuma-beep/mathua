@@ -1,0 +1,26 @@
+{
+  "concept": "alg.eq.multi_step",
+  "setup": "This equation needs more than one move to isolate x.",
+  "steps": [
+    {
+      "fact": "ax",
+      "optional": true,
+      "say": "Whatever is attached to x must be undone by doing the opposite operation to *both* sides — subtracting the same number from each side is exactly what keeps them equal. Subtracting [[b]] leaves [[a]]x = [[ax]]."
+    },
+    {
+      "fact": "inner",
+      "optional": true,
+      "say": "The brackets hide an addition. Divide both sides by [[a]] to peel them off first, which leaves x + [[b]] = [[inner]]."
+    },
+    {
+      "fact": "inner",
+      "optional": true,
+      "say": "Subtracting [[b]] from both sides then leaves x standing alone."
+    },
+    {
+      "fact": "x",
+      "say": "Dividing through by the coefficient finishes it, giving x = [[x]]."
+    }
+  ],
+  "answer": "So x = [[x]]."
+}

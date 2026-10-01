@@ -1,0 +1,19 @@
+{
+  "concept": "alg.eq.vars_both_sides",
+  "setup": "The equation has x on both sides: [[a]]x + [[b]] = [[c]]x + [[d]].",
+  "steps": [
+    {
+      "fact": "diff",
+      "say": "The x terms must be gathered onto one side before x can be isolated. Moving [[c]]x across gives a difference of [[a]] − [[c]] = [[diff]] on the left."
+    },
+    {
+      "fact": "rhs",
+      "say": "The constants end up on the right: [[d]] − [[b]] = [[rhs]]."
+    },
+    {
+      "fact": "x",
+      "say": "Dividing through by the coefficient finishes it."
+    }
+  ],
+  "answer": "So x = [[x]]."
+}

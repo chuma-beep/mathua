@@ -1,0 +1,19 @@
+{
+  "concept": "alg.linear.graph",
+  "setup": "The line is y = [[m]]x + [[b]], and a value of x is given.",
+  "steps": [
+    {
+      "fact": "x",
+      "say": "To find y at a given x, substitute: x = [[x]] goes wherever x appears in the equation."
+    },
+    {
+      "fact": "mx",
+      "say": "That makes [[m]] × [[x]] = [[mx]]."
+    },
+    {
+      "fact": "y",
+      "say": "Adding the intercept [[b]] gives y = [[y]]."
+    }
+  ],
+  "answer": "So y = [[y]]."
+}
