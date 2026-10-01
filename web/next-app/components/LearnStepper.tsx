@@ -258,7 +258,7 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
         setConsecutive(next)
         setMisses(0)
         setDifficulty(nextDiff)
-        setEntry(key, { checking: false, feedback: { correct: true, text: '', xp: res.xp ?? 0 } })
+        setEntry(key, { checking: false, feedback: { correct: true, text: res.explanation ?? entry.q.explanation, xp: res.xp ?? 0 } })
         const est = masteryEstimate(nextHistory)
         const advance = est.decision === 'advance' || next >= REQUIRED_IN_A_ROW
         appendAfter(350, async () => {
@@ -490,13 +490,24 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
               {locked && qe.feedback && (
                 <div className="mt-3">
                   <p className={`font-mono text-xs ${qe.feedback.correct ? 'text-green-400' : 'text-red-400'}`}>
-                    {qe.feedback.correct ? `✓ ${qe.feedback.xp ? `+${qe.feedback.xp} XP` : 'Correct'}` : '✗ Not quite — the method:'} <span className="text-mathua-muted">you answered “{qe.answer}”</span>
+                    {qe.feedback.correct ? `✓ ${qe.feedback.xp ? `+${qe.feedback.xp} XP` : 'Correct'}` : '✗ Not quite.'}{' '}
+                    <span className="text-mathua-muted">you answered “{qe.answer}”</span>
                   </p>
                   <p className="mt-1.5 font-mono text-xs text-mathua-primary">
-                    Expected: <KatexContent>{qe.q.answer}</KatexContent>
+                    Answer: <KatexContent>{qe.q.answer}</KatexContent>
                   </p>
-                  {!qe.feedback.correct && (
-                    <KatexContent className="mt-1.5 text-xs font-mono text-mathua-secondary whitespace-pre-wrap">{qe.feedback.text}</KatexContent>
+                  {/* The explanation is the solution for *this* instance, shown
+                      on both verdicts: a correct answer still needs the
+                      reasoning that made it right. Guarded on a non-empty
+                      string so a server that returns nothing leaves no empty
+                      section behind. */}
+                  {qe.feedback.text && (
+                    <div className="mt-1.5">
+                      <p className="font-mono text-[11px] uppercase tracking-wider text-mathua-muted">
+                        {qe.feedback.correct ? 'Why' : 'How'}
+                      </p>
+                      <KatexContent className="mt-1 text-xs font-mono text-mathua-secondary whitespace-pre-wrap">{qe.feedback.text}</KatexContent>
+                    </div>
                   )}
                 </div>
               )}

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, fireEvent, within } from '@testing-library/react'
+import { render, screen, fireEvent, within, waitFor } from '@testing-library/react'
 import LearnStepper, { headConceptId } from '../components/LearnStepper'
 import {
   getLessonKPs,
@@ -181,4 +181,62 @@ describe('LearnStepper done state (PR5)', () => {
       vi.useRealTimers()
     }
   }, 30000)
+})
+
+// The loop teaches on both verdicts. A correct answer used to show only the
+// verdict and XP, and a miss showed the grader's "Incorrect" in place of the
+// worked solution the server had sent.
+describe('LearnStepper explanation after submission', () => {
+  it('shows the served explanation after a correct answer', async () => {
+    vi.mocked(submitStudyAnswer).mockResolvedValue({
+      correct: true,
+      feedback: 'Correct!',
+      explanation: '2 and 3 make 5: start at 2 and count on 3.',
+      xp: 2,
+    })
+    render(<LearnStepper conceptId={CID} />)
+
+    fireEvent.click(await screen.findByRole('button', { name: 'Start practicing →' }))
+    expect(await screen.findByText('2 + 3 = ?')).toBeTruthy()
+    await answerCurrent('5')
+
+    // The reasoning for *this* instance, on the correct branch too.
+    expect(await screen.findByText('2 and 3 make 5: start at 2 and count on 3.')).toBeTruthy()
+    expect(screen.getByText('Why')).toBeTruthy()
+    // The card locked: the answer is restated, not just scored.
+    expect(screen.getByText('Answer:')).toBeTruthy()
+  }, 15000)
+
+  it('shows the served explanation after a wrong answer, and never "Incorrect"', async () => {
+    vi.mocked(submitStudyAnswer).mockResolvedValue({
+      correct: false,
+      feedback: 'Incorrect',
+      explanation: 'Start at 2 and count on 3 to reach 5, not 6.',
+      xp: 0,
+    })
+    render(<LearnStepper conceptId={CID} />)
+
+    fireEvent.click(await screen.findByRole('button', { name: 'Start practicing →' }))
+    expect(await screen.findByText('2 + 3 = ?')).toBeTruthy()
+    await answerCurrent('6')
+
+    expect(await screen.findByText('Start at 2 and count on 3 to reach 5, not 6.')).toBeTruthy()
+    expect(screen.getByText('How')).toBeTruthy()
+    // The grader's status token must never stand in as the explanation.
+    expect(screen.queryByText('Incorrect')).toBeNull()
+  }, 15000)
+
+  it('leaves no empty section when the server sends no explanation', async () => {
+    vi.mocked(submitStudyAnswer).mockResolvedValue({ correct: true, feedback: 'Correct!', explanation: '', xp: 1 })
+    render(<LearnStepper conceptId={CID} />)
+
+    fireEvent.click(await screen.findByRole('button', { name: 'Start practicing →' }))
+    expect(await screen.findByText('2 + 3 = ?')).toBeTruthy()
+    await answerCurrent('5')
+
+    // Card still locked (the tally header and the card both report the XP).
+    await waitFor(() => expect(screen.getAllByText(/\+1 XP/).length).toBeGreaterThan(0))
+    // …but an absent explanation leaves no dangling heading.
+    expect(screen.queryByText('Why')).toBeNull()
+  }, 15000)
 })
