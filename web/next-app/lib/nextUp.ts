@@ -140,7 +140,7 @@ export function selectNextUp(input: NextUpInput): NextUp {
     kind: 'browse',
     badge: 'Study',
     title: 'Browse the Study library',
-    detail: 'Pick a Lesson — worked example first, then answer',
+    detail: 'No task is due — read up on anything',
     href: '/study',
     cta: 'Browse Study →',
   }
@@ -372,7 +372,7 @@ export const fixedWeightPolicy: SelectionPolicy = (cands, input) => {
     take(learnItem('resume', 'Continue', r, 'Pick up where you left off', 'Continue →'), r.id)
   }
   if (items.length === 0) {
-    take({ kind: 'browse', badge: 'Study', title: 'Browse the Study library', detail: 'Pick a Lesson — worked example first, then answer', href: '/study', cta: 'Browse Study →', xp: 0 })
+    take({ kind: 'browse', badge: 'Study', title: 'Browse the Study library', detail: 'No task is due — read up on anything', href: '/study', cta: 'Browse Study →', xp: 0 })
   }
   return items.slice(0, 5)
 }

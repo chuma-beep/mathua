@@ -231,7 +231,7 @@ export interface Scores {
   spaced_reps?: Record<string, number>
   avg_learning_speed?: number
   paused_until?: string
-  // Batch 1: Quiz 150 XP gate signal (backend); absent on old mocks.
+  // Quiz 50 XP gate signal (backend); absent on old mocks.
   xp_since_quiz?: number
   quiz_due?: boolean
 }
@@ -1279,7 +1279,7 @@ export async function submitReviewAnswer(
 	return res.json()
 }
 
-// Quiz (actionable every 150 XP, 80% difficulty, guest unlimited retake, own grading path)
+// Quiz (actionable every 50 XP, 80% difficulty, guest unlimited retake, own grading path)
 export interface QuizStartRes {
 	session_id: string
 	student_id?: string

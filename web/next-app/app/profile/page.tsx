@@ -262,13 +262,13 @@ export default function ProfilePage() {
                   <Link href="/onboard" className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover mt-2 inline-block">Start diagnostic test →</Link>
                 </div>
                 <div className="border border-mathua-border p-3 bg-mathua-surface-elevated">
-                  <div className="font-mono text-xs text-mathua-blue mb-1">2. Pick a lesson in Study</div>
-                  <p className="font-mono text-[11px] text-mathua-secondary">Start with Arithmetic → Fractions → Pre-Algebra</p>
-                  <Link href="/study" className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover mt-2 inline-block">Browse Study →</Link>
+                  <div className="font-mono text-xs text-mathua-blue mb-1">2. Start answering in Learn</div>
+                  <p className="font-mono text-[11px] text-mathua-secondary">Questions are generated; nothing to memorise</p>
+                  <Link href="/learn" className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover mt-2 inline-block">Go to Learn →</Link>
                 </div>
                 <div className="border border-mathua-border p-3 bg-mathua-surface-elevated">
                   <div className="font-mono text-xs text-mathua-blue mb-1">3. Practice → see XP</div>
-                  <p className="font-mono text-[11px] text-mathua-secondary">2 in a row to advance · XP shows on Profile</p>
+                  <p className="font-mono text-[11px] text-mathua-secondary">Answer questions · XP shows on Profile</p>
                   <Link href="/learn" className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover mt-2 inline-block">Continue learning →</Link>
                 </div>
               </div>
@@ -398,13 +398,13 @@ export default function ProfilePage() {
                 <Link href="/onboard" className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover mt-2 inline-block">Start diagnostic test →</Link>
               </div>
               <div className="border border-mathua-border p-3 bg-mathua-surface-elevated">
-                <div className="font-mono text-xs text-mathua-blue mb-1">2. Pick a lesson in Study</div>
-                <p className="font-mono text-[11px] text-mathua-secondary">Start with Arithmetic → Fractions → Pre-Algebra</p>
-                <Link href="/study" className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover mt-2 inline-block">Browse Study →</Link>
+                <div className="font-mono text-xs text-mathua-blue mb-1">2. Start answering in Learn</div>
+                <p className="font-mono text-[11px] text-mathua-secondary">Questions are generated; nothing to memorise</p>
+                <Link href="/learn" className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover mt-2 inline-block">Go to Learn →</Link>
               </div>
               <div className="border border-mathua-border p-3 bg-mathua-surface-elevated">
                 <div className="font-mono text-xs text-mathua-blue mb-1">3. Practice → see XP</div>
-                <p className="font-mono text-[11px] text-mathua-secondary">2 in a row to advance · XP shows below</p>
+                <p className="font-mono text-[11px] text-mathua-secondary">Answer questions · XP shows below</p>
                 <Link href="/learn" className="font-mono text-[10px] text-mathua-blue hover:text-mathua-blue-hover mt-2 inline-block">Continue learning →</Link>
               </div>
             </div>
