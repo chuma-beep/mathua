@@ -88,7 +88,7 @@ export default function MonthCard({ year, month, data }: Props) {
   const activeDays = monthData.filter((d) => d.questions > 0).length
 
   return (
-    <div className="w-[228px] shrink-0 snap-start border-[0.5px] border-mathua-border overflow-hidden bg-transparent">
+    <div className="w-[272px] shrink-0 snap-start border-[0.5px] border-mathua-border overflow-hidden bg-transparent">
       <div className="px-3 py-2 min-w-0">
         <p className="min-w-0 truncate text-left text-[13px] font-normal font-mono text-mathua-primary">
           {MONTH_NAMES[month]} {year}
@@ -107,11 +107,11 @@ export default function MonthCard({ year, month, data }: Props) {
 
         <div className="flex justify-center w-full max-w-full min-w-0 overflow-hidden">
           <div className="inline-block max-w-full">
-            <div className="flex gap-[3px] mb-[3px]">
+            <div className="flex gap-1 mb-1">
               {DAY_HEADERS.map((dh) => (
                 <div
                   key={dh}
-                  className="w-[16px] h-[16px] flex items-center justify-center font-mono text-[9px] text-mathua-muted shrink-0"
+                  className="w-5 h-5 flex items-center justify-center font-mono text-[10px] text-mathua-muted shrink-0"
                 >
                   {SHOWN_DAY_HEADERS.has(dh) ? dh : ''}
                 </div>
@@ -119,7 +119,7 @@ export default function MonthCard({ year, month, data }: Props) {
             </div>
 
             {calendar.map((week, wi) => (
-              <div key={wi} className="flex gap-[3px] mb-[3px]">
+              <div key={wi} className="flex gap-1 mb-1">
                 {week.map((cell, di) => (
                   <div
                     key={di}
@@ -128,7 +128,7 @@ export default function MonthCard({ year, month, data }: Props) {
                         ? `${MONTH_NAMES[month].slice(0, 3)} ${cell.date}: ${cell.questions}q, ${cell.questions > 0 ? Math.round((cell.correct / cell.questions) * 100) : 0}%`
                         : ''
                     }
-                    className="w-[16px] h-[16px] shrink-0 border-[0.5px]"
+                    className="w-5 h-5 shrink-0 border-[0.5px]"
                     style={{
                       background: cell ? heatColor(cell.level) : 'transparent',
                       borderColor: cell ? 'var(--border)' : 'transparent',

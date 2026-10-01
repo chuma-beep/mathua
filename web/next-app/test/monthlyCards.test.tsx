@@ -71,6 +71,14 @@ describe('MonthlyCards strip', () => {
     expect(container.textContent).toMatch(/5 questions/)
   })
 
+  it('sizes month cards and cells to the wide spec', () => {
+    const { container } = render(<MonthlyCards data={[]} />)
+    const card = container.querySelector('[data-testid="month-strip"] > div > div')
+    expect(card?.className).toContain('w-[272px]')
+    const cell = container.querySelector('div[title=""]')
+    expect(cell?.className).toContain('w-5')
+  })
+
   it('trims day headers to Mo/We/Fr', () => {
     const { container } = render(<MonthlyCards data={[]} />)
     const text = container.textContent ?? ''
