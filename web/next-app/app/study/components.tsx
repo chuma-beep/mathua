@@ -222,12 +222,15 @@ export function DomainDrillDown({
 export function LessonDetail({
   lesson,
   domain,
+  fromConcept = '',
   onBack,
   revealReq,
   onConceptSelect,
 }: {
   lesson: LessonInfo
   domain: string | null
+  /** Concept the learner was answering in Learn, when they arrived from it. */
+  fromConcept?: string
   onBack: () => void
   revealReq?: { cid: string; n: number } | null
   onConceptSelect?: (cid: string, e: ReactMouseEvent<HTMLAnchorElement>) => void
@@ -389,7 +392,10 @@ export function LessonDetail({
   // the rest under a disclosure — same head-plus-alternatives pattern as
   // the shelf. First unmastered in lesson order heads; all-mastered falls
   // back to re-practicing the first.
-  const learnTargets = conceptIds.slice(0, 3)
+  // Every concept the lesson covers, not the first three. Silently dropping
+  // the rest meant a learner reading a five-concept lesson was shown links for
+  // two of them, with no indication the others existed.
+  const learnTargets = conceptIds
   const isMasteredStatus = (cid: string) => (lesson.progress?.[cid]?.status ?? '').toUpperCase() === 'MASTERED'
   const headCid = learnTargets.find(cid => !isMasteredStatus(cid)) ?? learnTargets[0]
   const restCids = learnTargets.filter(cid => cid !== headCid)
@@ -560,25 +566,27 @@ export function LessonDetail({
         </div>
       )}
 
-      <div id="practice" className="mt-2 flex items-center gap-2 scroll-mt-24">
+      <div className="mt-2 flex items-center gap-2">
         <span className="bg-mathua-border text-mathua-primary px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
           Learn
         </span>
         <span className="font-mono text-[10px] text-mathua-muted">
-          interactive loop, one concept at a time
+          {fromConcept ? 'back to the questions you were answering' : 'answer questions on any of these'}
         </span>
       </div>
       {headCid && (
         <Link
           key={headCid}
-          href={`/learn?concept=${encodeURIComponent(headCid)}`}
+          href={`/learn?concept=${encodeURIComponent(headCid)}&return=${encodeURIComponent(headCid)}`}
           className="mt-3 flex items-center justify-between gap-3 border border-mathua-border bg-mathua-surface p-4 hover:border-mathua-blue transition-colors"
         >
           <span className="font-mono text-xs text-mathua-primary truncate">
-            {conceptLabels.get(headCid) || headCid}
+            {fromConcept
+              ? `Back to ${conceptLabels.get(fromConcept) || fromConcept}`
+              : conceptLabels.get(headCid) || headCid}
           </span>
           <span className="shrink-0 font-mono text-xs text-mathua-blue">
-            Start learning →
+            {fromConcept ? 'Back to practice →' : 'Start learning →'}
           </span>
         </Link>
       )}
@@ -591,11 +599,13 @@ export function LessonDetail({
             {restCids.map(cid => (
               <Link
                 key={cid}
-                href={`/learn?concept=${encodeURIComponent(cid)}`}
+                href={`/learn?concept=${encodeURIComponent(cid)}&return=${encodeURIComponent(cid)}`}
                 className="border border-mathua-border p-3 hover:border-mathua-blue transition-colors block min-w-0"
               >
                 <div className="font-mono text-xs text-mathua-primary truncate">{conceptLabels.get(cid) || cid}</div>
-                <div className="mt-1 font-mono text-[11px] text-mathua-blue">Start learning →</div>
+                <div className="mt-1 font-mono text-[11px] text-mathua-blue">
+                  {fromConcept ? 'Back to practice →' : 'Start learning →'}
+                </div>
               </Link>
             ))}
           </div>

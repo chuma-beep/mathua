@@ -446,7 +446,7 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
                     <Link href="/profile" className="border border-mathua-border px-5 py-2 font-mono text-xs text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue inline-flex items-center min-h-[40px]">Back to Profile</Link>
                   )}
                   <button type="button" onClick={practiceAgain} className="border border-mathua-border px-5 py-2 font-mono text-xs text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue inline-flex items-center min-h-[40px]">Practice again</button>
-                  <Link href={`/study?concept=${encodeURIComponent(conceptId)}`} className="border border-mathua-border px-5 py-2 font-mono text-xs text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue inline-flex items-center min-h-[40px]">Reference</Link>
+                  <Link href={`/study?concept=${encodeURIComponent(conceptId)}&from=${encodeURIComponent(conceptId)}`} className="border border-mathua-border px-5 py-2 font-mono text-xs text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue inline-flex items-center min-h-[40px]">Reference</Link>
                 </div>
                 {!nextLoading && nextShelf && nextShelf.alternatives.length > 0 && (
                   <details className="mt-3 border border-mathua-border">
