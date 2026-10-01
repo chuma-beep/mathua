@@ -1,0 +1,15 @@
+{
+  "concept": "trig.basics.sin_cos_def",
+  "setup": "This is a right triangle with two of its sides given.",
+  "steps": [
+    {
+      "fact": "hyp",
+      "say": "Sine is the ratio opposite over hypotenuse, cosine is adjacent over hypotenuse — both measured against the same side, the hypotenuse [[hyp]], which is the longest."
+    },
+    {
+      "fact": "num",
+      "say": "Dividing and reducing gives [[num]]/[[den]]."
+    }
+  ],
+  "answer": "The ratio is [[num]]/[[den]]."
+}

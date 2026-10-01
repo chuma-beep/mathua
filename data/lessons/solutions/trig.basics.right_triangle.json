@@ -1,0 +1,15 @@
+{
+  "concept": "trig.basics.right_triangle",
+  "setup": "This is a right triangle with the sides [[opp]], [[adj]] and [[hyp]].",
+  "steps": [
+    {
+      "fact": "opp",
+      "say": "Pick the ratio by which sides are named: for [[fn]] it is opposite over adjacent. The side opposite the angle in question is [[opp]], and the one next to it is [[adj]]."
+    },
+    {
+      "fact": "val",
+      "say": "So [[fn]] = [[opp]]/[[adj]], which is [[val]]."
+    }
+  ],
+  "answer": "The value is [[val]]."
+}

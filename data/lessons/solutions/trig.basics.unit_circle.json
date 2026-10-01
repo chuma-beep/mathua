@@ -1,0 +1,15 @@
+{
+  "concept": "trig.basics.unit_circle",
+  "setup": "The angle [[label]] is marked on the unit circle.",
+  "steps": [
+    {
+      "fact": "fn",
+      "say": "On the unit circle every point is exactly 1 from the origin, so the coordinates of a point at angle θ are $(\\cos θ, \\sin θ)$ — the horizontal distance is the cosine and the vertical is the sine."
+    },
+    {
+      "fact": "val",
+      "say": "Reading the point for [[label]], its vertical coordinate is [[val]]."
+    }
+  ],
+  "answer": "So the value is [[val]]."
+}

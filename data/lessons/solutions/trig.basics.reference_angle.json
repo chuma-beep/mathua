@@ -1,0 +1,15 @@
+{
+  "concept": "trig.basics.reference_angle",
+  "setup": "The angle given is [[angle]]°.",
+  "steps": [
+    {
+      "fact": "angle",
+      "say": "A reference angle is the acute angle the terminal side makes with the x-axis, so it is always between 0° and 90° — take [[angle]]° and peel off the straight lines it sits past."
+    },
+    {
+      "fact": "ref",
+      "say": "That leaves [[ref]]."
+    }
+  ],
+  "answer": "The reference angle is [[ref]]°."
+}

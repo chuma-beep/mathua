@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"math/rand"
+	"strconv"
 
 	"github.com/chuma-beep/mathua/internal/generator"
 	"github.com/chuma-beep/mathua/internal/mathutil"
@@ -68,12 +69,14 @@ func (g *radiansGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 			Question:    fmt.Sprintf("Convert \\(%d^{\\circ}\\) to radians.", e.deg),
 			Answer:      e.radHTML,
 			Explanation: fmt.Sprintf("\\(%d^{\\circ} \\times \\frac{\\pi}{180} = %s\\).", e.deg, e.radHTML),
+			Facts:       map[string]string{"deg": strconv.Itoa(e.deg), "rad": e.radHTML, "factor": "\\frac{\\pi}{180}"},
 		}
 	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Convert %s to degrees.", e.radHTML),
 		Answer:      fmt.Sprintf("%d", e.deg),
 		Explanation: fmt.Sprintf("%s \\(\\times \\frac{180}{\\pi} = %d^{\\circ}\\).", e.radHTML, e.deg),
+		Facts:       map[string]string{"deg": strconv.Itoa(e.deg), "rad": e.radHTML, "factor": "\\frac{180}{\\pi}"},
 	}
 }
 
@@ -118,12 +121,14 @@ func (g *unitCircleGen) Generate(ctx generator.GeneratorContext) generator.Probl
 			Question:    fmt.Sprintf("What is \\(\\sin(%s)\\)?", a.label),
 			Answer:      a.sin,
 			Explanation: fmt.Sprintf("On the unit circle, \\(\\sin(%s) = %s\\).", a.label, a.sin),
+			Facts:       map[string]string{"label": a.label, "val": a.sin, "fn": "\\sin"},
 		}
 	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("What is \\(\\cos(%s)\\)?", a.label),
 		Answer:      a.cos,
 		Explanation: fmt.Sprintf("On the unit circle, \\(\\cos(%s) = %s\\).", a.label, a.cos),
+		Facts:       map[string]string{"label": a.label, "val": a.cos, "fn": "\\cos"},
 	}
 }
 
@@ -179,6 +184,7 @@ func (g *sinCosDefGen) Generate(ctx generator.GeneratorContext) generator.Proble
 			Question:    fmt.Sprintf("In a right triangle with opposite = %d and hypotenuse = %d, what is \\(\\sin(\\theta)\\)?", t.opp, t.hyp),
 			Answer:      fmt.Sprintf("%d/%d", num, den),
 			Explanation: fmt.Sprintf("sin(θ) = opp/hyp = %d/%d = %d/%d.", t.opp, t.hyp, num, den),
+			Facts:       map[string]string{"opp": strconv.Itoa(t.opp), "hyp": strconv.Itoa(t.hyp), "num": strconv.Itoa(num), "den": strconv.Itoa(den)},
 		}
 	}
 	gcd := mathutil.GCD(t.adj, t.hyp)
@@ -188,6 +194,7 @@ func (g *sinCosDefGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		Question:    fmt.Sprintf("In a right triangle with adjacent = %d and hypotenuse = %d, what is \\(\\cos(\\theta)\\)?", t.adj, t.hyp),
 		Answer:      fmt.Sprintf("%d/%d", num, den),
 		Explanation: fmt.Sprintf("cos(θ) = adj/hyp = %d/%d = %d/%d.", t.adj, t.hyp, num, den),
+		Facts:       map[string]string{"adj": strconv.Itoa(t.adj), "hyp": strconv.Itoa(t.hyp), "num": strconv.Itoa(num), "den": strconv.Itoa(den)},
 	}
 }
 
@@ -204,6 +211,7 @@ func (g *tanDefGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 			Question:    fmt.Sprintf("In a right triangle with opposite = %d and adjacent = %d, what is \\(\\tan(\\theta)\\)?", t.opp, t.adj),
 			Answer:      fmt.Sprintf("%d/%d", num, den),
 			Explanation: fmt.Sprintf("tan(θ) = opp/adj = %d/%d = %d/%d.", t.opp, t.adj, num, den),
+			Facts:       map[string]string{"opp": strconv.Itoa(t.opp), "adj": strconv.Itoa(t.adj), "num": strconv.Itoa(num), "den": strconv.Itoa(den)},
 		}
 	}
 	t := pythagoreanTriples[rand.Intn(len(pythagoreanTriples))]
@@ -220,6 +228,7 @@ func (g *tanDefGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		Question:    fmt.Sprintf("If \\(\\sin(\\theta) = %d/%d\\) and \\(\\cos(\\theta) = %d/%d\\), what is \\(\\tan(\\theta)\\)?", sinNum, sinDen, cosNum, cosDen),
 		Answer:      fmt.Sprintf("%d/%d", tanNum, tanDen),
 		Explanation: fmt.Sprintf("tan(θ) = sin(θ)/cos(θ) = (%d/%d)/(%d/%d) = %d/%d.", sinNum, sinDen, cosNum, cosDen, tanNum, tanDen),
+		Facts:       map[string]string{"sin_num": strconv.Itoa(sinNum), "sin_den": strconv.Itoa(sinDen), "cos_num": strconv.Itoa(cosNum), "cos_den": strconv.Itoa(cosDen), "num": strconv.Itoa(tanNum), "den": strconv.Itoa(tanDen)},
 	}
 }
 
@@ -245,6 +254,7 @@ func (g *reciprocalGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Question:    fmt.Sprintf("If %s = %d/%d, what is %s?", fn.name, fn.num, fn.den, fn.recip),
 		Answer:      fmt.Sprintf("%d/%d", recipNum, recipDen),
 		Explanation: fmt.Sprintf("%s = 1/%s = 1/(%d/%d) = %d/%d.", fn.recip, fn.name, fn.num, fn.den, recipNum, recipDen),
+		Facts:       map[string]string{"name": fn.name, "num": strconv.Itoa(fn.num), "den": strconv.Itoa(fn.den), "recip": fn.recip, "recip_num": strconv.Itoa(recipNum), "recip_den": strconv.Itoa(recipDen)},
 	}
 }
 
@@ -264,6 +274,7 @@ func (g *pythagoreanIDGen) Generate(ctx generator.GeneratorContext) generator.Pr
 			Question:    fmt.Sprintf("If \\(\\sin(\\theta) = %d/%d\\), find \\(\\cos(\\theta)\\) using \\(\\sin^{2}\\theta + \\cos^{2}\\theta = 1\\) (assume \\(\\theta\\) is acute).", sinNum, sinDen),
 			Answer:      fmt.Sprintf("%d/%d", cosNum, cosDen),
 			Explanation: fmt.Sprintf("cos²θ = 1 - sin²θ = 1 - (%d/%d)² = 1 - %d/%d = %d/%d, so cos(θ) = √(%d/%d) = %d/%d.", sinNum, sinDen, sinNum*sinNum, sinDen*sinDen, sinDen*sinDen-sinNum*sinNum, sinDen*sinDen, sinDen*sinDen-sinNum*sinNum, sinDen*sinDen, cosNum, cosDen),
+			Facts:       map[string]string{"known": strconv.Itoa(sinNum) + "/" + strconv.Itoa(sinDen), "known_num": strconv.Itoa(sinNum), "known_den": strconv.Itoa(sinDen), "want": "$\\cos(\\theta)$", "sq_num": strconv.Itoa(sinNum * sinNum), "sq_den": strconv.Itoa(sinDen * sinDen), "rem_num": strconv.Itoa(sinDen*sinDen - sinNum*sinNum), "num": strconv.Itoa(cosNum), "den": strconv.Itoa(cosDen)},
 		}
 	}
 	cosGcd := mathutil.GCD(t.adj, t.hyp)
@@ -276,6 +287,7 @@ func (g *pythagoreanIDGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Question:    fmt.Sprintf("If \\(\\cos(\\theta) = %d/%d\\), find \\(\\sin(\\theta)\\) using \\(\\sin^{2}\\theta + \\cos^{2}\\theta = 1\\) (assume \\(\\theta\\) is acute).", cosNum, cosDen),
 		Answer:      fmt.Sprintf("%d/%d", sinNum, sinDen),
 		Explanation: fmt.Sprintf("sin²θ = 1 - cos²θ = 1 - (%d/%d)² = 1 - %d/%d = %d/%d, so sin(θ) = √(%d/%d) = %d/%d.", cosNum, cosDen, cosNum*cosNum, cosDen*cosDen, cosDen*cosDen-cosNum*cosNum, cosDen*cosDen, cosDen*cosDen-cosNum*cosNum, cosDen*cosDen, sinNum, sinDen),
+		Facts:       map[string]string{"known": strconv.Itoa(cosNum) + "/" + strconv.Itoa(cosDen), "known_num": strconv.Itoa(cosNum), "known_den": strconv.Itoa(cosDen), "want": "$\\sin(\\theta)$", "sq_num": strconv.Itoa(cosNum * cosNum), "sq_den": strconv.Itoa(cosDen * cosDen), "rem_num": strconv.Itoa(cosDen*cosDen - cosNum*cosNum), "num": strconv.Itoa(sinNum), "den": strconv.Itoa(sinDen)},
 	}
 }
 
@@ -307,6 +319,7 @@ func (g *specialAnglesGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Question:    fmt.Sprintf("What is the exact value of %s(%s)?", fn.name, e.label),
 		Answer:      fn.val,
 		Explanation: fmt.Sprintf("%s(%s) = %s.", fn.name, e.label, fn.val),
+		Facts:       map[string]string{"fn": fn.name, "label": e.label, "val": fn.val},
 	}
 }
 
@@ -333,6 +346,7 @@ func (g *referenceAngleGen) Generate(ctx generator.GeneratorContext) generator.P
 		Question:    fmt.Sprintf("What is the reference angle for %d°?", e.angle),
 		Answer:      fmt.Sprintf("%d°", e.ref),
 		Explanation: fmt.Sprintf("The reference angle for %d° is the acute angle it makes with the x-axis: %d°.", e.angle, e.ref),
+		Facts:       map[string]string{"angle": strconv.Itoa(e.angle), "ref": strconv.Itoa(e.ref)},
 	}
 }
 
@@ -496,6 +510,7 @@ func (g *lawSinesGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		Question:    fmt.Sprintf("In triangle ABC, \\(A = %d^{\\circ}\\), \\(B = %d^{\\circ}\\), and side \\(a = %d\\). Find side \\(b\\) using the law of sines.", aDeg, bDeg, c.a),
 		Answer:      fmt.Sprintf("%.1f", bRounded),
 		Explanation: fmt.Sprintf("a/sin(A) = b/sin(B), so b = a·sin(B)/sin(A) = %d·sin(%d°)/sin(%d°) = %.1f.", c.a, bDeg, aDeg, bRounded),
+		Facts:       map[string]string{"a": strconv.Itoa(c.a), "A": strconv.Itoa(aDeg), "B": strconv.Itoa(bDeg), "b": fmt.Sprintf("%.1f", bRounded)},
 	}
 }
 
@@ -524,6 +539,7 @@ func (g *lawCosinesGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Question:    fmt.Sprintf("In triangle ABC, \\(a = %d\\), \\(b = %d\\), and \\(C = %d^{\\circ}\\). Find side \\(c\\) using the law of cosines.", c.a, c.b, c.C),
 		Answer:      fmt.Sprintf("%.1f", cRounded),
 		Explanation: fmt.Sprintf("c² = a² + b² - 2ab·cos(C) = %d² + %d² - 2(%d)(%d)·cos(%d°) = %d + %d - %d = %d, so c = √%d ≈ %.1f.", c.a, c.b, c.a, c.b, c.C, c.a*c.a, c.b*c.b, c.a*c.b, c.c2, c.c2, cRounded),
+		Facts:       map[string]string{"a": strconv.Itoa(c.a), "b": strconv.Itoa(c.b), "C": strconv.Itoa(c.C), "a_sq": strconv.Itoa(c.a * c.a), "b_sq": strconv.Itoa(c.b * c.b), "two_ab": strconv.Itoa(2 * c.a * c.b), "c_sq": strconv.Itoa(c.c2), "c": fmt.Sprintf("%.1f", cRounded)},
 	}
 }
 
@@ -589,6 +605,7 @@ func (g *rightTriangleGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Question:    fmt.Sprintf("In a right triangle with sides %d, %d, %d, what is \\(\\%s\\) of the angle opposite the side of length %d? (as a fraction)", t.opp, t.adj, t.hyp, f, t.opp),
 		Answer:      ans,
 		Explanation: fmt.Sprintf("SOH CAH TOA: %s(θ) = %s", f, ans),
+		Facts:       map[string]string{"fn": f, "opp": strconv.Itoa(t.opp), "adj": strconv.Itoa(adj), "hyp": strconv.Itoa(t.hyp), "val": ans},
 	}
 }
 

@@ -1,0 +1,19 @@
+{
+  "concept": "trig.adv.law_sines",
+  "setup": "Triangle ABC has angle A = [[A]]°, angle B = [[B]]°, and side a = [[a]].",
+  "steps": [
+    {
+      "fact": "A",
+      "say": "The law of sines says every triangle obeys a/sin A = b/sin B — the ratio of a side to the sine of its opposite angle is the same for all three."
+    },
+    {
+      "fact": "B",
+      "say": "Rearranged for the side wanted, b = a·sin(B)/sin(A) = [[a]]·sin([[B]]°)/sin([[A]]°)."
+    },
+    {
+      "fact": "b",
+      "say": "That evaluates to [[b]]."
+    }
+  ],
+  "answer": "So side b is [[b]]."
+}
