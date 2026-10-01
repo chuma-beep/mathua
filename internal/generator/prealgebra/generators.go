@@ -77,6 +77,7 @@ func (g *decCompareGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Question:    fmt.Sprintf("Compare: %.2f __ %.2f  (enter >, <, or =)", a, b),
 		Answer:      ans,
 		Explanation: fmt.Sprintf("%.2f %s %.2f", a, ans, b),
+		Facts:       map[string]string{"a": fmt.Sprintf("%.2f", a), "b": fmt.Sprintf("%.2f", b), "op": ans},
 	}
 }
 
@@ -96,6 +97,7 @@ func (g *decAddSubGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		Question:    fmt.Sprintf("%.2f %s %.2f = ?", a, g.op, b),
 		Answer:      fmt.Sprintf("%.2f", result),
 		Explanation: fmt.Sprintf("%.2f %s %.2f = %.2f", a, g.op, b, result),
+		Facts:       map[string]string{"a": fmt.Sprintf("%.2f", a), "b": fmt.Sprintf("%.2f", b), "op": g.op, "result": fmt.Sprintf("%.2f", result)},
 	}
 }
 
@@ -109,6 +111,7 @@ func (g *decMultGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 		Question:    fmt.Sprintf("%.1f x %.1f = ?", a, b),
 		Answer:      fmt.Sprintf("%.2f", a*b),
 		Explanation: fmt.Sprintf("%.1f x %.1f = %.2f", a, b, a*b),
+		Facts:       map[string]string{"a": fmt.Sprintf("%.1f", a), "b": fmt.Sprintf("%.1f", b), "result": fmt.Sprintf("%.2f", a*b)},
 	}
 }
 
@@ -123,6 +126,7 @@ func (g *decDivGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		Question:    fmt.Sprintf("%.2f / %.1f = ?", a, b),
 		Answer:      fmt.Sprintf("%.1f", q),
 		Explanation: fmt.Sprintf("%.2f / %.1f = %.1f", a, b, q),
+		Facts:       map[string]string{"a": fmt.Sprintf("%.2f", a), "b": fmt.Sprintf("%.1f", b), "result": fmt.Sprintf("%.1f", q)},
 	}
 }
 
@@ -136,6 +140,7 @@ func (g *decFromFracGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("Convert %d/%d to a decimal.", num, den),
 		Answer:      fmt.Sprintf("%g", float64(num)/float64(den)),
 		Explanation: fmt.Sprintf("%d / %d = %g", num, den, float64(num)/float64(den)),
+		Facts:       map[string]string{"num": strconv.Itoa(num), "den": strconv.Itoa(den), "dec": fmt.Sprintf("%g", float64(num)/float64(den))},
 	}
 }
 
@@ -153,6 +158,7 @@ func (g *decToFracGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		Question:    fmt.Sprintf("Convert %g to a fraction in simplest form.", d),
 		Answer:      fmt.Sprintf("%d/%d", num, den),
 		Explanation: fmt.Sprintf("%g = %d/1000 = %d/%d", d, int(d*1000), num, den),
+		Facts:       map[string]string{"dec": fmt.Sprintf("%g", d), "over_1000": strconv.Itoa(int(d * 1000)), "num": strconv.Itoa(num), "den": strconv.Itoa(den)},
 	}
 }
 
@@ -166,6 +172,7 @@ func (g *decRoundGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		Question:    fmt.Sprintf("Round %g to the nearest hundredth (2 decimal places).", n),
 		Answer:      fmt.Sprintf("%.2f", r),
 		Explanation: fmt.Sprintf("%g rounded to 2 decimals = %.2f", n, r),
+		Facts:       map[string]string{"n": fmt.Sprintf("%g", n), "result": fmt.Sprintf("%.2f", r), "third": strconv.Itoa(int(n*1000) % 10)},
 	}
 }
 
@@ -180,6 +187,7 @@ func (g *pctConceptGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Question:    fmt.Sprintf("How do you write %d percent as a fraction?", p),
 		Answer:      fmt.Sprintf("%d/100", p),
 		Explanation: fmt.Sprintf("%d%% = %d/100", p, p),
+		Facts:       map[string]string{"p": strconv.Itoa(p)},
 	}
 }
 
@@ -192,6 +200,7 @@ func (g *pctToDecGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		Question:    fmt.Sprintf("Convert %d%% to a decimal.", p),
 		Answer:      fmt.Sprintf("%g", float64(p)/100),
 		Explanation: fmt.Sprintf("%d%% = %d/100 = %g", p, p, float64(p)/100),
+		Facts:       map[string]string{"p": strconv.Itoa(p), "dec": fmt.Sprintf("%g", float64(p)/100)},
 	}
 }
 
@@ -204,6 +213,7 @@ func (g *pctFromDecGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Question:    fmt.Sprintf("Convert %g to a percent.", d),
 		Answer:      fmt.Sprintf("%g", d*100),
 		Explanation: fmt.Sprintf("%g x 100 = %g%%", d, d*100),
+		Facts:       map[string]string{"dec": fmt.Sprintf("%g", d), "pct": fmt.Sprintf("%g", d*100)},
 	}
 }
 
@@ -218,6 +228,7 @@ func (g *pctOfNumberGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("What is %d%% of %d?", p, n),
 		Answer:      fmt.Sprintf("%.1f", result),
 		Explanation: fmt.Sprintf("%d%% of %d = %.2f x %d = %.1f", p, n, float64(p)/100, n, result),
+		Facts:       map[string]string{"p": strconv.Itoa(p), "n": strconv.Itoa(n), "rate": fmt.Sprintf("%.2f", float64(p)/100), "result": fmt.Sprintf("%.1f", result)},
 	}
 }
 
@@ -232,6 +243,7 @@ func (g *pctFindRateGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("%d is what percent of %d?", part, total),
 		Answer:      fmt.Sprintf("%d", p),
 		Explanation: fmt.Sprintf("\\(\\frac{%d}{%d} = \\frac{%d}{%d} = %d\\%%\\)", part, total, p, 100, p),
+		Facts:       map[string]string{"part": strconv.Itoa(part), "total": strconv.Itoa(total), "p": strconv.Itoa(p)},
 	}
 }
 
@@ -246,6 +258,7 @@ func (g *pctIncreaseGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("What is a %d%% increase on %d?", p, orig),
 		Answer:      fmt.Sprintf("%.1f", float64(orig)+inc),
 		Explanation: fmt.Sprintf("%d + %d%% = %d + %.1f = %.1f", orig, p, orig, inc, float64(orig)+inc),
+		Facts:       map[string]string{"p": strconv.Itoa(p), "orig": strconv.Itoa(orig), "inc": fmt.Sprintf("%.1f", inc), "result": fmt.Sprintf("%.1f", float64(orig)+inc)},
 	}
 }
 
@@ -260,6 +273,7 @@ func (g *pctDiscountGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("Price: $%d. %d%% off. What is the sale price?", orig, p),
 		Answer:      fmt.Sprintf("%.2f", float64(orig)-disc),
 		Explanation: fmt.Sprintf("%d%% of %d = %.2f. %d - %.2f = %.2f.", p, orig, disc, orig, disc, float64(orig)-disc),
+		Facts:       map[string]string{"p": strconv.Itoa(p), "orig": strconv.Itoa(orig), "disc": fmt.Sprintf("%.2f", disc), "result": fmt.Sprintf("%.2f", float64(orig)-disc)},
 	}
 }
 
@@ -276,6 +290,7 @@ func (g *pctTaxTipGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		Question:    fmt.Sprintf("Your %s is $%d. Add a %d%% tip. What is the total?", item, amount, rate),
 		Answer:      fmt.Sprintf("%.2f", float64(amount)+tip),
 		Explanation: fmt.Sprintf("%d%% of $%d = $%.2f. $%d + $%.2f = $%.2f.", rate, amount, tip, amount, tip, float64(amount)+tip),
+		Facts:       map[string]string{"rate": strconv.Itoa(rate), "amount": strconv.Itoa(amount), "tip": fmt.Sprintf("%.2f", tip), "item": item, "result": fmt.Sprintf("%.2f", float64(amount)+tip)},
 	}
 }
 
@@ -290,6 +305,7 @@ func (g *absValueGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		Question:    fmt.Sprintf("\\(|%d| =\\) ?", n),
 		Answer:      fmt.Sprintf("%d", mathutil.Abs(n)),
 		Explanation: fmt.Sprintf("The absolute value of %d is %d.", n, mathutil.Abs(n)),
+		Facts:       map[string]string{"n": strconv.Itoa(n), "abs": strconv.Itoa(mathutil.Abs(n))},
 	}
 }
 
@@ -308,6 +324,7 @@ func (g *negOrderOpsGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("Evaluate: \\(%d + (%d) \\times %d\\)", a, b, c),
 		Answer:      fmt.Sprintf("%d", result),
 		Explanation: fmt.Sprintf("\\(%d + (%d) \\times %d = %d + %d = %d\\)", a, b, c, a, b*c, result),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "product": strconv.Itoa(b * c), "result": strconv.Itoa(result)},
 	}
 }
 
@@ -345,6 +362,7 @@ func (g *ratioConceptGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		Question:    fmt.Sprintf("Write the ratio of %d to %d in simplest form.", a, b),
 		Answer:      fmt.Sprintf("%d:%d", a, b),
 		Explanation: fmt.Sprintf("%d:%d", a, b),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b)},
 	}
 }
 
@@ -382,6 +400,7 @@ func (g *ratioSimplifyGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Question:    fmt.Sprintf("Simplify the ratio %d:%d", a, b),
 		Answer:      fmt.Sprintf("%d:%d", a/d, b/d),
 		Explanation: fmt.Sprintf("Divide both by %d: \\(\\frac{%d}{%d} : \\frac{%d}{%d} = %d:%d\\)", d, a, d, b, d, a/d, b/d),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "d": strconv.Itoa(d), "out_a": strconv.Itoa(a / d), "out_b": strconv.Itoa(b / d)},
 	}
 }
 
@@ -398,6 +417,7 @@ func (g *ratioProportionGen) Generate(ctx generator.GeneratorContext) generator.
 		Question:    fmt.Sprintf("Solve the proportion: \\(\\frac{%d}{%d} = \\frac{x}{%d}\\)", a, b, c),
 		Answer:      fmt.Sprintf("%d", x),
 		Explanation: fmt.Sprintf("\\(\\frac{%d}{%d} = \\frac{x}{%d}\\), cross-multiply: \\(%dx = %d \\times %d\\), \\(x = %d\\)", a, b, c, a, c, b, x),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "bc": strconv.Itoa(b * c), "x": strconv.Itoa(x)},
 	}
 }
 
@@ -412,6 +432,7 @@ func (g *ratioRateGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		Question:    fmt.Sprintf("%d miles in %d hours. What is the rate in miles per hour?", dist, time),
 		Answer:      fmt.Sprintf("%d", speed),
 		Explanation: fmt.Sprintf("%d / %d = %d mph.", dist, time, speed),
+		Facts:       map[string]string{"dist": strconv.Itoa(dist), "time": strconv.Itoa(time), "speed": strconv.Itoa(speed)},
 	}
 }
 
@@ -426,6 +447,7 @@ func (g *ratioScaleGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Question:    fmt.Sprintf("Scale is 1:%d. Model length is %d cm. What is the actual length?", factor, length),
 		Answer:      fmt.Sprintf("%d", actual),
 		Explanation: fmt.Sprintf("%d x %d = %d cm.", length, factor, actual),
+		Facts:       map[string]string{"factor": strconv.Itoa(factor), "length": strconv.Itoa(length), "actual": strconv.Itoa(actual)},
 	}
 }
 
@@ -441,6 +463,7 @@ func (g *expNegGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		Question:    fmt.Sprintf("Simplify: \\(%d^{-%d}\\)", base, exp),
 		Answer:      fmt.Sprintf("1/%d", mathutil.IntPow(base, exp)),
 		Explanation: fmt.Sprintf("\\(%d^{-%d} = \\frac{1}{%d^{%d}} = \\frac{1}{%d}\\)", base, exp, base, exp, mathutil.IntPow(base, exp)),
+		Facts:       map[string]string{"base": strconv.Itoa(base), "exp": strconv.Itoa(exp), "value": strconv.Itoa(mathutil.IntPow(base, exp))},
 	}
 }
 
@@ -458,12 +481,14 @@ func (g *expZeroGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 			Question:    fmt.Sprintf("In the expression %d^0, what is the base? (enter a number)", base),
 			Answer:      fmt.Sprintf("%d", base),
 			Explanation: fmt.Sprintf("The base is %d; any non-zero base to the power 0 equals 1, so %d^0 = 1.", base, base),
+			Facts:       map[string]string{"base": strconv.Itoa(base), "which": "base"},
 		}
 	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("\\(%d^{0} =\\) ?", base),
 		Answer:      "1",
 		Explanation: fmt.Sprintf("Any non-zero number raised to 0 equals 1. %d^0 = 1.", base),
+		Facts:       map[string]string{"base": strconv.Itoa(base), "which": "value"},
 	}
 }
 
@@ -478,16 +503,18 @@ func (g *sciNotationGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		exp := rand.Intn(max(1, scale)) + 1
 		return generator.Problem{
 			Question:    fmt.Sprintf("Write \\(%g \\times 10^{%d}\\) as a standard number.", coeff, exp),
-			Answer:      fmt.Sprintf("%g", coeff*float64(mathutil.IntPow(10, exp))),
+			Answer:      fmtNum(coeff * float64(mathutil.IntPow(10, exp))),
 			Explanation: fmt.Sprintf("\\(%g \\times 10^{%d} = %g\\)", coeff, exp, coeff*float64(mathutil.IntPow(10, exp))),
+			Facts:       map[string]string{"coeff": fmt.Sprintf("%g", coeff), "exp": strconv.Itoa(exp), "places": strconv.Itoa(exp), "std": fmtNum(coeff * float64(mathutil.IntPow(10, exp))), "direction": "right"},
 		}
 	case 1:
 		// scientific -> standard, negative exponent.
 		exp := rand.Intn(max(1, scale)) + 1
 		return generator.Problem{
 			Question:    fmt.Sprintf("Write \\(%g \\times 10^{%d}\\) as a standard number.", coeff, -exp),
-			Answer:      fmt.Sprintf("%g", coeff/float64(mathutil.IntPow(10, exp))),
+			Answer:      fmtNum(coeff / float64(mathutil.IntPow(10, exp))),
 			Explanation: fmt.Sprintf("\\(%g \\times 10^{%d} = %g\\): move the point %d places left.", coeff, -exp, coeff/float64(mathutil.IntPow(10, exp)), exp),
+			Facts:       map[string]string{"coeff": fmt.Sprintf("%g", coeff), "exp": "-" + strconv.Itoa(exp), "places": strconv.Itoa(exp), "std": fmtNum(coeff / float64(mathutil.IntPow(10, exp))), "direction": "left"},
 		}
 	default:
 		// standard -> scientific, typed in x10^ form (e.g. 3.7x10^4).
@@ -497,9 +524,10 @@ func (g *sciNotationGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		}
 		std := coeff * math.Pow(10, float64(exp))
 		return generator.Problem{
-			Question:    fmt.Sprintf("Write %g in scientific notation (type like 3.7x10^4).", std),
+			Question:    fmt.Sprintf("Write %s in scientific notation (type like 3.7x10^4).", fmtNum(std)),
 			Answer:      fmt.Sprintf("%gx10^%d", coeff, exp),
 			Explanation: fmt.Sprintf("%g = %g × 10^%d: shift the point to isolate one nonzero digit.", std, coeff, exp),
+			Facts:       map[string]string{"std": fmtNum(std), "coeff": fmt.Sprintf("%g", coeff), "exp": strconv.Itoa(exp), "places": strconv.Itoa(absInt(exp)), "isolate": "yes"},
 		}
 	}
 }
@@ -597,6 +625,7 @@ func (g *sciNotationOpsGen) Generate(ctx generator.GeneratorContext) generator.P
 		Question:    fmt.Sprintf("\\((%g \\times 10^{%d}) \\times (%g \\times 10^{%d}) =\\) ? (in scientific notation)", a, ea, b, eb),
 		Answer:      fmt.Sprintf("%g x 10^%d", coeff, totalExp),
 		Explanation: fmt.Sprintf("\\((%g \\times %g) \\times 10^{%d+%d} = %g \\times 10^{%d}\\)", a, b, ea, eb, coeff, totalExp),
+		Facts:       map[string]string{"a": fmt.Sprintf("%g", a), "b": fmt.Sprintf("%g", b), "ea": strconv.Itoa(ea), "eb": strconv.Itoa(eb), "coeff": fmt.Sprintf("%g", coeff), "total_exp": strconv.Itoa(totalExp)},
 	}
 }
 
@@ -611,6 +640,7 @@ func (g *varConceptGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Question:    fmt.Sprintf("If \\(x = %d\\), what is \\(3x\\)?", n),
 		Answer:      fmt.Sprintf("%d", 3*n),
 		Explanation: fmt.Sprintf("3x means 3 times x. 3 x %d = %d.", n, 3*n),
+		Facts:       map[string]string{"n": strconv.Itoa(n), "coef": "3", "result": strconv.Itoa(3 * n)},
 	}
 }
 
@@ -626,6 +656,7 @@ func (g *exprEvalGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		Question:    fmt.Sprintf("Evaluate \\(%dx + %d\\) when \\(x = %d\\).", a, b, x),
 		Answer:      fmt.Sprintf("%d", result),
 		Explanation: fmt.Sprintf("\\(%d(%d) + %d = %d + %d = %d\\)", a, x, b, a*x, b, result),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "x": strconv.Itoa(x), "ax": strconv.Itoa(a * x), "result": strconv.Itoa(result)},
 	}
 }
 
@@ -641,6 +672,7 @@ func (g *likeTermsGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		Question:    fmt.Sprintf("Combine like terms: \\(%dx + %dx + %d\\)", a, b, c),
 		Answer:      fmt.Sprintf("%dx + %d", resultCoef, c),
 		Explanation: fmt.Sprintf("\\(%dx + %dx = %dx\\), plus \\(%d = %dx + %d\\)", a, b, resultCoef, c, resultCoef, c),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "coef": strconv.Itoa(resultCoef)},
 	}
 }
 
@@ -657,6 +689,7 @@ func (g *distributeGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		Question:    fmt.Sprintf("Simplify: \\(%d(%dx + %d)\\)", a, b, c),
 		Answer:      fmt.Sprintf("%dx + %d", resultB, resultC),
 		Explanation: fmt.Sprintf("\\(%d(%dx + %d) = %d(%dx) + %d(%d) = %dx + %d\\)", a, b, c, a, b, a, c, resultB, resultC),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "out_b": strconv.Itoa(resultB), "out_c": strconv.Itoa(resultC)},
 	}
 }
 
@@ -673,6 +706,7 @@ func (g *eqOneStepAddGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		Question:    fmt.Sprintf("Solve: \\(x + %d = %d\\)", b, a+b),
 		Answer:      fmt.Sprintf("%d", x),
 		Explanation: fmt.Sprintf("\\(x + %d = %d\\), subtract %d: \\(x = %d\\)", b, a+b, b, x),
+		Facts:       map[string]string{"b": strconv.Itoa(b), "rhs": strconv.Itoa(a + b), "x": strconv.Itoa(x)},
 	}
 }
 
@@ -687,7 +721,34 @@ func (g *eqOneStepMultGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Question:    fmt.Sprintf("Solve: \\(%dx = %d\\)", coeff, rhs),
 		Answer:      fmt.Sprintf("%d", x),
 		Explanation: fmt.Sprintf("\\(%dx = %d\\), divide by %d: \\(x = %d\\)", coeff, rhs, coeff, x),
+		Facts:       map[string]string{"coeff": strconv.Itoa(coeff), "rhs": strconv.Itoa(rhs), "x": strconv.Itoa(x)},
 	}
+}
+
+// fmtNum renders a float without the binary-float noise %g exposes.
+// Scientific notation divides by powers of ten, so 4.4 / 10 came out as
+// 0.44000000000000006 — a served answer and an explanation quoting a number
+// the learner never wrote. Twelve significant digits is well past any value
+// these generators produce and well short of the noise.
+func fmtNum(f float64) string {
+	return strconv.FormatFloat(f, 'g', 12, 64)
+}
+
+func absInt(n int) int {
+	if n < 0 {
+		return -n
+	}
+	return n
+}
+
+// moveTerm is the phrase for undoing the constant term on an equation's left,
+// so authored prose does not have to guess whether it is being added or
+// subtracted.
+func moveTerm(b int) string {
+	if b >= 0 {
+		return "subtract " + strconv.Itoa(b)
+	}
+	return "add " + strconv.Itoa(-b)
 }
 
 type eqTwoStepGen struct{}
@@ -703,6 +764,7 @@ func (g *eqTwoStepGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		Question:    fmt.Sprintf("Solve: %s = %d", lhs, rhs),
 		Answer:      fmt.Sprintf("%d", x),
 		Explanation: fmt.Sprintf("\\(%s = %d \\to %dx = %d \\to x = %d\\)", lhs, rhs, a, rhs-b, x),
+		Facts:       map[string]string{"lhs": lhs, "rhs": strconv.Itoa(rhs), "a": strconv.Itoa(a), "b": strconv.Itoa(b), "ax_rhs": strconv.Itoa(rhs - b), "x": strconv.Itoa(x), "move": moveTerm(b)},
 	}
 }
 
@@ -719,6 +781,7 @@ func (g *eqWordGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		Question:    fmt.Sprintf("You bought %d %s for $%d. How much does each %s cost?", x, item, total, strings.TrimSuffix(item, "s")),
 		Answer:      fmt.Sprintf("%d", cost),
 		Explanation: fmt.Sprintf("Let p = price. \\(%d \\times p = %d\\). \\(p = \\frac{%d}{%d} = %d\\)", x, total, total, x, cost),
+		Facts:       map[string]string{"count": strconv.Itoa(x), "item": item, "total": strconv.Itoa(total), "cost": strconv.Itoa(cost)},
 	}
 }
 
@@ -735,6 +798,7 @@ func (g *ineqOneStepGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("Solve: \\(x + %d > %d\\)", b, c),
 		Answer:      fmt.Sprintf("%d", x),
 		Explanation: fmt.Sprintf("\\(x + %d > %d\\), subtract %d: \\(x > %d\\)", b, c, b, c-b),
+		Facts:       map[string]string{"b": strconv.Itoa(b), "c": strconv.Itoa(c), "x": strconv.Itoa(c - b)},
 	}
 }
 
@@ -751,6 +815,7 @@ func (g *ineqTwoStepGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    q,
 		Answer:      fmt.Sprintf("%d", x),
 		Explanation: fmt.Sprintf("Solve \\(%s \\to %dx < %d \\to x < %.1f \\to x = %d\\)", q, a, c-b, float64(c-b)/float64(a), x),
+		Facts:       map[string]string{"q": q, "a": strconv.Itoa(a), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "rhs": strconv.Itoa(c - b), "bound": fmt.Sprintf("%.1f", float64(c-b)/float64(a)), "x": strconv.Itoa(x)},
 	}
 }
 

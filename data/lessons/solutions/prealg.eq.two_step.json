@@ -1,0 +1,19 @@
+{
+  "concept": "prealg.eq.two_step",
+  "setup": "The equation is [[lhs]] = [[rhs]].",
+  "steps": [
+    {
+      "fact": "move",
+      "say": "First get the x terms alone on the left. Whatever is attached to them on the left has to be undone on the right too, so [[move]] from both sides — doing it to both sides is what keeps them equal."
+    },
+    {
+      "fact": "ax_rhs",
+      "say": "That leaves [[a]]x on the left and [[ax_rhs]] on the right."
+    },
+    {
+      "fact": "x",
+      "say": "Dividing both sides by [[a]] isolates x."
+    }
+  ],
+  "answer": "So x = [[x]]."
+}

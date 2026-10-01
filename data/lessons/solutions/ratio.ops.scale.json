@@ -1,0 +1,15 @@
+{
+  "concept": "ratio.ops.scale",
+  "setup": "The scale is 1:[[factor]] and the model is [[length]] cm.",
+  "steps": [
+    {
+      "fact": "factor",
+      "say": "A scale of 1:[[factor]] means the real thing is [[factor]] times as large as the model."
+    },
+    {
+      "fact": "actual",
+      "say": "So [[length]] × [[factor]] = [[actual]]."
+    }
+  ],
+  "answer": "The actual length is [[actual]] cm."
+}

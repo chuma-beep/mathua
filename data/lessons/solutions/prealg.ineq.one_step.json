@@ -1,0 +1,15 @@
+{
+  "concept": "prealg.ineq.one_step",
+  "setup": "The inequality is x + [[b]] > [[c]].",
+  "steps": [
+    {
+      "fact": "b",
+      "say": "Subtract [[b]] from both sides to undo the addition — the same move as for an equation, and the greater-than sign keeps its direction because both sides moved by the same amount."
+    },
+    {
+      "fact": "c",
+      "say": "That leaves x > [[x]]."
+    }
+  ],
+  "answer": "So x > [[x]]."
+}

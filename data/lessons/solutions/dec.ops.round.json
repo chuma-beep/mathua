@@ -1,0 +1,15 @@
+{
+  "concept": "dec.ops.round",
+  "setup": "You are rounding [[n]] to two decimal places.",
+  "steps": [
+    {
+      "fact": "third",
+      "say": "Look at the third decimal digit — the one that would be dropped. Here it is [[third]]."
+    },
+    {
+      "fact": "n",
+      "say": "If it is 5 or more the hundredths round up; if less, they stay. Applying that to [[n]] gives the value below."
+    }
+  ],
+  "answer": "Rounded to the nearest hundredth, [[n]] is [[result]]."
+}

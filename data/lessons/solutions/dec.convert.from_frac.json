@@ -1,0 +1,15 @@
+{
+  "concept": "dec.convert.from_frac",
+  "setup": "You are converting [[num]]/[[den]] to a decimal.",
+  "steps": [
+    {
+      "fact": "den",
+      "say": "A fraction is a division written on one line, so converting means dividing [[num]] by [[den]]."
+    },
+    {
+      "fact": "dec",
+      "say": "That quotient is [[dec]]."
+    }
+  ],
+  "answer": "So [[num]]/[[den]] = [[dec]]."
+}

@@ -1,0 +1,15 @@
+{
+  "concept": "arith.exp.neg",
+  "setup": "You are simplifying [[base]]^(−[[exp]]).",
+  "steps": [
+    {
+      "fact": "exp",
+      "say": "A negative exponent means \"divide by that power\", which is the same as taking the reciprocal of the positive power."
+    },
+    {
+      "fact": "value",
+      "say": "So [[base]]^(−[[exp]]) = 1/[[base]]^[[exp]] = 1/[[value]]."
+    }
+  ],
+  "answer": "So it equals 1/[[value]]."
+}

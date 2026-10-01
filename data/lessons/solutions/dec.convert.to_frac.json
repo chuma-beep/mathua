@@ -1,0 +1,15 @@
+{
+  "concept": "dec.convert.to_frac",
+  "setup": "You are converting the decimal [[dec]] to a fraction.",
+  "steps": [
+    {
+      "fact": "over_1000",
+      "say": "A decimal is a fraction over a power of ten: [[dec]] = [[over_1000]]/1000. The three zeros come from the three decimal places."
+    },
+    {
+      "fact": "num",
+      "say": "Then reduce, dividing top and bottom by their common factor."
+    }
+  ],
+  "answer": "In simplest form that is [[num]]/[[den]]."
+}

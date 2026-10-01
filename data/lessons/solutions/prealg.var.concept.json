@@ -1,0 +1,15 @@
+{
+  "concept": "prealg.var.concept",
+  "setup": "x = [[n]], and the expression is 3x.",
+  "steps": [
+    {
+      "fact": "coef",
+      "say": "Writing a number next to a letter means multiplication, so 3x is 3 multiplied by x, not the two-digit number 3 and x together."
+    },
+    {
+      "fact": "n",
+      "say": "Substituting x = [[n]]: 3 × [[n]] = [[result]]."
+    }
+  ],
+  "answer": "So 3x = [[result]]."
+}

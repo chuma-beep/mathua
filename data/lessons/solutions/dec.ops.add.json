@@ -1,0 +1,15 @@
+{
+  "concept": "dec.ops.add",
+  "setup": "You are adding [[a]] and [[b]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Keep the decimal points aligned — that is what makes the place values line up, and it is the whole trick to adding decimals."
+    },
+    {
+      "fact": "result",
+      "say": "Add the hundredths, carry if the column reaches 10, then the tenths, then the ones: [[a]] + [[b]] = [[result]]."
+    }
+  ],
+  "answer": "The total is [[result]]."
+}

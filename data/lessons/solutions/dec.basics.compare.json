@@ -1,0 +1,15 @@
+{
+  "concept": "dec.basics.compare",
+  "setup": "The two decimals to compare are [[a]] and [[b]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Line the decimal points up and read each number in the same order of magnitude. Here both have two decimal places, so the comparison is decided by tenths and hundredths."
+    },
+    {
+      "fact": "op",
+      "say": "[[a]] and [[b]] are not equal, and the larger one comes first, so the sign between them is [[op]]."
+    }
+  ],
+  "answer": "[[a]] [[op]] [[b]]."
+}

@@ -1,0 +1,15 @@
+{
+  "concept": "pct.ops.of_number",
+  "setup": "You want [[p]]% of [[n]].",
+  "steps": [
+    {
+      "fact": "p",
+      "say": "\"Of\" means multiply, and a percent is not yet a decimal — so convert first: [[p]]% = [[rate]]."
+    },
+    {
+      "fact": "n",
+      "say": "Then [[rate]] × [[n]] = [[result]]."
+    }
+  ],
+  "answer": "[[p]]% of [[n]] is [[result]]."
+}

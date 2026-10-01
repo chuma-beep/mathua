@@ -1,0 +1,15 @@
+{
+  "concept": "dec.ops.div",
+  "setup": "You are dividing [[a]] by [[b]].",
+  "steps": [
+    {
+      "fact": "b",
+      "say": "Dividing by a decimal is the same as dividing by a fraction, so move the point in the divisor to make it a whole number — and move it the same number of places in the dividend so the answer keeps its place."
+    },
+    {
+      "fact": "result",
+      "say": "The quotient is [[result]]."
+    }
+  ],
+  "answer": "The quotient is [[result]]."
+}

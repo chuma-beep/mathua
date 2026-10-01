@@ -1,0 +1,15 @@
+{
+  "concept": "arith.neg.order_ops",
+  "setup": "You are evaluating [[a]] + ([[b]]) × [[c]].",
+  "steps": [
+    {
+      "fact": "c",
+      "say": "Multiplication is done before addition, whatever the signs: ([[b]]) × [[c]] = [[product]]."
+    },
+    {
+      "fact": "a",
+      "say": "Then add [[a]], which is [[result]]."
+    }
+  ],
+  "answer": "The value is [[result]]."
+}

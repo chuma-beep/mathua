@@ -1,0 +1,17 @@
+{
+  "concept": "arith.exp.sci_notation",
+  "setup": "This is a conversion between scientific notation and a standard number.",
+  "steps": [
+    {
+      "fact": "isolate",
+      "optional": true,
+      "say": "To write a standard number in scientific notation, shift the point until exactly one nonzero digit sits to its left. From [[std]] that leaves [[coeff]], the point having moved [[places]] place(s)."
+    },
+    {
+      "fact": "direction",
+      "optional": true,
+      "say": "To undo scientific notation, shift the point back by the power of ten: [[coeff]] × 10^[[exp]] moves it [[places]] place(s) [[direction]], giving [[std]]."
+    }
+  ],
+  "answer": "So the value is [[std]]."
+}

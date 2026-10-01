@@ -1,0 +1,15 @@
+{
+  "concept": "prealg.expr.evaluate",
+  "setup": "You are evaluating [[a]]x + [[b]] when x = [[x]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Substitute the value for x wherever it appears, keeping the brackets so the multiplication stays visible."
+    },
+    {
+      "fact": "ax",
+      "say": "[[a]] × [[x]] = [[ax]]."
+    }
+  ],
+  "answer": "The value is [[result]]."
+}

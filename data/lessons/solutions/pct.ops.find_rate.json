@@ -1,0 +1,15 @@
+{
+  "concept": "pct.ops.find_rate",
+  "setup": "[[part]] is what percent of [[total]]?",
+  "steps": [
+    {
+      "fact": "part",
+      "say": "Take the part as a fraction of the whole: [[part]]/[[total]]. A percent is that same fraction written over 100."
+    },
+    {
+      "fact": "p",
+      "say": "Putting it over 100 gives [[p]]/100, which is [[p]]%."
+    }
+  ],
+  "answer": "So [[part]] is [[p]]% of [[total]]."
+}
