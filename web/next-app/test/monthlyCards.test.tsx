@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import MonthlyCards from '../components/MonthlyCards'
 
 function iso(year: number, month: number, day: number): string {
@@ -45,7 +45,7 @@ describe('MonthlyCards strip', () => {
 
   it('shows every grid without toggles', () => {
     const now = new Date()
-    render(
+    const { container } = render(
       <MonthlyCards
         data={[
           entry(now.getFullYear() - 1, now.getMonth(), 3),
@@ -53,9 +53,11 @@ describe('MonthlyCards strip', () => {
         ]}
       />
     )
-    expect(screen.queryByRole('button')).toBeNull()
-    // Both months' grids visible: tooltips from each year present.
-    expect(document.querySelectorAll('div[title*="q,"]').length).toBeGreaterThan(0)
+    const strip = container.querySelector('[data-testid="month-strip"]')
+    // No toggle buttons inside the strip; both months' grids visible.
+    expect(strip?.querySelector('button')).toBeNull()
+    expect(strip?.textContent).toContain(String(now.getFullYear()))
+    expect(strip?.textContent).toContain(String(now.getFullYear() - 1))
   })
 
   it('shows heat cells without day numbers, tooltips intact', () => {
@@ -77,6 +79,36 @@ describe('MonthlyCards strip', () => {
     expect(card?.className).toContain('w-[272px]')
     const cell = container.querySelector('div[title=""]')
     expect(cell?.className).toContain('w-5')
+  })
+
+  it('pages one month at a time with prev/next buttons', () => {
+    const now = new Date()
+    const old = new Date(now.getFullYear(), now.getMonth() - 2, 1)
+    render(
+      <MonthlyCards
+        data={[
+          entry(old.getFullYear(), old.getMonth(), 3),
+          entry(now.getFullYear(), now.getMonth(), 5),
+        ]}
+      />
+    )
+    const prev = screen.getByRole('button', { name: 'Previous month' })
+    const next = screen.getByRole('button', { name: 'Next month' })
+    // Newest selected by default; next clamped.
+    expect(next).toBeDisabled()
+    expect(prev).not.toBeDisabled()
+    fireEvent.click(prev)
+    // Stepped one month back; prev still enabled (older month remains).
+    expect(next).not.toBeDisabled()
+    fireEvent.click(next)
+    expect(next).toBeDisabled()
+  })
+
+  it('clamps the pager at the oldest month', () => {
+    const now = new Date()
+    render(<MonthlyCards data={[entry(now.getFullYear(), now.getMonth(), 5)]} />)
+    expect(screen.getByRole('button', { name: 'Previous month' })).toBeDisabled()
+    expect(screen.getByRole('button', { name: 'Next month' })).toBeDisabled()
   })
 
   it('trims day headers to Mo/We/Fr', () => {
