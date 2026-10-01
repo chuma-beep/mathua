@@ -39,6 +39,7 @@ import (
 	"github.com/chuma-beep/mathua/internal/planning"
 	"github.com/chuma-beep/mathua/internal/repair"
 	"github.com/chuma-beep/mathua/internal/server"
+	"github.com/chuma-beep/mathua/internal/solutions"
 	"github.com/chuma-beep/mathua/internal/storage"
 )
 
@@ -109,6 +110,15 @@ func main() {
 	ll, err := lessons.Load("data/lessons")
 	if err != nil {
 		fmt.Printf("lessons not loaded: %v (continuing without lessons)\n", err)
+	}
+
+	// Corpus solution schemas: authored prose per concept, interpolated with
+	// the facts each generator publishes. Optional — without them every problem
+	// keeps the generator's own explanation.
+	if sol, err := solutions.Load("data/lessons/solutions"); err != nil {
+		fmt.Printf("solution schemas not loaded: %v (using generator explanations)\n", err)
+	} else {
+		reg.SetSolutions(sol)
 	}
 
 	// Purge stored questions for concepts that have live generators: rows
