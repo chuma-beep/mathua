@@ -69,7 +69,7 @@ export default function DangerZone() {
   }
 
   return (
-    <div className="border border-mathua-red/60 bg-mathua-surface p-4 sm:p-6 min-w-0">
+    <div className="border border-mathua-red bg-mathua-surface p-4 sm:p-6 min-w-0">
       <span className="font-mono text-sm text-mathua-red">Reset progress</span>
       <p className="text-mathua-muted text-xs mt-1">
         Wipes your learning record. This cannot be undone.

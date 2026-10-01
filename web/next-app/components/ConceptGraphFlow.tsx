@@ -1123,7 +1123,7 @@ function GraphInner({
             <button
               type="button"
               onClick={() => onNodeSelect?.(selected.id)}
-              className="text-[12px] font-mono text-[#60a5fa] bg-transparent border border-mathua-blue/30 rounded-none px-3 py-1.5 min-h-[36px] sm:min-h-[36px] w-full sm:w-auto sm:ml-auto shrink-0 inline-flex items-center justify-center hover:bg-mathua-blue/10 transition-colors"
+              className="text-[12px] font-mono text-[#60a5fa] bg-transparent border border-mathua-blue rounded-none px-3 py-1.5 min-h-[36px] sm:min-h-[36px] w-full sm:w-auto sm:ml-auto shrink-0 inline-flex items-center justify-center hover:bg-mathua-blue-faint transition-colors"
             >
               Open concept →
             </button>

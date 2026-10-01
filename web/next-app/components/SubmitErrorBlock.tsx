@@ -39,7 +39,7 @@ export default function SubmitErrorBlock({
   return (
     <div
       role="alert"
-      className="border border-mathua-red/60 bg-mathua-surface p-4 text-left"
+      className="border border-mathua-red bg-mathua-surface p-4 text-left"
     >
       <p className="font-mono text-xs text-mathua-red">
         {sessionGone
@@ -55,7 +55,7 @@ export default function SubmitErrorBlock({
             type="button"
             onClick={onRetry}
             disabled={retrying}
-            className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-4 h-10 font-mono text-xs disabled:opacity-50"
+            className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-4 h-10 font-mono text-xs disabled:opacity-50"
           >
             {retrying ? 'Retrying…' : 'Retry'}
           </button>

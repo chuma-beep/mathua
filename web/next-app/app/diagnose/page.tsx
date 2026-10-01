@@ -88,7 +88,7 @@ export default function DiagnosePage() {
         <div className="flex gap-3 justify-center max-sm:flex-col max-sm:items-center min-w-0">
           <Link
             href="/onboard"
-            className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 rounded-none h-10 min-h-[36px] px-6 text-[13px] font-medium transition-colors flex items-center justify-center w-full sm:w-auto max-w-[280px]"
+            className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-10 min-h-[36px] px-6 text-[13px] font-medium transition-colors flex items-center justify-center w-full sm:w-auto max-w-[280px]"
           >
             Start diagnostic test
           </Link>

@@ -247,7 +247,7 @@ npm run dev`}
                   <span
                     className={`shrink-0 font-mono text-[10px] border px-1.5 py-0.5 ${
                       req === 'Yes'
-                        ? 'text-mathua-green border-mathua-green/50'
+                        ? 'text-mathua-green border-mathua-green'
                         : 'text-mathua-muted border-mathua-border'
                     }`}
                   >

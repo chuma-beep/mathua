@@ -149,7 +149,7 @@ export default function AdminReportsPage() {
                 <button
                   type="submit"
                   disabled={loggingIn || !password}
-                  className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 transition-colors px-4 h-11 text-sm font-mono disabled:opacity-50"
+                  className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint transition-colors px-4 h-11 text-sm font-mono disabled:opacity-50"
                 >
                   {loggingIn ? 'Checking…' : 'Log in'}
                 </button>

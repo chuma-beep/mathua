@@ -40,7 +40,7 @@ export default function NextUpSummary({ shelf }: { shelf: Shelf }) {
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
         <div className="min-w-0">
           <div className="flex items-center gap-2 min-w-0">
-            <span className="shrink-0 bg-mathua-blue/10 text-mathua-blue px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
+            <span className="shrink-0 bg-mathua-blue-faint text-mathua-blue px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
               {next.badge}
             </span>
             <span className="font-mono text-[10px] text-mathua-muted uppercase tracking-wider">Next up</span>
@@ -54,7 +54,7 @@ export default function NextUpSummary({ shelf }: { shelf: Shelf }) {
         </div>
         <Link
           href={next.href}
-          className="w-full sm:w-auto sm:shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap"
+          className="w-full sm:w-auto sm:shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap"
         >
           {next.cta}
         </Link>

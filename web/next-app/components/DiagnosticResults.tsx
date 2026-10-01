@@ -158,7 +158,7 @@ export default function DiagnosticResults({ plan, onStartPractice }: Props) {
 
       {onStartPractice && (
         <div className="text-center">
-          <button type="button" onClick={onStartPractice} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue/10 px-10 h-12 font-mono text-sm">
+          <button type="button" onClick={onStartPractice} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-10 h-12 font-mono text-sm">
             Start practicing →
           </button>
           <div className="mt-3">
