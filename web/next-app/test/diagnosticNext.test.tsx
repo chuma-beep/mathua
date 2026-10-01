@@ -512,6 +512,55 @@ describe('QuizHost manual advance', () => {
     expect(screen.getByPlaceholderText(/your answer/i)).toBe(document.activeElement)
   })
 
+  // The quiz response never carried an explanation, so a miss showed the
+  // grader's status token and a hit showed nothing. It now sends the served
+  // instance's worked solution on both verdicts, like the diagnostic path.
+  it('shows the served explanation on a wrong quiz answer, never the status token', async () => {
+    vi.mocked(submitQuizAnswer).mockResolvedValueOnce({
+      done: false,
+      correct: false,
+      feedback: 'Incorrect',
+      explanation: '3 and 5 make 8: start at 3 and count on 5.',
+      xp: 0,
+      concept_id: 'c2',
+      concept_name: 'Q2 quiz',
+      question: 'Quiz Q2 text',
+      grading_type: 'numeric',
+      time_limit_seconds: 30,
+    })
+    render(<QuizHost />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Start quiz →' }))
+    await screen.findByText('Quiz Q1 text')
+    fireEvent.change(screen.getByPlaceholderText(/your answer/i), { target: { value: '9' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
+
+    expect(await screen.findByText(/start at 3 and count on 5/)).toBeInTheDocument()
+    expect(screen.queryByText('Incorrect')).toBeNull()
+  })
+
+  it('shows the quiz explanation on a correct answer too', async () => {
+    vi.mocked(submitQuizAnswer).mockResolvedValueOnce({
+      done: false,
+      correct: true,
+      feedback: '',
+      explanation: 'Because 3 + 5 = 8, checked by counting on from 3.',
+      xp: 2,
+      concept_id: 'c2',
+      concept_name: 'Q2 quiz',
+      question: 'Quiz Q2 text',
+      grading_type: 'numeric',
+      time_limit_seconds: 30,
+    })
+    render(<QuizHost />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Start quiz →' }))
+    await screen.findByText('Quiz Q1 text')
+    fireEvent.change(screen.getByPlaceholderText(/your answer/i), { target: { value: '8' } })
+    fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
+
+    expect(await screen.findByText('✓ Correct!')).toBeInTheDocument()
+    expect(screen.getByText(/checked by counting on from 3/)).toBeInTheDocument()
+  })
+
   it('QuizHost shows the error block and Skip advances without XP', async () => {
     vi.mocked(submitQuizAnswer).mockRejectedValueOnce(
       Object.assign(new Error('Quiz answer failed: 500'), {

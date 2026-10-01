@@ -2758,11 +2758,20 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 	// answer, and the XP/mastery update can never disagree.
 	expected := sess.LastProblem.Answer
 	gr := s.eng.GradeAnswer(req.ConceptID, expected, req.Answer)
+	// The session already holds the explanation the generator produced for the
+	// question that was served. Send it on every verdict — a correct answer
+	// still needs the reasoning that made it right — and fall back to the
+	// grader's status token only if it is somehow empty. Same contract as
+	// handleGoalDiagnosticAnswer, which was the one path already doing this.
+	explanation := sess.LastProblem.Explanation
 	feedback := gr.Feedback
+	if explanation == "" {
+		explanation = feedback
+	}
 	if req.DontKnow {
 		// Admitted unknown: forced miss, teaching content as feedback.
 		gr = grader.Result{Correct: false}
-		feedback = sess.LastProblem.Explanation
+		feedback = explanation
 		if feedback == "" {
 			feedback = "Not quite."
 		}
@@ -2810,7 +2819,7 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 		delete(s.quizSessions, req.SessionID)
 		delete(s.quizCreated, req.SessionID)
 		s.mu.Unlock()
-		writeJSON(w, map[string]interface{}{"done": true, "correct": gr.Correct, "feedback": feedback, "xp": xp, "new_status": newStatus, "remedial": remedial, "retake_available": true})
+		writeJSON(w, map[string]interface{}{"done": true, "correct": gr.Correct, "feedback": feedback, "explanation": explanation, "xp": xp, "new_status": newStatus, "remedial": remedial, "retake_available": true})
 		return
 	}
 	prob, cid, err := qEng.NextQuestion(sess)
@@ -2827,6 +2836,7 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 		"done":               false,
 		"correct":            gr.Correct,
 		"feedback":           feedback,
+		"explanation":        explanation,
 		"xp":                 xp,
 		"new_status":         newStatus,
 		"remedial":           remedial,
