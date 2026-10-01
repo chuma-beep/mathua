@@ -105,7 +105,14 @@ go test ./... -count 1
 go run scripts/validate_graph.go
 python3 scripts/audit_lessons.py
 go test ./internal/generator/... -run TestFuzz -count 1000  # local full; CI runs -count 100
+make e2e                                                     # browsers; CI runs it sharded
 ```
+
+`make e2e` is not optional if you touched a route, a button label or where a
+component lives. The unit suite renders components in isolation and cannot see
+any of those: a renamed button and a page that moved both reached `main` green
+on `vitest` while six Playwright tests failed.
+
 
 ### 4. (Optional) Write a lesson
 
