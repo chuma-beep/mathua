@@ -2,9 +2,10 @@
 
 import { useMemo } from 'react'
 import type { DailyActivity } from '../lib/api'
-import { heatColor, heatTextColor } from '../lib/heatColor'
+import { heatColor } from '../lib/heatColor'
 
 const DAY_HEADERS = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
+const SHOWN_DAY_HEADERS = new Set(['Mo', 'We', 'Fr'])
 const MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
 interface Props {
@@ -127,7 +128,7 @@ export default function MonthCard({ year, month, data, expanded, onToggle }: Pro
                     key={dh}
                     className="w-[11px] h-[11px] flex items-center justify-center font-mono text-[8px] text-mathua-muted shrink-0"
                   >
-                    {dh}
+                    {SHOWN_DAY_HEADERS.has(dh) ? dh : ''}
                   </div>
                 ))}
               </div>
@@ -142,15 +143,12 @@ export default function MonthCard({ year, month, data, expanded, onToggle }: Pro
                           ? `${MONTH_NAMES[month].slice(0, 3)} ${cell.date}: ${cell.questions}q, ${cell.questions > 0 ? Math.round((cell.correct / cell.questions) * 100) : 0}%`
                           : ''
                       }
-                      className="w-[11px] h-[11px] flex items-center justify-center font-mono text-[7px] shrink-0 border-[0.5px]"
+                      className="w-[11px] h-[11px] shrink-0 border-[0.5px]"
                       style={{
                         background: cell ? heatColor(cell.level) : 'transparent',
                         borderColor: cell ? 'var(--border)' : 'transparent',
-                        color: cell ? heatTextColor(cell.level) : 'var(--text-muted)',
                       }}
-                    >
-                      {cell?.date}
-                    </div>
+                    />
                   ))}
                 </div>
               ))}
