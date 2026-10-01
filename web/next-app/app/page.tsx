@@ -31,14 +31,18 @@ export default function HomePage() {
 
   function handleGetStarted() {
     ensureGuestId()
-    // Mint the guest token before landing on /profile so the first scores
-    // fetch already carries a credential. Best-effort.
-    ensureGuestToken().finally(() => push('/profile'))
+    // Mint the guest token before landing so the first answer is graded against
+    // a server-side anchor and recorded against the guest id.
+    ensureGuestToken().finally(() => push('/learn'))
   }
 
   return (
     <>
-      <Header links={[{ label: 'Study', href: '/study' }, { label: 'How it works', href: '/how-it-works' }, { label: 'Docs', href: '/docs' }, { label: 'Note', href: '/note' }, { label: 'Leaderboard', href: '/leaderboard' }, { label: 'Login', href: '/login' }]} />
+      {/* The landing hardcodes its own header rather than inheriting lib/nav.ts,
+          because a marketing page wants Docs and How it works inline. Learn is
+          still listed first: the primary destination of the product should not
+          vanish on the page that introduces it. */}
+      <Header links={[{ label: 'Learn', href: '/learn' }, { label: 'Study', href: '/study' }, { label: 'How it works', href: '/how-it-works' }, { label: 'Docs', href: '/docs' }, { label: 'Note', href: '/note' }, { label: 'Leaderboard', href: '/leaderboard' }, { label: 'Login', href: '/login' }]} />
       <main className="max-w-container mx-auto px-4 sm:px-6 overflow-x-clip min-w-0">
         <HeroSection theme={theme} onGetStarted={handleGetStarted} />
         <TrustSection />
