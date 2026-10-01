@@ -1,0 +1,15 @@
+{
+  "concept": "alg.func.concept",
+  "setup": "f(x) = [[a]]x + [[b]], and you want f at [[x]].",
+  "steps": [
+    {
+      "fact": "ax",
+      "say": "f([[x]]) means: put [[x]] in place of x everywhere it appears, then work out the value."
+    },
+    {
+      "fact": "y",
+      "say": "[[a]] × [[x]] = [[ax]], and adding [[b]] gives [[y]]."
+    }
+  ],
+  "answer": "So f([[x]]) = [[y]]."
+}

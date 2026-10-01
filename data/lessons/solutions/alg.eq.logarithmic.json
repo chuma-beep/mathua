@@ -1,0 +1,15 @@
+{
+  "concept": "alg.eq.logarithmic",
+  "setup": "You are solving log base [[base]] of x = [[e]].",
+  "steps": [
+    {
+      "fact": "v",
+      "say": "A logarithm equation is an exponent equation in disguise: \"log base [[base]] of x = [[e]]\" says the same thing as \"[[base]] raised to [[e]] gives x\", so x = [[base]]^[[e]]."
+    },
+    {
+      "fact": "v",
+      "say": "That evaluates to [[v]]."
+    }
+  ],
+  "answer": "So x = [[v]]."
+}

@@ -1,0 +1,15 @@
+{
+  "concept": "alg.exp.concept",
+  "setup": "f(x) = [[base]]^x, and you want f([[x]]).",
+  "steps": [
+    {
+      "fact": "x",
+      "say": "An exponential function multiplies the base by itself once for each step, so the exponent counts the multiplications."
+    },
+    {
+      "fact": "val",
+      "say": "[[base]] to the power [[x]] is [[val]]."
+    }
+  ],
+  "answer": "So f([[x]]) = [[val]]."
+}

@@ -1,0 +1,15 @@
+{
+  "concept": "alg.log.concept",
+  "setup": "[[base]]^[[exp]] = [[val]], and you are asked to write it as a logarithm.",
+  "steps": [
+    {
+      "fact": "val",
+      "say": "A logarithm asks the question a power statement answers: \"to what exponent does the base have to be raised?\" Here the base is [[base]] and the result is [[val]]."
+    },
+    {
+      "fact": "exp",
+      "say": "The exponent that does it is [[exp]]."
+    }
+  ],
+  "answer": "So log base [[base]] of [[val]] is [[exp]]."
+}

@@ -1,0 +1,15 @@
+{
+  "concept": "alg.func.composite",
+  "setup": "f(x) = [[a]]x and g(x) = x + [[b]], and you want f(g([[x]])).",
+  "steps": [
+    {
+      "fact": "gx",
+      "say": "A composite is read inside out: g([[x]]) first, and its result becomes the input to f."
+    },
+    {
+      "fact": "y",
+      "say": "g([[x]]) = [[gx]], so f is applied to [[gx]]: [[a]] × [[gx]] = [[y]]."
+    }
+  ],
+  "answer": "So f(g([[x]])) = [[y]]."
+}

@@ -1,0 +1,27 @@
+{
+  "concept": "alg.func.linear",
+  "setup": "This is about the line y = mx + b, or whether a relation is a function at all.",
+  "steps": [
+    {
+      "fact": "is_slope",
+      "say": "In y = mx + b the m is the slope, so it can be read straight off the coefficient of x.",
+      "optional": true
+    },
+    {
+      "fact": "is_intercept",
+      "say": "The b is the y-intercept: the value of y when x is 0, which is the point where the line crosses the y-axis.",
+      "optional": true
+    },
+    {
+      "fact": "is_linear_yes",
+      "say": "A non-vertical straight line hits any vertical line at exactly one point, so it passes the vertical line test and defines a function.",
+      "optional": true
+    },
+    {
+      "fact": "is_vertical",
+      "say": "Here x is pinned to a single value, which makes the relation a vertical line. A vertical line meets most vertical lines at a whole point rather than one, so it fails the vertical line test and is not a function.",
+      "optional": true
+    }
+  ],
+  "answer": "So the answer is [[answer]]."
+}

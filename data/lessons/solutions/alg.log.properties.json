@@ -1,0 +1,15 @@
+{
+  "concept": "alg.log.properties",
+  "setup": "You are simplifying log base [[base]] of ([[a]] × [[b]]).",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The rule that helps is that the log of a product splits into the sum of the logs — which holds because multiplying the two arguments multiplies the two powers behind them."
+    },
+    {
+      "fact": "b",
+      "say": "So it becomes log base [[base]] of [[a]] plus log base [[base]] of [[b]]."
+    }
+  ],
+  "answer": "So it simplifies to the sum of the two logarithms."
+}

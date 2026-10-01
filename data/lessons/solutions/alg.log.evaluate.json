@@ -1,0 +1,15 @@
+{
+  "concept": "alg.log.evaluate",
+  "setup": "You are evaluating log base [[base]] of [[val]].",
+  "steps": [
+    {
+      "fact": "val",
+      "say": "Evaluating a logarithm means finding the exponent, so ask: [[base]] raised to what power gives [[val]]?"
+    },
+    {
+      "fact": "exp",
+      "say": "It is [[exp]], since [[base]]^[[exp]] = [[val]]."
+    }
+  ],
+  "answer": "So the value is [[exp]]."
+}

@@ -1,0 +1,11 @@
+{
+  "concept": "alg.func.monotonicity",
+  "setup": "f(x) = [[a]]x, and you want whether it rises or falls.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "A straight line through the origin rises or falls according to its slope, which here is [[a]] — a [[sign]] slope."
+    }
+  ],
+  "answer": "So the function is [[dir]]."
+}

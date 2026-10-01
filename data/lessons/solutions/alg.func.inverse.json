@@ -1,0 +1,15 @@
+{
+  "concept": "alg.func.inverse",
+  "setup": "f(x) = [[a]]x + [[b]], and you want f⁻¹(x).",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The inverse undoes f, so write y = [[a]]x + [[b]] and solve for x in terms of y."
+    },
+    {
+      "fact": "neg_b",
+      "say": "Rearranging gives x = (y + [[neg_b]]) / [[a]]. Swapping the letters back — the inverse takes y where the function took x."
+    }
+  ],
+  "answer": "So f⁻¹(x) = (x + [[neg_b]])/[[a]]."
+}

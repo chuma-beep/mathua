@@ -1,0 +1,15 @@
+{
+  "concept": "alg.func.quad",
+  "setup": "f(x) = [[a]]x² + [[b]], and you want f(2).",
+  "steps": [
+    {
+      "fact": "four_a",
+      "say": "At x = 2 the square is 2² = 4, so the first term becomes [[a]] × 4 = [[four_a]]."
+    },
+    {
+      "fact": "y",
+      "say": "Adding the constant [[b]] gives [[y]]."
+    }
+  ],
+  "answer": "So f(2) = [[y]]."
+}
