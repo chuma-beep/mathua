@@ -1,0 +1,19 @@
+{
+  "setup": "You are subtracting $[[w2]] \\frac{[[n2]]}{[[den]]}$ from $[[w1]] \\frac{[[n1]]}{[[den]]}$.",
+  "steps": [
+    {
+      "fact": "a_improper",
+      "say": "Convert both to improper fractions over the same bottom: the first becomes $\\frac{[[a_improper]]}{[[den]]}$ and the second $\\frac{[[b_improper]]}{[[den]]}$."
+    },
+    {
+      "fact": "result",
+      "say": "Subtract the tops, keeping [[den]]: [[a_improper]] − [[b_improper]] = [[result]]."
+    },
+    {
+      "fact": "whole",
+      "say": "[[result]] ÷ [[den]] is [[whole]] with [[rem]] left over."
+    }
+  ],
+  "answer": "So the difference is $[[whole]] \\frac{[[rem]]}{[[rem_den]]}$.",
+  "concept": "frac.mixed.sub"
+}

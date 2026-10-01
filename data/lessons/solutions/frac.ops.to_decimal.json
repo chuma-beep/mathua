@@ -1,0 +1,15 @@
+{
+  "setup": "Converting $\\frac{[[num]]}{[[den]]}$ to a decimal means dividing [[num]] by [[den]].",
+  "steps": [
+    {
+      "fact": "den",
+      "say": "A fraction whose denominator divides a power of 10 — here [[den]] — converts by placing the digits rather than by long division."
+    },
+    {
+      "fact": "dec",
+      "say": "[[num]] ÷ [[den]] = [[dec]]."
+    }
+  ],
+  "answer": "So $\\frac{[[num]]}{[[den]]} = [[dec]]$ as a decimal.",
+  "concept": "frac.ops.to_decimal"
+}

@@ -1,0 +1,15 @@
+{
+  "setup": "A fraction between 0 and 1 is found by dividing the line from 0 to 1 into [[den]] equal gaps and counting [[num]] of them.",
+  "steps": [
+    {
+      "fact": "dec",
+      "say": "$\\frac{[[num]]}{[[den]]}$ means [[num]] of the [[den]] equal gaps, so on a 0-to-1 line it sits at [[dec]]."
+    },
+    {
+      "fact": "den",
+      "say": "Every part is the same size, which is what makes the position a fraction of the whole rather than an approximation."
+    }
+  ],
+  "answer": "So the point is [[dec]] along a number line running from 0 to 1.",
+  "concept": "frac.basics.number_line"
+}

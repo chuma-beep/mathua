@@ -1,0 +1,19 @@
+{
+  "setup": "The whole pizza is cut into equal slices. You eat $\\frac{[[a_num]]}{[[a_den]]}$ of it and your friend eats $\\frac{[[b_num]]}{[[b_den]]}$.",
+  "steps": [
+    {
+      "fact": "lcm",
+      "say": "\"How much pizza\" is one whole, so the two fractions have to be measured against the same whole. The slices are different sizes, so convert both to the smallest common denominator: LCM([[a_den]], [[b_den]]) = [[lcm]]."
+    },
+    {
+      "fact": "a_scaled",
+      "say": "That makes your share $\\frac{[[a_scaled]]}{[[lcm]]}$ of the pizza and your friend's $\\frac{[[b_scaled]]}{[[lcm]]}$."
+    },
+    {
+      "fact": "raw_num",
+      "say": "Add them: [[a_scaled]] + [[b_scaled]] = [[raw_num]], out of [[raw_den]]."
+    }
+  ],
+  "answer": "Together that is $\\frac{[[raw_num]]}{[[raw_den]]}$ of the pizza — in lowest terms, $\\frac{[[out_num]]}{[[out_den]]}$.",
+  "concept": "frac.add.word"
+}

@@ -1,0 +1,19 @@
+{
+  "setup": "You are rewriting $\\frac{[[num]]}{[[den]]}$ by multiplying the top and the bottom by [[mult]].",
+  "steps": [
+    {
+      "fact": "mult",
+      "say": "Multiplying the top and the bottom by the **same** number [[mult]] does not change the value — you are just counting in finer pieces, like cutting each piece into [[mult]] smaller ones."
+    },
+    {
+      "fact": "eq_num",
+      "say": "The top goes from [[num]] to [[num]] × [[mult]] = [[eq_num]]."
+    },
+    {
+      "fact": "eq_den",
+      "say": "The bottom goes from [[den]] to [[den]] × [[mult]] = [[eq_den]]."
+    }
+  ],
+  "answer": "So $\\frac{[[num]]}{[[den]]} = \\frac{[[eq_num]]}{[[eq_den]]}$, and the fraction is still worth exactly the same amount.",
+  "concept": "frac.basics.equivalent"
+}

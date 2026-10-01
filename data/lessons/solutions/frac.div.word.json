@@ -1,0 +1,19 @@
+{
+  "setup": "You have $\\frac{[[a_num]]}{[[a_den]]}$ liters of juice and each glass takes $\\frac{[[b_num]]}{[[b_den]]}$ liters.",
+  "steps": [
+    {
+      "fact": "flipped_num",
+      "say": "\"How many glasses fit\" is a fraction divided by a fraction, and dividing by a fraction means using its reciprocal: $\\frac{[[b_num]]}{[[b_den]]}$ becomes $\\frac{[[flipped_num]]}{[[flipped_den]]}$."
+    },
+    {
+      "fact": "raw_num",
+      "say": "Now multiply across: [[a_num]] × [[flipped_num]] = [[raw_num]] on top, and [[a_den]] × [[flipped_den]] = [[raw_den]] underneath."
+    },
+    {
+      "fact": "out_den",
+      "say": "[[a_den]] × [[flipped_den]] = [[out_den]] underneath."
+    }
+  ],
+  "answer": "Reducing gives $\\frac{[[out_num]]}{[[out_den]]}$ of a glass. Check the size: the answer is in the same units as one glass, since that is what you are counting in.",
+  "concept": "frac.div.word"
+}

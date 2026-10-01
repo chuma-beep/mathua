@@ -1,0 +1,19 @@
+{
+  "setup": "You start with $\\frac{[[a_num]]}{[[a_den]]}$ of a cake and give away $\\frac{[[b_num]]}{[[b_den]]}$ of it.",
+  "steps": [
+    {
+      "fact": "lcm",
+      "say": "Both amounts are parts of the same cake, so measure them against a common whole: LCM([[a_den]], [[b_den]]) = [[lcm]]."
+    },
+    {
+      "fact": "a_scaled",
+      "say": "That is $\\frac{[[a_scaled]]}{[[lcm]]}$ had and $\\frac{[[b_scaled]]}{[[lcm]]}$ given away."
+    },
+    {
+      "fact": "raw_num",
+      "say": "Take the smaller from the larger: [[a_scaled]] − [[b_scaled]] = [[raw_num]], out of [[raw_den]]."
+    }
+  ],
+  "answer": "So $\\frac{[[raw_num]]}{[[raw_den]]}$ of the cake is left — in lowest terms, $\\frac{[[out_num]]}{[[out_den]]}$.",
+  "concept": "frac.sub.word"
+}

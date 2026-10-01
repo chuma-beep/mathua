@@ -1,0 +1,15 @@
+{
+  "setup": "The bar below is cut into [[parts]] equal parts, and [[filled]] of them are marked.",
+  "steps": [
+    {
+      "fact": "parts",
+      "say": "Count the slots: the bar is cut into [[parts]] equal pieces. That number is the **denominator**, because it says how many pieces make the whole."
+    },
+    {
+      "fact": "filled",
+      "say": "Count the marked pieces: [[filled]]. That number is the **numerator**, because it says how many pieces of the whole are taken."
+    }
+  ],
+  "answer": "So the fraction is [[filled]]/[[parts]].",
+  "concept": "frac.basics.concept"
+}

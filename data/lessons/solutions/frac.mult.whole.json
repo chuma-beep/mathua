@@ -1,0 +1,15 @@
+{
+  "setup": "You are multiplying $\\frac{[[num]]}{[[den]]}$ by the whole number [[whole]].",
+  "steps": [
+    {
+      "fact": "raw_num",
+      "say": "Multiplying by a whole number means counting the fraction that many times, so the top goes up: [[num]] × [[whole]] = [[raw_num]]."
+    },
+    {
+      "fact": "raw_den",
+      "say": "The bottom [[raw_den]] is unchanged — [[whole]]/1 in disguise, and 1 leaves any denominator alone."
+    }
+  ],
+  "answer": "In lowest terms that is $\\frac{[[out_num]]}{[[out_den]]}$.",
+  "concept": "frac.mult.whole"
+}

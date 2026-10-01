@@ -1,0 +1,15 @@
+{
+  "setup": "This is a conversion between a mixed number and an improper fraction, which are two ways of writing the same amount.",
+  "steps": [
+    {
+      "fact": "scaled",
+      "say": "To turn a mixed number into an improper fraction, turn the whole part into [[den]]s first: [[whole]] × [[den]] = [[scaled]]."
+    },
+    {
+      "fact": "improper",
+      "say": "Then add the existing top on top of that: [[scaled]] + [[num]] = [[improper]]."
+    }
+  ],
+  "answer": "So the improper fraction is $\\frac{[[improper]]}{[[den]]}$. Going the other way, divide [[improper]] by [[den]]: the quotient is [[whole]] with [[rem]] left over, so it is $[[whole]] \\frac{[[rem]]}{[[den]]}$.",
+  "concept": "frac.mixed.convert"
+}

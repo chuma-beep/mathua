@@ -50,6 +50,15 @@ func mixStr(whole, num, den int) string {
 
 func lcm(a, b int) int { return a * b / mathutil.GCD(a, b) }
 
+// opIng is the word form of an operator, so authored prose can say "you are
+// adding" without branching on the symbol in the schema.
+func opIng(op string) string {
+	if op == "-" {
+		return "subtracting"
+	}
+	return "adding"
+}
+
 func reduce(num, den int) (int, int) {
 	g := mathutil.GCD(num, den)
 	return num / g, den / g
@@ -79,6 +88,7 @@ func (g *fracConceptGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("What fraction of the bar is filled?\n\n\\(%s\\)", bar.String()),
 		Answer:      fracStr(num, den),
 		Explanation: fmt.Sprintf("%d out of %d equal parts are filled = %d/%d", num, den, num, den),
+		Facts:       map[string]string{"filled": strconv.Itoa(num), "parts": strconv.Itoa(den)},
 	}
 }
 
@@ -94,12 +104,14 @@ func (g *fracPartsGen) Generate(ctx generator.GeneratorContext) generator.Proble
 			Question:    fmt.Sprintf("In the fraction \\(\\frac{%d}{%d}\\), what is the denominator?", num, den),
 			Answer:      strconv.Itoa(den),
 			Explanation: fmt.Sprintf("The denominator %d tells how many equal parts make the whole.", den),
+			Facts:       map[string]string{"num": strconv.Itoa(num), "den": strconv.Itoa(den)},
 		}
 	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("In the fraction \\(\\frac{%d}{%d}\\), what is the numerator?", num, den),
 		Answer:      strconv.Itoa(num),
 		Explanation: fmt.Sprintf("The numerator %d tells how many parts we have.", num),
+		Facts:       map[string]string{"num": strconv.Itoa(num), "den": strconv.Itoa(den)},
 	}
 }
 
@@ -113,6 +125,7 @@ func (g *fracNumberLineGen) Generate(ctx generator.GeneratorContext) generator.P
 		Question:    fmt.Sprintf("Where is \\(\\frac{%d}{%d}\\) on a number line from \\(0\\) to \\(1\\)?", num, den),
 		Answer:      fmt.Sprintf("%.2f", float64(num)/float64(den)),
 		Explanation: fmt.Sprintf("%d/%d = %.2f, located between 0 and 1.", num, den, float64(num)/float64(den)),
+		Facts:       map[string]string{"num": strconv.Itoa(num), "den": strconv.Itoa(den), "dec": fmt.Sprintf("%.2f", float64(num)/float64(den))},
 	}
 }
 
@@ -128,6 +141,7 @@ func (g *fracEquivalentGen) Generate(ctx generator.GeneratorContext) generator.P
 		Question:    fmt.Sprintf("Find an equivalent fraction to \\(\\frac{%d}{%d}\\) by multiplying numerator and denominator by \\(%d\\).", num, den, mult),
 		Answer:      goal,
 		Explanation: fmt.Sprintf("%d/%d x %d/%d = %d/%d", num, den, mult, mult, num*mult, den*mult),
+		Facts:       map[string]string{"num": strconv.Itoa(num), "den": strconv.Itoa(den), "mult": strconv.Itoa(mult), "eq_num": strconv.Itoa(num * mult), "eq_den": strconv.Itoa(den * mult)},
 	}
 }
 
@@ -150,6 +164,7 @@ func (g *fracSimplifyGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		Question:    fmt.Sprintf("Simplify: \\(\\frac{%d}{%d}\\)", num, den),
 		Answer:      fracStr(n, d),
 		Explanation: fmt.Sprintf("Divide numerator and denominator by %d: %d/%d = %d/%d", mathutil.GCD(num, den), num, den, n, d),
+		Facts:       map[string]string{"num": strconv.Itoa(num), "den": strconv.Itoa(den), "gcd": strconv.Itoa(mathutil.GCD(num, den)), "out_num": strconv.Itoa(n), "out_den": strconv.Itoa(d)},
 	}
 }
 
@@ -174,6 +189,7 @@ func (g *fracCompareGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("Compare: \\(\\frac{%d}{%d} \\_\\_ \\frac{%d}{%d}\\) (enter > or <)", aNum, aDen, bNum, bDen),
 		Answer:      ans,
 		Explanation: fmt.Sprintf("%d/%d = %.3f, %d/%d = %.3f, so %d/%d %s %d/%d", aNum, aDen, av, bNum, bDen, bv, aNum, aDen, ans, bNum, bDen),
+		Facts:       map[string]string{"a_num": strconv.Itoa(aNum), "a_den": strconv.Itoa(aDen), "a_val": fmt.Sprintf("%.3f", av), "b_num": strconv.Itoa(bNum), "b_den": strconv.Itoa(bDen), "b_val": fmt.Sprintf("%.3f", bv), "op": ans},
 	}
 }
 
@@ -197,6 +213,7 @@ func (g *fracBenchmarkGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Question:    fmt.Sprintf("Is \\(\\frac{%d}{%d}\\) greater than, less than, or equal to \\(\\frac{1}{2}\\)?", num, den),
 		Answer:      ans,
 		Explanation: fmt.Sprintf("1/2 = %d/%d, and %d/%d %s 1/2", den/2, den, num, den, comp),
+		Facts:       map[string]string{"num": strconv.Itoa(num), "den": strconv.Itoa(den), "dec": fmt.Sprintf("%.2f", val), "word": ans, "comp": comp},
 	}
 }
 
@@ -211,6 +228,7 @@ func (g *fracToDecimalGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Question:    fmt.Sprintf("Convert \\(\\frac{%d}{%d}\\) to a decimal.", num, den),
 		Answer:      fmt.Sprintf("%g", dec),
 		Explanation: fmt.Sprintf("%d / %d = %g", num, den, dec),
+		Facts:       map[string]string{"num": strconv.Itoa(num), "den": strconv.Itoa(den), "dec": fmt.Sprintf("%g", dec)},
 	}
 }
 
@@ -237,6 +255,7 @@ func (g *fracOpSameDenGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Question:    fmt.Sprintf("\\(\\frac{%d}{%d} %s \\frac{%d}{%d} =\\) ?", a, den, g.op, b, den),
 		Answer:      fmt.Sprintf("%d/%d", rn, rd),
 		Explanation: fmt.Sprintf("(%d %s %d)/%d = %d/%d", a, g.op, b, den, rn, rd),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "den": strconv.Itoa(den), "op": g.op, "op_ing": opIng(g.op), "raw_num": strconv.Itoa(result), "raw_den": strconv.Itoa(den), "out_num": strconv.Itoa(rn), "out_den": strconv.Itoa(rd)},
 	}
 }
 
@@ -276,6 +295,7 @@ func (g *fracOpDiffDenGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Question:    fmt.Sprintf("\\(\\frac{%d}{%d} %s \\frac{%d}{%d} =\\) ?", aNum, aDen, g.op, bNum, bDen),
 		Answer:      fmt.Sprintf("%d/%d", rn, rd),
 		Explanation: fmt.Sprintf("Given %d/%d %s %d/%d. Step 1: common denominator LCM(%d,%d)=%d. Step 2: convert to %d/%d %s %d/%d. Step 3: combine = %d/%d. Answer: %d/%d", aNum, aDen, g.op, bNum, bDen, aDen, bDen, cm, aScaled, cm, g.op, bScaled, cm, rn, rd, rn, rd),
+		Facts:       map[string]string{"a_num": strconv.Itoa(aNum), "a_den": strconv.Itoa(aDen), "b_num": strconv.Itoa(bNum), "b_den": strconv.Itoa(bDen), "op": g.op, "op_ing": opIng(g.op), "lcm": strconv.Itoa(cm), "a_scaled": strconv.Itoa(aScaled), "b_scaled": strconv.Itoa(bScaled), "raw_num": strconv.Itoa(result), "raw_den": strconv.Itoa(cm), "out_num": strconv.Itoa(rn), "out_den": strconv.Itoa(rd)},
 	}
 }
 
@@ -305,6 +325,7 @@ func (g *fracWordGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		Question:    fmt.Sprintf("You eat \\(\\frac{%d}{%d}\\) of a pizza. Your friend eats \\(\\frac{%d}{%d}\\). How much pizza was eaten total?", aNum, aDen, bNum, bDen),
 		Answer:      fmt.Sprintf("%d/%d", rn, rd),
 		Explanation: fmt.Sprintf("Given %d/%d + %d/%d. Step 1: common denominator LCM(%d,%d)=%d → %d/%d + %d/%d. Step 2: add tops = %d/%d. Answer: %d/%d of the pizza", aNum, aDen, bNum, bDen, aDen, bDen, cm, aS, cm, bS, cm, rn, rd, rn, rd),
+		Facts:       map[string]string{"a_num": strconv.Itoa(aNum), "a_den": strconv.Itoa(aDen), "b_num": strconv.Itoa(bNum), "b_den": strconv.Itoa(bDen), "lcm": strconv.Itoa(cm), "a_scaled": strconv.Itoa(aS), "b_scaled": strconv.Itoa(bS), "raw_num": strconv.Itoa(result), "raw_den": strconv.Itoa(cm), "out_num": strconv.Itoa(rn), "out_den": strconv.Itoa(rd)},
 	}
 }
 
@@ -323,12 +344,14 @@ func (g *fracMultGen) Generate(ctx generator.GeneratorContext) generator.Problem
 				Question:    fmt.Sprintf("\\(%d \\times \\frac{%d}{%d} =\\) ?", whole, num, den),
 				Answer:      strconv.Itoa(w),
 				Explanation: fmt.Sprintf("%d x %d/%d = %d/%d = %d", whole, num, den, whole*num, den, w),
+				Facts:       map[string]string{"whole": strconv.Itoa(whole), "num": strconv.Itoa(num), "den": strconv.Itoa(den), "raw_num": strconv.Itoa(whole * num), "raw_den": strconv.Itoa(den), "out_num": strconv.Itoa(rn), "out_den": strconv.Itoa(rd), "whole_part": strconv.Itoa(w)},
 			}
 		}
 		return generator.Problem{
 			Question:    fmt.Sprintf("\\(%d \\times \\frac{%d}{%d} =\\) ?", whole, num, den),
 			Answer:      fmt.Sprintf("%d/%d", rn, rd),
 			Explanation: fmt.Sprintf("%d x %d/%d = %d/%d = %s", whole, num, den, whole*num, den, mixStr(w, r, d)),
+			Facts:       map[string]string{"whole": strconv.Itoa(whole), "num": strconv.Itoa(num), "den": strconv.Itoa(den), "raw_num": strconv.Itoa(whole * num), "raw_den": strconv.Itoa(den), "out_num": strconv.Itoa(rn), "out_den": strconv.Itoa(rd), "whole_part": strconv.Itoa(w), "rem": strconv.Itoa(r), "rem_den": strconv.Itoa(d)},
 		}
 	}
 	aNum := rand.Intn(max(3, scale*2)) + 1
@@ -340,6 +363,7 @@ func (g *fracMultGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		Question:    fmt.Sprintf("\\(\\frac{%d}{%d} \\times \\frac{%d}{%d} =\\) ?", aNum, aDen, bNum, bDen),
 		Answer:      fmt.Sprintf("%d/%d", rn, rd),
 		Explanation: fmt.Sprintf("(%d x %d)/(%d x %d) = %d/%d", aNum, bNum, aDen, bDen, rn, rd),
+		Facts:       map[string]string{"a_num": strconv.Itoa(aNum), "a_den": strconv.Itoa(aDen), "b_num": strconv.Itoa(bNum), "b_den": strconv.Itoa(bDen), "raw_num": strconv.Itoa(aNum * bNum), "raw_den": strconv.Itoa(aDen * bDen), "out_num": strconv.Itoa(rn), "out_den": strconv.Itoa(rd)},
 	}
 }
 
@@ -356,6 +380,7 @@ func (g *fracDivGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 			Question:    fmt.Sprintf("\\(\\frac{%d}{%d} \\div %d =\\) ?", aNum, aDen, whole),
 			Answer:      fmt.Sprintf("%d/%d", rn, rd),
 			Explanation: fmt.Sprintf("%d/%d / %d = %d/(%d x %d) = %d/%d", aNum, aDen, whole, aNum, aDen, whole, rn, rd),
+			Facts:       map[string]string{"num": strconv.Itoa(aNum), "den": strconv.Itoa(aDen), "whole": strconv.Itoa(whole), "raw_num": strconv.Itoa(aNum), "raw_den": strconv.Itoa(aDen * whole), "out_num": strconv.Itoa(rn), "out_den": strconv.Itoa(rd)},
 		}
 	}
 	aNum := rand.Intn(max(3, scale*2)) + 1
@@ -367,6 +392,7 @@ func (g *fracDivGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 		Question:    fmt.Sprintf("\\(\\frac{%d}{%d} \\div \\frac{%d}{%d} =\\) ?", aNum, aDen, bNum, bDen),
 		Answer:      fmt.Sprintf("%d/%d", rn, rd),
 		Explanation: fmt.Sprintf("Flip and multiply: %d/%d x %d/%d = %d/%d", aNum, aDen, bDen, bNum, rn, rd),
+		Facts:       map[string]string{"a_num": strconv.Itoa(aNum), "a_den": strconv.Itoa(aDen), "b_num": strconv.Itoa(bNum), "b_den": strconv.Itoa(bDen), "flipped_num": strconv.Itoa(bDen), "flipped_den": strconv.Itoa(bNum), "raw_num": strconv.Itoa(aNum * bDen), "raw_den": strconv.Itoa(aDen * bNum), "out_num": strconv.Itoa(rn), "out_den": strconv.Itoa(rd)},
 	}
 }
 
@@ -384,6 +410,7 @@ func (g *fracMixedConvertGen) Generate(ctx generator.GeneratorContext) generator
 			Question:    fmt.Sprintf("Convert \\(%d \\frac{%d}{%d}\\) to an improper fraction.", whole, num, den),
 			Answer:      fmt.Sprintf("%d/%d", improper, den),
 			Explanation: fmt.Sprintf("Given %d %d/%d. Step 1: multiply whole part: %d × %d = %d. Step 2: add numerator: %d + %d = %d. Answer: %d/%d", whole, num, den, whole, den, whole*den, whole*den, num, improper, improper, den),
+			Facts:       map[string]string{"whole": strconv.Itoa(whole), "num": strconv.Itoa(num), "den": strconv.Itoa(den), "scaled": strconv.Itoa(whole * den), "improper": strconv.Itoa(improper), "rem": strconv.Itoa(num), "rem_den": strconv.Itoa(den)},
 		}
 	}
 	improper := whole*den + num
@@ -392,6 +419,7 @@ func (g *fracMixedConvertGen) Generate(ctx generator.GeneratorContext) generator
 		Question:    fmt.Sprintf("Convert \\(\\frac{%d}{%d}\\) to a mixed number.", improper, den),
 		Answer:      fmt.Sprintf("%d %d/%d", w, r, d),
 		Explanation: fmt.Sprintf("Given %d/%d. Step 1: divide: %d ÷ %d = %d remainder %d. Step 2: whole part %d, fraction %d/%d. Answer: %d %d/%d", improper, den, improper, den, w, r, w, r, d, w, r, d),
+		Facts:       map[string]string{"improper": strconv.Itoa(improper), "den": strconv.Itoa(den), "whole": strconv.Itoa(w), "rem": strconv.Itoa(r), "rem_den": strconv.Itoa(d), "num": strconv.Itoa(r), "scaled": strconv.Itoa(w * den)},
 	}
 }
 
@@ -423,6 +451,7 @@ func (g *fracMixedOpGen) Generate(ctx generator.GeneratorContext) generator.Prob
 			Question:    fmt.Sprintf("\\(%d \\frac{%d}{%d} %s %d \\frac{%d}{%d} = ?\\)", w1, n1, den, g.op, w2, n2, den),
 			Answer:      strconv.Itoa(w),
 			Explanation: fmt.Sprintf("%d %d/%d %s %d %d/%d = %d", w1, n1, den, g.op, w2, n2, den, w),
+			Facts:       map[string]string{"w1": strconv.Itoa(w1), "n1": strconv.Itoa(n1), "w2": strconv.Itoa(w2), "n2": strconv.Itoa(n2), "den": strconv.Itoa(den), "op": g.op, "op_ing": opIng(g.op), "a_improper": strconv.Itoa(aImproper), "b_improper": strconv.Itoa(bImproper), "result": strconv.Itoa(result), "whole": strconv.Itoa(w), "rem": "0", "rem_den": strconv.Itoa(den)},
 		}
 	}
 	return generator.Problem{
@@ -430,6 +459,7 @@ func (g *fracMixedOpGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Answer:   fmt.Sprintf("%d %d/%d", w, r, d),
 		Explanation: fmt.Sprintf("Convert to improper: %d/%d %s %d/%d = %d/%d = %d %d/%d",
 			aImproper, den, g.op, bImproper, den, result, den, w, r, d),
+		Facts: map[string]string{"w1": strconv.Itoa(w1), "n1": strconv.Itoa(n1), "w2": strconv.Itoa(w2), "n2": strconv.Itoa(n2), "den": strconv.Itoa(den), "op": g.op, "op_ing": opIng(g.op), "a_improper": strconv.Itoa(aImproper), "b_improper": strconv.Itoa(bImproper), "result": strconv.Itoa(result), "whole": strconv.Itoa(w), "rem": strconv.Itoa(r), "rem_den": strconv.Itoa(d)},
 	}
 }
 
@@ -452,6 +482,7 @@ func (g *fracMixedMultGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		Question:    fmt.Sprintf("\\(%d \\frac{%d}{%d} \\times %d \\frac{%d}{%d} = ?\\)", w1, n1, den, w2, n2, den),
 		Answer:      fmt.Sprintf("%d/%d", rn, rd),
 		Explanation: fmt.Sprintf("(%d/%d) x (%d/%d) = %d/%d = %s", aImp, den, bImp, den, rn, rd, mixStr(w, r, d)),
+		Facts:       map[string]string{"w1": strconv.Itoa(w1), "n1": strconv.Itoa(n1), "w2": strconv.Itoa(w2), "n2": strconv.Itoa(n2), "den": strconv.Itoa(den), "a_improper": strconv.Itoa(aImp), "b_improper": strconv.Itoa(bImp), "raw_num": strconv.Itoa(num), "raw_den": strconv.Itoa(denSq), "out_num": strconv.Itoa(rn), "out_den": strconv.Itoa(rd)},
 	}
 }
 
@@ -480,6 +511,7 @@ func (g *fracSubWordGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("You had \\(\\frac{%d}{%d}\\) of a cake and gave away \\(\\frac{%d}{%d}\\). How much is left?", aNum, aDen, bNum, bDen),
 		Answer:      fmt.Sprintf("%d/%d", rn, rd),
 		Explanation: fmt.Sprintf("%d/%d - %d/%d = %d/%d", aNum, aDen, bNum, bDen, rn, rd),
+		Facts:       map[string]string{"a_num": strconv.Itoa(aNum), "a_den": strconv.Itoa(aDen), "b_num": strconv.Itoa(bNum), "b_den": strconv.Itoa(bDen), "lcm": strconv.Itoa(cm), "a_scaled": strconv.Itoa(aS), "b_scaled": strconv.Itoa(bS), "raw_num": strconv.Itoa(result), "raw_den": strconv.Itoa(cm), "out_num": strconv.Itoa(rn), "out_den": strconv.Itoa(rd)},
 	}
 }
 
@@ -496,6 +528,7 @@ func (g *fracMultWordGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		Question:    fmt.Sprintf("A recipe needs \\(\\frac{%d}{%d}\\) cup of sugar per serving. You make \\(\\frac{%d}{%d}\\) servings. How much sugar total?", aNum, aDen, bNum, bDen),
 		Answer:      fmt.Sprintf("%d/%d", rn, rd),
 		Explanation: fmt.Sprintf("%d/%d x %d/%d = %d/%d cups", aNum, aDen, bNum, bDen, rn, rd),
+		Facts:       map[string]string{"a_num": strconv.Itoa(aNum), "a_den": strconv.Itoa(aDen), "b_num": strconv.Itoa(bNum), "b_den": strconv.Itoa(bDen), "raw_num": strconv.Itoa(aNum * bNum), "raw_den": strconv.Itoa(aDen * bDen), "out_num": strconv.Itoa(rn), "out_den": strconv.Itoa(rd)},
 	}
 }
 
@@ -512,6 +545,7 @@ func (g *fracDivWordGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		Question:    fmt.Sprintf("You have \\(\\frac{%d}{%d}\\) liters of juice. Each glass holds \\(\\frac{%d}{%d}\\) liters. How many glasses can you fill?", aNum, aDen, bNum, bDen),
 		Answer:      fmt.Sprintf("%d/%d", rn, rd),
 		Explanation: fmt.Sprintf("%d/%d ÷ %d/%d = %d/%d", aNum, aDen, bNum, bDen, rn, rd),
+		Facts:       map[string]string{"a_num": strconv.Itoa(aNum), "a_den": strconv.Itoa(aDen), "b_num": strconv.Itoa(bNum), "b_den": strconv.Itoa(bDen), "flipped_num": strconv.Itoa(bDen), "flipped_den": strconv.Itoa(bNum), "raw_num": strconv.Itoa(aNum * bDen), "raw_den": strconv.Itoa(aDen * bNum), "out_num": strconv.Itoa(rn), "out_den": strconv.Itoa(rd)},
 	}
 }
 
@@ -533,12 +567,14 @@ func (g *fracMixedWordGen) Generate(ctx generator.GeneratorContext) generator.Pr
 			Question:    fmt.Sprintf("You have \\(%d \\frac{%d}{%d}\\) meters of ribbon and buy \\(%d \\frac{%d}{%d}\\) more. Total?", w1, n1, den, w2, n2, den),
 			Answer:      strconv.Itoa(w),
 			Explanation: fmt.Sprintf("%d %d/%d + %d %d/%d = %d meters", w1, n1, den, w2, n2, den, w),
+			Facts:       map[string]string{"w1": strconv.Itoa(w1), "n1": strconv.Itoa(n1), "w2": strconv.Itoa(w2), "n2": strconv.Itoa(n2), "den": strconv.Itoa(den), "whole": strconv.Itoa(w), "rem": "0", "rem_den": strconv.Itoa(den)},
 		}
 	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("You have \\(%d \\frac{%d}{%d}\\) meters of ribbon and buy \\(%d \\frac{%d}{%d}\\) more. Total?", w1, n1, den, w2, n2, den),
 		Answer:      fmt.Sprintf("%d %d/%d", w, r, d),
 		Explanation: fmt.Sprintf("%d %d/%d + %d %d/%d = %d %d/%d", w1, n1, den, w2, n2, den, w, r, d),
+		Facts:       map[string]string{"w1": strconv.Itoa(w1), "n1": strconv.Itoa(n1), "w2": strconv.Itoa(w2), "n2": strconv.Itoa(n2), "den": strconv.Itoa(den), "whole": strconv.Itoa(w), "rem": strconv.Itoa(r), "rem_den": strconv.Itoa(d)},
 	}
 }
 
@@ -564,5 +600,6 @@ func (g *fracCompareWordGen) Generate(ctx generator.GeneratorContext) generator.
 		Question:    fmt.Sprintf("Alice ate \\(\\frac{%d}{%d}\\) of a pizza, Bob ate \\(\\frac{%d}{%d}\\). Who ate more? (first/second)", aNum, aDen, bNum, bDen),
 		Answer:      ans,
 		Explanation: fmt.Sprintf("%d/%d = %.3f, %d/%d = %.3f, so %s ate more", aNum, aDen, av2, bNum, bDen, bv2, ans),
+		Facts:       map[string]string{"a_num": strconv.Itoa(aNum), "a_den": strconv.Itoa(aDen), "a_val": fmt.Sprintf("%.3f", av2), "b_num": strconv.Itoa(bNum), "b_den": strconv.Itoa(bDen), "b_val": fmt.Sprintf("%.3f", bv2), "who": ans},
 	}
 }

@@ -1,0 +1,19 @@
+{
+  "setup": "Alice ate $\\frac{[[a_num]]}{[[a_den]]}$ of a pizza and Bob ate $\\frac{[[b_num]]}{[[b_den]]}$ of one.",
+  "steps": [
+    {
+      "fact": "a_val",
+      "say": "Alice's share is about [[a_val]] of a pizza."
+    },
+    {
+      "fact": "b_val",
+      "say": "Bob's share is about [[b_val]] of a pizza."
+    },
+    {
+      "fact": "who",
+      "say": "Comparing the two values, the larger one belongs to the [[who]] eater."
+    }
+  ],
+  "answer": "So the [[who]] one ate more.",
+  "concept": "frac.compare.word"
+}

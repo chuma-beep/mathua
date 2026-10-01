@@ -1,0 +1,15 @@
+{
+  "setup": "You are dividing $\\frac{[[num]]}{[[den]]}$ by the whole number [[whole]].",
+  "steps": [
+    {
+      "fact": "raw_den",
+      "say": "Dividing by a whole number is dividing by [[whole]]/1, so it multiplies the bottom instead of the top: [[den]] × [[whole]] = [[raw_den]]."
+    },
+    {
+      "fact": "raw_num",
+      "say": "The top [[raw_num]] is unchanged."
+    }
+  ],
+  "answer": "In lowest terms that is $\\frac{[[out_num]]}{[[out_den]]}$.",
+  "concept": "frac.div.whole"
+}

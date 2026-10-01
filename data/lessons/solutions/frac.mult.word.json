@@ -1,0 +1,15 @@
+{
+  "setup": "Each serving needs $\\frac{[[a_num]]}{[[a_den]]}$ cup of sugar, and you are making [[b_num]]/[[b_den]] of a serving count — [[b_num]] over [[b_den]] servings.",
+  "steps": [
+    {
+      "fact": "raw_num",
+      "say": "Multiply across: the tops give [[a_num]] × [[b_num]] = [[raw_num]]."
+    },
+    {
+      "fact": "raw_den",
+      "say": "The bottoms give [[a_den]] × [[b_den]] = [[raw_den]]."
+    }
+  ],
+  "answer": "So the product is $\\frac{[[raw_num]]}{[[raw_den]]}$, reduced to $\\frac{[[out_num]]}{[[out_den]]}$. Multiplying tops with tops works because \"of\" means a fraction *of* a fraction, and each step halves the size of a piece.",
+  "concept": "frac.mult.word"
+}
