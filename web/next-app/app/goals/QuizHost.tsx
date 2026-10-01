@@ -281,7 +281,7 @@ export default function QuizHost() {
               <Link href="/profile" className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none h-12 px-8 text-sm inline-flex items-center">Back to Profile →</Link>
             </div>
             <div className="mt-3 text-center">
-              <Link href="/progress-card" className="font-mono text-xs text-mathua-muted hover:text-mathua-blue">View progress card →</Link>
+              <Link href="/history" className="font-mono text-xs text-mathua-muted hover:text-mathua-blue">Every question you&apos;ve answered →</Link>
             </div>
           </>
         )}

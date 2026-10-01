@@ -46,7 +46,7 @@ const NAV_ITEMS: { label: string; href: string; icon: LucideIcon }[] = [
   { label: 'Study', href: '/study', icon: BookOpen },
   { label: 'Graph', href: '/graph', icon: Network },
   { label: 'Leaderboard', href: '/leaderboard', icon: Trophy },
-  { label: 'Progress', href: '/progress-card', icon: ChartNoAxesColumn },
+  { label: 'Progress', href: '/progress', icon: ChartNoAxesColumn },
   { label: 'Settings', href: '/settings', icon: Settings },
 ]
 

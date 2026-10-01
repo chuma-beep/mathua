@@ -78,10 +78,23 @@ describe('AppSidebar', () => {
     expect(screen.queryByText('Activity')).toBeNull()
   })
 
+  it('points "Progress" at the report, not at the mistakes transcript', () => {
+    // The label said Progress and the destination was a paginated list of past
+    // questions, opening filtered to the ones you got wrong. That is the single
+    // most misleading thing the navigation did, and this is the assertion that
+    // keeps it fixed.
+    renderSidebar()
+    const sidebar = screen.getByTestId('profile-sidebar')
+    const progress = within(sidebar).getByText('Progress', { exact: true })
+    const link = progress.closest('a')
+    expect(link?.getAttribute('href')).toBe('/progress')
+    expect(sidebar.querySelector('a[href="/progress-card"]')).toBeNull()
+  })
+
   it('nav buttons render fixed-size Lucide icons (even collapsed rail)', () => {
     renderSidebar()
     const sidebar = screen.getByTestId('profile-sidebar')
-    const hrefs = ['/study', '/learn', '/graph', '/leaderboard', '/progress-card', '/settings']
+    const hrefs = ['/study', '/learn', '/graph', '/leaderboard', '/progress', '/settings']
     expect(hrefs).toHaveLength(6)
     for (const href of hrefs) {
       const link = sidebar.querySelector(`a[href="${href}"]`)!
