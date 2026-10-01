@@ -1195,16 +1195,20 @@ export interface StudyAnswerRes {
 interface StudyAnswerBody {
 	concept_id: string
 	answer: string
-	expected: string
 	elapsed: number
 	student_id?: string
 	question?: string
 }
 
-export async function submitStudyAnswer(conceptId: string, answer: string, expected: string, elapsed: number, question?: string): Promise<StudyAnswerRes> {
+// No `expected` is sent: the server anchors every served question against its
+// own answer, so a client-supplied one is either redundant or an attempt to
+// grade itself. A 409 means the server has no record of this question (the
+// anchor's TTL expired, or the tab was left open too long) and the caller
+// should re-serve rather than resubmit.
+export async function submitStudyAnswer(conceptId: string, answer: string, elapsed: number, question?: string): Promise<StudyAnswerRes> {
 	const { getGuestId } = await import('./auth')
 	const headers = { 'Content-Type': 'application/json', ...getAuthHeaders() } satisfies Record<string, string>
-	const body: StudyAnswerBody = { concept_id: conceptId, answer, expected, elapsed, question }
+	const body: StudyAnswerBody = { concept_id: conceptId, answer, elapsed, question }
 	const guestId = getGuestId()
 	if (guestId && !('Authorization' in headers)) {
 		body.student_id = guestId
@@ -1214,7 +1218,7 @@ export async function submitStudyAnswer(conceptId: string, answer: string, expec
 		headers,
 		body: JSON.stringify(body),
 	})
-	if (!res.ok) throw new Error(`Study answer failed: ${res.status}`)
+	if (!res.ok) await throwWithResponse(res, `Study answer failed: ${res.status}`)
 	return res.json() as Promise<StudyAnswerRes>
 }
 

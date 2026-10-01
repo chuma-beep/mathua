@@ -58,6 +58,13 @@ var ErrNoActiveQuestion = fmt.Errorf("no active question")
 // keeps garbage IDs from farming XP and polluting progress/attempt tables.
 var ErrUnknownConcept = fmt.Errorf("unknown concept")
 
+// ErrNoStudyAnchor means the server has no record of the question being
+// answered, so it cannot grade it. Distinct from a wrong answer: nothing is
+// recorded — no attempt, no streak, no weakness, no XP — and the caller should
+// re-serve the question. The anchor TTL is 24h, so the realistic trigger is a
+// tab left open overnight.
+var ErrNoStudyAnchor = fmt.Errorf("no server-side anchor for this question")
+
 const (
 	// serverSessionStudyExpected is the server_sessions kind for H1b
 	// anti-cheat anchors. The name is historical and deliberately unchanged:
@@ -1210,19 +1217,25 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 	}, nil
 }
 
-// SubmitStudyAnswer records a Study-library answer (LessonQuiz seam per CONTEXT.md: Seam).
-// It grades via the concept's grading_type, updates mastery/SM-2/weakness/XP, and
-// awards TaskMultistep 15 for *.word else TaskLesson 10 (Q2 lock).
-// H1b: if a server-side anchor was stored via SetStudyAnchorBatch (practice
-// generation), its answer is used instead of the client-supplied expected to
-// prevent trivial cheat (client sending expected==answer). The same anchor
-// carries the explanation owed for that exact question.
-func (e *Engine) SubmitStudyAnswer(studentID, conceptID, answer, expected string, elapsedSeconds float64, questionText string) (*AnswerResult, error) {
+// SubmitStudyAnswer records a Learn-loop answer (LessonQuiz seam per CONTEXT.md:
+// Seam). It grades via the concept's grading_type, updates mastery/SM-2/
+// weakness/XP, and awards TaskMultistep 15 for *.word else TaskLesson 10.
+//
+// It takes no expected answer, and that is the point: the answer and the
+// explanation both come from the server-side anchor written when the question
+// was served, which is keyed by question text. There is no parameter a caller
+// could use to grade its own homework, and no code path that grades a study
+// answer against client input.
+//
+// A question with no anchor — the anchor's TTL expired, or the tab sat open
+// longer than it — returns ErrNoStudyAnchor so the caller can re-serve rather
+// than accept an ungradeable attempt.
+func (e *Engine) SubmitStudyAnswer(studentID, conceptID, answer string, elapsedSeconds float64, questionText string) (*AnswerResult, error) {
 	taskType := TaskLesson
 	if strings.HasSuffix(conceptID, ".word") {
 		taskType = TaskMultistep
 	}
-	return e.submitAnswerWithTask(studentID, conceptID, answer, expected, elapsedSeconds, taskType, true, false, questionText)
+	return e.submitAnswerWithTask(studentID, conceptID, answer, "", elapsedSeconds, taskType, true, false, questionText)
 }
 
 // SubmitQuizAnswer is the single-path quiz grader: TaskQuiz base XP (20),
@@ -1245,9 +1258,14 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 		return nil, fmt.Errorf("%w: %q", ErrUnknownConcept, conceptID)
 	}
 	if useAnchor {
-		if stored, ok := e.studyAnchorFor(studentID, conceptID, questionText); ok && stored.Answer != "" {
-			expected = stored.Answer
+		anchor, found := e.studyAnchorFor(studentID, conceptID, questionText)
+		if !found || anchor.Answer == "" {
+			// No server-side record of this question. Refuse rather than fall
+			// back to anything the caller supplied: the one thing a study
+			// answer must never be graded against is a guess from the client.
+			return nil, ErrNoStudyAnchor
 		}
+		expected = anchor.Answer
 	}
 	// Narrow lock: only protect studySessions lookup/creation and studyMisses update.
 	e.mu.Lock()

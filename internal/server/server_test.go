@@ -1061,6 +1061,94 @@ func TestPractice_WritesTheStudyAnchor(t *testing.T) {
 	}
 }
 
+// The study request carries no expected answer and needs none: the answer and
+// the explanation come from the anchor written when the question was served.
+// These two tests pin the guarantees that follow from that.
+func TestStudyAnswer_AnchoredNotClientSupplied(t *testing.T) {
+	_, mux, _ := guestServer(t)
+	token, studentID := quizGuest(t, mux)
+
+	// Serve a set, which is what writes the anchor.
+	rec := httptest.NewRecorder()
+	get := httptest.NewRequest("GET", "/api/lessons/a/practice?student_id="+studentID+"&count=1", nil)
+	get.Header.Set("Authorization", "Bearer "+token)
+	mux.ServeHTTP(rec, get)
+	if rec.Code != 200 {
+		t.Fatalf("practice: %d %s", rec.Code, rec.Body.String())
+	}
+	var set struct {
+		Questions []struct{ Question, Answer string } `json:"questions"`
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &set); err != nil {
+		t.Fatalf("decode practice: %v", err)
+	}
+	if len(set.Questions) == 0 {
+		t.Fatal("expected a served question")
+	}
+	question := set.Questions[0].Question
+	anchored := set.Questions[0].Answer
+
+	// The forgery: answer something wrong while claiming it is what was
+	// expected. A server that honoured the client would call this correct.
+	const forged = "987654321"
+	body, _ := json.Marshal(map[string]interface{}{
+		"concept_id": "a",
+		"answer":     forged,
+		"expected":   forged,
+		"elapsed":    5.0,
+		"question":   question,
+		"student_id": studentID,
+	})
+	rec = httptest.NewRecorder()
+	post := httptest.NewRequest("POST", "/api/study/answer", bytes.NewReader(body))
+	post.Header.Set("Authorization", "Bearer "+token)
+	mux.ServeHTTP(rec, post)
+	if rec.Code != 200 {
+		t.Fatalf("study answer: %d %s", rec.Code, rec.Body.String())
+	}
+	var res struct {
+		Correct        bool   `json:"correct"`
+		ExpectedAnswer string `json:"expected_answer"`
+		Explanation    string `json:"explanation"`
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &res); err != nil {
+		t.Fatalf("decode answer: %v", err)
+	}
+	if res.Correct {
+		t.Errorf("a forged expected answer was honoured: %q graded correct", forged)
+	}
+	if res.ExpectedAnswer != anchored {
+		t.Errorf("expected_answer = %q, want the anchored %q", res.ExpectedAnswer, anchored)
+	}
+	if res.Explanation == "" {
+		t.Error("a graded answer must carry the served explanation")
+	}
+}
+
+// A question the server has no record of cannot be graded, and the honest
+// response is to say so rather than accept the caller's word for it. 409 (not
+// 400) is what tells the client to re-serve.
+func TestStudyAnswer_UnknownQuestionIs409(t *testing.T) {
+	_, mux, _ := guestServer(t)
+	token, studentID := quizGuest(t, mux)
+
+	body, _ := json.Marshal(map[string]interface{}{
+		"concept_id": "a",
+		"answer":     "4",
+		"expected":   "4", // ignored; the anchor is what matters
+		"elapsed":    5.0,
+		"question":   "a question the server never served",
+		"student_id": studentID,
+	})
+	rec := httptest.NewRecorder()
+	req := httptest.NewRequest("POST", "/api/study/answer", bytes.NewReader(body))
+	req.Header.Set("Authorization", "Bearer "+token)
+	mux.ServeHTTP(rec, req)
+	if rec.Code != 409 {
+		t.Errorf("expected 409 for an unserved question, got %d: %s", rec.Code, rec.Body.String())
+	}
+}
+
 func TestStudyAnswer_UnknownConcept(t *testing.T) {
 	s := testServer(t)
 	mux := http.NewServeMux()

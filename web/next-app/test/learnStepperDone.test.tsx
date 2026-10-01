@@ -53,8 +53,10 @@ beforeEach(() => {
   })
   vi.mocked(getLessonPractice).mockResolvedValue({ questions: QS, concept_id: CID })
   vi.mocked(getLessonReadiness).mockResolvedValue({ concept_id: CID, ready: true, weak: [], missing: [] })
-  vi.mocked(submitStudyAnswer).mockImplementation(async (_cid, answer, expected) => ({
-    correct: answer.trim() === expected.trim(),
+  // The server grades by looking the question up in its own anchor; the mock
+  // mirrors that rather than trusting a caller-supplied expected answer.
+  vi.mocked(submitStudyAnswer).mockImplementation(async (_cid, answer, _elapsed, question) => ({
+    correct: answer.trim() === (QS.find(q => q.question === question)?.answer ?? '').trim(),
     feedback: 'Correct!',
     explanation: '',
     xp: 1,
