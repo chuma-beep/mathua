@@ -12,11 +12,9 @@ interface Props {
   year: number
   month: number
   data: DailyActivity[]
-  expanded: boolean
-  onToggle: () => void
 }
 
-export default function MonthCard({ year, month, data, expanded, onToggle }: Props) {
+export default function MonthCard({ year, month, data }: Props) {
   const monthData = useMemo(() => {
     const prefix = `${year}-${String(month + 1).padStart(2, '0')}`
     return data.filter((d) => d.date.startsWith(prefix))
@@ -90,72 +88,58 @@ export default function MonthCard({ year, month, data, expanded, onToggle }: Pro
   const activeDays = monthData.filter((d) => d.questions > 0).length
 
   return (
-    <div className="w-full max-w-full min-w-0 border-[0.5px] border-mathua-border mb-1 overflow-hidden bg-transparent">
-      <button
-        type="button"
-        onClick={onToggle}
-        aria-expanded={expanded}
-        aria-label={`${MONTH_NAMES[month]} ${year} activity`}
-        className="flex w-full max-w-full min-w-0 items-center justify-between gap-2 px-3 py-2 min-h-[36px] bg-transparent border-none cursor-pointer text-mathua-primary font-mono"
-      >
-        <span className="min-w-0 flex-1 truncate text-left text-[13px] font-normal">
+    <div className="w-[228px] shrink-0 snap-start border-[0.5px] border-mathua-border overflow-hidden bg-transparent">
+      <div className="px-3 py-2 min-w-0">
+        <p className="min-w-0 truncate text-left text-[13px] font-normal font-mono text-mathua-primary">
           {MONTH_NAMES[month]} {year}
           <span className="ml-2 text-[11px] text-mathua-muted">
             {activeDays} day{activeDays !== 1 ? 's' : ''}
           </span>
-        </span>
-        <span
-          className="shrink-0 text-[14px] text-mathua-muted transition-transform duration-200"
-          style={{ transform: expanded ? 'rotate(90deg)' : 'rotate(0deg)' }}
-        >
-          ▸
-        </span>
-      </button>
+        </p>
+      </div>
 
-      {expanded && (
-        <div className="px-3 pb-3 pt-0 border-t-[0.5px] border-mathua-border w-full max-w-full min-w-0 overflow-hidden">
-          <div className="flex flex-wrap gap-x-4 gap-y-1 py-2 font-mono text-[11px] text-mathua-secondary">
-            <span>{stats.questions} questions</span>
-            <span className="text-mathua-muted">{stats.accuracy}% correct</span>
-            <span className="text-mathua-muted">{stats.concepts} topics</span>
-          </div>
+      <div className="px-3 pb-3 pt-0 border-t-[0.5px] border-mathua-border w-full min-w-0 overflow-hidden">
+        <div className="flex flex-wrap gap-x-4 gap-y-1 py-2 font-mono text-[11px] text-mathua-secondary">
+          <span>{stats.questions} questions</span>
+          <span className="text-mathua-muted">{stats.accuracy}% correct</span>
+          <span className="text-mathua-muted">{stats.concepts} topics</span>
+        </div>
 
-          <div className="flex justify-center w-full max-w-full min-w-0 overflow-hidden">
-            <div className="inline-block max-w-full">
-              <div className="flex gap-[2px] mb-[2px]">
-                {DAY_HEADERS.map((dh) => (
-                  <div
-                    key={dh}
-                    className="w-[11px] h-[11px] flex items-center justify-center font-mono text-[8px] text-mathua-muted shrink-0"
-                  >
-                    {SHOWN_DAY_HEADERS.has(dh) ? dh : ''}
-                  </div>
-                ))}
-              </div>
-
-              {calendar.map((week, wi) => (
-                <div key={wi} className="flex gap-[2px] mb-[2px]">
-                  {week.map((cell, di) => (
-                    <div
-                      key={di}
-                      title={
-                        cell
-                          ? `${MONTH_NAMES[month].slice(0, 3)} ${cell.date}: ${cell.questions}q, ${cell.questions > 0 ? Math.round((cell.correct / cell.questions) * 100) : 0}%`
-                          : ''
-                      }
-                      className="w-[11px] h-[11px] shrink-0 border-[0.5px]"
-                      style={{
-                        background: cell ? heatColor(cell.level) : 'transparent',
-                        borderColor: cell ? 'var(--border)' : 'transparent',
-                      }}
-                    />
-                  ))}
+        <div className="flex justify-center w-full max-w-full min-w-0 overflow-hidden">
+          <div className="inline-block max-w-full">
+            <div className="flex gap-[3px] mb-[3px]">
+              {DAY_HEADERS.map((dh) => (
+                <div
+                  key={dh}
+                  className="w-[16px] h-[16px] flex items-center justify-center font-mono text-[9px] text-mathua-muted shrink-0"
+                >
+                  {SHOWN_DAY_HEADERS.has(dh) ? dh : ''}
                 </div>
               ))}
             </div>
+
+            {calendar.map((week, wi) => (
+              <div key={wi} className="flex gap-[3px] mb-[3px]">
+                {week.map((cell, di) => (
+                  <div
+                    key={di}
+                    title={
+                      cell
+                        ? `${MONTH_NAMES[month].slice(0, 3)} ${cell.date}: ${cell.questions}q, ${cell.questions > 0 ? Math.round((cell.correct / cell.questions) * 100) : 0}%`
+                        : ''
+                    }
+                    className="w-[16px] h-[16px] shrink-0 border-[0.5px]"
+                    style={{
+                      background: cell ? heatColor(cell.level) : 'transparent',
+                      borderColor: cell ? 'var(--border)' : 'transparent',
+                    }}
+                  />
+                ))}
+              </div>
+            ))}
           </div>
         </div>
-      )}
+      </div>
     </div>
   )
 }

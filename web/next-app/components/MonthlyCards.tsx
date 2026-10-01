@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import type { DailyActivity } from '../lib/api'
 import MonthCard from './MonthCard'
 
@@ -13,9 +13,10 @@ function monthKey(year: number, month: number): string {
 }
 
 export default function MonthlyCards({ data }: Props) {
-  // Only months with activity plus the current month as an anchor — never a
-  // wall of twelve mostly-empty accordions. Newest first. Expansion is keyed
-  // by year-month (a bare month index collides across years).
+  // Horizontal month strip, oldest → newest: only months with activity plus
+  // the current month as an anchor — never a wall of empty accordions. Every
+  // visible month shows its grid (no expand/collapse); the strip opens
+  // scrolled to the newest end.
   const months = useMemo(() => {
     const now = new Date()
     const current = { year: now.getFullYear(), month: now.getMonth() }
@@ -29,27 +30,31 @@ export default function MonthlyCards({ data }: Props) {
     }
     const currentKey = monthKey(current.year, current.month)
     if (!active.has(currentKey)) active.set(currentKey, current)
-    return [...active.values()].sort((a, b) => b.year - a.year || b.month - a.month)
+    return [...active.values()].sort((a, b) => a.year - b.year || a.month - b.month)
   }, [data])
 
-  const [expanded, setExpanded] = useState<string | null>(null)
-  const openKey = expanded ?? (months.length > 0 ? monthKey(months[0].year, months[0].month) : null)
+  const stripRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const el = stripRef.current
+    if (el) el.scrollLeft = el.scrollWidth
+  }, [months.length])
 
   return (
-    <div className="w-full max-w-full min-w-0 mx-auto">
-      {months.map((m) => {
-        const key = monthKey(m.year, m.month)
-        return (
+    <div
+      ref={stripRef}
+      data-testid="month-strip"
+      className="w-full max-w-full min-w-0 overflow-x-auto"
+    >
+      <div className="flex gap-3 w-max min-w-full px-0.5 py-0.5">
+        {months.map((m) => (
           <MonthCard
-            key={key}
+            key={monthKey(m.year, m.month)}
             year={m.year}
             month={m.month}
             data={data}
-            expanded={openKey === key}
-            onToggle={() => setExpanded(openKey === key ? '' : key)}
           />
-        )
-      })}
+        ))}
+      </div>
     </div>
   )
 }
