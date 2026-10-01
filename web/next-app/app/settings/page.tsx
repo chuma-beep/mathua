@@ -9,6 +9,7 @@ import SectionHeader from '../../components/SectionHeader'
 import DangerZone from '../../components/DangerZone'
 import DailyGoalControl from '../../components/DailyGoalControl'
 import PlanEditor from '../../components/PlanEditor'
+import { Input } from '@/components/ui/input'
 import Footer from '../../components/Footer'
 import { getSettings, getScores, updateSettings, updateProfileName, changePassword, uploadAvatar, deleteAvatar, avatarImageUrl, getIdentities, deleteIdentity, createLinkToken, requestEmailVerification, startOAuthLogin, getConfig, OAUTH_LABELS, type OAuthProvider, enableShare, disableShare, type UserSettings } from '../../lib/api'
 import { isLoggedIn, getUserInfo, setUserInfo } from '../../lib/auth'
@@ -456,7 +457,7 @@ export default function SettingsPage() {
                 </p>
                 <label htmlFor="display-name" className="font-mono text-[11px] uppercase text-mathua-muted mt-4 block">Display name</label>
                 <form onSubmit={e => { e.preventDefault(); handleSaveName() }} className="flex flex-col sm:flex-row gap-2 mt-2">
-                  <input
+                  <Input
                     id="display-name"
                     type="text"
                     value={displayName}
@@ -464,7 +465,7 @@ export default function SettingsPage() {
                     onChange={(e) => setDisplayName(e.target.value)}
                     placeholder="Your name"
                     enterKeyHint="done"
-                    className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-10 px-3 font-mono text-sm text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+                    className="flex-1"
                   />
                   <button
                     type="submit"
@@ -479,14 +480,14 @@ export default function SettingsPage() {
                 <label htmlFor="recovery-email" className="font-mono text-[11px] uppercase text-mathua-muted mt-4 block">Recovery email (optional)</label>
                 <p className="text-mathua-muted text-xs mt-1">Used only for password reset. Empty clears it.</p>
                 <div className="flex flex-col sm:flex-row gap-2 mt-2">
-                  <input
+                  <Input
                     id="recovery-email"
                     type="email"
                     value={recoveryEmail}
                     onChange={(e) => setRecoveryEmail(e.target.value)}
                     placeholder="you@example.com"
                     autoComplete="email"
-                    className="flex-1 min-w-0 bg-mathua-code border border-mathua-border rounded-none h-10 px-3 font-mono text-sm text-mathua-primary placeholder:text-mathua-muted focus:outline-none focus:border-mathua-blue"
+                    className="flex-1"
                   />
                 </div>
                 {userEmail !== '' && !userEmailVerified && (
