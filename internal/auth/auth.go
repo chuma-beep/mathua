@@ -150,6 +150,14 @@ var ErrGoogleOnly = errors.New("this account uses Google sign-in")
 // NormalizeUsername trims and lowercases: "Ada" and "ada" are one account.
 func NormalizeUsername(u string) string { return strings.ToLower(strings.TrimSpace(u)) }
 
+// NormalizeEmail trims and lowercases. Deliberately NOT plus/dot folding:
+// those are provider-specific (Gmail-only) and folding risks merging two
+// genuinely distinct mailboxes. Plus-addresses stay distinct accounts.
+func NormalizeEmail(e string) string { return strings.ToLower(strings.TrimSpace(e)) }
+
+// ErrEmailInUse marks an address held by another account (409, not 400/500).
+var ErrEmailInUse = errors.New("email already in use")
+
 // ErrUsernameTaken marks a taken username (409, not a 400/500).
 var ErrUsernameTaken = errors.New("username is taken")
 
@@ -239,13 +247,17 @@ type OAuthProfile struct {
 
 // LoginOrCreateOAuth is the provider-agnostic login core:
 //  1. known (provider, id) identity → log in (refresh avatar);
-//  2. dual-verified email (provider-attested AND ours) → link + log in;
-//  3. otherwise → fresh account. Unverified emails NEVER merge — this is
-//     what stops account takeover via claimed emails.
+//  2. provider-verified email matching a row that is verified OR has no
+//     password → link + log in (the provider attests mailbox ownership, so
+//     an unverified passwordless row is safe to join; a password row is
+//     never joined — claiming its email at signup proves nothing);
+//  3. otherwise → fresh account. Unverified-provider emails NEVER merge —
+//     this is what stops account takeover via claimed emails.
 func (a *AuthService) LoginOrCreateOAuth(p OAuthProfile) (string, *storage.Student, error) {
 	if p.Provider == "" || p.ProviderID == "" {
 		return "", nil, jwt.ErrTokenRequiredClaimMissing
 	}
+	p.Email = NormalizeEmail(p.Email)
 	if st, err := a.repo.FindStudentByIdentity(p.Provider, p.ProviderID); err != nil {
 		return "", nil, err
 	} else if st != nil {
@@ -264,7 +276,7 @@ func (a *AuthService) LoginOrCreateOAuth(p OAuthProfile) (string, *storage.Stude
 	if p.Email != "" && p.EmailVerified {
 		if st, err := a.repo.FindByEmail(p.Email); err != nil {
 			return "", nil, err
-		} else if st != nil && st.EmailVerified {
+		} else if st != nil && (st.EmailVerified || st.PasswordHash == "") {
 			if err := a.repo.CreateIdentity(p.Provider, p.ProviderID, st.ID, p.Email, true); err != nil {
 				return "", nil, err
 			}
@@ -277,6 +289,18 @@ func (a *AuthService) LoginOrCreateOAuth(p OAuthProfile) (string, *storage.Stude
 				return "", nil, err
 			}
 			return tok, st, nil
+		}
+	}
+	// No silent forks: an address already on another row errors out instead
+	// of creating a duplicate (the unique index would reject it anyway).
+	// The caller logs in with the existing credential, then connects the
+	// provider in Settings. Unverified-provider emails are blocked the same
+	// way — an unverified claim must neither merge nor fork.
+	if p.Email != "" {
+		if existing, err := a.repo.FindByEmail(p.Email); err != nil {
+			return "", nil, err
+		} else if existing != nil {
+			return "", nil, ErrEmailInUse
 		}
 	}
 	st, err := a.repo.CreateOAuthUser(p.Provider, p.ProviderID, p.Name, p.Email, p.EmailVerified, p.AvatarURL)
@@ -312,6 +336,7 @@ func (a *AuthService) ConnectProvider(studentID string, p OAuthProfile) error {
 	if p.Provider == "" || p.ProviderID == "" {
 		return jwt.ErrTokenRequiredClaimMissing
 	}
+	p.Email = NormalizeEmail(p.Email)
 	if st, err := a.repo.FindStudentByIdentity(p.Provider, p.ProviderID); err != nil {
 		return err
 	} else if st != nil {

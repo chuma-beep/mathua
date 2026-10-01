@@ -3077,7 +3077,7 @@ func (s *Server) handleSignup(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "name, username, and password are required", 400)
 		return
 	}
-	email := strings.ToLower(strings.TrimSpace(req.Email))
+	email := auth.NormalizeEmail(req.Email)
 	if email == "" {
 		writeError(w, "email is required", 400)
 		return
@@ -3270,8 +3270,7 @@ func (s *Server) handleProfileUpdate(w http.ResponseWriter, r *http.Request) {
 	}
 	email := ""
 	if req.Email != nil {
-		// Lowercased so FindByEmail (exact match) meets the signup form.
-		email = strings.ToLower(strings.TrimSpace(*req.Email))
+		email = auth.NormalizeEmail(*req.Email)
 		if err := auth.ValidateEmail(email); err != nil {
 			writeError(w, err.Error(), 400)
 			return

@@ -91,6 +91,12 @@ func authMigrate(db *sql.DB) error {
 			}
 		}
 	}
+	// Back the app-level one-email-one-account 409s with a partial unique
+	// index (case-insensitive, legacy '' rows excluded). Retried each boot
+	// until clean so dirty databases still start.
+	if err := ensureEmailUniqueIndexSQLite(db); err != nil {
+		return err
+	}
 	// One-time data backfills (drift fixes), version-guarded:
 	// v1 daily goal 150 → 30 (MA 20-40); v2 username lowercasing except
 	// colliding groups (same lower form twice — manual rename, never merge).
@@ -136,6 +142,34 @@ func runOnceSQLite(db *sql.DB, version int, stmts []string) error {
 
 func isDuplicateColumn(err error) bool {
 	return strings.Contains(err.Error(), "duplicate column name")
+}
+
+// ensureEmailUniqueIndexSQLite enforces one-email-one-account at the DB layer
+// for every writer at once (signup, OAuth create/merge, profile update,
+// verification) — the app-level 409 checks are check-then-insert and race.
+// Expression index on lower(email) matches FindByEmail's lookup semantics;
+// the partial predicate keeps legacy ” rows legal. While real duplicates
+// exist the index is skipped with a log (boot proceeds) and retried next
+// boot; the audit names no addresses, only a count.
+func ensureEmailUniqueIndexSQLite(db *sql.DB) error {
+	var name string
+	if err := db.QueryRow("SELECT name FROM sqlite_master WHERE type='index' AND name='uidx_students_email'").Scan(&name); err == nil && name != "" {
+		return nil
+	} else if err != nil && err != sql.ErrNoRows {
+		return fmt.Errorf("check email unique index: %w", err)
+	}
+	var dupes int
+	if err := db.QueryRow("SELECT COUNT(*) FROM (SELECT lower(email) FROM students WHERE email IS NOT NULL AND email != '' GROUP BY lower(email) HAVING COUNT(*) > 1)").Scan(&dupes); err != nil {
+		return fmt.Errorf("audit duplicate emails: %w", err)
+	}
+	if dupes > 0 {
+		log.Printf("storage: %d duplicate email groups; skipping unique email index until resolved", dupes)
+		return nil
+	}
+	if _, err := db.Exec("CREATE UNIQUE INDEX uidx_students_email ON students(lower(email)) WHERE email IS NOT NULL AND email != ''"); err != nil {
+		return fmt.Errorf("create email unique index: %w", err)
+	}
+	return nil
 }
 
 func (s *SQLiteStore) Close() error {
@@ -274,7 +308,7 @@ func (s *SQLiteStore) FindByEmail(email string) (*Student, error) {
 	if email == "" {
 		return nil, nil
 	}
-	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token, email, google_id, avatar_url, email_verified FROM students WHERE email = ? LIMIT 1", email)
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token, email, google_id, avatar_url, email_verified FROM students WHERE lower(email) = lower(?) AND email != '' LIMIT 1", email)
 	return scanStudent(row)
 }
 

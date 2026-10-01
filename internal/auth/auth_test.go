@@ -24,6 +24,16 @@ func TestNormalizeUsername(t *testing.T) {
 	}
 }
 
+func TestNormalizeEmail(t *testing.T) {
+	if got := NormalizeEmail("  Ada@Example.COM "); got != "ada@example.com" {
+		t.Errorf("expected trimmed lowercase, got %q", got)
+	}
+	// Plus-addressing is provider-specific: never folded.
+	if got := NormalizeEmail("ada+tag@example.com"); got != "ada+tag@example.com" {
+		t.Errorf("expected plus preserved, got %q", got)
+	}
+}
+
 func TestSignupLogin_CaseInsensitive(t *testing.T) {
 	svc := newTestService(t)
 	token, st, err := svc.Signup("Ada", "Ada", "Engine!n1")

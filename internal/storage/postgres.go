@@ -299,6 +299,39 @@ func pgAuthMigrate(db *sql.DB) error {
 			return err
 		}
 	}
+	// Back the app-level one-email-one-account 409s with a partial unique
+	// index (case-insensitive, legacy '' rows excluded). Retried each boot
+	// until clean so dirty databases still start; see the SQLite twin.
+	if err := ensureEmailUniqueIndexPostgres(db); err != nil {
+		return err
+	}
+	return nil
+}
+
+// ensureEmailUniqueIndexPostgres enforces one-email-one-account at the DB
+// layer for every writer at once — the app-level 409 checks are
+// check-then-insert and race. Expression index on lower(email) matches
+// FindByEmail's lookup semantics; the partial predicate keeps legacy ”
+// rows legal. While real duplicates exist the index is skipped with a log
+// (boot proceeds) and retried next boot.
+func ensureEmailUniqueIndexPostgres(db *sql.DB) error {
+	var name string
+	if err := db.QueryRow("SELECT indexname FROM pg_indexes WHERE schemaname = current_schema() AND indexname = 'uidx_students_email'").Scan(&name); err == nil && name != "" {
+		return nil
+	} else if err != nil && err != sql.ErrNoRows {
+		return fmt.Errorf("check email unique index: %w", err)
+	}
+	var dupes int
+	if err := db.QueryRow("SELECT COUNT(*) FROM (SELECT lower(email) FROM students WHERE email IS NOT NULL AND email <> '' GROUP BY lower(email) HAVING COUNT(*) > 1) d").Scan(&dupes); err != nil {
+		return fmt.Errorf("audit duplicate emails: %w", err)
+	}
+	if dupes > 0 {
+		log.Printf("storage: %d duplicate email groups; skipping unique email index until resolved", dupes)
+		return nil
+	}
+	if _, err := db.Exec("CREATE UNIQUE INDEX uidx_students_email ON students(lower(email)) WHERE email IS NOT NULL AND email <> ''"); err != nil {
+		return fmt.Errorf("create email unique index: %w", err)
+	}
 	return nil
 }
 
@@ -412,7 +445,7 @@ func (s *PostgresStore) FindByEmail(email string) (*Student, error) {
 	if email == "" {
 		return nil, nil
 	}
-	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token, email, google_id, avatar_url, email_verified FROM students WHERE email = $1 LIMIT 1", email)
+	row := s.db.QueryRow("SELECT id, name, username, password_hash, course_id, xp_total, xp_today, xp_date, diagnostic_completed, daily_xp_goal, settings, created_at, league, league_week, league_moved, share_token, email, google_id, avatar_url, email_verified FROM students WHERE lower(email) = lower($1) AND email <> '' LIMIT 1", email)
 	return scanStudent(row)
 }
 
