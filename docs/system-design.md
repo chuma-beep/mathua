@@ -428,7 +428,6 @@ web/next-app/
 │   └── docs/               # Documentation
 ├── components/             # Shared React components
 │   ├── Header.tsx          # Sticky nav bar
-│   ├── D2Diagram.tsx       # Diagram renderer
 │   ├── FormulaBlock.tsx    # KaTeX formula display
 │   └── ...
 ├── diagrams/               # D2 source files

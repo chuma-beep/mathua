@@ -132,3 +132,46 @@ describe('docs describe routes that exist', () => {
     })
   }
 })
+
+// D2Diagram.tsx and lib/conceptDisplay.ts were fully written, one had a test,
+// and neither had a single importer. A test that only its own module's test
+// imports is not coverage — it is a file that cannot fail in production.
+describe('no orphaned modules', () => {
+  const roots = ['app', 'components', 'lib', 'hooks']
+  const all: string[] = roots.flatMap(r => tsSources(join(APP, r)))
+
+  // Next.js loads these by filename convention; nothing imports them and
+  // nothing should.
+  const conventionFiles = new Set([
+    'app/robots.ts',
+    'app/sitemap.ts',
+    'app/global-error.tsx',
+    'app/not-found.tsx',
+  ])
+
+  it('every other module is referenced by some other file', () => {
+    const bodies = new Map(all.map(f => [f, readFileSync(f, 'utf-8')]))
+    const orphans: string[] = []
+    for (const [file, text] of bodies) {
+      const rel = file.slice(APP.length + 1)
+      if (conventionFiles.has(rel)) continue
+      // Routes are entered by the framework, and a route file legitimately
+      // imports nothing.
+      if (/(^|\/)(page|layout|route|loading|error)\.tsx$/.test(rel)) continue
+
+      const base = file.split('/').pop()!.replace(/\.(ts|tsx)$/, '')
+      const referencedElsewhere = [...bodies.entries()].some(
+        ([other, otherText]) =>
+          other !== file && new RegExp(`\\b${base}\\b`).test(otherText),
+      )
+      if (!referencedElsewhere) orphans.push(rel)
+    }
+
+    expect(
+      orphans,
+      `modules no other file references:\n  ${orphans.join('\n  ')}\n` +
+        'Delete them, or wire them up. A module only its own test imports is\n' +
+        'not covered — it cannot fail in production.',
+    ).toEqual([])
+  })
+})
