@@ -1387,19 +1387,25 @@ type ineqIntervalGen struct{}
 func (g *ineqIntervalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(5) - 3
 	b := a + rand.Intn(5) + 2
-	types := []struct {
-		q string
-		a string
-	}{
-		{fmt.Sprintf("Write in interval notation: \\(%d \\leq x < %d\\).", a, b), fmt.Sprintf("[%d,%d)", a, b)},
-		{fmt.Sprintf("Write in interval notation: \\(x > %d\\).", a), fmt.Sprintf("(%d,\\infty)", a)},
-		{fmt.Sprintf("Write in interval notation: \\(x \\leq %d\\).", b), fmt.Sprintf("(-\\infty,%d]", b)},
-		{fmt.Sprintf("Write in interval notation: \\(%d < x < %d\\).", a, b), fmt.Sprintf("(%d,%d)", a, b)},
+	type interval struct {
+		q, a, key string
+	}
+	// key is published as its own fact so an authored schema can key one step
+	// per bracket shape. A shared "shape" fact would be present on every
+	// question, so every step would render every time.
+	types := []interval{
+		{fmt.Sprintf("Write in interval notation: \\%d \\leq x < %d\\).", a, b), fmt.Sprintf("[%d,%d)", a, b), "a_left_closed"},
+		{fmt.Sprintf("Write in interval notation: \\(x > %d\\).", a), fmt.Sprintf("(%d,\\infty)", a), "a_right_unbounded"},
+		{fmt.Sprintf("Write in interval notation: \\(x \\leq %d\\).", b), fmt.Sprintf("(-\\infty,%d]", b), "a_left_unbounded"},
+		{fmt.Sprintf("Write in interval notation: \\%d < x < %d\\).", a, b), fmt.Sprintf("(%d,%d)", a, b), "a_both_open"},
 	}
 	e := types[rand.Intn(len(types))]
+	facts := map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), e.key: "yes"}
 	return generator.Problem{
-		Question: e.q, Answer: e.a,
+		Question:    e.q,
+		Answer:      e.a,
 		Explanation: fmt.Sprintf("The interval notation for this set is %s.", e.a),
+		Facts:       facts,
 	}
 }
 
