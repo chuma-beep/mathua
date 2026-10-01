@@ -45,16 +45,16 @@ func TestOAuth_UnverifiedEmailNeverMerges(t *testing.T) {
 	if err := repo.SetEmail(victim.ID, "victim@example.com"); err != nil {
 		t.Fatal(err)
 	}
-	// Victim signs in with a verified provider email: must NOT merge.
-	tok, fresh, err := svc.LoginOrCreateOAuth(OAuthProfile{
+	// Victim signs in with a verified provider email: must NOT merge — and
+	// must not fork either. The unique index would reject a duplicate row,
+	// so this returns ErrEmailInUse up front: log in with the password,
+	// then connect the provider in Settings.
+	_, fresh, err := svc.LoginOrCreateOAuth(OAuthProfile{
 		Provider: "google", ProviderID: "google-uid-1",
 		Email: "victim@example.com", EmailVerified: true, Name: "Victim",
 	})
-	if err != nil || tok == "" {
-		t.Fatalf("expected fresh login, got %v", err)
-	}
-	if fresh.ID == victim.ID {
-		t.Fatal("TAKEOVER: unverified email caused a merge")
+	if err != ErrEmailInUse {
+		t.Fatalf("expected ErrEmailInUse, got %v (id %v)", err, fresh)
 	}
 }
 
@@ -177,5 +177,58 @@ func TestLinkTokenFlow(t *testing.T) {
 	}
 	if _, ok, _ := svc.ConsumeLinkToken(""); ok {
 		t.Error("expected empty rejected")
+	}
+}
+
+func TestOAuth_MergesPasswordlessUnverifiedRow(t *testing.T) {
+	svc := newTestService(t)
+	repo := svc.repo
+	// OAuth-created row with a provider-unverified email: no password.
+	first, err := repo.CreateOAuthUser("github", "gh-1", "G", "g@example.com", false, "")
+	if err != nil {
+		t.Fatal(err)
+	}
+	// Same mailbox, provider-verified, different provider → join, not fork.
+	tok, st, err := svc.LoginOrCreateOAuth(OAuthProfile{
+		Provider: "google", ProviderID: "google-uid-9",
+		Email: "g@example.com", EmailVerified: true, Name: "G",
+	})
+	if err != nil || tok == "" {
+		t.Fatalf("expected merge+login, got %v", err)
+	}
+	if st.ID != first.ID {
+		t.Errorf("expected merge into %q, got %q", first.ID, st.ID)
+	}
+	ids, err := repo.ListIdentities(st.ID)
+	if err != nil || len(ids) != 2 {
+		t.Errorf("expected two linked identities, got %+v %v", ids, err)
+	}
+}
+
+func TestOAuth_CaseInsensitiveMerge(t *testing.T) {
+	svc := newTestService(t)
+	repo := svc.repo
+	st, err := repo.CreateUser("Ada", "ada-ci", "hash")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := repo.SetEmail(st.ID, "ada@example.com"); err != nil {
+		t.Fatal(err)
+	}
+	if err := repo.SetEmailVerified(st.ID, true); err != nil {
+		t.Fatal(err)
+	}
+	tok, linked, err := svc.LoginOrCreateOAuth(OAuthProfile{
+		Provider: "github", ProviderID: "4243",
+		Email: "ADA@EXAMPLE.COM", EmailVerified: true, Name: "Ada",
+	})
+	if err != nil || tok == "" {
+		t.Fatalf("expected link+login, got %v", err)
+	}
+	if linked.ID != st.ID {
+		t.Errorf("expected merge into %q, got %q", st.ID, linked.ID)
+	}
+	if got, _ := repo.GetStudent(st.ID); got.Email != "ada@example.com" {
+		t.Errorf("expected stored email untouched, got %q", got.Email)
 	}
 }

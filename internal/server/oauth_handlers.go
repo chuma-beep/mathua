@@ -1,6 +1,7 @@
 package server
 
 import (
+	"errors"
 	"log"
 	"net/http"
 	"os"
@@ -298,6 +299,10 @@ func (s *Server) handleEmailVerify(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if _, err := s.auth.VerifyEmail(req.Token); err != nil {
+		if errors.Is(err, auth.ErrEmailInUse) {
+			writeError(w, err.Error(), 409)
+			return
+		}
 		writeError(w, err.Error(), 400)
 		return
 	}

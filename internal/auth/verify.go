@@ -66,6 +66,9 @@ func (a *AuthService) RequestEmailVerification(studentID string) error {
 }
 
 // VerifyEmail burns a verification token and marks the email verified.
+// Refuses with ErrEmailInUse when another verified row already holds the
+// address (e.g. an OAuth fork created before this verification landed) —
+// the holder logs in and connects instead of forking a duplicate.
 func (a *AuthService) VerifyEmail(token string) (string, error) {
 	if strings.TrimSpace(token) == "" {
 		return "", errors.New("verification token is required")
@@ -76,6 +79,17 @@ func (a *AuthService) VerifyEmail(token string) (string, error) {
 	}
 	if !ok {
 		return "", errors.New("verification link is invalid or expired")
+	}
+	st, err := a.repo.GetStudent(studentID)
+	if err != nil {
+		return "", err
+	}
+	if st != nil && st.Email != "" {
+		if existing, err := a.repo.FindByEmail(st.Email); err != nil {
+			return "", err
+		} else if existing != nil && existing.ID != studentID && existing.EmailVerified {
+			return "", ErrEmailInUse
+		}
 	}
 	if err := a.repo.SetEmailVerified(studentID, true); err != nil {
 		return "", err
