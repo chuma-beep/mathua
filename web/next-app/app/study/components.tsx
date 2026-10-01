@@ -9,6 +9,7 @@ import SearchBar from '../../components/SearchBar'
 import ReportMenu from '../../components/ReportMenu'
 import MasteryBadge from '../../components/MasteryBadge'
 import { getLessonKPs, type LessonInfo, type LessonKpsRes } from '../../lib/api'
+import { isMastered } from '../../lib/progress'
 import { stripMathDelimiters } from '../../lib/lessonMath'
 import { conceptLabels, domainIcon, domainLabels, lessonProgress } from './domains'
 
@@ -396,8 +397,7 @@ export function LessonDetail({
   // the rest meant a learner reading a five-concept lesson was shown links for
   // two of them, with no indication the others existed.
   const learnTargets = conceptIds
-  const isMasteredStatus = (cid: string) => (lesson.progress?.[cid]?.status ?? '').toUpperCase() === 'MASTERED'
-  const headCid = learnTargets.find(cid => !isMasteredStatus(cid)) ?? learnTargets[0]
+  const headCid = learnTargets.find(cid => !isMastered(lesson.progress?.[cid])) ?? learnTargets[0]
   const restCids = learnTargets.filter(cid => cid !== headCid)
 
   return (
