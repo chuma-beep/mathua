@@ -1237,6 +1237,40 @@ func quizGuest(t *testing.T, mux *http.ServeMux) (token, studentID string) {
 // Batch 1: quiz session carries timed closed-book contract; completing it
 // records the gate baseline and offers retake.
 
+// The quiz response never carried an explanation, so a wrong answer showed the
+// grader's "Incorrect" and a right one showed nothing at all. The session
+// already holds the served instance's solution; it must reach the client on
+// both verdicts, exactly as handleGoalDiagnosticAnswer already did.
+func TestQuizAnswer_ExplanationOnBothVerdicts(t *testing.T) {
+	_, mux, _ := guestServer(t)
+	token, _ := quizGuest(t, mux)
+
+	// Wrong answer. The session holds one question, so this also ends the quiz
+	// — which is fine, it is the done response that also needs the solution.
+	sess := quizPost(t, mux, "/api/quiz/session", `{}`, token)
+	miss := quizPost(t, mux, "/api/quiz/answer", `{"session_id":"`+sess["session_id"].(string)+`","concept_id":"a","answer":"999","elapsed":5}`, token)
+	if miss["correct"] != false {
+		t.Fatalf("expected the wrong answer to grade incorrect, got %v", miss)
+	}
+	missExpl, _ := miss["explanation"].(string)
+	if missExpl == "" {
+		t.Error("expected an explanation on a wrong quiz answer")
+	}
+	if missExpl == "Incorrect" {
+		t.Errorf("explanation must be the solution, not the grader token: %q", missExpl)
+	}
+
+	// Correct answer, fresh session.
+	sess2 := quizPost(t, mux, "/api/quiz/session", `{}`, token)
+	hit := quizPost(t, mux, "/api/quiz/answer", `{"session_id":"`+sess2["session_id"].(string)+`","concept_id":"a","answer":"4","elapsed":5}`, token)
+	if hit["correct"] != true {
+		t.Fatalf("expected the exact answer to grade correct, got %v", hit)
+	}
+	if expl, _ := hit["explanation"].(string); expl == "" {
+		t.Error("a correct quiz answer must still carry its explanation")
+	}
+}
+
 func TestQuizSession_ClosedBookContractAndCompletion(t *testing.T) {
 	_, mux, _ := guestServer(t)
 	token, _ := quizGuest(t, mux)

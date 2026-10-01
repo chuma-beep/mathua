@@ -1293,6 +1293,8 @@ export interface QuizAnswerRes {
   done: boolean
   correct?: boolean
   feedback?: string
+  // The served instance's worked solution, on both verdicts.
+  explanation?: string
   xp?: number
   new_status?: string
   concept_id?: string

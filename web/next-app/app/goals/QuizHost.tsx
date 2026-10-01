@@ -37,7 +37,7 @@ export default function QuizHost() {
   const [quizConceptName, setQuizConceptName] = useState('')
   const [quizCount, setQuizCount] = useState(0)
   const [quizAnswerInput, setQuizAnswerInput] = useState('')
-  const [quizLastResult, setQuizLastResult] = useState<{ correct: boolean; feedback: string; xp?: number } | null>(null)
+  const [quizLastResult, setQuizLastResult] = useState<{ correct: boolean; feedback: string; explanation?: string; xp?: number } | null>(null)
   const [quizAccuracy, setQuizAccuracy] = useState({ correct: 0, total: 0 })
   const [quizTimeLimit, setQuizTimeLimit] = useState(0)
   const [quizRemaining, setQuizRemaining] = useState(0)
@@ -125,7 +125,7 @@ export default function QuizHost() {
       const correct = data.correct || false
       const feedback = data.feedback || (correct ? 'Correct!' : 'Not quite.')
       setQuizAccuracy(prev => ({ correct: prev.correct + (correct ? 1 : 0), total: prev.total + 1 }))
-      setQuizLastResult({ correct, feedback, xp: data.xp })
+      setQuizLastResult({ correct, feedback, explanation: data.explanation, xp: data.xp })
       if (data.remedial?.length) {
         setQuizRemedial(prev => Array.from(new Set([...prev, ...(data.remedial ?? [])])))
       }
@@ -338,9 +338,16 @@ export default function QuizHost() {
               </div>
             </>
           ) : (
-            <div className="animate-fadeIn text-center">
+            <div className="animate-fadeIn">
               <p className={`text-base font-medium mb-2 ${quizLastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}`}>{quizLastResult.correct ? '✓ Correct!' : '✗ Not quite'}</p>
-              <KatexContent className="text-mathua-secondary text-sm">{quizLastResult.feedback}</KatexContent>
+              {/* The worked solution for the question just answered, on both
+                  verdicts. The next question stays staged and hidden until
+                  Next is pressed, so reading this never burns question time. */}
+              {quizLastResult.explanation ? (
+                <KatexContent className="text-mathua-secondary text-sm whitespace-pre-wrap text-left">{quizLastResult.explanation}</KatexContent>
+              ) : (
+                <KatexContent className="text-mathua-secondary text-sm">{quizLastResult.feedback}</KatexContent>
+              )}
             </div>
           )}
         </div>
