@@ -11,39 +11,11 @@ if (typeof window !== 'undefined' && !process.env.NEXT_PUBLIC_API_URL && process
   console.warn('[mathua] NEXT_PUBLIC_API_URL is unset — API calls use relative /api/*, which breaks static hosting. Set it to your API origin.')
 }
 
-const QuestionSchema = z.object({
-  concept_id: z.string(),
-  concept_name: z.string(),
-  question: z.string(),
-  is_review: z.boolean(),
-  attempt_id: z.string().optional(),
-  lesson: z.object({ Title: z.string(), Body: z.string(), Concepts: z.array(z.string()) }).optional(),
-  diagram: z.string().optional(),
-  grading_type: z.string().optional(),
-})
-
-const StartSessionResSchema = z.object({
-  student_id: z.string(),
-  session_id: z.string(),
-  question: QuestionSchema.nullable(),
-})
-
-const AnswerResultSchema = z.object({
-  correct: z.boolean(),
-  feedback: z.string(),
-  new_status: z.string(),
-  explanation: z.string(),
-  streak: z.number(),
-  required_streak: z.number(),
-  xp: z.number(),
-  expected_answer: z.string(),
-  ungraded: z.boolean().optional(),
-})
-
-const AnswerResSchema = z.object({
-  result: AnswerResultSchema.nullable(),
-  next_question: QuestionSchema.nullable(),
-  done: z.boolean(),
+export const PrereqInfoSchema = z.object({
+  id: z.string(),
+  label: z.string(),
+  status: z.string(),
+  mastery_pct: z.number(),
 })
 
 const AuthResSchema = z.object({
@@ -114,13 +86,6 @@ const WeaknessResSchema = z.object({
   by_domain: z.record(z.string(), z.array(WeaknessEntrySchema)),
 })
 
-const PrereqInfoSchema = z.object({
-  id: z.string(),
-  label: z.string(),
-  status: z.string(),
-  mastery_pct: z.number(),
-})
-
 const LessonInfoSchema = z.object({
   title: z.string(),
   body: z.string().optional(),
@@ -132,25 +97,6 @@ const LessonInfoSchema = z.object({
 
 const LessonsResSchema = z.object({
   lessons: z.record(z.string(), z.array(LessonInfoSchema)),
-})
-
-const ConceptDetailResSchema = z.object({
-  concept: z.object({
-    id: z.string(),
-    label: z.string(),
-    domain: z.string(),
-    subdomain: z.string().optional(),
-  }),
-  lesson: z.object({ title: z.string(), body: z.string(), concepts: z.array(z.string()) }).optional(),
-  prerequisites: z.array(PrereqInfoSchema),
-  dependents: z.array(PrereqInfoSchema).optional(),
-  unlocked: z.boolean(),
-  progress: z.object({
-    status: z.string(),
-    streak: z.number(),
-    required_streak: z.number(),
-    mastery_pct: z.number(),
-  }).optional(),
 })
 
 export interface StartSessionRes {
@@ -248,29 +194,6 @@ export interface ConceptProgress {
   completed?: boolean
 }
 
-export async function startSession(): Promise<StartSessionRes> {
-  const headers = {
-    'Content-Type': 'application/json',
-    ...getAuthHeaders(),
-  } satisfies Record<string, string>
-  const res = await authedFetch(`${API_BASE}/api/session`, {
-    method: 'POST',
-    headers,
-  })
-  if (!res.ok) throw new Error(`Session start failed: ${res.status}`)
-  return validateResponse(StartSessionResSchema, await res.json(), 'startSession') as StartSessionRes
-}
-
-export async function startSessionName(name: string): Promise<StartSessionRes> {
-  const res = await authedFetch(`${API_BASE}/api/session`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name }),
-  })
-  if (!res.ok) throw new Error(`Session start failed: ${res.status}`)
-  return res.json()
-}
-
 // oxlint-disable-next-line anti-slop/no-unknown-parameters -- catch value: unknown is the correct error contract
 export function isConflictError(err: unknown): boolean {
   return err instanceof Error && (err as { status?: number }).status === 409
@@ -313,34 +236,6 @@ async function throwWithResponse(res: Response, fallbackMsg: string): Promise<ne
   } catch { /* ignore json parse */ }
   const msg = serverMessage ? `${fallbackMsg}: ${serverMessage}` : fallbackMsg
   throw Object.assign(new Error(msg), { status: res.status, serverMessage })
-}
-
-export async function submitAnswer(
-  sessionID: string,
-  answer: string,
-  elapsed: number,
-  attemptID: string,
-): Promise<AnswerRes> {
-  const headers = {
-    'Content-Type': 'application/json',
-    ...getAuthHeaders(),
-  } satisfies Record<string, string>
-  const res = await authedFetch(`${API_BASE}/api/answer`, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify({ session_id: sessionID, attempt_id: attemptID, answer, elapsed }),
-  })
-  if (!res.ok) await throwWithResponse(res, `Answer submit failed: ${res.status}`)
-  return validateResponse(AnswerResSchema, await res.json(), 'submitAnswer') as AnswerRes
-}
-
-export async function getCurrentQuestion(sessionID: string): Promise<Question | null> {
-  const headers = { ...getAuthHeaders() } satisfies Record<string, string>
-  const res = await authedFetch(`${API_BASE}/api/session/current?session_id=${encodeURIComponent(sessionID)}`, { headers })
-  if (!res.ok) return null
-  const data = await res.json()
-  if (!data.question) return null
-  return validateResponse(QuestionSchema, data.question, 'getCurrentQuestion') as Question
 }
 
 export async function getProgress(studentID: string): Promise<Record<string, ConceptProgress>> {
@@ -1084,47 +979,6 @@ export async function getLessons(studentId?: string): Promise<LessonsRes> {
 	const res = await authedFetch(url, { cache: 'no-store' })
 	if (!res.ok) return { lessons: {} }
 	return validateResponse(LessonsResSchema, await res.json(), 'getLessons') as LessonsRes
-}
-
-export interface ConceptDetailRes {
-	concept: {
-		id: string
-		label: string
-		domain: string
-		subdomain: string
-	}
-	lesson?: {
-		title: string
-		body: string
-		concepts: string[]
-	}
-	prerequisites: {
-		id: string
-		label: string
-		status: string
-		mastery_pct: number
-	}[]
-	dependents?: {
-		id: string
-		label: string
-		status: string
-		mastery_pct: number
-	}[]
-	unlocked: boolean
-	progress?: {
-		status: string
-		streak: number
-		required_streak: number
-		mastery_pct: number
-	}
-}
-
-export async function getConceptDetail(conceptId: string): Promise<ConceptDetailRes> {
-	const res = await authedFetch(`${API_BASE}/api/concepts/${encodeURIComponent(conceptId)}`, {
-		cache: 'no-store',
-	})
-	if (!res.ok) throw new Error(`Concept detail fetch failed: ${res.status}`)
-	return validateResponse(ConceptDetailResSchema, await res.json(), 'getConceptDetail') as ConceptDetailRes
 }
 
 export interface PracticeQuestion {

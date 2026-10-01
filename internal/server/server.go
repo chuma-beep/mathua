@@ -231,9 +231,6 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/me", logRequest(cors(s.handleMe)))
 	mux.HandleFunc("/api/profile", logRequest(cors(s.authMiddleware(s.handleProfileUpdate))))
 
-	mux.HandleFunc("/api/session", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleSession)))))
-	mux.HandleFunc("/api/session/current", logRequest(cors(s.optionalAuthMiddleware(s.handleSessionCurrent))))
-	mux.HandleFunc("/api/answer", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleAnswer)))))
 	mux.HandleFunc("/api/progress/", logRequest(cors(s.optionalAuthMiddleware(s.handleProgress))))
 	mux.HandleFunc("/api/scores/", logRequest(cors(s.optionalAuthMiddleware(s.handleScores))))
 	mux.HandleFunc("/api/config", logRequest(cors(getOnly(s.handleConfig))))
@@ -279,7 +276,6 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/lessons", logRequest(cors(s.optionalAuthMiddleware(s.handleLessons))))
 	mux.HandleFunc("/api/lessons/body", logRequest(cors(s.optionalAuthMiddleware(s.handleLessonBody))))
 	mux.HandleFunc("/api/lessons/", logRequest(cors(s.optionalAuthMiddleware(s.handleLessonConcept))))
-	mux.HandleFunc("/api/concepts/", logRequest(cors(s.handleConceptDetail)))
 	mux.HandleFunc("/api/study/answer", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleStudyAnswer)))))
 	mux.HandleFunc("/api/reports", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodGet {
@@ -299,250 +295,6 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/efficacy", logRequest(cors(s.authMiddleware(s.handleEfficacy))))
 	mux.HandleFunc("/api/efficacy/all", logRequest(cors(s.shareLimiter.middleware(s.handleEfficacyAll))))
 	mux.HandleFunc("/api/efficacy/trend", logRequest(cors(s.shareLimiter.middleware(s.handleEfficacyTrend))))
-}
-
-// POST /api/session
-type startSessionReq struct {
-	Name string `json:"name"` // Only used when no auth token
-}
-type startSessionRes struct {
-	StudentID string           `json:"student_id"`
-	SessionID string           `json:"session_id"`
-	Question  *engine.Question `json:"question"`
-}
-
-type authStudentKey struct{}
-
-// ownsStudentID reports whether the caller may act as sid. The validated
-// Bearer identity always wins; unauthenticated callers may only act as
-// client-generated guest IDs (unguessable `guest_` tokens kept in
-// localStorage — knowledge of the token IS the credential). Auth-disabled
-// deployments (dev/test) allow all, preserving legacy behavior.
-func (s *Server) ownsStudentID(r *http.Request, sid string) bool {
-	if sid == "" {
-		return false
-	}
-	if authID, _ := r.Context().Value(authStudentKey{}).(string); authID != "" {
-		return authID == sid
-	}
-	if s.auth != nil {
-		return strings.HasPrefix(sid, "guest_")
-	}
-	return true
-}
-
-// getOnly rejects non-GET requests for read-only endpoints (health/config).
-func getOnly(next http.HandlerFunc) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		if r.Method != http.MethodGet {
-			http.Error(w, `{"error":"method not allowed"}`, http.StatusMethodNotAllowed)
-			return
-		}
-		next(w, r)
-	}
-}
-
-func (s *Server) authMiddleware(next http.HandlerFunc) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		if s.auth == nil {
-			next(w, r)
-			return
-		}
-		token := strings.TrimPrefix(r.Header.Get("Authorization"), "Bearer ")
-		if token == "" {
-			http.Error(w, `{"error":"missing authorization"}`, 401)
-			return
-		}
-		studentID, err := s.auth.ValidateToken(token)
-		if err != nil {
-			http.Error(w, `{"error":"invalid token"}`, 401)
-			return
-		}
-		ctx := r.Context()
-		r = r.WithContext(context.WithValue(ctx, authStudentKey{}, studentID))
-		next(w, r)
-	}
-}
-
-func (s *Server) optionalAuthMiddleware(next http.HandlerFunc) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		if s.auth == nil {
-			next(w, r)
-			return
-		}
-		token := strings.TrimPrefix(r.Header.Get("Authorization"), "Bearer ")
-		if token == "" {
-			next(w, r)
-			return
-		}
-		studentID, err := s.auth.ValidateToken(token)
-		if err != nil {
-			// Invalid token treated as unauthenticated — allow guest flow to proceed
-			log.Printf("optionalAuth: invalid token: %v", err)
-			next(w, r)
-			return
-		}
-		ctx := r.Context()
-		r = r.WithContext(context.WithValue(ctx, authStudentKey{}, studentID))
-		next(w, r)
-	}
-}
-
-func (s *Server) handleSession(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		http.Error(w, `{"error":"method not allowed"}`, 405)
-		return
-	}
-	// If authenticated, prefer the authenticated identity; otherwise fall back to body-provided
-	// name/student_id so visitors can take diagnostics and practice without an account.
-	studentID, _ := r.Context().Value(authStudentKey{}).(string)
-	if studentID != "" {
-		sess, err := s.repo.CreateSession(studentID)
-		if err != nil {
-			writeError(w, "failed to create session", 500)
-			return
-		}
-		q, err := s.eng.NextQuestion(sess.ID, studentID)
-		if err != nil {
-			writeError(w, "failed to get question", 500)
-			return
-		}
-		writeJSON(w, startSessionRes{StudentID: studentID, SessionID: sess.ID, Question: q})
-		return
-	}
-	// Unauthenticated / guest path
-	var req struct {
-		Name      string `json:"name"`
-		StudentID string `json:"student_id"`
-	}
-	if err := decodeJSON(w, r, &req); err != nil {
-		http.Error(w, `{"error":"invalid request"}`, 400)
-		return
-	}
-	sid := req.StudentID
-	if sid == "" {
-		if req.Name == "" {
-			http.Error(w, `{"error":"name or student_id is required"}`, 400)
-			return
-		}
-		st, err := s.eng.CreateStudent(req.Name)
-		if err != nil {
-			writeError(w, "failed to create student", 500)
-			return
-		}
-		sid = st.ID
-	}
-	sess, err := s.repo.CreateSession(sid)
-	if err != nil {
-		writeError(w, "failed to create session", 500)
-		return
-	}
-	q, err := s.eng.NextQuestion(sess.ID, sid)
-	if err != nil {
-		writeError(w, "failed to get question", 500)
-		return
-	}
-	writeJSON(w, startSessionRes{StudentID: sid, SessionID: sess.ID, Question: q})
-}
-
-// GET /api/session/current?session_id=xxx — verbatim peek of the active question
-func (s *Server) handleSessionCurrent(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		http.Error(w, `{"error":"method not allowed"}`, 405)
-		return
-	}
-	sessionID := r.URL.Query().Get("session_id")
-	if sessionID == "" {
-		writeError(w, "session_id required", 400)
-		return
-	}
-	studentID, _ := r.Context().Value(authStudentKey{}).(string)
-	if studentID == "" {
-		ses, _ := s.repo.GetSession(sessionID)
-		if ses != nil {
-			studentID = ses.StudentID
-		}
-	}
-	if studentID == "" {
-		writeError(w, "missing student id", 400)
-		return
-	}
-	ses, _ := s.repo.GetSession(sessionID)
-	if ses == nil {
-		writeError(w, "session not found", 404)
-		return
-	}
-	if ses.StudentID != studentID {
-		writeError(w, "session does not belong to student", 403)
-		return
-	}
-	q, err := s.eng.GetCurrentQuestion(sessionID, studentID)
-	if err != nil {
-		writeError(w, "failed to get current question", 500)
-		return
-	}
-	writeJSON(w, map[string]interface{}{"question": q})
-}
-
-// POST /api/answer
-type answerReq struct {
-	SessionID string  `json:"session_id"`
-	AttemptID string  `json:"attempt_id"`
-	Answer    string  `json:"answer"`
-	Elapsed   float64 `json:"elapsed"`
-}
-type answerRes struct {
-	Result       *engine.AnswerResult `json:"result"`
-	NextQuestion *engine.Question     `json:"next_question"`
-	Done         bool                 `json:"done"`
-}
-
-func (s *Server) handleAnswer(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		http.Error(w, `{"error":"method not allowed"}`, 405)
-		return
-	}
-	var req answerReq
-	if err := decodeJSON(w, r, &req); err != nil {
-		writeError(w, "invalid request", 400)
-		return
-	}
-	studentID, _ := r.Context().Value(authStudentKey{}).(string)
-	if studentID == "" {
-		ses, _ := s.repo.GetSession(req.SessionID)
-		if ses != nil {
-			studentID = ses.StudentID
-		}
-	}
-	if studentID == "" {
-		writeError(w, "missing student id", 400)
-		return
-	}
-	sesCheck, _ := s.repo.GetSession(req.SessionID)
-	if sesCheck != nil && sesCheck.StudentID != studentID {
-		writeError(w, "session does not belong to student", 403)
-		return
-	}
-	if req.Elapsed < MinAnswerSeconds {
-		writeError(w, "answer submitted too quickly", 400)
-		return
-	}
-	result, err := s.eng.SubmitAnswer(req.SessionID, studentID, req.AttemptID, req.Answer, req.Elapsed)
-	if err != nil {
-		if errors.Is(err, engine.ErrNoActiveQuestion) {
-			writeError(w, "no active question", 409)
-			return
-		}
-		writeError(w, "failed to submit answer", 500)
-		return
-	}
-	next, err := s.eng.NextQuestion(req.SessionID, studentID)
-	if err != nil {
-		log.Printf("handleAnswer: NextQuestion failed for session %s: %v (returning result without next question)", req.SessionID, err)
-		writeJSON(w, answerRes{Result: result, NextQuestion: nil, Done: true})
-		return
-	}
-	writeJSON(w, answerRes{Result: result, NextQuestion: next, Done: next == nil})
 }
 
 // GET /api/progress/{student_id}
@@ -2055,6 +1807,27 @@ func paused(studentID string, repo storage.Repository) bool {
 	return t.After(time.Now().UTC())
 }
 
+// startSessionRes and the answer shapes below were named for the session flow
+// that used to live here. Those routes are gone; the review handlers still use
+// them, so the shapes stay and the comments now say so.
+type startSessionRes struct {
+	StudentID string           `json:"student_id"`
+	SessionID string           `json:"session_id"`
+	Question  *engine.Question `json:"question"`
+}
+
+type answerReq struct {
+	SessionID string  `json:"session_id"`
+	AttemptID string  `json:"attempt_id"`
+	Answer    string  `json:"answer"`
+	Elapsed   float64 `json:"elapsed"`
+}
+type answerRes struct {
+	Result       *engine.AnswerResult `json:"result"`
+	NextQuestion *engine.Question     `json:"next_question"`
+	Done         bool                 `json:"done"`
+}
+
 // POST /api/reviews/session — creates a review-only session
 func (s *Server) handleReviewsSession(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
@@ -2505,26 +2278,6 @@ func (s *Server) handleCourseDiagnostic(w http.ResponseWriter, r *http.Request) 
 	})
 }
 
-// GET /api/concepts/{id}
-func (s *Server) handleConceptDetail(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		http.Error(w, `{"error":"method not allowed"}`, 405)
-		return
-	}
-	conceptID := strings.TrimPrefix(r.URL.Path, "/api/concepts/")
-	if conceptID == "" {
-		writeError(w, "missing concept id", 400)
-		return
-	}
-	studentID, _ := r.Context().Value(authStudentKey{}).(string)
-	detail, err := s.eng.ConceptDetail(studentID, conceptID)
-	if err != nil {
-		writeError(w, err.Error(), 404)
-		return
-	}
-	writeJSON(w, detail)
-}
-
 // POST /api/study/answer — Learn seam: LessonQuiz → SubmitAnswer (CONTEXT.md Seam)
 // Body: { concept_id, answer, elapsed, question, student_id? }
 // student_id is used only for a guest (mathua_guest_id).
@@ -2619,6 +2372,140 @@ func (s *Server) handleStudyAnswer(w http.ResponseWriter, r *http.Request) {
 		"expected_answer": res.ExpectedAnswer,
 		"halted":          res.Halted,
 	})
+}
+
+type authStudentKey struct{}
+
+// ownsStudentID reports whether the caller may act as sid. The validated
+// Bearer identity always wins; unauthenticated callers may only act as
+// client-generated guest IDs (unguessable `guest_` tokens kept in
+// localStorage — knowledge of the token IS the credential). Auth-disabled
+// deployments (dev/test) allow all, preserving legacy behavior.
+func (s *Server) ownsStudentID(r *http.Request, sid string) bool {
+	if sid == "" {
+		return false
+	}
+	if authID, _ := r.Context().Value(authStudentKey{}).(string); authID != "" {
+		return authID == sid
+	}
+	if s.auth != nil {
+		return strings.HasPrefix(sid, "guest_")
+	}
+	return true
+}
+
+// getOnly rejects non-GET requests for read-only endpoints (health/config).
+func getOnly(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodGet {
+			http.Error(w, `{"error":"method not allowed"}`, http.StatusMethodNotAllowed)
+			return
+		}
+		next(w, r)
+	}
+}
+
+func (s *Server) authMiddleware(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		if s.auth == nil {
+			next(w, r)
+			return
+		}
+		token := strings.TrimPrefix(r.Header.Get("Authorization"), "Bearer ")
+		if token == "" {
+			http.Error(w, `{"error":"missing authorization"}`, 401)
+			return
+		}
+		studentID, err := s.auth.ValidateToken(token)
+		if err != nil {
+			http.Error(w, `{"error":"invalid token"}`, 401)
+			return
+		}
+		ctx := r.Context()
+		r = r.WithContext(context.WithValue(ctx, authStudentKey{}, studentID))
+		next(w, r)
+	}
+}
+
+func (s *Server) optionalAuthMiddleware(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		if s.auth == nil {
+			next(w, r)
+			return
+		}
+		token := strings.TrimPrefix(r.Header.Get("Authorization"), "Bearer ")
+		if token == "" {
+			next(w, r)
+			return
+		}
+		studentID, err := s.auth.ValidateToken(token)
+		if err != nil {
+			// Invalid token treated as unauthenticated — allow guest flow to proceed
+			log.Printf("optionalAuth: invalid token: %v", err)
+			next(w, r)
+			return
+		}
+		ctx := r.Context()
+		r = r.WithContext(context.WithValue(ctx, authStudentKey{}, studentID))
+		next(w, r)
+	}
+}
+
+func (s *Server) handleSession(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	// If authenticated, prefer the authenticated identity; otherwise fall back to body-provided
+	// name/student_id so visitors can take diagnostics and practice without an account.
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID != "" {
+		sess, err := s.repo.CreateSession(studentID)
+		if err != nil {
+			writeError(w, "failed to create session", 500)
+			return
+		}
+		q, err := s.eng.NextQuestion(sess.ID, studentID)
+		if err != nil {
+			writeError(w, "failed to get question", 500)
+			return
+		}
+		writeJSON(w, startSessionRes{StudentID: studentID, SessionID: sess.ID, Question: q})
+		return
+	}
+	// Unauthenticated / guest path
+	var req struct {
+		Name      string `json:"name"`
+		StudentID string `json:"student_id"`
+	}
+	if err := decodeJSON(w, r, &req); err != nil {
+		http.Error(w, `{"error":"invalid request"}`, 400)
+		return
+	}
+	sid := req.StudentID
+	if sid == "" {
+		if req.Name == "" {
+			http.Error(w, `{"error":"name or student_id is required"}`, 400)
+			return
+		}
+		st, err := s.eng.CreateStudent(req.Name)
+		if err != nil {
+			writeError(w, "failed to create student", 500)
+			return
+		}
+		sid = st.ID
+	}
+	sess, err := s.repo.CreateSession(sid)
+	if err != nil {
+		writeError(w, "failed to create session", 500)
+		return
+	}
+	q, err := s.eng.NextQuestion(sess.ID, sid)
+	if err != nil {
+		writeError(w, "failed to get question", 500)
+		return
+	}
+	writeJSON(w, startSessionRes{StudentID: sid, SessionID: sess.ID, Question: q})
 }
 
 // POST /api/quiz/session — actionable quiz every 150 XP, own grading path, guest unlimited retake
