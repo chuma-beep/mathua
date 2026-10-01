@@ -163,16 +163,17 @@ export default function ArchitecturePage() {
 
         <div style={{ marginTop: '2rem' }}>
           {[
-            'Client sends POST /api/answer with {session_id, answer, elapsed}.',
+            'Client sends POST /api/study/answer with {concept_id, answer, question}.',
             'Auth middleware validates JWT and injects student ID into request context.',
-            'Engine.SubmitAnswer routes to the correct grader by grading_type.',
+            'The server-side anchor written when the question was served supplies the expected answer, so a client cannot grade itself.',
+            'Engine.SubmitStudyAnswer routes to the correct grader by grading_type.',
             'The Mastery Machine evaluates whether a state transition is earned.',
             'SM-2 Compute recalculates repetition count, interval and easiness factor.',
             'repo.UpsertProgress atomically saves all fields via ON CONFLICT DO UPDATE.',
             'If weakness > 0.3, it propagates to dependent concepts at w * 0.3.',
             'repo.RecordAttempt stores the raw answer for analytics.',
             'XP is computed (base * timeMult * streakMult) and added to the student.',
-            'Engine.NextQuestion asks the scheduler for the next concept and generates a problem.',
+            'The client refetches the practice set, which generates the next problem and anchors it.',
           ].map((step, i) => (
             <div key={step} style={{ ...bodyStyle, marginBottom: '0.5rem' }}>
               <span style={{ color: 'var(--accent-blue)', fontFamily: monoFont, fontSize: '13px', fontWeight: 500 }}>

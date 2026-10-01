@@ -96,3 +96,39 @@ describe('every API route has a caller', () => {
     expect(declared).toContain('/api/auth/guest')
   })
 })
+
+// The architecture docs described the session answer flow as *the* answer flow
+// while nothing called it. The routes are gone; a doc that still names one is
+// either stale or describing something that does not exist.
+describe('docs describe routes that exist', () => {
+  const server = readFileSync(join(APP, '..', '..', 'internal', 'server', 'server.go'), 'utf-8')
+  const registered = new Set(
+    [...server.matchAll(/mux\.HandleFunc\("(\/api\/[^"?]*)/g)].map(m => m[1]),
+  )
+
+  const docs: [string, string][] = [
+    ['docs/system-design.md', readFileSync(join(APP, '..', '..', 'docs', 'system-design.md'), 'utf-8')],
+    ['app/docs/architecture/page.tsx', readFileSync(join(APP, 'app', 'docs', 'architecture', 'page.tsx'), 'utf-8')],
+    ['components/SystemDesignFlow/RequestFlow.tsx', readFileSync(join(APP, 'components', 'SystemDesignFlow', 'RequestFlow.tsx'), 'utf-8')],
+    ['diagrams/system-design-request-flow.d2', readFileSync(join(APP, 'diagrams', 'system-design-request-flow.d2'), 'utf-8')],
+  ]
+
+  for (const [file, text] of docs) {
+    it(`${file} names no unregistered /api route`, () => {
+      // Docs legitimately write wildcards ("/api/quiz/*") and path
+      // parameters ("/api/progress/{student_id}"). Neither is a concrete
+      // route, so both are reduced to the registered prefix they describe.
+      const named = [...new Set([...text.matchAll(/\/api\/[a-z0-9{}/_*-]*/g)].map(m => m[0]))]
+      // A registered path is a ServeMux subtree: "/api/lessons/" serves
+      // "/api/lessons/{id}/practice". So a named route is real when some
+      // registered route is a path prefix of it.
+      const prefixes = [...registered].sort((a, b) => b.length - a.length)
+      const served = (route: string) => prefixes.some(p => route === p || route.startsWith(p))
+      const stale = named.filter(route => !route.includes('*') && !served(route))
+      expect(
+        stale,
+        `${file} documents routes the server does not register:\n  ${stale.join('\n  ')}`,
+      ).toEqual([])
+    })
+  }
+})

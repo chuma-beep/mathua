@@ -8,9 +8,9 @@ Server: HTTP Server\nnet/http Mux
 
 Auth: Auth Middleware\nJWT Validation
 
-Handler: handleAnswer\n/api/answer POST
+Handler: handleStudyAnswer\n/api/study/answer POST
 
-Engine: Engine.SubmitAnswer\n(sessionID, studentID, answer, elapsed)
+Engine: Engine.SubmitStudyAnswer\n(studentID, conceptID, answer, elapsed)
 
 Grade: gradeAnswer\nGenerator.Grade || Router.Grade
 
@@ -28,15 +28,15 @@ Attempt: RecordAttempt()\nINSERT INTO attempts
 
 XP: computeXP() + repo.AddXP()
 
-Next: Engine.NextQuestion()\nLoad next problem
+Next: Client refetches practice\nNew problem, new anchor
 
-Response: JSON Response\nresult + next question
+Response: JSON Response\ncorrect + feedback + explanation + xp
 
 # Flow
-Client -> Server: POST /api/answer
+Client -> Server: POST /api/study/answer
 Server -> Auth: Validate Token
 Auth -> Handler: studentID in context
-Handler -> Engine: SubmitAnswer()
+Handler -> Engine: SubmitStudyAnswer()
 Engine -> Grade: Route to grader
 Grade -> Grader: Grade expected vs answer
 Grader -> Mastery: result + metrics

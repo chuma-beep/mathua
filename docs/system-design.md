@@ -77,7 +77,7 @@ Five core tables: `students`, `concept_progress`, `sessions`, `attempts`, `quest
 | `xp_total` | INTEGER | Lifetime XP (`MAX(0, xp_total+?)` floor `sqlite.go:199`) |
 | `xp_today` | INTEGER | Resets via `xp_date` check (`MAX(0, …)`) |
 | `xp_date` | TEXT | Date of `xp_today` bucket (`YYYY-MM-DD`) |
-| `daily_xp_goal` | INTEGER | Daily goal (default 30, migrated from legacy 150 via versioned backfill `sqlite.go`) |
+| `daily_xp_goal` | INTEGER | Daily goal (default 10, migrated from legacy 150 via versioned backfill `sqlite.go`) |
 | `settings` | TEXT (JSON) | Arbitrary key-value settings (`pause_until`, `accommodations.extra_time`) |
 | `diagnostic_completed` | INTEGER | Boolean flag |
 | `share_token` | TEXT | `s_` + 12 random bytes (`engine.go:1270`) |
@@ -339,7 +339,7 @@ The web server exposes a REST API through Go's standard `net/http` package. No e
 | `logRequest` | Logs method and path |
 | `authMiddleware` | Reads `Authorization: Bearer <token>`, validates `HS256` JWT (`auth.go:98`), injects `studentID` into context |
 | `authLimiter` | Token-bucket rate limiter (5 rate, 10 burst, 1 min window) on auth endpoints `server.go:70` |
-| `writeLimiter` | 20 burst, 3s window on write endpoints (`/api/session`, `/api/answer`, `/api/study/answer`, `/api/quiz/*`, `/api/goal/*`, `/api/reviews/*`) `server.go:69` |
+| `writeLimiter` | 20 burst, 3s window on write endpoints (`/api/study/answer`, `/api/quiz/*`, `/api/goal/*`, `/api/reviews/*`) `server.go:69` |
 | `shareLimiter` | 10 burst, 6s window on `GET /api/share/*` `server.go:69` |
 
 ### All Routes
@@ -349,9 +349,6 @@ The web server exposes a REST API through Go's standard `net/http` package. No e
 | POST | `/api/auth/signup` | write: authLimiter | Create account → JWT |
 | POST | `/api/auth/login` | write: authLimiter | Login → JWT |
 | GET | `/api/auth/me` | Bearer | Current user + scores |
-| POST | `/api/session` | write: writeLimiter, optional | Start practice session |
-| GET | `/api/session/current` | optional | Peek active question (409 recovery) |
-| POST | `/api/answer` | write: writeLimiter, optional | Submit answer → result + next (`MinAnswerSeconds 0.3` `server.go:30`) |
 | GET | `/api/progress/{student_id}` | optional | All concept progress |
 | GET | `/api/scores/{student_id}` | optional | Aggregated scores |
 | GET | `/api/config` | no | `{auth_enabled: bool}` |
@@ -376,11 +373,10 @@ The web server exposes a REST API through Go's standard `net/http` package. No e
 | POST | `/api/reviews/answer` | write: writeLimiter, auth | Submit review answer |
 | GET | `/api/lessons` | no | All lessons with progress (`?student_id=`) |
 | GET | `/api/lessons/body` | no | Single lesson markdown body |
-| GET | `/api/lessons/{id}/practice` | no | Generated/curated practice questions (`?count=5`) — also stores `studyExpected` for cheat prevention `server.go:1150` |
+| GET | `/api/lessons/{id}/practice` | no | Generated/curated practice questions (`?count=5`) — also writes the study anchor (expected answer + explanation) that `/api/study/answer` grades against, so a client cannot grade itself |
 | GET | `/api/lessons/{id}/kp` | no | KP shards (3 per concept) with worked example |
-| GET | `/api/concepts/{id}` | optional | Concept detail + prereqs/dependents/unlocked |
-| POST | `/api/study/answer` | write: writeLimiter, optional | Study seam `LessonQuiz→SubmitAnswer` (`CONTEXT.md` Seam) — server-stored expected `engine.go:931`, `student_id` impersonation guard `server.go:1594` |
-| POST | `/api/quiz/session` | write: writeLimiter, optional | Quiz every 150 XP at 80% difficulty (`quiz.go:1`) |
+| POST | `/api/study/answer` | write: writeLimiter, optional | Study seam `LessonQuiz→SubmitAnswer` (`CONTEXT.md` Seam) — graded against the server-side anchor, never a client-supplied expected; 409 + re-serve when no anchor exists, `student_id` impersonation guard |
+| POST | `/api/quiz/session` | write: writeLimiter, optional | Quiz every 50 XP at 80% difficulty (`quiz.go:1`) |
 | POST | `/api/quiz/answer` | write: writeLimiter, optional | Submit quiz answer (`TaskQuiz 20` `engine.go:1126`) |
 | GET | `/api/activity` | auth | Daily activity heatmap (`?days=365`) |
 | GET | `/api/efficacy` | auth | First-pass/second-pass efficacy |
@@ -456,9 +452,9 @@ Here's the complete flow when a student submits an answer:
 
 ### Step-by-Step
 
-1. **Client** sends `POST /api/answer` with `{session_id, answer, elapsed_seconds}`
+1. **Client** sends `POST /api/study/answer` with `{concept_id, answer, question}`
 2. **Auth middleware** validates JWT, injects `studentID` into request context
-3. **Handler** calls `Engine.SubmitAnswer(sessionID, studentID, answer, elapsed)`
+3. **Handler** looks the question up in the server-side anchor — written when the question was served — and calls `Engine.SubmitStudyAnswer(studentID, conceptID, answer, elapsed)`. There is no client-supplied expected answer to fall back on: no anchor means a 409 and a re-serve, not a guess.
 4. **Grading**  --  route to the correct grader based on `grading_type`: numeric graders parse the answer, SymPy handles symbolic equivalence, etc.
 5. **Machine**  --  `mastery.Machine.Next()` determines if the student's performance qualifies for a state transition (UNSEEN → LEARNING → etc.)
 6. **SM-2**  --  `scheduler.ComputeSM2()` computes new repetition count, interval, and easiness factor
@@ -466,7 +462,7 @@ Here's the complete flow when a student submits an answer:
 8. **Weakness**  --  if the concept's weakness score exceeds 0.3, propagate to dependent concepts at `w × 0.3`
 9. **Attempt**  --  `repo.RecordAttempt()` inserts a row into the `attempts` table
 10. **XP**  --  `computeXP()` calculates XP using base, time, and streak multipliers, then `repo.AddXP()` updates the student record
-11. **Next**  --  `Engine.NextQuestion()` loads the next concept from the scheduler and asks the generator registry to produce a new problem
+11. **Next**  --  the client refetches the practice set, which generates the next problem and writes its anchor. The scheduler picks the next concept on the following turn.
 12. **Response**  --  JSON response with result, next question, and session state
 
 Total latency target: under 100ms for numeric grading, under 500ms for SymPy-based grading (including subprocess round-trip).
@@ -488,7 +484,7 @@ Mathua implements a compressed-covering + info-gain CAT to locate a student's kn
 5. Propagate evidence: **correct** → `+0.3` belief to all prerequisites; **wrong** → `-0.3` to all dependents + related (Bayes conflict weighting)
 6. Track per-concept `KnowledgeConfidence 0–1`; `Frontier` is the highest belief drop between sorted beliefs
 7. Stop when every concept has `≥2` probes and `confidence ≥0.7`; otherwise run `supplementalDiagnostic()` to probe low-confidence concepts
-8. Report `DiagnosticReport{PlacementCourseID, FrontierIdx, GapsByDomain, MasteryLevels, CompletionEstimates}` (`report.go:11`) with `150 XP` completion estimates
+8. Report `DiagnosticReport{PlacementCourseID, FrontierIdx, GapsByDomain, MasteryLevels, CompletionEstimates}` (`report.go:11`) with `50/100/300 XP` completion estimates (`report.go:41`)
 
 ### Key Properties
 
