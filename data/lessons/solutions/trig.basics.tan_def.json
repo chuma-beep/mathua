@@ -1,0 +1,21 @@
+{
+  "concept": "trig.basics.tan_def",
+  "setup": "Tangent is the ratio opposite over adjacent, and it can be reached two ways from what is given.",
+  "steps": [
+    {
+      "fact": "adj",
+      "optional": true,
+      "say": "From the right triangle: the side opposite the angle in question is [[opp]] and the one next to it is [[adj]], so tangent is [[opp]]/[[adj]]."
+    },
+    {
+      "fact": "cos_num",
+      "optional": true,
+      "say": "From sine and cosine instead: tangent is $\\sin(\\theta)$ divided by $\\cos(\\theta)$, which is $([[sin_num]]/[[sin_den]]) \\div ([[cos_num]]/[[cos_den]])$. Dividing by a fraction means multiplying by its reciprocal, so the two fractions turn into one over the other."
+    },
+    {
+      "fact": "num",
+      "say": "Reducing that gives [[num]]/[[den]]."
+    }
+  ],
+  "answer": "So the value is [[num]]/[[den]]."
+}

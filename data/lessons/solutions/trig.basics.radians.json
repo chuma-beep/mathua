@@ -1,0 +1,15 @@
+{
+  "concept": "trig.basics.radians",
+  "setup": "The angle is [[deg]] degrees, and the task is to express it in radians.",
+  "steps": [
+    {
+      "fact": "rad",
+      "say": "A full turn is 360 degrees and also 2π radians, so one degree is worth $\\frac{\\pi}{180}$ radians."
+    },
+    {
+      "fact": "deg",
+      "say": "Multiply: [[deg]] × $\\frac{\\pi}{180}$."
+    }
+  ],
+  "answer": "That is [[rad]]."
+}

@@ -1,0 +1,19 @@
+{
+  "concept": "trig.ident.pythagorean",
+  "setup": "You are given one of the two ratios and asked for the other using $\\sin^{2}\\theta + \\cos^{2}\\theta = 1$.",
+  "steps": [
+    {
+      "fact": "known",
+      "say": "The identity comes straight from the unit circle, where the horizontal and vertical distances square to 1 — so the two squared ratios always add to 1."
+    },
+    {
+      "fact": "sq_num",
+      "say": "Subtract the known square: 1 − ([[known_num]]/[[known_den]])², and [[known_num]]²/[[known_den]]² = [[sq_num]]/[[sq_den]]."
+    },
+    {
+      "fact": "rem_num",
+      "say": "That leaves [[rem_num]]/[[sq_den]], so [[want]] = √([[rem_num]]/[[sq_den]]). Taking the positive root is what the assumption that the angle is acute buys you."
+    }
+  ],
+  "answer": "So [[want]] = [[num]]/[[den]]."
+}

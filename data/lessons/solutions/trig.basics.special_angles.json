@@ -1,0 +1,15 @@
+{
+  "concept": "trig.basics.special_angles",
+  "setup": "You want the exact value of [[fn]] at [[label]].",
+  "steps": [
+    {
+      "fact": "label",
+      "say": "The exact values for 30°, 45° and 60° come from cutting an equilateral triangle in half, which puts a 30-60-90 triangle against a 45-45-90 one."
+    },
+    {
+      "fact": "val",
+      "say": "Reading off the [[fn]] coordinate for [[label]] gives [[val]] — an exact surd, not a rounded decimal."
+    }
+  ],
+  "answer": "So [[fn]]([[label]]) = [[val]]."
+}

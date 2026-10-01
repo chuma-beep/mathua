@@ -1,0 +1,15 @@
+{
+  "concept": "trig.basics.reciprocal",
+  "setup": "You are given [[name]] = [[num]]/[[den]] and asked for its reciprocal [[recip]].",
+  "steps": [
+    {
+      "fact": "recip",
+      "say": "The reciprocal of a value is one divided by it, which flips the fraction: [[num]]/[[den]] becomes [[den]]/[[num]]."
+    },
+    {
+      "fact": "recip_num",
+      "say": "Written as one fraction, that is 1 divided by ([[num]]/[[den]]) = [[recip_num]]/[[recip_den]]."
+    }
+  ],
+  "answer": "So [[recip]] = [[recip_num]]/[[recip_den]]."
+}

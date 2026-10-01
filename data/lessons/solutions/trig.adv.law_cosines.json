@@ -1,0 +1,23 @@
+{
+  "concept": "trig.adv.law_cosines",
+  "setup": "Triangle ABC has a = [[a]], b = [[b]], and angle C = [[C]]°.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The law of cosines handles the side opposite the known angle: c² = a² + b² − 2ab·cos(C). The minus sign is what distinguishes it from the Pythagorean theorem, which is the same formula with C = 90° and cos C = 0."
+    },
+    {
+      "fact": "two_ab",
+      "say": "The squared sides are [[a_sq]] and [[b_sq]], and the cross term 2ab·cos([[C]]°) is [[two_ab]]."
+    },
+    {
+      "fact": "c_sq",
+      "say": "So c² = [[a_sq]] + [[b_sq]] − [[two_ab]] = [[c_sq]]."
+    },
+    {
+      "fact": "c",
+      "say": "Taking the square root gives c = [[c]]."
+    }
+  ],
+  "answer": "So side c is [[c]]."
+}
