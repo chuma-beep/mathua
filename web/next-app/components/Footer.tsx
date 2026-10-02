@@ -8,6 +8,12 @@ interface FooterProps {
 // Page-colored footer: blends with the background in both themes, separated
 // by a hairline. Brand left, link columns grouped right, credits in a bottom
 // bar. Full-width content.
+
+// Which background the footer wears. 'art' shows the risograph feature band
+// (footer2); 'texture' shows the subtle footer.png wallpaper. Flip the constant
+// to compare; both assets stay committed.
+const FOOTER_BG: 'art' | 'texture' = 'art'
+
 const FOOTER_SHAPES = ['alpha', 'beta', 'gamma']
 const shapeUrl = (seed: string) =>
   `https://api.dicebear.com/${DICEBEAR_VERSION}/shapes/svg?seed=${seed}&backgroundColor=1c3a5e`
@@ -20,14 +26,16 @@ const CREDITS = ['MIT License', 'Avatars by DiceBear']
 export default function Footer({ className = '' }: FooterProps) {
   return (
     <footer className={`relative mt-[10px] overflow-hidden border-t border-mathua-border bg-mathua-bg text-mathua-primary ${className}`}>
-      {/* Decorative texture behind the whole footer. aria-hidden and
-          pointer-events-none so it stays out of the a11y tree and cannot
+      {/* Decorative texture behind the whole footer ('texture' mode). aria-hidden
+          and pointer-events-none so it stays out of the a11y tree and cannot
           intercept clicks; the content below is lifted with `relative`. */}
-      <div
-        aria-hidden="true"
-        className="footer-bg pointer-events-none absolute inset-0 bg-cover bg-center"
-      />
-      <div className="relative w-full px-4 py-10 sm:px-6 md:py-14 lg:px-10">
+      {FOOTER_BG === 'texture' && (
+        <div
+          aria-hidden="true"
+          className="footer-bg pointer-events-none absolute inset-0 bg-cover bg-center"
+        />
+      )}
+      <div className="relative w-full px-4 pt-10 sm:px-6 md:pt-14 lg:px-10">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between md:gap-12">
           <div className="md:max-w-[34ch]">
             <div>
@@ -83,7 +91,7 @@ export default function Footer({ className = '' }: FooterProps) {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-mathua-border pt-5 font-mono text-[10px] opacity-40">
+        <div className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-mathua-border pb-10 pt-5 font-mono text-[10px] opacity-40">
           {CREDITS.map(credit => (
             <span key={credit} className="after:ml-3 after:content-['·'] last:after:content-none">
               {credit}
@@ -91,6 +99,13 @@ export default function Footer({ className = '' }: FooterProps) {
           ))}
         </div>
       </div>
+
+      {/* Feature band ('art' mode): a full-bleed, text-free strip below the
+          content, so the illustration is seen without ever competing with the
+          footer text for contrast. */}
+      {FOOTER_BG === 'art' && (
+        <div aria-hidden="true" className="footer-art pointer-events-none" />
+      )}
     </footer>
   )
 }

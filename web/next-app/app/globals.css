@@ -450,6 +450,21 @@ footer .link-underline:hover {
   opacity: 0.17;
 }
 
+/* Footer feature band (risograph illustration). Opaque, so no per-theme
+   opacity: the same blue art reads in both themes. `center bottom` keeps the
+   walking figure, which sits in the lower third of the source. The top edge
+   dissolves into --bg with a mask -- transparent, not a colored overlay, so it
+   follows the theme for free. The band is text-free: the content above it owns
+   the contrast. */
+.footer-art {
+  height: clamp(140px, 18vw, 240px);
+  background-image: url('/footer2-bg.avif');
+  background-size: cover;
+  background-position: center bottom;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 40%);
+  mask-image: linear-gradient(to bottom, transparent, #000 40%);
+}
+
 /* Self-keying cluster labels: the domain color rides on the label itself,
    so the standalone legend is no longer needed. */
 .graph-label--domain::before {
