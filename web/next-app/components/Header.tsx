@@ -9,6 +9,7 @@ import { useTheme } from '../hooks/useTheme'
 import { useAuthState } from '../hooks/useAuthState'
 import { useChrome } from '../hooks/useChrome'
 import { useInertWhen } from '../hooks/useInertWhen'
+import { registerChromePart } from '../lib/chrome'
 import { signOut } from '../lib/auth'
 import { resolveAvatar } from '../lib/dicebear'
 import Avatar from './Avatar'
@@ -25,6 +26,9 @@ export default function Header({ links }: HeaderProps) {
   const { visible: chromeVisible } = useChrome()
   const headerRef = useRef<HTMLElement>(null)
   useInertWhen(headerRef, !chromeVisible)
+  // Tell the chrome store a header exists, so the tap control knows there is
+  // something to hide even on a page with no tab bar (the landing page).
+  useEffect(() => registerChromePart('header'), [])
   const router = useRouter()
   const pathname = usePathname()
   const [open, setOpen] = useState(false)

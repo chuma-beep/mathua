@@ -3,6 +3,7 @@ import Script from 'next/script'
 import localFont from 'next/font/local'
 import { Toaster } from '@/components/ui/sonner'
 import ServiceWorkerRegistrar from '@/components/ServiceWorkerRegistrar'
+import ChromeToggle from '@/components/ChromeToggle'
 import { SITE_URL } from '@/lib/site'
 import './globals.css'
 
@@ -108,6 +109,11 @@ export default function RootLayout({
         </div>
         <Toaster />
         <ServiceWorkerRegistrar />
+        {/* The chrome tap control, mounted here rather than inside Header: the
+            header is `inert` while hidden, which would disable the one control
+            meant to bring it back. It renders nothing on pages with no chrome
+            (mobile /profile). */}
+        <ChromeToggle />
       </body>
     </html>
   )
