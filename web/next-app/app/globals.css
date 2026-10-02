@@ -457,10 +457,12 @@ footer .link-underline:hover {
      < 768px  luffy-bg    the RGBA silhouette, scaled to the footer width
      >= 768px new-zealand the landscape photo at its full 2.5:1 ratio
 
-   Both use `background-size: 100% auto` so the height is never reduced: the
-   image is shown whole, not cropped. What differs is how much of it there is --
-   mobile is content-sized and puts a small silhouette at the foot, while the
-   desktop host reserves the photo's exact ratio (40vw) so it fills the footer. */
+Both use `background-size: 100% auto` so the image is shown at its native
+   ratio, never squashed. Up to the desktop cap the height is never reduced
+   either and the photo fills the footer whole; past the cap it trims the sky
+   (see .footer-art-host). What differs by breakpoint is how much there is --
+   mobile is content-sized and puts a small silhouette at the foot, desktop
+   reserves the photo's own ratio so it fills the footer. */
 
 /* Mobile: luffy-bg. An RGBA silhouette, fully transparent at the top and dense
    at the bottom, so it blends into --bg on its own. It is near-black, hence the
@@ -489,9 +491,14 @@ footer .link-underline:hover {
     filter: none;
   }
 
-  /* 100/2.504: the photo's exact ratio, so `cover`-free `100% auto` fills it. */
+  /* 100/2.504: the photo's exact ratio, so `cover`-free `100% auto` fills it --
+     up to a point. Left uncapped this grows without limit (767px at 1920,
+     1023px at 2560), so the height stops at 640px. That binds above ~1600px
+     wide, and past it the photo is taller than its box: `center bottom` then
+     keeps the mountains and lake pinned and trims the sky off the top, with the
+     photo still edge to edge. */
   .footer-art-host {
-    min-height: 39.94vw;
+    min-height: min(39.94vw, 640px);
   }
 
   /* Brand and nav sit top-left and top-right over the photo, so the scrim is
