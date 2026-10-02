@@ -9,9 +9,9 @@ interface FooterProps {
 // by a hairline. Brand left, link columns grouped right, credits in a bottom
 // bar. Full-width content.
 
-// Which background the footer wears. 'art' shows the risograph feature band
-// (footer2); 'texture' shows the subtle footer.png wallpaper. Flip the constant
-// to compare; both assets stay committed.
+// Which background the footer wears. 'art' shows the luffy-bg silhouette
+// (luffy-bg.avif); 'texture' shows the subtle footer.png wallpaper. Flip the
+// constant to compare; all three source assets stay committed.
 const FOOTER_BG: 'art' | 'texture' = 'art'
 
 const FOOTER_SHAPES = ['alpha', 'beta', 'gamma']
@@ -33,11 +33,10 @@ export default function Footer({ className = '' }: FooterProps) {
       {/* Decorative background behind the whole footer. aria-hidden and
           pointer-events-none so it stays out of the a11y tree and cannot
           intercept clicks; the content below is lifted with `relative`. The
-          'art' image is opaque, so a theme-colored scrim rides above it to keep
-          the text legible. */}
+          'art' layer carries its own alpha fade, so it needs no scrim. */}
       <div
         aria-hidden="true"
-        className={`${FOOTER_BG === 'art' ? 'footer-art' : 'footer-bg'} pointer-events-none absolute inset-0 bg-cover bg-center`}
+        className={`${FOOTER_BG === 'art' ? 'footer-art' : 'footer-bg'} pointer-events-none absolute inset-0`}
       />
       {FOOTER_BG === 'art' && (
         <div aria-hidden="true" className="footer-scrim pointer-events-none absolute inset-0" />
