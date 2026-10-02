@@ -29,15 +29,20 @@ export default function Footer({ className = '' }: FooterProps) {
     <footer
       className={`relative mt-[10px] overflow-hidden border-t border-mathua-border bg-mathua-bg text-mathua-primary ${className}`}
     >
-      {/* Decorative background. Carries the luffy-bg silhouette on mobile only;
-          from md up the footer is deliberately plain -- page-colored with a
-          hairline -- so globals.css hides this layer there. aria-hidden and
-          pointer-events-none so it stays out of the a11y tree and cannot
-          intercept clicks; the content below is lifted with `relative`. */}
+      {/* Decorative background. Carries the luffy-bg silhouette on phones and
+          tablets; from lg up the footer is deliberately plain -- page-colored
+          with a hairline -- so globals.css hides this layer there. The scrim
+          rides over the art from md up, where the row layout puts the nav where
+          the figure is. Both are aria-hidden and pointer-events-none so they
+          stay out of the a11y tree and cannot intercept clicks; the content
+          below is lifted with `relative`. */}
       <div
         aria-hidden="true"
         className={`${FOOTER_BG === 'art' ? 'footer-art' : 'footer-bg'} pointer-events-none absolute inset-0`}
       />
+      {FOOTER_BG === 'art' && (
+        <div aria-hidden="true" className="footer-scrim pointer-events-none absolute inset-0" />
+      )}
       <div className="relative w-full px-4 py-10 sm:px-6 md:py-14 lg:px-10">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between md:gap-12">
           <div className="md:max-w-[34ch]">
