@@ -15,6 +15,7 @@ import ProfileSkeleton from '../../components/skeletons/ProfileSkeleton'
 import { AppSidebar } from '../../components/app-sidebar'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '../../components/ui/sidebar'
 import NextUpSummary from '../../components/NextUpSummary'
+import PositionBlock from '../../components/PositionBlock'
 import DailyGoalControl, { getGuestGoal } from '../../components/DailyGoalControl'
 import { selectNextUp, selectShelfHead, isNewUser, recentlyUnlocked, hrefConceptId, RECENT_UNLOCK_DAYS } from '../../lib/nextUp'
 import { concepts as conceptCatalog } from '../../lib/conceptData'
@@ -91,6 +92,15 @@ export default function ProfilePage() {
     [dueReviews, weaknesses, progress, activity, user?.diagnostic_completed, scores?.concepts_mastered],
   )
 
+
+  // The frontier is the concept the scheduler would serve next. It comes from
+  // the same head the Next task uses, so "where am I" and "what's next" cannot
+  // disagree. A head that is not a concept (the diagnostic, or the browse
+  // fallback) leaves no frontier to name.
+  const frontierCid = hrefConceptId(head.next.href)
+  const frontierLabel = frontierCid
+    ? (conceptCatalog.find(c => c.id === frontierCid)?.label ?? frontierCid)
+    : null
 
   // Recently unlocked: successors unlocked by recently-active concepts
   // (recency derived client-side from activity — no endpoint needed). Head
@@ -361,6 +371,13 @@ export default function ProfilePage() {
           avatarSeed={user.student_id}
           avatarUrl={avatarPreset !== null ? undefined : avatarUrl}
           avatarPreset={avatarPreset}
+        />
+
+        <PositionBlock
+          catalogue={conceptCatalog}
+          progress={progress}
+          frontierLabel={frontierLabel}
+          frontierHref={frontierCid ? `/learn?concept=${encodeURIComponent(frontierCid)}` : null}
         />
 
         {effScores && !isLoggedIn() && (

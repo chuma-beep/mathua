@@ -88,6 +88,16 @@ describe('/profile shows the report', () => {
     expect(next.querySelectorAll('a').length).toBeGreaterThan(0)
   })
 
+
+  it('answers "where am I" on the hub, above the Next task', async () => {
+    render(<ProfilePage />)
+    const pos = await screen.findByRole('region', { name: 'Where you are' })
+    expect(pos.textContent).toMatch(/concepts mastered/)
+    // It reads the same head the Next task does, so the position and the task
+    // cannot disagree about what comes next.
+    const regions = screen.getAllByRole('region').map(r => r.getAttribute('aria-label') ?? '')
+    expect(regions.indexOf('Where you are')).toBeLessThan(regions.indexOf('Next up'))
+  })
   it('orders Activity ahead of the rest of the report', async () => {
     render(<ProfilePage />)
     const order = (await screen.findAllByRole('region'))
