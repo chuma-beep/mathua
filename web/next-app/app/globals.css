@@ -450,19 +450,32 @@ footer .link-underline:hover {
   opacity: 0.17;
 }
 
-/* Footer feature band (risograph illustration). Opaque, so no per-theme
-   opacity: the same blue art reads in both themes. `center bottom` keeps the
-   walking figure, which sits in the lower third of the source. The top edge
-   dissolves into --bg with a mask -- transparent, not a colored overlay, so it
-   follows the theme for free. The band is text-free: the content above it owns
-   the contrast. */
+/* Footer background art (risograph illustration), full-bleed behind the
+   content. Opaque, so no per-theme opacity: the same blue art reads in both
+   themes. The footer reserves the image's own aspect ratio for the 'art' mode
+   (.footer-art-host), so `cover` paints the whole illustration instead of
+   cropping it to a short strip. */
 .footer-art {
-  height: clamp(140px, 18vw, 240px);
   background-image: url('/footer2-bg.avif');
   background-size: cover;
-  background-position: center bottom;
-  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 40%);
-  mask-image: linear-gradient(to bottom, transparent, #000 40%);
+  background-position: center;
+}
+
+.footer-art-host {
+  min-height: 56.25vw; /* the image's 16:9 ratio: cover shows it uncropped */
+}
+
+/* The art is opaque and busy, so a theme-colored scrim rides between it and the
+   content. It is strongest at the top, where the brand and links live, and
+   thins toward the bottom so the illustration reads. color-mix on --bg keeps it
+   theme-aware. */
+.footer-scrim {
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--bg) 92%, transparent) 0%,
+    color-mix(in srgb, var(--bg) 74%, transparent) 42%,
+    color-mix(in srgb, var(--bg) 28%, transparent) 100%
+  );
 }
 
 /* Self-keying cluster labels: the domain color rides on the label itself,
