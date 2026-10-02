@@ -25,17 +25,24 @@ const CREDITS = ['MIT License', 'Avatars by DiceBear']
 
 export default function Footer({ className = '' }: FooterProps) {
   return (
-    <footer className={`relative mt-[10px] overflow-hidden border-t border-mathua-border bg-mathua-bg text-mathua-primary ${className}`}>
-      {/* Decorative texture behind the whole footer ('texture' mode). aria-hidden
-          and pointer-events-none so it stays out of the a11y tree and cannot
-          intercept clicks; the content below is lifted with `relative`. */}
-      {FOOTER_BG === 'texture' && (
-        <div
-          aria-hidden="true"
-          className="footer-bg pointer-events-none absolute inset-0 bg-cover bg-center"
-        />
+    <footer
+      className={`relative mt-[10px] overflow-hidden border-t border-mathua-border bg-mathua-bg text-mathua-primary ${
+        FOOTER_BG === 'art' ? 'footer-art-host' : ''
+      } ${className}`}
+    >
+      {/* Decorative background behind the whole footer. aria-hidden and
+          pointer-events-none so it stays out of the a11y tree and cannot
+          intercept clicks; the content below is lifted with `relative`. The
+          'art' image is opaque, so a theme-colored scrim rides above it to keep
+          the text legible. */}
+      <div
+        aria-hidden="true"
+        className={`${FOOTER_BG === 'art' ? 'footer-art' : 'footer-bg'} pointer-events-none absolute inset-0 bg-cover bg-center`}
+      />
+      {FOOTER_BG === 'art' && (
+        <div aria-hidden="true" className="footer-scrim pointer-events-none absolute inset-0" />
       )}
-      <div className="relative w-full px-4 pt-10 sm:px-6 md:pt-14 lg:px-10">
+      <div className="relative w-full px-4 py-10 sm:px-6 md:py-14 lg:px-10">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between md:gap-12">
           <div className="md:max-w-[34ch]">
             <div>
@@ -91,7 +98,7 @@ export default function Footer({ className = '' }: FooterProps) {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-mathua-border pb-10 pt-5 font-mono text-[10px] opacity-40">
+        <div className="mt-10 flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-mathua-border pt-5 font-mono text-[10px] opacity-40">
           {CREDITS.map(credit => (
             <span key={credit} className="after:ml-3 after:content-['·'] last:after:content-none">
               {credit}
