@@ -27,22 +27,17 @@ const CREDITS = ['MIT License', 'Avatars by DiceBear']
 export default function Footer({ className = '' }: FooterProps) {
   return (
     <footer
-      className={`relative mt-[10px] overflow-hidden border-t border-mathua-border bg-mathua-bg text-mathua-primary ${
-        FOOTER_BG === 'art' ? 'footer-art-host' : ''
-      } ${className}`}
+      className={`relative mt-[10px] overflow-hidden border-t border-mathua-border bg-mathua-bg text-mathua-primary ${className}`}
     >
-      {/* Decorative background behind the whole footer. aria-hidden and
+      {/* Decorative background. Carries the luffy-bg silhouette on mobile only;
+          from md up the footer is deliberately plain -- page-colored with a
+          hairline -- so globals.css hides this layer there. aria-hidden and
           pointer-events-none so it stays out of the a11y tree and cannot
-          intercept clicks; the content below is lifted with `relative`. Which
-          image is used, and the scrim over it, is decided per breakpoint in
-          globals.css. */}
+          intercept clicks; the content below is lifted with `relative`. */}
       <div
         aria-hidden="true"
         className={`${FOOTER_BG === 'art' ? 'footer-art' : 'footer-bg'} pointer-events-none absolute inset-0`}
       />
-      {FOOTER_BG === 'art' && (
-        <div aria-hidden="true" className="footer-scrim pointer-events-none absolute inset-0" />
-      )}
       <div className="relative w-full px-4 py-10 sm:px-6 md:py-14 lg:px-10">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between md:gap-12">
           <div className="md:max-w-[34ch]">
