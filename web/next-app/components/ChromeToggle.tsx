@@ -50,7 +50,7 @@ export default function ChromeToggle() {
         aria-expanded={visible}
         aria-label={visible ? 'Hide navigation' : 'Show navigation'}
         data-testid="chrome-toggle"
-        className="lg:hidden fixed left-1/2 z-40 flex size-11 -translate-x-1/2 items-center justify-center rounded-full border border-mathua-border bg-mathua-surface text-mathua-muted transition-[bottom] duration-300 ease-out active:text-mathua-blue motion-reduce:transition-none"
+        className="lg:hidden fixed left-1/2 z-40 flex size-11 -translate-x-1/2 items-center justify-center rounded-full border border-mathua-border bg-transparent text-mathua-muted transition-[bottom] duration-300 ease-out active:text-mathua-blue motion-reduce:transition-none"
         style={{ bottom: chevronBottom }}
       >
         {visible ? (
