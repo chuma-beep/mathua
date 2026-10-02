@@ -207,7 +207,7 @@ function StudyContent() {
     return (
       <>
         <Header />
-        <div className="pt-20 lg:pt-0">
+        <div className="pt-[var(--chrome-top)] lg:pt-0">
           <StudySkeleton />
         </div>
         <BottomTabs />
@@ -336,7 +336,7 @@ function StudyContent() {
 export default function StudyPage() {
   return (
     <Suspense fallback={
-      <><Header /><div className="pt-20 lg:pt-0"><StudySkeleton /></div></>
+      <><Header /><div className="pt-[var(--chrome-top)] lg:pt-0"><StudySkeleton /></div></>
     }>
       <StudyContent />
     </Suspense>

@@ -5,6 +5,11 @@
 @layer base {
   :root {
     color-scheme: light dark;
+    /* Top spacing mobile pages use to clear the sticky header. The header is in
+       flow and collapses when the chrome hides (see components/Header.tsx), so
+       this has to collapse with it or the page keeps an 80px hole. Desktop
+       overrides it back to 0 with `lg:pt-0`. */
+    --chrome-top: 80px;
     --bg: oklch(1 0 0);
     --surface: oklch(0.95 0 0);
     --surface-elevated: oklch(0.92 0 0);
@@ -43,6 +48,12 @@
     --sidebar-accent-foreground: var(--text-primary);
     --sidebar-border: var(--border);
     --sidebar-ring: var(--accent-blue);
+  }
+
+  /* Set on <html> by lib/chrome.ts. Hidden chrome reclaims the top spacing the
+     pages were reserving for the header. */
+  [data-chrome='hidden'] {
+    --chrome-top: 0px;
   }
 
   .dark {

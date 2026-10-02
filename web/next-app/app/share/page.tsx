@@ -34,7 +34,7 @@ function ShareContent() {
     return (
       <>
         <Header />
-        <div className="max-w-container mx-auto px-4 sm:px-6 pt-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 text-center overflow-x-hidden min-w-0">
+        <div className="max-w-container mx-auto px-4 sm:px-6 pt-[var(--chrome-top)] pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 text-center overflow-x-hidden min-w-0">
           <p className="text-mathua-muted text-sm">{error}</p>
           {!token && (
             <p className="text-mathua-muted text-xs font-mono mt-2">Ask the student to enable sharing in Settings → Share with parent / teacher.</p>
@@ -53,7 +53,7 @@ function ShareContent() {
     return (
       <>
         <Header />
-        <div className="max-w-container mx-auto px-4 sm:px-6 pt-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 text-center overflow-x-hidden min-w-0">
+        <div className="max-w-container mx-auto px-4 sm:px-6 pt-[var(--chrome-top)] pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 text-center overflow-x-hidden min-w-0">
           <Loading label="LOADING REPORT" />
         </div>
         <Footer />
@@ -116,7 +116,7 @@ function ShareContent() {
 export default function SharePage() {
   return (
     <Suspense fallback={
-      <><Header /><div className="max-w-container mx-auto px-4 sm:px-6 pt-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 text-center overflow-x-hidden min-w-0"><Loading label="LOADING REPORT" /></div></>
+      <><Header /><div className="max-w-container mx-auto px-4 sm:px-6 pt-[var(--chrome-top)] pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 text-center overflow-x-hidden min-w-0"><Loading label="LOADING REPORT" /></div></>
     }>
       <ShareContent />
     </Suspense>

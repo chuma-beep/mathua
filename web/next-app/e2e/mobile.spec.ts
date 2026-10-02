@@ -83,6 +83,70 @@ test('bottom tabs present and scroll-aware on mobile', async ({ page }) => {
   await expect(tabs).toBeInViewport()
 })
 
+// The chrome is one shared state, so the header and the tab bar always agree.
+// Both hide together, both come back together, and both leave the tab order
+// while hidden -- otherwise a keyboard user tabs into links they cannot see.
+test('chrome hides the header and the tab bar together, and tap toggles it', async ({ page }) => {
+  await page.goto('/how-it-works')
+  const header = page.locator('header')
+  const tabs = page.locator('nav.lg\\:hidden')
+  const toggle = page.getByTestId('chrome-toggle')
+  await expect(tabs).toBeVisible()
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true')
+
+  await page.evaluate(() => { document.documentElement.style.scrollBehavior = 'auto' })
+  await page.evaluate(() => window.scrollTo(0, 800))
+  await page.waitForTimeout(600)
+
+  await toggle.click()
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false')
+  await expect(header).toHaveAttribute('inert', '')
+  await expect(tabs).toHaveAttribute('inert', '')
+  // Collapsed, not merely translated: the header gives its height back.
+  await expect.poll(async () => header.evaluate(el => el.getBoundingClientRect().height)).toBe(0)
+
+  // A tap is a decision, not a suggestion: idle and settle must not undo it.
+  await page.waitForTimeout(1500)
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false')
+
+  await toggle.click()
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true')
+  await expect(tabs).toBeInViewport()
+  await expect(header).not.toHaveAttribute('inert', '')
+})
+
+test('chrome reveals at the bottom then gets out of the way', async ({ page }) => {
+  await page.goto('/how-it-works')
+  const tabs = page.locator('nav.lg\\:hidden')
+  const toggle = page.getByTestId('chrome-toggle')
+  await page.evaluate(() => { document.documentElement.style.scrollBehavior = 'auto' })
+
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight))
+  await expect(tabs).toBeInViewport()
+
+  // Then it hides itself, and stays hidden: collapsing the header shortens the
+  // document, so the browser clamps scrollY and reports it as a scroll event.
+  // Acting on that clamp used to restart the timer in a loop that never settled.
+  await expect.poll(async () => toggle.getAttribute('aria-expanded'), { timeout: 6000 }).toBe('false')
+  await page.waitForTimeout(2500)
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false')
+})
+
+test('desktop keeps its chrome: no handle, no scroll hiding', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 })
+  await page.goto('/how-it-works')
+  const header = page.locator('header')
+  await page.evaluate(() => { document.documentElement.style.scrollBehavior = 'auto' })
+
+  // The handle is a mobile affordance; the tab bar does not exist at lg.
+  await expect(page.getByTestId('chrome-toggle')).toBeHidden()
+  await page.evaluate(() => window.scrollTo(0, 900))
+  await page.waitForTimeout(800)
+
+  await expect(header).toBeInViewport()
+  await expect(header).not.toHaveAttribute('inert', '')
+})
+
 test('mobile landing hero graph supports tap, pan and pinch', async ({ page }) => {
   const errors: string[] = []
   page.on('pageerror', e => errors.push(String(e)))

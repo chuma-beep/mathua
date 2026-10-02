@@ -360,7 +360,7 @@ export default function SettingsPage() {
     return (
       <>
         <Header />
-        <div className="max-w-container mx-auto px-4 sm:px-6 pt-20 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 text-center overflow-x-hidden min-w-0">
+        <div className="max-w-container mx-auto px-4 sm:px-6 pt-[var(--chrome-top)] pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 text-center overflow-x-hidden min-w-0">
           <Loading label="LOADING SETTINGS" />
         </div>
         <BottomTabs />
