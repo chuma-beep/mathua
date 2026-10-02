@@ -9,9 +9,10 @@ interface FooterProps {
 // by a hairline. Brand left, link columns grouped right, credits in a bottom
 // bar. Full-width content.
 
-// Which background the footer wears. 'art' shows the luffy-bg silhouette
-// (luffy-bg.avif); 'texture' shows the subtle footer.png wallpaper. Flip the
-// constant to compare; all three source assets stay committed.
+// Which background the footer wears. 'art' shows the breakpoint-split art
+// (new-zealand on desktop, the luffy-bg silhouette on mobile); 'texture' shows
+// the subtle footer.png wallpaper. Flip the constant to compare; all the source
+// assets stay committed.
 const FOOTER_BG: 'art' | 'texture' = 'art'
 
 const FOOTER_SHAPES = ['alpha', 'beta', 'gamma']
@@ -32,8 +33,9 @@ export default function Footer({ className = '' }: FooterProps) {
     >
       {/* Decorative background behind the whole footer. aria-hidden and
           pointer-events-none so it stays out of the a11y tree and cannot
-          intercept clicks; the content below is lifted with `relative`. The
-          'art' layer carries its own alpha fade, so it needs no scrim. */}
+          intercept clicks; the content below is lifted with `relative`. Which
+          image is used, and the scrim over it, is decided per breakpoint in
+          globals.css. */}
       <div
         aria-hidden="true"
         className={`${FOOTER_BG === 'art' ? 'footer-art' : 'footer-bg'} pointer-events-none absolute inset-0`}
@@ -105,13 +107,6 @@ export default function Footer({ className = '' }: FooterProps) {
           ))}
         </div>
       </div>
-
-      {/* Feature band ('art' mode): a full-bleed, text-free strip below the
-          content, so the illustration is seen without ever competing with the
-          footer text for contrast. */}
-      {FOOTER_BG === 'art' && (
-        <div aria-hidden="true" className="footer-art pointer-events-none" />
-      )}
     </footer>
   )
 }

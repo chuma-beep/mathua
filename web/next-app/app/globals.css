@@ -450,12 +450,23 @@ footer .link-underline:hover {
   opacity: 0.17;
 }
 
-/* Footer background art (luffy-bg), full-bleed behind the content. The source
-   is an RGBA silhouette that is fully transparent at the top and dense at the
-   bottom, so it blends into --bg on its own -- no scrim, and no need to fade an
-   edge by hand. `background-size: 100% auto` keeps its native 3:1 ratio (the
-   height is never reduced) and .footer-art-host reserves exactly that ratio, so
-   the image is shown whole rather than cropped. */
+/* Footer background art, full-bleed behind the content. Two different images,
+   one per breakpoint (Tailwind's md, which is also where the footer layout goes
+   from a stacked column to a row):
+
+     < 768px  luffy-bg    the RGBA silhouette, scaled to the footer width
+     >= 768px new-zealand the landscape photo at its full 2.5:1 ratio
+
+   Both use `background-size: 100% auto` so the height is never reduced: the
+   image is shown whole, not cropped. What differs is how much of it there is --
+   mobile is content-sized and puts a small silhouette at the foot, while the
+   desktop host reserves the photo's exact ratio (40vw) so it fills the footer. */
+
+/* Mobile: luffy-bg. An RGBA silhouette, fully transparent at the top and dense
+   at the bottom, so it blends into --bg on its own. It is near-black, hence the
+   invert on dark; it is greyscale, so invert alone turns it into a light
+   silhouette. No scrim down here: the figure lands below the nav and never
+   collides with it. */
 .footer-art {
   background-image: url('/luffy-bg.avif');
   background-size: 100% auto;
@@ -463,27 +474,37 @@ footer .link-underline:hover {
   background-repeat: no-repeat;
 }
 
-.footer-art-host {
-  min-height: 33.333vw; /* 100/3: the image's exact ratio */
-}
-
-/* The figure sits under the nav columns, which are top-right. A soft scrim in
-   that corner keeps the links legible; it is transparent by 70% toward the
-   bottom-left, so the figure's body, cape and the smoke stay at full strength.
-   color-mix on --bg makes it track both themes. */
-.footer-scrim {
-  background: linear-gradient(
-    to bottom left,
-    color-mix(in srgb, var(--bg) 90%, transparent) 0%,
-    color-mix(in srgb, var(--bg) 55%, transparent) 38%,
-    transparent 70%
-  );
-}
-
-/* The art is near-black, so it vanishes against the dark --bg. It is greyscale,
-   so a straight invert turns it into a light silhouette instead. */
 .dark .footer-art {
   filter: invert(1);
+}
+
+@media (min-width: 768px) {
+  /* Desktop: new-zealand. Opaque, so it needs the scrim below, and it is a
+     colour photo, so the silhouette's invert must not apply to it. */
+  .footer-art {
+    background-image: url('/new-zealand-bg.avif');
+  }
+
+  .dark .footer-art {
+    filter: none;
+  }
+
+  /* 100/2.504: the photo's exact ratio, so `cover`-free `100% auto` fills it. */
+  .footer-art-host {
+    min-height: 39.94vw;
+  }
+
+  /* Brand and nav sit top-left and top-right over the photo, so the scrim is
+     strongest across the top and thins toward the water at the bottom. It is
+     color-mix on --bg, so one rule tracks both themes. */
+  .footer-scrim {
+    background: linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--bg) 88%, transparent) 0%,
+      color-mix(in srgb, var(--bg) 62%, transparent) 45%,
+      color-mix(in srgb, var(--bg) 38%, transparent) 100%
+    );
+  }
 }
 
 /* Self-keying cluster labels: the domain color rides on the label itself,
