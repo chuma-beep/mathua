@@ -2,6 +2,9 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
 import {
   subscribeChrome,
   getChromeVisible,
+  getChromeHasChrome,
+  getChromeHasTabs,
+  registerChromePart,
   toggleChrome,
 } from '../lib/chrome'
 
@@ -214,5 +217,41 @@ describe('chrome visibility', () => {
     unsubscribe = null
     expect(document.documentElement.dataset.chrome).toBeUndefined()
     expect(getChromeVisible()).toBe(true)
+  })
+
+  it('tracks which chrome parts are mounted', () => {
+    expect(getChromeHasChrome()).toBe(false)
+    expect(getChromeHasTabs()).toBe(false)
+
+    const offHeader = registerChromePart('header')
+    expect(getChromeHasChrome()).toBe(true)
+    expect(getChromeHasTabs()).toBe(false)
+
+    const offTabs = registerChromePart('tabs')
+    expect(getChromeHasTabs()).toBe(true)
+
+    // A page with a bar can still hide it.
+    toggleChrome()
+    expect(getChromeVisible()).toBe(false)
+
+    offTabs()
+    expect(getChromeHasTabs()).toBe(false)
+    // Still chrome: the header is still mounted.
+    expect(getChromeHasChrome()).toBe(true)
+
+    offHeader()
+    expect(getChromeHasChrome()).toBe(false)
+  })
+
+  it('notifies subscribers when a part registers', () => {
+    let calls = 0
+    const spy = () => { calls += 1 }
+    const off = subscribeChrome(spy)
+    const before = calls
+
+    registerChromePart('header')()
+    expect(calls).toBeGreaterThan(before)
+
+    off()
   })
 })

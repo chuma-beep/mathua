@@ -147,6 +147,49 @@ test('desktop keeps its chrome: no handle, no scroll hiding', async ({ page }) =
   await expect(header).not.toHaveAttribute('inert', '')
 })
 
+// The control has to exist wherever the chrome can hide, including the landing
+// page, which has a header but no tab bar.
+test('chrome control appears wherever there is chrome, and only there', async ({ page }) => {
+  await page.goto('/')
+  await expect(page.getByTestId('chrome-toggle')).toBeVisible()
+  await expect(page.getByTestId('chrome-tap-strip')).toHaveCount(1)
+
+  // /profile has neither a header nor a tab bar on mobile, so a control there
+  // would hide nothing.
+  await page.goto('/profile')
+  await expect(page.getByTestId('chrome-toggle')).toHaveCount(0)
+  await expect(page.getByTestId('chrome-tap-strip')).toHaveCount(0)
+})
+
+// Hiding is a small control on the bar's edge; getting it back is a tap
+// anywhere along the bottom of the screen, because that is the gesture you
+// reach for mid-scroll.
+test('the bottom edge brings the chrome back, and only while it is hidden', async ({ page }) => {
+  await page.goto('/how-it-works')
+  const header = page.locator('header')
+  const strip = page.getByTestId('chrome-tap-strip')
+  const toggle = page.getByTestId('chrome-toggle')
+  await page.evaluate(() => { document.documentElement.style.scrollBehavior = 'auto' })
+
+  // While the bars are up the strip must not intercept taps meant for content.
+  await expect(strip).toHaveCSS('pointer-events', 'none')
+
+  await toggle.click()
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false')
+  await expect(strip).toHaveCSS('pointer-events', 'auto')
+
+  // Tap the very bottom of the viewport, not the button.
+  const size = page.viewportSize()!
+  await page.mouse.click(size.width / 2, size.height - 6)
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true')
+  await expect(header).toBeInViewport()
+
+  // And the strip goes inert again, so it stops eating bottom-edge taps.
+  await expect(strip).toHaveCSS('pointer-events', 'none')
+  await page.mouse.click(size.width / 2, size.height - 6)
+  await expect(toggle).toHaveAttribute('aria-expanded', 'true')
+})
+
 test('mobile landing hero graph supports tap, pan and pinch', async ({ page }) => {
   const errors: string[] = []
   page.on('pageerror', e => errors.push(String(e)))

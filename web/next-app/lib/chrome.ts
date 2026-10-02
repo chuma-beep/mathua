@@ -12,6 +12,11 @@
 
 export type ChromePin = 'shown' | 'hidden' | null
 
+// Which chrome parts are currently mounted. The tap control needs these to
+// know whether it has anything to hide at all (mobile /profile has no chrome)
+// and whether a tab bar is present to sit above.
+export type ChromePart = 'header' | 'tabs'
+
 interface ChromeState {
   scrollHidden: boolean
   pinned: ChromePin
@@ -62,6 +67,10 @@ const DESKTOP_QUERY = '(min-width: 1024px)'
 
 let state: ChromeState = { scrollHidden: false, pinned: null }
 const listeners = new Set<() => void>()
+
+// Mounted chrome parts, as a set so a page with two Headers (never, but the
+// type allows it) does not unregister on the first unmount.
+const parts = new Set<ChromePart>()
 
 let lastY = 0
 let pinAnchorY = 0
@@ -174,6 +183,7 @@ function detach(): void {
   settleUntil = 0
   pinAnchorY = 0
   atBottomMode = false
+  parts.clear()
   if (typeof document !== 'undefined') delete document.documentElement.dataset.chrome
 }
 
@@ -184,6 +194,42 @@ export function toggleChrome(): void {
   atBottomMode = false
   state = { scrollHidden: false, pinned: isVisible() ? 'hidden' : 'shown' }
   emit()
+}
+
+/**
+ * Record that a chrome part is mounted. Returns the unregister function, so a
+ * component can call it from a useEffect cleanup. Registered separately from
+ * the visibility subscription because these are about what exists, not what is
+ * showing.
+ */
+export function registerChromePart(part: ChromePart): () => void {
+  parts.add(part)
+  emit()
+  return () => {
+    parts.delete(part)
+    emit()
+  }
+}
+
+export function getChromeHasChrome(): boolean {
+  return parts.size > 0
+}
+
+export function getChromeHasTabs(): boolean {
+  return parts.has('tabs')
+}
+
+// The pre-rendered HTML always has the chrome showing, so the first client
+// render has to agree with it. The server has no mounted parts either -- they
+// only appear once React runs -- so both parts read false there.
+export function getChromeServerVisible(): boolean {
+  return true
+}
+export function getChromeServerHasChrome(): boolean {
+  return false
+}
+export function getChromeServerHasTabs(): boolean {
+  return false
 }
 
 export function subscribeChrome(cb: () => void): () => void {
@@ -199,8 +245,3 @@ export function getChromeVisible(): boolean {
   return isVisible()
 }
 
-// The pre-rendered HTML always has the chrome showing, so the first client
-// render has to agree with it.
-export function getChromeServerVisible(): boolean {
-  return true
-}
