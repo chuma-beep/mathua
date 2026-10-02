@@ -450,25 +450,14 @@ footer .link-underline:hover {
   opacity: 0.17;
 }
 
-/* Footer background art, full-bleed behind the content. Two different images,
-   one per breakpoint (Tailwind's md, which is also where the footer layout goes
-   from a stacked column to a row):
+/* Footer background art, behind the content. Mobile only: the luffy-bg
+   silhouette, scaled to the footer width and anchored to the foot, so it reads
+   as a small figure at the bottom of a content-sized footer. It is an RGBA
+   silhouette, fully transparent at the top and dense at the bottom, so it blends
+   into --bg on its own and needs no scrim -- the figure lands below the nav and
+   never collides with it. Near-black, so .dark inverts it into a light
+   silhouette; it is greyscale, so invert alone is enough. */
 
-     < 768px  luffy-bg    the RGBA silhouette, scaled to the footer width
-     >= 768px new-zealand the landscape photo at its full 2.5:1 ratio
-
-Both use `background-size: 100% auto` so the image is shown at its native
-   ratio, never squashed. Up to the desktop cap the height is never reduced
-   either and the photo fills the footer whole; past the cap it trims the sky
-   (see .footer-art-host). What differs by breakpoint is how much there is --
-   mobile is content-sized and puts a small silhouette at the foot, desktop
-   reserves the photo's own ratio so it fills the footer. */
-
-/* Mobile: luffy-bg. An RGBA silhouette, fully transparent at the top and dense
-   at the bottom, so it blends into --bg on its own. It is near-black, hence the
-   invert on dark; it is greyscale, so invert alone turns it into a light
-   silhouette. No scrim down here: the figure lands below the nav and never
-   collides with it. */
 .footer-art {
   background-image: url('/luffy-bg.avif');
   background-size: 100% auto;
@@ -480,37 +469,12 @@ Both use `background-size: 100% auto` so the image is shown at its native
   filter: invert(1);
 }
 
+/* From md up the footer is deliberately plain -- page-colored with a hairline,
+   no image -- so the art layer is hidden rather than left to stretch a
+   landscape photo across a short, wide box. */
 @media (min-width: 768px) {
-  /* Desktop: new-zealand. Opaque, so it needs the scrim below, and it is a
-     colour photo, so the silhouette's invert must not apply to it. */
   .footer-art {
-    background-image: url('/new-zealand-bg.avif');
-  }
-
-  .dark .footer-art {
-    filter: none;
-  }
-
-  /* 100/2.504: the photo's exact ratio, so `cover`-free `100% auto` fills it --
-     up to a point. Left uncapped this grows without limit (767px at 1920,
-     1023px at 2560), so the height stops at 640px. That binds above ~1600px
-     wide, and past it the photo is taller than its box: `center bottom` then
-     keeps the mountains and lake pinned and trims the sky off the top, with the
-     photo still edge to edge. */
-  .footer-art-host {
-    min-height: min(39.94vw, 640px);
-  }
-
-  /* Brand and nav sit top-left and top-right over the photo, so the scrim is
-     strongest across the top and thins toward the water at the bottom. It is
-     color-mix on --bg, so one rule tracks both themes. */
-  .footer-scrim {
-    background: linear-gradient(
-      to bottom,
-      color-mix(in srgb, var(--bg) 88%, transparent) 0%,
-      color-mix(in srgb, var(--bg) 62%, transparent) 45%,
-      color-mix(in srgb, var(--bg) 38%, transparent) 100%
-    );
+    display: none;
   }
 }
 
