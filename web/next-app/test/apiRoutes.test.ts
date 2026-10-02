@@ -152,7 +152,7 @@ describe('no orphaned modules', () => {
   it('every other module is referenced by some other file', () => {
     const bodies = new Map(all.map(f => [f, readFileSync(f, 'utf-8')]))
     const orphans: string[] = []
-    for (const [file, text] of bodies) {
+    for (const file of bodies.keys()) {
       const rel = file.slice(APP.length + 1)
       if (conventionFiles.has(rel)) continue
       // Routes are entered by the framework, and a route file legitimately
