@@ -91,7 +91,19 @@ export default function RootLayout({
           src="/js/theme-init.js"
           strategy="beforeInteractive"
         />
-        <div id="main-content" tabIndex={-1} className="relative z-10">
+        <div
+          id="main-content"
+          tabIndex={-1}
+          // Scroll anchoring is off, deliberately. The chrome collapses the
+          // header and its --chrome-top padding, which changes the height of the
+          // document above the viewport. With anchoring on, the browser
+          // compensates and reports that compensation as a scroll event -- and
+          // since it moves in the same direction as the chrome just went, the
+          // scroll logic read it as the user scrolling and undid the hide. The
+          // content shifting when a toolbar collapses is the expected behaviour;
+          // silently scrolling to compensate for it is not.
+          className="relative z-10 [overflow-anchor:none]"
+        >
           {children}
         </div>
         <Toaster />

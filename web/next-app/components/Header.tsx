@@ -7,6 +7,8 @@ import { CompassIcon, type CompassIconHandle } from './icons/compass'
 import { SunMoonIcon, type SunMoonIconHandle } from './icons/sun-moon'
 import { useTheme } from '../hooks/useTheme'
 import { useAuthState } from '../hooks/useAuthState'
+import { useChrome } from '../hooks/useChrome'
+import { useInertWhen } from '../hooks/useInertWhen'
 import { signOut } from '../lib/auth'
 import { resolveAvatar } from '../lib/dicebear'
 import Avatar from './Avatar'
@@ -20,6 +22,9 @@ interface HeaderProps {
 export default function Header({ links }: HeaderProps) {
   const { mounted, toggleTheme } = useTheme()
   const { loggedIn, user } = useAuthState()
+  const { visible: chromeVisible } = useChrome()
+  const headerRef = useRef<HTMLElement>(null)
+  useInertWhen(headerRef, !chromeVisible)
   const router = useRouter()
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
@@ -105,132 +110,145 @@ export default function Header({ links }: HeaderProps) {
   const compassLinks = links || overflowLinks(loggedIn)
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur border-b border-mathua-border bg-mathua-bg transition-colors">
-      <div className="flex items-center justify-between px-4 md:px-6 py-3 max-w-container mx-auto">
-        <div className="flex items-center gap-4 md:gap-6 min-w-0">
-          <Link
-            href={loggedIn ? '/profile' : '/'}
-            className="link-underline font-mono text-sm text-mathua-blue whitespace-nowrap shrink-0"
-          >
-            λ Mathua
-          </Link>
-
-          <nav className="hidden md:flex items-center gap-2">
-            {displayLinks.map((link, i) => (
-              <span key={link.href} className="flex items-center gap-2">
-                {i > 0 && (
-                  <span className="font-mono text-xs text-mathua-blue select-none">|</span>
-                )}
-                <Link
-                  href={link.href}
-                  className="link-underline font-mono text-xs text-mathua-muted hover:text-mathua-blue whitespace-nowrap transition-colors"
-                >
-                  {link.label}
-                </Link>
-              </span>
-            ))}
-          </nav>
-        </div>
-
-        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-          {mounted && (
-            <button
-              type="button"
-              onClick={handleThemeToggle}
-              aria-label="Toggle theme"
-              className="flex items-center justify-center min-h-[44px] min-w-[44px] text-mathua-muted bg-transparent border-none cursor-pointer hover:text-mathua-blue transition-colors"
+    // The header is sticky and therefore in flow, so hiding it with a transform
+    // would leave a dead strip where it used to be. Collapsing the row to 0fr
+    // takes its height out of the flow and pulls the page up with it. The
+    // border lives on the inner bar so it collapses too, instead of leaving a
+    // 1px line behind.
+    <header
+      ref={headerRef}
+      data-chrome-part="header"
+      className={`sticky top-0 z-50 grid backdrop-blur transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none ${
+        chromeVisible ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+      }`}
+    >
+      <div className="min-h-0 overflow-hidden bg-mathua-bg">
+        <div className="flex items-center justify-between border-b border-mathua-border px-4 md:px-6 py-3 max-w-container mx-auto">
+          <div className="flex items-center gap-4 md:gap-6 min-w-0">
+            <Link
+              href={loggedIn ? '/profile' : '/'}
+              className="link-underline font-mono text-sm text-mathua-blue whitespace-nowrap shrink-0"
             >
-              <SunMoonIcon ref={sunMoonRef} size={15} aria-hidden="true" />
-            </button>
-          )}
-          {/* Mobile nav: bare compass mark. Overflow only
-              (see lib/nav.ts) — destinations missing from the bottom tabs. */}
-          <div className="relative md:hidden" ref={navMenuRef}>
+              λ Mathua
+            </Link>
+
+            <nav className="hidden md:flex items-center gap-2">
+              {displayLinks.map((link, i) => (
+                <span key={link.href} className="flex items-center gap-2">
+                  {i > 0 && (
+                    <span className="font-mono text-xs text-mathua-blue select-none">|</span>
+                  )}
+                  <Link
+                    href={link.href}
+                    className="link-underline font-mono text-xs text-mathua-muted hover:text-mathua-blue whitespace-nowrap transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </span>
+              ))}
+            </nav>
+          </div>
+
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            {mounted && (
               <button
                 type="button"
-                onClick={toggleNav}
-                aria-label="Open navigation menu"
-                aria-expanded={navOpen}
-                aria-haspopup="menu"
+                onClick={handleThemeToggle}
+                aria-label="Toggle theme"
                 className="flex items-center justify-center min-h-[44px] min-w-[44px] text-mathua-muted bg-transparent border-none cursor-pointer hover:text-mathua-blue transition-colors"
               >
-                <CompassIcon ref={compassRef} size={15} aria-hidden="true" />
+                <SunMoonIcon ref={sunMoonRef} size={15} aria-hidden="true" />
               </button>
-              {navOpen && (
-                <div
-                  role="menu"
-                  aria-label="Site navigation"
-                  className="absolute right-0 top-[calc(100%+8px)] min-w-[200px] bg-mathua-surface border border-mathua-border shadow-lg py-1 z-50"
+            )}
+            {/* Mobile nav: bare compass mark. Overflow only
+                (see lib/nav.ts) — destinations missing from the bottom tabs. */}
+            <div className="relative md:hidden" ref={navMenuRef}>
+                <button
+                  type="button"
+                  onClick={toggleNav}
+                  aria-label="Open navigation menu"
+                  aria-expanded={navOpen}
+                  aria-haspopup="menu"
+                  className="flex items-center justify-center min-h-[44px] min-w-[44px] text-mathua-muted bg-transparent border-none cursor-pointer hover:text-mathua-blue transition-colors"
                 >
-                  {compassLinks.map(link => {
-                    const active = pathname === link.href || (pathname ?? '').startsWith(link.href + '/')
-                    return (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        role="menuitem"
-                        aria-current={active ? 'page' : undefined}
-                        onClick={() => setNavOpen(false)}
-                        className={`flex items-center min-h-[44px] px-4 font-mono text-xs whitespace-nowrap transition-colors ${
-                          active ? 'text-mathua-blue' : 'text-mathua-muted hover:text-mathua-blue hover:bg-mathua-surface-elevated'
-                        }`}
-                      >
-                        {link.label}
-                      </Link>
-                    )
-                  })}
-                </div>
-              )}
-          </div>
-          {loggedIn && user ? (
-            <div className="relative" ref={menuRef}>
-              <button
-                type="button"
-                onClick={() => setOpen(o => !o)}
-                aria-label="Open profile menu"
-                aria-expanded={open}
-                aria-haspopup="menu"
-                className="rounded-full p-0.5 border border-transparent hover:border-mathua-border focus:outline-none focus:border-mathua-blue transition-colors"
-              >
-                <Avatar
-                  seed={user.student_id}
-                  name={user.name}
-                  size={32}
-                  url={avatarPreset !== null ? undefined : avatarUrl}
-                  preset={avatarPreset ?? undefined}
-                />
-              </button>
-              {open && (
-                <div className="absolute right-0 top-[calc(100%+8px)] min-w-[160px] bg-mathua-surface border border-mathua-border shadow-lg py-1 z-50">
-                  <div className="px-3 py-2 border-b border-mathua-border">
-                    <div className="font-mono text-xs text-mathua-primary truncate">{user.name}</div>
-                    {user.username && <div className="font-mono text-[10px] text-mathua-muted truncate">@{user.username}</div>}
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setOpen(false)
-                      signOut()
-                      router.push('/login')
-                    }}
-                    className="w-full text-left px-3 py-2 font-mono text-xs text-mathua-muted hover:text-mathua-red hover:bg-mathua-surface-elevated transition-colors"
+                  <CompassIcon ref={compassRef} size={15} aria-hidden="true" />
+                </button>
+                {navOpen && (
+                  <div
+                    role="menu"
+                    aria-label="Site navigation"
+                    className="absolute right-0 top-[calc(100%+8px)] min-w-[200px] bg-mathua-surface border border-mathua-border shadow-lg py-1 z-50"
                   >
-                    Sign out
-                  </button>
+                    {compassLinks.map(link => {
+                      const active = pathname === link.href || (pathname ?? '').startsWith(link.href + '/')
+                      return (
+                        <Link
+                          key={link.href}
+                          href={link.href}
+                          role="menuitem"
+                          aria-current={active ? 'page' : undefined}
+                          onClick={() => setNavOpen(false)}
+                          className={`flex items-center min-h-[44px] px-4 font-mono text-xs whitespace-nowrap transition-colors ${
+                            active ? 'text-mathua-blue' : 'text-mathua-muted hover:text-mathua-blue hover:bg-mathua-surface-elevated'
+                          }`}
+                        >
+                          {link.label}
+                        </Link>
+                      )
+                    })}
+                  </div>
+                )}
+            </div>
+            {loggedIn && user ? (
+              <div className="relative" ref={menuRef}>
+                <button
+                  type="button"
+                  onClick={() => setOpen(o => !o)}
+                  aria-label="Open profile menu"
+                  aria-expanded={open}
+                  aria-haspopup="menu"
+                  className="rounded-full p-0.5 border border-transparent hover:border-mathua-border focus:outline-none focus:border-mathua-blue transition-colors"
+                >
+                  <Avatar
+                    seed={user.student_id}
+                    name={user.name}
+                    size={32}
+                    url={avatarPreset !== null ? undefined : avatarUrl}
+                    preset={avatarPreset ?? undefined}
+                  />
+                </button>
+                {open && (
+                  <div className="absolute right-0 top-[calc(100%+8px)] min-w-[160px] bg-mathua-surface border border-mathua-border shadow-lg py-1 z-50">
+                    <div className="px-3 py-2 border-b border-mathua-border">
+                      <div className="font-mono text-xs text-mathua-primary truncate">{user.name}</div>
+                      {user.username && <div className="font-mono text-[10px] text-mathua-muted truncate">@{user.username}</div>}
+                    </div>
                     <button
                       type="button"
                       onClick={() => {
                         setOpen(false)
-                        router.push('/profile')
+                        signOut()
+                        router.push('/login')
                       }}
-                      className="w-full text-left px-3 py-2 font-mono text-xs text-mathua-muted hover:text-mathua-blue hover:bg-mathua-surface-elevated transition-colors"
+                      className="w-full text-left px-3 py-2 font-mono text-xs text-mathua-muted hover:text-mathua-red hover:bg-mathua-surface-elevated transition-colors"
                     >
-                      Profile
+                      Sign out
                     </button>
-                </div>
-              )}
-            </div>
-          ) : null}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setOpen(false)
+                          router.push('/profile')
+                        }}
+                        className="w-full text-left px-3 py-2 font-mono text-xs text-mathua-muted hover:text-mathua-blue hover:bg-mathua-surface-elevated transition-colors"
+                      >
+                        Profile
+                      </button>
+                  </div>
+                )}
+              </div>
+            ) : null}
+          </div>
         </div>
       </div>
     </header>

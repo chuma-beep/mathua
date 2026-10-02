@@ -26,7 +26,7 @@ export default function PlanPage() {
   return (
     <>
       <Header />
-      <div className="pt-20 lg:pt-0">
+      <div className="pt-[var(--chrome-top)] lg:pt-0">
         <Suspense fallback={<div className="p-6 font-mono text-xs text-mathua-muted">Loading…</div>}>
           <PlanContent />
         </Suspense>
