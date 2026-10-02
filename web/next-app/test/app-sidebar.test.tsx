@@ -29,7 +29,7 @@ describe('AppSidebar', () => {
   it('renders Navigate group without a Diagnostic entry (no CTA duplication)', () => {
     renderSidebar()
     expect(screen.getByText('Navigate')).toBeInTheDocument()
-    for (const label of ['Study', 'Learn', 'Graph', 'Leaderboard', 'Progress', 'Settings']) {
+    for (const label of ['Study', 'Learn', 'Graph', 'Leaderboard', 'History', 'Settings']) {
       expect(screen.getByText(label)).toBeInTheDocument()
     }
     expect(screen.queryByText('Diagnostic')).toBeNull()
@@ -78,23 +78,24 @@ describe('AppSidebar', () => {
     expect(screen.queryByText('Activity')).toBeNull()
   })
 
-  it('points "Progress" at the report, not at the mistakes transcript', () => {
-    // The label said Progress and the destination was a paginated list of past
-    // questions, opening filtered to the ones you got wrong. That is the single
-    // most misleading thing the navigation did, and this is the assertion that
-    // keeps it fixed.
+  it('names the transcript History, and nothing in the rail claims to be Progress', () => {
+    // The entry was called Progress and resolved to a paginated list of past
+    // questions, opening filtered to the ones you got wrong — the single most
+    // misleading thing the navigation did. The transcript is now named for what
+    // it is, and the report lives on the learner's own page rather than behind
+    // a rail entry.
     renderSidebar()
     const sidebar = screen.getByTestId('profile-sidebar')
-    const progress = within(sidebar).getByText('Progress', { exact: true })
-    const link = progress.closest('a')
-    expect(link?.getAttribute('href')).toBe('/progress')
+    const history = within(sidebar).getByText('History', { exact: true })
+    expect(history.closest('a')?.getAttribute('href')).toBe('/history')
+    expect(screen.queryByText('Progress', { exact: true })).toBeNull()
     expect(sidebar.querySelector('a[href="/progress-card"]')).toBeNull()
   })
 
   it('nav buttons render fixed-size Lucide icons (even collapsed rail)', () => {
     renderSidebar()
     const sidebar = screen.getByTestId('profile-sidebar')
-    const hrefs = ['/study', '/learn', '/graph', '/leaderboard', '/progress', '/settings']
+    const hrefs = ['/study', '/learn', '/graph', '/leaderboard', '/history', '/settings']
     expect(hrefs).toHaveLength(6)
     for (const href of hrefs) {
       const link = sidebar.querySelector(`a[href="${href}"]`)!
@@ -110,7 +111,7 @@ describe('AppSidebar', () => {
     const sidebar = screen.getByTestId('profile-sidebar')
     // Every text label next to an icon carries the collapse-hide class;
     // tooltips (not visible text) carry the label when collapsed.
-    const labels = ['Mathua', 'Study', 'Learn', 'Graph', 'Leaderboard', 'Progress', 'Settings', 'Docs', 'Contribute', "Creator's note", 'Sign out']
+    const labels = ['Mathua', 'Study', 'Learn', 'Graph', 'Leaderboard', 'History', 'Settings', 'Docs', 'Contribute', "Creator's note", 'Sign out']
     for (const label of labels) {
       const el = screen.getByText(label, { exact: true })
       expect(sidebar.contains(el)).toBe(true)
