@@ -442,12 +442,12 @@ footer .link-underline:hover {
    background as on the light one, so the two themes need different opacities
    to read as equally subtle. */
 .footer-bg {
-  background-image: url('/footer.png');
+  background-image: url('/footer-bg.avif');
   opacity: 0.45;
 }
 
 .dark .footer-bg {
-  opacity: 0.22;
+  opacity: 0.17;
 }
 
 /* Self-keying cluster labels: the domain color rides on the label itself,
