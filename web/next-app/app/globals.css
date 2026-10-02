@@ -450,13 +450,15 @@ footer .link-underline:hover {
   opacity: 0.17;
 }
 
-/* Footer background art, behind the content. Mobile only: the luffy-bg
-   silhouette, scaled to the footer width and anchored to the foot, so it reads
-   as a small figure at the bottom of a content-sized footer. It is an RGBA
-   silhouette, fully transparent at the top and dense at the bottom, so it blends
-   into --bg on its own and needs no scrim -- the figure lands below the nav and
-   never collides with it. Near-black, so .dark inverts it into a light
-   silhouette; it is greyscale, so invert alone is enough. */
+/* Footer background art, behind the content: the luffy-bg silhouette, scaled to
+   the footer width and anchored to the foot. It is an RGBA silhouette, fully
+   transparent at the top and dense at the bottom, so it blends into --bg on its
+   own. Near-black, so .dark inverts it into a light silhouette; it is
+   greyscale, so invert alone is enough.
+
+   It shows on phones and tablets, up to lg. From lg up the footer is
+   deliberately plain -- page-colored with a hairline, no image -- so the art
+   layer is hidden rather than stretched across a wide box. */
 
 .footer-art {
   background-image: url('/luffy-bg.avif');
@@ -469,12 +471,26 @@ footer .link-underline:hover {
   filter: invert(1);
 }
 
-/* From md up the footer is deliberately plain -- page-colored with a hairline,
-   no image -- so the art layer is hidden rather than left to stretch a
-   landscape photo across a short, wide box. */
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .footer-art {
     display: none;
+  }
+}
+
+/* From md up the layout is a row, so the nav columns sit top-right -- exactly
+   where the figure is, and the links land on his hat. A soft scrim in that
+   corner fades him back; it is transparent by 70% toward the bottom-left, so
+   his body, cape and the smoke keep full strength. color-mix on --bg tracks
+   both themes. Below md the figure lands under the nav instead, so it is not
+   needed. */
+@media (min-width: 768px) {
+  .footer-scrim {
+    background: linear-gradient(
+      to bottom left,
+      color-mix(in srgb, var(--bg) 90%, transparent) 0%,
+      color-mix(in srgb, var(--bg) 55%, transparent) 38%,
+      transparent 70%
+    );
   }
 }
 
