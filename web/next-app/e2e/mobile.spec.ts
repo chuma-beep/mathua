@@ -221,8 +221,9 @@ test('scroll containers are edge-to-edge and horizontally scrollable', async ({ 
     expect(await lb.evaluate(el => el.scrollLeft)).toBeGreaterThan(0)
   }
 
-  // Yearly heatmap (switch view first). It lives on the report, not the hub.
-  await page.goto('/progress')
+  // Yearly heatmap (switch view first). It is on the hub, with the rest of the
+  // report.
+  await page.goto('/profile')
   await page.getByRole('button', { name: 'Yearly' }).click()
   const yearly = page.locator('div.overflow-x-auto').first()
   await expect(yearly).toBeVisible()
