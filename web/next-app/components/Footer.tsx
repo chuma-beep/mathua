@@ -19,8 +19,15 @@ const CREDITS = ['MIT License', 'Avatars by DiceBear']
 
 export default function Footer({ className = '' }: FooterProps) {
   return (
-    <footer className={`mt-[10px] border-t border-mathua-border bg-mathua-bg text-mathua-primary ${className}`}>
-      <div className="w-full px-4 py-10 sm:px-6 md:py-14 lg:px-10">
+    <footer className={`relative mt-[10px] overflow-hidden border-t border-mathua-border bg-mathua-bg text-mathua-primary ${className}`}>
+      {/* Decorative texture behind the whole footer. aria-hidden and
+          pointer-events-none so it stays out of the a11y tree and cannot
+          intercept clicks; the content below is lifted with `relative`. */}
+      <div
+        aria-hidden="true"
+        className="footer-bg pointer-events-none absolute inset-0 bg-cover bg-center"
+      />
+      <div className="relative w-full px-4 py-10 sm:px-6 md:py-14 lg:px-10">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between md:gap-12">
           <div className="md:max-w-[34ch]">
             <div>
