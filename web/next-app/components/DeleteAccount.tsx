@@ -17,16 +17,25 @@ export default function DeleteAccount() {
   const { push } = useRouter()
   const [phrase, setPhrase] = useState('')
   const [password, setPassword] = useState('')
-  const [needsPassword, setNeedsPassword] = useState(false)
+  const [error, setError] = useState('')
+  // Tri-state, not a boolean: `null` means "we could not find out" (getMe
+  // failed or is still in flight). Hiding the field on `null` used to strand a
+  // password account — the delete went out with no password, the server
+  // answered 401 "current password is required", and there was no field on
+  // screen to fill. So when unknown we SHOW the field but do not require it:
+  // the server is the real gate, and an OAuth-only learner can ignore it.
+  const [needsPassword, setNeedsPassword] = useState<boolean | null>(null)
   const [busy, setBusy] = useState(false)
   const [exporting, setExporting] = useState(false)
   const [exported, setExported] = useState(false)
-  const [error, setError] = useState('')
-  const armed = phrase.trim() === DELETE_PHRASE && (!needsPassword || password !== '')
+  const armed = phrase.trim() === DELETE_PHRASE && (needsPassword !== true || password !== '')
 
   useEffect(() => {
-    setNeedsPassword(getUserInfo()?.has_password ?? false)
-    getMe().then(me => setNeedsPassword(!!me.has_password)).catch(() => {})
+    const cached = getUserInfo()?.has_password
+    if (cached !== undefined) setNeedsPassword(!!cached)
+    getMe()
+      .then(me => setNeedsPassword(!!me.has_password))
+      .catch(() => setNeedsPassword(cached === undefined ? null : !!cached))
   }, [])
 
   async function handleExport() {
@@ -62,10 +71,13 @@ export default function DeleteAccount() {
     setBusy(true)
     setError('')
     try {
-      if (needsPassword) {
+      if (needsPassword === true) {
         await deleteAccount({ phrase: phrase.trim(), password })
       } else {
-        await deleteAccount({ phrase: phrase.trim() })
+        // When we don't know whether a password is required, send it if the
+        // learner typed one; the server decides, and a 401 can now be retried
+        // because the field is on screen.
+        await deleteAccount(password ? { phrase: phrase.trim(), password } : { phrase: phrase.trim() })
       }
       signOut()
       clearGuest()
@@ -123,7 +135,7 @@ export default function DeleteAccount() {
             autoComplete="off"
             className="flex-1 min-w-0 bg-mathua-bg border border-mathua-border px-3 py-2 font-mono text-xs text-mathua-primary"
           />
-          {needsPassword && (
+          {needsPassword !== false && (
             <input
               id="delete-password"
               type="password"
@@ -131,7 +143,10 @@ export default function DeleteAccount() {
               onChange={e => setPassword(e.target.value)}
               placeholder="Current password"
               autoComplete="current-password"
-              aria-label="Current password"
+              // Distinct from the change-password field higher up this page:
+              // two controls sharing an accessible name made the Settings
+              // page ambiguous for screen readers and for tests.
+              aria-label="Current password, to confirm deletion"
               className="flex-1 min-w-0 bg-mathua-bg border border-mathua-border px-3 py-2 font-mono text-xs text-mathua-primary"
             />
           )}

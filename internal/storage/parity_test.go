@@ -183,6 +183,13 @@ func TestDeleteAccount_RemovesEveryOwnedRow(t *testing.T) {
 		if err := repo.DeleteAccount(stu.ID); err != nil {
 			t.Errorf("[%s] repeat delete: %v", tag, err)
 		}
+		// `other` claimed the freed address, so leaving it behind made every
+		// later run against a reused DSN fail on uidx_students_email. CI gets
+		// a fresh database and never sees it; a developer reusing a local
+		// Postgres does. Clean up after the assertion, not before it.
+		if err := repo.DeleteAccount(other.ID); err != nil {
+			t.Errorf("[%s] cleanup: %v", tag, err)
+		}
 	}
 }
 func TestParity_SQLiteVsPostgres(t *testing.T) {

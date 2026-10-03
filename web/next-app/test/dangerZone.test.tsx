@@ -73,26 +73,26 @@ describe('DeleteAccount', () => {
   it('requires the current password only for password accounts', async () => {
     vi.mocked(getMe).mockResolvedValue({ student_id: 's1', name: 'A', has_password: true })
     render(<DeleteAccount />)
-    expect(await screen.findByLabelText('Current password')).toBeTruthy()
+    expect(await screen.findByLabelText('Current password, to confirm deletion')).toBeTruthy()
     fireEvent.change(screen.getByLabelText(/Type.*to confirm/i), { target: { value: 'delete my account' } })
     // Phrase alone is not enough while the password is empty.
     expect(screen.getByRole('button', { name: /^Delete my account$/ })).toBeDisabled()
-    fireEvent.change(screen.getByLabelText('Current password'), { target: { value: 'secret' } })
+    fireEvent.change(screen.getByLabelText('Current password, to confirm deletion'), { target: { value: 'secret' } })
     expect(screen.getByRole('button', { name: /^Delete my account$/ })).not.toBeDisabled()
   })
 
   it('omits the password field for OAuth-only rows', async () => {
     render(<DeleteAccount />)
     await screen.findByText(/Delete account/)
-    expect(screen.queryByLabelText('Current password')).toBeNull()
+    expect(screen.queryByLabelText('Current password, to confirm deletion')).toBeNull()
   })
 
   it('deletes, signs out fully, and lands on /', async () => {
     vi.mocked(getMe).mockResolvedValue({ student_id: 's1', name: 'A', has_password: true })
     render(<DeleteAccount />)
-    await screen.findByLabelText('Current password')
+    await screen.findByLabelText('Current password, to confirm deletion')
     fireEvent.change(screen.getByLabelText(/Type.*to confirm/i), { target: { value: 'delete my account' } })
-    fireEvent.change(screen.getByLabelText('Current password'), { target: { value: 'secret' } })
+    fireEvent.change(screen.getByLabelText('Current password, to confirm deletion'), { target: { value: 'secret' } })
     fireEvent.click(screen.getByRole('button', { name: /^Delete my account$/ }))
     await screen.findByText('Deleting…')
     expect(vi.mocked(deleteAccount)).toHaveBeenCalledWith({ phrase: 'delete my account', password: 'secret' })
