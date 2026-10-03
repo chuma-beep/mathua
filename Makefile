@@ -28,6 +28,13 @@ validate:
 	python3 scripts/counts.py --check
 	go test ./internal/generator/ -run TestLearnerDomainsHaveSchemas
 
+# Strict LaTeX check: runs every math span in the lesson corpus through Compute
+# Engine and reports the malformed ones. Needs node (for the CE dependency) and
+# the Go toolchain (for latexdump). Exits 1 while defects remain, so it is not in
+# `validate` yet -- see the CI step for why.
+latex-normalize:
+	cd web/next-app && node scripts/normalize-latex.mjs
+
 lint-go:
 	go run github.com/curtbushko/go-ai-lint/cmd/go-ai-lint@v1.0.1-0.20260620203811-c6ce4ee5624f ./...
 
