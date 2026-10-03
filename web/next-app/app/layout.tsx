@@ -5,6 +5,9 @@ import { Toaster } from '@/components/ui/sonner'
 import ServiceWorkerRegistrar from '@/components/ServiceWorkerRegistrar'
 import ChromeToggle from '@/components/ChromeToggle'
 import { SITE_URL } from '@/lib/site'
+// MathLive's own stylesheet for the <math-field> rendering (MathML). Loaded here,
+// not in the lazily-loaded component, so the chunk has no CSS side-effect.
+import 'mathlive/static.css'
 import './globals.css'
 
 // Self-hosted variable fonts (vendored from Google Fonts 2026-09-28:

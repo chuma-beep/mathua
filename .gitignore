@@ -80,3 +80,8 @@ eval/
 
 # Figure display fonts (fetched via figures/fetch_fonts.py, never committed)
 figures/fonts/
+
+# MathLive fetches KaTeX webfonts from /fonts at runtime;
+# scripts/copy-mathlive-fonts.mjs regenerates them on predev/prebuild out of
+# node_modules, so they are build output rather than source.
+web/next-app/public/fonts/

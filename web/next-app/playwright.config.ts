@@ -20,17 +20,17 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
-      testIgnore: /mobile\.spec\.ts/,
+      testIgnore: /mobile(-math)?\.spec\.ts/,
     },
     {
       name: 'mobile-chromium',
       use: { ...devices['Pixel 7'] },
-      testMatch: /mobile\.spec\.ts/,
+      testMatch: /mobile(-math)?\.spec\.ts/,
     },
     {
       name: 'mobile-320',
       use: { ...devices['Pixel 7'], viewport: { width: 320, height: 568 } },
-      testMatch: /mobile\.spec\.ts/,
+      testMatch: /mobile(-math)?\.spec\.ts/,
     },
   ],
   webServer: {

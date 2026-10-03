@@ -4,7 +4,6 @@ import type { RefObject } from 'react'
 import KatexContent from '../../components/KatexContent'
 import SectionHeader from '../../components/SectionHeader'
 import ProgressBar from '../../components/ProgressBar'
-import SymbolPalette from '../../components/SymbolPalette'
 import ReportButton from '../../components/ReportButton'
 import BriefingCard, { DIAGNOSTIC_BRIEFING } from '../../components/BriefingCard'
 import SubmitErrorBlock, { type SubmitError } from '../../components/SubmitErrorBlock'
@@ -14,7 +13,7 @@ import type { DiagnosticProgress, GoalPlanRes } from '../../lib/api'
 import type { AnswerFormat } from '../../lib/answerFormat'
 import ChoiceOptions from '../../components/ChoiceOptions'
 import { domainLabels, type DomainInfo } from './domains'
-import { Input } from '@/components/ui/input'
+import { MathAnswerInput, type MathFocusHandle } from '@/components/math/MathInput'
 
 export function WelcomeStep({
   domains,
@@ -182,7 +181,7 @@ export function DiagnosticStep({
   lastResult: { correct: boolean; feedback: string } | null
   accuracy: { correct: number; total: number }
   loading: boolean
-  inputRef: RefObject<HTMLInputElement | null>
+  inputRef: RefObject<MathFocusHandle | null>
   conceptId: string
   sessionId: string
   onInputChange: (value: string) => void
@@ -221,17 +220,18 @@ export function DiagnosticStep({
             className="flex flex-col sm:flex-row gap-3 min-w-0"
           >
             <label htmlFor="onboard-answer" className="sr-only">Your answer</label>
-            <Input
-              ref={inputRef}
+            <MathAnswerInput
               id="onboard-answer"
-              type="text"
               value={answerInput}
-              onChange={(e) => onInputChange(e.target.value)}
-              placeholder="Your answer..."
-              enterKeyHint="go"
-              inputMode={answerFormat.inputMode}
+              onChange={onInputChange}
+              onSubmit={onSubmit}
+              conceptId={conceptId}
               disabled={loading || lastResult !== null}
+              status={lastResult ? (lastResult.correct ? 'correct' : 'incorrect') : 'default'}
+              inputMode={answerFormat.inputMode}
+              placeholder="Your answer..."
               className="sm:flex-1"
+              focusRef={inputRef}
             />
             <button
               type="submit"
@@ -253,7 +253,6 @@ export function DiagnosticStep({
               </button>
             )}
           </div>
-          <SymbolPalette targetRef={inputRef} onInsert={onInputChange} />
           <div className="mt-2 flex justify-end">
             <ReportButton
               key={question}

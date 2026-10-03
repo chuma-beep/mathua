@@ -4,12 +4,12 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import KatexContent from './KatexContent'
 import ChoiceOptions from './ChoiceOptions'
-import { Input } from '@/components/ui/input'
 import { getLessonKPs, getLessonPractice, getLessonReadiness, submitStudyAnswer, getActivity, getDueReviews, getProgress, getScores, getWeaknesses, getErrorStatus, type KpInfo, type PracticeQuestion, type ReadinessRes, type DailyActivity, type Scores, type WeaknessRes, type ConceptProgress } from '../lib/api'
 import { getUserInfo } from '../lib/auth'
 import { selectShelfHead, upcomingLocked, hrefConceptId, type Shelf, type LockedSuccessor } from '../lib/nextUp'
 import { REQUIRED_IN_A_ROW, masteryEstimate, type Attempt } from '../lib/progression'
 import { formatForGradingType } from '../lib/answerFormat'
+import { MathAnswerInput } from './math/MathInput'
 import { concepts } from '../lib/conceptData'
 
 // Append-only learning feed: intro once, then each submit locks its card and
@@ -79,7 +79,8 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
   const seenRef = useRef<string[]>([])
   const bottomRef = useRef<HTMLDivElement>(null)
   const reduceMotion = useRef(false)
-  const format = formatForGradingType(concepts.find(c => c.id === conceptId)?.grading_type)
+  const conceptGradingType = concepts.find(c => c.id === conceptId)?.grading_type
+  const format = formatForGradingType(conceptGradingType)
   // A learner reading "← Back to frac.add.diff" is reading a storage key.
   const returnToLabel = concepts.find(c => c.id === returnTo)?.label ?? returnTo
 
@@ -521,7 +522,19 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
               {!locked && (
                 <form onSubmit={ev => { ev.preventDefault(); handleCheck(qe.key) }} className="mt-3 flex flex-col sm:flex-row gap-2">
                   <label htmlFor={`learn-answer-${qe.key}`} className="sr-only">Your answer</label>
-                  <Input id={`learn-answer-${qe.key}`} value={qe.answer} onChange={ev => setEntry(qe.key, { answer: ev.target.value })} placeholder="Your answer…" inputMode={format.inputMode} className="sm:flex-1 bg-mathua-bg" />
+                  <MathAnswerInput
+                    id={`learn-answer-${qe.key}`}
+                    value={qe.answer}
+                    onChange={v => setEntry(qe.key, { answer: v })}
+                    onSubmit={() => handleCheck(qe.key)}
+                    gradingType={conceptGradingType}
+                    conceptId={conceptId}
+                    disabled={qe.checking}
+                    status={qe.feedback ? (qe.feedback.correct ? 'correct' : 'incorrect') : 'default'}
+                    inputMode={format.inputMode}
+                  placeholder="Your answer"
+                    className="sm:flex-1"
+                  />
                   <button type="submit" disabled={qe.checking || !qe.answer.trim()} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-6 h-12 text-sm font-mono disabled:opacity-50 w-auto self-end sm:self-auto shrink-0">Check</button>
                 </form>
               )}

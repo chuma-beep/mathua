@@ -1,0 +1,210 @@
+{
+  "_comment": "Recorded by scripts/record-mathlive-corpus.mjs from mathlive in Chromium, via MathfieldElement.getValue('plain-text'). Not hand-written: do not edit, re-record.",
+  "mathliveVersion": "0.111.0",
+  "cases": [
+    {
+      "gradingType": "numeric",
+      "expected": "-5",
+      "latex": "-5",
+      "plain": "-5"
+    },
+    {
+      "gradingType": "numeric",
+      "expected": "0.75",
+      "latex": "0.75",
+      "plain": "0.75"
+    },
+    {
+      "gradingType": "numeric",
+      "expected": "7/2",
+      "latex": "7\\div2",
+      "plain": "7 -: 2"
+    },
+    {
+      "gradingType": "numeric",
+      "expected": "1/2",
+      "latex": "\\frac{1}{2}",
+      "plain": "(1)/(2)"
+    },
+    {
+      "gradingType": "numeric",
+      "expected": "1/2",
+      "latex": "\\frac{2}{4}",
+      "plain": "(2)/(4)"
+    },
+    {
+      "gradingType": "numeric",
+      "expected": "4 1/10",
+      "latex": "4\\frac{1}{10}",
+      "plain": "4(1)/(10)"
+    },
+    {
+      "gradingType": "numeric",
+      "expected": "-1 1/2",
+      "latex": "-1\\frac{1}{2}",
+      "plain": "-1(1)/(2)"
+    },
+    {
+      "gradingType": "numeric",
+      "expected": "0.0314",
+      "latex": "3.14e-2",
+      "plain": "3.14e-2"
+    },
+    {
+      "gradingType": "numeric-expression",
+      "expected": "1000000",
+      "latex": "10^{6}",
+      "plain": "10^6"
+    },
+    {
+      "gradingType": "numeric-expression",
+      "expected": "0.001",
+      "latex": "10^{-3}",
+      "plain": "10^(-3)"
+    },
+    {
+      "gradingType": "numeric-expression",
+      "expected": "0.0314",
+      "latex": "3.14\\times 10^{-2}",
+      "plain": "3.14 * 10^(-2)"
+    },
+    {
+      "gradingType": "numeric-expression",
+      "expected": "48",
+      "latex": "12\\times4",
+      "plain": "12 * 4"
+    },
+    {
+      "gradingType": "expression",
+      "expected": "2x+3",
+      "latex": "2x+3",
+      "plain": "2x+3"
+    },
+    {
+      "gradingType": "expression",
+      "expected": "x+4=10",
+      "latex": "x+4=10",
+      "plain": "x+4=10"
+    },
+    {
+      "gradingType": "expression",
+      "expected": "6x^2",
+      "latex": "6x^{2}",
+      "plain": "6x^2"
+    },
+    {
+      "gradingType": "expression",
+      "expected": "x^2+2x+1",
+      "latex": "x^{2}+2x+1",
+      "plain": "x^2+2x+1"
+    },
+    {
+      "gradingType": "expression",
+      "expected": "(x+1)^2",
+      "latex": "(x+1)^{2}",
+      "plain": "(x+1)^2"
+    },
+    {
+      "gradingType": "expression",
+      "expected": "2x",
+      "latex": "2\\pi r",
+      "plain": "2pi r"
+    },
+    {
+      "gradingType": "expression",
+      "expected": "-3x-5",
+      "latex": "-3x-5",
+      "plain": "-3x-5"
+    },
+    {
+      "gradingType": "expression",
+      "expected": "sqrt(x^2)",
+      "latex": "\\sqrt{x^{2}}",
+      "plain": "sqrt(x^2)"
+    },
+    {
+      "gradingType": "expression",
+      "expected": "x^(n+1)",
+      "latex": "x^{n+1}",
+      "plain": "x^(n+1)"
+    },
+    {
+      "gradingType": "expression",
+      "expected": "x^2",
+      "latex": "x^{2}",
+      "plain": "x^2"
+    },
+    {
+      "gradingType": "symbolic",
+      "expected": "sqrt(2)",
+      "latex": "\\sqrt{2}",
+      "plain": "sqrt(2)"
+    },
+    {
+      "gradingType": "symbolic",
+      "expected": "1/sqrt(3)",
+      "latex": "\\frac{1}{\\sqrt{3}}",
+      "plain": "(1)/(sqrt(3))"
+    },
+    {
+      "gradingType": "symbolic",
+      "expected": "(x+y)/(x-y)",
+      "latex": "\\frac{x+y}{x-y}",
+      "plain": "(x+y)/(x-y)"
+    },
+    {
+      "gradingType": "expression",
+      "expected": "sin(x)+cos(x)",
+      "latex": "\\sin(x)+\\cos(x)",
+      "plain": "sin (x)+cos (x)"
+    },
+    {
+      "gradingType": "expression",
+      "expected": "sin^2(x)+cos^2(x)",
+      "latex": "\\sin^{2}(x)+\\cos^{2}(x)",
+      "plain": "sin ^2(x)+cos ^2(x)"
+    },
+    {
+      "gradingType": "expression",
+      "expected": "5 R 3",
+      "latex": "5\\ R\\ 3",
+      "plain": "5 R 3"
+    },
+    {
+      "gradingType": "expression",
+      "expected": "3sqrt(2)",
+      "latex": "3\\sqrt{2}",
+      "plain": "3sqrt(2)"
+    },
+    {
+      "gradingType": "expression",
+      "expected": "2:3",
+      "latex": "2:3",
+      "plain": "2:3"
+    },
+    {
+      "gradingType": "tuple",
+      "expected": "2,3",
+      "latex": "2,3",
+      "plain": "2,3"
+    },
+    {
+      "gradingType": "tuple",
+      "expected": "(2,3)",
+      "latex": "(2,3)",
+      "plain": "(2,3)"
+    },
+    {
+      "gradingType": "ordering",
+      "expected": "2,3,5",
+      "latex": "2,3,5",
+      "plain": "2,3,5"
+    },
+    {
+      "gradingType": "comparison",
+      "expected": "<",
+      "latex": "<",
+      "plain": "<"
+    }
+  ]
+}

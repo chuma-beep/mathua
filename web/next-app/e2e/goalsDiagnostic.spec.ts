@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test'
+import { answerField, focusAnswerField, typeAnswer } from './helpers/answer'
 
 // Goals diagnostic flow (select → answer → results). This is the safety net
 // for the DiagnosticHost extraction: it must keep passing unchanged.
@@ -50,8 +51,7 @@ test('goals diagnostic: select domain → answer → results', async ({ page }) 
   await page.getByRole('button', { name: 'Begin diagnostic →' }).click()
 
   await expect(page.getByText('2 + 3 = ?')).toBeVisible({ timeout: 20_000 })
-  const input = page.locator('input[placeholder*="Your answer"]').first()
-  await input.fill('5')
+  await typeAnswer(page, '5')
   await page.getByRole('button', { name: 'Check Answer' }).first().click()
 
   await expect(page.getByText("Here's what we found")).toBeVisible({ timeout: 20_000 })

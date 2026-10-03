@@ -12,6 +12,7 @@ import {
   skipQuizQuestion,
 } from '../lib/api'
 import { formatForGradingType } from '../lib/answerFormat'
+import { answerValue, findAnswerField, isMathField, typeAnswer } from './helpers/answerInput'
 
 describe('formatForGradingType', () => {
   it('maps known types to hint + keyboard, unknowns to generic text', () => {
@@ -321,9 +322,11 @@ describe('DiagnosticHost manual advance', () => {
 
     // Format hint from the served grading_type, with numeric keyboard.
     expect(screen.getByText('Answer with a number, fraction, or mixed number (e.g. 4 1/10)')).toBeInTheDocument()
-    expect(screen.getByPlaceholderText(/your answer/i).getAttribute('inputmode')).toBe('numeric')
+    // `numeric` selects the math editor, which brings its own virtual keyboard
+    // rather than the OS numeric pad — so the control itself is the assertion.
+    expect(isMathField(await findAnswerField())).toBe(true)
 
-    fireEvent.change(screen.getByPlaceholderText(/your answer/i), { target: { value: '5' } })
+    typeAnswer(await findAnswerField(), '5')
     fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
 
     // Feedback shows, staged Q2 stays hidden — no auto-advance.
@@ -335,7 +338,7 @@ describe('DiagnosticHost manual advance', () => {
     fireEvent.click(next)
     await screen.findByText('Q2 text')
     expect(screen.queryByRole('button', { name: 'Next →' })).toBeNull()
-    expect(screen.getByPlaceholderText(/your answer/i)).toBe(document.activeElement)
+    expect(await findAnswerField()).toBe(document.activeElement)
   })
 
   it('shows the error block with Retry and Skip on submit failure', async () => {
@@ -355,7 +358,7 @@ describe('DiagnosticHost manual advance', () => {
     )
     await screen.findByText('Q1 text')
 
-    fireEvent.change(screen.getByPlaceholderText(/your answer/i), { target: { value: '5' } })
+    typeAnswer(await findAnswerField(), '5')
     fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
 
     // No alert: persistent inline error with the server's own words.
@@ -364,7 +367,7 @@ describe('DiagnosticHost manual advance', () => {
     expect(screen.getByRole('button', { name: 'Retry' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Skip →' })).toBeInTheDocument()
     // Answer preserved for one-tap retry.
-    expect(screen.getByPlaceholderText(/your answer/i)).toHaveValue('5')
+    expect(answerValue(await findAnswerField())).toBe('5')
 
     // Retry succeeds (mock default) and advances on Next.
     fireEvent.click(screen.getByRole('button', { name: 'Retry' }))
@@ -389,7 +392,7 @@ describe('DiagnosticHost manual advance', () => {
     )
     await screen.findByText('Q1 text')
 
-    fireEvent.change(screen.getByPlaceholderText(/your answer/i), { target: { value: '5' } })
+    typeAnswer(await findAnswerField(), '5')
     fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
 
     // 404: session gone — Retry/Skip pointless, only Restart.
@@ -417,7 +420,7 @@ describe('DiagnosticHost manual advance', () => {
     )
     await screen.findByText('Q1 text')
 
-    fireEvent.change(screen.getByPlaceholderText(/your answer/i), { target: { value: '5' } })
+    typeAnswer(await findAnswerField(), '5')
     fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
     await screen.findByRole('alert')
 
@@ -425,7 +428,7 @@ describe('DiagnosticHost manual advance', () => {
     await screen.findByText('Q3 text')
     expect(vi.mocked(skipGoalQuestion)).toHaveBeenCalledTimes(1)
     expect(screen.queryByRole('alert')).toBeNull()
-    expect(screen.getByPlaceholderText(/your answer/i)).toBe(document.activeElement)
+    expect(await findAnswerField()).toBe(document.activeElement)
   })
 
   it("I don't know submits empty with the flag and lands on feedback", async () => {
@@ -475,7 +478,7 @@ describe('DiagnosticHost manual advance', () => {
     )
     await screen.findByText('Q1 text')
 
-    fireEvent.change(screen.getByPlaceholderText(/your answer/i), { target: { value: 'wrong' } })
+    typeAnswer(await findAnswerField(), 'wrong')
     fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
 
     await screen.findByText('Nope')
@@ -486,7 +489,7 @@ describe('DiagnosticHost manual advance', () => {
     await screen.findByText('Q1 text')
     expect(vi.mocked(retryGoalQuestion)).toHaveBeenCalledWith('s1', 'c1')
     expect(screen.queryByRole('button', { name: 'I made a silly mistake — retry' })).toBeNull()
-    expect(screen.getByPlaceholderText(/your answer/i)).toBe(document.activeElement)
+    expect(await findAnswerField()).toBe(document.activeElement)
   })
 })
 
@@ -500,7 +503,7 @@ describe('QuizHost manual advance', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Start quiz →' }))
     await screen.findByText('Quiz Q1 text')
 
-    fireEvent.change(screen.getByPlaceholderText(/your answer/i), { target: { value: '8' } })
+    typeAnswer(await findAnswerField(), '8')
     fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
 
     await screen.findByText('Good!')
@@ -509,7 +512,7 @@ describe('QuizHost manual advance', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Next →' }))
     await screen.findByText('Quiz Q2 text')
     expect(screen.queryByRole('button', { name: 'Next →' })).toBeNull()
-    expect(screen.getByPlaceholderText(/your answer/i)).toBe(document.activeElement)
+    expect(await findAnswerField()).toBe(document.activeElement)
   })
 
   // The quiz response never carried an explanation, so a miss showed the
@@ -531,7 +534,7 @@ describe('QuizHost manual advance', () => {
     render(<QuizHost />)
     fireEvent.click(await screen.findByRole('button', { name: 'Start quiz →' }))
     await screen.findByText('Quiz Q1 text')
-    fireEvent.change(screen.getByPlaceholderText(/your answer/i), { target: { value: '9' } })
+    typeAnswer(await findAnswerField(), '9')
     fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
 
     expect(await screen.findByText(/start at 3 and count on 5/)).toBeInTheDocument()
@@ -554,7 +557,7 @@ describe('QuizHost manual advance', () => {
     render(<QuizHost />)
     fireEvent.click(await screen.findByRole('button', { name: 'Start quiz →' }))
     await screen.findByText('Quiz Q1 text')
-    fireEvent.change(screen.getByPlaceholderText(/your answer/i), { target: { value: '8' } })
+    typeAnswer(await findAnswerField(), '8')
     fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
 
     expect(await screen.findByText('✓ Correct!')).toBeInTheDocument()
@@ -572,7 +575,7 @@ describe('QuizHost manual advance', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Start quiz →' }))
     await screen.findByText('Quiz Q1 text')
 
-    fireEvent.change(screen.getByPlaceholderText(/your answer/i), { target: { value: '8' } })
+    typeAnswer(await findAnswerField(), '8')
     fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
 
     await screen.findByRole('alert')

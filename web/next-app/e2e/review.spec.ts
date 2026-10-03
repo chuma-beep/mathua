@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test'
+import { typeAnswer } from './helpers/answer'
 
 // Review runner flow (intro → answer → done). Safety net for the dead-end
 // fix: both Review-now links land here instead of the session chooser.
@@ -20,8 +21,7 @@ test('review: start → answer → done', async ({ page }) => {
   await page.getByRole('button', { name: 'Start review →' }).click()
 
   await expect(page.getByText('2 + 3 = ?').first()).toBeVisible({ timeout: 20_000 })
-  const input = page.locator('input[placeholder*="Your answer"]').first()
-  await input.fill('5')
+  await typeAnswer(page, '5')
   await page.getByRole('button', { name: 'Check Answer' }).first().click()
 
   await expect(page.getByText('Review complete').first()).toBeVisible({ timeout: 20_000 })

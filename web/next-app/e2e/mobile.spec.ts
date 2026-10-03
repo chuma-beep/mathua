@@ -1,5 +1,6 @@
 import { test, expect, type Page } from '@playwright/test'
 import conceptsData from '../data/concepts.json'
+import { answerField, focusAnswerField, typeAnswer } from './helpers/answer'
 
 const sample = conceptsData as Array<{ id: string; label: string; domain: string; prerequisites: string[] }>
 
@@ -381,18 +382,20 @@ test('double-clicking Check Answer fires exactly one POST', async ({ page }) => 
   await page.getByRole('button', { name: 'Next →' }).click()
   await expect(page.getByText('5+4=?')).toBeVisible({ timeout: 30_000 })
 
-  const input = page.locator('input[placeholder*="Your answer"]').first()
+  const input = answerField(page)
   await expect(input).toBeVisible({ timeout: 20_000 })
   // Regression guard: `flex-1` on the column form once made flex-basis:0% win
-  // over the height class, collapsing the box to ~22px on mobile.
+  // over the height class, collapsing the box to ~22px on mobile. The math editor
+  // keeps the same 48px floor, so the guard still applies to it.
   const inputBox = await input.boundingBox()
-  expect(inputBox?.height).toBe(48)
+  expect(inputBox?.height).toBeGreaterThanOrEqual(48)
+  await focusAnswerField(page)
   // Submit hugs its label instead of stretching to the column width.
   const submit = page.getByRole('button', { name: 'Check', exact: true }).first()
   const submitBox = await submit.boundingBox()
   expect(submitBox?.height).toBe(48)
   expect(submitBox?.width ?? 0).toBeLessThan(inputBox?.width ?? 0)
-  await input.fill('9')
+  await typeAnswer(page, '9')
   await submit.dblclick()
   await page.waitForTimeout(500)
 

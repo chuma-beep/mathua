@@ -5,7 +5,6 @@ import { toast } from 'sonner'
 import KatexContent from '../../components/KatexContent'
 import SectionHeader from '../../components/SectionHeader'
 import ProgressBar from '../../components/ProgressBar'
-import SymbolPalette from '../../components/SymbolPalette'
 import ReportButton from '../../components/ReportButton'
 import {
   startGoalDiagnostic,
@@ -26,7 +25,7 @@ import SubmitErrorBlock, {
   type SubmitError,
 } from '../../components/SubmitErrorBlock'
 import { GOALS_DIAG_KEY } from './constants'
-import { Input } from '@/components/ui/input'
+import { MathAnswerInput, type MathFocusHandle } from '@/components/math/MathInput'
 
 const EMPTY_PLAN: GoalPlanRes = {
   readiness: 1,
@@ -52,7 +51,8 @@ export default function DiagnosticHost({
   const [loading, setLoading] = useState(false)
   const sessionId = useRef('')
   const conceptId = useRef('')
-  const goalsInputRef = useRef<HTMLInputElement>(null)
+  const diagGradingType = useRef('')
+  const goalsInputRef = useRef<MathFocusHandle | null>(null)
   const startedRef = useRef(false)
 
   const [question, setQuestion] = useState('')
@@ -93,6 +93,7 @@ export default function DiagnosticHost({
       conceptId.current = res.concept_id || ''
       setConceptName(res.concept_name || '')
       setAnswerFormat(formatForGradingType(res.grading_type))
+    diagGradingType.current = res.grading_type
       setQuestionCount(1)
       // Backend truth first; frontend estimate as fallback for older servers.
       if (res.progress && res.progress.cover_size > 0) {
@@ -143,6 +144,7 @@ export default function DiagnosticHost({
       conceptId.current = data.concept_id || ''
       setConceptName(data.concept_name || '')
       setAnswerFormat(formatForGradingType(data.grading_type))
+    diagGradingType.current = data.grading_type
       if (data.progress) {
         setProgress(data.progress)
         setEstimatedTotal(data.progress.cover_size)
@@ -245,6 +247,7 @@ export default function DiagnosticHost({
     conceptId.current = cid
     setConceptName(name)
     setAnswerFormat(formatForGradingType(gradingType))
+    diagGradingType.current = gradingType
     setQuestionCount(prev => prev + 1)
     setLastResult(null)
     setAnswerInput('')
@@ -303,6 +306,7 @@ export default function DiagnosticHost({
       conceptId.current = data.concept_id || ''
       setConceptName(data.concept_name || '')
       setAnswerFormat(formatForGradingType(data.grading_type || ''))
+    diagGradingType.current = data.grading_type || ''
       setLastResult(null)
       setAnswerInput('')
     } catch (e) {
@@ -359,17 +363,19 @@ export default function DiagnosticHost({
                 className="flex flex-col sm:flex-row gap-3 min-w-0"
               >
                 <label htmlFor="goals-answer" className="sr-only">Your answer</label>
-                <Input
-                  ref={goalsInputRef}
+                <MathAnswerInput
                   id="goals-answer"
-                  type="text"
                   value={answerInput}
-                  onChange={e => setAnswerInput(e.target.value)}
-                  placeholder="Your answer..."
-                  enterKeyHint="go"
-                  inputMode={answerFormat.inputMode}
+                  onChange={setAnswerInput}
+                  onSubmit={() => void submitAnswer(false)}
+                  gradingType={diagGradingType.current}
+                  conceptId={conceptId.current}
                   disabled={loading}
+                  status={lastResult ? (lastResult.correct ? 'correct' : 'incorrect') : 'default'}
+                  inputMode={answerFormat.inputMode}
+              placeholder="Your answer..."
                   className="sm:flex-1"
+                  focusRef={goalsInputRef}
                 />
                 <button
                   type="submit"
@@ -390,7 +396,6 @@ export default function DiagnosticHost({
                   I don&apos;t know
                 </button>
               </div>
-              <SymbolPalette targetRef={goalsInputRef} onInsert={setAnswerInput} />
               <div className="mt-2 flex justify-end">
                 <ReportButton
                   key={question}

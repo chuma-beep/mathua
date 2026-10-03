@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
 import ReviewHost from '../app/review/ReviewHost'
 import { startReviewSession, submitReviewAnswer } from '../lib/api'
+import { findAnswerField, typeAnswer } from './helpers/answerInput'
 
 vi.mock('../lib/api', async (importOriginal) => {
   const mod = await importOriginal<typeof import('../lib/api')>()
@@ -58,7 +59,7 @@ describe('ReviewHost', () => {
     fireEvent.click(screen.getByRole('button', { name: /Start review/ }))
     await screen.findByText('2 + 3 = ?')
 
-    fireEvent.change(screen.getByPlaceholderText(/Your answer/), { target: { value: '5' } })
+    typeAnswer(await findAnswerField(), '5')
     fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
     expect(await screen.findByText('✓ Correct!')).toBeTruthy()
 
@@ -67,7 +68,7 @@ describe('ReviewHost', () => {
     expect(await screen.findByText('8 - 3 = ?')).toBeTruthy()
     expect(screen.getByText('Review question 2')).toBeTruthy()
 
-    fireEvent.change(screen.getByPlaceholderText(/Your answer/), { target: { value: '5' } })
+    typeAnswer(await findAnswerField(), '5')
     fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
     expect(await screen.findByText('Review complete', {}, { timeout: 3000 })).toBeTruthy()
     expect(screen.getByText('2/2 correct')).toBeTruthy()
@@ -89,7 +90,7 @@ describe('ReviewHost', () => {
     render(<ReviewHost />)
     fireEvent.click(screen.getByRole('button', { name: /Start review/ }))
     await screen.findByText('2 + 3 = ?')
-    fireEvent.change(screen.getByPlaceholderText(/Your answer/), { target: { value: '5' } })
+    typeAnswer(await findAnswerField(), '5')
     fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
     expect(await screen.findByText(/Couldn't submit your answer/)).toBeTruthy()
   })
