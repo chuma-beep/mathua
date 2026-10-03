@@ -378,7 +378,7 @@ test('double-clicking Check Answer fires exactly one POST', async ({ page }) => 
   await expect(page.getByText('5+4=?')).toHaveCount(0)
   await page.getByRole('link', { name: 'Start learning →' }).first().click()
   await expect(page).toHaveURL(/\/learn\?concept=arith\.add\.single/)
-  await page.getByRole('button', { name: 'Skip the example →' }).click()
+  await page.getByRole('button', { name: 'Next →' }).click()
   await expect(page.getByText('5+4=?')).toBeVisible({ timeout: 30_000 })
 
   const input = page.locator('input[placeholder*="Your answer"]').first()

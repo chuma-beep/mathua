@@ -54,7 +54,7 @@ test('study → learn → answer → XP persists (Study seam)', async ({ page })
   // Study is reference-only: practice lives in /learn behind Start learning.
   await page.getByRole('link', { name: 'Start learning →' }).first().click()
   await expect(page).toHaveURL(/\/learn\?concept=arith\.add\.single/)
-  await page.getByRole('button', { name: 'Skip the example →' }).click()
+  await page.getByRole('button', { name: 'Next →' }).click()
 
   const input = page.locator('input[placeholder*="Your answer"]').first()
   await expect(input).toBeVisible({ timeout: 20_000 })

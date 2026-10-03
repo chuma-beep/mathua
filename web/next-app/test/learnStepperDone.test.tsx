@@ -83,7 +83,7 @@ describe('LearnStepper done state (PR5)', () => {
     render(<LearnStepper conceptId={CID} />)
 
     // Intro → first question.
-    fireEvent.click(await screen.findByRole('button', { name: 'Skip the example →' }))
+    fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
     expect(await screen.findByText('2 + 3 = ?')).toBeTruthy()
 
     // Two in a row advances the single KP → done (REQUIRED_IN_A_ROW = 2).
@@ -124,7 +124,7 @@ describe('LearnStepper done state (PR5)', () => {
     vi.mocked(getProgress).mockRejectedValue(new Error('offline'))
     render(<LearnStepper conceptId={CID} />)
 
-    fireEvent.click(await screen.findByRole('button', { name: 'Skip the example →' }))
+    fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
     expect(await screen.findByText('2 + 3 = ?')).toBeTruthy()
     await answerCurrent('5')
     expect(await screen.findByText('4 + 1 = ?')).toBeTruthy()
@@ -157,7 +157,7 @@ describe('LearnStepper done state (PR5)', () => {
       render(<LearnStepper conceptId={CID} />)
       await vi.advanceTimersByTimeAsync(10)
 
-      fireEvent.click(screen.getByRole('button', { name: 'Skip the example →' }))
+      fireEvent.click(screen.getByRole('button', { name: 'Next →' }))
       await vi.advanceTimersByTimeAsync(10)
 
       for (let i = 0; i < 2; i++) {
@@ -199,7 +199,7 @@ describe('LearnStepper explanation after submission', () => {
     })
     render(<LearnStepper conceptId={CID} />)
 
-    fireEvent.click(await screen.findByRole('button', { name: 'Skip the example →' }))
+    fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
     expect(await screen.findByText('2 + 3 = ?')).toBeTruthy()
     await answerCurrent('5')
 
@@ -219,7 +219,7 @@ describe('LearnStepper explanation after submission', () => {
     })
     render(<LearnStepper conceptId={CID} />)
 
-    fireEvent.click(await screen.findByRole('button', { name: 'Skip the example →' }))
+    fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
     expect(await screen.findByText('2 + 3 = ?')).toBeTruthy()
     await answerCurrent('6')
 
@@ -241,7 +241,7 @@ describe('LearnStepper explanation after submission', () => {
       xp: 0,
     })
     render(<LearnStepper conceptId={CID} />)
-    fireEvent.click(await screen.findByRole('button', { name: 'Skip the example →' }))
+    fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
     await answerCurrent('6')
     expect(await screen.findByText(/off by one/)).toBeTruthy()
   })
@@ -255,7 +255,7 @@ describe('LearnStepper explanation after submission', () => {
       xp: 0,
     })
     render(<LearnStepper conceptId={CID} />)
-    fireEvent.click(await screen.findByRole('button', { name: 'Skip the example →' }))
+    fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
     await answerCurrent('6')
     expect(await screen.findByText(/Start at 2 and count on 3/)).toBeTruthy()
     // The explanation renders; the empty diagnosis contributes no node.
@@ -266,7 +266,7 @@ describe('LearnStepper explanation after submission', () => {
     vi.mocked(submitStudyAnswer).mockResolvedValue({ correct: true, feedback: 'Correct!', explanation: '', xp: 1 })
     render(<LearnStepper conceptId={CID} />)
 
-    fireEvent.click(await screen.findByRole('button', { name: 'Skip the example →' }))
+    fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
     expect(await screen.findByText('2 + 3 = ?')).toBeTruthy()
     await answerCurrent('5')
 

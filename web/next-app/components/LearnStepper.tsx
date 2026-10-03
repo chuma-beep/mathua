@@ -412,7 +412,14 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
                     </ol>
                   </details>
                 )}
-                <button type="button" onClick={startPracticing} className="mt-5 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-6 py-2.5 font-mono text-xs min-h-[44px]">Skip the example →</button>
+                {/* Progression, not a waiver: the feed is append-only, so the
+                    example stays on screen as scrollback — nothing is skipped.
+                    Matches the kpdiv "Next: … (worked example)" label below, and
+                    MA has no skip affordance at all: the worked example is the
+                    scaffolding for the question that follows (example-problem
+                    pair), so the label must not invite bypassing it. */}
+                <button type="button" onClick={startPracticing} className="mt-5 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-6 py-2.5 font-mono text-xs min-h-[44px]">Next →</button>
+                <p className="mt-2 font-mono text-[11px] text-mathua-muted">Work it through on paper first — the question below is the same move.</p>
               </div>
             )
           }
