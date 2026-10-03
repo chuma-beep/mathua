@@ -42,6 +42,48 @@ SOFTWARE.
 
 Upstream: <https://github.com/arnog/mathlive> · Documentation: <https://mathlive.io/mathfield/>
 
+### Compute Engine — `@cortex-js/compute-engine@0.147.0`
+
+Used for one thing: `web/next-app/components/math/SelfCheck.tsx`, which tells a learner
+what their own expression simplifies to. Licensed under the MIT License.
+
+Compute Engine is **used, not vendored**, and is a browser dependency only — it is
+dynamically imported so it never enters any route's initial JS, and it is skipped on
+metered connections. It is *not* used for grading: the Go engine and SymPy remain the
+only graders (ADR-005), and the self-check cannot reach a submitted answer.
+
+Note for anyone extending this: importing the library also switches on MathLive's
+MathJSON paste support, because Compute Engine registers itself under
+`globalThis[Symbol.for("io.cortexjs.compute-engine")]` as a side effect of being
+imported. That is an implicit coupling and is asserted in
+`web/next-app/test/equivalence.test.ts`.
+
+```
+MIT License
+
+Copyright (c) 2019 CortexJS
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+Upstream: <https://cortexjs.io/compute-engine/>
+
 ### Other npm dependencies
 
 KaTeX (MIT) renders question text, answers and lesson content; three.js and

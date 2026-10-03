@@ -107,8 +107,14 @@ bundle:
 - `convertLatexToMathJson()` is no longer exported. The only surviving MathJSON code in the 1.4 MB bundle is a private `mathJsonToLatex` used for the clipboard.
 
 MathJSON is now Compute Engine's exclusive domain (`@cortex-js/compute-engine`, also
-MIT). So if that layer is ever added, the path is **MathLive → LaTeX → `ce.parse()` →
+MIT), and it **is** a dependency now — for the self-check, not for MathLive. So if a
+MathJSON wire format is ever added, the path is **MathLive → LaTeX → `ce.parse()` →
 `.json`**, not MathLive → MathJSON.
+
+Importing the library is also all it takes to switch on MathLive's own MathJSON support:
+it resolves the engine through `globalThis[Symbol.for("io.cortexjs.compute-engine")]`,
+which CE sets as a side effect of being imported, and logs an error when it is absent.
+`test/equivalence.test.ts` asserts that global exists.
 
 MathLive still *consumes* MathJSON in two places — clipboard paste with
 `format: "math-json"`, and as its default `serializeToLatex` — and it does **not**
@@ -126,38 +132,71 @@ rather than changing any of ours.
 
 ### The subset a Go grader would actually receive
 
-**Read from the Compute Engine 0.147 documentation, not executed locally** — Compute
-Engine is not a dependency yet, so this table is what the library documents, not
-something this repository has observed. The first version of it that *is* observed
-should come from a corpus recorded the way
-`test/fixtures/mathlive-plain-text.json` was.
+**Observed, not read from documentation.** `@cortex-js/compute-engine@0.147.0` is
+installed, and this table is `JSON.stringify(ce.parse(latex).json)` run against it. That
+matters, because the library's *documented* canonical form does not match what it
+emits: the docs say `Sqrt` becomes `["Power", x, "Half"]` and `["Power", x, 2]`
+becomes `["Square", x]`. In 0.147.0 neither happens — `Sqrt` and `Root` survive intact
+and `x^2` stays a `Power`. A Go grader written against the documentation would fail on
+almost every input.
 
-The brief this work came from asked for "numbers, symbols, Add, Subtract, Multiply,
-Divide, Power, Negate, Sqrt, Rational, plus function applications". Two of those do
-not survive canonicalisation, and three it omits do. Against
-`ce.parse()`'s canonical form:
-
-| Expression | MathJSON | Note |
+| Expression | MathJSON from 0.147.0 | Note |
 |---|---|---|
-| `\frac{1}{2}` | `["Rational", 1, 2]` | **not** `["Divide", …]` |
-| `\frac{x}{y}` | `["Rational", "x", "y"]` | symbolic denominator, still `Rational` |
-| `\sqrt{9}` | `["Square", 3]` | evaluates to the number |
-| `\sqrt{x}` | `["Power", "x", "Half"]` | **`"Half"` is a symbol, not `1/2`** |
-| `\sqrt[3]{x}` | `["Power", "x", ["Rational", 1, 3]]` | |
-| `x^2` | `["Square", "x"]` | **not** `["Power", "x", 2]` |
-| `a - b` | `["Add", ["Negate", "b"], "a"]` | **`Subtract` is eliminated** |
-| `\div 2` | `["Divide", …]` | only in `{form: 'raw'}`; canonical form folds it |
-| `3.14` | `3.14`, or `{"num": "3.14…"}` | high precision needs the object form |
-| `x` | `"x"`, or `{"sym": "x"}` | metadata needs the object form |
+| `\frac{1}{2}` | `["Rational", 1, 2]` | literal fractions become `Rational`, not `Divide` |
+| `\frac{x}{y}` | `["Divide", "x", "y"]` | a symbolic denominator stays a `Divide` |
+| `\frac{1}{2}+\frac{1}{3}` | `["Rational", 5, 6]` | parsed *and* evaluated on the way in |
+| `x^2` | `["Power", "x", 2]` | **not** `["Square", "x"]` |
+| `x^2+2x+1` | `["Add", ["Power","x",2], ["Multiply",2,"x"], 1]` | |
+| `\sqrt{9}` | `3` | a root of a number is just the number |
+| `\sqrt{x}` | `["Sqrt", "x"]` | **`Sqrt` survives** canonicalisation |
+| `\sqrt[3]{x}` | `["Root", "x", 3]` | |
+| `x-2` | `["Add", "x", -2]` | **`Subtract` is eliminated**, as documented |
+| `-x` | `["Negate", "x"]` | |
+| `2x+3` | `["Add", ["Multiply", 2, "x"], 3]` | implicit multiplication is explicit here |
+| `\sin(x)` | `["Sin", "x"]` | functions appear bare, not wrapped in `Apply` |
+| `\pi` | `"Pi"` | a named constant, not a symbol |
+| `3.14` | `3.14` | high precision needs the `{"num": "…"}` object form |
 
-So a Go-side subset would need `Add`, `Negate`, `Multiply`, `Power`, `Square`,
-`Divide` (raw only), `Rational`, `Sqrt` (raw only), `Apply`, plus the `"Half"`
-symbol — and it would have to accept that **`Subtract` and `Sqrt` essentially never
-arrive**.
+So the subset a Go grader would need is `Add`, `Multiply`, `Power`, `Divide`, `Negate`,
+`Rational`, `Sqrt`, `Root`, `Sin`/`Cos`/… , `Pi`, and bare symbols — and it must
+tolerate that **`Subtract` never arrives**, `Divide` only survives with a symbolic
+denominator, and constant subexpressions arrive already evaluated.
 
-Recommended stance if this is ever built: parse the raw form (`{form: 'raw'}`) rather
-than canonical, so the tree mirrors what the learner typed, and keep `Sqrt`/`Divide`
-in the subset anyway for safety.
+### What Compute Engine does when asked to judge equality
+
+Measured, because the answer decides whether an equivalence feature can exist at all
+(`test/equivalence.test.ts`):
+
+| Comparison | `isEqual` | `isIdenticallyEqual` | `simplify` fallback |
+|---|---|---|---|
+| `2x+3` vs `2*x+3` | `true` | `true` | — |
+| `(x+1)^2` vs `x^2+2x+1` | **`undefined`** | `true` | — |
+| `sin^2(x)+cos^2(x)` vs `1` | **`undefined`** | **`undefined`** | `1` — resolves it |
+| `\sqrt{x^2}` vs `x` | `undefined` | **`undefined`** (correctly refuses) | stays unequal |
+| `\sqrt{x^2}` vs `\|x\|` | `undefined` | `true` | — |
+| `2x+3` vs `2x+4` | `undefined` | **`undefined`** | stays unequal |
+| `2^10` vs `1024` | `true` | `false` | — |
+
+Three things follow.
+
+**`isEqual` is unusable for grading.** It returns `undefined` for the symbolic
+identities that matter — expanded versus factored, and every trig identity. It answers
+"do these have the same *value*", and two expressions with a free variable do not.
+
+**`isIdenticallyEqual` is the only one that can refuse**, which is exactly what is
+wanted for `sqrt(x^2)` vs `x`: it declines rather than confirming a false identity, and
+it knows the right answer when asked about `|x|`. It also declines to call `2x+3` and
+`2x+4` *different*, so a hint built on it would have to say "I don't know" for plainly
+wrong input.
+
+**`simplify` is the tie-breaker**, and it is what makes trig identities work — and it is
+also what produces `|x|` from `sqrt(x^2)`, which is the single best argument for using a
+CAS here: the naive reading of `sqrt(x^2)` is `x`, and that is wrong for every negative
+x.
+
+Which is why the shipped feature is a **self-check** — "that simplifies to X" about the
+learner's own expression — and not a comparison against an answer. The client does not
+have the expected answer, by design; see §4.
 
 ### Is it worth building?
 
@@ -169,11 +208,38 @@ corpus test currently covers 12 of 34 recorded cases through the pure-Go path; t
 remaining 22 are the SymPy-backed types, which SymPy already handles with `trigsimp`,
 `radsimp`, `expand`, `factor` and random-substitution numeric checks.
 
-A MathJSON layer would earn its place if it bought *better verdicts* — evaluating a
-constant expression, or reasoning about equivalent forms without a subprocess. It
-should not be added merely to have a structured representation.
+A MathJSON layer would earn its place if it bought *better verdicts*. The one gap
+`plain-text` leaves is a constant expression the numeric grader cannot evaluate
+(`10^6`, `12 × 4`); a MathJSON-aware numeric path would close it. It should not be added
+merely to have a structured representation.
 
 ---
+
+### The self-check, and what it costs
+
+`components/math/SelfCheck.tsx` shows the learner what their own expression simplifies
+to: `1/2 + 1/3` → "that simplifies to 5/6", `sqrt(x^2)` → "that simplifies to |x|".
+
+It is deliberately not an equivalence check against the expected answer. The client does
+not hold the expected answer, and shipping it to power a hint would turn the hint into
+an answer oracle and undo ADR-005. No code path lets the hint affect a submitted value,
+and `test/selfCheck.test.tsx` asserts that: the hint appears in the DOM while the value
+the host receives is untouched.
+
+The cost is the part worth arguing about. Compute Engine is **788 kB gzipped** — nearly
+four times MathLive. It is never in any route's initial JS, and never fetched unless a
+learner pauses mid-answer with arithmetic on screen. Measured:
+
+- Routes without math input: **+0 kB**.
+- Routes with the editor: **+1 kB gzip** (the hint's shell).
+- One **788 kB gzip** download, on first use, expression-valued concepts only.
+
+It is skipped entirely when `navigator.connection.saveData` is set, or the effective
+type is `2g`/`slow-2g`. A one-line simplification is not worth someone's data allowance,
+and a feature that quietly spends it is worse than one that is visibly absent.
+
+If that trade is wrong, `SelfCheck.tsx` is the only file to delete: nothing else in
+`components/math/` imports it, and removing it costs no other behaviour.
 
 ## 4. The fallback grading path
 

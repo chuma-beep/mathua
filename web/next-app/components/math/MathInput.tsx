@@ -17,12 +17,15 @@
 // every concept. That is the whole point of the fallback: it is not a lesser
 // editor, it is the editor that always works.
 
+import dynamic from 'next/dynamic'
 import { Component, lazy, Suspense, useEffect, useRef, useState, type MutableRefObject, type ReactNode } from 'react'
 import { Input } from '@/components/ui/input'
 import SymbolPalette from '@/components/SymbolPalette'
 import { presentationForQuestion } from './keyboards'
 import type { MathInputStatus, MathInputValue } from './types'
 import type { MathLiveFieldHandle } from './MathLiveField'
+
+const SelfCheck = dynamic(() => import('./SelfCheck'), { ssr: false })
 
 const EMPTY: MathInputValue = { latex: '', plainAnswer: '' }
 
@@ -123,6 +126,10 @@ export default function MathInput({
   const fallbackRef = useRef<HTMLInputElement | null>(null)
   const [fallbackActive, setFallbackActive] = useState(false)
   const [focusRequest, setFocusRequest] = useState(0)
+  // What the learner actually typed, for the optional self-check. Tracked separately
+  // from `value` because a host's value is the *plain* answer it will submit, and it
+  // only catches up after a render — the hint must not wait for the round trip.
+  const [typedLatex, setTypedLatex] = useState('')
 
   const isDisabled = disabled === true || status === 'disabled'
   const shell = statusClasses(status, isDisabled)
@@ -173,10 +180,18 @@ export default function MathInput({
             placeholder={placeholder}
             ariaLabel={ariaLabel}
             onChange={v => onChange?.(v)}
+            onLatex={setTypedLatex}
             onSubmit={() => onSubmit?.()}
             handleRef={fieldRef}
             focusRequest={focusRequest}
           />
+        </Suspense>
+        {/* Its own boundary, deliberately outside the field's. A lazily-loaded
+            sibling suspending inside the field's <Suspense> re-suspends that boundary
+            and React discards the already-rendered field — remounting it, which reset
+            the answer to the host's last value and lost what the learner had typed. */}
+        <Suspense fallback={null}>
+          <SelfCheck latex={typedLatex} active={!isDisabled} />
         </Suspense>
       </div>
     </MathLiveBoundary>

@@ -61,6 +61,8 @@ interface Props {
   /** Accessible name. MathLive gives the field `role="group"`, so this is what a screen reader announces. */
   ariaLabel: string
   onChange: (value: MathInputValue) => void
+  /** Called with the LaTeX as typed, for optional decoration. Never for grading. */
+  onLatex?: (latex: string) => void
   onSubmit: () => void
   handleRef?: MutableRefObject<MathLiveFieldHandle | null>
   /**
@@ -79,6 +81,7 @@ export default function MathLiveField({
   placeholder,
   ariaLabel,
   onChange,
+  onLatex,
   onSubmit,
   handleRef,
   focusRequest = 0,
@@ -98,13 +101,21 @@ export default function MathLiveField({
   // installKeyboard is declared below; the pointerdown listener needs it now.
   const installKeyboardRef = useRef<() => void>(() => {})
 
+  // Stable on purpose: hosts pass a fresh arrow to `onChange` on every render, and an
+  // `emit` that changed identity re-ran the sync effect below, which then wrote the
+  // host's (stale) value back over what the learner had just typed.
+  const onChangeRef = useRef(onChange)
+  onChangeRef.current = onChange
+  const onLatexRef = useRef(onLatex)
+  onLatexRef.current = onLatex
   const emit = useCallback(() => {
     const el = ref.current
     if (!el) return
     const latex = el.value ?? ''
     lastPushed.current = latex
-    onChange({ latex, plainAnswer: toPlainAnswer(el.getValue('plain-text') ?? '') })
-  }, [onChange])
+    onChangeRef.current({ latex, plainAnswer: toPlainAnswer(el.getValue('plain-text') ?? '') })
+    onLatexRef.current?.(latex)
+  }, [])
 
   // Push an externally-owned value in — ChoiceOptions filling the field, or a
   // reused card. Only when it genuinely differs from what we last emitted.
@@ -116,6 +127,7 @@ export default function MathLiveField({
       el.value = value
       emit()
     }
+    // `value` only. See the note on `emit`.
   }, [value, emit])
 
   useEffect(() => {
