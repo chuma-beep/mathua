@@ -2,6 +2,7 @@ package engine
 
 import (
 	"errors"
+	"fmt"
 	"sync"
 	"testing"
 	"time"
@@ -546,6 +547,103 @@ func TestEngine_StudyPath_ExplanationOnBothVerdicts(t *testing.T) {
 	}
 	if hit.Explanation != why {
 		t.Errorf("correct explanation = %q, want the same served explanation %q", hit.Explanation, why)
+	}
+}
+
+// A second serve must not erase the first. The Learn client buffers served
+// questions and fetches a fresh batch while the learner is still reading the
+// one in front of them, so a replace-on-write blob made every question past the
+// first ungradeable: the submit hit ErrNoStudyAnchor, the server answered 409,
+// and the client swapped in a different question — which read as Learn skipping
+// questions the learner had just answered.
+func TestEngine_StudyAnchor_MergesAcrossBatches(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("study_merge")
+
+	// The real arith.add.single question shape (internal/generator/arithmetic).
+	first := map[string]Anchor{
+		`\(3 + 4 = ?\)`: {Answer: "7", Explanation: "Given 3 + 4. Answer: 7."},
+		`\(5 + 2 = ?\)`: {Answer: "7", Explanation: "Given 5 + 2. Answer: 7."},
+	}
+	second := map[string]Anchor{
+		`\(8 + 1 = ?\)`: {Answer: "9", Explanation: "Given 8 + 1. Answer: 9."},
+	}
+	e.SetStudyAnchorBatch(st.ID, "a", first)
+	e.SetStudyAnchorBatch(st.ID, "a", second)
+
+	// Every question from the first batch must still grade against the answer it
+	// was served with, not be reported as expired.
+	for question, anchor := range first {
+		res, err := e.SubmitStudyAnswer(st.ID, "a", anchor.Answer, 5.0, question)
+		if err != nil {
+			t.Fatalf("submit %q after a second batch: %v", question, err)
+		}
+		if !res.Correct {
+			t.Errorf("expected %q to grade correct", question)
+		}
+		if res.Explanation != anchor.Explanation {
+			t.Errorf("explanation for %q = %q, want the served one %q", question, res.Explanation, anchor.Explanation)
+		}
+	}
+
+	// And the second batch is anchored too.
+	res, err := e.SubmitStudyAnswer(st.ID, "a", "9", 5.0, `\(8 + 1 = ?\)`)
+	if err != nil || !res.Correct {
+		t.Errorf("second batch question: correct=%v err=%v", res != nil && res.Correct, err)
+	}
+}
+
+// Incoming entries win on identical text. Deterministic generators give the
+// same text the same answer, so this is not lossy — but a re-serve carrying a
+// corrected explanation must not be shadowed by the stale copy.
+func TestEngine_StudyAnchor_IncomingWinsOnSameText(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("study_same_text")
+	const question = `\(3 + 4 = ?\)`
+
+	e.SetStudyAnchorBatch(st.ID, "a", map[string]Anchor{question: {Answer: "7", Explanation: "old"}})
+	e.SetStudyAnchorBatch(st.ID, "a", map[string]Anchor{question: {Answer: "7", Explanation: "new"}})
+
+	res, err := e.SubmitStudyAnswer(st.ID, "a", "7", 5.0, question)
+	if err != nil {
+		t.Fatalf("submit: %v", err)
+	}
+	if res.Explanation != "new" {
+		t.Errorf("explanation = %q, want the latest served one", res.Explanation)
+	}
+}
+
+// The merged blob is bounded, and the batch just served survives the cap in
+// full: those are the questions the learner is looking at now. Anything evicted
+// degrades to the 409 re-serve path, never to a wrong grade.
+func TestEngine_StudyAnchor_CapKeepsCurrentBatch(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("study_cap")
+
+	old := make(map[string]Anchor, studyAnchorMaxEntries)
+	for i := 0; i < studyAnchorMaxEntries; i++ {
+		old[fmt.Sprintf("old-%d", i)] = Anchor{Answer: "1"}
+	}
+	e.SetStudyAnchorBatch(st.ID, "a", old)
+
+	current := map[string]Anchor{}
+	for i := 0; i < 10; i++ {
+		current[fmt.Sprintf("now-%d", i)] = Anchor{Answer: "2", Explanation: "current"}
+	}
+	e.SetStudyAnchorBatch(st.ID, "a", current)
+
+	for question := range current {
+		if _, err := e.SubmitStudyAnswer(st.ID, "a", "2", 5.0, question); err != nil {
+			t.Errorf("current-batch question %q was evicted: %v", question, err)
+		}
+	}
+
+	// The blob stayed bounded.
+	e.mu.Lock()
+	size := len(decodeStudyAnchor(e.studyAnchor[st.ID+"|a"]))
+	e.mu.Unlock()
+	if size > studyAnchorMaxEntries {
+		t.Errorf("anchor grew to %d entries, cap is %d", size, studyAnchorMaxEntries)
 	}
 }
 

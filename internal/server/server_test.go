@@ -9,9 +9,12 @@ import (
 	"mime/multipart"
 	"net/http"
 	"net/http/httptest"
+	"net/url"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
+	"sync/atomic"
 	"testing"
 	"time"
 
@@ -28,6 +31,38 @@ type testGen struct{}
 
 func (g *testGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	return generator.Problem{Question: "2+2=?", Answer: "4", Explanation: "2+2=4"}
+}
+
+// seededGen returns a different question on every call. BatchGenerateContext
+// invokes Generate repeatedly with one context and dedupes by question text, so
+// varying only on the seed would collapse a whole batch to a single question.
+// The real generators vary per call for the same reason, and that is what the
+// Learn client's exclude[] and its fresh-variant prefetch depend on.
+type seededGen struct{ n int64 }
+
+func (g *seededGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	n := atomic.AddInt64(&g.n, 1) + ctx.Seed
+	return generator.Problem{
+		Question: fmt.Sprintf("seeded %d + 1 = ?", n),
+		Answer:   strconv.FormatInt(n+1, 10),
+	}
+}
+
+// varyingGuestServer is guestServer with a generator whose questions vary.
+func varyingGuestServer(t *testing.T) (*Server, *http.ServeMux, storage.Repository) {
+	t.Helper()
+	d, _ := concepts.Build([]concepts.Concept{
+		{ID: "a", Label: "A", Domain: "d", GradingType: "numeric", Prerequisites: []string{},
+			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 60}},
+	})
+	store, _ := storage.NewSQLiteStore(":memory:")
+	t.Cleanup(func() { store.Close() })
+	reg := generator.NewRegistry()
+	reg.Register("a", &seededGen{})
+	s := New(engine.New(store, d, reg, nil, nil), store, auth.New(store))
+	mux := http.NewServeMux()
+	s.Register(mux)
+	return s, mux, store
 }
 
 func testServer(t *testing.T) *Server {
@@ -1012,6 +1047,103 @@ func TestStudyAnswer_UnknownQuestionIs409(t *testing.T) {
 	mux.ServeHTTP(rec, req)
 	if rec.Code != 409 {
 		t.Errorf("expected 409 for an unserved question, got %d: %s", rec.Code, rec.Body.String())
+	}
+}
+
+// Regression for the Learn loop dropping the questions a learner had just
+// answered. The client buffers served questions and serves a second batch while
+// the learner is still reading the first, so the practice endpoint is called
+// twice for one concept before the first question is submitted. Replacing the
+// anchor blob on the second call erased the first, and the submit came back 409
+// — which the client reports as "that question had expired" and answers by
+// swapping in a different question.
+//
+// The fix is in SetStudyAnchorBatch (merge, don't replace); this pins the HTTP
+// behaviour that the learner actually sees.
+func TestStudyAnswer_GradesFirstBatchAfterASecondPracticeFetch(t *testing.T) {
+	_, mux, _ := varyingGuestServer(t)
+	token, studentID := quizGuest(t, mux)
+
+	serve := func(exclude []string) []struct{ Question, Answer, Explanation string } {
+		t.Helper()
+		u := fmt.Sprintf("/api/lessons/a/practice?count=3&seed=11&difficulty=0.4&exclude=%s",
+			url.QueryEscape(strings.Join(exclude, "\n")))
+		req := httptest.NewRequest("GET", u, nil)
+		req.Header.Set("Authorization", "Bearer "+token)
+		rec := httptest.NewRecorder()
+		mux.ServeHTTP(rec, req)
+		if rec.Code != 200 {
+			t.Fatalf("practice: %d %s", rec.Code, rec.Body.String())
+		}
+		var set struct {
+			Questions []struct{ Question, Answer, Explanation string } `json:"questions"`
+		}
+		if err := json.Unmarshal(rec.Body.Bytes(), &set); err != nil {
+			t.Fatalf("decode practice: %v", err)
+		}
+		if len(set.Questions) == 0 {
+			t.Fatal("expected a served question")
+		}
+		return set.Questions
+	}
+
+	// Batch one is what the learner answers; batch two is the prefetch the
+	// client fires while they are still reading batch one, and it excludes the
+	// texts already seen -- so the two sets do not overlap, which is the point.
+	first := serve(nil)
+	second := serve([]string{first[0].Question, first[1%len(first)].Question})
+	if len(second) == 0 {
+		t.Fatal("expected the second batch to serve questions")
+	}
+	for _, q := range second {
+		if q.Question == first[0].Question {
+			t.Fatal("exclude did not filter the first batch out; the test would not reproduce the bug")
+		}
+	}
+
+	body, _ := json.Marshal(map[string]interface{}{
+		"concept_id": "a",
+		"answer":     first[0].Answer,
+		"elapsed":    5.0,
+		"question":   first[0].Question,
+		"student_id": studentID,
+	})
+	rec := httptest.NewRecorder()
+	req := httptest.NewRequest("POST", "/api/study/answer", bytes.NewReader(body))
+	req.Header.Set("Authorization", "Bearer "+token)
+	mux.ServeHTTP(rec, req)
+	if rec.Code != 200 {
+		t.Fatalf("a question served before the second batch must still grade; got %d: %s", rec.Code, rec.Body.String())
+	}
+	var res struct {
+		Correct        bool   `json:"correct"`
+		ExpectedAnswer string `json:"expected_answer"`
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &res); err != nil {
+		t.Fatalf("decode answer: %v", err)
+	}
+	if !res.Correct {
+		t.Error("expected the served answer to grade correct")
+	}
+	if res.ExpectedAnswer != first[0].Answer {
+		t.Errorf("graded against %q, want the first batch's %q", res.ExpectedAnswer, first[0].Answer)
+	}
+
+	// A genuinely unserved question is still refused: merging must not weaken
+	// the refusal that 409 exists for.
+	body, _ = json.Marshal(map[string]interface{}{
+		"concept_id": "a",
+		"answer":     "4",
+		"elapsed":    5.0,
+		"question":   "a question no batch ever served",
+		"student_id": studentID,
+	})
+	rec = httptest.NewRecorder()
+	req = httptest.NewRequest("POST", "/api/study/answer", bytes.NewReader(body))
+	req.Header.Set("Authorization", "Bearer "+token)
+	mux.ServeHTTP(rec, req)
+	if rec.Code != 409 {
+		t.Errorf("expected 409 for a question no batch served, got %d: %s", rec.Code, rec.Body.String())
 	}
 }
 

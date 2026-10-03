@@ -74,6 +74,15 @@ const (
 	// within a day is normal; older rows are stale and treated as missing.
 	serverSessionStudyExpected = "study_expected"
 	studyAnchorTTL             = 24 * time.Hour
+	// Ceiling on how many served-but-unanswered questions one student/concept
+	// keeps anchored. Generators draw from a finite parameter space (nine
+	// values per operand for arith.add.single, for one), so the set of live
+	// question texts is small — but a long session with difficulty stepping and
+	// variant changes could otherwise grow the blob without limit. At the cap the
+	// batch just served is kept in full and older entries are dropped, which
+	// degrades those questions to the 409 re-serve path rather than to a wrong
+	// grade.
+	studyAnchorMaxEntries = 64
 )
 
 // isFutureRFC3339 reports whether exp (RFC3339 UTC) is still in the future.
@@ -199,6 +208,20 @@ func (e *Engine) SetStudyAnchor(studentID, conceptID, expected string) {
 // solution for the question actually answered. Best-effort durable
 // write-through for restarts.
 //
+// The blob MERGES rather than replaces, and that is load-bearing. The Learn
+// client keeps a buffer of served-but-unanswered questions across several
+// fetches, and serves a new batch whenever the buffer runs low — which happens
+// while the learner is still reading the question in front of them. Replacing
+// meant each new batch erased the previous one, so the next submit looked up a
+// question the server had genuinely forgotten, got ErrNoStudyAnchor, and came
+// back 409. The client treats 409 as "that question expired" and swaps in a
+// fresh question, which is what looked like Learn skipping questions the learner
+// had just answered. Merging keeps every question still in flight gradeable.
+//
+// Incoming entries win on identical text. That is safe rather than lossy
+// because the generators are deterministic per (concept, seed, difficulty), so
+// the same text always implies the same answer and explanation.
+//
 // The server_sessions kind deliberately stays "study_expected": the stored
 // value is an opaque JSON blob, and renaming the kind would touch every reset
 // statement in both stores plus their tests for no behavioural gain.
@@ -207,17 +230,51 @@ func (e *Engine) SetStudyAnchorBatch(studentID, conceptID string, byQuestion map
 		return
 	}
 	key := studentID + "|" + conceptID
-	blob, err := json.Marshal(byQuestion)
-	if err != nil {
-		log.Printf("warning: marshal study anchor %s: %v", key, err)
-		return
-	}
+
+	// Read-merge-write under one lock. Two serves racing could otherwise
+	// interleave and drop a batch even though each merge was individually
+	// correct.
 	e.mu.Lock()
 	if e.studyAnchor == nil {
 		e.studyAnchor = make(map[string]string)
 	}
+	merged := make(map[string]Anchor, len(byQuestion))
+	// Only decode a blob that actually exists. decodeStudyAnchor's final
+	// fallback for unparseable input is a single ""-keyed entry, so handing it
+	// an empty string would plant a phantom empty anchor -- and studyAnchorFor
+	// falls back to the "" key, which would then report every unknown question
+	// as "found" (with an empty answer).
+	if existing := e.studyAnchor[key]; existing != "" {
+		merged = decodeStudyAnchor(existing)
+	}
+	for question, anchor := range byQuestion {
+		merged[question] = anchor
+	}
+	if len(merged) > studyAnchorMaxEntries {
+		// Keep the batch just served in full: every question the learner is
+		// looking at right now is in it. Older entries are evicted in map order
+		// (deliberately not sorted — any order is fine and this stays O(1) per
+		// eviction). An evicted question degrades to the existing 409 recovery,
+		// which is the correct response for an anchor that is genuinely gone.
+		for question := range merged {
+			if _, keep := byQuestion[question]; keep {
+				continue
+			}
+			delete(merged, question)
+			if len(merged) <= studyAnchorMaxEntries {
+				break
+			}
+		}
+	}
+	blob, err := json.Marshal(merged)
+	if err != nil {
+		e.mu.Unlock()
+		log.Printf("warning: marshal study anchor %s: %v", key, err)
+		return
+	}
 	e.studyAnchor[key] = string(blob)
 	e.mu.Unlock()
+
 	if e.repo != nil {
 		exp := time.Now().UTC().Add(studyAnchorTTL).Format(time.RFC3339)
 		if err := e.repo.UpsertServerSession(serverSessionStudyExpected, key, string(blob), exp); err != nil {
