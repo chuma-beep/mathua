@@ -131,7 +131,10 @@ export function classifyResult(box) {
   }
   // A command, function or symbol CE has no rule for. Cannot be told apart from
   // valid-but-unsupported without a human, so it is counted, not reported.
-  if (/^(unexpected-command|missing|invalid-base|expected-function|invalid-symbol|unexpected-argument)/.test(reason)) {
+  // unexpected-symbol is CE saying it has no rule for a symbol, which is how it
+  // reports perfectly good matrix notation: `A^k = PD^kP^{-1}` comes back as
+  // "unexpected-symbol, D". Same class as an unknown command.
+  if (/^(unexpected-command|missing|invalid-base|expected-function|invalid-symbol|unexpected-symbol|unexpected-argument)/.test(reason)) {
     return { bucket: 'ce-gap', reason: short }
   }
   // CE's own point-algebra objections, which are not defects in the LaTeX.

@@ -9,9 +9,9 @@ This mean is particularly appropriate when averaging rates, ratios, or speeds, s
 
 In general form, the harmonic mean is expressed as:
 
-\\[M_{-1} = \frac{n}{\displaystyle\sum_{i=1}^{n} \frac{1}{x_i}} \\]
+\[M_{-1} = \frac{n}{\displaystyle\sum_{i=1}^{n} \frac{1}{x_i}} \]
 
-where \\(x_1, x_2, \ldots, x_n\\) are the observed positive values and \\(n\\) is the total number of elements in the dataset.
+where \(x_1, x_2, \ldots, x_n\) are the observed positive values and \(n\) is the total number of elements in the dataset.
 
   * The harmonic mean gives greater weight to smaller values, making it suitable for datasets based on rates or proportional quantities.
   * It can only be calculated for positive, non-zero values because it involves taking the reciprocal of each observation.
@@ -19,7 +19,7 @@ where \\(x_1, x_2, \ldots, x_n\\) are the observed positive values and \\(n\\) i
   * When data represent uniform measures of work or distance completed at varying speeds, the harmonic mean expresses the true average rate more accurately than other means.
 
 
-##### The harmonic mean is often denoted as \\( M_{-1} \\) because it represents a specific case within the [Hölder mean family](<../introduction-to-the-mean>) (or power means), corresponding to the exponent ( s = -1 ).
+##### The harmonic mean is often denoted as \( M_{-1} \) because it represents a specific case within the [Hölder mean family](<../introduction-to-the-mean>) (or power means), corresponding to the exponent ( s = -1 ).
 
 ## Example 1
 
@@ -29,17 +29,17 @@ To understand how the harmonic mean works in practice, let’s look at a simple 
   * On the second half, it moves faster, at 90 km/h.
 
 
-Even though the distance is the same, the time spent on each part of the trip is not. Because the slower speed takes more time, it has a greater influence on the overall average. That’s why using the arithmetic mean \\((75 \text{ km/h})\\) would give a misleading result, the correct approach is the harmonic mean.
+Even though the distance is the same, the time spent on each part of the trip is not. Because the slower speed takes more time, it has a greater influence on the overall average. That’s why using the arithmetic mean \((75 \text{ km/h})\) would give a misleading result, the correct approach is the harmonic mean.
 
 Substituting the two speed values to the formula we obtain:
 
-\\[M_{-1} = \frac{2}{\frac{1}{60} + \frac{1}{90}} = \frac{2}{\frac{5}{180}} = \frac{360}{5} = 72 \\]
+\[M_{-1} = \frac{2}{\frac{1}{60} + \frac{1}{90}} = \frac{2}{\frac{5}{180}} = \frac{360}{5} = 72 \]
 
 ##### The harmonic mean accurately represents the true average rate when distances are equal, because it reflects the additional time spent at lower speeds. Its formulation captures the reciprocal relationship between the variables, recognizing that time varies inversely with velocity. In essence, the harmonic mean describes balance within rate-based or proportional data, offering a precise and unbiased measure whenever the values being averaged represent performance, efficiency, or speed rather than direct quantities.
 
 Therefore, the harmonic mean speed for the trip is:
 
-\\[M_h = 72 \text{ km/h} \\]
+\[M_h = 72 \text{ km/h} \]
 
 ## Example 2
 
@@ -57,8 +57,8 @@ Since each interval has the same duration, the correct way to find the overall a
 
 Substituting the observed values we obtain:
 
-\\[\begin{align} M_{-1} &= \frac{5}{\frac{1}{10} + \frac{1}{12} + \frac{1}{8} + \frac{1}{15} + \frac{1}{9}} \\\\[3pt] &= \frac{5}{0.1 + 0.0833 + 0.125 + 0.0667 + 0.1111} \\\\[8pt] &= \frac{5}{0.4861} \approx 10.29 \end{align} \\]
+\[\begin{align} M_{-1} &= \frac{5}{\frac{1}{10} + \frac{1}{12} + \frac{1}{8} + \frac{1}{15} + \frac{1}{9}} \\\\[3pt] &= \frac{5}{0.1 + 0.0833 + 0.125 + 0.0667 + 0.1111} \\\\[8pt] &= \frac{5}{0.4861} \approx 10.29 \end{align} \]
 
 Hence, the harmonic mean rate of production is approximately:
 
-\\[M_{-1} \approx 10.3 \text{ units per minute} \\]
+\[M_{-1} \approx 10.3 \text{ units per minute} \]

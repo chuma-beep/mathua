@@ -4,17 +4,17 @@
 
 Rational equations feature at least one fraction in which the numerator and denominator are [polynomials](<../polynomials>). Such equations are categorized as rational because they can be expressed as the ratio of two [polynomials](<../polynomials>). Specifically, rational [equations](<../equations>) have the following form:
 
-\\[\frac{P(x)}{Q(x)}=0 \\]
+\[\frac{P(x)}{Q(x)}=0 \]
 
-where \\(P(x)\\) and \\(Q(x)\\) are polynomials and \\(Q(x) \neq 0\\). Recall that a polynomial expression is made up of a combination of [monomials](<../monomials>) that are added or subtracted to form the full expression. A polynomial therefore has the general form:
+where \(P(x)\) and \(Q(x)\) are polynomials and \(Q(x) \neq 0\). Recall that a polynomial expression is made up of a combination of [monomials](<../monomials>) that are added or subtracted to form the full expression. A polynomial therefore has the general form:
 
-\\[a_nx^n + a_{n-1}x^{n-1} + \dotsb + a_2x^2 + a_1x + a_0 \\]
+\[a_nx^n + a_{n-1}x^{n-1} + \dotsb + a_2x^2 + a_1x + a_0 \]
 
 Where:
 
-  * \\(ax^n\\) is a monomial;
-  * \\(a\\) is a real number, known as the coefficient of the term;
-  * \\(n\\) is a non-negative [integer](<../integers/>), representing the exponent of the variable.
+  * \(ax^n\) is a monomial;
+  * \(a\) is a real number, known as the coefficient of the term;
+  * \(n\) is a non-negative [integer](<../integers/>), representing the exponent of the variable.
 
 
 ## Distinction between irrational and rational equations
@@ -24,9 +24,9 @@ The key distinction between rational and [irrational equations](<../irrational-e
 
 This fundamental difference is crucial to understanding the nature of these equations. For example:
 
-  * \\(\dfrac{2s}{2x-1}\\) is a rational equation since the expression contains only ratios of polynomial terms
+  * \(\dfrac{2s}{2x-1}\) is a rational equation since the expression contains only ratios of polynomial terms
 
-  * \\(\dfrac{1}{\sqrt{2x-1}}\\) is an [irrational](<../irrational-equations>) since the variable is inside a root.
+  * \(\dfrac{1}{\sqrt{2x-1}}\) is an [irrational](<../irrational-equations>) since the variable is inside a root.
 
 
 ## How to Solve Rational Equations
@@ -40,14 +40,14 @@ This fundamental difference is crucial to understanding the nature of these equa
 
 ## Example
 
-Solve the rational equation: \\[\frac{1}{x+1} + \frac{1}{x+2} = 0\\]
+Solve the rational equation: \[\frac{1}{x+1} + \frac{1}{x+2} = 0\]
 
 
 The first step to solving these equations is determining the values that make the denominators zero. These values are not allowable solutions because they lead to an indeterminate form:
 
 \begin{align} x+1 = 0 \quad\quad x = -1\\\\[0.5em] x+2 = 0 \quad\quad x = -2\\\\[0.5em] \end{align}
 
-Values for which \\(x = -1\\) and \\(x = -2\\) must be excluded from the solutions because they would make the denominators zero.
+Values for which \(x = -1\) and \(x = -2\) must be excluded from the solutions because they would make the denominators zero.
 
 
 Now let’s proceed with the calculations and obtain:
@@ -55,35 +55,35 @@ Now let’s proceed with the calculations and obtain:
 \begin{align} &\frac{x+2}{(x+1)(x+2)} + \frac{x+1}{(x+1)(x+2)} = 0\\\\[1em] & \frac{x+2+x+1}{(x+1)(x+2)} = 0\\\\[1em] &\frac{2x+3}{(x+1)(x+2)} = 0 \end{align}
 
 
-Let’s find solutions that set the numerator \\(2x+3 = 0\\) and then check their validity. The equation is reduced to a first-degree [linear equation](<../linear-equations>), which admits a unique solution \\(\large{x = -\frac{3}{2}}\\). The solution is not among the values that nullify \\(x\\) in the denominator; therefore, it is an admissible solution. Finally, we substitute the solution into the initial equation and verify whether equality holds.
+Let’s find solutions that set the numerator \(2x+3 = 0\) and then check their validity. The equation is reduced to a first-degree [linear equation](<../linear-equations>), which admits a unique solution \(\large{x = -\frac{3}{2}}\). The solution is not among the values that nullify \(x\) in the denominator; therefore, it is an admissible solution. Finally, we substitute the solution into the initial equation and verify whether equality holds.
 
 \begin{align*} \frac{1}{{-\frac{3}{2}+1}} + \frac{1}{{-\frac{3}{2}+2}} &= 0\\\\[1em] \frac{1}{{-\frac{1}{2}}} + \frac{1}{{\frac{1}{2}}} &= 0\\\\[1em] +2-2 &=0 \end{align*}
 
-The equality is verified, therefore \\(x = \large(-\frac{3}{2})\\) is the solution of the equation.
+The equality is verified, therefore \(x = \large(-\frac{3}{2})\) is the solution of the equation.
 
-The solution to the equation is: \\[x= - \frac{3}{2}\\]
+The solution to the equation is: \[x= - \frac{3}{2}\]
 
 ## Solve the following rational equations
 
-  * \\[\text{1. } \quad \frac{3x-2}{5-2x} = 0\\] [solution](<../rational-equation-a-1>)
+  * \[\text{1. } \quad \frac{3x-2}{5-2x} = 0\] [solution](<../rational-equation-a-1>)
 
-  * \\[\text{2. } \quad 1-\frac{6}{x} = -\frac{8}{x^2}\\] [solution](<../rational-equation-a-2>)
+  * \[\text{2. } \quad 1-\frac{6}{x} = -\frac{8}{x^2}\] [solution](<../rational-equation-a-2>)
 
-  * \\[\text{3. } \quad \frac{2x+1}{6} = \frac{1}{x}\\] [solution](<../rational-equation-a-3>)
+  * \[\text{3. } \quad \frac{2x+1}{6} = \frac{1}{x}\] [solution](<../rational-equation-a-3>)
 
-  * \\[\text{4. } \quad \frac{1}{x+2}-\frac{1}{x-1} = \frac{2}{x^2-1}\\] [solution](<../rational-equation-a-4>)
+  * \[\text{4. } \quad \frac{1}{x+2}-\frac{1}{x-1} = \frac{2}{x^2-1}\] [solution](<../rational-equation-a-4>)
 
-  * \\[\text{5. } \quad \frac{2x}{x+1}-\frac{3}{x+5} = \frac{-8x^2}{x^2+6x+5}\\] [solution](<../rational-equation-a-5>)
+  * \[\text{5. } \quad \frac{2x}{x+1}-\frac{3}{x+5} = \frac{-8x^2}{x^2+6x+5}\] [solution](<../rational-equation-a-5>)
 
-  * \\[\text{6. } \quad \frac{4x-x}{3x+2}-\frac{1}{9x^2-4} = 0\\] [solution](<../rational-equation-a-6>)
+  * \[\text{6. } \quad \frac{4x-x}{3x+2}-\frac{1}{9x^2-4} = 0\] [solution](<../rational-equation-a-6>)
 
-  * \\[\text{7. } \quad \frac{1}{x-4} = \frac{7}{x^2+x-20} \\] [solution](<../rational-equation-a-7>)
+  * \[\text{7. } \quad \frac{1}{x-4} = \frac{7}{x^2+x-20} \] [solution](<../rational-equation-a-7>)
 
-  * \\[\text{8. } \quad \frac{x-5}{x^3+9x+27x+27} =0\\] [solution](<../rational-equation-a-8>)
+  * \[\text{8. } \quad \frac{x-5}{x^3+9x+27x+27} =0\] [solution](<../rational-equation-a-8>)
 
-  * \\[\text{9. } \quad \frac{x^2-9}{x-3} = 4\\] [solution](<../rational-equation-a-9>)
+  * \[\text{9. } \quad \frac{x^2-9}{x-3} = 4\] [solution](<../rational-equation-a-9>)
 
-  * \\[\text{10. } \quad \frac{x^2+4x-5}{x-1} = \frac{x-2}{2}\\] [solution](<../rational-equation-a-10>)
+  * \[\text{10. } \quad \frac{x^2+4x-5}{x-1} = \frac{x-2}{2}\] [solution](<../rational-equation-a-10>)
 
 
 ##### The proposed equations are carefully designed to help you consolidate your understanding of irrational equations. Try solving them independently before checking the solutions provided.
@@ -94,7 +94,7 @@ The solution to the equation is: \\[x= - \frac{3}{2}\\]
 
   * Polynomial: an expression made up of a combination of monomials that are added or subtracted.
 
-  * Monomial: a term within a polynomial, typically of the form \\( ax^n \\), where \\( a \\) is a real number coefficient and \\( n \\) is a non-negative integer exponent.
+  * Monomial: a term within a polynomial, typically of the form \( ax^n \), where \( a \) is a real number coefficient and \( n \) is a non-negative integer exponent.
 
   * Numerator: The top part of a fraction.
 

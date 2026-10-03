@@ -164,7 +164,7 @@ Divide. Then check by multiplying. ⓐ $42 \div 6$ ⓑ $\frac{72}{9}$ ⓒ 763
   <td></td>
   </tr>
   <tr>
-  <td>$42✓$</td>
+  <td>42</td>
   <td></td>
   </tr>
   </tbody>
@@ -194,7 +194,7 @@ Divide. Then check by multiplying. ⓐ $42 \div 6$ ⓑ $\frac{72}{9}$ ⓒ 763
   <td></td>
   </tr>
   <tr>
-  <td>$72✓$</td>
+  <td>72</td>
   <td></td>
   </tr>
   </tbody>
@@ -224,7 +224,7 @@ Divide. Then check by multiplying. ⓐ $42 \div 6$ ⓑ $\frac{72}{9}$ ⓒ 763
   <td></td>
   </tr>
   <tr>
-  <td>$63✓$</td>
+  <td>63</td>
   <td></td>
   </tr>
   </tbody>
@@ -293,7 +293,7 @@ Divide. Then check by multiplying:
   <td></td>
   </tr>
   <tr>
-  <td>$11✓$</td>
+  <td>11</td>
   <td></td>
   </tr>
   </tbody>
@@ -323,7 +323,7 @@ Divide. Then check by multiplying:
   <td></td>
   </tr>
   <tr>
-  <td>$19✓$</td>
+  <td>19</td>
   <td></td>
   </tr>
   </tbody>
@@ -353,7 +353,7 @@ Divide. Then check by multiplying:
   <td></td>
   </tr>
   <tr>
-  <td>$7✓$</td>
+  <td>7</td>
   <td></td>
   </tr>
   </tbody>
@@ -418,7 +418,7 @@ Divide. Check by multiplying: ⓐ $0 \div 3$ ⓑ $10/0.$
   <td></td>
   </tr>
   <tr>
-  <td>$0✓$</td>
+  <td>0</td>
   <td></td>
   </tr>
   </tbody>
@@ -467,7 +467,7 @@ $$
 \begin{array}{r}
 {\overset{1}{2}6} \\
 {\underset{\text{\_\_\_}}{\times 3}} \\
-{78✓}
+{78}
 \end{array}
 $$
 

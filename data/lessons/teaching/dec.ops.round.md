@@ -486,8 +486,8 @@ In previous chapters, we used the number line to order numbers.
 $$
 \begin{array}{l}
  \\
-{a < b ‘a\ \text{is less than}\ b’\ \text{when}\ a\ \text{is to the left of}\ b\ \text{on the number line}} \\
-{a > b ‘a\ \text{is greater than}\ b’\ \text{when}\ a\ \text{is to the right of}\ b\ \text{on the number line}}
+{a < b ‘a\ \text{is less than}\ b'\ \text{when}\ a\ \text{is to the left of}\ b\ \text{on the number line}} \\
+{a > b ‘a\ \text{is greater than}\ b'\ \text{when}\ a\ \text{is to the right of}\ b\ \text{on the number line}}
 \end{array}
 $$
 
@@ -563,13 +563,13 @@ Order the following decimals using $< \ \text{or}\ \text{>:}$
 </tr>
 <tr>
 <td>Compare the numbers to the right of the decimal point as if they were whole numbers.</td>
-<td data-align="center">$64 &gt; 60$</td>
+<td data-align="center">$64 > 60$</td>
 </tr>
 <tr>
 <td>Order the numbers using the appropriate inequality sign.</td>
-<td data-align="center">$0.64 &gt; 0.60$<br />
+<td data-align="center">$0.64 > 0.60$<br />
 <br />
-$0.64 &gt; 0.6$</td>
+$0.64 > 0.6$</td>
 </tr>
 </tbody>
 </table>
@@ -594,13 +594,13 @@ $0.64 &gt; 0.6$</td>
 </tr>
 <tr>
 <td>Compare the numbers to the right of the decimal point as if they were whole numbers.</td>
-<td data-align="center">$830 &gt; 803$</td>
+<td data-align="center">$830 > 803$</td>
 </tr>
 <tr>
 <td>Order the numbers using the appropriate inequality sign.</td>
-<td data-align="center">$0.830 &gt; 0.803$<br />
+<td data-align="center">$0.830 > 0.803$<br />
 <br />
-$0.83 &gt; 0.803$</td>
+$0.83 > 0.803$</td>
 </tr>
 </tbody>
 </table>
@@ -648,8 +648,8 @@ $-0.8$</td>
 <td></td>
 </tr>
 <tr>
-<td>Since $-1 &gt; -8, -1$ tenth is greater than $-8$ tenths.</td>
-<td>$-0.1 &gt; -0.8$</td>
+<td>Since $-1 > -8, -1$ tenth is greater than $-8$ tenths.</td>
+<td>$-0.1 > -0.8$</td>
 </tr>
 </tbody>
 </table>
