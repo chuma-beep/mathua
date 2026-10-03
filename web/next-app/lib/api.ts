@@ -740,10 +740,10 @@ export async function resetAccount(phrase: string): Promise<void> {
 		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
 		body: JSON.stringify({ phrase }),
 	})
-	if (!res.ok) {
-		const msg = await res.text().catch(() => '')
-		throw new Error(msg || `Reset failed: ${res.status}`)
-	}
+	// Read the {error} envelope rather than res.text(): throwing the raw body
+	// put a literal `{"error":"…"}` in the danger zone, which reads as a
+	// broken app instead of an explanation.
+	if (!res.ok) await throwWithResponse(res, 'Reset failed')
 }
 
 const MeSchema = z.object({
@@ -766,10 +766,8 @@ export async function deleteAccount(body: { phrase: string; password?: string })
 		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
 		body: JSON.stringify(body),
 	})
-	if (!res.ok) {
-		const msg = await res.text().catch(() => '')
-		throw new Error(msg || `Delete failed: ${res.status}`)
-	}
+	// Same reason as resetAccount: never surface the raw JSON envelope.
+	if (!res.ok) await throwWithResponse(res, 'Delete failed')
 }
 
 export async function getWeaknesses(): Promise<WeaknessRes> {

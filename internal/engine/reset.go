@@ -15,9 +15,14 @@ const ResetPhrase = "reset my progress"
 // never authorize a deletion.
 const DeletePhrase = "delete my account"
 
-var errResetPhraseMismatch = fmt.Errorf("confirmation phrase does not match")
+// ErrResetPhraseMismatch and ErrDeletePhraseMismatch are the only expected
+// failures on these paths. They are exported so the HTTP layer can tell "you
+// typed the wrong words" apart from "the database refused": collapsing both
+// into one 400 told a learner with a real infrastructure fault that their
+// confirmation phrase was wrong, which is unsendable advice.
+var ErrResetPhraseMismatch = fmt.Errorf("confirmation phrase does not match")
 
-var errDeletePhraseMismatch = fmt.Errorf("confirmation phrase does not match")
+var ErrDeletePhraseMismatch = fmt.Errorf("confirmation phrase does not match")
 
 // ResetAccountProgress wipes one student's learning record and returns them
 // to a fresh start. Order matters and every step is retry-safe:
@@ -31,7 +36,7 @@ var errDeletePhraseMismatch = fmt.Errorf("confirmation phrase does not match")
 //     so Plan shows the neutral fresh-start state until a new baseline).
 func (e *Engine) ResetAccountProgress(studentID, phrase string) error {
 	if strings.TrimSpace(phrase) != ResetPhrase {
-		return errResetPhraseMismatch
+		return ErrResetPhraseMismatch
 	}
 	if err := e.repo.ResetProgress(studentID); err != nil {
 		return err
@@ -72,7 +77,7 @@ func (e *Engine) ResetAccountProgress(studentID, phrase string) error {
 // password accounts) happens in the server handler before this runs.
 func (e *Engine) DeleteAccount(studentID, phrase string) error {
 	if strings.TrimSpace(phrase) != DeletePhrase {
-		return errDeletePhraseMismatch
+		return ErrDeletePhraseMismatch
 	}
 	if err := e.repo.DeleteAccount(studentID); err != nil {
 		return err

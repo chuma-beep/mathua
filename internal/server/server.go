@@ -201,6 +201,33 @@ func New(eng *engine.Engine, repo storage.Repository, auth *auth.AuthService) *S
 	return s
 }
 
+// dropStudentLiveSessions evicts every in-memory diagnostic and quiz session
+// belonging to studentID.
+//
+// The age-based janitor above only sweeps after an hour, which is the right
+// default for abandoned tabs and the wrong one for a reset: a learner who
+// wipes their record and then reopens the tab they left mid-diagnostic gets it
+// all back, because handleGoalDiagnosticAnswer re-inserts the attempt via
+// EnsureSession + RecordAttempt, and handleQuizAnswer writes concept_progress
+// and XP through SubmitQuizAnswer. Reset and delete must therefore evict these
+// eagerly — a wipe that a stale in-memory session can undo is not a wipe.
+func (s *Server) dropStudentLiveSessions(studentID string) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	for id, sess := range s.diagSessions {
+		if sess != nil && sess.StudentID == studentID {
+			delete(s.diagSessions, id)
+			delete(s.diagCreated, id)
+		}
+	}
+	for id, sess := range s.quizSessions {
+		if sess != nil && sess.StudentID == studentID {
+			delete(s.quizSessions, id)
+			delete(s.quizCreated, id)
+		}
+	}
+}
+
 func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/auth/signup", logRequest(cors(s.authLimiter.middleware(s.handleSignup))))
 	mux.HandleFunc("/api/auth/login", logRequest(cors(s.authLimiter.middleware(s.handleLogin))))
@@ -2074,9 +2101,19 @@ func (s *Server) handleAccountReset(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if err := s.eng.ResetAccountProgress(studentID, req.Phrase); err != nil {
-		writeError(w, "confirmation phrase does not match", 400)
+		if errors.Is(err, engine.ErrResetPhraseMismatch) {
+			writeError(w, "confirmation phrase does not match", 400)
+			return
+		}
+		// An infrastructure fault must not read as a typo: the learner would
+		// retype the same correct phrase forever.
+		log.Printf("account reset failed for %s: %v", studentID, err)
+		writeError(w, "reset failed and nothing was changed — please try again", 500)
 		return
 	}
+	// Evict live diagnostic/quiz sessions so a tab left open cannot rewrite
+	// the rows we just deleted.
+	s.dropStudentLiveSessions(studentID)
 	writeJSON(w, map[string]interface{}{"reset": true})
 }
 
@@ -2113,9 +2150,18 @@ func (s *Server) handleAccountDelete(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	if err := s.eng.DeleteAccount(studentID, req.Phrase); err != nil {
-		writeError(w, "confirmation phrase does not match", 400)
+		if errors.Is(err, engine.ErrDeletePhraseMismatch) {
+			writeError(w, "confirmation phrase does not match", 400)
+			return
+		}
+		log.Printf("account delete failed for %s: %v", studentID, err)
+		writeError(w, "deletion failed and nothing was changed — please try again", 500)
 		return
 	}
+	// Evict live sessions too. On Postgres these FKs are absent, so without
+	// this an in-flight answer re-creates attempts rows for an identity that
+	// no longer exists.
+	s.dropStudentLiveSessions(studentID)
 	log.Printf("auth: account deleted for student %s", studentID)
 	writeJSON(w, map[string]interface{}{"deleted": true})
 }
