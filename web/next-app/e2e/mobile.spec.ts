@@ -396,6 +396,12 @@ test('double-clicking Check Answer fires exactly one POST', async ({ page }) => 
   expect(submitBox?.height).toBe(48)
   expect(submitBox?.width ?? 0).toBeLessThan(inputBox?.width ?? 0)
   await typeAnswer(page, '9')
+  // Wait for the answer to reach the host before clicking. `typeAnswer` returns as
+  // soon as the field has the text, but Check stays disabled until the value has
+  // propagated into host state, and the disabled→enabled transition leaves the
+  // button moving. dblclick's own stability wait then times out on a *disabled*
+  // button, which reads like a product bug and is not one.
+  await expect(submit).toBeEnabled({ timeout: 20_000 })
   await submit.dblclick()
   await page.waitForTimeout(500)
 
