@@ -446,7 +446,7 @@ To find the reciprocals, we keep the sign and invert the fractions.
 | Check: |  |
 | Multiply the number and its reciprocal. | $\frac{4}{9} \cdot \frac{9}{4}$ |
 | Multiply numerators and denominators. | $\frac{36}{36}$ |
-| Simplify. | $1✓$ |
+| Simplify. | 1 |
 
 |                                           |                                |
 |-------------------------------------------|--------------------------------|
@@ -454,7 +454,7 @@ To find the reciprocals, we keep the sign and invert the fractions.
 | Find the reciprocal of $- \frac{1}{6}$. | $- \frac{6}{1}$              |
 | Simplify.                                 | $- 6$                        |
 | Check:                                    | $- \frac{1}{6} \cdot ( - 6)$ |
-|                                           | $1✓$                         |
+|                                           | 1                         |
 
 |  |  |
 |----|----|
@@ -462,7 +462,7 @@ To find the reciprocals, we keep the sign and invert the fractions.
 | Find the reciprocal of $- \frac{14}{5}$. | $- \frac{5}{14}$ |
 | Check: | $- \frac{14}{5} \cdot \left( - \frac{5}{14} \right)$ |
 |  | $\frac{70}{70}$ |
-|  | $1✓$ |
+|  | 1 |
 
 |  |  |
 |----|----|
@@ -471,7 +471,7 @@ To find the reciprocals, we keep the sign and invert the fractions.
 | Write 7 as a fraction. | $\frac{7}{1}$ |
 | Write the reciprocal of $\frac{7}{1}$. | $\frac{1}{7}$ |
 | Check: | $7 \cdot \left( \frac{1}{7} \right)$ |
-|  | $1✓$ |
+|  | 1 |
 
 ### Try It 4.57
 

@@ -181,7 +181,7 @@ Subtract and then check by adding:
 </tr>
 <tr>
 <td>Check with addition.<br />
-$2 + 7 = 9✓$</td>
+$2 + 7 = 9$</td>
 <td></td>
 </tr>
 </tbody>
@@ -207,7 +207,7 @@ $2 + 7 = 9✓$</td>
 </tr>
 <tr>
 <td>Check with addition.<br />
-$5 + 3 = 8✓$</td>
+$5 + 3 = 8$</td>
 <td></td>
 </tr>
 </tbody>
@@ -500,7 +500,7 @@ $$\begin{array}{l}
  \\
 {\quad\overset{1}{1},\overset{1}{6}\overset{1}{8}3} \\
 {\underset{\text{\_\_\_\_\_\_}}{+ 479}} \\
-{ 2,\; 162✓}
+{ 2,\; 162}
 \end{array}$$</td>
 <td></td>
 </tr>

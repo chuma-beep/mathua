@@ -11,9 +11,9 @@ In simple terms, it describes the equilibrium point of the squared distribution,
 
 In general form, the quadratic mean is expressed as:
 
-\\[M_2 = \sqrt{\frac{1}{n} \sum_{i=1}^{n} x_i^2} \\]
+\[M_2 = \sqrt{\frac{1}{n} \sum_{i=1}^{n} x_i^2} \]
 
-where \\(x_1, x_2, \ldots, x_n\\) are the observed values and \\(n\\) is the total number of elements.
+where \(x_1, x_2, \ldots, x_n\) are the observed values and \(n\) is the total number of elements.
 
   * The quadratic mean can be applied to any set of real numbers, positive or negative.
   * Since the calculation involves squaring each term, it is always greater than or equal to the arithmetic and geometric means.
@@ -34,7 +34,7 @@ Friday| 3.2
   
 Substituting the observed values to the quadratic mean formula, we get:
 
-\\[\begin{align} M_2 &= \sqrt{\frac{(-3.5)^2 + 0.0^2 + (2.8)^2 + (-1.6)^2 + (3.2)^2}{5}} \\\\[3pt] &= \sqrt{\frac{12.25 + 0.00 + 7.84 + 2.56 + 10.24}{5}} \\\\[3pt] & = \sqrt{\frac{32.89}{5}} \approx 2.56 \end{align} \\]
+\[\begin{align} M_2 &= \sqrt{\frac{(-3.5)^2 + 0.0^2 + (2.8)^2 + (-1.6)^2 + (3.2)^2}{5}} \\\\[3pt] &= \sqrt{\frac{12.25 + 0.00 + 7.84 + 2.56 + 10.24}{5}} \\\\[3pt] & = \sqrt{\frac{32.89}{5}} \approx 2.56 \end{align} \]
 
 
   * If we consider the arithmetic mean (0.18 °C), it is noticeably lower than the quadratic mean (2.56 °C).
@@ -44,6 +44,6 @@ Substituting the observed values to the quadratic mean formula, we get:
 
 Hence, the quadratic mean temperature is approximately:
 
-\\[M_2 = 2.56 \text{ °C} \\]
+\[M_2 = 2.56 \text{ °C} \]
 
 ##### This result shows that, even though the temperature fluctuates above and below zero, the quadratic mean captures the overall intensity of these variations.

@@ -13,51 +13,51 @@ If a material point moves along a [straight-line](<../lines>) path under constan
 
 ## Acceleration
 
-Let us consider a particle moving along a straight-line trajectory, where the position as a function of time is not described by a [linear equation](<../linear-equations/>). Let \\( P_1 \\) and \\( P_2 \\) denote two positions of the material point along the \\( x \\)-axis at times \\( t_1 \\) and \\( t_2 \\), respectively. We denote by \\( \mathbf{v}_1 \\) and \\( \mathbf{v}_2 \\) the corresponding velocity [vectors](<../vectors/>), with \\( \mathbf{v}_1 \neq \mathbf{v}_2 \\). The **vector acceleration** is defined as the following limit:
+Let us consider a particle moving along a straight-line trajectory, where the position as a function of time is not described by a [linear equation](<../linear-equations/>). Let \( P_1 \) and \( P_2 \) denote two positions of the material point along the \( x \)-axis at times \( t_1 \) and \( t_2 \), respectively. We denote by \( \mathbf{v}_1 \) and \( \mathbf{v}_2 \) the corresponding velocity [vectors](<../vectors/>), with \( \mathbf{v}_1 \neq \mathbf{v}_2 \). The **vector acceleration** is defined as the following limit:
 
-\\[\mathbf{a} = \lim_{\Delta t \to 0} \frac{\Delta \mathbf{v}}{\Delta t} = \frac{d\mathbf{v}}{dt} \\]
+\[\mathbf{a} = \lim_{\Delta t \to 0} \frac{\Delta \mathbf{v}}{\Delta t} = \frac{d\mathbf{v}}{dt} \]
 
 We have seen, by analyzing the [velocity](<../velocity>), that:
 
-\\[\lim_{\Delta t \to 0} \frac{\Delta \mathbf{r}}{\Delta t} = \frac{d\mathbf{r}}{dt} = \mathbf{v} \\]
+\[\lim_{\Delta t \to 0} \frac{\Delta \mathbf{r}}{\Delta t} = \frac{d\mathbf{r}}{dt} = \mathbf{v} \]
 
 Thus, we have:
 
-\\[\mathbf{a} = \frac{d}{dt}\left( \frac{d\mathbf{r}}{dt} \right) = \frac{d^2 \mathbf{r}}{dt^2} \\]
+\[\mathbf{a} = \frac{d}{dt}\left( \frac{d\mathbf{r}}{dt} \right) = \frac{d^2 \mathbf{r}}{dt^2} \]
 
 
-Starting from the general expression of acceleration it is possible to introduce the concept of **tangential acceleration** As a point \\( P \\) travels along a given path, the acceleration vector \\( \mathbf{a} \\) can be broken down into two components:
+Starting from the general expression of acceleration it is possible to introduce the concept of **tangential acceleration** As a point \( P \) travels along a given path, the acceleration vector \( \mathbf{a} \) can be broken down into two components:
 
   * One tangential to the trajectory.
   * One normal to the trajectory (also called centripetal acceleration that points toward the center of the curvature of the path).
 
 
-The tangential acceleration, denoted by \\( \mathbf{a}_t \\), corresponds to the variation of the speed over time. It is defined as:
+The tangential acceleration, denoted by \( \mathbf{a}_t \), corresponds to the variation of the speed over time. It is defined as:
 
-\\[a_t = \frac{dv}{dt} = \mathbf{i} \, a_t \\]
+\[a_t = \frac{dv}{dt} = \mathbf{i} \, a_t \]
 
-where \\( v \\) represents the magnitude of the velocity vector \\( \mathbf{v} \\) and \\(\mathbf{i}\\) represents a directed and oriented vector.
+where \( v \) represents the magnitude of the velocity vector \( \mathbf{v} \) and \(\mathbf{i}\) represents a directed and oriented vector.
 
 ![The acceleration vector consists of two parts: a tangential component and a normal component.](/diagrams/algebrica/acceleration-1.png)
 
-  * If the magnitude of the velocity changes, there is tangential acceleration \\((a_t \neq 0)\\).
-  * If the magnitude of the velocity remains constant, the tangential acceleration is zero \\((a_t = 0)\\).
+  * If the magnitude of the velocity changes, there is tangential acceleration \((a_t \neq 0)\).
+  * If the magnitude of the velocity remains constant, the tangential acceleration is zero \((a_t = 0)\).
 
 
-Uniformly accelerated motion is a type of motion in which the tangential acceleration \\( a_t \\) is constant at every point and equal to the average acceleration over any time [interval](<../intervals/>). We have:
+Uniformly accelerated motion is a type of motion in which the tangential acceleration \( a_t \) is constant at every point and equal to the average acceleration over any time [interval](<../intervals/>). We have:
 
-\\[\frac{v - v_0}{t-t_0} = a_t\\]
+\[\frac{v - v_0}{t-t_0} = a_t\]
 
-Starting from this formula, solving for \\( v \\) and assuming \\( t_0 = 0 \\), we obtain:
+Starting from this formula, solving for \( v \) and assuming \( t_0 = 0 \), we obtain:
 
-\\[v = v_0 + a_t t \\]
+\[v = v_0 + a_t t \]
 
 In this way, derived the expression for velocity based on the definition of acceleration. Starting from the expression of velocity as a function of time we can derive the equation of motion by [integrating](<../integrals>) with respect to time:
 
-\\[y = \int_0^t v(t) \, dt = \int_0^t (v_0 + a_t t) \, dt \\]
+\[y = \int_0^t v(t) \, dt = \int_0^t (v_0 + a_t t) \, dt \]
 
 Evaluating the integral, we obtain:
 
-\\[y = v_0 t + \frac{1}{2} a_t t^2 \\]
+\[y = v_0 t + \frac{1}{2} a_t t^2 \]
 
-where \\( y \\) represents the displacement of the material point along the trajectory as a function of time.
+where \( y \) represents the displacement of the material point along the trajectory as a function of time.

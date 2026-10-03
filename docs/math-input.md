@@ -385,17 +385,46 @@ covers 44% of its input is not a clean bill of health. `make validate` does not 
 it and CI runs it with `continue-on-error: true` — the corpus has pre-existing defects,
 so a hard gate would block main on content rather than on a regression.
 
-Current state of the corpus:
+Current state of the corpus, after `cmd/latexfix` repaired what was mechanical:
 
 | | spans |
 |---|---|
-| checked (parsed cleanly) | 37,465 |
-| **malformed** | **517** (329 unique) |
-| unchecked: not an expression (environments, prose-in-math, arrows) | 6,496 |
+| checked (parsed cleanly) | 37,657 |
+| **malformed** | **228** (137 unique, in 60 files) |
+| unchecked: not an expression (environments, prose-in-math, arrows) | 6,480 |
 | unchecked: valid but outside CE's numeric type system | 773 |
-| unchecked: command or operand CE does not implement | 1,621 |
+| unchecked: command or operand CE does not implement | 1,650 |
 | engine crashes (CE overflowed its own recursion) | 0 |
-| **total** | **46,872** across 577 files |
+| **total** | **46,821** across 577 files |
+
+`cmd/latexfix` took it from 517. Three classes were mechanical and are now fixed:
+
+- **Unicode apostrophes in derivatives** (162 → 1). `f’(x)` is a typo. `‘a \text{is
+  less than}\ b’` is a *quotation mark*, and rewriting it to `'` makes LaTeX render
+  primes — a silent change to what the lesson teaches. The rule only fires on an
+  attached apostrophe, and never on an opening curly quote.
+- **Scrape artifacts**: `42✓` correctness ticks (68) and HTML entities leaked into
+  math (`&gt;`, `&#39;`) (32).
+- **Doubled delimiters** (14,936 `\(`, plus the display-math `\[`). The Algebrica
+  scrape wrote `\(`, which `latexnorm` reads as an escaped backslash followed by a
+  paren — so every Algebrica formula sat in a *prose* region and no region-based
+  tool could see it. The canonicalizer is what turned it into `$ … $`, which is why
+  the checker found defects the fixer could not reach. Un-escaping is provably
+  free: `canonicalize` emits byte-identical output for `\(x\)` and `\(x\)`, and
+  that invariant is a test.
+
+Two findings worth keeping:
+
+- **`\[` needs a discriminator.** A row break in an `align` environment is
+  `\[2pt]` — two backslashes then a bracket holding a length, closed by a *single*
+  `]`. So `\]` is unambiguously a display closer, while `\[` is a display opener
+  only when not followed by a length. The corpus agrees: 4,496 `\]` against ~4,500
+  non-row-break `\[`, and 1,157 genuine row breaks left alone.
+- **Removing a `✓` can create a defect.** `$42✓$` → `$42$` is a *bare numeral set as
+  math*, which the canonicalizer escapes to `\$42\$` — the learner sees literal
+  dollar signs (ADR-016). So a repaired span that becomes a bare numeral loses its
+  delimiters too: `$42✓$` → `42`. The old form was itself broken; the learner was
+  seeing `\$1✓\$`.
 
 Of the 517, the largest single cause is a Unicode apostrophe where LaTeX wants ASCII:
 `f’(x) = 18x - 4` is 162 of them, from the scrape. KaTeX renders it anyway, which is
