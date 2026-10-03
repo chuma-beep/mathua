@@ -34,6 +34,13 @@ jobs:
       - run: python scripts/lint_hypothesis.py
       - run: python scripts/lint_notation.py
       - run: python3 scripts/lint_math_layout.py
+      # Reports, does not gate. The corpus currently has ~517 malformed spans
+      # (mostly Unicode apostrophes where LaTeX wants ASCII), so a hard gate would
+      # block main on pre-existing content rather than on a regression. Flip
+      # continue-on-error to false once that count reaches zero.
+      - name: LaTeX corpus check (report only)
+        continue-on-error: true
+        run: cd web/next-app && node scripts/normalize-latex.mjs --quiet
       - name: Fail on verifier FAILs
         run: |
           python -c "

@@ -345,3 +345,60 @@ navigable placeholder — not `/`. A keycap that inserted the character would lo
 identical in a screenshot and behave nothing like a fraction. `test/keyboards.test.ts`
 asserts this for every mode, and `e2e/math-input.spec.ts` asserts it against the real
 library.
+
+## 7. The LaTeX corpus check
+
+`web/next-app/scripts/normalize-latex.mjs` runs every math span in the lesson corpus
+through Compute Engine and reports the malformed ones (`make latex-normalize`).
+
+The corpus gate (`test/latexCorpus.test.ts`) already proves KaTeX can *render* every
+lesson, but that is a weak signal: KaTeX is forgiving by design and will render a
+malformed fraction by guessing. This is the strict counterpart.
+
+Four things about it are not obvious, and each was learned the hard way:
+
+**The spans come from `cmd/latexdump -spans`, not from a regex.** `latexnorm.Scan` is
+the only thing in the tree that knows a dollar can be a delimiter or a currency amount,
+and it runs over the canonicalized body — the text the API actually serves. A regex
+would report every "$5 and up" in the corpus as a syntax error.
+
+**`ce.parse` does not throw.** It is total: a LaTeX syntax error comes back as a tree
+containing an `["Error", reason, …]` node. A try/catch reports a corpus with thousands
+of broken spans as perfectly clean, which is worse than no report because it is a
+confident lie. Failure is read off the returned box.
+
+**A parse failure is not automatically a defect.** CE is a numeric/symbolic CAS; this
+corpus is largely abstract algebra, group theory and topology. CE reports `U \times F`
+as `incompatible-type: number, function` — having parsed the syntax perfectly and then
+declined to type a product of two sets — and does the same for `\mathbb{R}^2 \setminus
+\{0\}`. Filing those as "unparseable" buries the real defects under ~1,600 spans of
+noise and gets the report switched off. Reasons are bucketed by what CE objected to:
+`syntax` (a real defect: unclosed delimiter, stray operator, stray token),
+`not-numeric` (understood, refused to type it), `ce-gap` (a command CE has no rule for,
+which cannot be told from valid-but-unsupported without a human).
+
+**Every span is accounted for, and the buckets reconcile.** The summary asserts
+`clean + malformed + unchecked == spans` and exits 2 if not, because that check is what
+caught the first two versions of this script reporting "20,549 of 46,872" while
+happily reporting success. It also states `checked_pct`, because a report that quietly
+covers 44% of its input is not a clean bill of health. `make validate` does not include
+it and CI runs it with `continue-on-error: true` — the corpus has pre-existing defects,
+so a hard gate would block main on content rather than on a regression.
+
+Current state of the corpus:
+
+| | spans |
+|---|---|
+| checked (parsed cleanly) | 37,465 |
+| **malformed** | **517** (329 unique) |
+| unchecked: not an expression (environments, prose-in-math, arrows) | 6,496 |
+| unchecked: valid but outside CE's numeric type system | 773 |
+| unchecked: command or operand CE does not implement | 1,621 |
+| engine crashes (CE overflowed its own recursion) | 0 |
+| **total** | **46,872** across 577 files |
+
+Of the 517, the largest single cause is a Unicode apostrophe where LaTeX wants ASCII:
+`f’(x) = 18x - 4` is 162 of them, from the scrape. KaTeX renders it anyway, which is
+exactly why no existing gate caught it. The rest are unbalanced delimiters, stray `&`
+outside an `aligned` environment, and one prose paragraph that `latexnorm.Scan`
+classified as math.
