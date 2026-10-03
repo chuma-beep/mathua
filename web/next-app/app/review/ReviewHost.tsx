@@ -7,13 +7,12 @@ import KatexContent from '../../components/KatexContent'
 import Loading from '../../components/Loading'
 import SectionHeader from '../../components/SectionHeader'
 import BriefingCard, { REVIEW_BRIEFING } from '../../components/BriefingCard'
-import SymbolPalette from '../../components/SymbolPalette'
 import ReportButton from '../../components/ReportButton'
 import { startReviewSession, submitReviewAnswer } from '../../lib/api'
 import { formatForGradingType, type AnswerFormat } from '../../lib/answerFormat'
 import ChoiceOptions from '../../components/ChoiceOptions'
 import SubmitErrorBlock, { toSubmitError, type SubmitError } from '../../components/SubmitErrorBlock'
-import { Input } from '@/components/ui/input'
+import { MathAnswerInput, type MathFocusHandle } from '@/components/math/MathInput'
 
 type Phase = 'loading' | 'intro' | 'run' | 'done'
 
@@ -25,9 +24,10 @@ export default function ReviewHost() {
   const [loading, setLoading] = useState(false)
 
   const reviewSessionId = useRef('')
-  const reviewInputRef = useRef<HTMLInputElement>(null)
+  const reviewInputRef = useRef<MathFocusHandle | null>(null)
   const reviewShownAt = useRef<number | null>(null)
   const reviewConceptId = useRef('')
+  const reviewGradingType = useRef('')
   const reviewAttemptId = useRef('')
 
   const [reviewQuestion, setReviewQuestion] = useState('')
@@ -68,6 +68,7 @@ export default function ReviewHost() {
       reviewAttemptId.current = res.question.attempt_id ?? ''
       reviewShownAt.current = Date.now()
       setAnswerFormat(formatForGradingType(res.question.grading_type))
+    reviewGradingType.current = res.question.grading_type
       setReviewCount(1)
       setReviewAccuracy({ correct: 0, total: 0 })
       setReviewXp(0)
@@ -142,6 +143,7 @@ export default function ReviewHost() {
     setReviewConceptName(name)
     reviewAttemptId.current = attemptId
     setAnswerFormat(formatForGradingType(gradingType))
+    reviewGradingType.current = gradingType
     setReviewCount(prev => prev + 1)
     setReviewLastResult(null)
     setReviewAnswerInput('')
@@ -241,13 +243,25 @@ export default function ReviewHost() {
             <>
               <form onSubmit={e => { e.preventDefault(); void submitReviewFn() }} className="flex flex-col sm:flex-row gap-3 min-w-0">
                 <label htmlFor="review-answer" className="sr-only">Your answer</label>
-                <Input ref={reviewInputRef} id="review-answer" type="text" value={reviewAnswerInput} onChange={e => setReviewAnswerInput(e.target.value)} placeholder="Your answer..." enterKeyHint="go" inputMode={answerFormat.inputMode} disabled={loading} className="sm:flex-1" />
+                <MathAnswerInput
+                  id="review-answer"
+                  value={reviewAnswerInput}
+                  onChange={setReviewAnswerInput}
+                  onSubmit={() => void submitReviewFn()}
+                  gradingType={reviewGradingType.current}
+                  conceptId={reviewConceptId.current}
+                  disabled={loading}
+                  status={reviewLastResult ? (reviewLastResult.correct ? 'correct' : 'incorrect') : 'default'}
+                  inputMode={answerFormat.inputMode}
+              placeholder="Your answer..."
+                  className="sm:flex-1"
+                  focusRef={reviewInputRef}
+                />
                 <button type="submit" disabled={!reviewAnswerInput.trim() || loading} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-12 px-6 font-medium text-sm disabled:opacity-50 shrink-0 w-auto self-end sm:self-auto">Check Answer</button>
               </form>
               <div className="mt-2 flex items-center justify-between gap-2">
                 <p className="font-mono text-[11px] text-mathua-muted">{answerFormat.hint}</p>
               </div>
-              <SymbolPalette targetRef={reviewInputRef} onInsert={setReviewAnswerInput} />
               <div className="mt-2 flex justify-end">
                 <ReportButton
                   key={reviewQuestion}

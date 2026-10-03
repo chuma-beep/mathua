@@ -26,6 +26,7 @@ import {
 } from '../../components/SubmitErrorBlock'
 import { setUserInfo, getUserInfo } from '../../lib/auth'
 import { concepts as conceptsData } from '../../lib/conceptData'
+import type { MathFocusHandle } from '@/components/math/MathInput'
 import { domainOrder, type DomainInfo } from './domains'
 import { DiagnosticStep, ResultsStep, WelcomeStep } from './steps'
 
@@ -46,7 +47,7 @@ export default function OnboardPage() {
   const [domains, setDomains] = useState<DomainInfo[]>([])
 
   const sessionId = useRef('')
-  const onboardInputRef = useRef<HTMLInputElement>(null)
+  const onboardInputRef = useRef<MathFocusHandle | null>(null)
   const [question, setQuestion] = useState('')
   const conceptId = useRef('')
   // Next question staged from the submit response — revealed by goNext(),

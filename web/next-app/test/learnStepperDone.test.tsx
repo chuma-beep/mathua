@@ -13,6 +13,7 @@ import {
   getScores,
 } from '../lib/api'
 import { getUserInfo } from '../lib/auth'
+import { answerCard, answerField, typeAnswer } from './helpers/answerInput'
 
 vi.mock('../lib/api', async (importOriginal) => {
   const mod = await importOriginal<typeof import('../lib/api')>()
@@ -71,11 +72,10 @@ beforeEach(() => {
 })
 
 async function answerCurrent(value: string) {
-  const inputs = await screen.findAllByPlaceholderText(/Your answer/)
-  const input = inputs[inputs.length - 1]
-  fireEvent.change(input, { target: { value } })
-  const card = input.closest('div[class*="border"]') ?? document.body
-  fireEvent.click(within(card as HTMLElement).getByRole('button', { name: 'Check' }))
+  await waitFor(() => expect(answerField()).toBeTruthy())
+  const input = answerField()
+  typeAnswer(input, value)
+  fireEvent.click(within(answerCard(input)).getByRole('button', { name: 'Check' }))
 }
 
 describe('LearnStepper done state (PR5)', () => {
@@ -163,9 +163,8 @@ describe('LearnStepper done state (PR5)', () => {
       for (let i = 0; i < 2; i++) {
         const inputs = screen.getAllByPlaceholderText(/Your answer/)
         const input = inputs[inputs.length - 1]
-        fireEvent.change(input, { target: { value: '5' } })
-        const card = input.closest('div[class*="border"]') ?? document.body
-        fireEvent.click(within(card as HTMLElement).getByRole('button', { name: 'Check' }))
+        typeAnswer(input, '5')
+        fireEvent.click(within(answerCard(input)).getByRole('button', { name: 'Check' }))
         await vi.advanceTimersByTimeAsync(500)
       }
 

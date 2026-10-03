@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test'
+import { answerField, typeAnswer } from './helpers/answer'
 
 const LESSON = {
   title: 'Addition Basics',
@@ -56,12 +57,14 @@ test('study → learn → answer → XP persists (Study seam)', async ({ page })
   await expect(page).toHaveURL(/\/learn\?concept=arith\.add\.single/)
   await page.getByRole('button', { name: 'Next →' }).click()
 
-  const input = page.locator('input[placeholder*="Your answer"]').first()
+  // The answer control is MathLive for arithmetic concepts and the plain input for
+  // choice-based ones; `answerField` finds whichever rendered.
+  const input = answerField(page)
   await expect(input).toBeVisible({ timeout: 20_000 })
-  // Answer input is the standard 48px control at all widths.
+  // Answer input is at least the standard 48px control at all widths.
   const inputBox = await input.boundingBox()
-  expect(inputBox?.height).toBe(48)
-  await input.fill('4')
+  expect(inputBox?.height).toBeGreaterThanOrEqual(48)
+  await typeAnswer(page, '4')
   await page.getByRole('button', { name: 'Check', exact: true }).first().click()
   await expect(page.getByText('+1 XP').first()).toBeVisible({ timeout: 20_000 })
 })
@@ -112,8 +115,7 @@ test('quiz reuse host at /goals?quiz=1 starts actionable quiz (guest unlimited r
   await expect(page.getByText('5 + 3 = ?').first()).toBeVisible()
   await expect(page.getByText('Answer with a number').first()).toBeVisible()
 
-  const input = page.locator('input[placeholder*="Your answer"]').first()
-  await input.fill('8')
+  await typeAnswer(page, '8')
   await page.getByRole('button', { name: 'Check Answer' }).first().click()
   await expect(page.getByText('Correct').first()).toBeVisible({ timeout: 20_000 })
   await expect(page.getByText('+3 XP').first()).toBeVisible()

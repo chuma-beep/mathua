@@ -7,7 +7,6 @@ import KatexContent from '../../components/KatexContent'
 import Loading from '../../components/Loading'
 import SectionHeader from '../../components/SectionHeader'
 import BriefingCard, { QUIZ_BRIEFING } from '../../components/BriefingCard'
-import SymbolPalette from '../../components/SymbolPalette'
 import ReportButton from '../../components/ReportButton'
 import { startQuizSession, submitQuizAnswer, skipQuizQuestion } from '../../lib/api'
 import { formatForGradingType, type AnswerFormat } from '../../lib/answerFormat'
@@ -18,7 +17,7 @@ import SubmitErrorBlock, {
   type SubmitError,
 } from '../../components/SubmitErrorBlock'
 import { concepts as conceptsData } from '../../lib/conceptData'
-import { Input } from '@/components/ui/input'
+import { MathAnswerInput, type MathFocusHandle } from '@/components/math/MathInput'
 
 type Phase = 'loading' | 'intro' | 'quiz' | 'done'
 
@@ -30,9 +29,10 @@ export default function QuizHost() {
   const [loading, setLoading] = useState(false)
 
   const quizSessionId = useRef('')
-  const quizInputRef = useRef<HTMLInputElement>(null)
+  const quizInputRef = useRef<MathFocusHandle | null>(null)
   const quizShownAt = useRef<number | null>(null)
   const quizConceptId = useRef('')
+  const quizGradingType = useRef('')
 
   const [quizQuestion, setQuizQuestion] = useState('')
   const [quizConceptName, setQuizConceptName] = useState('')
@@ -74,6 +74,7 @@ export default function QuizHost() {
       setQuizConceptName(res.concept_name || '')
       quizShownAt.current = Date.now()
       setAnswerFormat(formatForGradingType(res.grading_type))
+    quizGradingType.current = res.grading_type
       setQuizCount(1)
       setQuizAccuracy({ correct: 0, total: 0 })
       setQuizLastResult(null)
@@ -167,6 +168,7 @@ export default function QuizHost() {
     setQuizTimeLimit(timeLimit)
     setQuizRemaining(timeLimit)
     setAnswerFormat(formatForGradingType(gradingType))
+    quizGradingType.current = gradingType
     setSubmitError(null)
   }
 
@@ -312,7 +314,20 @@ export default function QuizHost() {
             <>
               <form onSubmit={e => { e.preventDefault(); void submitQuizAnswerFn(false) }} className="flex flex-col sm:flex-row gap-3 min-w-0">
                 <label htmlFor="quiz-answer" className="sr-only">Your answer</label>
-                <Input ref={quizInputRef} id="quiz-answer" type="text" value={quizAnswerInput} onChange={e => setQuizAnswerInput(e.target.value)} placeholder="Your answer..." enterKeyHint="go" inputMode={answerFormat.inputMode} disabled={loading} className="sm:flex-1" />
+                <MathAnswerInput
+                  id="quiz-answer"
+                  value={quizAnswerInput}
+                  onChange={setQuizAnswerInput}
+                  onSubmit={() => void submitQuizAnswerFn(false)}
+                  gradingType={quizGradingType.current}
+                  conceptId={quizConceptId.current}
+                  disabled={loading}
+                  status={quizLastResult ? (quizLastResult.correct ? 'correct' : 'incorrect') : 'default'}
+                  inputMode={answerFormat.inputMode}
+              placeholder="Your answer..."
+                  className="sm:flex-1"
+                  focusRef={quizInputRef}
+                />
                 <button type="submit" disabled={!quizAnswerInput.trim() || loading} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-12 px-6 font-medium text-sm disabled:opacity-50 shrink-0 w-auto self-end sm:self-auto">Check Answer</button>
               </form>
               <div className="mt-2 flex items-center justify-between gap-2">
@@ -326,7 +341,6 @@ export default function QuizHost() {
                   I don&apos;t know
                 </button>
               </div>
-              <SymbolPalette targetRef={quizInputRef} onInsert={setQuizAnswerInput} />
               <div className="mt-2 flex justify-end">
                 <ReportButton
                   key={quizQuestion}

@@ -559,3 +559,141 @@ footer .link-underline:hover {
 .lesson-diagram text {
   font-family: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
 }
+
+/* ==========================================================================
+   MathLive answer editor — components/math/
+   --------------------------------------------------------------------------
+   MathLive deliberately does not style the <math-field> host box (its own
+   stylesheet is `:host { display: block }`), so the field is dressed here with
+   the same tokens as every other Mathua input: square corners, a hairline
+   border, mono text, and a border-colour focus state rather than a ring.
+
+   Light and dark need no separate rules. Every colour below is a Mathua CSS
+   variable that the `.dark` block already redefines, so the editor follows the
+   theme for free — which is the whole reason the theming is done this way.
+   ========================================================================== */
+
+.mathua-math-input {
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+
+math-field.mathua-math-field {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 2.75rem;
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0;
+  background: var(--code-bg);
+  color: var(--text-primary);
+  font-family: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  line-height: 1.4;
+  transition: border-color 0.15s ease;
+}
+
+math-field.mathua-math-field:focus-within {
+  border-color: var(--accent-blue);
+}
+
+math-field.mathua-math-field[readonly] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* The selection and caret are MathLive's own variables. Mathua's accent at
+   partial alpha keeps a selection legible without inverting the text. */
+math-field.mathua-math-field {
+  --caret-color: var(--accent-blue);
+  --primary-color: var(--accent-blue);
+  --selection-background-color: color-mix(in srgb, var(--accent-blue) 22%, transparent);
+  --selection-color: var(--text-primary);
+  --smart-fence-color: var(--accent-blue);
+  --placeholder-color: var(--text-muted);
+  --placeholder-opacity: 0.7;
+  --contains-highlight-background-color: color-mix(in srgb, var(--accent-blue) 12%, transparent);
+  --correct-color: var(--accent-green);
+  --incorrect-color: var(--accent-red);
+  --tooltip-background-color: var(--surface-elevated);
+  --tooltip-border: var(--border-strong);
+  --tooltip-color: var(--text-primary);
+}
+
+/* The virtual keyboard is a page-level singleton appended to <body>, so its
+   variables have to be set at that level. Same tokens again: dense, square,
+   hairline — a Mathua panel rather than MathLive's rounded default. */
+body {
+  --keyboard-zindex: 3000;
+  --keyboard-background: var(--bg);
+  --keyboard-border: var(--border);
+  --keyboard-accent-color: var(--accent-blue);
+  --keyboard-toolbar-text: var(--text-muted);
+  --keyboard-toolbar-text-active: var(--accent-blue);
+  --keyboard-toolbar-background: var(--surface);
+  --keyboard-toolbar-background-hover: var(--surface-elevated);
+  --keyboard-toolbar-background-selected: var(--surface-highlight);
+  --keyboard-padding-horizontal: 6px;
+  --keyboard-padding-top: 4px;
+  --keyboard-padding-bottom: 4px;
+  --keycap-background: var(--surface);
+  --keycap-background-hover: var(--surface-elevated);
+  --keycap-background-active: var(--surface-highlight);
+  --keycap-background-pressed: var(--surface-highlight);
+  --keycap-border: var(--border);
+  --keycap-border-bottom: var(--border-strong);
+  --keycap-text: var(--text-primary);
+  --keycap-text-hover: var(--text-primary);
+  --keycap-text-active: var(--accent-blue);
+  --keycap-text-pressed: var(--text-primary);
+  --keycap-shift-text: var(--text-muted);
+  --keycap-shift-color: var(--text-muted);
+  --keycap-primary-background: var(--surface-elevated);
+  --keycap-primary-text: var(--accent-blue);
+  --keycap-secondary-background: var(--surface);
+  --keycap-secondary-text: var(--text-secondary);
+  --variant-panel-background: var(--surface-elevated);
+  --variant-keycap-text: var(--text-primary);
+}
+
+/* Touch targets. MathLive's defaults are already touch-shaped; 44px is pinned
+   here so the Playwright mobile suite can assert a floor rather than a guess,
+   and so the density does not drift when the default changes. Keycap glyphs stay
+   small — a 44px target does not need a 44px letter. */
+@media (pointer: coarse) {
+  body {
+    --keycap-height: 44px;
+    --keycap-gap: 3px;
+    --keycap-font-size: 18px;
+    --keyboard-toolbar-font-size: 14px;
+    /* MathLive derives keycap width from `10cqw` — 10% of the keyboard panel —
+       which lands around 37px on a 412px phone. Pinning it is what actually clears
+       the 44px touch-target floor; height alone was never the binding constraint. */
+    --keycap-width: 48px;
+  }
+}
+
+/* Desktop: the keyboard is available but not loud. Keep MathLive's toggle
+   visible so a physical-keyboard user can still reach the symbolic keys, and
+   let the field keep a single-line height until the panel opens. */
+@media not (pointer: coarse) {
+  body {
+    --keycap-height: 40px;
+    --keycap-font-size: 15px;
+    --keyboard-toolbar-font-size: 13px;
+  }
+  math-field.mathua-math-field {
+    --caret-color: var(--accent-blue);
+  }
+  math-field.mathua-math-field::part(virtual-keyboard-toggle) {
+    color: var(--text-muted);
+    opacity: 0.7;
+  }
+  math-field.mathua-math-field:focus-within::part(virtual-keyboard-toggle) {
+    color: var(--accent-blue);
+    opacity: 1;
+  }
+}
