@@ -583,9 +583,15 @@ math-field.mathua-math-field {
   display: block;
   box-sizing: border-box;
   width: 100%;
-  min-height: 2.75rem;
+  /* 3rem, not the 2.75rem this used to carry. The 48px floor belongs to the control,
+     and `e2e/mobile.spec.ts` asserts the field itself is at least 48px — it only
+     reached that via `min-h-12` on the wrapper that no longer draws a box. */
+  min-height: 3rem;
   margin: 0;
-  padding: 0.5rem 0.75rem;
+  /* Matches `Input`'s `px-4`. The wrapper used to add `px-3 py-2` on top of this, so
+     the effective inset was 24px/16px and the field visibly reflowed when the plain
+     input replaced it while the chunk loaded. */
+  padding: 0.5rem 1rem;
   border: 1px solid var(--border);
   border-radius: 0;
   background: var(--code-bg);
@@ -596,8 +602,26 @@ math-field.mathua-math-field {
   transition: border-color 0.15s ease;
 }
 
+/* One focus colour, on the one box. The wrapper used to declare its own
+   `focus-within:border-mathua-blue` around this border, so focusing the answer drew two
+   blue rectangles 24px apart — the same token twice, which reads as two states rather
+   than one. */
 math-field.mathua-math-field:focus-within {
   border-color: var(--accent-blue);
+}
+
+/* The verdict colours the field's own border, not a ring around it. They used to land
+   on the wrapper, outside this element's opaque background, so `correct` drew a green
+   outline around a still-grey box.
+   These have to be attributes rather than utility classes: this selector is more
+   specific than any Tailwind class, so `border-mathua-green` passed to the element
+   would lose to the `border-color` above. */
+math-field.mathua-math-field[data-status='correct'] {
+  border-color: var(--accent-green);
+}
+
+math-field.mathua-math-field[data-status='incorrect'] {
+  border-color: var(--accent-red);
 }
 
 math-field.mathua-math-field[readonly] {

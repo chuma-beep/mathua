@@ -144,18 +144,21 @@ describe('MathAnswerInput answer flow', () => {
 })
 
 describe('MathAnswerInput states', () => {
-
   it('marks the field correct, incorrect and disabled from the server verdict', async () => {
-    for (const [status, matcher] of [
-      ['correct', /green/],
-      ['incorrect', /red/],
-    ] as const) {
+    for (const status of ['correct', 'incorrect'] as const) {
       const { unmount } = render(
         <MathAnswerInput value="5" onChange={() => {}} status={status} gradingType="numeric" conceptId="arith.add.single" />,
       )
       await waitFor(() => expect(field()).toBeTruthy())
-      // The status class lives on the wrapper, not on the <math-field> itself.
-      expect(document.querySelector('.mathua-math-input')?.getAttribute('class')).toMatch(matcher)
+      // The verdict rides on the field's own border, as `data-status`.
+      //
+      // It used to be a utility class on the wrapper, which drew the colour *outside*
+      // the field's opaque background — so `correct` was a green ring around a grey box.
+      // A class cannot come back here either: globals.css's
+      // `math-field.mathua-math-field` selector outranks any Tailwind utility, so
+      // `border-mathua-green` on the element would lose to the `border-color` declared
+      // there and the verdict would not render at all.
+      expect(field()?.getAttribute('data-status')).toBe(status)
       unmount()
     }
 
@@ -165,6 +168,27 @@ describe('MathAnswerInput states', () => {
     await waitFor(() => expect(field()).toBeTruthy())
     // Disabled is a property on the MathLive element, not just a class.
     expect((field() as unknown as { readOnly: boolean }).readOnly).toBe(true)
+    // No verdict attribute when there is no verdict, so the border falls back to the
+    // rest colour rather than to whatever the last state was.
+    expect(field()?.getAttribute('data-status')).toBeNull()
     unmount()
   })
+
+  it('draws exactly one box around the answer', async () => {
+    const { container, unmount } = render(
+      <MathAnswerInput value="5" onChange={() => {}} gradingType="numeric" conceptId="arith.add.single" />,
+    )
+    await waitFor(() => expect(field()).toBeTruthy())
+
+    // The wrapper is layout-only now. It used to carry `border border-mathua-border
+    // bg-mathua-code px-3 py-2 focus-within:border-mathua-blue` while the field carried
+    // its own border, so focusing the answer drew two blue rectangles 24px apart — one
+    // token, painted twice, which reads as two states rather than one.
+    const wrapper = container.querySelector('.mathua-math-input') as HTMLElement
+    expect(wrapper.className).not.toMatch(/border/)
+    expect(wrapper.className).not.toMatch(/bg-/)
+    expect(wrapper.className).not.toMatch(/p[xy]-/)
+    unmount()
+  })
+
 })

@@ -400,6 +400,57 @@ test.describe('visual integration', () => {
     expect(styles.borderStyle).toBe('solid')
   })
 
+  test('the answer field is the only box drawn around it', async ({ page }) => {
+    await openLearn(page)
+    await focusAnswerField(page)
+    await showVirtualKeyboard(page)
+
+    // Focusing used to light two blue rectangles: the wrapper div and the <math-field>
+    // each declared a border and each turned blue, because `mathua-blue` *is*
+    // `var(--accent-blue)`. Same token twice, which reads as two states rather than
+    // one. Counting elements is the only assertion that catches it — a screenshot diff
+    // would call it a design choice, and checking one element's colour cannot see the
+    // other.
+    const boxes = await page.evaluate(() => {
+      const field = document.querySelector('math-field[placeholder*="Your answer"]')
+      if (!field?.parentElement) return null
+      const drawn = [field.parentElement, field]
+        .map(el => {
+          const cs = getComputedStyle(el)
+          return {
+            tag: el.tagName.toLowerCase(),
+            width: cs.borderTopWidth,
+            style: cs.borderTopStyle,
+            color: cs.borderTopColor,
+          }
+        })
+        // A `0px` or `none` border is not a box.
+        .filter(b => b.style !== 'none' && parseFloat(b.width) > 0)
+      return drawn
+    })
+
+    expect(boxes, 'answer field wrapper was not found').not.toBeNull()
+    expect(boxes?.map(b => b.tag), 'more than one border is drawn around the answer').toEqual(['math-field'])
+  })
+
+  test('focusing the answer turns exactly one border blue', async ({ page }) => {
+    await openLearn(page)
+    await focusAnswerField(page)
+    await showVirtualKeyboard(page)
+
+    const accent = await page.evaluate(() =>
+      getComputedStyle(document.body).getPropertyValue('--accent-blue').trim(),
+    )
+    const blue = await page.evaluate(() => {
+      const field = document.querySelector('math-field[placeholder*="Your answer"]')
+      return field ? getComputedStyle(field).borderTopColor : null
+    })
+    expect(accent).not.toBe('')
+    // ...and it is the one brand blue, not a second shade. `mathua-blue` resolves to the
+    // same `--accent-blue`, so this cannot drift from the token the rest of the app uses.
+    expect(blue).toBe(accent)
+  })
+
   test('the keyboard inherits Mathua tokens when it does open', async ({ page }) => {
     await openLearn(page)
     await focusAnswerField(page)

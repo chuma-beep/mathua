@@ -209,7 +209,9 @@ export default function MathInput({
   const [loadingText, setLoadingText] = useState('')
 
   const isDisabled = disabled === true || status === 'disabled'
-  const shell = statusClasses(status, isDisabled)
+  const layout = layoutClasses()
+  // Only the standalone fallback needs a status *class*; see fallbackStatusClasses.
+  const fallbackShell = fallbackStatusClasses(status, isDisabled)
 
   if (focusRef) {
     focusRef.current = {
@@ -240,13 +242,13 @@ export default function MathInput({
       disabled={isDisabled}
       placeholder={placeholder}
       ariaLabel={ariaLabel}
-      className={`${shell} ${className ?? ''}`}
+      className={`w-full min-w-0 min-h-12 bg-mathua-code font-mono text-base ${fallbackShell} ${className ?? ''}`}
     />
   )
 
   return (
     <MathLiveBoundary fallback={fallback} onFallback={() => setFallbackActive(true)}>
-      <div className={`mathua-math-input ${shell} ${className ?? ''}`}>
+      <div className={`mathua-math-input ${layout} ${className ?? ''}`}>
         {/* The loading state is a working plain input, not a spacer. See
             PlainAnswerInput: a div of the right size in the right place looked like an
             answer field and swallowed every tap and keystroke for the length of the
@@ -266,7 +268,7 @@ export default function MathInput({
               disabled={isDisabled}
               placeholder={placeholder}
               ariaLabel={ariaLabel}
-              className={`${shell} ${className ?? ''}`}
+              className={`w-full ${className ?? ''}`}
               loading
             />
           }
@@ -275,6 +277,7 @@ export default function MathInput({
             value={value ?? ''}
             mode={mode}
             disabled={isDisabled}
+            status={status}
             placeholder={placeholder}
             ariaLabel={ariaLabel}
             onChange={v => onChange?.(v)}
@@ -300,18 +303,39 @@ export default function MathInput({
 // corners, hairline borders, no ring. The colours are CSS variables MathLive's own
 // stylesheet also reads (see app/globals.css), so the field follows light/dark
 // without a second palette.
-function statusClasses(status: MathInputStatus, disabled: boolean): string {
-  const base =
-    'w-full min-w-0 min-h-12 border bg-mathua-code px-3 py-2 font-mono text-base text-mathua-primary transition-colors'
-  if (disabled) return `${base} border-mathua-border opacity-50 cursor-not-allowed`
-  switch (status) {
-    case 'correct':
-      return `${base} border-green-600/50`
-    case 'incorrect':
-      return `${base} border-red-600/50`
-    default:
-      return `${base} border-mathua-border focus-within:border-mathua-blue`
-  }
+//
+// Split in two, because the box belongs to the control and not to the wrapper.
+//
+// These two used to be one string applied to the wrapper `<div>`, and that produced
+// two nested bordered rectangles around the answer field: the wrapper drew
+// `border border-mathua-border bg-mathua-code px-3 py-2 focus-within:border-mathua-blue`
+// while `<math-field>` drew its own `border: 1px solid var(--border)` and turned blue
+// on `:focus-within` (app/globals.css). Same blue — `mathua-blue` *is*
+// `var(--accent-blue)`, tailwind.config.js — so it read as one colour in two states
+// rather than as a deliberate two-tone treatment. Both transition over 0.15s, so they
+// lit up together.
+//
+// Worse, the wrapper also wraps `SelfCheck`, so once anything was typed the outer box
+// grew downward to enclose the hint. And the verdict colours landed on the wrapper,
+// *outside* the field's opaque background, so `correct` drew a coloured ring around a
+// still-grey box instead of colouring the box the learner was looking at.
+function layoutClasses(): string {
+  // `min-h-12` and the padding moved to the control. `app/globals.css` sets the
+  // field's own `min-height: 3rem` and padding to match `Input`, because
+  // `e2e/mobile.spec.ts` asserts the field is at least 48px and it only reached that
+  // height via this wrapper.
+  return 'w-full min-w-0'
+}
+
+// The plain `<input>` fallback draws its own box, so it still needs the status colour
+// as a class. The math editor cannot use one: globals.css's
+// `math-field.mathua-math-field` selector is more specific than any Tailwind utility
+// class, so a `border-mathua-green` passed to `<math-field>` would lose to the
+// `border-color` declared there. `MathLiveField` therefore takes `status` and sets
+// `data-status`, which globals.css styles.
+function fallbackStatusClasses(status: MathInputStatus, disabled: boolean): string {
+  if (disabled) return 'border-mathua-border opacity-50 cursor-not-allowed'
+  return legacyStatusClass(status)
 }
 
 // ---------------------------------------------------------------------------
