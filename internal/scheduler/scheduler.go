@@ -191,7 +191,7 @@ func effectiveState(snap *ConceptSnapshot, now time.Time) (mastery.Status, bool)
 	if snap == nil {
 		return mastery.StatusUnseen, false
 	}
-	status := mastery.EffectiveStatus(snap.Status, daysSince(snap.LastReviewed), 14)
+	status := mastery.EffectiveStatus(snap.Status, daysSince(snap.LastReviewed), mastery.DecayDays)
 	isReview := status == "DECAYING"
 	if snap.Status == mastery.StatusMastered && snap.NextReviewDue != nil && !snap.NextReviewDue.After(now) {
 		isReview = true
@@ -205,7 +205,7 @@ func prereqsMet(dag *concepts.DAG, c *concepts.Concept, snapshots map[string]*Co
 		if snap == nil {
 			return false
 		}
-		status := mastery.EffectiveStatus(snap.Status, daysSince(snap.LastReviewed), 14)
+		status := mastery.EffectiveStatus(snap.Status, daysSince(snap.LastReviewed), mastery.DecayDays)
 		if status != mastery.StatusMastered && status != "DECAYING" {
 			return false
 		}
