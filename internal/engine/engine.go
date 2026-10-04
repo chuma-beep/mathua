@@ -1731,6 +1731,36 @@ func (e *Engine) GetProgress(studentID string) (map[string]*storage.ConceptProgr
 	return progress, nil
 }
 
+// ProgressWithMasteryPct is GetProgress plus the one derived number the client used to
+// recompute for itself.
+//
+// Additive rather than a change to GetProgress: readiness, the due-review count and the
+// study catalogue all read GetProgress and none of them need a percentage, and widening
+// its return type would touch every one of them for no gain.
+//
+// It lives here rather than in the server because the threshold lives here, next to the
+// state machine that enforces it. The graph used to derive the same ratio client-side
+// from `streak` and a *bundled* copy of the corpus, which is a second source of truth
+// that silently disagrees with the server's whenever the corpus is rebuilt.
+func (e *Engine) ProgressWithMasteryPct(studentID string) (map[string]ProgressView, error) {
+	progress, err := e.GetProgress(studentID)
+	if err != nil {
+		return nil, err
+	}
+	out := make(map[string]ProgressView, len(progress))
+	for id, p := range progress {
+		reqStreak := 0
+		if c := e.dag.Concept(id); c != nil {
+			reqStreak = c.MasteryThreshold.Streak
+		}
+		out[id] = ProgressView{
+			ConceptProgress: p,
+			MasteryPct:      mastery.MasteryPct(mastery.Status(p.Status), p.Streak, reqStreak),
+		}
+	}
+	return out, nil
+}
+
 func (e *Engine) GetScores(studentID string) (*scoring.Scores, error) {
 	return e.scorer.Compute(studentID)
 }

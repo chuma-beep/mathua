@@ -3,6 +3,7 @@ package engine
 import (
 	"errors"
 	"fmt"
+	"math"
 	"sync"
 	"testing"
 	"time"
@@ -1143,5 +1144,106 @@ func TestGetProgress_LeavesOtherStatusesAlone(t *testing.T) {
 		if got[id].Status != want {
 			t.Errorf("%s status = %q, want %q unchanged", id, got[id].Status, want)
 		}
+	}
+}
+
+// answerCorrectly answers concept "a" correctly n times, using the engine's own question
+// pool. It is not usable for long runs: the pool for a two-concept DAG runs out after a
+// handful of questions, which is why the exhaustive monotonicity proof lives in
+// internal/mastery — where it can drive the transition rules directly — and what is
+// asserted here is that the endpoint derives from the server's threshold.
+func answerCorrectly(t *testing.T, e *Engine, studentID string, n int) {
+	t.Helper()
+	for i := 0; i < n; i++ {
+		sess, _ := e.repo.CreateSession(studentID)
+		e.mu.Lock()
+		e.sessions[sess.ID] = &activeSession{}
+		e.mu.Unlock()
+		q, err := e.NextQuestion(sess.ID, studentID)
+		if err != nil {
+			t.Fatalf("next question %d: %v", i+1, err)
+		}
+		res, err := e.SubmitAnswer(sess.ID, studentID, q.AttemptID, "42", 1.0)
+		if err != nil {
+			t.Fatalf("submit %d: %v", i+1, err)
+		}
+		if !res.Correct {
+			t.Fatalf("expected correct on attempt %d", i+1)
+		}
+	}
+}
+
+// ProgressWithMasteryPct is what the graph's bar length is read from, so the two
+// properties that matter are: it is derived from the server's own threshold rather than a
+// bundled copy of the corpus, and it does not fall when the learner advances a tier.
+func TestProgressWithMasteryPct_DerivesFromServerThreshold(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("pct_threshold")
+
+	views, err := e.ProgressWithMasteryPct(st.ID)
+	if err != nil {
+		t.Fatalf("ProgressWithMasteryPct: %v", err)
+	}
+	if len(views) != 0 {
+		t.Errorf("an untouched learner has %d progress rows, want 0", len(views))
+	}
+
+	// Three correct answers is the threshold, so this lands on the UNSEEN -> LEARNING
+	// advance, where the engine resets the streak to 1. The bar therefore reads as one
+	// third plus a third of a third of a third — and, critically, not as the 1/3 a
+	// streak-derived ratio would give here.
+	answerCorrectly(t, e, st.ID, 3)
+	views, _ = e.ProgressWithMasteryPct(st.ID)
+	row := views["a"]
+	// (1 tier + 1/3 of the next) / 3 = 4/9.
+	if got, want := row.MasteryPct, 4.0/9.0; got < want-0.01 || got > want+0.01 {
+		t.Errorf("mastery_pct at LEARNING = %v, want %v (one tier plus 1/3 of the next)", got, want)
+	}
+	// The stored row is embedded, so the schema fields still travel with it.
+	if row.Status != "LEARNING" {
+		t.Errorf("embedded status = %q, want LEARNING", row.Status)
+	}
+	if row.Streak != 1 {
+		t.Errorf("embedded streak = %d, want 1", row.Streak)
+	}
+}
+
+func TestProgressWithMasteryPct_NeverFallsOnAdvance(t *testing.T) {
+	// The sawtooth this exists to prevent, at the exact answer where it happened. The
+	// engine resets the streak to 1 on the tier advance; a streak-derived ratio therefore
+	// falls from 1.0 to 0.33 here. Tier-derived attainment rises instead.
+	//
+	// The exhaustive version — every answer through all three advances — is
+	// TestMasteryPct_NeverGoesBackwards in internal/mastery, which drives the transition
+	// rules directly and so is not limited by the question pool.
+	if got := mastery.MasteryPct(mastery.StatusLearning, 3, 3); math.Abs(got-2.0/3.0) > 1e-9 {
+		t.Errorf("mastery_pct for LEARNING with the streak met = %v, want %v", got, 2.0/3.0)
+	}
+	// And the ratio the client used to compute, at the same two instants.
+	if old := float64(3) / float64(3); old != 1 {
+		t.Errorf("sanity: the old streak ratio at the threshold should be 1, got %v", old)
+	}
+	if after := float64(1) / float64(3); after >= 0.5 {
+		t.Errorf("sanity: after the reset the old ratio reads %v, which is the drop", after)
+	}
+}
+
+// A decayed concept keeps a full bar. Decay is signalled by colour alone, and a shorter
+// bar would read as losing the competence — the one thing decay does not mean.
+func TestProgressWithMasteryPct_DecayingIsFull(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("pct_decaying")
+	answerCorrectly(t, e, st.ID, 3)
+
+	views, _ := e.ProgressWithMasteryPct(st.ID)
+	if got := views["a"].MasteryPct; got < 1.0/3.0 {
+		t.Errorf("mastery_pct at LEARNING = %v, want past the first third", got)
+	}
+	// `GetProgress` applies decay from the clock and these answers all happened now, so
+	// the served status is still LEARNING. The decayed case is asserted directly against
+	// the same function the endpoint calls; backdating the row to force it would be
+	// asserting the clock rather than the rule.
+	if got := mastery.MasteryPct("DECAYING", 1, 3); got != 1 {
+		t.Errorf("decaying mastery_pct = %v, want 1 (colour carries decay, not length)", got)
 	}
 }
