@@ -89,6 +89,30 @@ const CASES = [
   ['tuple', '(2,3)', '(2,3)'],
   ['ordering', '2,3,5', '2,3,5'],
   ['comparison', '<', '<'],
+  ['comparison', '>', '>'],
+  ['comparison', '<=', '\\le'],
+  ['comparison', '>=', '\\ge'],
+  // Multiple choice, which used to be the one grading type with no recorded cases at
+  // all -- so `GradingMultipleChoice` sat in the compat test's pure-Go set and was
+  // never actually exercised.
+  //
+  // These are the answer shapes the corpus really contains, taken from the most common
+  // `expected` values across internal/generator: 673 "yes", 171 "no", then small
+  // integers, then words. `choiceGrader` is `strings.EqualFold(expected, answer)`,
+  // so every one of these is an exact string comparison and the risk is specific:
+  // MathLive reads bare letters as implicit multiplication, so "yes" could come back
+  // as "y e s" and "Z" as a single symbol, and neither would match. Measured rather
+  // than assumed, which is the whole point of recording them.
+  ['multiple_choice', 'yes', 'yes'],
+  ['multiple_choice', 'no', 'no'],
+  ['multiple_choice', '1/2', '\\frac{1}{2}'],
+  ['multiple_choice', 'pi/2', 'pi/2'],
+  ['multiple_choice', 'pi/2', '\\frac{\\pi}{2}'],
+  ['multiple_choice', 'odd', 'odd'],
+  ['multiple_choice', 'Z', 'Z'],
+  ['multiple_choice', 'addition', 'addition'],
+  ['multiple_choice', '2', '2'],
+  ['multiple_choice', '-1', '-1'],
 ]
 
 async function main() {

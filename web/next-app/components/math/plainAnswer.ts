@@ -27,14 +27,20 @@ export function fixDivision(s: string): string {
 }
 
 const MIXED_RE = /(-?\d+)\((\d+)\)\/\((\d+)\)/
-const FRACTION_PARENS_RE = /\((-?\d+)\)\/\((-?\d+)\)/g
+// A single token, not an arbitrary expression: MathLive parenthesises the numerator and
+// denominator of every fraction, so `\frac{\pi}{2}` comes back as `(pi)/(2)` exactly as
+// `\frac{1}{2}` comes back as `(1)/(2)`. The original pattern only matched digits, so it
+// handled the first and missed the second. Restricting each side to one token is what
+// keeps this from mangling a real expression: `(x + 1)/(y)` must keep its parentheses,
+// because unwrapping it would read as `x + 1/y`.
+const FRACTION_PARENS_RE = /\((-?[A-Za-z0-9.]+)\)\/\((-?[A-Za-z0-9.]+)\)/g
 
 /** `4(1)/(10)` → `4 1/10`. Must run before `fixFractionParens`. */
 export function fixMixedNumbers(s: string): string {
   return s.replace(MIXED_RE, (_m, whole, num, den) => `${whole} ${num}/${den}`)
 }
 
-/** `(1)/(2)` → `1/2`. */
+/** `(1)/(2)` → `1/2`, and `(pi)/(2)` → `pi/2`. */
 export function fixFractionParens(s: string): string {
   return s.replace(FRACTION_PARENS_RE, '$1/$2')
 }
@@ -46,11 +52,52 @@ export function fixNameSpacing(s: string): string {
   return s.replace(SPACE_BEFORE_CALL_OR_POW, '')
 }
 
+// A run of adjacent single letters separated by single spaces.
+const LETTER_RUN = /[A-Za-z](?: [A-Za-z])+/g
+
+/**
+ * Rejoin a word the learner's keyboard split into letters.
+ *
+ * MathLive reads bare adjacent letters as implicit multiplication and serialises them
+ * with spaces, so a learner who types `yes` gets back `y e s`, `odd` gets `o d d`, and
+ * `addition` gets `a d d i t i o n`. That is a real false miss, not a cosmetic one, and
+ * it is the single largest answer shape in the corpus: `yes` is the most common expected
+ * answer of all (673 occurrences) and `no` is second (171).
+ *
+ * It matters because the multiple-choice grader is `strings.EqualFold(expected, answer)`
+ * -- an exact comparison -- so `y e s` never matches `yes`.
+ *
+ * The guard is what keeps this from eating real products. `2pi r` also contains a
+ * letter-space-letter, and collapsing it gives `2pir`, which is wrong: the run is part of
+ * a product, not a word. So the run is first extended left over its whole adjacent letter
+ * sequence, and only collapsed when what precedes *that* is another letter or nothing at
+ * all. `y e s` starts the string and collapses; `2pi r` is preceded by a digit and does
+ * not.
+ *
+ * This is not speculation about MathLive: it is measured. `scripts/record-mathlive-corpus.mjs`
+ * records what the library actually returns for each of these, and
+ * `internal/grader/mathlive_compat_test.go` grades the recording.
+ */
+export function fixImplicitLetterSpacing(s: string): string {
+  return s.replace(LETTER_RUN, (run, offset: number) => {
+    let start = offset
+    while (start > 0 && /[A-Za-z]/.test(s[start - 1]!)) start--
+    let before = start - 1
+    while (before >= 0 && s[before] === ' ') before--
+    if (before >= 0 && !/[A-Za-z]/.test(s[before]!)) return run
+    return run.replace(/ /g, '')
+  })
+}
+
 /**
  * The plain-text answer submitted to the existing endpoints. Identical wire
  * format to what a plain `<input>` produced; only the fidelity improves, so a
  * structured fraction or exponent now grades instead of erroring.
  */
 export function toPlainAnswer(plainText: string): string {
-  return fixNameSpacing(fixFractionParens(fixMixedNumbers(fixDivision(plainText))))
+  // Last, so it sees the text the other rules produced. Running it first would work on
+  // a string `fixMixedNumbers` was about to rewrite.
+  return fixImplicitLetterSpacing(
+    fixNameSpacing(fixFractionParens(fixMixedNumbers(fixDivision(plainText)))),
+  )
 }

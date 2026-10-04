@@ -37,17 +37,55 @@ type mathliveCorpus struct {
 }
 
 var (
-	mixedNumbersRE   = regexp.MustCompile(`(-?\d+)\((\d+)\)/\((\d+)\)`)
-	fractionParensRE = regexp.MustCompile(`\((-?\d+)\)/\((-?\d+)\)`)
+	mixedNumbersRE = regexp.MustCompile(`(-?\d+)\((\d+)\)/\((\d+)\)`)
+	// A single token per side, mirroring plainAnswer.ts: wide enough for `(pi)/(2)`,
+	// narrow enough to leave `(x + 1)/(y)` alone.
+	fractionParensRE = regexp.MustCompile(`\((-?[A-Za-z0-9.]+)\)/\((-?[A-Za-z0-9.]+)\)`)
 	nameSpacingRE    = regexp.MustCompile(`(?m)([\w)])\s+([(^])`)
+	letterRunRE      = regexp.MustCompile(`[A-Za-z](?: [A-Za-z])+`)
+	letterRunOffset  = regexp.MustCompile(`[A-Za-z]`)
+	spaceRE          = regexp.MustCompile(` +`)
 )
 
 // normalized mirrors components/math/plainAnswer.ts `toPlainAnswer`.
+//
+// A second implementation on purpose: the value of this test is that two independent
+// implementations agree, and sharing the code would make that vacuous. So the guard
+// below is re-derived here rather than imported.
 func normalized(s string) string {
 	s = strings.ReplaceAll(s, "-:", "/")
 	s = mixedNumbersRE.ReplaceAllString(s, "${1} ${2}/${3}")
 	s = fractionParensRE.ReplaceAllString(s, "${1}/${2}")
-	return nameSpacingRE.ReplaceAllString(s, "")
+	s = nameSpacingRE.ReplaceAllString(s, "")
+	return collapseLetterRuns(s)
+}
+
+// collapseLetterRuns rejoins a word MathLive split into single-letter factors.
+//
+// `yes` serialises as `y e s` and `addition` as `a d d i t i o n`, which never match
+// the expected answer under the multiple-choice grader's exact comparison -- and those
+// are the two most common expected answers in the corpus. The guard is what stops it
+// eating real products: `2pi r` must survive, because collapsing it gives `2pir`.
+func collapseLetterRuns(s string) string {
+	return letterRunRE.ReplaceAllStringFunc(s, func(run string) string {
+		start := strings.Index(s, run)
+		if start < 0 {
+			return run
+		}
+		// Extend left over the whole adjacent letter sequence, so the run inside
+		// `2pi r` is understood as part of the product rather than a fresh word.
+		for start > 0 && letterRunOffset.MatchString(s[start-1:start]) {
+			start--
+		}
+		i := start - 1
+		for i >= 0 && s[i] == ' ' {
+			i--
+		}
+		if i >= 0 && !letterRunOffset.MatchString(s[i:i+1]) {
+			return run
+		}
+		return spaceRE.ReplaceAllString(run, "")
+	})
 }
 
 func loadMathliveCorpus(t *testing.T) mathliveCorpus {

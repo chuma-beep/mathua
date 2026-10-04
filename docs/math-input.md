@@ -406,6 +406,62 @@ and why `e2e/mobile-math.spec.ts` asserts the *call* Mathua makes rather than th
 resulting visibility — spying on `mathVirtualKeyboard.hide` fails on the old listener
 and passes now. The recovery behaviour itself still wants a real-device check.
 
+### Every question gets the editor
+
+The editor was once scoped to the five expression-valued `grading_type`s. That left 223
+of 657 concepts — 209 `multiple_choice`, 11 `tuple`, 1 `ordering`, 2 `comparison` —
+typing mathematics into a plain `<input>`, because the answer hosts render a text field
+even when the question also offers tappable options.
+
+Making it universal was **measured, not assumed**. The multiple-choice grader is
+`strings.EqualFold(expected, answer)`, and MathLive reads bare adjacent letters as
+implicit multiplication:
+
+| expected | MathLive emitted | grades? |
+|---|---|---|
+| `yes` | `"y e s"` | ✗ |
+| `no` | `"n o"` | ✗ |
+| `odd` | `"o d d"` | ✗ |
+| `addition` | `"a d d i t i o n"` | ✗ |
+| `pi/2` | `"p i/2"` | ✗ |
+| `1/2` | `"(1)/(2)"` | ✓ |
+
+`yes` is the single most common expected answer in the corpus (673) and `no` is second
+(171), so universal MathLive would have broken roughly 850 questions. Two rules close
+it, both covered by `internal/grader/mathlive_compat_test.go` against a *recording* of
+what the library emits:
+
+- `fixImplicitLetterSpacing` rejoins a word the keyboard split into letters. The guard is
+  the hard part: `2pi r` also contains a letter-space-letter, and collapsing it gives
+  `2pir`. So the run is extended left over its whole adjacent letter sequence and only
+  collapsed when what precedes *that* is a letter or nothing.
+- `fixFractionParens` accepts a symbolic numerator, `(pi)/(2)` → `pi/2`, while staying
+  narrow enough to leave `(x + 1)/(y)` alone.
+
+Multiple choice still renders `ChoiceOptions` above the field, so yes/no remains a tap.
+
+### The keypad answers for the corpus
+
+Two things were missing and both blocked real questions:
+
+- **No comma in any layout.** Every `tuple` and `ordering` answer is a list, so those 12
+  concepts had no way to enter their answer at all.
+- **No `< > ≤ ≥`.** `dec.basics.compare` and `frac.ops.compare` grade a comparison.
+
+And a structural one, which was the expensive part: **MathLive's toolbar navigates
+*layouts*, not *layers*.** It emits `data-layer="${layout.layers[0].id}"` for each entry
+in `kb.layouts`, so a layout with three `layers` renders only the first and the other two
+are unreachable. A keycap carrying a `layer` property only gains a `layer-switch` *class*
+and does nothing when pressed. Layers 2+ had been unreachable from the start — the old
+operators and scientific-notation layer had no way in, which is the same class of bug as
+the keycap that typed its own name (ADR-029).
+
+So each page is its own single-layer `Layout`, `layoutsForMode` returns them together, and
+`kb.layouts = [...pages, 'alphabetic']`. Every layer also needs a `label`, because the
+toolbar renders it and shows "untitled" without one. Letters come from MathLive's own
+`alphabetic` layout rather than a 26-key grid that could not hold the 44px floor at
+320px.
+
 ## 5. Mobile setup
 
 Real-device verification lives in [`mobile-device-checklist.md`](./mobile-device-checklist.md).

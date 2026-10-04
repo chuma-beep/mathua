@@ -30,11 +30,50 @@ import type { VirtualKeyboardKeycap } from 'mathlive'
 
 export type Keycap = string | Partial<VirtualKeyboardKeycap>
 
+/**
+ * One page of keycaps.
+ *
+ * A page is a MathLive *layout*, not a MathLive *layer*, and that distinction is
+ * load-bearing. MathLive's keypad toolbar builds its switcher by iterating `kb.layouts`
+ * and emitting `data-layer="${layout.layers[0].id}"` per entry — so it navigates
+ * between layouts and there is no navigation between the `layers` of a single layout.
+ * Verified rather than assumed: with a three-layer layout installed, the toolbar offered
+ * exactly one switcher entry (MathLive's `alphabetic`), and pressing a keycap that
+ * carried a `layer` property did nothing at all, because `renderKeycap` only adds a
+ * `layer-switch` class to it.
+ *
+ * So each page is exported as its own single-layer `Layout` and `layoutsForMode` returns
+ * them together. `label` is what the toolbar shows for each.
+ */
+export type MathuaLayer = { id: string; label: string; rows: Keycap[][] }
+
 export type Layout = {
   label: string
   tooltip: string
-  layers: { rows: Keycap[][] }[]
+  layers: MathuaLayer[]
 }
+
+/**
+ * Layer ids.
+ *
+ * Layers used to be unreachable: `layers: [{rows}, {rows}]` renders both, but nothing
+ * pointed at the second, so the operators and scientific-notation layer had no way in --
+ * the same class of bug as the keycap that typed its own name.
+ *
+ * The fix is not a keycap. A keycap with a `layer` property only gets a `layer-switch`
+ * *class* from `renderKeycap` and does nothing when pressed; the handler reads a
+ * `data-layer` attribute from an ancestor, and the only thing that emits one is the
+ * toolbar switcher MathLive builds itself from the layers' labels. So the layers need
+ * ids and labels, and navigation is the toolbar. Verified in the e2e suite by pressing
+ * the switcher and asserting the keypad changed.
+ */
+export const LAYER_MAIN = 'mathua-main'
+export const LAYER_SYMBOLS = 'mathua-symbols'
+export const LAYER_LETTERS = 'mathua-letters'
+
+const MAIN: MathuaLayer = { id: LAYER_MAIN, label: '123', rows: [] }
+const SYMBOLS: MathuaLayer = { id: LAYER_SYMBOLS, label: '±÷', rows: [] }
+const LAYER_LETTERS_TEMPLATE: MathuaLayer = { id: LAYER_LETTERS, label: 'abc', rows: [] }
 
 // `label`, not `latex`, and that distinction is the whole reason these two work.
 //
@@ -66,6 +105,16 @@ const HIDE: Keycap = '[hide-keyboard]'
 const FRACTION: Keycap = { label: 'a⁄b', latex: '\\frac{#@}{#0}', aside: 'fraction', variants: [{ label: 'n⁄d', latex: '\\frac{#?}{#?}' }] }
 const ROOT: Keycap = { label: '√', latex: '\\sqrt{#0}', aside: 'square root', variants: [{ label: '∛', latex: '\\sqrt[#?]{#0}' }] }
 const POWER: Keycap = { label: 'xⁿ', latex: '#@^{#?}', aside: 'exponent' }
+// The separator. 14 concepts cannot be answered without it -- every `tuple` and
+// `ordering` answer is a list -- and 209 more are typed alongside their tap targets.
+// Absent until the editor went universal, at which point it stopped being optional.
+const COMMA: Keycap = ','
+// `frac.ops.compare` and `dec.basics.compare` grade a comparison, and typing `<`
+// or `≥` on a phone keyboard means reaching for a symbol row that may not be there.
+const LESS: Keycap = { label: '<', latex: '<' }
+const GREATER: Keycap = { label: '>', latex: '>' }
+const LEQ: Keycap = { label: '≤', latex: '\\le' }
+const GEQ: Keycap = { label: '≥', latex: '\\ge' }
 const TIMES: Keycap = '\\times'
 const DIVIDE: Keycap = '\\div'
 const MINUS: Keycap = '-'
@@ -86,7 +135,10 @@ function digitColumn(rows: Keycap[][], right: Keycap[][], bottomRight: Keycap[])
   rows.push([digit(7), digit(8), digit(9), ...right[0]])
   rows.push([digit(4), digit(5), digit(6), ...right[1]])
   rows.push([digit(1), digit(2), digit(3), ...right[2]])
-  rows.push([ZERO_WIDE, DOT, OPEN, CLOSE, EQUALS, ...bottomRight])
+  // COMMA is here rather than only on a second layer: it is the separator every tuple and
+  // ordering answer needs, and a key the learner has to discover is a key they will not
+  // find mid-question.
+  rows.push([ZERO_WIDE, DOT, COMMA, OPEN, CLOSE, ...bottomRight])
 }
 
 // A mode with no letters (elementary arithmetic) still needs a second layer for
@@ -104,9 +156,20 @@ const LETTER_ROW: Keycap[] = [
   ...OPERATORS,
 ]
 
+// Every layout ends here. A comma and the comparisons are on this row because a
+// second layer the learner has to discover is a worse answer than one more key.
 const STRUCTURE_ROW: Keycap[] = [FRACTION, POWER, ROOT, LEFT, RIGHT, BACKSPACE]
 
-const LETTERS: Keycap[][] = [LETTER_ROW, STRUCTURE_ROW]
+// Six keycaps, deliberately. A learner answering "which is larger" needs one of these
+// and nothing else on the screen, and the row stays inside the ten-keycap guidance so
+// it still fits a 320px viewport at the 44px touch-target floor.
+const COMPARISON_ROW: Keycap[] = [LESS, GREATER, LEQ, GEQ, COMMA, HIDE]
+
+const LETTER_LAYERS: MathuaLayer[] = [
+  { ...MAIN, rows: [LETTER_ROW] },
+  { ...SYMBOLS, rows: [STRUCTURE_ROW] },
+  { ...LAYER_LETTERS_TEMPLATE, rows: [COMPARISON_ROW] },
+]
 
 // Elementary arithmetic gets its own grid rather than the shared `digitColumn`.
 //
@@ -118,18 +181,16 @@ const ARITHMETIC: Layout = {
   label: 'Arithmetic',
   tooltip: 'Numbers, the four operations, fractions and powers',
   layers: [
-    {
-      rows: [
+    { ...MAIN, rows: [
         [digit(7), digit(8), digit(9), DIVIDE, ROOT],
         [digit(4), digit(5), digit(6), TIMES, POWER],
         [digit(1), digit(2), digit(3), MINUS, PLUS],
         [ZERO_WIDE, DOT, OPEN, CLOSE, EQUALS],
-        [FRACTION, LEFT, RIGHT, { ...BACKSPACE, width: 2 }],
+        [FRACTION, COMMA, LEFT, RIGHT, { ...BACKSPACE, width: 2 }],
       ],
     },
-    {
-      rows: [[...OPERATORS, SEPARATOR, FRACTION, POWER, ROOT, SCI, HIDE]],
-    },
+    { ...SYMBOLS, rows: [[...OPERATORS, COMMA, FRACTION, POWER, ROOT]] },
+    { ...LAYER_LETTERS_TEMPLATE, rows: [COMPARISON_ROW] },
   ],
 }
 
@@ -138,6 +199,7 @@ const FRACTIONS: Layout = {
   tooltip: 'Numerator and denominator, mixed numbers',
   layers: [
     {
+      ...MAIN,
       rows: (() => {
         const rows: Keycap[][] = []
         digitColumn(
@@ -148,7 +210,8 @@ const FRACTIONS: Layout = {
         return rows
       })(),
     },
-    { rows: [[...OPERATORS, SEPARATOR, ROOT, POWER, HIDE]] },
+    { ...SYMBOLS, rows: [[...OPERATORS, COMMA, ROOT, POWER]] },
+    { ...LAYER_LETTERS_TEMPLATE, rows: [COMPARISON_ROW] },
   ],
 }
 
@@ -157,6 +220,7 @@ const ALGEBRA: Layout = {
   tooltip: 'Letters, numbers, the four operations, structures',
   layers: [
     {
+      ...MAIN,
       rows: (() => {
         const rows: Keycap[][] = []
         digitColumn(
@@ -167,7 +231,7 @@ const ALGEBRA: Layout = {
         return rows
       })(),
     },
-    { rows: LETTERS },
+    ...LETTER_LAYERS,
   ],
 }
 
@@ -176,6 +240,7 @@ const GEOMETRY: Layout = {
   tooltip: 'Measures, angles, roots and powers',
   layers: [
     {
+      ...MAIN,
       rows: (() => {
         const rows: Keycap[][] = []
         digitColumn(
@@ -186,7 +251,8 @@ const GEOMETRY: Layout = {
         return rows
       })(),
     },
-    { rows: [[...OPERATORS, '\\pi', SEPARATOR, FRACTION, POWER, ROOT, HIDE]] },
+    { ...SYMBOLS, rows: [[...OPERATORS, '\\pi', COMMA, FRACTION, POWER]] },
+    { ...LAYER_LETTERS_TEMPLATE, rows: [COMPARISON_ROW] },
   ],
 }
 
@@ -195,6 +261,7 @@ const CALCULUS: Layout = {
   tooltip: 'Limits, derivatives, integrals, the four operations',
   layers: [
     {
+      ...MAIN,
       rows: (() => {
         const rows: Keycap[][] = []
         digitColumn(
@@ -205,8 +272,7 @@ const CALCULUS: Layout = {
         return rows
       })(),
     },
-    {
-      rows: [
+    { ...MAIN, rows: [
         [
           { latex: '\\lim', variants: ['\\lim_{#@\\to #?}', '\\lim_{#@\\to \\infty}'], aside: 'limit' },
           { latex: '\\frac{d#@}{d#?}', aside: 'derivative' },
@@ -232,4 +298,19 @@ const LAYOUTS: Record<MathKeyboardMode, Layout> = {
 
 export function layoutForMode(mode: MathKeyboardMode): Layout {
   return LAYOUTS[mode] ?? LAYOUTS.algebra
+}
+
+/**
+ * Every page of a mode, in toolbar order.
+ *
+ * Handed to MathLive as `kb.layouts`, so the toolbar renders one switcher entry per page
+ * and the learner can actually reach the symbols and comparisons. Returns a copy rather
+ * than the originals because MathLive freezes the array it is given.
+ */
+export function layoutsForMode(mode: MathKeyboardMode): Layout[] {
+  return layoutForMode(mode).layers.map(layer => ({
+    label: layer.label,
+    tooltip: layoutForMode(mode).tooltip,
+    layers: [{ ...layer }],
+  }))
 }

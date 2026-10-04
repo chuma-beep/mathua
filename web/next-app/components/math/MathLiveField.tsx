@@ -21,7 +21,7 @@ import 'mathlive'
 // and the instance accessors deliberately throw ("Use MathfieldElement.soundsDirectory
 // instead"), so there is no way to reach them from an element.
 import { MathfieldElement } from 'mathlive'
-import { layoutForMode } from './layouts'
+import { layoutsForMode } from './layouts'
 import type { MathKeyboardMode } from './keyboards'
 import { toPlainAnswer } from './plainAnswer'
 import type { MathInputValue } from './types'
@@ -164,7 +164,19 @@ export default function MathLiveField({
     // The layout is a page-wide singleton, so every field installs its own on focus
     // or they overwrite each other in the Learn feed.
     if (installedMode.current !== mode) {
-      kb.layouts = [layoutForMode(mode)]
+      // One MathLive *layout* per Mathua page, plus MathLive's own `alphabetic`, which
+      // gives every letter
+      // without a 26-key grid Mathua would have to design for a 320px screen and fail
+      // the 44px touch-target floor on. With more than one entry in `kb.layouts`,
+      // MathLive renders its own layout switcher in the keypad toolbar -- verified, not
+      // assumed: the toolbar read "Arithmeticabc" before this was wired up, because a
+      // probe set `layouts` by hand and MathLive offered the switcher unprompted.
+      //
+      // This is what makes a yes/no question typeable. Multiple choice still renders
+      // `ChoiceOptions` above the field, so `yes` is a tap; the alphabet is there for the
+      // learner who would rather type, and `addition`, `odd` and `Z` have no other route
+      // in.
+      kb.layouts = [...layoutsForMode(mode), 'alphabetic']
       installedMode.current = mode
     }
     // Show it only where there is no physical keyboard to type on. Opening a
