@@ -174,7 +174,6 @@ export default function MathLiveField({
       onSubmitRef.current?.()
     }
     el.addEventListener('keydown', onKeyDown)
-    el.addEventListener('keydown', onKeyDown)
     return () => el.removeEventListener('keydown', onKeyDown)
   }, [])
 
@@ -184,6 +183,13 @@ export default function MathLiveField({
   // focuses a contenteditable sink inside its own shadow root, and a tap on a touch
   // profile does not reliably surface as a focus event on the host. `pointerdown`
   // always does.
+  //
+  // This is also the recovery path. MathLive raises the keyboard from exactly one
+  // place — a document `focusin` listener — so if anything hides the panel while the
+  // field still holds focus, tapping the field again is the only thing that can bring
+  // it back, and that is this handler. MathLive's own `focusout` handler hides the
+  // panel when focus genuinely leaves, which is the behaviour we want; nothing else
+  // needs to.
   useEffect(() => {
     const el = ref.current
     if (!el) return
@@ -192,31 +198,17 @@ export default function MathLiveField({
     return () => el.removeEventListener('pointerdown', onPointerDown)
   }, [])
 
-  // Dismiss the keypad on a touch outside it.
-  //
-  // Known limitation, measured rather than assumed: in MathLive 0.111.0 under
-  // Chromium, `mathVirtualKeyboard.hide()` had no effect — calling it directly from
-  // the page left both `visible === true` and the panel in the DOM, under `auto` and
-  // under `manual` alike. So this listener expresses the intent and does not yet
-  // achieve it, and the mobile suite does not assert dismissal. Tracked as the first
-  // thing to revisit if the keypad is found covering an exercise.
-  useEffect(() => {
-    if (typeof document === 'undefined') return
-    const onPointerDown = (e: PointerEvent) => {
-      const target = e.target as Element | null
-      if (!target) return
-      if (target.closest?.('math-field')) return
-      // The keypad's own classes are all MLK__-prefixed; there is no single
-      // wrapper class to test for, and hiding it mid-tap cancels the keypress.
-      if (target.closest?.('[class*="MLK__"]')) return
-      window.mathVirtualKeyboard?.hide()
-    }
-    document.addEventListener('pointerdown', onPointerDown, true)
-    return () => document.removeEventListener('pointerdown', onPointerDown, true)
-  }, [])
-
   // A Learn card can unmount while focused (a 3-miss halt, a concept swap).
   // Leaving the singleton keyboard up would cover the next exercise.
+  //
+  // This is the only place Mathua hides the keypad. There used to be a
+  // capture-phase `pointerdown` listener on `document` that hid it on any tap
+  // outside the field, and it had to go: hiding without requiring focus to leave
+  // left the field focused with no keyboard and no way back, because MathLive only
+  // shows on a *focus transition*. Tapping a non-focusable area — the question
+  // text, the page background — did exactly that, and the learner had to tap the
+  // field several times before it came back. MathLive's own `focusout` handler
+  // covers the case that should actually dismiss.
   useEffect(() => {
     const el = ref.current
     return () => {

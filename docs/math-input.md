@@ -297,17 +297,36 @@ keypad whose delete key typed its own name. `e2e/helpers/answer.ts` now exposes
 asserts that it reached the delete and caret keys, so "no undersized keycaps" cannot
 quietly go back to meaning "no keycaps measured".
 
-### Known limitation, not yet fixed
+### Dismissal, and why Mathua no longer tries
 
-`mathVirtualKeyboard.hide()` does not work in MathLive 0.111.0 under Chromium.
-Called directly from the page it left `visible === true` and the panel in the DOM,
-under both the `auto` and `manual` policies, and neither an outside tap nor a blur
-freed it. `MathLiveField` calls `hide()` on a pointerdown outside the field, but the
-mobile suite does **not** assert dismissal, because the behaviour is unproven. Until
-it is, the working exits on a phone are submitting (which blurs the field) or the
-keypad's own hide keycap.
+Mathua used to hide the virtual keypad from a capture-phase `pointerdown` listener on
+`document`: any tap outside the field, and the keypad went away. It had to go.
 
----
+MathLive raises the keyboard from exactly one place — a document `focusin` listener
+that calls `show()` after 300ms, gated on `policy === 'auto' && hasEditableContent`.
+There is no re-show path. So hiding the panel while the field *still holds focus*
+strands it: no focus transition means no `focusin`, so tapping the field again does
+nothing, and the learner has to keep tapping. On iOS Safari a tap on non-focusable
+content frequently does not blur the input, so this reproduced reliably on a phone
+while being invisible in Chromium.
+
+MathLive already hides the keypad itself, from a `focusout` listener, when focus
+genuinely leaves the field. That is the behaviour worth having, so the outside-tap
+listener was redundant *and* harmful. Mathua now hides the keypad in exactly one
+place: when a focused field unmounts, since the Learn feed swaps cards under you.
+
+`MathLiveField`'s `pointerdown` handler is the recovery path — it calls `show()`, and
+because `show()` only dispatches a message, calling it when the panel is already
+visible is harmless.
+
+### Not yet fixed
+
+`mathVirtualKeyboard.hide()` had no measurable effect under Chromium when called
+directly from the page: `visible` stayed `true` and the panel stayed in the DOM, under
+both `auto` and `manual`. That is why the strand could not be reproduced in Playwright
+and why `e2e/mobile-math.spec.ts` asserts the *call* Mathua makes rather than the
+resulting visibility — spying on `mathVirtualKeyboard.hide` fails on the old listener
+and passes now. The recovery behaviour itself still wants a real-device check.
 
 ## 5. API surprises
 

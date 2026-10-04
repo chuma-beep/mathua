@@ -263,6 +263,54 @@ test.describe('the whole loop on a phone', () => {
   // touch, but the behaviour is unproven, so it is not claimed. Until it is fixed,
   // the usable exits on a phone are submitting (which blurs the field) or the
   // element's own hide-keyboard keycap.
+  test('an outside tap does not hide the keypad while the field keeps focus', async ({ page }) => {
+    // The regression, asserted at the mechanism rather than the symptom.
+    //
+    // Mathua used to hide the keypad from a capture-phase `pointerdown` listener on
+    // `document`, on any tap outside the field. MathLive raises the keyboard from
+    // exactly one place -- a `focusin` listener -- so hiding it while focus stayed in
+    // the field left no way back: no focus transition meant no re-show. Tapping a
+    // non-focusable area did precisely that, and the learner had to keep tapping.
+    //
+    // Playwright cannot reproduce the strand itself, because `hide()` is a no-op under
+    // Chromium (documented in docs/math-input.md). So this asserts the *call* never
+    // happens, which is the part that is ours and which does fail on the old code.
+    await openLearn(page)
+    await setAnswer(page, '')
+    await answerField(page).tap()
+    await expect(keyboardRows(page)).toBeVisible({ timeout: 10_000 })
+    expect(await keyboardVisible(page)).toBe(true)
+
+    await page.evaluate(() => {
+      const w = window as unknown as { mathVirtualKeyboard?: { hide: () => void }; __hideCalls?: number }
+      const kb = w.mathVirtualKeyboard
+      if (!kb) throw new Error('no virtual keyboard')
+      w.__hideCalls = 0
+      const original = kb.hide.bind(kb)
+      kb.hide = () => {
+        w.__hideCalls = (w.__hideCalls ?? 0) + 1
+        original()
+      }
+    })
+
+    // A heading: not focusable, so tapping it cannot move focus out of the field.
+    const heading = page.locator('h1, h2, h3').first()
+    await expect(heading).toBeVisible()
+    await heading.tap()
+
+    expect(await page.evaluate(() => (window as unknown as { __hideCalls?: number }).__hideCalls ?? 0)).toBe(0)
+
+    // Whether focus survives an outside tap is platform behaviour, not ours:
+    // Chromium blurs to the body, iOS Safari frequently does not. So this test does
+    // not assert it. What matters, and is platform-neutral, is that another tap on
+    // the field brings the keypad back — that is the recovery path, and it is what the
+    // learner experiences as "I have to tap it several times".
+    await page.waitForTimeout(400) // MathLive's own focusout -> hide timer is 300ms
+    await answerField(page).tap()
+    await expect(keyboardRows(page)).toBeVisible({ timeout: 10_000 })
+    expect(await keyboardVisible(page)).toBe(true)
+  })
+
   test('the answer survives the keypad opening and closing repeatedly', async ({ page }) => {
     await openLearn(page)
     await answerField(page).tap()
