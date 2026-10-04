@@ -25,9 +25,9 @@ import { loadGraphPayload, loadPositionEntries } from '../lib/graphPositions'
 import type { GraphPayload } from '../lib/graphPayload'
 import { domainColor, domainLabel, DOMAIN_ORDER } from '../lib/graphDomains'
 import { useIsMobile } from '../hooks/useIsMobile'
-import { type MasteryStatus } from '../lib/graphStatus'
+import type { MasteryState } from '../lib/graphStatus'
 
-export type { MasteryStatus }
+export type { MasteryState }
 
 export interface ConceptDef {
   id: string
@@ -38,7 +38,7 @@ export interface ConceptDef {
 
 interface MathConceptGraph3DProps {
   theme?: 'dark' | 'light'
-  conceptStatuses?: Record<string, MasteryStatus>
+  conceptStatuses?: Record<string, MasteryState>
   onPathNodes?: string[]
   onNodeSelect?: (nodeId: string) => void
 }
@@ -63,21 +63,30 @@ const EDGE_ALPHA_LIGHT: Record<LodTier, number> = { far: 0.1, mid: 0.2, close: 0
 const FOCUS_EDGE_ALPHA = 0.6
 const UNFOCUSED_EDGE_FACTOR = 0.12
 
+// `Record<MasteryState, string>` rather than `Record<string, string>` on purpose. With
+// the looser type a state added to `MasteryState` compiles here and then falls through
+// `?? domainColor` at the call site, so a decayed concept silently renders in its domain
+// colour — no error, no warning, and the decay signal gone. Typing the maps against the
+// union makes the compiler name it.
+//
+// `locked` is absent because it is not a learner state and cannot reach this component:
+// "prerequisite unmet" is a position in the DAG, and the only caller passes no statuses
+// at all (app/home/sections.tsx renders the hero with just `theme`).
 const STATUS_COLORS_DARK = {
   mastered:   '#4db8a0',
+  decaying:   '#c07d1f',
   practicing: '#60a5fa',
   learning:   '#e8a849',
   unseen:     '#5a6577',
-  locked:     '#2a2d35',
-} satisfies Record<string, string>
+} satisfies Record<MasteryState, string>
 
 const STATUS_COLORS_LIGHT = {
   mastered:   '#3a9a8a',
+  decaying:   '#9a5f10',
   practicing: '#3b82f6',
   learning:   '#c08a30',
   unseen:     '#9ca3af',
-  locked:     '#d0d0d0',
-} satisfies Record<string, string>
+} satisfies Record<MasteryState, string>
 
 const monoFont = "var(--font-jetbrains-mono), 'JetBrains Mono', monospace"
 const serifFont = "var(--font-space-grotesk), 'Space Grotesk', serif"
@@ -87,7 +96,7 @@ interface RenderNode {
   name: string
   domain: string
   position: Vec3
-  status: MasteryStatus | null
+  status: MasteryState | null
   onPath: boolean
   importance: number
 }
@@ -113,7 +122,7 @@ function nodeDisplayColor(node: RenderNode, theme: 'dark' | 'light'): string {
 
   if (showStatus) {
     if (node.onPath) return theme === 'dark' ? '#ffdd88' : '#b08020'
-    if (node.status === 'locked' || node.status === 'unseen') return theme === 'dark' ? '#2a2d35' : '#d0d0d0'
+    if (node.status === 'unseen') return theme === 'dark' ? '#2a2d35' : '#d0d0d0'
     const statusMap = theme === 'dark' ? STATUS_COLORS_DARK : STATUS_COLORS_LIGHT
     return statusMap[node.status] ?? domainColor(node.domain, theme)
   }
@@ -153,7 +162,7 @@ function useCoarsePointer(): boolean {
 function buildGraph(
   payload: GraphPayload,
   entries: Array<[string, Vec3]>,
-  statuses: Record<string, MasteryStatus> | undefined,
+  statuses: Record<string, MasteryState> | undefined,
   onPathNodes: string[] | undefined
 ): BuiltGraph {
   const positionMap = new Map<string, Vec3>(entries)

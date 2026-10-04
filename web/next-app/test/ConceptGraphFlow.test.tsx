@@ -123,6 +123,45 @@ describe('ConceptGraphFlow', () => {
     expect(node!.querySelector('.node-progress-tip')!.textContent).toBe('Not started')
   })
 
+  it('gives a decaying concept the same full bar as a mastered one, and says why', () => {
+    // The brief: bar length is attainment, colour is state. A decayed concept keeps the
+    // exact geometry of a mastered one — full bar, same track — so "full bar" keeps
+    // meaning "I learned this", and decay is carried entirely by the node colour and the
+    // hover text. No second bar, no pattern, no icon, no badge, no shorter fill.
+    const barWidth = (el: Element | null) =>
+      (el as HTMLElement | null)?.style.width ?? ''
+
+    const { container: freshC } = render(
+      <ConceptGraphFlow concepts={concepts} conceptStatuses={{ add: 'mastered' }} conceptProgress={{ add: 1 }} />,
+    )
+    const { container: staleC } = render(
+      <ConceptGraphFlow concepts={concepts} conceptStatuses={{ add: 'decaying' }} conceptProgress={{ add: 1 }} />,
+    )
+
+    // `data-progress` is on the 4px track; the fill is its child and carries the width.
+    const fillOf = (c: HTMLElement) =>
+      c.querySelector('.concept-node[aria-label*="Addition"] [data-progress] > div') as HTMLElement
+
+    expect(barWidth(fillOf(freshC))).toBe('100%')
+    expect(barWidth(fillOf(staleC))).toBe('100%')
+
+    // Identical geometry: same track, same fill height, not a shortened or second bar.
+    const trackOf = (c: HTMLElement) =>
+      c.querySelector('.concept-node[aria-label*="Addition"] [data-progress]') as HTMLElement
+    expect(trackOf(freshC).getAttribute('style')).toBe(trackOf(staleC).getAttribute('style'))
+
+    // Same words about attainment, different words about what is outstanding.
+    const tipOf = (c: HTMLElement) =>
+      c.querySelector('.concept-node[aria-label*="Addition"] .node-progress-tip')!.textContent
+    expect(tipOf(freshC)).toBe('100% toward mastery')
+    expect(tipOf(staleC)).toBe('Due for review')
+
+    // And the accessible label distinguishes them, so the state is not colour-only for
+    // anyone who cannot see the hue.
+    expect(staleC.querySelector('.concept-node[aria-label*="Addition"]')!.getAttribute('aria-label'))
+      .toContain('Due for review')
+  })
+
   it('derives locked statuses that flow into node colors', () => {
     const statuses = deriveStatuses(concepts)
     expect(statuses['count']).toBe('unseen')

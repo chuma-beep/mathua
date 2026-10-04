@@ -163,7 +163,12 @@ function GraphContent() {
     const out: Record<string, number> = {}
     for (const [id, p] of Object.entries(rawProgress)) {
       const status = conceptStatuses[id]
-      if (status === 'mastered') {
+      // `decaying` is full for the same reason `mastered` is: the learner demonstrated
+      // the competence and what is outstanding is a retrieval check, not attainment.
+      // Decay is signalled by the node's colour alone — no second bar, no pattern, no
+      // shorter fill — so that "full bar" keeps meaning "I learned this" and a learner
+      // watching their progress fall would never mistake decay for losing it.
+      if (status === 'mastered' || status === 'decaying') {
         out[id] = 1
         continue
       }

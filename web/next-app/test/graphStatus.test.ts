@@ -58,3 +58,53 @@ describe('deriveStatuses', () => {
     expect(s['add']).toBe('locked')
   })
 })
+
+// Decay is computed at read time by the server, so a concept mastered a fortnight ago
+// arrives as DECAYING rather than MASTERED. This file used to not know that state at
+// all, which is the defect these tests pin.
+describe('decaying', () => {
+  const withPrereq = () => [
+    { id: 'add', prerequisites: [] as string[] },
+    { id: 'mul', prerequisites: ['add'] },
+    { id: 'div', prerequisites: ['mul'] },
+  ]
+
+  it('is its own state, not unseen', () => {
+    const s = deriveStatuses(withPrereq(), { add: { status: 'DECAYING' } })
+    expect(s['add']).toBe('decaying')
+  })
+
+  it('does not relock anything downstream', () => {
+    // The failure this replaces: DECAYING was missing from the recognised statuses, so
+    // the concept was neither `started` nor `mastered`. It rendered as `unseen` — with
+    // no progress bar, as if never attempted — and its absence from the `mastered` set
+    // locked its successor. `mul` and `div` are visible again on the graph and in the
+    // scheduler at the same time, and disagreeing here is what made that happen.
+    const s = deriveStatuses(withPrereq(), {
+      add: { status: 'DECAYING' },
+      mul: { status: 'MASTERED' },
+      div: { status: 'MASTERED' },
+    })
+    expect(s['mul']).toBe('mastered')
+    expect(s['div']).toBe('mastered')
+  })
+
+  it('still unlocks an unstarted successor', () => {
+    const s = deriveStatuses(withPrereq(), { add: { status: 'DECAYING' } })
+    expect(s['mul']).toBe('unseen')
+  })
+
+  it('keeps a successor reachable that a merely-practising prerequisite would lock', () => {
+    // `div` depends on `mul`, so `mul` is the prerequisite under test.
+    const decayed = deriveStatuses(withPrereq(), {
+      add: { status: 'MASTERED' },
+      mul: { status: 'DECAYING' },
+    })
+    const practising = deriveStatuses(withPrereq(), {
+      add: { status: 'MASTERED' },
+      mul: { status: 'PRACTICING' },
+    })
+    expect(decayed['div']).toBe('unseen')
+    expect(practising['div']).toBe('locked')
+  })
+})
