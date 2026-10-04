@@ -437,7 +437,7 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
           }
           if (e.kind === 'halt') {
             return (
-              <div key={e.key} className="border border-red-500/40 bg-mathua-surface p-5">
+              <div key={e.key} className="border border-mathua-red-faint bg-mathua-surface p-5">
                 <p className="font-mono text-xs text-red-400">Stepping down a level — easier question below.</p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {prereqs.slice(0, 2).map(p => (
@@ -457,7 +457,7 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
             const canContinue = !nextLoading && nextShelf && headId !== null && headId !== conceptId
             const upcoming: LockedSuccessor[] = upcomingLocked(catalogEntries(), shelfProgress, conceptId)
             return (
-              <div key={e.key} className="border border-green-500/40 bg-mathua-surface p-6">
+              <div key={e.key} className="border border-mathua-green-faint bg-mathua-surface p-6">
                 <p className="font-mono text-xs text-green-400">✓ Complete — {totalCorrect}/{totalAnswered} correct · +{totalXP} XP · {est.band}</p>
                 <p className="mt-2 font-mono text-[11px] text-mathua-secondary">Scroll up to review anything. Reviews are scheduled automatically.</p>
                 <div className="mt-4 flex flex-wrap gap-2">
@@ -516,7 +516,7 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
           const qe = e as QEntry
           const locked = qe.feedback !== null
           return (
-            <div key={qe.key} className={`border bg-mathua-surface p-6 ${qe.feedback?.correct ? 'border-green-500/30' : qe.feedback ? 'border-red-500/30' : 'border-mathua-border'}`}>
+            <div key={qe.key} className={`border bg-mathua-surface p-6 ${qe.feedback?.correct ? 'border-mathua-green-faint' : qe.feedback ? 'border-mathua-red-faint' : 'border-mathua-border'}`}>
               <KatexContent className="text-sm text-mathua-primary font-mono whitespace-pre-wrap">{qe.q.question}</KatexContent>
               <ChoiceOptions question={qe.q.question} value={qe.answer} onPick={v => setEntry(qe.key, { answer: v })} disabled={locked || qe.checking} />
               {!locked && (
