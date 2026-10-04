@@ -32,7 +32,8 @@ type EstimateOpts struct {
 }
 
 const (
-	defaultDecayDays = 30
+	// Was 30, which is not the cadence the scheduler uses.
+	defaultDecayDays = mastery.DecayDays
 	minAccuracy      = 0.2
 	maxAccuracy      = 0.95
 	quizGateXP       = 50

@@ -2,9 +2,14 @@ package planning
 
 import (
 	"testing"
+	"time"
 
 	"github.com/chuma-beep/mathua/internal/concepts"
+	"github.com/chuma-beep/mathua/internal/mastery"
+	"github.com/chuma-beep/mathua/internal/storage"
 )
+
+func ptrTime(t time.Time) *time.Time { return &t }
 
 func testDAG(t *testing.T) *concepts.DAG {
 	t.Helper()
@@ -190,5 +195,48 @@ func TestDestinationUnion(t *testing.T) {
 	}
 	if _, err := p.PathForDestination("nope"); err == nil {
 		t.Errorf("expected error for unknown destination")
+	}
+}
+
+// The estimator and the scheduler must agree on when a mastered concept needs a
+// review pass.
+//
+// They did not. `defaultDecayDays` here was 30 while `scheduler.effectiveState`
+// and the engine used 14, so a plan priced reviews on a cadence the app would not
+// honour — and reviews are priced on the same path the deadline is computed from
+// (ADR-019). The constant is now shared; this pins the agreement at the boundary
+// so a future divergence is a failing test rather than a silently optimistic date.
+func TestEstimate_AgreesWithSchedulerOnDecay(t *testing.T) {
+	p := estimatePlanner(t)
+	path, err := p.PrerequisitesOf([]string{"a"})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	for _, tc := range []struct {
+		name      string
+		daysSince float64
+		wantDue   bool
+	}{
+		{"fresh just inside the window", mastery.DecayDays - 1, false},
+		{"due exactly at the window", mastery.DecayDays, true},
+		{"due past the window", mastery.DecayDays + 10, true},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			reviewed := time.Now().UTC().Add(-time.Duration(tc.daysSince*24) * time.Hour)
+			// NextReviewDue is deliberately in the future so the SM-2 schedule is not
+			// what makes it due — this is purely the decay window under test.
+			progress := map[string]*storage.ConceptProgress{
+				"a": {Status: "MASTERED", LastReviewed: &reviewed, NextReviewDue: ptrTime(time.Now().UTC().AddDate(0, 0, 90))},
+			}
+			est := EstimateWorkload(path, progress, map[string]AttemptStats{}, EstimateOpts{})
+			if got := est.ReviewsDue; (got > 0) != tc.wantDue {
+				t.Errorf("ReviewsDue = %d with %.0f days since review, want due=%v", got, tc.daysSince, tc.wantDue)
+			}
+			// The same fact read through the shared constant the scheduler uses.
+			if got := mastery.EffectiveStatus(mastery.StatusMastered, tc.daysSince, mastery.DecayDays); (got == "DECAYING") != tc.wantDue {
+				t.Errorf("EffectiveStatus(%.0f days) = %q, want decaying=%v", tc.daysSince, got, tc.wantDue)
+			}
+		})
 	}
 }

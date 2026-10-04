@@ -1698,11 +1698,6 @@ func computeXP(correct bool, elapsed, timeThreshold float64, streak int, isRevie
 	return computeXPForTask(correct, elapsed, timeThreshold, streak, taskType)
 }
 
-// decayDays matches the scheduler's threshold (scheduler.effectiveState), so
-// a concept reads the same way to the learner and to the thing that decides
-// what to serve them next.
-const decayDays = 14
-
 // GetProgress returns the learner's progress with decay applied at read time.
 //
 // The database stores MASTERED forever — decay is deliberately not persisted
@@ -1731,7 +1726,7 @@ func (e *Engine) GetProgress(studentID string) (map[string]*storage.ConceptProgr
 		if p.LastReviewed != nil {
 			days = now.Sub(*p.LastReviewed).Hours() / 24
 		}
-		p.Status = string(mastery.EffectiveStatus(mastery.StatusMastered, days, decayDays))
+		p.Status = string(mastery.EffectiveStatus(mastery.StatusMastered, days, mastery.DecayDays))
 	}
 	return progress, nil
 }
