@@ -351,7 +351,11 @@ func (s *Server) handleProgress(w http.ResponseWriter, r *http.Request) {
 	// Authed: always serve the caller's own progress — the path ID is
 	// ignored so one student can never pull another's via enumeration
 	// (e.g. IDs harvested from the public leaderboard).
-	progress, err := s.eng.GetProgress(studentID)
+	// mastery_pct is derived server-side, beside the state machine that enforces the
+	// threshold. The client used to recompute it from `streak` and a bundled copy of the
+	// corpus, which is a second source of truth that drifts from the server's whenever
+	// the corpus is rebuilt.
+	progress, err := s.eng.ProgressWithMasteryPct(studentID)
 	if err != nil {
 		writeError(w, "failed to get progress", 500)
 		return

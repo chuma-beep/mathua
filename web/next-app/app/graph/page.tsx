@@ -85,7 +85,7 @@ function GraphContent() {
   const searchParams = useSearchParams()
   const conceptParam = searchParams.get('concept')
   const [graphData, setGraphData] = useState<GraphRes | null>(null)
-  const [rawProgress, setRawProgress] = useState<Record<string, { status?: string; streak?: number }>>({})
+  const [rawProgress, setRawProgress] = useState<Record<string, { status?: string; streak?: number; mastery_pct?: number }>>({})
   const [weakByDomain, setWeakByDomain] = useState<Record<string, { id: string; label: string }[]> | undefined>(undefined)
   const [connected, setConnected] = useState(false)
   const [scores, setScores] = useState<Scores | null>(null)
@@ -142,28 +142,26 @@ function GraphContent() {
     [statusSource, rawProgress]
   )
 
-  // Progress toward mastery per concept, mirroring the engine's rule:
-  // streak / mastery_threshold.streak, capped at 1. Mastered is full;
-  // locked/unseen get no bar.
+  // Bar length per concept, straight from the server's `mastery_pct`.
+  //
+  // This used to be recomputed here as `streak / mastery_threshold.streak` against the
+  // *bundled* corpus. Both halves of that were wrong: the streak resets to 1 on every
+  // tier advance, so the bar dropped from 100% to ~10% three times while the learner was
+  // doing everything right, and a bundled threshold is a second source of truth that
+  // drifts from the server's whenever the corpus is rebuilt. The server now derives it
+  // from the tier and the streak together — see `mastery.MasteryPct`.
+  //
+  // `decaying` still reads as a full bar, for the same reason `mastered` does: the
+  // competence was demonstrated and what is outstanding is a retrieval check, not
+  // attainment. Decay is carried by the node's colour alone, so "full bar" keeps meaning
+  // "I learned this" and a learner never sees decay as losing it.
   const conceptProgress = useMemo(() => {
-    const thresholds = new Map<string, number>()
-    for (const c of conceptsData) {
-      thresholds.set(c.id, c.mastery_threshold?.streak ?? 10)
-    }
     const out: Record<string, number> = {}
     for (const [id, p] of Object.entries(rawProgress)) {
       const status = conceptStatuses[id]
-      // `decaying` is full for the same reason `mastered` is: the learner demonstrated
-      // the competence and what is outstanding is a retrieval check, not attainment.
-      // Decay is signalled by the node's colour alone — no second bar, no pattern, no
-      // shorter fill — so that "full bar" keeps meaning "I learned this" and a learner
-      // watching their progress fall would never mistake decay for losing it.
-      if (status === 'mastered' || status === 'decaying') {
-        out[id] = 1
-        continue
-      }
       if (status === 'unseen' || status === 'locked') continue
-      out[id] = Math.min(1, (p.streak ?? 0) / (thresholds.get(id) ?? 10))
+      if (typeof p.mastery_pct !== 'number') continue
+      out[id] = Math.min(1, Math.max(0, p.mastery_pct))
     }
     return out
   }, [rawProgress, conceptStatuses])

@@ -72,6 +72,16 @@ export const ConceptProgressSchema = z.object({
   avg_response_time: z.number().optional(),
   attempts: z.number().optional(),
   completed: z.boolean().optional(),
+  /**
+   * Attainment, 0..1, derived server-side from the status tier and progress within it.
+   *
+   * The graph used to recompute this as `streak / mastery_threshold.streak`, from a
+   * *bundled* copy of the corpus. That was wrong twice over: the streak resets on every
+   * tier advance, so the bar fell from 100% to ~10% three times on the way up, and a
+   * bundled threshold silently disagrees with the server's whenever the corpus is
+   * rebuilt. Optional so a payload predating the field still parses.
+   */
+  mastery_pct: z.number().optional(),
 })
 
 const ProgressMapSchema = z.record(z.string(), ConceptProgressSchema)
