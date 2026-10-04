@@ -45,17 +45,30 @@ export function answerField(): HTMLElement {
 /**
  * The answer control, once it exists.
  *
- * The math editor is loaded lazily, so on the first render after a question is
- * served the field is not in the DOM yet — it is behind a Suspense boundary while
- * the MathLive chunk resolves. A synchronous query right after the question
- * appears therefore finds nothing, and would be flaky rather than deterministic if
- * the chunk happened to be cached.
+ * The math editor is loaded lazily, so on the first render after a question is served
+ * it is behind a Suspense boundary while the MathLive chunk resolves. That boundary
+ * now renders a *working plain input* rather than an inert div (see
+ * `PlainAnswerInput`), so "an answer field exists" is no longer the same claim as "the
+ * editor has loaded" — the loading state is an input too.
+ *
+ * `kind: 'math'` therefore waits for the editor specifically. Without it a test that
+ * meant to exercise MathLive would silently assert against the loading input, which is
+ * how `diagnosticNext` caught this change.
  */
-export async function findAnswerField(): Promise<HTMLElement> {
+export async function findAnswerField(kind: 'any' | 'math' = 'any'): Promise<HTMLElement> {
   await waitFor(() => {
-    if (answerFields().length === 0) throw new Error('no answer field rendered yet')
+    const all = answerFields()
+    if (all.length === 0) throw new Error('no answer field rendered yet')
+    if (kind === 'math' && !all.some(el => el.tagName.toLowerCase() === 'math-field')) {
+      throw new Error('math editor not mounted yet (still showing the loading input)')
+    }
   })
   return answerField()
+}
+
+/** The math editor specifically, once its chunk has resolved. */
+export async function findMathField(): Promise<HTMLElement> {
+  return findAnswerField('math')
 }
 
 export function isMathField(el: Field): boolean {

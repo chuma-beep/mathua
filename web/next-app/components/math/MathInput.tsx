@@ -94,6 +94,79 @@ class MathLiveBoundary extends Component<
 }
 
 /**
+ * The plain answer input, used in two places.
+ *
+ * Once when the MathLive chunk fails and Mathua has no choice, and once while that
+ * chunk is still *loading*. The second case used to render
+ * `<div className="h-12" aria-hidden />` — a div of exactly the right size in exactly
+ * the right place, which is the worst kind of loading state, because it looks like an
+ * answer field and silently swallows the tap.
+ *
+ * Measured (`e2e/answer-diagnosis.spec.ts`): between the answer UI appearing and the
+ * editor being usable there is a window of 322ms with the chunk cached and 3116ms
+ * with a 3s chunk delay — which on a real phone connection is longer still. During
+ * that window a tap on the answer area landed on that div, the keystrokes went
+ * nowhere, and Check Answer was correctly but unhelpfully disabled because no answer
+ * existed. Value propagation was never at fault: once the editor was up, input
+ * reached React state in 2-7ms and the first tap submitted in 12-14ms.
+ *
+ * So this is not a cosmetic placeholder. It is the editor that always works, shown
+ * while the better one loads — and whatever is typed here carries across, because the
+ * typed text is reported as the LaTeX too and `MathLiveField` pushes it in on mount.
+ */
+function PlainAnswerInput({
+  value,
+  onChange,
+  onSubmit,
+  disabled,
+  placeholder,
+  ariaLabel,
+  id,
+  className,
+  inputRef,
+  loading,
+}: {
+  value: string
+  onChange: (plainAnswer: string) => void
+  onSubmit?: () => void
+  disabled: boolean
+  placeholder?: string
+  ariaLabel: string
+  id?: string
+  className: string
+  inputRef?: MutableRefObject<HTMLInputElement | null>
+  /**
+   * Marks the loading instance. The attribute is not decoration: the editor and the
+   * loading input share a placeholder, so without it a query for "the answer field"
+   * can return the transient control and a tap on it goes nowhere — which is the
+   * exact failure this component was changed to fix, reappearing in the tests.
+   */
+  loading?: boolean
+}) {
+  return (
+    <Input
+      ref={inputRef}
+      id={id}
+      value={value}
+      data-mathua-loading={loading ? 'true' : undefined}
+      aria-busy={loading ? true : undefined}
+      onChange={e => onChange(e.target.value)}
+      onKeyDown={e => {
+        if (e.key === 'Enter') {
+          e.preventDefault()
+          onSubmit?.()
+        }
+      }}
+      placeholder={placeholder}
+      enterKeyHint="go"
+      disabled={disabled}
+      aria-label={ariaLabel}
+      className={className}
+    />
+  )
+}
+
+/**
  * Reports the moment the boundary trips, so `focus()` can point at the plain input
  * instead of at an element that never mounted.
  */
@@ -130,6 +203,10 @@ export default function MathInput({
   // from `value` because a host's value is the *plain* answer it will submit, and it
   // only catches up after a render — the hint must not wait for the round trip.
   const [typedLatex, setTypedLatex] = useState('')
+  // What has been typed into the plain input while MathLive loads. Local, because the
+  // host's `value` is LaTeX and this control is showing plain text; the two only meet
+  // when `MathLiveField` mounts and pushes `value` in.
+  const [loadingText, setLoadingText] = useState('')
 
   const isDisabled = disabled === true || status === 'disabled'
   const shell = statusClasses(status, isDisabled)
@@ -137,8 +214,11 @@ export default function MathInput({
   if (focusRef) {
     focusRef.current = {
       focus: () => {
-        if (fallbackActive) {
-          fallbackRef.current?.focus()
+        // Whichever plain input is mounted wins: the Suspense one while the chunk
+        // loads, the boundary one if it failed. Testing the ref rather than
+        // `fallbackActive` is what makes the loading case focusable at all.
+        if (fallbackRef.current) {
+          fallbackRef.current.focus()
           return
         }
         // Queue the request rather than dropping it: on the first question the host
@@ -151,20 +231,15 @@ export default function MathInput({
   }
 
   const fallback = (
-    <Input
-      ref={fallbackRef}
+    <PlainAnswerInput
+      inputRef={fallbackRef}
       id={id}
       value={value ?? ''}
-      onChange={e => onChange?.({ latex: '', plainAnswer: e.target.value })}
-      onKeyDown={e => {
-        if (e.key === 'Enter') {
-          e.preventDefault()
-          onSubmit?.()
-        }
-      }}
-      placeholder={placeholder}
+      onChange={plain => onChange?.({ latex: plain, plainAnswer: plain })}
+      onSubmit={() => onSubmit?.()}
       disabled={isDisabled}
-      aria-label={ariaLabel}
+      placeholder={placeholder}
+      ariaLabel={ariaLabel}
       className={`${shell} ${className ?? ''}`}
     />
   )
@@ -172,7 +247,30 @@ export default function MathInput({
   return (
     <MathLiveBoundary fallback={fallback} onFallback={() => setFallbackActive(true)}>
       <div className={`mathua-math-input ${shell} ${className ?? ''}`}>
-        <Suspense fallback={<div className="h-12" aria-hidden />}>
+        {/* The loading state is a working plain input, not a spacer. See
+            PlainAnswerInput: a div of the right size in the right place looked like an
+            answer field and swallowed every tap and keystroke for the length of the
+            chunk load. Typed text is reported as the LaTeX too, so `MathLiveField`
+            picks it up when it mounts. */}
+        <Suspense
+          fallback={
+            <PlainAnswerInput
+              inputRef={fallbackRef}
+              id={id}
+              value={loadingText}
+              onChange={plain => {
+                setLoadingText(plain)
+                onChange?.({ latex: plain, plainAnswer: plain })
+              }}
+              onSubmit={() => onSubmit?.()}
+              disabled={isDisabled}
+              placeholder={placeholder}
+              ariaLabel={ariaLabel}
+              className={`${shell} ${className ?? ''}`}
+              loading
+            />
+          }
+        >
           <MathLiveField
             value={value ?? ''}
             mode={mode}

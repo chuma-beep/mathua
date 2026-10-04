@@ -12,7 +12,7 @@ import {
   skipQuizQuestion,
 } from '../lib/api'
 import { formatForGradingType } from '../lib/answerFormat'
-import { answerValue, findAnswerField, isMathField, typeAnswer } from './helpers/answerInput'
+import { answerValue, findAnswerField, findMathField, isMathField, typeAnswer } from './helpers/answerInput'
 
 describe('formatForGradingType', () => {
   it('maps known types to hint + keyboard, unknowns to generic text', () => {
@@ -324,9 +324,11 @@ describe('DiagnosticHost manual advance', () => {
     expect(screen.getByText('Answer with a number, fraction, or mixed number (e.g. 4 1/10)')).toBeInTheDocument()
     // `numeric` selects the math editor, which brings its own virtual keyboard
     // rather than the OS numeric pad — so the control itself is the assertion.
-    expect(isMathField(await findAnswerField())).toBe(true)
+    // `findMathField`, not `findAnswerField`: the loading state is a working plain
+    // input, so the generic helper would hand back that and pass a test meant for MathLive.
+    expect(isMathField(await findMathField())).toBe(true)
 
-    typeAnswer(await findAnswerField(), '5')
+    typeAnswer(await findMathField(), '5')
     fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
 
     // Feedback shows, staged Q2 stays hidden — no auto-advance.
@@ -358,7 +360,7 @@ describe('DiagnosticHost manual advance', () => {
     )
     await screen.findByText('Q1 text')
 
-    typeAnswer(await findAnswerField(), '5')
+    typeAnswer(await findMathField(), '5')
     fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
 
     // No alert: persistent inline error with the server's own words.
@@ -392,7 +394,7 @@ describe('DiagnosticHost manual advance', () => {
     )
     await screen.findByText('Q1 text')
 
-    typeAnswer(await findAnswerField(), '5')
+    typeAnswer(await findMathField(), '5')
     fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
 
     // 404: session gone — Retry/Skip pointless, only Restart.
@@ -420,7 +422,7 @@ describe('DiagnosticHost manual advance', () => {
     )
     await screen.findByText('Q1 text')
 
-    typeAnswer(await findAnswerField(), '5')
+    typeAnswer(await findMathField(), '5')
     fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
     await screen.findByRole('alert')
 

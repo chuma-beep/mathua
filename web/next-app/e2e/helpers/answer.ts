@@ -9,10 +9,21 @@
 
 import { expect, type Locator, type Page } from '@playwright/test'
 
-const ANSWER = 'math-field[placeholder*="Your answer"], input[placeholder*="Your answer"]'
+// The editor, or the plain input for a text-mode question — but never the *loading*
+// plain input. `PlainAnswerInput` serves both the loading and the fallback state and
+// carries the same placeholder as the editor, so an unqualified query can return a
+// transient control that disappears a moment later, and a tap aimed at the editor
+// silently lands on nothing. It is marked `data-mathua-loading` for exactly this.
+const ANSWER =
+  'math-field[placeholder*="Your answer"], input[placeholder*="Your answer"]:not([data-mathua-loading])'
 
 export function answerField(page: Page): Locator {
   return page.locator(ANSWER).first()
+}
+
+/** The loading control itself: the plain input standing in for the editor. */
+export function loadingAnswerField(page: Page): Locator {
+  return page.locator('.mathua-math-input input[data-mathua-loading="true"]').first()
 }
 
 export async function answerLatex(page: Page): Promise<string> {
