@@ -128,9 +128,24 @@ if (typeof window !== 'undefined' && !(window as { mathVirtualKeyboard?: unknown
       this.visible = false
     },
     addEventListener() {},
+    // Present on the real object, and required: the geometry listener's cleanup calls it,
+    // and a stub without it fails on unmount rather than on the assertion under test.
+    removeEventListener() {},
     boundingRect: { height: 0, width: 0, top: 0, left: 0, right: 0, bottom: 0, x: 0, y: 0 },
   }
 }
+
+/**
+ * The real module exports the class as a value, not only as a type, because
+ * `soundsDirectory` and `keypressVibration` are *statics* and the instance accessors
+ * deliberately throw. `MathLiveField` imports it as a value to set them, so the stub has
+ * to carry it or every component test dies with
+ * "Cannot set properties of undefined (setting 'soundsDirectory')".
+ */
+export const MathfieldElement = Object.assign(StubMathField, {
+  soundsDirectory: './sounds' as string | null,
+  keypressVibration: true,
+})
 
 export const version = { mathlive: '0.111.0-stub' }
 export default {}

@@ -406,9 +406,111 @@ and why `e2e/mobile-math.spec.ts` asserts the *call* Mathua makes rather than th
 resulting visibility — spying on `mathVirtualKeyboard.hide` fails on the old listener
 and passes now. The recovery behaviour itself still wants a real-device check.
 
-## 5. API surprises
+## 5. Mobile setup
+
+What is actually configured, all verified against the pinned MathLive 0.111.0 rather
+than remembered from an earlier version.
+
+**Virtual keyboard policy.** Not set. 0.111.0's default is `'auto'`, confirmed in the
+bundle's own defaults object, and `auto` is the behaviour Mathua wants: raise the keypad
+on touch, leave it alone where there is a physical keyboard. The attribute exists as both
+`mathVirtualKeyboardPolicy` and `math-virtual-keyboard-policy`. It is left at the default
+rather than set redundantly, because setting it would assert something already true and
+would need re-asserting if the default ever changed.
+
+**Keyboard layouts.** Five, chosen from the concept's domain by `keyboards.ts`:
+`arithmetic`, `fractions`, `algebra`, `geometry`, `calculus`. Installed on focus
+(`kb.layouts = [layoutForMode(mode)]`), because the keyboard is a page-wide singleton and
+every field would otherwise overwrite the last.
+
+**Keyboard container.** MathLive's own. It positions the panel against the field, so it
+does not cover the editor. What it cannot do is shrink the *page*, so
+`geometrychange` is republished as one CSS custom property:
+
+| what | where |
+|---|---|
+| keypad height | `--mathua-keyboard-height` on `:root` |
+| keypad state | `data-mathua-keyboard="open"｜"closed"` on `:root` |
+
+Stylesheets adapt to that instead of a hardcoded pixel height, which would be wrong on
+every device. Safe-area is handled where it already was — `ChromeToggle`,
+`ConceptGraphFlow`, `/history` — and deliberately *not* added to the answer area, because
+MathLive's panel already sits above the home indicator and double-padding it would push
+the field away from the keypad.
+
+**Fonts.** `MathfieldElement._fontsDirectory` defaults to `'./fonts/'`, and Mathua copies
+MathLive's webfonts there at build time (`scripts/copy-mathlive-fonts.mjs`). 300 kB of
+woff2. The property is left at its default because the default is already correct.
+
+**Sounds.** Disabled, and this was a real bug:
+
+```
+MathfieldElement.soundsDirectory = null   // static; the instance accessor throws
+MathfieldElement.keypressVibration = false
+```
+
+0.111.0 defaults `_soundsDirectory` to `'./sounds'` and `keypressSound` to
+`keypress-standard.wav`, loaded with a `fetch()` **on every keystroke**. Mathua ships
+`public/fonts` and never shipped `public/sounds`, so each key requested a file that does
+not exist. Measured: two taps produced two requests for
+`/…/chunks/sounds/keypress-standard.wav`. `soundsDirectory = null` is the documented way
+to load no sounds; `test/mobile-math.spec.ts` asserts none are requested.
+
+**Compute Engine.** Dynamically imported by `SelfCheck`, never in initial JS. 787 kB
+gzip, fetched once, on first use, and skipped entirely when
+`navigator.connection.saveData` is set or the effective type is `2g`/`slow-3g`.
+
+**Client-only loading.** `MathLiveField.tsx` is the only file that imports `mathlive`,
+and it sits behind `React.lazy` inside a boundary. The boundary catches a chunk that
+fails to *load*, which no ref check can: a chunk that never mounts has no ref to check.
+
+### First Load JS, before and after
+
+Measured from the built `out/`, gzip, summing the `<script src>` tags each prerendered
+route actually ships.
+
+| Route | Before | After | Δ |
+|---|---|---|---|
+| `/learn` | 436 kB | 437 kB | +1 |
+| `/review` | 433 kB | 434 kB | +1 |
+| `/goals` | 440 kB | 441 kB | +1 |
+| `/onboard` | 438 kB | 438 kB | 0 |
+| `/study` | 462 kB | 462 kB | 0 |
+| `/profile` | 248 kB | 248 kB | 0 |
+| `/history` | 411 kB | 411 kB | 0 |
+| `/graph` | 252 kB | 252 kB | 0 |
+| `/settings` | 247 kB | 246 kB | −1 |
+| `/` | 236 kB | 236 kB | 0 |
+| **total** | **3603 kB** | **3605 kB** | **+2** |
+
+Lazily fetched, never in the above:
+
+| chunk | gzip | what |
+|---|---|---|
+| `c48e1edc…` | 787 kB | Compute Engine — first simplification only |
+| `428ea25f…` | 215 kB | MathLive — on any expression-valued question |
+
+The MathLive chunk is 794 kB decoded, which is why the loading window is ~310ms even
+with the bytes already cached: it is parse and evaluate, not download.
+
+## 6. API surprises
 
 Everything here cost time to find and is worth writing down.
+
+**`geometrychange` carries no `detail`.** The 0.111.0 docs say
+`evt.detail.boundingRect`. The library dispatches `new Event('geometrychange')` — a
+plain `Event`, no detail at all — from a `ResizeObserver` and from `stateChanged()`. A
+handler written to the documented shape reads `undefined`, computes a height of zero, and
+reports the keypad as closed for the rest of the session: the exact failure the listener
+exists to prevent. Read `kb.boundingRect` instead.
+
+**`soundsDirectory` is static, and the instance accessor throws.** Setting
+`field.soundsDirectory` throws `Error("Use MathfieldElement.soundsDirectory instead")`,
+so it has to be the class. The default is `'./sounds'`, and sounds are fetched per
+keystroke.
+
+**The keycap `latex` is an insert, not a command.** See "The keycap `latex`/`label` trap"
+above — backspace and the zero key typed their own source text in all five layouts.
 
 **`getValue('plain-text')` returns `""` in jsdom**, always — so the component suite
 stubs the library out (`test/stubs/mathlive.ts`, aliased in `vitest.config.mts`) and
@@ -461,7 +563,7 @@ asynchronous parser drops characters — a harness artefact, not a product bug.
 
 ---
 
-## 6. Where the keyboard choice lives
+## 7. Where the keyboard choice lives
 
 `keyboards.ts` maps `grading_type` + `domain` → `MathKeyboardMode`; `layouts.ts` holds
 the five keycap grids as plain data. No React component branches on a domain.
@@ -481,7 +583,7 @@ identical in a screenshot and behave nothing like a fraction. `test/keyboards.te
 asserts this for every mode, and `e2e/math-input.spec.ts` asserts it against the real
 library.
 
-## 7. The LaTeX corpus check
+## 8. The LaTeX corpus check
 
 `web/next-app/scripts/normalize-latex.mjs` runs every math span in the lesson corpus
 through Compute Engine and reports the malformed ones (`make latex-normalize`).

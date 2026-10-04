@@ -267,6 +267,44 @@ test.describe('the whole loop on a phone', () => {
     await expect(page.getByText('+1 XP').first()).toBeVisible({ timeout: 20_000 })
   })
 
+  test('no sound asset is ever requested', async ({ page }) => {
+    // MathLive 0.111.0 defaults `MathfieldElement._soundsDirectory` to './sounds' and
+    // `keypressSound` to 'keypress-standard.wav', loaded with a fetch on every
+    // keystroke. Mathua ships `public/fonts` but never shipped `public/sounds`, so
+    // every key was requesting a file that does not exist. The fix sets the static to
+    // `null`, which is the documented way to load no sounds at all -- verified against
+    // the 0.111.0 types, because the *instance* accessor throws rather than working.
+    const sounds: string[] = []
+    page.on('request', req => {
+      if (/\/sounds\/|\.wav($|\?)/i.test(req.url())) sounds.push(req.url())
+    })
+    await openLearn(page)
+    await answerField(page).tap()
+    await expect(keyboardRows(page)).toBeVisible({ timeout: 10_000 })
+    await keycaps(page).filter({ hasText: /^7/ }).first().tap()
+    await keycaps(page).filter({ hasText: /^5/ }).first().tap()
+    await page.waitForTimeout(600)
+    expect(sounds, `MathLive asked for sound assets: ${sounds.join(', ')}`).toEqual([])
+  })
+
+  test('the keypad height is published so page layout can clear it', async ({ page }) => {
+    await openLearn(page)
+    await answerField(page).tap()
+    await expect(keyboardRows(page)).toBeVisible({ timeout: 10_000 })
+    // `geometrychange` carries the new bounding rectangle; Mathua turns it into one CSS
+    // custom property and a state attribute, so stylesheets can adapt without a
+    // hardcoded pixel height that is wrong on every device.
+    await expect
+      .poll(() => page.evaluate(() => document.documentElement.dataset.mathuaKeyboard ?? null), {
+        timeout: 10_000,
+      })
+      .toBe('open')
+    const height = await page.evaluate(() =>
+      document.documentElement.style.getPropertyValue('--mathua-keyboard-height'),
+    )
+    expect(Number.parseInt(height, 10)).toBeGreaterThan(0)
+  })
+
   // Deliberately no assertion that the keypad can be dismissed.
   //
   // `mathVirtualKeyboard.hide()` does not work in MathLive 0.111.0 under Chromium —
