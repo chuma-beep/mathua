@@ -58,6 +58,39 @@ describe('ConceptGraphFlow', () => {
     expect(screen.getByText('No concepts to display')).toBeInTheDocument()
   })
 
+  it('draws no bordered box rounded, because the house style is square', () => {
+    // app/docs/contributing states the aesthetic outright: "no rounded corners". This
+    // component was the only place in the app that broke it — the node card, the search
+    // box, the results dropdown, the legend toggle, two filter chips and two inner
+    // panels — while a button a few lines away used `rounded-none` and the page
+    // contradicted itself.
+    //
+    // The rule is deliberately the user's own: a *bordered* box may not be rounded. That
+    // exempts the things that are round because they are shapes, not corners — status
+    // dots, avatars, progress bars, switch knobs — without listing them and going stale.
+    //
+    // Both mechanisms have to be checked. jsdom resolves an inline `borderRadius` but has
+    // no stylesheet, so a Tailwind `rounded-[4px]` is invisible to `getComputedStyle`
+    // and a computed-style-only assertion passes vacuously over six of the eight boxes
+    // this replaced. Hence the class check as well.
+    const { container } = render(<ConceptGraphFlow concepts={concepts} />)
+
+    const offenders = Array.from(container.querySelectorAll<HTMLElement>('*'))
+      .map(el => {
+        const cls = el.getAttribute('class') ?? ''
+        const inline = el.getAttribute('style') ?? ''
+        const hasBorder = /\bborder/.test(cls) || /\bborder(?:Top|Right|Bottom|Left)?\s*:/.test(inline)
+        const roundedClass = /(?:^|\s)rounded-(?!none\b)[\w[\]-]*/.test(cls)
+        const roundedInline = parseFloat(getComputedStyle(el).borderRadius) > 0
+        return hasBorder && (roundedClass || roundedInline)
+          ? `${el.tagName.toLowerCase()}.${cls || '(inline)'}`
+          : null
+      })
+      .filter((v): v is string => v !== null)
+
+    expect(offenders, `rounded bordered boxes: ${JSON.stringify(offenders)}`).toEqual([])
+  })
+
   it('search finds a concept and selecting it calls onSelectionChange', async () => {
     const onSelectionChange = vi.fn()
     render(<ConceptGraphFlow concepts={concepts} onSelectionChange={onSelectionChange} />)
