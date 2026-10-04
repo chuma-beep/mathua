@@ -74,6 +74,20 @@ export default function PositionBlock({ catalogue, progress, frontierLabel, fron
           </p>
         )}
 
+        {counts.dueForReview > 0 && (
+          // Named rather than folded into "Mastered", because it is a different fact with
+          // a different consequence. These concepts are counted as mastered — the bar
+          // above is honest about that — and this line is the review debt, so the number
+          // the learner acts on is visible instead of having been subtracted from a
+          // headline they would then compare against the graph's full bars.
+          <p className="mt-2 font-mono text-[11px] text-mathua-secondary">
+            {counts.dueForReview} due for review — still learned, worth a retrieval check.{' '}
+            <Link href="/review" className="text-mathua-blue hover:underline">
+              Review →
+            </Link>
+          </p>
+        )}
+
         {frontierLabel && (
           <div className="mt-4 border-t border-mathua-border pt-3 flex flex-wrap items-center justify-between gap-2">
             <span className="min-w-0">
