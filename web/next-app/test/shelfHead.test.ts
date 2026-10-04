@@ -90,3 +90,50 @@ describe('selectShelfHead', () => {
     expect(skipped.next.href).not.toContain('concept=b')
   })
 })
+
+// A learner who has finished a concept and come back after a break must not find it
+// waiting for them as teaching. The shelf is what `/learn` and the Profile "Next task"
+// both read, so this is the single place the rule has to hold.
+describe('mastery exits the active teaching queue', () => {
+  const catalog = [
+    { id: 'a', label: 'A', prerequisites: [] as string[], avgTimeSeconds: 10 },
+    { id: 'b', label: 'B', prerequisites: ['a'] as string[], avgTimeSeconds: 10 },
+  ]
+  const input = {
+    dueReviews: 0,
+    weaknesses: { by_domain: {} },
+    activity: [],
+    diagnosticCompleted: true,
+    conceptsMastered: 1,
+    catalog,
+  }
+  const all = (h: { next: { href: string }; alternatives: { href: string }[] }) => [h.next, ...h.alternatives]
+
+  it('offers a fresh MASTERED concept for nothing', () => {
+    const head = selectShelfHead({ ...input, progress: { a: { status: 'MASTERED', streak: 3 } } })
+    expect(JSON.stringify(all(head))).not.toContain('concept=a')
+  })
+
+  it('offers a DECAYING concept for nothing, and points at review instead', () => {
+    // The whole point: decay changes what is *maintenance*, not what is *teaching*.
+    const withReview = {
+      ...input,
+      dueReviews: 2,
+      progress: { a: { status: 'DECAYING', streak: 3 } },
+    }
+    const head = selectShelfHead(withReview)
+
+    // Nothing routes the learner back into the lesson for `a`.
+    expect(JSON.stringify(all(head))).not.toContain('concept=a')
+    // And the maintenance route is offered, because "get out of the way" must not mean
+    // "silently drop it": the retrieval check is still owed.
+    const review = all(head).find(i => i.href === '/review')
+    expect(review).toBeDefined()
+  })
+
+  it('keeps a concept that is still being learned', () => {
+    const prog = { a: { status: 'DECAYING', streak: 3 }, b: { status: 'PRACTICING', streak: 1 } }
+    const head = selectShelfHead({ ...input, progress: prog })
+    expect(head.next.href).toContain('concept=b')
+  })
+})

@@ -159,7 +159,7 @@ describe('LessonDetail dedupe and single Start', () => {
     expect(screen.queryByText(/· also/)).toBeNull()
   })
 
-  it('shows one primary Start for the first unmastered concept', () => {
+  it('shows one primary Start for the first concept still being learned', () => {
     render(
       <LessonDetail
         lesson={{ ...lesson, progress: { a: { status: 'MASTERED', streak: 3 } } }}
@@ -169,14 +169,55 @@ describe('LessonDetail dedupe and single Start', () => {
     )
     const links = screen.getAllByRole('link') as HTMLAnchorElement[]
     const starts = links.filter((l) => (l.getAttribute('href') ?? '').startsWith('/learn?concept='))
-    // Primary heads b (a is mastered); a remains only under the disclosure.
-    // Every Start link carries ?return= so the learner can come back to the
-    // concept they were reading.
+    // Primary heads b, since a is already learned.
     expect(starts.filter((l) => l.getAttribute('href') === '/learn?concept=b&return=b')).toHaveLength(1)
-    expect(screen.getByText('Or pick something else (1)')).toBeTruthy()
-    expect(starts.filter((l) => l.getAttribute('href') === '/learn?concept=a&return=a')).toHaveLength(1)
     // Exactly one primary row; the rest live in the disclosure.
     expect(document.querySelectorAll('a.justify-between')).toHaveLength(1)
+
+    // `a` is no longer offered as a Start target. It used to be — "a remains only under
+    // the disclosure" — and every one of those links is a route into /learn, which opens
+    // with the lesson's worked example unconditionally. Offering a concept the learner has
+    // already demonstrated as something to start learning is the tutorial purgatory; the
+    // reference itself is still one click away via the concept chips.
+    expect(starts.filter((l) => l.getAttribute('href') === '/learn?concept=a&return=a')).toHaveLength(0)
+    // And with nothing learnable left besides the head, the disclosure is gone rather than
+    // present and empty — a count in "Or pick something else (N)" that does not match the
+    // N links under it is its own kind of lie.
+    expect(screen.queryByText(/Or pick something else/)).toBeNull()
+  })
+
+  it('does not offer Start learning at all when every concept is already learned', () => {
+    render(
+      <LessonDetail
+        lesson={{ ...lesson, progress: { a: { status: 'MASTERED', streak: 3 }, b: { status: 'MASTERED', streak: 3 } } }}
+        domain={null}
+        onBack={() => {}}
+      />,
+    )
+    const links = screen.getAllByRole('link') as HTMLAnchorElement[]
+    const starts = links.filter((l) => (l.getAttribute('href') ?? '').startsWith('/learn?concept='))
+
+    // The head used to fall back to `learnTargets[0]` here — so a fully-mastered lesson
+    // presented a concept the learner had already demonstrated as its primary call to
+    // action, labelled "Start learning".
+    expect(starts).toHaveLength(0)
+    expect(screen.getByText(/Every concept here is learned/)).toBeTruthy()
+  })
+
+  it('treats a decayed concept as learned, not as a Start target', () => {
+    // The server reports stale mastery as DECAYING rather than MASTERED, so a strict
+    // `status === 'MASTERED'` test reads a fortnight's break as "not started" and offers
+    // the tutorial again. Decay is a retrieval question, not a teaching one.
+    render(
+      <LessonDetail
+        lesson={{ ...lesson, progress: { a: { status: 'DECAYING', streak: 3 }, b: { status: 'DECAYING', streak: 3 } } }}
+        domain={null}
+        onBack={() => {}}
+      />,
+    )
+    const links = screen.getAllByRole('link') as HTMLAnchorElement[]
+    expect(links.filter((l) => (l.getAttribute('href') ?? '').startsWith('/learn?concept='))).toHaveLength(0)
+    expect(screen.getByText(/Every concept here is learned/)).toBeTruthy()
   })
 
   it('heads the first concept when nothing is mastered', () => {
