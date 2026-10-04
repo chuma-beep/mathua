@@ -22,10 +22,10 @@ import {
 import '@xyflow/react/dist/base.css'
 import Fuse from 'fuse.js'
 import dagre from 'dagre'
-import type { MasteryStatus } from '../lib/graphStatus'
+import type { GraphStatus } from '../lib/graphStatus'
 import { precomputedLayout, type FlowPoint } from '../lib/flowLayout'
 
-export type { MasteryStatus }
+export type { GraphStatus }
 
 export interface GraphConcept {
   id: string
@@ -36,7 +36,7 @@ export interface GraphConcept {
 
 interface ConceptGraphFlowProps {
   concepts: GraphConcept[]
-  conceptStatuses?: Record<string, MasteryStatus>
+  conceptStatuses?: Record<string, GraphStatus>
   conceptProgress?: Record<string, number>
   theme?: 'dark' | 'light'
   onPathNodes?: string[]
@@ -47,16 +47,23 @@ interface ConceptGraphFlowProps {
   focusDomain?: string | null
 }
 
-const STATUS_COLORS: Record<MasteryStatus, string> = {
+const STATUS_COLORS: Record<GraphStatus, string> = {
   mastered: '#10b981',
+  // Darker amber than `learning`'s, and deliberately so. Both states are "attention"
+  // and the brief is that decay is signalled by colour alone — no second bar, no
+  // pattern, no badge, no shorter fill — so if the two ambers matched, `learning` and
+  // `decaying` would be the same picture. A full bar in a deeper amber reads as
+  // "learned, come back to this", which is what it is.
+  decaying: '#b45309',
   practicing: '#60a5fa',
   learning: '#f59e0b',
   unseen: '#71717a',
   locked: '#52525b',
 }
 
-const STATUS_LABELS: Record<MasteryStatus, string> = {
+const STATUS_LABELS: Record<GraphStatus, string> = {
   mastered: 'Mastered',
+  decaying: 'Due for review',
   practicing: 'Practicing',
   learning: 'Learning',
   unseen: 'Unseen',
@@ -75,7 +82,7 @@ function domainColor(domain: string): string {
 type ConceptNodeData = {
   label: string
   domain: string
-  status: MasteryStatus
+  status: GraphStatus
   progress?: number
   onPath: boolean
   dimmed: boolean
@@ -185,7 +192,11 @@ const ConceptNode = memo(function ConceptNode({ id, data }: NodeProps<ConceptFlo
           padding: '3px 8px',
         }}
       >
-        {progressPct !== null ? `${progressPct}% toward mastery` : 'Not started'}
+        {data.status === 'decaying'
+          ? 'Due for review'
+          : progressPct !== null
+            ? `${progressPct}% toward mastery`
+            : 'Not started'}
       </div>
     </div>
   )
@@ -451,7 +462,7 @@ function ListView({
   onClose,
 }: {
   concepts: GraphConcept[]
-  conceptStatuses?: Record<string, MasteryStatus>
+  conceptStatuses?: Record<string, GraphStatus>
   selectedId: string | null
   onSelect: (id: string) => void
   onClose: () => void

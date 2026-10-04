@@ -54,8 +54,8 @@ describe('countByDomain', () => {
     // counted as learning or locked. With b mastered and c practicing, a has
     // no prerequisites and c's are met, so nothing in x is locked.
     const got = countByDomain(catalogue, { b: p('MASTERED'), c: p('PRACTICING') })
-    expect(got.get('x')).toEqual({ total: 3, mastered: 1, learning: 1, completed: 0, locked: 0 })
-    expect(got.get('y')).toEqual({ total: 1, mastered: 0, learning: 0, completed: 0, locked: 0 })
+    expect(got.get('x')).toEqual({ total: 3, mastered: 1, dueForReview: 0, learning: 1, completed: 0, locked: 0 })
+    expect(got.get('y')).toEqual({ total: 1, mastered: 0, dueForReview: 0, learning: 0, completed: 0, locked: 0 })
   })
 
   it('locks a concept whose prerequisite is unmet', () => {
@@ -125,8 +125,31 @@ describe('decay', () => {
     expect(stale.get('x')?.locked).toBe(fresh.get('x')?.locked)
   })
 
-  it('does lower the mastered count, which is the point of reporting it', () => {
-    expect(countOverall(catalogue, { a: p('MASTERED') }).mastered).toBe(1)
-    expect(countOverall(catalogue, { a: p('DECAYING') }).mastered).toBe(0)
+  it('keeps the mastered count and reports the review debt separately', () => {
+    // This used to assert the opposite: that DECAYING *lowered* `mastered`, "which is
+    // the point of reporting it" — a deliberate choice not to over-claim.
+    //
+    // It over-claimed in the other direction instead. The graph gives a decayed concept
+    // a full mastery bar, so a learner with 10 decayed and 32 fresh read "32 concepts
+    // mastered" on the profile next to 42 full bars on the graph, with nothing to
+    // explain the gap. Two numbers for one fact is the problem this file exists to
+    // prevent.
+    //
+    // So `mastered` now means "competence demonstrated and not yet stale" — which is
+    // what the word means — and decay is reported in its own right rather than by
+    // silently shrinking it. The over-claiming the original was avoiding is prevented
+    // by *showing* the review debt, not by making the headline number disagree with the
+    // map.
+    const fresh = countOverall(catalogue, { a: p('MASTERED') })
+    const stale = countOverall(catalogue, { a: p('DECAYING') })
+
+    expect(fresh.mastered).toBe(1)
+    expect(fresh.dueForReview).toBe(0)
+    expect(stale.mastered).toBe(1)
+    expect(stale.dueForReview).toBe(1)
+
+    // And the two still disagree where they should: `isMastered` is the strict
+    // question, and it is false for a stale concept.
+    expect(isMastered(p('DECAYING'))).toBe(false)
   })
 })
