@@ -30,6 +30,25 @@ describe('buildCandidates', () => {
     expect(ids).not.toContain('e') // locked
   })
 
+  it('does not offer a decayed concept for teaching', () => {
+    // The acceptance criterion, at the level of the queue that feeds /learn.
+    //
+    // A decayed concept used to appear here as a `resume` item, because the only status
+    // filter asked `status === 'MASTERED'` and the server reports stale mastery as
+    // DECAYING. /learn then opened with the concept's worked example, unconditionally —
+    // it has no notion of the lesson having been seen before — so a fortnight's break
+    // meant re-reading the tutorial for something already demonstrated. That is the
+    // purgatory, and this is where it entered.
+    const cands = buildCandidates({ ...base, progress: { b: { status: 'DECAYING', streak: 3 } } })
+    expect(cands.map(c => c.id)).not.toContain('b')
+
+    // And a decayed prerequisite still unlocks its dependents, matching
+    // scheduler.prereqsMet, so removing it from the queue cannot strand the frontier.
+    const unlocked = buildCandidates({ ...base, progress: { a: { status: 'DECAYING', streak: 3 } } })
+    expect(unlocked.map(c => c.id)).toContain('b')
+    expect(unlocked.map(c => c.id)).toContain('c')
+  })
+
   it('classifies weakness vs resume vs new', () => {
     const cands = buildCandidates({
       ...base,

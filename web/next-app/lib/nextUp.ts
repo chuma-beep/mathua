@@ -1,5 +1,5 @@
 import type { ConceptProgress, DailyActivity, WeaknessRes } from './api'
-import { isMastered, prereqMet } from './progress'
+import { countsAsMastered, prereqMet } from './progress'
 
 export type NextUpKind = 'review' | 'weakness' | 'resume' | 'diagnostic' | 'browse'
 
@@ -42,7 +42,7 @@ function topWeakness(input: NextUpInput): { id: string; label: string } | null {
   for (const items of Object.values(entries)) {
     for (const it of items) {
       if (excluded.has(it.id)) continue
-      if (isMastered(input.progress[it.id])) continue
+      if (countsAsMastered(input.progress[it.id])) continue
       if (!best || it.weakness > best.weakness) best = it
     }
   }
@@ -58,7 +58,7 @@ function mostRecentInProgress(input: NextUpInput): string | null {
       if (excluded.has(cid)) continue
       const p = input.progress[cid]
       // In progress = has a progress record but not yet mastered
-      if (p && !isMastered(p)) return cid
+      if (p && !countsAsMastered(p)) return cid
     }
   }
   return null
@@ -219,7 +219,14 @@ export function buildCandidates(input: ShelfInput): ShelfCandidate[] {
   const excluded = new Set(input.excludeConceptIds ?? [])
   for (const c of input.catalog) {
     if (excluded.has(c.id)) continue
-    if (isMastered(input.progress[c.id])) continue
+    // countsAsMastered, not isMastered: this is the active *teaching* queue, and a
+    // concept whose review has gone stale is not something to teach again. The server
+    // reports a decayed concept as DECAYING rather than MASTERED, so asking the strict
+    // question here made a fortnight's break read as "not started": the concept came
+    // back as a `resume` item and /learn opened with its worked example, which is the
+    // tutorial purgatory. Retrieval practice for it belongs on /review, which is
+    // problems-first and fetches no lesson.
+    if (countsAsMastered(input.progress[c.id])) continue
     if (!(c.prerequisites ?? []).every(pid => prereqMet(input.progress, pid))) continue
     const w = weakById.get(c.id)
     const inProgress = input.progress[c.id] !== undefined || recent.has(c.id)
@@ -256,7 +263,7 @@ export function upcomingLocked(
   const out: LockedSuccessor[] = []
   for (const c of catalog) {
     if (!(c.prerequisites ?? []).includes(conceptId)) continue
-    if (isMastered(progress[c.id])) continue
+    if (countsAsMastered(progress[c.id])) continue
     const missing = (c.prerequisites ?? []).filter(pid => !prereqMet(progress, pid))
     if (missing.length === 0) continue // eligible — already a `new` candidate
     out.push({ id: c.id, label: c.label, missing: missing.map(pid => labels.get(pid) ?? pid) })
@@ -312,7 +319,7 @@ export function recentlyUnlocked(input: {
   for (const cid of recent) {
     for (const c of input.catalog) {
       if (!(c.prerequisites ?? []).includes(cid)) continue
-      if (seen.has(c.id) || isMastered(input.progress[c.id])) continue
+      if (seen.has(c.id) || countsAsMastered(input.progress[c.id])) continue
       if (!(c.prerequisites ?? []).every(pid => prereqMet(input.progress, pid))) continue
       seen.add(c.id)
       out.push({ id: c.id, label: c.label, via: labels.get(cid) ?? cid })

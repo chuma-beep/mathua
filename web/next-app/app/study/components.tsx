@@ -9,7 +9,7 @@ import SearchBar from '../../components/SearchBar'
 import ReportMenu from '../../components/ReportMenu'
 import MasteryBadge from '../../components/MasteryBadge'
 import { getLessonKPs, type LessonInfo, type LessonKpsRes } from '../../lib/api'
-import { isMastered } from '../../lib/progress'
+import { countsAsMastered } from '../../lib/progress'
 import { stripMathDelimiters } from '../../lib/lessonMath'
 import { conceptLabels, domainIcon, domainLabels, lessonProgress } from './domains'
 
@@ -391,14 +391,22 @@ export function LessonDetail({
 
   // One primary Start per lesson (head within this lesson's concepts),
   // the rest under a disclosure — same head-plus-alternatives pattern as
-  // the shelf. First unmastered in lesson order heads; all-mastered falls
-  // back to re-practicing the first.
+  // the shelf. First concept still being learned heads.
   // Every concept the lesson covers, not the first three. Silently dropping
   // the rest meant a learner reading a five-concept lesson was shown links for
   // two of them, with no indication the others existed.
   const learnTargets = conceptIds
-  const headCid = learnTargets.find(cid => !isMastered(lesson.progress?.[cid])) ?? learnTargets[0]
-  const restCids = learnTargets.filter(cid => cid !== headCid)
+  // countsAsMastered, so a concept whose review has gone stale still counts as learned.
+  // Derived once and used for both the head and the disclosure, so the count in
+  // "Or pick something else (N)" cannot drift from the number of links under it.
+  const learnableCids = learnTargets.filter(cid => !countsAsMastered(lesson.progress?.[cid]))
+  const headCid = learnableCids[0]
+  const allAttained = learnTargets.length > 0 && learnableCids.length === 0
+  // `fromConcept` is a return path — the learner was already answering that concept and
+  // wants back — so it keeps its link even when everything here is mastered.
+  const backCid = fromConcept ? learnTargets[0] : undefined
+  const primaryCid = headCid ?? backCid
+  const restCids = learnableCids.filter(cid => cid !== primaryCid)
 
   return (
     <div className="max-w-7xl mx-auto mt-8 mb-16">
@@ -574,16 +582,28 @@ export function LessonDetail({
           {fromConcept ? 'back to the questions you were answering' : 'answer questions on any of these'}
         </span>
       </div>
-      {headCid && (
+      {allAttained && !fromConcept && (
+        // Every concept this lesson covers has been demonstrated. Offering
+        // "Start learning" here is how a learner who already knows the material gets
+        // walked through it again: /learn opens with the worked example, unconditionally,
+        // because it has no notion of the lesson having been seen before. So the block
+        // says what is true instead — these are learned, and retrieval practice arrives
+        // on its own schedule via /review. Study stays reference.
+        <p className="mt-3 border border-mathua-border bg-mathua-surface p-4 font-mono text-xs text-mathua-secondary">
+          Every concept here is learned. Review practice arrives on its own schedule — no
+          need to work through this lesson again.
+        </p>
+      )}
+      {primaryCid && (
         <Link
-          key={headCid}
-          href={`/learn?concept=${encodeURIComponent(headCid)}&return=${encodeURIComponent(headCid)}`}
+          key={primaryCid}
+          href={`/learn?concept=${encodeURIComponent(primaryCid)}&return=${encodeURIComponent(primaryCid)}`}
           className="mt-3 flex items-center justify-between gap-3 border border-mathua-border bg-mathua-surface p-4 hover:border-mathua-blue transition-colors"
         >
           <span className="font-mono text-xs text-mathua-primary truncate">
             {fromConcept
               ? `Back to ${conceptLabels.get(fromConcept) || fromConcept}`
-              : conceptLabels.get(headCid) || headCid}
+              : conceptLabels.get(primaryCid) || primaryCid}
           </span>
           <span className="shrink-0 font-mono text-xs text-mathua-blue">
             {fromConcept ? 'Back to practice →' : 'Start learning →'}
