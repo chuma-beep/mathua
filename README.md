@@ -207,7 +207,7 @@ Lesson content and diagrams sourced from [Algebrica](https://algebrica.org) by A
 
 Profile characters served by [DiceBear](https://www.dicebear.com) (individual avatar styles carry their own licenses, see their [license overview](https://www.dicebear.com/licenses/)).
 
-Mathematical answers are entered through [MathLive](https://mathlive.io/mathfield/) (MIT) — used as published, not forked. See [docs/math-input.md](docs/math-input.md) for how an answer reaches a verdict, and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for licence obligations.
+Mathematical answers are entered through [MathLive](https://mathlive.io/mathfield/) (MIT) — used as published, not forked. See [docs/math-input.md](docs/math-input.md) for how an answer reaches a verdict, and [docs/mobile-device-checklist.md](docs/mobile-device-checklist.md) for what still needs a real phone, and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for licence obligations.
 
 ---
 

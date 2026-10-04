@@ -408,6 +408,11 @@ and passes now. The recovery behaviour itself still wants a real-device check.
 
 ## 5. Mobile setup
 
+Real-device verification lives in [`mobile-device-checklist.md`](./mobile-device-checklist.md).
+Nothing in this document is a substitute for it: the automated suite uses emulated
+viewports, which cannot reproduce OS-keyboard suppression, iOS viewport units, safe-area
+insets, iOS focus zoom, or real parse cost. The numbers below are floors.
+
 What is actually configured, all verified against the pinned MathLive 0.111.0 rather
 than remembered from an earlier version.
 
