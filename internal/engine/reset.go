@@ -6,11 +6,26 @@ import (
 	"time"
 )
 
-// ResetPhrase is the exact typed confirmation the reset endpoint requires.
+// ResetPhrase is the typed confirmation the reset endpoint requires.
 // Client-side gating is UX only; the server enforces this value.
 const ResetPhrase = "reset my progress"
 
-// DeletePhrase is the exact typed confirmation the account-deletion
+// PhraseMatches reports whether a typed confirmation is acceptable for want.
+//
+// Case-insensitive, and deliberately so. The confirmation is typed into a `type="text"`
+// field, which Safari capitalises as you type and Android keyboards routinely
+// autocorrect — "reset my progress" arrives as "Reset my progress". An exact comparison
+// therefore rejected people who had typed precisely what the label asked for, and the
+// error they got back said they had mistyped it.
+//
+// The phrase confirms intent; it is not a secret. Casing and surrounding whitespace say
+// nothing about how deliberate the action was, and the two phrases stay separate values
+// so a reset confirmation can never authorize a deletion.
+func PhraseMatches(typed, want string) bool {
+	return strings.EqualFold(strings.TrimSpace(typed), want)
+}
+
+// DeletePhrase is the typed confirmation the account-deletion
 // endpoint requires. Separate from ResetPhrase so a reset confirmation can
 // never authorize a deletion.
 const DeletePhrase = "delete my account"
@@ -35,7 +50,7 @@ var ErrDeletePhraseMismatch = fmt.Errorf("confirmation phrase does not match")
 //  4. Prefs reset marker (keeps destination/deadline/pace, stamps ResetAt
 //     so Plan shows the neutral fresh-start state until a new baseline).
 func (e *Engine) ResetAccountProgress(studentID, phrase string) error {
-	if strings.TrimSpace(phrase) != ResetPhrase {
+	if !PhraseMatches(phrase, ResetPhrase) {
 		return ErrResetPhraseMismatch
 	}
 	if err := e.repo.ResetProgress(studentID); err != nil {
@@ -76,7 +91,7 @@ func (e *Engine) ResetAccountProgress(studentID, phrase string) error {
 // transaction, and map deletes tolerate absence. Password verification (for
 // password accounts) happens in the server handler before this runs.
 func (e *Engine) DeleteAccount(studentID, phrase string) error {
-	if strings.TrimSpace(phrase) != DeletePhrase {
+	if !PhraseMatches(phrase, DeletePhrase) {
 		return ErrDeletePhraseMismatch
 	}
 	if err := e.repo.DeleteAccount(studentID); err != nil {

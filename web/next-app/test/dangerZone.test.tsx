@@ -39,6 +39,47 @@ describe('DangerZone', () => {
     expect(button).not.toBeDisabled()
   })
 
+  it('arms on the phrase as a phone would type it', () => {
+    // The reported symptom: on iOS the button never enables.
+    //
+    // Both inputs are `type="text"` with no `autoCapitalize`, so Safari capitalises the
+    // first letter as you type — "reset my progress" becomes "Reset my progress". Both
+    // the client comparison and the server's were case-sensitive, so the button stayed
+    // disabled forever and the server would have rejected the capitalised phrase with
+    // "confirmation phrase does not match". Chromium does not auto-capitalise, which is
+    // why the whole suite was green.
+    render(<DangerZone />)
+    const input = screen.getByLabelText(/reset my progress/i) as HTMLInputElement
+    const submit = screen.getByRole('button', { name: /reset everything/i })
+
+    // The OS must not be allowed to mangle it in the first place.
+    expect(input.getAttribute('autocapitalize')).toBe('none')
+    expect(input.getAttribute('spellcheck')).toBe('false')
+
+    // And if it does anyway — a keyboard that capitalises, a paste from a note — the
+    // button must still arm. The phrase confirms intent; it is not a secret.
+    fireEvent.change(input, { target: { value: 'Reset My Progress' } })
+    expect(submit).not.toBeDisabled()
+    // Leading/trailing whitespace is still not a way to bypass the gate.
+    fireEvent.change(input, { target: { value: 'reset my progressX' } })
+    expect(submit).toBeDisabled()
+  })
+
+  it('says why the button is disabled instead of leaving a grey rectangle', () => {
+    render(<DangerZone />)
+    const input = screen.getByLabelText(/reset my progress/i)
+    const submit = screen.getByRole('button', { name: /reset everything/i })
+
+    expect(submit).toBeDisabled()
+    // Nothing typed yet: nothing to say.
+    expect(screen.queryByRole('status')).toBeNull()
+
+    fireEvent.change(input, { target: { value: 'reset my' } })
+    expect(submit).toBeDisabled()
+    // Something typed and it is wrong: say so, instead of a control that just greys out.
+    expect(screen.getByRole('status').textContent).toMatch(/does not match/i)
+  })
+
   it('states the keeps list including destination, deadline and pace', () => {
     render(<DangerZone />)
     expect(screen.getByText(/Destination, deadline and pace/i)).toBeTruthy()
