@@ -437,12 +437,12 @@ export default function ProfilePage() {
         {dueReviews > 0 && (
           <Link
             href="/review"
-            className="mt-6 flex w-full min-w-0 flex-col gap-2 bg-mathua-surface border border-yellow-500/40 px-4 py-3 hover:border-yellow-500 transition-colors sm:flex-row sm:items-center sm:justify-between"
+            className="mt-6 flex w-full min-w-0 flex-col gap-2 bg-mathua-surface border border-mathua-blue-faint px-4 py-3 hover:border-mathua-blue transition-colors sm:flex-row sm:items-center sm:justify-between"
           >
-            <span className="font-mono text-xs text-yellow-400 min-w-0 break-words [overflow-wrap:anywhere] leading-snug">
+            <span className="font-mono text-xs text-mathua-blue min-w-0 break-words [overflow-wrap:anywhere] leading-snug">
               ⏳ {dueReviews} concept{dueReviews !== 1 ? 's' : ''} due for review
             </span>
-            <span className="font-mono text-[11px] text-yellow-400 border border-yellow-500/60 px-3 py-1.5 shrink-0 inline-flex items-center justify-center min-h-[36px] w-full sm:w-auto text-center whitespace-nowrap">
+            <span className="font-mono text-[11px] text-mathua-blue border border-mathua-blue-faint px-3 py-1.5 shrink-0 inline-flex items-center justify-center min-h-[36px] w-full sm:w-auto text-center whitespace-nowrap">
               Review Now →
             </span>
           </Link>

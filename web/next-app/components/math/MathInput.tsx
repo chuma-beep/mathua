@@ -445,8 +445,8 @@ export function MathAnswerInput({
 }
 
 function legacyStatusClass(status: MathInputStatus): string {
-  if (status === 'correct') return 'border-green-600/50'
-  if (status === 'incorrect') return 'border-red-600/50'
+  if (status === 'correct') return 'border-mathua-green-faint'
+  if (status === 'incorrect') return 'border-mathua-red-faint'
   return ''
 }
 

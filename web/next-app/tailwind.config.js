@@ -25,6 +25,14 @@ module.exports = {
           // bg-mathua-blue/10 silently do nothing (transparent bg, dead
           // hover). color-mix shares the baseline of the oklch tokens above.
           'blue-faint': 'color-mix(in srgb, var(--accent-blue) 10%, transparent)',
+          // State borders. Same reasoning as `blue-faint`, and the same 40% the raw
+          // palette classes were reaching for: `border-green-500/40`,
+          // `border-red-500/40` and friends were the only verdict borders in the app, so
+          // every state colour was a hardcoded Tailwind value that no theme could reach.
+          // One weight for both, so a verdict border looks the same on the question card,
+          // the quiz host and the answer field.
+          'green-faint': 'color-mix(in srgb, var(--accent-green) 40%, transparent)',
+          'red-faint': 'color-mix(in srgb, var(--accent-red) 40%, transparent)',
           teal: 'var(--accent-teal)',
           green: 'var(--accent-green)',
           red: 'var(--accent-red)',
