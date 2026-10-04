@@ -114,6 +114,39 @@ describe('domain → keyboard mode', () => {
 })
 
 describe('layouts', () => {
+  it('no keycap inserts a bracketed command token as literal text', () => {
+    // The bug class that shipped broken keys in all five layouts. MathLive resolves
+    // a keycap as `command` → `insert` → `key` → `latex` → `typedText(label)`, and it
+    // merges its own KEYCAP_SHORTCUTS definition only for a bare-string keycap or one
+    // carrying a `label`/`key`. So `{ latex: '[backspace]' }` matched nothing and fell
+    // through to the insert branch: the key typed the literal string `[backspace]`,
+    // and `{ latex: '[0]' }` typed `[0]`. Both look correct in a screenshot.
+    //
+    // A bracketed token in `latex` is therefore always a mistake. Name the shortcut
+    // in `label` instead, which is what MathLive's own layouts do.
+    const BRACKETED = /^\s*\[/
+    for (const mode of MODES) {
+      for (const layer of layoutForMode(mode).layers) {
+        for (const row of layer.rows) {
+          for (const key of row) {
+            if (typeof key === 'string') continue // resolved via KEYCAP_SHORTCUTS
+            expect(key.command, `${mode}: use label, not command, for shortcuts`).toBeUndefined()
+            if (typeof key.latex !== 'string') continue
+            expect(
+              BRACKETED.test(key.latex),
+              `${mode}: keycap latex ${JSON.stringify(key.latex)} would be typed as literal text`,
+            ).toBe(false)
+            for (const v of [key.shift, ...(key.variants ?? [])]) {
+              const l = typeof v === 'string' ? v : v?.latex
+              if (typeof l !== 'string') continue
+              expect(BRACKETED.test(l), `${mode}: variant ${JSON.stringify(l)}`).toBe(false)
+            }
+          }
+        }
+      }
+    }
+  })
+
   it('every mode has a label, a tooltip and at least one layer', () => {
     for (const mode of MODES) {
       const l = layoutForMode(mode)
@@ -148,8 +181,14 @@ describe('layouts', () => {
       expect(has('\\times'), `${mode} has no multiplication`).toBe(true)
       expect(has('\\div'), `${mode} has no division`).toBe(true)
       expect(keys.some(k => k === '-' || k === '+')).toBe(true)
+      // Digits 1-9 are bare strings; zero is a shortcut we name in `label`, because
+      // `[0]`'s payload (`latex: "0"`) lives in MathLive's own table. Presence is
+      // therefore a question about the declared name, not about what we insert --
+      // `insertedLatex` is the right tool for the LaTeX assertions above and the
+      // wrong one here.
+      const names = keycaps(mode)
       for (const d of ['[0]', '[1]', '[2]', '[3]', '[4]', '[5]', '[6]', '[7]', '[8]', '[9]']) {
-        expect(keys, `${mode} is missing ${d}`).toContain(d)
+        expect(names, `${mode} is missing ${d}`).toContain(d)
       }
     }
   })
@@ -208,9 +247,14 @@ describe('layouts', () => {
 
   it('gives every mode a way to delete and a way to dismiss the keyboard', () => {
     for (const mode of MODES) {
-      const keys = insertedLatex(mode)
-      expect(keys, `${mode} has no backspace`).toContain('[backspace]')
-      expect(keys, `${mode} cannot dismiss the keyboard`).toContain('[hide-keyboard]')
+      // Neither of these is an insertion, so neither belongs in `insertedLatex`:
+      // backspace runs `deleteBackward`, and the dismiss key hides the panel. Both
+      // are asserted by the *name* we declare, which is what has to match
+      // MathLive's KEYCAP_SHORTCUTS for the library to supply the behaviour. The
+      // e2e suite then proves the key actually deletes.
+      const names = keycaps(mode)
+      expect(names, `${mode} has no backspace`).toContain('[backspace]')
+      expect(names, `${mode} cannot dismiss the keyboard`).toContain('[hide-keyboard]')
     }
   })
 

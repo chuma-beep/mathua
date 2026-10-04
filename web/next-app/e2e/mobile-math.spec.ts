@@ -1,5 +1,5 @@
 import { test, expect, type Page } from '@playwright/test'
-import { answerField, focusAnswerField, setAnswer, typeIntoField, showVirtualKeyboard, keyboardRows, keyboardPanel, keyboardVisible, hideVirtualKeyboard } from './helpers/answer'
+import { answerField, answerLatex, focusAnswerField, setAnswer, typeIntoField, showVirtualKeyboard, keyboardRows, keyboardPanel, keyboardVisible, hideVirtualKeyboard, keycaps, glyphKeycap } from './helpers/answer'
 
 // Mobile behaviour, on a real touch device profile (Pixel 7, and a 320px viewport).
 //
@@ -112,6 +112,43 @@ test.describe('touch input', () => {
     // A fraction, not "34": the tap inserted a structure with two slots.
     expect(value).toContain('\\frac')
   })
+
+  // Both of these keys were broken in all five layouts and neither test existed.
+  // The layouts named their shortcuts in `latex`, which MathLive does not consult:
+  // it resolves a keycap as command -> insert -> key -> latex -> typedText(label),
+  // and merges its own KEYCAP_SHORTCUTS table only for a bare-string keycap or one
+  // carrying a `label` or `key`. So both keys missed the table *and* fell through to
+  // the insert branch, typing their own source text into the field. A screenshot
+  // looked fine and every existing assertion still passed, because the digit tests
+  // only ever tapped 1-9 and nothing ever pressed delete.
+  test('the zero key inserts 0, not the text [0]', async ({ page }) => {
+    await openLearn(page)
+    await setAnswer(page, '')
+    await answerField(page).tap()
+    await expect(keyboardRows(page)).toBeVisible({ timeout: 10_000 })
+    await keycaps(page).filter({ hasText: /^0/ }).first().tap()
+    await page.waitForTimeout(150)
+    // Was '[0]' before the fix.
+    expect(await answerLatex(page)).toBe('0')
+  })
+
+  test('backspace deletes rather than inserting its own name', async ({ page }) => {
+    await openLearn(page)
+    await setAnswer(page, '')
+    await answerField(page).tap()
+    await expect(keyboardRows(page)).toBeVisible({ timeout: 10_000 })
+    await typeIntoField(page, '4')
+    await typeIntoField(page, '2')
+    expect(await answerLatex(page)).toBe('42')
+
+    // The merged shortcut renders MathLive's own delete glyph, and `renderKeycap`
+    // gives it a class of `action ...` *without* `MLK__keycap` -- so both the glyph
+    // and the missing class are why this key was invisible to the old selectors.
+    await glyphKeycap(page, 'delete-backward').first().tap()
+    await page.waitForTimeout(150)
+    // Was '4[backspace]' before the fix.
+    expect(await answerLatex(page)).toBe('4')
+  })
 })
 
 test.describe('layout and reachability', () => {
@@ -120,18 +157,45 @@ test.describe('layout and reachability', () => {
     await answerField(page).tap()
     await expect(keyboardRows(page)).toBeVisible({ timeout: 10_000 })
 
-    const undersized = await page.locator('.MLK__keycap:visible').evaluateAll(els =>
+    // `keycaps()`, not `.MLK__keycap`: MathLive omits that class from any keycap whose
+    // class contains `separator`, `action`, `shift`, `fnbutton` or `bigfnbutton`, so a
+    // `.MLK__keycap` audit measured only the keys that already worked and never looked
+    // at backspace, the caret arrows, the dismiss key or a separator. Separators are
+    // still excluded below, by class rather than by the accident of the old selector.
+    const undersized = await keycaps(page).evaluateAll(els =>
       els
         .map(el => {
           const r = el.getBoundingClientRect()
-          return { text: (el.textContent ?? '').trim().slice(0, 12), w: Math.round(r.width), h: Math.round(r.height) }
+          return {
+            text: (el.textContent ?? '').trim().slice(0, 12),
+            glyph: el.querySelector('use')?.getAttribute('href') ?? '',
+            cls: el.className,
+            w: Math.round(r.width),
+            h: Math.round(r.height),
+          }
         })
-        // The toolbar's own controls are not answer keys; a narrow separator is not a tap
-        // target either. Both are excluded by width, since neither is a digit or operator.
-        .filter(k => /[0-9÷×−+=()√]/.test(k.text))
+        // A separator is not a tap target. Everything else is.
+        .filter(k => !/(^|\s)separator(\s|$)/.test(k.cls))
         .filter(k => k.w < 44 || k.h < 44),
     )
     expect(undersized, `undersized keycaps: ${JSON.stringify(undersized)}`).toEqual([])
+
+    // And the audit must actually be reaching the glyph keys, or "no undersized
+    // keycaps" would again mean "no keycaps measured". A `.MLK__keycap` selector
+    // reported a clean pass over a keypad whose backspace and caret arrows were
+    // invisible to it.
+    // MathLive writes the glyph reference as `xlink:href`, so a bare `href` read
+    // returns null and the guard would pass on an empty set.
+    const measured = await keycaps(page).evaluateAll(els =>
+      els.map(el => {
+        const use = el.querySelector('use')
+        return use?.getAttribute('href') ?? use?.getAttribute('xlink:href') ?? ''
+      }),
+    )
+    expect(measured.filter(h => h.includes('delete-backward')).length,
+      'the touch-target audit did not reach the backspace key').toBeGreaterThan(0)
+    expect(measured.filter(h => h.includes('arrow-')).length,
+      'the touch-target audit did not reach the caret arrows').toBeGreaterThan(0)
   })
 
   test('the keypad does not take more than half the screen', async ({ page }) => {

@@ -36,7 +36,26 @@ export type Layout = {
   layers: { rows: Keycap[][] }[]
 }
 
-const BACKSPACE: Keycap = { latex: '[backspace]', width: 2 }
+// `label`, not `latex`, and that distinction is the whole reason these two work.
+//
+// MathLive resolves a keycap in this order (`executeKeycapCommand`): `command`,
+// then `insert`, then `key`, then **`latex` — which it runs as an insert**, and
+// only then `typedText(label)`. Separately, `normalizeKeycap` merges the
+// library's own definition for a keycap in only two cases: the keycap is a bare
+// string, or it carries a `label` or `key` that names a known shortcut.
+//
+// These two used `latex`, which is neither. So they missed the shortcut table
+// *and* fell through to the insert branch, which meant backspace typed the
+// literal text `[backspace]` into the field and the zero key typed `[0]` — in all
+// five layouts. Both are fixed by naming the shortcut in `label`, which is also
+// what MathLive's own layouts do (`{ label: "[backspace]", width: 1 }`).
+//
+// What the merge brings in, from KEYCAP_SHORTCUTS: `command:
+// "performWithFeedback(deleteBackward)"` for backspace, `latex: "0"` for zero,
+// an SVG delete glyph as the label, and `class: "action bottom right hide-shift"`
+// plus `width: 1.5` from the library. We keep our own `width`, because the
+// 320px layout needs the extra room.
+const BACKSPACE: Keycap = { label: '[backspace]', width: 2 }
 const LEFT: Keycap = '[left]'
 const RIGHT: Keycap = '[right]'
 const SEPARATOR: Keycap = { label: '[separator]', width: 0.5 }
@@ -55,7 +74,9 @@ const EQUALS: Keycap = '='
 const OPEN: Keycap = '('
 const CLOSE: Keycap = ')'
 const DOT: Keycap = '[.]'
-const ZERO_WIDE: Keycap = { latex: '[0]', width: 2 }
+// Same story as BACKSPACE: `[0]` is a shortcut whose payload is `latex: "0"`, so
+// it has to be named in `label` or it inserts the two-character string `[0]`.
+const ZERO_WIDE: Keycap = { label: '[0]', width: 2 }
 const SCI: Keycap = { label: '×10ⁿ', latex: '#@\\times 10^{#?}', aside: 'scientific notation' }
 
 const digit = (n: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9): Keycap => `[${n}]`

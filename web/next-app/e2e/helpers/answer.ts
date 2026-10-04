@@ -145,9 +145,38 @@ export function keyboardRows(page: Page): Locator {
  * includes its `aside` caption — the √ key renders as "√\nsquare root" — so pass the
  * leading glyph.
  */
+/**
+ * Every keycap in the keypad, including the ones that are not `.MLK__keycap`.
+ *
+ * MathLive's `renderKeycap` adds `MLK__keycap` only when the keycap's class does
+ * *not* already contain `separator`, `action`, `shift`, `fnbutton` or
+ * `bigfnbutton`. So backspace, the caret arrows, the dismiss key and every
+ * separator are all rendered without it. A `.MLK__keycap` selector silently skips
+ * them, which is how a broken backspace key passed the touch-target audit for the
+ * whole of commit 1: the audit was measuring only the keys that were working.
+ *
+ * The row's direct children are the honest superset. `:visible` matters: MathLive
+ * renders every layer and hides the inactive ones, so without it the measurement
+ * collects keycaps at 0x0 from layers the learner cannot see.
+ */
+export function keycaps(page: Page): Locator {
+  return page.locator('.MLK__row > *:visible')
+}
+
+/**
+ * A keycap drawn as one of MathLive's built-in SVG glyphs, e.g. `delete-backward`.
+ *
+ * Glyph keycaps have no text at all, so `hasText` cannot find them; they are
+ * identified by the `use` element they reference.
+ */
+export function glyphKeycap(page: Page, glyph: string): Locator {
+  return keycaps(page).filter({
+    has: page.locator(`[*|href="#svg-${glyph}"], [href="#svg-${glyph}"]`),
+  })
+}
+
 export function keycap(page: Page, label: string): Locator {
-  return page
-    .locator('.MLK__keycap:visible')
+  return keycaps(page)
     .filter({ hasText: new RegExp(`^${label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`) })
     .first()
 }

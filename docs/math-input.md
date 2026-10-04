@@ -259,6 +259,44 @@ needs. It is the editor that always works.
 
 Both are tested (`test/mathInputFallback.test.tsx`, and the existing grader tests).
 
+### The keycap `latex`/`label` trap
+
+Two of Mathua's keypad keys were broken in **all five layouts** and no test noticed:
+backspace typed the literal text `[backspace]` into the answer field, and the zero key
+typed `[0]`. Both were declared like this:
+
+```ts
+const BACKSPACE: Keycap = { latex: '[backspace]', width: 2 }
+const ZERO_WIDE: Keycap = { latex: '[0]', width: 2 }
+```
+
+    Assumed: a keycap whose `latex` names a bracketed command performs that command.
+    Actual 0.111.0: `latex` is *inserted*. `executeKeycapCommand` resolves in order —
+    `command`, then `insert`, then `key`, then `latex` (run as an insert), and only
+    then `typedText(label)`. Separately, `normalizeKeycap` merges MathLive's own
+    `KEYCAP_SHORTCUTS` definition only when the keycap is a bare string, or carries a
+    `label` or `key` naming a known shortcut. `latex` is not one of those.
+    Difference: these keycaps matched no shortcut *and* fell through to the insert
+    branch, so they typed their own source text. `KEYCAP_SHORTCUTS["[backspace]"]`
+    carries `command: "performWithFeedback(deleteBackward)"` and
+    `KEYCAP_SHORTCUTS["[0]"]` carries `latex: "0"`; neither was consulted.
+    Fix: name the shortcut in `label`, which is what MathLive's own layouts do
+    (`{ label: "[backspace]", width: 1 }`). `test/keyboards.test.ts` now fails on any
+    bracketed token in a keycap's `latex`, which is the whole bug class.
+    Source: `node_modules/mathlive/mathlive.mjs` — `executeKeycapCommand`,
+    `normalizeKeycap`, `renderKeycap`, `KEYCAP_SHORTCUTS`.
+
+A second trap sat behind it, and it is why the bug survived: **`renderKeycap` only
+adds the `MLK__keycap` class when the keycap's class does not already contain
+`separator`, `action`, `shift`, `fnbutton` or `bigfnbutton`.** So backspace, the caret
+arrows, the dismiss key and every separator render *without* it. Every selector in the
+suite used `.MLK__keycap`, including the 44px touch-target audit — so that audit
+measured only the keys that were already working and reported a clean pass over a
+keypad whose delete key typed its own name. `e2e/helpers/answer.ts` now exposes
+`keycaps()` (the row's visible direct children) and `glyphKeycap()`, and the audit
+asserts that it reached the delete and caret keys, so "no undersized keycaps" cannot
+quietly go back to meaning "no keycaps measured".
+
 ### Known limitation, not yet fixed
 
 `mathVirtualKeyboard.hide()` does not work in MathLive 0.111.0 under Chromium.
