@@ -17,7 +17,10 @@ import { useCallback, useEffect, useRef, type MutableRefObject } from 'react'
 // Side-effect import: this is what registers the <math-field> custom element.
 // The type import below is erased at runtime, so it cannot do this job.
 import 'mathlive'
-import type { MathfieldElement } from 'mathlive'
+// A value import, not just the type: the two settings below are statics on the class,
+// and the instance accessors deliberately throw ("Use MathfieldElement.soundsDirectory
+// instead"), so there is no way to reach them from an element.
+import { MathfieldElement } from 'mathlive'
 import { layoutForMode } from './layouts'
 import type { MathKeyboardMode } from './keyboards'
 import { toPlainAnswer } from './plainAnswer'
@@ -86,6 +89,20 @@ export default function MathLiveField({
   handleRef,
   focusRequest = 0,
 }: Props) {
+  // Per-keystroke feedback Mathua does not want, configured off once per document.
+  //
+  // Verified against 0.111.0 rather than assumed: `MathfieldElement._soundsDirectory`
+  // defaults to `'./sounds'` and `keypressSound` to `keypress-standard.wav` and friends,
+  // loaded with `fetch(`${dir}/${file}`)` on every key. Mathua copies MathLive's
+  // *fonts* into `public/fonts` but never shipped `public/sounds`, so every keystroke
+  // was issuing a request for a file that does not exist. Setting the static to `null`
+  // is the documented way to prevent any sound from being loaded, and `keypressVibration`
+  // is the same idea for the vibration API.
+  useEffect(() => {
+    MathfieldElement.soundsDirectory = null
+    MathfieldElement.keypressVibration = false
+  }, [])
+
   const ref = useRef<MathfieldElement | null>(null)
   // MathLive owns the element's value, so a value arriving from outside has to
   // be pushed in. Tracking what we last sent keeps us from resetting the
@@ -196,6 +213,44 @@ export default function MathLiveField({
     const onPointerDown = () => installKeyboardRef.current()
     el.addEventListener('pointerdown', onPointerDown)
     return () => el.removeEventListener('pointerdown', onPointerDown)
+  }, [])
+
+  // Publish the keypad's height so page layout can keep clear of it.
+  //
+  // MathLive positions its own panel relative to the field, so it does not cover the
+  // editor -- that part is its job. What it cannot do is shrink the *page*: a sticky
+  // header, or a submit button anchored to the bottom of the viewport, still sits
+  // underneath a panel whose height Mathua has no idea about. `geometrychange` carries
+  // the new bounding rectangle, and this turns it into one CSS custom property so
+  // stylesheets can adapt without a hardcoded pixel value that is wrong on every
+  // device.
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const kb = window.mathVirtualKeyboard
+    if (!kb) return
+    // The rect is read from `kb.boundingRect`, *not* from the event.
+    //
+    // 0.111.0's own type documentation says `evt.detail.boundingRect`, and that is
+    // wrong: the library dispatches `new Event('geometrychange')` — a plain Event with
+    // no `detail` at all — from a ResizeObserver and from `stateChanged()`. A handler
+    // written to the documented shape reads `undefined`, computes a height of zero, and
+    // reports the keypad as closed forever, which is precisely the failure this exists to
+    // prevent. The measured symptom of getting it wrong is in git history.
+    const publish = () => {
+      const height = Math.round(kb.boundingRect?.height ?? 0)
+      document.documentElement.style.setProperty('--mathua-keyboard-height', `${height}px`)
+      document.documentElement.dataset.mathuaKeyboard = height > 0 ? 'open' : 'closed'
+    }
+    const onGeometryChange = () => publish()
+    kb.addEventListener('geometrychange', onGeometryChange)
+    // The panel can already be up when this mounts (a later card in the Learn feed),
+    // so publish the current geometry rather than waiting for the first change.
+    publish()
+    return () => {
+      kb.removeEventListener('geometrychange', onGeometryChange)
+      document.documentElement.style.removeProperty('--mathua-keyboard-height')
+      delete document.documentElement.dataset.mathuaKeyboard
+    }
   }, [])
 
   // A Learn card can unmount while focused (a 3-miss halt, a concept swap).
