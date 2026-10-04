@@ -25,12 +25,15 @@ export default defineConfig({
     {
       name: 'mobile-chromium',
       use: { ...devices['Pixel 7'] },
-      testMatch: /mobile(-math)?\.spec\.ts/,
+      // The diagnosis spec runs on the real touch profiles as well as desktop: the
+      // behaviour under investigation is touch-specific, and a desktop-only run
+      // would measure a code path a phone never takes.
+      testMatch: [/mobile(-math)?\.spec\.ts/, /-diagnosis\.spec\.ts$/],
     },
     {
       name: 'mobile-320',
       use: { ...devices['Pixel 7'], viewport: { width: 320, height: 568 } },
-      testMatch: /mobile(-math)?\.spec\.ts/,
+      testMatch: [/mobile(-math)?\.spec\.ts/, /-diagnosis\.spec\.ts$/],
     },
   ],
   webServer: {

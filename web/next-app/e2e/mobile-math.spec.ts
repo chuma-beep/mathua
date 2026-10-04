@@ -311,6 +311,48 @@ test.describe('the whole loop on a phone', () => {
     expect(await keyboardVisible(page)).toBe(true)
   })
 
+  // The chain that works, asserted in order, so a regression in any link is
+  // attributable rather than showing up as one vague "submit did not happen".
+  //
+  // No sleeps anywhere: every step is an assertion that polls. The measured timings
+  // behind this (e2e/answer-diagnosis.spec.ts) put input -> React at 2-7ms and
+  // tap -> API response at 12-14ms, so there is nothing here worth waiting for.
+  test('field interactive -> type -> React receives -> Check enables -> first tap submits once', async ({ page }) => {
+    let posts = 0
+    await page.on('request', req => {
+      if (req.method() === 'POST' && req.url().includes('/api/study/answer')) posts++
+    })
+    await openLearn(page)
+
+    // 1. The field exists and is usable. Polling, not a fixed wait: the no-input
+    //    window is real and its length depends on the chunk (300ms cached here,
+    //    3.1s with a 3s chunk delay on the network), so a sleep would be wrong in
+    //    both directions.
+    await expect(answerField(page)).toBeVisible({ timeout: 20_000 })
+    await setAnswer(page, '')
+
+    // 2. Enter an answer by tapping the keypad, and let the answer reach the host.
+    //    Keycaps rather than `keyboard.type`, because at 320px the open virtual
+    //    keyboard swallows synthetic keystrokes -- the sibling loop test taps for the
+    //    same reason, and it is closer to what a phone user does anyway. The button's
+    //    `disabled` is `checking || !answer.trim()`, so it is the only observable for
+    //    React having received the answer.
+    await answerField(page).tap()
+    await expect(keyboardRows(page)).toBeVisible({ timeout: 10_000 })
+    await keycaps(page).filter({ hasText: /^4/ }).first().tap()
+    const check = page.getByRole('button', { name: 'Check', exact: true }).first()
+    await expect(check).toBeEnabled({ timeout: 10_000 })
+
+    // 3. The first tap reaches the submit handler.
+    await check.tap()
+
+    // 4. Exactly one POST, and the verdict comes back. The explanation text is the
+    //    verdict here; asserting on the feedback body rather than a "correct" string
+    //    because the panel shows the explanation, not the word correct.
+    await expect(page.getByText('Two and two.').first()).toBeVisible({ timeout: 20_000 })
+    expect(posts).toBe(1)
+  })
+
   test('the answer survives the keypad opening and closing repeatedly', async ({ page }) => {
     await openLearn(page)
     await answerField(page).tap()
