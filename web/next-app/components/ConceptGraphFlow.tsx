@@ -137,12 +137,11 @@ const ConceptNode = memo(function ConceptNode({ id, data }: NodeProps<ConceptFlo
             : data.onPath
               ? '1px solid var(--accent-teal)'
               : '1px solid var(--border)',
-          borderRadius: 4,
           overflow: 'hidden',
         }}
       >
         <Handle type="target" position={Position.Left} style={{ opacity: 0, pointerEvents: 'none' }} />
-        <span style={{ width: 3, height: 22, borderRadius: 2, flexShrink: 0, background: domainColor(data.domain) }} />
+        <span style={{ width: 3, height: 22, flexShrink: 0, background: domainColor(data.domain) }} />
         <span style={{ width: 8, height: 8, borderRadius: '50%', flexShrink: 0, background: statusColor }} />
         <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{data.label}</span>
         <Handle type="source" position={Position.Right} style={{ opacity: 0, pointerEvents: 'none' }} />
@@ -155,7 +154,6 @@ const ConceptNode = memo(function ConceptNode({ id, data }: NodeProps<ConceptFlo
             right: 8,
             bottom: 3,
             height: 4,
-            borderRadius: 2,
             background: 'var(--border)',
           }}
         >
@@ -164,7 +162,6 @@ const ConceptNode = memo(function ConceptNode({ id, data }: NodeProps<ConceptFlo
               height: '100%',
               width: `${progressPct ?? 0}%`,
               background: statusColor,
-              borderRadius: 2,
               transition: 'width 300ms ease',
             }}
           />
@@ -185,7 +182,6 @@ const ConceptNode = memo(function ConceptNode({ id, data }: NodeProps<ConceptFlo
           color: 'var(--text-secondary)',
           background: 'var(--surface-elevated)',
           border: '0.5px solid var(--border-strong)',
-          borderRadius: 3,
           padding: '3px 8px',
         }}
       >
@@ -364,10 +360,10 @@ function SearchOverlay({
           if (e.key === 'Escape') setOpen(false)
         }}
         placeholder="Search concepts…"
-        className="w-full min-h-[36px] h-9 px-2.5 text-[11px] font-mono text-mathua-primary bg-mathua-surface-elevated border-[0.5px] border-mathua-border-strong rounded-[4px] outline-none"
+        className="w-full min-h-[36px] h-9 px-2.5 text-[11px] font-mono text-mathua-primary bg-mathua-surface-elevated border-[0.5px] border-mathua-border-strong outline-none"
       />
       {open && results.length > 0 && (
-        <div className="mt-1 bg-mathua-surface-elevated border-[0.5px] border-mathua-border rounded-[4px] overflow-hidden max-h-[min(50dvh,240px)] overflow-y-auto">
+        <div className="mt-1 bg-mathua-surface-elevated border-[0.5px] border-mathua-border overflow-hidden max-h-[min(50dvh,240px)] overflow-y-auto">
           {results.map(r => (
             <button
               key={r.id}
@@ -379,7 +375,7 @@ function SearchOverlay({
               }}
               className="flex items-center gap-1.5 w-full text-left px-2.5 py-2 min-h-[36px] text-[11px] font-mono text-mathua-secondary bg-transparent border-none border-b-[0.5px] border-mathua-border last:border-b-0 cursor-pointer hover:bg-mathua-code"
             >
-              <span className="w-[3px] h-3.5 rounded-[2px] shrink-0" style={{ background: domainColor(r.domain) }} />
+              <span className="w-[3px] h-3.5 shrink-0" style={{ background: domainColor(r.domain) }} />
               <span className="truncate flex-1 min-w-0">{r.label}</span>
             </button>
           ))}
@@ -416,7 +412,6 @@ function AmbientToggle({
         color: enabled ? '#fff' : 'var(--text-muted)',
         background: enabled ? 'var(--accent-blue)' : 'var(--surface-elevated)',
         border: '0.5px solid var(--border-strong)',
-        borderRadius: 4,
         cursor: 'pointer',
       }}
     >
@@ -441,7 +436,7 @@ function ListToggleButton({
       title="Browse concepts as a keyboard-accessible list"
       aria-expanded={open}
       aria-label={open ? 'Close concept list' : 'Open concept list'}
-      className={`absolute top-2.5 left-2.5 z-[6] min-h-[36px] h-9 px-2.5 text-[10px] uppercase tracking-[0.05em] font-mono border-[0.5px] border-mathua-border-strong rounded-[4px] cursor-pointer transition-colors ${open ? 'bg-mathua-teal text-white' : 'bg-mathua-surface-elevated text-mathua-muted hover:text-mathua-primary'}`}
+      className={`absolute top-2.5 left-2.5 z-[6] min-h-[36px] h-9 px-2.5 text-[10px] uppercase tracking-[0.05em] font-mono border-[0.5px] border-mathua-border-strong cursor-pointer transition-colors ${open ? 'bg-mathua-teal text-white' : 'bg-mathua-surface-elevated text-mathua-muted hover:text-mathua-primary'}`}
     >
       {LIST_TOGGLE_LABEL}
     </button>
@@ -504,7 +499,6 @@ function ListView({
         flexDirection: 'column',
         background: 'var(--surface-elevated)',
         border: '0.5px solid var(--border)',
-        borderRadius: 4,
         overflow: 'hidden',
       }}
     >
@@ -530,7 +524,6 @@ function ListView({
             color: 'var(--text-primary)',
             background: 'var(--surface-elevated)',
             border: '0.5px solid var(--border-strong)',
-            borderRadius: 3,
             outline: 'none',
           }}
         />
@@ -580,7 +573,6 @@ function ListView({
                         : 'transparent',
                     border: 'none',
                     borderBottom: '0.5px solid var(--border)',
-                    borderRadius: 3,
                     cursor: 'pointer',
                   }}
                 >
@@ -1141,7 +1133,7 @@ function GraphInner({
                         key={p.id}
                         type="button"
                         onClick={() => select(p.id)}
-                        className="text-[11px] font-mono text-mathua-secondary bg-mathua-surface-elevated border-[0.5px] border-mathua-border rounded-[3px] px-2.5 py-1.5 min-h-[36px] cursor-pointer hover:border-mathua-blue hover:text-mathua-blue transition-colors"
+                        className="text-[11px] font-mono text-mathua-secondary bg-mathua-surface-elevated border-[0.5px] border-mathua-border px-2.5 py-1.5 min-h-[36px] cursor-pointer hover:border-mathua-blue hover:text-mathua-blue transition-colors"
                       >
                         {p.label}
                       </button>
@@ -1160,7 +1152,7 @@ function GraphInner({
                         key={u.id}
                         type="button"
                         onClick={() => select(u.id)}
-                        className="text-[11px] font-mono text-mathua-secondary bg-mathua-surface-elevated border-[0.5px] border-mathua-border rounded-[3px] px-2.5 py-1.5 min-h-[36px] cursor-pointer hover:border-mathua-blue hover:text-mathua-blue transition-colors"
+                        className="text-[11px] font-mono text-mathua-secondary bg-mathua-surface-elevated border-[0.5px] border-mathua-border px-2.5 py-1.5 min-h-[36px] cursor-pointer hover:border-mathua-blue hover:text-mathua-blue transition-colors"
                       >
                         {u.label}
                       </button>

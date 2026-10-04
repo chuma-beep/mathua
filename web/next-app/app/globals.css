@@ -309,7 +309,6 @@ footer .link-underline:hover {
   content: '';
   position: absolute;
   inset: -3px;
-  border-radius: 5px;
   pointer-events: none;
   animation: nodeglow 2.4s ease-in-out infinite;
 }
@@ -328,7 +327,6 @@ footer .link-underline:hover {
   content: '';
   position: absolute;
   inset: -3px;
-  border-radius: 5px;
   pointer-events: none;
   animation: nodebreathe 3.6s ease-in-out infinite;
 }
