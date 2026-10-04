@@ -15,6 +15,7 @@ import { getScores, getGraph, getProgress, getWeaknesses, healthCheck, type Grap
 import { getUserInfo } from '../../lib/auth'
 import { useAuthState } from '../../hooks/useAuthState'
 import { deriveStatuses } from '../../lib/graphStatus'
+import { createInflightCache, createSessionCache } from '../../lib/requestCache'
 import Loading from '../../components/Loading'
 
 const graphLoadingStyle: React.CSSProperties = {
@@ -73,21 +74,10 @@ const domainOrder = [
   'abstract_algebra', 'topology',
 ]
 
-// StrictMode double-invokes effects in dev; share one in-flight request per key
-// so mounting twice never doubles network traffic.
-const inflight = new Map<string, Promise<unknown>>()
-function once<T>(key: string, run: () => Promise<T>): Promise<T> {
-  if (!inflight.has(key)) {
-    inflight.set(
-      key,
-      run().catch(err => {
-        inflight.delete(key)
-        throw err
-      })
-    )
-  }
-  return inflight.get(key) as Promise<T>
-}
+// Two caches, because the two kinds of data on this page have opposite lifetimes. See
+// lib/requestCache.ts for why they were one helper and what that cost.
+const oncePerSession = createSessionCache()
+const dedupeInFlight = createInflightCache()
 
 function GraphContent() {
   const { theme, mounted } = useTheme()
@@ -106,8 +96,8 @@ function GraphContent() {
 
   const loadGraph = useCallback(() => {
     setGraphError(false)
-    once('health', healthCheck).then(setConnected).catch(() => setConnected(false))
-    once('graph', getGraph).then(data => { setGraphData(data); setGraphError(false) }).catch(() => setGraphError(true))
+    oncePerSession('health', healthCheck).then(setConnected).catch(() => setConnected(false))
+    oncePerSession('graph', getGraph).then(data => { setGraphData(data); setGraphError(false) }).catch(() => setGraphError(true))
   }, [])
 
   useEffect(() => {
@@ -119,9 +109,9 @@ function GraphContent() {
     const user = getUserInfo()
     if (!user) return
     const id = user.student_id
-    once(`scores:${id}`, () => getScores(id)).then(setScores).catch(() => console.error('getScores failed'))
-    once(`progress:${id}`, () => getProgress(id)).then(setRawProgress).catch(() => console.error('getProgress failed'))
-    once('weaknesses', getWeaknesses).then(w => {
+    dedupeInFlight(`scores:${id}`, () => getScores(id)).then(setScores).catch(() => console.error('getScores failed'))
+    dedupeInFlight(`progress:${id}`, () => getProgress(id)).then(setRawProgress).catch(() => console.error('getProgress failed'))
+    dedupeInFlight('weaknesses', getWeaknesses).then(w => {
       const byDomain: Record<string, { id: string; label: string }[]> = {}
       for (const [domain, entries] of Object.entries(w.by_domain)) {
         byDomain[domain] = entries.map((e: any) => ({ id: e.id, label: e.label }))

@@ -14,15 +14,22 @@ import { DomainDrillDown, DomainOverview, LessonDetail } from './components'
 import { concepts as conceptCatalog } from '../../lib/conceptData'
 import { topoRank } from '../../lib/topoRank'
 import { planConceptNavigation } from '../../lib/conceptTarget'
+import { createInflightCache } from '../../lib/requestCache'
 
-let lessonsCache: { key: string; res: LessonsRes } | null = null
+// Deduplicates the in-flight request only, so a revisit refetches.
+//
+// This held onto a *resolved* promise for the life of the session, and the payload is
+// not just the catalogue: `lesson.progress[cid].status` is the learner's own mastery, and
+// it drives the `MasteryBadge` on every concept chip, the "before you start" list and
+// the "what to study next" list. So a learner who answered something, came back to Study,
+// and saw concept chips claiming they had not started what they had already mastered —
+// with the graph, a few clicks away, disagreeing.
+//
+// The catalogue half of the payload is immutable and would have been fine to keep; the
+// progress half is not, and one response carries both.
+const inflight = createInflightCache()
 function getLessonsCached(studentId?: string): Promise<LessonsRes> {
-  const key = studentId ?? ''
-  if (lessonsCache && lessonsCache.key === key) return Promise.resolve(lessonsCache.res)
-  return getLessons(studentId).then(res => {
-    lessonsCache = { key, res }
-    return res
-  })
+  return inflight(`lessons:${studentId ?? ''}`, () => getLessons(studentId))
 }
 
 function StudyContent() {
