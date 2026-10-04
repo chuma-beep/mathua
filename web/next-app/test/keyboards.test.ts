@@ -48,35 +48,43 @@ function insertedLatex(mode: MathKeyboardMode): string[] {
 }
 
 describe('editor vs text', () => {
-  // The 657-concept corpus is 213 multiple_choice, 26 tuple, 1 ordering, 2
-  // comparison — a third of it. A math editor is a downgrade for all of them: those
-  // answers are tap targets or short lists, not expressions.
+  // Every grading type gets the math editor. This was the five expression-valued types
+  // only, on the reasoning that MathLive earns its place where the grader parses an
+  // expression — which left 223 of 657 concepts (209 multiple_choice, 11 tuple,
+  // 2 comparison, 1 ordering) typing mathematics into a plain input with no fraction
+  // key, no exponent and no parentheses.
+  //
+  // The grading risk that motivated the old split is real and is now covered by
+  // measurement rather than by avoidance: `internal/grader/mathlive_compat_test.go`
+  // grades a recording of what MathLive actually emits, including the multiple-choice
+  // shapes that broke first (`yes` → `y e s`). See `fixImplicitLetterSpacing`.
   it.each([
     ['numeric', 'math'],
     ['symbolic', 'math'],
     ['expression', 'math'],
     ['polynomial', 'math'],
     ['complex', 'math'],
-    ['multiple_choice', 'text'],
-    ['tuple', 'text'],
-    ['ordering', 'text'],
-    ['comparison', 'text'],
-    [undefined, 'text'],
-    ['', 'text'],
+    ['multiple_choice', 'math'],
+    ['tuple', 'math'],
+    ['ordering', 'math'],
+    ['comparison', 'math'],
   ])('grading_type %s → %s editor', (gradingType, editor) => {
     expect(editorForGradingType(gradingType)).toBe(editor)
   })
 
-  it('falls back to the text editor for a concept the corpus does not know', () => {
-    // A fixture id, or a concept added server-side before the corpus rebuild. The
-    // plain input is the safe default because it grades correctly everywhere.
+  it('still degrades to the text editor for a concept the corpus does not know', () => {
+    // A fixture id, or a concept added server-side before the corpus rebuild. The plain
+    // input is the safe default because it grades correctly everywhere, and it is the
+    // only thing that degrades now.
     expect(presentationForQuestion(undefined, 'not-a-real-concept').editor).toBe('text')
   })
 
-  it('prefers the server grading_type over the corpus', () => {
+  it('prefers the server grading_type over the corpus, either way it points', () => {
     // ADR-009: every served question carries grading_type, and the server is the
-    // authority for it.
-    expect(presentationForQuestion('multiple_choice', 'arith.add.single').editor).toBe('text')
+    // authority for it. With the editor universal this cannot change the *outcome* for a
+    // known type, but it still must not be the corpus that decides.
+    expect(presentationForQuestion('multiple_choice', 'arith.add.single').editor).toBe('math')
+    expect(presentationForQuestion('numeric', 'not-a-real-concept').editor).toBe('math')
   })
 })
 

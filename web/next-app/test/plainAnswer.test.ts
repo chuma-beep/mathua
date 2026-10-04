@@ -7,7 +7,14 @@
 // moved — which is the point, because that shape is what the server grades.
 
 import { describe, it, expect } from 'vitest'
-import { fixDivision, fixMixedNumbers, fixFractionParens, fixNameSpacing, toPlainAnswer } from '../components/math/plainAnswer'
+import {
+  fixDivision,
+  fixMixedNumbers,
+  fixFractionParens,
+  fixNameSpacing,
+  fixImplicitLetterSpacing,
+  toPlainAnswer,
+} from '../components/math/plainAnswer'
 import corpus from './fixtures/mathlive-plain-text.json'
 
 type Case = (typeof corpus.cases)[number]
@@ -81,4 +88,61 @@ describe('toPlainAnswer', () => {
     // A silent MathLive bump changes the corpus under us; this is the canary.
     expect(corpus.mathliveVersion).toBe('0.111.0')
   })
+
+describe('fixImplicitLetterSpacing', () => {
+  // MathLive reads bare adjacent letters as implicit multiplication and serialises them
+  // with spaces. These are the answer shapes the corpus actually contains -- `yes` is the
+  // single most common expected answer in it (673 occurrences), `no` second (171) -- and
+  // the multiple-choice grader compares with strings.EqualFold, so `y e s` never matches
+  // `yes`. Every value below is a recording from the real library via
+  // scripts/record-mathlive-corpus.mjs, not a guess.
+  const rows: [string, string][] = [
+    ['y e s', 'yes'],
+    ['n o', 'no'],
+    ['o d d', 'odd'],
+    ['a d d i t i o n', 'addition'],
+    ['p i/2', 'pi/2'],
+    ['x y z', 'xyz'],
+  ]
+  for (const [raw, want] of rows) {
+    it(`rejoins ${JSON.stringify(raw)} as ${JSON.stringify(want)}`, () => {
+      expect(fixImplicitLetterSpacing(raw)).toBe(want)
+      expect(toPlainAnswer(raw)).toBe(want)
+    })
+  }
+
+  // The guard is the whole difficulty. A letter-space-letter also appears inside real
+  // products, and collapsing one turns `2pi r` into `2pir`, which is a different answer.
+  const untouched: [string, string][] = [
+    ['2pi r', '2pi r'],
+    ['2 xy', '2 xy'],
+    ['2 x + y', '2 x + y'],
+    ['sin (x)', 'sin (x)'],
+    ['x^2 + 1', 'x^2 + 1'],
+  ]
+  for (const [raw, want] of untouched) {
+    it(`leaves the product ${JSON.stringify(raw)} alone`, () => {
+      expect(fixImplicitLetterSpacing(raw)).toBe(want)
+    })
+  }
+
+  it('is idempotent, because it runs after the other rules in a pipeline', () => {
+    for (const [raw] of rows) {
+      const once = fixImplicitLetterSpacing(raw)
+      expect(fixImplicitLetterSpacing(once)).toBe(once)
+    }
+  })
+})
+
+describe('fixFractionParens with a symbolic numerator', () => {
+  it('unwraps (pi)/(2) as well as (1)/(2)', () => {
+    expect(toPlainAnswer('(1)/(2)')).toBe('1/2')
+    expect(toPlainAnswer('(pi)/(2)')).toBe('pi/2')
+  })
+
+  it('keeps parentheses on a real expression numerator', () => {
+    // Unwrapping this would read as `x + 1/y`, which is a different answer.
+    expect(toPlainAnswer('(x + 1)/(y)')).toBe('(x + 1)/(y)')
+  })
+})
 })

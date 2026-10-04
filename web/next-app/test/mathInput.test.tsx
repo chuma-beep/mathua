@@ -48,15 +48,25 @@ describe('MathAnswerInput control selection', () => {
     expect(await mathField()).toBeTruthy()
   })
 
-  it('renders the plain input for a multiple-choice concept', async () => {
-    render(<MathAnswerInput value="" onChange={() => {}} gradingType="multiple_choice" conceptId="c1" placeholder="Your answer" />)
+  it('renders the math editor for a multiple-choice concept too', async () => {
+    // The editor is universal now. Multiple choice still renders ChoiceOptions above
+    // the field, so this is the *typed* path, not a replacement for the tap target.
+    render(<MathAnswerInput value="" onChange={() => {}} gradingType="multiple_choice" conceptId="geo.basic.points_lines" placeholder="Your answer" />)
+    expect(await mathField()).toBeTruthy()
+  })
+
+  it('still renders the plain input when the concept is unknown to the corpus', async () => {
+    // The one remaining text path: a fixture id, or a concept added server-side before
+    // the corpus rebuild. Degrading to the input that grades correctly everywhere is the
+    // safer failure.
+    render(<MathAnswerInput value="" onChange={() => {}} conceptId="not-a-real-concept" placeholder="Your answer" />)
     await waitFor(() => expect(field()).toBeTruthy())
     expect(textField()).toBeTruthy()
   })
 
   it('keeps the SymbolPalette in text mode, and not in math mode', async () => {
     const { unmount } = render(
-      <MathAnswerInput value="" onChange={() => {}} gradingType="multiple_choice" conceptId="c1" placeholder="Your answer" />,
+      <MathAnswerInput value="" onChange={() => {}} conceptId="not-a-real-concept" placeholder="Your answer" />,
     )
     await waitFor(() => expect(textField()).toBeTruthy())
     // The palette is the legacy way to type π and ± into a plain input; the math
@@ -105,7 +115,7 @@ describe('MathAnswerInput answer flow', () => {
 
   it('submits on Enter from the plain input too', async () => {
     const onSubmit = vi.fn()
-    render(<MathAnswerInput value="" onChange={() => {}} onSubmit={onSubmit} gradingType="multiple_choice" conceptId="c1" />)
+    render(<MathAnswerInput value="" onChange={() => {}} onSubmit={onSubmit} conceptId="not-a-real-concept" />)
     await waitFor(() => expect(textField()).toBeTruthy())
     fireEvent.keyDown(textField(), { key: 'Enter' })
     expect(onSubmit).toHaveBeenCalledTimes(1)

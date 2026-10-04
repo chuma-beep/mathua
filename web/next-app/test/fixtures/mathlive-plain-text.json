@@ -205,6 +205,84 @@
       "expected": "<",
       "latex": "<",
       "plain": "<"
+    },
+    {
+      "gradingType": "comparison",
+      "expected": ">",
+      "latex": ">",
+      "plain": ">"
+    },
+    {
+      "gradingType": "comparison",
+      "expected": "<=",
+      "latex": "\\le",
+      "plain": "<="
+    },
+    {
+      "gradingType": "comparison",
+      "expected": ">=",
+      "latex": "\\ge",
+      "plain": ">="
+    },
+    {
+      "gradingType": "multiple_choice",
+      "expected": "yes",
+      "latex": "yes",
+      "plain": "y e s"
+    },
+    {
+      "gradingType": "multiple_choice",
+      "expected": "no",
+      "latex": "no",
+      "plain": "n o"
+    },
+    {
+      "gradingType": "multiple_choice",
+      "expected": "1/2",
+      "latex": "\\frac{1}{2}",
+      "plain": "(1)/(2)"
+    },
+    {
+      "gradingType": "multiple_choice",
+      "expected": "pi/2",
+      "latex": "pi/2",
+      "plain": "p i/2"
+    },
+    {
+      "gradingType": "multiple_choice",
+      "expected": "pi/2",
+      "latex": "\\frac{\\pi}{2}",
+      "plain": "(pi)/(2)"
+    },
+    {
+      "gradingType": "multiple_choice",
+      "expected": "odd",
+      "latex": "odd",
+      "plain": "o d d"
+    },
+    {
+      "gradingType": "multiple_choice",
+      "expected": "Z",
+      "latex": "Z",
+      "plain": "Z"
+    },
+    {
+      "gradingType": "multiple_choice",
+      "expected": "addition",
+      "latex": "addition",
+      "plain": "a d d i t i o n"
+    },
+    {
+      "gradingType": "multiple_choice",
+      "expected": "2",
+      "latex": "2",
+      "plain": "2"
+    },
+    {
+      "gradingType": "multiple_choice",
+      "expected": "-1",
+      "latex": "-1",
+      "plain": "-1"
     }
   ]
 }

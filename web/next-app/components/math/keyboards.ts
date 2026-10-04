@@ -19,8 +19,43 @@ export type MathKeyboardMode = 'arithmetic' | 'algebra' | 'fractions' | 'geometr
 
 export type AnswerEditor = 'math' | 'text'
 
-/** grading_type → editor. Mirrors internal/grader/router.go. */
-const MATH_GRADING_TYPES = new Set(['numeric', 'symbolic', 'expression', 'polynomial', 'complex'])
+/**
+ * Every question gets the math editor, whatever it grades as.
+ *
+ * This used to be a set of the five expression-valued grading types, mirroring
+ * internal/grader/router.go, on the reasoning that MathLive earns its place only where
+ * the grader parses an expression. That reasoning was sound for the editor and wrong
+ * about the corpus: `multiple_choice` is 209 of 657 concepts and its options are
+ * embedded in the question text, `tuple` 11, `ordering` 1, `comparison` 2 — and all of
+ * them take a *typed* answer too, because the answer hosts render a text field
+ * alongside the tappable options. So 223 concepts were typing mathematics into a plain
+ * `<input>` with no fraction key, no exponent, no parentheses and no symbols.
+ *
+ * The grading concern was real and is now measured rather than assumed. The
+ * multiple-choice grader is `strings.EqualFold(expected, answer)`, and MathLive reads
+ * bare adjacent letters as implicit multiplication: `yes` came back as `y e s`, `no` as
+ * `n o`, `odd` as `o d d`, `addition` as `a d d i t i o n`, `pi/2` as `p i/2`. With
+ * `yes` the most common expected answer in the corpus (673) and `no` second (171),
+ * universal MathLive would have broken roughly 850 questions. It is safe now because
+ * `fixImplicitLetterSpacing` rejoins them and `fixFractionParens` handles a symbolic
+ * numerator, and because `internal/grader/mathlive_compat_test.go` grades a *recording*
+ * of what the library actually emits -- 47 cases, including 10 multiple-choice ones
+ * that did not exist before this.
+ *
+ * Multiple choice still renders `ChoiceOptions` above the field, so a yes/no question
+ * stays a tap. The keypad is there for the learner who would rather type.
+ */
+const MATH_GRADING_TYPES = new Set([
+  'numeric',
+  'symbolic',
+  'expression',
+  'polynomial',
+  'complex',
+  'multiple_choice',
+  'tuple',
+  'ordering',
+  'comparison',
+])
 
 /**
  * domain → keyboard mode. Domains not listed fall back to 'algebra', which is

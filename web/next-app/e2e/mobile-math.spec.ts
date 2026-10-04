@@ -21,6 +21,28 @@ const CONCEPT = 'arith.add.single'
  * inside. Using the normal wait made them pass or fail depending on how the two
  * deadlines interleaved -- which is exactly what they did.
  */
+/**
+ * Press MathLive's own layer switcher in the keypad toolbar.
+ *
+ * This is the only layer-navigation mechanism that works in 0.111.0: a keycap with a
+ * `layer` property gains a `layer-switch` *class* and does nothing when pressed, while
+ * the toolbar emits `data-layer` on its entries and a click assigns
+ * `virtualKeyboard.currentLayer`. Layers were unreachable before this for exactly that
+ * reason, so the switcher is asserted rather than assumed.
+ */
+async function switchLayer(page: Page, label: string) {
+  // Forced: the switcher entries are small toolbar targets that Playwright's
+  // stability check rejects, and MathLive's own handler reads `data-layer` from the
+  // event target regardless of how the event was produced.
+  await page
+    // `:visible` matters: MathLive renders one toolbar per layout and only the active
+    // one is shown, so the first match in DOM order is usually a hidden copy.
+    .locator('.MLK__toolbar .layer-switch:visible')
+    .filter({ hasText: new RegExp(`^${label}$`) })
+    .first()
+    .click({ force: true })
+}
+
 async function openLearn(page: Page, opts: { waitForEditor?: boolean } = {}) {
   await page.addInitScript(() => {
     localStorage.setItem('mathua_token', 'fake-token')
@@ -416,6 +438,58 @@ test.describe('the whole loop on a phone', () => {
   // The chunk is delayed so the window is wide enough to act inside deterministically.
   // Nothing here waits for a fixed duration to pass: each step waits for the state it
   // needs, and the delay is the condition under test rather than a sleep.
+  // The editor is universal now, so the keypad has to answer what every grading type
+  // asks for. Three of these were missing before and each blocked a real question:
+  // no comma meant no tuple or ordering answer could be entered at all, and no
+  // comparison key meant `dec.basics.compare` and `frac.ops.compare` could not be
+  // answered on a phone without digging for a symbol row.
+  test('the keypad can enter a tuple, so tuple and ordering concepts are answerable', async ({ page }) => {
+    await openLearn(page)
+    await setAnswer(page, '')
+    await answerField(page).tap()
+    await expect(keyboardRows(page)).toBeVisible({ timeout: 10_000 })
+    await keycaps(page).filter({ hasText: /^3/ }).first().tap()
+    await keycaps(page).filter({ hasText: /^,/ }).first().tap()
+    await keycaps(page).filter({ hasText: /^7/ }).first().tap()
+    await page.waitForTimeout(150)
+    // A tuple, not "37": the comma is a separator, and without it these 14 concepts have
+    // no way to enter their answer at all.
+    expect(await answerLatex(page)).toBe('3,7')
+  })
+
+  test('the keypad carries the comparison signs the two comparison concepts need', async ({ page }) => {
+    await openLearn(page)
+    await setAnswer(page, '')
+    await answerField(page).tap()
+    await expect(keyboardRows(page)).toBeVisible({ timeout: 10_000 })
+    // Reached through MathLive's own toolbar switcher, because that is the only
+    // mechanism that works: a keycap with a `layer` property only gains a CSS class and
+    // does nothing when pressed, while the toolbar emits `data-layer` and assigns
+    // `currentLayer`. Layers were unreachable before this for the same reason.
+    await switchLayer(page, '±÷')
+    await switchLayer(page, 'abc')
+    // Poll rather than sleep: the switch is asynchronous and the keypad re-renders, so a
+    // fixed wait passes in isolation and fails under load — which is how this looked
+    // broken when it was only racy.
+    const ge = keycaps(page).filter({ hasText: /\u2265/ })
+    await expect(ge).toBeVisible({ timeout: 10_000 })
+    await ge.first().tap()
+    await page.waitForTimeout(150)
+    expect(await answerLatex(page)).toBe('\\ge')
+  })
+
+  test('offers an alphabet layout, so a yes/no answer can be typed at all', async ({ page }) => {
+    // `yes` is the most common expected answer in the corpus and `no` the second. They
+    // stay tappable through ChoiceOptions, but the typed path has to work too -- and
+    // MathLive reads bare letters as implicit multiplication, so it needs `toPlainAnswer`
+    // to rejoin them (test/plainAnswer.test.ts).
+    await openLearn(page)
+    await answerField(page).tap()
+    await expect(keyboardRows(page)).toBeVisible({ timeout: 10_000 })
+    // MathLive renders the switcher itself once `kb.layouts` has more than one entry.
+    await expect(page.locator('.MLK__toolbar').first()).toContainText('abc')
+  })
+
   test('the answer is typeable while the editor is still loading', async ({ page }) => {
     await installInstrumentation(page)
     await delayMathLiveChunk(page, 3000)
