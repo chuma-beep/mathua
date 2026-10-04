@@ -162,6 +162,44 @@ So the subset a Go grader would need is `Add`, `Multiply`, `Power`, `Divide`, `N
 tolerate that **`Subtract` never arrives**, `Divide` only survives with a symbolic
 denominator, and constant subexpressions arrive already evaluated.
 
+### The feedback contract
+
+`equivalence()` is three-valued, and the naming is deliberate — a string union rather
+than `true | false | undefined`, because `'unknown'` is an *absence* and `undefined`
+would be indistinguishable from a function that failed to return.
+
+| state | meaning |
+|---|---|
+| `'equivalent'` | the two expressions are the same |
+| `'different'` | they are provably not |
+| `'unknown'` | Compute Engine could not decide, and we decline to guess |
+
+The actual results, so the states are not aspirational:
+
+| comparison | result |
+|---|---|
+| `x²+2x+1` vs `(x+1)²` | `equivalent` |
+| `2^10` vs `1024` | `different` |
+| `\sqrt{x²}` vs `x` | `unknown` — correctly refuses; it is `|x|` |
+| `\sqrt{x²}` vs `\lvert x\rvert` | `equivalent` |
+| `2x+3` vs `x²+2x+1` | **`unknown`**, not `different` |
+
+That last row is the one that matters. CE will not call two plainly unequal symbolic
+expressions *different* — it declines rather than guess — which is why `'unknown'` is a
+first-class outcome and not an error path.
+
+**No state renders a verdict.** Not `'equivalent'`, not `'different'`, and above all not
+`'unknown'`: nothing may render as "correct", "incorrect", "wrong", "try again" or "not
+yet". `test/selfCheck.test.tsx` asserts that for all three states, using a real pair
+that reaches each one.
+
+This is not a missing feature, and the reason is the answer oracle. The client does not
+hold the expected answer — grading is server-side and answers are anchored there
+(ADR-005) — so there is nothing to compare against without shipping the answer to the
+browser. `simplificationHint` is what the UI uses instead: it reports what the
+learner's own expression simplifies to and cannot produce a verdict even in principle,
+because it never sees a second expression.
+
 ### What Compute Engine does when asked to judge equality
 
 Measured, because the answer decides whether an equivalence feature can exist at all

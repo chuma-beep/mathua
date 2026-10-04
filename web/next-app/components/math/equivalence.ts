@@ -35,7 +35,40 @@ export interface Expression {
   toString(): string
 }
 
+/**
+ * The three-state verdict, spelled out.
+ *
+ *   'equivalent'  the two expressions are the same
+ *   'different'   they are provably not
+ *   'unknown'     Compute Engine could not decide, and we decline to guess
+ *
+ * 'unknown' is the load-bearing one and it is not an edge case. Measured against
+ * `isEqual` / `isIdenticallyEqual` (see docs/math-input.md): symbolic identities come
+ * back undefined almost as often as they come back true, and `isIdenticallyEqual`
+ * declines to call `2x+3` and `2x+4` different. So a comparison that cannot say
+ * 'different' must say nothing at all.
+ *
+ * ## Nothing renders a verdict from this, for any of the three
+ *
+ * There is no correctness feedback built on this function, and that is deliberate
+ * rather than unfinished. The client does not hold the expected answer — grading is
+ * server-side and answers are anchored there (ADR-005) — so there is nothing here to
+ * compare *against* without shipping the answer to the browser, which would turn any
+ * hint into an answer oracle.
+ *
+ * `simplificationHint` is what the UI uses instead: it reports what the learner's own
+ * expression simplifies to, and cannot produce a correctness verdict even in principle
+ * because it never sees a second expression. `test/selfCheck.test.tsx` asserts that for
+ * all three states, including 'unknown', nothing resembling a verdict reaches the DOM —
+ * no "correct", no "incorrect", no "wrong", no "try again".
+ *
+ * Naming: a string union rather than `true | false | undefined`. The three outcomes are
+ * not truthy/falsy-shaped — 'unknown' is an absence, and `undefined` would be
+ * indistinguishable from a function that simply failed to return. The states are
+ * compared by name at every call site.
+ */
 export type Equivalence = 'equivalent' | 'different' | 'unknown'
+
 
 let enginePromise: Promise<Engine | null> | null = null
 
