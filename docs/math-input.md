@@ -558,6 +558,61 @@ with the bytes already cached: it is parse and evaluate, not download.
 
 Everything here cost time to find and is worth writing down.
 
+**`math-mode-space` is ignored; set the property.** This is the spacebar. MathLive's own
+`alphabetic` layout — reachable from the keypad toolbar on every question — ships
+
+```js
+{ label: " ", width: 1.5 }
+```
+
+A label and a width, and no `command`, `insert`, `latex` or `key`. `executeKeycapCommand`
+resolves a keycap as `command` → `insert` → `key` → `latex` → `typedText(label)`, so
+with none of the first four set it falls through to `typedText(" ")`. That reaches the
+`[Space]` keystroke handler, which does:
+
+```js
+if (mathfield.options.mathModeSpace) { insert(mathModeSpace) }
+else                               { moveAfterParent() }
+```
+
+`mathModeSpace` defaults to `""`. **So the spacebar moved the caret and inserted nothing** —
+an upstream defect, not a Mathua regression. Three generator answer formats need a real
+space: `Q R` (remainder), `a sqrt(b)` and `P=[[...]] D=[[...]]`.
+
+The payload is `\,`, not a literal space, because TeX discards literal spaces in math mode.
+`\,` is the proven round-trip value: the recorded corpus holds
+`expression 5 R 3 <- 5\ R\ 3`, which comes back as plain text `5 R 3` and grades.
+
+Set it as a **property**, not the documented attribute. Measured on 0.111.0 with React 18:
+the attribute is present in the DOM and `placeholder` and `class` are both honoured from
+it, but `mathModeSpace` stays `""` and the spacebar stays inert. `el.mathModeSpace = '\,'`
+and `el.setOptions({ mathModeSpace: '\,' })` both work. An attribute that is silently
+ignored is worse than none — it reads as configuration and is not.
+
+Two more traps on the way, both the ADR-029 class again. A keycap of `{ label: ' ' }`
+*does* work (it maps to `[Space]`) but renders as a blank face, which is half of why the
+key read as broken. The obvious fix — a visible `label: '␣'` — **types the glyph `␣` into
+the field**, because with no payload beside the label it falls through to
+`typedText('␣')`. The payload has to be stated alongside: `{ label: '␣', latex: '\,' }`.
+
+**The keypad's width budget is in keycap-widths, and it depends on the viewport.**
+MathLive does not stretch keys to fill its panel: measured on a Pixel 7 (400px panel),
+every keycap renders 45px and a `width: 2` keycap renders 93px, whatever the row holds.
+So the binding constraint is the row's total *units*, and the ceiling is the point at
+which `units × 45` stops fitting:
+
+| panel | 5u | 6u | 7u | 8u | 9u | 10u |
+|---|---|---|---|---|---|---|
+| 400px (412px phone) | 45 | 45 | 45 | 45 | **42** | 37 |
+| 308px (320px phone) | 45 | 45 | **41** | **36** | — | — |
+
+Eight units is the design target and is what `test/keyboards.test.ts` asserts for all five
+modes. **At 320px the ceiling is six units, and thirteen rows across four modes are already
+over it** — so the 44px floor holds at 412px and does not hold at 320px. The e2e
+touch-target audit passes at 320px only because it measures whichever layout the default
+question selects, `ARITHMETIC`, the one mode whose rows all fit. Closing that means
+splitting the eight-keycap rows across modes, which is a redesign rather than a fix.
+
 **`geometrychange` carries no `detail`.** The 0.111.0 docs say
 `evt.detail.boundingRect`. The library dispatches `new Event('geometrychange')` — a
 plain `Event`, no detail at all — from a `ResizeObserver` and from `stateChanged()`. A

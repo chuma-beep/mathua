@@ -158,6 +158,30 @@ export default function MathLiveField({
     if (el) el.readOnly = disabled
   }, [disabled])
 
+  // What a spacebar press inserts. `mathModeSpace` defaults to `""`, and with it empty
+  // the `[Space]` keystroke handler only calls `moveAfterParent()` -- the caret moves
+  // and nothing is inserted. That is why the spacebar looked dead: MathLive's own
+  // `alphabetic` layout ships `{ label: " ", width: 1.5 }`, which declares no command,
+  // no insert and no latex, so `executeKeycapCommand` falls through to
+  // `typedText(" ")` and lands on that empty branch. It is an upstream defect, not a
+  // Mathua regression.
+  //
+  // `\,` and not a literal space: TeX discards literal spaces in math mode, so a spacebar
+  // inserting `" "` would render and serialise as nothing. `\,` is the payload proven to
+  // survive the round trip -- the recorded corpus holds `expression 5 R 3 <- 5\ R\ 3`,
+  // which comes back as the plain text `5 R 3` and grades. Three generator answer formats
+  // need it: `Q R`, `a sqrt(b)` and `P=[[...]] D=[[...]]`.
+  //
+  // Set as a property, not as the documented `math-mode-space` attribute. Measured on
+  // 0.111.0 with React 18: the attribute is present in the DOM and `placeholder` and
+  // `class` are both honoured from it, but `mathModeSpace` stays `""` and the spacebar
+  // stays inert. The property and `setOptions({ mathModeSpace })` both work. An attribute
+  // that is silently ignored is worse than none -- it reads as configuration and is not.
+  useEffect(() => {
+    const el = ref.current
+    if (el) el.mathModeSpace = '\\,'
+  }, [])
+
   const installKeyboard = useCallback(() => {
     const kb = typeof window === 'undefined' ? undefined : window.mathVirtualKeyboard
     if (!kb) return

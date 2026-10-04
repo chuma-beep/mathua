@@ -178,6 +178,33 @@ describe('layouts', () => {
     }
   })
 
+  it('no row exceeds eight keycap-widths, or its keys drop under 44px', () => {
+    // MathLive's ten-keycap guidance is necessary but not sufficient, and it is the
+    // wrong number to design against. Measured on a Pixel 7 (a 400px keypad panel):
+    // every keycap renders 45px wide and a `width: 2` keycap renders 93px, whatever
+    // the row contains -- the panel does not stretch keys to fill itself. So the
+    // binding constraint is width *units*, and 400 / 45 is 8.8. Eight units is the
+    // last row that keeps every key at 45px; nine puts the narrowest key at 40px.
+    //
+    // The e2e touch-target audit checks the same floor against the real DOM, but it
+    // only ever sees whichever layout the default question selects. This asserts all
+    // five modes, including the ones no test drives a browser to.
+    const UNITS = (k: unknown): number =>
+      typeof k === 'string' ? 1 : ((k as { width?: number }).width ?? 1)
+
+    for (const mode of MODES) {
+      for (const layer of layoutForMode(mode).layers) {
+        for (const row of layer.rows) {
+          const units = row.reduce((sum, k) => sum + UNITS(k), 0)
+          expect(
+            Math.round(units * 10) / 10,
+            `${mode} row of ${units} units: ${row.map(k => (typeof k === 'string' ? k : (k.label ?? k.latex ?? '?'))).join(' ')}`,
+          ).toBeLessThanOrEqual(8)
+        }
+      }
+    }
+  })
+
   it('gives every mode the digits, four operations, a fraction, a root and an exponent', () => {
     // A learner must never be unable to enter the answer the hint asks for.
     for (const mode of MODES) {

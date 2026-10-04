@@ -197,6 +197,45 @@ export async function pressKeycap(page: Page, label: string): Promise<void> {
   await keycap(page, label).click()
   await page.waitForTimeout(60)
 }
+
+/**
+ * Switch the keypad to MathLive's `alphabetic` layout.
+ *
+ * Every mode appends it (`kb.layouts = [...layoutsForMode(mode), 'alphabetic']`), so it
+ * is reachable from any question, and it is the only layout carrying the full Latin
+ * alphabet -- Mathua's own letter layer holds `x`, `y`, `n` and `pi`.
+ *
+ * Selected by the generated layer id rather than by the toolbar's label or tooltip:
+ * Mathua's layouts declare `mathua-main` / `mathua-symbols` / `mathua-letters`, and
+ * MathLive mints `ML__layer_*` for the layouts it builds itself. A `data-tooltip`
+ * string would pin the test to English.
+ *
+ * Only visible entries: MathLive renders a toolbar per layout and leaves the inactive
+ * ones in the DOM, so an unscoped selector resolves to the first *hidden* copy.
+ */
+export async function useAlphabeticLayout(page: Page): Promise<void> {
+  await page.locator('.MLK__toolbar [data-layer^="ML__layer_"]:visible').first().click()
+  await expect(keyboardRows(page)).toBeVisible()
+  await page.waitForTimeout(400)
+}
+
+/**
+ * MathLive's own spacebar, in the `alphabetic` layout -- the key that was reported
+ * inert.
+ *
+ * Located structurally because there is nothing to match on: its label is a single
+ * space character, so `textContent.trim()` is empty. `width: 1.5` renders as the class
+ * `w15`, and the other `w15` keycaps in that layout are the shift key and the dismiss
+ * key, told apart by `shift` and `action`. The `[separator]` filler is excluded for the
+ * same reason the touch-target audit excludes it: a separator is not a tap target.
+ *
+ * Its rendered width is 55px, so it is not itself a touch-target problem.
+ */
+export function mathLiveSpacebar(page: Page): Locator {
+  return page
+    .locator('.MLK__rows .MLK__row > *:visible.w15:not(.action):not(.shift):not(.separator)')
+    .first()
+}
 /**
  * Run one of MathLive's own editing commands, e.g. `moveToMathfieldStart`.
  *

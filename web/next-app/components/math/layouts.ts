@@ -100,6 +100,30 @@ const RIGHT: Keycap = '[right]'
 const SEPARATOR: Keycap = { label: '[separator]', width: 0.5 }
 const HIDE: Keycap = '[hide-keyboard]'
 
+// A spacebar that works, for the mode that needs one most.
+//
+// `mathModeSpace` (set in `MathLiveField`) is what repairs MathLive's *own* spacebar --
+// the one in its `alphabetic` layout, which is appended to every mode and reachable from
+// the keypad toolbar. Upstream that key is `{ label: " ", width: 1.5 }`: a label and a
+// width, and no `command`, `insert`, `latex` or `key`, so `executeKeycapCommand` falls
+// through to `typedText(" ")`, which reaches the `[Space]` handler and, with
+// `mathModeSpace` empty, only calls `moveAfterParent()`. The caret moved and nothing was
+// inserted. It is an upstream defect, not a Mathua regression.
+//
+// This is the same key on the arithmetic grid, which is where it earns its place: the
+// remainder format `Q R` and mixed numbers are arithmetic answers, and reaching them
+// through `alphabetic` first means two taps before a space. One unit wide, on the one
+// row that has a spare unit to give -- see the width budget in `test/keyboards.test.ts`,
+// which is why this is arithmetic-only and not on every grid.
+//
+// `latex: '\\,'` rather than a label-only key, and this is the ADR-029 trap twice over: a
+// label of `' '` would work (it maps to `[Space]`) but renders as a blank face, which is
+// half of why the key read as broken; a visible label of `'␣'` renders the glyph but, with
+// no payload beside it, *types* the glyph `␣` into the field. So the payload is stated.
+// `\\,` is the proven round-trip value -- the recorded corpus holds
+// `expression 5 R 3 <- 5\ R\ 3`, which comes back as the plain text `5 R 3` and grades.
+const SPACE: Keycap = { label: '␣', aside: 'space', latex: '\\,' }
+
 // Structural keycaps. Shared so a fraction looks and behaves identically in
 // every mode.
 const FRACTION: Keycap = { label: 'a⁄b', latex: '\\frac{#@}{#0}', aside: 'fraction', variants: [{ label: 'n⁄d', latex: '\\frac{#?}{#?}' }] }
@@ -184,7 +208,7 @@ const ARITHMETIC: Layout = {
     { ...MAIN, rows: [
         [digit(7), digit(8), digit(9), DIVIDE, ROOT],
         [digit(4), digit(5), digit(6), TIMES, POWER],
-        [digit(1), digit(2), digit(3), MINUS, PLUS],
+        [digit(1), digit(2), digit(3), MINUS, PLUS, SPACE],
         [ZERO_WIDE, DOT, OPEN, CLOSE, EQUALS],
         [FRACTION, COMMA, LEFT, RIGHT, { ...BACKSPACE, width: 2 }],
       ],
@@ -225,8 +249,8 @@ const ALGEBRA: Layout = {
         const rows: Keycap[][] = []
         digitColumn(
           rows,
-          [[FRACTION, ROOT, BACKSPACE], [TIMES, POWER, LEFT, RIGHT], [DIVIDE, PLUS, MINUS, SEPARATOR]],
-          [{ latex: 'x', variants: ['y', 'z'] }, { latex: 'y' }, HIDE],
+          [[FRACTION, ROOT, BACKSPACE], [TIMES, POWER, LEFT, RIGHT, { latex: 'y' }], [DIVIDE, PLUS, MINUS, SEPARATOR]],
+          [{ latex: 'x', variants: ['y', 'z'] }, HIDE],
         )
         return rows
       })(),
@@ -245,8 +269,8 @@ const GEOMETRY: Layout = {
         const rows: Keycap[][] = []
         digitColumn(
           rows,
-          [[ROOT, BACKSPACE], [POWER, LEFT, RIGHT], [TIMES, PLUS, MINUS, SEPARATOR]],
-          [{ latex: '\\pi', variants: ['2\\pi'] }, { latex: '^\\circ', variants: ['\\pi/180'] }, HIDE],
+          [[ROOT, BACKSPACE], [POWER, LEFT, RIGHT, { latex: '^\\circ', variants: ['\\pi/180'] }], [TIMES, PLUS, MINUS, SEPARATOR]],
+          [{ latex: '\\pi', variants: ['2\\pi'] }, HIDE],
         )
         return rows
       })(),

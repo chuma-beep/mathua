@@ -70,6 +70,9 @@ Recommended: any iPhone still receiving security updates. Record the exact model
 | 1.19 | Fraction key | builds a fraction with two navigable slots | |
 | 1.20 | Full flow, touch only: open → focus → answer → modify → submit → feedback → continue | completes | |
 | 1.21 | Type `1/2+1/3`, pause | the self-check offers "that simplifies to 5/6" | |
+| 1.22 | Switch the keypad to `abc` and tap the wide bottom bar | inserts a space; does **not** just move the caret (ADR-035) | |
+| 1.23 | Tap the `␣` key on the arithmetic grid | inserts a space; never types the glyph `␣` | |
+| 1.24 | Tap every key in the `Algebra` and `Geometry` grids | all at least 44px on a 412px phone (ADR-035) | |
 | 1.22 | On mobile data, observe first use | note whether the CE download is acceptable to you | |
 | 1.23 | DevTools → Network, filter `.wav` | **no requests** | |
 | 1.24 | DevTools → Elements, `:root` | `data-mathua-keyboard="open"` and a non-zero `--mathua-keyboard-height` while the keypad is up | |
