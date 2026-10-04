@@ -61,6 +61,16 @@ interface Props {
   mode: MathKeyboardMode
   disabled: boolean
   placeholder?: string
+  /**
+   * The server verdict, so the field's own border can carry it.
+   *
+   * Not a class name. `app/globals.css` styles the host with
+   * `math-field.mathua-math-field`, which is more specific than any Tailwind utility, so
+   * a `border-mathua-green` passed in here loses to the `border-color` declared there.
+   * The attribute is read by that stylesheet instead, and is the same trick
+   * `PlainAnswerInput` uses with `data-mathua-loading`.
+   */
+  status?: import('./types').MathInputStatus
   /** Accessible name. MathLive gives the field `role="group"`, so this is what a screen reader announces. */
   ariaLabel: string
   onChange: (value: MathInputValue) => void
@@ -82,6 +92,7 @@ export default function MathLiveField({
   mode,
   disabled,
   placeholder,
+  status,
   ariaLabel,
   onChange,
   onLatex,
@@ -316,6 +327,7 @@ export default function MathLiveField({
     <math-field
       ref={ref}
       class="mathua-math-field"
+      data-status={status === 'correct' || status === 'incorrect' ? status : undefined}
       placeholder={placeholder}
       aria-label={ariaLabel}
       onInput={emit}
