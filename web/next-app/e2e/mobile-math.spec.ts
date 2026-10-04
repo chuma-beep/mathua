@@ -1,5 +1,5 @@
 import { test, expect, type Page } from '@playwright/test'
-import { answerField, answerLatex, focusAnswerField, setAnswer, typeIntoField, showVirtualKeyboard, keyboardRows, keyboardPanel, keyboardVisible, hideVirtualKeyboard, keycaps, glyphKeycap, loadingAnswerField } from './helpers/answer'
+import { answerField, answerLatex, focusAnswerField, setAnswer, typeIntoField, showVirtualKeyboard, keyboardRows, keyboardPanel, keyboardVisible, hideVirtualKeyboard, keycaps, glyphKeycap, loadingAnswerField, captureSubmittedAnswer, pressKeycap, useAlphabeticLayout, mathLiveSpacebar } from './helpers/answer'
 import { installInstrumentation, delayMathLiveChunk } from './helpers/instrument'
 
 // Mobile behaviour, on a real touch device profile (Pixel 7, and a 320px viewport).
@@ -43,7 +43,11 @@ async function switchLayer(page: Page, label: string) {
     .click({ force: true })
 }
 
-async function openLearn(page: Page, opts: { waitForEditor?: boolean } = {}) {
+async function openLearn(
+  page: Page,
+  opts: { waitForEditor?: boolean; concept?: string } = {},
+) {
+  const concept = opts.concept ?? CONCEPT
   await page.addInitScript(() => {
     localStorage.setItem('mathua_token', 'fake-token')
     localStorage.setItem(
@@ -56,7 +60,7 @@ async function openLearn(page: Page, opts: { waitForEditor?: boolean } = {}) {
     if (url.includes('/practice')) {
       return route.fulfill({
         json: {
-          concept_id: CONCEPT,
+          concept_id: concept,
           questions: [
             { question: '2 + 2 = ?', answer: '4', explanation: 'Two and two.', source: 'curated' },
             { question: '3 + 5 = ?', answer: '8', explanation: 'Three and five.', source: 'curated' },
@@ -64,8 +68,8 @@ async function openLearn(page: Page, opts: { waitForEditor?: boolean } = {}) {
         },
       })
     }
-    if (url.includes('/kp')) return route.fulfill({ json: { concept_id: CONCEPT, kps: [{ label: 'Add', section: 'Add', subgoals: [], worked_example: '2+3=5' }] } })
-    if (url.includes('/readiness')) return route.fulfill({ json: { concept_id: CONCEPT, ready: true, weak: [], missing: [] } })
+    if (url.includes('/kp')) return route.fulfill({ json: { concept_id: concept, kps: [{ label: 'Add', section: 'Add', subgoals: [], worked_example: '2+3=5' }] } })
+    if (url.includes('/readiness')) return route.fulfill({ json: { concept_id: concept, ready: true, weak: [], missing: [] } })
     return route.fulfill({ json: {} })
   })
   await page.route('**/api/study/answer', route => {
@@ -87,7 +91,7 @@ async function openLearn(page: Page, opts: { waitForEditor?: boolean } = {}) {
     await page.route(pattern, route => route.fulfill({ json: body }))
   }
 
-  await page.goto(`/learn?concept=${CONCEPT}`)
+  await page.goto(`/learn?concept=${concept}`)
   await page.getByRole('button', { name: 'Next →' }).click()
   if (opts.waitForEditor === false) {
     await expect(page.locator('.mathua-math-input')).toBeAttached({ timeout: 30_000 })
@@ -267,6 +271,66 @@ test.describe('layout and reachability', () => {
     // rows must not push the page into a horizontal scroll.
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)
     expect(overflow).toBeLessThanOrEqual(1)
+  })
+})
+
+test.describe('the spacebar', () => {
+  test('the space key inserts a space', async ({ page }) => {
+    await openLearn(page)
+    await answerField(page).tap()
+    await expect(keyboardRows(page)).toBeVisible({ timeout: 10_000 })
+
+    await pressKeycap(page, '5')
+    await pressKeycap(page, '\u2423')
+    await pressKeycap(page, '3')
+
+    // `\,` and not a bare space. TeX discards literal spaces in math mode, so a spacebar
+    // that inserted `" "` would render as nothing and serialise as nothing; `\,` is the
+    // payload the recorded corpus proves survives the round trip.
+    expect(await answerLatex(page)).toBe('5\\,3')
+  })
+
+  test('MathLive\'s own spacebar works, which is the key that was reported broken', async ({ page }) => {
+    await openLearn(page)
+    await answerField(page).tap()
+    await expect(keyboardRows(page)).toBeVisible({ timeout: 10_000 })
+    await useAlphabeticLayout(page)
+
+    const spacebar = mathLiveSpacebar(page)
+    await expect(spacebar, 'no spacebar found in the alphabetic layout').toBeVisible()
+    await spacebar.click()
+    await page.waitForTimeout(120)
+
+    expect(await answerLatex(page)).toContain('\\,')
+
+    // And it is a space in the answer that gets submitted, which is the only reason to
+    // want one: `Q R`, `a sqrt(b)` and `P=[[...]] D=[[...]]` are generator answer
+    // formats a learner cannot type without it.
+    await pressKeycap(page, 'r')
+    expect(await answerLatex(page)).toBe('\\,r')
+  })
+
+  test('a space still rejoins a word typed with one, so letters are not fragmented', async ({ page }) => {
+    // The regression risk in making spaces real. `fixImplicitLetterSpacing` collapses
+    // `y e s` to `yes` on the *plain-text* answer, and `\,` has already become a plain
+    // space by the time that runs -- but only because the collapse happens downstream of
+    // the serialisation. If it were ever applied to the LaTeX instead, every letter a
+    // learner typed would be welded to its neighbour. This is the test that notices.
+    await openLearn(page)
+    await answerField(page).tap()
+    await expect(keyboardRows(page)).toBeVisible({ timeout: 10_000 })
+    await useAlphabeticLayout(page)
+
+    for (const k of ['y', 'e', 's']) {
+      await pressKeycap(page, k)
+      await mathLiveSpacebar(page).click()
+      await page.waitForTimeout(60)
+    }
+    expect(await answerLatex(page)).toBe('y\\,e\\,s\\,')
+
+    const submitted = captureSubmittedAnswer(page, '/api/study/answer')
+    await page.getByRole('button', { name: 'Check', exact: true }).first().tap()
+    await expect.poll(submitted).toBe('yes')
   })
 })
 
@@ -536,3 +600,4 @@ test.describe('the whole loop on a phone', () => {
     expect(await answerField(page).evaluate(el => (el as unknown as { value: string }).value)).toBe('7')
   })
 })
+
