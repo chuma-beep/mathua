@@ -6,6 +6,26 @@ import { getAttempts, resetAccount, type AttemptRecord } from '../lib/api'
 
 const RESET_PHRASE = 'reset my progress'
 
+/**
+ * Whether the typed phrase confirms the action.
+ *
+ * Case-insensitive, and deliberately so. This input is `type="text"` with no
+ * `autoCapitalize`, so Safari capitalises the first letter as you type and Android
+ * keyboards frequently autocorrect: "reset my progress" arrives as "Reset my progress".
+ * Both the comparison here and the server's were exact, so the button stayed disabled
+ * forever on a phone and the server would have answered the capitalised phrase with
+ * "confirmation phrase does not match" — telling someone who had typed exactly what
+ * the label asked for that they had mistyped it. Chromium does not auto-capitalise,
+ * which is why the suite was green throughout.
+ *
+ * The phrase confirms intent; it is not a secret. Casing and surrounding whitespace say
+ * nothing about how deliberate the action was, and refusing to arm over them locks a
+ * learner out of a reset they explicitly asked for. Anything else still fails.
+ */
+export function phraseConfirms(typed: string, expected: string): boolean {
+  return typed.trim().toLowerCase() === expected
+}
+
 export function attemptsToCSV(rows: AttemptRecord[]): string {
   const head = 'timestamp,concept_id,question,answer,expected,correct,elapsed_seconds,source'
   const esc = (v: string | number | boolean) => `"${String(v ?? '').replace(/"/g, '""')}"`
@@ -25,7 +45,7 @@ export default function DangerZone() {
   const [exporting, setExporting] = useState(false)
   const [exported, setExported] = useState(false)
   const [error, setError] = useState('')
-  const armed = phrase.trim() === RESET_PHRASE
+  const armed = phraseConfirms(phrase, RESET_PHRASE)
 
   async function handleExport() {
     setExporting(true)
@@ -60,7 +80,8 @@ export default function DangerZone() {
     setBusy(true)
     setError('')
     try {
-      await resetAccount(phrase.trim())
+      // Send the canonical phrase, so the server's own gate compares like with like.
+      await resetAccount(RESET_PHRASE)
       push('/profile')
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Reset failed')
@@ -115,6 +136,11 @@ export default function DangerZone() {
             onChange={e => setPhrase(e.target.value)}
             placeholder="reset my progress"
             autoComplete="off"
+            autoCapitalize="none"
+            autoCorrect="off"
+            spellCheck={false}
+            enterKeyHint="go"
+            aria-describedby={phrase && !armed ? 'reset-phrase-hint' : undefined}
             className="flex-1 min-w-0 bg-mathua-bg border border-mathua-border px-3 py-2 font-mono text-xs text-mathua-primary"
           />
           <button
@@ -126,6 +152,13 @@ export default function DangerZone() {
           </button>
         </div>
       </form>
+      {/* A greyed-out button with no explanation is indistinguishable from a broken
+          one, which is how this hid for as long as it did. */}
+      {phrase && !armed && (
+        <p id="reset-phrase-hint" role="status" className="mt-2 font-mono text-[11px] text-mathua-secondary">
+          That does not match. Type <span className="text-mathua-primary">{RESET_PHRASE}</span> exactly.
+        </p>
+      )}
       {error && <p className="mt-2 font-mono text-[11px] text-mathua-red">{error}</p>}
     </div>
   )

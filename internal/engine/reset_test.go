@@ -82,3 +82,35 @@ func TestPlanPrefs_LegacyMigration(t *testing.T) {
 		t.Error("evidence must survive migration")
 	}
 }
+
+// A confirmation typed on a phone arrives capitalised: Safari upper-cases the first
+// letter of a `type="text"` input and Android keyboards autocorrect. An exact
+// comparison rejected people who had typed exactly what the label asked for, and told
+// them they had mistyped it.
+func TestPhraseMatches_CasingAndWhitespace(t *testing.T) {
+	for _, typed := range []string{
+		"reset my progress",
+		"Reset my progress",
+		"RESET MY PROGRESS",
+		"  reset my progress  ",
+		"Reset My Progress",
+	} {
+		if !PhraseMatches(typed, ResetPhrase) {
+			t.Errorf("PhraseMatches(%q, ResetPhrase) = false, want true", typed)
+		}
+	}
+	for _, typed := range []string{
+		"reset",
+		"reset my progress!",
+		"reset my progres",
+		"delete my account", // the other phrase must not unlock this one
+		"",
+	} {
+		if PhraseMatches(typed, ResetPhrase) {
+			t.Errorf("PhraseMatches(%q, ResetPhrase) = true, want false", typed)
+		}
+	}
+	if !PhraseMatches("Delete My Account", DeletePhrase) {
+		t.Error("the delete phrase must tolerate casing too")
+	}
+}

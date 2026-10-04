@@ -8,6 +8,11 @@ import { attemptsToCSV } from './DangerZone'
 
 const DELETE_PHRASE = 'delete my account'
 
+/** See the identical helper in DangerZone.tsx — same bug, same reason. */
+export function phraseConfirms(typed: string, expected: string): boolean {
+  return typed.trim().toLowerCase() === expected
+}
+
 // DeleteAccount: destructive, explicit, and honest about scope. Deletion
 // wipes the account row and every owned row (progress, attempts, sessions,
 // quizzes, identities, settings, plans, avatars, filed reports) — nothing
@@ -28,7 +33,7 @@ export default function DeleteAccount() {
   const [busy, setBusy] = useState(false)
   const [exporting, setExporting] = useState(false)
   const [exported, setExported] = useState(false)
-  const armed = phrase.trim() === DELETE_PHRASE && (needsPassword !== true || password !== '')
+  const armed = phraseConfirms(phrase, DELETE_PHRASE) && (needsPassword !== true || password !== '')
 
   useEffect(() => {
     const cached = getUserInfo()?.has_password
@@ -72,12 +77,13 @@ export default function DeleteAccount() {
     setError('')
     try {
       if (needsPassword === true) {
-        await deleteAccount({ phrase: phrase.trim(), password })
+        // Canonical phrase: this keyboard capitalises and the server's gate is exact.
+        await deleteAccount({ phrase: DELETE_PHRASE, password })
       } else {
         // When we don't know whether a password is required, send it if the
         // learner typed one; the server decides, and a 401 can now be retried
         // because the field is on screen.
-        await deleteAccount(password ? { phrase: phrase.trim(), password } : { phrase: phrase.trim() })
+        await deleteAccount(password ? { phrase: DELETE_PHRASE, password } : { phrase: DELETE_PHRASE })
       }
       signOut()
       clearGuest()
@@ -133,6 +139,10 @@ export default function DeleteAccount() {
             onChange={e => setPhrase(e.target.value)}
             placeholder="delete my account"
             autoComplete="off"
+            autoCapitalize="none"
+            autoCorrect="off"
+            spellCheck={false}
+            aria-describedby={phrase && !phraseConfirms(phrase, DELETE_PHRASE) ? 'delete-phrase-hint' : undefined}
             className="flex-1 min-w-0 bg-mathua-bg border border-mathua-border px-3 py-2 font-mono text-xs text-mathua-primary"
           />
           {needsPassword !== false && (
@@ -159,6 +169,11 @@ export default function DeleteAccount() {
           </button>
         </div>
       </form>
+      {phrase && !phraseConfirms(phrase, DELETE_PHRASE) && (
+        <p id="delete-phrase-hint" role="status" className="mt-2 font-mono text-[11px] text-mathua-secondary">
+          That does not match. Type <span className="text-mathua-primary">{DELETE_PHRASE}</span> exactly.
+        </p>
+      )}
       {error && <p className="mt-2 font-mono text-[11px] text-mathua-red">{error}</p>}
     </div>
   )
