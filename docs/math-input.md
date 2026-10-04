@@ -297,6 +297,46 @@ keypad whose delete key typed its own name. `e2e/helpers/answer.ts` now exposes
 asserts that it reached the delete and caret keys, so "no undersized keycaps" cannot
 quietly go back to meaning "no keycaps measured".
 
+### The loading window, measured
+
+Between the answer UI appearing and MathLive being usable there is a window. It used to
+be filled with `<div className="h-12" aria-hidden />`: the right size, in the right
+place, and completely inert. A tap on it looked like it landed on an answer field and
+then did nothing.
+
+Measured (`make diagnose-answer` equivalent: `e2e/answer-diagnosis.spec.ts`, everything
+on one `performance.now()` clock):
+
+| MathLive chunk latency | window with no editor |
+|---|---|
+| 0ms (cached) | 322ms |
+| 500ms | 611ms |
+| 1500ms | 1611ms |
+| 3000ms | 3116ms |
+
+And once the editor is up, nothing else is slow: input reaches React state in 2-7ms and
+the first tap on Check reaches the API and returns in 12-14ms, on desktop and both
+mobile profiles.
+
+The loading state is now `PlainAnswerInput` — the same working plain input used when
+the chunk fails outright. So the learner can answer during the window rather than
+repeating themselves, and whatever they type is adopted when MathLive arrives.
+
+Two things to be careful about if you re-measure this:
+
+- **CDP network throttling does not reach the MathLive chunk here.** It reported
+  `transferSize: 0` and completed in 39ms under a 4 Mbps profile while the main chunks
+  correctly took 1100-1400ms — it is served from Chromium's memory cache. A first pass
+  took that as "the network does not matter". `Network.setCacheDisabled` did not change
+  it either.
+- **Delay the chunk instead, and prove the delay applied.** `delayMathLiveChunk()`
+  finds its target by scanning the build output for MathLive's own markers, routes at
+  context level, and counts its interceptions; every scenario reports `delayApplied`.
+
+The 310ms floor is a floor for this harness, not a phone: desktop CPU, cached chunk.
+Network contribution is unmeasured and the cost of parsing a 794 kB decoded bundle on a
+mid-range phone is unknown. Both are larger.
+
 ### Dismissal, and why Mathua no longer tries
 
 Mathua used to hide the virtual keypad from a capture-phase `pointerdown` listener on

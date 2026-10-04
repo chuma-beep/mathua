@@ -1,5 +1,6 @@
 import { test, expect, type Page } from '@playwright/test'
-import { answerField, answerLatex, focusAnswerField, setAnswer, typeIntoField, showVirtualKeyboard, keyboardRows, keyboardPanel, keyboardVisible, hideVirtualKeyboard, keycaps, glyphKeycap } from './helpers/answer'
+import { answerField, answerLatex, focusAnswerField, setAnswer, typeIntoField, showVirtualKeyboard, keyboardRows, keyboardPanel, keyboardVisible, hideVirtualKeyboard, keycaps, glyphKeycap, loadingAnswerField } from './helpers/answer'
+import { installInstrumentation, delayMathLiveChunk } from './helpers/instrument'
 
 // Mobile behaviour, on a real touch device profile (Pixel 7, and a 320px viewport).
 //
@@ -13,7 +14,14 @@ import { answerField, answerLatex, focusAnswerField, setAnswer, typeIntoField, s
 
 const CONCEPT = 'arith.add.single'
 
-async function openLearn(page: Page) {
+/**
+ * `waitForEditor: false` returns as soon as the answer area exists, without waiting
+ * for MathLive. The loading-state tests need that: `openLearn`'s normal wait is for the
+ * editor, and the editor arriving *is* the end of the window they are trying to act
+ * inside. Using the normal wait made them pass or fail depending on how the two
+ * deadlines interleaved -- which is exactly what they did.
+ */
+async function openLearn(page: Page, opts: { waitForEditor?: boolean } = {}) {
   await page.addInitScript(() => {
     localStorage.setItem('mathua_token', 'fake-token')
     localStorage.setItem(
@@ -59,6 +67,10 @@ async function openLearn(page: Page) {
 
   await page.goto(`/learn?concept=${CONCEPT}`)
   await page.getByRole('button', { name: 'Next →' }).click()
+  if (opts.waitForEditor === false) {
+    await expect(page.locator('.mathua-math-input')).toBeAttached({ timeout: 30_000 })
+    return
+  }
   await expect(answerField(page)).toBeVisible({ timeout: 30_000 })
 }
 
@@ -351,6 +363,53 @@ test.describe('the whole loop on a phone', () => {
     //    because the panel shows the explanation, not the word correct.
     await expect(page.getByText('Two and two.').first()).toBeVisible({ timeout: 20_000 })
     expect(posts).toBe(1)
+  })
+
+  // The reported "I have to type Check Answer multiple times", as two assertions.
+  //
+  // The loading state used to be `<div className="h-12" aria-hidden />` — the right
+  // size in the right place, so a tap looked like it landed on an answer field and then
+  // did nothing, and every keystroke went nowhere. Measured in
+  // `e2e/answer-diagnosis.spec.ts`: the window is 322ms with the chunk cached and 3116ms
+  // with a 3s chunk delay, so on a real phone connection it is seconds. Value
+  // propagation was never at fault (input to React state in 2-7ms, first tap to submit
+  // in 12-14ms); the control simply was not there yet.
+  //
+  // The chunk is delayed so the window is wide enough to act inside deterministically.
+  // Nothing here waits for a fixed duration to pass: each step waits for the state it
+  // needs, and the delay is the condition under test rather than a sleep.
+  test('the answer is typeable while the editor is still loading', async ({ page }) => {
+    await installInstrumentation(page)
+    await delayMathLiveChunk(page, 3000)
+    await openLearn(page, { waitForEditor: false })
+
+    // The window is genuinely open: no editor yet.
+    await expect(loadingAnswerField(page)).toBeVisible({ timeout: 15_000 })
+    expect(await page.locator('math-field').count()).toBe(0)
+
+    // Type into what is actually on screen.
+    await loadingAnswerField(page).fill('4')
+
+    // React receives it, Check enables, and the first tap submits.
+    const check = page.getByRole('button', { name: 'Check', exact: true }).first()
+    await expect(check).toBeEnabled({ timeout: 15_000 })
+    await check.tap()
+    await expect(page.getByText('Two and two.').first()).toBeVisible({ timeout: 20_000 })
+  })
+
+  test('an answer typed while loading survives the editor arriving', async ({ page }) => {
+    await installInstrumentation(page)
+    await delayMathLiveChunk(page, 1500)
+    await openLearn(page, { waitForEditor: false })
+
+    await loadingAnswerField(page).fill('4')
+
+    // The editor mounts and must adopt the answer rather than replacing it with an
+    // empty field -- which is what a naive swap would do.
+    await expect(answerField(page)).toBeVisible({ timeout: 30_000 })
+    // `toHaveValue` does not work here: `math-field` is a custom element, not an
+    // <input>, and Playwright rejects it. The LaTeX is read off `.value` directly.
+    await expect.poll(() => answerLatex(page), { timeout: 15_000 }).toBe('4')
   })
 
   test('the answer survives the keypad opening and closing repeatedly', async ({ page }) => {

@@ -16,7 +16,20 @@ function field(): HTMLInputElement | Element {
   return all[all.length - 1]
 }
 
-function mathField(): Element {
+/**
+ * The editor, once it has actually loaded.
+ *
+ * Waits, because the loading state is now a working plain `<input>` rather than an
+ * inert div (see PlainAnswerInput). So "there is an input" is no longer evidence
+ * that MathLive has mounted -- the very first control in the answer area is an input
+ * now, and asserting synchronously would have tested the loading state and called it
+ * the editor.
+ */
+async function mathField(): Promise<Element> {
+  await waitFor(() => {
+    const all = answerFields()
+    expect(all.some(el => el.tagName.toLowerCase() === 'math-field')).toBe(true)
+  })
   const el = field()
   expect(el.tagName.toLowerCase()).toBe('math-field')
   return el
@@ -32,7 +45,7 @@ describe('MathAnswerInput control selection', () => {
   it('renders the math editor for an expression-valued concept', async () => {
     render(<MathAnswerInput value="" onChange={() => {}} gradingType="numeric" conceptId="arith.add.single" placeholder="Your answer" />)
     await waitFor(() => expect(field()).toBeTruthy())
-    expect(mathField()).toBeTruthy()
+    expect(await mathField()).toBeTruthy()
   })
 
   it('renders the plain input for a multiple-choice concept', async () => {
@@ -52,16 +65,16 @@ describe('MathAnswerInput control selection', () => {
     unmount()
 
     render(<MathAnswerInput value="" onChange={() => {}} gradingType="numeric" conceptId="arith.add.single" placeholder="Your answer" />)
-    await waitFor(() => expect(mathField()).toBeTruthy())
+    await mathField()
     expect(screen.queryByLabelText('Insert π')).toBeNull()
   })
 
   it('exposes an accessible name on whichever control it rendered', async () => {
     render(<MathAnswerInput value="" onChange={() => {}} gradingType="numeric" conceptId="arith.add.single" ariaLabel="Your answer" placeholder="Your answer" />)
-    await waitFor(() => expect(mathField()).toBeTruthy())
+    await mathField()
     // MathLive gives the field role="group", so aria-label is what a screen reader
     // announces — without it the field is an unnamed group.
-    expect(mathField().getAttribute('aria-label')).toBe('Your answer')
+    expect((await mathField()).getAttribute('aria-label')).toBe('Your answer')
   })
 
   it('keeps the placeholder queryable, so a host can still find its own field', async () => {
@@ -75,7 +88,7 @@ describe('MathAnswerInput answer flow', () => {
     const seen: string[] = []
     render(<MathAnswerInput value="" onChange={v => seen.push(v)} gradingType="numeric" conceptId="arith.add.single" />)
     await waitFor(() => expect(field()).toBeTruthy())
-    const el = mathField() as unknown as { value: string }
+    const el = (await mathField()) as unknown as { value: string }
     el.value = '\\frac{1}{2}'
     await waitFor(() => expect(seen.length).toBeGreaterThan(0))
     // The whole design: the host stores "1/2", submits "1/2", the grader sees "1/2".
@@ -86,7 +99,7 @@ describe('MathAnswerInput answer flow', () => {
     const onSubmit = vi.fn()
     render(<MathAnswerInput value="" onChange={() => {}} onSubmit={onSubmit} gradingType="numeric" conceptId="arith.add.single" />)
     await waitFor(() => expect(field()).toBeTruthy())
-    fireEvent.keyDown(mathField(), { key: 'Enter' })
+    fireEvent.keyDown(await mathField(), { key: 'Enter' })
     expect(onSubmit).toHaveBeenCalledTimes(1)
   })
 
@@ -104,7 +117,7 @@ describe('MathAnswerInput answer flow', () => {
     const onSubmit = vi.fn()
     render(<MathAnswerInput value="" onChange={() => {}} onSubmit={onSubmit} gradingType="numeric" conceptId="arith.add.single" />)
     await waitFor(() => expect(field()).toBeTruthy())
-    fireEvent.keyDown(mathField(), { key: 'Tab' })
+    fireEvent.keyDown(await mathField(), { key: 'Tab' })
     expect(onSubmit).not.toHaveBeenCalled()
   })
 
