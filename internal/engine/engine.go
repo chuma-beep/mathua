@@ -1118,8 +1118,22 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 		}
 	}
 
-	// Mastery transition
+	// Mastery transition, on evidence rather than on the streak.
+	//
+	// The window includes the attempt being graded. It has not been written yet —
+	// RecordAttempt runs at the end of this function — so without appending it here the
+	// very first answer on a concept would be judged on an empty window and a learner
+	// could not leave UNSEEN until they had answered twice before being credited with
+	// anything.
+	evidence := e.buildEvidenceWindow(studentID, sessionFields.conceptID, mastery.Attempt{
+		Correct:    gr.Correct,
+		Elapsed:    elapsedSeconds,
+		Difficulty: difficultyOrNil(sessionFields.questionDifficulty),
+		Instance:   sessionFields.questionText,
+	})
+
 	ctx := mastery.TransitionCtx{
+		Evidence:          evidence,
 		Streak:            progress.Streak,
 		RequiredStreak:    sessionFields.requiredStreak,
 		AvgResponseTime:   progress.AvgResponseTime,
@@ -1128,9 +1142,12 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 	newStatus := e.machine.Next(mastery.Status(progress.Status), ctx)
 	oldStatus := progress.Status
 	progress.Status = string(newStatus)
+	advanced := newStatus != mastery.Status(oldStatus)
 
-	// Reset streak when advancing to a new mastery level.
-	if newStatus != mastery.Status(oldStatus) && gr.Correct {
+	// Reset the streak on a tier advance. It no longer gates anything — the ladder above
+	// does — but it is still the honest running count of consecutive correct answers, it
+	// still feeds SM-2 quality, and the shelf still reads it to tell "resume" from "new".
+	if advanced && gr.Correct {
 		progress.Streak = 1
 	}
 
@@ -1172,7 +1189,20 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 	if newStatus == mastery.StatusMastered {
 		progress.WeaknessScore = 0.0
 	}
-	if progress.Streak >= sessionFields.requiredStreak && progress.AvgResponseTime <= sessionFields.timeThreshold {
+	// The decay clock starts when a tier is attained, not when a streak happens to reach
+	// the old threshold.
+	//
+	// It was gated on `streak >= required && avg time <= threshold`, which was a proxy for
+	// "a tier was just advanced" back when that was what advancement meant. It is not any
+	// more: the ladder advances on evidence, so a concept can reach MASTERED with a streak
+	// of 1. That left `LastReviewed` nil, and `GetProgress` treats a nil `LastReviewed` as
+	// fully decayed — so a concept could be MASTERED and simultaneously read as DECAYING,
+	// depending on which rule fired first. Seen in the engine tests as the ladder passing
+	// through DECAYING on its way up.
+	//
+	// A tier attainment is exactly what the decay clock should measure from: the last time
+	// the learner demonstrated this concept.
+	if advanced || (progress.Streak >= sessionFields.requiredStreak && progress.AvgResponseTime <= sessionFields.timeThreshold) {
 		now := nowUTC()
 		progress.LastReviewed = &now
 		nextReview := now.AddDate(0, 0, nextSM2.Interval)
@@ -1428,7 +1458,23 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 			progress.WeaknessScore = 1.0
 		}
 	}
+	// Same ladder, same evidence, as SubmitAnswer. This path serves quizzes and the
+	// diagnostic, and it carried its own copy of the transition — which is how the two
+	// routes could disagree about whether a concept was mastered. That is the class of bug
+	// ADR-037 spent a week removing, reintroduced by the duplication rather than by
+	// anything to do with the ladder.
+	//
+	// Difficulty is unknown here and stays unknown: these questions are not generated
+	// through a session that recorded a difficulty, so the score drops the term rather than
+	// assuming one.
+	evidence := e.buildEvidenceWindow(studentID, conceptID, mastery.Attempt{
+		Correct:  gr.Correct,
+		Elapsed:  elapsedSeconds,
+		Instance: questionText,
+	})
+
 	ctx := mastery.TransitionCtx{
+		Evidence:          evidence,
 		Streak:            progress.Streak,
 		RequiredStreak:    requiredStreak,
 		AvgResponseTime:   progress.AvgResponseTime,
@@ -1437,7 +1483,8 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 	newStatus := e.machine.Next(mastery.Status(progress.Status), ctx)
 	oldStatus := progress.Status
 	progress.Status = string(newStatus)
-	if newStatus != mastery.Status(oldStatus) && gr.Correct {
+	advanced := newStatus != mastery.Status(oldStatus)
+	if advanced && gr.Correct {
 		progress.Streak = 1
 	}
 	quality := mastery.SM2Quality(
@@ -1475,7 +1522,10 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 	if newStatus == mastery.StatusMastered {
 		progress.WeaknessScore = 0.0
 	}
-	if progress.Streak >= requiredStreak && progress.AvgResponseTime <= timeThreshold {
+	// Same decay-clock rule as SubmitAnswer: a tier attainment starts it. See the note
+	// there — gating this on the streak threshold left a concept that reached MASTERED on
+	// evidence with a nil LastReviewed, which reads as fully decayed.
+	if advanced || (progress.Streak >= requiredStreak && progress.AvgResponseTime <= timeThreshold) {
 		now := nowUTC()
 		progress.LastReviewed = &now
 		nextReview := now.AddDate(0, 0, nextSM2.Interval)
@@ -2453,4 +2503,43 @@ func attemptDifficulty(as *activeSession) *float64 {
 		return nil
 	}
 	return difficultyOrNil(as.questionDifficulty)
+}
+
+// buildEvidenceWindow assembles the evidence the mastery ladder reads.
+//
+// It fetches the concept's most recent attempts and appends the one being graded, which
+// has not been written yet. Reading a bounded window rather than the learner's history is
+// the point: GetAttemptsForStudent returns everything — 15,774 rows for someone who has
+// worked through the corpus — and this runs on every graded answer.
+//
+// A failed read is not fatal. With no window the ladder simply does not advance, and the
+// learner's next answer will see a full one. The alternative — advancing on no evidence —
+// would be mastery without a record of what it was based on.
+func (e *Engine) buildEvidenceWindow(studentID, conceptID string, current mastery.Attempt) mastery.Evidence {
+	opts := mastery.EvidenceOptions{}
+	if c := e.dag.Concept(conceptID); c != nil {
+		opts.TimeThreshold = c.MasteryThreshold.AvgTimeSeconds
+	}
+
+	prior := make([]mastery.Attempt, 0, mastery.EvidenceWindow)
+	if e.repo != nil {
+		rows, err := e.repo.GetRecentAttemptsForConcept(studentID, conceptID, mastery.EvidenceWindow)
+		if err != nil {
+			log.Printf("warning: recent attempts for %s/%s: %v", studentID, conceptID, err)
+		} else {
+			for _, r := range rows {
+				prior = append(prior, mastery.Attempt{
+					Correct:    r.Correct,
+					Elapsed:    r.ElapsedSeconds,
+					Difficulty: r.Difficulty,
+					Instance:   r.Question,
+				})
+			}
+		}
+	}
+
+	window := make([]mastery.Attempt, 0, len(prior)+1)
+	window = append(window, prior...)
+	window = append(window, current)
+	return mastery.BuildEvidence(window, opts)
 }

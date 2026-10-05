@@ -312,6 +312,16 @@ type Repository interface {
 	DeleteAccount(studentID string) error
 	GetSessionAttempts(studentID, sessionID string) ([]AttemptEntry, error)
 	GetAttemptsForStudent(studentID string) ([]AttemptEntry, error)
+	// GetRecentAttemptsForConcept returns up to `limit` of the most recent attempts on one
+	// concept, newest last.
+	//
+	// This exists because the evidence model needs a bounded window per concept on every
+	// graded answer, and GetAttemptsForStudent returns the learner's entire history —
+	// 15,774 rows for someone who has worked through the corpus. Reading that per answer
+	// would be a different kind of mistake from the one it fixes.
+	//
+	// Backed by idx_attempts_cover (student_id, concept_id, timestamp) in both stores.
+	GetRecentAttemptsForConcept(studentID, conceptID string, limit int) ([]AttemptEntry, error)
 	GetAllAttempts() ([]AttemptEntry, error)
 
 	GetQuestions(conceptID string, count int) ([]Question, error)

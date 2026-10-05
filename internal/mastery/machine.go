@@ -3,28 +3,48 @@ package mastery
 import "math"
 
 // Signals that drive a mastery state transition.
+//
+// Evidence is what decides. The streak and timing fields are still carried because they
+// are the raw signals behind it and SM-2 needs the streak to grade a review, but they are
+// no longer the gate: `Next` advances on the rung the evidence reaches, and the rung is
+// reached by accuracy, difficulty, variety of problem instance and time.
 type TransitionCtx struct {
-	Streak            int     // current consecutive correct streak
-	RequiredStreak    int     // mastery threshold for streak
-	AvgResponseTime   float64 // current average response time in seconds
-	ResponseThreshold float64 // mastery threshold for response time
+	// Evidence is the assembled picture for this concept. Authoritative.
+	Evidence Evidence
+	// Streak and the thresholds are context, not authority. Kept so a caller building a
+	// TransitionCtx has the concept's own numbers to hand, and because SM-2 quality is
+	// computed from the streak elsewhere in the same transaction.
+	Streak            int
+	RequiredStreak    int
+	AvgResponseTime   float64
+	ResponseThreshold float64
 }
 
-// Machine steps from one mastery status to the next based on performance.
+// Machine steps from one mastery status to the next based on evidence.
 //
-// Rules:
+// Rules, as the state diagram draws them (`docs/diagrams/student-model.svg`):
 //
-//	UNSEEN    → LEARNING   when streak >= required AND time <= threshold
-//	LEARNING  → PRACTICING when streak >= required AND time <= threshold
-//	PRACTICING → MASTERED  when streak >= required AND time <= threshold
-//	MASTERED  → MASTERED   (decay detection is the caller's job)
+//	UNSEEN     → LEARNING    one correct answer            "first correct"
+//	LEARNING   → PRACTICING  consistent across attempts    "streak reached"
+//	PRACTICING → MASTERED    demonstrated and transferable "interval elapsed"
+//	MASTERED   → MASTERED    (decay detection is the caller's job)
+//
+// All three used to be gated on the single condition
+// `streak >= required AND avg time <= threshold`, which made the ladder one test repeated
+// until the streak was long enough — 30 consecutive correct answers for the 459 concepts
+// whose threshold is 10, and no new information at any rung. See
+// docs/mastery-semantics.md.
+//
+// Status only ever moves forward. A miss lowers the evidence score, but it does not un-learn
+// a concept: MASTERED is an exit, not a position that can be lost to one bad answer. Decay
+// is computed at read time and is a question about retention, not attainment.
 type Machine struct{}
 
 // Next computes the next status.
 func (m *Machine) Next(current Status, ctx TransitionCtx) Status {
 	switch current {
 	case StatusUnseen, StatusLearning, StatusPracticing:
-		if ctx.Streak >= ctx.RequiredStreak && ctx.AvgResponseTime <= ctx.ResponseThreshold {
+		if HighestRung(ctx.Evidence) >= requiredRung(current) {
 			return nextAdvance(current)
 		}
 		return current
@@ -32,6 +52,19 @@ func (m *Machine) Next(current Status, ctx TransitionCtx) Status {
 		return StatusMastered
 	default:
 		return current
+	}
+}
+
+// requiredRung is the evidence a concept at `current` must reach to advance. One rung per
+// transition: the ladder climbs a step at a time, never to the top.
+func requiredRung(current Status) Rung {
+	switch current {
+	case StatusUnseen:
+		return RungStarted
+	case StatusLearning:
+		return RungConsistent
+	default:
+		return RungDemonstrated
 	}
 }
 
