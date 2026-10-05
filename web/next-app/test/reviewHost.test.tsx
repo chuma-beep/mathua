@@ -30,6 +30,10 @@ function result(correct: boolean, xp: number) {
     correct,
     feedback: correct ? 'Correct!' : 'Not quite.',
     new_status: 'PRACTICING',
+    // Always present on a graded answer: the server sends the authoritative evidence score
+    // and band so no client has to compute its own.
+    evidence_score: 0.42,
+    evidence_band: 'building',
     explanation: '',
     streak: 1,
     required_streak: 2,

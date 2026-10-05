@@ -7,7 +7,7 @@ import ChoiceOptions from './ChoiceOptions'
 import { getLessonKPs, getLessonPractice, getLessonReadiness, submitStudyAnswer, getActivity, getDueReviews, getProgress, getScores, getWeaknesses, getErrorStatus, type KpInfo, type PracticeQuestion, type ReadinessRes, type DailyActivity, type Scores, type WeaknessRes, type ConceptProgress } from '../lib/api'
 import { getUserInfo } from '../lib/auth'
 import { selectShelfHead, upcomingLocked, hrefConceptId, type Shelf, type LockedSuccessor } from '../lib/nextUp'
-import { REQUIRED_IN_A_ROW, masteryEstimate, type Attempt } from '../lib/progression'
+import { REQUIRED_IN_A_ROW } from '../lib/progression'
 import { formatForGradingType } from '../lib/answerFormat'
 import { countsAsMastered } from '../lib/progress'
 import { MathAnswerInput } from './math/MathInput'
@@ -64,7 +64,14 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
   const [readiness, setReadiness] = useState<ReadinessRes | null>(null)
   const [bannerDismissed, setBannerDismissed] = useState(false)
   const [buffer, setBuffer] = useState<PracticeQuestion[]>([])
-  const [history, setHistory] = useState<Attempt[]>([])
+  // A tally of this knowledge point's answers for the header count. Not a model: no
+  // judgement is derived from it. The learner's progress reading comes from the
+  // server as `band` below.
+  const [history, setHistory] = useState<{ correct: boolean }[]>([])
+  // Plain-language progress reading, computed server-side by mastery.EvidenceBand from
+  // the same evidence the ladder decides on. The client used to compute its own score
+  // and its own bands here; see test/masteryAuthority.test.ts.
+  const [band, setBand] = useState('')
   const [difficulty, setDifficulty] = useState(0.4)
   const [consecutive, setConsecutive] = useState(0)
   const [misses, setMisses] = useState(0)
@@ -253,9 +260,8 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
         setEntry(key, { checking: false })
         return
       }
-      const h: Attempt = { correct: res.correct, difficulty, elapsed, variation: entry.q.question }
-      const nextHistory = [...history, h]
-      setHistory(nextHistory)
+      setHistory(prev => [...prev, { correct: res.correct }])
+      if (res.evidence_band) setBand(res.evidence_band)
       if (res.correct) {
         const next = consecutive + 1
         const nextDiff = Math.min(1.0, difficulty + 0.15)
@@ -271,8 +277,14 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
             xp: res.xp ?? 0,
           },
         })
-        const est = masteryEstimate(nextHistory)
-        const advance = est.decision === 'advance' || next >= REQUIRED_IN_A_ROW
+        // 2-in-a-row, and nothing else. This used to read
+        //   `est.decision === 'advance' || next >= REQUIRED_IN_A_ROW`
+        // where `est` came from a second, client-side copy of the mastery evidence model.
+        // The first operand was dead: `decision === 'advance'` required the last two
+        // attempts correct, which is the same fact as `next >= REQUIRED_IN_A_ROW`, so it
+        // could never be the deciding half. Proven exhaustively in
+        // test/masteryAuthority.test.ts. The model is gone; this rule is the whole gate.
+        const advance = next >= REQUIRED_IN_A_ROW
         appendAfter(350, async () => {
           if (advance) {
             const total = Math.max(kps.length, 1)
@@ -378,7 +390,6 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
   const toReview = prereqs.filter(p => countsAsMastered({ status: p.status }))
   const onlyReview = toLearn.length === 0 && toReview.length > 0
   const showBanner = readiness && !readiness.ready && !bannerDismissed && prereqs.length > 0
-  const est = masteryEstimate(history)
   const totalAnswered = history.length
   const totalCorrect = history.filter(h => h.correct).length
   const totalXP = entries.reduce((s, e) => s + (e.kind === 'q' && e.feedback?.correct ? e.feedback.xp : 0), 0)
@@ -390,7 +401,11 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
         {totalAnswered > 0 && <span>· {totalCorrect}/{totalAnswered} correct</span>}
         {totalXP > 0 && <span className="text-yellow-400">· +{totalXP} XP</span>}
         <span>· level {difficulty.toFixed(2)}</span>
-        {est.score > 0 && <span title="Mastery estimate from accuracy, difficulty, variation and time">· {est.band}</span>}
+        {band && (
+          <span title="How you're doing on this concept, from your recent answers. Progress only — mastery is decided separately.">
+            · {band}
+          </span>
+        )}
       </div>
 
       {showBanner && (
@@ -491,7 +506,7 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
             const upcoming: LockedSuccessor[] = upcomingLocked(catalogEntries(), shelfProgress, conceptId)
             return (
               <div key={e.key} className="border border-mathua-green-faint bg-mathua-surface p-6">
-                <p className="font-mono text-xs text-green-400">✓ Complete — {totalCorrect}/{totalAnswered} correct · +{totalXP} XP · {est.band}</p>
+                <p className="font-mono text-xs text-green-400">✓ Complete — {totalCorrect}/{totalAnswered} correct · +{totalXP} XP · {band}</p>
                 <p className="mt-2 font-mono text-[11px] text-mathua-secondary">Scroll up to review anything. Reviews are scheduled automatically.</p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {returnTo && <Link href={`/learn?concept=${encodeURIComponent(returnTo)}`} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-5 py-2 font-mono text-xs inline-flex items-center min-h-[40px]">← Back to {returnToLabel}</Link>}

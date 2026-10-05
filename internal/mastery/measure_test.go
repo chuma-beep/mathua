@@ -464,3 +464,67 @@ func TestEvidenceHasNoSpacingTerm(t *testing.T) {
 			"function of the attempts", old1.Score, fresh.Score)
 	}
 }
+
+// --- the band a learner reads -------------------------------------------------------
+
+// The band is presentational, but it must not lie about what the evidence supports.
+//
+// The client version of this label offered "well retained" off a score with no spacing
+// term at all — a retention claim drawn from evidence that knows nothing about retention.
+// And with no floor it read "strong" after a *single* correct answer, because a lone answer
+// carries the most recency weight there is. Both defects arrived through the label rather
+// than the state, so the label needs its own tests.
+func TestEvidenceBandClaimsNothingBeyondTheEvidence(t *testing.T) {
+	// One correct answer scores 0.84 — above every score threshold — and must still read as
+	// early, because a single attempt is not evidence.
+	single := BuildEvidence([]Attempt{{
+		Correct: true, Elapsed: 4, Instance: "a",
+	}}, EvidenceOptions{TimeThreshold: 20})
+	if single.Score < 0.8 {
+		t.Fatalf("test setup: a single correct answer scored %.3f, expected it to clear the "+
+			"score thresholds so the floor is what stops it", single.Score)
+	}
+	if got := EvidenceBand(single); got != "early" {
+		t.Errorf("one correct answer reads %q, want %q — the band must be floored by evidence "+
+			"the way mastery is", got, "early")
+	}
+
+	// No band may promise anything about remembering it later.
+	// No clock is involved anywhere, so nothing here can distinguish an answer from
+	// yesterday and one from last year. See TestEvidenceHasNoSpacingTerm.
+	for _, band := range []Evidence{
+		single,
+		BuildEvidence(cleanAttempts(6, true), EvidenceOptions{TimeThreshold: 20}),
+		BuildEvidence(cleanAttempts(6, false), EvidenceOptions{TimeThreshold: 20}),
+	} {
+		if got := EvidenceBand(band); got == "mastered" || got == "well retained" || got == "retained" {
+			t.Errorf("band %q claims mastery or retention, which BuildEvidence cannot support", got)
+		}
+	}
+}
+
+// The band is a function of the evidence and nothing else, so it cannot drift from the
+// ladder's own inputs — and it must move when the evidence moves.
+func TestEvidenceBandTracksTheEvidence(t *testing.T) {
+	strong := BuildEvidence(cleanAttempts(6, true), EvidenceOptions{TimeThreshold: 20})
+	weak := BuildEvidence(cleanAttempts(6, false), EvidenceOptions{TimeThreshold: 20})
+	if EvidenceBand(strong) == EvidenceBand(weak) {
+		t.Errorf("six correct and six wrong both read %q", EvidenceBand(strong))
+	}
+	if EvidenceBand(strong) != EvidenceBand(BuildEvidence(cleanAttempts(6, true), EvidenceOptions{TimeThreshold: 20})) {
+		t.Error("identical evidence produced different bands")
+	}
+}
+
+func cleanAttempts(n int, correct bool) []Attempt {
+	out := make([]Attempt, 0, n)
+	for i := 0; i < n; i++ {
+		out = append(out, Attempt{
+			Correct: correct, Elapsed: 4, Difficulty: floatPtrLocal(midDifficulty),
+			Instance: fmt.Sprintf("q%d", i),
+		})
+	}
+	return out
+}
+
+func floatPtrLocal(v float64) *float64 { return &v }
