@@ -45,6 +45,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
+	"unicode/utf8"
 
 	"github.com/chuma-beep/latexnorm"
 )
@@ -91,7 +92,23 @@ var bareNumeral = regexp.MustCompile(`^[0-9][0-9.,]*$`)
 func textGroup(content string) [][2]int {
 	var out [][2]int
 	openers := []string{`\text{`, `\mbox{`, `\emph{`, `\textit{`, `\textbf{`}
-	for i := 0; i < len(content); i++ {
+	// Advance by rune width rather than by one byte (go-ai-lint AIL070). The returned ranges
+	// are byte offsets, which is what the caller slices with, so `i` remains a byte index.
+	//
+	// The byte-at-a-time version could not produce a wrong answer, and the reason is worth
+	// recording because it is not obvious: a multi-byte UTF-8 sequence is made only of bytes
+	// ≥ 0x80, and every opener here begins with a backslash at 0x5C, so a fragment starting
+	// mid-rune can never begin with `\text{`. The scan was safe because of a property of
+	// UTF-8, not because of anything in this code — and it would stop being safe the moment
+	// an opener were matched on a byte that can appear inside a rune.
+	//
+	// Decoding the rune makes that guarantee local and explicit instead of resting on the
+	// encoding.
+	// The index is managed by hand rather than with `for i := range content`, because this
+	// loop jumps `i` forward to skip a matched group. A range loop reassigns its index at the
+	// top of every iteration, so that jump would be discarded and the scan would restart
+	// inside the group it just consumed.
+	for i := 0; i < len(content); {
 		matched := ""
 		for _, o := range openers {
 			if strings.HasPrefix(content[i:], o) {
@@ -100,6 +117,8 @@ func textGroup(content string) [][2]int {
 			}
 		}
 		if matched == "" {
+			_, w := utf8.DecodeRuneInString(content[i:])
+			i += w
 			continue
 		}
 		depth, j := 1, i+len(matched)
@@ -112,7 +131,7 @@ func textGroup(content string) [][2]int {
 			}
 		}
 		out = append(out, [2]int{i, j})
-		i = j - 1
+		i = j
 	}
 	return out
 }
@@ -193,34 +212,52 @@ var rowBreakLen = regexp.MustCompile(`^\[?[0-9.]*[a-z]*\]`)
 func unescapeDelimiters(src string) (string, int) {
 	var b strings.Builder
 	n := 0
-	for i := 0; i < len(src); i++ {
+	// Rune-at-a-time rather than byte-at-a-time (go-ai-lint AIL070).
+	//
+	// To be accurate about what this changes: the byte-at-a-time version was **not** losing
+	// anything. `strings.Builder.WriteByte` appends the raw byte and the loop visited every
+	// byte exactly once, so it reconstructed the input byte-for-byte — verified for em
+	// dashes, curly quotes, Greek letters and ellipses. The lint is a robustness finding, not
+	// a correctness one, and this rewrite should not be described as a bug fix.
+	//
+	// What it does buy is that the invariant stops being incidental. Writing the whole rune
+	// in one step means a future branch that jumps `i` forward cannot drop a byte by
+	// accident, because the copy and the advance are now the same operation instead of two
+	// that have to agree.
+	//
+	// The index is advanced explicitly rather than with a range loop, because the branches
+	// below consume a fixed number of bytes; a range loop would discard those jumps.
+	for i := 0; i < len(src); {
 		if strings.HasPrefix(src[i:], `\\(`) || strings.HasPrefix(src[i:], `\\)`) {
 			b.WriteByte('\\')
 			b.WriteByte(src[i+2])
-			// Consumed i, i+1 and i+2; the loop's own i++ moves past them.
-			i += 2
+			// Consume i, i+1 and i+2 in one step.
+			i += 3
 			n++
 			continue
 		}
 		if strings.HasPrefix(src[i:], `\\]`) {
 			b.WriteString(`\]`)
-			i += 2
+			i += 3
 			n++
 			continue
 		}
 		if strings.HasPrefix(src[i:], `\\[`) {
-			rest := src[i+3:]
-			if rowBreakLen.MatchString(rest) {
-				// A row break: leave both backslashes alone.
-				b.WriteByte(src[i])
+			if rowBreakLen.MatchString(src[i+3:]) {
+				// A row break: leave both backslashes alone. Written together here because
+				// the next iteration no longer starts on a backslash pair.
+				b.WriteString(src[i : i+2])
+				i += 2
 				continue
 			}
 			b.WriteString(`\[`)
-			i += 2
+			i += 3
 			n++
 			continue
 		}
-		b.WriteByte(src[i])
+		_, w := utf8.DecodeRuneInString(src[i:])
+		b.WriteString(src[i : i+w])
+		i += w
 	}
 	return b.String(), n
 }
