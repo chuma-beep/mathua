@@ -845,7 +845,7 @@ func TestEngine_SubmitQuizAnswer_TaskQuizXP(t *testing.T) {
 	if err != nil {
 		t.Fatalf("get xp: %v", err)
 	}
-	res, err := e.SubmitQuizAnswer(st.ID, "a", "42", "42", 3.0, "")
+	res, err := e.SubmitQuizAnswer(st.ID, "a", "42", "42", 3.0, "", nil)
 	if err != nil {
 		t.Fatalf("submit quiz answer: %v", err)
 	}
@@ -877,7 +877,7 @@ func TestEngine_SubmitStudyAnswer_UnknownConcept(t *testing.T) {
 	if _, err := e.SubmitStudyAnswer(st.ID, "nope.not.real", "1", 5.0, ""); !errors.Is(err, ErrUnknownConcept) {
 		t.Errorf("expected ErrUnknownConcept, got %v", err)
 	}
-	if _, err := e.SubmitQuizAnswer(st.ID, "nope.not.real", "1", "1", 5.0, ""); !errors.Is(err, ErrUnknownConcept) {
+	if _, err := e.SubmitQuizAnswer(st.ID, "nope.not.real", "1", "1", 5.0, "", nil); !errors.Is(err, ErrUnknownConcept) {
 		t.Errorf("expected ErrUnknownConcept (quiz), got %v", err)
 	}
 	// No garbage progress row persisted.
@@ -974,7 +974,7 @@ func TestEngine_QuizMiss_EnqueuesRemedial(t *testing.T) {
 	e := New(store, d, reg, nil, nil)
 	st, _ := e.CreateStudent("remedial")
 
-	res, err := e.SubmitQuizAnswer(st.ID, "b", "wrong", "99", 5.0, "")
+	res, err := e.SubmitQuizAnswer(st.ID, "b", "wrong", "99", 5.0, "", nil)
 	if err != nil {
 		t.Fatalf("submit: %v", err)
 	}
@@ -988,7 +988,7 @@ func TestEngine_QuizMiss_EnqueuesRemedial(t *testing.T) {
 		t.Errorf("expected queued remedial len 2, got %v", got)
 	}
 	// Correct answers never enqueue.
-	if _, err := e.SubmitQuizAnswer(st.ID, "a", "42", "42", 5.0, ""); err != nil {
+	if _, err := e.SubmitQuizAnswer(st.ID, "a", "42", "42", 5.0, "", nil); err != nil {
 		t.Fatalf("submit correct: %v", err)
 	}
 	if got := e.QuizRemedial(st.ID); len(got) != 2 {
@@ -1369,4 +1369,206 @@ func TestEngine_NeverRecordsZeroDifficulty(t *testing.T) {
 	if got := attemptDifficulty(nil); got != nil {
 		t.Errorf("attemptDifficulty(nil) = %v, want nil", *got)
 	}
+}
+
+// The scoring side and the serving side must agree on what "a question of unknown
+// difficulty" is worth.
+//
+// mastery.NeutralDifficulty is what BuildEvidence credits a correct answer with when the
+// attempt carries no difficulty, and difficultyFromWeakness is what the engine serves when
+// it has no information about the learner. If those two drift apart, an unknown-difficulty
+// attempt silently becomes worth more or less than the questions actually being served —
+// which is precisely the bug that made the quiz surface more permissive than the study
+// surface.
+func TestNeutralDifficultyMatchesEngineDefault(t *testing.T) {
+	if got := difficultyFromWeakness(nil, "anything"); got != mastery.NeutralDifficulty {
+		t.Errorf("engine default difficulty = %v, mastery.NeutralDifficulty = %v; the score "+
+			"credited to an unknown-difficulty attempt no longer matches the question served",
+			got, mastery.NeutralDifficulty)
+	}
+	if got := difficultyFromWeakness(map[string]float64{}, "anything"); got != mastery.NeutralDifficulty {
+		t.Errorf("engine default difficulty with an empty weakness map = %v, want %v",
+			got, mastery.NeutralDifficulty)
+	}
+}
+
+// --- the shared mastery authority must not care which screen produced the attempt ------
+
+// A learner must not be able to change their own mastery outcome by choosing a different
+// surface.
+//
+// `submitAnswerWithTask` serves both the study/Learn loop and quizzes, and it used to hand
+// the mastery authority a hardcoded `difficulty: 0` — meaning "unknown" — while
+// `SubmitAnswer` passed the real difficulty off the active session. Unknown difficulty was
+// then scored as `difficultyTerm = 1.0`, the top of the range, so the same answers were worth
+// more on the quiz path than on the study path. Measured at 50% accuracy: 0.65 and cleared
+// the bar on quiz, 0.57 and failed on study.
+//
+// This drives both hosts with identical questions, identical outcomes and identical
+// difficulty, and requires the persisted evidence to be identical.
+func TestStudyAndQuizProduceEquivalentMasteryEvidence(t *testing.T) {
+	const served = 0.65
+	diff := served
+	question := "3/4 + 1/2 = ?"
+
+	// Six answers at 50% accuracy — the exact case the asymmetry decided.
+	outcomes := []bool{true, false, true, false, true, true}
+
+	// Study: the anchor is the record of what was served, so the difficulty rides there —
+	// no caller supplies it.
+	studyEngine, studyStudent := func() (*Engine, *storage.Student) {
+		e := testEngine(t)
+		st, err := e.CreateStudent("equiv_study")
+		if err != nil {
+			t.Fatalf("create student: %v", err)
+		}
+		e.SetStudyAnchorBatch(st.ID, "a", map[string]Anchor{
+			question: {Answer: "5/4", Explanation: "because", Difficulty: &diff},
+		})
+		for i, correct := range outcomes {
+			ans := "5/4"
+			if !correct {
+				ans = "7/4"
+			}
+			if _, err := e.SubmitStudyAnswer(st.ID, "a", ans, 5.0, question); err != nil {
+				t.Fatalf("study answer %d: %v", i, err)
+			}
+		}
+		return e, st
+	}()
+
+	// Quiz: the difficulty comes off the served problem, exactly as handleQuizAnswer reads
+	// it from sess.LastProblem.Difficulty.
+	quizEngine := testEngine(t)
+	quizStudent, err := quizEngine.CreateStudent("equiv_quiz")
+	if err != nil {
+		t.Fatalf("create student: %v", err)
+	}
+	for i, correct := range outcomes {
+		ans := "5/4"
+		if !correct {
+			ans = "7/4"
+		}
+		if _, err := quizEngine.SubmitQuizAnswer(quizStudent.ID, "a", ans, "5/4", 5.0, question, &diff); err != nil {
+			t.Fatalf("quiz answer %d: %v", i, err)
+		}
+	}
+
+	studyRows := recentAttempts(t, studyEngine, studyStudent.ID, "a")
+	quizRows := recentAttempts(t, quizEngine, quizStudent.ID, "a")
+
+	if len(studyRows) != len(outcomes) || len(quizRows) != len(outcomes) {
+		t.Fatalf("got %d study and %d quiz attempts, want %d each",
+			len(studyRows), len(quizRows), len(outcomes))
+	}
+	for i := range outcomes {
+		if studyRows[i].Difficulty == nil || quizRows[i].Difficulty == nil {
+			t.Fatalf("attempt %d: study difficulty %v, quiz difficulty %v — both must carry "+
+				"the served difficulty", i, studyRows[i].Difficulty, quizRows[i].Difficulty)
+		}
+		if math.Abs(*studyRows[i].Difficulty-*quizRows[i].Difficulty) > 1e-9 {
+			t.Errorf("attempt %d: study difficulty %v vs quiz %v",
+				i, *studyRows[i].Difficulty, *quizRows[i].Difficulty)
+		}
+		if studyRows[i].Correct != quizRows[i].Correct {
+			t.Errorf("attempt %d: study correct=%v, quiz correct=%v for the same answer",
+				i, studyRows[i].Correct, quizRows[i].Correct)
+		}
+	}
+
+	// And the evidence they assemble must be the same number, not merely the same shape.
+	studyEv := evidenceFromRows(studyRows)
+	quizEv := evidenceFromRows(quizRows)
+	if math.Abs(studyEv.Score-quizEv.Score) > 1e-9 {
+		t.Errorf("study evidence scored %.4f and quiz evidence %.4f for the same answers on "+
+			"the same questions — the surface is changing what the learner demonstrated",
+			studyEv.Score, quizEv.Score)
+	}
+	if studyEv.Attempts != quizEv.Attempts {
+		t.Errorf("study saw %d attempts, quiz %d", studyEv.Attempts, quizEv.Attempts)
+	}
+}
+
+// recentAttempts reads back the rows the evidence window is built from.
+func recentAttempts(t *testing.T, e *Engine, studentID, conceptID string) []storage.AttemptEntry {
+	t.Helper()
+	rows, err := e.repo.GetRecentAttemptsForConcept(studentID, conceptID, 20)
+	if err != nil {
+		t.Fatalf("recent attempts: %v", err)
+	}
+	return rows
+}
+
+// A host that genuinely does not know the difficulty must not be *more* generous than one
+// that does. This is the regression at the level the bug actually lived: not "is the value
+// plumbed" but "does its absence buy anything".
+func TestUnknownDifficultyHostIsNotMoreGenerous(t *testing.T) {
+	e := testEngine(t)
+	question := "3/4 + 1/2 = ?"
+	diff := 0.65
+	outcomes := []bool{true, false, true, false, true, true}
+
+	// Known difficulty, from the anchor.
+	known, _ := e.CreateStudent("diff_known")
+	e.SetStudyAnchorBatch(known.ID, "a", map[string]Anchor{
+		question: {Answer: "5/4", Difficulty: &diff},
+	})
+	for i, correct := range outcomes {
+		ans, want := "7/4", "5/4"
+		if correct {
+			ans = "5/4"
+		}
+		if _, err := e.SubmitStudyAnswer(known.ID, "a", ans, 5.0, question); err != nil {
+			t.Fatalf("answer %d: %v", i, err)
+		}
+		_ = want
+	}
+
+	// Unknown difficulty, honestly reported as unknown.
+	unknown, _ := e.CreateStudent("diff_unknown")
+	e.SetStudyAnchorBatch(unknown.ID, "a", map[string]Anchor{
+		question: {Answer: "5/4"},
+	})
+	for i, correct := range outcomes {
+		ans := "7/4"
+		if correct {
+			ans = "5/4"
+		}
+		if _, err := e.SubmitStudyAnswer(unknown.ID, "a", ans, 5.0, question); err != nil {
+			t.Fatalf("answer %d: %v", i, err)
+		}
+	}
+
+	knownRows := recentAttempts(t, e, known.ID, "a")
+	unknownRows := recentAttempts(t, e, unknown.ID, "a")
+	if len(knownRows) != 6 || len(unknownRows) != 6 {
+		t.Fatalf("got %d and %d attempts, want 6 each", len(knownRows), len(unknownRows))
+	}
+	if knownRows[5].Difficulty == nil || unknownRows[5].Difficulty != nil {
+		t.Fatalf("setup: known=%v unknown=%v", knownRows[5].Difficulty, unknownRows[5].Difficulty)
+	}
+
+	// Build the same evidence both ways and require the unknown-difficulty score not to
+	// exceed the known one.
+	knownEv := evidenceFromRows(knownRows)
+	unknownEv := evidenceFromRows(unknownRows)
+	if unknownEv.Score > knownEv.Score+1e-9 {
+		t.Errorf("unknown difficulty scored %.4f against %.4f for known difficulty %.2f — "+
+			"a missing value is buying more evidence than a recorded one",
+			unknownEv.Score, knownEv.Score, *knownRows[5].Difficulty)
+	}
+}
+
+// evidenceFromRows assembles evidence the way buildEvidenceWindow does, from persisted rows.
+func evidenceFromRows(rows []storage.AttemptEntry) mastery.Evidence {
+	var as []mastery.Attempt
+	for _, r := range rows {
+		as = append(as, mastery.Attempt{
+			Correct:    r.Correct,
+			Elapsed:    r.ElapsedSeconds,
+			Difficulty: r.Difficulty,
+			Instance:   r.Question,
+		})
+	}
+	return mastery.BuildEvidence(as, mastery.EvidenceOptions{TimeThreshold: 60})
 }

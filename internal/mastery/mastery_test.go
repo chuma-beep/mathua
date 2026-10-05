@@ -515,17 +515,40 @@ func TestBuildEvidence_DifficultyAndTimeChangeTheScore(t *testing.T) {
 	}
 }
 
-// Unknown difficulty must be dropped, not read as zero. A concept whose attempts predate
-// the column still has evidence; it just has none of this kind.
-func TestBuildEvidence_UnknownDifficultyIsDroppedNotZeroed(t *testing.T) {
+// Unknown difficulty must be read as neither zero nor perfect.
+//
+// The first version of this test asserted the opposite: it required the score to come out at
+// 1.0, which is what "drop the difficulty term" produces. Dropping a *multiplier* means
+// multiplying by 1.0 — the top of the range — so a missing value was being credited as
+// "the hardest question we could have asked". The name said "dropped, not zeroed" and both
+// halves of that were wrong: it was not dropped, and the effect was maximal.
+//
+// A concept whose attempts predate the column still has evidence. It just does not have
+// evidence of how hard the questions were, and it is credited at NeutralDifficulty — the
+// difficulty the engine serves when it knows nothing — rather than at either extreme.
+func TestBuildEvidence_UnknownDifficultyIsNeitherZeroNorPerfect(t *testing.T) {
 	unknown := unknownDifficultyWindow(MasteryEvidenceFloor)
 	if unknown.AvgDifficulty != 0 {
 		t.Errorf("AvgDifficulty = %v, want 0 when nothing recorded it", unknown.AvgDifficulty)
 	}
-	// 1.0 accuracy with the difficulty term dropped, plus variety 0.10, clamped at 1.
-	if unknown.Score != 1 {
-		t.Errorf("score = %v, want 1 (difficulty term dropped, not zeroed)", unknown.Score)
+
+	// Identical evidence at the neutral difficulty must score the same, because that is
+	// what NeutralDifficulty claims.
+	neutral := cleanWindow(MasteryEvidenceFloor, NeutralDifficulty)
+	if math.Abs(unknown.Score-neutral.Score) > 1e-9 {
+		t.Errorf("unknown difficulty scored %v, difficulty %v scored %v; unknown should be "+
+			"credited as the neutral question", unknown.Score, NeutralDifficulty, neutral.Score)
 	}
+
+	// And it must sit strictly below the hardest question, which is what the old 1.0
+	// default scored it as.
+	hardest := cleanWindow(MasteryEvidenceFloor, 1.0)
+	if !(unknown.Score < hardest.Score) {
+		t.Errorf("unknown difficulty scored %v, not below the hardest question's %v — a "+
+			"missing value is being treated as maximal evidence", unknown.Score, hardest.Score)
+	}
+
+	// The property that actually matters: it must not disqualify otherwise-good evidence.
 	if !EnoughForMastery(unknown) {
 		t.Errorf("unknown difficulty should not disqualify otherwise-good evidence: %+v", unknown)
 	}
