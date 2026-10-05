@@ -24,7 +24,7 @@ $$a^{-x} = \frac{1}{a^x}$$
 
 6.When $a > 1,$ the exponential function $y = a^x$ is [strictly increasing](<../increasing-and-decreasing-functions/>) over $\mathbb{R}.$
 
-The graph of the exponential function  always lies above the x-axis. y x y = aˣ with a > 1 1
+![The graph of the exponential function always lies above the x-axis.](/diagrams/algebrica/exponential-function-1.svg)
 
 7.
 
@@ -48,7 +48,7 @@ $$ \begin{align} \lim_{x \to -\infty} a^x &= 0^+ \\\\[6pt] \lim_{x \to +\infty} 
 
 10.When $0 < a < 1,$ the exponential function $y = a^x$ is strictly decreasing over $\mathbb{R}.$
 
-When the base a is between 0 and  1, the function is decreasing. y x y = aˣ 1
+![When the base a is between 0 and 1, the function is decreasing.](/diagrams/algebrica/exponential-function-2.svg)
 
 11.
 
@@ -72,7 +72,7 @@ $$ \begin{align} \lim_{x \to -\infty} a^x &= +\infty \\\\[6pt] \lim_{x \to +\inf
 
 14.When $a = 1,$ the exponential function reduces to the constant function $y = 1^x = 1,$ which is excluded from the standard definition. Its graph is a horizontal line at height $y = 1.$
 
-When a = 1, the function  is parallel to the x-axis. y x 1 a=1 y = aˣ
+![When a = 1, the function is parallel to the x-axis.](/diagrams/algebrica/exponential-function-3.svg)
 
 15.
 

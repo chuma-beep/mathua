@@ -18,7 +18,7 @@ $$ e := \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n $$
 
 6.The graph below illustrates how the terms of the sequence behave as $n$ grows. The values increase rapidly for small $n$, then rise more slowly, approaching $e$ from below without ever reaching it.
 
-2.5 2.3 2.7 2.0 5 10 15 For large values of n, the  sequence converges to  e. n (index) e aₙ
+![For large values of n, the sequence converges to e.](/diagrams/algebrica/euler-number-limit-sequence-1.svg)
 
 > 7.
 > 

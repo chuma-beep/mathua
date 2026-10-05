@@ -24,6 +24,9 @@ Their decimal expansions are infinite and non-repeating, lacking any predictable
 
 Formally, if \( a \in \mathbb{N} \) is not a perfect square, then \( \sqrt{a} \notin \mathbb{Q} \).
 
+
+![The real number line illustrating the distribution of natural numbers, integers, rational numbers, and irrational numbers.](/diagrams/algebrica/radicals-1.svg)
+
 > Square roots are not always irrational. The square root of a perfect square, such as 4 or 9, is rational. In contrast, the square root of a non-perfect square, such as 2 or 5, is irrational because it cannot be expressed as a fraction.
 
 ## Why is \( \sqrt{2} \) irrational?
@@ -271,3 +274,5 @@ AD = \sqrt{a}
 \]
 
 This completes the construction: the segment \(AD\) has length exactly equal to \(\sqrt{a}\).
+
+![Geometric construction of √a: extend a segment by 1 unit, draw a semicircle, and obtain √a from the perpendicular segment.](/diagrams/algebrica/radicals-2.svg)

@@ -251,3 +251,94 @@ func TestCorpusOfReportsTheCorpusNotTheDirectory(t *testing.T) {
 		}
 	}
 }
+
+// The section a figure was placed in is recomputed from the written body, not taken on trust
+// from whatever wrote it. This is the check that a placement is right: a figure that landed a
+// section early or late has a different nearest-preceding-heading, so a wrong placement
+// changes the value and fails here rather than being noticed by a reader.
+func TestPlacedFiguresAreInTheSectionTheirPlacementNamed(t *testing.T) {
+	root := "../../data/lessons"
+	if _, err := os.Stat(root); err != nil {
+		t.Skipf("lesson corpus not present: %v", err)
+	}
+	type want struct{ lesson, file, section string }
+	expect := []want{
+		{"roots-of-unity.md", "roots-of-unity-1.svg", "geometric interpretation"},
+		{"cauchy-theorem.md", "cauchy-theorem-1.svg", "introduction"},
+		{"exponential-function.md", "exponential-function-1.svg", "properties for $a$ greater than one"},
+		{"exponential-function.md", "exponential-function-2.svg", "properties for $a$ between zero and one"},
+		{"exponential-function.md", "exponential-function-3.svg", "properties for $a$ equal to one"},
+		{"polynomial-function.md", "polynomial-function-1.svg", "degree 1: linear functions"},
+		{"polynomial-function.md", "polynomial-function-2.svg", "degree 2: quadratic functions"},
+		{"polynomial-function.md", "polynomial-function-3.svg", "degree 3: cubic functions"},
+		{"trigonometric-inequalities.md", "trigonometric-inequalities-1.svg", "inequalities involving sine"},
+		{"trigonometric-inequalities.md", "trigonometric-inequalities-2.svg", "inequalities involving cosine"},
+		{"trigonometric-inequalities.md", "trigonometric-inequalities-3.svg", "inequalities involving tangent"},
+		{"indefinite-integrals.md", "indefinite-integrals-1.svg", "primitives"},
+		{"indefinite-integrals.md", "indefinite-integrals-2.svg", "primitives"},
+		{"integration-by-parts.md", "integration-by-parts-1.svg", "derivation of the formula"},
+		{"numerical-integration.md", "numerical-integration-1.svg", ""},
+		{"numerical-integration.md", "numerical-integration-2.svg", ""},
+		{"polynomials.md", "polynomials-1.svg", "degree of a polynomial and its geometric interpretation"},
+		{"polynomials.md", "polynomials-2.svg", "polynomial equations"},
+		{"polynomials.md", "polynomials-3.svg", "end behavior of polynomial"},
+		{"trinomials.md", "trinomials-1.svg", "classification of trinomials"},
+		{"logarithms.md", "logarithms-1.svg", "logarithmic function"},
+		{"logarithms.md", "logarithms-2.svg", "logarithmic function"},
+		{"logarithms.md", "logarithms-3.svg", "fundamental inequality for the natural logarithm"},
+		{"radicals.md", "radicals-1.svg", "definition of radicals"},
+		{"radicals.md", "radicals-2.svg", "geometric construction of the segment \\(\\sqrt{a}\\)"},
+		{"euler-number-limit-sequence.md", "euler-number-limit-sequence-1.svg", ""},
+		{"principle-of-mathematical-induction.md", "principle-of-mathematical-induction-1.svg", "mathematical induction"},
+		{"power-series.md", "power-series-1.svg", "radius of convergence"},
+		{"power-series.md", "power-series-2.svg", "radius of convergence"},
+		{"integers.md", "integers-1.svg", "definition"},
+		{"integers.md", "integers-2.svg", "definition"},
+		{"sets.md", "sets-1.svg", "set operations"},
+		{"sets.md", "sets-2.svg", "set operations"},
+		{"sets.md", "sets-3.svg", "set operations"},
+		{"sets.md", "sets-4.svg", "set operations"},
+		{"sets.md", "sets-5.svg", "set operations"},
+		{"sets.md", "sets-6.svg", "properties of set operations"},
+		{"eigenvalues-and-eigenvectors.md", "eigenvalues-and-eigenvectors-1.svg", "definition"},
+	}
+
+	byName := map[string]string{}
+	for _, e := range expect {
+		found := ""
+		_ = filepath.Walk(root, func(p string, info os.FileInfo, err error) error {
+			if err != nil || info.IsDir() || filepath.Base(p) != e.lesson {
+				return err
+			}
+			raw, rerr := os.ReadFile(p)
+			if rerr != nil {
+				return rerr
+			}
+			for _, a := range ExtractAssets(string(raw), []string{"x"}) {
+				if path.Base(a.Src) == e.file {
+					found = a.Section
+				}
+			}
+			return nil
+		})
+		if found == "" {
+			t.Errorf("%s: %s is not referenced by any lesson body", e.lesson, e.file)
+			continue
+		}
+		byName[e.file] = found
+		// An empty expectation means the figure's section was not pinned deliberately, which is
+		// the case for the three that replaced a paragraph already in the right place.
+		if e.section == "" {
+			continue
+		}
+		// Compared through normSectionKey and case-insensitively: the expectation is written
+		// as a human reads the heading ("Properties for $a$ greater than one") while the
+		// extracted value has been through the same normalisation the section matcher uses.
+		if !strings.EqualFold(normSectionKey(e.section), normSectionKey(found)) {
+			t.Errorf("%s: %s is in section %q, want %q", e.lesson, e.file, found, e.section)
+		}
+	}
+	if len(expect) != 38 {
+		t.Fatalf("expectation list has %d entries; it must cover all 38 placed figures", len(expect))
+	}
+}

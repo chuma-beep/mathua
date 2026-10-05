@@ -383,7 +383,7 @@ so the tiers below do not treat it as evidence either way.
 
 ## B. Prose that promises a figure
 
-33 sentences refer to a figure that is not in the body.
+32 sentences refer to a figure that is not in the body.
 
 | lesson | line | phrase | context |
 | --- | --- | --- | --- |
@@ -391,7 +391,6 @@ so the tiers below do not treat it as evidence either way.
 | `algebrica/functions/functions.md` | 56 | The figure shows | The figure shows that the curve on the left (a [parabola](<../parabola/>)) is a function, since each \( x\ \) corresponds to exactly one \( y \), whereas the curve on the right is not, since for \( x_ |
 | `algebrica/probability-and-statistics/chi-square-distribution.md` | 77 | the figure illustrates | The shaded region in the figure illustrates precisely this idea: the dark area corresponds to the probability \(\alpha\), and the boundary between the shaded and unshaded regions marks the critical va |
 | `algebrica/sequences/convergent-and-divergent-sequences.md` | 111 | As shown in the graph | As shown in the graph, when \( q = 2 \), the values of the geometric sequence \( a_n = q^n \) grow [exponentially](<../exponential-function>). As \( n \) increases, each term doubles the previous one, |
-| `algebrica/sequences/euler-number-limit-sequence.md` | 19 | The graph below | 6.The graph below illustrates how the terms of the sequence behave as $n$ grows. The values increase rapidly for small $n$, then rise more slowly, approaching $e$ from below without ever reaching it. |
 | `algebrica/series/integral-test-for-series-convergence.md` | 21 | The graph illustrates | The graph illustrates the connection between a series and an improper integral as stated by the Integral Test. |
 | `teaching/arith.factor.lcm.md` | 77 | The figure shows | <table class="unnumbered unstyled" data-id="eip-id1168466026521" data-label="" data-summary="The figure shows multiple factor trees with the number 48 at the top. In the first tree two branches are sp |
 | `teaching/arith.factor.lcm.md` | 126 | The figure shows | <table class="unnumbered unstyled" data-id="eip-id1168467446629" data-label="" data-summary="The figure shows two factor trees with the number 84 at the top. In the first tree two branches are splitti |
@@ -423,8 +422,8 @@ so the tiers below do not treat it as evidence either way.
 
 ## C. Shipped but unreferenced
 
-586 diagrams ship, 242 URLs are referenced by lesson bodies, and
-**324 content diagrams are referenced by nothing** (site chrome
+586 diagrams ship, 279 URLs are referenced by lesson bodies, and
+**287 content diagrams are referenced by nothing** (site chrome
 with dark/light variants is excluded — components reference those).
 
 These already exist and are already served, so a teaching figure that is missing today
@@ -435,29 +434,11 @@ figure already on disk could be dropped in without authoring anything.
 
 | lesson | references a figure | exact stem match | topic-word match |
 | --- | --- | --- | --- |
-| `algebrica/complex-numbers/roots-of-unity.md` | no | `roots-of-unity-1.svg` | — |
-| `algebrica/differential-calculus-theorems/cauchy-theorem.md` | no | `cauchy-theorem-1.svg` | — |
-| `algebrica/functions/exponential-function.md` | no | `exponential-function-1.svg`, `exponential-function-2.svg`, `exponential-function-3.svg` | — |
-| `algebrica/functions/polynomial-function.md` | no | `polynomial-function-1.svg`, `polynomial-function-2.svg`, `polynomial-function-3.svg` | — |
-| `algebrica/inequalities/trigonometric-inequalities.md` | no | `trigonometric-inequalities-1.svg`, `trigonometric-inequalities-2.svg`, `trigonometric-inequalities-3.svg` | — |
-| `algebrica/integrals/indefinite-integrals.md` | no | `indefinite-integrals-1.svg`, `indefinite-integrals-2.svg` | — |
-| `algebrica/integrals/integration-by-parts.md` | no | `integration-by-parts-1.svg` | — |
-| `algebrica/integrals/numerical-integration.md` | no | `numerical-integration-1.svg`, `numerical-integration-2.svg` | — |
-| `algebrica/polynomials/polynomials.md` | no | `polynomials-1.svg`, `polynomials-2.svg`, `polynomials-3.svg` | — |
-| `algebrica/polynomials/trinomials.md` | no | `trinomials-1.svg` | — |
-| `algebrica/powers-radicals-logarithms/logarithms.md` | no | `logarithms-1.svg`, `logarithms-2.svg`, `logarithms-3.svg` | — |
-| `algebrica/powers-radicals-logarithms/radicals.md` | no | `radicals-1.svg`, `radicals-2.svg` | — |
-| `algebrica/sequences/euler-number-limit-sequence.md` | no | `euler-number-limit-sequence-1.svg` | — |
-| `algebrica/sequences/principle-of-mathematical-induction.md` | no | `principle-of-mathematical-induction-1.svg` | — |
-| `algebrica/series/power-series.md` | no | `power-series-1.svg`, `power-series-2.svg` | — |
-| `algebrica/sets-and-numbers/integers.md` | no | `integers-1.svg`, `integers-2.svg` | — |
-| `algebrica/sets-and-numbers/sets.md` | no | `sets-1.svg`, `sets-2.svg`, `sets-3.svg`, `sets-4.svg`, `sets-5.svg`, `sets-6.svg` | — |
-| `algebrica/vectors-and-matrices/eigenvalues-and-eigenvectors.md` | no | `eigenvalues-and-eigenvectors-1.svg` | — |
 | `algebrica/complex-numbers/complex-logarithm.md` | no | — | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
-| `algebrica/complex-numbers/de-moivre-theorem.md` | no | — | `cauchy-theorem-1.svg`, `darboux-theorem-1.svg`, `fermat-theorem-1.svg`, `fermat-theorem-2.svg`, `fermat-theorem-3.svg`, `fundamental-theorem-of-calculus-2.svg`, `intermediate-value-theorem-1.svg`, `intermediate-value-theorem-2.svg` |
+| `algebrica/complex-numbers/de-moivre-theorem.md` | no | — | `darboux-theorem-1.svg`, `fermat-theorem-1.svg`, `fermat-theorem-2.svg`, `fermat-theorem-3.svg`, `fundamental-theorem-of-calculus-2.svg`, `intermediate-value-theorem-1.svg`, `intermediate-value-theorem-2.svg`, `lagrange-theorem-1.svg` |
 | `algebrica/complex-numbers/fundamental-inequalities-for-complex-numbers.md` | no | — | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg`, `fundamental-theorem-of-calculus-2.svg`, `geometric-interpretation-quadratic-inequalities-1.svg` |
 | `algebrica/complex-numbers/operations-with-complex-numbers.md` | no | — | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg`, `real-numbers-1.svg`, `types-of-numbers-1.svg` |
-| `algebrica/derivatives/derivative-of-composite-power-functions.md` | no | — | `composite-functions-1.svg`, `derivative-of-the-inverse-function-1.svg`, `power-series-1.svg`, `power-series-2.svg`, `exp-power-rule.svg`, `factor-composite.svg` |
+| `algebrica/derivatives/derivative-of-composite-power-functions.md` | no | — | `composite-functions-1.svg`, `derivative-of-the-inverse-function-1.svg`, `exp-power-rule.svg`, `factor-composite.svg` |
 | `algebrica/derivatives/the-derivative-of-a-composite-function.md` | no | — | `composite-functions-1.svg`, `derivative-of-the-inverse-function-1.svg`, `factor-composite.svg` |
 | `algebrica/differential-calculus-theorems/hopital-rule.md` | no | — | `exp-power-rule.svg`, `exp-product-rule.svg`, `exp-quotient-rule.svg` |
 | `algebrica/equations/absolute-value-equations.md` | no | — | `absolute-value-1.svg`, `absolute-value-function-1.svg`, `absolute-value-function-2.svg`, `exponential-equations-1.svg`, `geometric-interpretation-quadratic-equations-1.svg`, `geometric-interpretation-quadratic-equations-2.svg`, `geometric-interpretation-quadratic-equations-3.svg`, `intermediate-value-theorem-1.svg` |
@@ -469,35 +450,33 @@ figure already on disk could be dropped in without authoring anything.
 | `algebrica/equations/irrational-equations.md` | no | — | `exponential-equations-1.svg`, `geometric-interpretation-quadratic-equations-1.svg`, `geometric-interpretation-quadratic-equations-2.svg`, `geometric-interpretation-quadratic-equations-3.svg`, `irrational-inequalities-1.svg`, `linear-equations-1.svg`, `separable-differential-equations-1.svg`, `systems-of-linear-equations-in-two-variables-1.svg` |
 | `algebrica/equations/linear-equations-with-parameters.md` | no | — | `exponential-equations-1.svg`, `geometric-interpretation-quadratic-equations-1.svg`, `geometric-interpretation-quadratic-equations-2.svg`, `geometric-interpretation-quadratic-equations-3.svg`, `linear-equations-1.svg`, `separable-differential-equations-1.svg`, `systems-of-linear-equations-in-two-variables-1.svg`, `vector-and-parametric-equations-of-a-line-1.svg` |
 | `algebrica/equations/logarithmic-equations.md` | no | — | `exponential-equations-1.svg`, `geometric-interpretation-quadratic-equations-1.svg`, `geometric-interpretation-quadratic-equations-2.svg`, `geometric-interpretation-quadratic-equations-3.svg`, `linear-equations-1.svg`, `separable-differential-equations-1.svg`, `systems-of-linear-equations-in-two-variables-1.svg`, `vector-and-parametric-equations-of-a-line-1.svg` |
-| `algebrica/equations/loss-of-roots.md` | no | — | `roots-of-a-polynomial-1.svg`, `roots-of-a-polynomial-2.svg`, `roots-of-a-polynomial-3.svg`, `roots-of-unity-1.svg` |
-| `algebrica/equations/polynomial-equations.md` | no | — | `exponential-equations-1.svg`, `geometric-interpretation-quadratic-equations-1.svg`, `geometric-interpretation-quadratic-equations-2.svg`, `geometric-interpretation-quadratic-equations-3.svg`, `linear-equations-1.svg`, `polynomial-function-1.svg`, `polynomial-function-2.svg`, `polynomial-function-3.svg` |
+| `algebrica/equations/loss-of-roots.md` | no | — | `roots-of-a-polynomial-1.svg`, `roots-of-a-polynomial-2.svg`, `roots-of-a-polynomial-3.svg` |
+| `algebrica/equations/polynomial-equations.md` | no | — | `exponential-equations-1.svg`, `geometric-interpretation-quadratic-equations-1.svg`, `geometric-interpretation-quadratic-equations-2.svg`, `geometric-interpretation-quadratic-equations-3.svg`, `linear-equations-1.svg`, `roots-of-a-polynomial-1.svg`, `roots-of-a-polynomial-2.svg`, `roots-of-a-polynomial-3.svg` |
 | `algebrica/equations/quadratic-formula.md` | no | — | `geometric-interpretation-quadratic-equations-1.svg`, `geometric-interpretation-quadratic-equations-2.svg`, `geometric-interpretation-quadratic-equations-3.svg`, `geometric-interpretation-quadratic-inequalities-1.svg`, `geometric-interpretation-quadratic-inequalities-2.svg`, `quadratic-inequalities-1.svg`, `quadratic-inequalities-2.svg`, `quadratic-inequalities-4.svg` |
 | `algebrica/equations/rational-equations.md` | no | — | `exponential-equations-1.svg`, `geometric-interpretation-quadratic-equations-1.svg`, `geometric-interpretation-quadratic-equations-2.svg`, `geometric-interpretation-quadratic-equations-3.svg`, `linear-equations-1.svg`, `separable-differential-equations-1.svg`, `systems-of-linear-equations-in-two-variables-1.svg`, `vector-and-parametric-equations-of-a-line-1.svg` |
 | `algebrica/equations/trinomial-equations.md` | no | — | `exponential-equations-1.svg`, `geometric-interpretation-quadratic-equations-1.svg`, `geometric-interpretation-quadratic-equations-2.svg`, `geometric-interpretation-quadratic-equations-3.svg`, `linear-equations-1.svg`, `separable-differential-equations-1.svg`, `systems-of-linear-equations-in-two-variables-1.svg`, `vector-and-parametric-equations-of-a-line-1.svg` |
 | `algebrica/inequalities/inequalities-with-absolute-value.md` | no | — | `absolute-value-1.svg`, `absolute-value-function-1.svg`, `absolute-value-function-2.svg`, `geometric-interpretation-quadratic-inequalities-1.svg`, `geometric-interpretation-quadratic-inequalities-2.svg`, `intermediate-value-theorem-1.svg`, `intermediate-value-theorem-2.svg`, `irrational-inequalities-1.svg` |
 | `algebrica/inequalities/rational-inequalities.md` | no | — | `geometric-interpretation-quadratic-inequalities-1.svg`, `geometric-interpretation-quadratic-inequalities-2.svg`, `irrational-inequalities-1.svg`, `quadratic-inequalities-1.svg`, `quadratic-inequalities-2.svg`, `quadratic-inequalities-4.svg`, `quadratic-inequalities-5.svg`, `sign-analysis-in-inequalities-1.svg` |
 | `algebrica/inequalities/systems-of-inequalities.md` | no | — | `geometric-interpretation-quadratic-inequalities-1.svg`, `geometric-interpretation-quadratic-inequalities-2.svg`, `irrational-inequalities-1.svg`, `quadratic-inequalities-1.svg`, `quadratic-inequalities-2.svg`, `quadratic-inequalities-4.svg`, `quadratic-inequalities-5.svg`, `sign-analysis-in-inequalities-1.svg` |
-| `algebrica/integrals/convergence-tests-for-improper-integrals.md` | no | — | `improper-integrals-3.svg`, `indefinite-integrals-1.svg`, `indefinite-integrals-2.svg`, `integral-test-for-series-convergence-1.svg` |
+| `algebrica/integrals/convergence-tests-for-improper-integrals.md` | no | — | `improper-integrals-3.svg`, `integral-test-for-series-convergence-1.svg` |
 | `algebrica/integrals/integral-of-rational-functions.md` | no | — | `integral-test-for-series-convergence-1.svg` |
-| `algebrica/integrals/integral-of-the-exponential-function.md` | no | — | `complex-numbers-exponential-form-1.svg`, `exponential-equations-1.svg`, `exponential-function-1.svg`, `exponential-function-2.svg`, `exponential-function-3.svg`, `integral-test-for-series-convergence-1.svg` |
-| `algebrica/integrals/integral-of-trigonometric-functions.md` | no | — | `complex-numbers-trigonometric-form-1.svg`, `integral-test-for-series-convergence-1.svg`, `trigonometric-identities-1.svg`, `trigonometric-inequalities-1.svg`, `trigonometric-inequalities-2.svg`, `trigonometric-inequalities-3.svg` |
-| `algebrica/integrals/integrals-of-irrational-functions.md` | no | — | `improper-integrals-3.svg`, `indefinite-integrals-1.svg`, `indefinite-integrals-2.svg`, `irrational-inequalities-1.svg` |
-| `algebrica/integrals/integration-by-substitution.md` | no | — | `integration-by-parts-1.svg`, `numerical-integration-1.svg`, `numerical-integration-2.svg` |
-| `algebrica/integrals/integration-strategies.md` | no | — | `integration-by-parts-1.svg`, `numerical-integration-1.svg`, `numerical-integration-2.svg` |
-| `algebrica/integrals/reduction-formulas-for-integrals.md` | no | — | `improper-integrals-3.svg`, `indefinite-integrals-1.svg`, `indefinite-integrals-2.svg`, `reduction-formulas-and-reference-angles-1.svg`, `reduction-formulas-and-reference-angles-2.svg`, `reduction-formulas-and-reference-angles-3.svg`, `reduction-formulas-and-reference-angles-4.svg`, `reduction-formulas-and-reference-angles-5.svg` |
+| `algebrica/integrals/integral-of-the-exponential-function.md` | no | — | `complex-numbers-exponential-form-1.svg`, `exponential-equations-1.svg`, `integral-test-for-series-convergence-1.svg` |
+| `algebrica/integrals/integral-of-trigonometric-functions.md` | no | — | `complex-numbers-trigonometric-form-1.svg`, `integral-test-for-series-convergence-1.svg`, `trigonometric-identities-1.svg` |
+| `algebrica/integrals/integrals-of-irrational-functions.md` | no | — | `improper-integrals-3.svg`, `irrational-inequalities-1.svg` |
+| `algebrica/integrals/integration-by-substitution.md` | no | — | `numerical-integration-1.svg` |
+| `algebrica/integrals/integration-strategies.md` | no | — | `numerical-integration-1.svg` |
+| `algebrica/integrals/reduction-formulas-for-integrals.md` | no | — | `improper-integrals-3.svg`, `reduction-formulas-and-reference-angles-1.svg`, `reduction-formulas-and-reference-angles-2.svg`, `reduction-formulas-and-reference-angles-3.svg`, `reduction-formulas-and-reference-angles-4.svg`, `reduction-formulas-and-reference-angles-5.svg`, `reduction-formulas-and-reference-angles-6.svg`, `reduction-formulas-and-reference-angles-7.svg` |
 | `algebrica/integrals/the-weierstrass-substitution.md` | no | — | `weierstrass-theorem-1.svg` |
 | `algebrica/limits/algebra-of-limits.md` | no | — | `limits-1.svg`, `limits-2.svg`, `limits-3.svg` |
 | `algebrica/limits/remarkable-limits.md` | no | — | `limits-1.svg`, `limits-2.svg`, `limits-3.svg` |
 | `algebrica/linear-systems/cramers-rule.md` | no | — | `exp-power-rule.svg`, `exp-product-rule.svg`, `exp-quotient-rule.svg` |
-| `algebrica/linear-systems/rouche-capelli-theorem.md` | no | — | `cauchy-theorem-1.svg`, `darboux-theorem-1.svg`, `fermat-theorem-1.svg`, `fermat-theorem-2.svg`, `fermat-theorem-3.svg`, `fundamental-theorem-of-calculus-2.svg`, `intermediate-value-theorem-1.svg`, `intermediate-value-theorem-2.svg` |
+| `algebrica/linear-systems/rouche-capelli-theorem.md` | no | — | `darboux-theorem-1.svg`, `fermat-theorem-1.svg`, `fermat-theorem-2.svg`, `fermat-theorem-3.svg`, `fundamental-theorem-of-calculus-2.svg`, `intermediate-value-theorem-1.svg`, `intermediate-value-theorem-2.svg`, `lagrange-theorem-1.svg` |
 | `algebrica/linear-systems/solving-linear-systems-using-gaussian-elimination.md` | no | — | `linear-equations-1.svg`, `systems-of-linear-equations-in-two-variables-1.svg` |
 | `algebrica/linear-systems/systems-of-linear-equations.md` | no | — | `exponential-equations-1.svg`, `geometric-interpretation-quadratic-equations-1.svg`, `geometric-interpretation-quadratic-equations-2.svg`, `geometric-interpretation-quadratic-equations-3.svg`, `linear-equations-1.svg`, `separable-differential-equations-1.svg`, `systems-of-linear-equations-in-two-variables-1.svg`, `vector-and-parametric-equations-of-a-line-1.svg` |
-| `algebrica/polynomials/adding-and-subtracting-polynomials.md` | no | — | `polynomials-1.svg`, `polynomials-2.svg`, `polynomials-3.svg` |
-| `algebrica/polynomials/factoring-polynomials-ac-method.md` | no | — | `polynomials-1.svg`, `polynomials-2.svg`, `polynomials-3.svg` |
-| `algebrica/polynomials/polynomial-division.md` | no | — | `polynomial-function-1.svg`, `polynomial-function-2.svg`, `polynomial-function-3.svg`, `roots-of-a-polynomial-1.svg`, `roots-of-a-polynomial-2.svg`, `roots-of-a-polynomial-3.svg` |
+| `algebrica/polynomials/polynomial-division.md` | no | — | `roots-of-a-polynomial-1.svg`, `roots-of-a-polynomial-2.svg`, `roots-of-a-polynomial-3.svg` |
 | `algebrica/polynomials/vieta-formulas.md` | no | — | `reduction-formulas-and-reference-angles-1.svg`, `reduction-formulas-and-reference-angles-2.svg`, `reduction-formulas-and-reference-angles-3.svg`, `reduction-formulas-and-reference-angles-4.svg`, `reduction-formulas-and-reference-angles-5.svg`, `reduction-formulas-and-reference-angles-6.svg`, `reduction-formulas-and-reference-angles-7.svg` |
 | `algebrica/probability-and-statistics/arithmetic-mean.md` | no | — | `arithmetic-sequence-1.svg` |
-| `algebrica/probability-and-statistics/bayes-theorem.md` | no | — | `cauchy-theorem-1.svg`, `darboux-theorem-1.svg`, `fermat-theorem-1.svg`, `fermat-theorem-2.svg`, `fermat-theorem-3.svg`, `fundamental-theorem-of-calculus-2.svg`, `intermediate-value-theorem-1.svg`, `intermediate-value-theorem-2.svg` |
+| `algebrica/probability-and-statistics/bayes-theorem.md` | no | — | `darboux-theorem-1.svg`, `fermat-theorem-1.svg`, `fermat-theorem-2.svg`, `fermat-theorem-3.svg`, `fundamental-theorem-of-calculus-2.svg`, `intermediate-value-theorem-1.svg`, `intermediate-value-theorem-2.svg`, `lagrange-theorem-1.svg` |
 | `algebrica/probability-and-statistics/bernoulli-distribution.md` | no | — | `beta-distribution-1.svg`, `chi-square-distribution-1.svg`, `chi-square-distribution-2.svg`, `gamma-distribution-1.svg`, `normal-distribution-1.svg`, `student-t-distribution-1.svg`, `uniform-distribution-1.svg` |
 | `algebrica/probability-and-statistics/binomial-distribution.md` | no | — | `beta-distribution-1.svg`, `chi-square-distribution-1.svg`, `chi-square-distribution-2.svg`, `gamma-distribution-1.svg`, `normal-distribution-1.svg`, `student-t-distribution-1.svg`, `uniform-distribution-1.svg` |
 | `algebrica/probability-and-statistics/discrete-random-variables.md` | no | — | `continuous-random-variables-1.svg`, `systems-of-linear-equations-in-two-variables-1.svg` |
@@ -512,19 +491,19 @@ figure already on disk could be dropped in without authoring anything.
 | `algebrica/probability-and-statistics/variance-and-covariance-of-a-random-variable.md` | no | — | `continuous-random-variables-1.svg` |
 | `algebrica/sequences/monotone-sequences.md` | no | — | `convergent-and-divergent-sequences-1.svg`, `convergent-and-divergent-sequences-2.svg`, `convergent-and-divergent-sequences-3.svg`, `sequences-of-functions-1.svg` |
 | `algebrica/sequences/sequences.md` | no | — | `convergent-and-divergent-sequences-1.svg`, `convergent-and-divergent-sequences-2.svg`, `convergent-and-divergent-sequences-3.svg`, `sequences-of-functions-1.svg` |
-| `algebrica/series/fourier-series.md` | no | — | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg`, `power-series-1.svg`, `power-series-2.svg` |
-| `algebrica/series/function-series.md` | no | — | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg`, `power-series-1.svg`, `power-series-2.svg` |
+| `algebrica/series/fourier-series.md` | no | — | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
+| `algebrica/series/function-series.md` | no | — | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
 | `algebrica/series/geometric-series.md` | no | — | `geometric-interpretation-quadratic-equations-1.svg`, `geometric-interpretation-quadratic-equations-2.svg`, `geometric-interpretation-quadratic-equations-3.svg`, `geometric-interpretation-quadratic-inequalities-1.svg`, `geometric-interpretation-quadratic-inequalities-2.svg`, `geometric-sequence-1.svg`, `geometric-sequence-2.svg`, `geometric-sequence-3.svg` |
-| `algebrica/series/root-test-for-series-convergence.md` | no | — | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg`, `power-series-1.svg`, `power-series-2.svg` |
-| `algebrica/series/series-with-positive-terms.md` | no | — | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg`, `power-series-1.svg`, `power-series-2.svg` |
-| `algebrica/series/series.md` | no | — | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg`, `power-series-1.svg`, `power-series-2.svg` |
-| `algebrica/series/taylor-series.md` | no | — | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg`, `power-series-1.svg`, `power-series-2.svg` |
+| `algebrica/series/root-test-for-series-convergence.md` | no | — | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
+| `algebrica/series/series-with-positive-terms.md` | no | — | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
+| `algebrica/series/series.md` | no | — | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
+| `algebrica/series/taylor-series.md` | no | — | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
 | `algebrica/sets-and-numbers/natural-numbers.md` | no | — | `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg`, `real-numbers-1.svg`, `types-of-numbers-1.svg` |
 | `algebrica/sets-and-numbers/properties-of-real-numbers.md` | no | — | `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg`, `discontinuities-of-real-functions-1.svg`, `discontinuities-of-real-functions-2.svg`, `discontinuities-of-real-functions-3.svg` |
 | `algebrica/vectors-and-matrices/determinant-of-a-square-matrix.md` | no | — | `chi-square-distribution-1.svg`, `chi-square-distribution-2.svg`, `completing-the-square-1.svg` |
 | `algebrica/vectors-and-matrices/inverse-matrix.md` | no | — | `derivative-of-the-inverse-function-1.svg`, `inverse-function-1.svg` |
 | `authored/calc.integral.applied.md` | no | — | `integral-test-for-series-convergence-1.svg` |
-| `authored/calc.series.ratio.md` | no | — | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg`, `power-series-1.svg`, `power-series-2.svg` |
+| `authored/calc.series.ratio.md` | no | — | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
 | `teaching/alg.factor.diff_squares.md` | no | — | `factor-composite.svg`, `factor-find.svg`, `factor-gcf.svg`, `factor-lcm.svg`, `factor-prime-fact.svg`, `factor-prime.svg` |
 | `teaching/alg.factor.gcf.md` | no | — | `factor-composite.svg`, `factor-find.svg`, `factor-gcf.svg`, `factor-lcm.svg`, `factor-prime-fact.svg`, `factor-prime.svg` |
 | `teaching/alg.linear.graph.md` | no | — | `linear-equations-1.svg`, `systems-of-linear-equations-in-two-variables-1.svg` |
@@ -558,8 +537,6 @@ figure already on disk could be dropped in without authoring anything.
 | `teaching/arith.sqrt.perfect.md` | no | — | `sqrt-perfect.svg`, `sqrt-simplify.svg` |
 | `teaching/calc.integral.power_rule.md` | no | — | `integral-test-for-series-convergence-1.svg` |
 | `teaching/calc.integral.volume.md` | no | — | `integral-test-for-series-convergence-1.svg` |
-| `teaching/calc.limit.infinity.md` | no | — | `euler-number-limit-sequence-1.svg` |
-| `teaching/calc.limit.numeric.md` | no | — | `euler-number-limit-sequence-1.svg` |
 | `teaching/complex.analytic.md` | no | — | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
 | `teaching/complex.argument.md` | no | — | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
 | `teaching/complex.cauchy_goursat.md` | no | — | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
@@ -576,7 +553,6 @@ figure already on disk could be dropped in without authoring anything.
 | `teaching/complex.riemann_sphere.md` | no | — | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
 | `teaching/complex.schwarz.md` | no | — | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
 | `teaching/discrete.sequences.recurrence.md` | no | — | `convergent-and-divergent-sequences-1.svg`, `convergent-and-divergent-sequences-2.svg`, `convergent-and-divergent-sequences-3.svg`, `sequences-of-functions-1.svg` |
-| `teaching/discrete.sets.venn.md` | no | — | `sets-1.svg`, `sets-2.svg`, `sets-3.svg`, `sets-4.svg`, `sets-5.svg`, `sets-6.svg` |
 | `teaching/frac.mult.whole.md` | no | — | `mult-2-5-10.svg`, `mult-concept.svg`, `mult-double.svg`, `mult-tables.svg`, `mult-triple.svg`, `mult-word.svg`, `neg-mult-div.svg` |
 | `teaching/fractions/comparison-word.md` | no | — | `add-word.svg`, `div-word.svg`, `mult-word.svg`, `sub-word.svg` |
 | `teaching/fractions/division-word.md` | no | — | `add-word.svg`, `div-word.svg`, `mult-word.svg`, `sub-word.svg` |
@@ -628,6 +604,7 @@ figure already on disk could be dropped in without authoring anything.
 | `algebrica/inequalities/sign-analysis-in-inequalities.md` | yes | `sign-analysis-in-inequalities-1.svg` | — |
 | `algebrica/integrals/fundamental-theorem-of-calculus.md` | yes | `fundamental-theorem-of-calculus-2.svg` | — |
 | `algebrica/integrals/improper-integrals.md` | yes | `improper-integrals-3.svg` | — |
+| `algebrica/integrals/numerical-integration.md` | yes | `numerical-integration-1.svg` | — |
 | `algebrica/kinematics/velocity.md` | yes | `velocity-1.svg`, `velocity-2.svg`, `velocity-3.svg`, `velocity-4.svg` | — |
 | `algebrica/limits/asymptotes.md` | yes | `asymptotes-1.svg`, `asymptotes-3.svg` | — |
 | `algebrica/limits/big-o-notation.md` | yes | `big-o-notation-1.svg` | — |
@@ -676,9 +653,10 @@ figure already on disk could be dropped in without authoring anything.
 | `algebrica/trigonometry/unit-circle.md` | yes | `unit-circle-1.svg`, `unit-circle-2.svg`, `unit-circle-3.svg`, `unit-circle-4.svg` | — |
 | `algebrica/various/cosine-similarity.md` | yes | `cosine-similarity-1.svg`, `cosine-similarity-2.svg` | — |
 | `algebrica/vectors-and-matrices/vectors.md` | yes | `vectors-1.svg`, `vectors-2.svg`, `vectors-3.svg`, `vectors-4.svg`, `vectors-5.svg`, `vectors-6.svg` | — |
-| `algebrica/complex-numbers/euler-formula.md` | yes | — | `euler-number-limit-sequence-1.svg` |
+| `algebrica/complex-numbers/roots-of-unity.md` | yes | — | `roots-of-a-polynomial-1.svg`, `roots-of-a-polynomial-2.svg`, `roots-of-a-polynomial-3.svg` |
 | `algebrica/derivatives/partial-derivatives.md` | yes | — | `derivatives-1.svg` |
-| `algebrica/differential-calculus-theorems/rolles-theorem.md` | yes | — | `cauchy-theorem-1.svg`, `darboux-theorem-1.svg`, `fermat-theorem-1.svg`, `fermat-theorem-2.svg`, `fermat-theorem-3.svg`, `fundamental-theorem-of-calculus-2.svg`, `intermediate-value-theorem-1.svg`, `intermediate-value-theorem-2.svg` |
+| `algebrica/differential-calculus-theorems/cauchy-theorem.md` | yes | — | `cauchy-sequence-1.svg`, `darboux-theorem-1.svg`, `fermat-theorem-1.svg`, `fermat-theorem-2.svg`, `fermat-theorem-3.svg`, `fundamental-theorem-of-calculus-2.svg`, `intermediate-value-theorem-1.svg`, `intermediate-value-theorem-2.svg` |
+| `algebrica/differential-calculus-theorems/rolles-theorem.md` | yes | — | `darboux-theorem-1.svg`, `fermat-theorem-1.svg`, `fermat-theorem-2.svg`, `fermat-theorem-3.svg`, `fundamental-theorem-of-calculus-2.svg`, `intermediate-value-theorem-1.svg`, `intermediate-value-theorem-2.svg`, `lagrange-theorem-1.svg` |
 | `algebrica/differential-equations/differential-equations.md` | yes | — | `differential-of-a-function-1.svg`, `exponential-equations-1.svg`, `geometric-interpretation-quadratic-equations-1.svg`, `geometric-interpretation-quadratic-equations-2.svg`, `geometric-interpretation-quadratic-equations-3.svg`, `linear-equations-1.svg`, `separable-differential-equations-1.svg`, `systems-of-linear-equations-in-two-variables-1.svg` |
 | `algebrica/equations/geometrical-meaning-quadratic-equations.md` | yes | — | `exponential-equations-1.svg`, `geometric-interpretation-quadratic-equations-1.svg`, `geometric-interpretation-quadratic-equations-2.svg`, `geometric-interpretation-quadratic-equations-3.svg`, `geometric-interpretation-quadratic-inequalities-1.svg`, `geometric-interpretation-quadratic-inequalities-2.svg`, `linear-equations-1.svg`, `quadratic-inequalities-1.svg` |
 | `algebrica/equations/incomplete-quadratic-equations.md` | yes | — | `exponential-equations-1.svg`, `geometric-interpretation-quadratic-equations-1.svg`, `geometric-interpretation-quadratic-equations-2.svg`, `geometric-interpretation-quadratic-equations-3.svg`, `geometric-interpretation-quadratic-inequalities-1.svg`, `geometric-interpretation-quadratic-inequalities-2.svg`, `linear-equations-1.svg`, `quadratic-inequalities-1.svg` |
@@ -693,21 +671,28 @@ figure already on disk could be dropped in without authoring anything.
 | `algebrica/functions/cosecant-function.md` | yes | — | `cosecant-1.png`, `secant-and-cosecant-1.svg`, `secant-and-cosecant-2.svg` |
 | `algebrica/functions/cosine-function.md` | yes | — | `cosine-similarity-1.svg`, `cosine-similarity-2.svg`, `hyperbolic-cosine-function-1.svg`, `hyperbolic-sine-and-cosine-1.svg`, `hyperbolic-sine-and-cosine-2.svg`, `hyperbolic-sine-and-cosine-3.svg`, `hyperbolic-sine-and-cosine-4.svg`, `hyperbolic-sine-and-cosine-5.svg` |
 | `algebrica/functions/cotangent-function.md` | yes | — | `cotangent-chart-1.png`, `hyperbolic-cotangent-function-1.svg`, `hyperbolic-tangent-and-cotangent-1.svg`, `hyperbolic-tangent-and-cotangent-2.svg`, `hyperbolic-tangent-and-cotangent-3.svg`, `hyperbolic-tangent-and-cotangent-4.svg`, `tangent-and-cotangent-1.svg`, `tangent-and-cotangent-2.svg` |
+| `algebrica/functions/exponential-function.md` | yes | — | `complex-numbers-exponential-form-1.svg`, `exponential-equations-1.svg` |
 | `algebrica/functions/irrational-functions.md` | yes | — | `irrational-inequalities-1.svg` |
-| `algebrica/functions/power-function.md` | yes | — | `power-series-1.svg`, `power-series-2.svg`, `exp-power-rule.svg` |
+| `algebrica/functions/polynomial-function.md` | yes | — | `roots-of-a-polynomial-1.svg`, `roots-of-a-polynomial-2.svg`, `roots-of-a-polynomial-3.svg` |
+| `algebrica/functions/power-function.md` | yes | — | `exp-power-rule.svg` |
 | `algebrica/functions/secant-function.md` | yes | — | `secant-1-1.png`, `secant-and-cosecant-1.svg`, `secant-and-cosecant-2.svg` |
 | `algebrica/functions/sine-function.md` | yes | — | `hyperbolic-sine-and-cosine-1.svg`, `hyperbolic-sine-and-cosine-2.svg`, `hyperbolic-sine-and-cosine-3.svg`, `hyperbolic-sine-and-cosine-4.svg`, `hyperbolic-sine-and-cosine-5.svg`, `hyperbolic-sine-function-1.svg`, `sine-and-cosine-1.svg`, `sine-and-cosine-2.svg` |
 | `algebrica/inequalities/linear-inequalities.md` | yes | — | `geometric-interpretation-quadratic-inequalities-1.svg`, `geometric-interpretation-quadratic-inequalities-2.svg`, `irrational-inequalities-1.svg`, `linear-equations-1.svg`, `quadratic-inequalities-1.svg`, `quadratic-inequalities-2.svg`, `quadratic-inequalities-4.svg`, `quadratic-inequalities-5.svg` |
 | `algebrica/inequalities/logarithmic-inequalities.md` | yes | — | `geometric-interpretation-quadratic-inequalities-1.svg`, `geometric-interpretation-quadratic-inequalities-2.svg`, `irrational-inequalities-1.svg`, `quadratic-inequalities-1.svg`, `quadratic-inequalities-2.svg`, `quadratic-inequalities-4.svg`, `quadratic-inequalities-5.svg`, `sign-analysis-in-inequalities-1.svg` |
-| `algebrica/integrals/definite-integrals.md` | yes | — | `improper-integrals-3.svg`, `indefinite-integrals-1.svg`, `indefinite-integrals-2.svg` |
-| `algebrica/integrals/finding-areas-by-integration.md` | yes | — | `integration-by-parts-1.svg`, `numerical-integration-1.svg`, `numerical-integration-2.svg` |
-| `algebrica/integrals/mean-value-theorem-for-integrals.md` | yes | — | `absolute-value-1.svg`, `absolute-value-function-1.svg`, `absolute-value-function-2.svg`, `cauchy-theorem-1.svg`, `darboux-theorem-1.svg`, `fermat-theorem-1.svg`, `fermat-theorem-2.svg`, `fermat-theorem-3.svg` |
-| `algebrica/integrals/trigonometric-substitution-for-integrals.md` | yes | — | `complex-numbers-trigonometric-form-1.svg`, `improper-integrals-3.svg`, `indefinite-integrals-1.svg`, `indefinite-integrals-2.svg`, `trigonometric-identities-1.svg`, `trigonometric-inequalities-1.svg`, `trigonometric-inequalities-2.svg`, `trigonometric-inequalities-3.svg` |
+| `algebrica/inequalities/trigonometric-inequalities.md` | yes | — | `complex-numbers-trigonometric-form-1.svg`, `geometric-interpretation-quadratic-inequalities-1.svg`, `geometric-interpretation-quadratic-inequalities-2.svg`, `irrational-inequalities-1.svg`, `quadratic-inequalities-1.svg`, `quadratic-inequalities-2.svg`, `quadratic-inequalities-4.svg`, `quadratic-inequalities-5.svg` |
+| `algebrica/integrals/definite-integrals.md` | yes | — | `improper-integrals-3.svg` |
+| `algebrica/integrals/finding-areas-by-integration.md` | yes | — | `numerical-integration-1.svg` |
+| `algebrica/integrals/indefinite-integrals.md` | yes | — | `improper-integrals-3.svg` |
+| `algebrica/integrals/integration-by-parts.md` | yes | — | `numerical-integration-1.svg` |
+| `algebrica/integrals/mean-value-theorem-for-integrals.md` | yes | — | `absolute-value-1.svg`, `absolute-value-function-1.svg`, `absolute-value-function-2.svg`, `darboux-theorem-1.svg`, `fermat-theorem-1.svg`, `fermat-theorem-2.svg`, `fermat-theorem-3.svg`, `fundamental-theorem-of-calculus-2.svg` |
+| `algebrica/integrals/trigonometric-substitution-for-integrals.md` | yes | — | `complex-numbers-trigonometric-form-1.svg`, `improper-integrals-3.svg`, `trigonometric-identities-1.svg` |
 | `algebrica/kinematics/simple-harmonic-motion.md` | yes | — | `harmonic-series-1.svg` |
 | `algebrica/limits/little-o-notation.md` | yes | — | `big-o-notation-1.svg`, `little-o-1.svg` |
-| `algebrica/polynomials/binomial-theorem.md` | yes | — | `cauchy-theorem-1.svg`, `darboux-theorem-1.svg`, `fermat-theorem-1.svg`, `fermat-theorem-2.svg`, `fermat-theorem-3.svg`, `fundamental-theorem-of-calculus-2.svg`, `intermediate-value-theorem-1.svg`, `intermediate-value-theorem-2.svg` |
-| `algebrica/probability-and-statistics/exponential-distribution.md` | yes | — | `beta-distribution-1.svg`, `chi-square-distribution-1.svg`, `chi-square-distribution-2.svg`, `complex-numbers-exponential-form-1.svg`, `exponential-equations-1.svg`, `exponential-function-1.svg`, `exponential-function-2.svg`, `exponential-function-3.svg` |
-| `algebrica/series/cauchy-convergence-criterion-series.md` | yes | — | `cauchy-sequence-1.svg`, `cauchy-theorem-1.svg`, `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg`, `power-series-1.svg`, `power-series-2.svg` |
+| `algebrica/polynomials/binomial-theorem.md` | yes | — | `darboux-theorem-1.svg`, `fermat-theorem-1.svg`, `fermat-theorem-2.svg`, `fermat-theorem-3.svg`, `fundamental-theorem-of-calculus-2.svg`, `intermediate-value-theorem-1.svg`, `intermediate-value-theorem-2.svg`, `lagrange-theorem-1.svg` |
+| `algebrica/probability-and-statistics/exponential-distribution.md` | yes | — | `beta-distribution-1.svg`, `chi-square-distribution-1.svg`, `chi-square-distribution-2.svg`, `complex-numbers-exponential-form-1.svg`, `exponential-equations-1.svg`, `gamma-distribution-1.svg`, `normal-distribution-1.svg`, `student-t-distribution-1.svg` |
+| `algebrica/sequences/euler-number-limit-sequence.md` | yes | — | `arithmetic-sequence-1.svg`, `cauchy-sequence-1.svg`, `complex-number-operations-1.svg`, `geometric-sequence-1.svg`, `geometric-sequence-2.svg`, `geometric-sequence-3.svg`, `neg-number-line.svg` |
+| `algebrica/series/cauchy-convergence-criterion-series.md` | yes | — | `cauchy-sequence-1.svg`, `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
+| `algebrica/series/power-series.md` | yes | — | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg`, `exp-power-rule.svg` |
 | `algebrica/trigonometry/pythagorean-identity.md` | yes | — | `pythagorean-theorem-1.svg`, `pythagorean-theorem-2.svg`, `pythagorean-theorem-3.svg` |
 | `algebrica/vectors-and-matrices/linear-combinations.md` | yes | — | `linear-equations-1.svg`, `systems-of-linear-equations-in-two-variables-1.svg` |
 

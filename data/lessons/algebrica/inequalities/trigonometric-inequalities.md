@@ -51,6 +51,9 @@ $$\frac{\pi}{3} + 2n\pi < x < \frac{2\pi}{3} + 2n\pi$$
 
 $$n \in \mathbb{Z}$$
 
+
+![sin x > k holds wherever the unit circle arc lies above the horizontal line y = k](/diagrams/algebrica/trigonometric-inequalities-1.svg)
+
 > 13.
 > 
 > A practical remark: solving trigonometric inequalities in closed form requires familiarity with the principal values of sine and cosine at the standard angles $\pi/6$, $\pi/4$, $\pi/3$, and $\pi/2$. Without this, the step from $\arcsin(\sqrt{3}/2)$ to $\pi/3$ is not immediate.
@@ -86,6 +89,9 @@ $$\frac{2\pi}{3} + 2n\pi \leq x \leq \frac{4\pi}{3} + 2n\pi$$
 
 $$n \in \mathbb{Z}$$
 
+
+![cos x < k holds wherever the unit circle arc lies to the left of the vertical line x = k](/diagrams/algebrica/trigonometric-inequalities-2.svg)
+
 > 21.
 > 
 > As with the sine case discussed above, solving cosine inequalities in closed form requires familiarity with the principal values of cosine at the standard angles $\pi/6$, $\pi/4$, $\pi/3$, and $\pi/2$. Without this, the step from $\arccos(-1/2)$ to $2\pi/3$ is not immediate.
@@ -120,6 +126,9 @@ $$-\frac{\pi}{2} + n\pi < x \leq -\frac{\pi}{4} + n\pi$$
 $$n \in \mathbb{Z}$$
 
 28.The left endpoint is excluded because the tangent function is not defined there.
+
+
+![tan x > k holds wherever the unit circle arc lies above the line y = kx](/diagrams/algebrica/trigonometric-inequalities-3.svg)
 
 ## Reducible inequalities
 

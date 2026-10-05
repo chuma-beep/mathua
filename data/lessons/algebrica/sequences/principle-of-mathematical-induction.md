@@ -35,6 +35,8 @@ These two conditions correspond precisely to the structure of a proof by mathema
   * The base case consists of verifying that \( p(0) \) holds, meaning that 0 belongs to \( A \).
   * The inductive step consists of proving that, whenever \( p(n) \) is true for some \( n \in \mathbb{N} \), it follows that \( p(n+1) \) is also true, thereby ensuring that \( n+1 \in A \).
 
+![The two steps of an induction: the base case, true for every $n$ in the natural numbers, and the inductive step, $p(n)$ implies $p(n+1)$.](/diagrams/algebrica/principle-of-mathematical-induction-1.svg)
+
 
 ## Example 1
 

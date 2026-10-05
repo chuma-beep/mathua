@@ -4,6 +4,8 @@
 
 **Cauchy’s Theorem** establishes a relationship between the changes of two functions over a given interval. Specifically, if \( f(x) \) and \( g(x) \) are [continuous](<../continuous-functions/>) on a closed interval \([a, b]\) and differentiable in its interior, with \( g'(x) \neq 0 \), then there exists at least one point \( c \) in \( (a, b) \) where the ratio of their [derivatives](<../derivatives>) matches the ratio of their overall change across the interval:
 
+![At C, the tangent is parallel to the secant through A and B.](/diagrams/algebrica/cauchy-theorem-1.svg)
+
 ## Statement
 
 The Cauchy’s theorem states the following. Let \( f(x) \) and \( g(x) \) be two functions such that:

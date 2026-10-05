@@ -122,11 +122,15 @@ The union of \(A\) and \(B\) is the set of all elements that belong to at least 
 A \cup B = \\{x \mid x \in A \text{ or } x \in B\\}
 \]
 
+![Venn diagram of the union $A \cup B$ of sets $A$ and $B$ within a universal set $U$.](/diagrams/algebrica/sets-1.svg)
+
 The intersection of \(A\) and \(B\) is the set of elements that belong to both sets:
 
 \[
 A \cap B = \\{x \mid x \in A \text{ and } x \in B\\}
 \]
+
+![Venn diagram of the intersection $A \cap B$ of sets $A$ and $B$.](/diagrams/algebrica/sets-2.svg)
 
 If \(A \cap B = \emptyset\), the two sets are disjoint and share no elements.
 
@@ -136,6 +140,8 @@ The complement of \(A\) with respect to a universal set \(U\) is the set of all 
 A^c = \\{x \in U \mid x \notin A\\}
 \]
 
+![Venn diagram of the complement $A^c$ of $A$ within the universal set $U$.](/diagrams/algebrica/sets-3.svg)
+
 Another way to represent the complement of \(A\) is \(\overline{A}\) or \(U \setminus A\). A single set may yield different complements when \(U\) changes, since the elements of the complement vary with the universal set we pick.
 
 The difference of \(A\) and \(B\), \(A \setminus B\), is the set of elements that belong to \(A\) but not to \(B\):
@@ -144,6 +150,8 @@ The difference of \(A\) and \(B\), \(A \setminus B\), is the set of elements tha
 A \setminus B = \\{x \mid x \in A \text{ and } x \notin B\\}
 \]
 
+![Venn diagram of the difference $A \setminus B$: the part of $A$ outside $B$.](/diagrams/algebrica/sets-4.svg)
+
 The relation \(A \setminus B \neq B \setminus A\) holds, since the difference between sets is not a commutative operation. For any universal set that contains both \(A\) and \(B\) the identity \(A \setminus B = A \cap B^c\) holds, linking the difference to the complement.
 
 The symmetric difference of \(A\) and \(B\), \(A \triangle B\), is the set of elements that belong to one of the two sets but not to both:
@@ -151,6 +159,8 @@ The symmetric difference of \(A\) and \(B\), \(A \triangle B\), is the set of el
 \[
 A \triangle B = (A \setminus B) \cup (B \setminus A)
 \]
+
+![Venn diagram of the symmetric difference $A \triangle B$: the part of exactly one of $A$ and $B$.](/diagrams/algebrica/sets-5.svg)
 
 An equivalent representation is given by the following expression:
 
@@ -191,6 +201,8 @@ A \cup (B \cap C) &= (A \cup B) \cap (A \cup C)
 \]
 
 The empty set and the universal set act as the identity element respectively for union and for intersection. Combining any set with either of them brings back the original set.
+![Venn diagram of the distributive identity $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$.](/diagrams/algebrica/sets-6.svg)
+
 
 \[
 \begin{align}

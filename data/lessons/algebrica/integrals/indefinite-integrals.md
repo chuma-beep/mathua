@@ -22,6 +22,11 @@ Conversely, any two primitives of the same function differ by a constant. If \(F
 
 which implies \(F_1(x) - F_2(x) = c\) for some constant \(c \in \mathbb{R}\).
 
+
+![The graph of the function y = x² is a parabola passing through the origin. Its derivative at a given point represents the slope of the tangent line to the curve at that point.](/diagrams/algebrica/indefinite-integrals-1.svg)
+
+![The functions y = x², y = x² + 2, y = x² + 4 and, more generally, all functions of the form y = x² + c differ only by a vertical translation. Since this translation does not change the slope of the curve, they all have the same derivative: y′ = 2x.](/diagrams/algebrica/indefinite-integrals-2.svg)
+
 ## What is the indefinite integral
 
 The indefinite integral of a function \(f(x)\) is the set of all its primitives. Since any two primitives differ by a constant, the entire family is expressed as \(F(x) + c\) for \(c \in \mathbb{R}\), and is denoted:

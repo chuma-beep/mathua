@@ -37,6 +37,9 @@ Trinomials are classified according to two primary criteria: degree and number o
 
 In the case of two variables, trinomials of the form \(ax^2 + bxy + cy^2\) represent homogeneous quadratic forms. Homogeneous trinomials deserve a brief mention: a trinomial \(ax^n + bx^{n-1}y + cy^{n-2}\) is not homogeneous unless all three terms share the same total degree. The trinomial \(x^2 + xy + y^2\), for instance, is homogeneous of degree 2, while \(x^2 + xy + y\) is not.
 
+
+![The same parabola drawn twice: since the coefficient $a > 0$ the concavity faces upward, and since $a < 0$ it faces downward.](/diagrams/algebrica/trinomials-1.svg)
+
 ## The discriminant
 
 The algebraic properties of the quadratic trinomial \(ax^2 + bx + c\) are determined by a single quantity known as the discriminant, defined as follows:

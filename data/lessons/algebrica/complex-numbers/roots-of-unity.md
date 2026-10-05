@@ -54,6 +54,9 @@ z_1 &= e^{2\pi i/3} = -\frac{1}{2} + \frac{\sqrt{3}}{2}\\,i \\\\[6pt]
 z_2 &= e^{4\pi i/3} = -\frac{1}{2} - \frac{\sqrt{3}}{2}\\,i
 \end{align}
 
+
+![The vertices lie on the unit circle and are separated by equal central angles of 2π/3 between consecutive radii.](/diagrams/algebrica/roots-of-unity-1.svg)
+
 > For \(n = 6\) the six roots are the vertices of a regular hexagon, and they include as a subset the roots for \(n = 2\) and \(n = 3\), which reflects the divisibility \(2 \mid 6\) and \(3 \mid 6\) and the corresponding subgroup inclusions \(\mu_2, \mu_3 \subset \mu_6\).
 
 ## Primitive roots

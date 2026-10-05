@@ -70,6 +70,8 @@ where \( m \neq 0 \) is the slope and \( q \) is the y-intercept. Its graph is a
   * The function is bijective from \( \mathbb{R} \) to \( \mathbb{R} \).
   * It has no maximum or minimum points.
 
+![Two linear functions side by side: a strictly increasing one with positive slope and y-intercept 2, and a strictly decreasing one with negative slope and y-intercept 1.](/diagrams/algebrica/polynomial-function-1.svg)
+
 
 ## Degree 2: quadratic functions
 
@@ -87,6 +89,8 @@ where \( a \neq 0 \). Its graph is a [parabola](<../parabola/>) with vertical ax
   * When \( a < 0 \), the parabola opens downward and the vertex is a global maximum.
   * The function is not monotone over all of \( \mathbb{R} \), but it is strictly monotone on each of the two half-lines separated by the vertex.
 
+![Two quadratic functions side by side: y = 2x² − 3x + 1 opening upward and y = −x² + 5x + 1 opening downward. In each case the axis of symmetry is vertical and the vertex is the extremum.](/diagrams/algebrica/polynomial-function-2.svg)
+
 
 ## Degree 3: cubic functions
 
@@ -101,6 +105,8 @@ where \( a \neq 0 \). Unlike the quadratic case, a cubic function has no [global
   * The function is bijective from \( \mathbb{R} \) to \( \mathbb{R} \) if and only if it has no local extrema, that is, if its derivative has no real roots.
   * It may have one or two local extrema and exactly one [inflection point](https://algebrica.org/maximum-minimum-and-inflection-points/).
   * Limits at infinity: \[\begin{align} \lim_{x \to -\infty} f(x) &= -\infty \quad \text{if } a > 0 \\\\[6pt] \lim_{x \to +\infty} f(x) &= +\infty \quad \text{if } a > 0 \end{align} \]
+
+![The graph of y = 2x³ − 5x² + x + 2 has one local maximum, one local minimum, and one inflection point.](/diagrams/algebrica/polynomial-function-3.svg)
 
 
 ## End behavior
