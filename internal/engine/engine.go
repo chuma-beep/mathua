@@ -46,6 +46,10 @@ type activeSession struct {
 	halted             bool
 	remedialQueue      []string
 	remedialDifficulty float64
+	// Difficulty the currently-served question was generated at. Zero means the question
+	// was not generated at a known difficulty, and the attempt is written with a NULL
+	// rather than a fabricated one.
+	questionDifficulty float64
 	rushCount          int
 }
 
@@ -557,6 +561,7 @@ func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
 		as.explanation = prob.Explanation
 		as.isReview = false
 		as.questionText = prob.Question
+		as.questionDifficulty = diff
 		e.sessions[sessionID] = as
 		e.persistActiveSession(sessionID, studentID, as, as.questionText)
 		var lesson *lessons.Lesson
@@ -616,6 +621,7 @@ func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
 	as.answered = false
 	as.attemptID = attemptID
 	as.questionText = prob.Question
+	as.questionDifficulty = difficulty
 	as.recentConcepts = append(as.recentConcepts, next.Concept.ID)
 	if len(as.recentConcepts) > 3 {
 		as.recentConcepts = as.recentConcepts[len(as.recentConcepts)-3:]
@@ -705,6 +711,7 @@ func (e *Engine) NextReviewQuestion(sessionID, studentID string) (*Question, err
 	as.answered = false
 	as.attemptID = attemptID
 	as.questionText = prob.Question
+	as.questionDifficulty = difficulty
 	e.sessions[sessionID] = as
 	e.persistActiveSession(sessionID, studentID, as, as.questionText)
 
@@ -1031,21 +1038,23 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 		return nil, fmt.Errorf("%w for session %q", ErrNoActiveQuestion, sessionID)
 	}
 	sessionFields := struct {
-		conceptID      string
-		expectedAnswer string
-		explanation    string
-		questionText   string
-		requiredStreak int
-		timeThreshold  float64
-		isReview       bool
+		conceptID          string
+		expectedAnswer     string
+		explanation        string
+		questionText       string
+		questionDifficulty float64
+		requiredStreak     int
+		timeThreshold      float64
+		isReview           bool
 	}{
-		conceptID:      as.conceptID,
-		expectedAnswer: as.expectedAnswer,
-		explanation:    as.explanation,
-		questionText:   as.questionText,
-		requiredStreak: as.requiredStreak,
-		timeThreshold:  as.timeThreshold,
-		isReview:       as.isReview,
+		conceptID:          as.conceptID,
+		expectedAnswer:     as.expectedAnswer,
+		explanation:        as.explanation,
+		questionText:       as.questionText,
+		questionDifficulty: as.questionDifficulty,
+		requiredStreak:     as.requiredStreak,
+		timeThreshold:      as.timeThreshold,
+		isReview:           as.isReview,
 	}
 	// Mark answered while still holding the lock so a concurrent
 	// SubmitAnswer for the same attemptID is rejected as ErrNoActiveQuestion.
@@ -1189,6 +1198,7 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 		Question:       sessionFields.questionText,
 		Source:         sourceForTask(sessionFields.isReview),
 		Explanation:    sessionFields.explanation,
+		Difficulty:     difficultyOrNil(sessionFields.questionDifficulty),
 	}); err != nil {
 		return nil, fmt.Errorf("record attempt: %w", err)
 	}
@@ -2097,6 +2107,7 @@ func (e *Engine) PracticeConcept(sessionID, studentID, conceptID string) (*Quest
 	as.answered = false
 	as.attemptID = attemptID
 	as.questionText = prob.Question
+	as.questionDifficulty = difficulty
 	e.sessions[sessionID] = as
 	e.persistActiveSession(sessionID, studentID, as, as.questionText)
 
@@ -2321,6 +2332,7 @@ func (e *Engine) persistActiveSession(sessionID, studentID string, as *activeSes
 		LastConceptID:  as.lastConceptID,
 		SessionReview:  as.sessionReview,
 		SessionNew:     as.sessionNew,
+		Difficulty:     attemptDifficulty(as),
 	}
 	if err := e.repo.UpsertActiveSession(rec); err != nil {
 		log.Printf("warning: persist active session %s: %v", sessionID, err)
@@ -2418,4 +2430,27 @@ func (e *Engine) Close() {
 	if e.gr != nil {
 		e.gr.Close()
 	}
+}
+
+// difficultyOrNil turns "we generated this at a known difficulty" into a pointer and
+// "we did not" into nil.
+//
+// The distinction is the whole point. An evidence model that weights answers by
+// difficulty has to be able to say "not recorded" as well as "trivial", and a stored 0
+// would claim the second. Pre-migration attempts and hand-written quiz or diagnostic
+// questions land in the nil case honestly rather than being backfilled with a number
+// nobody measured.
+func difficultyOrNil(d float64) *float64 {
+	if d <= 0 {
+		return nil
+	}
+	return &d
+}
+
+// attemptDifficulty is the persisted form for the active session row.
+func attemptDifficulty(as *activeSession) *float64 {
+	if as == nil {
+		return nil
+	}
+	return difficultyOrNil(as.questionDifficulty)
 }

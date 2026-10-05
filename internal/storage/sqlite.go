@@ -83,6 +83,10 @@ func authMigrate(db *sql.DB) error {
 		"ALTER TABLE attempts ADD COLUMN question TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE attempts ADD COLUMN source TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE attempts ADD COLUMN explanation TEXT NOT NULL DEFAULT ''",
+		// Nullable on purpose: existing rows have no difficulty, and backfilling a
+		// plausible-looking number would be fabricating evidence.
+		"ALTER TABLE attempts ADD COLUMN difficulty REAL",
+		"ALTER TABLE active_sessions ADD COLUMN difficulty REAL",
 	}
 	for _, m := range migrations {
 		if _, err := db.Exec(m); err != nil {
@@ -947,7 +951,7 @@ func (s *SQLiteStore) GetActiveSession(sessionID string) (*ActiveSession, error)
 	row := s.db.QueryRow(`
 		SELECT session_id, student_id, concept_id, concept_name, expected_answer,
 		       attempt_id, question, explanation, diagram, is_review, answered,
-		       last_concept_id, session_review, session_new, updated_at
+		       last_concept_id, session_review, session_new, difficulty, updated_at
 		FROM active_sessions WHERE session_id = ?
 	`, sessionID)
 	var a ActiveSession
@@ -955,7 +959,7 @@ func (s *SQLiteStore) GetActiveSession(sessionID string) (*ActiveSession, error)
 	var updatedAt string
 	if err := row.Scan(&a.SessionID, &a.StudentID, &a.ConceptID, &a.ConceptName, &a.ExpectedAnswer,
 		&a.AttemptID, &a.Question, &a.Explanation, &a.Diagram, &isReview, &answered,
-		&a.LastConceptID, &a.SessionReview, &a.SessionNew, &updatedAt); err != nil {
+		&a.LastConceptID, &a.SessionReview, &a.SessionNew, &a.Difficulty, &updatedAt); err != nil {
 		if err == sql.ErrNoRows {
 			return nil, nil
 		}
@@ -977,8 +981,8 @@ func (s *SQLiteStore) UpsertActiveSession(a *ActiveSession) error {
 		INSERT INTO active_sessions
 			(session_id, student_id, concept_id, concept_name, expected_answer,
 			 attempt_id, question, explanation, diagram, is_review, answered,
-			 last_concept_id, session_review, session_new, updated_at)
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 last_concept_id, session_review, session_new, difficulty, updated_at)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 		ON CONFLICT(session_id) DO UPDATE SET
 			student_id      = excluded.student_id,
 			concept_id      = excluded.concept_id,
@@ -993,10 +997,11 @@ func (s *SQLiteStore) UpsertActiveSession(a *ActiveSession) error {
 			last_concept_id = excluded.last_concept_id,
 			session_review  = excluded.session_review,
 			session_new     = excluded.session_new,
+			difficulty      = excluded.difficulty,
 			updated_at      = excluded.updated_at
 	`, a.SessionID, a.StudentID, a.ConceptID, a.ConceptName, a.ExpectedAnswer,
 		a.AttemptID, a.Question, a.Explanation, a.Diagram, boolToInt(a.IsReview), boolToInt(a.Answered),
-		a.LastConceptID, a.SessionReview, a.SessionNew, now)
+		a.LastConceptID, a.SessionReview, a.SessionNew, a.Difficulty, now)
 	if err != nil {
 		return fmt.Errorf("upsert active session: %w", err)
 	}
@@ -1100,14 +1105,14 @@ func (s *SQLiteStore) RecordAttempt(entry AttemptEntry) error {
 	_, err := s.db.Exec(`
 		INSERT INTO attempts
 			(session_id, student_id, concept_id, answer, expected,
-			 correct, elapsed_seconds, timestamp, question, source, explanation)
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 correct, elapsed_seconds, timestamp, question, source, explanation, difficulty)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 	`,
 		entry.SessionID, entry.StudentID, entry.ConceptID,
 		entry.Answer, entry.Expected,
 		boolToInt(entry.Correct), entry.ElapsedSeconds,
 		entry.Timestamp.Format(time.RFC3339),
-		entry.Question, entry.Source, entry.Explanation,
+		entry.Question, entry.Source, entry.Explanation, entry.Difficulty,
 	)
 	if err != nil {
 		return fmt.Errorf("record attempt: %w", err)
@@ -1128,7 +1133,7 @@ func (s *SQLiteStore) UpdateAttemptCorrect(id int64, correct bool) error {
 func (s *SQLiteStore) GetAllAttempts() ([]AttemptEntry, error) {
 	rows, err := s.db.Query(`
 		SELECT id, session_id, student_id, concept_id, answer, expected,
-		       correct, elapsed_seconds, timestamp, question, source, explanation
+		       correct, elapsed_seconds, timestamp, question, source, explanation, difficulty
 		FROM attempts
 		ORDER BY student_id, concept_id, timestamp ASC
 	`)
@@ -1145,7 +1150,7 @@ func (s *SQLiteStore) GetAllAttempts() ([]AttemptEntry, error) {
 		if err := rows.Scan(
 			&e.ID, &e.SessionID, &e.StudentID, &e.ConceptID,
 			&e.Answer, &e.Expected, &correct, &e.ElapsedSeconds, &ts,
-			&e.Question, &e.Source, &e.Explanation,
+			&e.Question, &e.Source, &e.Explanation, &e.Difficulty,
 		); err != nil {
 			return nil, fmt.Errorf("scan attempt: %w", err)
 		}
@@ -1161,7 +1166,7 @@ func (s *SQLiteStore) GetAllAttempts() ([]AttemptEntry, error) {
 func (s *SQLiteStore) GetAttemptsForStudent(studentID string) ([]AttemptEntry, error) {
 	rows, err := s.db.Query(`
 		SELECT id, session_id, student_id, concept_id, answer, expected,
-		       correct, elapsed_seconds, timestamp, question, source, explanation
+		       correct, elapsed_seconds, timestamp, question, source, explanation, difficulty
 		FROM attempts
 		WHERE student_id = ?
 		ORDER BY concept_id, timestamp ASC
@@ -1179,7 +1184,7 @@ func (s *SQLiteStore) GetAttemptsForStudent(studentID string) ([]AttemptEntry, e
 		if err := rows.Scan(
 			&e.ID, &e.SessionID, &e.StudentID, &e.ConceptID,
 			&e.Answer, &e.Expected, &correct, &e.ElapsedSeconds, &ts,
-			&e.Question, &e.Source, &e.Explanation,
+			&e.Question, &e.Source, &e.Explanation, &e.Difficulty,
 		); err != nil {
 			return nil, fmt.Errorf("scan attempt: %w", err)
 		}
@@ -1193,7 +1198,7 @@ func (s *SQLiteStore) GetAttemptsForStudent(studentID string) ([]AttemptEntry, e
 func (s *SQLiteStore) GetSessionAttempts(studentID, sessionID string) ([]AttemptEntry, error) {
 	rows, err := s.db.Query(`
 		SELECT id, session_id, student_id, concept_id, answer, expected,
-		       correct, elapsed_seconds, timestamp, question, source, explanation
+		       correct, elapsed_seconds, timestamp, question, source, explanation, difficulty
 		FROM attempts
 		WHERE student_id = ? AND session_id = ?
 		ORDER BY timestamp ASC
@@ -1211,7 +1216,7 @@ func (s *SQLiteStore) GetSessionAttempts(studentID, sessionID string) ([]Attempt
 		if err := rows.Scan(
 			&e.ID, &e.SessionID, &e.StudentID, &e.ConceptID,
 			&e.Answer, &e.Expected, &correct, &e.ElapsedSeconds, &ts,
-			&e.Question, &e.Source, &e.Explanation,
+			&e.Question, &e.Source, &e.Explanation, &e.Difficulty,
 		); err != nil {
 			return nil, fmt.Errorf("scan attempt: %w", err)
 		}

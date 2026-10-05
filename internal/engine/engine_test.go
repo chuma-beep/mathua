@@ -1247,3 +1247,62 @@ func TestProgressWithMasteryPct_DecayingIsFull(t *testing.T) {
 		t.Errorf("decaying mastery_pct = %v, want 1 (colour carries decay, not length)", got)
 	}
 }
+
+// The evidence model weights a correct answer by how hard the question was. That is only
+// usable if the server records the difficulty it generated at — and records *nothing*
+// rather than a guess when it does not know.
+func TestEngine_RecordsServedQuestionDifficulty(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("difficulty_recorded")
+
+	sess, _ := e.repo.CreateSession(st.ID)
+	e.mu.Lock()
+	e.sessions[sess.ID] = &activeSession{}
+	e.mu.Unlock()
+
+	q, err := e.NextQuestion(sess.ID, st.ID)
+	if err != nil {
+		t.Fatalf("next question: %v", err)
+	}
+	res, err := e.SubmitAnswer(sess.ID, st.ID, q.AttemptID, "42", 1.0)
+	if err != nil {
+		t.Fatalf("submit: %v", err)
+	}
+	if !res.Correct {
+		t.Fatal("expected the seeded answer to grade correct")
+	}
+
+	atts, err := e.repo.GetAttemptsForStudent(st.ID)
+	if err != nil {
+		t.Fatalf("get attempts: %v", err)
+	}
+	if len(atts) != 1 {
+		t.Fatalf("got %d attempts, want 1", len(atts))
+	}
+	d := atts[0].Difficulty
+	if d == nil {
+		t.Fatal("attempt difficulty is nil; a generated question always knows its own difficulty")
+	}
+	// Generators are asked for 0.3-1.0. Outside that range would mean the value came
+	// from somewhere other than the generator context.
+	if *d < 0.3 || *d > 1.0 {
+		t.Errorf("difficulty = %v, want within the generator's 0.3-1.0 range", *d)
+	}
+}
+
+// A difficulty of 0 would claim the question was trivially easy. Nothing measured that,
+// so nothing may write it.
+func TestEngine_NeverRecordsZeroDifficulty(t *testing.T) {
+	if got := difficultyOrNil(0); got != nil {
+		t.Errorf("difficultyOrNil(0) = %v, want nil", *got)
+	}
+	if got := difficultyOrNil(-1); got != nil {
+		t.Errorf("difficultyOrNil(-1) = %v, want nil", *got)
+	}
+	if got := difficultyOrNil(0.3); got == nil || *got != 0.3 {
+		t.Errorf("difficultyOrNil(0.3) = %v, want 0.3", got)
+	}
+	if got := attemptDifficulty(nil); got != nil {
+		t.Errorf("attemptDifficulty(nil) = %v, want nil", *got)
+	}
+}

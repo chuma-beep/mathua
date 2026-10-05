@@ -37,6 +37,11 @@ type snapshot struct {
 	AttemptPoints   []bool
 	DailyQuestions  int
 	DailyCorrect    int
+	// AttemptDifficulty, nil for the pre-migration attempt and set for the generated
+	// one. The pair has to survive the round trip *as a pair*: a store that turned NULL
+	// into 0, or 0.8 into NULL, would make the evidence model silently wrong on one
+	// engine only, and nothing else in the scenario would notice.
+	AttemptDifficulty []*float64
 }
 
 // exercise runs the same read/write sequence against either store and returns
@@ -67,10 +72,13 @@ func exercise(t *testing.T, repo Repository, tag string) snapshot {
 	}
 
 	base := time.Now().UTC().Add(-time.Hour)
+	// First attempt has no difficulty — the pre-migration shape, and the case a store
+	// could quietly coerce to 0. Second is generated at 0.8.
 	_ = repo.RecordAttempt(AttemptEntry{SessionID: sess.ID, StudentID: stu.ID, ConceptID: "c1",
 		Answer: "4 and 1/10", Expected: "4 1/10", Correct: false, ElapsedSeconds: 5, Timestamp: base})
 	_ = repo.RecordAttempt(AttemptEntry{SessionID: sess.ID, StudentID: stu.ID, ConceptID: "c1",
-		Answer: "5", Expected: "4 1/10", Correct: false, ElapsedSeconds: 9, Timestamp: base.Add(time.Minute)})
+		Answer: "5", Expected: "4 1/10", Correct: false, ElapsedSeconds: 9, Timestamp: base.Add(time.Minute),
+		Difficulty: difficultyPtr(0.8)})
 
 	atts, err := repo.GetAttemptsForStudent(stu.ID)
 	if err != nil {
@@ -101,14 +109,25 @@ func exercise(t *testing.T, repo Repository, tag string) snapshot {
 		correct += d.Correct
 	}
 
+	// Difficulties come back in the same order, including the nil one.
+	var diffs []*float64
+	for _, a := range atts {
+		diffs = append(diffs, a.Difficulty)
+	}
+
 	return snapshot{
 		Status: got.Status, Streak: got.Streak, BestStreak: got.BestStreak,
 		Attempts: got.Attempts, AvgResponseTime: got.AvgResponseTime,
 		WeaknessScore: got.WeaknessScore, SM2EFactor: got.SM2EFactor,
 		SM2Repetitions: got.SM2Repetitions, SM2Interval: got.SM2Interval,
 		AttemptPoints: points, DailyQuestions: questions, DailyCorrect: correct,
+		AttemptDifficulty: diffs,
 	}
 }
+
+// difficultyPtr is the local spelling of what difficultyOrNil does in the engine: a
+// generated question carries its difficulty, anything else stays absent.
+func difficultyPtr(d float64) *float64 { return &d }
 
 // TestDeleteAccount_RemovesEveryOwnedRow seeds one student across tables,
 // deletes, and requires every owned row gone plus the address reusable.
