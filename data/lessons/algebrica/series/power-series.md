@@ -19,6 +19,11 @@ endpoint is tested separately. The ratio test gives the standard computation:
 Example: \(\sum x^n / n!\) has \(R = \infty\) (converges to \(e^x\) everywhere),
 while \(\sum n! \, x^n\) has \(R = 0\) (converges only at \(x = 0\)).
 
+
+![Along the real axis, the series converges for |z-z₀|<R, diverges for |z-z₀|>R, and the endpoint cases |z-z₀|=R must be examined separately.](/diagrams/algebrica/power-series-1.svg)
+
+![The power series converges for complex numbers z satisfying |z − z₀| < R and diverges for |z − z₀| > R, where |z − z₀| is the modulus of z − z₀, that is, the distance from z to the centre z₀ in the complex plane.](/diagrams/algebrica/power-series-2.svg)
+
 ## Differentiating Term by Term
 
 Inside the interval of convergence, a power series can be differentiated and

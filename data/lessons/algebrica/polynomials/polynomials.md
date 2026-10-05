@@ -69,6 +69,8 @@ Third-degree polynomials, also known as cubic polynomials, have a graph that cor
 \[y = ax^3 + bx^2 + cx + d \]
 where \( a \) determines the overall shape and orientation of the curve, \( b \) and \( c \) influence the curvature and inflection points, and \( d \) represents the y-intercept.
 
+![A first-degree polynomial represents a straight line with equation y = mx + q](/diagrams/algebrica/polynomials-1.svg)
+
 
 ## End behavior of polynomial
 
@@ -101,6 +103,9 @@ In this case the polynomial exhibits the characteristic end behavior of a cubic 
 
 
 This behavior produces the familiar down–to–up orientation characteristic of all odd-degree polynomials with a positive leading coefficient. Understanding a polynomial’s end behavior directly from its algebraic structure is especially valuable when studying the overall behavior of functions. By focusing on the leading term \(a_n x^n\), one can predict how the graph evolves as \(x \to +\infty\) or \(x \to -\infty\), since the rapid growth of \(x^n\) dominates and makes all lower-degree contributions negligible. In many cases, identifying the degree of the polynomial and the sign of its leading coefficient already provides a clear, immediate indication of the global shape of the function.
+
+
+![The graph illustrates the typical end behavior of an odd–degree polynomial with a positive leading coefficient: the curve approaches −∞ as x→−∞ and rises toward +∞ as x→+∞.](/diagrams/algebrica/polynomials-3.svg)
 
 ## Monomials, binomials, trinomials
 
@@ -227,6 +232,9 @@ A polynomial equation is an equation of the form:
 \[a_{n}x^{n}+a_{n-1}x^{n-1}+\dotsb +a_{2}x^{2}+a_{1}x+a_{0} = 0\]
 
 Polynomial equations are classified according to the degree of the leading term. Depending on their degree, they are referred to as linear (degree 1), quadratic (degree 2), cubic (degree 3), or of higher degree when \(n > 3\).
+
+
+![The parabola intersects the x-axis at two points corresponding to the two real solutions of the equation. In this case, we have Δ > 0.](/diagrams/algebrica/polynomials-2.svg)
 
 ## Polynomial functions
 

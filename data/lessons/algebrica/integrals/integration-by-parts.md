@@ -54,6 +54,9 @@ This is the integration by parts formula. In the compact notation \( u = f(x) \)
 \int u\\,dv = uv \\,\\, - \int v\\,du
 \]
 
+
+![The rectangle has an area equal to its base multiplied by its height. The curve divides it into two regions whose areas correspond to the two integrals in the integration by parts formula.](/diagrams/algebrica/integration-by-parts-1.svg)
+
 > In practice, integration by parts is useful when differentiating one factor makes it simpler, while the other can still be integrated without difficulty. The method often turns a complicated expression into something more manageable, and in many problems it can be applied repeatedly until the integral is reduced to a standard form.
 
 ## How to choose \(u\) and \(dv\)

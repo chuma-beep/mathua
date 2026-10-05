@@ -20,7 +20,7 @@ $$\int_0^1 e^{-x^2}\\\\\,dx$$
 
 6.Numerical integration rests on the same construction that defines the [Riemann integral](<../riemann-integrability-criteria/>): the interval of integration is partitioned into a finite number of subintervals, the integrand is replaced on each subinterval by a simpler function whose integral is known exactly, and the total area is approximated by summing the contributions of the individual pieces. The quality of the approximation is determined by two factors: the width of the subintervals and the order of accuracy of the local rule.
 
-x y y=f(x) a h b The interval [a, b] has been divided  into 6 subintervals of width  h , whose  sum provides a lower approximation  of the area of the curvilinear  trapezoid.
+![The interval [a, b] has been divided into 6 subintervals of width h , whose sum provides a lower approximation of the area of the curvilinear trapezoid.](/diagrams/algebrica/numerical-integration-1.svg)
 
 7.Consider a uniform partition of the interval $[a,b]$:
 
@@ -70,7 +70,7 @@ $$ \left| \int_a^b f(x)\\\\\,dx - h\sum_{k=1}^{n} f(\bar{x}_k) \right| \le \frac
 
 19.A more accurate approximation is obtained by replacing the integrand on each subinterval not by a constant but by an affine function, namely the segment joining the two graph points $(x_{k-1}, f(x_{k-1}))$ and $(x_k, f(x_k))$. The region underneath this segment is a trapezoid, and its area equals the average of the two ordinates multiplied by the base.
 
-x y y=f(x) a b h Each subinterval generates a trapezoid: h is the  base, while f(x ₖ₋ ₁) and f(x ₖ ) are the two heights  used to approximate the area under the curve. x ₖ f(x ₖ ) x ₖ₋ ₁ f(x ₖ₋ ₁)
+![Each subinterval generates a trapezoid: h is the base, while f(x ₖ₋ ₁) and f(x ₖ ) are the two heights used to approximate the area under the curve.](/diagrams/algebrica/numerical-integration-2.svg)
 
 20.The local formula reads:
 

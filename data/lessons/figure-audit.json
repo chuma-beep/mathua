@@ -2540,12 +2540,6 @@
       "context": "As shown in the graph, when \\( q = 2 \\), the values of the geometric sequence \\( a_n = q^n \\) grow [exponentially](<../exponential-function>). As \\( n \\) increases, each term doubles the previous one,"
     },
     {
-      "lesson": "algebrica/sequences/euler-number-limit-sequence.md",
-      "line": 19,
-      "phrase": "The graph below",
-      "context": "6.The graph below illustrates how the terms of the sequence behave as $n$ grows. The values increase rapidly for small $n$, then rise more slowly, approaching $e$ from below without ever reaching it."
-    },
-    {
       "lesson": "algebrica/series/integral-test-for-series-convergence.md",
       "line": 21,
       "phrase": "The graph illustrates",
@@ -2715,174 +2709,10 @@
     }
   ],
   "unreferenced_diagrams": {
-    "referenced": 242,
+    "referenced": 279,
     "shipped": 586,
-    "unreferenced_content": 324,
+    "unreferenced_content": 287,
     "candidates": [
-      {
-        "lesson": "algebrica/complex-numbers/roots-of-unity.md",
-        "figures_referenced": false,
-        "exact_stem_match": [
-          "/diagrams/algebrica/roots-of-unity-1.svg"
-        ],
-        "topic_word_match": []
-      },
-      {
-        "lesson": "algebrica/differential-calculus-theorems/cauchy-theorem.md",
-        "figures_referenced": false,
-        "exact_stem_match": [
-          "/diagrams/algebrica/cauchy-theorem-1.svg"
-        ],
-        "topic_word_match": []
-      },
-      {
-        "lesson": "algebrica/functions/exponential-function.md",
-        "figures_referenced": false,
-        "exact_stem_match": [
-          "/diagrams/algebrica/exponential-function-1.svg",
-          "/diagrams/algebrica/exponential-function-2.svg",
-          "/diagrams/algebrica/exponential-function-3.svg"
-        ],
-        "topic_word_match": []
-      },
-      {
-        "lesson": "algebrica/functions/polynomial-function.md",
-        "figures_referenced": false,
-        "exact_stem_match": [
-          "/diagrams/algebrica/polynomial-function-1.svg",
-          "/diagrams/algebrica/polynomial-function-2.svg",
-          "/diagrams/algebrica/polynomial-function-3.svg"
-        ],
-        "topic_word_match": []
-      },
-      {
-        "lesson": "algebrica/inequalities/trigonometric-inequalities.md",
-        "figures_referenced": false,
-        "exact_stem_match": [
-          "/diagrams/algebrica/trigonometric-inequalities-1.svg",
-          "/diagrams/algebrica/trigonometric-inequalities-2.svg",
-          "/diagrams/algebrica/trigonometric-inequalities-3.svg"
-        ],
-        "topic_word_match": []
-      },
-      {
-        "lesson": "algebrica/integrals/indefinite-integrals.md",
-        "figures_referenced": false,
-        "exact_stem_match": [
-          "/diagrams/algebrica/indefinite-integrals-1.svg",
-          "/diagrams/algebrica/indefinite-integrals-2.svg"
-        ],
-        "topic_word_match": []
-      },
-      {
-        "lesson": "algebrica/integrals/integration-by-parts.md",
-        "figures_referenced": false,
-        "exact_stem_match": [
-          "/diagrams/algebrica/integration-by-parts-1.svg"
-        ],
-        "topic_word_match": []
-      },
-      {
-        "lesson": "algebrica/integrals/numerical-integration.md",
-        "figures_referenced": false,
-        "exact_stem_match": [
-          "/diagrams/algebrica/numerical-integration-1.svg",
-          "/diagrams/algebrica/numerical-integration-2.svg"
-        ],
-        "topic_word_match": []
-      },
-      {
-        "lesson": "algebrica/polynomials/polynomials.md",
-        "figures_referenced": false,
-        "exact_stem_match": [
-          "/diagrams/algebrica/polynomials-1.svg",
-          "/diagrams/algebrica/polynomials-2.svg",
-          "/diagrams/algebrica/polynomials-3.svg"
-        ],
-        "topic_word_match": []
-      },
-      {
-        "lesson": "algebrica/polynomials/trinomials.md",
-        "figures_referenced": false,
-        "exact_stem_match": [
-          "/diagrams/algebrica/trinomials-1.svg"
-        ],
-        "topic_word_match": []
-      },
-      {
-        "lesson": "algebrica/powers-radicals-logarithms/logarithms.md",
-        "figures_referenced": false,
-        "exact_stem_match": [
-          "/diagrams/algebrica/logarithms-1.svg",
-          "/diagrams/algebrica/logarithms-2.svg",
-          "/diagrams/algebrica/logarithms-3.svg"
-        ],
-        "topic_word_match": []
-      },
-      {
-        "lesson": "algebrica/powers-radicals-logarithms/radicals.md",
-        "figures_referenced": false,
-        "exact_stem_match": [
-          "/diagrams/algebrica/radicals-1.svg",
-          "/diagrams/algebrica/radicals-2.svg"
-        ],
-        "topic_word_match": []
-      },
-      {
-        "lesson": "algebrica/sequences/euler-number-limit-sequence.md",
-        "figures_referenced": false,
-        "exact_stem_match": [
-          "/diagrams/algebrica/euler-number-limit-sequence-1.svg"
-        ],
-        "topic_word_match": []
-      },
-      {
-        "lesson": "algebrica/sequences/principle-of-mathematical-induction.md",
-        "figures_referenced": false,
-        "exact_stem_match": [
-          "/diagrams/algebrica/principle-of-mathematical-induction-1.svg"
-        ],
-        "topic_word_match": []
-      },
-      {
-        "lesson": "algebrica/series/power-series.md",
-        "figures_referenced": false,
-        "exact_stem_match": [
-          "/diagrams/algebrica/power-series-1.svg",
-          "/diagrams/algebrica/power-series-2.svg"
-        ],
-        "topic_word_match": []
-      },
-      {
-        "lesson": "algebrica/sets-and-numbers/integers.md",
-        "figures_referenced": false,
-        "exact_stem_match": [
-          "/diagrams/algebrica/integers-1.svg",
-          "/diagrams/algebrica/integers-2.svg"
-        ],
-        "topic_word_match": []
-      },
-      {
-        "lesson": "algebrica/sets-and-numbers/sets.md",
-        "figures_referenced": false,
-        "exact_stem_match": [
-          "/diagrams/algebrica/sets-1.svg",
-          "/diagrams/algebrica/sets-2.svg",
-          "/diagrams/algebrica/sets-3.svg",
-          "/diagrams/algebrica/sets-4.svg",
-          "/diagrams/algebrica/sets-5.svg",
-          "/diagrams/algebrica/sets-6.svg"
-        ],
-        "topic_word_match": []
-      },
-      {
-        "lesson": "algebrica/vectors-and-matrices/eigenvalues-and-eigenvectors.md",
-        "figures_referenced": false,
-        "exact_stem_match": [
-          "/diagrams/algebrica/eigenvalues-and-eigenvectors-1.svg"
-        ],
-        "topic_word_match": []
-      },
       {
         "lesson": "algebrica/complex-numbers/complex-logarithm.md",
         "figures_referenced": false,
@@ -2901,14 +2731,14 @@
         "figures_referenced": false,
         "exact_stem_match": [],
         "topic_word_match": [
-          "/diagrams/algebrica/cauchy-theorem-1.svg",
           "/diagrams/algebrica/darboux-theorem-1.svg",
           "/diagrams/algebrica/fermat-theorem-1.svg",
           "/diagrams/algebrica/fermat-theorem-2.svg",
           "/diagrams/algebrica/fermat-theorem-3.svg",
           "/diagrams/algebrica/fundamental-theorem-of-calculus-2.svg",
           "/diagrams/algebrica/intermediate-value-theorem-1.svg",
-          "/diagrams/algebrica/intermediate-value-theorem-2.svg"
+          "/diagrams/algebrica/intermediate-value-theorem-2.svg",
+          "/diagrams/algebrica/lagrange-theorem-1.svg"
         ]
       },
       {
@@ -2948,8 +2778,6 @@
         "topic_word_match": [
           "/diagrams/algebrica/composite-functions-1.svg",
           "/diagrams/algebrica/derivative-of-the-inverse-function-1.svg",
-          "/diagrams/algebrica/power-series-1.svg",
-          "/diagrams/algebrica/power-series-2.svg",
           "/diagrams/arithmetic/exp-power-rule.svg",
           "/diagrams/arithmetic/factor-composite.svg"
         ]
@@ -3116,8 +2944,7 @@
         "topic_word_match": [
           "/diagrams/algebrica/roots-of-a-polynomial-1.svg",
           "/diagrams/algebrica/roots-of-a-polynomial-2.svg",
-          "/diagrams/algebrica/roots-of-a-polynomial-3.svg",
-          "/diagrams/algebrica/roots-of-unity-1.svg"
+          "/diagrams/algebrica/roots-of-a-polynomial-3.svg"
         ]
       },
       {
@@ -3130,9 +2957,9 @@
           "/diagrams/algebrica/geometric-interpretation-quadratic-equations-2.svg",
           "/diagrams/algebrica/geometric-interpretation-quadratic-equations-3.svg",
           "/diagrams/algebrica/linear-equations-1.svg",
-          "/diagrams/algebrica/polynomial-function-1.svg",
-          "/diagrams/algebrica/polynomial-function-2.svg",
-          "/diagrams/algebrica/polynomial-function-3.svg"
+          "/diagrams/algebrica/roots-of-a-polynomial-1.svg",
+          "/diagrams/algebrica/roots-of-a-polynomial-2.svg",
+          "/diagrams/algebrica/roots-of-a-polynomial-3.svg"
         ]
       },
       {
@@ -3231,8 +3058,6 @@
         "exact_stem_match": [],
         "topic_word_match": [
           "/diagrams/algebrica/improper-integrals-3.svg",
-          "/diagrams/algebrica/indefinite-integrals-1.svg",
-          "/diagrams/algebrica/indefinite-integrals-2.svg",
           "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
         ]
       },
@@ -3251,9 +3076,6 @@
         "topic_word_match": [
           "/diagrams/algebrica/complex-numbers-exponential-form-1.svg",
           "/diagrams/algebrica/exponential-equations-1.svg",
-          "/diagrams/algebrica/exponential-function-1.svg",
-          "/diagrams/algebrica/exponential-function-2.svg",
-          "/diagrams/algebrica/exponential-function-3.svg",
           "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
         ]
       },
@@ -3264,10 +3086,7 @@
         "topic_word_match": [
           "/diagrams/algebrica/complex-numbers-trigonometric-form-1.svg",
           "/diagrams/algebrica/integral-test-for-series-convergence-1.svg",
-          "/diagrams/algebrica/trigonometric-identities-1.svg",
-          "/diagrams/algebrica/trigonometric-inequalities-1.svg",
-          "/diagrams/algebrica/trigonometric-inequalities-2.svg",
-          "/diagrams/algebrica/trigonometric-inequalities-3.svg"
+          "/diagrams/algebrica/trigonometric-identities-1.svg"
         ]
       },
       {
@@ -3276,8 +3095,6 @@
         "exact_stem_match": [],
         "topic_word_match": [
           "/diagrams/algebrica/improper-integrals-3.svg",
-          "/diagrams/algebrica/indefinite-integrals-1.svg",
-          "/diagrams/algebrica/indefinite-integrals-2.svg",
           "/diagrams/algebrica/irrational-inequalities-1.svg"
         ]
       },
@@ -3286,9 +3103,7 @@
         "figures_referenced": false,
         "exact_stem_match": [],
         "topic_word_match": [
-          "/diagrams/algebrica/integration-by-parts-1.svg",
-          "/diagrams/algebrica/numerical-integration-1.svg",
-          "/diagrams/algebrica/numerical-integration-2.svg"
+          "/diagrams/algebrica/numerical-integration-1.svg"
         ]
       },
       {
@@ -3296,9 +3111,7 @@
         "figures_referenced": false,
         "exact_stem_match": [],
         "topic_word_match": [
-          "/diagrams/algebrica/integration-by-parts-1.svg",
-          "/diagrams/algebrica/numerical-integration-1.svg",
-          "/diagrams/algebrica/numerical-integration-2.svg"
+          "/diagrams/algebrica/numerical-integration-1.svg"
         ]
       },
       {
@@ -3307,13 +3120,13 @@
         "exact_stem_match": [],
         "topic_word_match": [
           "/diagrams/algebrica/improper-integrals-3.svg",
-          "/diagrams/algebrica/indefinite-integrals-1.svg",
-          "/diagrams/algebrica/indefinite-integrals-2.svg",
           "/diagrams/algebrica/reduction-formulas-and-reference-angles-1.svg",
           "/diagrams/algebrica/reduction-formulas-and-reference-angles-2.svg",
           "/diagrams/algebrica/reduction-formulas-and-reference-angles-3.svg",
           "/diagrams/algebrica/reduction-formulas-and-reference-angles-4.svg",
-          "/diagrams/algebrica/reduction-formulas-and-reference-angles-5.svg"
+          "/diagrams/algebrica/reduction-formulas-and-reference-angles-5.svg",
+          "/diagrams/algebrica/reduction-formulas-and-reference-angles-6.svg",
+          "/diagrams/algebrica/reduction-formulas-and-reference-angles-7.svg"
         ]
       },
       {
@@ -3359,14 +3172,14 @@
         "figures_referenced": false,
         "exact_stem_match": [],
         "topic_word_match": [
-          "/diagrams/algebrica/cauchy-theorem-1.svg",
           "/diagrams/algebrica/darboux-theorem-1.svg",
           "/diagrams/algebrica/fermat-theorem-1.svg",
           "/diagrams/algebrica/fermat-theorem-2.svg",
           "/diagrams/algebrica/fermat-theorem-3.svg",
           "/diagrams/algebrica/fundamental-theorem-of-calculus-2.svg",
           "/diagrams/algebrica/intermediate-value-theorem-1.svg",
-          "/diagrams/algebrica/intermediate-value-theorem-2.svg"
+          "/diagrams/algebrica/intermediate-value-theorem-2.svg",
+          "/diagrams/algebrica/lagrange-theorem-1.svg"
         ]
       },
       {
@@ -3394,33 +3207,10 @@
         ]
       },
       {
-        "lesson": "algebrica/polynomials/adding-and-subtracting-polynomials.md",
-        "figures_referenced": false,
-        "exact_stem_match": [],
-        "topic_word_match": [
-          "/diagrams/algebrica/polynomials-1.svg",
-          "/diagrams/algebrica/polynomials-2.svg",
-          "/diagrams/algebrica/polynomials-3.svg"
-        ]
-      },
-      {
-        "lesson": "algebrica/polynomials/factoring-polynomials-ac-method.md",
-        "figures_referenced": false,
-        "exact_stem_match": [],
-        "topic_word_match": [
-          "/diagrams/algebrica/polynomials-1.svg",
-          "/diagrams/algebrica/polynomials-2.svg",
-          "/diagrams/algebrica/polynomials-3.svg"
-        ]
-      },
-      {
         "lesson": "algebrica/polynomials/polynomial-division.md",
         "figures_referenced": false,
         "exact_stem_match": [],
         "topic_word_match": [
-          "/diagrams/algebrica/polynomial-function-1.svg",
-          "/diagrams/algebrica/polynomial-function-2.svg",
-          "/diagrams/algebrica/polynomial-function-3.svg",
           "/diagrams/algebrica/roots-of-a-polynomial-1.svg",
           "/diagrams/algebrica/roots-of-a-polynomial-2.svg",
           "/diagrams/algebrica/roots-of-a-polynomial-3.svg"
@@ -3453,14 +3243,14 @@
         "figures_referenced": false,
         "exact_stem_match": [],
         "topic_word_match": [
-          "/diagrams/algebrica/cauchy-theorem-1.svg",
           "/diagrams/algebrica/darboux-theorem-1.svg",
           "/diagrams/algebrica/fermat-theorem-1.svg",
           "/diagrams/algebrica/fermat-theorem-2.svg",
           "/diagrams/algebrica/fermat-theorem-3.svg",
           "/diagrams/algebrica/fundamental-theorem-of-calculus-2.svg",
           "/diagrams/algebrica/intermediate-value-theorem-1.svg",
-          "/diagrams/algebrica/intermediate-value-theorem-2.svg"
+          "/diagrams/algebrica/intermediate-value-theorem-2.svg",
+          "/diagrams/algebrica/lagrange-theorem-1.svg"
         ]
       },
       {
@@ -3633,9 +3423,7 @@
         "exact_stem_match": [],
         "topic_word_match": [
           "/diagrams/algebrica/harmonic-series-1.svg",
-          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg",
-          "/diagrams/algebrica/power-series-1.svg",
-          "/diagrams/algebrica/power-series-2.svg"
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
         ]
       },
       {
@@ -3644,9 +3432,7 @@
         "exact_stem_match": [],
         "topic_word_match": [
           "/diagrams/algebrica/harmonic-series-1.svg",
-          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg",
-          "/diagrams/algebrica/power-series-1.svg",
-          "/diagrams/algebrica/power-series-2.svg"
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
         ]
       },
       {
@@ -3670,9 +3456,7 @@
         "exact_stem_match": [],
         "topic_word_match": [
           "/diagrams/algebrica/harmonic-series-1.svg",
-          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg",
-          "/diagrams/algebrica/power-series-1.svg",
-          "/diagrams/algebrica/power-series-2.svg"
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
         ]
       },
       {
@@ -3681,9 +3465,7 @@
         "exact_stem_match": [],
         "topic_word_match": [
           "/diagrams/algebrica/harmonic-series-1.svg",
-          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg",
-          "/diagrams/algebrica/power-series-1.svg",
-          "/diagrams/algebrica/power-series-2.svg"
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
         ]
       },
       {
@@ -3692,9 +3474,7 @@
         "exact_stem_match": [],
         "topic_word_match": [
           "/diagrams/algebrica/harmonic-series-1.svg",
-          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg",
-          "/diagrams/algebrica/power-series-1.svg",
-          "/diagrams/algebrica/power-series-2.svg"
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
         ]
       },
       {
@@ -3703,9 +3483,7 @@
         "exact_stem_match": [],
         "topic_word_match": [
           "/diagrams/algebrica/harmonic-series-1.svg",
-          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg",
-          "/diagrams/algebrica/power-series-1.svg",
-          "/diagrams/algebrica/power-series-2.svg"
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
         ]
       },
       {
@@ -3770,9 +3548,7 @@
         "exact_stem_match": [],
         "topic_word_match": [
           "/diagrams/algebrica/harmonic-series-1.svg",
-          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg",
-          "/diagrams/algebrica/power-series-1.svg",
-          "/diagrams/algebrica/power-series-2.svg"
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
         ]
       },
       {
@@ -4139,22 +3915,6 @@
         ]
       },
       {
-        "lesson": "teaching/calc.limit.infinity.md",
-        "figures_referenced": false,
-        "exact_stem_match": [],
-        "topic_word_match": [
-          "/diagrams/algebrica/euler-number-limit-sequence-1.svg"
-        ]
-      },
-      {
-        "lesson": "teaching/calc.limit.numeric.md",
-        "figures_referenced": false,
-        "exact_stem_match": [],
-        "topic_word_match": [
-          "/diagrams/algebrica/euler-number-limit-sequence-1.svg"
-        ]
-      },
-      {
         "lesson": "teaching/complex.analytic.md",
         "figures_referenced": false,
         "exact_stem_match": [],
@@ -4358,19 +4118,6 @@
           "/diagrams/algebrica/convergent-and-divergent-sequences-2.svg",
           "/diagrams/algebrica/convergent-and-divergent-sequences-3.svg",
           "/diagrams/algebrica/sequences-of-functions-1.svg"
-        ]
-      },
-      {
-        "lesson": "teaching/discrete.sets.venn.md",
-        "figures_referenced": false,
-        "exact_stem_match": [],
-        "topic_word_match": [
-          "/diagrams/algebrica/sets-1.svg",
-          "/diagrams/algebrica/sets-2.svg",
-          "/diagrams/algebrica/sets-3.svg",
-          "/diagrams/algebrica/sets-4.svg",
-          "/diagrams/algebrica/sets-5.svg",
-          "/diagrams/algebrica/sets-6.svg"
         ]
       },
       {
@@ -4865,6 +4612,14 @@
         "topic_word_match": []
       },
       {
+        "lesson": "algebrica/integrals/numerical-integration.md",
+        "figures_referenced": true,
+        "exact_stem_match": [
+          "/diagrams/algebrica/numerical-integration-1.svg"
+        ],
+        "topic_word_match": []
+      },
+      {
         "lesson": "algebrica/kinematics/velocity.md",
         "figures_referenced": true,
         "exact_stem_match": [
@@ -5311,11 +5066,13 @@
         "topic_word_match": []
       },
       {
-        "lesson": "algebrica/complex-numbers/euler-formula.md",
+        "lesson": "algebrica/complex-numbers/roots-of-unity.md",
         "figures_referenced": true,
         "exact_stem_match": [],
         "topic_word_match": [
-          "/diagrams/algebrica/euler-number-limit-sequence-1.svg"
+          "/diagrams/algebrica/roots-of-a-polynomial-1.svg",
+          "/diagrams/algebrica/roots-of-a-polynomial-2.svg",
+          "/diagrams/algebrica/roots-of-a-polynomial-3.svg"
         ]
       },
       {
@@ -5327,11 +5084,11 @@
         ]
       },
       {
-        "lesson": "algebrica/differential-calculus-theorems/rolles-theorem.md",
+        "lesson": "algebrica/differential-calculus-theorems/cauchy-theorem.md",
         "figures_referenced": true,
         "exact_stem_match": [],
         "topic_word_match": [
-          "/diagrams/algebrica/cauchy-theorem-1.svg",
+          "/diagrams/algebrica/cauchy-sequence-1.svg",
           "/diagrams/algebrica/darboux-theorem-1.svg",
           "/diagrams/algebrica/fermat-theorem-1.svg",
           "/diagrams/algebrica/fermat-theorem-2.svg",
@@ -5339,6 +5096,21 @@
           "/diagrams/algebrica/fundamental-theorem-of-calculus-2.svg",
           "/diagrams/algebrica/intermediate-value-theorem-1.svg",
           "/diagrams/algebrica/intermediate-value-theorem-2.svg"
+        ]
+      },
+      {
+        "lesson": "algebrica/differential-calculus-theorems/rolles-theorem.md",
+        "figures_referenced": true,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/darboux-theorem-1.svg",
+          "/diagrams/algebrica/fermat-theorem-1.svg",
+          "/diagrams/algebrica/fermat-theorem-2.svg",
+          "/diagrams/algebrica/fermat-theorem-3.svg",
+          "/diagrams/algebrica/fundamental-theorem-of-calculus-2.svg",
+          "/diagrams/algebrica/intermediate-value-theorem-1.svg",
+          "/diagrams/algebrica/intermediate-value-theorem-2.svg",
+          "/diagrams/algebrica/lagrange-theorem-1.svg"
         ]
       },
       {
@@ -5525,6 +5297,15 @@
         ]
       },
       {
+        "lesson": "algebrica/functions/exponential-function.md",
+        "figures_referenced": true,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/complex-numbers-exponential-form-1.svg",
+          "/diagrams/algebrica/exponential-equations-1.svg"
+        ]
+      },
+      {
         "lesson": "algebrica/functions/irrational-functions.md",
         "figures_referenced": true,
         "exact_stem_match": [],
@@ -5533,12 +5314,20 @@
         ]
       },
       {
+        "lesson": "algebrica/functions/polynomial-function.md",
+        "figures_referenced": true,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/roots-of-a-polynomial-1.svg",
+          "/diagrams/algebrica/roots-of-a-polynomial-2.svg",
+          "/diagrams/algebrica/roots-of-a-polynomial-3.svg"
+        ]
+      },
+      {
         "lesson": "algebrica/functions/power-function.md",
         "figures_referenced": true,
         "exact_stem_match": [],
         "topic_word_match": [
-          "/diagrams/algebrica/power-series-1.svg",
-          "/diagrams/algebrica/power-series-2.svg",
           "/diagrams/arithmetic/exp-power-rule.svg"
         ]
       },
@@ -5598,13 +5387,26 @@
         ]
       },
       {
+        "lesson": "algebrica/inequalities/trigonometric-inequalities.md",
+        "figures_referenced": true,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/complex-numbers-trigonometric-form-1.svg",
+          "/diagrams/algebrica/geometric-interpretation-quadratic-inequalities-1.svg",
+          "/diagrams/algebrica/geometric-interpretation-quadratic-inequalities-2.svg",
+          "/diagrams/algebrica/irrational-inequalities-1.svg",
+          "/diagrams/algebrica/quadratic-inequalities-1.svg",
+          "/diagrams/algebrica/quadratic-inequalities-2.svg",
+          "/diagrams/algebrica/quadratic-inequalities-4.svg",
+          "/diagrams/algebrica/quadratic-inequalities-5.svg"
+        ]
+      },
+      {
         "lesson": "algebrica/integrals/definite-integrals.md",
         "figures_referenced": true,
         "exact_stem_match": [],
         "topic_word_match": [
-          "/diagrams/algebrica/improper-integrals-3.svg",
-          "/diagrams/algebrica/indefinite-integrals-1.svg",
-          "/diagrams/algebrica/indefinite-integrals-2.svg"
+          "/diagrams/algebrica/improper-integrals-3.svg"
         ]
       },
       {
@@ -5612,9 +5414,23 @@
         "figures_referenced": true,
         "exact_stem_match": [],
         "topic_word_match": [
-          "/diagrams/algebrica/integration-by-parts-1.svg",
-          "/diagrams/algebrica/numerical-integration-1.svg",
-          "/diagrams/algebrica/numerical-integration-2.svg"
+          "/diagrams/algebrica/numerical-integration-1.svg"
+        ]
+      },
+      {
+        "lesson": "algebrica/integrals/indefinite-integrals.md",
+        "figures_referenced": true,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/improper-integrals-3.svg"
+        ]
+      },
+      {
+        "lesson": "algebrica/integrals/integration-by-parts.md",
+        "figures_referenced": true,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/numerical-integration-1.svg"
         ]
       },
       {
@@ -5625,11 +5441,11 @@
           "/diagrams/algebrica/absolute-value-1.svg",
           "/diagrams/algebrica/absolute-value-function-1.svg",
           "/diagrams/algebrica/absolute-value-function-2.svg",
-          "/diagrams/algebrica/cauchy-theorem-1.svg",
           "/diagrams/algebrica/darboux-theorem-1.svg",
           "/diagrams/algebrica/fermat-theorem-1.svg",
           "/diagrams/algebrica/fermat-theorem-2.svg",
-          "/diagrams/algebrica/fermat-theorem-3.svg"
+          "/diagrams/algebrica/fermat-theorem-3.svg",
+          "/diagrams/algebrica/fundamental-theorem-of-calculus-2.svg"
         ]
       },
       {
@@ -5639,12 +5455,7 @@
         "topic_word_match": [
           "/diagrams/algebrica/complex-numbers-trigonometric-form-1.svg",
           "/diagrams/algebrica/improper-integrals-3.svg",
-          "/diagrams/algebrica/indefinite-integrals-1.svg",
-          "/diagrams/algebrica/indefinite-integrals-2.svg",
-          "/diagrams/algebrica/trigonometric-identities-1.svg",
-          "/diagrams/algebrica/trigonometric-inequalities-1.svg",
-          "/diagrams/algebrica/trigonometric-inequalities-2.svg",
-          "/diagrams/algebrica/trigonometric-inequalities-3.svg"
+          "/diagrams/algebrica/trigonometric-identities-1.svg"
         ]
       },
       {
@@ -5669,14 +5480,14 @@
         "figures_referenced": true,
         "exact_stem_match": [],
         "topic_word_match": [
-          "/diagrams/algebrica/cauchy-theorem-1.svg",
           "/diagrams/algebrica/darboux-theorem-1.svg",
           "/diagrams/algebrica/fermat-theorem-1.svg",
           "/diagrams/algebrica/fermat-theorem-2.svg",
           "/diagrams/algebrica/fermat-theorem-3.svg",
           "/diagrams/algebrica/fundamental-theorem-of-calculus-2.svg",
           "/diagrams/algebrica/intermediate-value-theorem-1.svg",
-          "/diagrams/algebrica/intermediate-value-theorem-2.svg"
+          "/diagrams/algebrica/intermediate-value-theorem-2.svg",
+          "/diagrams/algebrica/lagrange-theorem-1.svg"
         ]
       },
       {
@@ -5689,9 +5500,23 @@
           "/diagrams/algebrica/chi-square-distribution-2.svg",
           "/diagrams/algebrica/complex-numbers-exponential-form-1.svg",
           "/diagrams/algebrica/exponential-equations-1.svg",
-          "/diagrams/algebrica/exponential-function-1.svg",
-          "/diagrams/algebrica/exponential-function-2.svg",
-          "/diagrams/algebrica/exponential-function-3.svg"
+          "/diagrams/algebrica/gamma-distribution-1.svg",
+          "/diagrams/algebrica/normal-distribution-1.svg",
+          "/diagrams/algebrica/student-t-distribution-1.svg"
+        ]
+      },
+      {
+        "lesson": "algebrica/sequences/euler-number-limit-sequence.md",
+        "figures_referenced": true,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/arithmetic-sequence-1.svg",
+          "/diagrams/algebrica/cauchy-sequence-1.svg",
+          "/diagrams/algebrica/complex-number-operations-1.svg",
+          "/diagrams/algebrica/geometric-sequence-1.svg",
+          "/diagrams/algebrica/geometric-sequence-2.svg",
+          "/diagrams/algebrica/geometric-sequence-3.svg",
+          "/diagrams/arithmetic/neg-number-line.svg"
         ]
       },
       {
@@ -5700,11 +5525,18 @@
         "exact_stem_match": [],
         "topic_word_match": [
           "/diagrams/algebrica/cauchy-sequence-1.svg",
-          "/diagrams/algebrica/cauchy-theorem-1.svg",
+          "/diagrams/algebrica/harmonic-series-1.svg",
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "algebrica/series/power-series.md",
+        "figures_referenced": true,
+        "exact_stem_match": [],
+        "topic_word_match": [
           "/diagrams/algebrica/harmonic-series-1.svg",
           "/diagrams/algebrica/integral-test-for-series-convergence-1.svg",
-          "/diagrams/algebrica/power-series-1.svg",
-          "/diagrams/algebrica/power-series-2.svg"
+          "/diagrams/arithmetic/exp-power-rule.svg"
         ]
       },
       {
@@ -5748,7 +5580,6 @@
       "/diagrams/algebrica/beta-distribution-1.svg",
       "/diagrams/algebrica/big-o-notation-1.svg",
       "/diagrams/algebrica/cauchy-sequence-1.svg",
-      "/diagrams/algebrica/cauchy-theorem-1.svg",
       "/diagrams/algebrica/chi-square-distribution-1.svg",
       "/diagrams/algebrica/chi-square-distribution-2.svg",
       "/diagrams/algebrica/circumference-1.svg",
@@ -5784,18 +5615,13 @@
       "/diagrams/algebrica/discontinuities-of-real-functions-1.svg",
       "/diagrams/algebrica/discontinuities-of-real-functions-2.svg",
       "/diagrams/algebrica/discontinuities-of-real-functions-3.svg",
-      "/diagrams/algebrica/eigenvalues-and-eigenvectors-1.svg",
       "/diagrams/algebrica/ellipse-1.svg",
       "/diagrams/algebrica/ellipse-2.svg",
-      "/diagrams/algebrica/euler-number-limit-sequence-1.svg",
       "/diagrams/algebrica/even-and-odd-functions-1.svg",
       "/diagrams/algebrica/even-and-odd-functions-2.svg",
       "/diagrams/algebrica/even-and-odd-functions-3.svg",
       "/diagrams/algebrica/even-and-odd-functions-4.svg",
       "/diagrams/algebrica/exponential-equations-1.svg",
-      "/diagrams/algebrica/exponential-function-1.svg",
-      "/diagrams/algebrica/exponential-function-2.svg",
-      "/diagrams/algebrica/exponential-function-3.svg",
       "/diagrams/algebrica/fermat-theorem-1.svg",
       "/diagrams/algebrica/fermat-theorem-2.svg",
       "/diagrams/algebrica/fermat-theorem-3.svg",
@@ -5832,16 +5658,11 @@
       "/diagrams/algebrica/improper-integrals-3.svg",
       "/diagrams/algebrica/increasing-and-decreasing-functions-1.svg",
       "/diagrams/algebrica/increasing-and-decreasing-functions-2.svg",
-      "/diagrams/algebrica/indefinite-integrals-1.svg",
-      "/diagrams/algebrica/indefinite-integrals-2.svg",
       "/diagrams/algebrica/inner-product-spaces-1.svg",
       "/diagrams/algebrica/inner-product-spaces-2.svg",
       "/diagrams/algebrica/inner-product-spaces-3.svg",
       "/diagrams/algebrica/inner-product-spaces-4.svg",
-      "/diagrams/algebrica/integers-1.svg",
-      "/diagrams/algebrica/integers-2.svg",
       "/diagrams/algebrica/integral-test-for-series-convergence-1.svg",
-      "/diagrams/algebrica/integration-by-parts-1.svg",
       "/diagrams/algebrica/intermediate-value-theorem-1.svg",
       "/diagrams/algebrica/intermediate-value-theorem-2.svg",
       "/diagrams/algebrica/introduction-to-conics-1.svg",
@@ -5857,9 +5678,6 @@
       "/diagrams/algebrica/lines-2.svg",
       "/diagrams/algebrica/lines-3.svg",
       "/diagrams/algebrica/little-o-1.svg",
-      "/diagrams/algebrica/logarithms-1.svg",
-      "/diagrams/algebrica/logarithms-2.svg",
-      "/diagrams/algebrica/logarithms-3.svg",
       "/diagrams/algebrica/maximum-minimum-inflection-points-1.svg",
       "/diagrams/algebrica/maximum-minimum-inflection-points-2.svg",
       "/diagrams/algebrica/maximum-minimum-inflection-points-3.svg",
@@ -5877,7 +5695,6 @@
       "/diagrams/algebrica/neural-network.png",
       "/diagrams/algebrica/normal-distribution-1.svg",
       "/diagrams/algebrica/numerical-integration-1.svg",
-      "/diagrams/algebrica/numerical-integration-2.svg",
       "/diagrams/algebrica/parabola-1.svg",
       "/diagrams/algebrica/parabola-2.svg",
       "/diagrams/algebrica/parabola-5.svg",
@@ -5904,15 +5721,6 @@
       "/diagrams/algebrica/points-of-non-differentiability-5.svg",
       "/diagrams/algebrica/polar-coordinates-1.svg",
       "/diagrams/algebrica/polar-coordinates-2.svg",
-      "/diagrams/algebrica/polynomial-function-1.svg",
-      "/diagrams/algebrica/polynomial-function-2.svg",
-      "/diagrams/algebrica/polynomial-function-3.svg",
-      "/diagrams/algebrica/polynomials-1.svg",
-      "/diagrams/algebrica/polynomials-2.svg",
-      "/diagrams/algebrica/polynomials-3.svg",
-      "/diagrams/algebrica/power-series-1.svg",
-      "/diagrams/algebrica/power-series-2.svg",
-      "/diagrams/algebrica/principle-of-mathematical-induction-1.svg",
       "/diagrams/algebrica/pythagorean-theorem-1.svg",
       "/diagrams/algebrica/pythagorean-theorem-2.svg",
       "/diagrams/algebrica/pythagorean-theorem-3.svg",
@@ -5920,8 +5728,6 @@
       "/diagrams/algebrica/quadratic-inequalities-2.svg",
       "/diagrams/algebrica/quadratic-inequalities-4.svg",
       "/diagrams/algebrica/quadratic-inequalities-5.svg",
-      "/diagrams/algebrica/radicals-1.svg",
-      "/diagrams/algebrica/radicals-2.svg",
       "/diagrams/algebrica/real-numbers-1.svg",
       "/diagrams/algebrica/reduction-formulas-and-reference-angles-1.svg",
       "/diagrams/algebrica/reduction-formulas-and-reference-angles-2.svg",
@@ -5939,18 +5745,11 @@
       "/diagrams/algebrica/roots-of-a-polynomial-1.svg",
       "/diagrams/algebrica/roots-of-a-polynomial-2.svg",
       "/diagrams/algebrica/roots-of-a-polynomial-3.svg",
-      "/diagrams/algebrica/roots-of-unity-1.svg",
       "/diagrams/algebrica/secant-1-1.png",
       "/diagrams/algebrica/secant-and-cosecant-1.svg",
       "/diagrams/algebrica/secant-and-cosecant-2.svg",
       "/diagrams/algebrica/separable-differential-equations-1.svg",
       "/diagrams/algebrica/sequences-of-functions-1.svg",
-      "/diagrams/algebrica/sets-1.svg",
-      "/diagrams/algebrica/sets-2.svg",
-      "/diagrams/algebrica/sets-3.svg",
-      "/diagrams/algebrica/sets-4.svg",
-      "/diagrams/algebrica/sets-5.svg",
-      "/diagrams/algebrica/sets-6.svg",
       "/diagrams/algebrica/sigmoid-function-1.svg",
       "/diagrams/algebrica/sigmoid-function-2.svg",
       "/diagrams/algebrica/sign-analysis-in-inequalities-1.svg",
@@ -5979,10 +5778,6 @@
       "/diagrams/algebrica/the-cartesian-coordinate-plane-5.svg",
       "/diagrams/algebrica/the-law-of-sines-1.svg",
       "/diagrams/algebrica/trigonometric-identities-1.svg",
-      "/diagrams/algebrica/trigonometric-inequalities-1.svg",
-      "/diagrams/algebrica/trigonometric-inequalities-2.svg",
-      "/diagrams/algebrica/trigonometric-inequalities-3.svg",
-      "/diagrams/algebrica/trinomials-1.svg",
       "/diagrams/algebrica/types-of-numbers-1.svg",
       "/diagrams/algebrica/uniform-continuity-1.svg",
       "/diagrams/algebrica/uniform-distribution-1.svg",

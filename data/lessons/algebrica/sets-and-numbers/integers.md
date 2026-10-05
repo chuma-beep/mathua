@@ -7,7 +7,12 @@ Among the different types of numbers, the integers emerge when we extend the nat
 \[
 \mathbb{Z} = \{\ldots,-3,-2,-1,0,1,2,3,\ldots\}
 \]
+
+![Integers extend the natural numbers by including negative counterparts, forming a symmetric set around zero.](/diagrams/algebrica/integers-1.svg)
+
 an infinite collection of evenly spaced points along the number line.
+![The distance between any two consecutive integers is always 1, and there are no other integers between them.](/diagrams/algebrica/integers-2.svg)
+
 
 A rigorous construction models each integer as a class of ordered pairs of natural numbers. Take pairs \((a,b)\) with \(a,b \in \mathbb{N}\) and say that two pairs belong to the same class whenever:
 \[

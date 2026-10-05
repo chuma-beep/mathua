@@ -27,6 +27,9 @@ A = \begin{pmatrix} 2 & 1 \\\\ 1 & 2 \end{pmatrix}
 
 The unit circle is mapped to an ellipse: most vectors change direction under the transformation. The two eigenvectors \(\mathbf{v}\_1\) and \(\mathbf{v}\_2\) are the exception. They remain on the same line through the origin, scaled by \(\lambda_1 = 3\) and \(\lambda_2 = 1\) respectively.
 
+
+![Eigenvectors maintain their direction after the transformation 𝐴. Their length is scaled by the eigenvalue 𝜆.](/diagrams/algebrica/eigenvalues-and-eigenvectors-1.svg)
+
 ## The characteristic equation
 
 Rewriting the eigenvalue equation as \((A - \lambda I)\mathbf{v} = \mathbf{0}\), where \(I\) is the identity matrix of order \(n\), it is clear that a non-zero solution \(\mathbf{v}\) exists precisely when the matrix \(A - \lambda I\) is singular. The condition for singularity is that its determinant vanishes. The equation

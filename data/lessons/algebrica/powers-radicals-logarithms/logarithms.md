@@ -47,6 +47,10 @@ As previously introduced, the logarithmic function is the inverse of the exponen
 The domain is \(x \in \mathbb{R}^+ \) and the range is \(\mathbb{R}\). The function is continuous and differentiable on \( (0,+\infty) \).
 
 
+![Graphical representation of the function logₐ x with a > 1.](/diagrams/algebrica/logarithms-1.svg)
+
+![Graphical representation of the function logₐ x with 0 < a < 1.](/diagrams/algebrica/logarithms-2.svg)
+
 The graph above illustrates the monotonic behaviour and asymptotic properties of the logarithmic function. For values of \( a > 1 \), the function \(f(x) = \log_a x\) is strictly increasing on \( (0,+\infty) \). It has a vertical asymptote at \( x = 0 \), and its limits are:
 
 \[
@@ -121,6 +125,9 @@ y = x - 1
 \]
 
 Therefore, the inequality expresses the geometric fact that the curve \( y = \ln x \) does not rise above its tangent at \( x = 1 \).
+
+
+![lnx is a concave function and always remains below its tangent line at x = 1.](/diagrams/algebrica/logarithms-3.svg)
 
 ## The role of logarithms in algebraic structure
 
