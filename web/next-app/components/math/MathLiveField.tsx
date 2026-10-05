@@ -77,6 +77,20 @@ interface Props {
   /** Called with the LaTeX as typed, for optional decoration. Never for grading. */
   onLatex?: (latex: string) => void
   onSubmit: () => void
+  /**
+   * Typing shortcuts to keep, as MathLive's `{ [typed]: replacement }` map.
+   *
+   * Defaults to **none**, and that default is the fix for "typing a point has it completing
+   * math symbols". MathLive's `inlineShortcuts` default map rewrites bare words as you type:
+   * `pi` becomes π, `theta` becomes θ, `alpha` becomes α, `sqrt` becomes √, `+-` becomes ±.
+   * On a maths keypad that is helpful; on a physical keyboard it means a learner who types
+   * the word "pi" gets a symbol they did not type, in a field whose whole job is to record
+   * what they typed. The answer then grades against a different string than the one entered.
+   *
+   * The allowlist is a prop rather than a global so a host that genuinely wants `sqrt` to
+   * expand can ask for it, and so nothing re-enables it for every field at once.
+   */
+  inlineShortcuts?: Record<string, string>
   handleRef?: MutableRefObject<MathLiveFieldHandle | null>
   /**
    * Incremented by the wrapper each time focus is requested. A counter rather than
@@ -97,6 +111,7 @@ export default function MathLiveField({
   onChange,
   onLatex,
   onSubmit,
+  inlineShortcuts,
   handleRef,
   focusRequest = 0,
 }: Props) {
@@ -168,6 +183,25 @@ export default function MathLiveField({
     const el = ref.current
     if (el) el.readOnly = disabled
   }, [disabled])
+
+  // Take the typed word, not the symbol it abbreviates. `{}` is the documented way to
+  // disable the whole map; an omitted prop and an empty object are the same intent here, so
+  // both resolve to "nothing is rewritten".
+  //
+  // Set on the instance rather than on `MathfieldElement.inlineShortcuts` because the
+  // static default would apply to every field in the document, including any future host
+  // that wants a shortcut, and because MathLive merges the per-instance value over the
+  // static one — an empty instance map is a replacement, not an addition.
+  // Through a ref keyed on the shortcut *names*, not the object: a host passing an inline
+  // `{ sqrt: '\\sqrt' }` literal would otherwise hand us a new identity every render and
+  // re-run this effect every render. Two hosts passing equal maps must not thrash.
+  const shortcutsRef = useRef<Record<string, string>>(inlineShortcuts ?? {})
+  shortcutsRef.current = inlineShortcuts ?? {}
+  const shortcutKey = Object.keys(shortcutsRef.current).sort().join(',')
+  useEffect(() => {
+    const el = ref.current
+    if (el) el.inlineShortcuts = shortcutsRef.current
+  }, [shortcutKey])
 
   // What a spacebar press inserts. `mathModeSpace` defaults to `""`, and with it empty
   // the `[Space]` keystroke handler only calls `moveAfterParent()` -- the caret moves
