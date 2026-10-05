@@ -1,6 +1,6 @@
 import { test, expect, type Page } from '@playwright/test'
 import conceptsData from '../data/concepts.json'
-import { answerField, focusAnswerField, typeAnswer } from './helpers/answer'
+import { answerField, enterAnswer, focusAnswerField } from './helpers/answer'
 
 const sample = conceptsData as Array<{ id: string; label: string; domain: string; prerequisites: string[] }>
 
@@ -395,8 +395,15 @@ test('double-clicking Check Answer fires exactly one POST', async ({ page }) => 
   const submitBox = await submit.boundingBox()
   expect(submitBox?.height).toBe(48)
   expect(submitBox?.width ?? 0).toBeLessThan(inputBox?.width ?? 0)
-  await typeAnswer(page, '9')
-  // Wait for the answer to reach the host before clicking. `typeAnswer` returns as
+  // `enterAnswer`, not `typeAnswer`: this spec runs on both mobile projects, where the
+  // profile is coarse-pointer and the virtual keypad opens on focus and swallows
+  // synthetic keystrokes. Typing here made the test fail deterministically at 320px
+  // while passing at 412px — not a product fault and not machine load, just an input
+  // method that is invalid on a profile with no physical keyboard. What is under test
+  // here is double-submit prevention, so the way the answer gets in is incidental and
+  // should follow the profile. See `typeAnswer`'s note.
+  await enterAnswer(page, '9')
+  // Wait for the answer to reach the host before clicking. `enterAnswer` returns as
   // soon as the field has the text, but Check stays disabled until the value has
   // propagated into host state, and the disabled→enabled transition leaves the
   // button moving. dblclick's own stability wait then times out on a *disabled*
