@@ -83,8 +83,11 @@ export async function enterAnswer(page: Page, value: string): Promise<void> {
     await typeAnswer(page, value)
     return
   }
-  await focusAnswerField(page)
-  await expect(keyboardRows(page)).toBeVisible({ timeout: 10_000 })
+  // `showVirtualKeyboard` rather than focus-and-hope: it calls `kb.show()` directly, whereas
+  // relying on focus leaves the panel's appearance to MathLive's own 300ms focusin timer. Under
+  // a loaded parallel suite that timer slipped past a 10s wait and the tap then failed — trading
+  // one flake for another. Showing the panel is safe when it is already up (ADR-030).
+  await showVirtualKeyboard(page)
   for (const ch of value) {
     await pressKeycap(page, ch)
   }

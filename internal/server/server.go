@@ -1539,7 +1539,29 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 			break
 		}
 	}
+	// If exclusion emptied the set, serve the batch anyway rather than returning
+	// `questions: []` with a 200. A learner whose session has already seen every
+	// variant a concept has must still be able to answer something.
+	//
+	// This is not hypothetical: `geo.basic.points_lines` has exactly four distinct
+	// question texts, so after four answers the filtered set was empty and the Learn
+	// feed read that as success, stopped appending, and left the last verdict as the end
+	// of the page with no next step and no message. Repeats are a far better outcome than
+	// a stranded learner, and the variety shortfall is measured separately in
+	// `internal/generator/all/bank_test.go` — 378 of 657 concepts sit under a 12-question
+	// reference, which is a content backlog, not something an empty array should be
+	// answering.
+	if len(fresh) == 0 && len(problems) > 0 {
+		fresh = problems
+	}
 	problems = fresh
+	if len(problems) == 0 {
+		// The generator produced nothing at all, which is a different failure from "the
+		// learner has seen them all" and must not look like it. An empty 200 reads as
+		// success to every caller.
+		http.Error(w, `{"error":"no questions available for this concept"}`, 503)
+		return
+	}
 	// H1b: anchor the whole served set (not just the first question) so each
 	// question is graded against its own answer and answered with its own
 	// explanation. The two travel together: both come from one generator call.

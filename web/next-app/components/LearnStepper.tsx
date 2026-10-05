@@ -33,7 +33,7 @@ type Entry =
   | QEntry
   | { key: number; kind: 'kpdiv'; kpIndex: number }
   | { key: number; kind: 'halt' }
-  | { key: number; kind: 'done' }
+  | { key: number; kind: 'done'; note?: string }
 
 interface Props {
   conceptId: string
@@ -64,10 +64,13 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
   const [readiness, setReadiness] = useState<ReadinessRes | null>(null)
   const [bannerDismissed, setBannerDismissed] = useState(false)
   const [buffer, setBuffer] = useState<PracticeQuestion[]>([])
-  // A tally of this knowledge point's answers for the header count. Not a model: no
-  // judgement is derived from it. The learner's progress reading comes from the
-  // server as `band` below.
-  const [history, setHistory] = useState<{ correct: boolean }[]>([])
+  // Counts for the header, per *concept*. Not per knowledge point: this used to reset on
+  // every KP advance, so a learner three questions in with two correct saw "1/2 correct"
+  // sitting next to "+3 XP" — the XP sums every card in the feed while the count summed only
+  // the current section. Two scopes on one line, and the count was the one that looked wrong.
+  // Two numbers rather than an array because nothing else needed the answers themselves.
+  const [answeredCount, setAnsweredCount] = useState(0)
+  const [correctCount, setCorrectCount] = useState(0)
   // Plain-language progress reading, computed server-side by mastery.EvidenceBand from
   // the same evidence the ladder decides on. The client used to compute its own score
   // and its own bands here; see test/masteryAuthority.test.ts.
@@ -127,7 +130,8 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
   useEffect(() => {
     setEntries([])
     setKpIndex(0)
-    setHistory([])
+    setAnsweredCount(0)
+    setCorrectCount(0)
     setDifficulty(0.4)
     setConsecutive(0)
     setMisses(0)
@@ -143,7 +147,8 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
   const practiceAgain = useCallback(() => {
     setEntries([])
     setKpIndex(0)
-    setHistory([])
+    setAnsweredCount(0)
+    setCorrectCount(0)
     setDifficulty(0.4)
     setConsecutive(0)
     setMisses(0)
@@ -249,6 +254,74 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
     setEntries(prev => prev.map(e => (e.key === key && e.kind === 'q' ? { ...e, ...patch } : e)))
   }
 
+  /**
+   * Move to the next knowledge point, or finish the concept.
+   *
+   * Shared by the 2-in-a-row rule and by question exhaustion, because "this section is
+   * over" means the same thing whichever caused it.
+   */
+  async function advanceSection(from: QEntry, why: 'complete' | 'exhausted') {
+    const total = Math.max(kps.length, 1)
+    const note = why === 'exhausted'
+      ? 'This topic ran out of new questions, so the section ended here.'
+      : undefined
+    if (from.kpIndex + 1 >= total) {
+      setEntries(prev => [...prev, { key: nextKey(), kind: 'done', note }])
+      return
+    }
+    const ni = from.kpIndex + 1
+    setKpIndex(ni)
+    setConsecutive(0)
+    setMisses(0)
+    setDifficulty(0.4)
+    // Ask for the next section's question before announcing the section, so a concept with
+    // nothing left anywhere goes straight to the completion card instead of showing a
+    // heading and then nothing under it.
+    const nq = await takeNext(0.4)
+    setEntries(prev => [...prev, { key: nextKey(), kind: 'kpdiv', kpIndex: ni }])
+    if (nq) {
+      setEntries(prev => [
+        ...prev,
+        { key: nextKey(), kind: 'q', kpIndex: ni, q: nq, answer: '', checking: false, servedAt: Date.now(), feedback: null },
+      ])
+    } else {
+      setEntries(prev => [
+        ...prev,
+        {
+          key: nextKey(),
+          kind: 'done',
+          note: note ?? 'This topic ran out of new questions, so there was nothing left to work through.',
+        },
+      ])
+    }
+  }
+
+  /**
+   * Append the next question in this section, or move on if there isn't one.
+   *
+   * This is the fix for the dead end. `takeNext` returns null when the buffer is empty and
+   * the refill yields nothing, which used to hit `if (!nq) return` at three sites: no card,
+   * no message, no way forward, and the last verdict became the end of the page. A learner
+   * hit this on `geo.basic.points_lines`, a concept whose generator has exactly four
+   * distinct question texts, so it was guaranteed on the fourth answer rather than an edge
+   * case.
+   *
+   * The practice endpoint now falls back to repeats rather than returning an empty 200, so
+   * this is the second line of defence rather than the only one — but a client that can be
+   * stranded by a 200 with an empty array has no business relying on the server not to.
+   */
+  async function continueInSection(from: QEntry, diff: number) {
+    const nq = await takeNext(diff)
+    if (nq) {
+      setEntries(prev => [
+        ...prev,
+        { key: nextKey(), kind: 'q', kpIndex: from.kpIndex, q: nq, answer: '', checking: false, servedAt: Date.now(), feedback: null },
+      ])
+      return
+    }
+    await advanceSection(from, 'exhausted')
+  }
+
   async function handleCheck(key: number) {
     const entry = entries.find(e => e.key === key && e.kind === 'q') as QEntry | undefined
     if (!entry || !entry.answer.trim() || entry.checking || entry.feedback) return
@@ -260,7 +333,8 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
         setEntry(key, { checking: false })
         return
       }
-      setHistory(prev => [...prev, { correct: res.correct }])
+      setAnsweredCount(n => n + 1)
+      if (res.correct) setCorrectCount(n => n + 1)
       if (res.evidence_band) setBand(res.evidence_band)
       if (res.correct) {
         const next = consecutive + 1
@@ -287,28 +361,9 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
         const advance = next >= REQUIRED_IN_A_ROW
         appendAfter(350, async () => {
           if (advance) {
-            const total = Math.max(kps.length, 1)
-            if (entry.kpIndex + 1 >= total) {
-              setEntries(prev => [...prev, { key: nextKey(), kind: 'done' }])
-            } else {
-              const ni = entry.kpIndex + 1
-              setKpIndex(ni)
-              setConsecutive(0)
-              setMisses(0)
-              setHistory([])
-              setDifficulty(0.4)
-              const nq = await takeNext(0.4)
-              if (!nq) return
-              setEntries(prev => [
-                ...prev,
-                { key: nextKey(), kind: 'kpdiv', kpIndex: ni },
-                { key: nextKey(), kind: 'q', kpIndex: ni, q: nq, answer: '', checking: false, servedAt: Date.now(), feedback: null },
-              ])
-            }
+            await advanceSection(entry, 'complete')
           } else {
-            const nq = await takeNext(nextDiff)
-            if (!nq) return
-            setEntries(prev => [...prev, { key: nextKey(), kind: 'q', kpIndex: entry.kpIndex, q: nq, answer: '', checking: false, servedAt: Date.now(), feedback: null }])
+            await continueInSection(entry, nextDiff)
           }
         })
       } else {
@@ -330,12 +385,21 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
           if (m >= 3) {
             // Safety net only: note + easier question below, prereq links.
             const nq = await takeNext(Math.max(0.3, nextDiff - 0.1))
-            setEntries(prev => [...prev, { key: nextKey(), kind: 'halt' }, ...(nq ? [{ key: nextKey(), kind: 'q', kpIndex: entry.kpIndex, q: nq, answer: '', checking: false, servedAt: Date.now(), feedback: null } as QEntry] : [])])
+            if (nq) {
+              setEntries(prev => [
+                ...prev,
+                { key: nextKey(), kind: 'halt' },
+                { key: nextKey(), kind: 'q', kpIndex: entry.kpIndex, q: nq, answer: '', checking: false, servedAt: Date.now(), feedback: null } as QEntry,
+              ])
+            } else {
+              // The halt note still belongs even with no question to put under it, and the
+              // section still has to end somewhere the learner can move on from.
+              setEntries(prev => [...prev, { key: nextKey(), kind: 'halt' }])
+              await advanceSection(entry, 'exhausted')
+            }
             setMisses(0)
           } else {
-            const nq = await takeNext(nextDiff)
-            if (!nq) return
-            setEntries(prev => [...prev, { key: nextKey(), kind: 'q', kpIndex: entry.kpIndex, q: nq, answer: '', checking: false, servedAt: Date.now(), feedback: null }])
+            await continueInSection(entry, nextDiff)
           }
         })
       }
@@ -390,8 +454,8 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
   const toReview = prereqs.filter(p => countsAsMastered({ status: p.status }))
   const onlyReview = toLearn.length === 0 && toReview.length > 0
   const showBanner = readiness && !readiness.ready && !bannerDismissed && prereqs.length > 0
-  const totalAnswered = history.length
-  const totalCorrect = history.filter(h => h.correct).length
+  const totalAnswered = answeredCount
+  const totalCorrect = correctCount
   const totalXP = entries.reduce((s, e) => s + (e.kind === 'q' && e.feedback?.correct ? e.feedback.xp : 0), 0)
 
   return (
@@ -507,6 +571,7 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
             return (
               <div key={e.key} className="border border-mathua-green-faint bg-mathua-surface p-6">
                 <p className="font-mono text-xs text-green-400">✓ Complete — {totalCorrect}/{totalAnswered} correct · +{totalXP} XP · {band}</p>
+                {e.note && <p role="status" className="mt-2 font-mono text-[11px] text-mathua-secondary">{e.note}</p>}
                 <p className="mt-2 font-mono text-[11px] text-mathua-secondary">Scroll up to review anything. Reviews are scheduled automatically.</p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {returnTo && <Link href={`/learn?concept=${encodeURIComponent(returnTo)}`} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-5 py-2 font-mono text-xs inline-flex items-center min-h-[40px]">← Back to {returnToLabel}</Link>}

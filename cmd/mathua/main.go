@@ -17,24 +17,7 @@ import (
 	"github.com/chuma-beep/mathua/internal/auth"
 	"github.com/chuma-beep/mathua/internal/concepts"
 	"github.com/chuma-beep/mathua/internal/engine"
-	"github.com/chuma-beep/mathua/internal/generator"
-	"github.com/chuma-beep/mathua/internal/generator/abstract"
-	"github.com/chuma-beep/mathua/internal/generator/algebra"
-	"github.com/chuma-beep/mathua/internal/generator/arithmetic"
-	"github.com/chuma-beep/mathua/internal/generator/calculus"
-	"github.com/chuma-beep/mathua/internal/generator/complex"
-	"github.com/chuma-beep/mathua/internal/generator/discrete"
-	"github.com/chuma-beep/mathua/internal/generator/fractions"
-	"github.com/chuma-beep/mathua/internal/generator/geometry"
-	"github.com/chuma-beep/mathua/internal/generator/linalg"
-	"github.com/chuma-beep/mathua/internal/generator/machinelearning"
-	"github.com/chuma-beep/mathua/internal/generator/numtheory"
-	"github.com/chuma-beep/mathua/internal/generator/odes"
-	"github.com/chuma-beep/mathua/internal/generator/prealgebra"
-	"github.com/chuma-beep/mathua/internal/generator/precalculus"
-	"github.com/chuma-beep/mathua/internal/generator/statistics"
-	"github.com/chuma-beep/mathua/internal/generator/topology"
-	"github.com/chuma-beep/mathua/internal/generator/trigonometry"
+	"github.com/chuma-beep/mathua/internal/generator/all"
 	"github.com/chuma-beep/mathua/internal/lessons"
 	"github.com/chuma-beep/mathua/internal/planning"
 	"github.com/chuma-beep/mathua/internal/repair"
@@ -118,24 +101,7 @@ func main() {
 		auth.SetSecretFile(filepath.Join(filepath.Dir(dbPath), ".jwt_secret"))
 	}
 
-	reg := generator.NewRegistry()
-	arithmetic.Register(reg)
-	fractions.Register(reg)
-	geometry.Register(reg)
-	prealgebra.Register(reg)
-	algebra.Register(reg)
-	trigonometry.Register(reg)
-	precalculus.Register(reg)
-	statistics.Register(reg)
-	numtheory.Register(reg)
-	complex.Register(reg)
-	linalg.Register(reg)
-	machinelearning.Register(reg)
-	discrete.Register(reg)
-	calculus.Register(reg)
-	odes.Register(reg)
-	abstract.Register(reg)
-	topology.Register(reg)
+	reg := all.Registry()
 
 	ll, err := lessons.Load("data/lessons")
 	if err != nil {
