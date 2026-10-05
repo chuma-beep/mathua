@@ -147,16 +147,39 @@ func TestEngine_MasteryProgression(t *testing.T) {
 			t.Fatalf("expected correct on attempt %d", i+1)
 		}
 	}
-	progress, _ := e.GetProgress(st.ID)
-	// 3 correct fast answers on 3 distinct questions walk the whole ladder: UNSEEN →
-	// LEARNING → PRACTICING → MASTERED.
+	// One clean answer is LEARNING — the cheap first rung.
+	one, _ := e.CreateStudent("prog_one")
+	answerCorrectly(t, e, one.ID, 1)
+	if p := mustProgress(t, e, one.ID)["a"]; p == nil || p.Status != "LEARNING" {
+		t.Errorf("expected LEARNING after 1 clean answer, got %+v", p)
+	}
+
+	// Three clean answers reach PRACTICING and stop: the mastery floor is a full evidence
+	// window, so the top rung is out of reach however good the answers are.
 	//
 	// This used to assert LEARNING, because the old rule needed the streak to *reach* the
-	// threshold before it would move at all — and then a further full threshold for each
-	// of the next two tiers. Three answers is the number the ladder was built to reach.
-	if p, ok := progress["a"]; !ok || p.Status != "MASTERED" {
-		t.Errorf("expected MASTERED after 3 clean answers, got %+v", progress["a"])
+	// threshold before it would move at all — and then a further full threshold for each of
+	// the next two tiers.
+	progress, _ := e.GetProgress(st.ID)
+	if p, ok := progress["a"]; !ok || p.Status != "PRACTICING" {
+		t.Errorf("expected PRACTICING after 3 clean answers, got %+v", progress["a"])
 	}
+
+	// A full window of clean answers reaches MASTERED.
+	full, _ := e.CreateStudent("prog_full")
+	answerCorrectly(t, e, full.ID, mastery.MasteryEvidenceFloor)
+	if p := mustProgress(t, e, full.ID)["a"]; p == nil || p.Status != "MASTERED" {
+		t.Errorf("expected MASTERED after a full clean window, got %+v", p)
+	}
+}
+
+func mustProgress(t *testing.T, e *Engine, studentID string) map[string]*storage.ConceptProgress {
+	t.Helper()
+	p, err := e.GetProgress(studentID)
+	if err != nil {
+		t.Fatalf("get progress: %v", err)
+	}
+	return p
 }
 
 func TestEngine_GetScores(t *testing.T) {
@@ -1210,15 +1233,15 @@ func TestProgressWithMasteryPct_DerivesFromServerThreshold(t *testing.T) {
 		t.Errorf("an untouched learner has %d progress rows, want 0", len(views))
 	}
 
-	// Three clean correct answers walk the whole ladder to MASTERED, and the bar is full.
-	// The per-concept threshold no longer has any say in this: the score is normalised
-	// against the concept's own difficulty and time threshold, so mastery costs the same
-	// handful of answers whether required_streak is 3 or 15.
-	answerCorrectly(t, e, st.ID, 3)
+	// A full window of clean answers reaches MASTERED and the bar is full. The
+	// per-concept threshold has no say in this: the score is normalised against the
+	// concept's own difficulty and time threshold, so mastery costs the same whether
+	// required_streak is 3 or 15.
+	answerCorrectly(t, e, st.ID, mastery.MasteryEvidenceFloor)
 	views, _ = e.ProgressWithMasteryPct(st.ID)
 	row := views["a"]
 	if row.Status != "MASTERED" {
-		t.Fatalf("status after 3 clean answers = %q, want MASTERED", row.Status)
+		t.Fatalf("status after a full clean window = %q, want MASTERED", row.Status)
 	}
 	if row.MasteryPct != 1 {
 		t.Errorf("mastery_pct at MASTERED = %v, want 1", row.MasteryPct)
@@ -1241,8 +1264,8 @@ func TestProgressWithMasteryPct_DerivesFromServerThreshold(t *testing.T) {
 	if row.Status != "MASTERED" {
 		t.Errorf("embedded status = %q, want MASTERED", row.Status)
 	}
-	if row.Attempts != 3 {
-		t.Errorf("embedded attempts = %d, want 3", row.Attempts)
+	if row.Attempts != mastery.MasteryEvidenceFloor {
+		t.Errorf("embedded attempts = %d, want %d", row.Attempts, mastery.MasteryEvidenceFloor)
 	}
 	if row.MasteryPct != views["a"].MasteryPct {
 		t.Errorf("embedded view disagrees with the derived value: %v", row.MasteryPct)

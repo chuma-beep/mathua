@@ -18,6 +18,28 @@ func evidenceOf(correct bool, instance string, difficulty, elapsed float64) Atte
 	return Attempt{Correct: correct, Instance: instance, Difficulty: diff(difficulty), Elapsed: elapsed}
 }
 
+// cleanWindow builds `n` correct attempts on distinct instances at `difficulty` — what a
+// learner who is reliably getting it right produces. Used where a test needs evidence that
+// clears the mastery floor rather than evidence of a specific shape.
+func cleanWindow(n int, difficulty float64) Evidence {
+	var as []Attempt
+	for i := 0; i < n; i++ {
+		as = append(as, evidenceOf(true, string(rune('a'+i)), difficulty, 4))
+	}
+	return BuildEvidence(as, EvidenceOptions{TimeThreshold: 10})
+}
+
+// unknownDifficultyWindow is cleanWindow with no difficulty recorded at all, which is a
+// different fact from a recorded 0 — see attempts.difficulty being nullable, and
+// difficultyOrNil refusing to write zero.
+func unknownDifficultyWindow(n int) Evidence {
+	var as []Attempt
+	for i := 0; i < n; i++ {
+		as = append(as, Attempt{Correct: true, Elapsed: 4, Instance: string(rune('a' + i))})
+	}
+	return BuildEvidence(as, EvidenceOptions{TimeThreshold: 10})
+}
+
 // started is one correct answer: enough to say the learner has begun.
 func started() Evidence {
 	return BuildEvidence([]Attempt{evidenceOf(true, "a", 0.5, 4)}, EvidenceOptions{TimeThreshold: 10})
@@ -32,10 +54,7 @@ func consistent() Evidence {
 
 // demonstrated is four correct across four instances at real difficulty.
 func demonstrated() Evidence {
-	return BuildEvidence([]Attempt{
-		evidenceOf(true, "a", 0.7, 6), evidenceOf(true, "b", 0.8, 6),
-		evidenceOf(true, "c", 0.7, 6), evidenceOf(true, "d", 0.9, 6),
-	}, EvidenceOptions{TimeThreshold: 10})
+	return cleanWindow(MasteryEvidenceFloor, 0.8)
 }
 
 func TestNext_UnseenToLearning(t *testing.T) {
@@ -91,15 +110,20 @@ func TestNext_LearningToPracticing(t *testing.T) {
 // same question text every attempt drives Instances to 1 forever and the concept can never
 // be mastered at all.
 func TestNext_VarietyIsRewardedNotRequired(t *testing.T) {
-	same := BuildEvidence([]Attempt{
-		evidenceOf(true, "a", 0.9, 3), evidenceOf(true, "a", 0.9, 3), evidenceOf(true, "a", 0.9, 3),
-	}, EvidenceOptions{TimeThreshold: 10})
-	varied := BuildEvidence([]Attempt{
-		evidenceOf(true, "a", 0.9, 3), evidenceOf(true, "b", 0.9, 3), evidenceOf(true, "c", 0.9, 3),
-	}, EvidenceOptions{TimeThreshold: 10})
+	// The degenerate generator: a full window of correct answers whose question text never
+	// varies, so every attempt is the same instance.
+	var degenerate []Attempt
+	for i := 0; i < MasteryEvidenceFloor; i++ {
+		degenerate = append(degenerate, evidenceOf(true, "a", 0.9, 3))
+	}
+	same := BuildEvidence(degenerate, EvidenceOptions{TimeThreshold: 10})
+	varied := cleanWindow(MasteryEvidenceFloor, 0.9)
 
-	if same.Instances != 1 || varied.Instances != 3 {
-		t.Fatalf("instances: same=%d varied=%d", same.Instances, varied.Instances)
+	if same.Instances != 1 {
+		t.Fatalf("the degenerate generator produced %d instances, want 1", same.Instances)
+	}
+	if varied.Instances != MasteryEvidenceFloor {
+		t.Fatalf("varied window produced %d instances, want %d", varied.Instances, MasteryEvidenceFloor)
 	}
 	if varied.Score <= same.Score {
 		t.Errorf("variety did not raise the score: %v vs %v", varied.Score, same.Score)
@@ -410,18 +434,14 @@ func at(vals ...float64) []*float64 {
 // ADR-037 spent a week untangling.
 func TestBuildEvidence_MatchesBrowserModelShape(t *testing.T) {
 	// 3 correct at difficulty 0.7, on 3 distinct instances, fast.
-	ev := BuildEvidence([]Attempt{
-		{Correct: true, Elapsed: 5, Difficulty: diff(0.7), Instance: "a"},
-		{Correct: true, Elapsed: 6, Difficulty: diff(0.7), Instance: "b"},
-		{Correct: true, Elapsed: 5, Difficulty: diff(0.7), Instance: "c"},
-	}, EvidenceOptions{TimeThreshold: 10})
+	ev := cleanWindow(MasteryEvidenceFloor, 0.7)
 
-	if ev.Attempts != 3 || ev.Correct != 3 || ev.Instances != 3 {
+	if ev.Attempts != MasteryEvidenceFloor || ev.Correct != MasteryEvidenceFloor || ev.Instances != MasteryEvidenceFloor {
 		t.Fatalf("assembled %+v", ev)
 	}
-	// accuracy 1.0 × (0.6 + 0.4×0.7) = 0.88, + variety 0.10 (3 instances, capped below
-	// 0.15), × time 1.0
-	want := (1.0*(0.6+0.4*0.7) + 0.10)
+	// accuracy 1.0 × (0.6 + 0.4×0.7) = 0.88, + variety 0.15 (six instances, capped),
+	// × time 1.0 → 1.03, clamped to 1.
+	want := 1.0
 	if math.Abs(ev.Score-want) > 1e-9 {
 		t.Errorf("score = %v, want %v", ev.Score, want)
 	}
@@ -498,11 +518,7 @@ func TestBuildEvidence_DifficultyAndTimeChangeTheScore(t *testing.T) {
 // Unknown difficulty must be dropped, not read as zero. A concept whose attempts predate
 // the column still has evidence; it just has none of this kind.
 func TestBuildEvidence_UnknownDifficultyIsDroppedNotZeroed(t *testing.T) {
-	unknown := BuildEvidence([]Attempt{
-		{Correct: true, Elapsed: 5, Instance: "a"},
-		{Correct: true, Elapsed: 5, Instance: "b"},
-		{Correct: true, Elapsed: 5, Instance: "c"},
-	}, EvidenceOptions{TimeThreshold: 10})
+	unknown := unknownDifficultyWindow(MasteryEvidenceFloor)
 	if unknown.AvgDifficulty != 0 {
 		t.Errorf("AvgDifficulty = %v, want 0 when nothing recorded it", unknown.AvgDifficulty)
 	}
@@ -605,38 +621,81 @@ func TestLadder_EachRungAsksADifferentQuestion(t *testing.T) {
 		t.Errorf("two consistent correct answers gave rung %v, want RungConsistent", HighestRung(two))
 	}
 
-	// 4. Four correct across four instances at real difficulty: demonstrated.
-	four := BuildEvidence([]Attempt{
-		{Correct: true, Elapsed: 6, Difficulty: diff(0.7), Instance: "a"},
-		{Correct: true, Elapsed: 6, Difficulty: diff(0.8), Instance: "b"},
-		{Correct: true, Elapsed: 6, Difficulty: diff(0.7), Instance: "c"},
-		{Correct: true, Elapsed: 6, Difficulty: diff(0.9), Instance: "d"},
-	}, EvidenceOptions{TimeThreshold: 10})
+	// 4. A full window of correct answers across distinct instances at real difficulty:
+	// demonstrated. Four is no longer enough — the floor is MasteryEvidenceFloor — which is
+	// the calibration change, not a new kind of evidence.
+	four := cleanWindow(MasteryEvidenceFloor, 0.8)
 	if HighestRung(four) != RungDemonstrated {
-		t.Errorf("four clean varied correct answers gave rung %v, want RungDemonstrated", HighestRung(four))
+		t.Errorf("a full clean window gave rung %v, want RungDemonstrated", HighestRung(four))
+	}
+
+	// Just under the floor, the top rung is out of reach however good the answers are. This
+	// is the whole of the calibration: the floor is on *how much* evidence, not on what it
+	// contains.
+	short := cleanWindow(MasteryEvidenceFloor-1, 0.9)
+	if short.Score < MasteryThreshold {
+		t.Fatalf("test setup: %d attempts scored %v, which should clear the threshold",
+			MasteryEvidenceFloor-1, short.Score)
+	}
+	if HighestRung(short) == RungDemonstrated {
+		t.Errorf("%d attempts reached the top rung; the floor is %d", MasteryEvidenceFloor-1, MasteryEvidenceFloor)
 	}
 }
 
-// The rungs must be strictly ordered, or a weaker bar could fire on stronger evidence and
-// the ladder would advance past the rung that was actually met.
-func TestLadder_RungsAreOrdered(t *testing.T) {
+// More evidence, or better evidence, must never lower the rung.
+//
+// Monotone, not strictly increasing: the rungs saturate. Two correct answers on two
+// instances and three correct answers on three instances are both RungConsistent, because
+// both clear the threshold and the attempt floor for that rung is two. Asserting strict
+// increase would be asserting a distinction the ladder does not make and should not.
+func TestLadder_RungsAreMonotone(t *testing.T) {
 	cases := []struct {
 		name string
 		ev   Evidence
 	}{
 		{"none", BuildEvidence(nil, EvidenceOptions{})},
 		{"one", BuildEvidence([]Attempt{{Correct: true, Instance: "a"}}, EvidenceOptions{})},
-		{"two easy", BuildEvidence([]Attempt{
-			{Correct: true, Instance: "a"}, {Correct: true, Instance: "b"},
-		}, EvidenceOptions{})},
-		{"three easy", BuildEvidence([]Attempt{
-			{Correct: true, Instance: "a"}, {Correct: true, Instance: "b"}, {Correct: true, Instance: "c"},
-		}, EvidenceOptions{})},
+		{"two easy", cleanWindow(2, 0.4)},
+		{"three easy", cleanWindow(3, 0.4)},
+		{"five easy", cleanWindow(MasteryEvidenceFloor-1, 0.4)},
+		{"full window easy", cleanWindow(MasteryEvidenceFloor, 0.4)},
+		{"full window hard", cleanWindow(MasteryEvidenceFloor, 0.9)},
 	}
 	for i := 1; i < len(cases); i++ {
-		if HighestRung(cases[i-1].ev) >= HighestRung(cases[i].ev) {
-			t.Errorf("%s rung %v is not below %s rung %v",
-				cases[i-1].name, HighestRung(cases[i-1].ev), cases[i].name, HighestRung(cases[i].ev))
+		prev, cur := HighestRung(cases[i-1].ev), HighestRung(cases[i].ev)
+		if cur < prev {
+			t.Errorf("%s rung %v is below %s rung %v",
+				cases[i].name, cur, cases[i-1].name, prev)
 		}
+	}
+	// And the ends of the range are reached, so the walk above is not vacuous.
+	if HighestRung(cases[0].ev) != RungNone {
+		t.Error("no evidence should reach no rung")
+	}
+	if HighestRung(cases[len(cases)-1].ev) != RungDemonstrated {
+		t.Error("a full window of hard correct answers should reach the top rung")
+	}
+}
+
+// Difficulty must not be able to *lower* the rung. It weights the score upward, so this is
+// the same monotonicity read through the other signal — and it is the one that would break
+// if the difficulty term were ever subtracted rather than multiplied in.
+func TestLadder_HarderEvidenceNeverHurts(t *testing.T) {
+	easy := HighestRung(cleanWindow(MasteryEvidenceFloor, 0.3))
+	hard := HighestRung(cleanWindow(MasteryEvidenceFloor, 1.0))
+	if hard < easy {
+		t.Errorf("harder evidence gave rung %v, below easy %v", hard, easy)
+	}
+	// Slow answers likewise.
+	fast := HighestRung(cleanWindow(MasteryEvidenceFloor, 0.8))
+	slow := BuildEvidence(func() []Attempt {
+		var as []Attempt
+		for i := 0; i < MasteryEvidenceFloor; i++ {
+			as = append(as, evidenceOf(true, string(rune('a'+i)), 0.8, 600))
+		}
+		return as
+	}(), EvidenceOptions{TimeThreshold: 10})
+	if HighestRung(slow) > fast {
+		t.Errorf("slow answers gave a higher rung (%v) than fast (%v)", HighestRung(slow), fast)
 	}
 }

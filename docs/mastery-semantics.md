@@ -258,26 +258,47 @@ two-concept fixture whose generator returns the *same* question text every attem
 worst possible case for the variety term:
 
 ```
-attempt 1: LEARNING     score 0.820  instances 1
-attempt 2: PRACTICING   score 0.870  instances 1
-attempt 3: MASTERED     score 0.887  instances 1
-attempt 4: MASTERED     score 0.591  instances 1   ← a miss, and the exit holds
+attempt 1: UNSEEN      score 0.800  instances 1   ← LEARNING
+attempt 2: LEARNING    score 0.800  instances 1   ← PRACTICING
+attempt 3: PRACTICING  score 0.800  instances 1
+attempt 4: PRACTICING  score 0.800  instances 1
+attempt 5: PRACTICING  score 0.587  instances 1   ← a miss, and the score falls below
+attempt 6: PRACTICING  score 0.640  instances 1   ← MASTERED, one good answer later
+attempt 7: MASTERED    score 0.658  instances 1
 ```
 
-**Three correct answers to master, from any starting `required_streak`.** The per-concept
-threshold no longer affects the cost at all: the score is already normalised against the
-concept's own difficulty and time threshold, so concepts differ in what counts as hard, not
-in how much evidence proves competence.
-
-That is far below the ~9 the brief anticipated, and it is a deliberate consequence of the
-design rather than a target that was missed:
+**Six answers to master, from any starting `required_streak`, and the exit holds.** The
+per-concept threshold no longer affects the cost at all: the score is already normalised
+against the concept's own difficulty and time threshold, so concepts differ in what counts
+as hard, not in how much evidence proves competence.
 
 - `UNSEEN → LEARNING` takes **one** correct answer. Demanding ten first was the complaint.
-- `PRACTICING → MASTERED` needs a score over **three or more** attempts.
+- `PRACTICING → MASTERED` needs a score over `MasteryThreshold` across **at least six
+  attempts** — a full evidence window.
 
-The three knobs, if the owner wants it dearer, are all in one place: `MasteryThreshold`
-(0.6), `EnoughForMastery`'s attempt floor (3), and the `varietyBonus` cap (0.15). Raising the
-attempt floor to 6 would put the natural cost at roughly 6–9 answers.
+Six is a floor on *evidence*, not a demand for six consecutive correct answers. It was set to
+6 after measurement rather than assumed: `internal/mastery/measure_test.go` walks six
+learner profiles (perfect, slowest, one-miss-in-eight, 80% correct, slow-but-right,
+starts-rough) against all eight real `avg_time_seconds` values in the corpus, and every one
+of them masters in exactly 6. Median, p25, p75, min and max are all 6.
+
+### What the measurement found that was not asked for: the score does not bind
+
+Because the floor and the evidence window are both 6, the floor is reached before the score
+has anything to say. A sweep from 40% to 100% accuracy (`TestMeasureAccuracyBandThatStillMasters`)
+reports **every level masterable, none blocked** — `MasteryThreshold` at 0.6 is currently
+decorative, and the evidence floor is the entire gate.
+
+That is a real calibration question and it is deliberately **not** fixed here. Raising
+`MasteryThreshold` is a different decision from setting the floor to 6, and inventing a value
+for it would repeat the error of picking "9 answers" as a target and then tuning to it. The
+three knobs are in one place for whoever makes that call: `MasteryThreshold` (0.6),
+`MasteryEvidenceFloor` (6), and the `varietyBonus` cap (0.15).
+
+The properties the measurement *does* assert, because they are not calibration choices:
+nothing is permanently unmasterable, a concept whose generator never varies its question
+text still masters, mastery is reachable after an arbitrarily long run that includes misses,
+and the per-concept `required_streak` cannot change the outcome.
 
 ### Two things this change had to fix that were not in the brief
 
