@@ -9,6 +9,7 @@ import (
 	"github.com/chuma-beep/mathua/internal/levels"
 	"github.com/chuma-beep/mathua/internal/mastery"
 	"github.com/chuma-beep/mathua/internal/storage"
+	"github.com/chuma-beep/mathua/internal/xp"
 )
 
 type Scores struct {
@@ -113,8 +114,7 @@ func (u *Updater) Compute(studentID string) (*Scores, error) {
 		AvgLearningSpeed: math.Round(avgSpeed*100) / 100,
 		PausedUntil:      pausedUntil(u, studentID),
 		XPSinceQuiz:      xpSinceQuiz,
-		// 50 mirrors engine.QuizGateXP (import cycle forbids sharing).
-		QuizDue: xpSinceQuiz >= 50,
+		QuizDue:          xpSinceQuiz >= xp.QuizGateXP,
 	}, nil
 }
 

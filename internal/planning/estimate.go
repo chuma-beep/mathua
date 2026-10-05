@@ -36,7 +36,9 @@ const (
 	defaultDecayDays = mastery.DecayDays
 	minAccuracy      = 0.2
 	maxAccuracy      = 0.95
-	quizGateXP       = 50
+	// quizGateXP delegates to the single definition in internal/xp rather than repeating
+	// the literal, which is how the three copies drifted apart in the first place.
+	quizGateXP       = xp.QuizGateXP
 	quizQuestions    = 5
 	quizSecPerQ      = 30.0
 	dontKnowTimeFrac = 0.3

@@ -59,7 +59,7 @@ func authMigrate(db *sql.DB) error {
 		"ALTER TABLE students ADD COLUMN xp_today INTEGER NOT NULL DEFAULT 0",
 		"ALTER TABLE students ADD COLUMN xp_date TEXT",
 		"ALTER TABLE students ADD COLUMN diagnostic_completed INTEGER NOT NULL DEFAULT 0",
-		"ALTER TABLE students ADD COLUMN daily_xp_goal INTEGER NOT NULL DEFAULT 10",
+		"ALTER TABLE students ADD COLUMN daily_xp_goal INTEGER NOT NULL DEFAULT 30",
 		"ALTER TABLE students ADD COLUMN settings TEXT NOT NULL DEFAULT '{}'",
 		"ALTER TABLE students ADD COLUMN league TEXT NOT NULL DEFAULT 'bronze'",
 		"ALTER TABLE students ADD COLUMN league_week TEXT NOT NULL DEFAULT ''",
@@ -115,6 +115,14 @@ func authMigrate(db *sql.DB) error {
 		// v3 small-awards economy: proportional rescale preserves intent
 		// (30→10, 150→50, 100→33); goals already at/below 10 are untouched.
 		3: {"UPDATE students SET daily_xp_goal = MAX(1, CAST(ROUND(daily_xp_goal / 3.0) AS INTEGER)) WHERE daily_xp_goal > 10"},
+		// v4 daily goal range: the goal is now bounded 10..100 (xp.MinDailyGoal..MaxDailyGoal)
+		// and defaults to 30. v3 left every learner at or below 10, so a learner who had
+		// accepted the old default sat at the *new minimum* rather than the default, and goals
+		// above 100 are no longer accepted by the setter. Clamp into range and lift the old
+		// default to the new one; anyone who chose their own goal inside 10..100 keeps it.
+		4: {`UPDATE students SET daily_xp_goal = 30 WHERE daily_xp_goal = 10`,
+			`UPDATE students SET daily_xp_goal = 100 WHERE daily_xp_goal > 100`,
+			`UPDATE students SET daily_xp_goal = 10 WHERE daily_xp_goal < 10`},
 	}
 	for v := 1; v <= len(dataMigrations); v++ {
 		if err := runOnceSQLite(db, v, dataMigrations[v]); err != nil {

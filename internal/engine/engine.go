@@ -168,6 +168,10 @@ type Engine struct {
 	activePath map[string]map[string]bool
 	// PR 1.5: study-path consecutive-miss tracker (studentID|conceptID → count)
 	studyMisses map[string]int
+	// studyRush counts sub-RushSeconds wrong answers per concept on the study/quiz path.
+	// The practice path keeps its own count on the active session; both now apply the same
+	// xp.RushSeconds/xp.RushAfter rule instead of two different ones.
+	studyRush map[string]int
 	// PR 1.5: stable per-student session id for study/quiz attempt FK.
 	studySessions map[string]string
 	// H1b: server-side anchors for the study seam — the answer each served
@@ -179,9 +183,10 @@ type Engine struct {
 	quizRemedial map[string][]string
 }
 
-// QuizGateXP is the mastery-check interval (rescaled 150 -> 50 with the
-// small-awards economy; cadence preserved at roughly every 5 lessons).
-const QuizGateXP = 50
+// QuizGateXP is the mastery-check interval. It delegates so there is one definition: the
+// value was written out in three packages (engine, planning, scoring) with a comment in one
+// of them admitting it was a copy.
+const QuizGateXP = xppolicy.QuizGateXP
 
 // maxQuizRemedial caps the per-student quiz remedial queue.
 const maxQuizRemedial = 10
@@ -202,6 +207,7 @@ func New(repo storage.Repository, dag *concepts.DAG, reg *generator.Registry, ll
 		sessions:      make(map[string]*activeSession),
 		activePath:    make(map[string]map[string]bool),
 		studyMisses:   make(map[string]int),
+		studyRush:     make(map[string]int),
 		studySessions: make(map[string]string),
 		studyAnchor:   make(map[string]string),
 		quizRemedial:  make(map[string][]string),
@@ -1199,9 +1205,9 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 	}
 
 	// PR 1.5: negative XP for rushing/guessing — elapsed <2s incorrect twice.
-	if !gr.Correct && elapsedSeconds < 2.0 {
+	if !gr.Correct && elapsedSeconds < xppolicy.RushSeconds {
 		as.rushCount++
-		if as.rushCount >= 2 {
+		if as.rushCount >= xppolicy.RushAfter {
 			xp = xppolicy.RushPenalty
 		}
 	}
@@ -1424,8 +1430,15 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 		if e.studyMisses[missKey] >= 2 {
 			halted = true
 		}
-		if elapsedSeconds < 2.0 && e.studyMisses[missKey] >= 2 && !dontKnow {
-			xp = xppolicy.RushPenalty
+		// Same rule as the practice path: a wrong answer answered implausibly fast, twice.
+		// It used to require two misses on the concept as well, so a learner who rushed once
+		// and was wrong twice for ordinary reasons was never penalised here — the same
+		// behaviour was penalised on one route and not the other.
+		if !dontKnow && elapsedSeconds < xppolicy.RushSeconds {
+			e.studyRush[missKey]++
+			if e.studyRush[missKey] >= xppolicy.RushAfter {
+				xp = xppolicy.RushPenalty
+			}
 		}
 		// Batch 1: immediate remedial enqueue on quiz miss — missed concept
 		// plus its key prerequisites surface first in Study after the quiz.
@@ -1435,6 +1448,7 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 		}
 	} else {
 		delete(e.studyMisses, missKey)
+		delete(e.studyRush, missKey)
 	}
 	e.mu.Unlock()
 	if xp != 0 {

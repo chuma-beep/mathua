@@ -12,6 +12,7 @@ import (
 	"github.com/chuma-beep/mathua/internal/generator"
 	"github.com/chuma-beep/mathua/internal/mastery"
 	"github.com/chuma-beep/mathua/internal/storage"
+	xppolicy "github.com/chuma-beep/mathua/internal/xp"
 )
 
 type testGen struct {
@@ -865,9 +866,12 @@ func TestEngine_SubmitQuizAnswer_TaskQuizXP(t *testing.T) {
 	if res.XP != want {
 		t.Errorf("expected TaskQuiz XP %d, got %d", want, res.XP)
 	}
+	// A quiz answer earns the same effort base as a lesson answer. It used to carry a +1
+	// assessment premium, which made a quiz worth more per question than the teaching it
+	// was checking, so the honest assertion is equality.
 	lesson := computeXPForTask(true, 3.0, 60, res.Streak, TaskLesson)
-	if res.XP <= lesson {
-		t.Errorf("expected quiz XP %d to exceed lesson XP %d", res.XP, lesson)
+	if res.XP != lesson {
+		t.Errorf("quiz XP %d should equal lesson XP %d at the same effort", res.XP, lesson)
 	}
 }
 
@@ -1640,5 +1644,76 @@ func TestUngradedAnswerCarriesNoEvidence(t *testing.T) {
 	res := &AnswerResult{Ungraded: true, Feedback: "grader unavailable"}
 	if res.EvidenceScore != 0 || res.EvidenceBand != "" {
 		t.Errorf("an ungraded answer reported evidence %v/%q", res.EvidenceScore, res.EvidenceBand)
+	}
+}
+
+// The rush penalty must mean the same thing on every host.
+//
+// The practice path counted its own sub-2-second wrong answers on the active session; the
+// study/quiz path required two misses on the concept as well, so a learner who rushed twice
+// but was wrong for ordinary reasons was never penalised there. Same behaviour, two
+// different rules — now both xp.RushSeconds / xp.RushAfter.
+func TestRushPenaltyIsIdenticalAcrossHosts(t *testing.T) {
+	e := testEngine(t)
+	st, err := e.CreateStudent("rush_parity")
+	if err != nil {
+		t.Fatalf("create student: %v", err)
+	}
+	const question = "3/4 + 1/2 = ?"
+	diff := 0.6
+	e.SetStudyAnchorBatch(st.ID, "a", map[string]Anchor{
+		question: {Answer: "5/4", Difficulty: &diff},
+	})
+
+	// Two fast wrong answers on the study path: the second must carry the penalty.
+	var xps []int
+	for i := 0; i < 2; i++ {
+		res, err := e.SubmitStudyAnswer(st.ID, "a", "7/4", xppolicy.RushSeconds-0.5, question)
+		if err != nil {
+			t.Fatalf("submit %d: %v", i, err)
+		}
+		xps = append(xps, res.XP)
+	}
+	if xps[0] != 0 {
+		t.Errorf("first fast wrong answer XP = %d, want 0 (penalty starts at RushAfter)", xps[0])
+	}
+	if xps[1] != xppolicy.RushPenalty {
+		t.Errorf("second fast wrong answer XP = %d, want %d", xps[1], xppolicy.RushPenalty)
+	}
+
+	// The same two fast wrong answers on the quiz path must produce the same two numbers.
+	e2 := testEngine(t)
+	st2, _ := e2.CreateStudent("rush_parity_quiz")
+	var quizXPs []int
+	for i := 0; i < 2; i++ {
+		res, err := e2.SubmitQuizAnswer(st2.ID, "a", "7/4", "5/4", xppolicy.RushSeconds-0.5, question, &diff)
+		if err != nil {
+			t.Fatalf("quiz submit %d: %v", i, err)
+		}
+		quizXPs = append(quizXPs, res.XP)
+	}
+	if quizXPs[0] != xps[0] || quizXPs[1] != xps[1] {
+		t.Errorf("quiz XP %v vs study XP %v for the same two fast wrong answers", quizXPs, xps)
+	}
+}
+
+// An admitted "I don't know" is honesty, not rushing, so it never draws the penalty however
+// fast it was submitted.
+func TestDontKnowIsNeverRushed(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("dontknow_rush")
+	const question = "3/4 + 1/2 = ?"
+	diff := 0.6
+	for i := 0; i < 3; i++ {
+		res, err := e.SubmitQuizDontKnow(st.ID, "a", "5/4", 0.5, question, &diff)
+		if err != nil {
+			t.Fatalf("submit %d: %v", i, err)
+		}
+		if res.XP == xppolicy.RushPenalty {
+			t.Fatalf("an admitted don't-know at 0.5s drew the rush penalty on attempt %d", i+1)
+		}
+		if res.XP != 0 {
+			t.Errorf("an admitted don't-know paid %d XP, want 0", res.XP)
+		}
 	}
 }
