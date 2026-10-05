@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import KatexContent from './KatexContent'
+import LessonDiagram from './LessonDiagram'
+import LessonAssets from './LessonAssets'
 import ChoiceOptions from './ChoiceOptions'
 import { getLessonKPs, getLessonPractice, getLessonReadiness, submitStudyAnswer, getActivity, getDueReviews, getProgress, getScores, getWeaknesses, getErrorStatus, type KpInfo, type PracticeQuestion, type ReadinessRes, type DailyActivity, type Scores, type WeaknessRes, type ConceptProgress } from '../lib/api'
 import { getUserInfo } from '../lib/auth'
@@ -60,6 +62,10 @@ export { hrefConceptId as headConceptId }
 export default function LearnStepper({ conceptId, returnTo }: Props) {
   const [entries, setEntries] = useState<Entry[]>([])
   const [kps, setKps] = useState<KpInfo[]>([])
+  // The concept's own diagram. The KP endpoint has always returned it and the client has
+  // always dropped it, so the one figure guaranteed to be relevant to the concept being
+  // studied was the one figure /learn never showed.
+  const [diagram, setDiagram] = useState<string | null>(null)
   const [kpIndex, setKpIndex] = useState(0)
   const [readiness, setReadiness] = useState<ReadinessRes | null>(null)
   const [bannerDismissed, setBannerDismissed] = useState(false)
@@ -115,6 +121,7 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
     try {
       const [kpRes, readyRes] = await Promise.all([getLessonKPs(conceptId), getLessonReadiness(conceptId)])
       setKps(kpRes.kps ?? [])
+      setDiagram(kpRes.diagram ?? null)
       setReadiness(readyRes)
       const pr = await getLessonPractice(conceptId, 3, { seed: Date.now() % 100000, difficulty: 0.4 })
       seenRef.current = pr.questions.map(q => q.question)
@@ -512,6 +519,16 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
               <div key={e.key} className="border border-mathua-border bg-mathua-surface p-6">
                 <p className="font-mono text-[11px] uppercase tracking-wider text-mathua-muted">{ikp?.label || 'Learn'}</p>
                 <KatexContent className="mt-3 text-sm text-mathua-primary whitespace-pre-wrap">{ikp?.worked_example || 'Worked example unavailable — start practicing instead.'}</KatexContent>
+                {/* Figures for this knowledge point, plus the concept's own diagram. The
+                    worked example is text lifted out of the lesson body, so its figures do
+                    not come with it; selecting them per knowledge point is what keeps the
+                    shorter surface shorter without discarding instruction. */}
+                <LessonAssets assets={ikp?.assets} />
+                {diagram && (
+                  <figure className="mt-4">
+                    <LessonDiagram src={diagram} alt={`Diagram for ${ikp?.label || 'this topic'}`} />
+                  </figure>
+                )}
                 {ikp?.subgoals && ikp.subgoals.length > 0 && (
                   <details className="mt-3">
                     <summary className="font-mono text-[11px] text-mathua-muted cursor-pointer hover:text-mathua-blue">Steps ({ikp.subgoals.length})</summary>
@@ -538,6 +555,7 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
                 <details>
                   <summary className="font-mono text-[11px] uppercase tracking-wider text-mathua-blue cursor-pointer">Next: {ikp?.label || `Knowledge point ${e.kpIndex + 1}`} (worked example)</summary>
                   <KatexContent className="mt-2 text-sm text-mathua-primary whitespace-pre-wrap">{ikp?.worked_example || ''}</KatexContent>
+                  <LessonAssets assets={ikp?.assets} />
                 </details>
               </div>
             )

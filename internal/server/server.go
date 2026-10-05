@@ -24,6 +24,7 @@ import (
 	"github.com/chuma-beep/mathua/internal/engine"
 	"github.com/chuma-beep/mathua/internal/generator"
 	"github.com/chuma-beep/mathua/internal/grader"
+	"github.com/chuma-beep/mathua/internal/lessons"
 	"github.com/chuma-beep/mathua/internal/mastery"
 	"github.com/chuma-beep/mathua/internal/quiz"
 	"github.com/chuma-beep/mathua/internal/scoring"
@@ -1346,7 +1347,20 @@ func (s *Server) handleLessonBody(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, `{"error":"lesson not found"}`, 404)
 		return
 	}
-	writeJSON(w, map[string]string{"title": l.Title, "body": l.Body})
+	// Assets travel with the body so a client can address figures as data. `/study` renders
+	// the body verbatim and needs nothing from them, but 133 of the corpus's figures have no
+	// alt text and no caption, and there is no way to fix or even count those without a
+	// list. An empty list is [] rather than null so clients need no null check.
+	assets := l.Assets
+	if assets == nil {
+		assets = []lessons.Asset{}
+	}
+	writeJSON(w, map[string]interface{}{
+		"title":  l.Title,
+		"body":   l.Body,
+		"source": l.Source,
+		"assets": assets,
+	})
 }
 
 func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
@@ -1413,10 +1427,11 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 		}
 		kps := ll.KPs(conceptID)
 		type kpInfo struct {
-			Label         string   `json:"label"`
-			Section       string   `json:"section"`
-			Subgoals      []string `json:"subgoals"`
-			WorkedExample string   `json:"worked_example"`
+			Label         string          `json:"label"`
+			Section       string          `json:"section"`
+			Subgoals      []string        `json:"subgoals"`
+			WorkedExample string          `json:"worked_example"`
+			Assets        []lessons.Asset `json:"assets"`
 		}
 		out := make([]kpInfo, 0, len(kps))
 		for _, kp := range kps {
@@ -1426,11 +1441,16 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 					we = l.Body
 				}
 			}
+			assets := ll.KPAssets(conceptID, kp)
+			if assets == nil {
+				assets = []lessons.Asset{}
+			}
 			out = append(out, kpInfo{
 				Label:         kp.Label,
 				Section:       kp.Section,
 				Subgoals:      kp.Subgoals,
 				WorkedExample: we,
+				Assets:        assets,
 			})
 		}
 		writeJSON(w, map[string]interface{}{

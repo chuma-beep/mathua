@@ -10,6 +10,25 @@ import rehypeCollapseEmptyColumns from '../lib/rehypeCollapseEmptyColumns'
 import 'katex/dist/katex.min.css'
 import { lessonMacros, prepareLessonMath } from '../lib/lessonMath'
 
+// Resolve a lesson-image reference to a served URL.
+//
+// Exported rather than inlined in the `img` override below because a second host needs the
+// same rule: `/learn` renders `LessonAsset.src` values that came out of the lesson body
+// verbatim, and resolving them differently from the prose that surrounds them would show a
+// figure in one place and a broken image in the other.
+//
+// The rule is duplicated in `internal/lessons/assets_test.go`, which gates the corpus against
+// a body referencing a figure that is not shipped. Two copies in two languages is a real
+// cost, paid deliberately: the rule is one comparison and a basename, and the test on either
+// side fails loudly if it drifts.
+export function resolveLessonImageUrl(src?: string): string {
+	let url = src || ''
+	if (url && !url.startsWith('http') && !url.startsWith('/')) {
+		url = '/diagrams/algebrica/' + url.split('/').pop()
+	}
+	return url
+}
+
 function headingId(text: string): string {
   return text
     .toLowerCase()
@@ -179,10 +198,7 @@ export default function KatexContent({ children, className = '' }: { children: s
             </code>
           ),
           img: ({ src, alt }) => {
-            let url = src
-            if (url && !url.startsWith('http') && !url.startsWith('/')) {
-              url = '/diagrams/algebrica/' + url.split('/').pop()
-            }
+            const url = resolveLessonImageUrl(src)
             // Lesson-sourced images come from arbitrary remote/relative URLs without
             // intrinsic dimensions, so next/image optimization does not apply here.
             // A missing alt falls back to the file name (never empty on content
