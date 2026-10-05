@@ -33,6 +33,19 @@ export async function answerLatex(page: Page): Promise<string> {
 /**
  * Put the caret in the answer field and type.
  *
+ * **Only valid where there is a physical keyboard.** On a coarse-pointer profile the
+ * virtual keypad opens on focus (`MathLiveField` calls `kb.show()` when
+ * `(pointer: coarse)` matches), and at a 320px viewport the open keypad *swallows
+ * synthetic keystrokes*: `page.keyboard.type` reports success while nothing reaches
+ * the field, `onChange` never fires, and Check stays disabled. This is not a product
+ * bug: every touch test in `mobile-math.spec.ts` taps keycaps and submits
+ * successfully at that width. It is a property of driving a virtual keyboard with
+ * synthetic key events, and `mobile-math.spec.ts` carries the same note at its own
+ * call site.
+ *
+ * Prefer `enterAnswer` over choosing a method per profile by hand: it makes that
+ * choice, so it cannot be forgotten at a new call site.
+ *
  * MathLive focuses its contenteditable sink on `mousedown`. A single atomic
  * `locator.click()` — mousedown and mouseup in the same tick — leaves the field
  * unfocused here, so the press is split with a gap. `.focus()` is used as the
@@ -45,6 +58,36 @@ export async function answerLatex(page: Page): Promise<string> {
 export async function typeAnswer(page: Page, value: string): Promise<void> {
   await focusAnswerField(page)
   await typeIntoField(page, value)
+}
+
+/**
+ * Enter an answer the way the profile's user actually would.
+ *
+ * Types where a physical keyboard exists, taps the virtual keypad where one does not.
+ * See `typeAnswer` for why that distinction is not optional: on a coarse-pointer
+ * profile the keypad is open and swallows synthetic keystrokes, so a test that types
+ * there is not testing the product, it is testing Playwright.
+ *
+ * Only single-character values are supported on the tap path, because each character
+ * has to be one visible keycap. A longer value throws rather than silently tapping
+ * whatever happens to match the first character -- a test that quietly entered `9`
+ * when it asked for `42` would be worse than one that failed.
+ *
+ * Several characters *are* fine where each is a keycap (`42`, `1/2`, `pi` with
+ * `useAlphabeticLayout` first). Use `typeAnswer` directly if you need to exercise the
+ * parser on a specific string.
+ */
+export async function enterAnswer(page: Page, value: string): Promise<void> {
+  const coarse = await page.evaluate(() => window.matchMedia('(pointer: coarse)').matches)
+  if (!coarse) {
+    await typeAnswer(page, value)
+    return
+  }
+  await focusAnswerField(page)
+  await expect(keyboardRows(page)).toBeVisible({ timeout: 10_000 })
+  for (const ch of value) {
+    await pressKeycap(page, ch)
+  }
 }
 
 /**
