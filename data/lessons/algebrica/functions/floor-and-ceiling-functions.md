@@ -36,7 +36,7 @@ On the integers the two functions are the identity, since $n \le n < n+1$ and $n
 
 The graph of $y = \lfloor x \rfloor$ is a staircase with steps of unit width and unit height. The floor is a piecewise function, constant with value $n$ on each interval $n, n+1).$ Its graph consists of countably many horizontal segments, each containing its left endpoint and missing its right endpoint.
 
-![
+![The floor function is constant on each interval $[n, n+1)$, where it takes the value $n$. The filled point marks the value attained at the left endpoint.](/diagrams/algebrica/floor-and-ceiling-functions-1.svg)
 
 The graph of $y = \lceil x \rceil$ has the same staircase shape, with the endpoint convention reversed. On $(n-1, n]$ the ceiling is constant with value $n,$ and each segment includes its right endpoint and excludes its left endpoint.
 
@@ -64,7 +64,7 @@ Every real number therefore has the decomposition $x=\lfloor x\rfloor+\{x\}$ int
 
 The fractional part is zero exactly at the integers and has period 1, since $\{x+1\}=\{x\}$ for every real $x.$ Its graph is a sawtooth obtained by subtracting the floor staircase from the identity function.
 
-![
+![The fractional part repeats the same tooth on every interval $[n, n+1)$. It vanishes at the integers and approaches 1 without reaching it.](/diagrams/algebrica/floor-and-ceiling-functions-3.svg)
 
 Deleting the digits after the decimal point defines truncation toward zero, which is distinct from both floor and ceiling on $\mathbb{R}.$ It equals the floor for $x \ge 0$ and the ceiling for $x < 0,$ so it can be written with the sign function as $\mathrm{sgn}(x)\lfloor|x|\rfloor.$ A real-to-integer conversion that discards the fractional part uses this operation.
 
