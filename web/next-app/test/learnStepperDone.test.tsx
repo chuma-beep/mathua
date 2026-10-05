@@ -275,3 +275,59 @@ describe('LearnStepper explanation after submission', () => {
     expect(screen.queryByText('Why')).toBeNull()
   }, 15000)
 })
+
+// The readiness banner is the second route by which decay could become teaching.
+// `buildCandidates` was fixed so a decayed concept leaves the shelf, but the banner
+// builds its own links from the readiness payload — and the server's distinction
+// between `missing` (never started) and `weak` (started, includes decayed) was being
+// discarded by concatenating the two and giving every entry the same `/learn` href.
+// So a concept the learner had mastered and not reviewed for a fortnight was re-taught
+// with the tutorial, via a link labelled "Review", every time they opened anything that
+// depended on it.
+describe('readiness banner and decay', () => {
+  const prereq = (id: string, status: string) => ({ id, label: `Concept ${id}`, status, mastery_pct: 1 })
+
+  it('routes a decayed prerequisite to /review, never to /learn', async () => {
+    vi.mocked(getLessonReadiness).mockResolvedValue({
+      concept_id: CID,
+      ready: false,
+      weak: [prereq('frac.add.word', 'DECAYING')],
+      missing: [],
+    })
+    render(<LearnStepper conceptId={CID} />)
+    await waitFor(() => expect(screen.getByRole('note', { name: /prerequisite/i })).toBeTruthy())
+
+    const hrefs = screen.getAllByRole('link').map(l => l.getAttribute('href') ?? '')
+    expect(hrefs.some(h => h.includes('concept=frac.add.word'))).toBe(false)
+    expect(hrefs).toContain('/review')
+  })
+
+  it('still routes a prerequisite that is genuinely being learned to /learn', async () => {
+    vi.mocked(getLessonReadiness).mockResolvedValue({
+      concept_id: CID,
+      ready: false,
+      weak: [],
+      missing: [prereq('frac.add.word', 'UNSEEN')],
+    })
+    render(<LearnStepper conceptId={CID} />)
+    await waitFor(() => expect(screen.getByRole('note', { name: /prerequisite/i })).toBeTruthy())
+
+    const hrefs = screen.getAllByRole('link').map(l => l.getAttribute('href') ?? '')
+    expect(hrefs.some(h => h.includes('concept=frac.add.word'))).toBe(true)
+  })
+
+  it('says "already learned" when every prerequisite only needs a check', async () => {
+    vi.mocked(getLessonReadiness).mockResolvedValue({
+      concept_id: CID,
+      ready: false,
+      weak: [prereq('frac.add.word', 'DECAYING')],
+      missing: [],
+    })
+    render(<LearnStepper conceptId={CID} />)
+    await waitFor(() => expect(screen.getByRole('note', { name: /prerequisite/i })).toBeTruthy())
+    // "Before you start" would be false here: the learner did start, and finished.
+    expect(screen.getByText(/Due a retrieval check/i)).toBeTruthy()
+    expect(screen.getByText(/already learned/i)).toBeTruthy()
+    expect(screen.queryByText(/Before you start/i)).toBeNull()
+  })
+})
