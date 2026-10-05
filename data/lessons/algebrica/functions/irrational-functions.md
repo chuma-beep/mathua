@@ -169,7 +169,7 @@ The function $f$ increases from 1 to $+\infty$ on $(-\infty, -2)$ and from 0 to 
 
 $$[0, 1) \cup (1, +\infty)$$
 
-![
+![The domain is $(-\infty, -2) \cup [1, +\infty)$. The function increases on each interval and approaches the horizontal asymptote $y = 1$ in both directions.](/diagrams/algebrica/irrational-functions-4.svg)
 
 ## Example 2
 

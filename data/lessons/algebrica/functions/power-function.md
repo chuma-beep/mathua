@@ -38,7 +38,7 @@ The exponent $a = 0$ is a separate case. The identity $x^0 = 1$ holds for every 
 
 Let $f(x) = x^n$ with $n$ an even positive integer. The domain is $\mathbb{R}$ and the range is $0, +\infty),$ since an even power of a real number is never negative.
 
-![
+![An even exponent gives a graph symmetric about the $y$-axis, with minimum at the origin.](/diagrams/algebrica/power-function-1.svg)
 
 + Domain: $\mathbb{R}$
 + Range: $0, +\infty)$
