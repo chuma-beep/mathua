@@ -247,3 +247,58 @@ gone, the remaining gap is far less costly than it looks today.
 4. **How long should a concept stay out of `/learn` after mastery?** ADR-037 makes it
    "until review says otherwise". Confirm that is the intent rather than an artefact of
    the fix.
+
+---
+
+## What the ladder actually costs (measured)
+
+The ladder is in `internal/mastery/evidence.go` and `Machine.Next` now reads evidence
+rather than the streak. Measured end to end through `Engine.submitAnswerWithTask`, on the
+two-concept fixture whose generator returns the *same* question text every attempt — the
+worst possible case for the variety term:
+
+```
+attempt 1: LEARNING     score 0.820  instances 1
+attempt 2: PRACTICING   score 0.870  instances 1
+attempt 3: MASTERED     score 0.887  instances 1
+attempt 4: MASTERED     score 0.591  instances 1   ← a miss, and the exit holds
+```
+
+**Three correct answers to master, from any starting `required_streak`.** The per-concept
+threshold no longer affects the cost at all: the score is already normalised against the
+concept's own difficulty and time threshold, so concepts differ in what counts as hard, not
+in how much evidence proves competence.
+
+That is far below the ~9 the brief anticipated, and it is a deliberate consequence of the
+design rather than a target that was missed:
+
+- `UNSEEN → LEARNING` takes **one** correct answer. Demanding ten first was the complaint.
+- `PRACTICING → MASTERED` needs a score over **three or more** attempts.
+
+The three knobs, if the owner wants it dearer, are all in one place: `MasteryThreshold`
+(0.6), `EnoughForMastery`'s attempt floor (3), and the `varietyBonus` cap (0.15). Raising the
+attempt floor to 6 would put the natural cost at roughly 6–9 answers.
+
+### Two things this change had to fix that were not in the brief
+
+**A gate on a derived signal made mastery unreachable.** The first version of
+`EnoughForMastery` also required `Instances >= 2` — distinct problem instances, the stand-in
+for "does this transfer?". Wiring it into the engine immediately produced a concept that
+could never be mastered, because a generator whose question text does not vary between
+attempts holds `Instances` at 1 forever. There is no such generator in production
+(`GenerateContext` errors rather than falling back), but the failure mode is the point: a
+gate on a signal you do not fully control can lock a state. Variety now *scores* and cannot
+veto.
+
+**The decay clock was gated on the rule being replaced.** `LastReviewed` was set only when
+`streak >= required_streak && avg time <= threshold` — a proxy for "a tier was just
+advanced" back when that was what advancement meant. Under the ladder a concept can reach
+MASTERED with a streak of 1, leaving `LastReviewed` nil, and `GetProgress` treats a nil
+`LastReviewed` as fully decayed. The engine tests showed the ladder passing **through
+DECAYING on its way up**: a concept simultaneously stored as MASTERED and read as DECAYING.
+The decay clock now starts on tier attainment, which is what it was always a proxy for.
+
+Also found while wiring this up: the transition logic existed **twice** —
+`SubmitAnswer` (study, review) and `submitAnswerWithTask` (quiz, diagnostic) each had their
+own copy. Both now read evidence, or a quiz answer would have graded differently from a
+study answer, which is the class of divergence ADR-037 exists to prevent.
