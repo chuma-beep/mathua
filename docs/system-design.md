@@ -237,7 +237,29 @@ Four stored states, one computed state:
 | **PRACTICING** → MASTERED | Mastery achieved | Same |
 | **MASTERED** → DECAYING | 14+ days idle | Computed at read time, never stored |
 
-The `streak` resets to 0 on any incorrect answer. Each concept has a `required_streak` (typically 3) and a `time_threshold` (typically 120s for generated, 60s for review).
+The `streak` resets to 0 on any incorrect answer, **and to 1 on every tier advance**
+(`engine.go:1124`). Each concept has a `required_streak` and a `time_threshold`
+(typically 120s for generated, 60s for review).
+
+Two corrections to this table, both of which hid a real cost for months:
+
+- **`required_streak` is not "typically 3".** It is **10 for 459 of the 657 concepts**, 3
+  for 171, and 5/7/15 for the remaining 27. The old figure was wrong for 70% of the corpus.
+- **The three tiers were meant to be gated on different evidence.** The state diagram
+  (`docs/diagrams/student-model.svg`) labels them "first correct", "streak reached" and
+  **"interval elapsed"** — the last being a spacing interval before `MASTERED`. The
+  implemented condition is the same for all three, so the spacing rung was lost.
+- **The reset on advance was not documented here.** Combined with the identical condition
+  above, it means `MASTERED` costs **3 × `required_streak` consecutive correct answers** —
+  30 for most of the corpus, all-or-nothing, since one miss zeroes the streak. Measured
+  cost, per concept: median 12 minutes of answer time, and a 4% chance of completing a
+  30-answer run in one sitting at 90% per-answer accuracy.
+
+That cost is not a design decision: it arrived with commit `725fad9`, *"fix mastery state
+machine — reset streak on level-up"*, whose message has no body. See
+`docs/mastery-semantics.md` for the measurements and for the evidence model this should
+be replaced by — which already exists at `web/next-app/lib/progression.ts` and is, today,
+only a label.
 
 ### SM-2 Spaced Repetition
 
