@@ -331,3 +331,101 @@ describe('readiness banner and decay', () => {
     expect(screen.queryByText(/Before you start/i)).toBeNull()
   })
 })
+
+// The dead end.
+//
+// `takeNext` returns null when the buffer is empty and the refill yields nothing. That used
+// to hit `if (!nq) return` at three sites: no card, no message, no way forward, with the
+// last verdict as the end of the page. It was not an edge case — `geo.basic.points_lines`
+// has exactly four distinct question texts, so a session hit it on the fourth answer, and
+// the measurement in `internal/generator/all/bank_test.go` found 378 of 657 concepts under a
+// 12-question variety reference.
+describe('LearnStepper question exhaustion', () => {
+  it('finishes the section with an explanation when no further question is available', async () => {
+    // An empty practice set from the second call onward: the buffer drains and every refill
+    // comes back with nothing, which is exactly what the server used to do once a concept's
+    // variants were all seen.
+    vi.mocked(getLessonPractice)
+      .mockResolvedValueOnce({ questions: [QS[0]], concept_id: CID })
+      .mockResolvedValue({ questions: [], concept_id: CID })
+
+    render(<LearnStepper conceptId={CID} />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
+    expect(await screen.findByText('2 + 3 = ?')).toBeTruthy()
+
+    // Answer incorrectly so the 2-in-a-row rule does not advance the section — the only way
+    // to reach the "keep going in this section" path, which is where the strand was.
+    await answerCurrent('nope')
+    await waitForTimeout(500)
+
+    // The learner must be told what happened and given somewhere to go, rather than being
+    // left looking at a verdict.
+    expect(await screen.findByText(/ran out of new questions/)).toBeTruthy()
+    // The completion card is what offers the onward journey.
+    expect(await screen.findByRole('button', { name: /Practice again/ })).toBeTruthy()
+  })
+
+  it('still answers when the bank keeps serving repeats', async () => {
+    // The server's fallback: exclusion empties the set, so it serves what it has. Repeats are
+    // a far better outcome than a strand, and the feed must keep working when they arrive.
+    vi.mocked(getLessonPractice).mockResolvedValue({ questions: [QS[0]], concept_id: CID })
+
+    render(<LearnStepper conceptId={CID} />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
+    expect(await screen.findByText('2 + 3 = ?')).toBeTruthy()
+
+    await answerCurrent('5')
+    await waitForTimeout(500)
+    // Either another question arrived or the section ended — but the learner is never left
+    // with no card and no message.
+    // `queryAllByText` because a repeat is exactly what is being asserted here, so the same
+    // question text legitimately appears more than once in the scrollback.
+    const stranded =
+      screen.queryByText(/ran out of new questions/) === null &&
+      screen.queryAllByText('2 + 3 = ?').length === 0 &&
+      screen.queryAllByText('4 + 1 = ?').length === 0 &&
+      screen.queryAllByText('1 + 6 = ?').length === 0
+    expect(stranded).toBe(false)
+  })
+})
+
+// The header's count and XP must describe the same span.
+//
+// The count used to reset on every knowledge-point advance while the XP summed every card
+// in the feed, so a learner three questions in with two correct saw "1/2 correct" next to
+// "+3 XP" — two scopes on one line, and the count was the one that read as wrong.
+describe('LearnStepper header tally', () => {
+  it('counts every answer in the concept, not just the current section', async () => {
+    vi.mocked(getLessonKPs).mockResolvedValue({
+      concept_id: CID,
+      kps: [
+        { label: 'KP one', subgoals: [], worked_example: '2 + 3 = 5' },
+        { label: 'KP two', subgoals: [], worked_example: '4 + 1 = 5' },
+      ],
+    })
+    render(<LearnStepper conceptId={CID} />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
+    await screen.findByText('2 + 3 = ?')
+
+    // Answered one at a time, waiting for each card: `answerField()` returns the *newest*
+    // field, and a submitted card keeps its own, so answering without waiting would type into
+    // the previous question.
+    await answerCurrent('5')
+    expect(await screen.findByText('4 + 1 = ?')).toBeTruthy()
+
+    // Two in a row advances to the second KP — the point at which the old tally reset. The
+    // third served question is `1 + 6 = ?`, whose answer is 7.
+    await answerCurrent('5')
+    expect(await screen.findByText('1 + 6 = ?')).toBeTruthy()
+
+    // 3 answered, 3 correct across the concept. Under the old per-section tally this read
+    // "0/1 correct" for the section the learner had just moved into.
+    await answerCurrent('7')
+    await waitFor(() => expect(screen.getAllByText(/3\/3 correct/).length).toBeGreaterThan(0))
+  })
+})
+
+// Local helper: the component waits 350ms before appending the next card.
+function waitForTimeout(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}

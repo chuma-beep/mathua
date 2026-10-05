@@ -12,6 +12,7 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
+	"sort"
 	"strconv"
 	"strings"
 	"sync/atomic"
@@ -1800,4 +1801,111 @@ func miniLessons(t *testing.T, byConcept map[string]string) *lessons.Loader {
 		t.Fatalf("mini lessons: %v", err)
 	}
 	return ll
+}
+
+// fixedBankGen produces a small, fixed set of question texts — the shape that ended a Learn
+// session dead.
+//
+// `geo.basic.points_lines` really does this: four definition-recall variants, nothing else.
+// Once a session had seen all four, the practice endpoint's exclusion filter emptied the
+// candidate set and it answered 200 with `questions: []`, which the Learn feed read as
+// success. No card, no message, no way forward.
+type fixedBankGen struct{ n int64 }
+
+func (g *fixedBankGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	bank := []struct{ q, a string }{
+		{"What is: an exact location with no size?", "point"},
+		{"What is: goes forever in two directions?", "line"},
+		{"What is: has one endpoint and goes forever?", "ray"},
+		{"What is: has two endpoints?", "line segment"},
+	}
+	i := int(atomic.AddInt64(&g.n, 1)+ctx.Seed) % len(bank)
+	if i < 0 {
+		i += len(bank)
+	}
+	return generator.Problem{Question: bank[i].q, Answer: bank[i].a}
+}
+
+func fixedBankServer(t *testing.T) (*Server, *http.ServeMux) {
+	t.Helper()
+	d, err := concepts.Build([]concepts.Concept{
+		{ID: "a", Label: "A", Domain: "d", GradingType: "numeric", Prerequisites: []string{},
+			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 60}},
+	})
+	if err != nil {
+		t.Fatalf("build dag: %v", err)
+	}
+	store, _ := storage.NewSQLiteStore(":memory:")
+	t.Cleanup(func() { store.Close() })
+	reg := generator.NewRegistry()
+	reg.Register("a", &fixedBankGen{})
+	s := New(engine.New(store, d, reg, nil, nil), store, auth.New(store))
+	mux := http.NewServeMux()
+	s.Register(mux)
+	return s, mux
+}
+
+// TestPracticeNeverReturnsEmptyOnceEveryVariantHasBeenSeen is the server half of the
+// dead-end fix.
+//
+// Asking for practice with every one of a concept's variants in `exclude` used to return
+// 200 with an empty array. Repeats are a much better answer than a stranded learner: the
+// alternative is not "no practice", it is "no next step, silently".
+func TestPracticeNeverReturnsEmptyOnceEveryVariantHasBeenSeen(t *testing.T) {
+	_, mux := fixedBankServer(t)
+
+	// Collect every distinct question the bank can produce.
+	all := map[string]bool{}
+	for i := 0; i < 12; i++ {
+		req := httptest.NewRequest("GET", fmt.Sprintf("/api/lessons/a/practice?count=3&seed=%d", i), nil)
+		rec := httptest.NewRecorder()
+		mux.ServeHTTP(rec, req)
+		if rec.Code != 200 {
+			t.Fatalf("practice %d: %d %s", i, rec.Code, rec.Body.String())
+		}
+		var set struct {
+			Questions []struct{ Question string } `json:"questions"`
+		}
+		if err := json.Unmarshal(rec.Body.Bytes(), &set); err != nil {
+			t.Fatalf("decode: %v", err)
+		}
+		for _, q := range set.Questions {
+			all[q.Question] = true
+		}
+	}
+	if len(all) < 2 {
+		t.Fatalf("test setup: bank produced %d distinct questions", len(all))
+	}
+
+	// Now exclude all of them at once. This is what a session does once it has seen the
+	// whole bank, and it used to come back empty.
+	exclude := make([]string, 0, len(all))
+	for q := range all {
+		exclude = append(exclude, q)
+	}
+	sort.Strings(exclude)
+	u := "/api/lessons/a/practice?count=3&exclude=" + url.QueryEscape(strings.Join(exclude, "\n"))
+	req := httptest.NewRequest("GET", u, nil)
+	rec := httptest.NewRecorder()
+	mux.ServeHTTP(rec, req)
+
+	if rec.Code != 200 {
+		t.Fatalf("with every variant excluded: %d %s", rec.Code, rec.Body.String())
+	}
+	var set struct {
+		Questions []struct{ Question, Answer string } `json:"questions"`
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &set); err != nil {
+		t.Fatalf("decode: %v", err)
+	}
+	if len(set.Questions) == 0 {
+		t.Fatal("practice returned no questions after every variant was excluded — the Learn " +
+			"feed treats an empty list as success and stops appending, stranding the learner")
+	}
+	// And they must still be answerable: a repeat with no anchor is a 409 waiting to happen.
+	for _, q := range set.Questions {
+		if q.Answer == "" {
+			t.Errorf("served question %q has no answer", q.Question)
+		}
+	}
 }
