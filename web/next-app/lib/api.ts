@@ -975,13 +975,56 @@ export interface LessonInfo {
 // fetched on selection. No client-side memoization: a stale body surviving a
 // backend restart is worse than an extra request. no-store also bypasses the
 // Next.js data cache in dev.
-export async function getLessonBody(title: string): Promise<string> {
+// One figure, table or other instructional block referenced by a lesson.
+//
+// `src` is the reference exactly as the lesson body writes it; resolution to a served
+// URL happens in KatexContent, which is the only place that knows the serving base.
+// `line` is the 1-based line in the body, so a renderer can interleave figures with the
+// prose rather than appending them.
+export interface LessonAsset {
+	id: string
+	kind: 'image' | 'table'
+	src?: string
+	alt?: string
+	caption?: string
+	line: number
+	section?: string
+	concept_ids?: string[]
+	source?: string
+}
+
+// A lesson plus its figure inventory. `/study` renders the body verbatim and needs
+// nothing from `assets`; the list exists so a figure can be addressed, counted and
+// repaired rather than being trapped inside the markdown.
+export interface LessonDocument {
+	title: string
+	body: string
+	source?: string
+	assets: LessonAsset[]
+}
+
+// Lesson bodies ship separately (the list payload is metadata-only) and are
+// fetched on selection. No client-side memoization: a stale body surviving a
+// backend restart is worse than an extra request. no-store also bypasses the
+// Next.js data cache in dev.
+export async function getLessonDocument(title: string): Promise<LessonDocument> {
 	const res = await authedFetch(`${API_BASE}/api/lessons/body?title=${encodeURIComponent(title)}`, {
 		cache: 'no-store',
 	})
 	if (!res.ok) throw new Error(`Lesson body fetch failed: ${res.status}`)
-	const data = (await res.json()) as { title: string; body: string }
-	return data.body
+	const data = (await res.json()) as Partial<LessonDocument>
+	// The server sends [] rather than null, but a proxy or an older build could omit the
+	// field, and every caller iterates it.
+	return {
+		title: data.title ?? title,
+		body: data.body ?? '',
+		source: data.source,
+		assets: data.assets ?? [],
+	}
+}
+
+export async function getLessonBody(title: string): Promise<string> {
+	return (await getLessonDocument(title)).body
 }
 
 export interface LessonsRes {
@@ -1011,6 +1054,10 @@ export interface KpInfo {
 	section?: string
 	subgoals: string[]
 	worked_example: string
+	// Figures belonging to this learning step, selected from the lesson by section (or by
+	// an authored asset_ids list on the shard). `/learn` shows these; `/study` shows the
+	// whole lesson. Optional so a response from a build predating the field still renders.
+	assets?: LessonAsset[]
 }
 
 export interface LessonKpsRes {
