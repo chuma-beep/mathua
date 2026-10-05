@@ -258,6 +258,39 @@ func EnoughForMastery(ev Evidence) bool {
 	return ev.Score >= MasteryThreshold && ev.Attempts >= MasteryEvidenceFloor
 }
 
+// EvidenceBand is a plain-language reading of the evidence, for showing a learner how they
+// are doing. It is presentational and carries no authority: nothing branches on it.
+//
+// It lives here rather than in a client because the thresholds would otherwise be a second
+// interpretation of the same number, free to drift from `MasteryThreshold` and
+// `MasteryEvidenceFloor` below — which is how `web/next-app/lib/progression.ts` came to keep
+// its own score and its own bands while looking like it was reporting mastery.
+//
+// Two deliberate properties:
+//
+//   - The words claim nothing about the future. An earlier client version offered "well
+//     retained" off this score, which has no spacing term at all: a retention claim drawn
+//     from evidence that knows nothing about retention.
+//   - The evidence floor gates the band as well as mastery. Without it a single correct
+//     answer scored 0.84 — a lone answer carries the most recency weight there is — and
+//     read as "strong", which is the same defect `MasteryEvidenceFloor` exists to prevent,
+//     arriving through the label instead of the state.
+func EvidenceBand(ev Evidence) string {
+	if ev.Attempts < MasteryEvidenceFloor {
+		return "early"
+	}
+	switch {
+	case ev.Score >= 0.85:
+		return "strong"
+	case ev.Score >= MasteryThreshold:
+		return "consistent"
+	case ev.Score >= 0.3:
+		return "building"
+	default:
+		return "starting"
+	}
+}
+
 // Rung names which transition a given piece of evidence authorises. It exists so the
 // decision reads as a ladder in one place and the three predicates cannot be applied out
 // of order by accident.

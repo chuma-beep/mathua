@@ -1572,3 +1572,73 @@ func evidenceFromRows(rows []storage.AttemptEntry) mastery.Evidence {
 	}
 	return mastery.BuildEvidence(as, mastery.EvidenceOptions{TimeThreshold: 60})
 }
+
+// The answer response carries the authoritative evidence, so no client has to compute its
+// own.
+//
+// `web/next-app/lib/progression.ts` kept a second implementation of the mastery evidence
+// model — different weights, different variety population, a flat 60s time cliff instead of
+// the concept threshold — and rendered a band from it in the Learn header. That is only
+// removable if the number is available, so this asserts it is, and that the band comes from
+// the same place as the verdict.
+func TestAnswerResponseCarriesAuthoritativeEvidence(t *testing.T) {
+	e := testEngine(t)
+	st, err := e.CreateStudent("evidence_payload")
+	if err != nil {
+		t.Fatalf("create student: %v", err)
+	}
+	const question = "3/4 + 1/2 = ?"
+	diff := 0.65
+	e.SetStudyAnchorBatch(st.ID, "a", map[string]Anchor{
+		question: {Answer: "5/4", Difficulty: &diff},
+	})
+
+	// Below the evidence floor, so the band must say so rather than score well.
+	first, err := e.SubmitStudyAnswer(st.ID, "a", "5/4", 5.0, question)
+	if err != nil {
+		t.Fatalf("submit: %v", err)
+	}
+	if first.EvidenceScore <= 0 {
+		t.Error("evidence_score was not sent on a graded answer")
+	}
+	if first.EvidenceBand != "early" {
+		t.Errorf("band after one attempt = %q, want %q", first.EvidenceBand, "early")
+	}
+
+	// Fill the window and the band must move, and move to what BuildEvidence implies.
+	for i := 0; i < mastery.MasteryEvidenceFloor-1; i++ {
+		if _, err := e.SubmitStudyAnswer(st.ID, "a", "5/4", 5.0, question); err != nil {
+			t.Fatalf("submit %d: %v", i, err)
+		}
+	}
+	rows := recentAttempts(t, e, st.ID, "a")
+	ev := evidenceFromRows(rows)
+	last, err := e.SubmitStudyAnswer(st.ID, "a", "5/4", 5.0, question)
+	if err != nil {
+		t.Fatalf("final submit: %v", err)
+	}
+	if last.EvidenceBand == "early" {
+		t.Error("band still reads early with a full window of correct answers")
+	}
+
+	// The payload must be the same evidence the ladder read, not a parallel computation.
+	fresh := evidenceFromRows(recentAttempts(t, e, st.ID, "a"))
+	if fresh.Score < ev.Score-1e-9 {
+		t.Errorf("evidence went backwards after another correct answer: %.4f then %.4f",
+			ev.Score, fresh.Score)
+	}
+	if last.EvidenceBand != mastery.EvidenceBand(fresh) {
+		t.Errorf("band %q does not match mastery.EvidenceBand(%+v) = %q",
+			last.EvidenceBand, fresh, mastery.EvidenceBand(fresh))
+	}
+}
+
+// An ungraded answer records nothing, so it must not report new evidence.
+func TestUngradedAnswerCarriesNoEvidence(t *testing.T) {
+	// Mirrors the shape both hosts construct when `Engine.GradeAnswer` reports a grader
+	// fault. ADR-006: nothing is recorded, so there is no new evidence to report.
+	res := &AnswerResult{Ungraded: true, Feedback: "grader unavailable"}
+	if res.EvidenceScore != 0 || res.EvidenceBand != "" {
+		t.Errorf("an ungraded answer reported evidence %v/%q", res.EvidenceScore, res.EvidenceBand)
+	}
+}

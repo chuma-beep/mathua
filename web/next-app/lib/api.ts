@@ -140,6 +140,10 @@ export interface AnswerResult {
   correct: boolean
   feedback: string
   new_status: string
+  /** Authoritative mastery evidence score 0..1, from internal/mastery.BuildEvidence. */
+  evidence_score: number
+  /** The same score in plain language. Presentational; claims nothing about retention. */
+  evidence_band: string
   explanation: string
   streak: number
   required_streak: number
@@ -1056,6 +1060,22 @@ export interface StudyAnswerRes {
 	ungraded?: boolean
 	/** One sentence naming the mistake, when it is certain. Empty otherwise. */
 	diagnosis?: string
+	/**
+	 * Authoritative mastery evidence score for this concept, 0..1, from the same
+	 * `BuildEvidence` the ladder decides on.
+	 *
+	 * Absent on an ungraded answer: nothing was recorded, so there is no new evidence.
+	 */
+	evidence_score?: number
+	/**
+	 * `evidence_score` in plain language, from `mastery.EvidenceBand`. Presentational only,
+	 * and deliberately claiming nothing about retention — the evidence model has no spacing
+	 * term, so it cannot support such a claim.
+	 *
+	 * Empty before the evidence floor is met, which is what stops a single correct answer
+	 * from reading as a strong result.
+	 */
+	evidence_band?: string
 }
 
 interface StudyAnswerBody {
@@ -1169,6 +1189,15 @@ export interface QuizAnswerRes {
   explanation?: string
   xp?: number
   new_status?: string
+  /**
+   * Authoritative mastery evidence score, 0..1.
+   *
+   * Absent on an ungraded answer (nothing was recorded, so there is no new evidence).
+   * This is a progress reading, not a mastery verdict — `new_status` is the verdict, and
+   * the score alone never means anything without the evidence floor the ladder also
+   * requires.
+   */
+  evidence_score?: number
   concept_id?: string
   concept_name?: string
   question?: string

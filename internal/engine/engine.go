@@ -129,6 +129,25 @@ type AnswerResult struct {
 	// Diagnosis names the mistake in one sentence, when it can be determined
 	// with certainty. Empty most of the time, and never before grading.
 	Diagnosis string `json:"diagnosis,omitempty"`
+	// EvidenceScore is the authoritative mastery evidence score for this concept after
+	// this answer, 0..1, from internal/mastery.BuildEvidence.
+	//
+	// It is sent so a client can render the learner's progress from the same number the
+	// ladder decides on. `web/next-app/lib/progression.ts` used to compute its own score
+	// from its own attempt history, which made a second definition of "how well are they
+	// doing" that could not be reconciled with this one — it weighted difficulty per
+	// attempt against this file's mean-of-correct-attempts, counted a wider population for
+	// the variety term, and applied a flat 60s time cliff instead of the concept's own
+	// threshold. Removing that copy is only possible because the number is here.
+	//
+	// Zero when the answer was ungraded, because nothing was recorded and there is no new
+	// evidence. It is a *progress* reading, not a mastery verdict: the status is
+	// `NewStatus`, and this score alone never means anything without the evidence floor
+	// (mastery.MasteryEvidenceFloor) that the ladder also requires.
+	EvidenceScore float64 `json:"evidence_score"`
+	// EvidenceBand is EvidenceScore in plain language, from mastery.EvidenceBand.
+	// Presentational only, and the words deliberately claim nothing about retention.
+	EvidenceBand string `json:"evidence_band"`
 }
 
 type Engine struct {
@@ -1095,7 +1114,7 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 		}
 	}
 
-	newStatus, err := e.applyGradedAttempt(progress, gradedAttempt{
+	newStatus, evidence, err := e.applyGradedAttempt(progress, gradedAttempt{
 		studentID:      studentID,
 		conceptID:      sessionFields.conceptID,
 		requiredStreak: sessionFields.requiredStreak,
@@ -1212,6 +1231,8 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 		Feedback:       gr.Feedback,
 		Diagnosis:      gr.Diagnosis,
 		NewStatus:      newStatus,
+		EvidenceScore:  evidence.Score,
+		EvidenceBand:   mastery.EvidenceBand(evidence),
 		Explanation:    explanation,
 		Streak:         progress.Streak,
 		RequiredStreak: sessionFields.requiredStreak,
@@ -1345,7 +1366,7 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 			SM2EFactor: 2.5,
 		}
 	}
-	newStatus, err := e.applyGradedAttempt(progress, gradedAttempt{
+	newStatus, evidence, err := e.applyGradedAttempt(progress, gradedAttempt{
 		studentID:      studentID,
 		conceptID:      conceptID,
 		requiredStreak: requiredStreak,
@@ -1426,6 +1447,8 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 		Feedback:       gr.Feedback,
 		Diagnosis:      gr.Diagnosis,
 		NewStatus:      newStatus,
+		EvidenceScore:  evidence.Score,
+		EvidenceBand:   mastery.EvidenceBand(evidence),
 		Explanation:    explanation,
 		Streak:         progress.Streak,
 		RequiredStreak: requiredStreak,
@@ -2400,7 +2423,11 @@ type gradedAttempt struct {
 // transition, the streak reset, SM-2 and the per-topic speed, the mastery timestamp, and
 // the decay clock. Recording the attempt row is left to the caller because the two hosts
 // classify it differently.
-func (e *Engine) applyGradedAttempt(progress *storage.ConceptProgress, o gradedAttempt) (mastery.Status, error) {
+// It returns the status it settled on and the evidence it decided from, because both are
+// answers a caller legitimately needs: the status is reported to the client as
+// `new_status`, and the evidence is what lets a client render progress from the same
+// number rather than keeping a second copy of the formula.
+func (e *Engine) applyGradedAttempt(progress *storage.ConceptProgress, o gradedAttempt) (mastery.Status, mastery.Evidence, error) {
 	progress.Attempts++
 	progress.LastAttempted = ptrTime(nowUTC())
 	// AvgResponseTime reflects every attempt, not just correct ones; excluding
@@ -2525,8 +2552,8 @@ func (e *Engine) applyGradedAttempt(progress *storage.ConceptProgress, o gradedA
 	}
 
 	if err := e.repo.UpsertProgress(progress); err != nil {
-		return mastery.Status(progress.Status), err
+		return mastery.Status(progress.Status), evidence, err
 	}
 	e.PropagateWeakness(o.studentID)
-	return newStatus, nil
+	return newStatus, evidence, nil
 }
