@@ -43,6 +43,36 @@ import (
 	"github.com/chuma-beep/mathua/internal/storage"
 )
 
+// dataPath resolves a file inside the data directory.
+//
+// Every data path used to be a bare relative string, which made the server depend on its
+// working directory: started anywhere but the repo root, `data/courses.json` was missing,
+// the planner came back nil, and — because that error was discarded — nothing said so.
+// Resolution order is $MATHUA_DATA_DIR, then the executable's own directory, then the
+// working directory, so an installed binary works without configuration and the repo-root
+// case keeps working unchanged.
+func dataPath(name string) string {
+	dirs := []string{}
+	if d := os.Getenv("MATHUA_DATA_DIR"); d != "" {
+		dirs = append(dirs, d)
+	}
+	if exe, err := os.Executable(); err == nil {
+		if exe, err = filepath.EvalSymlinks(exe); err == nil {
+			dirs = append(dirs, filepath.Dir(exe))
+		}
+	}
+	dirs = append(dirs, "data")
+	for _, d := range dirs {
+		p := filepath.Join(d, name)
+		if st, err := os.Stat(p); err == nil && !st.IsDir() {
+			return p
+		}
+	}
+	// Nothing found: return the historical cwd-relative path so the caller's error message
+	// names the location it looked in.
+	return filepath.Join("data", name)
+}
+
 func main() {
 	serve := flag.Bool("serve", false, "run web server")
 	port := flag.Int("port", 8080, "web server port")
@@ -51,7 +81,7 @@ func main() {
 	repairDryRun := flag.Bool("repair-grading-dry-run", false, "report grading repairs without writing, then exit")
 	flag.Parse()
 
-	dag, err := concepts.LoadDir("data/concepts")
+	dag, err := concepts.LoadDir(dataPath("concepts"))
 	if err != nil {
 		log.Fatalf("load concepts: %v", err)
 	}
@@ -139,10 +169,21 @@ func main() {
 		}
 	}
 
-	planner, _ := planning.Load("data/courses.json", dag)
+	// The learning planner is optional in the sense that the rest of the server runs without
+	// it — but it was loaded with `_`, so a missing or unreadable catalog left `planner` nil
+	// with nothing logged, and every /api/destinations/{id}/estimate then answered 404
+	// "planner unavailable". From the learner's side that was a planner page with an empty
+	// dropdown and no message. Fail loudly instead.
+	planner, err := planning.Load(dataPath("courses.json"), dag)
+	if err != nil {
+		log.Printf("WARNING: course catalog unavailable (%v) — the learning planner and every "+
+			"destination estimate will be unavailable. Set MATHUA_DATA_DIR if the data "+
+			"directory is not next to the binary or the working directory", err)
+	}
 	if planner != nil {
-		if ds, err := planning.LoadDestinations("data/destinations.json"); err != nil {
-			log.Printf("warning: destinations unavailable: %v", err)
+		if ds, err := planning.LoadDestinations(dataPath("destinations.json")); err != nil {
+			log.Printf("WARNING: destinations unavailable (%v) — destination estimates will "+
+				"return 404 until this is fixed", err)
 		} else {
 			planner.SetDestinations(ds)
 		}

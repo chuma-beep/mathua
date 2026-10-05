@@ -81,7 +81,12 @@ export default function DailyGoalControl({ current, onSaved, bare }: { current: 
           Set
         </button>
       </form>
-      <p className="mt-2 font-mono text-[11px] text-mathua-muted">≈ {Math.max(1, Math.round(current / 2))} questions/day at ~2 XP each. Changing your target never moves quiz eligibility or mastery.</p>
+      {/* The "≈ N questions/day at ~2 XP each" this replaced was a client guess: XP is
+          effort-derived server-side from each concept's own time threshold (1-5 XP), so
+          there is no single per-question figure to divide by, and the guess was ~2x too
+          optimistic — 73% of the corpus prices at 1 XP. Rather than reintroduce a second
+          copy of the award formula here, say what is actually true. */}
+      <p className="mt-2 font-mono text-[11px] text-mathua-muted">XP is earned per question, sized by how much work that question takes (1-5 XP), so the number of questions a day varies by topic. Changing your target never moves quiz eligibility or mastery.</p>
       {msg && <p className="mt-1 font-mono text-[11px] text-mathua-secondary">{msg}</p>}
     </div>
   )

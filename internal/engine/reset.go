@@ -64,6 +64,7 @@ func (e *Engine) ResetAccountProgress(studentID, phrase string) error {
 	for k := range e.studyMisses {
 		if strings.HasPrefix(k, prefix) {
 			delete(e.studyMisses, k)
+			delete(e.studyRush, k)
 		}
 	}
 	for k := range e.studyAnchor {
@@ -105,6 +106,7 @@ func (e *Engine) DeleteAccount(studentID, phrase string) error {
 	for k := range e.studyMisses {
 		if strings.HasPrefix(k, prefix) {
 			delete(e.studyMisses, k)
+			delete(e.studyRush, k)
 		}
 	}
 	for k := range e.studyAnchor {

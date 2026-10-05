@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { getDestinations, getEstimate, getScores, savePlan, getCurrentPlan, type DestinationStatus, type EstimateRes, type StudyPlan } from '../lib/api'
 import { getUserInfo, getGuestId } from '../lib/auth'
-import { clampGoal, daysFor, monthLabel } from '../lib/plan'
+import { clampGoal, daysFor, monthLabel, DEFAULT_DAILY_GOAL, GOAL_PRESETS } from '../lib/plan'
 
 // Learning planner: destination + (daily effort XOR deadline) → estimate.
 // Dates render as months (estimates, never promises); quiz eligibility and
@@ -27,9 +27,22 @@ export default function PlanEditor({ compact = false }: { compact?: boolean }) {
   useEffect(() => {
     const info = getUserInfo()
     const sid = info?.student_id || getGuestId() || ''
-    Promise.all([getDestinations().catch(() => [] as DestinationStatus[]), (sid ? getScores(sid) : Promise.resolve(null)).catch(() => null), getCurrentPlan().catch(() => ({ plan: null as StudyPlan | null }))]).then(([d, s, p]) => {
-      setDests(d)
-      if (d.length > 0) setDestId(d[0].id)
+    // Destinations failing is a real, reportable state: it used to be swallowed into an
+    // empty array, which rendered a <select> with no options and no message, so the page
+    // looked broken rather than unavailable. The score and plan fetches are advisory — a
+    // failure there only means we fall back to a default — so they stay non-fatal but are
+    // no longer silently indistinguishable from "you have no plan".
+    Promise.all([
+      getDestinations().then(d => ({ dests: d, err: null as string | null })).catch(e => ({
+        dests: [] as DestinationStatus[],
+        err: e instanceof Error ? e.message : 'Could not load destinations',
+      })),
+      (sid ? getScores(sid) : Promise.resolve(null)).catch(() => null),
+      getCurrentPlan().catch(() => ({ plan: null as StudyPlan | null })),
+    ]).then(([d, s, p]) => {
+      setDests(d.dests)
+      if (d.dests.length > 0) setDestId(d.dests[0].id)
+      if (d.err) setError(d.err)
       const guestGoal = (() => {
         try {
           const v = Number(window.localStorage.getItem('mathua_daily_goal'))
@@ -38,7 +51,7 @@ export default function PlanEditor({ compact = false }: { compact?: boolean }) {
           return null
         }
       })()
-      const g = guestGoal ?? s?.daily_xp_goal ?? 30
+      const g = guestGoal ?? s?.daily_xp_goal ?? DEFAULT_DAILY_GOAL
       setDailyGoal(g)
       setWhatIf(g)
       if (p.plan) setSaved(p.plan)
@@ -58,6 +71,7 @@ export default function PlanEditor({ compact = false }: { compact?: boolean }) {
       })
       setEst(r)
     } catch (e) {
+      setEst(null)
       setError(e instanceof Error ? e.message : 'Estimate failed')
     }
   }, [mode])
@@ -90,9 +104,17 @@ export default function PlanEditor({ compact = false }: { compact?: boolean }) {
   return (
     <div>
       <label htmlFor="plan-dest" className="mt-5 block font-mono text-[11px] uppercase tracking-wider text-mathua-muted">What do you want to learn?</label>
-      <select id="plan-dest" value={destId} onChange={ev => setDestId(ev.target.value)} className="mt-1 w-full bg-mathua-surface border border-mathua-border px-3 py-2.5 font-mono text-sm text-mathua-primary min-h-[44px]">
-        {dests.map(d => <option key={d.id} value={d.id}>{d.name} ({Math.round(d.pct * 100)}% done)</option>)}
-      </select>
+      {dests.length === 0 ? (
+        <p role="status" className="mt-1 border border-mathua-border bg-mathua-surface px-3 py-2.5 font-mono text-xs text-mathua-secondary">
+          No learning paths are available right now. This usually means the server could not
+          load its course catalog — check the server log for &quot;courses unavailable&quot; or
+          &quot;destinations unavailable&quot;.
+        </p>
+      ) : (
+        <select id="plan-dest" value={destId} onChange={ev => setDestId(ev.target.value)} className="mt-1 w-full bg-mathua-surface border border-mathua-border px-3 py-2.5 font-mono text-sm text-mathua-primary min-h-[44px]">
+          {dests.map(d => <option key={d.id} value={d.id}>{d.name} ({Math.round(d.pct * 100)}% done)</option>)}
+        </select>
+      )}
 
       <div className="mt-4 flex gap-2" role="group" aria-label="Planning direction">
         {(['effort', 'deadline'] as const).map(m => (
@@ -106,7 +128,7 @@ export default function PlanEditor({ compact = false }: { compact?: boolean }) {
         <div className="mt-3">
           <label htmlFor="plan-goal" className="font-mono text-[11px] uppercase tracking-wider text-mathua-muted">Daily XP target</label>
           <div className="mt-1 flex gap-2">
-            {[5, 10, 20, 50].map(p => (
+            {GOAL_PRESETS.map(p => (
               <button key={p} type="button" onClick={() => setDailyGoal(p)} aria-pressed={dailyGoal === p} className={`flex-1 border px-2 py-2 font-mono text-xs min-h-[40px] ${dailyGoal === p ? 'border-mathua-blue text-mathua-blue' : 'border-mathua-border text-mathua-secondary'}`}>{p}</button>
             ))}
             <input id="plan-goal" value={dailyGoal} onChange={ev => setDailyGoal(clampGoal(Number(ev.target.value) || 0))} inputMode="numeric" className="w-20 bg-mathua-surface border border-mathua-border px-2 py-2 font-mono text-xs text-mathua-primary text-center" aria-label="Custom daily XP target" />
@@ -180,13 +202,26 @@ export default function PlanEditor({ compact = false }: { compact?: boolean }) {
               <input id="plan-whatif" type="range" min={2} max={60} step={1} value={whatIf} onChange={ev => setWhatIf(Number(ev.target.value))} className="mt-1 w-full" />
             </div>
           )}
-          <div className="mt-4">
-            <button type="button" onClick={handleSave} disabled={saving} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-6 py-2.5 font-mono text-xs min-h-[44px] disabled:opacity-50">
-              {saving ? 'Saving…' : saved ? 'Update my plan' : 'Plan my learning'}
-            </button>
-          </div>
-          <p className="mt-3 font-mono text-[11px] text-mathua-muted">Illustrative estimate from Mathua&apos;s measured curriculum workload — actual completion depends on pace, reviews, and checks. It never changes quiz eligibility or mastery rules.</p>
         </div>
+      )}
+
+      {/* The save button used to live inside the `{e && ...}` block above, so a failed or
+          missing estimate removed the only way to save a plan from the page. Saving records
+          a destination and a pace; it does not depend on the workload estimate rendering, and
+          it must not be unreachable because a projection failed. */}
+      <div className={e ? 'mt-4' : 'mt-5'}>
+        <button type="button" onClick={handleSave} disabled={saving || !destId} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-6 py-2.5 font-mono text-xs min-h-[44px] disabled:opacity-50">
+          {saving ? 'Saving…' : saved ? 'Update my plan' : 'Plan my learning'}
+        </button>
+      </div>
+
+      {e ? (
+        <p className="mt-3 font-mono text-[11px] text-mathua-muted">Illustrative estimate from Mathua&apos;s measured curriculum workload — actual completion depends on pace, reviews, and checks. It never changes quiz eligibility or mastery rules.</p>
+      ) : (
+        <p className="mt-3 font-mono text-[11px] text-mathua-muted">
+          Your plan is saved as a destination and a daily pace. The workload estimate is not
+          available right now — your answers still count toward it.
+        </p>
       )}
     </div>
   )

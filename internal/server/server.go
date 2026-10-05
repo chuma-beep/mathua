@@ -28,6 +28,7 @@ import (
 	"github.com/chuma-beep/mathua/internal/quiz"
 	"github.com/chuma-beep/mathua/internal/scoring"
 	"github.com/chuma-beep/mathua/internal/storage"
+	"github.com/chuma-beep/mathua/internal/xp"
 )
 
 // MinAnswerSeconds is the minimum time in seconds a human should realistically
@@ -1572,8 +1573,8 @@ func (s *Server) handleSetDailyXPGoal(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "invalid request", 400)
 		return
 	}
-	if req.Goal < 1 || req.Goal > 10000 {
-		writeError(w, "goal must be between 1 and 10000", 400)
+	if req.Goal < xp.MinDailyGoal || req.Goal > xp.MaxDailyGoal {
+		writeError(w, fmt.Sprintf("goal must be between %d and %d", xp.MinDailyGoal, xp.MaxDailyGoal), 400)
 		return
 	}
 	if err := s.repo.SetDailyXPGoal(studentID, req.Goal); err != nil {
@@ -2013,7 +2014,11 @@ func (s *Server) handleDestinationEstimate(w http.ResponseWriter, r *http.Reques
 		if st, err := s.repo.GetStudent(studentID); err == nil && st != nil && st.DailyXPGoal > 0 {
 			dailyGoal = st.DailyXPGoal
 		} else {
-			dailyGoal = 30
+			// Must match xp.DefaultDailyGoal, engine/plan.go's fallback and the client's
+			// lib/plan.ts DEFAULT_DAILY_GOAL. This one said 30 while its sibling route
+			// handlePlanCurrent said 10, so the same learner got a 3x different pace from
+			// two endpoints.
+			dailyGoal = xp.DefaultDailyGoal
 		}
 	}
 	deadlineDays := -1
@@ -2088,7 +2093,7 @@ func (s *Server) handlePlanCurrent(w http.ResponseWriter, r *http.Request) {
 	if dest == "" && snapOK {
 		dest = snap.Destination
 	}
-	goal := 10
+	goal := xp.DefaultDailyGoal
 	if st, err := s.repo.GetStudent(studentID); err == nil && st != nil && st.DailyXPGoal > 0 {
 		goal = st.DailyXPGoal
 	}
