@@ -9,6 +9,7 @@ import { getUserInfo } from '../lib/auth'
 import { selectShelfHead, upcomingLocked, hrefConceptId, type Shelf, type LockedSuccessor } from '../lib/nextUp'
 import { REQUIRED_IN_A_ROW, masteryEstimate, type Attempt } from '../lib/progression'
 import { formatForGradingType } from '../lib/answerFormat'
+import { countsAsMastered } from '../lib/progress'
 import { MathAnswerInput } from './math/MathInput'
 import { concepts } from '../lib/conceptData'
 
@@ -360,6 +361,22 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
   }
 
   const prereqs = [...(readiness?.missing ?? []), ...(readiness?.weak ?? [])]
+  // A prerequisite the learner has already demonstrated is a *retrieval* question, not a
+  // teaching one, and the two must not be collapsed.
+  //
+  // The server already draws the distinction — `ready` buckets a prerequisite into
+  // `missing` only when UNSEEN and into `weak` otherwise, so a decayed one arrives in
+  // `weak` (`server.go` handleReadiness) — and then the client concatenated the buckets
+  // identically and gave every entry the same `/learn` link. That turned "you have
+  // mastered this and it is due a check" into "here is the tutorial again", which is the
+  // purgatory arriving through the back door after `buildCandidates` was fixed.
+  //
+  // So the split is kept and each half gets the destination that matches it: still being
+  // learned goes to `/learn`, already demonstrated goes to `/review`, which is
+  // problems-first and fetches no lesson.
+  const toLearn = prereqs.filter(p => !countsAsMastered({ status: p.status }))
+  const toReview = prereqs.filter(p => countsAsMastered({ status: p.status }))
+  const onlyReview = toLearn.length === 0 && toReview.length > 0
   const showBanner = readiness && !readiness.ready && !bannerDismissed && prereqs.length > 0
   const est = masteryEstimate(history)
   const totalAnswered = history.length
@@ -380,12 +397,23 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
         <div className="mb-4 border border-mathua-blue bg-mathua-surface p-4" role="note" aria-label="Prerequisite suggestion">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="font-mono text-[11px] uppercase tracking-wider text-mathua-blue">Before you start ({prereqs.length})</p>
-              <p className="mt-1 font-mono text-xs text-mathua-secondary">This builds on {prereqs.slice(0, 3).map(p => p.label).join(', ')}. A quick review helps — or continue anyway.</p>
+              <p className="font-mono text-[11px] uppercase tracking-wider text-mathua-blue">
+                {onlyReview ? 'Due a retrieval check' : `Before you start (${prereqs.length})`}
+              </p>
+              <p className="mt-1 font-mono text-xs text-mathua-secondary">
+                {onlyReview
+                  ? `You have already learned ${toReview.slice(0, 3).map(p => p.label).join(', ')} — a short check is due, or continue anyway.`
+                  : `This builds on ${toLearn.slice(0, 3).map(p => p.label).join(', ')}. A quick review helps — or continue anyway.`}
+              </p>
               <div className="mt-2 flex flex-wrap gap-2">
-                {prereqs.slice(0, 3).map(p => (
+                {toLearn.slice(0, 3).map(p => (
                   <Link key={p.id} href={`/learn?concept=${encodeURIComponent(p.id)}&return=${encodeURIComponent(conceptId)}`} className="border border-mathua-border px-2.5 py-1.5 font-mono text-[11px] text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue">
                     Review: {p.label}
+                  </Link>
+                ))}
+                {toReview.slice(0, 3).map(p => (
+                  <Link key={p.id} href="/review" className="border border-mathua-border px-2.5 py-1.5 font-mono text-[11px] text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue">
+                    Check: {p.label}
                   </Link>
                 ))}
               </div>
@@ -440,8 +468,13 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
               <div key={e.key} className="border border-mathua-red-faint bg-mathua-surface p-5">
                 <p className="font-mono text-xs text-red-400">Stepping down a level — easier question below.</p>
                 <div className="mt-3 flex flex-wrap gap-2">
-                  {prereqs.slice(0, 2).map(p => (
+                  {/* Same split as the readiness banner: a decayed prerequisite is owed
+                      a retrieval check, not another tutorial. */}
+                  {toLearn.slice(0, 2).map(p => (
                     <Link key={p.id} href={`/learn?concept=${encodeURIComponent(p.id)}&return=${encodeURIComponent(conceptId)}`} className="border border-mathua-border px-4 py-2 font-mono text-[11px] text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue inline-flex items-center">Review {p.label}</Link>
+                  ))}
+                  {toReview.slice(0, 2).map(p => (
+                    <Link key={p.id} href="/review" className="border border-mathua-border px-4 py-2 font-mono text-[11px] text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue inline-flex items-center">Check {p.label}</Link>
                   ))}
                   <Link href="/profile" className="border border-mathua-border px-4 py-2 font-mono text-[11px] text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue inline-flex items-center">Other task →</Link>
                 </div>

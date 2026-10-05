@@ -1004,8 +1004,25 @@ function InfoPanelBody({ concept, color, prereqConcepts, unlockedBy, isMobile }:
         >
           Study →
         </a>
+        {/* The scheduler's next task, not this concept.
+         *
+         * It used to be `/learn?concept=<id>` — an ungated route into the teaching loop
+         * for whichever node the pointer happened to be over. That is arbitrary navigation
+         * overriding the distinction between active learning and review: `/learn` opens
+         * with the concept's worked example unconditionally, so a concept already
+         * demonstrated got re-taught because someone clicked a sphere.
+         *
+         * This is reachable by real learners, not only hypothetical ones. Logged-in
+         * visits to `/` bounce to /profile, but a *guest* is not logged in and does have
+         * server-side progress (`ensureGuestId`), so the hero renders for exactly the
+         * audience that can already have mastered something.
+         *
+         * "Study →" above stays concept-specific: reference reading is always allowed
+         * (ADR-021). And the page's primary CTA already did this — `ensureGuestId()` then
+         * a bare `/learn` — so this makes the node link consistent with it rather than
+         * inventing a new rule. */}
         <a
-          href={`/learn?concept=${encodeURIComponent(concept.id)}`}
+          href="/learn"
           style={{ color: 'var(--accent-teal)', fontSize: '12px', fontFamily: monoFont, textDecoration: 'none' }}
         >
           Practice →
