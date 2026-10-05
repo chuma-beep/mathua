@@ -282,23 +282,70 @@ learner profiles (perfect, slowest, one-miss-in-eight, 80% correct, slow-but-rig
 starts-rough) against all eight real `avg_time_seconds` values in the corpus, and every one
 of them masters in exactly 6. Median, p25, p75, min and max are all 6.
 
-### What the measurement found that was not asked for: the score does not bind
+### Does the score actually bind? Yes — and the first measurement said otherwise
 
-Because the floor and the evidence window are both 6, the floor is reached before the score
-has anything to say. A sweep from 40% to 100% accuracy (`TestMeasureAccuracyBandThatStillMasters`)
-reports **every level masterable, none blocked** — `MasteryThreshold` at 0.6 is currently
-decorative, and the evidence floor is the entire gate.
+**The first version of this measurement was wrong, and its error is worth more than its
+result.** It swept accuracy from 40% to 100% and reported every level masterable, concluding
+that `MasteryThreshold` was decorative. The profile was `i%20 >= 12` — twelve wrong, then
+eight right — and a six-attempt window kept landing entirely inside the clean run. The
+finding was an artefact of the probe, not a property of the model. Learners do not answer in
+blocks of twenty, and a periodic test pattern will always manufacture a conclusion about
+whatever it is probing if the window is short enough to fit inside one period.
 
-That is a real calibration question and it is deliberately **not** fixed here. Raising
-`MasteryThreshold` is a different decision from setting the floor to 6, and inventing a value
-for it would repeat the error of picking "9 answers" as a target and then tuning to it. The
-three knobs are in one place for whoever makes that call: `MasteryThreshold` (0.6),
-`MasteryEvidenceFloor` (6), and the `varietyBonus` cap (0.15).
+With accuracy spread evenly (`correctAt(i, n, k)`, exactly `k` of every `n` correct, evenly
+placed so every window sees the nominal rate), the threshold binds cleanly:
 
-The properties the measurement *does* assert, because they are not calibration choices:
-nothing is permanently unmasterable, a concept whose generator never varies its question
-text still masters, mastery is reachable after an arbitrarily long run that includes misses,
-and the per-concept `required_streak` cannot change the outcome.
+| accuracy | outcome |
+|---|---|
+| 100%, 80%, 60% | MASTERED in exactly 6 answers |
+| 50%, 40%, 20%, 0% | never masters, at any length |
+
+So `MasteryThreshold` stays at 0.6. It was right, and the measurement was wrong — which is
+the opposite of the usual situation, and the reason the sweep is now
+`TestMeasureAccuracyBandThatStillMasters` with a pattern whose property is even distribution
+rather than an accident.
+
+A few profiles for detail, across all eight real corpus `avg_time_seconds` values:
+
+| profile | min | p25 | median | p75 | max |
+|---|---|---|---|---|---|
+| consistently correct | 6 | 6 | 6 | 6 | 6 |
+| approximately 80% correct | 6 | 6 | 6 | 6 | 6 |
+| approximately 60% correct | 6 | 6 | 6 | 6 | 6 |
+| slow but accurate | 6 | 6 | 6 | 6 | 6 |
+| correct on the hardest questions | 6 | 6 | 6 | 6 | 6 |
+| correct on the easiest questions | 6 | 6 | 6 | 6 | 6 |
+| starts rough, then steady | 8 | 8 | 8 | 8 | 8 |
+| alternating correct/incorrect | never | | | | |
+| approximately 40% correct | never | | | | |
+| fast but inaccurate | never | | | | |
+
+Note what does *not* appear: difficulty and speed are not in the cost. A learner who is right
+every time masters in 6 answers whether the questions were the easiest or the hardest in the
+corpus, and a slow-but-accurate learner masters in 6 exactly like a fast one. The difficulty
+and time terms change the *score*, not the number of answers needed to clear a bar that these
+profiles clear comfortably. They discriminate at the margin, which is where they matter — see
+variety below.
+
+### Variety is a weight, not a veto — and the difference is measurable
+
+ADR-038 recorded that variety "scores but cannot veto", which was imprecise in a way worth
+pinning down. The 0.15 bonus is large enough to flip the decision at the margin:
+
+| accuracy | distinct instances | identical instances |
+|---|---|---|
+| 100%, 80% | masters | masters |
+| 60% | masters | **never** |
+| 40% | never | never |
+
+So variety genuinely changes the outcome for a marginal learner, and that is correct: three
+right answers out of five spread across three different problems is evidence of transfer, and
+three right answers out of five on the *same* problem three times is evidence about one
+problem. What must not happen is the failure the old `Instances >= 2` hard gate caused —
+competence becoming *unreachable*. A learner who is right 80% of the time masters even on a
+generator whose question text never varies. That is the asserted property
+(`TestVarietyRaisesTheBarWithoutBlockingMastery`), rather than the looser claim that variety
+"doesn't matter".
 
 ### Two things this change had to fix that were not in the brief
 
@@ -308,8 +355,9 @@ for "does this transfer?". Wiring it into the engine immediately produced a conc
 could never be mastered, because a generator whose question text does not vary between
 attempts holds `Instances` at 1 forever. There is no such generator in production
 (`GenerateContext` errors rather than falling back), but the failure mode is the point: a
-gate on a signal you do not fully control can lock a state. Variety now *scores* and cannot
-veto.
+gate on a signal you do not fully control can lock a state. Variety now *scores* — and it is
+worth being precise that "scores" still lets it change a marginal outcome, as measured above.
+What it cannot do is make mastery unreachable.
 
 **The decay clock was gated on the rule being replaced.** `LastReviewed` was set only when
 `streak >= required_streak && avg time <= threshold` — a proxy for "a tier was just
@@ -323,3 +371,75 @@ Also found while wiring this up: the transition logic existed **twice** —
 `SubmitAnswer` (study, review) and `submitAnswerWithTask` (quiz, diagnostic) each had their
 own copy. Both now read evidence, or a quiz answer would have graded differently from a
 study answer, which is the class of divergence ADR-037 exists to prevent.
+
+### Difficulty belongs to the question, not to the host that graded it
+
+Worth its own section, because it was a correctness bug rather than a design gap, and because
+the symptom appeared in the wrong place.
+
+**The number.** `BuildEvidence` scored an attempt with no recorded difficulty as though the
+question had been the hardest the engine could ask:
+
+```go
+difficultyTerm := 1.0        // when diffN == 0
+```
+
+The comment above it read "With no difficulty on record the term is dropped entirely rather
+than assumed, so old attempts are neither rewarded nor punished for it." Dropping a
+*multiplier* means multiplying by 1.0, which is the **top** of the range (`0.6 + 0.4 ×
+difficulty` runs 0.72 to 1.0). So a missing value was maximally rewarded, and the comment
+described the opposite of what the code did. At 50% accuracy:
+
+| difficulty on the attempt | score | clears 0.6? |
+|---|---|---|
+| unknown | 0.65 | yes |
+| 0.6 | 0.57 | no |
+
+Same learner, same answers, different verdict — decided by which screen they used.
+
+**Why unknown difficulty was common.** Difficulty went *into* `GeneratorContext` and stopped
+there. `generator.Problem` did not carry it back out, so every surface that generated a
+question and later graded it had to thread the value back by hand:
+
+| host | difficulty source | before |
+|---|---|---|
+| `SubmitAnswer` (`/api/answer`) | `activeSession.questionDifficulty` | real |
+| `submitAnswerWithTask` — **Learn loop** (`/api/study/answer`) | none | `0` → unknown |
+| `submitAnswerWithTask` — quizzes (`/api/quiz/answer`) | none | `0` → unknown |
+| diagnostic (`/api/goal/diagnostic/answer`) | none | not recorded at all |
+
+The main teaching loop was the host with no difficulty, not the quiz — the opposite of where
+this was reported from. The diagnostic wrote its attempt row directly in `server.go`, bypassing
+the shared authority entirely, and those rows still feed `GetRecentAttemptsForConcept`, so they
+landed in the evidence window as unknown-difficulty attempts.
+
+**The fix**, in the order the architecture implies:
+
+1. `generator.Problem.Difficulty *float64`, stamped by `Registry.GenerateContext` and
+   `BatchGenerateContext`. It is now structurally impossible to generate a question without
+   its difficulty travelling alongside it.
+2. `engine.Anchor` carries it too, because the anchor is already the durable record of what
+   was served and is authoritative over the expected answer for the same reason. The study
+   serve fills it from the Problem (generator path) or from `questions.difficulty`
+   (curated path — `NOT NULL DEFAULT 0.5`, so real).
+3. Quiz passes `sess.LastProblem.Difficulty`; the diagnostic stamps the row it writes.
+4. `gradedAttempt.difficulty` became `*float64`, so "unknown" is a value a caller must choose
+   rather than a `0` that gets reinterpreted downstream. That overloading is what hid the bug.
+5. Unknown is credited at `mastery.NeutralDifficulty = 0.55`, which is not chosen here — it
+   is what `difficultyFromWeakness` serves when it knows nothing about the learner (weakness
+   defaults to 0.5, so `0.3 + 0.5 × 0.5`). `TestNeutralDifficultyMatchesEngineDefault` in the
+   engine package fails if the scoring side and the serving side ever drift apart.
+
+**What the shared authority deliberately does not do:** guess. Re-deriving difficulty from the
+learner's *current* weakness would credit an attempt with the difficulty a **future** question
+would get, which is a different claim from the one the learner answered. `applyGradedAttempt`
+receives the value and does not reinterpret it.
+
+**Known remaining divergence, stated rather than hidden:** `web/next-app/lib/progression.ts`
+is a second copy of this model and does not match it — it weights difficulty per attempt
+rather than by the mean of correct attempts, uses a fixed 60s time threshold rather than the
+concept's own, and has no unknown-difficulty case because its `difficulty` field is a required
+number. So this change creates no new browser/server divergence, but the pre-existing one
+remains: the two disagree at the margin, and the browser's copy feeds `LearnStepper`'s
+`advance` decision and header label. The server ladder is authoritative for progression, so
+that is a display-consistency problem, not a correctness one.

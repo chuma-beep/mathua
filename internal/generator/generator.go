@@ -20,6 +20,20 @@ type Problem struct {
 	// Keys are snake_case and stable; renaming one is a content change and the
 	// contract test will say so.
 	Facts map[string]string
+
+	// Difficulty the question was generated at, 0.3-1.0. Nil means unknown — a problem
+	// that did not come from a difficulty-parameterised generator, such as a curated row
+	// read straight out of the questions table.
+	//
+	// This field exists because difficulty used to go *into* GeneratorContext and stop
+	// there. Every surface that generated a question and later graded it had to thread the
+	// value back out by hand, and two of the three did not: the study and quiz paths
+	// recorded `attempts.difficulty = NULL`. Mastery evidence therefore depended on which
+	// screen the learner happened to use, which is not a property a learner should be able
+	// to change by tapping a different button. Carrying it on the Problem makes generation
+	// and grading agree by construction — the registry fills this in, so no caller can
+	// generate a question and forget what it was generated at.
+	Difficulty *float64
 }
 
 type Generator interface {

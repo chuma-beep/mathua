@@ -197,6 +197,15 @@ func New(repo storage.Repository, dag *concepts.DAG, reg *generator.Registry, ll
 type Anchor struct {
 	Answer      string `json:"answer"`
 	Explanation string `json:"explanation"`
+	// Difficulty the served question was produced at, or nil when it is genuinely unknown
+	// (a curated question with no recorded difficulty).
+	//
+	// The anchor is the only durable record of what the learner was actually served, keyed
+	// by question text, so it is the right place for this: `submitAnswerWithTask` already
+	// reads the anchor to grade, and reading the difficulty from the same place means the
+	// attempt is credited with the difficulty of the question that was served rather than
+	// whatever the grading path happens to know.
+	Difficulty *float64 `json:"difficulty,omitempty"`
 }
 
 // SetStudyAnchor stores a single anchor for a concept (question key "").
@@ -1094,7 +1103,7 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 		elapsed:        elapsedSeconds,
 		correct:        gr.Correct,
 		questionText:   sessionFields.questionText,
-		difficulty:     sessionFields.questionDifficulty,
+		difficulty:     difficultyOrNil(sessionFields.questionDifficulty),
 	})
 	if err != nil {
 		return nil, fmt.Errorf("save progress: %w", err)
@@ -1226,30 +1235,45 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 // A question with no anchor — the anchor's TTL expired, or the tab sat open
 // longer than it — returns ErrNoStudyAnchor so the caller can re-serve rather
 // than accept an ungradeable attempt.
+// It takes no difficulty argument, and does not need one: the difficulty comes from the
+// study anchor, which is the durable record of the question that was actually served. That
+// is a stronger source than a caller could supply, for the same reason the expected answer
+// does.
 func (e *Engine) SubmitStudyAnswer(studentID, conceptID, answer string, elapsedSeconds float64, questionText string) (*AnswerResult, error) {
 	taskType := TaskLesson
 	if strings.HasSuffix(conceptID, ".word") {
 		taskType = TaskMultistep
 	}
-	return e.submitAnswerWithTask(studentID, conceptID, answer, "", elapsedSeconds, taskType, true, false, questionText)
+	return e.submitAnswerWithTask(studentID, conceptID, answer, "", elapsedSeconds, taskType, true, false, questionText, nil)
 }
 
 // SubmitQuizAnswer is the single-path quiz grader: TaskQuiz base XP (20),
 // progress update, and exactly one AddXP — DB and response agree by
 // construction. Unlike SubmitStudyAnswer it never consults the study anchor:
 // the quiz expected answer comes from the quiz session.
-func (e *Engine) SubmitQuizAnswer(studentID, conceptID, answer, expected string, elapsedSeconds float64, questionText string) (*AnswerResult, error) {
-	return e.submitAnswerWithTask(studentID, conceptID, answer, expected, elapsedSeconds, TaskQuiz, false, false, questionText)
+//
+// difficulty is the difficulty the quiz question was generated at, from
+// `quiz.Session.LastProblem.Difficulty`. It is a parameter rather than something re-derived
+// here because re-deriving it from the learner's *current* weakness would credit the
+// attempt with a difficulty nobody actually served — and because the whole point of this
+// argument is that the quiz path produces the same evidence as the study path.
+func (e *Engine) SubmitQuizAnswer(studentID, conceptID, answer, expected string, elapsedSeconds float64, questionText string, difficulty *float64) (*AnswerResult, error) {
+	return e.submitAnswerWithTask(studentID, conceptID, answer, expected, elapsedSeconds, TaskQuiz, false, false, questionText, difficulty)
 }
 
 // SubmitQuizDontKnow records an admitted unknown ("I don't know" button) as
 // a quiz miss: weakness up, streak reset, remedial queued — but no XP and no
 // rushing penalty (an instant admit is honesty, not rushing).
-func (e *Engine) SubmitQuizDontKnow(studentID, conceptID, expected string, elapsedSeconds float64, questionText string) (*AnswerResult, error) {
-	return e.submitAnswerWithTask(studentID, conceptID, "", expected, elapsedSeconds, TaskQuiz, false, true, questionText)
+func (e *Engine) SubmitQuizDontKnow(studentID, conceptID, expected string, elapsedSeconds float64, questionText string, difficulty *float64) (*AnswerResult, error) {
+	return e.submitAnswerWithTask(studentID, conceptID, "", expected, elapsedSeconds, TaskQuiz, false, true, questionText, difficulty)
 }
 
-func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected string, elapsedSeconds float64, taskType string, useAnchor bool, dontKnow bool, questionText string) (*AnswerResult, error) {
+// difficulty is the difficulty the question that produced this attempt was served at, or
+// nil when it is genuinely unknown. For study it comes from the anchor; for quiz it is
+// passed by the caller from the served problem. It is never derived from the learner's
+// current weakness, because that is a different number: it is the difficulty a *future*
+// question would get, not the one the learner just answered.
+func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected string, elapsedSeconds float64, taskType string, useAnchor bool, dontKnow bool, questionText string, difficulty *float64) (*AnswerResult, error) {
 	if e.dag.Concept(conceptID) == nil {
 		return nil, fmt.Errorf("%w: %q", ErrUnknownConcept, conceptID)
 	}
@@ -1262,6 +1286,10 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 			return nil, ErrNoStudyAnchor
 		}
 		expected = anchor.Answer
+		// The anchor is the record of what was served, so it wins over the argument. This
+		// is the study path's equivalent of the quiz passing LastProblem.Difficulty: both
+		// read the number from the question the learner actually saw.
+		difficulty = anchor.Difficulty
 	}
 	// Narrow lock: only protect studySessions lookup/creation and studyMisses update.
 	e.mu.Lock()
@@ -1325,7 +1353,7 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 		elapsed:        elapsedSeconds,
 		correct:        gr.Correct,
 		questionText:   questionText,
-		difficulty:     0,
+		difficulty:     difficulty,
 	})
 	if err != nil {
 		return nil, fmt.Errorf("save progress: %w", err)
@@ -1356,6 +1384,10 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 		Question:       questionText,
 		Source:         sourceForTaskType(taskType),
 		Explanation:    explanation,
+		// The same value the evidence window was just given, so the persisted row and the
+		// decision it fed cannot disagree. This column used to be left NULL on this path,
+		// which is what made quiz and study evidence incomparable.
+		Difficulty: difficulty,
 	}); err != nil {
 		return nil, fmt.Errorf("record attempt: %w", err)
 	}
@@ -2348,9 +2380,12 @@ type gradedAttempt struct {
 	elapsed        float64
 	correct        bool
 	questionText   string
-	// difficulty the question was generated at. Zero means unknown and is recorded as
-	// such rather than assumed.
-	difficulty float64
+	// difficulty the question that produced this attempt was generated at, or nil when it
+	// is genuinely unknown. A pointer, not a float64 with 0 meaning unknown: 0 is not a
+	// difficulty the engine ever serves, so overloading it would let a forgotten value and
+	// a deliberate "unknown" be indistinguishable at the call site — which is exactly the
+	// bug that let the quiz path record unknown difficulty for every attempt.
+	difficulty *float64
 }
 
 // applyGradedAttempt is the single mastery authority.
@@ -2408,7 +2443,7 @@ func (e *Engine) applyGradedAttempt(progress *storage.ConceptProgress, o gradedA
 	evidence := e.buildEvidenceWindow(o.studentID, o.conceptID, mastery.Attempt{
 		Correct:    o.correct,
 		Elapsed:    o.elapsed,
-		Difficulty: difficultyOrNil(o.difficulty),
+		Difficulty: o.difficulty,
 		Instance:   o.questionText,
 	})
 

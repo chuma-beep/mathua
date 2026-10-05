@@ -130,11 +130,20 @@ func BuildEvidence(attempts []Attempt, opts EvidenceOptions) Evidence {
 
 	// Difficulty weighting. `0.6 + 0.4 × difficulty` is the browser model's shape and is
 	// kept so the two do not drift: at difficulty 0.3 a correct answer is worth 0.72, at
-	// 1.0 it is worth 1.0. With no difficulty on record the term is dropped entirely
-	// rather than assumed, so old attempts are neither rewarded nor punished for it.
-	difficultyTerm := 1.0
+	// 1.0 it is worth 1.0.
+	//
+	// Unknown difficulty is credited at NeutralDifficulty, *not* dropped. Dropping the
+	// term means multiplying by 1.0, which is the top of the range — so a missing value was
+	// being read as "the learner got this right on the hardest question we could have
+	// asked", and the comment claiming unknown attempts were "neither rewarded nor punished"
+	// was describing the opposite of what the code did. It was not cosmetic: at 50%
+	// accuracy the unknown-difficulty score was 0.65 and cleared the threshold, while the
+	// same attempts with difficulty 0.6 scored 0.57 and did not. A learner could therefore
+	// pass the mastery bar on the quiz surface and fail it on the study surface for the same
+	// answers.
+	difficultyTerm := difficultyWeight(NeutralDifficulty)
 	if diffN > 0 {
-		difficultyTerm = 0.6 + 0.4*ev.AvgDifficulty
+		difficultyTerm = difficultyWeight(ev.AvgDifficulty)
 	}
 
 	// Variety: each instance beyond the first is worth up to 0.15, capped. Two instances is
@@ -160,7 +169,46 @@ func BuildEvidence(attempts []Attempt, opts EvidenceOptions) Evidence {
 // normalised against the concept's own difficulty and time threshold, so a single
 // constant is the right shape. Concepts differ in what counts as a hard question, not in
 // how much evidence proves competence.
+//
+// Measured rather than assumed, and it does bind. `TestMeasureMasteryCost` walks realistic
+// interleaved accuracy profiles: 100%, 80% and 60% reach MASTERED in exactly
+// MasteryEvidenceFloor answers, while 50%, 40%, 20% and 0% never reach it at any length.
+// The threshold separates those two groups cleanly, so it is not decorative.
+//
+// An earlier version of that measurement reported the opposite — that every accuracy level
+// from 40% up mastered — because the test profile was periodic in blocks of 20 (twelve
+// wrong, then eight right), so a six-attempt window eventually landed entirely inside the
+// clean run. A learner does not answer in blocks. The lesson is recorded because the
+// failure mode recurs: a periodic probe measures the probe's period, not the model.
 const MasteryThreshold = 0.6
+
+// NeutralDifficulty is the difficulty credited to a correct answer whose attempt carries
+// none — an attempt predating `attempts.difficulty`, or a curated question with no
+// recorded value.
+//
+// It is not chosen here. It is the difficulty the engine serves when it has no information
+// about the learner: `engine.difficultyFromWeakness` defaults weakness to 0.5 and computes
+// `0.3 + (1 - 0.5) × 0.5 = 0.55`. `TestNeutralDifficultyMatchesEngineDefault` in the engine
+// package asserts the two agree, so the scoring side cannot drift away from the serving
+// side. Crediting an average question is the honest reading of "we do not know how hard
+// this was".
+const NeutralDifficulty = 0.55
+
+// difficultyWeight maps a difficulty onto the score multiplier for a correct answer, in
+// [0.72, 1.0]. One place, so the known and unknown paths cannot diverge.
+func difficultyWeight(difficulty float64) float64 {
+	return 0.6 + 0.4*clampDifficulty(difficulty)
+}
+
+func clampDifficulty(d float64) float64 {
+	if d < 0.3 {
+		return 0.3
+	}
+	if d > 1.0 {
+		return 1.0
+	}
+	return d
+}
 
 // FirstEvidence is the bar for LEARNING: one correct answer.
 //

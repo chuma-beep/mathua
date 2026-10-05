@@ -698,6 +698,12 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 	expected := session.LastProblem.Answer
 	expExplanation := session.LastProblem.Explanation
 	questionText := session.LastProblem.Question
+	// The difficulty this diagnostic question was generated at. The attempt row is the
+	// mistakes transcript, but it is also read back by the mastery evidence window
+	// (GetRecentAttemptsForConcept), so an attempt recorded here without difficulty is an
+	// attempt that counts as "correct at unknown difficulty" against any concept the
+	// learner later practises.
+	servedDifficulty := session.LastProblem.Difficulty
 	session.Unlock()
 	if req.DontKnow {
 		s.eng.SubmitDiagnosticDontKnow(session, req.ConceptID, req.Elapsed, timeThresh)
@@ -729,6 +735,7 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 			Question:       questionText,
 			Source:         "diagnostic",
 			Explanation:    expExplanation,
+			Difficulty:     servedDifficulty,
 		}); err != nil {
 			log.Printf("handleGoalDiagnosticAnswer: record attempt failed for %s: %v", diagStudentID, err)
 		}
@@ -1495,7 +1502,11 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 			}
 			qa := make(map[string]engine.Anchor, len(dbQs))
 			for _, q := range dbQs {
-				qa[q.Question] = engine.Anchor{Answer: q.Answer, Explanation: q.Explanation}
+				// questions.difficulty is NOT NULL DEFAULT 0.5, so a curated row always has
+				// a real value. It is the same field the generator path fills in, so both
+				// branches of this serve hand the grader the same kind of evidence.
+				d := q.Difficulty
+				qa[q.Question] = engine.Anchor{Answer: q.Answer, Explanation: q.Explanation, Difficulty: &d}
 			}
 			if studentID, _ := r.Context().Value(authStudentKey{}).(string); s.ownsStudentID(r, studentID) {
 				s.eng.SetStudyAnchorBatch(studentID, conceptID, qa)
@@ -1533,7 +1544,7 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 	// explanation. The two travel together: both come from one generator call.
 	qa := make(map[string]engine.Anchor, len(problems))
 	for _, p := range problems {
-		qa[p.Question] = engine.Anchor{Answer: p.Answer, Explanation: p.Explanation}
+		qa[p.Question] = engine.Anchor{Answer: p.Answer, Explanation: p.Explanation, Difficulty: p.Difficulty}
 	}
 	if studentID, _ := r.Context().Value(authStudentKey{}).(string); s.ownsStudentID(r, studentID) {
 		s.eng.SetStudyAnchorBatch(studentID, conceptID, qa)
@@ -2752,10 +2763,15 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 	if studentID != "" {
 		var res *engine.AnswerResult
 		var err error
+		// The difficulty comes off the problem that was served, which quiz.NextQuestion
+		// stamped from the GeneratorContext it generated at. Reading it here rather than
+		// recomputing it is what makes a quiz attempt count for mastery exactly as much as
+		// the equivalent study attempt.
+		servedDifficulty := sess.LastProblem.Difficulty
 		if req.DontKnow {
-			res, err = s.eng.SubmitQuizDontKnow(studentID, req.ConceptID, expected, req.Elapsed, sess.LastProblem.Question)
+			res, err = s.eng.SubmitQuizDontKnow(studentID, req.ConceptID, expected, req.Elapsed, sess.LastProblem.Question, servedDifficulty)
 		} else {
-			res, err = s.eng.SubmitQuizAnswer(studentID, req.ConceptID, req.Answer, expected, req.Elapsed, sess.LastProblem.Question)
+			res, err = s.eng.SubmitQuizAnswer(studentID, req.ConceptID, req.Answer, expected, req.Elapsed, sess.LastProblem.Question, servedDifficulty)
 		}
 		if err != nil {
 			if errors.Is(err, engine.ErrUnknownConcept) {
