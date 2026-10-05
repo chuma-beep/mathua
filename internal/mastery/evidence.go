@@ -179,10 +179,25 @@ func EnoughForPracticing(ev Evidence) bool {
 	return ev.Score >= MasteryThreshold && ev.Attempts >= 2
 }
 
-// EnoughForMastery is the bar for MASTERED: demonstrated.
+// MasteryEvidenceFloor is the minimum number of attempts the evidence must span before a
+// concept can count as mastered.
 //
-// The attempt floor is what stops a single lucky question from being a state change; a lone
-// correct answer is weighted 1.0 and would clear the score on its own.
+// It is a *floor on evidence*, not a rule about what those attempts are. Six identical
+// correct answers are not the requirement; six attempts whose combined score clears the
+// threshold are, and the score already weights difficulty, variety of problem instance and
+// time. A lone correct answer is weighted 1.0 and would clear the threshold on its own, so
+// something has to stop one lucky question from being a state change — and the number that
+// stops it is this, not the shape of the attempts.
+//
+// Six rather than three because ADR-038 measured the ladder reaching mastery in three correct
+// answers on a clean run, which is below the ~9 evidence-bearing answers the design intended.
+// The cost was not the goal; a reasonable amount of evidence is. Since the window is six
+// attempts wide, a floor of six means the score must be clear over a full window rather than
+// over the first three answers, so a learner cannot master a concept before the evidence has
+// had room to include a mistake and a recovery.
+const MasteryEvidenceFloor = 6
+
+// EnoughForMastery is the bar for MASTERED: demonstrated, over a full window of evidence.
 //
 // **Variety deliberately scores but does not gate.** An earlier version also required
 // `Instances >= 2`, and wiring this into the engine immediately produced a state that could
@@ -190,9 +205,9 @@ func EnoughForPracticing(ev Evidence) bool {
 // Instances at 1 forever, so the concept cannot be mastered however much the learner
 // demonstrates it. A gate on a derived signal can make a state unreachable, and an
 // unreachable mastery is a far worse failure than a slightly generous one. Variety still
-// contributes up to 0.15 through varietyBonus — worth real evidence, but not a veto.
+// contributes up to 0.15 through varietyBonus — worth real evidence, but never a veto.
 func EnoughForMastery(ev Evidence) bool {
-	return ev.Score >= MasteryThreshold && ev.Attempts >= 3
+	return ev.Score >= MasteryThreshold && ev.Attempts >= MasteryEvidenceFloor
 }
 
 // Rung names which transition a given piece of evidence authorises. It exists so the
