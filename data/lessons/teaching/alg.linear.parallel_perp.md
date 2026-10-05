@@ -2,8 +2,6 @@
 
 # Geometry of Lines
 
-*Alternative Video Lessons*
-
 The equations of horizontal and vertical lines are special and distinguished from the equations other lines. Also, pairs of lines that are parallel or perpendicular to each other have interesting features and properties. This section examines all these geometric features of lines.
 
 *Horizontal Line*
@@ -177,4 +175,3 @@ If you make a table of $x$- and $y$-values for a horizontal line what special th
 If you know two points on one line, and you know two points on a second line, what could you do to determine whether or not the two lines are perpendicular?
 
 ##
-

@@ -4,15 +4,11 @@
 
 We solved inequalities in  the section  where only one step was needed to isolate the variable. Now we will work with inequalities that need more than one step.
 
-*Alternative Video Lessons*
-
 ## Solving Multistep Inequalities
 
 When solving a linear inequality, we almost follow the exact same steps as we do in  Process . One difference is that when we multiply or divide by a negative number on both sides of an inequality, the direction of the inequality symbol must switch. The other difference is that checking a solution set takes more effort.
 
 Steps to Solve Linear Inequalities
-
-
 
 **Example**
 
@@ -109,4 +105,3 @@ How is the solution set to a linear inequality different from the solution set t
 If you want to check your solution set to a linear inequality, what exactly are you going to do?
 
 ##
-

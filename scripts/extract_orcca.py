@@ -558,12 +558,34 @@ def _extract_sidebyside(el, md_parts):
                 emit_block(child, md_parts)
 
 
+# Caption text that carries no instructional content of its own: it labels a media
+# element which is not being kept, so the caption goes with it.
+#
+# Compared as a normalized set rather than by equality against one string. The previous
+# test was `not in ("alternative video lesson", "interactive")`, which is singular-only,
+# and the corpus contains "Alternative Video Lessons" in four committed lessons - so a line
+# the rule was written to remove survived in the content.
+NON_CONTENT_CAPTIONS = frozenset({
+    "alternative video lesson",
+    "alternative video lessons",
+    "interactive",
+    "video",
+    "video lesson",
+    "video lessons",
+})
+
+
+def _normalize_caption(text):
+    return " ".join(str(text).split()).strip().lower()
+
+
+
 def _skip_figure(el, md_parts):
     caption = el.find("caption")
     if caption is not None:
         t = text_content(caption)
         # Skip captions of purely interactive elements (videos, widgets).
-        if t and t.lower() not in ("alternative video lesson", "interactive"):
+        if t and _normalize_caption(t) not in NON_CONTENT_CAPTIONS:
             md_parts.append(f"*{t}*")
             md_parts.append("")
 
