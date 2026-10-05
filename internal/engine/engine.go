@@ -1086,134 +1086,19 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 		}
 	}
 
-	progress.Attempts++
-	progress.LastAttempted = ptrTime(nowUTC())
-	// AvgResponseTime reflects every attempt, not just correct ones; excluding
-	// misses biases the average low and inflates mastery readiness.
-	totalTime := progress.AvgResponseTime*float64(progress.Attempts-1) + elapsedSeconds
-	progress.AvgResponseTime = totalTime / float64(progress.Attempts)
-	if gr.Correct {
-		progress.Streak++
-		if progress.Streak > progress.BestStreak {
-			progress.BestStreak = progress.Streak
-		}
-	} else {
-		progress.Streak = 0
-	}
-
-	// Weakness score update
-	conceptThreshold := sessionFields.timeThreshold
-	if conceptThreshold == 0 {
-		conceptThreshold = 10.0
-	}
-	if gr.Correct {
-		progress.WeaknessScore *= 0.5
-		if elapsedSeconds <= conceptThreshold {
-			progress.WeaknessScore *= 0.3
-		}
-	} else {
-		progress.WeaknessScore += 0.2
-		if progress.WeaknessScore > 1.0 {
-			progress.WeaknessScore = 1.0
-		}
-	}
-
-	// Mastery transition, on evidence rather than on the streak.
-	//
-	// The window includes the attempt being graded. It has not been written yet —
-	// RecordAttempt runs at the end of this function — so without appending it here the
-	// very first answer on a concept would be judged on an empty window and a learner
-	// could not leave UNSEEN until they had answered twice before being credited with
-	// anything.
-	evidence := e.buildEvidenceWindow(studentID, sessionFields.conceptID, mastery.Attempt{
-		Correct:    gr.Correct,
-		Elapsed:    elapsedSeconds,
-		Difficulty: difficultyOrNil(sessionFields.questionDifficulty),
-		Instance:   sessionFields.questionText,
+	newStatus, err := e.applyGradedAttempt(progress, gradedAttempt{
+		studentID:      studentID,
+		conceptID:      sessionFields.conceptID,
+		requiredStreak: sessionFields.requiredStreak,
+		timeThreshold:  sessionFields.timeThreshold,
+		elapsed:        elapsedSeconds,
+		correct:        gr.Correct,
+		questionText:   sessionFields.questionText,
+		difficulty:     sessionFields.questionDifficulty,
 	})
-
-	ctx := mastery.TransitionCtx{
-		Evidence:          evidence,
-		Streak:            progress.Streak,
-		RequiredStreak:    sessionFields.requiredStreak,
-		AvgResponseTime:   progress.AvgResponseTime,
-		ResponseThreshold: sessionFields.timeThreshold,
-	}
-	newStatus := e.machine.Next(mastery.Status(progress.Status), ctx)
-	oldStatus := progress.Status
-	progress.Status = string(newStatus)
-	advanced := newStatus != mastery.Status(oldStatus)
-
-	// Reset the streak on a tier advance. It no longer gates anything — the ladder above
-	// does — but it is still the honest running count of consecutive correct answers, it
-	// still feeds SM-2 quality, and the shelf still reads it to tell "resume" from "new".
-	if advanced && gr.Correct {
-		progress.Streak = 1
-	}
-
-	// SM-2 update — PR 1.2 student model: scale interval by per-topic learningSpeed
-	quality := mastery.SM2Quality(
-		gr.Correct && progress.Streak >= sessionFields.requiredStreak,
-		progress.AvgResponseTime/sessionFields.timeThreshold,
-	)
-	prevSM2 := scheduler.SM2{
-		Repetitions: progress.SM2Repetitions,
-		EFactor:     progress.SM2EFactor,
-		Interval:    progress.SM2Interval,
-	}
-	learningSpeed := 1.0
-	if ts, err := e.repo.GetTopicSpeed(studentID, sessionFields.conceptID); err == nil && ts != nil {
-		learningSpeed = ts.LearningSpeed
-	}
-	nextSM2 := scheduler.ComputeSM2WithSpeed(prevSM2, quality, learningSpeed)
-	progress.SM2Repetitions = nextSM2.Repetitions
-	progress.SM2EFactor = nextSM2.EFactor
-	progress.SM2Interval = nextSM2.Interval
-	// Persist updated per-topic speed from timeRatio + streak
-	newSpeed := scheduler.UpdateLearningSpeed(learningSpeed, gr.Correct, progress.AvgResponseTime/sessionFields.timeThreshold, progress.Streak)
-	if err := e.repo.UpsertTopicSpeed(&storage.TopicSpeed{
-		StudentID:     studentID,
-		ConceptID:     sessionFields.conceptID,
-		EFactor:       nextSM2.EFactor,
-		Interval:      nextSM2.Interval,
-		Repetitions:   nextSM2.Repetitions,
-		LearningSpeed: newSpeed,
-	}); err != nil {
-		log.Printf("warning: upsert topic speed %s/%s: %v", studentID, sessionFields.conceptID, err)
-	}
-
-	if newStatus == mastery.StatusMastered && mastery.Status(oldStatus) != mastery.StatusMastered {
-		now := nowUTC()
-		progress.MasteredAt = &now
-	}
-	if newStatus == mastery.StatusMastered {
-		progress.WeaknessScore = 0.0
-	}
-	// The decay clock starts when a tier is attained, not when a streak happens to reach
-	// the old threshold.
-	//
-	// It was gated on `streak >= required && avg time <= threshold`, which was a proxy for
-	// "a tier was just advanced" back when that was what advancement meant. It is not any
-	// more: the ladder advances on evidence, so a concept can reach MASTERED with a streak
-	// of 1. That left `LastReviewed` nil, and `GetProgress` treats a nil `LastReviewed` as
-	// fully decayed — so a concept could be MASTERED and simultaneously read as DECAYING,
-	// depending on which rule fired first. Seen in the engine tests as the ladder passing
-	// through DECAYING on its way up.
-	//
-	// A tier attainment is exactly what the decay clock should measure from: the last time
-	// the learner demonstrated this concept.
-	if advanced || (progress.Streak >= sessionFields.requiredStreak && progress.AvgResponseTime <= sessionFields.timeThreshold) {
-		now := nowUTC()
-		progress.LastReviewed = &now
-		nextReview := now.AddDate(0, 0, nextSM2.Interval)
-		progress.NextReviewDue = &nextReview
-	}
-
-	if err := e.repo.UpsertProgress(progress); err != nil {
+	if err != nil {
 		return nil, fmt.Errorf("save progress: %w", err)
 	}
-
-	e.PropagateWeakness(studentID)
 
 	// Record attempt
 	if err := e.repo.RecordAttempt(storage.AttemptEntry{
@@ -1432,109 +1317,19 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 			SM2EFactor: 2.5,
 		}
 	}
-	progress.Attempts++
-	progress.LastAttempted = ptrTime(nowUTC())
-	// AvgResponseTime reflects every attempt, not just correct ones; excluding
-	// misses biases the average low and inflates mastery readiness.
-	totalTime := progress.AvgResponseTime*float64(progress.Attempts-1) + elapsedSeconds
-	progress.AvgResponseTime = totalTime / float64(progress.Attempts)
-	if gr.Correct {
-		progress.Streak++
-		if progress.Streak > progress.BestStreak {
-			progress.BestStreak = progress.Streak
-		}
-	} else {
-		progress.Streak = 0
-	}
-	conceptThreshold := timeThreshold
-	if gr.Correct {
-		progress.WeaknessScore *= 0.5
-		if elapsedSeconds <= conceptThreshold {
-			progress.WeaknessScore *= 0.3
-		}
-	} else {
-		progress.WeaknessScore += 0.2
-		if progress.WeaknessScore > 1.0 {
-			progress.WeaknessScore = 1.0
-		}
-	}
-	// Same ladder, same evidence, as SubmitAnswer. This path serves quizzes and the
-	// diagnostic, and it carried its own copy of the transition — which is how the two
-	// routes could disagree about whether a concept was mastered. That is the class of bug
-	// ADR-037 spent a week removing, reintroduced by the duplication rather than by
-	// anything to do with the ladder.
-	//
-	// Difficulty is unknown here and stays unknown: these questions are not generated
-	// through a session that recorded a difficulty, so the score drops the term rather than
-	// assuming one.
-	evidence := e.buildEvidenceWindow(studentID, conceptID, mastery.Attempt{
-		Correct:  gr.Correct,
-		Elapsed:  elapsedSeconds,
-		Instance: questionText,
+	newStatus, err := e.applyGradedAttempt(progress, gradedAttempt{
+		studentID:      studentID,
+		conceptID:      conceptID,
+		requiredStreak: requiredStreak,
+		timeThreshold:  timeThreshold,
+		elapsed:        elapsedSeconds,
+		correct:        gr.Correct,
+		questionText:   questionText,
+		difficulty:     0,
 	})
-
-	ctx := mastery.TransitionCtx{
-		Evidence:          evidence,
-		Streak:            progress.Streak,
-		RequiredStreak:    requiredStreak,
-		AvgResponseTime:   progress.AvgResponseTime,
-		ResponseThreshold: timeThreshold,
-	}
-	newStatus := e.machine.Next(mastery.Status(progress.Status), ctx)
-	oldStatus := progress.Status
-	progress.Status = string(newStatus)
-	advanced := newStatus != mastery.Status(oldStatus)
-	if advanced && gr.Correct {
-		progress.Streak = 1
-	}
-	quality := mastery.SM2Quality(
-		gr.Correct && progress.Streak >= requiredStreak,
-		progress.AvgResponseTime/timeThreshold,
-	)
-	prevSM2 := scheduler.SM2{
-		Repetitions: progress.SM2Repetitions,
-		EFactor:     progress.SM2EFactor,
-		Interval:    progress.SM2Interval,
-	}
-	learningSpeed := 1.0
-	if ts, err := e.repo.GetTopicSpeed(studentID, conceptID); err == nil && ts != nil {
-		learningSpeed = ts.LearningSpeed
-	}
-	nextSM2 := scheduler.ComputeSM2WithSpeed(prevSM2, quality, learningSpeed)
-	progress.SM2Repetitions = nextSM2.Repetitions
-	progress.SM2EFactor = nextSM2.EFactor
-	progress.SM2Interval = nextSM2.Interval
-	newSpeed := scheduler.UpdateLearningSpeed(learningSpeed, gr.Correct, progress.AvgResponseTime/timeThreshold, progress.Streak)
-	if err := e.repo.UpsertTopicSpeed(&storage.TopicSpeed{
-		StudentID:     studentID,
-		ConceptID:     conceptID,
-		EFactor:       nextSM2.EFactor,
-		Interval:      nextSM2.Interval,
-		Repetitions:   nextSM2.Repetitions,
-		LearningSpeed: newSpeed,
-	}); err != nil {
-		log.Printf("warning: upsert topic speed %s/%s: %v", studentID, conceptID, err)
-	}
-	if newStatus == mastery.StatusMastered && mastery.Status(oldStatus) != mastery.StatusMastered {
-		now := nowUTC()
-		progress.MasteredAt = &now
-	}
-	if newStatus == mastery.StatusMastered {
-		progress.WeaknessScore = 0.0
-	}
-	// Same decay-clock rule as SubmitAnswer: a tier attainment starts it. See the note
-	// there — gating this on the streak threshold left a concept that reached MASTERED on
-	// evidence with a nil LastReviewed, which reads as fully decayed.
-	if advanced || (progress.Streak >= requiredStreak && progress.AvgResponseTime <= timeThreshold) {
-		now := nowUTC()
-		progress.LastReviewed = &now
-		nextReview := now.AddDate(0, 0, nextSM2.Interval)
-		progress.NextReviewDue = &nextReview
-	}
-	if err := e.repo.UpsertProgress(progress); err != nil {
+	if err != nil {
 		return nil, fmt.Errorf("save progress: %w", err)
 	}
-	e.PropagateWeakness(studentID)
 	// The explanation is the one the generator produced for the question this
 	// learner actually saw, held in the anchor written when it was served. It
 	// is returned whether the answer was right or wrong: a correct answer still
@@ -2542,4 +2337,161 @@ func (e *Engine) buildEvidenceWindow(studentID, conceptID string, current master
 	window = append(window, prior...)
 	window = append(window, current)
 	return mastery.BuildEvidence(window, opts)
+}
+
+// gradedAttempt is what one graded answer contributes to a concept's progress.
+type gradedAttempt struct {
+	studentID      string
+	conceptID      string
+	requiredStreak int
+	timeThreshold  float64
+	elapsed        float64
+	correct        bool
+	questionText   string
+	// difficulty the question was generated at. Zero means unknown and is recorded as
+	// such rather than assumed.
+	difficulty float64
+}
+
+// applyGradedAttempt is the single mastery authority.
+//
+// It used to exist twice — once in SubmitAnswer for study and review, once in
+// submitAnswerWithTask for quizzes and the diagnostic — with identical logic and different
+// variable names. Two copies of the state machine is how a quiz answer ends up graded
+// differently from a study answer, which is the class of divergence ADR-037 spent a week
+// removing. There is one now, and both hosts call it.
+//
+// It owns: the attempt counters, the weakness update, the evidence window, the ladder
+// transition, the streak reset, SM-2 and the per-topic speed, the mastery timestamp, and
+// the decay clock. Recording the attempt row is left to the caller because the two hosts
+// classify it differently.
+func (e *Engine) applyGradedAttempt(progress *storage.ConceptProgress, o gradedAttempt) (mastery.Status, error) {
+	progress.Attempts++
+	progress.LastAttempted = ptrTime(nowUTC())
+	// AvgResponseTime reflects every attempt, not just correct ones; excluding
+	// misses biases the average low and inflates mastery readiness.
+	totalTime := progress.AvgResponseTime*float64(progress.Attempts-1) + o.elapsed
+	progress.AvgResponseTime = totalTime / float64(progress.Attempts)
+	if o.correct {
+		progress.Streak++
+		if progress.Streak > progress.BestStreak {
+			progress.BestStreak = progress.Streak
+		}
+	} else {
+		progress.Streak = 0
+	}
+
+	// Weakness score update
+	conceptThreshold := o.timeThreshold
+	if conceptThreshold == 0 {
+		conceptThreshold = 10.0
+	}
+	if o.correct {
+		progress.WeaknessScore *= 0.5
+		if o.elapsed <= conceptThreshold {
+			progress.WeaknessScore *= 0.3
+		}
+	} else {
+		progress.WeaknessScore += 0.2
+		if progress.WeaknessScore > 1.0 {
+			progress.WeaknessScore = 1.0
+		}
+	}
+
+	// Mastery transition, on evidence rather than on the streak.
+	//
+	// The window includes the attempt being graded. It has not been written yet —
+	// RecordAttempt runs at the end of this function — so without appending it here the
+	// very first answer on a concept would be judged on an empty window and a learner
+	// could not leave UNSEEN until they had answered twice before being credited with
+	// anything.
+	evidence := e.buildEvidenceWindow(o.studentID, o.conceptID, mastery.Attempt{
+		Correct:    o.correct,
+		Elapsed:    o.elapsed,
+		Difficulty: difficultyOrNil(o.difficulty),
+		Instance:   o.questionText,
+	})
+
+	ctx := mastery.TransitionCtx{
+		Evidence:          evidence,
+		Streak:            progress.Streak,
+		RequiredStreak:    o.requiredStreak,
+		AvgResponseTime:   progress.AvgResponseTime,
+		ResponseThreshold: o.timeThreshold,
+	}
+	newStatus := e.machine.Next(mastery.Status(progress.Status), ctx)
+	oldStatus := progress.Status
+	progress.Status = string(newStatus)
+	advanced := newStatus != mastery.Status(oldStatus)
+
+	// Reset the streak on a tier advance. It no longer gates anything — the ladder above
+	// does — but it is still the honest running count of consecutive correct answers, it
+	// still feeds SM-2 quality, and the shelf still reads it to tell "resume" from "new".
+	if advanced && o.correct {
+		progress.Streak = 1
+	}
+
+	// SM-2 update — PR 1.2 student model: scale interval by per-topic learningSpeed
+	quality := mastery.SM2Quality(
+		o.correct && progress.Streak >= o.requiredStreak,
+		progress.AvgResponseTime/o.timeThreshold,
+	)
+	prevSM2 := scheduler.SM2{
+		Repetitions: progress.SM2Repetitions,
+		EFactor:     progress.SM2EFactor,
+		Interval:    progress.SM2Interval,
+	}
+	learningSpeed := 1.0
+	if ts, err := e.repo.GetTopicSpeed(o.studentID, o.conceptID); err == nil && ts != nil {
+		learningSpeed = ts.LearningSpeed
+	}
+	nextSM2 := scheduler.ComputeSM2WithSpeed(prevSM2, quality, learningSpeed)
+	progress.SM2Repetitions = nextSM2.Repetitions
+	progress.SM2EFactor = nextSM2.EFactor
+	progress.SM2Interval = nextSM2.Interval
+	// Persist updated per-topic speed from timeRatio + streak
+	newSpeed := scheduler.UpdateLearningSpeed(learningSpeed, o.correct, progress.AvgResponseTime/o.timeThreshold, progress.Streak)
+	if err := e.repo.UpsertTopicSpeed(&storage.TopicSpeed{
+		StudentID:     o.studentID,
+		ConceptID:     o.conceptID,
+		EFactor:       nextSM2.EFactor,
+		Interval:      nextSM2.Interval,
+		Repetitions:   nextSM2.Repetitions,
+		LearningSpeed: newSpeed,
+	}); err != nil {
+		log.Printf("warning: upsert topic speed %s/%s: %v", o.studentID, o.conceptID, err)
+	}
+
+	if newStatus == mastery.StatusMastered && mastery.Status(oldStatus) != mastery.StatusMastered {
+		now := nowUTC()
+		progress.MasteredAt = &now
+	}
+	if newStatus == mastery.StatusMastered {
+		progress.WeaknessScore = 0.0
+	}
+	// The decay clock starts when a tier is attained, not when a streak happens to reach
+	// the old threshold.
+	//
+	// It was gated on `streak >= required && avg time <= threshold`, which was a proxy for
+	// "a tier was just advanced" back when that was what advancement meant. It is not any
+	// more: the ladder advances on evidence, so a concept can reach MASTERED with a streak
+	// of 1. That left `LastReviewed` nil, and `GetProgress` treats a nil `LastReviewed` as
+	// fully decayed — so a concept could be MASTERED and simultaneously read as DECAYING,
+	// depending on which rule fired first. Seen in the engine tests as the ladder passing
+	// through DECAYING on its way up.
+	//
+	// A tier attainment is exactly what the decay clock should measure from: the last time
+	// the learner demonstrated this concept.
+	if advanced || (progress.Streak >= o.requiredStreak && progress.AvgResponseTime <= o.timeThreshold) {
+		now := nowUTC()
+		progress.LastReviewed = &now
+		nextReview := now.AddDate(0, 0, nextSM2.Interval)
+		progress.NextReviewDue = &nextReview
+	}
+
+	if err := e.repo.UpsertProgress(progress); err != nil {
+		return mastery.Status(progress.Status), err
+	}
+	e.PropagateWeakness(o.studentID)
+	return newStatus, nil
 }
