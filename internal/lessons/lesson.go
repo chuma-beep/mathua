@@ -16,6 +16,14 @@ type Lesson struct {
 	Title    string
 	Body     string
 	Concepts []string
+	// Source is the corpus the lesson came from ("teaching", "algebrica", "authored").
+	// It is provenance for the prose, not an attribution of any individual claim, and it is
+	// never synthesised — a lesson with no known corpus reports "".
+	Source string
+	// Assets are the lesson's figures, extracted from Body by ExtractAssets. Derived, not
+	// stored, so the body remains the single source and the two cannot disagree; see
+	// assets.go for why they are exposed as data at all.
+	Assets []Asset
 }
 
 // KP is a knowledge-point shard: a subgoal-labeled worked example for one
@@ -25,6 +33,11 @@ type KP struct {
 	Label    string   `json:"label"`
 	Section  string   `json:"section"`
 	Subgoals []string `json:"subgoals"`
+	// AssetIDs optionally names the figures for this learning step, overriding the
+	// section-derived selection in Loader.KPAssets. Left empty for every current shard, so
+	// nothing depends on it yet; it exists so a future step can point at a figure that
+	// lives outside its section without the prose being rearranged to suit.
+	AssetIDs []string `json:"asset_ids,omitempty"`
 }
 
 type mapping struct {
@@ -76,6 +89,8 @@ func Load(lessonsDir string) (*Loader, error) {
 			Title:    title,
 			Body:     content,
 			Concepts: ids,
+			Source:   corpusOf(source),
+			Assets:   ExtractAssets(content, ids),
 		}
 	}
 
