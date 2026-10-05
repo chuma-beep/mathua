@@ -756,3 +756,101 @@ func TestResetProgress_RoundTrip(t *testing.T) {
 		t.Errorf("second reset: %v", err)
 	}
 }
+
+// An attempt's difficulty is evidence, and "not recorded" has to survive a round trip
+// as itself.
+//
+// The evidence model weights a correct answer by how hard the question was. That is only
+// meaningful if it can also say "we do not know": pre-migration attempts, hand-written
+// quiz questions and anything not generated at a known difficulty have no difficulty.
+// Storing 0 for those would claim they were trivially easy, which is a fact nobody
+// measured — and it would be indistinguishable from a real measurement once written.
+//
+// The Postgres half of this is TestParity_SQLiteVsPostgres; this runs without a database
+// server so CI covers it too.
+func TestAttemptDifficulty_DistinguishesUnknownFromTrivial(t *testing.T) {
+	store := newTestStore(t)
+	stu, err := store.CreateStudent("difficulty-round-trip")
+	if err != nil {
+		t.Fatalf("create student: %v", err)
+	}
+	sess, err := store.CreateSession(stu.ID)
+	if err != nil {
+		t.Fatalf("create session: %v", err)
+	}
+	base := time.Now().UTC().Add(-time.Hour)
+
+	// Unknown: no difficulty recorded.
+	if err := store.RecordAttempt(AttemptEntry{
+		SessionID: sess.ID, StudentID: stu.ID, ConceptID: "c1",
+		Answer: "1", Expected: "1", Correct: true, Timestamp: base,
+	}); err != nil {
+		t.Fatalf("record unknown: %v", err)
+	}
+	// Generated at 0.8.
+	d := 0.8
+	if err := store.RecordAttempt(AttemptEntry{
+		SessionID: sess.ID, StudentID: stu.ID, ConceptID: "c1",
+		Answer: "2", Expected: "2", Correct: true, Timestamp: base.Add(time.Minute),
+		Difficulty: &d,
+	}); err != nil {
+		t.Fatalf("record 0.8: %v", err)
+	}
+
+	atts, err := store.GetAttemptsForStudent(stu.ID)
+	if err != nil {
+		t.Fatalf("get attempts: %v", err)
+	}
+	if len(atts) != 2 {
+		t.Fatalf("got %d attempts, want 2", len(atts))
+	}
+	if atts[0].Difficulty != nil {
+		t.Errorf("first attempt difficulty = %v, want nil (unknown, not zero)", *atts[0].Difficulty)
+	}
+	if atts[1].Difficulty == nil {
+		t.Fatal("second attempt difficulty is nil, want 0.8")
+	}
+	if *atts[1].Difficulty != 0.8 {
+		t.Errorf("second attempt difficulty = %v, want 0.8", *atts[1].Difficulty)
+	}
+}
+
+// The active session has to carry the served difficulty, or a restart between serving a
+// question and answering it would write the attempt with no difficulty at all — which is
+// the honest-but-lossy outcome, and happens for a reason that is entirely avoidable.
+func TestActiveSession_DifficultySurvivesTheRoundTrip(t *testing.T) {
+	store := newTestStore(t)
+	stu, _ := store.CreateStudent("difficulty-session")
+	sess, _ := store.CreateSession(stu.ID)
+
+	d := 0.55
+	if err := store.UpsertActiveSession(&ActiveSession{
+		SessionID: sess.ID, StudentID: stu.ID, ConceptID: "c1",
+		ConceptName: "C1", ExpectedAnswer: "42", AttemptID: "a1",
+		Question: "q", Difficulty: &d,
+	}); err != nil {
+		t.Fatalf("upsert: %v", err)
+	}
+	got, err := store.GetActiveSession(sess.ID)
+	if err != nil {
+		t.Fatalf("get: %v", err)
+	}
+	if got == nil {
+		t.Fatal("no active session returned")
+	}
+	if got.Difficulty == nil || *got.Difficulty != 0.55 {
+		t.Errorf("session difficulty = %v, want 0.55", got.Difficulty)
+	}
+
+	// And an unknown one stays nil rather than becoming 0.
+	if err := store.UpsertActiveSession(&ActiveSession{
+		SessionID: sess.ID, StudentID: stu.ID, ConceptID: "c2",
+		ConceptName: "C2", ExpectedAnswer: "1", AttemptID: "a2", Question: "q2",
+	}); err != nil {
+		t.Fatalf("upsert unknown: %v", err)
+	}
+	got, _ = store.GetActiveSession(sess.ID)
+	if got.Difficulty != nil {
+		t.Errorf("unknown session difficulty = %v, want nil", *got.Difficulty)
+	}
+}

@@ -235,6 +235,10 @@ func pgAuthMigrate(db *sql.DB) error {
 		"ALTER TABLE attempts ADD COLUMN IF NOT EXISTS question TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE attempts ADD COLUMN IF NOT EXISTS source TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE attempts ADD COLUMN IF NOT EXISTS explanation TEXT NOT NULL DEFAULT ''",
+		// Nullable on purpose: existing rows have no difficulty, and backfilling a
+		// plausible-looking number would be fabricating evidence.
+		"ALTER TABLE attempts ADD COLUMN IF NOT EXISTS difficulty DOUBLE PRECISION",
+		"ALTER TABLE active_sessions ADD COLUMN IF NOT EXISTS difficulty DOUBLE PRECISION",
 		`CREATE TABLE IF NOT EXISTS avatar_images (
 			student_id TEXT PRIMARY KEY REFERENCES students(id) ON DELETE CASCADE,
 			content_type TEXT NOT NULL,
@@ -1079,7 +1083,7 @@ func (s *PostgresStore) GetActiveSession(sessionID string) (*ActiveSession, erro
 	row := s.db.QueryRow(`
 		SELECT session_id, student_id, concept_id, concept_name, expected_answer,
 		       attempt_id, question, explanation, diagram, is_review, answered,
-		       last_concept_id, session_review, session_new, updated_at
+		       last_concept_id, session_review, session_new, difficulty, updated_at
 		FROM active_sessions WHERE session_id = $1
 	`, sessionID)
 	var a ActiveSession
@@ -1087,7 +1091,7 @@ func (s *PostgresStore) GetActiveSession(sessionID string) (*ActiveSession, erro
 	var updatedAt string
 	if err := row.Scan(&a.SessionID, &a.StudentID, &a.ConceptID, &a.ConceptName, &a.ExpectedAnswer,
 		&a.AttemptID, &a.Question, &a.Explanation, &a.Diagram, &isReview, &answered,
-		&a.LastConceptID, &a.SessionReview, &a.SessionNew, &updatedAt); err != nil {
+		&a.LastConceptID, &a.SessionReview, &a.SessionNew, &a.Difficulty, &updatedAt); err != nil {
 		if err == sql.ErrNoRows {
 			return nil, nil
 		}
@@ -1109,7 +1113,7 @@ func (s *PostgresStore) UpsertActiveSession(a *ActiveSession) error {
 		INSERT INTO active_sessions
 			(session_id, student_id, concept_id, concept_name, expected_answer,
 			 attempt_id, question, explanation, diagram, is_review, answered,
-			 last_concept_id, session_review, session_new, updated_at)
+			 last_concept_id, session_review, session_new, difficulty, updated_at)
 		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
 		ON CONFLICT(session_id) DO UPDATE SET
 			student_id      = EXCLUDED.student_id,
@@ -1125,10 +1129,11 @@ func (s *PostgresStore) UpsertActiveSession(a *ActiveSession) error {
 			last_concept_id = EXCLUDED.last_concept_id,
 			session_review  = EXCLUDED.session_review,
 			session_new     = EXCLUDED.session_new,
+			difficulty      = EXCLUDED.difficulty,
 			updated_at      = EXCLUDED.updated_at
 	`, a.SessionID, a.StudentID, a.ConceptID, a.ConceptName, a.ExpectedAnswer,
 		a.AttemptID, a.Question, a.Explanation, a.Diagram, boolToInt(a.IsReview), boolToInt(a.Answered),
-		a.LastConceptID, a.SessionReview, a.SessionNew, now)
+		a.LastConceptID, a.SessionReview, a.SessionNew, a.Difficulty, now)
 	if err != nil {
 		return fmt.Errorf("upsert active session: %w", err)
 	}
@@ -1229,14 +1234,14 @@ func (s *PostgresStore) RecordAttempt(entry AttemptEntry) error {
 	_, err := s.db.Exec(`
 		INSERT INTO attempts
 			(session_id, student_id, concept_id, answer, expected,
-			 correct, elapsed_seconds, timestamp, question, source, explanation)
-		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+			 correct, elapsed_seconds, timestamp, question, source, explanation, difficulty)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
 	`,
 		entry.SessionID, entry.StudentID, entry.ConceptID,
 		entry.Answer, entry.Expected,
 		boolToInt(entry.Correct), entry.ElapsedSeconds,
 		entry.Timestamp.Format(time.RFC3339),
-		entry.Question, entry.Source, entry.Explanation,
+		entry.Question, entry.Source, entry.Explanation, entry.Difficulty,
 	)
 	if err != nil {
 		return fmt.Errorf("record attempt: %w", err)
@@ -1255,7 +1260,7 @@ func (s *PostgresStore) UpdateAttemptCorrect(id int64, correct bool) error {
 func (s *PostgresStore) GetAllAttempts() ([]AttemptEntry, error) {
 	rows, err := s.db.Query(`
 		SELECT id, session_id, student_id, concept_id, answer, expected,
-		       correct, elapsed_seconds, timestamp, question, source, explanation
+		       correct, elapsed_seconds, timestamp, question, source, explanation, difficulty
 		FROM attempts
 		ORDER BY student_id, concept_id, timestamp ASC
 	`)
@@ -1272,7 +1277,7 @@ func (s *PostgresStore) GetAllAttempts() ([]AttemptEntry, error) {
 		if err := rows.Scan(
 			&e.ID, &e.SessionID, &e.StudentID, &e.ConceptID,
 			&e.Answer, &e.Expected, &correct, &e.ElapsedSeconds, &ts,
-			&e.Question, &e.Source, &e.Explanation,
+			&e.Question, &e.Source, &e.Explanation, &e.Difficulty,
 		); err != nil {
 			return nil, fmt.Errorf("scan attempt: %w", err)
 		}
@@ -1286,7 +1291,7 @@ func (s *PostgresStore) GetAllAttempts() ([]AttemptEntry, error) {
 func (s *PostgresStore) GetAttemptsForStudent(studentID string) ([]AttemptEntry, error) {
 	rows, err := s.db.Query(`
 		SELECT id, session_id, student_id, concept_id, answer, expected,
-		       correct, elapsed_seconds, timestamp, question, source, explanation
+		       correct, elapsed_seconds, timestamp, question, source, explanation, difficulty
 		FROM attempts
 		WHERE student_id = $1
 		ORDER BY concept_id, timestamp ASC
@@ -1304,7 +1309,7 @@ func (s *PostgresStore) GetAttemptsForStudent(studentID string) ([]AttemptEntry,
 		if err := rows.Scan(
 			&e.ID, &e.SessionID, &e.StudentID, &e.ConceptID,
 			&e.Answer, &e.Expected, &correct, &e.ElapsedSeconds, &ts,
-			&e.Question, &e.Source, &e.Explanation,
+			&e.Question, &e.Source, &e.Explanation, &e.Difficulty,
 		); err != nil {
 			return nil, fmt.Errorf("scan attempt: %w", err)
 		}
@@ -1318,7 +1323,7 @@ func (s *PostgresStore) GetAttemptsForStudent(studentID string) ([]AttemptEntry,
 func (s *PostgresStore) GetSessionAttempts(studentID, sessionID string) ([]AttemptEntry, error) {
 	rows, err := s.db.Query(`
 		SELECT id, session_id, student_id, concept_id, answer, expected,
-		       correct, elapsed_seconds, timestamp, question, source, explanation
+		       correct, elapsed_seconds, timestamp, question, source, explanation, difficulty
 		FROM attempts
 		WHERE student_id = $1 AND session_id = $2
 		ORDER BY timestamp ASC
@@ -1336,7 +1341,7 @@ func (s *PostgresStore) GetSessionAttempts(studentID, sessionID string) ([]Attem
 		if err := rows.Scan(
 			&e.ID, &e.SessionID, &e.StudentID, &e.ConceptID,
 			&e.Answer, &e.Expected, &correct, &e.ElapsedSeconds, &ts,
-			&e.Question, &e.Source, &e.Explanation,
+			&e.Question, &e.Source, &e.Explanation, &e.Difficulty,
 		); err != nil {
 			return nil, fmt.Errorf("scan attempt: %w", err)
 		}

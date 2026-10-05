@@ -63,6 +63,11 @@ CREATE TABLE IF NOT EXISTS attempts (
     question        TEXT    NOT NULL DEFAULT '',
     source          TEXT    NOT NULL DEFAULT '',
     explanation     TEXT    NOT NULL DEFAULT '',
+    -- Difficulty the generator served this question at, 0.3-1.0. NULL means the attempt
+    -- predates the column, or the question was not generated at all, so difficulty is
+    -- *unknown* rather than zero. Evidence has to be able to tell those apart, so this is
+    -- nullable and never backfilled with a plausible-looking number.
+    difficulty      REAL,
     FOREIGN KEY (session_id) REFERENCES sessions(id),
     FOREIGN KEY (student_id) REFERENCES students(id)
 );
@@ -101,6 +106,7 @@ CREATE TABLE IF NOT EXISTS active_sessions (
     last_concept_id TEXT NOT NULL DEFAULT '',
     session_review  INTEGER NOT NULL DEFAULT 0,
     session_new     INTEGER NOT NULL DEFAULT 0,
+    difficulty      REAL,
     updated_at      TEXT NOT NULL DEFAULT (datetime('now'))
 );
 

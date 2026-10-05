@@ -69,9 +69,12 @@ type Session struct {
 }
 
 type ActiveSession struct {
-	SessionID      string
-	StudentID      string
-	ConceptID      string
+	SessionID string
+	StudentID string
+	ConceptID string
+	// Difficulty the currently-served question was generated at. Zero means the question
+	// was not generated at this difficulty, and the attempt is written with a NULL.
+	Difficulty     *float64
 	ConceptName    string
 	ExpectedAnswer string
 	AttemptID      string
@@ -103,6 +106,11 @@ type AttemptEntry struct {
 	Question    string `json:"question"`
 	Source      string `json:"source"`
 	Explanation string `json:"explanation"`
+	// Difficulty the generator served this question at (0.3-1.0). Nil means unknown:
+	// a pre-migration row, or a question that was not generated. Never fabricate it —
+	// "not recorded" and "recorded as trivial" are different facts, and an evidence model
+	// that cannot tell them apart is worse than one that knows less.
+	Difficulty *float64 `json:"difficulty,omitempty"`
 }
 
 // parseAttemptTimestamp parses attempt timestamps from either store.
