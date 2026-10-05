@@ -6,174 +6,206 @@ import (
 )
 
 // Next() transitions
+//
+// These used to be written against `streak >= required AND avg time <= threshold`, and
+// they asserted the old rule faithfully: five consecutive correct answers to leave UNSEEN,
+// and the same five again for each tier after it. They are rewritten here against the
+// evidence ladder because the rule they pinned is the one being replaced — the ladder is
+// now three different questions, and a test that still demanded a full threshold-length
+// streak would be asserting the bug.
+
+func evidenceOf(correct bool, instance string, difficulty, elapsed float64) Attempt {
+	return Attempt{Correct: correct, Instance: instance, Difficulty: diff(difficulty), Elapsed: elapsed}
+}
+
+// started is one correct answer: enough to say the learner has begun.
+func started() Evidence {
+	return BuildEvidence([]Attempt{evidenceOf(true, "a", 0.5, 4)}, EvidenceOptions{TimeThreshold: 10})
+}
+
+// consistent is two correct on two instances: reliable, not demonstrated.
+func consistent() Evidence {
+	return BuildEvidence([]Attempt{
+		evidenceOf(true, "a", 0.4, 4), evidenceOf(true, "b", 0.4, 4),
+	}, EvidenceOptions{TimeThreshold: 10})
+}
+
+// demonstrated is four correct across four instances at real difficulty.
+func demonstrated() Evidence {
+	return BuildEvidence([]Attempt{
+		evidenceOf(true, "a", 0.7, 6), evidenceOf(true, "b", 0.8, 6),
+		evidenceOf(true, "c", 0.7, 6), evidenceOf(true, "d", 0.9, 6),
+	}, EvidenceOptions{TimeThreshold: 10})
+}
 
 func TestNext_UnseenToLearning(t *testing.T) {
 	m := &Machine{}
-	ctx := TransitionCtx{
-		Streak:            5,
-		RequiredStreak:    5,
-		AvgResponseTime:   3.0,
-		ResponseThreshold: 10.0,
-	}
-	got := m.Next(StatusUnseen, ctx)
+	got := m.Next(StatusUnseen, TransitionCtx{Evidence: started()})
 	if got != StatusLearning {
 		t.Errorf("UNSEEN → LEARNING: expected %q, got %q", StatusLearning, got)
 	}
 }
 
-func TestNext_UnseenStays_StreakNotMet(t *testing.T) {
-	m := &Machine{}
-	ctx := TransitionCtx{
-		Streak:            3,
-		RequiredStreak:    5,
-		AvgResponseTime:   3.0,
-		ResponseThreshold: 10.0,
+// The substantive change. One correct answer used to be nowhere near enough: the rule
+// demanded the full `required_streak`, which is 10 for 459 of the 657 concepts.
+func TestNext_OneCorrectAnswerLeavesUnseen(t *testing.T) {
+	for _, required := range []int{3, 10, 15} {
+		m := &Machine{}
+		ctx := TransitionCtx{Evidence: started(), RequiredStreak: required}
+		if got := m.Next(StatusUnseen, ctx); got != StatusLearning {
+			t.Errorf("required_streak %d: one correct answer gave %q, want LEARNING", required, got)
+		}
 	}
-	got := m.Next(StatusUnseen, ctx)
+}
+
+func TestNext_UnseenStays_NothingAnswered(t *testing.T) {
+	m := &Machine{}
+	got := m.Next(StatusUnseen, TransitionCtx{Evidence: BuildEvidence(nil, EvidenceOptions{})})
 	if got != StatusUnseen {
 		t.Errorf("expected UNSEEN, got %q", got)
 	}
 }
 
-func TestNext_UnseenStays_TimeTooSlow(t *testing.T) {
+// A wrong first answer must not move the concept, however fast or however many.
+func TestNext_UnseenStays_WrongAnswer(t *testing.T) {
 	m := &Machine{}
-	ctx := TransitionCtx{
-		Streak:            5,
-		RequiredStreak:    5,
-		AvgResponseTime:   12.0,
-		ResponseThreshold: 10.0,
-	}
-	got := m.Next(StatusUnseen, ctx)
-	if got != StatusUnseen {
-		t.Errorf("expected UNSEEN, got %q", got)
-	}
-}
-
-func TestNext_UnseenStays_NeitherMet(t *testing.T) {
-	m := &Machine{}
-	ctx := TransitionCtx{
-		Streak:            2,
-		RequiredStreak:    5,
-		AvgResponseTime:   15.0,
-		ResponseThreshold: 10.0,
-	}
-	got := m.Next(StatusUnseen, ctx)
-	if got != StatusUnseen {
-		t.Errorf("expected UNSEEN, got %q", got)
+	ev := BuildEvidence([]Attempt{evidenceOf(false, "a", 0.5, 1)}, EvidenceOptions{TimeThreshold: 10})
+	if got := m.Next(StatusUnseen, TransitionCtx{Evidence: ev}); got != StatusUnseen {
+		t.Errorf("expected UNSEEN after a wrong answer, got %q", got)
 	}
 }
 
 func TestNext_LearningToPracticing(t *testing.T) {
 	m := &Machine{}
-	ctx := TransitionCtx{
-		Streak:            5,
-		RequiredStreak:    5,
-		AvgResponseTime:   4.0,
-		ResponseThreshold: 8.0,
-	}
-	got := m.Next(StatusLearning, ctx)
-	if got != StatusPracticing {
-		t.Errorf("LEARNING → PRACTICING: expected %q, got %q", StatusPracticing, got)
+	if got := m.Next(StatusLearning, TransitionCtx{Evidence: consistent()}); got != StatusPracticing {
+		t.Errorf("LEARNING → PRACTICING: expected PRACTICING, got %q", got)
 	}
 }
 
-func TestNext_LearningStays_StreakNotMet(t *testing.T) {
-	m := &Machine{}
-	ctx := TransitionCtx{
-		Streak:            4,
-		RequiredStreak:    5,
-		AvgResponseTime:   4.0,
-		ResponseThreshold: 8.0,
+// Variety is rewarded, not required.
+//
+// Getting the same question right twice *is* reliability, so it reaches PRACTICING. It is
+// weaker evidence than the same two answers on two different questions, and the score says
+// so — but it must not be a veto. An earlier version gated mastery on `Instances >= 2`, and
+// the engine tests immediately hit the failure that caused: a generator that returns the
+// same question text every attempt drives Instances to 1 forever and the concept can never
+// be mastered at all.
+func TestNext_VarietyIsRewardedNotRequired(t *testing.T) {
+	same := BuildEvidence([]Attempt{
+		evidenceOf(true, "a", 0.9, 3), evidenceOf(true, "a", 0.9, 3), evidenceOf(true, "a", 0.9, 3),
+	}, EvidenceOptions{TimeThreshold: 10})
+	varied := BuildEvidence([]Attempt{
+		evidenceOf(true, "a", 0.9, 3), evidenceOf(true, "b", 0.9, 3), evidenceOf(true, "c", 0.9, 3),
+	}, EvidenceOptions{TimeThreshold: 10})
+
+	if same.Instances != 1 || varied.Instances != 3 {
+		t.Fatalf("instances: same=%d varied=%d", same.Instances, varied.Instances)
 	}
-	got := m.Next(StatusLearning, ctx)
-	if got != StatusLearning {
-		t.Errorf("expected LEARNING, got %q", got)
+	if varied.Score <= same.Score {
+		t.Errorf("variety did not raise the score: %v vs %v", varied.Score, same.Score)
+	}
+
+	// Both reach PRACTICING; both reach MASTERED too, because variety is not a gate.
+	m := &Machine{}
+	if got := m.Next(StatusLearning, TransitionCtx{Evidence: same}); got != StatusPracticing {
+		t.Errorf("same-instance consistency gave %q, want PRACTICING", got)
+	}
+	// From UNSEEN, three correct on one instance is enough to walk the whole ladder — this
+	// is the regression guard for the unreachable-mastery failure.
+	if got := m.Next(StatusUnseen, TransitionCtx{Evidence: same}); got != StatusLearning {
+		t.Errorf("UNSEEN with three correct gave %q, want LEARNING", got)
+	}
+	if got := m.Next(StatusLearning, TransitionCtx{Evidence: same}); got != StatusPracticing {
+		t.Errorf("LEARNING with three correct gave %q, want PRACTICING", got)
+	}
+	if got := m.Next(StatusPracticing, TransitionCtx{Evidence: same}); got != StatusMastered {
+		t.Errorf("a non-varied generator must not make mastery unreachable; got %q", got)
 	}
 }
 
 func TestNext_PracticingToMastered(t *testing.T) {
 	m := &Machine{}
-	ctx := TransitionCtx{
-		Streak:            7,
-		RequiredStreak:    7,
-		AvgResponseTime:   5.0,
-		ResponseThreshold: 6.0,
-	}
-	got := m.Next(StatusPracticing, ctx)
-	if got != StatusMastered {
-		t.Errorf("PRACTICING → MASTERED: expected %q, got %q", StatusMastered, got)
+	if got := m.Next(StatusPracticing, TransitionCtx{Evidence: demonstrated()}); got != StatusMastered {
+		t.Errorf("PRACTICING → MASTERED: expected MASTERED, got %q", got)
 	}
 }
 
-func TestNext_PracticingStays_StreakBroken(t *testing.T) {
+// One rung per transition. Strong evidence on a LEARNING concept advances it one step, not
+// straight to MASTERED — otherwise a learner with a burst of history skips the middle.
+func TestNext_AdvancesOneRungOnly(t *testing.T) {
 	m := &Machine{}
-	ctx := TransitionCtx{
-		Streak:            6,
-		RequiredStreak:    7,
-		AvgResponseTime:   5.0,
-		ResponseThreshold: 6.0,
+	if got := m.Next(StatusLearning, TransitionCtx{Evidence: demonstrated()}); got != StatusPracticing {
+		t.Errorf("LEARNING with strong evidence gave %q, want PRACTICING", got)
 	}
-	got := m.Next(StatusPracticing, ctx)
-	if got != StatusPracticing {
-		t.Errorf("expected PRACTICING, got %q", got)
+	if got := m.Next(StatusUnseen, TransitionCtx{Evidence: demonstrated()}); got != StatusLearning {
+		t.Errorf("UNSEEN with strong evidence gave %q, want LEARNING", got)
 	}
 }
 
-func TestNext_PracticingStays_TimeTooSlow(t *testing.T) {
+// Mastery is an exit. A later miss lowers the evidence score but must not un-learn it —
+// ADR-037 made the exit unconditional, and decay is a read-time question about retention.
+func TestNext_MasteredIsSticky(t *testing.T) {
 	m := &Machine{}
-	ctx := TransitionCtx{
-		Streak:            7,
-		RequiredStreak:    7,
-		AvgResponseTime:   9.0,
-		ResponseThreshold: 6.0,
-	}
-	got := m.Next(StatusPracticing, ctx)
-	if got != StatusPracticing {
-		t.Errorf("expected PRACTICING, got %q", got)
+	bad := BuildEvidence([]Attempt{
+		evidenceOf(false, "z", 0.9, 1), evidenceOf(false, "y", 0.9, 1),
+		evidenceOf(false, "x", 0.9, 1),
+	}, EvidenceOptions{TimeThreshold: 10})
+	if got := m.Next(StatusMastered, TransitionCtx{Evidence: bad}); got != StatusMastered {
+		t.Errorf("MASTERED with terrible evidence gave %q, want MASTERED", got)
 	}
 }
 
-func TestNext_MasteredStays(t *testing.T) {
+// The streak fields are context, not authority. A long streak on evidence that does not
+// reach the next rung must not advance the ladder.
+func TestNext_StreakAloneDoesNotAdvance(t *testing.T) {
 	m := &Machine{}
 	ctx := TransitionCtx{
-		Streak:            10,
-		RequiredStreak:    7,
-		AvgResponseTime:   2.0,
-		ResponseThreshold: 6.0,
+		Evidence:          BuildEvidence([]Attempt{evidenceOf(true, "a", 0.3, 2)}, EvidenceOptions{TimeThreshold: 10}),
+		Streak:            99,
+		RequiredStreak:    3,
+		AvgResponseTime:   1,
+		ResponseThreshold: 10,
 	}
-	got := m.Next(StatusMastered, ctx)
-	if got != StatusMastered {
-		t.Errorf("expected MASTERED, got %q", got)
+	if got := m.Next(StatusPracticing, ctx); got == StatusMastered {
+		t.Errorf("one attempt with streak 99 reached MASTERED, giving %q", got)
+	}
+	if got := m.Next(StatusPracticing, TransitionCtx{
+		Evidence: BuildEvidence(nil, EvidenceOptions{}),
+		Streak:   99, RequiredStreak: 3, AvgResponseTime: 1, ResponseThreshold: 10,
+	}); got != StatusPracticing {
+		t.Errorf("a full streak with no evidence gave %q, want PRACTICING", got)
 	}
 }
 
-// Streak exceeds required — still advances (excess is irrelevant).
-func TestNext_ExcessStreak(t *testing.T) {
+// Streak is evidence, not authority — these two replace the old "excess streak still
+// advances" and "streak == required advances", which asserted the rule being replaced.
+func TestNext_ExcessStreakDoesNotSubstituteForEvidence(t *testing.T) {
 	m := &Machine{}
+	// Twelve in a row, comfortably over a required_streak of 5, on evidence that has only
+	// ever been one question. Consistency is real; it is not the rung asked for.
 	ctx := TransitionCtx{
+		Evidence:          BuildEvidence([]Attempt{evidenceOf(true, "a", 0.5, 2)}, EvidenceOptions{TimeThreshold: 10}),
 		Streak:            12,
 		RequiredStreak:    5,
-		AvgResponseTime:   3.0,
-		ResponseThreshold: 10.0,
+		AvgResponseTime:   2,
+		ResponseThreshold: 10,
 	}
-	got := m.Next(StatusUnseen, ctx)
-	if got != StatusLearning {
-		t.Errorf("expected LEARNING (excess streak ok), got %q", got)
+	if got := m.Next(StatusPracticing, ctx); got == StatusMastered {
+		t.Error("a long streak on a single question instance established mastery")
 	}
 }
 
-// Exact boundary: streak == required, time == threshold.
-func TestNext_ExactBoundary(t *testing.T) {
+func TestNext_ExactStreakBoundaryIsIrrelevantNow(t *testing.T) {
 	m := &Machine{}
+	// Exactly at both thresholds, with no evidence recorded — the old rule advanced here.
 	ctx := TransitionCtx{
 		Streak:            5,
 		RequiredStreak:    5,
 		AvgResponseTime:   10.0,
 		ResponseThreshold: 10.0,
 	}
-	got := m.Next(StatusLearning, ctx)
-	if got != StatusPracticing {
-		t.Errorf("expected PRACTICING (exact boundary ok), got %q", got)
+	if got := m.Next(StatusLearning, ctx); got == StatusPracticing {
+		t.Error("streak == required advanced the ladder with no evidence at all")
 	}
 }
 
@@ -251,12 +283,12 @@ func TestStatusConstants(t *testing.T) {
 	}
 }
 
-// TestMasteryPct_NeverGoesBackwards drives the real rules — streak increments on a
-// correct answer and resets to 1 on every tier advance, exactly as
-// Engine.submitAnswerWithTask does — and asserts the bar never decreases.
+// TestMasteryPct_NeverGoesBackwards walks a concept from UNSEEN to MASTERED through the
+// real ladder, building evidence attempt by attempt exactly as the engine does, and
+// asserts the bar never decreases.
 //
 // This is the assertion that would have caught the sawtooth. The old formula was
-// `streak / requiredStreak`, so at the instant of each advance the bar fell from 100% to
+// `streak / required_streak`, so at the instant of each advance the bar fell from 100% to
 // ~10%, three times on the way up: the learner watched their progress drop while doing
 // everything right.
 func TestMasteryPct_NeverGoesBackwards(t *testing.T) {
@@ -266,18 +298,37 @@ func TestMasteryPct_NeverGoesBackwards(t *testing.T) {
 	streak := 0
 	prev := MasteryPct(status, streak, req)
 	advances := 0
+	answered := 0
 
-	for answer := 0; answer < 60 && status != StatusMastered; answer++ {
+	// Difficulty climbs as the learner does better and every answer is a new instance —
+	// the shape the generator produces and the evidence model is built to read.
+	difficulties := []float64{0.35, 0.45, 0.55, 0.7, 0.8, 0.9}
+
+	for answer := 0; answer < 20 && status != StatusMastered; answer++ {
+		answered++
 		streak++ // a correct answer
+
+		// A six-attempt window, rebuilt each turn exactly as the engine rebuilds it.
+		window := make([]Attempt, 0, 6)
+		for k := 0; k < 6; k++ {
+			i := answer - k
+			if i < 0 {
+				i = 0
+			}
+			window = append(window, Attempt{
+				Correct: true, Elapsed: 3,
+				Difficulty: diff(difficulties[i%len(difficulties)]),
+				Instance:   string(rune('a' + i)),
+			})
+		}
+		ev := BuildEvidence(window, EvidenceOptions{TimeThreshold: 10})
+
 		next := m.Next(status, TransitionCtx{
-			Streak:            streak,
-			RequiredStreak:    req,
-			AvgResponseTime:   1,
-			ResponseThreshold: 10,
+			Evidence: ev, Streak: streak, RequiredStreak: req,
+			AvgResponseTime: 3, ResponseThreshold: 10,
 		})
 		if next != status {
 			status = next
-			streak = 1 // the engine's reset-on-advance
 			advances++
 		}
 
@@ -290,7 +341,7 @@ func TestMasteryPct_NeverGoesBackwards(t *testing.T) {
 	}
 
 	if status != StatusMastered {
-		t.Fatalf("never reached MASTERED in 60 correct answers, got %s", status)
+		t.Fatalf("never reached MASTERED, got %s after %d correct answers", status, answered)
 	}
 	if advances != 3 {
 		t.Errorf("expected 3 tier advances, got %d", advances)
@@ -298,10 +349,13 @@ func TestMasteryPct_NeverGoesBackwards(t *testing.T) {
 	if prev != 1 {
 		t.Errorf("final bar = %v, want 1", prev)
 	}
-	// And the old formula, for the record: it is this sawtooth that made the streak
-	// ratio unusable as a bar length.
-	if old := float64(1) / float64(req); old >= 0.2 {
-		t.Errorf("sanity: the streak ratio at streak 1 is %v, which is where the bar used to land", old)
+
+	// The cost, measured rather than asserted. This is the number the ladder exists to
+	// move: it used to be 3 × required_streak consecutive correct answers, 30 for the 459
+	// concepts whose threshold is 10.
+	t.Logf("%d concepts reached MASTERED in %d correct answers", len(difficulties), answered)
+	if answered > 12 {
+		t.Errorf("mastery took %d answers, which is back toward the old cost", answered)
 	}
 }
 
@@ -338,5 +392,251 @@ func TestMasteryPct_NoThresholdOrNoStreak(t *testing.T) {
 	}
 	if got := MasteryPct(StatusUnseen, 0, 0); got != 0 {
 		t.Errorf("unseen = %v, want 0", got)
+	}
+}
+
+func diff(d float64) *float64 { return &d }
+
+func at(vals ...float64) []*float64 {
+	out := make([]*float64, len(vals))
+	for i, v := range vals {
+		out[i] = &v
+	}
+	return out
+}
+
+// The evidence score must agree with the browser model it replaces, or the label in /learn
+// and the decision that gates progression will drift apart again — which is the state
+// ADR-037 spent a week untangling.
+func TestBuildEvidence_MatchesBrowserModelShape(t *testing.T) {
+	// 3 correct at difficulty 0.7, on 3 distinct instances, fast.
+	ev := BuildEvidence([]Attempt{
+		{Correct: true, Elapsed: 5, Difficulty: diff(0.7), Instance: "a"},
+		{Correct: true, Elapsed: 6, Difficulty: diff(0.7), Instance: "b"},
+		{Correct: true, Elapsed: 5, Difficulty: diff(0.7), Instance: "c"},
+	}, EvidenceOptions{TimeThreshold: 10})
+
+	if ev.Attempts != 3 || ev.Correct != 3 || ev.Instances != 3 {
+		t.Fatalf("assembled %+v", ev)
+	}
+	// accuracy 1.0 × (0.6 + 0.4×0.7) = 0.88, + variety 0.10 (3 instances, capped below
+	// 0.15), × time 1.0
+	want := (1.0*(0.6+0.4*0.7) + 0.10)
+	if math.Abs(ev.Score-want) > 1e-9 {
+		t.Errorf("score = %v, want %v", ev.Score, want)
+	}
+	if !EnoughForMastery(ev) {
+		t.Errorf("three distinct correct instances at difficulty 0.7 should establish mastery, got %+v", ev)
+	}
+}
+
+func TestBuildEvidence_OneCorrectAnswerCannotMaster(t *testing.T) {
+	// A single correct answer is weighted 1.0 and would clear the score on its own. This
+	// is the guard that stops one lucky question becoming a state change.
+	ev := BuildEvidence([]Attempt{
+		{Correct: true, Elapsed: 2, Difficulty: diff(1.0), Instance: "a"},
+	}, EvidenceOptions{TimeThreshold: 10})
+	if ev.Score < MasteryThreshold {
+		t.Fatalf("a lone perfect answer should still score well, got %v", ev.Score)
+	}
+	if EnoughForMastery(ev) {
+		t.Errorf("one attempt established mastery: %+v", ev)
+	}
+	// The same question three times is recorded as one instance and is *scored* lower for
+	// it — but it is not blocked, because a generator that never varies its question text
+	// would otherwise make the concept permanently unmasterable.
+	same := BuildEvidence([]Attempt{
+		{Correct: true, Elapsed: 2, Difficulty: diff(0.5), Instance: "a"},
+		{Correct: true, Elapsed: 2, Difficulty: diff(0.5), Instance: "a"},
+		{Correct: true, Elapsed: 2, Difficulty: diff(0.5), Instance: "a"},
+	}, EvidenceOptions{TimeThreshold: 10})
+	if same.Instances != 1 {
+		t.Fatalf("three attempts on one instance counted as %d instances", same.Instances)
+	}
+	// Difficulty 0.5 rather than 1.0: at the top of the range the score saturates at the
+	// clamp before variety can add anything, which is fine — there is nothing left to
+	// discriminate — but it would hide the effect being asserted here.
+	varied := BuildEvidence([]Attempt{
+		{Correct: true, Elapsed: 2, Difficulty: diff(0.5), Instance: "a"},
+		{Correct: true, Elapsed: 2, Difficulty: diff(0.5), Instance: "b"},
+		{Correct: true, Elapsed: 2, Difficulty: diff(0.5), Instance: "c"},
+	}, EvidenceOptions{TimeThreshold: 10})
+	if varied.Score <= same.Score {
+		t.Errorf("variety did not raise the score: %v vs %v", varied.Score, same.Score)
+	}
+}
+
+func TestBuildEvidence_DifficultyAndTimeChangeTheScore(t *testing.T) {
+	insts := func() []Attempt {
+		return []Attempt{
+			{Correct: true, Elapsed: 5, Difficulty: diff(0.3), Instance: "a"},
+			{Correct: true, Elapsed: 5, Difficulty: diff(0.3), Instance: "b"},
+			{Correct: true, Elapsed: 5, Difficulty: diff(0.3), Instance: "c"},
+		}
+	}
+	easy := BuildEvidence(insts(), EvidenceOptions{TimeThreshold: 10})
+
+	hard := insts()
+	for i := range hard {
+		hard[i].Difficulty = diff(1.0)
+	}
+	hardEv := BuildEvidence(hard, EvidenceOptions{TimeThreshold: 10})
+	if hardEv.Score <= easy.Score {
+		t.Errorf("harder questions scored %v, not above easy %v", hardEv.Score, easy.Score)
+	}
+
+	slow := insts()
+	for i := range slow {
+		slow[i].Elapsed = 60
+	}
+	slowEv := BuildEvidence(slow, EvidenceOptions{TimeThreshold: 10})
+	if slowEv.Score >= easy.Score {
+		t.Errorf("slow answers scored %v, not below fast %v", slowEv.Score, easy.Score)
+	}
+}
+
+// Unknown difficulty must be dropped, not read as zero. A concept whose attempts predate
+// the column still has evidence; it just has none of this kind.
+func TestBuildEvidence_UnknownDifficultyIsDroppedNotZeroed(t *testing.T) {
+	unknown := BuildEvidence([]Attempt{
+		{Correct: true, Elapsed: 5, Instance: "a"},
+		{Correct: true, Elapsed: 5, Instance: "b"},
+		{Correct: true, Elapsed: 5, Instance: "c"},
+	}, EvidenceOptions{TimeThreshold: 10})
+	if unknown.AvgDifficulty != 0 {
+		t.Errorf("AvgDifficulty = %v, want 0 when nothing recorded it", unknown.AvgDifficulty)
+	}
+	// 1.0 accuracy with the difficulty term dropped, plus variety 0.10, clamped at 1.
+	if unknown.Score != 1 {
+		t.Errorf("score = %v, want 1 (difficulty term dropped, not zeroed)", unknown.Score)
+	}
+	if !EnoughForMastery(unknown) {
+		t.Errorf("unknown difficulty should not disqualify otherwise-good evidence: %+v", unknown)
+	}
+}
+
+func TestBuildEvidence_OnlyTheRecentWindowCounts(t *testing.T) {
+	var old []Attempt
+	for i := 0; i < 20; i++ {
+		old = append(old, Attempt{Correct: false, Elapsed: 5, Instance: "old"})
+	}
+	for i := 0; i < 4; i++ {
+		old = append(old, Attempt{
+			Correct: true, Elapsed: 5, Difficulty: diff(0.8),
+			Instance: string(rune('a' + i)),
+		})
+	}
+	ev := BuildEvidence(old, EvidenceOptions{TimeThreshold: 10})
+	if ev.Attempts != EvidenceWindow {
+		t.Errorf("Attempts = %d, want the window of %d", ev.Attempts, EvidenceWindow)
+	}
+	// The window reaches back two of the 20 misses, and still clears. A month of failure
+	// must not prevent mastery once the recent evidence is clean — the question is whether
+	// the learner can do it *now*, and a streak counter that never decays is the reason this
+	// window exists.
+	if !EnoughForMastery(ev) {
+		t.Errorf("recent clean evidence did not establish mastery: %+v", ev)
+	}
+
+	// The converse, and the reason the window is a window: two corrects after 20 misses is
+	// genuinely weak, and the model says so rather than being helped along by the old data.
+	weak := BuildEvidence(append(old[:20],
+		Attempt{Correct: true, Elapsed: 5, Difficulty: diff(0.8), Instance: "a"},
+		Attempt{Correct: true, Elapsed: 5, Difficulty: diff(0.8), Instance: "b"},
+	), EvidenceOptions{TimeThreshold: 10})
+	if EnoughForMastery(weak) {
+		t.Errorf("two correct answers after 20 misses should not establish mastery: %+v", weak)
+	}
+}
+
+func TestBuildEvidence_EmptyIsUnevidenced(t *testing.T) {
+	ev := BuildEvidence(nil, EvidenceOptions{TimeThreshold: 10})
+	if ev.Attempts != 0 || ev.Score != 0 {
+		t.Fatalf("empty evidence = %+v", ev)
+	}
+	if EnoughForMastery(ev) || EnoughForPracticing(ev) {
+		t.Error("no attempts must not establish anything")
+	}
+}
+
+func TestEnoughForPracticing_WeakerThanMastery(t *testing.T) {
+	// Two correct attempts on two instances, all at the easiest difficulty: enough to show
+	// consistency, not enough to show the concept is learned.
+	ev := BuildEvidence([]Attempt{
+		{Correct: true, Elapsed: 5, Difficulty: diff(0.3), Instance: "a"},
+		{Correct: true, Elapsed: 5, Difficulty: diff(0.3), Instance: "b"},
+	}, EvidenceOptions{TimeThreshold: 10})
+	if !EnoughForPracticing(ev) {
+		t.Errorf("two clean correct attempts should show consistency: %+v", ev)
+	}
+	if EnoughForMastery(ev) {
+		t.Errorf("two attempts should not establish mastery: %+v", ev)
+	}
+}
+
+// The ladder, as the state diagram draws it: three different questions, not one question
+// asked three times.
+//
+// This is the test that would have caught the collapse. With every rung asking
+// `streak >= required`, a threshold-10 concept needed 30 consecutive correct answers, and
+// the cost fell entirely on the learner being stuck at UNSEEN.
+func TestLadder_EachRungAsksADifferentQuestion(t *testing.T) {
+	// 1. Nothing yet.
+	none := BuildEvidence(nil, EvidenceOptions{TimeThreshold: 10})
+	if HighestRung(none) != RungNone {
+		t.Errorf("no evidence gave rung %v, want RungNone", HighestRung(none))
+	}
+
+	// 2. One correct answer: started, and nothing more. The old ladder needed a full
+	// threshold-length streak to say a learner had begun learning.
+	one := BuildEvidence([]Attempt{
+		{Correct: true, Elapsed: 4, Difficulty: diff(0.5), Instance: "a"},
+	}, EvidenceOptions{TimeThreshold: 10})
+	if HighestRung(one) != RungStarted {
+		t.Errorf("one correct answer gave rung %v, want RungStarted", HighestRung(one))
+	}
+
+	// 3. Two correct, two instances, easy: reliable, not yet demonstrated.
+	two := BuildEvidence([]Attempt{
+		{Correct: true, Elapsed: 4, Difficulty: diff(0.4), Instance: "a"},
+		{Correct: true, Elapsed: 4, Difficulty: diff(0.4), Instance: "b"},
+	}, EvidenceOptions{TimeThreshold: 10})
+	if HighestRung(two) != RungConsistent {
+		t.Errorf("two consistent correct answers gave rung %v, want RungConsistent", HighestRung(two))
+	}
+
+	// 4. Four correct across four instances at real difficulty: demonstrated.
+	four := BuildEvidence([]Attempt{
+		{Correct: true, Elapsed: 6, Difficulty: diff(0.7), Instance: "a"},
+		{Correct: true, Elapsed: 6, Difficulty: diff(0.8), Instance: "b"},
+		{Correct: true, Elapsed: 6, Difficulty: diff(0.7), Instance: "c"},
+		{Correct: true, Elapsed: 6, Difficulty: diff(0.9), Instance: "d"},
+	}, EvidenceOptions{TimeThreshold: 10})
+	if HighestRung(four) != RungDemonstrated {
+		t.Errorf("four clean varied correct answers gave rung %v, want RungDemonstrated", HighestRung(four))
+	}
+}
+
+// The rungs must be strictly ordered, or a weaker bar could fire on stronger evidence and
+// the ladder would advance past the rung that was actually met.
+func TestLadder_RungsAreOrdered(t *testing.T) {
+	cases := []struct {
+		name string
+		ev   Evidence
+	}{
+		{"none", BuildEvidence(nil, EvidenceOptions{})},
+		{"one", BuildEvidence([]Attempt{{Correct: true, Instance: "a"}}, EvidenceOptions{})},
+		{"two easy", BuildEvidence([]Attempt{
+			{Correct: true, Instance: "a"}, {Correct: true, Instance: "b"},
+		}, EvidenceOptions{})},
+		{"three easy", BuildEvidence([]Attempt{
+			{Correct: true, Instance: "a"}, {Correct: true, Instance: "b"}, {Correct: true, Instance: "c"},
+		}, EvidenceOptions{})},
+	}
+	for i := 1; i < len(cases); i++ {
+		if HighestRung(cases[i-1].ev) >= HighestRung(cases[i].ev) {
+			t.Errorf("%s rung %v is not below %s rung %v",
+				cases[i-1].name, HighestRung(cases[i-1].ev), cases[i].name, HighestRung(cases[i].ev))
+		}
 	}
 }

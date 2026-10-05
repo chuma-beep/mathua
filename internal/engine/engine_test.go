@@ -148,9 +148,14 @@ func TestEngine_MasteryProgression(t *testing.T) {
 		}
 	}
 	progress, _ := e.GetProgress(st.ID)
-	// 3 correct fast answers: UNSEEN → LEARNING (streak hits 3)
-	if p, ok := progress["a"]; !ok || p.Status != "LEARNING" {
-		t.Errorf("expected LEARNING after 3-streak, got %+v", progress["a"])
+	// 3 correct fast answers on 3 distinct questions walk the whole ladder: UNSEEN →
+	// LEARNING → PRACTICING → MASTERED.
+	//
+	// This used to assert LEARNING, because the old rule needed the streak to *reach* the
+	// threshold before it would move at all — and then a further full threshold for each
+	// of the next two tiers. Three answers is the number the ladder was built to reach.
+	if p, ok := progress["a"]; !ok || p.Status != "MASTERED" {
+		t.Errorf("expected MASTERED after 3 clean answers, got %+v", progress["a"])
 	}
 }
 
@@ -294,8 +299,16 @@ func TestEngine_FullMasteryCycle(t *testing.T) {
 	st, _ := e.CreateStudent("mastery_tester")
 	sess, _ := e.repo.CreateSession(st.ID)
 
-	// Master concept "a" (requiredStreak=3 per level, 9 total correct answers).
-	// Then verify concept "b" becomes available (prerequisite "a" now mastered).
+	// Master concept "a", then confirm "b" becomes available because its prerequisite is
+	// now mastered.
+	//
+	// This loop used to ask for concept "a" nine times and fail if it got anything else,
+	// because the old rule needed 3 × required_streak correct answers per concept. Under
+	// the evidence ladder "a" is mastered in three and the scheduler moves to "b" — so the
+	// test now asserts the *frontier advancing*, which is the behaviour the ladder exists
+	// to produce. It is the clearest available proof of the cost change: 3 answers, not 9,
+	// and not 30.
+	masteredOn := 0
 	for i := 0; i < 9; i++ {
 		e.mu.Lock()
 		e.sessions[sess.ID] = &activeSession{}
@@ -308,7 +321,7 @@ func TestEngine_FullMasteryCycle(t *testing.T) {
 			t.Fatal("expected question")
 		}
 		if q.ConceptID != "a" {
-			t.Fatalf("expected concept a on attempt %d, got %s", i+1, q.ConceptID)
+			break // the frontier moved on, which is the point
 		}
 		res, err := e.SubmitAnswer(sess.ID, st.ID, q.AttemptID, "42", 1.0)
 		if err != nil {
@@ -317,11 +330,20 @@ func TestEngine_FullMasteryCycle(t *testing.T) {
 		if !res.Correct {
 			t.Fatalf("expected correct on attempt %d, got %s", i+1, res.Feedback)
 		}
+		masteredOn = i + 1
+		if p, _ := e.GetProgress(st.ID); p["a"] != nil && p["a"].Status == "MASTERED" {
+			break
+		}
 	}
+
 	progress, _ := e.GetProgress(st.ID)
 	if p := progress["a"]; p == nil || p.Status != "MASTERED" {
-		t.Fatalf("expected MASTERED after 9 correct, got %+v", progress["a"])
+		t.Fatalf("expected a MASTERED, got %+v", progress["a"])
 	}
+	if masteredOn > 6 {
+		t.Errorf("a took %d answers to master; the ladder is supposed to be a handful, not a threshold-length streak", masteredOn)
+	}
+	t.Logf("concept a mastered in %d correct answers", masteredOn)
 
 	// Now concept "b" should be available (prereq "a" is mastered).
 	e.mu.Lock()
@@ -1188,23 +1210,42 @@ func TestProgressWithMasteryPct_DerivesFromServerThreshold(t *testing.T) {
 		t.Errorf("an untouched learner has %d progress rows, want 0", len(views))
 	}
 
-	// Three correct answers is the threshold, so this lands on the UNSEEN -> LEARNING
-	// advance, where the engine resets the streak to 1. The bar therefore reads as one
-	// third plus a third of a third of a third — and, critically, not as the 1/3 a
-	// streak-derived ratio would give here.
+	// Three clean correct answers walk the whole ladder to MASTERED, and the bar is full.
+	// The per-concept threshold no longer has any say in this: the score is normalised
+	// against the concept's own difficulty and time threshold, so mastery costs the same
+	// handful of answers whether required_streak is 3 or 15.
 	answerCorrectly(t, e, st.ID, 3)
 	views, _ = e.ProgressWithMasteryPct(st.ID)
 	row := views["a"]
-	// (1 tier + 1/3 of the next) / 3 = 4/9.
-	if got, want := row.MasteryPct, 4.0/9.0; got < want-0.01 || got > want+0.01 {
-		t.Errorf("mastery_pct at LEARNING = %v, want %v (one tier plus 1/3 of the next)", got, want)
+	if row.Status != "MASTERED" {
+		t.Fatalf("status after 3 clean answers = %q, want MASTERED", row.Status)
 	}
-	// The stored row is embedded, so the schema fields still travel with it.
-	if row.Status != "LEARNING" {
-		t.Errorf("embedded status = %q, want LEARNING", row.Status)
+	if row.MasteryPct != 1 {
+		t.Errorf("mastery_pct at MASTERED = %v, want 1", row.MasteryPct)
 	}
-	if row.Streak != 1 {
-		t.Errorf("embedded streak = %d, want 1", row.Streak)
+
+	// Mid-ladder the bar is partial and ordered, which is what makes it mean attainment
+	// rather than a streak ratio. A separate learner, because concept "a" has run out of
+	// questions by now and asking again is not possible.
+	mid, _ := e.CreateStudent("pct_mid_ladder")
+	answerCorrectly(t, e, mid.ID, 1)
+	midViews, _ := e.ProgressWithMasteryPct(mid.ID)
+	if got := midViews["a"].Status; got != "LEARNING" {
+		t.Fatalf("status after 1 clean answer = %q, want LEARNING", got)
+	}
+	if got := midViews["a"].MasteryPct; got <= 1.0/3.0 || got >= 2.0/3.0 {
+		t.Errorf("mastery_pct one answer in = %v, want strictly between 1/3 and 2/3", got)
+	}
+	// The stored row is embedded, so the schema fields still travel with it alongside the
+	// derived percentage.
+	if row.Status != "MASTERED" {
+		t.Errorf("embedded status = %q, want MASTERED", row.Status)
+	}
+	if row.Attempts != 3 {
+		t.Errorf("embedded attempts = %d, want 3", row.Attempts)
+	}
+	if row.MasteryPct != views["a"].MasteryPct {
+		t.Errorf("embedded view disagrees with the derived value: %v", row.MasteryPct)
 	}
 }
 

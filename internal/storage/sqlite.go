@@ -1120,6 +1120,54 @@ func (s *SQLiteStore) RecordAttempt(entry AttemptEntry) error {
 	return nil
 }
 
+// GetRecentAttemptsForConcept implements the bounded per-concept window the evidence
+// model reads on each graded answer. Newest last, matching BuildEvidence's expectation.
+//
+// Ordered descending so the LIMIT takes the most recent rows, then reversed on the way
+// out: the query needs newest-first to bound itself, and the evidence model reads
+// oldest-last so its recency weights increase toward the present.
+func (s *SQLiteStore) GetRecentAttemptsForConcept(studentID, conceptID string, limit int) ([]AttemptEntry, error) {
+	if limit <= 0 {
+		limit = 10
+	}
+	rows, err := s.db.Query(`
+		SELECT id, session_id, student_id, concept_id, answer, expected,
+		       correct, elapsed_seconds, timestamp, question, source, explanation, difficulty
+		FROM attempts
+		WHERE student_id = ? AND concept_id = ?
+		ORDER BY timestamp DESC, id DESC
+		LIMIT ?
+	`, studentID, conceptID, limit)
+
+	if err != nil {
+		return nil, fmt.Errorf("recent attempts for concept: %w", err)
+	}
+	defer rows.Close()
+	var out []AttemptEntry
+	for rows.Next() {
+		var e AttemptEntry
+		var correct int
+		var ts string
+		if err := rows.Scan(
+			&e.ID, &e.SessionID, &e.StudentID, &e.ConceptID,
+			&e.Answer, &e.Expected, &correct, &e.ElapsedSeconds, &ts,
+			&e.Question, &e.Source, &e.Explanation, &e.Difficulty,
+		); err != nil {
+			return nil, fmt.Errorf("scan recent attempt: %w", err)
+		}
+		e.Correct = correct != 0
+		e.Timestamp = parseAttemptTimestamp(ts)
+		out = append(out, e)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	for i, j := 0, len(out)-1; i < j; i, j = i+1, j-1 {
+		out[i], out[j] = out[j], out[i]
+	}
+	return out, nil
+}
+
 // UpdateAttemptCorrect flips an attempt's correctness (grading data-repair).
 func (s *SQLiteStore) UpdateAttemptCorrect(id int64, correct bool) error {
 	if _, err := s.db.Exec(`UPDATE attempts SET correct = ? WHERE id = ?`, boolToInt(correct), id); err != nil {
