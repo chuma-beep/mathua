@@ -201,15 +201,26 @@ function transform(node) {
   if (tag === 'nbsp') return text(' ')
   if (tag === 'times') return text('\\times')
 
-  // Figures: keep only the caption, italicized.
+  // Figures: keep the caption, and record the image we are not keeping.
+  //
+  // The caption alone is what produced 359 paragraphs of orphaned italic text in the
+  // committed corpus: a figure's image was stripped, its caption was kept, and nothing
+  // recorded that an asset had gone missing. The caption is still the right thing to
+  // render — emitting `![…](…)` for a file we cannot fetch would put a broken image in
+  // every lesson — but the gap has to be *stored* rather than discarded, so it can be
+  // enumerated and reviewed instead of being invisible.
   if (tag === 'figure' || tag === 'aside') {
     const cap = (node.children ?? []).find((c) => localName(c) === 'caption')
+    const img = (node.children ?? []).find((c) => localName(c) === 'image')
     if (cap && node.name === 'figure') {
       const t = (cap.children ?? []).map((c) => c.value ?? '').join('').trim().toLowerCase()
-      if (t && t !== 'alternative video lesson' && t !== 'interactive') {
+      if (t && !isNonContentCaption(t)) {
+        const alt = (cap.children ?? []).map((c) => c.value ?? '').join('').trim()
+        recordFigure(currentSlug, img?.attributes?.source ?? null, alt)
         return { ...el('p'), children: [{ ...el('em'), children: cap.children }] }
       }
     }
+    recordFigure(currentSlug, img?.attributes?.source ?? null, null)
     return null
   }
 
@@ -269,12 +280,45 @@ function transform(node) {
   return node
 }
 
+// Figures encountered during this run, keyed by lesson slug. Written out as
+// `data/lessons/figure-index.json` at the end of ingest so the media the pipeline chose not
+// to carry is still on disk and reviewable. The ORCCA image files are not fetchable from the
+// paths this script reads (verified: 404 on every branch), which is precisely why the
+// absence has to be recorded rather than assumed recoverable.
+const FIGURE_INDEX_PATH = path.join(OUTPUT_DIR, '..', 'figure-index.json')
+let currentSlug = null
+const figureIndex = {}
+
+function recordFigure(slug, source, alt) {
+  if (!slug) return
+  const key = String(slug).replace(/\.ptx$/, '')
+  figureIndex[key] ??= []
+  figureIndex[key].push({ source: source ?? null, alt: alt ?? null })
+}
+
 async function fetchSection(slug) {
   const url = `${ORCCA_BASE}/${slug}.ptx`
   const resp = await fetch(url)
   if (!resp.ok) throw new Error(`${resp.status} for ${url}`)
   return fromXml(await resp.text())
 }
+
+// Caption text that carries no instructional content of its own: it labels a media
+// element which is not being kept, so the caption goes with it.
+//
+// Compared as a normalized set rather than by equality against one string. The previous
+// test was `t !== 'alternative video lesson'`, which is singular-only, and the corpus
+// contains "Alternative Video Lessons" in four committed lessons — so a line the rule was
+// written to remove survived in the content.
+const NON_CONTENT_CAPTIONS = new Set([
+  'alternative video lesson',
+  'alternative video lessons',
+  'interactive',
+  'video',
+  'video lesson',
+  'video lessons',
+]);
+const isNonContentCaption = (t) => NON_CONTENT_CAPTIONS.has(String(t).replace(/\s+/g, ' ').trim().toLowerCase());
 
 const DIRECTIVE_LABELS = {
   example: 'Example', definition: 'Definition', theorem: 'Theorem', fact: 'Fact',
@@ -382,6 +426,7 @@ async function main() {
   for (const [slug, conceptIds] of slugs) {
     try {
       const tree = await fetchSection(slug)
+      currentSlug = slug
       transform(tree)
       const md = ATTRIBUTION + '\n' + sectionMarkdown(tree) + '\n'
       for (const cid of conceptIds) {
@@ -393,6 +438,26 @@ async function main() {
       console.error(`X ${slug}: ${err.message}`)
     }
   }
+  const figureCount = Object.values(figureIndex).reduce((n, v) => n + v.length, 0)
+  const withSource = Object.values(figureIndex)
+    .flat().filter((f) => f.source).length
+  fs.writeFileSync(
+    FIGURE_INDEX_PATH,
+    JSON.stringify(
+      {
+        note: 'Figures referenced by the ingested source. Their images are NOT carried into the lesson bodies, so a lesson shows only the caption; a figure whose source is non-null may exist to be recovered.',
+        generated_by: 'scripts/ingest/ingest_pretext.mjs',
+        sections: Object.keys(figureIndex).length,
+        figures: figureCount,
+        figures_with_source: withSource,
+        lessons: figureIndex,
+      },
+      null,
+      2,
+    ) + '\n',
+  )
+  console.log(`figure index: ${figureCount} figures across ${Object.keys(figureIndex).length} sections (${withSource} with a source path)`)
+
   process.exitCode = failures ? 1 : 0
 }
 

@@ -4,8 +4,6 @@
 
 We solved equations in  the section  where only one step was needed to isolate the variable. Now we will work with equations that need more than one step.
 
-*Alternative Video Lessons*
-
 ## Solving Two-Step Equations
 
 **Example**
@@ -53,8 +51,6 @@ In  the section , there was  the example . In that example, some background info
 More complicated equations might need a few setup steps before we can do the two important steps of isolating the variable term and eliminating the coefficient. Here is a general guide for what the full process can be like.
 
 Steps to Solve Linear Equations
-
-
 
 **Example**
 
@@ -261,4 +257,3 @@ In this section there is a reminder to take care with negative numbers when doin
 Explain what is wrong with saying "I need to solve $3x+x-8$."
 
 ##
-
