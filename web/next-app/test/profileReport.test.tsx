@@ -92,11 +92,24 @@ describe('/profile shows the report', () => {
   it('answers "where am I" on the hub, above the Next task', async () => {
     render(<ProfilePage />)
     const pos = await screen.findByRole('region', { name: 'Where you are' })
-    expect(pos.textContent).toMatch(/concepts mastered/)
+    // Scored against what the learner can reach, and naming that denominator. The block used
+    // to say "of 657 concepts mastered" above a bar computed against unlocked.
+    expect(pos.textContent).toMatch(/of \d+ you can reach/)
+    expect(pos.textContent).not.toMatch(/concepts mastered/)
+    expect(pos.textContent).not.toMatch(/still locked/i)
     // It reads the same head the Next task does, so the position and the task
     // cannot disagree about what comes next.
     const regions = screen.getAllByRole('region').map(r => r.getAttribute('aria-label') ?? '')
     expect(regions.indexOf('Where you are')).toBeLessThan(regions.indexOf('Next up'))
+
+    // ...and because it reads that same head, it needs no second button for it. Two CTAs for
+    // one task twenty lines apart is not emphasis. (The review-debt link inside this block is a
+    // different fact and stays, so the assertion is about the *head's* destination specifically.)
+    const nextUp = screen.getByRole('region', { name: 'Next up' })
+    const headHref = nextUp.querySelector('a[href]')?.getAttribute('href') ?? null
+    const posHrefs = [...pos.querySelectorAll('a[href]')].map((a) => a.getAttribute('href'))
+    expect(headHref).toBeTruthy()
+    expect(posHrefs).not.toContain(headHref)
   })
   it('orders Activity ahead of the rest of the report', async () => {
     render(<ProfilePage />)

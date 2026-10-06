@@ -313,7 +313,7 @@ function StudyContent() {
                       </button>
                     ))}
                   </div>
-                  <p className="font-mono text-[10px] text-mathua-muted mt-3">Study is the reference library: browse any lesson, read it in full, nothing is tracked. Learn is where you answer questions, and the scheduler picks what comes next from the prerequisite graph.</p>
+                  <p className="font-mono text-[10px] text-mathua-muted mt-3">Study is the reference library: browse any lesson, read it in full, nothing is tracked. Learn is where you answer questions, and what comes next is picked from the prerequisite graph and your progress so far.</p>
                 </div>
               )}
               <DomainOverview

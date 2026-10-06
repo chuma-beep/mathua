@@ -9,7 +9,6 @@ interface Props {
   progress: Record<string, ConceptProgress>
   /** Label of the concept the scheduler would serve next, if known. */
   frontierLabel?: string | null
-  frontierHref?: string | null
 }
 
 // "Where am I" — the question the rest of the report hangs off, and the one
@@ -20,11 +19,15 @@ interface Props {
 // abstract algebra, so "7% of all of math" tells a learner nothing they can
 // act on. Mastered against unlocked is the pair that means something: one is
 // what you have, the other is what you can currently reach.
-export default function PositionBlock({ catalogue, progress, frontierLabel, frontierHref }: Props) {
+export default function PositionBlock({ catalogue, progress, frontierLabel }: Props) {
   const counts = countOverall(catalogue, progress)
   if (counts.total === 0) return null
 
-  const pct = counts.total > 0 ? Math.round((counts.mastered / counts.total) * 100) : 0
+  // One denominator for both the headline and the bar. They were `total` and `unlocked`,
+  // so on a 657-concept catalogue the block claimed "1 of 657 mastered" directly above a bar
+  // that read 100% — two true statements about different sets, presented as one scale.
+  const denom = counts.unlocked
+  const pct = denom > 0 ? Math.round((counts.mastered / denom) * 100) : 0
 
   return (
     <section id="position" aria-label="Where you are" className="min-w-0">
@@ -36,7 +39,7 @@ export default function PositionBlock({ catalogue, progress, frontierLabel, fron
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <span className="font-mono text-3xl text-mathua-blue leading-none">{counts.mastered}</span>
           <span className="font-mono text-sm text-mathua-muted">
-            of {counts.total} concepts mastered
+            of {denom} you can reach
           </span>
         </div>
 
@@ -45,11 +48,11 @@ export default function PositionBlock({ catalogue, progress, frontierLabel, fron
         <div className="mt-3 h-1 w-full bg-mathua-border" role="presentation">
           <div
             className="h-full bg-mathua-blue transition-all duration-300"
-            style={{ width: `${counts.unlocked > 0 ? Math.round((counts.mastered / counts.unlocked) * 100) : 0}%` }}
+            style={{ width: `${pct}%` }}
           />
         </div>
 
-        <dl className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-3 font-mono text-[11px]">
+        <dl className="mt-3 grid grid-cols-3 gap-3 font-mono text-[11px]">
           <div className="min-w-0">
             <dt className="text-mathua-muted uppercase">Mastered</dt>
             <dd className="text-mathua-primary text-base">{counts.mastered}</dd>
@@ -62,15 +65,11 @@ export default function PositionBlock({ catalogue, progress, frontierLabel, fron
             <dt className="text-mathua-muted uppercase">In progress</dt>
             <dd className="text-mathua-primary text-base">{counts.learning + counts.completed}</dd>
           </div>
-          <div className="min-w-0">
-            <dt className="text-mathua-muted uppercase">Still locked</dt>
-            <dd className="text-mathua-secondary text-base">{counts.locked}</dd>
-          </div>
         </dl>
 
         {counts.mastered > 0 && (
           <p className="mt-3 font-mono text-[11px] text-mathua-secondary">
-            {pct}% of everything you have access to so far.
+            {pct}% of what you can reach. More unlocks as you go.
           </p>
         )}
 
@@ -89,23 +88,17 @@ export default function PositionBlock({ catalogue, progress, frontierLabel, fron
         )}
 
         {frontierLabel && (
-          <div className="mt-4 border-t border-mathua-border pt-3 flex flex-wrap items-center justify-between gap-2">
-            <span className="min-w-0">
-              <span className="font-mono text-[10px] uppercase text-mathua-muted block">
-                {counts.mastered > 0 ? 'Currently working towards' : 'Start here'}
-              </span>
-              <span className="font-mono text-xs text-mathua-primary break-words">
-                {frontierLabel}
-              </span>
+          // The label, not a button. This block answers "where am I", and the sentence is
+          // what carries the answer; the action belongs to the Next task surface directly below,
+          // which reads the same head. A second "Answer it →" twenty lines from the first one
+          // is not emphasis, it is two buttons for one task.
+          <div className="mt-4 border-t border-mathua-border pt-3">
+            <span className="font-mono text-[10px] uppercase text-mathua-muted block">
+              {counts.mastered > 0 ? 'Currently working towards' : 'Start here'}
             </span>
-            {frontierHref && (
-              <Link
-                href={frontierHref}
-                className="shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-3 py-1.5 font-mono text-[11px] inline-flex items-center min-h-[36px]"
-              >
-                Answer it →
-              </Link>
-            )}
+            <span className="font-mono text-xs text-mathua-primary break-words">
+              {frontierLabel}
+            </span>
           </div>
         )}
       </div>

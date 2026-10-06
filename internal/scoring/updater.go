@@ -28,6 +28,11 @@ type Scores struct {
 	// Quiz gate signal: XP earned since last completed quiz.
 	XPSinceQuiz int  `json:"xp_since_quiz"`
 	QuizDue     bool `json:"quiz_due"`
+	// QuizGateXP is xp.QuizGateXP, carried so the profile's progress bar can render the gate
+	// instead of a copy of it. The bar divided by a literal 50 while ADR-020 moved the gate —
+	// the same drift the landing page had, one level worse, because a wrong bar is a claim
+	// about how close this learner is rather than a headline.
+	QuizGateXP int `json:"quiz_gate_xp"`
 }
 
 type Updater struct {
@@ -115,6 +120,7 @@ func (u *Updater) Compute(studentID string) (*Scores, error) {
 		PausedUntil:      pausedUntil(u, studentID),
 		XPSinceQuiz:      xpSinceQuiz,
 		QuizDue:          xpSinceQuiz >= xp.QuizGateXP,
+		QuizGateXP:       xp.QuizGateXP,
 	}, nil
 }
 
