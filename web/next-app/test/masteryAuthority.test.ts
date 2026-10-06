@@ -26,6 +26,7 @@
 
 import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
 
 const read = (path: string) => readFileSync(path, 'utf8')
 
@@ -108,5 +109,67 @@ describe('the score on the wire is the authoritative one', () => {
     // The docs on the field must keep saying what it is, so nobody later reads it as a
     // mastery verdict.
     expect(api).toMatch(/claiming nothing about retention/)
+  })
+})
+
+describe('the recommendation is decided by the engine, not the client', () => {
+  const read = (f: string) => readFileSync(join(__dirname, '..', f), 'utf8')
+  const strip = (s: string) => s.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '')
+  const code = (f: string) => strip(read(f))
+
+  it('lib/nextUp.ts computes no ranking', () => {
+    const src = code('lib/nextUp.ts')
+    // The client used to build candidates, weight them and choose the head here. Two copies of
+    // the eligibility rules and of the XP award is how they came to disagree with
+    // internal/scheduler — the client's still halved reviews after ADR-020 removed that from
+    // the server. The decision is engine-side now, tested in internal/scheduler and by
+    // TestNext_* in internal/server.
+    for (const banned of [
+      'buildCandidates',
+      'selectShelfHead',
+      'fixedWeightPolicy',
+      'SelectionPolicy',
+      'effortBase',
+      'xpFor',
+    ]) {
+      expect(src, `lib/nextUp.ts still contains ${banned}`).not.toContain(banned)
+    }
+    // No sorting of candidates either: the engine orders them.
+    expect(src).not.toMatch(/\.sort\(.*weakness/)
+  })
+
+  it('no surface ranks for itself', () => {
+    // /learn, /profile and the Learn done card all read the same shelf. If one of them starts
+    // sorting or filtering by score again, the two surfaces can disagree about what "next" is —
+    // which is the duplication defect this replaced.
+    for (const f of ['app/learn/page.tsx', 'app/profile/page.tsx', 'components/LearnStepper.tsx']) {
+      const src = code(f)
+      expect(src, `${f} must not compute a priority`).not.toMatch(/priority\s*[<>]=?/)
+      expect(src, `${f} must not weight candidates`).not.toMatch(/weakness\s*\*\s*0\./)
+    }
+  })
+
+  it('every surface asks the engine, and only the engine', () => {
+    for (const f of ['app/learn/page.tsx', 'app/profile/page.tsx', 'components/LearnStepper.tsx']) {
+      expect(read(f), `${f} should read the shelf from lib/recommendations`).toContain('fetchShelf')
+      expect(code(f), `${f} should not import the ranking helpers`).not.toContain('selectShelfHead')
+    }
+    // code(), not read(): the module documents what it used to contain, and a comment
+    // naming the deleted function is not the function coming back.
+    expect(code('lib/nextUp.ts')).not.toContain('selectShelfHead')
+  })
+
+  it('the engine owns the wording, so two surfaces cannot describe one task differently', () => {
+    // The duplication defect: /profile rendered "Currently working towards X / Answer it" and
+    // "Next up / Continue: X" from the same object, sometimes with different labels for it. So
+    // the copy arrives from the server and the mapper passes it through.
+    const mapper = code('lib/recommendations.ts')
+    expect(mapper).toContain('r.detail')
+    expect(mapper).toContain('r.cta')
+    expect(mapper).toContain('r.badge')
+    const types = read('lib/api.ts')
+    for (const field of ['badge: string', 'detail: string', 'cta: string']) {
+      expect(types, `Recommendation should carry ${field} from the server`).toContain(field)
+    }
   })
 })

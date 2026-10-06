@@ -8,7 +8,8 @@ import LessonAssets from './LessonAssets'
 import ChoiceOptions from './ChoiceOptions'
 import { getLessonKPs, getLessonPractice, getLessonReadiness, submitStudyAnswer, getActivity, getDueReviews, getProgress, getScores, getWeaknesses, getErrorStatus, type KpInfo, type PracticeQuestion, type ReadinessRes, type DailyActivity, type Scores, type WeaknessRes, type ConceptProgress } from '../lib/api'
 import { getUserInfo } from '../lib/auth'
-import { selectShelfHead, upcomingLocked, hrefConceptId, type Shelf, type LockedSuccessor } from '../lib/nextUp'
+import { upcomingLocked, hrefConceptId, type Shelf, type LockedSuccessor } from '../lib/nextUp'
+import { fetchShelf } from '../lib/recommendations'
 import { REQUIRED_IN_A_ROW } from '../lib/progression'
 import { formatForGradingType } from '../lib/answerFormat'
 import { countsAsMastered } from '../lib/progress'
@@ -186,30 +187,19 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
     })
     Promise.race([
       Promise.all([
-        getActivity().catch(() => [] as DailyActivity[]),
+        fetchShelf([conceptId]),
+        // Progress is still needed here, for "Coming up": the successors this concept will
+        // unlock once it is mastered.
         sid ? getProgress(sid).catch(() => ({} as Record<string, ConceptProgress>)) : Promise.resolve({} as Record<string, ConceptProgress>),
-        getWeaknesses().catch(() => ({ by_domain: {} } as WeaknessRes)),
-        getDueReviews().catch(() => ({ count: 0 })),
-        sid ? getScores(sid).catch(() => null) : Promise.resolve(null),
       ]),
       timeout,
-    ]).then(([a, p, w, r, s]) => {
-      const progress = p as Record<string, ConceptProgress>
+    ]).then(([next, progress]) => {
       setShelfProgress(progress)
-      setNextShelf(selectShelfHead({
-        dueReviews: r.count ?? 0,
-        weaknesses: w,
-        progress,
-        activity: a,
-        diagnosticCompleted: info?.diagnostic_completed ?? false,
-        conceptsMastered: (s as Scores | null)?.concepts_mastered ?? 0,
-        catalog: catalogEntries(),
-        // Never head the concept just finished: it is unmastered by
-        // definition here, so without this it would resume itself and the
-        // Continue link would point at the current page (scroll-to-top dead
-        // end). Passed only by this done re-fetch.
-        excludeConceptIds: [conceptId],
-      }))
+      // The concept just finished is excluded server-side. It is unmastered by definition
+      // here, so without that it would head itself and the Continue link would point at the
+      // current page — a scroll-to-top dead end. That argument moved to the engine with the
+      // rest of the decision.
+      setNextShelf(next)
     }).catch(() => {
       nextFetchedRef.current = false
     }).finally(() => setNextLoading(false))

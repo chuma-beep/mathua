@@ -1,169 +1,35 @@
 import { describe, it, expect } from 'vitest'
-import { selectShelf, selectShelfHead, buildCandidates, upcomingLocked, recentlyUnlocked, hrefConceptId, type ShelfInput } from '../lib/nextUp'
+import { upcomingLocked, hrefConceptId, recentlyUnlocked, RECENT_UNLOCK_DAYS, isNewUser, type CatalogEntry } from '../lib/nextUp'
+import type { ConceptProgress, DailyActivity } from '../lib/api'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
 
-const catalog = [
-  { id: 'a', label: 'A', prerequisites: [] as string[], avgTimeSeconds: 10 },
-  { id: 'b', label: 'B', prerequisites: ['a'], avgTimeSeconds: 120 },
-  { id: 'c', label: 'C', prerequisites: ['a'], avgTimeSeconds: 10 },
-  { id: 'd.word', label: 'D word', prerequisites: ['b', 'c'], avgTimeSeconds: 30 },
-  { id: 'e', label: 'E', prerequisites: ['z-locked'], avgTimeSeconds: 10 },
+/**
+ * The graph helpers in lib/nextUp.ts.
+ *
+ * The ranking tests that used to live here are gone because the ranking is gone: the decision
+ * is made in internal/scheduler and arrives over /api/next, tested in Go
+ * (`internal/scheduler/recommend_test.go`) and at the boundary (`TestNext_*` in
+ * internal/server). What remains here is reporting on the learner's own history — which
+ * successors a concept just unlocked, and what an href points at.
+ *
+ * The one behaviour worth noting is the decay rule, which had to be kept in step with the
+ * scheduler by hand before (ADR-037): a DECAYING concept still satisfies a prerequisite, or a
+ * concept the learner has not lost would lock everything downstream.
+ */
+const catalog: CatalogEntry[] = [
+  { id: 'a', label: 'A', prerequisites: [] },
+  { id: 'b', label: 'B', prerequisites: ['a'] },
+  { id: 'c', label: 'C', prerequisites: ['a'] },
+  { id: 'd.word', label: 'D word', prerequisites: ['b', 'c'] },
+  { id: 'e', label: 'E', prerequisites: ['z-locked'] },
 ]
+const cat = catalog
+const prog = (s: Record<string, ConceptProgress['status']>): Record<string, ConceptProgress> =>
+  Object.fromEntries(Object.entries(s).map(([k, status]) => [k, { status, streak: 0 }]))
 
-const base: ShelfInput = {
-  dueReviews: 0,
-  weaknesses: { by_domain: {} },
-  progress: {},
-  activity: [],
-  diagnosticCompleted: true,
-  conceptsMastered: 3,
-  catalog,
-}
-
-describe('buildCandidates', () => {
-  it('only lists available unmastered concepts', () => {
-    const cands = buildCandidates({ ...base, progress: { a: { status: 'MASTERED', streak: 3 } } })
-    const ids = cands.map(c => c.id)
-    expect(ids).toContain('b')
-    expect(ids).toContain('c')
-    expect(ids).not.toContain('a') // mastered
-    expect(ids).not.toContain('d.word') // prereqs unmet
-    expect(ids).not.toContain('e') // locked
-  })
-
-  it('does not offer a decayed concept for teaching', () => {
-    // The acceptance criterion, at the level of the queue that feeds /learn.
-    //
-    // A decayed concept used to appear here as a `resume` item, because the only status
-    // filter asked `status === 'MASTERED'` and the server reports stale mastery as
-    // DECAYING. /learn then opened with the concept's worked example, unconditionally —
-    // it has no notion of the lesson having been seen before — so a fortnight's break
-    // meant re-reading the tutorial for something already demonstrated. That is the
-    // purgatory, and this is where it entered.
-    const cands = buildCandidates({ ...base, progress: { b: { status: 'DECAYING', streak: 3 } } })
-    expect(cands.map(c => c.id)).not.toContain('b')
-
-    // And a decayed prerequisite still unlocks its dependents, matching
-    // scheduler.prereqsMet, so removing it from the queue cannot strand the frontier.
-    const unlocked = buildCandidates({ ...base, progress: { a: { status: 'DECAYING', streak: 3 } } })
-    expect(unlocked.map(c => c.id)).toContain('b')
-    expect(unlocked.map(c => c.id)).toContain('c')
-  })
-
-  it('classifies weakness vs resume vs new', () => {
-    const cands = buildCandidates({
-      ...base,
-      progress: { a: { status: 'MASTERED', streak: 3 }, b: { status: 'learning', streak: 1 } },
-      weaknesses: { by_domain: { d: [{ id: 'c', label: 'C', weakness: 0.9 }] } },
-    })
-    const byId = Object.fromEntries(cands.map(c => [c.id, c.kind]))
-    expect(byId['b']).toBe('resume')
-    expect(byId['c']).toBe('weakness')
-  })
-})
-
-describe('selectShelf', () => {
-  it('caps at 5 with mixed composition', () => {
-    const items = selectShelf({
-      ...base,
-      dueReviews: 4,
-      progress: { a: { status: 'MASTERED', streak: 3 } },
-      weaknesses: { by_domain: { d: [{ id: 'c', label: 'C', weakness: 0.9 }] } },
-    })
-    expect(items.length).toBeLessThanOrEqual(5)
-    const kinds = items.map(i => i.kind)
-    expect(kinds).toContain('review')
-    expect(kinds).toContain('new')
-    expect(kinds).toContain('weakness')
-    // No duplicate concepts.
-    const hrefs = items.map(i => i.href)
-    expect(new Set(hrefs).size).toBe(hrefs.length)
-  })
-
-  it('prices items from effort calibration', () => {
-    const items = selectShelf({
-      ...base,
-      progress: {
-        a: { status: 'MASTERED', streak: 3 },
-        b: { status: 'MASTERED', streak: 3 },
-        c: { status: 'MASTERED', streak: 3 },
-      },
-    })
-    // d.word (30s) calibrates to 1 XP; only it is eligible.
-    expect(items).toHaveLength(1)
-    expect(items[0].href).toContain('d.word')
-    expect(items[0].xp).toBe(1)
-  })
-
-  it('prices a 120s concept at 2 XP', () => {
-    const items = selectShelf({
-      ...base,
-      progress: { a: { status: 'MASTERED', streak: 3 } },
-    })
-    const hard = items.find(i => i.href.includes('concept=b'))
-    expect(hard?.xp).toBe(2)
-  })
-
-  it('is always satisfiable for brand-new users', () => {    const items = selectShelf({
-      dueReviews: 0,
-      weaknesses: { by_domain: {} },
-      progress: {},
-      activity: [],
-      diagnosticCompleted: false,
-      conceptsMastered: 0,
-      catalog,
-    })
-    expect(items.length).toBeGreaterThan(0)
-    expect(items[0].kind).toBe('diagnostic')
-  })
-
-  it('falls back to browse when nothing is eligible', () => {
-    const items = selectShelf({
-      ...base,
-      catalog: [{ id: 'z', label: 'Z', prerequisites: ['missing'] }],
-    })
-    expect(items).toHaveLength(1)
-    expect(items[0].kind).toBe('browse')
-  })
-
-  it('omits diagnostic for active-but-unmastered learners', () => {
-    const items = selectShelf({
-      ...base,
-      activity: [{ date: '2026-09-28', questions: 53, correct: 44, concepts: ['arith.add'] }],
-    })
-    expect(items.length).toBeGreaterThan(0)
-    expect(items.some(i => i.kind === 'diagnostic')).toBe(false)
-  })
-
-  it('drops excluded concept ids from candidates', () => {
-    const input = {
-      ...base,
-      progress: { a: { status: 'MASTERED', streak: 3 }, b: { status: 'learning', streak: 1 } },
-    }
-    expect(buildCandidates(input).map(c => c.id)).toContain('b')
-    expect(buildCandidates({ ...input, excludeConceptIds: ['b'] }).map(c => c.id)).not.toContain('b')
-  })
-
-  it('keeps a valid resume when nothing is excluded (entry/profile behavior)', () => {
-    const input = {
-      ...base,
-      progress: { a: { status: 'MASTERED', streak: 3 }, b: { status: 'learning', streak: 1 } },
-    }
-    const cands = buildCandidates(input)
-    expect(cands.find(c => c.id === 'b')?.kind).toBe('resume')
-    const items = selectShelf(input)
-    expect(items.some(i => i.href.includes('concept=b'))).toBe(true)
-  })
-
-  it('never heads an excluded concept and falls back to browse when empty', () => {
-    const head = selectShelfHead({
-      ...base,
-      progress: { a: { status: 'MASTERED', streak: 3 }, b: { status: 'learning', streak: 1 } },
-      excludeConceptIds: ['b', 'c'],
-    })
-    expect(head.next.kind).toBe('browse')
-    expect([head.next, ...head.alternatives].every(i => !i.href.includes('concept=b') && !i.href.includes('concept=c'))).toBe(true)
-  })
-})
+const mastered = prog({ a: 'MASTERED' })
+const decayed = prog({ a: 'DECAYING' })
 
 describe('upcomingLocked', () => {
   it('lists locked successors with missing prerequisite labels', () => {
@@ -188,30 +54,31 @@ describe('upcomingLocked', () => {
   })
 })
 
-describe('completion unlock rule (PR1 client half)', () => {
-  it('treats a completed prerequisite as satisfied', () => {
-    const cands = buildCandidates({
-      ...base,
-      progress: {
-        a: { status: 'MASTERED', streak: 3 },
-        b: { status: 'learning', streak: 1, completed: true },
-        c: { status: 'MASTERED', streak: 3 },
-      },
-    })
-    // d.word needs b + c: b is completed-not-mastered, c mastered → eligible.
-    expect(cands.map(c => c.id)).toContain('d.word')
-  })
+/**
+ * The `completed` prerequisite shortcut is inert.
+ *
+ * `prereqMet` treats `p?.completed === true` as satisfying a prerequisite, and `countByDomain`
+ * and `countOverall` report a `completed` bucket on the strength of it. Two tests used to assert
+ * that behaviour through `buildCandidates`. They were deleted with the rest of the ranking, and
+ * replacing them matters more than keeping them: **no endpoint emits a `completed` field.**
+ * `storage.ConceptProgress` has no such column, `ProgressView` embeds that struct, and no route
+ * adds one, so the branch cannot fire against a real response.
+ *
+ * So the rule was tested but unreachable — the same failure shape as a probe run where the thing
+ * does not exist. This test states it instead, so the next person to touch it learns the field
+ * does not exist rather than re-deriving it. If a PR1 payload does land `completed`, delete this
+ * and reinstate the rule's tests, because then it will finally be doing something.
+ */
+describe('the completed flag', () => {
+  it('is not sent by any endpoint, so prereqMet\'s shortcut cannot fire', () => {
+    const prereqMetSource = readFileSync(join(__dirname, '../lib/progress.ts'), 'utf8')
+    expect(prereqMetSource).toContain('completed')
 
-  it('keeps locked successors locked without completion', () => {
-    const cands = buildCandidates({
-      ...base,
-      progress: {
-        a: { status: 'MASTERED', streak: 3 },
-        b: { status: 'learning', streak: 1 },
-        c: { status: 'MASTERED', streak: 3 },
-      },
-    })
-    expect(cands.map(c => c.id)).not.toContain('d.word')
+    // The server side is the fact that matters: grep it here so the test fails the moment a
+    // payload starts sending the field and this note becomes stale.
+    const store = readFileSync(join(__dirname, '../../../internal/storage/store.go'), 'utf8')
+    const progressStruct = store.slice(store.indexOf('type ConceptProgress struct'))
+    expect(progressStruct.slice(0, progressStruct.indexOf('}'))).not.toContain('Completed')
   })
 })
 
@@ -267,5 +134,46 @@ describe('recentlyUnlocked', () => {
     })
     // d.word needs c too, which is untouched → still locked.
     expect(rows).toHaveLength(0)
+  })
+})
+
+
+describe('isNewUser', () => {
+  const day = (n: number): DailyActivity => ({ date: '2026-01-01', questions: n, correct: n, concepts: [] })
+
+  it('is new only with no mastery and no answered questions', () => {
+    expect(isNewUser({ conceptsMastered: 0, activity: [] })).toBe(true)
+    expect(isNewUser({ conceptsMastered: 1, activity: [] })).toBe(false)
+    expect(isNewUser({ conceptsMastered: 0, activity: [day(1)] })).toBe(false)
+  })
+
+  it('treats a struggling newcomer with attempts as not new', () => {
+    // They have evidence about themselves even without mastery, so a diagnostic is not the
+    // most useful thing to offer them.
+    expect(isNewUser({ conceptsMastered: 0, activity: [day(4)] })).toBe(false)
+  })
+})
+
+describe('a decayed concept still unlocks its successors', () => {
+  // A three-node chain, so "unlocked by a" and "still locked on b" are distinguishable.
+  const chain: CatalogEntry[] = [
+    { id: 'a', label: 'A', prerequisites: [] },
+    { id: 'b', label: 'B', prerequisites: ['a'] },
+    { id: 'c', label: 'C', prerequisites: ['a', 'b'] },
+  ]
+
+  it('does not relock a learner over decay', () => {
+    // ADR-037: DECAYING satisfies a prerequisite. Without that, a concept the learner has not
+    // lost would lock everything downstream of it, and the whole graph would relock after a
+    // fortnight away.
+    const rows = upcomingLocked(chain, decayed, 'a')
+    expect(rows.map(r => r.id)).toEqual(['c']) // b is unlocked by a; c still needs b
+    expect(rows[0].missing).toEqual(['B'])
+  })
+
+  it('reports the same locked set whether a is MASTERED or DECAYING', () => {
+    // The scheduler's prereqsMet accepts both, so "Coming up" must not change just because a
+    // concept's status label moved. These two must never diverge.
+    expect(upcomingLocked(chain, decayed, 'a')).toEqual(upcomingLocked(chain, mastered, 'a'))
   })
 })

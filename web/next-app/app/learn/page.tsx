@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useEffect, useMemo, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import Header from '../../components/Header'
@@ -8,53 +8,28 @@ import BottomTabs from '../../components/BottomTabs'
 import Footer from '../../components/Footer'
 import LearnStepper from '../../components/LearnStepper'
 import NextUpCard from '../../components/NextUpCard'
-import { getActivity, getDueReviews, getProgress, getScores, getWeaknesses, type DailyActivity, type Scores, type WeaknessRes, type ConceptProgress } from '../../lib/api'
-import { getUserInfo, getGuestId } from '../../lib/auth'
-import { selectShelfHead } from '../../lib/nextUp'
-import { concepts as conceptCatalog } from '../../lib/conceptData'
+import type { Shelf } from '../../lib/nextUp'
+import { fetchShelf } from '../../lib/recommendations'
 
+/**
+ * The learner's entry point: whatever the engine recommends, rendered as one card plus the
+ * alternatives they may pick instead.
+ *
+ * This used to fetch five endpoints and rank the result in the browser. It now asks once. The
+ * engine chooses; the learner disposes.
+ */
 function LearnEntry() {
-  const [activity, setActivity] = useState<DailyActivity[]>([])
-  const [progress, setProgress] = useState<Record<string, ConceptProgress>>({})
-  const [weaknesses, setWeaknesses] = useState<WeaknessRes | null>(null)
-  const [dueReviews, setDueReviews] = useState(0)
-  const [scores, setScores] = useState<Scores | null>(null)
-  const [diagnosticCompleted, setDiagnosticCompleted] = useState(false)
-  const [loading, setLoading] = useState(true)
+  const [shelf, setShelf] = useState<Shelf | null>(null)
 
   useEffect(() => {
-    const info = getUserInfo()
-    setDiagnosticCompleted(info?.diagnostic_completed ?? false)
-    const sid = info?.student_id || getGuestId() || ''
-    Promise.all([
-      getActivity().catch(() => [] as DailyActivity[]),
-      sid ? getProgress(sid).catch(() => ({} as Record<string, ConceptProgress>)) : Promise.resolve({} as Record<string, ConceptProgress>),
-      getWeaknesses().catch(() => ({ by_domain: {} } as WeaknessRes)),
-      getDueReviews().catch(() => ({ count: 0 })),
-      sid ? getScores(sid).catch(() => null) : Promise.resolve(null),
-    ]).then(([a, p, w, r, s]) => {
-      setActivity(a)
-      setProgress(p)
-      setWeaknesses(w)
-      setDueReviews(r.count ?? 0)
-      setScores(s as Scores | null)
-      setLoading(false)
-    }).catch(() => setLoading(false))
+    let cancelled = false
+    fetchShelf()
+      .then(s => { if (!cancelled) setShelf(s) })
+      .catch(() => { if (!cancelled) setShelf(null) })
+    return () => { cancelled = true }
   }, [])
 
-  const shelf = useMemo(
-    () =>
-      selectShelfHead({
-        dueReviews,
-        weaknesses,
-        progress,
-        activity,
-        diagnosticCompleted,
-        conceptsMastered: scores?.concepts_mastered ?? 0,
-        catalog: conceptCatalog.map(c => ({ id: c.id, label: c.label, prerequisites: c.prerequisites ?? [], avgTimeSeconds: c.mastery_threshold?.avg_time_seconds })),
-      }),
-    [dueReviews, weaknesses, progress, activity, diagnosticCompleted, scores?.concepts_mastered],
-  )
+  const loading = shelf === null
 
   if (loading) {
     return <div className="p-6 font-mono text-xs text-mathua-muted">Loading…</div>

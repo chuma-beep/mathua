@@ -11,6 +11,7 @@ import {
   getWeaknesses,
   getDueReviews,
   getScores,
+  getNext,
 } from '../lib/api'
 import { getUserInfo } from '../lib/auth'
 import { answerCard, answerField, typeAnswer } from './helpers/answerInput'
@@ -28,6 +29,7 @@ vi.mock('../lib/api', async (importOriginal) => {
     getWeaknesses: vi.fn(),
     getDueReviews: vi.fn(),
     getScores: vi.fn(),
+    getNext: vi.fn(),
   }
 })
 
@@ -48,6 +50,22 @@ const QS = [
 ]
 
 beforeEach(() => {
+    vi.mocked(getNext).mockResolvedValue({
+      primary: {
+        id: 'b', conceptId: 'b', conceptTitle: 'B', kind: 'learn', reason: 'new', priority: 2,
+        action: { type: 'learn', href: '/learn?concept=b' },
+        badge: 'New', detail: 'Ready to learn', cta: 'Start →',
+      },
+      alternatives: [
+        {
+          id: 'c', conceptId: 'c', conceptTitle: 'C', kind: 'learn', reason: 'new', priority: 1,
+          action: { type: 'learn', href: '/learn?concept=c' },
+          badge: 'New', detail: 'Ready to learn', cta: 'Start →',
+        },
+      ],
+      generatedAt: '',
+    })
+
   vi.mocked(getLessonKPs).mockResolvedValue({
     concept_id: CID,
     kps: [{ label: 'Add single digits', subgoals: [], worked_example: '2 + 3 = 5' }],
@@ -116,12 +134,9 @@ describe('LearnStepper done state (PR5)', () => {
     )
   }, 15000)
 
-  it('still offers Continue when shelf APIs fail (fail-soft defaults)', async () => {
-    vi.mocked(getActivity).mockRejectedValue(new Error('offline'))
-    vi.mocked(getWeaknesses).mockRejectedValue(new Error('offline'))
-    vi.mocked(getDueReviews).mockRejectedValue(new Error('offline'))
-    vi.mocked(getScores).mockRejectedValue(new Error('offline'))
-    vi.mocked(getProgress).mockRejectedValue(new Error('offline'))
+  it('never dead-ends when the recommendation fetch fails', async () => {
+    // One request replaced five, so this is now one failure to simulate rather than five.
+    vi.mocked(getNext).mockRejectedValue(new Error('offline'))
     render(<LearnStepper conceptId={CID} />)
 
     fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
@@ -130,11 +145,17 @@ describe('LearnStepper done state (PR5)', () => {
     expect(await screen.findByText('4 + 1 = ?')).toBeTruthy()
     await answerCurrent('5')
 
-    // Per-call catch defaults keep the head satisfiable (browse fallback),
-    // so done still offers Continue — never a dead end.
+    // getNext absorbs its own network failure and returns the library recommendation, whose
+    // /study href carries no concept id — so `canContinue` is false and the card falls through
+    // to its failure branch. That branch is the guarantee: a way out, and never a link that
+    // points back at the concept just finished.
     expect(await screen.findByText(/Complete — 2\/2 correct/)).toBeTruthy()
-    const cont = await screen.findByRole('link', { name: /^(New|Due now|Recommended|Continue|Study): / })
-    expect(cont.getAttribute('href')!).toMatch(/^\/learn\?concept=|^\/study$|^\/onboard$/)
+    const back = await screen.findByRole('link', { name: 'Back to Profile' })
+    expect(back.getAttribute('href')).toBe('/profile')
+    expect(screen.getByRole('button', { name: 'Practice again' })).toBeTruthy()
+    expect(screen.getByRole('link', { name: 'Reference' })).toBeTruthy()
+    const links = screen.getAllByRole('link').map((l) => l.getAttribute('href') ?? '')
+    expect(links.some((h) => h.includes(`/learn?concept=${encodeURIComponent(CID)}`))).toBe(false)
   }, 15000)
 
   it('guards same-concept heads by id even when query params differ', () => {
