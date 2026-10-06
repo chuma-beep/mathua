@@ -245,8 +245,19 @@ func BrokenImageRefs(body string) []int {
 	}
 
 	var out []int
-	for i := 0; i+1 < len(body); i++ {
-		if body[i] != '!' || body[i+1] != '[' {
+	// Rune-at-a-time rather than byte-at-a-time, which is lint compliance and also the
+	// clearer expression of intent: `range` over a string still yields the byte offset of each
+	// rune's first byte, so `i` remains the offset `covered` and the caller's line arithmetic
+	// both expect.
+	//
+	// Testing `body[i+1] == '['` after a `!` is safe even though `i` steps by rune width: `!`
+	// is one byte, so `i+1` is the start of the next character, and if that character is
+	// multi-byte then `body[i+1]` is a continuation byte — always >= 0x80, never `[` (0x5B).
+	for i, r := range body {
+		if r != '!' {
+			continue
+		}
+		if i+1 >= len(body) || body[i+1] != '[' {
 			continue
 		}
 		if starts[i] {
