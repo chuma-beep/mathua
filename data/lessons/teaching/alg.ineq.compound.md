@@ -29,9 +29,6 @@ The union of sets $\{1,2,3,4\}$ and $\{3,4,5,6\}$ is the set of all elements fro
 Visualize the union of the sets $(-\infty,4)$ and $[7,\infty)$.
 
 First we make a number line with both intervals drawn to understand what both sets mean.
-
-*A number line sketch of $(-\infty,4)$ as well as $[7,\infty)$*
-
 The two intervals should be viewed as a single object when stating the union, so here is the picture of the union. It looks the same, but now it is a graph of a single set.
 
 *A number line sketch of $(-\infty,4)\cup[7,\infty)$*
@@ -51,13 +48,7 @@ The intersection of sets $\{1,2,3,4\}$ and $\{3,4,5,6\}$ is the set of all eleme
 Find the intersection of the sets $(-\infty,5)$ and $[3,\infty)$.
 
 To find the intersection of the sets $(-\infty,5)$ and $[3,\infty)$, first we draw a number line with both intervals drawn to visualize where the sets overlap.
-
-*A number line sketch of $(-\infty,5)$ and $[-3,\infty)$*
-
 Recall that the intersection of two sets is the set of the numbers in common to both sets. In English, we might say that the lines overlap at every number between $-3$ and 5. This description is the same as the interval $[-3,5)$.
-
-*A number line sketch of $[-3,5)$*
-
 In conclusion,
 
 $$
@@ -115,9 +106,6 @@ $$
 $$
 
 Writing the solution set to this compound inequality doesn't require any algebra beforehand because each of the inequalities is already solved for $x$. The first thing we should do is understand what each inequality is saying using a graph.
-
-*A number line sketch of solutions to $x\le 1$ as well as to $x\gt 4$*
-
 An "or" statement becomes a union of solution sets, so the solution set to the compound inequality must be:
 
 $$
@@ -141,9 +129,6 @@ $$
 $$
 
 The solution set for the compound inequality $x\lt2$ is $(-\infty,2)$ and the solution set to $x\ge5$ is $[5,\infty)$. To do the "or" portion of the problem, we need to take the union of these two sets. Let's first make a graph of the solution sets to visualize the problem.
-
-*A number line sketch of $(-\infty,2)$ as well as $[5,\infty)$*
-
 The union combines both solution sets into one, and so
 
 $$
@@ -185,9 +170,6 @@ $$
 $$
 
 The solution set to $t\le \frac{2}{3}$ is $\left(-\infty,\frac{2}{3}\right]$ and the solution set to $t\gt 7$ is $(7,\infty)$.  Figure  shows these two sets.
-
-*A number line sketch of $\left(-\infty,\frac{2}{3}\right]$ and also $(7,\infty)$*
-
 Note that the two sets do not overlap so there will be no way to simplify the union. Thus the solution set to the compound inequality is:
 
 $$
@@ -209,9 +191,6 @@ $$
 $$
 
 The solution set to $y\gt 7$ is $(7,\infty)$ and the solution set to $y\le 2$ is $(-\infty,2]$.  Figure  shows these two sets.
-
-*A number line sketch of $(7,\infty)$ as well as $(-\infty,2]$*
-
 So the solution set to the compound inequality is:
 
 $$
@@ -317,9 +296,6 @@ $$
 $$
 
 The solution set to $t\lt3$ is $(-\infty,3)$ and the solution set to $t\geq-1$ is $[-1,\infty)$. Shown is a graph of these solution sets.
-
-*A number line sketch of $(-\infty,3)$ and also $[-1,\infty)$*
-
 Recall that an "and" problem finds the intersection of the solution sets. Intersection finds the $t$-values where the two lines overlap, so the solution to the compound inequality must be
 
 $$
@@ -360,9 +336,6 @@ $$
 $$
 
 The solution set to $x\le -3$ is $(-\infty,-3]$ and the solution set to $x\gt-5$ is $(-5,\infty)$. Shown is a graph of these solution sets on a number line.
-
-*A number line sketch of $(-\infty,-3]$ and $(-5,\infty)$*
-
 Recall that "and" statements of inequalities become intersections of the solution sets. Since intersections refer to where the sets overlap, and these sets overlap between $-5$ (exclusive) and $-3$ (inclusive), we would say
 
 $$

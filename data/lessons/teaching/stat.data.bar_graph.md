@@ -41,9 +41,6 @@ Since we know that we will go forward 5 units and then down 3 units, and that we
 Find the slope and vertical intercept of $y=h(x)$, where $h(x)=\frac{5}{3}x-4$. Then use slope triangles to find two more points on the line and sketch it.
 
 The slope is $\frac{5}{3}$ and the vertical intercept is $(0,-4)$. Starting at $(0,-4)$, we go forward 3 units and up 5 units to reach more points: $(3,1)$ and $(6,6)$.
-
-*A graph of $h(x)=\frac{5}{3}x-4$*
-
 ## Graphing Lines in Point-Slope Form
 
 Recall that the  point-slope form  of a line equation is $y=m(x-x_0)+y_0$ where $m$ is the slope and $(x_0,y_0)$ is a point on the line. The reason that $(x_0,y_0)$ is a point on the line is because you can substitute in $x_0$ for $x$ and then $y_0$ is the result for $y$.
@@ -71,9 +68,6 @@ Let's make graph of this equation given the information provided, but only betwe
 Find the slope and a point on the graph of $y=m(x)$, where $m(x)=-\frac{9}{5}(x+1)-3$. Then use slope triangles to find two more points on the line and sketch it.
 
 The slope of the line is $-\frac{9}{5}$, and the point given by the equation is $(-1,-3)$. So to graph $h$, start at $(-1,-3)$, and the go forward 5 units and down 9 units to reach more points: $(4,-12)$ and $(9,-21)$.
-
-*A graph of $m(x)=-\frac{9}{5}(x+1)-3$*
-
 ## Graphing Lines Using Intercepts
 
 Recall that the  standard form  of a line equation is $Ax+By=C$ where where $A$, $B$, and $C$ are three numbers (each of which might be 0, although at least one of $A$ and $B$ must be nonzero).
@@ -135,9 +129,6 @@ Any function, linear or not, can be graphed by building a table of $x$- and $y$-
 Imagine a company called Corduroy's-Я-Us that makes pants. Their profit from their Royal Blue Corduroys, in thousands of dollars, can be modeled by the function $P(x)=-0.5x^2+33x-200$ where $x$ is the price of each pair of Royal Blue pants that they sell. Let's build a table of values and plot the function's graph.
 
 In this context, the value of $x$ must be positive. Furthermore, we shouldn't really consider $x$-values like 1, 2, etc., because it is not realistic that the price of a pair of new pants would be so low. Instead we try multiples of 10: 10, 20, etc.
-
-*A table of values for $P(x)=-0.5x^2+33x-200$*
-
 With the values in  Table , we can sketch the graph. Note that we have to estimate the how the graph curves which is a limitation of graphing a function by plotting points compared with using algebraic techniques.
 
 **Exercise**

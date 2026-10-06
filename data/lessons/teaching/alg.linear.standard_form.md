@@ -129,9 +129,6 @@ So the line's $y$-intercept is $(0,2)$.
 *Intercepts of $2x-3y=-6$*
 
 With both intercepts' coordinates, we can graph the line:
-
-*Graph of $2x-3y=-6$*
-
 There is a slope triangle from the $x$-intercept to the origin up to the $y$-intercept. It tells us that the slope is
 
 $$

@@ -466,3 +466,111 @@ func TestContinuationByteIsNeverAnOpeningBracket(t *testing.T) {
 		}
 	}
 }
+
+// Figure captions left behind by a dropped image may not grow.
+//
+// 359 paragraphs in the teaching corpus are a figure caption with no figure beside it: the
+// shape `ingest_pretext.mjs` emits for a `<figure>` when it keeps the caption and drops the
+// image. `scripts/prune_orphan_captions.py` removes the 35 that nothing refers to. The other
+// 324 are kept on purpose, and the reasons are recorded here because the number looks
+// indefensible without them:
+//
+//	220  the lesson's prose cites a figure — by number ("as shown in Figure 1.2") or by
+//	     position ("the graph above illustrates"). Removing the caption would leave the prose
+//	     pointing at nothing, which is worse than an orphaned caption.
+//	 74  no picture vocabulary, so the text could as readily be emphasis. Several are real
+//	     captions ("Share of all income held by the top 1%, United States") and the rule that
+//	     would catch them also catches content that must stay.
+//	 30  bare section labels such as `*Solution*`, which head a worked answer. The audit's
+//	     "duplicated in this lesson" signal rates them `strong`, because a lesson with two
+//	     worked answers has two of them, so a tier-based rule deletes a heading from 15
+//	     geometry lessons.
+//
+// This is a ceiling on a known, explained remainder, not an assertion that 324 is correct.
+// The audit is the tool for that judgement — see docs/lesson-media.md — and it is a report,
+// because the remaining cases are per instance.
+func TestOrphanCaptionsDoNotGrow(t *testing.T) {
+	root := "../../data/lessons"
+	if _, err := os.Stat(root); err != nil {
+		t.Skipf("lesson corpus not present: %v", err)
+	}
+	const known = 324
+
+	var files, total int
+	var worst []string
+	err := filepath.Walk(root, func(p string, info os.FileInfo, err error) error {
+		if err != nil || info.IsDir() || !strings.HasSuffix(p, ".md") {
+			return err
+		}
+		raw, err := os.ReadFile(p)
+		if err != nil {
+			return err
+		}
+		n := len(orphanCaptions(string(raw)))
+		if n == 0 {
+			return nil
+		}
+		files++
+		total += n
+		if n > 0 {
+			worst = append(worst, relative(p))
+		}
+		return nil
+	})
+	if err != nil {
+		t.Fatalf("walk corpus: %v", err)
+	}
+	if total > known {
+		t.Errorf("%d orphaned figure captions across %d lessons, ceiling is %d.\n"+
+			"A new one means an ingestion run dropped another figure's image and kept its "+
+			"caption. `scripts/prune_orphan_captions.py --dry-run` lists them.", total, files, known)
+	}
+	t.Logf("%d orphaned figure captions across %d lessons (ceiling %d)", total, files, known)
+}
+
+// orphanCaptions finds paragraphs that are nothing but emphasis and that sit next to no image.
+//
+// This deliberately mirrors `section_a_candidates` in scripts/audit_lesson_media.py rather than
+// being a convenient second version of the rule. An earlier permissive version counted 416
+// against the audit's 324, and the ceiling below is only meaningful if the two agree — so
+// agreement is itself the cross-check, and a drift shows up as a failing number rather than as
+// a silently weaker gate. The pruning script imports the audit for the same reason: two
+// versions of this rule disagreed by 74, and the extra 74 included content that had to stay.
+func orphanCaptions(body string) []string {
+	lines := strings.Split(body, "\n")
+	// All four prefixes the audit checks. Omitting "*" counted 398 against the audit's 324,
+	// which is exactly the number of captions that sit next to another emphasis line.
+	edge := func(l string) bool {
+		return strings.HasPrefix(l, "-") || strings.HasPrefix(l, "*") ||
+			strings.HasPrefix(l, "|") || strings.HasPrefix(l, ">")
+	}
+	nonBlank := func(from, step int) string {
+		for j := from; j >= 0 && j < len(lines); j += step {
+			if t := strings.TrimSpace(lines[j]); t != "" {
+				return t
+			}
+		}
+		return ""
+	}
+	var out []string
+	for i, ln := range lines {
+		t := strings.TrimSpace(ln)
+		// A paragraph that is nothing but emphasis. Excludes a bullet (`* item`) and a
+		// bold-only line (`**Header**`), which look the same and are neither.
+		if len(t) <= 2 || !strings.HasPrefix(t, "*") || !strings.HasSuffix(t, "*") ||
+			strings.HasPrefix(t, "* ") || strings.HasPrefix(t[1:], "*") {
+			continue
+		}
+		// No well-formed image on this line, or on the nearest non-blank line either side.
+		if imageRe.MatchString(t) || imageRe.MatchString(nonBlank(i-1, -1)) {
+			continue
+		}
+		// A caption introduced by a list, table or blockquote edge is part of that structure
+		// rather than a dropped figure.
+		if edge(nonBlank(i-1, -1)) || edge(nonBlank(i+1, 1)) {
+			continue
+		}
+		out = append(out, fmt.Sprintf("%d: %s", i+1, t))
+	}
+	return out
+}

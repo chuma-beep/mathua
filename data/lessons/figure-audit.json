@@ -1,13 +1,6 @@
 {
   "orphan_caption_candidates": [
     {
-      "lesson": "teaching/alg.factor.gcf.md",
-      "line": 15,
-      "text": "A graph of $y=(x+2)(x-3)$",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
       "lesson": "teaching/alg.func.evaluate.md",
       "line": 11,
       "text": "Values of $\\sqrt{x}$",
@@ -23,14 +16,7 @@
     },
     {
       "lesson": "teaching/alg.func.evaluate.md",
-      "line": 109,
-      "text": "Imagining a function as a machine. (Image by Duane Nykamp using Mathematica.)",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/alg.func.evaluate.md",
-      "line": 198,
+      "line": 195,
       "text": "Unemployment in the United States",
       "confidence": "likely",
       "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
@@ -51,14 +37,7 @@
     },
     {
       "lesson": "teaching/alg.func.notation.md",
-      "line": 109,
-      "text": "Imagining a function as a machine. (Image by Duane Nykamp using Mathematica.)",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/alg.func.notation.md",
-      "line": 198,
+      "line": 195,
       "text": "Unemployment in the United States",
       "confidence": "likely",
       "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
@@ -71,165 +50,46 @@
       "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
     },
     {
-      "lesson": "teaching/alg.ineq.compound.md",
-      "line": 33,
-      "text": "A number line sketch of $(-\\infty,4)$ as well as $[7,\\infty)$",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/alg.ineq.compound.md",
-      "line": 55,
-      "text": "A number line sketch of $(-\\infty,5)$ and $[-3,\\infty)$",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/alg.ineq.compound.md",
-      "line": 59,
-      "text": "A number line sketch of $[-3,5)$",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/alg.ineq.compound.md",
-      "line": 119,
-      "text": "A number line sketch of solutions to $x\\le 1$ as well as to $x\\gt 4$",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/alg.ineq.compound.md",
-      "line": 145,
-      "text": "A number line sketch of $(-\\infty,2)$ as well as $[5,\\infty)$",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/alg.ineq.compound.md",
-      "line": 189,
-      "text": "A number line sketch of $\\left(-\\infty,\\frac{2}{3}\\right]$ and also $(7,\\infty)$",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/alg.ineq.compound.md",
-      "line": 213,
-      "text": "A number line sketch of $(7,\\infty)$ as well as $(-\\infty,2]$",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/alg.ineq.compound.md",
-      "line": 321,
-      "text": "A number line sketch of $(-\\infty,3)$ and also $[-1,\\infty)$",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/alg.ineq.compound.md",
-      "line": 364,
-      "text": "A number line sketch of $(-\\infty,-3]$ and $(-5,\\infty)$",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
       "lesson": "teaching/alg.ineq.two_var.md",
-      "line": 13,
-      "text": "A Graph of AAPL Stock Data",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/alg.ineq.two_var.md",
-      "line": 19,
-      "text": "A Graph of AAPL Stock Data with $y=205$",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/alg.ineq.two_var.md",
-      "line": 23,
-      "text": "A Zoomed-In Graph of AAPL Stock Data with $y=205$",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/alg.ineq.two_var.md",
-      "line": 33,
-      "text": "A Graph of Both $y=3x-2$ and $y=7$",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/alg.ineq.two_var.md",
-      "line": 37,
-      "text": "A Graph of Both $y=3x-2$ and $y=7$",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/alg.ineq.two_var.md",
-      "line": 57,
+      "line": 42,
       "text": "$y=\\abs{\\frac{2}{3}x+1}$ and $y=3$",
       "confidence": "likely",
       "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
     },
     {
       "lesson": "teaching/alg.ineq.two_var.md",
-      "line": 77,
+      "line": 62,
       "text": "$y=\\abs{\\frac{1}{3}x+2}$ and $y=3$",
       "confidence": "likely",
       "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
     },
     {
       "lesson": "teaching/alg.ineq.two_var.md",
-      "line": 90,
+      "line": 75,
       "text": "Points of intersection for $y=42(x-2)^2-60$ and $y=21x-39$",
       "confidence": "likely",
       "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
     },
     {
       "lesson": "teaching/alg.ineq.two_var.md",
-      "line": 96,
+      "line": 81,
       "text": "Where $42(x-2)^2-60\\ge21x-39$",
       "confidence": "likely",
       "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
     },
     {
       "lesson": "teaching/alg.ineq.two_var.md",
-      "line": 101,
+      "line": 86,
       "text": "Where $42(x-2)^2-60\\lt21x-39$",
       "confidence": "likely",
       "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
     },
     {
       "lesson": "teaching/alg.ineq.two_var.md",
-      "line": 109,
-      "text": "Graph of $y=f(x)$",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/alg.ineq.two_var.md",
-      "line": 119,
-      "text": "Graph of $y=g(x)$",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/alg.ineq.two_var.md",
-      "line": 142,
+      "line": 121,
       "text": "$y=f(x)$ and $y=1.1$",
       "confidence": "likely",
       "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
-    },
-    {
-      "lesson": "teaching/alg.ineq.two_var.md",
-      "line": 147,
-      "text": "$y=f(x)$, the Graph of the Mt Hood Ascent and Descent",
-      "confidence": "strong",
-      "reason": "describes a picture"
     },
     {
       "lesson": "teaching/alg.linear.parallel_perp.md",
@@ -317,14 +177,7 @@
     },
     {
       "lesson": "teaching/alg.linear.standard_form.md",
-      "line": 133,
-      "text": "Graph of $2x-3y=-6$",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/alg.linear.standard_form.md",
-      "line": 211,
+      "line": 208,
       "text": "Graphing $2x-3y=0 $ with Slope Triangles",
       "confidence": "likely",
       "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
@@ -394,14 +247,7 @@
     },
     {
       "lesson": "teaching/alg.seq.sum_arith.md",
-      "line": 109,
-      "text": "Imagining a function as a machine. (Image by Duane Nykamp using Mathematica.)",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/alg.seq.sum_arith.md",
-      "line": 198,
+      "line": 195,
       "text": "Unemployment in the United States",
       "confidence": "likely",
       "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
@@ -601,13 +447,6 @@
       "text": "Figure 2.10 Factors of the counting numbers from 2 2 through 20 , 20 , with prime numbers highlighted",
       "confidence": "certain",
       "reason": "auto-numbered figure/table label"
-    },
-    {
-      "lesson": "teaching/arith.factor.gcf.md",
-      "line": 15,
-      "text": "A graph of $y=(x+2)(x-3)$",
-      "confidence": "strong",
-      "reason": "describes a picture"
     },
     {
       "lesson": "teaching/arith.factor.prime.md",
@@ -1119,13 +958,6 @@
       "text": "$\\abs{2}$ and $\\abs{-2}$",
       "confidence": "likely",
       "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
-    },
-    {
-      "lesson": "teaching/arith.sqrt.perfect.md",
-      "line": 61,
-      "text": "Multiplication table with squares",
-      "confidence": "strong",
-      "reason": "describes a picture"
     },
     {
       "lesson": "teaching/calc.deriv.exp_log.md",
@@ -2346,27 +2178,6 @@
       "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
     },
     {
-      "lesson": "teaching/stat.data.bar_graph.md",
-      "line": 45,
-      "text": "A graph of $h(x)=\\frac{5}{3}x-4$",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/stat.data.bar_graph.md",
-      "line": 75,
-      "text": "A graph of $m(x)=-\\frac{9}{5}(x+1)-3$",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/stat.data.bar_graph.md",
-      "line": 139,
-      "text": "A table of values for $P(x)=-0.5x^2+33x-200$",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
       "lesson": "teaching/stat.data.line_plot.md",
       "line": 13,
       "text": "Share of all income held by the top 1% of wage earners",
@@ -2375,21 +2186,7 @@
     },
     {
       "lesson": "teaching/stat.data.line_plot.md",
-      "line": 33,
-      "text": "Table with a mathematical pattern",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/stat.data.line_plot.md",
-      "line": 37,
-      "text": "The data from the third table in&#x20;",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/stat.data.line_plot.md",
-      "line": 125,
+      "line": 119,
       "text": "Share of all income held by the top 1%, United States, 20002021",
       "confidence": "likely",
       "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
@@ -2403,21 +2200,7 @@
     },
     {
       "lesson": "teaching/stat.data.mode.md",
-      "line": 33,
-      "text": "Table with a mathematical pattern",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/stat.data.mode.md",
-      "line": 37,
-      "text": "The data from the third table in&#x20;",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/stat.data.mode.md",
-      "line": 125,
+      "line": 119,
       "text": "Share of all income held by the top 1%, United States, 20002021",
       "confidence": "likely",
       "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
@@ -2431,21 +2214,7 @@
     },
     {
       "lesson": "teaching/stat.data.range.md",
-      "line": 33,
-      "text": "Table with a mathematical pattern",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/stat.data.range.md",
-      "line": 37,
-      "text": "The data from the third table in&#x20;",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/stat.data.range.md",
-      "line": 125,
+      "line": 119,
       "text": "Share of all income held by the top 1%, United States, 20002021",
       "confidence": "likely",
       "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
@@ -2459,21 +2228,7 @@
     },
     {
       "lesson": "teaching/stat.data.read_table.md",
-      "line": 33,
-      "text": "Table with a mathematical pattern",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/stat.data.read_table.md",
-      "line": 37,
-      "text": "The data from the third table in&#x20;",
-      "confidence": "strong",
-      "reason": "describes a picture"
-    },
-    {
-      "lesson": "teaching/stat.data.read_table.md",
-      "line": 125,
+      "line": 119,
       "text": "Share of all income held by the top 1%, United States, 20002021",
       "confidence": "likely",
       "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"

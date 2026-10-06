@@ -11,9 +11,6 @@ When you write $x^2+2x$, you have an algebraic expression built with two terms--
 You've seen this with fractions. To simplify $\frac{15}{35}$, breaking down the numerator and denominator into factors is useful: $\frac{3\cdot5}{7\cdot5}$. Now you can see that the factors of 5 cancel.
 
 There are other reasons to appreciate the value in factoring. One reason is that there is a relationship between a factored polynomial and the horizontal intercepts of its graph. For example in the graph of $y=(x+2)(x-3)$, the horizontal intercepts are $(-2,0)$ and $(3,0)$. Note the $x$-values are $-2$ and 3, and think about what happens when you subsitutue those numbers in for $x$ in $y=(x+2)(x-3)$. We will explore this more fully in  Section .
-
-*A graph of $y=(x+2)(x-3)$*
-
 ## Identifying the Greatest Common Factor
 
 The most basic technique for factoring involves recognizing the *greatest common factor* between two expressions, which is the largest factor that goes in evenly to both expressions. For example, the greatest common factor between 6 and 8 is 2, since 2 divides nicely into both 6 and 8 and no larger number would divide nicely into both 6 and 8.

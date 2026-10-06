@@ -9,19 +9,10 @@ In this text, we have mostly focused on  solving inequalities algebraically . Wh
 **Example**
 
 Business leaders and professionals around the world concern themselves with money and how to grow their wealth. While a vast majority of people who live in the United States own few or no stocks, the stock market is important to learn about for anyone interested in earning a retirement. Stock owners need to know when to buy or sell their stocks to make a profit and the most essential tool to do so is the ability to read a graph. Let's examine a graph of the actual closing value of Apple (AAPL) stock from June 3, 2019 to August 6, 2019.
-
-*A Graph of AAPL Stock Data*
-
 If a person bought the stock on June 6, when the stock was valued at $$\$185$$ per share, and they wanted at least a $$\$20$$ per share profit, during what days could they have sold that stock?
 
 If we want a $$\$20$$ per share profit, then we should be interested in stock prices of $$\$205$$ or more. Let's draw a line at $y=205$, representing the price of $$\$205$$, and find any days when the stock was on or above that line. According to the graph, there are several dates in question in starting in late July. Let's zoom in on those dates to read our solutions better.
-
-*A Graph of AAPL Stock Data with $y=205$*
-
 With a zoomed-in and rescaled graph, we can clearly see the dates that would have resulted in a $$\$20$$ per share profit. Those dates were July 15, 16, 18, 22, 23, 24, 25, 26, 29, 30, 31, and August 1. Keep in mind that the stock market is closed on weekends and holidays, so we are only counting the solid dots as our solutions.
-
-*A Zoomed-In Graph of AAPL Stock Data with $y=205$*
-
 Let's turn to an example involving a linear equation.
 
 **Example**
@@ -29,13 +20,7 @@ Let's turn to an example involving a linear equation.
 Solve the inequality $3x-2\lt7$ graphically.
 
 To solve any inequality (or equation) graphically, we first take each side of the equation and graph $y=\text{"left hand side"}$ and $y=\text{"right hand side"}$. In this case, that would be $y=3x-2$ and $y=7$. Now we can see that the graphs of $y=3x-2$ and $y=7$ intersect at the point $(3,7)$.
-
-*A Graph of Both $y=3x-2$ and $y=7$*
-
 Since we are trying to solve the inequality $3x-2\lt7$, we need to examine the graph for where (what $x$-values) the graph of $y=3x-2$ is below the graph of $y=7$. This happens for $x$-values less than 3. So we would say that the solution set to $3x-2\lt7$ is $(-\infty,3)$. It is review to solve the inequality algebraically to verify our result.
-
-*A Graph of Both $y=3x-2$ and $y=7$*
-
 ## Solving Absolute Value and Quadratic Inequalities Graphically
 
 Recall in  Section  that we learned that graphs of absolute value function are in general shaped like "V"s. We can now solve some absolute value inequalities graphically.
@@ -105,9 +90,6 @@ For both parts of this example, we start by graphing the equations $y=42(x-2)^2-
 **Example**
 
 Figure  shows a graph of $y=f(x)$. Use the graph to solve the inequality $2\le f(x) \lt 6$.
-
-*Graph of $y=f(x)$*
-
 To solve the inequality $2\le f(x) \lt 6$ means to find the $x$-values that give function values between 2 and 6, not including 6. We draw the horizontal lines $y=2$ and $y=6$. Then we look for the points of intersection and find their $x$-values. We see that when $x$ is between $-4$ and 4, not including $-4$, the inequality will be true. We have drawn the interval $(-4,4]$ along the $x$-axis, which is the solution set.
 
 *Graph of $y=f(x)$ and the solution set to $2\le f(x) \lt 6$*
@@ -115,9 +97,6 @@ To solve the inequality $2\le f(x) \lt 6$ means to find the $x$-values that give
 **Example**
 
 Figure  shows a graph of $y=g(x)$. Use the graph to solve the inequality $-4\lt g(x) \le 3$.
-
-*Graph of $y=g(x)$*
-
 To solve $-4\lt g(x) \le 3$, we first draw the horizontal lines $y=-4$ and $y=3$. To solve this inequality we notice that there are two pieces of the function $g$ that are trapped between the $y$-values $-4$ and 3.
 
 The solution set is the compound inequality $(-2.1,0.7)\cup(2.4,3.2]$.
@@ -143,9 +122,6 @@ Phuong is taking the standard climbing route on Mount Hood from Timberline Lodge
 2) The inequality we are looking for will describe when the altitude is below 1.5 miles, but also above 1.1 miles based on the reality of the situation (since the model only works above Timberline lodge at 1.1 miles of altitude). Since $f(x)$ is the altitude, the inequality we need is $1.1\le f(x)\lt 1.5$, which becomes $1.1\le2.1-0.3077\cdot\abs{x-3.25}\lt 1.5$.
 
    Let's examine the graph again to solve this inequality: We are looking for places on the graph where the $y$-value is above 1.1, but also where the graph is below 1.5. To find this, we will draw in lines at both of those $y$-values and find intersections with $f$.
-
-   *$y=f(x)$, the Graph of the Mt Hood Ascent and Descent*
-
    The highlighted portions of the graph have $x$-values that satisfy the inequalities $0\le x\lt1.3 \text{ or } 5.2\lt x\le 6.5$.
 
    In conclusion, based both on our math and the reality of the situation, regions of the trail that are below 1.5 miles are those that are from Timberline Lodge (at 0 miles on the trail), to 1.3 miles along the trail and then also from 5.2 miles along the trail (and by now we are on our way back down) to 6.5 miles along the trail (back at Timberline Lodge). If we wanted to write this in interval notation, we might write $[0,1.3)\cup(5.2,6.5]$. There is a big portion along the trail (from 1.3 miles to 5.2 miles) that Phuong will be above the 1.5 mile altitude and should watch for signs of altitude sickness.
