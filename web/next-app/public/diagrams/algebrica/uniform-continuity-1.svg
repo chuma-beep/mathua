@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="342px" height="321px" viewBox="0 0 342 321" version="1.1" xmlns="http://www.w3.org/2000/svg">
-    <title>Group 12</title>
     <defs>
         <pattern id="diagonal-lines" width="10" height="10" patternUnits="userSpaceOnUse">
             <path d="M-2,2 L2,-2 M0,10 L10,0 M8,12 L12,8" fill="none" stroke="#E2DFDD" stroke-width="1"></path>
