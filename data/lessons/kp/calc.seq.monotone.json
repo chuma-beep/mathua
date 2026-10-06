@@ -6,7 +6,20 @@
       "Check a_{n+1} >= a_n termwise",
       "Test 1-1/n for increase",
       "Flag n as unbounded increase"
-    ]
+    ],
+    "slice": {
+      "rule": "A sequence is monotone increasing when $a_{n+1} \\ge a_n$ for every $n$, and monotone decreasing when the inequality reverses. Check it termwise rather than by eye: compare consecutive terms.",
+      "examples": [
+        {
+          "item": "$a_n = 1 - \\tfrac1n$",
+          "says": "$a_{n+1} - a_n = \\tfrac1{n(n+1)} > 0$ — increasing"
+        },
+        {
+          "item": "$a_n = (-1)^n$",
+          "says": "alternates — not monotone"
+        }
+      ]
+    }
   },
   {
     "label": "Monotone convergence theorem",
@@ -15,7 +28,21 @@
       "Pair monotonicity with an upper bound",
       "Conclude 1-1/n converges to 1",
       "Reject n for missing an upper bound"
-    ]
+    ],
+    "slice": {
+      "rule": "A sequence that is monotone and bounded above converges; its limit is the least upper bound of its terms. Both halves are needed. $1-\\tfrac1n$ is increasing but unbounded, so it has no limit; $\\left(1+\\tfrac1n\\right)^n$ is increasing and bounded by 3, so it converges.",
+      "examples": [
+        {
+          "item": "$1-\\tfrac1n$",
+          "says": "increasing, unbounded — does not converge"
+        },
+        {
+          "item": "$\\left(1+\\tfrac1n\\right)^n$",
+          "says": "increasing, bounded by 3 — converges to $e$"
+        }
+      ],
+      "note": "Monotone alone is not enough, which is exactly what the first example shows."
+    }
   },
   {
     "label": "Non-monotone convergence",
@@ -24,6 +51,19 @@
       "Exhibit (-1)^n/n oscillating",
       "Squeeze it to 0 anyway",
       "File monotone as sufficient, not necessary"
-    ]
+    ],
+    "slice": {
+      "rule": "Monotonicity is sufficient for convergence, not necessary. $b_n = \\dfrac{(-1)^n}{n}$ oscillates wildly in sign, yet $|b_n| \\le 1$ and the squeeze theorem drives it to 0.",
+      "examples": [
+        {
+          "item": "$b_n = \\dfrac{(-1)^n}{n}$",
+          "says": "oscillates, converges to $0$"
+        },
+        {
+          "item": "$b_n = (-1)^n$",
+          "says": "oscillates, does not converge"
+        }
+      ]
+    }
   }
 ]

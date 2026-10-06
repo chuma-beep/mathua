@@ -6,7 +6,25 @@
       "Identify the base and exponent",
       "Recognize exponential growth",
       "Read values from the function"
-    ]
+    ],
+    "slice": {
+      "rule": "The exponential function is $f(x) = a^x$ for a fixed base $a > 0$ with $a \\ne 1$. Unlike a power $x^n$, the variable sits in the exponent, so the output grows by a fixed *ratio* over each unit step rather than by a fixed amount. The domain is all of $\\mathbb{R}$ and the range is $\\mathbb{R}^+$.",
+      "examples": [
+        {
+          "item": "$f(x) = 2^x$",
+          "says": "$f(0)=1$, and each step doubles"
+        },
+        {
+          "item": "$f(x) = \\tfrac12^x$",
+          "says": "each step halves"
+        },
+        {
+          "item": "$f(x) = 1^x$",
+          "says": "constant $1$ — the case excluded by $a \\ne 1$"
+        }
+      ],
+      "note": "Every output is positive, so an exponential never touches or crosses the $x$-axis."
+    }
   },
   {
     "label": "Exponential behavior",
@@ -15,7 +33,20 @@
       "Compare growth rates",
       "Interpret the base",
       "Sketch the shape"
-    ]
+    ],
+    "slice": {
+      "rule": "Three regimes, decided by the base. For $a>1$ the function is strictly increasing from $0$ towards $\\infty$, passing through $(0,1)$. For $0<a<1$ it is strictly decreasing from $\\infty$ towards $0$. For $a=1$ it is the constant line $y=1$.",
+      "examples": [
+        {
+          "item": "$a>1$",
+          "says": "increasing, convex"
+        },
+        {
+          "item": "$0<a<1$",
+          "says": "decreasing, still convex"
+        }
+      ]
+    }
   },
   {
     "label": "Applications",
@@ -24,6 +55,19 @@
       "Recognize exponential models",
       "Evaluate at given inputs",
       "Interpret the output"
-    ]
+    ],
+    "slice": {
+      "rule": "Anything that compounds by a constant factor is exponential: population growth under a fixed rate, a balance earning a fixed rate, and radioactive decay. Read the base as the factor per unit of time.",
+      "examples": [
+        {
+          "item": "a population growing 3% yearly",
+          "says": "base $1.03$ per year"
+        },
+        {
+          "item": "a balance earning 5% yearly",
+          "says": "base $1.05$ per year"
+        }
+      ]
+    }
   }
 ]

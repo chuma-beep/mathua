@@ -358,7 +358,12 @@ func (l *Loader) KPAssets(conceptID string, kp KP) []Asset {
 	}
 	want := normSectionKey(kp.Section)
 	if want == "" {
-		return lesson.Assets
+		// No section means no figures either. Returning the whole lesson's asset list was the
+		// same mistake as serving the whole lesson body, in a different form: 40 figures were
+		// attached to fallback steps that have no section to place them in, so a learner
+		// meeting one concept's opening card was shown every figure the article contains. A
+		// shard that genuinely wants a figure names it in asset_ids above.
+		return nil
 	}
 	var out []Asset
 	for _, a := range lesson.Assets {

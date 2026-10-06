@@ -6,7 +6,33 @@
       "Test for a declarative sentence form",
       "Check it has one definite truth value",
       "Reject questions, commands, and paradoxes"
-    ]
+    ],
+    "slice": {
+      "rule": "A proposition is a declarative sentence that has one definite truth value: it is either true or false, and there is no third option. A question or a command is not a proposition, because it asserts nothing for a truth value to attach to. A sentence that looks declarative but leaves its truth unsettled — *this number is large* — is not a proposition either.",
+      "examples": [
+        {
+          "item": "The Earth orbits the Sun.",
+          "says": "true, so a proposition"
+        },
+        {
+          "item": "$2 + 2 = 4$.",
+          "says": "true, so a proposition"
+        },
+        {
+          "item": "The Moon is made of green cheese.",
+          "says": "false, but still a proposition"
+        },
+        {
+          "item": "What time is it?",
+          "says": "a question, so not a proposition"
+        },
+        {
+          "item": "Close the window.",
+          "says": "a command, so not a proposition"
+        }
+      ],
+      "note": "A false statement is a proposition. Only statements with no truth value at all are rejected."
+    }
   },
   {
     "label": "Sort true, false, and non-propositions",
@@ -15,7 +41,28 @@
       "Accept false statements as propositions",
       "Flag vague open sentences like x is large",
       "Count propositions in a mixed list"
-    ]
+    ],
+    "slice": {
+      "rule": "Sort in two passes. First ask whether the sentence asserts anything: a question or command goes straight out. Then, for whatever is left, decide whether it is true or false. That second step never changes the category — it only assigns a value — so a false statement stays a proposition.",
+      "examples": [
+        {
+          "item": "$0 = 1$",
+          "says": "asserts something, so a proposition, and it is false"
+        },
+        {
+          "item": "Every prime is odd.",
+          "says": "a proposition, and false"
+        },
+        {
+          "item": "Please sit down.",
+          "says": "a request, so not a proposition"
+        },
+        {
+          "item": "Is this a proposition?",
+          "says": "a question, so not a proposition"
+        }
+      ]
+    }
   },
   {
     "label": "Apply the proposition test at speed",
@@ -24,6 +71,24 @@
       "Scan three statements for truth-valuedness",
       "Tally how many qualify",
       "Name the disqualifier for each reject"
-    ]
+    ],
+    "slice": {
+      "rule": "Run one pass over a mixed list. For each sentence ask only: does this assert something with a definite truth value? Reject questions, commands and requests on sight, and reject anything whose truth value is genuinely unsettled. When you reject one, name the disqualifier rather than leaving the reason implicit.",
+      "examples": [
+        {
+          "item": "(a) Please sit down.",
+          "says": "command — rejected"
+        },
+        {
+          "item": "(b) What time is it?",
+          "says": "question — rejected"
+        },
+        {
+          "item": "(c) $2 + 2 = 4$",
+          "says": "declarative with a definite value — kept"
+        }
+      ],
+      "note": "Naming the disqualifier is most of the work: a rejection without a reason is not a decision yet."
+    }
   }
 ]

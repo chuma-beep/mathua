@@ -1,7 +1,9 @@
 package lessons
 
 import (
+	"fmt"
 	"regexp"
+	"sort"
 	"strings"
 	"testing"
 )
@@ -157,5 +159,103 @@ func TestRealDataTitlesSane(t *testing.T) {
 	}
 	if checked == 0 {
 		t.Fatal("no lessons checked")
+	}
+}
+
+// The worked example `/learn` serves is never the lesson body.
+//
+// This is the invariant whose absence let a real defect ship. When a shard's `section` was
+// empty the server substituted the whole lesson body, so 69 of 1,971 steps across 43 concepts
+// served the entire reference article — 33,784 words, and discrete.logic.propositions served
+// its 2,724-word article three times over, against a concept whose mastery threshold is twelve
+// seconds. Nothing caught it, for two compounding reasons:
+//
+//   - `TestRealDataKPSectionsResolve` above `continue`s on `kp.Section == ""`, so all 69 of
+//     them sat outside the one gate whose own comment names this failure mode.
+//   - Every e2e test mocks `**/api/lessons**`, so the `worked_example` under test was a
+//     hand-written literal and never a served body.
+//
+// So this asserts the served string is *bounded*, not that every section resolves. An authored
+// slice cannot reintroduce the article, and neither can a shard whose section stops matching.
+func TestWorkedExampleIsBoundedAndNeverTheWholeBody(t *testing.T) {
+	lib, err := Load("../../data/lessons")
+	if err != nil {
+		t.Skipf("dataset not present: %v", err)
+	}
+	if lib.Count() == 0 {
+		t.Skip("empty library")
+	}
+
+	var total, sectioned, authored, minimal, firstCardMinimal int
+	var overBudget []string
+	conceptsWithMinimal := map[string]bool{}
+
+	for _, f := range lib.SliceAudit() {
+		total++
+		lesson := lib.Lesson(f.ConceptID)
+		if lesson == nil {
+			continue
+		}
+		if f.Words > MaxSliceWords {
+			// Reported, not failed. A section over budget is normally a section that genuinely
+			// needs the room — `abstract.group.dihedral`'s "Two generators and three relations"
+			// is 534 words and cannot be truncated without breaking the argument. The budget
+			// gates what is *authored* (see TestAuthoredSlicesMeetTheirBoundaries); for content
+			// that already exists it is a number worth knowing rather than a rule to enforce,
+			// because the only mechanical fix would be cutting a proof in half.
+			overBudget = append(overBudget, fmt.Sprintf("%s/%s (%d)", f.ConceptID, f.KPLabel, f.Words))
+		}
+		if f.FirstCard && f.Level == SliceLevelMinimal {
+			firstCardMinimal++
+		}
+		switch f.Level {
+		case SliceLevelAuthored:
+			authored++
+		case SliceLevelMinimal:
+			minimal++
+			conceptsWithMinimal[f.ConceptID] = true
+		default:
+			sectioned++
+			// A sectioned step must not be the whole article. This is the direct check on the
+			// substitution that caused the defect, and it holds even if the article is short.
+			if len(strings.Fields(lesson.Body)) == f.Words {
+				t.Errorf("%s: worked example is exactly the lesson body (%d words)",
+					f.ConceptID, f.Words)
+			}
+		}
+	}
+
+	t.Logf("%d knowledge points: %d served a lesson section, %d an authored slice, %d a minimal placeholder",
+		total, sectioned, authored, minimal)
+	if len(overBudget) > 0 {
+		sort.Strings(overBudget)
+		t.Logf("%d steps exceed the %d-word guideline, e.g. %v (reported, not enforced)",
+			len(overBudget), MaxSliceWords, overBudget[:min(4, len(overBudget))])
+	}
+	t.Logf("%d concepts have at least one minimal placeholder; %d show one on the first card",
+		len(conceptsWithMinimal), firstCardMinimal)
+	t.Logf("content backlog: %d steps await an authored slice", minimal)
+}
+
+// An authored slice is only worth having if it teaches. These are curriculum boundaries rather
+// than a word-count gate: a slice with no rule teaches nothing, and one long past the budget
+// has stopped being the minimum needed for the next practice item.
+func TestAuthoredSlicesMeetTheirBoundaries(t *testing.T) {
+	lib, err := Load("../../data/lessons")
+	if err != nil {
+		t.Skipf("dataset not present: %v", err)
+	}
+	for _, f := range lib.SliceAudit() {
+		if f.Level != SliceLevelAuthored {
+			continue
+		}
+		if f.Words < MinSliceWords {
+			t.Errorf("%s %q: slice is %d words, below MinSliceWords=%d — it teaches nothing",
+				f.ConceptID, f.KPLabel, f.Words, MinSliceWords)
+		}
+		if f.Words > MaxSliceWords {
+			t.Errorf("%s %q: slice is %d words, over MaxSliceWords=%d",
+				f.ConceptID, f.KPLabel, f.Words, MaxSliceWords)
+		}
 	}
 }

@@ -38,6 +38,10 @@ type KP struct {
 	// nothing depends on it yet; it exists so a future step can point at a figure that
 	// lives outside its section without the prose being rearranged to suit.
 	AssetIDs []string `json:"asset_ids,omitempty"`
+	// Slice is an authored teaching slice for this step, used when Section is empty or does
+	// not resolve. It is what `/learn` shows in place of the lesson body: a rule, a few
+	// examples, and at most one misconception note. See slice.go.
+	Slice *Slice `json:"slice,omitempty"`
 }
 
 type mapping struct {

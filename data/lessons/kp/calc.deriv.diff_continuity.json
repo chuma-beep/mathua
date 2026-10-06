@@ -6,7 +6,20 @@
       "State the theorem precisely",
       "Follow the limit-factor proof idea",
       "Apply: differentiable at a, continuous at a"
-    ]
+    ],
+    "slice": {
+      "rule": "If $f$ is differentiable at $a$, it is continuous there. The idea behind the proof is that $\\frac{f(a+h)-f(a)}{h} = \\frac{f(a+h)-f(a)}{h-a}\\cdot 1$ splits into a difference quotient, which stays finite because the derivative exists, times a factor that tends to 1. A finite quantity times something tending to 1 tends to a finite number, and that limit is $f(a+h)-f(a) \\to 0$.",
+      "examples": [
+        {
+          "item": "$f(x) = x^2$ at $a = 3$",
+          "says": "differentiable, hence continuous"
+        },
+        {
+          "item": "$f(x) = |x|$ at $a = 0$",
+          "says": "continuous but not differentiable — the converse fails here"
+        }
+      ]
+    }
   },
   {
     "label": "Counterexamples: corners and cusps",
@@ -15,7 +28,25 @@
       "Show |x| is continuous at 0",
       "Show |x| has no derivative at 0",
       "Conclude the converse is false"
-    ]
+    ],
+    "slice": {
+      "rule": "Continuity does not imply differentiability. A corner, a cusp and a vertical tangent all leave the function continuous while destroying the limit of the difference quotient, because the left and right slopes disagree. $f(x)=|x|$ at 0 is the standard example: it is continuous, and the one-sided slopes are $-1$ and $1$.",
+      "examples": [
+        {
+          "item": "$|x|$ at $a=0$",
+          "says": "corner — continuous, no derivative"
+        },
+        {
+          "item": "$\\sqrt{x}$ at $a=0$",
+          "says": "vertical tangent — derivative is infinite, so no finite derivative"
+        },
+        {
+          "item": "$x^2$ at $a=0$",
+          "says": "smooth — differentiable and continuous"
+        }
+      ],
+      "note": "Undefined and discontinuous are different failures. A corner is defined and continuous; the problem is only the slope."
+    }
   },
   {
     "label": "Checking differentiability",
@@ -24,6 +55,9 @@
       "Test corners, cusps, vertical tangents",
       "Distinguish undefined from discontinuous",
       "Confirm differentiability is strictly stronger"
-    ]
+    ],
+    "slice": {
+      "rule": "To test differentiability at a point, compute the difference quotient limit from each side separately. If both exist and agree, the function is differentiable there. If they disagree you have a corner or a cusp; if either side has no limit you do not even have continuity to start from."
+    }
   }
 ]
