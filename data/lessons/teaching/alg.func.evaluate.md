@@ -105,9 +105,6 @@ More Notation Ambiguity
 As mentioned in  Warning , we need to remain conscious of the context of any symbol we are using.  Consider the expression $a(b)$. This could easily mean the output of a function $a$ with input $b$. It could also mean that two numbers $a$ and $b$ need to be multiplied. It all depends on the context in which these symbols are being used.
 
 Sometimes it's helpful to think of a function as a machine, as in  Figure .  A *function* has the capacity to take in all kinds of different numbers into it's hopper (feeding tray) as inputs and transform them into their outputs.
-
-*Imagining a function as a machine. (Image by Duane Nykamp using Mathematica.)*
-
 ## Tables and Graphs
 
 Since functions are potentially complicated, we want ways to understand them more easily. Two basic tools for understanding a function better are tables and graphs.

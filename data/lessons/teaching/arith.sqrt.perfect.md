@@ -57,9 +57,6 @@ Students may see an expression like $\abs{2-5}$ and incorrectly think it is OK t
 ## Square Root Facts
 
 If you have learned your basic multiplication table, you know:
-
-*Multiplication table with squares*
-
 The numbers along the diagonal are special; they are known as *perfect squares*.  And for working with square roots, it will be helpful if you can memorize these first few perfect square numbers.
 
 "Taking a square root" is the opposite action of squaring a number. For example, when you  square 3, the result is 9. So when you take the square root of 9, the result is 3. Just knowing that 9 comes about as $3^2$ lets us realize that 3 is the square root of 9. This is why memorizing the perfect squares from the multiplication table can be so helpful.

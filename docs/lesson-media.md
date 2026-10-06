@@ -5,8 +5,8 @@ a report, because the remaining decisions are per instance.
 
 ## A. Orphan caption candidates
 
-359 paragraphs across 116 lessons look like a figure caption whose image
-was dropped while its text was kept: **220 certain**, **68 strong**, **71 likely**.
+324 paragraphs across 113 lessons look like a figure caption whose image
+was dropped while its text was kept: **220 certain**, **33 strong**, **71 likely**.
 
 `certain` opens with an auto-numbered `Figure 3.2` / `Table 1.4` label, which PreTeXt
 generates for a figure or table and which survives ingestion — no judgement needed.
@@ -21,39 +21,19 @@ so the tiers below do not treat it as evidence either way.
 
 | lesson | line | confidence | text | why |
 | --- | --- | --- | --- | --- |
-| `teaching/alg.factor.gcf.md` | 15 | strong | *A graph of $y=(x+2)(x-3)$* | describes a picture |
 | `teaching/alg.func.evaluate.md` | 11 | likely | *Values of $\sqrt{x}$* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/alg.func.evaluate.md` | 33 | likely | *Values of $\operatorname{sqrt}(x)$* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/alg.func.evaluate.md` | 109 | strong | *Imagining a function as a machine. (Image by Duane Nykamp using Mathematica.)* | describes a picture |
-| `teaching/alg.func.evaluate.md` | 198 | likely | *Unemployment in the United States* | teaching corpus: standalone emphasis is the dropped-figure shape |
+| `teaching/alg.func.evaluate.md` | 195 | likely | *Unemployment in the United States* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/alg.func.notation.md` | 11 | likely | *Values of $\sqrt{x}$* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/alg.func.notation.md` | 33 | likely | *Values of $\operatorname{sqrt}(x)$* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/alg.func.notation.md` | 109 | strong | *Imagining a function as a machine. (Image by Duane Nykamp using Mathematica.)* | describes a picture |
-| `teaching/alg.func.notation.md` | 198 | likely | *Unemployment in the United States* | teaching corpus: standalone emphasis is the dropped-figure shape |
+| `teaching/alg.func.notation.md` | 195 | likely | *Unemployment in the United States* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/alg.ineq.compound.md` | 7 | likely | *Possible SAT Scores* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/alg.ineq.compound.md` | 33 | strong | *A number line sketch of $(-\infty,4)$ as well as $[7,\infty)$* | describes a picture |
-| `teaching/alg.ineq.compound.md` | 55 | strong | *A number line sketch of $(-\infty,5)$ and $[-3,\infty)$* | describes a picture |
-| `teaching/alg.ineq.compound.md` | 59 | strong | *A number line sketch of $[-3,5)$* | describes a picture |
-| `teaching/alg.ineq.compound.md` | 119 | strong | *A number line sketch of solutions to $x\le 1$ as well as to $x\gt 4$* | describes a picture |
-| `teaching/alg.ineq.compound.md` | 145 | strong | *A number line sketch of $(-\infty,2)$ as well as $[5,\infty)$* | describes a picture |
-| `teaching/alg.ineq.compound.md` | 189 | strong | *A number line sketch of $\left(-\infty,\frac{2}{3}\right]$ and also $(7,\infty)$* | describes a picture |
-| `teaching/alg.ineq.compound.md` | 213 | strong | *A number line sketch of $(7,\infty)$ as well as $(-\infty,2]$* | describes a picture |
-| `teaching/alg.ineq.compound.md` | 321 | strong | *A number line sketch of $(-\infty,3)$ and also $[-1,\infty)$* | describes a picture |
-| `teaching/alg.ineq.compound.md` | 364 | strong | *A number line sketch of $(-\infty,-3]$ and $(-5,\infty)$* | describes a picture |
-| `teaching/alg.ineq.two_var.md` | 13 | strong | *A Graph of AAPL Stock Data* | describes a picture |
-| `teaching/alg.ineq.two_var.md` | 19 | strong | *A Graph of AAPL Stock Data with $y=205$* | describes a picture |
-| `teaching/alg.ineq.two_var.md` | 23 | strong | *A Zoomed-In Graph of AAPL Stock Data with $y=205$* | describes a picture |
-| `teaching/alg.ineq.two_var.md` | 33 | strong | *A Graph of Both $y=3x-2$ and $y=7$* | describes a picture |
-| `teaching/alg.ineq.two_var.md` | 37 | strong | *A Graph of Both $y=3x-2$ and $y=7$* | describes a picture |
-| `teaching/alg.ineq.two_var.md` | 57 | likely | *$y=\abs{\frac{2}{3}x+1}$ and $y=3$* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/alg.ineq.two_var.md` | 77 | likely | *$y=\abs{\frac{1}{3}x+2}$ and $y=3$* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/alg.ineq.two_var.md` | 90 | likely | *Points of intersection for $y=42(x-2)^2-60$ and $y=21x-39$* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/alg.ineq.two_var.md` | 96 | likely | *Where $42(x-2)^2-60\ge21x-39$* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/alg.ineq.two_var.md` | 101 | likely | *Where $42(x-2)^2-60\lt21x-39$* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/alg.ineq.two_var.md` | 109 | strong | *Graph of $y=f(x)$* | describes a picture |
-| `teaching/alg.ineq.two_var.md` | 119 | strong | *Graph of $y=g(x)$* | describes a picture |
-| `teaching/alg.ineq.two_var.md` | 142 | likely | *$y=f(x)$ and $y=1.1$* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/alg.ineq.two_var.md` | 147 | strong | *$y=f(x)$, the Graph of the Mt Hood Ascent and Descent* | describes a picture |
+| `teaching/alg.ineq.two_var.md` | 42 | likely | *$y=\abs{\frac{2}{3}x+1}$ and $y=3$* | teaching corpus: standalone emphasis is the dropped-figure shape |
+| `teaching/alg.ineq.two_var.md` | 62 | likely | *$y=\abs{\frac{1}{3}x+2}$ and $y=3$* | teaching corpus: standalone emphasis is the dropped-figure shape |
+| `teaching/alg.ineq.two_var.md` | 75 | likely | *Points of intersection for $y=42(x-2)^2-60$ and $y=21x-39$* | teaching corpus: standalone emphasis is the dropped-figure shape |
+| `teaching/alg.ineq.two_var.md` | 81 | likely | *Where $42(x-2)^2-60\ge21x-39$* | teaching corpus: standalone emphasis is the dropped-figure shape |
+| `teaching/alg.ineq.two_var.md` | 86 | likely | *Where $42(x-2)^2-60\lt21x-39$* | teaching corpus: standalone emphasis is the dropped-figure shape |
+| `teaching/alg.ineq.two_var.md` | 121 | likely | *$y=f(x)$ and $y=1.1$* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/alg.linear.parallel_perp.md` | 91 | likely | *Summary of Horizontal and Vertical Line Equations* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/alg.linear.parallel_perp.md` | 101 | likely | *Two Trees' Growth Chart* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/alg.linear.parallel_perp.md` | 117 | likely | *The relationship between slopes of perpendicular lines* | teaching corpus: standalone emphasis is the dropped-figure shape |
@@ -66,8 +46,7 @@ so the tiers below do not treat it as evidence either way.
 | `teaching/alg.linear.slope.md` | 157 | likely | *Height of a Tree* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/alg.linear.standard_form.md` | 109 | strong | *Intercepts of $2x-3y=-6$* | duplicated 2x in this lesson |
 | `teaching/alg.linear.standard_form.md` | 129 | strong | *Intercepts of $2x-3y=-6$* | duplicated 2x in this lesson |
-| `teaching/alg.linear.standard_form.md` | 133 | strong | *Graph of $2x-3y=-6$* | describes a picture |
-| `teaching/alg.linear.standard_form.md` | 211 | likely | *Graphing $2x-3y=0 $ with Slope Triangles* | teaching corpus: standalone emphasis is the dropped-figure shape |
+| `teaching/alg.linear.standard_form.md` | 208 | likely | *Graphing $2x-3y=0 $ with Slope Triangles* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/alg.poly.mult_mono.md` | 53 | likely | *A Generic Rectangle Modeling $2x(3x+4)$* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/alg.poly.mult_mono.md` | 101 | likely | *Using  Method to multiply $(x+2)(x+3)$* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/alg.poly.mult_mono.md` | 107 | likely | *Setting up Generic Rectangles to Multiply $(x+2)(x+3)$* | teaching corpus: standalone emphasis is the dropped-figure shape |
@@ -77,8 +56,7 @@ so the tiers below do not treat it as evidence either way.
 | `teaching/alg.poly.mult_mono.md` | 215 | likely | *Multiply Each Term by Each Term* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/alg.seq.sum_arith.md` | 11 | likely | *Values of $\sqrt{x}$* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/alg.seq.sum_arith.md` | 33 | likely | *Values of $\operatorname{sqrt}(x)$* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/alg.seq.sum_arith.md` | 109 | strong | *Imagining a function as a machine. (Image by Duane Nykamp using Mathematica.)* | describes a picture |
-| `teaching/alg.seq.sum_arith.md` | 198 | likely | *Unemployment in the United States* | teaching corpus: standalone emphasis is the dropped-figure shape |
+| `teaching/alg.seq.sum_arith.md` | 195 | likely | *Unemployment in the United States* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/alg.systems.word.md` | 45 | likely | *Amount in Savings Account* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/arith.dec.intro.md` | 49 | certain | *Figure 5.2 This chart illustrates place values to the left and right of the decimal point.* | auto-numbered figure/table label |
 | `teaching/arith.dec.intro.md` | 673 | certain | *Figure 5.4 ⓐ We see that 2.72 2.72 is closer to 3 3 than to 2 . 2 . So, 2.72 2.72 rounded to ...* | auto-numbered figure/table label |
@@ -107,7 +85,6 @@ so the tiers below do not treat it as evidence either way.
 | `teaching/arith.factor.find.md` | 157 | certain | *Figure 2.8 Multiples of 10 10 between 1 1 and 50 50* | auto-numbered figure/table label |
 | `teaching/arith.factor.find.md` | 198 | certain | *Figure 2.9 Multiples of 3 3 between 1 1 and 50 50* | auto-numbered figure/table label |
 | `teaching/arith.factor.find.md` | 518 | certain | *Figure 2.10 Factors of the counting numbers from 2 2 through 20 , 20 , with prime numbers hig...* | auto-numbered figure/table label |
-| `teaching/arith.factor.gcf.md` | 15 | strong | *A graph of $y=(x+2)(x-3)$* | describes a picture |
 | `teaching/arith.factor.prime.md` | 71 | certain | *Figure 2.6 Multiples of 2 2 between 1 1 and 50 50* | auto-numbered figure/table label |
 | `teaching/arith.factor.prime.md` | 114 | certain | *Figure 2.7 Multiples of 5 5 between 1 1 and 50 50* | auto-numbered figure/table label |
 | `teaching/arith.factor.prime.md` | 157 | certain | *Figure 2.8 Multiples of 10 10 between 1 1 and 50 50* | auto-numbered figure/table label |
@@ -181,7 +158,6 @@ so the tiers below do not treat it as evidence either way.
 | `teaching/arith.sci_notation.ops.md` | 26 | likely | *Whole Number Powers of 10* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/arith.sci_notation.ops.md` | 84 | likely | *Negative Integer Powers of 10* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/arith.sqrt.perfect.md` | 15 | likely | *$\abs{2}$ and $\abs{-2}$* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/arith.sqrt.perfect.md` | 61 | strong | *Multiplication table with squares* | describes a picture |
 | `teaching/calc.deriv.exp_log.md` | 43 | certain | *Figure 3.33 The graph of E ( x ) = e x E ( x ) = e x is between y = 2 x y = 2 x and y = 3 x ....* | auto-numbered figure/table label |
 | `teaching/calc.deriv.exp_log.md` | 73 | certain | *Figure 3.34 The tangent line to E ( x ) = e x E ( x ) = e x at x = 0 x = 0 has slope 1.* | auto-numbered figure/table label |
 | `teaching/calc.deriv.exp_log.md` | 239 | certain | *Figure 3.35 The function y = ln x The function y = ln x is increasing on ( 0 , + ∞ ) . ( 0 , ...* | auto-numbered figure/table label |
@@ -356,25 +332,14 @@ so the tiers below do not treat it as evidence either way.
 | `teaching/prealg.eq.word.md` | 45 | likely | *Amount in Savings Account* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/prealg.expr.distribute.md` | 69 | likely | *Horizontal and Vertical Rectangles* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/prealg.ineq.one_step.md` | 57 | likely | *When two numbers are multiplied by a negative number, their relationship changes* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/stat.data.bar_graph.md` | 45 | strong | *A graph of $h(x)=\frac{5}{3}x-4$* | describes a picture |
-| `teaching/stat.data.bar_graph.md` | 75 | strong | *A graph of $m(x)=-\frac{9}{5}(x+1)-3$* | describes a picture |
-| `teaching/stat.data.bar_graph.md` | 139 | strong | *A table of values for $P(x)=-0.5x^2+33x-200$* | describes a picture |
 | `teaching/stat.data.line_plot.md` | 13 | likely | *Share of all income held by the top 1% of wage earners* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/stat.data.line_plot.md` | 33 | strong | *Table with a mathematical pattern* | describes a picture |
-| `teaching/stat.data.line_plot.md` | 37 | strong | *The data from the third table in&#x20;* | describes a picture |
-| `teaching/stat.data.line_plot.md` | 125 | likely | *Share of all income held by the top 1%, United States, 20002021* | teaching corpus: standalone emphasis is the dropped-figure shape |
+| `teaching/stat.data.line_plot.md` | 119 | likely | *Share of all income held by the top 1%, United States, 20002021* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/stat.data.mode.md` | 13 | likely | *Share of all income held by the top 1% of wage earners* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/stat.data.mode.md` | 33 | strong | *Table with a mathematical pattern* | describes a picture |
-| `teaching/stat.data.mode.md` | 37 | strong | *The data from the third table in&#x20;* | describes a picture |
-| `teaching/stat.data.mode.md` | 125 | likely | *Share of all income held by the top 1%, United States, 20002021* | teaching corpus: standalone emphasis is the dropped-figure shape |
+| `teaching/stat.data.mode.md` | 119 | likely | *Share of all income held by the top 1%, United States, 20002021* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/stat.data.range.md` | 13 | likely | *Share of all income held by the top 1% of wage earners* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/stat.data.range.md` | 33 | strong | *Table with a mathematical pattern* | describes a picture |
-| `teaching/stat.data.range.md` | 37 | strong | *The data from the third table in&#x20;* | describes a picture |
-| `teaching/stat.data.range.md` | 125 | likely | *Share of all income held by the top 1%, United States, 20002021* | teaching corpus: standalone emphasis is the dropped-figure shape |
+| `teaching/stat.data.range.md` | 119 | likely | *Share of all income held by the top 1%, United States, 20002021* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/stat.data.read_table.md` | 13 | likely | *Share of all income held by the top 1% of wage earners* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/stat.data.read_table.md` | 33 | strong | *Table with a mathematical pattern* | describes a picture |
-| `teaching/stat.data.read_table.md` | 37 | strong | *The data from the third table in&#x20;* | describes a picture |
-| `teaching/stat.data.read_table.md` | 125 | likely | *Share of all income held by the top 1%, United States, 20002021* | teaching corpus: standalone emphasis is the dropped-figure shape |
+| `teaching/stat.data.read_table.md` | 119 | likely | *Share of all income held by the top 1%, United States, 20002021* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/stat.prob.basic.md` | 227 | certain | *Figure 5.7* | auto-numbered figure/table label |
 | `teaching/stat.prob.complement.md` | 227 | certain | *Figure 5.7* | auto-numbered figure/table label |
 | `teaching/stat.prob.compound.md` | 227 | certain | *Figure 5.7* | auto-numbered figure/table label |

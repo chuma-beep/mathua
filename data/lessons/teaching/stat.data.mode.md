@@ -29,13 +29,7 @@ Find a pattern in each table, using only the table itself. What is the missing e
 *Patterns in 3 tables*
 
 Generally in a table with two columns of data, we can think of the table as *assigning* value on the right to each value on the left. The first table *assigns*"white" to "black", as its opposite. The second table *assigns*"Paris" to "France", as its capital city. The third table *assigns*10 to 5, as its double.
-
-*Table with a mathematical pattern*
-
 Only the third table in  the example  is a table of numbers. Let's examine that data graphically.
-
-*The data from the third table in&#x20;*
-
 With the data plotted, and the question being what should happen when $x$ is 5, our eyes can converge to the point $(5,10)$ and we conclude the missing value will be 10. Graphically, we didn't have to use the observation that the $y$-values were twice the $x$-values.
 
 For each of the following tables, find an equation that describes the pattern you see. Numerical pattern recognition may or may not come naturally for you and you may want to use a graph to help visually process the numbers. Either way, pattern recognition is an important mathematical skill that anyone can develop. The solutions for these exercises offer some hints about what patterns you might look for.
