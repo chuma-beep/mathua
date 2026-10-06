@@ -91,8 +91,7 @@ type Recommendation struct {
 	Detail string `json:"detail"`
 	CTA    string `json:"cta"`
 
-	bucket    bucket
-	Generated bool
+	bucket bucket
 }
 
 // RecommendationResponse is the whole answer: one dominant task, and the alternatives the
