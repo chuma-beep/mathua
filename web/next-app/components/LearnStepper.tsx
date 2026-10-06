@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import KatexContent from './KatexContent'
 import LessonDiagram from './LessonDiagram'
@@ -429,6 +429,16 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
     }
   }
 
+  // Which sections have been attempted, meaning answered rather than served. A 'q' entry
+  // exists from the moment the question is put on screen, so keying on the entry alone would
+  // reveal the steps at the very moment the learner is about to try the question unaided.
+  // Derived from the feed, which is append-only, so no state to keep in sync.
+  const answeredSections = useMemo(() => {
+    const seen = new Set<number>()
+    for (const e of entries) if (e.kind === 'q' && e.feedback) seen.add(e.kpIndex)
+    return seen
+  }, [entries])
+
   if (loading && entries.length === 0) {
     return <div className="p-6 border border-mathua-border bg-mathua-surface"><p className="font-mono text-xs text-mathua-muted">Loading lesson…</p></div>
   }
@@ -458,10 +468,9 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
   return (
     <div className="max-w-2xl mx-auto">
       <div className="sticky top-0 z-10 bg-mathua-bg backdrop-blur py-2 mb-4 flex items-center gap-2 font-mono text-[11px] text-mathua-muted border-b border-mathua-border">
-        <span>KP {Math.min(kpIndex + 1, Math.max(kps.length, 1))}/{Math.max(kps.length, 1)}</span>
+        <span>Section {Math.min(kpIndex + 1, Math.max(kps.length, 1))} of {Math.max(kps.length, 1)}</span>
         {totalAnswered > 0 && <span>· {totalCorrect}/{totalAnswered} correct</span>}
         {totalXP > 0 && <span className="text-yellow-400">· +{totalXP} XP</span>}
-        <span>· level {difficulty.toFixed(2)}</span>
         {band && (
           <span title="How you're doing on this concept, from your recent answers. Progress only — mastery is decided separately.">
             · {band}
@@ -484,7 +493,7 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
               <div className="mt-2 flex flex-wrap gap-2">
                 {toLearn.slice(0, 3).map(p => (
                   <Link key={p.id} href={`/learn?concept=${encodeURIComponent(p.id)}&return=${encodeURIComponent(conceptId)}`} className="border border-mathua-border px-2.5 py-1.5 font-mono text-[11px] text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue">
-                    Review: {p.label}
+                    Learn: {p.label}
                   </Link>
                 ))}
                 {toReview.slice(0, 3).map(p => (
@@ -519,7 +528,12 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
                     <LessonDiagram src={diagram} alt={`Diagram for ${ikp?.label || 'this topic'}`} />
                   </figure>
                 )}
-                {ikp?.subgoals && ikp.subgoals.length > 0 && (
+                {/* Steps appear once this section has been attempted. Listed before the
+                    question they are a syllabus the learner has not chosen yet, and the
+                    effect was to read the steps and skip the work they were meant to
+                    support. Derived from the feed, which is append-only, so no state to keep
+                    in sync and no way for the two to disagree. */}
+                {ikp?.subgoals && ikp.subgoals.length > 0 && answeredSections.has(e.kpIndex) && (
                   <details className="mt-3">
                     <summary className="font-mono text-[11px] text-mathua-muted cursor-pointer hover:text-mathua-blue">Steps ({ikp.subgoals.length})</summary>
                     <ol className="mt-2 space-y-1.5">
@@ -534,7 +548,6 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
                     scaffolding for the question that follows (example-problem
                     pair), so the label must not invite bypassing it. */}
                 <button type="button" onClick={startPracticing} className="mt-5 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-6 py-2.5 font-mono text-xs min-h-[44px]">Next →</button>
-                <p className="mt-2 font-mono text-[11px] text-mathua-muted">Work it through on paper first — the question below is the same move.</p>
               </div>
             )
           }

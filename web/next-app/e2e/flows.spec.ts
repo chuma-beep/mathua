@@ -75,7 +75,7 @@ test('quiz gate banner appears at 50 XP on profile and links to quiz host', asyn
     localStorage.setItem('mathua_user', JSON.stringify({ student_id: 's1', name: 'Tester', username: 'tester', concepts_mastered: 15, current_streak: 5, level: 'Student', diagnostic_completed: true }))
   })
   await page.route('**/api/scores/**', route =>
-    route.fulfill({ json: { lifetime_points: 1500, weekly_score: 100, speed_bonus: 0, concepts_mastered: 15, current_streak: 5, level: 'Student', xp_total: 50, xp_today: 10, daily_xp_goal: 10, quiz_due: true, xp_since_quiz: 50, spaced_reps: {}, avg_learning_speed: 1.1 } }),
+    route.fulfill({ json: { lifetime_points: 1500, weekly_score: 100, speed_bonus: 0, concepts_mastered: 15, current_streak: 5, level: 'Student', xp_total: 50, xp_today: 10, daily_xp_goal: 10, quiz_due: true, xp_since_quiz: 50, quiz_gate_xp: 50, spaced_reps: {}, avg_learning_speed: 1.1 } }),
   )
   await page.route('**/api/progress/**', route => route.fulfill({ json: {} }))
   await page.route('**/api/activity**', route => route.fulfill({ json: [] }))
@@ -91,7 +91,7 @@ test('quiz gate banner appears at 50 XP on profile and links to quiz host', asyn
   await page.goto('/profile')
   await expect(page.getByText('Quiz due').first()).toBeVisible({ timeout: 30_000 })
   await expect(page.getByText('50 XP reached: mastery check recommended').first()).toBeVisible()
-  await expect(page.getByRole('link', { name: 'Take Test' }).first()).toBeVisible()
+  await expect(page.getByRole('link', { name: 'Start the quiz' }).first()).toBeVisible()
 })
 
 test('quiz reuse host at /goals?quiz=1 starts actionable quiz (guest unlimited retake)', async ({ page }) => {

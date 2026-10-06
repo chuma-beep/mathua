@@ -30,10 +30,10 @@ type Computer struct {
 	// Weekly board is a full students×progress scan per call; cache it
 	// briefly so leaderboard polling under load doesn't queue behind
 	// the write path on the SQLite pool.
-	mu      sync.Mutex
-	cached  []Entry
-	filled  time.Time
-	ttl     time.Duration
+	mu     sync.Mutex
+	cached []Entry
+	filled time.Time
+	ttl    time.Duration
 }
 
 // DefaultWeeklyTTL is the cache lifetime for the weekly board. Weekly
