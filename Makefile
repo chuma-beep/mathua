@@ -23,6 +23,7 @@ e2e:
 
 validate:
 	go run scripts/validate_graph.go
+	go run ./cmd/validate-mastery-units
 	python3 scripts/audit_lessons.py
 	python3 scripts/audit_solutions.py
 	python3 scripts/counts.py --check
@@ -32,6 +33,12 @@ validate:
 # Engine and reports the malformed ones. Needs node (for the CE dependency) and
 # the Go toolchain (for latexdump). Exits 1 while defects remain, so it is not in
 # `validate` yet -- see the CI step for why.
+# The mastery-unit partition is a generated draft (ADR-046 D3). The band width is a parameter,
+# not policy: 2, 3 and 4 are all candidates and the width decides how often a learner is
+# assessed. Regenerating at a different width needs no code change.
+mastery-units:
+	go run ./cmd/masteryunits -band 3
+
 latex-normalize:
 	cd web/next-app && node scripts/normalize-latex.mjs
 

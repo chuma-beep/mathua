@@ -23,14 +23,15 @@ The expensive part is not the code. It is:
   `data/concepts/*.json` carries only `id`, `label`, `domain`, `subdomain`, `prerequisites`,
   `grading_type`, `mastery_threshold`; `data/courses.json` has 22 entries of 4 loose `targets`
   each; `data/concepts/enrichment.json` is 10 heuristic overrides of which 2 carry
-  `encompasses`. **But measuring the graph shows the boundaries are already encoded in it** —
-  see the table under D3. The work is a derived draft plus a short correction list, not 657
-  hand-made decisions.
+  `encompasses`. **A draft now exists** (`data/mastery_units.json`, width 3, 91 units) and it is
+  reported in full below — including the finding that no band width produces an
+  assessment-grade partition, which is the result D3 was asked to produce and which makes the
+  authoring decision *larger* rather than smaller.
 - **D4** — the pass threshold, which is a content judgement about what "can demonstrate this
   independently" means for this corpus, and which no test can tell us.
 
-D4 is the genuine long pole now, and only because it needs a human answer. Everything after it
-is mechanical.
+D4 remains unanswered and unblocked by D3: a pass threshold is meaningful for a unit of any size,
+so it can be decided in parallel with the authoring.
 
 ---
 
@@ -87,47 +88,80 @@ Carry into the ADR: the count of stored unit states, currently two.
 
 **Blocks:** D4 (you cannot set a pass threshold for an undefined unit), and everything.
 
-**Measured 2026-10-06, over all 657 concepts.** The corpus was assumed to have no block
-structure. It has a usable one, encoded in the graph.
+**Measured 2026-10-06 and re-measured 2026-10-07, over all 657 concepts.** The corpus was
+assumed to have no block structure. The first measurement said it had usable ones; that
+measurement was **wrong**, and correcting it is the substance of this entry.
 
-| Observation | Value | What it rules in or out |
+### The first measurement was wrong
+
+It reported "32 units, 22 backward edges, condensation depth 13, 0 unresolved", computed by a
+Python Kahn's algorithm that **enqueued a subdomain the moment it was first seen rather than when
+its in-degree reached zero**. That processes a node before its predecessors are done, which
+assigns it an under-estimated depth — and it silently "resolves" cycles, because a node in a
+cycle is popped and then its unprocessed predecessor is never required to have run. The
+`0 unresolved` was the tell and it was read as success.
+
+The Go implementation has the same trap available to it and initially fell into it in a worse
+way: a missing map entry reads as `0`, so 26 cyclic subdomains were assigned depth 0 and banded
+as if they were foundations. **That produced 36 units and 96 backward edges — a confidently wrong
+answer rather than a missing one**, which is the failure mode this ADR exists to prevent.
+`SubdomainDepths` now returns the unresolved set and callers cannot ignore it.
+
+### What is actually true
+
+| Observation | Value | Consequence |
 |---|---|---|
 | `subdomain` values | 125 | — |
-| Subdomain size | median **4**, 18 singletons, 59 at ≤3 | **Rules out per-subdomain units.** That is a quiz after one or two concepts, which §12 forbids outright. |
-| Cross-subdomain edges | 282 pairs / 373 edges | — |
-| Condensation depth | **13** subdomain steps, 0 unresolved | The layering is well defined and complete. |
-| Per-domain depth span | mostly **2–4** layers (calculus 7–10, algebra 5–7, prealgebra 3–5, trigonometry 5–7, linear algebra 6–8) | **Domains already sit in near-contiguous layer windows.** The corpus is far more layered than a 657-concept DAG looks at a glance. |
-| `domain` × 3-layer band | **32 cells**, median 17 concepts; 2 cells ≤2, 3 cells ≥40 | A viable unit count and size distribution, derived not invented. |
-| Band order as a topological order | **22 backward edges of 875** (2.5%) | The partition is 97.5% derivable. |
+| **Subdomain condensation depth** | **does not exist for 26 of 125** | 9 cycles: `abstract_algebra.{fields,groups,rings,structures}`, `calculus.{advanced,derivatives,integrals,limits}`, `algebra.{factoring,polynomials,quadratics}` ↔ `complex_numbers.basics`, `topology.{algebraic,covering,manifolds}`, `linear_algebra.{determinants,matrices,vectors}`, and three more. |
+| Domain condensation depth | **does not exist for 14 of 17** | Only 3 domains level. Grouping loses the DAG's acyclicity. |
+| Concept depth | resolves **657 of 657**, max 44 | The only well-defined depth function. |
+| `(domain, floor(conceptDepth/3))` | **91 units**, median 5, 18 singletons | Violates §12: 18 singletons is a quiz per concept. |
 
-Options, with the measurements attached:
+**The 22 backward edges were never a property of the corpus.** They were the same Kahn bug. Under
+concept depth there are **zero backward edges at every band width from 1 to 45**, by
+construction — a proper topological ranking on an acyclic graph.
 
-- **Option A — per subdomain.** Ruled out by the size distribution: 18 singletons, median 4.
-- **Option B — hand-authored per curriculum block.** Still necessary, but now as a *correction*
-  pass rather than a from-scratch one.
-- **Option C — per course.** Ruled out: a course is a grade-level target list of 4 concepts
-  and cuts across prerequisite boundaries.
+### No band width produces an assessment-grade partition
 
-**Recommended: generate `(domain, ⌊subdomain depth / 3⌋)` as the draft, then correct.** The band
-index *is* the derivation ADR-046 asks for — unit prerequisites come out of the DAG's own
-layering rather than from a second authored hierarchy — and the corrections are enumerable: the
-22 backward edges (all but one intra-domain, concentrated in `topology` and
-`differential_equations`), the 2 cells too small to be units, and the 3 cells too coarse to
-assess as one.
+| Width | Units | Median | Max | Singletons | ≤3 | >25 |
+|---|---|---|---|---|---|---|
+| 2 | 117 | 4 | 33 | 19 | 54 | 3 |
+| 3 | 91 | 5 | 48 | 18 | 38 | 4 |
+| 4 | 73 | 6 | 48 | 8 | 26 | 3 |
+| 6 | 58 | 8 | 81 | 4 | 14 | 3 |
+| 12 | 40 | 13 | 105 | 1 | 7 | 3 |
+| 20 | 29 | 18 | 128 | 3 | 6 | 8 |
+| 45 | 17 | 26 | 128 | 0 | 0 | 11 |
 
-Two reasons this is not simply "generated", and both are content judgement, not mechanics:
+Small widths fragment into per-concept quizzes, which §12 forbids. Large widths produce units too
+large to assess — at width 45 the partition is just the 17 domains and calculus is 128 concepts.
+The usable widths trade fragmentation against size rather than resolving either. **The rule alone
+does not produce assessment-grade boundaries**, so D3's answer is a derived draft *plus* hand
+merging, not a derivation.
 
-- **Band width is arbitrary.** 3 was chosen because it lands on 32 cells of usable size. 2 and 4
-  are equally defensible; that is a decision about how often a learner is assessed, and it
-  belongs to whoever owns the learning model.
-- **Depth is computed per subdomain, so a subdomain spanning a band boundary makes its
-  concepts non-contiguous in depth.** This is the mechanism behind all 22 backward edges: a
-  concept inside a deep subdomain can be a prerequisite of one inside a shallower one. Splitting
-  those subdomains, not patching the edges, is the real fix.
+What the measurement did establish, and what survives: **the corpus has no partition at
+subdomain or domain granularity that admits a topological unit order at all.** Whatever the units
+are, they cannot be "one per domain" or "one per subdomain" and still inherit the DAG's ordering.
 
-Open sub-question: **a unit of one concept.** The partition rules permit it; it should be a
-content error. With 2 cells of size ≤2 this is a live case, so decide whether it is a hard
-validator failure or a reported count — a hard failure makes authoring a one-pass job.
+### What is committed
+
+`data/mastery_units.json` is the width-3 draft: 91 units, all 657 concepts covered exactly once,
+no authored prerequisite edges, band width recorded in the file rather than in a constant.
+`data/mastery_units.report.md` carries the table above and the unit list.
+`go run ./cmd/masteryunits -band N` regenerates at any width; `make validate` checks coverage,
+duplicate membership, referential integrity, and drift from the declared rule.
+
+### Now the open decision
+
+Not "which width" — that question is now secondary, because no width is clean. The real question
+is whether the unit boundary should be **derived from depth at all**, or authored around
+curriculum blocks with the derivation used only as a *check*. The draft says the former produces
+fragmentation; only someone who knows the learning model can say whether the fragmentation is a
+problem with the rule or a fact about the corpus.
+
+Open sub-question: **a unit of one concept.** Permitted by the rules, reported as an anomaly
+rather than an error. With 18 singletons at width 3 this is no longer hypothetical, and whether
+they are an error or a judgement is content, not schema.
 
 ### D4 — What is the pass threshold?
 
