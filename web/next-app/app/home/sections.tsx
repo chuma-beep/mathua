@@ -8,6 +8,7 @@ import { loadPositionEntries } from '../../lib/graphPositions'
 import {
   PIPELINE_STATES,
   conceptCount,
+  quizGateXP,
   domainCounts,
   domainLabels,
   domainOrder,
@@ -253,7 +254,7 @@ export function TrustSection() {
             <div className="mt-1 font-mono text-[10px] uppercase tracking-wider text-mathua-muted">generated problems</div>
           </div>
           <div className="p-5">
-            <div className="font-serif text-3xl tracking-tight text-mathua-primary">150</div>
+            <div className="font-serif text-3xl tracking-tight text-mathua-primary">{quizGateXP}</div>
             <div className="mt-1 font-mono text-[10px] uppercase tracking-wider text-mathua-muted">XP mastery check</div>
           </div>
         </div>
@@ -271,7 +272,7 @@ const FEATURES = [
   {
     numeral: 'II.',
     title: 'Concept graph',
-    body: 'Every concept is a node with explicit prerequisites. The scheduler reads the graph and your progress to decide what you see next.',
+    body: 'Every concept is a node with explicit prerequisites. Mathua reads the graph and your progress together, and picks what you see next from the two.',
   },
   {
     numeral: 'III.',

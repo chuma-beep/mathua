@@ -55,6 +55,10 @@ export default function ProfilePage() {
     }
   }, [mounted])
 
+  // Null when an older server omits it. The quiz block hides rather than substituting a
+  // literal, because a bar computed against a gate the engine does not use is worse than no bar.
+  const quizGate = scores?.quiz_gate_xp && scores.quiz_gate_xp > 0 ? scores.quiz_gate_xp : null
+
   const effScores = useMemo(
     () => (scores && goalOverride ? { ...scores, daily_xp_goal: goalOverride } : scores),
     [scores, goalOverride],
@@ -74,11 +78,10 @@ export default function ProfilePage() {
   // recommended" while the request is in flight would misreport the learner.
   const head = shelf
 
-  // Which concept the head names, for "where am I". Derived from the same head as the
-  // recommendation, so the two cannot disagree — which is the property that matters, not the
-  // label: the engine owns both the label and the href, so a learner cannot be shown a name
-  // for one concept and sent to another.
-  const frontierCid = head ? hrefConceptId(head.next.href) : null
+  // What the head names, for "where am I". Read off the same head as the recommendation, so
+  // the two cannot disagree — which is the property that matters, and the reason this block
+  // keeps the label even though it no longer offers a button: the engine owns both the name
+  // and the destination, so a learner is never shown one concept's name and sent to another.
   const frontierLabel = head?.next.title ?? null
 
   // Recently unlocked: successors unlocked by recently-active concepts
@@ -364,7 +367,6 @@ export default function ProfilePage() {
           catalogue={conceptCatalog}
           progress={progress}
           frontierLabel={frontierLabel}
-          frontierHref={frontierCid ? `/learn?concept=${encodeURIComponent(frontierCid)}` : null}
         />
 
         {effScores && !isLoggedIn() && (
@@ -435,20 +437,24 @@ export default function ProfilePage() {
           </Link>
         )}
 
-        {/* Quiz gate — backend signal, lifetime fallback */}
-        {scores && (scores.quiz_due ?? scores.xp_total >= 50) && (
+        {/* Quiz gate. Every number here is the server's: whether the gate is open
+            (quiz_due), how much it is (quiz_gate_xp) and how far along the learner is
+            (xp_since_quiz). The block had a literal 50 in the copy, in the bar and in an
+            `xp_total >= 50` fallback for a field the server does send, so ADR-020's rescale
+            could move the gate and leave all three describing the old one. */}
+        {scores && scores.quiz_due && quizGate && (
           <div className="mt-6 w-full min-w-0 overflow-hidden border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
             <div className="w-full sm:flex-1 min-w-0">
               <div className="flex flex-col items-start gap-1.5 sm:flex-row sm:items-center sm:gap-2 flex-wrap">
                 <span className="shrink-0 bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">Quiz due</span>
-                <span className="break-words font-mono text-[11px] sm:text-xs text-mathua-primary">50 XP reached: mastery check recommended</span>
+                <span className="break-words font-mono text-[11px] sm:text-xs text-mathua-primary">{quizGate} XP reached: mastery check recommended</span>
               </div>
               <div className="mt-2 h-1 bg-mathua-code overflow-hidden">
-                <div className="h-full bg-mathua-blue" style={{ width: `${Math.min(((scores.xp_since_quiz ?? scores.xp_total) / 50) * 100, 100)}%` }} />
+                <div className="h-full bg-mathua-blue" style={{ width: `${Math.min(((scores.xp_since_quiz ?? scores.xp_total) / quizGate) * 100, 100)}%` }} />
               </div>
             </div>
             <Link href="/goals?quiz=1" className="w-full sm:w-auto sm:shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap">
-              Take Test →
+              Start the quiz →
             </Link>
           </div>
         )}

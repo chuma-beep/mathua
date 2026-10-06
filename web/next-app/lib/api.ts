@@ -39,6 +39,9 @@ const ScoresSchema = z.object({
   avg_learning_speed: z.number().optional(),
   xp_since_quiz: z.number().optional(),
   quiz_due: z.boolean().optional(),
+  // Server policy, not a client constant. The profile bar divided by a literal 50 that did
+  // not reference xp.QuizGateXP, so ADR-020 could move the gate and leave the bar lying.
+  quiz_gate_xp: z.number().optional(),
 })
 
 // oxlint-disable-next-line anti-slop/no-unknown-parameters -- zod parse boundary: input is untrusted by design
@@ -196,6 +199,7 @@ export interface Scores {
   // Quiz 50 XP gate signal (backend); absent on old mocks.
   xp_since_quiz?: number
   quiz_due?: boolean
+  quiz_gate_xp?: number
 }
 
 export interface ConceptProgress {
