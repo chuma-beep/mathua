@@ -19,18 +19,18 @@ Read this before writing any migration. Two of these (D1, D2) determine the tabl
 
 The expensive part is not the code. It is:
 
-- **D3** — authoring a partition over 657 concepts. Nothing in the corpus expresses block
-  boundaries today: `data/concepts/*.json` carries only `id`, `label`, `domain`,
-  `subdomain`, `prerequisites`, `grading_type`, `mastery_threshold`. `data/courses.json` has
-  22 entries of 4 `targets` each — loose bundles, not ordered blocks — and
-  `data/concepts/enrichment.json` is 10 heuristic overrides of which only 2 carry
-  `encompasses`. So the partition is authored data, and it is the long pole by an order of
-  magnitude over the Go work.
+- **D3** — the partition over 657 concepts. Nothing in the corpus *states* block boundaries:
+  `data/concepts/*.json` carries only `id`, `label`, `domain`, `subdomain`, `prerequisites`,
+  `grading_type`, `mastery_threshold`; `data/courses.json` has 22 entries of 4 loose `targets`
+  each; `data/concepts/enrichment.json` is 10 heuristic overrides of which 2 carry
+  `encompasses`. **But measuring the graph shows the boundaries are already encoded in it** —
+  see the table under D3. The work is a derived draft plus a short correction list, not 657
+  hand-made decisions.
 - **D4** — the pass threshold, which is a content judgement about what "can demonstrate this
   independently" means for this corpus, and which no test can tell us.
 
-Everything downstream of those is mechanical. Sequencing them first would mean reworking the
-table when D3 says a unit is a term's worth of concepts rather than a week's.
+D4 is the genuine long pole now, and only because it needs a human answer. Everything after it
+is mechanical.
 
 ---
 
@@ -87,26 +87,47 @@ Carry into the ADR: the count of stored unit states, currently two.
 
 **Blocks:** D4 (you cannot set a pass threshold for an undefined unit), and everything.
 
-Open: one unit per what? Options, in order of how much judgement each demands:
+**Measured 2026-10-06, over all 657 concepts.** The corpus was assumed to have no block
+structure. It has a usable one, encoded in the graph.
 
-- **Option A — per subdomain.** `subdomain` already exists on every concept and is curated.
-  Mechanical to generate, and almost certainly too coarse and too fine in places; also two
-  adjacent subdomains may not share a prerequisite boundary, which the derivation rule in
-  ADR-046 forbids.
-- **Option B — hand-authored per curriculum block**, ~15–30 units, chosen so each is a coherent
-  assessable group with a clean prerequisite boundary. This is what the spec describes and it
-  is the only option that satisfies "do not invent arbitrary boundaries merely to satisfy the
-  requirement".
-- **Option C — per course** (`data/courses.json`). Reuses existing grouping, but a course is a
-  grade-level target list of 4 concepts and cuts across prerequisite boundaries.
+| Observation | Value | What it rules in or out |
+|---|---|---|
+| `subdomain` values | 125 | — |
+| Subdomain size | median **4**, 18 singletons, 59 at ≤3 | **Rules out per-subdomain units.** That is a quiz after one or two concepts, which §12 forbids outright. |
+| Cross-subdomain edges | 282 pairs / 373 edges | — |
+| Condensation depth | **13** subdomain steps, 0 unresolved | The layering is well defined and complete. |
+| Per-domain depth span | mostly **2–4** layers (calculus 7–10, algebra 5–7, prealgebra 3–5, trigonometry 5–7, linear algebra 6–8) | **Domains already sit in near-contiguous layer windows.** The corpus is far more layered than a 657-concept DAG looks at a glance. |
+| `domain` × 3-layer band | **32 cells**, median 17 concepts; 2 cells ≤2, 3 cells ≥40 | A viable unit count and size distribution, derived not invented. |
+| Band order as a topological order | **22 backward edges of 875** (2.5%) | The partition is 97.5% derivable. |
 
-Recommended: **B**, generated from A as a *draft* and corrected by hand — with `validate_graph`
-rejecting a unit whose members' DAG closure disagrees with its neighbours', which is the check
-that forces the boundary to be real.
+Options, with the measurements attached:
 
-Open sub-question: **a unit of one concept**. The partition rules permit it; it should be a
-content error. Decide whether that is a hard validator failure or a reported count, because a
-hard failure makes authoring 657 concepts a one-pass job.
+- **Option A — per subdomain.** Ruled out by the size distribution: 18 singletons, median 4.
+- **Option B — hand-authored per curriculum block.** Still necessary, but now as a *correction*
+  pass rather than a from-scratch one.
+- **Option C — per course.** Ruled out: a course is a grade-level target list of 4 concepts
+  and cuts across prerequisite boundaries.
+
+**Recommended: generate `(domain, ⌊subdomain depth / 3⌋)` as the draft, then correct.** The band
+index *is* the derivation ADR-046 asks for — unit prerequisites come out of the DAG's own
+layering rather than from a second authored hierarchy — and the corrections are enumerable: the
+22 backward edges (all but one intra-domain, concentrated in `topology` and
+`differential_equations`), the 2 cells too small to be units, and the 3 cells too coarse to
+assess as one.
+
+Two reasons this is not simply "generated", and both are content judgement, not mechanics:
+
+- **Band width is arbitrary.** 3 was chosen because it lands on 32 cells of usable size. 2 and 4
+  are equally defensible; that is a decision about how often a learner is assessed, and it
+  belongs to whoever owns the learning model.
+- **Depth is computed per subdomain, so a subdomain spanning a band boundary makes its
+  concepts non-contiguous in depth.** This is the mechanism behind all 22 backward edges: a
+  concept inside a deep subdomain can be a prerequisite of one inside a shallower one. Splitting
+  those subdomains, not patching the edges, is the real fix.
+
+Open sub-question: **a unit of one concept.** The partition rules permit it; it should be a
+content error. With 2 cells of size ≤2 this is a live case, so decide whether it is a hard
+validator failure or a reported count — a hard failure makes authoring a one-pass job.
 
 ### D4 — What is the pass threshold?
 
