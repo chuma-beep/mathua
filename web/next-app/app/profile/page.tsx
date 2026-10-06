@@ -20,6 +20,7 @@ import DailyGoalControl, { getGuestGoal } from '../../components/DailyGoalContro
 import { isNewUser, recentlyUnlocked, hrefConceptId, RECENT_UNLOCK_DAYS, type Shelf } from '../../lib/nextUp'
 import { fetchShelf } from '../../lib/recommendations'
 import { concepts as conceptCatalog } from '../../lib/conceptData'
+import { HourglassIcon, PauseIcon } from '@animateicons/react/lucide'
 
 interface UserInfo {
   student_id: string
@@ -417,8 +418,16 @@ export default function ProfilePage() {
 
         {scores.paused_until && (
           <div className="mt-6 w-full max-w-full min-w-0 overflow-hidden border border-mathua-border bg-mathua-surface p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-            <p className="font-mono text-xs text-mathua-primary min-w-0 break-words [overflow-wrap:anywhere] leading-snug">
-              ⏸ Paused until {scores.paused_until}: due reviews are hidden
+            <p className="flex items-center gap-2 font-mono text-xs text-mathua-primary min-w-0">
+              <PauseIcon
+                size={14}
+                duration={1.5}
+                color="var(--text-primary, currentColor)"
+                aria-hidden="true"
+              />
+              <span className="min-w-0 break-words [overflow-wrap:anywhere] leading-snug">
+                Paused until {scores.paused_until}: due reviews are hidden
+              </span>
             </p>
             <Link href="/settings" className="w-full sm:w-auto sm:shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-4 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap">
               Resume
@@ -431,8 +440,19 @@ export default function ProfilePage() {
             href="/review"
             className="mt-6 flex w-full min-w-0 flex-col gap-2 bg-mathua-surface border border-mathua-blue-faint px-4 py-3 hover:border-mathua-blue transition-colors sm:flex-row sm:items-center sm:justify-between"
           >
-            <span className="font-mono text-xs text-mathua-blue min-w-0 break-words [overflow-wrap:anywhere] leading-snug">
-              ⏳ {dueReviews} concept{dueReviews !== 1 ? 's' : ''} due for review
+            <span className="flex items-center gap-2 font-mono text-xs text-mathua-blue min-w-0">
+              {/* An icon, not the hourglass emoji (U+23F3) this replaced. Decorative: the
+                  sentence beside it already says what the line is, so a screen reader
+                  announcing "hourglass" would only add noise. */}
+              <HourglassIcon
+                size={14}
+                duration={1.5}
+                color="var(--accent-blue)"
+                aria-hidden="true"
+              />
+              <span className="min-w-0 break-words [overflow-wrap:anywhere] leading-snug">
+                {dueReviews} concept{dueReviews !== 1 ? 's' : ''} due for review
+              </span>
             </span>
             <span className="font-mono text-[11px] text-mathua-blue border border-mathua-blue-faint px-3 py-1.5 shrink-0 inline-flex items-center justify-center min-h-[36px] w-full sm:w-auto text-center whitespace-nowrap">
               Review Now →

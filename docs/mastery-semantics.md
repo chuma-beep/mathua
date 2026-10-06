@@ -123,10 +123,10 @@ There is no ADR, no design note and no test asserting the 3× cost.
 
 | Signal | How it is computed | Persisted server-side? |
 |---|---|---|
-| Consistency | recent-weighted accuracy, weights 0.5 → 1.0 | ✅ `attempts.correct` |
-| Different problem instances | `new Set(attempts.map(a => a.variation)).size`, bonus up to 0.15 | ✅ `attempts.question` — `variation` *is* the question text (`LearnStepper.tsx:256`) |
-| Difficulty | correct answers weighted `0.6 + 0.4 × difficulty` | ❌ **not stored** |
-| Time | median elapsed over correct answers, ×0.8 above 60s | ✅ `attempts.elapsed_seconds` |
+| Consistency | recent-weighted accuracy, weights 0.5 → 1.0 | yes — `attempts.correct` |
+| Different problem instances | `new Set(attempts.map(a => a.variation)).size`, bonus up to 0.15 | yes — `attempts.question` — `variation` *is* the question text (`LearnStepper.tsx:256`) |
+| Difficulty | correct answers weighted `0.6 + 0.4 × difficulty` | **not stored** |
+| Time | median elapsed over correct answers, ×0.8 above 60s | yes — `attempts.elapsed_seconds` |
 
 It also produces a decision, not just a score: `advance` needs `score ≥ 0.6` **and** ≥3
 attempts **and** 2-in-a-row at the end; `intervene` at 3 recent misses.
