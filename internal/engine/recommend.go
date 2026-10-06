@@ -76,11 +76,13 @@ func (e *Engine) ReviewsDue(studentID string) (int, error) {
 		if p.NextReviewDue.After(now) {
 			continue
 		}
-		// Decay is applied on read, so a stale MASTERED row arrives as DECAYING and the guard
-		// admits exactly the concepts a retrieval check is due for.
-		if p.Status != string(mastery.StatusMastered) {
-			count++
-		}
+		// A stored MASTERED row with a due review IS due a review — scheduler.effectiveState
+		// says so explicitly, which is what put it in the review bucket in the first place.
+		// The old guard skipped exactly those rows, so the count and the candidates disagreed
+		// and selectTasks never took the review bucket for a learner whose only debt was a
+		// decayed concept. Any NextReviewDue at or before now is a due review; that is the
+		// whole condition.
+		count++
 	}
 	return count, nil
 }
@@ -106,11 +108,16 @@ func (e *Engine) RecommendNext(studentID string, exclude []string) (scheduler.Re
 	}
 	quizDue, _ := e.QuizDue(studentID)
 
-	// How far along the learner is, in the two terms the recommender needs. Mastered counts
-	// with decay applied, so a stale concept has left the count rather than inflating it.
+	// How far along the learner is, in the two terms the recommender needs. Mastered is
+	// effective MASTERED — decay applied, so a stale concept has left the count rather than
+	// inflating it, and *not* "anything not unseen", which counted a concept the learner had
+	// merely started. Only the new-learner gate consumes this today and AttemptedDays already
+	// guarded it, so the miscount was unobservable; it is fixed because the field is named
+	// after a fact it did not report, and the next caller inherits discrepancies rather than
+	// reading the comment.
 	mastered, attemptedDays := 0, map[string]bool{}
 	for _, p := range progress {
-		if mastery.EffectiveStatus(mastery.Status(p.Status), daysSinceReview(p.LastReviewed), mastery.DecayDays) != mastery.StatusUnseen {
+		if mastery.EffectiveStatus(mastery.Status(p.Status), daysSinceReview(p.LastReviewed), mastery.DecayDays) == mastery.StatusMastered {
 			mastered++
 		}
 		if p.LastAttempted != nil {
@@ -153,14 +160,13 @@ func daysSinceReview(t *time.Time) float64 {
 func (e *Engine) RecommendPaused(studentID string) scheduler.RecommendationResponse {
 	return scheduler.RecommendationResponse{
 		Primary: &scheduler.Recommendation{
-			ID:        "paused",
-			Kind:      scheduler.KindLearn,
-			Reason:    scheduler.ReasonNew,
-			Action:    scheduler.Action{Type: scheduler.KindLearn, Href: "/study"},
-			Badge:     "Paused",
-			Detail:    "Reviews are on hold until you resume. Lessons are still open.",
-			CTA:       "Open a lesson →",
-			Generated: true,
+			ID:     "paused",
+			Kind:   scheduler.KindLearn,
+			Reason: scheduler.ReasonNew,
+			Action: scheduler.Action{Type: scheduler.KindLearn, Href: "/study"},
+			Badge:  "Paused",
+			Detail: "Reviews are on hold until you resume. Lessons are still open.",
+			CTA:    "Open a lesson →",
 		},
 		Alternatives: []scheduler.Recommendation{},
 		GeneratedAt:  time.Now().UTC(),
