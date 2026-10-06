@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="314px" height="253px" viewBox="0 0 314 253" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Group 19</title>
     <defs>
         <path d="M0,46 L0,0 L11.8167939,16 C18.3816794,22.6666667 21.6641221,26 21.6641221,26 C28.2290076,31.3333333 31.5114504,34 31.5114504,34 C42.0152672,39.3333333 47.2671756,42 47.2671756,42 C64.9923664,46 73.8549618,48 73.8549618,48 L114.229008,51 L129,51 L130,69 L107,68 L70,66 L32,61 L0,46 Z" id="path-1"></path>
         <pattern id="diagonal-lines" width="10" height="10" patternUnits="userSpaceOnUse">

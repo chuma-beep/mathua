@@ -1,9 +1,11 @@
 package lessons
 
 import (
+	"fmt"
 	"os"
 	"path"
 	"path/filepath"
+	"regexp"
 	"sort"
 	"strings"
 	"testing"
@@ -341,4 +343,78 @@ func TestPlacedFiguresAreInTheSectionTheirPlacementNamed(t *testing.T) {
 	if len(expect) != 38 {
 		t.Fatalf("expectation list has %d entries; it must cover all 38 placed figures", len(expect))
 	}
+}
+
+// A diagram's accessible name must describe the diagram.
+//
+// `LessonDiagram` wraps an inlined SVG in `role="img"` with an `aria-label` from the alt text,
+// so a screen reader is unaffected either way — but `sanitizeSvg` returns early when the SVG
+// already has a `<title>`, so whatever that title says is what a browser shows as the hover
+// tooltip over the figure. The vendored algebrica SVGs carried `<title>Group 42</title>` and
+// friends from whatever batch generated them: 68 of the 69 that had a title, with the numbers
+// reused across unrelated diagrams (seven files all titled "Group 6"). A learner hovering the
+// distributive-law figure in the sets lesson was told "Group 2".
+//
+// Those titles are stripped so the runtime injects one from the alt text, which is the
+// figure's own words. This gate exists so the next content wave cannot put them back.
+func TestDiagramTitlesDescribeTheirDiagram(t *testing.T) {
+	root := "../../web/next-app/public/diagrams"
+	if _, err := os.Stat(root); err != nil {
+		t.Skipf("diagram directory not present: %v", err)
+	}
+	// "Group 42" is the batch artifact. A bare filename is the same failure in milder form:
+	// accurate, and useless as a description.
+	placeholder := regexp.MustCompile(`(?i)^group\s*\d*$`)
+	var bad []string
+	var titled int
+
+	err := filepath.Walk(root, func(p string, info os.FileInfo, err error) error {
+		if err != nil || info.IsDir() || filepath.Ext(p) != ".svg" {
+			return err
+		}
+		raw, err := os.ReadFile(p)
+		if err != nil {
+			return err
+		}
+		m := titleRe.FindSubmatch(raw)
+		if m == nil {
+			return nil
+		}
+		titled++
+		text := strings.TrimSpace(string(m[1]))
+		stem := strings.TrimSuffix(filepath.Base(p), ".svg")
+		if placeholder.MatchString(text) || text == stem {
+			bad = append(bad, fmt.Sprintf("%s: <title>%s</title>", relative(p), text))
+		}
+		return nil
+	})
+	if err != nil {
+		t.Fatalf("walk diagrams: %v", err)
+	}
+	sort.Strings(bad)
+	if len(bad) > 0 {
+		limit := len(bad)
+		if limit > 10 {
+			limit = 10
+		}
+		t.Errorf("%d of %d diagram titles are placeholders or bare filenames, e.g. %v\n"+
+			"A placeholder title is what a browser shows on hover, and it suppresses the "+
+			"accessible title the renderer would otherwise inject from the alt text.",
+			len(bad), titled, bad[:limit])
+	}
+	t.Logf("%d diagram SVGs, %d carry a <title>, %d are placeholders", len(allSvgs(t, root)), titled, len(bad))
+}
+
+var titleRe = regexp.MustCompile(`(?s)<title[^>]*>(.*?)</title>`)
+
+func allSvgs(t *testing.T, root string) []string {
+	t.Helper()
+	var out []string
+	_ = filepath.Walk(root, func(p string, info os.FileInfo, err error) error {
+		if err == nil && !info.IsDir() && filepath.Ext(p) == ".svg" {
+			out = append(out, p)
+		}
+		return nil
+	})
+	return out
 }
