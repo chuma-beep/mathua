@@ -1909,3 +1909,155 @@ func TestPracticeNeverReturnsEmptyOnceEveryVariantHasBeenSeen(t *testing.T) {
 		}
 	}
 }
+
+// tokenFromGuest pulls the bearer token out of a /api/auth/guest response.
+func tokenFromGuest(t *testing.T, rec *httptest.ResponseRecorder) string {
+	t.Helper()
+	var out struct {
+		Token string `json:"token"`
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &out); err != nil || out.Token == "" {
+		t.Fatalf("no guest token in response: %s", rec.Body.String())
+	}
+	return out.Token
+}
+
+// GET /api/next is the single answer to "what should I do now?".
+//
+// This route had no HTTP-level test, which is the gap that let `/learn` and `/profile` each
+// recompute the decision in the browser while internal/scheduler sat unreachable between them.
+// The assertions are about the contract the client depends on: a primary plus alternatives,
+// wording owned by the server, and no internal terminology in what a learner will read.
+func TestNext_ReturnsAPrimaryAndAlternatives(t *testing.T) {
+	_, mux, _ := guestServer(t)
+	rec := postGuest(t, mux, `{}`, "")
+	if rec.Code != 200 {
+		t.Fatalf("guest: %d %s", rec.Code, rec.Body.String())
+	}
+	tok := tokenFromGuest(t, rec)
+
+	rec = httptest.NewRecorder()
+	req := httptest.NewRequest("GET", "/api/next", nil)
+	req.Header.Set("Authorization", "Bearer "+tok)
+	mux.ServeHTTP(rec, req)
+	if rec.Code != 200 {
+		t.Fatalf("/api/next: %d %s", rec.Code, rec.Body.String())
+	}
+
+	var resp struct {
+		Primary *struct {
+			ID           string  `json:"id"`
+			ConceptID    string  `json:"conceptId"`
+			ConceptTitle string  `json:"conceptTitle"`
+			Kind         string  `json:"kind"`
+			Reason       string  `json:"reason"`
+			Priority     float64 `json:"priority"`
+			Badge        string  `json:"badge"`
+			Detail       string  `json:"detail"`
+			CTA          string  `json:"cta"`
+			Action       struct {
+				Type string `json:"type"`
+				Href string `json:"href"`
+			} `json:"action"`
+		} `json:"primary"`
+		Alternatives []struct {
+			ConceptID string `json:"conceptId"`
+			Badge     string `json:"badge"`
+			CTA       string `json:"cta"`
+			Action    struct {
+				Href string `json:"href"`
+			} `json:"action"`
+		} `json:"alternatives"`
+		GeneratedAt string `json:"generatedAt"`
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &resp); err != nil {
+		t.Fatalf("decode: %v (%s)", err, rec.Body.String())
+	}
+
+	if resp.Primary == nil {
+		t.Fatalf("no primary recommendation: %s", rec.Body.String())
+	}
+	if resp.Primary.Badge == "" || resp.Primary.Detail == "" || resp.Primary.CTA == "" {
+		t.Errorf("primary carries incomplete copy: %+v", resp.Primary)
+	}
+	if resp.Primary.Action.Href == "" {
+		t.Error("primary has no href")
+	}
+	if resp.Alternatives == nil {
+		t.Error("alternatives is null; the client iterates it without a null check")
+	}
+	// The one the client must be able to rely on: the head is a /learn entry.
+	if resp.Primary.Kind == "learn" && !strings.HasPrefix(resp.Primary.Action.Href, "/learn?concept=") &&
+		resp.Primary.Action.Href != "/onboard" && resp.Primary.Action.Href != "/study" {
+		t.Errorf("learn href = %q", resp.Primary.Action.Href)
+	}
+
+	// No duplicates across head + alternatives.
+	seen := map[string]bool{resp.Primary.ConceptID: true}
+	for _, a := range resp.Alternatives {
+		if a.ConceptID == "" {
+			continue
+		}
+		if seen[a.ConceptID] {
+			t.Errorf("duplicate concept %q in the recommendation set", a.ConceptID)
+		}
+		seen[a.ConceptID] = true
+		if a.Badge == "" || a.CTA == "" || a.Action.Href == "" {
+			t.Errorf("alternative %q has incomplete copy: %+v", a.ConceptID, a)
+		}
+	}
+
+	// Learner-facing copy must not name the machinery.
+	for _, f := range []string{resp.Primary.Badge, resp.Primary.Detail, resp.Primary.CTA} {
+		for _, bad := range []string{"frontier", "DAG", "scheduler", "candidate"} {
+			if strings.Contains(f, bad) {
+				t.Errorf("learner-facing %q contains internal term %q", f, bad)
+			}
+		}
+	}
+}
+
+// A finished concept must not come back as the next thing to learn, which is what `exclude`
+// exists for and what the client's `excludeConceptIds` used to do.
+func TestNext_HonoursExclude(t *testing.T) {
+	_, mux, _ := guestServer(t)
+	rec := postGuest(t, mux, `{}`, "")
+	tok := tokenFromGuest(t, rec)
+
+	rec = httptest.NewRecorder()
+	req := httptest.NewRequest("GET", "/api/next?exclude=a", nil)
+	req.Header.Set("Authorization", "Bearer "+tok)
+	mux.ServeHTTP(rec, req)
+	if rec.Code != 200 {
+		t.Fatalf("/api/next?exclude=a: %d", rec.Code)
+	}
+	if strings.Contains(rec.Body.String(), `"conceptId":"a"`) {
+		t.Errorf("excluded concept was still recommended: %s", rec.Body.String())
+	}
+}
+
+// Unauthenticated must not error: a guest landing on the app gets a recommendation, and an
+// error would leave the home page with nothing to show.
+func TestNext_UnauthenticatedStillAnswers(t *testing.T) {
+	_, mux, _ := guestServer(t)
+	rec := httptest.NewRecorder()
+	mux.ServeHTTP(rec, httptest.NewRequest("GET", "/api/next", nil))
+	if rec.Code != 200 {
+		t.Fatalf("unauthenticated /api/next: %d %s", rec.Code, rec.Body.String())
+	}
+	var resp struct {
+		Primary *struct {
+			Action struct {
+				Type string `json:"type"`
+				Href string `json:"href"`
+			} `json:"action"`
+		} `json:"primary"`
+		Alternatives []json.RawMessage `json:"alternatives"`
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &resp); err != nil {
+		t.Fatalf("decode: %v", err)
+	}
+	if resp.Primary == nil || resp.Primary.Action.Href == "" {
+		t.Errorf("no primary for a signed-out visitor: %s", rec.Body.String())
+	}
+}

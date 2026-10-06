@@ -516,36 +516,7 @@ func (e *Engine) NextQuestion(sessionID, studentID string) (*Question, error) {
 	if err != nil {
 		return nil, fmt.Errorf("load progress: %w", err)
 	}
-	snapshots := make(map[string]*scheduler.ConceptSnapshot, len(progress))
-	for cid, p := range progress {
-		c := e.dag.Concept(cid)
-		reqStreak := 0
-		timeThresh := 0.0
-		if c != nil {
-			reqStreak = c.MasteryThreshold.Streak
-			timeThresh = c.MasteryThreshold.AvgTimeSeconds
-		}
-		status := mastery.Status(p.Status)
-		snapshots[cid] = &scheduler.ConceptSnapshot{
-			Status:         status,
-			Streak:         p.Streak,
-			LastAttempted:  timeOrZero(p.LastAttempted),
-			LastReviewed:   timeOrZero(p.LastReviewed),
-			NextReviewDue:  p.NextReviewDue,
-			RequiredStreak: reqStreak,
-			TimeThreshold:  timeThresh,
-			WeaknessScore:  p.WeaknessScore,
-		}
-	}
-	for _, c := range e.dag.Order() {
-		if _, ok := snapshots[c.ID]; !ok {
-			snapshots[c.ID] = &scheduler.ConceptSnapshot{
-				Status:         mastery.StatusUnseen,
-				RequiredStreak: c.MasteryThreshold.Streak,
-				TimeThreshold:  c.MasteryThreshold.AvgTimeSeconds,
-			}
-		}
-	}
+	snapshots := e.conceptSnapshotsFrom(studentID, progress)
 
 	e.mu.Lock()
 	defer e.mu.Unlock()
@@ -688,26 +659,7 @@ func (e *Engine) NextReviewQuestion(sessionID, studentID string) (*Question, err
 	if err != nil {
 		return nil, fmt.Errorf("load progress: %w", err)
 	}
-	snapshots := make(map[string]*scheduler.ConceptSnapshot, len(progress))
-	for cid, p := range progress {
-		c := e.dag.Concept(cid)
-		reqStreak := 0
-		timeThresh := 0.0
-		if c != nil {
-			reqStreak = c.MasteryThreshold.Streak
-			timeThresh = c.MasteryThreshold.AvgTimeSeconds
-		}
-		snapshots[cid] = &scheduler.ConceptSnapshot{
-			Status:         mastery.Status(p.Status),
-			Streak:         p.Streak,
-			LastAttempted:  timeOrZero(p.LastAttempted),
-			LastReviewed:   timeOrZero(p.LastReviewed),
-			NextReviewDue:  p.NextReviewDue,
-			RequiredStreak: reqStreak,
-			TimeThreshold:  timeThresh,
-			WeaknessScore:  p.WeaknessScore,
-		}
-	}
+	snapshots := e.conceptSnapshotsFrom(studentID, progress)
 
 	e.mu.Lock()
 	defer e.mu.Unlock()
