@@ -1082,6 +1082,89 @@ export async function getLessonKPs(conceptId: string): Promise<LessonKpsRes> {
 	return res.json()
 }
 
+/** What kind of work a recommendation is. Mirrors scheduler.Kind in Go. */
+export type RecommendationKind = 'learn' | 'practice' | 'review' | 'mastery_check'
+
+/** Why the task was chosen, in language a learner can act on. Mirrors scheduler.Reason. */
+export type RecommendationReason = 'new' | 'review_due' | 'needs_practice' | 'prerequisite' | 'mastery_ready'
+
+/**
+ * One worthwhile task, decided by the engine.
+ *
+ * The wording is the server's, and that is the point: `/profile` and `/learn` used to format
+ * one head two ways — "Currently working towards X / Answer it" beside "Next up / Continue: X",
+ * sometimes with different labels for the same concept — because each derived its own copy.
+ */
+export interface Recommendation {
+  id: string
+  conceptId: string
+  conceptTitle: string
+  kind: RecommendationKind
+  reason: RecommendationReason
+  priority: number
+  estimatedMinutes?: number
+  xp?: number
+  action: { type: RecommendationKind; href: string }
+  badge: string
+  detail: string
+  cta: string
+}
+
+/**
+ * The engine's answer: one dominant task plus the alternatives the learner may pick.
+ *
+ * "The engine chooses; the learner disposes" — so `alternatives` is part of the contract rather
+ * than an afterthought, and a learner who disagrees with the head can act on it.
+ */
+export interface RecommendationRes {
+  primary: Recommendation | null
+  alternatives: Recommendation[]
+  generatedAt: string
+}
+
+/**
+ * GET /api/next — the single answer to "what should I do now?".
+ *
+ * Fail-soft to a library recommendation rather than an empty response: the client used to
+ * assemble this from five requests plus a bundled copy of the corpus, and every one of those
+ * had a fallback, so a network blip already degraded gracefully and must keep doing so.
+ */
+export async function getNext(exclude?: string[]): Promise<RecommendationRes> {
+  const fallback: RecommendationRes = {
+    primary: {
+      id: 'study',
+      conceptId: '',
+      conceptTitle: 'Lesson library',
+      kind: 'learn',
+      reason: 'new',
+      priority: 0,
+      action: { type: 'learn', href: '/study' },
+      badge: 'Library',
+      detail: 'Everything recommended is already learned — the reference library is open',
+      cta: 'Browse lessons →',
+    },
+    alternatives: [],
+    generatedAt: new Date().toISOString(),
+  }
+  const params = new URLSearchParams()
+  if (exclude?.length) params.set('exclude', exclude.join(','))
+  const qs = params.toString()
+  // The five requests this replaced each carried their own `.catch(...)` default, so a network
+  // blip degraded to a browse recommendation rather than to a dead end. One call has to keep
+  // that — but the absorption belongs here rather than in each caller, because a caller that
+  // swallows the error instead ends up holding a shelf it can never replace, and the Learn
+  // done card's failure branch (which exists precisely for this) stops being reachable.
+  try {
+    const res = await authedFetch(`${API_BASE}/api/next${qs ? `?${qs}` : ''}`, { cache: 'no-store' })
+    if (!res.ok) return fallback
+    const data = (await res.json()) as Partial<RecommendationRes>
+    if (!data.primary) return fallback
+    return { primary: data.primary, alternatives: data.alternatives ?? [], generatedAt: data.generatedAt ?? '' }
+  } catch {
+    return fallback
+  }
+}
+
 export interface ReadinessRes {
 	concept_id: string
 	ready: boolean

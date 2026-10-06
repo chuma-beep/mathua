@@ -10,6 +10,7 @@ import {
   getWeaknesses,
   getDueReviews,
   getScores,
+  getNext,
 } from '../lib/api'
 import { getUserInfo } from '../lib/auth'
 import type { LessonAsset } from '../lib/api'
@@ -31,6 +32,7 @@ vi.mock('../lib/api', async (importOriginal) => {
     getWeaknesses: vi.fn(),
     getDueReviews: vi.fn(),
     getScores: vi.fn(),
+    getNext: vi.fn(),
   }
 })
 
@@ -87,6 +89,22 @@ async function renderStepper() {
 }
 
 beforeEach(() => {
+    vi.mocked(getNext).mockResolvedValue({
+      primary: {
+        id: 'b', conceptId: 'b', conceptTitle: 'B', kind: 'learn', reason: 'new', priority: 2,
+        action: { type: 'learn', href: '/learn?concept=b' },
+        badge: 'New', detail: 'Ready to learn', cta: 'Start →',
+      },
+      alternatives: [
+        {
+          id: 'c', conceptId: 'c', conceptTitle: 'C', kind: 'learn', reason: 'new', priority: 1,
+          action: { type: 'learn', href: '/learn?concept=c' },
+          badge: 'New', detail: 'Ready to learn', cta: 'Start →',
+        },
+      ],
+      generatedAt: '',
+    })
+
   vi.mocked(getLessonKPs).mockResolvedValue(kpsFor([unitCircle]) as never)
   vi.mocked(getLessonPractice).mockResolvedValue({ questions: [], concept_id: CID })
   vi.mocked(getLessonReadiness).mockResolvedValue({ concept_id: CID, ready: true, weak: [], missing: [] })

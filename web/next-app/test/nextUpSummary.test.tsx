@@ -1,27 +1,22 @@
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import NextUpSummary from '../components/NextUpSummary'
-import { selectShelfHead, type ShelfInput } from '../lib/nextUp'
+import type { Shelf } from '../lib/nextUp'
 
-const catalog = [
-  { id: 'a', label: 'A', prerequisites: [] as string[], avgTimeSeconds: 10 },
-  { id: 'b', label: 'B', prerequisites: ['a'], avgTimeSeconds: 120 },
-  { id: 'c', label: 'C', prerequisites: ['a'], avgTimeSeconds: 10 },
-]
+type ShelfShape = Parameters<typeof NextUpSummary>[0]['shelf']
 
-const base: ShelfInput = {
-  dueReviews: 0,
-  weaknesses: { by_domain: {} },
-  progress: { a: { status: 'MASTERED', streak: 3 } },
-  activity: [],
-  diagnosticCompleted: true,
-  conceptsMastered: 3,
-  catalog,
-}
+const shelfOf = (next: Partial<Shelf['next']>, alternatives: Shelf['alternatives'] = []): ShelfShape =>
+  ({
+    next: {
+      kind: 'new', badge: 'New', title: 'B', detail: 'Ready to learn', href: '/learn?concept=b',
+      cta: 'Start →', xp: 2, ...next,
+    },
+    alternatives,
+  }) as ShelfShape
 
 describe('NextUpSummary dashboard block', () => {
-  it('renders the head as the one primary Continue button with reason and XP', () => {
-    const shelf = selectShelfHead(base)
+  it('renders the head as the one primary button with reason and XP', () => {
+    const shelf = shelfOf({ badge: 'New', title: 'B', cta: 'Start →', xp: 2 })
     render(<NextUpSummary shelf={shelf} />)
     expect(screen.getByText(`Continue: ${shelf.next.title}`)).toBeTruthy()
     expect(screen.getAllByText(shelf.next.badge).length).toBeGreaterThan(0)
@@ -62,27 +57,27 @@ describe('NextUpSummary dashboard block', () => {
     expect(screen.getAllByRole('link')).toHaveLength(5) // primary + 4
   })
 
-  it('shows the diagnostic as the head for brand-new learners', () => {
-    const shelf = selectShelfHead({
-      dueReviews: 0,
-      weaknesses: { by_domain: {} },
-      progress: {},
-      activity: [],
-      diagnosticCompleted: false,
-      conceptsMastered: 0,
-      catalog,
+  it('renders a diagnostic head the engine chose, without deciding anything itself', () => {
+    // Whether a learner is offered the diagnostic is decided in internal/scheduler and covered
+    // by TestRecommend_NewLearnerIsOfferedTheDiagnosticButStillHasAgency. What this asserts is
+    // the other half: the surface renders the engine's choice rather than substituting its own
+    // judgement for it.
+    const shelf = shelfOf({
+      kind: 'diagnostic', badge: 'Recommended', title: 'Find where to start',
+      detail: 'A short adaptive test finds your level', href: '/onboard', cta: 'Start test →', xp: 0,
     })
-    expect(shelf.next.kind).toBe('diagnostic')
     render(<NextUpSummary shelf={shelf} />)
     const primary = screen.getByRole('link', { name: shelf.next.cta })
     expect(primary.getAttribute('href')).toBe('/onboard')
   })
 
-  it('Profile and Learn agree on the head for the same state', () => {
-    const input = { ...base }
-    expect(selectShelfHead(input).next).toEqual(selectShelfHead(input).next)
-    // Learn's done input differs only by the exclusion, by design.
-    const excluded = selectShelfHead({ ...input, excludeConceptIds: ['b', 'c'] })
-    expect(excluded.next.kind).toBe('browse')
+  it('renders a mastery-check task as a task, with its href intact', () => {
+    const shelf = shelfOf({
+      kind: 'diagnostic', badge: 'Mastery check', title: 'Mastery check',
+      detail: 'You have earned 50 XP since your last one', href: '/goals?quiz=1',
+      cta: 'Take the check →', xp: 0,
+    })
+    render(<NextUpSummary shelf={shelf} />)
+    expect(screen.getByRole('link', { name: shelf.next.cta }).getAttribute('href')).toBe('/goals?quiz=1')
   })
 })

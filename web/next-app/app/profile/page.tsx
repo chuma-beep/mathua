@@ -17,7 +17,8 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from '../../components/
 import NextUpSummary from '../../components/NextUpSummary'
 import PositionBlock from '../../components/PositionBlock'
 import DailyGoalControl, { getGuestGoal } from '../../components/DailyGoalControl'
-import { selectNextUp, selectShelfHead, isNewUser, recentlyUnlocked, hrefConceptId, RECENT_UNLOCK_DAYS } from '../../lib/nextUp'
+import { isNewUser, recentlyUnlocked, hrefConceptId, RECENT_UNLOCK_DAYS, type Shelf } from '../../lib/nextUp'
+import { fetchShelf } from '../../lib/recommendations'
 import { concepts as conceptCatalog } from '../../lib/conceptData'
 
 interface UserInfo {
@@ -40,27 +41,13 @@ export default function ProfilePage() {
   const [weaknesses, setWeaknesses] = useState<WeaknessRes | null>(null)
   const [efficacy, setEfficacy] = useState<EfficacyReport | null>(null)
   const [dueReviews, setDueReviews] = useState(0)
+  const [shelf, setShelf] = useState<Shelf | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [goalOverride, setGoalOverride] = useState<number | null>(null)
   const [avatarUrl, setAvatarUrl] = useState<string | undefined>(undefined)
   const [avatarPreset, setAvatarPreset] = useState<number | null>(null)
 
-  const nextUp = useMemo(
-    () =>
-      selectNextUp({
-        dueReviews,
-        weaknesses,
-        progress,
-        activity,
-        diagnosticCompleted: user?.diagnostic_completed ?? false,
-        conceptsMastered: scores?.concepts_mastered ?? 0,
-      }),
-    [dueReviews, weaknesses, progress, activity, user?.diagnostic_completed, scores?.concepts_mastered],
-  )
-
-  // Task shelf (primary surface): eligible candidates via the v1 fixed
-  // policy; selectNextUp stays as the always-satisfiable fallback.
   // Guest daily-goal override (server default applies otherwise).
   useEffect(() => {
     if (mounted && !getUserInfo()) {
@@ -76,37 +63,33 @@ export default function ProfilePage() {
   // New = nothing mastered and no answered questions anywhere.
   const isNew = scores != null && isNewUser({ conceptsMastered: scores.concepts_mastered, activity })
 
-  // Next head (compact summary only): Learn owns the full NextUpCard.
-  // Profile names the head item and links to /learn — no shelf here.
-  const head = useMemo(
-    () =>
-      selectShelfHead({
-        dueReviews,
-        weaknesses,
-        progress,
-        activity,
-        diagnosticCompleted: user?.diagnostic_completed ?? false,
-        conceptsMastered: scores?.concepts_mastered ?? 0,
-        catalog: conceptCatalog.map(c => ({ id: c.id, label: c.label, prerequisites: c.prerequisites ?? [], avgTimeSeconds: c.mastery_threshold?.avg_time_seconds })),
-      }),
-    [dueReviews, weaknesses, progress, activity, user?.diagnostic_completed, scores?.concepts_mastered],
-  )
+  // The head, as the engine ranked it.
+  //
+  // This used to be re-derived here from `progress`, `weaknesses`, `activity`, `dueReviews`
+  // and `scores` — five inputs the browser combined with its own copy of the eligibility and
+  // ranking rules, which had already drifted from internal/scheduler: a duplicated XP award
+  // that still halved reviews, and a different ranking order. Now it arrives decided.
+  //
+  // A null shelf is the pre-fetch state rather than an empty one: rendering "nothing
+  // recommended" while the request is in flight would misreport the learner.
+  const head = shelf
 
-
-  // The frontier is the concept the scheduler would serve next. It comes from
-  // the same head the Next task uses, so "where am I" and "what's next" cannot
-  // disagree. A head that is not a concept (the diagnostic, or the browse
-  // fallback) leaves no frontier to name.
-  const frontierCid = hrefConceptId(head.next.href)
-  const frontierLabel = frontierCid
-    ? (conceptCatalog.find(c => c.id === frontierCid)?.label ?? frontierCid)
-    : null
+  // Which concept the head names, for "where am I". Derived from the same head as the
+  // recommendation, so the two cannot disagree — which is the property that matters, not the
+  // label: the engine owns both the label and the href, so a learner cannot be shown a name
+  // for one concept and sent to another.
+  const frontierCid = head ? hrefConceptId(head.next.href) : null
+  const frontierLabel = head?.next.title ?? null
 
   // Recently unlocked: successors unlocked by recently-active concepts
   // (recency derived client-side from activity — no endpoint needed). Head
   // and queue destinations are filtered so no two items share an href and
   // nothing re-links the head concept.
   const unlockRows = useMemo(() => {
+    // head is null until the recommendation arrives. Deriving rows from it unconditionally
+    // would throw on the first render — the memo ran before with a synchronously computed head,
+    // which is exactly what moving the decision to the engine changed.
+    if (!head) return []
     const rows = recentlyUnlocked({
       catalog: conceptCatalog.map(c => ({ id: c.id, label: c.label, prerequisites: c.prerequisites ?? [] })),
       progress,
@@ -179,6 +162,10 @@ export default function ProfilePage() {
           setWeaknesses(weaknessesRes)
           getDueReviews().then(r => setDueReviews(r.count)).catch(() => {})
           getEfficacy().then(setEfficacy).catch(() => {})
+          // The recommendation is the engine's answer, not a re-ranking of the fetches above.
+          // Fetched beside them rather than derived from them: the report's numbers and the
+          // recommendation come from one authority each, and neither is computed from the other.
+          fetchShelf().then(setShelf).catch(() => setShelf(null))
         } else {
           // Guest: fetch progress via ephemeral guest_id so Study answers are visible
           const guestId = getGuestId() || ''
@@ -468,7 +455,7 @@ export default function ProfilePage() {
 
         {/* Diagnostic CTA — new users only: hidden once completed or once
             the learner is no longer new. Retake stays URL-reachable. */}
-        {!user.diagnostic_completed && isNew && nextUp.kind !== 'diagnostic' && (
+        {!user.diagnostic_completed && isNew && head?.next.kind !== 'diagnostic' && (
         <section className="mt-6 w-full max-w-full min-w-0 overflow-hidden border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           <div className="w-full sm:flex-1 min-w-0 overflow-hidden">
             <div className="flex flex-col items-start gap-1.5 sm:flex-row sm:items-center sm:gap-2 min-w-0">
