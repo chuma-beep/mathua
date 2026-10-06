@@ -32,7 +32,13 @@ export function xpLabel(xp: number): string {
   return xp > 0 ? `+${xp} XP` : ''
 }
 
-export default function NextUpSummary({ shelf }: { shelf: Shelf }) {
+// The shelf is null until the recommendation arrives, and this used to assume it had: the
+// caller computed it synchronously, so `shelf.next` never hit null. Reading it from an endpoint
+// made the wait real, and /profile crashed into its 500 boundary on every load — React error
+// #310, which names nothing useful on a minified build. Renders nothing while waiting rather
+// than a placeholder, because an empty "Next up" card would claim there is no next task.
+export default function NextUpSummary({ shelf }: { shelf: Shelf | null }) {
+  if (!shelf) return null
   const { next } = shelf
   const rows = queueRows(next, shelf.alternatives)
   return (

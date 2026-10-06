@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import NextUpSummary from '../components/NextUpSummary'
 import type { Shelf } from '../lib/nextUp'
@@ -79,5 +79,22 @@ describe('NextUpSummary dashboard block', () => {
     })
     render(<NextUpSummary shelf={shelf} />)
     expect(screen.getByRole('link', { name: shelf.next.cta }).getAttribute('href')).toBe('/goals?quiz=1')
+  })
+})
+
+// The shelf arrives over an endpoint now, so it is null for the first paint. This component
+// destructured `shelf.next` unguarded and took /profile down into its 500 boundary — React
+// error #310, which on a minified build says nothing about where. jsdom never saw it because
+// the mock resolved before the assertions ran; `next build` + Playwright did.
+describe('NextUpSummary before the recommendation arrives', () => {
+  it('renders nothing rather than throwing', () => {
+    const spy = vi.spyOn(console, 'error').mockImplementation(() => {})
+    try {
+      const { container } = render(<NextUpSummary shelf={null} />)
+      expect(container.querySelector('[aria-label="Next up"]')).toBeNull()
+      expect(spy).not.toHaveBeenCalled()
+    } finally {
+      spy.mockRestore()
+    }
   })
 })
