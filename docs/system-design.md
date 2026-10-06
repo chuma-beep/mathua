@@ -530,11 +530,11 @@ A variant that targets a specific set of concept goals. Instead of starting at t
 
 | Factor | Go | Python | Node.js |
 |--------|-------|--------|---------|
-| Single binary deploy | ✅ Yes | ❌ Requires runtime | ❌ Requires runtime |
-| SymPy subprocess | ✅ Natural with `os/exec` | ✅ Native | ⚠️ Indirect |
-| Concurrency | ✅ Goroutines | ⚠️ GIL | ✅ Event loop |
-| Compile-time safety | ✅ Strong | ❌ Runtime | ❌ Runtime |
-| Startup time | ✅ ~5ms | ❌ ~500ms | ⚠️ ~100ms |
+| Single binary deploy | Yes | Requires runtime | Requires runtime |
+| SymPy subprocess | Natural with `os/exec` | Native | Indirect |
+| Concurrency | Goroutines | GIL | Event loop |
+| Compile-time safety | Strong | Runtime | Runtime |
+| Startup time | ~5ms | ~500ms | ~100ms |
 
 The biggest win: a single ~15MB binary that is both API server and static file server. Deploy with `scp mathua user@server: && ./mathua --serve`.
 

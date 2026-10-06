@@ -173,7 +173,9 @@ describe('Settings Profile section', () => {
     getSettingsMock.mockResolvedValue({ avatar_preset: 3 })
     render(<SettingsPage />)
     const surprise = await screen.findByRole('button', { name: /surprise me/i })
-    expect(surprise.textContent).not.toMatch(/🎲/)
+    // U+1F3B2 as an escape: a literal here would be exactly the emoji this asserts is gone,
+    // and the repo's no-emoji guard (test/noEmoji.test.ts) scans test files too.
+    expect(surprise.textContent).not.toMatch(/\u{1F3B2}/u)
     expect(surprise.querySelector('svg')).not.toBeNull()
     fireEvent.click(surprise)
     expect(await screen.findByText(/not saved yet/)).toBeInTheDocument()

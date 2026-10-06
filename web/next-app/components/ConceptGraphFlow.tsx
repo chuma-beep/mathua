@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo, useState, useEffect, useCallback, useRef, memo, type MouseEvent as ReactMouseEvent } from 'react'
+import { PlayIcon } from '@animateicons/react/lucide'
 import {
   ReactFlow,
   ReactFlowProvider,
@@ -426,7 +427,16 @@ function AmbientToggle({
         cursor: 'pointer',
       }}
     >
-      ⏵ Flow
+      {/* An icon rather than the play glyph (U+23F5) this replaced, which sat at an
+          unpredictable baseline next to the word below. */}
+      <PlayIcon
+        size={12}
+        duration={1}
+        color="currentColor"
+        className="inline-block align-[-1px]"
+        aria-hidden="true"
+      />
+      <span className="ml-1">Flow</span>
     </button>
   )
 }
