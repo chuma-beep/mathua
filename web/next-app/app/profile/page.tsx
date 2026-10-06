@@ -55,8 +55,11 @@ export default function ProfilePage() {
     }
   }, [mounted])
 
-  // Null when an older server omits it. The quiz block hides rather than substituting a
-  // literal, because a bar computed against a gate the engine does not use is worse than no bar.
+  // Null when an older server omits it. The bar hides rather than substituting a literal — a
+  // bar computed against a gate the engine does not use is a claim about this learner, and is
+  // worse than no bar. The banner and its CTA still render, because `quiz_due` is the flag that
+  // actually says whether the quiz is open, and dropping the way into it would cost a learner
+  // the assessment on a stale deployment.
   const quizGate = scores?.quiz_gate_xp && scores.quiz_gate_xp > 0 ? scores.quiz_gate_xp : null
 
   const effScores = useMemo(
@@ -442,16 +445,18 @@ export default function ProfilePage() {
             (xp_since_quiz). The block had a literal 50 in the copy, in the bar and in an
             `xp_total >= 50` fallback for a field the server does send, so ADR-020's rescale
             could move the gate and leave all three describing the old one. */}
-        {scores && scores.quiz_due && quizGate && (
+        {scores && scores.quiz_due && (
           <div className="mt-6 w-full min-w-0 overflow-hidden border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
             <div className="w-full sm:flex-1 min-w-0">
               <div className="flex flex-col items-start gap-1.5 sm:flex-row sm:items-center sm:gap-2 flex-wrap">
                 <span className="shrink-0 bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">Quiz due</span>
-                <span className="break-words font-mono text-[11px] sm:text-xs text-mathua-primary">{quizGate} XP reached: mastery check recommended</span>
+                <span className="break-words font-mono text-[11px] sm:text-xs text-mathua-primary">{quizGate ? `${quizGate} XP reached: mastery check recommended` : 'mastery check recommended'}</span>
               </div>
-              <div className="mt-2 h-1 bg-mathua-code overflow-hidden">
-                <div className="h-full bg-mathua-blue" style={{ width: `${Math.min(((scores.xp_since_quiz ?? scores.xp_total) / quizGate) * 100, 100)}%` }} />
-              </div>
+              {quizGate && (
+                <div className="mt-2 h-1 bg-mathua-code overflow-hidden">
+                  <div className="h-full bg-mathua-blue" style={{ width: `${Math.min(((scores.xp_since_quiz ?? scores.xp_total) / quizGate) * 100, 100)}%` }} />
+                </div>
+              )}
             </div>
             <Link href="/goals?quiz=1" className="w-full sm:w-auto sm:shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap">
               Start the quiz →
