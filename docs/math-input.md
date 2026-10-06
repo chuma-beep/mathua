@@ -277,7 +277,7 @@ type is `2g`/`slow-2g`. A one-line simplification is not worth someone's data al
 and a feature that quietly spends it is worse than one that is visibly absent.
 
 If that trade is wrong, `SelfCheck.tsx` is the only file to delete: nothing else in
-`components/math/` imports it, and removing it costs no other behaviour.
+`components/math/` imports it, and removing it costs no other behavior.
 
 ## 4. The fallback grading path
 
@@ -389,7 +389,7 @@ content frequently does not blur the input, so this reproduced reliably on a pho
 while being invisible in Chromium.
 
 MathLive already hides the keypad itself, from a `focusout` listener, when focus
-genuinely leaves the field. That is the behaviour worth having, so the outside-tap
+genuinely leaves the field. That is the behavior worth having, so the outside-tap
 listener was redundant *and* harmful. Mathua now hides the keypad in exactly one
 place: when a focused field unmounts, since the Learn feed swaps cards under you.
 
@@ -404,7 +404,7 @@ directly from the page: `visible` stayed `true` and the panel stayed in the DOM,
 both `auto` and `manual`. That is why the strand could not be reproduced in Playwright
 and why `e2e/mobile-math.spec.ts` asserts the *call* Mathua makes rather than the
 resulting visibility — spying on `mathVirtualKeyboard.hide` fails on the old listener
-and passes now. The recovery behaviour itself still wants a real-device check.
+and passes now. The recovery behavior itself still wants a real-device check.
 
 ### Every question gets the editor
 
@@ -473,7 +473,7 @@ What is actually configured, all verified against the pinned MathLive 0.111.0 ra
 than remembered from an earlier version.
 
 **Virtual keyboard policy.** Not set. 0.111.0's default is `'auto'`, confirmed in the
-bundle's own defaults object, and `auto` is the behaviour Mathua wants: raise the keypad
+bundle's own defaults object, and `auto` is the behavior Mathua wants: raise the keypad
 on touch, leave it alone where there is a physical keyboard. The attribute exists as both
 `mathVirtualKeyboardPolicy` and `math-virtual-keyboard-policy`. It is left at the default
 rather than set redundantly, because setting it would assert something already true and
@@ -630,7 +630,7 @@ above — backspace and the zero key typed their own source text in all five lay
 
 **`getValue('plain-text')` returns `""` in jsdom**, always — so the component suite
 stubs the library out (`test/stubs/mathlive.ts`, aliased in `vitest.config.mts`) and
-the real behaviour is verified in Playwright. MathLive's `node` export condition also
+the real behavior is verified in Playwright. MathLive's `node` export condition also
 resolves to the SSR build under vitest, which never registers `<math-field>` at all.
 
 **`next/dynamic({ ssr: false })` hangs under vitest.** It resolves through Next's

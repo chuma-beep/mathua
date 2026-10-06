@@ -93,7 +93,7 @@ Three pieces of evidence:
    for 459 concepts, 3 for 171. The documented world costs 9 answers; the real one costs
    30 for most of the corpus.
 3. **The documentation records the redundancy itself.** Its transition table gives the
-   condition for all three tiers as **"Same"**, while labelling the evidence "First
+   condition for all three tiers as **"Same"**, while labeling the evidence "First
    correct", "Consistent correct", "Mastery achieved". Three tiers gated by one identical
    test is three repetitions of the same measurement, not three kinds of evidence. It
    also documents `streak` resetting to 0 on an incorrect answer and not at all on a tier
