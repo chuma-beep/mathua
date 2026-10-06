@@ -1,6 +1,6 @@
 # Contributing to Mathua
 
-Mathua is community-built. Every concept, every generator, every line of the concept graph was added by someone who wanted to help others learn math better. The most useful thing you can contribute is a new concept — and it takes exactly three pieces.
+Mathua is community-built. Someone added every concept, every generator, and every line of the concept graph. They wanted to help others learn math better. The most useful thing you can contribute is a new concept — and it takes exactly three pieces.
 
 ## Quick start
 
@@ -18,7 +18,7 @@ DATABASE_URL=postgres://... ./mathua --serve --port 8080
 
 The concept graph lives in per-domain files under `data/concepts/`. Generators live in `internal/generator/`. Here are the kinds of contributions that move the needle:
 
-- New concepts — the single most impactful thing you can add. Concepts using `polynomial`, `expression`, `symbolic`, or `complex` grading are checked for equivalence by a pinned SymPy service (`grading/sympy_service.py`, version in `grading/requirements.txt`) that the production image ships; there is no pure-Go equivalence fallback, so run `go test ./...` and the grader tests with SymPy installed.
+- New concepts — the single most impactful thing you can add. A pinned SymPy service checks equivalence for `polynomial`, `expression`, `symbolic`, and `complex` grading. The service is `grading/sympy_service.py`, and its version is in `grading/requirements.txt`. The production image ships it. There is no pure-Go equivalence fallback. Run `go test ./...` and the grader tests with SymPy installed.
 - New generators — make existing or new concepts produce better problems.
 - Bug fixes in the scheduling engine or graders.
 - Documentation and diagram improvements.
@@ -79,7 +79,7 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
 
 - Use `ctx.Difficulty` (0.0 trivial → 1.0 challenging) to scale operand sizes.
 - Always return an `Explanation` — shown when a student asks to see the solution.
-- Use the global `math/rand` (seeded per-request via `registry.go:84`); no hardcoded problems. `ctx.Seed` is deterministic `hashSeed(student|cid|attemptID)` (`engine.go:389`), no `UnixNano`.
+- Use the global `math/rand`, seeded per request (`registry.go:84`). Do not hardcode problems. `ctx.Seed` is deterministic: `hashSeed(student|cid|attemptID)` (`engine.go:389`). Do not use `UnixNano`.
 
 ### 3. Prove it works
 
@@ -126,7 +126,7 @@ Multiple concepts can share a single lesson file. Lesson content is written in M
 
 ### 5. (Recommended) Add knowledge-point shards
 
-Every lesson should be broken into 1-3 **knowledge points** (KPs), each a subgoal-labeled worked example — the Math Academy scaffolding pattern. A KP shard for a concept is a JSON file at `data/lessons/kp/<concept_id>.json`:
+Every lesson is broken into exactly 3 **knowledge points** (KPs), each a subgoal-labeled worked example — the Math Academy scaffolding pattern. A KP shard for a concept is a JSON file at `data/lessons/kp/<concept_id>.json`:
 
 ```json
 [
@@ -142,9 +142,9 @@ Every lesson should be broken into 1-3 **knowledge points** (KPs), each a subgoa
 ]
 ```
 
-- `section` names a heading **inside the lesson body** that serves as the worked example. It must match a heading exactly; leave it empty to fall back to the full lesson body.
+- `section` names a heading **inside the lesson body** that serves as the worked example. It must match a heading exactly. Do not leave it empty. Since ADR-045, an empty `section` gives the learner a short placeholder that points at Study. It does not show the lesson body.
 - `subgoals` are short labels shown before practice (subgoal-labeling effect). Keep 3 per KP.
-- Prefer **3 KPs per concept**; 1-2 are acceptable for very small topics.
+- Every concept has exactly **3 KPs**. All 657 shards in the corpus do, and `scripts/check_docs.py` fails if a shard has a different count.
 - `scripts/gen_kp_shards.py` generates shard files from an inline spec and validates every section reference against the corpus — add your spec entries there and run `python3 scripts/gen_kp_shards.py <domain-prefix>`.
 
 ## The graph validator
@@ -156,7 +156,17 @@ A validator runs on every pull request. It checks invariants before any merge ca
 3. **No dup IDs, no empty label/domain, valid `mastery_threshold`** (`loader.go:303`)
 4. **No singleton `interference_group`** (`loader.go:321`), valid `grading_type` enum (9 values `loader.go:297`), `variants` `0.1–1.0` difficulty
 
-A second audit guards the lesson corpus (`python3 scripts/audit_lessons.py:191`). It fails on: DAG concepts with no lesson, stale `lessons.json` ids, lesson files missing on disk, orphaned sources, KP shard sections that do not resolve (657 files ×3 =1971 KPs), diagram mappings that point at missing assets or non-existent concepts (`engine.go:497` 181 diagrams), stale course targets, `grading_type`/`threshold` sanity, and `enrichment.json` wiring.
+A second audit guards the lesson corpus (`python3 scripts/audit_lessons.py:191`). It fails on these conditions:
+
+- a DAG concept with no lesson
+- a stale `lessons.json` id
+- a lesson file that is missing on disk
+- an orphaned source
+- a KP shard section that does not resolve (657 files × 3 = 1971 KPs)
+- a diagram mapping that points at a missing asset or a non-existent concept (`engine.go:497`, 181 diagrams)
+- a stale course target
+- a `grading_type` or `threshold` that fails its sanity check
+- incorrect `enrichment.json` wiring
 
 ## Submitting a pull request
 

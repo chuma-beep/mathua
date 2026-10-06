@@ -6,13 +6,13 @@ Playwright, and the reason is worth stating plainly before the list rather than 
 ## Why this file exists
 
 `e2e/mobile-math.spec.ts` runs under `mobile-chromium` and `mobile-320`, which are
-emulated viewports with synthetic touch. They are genuinely useful — they caught the
-backspace key typing its own name, the zero key typing `[0]`, and a loading state that
-swallowed every tap — and they are not a substitute for a device.
+emulated viewports with synthetic touch. They are genuinely useful. They caught the
+backspace key typing its own name. They caught the zero key typing `[0]`. They caught a
+loading state that swallowed every tap. They are not a substitute for a device.
 
 They cannot reproduce:
 
-| behaviour | why emulation misses it |
+| behavior | why emulation misses it |
 |---|---|
 | native / OS keyboard suppression | Chromium has no OS keyboard to suppress |
 | iOS Safari viewport units | `100vh`, `dvh` and the URL bar behave differently, and only on Safari |
@@ -27,9 +27,9 @@ numbers a **floor** rather than a measurement:
 - The no-input window measured **322ms** with the MathLive chunk cached and **3116ms**
   with a 3s chunk delay. The 310ms floor is parse-and-evaluate of a 794 kB decoded bundle
   on a desktop CPU. On a mid-range phone both terms are larger.
-- Network contribution is **unmeasured**, because CDP throttling cannot reach the chunk
-  in this harness — it is served from Chromium's memory cache and reports
-  `transferSize: 0` regardless of the profile applied.
+- Network contribution is **unmeasured**. CDP throttling cannot reach the chunk in this
+  harness. Chromium serves the chunk from its memory cache, and it reports
+  `transferSize: 0` regardless of the applied profile.
 
 So: a green suite means the wiring is right. It does not mean the experience is.
 

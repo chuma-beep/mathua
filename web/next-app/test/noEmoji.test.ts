@@ -41,6 +41,7 @@ const AUTHORED = [
   'cmd',
   'docs',
   'CONTEXT.md',
+  'AGENTS.md',
   'README.md',
   'DESIGN.md',
   'CONTRIBUTING.md',
@@ -182,6 +183,7 @@ describe('no emoji in authored code', () => {
       'web/next-app/components/AttemptList.tsx',
       'internal/concepts/mastery_units.go',
       'CONTEXT.md',
+      'AGENTS.md',
     ]) {
       expect([...visited], `${sentinel} was not scanned`).toContain(sentinel)
     }

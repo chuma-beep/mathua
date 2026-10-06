@@ -47,7 +47,7 @@ The web server exposes a REST API through Go's standard `net/http` package. No e
 
 ### Grading — nine types, six Go graders + SymPy
 
-The `grading_type` on each concept selects the grader. Nine enum values are dispatched through a single `Router`; six are pure Go, three route to SymPy:
+The `grading_type` on each concept selects the grader. One `Router` dispatches nine enum values. Six are pure Go. Three route to SymPy:
 
 - **Numeric** — integer, float, fraction, mixed number, scientific notation (pure Go).
 - **Choice** — case-insensitive multiple-choice matching.
@@ -56,7 +56,9 @@ The `grading_type` on each concept selects the grader. Nine enum values are disp
 - **Tuple** — coordinate/n-tuple parsing.
 - **Complex** — `a + bi` forms.
 
-**Symbolic, Polynomial, Expression** — routed through a long-lived Python subprocess running `grading/sympy_service.py`. The Go client sends a JSON expression pair over stdin; SymPy parses both into expression trees and tests equivalence (`simplify(expected - answer) == 0`, with expand/factor/trigsimp/radsimp/powsimp and numerical verification). Python and SymPy are **installed in the production image** (pinned in `grading/requirements.txt`) and verified at image build time, so grading is available in production. There is **no pure-Go equivalence fallback** for these types; the router does not use the unused `symbolicGrader`.
+**Symbolic, Polynomial, Expression** — routed through a long-lived Python subprocess running `grading/sympy_service.py`. The Go client sends a JSON expression pair over stdin. SymPy parses both into expression trees. SymPy then tests equivalence (`simplify(expected - answer) == 0`, with expand/factor/trigsimp/radsimp/powsimp and numerical verification). Python and SymPy are **installed in the production image** and pinned in `grading/requirements.txt`.
+
+The image build verifies the installation, so grading is available in production. There is **no pure-Go equivalence fallback** for these types. The router does not use the unused `symbolicGrader`.
 
 ### Storage — SQLite and Postgres
 
@@ -64,7 +66,9 @@ SQLite for local development (`mathua.db`, `WAL` `storage/migrate.go:23`). Postg
 
 ## Diagnostic — Computerised Adaptive Testing
 
-Locates a student's knowledge frontier using a compressed covering set + info-gain CAT (`internal/diagnostic/cat.go:1`, `internal/diagnostic/report.go:11`). The engine builds a minimal covering set of the DAG, repeatedly picks the concept with maximal entropy reduction, propagates `+0.3` evidence to prerequisites on correct and `-0.3` to dependents on incorrect, and tracks per-concept `KnowledgeConfidence 0–1`. The frontier is the highest belief drop; a supplemental diagnostic runs when confidence `<0.7`. Assessment is 25–45 adaptive questions (vs 657 exhaustive) with `80%` difficulty targeting via `engine.computeDifficulty` (`internal/engine/engine.go:157` `weakness→difficulty` 0.3–1.0).
+Locates a student's knowledge frontier using a compressed covering set + info-gain CAT (`internal/diagnostic/cat.go:1`, `internal/diagnostic/report.go:11`). The engine builds a minimal covering set of the DAG. It repeatedly picks the concept that gives the maximal entropy reduction. It propagates `+0.3` evidence to prerequisites on correct and `-0.3` to dependents on incorrect, and tracks per-concept `KnowledgeConfidence 0–1`. The frontier is the highest belief drop. A supplemental diagnostic runs when confidence `<0.7`.
+
+Assessment is 25–45 adaptive questions, not 657 exhaustive ones. It targets `80%` difficulty via `engine.computeDifficulty` (`internal/engine/engine.go:157`, `weakness→difficulty` 0.3–1.0).
 
 ## Full documentation
 
