@@ -280,9 +280,12 @@ def main() -> int:
         print("an ASD-STE100 conformance check and makes no claim of certification.",
               file=sys.stderr)
         return 1
+    # Built as a variable, not a multi-line expression inside the f-string braces: PEP 701
+    # f-string formatting is Python 3.12+, and CI runs 3.11. This passed locally on 3.14 and
+    # only failed in CI, which is the whole argument for testing on the version that ships.
+    advisory = f"; {len(warnings)} advisory warning(s) not failed" if warnings else ""
     print(f"OK: {checked} file(s) obey the STE structural rules this script checks "
-          f"(max {limit} words per sentence){
-          f'; {len(warnings)} advisory warning(s) not failed' if warnings else ''}.")
+          f"(max {limit} words per sentence){advisory}.")
     print("Structural subset only. Not an ASD-STE100 conformance check.")
     return 0
 
