@@ -164,9 +164,12 @@ The subdomain condensation of the concept DAG **contains cycles**: grouping conc
 subdomain discards the per-concept ordering, so a concept in subdomain A can be a
 prerequisite of one in subdomain B whose other members depend on A.
 
-**60 of 125 subdomains cannot be levelled at all** — they are inside a cycle, so no
-depth function exists for them. An implementation that ignores this gets level 0 for all
-of them, which is a confidently wrong answer rather than a missing one.
+**60 of 125 subdomains cannot be levelled** — they sit inside a cycle, or downstream
+of one, so no depth function exists for them at all. (Tarjan puts 26 inside cycles and
+the remaining 34 behind them; Kahn cannot order either group, because ordering a node
+requires its predecessors to be ordered first.) An implementation that ignores this
+gets level 0 for all of them, which is a confidently wrong answer rather than a missing
+one — which is what the first Go version of this generator did.
 
 Unresolvable subdomains:
 

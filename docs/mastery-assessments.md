@@ -112,7 +112,7 @@ answer rather than a missing one**, which is the failure mode this ADR exists to
 | Observation | Value | Consequence |
 |---|---|---|
 | `subdomain` values | 125 | — |
-| **Subdomain condensation depth** | **does not exist for 26 of 125** | 9 cycles: `abstract_algebra.{fields,groups,rings,structures}`, `calculus.{advanced,derivatives,integrals,limits}`, `algebra.{factoring,polynomials,quadratics}` ↔ `complex_numbers.basics`, `topology.{algebraic,covering,manifolds}`, `linear_algebra.{determinants,matrices,vectors}`, and three more. |
+| **Subdomain condensation depth** | **does not exist for 60 of 125** | 26 subdomains sit inside 9 cycles (`abstract_algebra.{fields,groups,rings,structures}`, `calculus.{advanced,derivatives,integrals,limits}`, `algebra.{factoring,polynomials,quadratics}` ↔ `complex_numbers.basics`, `topology.{algebraic,covering,manifolds}`, `linear_algebra.{determinants,matrices,vectors}`, and three more) and 34 more sit downstream, which Kahn cannot order either because ordering requires predecessors first. |
 | Domain condensation depth | **does not exist for 14 of 17** | Only 3 domains level. Grouping loses the DAG's acyclicity. |
 | Concept depth | resolves **657 of 657**, max 44 | The only well-defined depth function. |
 | `(domain, floor(conceptDepth/3))` | **91 units**, median 5, 18 singletons | Violates §12: 18 singletons is a quiz per concept. |
