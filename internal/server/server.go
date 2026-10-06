@@ -294,6 +294,9 @@ func (s *Server) Register(mux *http.ServeMux) {
 	// board-visible by design; 404 when the student has none).
 	mux.HandleFunc("/api/avatar/", logRequest(cors(s.handleAvatarPublic)))
 	mux.HandleFunc("/api/reviews/due", logRequest(cors(s.authMiddleware(s.handleDueReviews))))
+	// GET /api/next — the one answer to "what should I do now?". Optional auth so a guest
+	// landing on the app gets the diagnostic recommendation rather than an error.
+	mux.HandleFunc("/api/next", logRequest(cors(s.optionalAuthMiddleware(s.handleNext))))
 	mux.HandleFunc("/api/reviews/session", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleReviewsSession)))))
 	mux.HandleFunc("/api/reviews/answer", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleReviewsAnswer)))))
 	// The lesson routes stay publicly readable — Study is reference and is
@@ -1803,6 +1806,49 @@ func (s *Server) setSettingsFlag(studentID, key string, value bool) error {
 	return s.repo.UpdateSettings(studentID, string(out))
 }
 
+// GET /api/next — the learner's recommended task and their alternatives.
+//
+// The whole point of this endpoint is that the decision happens once. `/learn` and `/profile`
+// used to recompute it independently in the browser from five API calls and a bundled copy of
+// the corpus, while internal/scheduler held the eligibility rules, the decay rule and the
+// priority weights where neither surface could reach them. The two had already drifted: the
+// client kept its own copy of the XP award math and still halved reviews, a rule ADR-020
+// removed from the server.
+//
+// `exclude` lets a caller drop a concept it has just finished, so it is never offered back as
+// the next thing to do.
+func (s *Server) handleNext(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID != "" && paused(studentID, s.repo) {
+		// A paused learner's reviews are hidden, so a recommendation that sends them to
+		// /review would contradict the pause.
+		writeJSON(w, s.eng.RecommendPaused(studentID))
+		return
+	}
+	var exclude []string
+	for _, e := range r.URL.Query()["exclude"] {
+		for _, id := range strings.Split(e, ",") {
+			if id = strings.TrimSpace(id); id != "" {
+				exclude = append(exclude, id)
+			}
+		}
+	}
+	resp, err := s.eng.RecommendNext(studentID, exclude)
+	if err != nil {
+		writeJSON(w, map[string]interface{}{
+			"primary":      nil,
+			"alternatives": []interface{}{},
+			"generatedAt":  time.Now().UTC(),
+		})
+		return
+	}
+	writeJSON(w, resp)
+}
+
 // GET /api/reviews/due — returns count of concepts due for review
 func (s *Server) handleDueReviews(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
@@ -1819,17 +1865,12 @@ func (s *Server) handleDueReviews(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, map[string]interface{}{"count": 0})
 		return
 	}
-	progress, err := s.eng.GetProgress(studentID)
+	// The count lives on the engine now: the recommender needs the same number, and having it
+	// written twice is how the two could disagree about what "due" means.
+	count, err := s.eng.ReviewsDue(studentID)
 	if err != nil {
 		writeJSON(w, map[string]interface{}{"count": 0})
 		return
-	}
-	now := time.Now()
-	count := 0
-	for _, p := range progress {
-		if p.NextReviewDue != nil && p.NextReviewDue.Before(now) && p.Status != string(mastery.StatusMastered) {
-			count++
-		}
 	}
 	writeJSON(w, map[string]interface{}{"count": count})
 }
