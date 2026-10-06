@@ -1,29 +1,65 @@
 [
   {
-    "label": "Trigonometric inequalities",
+    "label": "Sketch, then cut",
     "section": "",
     "subgoals": [
       "Sketch sin/cos over one 2pi period",
       "Cut the graph at the boundary value",
       "Shade the arc satisfying the inequality"
-    ]
+    ],
+    "slice": {
+      "rule": "To solve a trigonometric inequality, sketch the relevant function over one $2\\pi$ period, draw the horizontal (or sloped) line for the boundary value, and read off the arcs where the graph sits on the required side. Testing one point inside each candidate arc confirms it, which is cheaper than solving algebraically.",
+      "examples": [
+        {
+          "item": "$\\sin x > k$",
+          "says": "keep the arcs where the curve rises above the line $y=k$"
+        },
+        {
+          "item": "$\\cos x < k$",
+          "says": "keep the arcs where the curve falls left of the line $x=k$"
+        }
+      ]
+    }
   },
   {
-    "label": "Trigonometric inequalities",
+    "label": "Shade, then transfer",
     "section": "",
     "subgoals": [
       "Transfer unit-circle signs into intervals",
       "Test one point inside each candidate arc",
       "Append +2k*pi to every solution arc"
-    ]
+    ],
+    "slice": {
+      "rule": "The shaded arcs on the unit circle are the same arcs: read the sign of the function off the unit-circle position, and each solution arc transfers directly into interval form.",
+      "examples": [
+        {
+          "item": "$\\tan x > k$",
+          "says": "the arcs where the unit-circle ray lies above the line $y=kx$"
+        }
+      ]
+    }
   },
   {
-    "label": "Trigonometric inequalities",
+    "label": "Close the answer",
     "section": "",
     "subgoals": [
       "Intersect solution arcs with the given domain",
       "Discard endpoints failing strict inequality",
       "Union disjoint arcs into the final set"
-    ]
+    ],
+    "slice": {
+      "rule": "A trigonometric solution on all reals repeats: add $2k\\pi$ for every integer $k$. Then intersect with whatever domain the problem gave, drop endpoints that fail a strict inequality, and union the surviving disjoint arcs into the final set.",
+      "examples": [
+        {
+          "item": "endpoints of $\\sin x > 0$",
+          "says": "excluded — the inequality is strict"
+        },
+        {
+          "item": "$\\cos x \\le k$",
+          "says": "endpoints kept"
+        }
+      ],
+      "note": "Intersecting with the domain after writing the general solution is the step most often forgotten."
+    }
   }
 ]

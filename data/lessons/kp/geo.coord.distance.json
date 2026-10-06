@@ -6,7 +6,21 @@
       "Move east-west first, then north-south",
       "Write the horizontal step before the vertical step",
       "Pin the origin at (0, 0)"
-    ]
+    ],
+    "slice": {
+      "rule": "A point in the plane is written $(x, y)$: the first coordinate says how far east or west of the origin, the second how far north or south. To locate a point, move horizontally first, then vertically — the reverse order lands somewhere else entirely.",
+      "examples": [
+        {
+          "item": "$(3, 2)$",
+          "says": "3 blocks east, then 2 north"
+        },
+        {
+          "item": "$(3, 2)$ read the other way",
+          "says": "3 north then 2 east is $(2, 3)$ — a different point"
+        }
+      ],
+      "note": "Horizontal first, always. The two orders give different points unless $x=y$."
+    }
   },
   {
     "label": "Axes split the plane into quadrants",
@@ -15,7 +29,24 @@
       "Cross the x-axis and y-axis at the origin",
       "Number the four quadrants with Roman numerals",
       "Read (1, 2) as x-coordinate 1, y-coordinate 2"
-    ]
+    ],
+    "slice": {
+      "rule": "The axes cross at the origin $(0,0)$. The $x$-axis is horizontal and the $y$-axis vertical; together they divide the plane into four quadrants, numbered anticlockwise from the upper right. A point with a zero coordinate sits on an axis rather than in a quadrant.",
+      "examples": [
+        {
+          "item": "$(1, 2)$",
+          "says": "Quadrant I — both positive"
+        },
+        {
+          "item": "$(-1, -2)$",
+          "says": "Quadrant III — both negative"
+        },
+        {
+          "item": "$(0, -3)$",
+          "says": "on the $y$-axis — no quadrant"
+        }
+      ]
+    }
   },
   {
     "label": "Drill: addresses off the street grid",
@@ -24,6 +55,23 @@
       "Count 2 blocks east and 3 north to the restaurant",
       "Count 3 right and 3 down for the bar",
       "Count 2 left and 4 down for the gas station"
-    ]
+    ],
+    "slice": {
+      "rule": "Apply the two rules together: read the pair, place it with a horizontal move then a vertical one, and check which quadrant it lands in.",
+      "examples": [
+        {
+          "item": "$(3, 4)$",
+          "says": "Quadrant I"
+        },
+        {
+          "item": "$(-2, 5)$",
+          "says": "Quadrant II"
+        },
+        {
+          "item": "$(-4, -1)$",
+          "says": "Quadrant III"
+        }
+      ]
+    }
   }
 ]

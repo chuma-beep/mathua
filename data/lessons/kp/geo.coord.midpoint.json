@@ -6,7 +6,20 @@
       "Average the two x-values for the middle x",
       "Average the two y-values for the middle y",
       "Keep horizontal-first order in the answer pair"
-    ]
+    ],
+    "slice": {
+      "rule": "The midpoint of two points is found by averaging each coordinate separately: add the two $x$-values and halve, add the two $y$-values and halve. Nothing else is involved — the midpoint is componentwise, not a new kind of average.",
+      "examples": [
+        {
+          "item": "$(2, 3)$ and $(6, 7)$",
+          "says": "midpoint $(4, 5)$"
+        },
+        {
+          "item": "$(-2, -4)$ and $(4, 2)$",
+          "says": "midpoint $(1, -1)$"
+        }
+      ]
+    }
   },
   {
     "label": "Origin and axes as reference points",
@@ -15,7 +28,10 @@
       "Start every address at the origin (0, 0)",
       "Measure x along the horizontal axis",
       "Measure y along the vertical axis"
-    ]
+    ],
+    "slice": {
+      "rule": "Coordinates are measured from the origin, with $x$ along the horizontal axis and $y$ along the vertical. Averaging works regardless of sign, because each coordinate is handled on its own axis."
+    }
   },
   {
     "label": "Drill: middle of two addresses",
@@ -24,6 +40,19 @@
       "Add the two x-values and halve the total",
       "Add the two y-values and halve the total",
       "Check the midpoint sits halfway on each axis"
-    ]
+    ],
+    "slice": {
+      "rule": "Average the two $x$-values for the middle $x$, average the two $y$-values for the middle $y$, and write the pair in that order. Then check the result really is halfway on each axis.",
+      "examples": [
+        {
+          "item": "$(0,0)$ and $(10, 4)$",
+          "says": "midpoint $(5, 2)$ — halfway on each axis"
+        },
+        {
+          "item": "$(-3, 7)$ and $(1, -1)$",
+          "says": "midpoint $(-1, 3)$"
+        }
+      ]
+    }
   }
 ]

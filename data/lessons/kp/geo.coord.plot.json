@@ -6,7 +6,20 @@
       "Step right for positive x and left for negative x",
       "Step up for positive y and down for negative y",
       "Mark (3, 2) after stepping 3 then 2"
-    ]
+    ],
+    "slice": {
+      "rule": "To plot $(x, y)$, step $x$ blocks right if $x$ is positive and left if it is negative, then step $y$ blocks up if $y$ is positive and down if it is negative. Horizontal first, then vertical, every time.",
+      "examples": [
+        {
+          "item": "$(3, 2)$",
+          "says": "3 right, then 2 up"
+        },
+        {
+          "item": "$(-5, -1)$",
+          "says": "5 left, then 1 down"
+        }
+      ]
+    }
   },
   {
     "label": "Quadrants and axis points",
@@ -15,7 +28,25 @@
       "Sort sign pairs into quadrants I through IV",
       "Park (0, -3) and (4, 0) on their axes",
       "Name all seven special places: origin, axes, quadrants"
-    ]
+    ],
+    "slice": {
+      "rule": "Signs place the quadrant: $(+,+)$ is I, $(-,+)$ is II, $(-,-)$ is III, $(+,-)$ is IV. A zero coordinate puts the point on an axis instead of in any quadrant, and two zeros put it at the origin.",
+      "examples": [
+        {
+          "item": "$(4, 0)$",
+          "says": "on the $x$-axis"
+        },
+        {
+          "item": "$(0, -3)$",
+          "says": "on the $y$-axis"
+        },
+        {
+          "item": "$(0, 0)$",
+          "says": "the origin"
+        }
+      ],
+      "note": "A point with one zero coordinate has no quadrant. That is the case most often mislabelled."
+    }
   },
   {
     "label": "Drill: plot (3, 2), (-5, -1), (0, -3), (4, 0)",
@@ -24,6 +55,23 @@
       "Walk each pair horizontal-first, then vertical",
       "Land (-5, -1) two signs deep in Quadrant III",
       "Rest every point with a zero on its axis"
-    ]
+    ],
+    "slice": {
+      "rule": "Plot each pair and name where it lands. Checking the sign pattern before drawing catches most errors.",
+      "examples": [
+        {
+          "item": "$(3, 2)$",
+          "says": "Quadrant I"
+        },
+        {
+          "item": "$(-5, -1)$",
+          "says": "Quadrant III"
+        },
+        {
+          "item": "$(0, -3)$",
+          "says": "negative $y$-axis"
+        }
+      ]
+    }
   }
 ]

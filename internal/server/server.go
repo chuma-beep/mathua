@@ -1435,12 +1435,12 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 		}
 		out := make([]kpInfo, 0, len(kps))
 		for _, kp := range kps {
-			we, ok := ll.KPSectionBody(conceptID, kp.Section)
-			if !ok {
-				if l := ll.Lesson(conceptID); l != nil {
-					we = l.Body
-				}
-			}
+			// TeachingSlice never falls back to the lesson body. It used to: when a shard's
+			// section was empty the server substituted l.Body, so 69 of 1,971 steps across 43
+			// concepts served the whole reference article to a learner who asked for one
+			// question — 33,784 words, and discrete.logic.propositions served its 2,724-word
+			// article three times over. `/study` keeps the article; this is the learning surface.
+			we, _ := ll.TeachingSlice(conceptID, kp)
 			assets := ll.KPAssets(conceptID, kp)
 			if assets == nil {
 				assets = []lessons.Asset{}

@@ -6,7 +6,20 @@
       "Replace f near a by its tangent line",
       "Write L(x) = f(a) + f'(a)(x-a)",
       "Check sqrt(x) at 4 gives 2 + (x-4)/4"
-    ]
+    ],
+    "slice": {
+      "rule": "Near a point $a$, replace a function by its tangent line there. The linearization is $L(x) = f(a) + f'(a)(x-a)$. It is the best possible straight-line approximation at $a$, in the sense that it matches both value and slope.",
+      "examples": [
+        {
+          "item": "$f(x)=\\sqrt{x}$ at $a=4$",
+          "says": "$L(x) = 2 + \\tfrac{1}{4}(x-4)$"
+        },
+        {
+          "item": "$f(x)=e^x$ at $a=0$",
+          "says": "$L(x) = 1 + x$"
+        }
+      ]
+    }
   },
   {
     "label": "Worked linear approximations",
@@ -15,7 +28,21 @@
       "Follow the tangent-line geometry",
       "Evaluate L at nearby points",
       "Check sqrt(1.1) approx 1.05"
-    ]
+    ],
+    "slice": {
+      "rule": "To evaluate $L$ at a point, plug it into the line. For $\\sqrt{x}$ linearized at 4, $L(4.1) = 2 + 0.025 = 2.025$. The accuracy fades as you move away from $a$, because the curve's curvature takes over.",
+      "examples": [
+        {
+          "item": "$\\sqrt{1.1}$ via $L$ at 4",
+          "says": "not valid — 1.1 is far from $a=4$, so the approximation is poor"
+        },
+        {
+          "item": "$\\sqrt{4.1}$ via $L$ at 4",
+          "says": "$2.025$ — a good approximation"
+        }
+      ],
+      "note": "Check the distance from $a$ before trusting the number."
+    }
   },
   {
     "label": "Linearization of exponentials",
@@ -24,6 +51,9 @@
       "Linearize e^x at x = 0",
       "Read off L(x) = 1 + x",
       "Note accuracy fades far from a"
-    ]
+    ],
+    "slice": {
+      "rule": "Linearizing $e^x$ at $x=0$ gives $L(x) = 1 + x$, since $f(0)=1$ and $f'(0)=1$. It is accurate near 0 and poor far from it: at $x=3$ it returns 4 against $e^3 \\approx 20$."
+    }
   }
 ]

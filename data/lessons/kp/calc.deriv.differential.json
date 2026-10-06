@@ -6,7 +6,17 @@
       "Form dy = f'(x)dx from the derivative",
       "Set dx = Δx for the independent variable",
       "Compute dy = 2x·dx for y = x^2"
-    ]
+    ],
+    "slice": {
+      "rule": "For $y = f(x)$, the differential is $dy = f'(x)\\,dx$. It is the change you would get by moving along the tangent line rather than along the curve. Setting $dx = \\Delta x$ and then comparing $dy$ against the true $\\Delta y$ measures how far the curve departs from its tangent.",
+      "examples": [
+        {
+          "item": "$y = x^2$ at $x = 3$ with $dx = 0.1$",
+          "says": "$dy = 2x\\,dx = 0.6$, against a true change of $3.1^2 - 3^2 = 0.61$"
+        }
+      ],
+      "note": "The two agree to the first order and part company beyond it, because the error term is second order in $dx$."
+    }
   },
   {
     "label": "Approximating change with dy",
@@ -15,7 +25,10 @@
       "Replace Δy by dy for small dx",
       "Evaluate dy at x = 3 with dx = 0.1",
       "Compare against the true (3.1)^2 - 9"
-    ]
+    ],
+    "slice": {
+      "rule": "For small $dx$, replace $\\Delta y$ by $dy$. The approximation gets better as $dx$ shrinks, so it is a tool for nearby points rather than a general rule. At $x=3$ for $y=x^2$ with $dx=0.1$, $dy = 0.6$ against an exact $0.61$ — close, and the gap is the curvature."
+    }
   },
   {
     "label": "Tangent-line meaning",
@@ -24,6 +37,9 @@
       "Read dy as rise along the tangent line",
       "Identify slope f'(x) with tan(alpha)",
       "Recover f'(x) = dy/dx as a ratio"
-    ]
+    ],
+    "slice": {
+      "rule": "Read $dy$ as the rise along the tangent line: its slope is $f'(x)$, which is the tangent of the angle the tangent line makes with the horizontal. Writing that slope as $\\frac{dy}{dx}$ recovers the derivative as a ratio, though $dy$ and $dx$ here are tied by the tangent, not free variables."
+    }
   }
 ]
