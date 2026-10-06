@@ -418,3 +418,51 @@ func allSvgs(t *testing.T, root string) []string {
 	})
 	return out
 }
+
+// The rune-at-a-time scan in BrokenImageRefs depends on two properties, and both are asserted
+// here rather than left as reasoning.
+//
+// This is *not* a regression test for a bug: the previous byte-at-a-time loop was lossless —
+// it compared bytes for equality and appended the index it was standing on, so it never
+// truncated anything. ADR-038 records the same false alarm on `cmd/latexfix`, where a test
+// written to prove byte iteration corrupted UTF-8 passed against the unfixed code. What the
+// change buys is a guarantee that is local to the loop instead of resting on the encoding.
+//
+// The two properties: a continuation byte can never be `[`, and the offsets returned are byte
+// offsets, because the caller turns them into line numbers by counting newlines.
+func TestBrokenImageRefsReportsByteOffsetsAroundMultibyteText(t *testing.T) {
+	body := "α β γ — an em dash and 2π/3, plus !π not a bracket.\n" +
+		"\n" +
+		"![legit](/diagrams/algebrica/a.svg)\n" +
+		"\n" +
+		"a bare ![ that never closes\n"
+
+	off := BrokenImageRefs(body)
+	if len(off) != 1 {
+		t.Fatalf("got %d broken references, want 1: %v", len(off), off)
+	}
+	// The `!π` on line 1 must not be mistaken for `![`, and the well-formed reference on
+	// line 3 must not be reported.
+	if got := string(body[off[0] : off[0]+2]); got != "![" {
+		t.Errorf("reported offset points at %q, want %q", got, "![")
+	}
+	if line := strings.Count(body[:off[0]], "\n") + 1; line != 5 {
+		t.Errorf("offset resolved to line %d, want 5 — offsets must be byte offsets", line)
+	}
+}
+
+// A continuation byte is >= 0x80, and `[` is 0x5B, so a multi-byte character can never be
+// mistaken for the opening bracket of an image reference. This is the property the loop's
+// `body[i+1]` lookup rests on, so it is asserted rather than argued.
+func TestContinuationByteIsNeverAnOpeningBracket(t *testing.T) {
+	for r := rune(0x80); r <= 0x10FFFF; r++ {
+		if r >= 0xD800 && r <= 0xDFFF { // surrogates are not encodable in UTF-8
+			continue
+		}
+		for _, b := range []byte(string(r)) {
+			if b >= 0x80 && b == '[' {
+				t.Fatalf("rune %U encodes a byte equal to '['", r)
+			}
+		}
+	}
+}
