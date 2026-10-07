@@ -28,8 +28,8 @@ scripts, Go, or documentation. This is not a style preference; see the reasons b
 
 - **`components/icons`.** Every icon in the app comes from that one module, which wraps
   `@animateicons/react` (the animated lucide set). Import from there and never from an icon
-  library directly — the wrapper is what pins the size to 16px and the colour to `currentColor`,
-  and the animated icons render a `<div>` whose default colour is not `currentColor`, so an icon
+  library directly — the wrapper is what pins the size to 16px and the color to `currentColor`,
+  and the animated icons render a `<div>` whose default color is not `currentColor`, so an icon
   added outside the wrapper does not follow light and dark mode and does not keep the collapsed
   44px sidebar rail even.
 - **Text.** A label beats a symbol most of the time. In tables, a word ("Yes", "Not stored")
