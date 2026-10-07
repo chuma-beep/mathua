@@ -50,6 +50,33 @@ describe('Header mobile nav menu', () => {
     expect(screen.queryAllByRole('menuitem')).toHaveLength(0)
   })
 
+  // The panel used to live inside `<div class="min-h-0 overflow-hidden">`, which is the CSS
+  // grid-collapse trick that hides the header on scroll. That clips absolutely positioned
+  // children, so on mobile the menu painted *behind* the page content instead of over it — the
+  // one thing a dropdown must never do, and one no assertion here would have caught because the
+  // panel was in the DOM and its links worked.
+  //
+  // The assertion is structural rather than visual: jsdom has no layout, so it cannot tell you
+  // what is painted on top. What it can check is that the panel is not a descendant of the
+  // clipping wrapper, which is the cause.
+  it('renders the nav panel outside the header row that clips it', () => {
+    render(<Header />)
+    fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }))
+    const panel = screen.getByRole('menu', { name: 'Site navigation' })
+
+    const clipper = document.querySelector('.overflow-hidden')
+    expect(clipper, 'the collapse wrapper should still exist; the animation needs it').not.toBeNull()
+    expect(clipper!.contains(panel)).toBe(false)
+
+    // It still has to be anchored to the header rather than the viewport, which is what the
+    // original `top-[calc(100%+8px)]` relative to the row achieved.
+    expect(panel.className).toMatch(/absolute/)
+    expect(panel.className).toMatch(/top-full/)
+    expect(panel.className).toMatch(/z-50/)
+    // Absolutely positioned against <header>, which is sticky and therefore a containing block.
+    expect(panel.closest('header')).not.toBeNull()
+  })
+
   it('opens the overflow links with correct hrefs on click', () => {
     render(<Header />)
     fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }))
