@@ -182,7 +182,14 @@ test('/profile keeps the tab bar, so it is not a dead end on mobile', async ({ p
   // Exactly one sidebar opener. The shell supplies it, but two branches also carried their own
   // copy from before the shell existed, and both rendered — so the page opened with two λ buttons
   // stacked at the top. A guard that only checks the tab bar would pass straight through that.
-  await expect(page.getByRole('button', { name: 'Toggle sidebar' })).toHaveCount(1)
+  const opener = page.getByRole('button', { name: 'Toggle sidebar' })
+  await expect(opener).toHaveCount(1)
+
+  // And it looks like a control rather than the wordmark. shadcn's SidebarTrigger defaults to a
+  // bare λ, which is the app logo sitting at the top-left behaving like a link — the same problem
+  // 114a3e25 fixed on the collapsed desktop rail, reached again through the mobile opener. The
+  // chevron is what makes it an affordance; assert it is present so it cannot quietly go back.
+  await expect(opener.locator('svg')).toHaveCount(1)
 
   // And it is live, not just painted: the tab bar is the way out.
   await page.getByRole('link', { name: 'Learn', exact: true }).last().click()
