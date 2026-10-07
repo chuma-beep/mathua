@@ -90,6 +90,24 @@ describe('toPlainAnswer', () => {
   })
 
 describe('fixImplicitLetterSpacing', () => {
+  it('preserves the word boundary in line segment', () => {
+    expect(toPlainAnswer('line segment')).toBe('line segment')
+  })
+
+  it('recovers explicit word spaces from MathLive for a bare alphabetic phrase', () => {
+    for (const c of corpus.cases.filter(c => c.expected === 'line segment')) {
+      expect(toPlainAnswer(c.plain, c.latex)).toBe('line segment')
+    }
+  })
+
+  it('does not recover word spaces inside mathematical expressions', () => {
+    expect(toPlainAnswer('2pi r', '2\\pi\\,r')).toBe('2pi r')
+    expect(toPlainAnswer('4(1)/(10)', '4\\frac{1}{10}')).toBe('4 1/10')
+    expect(toPlainAnswer('5 R 3', '5\\,R\\,3')).toBe('5 R 3')
+    // Explicitly separated variables must remain separate symbols.
+    expect(toPlainAnswer('x y', 'x\\,y')).toBe('x y')
+    expect(toPlainAnswer('(x + 1)/(y)', '\\frac{x+1}{y}')).toBe('(x + 1)/(y)')
+  })
   // MathLive reads bare adjacent letters as implicit multiplication and serialises them
   // with spaces. These are the answer shapes the corpus actually contains -- `yes` is the
   // single most common expected answer in it (673 occurrences), `no` second (171) -- and

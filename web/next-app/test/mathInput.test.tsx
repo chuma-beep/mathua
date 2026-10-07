@@ -94,6 +94,17 @@ describe('MathAnswerInput control selection', () => {
 })
 
 describe('MathAnswerInput answer flow', () => {
+  it('reports line segment intact from the MathLive multiple-choice field', async () => {
+    const seen: string[] = []
+    render(<MathAnswerInput value="" onChange={v => seen.push(v)} gradingType="multiple_choice" conceptId="geo.basic.points_lines" />)
+    const el = (await mathField()) as unknown as { value: string; getValue: (format?: string) => string }
+    // The real serializer recording is in mathlive-plain-text.json. The stub
+    // does not model implicit multiplication, so supply that recorded output.
+    vi.spyOn(el, 'getValue').mockReturnValue('l i n e s e g m e n t')
+    el.value = 'line\\,segment'
+    await waitFor(() => expect(seen[seen.length - 1]).toBe('line segment'))
+  })
+
   it('reports a plain string upward, not LaTeX', async () => {
     const seen: string[] = []
     render(<MathAnswerInput value="" onChange={v => seen.push(v)} gradingType="numeric" conceptId="arith.add.single" />)

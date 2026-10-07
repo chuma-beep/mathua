@@ -6,6 +6,23 @@ import (
 
 // Numeric grader
 
+func TestMultipleChoice_MultiWordAnswer(t *testing.T) {
+	r := NewRouter()
+	for _, tc := range []struct {
+		answer  string
+		correct bool
+	}{
+		{"line segment", true},
+		{" LINE SEGMENT ", true},
+		{"linesegment", false},
+		{"line", false},
+	} {
+		if got := r.Grade(GradingMultipleChoice, "line segment", tc.answer); got.Correct != tc.correct {
+			t.Errorf("answer %q: correct = %v, want %v", tc.answer, got.Correct, tc.correct)
+		}
+	}
+}
+
 func TestNumeric_Grade_IntegerMatch(t *testing.T) {
 	r := NewRouter()
 	for _, tc := range []struct{ expected, answer string }{

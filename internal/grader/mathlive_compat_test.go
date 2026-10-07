@@ -42,7 +42,8 @@ var (
 	// narrow enough to leave `(x + 1)/(y)` alone.
 	fractionParensRE = regexp.MustCompile(`\((-?[A-Za-z0-9.]+)\)/\((-?[A-Za-z0-9.]+)\)`)
 	nameSpacingRE    = regexp.MustCompile(`(?m)([\w)])\s+([(^])`)
-	letterRunRE      = regexp.MustCompile(`[A-Za-z](?: [A-Za-z])+`)
+	letterRunRE      = regexp.MustCompile(`\b[A-Za-z](?: [A-Za-z])+\b`)
+	wordPhraseRE     = regexp.MustCompile(`^[A-Za-z]+(?:\\,[A-Za-z]+)+$`)
 	letterRunOffset  = regexp.MustCompile(`[A-Za-z]`)
 	spaceRE          = regexp.MustCompile(` +`)
 )
@@ -52,7 +53,10 @@ var (
 // A second implementation on purpose: the value of this test is that two independent
 // implementations agree, and sharing the code would make that vacuous. So the guard
 // below is re-derived here rather than imported.
-func normalized(s string) string {
+func normalized(s string, latex ...string) string {
+	if len(latex) > 0 && wordPhraseRE.MatchString(latex[0]) {
+		return strings.ReplaceAll(latex[0], `\,`, " ")
+	}
 	s = strings.ReplaceAll(s, "-:", "/")
 	s = mixedNumbersRE.ReplaceAllString(s, "${1} ${2}/${3}")
 	s = fractionParensRE.ReplaceAllString(s, "${1}/${2}")
@@ -141,7 +145,7 @@ func TestMathlivePlainTextGradesLikeTheGenerator(t *testing.T) {
 		}
 		checked++
 		c := c
-		answer := normalized(c.Plain)
+		answer := normalized(c.Plain, c.LaTeX)
 		t.Run(c.GradingType+" "+c.LaTeX, func(t *testing.T) {
 			got := r.Grade(gt, c.Expected, answer)
 			if got.Unavailable {

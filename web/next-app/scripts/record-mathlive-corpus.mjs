@@ -111,6 +111,7 @@ const CASES = [
   ['multiple_choice', 'odd', 'odd'],
   ['multiple_choice', 'Z', 'Z'],
   ['multiple_choice', 'addition', 'addition'],
+  ['multiple_choice', 'line segment', '\\text{line segment}'],
   ['multiple_choice', '2', '2'],
   ['multiple_choice', '-1', '-1'],
 ]
@@ -142,6 +143,24 @@ async function main() {
   await page.goto(`http://localhost:${port}/`)
   await page.waitForFunction(() => window.__ready === true, { timeout: 30000 })
   const rows = await page.evaluate(() => window.__probe())
+  // Also record the physical spacebar path with Mathua's actual field options.
+  await page.evaluate(() => {
+    const mf = document.querySelector('math-field')
+    mf.value = ''
+    mf.inlineShortcuts = {}
+    mf.mathModeSpace = '\\,'
+    mf.mathVirtualKeyboardPolicy = 'manual'
+    mf.focus()
+  })
+  await page.waitForFunction(() => document.querySelector('math-field').hasFocus())
+  // MathLive installs its keyboard sink after the focus event settles.
+  await page.waitForTimeout(350)
+  await page.keyboard.type('line segment', { delay: 40 })
+  await page.waitForFunction(() => document.querySelector('math-field').value === 'line\\,segment')
+  rows.push(await page.evaluate(() => {
+    const mf = document.querySelector('math-field')
+    return { gradingType: 'multiple_choice', expected: 'line segment', latex: mf.value, plain: mf.getValue('plain-text') }
+  }))
   await browser.close()
   srv.close()
 

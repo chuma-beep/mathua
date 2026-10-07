@@ -274,6 +274,12 @@
     },
     {
       "gradingType": "multiple_choice",
+      "expected": "line segment",
+      "latex": "\\text{line segment}",
+      "plain": "line segment"
+    },
+    {
+      "gradingType": "multiple_choice",
       "expected": "2",
       "latex": "2",
       "plain": "2"
@@ -283,6 +289,12 @@
       "expected": "-1",
       "latex": "-1",
       "plain": "-1"
+    },
+    {
+      "gradingType": "multiple_choice",
+      "expected": "line segment",
+      "latex": "line\\,segment",
+      "plain": "l i n e s e g m e n t"
     }
   ]
 }

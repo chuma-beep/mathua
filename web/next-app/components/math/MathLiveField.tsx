@@ -156,7 +156,7 @@ export default function MathLiveField({
     if (!el) return
     const latex = el.value ?? ''
     lastPushed.current = latex
-    onChangeRef.current({ latex, plainAnswer: toPlainAnswer(el.getValue('plain-text') ?? '') })
+    onChangeRef.current({ latex, plainAnswer: toPlainAnswer(el.getValue('plain-text') ?? '', latex) })
     onLatexRef.current?.(latex)
   }, [])
 

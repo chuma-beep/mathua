@@ -52,8 +52,9 @@ export function fixNameSpacing(s: string): string {
   return s.replace(SPACE_BEFORE_CALL_OR_POW, '')
 }
 
-// A run of adjacent single letters separated by single spaces.
-const LETTER_RUN = /[A-Za-z](?: [A-Za-z])+/g
+// A run of complete single-letter tokens, never fragments of intact words.
+// Without the boundaries, the `e s` in `line segment` loses its word space.
+const LETTER_RUN = /\b[A-Za-z](?: [A-Za-z])+\b/g
 
 /**
  * Rejoin a word the learner's keyboard split into letters.
@@ -94,7 +95,14 @@ export function fixImplicitLetterSpacing(s: string): string {
  * format to what a plain `<input>` produced; only the fidelity improves, so a
  * structured fraction or exponent now grades instead of erroring.
  */
-export function toPlainAnswer(plainText: string): string {
+export function toPlainAnswer(plainText: string, latex?: string): string {
+  // MathLive serializes both implicit letter products and explicit `\\,` spaces
+  // as one space. Recover word boundaries only for a bare alphabetic phrase:
+  // numbers, operators and commands must still take the mathematical path below.
+  // `\\,` is exactly what MathLiveField inserts for a spacebar press.
+  if (latex && /^[A-Za-z]+(?:\\,[A-Za-z]+)+$/.test(latex)) {
+    return latex.replace(/\\,/g, ' ')
+  }
   // Last, so it sees the text the other rules produced. Running it first would work on
   // a string `fixMixedNumbers` was about to rewrite.
   return fixImplicitLetterSpacing(
