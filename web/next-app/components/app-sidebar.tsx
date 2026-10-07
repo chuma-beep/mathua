@@ -6,6 +6,7 @@ import {
   BookOpen,
   ChartNoAxesColumn,
   ChevronsLeft,
+  ChevronsRight,
   FileText,
   Handshake,
   Layers,
@@ -91,15 +92,25 @@ export function AppSidebar({
     <Sidebar collapsible="icon" data-testid="profile-sidebar">
       <SidebarHeader>
         <div className="flex items-center gap-1">
-          {/* Collapsed rail: brand mark doubles as expand toggle */}
+          {/* Collapsed rail: the brand mark doubles as the expand toggle, so it has to *look*
+              like a control. Expanded, `λ Mathua` is a link to the hub — the conventional
+              meaning of a logo — and a separate chevron collapses it. Collapsed, that same λ
+              becomes a button, which means the identical glyph is a destination in one state and
+              an action in the other. `aria-label` and `title` were the only things saying so, and
+              both need a hover, so the role was communicated to nobody until they tapped it.
+
+              The chevron mirrors the collapse chevron: expand and collapse look like the same kind
+              of control pointing opposite ways, which is the convention and, unlike convention
+              alone, it is visible before you press anything. */}
           <button
             type="button"
             onClick={toggleSidebar}
             aria-label="Expand sidebar"
             title="Expand sidebar"
-            className="hidden size-11 shrink-0 items-center justify-center font-mono text-sm text-mathua-blue hover:bg-sidebar-accent group-data-[collapsible=icon]:flex"
+            className="hidden size-11 shrink-0 flex-col items-center justify-center gap-0.5 font-mono text-sm text-mathua-blue hover:bg-sidebar-accent group-data-[collapsible=icon]:flex"
           >
             <span aria-hidden="true">λ</span>
+            <ChevronsRight size={10} className="text-mathua-muted" />
           </button>
           <SidebarMenu className="min-w-0 flex-1 group-data-[collapsible=icon]:hidden">
             <SidebarMenuItem>

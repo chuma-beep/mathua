@@ -118,6 +118,25 @@ describe('AppSidebar', () => {
     }
   })
 
+  // The collapsed rail shows the brand mark as the expand toggle, so the identical glyph is a
+  // destination when expanded (a link to the hub) and an action when collapsed. `aria-label` and
+  // `title` were the only signals, and both need a hover — so the control's role was communicated
+  // to nobody until they pressed it. The chevron is what makes it visible first.
+  it('shows an expand affordance on the collapsed rail, not just a hover-only tooltip', () => {
+    const { container } = renderSidebar()
+    const toggle = container.querySelector('button[aria-label="Expand sidebar"]')
+    expect(toggle).not.toBeNull()
+
+    // A visible chevron inside the control, mirroring the collapse chevron in the expanded state.
+    const chevron = toggle!.querySelector('svg')
+    expect(chevron, 'the collapsed toggle needs a visible glyph, not only a title attribute').not.toBeNull()
+
+    // And the brand mark stays: dropping it would leave a rail with no identity at all.
+    expect(toggle!.textContent).toContain('λ')
+    // 44px, matching every other tap target in the app. It was size-11 already and stays so.
+    expect(toggle!.className).toMatch(/size-11/)
+  })
+
   it('menu labels hide in icon-collapse mode (icons only, no text peek)', () => {
     renderSidebar()
     const sidebar = screen.getByTestId('profile-sidebar')
