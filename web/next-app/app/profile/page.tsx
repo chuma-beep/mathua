@@ -12,6 +12,7 @@ import ActivityHeatmap from '../../components/ActivityHeatmap'
 import StrugglesSection from '../../components/StrugglesSection'
 import ProfileSkeleton from '../../components/skeletons/ProfileSkeleton'
 import { AppSidebar, type AppSidebarProps } from '../../components/app-sidebar'
+import { ChevronsRight } from '../../components/icons'
 import BottomTabs from '../../components/BottomTabs'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '../../components/ui/sidebar'
 import NextUpSummary from '../../components/NextUpSummary'
@@ -47,8 +48,17 @@ function ProfileShell({
       <SidebarProvider>
         <AppSidebar {...sidebarProps} />
         <SidebarInset>
+          {/* The opener for the overlay sheet, dressed as the same control the collapsed desktop
+              rail uses: λ over a right-pointing chevron. shadcn's SidebarTrigger defaults to a bare
+              λ, which on mobile is the app's logo sitting at the top-left behaving like a wordmark
+              rather than a button — the exact thing 114a3e25 fixed on the desktop rail and the
+              reason this opener was missed here. On mobile the nav slides in from the left, so
+              right is also the honest direction for it to point. */}
           <div className="mb-2 flex justify-start md:hidden px-4 sm:px-6 pt-8">
-            <SidebarTrigger variant="ghost" />
+            <SidebarTrigger variant="ghost" className="flex-col gap-0.5">
+              <span aria-hidden="true" className="font-mono text-sm text-mathua-blue">λ</span>
+              <ChevronsRight size={10} className="text-mathua-muted" />
+            </SidebarTrigger>
           </div>
           {children}
         </SidebarInset>
