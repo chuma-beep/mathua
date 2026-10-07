@@ -260,11 +260,6 @@ export default function ProfilePage() {
     return (
       <ProfileShell name="Guest" studentId={getGuestId() || 'guest'}>
           <div id="profile-main" className="mx-auto w-full max-w-[820px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
-          {/* Mobile only: sidebar is an overlay sheet, so content needs an opener.
-              Desktop toggles from the sidebar header + edge rail. */}
-          <div className="mb-2 flex justify-start md:hidden">
-            <SidebarTrigger variant="ghost" />
-          </div>
           <div className="border border-mathua-border p-6 text-center bg-mathua-surface min-w-0">
             <h2 className="font-serif text-[1.2rem] text-mathua-primary mb-2">Welcome to your profile</h2>
             <p className="font-mono text-xs text-mathua-secondary mb-4">Sign in to track XP, streaks and mastery. Your activity heatmap will appear here once you start practicing.</p>
@@ -367,11 +362,6 @@ export default function ProfilePage() {
           Skip to profile content
         </a>
         <div id="profile-main" className="mx-auto w-full max-w-[820px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
-          {/* Mobile only: sidebar is an overlay sheet, so content needs an opener.
-              Desktop toggles from the sidebar header + edge rail. */}
-          <div className="mb-2 flex justify-start md:hidden">
-            <SidebarTrigger variant="ghost" />
-          </div>
           <div className="min-w-0">
         {/* Profile stats — mobile-first */}
         <ProfileStats
