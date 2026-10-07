@@ -40,8 +40,6 @@ export default function QuizHost() {
   const [quizAnswerInput, setQuizAnswerInput] = useState('')
   const [quizLastResult, setQuizLastResult] = useState<{ correct: boolean; feedback: string; explanation?: string; diagnosis?: string; xp?: number } | null>(null)
   const [quizAccuracy, setQuizAccuracy] = useState({ correct: 0, total: 0 })
-  const [quizTimeLimit, setQuizTimeLimit] = useState(0)
-  const [quizRemaining, setQuizRemaining] = useState(0)
   const [quizClosedBook, setQuizClosedBook] = useState(false)
   const [quizQuestionsTotal, setQuizQuestionsTotal] = useState(0)
   const [quizRemedial, setQuizRemedial] = useState<string[]>([])
@@ -55,7 +53,6 @@ export default function QuizHost() {
     question: string
     conceptId: string
     conceptName: string
-    timeLimit: number
     gradingType: string
   } | null>(null)
 
@@ -79,8 +76,6 @@ export default function QuizHost() {
       setQuizAccuracy({ correct: 0, total: 0 })
       setQuizLastResult(null)
       setQuizAnswerInput('')
-      setQuizTimeLimit(res.time_limit_seconds ?? 0)
-      setQuizRemaining(res.time_limit_seconds ?? 0)
       setQuizClosedBook(!!res.closed_book)
       setQuizQuestionsTotal(res.questions_total ?? 0)
       setQuizRemedial([])
@@ -107,14 +102,6 @@ export default function QuizHost() {
   useEffect(() => {
     if (phase === 'quiz' && !quizLastResult && quizQuestion) quizInputRef.current?.focus()
   }, [phase, quizLastResult, quizQuestion])
-  useEffect(() => {
-    if (phase !== 'quiz' || quizLastResult || quizTimeLimit <= 0) return
-    const started = quizShownAt.current ?? Date.now()
-    const tick = () => setQuizRemaining(Math.max(0, quizTimeLimit - (Date.now() - started) / 1000))
-    tick()
-    const id = window.setInterval(tick, 250)
-    return () => window.clearInterval(id)
-  }, [phase, quizLastResult, quizTimeLimit, quizQuestion])
 
   async function submitQuizAnswerFn(dontKnow = false) {
     if (!dontKnow && !quizAnswerInput.trim()) return
@@ -147,7 +134,6 @@ export default function QuizHost() {
         question: data.question || '',
         conceptId: data.concept_id || '',
         conceptName: data.concept_name || '',
-        timeLimit: data.time_limit_seconds ?? 0,
         gradingType: data.grading_type || '',
       }
       setLoading(false)
@@ -157,7 +143,7 @@ export default function QuizHost() {
     }
   }
 
-  function applyQuizQuestion(question: string, cid: string, name: string, timeLimit: number, gradingType: string) {
+  function applyQuizQuestion(question: string, cid: string, name: string, gradingType: string) {
     setQuizQuestion(question)
     quizConceptId.current = cid
     quizShownAt.current = Date.now()
@@ -165,8 +151,6 @@ export default function QuizHost() {
     setQuizCount(prev => prev + 1)
     setQuizLastResult(null)
     setQuizAnswerInput('')
-    setQuizTimeLimit(timeLimit)
-    setQuizRemaining(timeLimit)
     setAnswerFormat(formatForGradingType(gradingType))
     quizGradingType.current = gradingType
     setSubmitError(null)
@@ -192,7 +176,6 @@ export default function QuizHost() {
         data.question || '',
         data.concept_id || '',
         data.concept_name || '',
-        data.time_limit_seconds ?? 0,
         data.grading_type || '',
       )
     } catch (e) {
@@ -213,7 +196,7 @@ export default function QuizHost() {
     const staged = pendingQuizNext.current
     if (!staged) return
     pendingQuizNext.current = null
-    applyQuizQuestion(staged.question, staged.conceptId, staged.conceptName, staged.timeLimit, staged.gradingType)
+    applyQuizQuestion(staged.question, staged.conceptId, staged.conceptName, staged.gradingType)
   }
 
   if (phase === 'intro') {
@@ -299,11 +282,6 @@ export default function QuizHost() {
           <span className={quizAccuracy.correct / Math.max(quizAccuracy.total, 1) >= 0.7 ? 'text-mathua-green' : ''}>{quizAccuracy.correct}/{quizAccuracy.total} correct</span>
           {quizLastResult?.xp ? <span className="text-yellow-400">+{quizLastResult.xp} XP (TaskQuiz 20)</span> : null}
           {quizClosedBook ? <span className="text-mathua-muted">Closed book</span> : null}
-          {quizTimeLimit > 0 && !quizLastResult ? (
-            <span className={quizRemaining <= 0 ? 'text-mathua-red' : quizRemaining <= 3 ? 'text-yellow-400' : 'text-mathua-muted'}>
-              {quizRemaining <= 0 ? 'Time up (counts as slow)' : `${Math.ceil(quizRemaining)}s`}
-            </span>
-          ) : null}
         </div>
         <div className={`bg-mathua-surface border rounded-none p-4 sm:p-6 mb-6 transition-colors w-full max-w-full min-w-0 overflow-hidden ${quizLastResult ? (quizLastResult.correct ? 'border-mathua-green-faint' : 'border-mathua-red-faint') : 'border-mathua-border'}`}>
           <div className="bg-mathua-code border border-mathua-border rounded-none p-4 sm:p-6 text-center mb-4">
