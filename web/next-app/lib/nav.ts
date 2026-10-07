@@ -38,6 +38,9 @@ export const REVIEW_LINKS: NavLink[] = [{ label: 'Review', href: '/review' }]
 export const DISPLAY_LINKS: NavLink[] = [
   { label: 'Study', href: '/study' },
   { label: 'Graph', href: '/graph' },
+  // Not a bottom tab — the tab bar stays at five — so /domains reaches mobile through the
+  // compass overflow, which is derived from this list by subtracting TAB_HREFS.
+  { label: 'Domains', href: '/domains' },
   { label: 'Leaderboard', href: '/leaderboard' },
 ]
 

@@ -5,15 +5,8 @@ import Link from 'next/link'
 import type { GoalPlanRes } from '../lib/api'
 import { getLessons } from '../lib/api'
 import { getUserInfo } from '../lib/auth'
+import { domainLabel } from '../lib/graphDomains'
 
-const DOMAIN_LABELS = {
-  arithmetic: 'Arithmetic', fractions: 'Fractions', prealgebra: 'Pre-Algebra',
-  algebra: 'Algebra', geometry: 'Geometry', trigonometry: 'Trigonometry',
-  complex_numbers: 'Complex Numbers', precalculus: 'Precalculus', calculus: 'Calculus',
-  linear_algebra: 'Linear Algebra', statistics: 'Statistics', discrete_math: 'Discrete Math',
-  number_theory: 'Number Theory', differential_equations: 'Differential Equations',
-  abstract_algebra: 'Abstract Algebra', topology: 'Topology',
-} satisfies Record<string, string>
 
 interface Props {
   plan: GoalPlanRes
@@ -84,7 +77,7 @@ export default function DiagnosticResults({ plan, onStartPractice }: Props) {
 
       <div className="space-y-3 mb-8">
         {Array.from(domains).sort().map((domain) => {
-          const label = DOMAIN_LABELS[domain] || domain
+          const label = domainLabel(domain)
           const weak = plan.weak_areas[domain] || []
           const strong = plan.strong_areas[domain] || []
           const total = weak.length + strong.length
@@ -142,7 +135,7 @@ export default function DiagnosticResults({ plan, onStartPractice }: Props) {
           <div className="grid gap-2">
             {Object.entries(recommended).map(([domain, lessons]) => (
               <div key={domain} className="border border-mathua-border p-3 bg-mathua-surface-elevated">
-                <p className="font-mono text-[11px] uppercase text-mathua-muted mb-2">{DOMAIN_LABELS[domain] || domain}</p>
+                <p className="font-mono text-[11px] uppercase text-mathua-muted mb-2">{domainLabel(domain)}</p>
                 <div className="space-y-1">
                   {lessons.map((l) => (
                     <Link key={l.title} href={`/study?lesson=${encodeURIComponent(l.title)}`} className="block font-mono text-xs text-mathua-blue hover:text-mathua-blue-hover">

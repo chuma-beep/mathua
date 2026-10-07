@@ -9,7 +9,6 @@ import { getActivity, getProgress, getWeaknesses, getDueReviews, getEfficacy, ge
 import type { DailyActivity, Scores, WeaknessRes, ConceptProgress, EfficacyReport } from '../../lib/api'
 import ProfileStats from '../../components/ProfileStats'
 import ActivityHeatmap from '../../components/ActivityHeatmap'
-import DomainProgress from '../../components/DomainProgress'
 import StrugglesSection from '../../components/StrugglesSection'
 import ProfileSkeleton from '../../components/skeletons/ProfileSkeleton'
 import { AppSidebar } from '../../components/app-sidebar'
@@ -299,11 +298,6 @@ export default function ProfilePage() {
             </div>
           </section>
 
-          <section id="domains" aria-label="By domain" className="mt-8 min-w-0 scroll-mt-28">
-            <div className="grid grid-cols-1 gap-4 min-w-0">
-              <DomainProgress progress={progress} />
-            </div>
-          </section>
           </div>
         </SidebarInset>
       </SidebarProvider>
@@ -526,12 +520,6 @@ export default function ProfilePage() {
           </div>
         </section>
 
-        <section id="domains" aria-label="By domain" className="mt-8 min-w-0 scroll-mt-28">
-          <h2 className="font-serif text-[1.05rem] font-normal text-mathua-primary mb-4">
-            By domain
-          </h2>
-          <DomainProgress progress={progress} />
-        </section>
 
         {efficacy && efficacy.concepts_touched > 0 && (
           <section id="how-doing" aria-label="How you are doing" className="mt-8 min-w-0 scroll-mt-28">

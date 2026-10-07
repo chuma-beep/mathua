@@ -17,6 +17,7 @@ import QuizHost from './QuizHost'
 import DiagnosticHost from './DiagnosticHost'
 import BriefingCard, { DIAGNOSTIC_BRIEFING } from '../../components/BriefingCard'
 import { GOALS_DIAG_KEY } from './constants'
+import { DOMAIN_ORDER, domainLabel } from '../../lib/graphDomains'
 
 type Step = 'select' | 'diagnostic' | 'results' | 'quiz'
 
@@ -27,24 +28,6 @@ interface DomainInfo {
   selected: boolean
 }
 
-const domainLabels = {
-  arithmetic: 'Arithmetic',
-  fractions: 'Fractions',
-  prealgebra: 'Pre-Algebra',
-  algebra: 'Algebra',
-  geometry: 'Geometry',
-  trigonometry: 'Trigonometry',
-  complex_numbers: 'Complex Numbers',
-  precalculus: 'Precalculus',
-  calculus: 'Calculus',
-  linear_algebra: 'Linear Algebra',
-  statistics: 'Statistics',
-  discrete_math: 'Discrete Math',
-  number_theory: 'Number Theory',
-  differential_equations: 'Differential Equations',
-  abstract_algebra: 'Abstract Algebra',
-  topology: 'Topology',
-} satisfies Record<string, string>
 
 function GoalConfirmReview({
   domains,
@@ -58,7 +41,7 @@ function GoalConfirmReview({
   onCancel: () => void
 }) {
   const selected = domains.filter(d => d.selected)
-  const shown = selected.slice(0, 3).map(d => domainLabels[d.name] || d.name)
+  const shown = selected.slice(0, 3).map(d => domainLabel(d.name))
   const extra = selected.length > 3 ? ` +${selected.length - 3} more` : ''
   return (
     <div className="max-w-2xl mx-auto px-2">
@@ -154,7 +137,8 @@ function GoalsContent() {
       })
     })
     result.sort((a, b) => {
-      const order = ['arithmetic', 'fractions', 'prealgebra', 'algebra', 'geometry', 'trigonometry', 'complex_numbers', 'precalculus', 'calculus', 'linear_algebra', 'statistics', 'discrete_math', 'number_theory', 'differential_equations', 'abstract_algebra', 'topology']
+      // Widened: DOMAIN_ORDER is `as const`, so indexOf(a.string) will not compile.
+      const order: string[] = [...DOMAIN_ORDER]
       return order.indexOf(a.name) - order.indexOf(b.name)
     })
     setDomains(result)
@@ -223,7 +207,7 @@ function GoalsContent() {
 
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3 max-w-4xl mx-auto mb-8 min-w-0">
                 {domains.map(d => {
-                  const label = domainLabels[d.name] || d.name
+                  const label = domainLabel(d.name)
                   return (
                     <button
                       type="button"

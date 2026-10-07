@@ -3,31 +3,13 @@
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import type { WeaknessRes } from '../lib/api'
+import { domainLabel } from '../lib/graphDomains'
 
 interface Props {
   weaknesses: WeaknessRes | null
 }
 
-const DOMAIN_LABELS = {
-  arithmetic: 'Arithmetic',
-  fractions: 'Fractions',
-  prealgebra: 'Pre-Algebra',
-  algebra: 'Algebra',
-  geometry: 'Geometry',
-  trigonometry: 'Trigonometry',
-  calculus: 'Calculus',
-  statistics: 'Statistics',
-  linear_algebra: 'Linear Algebra',
-  discrete_math: 'Discrete Math',
-  complex_numbers: 'Complex Numbers',
-  number_theory: 'Number Theory',
-  differential_equations: 'Differential Equations',
-  abstract_algebra: 'Abstract Algebra',
-  topology: 'Topology',
-  machine_learning: 'Machine Learning',
-  machinelearning: 'Machine Learning',
-  precalculus: 'Precalculus',
-} satisfies Record<string, string>
+
 
 function tierFor(w: number) {
   if (w >= 0.6) return { label: 'Struggling', color: '#ef4444' }
@@ -147,7 +129,7 @@ export default function StrugglesSection({ weaknesses }: Props) {
                       <span className="w-10 h-1 bg-mathua-border shrink-0">
                         <span className="block h-full transition-all" style={{ width: `${Math.round(maxW * 100)}%`, background: tier.color }} />
                       </span>
-                      <span className="flex-1 min-w-0 truncate text-mathua-primary text-[11px]">{DOMAIN_LABELS[domain] ?? domain}</span>
+                      <span className="flex-1 min-w-0 truncate text-mathua-primary text-[11px]">{domainLabel(domain)}</span>
                       <span className="shrink-0 text-mathua-muted text-[10px]">{items.length} weak</span>
                       <span className="shrink-0 text-mathua-muted text-[11px]">{isOpen ? '▾' : '▸'}</span>
                     </button>
