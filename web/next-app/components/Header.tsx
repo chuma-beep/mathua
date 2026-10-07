@@ -3,8 +3,7 @@
 import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
-import { CompassIcon, type CompassIconHandle } from './icons/compass'
-import { SunMoonIcon, type SunMoonIconHandle } from './icons/sun-moon'
+import { Compass, SunMoon, type IconHandle } from './icons'
 import { useTheme } from '../hooks/useTheme'
 import { useAuthState } from '../hooks/useAuthState'
 import { useChrome } from '../hooks/useChrome'
@@ -37,8 +36,8 @@ export default function Header({ links }: HeaderProps) {
   const [avatarPreset, setAvatarPreset] = useState<number | null>(null)
   const menuRef = useRef<HTMLDivElement>(null)
   const navMenuRef = useRef<HTMLDivElement>(null)
-  const compassRef = useRef<CompassIconHandle>(null)
-  const sunMoonRef = useRef<SunMoonIconHandle>(null)
+  const compassRef = useRef<IconHandle>(null)
+  const sunMoonRef = useRef<IconHandle>(null)
 
   function prefersReducedMotion(): boolean {
     return (
@@ -161,7 +160,7 @@ export default function Header({ links }: HeaderProps) {
                 aria-label="Toggle theme"
                 className="flex items-center justify-center min-h-[44px] min-w-[44px] text-mathua-muted bg-transparent border-none cursor-pointer hover:text-mathua-blue transition-colors"
               >
-                <SunMoonIcon ref={sunMoonRef} size={15} aria-hidden="true" />
+                <SunMoon ref={sunMoonRef} size={15} isAnimated={false} />
               </button>
             )}
             {/* Mobile nav: bare compass mark. Overflow only
@@ -175,7 +174,7 @@ export default function Header({ links }: HeaderProps) {
                   aria-haspopup="menu"
                   className="flex items-center justify-center min-h-[44px] min-w-[44px] text-mathua-muted bg-transparent border-none cursor-pointer hover:text-mathua-blue transition-colors"
                 >
-                  <CompassIcon ref={compassRef} size={15} aria-hidden="true" />
+                  <Compass ref={compassRef} size={15} isAnimated={false} />
                 </button>
                 {navOpen && (
                   <div

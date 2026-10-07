@@ -16,11 +16,9 @@ import path from 'node:path'
 // list that silently omits a domain, because that is indistinguishable from a domain that does
 // not exist.
 
-// test/ -> next-app -> repo root. Getting this wrong makes every assertion below pass vacuously,
-// because the scan then visits nothing and finds nothing — which is what the first version of
-// test/noEmoji.test.ts did.
-const REPO = path.resolve(__dirname, '..', '..', '..')
-const ROOT = path.join(REPO, 'web', 'next-app')
+// Roots come from the shared helper; getting them wrong makes every assertion below pass
+// vacuously, because the scan then visits nothing.
+import { APP_ROOT as ROOT, REPO_ROOT as REPO } from './helpers/roots'
 const AUTHORED_DIRS = ['app', 'components', 'lib']
 const CANONICAL = path.join(ROOT, 'lib', 'graphDomains.ts')
 

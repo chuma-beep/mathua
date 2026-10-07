@@ -16,7 +16,7 @@ import { getSettings, getScores, updateSettings, updateProfileName, changePasswo
 import { isLoggedIn, getUserInfo, setUserInfo } from '../../lib/auth'
 import { DICEBEAR_STYLES, dicebearUrl, randomDicebear, type DicebearPick } from '../../lib/dicebear'
 import { Switch } from '../../components/ui/switch'
-import { Dices } from 'lucide-react'
+import { Dices } from '../../components/icons'
 import Loading from '../../components/Loading'
 import Avatar from '../../components/Avatar'
 

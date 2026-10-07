@@ -3,14 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect, useRef } from 'react'
-import {
-  House,
-  BookOpen,
-  Play,
-  User,
-  Network,
-  type LucideIcon,
-} from 'lucide-react'
+import { BookOpen, House, Network, Play, User, type IconComponent } from './icons'
 import { useChrome } from '../hooks/useChrome'
 import { useInertWhen } from '../hooks/useInertWhen'
 import { registerChromePart } from '../lib/chrome'
@@ -22,7 +15,7 @@ import Avatar from './Avatar'
 // Learn before Study: the tab bar is the mobile primary nav, and Learn is the
 // only tab that asks a question. Study stays — it is how a learner looks up a
 // concept they have just met. Order is mirrored in lib/nav.ts.
-const TABS: { label: string; href: string; icon: LucideIcon }[] = [
+const TABS: { label: string; href: string; icon: IconComponent }[] = [
   { label: 'Home', href: '/', icon: House },
   { label: 'Learn', href: '/learn', icon: Play },
   { label: 'Study', href: '/study', icon: BookOpen },
@@ -109,7 +102,7 @@ export default function BottomTabs() {
                 />
               </span>
             ) : (
-              <Icon size={18} strokeWidth={2} aria-hidden="true" />
+              <Icon size={18} />
             )}
             <span className="text-[9px] uppercase tracking-wide">{t.label}</span>
           </Link>

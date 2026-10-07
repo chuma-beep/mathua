@@ -7,16 +7,16 @@ import {
   ChartNoAxesColumn,
   ChevronsLeft,
   FileText,
-  HeartHandshake,
+  Handshake,
   Layers,
   LogOut,
   Network,
-  PenLine,
+  Pencil,
   Play,
   Settings,
   Trophy,
-  type LucideIcon,
-} from 'lucide-react'
+  type IconComponent,
+} from './icons'
 import {
   Sidebar,
   SidebarContent,
@@ -41,8 +41,10 @@ import { signOut } from '../lib/auth'
 // the full destination list lives; putting it here as well would be exactly the
 // duplication this rule exists to prevent.
 // Order mirrors lib/nav.ts: Learn leads, then Study as the reference surface.
-// Lucide icons (fixed size-4 box) so the collapsed 44px icon rail stays even.
-const NAV_ITEMS: { label: string; href: string; icon: LucideIcon }[] = [
+// Icons come from components/icons, which fixes the box at 16px. The animated set renders a
+// div rather than an svg, so a `size-4` class here would silently size nothing and the
+// collapsed 44px rail would go ragged.
+const NAV_ITEMS: { label: string; href: string; icon: IconComponent }[] = [
   { label: 'Learn', href: '/learn', icon: Play },
   { label: 'Study', href: '/study', icon: BookOpen },
   { label: 'Graph', href: '/graph', icon: Network },
@@ -54,10 +56,10 @@ const NAV_ITEMS: { label: string; href: string; icon: LucideIcon }[] = [
 
 // Resources group: docs, contributing, creator's note. Informational pages
 // only — never Diagnostic / Quiz / Review (no CTA duplication).
-const RESOURCE_ITEMS: { label: string; href: string; icon: LucideIcon }[] = [
+const RESOURCE_ITEMS: { label: string; href: string; icon: IconComponent }[] = [
   { label: 'Docs', href: '/docs', icon: FileText },
-  { label: 'Contribute', href: '/docs/contributing', icon: HeartHandshake },
-  { label: "Creator's note", href: '/note', icon: PenLine },
+  { label: 'Contribute', href: '/docs/contributing', icon: Handshake },
+  { label: "Creator's note", href: '/note', icon: Pencil },
 ]
 
 interface AppSidebarProps {
@@ -117,7 +119,7 @@ export function AppSidebar({
             title="Collapse sidebar"
             className="flex size-8 shrink-0 items-center justify-center text-mathua-muted hover:bg-sidebar-accent hover:text-mathua-blue group-data-[collapsible=icon]:hidden"
           >
-            <ChevronsLeft aria-hidden="true" className="size-4" />
+            <ChevronsLeft />
           </button>
         </div>
       </SidebarHeader>
@@ -134,7 +136,7 @@ export function AppSidebar({
                   <SidebarMenuItem key={item.href}>
                     <SidebarMenuButton asChild isActive={active} tooltip={item.label}>
                       <Link href={item.href}>
-                        <Icon aria-hidden="true" className="size-4 shrink-0" />
+                        <Icon className="shrink-0" />
                         <span className="group-data-[collapsible=icon]:hidden">{item.label}</span>
                       </Link>
                     </SidebarMenuButton>
@@ -158,7 +160,7 @@ export function AppSidebar({
                   <SidebarMenuItem key={item.href}>
                     <SidebarMenuButton asChild isActive={active} tooltip={item.label}>
                       <Link href={item.href}>
-                        <Icon aria-hidden="true" className="size-4 shrink-0" />
+                        <Icon className="shrink-0" />
                         <span className="group-data-[collapsible=icon]:hidden">{item.label}</span>
                       </Link>
                     </SidebarMenuButton>
