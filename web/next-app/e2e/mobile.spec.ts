@@ -155,16 +155,35 @@ test('chrome control appears wherever there is chrome, and only there', async ({
   await expect(page.getByTestId('chrome-toggle')).toBeVisible()
   await expect(page.getByTestId('chrome-tap-strip')).toHaveCount(1)
 
-  // /profile has neither a header nor a tab bar on mobile, so a control there
-  // would hide nothing.
+  // /profile used to assert the opposite: no control, because it had neither a header nor a tab
+  // bar on mobile. That was not a design decision — it was the bug. The page's shell replaced
+  // Header and BottomTabs with a desktop-only sidebar, so arriving at /profile from any other
+  // page's tab bar left a learner with no way back. The tab bar is back, so there is chrome here,
+  // and the control has something to hide.
   await page.goto('/profile')
-  await expect(page.getByTestId('chrome-toggle')).toHaveCount(0)
-  await expect(page.getByTestId('chrome-tap-strip')).toHaveCount(0)
+  await expect(page.getByTestId('chrome-toggle')).toBeVisible()
+  await expect(page.getByTestId('chrome-tap-strip')).toHaveCount(1)
 })
 
 // Hiding is a small control on the bar's edge; getting it back is a tap
 // anywhere along the bottom of the screen, because that is the gesture you
 // reach for mid-scroll.
+// The reported bug, stated as an assertion: /profile is reachable from every other page's tab
+// bar, so arriving there must not end navigation. It did — the page's shell replaced Header and
+// BottomTabs with a sidebar that shadcn renders as an overlay sheet below lg, which left one small
+// ghost trigger and no tabs. The structural guard for this is in test/navCoverage.test.ts; this is
+// the same thing checked on a real phone viewport, through the real tab bar.
+test('/profile keeps the tab bar, so it is not a dead end on mobile', async ({ page }) => {
+  await page.goto('/profile')
+  for (const label of ['Home', 'Learn', 'Study', 'Graph']) {
+    await expect(page.getByRole('link', { name: label, exact: true }).last()).toBeVisible()
+  }
+
+  // And it is live, not just painted: the tab bar is the way out.
+  await page.getByRole('link', { name: 'Learn', exact: true }).last().click()
+  await expect(page).toHaveURL(/\/learn/)
+})
+
 test('the bottom edge brings the chrome back, and only while it is hidden', async ({ page }) => {
   await page.goto('/how-it-works')
   const header = page.locator('header')

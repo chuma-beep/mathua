@@ -11,7 +11,8 @@ import ProfileStats from '../../components/ProfileStats'
 import ActivityHeatmap from '../../components/ActivityHeatmap'
 import StrugglesSection from '../../components/StrugglesSection'
 import ProfileSkeleton from '../../components/skeletons/ProfileSkeleton'
-import { AppSidebar } from '../../components/app-sidebar'
+import { AppSidebar, type AppSidebarProps } from '../../components/app-sidebar'
+import BottomTabs from '../../components/BottomTabs'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '../../components/ui/sidebar'
 import NextUpSummary from '../../components/NextUpSummary'
 import PositionBlock from '../../components/PositionBlock'
@@ -29,6 +30,34 @@ interface UserInfo {
   current_streak: number
   level: string
   diagnostic_completed: boolean
+}
+
+// Every branch below returns through this. /profile used to repeat
+// <SidebarProvider>…</SidebarProvider> in some return paths and nothing at all in others, and
+// the chrome was opt-in per branch. That is how this page ended up with no mobile navigation
+// and no theme control: three of the six paths — both error paths and the "Loading scores…"
+// wait — simply opted out, and the tab bar was never restored when BottomTabs came back. Wrapping
+// once makes a bare branch impossible to write by accident, which is the failure itself.
+function ProfileShell({
+  children,
+  ...sidebarProps
+}: { children: React.ReactNode } & AppSidebarProps) {
+  return (
+    <>
+      <SidebarProvider>
+        <AppSidebar {...sidebarProps} />
+        <SidebarInset>
+          <div className="mb-2 flex justify-start md:hidden px-4 sm:px-6 pt-8">
+            <SidebarTrigger variant="ghost" />
+          </div>
+          {children}
+        </SidebarInset>
+      </SidebarProvider>
+      {/* lg:hidden, so this restores mobile navigation and leaves the desktop rail alone. The
+          ghost SidebarTrigger above stays because it is what opens the sheet. */}
+      <BottomTabs />
+    </>
+  )
 }
 
 export default function ProfilePage() {
@@ -202,43 +231,34 @@ export default function ProfilePage() {
 
   if (loading) {
     return (
-      <SidebarProvider>
-        <AppSidebar name="…" studentId="…" />
-        <SidebarInset>
-          <div className="mb-2 flex justify-start md:hidden px-4 sm:px-6 pt-8">
-            <SidebarTrigger variant="ghost" />
-          </div>
-          <ProfileSkeleton />
-        </SidebarInset>
-      </SidebarProvider>
+      <ProfileShell name="…" studentId="…">
+        <ProfileSkeleton />
+      </ProfileShell>
     )
   }
 
   if (error) {
     return (
-      <div className="mx-auto px-4 sm:px-6 py-20 overflow-x-hidden min-w-0">
-        <div
-          style={{
-            fontFamily: monoFont,
-            fontSize: 13,
-            color: 'var(--text-muted)',
-            textAlign: 'center',
-          }}
-        >
-          {error}
+      <ProfileShell name="…" studentId="…">
+        <div className="mx-auto px-4 sm:px-6 py-20 overflow-x-hidden min-w-0">
+          <div
+            style={{
+              fontFamily: monoFont,
+              fontSize: 13,
+              color: 'var(--text-muted)',
+              textAlign: 'center',
+            }}
+          >
+            {error}
+          </div>
         </div>
-      </div>
+      </ProfileShell>
     )
   }
 
   if (!user) {
     return (
-      <SidebarProvider>
-        <AppSidebar
-          name="Guest"
-          studentId={getGuestId() || 'guest'}
-        />
-        <SidebarInset>
+      <ProfileShell name="Guest" studentId={getGuestId() || 'guest'}>
           <div id="profile-main" className="mx-auto w-full max-w-[820px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
           {/* Mobile only: sidebar is an overlay sheet, so content needs an opener.
               Desktop toggles from the sidebar header + edge rail. */}
@@ -299,8 +319,7 @@ export default function ProfilePage() {
           </section>
 
           </div>
-        </SidebarInset>
-      </SidebarProvider>
+      </ProfileShell>
     )
   }
 
@@ -309,39 +328,41 @@ export default function ProfilePage() {
     // Show actionable error with sign-in CTA instead of hanging.
     if (error) {
       return (
-        <div className="mx-auto px-4 sm:px-6 py-20 overflow-x-hidden min-w-0">
-          <div style={{ fontFamily: monoFont, fontSize: 13, color: 'var(--text-muted)', textAlign: 'center' }}>
-            {error}
-            <div className="mt-4 flex gap-3 justify-center">
-              <Link href="/login" className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Sign in</Link>
-              <button type="button" onClick={() => window.location.reload()} className="border border-mathua-border text-mathua-secondary px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Retry</button>
+        <ProfileShell name={user.name} studentId={user.student_id}>
+          <div className="mx-auto px-4 sm:px-6 py-20 overflow-x-hidden min-w-0">
+            <div style={{ fontFamily: monoFont, fontSize: 13, color: 'var(--text-muted)', textAlign: 'center' }}>
+              {error}
+              <div className="mt-4 flex gap-3 justify-center">
+                <Link href="/login" className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Sign in</Link>
+                <button type="button" onClick={() => window.location.reload()} className="border border-mathua-border text-mathua-secondary px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center">Retry</button>
+              </div>
             </div>
           </div>
-        </div>
+        </ProfileShell>
       )
     }
     return (
-      <div className="mx-auto px-4 sm:px-6 py-20 overflow-x-hidden min-w-0">
-        <div style={{ fontFamily: monoFont, fontSize: 13, color: 'var(--text-muted)', textAlign: 'center' }}>
-          Loading scores…
+      <ProfileShell name={user.name} studentId={user.student_id}>
+        <div className="mx-auto px-4 sm:px-6 py-20 overflow-x-hidden min-w-0">
+          <div style={{ fontFamily: monoFont, fontSize: 13, color: 'var(--text-muted)', textAlign: 'center' }}>
+            Loading scores…
+          </div>
         </div>
-      </div>
+      </ProfileShell>
     )
   }
 
   return (
-    <SidebarProvider>
-      <AppSidebar
-        name={user.name}
-        studentId={user.student_id}
-        username={user.username}
-        level={scores?.level}
-        streak={scores?.current_streak}
-        avatarUrl={avatarUrl}
-        avatarPreset={avatarPreset}
-        dueReviews={dueReviews}
-      />
-      <SidebarInset>
+    <ProfileShell
+      name={user.name}
+      studentId={user.student_id}
+      username={user.username}
+      level={scores?.level}
+      streak={scores?.current_streak}
+      avatarUrl={avatarUrl}
+      avatarPreset={avatarPreset}
+      dueReviews={dueReviews}
+    >
         <a href="#profile-main" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-mathua-surface focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:text-mathua-blue">
           Skip to profile content
         </a>
@@ -575,7 +596,6 @@ export default function ProfilePage() {
         )}
           </div>
         </div>
-      </SidebarInset>
-    </SidebarProvider>
+    </ProfileShell>
   )
 }
