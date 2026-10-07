@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { render, screen, within } from '@testing-library/react'
+import { render, screen, within, fireEvent } from '@testing-library/react'
 import { AppSidebar } from '../components/app-sidebar'
 import { SidebarProvider } from '../components/ui/sidebar'
 
@@ -23,6 +23,14 @@ import { vi } from 'vitest'
 vi.mock('next/navigation', () => ({
   usePathname: () => '/profile',
   useRouter: () => ({ push: () => {} }),
+}))
+
+// /profile renders no Header, so this sidebar is the only light/dark control on that page. The
+// hook is mocked to keep the test independent of localStorage and matchMedia, and to make the
+// click observable.
+const { sidebarToggleThemeMock } = vi.hoisted(() => ({ sidebarToggleThemeMock: vi.fn() }))
+vi.mock('../hooks/useTheme', () => ({
+  useTheme: () => ({ theme: 'dark', mounted: true, toggleTheme: sidebarToggleThemeMock }),
 }))
 
 // The collapsed 44px rail is only even because every icon in it occupies the same box.
@@ -158,5 +166,39 @@ describe('AppSidebar', () => {
     const ada = screen.getByText('Ada')
     const textWrapper = ada.closest('span[class*="flex-1"]')
     expect(textWrapper?.getAttribute('class') ?? '').toContain('group-data-[collapsible=icon]:hidden')
+  })
+
+  it('offers a theme control, because /profile renders no Header', () => {
+    // The regression this covers: fb5bde0a removed Header and BottomTabs from /profile and put
+    // back a shell that is desktop-only, so the page had no way to change light or dark on any
+    // viewport. Nothing failed when that happened.
+    renderSidebar()
+    const toggle = screen.getByRole('button', { name: 'Toggle theme' })
+    expect(toggle).toBeInTheDocument()
+    sidebarToggleThemeMock.mockClear()
+    fireEvent.click(toggle)
+    expect(sidebarToggleThemeMock).toHaveBeenCalledTimes(1)
+  })
+
+  it('keeps the theme control reachable when the rail is collapsed', () => {
+    // The label span is display:none in the collapsed rail, and shadcn's `tooltip` prop renders a
+    // TooltipContent — a description, not a name. Without an explicit aria-label the button's only
+    // child is an aria-hidden icon, so in the state most desktop users leave the sidebar in it has
+    // no accessible name at all.
+    renderSidebar()
+    const toggle = screen.getByRole('button', { name: 'Toggle theme' })
+    expect(toggle).toHaveAttribute('aria-label', 'Toggle theme')
+    expect(toggle.querySelector('svg')).not.toBeNull()
+  })
+
+  it('places the theme control above Sign out', () => {
+    // Footer order is the reading order for a keyboard user: preferences, then the destructive
+    // sign-out.
+    renderSidebar()
+    const labels = screen.getAllByRole('button').map(b => b.textContent?.trim() ?? '')
+    const themeIdx = labels.findIndex(l => l.includes('Toggle theme'))
+    const signOutIdx = labels.findIndex(l => l.includes('Sign out'))
+    expect(themeIdx).toBeGreaterThanOrEqual(0)
+    expect(signOutIdx).toBeGreaterThan(themeIdx)
   })
 })

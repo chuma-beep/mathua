@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
+import { useRef } from 'react'
 import {
   BookOpen,
   ChartNoAxesColumn,
@@ -15,8 +16,10 @@ import {
   Pencil,
   Play,
   Settings,
+  SunMoon,
   Trophy,
   type IconComponent,
+  type IconHandle,
 } from './icons'
 import {
   Sidebar,
@@ -34,6 +37,7 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar'
 import Avatar from './Avatar'
+import { useTheme } from '../hooks/useTheme'
 import { signOut } from '../lib/auth'
 
 // Navigate group: destinations only. Never Diagnostic / Quiz / Review —
@@ -63,7 +67,7 @@ const RESOURCE_ITEMS: { label: string; href: string; icon: IconComponent }[] = [
   { label: "Creator's note", href: '/note', icon: Pencil },
 ]
 
-interface AppSidebarProps {
+export interface AppSidebarProps {
   name: string
   studentId: string
   username?: string
@@ -87,6 +91,19 @@ export function AppSidebar({
   const pathname = usePathname()
   const router = useRouter()
   const { toggleSidebar } = useSidebar()
+  // The theme control used to live only in Header, and /profile does not render one, so this
+  // sidebar is the only place a learner can switch light/dark from here. It drives the icon
+  // through a ref rather than hover, because a touch device never fires hover.
+  const { mounted, toggleTheme } = useTheme()
+  const sunMoonRef = useRef<IconHandle>(null)
+
+  function handleThemeToggle(): void {
+    const reduced =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (!reduced) sunMoonRef.current?.startAnimation()
+    toggleTheme()
+  }
 
   return (
     <Sidebar collapsible="icon" data-testid="profile-sidebar">
@@ -206,6 +223,21 @@ export function AppSidebar({
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
+          {mounted && (
+            <SidebarMenuItem>
+              {/* aria-label, not just tooltip: the label span is display:none in the collapsed
+                  rail and the tooltip is a description, so without this the icon-only button has
+                  no accessible name in the state most desktop users leave the sidebar in. */}
+              <SidebarMenuButton
+                tooltip="Toggle theme"
+                aria-label="Toggle theme"
+                onClick={handleThemeToggle}
+              >
+                <SunMoon ref={sunMoonRef} size={16} isAnimated={false} aria-hidden="true" />
+                <span className="group-data-[collapsible=icon]:hidden">Toggle theme</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          )}
           <SidebarMenuItem>
             <SidebarMenuButton
               tooltip="Sign out"

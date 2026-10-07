@@ -3,6 +3,7 @@
 import dynamic from 'next/dynamic'
 import SectionHeader from '../../../components/SectionHeader'
 import Loading from '../../../components/Loading'
+import Link from 'next/link'
 
 const ArchitectureFlow = dynamic(() => import('../../../components/ArchitectureFlow'), {
   ssr: false,
@@ -92,6 +93,16 @@ const calloutStyle: React.CSSProperties = {
 export default function ArchitecturePage() {
   return (
     <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
+      {/* Back link, matching /docs and /docs/efficacy. These two siblings had none, so the
+          docs index linked into pages with no way out — the same dead end /profile had on
+          mobile, found by the guard in test/navCoverage.test.ts rather than by a learner. */}
+      <Link
+        href="/docs"
+        className="inline-block mt-8"
+        style={{ fontFamily: monoFont, fontSize: '13px', color: 'var(--text-muted)' }}
+      >
+        ← Docs
+      </Link>
       <section className="pt-8 min-w-0 overflow-hidden">
         <SectionHeader label="Documentation" title="Architecture & System Design" />
         <p style={{ ...bodyStyle, textAlign: 'center', maxWidth: '640px', margin: '0 auto 2rem' }}>
