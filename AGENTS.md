@@ -26,14 +26,24 @@ scripts, Go, or documentation. This is not a style preference; see the reasons b
 
 ### What to use instead
 
-- **An icon component.** `@animateicons/react` (lucide set) for animated icons,
-  `lucide-react` for static ones, and `components/icons/` for the hand-written animated ones
-  already there (`compass.tsx`, `sun-moon.tsx`). Decorate decorative icons with `aria-hidden`.
+- **`components/icons`.** Every icon in the app comes from that one module, which wraps
+  `@animateicons/react` (the animated lucide set). Import from there and never from an icon
+  library directly — the wrapper is what pins the size to 16px and the colour to `currentColor`,
+  and the animated icons render a `<div>` whose default colour is not `currentColor`, so an icon
+  added outside the wrapper does not follow light and dark mode and does not keep the collapsed
+  44px sidebar rail even.
 - **Text.** A label beats a symbol most of the time. In tables, a word ("Yes", "Not stored")
   beats a mark.
 
-If an icon is needed and neither library has it, add it to `components/icons/` following
-`compass.tsx` rather than reaching for a glyph.
+Icons animate on mount and again on hover. Two are driven imperatively instead — the compass
+spins forward on menu open and reverse on close, the sun-moon on theme toggle — because hover
+rarely fires on touch screens. Those pass `isAnimated={false}` and call `startAnimation` through
+a ref, guarded on `prefers-reduced-motion`.
+
+`test/iconAuthority.test.ts` enforces the surface, and `lucide-react`, `motion/react` and
+`framer-motion` are no longer dependencies. The hand-written `compass.tsx` and `sun-moon.tsx`
+were deleted: they were a third icon system built on `motion`, and removing that dependency made
+**every route's bundle smaller** while adding animation to nineteen icons.
 
 ### Typography that is not emoji
 

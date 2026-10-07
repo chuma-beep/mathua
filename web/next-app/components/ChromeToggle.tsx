@@ -1,6 +1,6 @@
 'use client'
 
-import { ChevronDown, ChevronUp } from 'lucide-react'
+import { ChevronDown, ChevronUp } from './icons'
 import { useChrome } from '../hooks/useChrome'
 
 // The chrome's tap control. It has to outlive the bars it controls: when they
@@ -54,9 +54,9 @@ export default function ChromeToggle() {
         style={{ bottom: chevronBottom }}
       >
         {visible ? (
-          <ChevronDown size={18} strokeWidth={2} aria-hidden="true" />
+          <ChevronDown size={18} />
         ) : (
-          <ChevronUp size={18} strokeWidth={2} aria-hidden="true" />
+          <ChevronUp size={18} />
         )}
       </button>
     </>

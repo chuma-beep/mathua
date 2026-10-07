@@ -25,6 +25,22 @@ vi.mock('next/navigation', () => ({
   useRouter: () => ({ push: () => {} }),
 }))
 
+// The collapsed 44px rail is only even because every icon in it occupies the same box.
+//
+// That was asserted as a `size-4` class on a lucide <svg>. The animated set renders
+// `<div class="inline-flex" style="color:currentcolor"><svg width=16 height=16
+// stroke="currentColor">`, so the class sizes nothing and the guarantee is now carried by explicit
+// width/height on the svg. Asserting the class would have passed against an icon that no longer
+// sizes to anything, which is the failure this replaces.
+function expectFixedBox(link: Element) {
+  const svg = link.querySelector('svg')
+  expect(svg, 'nav link has no icon').not.toBeNull()
+  expect(svg?.getAttribute('width'), 'icon width must be fixed, not a class').toBe('16')
+  expect(svg?.getAttribute('height'), 'icon height must be fixed, not a class').toBe('16')
+  // Colour has to come from the theme, not from the library's default.
+  expect(svg?.getAttribute('stroke')).toBe('currentColor')
+}
+
 describe('AppSidebar', () => {
   it('renders Navigate group without a Diagnostic entry (no CTA duplication)', () => {
     renderSidebar()
@@ -60,9 +76,7 @@ describe('AppSidebar', () => {
     for (const href of ['/docs', '/docs/contributing', '/note']) {
       const link = sidebar.querySelector(`a[href="${href}"]`)!
       expect(link).not.toBeNull()
-      const svg = link.querySelector('svg')
-      expect(svg).not.toBeNull()
-      expect(svg?.getAttribute('class') ?? '').toMatch(/size-4/)
+      expectFixedBox(link)
     }
   })
 
@@ -100,9 +114,7 @@ describe('AppSidebar', () => {
     for (const href of hrefs) {
       const link = sidebar.querySelector(`a[href="${href}"]`)!
       expect(link).not.toBeNull()
-      const svg = link.querySelector('svg')
-      expect(svg).not.toBeNull()
-      expect(svg?.getAttribute('class') ?? '').toMatch(/size-4/)
+      expectFixedBox(link)
     }
   })
 
