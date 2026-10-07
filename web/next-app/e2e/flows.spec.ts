@@ -99,8 +99,13 @@ test('quiz reuse host at /goals?quiz=1 starts actionable quiz (guest unlimited r
     route.fulfill({ json: { lifetime_points: 100, weekly_score: 10, speed_bonus: 0, concepts_mastered: 1, current_streak: 1, level: 'Novice', xp_total: 150, xp_today: 10, daily_xp_goal: 30 } }),
   )
   await page.route('**/api/weaknesses**', route => route.fulfill({ json: { by_domain: {} } }))
+  // time_limit_seconds is deliberately present. The quiz used to render a live countdown from
+  // it — "30s", ticking down, then "Time up (counts as slow)" — and the field is still sent by
+  // the server because TimeLimitFor/accommodatedThreshold scale it for grading. Supplying it here
+  // is what makes this test able to catch the countdown coming back: with the field absent the
+  // old UI rendered nothing either, so the assertion below would pass either way.
   await page.route('**/api/quiz/session', route =>
-    route.fulfill({ json: { session_id: 'q1', concept_id: 'arith.add.single', concept_name: 'Single-digit addition', question: '5 + 3 = ?', grading_type: 'numeric', done: false } }),
+    route.fulfill({ json: { session_id: 'q1', concept_id: 'arith.add.single', concept_name: 'Single-digit addition', question: '5 + 3 = ?', grading_type: 'numeric', time_limit_seconds: 30, done: false } }),
   )
   let sawDontKnow = false
   await page.route('**/api/quiz/answer', route => {
@@ -114,6 +119,14 @@ test('quiz reuse host at /goals?quiz=1 starts actionable quiz (guest unlimited r
   await expect(page.getByText('Quiz question 1').first()).toBeVisible({ timeout: 30_000 })
   await expect(page.getByText('5 + 3 = ?').first()).toBeVisible()
   await expect(page.getByText('Answer with a number').first()).toBeVisible()
+
+  // Time is measured, not shown. A countdown and a "Time up" warning made the clock the task:
+  // it rewarded speed over reasoning and put a learner who thinks for 30 seconds into a visibly
+  // failing state. elapsed_seconds still goes to the server, so slow classification, XP and
+  // analytics are unaffected — the learner is simply not told about any of it while answering.
+  const quizChrome = await page.locator('body').innerText()
+  expect(quizChrome).not.toMatch(/Time up/)
+  expect(quizChrome).not.toMatch(/\b\d+s\b/)
 
   await typeAnswer(page, '8')
   await page.getByRole('button', { name: 'Check Answer' }).first().click()
