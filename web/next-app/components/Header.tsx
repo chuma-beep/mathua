@@ -165,7 +165,7 @@ export default function Header({ links }: HeaderProps) {
             )}
             {/* Mobile nav: bare compass mark. Overflow only
                 (see lib/nav.ts) — destinations missing from the bottom tabs. */}
-            <div className="relative md:hidden" ref={navMenuRef}>
+            <div className="md:hidden" ref={navMenuRef}>
                 <button
                   type="button"
                   onClick={toggleNav}
@@ -176,31 +176,6 @@ export default function Header({ links }: HeaderProps) {
                 >
                   <Compass ref={compassRef} size={15} isAnimated={false} />
                 </button>
-                {navOpen && (
-                  <div
-                    role="menu"
-                    aria-label="Site navigation"
-                    className="absolute right-0 top-[calc(100%+8px)] min-w-[200px] bg-mathua-surface border border-mathua-border shadow-lg py-1 z-50"
-                  >
-                    {compassLinks.map(link => {
-                      const active = pathname === link.href || (pathname ?? '').startsWith(link.href + '/')
-                      return (
-                        <Link
-                          key={link.href}
-                          href={link.href}
-                          role="menuitem"
-                          aria-current={active ? 'page' : undefined}
-                          onClick={() => setNavOpen(false)}
-                          className={`flex items-center min-h-[44px] px-4 font-mono text-xs whitespace-nowrap transition-colors ${
-                            active ? 'text-mathua-blue' : 'text-mathua-muted hover:text-mathua-blue hover:bg-mathua-surface-elevated'
-                          }`}
-                        >
-                          {link.label}
-                        </Link>
-                      )
-                    })}
-                  </div>
-                )}
             </div>
             {loggedIn && user ? (
               <div className="relative" ref={menuRef}>
@@ -254,6 +229,41 @@ export default function Header({ links }: HeaderProps) {
           </div>
         </div>
       </div>
+      {/* The nav panel hangs off <header>, not off the row. Inside the row it sat below
+          `min-h-0 overflow-hidden` — the CSS grid-collapse trick that hides the header on scroll
+          — and that clips absolutely positioned children, so the panel painted *behind* the page
+          instead of over it. `overflow-hidden` cannot come off, because the collapse animation
+          needs it, so the panel moves out of the clipper instead of the clipper losing its clip.
+
+          Also gated on chromeVisible: the trigger lives inside the row, so a panel whose button
+          is scrolled away is a floating menu with no visible way to close it. */}
+{navOpen && chromeVisible && (
+                    <div
+                      role="menu"
+                      aria-label="Site navigation"
+                      className="absolute right-4 md:right-6 top-full min-w-[200px] bg-mathua-surface border border-mathua-border shadow-lg py-1 z-50 md:hidden"
+                    >
+                      {compassLinks.map(link => {
+                        const active = pathname === link.href || (pathname ?? '').startsWith(link.href + '/')
+                        return (
+                          <Link
+                            key={link.href}
+                            href={link.href}
+                            role="menuitem"
+                            aria-current={active ? 'page' : undefined}
+                            onClick={() => setNavOpen(false)}
+                            className={`flex items-center min-h-[44px] px-4 font-mono text-xs whitespace-nowrap transition-colors ${
+                              active ? 'text-mathua-blue' : 'text-mathua-muted hover:text-mathua-blue hover:bg-mathua-surface-elevated'
+                            }`}
+                          >
+                            {link.label}
+                          </Link>
+                        )
+                      })}
+                    </div>
+                  )}
+
+
     </header>
   )
 }
