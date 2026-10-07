@@ -179,6 +179,11 @@ test('/profile keeps the tab bar, so it is not a dead end on mobile', async ({ p
     await expect(page.getByRole('link', { name: label, exact: true }).last()).toBeVisible()
   }
 
+  // Exactly one sidebar opener. The shell supplies it, but two branches also carried their own
+  // copy from before the shell existed, and both rendered — so the page opened with two λ buttons
+  // stacked at the top. A guard that only checks the tab bar would pass straight through that.
+  await expect(page.getByRole('button', { name: 'Toggle sidebar' })).toHaveCount(1)
+
   // And it is live, not just painted: the tab bar is the way out.
   await page.getByRole('link', { name: 'Learn', exact: true }).last().click()
   await expect(page).toHaveURL(/\/learn/)
