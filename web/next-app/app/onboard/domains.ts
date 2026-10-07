@@ -1,3 +1,5 @@
+import { DOMAIN_ORDER, domainLabel } from '../../lib/graphDomains'
+
 export interface DomainInfo {
   name: string
   count: number
@@ -5,23 +7,11 @@ export interface DomainInfo {
   selected: boolean
 }
 
-export const domainLabels = {
-  arithmetic: 'Arithmetic',
-  fractions: 'Fractions',
-  prealgebra: 'Pre-Algebra',
-  algebra: 'Algebra',
-  geometry: 'Geometry',
-  trigonometry: 'Trigonometry',
-  complex_numbers: 'Complex Numbers',
-  precalculus: 'Precalculus',
-  calculus: 'Calculus',
-  linear_algebra: 'Linear Algebra',
-  statistics: 'Statistics',
-  discrete_math: 'Discrete Math',
-  number_theory: 'Number Theory',
-  differential_equations: 'Differential Equations',
-  abstract_algebra: 'Abstract Algebra',
-  topology: 'Topology',
-} satisfies Record<string, string>
-
-export const domainOrder = ['arithmetic', 'fractions', 'prealgebra', 'algebra', 'geometry', 'trigonometry', 'complex_numbers', 'precalculus', 'calculus', 'linear_algebra', 'statistics', 'discrete_math', 'number_theory', 'differential_equations', 'abstract_algebra', 'topology']
+// Re-exported from the canonical list rather than copied. This file's order turned out to be
+// identical to DOMAIN_ORDER apart from omitting `machine_learning`, so it was a stale copy and
+// not a deliberate teaching order. Four modules import these names from here.
+//
+// Widened to string[]: DOMAIN_ORDER is `as const`, so its element type is a literal union and
+// `.indexOf(someString)` stops compiling for callers that treat this as an open list.
+export const domainOrder: string[] = [...DOMAIN_ORDER]
+export const domainLabels = domainLabel

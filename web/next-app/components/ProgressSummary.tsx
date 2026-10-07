@@ -1,28 +1,12 @@
 import type { Scores } from '../lib/api'
+import { domainLabel } from '../lib/graphDomains'
 
 interface ProgressSummaryProps {
   scores: Scores
   weakByDomain?: Record<string, { id: string; label: string }[]>
 }
 
-const domainLabels = {
-  arithmetic: 'Arithmetic',
-  fractions: 'Fractions',
-  prealgebra: 'Pre-Algebra',
-  algebra: 'Algebra',
-  geometry: 'Geometry',
-  trigonometry: 'Trigonometry',
-  complex_numbers: 'Complex Numbers',
-  precalculus: 'Precalculus',
-  calculus: 'Calculus',
-  linear_algebra: 'Linear Algebra',
-  statistics: 'Statistics',
-  discrete_math: 'Discrete Math',
-  number_theory: 'Number Theory',
-  differential_equations: 'Differential Equations',
-  abstract_algebra: 'Abstract Algebra',
-  topology: 'Topology',
-} satisfies Record<string, string>
+
 
 export default function ProgressSummary({ scores, weakByDomain }: ProgressSummaryProps) {
   const stats = [
@@ -59,7 +43,7 @@ export default function ProgressSummary({ scores, weakByDomain }: ProgressSummar
       {weakDomains.length > 0 && (
         <div className="flex flex-wrap gap-3 justify-center mb-6">
           {weakDomains.map(([domain, concepts]) => {
-            const label = domainLabels[domain] || domain
+            const label = domainLabel(domain)
             return (
               <div key={domain} className="bg-mathua-surface border border-mathua-border px-4 py-2 text-center min-w-[120px]">
                 <div className="font-mono text-[10px] uppercase tracking-[0.1em] text-mathua-muted">{label}</div>

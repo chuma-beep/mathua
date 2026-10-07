@@ -26,7 +26,7 @@ describe('navigation order', () => {
     // Learn was previously logged-in-only, which meant a signed-out visitor
     // had no route to anything they could actually do.
     expect(desktopLinks(false).map(l => l.href)).toContain('/learn')
-    expect(order(desktopLinks(false))).toEqual(['/learn', '/study', '/graph', '/leaderboard', '/login'])
+    expect(order(desktopLinks(false))).toEqual(['/learn', '/study', '/graph', '/domains', '/leaderboard', '/login'])
   })
 
   it('shows Review beside Learn for a signed-in learner', () => {

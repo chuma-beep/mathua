@@ -15,6 +15,7 @@ import { getScores, getGraph, getProgress, getWeaknesses, healthCheck, type Grap
 import { getUserInfo } from '../../lib/auth'
 import { useAuthState } from '../../hooks/useAuthState'
 import { deriveStatuses } from '../../lib/graphStatus'
+import { DOMAIN_ORDER, domainLabel } from '../../lib/graphDomains'
 import { createInflightCache, createSessionCache } from '../../lib/requestCache'
 import Loading from '../../components/Loading'
 
@@ -48,31 +49,6 @@ const fallbackConcepts = conceptsData.map((c) => ({
   id: c.id, label: c.label, domain: c.domain, prerequisites: c.prerequisites,
 }))
 
-const domainLabels = {
-  arithmetic: 'Arithmetic',
-  fractions: 'Fractions',
-  prealgebra: 'Pre-Algebra',
-  algebra: 'Algebra',
-  geometry: 'Geometry',
-  trigonometry: 'Trigonometry',
-  complex_numbers: 'Complex Numbers',
-  precalculus: 'Precalculus',
-  calculus: 'Calculus',
-  linear_algebra: 'Linear Algebra',
-  statistics: 'Statistics',
-  discrete_math: 'Discrete Math',
-  number_theory: 'Number Theory',
-  differential_equations: 'Diff. Eqs.',
-  abstract_algebra: 'Abstract Algebra',
-  topology: 'Topology',
-} satisfies Record<string, string>
-
-const domainOrder = [
-  'arithmetic', 'fractions', 'prealgebra', 'algebra', 'geometry',
-  'trigonometry', 'complex_numbers', 'precalculus', 'calculus', 'linear_algebra',
-  'statistics', 'discrete_math', 'number_theory', 'differential_equations',
-  'abstract_algebra', 'topology',
-]
 
 // Two caches, because the two kinds of data on this page have opposite lifetimes. See
 // lib/requestCache.ts for why they were one helper and what that cost.
@@ -84,13 +60,30 @@ function GraphContent() {
   const { push, replace } = useRouter()
   const searchParams = useSearchParams()
   const conceptParam = searchParams.get('concept')
+  // ?domain= makes the filter linkable, so /domains can deep-link into one subject.
+  const domainParam = searchParams.get('domain')
   const [graphData, setGraphData] = useState<GraphRes | null>(null)
   const [rawProgress, setRawProgress] = useState<Record<string, { status?: string; streak?: number; mastery_pct?: number }>>({})
   const [weakByDomain, setWeakByDomain] = useState<Record<string, { id: string; label: string }[]> | undefined>(undefined)
   const [connected, setConnected] = useState(false)
   const [scores, setScores] = useState<Scores | null>(null)
   const [graphError, setGraphError] = useState(false)
-  const [activeDomain, setActiveDomain] = useState<string | null>(null)
+  // Seeded from ?domain= so a deep link lands already filtered. The reset effect below
+  // still runs: if the URL names a domain that does not exist, the graph shows nothing
+  // filtered rather than silently ignoring the parameter.
+  const [activeDomain, setActiveDomain] = useState<string | null>(domainParam)
+
+  // Chip clicks write the filter into the URL so the view is shareable and survives a reload.
+  // replace(), not push(): filtering is not navigation, and pushing would make Back walk through
+  // every domain the learner glanced at.
+  const setDomainFilter = (next: string | null) => {
+    setActiveDomain(next)
+    const q = new URLSearchParams(searchParams.toString())
+    if (next) q.set('domain', next)
+    else q.delete('domain')
+    const qs = q.toString()
+    replace(qs ? `/graph?${qs}` : '/graph', { scroll: false })
+  }
   const [selectedId, setSelectedId] = useState<string | null>(conceptParam)
   const { loggedIn } = useAuthState()
 
@@ -178,7 +171,7 @@ function GraphContent() {
   const domains = useMemo(() => {
     const set = new Set<string>()
     for (const c of concepts) set.add(c.domain)
-    return domainOrder.filter(d => set.has(d))
+    return DOMAIN_ORDER.filter(d => set.has(d))
   }, [concepts])
 
   const onPathNodes = useMemo(() => {
@@ -202,11 +195,19 @@ function GraphContent() {
   const deepLinkHandled = useRef(false)
   useEffect(() => {
     if (deepLinkHandled.current || concepts.length === 0) return
+    // Not marked handled until the domain has been resolved against the canonical list, so a
+    // ?domain= that has to be cleared still gets a chance to clear itself on a later pass.
+    if (domainParam && !DOMAIN_ORDER.includes(domainParam as (typeof DOMAIN_ORDER)[number])) return
     deepLinkHandled.current = true
+    // An unknown ?domain= is ignored rather than honoured: filtering on "bogus" matches no
+    // concept, so the graph would render empty with no indication of why.
+    if (activeDomain && !DOMAIN_ORDER.includes(activeDomain as (typeof DOMAIN_ORDER)[number])) {
+      setActiveDomain(null)
+    }
     if (!conceptParam || !activeDomain) return
     const c = conceptById.get(conceptParam)
     if (c && c.domain !== activeDomain) setActiveDomain(null)
-  }, [conceptParam, activeDomain, conceptById, concepts.length])
+  }, [conceptParam, domainParam, activeDomain, conceptById, concepts.length])
 
   if (!mounted) return <div style={{ background: 'var(--bg)', minHeight: '100vh' }} />
 
@@ -241,7 +242,7 @@ function GraphContent() {
         <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center mb-6 min-w-0">
           <button
             type="button"
-            onClick={() => setActiveDomain(null)}
+            onClick={() => setDomainFilter(null)}
             className={`font-mono text-[10px] uppercase px-3 min-h-[36px] py-1.5 border transition-colors min-w-0 truncate ${
               activeDomain === null
                 ? 'bg-mathua-blue text-white border-mathua-blue'
@@ -254,14 +255,14 @@ function GraphContent() {
             <button
               type="button"
               key={d}
-              onClick={() => setActiveDomain(activeDomain === d ? null : d)}
+              onClick={() => setDomainFilter(activeDomain === d ? null : d)}
               className={`font-mono text-[10px] uppercase px-3 min-h-[36px] py-1.5 border transition-colors min-w-0 truncate ${
                 activeDomain === d
                   ? 'bg-mathua-blue text-white border-mathua-blue'
                   : 'border-mathua-border text-mathua-muted hover:text-mathua-blue hover:border-mathua-secondary'
               }`}
             >
-              {domainLabels[d] || d}
+              {domainLabel(d)}
             </button>
           ))}
         </div>

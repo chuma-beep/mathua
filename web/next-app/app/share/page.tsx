@@ -10,7 +10,9 @@ import Footer from '../../components/Footer'
 import Loading from '../../components/Loading'
 import ProfileStats from '../../components/ProfileStats'
 import ActivityHeatmap from '../../components/ActivityHeatmap'
-import DomainProgress from '../../components/DomainProgress'
+import DomainTable from '../../components/DomainTable'
+import { concepts } from '../../lib/conceptData'
+import { buildDomainRows } from '../../lib/domainRows'
 import AttemptList from '../../components/AttemptList'
 import { getShareReport, type ShareReport } from '../../lib/api'
 
@@ -87,7 +89,9 @@ function ShareContent() {
             </section>
 
             <section className="mt-8 min-w-0">
-              <DomainProgress progress={report.progress} />
+              {/* No links and no expand: this is a shared read-only snapshot, so /learn is not
+                  the viewer's to be sent to and there is nothing behind a concept here. */}
+              <DomainTable rows={buildDomainRows(concepts, report.progress)} links={false} />
             </section>
 
             {(report.attempts?.length ?? 0) > 0 && (
