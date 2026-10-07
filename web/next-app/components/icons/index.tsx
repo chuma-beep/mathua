@@ -26,6 +26,7 @@ import {
   BookOpenIcon,
   ChartNoAxesColumnIcon,
   ChevronsLeftIcon,
+  ChevronsRightIcon,
   CompassIcon as CompassAnimatedIcon,
   Dice5Icon,
   FileTextIcon,
@@ -109,6 +110,7 @@ function wrap(Icon: AnyIcon) {
 export const BookOpen = wrap(BookOpenIcon as never)
 export const ChartNoAxesColumn = wrap(ChartNoAxesColumnIcon as never)
 export const ChevronsLeft = wrap(ChevronsLeftIcon as never)
+export const ChevronsRight = wrap(ChevronsRightIcon as never)
 export const Compass = wrap(CompassAnimatedIcon as never)
 export const FileText = wrap(FileTextIcon as never)
 export const Handshake = wrap(HandshakeIcon as never)
@@ -137,6 +139,7 @@ export const ICON_NAMES = [
   'ChartNoAxesColumn',
   'ChevronLeft',
   'ChevronsLeft',
+  'ChevronsRight',
   'Compass',
   'Dices',
   'FileText',
