@@ -18,7 +18,8 @@ import (
 //
 // The reference article is not a bad piece of teaching. It is simply the wrong surface: it is
 // written for a reader who wants the whole topic, and `/learn` is a learner who needs the next
-// move. `/study` keeps the article; the slice is what stands in front of the practice.
+// move. The reference panel (ADR-047) keeps the article available; the slice is what stands
+// in front of the practice.
 //
 // Three levels, in order of preference:
 //

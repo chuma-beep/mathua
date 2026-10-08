@@ -20,7 +20,12 @@ const APP_DIR = join(process.cwd(), 'app')
 
 // Routes that render nothing of their own and immediately send the learner elsewhere. These are
 // exempt because they are not destinations: there is no page here to leave.
-const REDIRECT_STUBS = new Set(['concept', 'session', 'docs/system-design'])
+//
+// `study` joined them when the reference library was closed. It is the one entry that was a
+// full destination until recently, which is why it is listed by name here rather than left to a
+// pattern: a route that used to be a page and is now a forwarder is the case most likely to be
+// quietly treated as content again.
+const REDIRECT_STUBS = new Set(['concept', 'session', 'study', 'docs/system-design'])
 
 /**
  * The invariant is "a learner can get off this page", not "this page renders one of two

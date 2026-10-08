@@ -764,10 +764,16 @@ export async function resetAccount(phrase: string): Promise<void> {
 	if (!res.ok) await throwWithResponse(res, 'Reset failed')
 }
 
+// The server's own account payload. `role` was missing here and zod strips unknown keys, so the
+// field was being silently discarded on the way in: `/api/auth/me` sent it, `getMe()` dropped
+// it, and the Admin navigation entry could never appear. A schema is a filter, so a field the
+// type does not name is a field the application does not have — which is the second half of
+// ADR-043's duplicate-schema lesson, arriving from the other direction.
 const MeSchema = z.object({
 	student_id: z.string(),
 	name: z.string(),
 	has_password: z.boolean().optional(),
+	role: z.enum(['student', 'admin']).optional(),
 })
 
 export type MeInfo = z.infer<typeof MeSchema>
@@ -1080,10 +1086,28 @@ export async function getLessonPractice(conceptId: string, count = 5, opts?: { s
 	return res.json()
 }
 
-export async function getLessonKPs(conceptId: string): Promise<LessonKpsRes> {
-	const res = await authedFetch(`${API_BASE}/api/lessons/${encodeURIComponent(conceptId)}/kp`, { cache: 'no-store' })
-	if (!res.ok) return { concept_id: conceptId, kps: [] }
-	return res.json()
+// The knowledge-point shard, shared between concurrent callers for the length of the request.
+//
+// `/learn` needs it twice on one page: LearnStepper renders the worked example for the current
+// section, and the reference panel renders every block for the same concept. Two callers, one
+// payload, and the shard is authored content that does not change while the tab is open — so
+// this is the in-flight cache rather than the session cache, because a later visit should
+// re-read it (a shard can be corrected, and a stale copy of a teaching section is a wrong
+// lesson rather than a stale progress bar).
+const lessonKPsInFlight = new Map<string, Promise<LessonKpsRes>>()
+
+export function getLessonKPs(conceptId: string): Promise<LessonKpsRes> {
+	const existing = lessonKPsInFlight.get(conceptId)
+	if (existing) return existing
+	const p = (async () => {
+		const res = await authedFetch(`${API_BASE}/api/lessons/${encodeURIComponent(conceptId)}/kp`, { cache: 'no-store' })
+		if (!res.ok) return { concept_id: conceptId, kps: [] }
+		return res.json() as Promise<LessonKpsRes>
+	})().finally(() => {
+		lessonKPsInFlight.delete(conceptId)
+	})
+	lessonKPsInFlight.set(conceptId, p)
+	return p
 }
 
 /** What kind of work a recommendation is. Mirrors scheduler.Kind in Go. */
@@ -1129,23 +1153,30 @@ export interface RecommendationRes {
 /**
  * GET /api/next — the single answer to "what should I do now?".
  *
- * Fail-soft to a library recommendation rather than an empty response: the client used to
+ * Fail-soft to an orientation recommendation rather than an empty response: the client used to
  * assemble this from five requests plus a bundled copy of the corpus, and every one of those
  * had a fallback, so a network blip already degraded gracefully and must keep doing so.
+ *
+ * The fallback mirrors the server's own empty-state head (`internal/scheduler.Recommend`)
+ * word for word, href included. That is not tidiness: this is the one place the client
+ * answers a question the engine normally answers, and the two versions of "there is nothing
+ * for you right now" already disagreed once — this one still said "browse lessons", a route
+ * that has since been closed. Two copies of a fallback are two copies of the product's
+ * decision about what a learner with nothing to do should be told.
  */
 export async function getNext(exclude?: string[]): Promise<RecommendationRes> {
   const fallback: RecommendationRes = {
     primary: {
-      id: 'study',
+      id: 'graph',
       conceptId: '',
-      conceptTitle: 'Lesson library',
+      conceptTitle: 'Concept graph',
       kind: 'learn',
       reason: 'new',
       priority: 0,
-      action: { type: 'learn', href: '/study' },
-      badge: 'Library',
-      detail: 'Everything recommended is already learned — the reference library is open',
-      cta: 'Browse lessons →',
+      action: { type: 'learn', href: '/graph' },
+      badge: 'All learned',
+      detail: 'Nothing is due right now — the graph shows what builds on what you have',
+      cta: 'See the graph →',
     },
     alternatives: [],
     generatedAt: new Date().toISOString(),
@@ -1534,4 +1565,113 @@ export async function adminLogout(token: string): Promise<void> {
 	} catch {
 		// Best-effort: the session expires server-side within 24h regardless.
 	}
+}
+
+// ── Role-based administration ──────────────────────────────────────────────
+//
+// A different mechanism from the triage session above, on purpose. Triage is gated by a shared
+// password from the deployment environment and confers no account identity; these calls carry
+// the learner's own token and are authorized by the role on that account. The server decides —
+// a 403 here means the backend said no, and hiding the pages in the UI is a convenience on top
+// of that, never the control.
+//
+// Every one of these uses authedFetch, unlike adminLogin above. That is the point of the split:
+// a 401 from these endpoints means the learner's own session is not an administrator, and
+// authedFetch's handling of a 401 is correct for that case, whereas adminLogin's 401 means a
+// typo in a password and must not disturb the session.
+
+const RoleSchema = z.enum(['student', 'admin'])
+
+// AdminUser mirrors the server's AdminUser projection. It has no field for a password hash, a
+// share token or learning state, and the schema is the reason: a response carrying a field this
+// type does not name cannot reach a page, whatever the server sends.
+const AdminUserSchema = z.object({
+	id: z.string(),
+	name: z.string(),
+	username: z.string(),
+	email: z.string(),
+	role: RoleSchema,
+	created_at: z.string(),
+	has_password: z.boolean(),
+})
+
+export type AdminUser = z.infer<typeof AdminUserSchema>
+export type Role = z.infer<typeof RoleSchema>
+
+// One definition, used by the overview's "recent activity" and by the audit page. Two schemas
+// for one row type is how the two surfaces come to disagree about what an event looks like.
+const AdminAuditEventSchema = z.object({
+	id: z.number(),
+	actor_id: z.string(),
+	action: z.string(),
+	entity_type: z.string(),
+	entity_id: z.string(),
+	before_json: z.string(),
+	after_json: z.string(),
+	created_at: z.string(),
+})
+
+const AdminOverviewSchema = z.object({
+	users: z.number(),
+	admins: z.number(),
+	concepts: z.number(),
+	domains: z.number(),
+	questions: z.number(),
+	recent_activity: z.array(AdminAuditEventSchema),
+})
+
+export type AdminOverview = z.infer<typeof AdminOverviewSchema>
+export type AdminAuditEvent = z.infer<typeof AdminAuditEventSchema>
+
+export interface AdminUsersRes {
+	users: AdminUser[]
+}
+
+export interface AdminAuditRes {
+	events: AdminAuditEvent[]
+}
+
+export async function adminOverview(): Promise<AdminOverview> {
+	const res = await authedFetch(`${API_BASE}/api/admin/overview`, { cache: 'no-store' })
+	if (!res.ok) await throwWithResponse(res, 'Could not load the overview')
+	return validateResponse(AdminOverviewSchema, await res.json(), 'adminOverview')
+}
+
+export async function searchAdminUsers(q: string): Promise<AdminUsersRes> {
+	const params = new URLSearchParams()
+	if (q.trim()) params.set('q', q.trim())
+	const qs = params.toString()
+	const res = await authedFetch(`${API_BASE}/api/admin/users${qs ? `?${qs}` : ''}`, { cache: 'no-store' })
+	if (!res.ok) await throwWithResponse(res, 'Could not load users')
+	const data = (await res.json()) as { users?: unknown }
+	return { users: validateResponse(z.array(AdminUserSchema), data.users ?? [], 'adminUsers') }
+}
+
+/**
+ * Set an account's role.
+ *
+ * `role` is a closed union here as well as on the server. Both ends reject anything else, and
+ * the reason they both bother is that coercing would let the response say one thing and the row
+ * say another — which is exactly the sort of quiet disagreement the rest of this client has been
+ * bitten by.
+ */
+export async function setUserRole(userId: string, role: Role): Promise<{ user: AdminUser; changed: boolean }> {
+	const res = await authedFetch(`${API_BASE}/api/admin/users/${encodeURIComponent(userId)}`, {
+		method: 'PATCH',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ role }),
+	})
+	if (!res.ok) await throwWithResponse(res, 'Could not change the role')
+	const data = (await res.json()) as { user?: unknown; changed?: unknown }
+	return {
+		user: validateResponse(AdminUserSchema, data.user, 'adminUserRole'),
+		changed: data.changed === true,
+	}
+}
+
+export async function listAdminAudit(): Promise<AdminAuditRes> {
+	const res = await authedFetch(`${API_BASE}/api/admin/audit`, { cache: 'no-store' })
+	if (!res.ok) await throwWithResponse(res, 'Could not load the audit log')
+	const data = (await res.json()) as { events?: unknown }
+	return { events: validateResponse(z.array(AdminAuditEventSchema), data.events ?? [], 'adminAudit') }
 }

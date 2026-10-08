@@ -7,7 +7,7 @@ import { hrefConceptId, type Shelf, type ShelfItem } from '../lib/nextUp'
  * NextUpSummary: Profile's dashboard view of the ranked shelf.
  * - Item 0 renders as the ONE primary button: "Continue: {label}" with the
  *   reason badge and estimated XP. It links to the head href as-is
- *   (/learn?concept= for learn items; /review, /onboard, /study otherwise).
+ *   (/learn?concept= for learn items; /review, /onboard, /graph, /settings otherwise).
  * - Alternatives render as quiet rows (reason + label + XP), visually
  *   secondary. Only the head is a button.
  * - Head href, head concept, and duplicate hrefs are filtered from the rows,

@@ -53,7 +53,7 @@ describe('AppSidebar', () => {
   it('renders Navigate group without a Diagnostic entry (no CTA duplication)', () => {
     renderSidebar()
     expect(screen.getByText('Navigate')).toBeInTheDocument()
-    for (const label of ['Study', 'Learn', 'Graph', 'Leaderboard', 'History', 'Settings']) {
+    for (const label of ['Learn', 'Graph', 'Domains', 'Leaderboard', 'History', 'Settings']) {
       expect(screen.getByText(label)).toBeInTheDocument()
     }
     expect(screen.queryByText('Diagnostic')).toBeNull()
@@ -61,17 +61,28 @@ describe('AppSidebar', () => {
     expect(screen.queryByText('Review Now')).toBeNull()
   })
 
-  it('orders Learn before Study, matching lib/nav.ts', () => {
-    // The sidebar keeps its own list rather than importing nav.ts, because it
-    // is deliberately a subset (no Review, no Login, plus Progress). That
-    // makes the order a thing that can silently drift back to reference-first,
-    // so it is asserted rather than assumed.
+  it('offers no way into the closed reference library', () => {
+    // The sidebar keeps its own list rather than importing nav.ts, which makes it the one
+    // navigation surface a change to lib/nav.ts cannot reach. It held a Study entry for as long
+    // as the library existed, so this asserts the entry is gone rather than assuming it.
     renderSidebar()
     const sidebar = screen.getByTestId('profile-sidebar')
-    const learn = within(sidebar).getByText('Learn', { exact: true })
-    const study = within(sidebar).getByText('Study', { exact: true })
-    // compareDocumentPosition: DOCUMENT_POSITION_FOLLOWING === 4
-    expect(learn.compareDocumentPosition(study) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+    expect(sidebar.querySelector('a[href="/study"]')).toBeNull()
+    expect(within(sidebar).queryByText('Study')).toBeNull()
+  })
+
+  it('leads the rail with Learn, matching lib/nav.ts', () => {
+    // The rail keeps its own list because it is deliberately a subset (no Review, no Login).
+    // That also makes the order something that can silently drift, so it is asserted.
+    renderSidebar()
+    const sidebar = screen.getByTestId('profile-sidebar')
+    const navLinks = [...sidebar.querySelectorAll('a[href]')]
+    const learn = navLinks.findIndex((a) => a.textContent?.includes('Learn'))
+    const graph = navLinks.findIndex((a) => a.textContent?.includes('Graph'))
+    expect(learn).toBeGreaterThan(-1)
+    // Compare before Graph, the next entry in the list, rather than against an index: the brand
+    // mark and the collapse toggle are anchors too and their position is not the claim.
+    expect(learn).toBeLessThan(graph)
   })
 
   it('renders Resources group with Docs, Contribute, and Creator note links', () => {
@@ -117,7 +128,7 @@ describe('AppSidebar', () => {
   it('nav buttons render fixed-size Lucide icons (even collapsed rail)', () => {
     renderSidebar()
     const sidebar = screen.getByTestId('profile-sidebar')
-    const hrefs = ['/study', '/learn', '/graph', '/leaderboard', '/history', '/settings']
+    const hrefs = ['/learn', '/graph', '/domains', '/leaderboard', '/history', '/settings']
     expect(hrefs).toHaveLength(6)
     for (const href of hrefs) {
       const link = sidebar.querySelector(`a[href="${href}"]`)!
@@ -150,7 +161,7 @@ describe('AppSidebar', () => {
     const sidebar = screen.getByTestId('profile-sidebar')
     // Every text label next to an icon carries the collapse-hide class;
     // tooltips (not visible text) carry the label when collapsed.
-    const labels = ['Mathua', 'Study', 'Learn', 'Graph', 'Leaderboard', 'History', 'Settings', 'Docs', 'Contribute', "Creator's note", 'Sign out']
+    const labels = ['Mathua', 'Learn', 'Graph', 'Domains', 'Leaderboard', 'History', 'Settings', 'Docs', 'Contribute', "Creator's note", 'Sign out']
     for (const label of labels) {
       const el = screen.getByText(label, { exact: true })
       expect(sidebar.contains(el)).toBe(true)
@@ -200,5 +211,18 @@ describe('AppSidebar', () => {
     const signOutIdx = labels.findIndex(l => l.includes('Sign out'))
     expect(themeIdx).toBeGreaterThanOrEqual(0)
     expect(signOutIdx).toBeGreaterThan(themeIdx)
+  })
+
+  it('offers the Admin entry to an administrator and to nobody else', () => {
+    // The component's half of the contract. The other half is that /profile passes `isAdmin` from
+    // the session role on *every* branch — the loading and error branches did, and the main one
+    // did not, so the entry appeared and then vanished once scores arrived. That wiring is what
+    // `e2e/admin.spec.ts` guards; this guards the prop.
+    const { unmount } = renderSidebar({ isAdmin: true })
+    expect(screen.getByRole('link', { name: /Admin/ })).toBeTruthy()
+    unmount()
+
+    renderSidebar()
+    expect(screen.queryByRole('link', { name: /Admin/ })).toBeNull()
   })
 })

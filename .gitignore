@@ -11,9 +11,54 @@ coverage.txt
 *.out
 
 # Environment
-.env
-.env.local
-.env.*.local
+#
+# `.env*` rather than a list of specific names. The old rules covered `.env`, `.env.local` and
+# `.env.*.local` but NOT `.env.production`, `.env.staging` or `.env.test` — and those are exactly
+# the filenames that hold real credentials. A list of extensions goes stale the first time
+# someone adds one; a glob plus an explicit exception for the template does not.
+.env*
+!.env.example
+!.env.*.example
+
+# Tracked on purpose: a public API origin, not a secret. Next.js inlines NEXT_PUBLIC_* at build
+# time, so this file is build configuration rather than a credential. It is listed here so the
+# `.env*` glob above does not read as an accident.
+!web/next-app/.env.production
+
+# Private keys, certificates and credential files. `.crt` is included because a self-signed
+# deployment certificate still identifies the deployment; `*.pub` is excluded below so public
+# keys and certificates can still be committed.
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.crt
+*.cer
+*.der
+id_rsa*
+id_dsa*
+id_ecdsa*
+id_ed25519*
+*.pub
+!*.pub
+
+# Deployment and infrastructure credentials
+.envrc
+.terraform/
+*.tfvars
+*.tfstate
+*.tfstate.*
+fly/
+.vercel/
+.netlify/
+
+# OS keychains and credential stores
+*.kdbx
+security/
+*.agilekeychain
+*.keychain
 
 # Auto-generated local JWT signing secret (0600, created on first boot next
 # to the DB file; explicit JWT_SECRET env always wins). Never commit —
@@ -25,6 +70,14 @@ coverage.txt
 *.db
 *.sqlite
 *.sqlite3
+# WAL sidecars: the -wal file holds recent writes that have not been checkpointed, so it can
+# contain data the .db file no longer shows. `*.sqlite*` above does not cover these names.
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite-journal
+*.db-wal
+*.db-shm
+*.db-journal
 
 # IDE
 .idea/

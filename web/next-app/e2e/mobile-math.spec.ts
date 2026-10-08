@@ -430,7 +430,13 @@ test.describe('the whole loop on a phone', () => {
     })
 
     // A heading: not focusable, so tapping it cannot move focus out of the field.
-    const heading = page.locator('h1, h2, h3').first()
+    //
+    // `:visible` matters now. `/learn` carries a collapsed reference panel whose own headings sit
+    // earlier in the document than anything else, and a heading inside a closed `<details>` is
+    // display:none — so the first match was a heading no one can see or tap. Filtering by
+    // visibility keeps the locator pointing at something a finger could actually reach, which is
+    // what the rest of the test assumes.
+    const heading = page.locator('h1:visible, h2:visible, h3:visible').first()
     await expect(heading).toBeVisible()
     await heading.tap()
 

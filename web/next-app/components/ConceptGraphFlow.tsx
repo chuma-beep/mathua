@@ -2,6 +2,7 @@
 
 import { useMemo, useState, useEffect, useCallback, useRef, memo, type MouseEvent as ReactMouseEvent } from 'react'
 import { PlayIcon } from '@animateicons/react/lucide'
+import { countsAsMastered } from '../lib/progress'
 import {
   ReactFlow,
   ReactFlowProvider,
@@ -41,7 +42,6 @@ interface ConceptGraphFlowProps {
   conceptProgress?: Record<string, number>
   theme?: 'dark' | 'light'
   onPathNodes?: string[]
-  onNodeSelect?: (id: string) => void
   selectedId?: string | null
   onSelectionChange?: (id: string | null) => void
   /** When set, mount only this domain plus its one-hop neighbourhood. */
@@ -651,7 +651,6 @@ function GraphInner({
   conceptProgress,
   theme = 'dark',
   onPathNodes,
-  onNodeSelect,
   selectedId,
   onSelectionChange,
   focusDomain = null,
@@ -1007,6 +1006,20 @@ function GraphInner({
   const selected = effectiveSelected ? conceptById.get(effectiveSelected) ?? null : null
   const selectedStatus = effectiveSelected ? conceptStatuses?.[effectiveSelected] ?? 'unseen' : null
 
+  // Where this node's one button goes, and what it says.
+  //
+  // This used to be an "Open concept" button on the page, and the page pushed `/study?concept=`
+  // — a reference route. It is gone, and its replacement is not simply `/learn?concept=`,
+  // because that route opens with the concept's worked example unconditionally: sending a
+  // concept the learner has already demonstrated there re-teaches what they just proved they
+  // can do, which is the tutorial purgatory ADR-037 removed from the scheduler's own path.
+  //
+  // So the destination is a function of the concept's state, which is the whole of §12's rule:
+  // still being learned goes to the teaching loop, already demonstrated goes to retrieval
+  // practice. DECAYING goes the second way deliberately — it means "learned, and the check is
+  // outstanding", which is a question about remembering, not about being taught again.
+  const selectedLearned = countsAsMastered({ status: selectedStatus ?? undefined })
+
   const prereqList = useMemo(() => {
     if (!selected) return []
     return selected.prerequisites
@@ -1133,13 +1146,12 @@ function GraphInner({
             {selectedStatus && (
               <span className="text-[11px] shrink-0" style={{ color: STATUS_COLORS[selectedStatus] }}>● {STATUS_LABELS[selectedStatus]}</span>
             )}
-            <button
-              type="button"
-              onClick={() => onNodeSelect?.(selected.id)}
-              className="text-[12px] font-mono text-[#60a5fa] bg-transparent border border-mathua-blue rounded-none px-3 py-1.5 min-h-[36px] sm:min-h-[36px] w-full sm:w-auto sm:ml-auto shrink-0 inline-flex items-center justify-center hover:bg-mathua-blue-faint transition-colors"
+            <a
+              href={selectedLearned ? '/review' : `/learn?concept=${encodeURIComponent(selected.id)}`}
+              className="text-[12px] font-mono text-[#60a5fa] bg-transparent border border-mathua-blue rounded-none px-3 py-1.5 min-h-[36px] sm:min-h-[36px] w-full sm:w-auto sm:ml-auto shrink-0 inline-flex items-center justify-center hover:bg-mathua-blue-faint transition-colors no-underline"
             >
-              Open concept →
-            </button>
+              {selectedLearned ? 'Check this →' : 'Learn this →'}
+            </a>
           </div>
           {(prereqList.length > 0 || unlocksList.length > 0) && (
             <div className="flex gap-4 sm:gap-6 mt-2.5 flex-wrap min-w-0">

@@ -2,6 +2,7 @@ package storage
 
 import (
 	"database/sql"
+	"encoding/json"
 	"fmt"
 	"log"
 	"sort"
@@ -34,6 +35,18 @@ func NewSQLiteStore(path string) (*SQLiteStore, error) {
 	// serialize inside SQLite and ride the 5s busy_timeout above. A pool
 	// of 8 lets reads interleave with the write queue instead of
 	// queueing behind it — loadtest-verified against MaxOpenConns(1).
+	//
+	// This pool and the ":memory:" DSN do not mix, and the failure is silent until something
+	// runs two things at once. Each connection to ":memory:" opens its OWN database, so a second
+	// concurrent statement gets an empty one: "no such table: students", and any count taken
+	// through it reads as zero. Sequentially the pool reuses its one idle connection and every
+	// test passes, which is what makes it hard to find — a concurrent test on a :memory: store
+	// reports whatever the empty database contains rather than what the code did.
+	//
+	// Production uses a file, and so does any test that needs real concurrency; see
+	// TestConcurrentDemotionsCannotReachZeroAdmins, which uses t.TempDir() for this reason and
+	// says so. Fixing it properly would mean opening ":memory:" as "file::memory:?cache=shared"
+	// with _txlock, which changes behaviour for every existing in-memory test to buy nothing.
 	db.SetMaxOpenConns(8)
 	store := &SQLiteStore{db: db}
 	if err := store.Migrate(); err != nil {
@@ -87,6 +100,12 @@ func authMigrate(db *sql.DB) error {
 		// plausible-looking number would be fabricating evidence.
 		"ALTER TABLE attempts ADD COLUMN difficulty REAL",
 		"ALTER TABLE active_sessions ADD COLUMN difficulty REAL",
+		// The administrative role. NOT NULL DEFAULT 'student' means every existing account is
+		// migrated to a learner, which is the only direction that can be migrated safely: there
+		// is no evidence in a pre-role database about who was administering anything, because
+		// nothing in it could.
+		"ALTER TABLE students ADD COLUMN role TEXT NOT NULL DEFAULT 'student'",
+		"CREATE INDEX IF NOT EXISTS idx_students_role ON students(role)",
 	}
 	for _, m := range migrations {
 		if _, err := db.Exec(m); err != nil {
@@ -1741,4 +1760,290 @@ func parseReportTime(s string) time.Time {
 		return t.UTC()
 	}
 	return time.Time{}
+}
+
+// ── Administration (SQLite) ────────────────────────────────────────────────
+
+// adminUserColumns is one constant for the projection, so the SELECT that reads a user for
+// administration and the SELECT that counts them cannot drift into disagreeing about which
+// columns exist. `password_hash IS NOT NULL AND password_hash != ”` becomes the HasPassword
+// boolean: a fact about the account, never the hash itself.
+const adminUserColumns = `id, name, username, email, role, created_at, (password_hash IS NOT NULL AND password_hash != '')`
+
+func (s *SQLiteStore) GetStudentRole(studentID string) (Role, error) {
+	var raw string
+	err := s.db.QueryRow("SELECT role FROM students WHERE id = ?", studentID).Scan(&raw)
+	if err == sql.ErrNoRows {
+		// A missing account is not an error here. A role lookup happens on every authenticated
+		// request, and an id that has been deleted in the last second should read as "no
+		// privilege" rather than take down the middleware. The caller's own resource lookup is
+		// what reports absence.
+		return RoleStudent, nil
+	}
+	if err != nil {
+		return RoleStudent, err
+	}
+	return NormalizeRole(raw), nil
+}
+
+func (s *SQLiteStore) SetStudentRole(studentID string, role Role) error {
+	res, err := s.db.Exec("UPDATE students SET role = ? WHERE id = ?", string(role), studentID)
+	if err != nil {
+		return err
+	}
+	if n, _ := res.RowsAffected(); n == 0 {
+		return sql.ErrNoRows
+	}
+	return nil
+}
+
+// DemoteAdminSafely refuses to remove the last administrator.
+//
+// The condition lives inside the UPDATE. A read of COUNT(*) followed by an UPDATE is a race:
+// two administrators demoting each other at the same moment both observe two, and the system
+// reaches zero — the failure this exists to prevent, reached by the very feature meant to
+// prevent it. One statement means the second demotion matches no rows.
+//
+// The same statement covers the no-op cases for free. An admin who is not the last admin, but
+// is already a student, matches nothing and is reported as ErrNoRows, so the caller can tell
+// "already a student" from "would have removed the last admin".
+func (s *SQLiteStore) DemoteAdminSafely(studentID string) error {
+	res, err := s.db.Exec(
+		`UPDATE students SET role = 'student'
+		 WHERE id = ? AND role = 'admin' AND (SELECT COUNT(*) FROM students WHERE role = 'admin') > 1`,
+		studentID)
+	if err != nil {
+		return err
+	}
+	n, _ := res.RowsAffected()
+	if n > 0 {
+		return nil
+	}
+	var role Role
+	var err2 error
+	role, err2 = s.GetStudentRole(studentID)
+	if err2 != nil {
+		return err2
+	}
+	if role != RoleAdmin {
+		return sql.ErrNoRows
+	}
+	return ErrLastAdmin
+}
+
+func (s *SQLiteStore) CountAdmins() (int, error) {
+	var n int
+	err := s.db.QueryRow("SELECT COUNT(*) FROM students WHERE role = 'admin'").Scan(&n)
+	return n, err
+}
+
+func (s *SQLiteStore) CountAdminUsers() (int, error) {
+	var n int
+	err := s.db.QueryRow("SELECT COUNT(*) FROM students").Scan(&n)
+	return n, err
+}
+
+func (s *SQLiteStore) CountStoredQuestions() (int, error) {
+	var n int
+	err := s.db.QueryRow("SELECT COUNT(*) FROM questions").Scan(&n)
+	return n, err
+}
+
+// adminQueryer is what a projection read needs, and naming it lets the same code serve both the
+// pool and an open transaction. SetRoleAudited has to read the before and after snapshots
+// inside its transaction, and a read that went to the pool instead would be looking at
+// committed state outside the unit of work it is describing.
+type adminQueryer interface {
+	Query(query string, args ...interface{}) (*sql.Rows, error)
+}
+
+// SearchAdminUsers matches on the four identifiers an administrator actually has for someone.
+// An empty query lists newest first, so "who signed up most recently" needs no sorting
+// parameter.
+//
+// The LIKE is over an escaped needle rather than a bare `%` + input, so a search for `x%`
+// cannot turn into a full scan-and-everything, and a needle containing `_` does not match any
+// character. ESCAPE is what makes the escape character itself matchable.
+func (s *SQLiteStore) SearchAdminUsers(query string, limit, offset int) ([]AdminUser, error) {
+	return searchAdminUsersSQLite(s.db, query, limit, offset)
+}
+
+func searchAdminUsersSQLite(q adminQueryer, query string, limit, offset int) ([]AdminUser, error) {
+	term := strings.TrimSpace(query)
+	if term == "" {
+		return queryAdminUsers(q,
+			`SELECT `+adminUserColumns+` FROM students ORDER BY created_at DESC, id DESC LIMIT ? OFFSET ?`,
+			limit, offset)
+	}
+	needle := "%" + escapeLike(term) + "%"
+	return queryAdminUsers(q,
+		`SELECT `+adminUserColumns+` FROM students
+		 WHERE id LIKE ? ESCAPE '\' OR email LIKE ? ESCAPE '\' OR username LIKE ? ESCAPE '\' OR name LIKE ? ESCAPE '\'
+		 ORDER BY created_at DESC, id DESC LIMIT ? OFFSET ?`,
+		needle, needle, needle, needle, limit, offset)
+}
+
+// adminUserByIDSQLite is the exact-id read SetRoleAudited uses. Searching by the id and
+// filtering keeps it to the one query in the package that can produce an AdminUser, so there
+// is still a single place that decides what an administrator may see.
+func adminUserByIDSQLite(q adminQueryer, id string) (*AdminUser, error) {
+	rows, err := searchAdminUsersSQLite(q, id, 200, 0)
+	if err != nil {
+		return nil, err
+	}
+	for i := range rows {
+		if rows[i].ID == id {
+			return &rows[i], nil
+		}
+	}
+	return nil, nil
+}
+
+func escapeLike(s string) string {
+	r := strings.NewReplacer(`\`, `\\`, `%`, `\%`, `_`, `\_`)
+	return r.Replace(s)
+}
+
+func queryAdminUsers(q adminQueryer, query string, args ...interface{}) ([]AdminUser, error) {
+	rows, err := q.Query(query, args...)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	out := []AdminUser{}
+	for rows.Next() {
+		var u AdminUser
+		var name, username, email, role, createdAt sql.NullString
+		var hasPw int
+		if err := rows.Scan(&u.ID, &name, &username, &email, &role, &createdAt, &hasPw); err != nil {
+			return nil, err
+		}
+		u.Name = name.String
+		u.Username = username.String
+		u.Email = email.String
+		u.Role = NormalizeRole(role.String)
+		u.CreatedAt = createdAt.String
+		u.HasPassword = hasPw == 1
+		out = append(out, u)
+	}
+	return out, rows.Err()
+}
+
+// RecordAdminAudit is an INSERT and nothing else. There is no update path and no delete path
+// anywhere in this package, so the log cannot be rewritten through the repository.
+func (s *SQLiteStore) RecordAdminAudit(rec AdminAuditRecord) (int64, error) {
+	res, err := s.db.Exec(
+		`INSERT INTO admin_audit (actor_id, action, entity_type, entity_id, before_json, after_json, created_at)
+		 VALUES (?, ?, ?, ?, ?, ?, ?)`,
+		rec.ActorID, rec.Action, rec.EntityType, rec.EntityID,
+		rec.BeforeJSON, rec.AfterJSON, formatReportTime(parseReportTime(rec.CreatedAt)))
+	if err != nil {
+		return 0, err
+	}
+	return res.LastInsertId()
+}
+
+func (s *SQLiteStore) ListAdminAudit(limit, offset int) ([]AdminAuditRecord, error) {
+	rows, err := s.db.Query(
+		`SELECT id, actor_id, action, entity_type, entity_id, before_json, after_json, created_at
+		 FROM admin_audit ORDER BY id DESC LIMIT ? OFFSET ?`, limit, offset)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	out := []AdminAuditRecord{}
+	for rows.Next() {
+		var r AdminAuditRecord
+		var createdAt sql.NullString
+		if err := rows.Scan(&r.ID, &r.ActorID, &r.Action, &r.EntityType, &r.EntityID,
+			&r.BeforeJSON, &r.AfterJSON, &createdAt); err != nil {
+			return nil, err
+		}
+		r.CreatedAt = createdAt.String
+		out = append(out, r)
+	}
+	return out, rows.Err()
+}
+
+// SetRoleAudited is the network-facing role change: the mutation and its audit event land
+// together or not at all.
+//
+// The transaction spans the three reads and two writes deliberately. The before-snapshot has to
+// be read inside it, or it describes committed state rather than the state being changed; the
+// after-snapshot likewise; and the audit row can only honestly name what happened if it is
+// written while that is still uncommitted. The last-admin guard stays inside the UPDATE rather
+// than becoming a prior SELECT for the reason given on DemoteAdminSafely.
+func (s *SQLiteStore) SetRoleAudited(actorID, studentID string, role Role) (RoleChange, error) {
+	tx, err := s.db.Begin()
+	if err != nil {
+		return RoleChange{}, fmt.Errorf("begin role change: %w", err)
+	}
+	// A no-op after a successful commit, and the safety net for every early return below.
+	defer func() { _ = tx.Rollback() }()
+
+	before, err := adminUserByIDSQLite(tx, studentID)
+	if err != nil {
+		return RoleChange{}, fmt.Errorf("read user before: %w", err)
+	}
+	if before == nil {
+		return RoleChange{}, sql.ErrNoRows
+	}
+	if before.Role == role {
+		// Nothing happened, so nothing is recorded. Returning a change object alongside the
+		// sentinel is deliberate: the caller reports `changed: false` from it rather than
+		// re-reading the row it was just told was already correct.
+		return RoleChange{Before: *before, After: *before, Changed: false}, ErrRoleUnchanged
+	}
+
+	action := ActionAdminDemoteUser
+	if role == RoleAdmin {
+		action = ActionAdminPromoteUser
+		if _, err := tx.Exec("UPDATE students SET role = ? WHERE id = ?", string(role), studentID); err != nil {
+			return RoleChange{}, fmt.Errorf("promote: %w", err)
+		}
+	} else {
+		res, err := tx.Exec(
+			`UPDATE students SET role = 'student'
+			 WHERE id = ? AND role = 'admin' AND (SELECT COUNT(*) FROM students WHERE role = 'admin') > 1`,
+			studentID)
+		if err != nil {
+			return RoleChange{}, fmt.Errorf("demote: %w", err)
+		}
+		// `before.Role` was admin inside this transaction, so zero rows affected can only mean
+		// the count condition failed: this was the last administrator.
+		if n, _ := res.RowsAffected(); n == 0 {
+			return RoleChange{}, ErrLastAdmin
+		}
+	}
+
+	after, err := adminUserByIDSQLite(tx, studentID)
+	if err != nil {
+		return RoleChange{}, fmt.Errorf("read user after: %w", err)
+	}
+	if after == nil {
+		return RoleChange{}, sql.ErrNoRows
+	}
+
+	beforeJSON, err := json.Marshal(before)
+	if err != nil {
+		return RoleChange{}, fmt.Errorf("encode before: %w", err)
+	}
+	afterJSON, err := json.Marshal(after)
+	if err != nil {
+		return RoleChange{}, fmt.Errorf("encode after: %w", err)
+	}
+	// The only place an administrative event is written. If this insert fails the deferred
+	// rollback discards the role change above, so a role can never be changed without a record.
+	if _, err := tx.Exec(
+		`INSERT INTO admin_audit (actor_id, action, entity_type, entity_id, before_json, after_json, created_at)
+		 VALUES (?, ?, 'user', ?, ?, ?, ?)`,
+		actorID, action, studentID, string(beforeJSON), string(afterJSON),
+		time.Now().UTC().Format(time.RFC3339)); err != nil {
+		return RoleChange{}, fmt.Errorf("record audit: %w", err)
+	}
+
+	if err := tx.Commit(); err != nil {
+		return RoleChange{}, fmt.Errorf("commit role change: %w", err)
+	}
+	return RoleChange{Before: *before, After: *after, Changed: true, Action: action}, nil
 }

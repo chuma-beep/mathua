@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useRef } from 'react'
 import {
-  BookOpen,
   ChartNoAxesColumn,
   ChevronsLeft,
   ChevronsRight,
@@ -12,6 +11,7 @@ import {
   Handshake,
   Layers,
   LogOut,
+  Shield,
   Network,
   Pencil,
   Play,
@@ -45,13 +45,18 @@ import { signOut } from '../lib/auth'
 // reachable from the header row and the mobile compass instead, which is where
 // the full destination list lives; putting it here as well would be exactly the
 // duplication this rule exists to prevent.
-// Order mirrors lib/nav.ts: Learn leads, then Study as the reference surface.
+// Order mirrors lib/nav.ts: Learn leads, then the orientation surfaces.
 // Icons come from components/icons, which fixes the box at 16px. The animated set renders a
 // div rather than an svg, so a `size-4` class here would silently size nothing and the
 // collapsed 44px rail would go ragged.
-const NAV_ITEMS: { label: string; href: string; icon: IconComponent }[] = [
+interface SidebarNavItem {
+  label: string
+  href: string
+  icon: IconComponent
+}
+
+const NAV_ITEMS: SidebarNavItem[] = [
   { label: 'Learn', href: '/learn', icon: Play },
-  { label: 'Study', href: '/study', icon: BookOpen },
   { label: 'Graph', href: '/graph', icon: Network },
   { label: 'Domains', href: '/domains', icon: Layers },
   { label: 'Leaderboard', href: '/leaderboard', icon: Trophy },
@@ -61,15 +66,30 @@ const NAV_ITEMS: { label: string; href: string; icon: IconComponent }[] = [
 
 // Resources group: docs, contributing, creator's note. Informational pages
 // only — never Diagnostic / Quiz / Review (no CTA duplication).
-const RESOURCE_ITEMS: { label: string; href: string; icon: IconComponent }[] = [
+const RESOURCE_ITEMS: SidebarNavItem[] = [
   { label: 'Docs', href: '/docs', icon: FileText },
   { label: 'Contribute', href: '/docs/contributing', icon: Handshake },
   { label: "Creator's note", href: '/note', icon: Pencil },
 ]
 
+const ADMIN_ITEM: SidebarNavItem = {
+  label: 'Admin',
+  href: '/admin',
+  icon: Shield,
+}
+
 export interface AppSidebarProps {
   name: string
   studentId: string
+  /**
+   * Whether to offer the Admin entry.
+   *
+   * A convenience and nothing more — the server reads the role on every administrative request,
+   * so a learner who types /admin/users reaches the page and is refused by the API with a 403.
+   * Omitting this only removes the invitation; it removes no access. It is here because the
+   * alternative is an administrator having to know a URL.
+   */
+  isAdmin?: boolean
   username?: string
   level?: string
   streak?: number
@@ -87,6 +107,7 @@ export function AppSidebar({
   avatarUrl,
   avatarPreset,
   dueReviews = 0,
+  isAdmin = false,
 }: AppSidebarProps) {
   const pathname = usePathname()
   const router = useRouter()
@@ -157,7 +178,11 @@ export function AppSidebar({
           <SidebarGroupLabel>Navigate</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {NAV_ITEMS.map((item) => {
+              {/* Admin last, and only for an administrator. Last because it is a different
+                  surface rather than another destination in this one; conditional because
+                  offering it to everyone would be an invitation most of them cannot accept.
+                  The server refuses either way — see AppSidebarProps.isAdmin. */}
+              {(isAdmin ? [...NAV_ITEMS, ADMIN_ITEM] : NAV_ITEMS).map((item) => {
                 const active = pathname === item.href || pathname.startsWith(item.href + '/')
                 const Icon = item.icon
                 return (

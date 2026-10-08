@@ -1,10 +1,8 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import type { GoalPlanRes } from '../lib/api'
-import { getLessons } from '../lib/api'
-import { getUserInfo } from '../lib/auth'
 import { domainLabel } from '../lib/graphDomains'
 
 
@@ -14,23 +12,7 @@ interface Props {
 }
 
 export default function DiagnosticResults({ plan, onStartPractice }: Props) {
-  const [recommended, setRecommended] = useState<Record<string, { title: string; concepts: string[] }[]>>({})
-  const [recLoading, setRecLoading] = useState(true)
-  const allWeakIds = Object.values(plan.weak_areas).flat().map((c) => c.id)
   const [expanded, setExpanded] = useState<string | null>(null)
-
-  useEffect(() => {
-    if (allWeakIds.length === 0) { setRecLoading(false); return }
-    const user = getUserInfo()
-    getLessons(user?.student_id).then((res) => {
-      const rec: Record<string, { title: string; concepts: string[] }[]> = {}
-      for (const [domain, lessons] of Object.entries(res.lessons)) {
-        const filtered = lessons.filter((l) => l.concepts.some((cid) => allWeakIds.includes(cid))).slice(0, 3)
-        if (filtered.length) rec[domain] = filtered
-      }
-      setRecommended(rec)
-    }).catch(() => {}).finally(() => setRecLoading(false))
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const domains = new Set([...Object.keys(plan.weak_areas), ...Object.keys(plan.strong_areas)])
   const readinessPct = Math.round(plan.readiness * 100)
@@ -101,7 +83,7 @@ export default function DiagnosticResults({ plan, onStartPractice }: Props) {
                       <p className="font-mono text-[10px] uppercase text-mathua-red mb-1">Needs review</p>
                       <div className="flex flex-wrap gap-1.5">
                         {weak.map((c) => (
-                          <Link key={c.id} href={`/study?concept=${encodeURIComponent(c.id)}`} className="text-xs font-mono border border-mathua-border px-2 py-1 hover:border-mathua-blue hover:text-mathua-blue">
+                          <Link key={c.id} href={`/learn?concept=${encodeURIComponent(c.id)}`} className="text-xs font-mono border border-mathua-border px-2 py-1 hover:border-mathua-blue hover:text-mathua-blue">
                             {c.label}
                           </Link>
                         ))}
@@ -120,34 +102,6 @@ export default function DiagnosticResults({ plan, onStartPractice }: Props) {
           )
         })}
       </div>
-
-      {recLoading && allWeakIds.length > 0 && (
-        <p className="font-mono text-xs text-mathua-muted text-center mb-8">Finding matching lessons…</p>
-      )}
-      {!recLoading && allWeakIds.length > 0 && Object.keys(recommended).length === 0 && (
-        <p className="font-mono text-xs text-mathua-muted text-center mb-8">
-          No matching lessons found — <Link href="/study" className="text-mathua-blue hover:text-mathua-blue-hover">browse Study →</Link>
-        </p>
-      )}
-      {Object.keys(recommended).length > 0 && (
-        <div className="mb-8">
-          <h3 className="font-serif text-lg text-mathua-primary mb-3">Recommended lessons</h3>
-          <div className="grid gap-2">
-            {Object.entries(recommended).map(([domain, lessons]) => (
-              <div key={domain} className="border border-mathua-border p-3 bg-mathua-surface-elevated">
-                <p className="font-mono text-[11px] uppercase text-mathua-muted mb-2">{domainLabel(domain)}</p>
-                <div className="space-y-1">
-                  {lessons.map((l) => (
-                    <Link key={l.title} href={`/study?lesson=${encodeURIComponent(l.title)}`} className="block font-mono text-xs text-mathua-blue hover:text-mathua-blue-hover">
-                      → {l.title}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
 
       {onStartPractice && (
         <div className="text-center">

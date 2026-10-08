@@ -8,21 +8,17 @@ export type HeaderLink = NavLink
 
 // Single source of truth for site navigation (Header + BottomTabs).
 //
-// Order carries meaning, and it is the same meaning on every surface: Learn
-// leads, then Study.
+// Order carries meaning: Learn leads, and the orientation surfaces follow it.
 //
-// Learn is the only surface that asks a question, grades an answer and explains
-// it. Study explains and never grades. Putting reference above doing made the
-// product read backwards — a learner opening the app was sent to browse a
-// reference library before being offered anything to solve.
+// Learn is the only surface that asks a question, grades an answer and explains it. It used to
+// lead into Study — a full reference library — because reading was treated as a way to learn.
+// It is not: only demonstrated answers move a concept, so a learner who could read their way
+// through the corpus had found a path around the only thing that counts. Reference material
+// stayed; the route to it from navigation did not. It now lives inside `/learn`, scoped to the
+// concept being learned (see components/ConceptReference).
 //
-// Study stays a tab regardless. It is the discovery surface for "what even is
-// this concept", which is a real job that Learn has no substitute for: Learn
-// has no browse, no search and no domain list.
-//
-// Bottom tabs are the primary mobile nav and stay at five. The mobile compass
-// menu shows ONLY overflow links not already in the tabs, so no destination
-// appears twice on one screen.
+// Bottom tabs are the primary mobile nav and stay at five. The mobile compass menu shows ONLY
+// overflow links not already in the tabs, so no destination appears twice on one screen.
 
 // LEARN_LINKS is the doing group, and it is shown to everyone — a guest can
 // answer questions, they just cannot have them remembered.
@@ -34,12 +30,12 @@ export const LEARN_LINKS: NavLink[] = [{ label: 'Learn', href: '/learn' }]
 // a guest would be a link to a 401.
 export const REVIEW_LINKS: NavLink[] = [{ label: 'Review', href: '/review' }]
 
-// DISPLAY_LINKS is the reference group.
+// DISPLAY_LINKS is the orientation group: where things sit in the curriculum and where the
+// learner stands in it. None of these grade an answer.
 export const DISPLAY_LINKS: NavLink[] = [
-  { label: 'Study', href: '/study' },
   { label: 'Graph', href: '/graph' },
-  // Not a bottom tab — the tab bar stays at five — so /domains reaches mobile through the
-  // compass overflow, which is derived from this list by subtracting TAB_HREFS.
+  // Not a bottom tab on every surface — the tab bar stays at five — so /domains reaches mobile
+  // through the tab bar and the compass overflow, derived from this list minus TAB_HREFS.
   { label: 'Domains', href: '/domains' },
   { label: 'Leaderboard', href: '/leaderboard' },
 ]
@@ -57,12 +53,12 @@ export const LOGGED_OUT_LINKS: NavLink[] = [{ label: 'Login', href: '/login' }]
 export const TAB_HREFS: ReadonlySet<string> = new Set([
   '/',
   '/learn',
-  '/study',
+  '/domains',
   '/profile',
   '/graph',
 ])
 
-// Full desktop header row: Learn first, then Study, then the account links.
+// Full desktop header row: Learn first, then the orientation surfaces, then the account links.
 export function desktopLinks(loggedIn: boolean): NavLink[] {
   return [
     ...LEARN_LINKS,

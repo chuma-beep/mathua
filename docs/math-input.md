@@ -536,7 +536,7 @@ route actually ships.
 | `/review` | 433 kB | 434 kB | +1 |
 | `/goals` | 440 kB | 441 kB | +1 |
 | `/onboard` | 438 kB | 438 kB | 0 |
-| `/study` | 462 kB | 462 kB | 0 |
+| `/study` (later closed — a 460 B forwarder; see ADR-046) | 462 kB | 462 kB | 0 |
 | `/profile` | 248 kB | 248 kB | 0 |
 | `/history` | 411 kB | 411 kB | 0 |
 | `/graph` | 252 kB | 252 kB | 0 |

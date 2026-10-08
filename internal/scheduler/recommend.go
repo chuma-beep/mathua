@@ -198,14 +198,22 @@ func (s *Scheduler) Recommend(in RecommendInput) RecommendationResponse {
 		resp.Alternatives = append(resp.Alternatives, picked[1:]...)
 	}
 	if resp.Primary == nil {
+		// Nothing is eligible: nothing new is reachable, nothing is due for review, nothing
+		// needs practice. That is a real state, and it used to be reported by pointing at
+		// `/study` — "everything available is already learned, the reference library is open".
+		//
+		// The library is closed. It was also the wrong answer while it existed: a learner with
+		// nothing due was told to go and read, which is the one thing that cannot help them.
+		// Orientation is the honest next surface — it makes no claim about progress, it cannot
+		// 401, and it shows what builds on what they already hold.
 		resp.Primary = &Recommendation{
-			ID:     "study",
+			ID:     "graph",
 			Kind:   KindLearn,
 			Reason: ReasonNew,
-			Action: Action{Type: KindLearn, Href: "/study"},
-			Badge:  "Library",
-			Detail: "Everything available is already learned — the reference library is open",
-			CTA:    "Browse lessons →",
+			Action: Action{Type: KindLearn, Href: "/graph"},
+			Badge:  "All learned",
+			Detail: "Nothing is due right now — the graph shows what builds on what you have",
+			CTA:    "See the graph →",
 		}
 	}
 	if resp.Alternatives == nil {

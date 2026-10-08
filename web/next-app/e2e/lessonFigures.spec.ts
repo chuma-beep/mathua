@@ -24,6 +24,10 @@ import { resolve } from 'node:path'
  *
  * Per ADR-029, `npx playwright` serves the prebuilt `out/`, so `next build` must run first or
  * this exercises the previous build and passes regardless of the change under test.
+ *
+ * It used to drive `/study`, which rendered every lesson body in full. That route is closed, and
+ * with it the renderer that resolves a figure reference out of markdown — which is why this spec
+ * had to move rather than be deleted. See `stubLesson` for the configuration it measures now.
  */
 
 const ROOT = resolve(__dirname, '../../..')
@@ -43,7 +47,19 @@ function bodyFor(file: string): string {
   return readFileSync(resolve(ROOT, 'data/lessons', file), 'utf8')
 }
 
-/** Stub the lesson API with a real body, and progress with nothing. */
+/**
+ * Stub the lesson API with a real body, and progress with nothing.
+ *
+ * The knowledge-point shard is stubbed empty on purpose. The figures this spec measures are
+ * referenced inline in the *article*, and the article is what the reference panel falls back to
+ * for a concept with no shards — so an empty shard is the one configuration that renders it.
+ *
+ * That is not the common path and the spec says so. A concept with shards is taught through
+ * them: `/learn` asks the server which figures belong to which step and shows those, so the
+ * figure appears with the instruction that needs it rather than in a wall of prose. This spec
+ * covers the other renderer, which is the one that resolves `/diagrams/…` references out of
+ * markdown, and it is the renderer most likely to go quietly untested after `/study` closed.
+ */
 async function stubLesson(page: import('@playwright/test').Page, concept: string, file: string) {
   const body = bodyFor(file)
   const title = body.split('\n')[0].replace(/^#\s*/, '')
@@ -53,7 +69,47 @@ async function stubLesson(page: import('@playwright/test').Page, concept: string
   await page.route('**/api/lessons', route =>
     route.fulfill({ json: { lessons: { [file.split('/')[0]]: [{ title, body: '', concepts: [concept] }] } } }),
   )
+  await page.route('**/api/lessons/*/kp*', route =>
+    route.fulfill({ json: { concept_id: concept, kps: [] } }),
+  )
+  await page.route('**/api/lessons/*/readiness*', route =>
+    route.fulfill({ json: { concept_id: concept, ready: true, weak: [], missing: [] } }),
+  )
+  await page.route('**/api/lessons/*/practice*', route =>
+    route.fulfill({ json: { concept_id: concept, questions: [] } }),
+  )
   await page.route('**/api/progress/**', route => route.fulfill({ json: {} }))
+}
+
+/**
+ * Open `/learn` for a concept and expand the reference panel that carries the article.
+ *
+ * The panel is a disclosure on a page that already has a learning feed above it, so its figures
+ * start well outside the viewport — and `KatexContent` renders them with `loading="lazy"`, so
+ * they are not fetched, and therefore have no intrinsic size, until they are near. That is right
+ * for a closed panel and a problem for a measurement: a figure that has not loaded reports 0x0,
+ * which is the same reading as a broken one. So each figure is scrolled into view and awaited
+ * before it is measured, which is also what a reader does.
+ */
+async function openReference(page: import('@playwright/test').Page, concept: string) {
+  await page.goto(`/learn?concept=${encodeURIComponent(concept)}`)
+  const summary = page.getByText('Reference — the full lesson')
+  await expect(summary).toBeVisible({ timeout: 30_000 })
+  await summary.click()
+}
+
+/** Scroll a figure into view and wait for it to decode, then report its drawn size. */
+async function measuredSize(locator: import('@playwright/test').Locator) {
+  await locator.scrollIntoViewIfNeeded()
+  await locator.evaluate(
+    (e: HTMLImageElement) =>
+      new Promise<void>((done) => {
+        if (e.complete) return done()
+        e.addEventListener('load', () => done(), { once: true })
+        e.addEventListener('error', () => done(), { once: true })
+      }),
+  )
+  return locator.evaluate((e: HTMLImageElement) => ({ w: e.naturalWidth, h: e.naturalHeight }))
 }
 
 const FIGURE = 'img[src*="/diagrams/algebrica/"]'
@@ -70,7 +126,7 @@ test.describe('lesson figures render', () => {
       }
       page.on('response', onResponse)
 
-      await page.goto(`/study?concept=${encodeURIComponent(c.concept)}`)
+      await openReference(page, c.concept)
       await expect(page.locator('body')).toContainText(bodyFor(c.file).split('\n')[0].replace(/^#\s*/, ''), {
         timeout: 30_000,
       })
@@ -80,7 +136,7 @@ test.describe('lesson figures render', () => {
       for (let i = 0; i < (await imgs.count()); i++) {
         const el = imgs.nth(i)
         const src = await el.getAttribute('src')
-        const size = await el.evaluate((e: HTMLImageElement) => ({ w: e.naturalWidth, h: e.naturalHeight }))
+        const size = await measuredSize(el)
         if (size.w === 0 || size.h === 0) problems.push(`${c.file}: ${src} drew at ${size.w}x${size.h}`)
       }
       if (notFound.length) problems.push(`${c.file}: 404 on ${notFound.join(', ')}`)
@@ -92,7 +148,7 @@ test.describe('lesson figures render', () => {
 
   test('negative control: a lesson with no figures reports none', async ({ page }) => {
     await stubLesson(page, FIGURELESS.concept, FIGURELESS.file)
-    await page.goto(`/study?concept=${FIGURELESS.concept}`)
+    await openReference(page, FIGURELESS.concept)
     await expect(page.locator('body')).toContainText(/\w/, { timeout: 30_000 })
     // The page really does render lesson prose, so zero here means "no figures", not "no
     // lesson" — which is the distinction that would otherwise make the test above vacuous.
@@ -101,8 +157,10 @@ test.describe('lesson figures render', () => {
 
   test('negative control: a missing diagram measures as zero, not as drawn', async ({ page }) => {
     await stubLesson(page, CASES[0].concept, CASES[0].file)
-    await page.goto(`/study?concept=${CASES[0].concept}`)
-    await expect(page.locator(FIGURE).first()).toBeVisible({ timeout: 30_000 })
+    await openReference(page, CASES[0].concept)
+    const first = page.locator(FIGURE).first()
+    await first.scrollIntoViewIfNeeded()
+    await expect(first).toBeVisible({ timeout: 30_000 })
 
     // The same measurement the passing test relies on, against a path nothing serves. If this
     // ever reported a non-zero size, "the figures drew" would mean nothing.

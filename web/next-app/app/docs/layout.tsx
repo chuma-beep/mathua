@@ -8,7 +8,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
   return (
     <>
       <Header links={[
-        { label: 'Study', href: '/study' },
+        { label: 'Domains', href: '/domains' },
         { label: 'Docs', href: '/docs' },
         { label: 'Architecture', href: '/docs/architecture' },
         { label: 'Contributing', href: '/docs/contributing' },

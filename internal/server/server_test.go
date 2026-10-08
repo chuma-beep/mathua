@@ -1987,8 +1987,11 @@ func TestNext_ReturnsAPrimaryAndAlternatives(t *testing.T) {
 		t.Error("alternatives is null; the client iterates it without a null check")
 	}
 	// The one the client must be able to rely on: the head is a /learn entry.
+	// /study is gone as a learner destination (it forwards to /learn now), so the set of
+	// non-concept heads a "learn" recommendation may name is /onboard, /graph and /settings.
 	if resp.Primary.Kind == "learn" && !strings.HasPrefix(resp.Primary.Action.Href, "/learn?concept=") &&
-		resp.Primary.Action.Href != "/onboard" && resp.Primary.Action.Href != "/study" {
+		resp.Primary.Action.Href != "/onboard" && resp.Primary.Action.Href != "/graph" &&
+		resp.Primary.Action.Href != "/settings" {
 		t.Errorf("learn href = %q", resp.Primary.Action.Href)
 	}
 

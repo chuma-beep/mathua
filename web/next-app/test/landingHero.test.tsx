@@ -59,15 +59,20 @@ describe('landing hero', () => {
     await waitFor(() => expect(replaceMock).toHaveBeenCalledWith('/profile'))
   })
 
-  it('lists Learn in the landing header, ahead of Study', async () => {
+  it('lists Learn in the landing header and does not advertise the closed library', async () => {
     render(<HomePage />)
     const header = await screen.findByRole('banner')
     const learn = header.querySelector('a[href="/learn"]')
-    const study = header.querySelector('a[href="/study"]')
     expect(learn).not.toBeNull()
-    expect(study).not.toBeNull()
-    // The landing hardcodes its header, so it is the one place the product's
-    // own ordering could quietly disappear.
-    expect(learn!.compareDocumentPosition(study!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+    // The landing hardcodes its own header rather than inheriting lib/nav.ts, so it is the one
+    // place the product's own navigation decision could quietly disappear — in either
+    // direction. Learn leads, and the closed reference library is not offered at all.
+    const hrefs = [...header.querySelectorAll('a')].map((a) => a.getAttribute('href'))
+    // The brand mark is the first anchor, so the ordering claim is about the nav entries:
+    // Learn leads them.
+    expect(hrefs.indexOf('/learn')).toBeGreaterThan(-1)
+    expect(hrefs.indexOf('/learn')).toBeLessThan(hrefs.indexOf('/how-it-works'))
+    expect(hrefs).not.toContain('/study')
+    expect([...header.querySelectorAll('a')].some((a) => /study/i.test(a.textContent ?? ''))).toBe(false)
   })
 })

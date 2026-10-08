@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { useTheme } from '../../hooks/useTheme'
-import { getUserInfo, ensureGuestId, ensureGuestToken, getGuestId, isLoggedIn } from '../../lib/auth'
+import { getUserInfo, ensureGuestId, ensureGuestToken, getGuestId, isLoggedIn, type UserInfo } from '../../lib/auth'
 import { ensureDicebearAvatar, resolveAvatar } from '../../lib/dicebear'
 import { getActivity, getProgress, getWeaknesses, getDueReviews, getEfficacy, getScores, getSettings } from '../../lib/api'
 import type { DailyActivity, Scores, WeaknessRes, ConceptProgress, EfficacyReport } from '../../lib/api'
@@ -23,15 +23,12 @@ import { fetchShelf } from '../../lib/recommendations'
 import { concepts as conceptCatalog } from '../../lib/conceptData'
 import { HourglassIcon, PauseIcon } from '@animateicons/react/lucide'
 
-interface UserInfo {
-  student_id: string
-  name: string
-  username: string
-  concepts_mastered: number
-  current_streak: number
-  level: string
-  diagnostic_completed: boolean
-}
+// UserInfo is imported rather than redeclared. This page had its own copy of the shape, which
+// is ADR-043's failure mode in its smallest form: a second schema describing the same payload,
+// so a field added to the real one type-checks here as a *missing property* instead of as a
+// change — and when `role` arrived from /api/auth/me, this copy did not have it. The compiler
+// said the field did not exist, which is the one symptom of the duplication that anyone noticed;
+// the other is that it never would have been noticed at all.
 
 // Every branch below returns through this. /profile used to repeat
 // <SidebarProvider>…</SidebarProvider> in some return paths and nothing at all in others, and
@@ -333,7 +330,7 @@ export default function ProfilePage() {
     // Show actionable error with sign-in CTA instead of hanging.
     if (error) {
       return (
-        <ProfileShell name={user.name} studentId={user.student_id}>
+        <ProfileShell name={user.name} studentId={user.student_id} isAdmin={user.role === 'admin'}>
           <div className="mx-auto px-4 sm:px-6 py-20 overflow-x-hidden min-w-0">
             <div style={{ fontFamily: monoFont, fontSize: 13, color: 'var(--text-muted)', textAlign: 'center' }}>
               {error}
@@ -347,7 +344,7 @@ export default function ProfilePage() {
       )
     }
     return (
-      <ProfileShell name={user.name} studentId={user.student_id}>
+      <ProfileShell name={user.name} studentId={user.student_id} isAdmin={user.role === 'admin'}>
         <div className="mx-auto px-4 sm:px-6 py-20 overflow-x-hidden min-w-0">
           <div style={{ fontFamily: monoFont, fontSize: 13, color: 'var(--text-muted)', textAlign: 'center' }}>
             Loading scores…
@@ -367,6 +364,7 @@ export default function ProfilePage() {
       avatarUrl={avatarUrl}
       avatarPreset={avatarPreset}
       dueReviews={dueReviews}
+      isAdmin={user.role === 'admin'}
     >
         <a href="#profile-main" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-mathua-surface focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:text-mathua-blue">
           Skip to profile content

@@ -100,16 +100,17 @@ export default function NotePage() {
           <p style={textStyle}>
             Mathua is for self-learners working through math on their own, and
             for parents and teachers who want an honest picture of where a
-            student stands. Take the diagnostic to find your starting point or browse
-            the Study library directly. If something is wrong, report it from
+            student stands. Take the diagnostic to find your starting point, then
+            work through it in Learn — each step teaches, asks a question and explains
+            the answer. If something is wrong, report it from
             any question: every report goes to a real triage queue.
           </p>
           <div className="flex gap-3 justify-center mt-6 max-sm:flex-col max-sm:items-center">
             <Link href="/onboard" style={{ fontFamily: monoFont, fontSize: '13px', color: 'var(--bg)', background: 'var(--accent-blue)', padding: '10px 22px', textDecoration: 'none' }}>
               Start diagnostic test →
             </Link>
-            <Link href="/study" style={{ fontFamily: monoFont, fontSize: '13px', color: 'var(--text-secondary)', border: '0.5px solid var(--border-strong)', padding: '10px 22px', textDecoration: 'none' }}>
-              Open Study →
+            <Link href="/learn" style={{ fontFamily: monoFont, fontSize: '13px', color: 'var(--text-secondary)', border: '0.5px solid var(--border-strong)', padding: '10px 22px', textDecoration: 'none' }}>
+              Start learning →
             </Link>
           </div>
         </section>

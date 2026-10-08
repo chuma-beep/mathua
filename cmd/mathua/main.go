@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"flag"
 	"fmt"
 	"log"
@@ -56,13 +57,129 @@ func dataPath(name string) string {
 	return filepath.Join("data", name)
 }
 
+// openRepo opens the configured store and reports which path it used.
+//
+// Extracted because `mathua admin …` needs a store and does not need a generator registry, a
+// lesson loader or a concept graph. Loading the whole corpus to change one column meant the
+// command printed "loaded 657 concepts" on its way to a two-line operation, and made a typo
+// in the corpus fail a maintenance task it had no business touching.
+//
+// The store's own Migrate has already run by the time this returns, which is what makes the
+// admin command work against a database created before the role column existed.
+func openRepo() (storage.Repository, string, error) {
+	dsn := os.Getenv("DATABASE_URL")
+	if strings.HasPrefix(dsn, "postgres://") || strings.HasPrefix(dsn, "postgresql://") {
+		fmt.Println("connecting to PostgreSQL...")
+		r, err := storage.NewPostgresStore(dsn)
+		return r, dsn, err
+	}
+	path := dsn
+	if path == "" {
+		path = "mathua.db"
+	}
+	r, err := storage.NewSQLiteStore(path)
+	return r, path, err
+}
+
+// adminCommand is the operator's bootstrap. It is the only way the first administrator comes
+// into existence, and it is a shell command on purpose.
+//
+// Every alternative was worse. An HTTP endpoint means anyone who can reach the server can ask
+// to become an administrator, which is not a bootstrap, it is an open door. A role in the
+// signup body means a client chooses its own privilege. An env var naming the first admin
+// needs a database row to point at and silently stops working once it does. Shell access to
+// the box is the one credential that already implies full control of the deployment, so it is
+// the right place for the decision that someone should have it.
+// adminActorCLI is the actor recorded for a shell-initiated promotion. See the call site for
+// why it is not the operator's email.
+const adminActorCLI = "cli"
+
+func adminCommand(args []string) error {
+	if len(args) == 0 {
+		return errors.New("usage: mathua admin promote <email>")
+	}
+	switch args[0] {
+	case "promote":
+		if len(args) != 2 {
+			return errors.New("usage: mathua admin promote <email>")
+		}
+		email := strings.TrimSpace(args[1])
+		if email == "" {
+			return errors.New("email is required")
+		}
+		repo, _, err := openRepo()
+		if err != nil {
+			return err
+		}
+		defer repo.Close()
+
+		st, err := repo.FindByEmail(email)
+		if err != nil {
+			return err
+		}
+		if st == nil {
+			// Refusing to create the account is the important half. A bootstrap that can sign
+			// someone up would be reachable by anyone who can guess an address, and an
+			// administrator with no password is an administrator nobody can attribute.
+			return fmt.Errorf("no account with email %q — sign up through the app first, then promote", email)
+		}
+
+		// The same primitive the web admin uses, so there is exactly one path that can change a
+		// role and exactly one place the audit event is written. A second implementation here
+		// would be a second set of invariants to keep — and it is the one nobody would remember
+		// to update.
+		//
+		// `cli` is the actor because that is the truth: shell access carries no account identity,
+		// and the argument for trusting this command is that it needs the machine, not a
+		// credential. Writing the operator's email here would be inventing an identity the code
+		// does not have.
+		res, err := repo.SetRoleAudited(adminActorCLI, st.ID, storage.RoleAdmin)
+		switch {
+		case errors.Is(err, storage.ErrRoleUnchanged):
+			fmt.Printf("%s (%s) is already an admin; nothing to do\n", email, st.ID)
+			return nil
+		case err != nil:
+			return err
+		}
+		fmt.Printf("promoted %s (%s) to admin — audit %s by %s\n",
+			email, st.ID, res.Action, adminActorCLI)
+		return nil
+	default:
+		return fmt.Errorf("unknown admin command %q. Available: promote <email>", args[0])
+	}
+}
+
 func main() {
-	serve := flag.Bool("serve", false, "run web server")
+	// Accepted and ignored: the server always starts, and it did before this flag meant
+	// anything — both arms of the branch it used to select opened the same store. The Dockerfile
+	// passes it, so removing it would break a deployment for no gain. Kept because deleting it
+	// silently would be the only real change, and it is not one worth making at the same time
+	// as adding administration.
+	flag.Bool("serve", false, "run web server (accepted for compatibility; the server always starts)")
 	port := flag.Int("port", 8080, "web server port")
 	noAuth := flag.Bool("no-auth", false, "disable authentication (dev mode)")
 	repairGrading := flag.Bool("repair-grading", false, "re-grade persisted attempts, repair grader false negatives, then exit")
 	repairDryRun := flag.Bool("repair-grading-dry-run", false, "report grading repairs without writing, then exit")
 	flag.Parse()
+
+	// Subcommands run before anything else is loaded. They are operator tools: someone with
+	// shell access to the box, not someone with a token. That distinction is the whole reason
+	// the first administrator is created here and not through an endpoint — there is no
+	// /register-admin route, no ?role=admin, and no request a browser can make that reaches
+	// this code.
+	if len(flag.Args()) > 0 {
+		switch flag.Arg(0) {
+		case "admin":
+			if err := adminCommand(flag.Args()[1:]); err != nil {
+				fmt.Fprintf(os.Stderr, "error: %v\n", err)
+				os.Exit(1)
+			}
+			return
+		default:
+			fmt.Fprintf(os.Stderr, "unknown command %q. Available: admin\n", flag.Arg(0))
+			os.Exit(2)
+		}
+	}
 
 	dag, err := concepts.LoadDir(dataPath("concepts"))
 	if err != nil {
@@ -70,21 +187,7 @@ func main() {
 	}
 	fmt.Printf("loaded %d concepts across %d domains\n", dag.Count(), len(dag.Domains()))
 
-	dsn := os.Getenv("DATABASE_URL")
-	var repo storage.Repository
-	if strings.HasPrefix(dsn, "postgres://") || strings.HasPrefix(dsn, "postgresql://") {
-		fmt.Println("connecting to PostgreSQL...")
-		repo, err = storage.NewPostgresStore(dsn)
-	} else {
-		if dsn != "" || *serve {
-			if dsn == "" {
-				dsn = "mathua.db"
-			}
-			repo, err = storage.NewSQLiteStore(dsn)
-		} else {
-			repo, err = storage.NewSQLiteStore("mathua.db")
-		}
-	}
+	repo, dsn, err := openRepo()
 	if err != nil {
 		log.Fatalf("storage: %v", err)
 	}
@@ -254,7 +357,14 @@ func nextStaticFS(root string) http.Handler {
 			return
 		}
 		localPath := filepath.Join(root, cleaned)
-		if _, err := os.Stat(localPath); err == nil {
+		// Regular files only. `os.Stat` succeeds for a directory too, and a Next.js export
+		// creates one for any route that has child routes — `/admin` because of /admin/users,
+		// `/docs` because of /docs/architecture. Handing a directory to http.FileServer makes
+		// it redirect to the trailing-slash form and then render a directory listing, so
+		// `/admin` answered 301 and its target answered 200 with a list of files instead of the
+		// administration page. The page exists at `out/admin.html`; only the `.html` fallback
+		// below finds it, and this branch was shadowing it.
+		if st, err := os.Stat(localPath); err == nil && !st.IsDir() {
 			fs.ServeHTTP(w, r)
 			return
 		}

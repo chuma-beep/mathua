@@ -82,11 +82,16 @@ describe('Header mobile nav menu', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }))
     const items = screen.getAllByRole('menuitem')
     const labels = items.map(i => i.textContent)
-    // Domains is here rather than in the tab bar: the tabs stay at five, and overflowLinks()
-    // derives the rest by subtracting TAB_HREFS from the desktop list.
-    expect(labels).toEqual(['Domains', 'Leaderboard', 'Login'])
+    // Whatever is left after the tab bar is subtracted out. Domains is not here: it holds a
+    // tab, having taken the slot the closed Study route occupied, so it is always one tap away
+    // on mobile instead of hiding one level deep.
+    expect(labels).toEqual(['Leaderboard', 'Login'])
     const hrefs = items.map(i => (i as HTMLAnchorElement).getAttribute('href'))
-    expect(hrefs).toEqual(['/domains', '/leaderboard', '/login'])
+    expect(hrefs).toEqual(['/leaderboard', '/login'])
+    // The invariant behind the exact list: nothing appears twice on one screen.
+    for (const href of hrefs) {
+      expect(hrefs.filter(h => h === href)).toHaveLength(1)
+    }
     expect(screen.getByRole('button', { name: 'Open navigation menu' }))
       .toHaveAttribute('aria-expanded', 'true')
   })
@@ -95,7 +100,7 @@ describe('Header mobile nav menu', () => {
     render(
       <Header
         links={[
-          { label: 'Study', href: '/study' },
+          { label: 'Graph', href: '/graph' },
           { label: 'Docs', href: '/docs' },
           { label: 'Architecture', href: '/docs/architecture' },
           { label: 'Contributing', href: '/docs/contributing' },
@@ -106,7 +111,7 @@ describe('Header mobile nav menu', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }))
     const menu = screen.getByRole('menu', { name: 'Site navigation' })
     const labels = within(menu).getAllByRole('menuitem').map(i => i.textContent)
-    expect(labels).toEqual(['Study', 'Docs', 'Architecture', 'Contributing', 'Note'])
+    expect(labels).toEqual(['Graph', 'Docs', 'Architecture', 'Contributing', 'Note'])
   })
 
   it('marks the current page with aria-current', () => {
@@ -129,7 +134,7 @@ describe('Header mobile nav menu', () => {
   it('closes on Escape', () => {
     render(<Header />)
     fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }))
-    expect(screen.getAllByRole('menuitem')).toHaveLength(3)
+    expect(screen.getAllByRole('menuitem')).toHaveLength(2)
     fireEvent.keyDown(document, { key: 'Escape' })
     expect(screen.queryAllByRole('menuitem')).toHaveLength(0)
   })
@@ -138,11 +143,11 @@ describe('Header mobile nav menu', () => {
     render(<Header />)
     const button = screen.getByRole('button', { name: 'Open navigation menu' })
     fireEvent.click(button)
-    expect(screen.getAllByRole('menuitem')).toHaveLength(3)
+    expect(screen.getAllByRole('menuitem')).toHaveLength(2)
     fireEvent.click(button)
     expect(screen.queryAllByRole('menuitem')).toHaveLength(0)
     fireEvent.click(button)
-    expect(screen.getAllByRole('menuitem')).toHaveLength(3)
+    expect(screen.getAllByRole('menuitem')).toHaveLength(2)
   })
 
   it('closes when a link is clicked', () => {

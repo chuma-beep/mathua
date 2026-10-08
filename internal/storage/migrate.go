@@ -196,6 +196,29 @@ CREATE TABLE IF NOT EXISTS question_reports (
 CREATE INDEX IF NOT EXISTS idx_reports_status  ON question_reports(status, created_at);
 CREATE INDEX IF NOT EXISTS idx_reports_concept ON question_reports(concept_id);
 
+-- Administration. The role column itself is added by the migration list below rather than
+-- here: this DDL runs on every boot, and ALTER TABLE ADD COLUMN is not idempotent. The
+-- default is 'student', so every existing row is a learner until an operator promotes it.
+--
+-- One row per privileged mutation. actor_id is deliberately not a foreign key: a trail that
+-- is deleted along with the account it records is not a trail. before_json/after_json hold the
+-- non-sensitive AdminUser projection only — a password hash cannot reach them because the
+-- projection cannot express one.
+CREATE TABLE IF NOT EXISTS admin_audit (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    actor_id    TEXT NOT NULL DEFAULT '',
+    action      TEXT NOT NULL,
+    entity_type TEXT NOT NULL DEFAULT '',
+    entity_id   TEXT NOT NULL DEFAULT '',
+    before_json TEXT NOT NULL DEFAULT '',
+    after_json  TEXT NOT NULL DEFAULT '',
+    created_at  TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS idx_admin_audit_created ON admin_audit(created_at);
+CREATE INDEX IF NOT EXISTS idx_admin_audit_actor   ON admin_audit(actor_id);
+CREATE INDEX IF NOT EXISTS idx_admin_audit_entity   ON admin_audit(entity_type, entity_id);
+
 -- Fix 6: durable server-side sessions (study anti-cheat expected answers,
 -- admin triage logins). Short-lived diag/quiz sessions stay in memory by
 -- design (capability UUIDs, 1h janitor; a restart just means a retake).
