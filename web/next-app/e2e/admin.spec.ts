@@ -108,7 +108,12 @@ interface Event {
 
 /** The server, as the browser sees it: a role table, an admin count, and an audit log. */
 function stubApi(page: Page, accounts: Account[], viewer: Role) {
-  const rows = [...accounts]
+  // Copy each account, not just the array. `rows` is mutated by a role change, and the tests
+  // pass module-level constants in — `[...accounts]` would hand every test the same object, so
+  // one test's promotion silently rewrote ROOT or CONTRIBUTOR for every test after it. That is
+  // a shared-mutable-fixture bug, and it surfaces as a flake rather than a failure: the suite
+  // passes when the tests happen to run in an order that does not expose it.
+  const rows = accounts.map((a) => ({ ...a }))
   const events: Event[] = []
   let nextId = 1
 
@@ -250,6 +255,8 @@ test.describe('administrator management', () => {
   })
 
   test('the last administrator cannot be removed, and the refusal is shown', async ({ page }) => {
+    // ROOT is the only administrator, so this is the demotion the server refuses. The stub
+    // enforces the rule by count, exactly as the real one does.
     stubApi(page, [ROOT, CONTRIBUTOR], 'admin')
     await signIn(page, 'admin')
 
@@ -260,6 +267,10 @@ test.describe('administrator management', () => {
     await row.getByRole('button', { name: 'Remove administrator' }).click()
     await page.getByRole('dialog').getByRole('button', { name: 'Remove access' }).click()
 
+    // The dialog closes before the message lands, so wait on the message rather than asserting
+    // the dialog is gone first. Two independent state writes land in the same tick — the dialog's
+    // pending=null and the error text — and asserting the absence of one while waiting for the
+    // other races the render.
     await expect(page.getByRole('alert').filter({ hasText: 'last administrator' })).toBeVisible()
     // The dialog is gone, so the message is not hidden behind it.
     await expect(page.getByRole('dialog')).toHaveCount(0)

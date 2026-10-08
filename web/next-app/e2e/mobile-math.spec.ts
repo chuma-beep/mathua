@@ -532,17 +532,23 @@ test.describe('the whole loop on a phone', () => {
     await setAnswer(page, '')
     await answerField(page).tap()
     await expect(keyboardRows(page)).toBeVisible({ timeout: 10_000 })
-    // Reached through MathLive's own toolbar switcher, because that is the only
+// Reached through MathLive's own toolbar switcher, because that is the only
     // mechanism that works: a keycap with a `layer` property only gains a CSS class and
     // does nothing when pressed, while the toolbar emits `data-layer` and assigns
     // `currentLayer`. Layers were unreachable before this for the same reason.
-    await switchLayer(page, '±÷')
-    await switchLayer(page, 'abc')
-    // Poll rather than sleep: the switch is asynchronous and the keypad re-renders, so a
-    // fixed wait passes in isolation and fails under load — which is how this looked
-    // broken when it was only racy.
-    const ge = keycaps(page).filter({ hasText: /\u2265/ })
-    await expect(ge).toBeVisible({ timeout: 10_000 })
+    //
+    // The two switches are inside the retry on purpose. MathLive assigns `currentLayer` and
+    // re-renders the keypad asynchronously, and under CI's two workers that re-render can land
+    // after both switches were sent — so switching once and then reading the keypad asserts
+    // that the first switch took and measures the second one's re-render, which fails as
+    // "the ≥ key is missing". Retrying the whole sequence states the actual property: eventually
+    // both switches land and the key is there.
+    const ge = keycaps(page).filter({ hasText: /≥/ })
+    await expect(async () => {
+      await switchLayer(page, '±÷')
+      await switchLayer(page, 'abc')
+      await expect(ge).toBeVisible({ timeout: 1_000 })
+    }).toPass({ timeout: 20_000 })
     await ge.first().tap()
     await page.waitForTimeout(150)
     expect(await answerLatex(page)).toBe('\\ge')
