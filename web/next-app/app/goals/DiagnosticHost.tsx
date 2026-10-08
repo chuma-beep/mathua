@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
+import Link from 'next/link'
 import { toast } from 'sonner'
 import KatexContent from '../../components/KatexContent'
 import SectionHeader from '../../components/SectionHeader'
@@ -64,7 +65,10 @@ export default function DiagnosticHost({
   const [estimatedTotal, setEstimatedTotal] = useState(0)
   const [progress, setProgress] = useState<DiagnosticProgress | null>(null)
   const [answerInput, setAnswerInput] = useState('')
-  const [lastResult, setLastResult] = useState<{ correct: boolean; feedback: string } | null>(null)
+  // Verdict only. A diagnostic measures prior knowledge, so the response no longer carries the
+  // worked solution and this holds no field for one. `conceptId` is the concept just answered,
+  // so a miss can route to Learn — the only surface that explains.
+  const [lastResult, setLastResult] = useState<{ correct: boolean; feedback: string; conceptId: string } | null>(null)
   const [accuracy, setAccuracy] = useState<{ correct: number; total: number }>({ correct: 0, total: 0 })
   const [submitError, setSubmitError] = useState<SubmitError | null>(null)
   const [planError, setPlanError] = useState('')
@@ -197,7 +201,7 @@ export default function DiagnosticHost({
         correct: prev.correct + (correct ? 1 : 0),
         total: prev.total + 1,
       }))
-      setLastResult({ correct, feedback })
+      setLastResult({ correct, feedback, conceptId: conceptId.current })
       setRetryAvailable(data.done ? false : data.retry_available === true)
       setRetryConcept(data.done ? '' : conceptId.current)
       if (data.progress && data.progress.cover_size > 0) {
@@ -265,7 +269,7 @@ export default function DiagnosticHost({
       setSkipCount(c => c + 1)
       if (data.done) {
         setFinished(true)
-        setLastResult({ correct: false, feedback: 'Skipped — no evidence recorded.' })
+        setLastResult({ correct: false, feedback: 'Skipped — no evidence recorded.', conceptId: conceptId.current })
         setTimeout(() => {
           void fetchPlan()
         }, 800)
@@ -413,6 +417,17 @@ export default function DiagnosticHost({
                 {lastResult.correct ? '✓ Correct!' : '✗ Not quite'}
               </p>
               <KatexContent className="text-mathua-secondary text-sm">{lastResult.feedback}</KatexContent>
+              {/* A miss offers the teaching surface as a deliberate next step, not as the answer.
+                  The feedback above is a verdict; this is the only route to an explanation, and it
+                  leaves the assessment rather than injecting instruction into it. */}
+              {!lastResult.correct && !finished && lastResult.conceptId && (
+                <Link
+                  href={`/learn?concept=${encodeURIComponent(lastResult.conceptId)}`}
+                  className="mt-2 inline-flex items-center border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em]"
+                >
+                  Learn this concept →
+                </Link>
+              )}
               {!lastResult.correct && !finished && retryAvailable && (
                 <button
                   type="button"

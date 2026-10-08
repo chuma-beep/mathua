@@ -343,6 +343,36 @@ describe('DiagnosticHost manual advance', () => {
     expect(await findAnswerField()).toBe(document.activeElement)
   })
 
+  // A diagnostic measures prior knowledge. A wrong answer must not hand back the solution, and a
+  // regressed server that sends one anyway must not get it onto the screen — the client holds its
+  // own copy of the contract. The cast is past the response type on purpose: the type no longer
+  // has these fields, and the guard must not depend on the type staying honest.
+  it('shows no solution on a wrong diagnostic answer, and routes the miss to Learn', async () => {
+    vi.mocked(submitGoalAnswer).mockResolvedValueOnce({
+      done: false,
+      correct: false,
+      feedback: 'Not quite',
+      concept_id: 'c2',
+      concept_name: 'Q2 concept',
+      question: 'Q2 text',
+      grading_type: 'numeric',
+      explanation: '2 + 3 = 5: count on from 2.',
+      diagnosis: 'You are exactly one away, so a count or a boundary is off by one.',
+    } as never)
+    render(
+      <DiagnosticHost startIds={[]} resumeId={null} onComplete={() => {}} onResumeExpired={() => {}} />,
+    )
+    await screen.findByText('Q1 text')
+    typeAnswer(await findMathField(), '4')
+    fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
+
+    expect(await screen.findByText('✗ Not quite')).toBeInTheDocument()
+    expect(screen.queryByText(/count on from 2/)).toBeNull()
+    expect(screen.queryByText(/one away/)).toBeNull()
+    // The concept just answered is the one the hand-off names, not the staged next one.
+    expect(screen.getByRole('link', { name: /Learn this concept/ })).toHaveAttribute('href', '/learn?concept=c1')
+  })
+
   it('shows the error block with Retry and Skip on submit failure', async () => {
     vi.mocked(submitGoalAnswer).mockRejectedValueOnce(
       Object.assign(new Error('Goal answer failed: 500'), {
@@ -517,15 +547,17 @@ describe('QuizHost manual advance', () => {
     expect(await findAnswerField()).toBe(document.activeElement)
   })
 
-  // The quiz response never carried an explanation, so a miss showed the
-  // grader's status token and a hit showed nothing. It now sends the served
-  // instance's worked solution on both verdicts, like the diagnostic path.
-  it('shows the served explanation on a wrong quiz answer, never the status token', async () => {
+  // A test verifies knowledge and does not teach. These two used to assert the opposite — that
+  // the served solution was shown on both verdicts — which meant a learner could read the answer
+  // to a question they had just been measured on, and the questions after it measured whether
+  // they had read rather than what they knew.
+  it('shows no solution on a wrong quiz answer, and routes the miss to Learn', async () => {
     vi.mocked(submitQuizAnswer).mockResolvedValueOnce({
       done: false,
       correct: false,
+      // A grader token is the only feedback the server sends now. Modelled here so the assertion
+      // covers what the client does with it.
       feedback: 'Incorrect',
-      explanation: '3 and 5 make 8: start at 3 and count on 5.',
       xp: 0,
       concept_id: 'c2',
       concept_name: 'Q2 quiz',
@@ -539,16 +571,19 @@ describe('QuizHost manual advance', () => {
     typeAnswer(await findAnswerField(), '9')
     fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
 
-    expect(await screen.findByText(/start at 3 and count on 5/)).toBeInTheDocument()
-    expect(screen.queryByText('Incorrect')).toBeNull()
+    expect(await screen.findByText('✗ Not quite')).toBeInTheDocument()
+    // The verdict, and no worked solution anywhere on the page.
+    expect(screen.queryByText(/start at 3 and count on 5/)).toBeNull()
+    // The one route to instruction leaves the assessment for the concept just answered.
+    const learn = screen.getByRole('link', { name: /Learn this concept/ })
+    expect(learn).toHaveAttribute('href', '/learn?concept=c1')
   })
 
-  it('shows the quiz explanation on a correct answer too', async () => {
+  it('shows no solution on a correct quiz answer either', async () => {
     vi.mocked(submitQuizAnswer).mockResolvedValueOnce({
       done: false,
       correct: true,
       feedback: '',
-      explanation: 'Because 3 + 5 = 8, checked by counting on from 3.',
       xp: 2,
       concept_id: 'c2',
       concept_name: 'Q2 quiz',
@@ -563,7 +598,43 @@ describe('QuizHost manual advance', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
 
     expect(await screen.findByText('✓ Correct!')).toBeInTheDocument()
-    expect(screen.getByText(/checked by counting on from 3/)).toBeInTheDocument()
+    // Correct offers no "Learn this concept" hand-off: there is nothing to remediate, and the
+    // hand-off's absence on a hit is what keeps it a signal of a miss rather than decoration.
+    expect(screen.queryByText(/checked by counting on from 3/)).toBeNull()
+    expect(screen.queryByRole('link', { name: /Learn this concept/ })).toBeNull()
+  })
+
+  // Belt as well as braces. The server is the boundary — it is what strips the solution, and
+  // the Go tests measure that — but the client holds its own copy of the contract, so a server
+  // that regressed to sending `explanation` and `diagnosis` would still not put the answer on
+  // screen. The response is cast past the type on purpose: the type no longer has these fields,
+  // and the point is that the rendering does not depend on the type being honest.
+  it('does not render a solution even if one arrives, and routes the miss to Learn', async () => {
+    vi.mocked(submitQuizAnswer).mockResolvedValueOnce({
+      done: false,
+      correct: false,
+      feedback: 'Incorrect',
+      xp: 0,
+      concept_id: 'c2',
+      concept_name: 'Q2 quiz',
+      question: 'Quiz Q2 text',
+      grading_type: 'numeric',
+      time_limit_seconds: 30,
+      // A regressed server. Both fields are solution-bearing: the worked answer outright, and
+      // "you are one away" which reconstructs it from the learner's own wrong answer.
+      explanation: '3 and 5 make 8: start at 3 and count on 5.',
+      diagnosis: 'You are exactly one away, so a count or a boundary is off by one.',
+    } as never)
+    render(<QuizHost />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Start quiz →' }))
+    await screen.findByText('Quiz Q1 text')
+    typeAnswer(await findAnswerField(), '9')
+    fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
+
+    expect(await screen.findByText('✗ Not quite')).toBeInTheDocument()
+    expect(screen.queryByText(/start at 3 and count on 5/)).toBeNull()
+    expect(screen.queryByText(/one away/)).toBeNull()
+    expect(screen.getByRole('link', { name: /Learn this concept/ })).toHaveAttribute('href', '/learn?concept=c1')
   })
 
   it('QuizHost shows the error block and Skip advances without XP', async () => {

@@ -38,7 +38,10 @@ export default function QuizHost() {
   const [quizConceptName, setQuizConceptName] = useState('')
   const [quizCount, setQuizCount] = useState(0)
   const [quizAnswerInput, setQuizAnswerInput] = useState('')
-  const [quizLastResult, setQuizLastResult] = useState<{ correct: boolean; feedback: string; explanation?: string; diagnosis?: string; xp?: number } | null>(null)
+  // Verdict only. A test verifies knowledge and does not teach, so the response carries no
+  // solution and this holds none: `conceptId` is here so a miss can hand the learner to Learn,
+  // which is the one surface allowed to explain.
+  const [quizLastResult, setQuizLastResult] = useState<{ correct: boolean; feedback: string; conceptId: string; xp?: number } | null>(null)
   const [quizAccuracy, setQuizAccuracy] = useState({ correct: 0, total: 0 })
   const [quizClosedBook, setQuizClosedBook] = useState(false)
   const [quizQuestionsTotal, setQuizQuestionsTotal] = useState(0)
@@ -114,7 +117,7 @@ export default function QuizHost() {
       const correct = data.correct || false
       const feedback = data.feedback || (correct ? 'Correct!' : 'Not quite.')
       setQuizAccuracy(prev => ({ correct: prev.correct + (correct ? 1 : 0), total: prev.total + 1 }))
-      setQuizLastResult({ correct, feedback, explanation: data.explanation, diagnosis: data.diagnosis, xp: data.xp })
+      setQuizLastResult({ correct, feedback, conceptId: quizConceptId.current, xp: data.xp })
       if (data.remedial?.length) {
         setQuizRemedial(prev => Array.from(new Set([...prev, ...(data.remedial ?? [])])))
       }
@@ -165,7 +168,7 @@ export default function QuizHost() {
       setSkipCount(c => c + 1)
       if (data.done) {
         setFinished(true)
-        setQuizLastResult({ correct: false, feedback: 'Skipped — no XP awarded.', xp: 0 })
+        setQuizLastResult({ correct: false, feedback: 'Skipped — no XP awarded.', conceptId: quizConceptId.current, xp: 0 })
         setTimeout(() => {
           setPhase('done')
           setLoading(false)
@@ -333,17 +336,20 @@ export default function QuizHost() {
           ) : (
             <div className="animate-fadeIn">
               <p className={`text-base font-medium mb-2 ${quizLastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}`}>{quizLastResult.correct ? '✓ Correct!' : '✗ Not quite'}</p>
-              {/* The worked solution for the question just answered, on both
-                  verdicts. The next question stays staged and hidden until
-                  Next is pressed, so reading this never burns question time. */}
-              {quizLastResult.explanation ? (
-                <KatexContent className="text-mathua-secondary text-sm whitespace-pre-wrap text-left">{quizLastResult.explanation}</KatexContent>
-              ) : (
-                <KatexContent className="text-mathua-secondary text-sm">{quizLastResult.feedback}</KatexContent>
-              )}
-              {/* Names the mistake when it is certain; empty otherwise. */}
-              {quizLastResult.diagnosis && (
-                <p className="mt-2 font-mono text-[11px] text-mathua-muted">{quizLastResult.diagnosis}</p>
+              {/* Assessment state, and nothing else. This used to render the served worked
+                  solution and a one-sentence diagnosis on both verdicts; the diagnosis was
+                  answer-revealing on its own ("you are exactly one away"), and the solution
+                  handed over the answer mid-test, so the remaining questions measured whether
+                  the learner had read it rather than what they knew. Instruction lives in Learn,
+                  reached deliberately, one concept at a time. */}
+              <KatexContent className="text-mathua-secondary text-sm">{quizLastResult.feedback}</KatexContent>
+              {!quizLastResult.correct && quizLastResult.conceptId && (
+                <Link
+                  href={`/learn?concept=${encodeURIComponent(quizLastResult.conceptId)}`}
+                  className="mt-3 inline-flex items-center border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em]"
+                >
+                  Learn this concept →
+                </Link>
               )}
             </div>
           )}

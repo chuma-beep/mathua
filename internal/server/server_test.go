@@ -1390,27 +1390,33 @@ func quizGuest(t *testing.T, mux *http.ServeMux) (token, studentID string) {
 // Batch 1: quiz session carries timed closed-book contract; completing it
 // records the gate baseline and offers retake.
 
-// The quiz response never carried an explanation, so a wrong answer showed the
-// grader's "Incorrect" and a right one showed nothing at all. The session
-// already holds the served instance's solution; it must reach the client on
-// both verdicts, exactly as handleGoalDiagnosticAnswer already did.
+// A quiz measures knowledge. It does not teach, so no verdict carries the
+// served solution — the boundary is semantic and does not depend on `done:true`.
+//
+// This test used to assert the opposite, and the reasoning was internally
+// consistent: "the session already holds the served instance's solution; it
+// must reach the client on both verdicts, exactly as handleGoalDiagnosticAnswer
+// already did." What it missed is that a diagnostic is also an assessment, so
+// the path it was copying was the leak, not the precedent. Showing the solution
+// to a question the learner just got wrong lets them read the answer instead of
+// demonstrating it, and the questions after it measure whether they read.
+// TestQuizBoundary_FinalVerdictCarriesNoSolution now covers both verdicts of
+// both the mid-flight and final responses.
 func TestQuizAnswer_ExplanationOnBothVerdicts(t *testing.T) {
 	_, mux, _ := guestServer(t)
 	token, _ := quizGuest(t, mux)
 
-	// Wrong answer. The session holds one question, so this also ends the quiz
-	// — which is fine, it is the done response that also needs the solution.
+	// Wrong answer. guestServer has one concept, so this also ends the quiz.
 	sess := quizPost(t, mux, "/api/quiz/session", `{}`, token)
 	miss := quizPost(t, mux, "/api/quiz/answer", `{"session_id":"`+sess["session_id"].(string)+`","concept_id":"a","answer":"999","elapsed":5}`, token)
 	if miss["correct"] != false {
 		t.Fatalf("expected the wrong answer to grade incorrect, got %v", miss)
 	}
-	missExpl, _ := miss["explanation"].(string)
-	if missExpl == "" {
-		t.Error("expected an explanation on a wrong quiz answer")
+	if expl, ok := miss["explanation"]; ok {
+		t.Errorf("a wrong quiz answer must not carry the solution, got explanation=%v", expl)
 	}
-	if missExpl == "Incorrect" {
-		t.Errorf("explanation must be the solution, not the grader token: %q", missExpl)
+	if diag, ok := miss["diagnosis"]; ok {
+		t.Errorf("a wrong quiz answer must not carry a diagnosis, got diagnosis=%v", diag)
 	}
 
 	// Correct answer, fresh session.
@@ -1419,8 +1425,8 @@ func TestQuizAnswer_ExplanationOnBothVerdicts(t *testing.T) {
 	if hit["correct"] != true {
 		t.Fatalf("expected the exact answer to grade correct, got %v", hit)
 	}
-	if expl, _ := hit["explanation"].(string); expl == "" {
-		t.Error("a correct quiz answer must still carry its explanation")
+	if expl, ok := hit["explanation"]; ok {
+		t.Errorf("a correct quiz answer must not carry the solution either, got explanation=%v", expl)
 	}
 }
 

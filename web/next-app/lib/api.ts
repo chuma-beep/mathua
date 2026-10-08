@@ -1347,11 +1347,10 @@ export interface QuizStartRes {
 export interface QuizAnswerRes {
   done: boolean
   correct?: boolean
+  // A verdict, or one of the grader's bare status tokens ("Not equivalent"). Never the
+  // solution: a test measures knowledge and does not teach, so the response carries no
+  // explanation and no answer-revealing diagnosis. Instruction is reached through /learn.
   feedback?: string
-  /** One sentence naming the mistake, when it is certain. Empty otherwise. */
-  diagnosis?: string
-  // The served instance's worked solution, on both verdicts.
-  explanation?: string
   xp?: number
   new_status?: string
   /**

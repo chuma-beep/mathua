@@ -755,7 +755,7 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 	if s.eng.IsDiagnosticComplete(session) {
 		report := s.eng.DiagnosticReport(session)
 		prog := s.eng.DiagnosticProgress(session)
-		writeJSON(w, map[string]interface{}{
+		writeAssessmentVerdict(w, map[string]interface{}{
 			"done":     true,
 			"correct":  correct,
 			"feedback": explanation,
@@ -774,7 +774,7 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 		// never serve an empty question with done:false.
 		report := s.eng.DiagnosticReport(session)
 		prog := s.eng.DiagnosticProgress(session)
-		writeJSON(w, map[string]interface{}{
+		writeAssessmentVerdict(w, map[string]interface{}{
 			"done":     true,
 			"correct":  correct,
 			"feedback": explanation,
@@ -792,7 +792,7 @@ func (s *Server) handleGoalDiagnosticAnswer(w http.ResponseWriter, r *http.Reque
 		name = c.Label
 	}
 	prog := s.eng.DiagnosticProgress(session)
-	writeJSON(w, map[string]interface{}{
+	writeAssessmentVerdict(w, map[string]interface{}{
 		"done":            false,
 		"correct":         correct,
 		"feedback":        explanation,
@@ -2897,7 +2897,10 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 		delete(s.quizSessions, req.SessionID)
 		delete(s.quizCreated, req.SessionID)
 		s.mu.Unlock()
-		writeJSON(w, map[string]interface{}{"done": true, "correct": gr.Correct, "feedback": feedback, "diagnosis": gr.Diagnosis, "explanation": explanation, "xp": xp, "new_status": newStatus, "remedial": remedial, "retake_available": true})
+		// The `diagnosis` and `explanation` keys are still passed so the helper is the single
+		// place that decides they do not cross, rather than the call site remembering to omit
+		// them. A verdict built anywhere else leaks by default; through the helper it does not.
+		writeAssessmentVerdict(w, map[string]interface{}{"done": true, "correct": gr.Correct, "feedback": feedback, "diagnosis": gr.Diagnosis, "explanation": explanation, "xp": xp, "new_status": newStatus, "remedial": remedial, "retake_available": true})
 		return
 	}
 	prob, cid, err := qEng.NextQuestion(sess)
@@ -2910,7 +2913,7 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 	if c2 != nil {
 		name2 = c2.Label
 	}
-	writeJSON(w, map[string]interface{}{
+	writeAssessmentVerdict(w, map[string]interface{}{
 		"done":               false,
 		"correct":            gr.Correct,
 		"feedback":           feedback,
@@ -3038,6 +3041,148 @@ func writeJSON(w http.ResponseWriter, v interface{}) {
 		log.Printf("warning: failed to encode JSON response: %v", err)
 	}
 }
+
+// ---------------------------------------------------------------------------
+// The assessment boundary.
+//
+// Diagnostics and tests measure knowledge. They do not teach. So a verdict from
+// an assessment may carry the assessment's own state — was it right, how far
+// through are we, what should be looked at next — and must not carry anything
+// that tells the learner the answer.
+//
+// `done: true` is not the line. It means "the assessment is over", not "now
+// start teaching". A final verdict that returns the worked solution teaches on
+// exactly the questions that were just missed, which is the outcome the whole
+// CAT exists to avoid: the learner can read the solution instead of having
+// demonstrated the knowledge, so the next measurement is contaminated.
+//
+// The stripped fields, and why each one goes:
+//
+//   explanation — the generator's worked solution. The whole solution.
+//   feedback    — for these two handlers it *is* the explanation; the graders'
+//                 own tokens ("Not equivalent", "Incorrect comparison") are
+//                 kept because they say how the answer was judged and nothing
+//                 about what the answer was.
+//   diagnosis   — "You are exactly one away, so a count or a boundary is off by
+//                 one." That is not a hint, it is a derivation: the learner
+//                 already holds their own wrong answer, so "exactly one away"
+//                 hands them the right one.
+//
+// Stripping happens on the way out, not on the way in. `LastProblem.Explanation`
+// stays on the session and `RecordAttempt` still stores the expected answer, so
+// the mistakes transcript and the grading system are unchanged; the solution
+// simply never travels with a verdict.
+//
+// `/api/study/answer` deliberately does not use this. That is Learn's seam:
+// Learn teaches, and teaching is what it is for. One boundary, two rules, and
+// the difference between them is which handler the request reached.
+// ---------------------------------------------------------------------------
+
+// assessmentVerdictFields are the keys an assessment response is built from. A
+// verdict assembled as map[string]interface{} is passed through
+// writeAssessmentVerdict rather than writeJSON, so that adding a field to an
+// assessment response cannot accidentally start leaking it: the allowlist
+// below is what a response may contain, and a field nobody thought about is
+// dropped by default.
+const (
+	// Keys that report assessment state. These are the whole of what may cross.
+	assessmentKeyCorrect            = "correct"
+	assessmentKeyDone               = "done"
+	assessmentKeyFeedback           = "feedback"
+	assessmentKeyProgress           = "progress"
+	assessmentKeyReport             = "report"
+	assessmentKeyXP                 = "xp"
+	assessmentKeyNewStatus          = "new_status"
+	assessmentKeyRemedial           = "remedial"
+	assessmentKeyRetryAvailable     = "retry_available"
+	assessmentKeyRetakeAvailable    = "retake_available"
+	assessmentKeyConceptID          = "concept_id"
+	assessmentKeyConceptName        = "concept_name"
+	assessmentKeyQuestion           = "question"
+	assessmentKeyGradingType        = "grading_type"
+	assessmentKeyTimeLimit          = "time_limit_seconds"
+	assessmentKeyQuestionsTotal     = "questions_total"
+	assessmentKeyClosedBook         = "closed_book"
+)
+
+// assessmentVerdictKeys is the allowlist, as a set for lookup. Declared
+// separately so the list above reads as documentation and this reads as data.
+var assessmentVerdictKeys = map[string]bool{
+	assessmentKeyCorrect:            true,
+	assessmentKeyDone:               true,
+	assessmentKeyFeedback:           true,
+	assessmentKeyProgress:           true,
+	assessmentKeyReport:             true,
+	assessmentKeyXP:                 true,
+	assessmentKeyNewStatus:          true,
+	assessmentKeyRemedial:           true,
+	assessmentKeyRetryAvailable:     true,
+	assessmentKeyRetakeAvailable:    true,
+	assessmentKeyConceptID:          true,
+	assessmentKeyConceptName:        true,
+	assessmentKeyQuestion:           true,
+	assessmentKeyGradingType:        true,
+	assessmentKeyTimeLimit:          true,
+	assessmentKeyQuestionsTotal:     true,
+	assessmentKeyClosedBook:         true,
+}
+
+// assessmentGraderTokens are the only feedback strings allowed through, and
+// only because the graders emit them as bare status and they describe the
+// comparison rather than its outcome's value. Anything else in `feedback` is
+// treated as instructional and dropped: the quiz handler sets `feedback` to the
+// served explanation when the learner answers "don't know", and the diagnostic
+// handler sets it to the explanation unconditionally, so keying the check on
+// the value rather than the key is what stops a future handler reintroducing
+// the leak by reusing the field.
+//
+// The list is exactly the strings internal/grader can produce. A grader that
+// starts emitting something new loses its token until this list names it, which
+// is the safe direction: the frontend falls back to the verdict it computed
+// from `correct` and shows no invented text.
+var assessmentGraderTokens = map[string]bool{
+	"Could not parse numeric values": true,
+	"Grading service busy":           true,
+	"Grading service error":          true,
+	"Grading service not found":      true,
+	"Grading service response error": true,
+	"Grading service timed out":      true,
+	"Grading service write error":    true,
+	"Incorrect":                      true,
+	"Incorrect choice":               true,
+	"Incorrect comparison":           true,
+	"Incorrect number of elements":   true,
+	"Incorrect order":                true,
+	"Internal error":                 true,
+	"Not equivalent":                 true,
+}
+
+// writeAssessmentVerdict writes an assessment response, holding back anything
+// that would teach. `verdict` is a map assembled by the handler; every key not
+// on the allowlist is dropped, and `feedback` survives only if it is one of the
+// graders' bare status tokens.
+//
+// Dropping rather than blanking matters for a second reason: an absent
+// explanation cannot be inspected in devtools, cannot be found by a test that
+// greps the response body, and cannot be read off a `undefined` field by a
+// client that guesses the key. There is nothing there to leak.
+func writeAssessmentVerdict(w http.ResponseWriter, verdict map[string]interface{}) {
+	safe := make(map[string]interface{}, len(verdict))
+	for key, value := range verdict {
+		if !assessmentVerdictKeys[key] {
+			continue
+		}
+		if key == "feedback" {
+			text, _ := value.(string)
+			if !assessmentGraderTokens[text] {
+				continue
+			}
+		}
+		safe[key] = value
+	}
+	writeJSON(w, safe)
+}
+
 
 func writeError(w http.ResponseWriter, msg string, code int) {
 	w.Header().Set("Content-Type", "application/json")
