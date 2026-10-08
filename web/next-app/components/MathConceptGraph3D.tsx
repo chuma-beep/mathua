@@ -997,30 +997,21 @@ function InfoPanelBody({ concept, color, prereqConcepts, unlockedBy, isMobile }:
       </div>
       <ChipList title="prerequisites" items={prereqConcepts} isMobile={isMobile} />
       <ChipList title="unlocks" items={unlockedBy} isMobile={isMobile} />
+      {/* One destination, and it is the engine's next task rather than whichever node the
+        * pointer happened to be over.
+        *
+        * There used to be two. "Study →" opened the reference library for this exact concept,
+        * and "Practice →" opened `/learn`. That pair is what this graph must not offer a
+        * learner: a sphere you click should orient you, not hand you a lesson. Study is
+        * closed as a route now, and the reason it mattered is the same reason the second link
+        * was written the way it was — `/learn?concept=<id>` is an ungated route into the
+        * teaching loop, and `/learn` opens with the concept's worked example unconditionally,
+        * so a concept already demonstrated got re-taught because someone clicked a sphere.
+        *
+        * The graph's job is orientation, so that is all it does: it shows where this concept
+        * sits and what unlocks it. Deciding what to learn next is the scheduler's, and this
+        * link asks it. */}
       <div style={{ marginTop: '10px', display: 'flex', gap: '8px' }}>
-        <a
-          href={`/study?concept=${encodeURIComponent(concept.id)}`}
-          style={{ color: '#60a5fa', fontSize: '12px', fontFamily: monoFont, textDecoration: 'none' }}
-        >
-          Study →
-        </a>
-        {/* The scheduler's next task, not this concept.
-         *
-         * It used to be `/learn?concept=<id>` — an ungated route into the teaching loop
-         * for whichever node the pointer happened to be over. That is arbitrary navigation
-         * overriding the distinction between active learning and review: `/learn` opens
-         * with the concept's worked example unconditionally, so a concept already
-         * demonstrated got re-taught because someone clicked a sphere.
-         *
-         * This is reachable by real learners, not only hypothetical ones. Logged-in
-         * visits to `/` bounce to /profile, but a *guest* is not logged in and does have
-         * server-side progress (`ensureGuestId`), so the hero renders for exactly the
-         * audience that can already have mastered something.
-         *
-         * "Study →" above stays concept-specific: reference reading is always allowed
-         * (ADR-021). And the page's primary CTA already did this — `ensureGuestId()` then
-         * a bare `/learn` — so this makes the node link consistent with it rather than
-         * inventing a new rule. */}
         <a
           href="/learn"
           style={{ color: 'var(--accent-teal)', fontSize: '12px', fontFamily: monoFont, textDecoration: 'none' }}

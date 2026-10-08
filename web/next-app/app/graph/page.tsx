@@ -57,7 +57,7 @@ const dedupeInFlight = createInflightCache()
 
 function GraphContent() {
   const { theme, mounted } = useTheme()
-  const { push, replace } = useRouter()
+  const { replace } = useRouter()
   const searchParams = useSearchParams()
   const conceptParam = searchParams.get('concept')
   // ?domain= makes the filter linkable, so /domains can deep-link into one subject.
@@ -290,10 +290,6 @@ function GraphContent() {
           selectedId={selectedId}
           onSelectionChange={handleSelectionChange}
           focusDomain={activeDomain}
-          onNodeSelect={(nodeId) => {
-            const c = conceptById.get(nodeId)
-            if (c) push(`/study?concept=${encodeURIComponent(c.id)}`)
-          }}
         />
       </div>
 

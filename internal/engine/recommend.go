@@ -157,16 +157,22 @@ func daysSinceReview(t *time.Time) float64 {
 // RecommendPaused is what a paused learner is told. Reviews are hidden while paused (ADR-022
 // and handleDueReviews agree on that), so a recommendation pointing at /review would
 // contradict the pause the learner just set.
+//
+// It used to point at `/study` instead, with "Lessons are still open" — true when it was
+// written, and a dead end once the library closed: a learner who opened the app on a break was
+// sent to a page that could only explain things they had already decided not to practise today.
+// `/settings` is where the pause and its end both live, so it is the one destination that can
+// actually answer "I am not doing reviews — now what".
 func (e *Engine) RecommendPaused(studentID string) scheduler.RecommendationResponse {
 	return scheduler.RecommendationResponse{
 		Primary: &scheduler.Recommendation{
 			ID:     "paused",
 			Kind:   scheduler.KindLearn,
 			Reason: scheduler.ReasonNew,
-			Action: scheduler.Action{Type: scheduler.KindLearn, Href: "/study"},
+			Action: scheduler.Action{Type: scheduler.KindLearn, Href: "/settings"},
 			Badge:  "Paused",
-			Detail: "Reviews are on hold until you resume. Lessons are still open.",
-			CTA:    "Open a lesson →",
+			Detail: "Reviews are on hold until you resume — due reviews are hidden while paused",
+			CTA:    "Change or resume →",
 		},
 		Alternatives: []scheduler.Recommendation{},
 		GeneratedAt:  time.Now().UTC(),

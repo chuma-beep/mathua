@@ -289,14 +289,31 @@ func TestRecommend_NoLearnerFacingTerminology(t *testing.T) {
 	}
 }
 
-func TestRecommend_NothingAvailableFallsBackToTheLibrary(t *testing.T) {
+// A learner with nothing eligible — nothing reachable, nothing due, nothing weak — is a real
+// state, and it must still get a head: the client cannot render a null primary.
+//
+// It used to be answered with `/study`, and the fallback is worth keeping as a test because of
+// what it says about the product. "Everything available is already learned, the reference
+// library is open" told a learner with nothing due to go and read, which is the one activity
+// that cannot help them. The graph is orientation: it claims nothing, it cannot 401, and it
+// shows what builds on what they already hold.
+func TestRecommend_NothingAvailableFallsBackToOrientation(t *testing.T) {
 	s := New(miniDAG(t))
 	now := time.Now()
 	got := s.Recommend(RecommendInput{Now: now, AttemptedDays: 90, ConceptsMastered: 4,
 		Snapshots: map[string]*ConceptSnapshot{
 			"a": masteredAt(now), "b": masteredAt(now), "c": masteredAt(now), "d": masteredAt(now),
 		}})
-	if got.Primary == nil || got.Primary.Action.Href != "/study" {
-		t.Errorf("primary = %+v, want the library when everything is learned", got.Primary)
+	if got.Primary == nil {
+		t.Fatal("no primary when everything is learned")
+	}
+	if got.Primary.Action.Href != "/graph" {
+		t.Errorf("primary href = %q, want /graph", got.Primary.Action.Href)
+	}
+	// Every destination this engine can name must be one the product still has. /study was a
+	// live route when this fallback was written and is a forwarder to /learn now, so a
+	// recommendation pointing at it would send a learner to a redirect on the way to nothing.
+	if strings.HasPrefix(got.Primary.Action.Href, "/study") {
+		t.Errorf("primary points at the closed reference library: %q", got.Primary.Action.Href)
 	}
 }

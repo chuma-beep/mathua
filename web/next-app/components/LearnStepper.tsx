@@ -6,6 +6,7 @@ import KatexContent from './KatexContent'
 import LessonDiagram from './LessonDiagram'
 import LessonAssets from './LessonAssets'
 import ChoiceOptions from './ChoiceOptions'
+import ConceptReference from './ConceptReference'
 import { getLessonKPs, getLessonPractice, getLessonReadiness, submitStudyAnswer, getProgress, getErrorStatus, type KpInfo, type PracticeQuestion, type ReadinessRes, type ConceptProgress } from '../lib/api'
 import { getUserInfo } from '../lib/auth'
 import { upcomingLocked, hrefConceptId, type Shelf, type LockedSuccessor } from '../lib/nextUp'
@@ -510,6 +511,15 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
 
       {error && <p className="mb-4 font-mono text-xs text-red-400">{error}</p>}
 
+      {/* The reference layer, in the flow.
+          This replaces the "Reference" link the done card used to carry to `/study`: the same
+          material, reachable without leaving the questions, and impossible to wander off in —
+          there is nothing in it that navigates. Collapsed by default, so it never stands between
+          a learner and the first question; the worked example above it is the intended first
+          read. It renders no mastery state and awards nothing, which is the point: reading
+          explains, and only an answer moves the concept. */}
+      <ConceptReference conceptId={conceptId} prerequisites={prereqs} />
+
       <div className="space-y-4">
         {entries.map(e => {
           if (e.kind === 'intro') {
@@ -604,7 +614,6 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
                     <Link href="/profile" className="border border-mathua-border px-5 py-2 font-mono text-xs text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue inline-flex items-center min-h-[40px]">Back to Profile</Link>
                   )}
                   <button type="button" onClick={practiceAgain} className="border border-mathua-border px-5 py-2 font-mono text-xs text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue inline-flex items-center min-h-[40px]">Practice again</button>
-                  <Link href={`/study?concept=${encodeURIComponent(conceptId)}&from=${encodeURIComponent(conceptId)}`} className="border border-mathua-border px-5 py-2 font-mono text-xs text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue inline-flex items-center min-h-[40px]">Reference</Link>
                 </div>
                 {!nextLoading && nextShelf && nextShelf.alternatives.length > 0 && (
                   <details className="mt-3 border border-mathua-border">

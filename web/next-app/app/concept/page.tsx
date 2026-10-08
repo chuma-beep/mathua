@@ -3,7 +3,8 @@
 import { Suspense, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
-// Deprecated route (PR1): /concept?id=X now lives at /study?concept=X.
+// Deprecated route (PR1): /concept?id=X forwarded to /study?concept=X, and /study
+// is now closed, so it forwards on to the learning loop for that concept.
 // Static export (`output: 'export'`) can't use next.config redirects, so
 // this client stub forwards old links and bookmarks.
 //
@@ -20,7 +21,7 @@ function ConceptRedirect() {
   const searchParams = useSearchParams()
   useEffect(() => {
     const id = searchParams.get('id')
-    router.replace(id ? `/study?concept=${encodeURIComponent(id)}` : '/study')
+    router.replace(id ? `/learn?concept=${encodeURIComponent(id)}` : '/learn')
   }, [router, searchParams])
   return null
 }

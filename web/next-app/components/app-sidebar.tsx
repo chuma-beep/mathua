@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useRef } from 'react'
 import {
-  BookOpen,
   ChartNoAxesColumn,
   ChevronsLeft,
   ChevronsRight,
@@ -45,13 +44,18 @@ import { signOut } from '../lib/auth'
 // reachable from the header row and the mobile compass instead, which is where
 // the full destination list lives; putting it here as well would be exactly the
 // duplication this rule exists to prevent.
-// Order mirrors lib/nav.ts: Learn leads, then Study as the reference surface.
+// Order mirrors lib/nav.ts: Learn leads, then the orientation surfaces.
 // Icons come from components/icons, which fixes the box at 16px. The animated set renders a
 // div rather than an svg, so a `size-4` class here would silently size nothing and the
 // collapsed 44px rail would go ragged.
-const NAV_ITEMS: { label: string; href: string; icon: IconComponent }[] = [
+interface SidebarNavItem {
+  label: string
+  href: string
+  icon: IconComponent
+}
+
+const NAV_ITEMS: SidebarNavItem[] = [
   { label: 'Learn', href: '/learn', icon: Play },
-  { label: 'Study', href: '/study', icon: BookOpen },
   { label: 'Graph', href: '/graph', icon: Network },
   { label: 'Domains', href: '/domains', icon: Layers },
   { label: 'Leaderboard', href: '/leaderboard', icon: Trophy },

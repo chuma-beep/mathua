@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect, useRef } from 'react'
-import { BookOpen, House, Network, Play, User, type IconComponent } from './icons'
+import { House, Layers, Network, Play, User, type IconComponent } from './icons'
 import { useChrome } from '../hooks/useChrome'
 import { useInertWhen } from '../hooks/useInertWhen'
 import { registerChromePart } from '../lib/chrome'
@@ -12,13 +12,13 @@ import { resolveAvatar } from '../lib/dicebear'
 import { getSettings } from '../lib/api'
 import Avatar from './Avatar'
 
-// Learn before Study: the tab bar is the mobile primary nav, and Learn is the
-// only tab that asks a question. Study stays — it is how a learner looks up a
-// concept they have just met. Order is mirrored in lib/nav.ts.
+// The tab bar is the mobile primary nav. Learn is the only tab that asks a
+// question, so it leads; Domains holds the orientation slot that the closed
+// Study route used to occupy. Order is mirrored in lib/nav.ts.
 const TABS: { label: string; href: string; icon: IconComponent }[] = [
   { label: 'Home', href: '/', icon: House },
   { label: 'Learn', href: '/learn', icon: Play },
-  { label: 'Study', href: '/study', icon: BookOpen },
+  { label: 'Domains', href: '/domains', icon: Layers },
   { label: 'Profile', href: '/profile', icon: User },
   { label: 'Graph', href: '/graph', icon: Network },
 ]

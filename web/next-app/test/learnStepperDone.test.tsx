@@ -127,11 +127,13 @@ describe('LearnStepper done state (PR5)', () => {
     // Alternatives stay available in done — learner disposes, no bounce.
     expect(screen.getByText(/Or pick something else/)).toBeTruthy()
 
-    // No auto-advance: only explicit navigation, Reference still offered.
-    // It carries ?from= so the reference page can offer a way back here.
-    expect(screen.getByRole('link', { name: 'Reference' }).getAttribute('href')).toBe(
-      `/study?concept=${encodeURIComponent(CID)}&from=${encodeURIComponent(CID)}`,
-    )
+    // No auto-advance: only explicit navigation.
+    //
+    // There is no "Reference" link here any more. It pointed at `/study`, and the reference
+    // material is now the panel at the top of this page — so the done card offers Continue,
+    // Practice again and Back to Profile, and nothing that leaves the loop.
+    expect(screen.queryByRole('link', { name: 'Reference' })).toBeNull()
+    expect(await screen.findByTestId('reference-blocks')).toBeTruthy()
   }, 15000)
 
   it('never dead-ends when the recommendation fetch fails', async () => {
@@ -145,15 +147,15 @@ describe('LearnStepper done state (PR5)', () => {
     expect(await screen.findByText('4 + 1 = ?')).toBeTruthy()
     await answerCurrent('5')
 
-    // getNext absorbs its own network failure and returns the library recommendation, whose
-    // /study href carries no concept id — so `canContinue` is false and the card falls through
-    // to its failure branch. That branch is the guarantee: a way out, and never a link that
-    // points back at the concept just finished.
+    // getNext absorbs its own network failure and returns its own recommendation, whose href
+    // carries no concept id — so `canContinue` is false and the card falls through to its
+    // failure branch. That branch is the guarantee: a way out, and never a link that points
+    // back at the concept just finished.
     expect(await screen.findByText(/Complete — 2\/2 correct/)).toBeTruthy()
     const back = await screen.findByRole('link', { name: 'Back to Profile' })
     expect(back.getAttribute('href')).toBe('/profile')
     expect(screen.getByRole('button', { name: 'Practice again' })).toBeTruthy()
-    expect(screen.getByRole('link', { name: 'Reference' })).toBeTruthy()
+    expect(screen.queryByRole('link', { name: 'Reference' })).toBeNull()
     const links = screen.getAllByRole('link').map((l) => l.getAttribute('href') ?? '')
     expect(links.some((h) => h.includes(`/learn?concept=${encodeURIComponent(CID)}`))).toBe(false)
   }, 15000)
@@ -162,7 +164,12 @@ describe('LearnStepper done state (PR5)', () => {
     expect(headConceptId(`/learn?concept=${CID}&seed=42&difficulty=0.7&exclude=a`)).toBe(CID)
     expect(headConceptId('/learn?concept=other.id')).toBe('other.id')
     expect(headConceptId('/review')).toBeNull()
+    // hrefConceptId parses a URL, it does not know the route table — and it should not. A
+    // stale `/study?concept=X` href from an older build is read as concept X, which is the safe
+    // reading: the done-card guard then compares it to the concept just finished and declines
+    // to render a link back onto itself.
     expect(headConceptId('/study')).toBeNull()
+    expect(headConceptId('/study?concept=other.id')).toBe('other.id')
     expect(headConceptId('not a url at all')).toBeNull()
   })
 

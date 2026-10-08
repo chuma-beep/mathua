@@ -24,7 +24,13 @@ const KP = {
   diagram: '/diagrams/algebrica/number-line-real.svg',
 }
 
-test('study → learn → answer → XP persists (Study seam)', async ({ page }) => {
+// The whole loop, on the one surface that now has it.
+//
+// This used to be a two-page test: open `/study?lesson=…`, read the worked examples, then click
+// "Start learning →" into `/learn` to be asked a question. That pairing was the bug, not the
+// test — a learner could read a concept instead of being taught it, and the app made the
+// reading feel like progress. Both halves now live on one page, so the test does too.
+async function stubLearn(page: import('@playwright/test').Page) {
   await page.route('**/api/lessons**', route => {
     const url = route.request().url()
     if (url.includes('/practice')) return route.fulfill({ json: PRACTICE })
@@ -46,15 +52,13 @@ test('study → learn → answer → XP persists (Study seam)', async ({ page })
   await page.route('**/api/courses**', route => route.fulfill({ json: { courses: [] } }))
   await page.route('**/api/transcript**', route => route.fulfill({ json: { courses: [] } }))
   await page.route('**/api/efficacy**', route => route.fulfill({ json: { concepts_touched: 1, first_pass_rate: 1, second_pass_rate: 1, avg_attempts_per_concept: 1, total_attempts: 1 } }))
+}
 
-  await page.goto('/study?lesson=' + encodeURIComponent(LESSON.title))
-  await expect(page.locator('body')).toContainText('Addition Basics', { timeout: 30_000 })
-  await expect(page.getByText('Worked example').first()).toBeVisible()
-  await expect(page.getByText('Use addition notation').first()).toBeVisible()
+test('learn teaches, answers and awards XP on one page', async ({ page }) => {
+  await stubLearn(page)
 
-  // Study is reference-only: practice lives in /learn behind Start learning.
-  await page.getByRole('link', { name: 'Start learning →' }).first().click()
-  await expect(page).toHaveURL(/\/learn\?concept=arith\.add\.single/)
+  await page.goto('/learn?concept=arith.add.single')
+  await expect(page.getByText('Use addition notation').first()).toBeVisible({ timeout: 30_000 })
   await page.getByRole('button', { name: 'Next →' }).click()
 
   // The answer control is MathLive for arithmetic concepts and the plain input for
@@ -67,6 +71,87 @@ test('study → learn → answer → XP persists (Study seam)', async ({ page })
   await typeAnswer(page, '4')
   await page.getByRole('button', { name: 'Check', exact: true }).first().click()
   await expect(page.getByText('+1 XP').first()).toBeVisible({ timeout: 20_000 })
+})
+
+test('the reference material is on the learn page, and holds no way out of it', async ({ page }) => {
+  await stubLearn(page)
+  await page.goto('/learn?concept=arith.add.single')
+
+  // The worked example the library used to render as a whole article is here, behind a
+  // disclosure, without leaving the page that asks the question.
+  const panel = page.getByText('Reference — the full lesson')
+  await expect(panel).toBeVisible({ timeout: 30_000 })
+  await panel.click()
+  await expect(page.getByText('Add 3+4').first()).toBeVisible()
+
+  // The behavioural property, asserted in a real browser rather than by reading source: nothing
+  // inside the panel navigates. A link out of here — to another concept, to a library, anywhere
+  // — is the second learning path this closure exists to prevent.
+  const linksInPanel = await page.locator('details:has-text("Reference — the full lesson") a').all()
+  expect(linksInPanel).toHaveLength(0)
+
+  // And it says so itself: reading is not progress.
+  await expect(page.getByText(/only the questions below move this concept/)).toBeVisible()
+})
+
+test('/study forwards a concept deep link into the loop', async ({ page }) => {
+  // Old bookmarks and inbound links exist, and a 404 would lose the one thing the old URL
+  // still carried: which concept. Static export cannot use next.config redirects, so this is a
+  // client forwarder and the URL changes in the browser rather than over the wire.
+  await stubLearn(page)
+  await page.goto('/study?concept=arith.add.single')
+  await expect(page).toHaveURL(/\/learn\?concept=arith\.add\.single/, { timeout: 30_000 })
+  await expect(page.getByText('Use addition notation').first()).toBeVisible()
+})
+
+test('/study with no concept forwards to the learn entry', async ({ page }) => {
+  await stubLearn(page)
+  await page.route('**/api/next', route =>
+    route.fulfill({
+      json: {
+        primary: {
+          id: 'arith.add.single', conceptId: 'arith.add.single', conceptTitle: 'Single-digit addition',
+          kind: 'learn', reason: 'new', priority: 1,
+          action: { type: 'learn', href: '/learn?concept=arith.add.single' },
+          badge: 'New', detail: 'ready to learn', cta: 'Start →',
+        },
+        alternatives: [],
+        generatedAt: '',
+      },
+    }),
+  )
+  await page.goto('/study')
+  await expect(page).toHaveURL(/\/learn(\?|$)/, { timeout: 30_000 })
+})
+
+test('no learner navigation offers a way into the closed library', async ({ page }) => {
+  // Enumerated over every surface the library used to appear in, rather than one of them. Each
+  // was a separate place to reintroduce it, and a single-page assertion would pass while four
+  // of the other six still linked there.
+  await page.route('**/api/**', route => route.fulfill({ status: 404, json: {} }))
+  const surfaces: [string, string][] = [
+    ['/', 'landing'],
+    ['/learn', 'learn entry'],
+    ['/profile', 'profile'],
+    ['/graph', 'graph'],
+    ['/domains', 'domains'],
+    ['/review', 'review'],
+    ['/leaderboard', 'leaderboard'],
+    ['/history', 'history'],
+    ['/settings', 'settings'],
+    ['/how-it-works', 'how it works'],
+    ['/docs', 'docs'],
+    ['/note', 'note'],
+  ]
+  for (const [path, name] of surfaces) {
+    await page.goto(path)
+    await page.waitForLoadState('domcontentloaded')
+    const chrome = page.locator('header, nav, footer')
+    const hrefs = await chrome.locator('a').evaluateAll(els => els.map((e) => e.getAttribute('href') ?? ''))
+    expect(hrefs.filter((h) => h.startsWith('/study')), `${name} links to /study`).toEqual([])
+    const words = await chrome.locator('a, button').evaluateAll(els => els.map((e) => (e.textContent ?? '').trim()))
+    expect(words.filter((w) => /^(open |browse )?study$/i.test(w)), `${name} offers a Study control`).toEqual([])
+  }
 })
 
 test('quiz gate banner appears at 50 XP on profile and links to quiz host', async ({ page }) => {

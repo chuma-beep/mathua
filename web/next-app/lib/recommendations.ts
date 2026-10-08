@@ -36,20 +36,24 @@ function shelfKind(r: Recommendation): ShelfItem['kind'] {
   if (r.kind === 'practice') return 'weakness'
   if (r.kind === 'mastery_check') return 'diagnostic'
   if (r.id === 'diagnostic') return 'diagnostic'
-  if (r.id === 'study') return 'browse'
+  if (r.id === 'paused') return 'diagnostic'
   return r.reason === 'prerequisite' ? 'resume' : 'new'
 }
 
 export function recommendationResToShelf(res: RecommendationRes): Shelf {
+  // Mirrors the server's own "nothing eligible" fallback (scheduler.Recommend) rather than
+  // inventing a third answer. It used to degrade to the reference library, which is two
+  // mistakes at once: the route is closed, and sending a learner who cannot be helped to a
+  // page of prose was never the response to "I have nothing to do today".
   const primary = res.primary
     ? recommendationToShelfItem(res.primary)
     : {
-        kind: 'browse' as const,
-        badge: 'Library',
-        title: 'Lesson library',
-        detail: 'Nothing is recommended right now',
-        href: '/study',
-        cta: 'Browse lessons →',
+        kind: 'new' as const,
+        badge: 'All learned',
+        title: 'Concept graph',
+        detail: 'Nothing is due right now — the graph shows what builds on what you have',
+        href: '/graph',
+        cta: 'See the graph →',
         xp: 0,
       }
   return {

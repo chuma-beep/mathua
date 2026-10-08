@@ -47,7 +47,7 @@ describe('NextUpSummary dashboard block', () => {
 
   it('caps the queue at four rows', () => {
     const shelf = {
-      next: { kind: 'browse', badge: 'Study', title: 'Browse', detail: 'd', href: '/study', cta: 'Browse →', xp: 0 },
+      next: { kind: 'review', badge: 'Review', title: 'Check', detail: 'd', href: '/review', cta: 'Start →', xp: 0 },
       alternatives: Array.from({ length: 6 }, (_, i) => ({
         kind: 'new', badge: 'New', title: `N${i}`, detail: 'd',
         href: `/learn?concept=n${i}`, cta: 'Continue →', xp: 1,
