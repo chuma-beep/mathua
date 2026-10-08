@@ -2011,6 +2011,19 @@ type DomainNode struct {
 	Subdomains []SubdomainNode `json:"subdomains"`
 }
 
+// CorpusSize reports how many concepts and domains this engine was loaded with.
+//
+// The corpus is the definition of what Mathua teaches, so any surface counting it should read
+// it here rather than counting rows: a database query would report what has been visited.
+// Zero means the corpus failed to load, which is the honest answer and not a bug to paper over
+// with a fallback.
+func (e *Engine) CorpusSize() (concepts int, domains int) {
+	if e == nil || e.dag == nil {
+		return 0, 0
+	}
+	return e.dag.Count(), len(e.dag.Domains())
+}
+
 func (e *Engine) ConceptTree(studentID string) []DomainNode {
 	progress, _ := e.repo.GetAllProgress(studentID)
 	domains := make(map[string]map[string][]ConceptTreeNode)
