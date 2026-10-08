@@ -11,7 +11,13 @@ export default defineConfig({
   // PW_WORKERS overrides (CI shards set 1 to halve peak browser memory).
   workers: process.env.PW_WORKERS ? Number(process.env.PW_WORKERS) : process.env.CI ? 2 : undefined,
   reporter: process.env.CI ? [['list'], ['html', { open: 'never' }]] : 'list',
-  timeout: 30_000,
+  // Generous per-test budget. These specs boot MathLive and KaTeX and stub a dozen endpoints, so
+  // the page needs real CPU time before it settles — and CI runs two workers across three
+  // projects, so a spec can be competing with another browser for most of its wall clock. At
+  // 30s this suite failed intermittently on `toBeEnabled` / `toBeVisible` waits that had not
+  // been given enough room, which reads as a product fault and is not one. A test that needs
+  // longer than this is genuinely stuck and should say so in a minute rather than hide.
+  timeout: 60_000,
   use: {
     baseURL,
     trace: 'retain-on-failure',

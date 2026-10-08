@@ -58,7 +58,12 @@ test('learn teaches, answers and awards XP on one page', async ({ page }) => {
   await stubLearn(page)
 
   await page.goto('/learn?concept=arith.add.single')
-  await expect(page.getByText('Use addition notation').first()).toBeVisible({ timeout: 30_000 })
+  // Scoped to the intro's own KP label. The reference panel repeats the same knowledge-point
+  // labels inside a collapsed `<details>`, and Playwright treats a `<summary>` in a closed
+  // `<details>` as hidden — so a page-wide `.first()` resolves to the panel's copy and fails for a
+  // reason unrelated to what this test is about.
+  const kpLabel = page.locator('p.font-mono.uppercase', { hasText: 'Use addition notation' })
+  await expect(kpLabel.first()).toBeVisible({ timeout: 30_000 })
   await page.getByRole('button', { name: 'Next →' }).click()
 
   // The answer control is MathLive for arithmetic concepts and the plain input for
@@ -101,7 +106,13 @@ test('/study forwards a concept deep link into the loop', async ({ page }) => {
   await stubLearn(page)
   await page.goto('/study?concept=arith.add.single')
   await expect(page).toHaveURL(/\/learn\?concept=arith\.add\.single/, { timeout: 30_000 })
-  await expect(page.getByText('Use addition notation').first()).toBeVisible()
+  // Not a page-wide `.first()`. The reference panel repeats the same knowledge-point labels
+  // inside a collapsed `<details>`, and Playwright treats a `<summary>` in a closed `<details>`
+  // as hidden — so a page-wide `.first()` can resolve to the panel's copy and fail for a reason
+  // that has nothing to do with the forwarder. Scoped to the intro's own label, which is what
+  // "the concept reached the teaching loop" actually looks like.
+  const kpLabel = page.locator('p.font-mono.uppercase', { hasText: 'Use addition notation' })
+  await expect(kpLabel.first()).toBeVisible()
 })
 
 test('/study with no concept forwards to the learn entry', async ({ page }) => {

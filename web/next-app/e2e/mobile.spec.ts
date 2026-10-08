@@ -127,7 +127,12 @@ test('chrome reveals at the bottom then gets out of the way', async ({ page }) =
   // Then it hides itself, and stays hidden: collapsing the header shortens the
   // document, so the browser clamps scrollY and reports it as a scroll event.
   // Acting on that clamp used to restart the timer in a loop that never settled.
-  await expect.poll(async () => toggle.getAttribute('aria-expanded'), { timeout: 6000 }).toBe('false')
+  //
+  // The window is generous on purpose. `BOTTOM_AUTO_HIDE_MS` is 2000ms of real
+  // wall-clock time, so the assertion has to outlast it even when the suite is
+  // running every project in parallel and the machine is saturated; 6000ms had
+  // no headroom over 2000ms under load and this test flaked rather than failed.
+  await expect.poll(async () => toggle.getAttribute('aria-expanded'), { timeout: 15_000 }).toBe('false')
   await page.waitForTimeout(2500)
   await expect(toggle).toHaveAttribute('aria-expanded', 'false')
 })
