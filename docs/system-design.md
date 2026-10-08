@@ -400,6 +400,10 @@ The web server exposes a REST API through Go's standard `net/http` package. No e
 | POST | `/api/study/answer` | write: writeLimiter, optional | Study seam `LessonQuiz→SubmitAnswer` (`CONTEXT.md` Seam) — graded against the server-side anchor, never a client-supplied expected; 409 + re-serve when no anchor exists, `student_id` impersonation guard |
 | POST | `/api/quiz/session` | write: writeLimiter, optional | Quiz every 50 XP at 80% difficulty (`quiz.go:1`) |
 | POST | `/api/quiz/answer` | write: writeLimiter, optional | Submit quiz answer (`TaskQuiz 20` `engine.go:1126`) |
+| GET | `/api/admin/overview` | **admin** | Counts for the admin landing page: accounts, administrators, corpus size, stored questions, recent audit events |
+| GET | `/api/admin/users` | **admin** | Search accounts by email / id / username / name (`?q=&limit=&offset=`). Projects `storage.AdminUser`, which has no field for a credential or for learning state |
+| PATCH | `/api/admin/users/{id}` | **admin** | `{"role":"admin"\|"student"}` — the only mutation. The body contributes one field; every other key is ignored. Refuses 409 when it would leave zero administrators, and audits the change |
+| GET | `/api/admin/audit` | **admin** | Audit trail, newest first. Read-only: no PUT/PATCH/DELETE route, and no update or delete method on either store |
 | GET | `/api/activity` | auth | Daily activity heatmap (`?days=365`) |
 | GET | `/api/efficacy` | auth | First-pass/second-pass efficacy |
 | GET | `/api/efficacy/all` | no | Aggregate efficacy across students |
