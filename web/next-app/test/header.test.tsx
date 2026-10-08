@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeAll, beforeEach, vi } from 'vitest'
-import { render, screen, fireEvent, within } from '@testing-library/react'
+import { render, screen, fireEvent, within, cleanup } from '@testing-library/react'
 import Header from '../components/Header'
 
 beforeAll(() => {
@@ -74,6 +74,49 @@ describe('Header mobile nav menu', () => {
   // The assertion is structural rather than visual: jsdom has no layout, so it cannot tell you
   // what is painted on top. What it can check is that the panel is not a descendant of the
   // clipping wrapper, which is the cause.
+  // The bar's rule is the header's own edge and reaches both sides of the window; the links stay
+  // capped at 1100px so they line up with the page content below. Both halves matter — a
+  // full-width row would put the logo away from the corner, and a capped rule would leave the bar
+  // reading as a floating strip with page either side of it. Structural, because jsdom has no
+  // layout to measure pixels against.
+  it("spans the header's full width while its content stays capped", () => {
+    render(<Header />)
+
+    const rule = document.querySelector('header > div > div')
+    expect(rule, 'the wrapper carrying the rule should be a direct child of the clipper').not.toBeNull()
+    expect(rule!.className).toMatch(/border-b/)
+    // The rule's own element must not be the capped one, or the border stops at 1100px.
+    expect(rule!.className).not.toMatch(/max-w-container/)
+
+    const row = rule!.firstElementChild as HTMLElement
+    expect(row.className).toMatch(/max-w-container/)
+    expect(row.className).toMatch(/mx-auto/)
+    expect(row.className).toMatch(/justify-between/)
+  })
+
+  // Both panels hang off the full-width header, so each needs the capped wrapper to measure its
+  // `right-*` from the row. Without it a wide screen puts the menu a long way from the button
+  // that opened it — the same class of fault as the border, one axis over.
+  it('anchors each panel to the capped row rather than the viewport', () => {
+    render(<Header />)
+    fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }))
+    const navWrap = screen.getByRole('menu', { name: 'Site navigation' }).parentElement!
+    expect(navWrap.className).toMatch(/max-w-container/)
+
+    // The profile panel only exists for a signed-in caller, so that half needs its own render.
+    // `cleanup()` and restoring `mockUser` rather than leaking the signed-in state into the tests
+    // below: the overflow links are computed from `loggedIn`, and a leaked session changes them.
+    cleanup()
+    mockUser = { student_id: 's1', name: 'Nelson', username: 'wis' }
+    render(<Header />)
+    fireEvent.click(screen.getByRole('button', { name: 'Open profile menu' }))
+    const profWrap = screen.getByRole('menu', { name: 'Profile' }).parentElement!
+    expect(profWrap.className).toMatch(/max-w-container/)
+
+    cleanup()
+    mockUser = null
+  })
+
   it('renders the nav panel outside the header row that clips it', () => {
     render(<Header />)
     fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }))

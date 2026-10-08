@@ -131,7 +131,21 @@ export default function Header({ links }: HeaderProps) {
       }`}
     >
       <div className="min-h-0 overflow-hidden bg-mathua-bg">
-        <div className="flex items-center justify-between border-b border-mathua-border px-4 md:px-6 py-3 max-w-container mx-auto">
+        {/* Full-bleed rule, constrained content.
+
+            The bar's rule is the header's own edge: it should reach both sides of the window the
+            way the footer's does. It used to sit on this row, which also carried `max-w-container`,
+            so on a screen wider than 1100px the rule stopped short and the bar read as a floating
+            strip with the page showing either side of it. The footer already had it right —
+            `border-t` on the full-width `<footer>`, unconstrained inner content — so the header is
+            now the same shape.
+
+            The inner row stays constrained rather than going full width, because the links need to
+            line up with the page content below, and the page content is capped at 1100px. Widening
+            the row alone would put the logo far from the top-left corner it is supposed to anchor.
+            `mx-auto` re-centres the capped row against the wider parent. */}
+        <div className="border-b border-mathua-border">
+        <div className="max-w-container mx-auto flex items-center justify-between px-4 md:px-6 py-3">
           <div className="flex items-center gap-4 md:gap-6 min-w-0">
             <Link
               href={loggedIn ? '/profile' : '/'}
@@ -204,6 +218,7 @@ export default function Header({ links }: HeaderProps) {
             ) : null}
           </div>
         </div>
+        </div>
       </div>
       {/* The nav panel hangs off <header>, not off the row. Inside the row it sat below
           `min-h-0 overflow-hidden` — the CSS grid-collapse trick that hides the header on scroll
@@ -214,10 +229,11 @@ export default function Header({ links }: HeaderProps) {
           Also gated on chromeVisible: the trigger lives inside the row, so a panel whose button
           is scrolled away is a floating menu with no visible way to close it. */}
 {navOpen && chromeVisible && (
+                  <div className="absolute inset-y-0 left-1/2 w-full max-w-container -translate-x-1/2 pointer-events-none">
                     <div
                       role="menu"
                       aria-label="Site navigation"
-                      className="absolute right-4 md:right-6 top-full min-w-[200px] bg-mathua-surface border border-mathua-border shadow-lg py-1 z-50 md:hidden"
+                      className="pointer-events-auto absolute right-4 md:right-6 top-full min-w-[200px] bg-mathua-surface border border-mathua-border shadow-lg py-1 z-50 md:hidden"
                     >
                       {compassLinks.map(link => {
                         const active = pathname === link.href || (pathname ?? '').startsWith(link.href + '/')
@@ -237,6 +253,7 @@ export default function Header({ links }: HeaderProps) {
                         )
                       })}
                     </div>
+                  </div>
                   )}
 
 
@@ -254,11 +271,20 @@ export default function Header({ links }: HeaderProps) {
           the collapsed row, so a menu whose button is scrolled away is a floating menu with no
           visible way to close it. */}
       {open && chromeVisible && (
+        <>
+        {/* The panel's wrapper is itself absolutely positioned: <header> is full width, so a panel
+            measured from it lands at the window edge while its trigger sits at the end of the
+            capped row. This box is the same width as that row and centred, so `right-6` lands next
+            to the avatar. `inset-y-0` keeps it as tall as the header, which is what makes
+            `top-full` mean the bottom of the bar; it is a positioning context for the same reason.
+            `pointer-events-none` with the panel re-enabling its own keeps the rest of the bar
+            clickable underneath an open menu. */}
+        <div className="absolute inset-y-0 left-1/2 w-full max-w-container -translate-x-1/2 pointer-events-none">
         <div
           ref={menuPanelRef}
           role="menu"
           aria-label="Profile"
-          className="absolute right-4 md:right-6 top-full min-w-[160px] bg-mathua-surface border border-mathua-border shadow-lg py-1 z-50"
+          className="pointer-events-auto absolute right-4 md:right-6 top-full min-w-[160px] bg-mathua-surface border border-mathua-border shadow-lg py-1 z-50"
         >
           <div className="px-3 py-2 border-b border-mathua-border">
             <div className="font-mono text-xs text-mathua-primary truncate">{user?.name}</div>
@@ -288,6 +314,8 @@ export default function Header({ links }: HeaderProps) {
             Sign out
           </button>
         </div>
+        </div>
+        </>
       )}
     </header>
   )
