@@ -7,9 +7,9 @@ import BottomTabs from '../../../components/BottomTabs'
 import Footer from '../../../components/Footer'
 import SectionHeader from '../../../components/SectionHeader'
 import AdminNav from '../../../components/AdminNav'
+import { useAdminMe } from '../../../hooks/useAdminMe'
 import { listAdminAudit, type AdminAuditEvent } from '../../../lib/api'
 import { getErrorMessage } from '../../../lib/api'
-import { useAuthState } from '../../../hooks/useAuthState'
 
 // The audit trail.
 //
@@ -23,7 +23,6 @@ import { useAuthState } from '../../../hooks/useAuthState'
 // filter control that hides events invites an administrator to curate the view of their own
 // trail, which is the wrong direction.
 export default function AdminAuditPage() {
-  const { user } = useAuthState()
   const [events, setEvents] = useState<AdminAuditEvent[] | null>(null)
   const [error, setError] = useState('')
   const [openId, setOpenId] = useState<number | null>(null)
@@ -36,7 +35,7 @@ export default function AdminAuditPage() {
     return () => { cancelled = true }
   }, [])
 
-  const isAdmin = user?.role === 'admin'
+  const { isStaff } = useAdminMe()
 
   return (
     <>
@@ -44,9 +43,9 @@ export default function AdminAuditPage() {
       <div className="pt-[var(--chrome-top)] lg:pt-0">
         <main className="mx-auto w-full max-w-[820px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
           <SectionHeader label="Administration" title="Audit" />
-          <AdminNav isAdmin={isAdmin} />
+          <AdminNav />
 
-          {!isAdmin && (
+          {!isStaff && (
             <p role="status" className="border border-mathua-border bg-mathua-surface p-4 font-mono text-xs text-mathua-secondary">
               This area needs an administrator role.
             </p>

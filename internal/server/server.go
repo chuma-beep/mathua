@@ -19,6 +19,7 @@ import (
 	"time"
 
 	"github.com/chuma-beep/mathua/internal/auth"
+	"github.com/chuma-beep/mathua/internal/admin"
 	"github.com/chuma-beep/mathua/internal/concepts"
 	"github.com/chuma-beep/mathua/internal/diagnostic"
 	"github.com/chuma-beep/mathua/internal/engine"
@@ -152,7 +153,6 @@ type Server struct {
 }
 
 func New(eng *engine.Engine, repo storage.Repository, auth *auth.AuthService) *Server {
-	checkAdminPasswordConfig()
 	s := &Server{
 		eng:          eng,
 		repo:         repo,
@@ -309,23 +309,29 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/lessons/body", logRequest(cors(s.optionalAuthMiddleware(s.handleLessonBody))))
 	mux.HandleFunc("/api/lessons/", logRequest(cors(s.optionalAuthMiddleware(s.handleLessonConcept))))
 	mux.HandleFunc("/api/study/answer", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleStudyAnswer)))))
-	mux.HandleFunc("/api/reports", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(func(w http.ResponseWriter, r *http.Request) {
-		if r.Method == http.MethodGet {
-			s.handleListReports(w, r)
-			return
-		}
-		s.handleCreateReport(w, r)
-	})))))
-	mux.HandleFunc("/api/reports/", logRequest(cors(s.optionalAuthMiddleware(s.handleUpdateReport))))
-	mux.HandleFunc("/api/admin/login", logRequest(cors(s.authLimiter.middleware(s.handleAdminLogin))))
-	mux.HandleFunc("/api/admin/logout", logRequest(cors(s.authLimiter.middleware(s.handleAdminLogout))))
-	// Role-based administration. Separate from the two triage routes above: those take a
-	// shared operator password, these require a role on an individual account, and neither
-	// authorizes the other. Every route below is behind requireAdmin and nothing else.
-	mux.HandleFunc("/api/admin/overview", logRequest(cors(s.requireAdmin(s.handleAdminOverview))))
-	mux.HandleFunc("/api/admin/audit", logRequest(cors(s.requireAdmin(s.handleAdminAudit))))
-	mux.HandleFunc("/api/admin/users", logRequest(cors(s.requireAdmin(s.handleAdminUsers))))
-	mux.HandleFunc("/api/admin/users/", logRequest(cors(s.requireAdmin(s.handleAdminUserRole))))
+	// Report creation only. Listing and resolving reports is administration now and lives under
+	// /api/admin/reports behind the role boundary; the old shared-password triage endpoints were
+	// removed in V2 so there is exactly one moderation path.
+	mux.HandleFunc("/api/reports", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleCreateReport)))))
+	// Admin V2. Every route names the permission it needs, and requirePermission enforces it
+	// server-side on every request from the role the database holds — never from anything the
+	// client sends. The password login above is the old content-triage gate; it is not this
+	// boundary and does not open any of these routes.
+	mux.HandleFunc("/api/admin/me", logRequest(cors(s.requirePermission(admin.Access, s.handleAdminMe))))
+	mux.HandleFunc("/api/admin/overview", logRequest(cors(s.requirePermission(admin.Access, s.handleAdminOverview))))
+	mux.HandleFunc("/api/admin/reports", logRequest(cors(s.requirePermission(admin.ReportsRead, s.handleAdminReports))))
+	mux.HandleFunc("/api/admin/reports/", logRequest(cors(s.requirePermission(admin.ReportsRead, s.handleAdminReport))))
+	mux.HandleFunc("/api/admin/users", logRequest(cors(s.requirePermission(admin.UsersRead, s.handleAdminUsers))))
+	mux.HandleFunc("/api/admin/users/", logRequest(cors(s.requirePermission(admin.UsersRead, s.handleAdminUser))))
+	mux.HandleFunc("/api/admin/admins", logRequest(cors(s.requirePermission(admin.AdminsRead, s.handleAdminAdmins))))
+	// Accepting an invitation is the one route here reachable by a non-staff account: it is how
+	// a learner becomes staff. It still requires authentication, and it is bound to the invited
+	// address.
+	mux.HandleFunc("/api/admin/invitations/accept", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleAdminInvitationAccept)))))
+	mux.HandleFunc("/api/admin/invitations", logRequest(cors(s.requirePermission(admin.AdminsRead, s.handleAdminInvitations))))
+	mux.HandleFunc("/api/admin/invitations/", logRequest(cors(s.requirePermission(admin.AdminsRead, s.handleAdminInvitationRevoke))))
+	mux.HandleFunc("/api/admin/audit", logRequest(cors(s.requirePermission(admin.AuditRead, s.handleAdminAudit))))
+	mux.HandleFunc("/api/admin/content", logRequest(cors(s.requirePermission(admin.ContentRead, s.handleAdminContent))))
 	mux.HandleFunc("/api/quiz/session", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleQuizSession)))))
 	mux.HandleFunc("/api/quiz/answer", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleQuizAnswer)))))
 	mux.HandleFunc("/api/quiz/skip", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleQuizSkip)))))
@@ -2549,6 +2555,11 @@ func (s *Server) handleStudyAnswer(w http.ResponseWriter, r *http.Request) {
 }
 
 type authStudentKey struct{}
+
+// authRoleKey carries the caller's role from requirePermission into the handler, so a handler
+// that needs to compare itself against a target (may it manage this account? is this a
+// self-change?) does not have to re-read the role it was already authorized on.
+type authRoleKey struct{}
 
 // ownsStudentID reports whether the caller may act as sid. The validated
 // Bearer identity always wins; unauthenticated callers may only act as

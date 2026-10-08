@@ -41,6 +41,7 @@ type adminEnv struct {
 	studentID  string
 	adminID    string
 	thirdID    string
+	thirdTok   string
 }
 
 func newAdminEnv(t *testing.T) *adminEnv {
@@ -99,11 +100,14 @@ func newAdminEnv(t *testing.T) *adminEnv {
 	env.studentID = me(env.studentTok)
 	env.adminID = me(env.adminTok)
 	env.thirdID = me(thirdTok)
+	env.thirdTok = thirdTok
 
 	// Promote through the operator path, not an endpoint: this is the same call
 	// `mathua admin promote` makes, and using it here keeps the tests from depending on a
 	// route that does not exist.
-	if err := store.SetStudentRole(env.adminID, storage.RoleAdmin); err != nil {
+	// The V2 top role is owner, not admin: owner is the one that can manage peers and hand
+	// out every other role, so the environment's privileged account holds it.
+	if err := store.SetStudentRole(env.adminID, storage.RoleOwner); err != nil {
 		t.Fatalf("promote: %v", err)
 	}
 	return env
@@ -329,40 +333,38 @@ func TestAdminCanDemoteAnotherAdminWhenSafe(t *testing.T) {
 
 // The rule itself, and the case nobody writes a test for: an admin demoting *themselves* when
 // they are the only one.
-func TestLastAdminCannotDemoteSelf(t *testing.T) {
+func TestLastOwnerCannotDemoteSelf(t *testing.T) {
 	e := newAdminEnv(t)
 	rec := e.do(t, "PATCH", "/api/admin/users/"+e.adminID, e.adminTok, `{"role":"student"}`)
 	if rec.Code != 409 {
-		t.Fatalf("last-admin demotion: got %d, want 409 (%s)", rec.Code, rec.Body.String())
+		t.Fatalf("last-owner demotion: got %d, want 409 (%s)", rec.Code, rec.Body.String())
 	}
 	role, _ := e.store.GetStudentRole(e.adminID)
-	if role != storage.RoleAdmin {
+	if role != storage.RoleOwner {
 		t.Errorf("the refused demotion still applied: role = %q", role)
 	}
-	n, _ := e.store.CountAdmins()
+	n, _ := e.store.CountOwners()
 	if n != 1 {
-		t.Errorf("admins = %d, want 1", n)
+		t.Errorf("owners = %d, want 1", n)
 	}
 }
 
-// Same rule, other direction: the last admin cannot be demoted *by another* admin either, and
-// the distinction is not "by the account holder".
-func TestLastAdminCannotBeDemotedByAnotherAdmin(t *testing.T) {
+// The other direction: an administrator cannot demote an owner, because the owner outranks
+// them. That is authorization (403), not the invariant — the invariant is what an owner hits
+// when they would empty the top of the hierarchy, covered by TestLastOwnerCannotDemoteSelf.
+func TestAdminCannotDemoteOwner(t *testing.T) {
 	e := newAdminEnv(t)
-	// Two admins, then demote one so the survivor is the last.
-	if err := e.store.SetStudentRole(e.studentID, storage.RoleAdmin); err != nil {
-		t.Fatalf("promote: %v", err)
+	// A second staff member who is an admin, not an owner.
+	if err := e.store.SetStudentRole(e.thirdID, storage.RoleAdmin); err != nil {
+		t.Fatalf("promote third: %v", err)
 	}
-	if err := e.store.DemoteAdminSafely(e.studentID); err != nil {
-		t.Fatalf("demote: %v", err)
+	rec := e.do(t, "PATCH", "/api/admin/users/"+e.adminID, e.thirdTok, `{"role":"student"}`)
+	if rec.Code != 403 {
+		t.Errorf("an admin demoting an owner: got %d, want 403 (%s)", rec.Code, rec.Body.String())
 	}
-	rec := e.do(t, "PATCH", "/api/admin/users/"+e.adminID, e.adminTok, `{"role":"student"}`)
-	if rec.Code != 409 {
-		t.Errorf("got %d, want 409", rec.Code)
-	}
-	n, _ := e.store.CountAdmins()
-	if n != 1 {
-		t.Errorf("admins = %d, want 1", n)
+	role, _ := e.store.GetStudentRole(e.adminID)
+	if role != storage.RoleOwner {
+		t.Errorf("the owner's role changed to %q", role)
 	}
 }
 
@@ -471,18 +473,23 @@ func TestRolePatchMalformedBodyIs400(t *testing.T) {
 	}
 }
 
-// A GET may not mutate. Without this, a crawler or a prefetch would demote an administrator.
+// A mutating method that is not PATCH/PUT is refused, and a GET is now a read of the same path
+// (the account detail) rather than a 405. Either way, none of them may mutate.
 func TestRolePatchRejectsOtherMethods(t *testing.T) {
 	e := newAdminEnv(t)
-	for _, m := range []string{"GET", "POST", "DELETE"} {
+	for _, m := range []string{"POST", "DELETE"} {
 		rec := e.do(t, m, "/api/admin/users/"+e.adminID, e.adminTok, "")
 		if rec.Code != 405 {
 			t.Errorf("%s: got %d, want 405", m, rec.Code)
 		}
-		role, _ := e.store.GetStudentRole(e.adminID)
-		if role != storage.RoleAdmin {
-			t.Fatalf("%s demoted the administrator", m)
-		}
+	}
+	// GET reads and returns 200, and the role is untouched.
+	if got := e.do(t, "GET", "/api/admin/users/"+e.adminID, e.adminTok, ""); got.Code != 200 {
+		t.Errorf("GET detail: got %d, want 200 (%s)", got.Code, got.Body.String())
+	}
+	role, _ := e.store.GetStudentRole(e.adminID)
+	if role != storage.RoleOwner {
+		t.Fatalf("a read demoted the owner: %q", role)
 	}
 }
 
@@ -602,9 +609,9 @@ func TestPromotionAndDemotionAreAudited(t *testing.T) {
 // administrator is a no-op and must not grow the trail.
 func TestNoOpRoleChangeIsNotAudited(t *testing.T) {
 	e := newAdminEnv(t)
-	rec := e.do(t, "PATCH", "/api/admin/users/"+e.adminID, e.adminTok, `{"role":"admin"}`)
+	rec := e.do(t, "PATCH", "/api/admin/users/"+e.adminID, e.adminTok, `{"role":"owner"}`)
 	if rec.Code != 200 {
-		t.Fatalf("no-op promote: got %d", rec.Code)
+		t.Fatalf("no-op re-assign: got %d", rec.Code)
 	}
 	var out struct {
 		User    storage.AdminUser `json:"user"`
@@ -718,7 +725,8 @@ func TestAdminOverviewReportsLiveCounts(t *testing.T) {
 	}
 	var out struct {
 		Users     int `json:"users"`
-		Admins    int `json:"admins"`
+		Staff     int `json:"staff"`
+		Owners    int `json:"owners"`
 		Concepts  int `json:"concepts"`
 		Domains   int `json:"domains"`
 		Questions int `json:"questions"`
@@ -729,53 +737,17 @@ func TestAdminOverviewReportsLiveCounts(t *testing.T) {
 	if out.Users != 3 {
 		t.Errorf("users = %d, want 3", out.Users)
 	}
-	if out.Admins != 1 {
-		t.Errorf("admins = %d, want 1", out.Admins)
+	if out.Staff != 1 {
+		t.Errorf("staff = %d, want 1", out.Staff)
+	}
+	if out.Owners != 1 {
+		t.Errorf("owners = %d, want 1", out.Owners)
 	}
 	if out.Concepts != 1 {
 		t.Errorf("concepts = %d, want 1 (the corpus this server was built with)", out.Concepts)
 	}
 	if out.Domains != 1 {
 		t.Errorf("domains = %d, want 1", out.Domains)
-	}
-}
-
-// ── Triage and role administration do not share a mechanism ────────────────
-
-// Both live under /admin and they must not be confused for one another. A triage password is
-// not an account role: holding one must not reach user administration, and holding an
-// administrator role must not reach the triage log.
-func TestTriagePasswordDoesNotGrantRoleAdministration(t *testing.T) {
-	t.Setenv("ADMIN_PASSWORD", "triage-secret-value")
-	e := newAdminEnv(t)
-
-	code, triageToken := loginAdmin(t, e.mux, "triage-secret-value")
-	if code != 200 {
-		t.Fatalf("triage login: got %d", code)
-	}
-	if triageToken == "" {
-		t.Fatal("triage login returned no token")
-	}
-
-	// 401, not 403, and the distinction is the point: the triage token is a session row in
-	// server_sessions, not a signed learner credential, so it fails authentication before the
-	// role is ever consulted. That is a stronger separation than "the same identity, fewer
-	// rights" — holding the triage password confers no account identity at all, so it cannot
-	// even be the subject of a role check.
-	if got := e.do(t, "GET", "/api/admin/users", triageToken, ""); got.Code != 401 {
-		t.Errorf("triage token reached user administration: %d (%s)", got.Code, got.Body.String())
-	}
-	if got := e.do(t, "PATCH", "/api/admin/users/"+e.studentID, triageToken, `{"role":"admin"}`); got.Code != 401 {
-		t.Errorf("triage token promoted a user: %d (%s)", got.Code, got.Body.String())
-	}
-	role, _ := e.store.GetStudentRole(e.studentID)
-	if role != storage.RoleStudent {
-		t.Errorf("triage token changed a role: %q", role)
-	}
-
-	// And the reverse: a real administrator cannot read the triage log.
-	if got := e.do(t, "GET", "/api/reports", e.adminTok, ""); got.Code == 200 {
-		t.Errorf("an account administrator read the triage log: %s", got.Body.String())
 	}
 }
 
@@ -789,7 +761,7 @@ func TestMeReportsRole(t *testing.T) {
 	for _, tc := range []struct {
 		token string
 		want  storage.Role
-	}{{e.adminTok, storage.RoleAdmin}, {e.studentTok, storage.RoleStudent}} {
+	}{{e.adminTok, storage.RoleOwner}, {e.studentTok, storage.RoleStudent}} {
 		rec := e.do(t, "GET", "/api/auth/me", tc.token, "")
 		if rec.Code != 200 {
 			t.Fatalf("me: got %d", rec.Code)

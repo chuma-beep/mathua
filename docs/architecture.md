@@ -64,127 +64,168 @@ The image build verifies the installation, so grading is available in production
 
 SQLite for local development (`mathua.db`, `WAL` `storage/migrate.go:23`). PostgreSQL for production web access via `DATABASE_URL=postgres://` (`internal/storage/postgres.go:7` `PostgresStore` via `pgx/v5/stdlib`, `pgSchema` `postgres.go:7`, `GREATEST` for XP floor, `STRING_AGG` for activity). `cmd/mathua` checks `DATABASE_URL` and opens `pgx` when `postgres://` is set, otherwise SQLite. The data schema is identical across both databases, abstracted behind a `Repository` interface (`storage/store.go:127`).
 
-## Administration — role, not a second login
+## Administration — roles, not a second login
 
-One authentication system serves everyone. A student signs in at `/login`. A Mathua
-administrator signs in at the same place with the same form. There is no admin login page, no
-admin password and no admin session. One column separates the two accounts.
+One authentication system serves everyone. A learner signs in at `/login`. An administrator
+signs in at the same place with the same form. There is no admin login page and no admin
+password. A role on the account separates the two.
 
-### The role
+### The roles
 
-`students.role` holds `student` or `admin`. The column is `NOT NULL DEFAULT 'student'`. Every
-account created before the column therefore migrated to a learner.
+`students.role` holds one of four values. The table lists them from most to least privilege.
 
-That is the only safe direction. A database from before roles hold no evidence about who
-administered it, because nothing in that database permitted administration.
+| Role | What it can do |
+|---|---|
+| `owner` | Everything. The only role that can grant another owner. |
+| `admin` | Run administration and moderation. Cannot grant owner. |
+| `moderator` | Work the moderation queue and inspect content. |
+| `student` | Learn. No administrative access. |
 
-The operator sets the role. Administrators set it too. The role never comes from XP, from
-mastery, from level, from curriculum progress or from an email domain. A learner can change
-each of those. A request body cannot set the role.
+The column is `NOT NULL DEFAULT 'student'`. Every account created before roles migrated to a
+learner. A database from before roles holds no evidence about who administered it, because
+nothing in that database permitted administration.
+
+V1 held only `student` and `admin`. The migration moves each V1 `admin` to `owner`. V1 `admin`
+was full control. The move keeps that control. Leaving the value as `admin` takes away the power to
+manage staff.
+
+The role never comes from XP, from mastery, from level or from an email domain. A learner can
+change each of those. A request body cannot set the role.
 
 ### Where the role is read
 
-`requireAdmin` (`internal/server/adminrole.go`) is the boundary. It authenticates the request.
-It identifies the account. Then it reads the current role from the database. It does not trust a
-role carried in the token.
+`requirePermission` (`internal/server/adminrole.go`) is the boundary. It authenticates the
+request. It identifies the account. Then it reads the current role from the database. It does
+not trust a role carried in the token.
 
 That is the decision the rest of the design follows from. A role embedded in a JWT is a claim
-made at sign-in. The claim stays valid until the token expires. Expiry can be a day.
+made at sign-in. The claim stays valid until the token expires. Expiry can be a day. An
+administrator demoted at 09:00 keeps access until midnight under that scheme. That administrator
+can use the access to promote themselves back.
 
-An administrator demoted at 09:00 keeps administrative access until midnight under that scheme.
-That administrator can use the access to promote themselves back. A lookup per request costs one
-indexed read. It removes the window entirely.
+One indexed read per request removes the window. A demotion then takes effect on the next call,
+from any device, with no re-login.
+`TestLastAdminDemotionTakesEffectImmediately` in `internal/server/adminrole_test.go` asserts
+this.
 
-A demotion then takes effect on the next call, from any device, with no re-login.
-`TestLastAdminDemotionTakesEffectImmediately` in `internal/server/adminrole_test.go` asserts this.
+### The permission model
 
-### Two trust models under `/admin`
+`internal/admin/admin.go` holds the model. Each role maps to a set of permissions. A route names
+one permission. The boundary checks the role against that permission.
 
-Both live under `/admin`. They do not authorize each other.
+The model is data, not scattered checks. A permission matrix spread across handlers is a matrix
+nobody can review. The failure it produces is a route that forgot a check.
 
-| Path | Mechanism | Identifies an account |
-|---|---|---|
-| `/admin/reports` | Shared `ADMIN_PASSWORD` from the deployment environment | No |
-| `/admin/users`, `/admin/audit` | Role on the account | Yes |
+The matrix is small on purpose. `owner` holds every permission. `admin` holds all but
+`roles.grant_owner`. `moderator` holds the moderation and content permissions. A learner holds
+nothing.
 
-The triage password confers no account identity. It cannot promote anyone. It cannot be the
-subject of a role check. `TestTriagePasswordDoesNotGrantRoleAdministration` asserts both
-directions.
+`CanAssign` decides one role change. It applies three rules. An actor cannot grant a role above
+their own. An actor cannot act on a peer or a superior, unless the actor is an owner. Granting
+`owner` needs `roles.grant_owner`. `TestCanAssign` in `internal/admin/admin_test.go` states the
+rules.
 
-### The last administrator
+### Moderation under the same boundary
 
-The system never reaches zero administrators through an administrative action. The check sits
-inside the UPDATE statement. It does not sit before the UPDATE.
+Reported content is moderated at `/api/admin/reports`. The role boundary guards it. A moderator
+resolves a decision and the same transaction writes the audit row.
+
+V1 gated content triage with a shared `ADMIN_PASSWORD`. V2 removed that mechanism. A shared
+password cannot say which person used it. One moderation path replaces the two.
+
+A report is never deleted. A decision sets the status, the reason, the actor and the time. The
+row keeps the complaint, so the next moderator can read what was decided before.
+
+### Staff access by invitation
+
+An owner or admin adds a contributor from `/admin/contributors`. The server creates an
+invitation. The invitation carries a token, an email and a role.
+
+The server stores only a SHA-256 hash of the token. A database read therefore yields no usable
+credential. The raw token returns once, in the response, and nowhere else.
+
+The invitation is single-use, time-limited and bound to the invited address. Acceptance burns
+the token. Acceptance checks the signed-in account against the invited email. A revoked,
+expired, reused or mismatched invitation grants nothing. Each failure reads the same to the
+caller, so a prober learns nothing about which near-miss they reached.
+
+`ConsumeAdminInvitation` burns the token, grants the role and writes the audit row in one
+transaction. No state exists in which someone holds a staff role with no record of how they got
+it.
+
+### The last owner
+
+The system never reaches zero owners through an administrative action. The check sits inside the
+UPDATE statement. It does not sit before the UPDATE.
 
 ```sql
-UPDATE students SET role = 'student'
- WHERE id = ? AND role = 'admin'
-   AND (SELECT COUNT(*) FROM students WHERE role = 'admin') > 1
+UPDATE students SET role = ?
+ WHERE id = ? AND role = 'owner'
+   AND (SELECT COUNT(*) FROM students WHERE role = 'owner') > 1
 ```
 
-A count read before a write loses a race. Two administrators who demote each other at the same
-moment both read two. Both write. The system reaches zero through the feature meant to stop it.
+A count read before a write loses a race. Two owners who demote each other at the same moment
+both read two. Both write. The system reaches zero through the feature meant to stop it. One
+statement means the second attempt matches no rows.
 
-One statement means the second attempt matches no rows.
-`TestConcurrentDemotionsCannotReachZeroAdmins` runs that race twenty times. It uses a
-file-backed SQLite database, because `:memory:` opens a separate database per connection and
-cannot express the concurrency.
+The invariant is on the owner, not the admin. An admin or a moderator can be removed freely. An
+owner cannot be, because nothing but an owner can create another owner.
 
 ### Bootstrap
 
-The operator creates the first administrator on the machine that holds the database:
+The operator creates the first owner on the machine that holds the database:
 
 ```bash
 mathua admin promote <email>
 ```
 
-The command requires an account that already exists. It refuses to create one. Shell access to the machine
-already grants control of the deployment, so it is the correct place to decide who administers.
+The command requires an account that already exists. It refuses to create one. Shell access to
+the machine already grants control of the deployment, so the machine is the correct place to
+decide who administers.
 
-The command calls the same `SetRoleAudited` as the HTTP handler. It passes `cli` as the actor. The command and the
-web page therefore share one code path. That path writes the audit row, and it applies the last-administrator rule.
-A second way to change a role is a hole in the audit log, because the log cannot record what it never saw.
+The command grants `owner`, not `admin`. The first promotion must be able to create the rest.
+The command calls the same `SetRoleAudited` as the HTTP handler, with `cli` as the actor. The
+command and the web page therefore share one code path that writes the audit row.
 
 An HTTP endpoint fails this test. Anyone who can reach the server could then ask for
-administrator access.
-
-This repository stores no administrator identity. It stores the mechanism. The deployment decides
-who holds the role.
+administrator access. This repository stores no administrator identity. It stores the mechanism.
 
 ### The audit log
 
-Every role change writes one row to `admin_audit`. The insert and the role change share one
-transaction. If the insert fails, the role change rolls back. A privileged change therefore
-cannot exist without a record. `TestFailedAuditInsertRollsBackPromotion` proves this. That test makes
-the insert fail.
+Every role change and every moderation decision writes one row to `admin_audit`. The insert and
+the change share one transaction. A failed insert rolls the change back. A privileged change
+therefore cannot exist without a record.
+`TestFailedAuditInsertRollsBackPromotion` proves this.
 
 The log has no foreign key on `actor_id`. A trail deleted together with the account it records
-is not a trail. Neither store offers an update path for the table. Neither store offers a delete
-path. No HTTP route offers either.
+is not a trail. Neither store offers an update path. Neither store offers a delete path. No HTTP
+route offers either. Each event names the actor, the action, the entity, the time, and the state
+either side of the change.
+
+`ListAdminAuditFor` reads the events about one entity. A role history and a report history are
+queries over the trail, not columns anyone maintains by hand.
 
 The before and after snapshots come from `storage.AdminUser`. That type has no field for a
 password hash, a share token or learner progress. A credential cannot reach the log through it.
 
 ### What the frontend is not
 
-The Admin navigation entry appears only for an account whose stored role is `admin`. The entry
-is a convenience. A hidden link is not authorization.
+`AdminNav` shows a section only when the caller holds the permission for it. The entry is a
+convenience. A hidden link is not authorization.
 
-Every administrative endpoint rejects a non-administrator on its own. A learner who types
-`/admin/users` reaches the page, and then the API refuses the request.
+Every administrative endpoint rejects a caller without the permission on its own. A learner who
+types `/admin/users` reaches the page, and then the API refuses the request with a 403.
 
 ### Confirmation before a role change
 
-`/admin/users` names the action on each row. The two actions are `Make administrator` and
-`Remove administrator`. Each opens `ConfirmDialog`. The dialog names the account.
+`/admin/users` offers a role picker on each row. The picker opens `ConfirmDialog`. The dialog
+names the account and the new role.
 
-The dialog puts focus on `Cancel`. It does not put focus on the action that changes the role. A
-stray Enter therefore does nothing. Escape, the backdrop, and `Cancel` all close the dialog and
-send no request.
+The dialog puts focus on `Cancel`. A stray Enter therefore does nothing. Escape, the backdrop
+and `Cancel` all close the dialog and send no request.
 
 The page shows two errors apart. One is the list failing to load. The other is the server
-refusing a change. They are different sentences. One earlier version shared a single slot. When
-the page reloaded its list, it dropped the server's refusal and displayed nothing.
+refusing a change. They are different sentences.
 
 ### The deployed surface
 

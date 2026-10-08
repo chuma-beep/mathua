@@ -2,272 +2,213 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import Header from '../../../components/Header'
+import BottomTabs from '../../../components/BottomTabs'
 import Footer from '../../../components/Footer'
+import SectionHeader from '../../../components/SectionHeader'
+import AdminNav from '../../../components/AdminNav'
+import Loading from '../../../components/Loading'
 import KatexContent from '../../../components/KatexContent'
 import {
-  adminLogin,
-  adminLogout,
-  listReports,
-  updateReportStatus,
-  type QuestionReport,
-  type ReportStatus,
+  listAdminReports, moderateReport, getErrorMessage,
+  type QuestionReport, type ModerationStatus,
 } from '../../../lib/api'
+import { useAdminMe } from '../../../hooks/useAdminMe'
 
-const STATUSES = ['open', 'confirmed', 'fixed', 'dismissed', 'all']
-const SOURCES = ['all', 'study', 'diagnostic', 'quiz', 'lesson', 'concept', 'review']
-const SESSION_KEY = 'mathua_admin_session'
+// The moderation queue. Reported Content is a first-class surface, not an afterthought: a report
+// is a person telling us something is wrong, and the queue exists so an operator can see it,
+// judge it, and record the decision without leaving the deployed app.
+//
+// A report is never deleted. Resolving stamps who decided and why, and the decision is written to
+// the audit trail; the row keeps the complaint so the next person can see what was decided before.
 
-interface AdminSession {
-  token: string
-  expires_at: string
-}
-
-function loadStoredSession(): AdminSession | null {
-  if (typeof window === 'undefined') return null
-  try {
-    const raw = sessionStorage.getItem(SESSION_KEY)
-    if (!raw) return null
-    const s = JSON.parse(raw) as AdminSession
-    if (!s.token) return null
-    if (s.expires_at && new Date(s.expires_at).getTime() < Date.now()) {
-      sessionStorage.removeItem(SESSION_KEY)
-      return null
-    }
-    return s
-  } catch {
-    return null
-  }
-}
+const FILTERS: { key: string; label: string }[] = [
+  { key: 'open', label: 'Open' },
+  { key: 'reviewing', label: 'Reviewing' },
+  { key: 'resolved', label: 'Resolved' },
+  { key: 'dismissed', label: 'Dismissed' },
+  { key: 'all', label: 'All' },
+]
 
 export default function AdminReportsPage() {
-  const [session, setSession] = useState<AdminSession | null>(null)
-  const [password, setPassword] = useState('')
-  const [loggingIn, setLoggingIn] = useState(false)
-  const [status, setStatus] = useState('open')
-  const [source, setSource] = useState('all')
-  const [reports, setReports] = useState<QuestionReport[]>([])
-  const [loading, setLoading] = useState(false)
+  const { can } = useAdminMe()
+  const [filter, setFilter] = useState('open')
+  const [reports, setReports] = useState<QuestionReport[] | null>(null)
   const [error, setError] = useState('')
 
-  const dropSession = useCallback((message: string) => {
-    sessionStorage.removeItem(SESSION_KEY)
-    setSession(null)
-    setReports([])
-    setError(message)
-  }, [])
-
-  const load = useCallback(
-    async (s: AdminSession, filter: string) => {
-      setLoading(true)
-      setError('')
-      try {
-        setReports(await listReports(s.token, filter))
-      } catch {
-        dropSession('Session expired or password changed — log in again.')
-      } finally {
-        setLoading(false)
-      }
-    },
-    [dropSession],
-  )
-
-  useEffect(() => {
-    const stored = loadStoredSession()
-    if (stored) {
-      setSession(stored)
-      load(stored, 'open')
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  async function handleLogin() {
-    if (!password || loggingIn) return
-    setLoggingIn(true)
+  const load = useCallback(() => {
     setError('')
-    try {
-      const res = await adminLogin(password)
-      const s = { token: res.token, expires_at: res.expires_at }
-      sessionStorage.setItem(SESSION_KEY, JSON.stringify(s))
-      setSession(s)
-      setPassword('')
-      await load(s, status)
-    } catch (e) {
-      setError(e instanceof Error ? e.message : 'Login failed')
-    } finally {
-      setLoggingIn(false)
-    }
-  }
+    listAdminReports(filter)
+      .then((r) => setReports(r.reports))
+      .catch((e) => { setError(getErrorMessage(e)); setReports([]) })
+  }, [filter])
 
-  async function handleLogout() {
-    if (session) await adminLogout(session.token)
-    sessionStorage.removeItem(SESSION_KEY)
-    setSession(null)
-    setReports([])
-    setError('')
-  }
-
-  async function resolve(id: number, next: ReportStatus) {
-    if (!session) return
-    try {
-      await updateReportStatus(session.token, id, next)
-      setReports(prev => prev.map(r => (r.id === id ? { ...r, status: next } : r)))
-    } catch {
-      dropSession('Session expired or password changed — log in again.')
-    }
-  }
+  useEffect(() => { load() }, [load])
 
   return (
     <>
       <Header />
-      <main className="max-w-container mx-auto px-4 sm:px-6 pt-[var(--chrome-top)] pb-16">
-        <h1 className="font-serif text-2xl text-mathua-primary">Content reports</h1>
-        <p className="mt-1 font-mono text-xs text-mathua-muted">
-          User complaints about questions, explanations, lessons and diagrams.
-        </p>
+      <div className="pt-[var(--chrome-top)] lg:pt-0">
+        <main className="mx-auto w-full max-w-[900px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
+          <SectionHeader label="Administration" title="Reports" />
+          <AdminNav />
 
-        {!session ? (
-          <div className="mt-6 max-w-md">
-            <p className="font-mono text-[11px] text-mathua-secondary uppercase tracking-wider mb-2">
-              Admin login
-            </p>
-            <div className="flex flex-col sm:flex-row gap-2">
-              <form
-                onSubmit={e => { e.preventDefault(); handleLogin() }}
-                className="flex flex-col sm:flex-row gap-2 flex-1"
-              >
-                <label htmlFor="admin-password" className="sr-only">Admin password</label>
-                <input
-                  id="admin-password"
-                  aria-label="Admin password"
-                  type="password"
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                  placeholder="Admin password"
-                  autoComplete="current-password"
-                  className="flex-1 bg-mathua-surface border border-mathua-border px-3 h-11 text-sm font-mono text-mathua-primary placeholder:text-mathua-muted outline-none"
-                />
-                <button
-                  type="submit"
-                  disabled={loggingIn || !password}
-                  className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint transition-colors px-4 h-11 text-sm font-mono disabled:opacity-50"
-                >
-                  {loggingIn ? 'Checking…' : 'Log in'}
-                </button>
-              </form>
-            </div>
-            {error && <p className="mt-3 font-mono text-xs text-red-400">{error}</p>}
-          </div>
-        ) : (
-          <>
-            <div className="mt-6 flex items-center gap-3 flex-wrap">
-              <span className="font-mono text-[11px] text-mathua-green uppercase tracking-wider">
-                ● Admin session
-              </span>
-              <span className="font-mono text-[11px] text-mathua-muted">
-                expires {new Date(session.expires_at).toLocaleString()}
-              </span>
+          <div className="mb-4 flex flex-wrap gap-2">
+            {FILTERS.map((f) => (
               <button
+                key={f.key}
                 type="button"
-                onClick={handleLogout}
-                className="font-mono text-[11px] text-mathua-muted hover:text-mathua-primary uppercase tracking-wider"
+                onClick={() => setFilter(f.key)}
+                className={
+                  filter === f.key
+                    ? 'border border-mathua-blue text-mathua-blue px-3 h-9 font-mono text-xs'
+                    : 'border border-mathua-border text-mathua-secondary hover:text-mathua-blue px-3 h-9 font-mono text-xs'
+                }
               >
-                Log out
+                {f.label}
               </button>
-            </div>
+            ))}
+          </div>
 
-            <div className="mt-4 flex gap-2 flex-wrap">
-              {STATUSES.map(s => (
-                <button
-                  type="button"
-                  key={s}
-                  onClick={() => { setStatus(s); load(session, s) }}
-                  className={`px-3 h-8 font-mono text-[11px] uppercase tracking-wider border transition-colors ${
-                    status === s
-                      ? 'border-mathua-blue text-mathua-blue'
-                      : 'border-mathua-border text-mathua-muted hover:text-mathua-primary'
-                  }`}
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
+          {error && (
+            <p role="alert" className="mb-4 border border-mathua-red bg-mathua-surface p-4 font-mono text-xs text-mathua-red">{error}</p>
+          )}
 
-            <div className="mt-2 flex gap-2 flex-wrap items-center">
-              <span className="font-mono text-[10px] text-mathua-muted uppercase tracking-wider">Source:</span>
-              {SOURCES.map(s => (
-                <button
-                  type="button"
-                  key={s}
-                  onClick={() => setSource(s)}
-                  className={`px-3 h-8 font-mono text-[11px] uppercase tracking-wider border transition-colors ${
-                    source === s
-                      ? 'border-mathua-blue text-mathua-blue'
-                      : 'border-mathua-border text-mathua-muted hover:text-mathua-primary'
-                  }`}
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
+          {!reports && !error && <Loading label="LOADING REPORTS" />}
+          {reports && reports.length === 0 && !error && (
+            <p role="status" className="border border-mathua-border bg-mathua-surface p-4 font-mono text-xs text-mathua-secondary">
+              Nothing here.
+            </p>
+          )}
 
-            {error && <p className="mt-4 font-mono text-xs text-red-400">{error}</p>}
-            {loading && <p className="mt-4 font-mono text-xs text-mathua-muted">Loading…</p>}
-
-            <div className="mt-6 space-y-3">
-              {reports.filter(r => source === 'all' || (r.source || 'study') === source).map(r => (
-                <div key={r.id} className="border border-mathua-border bg-mathua-surface p-4">
-                  <div className="flex items-center gap-2 flex-wrap font-mono text-[10px] uppercase tracking-wider">
-                    <span className="text-mathua-blue">#{r.id}</span>
-                    <span className="text-mathua-secondary">{r.kind}</span>
-                    <span className="text-mathua-secondary">{r.reason}</span>
-                    <span className="text-mathua-muted">{r.concept_id}</span>
-                    <span className="text-mathua-muted">{r.status}</span>
-                    <span className="text-mathua-muted ml-auto">{r.created_at}</span>
-                  </div>
-                  {r.question && (
-                    <KatexContent className="mt-2 text-xs font-mono text-mathua-primary whitespace-pre-wrap">
-                      {r.question}
-                    </KatexContent>
-                  )}
-                  {r.expected && (
-                    <p className="mt-1 font-mono text-[11px] text-mathua-secondary">Expected: {r.expected}</p>
-                  )}
-                  {r.explanation && (
-                    <KatexContent className="mt-1 text-[11px] font-mono text-mathua-secondary">
-                      {r.explanation}
-                    </KatexContent>
-                  )}
-                  {r.detail && (
-                    <p className="mt-1 font-mono text-[11px] text-mathua-primary">“{r.detail}”</p>
-                  )}
-                  <div className="mt-1 font-mono text-[10px] text-mathua-muted">
-                    reporter: {r.reporter_id || 'anon'}
-                    {r.lesson_id ? ` · lesson: ${r.lesson_id}` : ''}
-                    {r.source ? ` · source: ${r.source}` : ''}
-                  </div>
-                  <div className="mt-2 flex gap-2">
-                    {(['confirmed', 'fixed', 'dismissed'] as ReportStatus[]).map(next => (
-                      <button
-                        type="button"
-                        key={next}
-                        onClick={() => resolve(r.id, next)}
-                        disabled={r.status === next}
-                        className="font-mono text-[10px] uppercase tracking-wider border border-mathua-border text-mathua-muted hover:text-mathua-blue hover:border-mathua-blue px-2 h-7 disabled:opacity-40"
-                      >
-                        {next}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ))}
-              {!loading && !error && reports.length === 0 && (
-                <p className="font-mono text-xs text-mathua-muted">No reports with status “{status}”.</p>
-              )}
-            </div>
-          </>
-        )}
-      </main>
+          <ul className="space-y-3">
+            {reports?.map((r) => (
+              <ReportCard key={r.id} report={r} canModerate={can('reports.moderate')} onChanged={load} />
+            ))}
+          </ul>
+        </main>
+      </div>
+      <BottomTabs />
       <Footer />
     </>
+  )
+}
+
+function StatusPill({ status }: { status: string }) {
+  const tone =
+    status === 'open' ? 'text-mathua-red border-mathua-red'
+      : status === 'reviewing' ? 'text-mathua-blue border-mathua-blue'
+        : 'text-mathua-muted border-mathua-border'
+  return <span className={`border ${tone} px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider`}>{status}</span>
+}
+
+function ReportCard({ report, canModerate, onChanged }: { report: QuestionReport; canModerate: boolean; onChanged: () => void }) {
+  const [open, setOpen] = useState(false)
+  const [resolution, setResolution] = useState('')
+  const [busy, setBusy] = useState(false)
+  const [error, setError] = useState('')
+
+  async function decide(status: ModerationStatus) {
+    if ((status === 'resolved' || status === 'dismissed') && !resolution.trim()) {
+      setError('A reason is required to resolve or dismiss.')
+      return
+    }
+    setBusy(true)
+    setError('')
+    try {
+      await moderateReport(report.id, status, resolution.trim())
+      onChanged()
+    } catch (e) {
+      setError(getErrorMessage(e))
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  return (
+    <li className="border border-mathua-border bg-mathua-surface">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        className="flex w-full items-center justify-between gap-3 p-4 text-left"
+      >
+        <span className="min-w-0">
+          <span className="font-mono text-xs text-mathua-primary">{report.concept_id || '(no concept)'}</span>
+          <span className="ml-2 font-mono text-[11px] text-mathua-muted">{report.kind} · {report.reason}</span>
+        </span>
+        <span className="flex shrink-0 items-center gap-2">
+          <StatusPill status={report.status} />
+          <span className="font-mono text-[10px] text-mathua-muted">#{report.id}</span>
+        </span>
+      </button>
+
+      {open && (
+        <div className="border-t border-mathua-border p-4">
+          <dl className="grid grid-cols-1 sm:grid-cols-2 gap-2 font-mono text-[11px] text-mathua-secondary">
+            <div><dt className="text-mathua-muted">Reported by</dt><dd>{report.reporter_id || '(anon)'}</dd></div>
+            <div><dt className="text-mathua-muted">When</dt><dd>{report.created_at}</dd></div>
+            <div><dt className="text-mathua-muted">Source</dt><dd>{report.source || '—'}</dd></div>
+            <div><dt className="text-mathua-muted">Lesson</dt><dd>{report.lesson_id || '—'}</dd></div>
+          </dl>
+
+          {report.question && (
+            <div className="mt-3 border border-mathua-border bg-mathua-code p-3">
+              <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-mathua-muted">Question</p>
+              <KatexContent className="text-mathua-primary text-sm">{report.question}</KatexContent>
+            </div>
+          )}
+          {report.expected && (
+            <p className="mt-3 font-mono text-[11px] text-mathua-secondary">
+              Reporter&apos;s expected answer: <span className="text-mathua-primary">{report.expected}</span>
+            </p>
+          )}
+          {report.explanation && (
+            <p className="mt-2 font-mono text-[11px] text-mathua-secondary">{report.explanation}</p>
+          )}
+          {report.detail && (
+            <p className="mt-3 border-l-2 border-mathua-border pl-3 font-mono text-[11px] text-mathua-secondary">{report.detail}</p>
+          )}
+
+          {report.status === 'resolved' || report.status === 'dismissed' ? (
+            <p className="mt-3 font-mono text-[11px] text-mathua-muted">
+              {report.status} by {report.resolved_by || '(unknown)'} · {report.resolved_at}
+              {report.resolution ? ` — ${report.resolution}` : ''}
+            </p>
+          ) : null}
+
+          {canModerate && (report.status === 'open' || report.status === 'reviewing') && (
+            <div className="mt-4">
+              <label htmlFor={`res-${report.id}`} className="mb-1 block font-mono text-[10px] uppercase tracking-wider text-mathua-muted">
+                Decision reason
+              </label>
+              <textarea
+                id={`res-${report.id}`}
+                value={resolution}
+                onChange={(e) => setResolution(e.target.value)}
+                rows={2}
+                className="w-full border border-mathua-border bg-mathua-code p-2 font-mono text-xs text-mathua-primary"
+                placeholder="What did you decide, and why?"
+              />
+              {error && <p role="alert" className="mt-2 font-mono text-[11px] text-mathua-red">{error}</p>}
+              <div className="mt-2 flex flex-wrap gap-2">
+                {report.status === 'open' && (
+                  <button type="button" disabled={busy} onClick={() => decide('reviewing')}
+                    className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-3 h-9 font-mono text-xs disabled:opacity-50">
+                    Mark reviewing
+                  </button>
+                )}
+                <button type="button" disabled={busy} onClick={() => decide('resolved')}
+                  className="border border-mathua-green text-mathua-green hover:bg-mathua-green-faint px-3 h-9 font-mono text-xs disabled:opacity-50">
+                  Resolve
+                </button>
+                <button type="button" disabled={busy} onClick={() => decide('dismissed')}
+                  className="border border-mathua-border text-mathua-secondary hover:text-mathua-red px-3 h-9 font-mono text-xs disabled:opacity-50">
+                  Dismiss
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </li>
   )
 }

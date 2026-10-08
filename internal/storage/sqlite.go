@@ -106,6 +106,11 @@ func authMigrate(db *sql.DB) error {
 		// nothing in it could.
 		"ALTER TABLE students ADD COLUMN role TEXT NOT NULL DEFAULT 'student'",
 		"CREATE INDEX IF NOT EXISTS idx_students_role ON students(role)",
+		// Admin V2 moderation state on reports. Existing rows keep status, which the V2 data
+		// migration below rewrites into the V2 vocabulary.
+		"ALTER TABLE question_reports ADD COLUMN resolution TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE question_reports ADD COLUMN resolved_by TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE question_reports ADD COLUMN resolved_at TEXT NOT NULL DEFAULT ''",
 	}
 	for _, m := range migrations {
 		if _, err := db.Exec(m); err != nil {
@@ -142,6 +147,15 @@ func authMigrate(db *sql.DB) error {
 		4: {`UPDATE students SET daily_xp_goal = 30 WHERE daily_xp_goal = 10`,
 			`UPDATE students SET daily_xp_goal = 100 WHERE daily_xp_goal > 100`,
 			`UPDATE students SET daily_xp_goal = 10 WHERE daily_xp_goal < 10`},
+		// v5 Admin V2. V1's `admin` was full control, so it migrates to `owner`, the role that
+		// can still do everything it could; leaving it as `admin` would silently take away the
+		// ability to manage staff. This is one-way and idempotent (owner is never matched again).
+		// The report statuses move from V1's {open,confirmed,fixed,dismissed} to V2's
+		// {open,reviewing,resolved,dismissed}: `confirmed` was "we agree, not yet fixed", which
+		// is `reviewing`; `fixed` is `resolved`.
+		5: {`UPDATE students SET role = 'owner' WHERE role = 'admin'`,
+			`UPDATE question_reports SET status = 'reviewing' WHERE status = 'confirmed'`,
+			`UPDATE question_reports SET status = 'resolved' WHERE status = 'fixed'`},
 	}
 	for v := 1; v <= len(dataMigrations); v++ {
 		if err := runOnceSQLite(db, v, dataMigrations[v]); err != nil {
@@ -1696,7 +1710,8 @@ func (s *SQLiteStore) ListReports(status string, limit, offset int) ([]QuestionR
 	if status == "" || status == "all" {
 		rows, err = s.db.Query(`
 			SELECT id, reporter_id, concept_id, kind, question, expected, explanation,
-			       lesson_id, source, session_id, attempt_id, reason, detail, status, created_at
+			       lesson_id, source, session_id, attempt_id, reason, detail, status,
+			       resolution, resolved_by, resolved_at, created_at
 			FROM question_reports
 			ORDER BY created_at DESC
 			LIMIT ? OFFSET ?
@@ -1704,7 +1719,8 @@ func (s *SQLiteStore) ListReports(status string, limit, offset int) ([]QuestionR
 	} else {
 		rows, err = s.db.Query(`
 			SELECT id, reporter_id, concept_id, kind, question, expected, explanation,
-			       lesson_id, source, session_id, attempt_id, reason, detail, status, created_at
+			       lesson_id, source, session_id, attempt_id, reason, detail, status,
+			       resolution, resolved_by, resolved_at, created_at
 			FROM question_reports
 			WHERE status = ?
 			ORDER BY created_at DESC
@@ -1722,7 +1738,7 @@ func (s *SQLiteStore) ListReports(status string, limit, offset int) ([]QuestionR
 		if err := rows.Scan(
 			&r.ID, &r.ReporterID, &r.ConceptID, &r.Kind, &r.Question, &r.Expected,
 			&r.Explanation, &r.LessonID, &r.Source, &r.SessionID, &r.AttemptID,
-			&r.Reason, &r.Detail, &r.Status, &created,
+			&r.Reason, &r.Detail, &r.Status, &r.Resolution, &r.ResolvedBy, &r.ResolvedAt, &created,
 		); err != nil {
 			return nil, fmt.Errorf("scan report: %w", err)
 		}
@@ -1996,23 +2012,26 @@ func (s *SQLiteStore) SetRoleAudited(actorID, studentID string, role Role) (Role
 	}
 
 	action := ActionAdminDemoteUser
-	if role == RoleAdmin {
+	if role.AtLeast(before.Role) {
 		action = ActionAdminPromoteUser
-		if _, err := tx.Exec("UPDATE students SET role = ? WHERE id = ?", string(role), studentID); err != nil {
-			return RoleChange{}, fmt.Errorf("promote: %w", err)
+	}
+	// Removing an owner is the one change that can empty the top of the hierarchy, so it is the
+	// one change that carries the guard. The count lives inside the UPDATE for the reason given
+	// on DemoteAdminSafely: a read-then-write is a race two owners demoting each other both win.
+	if before.Role == RoleOwner && role != RoleOwner {
+		res, err := tx.Exec(
+			`UPDATE students SET role = ?
+			 WHERE id = ? AND role = 'owner' AND (SELECT COUNT(*) FROM students WHERE role = 'owner') > 1`,
+			string(role), studentID)
+		if err != nil {
+			return RoleChange{}, fmt.Errorf("demote owner: %w", err)
+		}
+		if n, _ := res.RowsAffected(); n == 0 {
+			return RoleChange{}, ErrLastOwner
 		}
 	} else {
-		res, err := tx.Exec(
-			`UPDATE students SET role = 'student'
-			 WHERE id = ? AND role = 'admin' AND (SELECT COUNT(*) FROM students WHERE role = 'admin') > 1`,
-			studentID)
-		if err != nil {
-			return RoleChange{}, fmt.Errorf("demote: %w", err)
-		}
-		// `before.Role` was admin inside this transaction, so zero rows affected can only mean
-		// the count condition failed: this was the last administrator.
-		if n, _ := res.RowsAffected(); n == 0 {
-			return RoleChange{}, ErrLastAdmin
+		if _, err := tx.Exec("UPDATE students SET role = ? WHERE id = ?", string(role), studentID); err != nil {
+			return RoleChange{}, fmt.Errorf("set role: %w", err)
 		}
 	}
 
@@ -2046,4 +2065,9 @@ func (s *SQLiteStore) SetRoleAudited(actorID, studentID string, role Role) (Role
 		return RoleChange{}, fmt.Errorf("commit role change: %w", err)
 	}
 	return RoleChange{Before: *before, After: *after, Changed: true, Action: action}, nil
+}
+
+// GetAdminUser reads one non-sensitive projection, or nil when the id does not exist.
+func (s *SQLiteStore) GetAdminUser(studentID string) (*AdminUser, error) {
+	return adminUserByIDSQLite(s.db, studentID)
 }

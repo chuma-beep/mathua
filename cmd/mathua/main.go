@@ -124,24 +124,20 @@ func adminCommand(args []string) error {
 			return fmt.Errorf("no account with email %q — sign up through the app first, then promote", email)
 		}
 
-		// The same primitive the web admin uses, so there is exactly one path that can change a
-		// role and exactly one place the audit event is written. A second implementation here
-		// would be a second set of invariants to keep — and it is the one nobody would remember
-		// to update.
-		//
-		// `cli` is the actor because that is the truth: shell access carries no account identity,
-		// and the argument for trusting this command is that it needs the machine, not a
-		// credential. Writing the operator's email here would be inventing an identity the code
-		// does not have.
-		res, err := repo.SetRoleAudited(adminActorCLI, st.ID, storage.RoleAdmin)
+		// The bootstrap grants owner, not admin. V1 had only `admin`; V2 has owner at the top
+		// because owner is the role that can hand out every other role, and the first promotion
+		// is the one that must be able to create the rest. Granting admin here would leave the
+		// deployment with no one able to invite an owner, which is a lockout reached by trying to
+		// be cautious.
+		res, err := repo.SetRoleAudited(adminActorCLI, st.ID, storage.RoleOwner)
 		switch {
 		case errors.Is(err, storage.ErrRoleUnchanged):
-			fmt.Printf("%s (%s) is already an admin; nothing to do\n", email, st.ID)
+			fmt.Printf("%s (%s) is already an owner; nothing to do\n", email, st.ID)
 			return nil
 		case err != nil:
 			return err
 		}
-		fmt.Printf("promoted %s (%s) to admin — audit %s by %s\n",
+		fmt.Printf("promoted %s (%s) to owner — audit %s by %s\n",
 			email, st.ID, res.Action, adminActorCLI)
 		return nil
 	default:

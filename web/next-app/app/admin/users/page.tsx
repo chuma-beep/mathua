@@ -11,6 +11,7 @@ import ConfirmDialog from '../../../components/ConfirmDialog'
 import { searchAdminUsers, setUserRole, type AdminUser, type Role } from '../../../lib/api'
 import { getErrorMessage } from '../../../lib/api'
 import { useAuthState } from '../../../hooks/useAuthState'
+import { useAdminMe } from '../../../hooks/useAdminMe'
 
 // Account administration, and the only place an administrator is made or un-made.
 //
@@ -38,6 +39,10 @@ function labelFor(u: AdminUser): string {
   return u.name || u.username || u.email || u.id
 }
 
+function roleLabel(role: Role): string {
+  return role === 'owner' ? 'owner' : role === 'admin' ? 'administrator' : role === 'moderator' ? 'moderator' : 'learner'
+}
+
 export default function AdminUsersPage() {
   const { user } = useAuthState()
   const [query, setQuery] = useState('')
@@ -60,7 +65,8 @@ export default function AdminUsersPage() {
 
   useEffect(() => { load('') }, [load])
 
-  const isAdmin = user?.role === 'admin'
+  const { can, isStaff, me } = useAdminMe()
+  const canManage = can('admins.manage')
 
   async function confirmChange() {
     if (!pending) return
@@ -75,8 +81,8 @@ export default function AdminUsersPage() {
       load(query)
       setNotice(
         res.changed
-          ? `${labelFor(pending.user)} is now ${pending.next === 'admin' ? 'an administrator' : 'a learner'}.`
-          : `${labelFor(pending.user)} was already ${pending.next === 'admin' ? 'an administrator' : 'a learner'}.`,
+          ? `${labelFor(pending.user)} is now ${roleLabel(pending.next)}.`
+          : `${labelFor(pending.user)} was already ${roleLabel(pending.next)}.`,
       )
       setPending(null)
     } catch (e) {
@@ -98,11 +104,11 @@ export default function AdminUsersPage() {
       <div className="pt-[var(--chrome-top)] lg:pt-0">
         <main className="mx-auto w-full max-w-[900px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
           <SectionHeader label="Administration" title="Users" />
-          <AdminNav isAdmin={isAdmin} />
+          <AdminNav />
 
-          {!isAdmin && (
+          {!isStaff && (
             <p role="status" className="border border-mathua-border bg-mathua-surface p-4 font-mono text-xs text-mathua-secondary">
-              This area needs an administrator role. If you are one, sign in with that account.
+              This area needs a staff role. If you hold one, sign in with that account.
             </p>
           )}
 
@@ -166,7 +172,6 @@ export default function AdminUsersPage() {
                 </thead>
                 <tbody>
                   {users.map((u) => {
-                    const isAdminRow = u.role === 'admin'
                     const self = u.id === user?.student_id
                     return (
                       <tr key={u.id} className="border-b border-mathua-border last:border-b-0 align-top">
@@ -186,25 +191,35 @@ export default function AdminUsersPage() {
                         </td>
                         <td className="px-3 py-2 min-w-0 text-mathua-secondary break-all">{u.email || '—'}</td>
                         <td className="px-3 py-2 whitespace-nowrap">
-                          {isAdminRow ? (
-                            <span className="text-mathua-blue">admin{self ? ' (you)' : ''}</span>
-                          ) : (
-                            <span className="text-mathua-muted">student</span>
-                          )}
+                          <span className={u.role === 'student' ? 'text-mathua-muted' : 'text-mathua-blue'}>
+                            {u.role}{self ? ' (you)' : ''}
+                          </span>
                         </td>
                         <td className="px-3 py-2 text-right whitespace-nowrap">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setActionError('')
-                              setNotice('')
-                              setPending({ user: u, next: isAdminRow ? 'student' : 'admin' })
-                            }}
-                            aria-haspopup="dialog"
-                            className="border border-mathua-border px-3 h-11 font-mono text-[11px] text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue"
-                          >
-                            {isAdminRow ? 'Remove administrator' : 'Make administrator'}
-                          </button>
+                          {canManage && !self ? (
+                            <label className="sr-only" htmlFor={`role-${u.id}`}>Change role for {labelFor(u)}</label>
+                          ) : null}
+                          {canManage && !self ? (
+                            <select
+                              id={`role-${u.id}`}
+                              value=""
+                              onChange={(e) => {
+                                const next = e.target.value as Role
+                                if (!next) return
+                                setActionError('')
+                                setNotice('')
+                                setPending({ user: u, next })
+                              }}
+                              className="border border-mathua-border bg-mathua-surface px-2 h-9 font-mono text-[11px] text-mathua-secondary"
+                            >
+                              <option value="">Change role…</option>
+                              {(me?.assignable_roles ?? []).filter((r) => r !== u.role).map((r) => (
+                                <option key={r} value={r}>{r}</option>
+                              ))}
+                            </select>
+                          ) : (
+                            <span className="font-mono text-[11px] text-mathua-muted">—</span>
+                          )}
                         </td>
                       </tr>
                     )
@@ -229,9 +244,9 @@ export default function AdminUsersPage() {
 
       <ConfirmDialog
         open={pending !== null}
-        title={pending?.next === 'admin' ? 'Make administrator?' : 'Remove administrator access?'}
-        confirmLabel={pending?.next === 'admin' ? 'Make administrator' : 'Remove access'}
-        tone={pending?.next === 'admin' ? 'default' : 'destructive'}
+        title={pending ? `Change role to ${roleLabel(pending.next)}?` : 'Change role?'}
+        confirmLabel={pending ? `Make ${roleLabel(pending.next)}` : 'Confirm'}
+        tone={pending && pending.next === 'student' ? 'destructive' : 'default'}
         busy={busy}
         onCancel={() => setPending(null)}
         onConfirm={confirmChange}
@@ -239,9 +254,9 @@ export default function AdminUsersPage() {
         {pending && (
           <>
             <p>
-              {pending.next === 'admin'
-                ? `${labelFor(pending.user)} will be able to access the Mathua administration interface and manage administrator access.`
-                : `${labelFor(pending.user)} will immediately lose administrative access.`}
+              {labelFor(pending.user)} will become {roleLabel(pending.next)}. The change takes
+              effect on their next request — their existing session is re-read, so no re-login is
+              needed.
             </p>
             <p className="text-mathua-muted">Recorded in the audit log.</p>
           </>

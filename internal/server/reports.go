@@ -2,8 +2,6 @@ package server
 
 import (
 	"net/http"
-	"os"
-	"strconv"
 	"strings"
 	"sync"
 	"time"
@@ -12,8 +10,9 @@ import (
 )
 
 // Report endpoints: users (authed or guest) complain about questions,
-// explanations, lesson bodies, worked examples, or diagrams.
-// Triage (list/resolve) is gated by ADMIN_TOKEN.
+// explanations, lesson bodies, worked examples, or diagrams. Listing and resolving are
+// administration now and live under /api/admin/reports behind the role boundary — see adminv2.go.
+// This file only creates reports.
 
 var (
 	validReportKinds = map[string]bool{
@@ -23,9 +22,6 @@ var (
 	validReportReasons = map[string]bool{
 		"wrong_answer": true, "bad_explanation": true, "unclear": true,
 		"formatting": true, "other": true,
-	}
-	validReportStatuses = map[string]bool{
-		"open": true, "confirmed": true, "fixed": true, "dismissed": true,
 	}
 	validReportSources = map[string]bool{
 		"study": true, "diagnostic": true, "quiz": true, "lesson": true,
@@ -170,89 +166,4 @@ func (s *Server) handleCreateReport(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	writeJSON(w, map[string]interface{}{"id": id, "status": "open"})
-}
-
-func (s *Server) adminAuthorized(r *http.Request) bool {
-	bearer := strings.TrimPrefix(r.Header.Get("Authorization"), "Bearer ")
-	if bearer != "" {
-		// 24h password-login session …
-		if s.validAdminSession(bearer) {
-			return true
-		}
-		// … or the legacy static ADMIN_TOKEN.
-		if token := strings.TrimSpace(os.Getenv("ADMIN_TOKEN")); token != "" && bearer == token {
-			return true
-		}
-	}
-	// Legacy token via query param (local-dev convenience; session tokens
-	// are header-only so they never leak into logs via URLs).
-	if token := strings.TrimSpace(os.Getenv("ADMIN_TOKEN")); token != "" && r.URL.Query().Get("token") == token {
-		return true
-	}
-	return false
-}
-
-// GET /api/reports?status=&limit=&offset= — admin only.
-func (s *Server) handleListReports(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodGet {
-		http.Error(w, `{"error":"method not allowed"}`, 405)
-		return
-	}
-	if !s.adminAuthorized(r) {
-		writeError(w, "not found", 404)
-		return
-	}
-	q := r.URL.Query()
-	status := strings.TrimSpace(q.Get("status"))
-	if status != "" && status != "all" && !validReportStatuses[status] {
-		writeError(w, "invalid status", 400)
-		return
-	}
-	limit, _ := strconv.Atoi(q.Get("limit"))
-	offset, _ := strconv.Atoi(q.Get("offset"))
-	reports, err := s.repo.ListReports(status, limit, offset)
-	if err != nil {
-		writeError(w, "failed to list reports", 500)
-		return
-	}
-	if reports == nil {
-		reports = []storage.QuestionReport{}
-	}
-	writeJSON(w, map[string]interface{}{"reports": reports})
-}
-
-// PATCH /api/reports/{id} {status} — admin only.
-func (s *Server) handleUpdateReport(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPatch && r.Method != http.MethodPut {
-		http.Error(w, `{"error":"method not allowed"}`, 405)
-		return
-	}
-	if !s.adminAuthorized(r) {
-		writeError(w, "not found", 404)
-		return
-	}
-	idStr := strings.TrimPrefix(r.URL.Path, "/api/reports/")
-	idStr = strings.Trim(idStr, "/")
-	id, err := strconv.ParseInt(idStr, 10, 64)
-	if err != nil || id <= 0 {
-		writeError(w, "invalid report id", 400)
-		return
-	}
-	var req struct {
-		Status string `json:"status"`
-	}
-	if err := decodeJSON(w, r, &req); err != nil {
-		writeError(w, "invalid request", 400)
-		return
-	}
-	status := strings.TrimSpace(req.Status)
-	if !validReportStatuses[status] {
-		writeError(w, "invalid status", 400)
-		return
-	}
-	if err := s.repo.UpdateReportStatus(id, status); err != nil {
-		writeError(w, "report not found", 404)
-		return
-	}
-	writeJSON(w, map[string]interface{}{"id": id, "status": status})
 }

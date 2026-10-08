@@ -91,15 +91,3 @@ func TestCreateReport_InvalidSource(t *testing.T) {
 		t.Errorf("expected 400 for invalid source, got %d: %s", rec.Code, rec.Body.String())
 	}
 }
-
-func TestListReports_RequiresAdmin(t *testing.T) {
-	s := testServer(t)
-	mux := http.NewServeMux()
-	s.Register(mux)
-
-	rec := httptest.NewRecorder()
-	mux.ServeHTTP(rec, httptest.NewRequest("GET", "/api/reports", nil))
-	if rec.Code != 404 {
-		t.Errorf("expected 404 without ADMIN_TOKEN, got %d", rec.Code)
-	}
-}

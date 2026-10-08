@@ -2,33 +2,35 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useAdminMe } from '../hooks/useAdminMe'
 
 // The admin sub-navigation.
 //
-// Three entries, all implemented. There is deliberately no "Curriculum", "Questions" or
-// "Publishing" here: those are real future phases and a navigation entry that leads nowhere is
-// worse than its absence, because it advertises a capability the deployment does not have.
+// Each entry names the permission it needs, and the list is filtered against /api/admin/me, so a
+// moderator sees Reports and Content while an owner or admin sees everything. This is a
+// convenience and it is labelled as one in the code: hiding a link is not authorization. Every
+// section's API is gated server-side, so a caller who types a hidden URL reaches the page and is
+// refused by the request.
 //
-// Note what is NOT here either: the existing content-triage page at /admin/reports. That one is
-// gated by the operator's shared password rather than by a role, so it belongs to a different
-// trust model and putting it in this list would imply the two authorize each other. It stays
-// reachable at its own URL.
+// The permission string is the same one the route is registered under on the server, which is
+// the point: the two lists are the same vocabulary and a section cannot be added to one without
+// naming it in the other.
+const ITEMS: { label: string; href: string; perm: string }[] = [
+  { label: 'Overview', href: '/admin', perm: 'admin.access' },
+  { label: 'Reports', href: '/admin/reports', perm: 'reports.read' },
+  { label: 'Users', href: '/admin/users', perm: 'users.read' },
+  { label: 'Contributors', href: '/admin/contributors', perm: 'admins.read' },
+  { label: 'Content', href: '/admin/content', perm: 'content.read' },
+  { label: 'Audit Log', href: '/admin/audit', perm: 'audit.read' },
+]
 
-// AdminNav renders nothing for a caller who is not an administrator.
-//
-// This is a convenience and it is labelled as one in the code: hiding a link is not
-// authorization. The backend reads the role on every request, so a learner who types /admin/users
-// directly reaches the page and is refused by the API with a 403 — which this nav is careful not
-// to pretend otherwise about.
-export default function AdminNav({ isAdmin }: { isAdmin?: boolean }) {
+export default function AdminNav() {
   const pathname = usePathname()
-  if (!isAdmin) return null
+  const { can, loading } = useAdminMe()
+  if (loading) return null
 
-  const items = [
-    { label: 'Overview', href: '/admin' },
-    { label: 'Users', href: '/admin/users' },
-    { label: 'Audit', href: '/admin/audit' },
-  ]
+  const items = ITEMS.filter((i) => can(i.perm))
+  if (items.length === 0) return null
 
   return (
     <nav aria-label="Admin sections" className="mb-6 flex flex-wrap gap-2">

@@ -190,11 +190,34 @@ CREATE TABLE IF NOT EXISTS question_reports (
     reason      TEXT NOT NULL DEFAULT 'other',
     detail      TEXT NOT NULL DEFAULT '',
     status      TEXT NOT NULL DEFAULT 'open',
+    resolution  TEXT NOT NULL DEFAULT '',
+    resolved_by TEXT NOT NULL DEFAULT '',
+    resolved_at TEXT NOT NULL DEFAULT '',
     created_at  TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
 CREATE INDEX IF NOT EXISTS idx_reports_status  ON question_reports(status, created_at);
 CREATE INDEX IF NOT EXISTS idx_reports_concept ON question_reports(concept_id);
+
+-- Staff invitations. The raw token is never stored, only its SHA-256 hash, so a database read
+-- cannot yield a usable credential. A row is never deleted: a revoked or expired invitation is
+-- history, and deleting it would erase the record of who offered production access and to whom.
+CREATE TABLE IF NOT EXISTS admin_invitations (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    token_hash  TEXT NOT NULL,
+    email       TEXT NOT NULL DEFAULT '',
+    role        TEXT NOT NULL,
+    invited_by  TEXT NOT NULL DEFAULT '',
+    created_at  TEXT NOT NULL DEFAULT (datetime('now')),
+    expires_at  TEXT NOT NULL,
+    accepted_at TEXT NOT NULL DEFAULT '',
+    accepted_by TEXT NOT NULL DEFAULT '',
+    revoked_at  TEXT NOT NULL DEFAULT '',
+    revoked_by  TEXT NOT NULL DEFAULT ''
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_admin_invitations_token ON admin_invitations(token_hash);
+CREATE INDEX IF NOT EXISTS idx_admin_invitations_email ON admin_invitations(email);
 
 -- Administration. The role column itself is added by the migration list below rather than
 -- here: this DDL runs on every boot, and ALTER TABLE ADD COLUMN is not idempotent. The

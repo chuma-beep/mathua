@@ -36,6 +36,10 @@ import { HourglassIcon, PauseIcon } from '@animateicons/react/lucide'
 // and no theme control: three of the six paths — both error paths and the "Loading scores…"
 // wait — simply opted out, and the tab bar was never restored when BottomTabs came back. Wrapping
 // once makes a bare branch impossible to write by accident, which is the failure itself.
+function isStaffRole(role?: string): boolean {
+  return role === 'owner' || role === 'admin' || role === 'moderator'
+}
+
 function ProfileShell({
   children,
   ...sidebarProps
@@ -330,7 +334,7 @@ export default function ProfilePage() {
     // Show actionable error with sign-in CTA instead of hanging.
     if (error) {
       return (
-        <ProfileShell name={user.name} studentId={user.student_id} isAdmin={user.role === 'admin'}>
+        <ProfileShell name={user.name} studentId={user.student_id} isAdmin={isStaffRole(user.role)}>
           <div className="mx-auto px-4 sm:px-6 py-20 overflow-x-hidden min-w-0">
             <div style={{ fontFamily: monoFont, fontSize: 13, color: 'var(--text-muted)', textAlign: 'center' }}>
               {error}
@@ -344,7 +348,7 @@ export default function ProfilePage() {
       )
     }
     return (
-      <ProfileShell name={user.name} studentId={user.student_id} isAdmin={user.role === 'admin'}>
+      <ProfileShell name={user.name} studentId={user.student_id} isAdmin={isStaffRole(user.role)}>
         <div className="mx-auto px-4 sm:px-6 py-20 overflow-x-hidden min-w-0">
           <div style={{ fontFamily: monoFont, fontSize: 13, color: 'var(--text-muted)', textAlign: 'center' }}>
             Loading scores…
@@ -364,7 +368,7 @@ export default function ProfilePage() {
       avatarUrl={avatarUrl}
       avatarPreset={avatarPreset}
       dueReviews={dueReviews}
-      isAdmin={user.role === 'admin'}
+      isAdmin={isStaffRole(user.role)}
     >
         <a href="#profile-main" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-mathua-surface focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:text-mathua-blue">
           Skip to profile content

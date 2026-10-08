@@ -438,18 +438,24 @@ func TestFailedAuditInsertRollsBackDemotion(t *testing.T) {
 }
 
 // A refused demotion writes nothing and leaves the role alone, and — the part worth asserting
-// separately — a refusal is not an audit failure. If the last-admin guard fired *after* a
+// separately — a refusal is not an audit failure. If the last-owner guard fired *after* a
 // successful insert, the transaction would have to roll the insert back too.
-func TestLastAdminRefusalWritesNoEventAndKeepsTheRole(t *testing.T) {
+//
+// The invariant is on the owner in V2: an admin can be demoted freely (another owner or, in
+// principle, the system itself can mint another), but emptying the owner role is unrecoverable
+// because nothing but an owner can create one.
+func TestLastOwnerRefusalWritesNoEventAndKeepsTheRole(t *testing.T) {
 	s, ids := newAdminStore(t)
-	promote(t, s, ids[0])
+	if err := s.SetStudentRole(ids[0], RoleOwner); err != nil {
+		t.Fatalf("promote to owner: %v", err)
+	}
 
 	_, err := s.SetRoleAudited(ids[0], ids[0], RoleStudent)
-	if !errors.Is(err, ErrLastAdmin) {
-		t.Fatalf("err = %v, want ErrLastAdmin", err)
+	if !errors.Is(err, ErrLastOwner) {
+		t.Fatalf("err = %v, want ErrLastOwner", err)
 	}
-	if got := roleOf(t, s, ids[0]); got != RoleAdmin {
-		t.Errorf("role = %q, want admin", got)
+	if got := roleOf(t, s, ids[0]); got != RoleOwner {
+		t.Errorf("role = %q, want owner", got)
 	}
 	events, _ := s.ListAdminAudit(10, 0)
 	if len(events) != 0 {

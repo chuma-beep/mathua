@@ -773,7 +773,7 @@ const MeSchema = z.object({
 	student_id: z.string(),
 	name: z.string(),
 	has_password: z.boolean().optional(),
-	role: z.enum(['student', 'admin']).optional(),
+	role: z.enum(['student', 'moderator', 'admin', 'owner']).optional(),
 })
 
 export type MeInfo = z.infer<typeof MeSchema>
@@ -1498,74 +1498,6 @@ export async function submitReport(input: SubmitReportInput): Promise<SubmitRepo
 	return res.json() as Promise<SubmitReportRes>
 }
 
-export interface QuestionReport {
-	id: number
-	reporter_id: string
-	concept_id: string
-	kind: string
-	question: string
-	expected: string
-	explanation: string
-	lesson_id: string
-	source: string
-	session_id: string
-	attempt_id: string
-	reason: string
-	detail: string
-	status: string
-	created_at: string
-}
-
-export async function listReports(token: string, status = 'open', limit = 50, offset = 0): Promise<QuestionReport[]> {
-	const res = await authedFetch(
-		`${API_BASE}/api/reports?status=${encodeURIComponent(status)}&limit=${limit}&offset=${offset}`,
-		{ headers: { Authorization: `Bearer ${token}` } },
-	)
-	if (!res.ok) throw new Error(`Reports fetch failed: ${res.status}`)
-	const data = (await res.json()) as { reports: QuestionReport[] }
-	return data.reports ?? []
-}
-
-export async function updateReportStatus(token: string, id: number, status: ReportStatus): Promise<void> {
-	const res = await authedFetch(`${API_BASE}/api/reports/${id}`, {
-		method: 'PATCH',
-		headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-		body: JSON.stringify({ status }),
-	})
-	if (!res.ok) throw new Error(`Report update failed: ${res.status}`)
-}
-
-// Admin triage auth: shared ADMIN_PASSWORD → 24h session token.
-// Login uses plain fetch (not authedFetch): a 401 here means "wrong admin
-// password" and must NOT clear the user's own login token.
-export interface AdminLoginRes {
-	token: string
-	expires_at: string
-}
-
-export async function adminLogin(password: string): Promise<AdminLoginRes> {
-	const res = await fetch(`${API_BASE}/api/admin/login`, {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ password }),
-	})
-	if (res.status === 401) throw new Error('Wrong password')
-	if (res.status === 404) throw new Error('Admin login is not configured on this server')
-	if (!res.ok) throw new Error(`Admin login failed: ${res.status}`)
-	return res.json() as Promise<AdminLoginRes>
-}
-
-export async function adminLogout(token: string): Promise<void> {
-	try {
-		await fetch(`${API_BASE}/api/admin/logout`, {
-			method: 'POST',
-			headers: { Authorization: `Bearer ${token}` },
-		})
-	} catch {
-		// Best-effort: the session expires server-side within 24h regardless.
-	}
-}
-
 // ── Role-based administration ──────────────────────────────────────────────
 //
 // A different mechanism from the triage session above, on purpose. Triage is gated by a shared
@@ -1574,12 +1506,11 @@ export async function adminLogout(token: string): Promise<void> {
 // a 403 here means the backend said no, and hiding the pages in the UI is a convenience on top
 // of that, never the control.
 //
-// Every one of these uses authedFetch, unlike adminLogin above. That is the point of the split:
-// a 401 from these endpoints means the learner's own session is not an administrator, and
-// authedFetch's handling of a 401 is correct for that case, whereas adminLogin's 401 means a
-// typo in a password and must not disturb the session.
+// Every one of these uses authedFetch. A 401 means the caller's own session is not signed in,
+// a 403 means the account lacks the permission, and authedFetch's handling of a 401 is correct
+// for the first case. The server decides; hiding a page in the UI is a convenience on top.
 
-const RoleSchema = z.enum(['student', 'admin'])
+const RoleSchema = z.enum(['student', 'moderator', 'admin', 'owner'])
 
 // AdminUser mirrors the server's AdminUser projection. It has no field for a password hash, a
 // share token or learning state, and the schema is the reason: a response carrying a field this
@@ -1612,10 +1543,18 @@ const AdminAuditEventSchema = z.object({
 
 const AdminOverviewSchema = z.object({
 	users: z.number(),
-	admins: z.number(),
+	staff: z.number(),
+	owners: z.number(),
 	concepts: z.number(),
 	domains: z.number(),
 	questions: z.number(),
+	reports: z.object({
+		open: z.number(),
+		reviewing: z.number(),
+		resolved: z.number(),
+		dismissed: z.number(),
+		outstanding: z.number(),
+	}),
 	recent_activity: z.array(AdminAuditEventSchema),
 })
 
@@ -1673,4 +1612,149 @@ export async function listAdminAudit(): Promise<AdminAuditRes> {
 	if (!res.ok) await throwWithResponse(res, 'Could not load the audit log')
 	const data = (await res.json()) as { events?: unknown }
 	return { events: validateResponse(z.array(AdminAuditEventSchema), data.events ?? [], 'adminAudit') }
+}
+
+// ── Admin V2 ──────────────────────────────────────────────────────────────
+//
+// The moderation queue, contributor management and content inspection. The permission list from
+// /api/admin/me drives which sections render; every call is still authorized server-side.
+
+export interface AdminMe {
+	id: string
+	role: Role
+	permissions: string[]
+	assignable_roles: Role[]
+}
+
+export async function adminMe(): Promise<AdminMe> {
+	const res = await authedFetch(`${API_BASE}/api/admin/me`, { cache: 'no-store' })
+	if (!res.ok) await throwWithResponse(res, 'Could not load your admin access')
+	const data = (await res.json()) as AdminMe
+	return data
+}
+
+// A moderation record. It is never deleted; resolved/dismissed stamp who decided and why.
+const QuestionReportSchema = z.object({
+	id: z.number(),
+	reporter_id: z.string(),
+	concept_id: z.string(),
+	kind: z.string(),
+	question: z.string(),
+	expected: z.string(),
+	explanation: z.string(),
+	lesson_id: z.string(),
+	source: z.string(),
+	session_id: z.string(),
+	attempt_id: z.string(),
+	reason: z.string(),
+	detail: z.string(),
+	status: z.string(),
+	resolution: z.string(),
+	resolved_by: z.string(),
+	resolved_at: z.string(),
+	created_at: z.string(),
+})
+export type QuestionReport = z.infer<typeof QuestionReportSchema>
+
+export type ModerationStatus = 'open' | 'reviewing' | 'resolved' | 'dismissed'
+
+export async function listAdminReports(status?: string): Promise<{ reports: QuestionReport[] }> {
+	const qs = status && status !== 'all' ? `?status=${encodeURIComponent(status)}` : ''
+	const res = await authedFetch(`${API_BASE}/api/admin/reports${qs}`, { cache: 'no-store' })
+	if (!res.ok) await throwWithResponse(res, 'Could not load reports')
+	const data = (await res.json()) as { reports?: unknown }
+	return { reports: validateResponse(z.array(QuestionReportSchema), data.reports ?? [], 'adminReports') }
+}
+
+export async function getAdminReport(id: number): Promise<{ report: QuestionReport; history: AdminAuditEvent[] }> {
+	const res = await authedFetch(`${API_BASE}/api/admin/reports/${id}`, { cache: 'no-store' })
+	if (!res.ok) await throwWithResponse(res, 'Could not load the report')
+	const data = (await res.json()) as { report?: unknown; history?: unknown }
+	return {
+		report: validateResponse(QuestionReportSchema, data.report, 'adminReport'),
+		history: validateResponse(z.array(AdminAuditEventSchema), data.history ?? [], 'adminReportHistory'),
+	}
+}
+
+export async function moderateReport(id: number, status: ModerationStatus, resolution: string): Promise<QuestionReport> {
+	const res = await authedFetch(`${API_BASE}/api/admin/reports/${id}`, {
+		method: 'PATCH',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ status, resolution }),
+	})
+	if (!res.ok) await throwWithResponse(res, 'Could not update the report')
+	const data = (await res.json()) as { report?: unknown }
+	return validateResponse(QuestionReportSchema, data.report, 'adminReportUpdate')
+}
+
+export async function listAdmins(): Promise<{ admins: AdminUser[] }> {
+	const res = await authedFetch(`${API_BASE}/api/admin/admins`, { cache: 'no-store' })
+	if (!res.ok) await throwWithResponse(res, 'Could not load staff')
+	const data = (await res.json()) as { admins?: unknown }
+	return { admins: validateResponse(z.array(AdminUserSchema), data.admins ?? [], 'adminAdmins') }
+}
+
+const AdminInvitationSchema = z.object({
+	id: z.number(),
+	email: z.string(),
+	role: RoleSchema,
+	invited_by: z.string(),
+	created_at: z.string(),
+	expires_at: z.string(),
+	accepted_at: z.string(),
+	accepted_by: z.string(),
+	revoked_at: z.string(),
+	revoked_by: z.string(),
+})
+export type AdminInvitation = z.infer<typeof AdminInvitationSchema>
+
+export async function listAdminInvitations(): Promise<{ invitations: AdminInvitation[] }> {
+	const res = await authedFetch(`${API_BASE}/api/admin/invitations`, { cache: 'no-store' })
+	if (!res.ok) await throwWithResponse(res, 'Could not load invitations')
+	const data = (await res.json()) as { invitations?: unknown }
+	return { invitations: validateResponse(z.array(AdminInvitationSchema), data.invitations ?? [], 'adminInvitations') }
+}
+
+export async function createAdminInvitation(email: string, role: Role): Promise<{ id: number; token: string; email: string; role: Role; expires_at: string }> {
+	const res = await authedFetch(`${API_BASE}/api/admin/invitations`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ email, role }),
+	})
+	if (!res.ok) await throwWithResponse(res, 'Could not create the invitation')
+	return res.json() as Promise<{ id: number; token: string; email: string; role: Role; expires_at: string }>
+}
+
+export async function acceptAdminInvitation(token: string): Promise<{ role: Role }> {
+	const res = await authedFetch(`${API_BASE}/api/admin/invitations/accept`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ token }),
+	})
+	if (!res.ok) await throwWithResponse(res, 'Could not accept the invitation')
+	return res.json() as Promise<{ role: Role }>
+}
+
+export async function revokeAdminInvitation(id: number): Promise<AdminInvitation> {
+	const res = await authedFetch(`${API_BASE}/api/admin/invitations/${id}/revoke`, { method: 'POST' })
+	if (!res.ok) await throwWithResponse(res, 'Could not revoke the invitation')
+	const data = (await res.json()) as { invitation?: unknown }
+	return validateResponse(AdminInvitationSchema, data.invitation, 'adminInvitationRevoke')
+}
+
+export interface AdminContentConcept {
+	id: string
+	label: string
+	domain: string
+	subdomain: string
+	grading_type: string
+	prerequisites: string[]
+}
+
+export async function listAdminContent(q = ''): Promise<{ concepts: AdminContentConcept[]; total: number }> {
+	const qs = q.trim() ? `?q=${encodeURIComponent(q.trim())}` : ''
+	const res = await authedFetch(`${API_BASE}/api/admin/content${qs}`, { cache: 'no-store' })
+	if (!res.ok) await throwWithResponse(res, 'Could not load content')
+	const data = (await res.json()) as { concepts?: AdminContentConcept[]; total?: number }
+	return { concepts: data.concepts ?? [], total: data.total ?? 0 }
 }

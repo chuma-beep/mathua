@@ -230,6 +230,10 @@ type QuizCompletion struct {
 
 // QuestionReport is a user complaint about a question, explanation,
 // lesson body, worked example, or diagram.
+//
+// A report is a moderation record, not a queue item: resolving it sets Status and the outcome
+// fields and leaves the row in place. Nothing in the system deletes one, because "what was
+// reported and what we decided" is the evidence a moderation log exists to hold.
 type QuestionReport struct {
 	ID          int64     `json:"id"`
 	ReporterID  string    `json:"reporter_id"`
@@ -244,9 +248,39 @@ type QuestionReport struct {
 	AttemptID   string    `json:"attempt_id"`
 	Reason      string    `json:"reason"` // wrong_answer | bad_explanation | unclear | formatting | other
 	Detail      string    `json:"detail"`
-	Status      string    `json:"status"` // open | confirmed | fixed | dismissed
-	CreatedAt   time.Time `json:"created_at"`
+	// Status is the moderation state: open | reviewing | resolved | dismissed.
+	Status string `json:"status"`
+	// Resolution is the moderator's reason for the decision, written when the report leaves
+	// open/reviewing. Kept separate from Detail, which is the reporter's own words.
+	Resolution string `json:"resolution"`
+	// ResolvedBy and ResolvedAt name who decided and when. Text, not a foreign key, for the same
+	// reason the audit actor is: the record must outlive the account it names.
+	ResolvedBy string    `json:"resolved_by"`
+	ResolvedAt string    `json:"resolved_at"`
+	CreatedAt  time.Time `json:"created_at"`
 }
+
+// AdminInvitation is a pending offer of a staff role to an account.
+//
+// The raw token is never stored. Only its SHA-256 hash is, exactly as with password resets: a
+// database read must not yield a usable credential, so a leaked backup cannot be replayed as
+// access. The row records who offered it and what it grants, so accepting it is a decision the
+// audit log can attribute to a person.
+type AdminInvitation struct {
+	ID        int64  `json:"id"`
+	Email     string `json:"email"`
+	Role      Role   `json:"role"`
+	InvitedBy string `json:"invited_by"`
+	CreatedAt string `json:"created_at"`
+	ExpiresAt string `json:"expires_at"`
+	// AcceptedAt/RevokedAt are "" while the invitation is pending. A row is never deleted: a
+	// revoked or expired invitation is history.
+	AcceptedAt string `json:"accepted_at"`
+	AcceptedBy string `json:"accepted_by"`
+	RevokedAt  string `json:"revoked_at"`
+	RevokedBy  string `json:"revoked_by"`
+}
+
 
 // ErrRoleUnchanged is returned when an account already holds the requested role.
 //
@@ -277,18 +311,67 @@ type RoleChange struct {
 // a lookup miss.
 var ErrLastAdmin = errors.New("cannot demote the last administrator")
 
-// Role is what an account may do beyond learning. Two values, no more.
+// ErrLastOwner is returned when a change would leave the system with no owner.
+//
+// The invariant moved up the hierarchy in Admin V2. V1 guarded the last `admin`; the role that
+// can hand out every other role is now `owner`, so that is the one the system may never run out
+// of. An admin or moderator count of zero is recoverable — an owner can always create one — but
+// an owner count of zero is not, because nothing but an owner can mint the first one back.
+var ErrLastOwner = errors.New("cannot remove the last owner")
+
+// ErrReportUnchanged is returned when a moderation decision would not change the report's
+// status. Like ErrRoleUnchanged it means "no change, no event": reopening a report that is
+// already open is not a moderation action, and recording it would put a fact in the trail that
+// did not happen.
+var ErrReportUnchanged = errors.New("report is already in that status")
+
+// Role is what an account may do beyond learning.
 //
 // It lives on the account and nowhere else. It is not derivable from XP, mastery, level,
 // curriculum progress, email domain or anything the client sends, because every one of those
 // is either something a learner controls or something they can change without meaning to. The
 // only thing that grants it is an explicit write by an administrator or the operator.
+//
+// Four values, ordered least to most privileged: student, moderator, admin, owner. The ordering
+// matters — every guard that stops someone acting above their authority is a comparison of
+// ranks, and having one definition of "above" is what keeps the guards from disagreeing.
 type Role string
 
 const (
-	RoleStudent Role = "student"
-	RoleAdmin   Role = "admin"
+	RoleStudent   Role = "student"
+	RoleModerator Role = "moderator"
+	RoleAdmin     Role = "admin"
+	RoleOwner     Role = "owner"
 )
+
+// roleRank orders the roles by privilege. An unknown role ranks below student, so anything that
+// slips through NormalizeRole is treated as no privilege rather than as some privilege nobody
+// has audited.
+func roleRank(r Role) int {
+	switch r {
+	case RoleOwner:
+		return 4
+	case RoleAdmin:
+		return 3
+	case RoleModerator:
+		return 2
+	case RoleStudent:
+		return 1
+	}
+	return 0
+}
+
+// AtLeast reports whether r is at least as privileged as other.
+func (r Role) AtLeast(other Role) bool {
+	return roleRank(r) >= roleRank(other)
+}
+
+// IsStaff reports whether the role grants any administrative surface at all. It is the check
+// `/api/auth/me` uses to decide whether to offer the Admin entry, and the one the middleware
+// uses to decide whether a caller is staff before it consults a specific permission.
+func (r Role) IsStaff() bool {
+	return roleRank(r) >= roleRank(RoleModerator)
+}
 
 // NormalizeRole maps any stored or supplied string to a role, defaulting to student.
 //
@@ -297,13 +380,19 @@ const (
 // rather than as "some privilege nobody has audited yet". Callers that need to reject bad
 // input use ParseRole.
 func NormalizeRole(s string) Role {
-	if Role(s) == RoleAdmin {
+	switch Role(s) {
+	case RoleOwner:
+		return RoleOwner
+	case RoleAdmin:
 		return RoleAdmin
+	case RoleModerator:
+		return RoleModerator
+	default:
+		return RoleStudent
 	}
-	return RoleStudent
 }
 
-// ParseRole is NormalizeRole for input that must be one of the two values exactly.
+// ParseRole is NormalizeRole for input that must be one of the values exactly.
 //
 // Role assignment goes through this, so a PATCH body carrying "Admin", "ADMIN" or "root" is
 // rejected rather than silently becoming something. Silently accepting it would mean the
@@ -312,8 +401,12 @@ func ParseRole(s string) (Role, bool) {
 	switch Role(s) {
 	case RoleStudent:
 		return RoleStudent, true
+	case RoleModerator:
+		return RoleModerator, true
 	case RoleAdmin:
 		return RoleAdmin, true
+	case RoleOwner:
+		return RoleOwner, true
 	}
 	return RoleStudent, false
 }
@@ -361,6 +454,13 @@ type AdminAuditRecord struct {
 const (
 	ActionAdminPromoteUser = "ADMIN_PROMOTE_USER"
 	ActionAdminDemoteUser  = "ADMIN_DEMOTE_USER"
+	// Admin V2 additions.
+	ActionAdminRoleChange     = "ADMIN_ROLE_CHANGE" // any role change that is not a plain promote/demote
+	ActionAdminInviteCreate   = "ADMIN_INVITE_CREATE"
+	ActionAdminInviteRevoke   = "ADMIN_INVITE_REVOKE"
+	ActionAdminInviteAccept   = "ADMIN_INVITE_ACCEPT"
+	ActionReportStatusChange  = "REPORT_STATUS_CHANGE"
+	ActionContentStatusChange = "CONTENT_STATUS_CHANGE"
 )
 
 // Repository interface
@@ -526,6 +626,16 @@ type Repository interface {
 	// they cannot be returned even by a bug.
 	SearchAdminUsers(query string, limit, offset int) ([]AdminUser, error)
 
+	// GetAdminUser reads one account's non-sensitive projection, or nil when there is no such
+	// row. It is the read a role change does before deciding whether it is allowed, so it has to
+	// distinguish "no such account" from "an account that is a student".
+	GetAdminUser(studentID string) (*AdminUser, error)
+
+	// ListStaff returns accounts holding moderator or above, newest first. It is the
+	// contributors page's read, and it is a query rather than a filter over SearchAdminUsers so
+	// the page does not page through every learner to find the few staff.
+	ListStaff(limit, offset int) ([]AdminUser, error)
+
 	// CountAdminUsers is the total number of accounts, for the overview.
 	CountAdminUsers() (int, error)
 
@@ -538,6 +648,59 @@ type Repository interface {
 
 	// ListAdminAudit returns the most recent events first.
 	ListAdminAudit(limit, offset int) ([]AdminAuditRecord, error)
+
+	// ListAdminAuditFor returns the most recent events about one entity, newest first. It is how
+	// a person's role history and a report's moderation history are reconstructed: "who granted
+	// this, and when" is a query over the trail, not a column anyone maintains by hand.
+	ListAdminAuditFor(entityType, entityID string, limit int) ([]AdminAuditRecord, error)
+
+	// ── Admin V2: roles, moderation and invitations ───────────────────────
+	//
+	// Additive to V1. The role guards and the audit trail are the same machinery; V2 adds the
+	// roles above `admin`, the moderation state on reports, and invitations.
+
+	// CountStaff is how many accounts hold moderator or above. It is the number the overview
+	// shows; CountAdmins (role = 'admin' exactly) no longer describes "who can administer".
+	CountStaff() (int, error)
+
+	// CountOwners is how many accounts hold the owner role. The invariant is that this is never
+	// zero, so it is also the number the last-owner guard protects.
+	CountOwners() (int, error)
+
+	// CountReportsByStatus returns one count per moderation status. Statuses with no rows are
+	// absent rather than zero, so the caller decides what "none" reads as.
+	CountReportsByStatus() (map[string]int, error)
+
+	// GetReport reads one report, for the detail view a moderator decides from.
+	GetReport(id int64) (*QuestionReport, error)
+
+	// UpdateReportStatusAudited applies a moderation decision and records it in one transaction.
+	// The report row is never deleted; Status, Resolution, ResolvedBy and ResolvedAt change and
+	// an audit event is appended. Returns sql.ErrNoRows if there is no such report.
+	UpdateReportStatusAudited(actorID string, id int64, status, resolution string) (QuestionReport, error)
+
+	// CreateAdminInvitation stores a pending invitation. Only the token hash is passed; the raw
+	// token exists in memory for the length of the response and nowhere else.
+	CreateAdminInvitation(inv AdminInvitation, tokenHash string) (int64, error)
+
+	// ListAdminInvitations returns invitations newest first, pending or not, so the contributors
+	// page can show history rather than only what is outstanding.
+	ListAdminInvitations(limit, offset int) ([]AdminInvitation, error)
+
+	// RevokeAdminInvitation marks a pending invitation revoked. Returns the updated row, or
+	// sql.ErrNoRows if it does not exist or is already settled.
+	RevokeAdminInvitation(actorID string, id int64) (AdminInvitation, error)
+
+	// FindAdminInvitationByTokenHash reads a pending-or-settled invitation by its token hash,
+	// or nil. It is read-only and is used to check the invited address before burning the token
+	// — the burn itself is ConsumeAdminInvitation, which is the atomic step.
+	FindAdminInvitationByTokenHash(tokenHash string) (*AdminInvitation, error)
+
+	// ConsumeAdminInvitation burns a raw-token hash and returns the invitation it belonged to.
+	// ok is false for unknown, expired, revoked or already-accepted tokens, which are
+	// indistinguishable to the caller on purpose: a token prober learns nothing about which
+	// near-miss they are close to.
+	ConsumeAdminInvitation(tokenHash, studentID string) (*AdminInvitation, bool, error)
 
 	CreateIdentity(provider, providerID, studentID, email string, emailVerified bool) error
 	FindStudentByIdentity(provider, providerID string) (*Student, error)

@@ -157,11 +157,33 @@ CREATE TABLE IF NOT EXISTS question_reports (
     reason      TEXT NOT NULL DEFAULT 'other',
     detail      TEXT NOT NULL DEFAULT '',
     status      TEXT NOT NULL DEFAULT 'open',
+    resolution  TEXT NOT NULL DEFAULT '',
+    resolved_by TEXT NOT NULL DEFAULT '',
+    resolved_at TEXT NOT NULL DEFAULT '',
     created_at  TEXT NOT NULL DEFAULT (now()::text)
 );
 
 CREATE INDEX IF NOT EXISTS idx_reports_status  ON question_reports(status, created_at);
 CREATE INDEX IF NOT EXISTS idx_reports_concept ON question_reports(concept_id);
+
+-- Staff invitations. Only the token hash is stored; a database read cannot yield a usable
+-- credential. Rows are never deleted, so the history of who offered access survives.
+CREATE TABLE IF NOT EXISTS admin_invitations (
+    id          BIGSERIAL PRIMARY KEY,
+    token_hash  TEXT NOT NULL,
+    email       TEXT NOT NULL DEFAULT '',
+    role        TEXT NOT NULL,
+    invited_by  TEXT NOT NULL DEFAULT '',
+    created_at  TEXT NOT NULL DEFAULT (now()::text),
+    expires_at  TEXT NOT NULL,
+    accepted_at TEXT NOT NULL DEFAULT '',
+    accepted_by TEXT NOT NULL DEFAULT '',
+    revoked_at  TEXT NOT NULL DEFAULT '',
+    revoked_by  TEXT NOT NULL DEFAULT ''
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_admin_invitations_token ON admin_invitations(token_hash);
+CREATE INDEX IF NOT EXISTS idx_admin_invitations_email ON admin_invitations(email);
 
 CREATE TABLE IF NOT EXISTS server_sessions (
     kind       TEXT NOT NULL,
@@ -264,6 +286,10 @@ func pgAuthMigrate(db *sql.DB) error {
 		// carries evidence about who was administering anything, because it could not.
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS role TEXT NOT NULL DEFAULT 'student'",
 		"CREATE INDEX IF NOT EXISTS idx_students_role ON students(role)",
+		// Admin V2 moderation state on reports; mirrors the SQLite migration.
+		"ALTER TABLE question_reports ADD COLUMN IF NOT EXISTS resolution TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE question_reports ADD COLUMN IF NOT EXISTS resolved_by TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE question_reports ADD COLUMN IF NOT EXISTS resolved_at TEXT NOT NULL DEFAULT ''",
 		`CREATE TABLE IF NOT EXISTS avatar_images (
 			student_id TEXT PRIMARY KEY REFERENCES students(id) ON DELETE CASCADE,
 			content_type TEXT NOT NULL,
@@ -327,6 +353,11 @@ func pgAuthMigrate(db *sql.DB) error {
 		4: {`UPDATE students SET daily_xp_goal = 30 WHERE daily_xp_goal = 10`,
 			`UPDATE students SET daily_xp_goal = 100 WHERE daily_xp_goal > 100`,
 			`UPDATE students SET daily_xp_goal = 10 WHERE daily_xp_goal < 10`},
+		// v5 Admin V2. Mirrors the SQLite migration exactly: V1 `admin` becomes `owner`, and the
+		// report statuses move to the V2 vocabulary. ADR-012 requires the two stores agree.
+		5: {`UPDATE students SET role = 'owner' WHERE role = 'admin'`,
+			`UPDATE question_reports SET status = 'reviewing' WHERE status = 'confirmed'`,
+			`UPDATE question_reports SET status = 'resolved' WHERE status = 'fixed'`},
 	}
 	for v := 1; v <= len(dataMigrations); v++ {
 		if err := runOncePostgres(db, v, dataMigrations[v]); err != nil {
@@ -1770,7 +1801,8 @@ func (s *PostgresStore) ListReports(status string, limit, offset int) ([]Questio
 	if status == "" || status == "all" {
 		rows, err = s.db.Query(`
 			SELECT id, reporter_id, concept_id, kind, question, expected, explanation,
-			       lesson_id, source, session_id, attempt_id, reason, detail, status, created_at
+			       lesson_id, source, session_id, attempt_id, reason, detail, status,
+			       resolution, resolved_by, resolved_at, created_at
 			FROM question_reports
 			ORDER BY created_at DESC
 			LIMIT $1 OFFSET $2
@@ -1778,7 +1810,8 @@ func (s *PostgresStore) ListReports(status string, limit, offset int) ([]Questio
 	} else {
 		rows, err = s.db.Query(`
 			SELECT id, reporter_id, concept_id, kind, question, expected, explanation,
-			       lesson_id, source, session_id, attempt_id, reason, detail, status, created_at
+			       lesson_id, source, session_id, attempt_id, reason, detail, status,
+			       resolution, resolved_by, resolved_at, created_at
 			FROM question_reports
 			WHERE status = $1
 			ORDER BY created_at DESC
@@ -1796,7 +1829,7 @@ func (s *PostgresStore) ListReports(status string, limit, offset int) ([]Questio
 		if err := rows.Scan(
 			&r.ID, &r.ReporterID, &r.ConceptID, &r.Kind, &r.Question, &r.Expected,
 			&r.Explanation, &r.LessonID, &r.Source, &r.SessionID, &r.AttemptID,
-			&r.Reason, &r.Detail, &r.Status, &created,
+			&r.Reason, &r.Detail, &r.Status, &r.Resolution, &r.ResolvedBy, &r.ResolvedAt, &created,
 		); err != nil {
 			return nil, fmt.Errorf("scan report: %w", err)
 		}
@@ -2019,21 +2052,25 @@ func (s *PostgresStore) SetRoleAudited(actorID, studentID string, role Role) (Ro
 	}
 
 	action := ActionAdminDemoteUser
-	if role == RoleAdmin {
+	if role.AtLeast(before.Role) {
 		action = ActionAdminPromoteUser
-		if _, err := tx.Exec("UPDATE students SET role = $1 WHERE id = $2", string(role), studentID); err != nil {
-			return RoleChange{}, fmt.Errorf("promote: %w", err)
-		}
-	} else {
+	}
+	// Removing an owner is the one change that can empty the top of the hierarchy, so it carries
+	// the guard. Mirrors SQLite; see that comment for why the count is inside the UPDATE.
+	if before.Role == RoleOwner && role != RoleOwner {
 		res, err := tx.Exec(
-			`UPDATE students SET role = 'student'
-			 WHERE id = $1 AND role = 'admin' AND (SELECT COUNT(*) FROM students WHERE role = 'admin') > 1`,
-			studentID)
+			`UPDATE students SET role = $1
+			 WHERE id = $2 AND role = 'owner' AND (SELECT COUNT(*) FROM students WHERE role = 'owner') > 1`,
+			string(role), studentID)
 		if err != nil {
-			return RoleChange{}, fmt.Errorf("demote: %w", err)
+			return RoleChange{}, fmt.Errorf("demote owner: %w", err)
 		}
 		if n, _ := res.RowsAffected(); n == 0 {
-			return RoleChange{}, ErrLastAdmin
+			return RoleChange{}, ErrLastOwner
+		}
+	} else {
+		if _, err := tx.Exec("UPDATE students SET role = $1 WHERE id = $2", string(role), studentID); err != nil {
+			return RoleChange{}, fmt.Errorf("set role: %w", err)
 		}
 	}
 
@@ -2065,4 +2102,9 @@ func (s *PostgresStore) SetRoleAudited(actorID, studentID string, role Role) (Ro
 		return RoleChange{}, fmt.Errorf("commit role change: %w", err)
 	}
 	return RoleChange{Before: *before, After: *after, Changed: true, Action: action}, nil
+}
+
+// GetAdminUser reads one non-sensitive projection, or nil when the id does not exist.
+func (s *PostgresStore) GetAdminUser(studentID string) (*AdminUser, error) {
+	return adminUserByIDPG(s.db, studentID)
 }
