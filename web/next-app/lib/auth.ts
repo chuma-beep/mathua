@@ -100,6 +100,14 @@ export interface UserInfo {
   email?: string
   email_verified?: boolean
   has_password?: boolean
+  /**
+   * The account's administrative role, as reported by `/api/auth/me`.
+   *
+   * Present so the app can *offer* an Admin entry, and nothing more. A missing field — an old
+   * build, a stale cached bundle — reads as a learner, which is the safe direction: the pages
+   * are still reachable by URL and the server refuses them.
+   */
+  role?: 'student' | 'admin'
 }
 
 export function setUserInfo(info: UserInfo) {
@@ -204,4 +212,55 @@ export async function ensureGuestToken(): Promise<string | null> {
   } finally {
     clearTimeout(timer)
   }
+}
+
+/**
+ * Store a freshly issued token together with the account the server says it belongs to.
+ *
+ * Every sign-in path used to build its own `UserInfo` literal from whatever the login response
+ * happened to contain — four copies, in the Google callback, One-Tap, password reset and the
+ * password form, each filling `concepts_mastered` and `current_streak` with zeros because the
+ * login response does not carry them. That is four copies of a schema to keep in step with
+ * `/api/auth/me`, and it immediately cost something: `role` is reported by that endpoint, no
+ * literal mentioned it, so a signed-in administrator's Admin entry never appeared at all.
+ *
+ * One function, one fetch of the server's own payload. The request is not an extra cost on the
+ * password path, which was already calling `/api/auth/me` through `validateToken` to confirm the
+ * token; this replaces that call rather than adding to it.
+ *
+ * Fails soft, in the direction that matters. If `/api/auth/me` fails the token is kept — the
+ * login itself succeeded — and the partial object is stored, which simply has no `role`. An
+ * administrator whose profile fetch blipped does not see the Admin entry until it succeeds, and
+ * a learner never sees it at all. Neither loses access to anything: the server decides.
+ */
+export async function establishSession(
+  token: string,
+  partial: Omit<UserInfo, 'role'>,
+): Promise<UserInfo> {
+  setToken(token)
+  try {
+    const res = await fetch(`${API_BASE}/api/auth/me`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    if (res.ok) {
+      const me = (await res.json()) as Partial<UserInfo>
+      // Built in statements rather than with a conditional spread, because the spread is
+      // exactly the thing that hides the case this function exists to get right: `role:
+      // undefined` and an absent key both read as falsy, so a spread would make "the server did
+      // not send a role" indistinguishable from "the server sent student".
+      const merged: UserInfo = {
+        ...partial,
+        student_id: typeof me.student_id === 'string' ? me.student_id : partial.student_id,
+        name: typeof me.name === 'string' ? me.name : partial.name,
+      }
+      if (me.role === 'admin' || me.role === 'student') merged.role = me.role
+      if (typeof me.has_password === 'boolean') merged.has_password = me.has_password
+      setUserInfo(merged)
+      return merged
+    }
+  } catch {
+    // Offline or unreachable. See above: keep the session, drop the enrichment.
+  }
+  setUserInfo({ ...partial })
+  return { ...partial }
 }

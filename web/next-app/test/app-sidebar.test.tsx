@@ -212,4 +212,17 @@ describe('AppSidebar', () => {
     expect(themeIdx).toBeGreaterThanOrEqual(0)
     expect(signOutIdx).toBeGreaterThan(themeIdx)
   })
+
+  it('offers the Admin entry to an administrator and to nobody else', () => {
+    // The component's half of the contract. The other half is that /profile passes `isAdmin` from
+    // the session role on *every* branch — the loading and error branches did, and the main one
+    // did not, so the entry appeared and then vanished once scores arrived. That wiring is what
+    // `e2e/admin.spec.ts` guards; this guards the prop.
+    const { unmount } = renderSidebar({ isAdmin: true })
+    expect(screen.getByRole('link', { name: /Admin/ })).toBeTruthy()
+    unmount()
+
+    renderSidebar()
+    expect(screen.queryByRole('link', { name: /Admin/ })).toBeNull()
+  })
 })
