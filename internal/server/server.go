@@ -319,6 +319,13 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/reports/", logRequest(cors(s.optionalAuthMiddleware(s.handleUpdateReport))))
 	mux.HandleFunc("/api/admin/login", logRequest(cors(s.authLimiter.middleware(s.handleAdminLogin))))
 	mux.HandleFunc("/api/admin/logout", logRequest(cors(s.authLimiter.middleware(s.handleAdminLogout))))
+	// Role-based administration. Separate from the two triage routes above: those take a
+	// shared operator password, these require a role on an individual account, and neither
+	// authorizes the other. Every route below is behind requireAdmin and nothing else.
+	mux.HandleFunc("/api/admin/overview", logRequest(cors(s.requireAdmin(s.handleAdminOverview))))
+	mux.HandleFunc("/api/admin/audit", logRequest(cors(s.requireAdmin(s.handleAdminAudit))))
+	mux.HandleFunc("/api/admin/users", logRequest(cors(s.requireAdmin(s.handleAdminUsers))))
+	mux.HandleFunc("/api/admin/users/", logRequest(cors(s.requireAdmin(s.handleAdminUserRole))))
 	mux.HandleFunc("/api/quiz/session", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleQuizSession)))))
 	mux.HandleFunc("/api/quiz/answer", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleQuizAnswer)))))
 	mux.HandleFunc("/api/quiz/skip", logRequest(cors(s.writeLimiter.middleware(s.optionalAuthMiddleware(s.handleQuizSkip)))))
@@ -1442,7 +1449,8 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 			// section was empty the server substituted l.Body, so 69 of 1,971 steps across 43
 			// concepts served the whole reference article to a learner who asked for one
 			// question — 33,784 words, and discrete.logic.propositions served its 2,724-word
-			// article three times over. `/study` keeps the article; this is the learning surface.
+			// article three times over. The reference panel keeps the article reachable (ADR-047);
+			// this is the learning surface.
 			we, _ := ll.TeachingSlice(conceptID, kp)
 			assets := ll.KPAssets(conceptID, kp)
 			if assets == nil {
@@ -2442,7 +2450,8 @@ func (s *Server) handleCourseDiagnostic(w http.ResponseWriter, r *http.Request) 
 	})
 }
 
-// POST /api/study/answer — Learn seam: LessonQuiz → SubmitAnswer (CONTEXT.md Seam)
+// POST /api/study/answer — Learn seam: LessonQuiz → SubmitAnswer (CONTEXT.md Seam).
+// The endpoint keeps its name; it is Learn's answer route and has never been Study's page.
 // Body: { concept_id, answer, elapsed, question, student_id? }
 // student_id is used only for a guest (mathua_guest_id).
 //
@@ -3448,6 +3457,17 @@ func (s *Server) handleMe(w http.ResponseWriter, r *http.Request) {
 		log.Printf("warning: failed to get scores for %s: %v", studentID, err)
 		scores = &scoring.Scores{}
 	}
+	// The role, so the client can decide whether to *offer* the Admin entry.
+	//
+	// This is a convenience and nothing more. Hiding a link is not authorization, and a client
+	// that lies about the role gets nothing: every /api/admin route re-reads it server-side.
+	// It is read here rather than added to storage.Student for the reason given there — a
+	// privilege field that silently defaults to "student" when unloaded is the wrong shape.
+	role, err := s.repo.GetStudentRole(studentID)
+	if err != nil {
+		log.Printf("warning: failed to read role for %s: %v", studentID, err)
+		role = storage.RoleStudent
+	}
 	writeJSON(w, map[string]interface{}{
 		"student_id":           st.ID,
 		"name":                 st.Name,
@@ -3460,6 +3480,7 @@ func (s *Server) handleMe(w http.ResponseWriter, r *http.Request) {
 		"email":                st.Email,
 		"email_verified":       st.EmailVerified,
 		"has_password":         st.PasswordHash != "",
+		"role":                 string(role),
 	})
 }
 
