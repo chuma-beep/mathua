@@ -74,12 +74,21 @@ func (s *Server) requirePermission(perm admin.Permission, next http.HandlerFunc)
 	}
 }
 
-// actorFrom returns the authenticated actor id and role the middleware injected. Both are
-// present on every request that reached a handler through requirePermission.
-func actorFrom(r *http.Request) (string, storage.Role) {
+// actor is the authenticated caller as a handler sees them: the account id the middleware
+// resolved and the role it read for this request.
+type actor struct {
+	ID   string
+	Role storage.Role
+}
+
+// actorFrom returns the authenticated caller the middleware injected. Both fields are present on
+// every request that reached a handler through requirePermission. It returns one value rather
+// than (id, role) because a two-value return ending in a named type reads like (value, error) at
+// the call site, and the `_` that follows hides which of the two was dropped.
+func actorFrom(r *http.Request) actor {
 	id, _ := r.Context().Value(authStudentKey{}).(string)
 	role, _ := r.Context().Value(authRoleKey{}).(storage.Role)
-	return id, role
+	return actor{ID: id, Role: role}
 }
 
 // adminLimit clamps a paging parameter. A client asking for 100000 rows gets the cap, not an
@@ -222,7 +231,7 @@ func (s *Server) handleAdminUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	actorID, actorRole := actorFrom(r)
+	a := actorFrom(r)
 	// Read the target first: the authorization decision is a comparison between the actor, the
 	// target's *current* role and the requested one, so it needs all three before it can allow
 	// anything. A missing target is 404 here rather than a student-shaped default.
@@ -238,11 +247,11 @@ func (s *Server) handleAdminUser(w http.ResponseWriter, r *http.Request) {
 	// Self-promotion is the specific self-change worth naming. Everything else about acting on
 	// yourself is either harmless or already blocked by the rank rule (you cannot outrank
 	// yourself), but "I made myself an owner" is the escalation to refuse in so many words.
-	if id == actorID && admin.CouldEscalate(target.Role, role) {
+	if id == a.ID && admin.CouldEscalate(target.Role, role) {
 		writeError(w, "you cannot change your own role", 403)
 		return
 	}
-	if !admin.CanAssign(actorRole, target.Role, role) {
+	if !admin.CanAssign(a.Role, target.Role, role) {
 		writeError(w, "you cannot assign that role", 403)
 		return
 	}
@@ -250,7 +259,7 @@ func (s *Server) handleAdminUser(w http.ResponseWriter, r *http.Request) {
 	// One call. The repository applies the mutation and writes the audit event in a single
 	// transaction, so there is no window in which the role has changed and the record has not
 	// — and no code path in which this handler could forget to record.
-	res, err := s.repo.SetRoleAudited(actorID, id, role)
+	res, err := s.repo.SetRoleAudited(a.ID, id, role)
 	switch {
 	case errors.Is(err, storage.ErrLastOwner):
 		// 409 rather than 400: the request was well-formed and permitted in general, and it

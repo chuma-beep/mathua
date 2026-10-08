@@ -8,8 +8,7 @@ import Footer from '../../../components/Footer'
 import SectionHeader from '../../../components/SectionHeader'
 import AdminNav from '../../../components/AdminNav'
 import { useAdminMe } from '../../../hooks/useAdminMe'
-import { listAdminAudit, type AdminAuditEvent } from '../../../lib/api'
-import { getErrorMessage } from '../../../lib/api'
+import { listAdminAudit, getErrorMessage, type AdminAuditEvent } from '../../../lib/api'
 
 // The audit trail.
 //

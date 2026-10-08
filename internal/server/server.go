@@ -18,8 +18,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/chuma-beep/mathua/internal/auth"
 	"github.com/chuma-beep/mathua/internal/admin"
+	"github.com/chuma-beep/mathua/internal/auth"
 	"github.com/chuma-beep/mathua/internal/concepts"
 	"github.com/chuma-beep/mathua/internal/diagnostic"
 	"github.com/chuma-beep/mathua/internal/engine"
@@ -3097,45 +3097,45 @@ func writeJSON(w http.ResponseWriter, v interface{}) {
 // dropped by default.
 const (
 	// Keys that report assessment state. These are the whole of what may cross.
-	assessmentKeyCorrect            = "correct"
-	assessmentKeyDone               = "done"
-	assessmentKeyFeedback           = "feedback"
-	assessmentKeyProgress           = "progress"
-	assessmentKeyReport             = "report"
-	assessmentKeyXP                 = "xp"
-	assessmentKeyNewStatus          = "new_status"
-	assessmentKeyRemedial           = "remedial"
-	assessmentKeyRetryAvailable     = "retry_available"
-	assessmentKeyRetakeAvailable    = "retake_available"
-	assessmentKeyConceptID          = "concept_id"
-	assessmentKeyConceptName        = "concept_name"
-	assessmentKeyQuestion           = "question"
-	assessmentKeyGradingType        = "grading_type"
-	assessmentKeyTimeLimit          = "time_limit_seconds"
-	assessmentKeyQuestionsTotal     = "questions_total"
-	assessmentKeyClosedBook         = "closed_book"
+	assessmentKeyCorrect         = "correct"
+	assessmentKeyDone            = "done"
+	assessmentKeyFeedback        = "feedback"
+	assessmentKeyProgress        = "progress"
+	assessmentKeyReport          = "report"
+	assessmentKeyXP              = "xp"
+	assessmentKeyNewStatus       = "new_status"
+	assessmentKeyRemedial        = "remedial"
+	assessmentKeyRetryAvailable  = "retry_available"
+	assessmentKeyRetakeAvailable = "retake_available"
+	assessmentKeyConceptID       = "concept_id"
+	assessmentKeyConceptName     = "concept_name"
+	assessmentKeyQuestion        = "question"
+	assessmentKeyGradingType     = "grading_type"
+	assessmentKeyTimeLimit       = "time_limit_seconds"
+	assessmentKeyQuestionsTotal  = "questions_total"
+	assessmentKeyClosedBook      = "closed_book"
 )
 
 // assessmentVerdictKeys is the allowlist, as a set for lookup. Declared
 // separately so the list above reads as documentation and this reads as data.
 var assessmentVerdictKeys = map[string]bool{
-	assessmentKeyCorrect:            true,
-	assessmentKeyDone:               true,
-	assessmentKeyFeedback:           true,
-	assessmentKeyProgress:           true,
-	assessmentKeyReport:             true,
-	assessmentKeyXP:                 true,
-	assessmentKeyNewStatus:          true,
-	assessmentKeyRemedial:           true,
-	assessmentKeyRetryAvailable:     true,
-	assessmentKeyRetakeAvailable:    true,
-	assessmentKeyConceptID:          true,
-	assessmentKeyConceptName:        true,
-	assessmentKeyQuestion:           true,
-	assessmentKeyGradingType:        true,
-	assessmentKeyTimeLimit:          true,
-	assessmentKeyQuestionsTotal:     true,
-	assessmentKeyClosedBook:         true,
+	assessmentKeyCorrect:         true,
+	assessmentKeyDone:            true,
+	assessmentKeyFeedback:        true,
+	assessmentKeyProgress:        true,
+	assessmentKeyReport:          true,
+	assessmentKeyXP:              true,
+	assessmentKeyNewStatus:       true,
+	assessmentKeyRemedial:        true,
+	assessmentKeyRetryAvailable:  true,
+	assessmentKeyRetakeAvailable: true,
+	assessmentKeyConceptID:       true,
+	assessmentKeyConceptName:     true,
+	assessmentKeyQuestion:        true,
+	assessmentKeyGradingType:     true,
+	assessmentKeyTimeLimit:       true,
+	assessmentKeyQuestionsTotal:  true,
+	assessmentKeyClosedBook:      true,
 }
 
 // assessmentGraderTokens are the only feedback strings allowed through, and
@@ -3193,7 +3193,6 @@ func writeAssessmentVerdict(w http.ResponseWriter, verdict map[string]interface{
 	}
 	writeJSON(w, safe)
 }
-
 
 func writeError(w http.ResponseWriter, msg string, code int) {
 	w.Header().Set("Content-Type", "application/json")

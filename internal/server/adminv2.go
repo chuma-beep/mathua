@@ -1,8 +1,8 @@
 package server
 
 import (
-	"encoding/json"
 	"database/sql"
+	"encoding/json"
 	"errors"
 	"log"
 	"net/http"
@@ -27,8 +27,7 @@ import (
 // permissions on one path (a GET that reads and a PATCH that writes). The middleware already
 // proved the floor permission; this is the stricter one.
 func hasPermission(r *http.Request, perm admin.Permission) bool {
-	_, role := actorFrom(r)
-	return admin.Permitted(role, perm)
+	return admin.Permitted(actorFrom(r).Role, perm)
 }
 
 // GET /api/admin/me — who the caller is to this surface, and what they may do. The frontend uses
@@ -38,20 +37,20 @@ func (s *Server) handleAdminMe(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "method not allowed", 405)
 		return
 	}
-	id, role := actorFrom(r)
-	perms := admin.Permissions(role)
+	a := actorFrom(r)
+	perms := admin.Permissions(a.Role)
 	names := make([]string, 0, len(perms))
 	for _, p := range perms {
 		names = append(names, string(p))
 	}
 	assignable := make([]string, 0)
-	for _, rr := range admin.AssignableRoles(role) {
+	for _, rr := range admin.AssignableRoles(a.Role) {
 		assignable = append(assignable, string(rr))
 	}
 	writeJSON(w, map[string]interface{}{
-		"id":              id,
-		"role":            string(role),
-		"permissions":     names,
+		"id":               a.ID,
+		"role":             string(a.Role),
+		"permissions":      names,
 		"assignable_roles": assignable,
 	})
 }
@@ -138,8 +137,7 @@ func (s *Server) handleAdminReport(w http.ResponseWriter, r *http.Request) {
 			writeError(w, "a resolution is required when resolving or dismissing", 400)
 			return
 		}
-		actorID, _ := actorFrom(r)
-		report, err := s.repo.UpdateReportStatusAudited(actorID, id, status, resolution)
+		report, err := s.repo.UpdateReportStatusAudited(actorFrom(r).ID, id, status, resolution)
 		switch {
 		case errors.Is(err, storage.ErrReportUnchanged):
 			writeJSON(w, map[string]interface{}{"report": report, "changed": false})
@@ -216,8 +214,8 @@ func (s *Server) handleAdminInvitations(w http.ResponseWriter, r *http.Request) 
 			writeError(w, "role must be moderator, admin or owner", 400)
 			return
 		}
-		actorID, actorRole := actorFrom(r)
-		if !admin.CanAssign(actorRole, storage.RoleStudent, role) {
+		a := actorFrom(r)
+		if !admin.CanAssign(a.Role, storage.RoleStudent, role) {
 			writeError(w, "you cannot invite someone to that role", 403)
 			return
 		}
@@ -230,7 +228,7 @@ func (s *Server) handleAdminInvitations(w http.ResponseWriter, r *http.Request) 
 		id, err := s.repo.CreateAdminInvitation(storage.AdminInvitation{
 			Email:     email,
 			Role:      role,
-			InvitedBy: actorID,
+			InvitedBy: a.ID,
 			CreatedAt: now.Format(time.RFC3339),
 			ExpiresAt: now.Add(admin.InvitationTTL).Format(time.RFC3339),
 		}, hash)
@@ -241,7 +239,7 @@ func (s *Server) handleAdminInvitations(w http.ResponseWriter, r *http.Request) 
 		// The audit records that the invitation was created, and to whom, without the token.
 		afterJSON, _ := json.Marshal(map[string]string{"email": email, "role": string(role)})
 		_, _ = s.repo.RecordAdminAudit(storage.AdminAuditRecord{
-			ActorID: actorID, Action: storage.ActionAdminInviteCreate,
+			ActorID: a.ID, Action: storage.ActionAdminInviteCreate,
 			EntityType: "invitation", EntityID: strconv.FormatInt(id, 10),
 			AfterJSON: string(afterJSON),
 			CreatedAt: now.Format(time.RFC3339),
@@ -276,8 +274,7 @@ func (s *Server) handleAdminInvitationRevoke(w http.ResponseWriter, r *http.Requ
 		writeError(w, "invalid invitation id", 400)
 		return
 	}
-	actorID, _ := actorFrom(r)
-	inv, err := s.repo.RevokeAdminInvitation(actorID, id)
+	inv, err := s.repo.RevokeAdminInvitation(actorFrom(r).ID, id)
 	if errors.Is(err, sql.ErrNoRows) {
 		writeError(w, "invitation not found or already settled", 404)
 		return
@@ -301,7 +298,7 @@ func (s *Server) handleAdminInvitationAccept(w http.ResponseWriter, r *http.Requ
 		writeError(w, "method not allowed", 405)
 		return
 	}
-	studentID, _ := actorFrom(r)
+	studentID := actorFrom(r).ID
 	if studentID == "" {
 		writeError(w, "authentication required", 401)
 		return

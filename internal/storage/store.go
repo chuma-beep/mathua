@@ -235,19 +235,19 @@ type QuizCompletion struct {
 // fields and leaves the row in place. Nothing in the system deletes one, because "what was
 // reported and what we decided" is the evidence a moderation log exists to hold.
 type QuestionReport struct {
-	ID          int64     `json:"id"`
-	ReporterID  string    `json:"reporter_id"`
-	ConceptID   string    `json:"concept_id"`
-	Kind        string    `json:"kind"` // question | explanation | lesson_body | worked_example | diagram
-	Question    string    `json:"question"`
-	Expected    string    `json:"expected"`
-	Explanation string    `json:"explanation"`
-	LessonID    string    `json:"lesson_id"`
-	Source      string    `json:"source"`
-	SessionID   string    `json:"session_id"`
-	AttemptID   string    `json:"attempt_id"`
-	Reason      string    `json:"reason"` // wrong_answer | bad_explanation | unclear | formatting | other
-	Detail      string    `json:"detail"`
+	ID          int64  `json:"id"`
+	ReporterID  string `json:"reporter_id"`
+	ConceptID   string `json:"concept_id"`
+	Kind        string `json:"kind"` // question | explanation | lesson_body | worked_example | diagram
+	Question    string `json:"question"`
+	Expected    string `json:"expected"`
+	Explanation string `json:"explanation"`
+	LessonID    string `json:"lesson_id"`
+	Source      string `json:"source"`
+	SessionID   string `json:"session_id"`
+	AttemptID   string `json:"attempt_id"`
+	Reason      string `json:"reason"` // wrong_answer | bad_explanation | unclear | formatting | other
+	Detail      string `json:"detail"`
 	// Status is the moderation state: open | reviewing | resolved | dismissed.
 	Status string `json:"status"`
 	// Resolution is the moderator's reason for the decision, written when the report leaves
@@ -280,7 +280,6 @@ type AdminInvitation struct {
 	RevokedAt  string `json:"revoked_at"`
 	RevokedBy  string `json:"revoked_by"`
 }
-
 
 // ErrRoleUnchanged is returned when an account already holds the requested role.
 //
