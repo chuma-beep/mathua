@@ -3,6 +3,7 @@ package storage
 import (
 	"crypto/rand"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"strings"
 	"time"
@@ -247,6 +248,121 @@ type QuestionReport struct {
 	CreatedAt   time.Time `json:"created_at"`
 }
 
+// ErrRoleUnchanged is returned when an account already holds the requested role.
+//
+// Its own sentinel rather than a success, because the caller has to answer two different
+// questions: did the role change (no), and is there an event for it (also no). Reporting
+// success with a changed flag would work, but the audit write is now inside the same
+// transaction as the mutation, so "nothing happened" has to be a real outcome rather than a
+// return value the caller can forget to check.
+var ErrRoleUnchanged = errors.New("account already has that role")
+
+// RoleChange is what one audited role change did.
+type RoleChange struct {
+	// Changed is false only when the account already held the requested role, which is also the
+	// case that produces no audit event.
+	Changed bool
+	// Action names the audit event this change wrote, or "" when it wrote none. Carried on the
+	// result so a caller can confirm which event to expect without re-reading the log — and so
+	// the CLI can print it rather than reconstructing the name from the requested role.
+	Action string
+	Before AdminUser
+	After  AdminUser
+}
+
+// ErrLastAdmin is returned when a demotion would leave the system with no administrator.
+//
+// It is a sentinel rather than a bool so a caller cannot confuse "refused" with "no such
+// user" — the two are reported differently, and the first one is a rule while the second is
+// a lookup miss.
+var ErrLastAdmin = errors.New("cannot demote the last administrator")
+
+// Role is what an account may do beyond learning. Two values, no more.
+//
+// It lives on the account and nowhere else. It is not derivable from XP, mastery, level,
+// curriculum progress, email domain or anything the client sends, because every one of those
+// is either something a learner controls or something they can change without meaning to. The
+// only thing that grants it is an explicit write by an administrator or the operator.
+type Role string
+
+const (
+	RoleStudent Role = "student"
+	RoleAdmin   Role = "admin"
+)
+
+// NormalizeRole maps any stored or supplied string to a role, defaulting to student.
+//
+// Anything unrecognised becomes `student`, which is the only safe direction: a future role
+// name, a typo, a hand-edited database cell and an empty column all read as "no privilege"
+// rather than as "some privilege nobody has audited yet". Callers that need to reject bad
+// input use ParseRole.
+func NormalizeRole(s string) Role {
+	if Role(s) == RoleAdmin {
+		return RoleAdmin
+	}
+	return RoleStudent
+}
+
+// ParseRole is NormalizeRole for input that must be one of the two values exactly.
+//
+// Role assignment goes through this, so a PATCH body carrying "Admin", "ADMIN" or "root" is
+// rejected rather than silently becoming something. Silently accepting it would mean the
+// response said one thing and the row said another.
+func ParseRole(s string) (Role, bool) {
+	switch Role(s) {
+	case RoleStudent:
+		return RoleStudent, true
+	case RoleAdmin:
+		return RoleAdmin, true
+	}
+	return RoleStudent, false
+}
+
+// AdminUser is the non-sensitive account projection administration reads.
+//
+// Deliberately not `Student`. That struct carries PasswordHash, ShareToken and the learner's
+// XP and streak, and an admin listing is not a place any of those should be reachable — not
+// because an admin has no business seeing them, but because a projection that cannot express a
+// field cannot leak it by a later edit. Everything here is something an administrator would
+// be shown anyway, and nothing here is derived from learning state.
+type AdminUser struct {
+	ID        string `json:"id"`
+	Name      string `json:"name"`
+	Username  string `json:"username"`
+	Email     string `json:"email"`
+	Role      Role   `json:"role"`
+	CreatedAt string `json:"created_at"`
+	// HasPassword distinguishes "signed up with a password" from "arrived through an OAuth
+	// provider". It is a boolean about a fact, never the hash.
+	HasPassword bool `json:"has_password"`
+}
+
+// AdminAuditRecord is one privileged mutation, written once and never updated.
+//
+// ActorID is deliberately not a foreign key. The point of an audit trail is that it survives
+// the account being deleted, and a foreign key to `students` would delete the evidence along
+// with the subject. The actor's id is kept as text so the record still names who did it.
+type AdminAuditRecord struct {
+	ID         int64  `json:"id"`
+	ActorID    string `json:"actor_id"`
+	Action     string `json:"action"`
+	EntityType string `json:"entity_type"`
+	EntityID   string `json:"entity_id"`
+	// BeforeJSON and AfterJSON are the entity's non-sensitive state either side of the change,
+	// or "" when there was none. They are built from AdminUser, never from Student, so a
+	// password hash cannot reach them by accident.
+	BeforeJSON string `json:"before_json"`
+	AfterJSON  string `json:"after_json"`
+	CreatedAt  string `json:"created_at"`
+}
+
+// Admin action names. A closed set on purpose: the audit log is a vocabulary, and a
+// free-text action column turns into prose nobody can filter on.
+const (
+	ActionAdminPromoteUser = "ADMIN_PROMOTE_USER"
+	ActionAdminDemoteUser  = "ADMIN_DEMOTE_USER"
+)
+
 // Repository interface
 
 type Repository interface {
@@ -357,6 +473,71 @@ type Repository interface {
 	CreateReport(r QuestionReport) (int64, error)
 	ListReports(status string, limit, offset int) ([]QuestionReport, error)
 	UpdateReportStatus(id int64, status string) error
+
+	// ── Administration ────────────────────────────────────────────────────
+	//
+	// Every method here sits behind the server's admin boundary; the repository is not the
+	// security boundary and does no authorization of its own.
+
+	// GetStudentRole is the only way to learn a role.
+	//
+	// It is a separate call rather than a field on Student on purpose. Every existing read of
+	// Student selects a fixed column list in two stores, so adding a column there meant editing
+	// roughly twenty query strings to keep them in sync — and a missed one is a scan error at
+	// runtime, in whichever endpoint nobody was testing. Worse, a Role field that is zero on
+	// most Student values reads as `student` when it has not been loaded at all, which is the
+	// worst possible default for a privilege field: forgetting to populate it looks exactly
+	// like correctly concluding that someone is a learner.
+	GetStudentRole(studentID string) (Role, error)
+
+	// SetStudentRole writes a role directly, with no last-admin protection. Callers that can
+	// be reached from the network must use SetRoleAudited instead; this exists for the
+	// operator's bootstrap, which is trusted and which must be able to make the very first
+	// promotion, and for tests arranging a starting state.
+	SetStudentRole(studentID string, role Role) error
+
+	// SetRoleAudited changes one account's role and records the event in a single transaction.
+	//
+	// This is the network-facing path, and the transaction is the point. Applying the mutation
+	// and then writing the audit row leaves a window in which a change exists with no event; an
+	// administrator whose own promotion failed to be recorded has an action nobody can account
+	// for. Here the insert is part of the same unit of work, so either both land or neither
+	// does — a failing audit insert rolls the role back rather than orphaning it.
+	//
+	// Returns ErrLastAdmin if the demotion would leave no administrator, ErrRoleUnchanged if the
+	// account already holds the requested role (and writes nothing), sql.ErrNoRows if there is
+	// no such account.
+	SetRoleAudited(actorID, studentID string, role Role) (RoleChange, error)
+
+	// DemoteAdminSafely demotes one admin to student, and refuses if that would leave the
+	// system with no administrator.
+	//
+	// The check and the write are one statement. Reading a count and then writing is a race:
+	// two administrators demoting each other at the same moment both read two, and the system
+	// reaches zero. Making the condition part of the UPDATE means the second one affects no
+	// rows. Returns ErrLastAdmin when it refused.
+	DemoteAdminSafely(studentID string) error
+
+	// CountAdmins is how many accounts may reach the admin surface right now.
+	CountAdmins() (int, error)
+
+	// SearchAdminUsers finds accounts by email, id, username or name. An empty query lists
+	// newest-first. Password hashes, share tokens and learning state are not selected, so
+	// they cannot be returned even by a bug.
+	SearchAdminUsers(query string, limit, offset int) ([]AdminUser, error)
+
+	// CountAdminUsers is the total number of accounts, for the overview.
+	CountAdminUsers() (int, error)
+
+	// CountStoredQuestions is how many question rows exist, for the overview.
+	CountStoredQuestions() (int, error)
+
+	// RecordAdminAudit appends one event. There is no update and no delete, on either store or
+	// through any route: the log is append-only because an audit trail you can edit is not one.
+	RecordAdminAudit(rec AdminAuditRecord) (int64, error)
+
+	// ListAdminAudit returns the most recent events first.
+	ListAdminAudit(limit, offset int) ([]AdminAuditRecord, error)
 
 	CreateIdentity(provider, providerID, studentID, email string, emailVerified bool) error
 	FindStudentByIdentity(provider, providerID string) (*Student, error)

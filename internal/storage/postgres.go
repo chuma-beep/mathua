@@ -2,6 +2,7 @@ package storage
 
 import (
 	"database/sql"
+	"encoding/json"
 	"fmt"
 	"log"
 	"sort"
@@ -36,7 +37,8 @@ CREATE TABLE IF NOT EXISTS students (
     email                TEXT NOT NULL DEFAULT '',
     google_id            TEXT NOT NULL DEFAULT '',
     avatar_url           TEXT NOT NULL DEFAULT '',
-    email_verified       INTEGER NOT NULL DEFAULT 0
+    email_verified       INTEGER NOT NULL DEFAULT 0,
+    role                 TEXT NOT NULL DEFAULT 'student'
 );
 
 CREATE TABLE IF NOT EXISTS concept_progress (
@@ -176,6 +178,24 @@ CREATE TABLE IF NOT EXISTS schema_migrations (
     version    INTEGER PRIMARY KEY,
     applied_at TEXT NOT NULL DEFAULT (now()::text)
 );
+
+-- Administration. actor_id is deliberately not a foreign key to students(id): a trail that is
+-- deleted along with the account it records is not a trail. before_json/after_json carry the
+-- non-sensitive AdminUser projection only, so a credential cannot reach them.
+CREATE TABLE IF NOT EXISTS admin_audit (
+    id          BIGSERIAL PRIMARY KEY,
+    actor_id    TEXT NOT NULL DEFAULT '',
+    action      TEXT NOT NULL,
+    entity_type TEXT NOT NULL DEFAULT '',
+    entity_id   TEXT NOT NULL DEFAULT '',
+    before_json TEXT NOT NULL DEFAULT '',
+    after_json  TEXT NOT NULL DEFAULT '',
+    created_at  TEXT NOT NULL DEFAULT (now()::text)
+);
+
+CREATE INDEX IF NOT EXISTS idx_admin_audit_created ON admin_audit(created_at);
+CREATE INDEX IF NOT EXISTS idx_admin_audit_actor   ON admin_audit(actor_id);
+CREATE INDEX IF NOT EXISTS idx_admin_audit_entity   ON admin_audit(entity_type, entity_id);
 `
 
 func NewPostgresStore(dsn string) (*PostgresStore, error) {
@@ -239,6 +259,11 @@ func pgAuthMigrate(db *sql.DB) error {
 		// plausible-looking number would be fabricating evidence.
 		"ALTER TABLE attempts ADD COLUMN IF NOT EXISTS difficulty DOUBLE PRECISION",
 		"ALTER TABLE active_sessions ADD COLUMN IF NOT EXISTS difficulty DOUBLE PRECISION",
+		// The administrative role. NOT NULL DEFAULT 'student' migrates every existing account
+		// to a learner, which is the only safe direction: nothing in a pre-role database
+		// carries evidence about who was administering anything, because it could not.
+		"ALTER TABLE students ADD COLUMN IF NOT EXISTS role TEXT NOT NULL DEFAULT 'student'",
+		"CREATE INDEX IF NOT EXISTS idx_students_role ON students(role)",
 		`CREATE TABLE IF NOT EXISTS avatar_images (
 			student_id TEXT PRIMARY KEY REFERENCES students(id) ON DELETE CASCADE,
 			content_type TEXT NOT NULL,
@@ -1793,4 +1818,251 @@ func (s *PostgresStore) UpdateReportStatus(id int64, status string) error {
 		return fmt.Errorf("report not found")
 	}
 	return nil
+}
+
+// ── Administration (Postgres) ───────────────────────────────────────────────
+
+const pgAdminUserColumns = `id, name, username, email, role, created_at, (password_hash IS NOT NULL AND password_hash != '')`
+
+func (s *PostgresStore) GetStudentRole(studentID string) (Role, error) {
+	var raw string
+	err := s.db.QueryRow("SELECT role FROM students WHERE id = $1", studentID).Scan(&raw)
+	if err == sql.ErrNoRows {
+		// See the SQLite store: a role lookup runs on every authenticated request, so a deleted
+		// id must read as "no privilege" rather than fail the middleware.
+		return RoleStudent, nil
+	}
+	if err != nil {
+		return RoleStudent, err
+	}
+	return NormalizeRole(raw), nil
+}
+
+func (s *PostgresStore) SetStudentRole(studentID string, role Role) error {
+	res, err := s.db.Exec("UPDATE students SET role = $1 WHERE id = $2", string(role), studentID)
+	if err != nil {
+		return fmt.Errorf("set student role: %w", err)
+	}
+	if n, _ := res.RowsAffected(); n == 0 {
+		return sql.ErrNoRows
+	}
+	return nil
+}
+
+// DemoteAdminSafely mirrors the SQLite implementation statement for statement, so the two
+// stores cannot disagree about what the last-admin rule is. See the SQLite comment for why the
+// count is inside the UPDATE rather than a read before it.
+func (s *PostgresStore) DemoteAdminSafely(studentID string) error {
+	res, err := s.db.Exec(
+		`UPDATE students SET role = 'student'
+		 WHERE id = $1 AND role = 'admin' AND (SELECT COUNT(*) FROM students WHERE role = 'admin') > 1`,
+		studentID)
+	if err != nil {
+		return fmt.Errorf("demote admin: %w", err)
+	}
+	n, _ := res.RowsAffected()
+	if n > 0 {
+		return nil
+	}
+	role, err := s.GetStudentRole(studentID)
+	if err != nil {
+		return err
+	}
+	if role != RoleAdmin {
+		return sql.ErrNoRows
+	}
+	return ErrLastAdmin
+}
+
+func (s *PostgresStore) CountAdmins() (int, error) {
+	var n int
+	err := s.db.QueryRow("SELECT COUNT(*) FROM students WHERE role = 'admin'").Scan(&n)
+	return n, err
+}
+
+func (s *PostgresStore) CountAdminUsers() (int, error) {
+	var n int
+	err := s.db.QueryRow("SELECT COUNT(*) FROM students").Scan(&n)
+	return n, err
+}
+
+func (s *PostgresStore) CountStoredQuestions() (int, error) {
+	var n int
+	err := s.db.QueryRow("SELECT COUNT(*) FROM questions").Scan(&n)
+	return n, err
+}
+
+// adminQueryerPG is the same indirection the SQLite store has, so its projection read can run
+// inside SetRoleAudited's transaction instead of on the pool. The two stores are kept at
+// parity deliberately: a rule that only one of them enforces is a rule a Postgres deployment
+// does not have.
+type adminQueryerPG interface {
+	Query(query string, args ...interface{}) (*sql.Rows, error)
+}
+
+// SearchAdminUsers escapes LIKE metacharacters the same way the SQLite store does. Postgres
+// would also treat a backslash as the default escape character, but it is spelled explicitly
+// here so the two stores cannot disagree about which character escapes what.
+func (s *PostgresStore) SearchAdminUsers(query string, limit, offset int) ([]AdminUser, error) {
+	return searchAdminUsersPG(s.db, query, limit, offset)
+}
+
+func searchAdminUsersPG(q adminQueryerPG, query string, limit, offset int) ([]AdminUser, error) {
+	term := strings.TrimSpace(query)
+	var (
+		query_ string
+		args   []interface{}
+	)
+	if term == "" {
+		query_ = `SELECT ` + pgAdminUserColumns + ` FROM students ORDER BY created_at DESC, id DESC LIMIT $1 OFFSET $2`
+		args = []interface{}{limit, offset}
+	} else {
+		needle := "%" + escapeLike(term) + "%"
+		query_ = `SELECT ` + pgAdminUserColumns + ` FROM students
+		 WHERE id LIKE $1 ESCAPE '\' OR email LIKE $2 ESCAPE '\'
+		    OR username LIKE $3 ESCAPE '\' OR name LIKE $4 ESCAPE '\'
+		 ORDER BY created_at DESC, id DESC LIMIT $5 OFFSET $6`
+		args = []interface{}{needle, needle, needle, needle, limit, offset}
+	}
+
+	rows, err := q.Query(query_, args...)
+	if err != nil {
+		return nil, fmt.Errorf("search admin users: %w", err)
+	}
+	defer rows.Close()
+	out := []AdminUser{}
+	for rows.Next() {
+		var u AdminUser
+		var name, username, email, role, createdAt sql.NullString
+		var hasPw bool
+		if err := rows.Scan(&u.ID, &name, &username, &email, &role, &createdAt, &hasPw); err != nil {
+			return nil, err
+		}
+		u.Name = name.String
+		u.Username = username.String
+		u.Email = email.String
+		u.Role = NormalizeRole(role.String)
+		u.CreatedAt = createdAt.String
+		u.HasPassword = hasPw
+		out = append(out, u)
+	}
+	return out, rows.Err()
+}
+
+func (s *PostgresStore) RecordAdminAudit(rec AdminAuditRecord) (int64, error) {
+	res, err := s.db.Exec(
+		`INSERT INTO admin_audit (actor_id, action, entity_type, entity_id, before_json, after_json, created_at)
+		 VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+		rec.ActorID, rec.Action, rec.EntityType, rec.EntityID,
+		rec.BeforeJSON, rec.AfterJSON, formatReportTime(parseReportTime(rec.CreatedAt)))
+	if err != nil {
+		return 0, fmt.Errorf("record admin audit: %w", err)
+	}
+	return res.LastInsertId()
+}
+
+func (s *PostgresStore) ListAdminAudit(limit, offset int) ([]AdminAuditRecord, error) {
+	rows, err := s.db.Query(
+		`SELECT id, actor_id, action, entity_type, entity_id, before_json, after_json, created_at
+		 FROM admin_audit ORDER BY id DESC LIMIT $1 OFFSET $2`, limit, offset)
+	if err != nil {
+		return nil, fmt.Errorf("list admin audit: %w", err)
+	}
+	defer rows.Close()
+	out := []AdminAuditRecord{}
+	for rows.Next() {
+		var r AdminAuditRecord
+		var createdAt sql.NullString
+		if err := rows.Scan(&r.ID, &r.ActorID, &r.Action, &r.EntityType, &r.EntityID,
+			&r.BeforeJSON, &r.AfterJSON, &createdAt); err != nil {
+			return nil, err
+		}
+		r.CreatedAt = createdAt.String
+		out = append(out, r)
+	}
+	return out, rows.Err()
+}
+
+// adminUserByIDPG is the exact-id read, mirroring adminUserByIDSQLite.
+func adminUserByIDPG(q adminQueryerPG, id string) (*AdminUser, error) {
+	rows, err := searchAdminUsersPG(q, id, 200, 0)
+	if err != nil {
+		return nil, err
+	}
+	for i := range rows {
+		if rows[i].ID == id {
+			return &rows[i], nil
+		}
+	}
+	return nil, nil
+}
+
+// SetRoleAudited mirrors the SQLite implementation statement for statement, including the
+// transaction boundary, so a deployment on Postgres gets the same guarantee: a role change and
+// its audit event are one unit of work.
+func (s *PostgresStore) SetRoleAudited(actorID, studentID string, role Role) (RoleChange, error) {
+	tx, err := s.db.Begin()
+	if err != nil {
+		return RoleChange{}, fmt.Errorf("begin role change: %w", err)
+	}
+	defer func() { _ = tx.Rollback() }()
+
+	before, err := adminUserByIDPG(tx, studentID)
+	if err != nil {
+		return RoleChange{}, fmt.Errorf("read user before: %w", err)
+	}
+	if before == nil {
+		return RoleChange{}, sql.ErrNoRows
+	}
+	if before.Role == role {
+		return RoleChange{Before: *before, After: *before, Changed: false}, ErrRoleUnchanged
+	}
+
+	action := ActionAdminDemoteUser
+	if role == RoleAdmin {
+		action = ActionAdminPromoteUser
+		if _, err := tx.Exec("UPDATE students SET role = $1 WHERE id = $2", string(role), studentID); err != nil {
+			return RoleChange{}, fmt.Errorf("promote: %w", err)
+		}
+	} else {
+		res, err := tx.Exec(
+			`UPDATE students SET role = 'student'
+			 WHERE id = $1 AND role = 'admin' AND (SELECT COUNT(*) FROM students WHERE role = 'admin') > 1`,
+			studentID)
+		if err != nil {
+			return RoleChange{}, fmt.Errorf("demote: %w", err)
+		}
+		if n, _ := res.RowsAffected(); n == 0 {
+			return RoleChange{}, ErrLastAdmin
+		}
+	}
+
+	after, err := adminUserByIDPG(tx, studentID)
+	if err != nil {
+		return RoleChange{}, fmt.Errorf("read user after: %w", err)
+	}
+	if after == nil {
+		return RoleChange{}, sql.ErrNoRows
+	}
+
+	beforeJSON, err := json.Marshal(before)
+	if err != nil {
+		return RoleChange{}, fmt.Errorf("encode before: %w", err)
+	}
+	afterJSON, err := json.Marshal(after)
+	if err != nil {
+		return RoleChange{}, fmt.Errorf("encode after: %w", err)
+	}
+	if _, err := tx.Exec(
+		`INSERT INTO admin_audit (actor_id, action, entity_type, entity_id, before_json, after_json, created_at)
+		 VALUES ($1, $2, 'user', $3, $4, $5, $6)`,
+		actorID, action, studentID, string(beforeJSON), string(afterJSON),
+		time.Now().UTC().Format(time.RFC3339)); err != nil {
+		return RoleChange{}, fmt.Errorf("record audit: %w", err)
+	}
+
+	if err := tx.Commit(); err != nil {
+		return RoleChange{}, fmt.Errorf("commit role change: %w", err)
+	}
+	return RoleChange{Before: *before, After: *after, Changed: true, Action: action}, nil
 }
