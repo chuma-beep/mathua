@@ -211,7 +211,9 @@ export default function OnboardPage() {
       const elapsed = Math.max(0.5, (Date.now() - (questionShownAt.current ?? Date.now())) / 1000)
       const data = await submitGoalAnswer(sessionId.current, conceptId.current, answer, elapsed, dontKnow)
       const correct = data.correct || false
-      const feedback = data.feedback || (correct ? 'Correct!' : 'Not quite.')
+      // An admitted unknown is not a wrong answer, so it does not get the wrong answer's words.
+      // This step renders the feedback and no separate verdict line, so the label goes here.
+      const feedback = dontKnow ? 'No answer' : data.feedback || (correct ? 'Correct!' : 'Not quite.')
       setAccuracy(prev => ({ correct: prev.correct + (correct ? 1 : 0), total: prev.total + 1 }))
       setLastResult({ correct, feedback })
       setRetryAvailable(data.done ? false : data.retry_available === true)

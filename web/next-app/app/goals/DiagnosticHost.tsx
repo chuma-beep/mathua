@@ -68,7 +68,10 @@ export default function DiagnosticHost({
   // Verdict only. A diagnostic measures prior knowledge, so the response no longer carries the
   // worked solution and this holds no field for one. `conceptId` is the concept just answered,
   // so a miss can route to Learn — the only surface that explains.
-  const [lastResult, setLastResult] = useState<{ correct: boolean; feedback: string; conceptId: string } | null>(null)
+  //
+  // `dontKnow` is what the learner did, not what they scored: the engine still records an admitted
+  // unknown as negative evidence, but the verdict must not read as "you were close and wrong".
+  const [lastResult, setLastResult] = useState<{ correct: boolean; feedback: string; conceptId: string; dontKnow?: boolean } | null>(null)
   const [accuracy, setAccuracy] = useState<{ correct: number; total: number }>({ correct: 0, total: 0 })
   const [submitError, setSubmitError] = useState<SubmitError | null>(null)
   const [planError, setPlanError] = useState('')
@@ -196,12 +199,14 @@ export default function DiagnosticHost({
       const elapsed = 5.0
       const data = await submitGoalAnswer(sessionId.current, conceptId.current, answer, elapsed, dontKnow)
       const correct = data.correct || false
-      const feedback = data.feedback || (correct ? 'Correct!' : 'Not quite.')
+      // An admitted unknown is not a wrong answer, so it does not get the wrong answer's words.
+      // Empty here, because the verdict line states it; the engine's accounting is untouched.
+      const feedback = dontKnow ? '' : data.feedback || (correct ? 'Correct!' : 'Not quite.')
       setAccuracy(prev => ({
         correct: prev.correct + (correct ? 1 : 0),
         total: prev.total + 1,
       }))
-      setLastResult({ correct, feedback, conceptId: conceptId.current })
+      setLastResult({ correct, feedback, conceptId: conceptId.current, dontKnow })
       setRetryAvailable(data.done ? false : data.retry_available === true)
       setRetryConcept(data.done ? '' : conceptId.current)
       if (data.progress && data.progress.cover_size > 0) {
@@ -414,7 +419,7 @@ export default function DiagnosticHost({
           ) : (
             <div className="animate-fadeIn text-center">
               <p className={`text-base font-medium mb-2 ${lastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}`}>
-                {lastResult.correct ? '✓ Correct!' : '✗ Not quite'}
+                {lastResult.dontKnow ? 'No answer' : lastResult.correct ? '✓ Correct!' : '✗ Not quite'}
               </p>
               <KatexContent className="text-mathua-secondary text-sm">{lastResult.feedback}</KatexContent>
               {/* A miss offers the teaching surface as a deliberate next step, not as the answer.

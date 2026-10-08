@@ -463,7 +463,18 @@ describe('DiagnosticHost manual advance', () => {
     expect(await findAnswerField()).toBe(document.activeElement)
   })
 
-  it("I don't know submits empty with the flag and lands on feedback", async () => {
+  it("I don't know submits empty with the flag and is labelled No answer, not Not quite", async () => {
+    // The server sends no feedback for an admitted unknown — the boundary strips it — so the
+    // label is the verdict, and it must not borrow the wrong answer's words.
+    vi.mocked(submitGoalAnswer).mockResolvedValueOnce({
+      done: false,
+      correct: false,
+      concept_id: 'c2',
+      concept_name: 'Q2 concept',
+      question: 'Q2 text',
+      grading_type: 'numeric',
+      progress: { ...PROG0, answered: 1, cover_done: 1 },
+    })
     render(
       <DiagnosticHost
         startIds={[]}
@@ -478,7 +489,8 @@ describe('DiagnosticHost manual advance', () => {
     expect(screen.getByRole('button', { name: 'Check Answer' })).toBeDisabled()
     fireEvent.click(screen.getByRole('button', { name: "I don't know" }))
 
-    await screen.findByText('Nice!')
+    expect(await screen.findByText('No answer')).toBeInTheDocument()
+    expect(screen.queryByText(/Not quite/)).toBeNull()
     expect(vi.mocked(submitGoalAnswer)).toHaveBeenCalledWith(
       's1',
       'c1',
@@ -659,7 +671,17 @@ describe('QuizHost manual advance', () => {
     expect(vi.mocked(skipQuizQuestion)).toHaveBeenCalledTimes(1)
   })
 
-  it("QuizHost I don't know submits empty with the flag", async () => {
+  it("QuizHost I don't know submits empty with the flag and is labelled No answer", async () => {
+    vi.mocked(submitQuizAnswer).mockResolvedValueOnce({
+      done: false,
+      correct: false,
+      xp: 0,
+      concept_id: 'c2',
+      concept_name: 'Q2 quiz',
+      question: 'Quiz Q2 text',
+      grading_type: 'numeric',
+      time_limit_seconds: 30,
+    })
     render(<QuizHost />)
     fireEvent.click(screen.getByRole('button', { name: 'Start quiz →' }))
     await screen.findByText('Quiz Q1 text')
@@ -667,7 +689,8 @@ describe('QuizHost manual advance', () => {
     expect(screen.getByRole('button', { name: 'Check Answer' })).toBeDisabled()
     fireEvent.click(screen.getByRole('button', { name: "I don't know" }))
 
-    await screen.findByText('Good!')
+    expect(await screen.findByText('No answer')).toBeInTheDocument()
+    expect(screen.queryByText(/Not quite/)).toBeNull()
     expect(vi.mocked(submitQuizAnswer)).toHaveBeenCalledWith(
       'q1',
       'c1',

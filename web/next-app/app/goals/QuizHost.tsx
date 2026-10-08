@@ -41,7 +41,10 @@ export default function QuizHost() {
   // Verdict only. A test verifies knowledge and does not teach, so the response carries no
   // solution and this holds none: `conceptId` is here so a miss can hand the learner to Learn,
   // which is the one surface allowed to explain.
-  const [quizLastResult, setQuizLastResult] = useState<{ correct: boolean; feedback: string; conceptId: string; xp?: number } | null>(null)
+  //
+  // `dontKnow` is what the learner did, not what they scored: an admitted unknown still counts as
+  // a miss, but the verdict must not read as "you were close and wrong".
+  const [quizLastResult, setQuizLastResult] = useState<{ correct: boolean; feedback: string; conceptId: string; xp?: number; dontKnow?: boolean } | null>(null)
   const [quizAccuracy, setQuizAccuracy] = useState({ correct: 0, total: 0 })
   const [quizClosedBook, setQuizClosedBook] = useState(false)
   const [quizQuestionsTotal, setQuizQuestionsTotal] = useState(0)
@@ -115,9 +118,10 @@ export default function QuizHost() {
       const elapsed = Math.max(0.5, (Date.now() - (quizShownAt.current ?? Date.now())) / 1000)
       const data = await submitQuizAnswer(quizSessionId.current, quizConceptId.current, answer, elapsed, dontKnow)
       const correct = data.correct || false
-      const feedback = data.feedback || (correct ? 'Correct!' : 'Not quite.')
+      // An admitted unknown is not a wrong answer, so it does not get the wrong answer's words.
+      const feedback = dontKnow ? '' : data.feedback || (correct ? 'Correct!' : 'Not quite.')
       setQuizAccuracy(prev => ({ correct: prev.correct + (correct ? 1 : 0), total: prev.total + 1 }))
-      setQuizLastResult({ correct, feedback, conceptId: quizConceptId.current, xp: data.xp })
+      setQuizLastResult({ correct, feedback, conceptId: quizConceptId.current, xp: data.xp, dontKnow })
       if (data.remedial?.length) {
         setQuizRemedial(prev => Array.from(new Set([...prev, ...(data.remedial ?? [])])))
       }
@@ -335,7 +339,7 @@ export default function QuizHost() {
             </>
           ) : (
             <div className="animate-fadeIn">
-              <p className={`text-base font-medium mb-2 ${quizLastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}`}>{quizLastResult.correct ? '✓ Correct!' : '✗ Not quite'}</p>
+              <p className={`text-base font-medium mb-2 ${quizLastResult.correct ? 'text-mathua-green' : 'text-mathua-red'}`}>{quizLastResult.dontKnow ? 'No answer' : quizLastResult.correct ? '✓ Correct!' : '✗ Not quite'}</p>
               {/* Assessment state, and nothing else. This used to render the served worked
                   solution and a one-sentence diagnosis on both verdicts; the diagnosis was
                   answer-revealing on its own ("you are exactly one away"), and the solution
