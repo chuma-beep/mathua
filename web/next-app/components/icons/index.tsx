@@ -39,6 +39,7 @@ import {
   PencilIcon,
   PlayIcon,
   SettingsIcon,
+  ShieldIcon,
   SunMoonIcon,
   TrophyIcon,
   UserIcon,
@@ -122,6 +123,10 @@ export const Pause = wrap(PauseIcon as never)
 export const Pencil = wrap(PencilIcon as never)
 export const Play = wrap(PlayIcon as never)
 export const Settings = wrap(SettingsIcon as never)
+// The administrative entry in the profile rail. A shield rather than a key or a gear: the gear
+// already means Settings, and a key would imply this is how you get in rather than what is
+// behind it.
+export const Shield = wrap(ShieldIcon as never)
 export const SunMoon = wrap(SunMoonIcon as never)
 export const Trophy = wrap(TrophyIcon as never)
 export const User = wrap(UserIcon as never)
@@ -152,6 +157,7 @@ export const ICON_NAMES = [
   'Pencil',
   'Play',
   'Settings',
+  'Shield',
   'SunMoon',
   'Trophy',
   'User',

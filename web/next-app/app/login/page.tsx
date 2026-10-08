@@ -11,7 +11,7 @@ import BottomTabs from '../../components/BottomTabs'
 import Footer from '../../components/Footer'
 import SectionHeader from '../../components/SectionHeader'
 import { signup, login, validateToken, requestPasswordReset, completePasswordReset, startOAuthLogin, googleOneTap, OAUTH_LABELS, type OAuthProvider, API_BASE, getConfig } from '../../lib/api'
-import { setToken, setUserInfo, clearToken, isLoggedIn } from '../../lib/auth'
+import { establishSession, isLoggedIn } from '../../lib/auth'
 
 type LoginState = {
   tab: 'login' | 'signup'
@@ -229,10 +229,9 @@ function LoginInner() {
       else setGoogleError(`${pretty} sign-in failed — try again`)
     }
     if (token && id) {
-      setToken(token)
-      setUserInfo({ student_id: id, name: name || 'Google user', username: '', concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: false })
-      validateToken().then(v => { if (!v.valid) clearToken() }).catch(() => {})
-      push(ret)
+      establishSession(token, { student_id: id, name: name || 'Google user', username: '', concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: false })
+        .then(() => { push(ret) })
+        .catch(() => {})
     }
   }, [searchParams, push, ret])
 
@@ -264,8 +263,7 @@ function LoginInner() {
               setGoogleError('')
               try {
                 const data = await googleOneTap(resp.credential)
-                setToken(data.token)
-                setUserInfo({ student_id: data.student_id, name: data.name, username: '', concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: data.diagnostic_completed })
+                await establishSession(data.token, { student_id: data.student_id, name: data.name, username: '', concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: data.diagnostic_completed })
                 push(ret)
               } catch (e) { setGoogleError((e as Error).message || 'Google sign-in failed') } finally { setGoogleLoading(false) }
             },
@@ -327,8 +325,7 @@ function LoginInner() {
     setResetMsg('')
     try {
       const res = await completePasswordReset(resetToken, resetPw)
-      setToken(res.token)
-      setUserInfo({ student_id: res.student_id, name: res.name, username: '', concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: res.diagnostic_completed })
+      await establishSession(res.token, { student_id: res.student_id, name: res.name, username: '', concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: res.diagnostic_completed })
       push(ret)
     } catch (e: unknown) {
       setResetMsg(e instanceof Error ? e.message : 'Reset failed — the link may have expired.')
@@ -366,15 +363,7 @@ function LoginInner() {
       const res = state.tab === 'signup'
         ? await signup(state.name.trim(), state.username.trim(), state.password, state.email.trim())
         : await login(state.username.trim(), state.password)
-      setToken(res.token)
-      setUserInfo({ student_id: res.student_id, name: res.name, username: state.username.trim(), concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: res.diagnostic_completed })
-      const verified = await validateToken()
-      if (!verified.valid) {
-        clearToken()
-        dispatch({ type: 'SET_ERROR', error: 'Something went wrong, but we\'re working on it.' })
-        dispatch({ type: 'SET_LOADING', loading: false })
-        return
-      }
+      await establishSession(res.token, { student_id: res.student_id, name: res.name, username: state.username.trim(), concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: res.diagnostic_completed })
       push(ret)
     } catch (e: any) {
       dispatch({ type: 'SET_ERROR', error: e.message || 'Authentication failed' })
