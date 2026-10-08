@@ -278,6 +278,44 @@ export async function getGraph(): Promise<GraphRes> {
   return validateResponse(GraphResSchema, await res.json(), 'getGraph') as GraphRes
 }
 
+export interface DomainSummary {
+  id: string
+  conceptCount: number
+  masteredCount: number
+  unlockedCount: number
+  inProgressCount: number
+}
+
+export interface TopicSummary {
+  conceptId: string
+  title: string
+  state: string
+  depth: number
+}
+
+export interface DomainDetail {
+  domain: { id: string }
+  topics: TopicSummary[]
+}
+
+/**
+ * The curriculum browser's data. The server decides each domain's counts and
+ * each topic's state; the client only renders them (ADR-042). Fails soft to an
+ * empty list so a network blip degrades to the empty state, never to a crash.
+ */
+export async function getCurriculumDomains(): Promise<DomainSummary[]> {
+  const res = await authedFetch(`${API_BASE}/api/curriculum/domains`, { cache: 'no-store' })
+  if (!res.ok) return []
+  const data = (await res.json()) as { domains?: DomainSummary[] }
+  return data.domains ?? []
+}
+
+export async function getCurriculumDomain(domainId: string): Promise<DomainDetail | null> {
+  const res = await authedFetch(`${API_BASE}/api/curriculum/domains/${encodeURIComponent(domainId)}`, { cache: 'no-store' })
+  if (!res.ok) return null
+  return res.json() as Promise<DomainDetail>
+}
+
 export async function getLeaderboard(): Promise<LeaderboardEntry[]> {
   const res = await authedFetch(`${API_BASE}/api/leaderboard`)
   if (!res.ok) return []
@@ -774,6 +812,14 @@ const MeSchema = z.object({
 	name: z.string(),
 	has_password: z.boolean().optional(),
 	role: z.enum(['student', 'moderator', 'admin', 'owner']).optional(),
+	/**
+	 * The server's own record that placement happened. The client must read it
+	 * here rather than trusting `mathua_user` or inferring it from having shown
+	 * the last diagnostic question: local storage can be stale on another device,
+	 * and "the final question was displayed" is not a completion.
+	 */
+	diagnostic_completed: z.boolean().optional(),
+	diagnostic_completed_at: z.string().optional(),
 })
 
 export type MeInfo = z.infer<typeof MeSchema>
@@ -1200,17 +1246,41 @@ export async function getNext(exclude?: string[]): Promise<RecommendationRes> {
   }
 }
 
+export interface EligibilityPrereq {
+	conceptId: string
+	title: string
+	state: string
+	met: boolean
+}
+
 export interface ReadinessRes {
 	concept_id: string
 	ready: boolean
 	weak: { id: string; label: string; status: string; mastery_pct: number }[]
 	missing: { id: string; label: string; status: string; mastery_pct: number }[]
+	/**
+	 * The server's eligibility verdict, present on current servers and absent on
+	 * older payloads. The client renders it; it never computes it. `eligible`
+	 * false means the topic's prerequisites are unmet and /learn will refuse it.
+	 */
+	eligible?: boolean
+	state?: string
+	reason?: string
+	prerequisites?: EligibilityPrereq[]
 }
 
 export async function getLessonReadiness(conceptId: string): Promise<ReadinessRes> {
 	const res = await authedFetch(`${API_BASE}/api/lessons/${encodeURIComponent(conceptId)}/readiness`, { cache: 'no-store' })
-	if (!res.ok) return { concept_id: conceptId, ready: true, weak: [], missing: [] }
+	// Fail soft, in the direction that matters: a blip must not block a learner
+	// whose prerequisites are satisfied. The practice endpoint still refuses a
+	// genuinely locked topic, so the server remains the authority.
+	if (!res.ok) return { concept_id: conceptId, ready: true, weak: [], missing: [], eligible: true }
 	return res.json()
+}
+
+/** The canonical eligibility read. Thin alias so call sites name the intent. */
+export async function getLessonEligibility(conceptId: string): Promise<ReadinessRes> {
+	return getLessonReadiness(conceptId)
 }
 
 export interface StudyAnswerRes {

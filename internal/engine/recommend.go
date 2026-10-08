@@ -35,6 +35,7 @@ func (e *Engine) conceptSnapshotsFrom(studentID string, progress map[string]*sto
 			RequiredStreak: reqStreak,
 			TimeThreshold:  timeThresh,
 			WeaknessScore:  p.WeaknessScore,
+			Placement:      p.PlacementSeeded,
 		}
 	}
 	// Concepts never attempted still need a snapshot: prereqsMet returns false for a missing
@@ -135,15 +136,25 @@ func (e *Engine) RecommendNext(studentID string, exclude []string) (scheduler.Re
 	}
 	e.mu.Unlock()
 
+	// The server's record that placement happened. This is the authoritative
+	// guard against offering the diagnostic back as an active task; the
+	// AttemptedDays check alone is not enough, because placement deliberately
+	// seeds reachability without mastery.
+	diagnosticCompleted := false
+	if st, err := e.repo.GetStudent(studentID); err == nil && st != nil {
+		diagnosticCompleted = st.DiagnosticCompleted
+	}
+
 	return scheduler.New(e.dag).Recommend(scheduler.RecommendInput{
-		Snapshots:         snapshots,
-		Now:               time.Now(),
-		Weakness:          weakness,
-		DueReviews:        due,
-		QuizDue:           quizDue,
-		ConceptsMastered:  mastered,
-		AttemptedDays:     len(attemptedDays),
-		ExcludeConceptIds: exclude,
+		Snapshots:           snapshots,
+		Now:                 time.Now(),
+		Weakness:            weakness,
+		DueReviews:          due,
+		QuizDue:             quizDue,
+		ConceptsMastered:    mastered,
+		AttemptedDays:       len(attemptedDays),
+		ExcludeConceptIds:   exclude,
+		DiagnosticCompleted: diagnosticCompleted,
 	}), nil
 }
 

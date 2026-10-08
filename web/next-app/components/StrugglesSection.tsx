@@ -84,7 +84,14 @@ export default function StrugglesSection({ weaknesses }: Props) {
                   <div className="w-10 h-1 bg-mathua-border shrink-0">
                     <div className="h-full transition-all duration-300" style={{ width: `${Math.round(item.weakness * 100)}%`, background: tier.color }} />
                   </div>
-                  <span className="min-w-0 flex-1 truncate text-mathua-primary text-[11px] font-mono">{item.label}</span>
+                  {/* A weak concept links into the learning loop, not the reference
+                      library: only demonstrated answers move it (ADR-047). */}
+                  <Link
+                    href={`/learn?concept=${encodeURIComponent(item.id)}`}
+                    className="min-w-0 flex-1 truncate text-mathua-primary text-[11px] font-mono hover:text-mathua-blue"
+                  >
+                    {item.label}
+                  </Link>
                   <span className="shrink-0 font-mono text-[10px]" style={{ color: tier.color }}>{tier.label}</span>
                 </div>
               )
@@ -142,7 +149,12 @@ export default function StrugglesSection({ weaknesses }: Props) {
                               <div className="w-8 h-1 bg-mathua-border shrink-0">
                                 <div className="h-full" style={{ width: `${Math.round(item.weakness * 100)}%`, background: t.color }} />
                               </div>
-                              <span className="min-w-0 flex-1 truncate text-mathua-secondary text-[11px]">{item.label}</span>
+                              <Link
+                                href={`/learn?concept=${encodeURIComponent(item.id)}`}
+                                className="min-w-0 flex-1 truncate text-mathua-secondary text-[11px] hover:text-mathua-blue"
+                              >
+                                {item.label}
+                              </Link>
                               <span className="shrink-0 font-mono text-[10px]" style={{ color: t.color }}>{Math.round(item.weakness * 100)}%</span>
                             </div>
                           )

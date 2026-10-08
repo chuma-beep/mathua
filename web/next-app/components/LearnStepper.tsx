@@ -7,6 +7,7 @@ import LessonDiagram from './LessonDiagram'
 import LessonAssets from './LessonAssets'
 import ChoiceOptions from './ChoiceOptions'
 import ConceptReference from './ConceptReference'
+import PrerequisitePanel from './PrerequisitePanel'
 import { getLessonKPs, getLessonPractice, getLessonReadiness, submitStudyAnswer, getProgress, getErrorStatus, type KpInfo, type PracticeQuestion, type ReadinessRes, type ConceptProgress } from '../lib/api'
 import { getUserInfo } from '../lib/auth'
 import { upcomingLocked, hrefConceptId, type Shelf, type LockedSuccessor } from '../lib/nextUp'
@@ -70,6 +71,10 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
   const [diagram, setDiagram] = useState<string | null>(null)
   const [kpIndex, setKpIndex] = useState(0)
   const [readiness, setReadiness] = useState<ReadinessRes | null>(null)
+  // The server refused this topic because its prerequisites are unmet. The
+  // practice endpoint enforces this; the UI renders the explanation so a locked
+  // topic never looks like a broken page or an empty question set.
+  const [ineligible, setIneligible] = useState<ReadinessRes | null>(null)
   const [bannerDismissed, setBannerDismissed] = useState(false)
   const [buffer, setBuffer] = useState<PracticeQuestion[]>([])
   // Counts for the header, per *concept*. Not per knowledge point: this used to reset on
@@ -120,11 +125,18 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
   const load = useCallback(async () => {
     setLoading(true)
     setError('')
+    setIneligible(null)
     try {
       const [kpRes, readyRes] = await Promise.all([getLessonKPs(conceptId), getLessonReadiness(conceptId)])
       setKps(kpRes.kps ?? [])
       setDiagram(kpRes.diagram ?? null)
       setReadiness(readyRes)
+      // The server is the authority: if it says the topic's prerequisites are
+      // unmet, do not fetch questions it would refuse. Show the path instead.
+      if (readyRes.eligible === false) {
+        setIneligible(readyRes)
+        return
+      }
       const pr = await getLessonPractice(conceptId, 3, { seed: Date.now() % 100000, difficulty: 0.4 })
       seenRef.current = pr.questions.map(q => q.question)
       setBuffer(pr.questions)
@@ -442,6 +454,25 @@ export default function LearnStepper({ conceptId, returnTo }: Props) {
 
   if (loading && entries.length === 0) {
     return <div className="p-6 border border-mathua-border bg-mathua-surface"><p className="font-mono text-xs text-mathua-muted">Loading lesson…</p></div>
+  }
+
+  // A locked topic is explained, never started. The server refused the questions;
+  // this renders its reason and a path into the prerequisite's own learning flow.
+  if (ineligible && entries.length === 0) {
+    const title = concepts.find(c => c.id === conceptId)?.label ?? conceptId
+    return (
+      <div className="max-w-2xl mx-auto">
+        <PrerequisitePanel topicTitle={title} prerequisites={ineligible.prerequisites ?? []} />
+        <div className="mt-4 flex flex-wrap gap-3">
+          <Link href="/domains" className="border border-mathua-border px-4 py-2 font-mono text-[11px] text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue">
+            ← Choose another topic
+          </Link>
+          <Link href="/profile" className="border border-mathua-border px-4 py-2 font-mono text-[11px] text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue">
+            Back to Profile
+          </Link>
+        </div>
+      </div>
+    )
   }
 
   const prereqs = [...(readiness?.missing ?? []), ...(readiness?.weak ?? [])]

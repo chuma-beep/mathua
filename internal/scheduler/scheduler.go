@@ -40,6 +40,12 @@ type ConceptSnapshot struct {
 	RequiredStreak int
 	TimeThreshold  float64
 	WeaknessScore  float64
+	// Placement marks a concept the diagnostic established as the learner's
+	// frontier. It grants reachability only: a placement-seeded prerequisite
+	// satisfies its successors so the learner can start where they were placed.
+	// It is not mastery and is never used to decide mastery, XP, the quiz gate or
+	// review (ADR-008, ADR-050).
+	Placement bool
 }
 
 // Next picks the next concept for a student to work on.
@@ -204,6 +210,14 @@ func prereqsMet(dag *concepts.DAG, c *concepts.Concept, snapshots map[string]*Co
 		snap := snapshots[pid]
 		if snap == nil {
 			return false
+		}
+		// Placement-seeded prerequisites count as satisfied. The diagnostic
+		// established the learner's frontier; refusing to let them start the
+		// concept just past it would make placement inert. This is reachability,
+		// not mastery — placement never appears in countsAsMastered, the quiz
+		// gate or XP.
+		if snap.Placement {
+			continue
 		}
 		status := mastery.EffectiveStatus(snap.Status, daysSince(snap.LastReviewed), mastery.DecayDays)
 		if status != mastery.StatusMastered && status != "DECAYING" {

@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS students (
     xp_today             INTEGER NOT NULL DEFAULT 0,
     xp_date              TEXT,
     diagnostic_completed INTEGER NOT NULL DEFAULT 0,
+    diagnostic_completed_at TEXT NOT NULL DEFAULT '',
     daily_xp_goal        INTEGER NOT NULL DEFAULT 30,
     settings             TEXT NOT NULL DEFAULT '{}',
     league               TEXT NOT NULL DEFAULT 'bronze',
@@ -39,6 +40,7 @@ CREATE TABLE IF NOT EXISTS concept_progress (
     sm2_efactor      REAL    NOT NULL DEFAULT 2.5,
     mastered_at      TEXT,
     weakness_score   REAL    NOT NULL DEFAULT 0,
+    placement_seeded INTEGER NOT NULL DEFAULT 0,
     PRIMARY KEY (student_id, concept_id),
     FOREIGN KEY (student_id) REFERENCES students(id)
 );

@@ -1,123 +1,112 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, fireEvent, waitFor, within } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import DomainsPage from '../app/domains/page'
 import DomainTable from '../components/DomainTable'
 import { concepts } from '../lib/conceptData'
 import { buildDomainRows, byNeedsAttention } from '../lib/domainRows'
 import { DOMAIN_ORDER, domainLabel } from '../lib/graphDomains'
-import { getProgress } from '../lib/api'
-import { getGuestId, getUserInfo } from '../lib/auth'
+import * as api from '../lib/api'
 
-vi.mock('../lib/api', async (importOriginal) => {
-  const mod = importOriginal<typeof import('../lib/api')>()
-  return { ...mod, getProgress: vi.fn(async () => ({})) }
-})
-
-vi.mock('../lib/auth', async (importOriginal) => {
-  const mod = importOriginal<typeof import('../lib/auth')>()
-  return { ...mod, getUserInfo: vi.fn(), getGuestId: vi.fn(() => 'guest-1') }
-})
-
+const push = vi.fn()
+vi.mock('next/navigation', () => ({
+  useRouter: () => ({ push }),
+}))
 vi.mock('next/link', () => ({
   default: ({ children, href }: { children: React.ReactNode; href: string }) => (
     <a href={href}>{children}</a>
   ),
 }))
-
+vi.mock('../lib/api', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('../lib/api')>()
+  return {
+    ...mod,
+    getCurriculumDomains: vi.fn(),
+    getCurriculumDomain: vi.fn(),
+    getLessonEligibility: vi.fn(),
+  }
+})
 vi.mock('../components/Header', () => ({ default: () => null }))
 vi.mock('../components/Footer', () => ({ default: () => null }))
 vi.mock('../components/BottomTabs', () => ({ default: () => null }))
-vi.mock('../components/Loading', () => ({ default: () => <div>Loading</div> }))
+vi.mock('../components/Loading', () => ({ default: ({ label }: { label?: string }) => <div>{label ?? 'Loading'}</div> }))
 vi.mock('../components/SectionHeader', () => ({
   default: ({ title }: { title: string }) => <h2>{title}</h2>,
 }))
 
-const MASTERED = { status: 'MASTERED', streak: 3 } as const
-
-// A row's toggle button reads "N concepts" with no domain name, and the row wrapper carries no
-// class on the last row, so neither `getByRole` nor `closest('div[class]')` can target one.
-// Walk up from the domain label to the ancestor that actually holds the toggle.
-function rowFor(label: string): HTMLElement {
-  let node: HTMLElement | null = screen.getByRole('link', { name: label })
-  while (node && !node.querySelector('button')) node = node.parentElement
-  if (!node) throw new Error(`no row with a toggle found for ${label}`)
-  return node
-}
+const domains = DOMAIN_ORDER.map((id) => ({
+  id,
+  conceptCount: 10,
+  masteredCount: 0,
+  unlockedCount: 2,
+  inProgressCount: 1,
+}))
 
 beforeEach(() => {
-  vi.mocked(getUserInfo).mockReturnValue({ student_id: 's1' } as ReturnType<typeof getUserInfo>)
-  vi.mocked(getGuestId).mockReturnValue('guest-1')
-  vi.mocked(getProgress).mockResolvedValue({})
+  push.mockReset()
+  vi.mocked(api.getCurriculumDomains).mockReset().mockResolvedValue(domains)
+  vi.mocked(api.getCurriculumDomain).mockReset()
+  vi.mocked(api.getLessonEligibility).mockReset()
 })
 
-describe('/domains', () => {
-  it('renders every domain in the canonical order', async () => {
+describe('/domains curriculum picker', () => {
+  it('renders every domain in the canonical order with availability', async () => {
     render(<DomainsPage />)
-    await waitFor(() => expect(screen.getByRole('link', { name: 'Arithmetic' })).toBeTruthy())
-
-    // Compared against DOMAIN_ORDER, not a count. The block this replaced hardcoded a
-    // 15-entry list and omitted precalculus and machine_learning, so 50 concepts never
-    // appeared anywhere — and a hardcoded "16 rows" assertion would have passed anyway.
+    await waitFor(() => expect(screen.getByText(domainLabel('arithmetic'))).toBeTruthy())
     for (const domain of DOMAIN_ORDER) {
-      const present = DOMAIN_ORDER.filter((d) =>
-        buildDomainRows(concepts, {}).some((r) => r.domain === d),
-      )
-      expect(present, `${domain} has no concepts and so renders no row`).toContain(domain)
-      expect(screen.getByRole('link', { name: domainLabel(domain) })).toBeTruthy()
+      expect(screen.getByText(domainLabel(domain))).toBeTruthy()
     }
+    expect(screen.getAllByText(/\/ \d+ concepts available/).length).toBeGreaterThan(0)
   })
 
-  it('deep-links each domain into the graph filter', async () => {
-    render(<DomainsPage />)
-    await waitFor(() => expect(screen.getByRole('link', { name: 'Arithmetic' })).toBeTruthy())
-    const link = screen.getByRole('link', { name: 'Arithmetic' }) as HTMLAnchorElement
-    expect(link.getAttribute('href')).toBe('/graph?domain=arithmetic')
-  })
-
-  // Phase 3 removed the locked count from PositionBlock as the one number a learner can neither
-  // act on nor change today. This table printed it on every row, which would have made it
-  // appear 17 times instead of once.
-  it('never prints a locked count', async () => {
-    render(<DomainsPage />)
-    await waitFor(() => expect(screen.getByRole('link', { name: 'Arithmetic' })).toBeTruthy())
-    expect(document.body.textContent).not.toMatch(/locked/i)
-  })
-
-  it('expands a domain into its concepts, grouped by status', async () => {
-    vi.mocked(getProgress).mockResolvedValue({
-      [concepts.find((c) => c.domain === 'arithmetic')!.id]: MASTERED,
+  it('opens a domain and renders its topics with server states', async () => {
+    vi.mocked(api.getCurriculumDomain).mockResolvedValue({
+      domain: { id: 'arithmetic' },
+      topics: [
+        { conceptId: 'arith.add', title: 'Single-digit addition', state: 'unlocked', depth: 0 },
+        { conceptId: 'arith.sub', title: 'Subtraction', state: 'locked', depth: 1 },
+      ],
     })
     render(<DomainsPage />)
-    await waitFor(() => expect(screen.getByRole('link', { name: 'Arithmetic' })).toBeTruthy())
-
-    fireEvent.click(within(rowFor('Arithmetic')).getByRole('button', { name: /concepts$/ }))
-    expect(screen.getByText(/^Mastered \(\d+\)$/)).toBeTruthy()
-    expect(screen.getByText(/^Not started \(\d+\)$/)).toBeTruthy()
+    await waitFor(() => expect(screen.getByText(domainLabel('arithmetic'))).toBeTruthy())
+    fireEvent.click(screen.getByText(domainLabel('arithmetic')))
+    await screen.findByText('Single-digit addition')
+    expect(screen.getByText('Available')).toBeTruthy()
+    expect(screen.getByText('Locked')).toBeTruthy()
   })
 
-  it('sorts weakest first on request', async () => {
+  it('checks eligibility before entering /learn', async () => {
+    vi.mocked(api.getCurriculumDomain).mockResolvedValue({
+      domain: { id: 'arithmetic' },
+      topics: [{ conceptId: 'arith.add', title: 'Single-digit addition', state: 'unlocked', depth: 0 }],
+    })
+    vi.mocked(api.getLessonEligibility).mockResolvedValue({
+      concept_id: 'arith.add', ready: true, weak: [], missing: [], eligible: true,
+    })
     render(<DomainsPage />)
-    await waitFor(() => expect(screen.getByRole('link', { name: 'Arithmetic' })).toBeTruthy())
-    // Domain rows are the /graph?domain= links; "Open the graph" is a plain /graph link.
-    const first = () =>
-      screen
-        .getAllByRole('link')
-        .map((a) => a.getAttribute('href') ?? '')
-        .find((h) => h.startsWith('/graph?domain='))
-
-    const curriculumFirst = first()
-    fireEvent.click(screen.getByRole('button', { name: 'Needs attention first' }))
-    await waitFor(() => expect(first()).not.toBe(curriculumFirst))
-    fireEvent.click(screen.getByRole('button', { name: 'Curriculum order' }))
-    await waitFor(() => expect(first()).toBe(curriculumFirst))
+    await waitFor(() => expect(screen.getByText(domainLabel('arithmetic'))).toBeTruthy())
+    fireEvent.click(screen.getByText(domainLabel('arithmetic')))
+    await screen.findByRole('button', { name: 'Learn' })
+    fireEvent.click(screen.getByRole('button', { name: 'Learn' }))
+    await waitFor(() => expect(push).toHaveBeenCalledWith('/learn?concept=arith.add'))
   })
 
-  it('still renders for a guest, who has progress before signing in', async () => {
-    vi.mocked(getUserInfo).mockReturnValue(null)
-    vi.mocked(getGuestId).mockReturnValue('guest-1')
+  it('explains a locked topic instead of offering a start', async () => {
+    vi.mocked(api.getCurriculumDomain).mockResolvedValue({
+      domain: { id: 'arithmetic' },
+      topics: [{ conceptId: 'arith.sub', title: 'Subtraction', state: 'locked', depth: 1 }],
+    })
+    vi.mocked(api.getLessonEligibility).mockResolvedValue({
+      concept_id: 'arith.sub', ready: false, weak: [], missing: [], eligible: false,
+      prerequisites: [{ conceptId: 'arith.add', title: 'Single-digit addition', state: 'unlocked', met: false }],
+    })
     render(<DomainsPage />)
-    await waitFor(() => expect(screen.getByRole('link', { name: 'Arithmetic' })).toBeTruthy())
-    expect(getProgress).toHaveBeenCalledWith('guest-1')
+    await waitFor(() => expect(screen.getByText(domainLabel('arithmetic'))).toBeTruthy())
+    fireEvent.click(screen.getByText(domainLabel('arithmetic')))
+    fireEvent.click(await screen.findByRole('button', { name: /View prerequisite path/ }))
+    await screen.findByRole('note', { name: /prerequisite/i })
+    expect(screen.getByRole('link', { name: /Learn prerequisite/ }).getAttribute('href'))
+      .toBe('/learn?concept=arith.add')
+    expect(push).not.toHaveBeenCalled()
   })
 })
 
@@ -137,20 +126,6 @@ describe('DomainTable', () => {
 })
 
 describe('buildDomainRows', () => {
-  it('counts a decayed concept as mastered and as review debt', () => {
-    const id = concepts.find((c) => c.domain === 'arithmetic')!.id
-    const [row] = buildDomainRows(concepts, { [id]: { status: 'DECAYING' } as never })
-    expect(row.mastered).toBe(1)
-    expect(row.dueForReview).toBe(1)
-  })
-
-  it('prefers a concept already in progress over one never started', () => {
-    const members = concepts.filter((c) => c.domain === 'arithmetic')
-    const started = members.find((c) => (c.prerequisites ?? []).length === 0)!
-    const [row] = buildDomainRows(concepts, { [started.id]: { status: 'LEARNING' } as never })
-    expect(row.nextId).toBe(started.id)
-  })
-
   it('puts the weakest domain first when sorting by needs attention', () => {
     const rows = buildDomainRows(concepts, {})
     const weak = { ...rows[0], mastered: 0, label: 'Zzz' }

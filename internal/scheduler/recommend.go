@@ -119,6 +119,12 @@ type RecommendInput struct {
 	// offered the diagnostic rather than a concept.
 	ConceptsMastered int
 	AttemptedDays    int
+	// DiagnosticCompleted is the server's own record that placement has happened. A
+	// learner who has completed the diagnostic is never offered it again, even if the
+	// diagnostic's seeded rows leave them with zero mastered concepts and no attempted
+	// day — which is exactly what placement does, because it seeds reachability rather
+	// than mastery. Without this, a finished diagnostic reappeared as the active task.
+	DiagnosticCompleted bool
 	// ExcludeConceptIds drops concepts already shown — the finished concept must not be offered
 	// back as the next thing to learn.
 	ExcludeConceptIds []string
@@ -149,8 +155,9 @@ func (s *Scheduler) Recommend(in RecommendInput) RecommendationResponse {
 	resp := RecommendationResponse{Alternatives: []Recommendation{}, GeneratedAt: now}
 
 	// A learner with nothing behind them cannot be recommended a concept, because no concept
-	// has been shown to be learnable for them. The diagnostic is the honest answer.
-	if in.ConceptsMastered == 0 && in.AttemptedDays == 0 {
+	// has been shown to be learnable for them. The diagnostic is the honest answer — but only
+	// once. A completed diagnostic is placement, not an active task, so the gate excludes it.
+	if !in.DiagnosticCompleted && in.ConceptsMastered == 0 && in.AttemptedDays == 0 {
 		resp.Primary = &Recommendation{
 			ID:     "diagnostic",
 			Kind:   KindLearn,

@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useTheme } from '../../hooks/useTheme'
 import { getUserInfo, ensureGuestId, ensureGuestToken, getGuestId, isLoggedIn, type UserInfo } from '../../lib/auth'
 import { ensureDicebearAvatar, resolveAvatar } from '../../lib/dicebear'
-import { getActivity, getProgress, getWeaknesses, getDueReviews, getEfficacy, getScores, getSettings } from '../../lib/api'
+import { getActivity, getProgress, getWeaknesses, getDueReviews, getEfficacy, getScores, getSettings, getMe } from '../../lib/api'
 import type { DailyActivity, Scores, WeaknessRes, ConceptProgress, EfficacyReport } from '../../lib/api'
 import ProfileStats from '../../components/ProfileStats'
 import ActivityHeatmap from '../../components/ActivityHeatmap'
@@ -15,7 +15,7 @@ import { AppSidebar, type AppSidebarProps } from '../../components/app-sidebar'
 import { ChevronsRight } from '../../components/icons'
 import BottomTabs from '../../components/BottomTabs'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '../../components/ui/sidebar'
-import NextUpSummary from '../../components/NextUpSummary'
+import RecommendedTaskList from '../../components/RecommendedTaskList'
 import PositionBlock from '../../components/PositionBlock'
 import DailyGoalControl, { getGuestGoal } from '../../components/DailyGoalControl'
 import { isNewUser, recentlyUnlocked, hrefConceptId, RECENT_UNLOCK_DAYS, type Shelf } from '../../lib/nextUp'
@@ -82,6 +82,10 @@ export default function ProfilePage() {
   const [efficacy, setEfficacy] = useState<EfficacyReport | null>(null)
   const [dueReviews, setDueReviews] = useState(0)
   const [shelf, setShelf] = useState<Shelf | null>(null)
+  // Placement is the server's record, not local storage's. `isLoggedIn` accounts
+  // fetch it from /api/auth/me; a stale `mathua_user` must not resurrect the
+  // diagnostic as an active task.
+  const [placementCompleted, setPlacementCompleted] = useState<boolean | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [goalOverride, setGoalOverride] = useState<number | null>(null)
@@ -208,6 +212,11 @@ export default function ProfilePage() {
           setWeaknesses(weaknessesRes)
           getDueReviews().then(r => setDueReviews(r.count)).catch(() => {})
           getEfficacy().then(setEfficacy).catch(() => {})
+          // Placement from the server. The client must not infer diagnostic
+          // completion from the displayed question or from local storage.
+          getMe().then(me => setPlacementCompleted(me.diagnostic_completed ?? false)).catch(() => {
+            setPlacementCompleted(info?.diagnostic_completed ?? false)
+          })
           // The recommendation is the engine's answer, not a re-ranking of the fetches above.
           // Fetched beside them rather than derived from them: the report's numbers and the
           // recommendation come from one authority each, and neither is computed from the other.
@@ -408,9 +417,9 @@ export default function ProfilePage() {
           </Link>
         </div>
 
-        <NextUpSummary shelf={head} />
+        <RecommendedTaskList shelf={head} loading={shelf === null} />
 
-        {(isNew && !user.diagnostic_completed) && (
+        {(isNew && placementCompleted === false) && (
           <section className="mt-6 border border-mathua-border bg-mathua-surface p-4">
             <h3 className="font-mono text-[11px] text-mathua-muted uppercase tracking-wider mb-3">What to do first</h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -501,38 +510,22 @@ export default function ProfilePage() {
           </div>
         )}
 
-        {/* Diagnostic CTA — new users only: hidden once completed or once
-            the learner is no longer new. Retake stays URL-reachable. */}
-        {!user.diagnostic_completed && isNew && head?.next.kind !== 'diagnostic' && (
-        <section className="mt-6 w-full max-w-full min-w-0 overflow-hidden border border-mathua-blue bg-mathua-surface p-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-          <div className="w-full sm:flex-1 min-w-0 overflow-hidden">
-            <div className="flex flex-col items-start gap-1.5 sm:flex-row sm:items-center sm:gap-2 min-w-0">
-              <span className="shrink-0 bg-mathua-blue text-white px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider">
-                Recommended
-              </span>
-              <span className="min-w-0 break-words [overflow-wrap:anywhere] leading-snug font-mono text-[11px] sm:text-xs text-mathua-primary">
-                Take a diagnostic to get a recommendation on where to start
-              </span>
-            </div>
-            <p className="font-mono text-xs text-mathua-secondary mt-1 break-words [overflow-wrap:anywhere]">
-              Diagnostic test · finds your starting point
-            </p>
-          </div>
-          <Link
-            href="/onboard"
-            className="w-full sm:w-auto sm:shrink-0 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-6 py-2 font-mono text-xs min-h-[36px] inline-flex items-center justify-center text-center whitespace-nowrap"
-          >
-            Start diagnostic test →
-          </Link>
-        </section>
-        )}
-
         {/* ── The report ────────────────────────────────────────────────
             Restored to the hub: a learner expects the whole picture on their
-            own page, not behind a separate destination. Activity leads, then
-            the durable picture, then the detail. Cohort figures stay on
-            /docs/efficacy — these are the learner's own numbers. */}
-        <section id="activity" aria-label="Activity" className="mt-10 flex min-w-0 flex-col items-stretch scroll-mt-28">
+            own page, not behind a separate destination. Needs attention leads
+            the report — it is the actionable part — then Activity, then the
+            durable picture. Cohort figures stay on /docs/efficacy; these are
+            the learner's own numbers. */}
+        <section id="struggles" aria-label="Struggles" className="mt-10 min-w-0 scroll-mt-28">
+          <StrugglesSection weaknesses={weaknesses} />
+          <div className="mt-3 text-center">
+            <Link href="/history" className="font-mono text-xs text-mathua-blue hover:text-mathua-blue-hover">
+              Every question you&apos;ve answered →
+            </Link>
+          </div>
+        </section>
+
+        <section id="activity" aria-label="Activity" className="mt-8 flex min-w-0 flex-col items-stretch scroll-mt-28">
           <h2 className="font-serif text-[1.05rem] font-normal text-mathua-primary mb-4 w-full">
             Activity
           </h2>
@@ -565,15 +558,6 @@ export default function ProfilePage() {
             </div>
           </section>
         )}
-
-        <section id="struggles" aria-label="Struggles" className="mt-8 min-w-0 scroll-mt-28">
-          <StrugglesSection weaknesses={weaknesses} />
-          <div className="mt-3 text-center">
-            <Link href="/history" className="font-mono text-xs text-mathua-blue hover:text-mathua-blue-hover">
-              Every question you&apos;ve answered →
-            </Link>
-          </div>
-        </section>
 
         {unlockRows.length > 0 && (
           <section aria-label="Recently unlocked" className="mt-8 w-full max-w-full min-w-0 overflow-hidden border border-mathua-border bg-mathua-surface p-4">

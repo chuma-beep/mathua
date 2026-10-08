@@ -264,6 +264,8 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/scores/", logRequest(cors(s.optionalAuthMiddleware(s.handleScores))))
 	mux.HandleFunc("/api/config", logRequest(cors(getOnly(s.handleConfig))))
 	mux.HandleFunc("/api/graph", logRequest(cors(s.handleGraph)))
+	mux.HandleFunc("/api/curriculum/domains", logRequest(cors(s.optionalAuthMiddleware(s.handleCurriculumDomains))))
+	mux.HandleFunc("/api/curriculum/domains/", logRequest(cors(s.optionalAuthMiddleware(s.handleCurriculumDomain))))
 	mux.HandleFunc("/api/leaderboard", logRequest(cors(s.handleLeaderboard)))
 	mux.HandleFunc("/api/leagues", logRequest(cors(s.authMiddleware(s.handleLeagues))))
 	mux.HandleFunc("/api/share", logRequest(cors(s.authMiddleware(s.handleShareToggle))))
@@ -453,6 +455,43 @@ func (s *Server) handleGraph(w http.ResponseWriter, r *http.Request) {
 		})
 	}
 	writeJSON(w, map[string]interface{}{"nodes": nodes, "count": len(nodes)})
+}
+
+// GET /api/curriculum/domains — read-only curriculum picker: each domain with
+// per-state counts. The server decides the states; the client renders them.
+func (s *Server) handleCurriculumDomains(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	domains, err := s.eng.CurriculumDomains(s.lessonStudentID(r))
+	if err != nil {
+		writeError(w, "failed to load curriculum", 500)
+		return
+	}
+	writeJSON(w, map[string]interface{}{"domains": domains})
+}
+
+// GET /api/curriculum/domains/{domainId} — one domain's concepts with state.
+func (s *Server) handleCurriculumDomain(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+		return
+	}
+	domainID := strings.TrimSuffix(strings.TrimPrefix(r.URL.Path, "/api/curriculum/domains/"), "/")
+	if domainID == "" {
+		http.Error(w, `{"error":"not found"}`, 404)
+		return
+	}
+	curriculum, err := s.eng.CurriculumDomain(s.lessonStudentID(r), domainID)
+	if err != nil {
+		writeError(w, "domain not found", 404)
+		return
+	}
+	writeJSON(w, map[string]interface{}{
+		"domain": map[string]string{"id": curriculum.Domain},
+		"topics": curriculum.Topics,
+	})
 }
 
 // GET /api/leaderboard
@@ -1392,19 +1431,15 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 	}
 	conceptID := parts[0]
 
-	// GET /api/lessons/{id}/readiness — soft prereq banner data (P2).
-	// Returns {ready, weak[], missing[]} so the /learn UI can suggest
-	// prerequisite review without hard-redirecting.
+	// GET /api/lessons/{id}/readiness — prerequisite detail and the server's
+	// eligibility verdict. `ready/weak/missing` remains the soft banner the
+	// /learn UI has always rendered; `eligible/state/reason/prerequisites` is the
+	// canonical answer a learner's curriculum selection is gated on. A client
+	// must ask, never decide (invariant 5).
 	if parts[1] == "readiness" {
+		sid := s.lessonStudentID(r)
 		var rawProgress map[string]*storage.ConceptProgress
-		if sid, _ := r.Context().Value(authStudentKey{}).(string); s.ownsStudentID(r, sid) {
-			if p, err := s.eng.GetProgress(sid); err == nil {
-				rawProgress = make(map[string]*storage.ConceptProgress)
-				for cid, cp := range p {
-					rawProgress[cid] = cp
-				}
-			}
-		} else if sid := r.URL.Query().Get("student_id"); s.ownsStudentID(r, sid) {
+		if sid != "" {
 			if p, err := s.eng.GetProgress(sid); err == nil {
 				rawProgress = make(map[string]*storage.ConceptProgress)
 				for cid, cp := range p {
@@ -1425,12 +1460,19 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 				weak = append(weak, p)
 			}
 		}
-		writeJSON(w, map[string]interface{}{
+		resp := map[string]interface{}{
 			"concept_id": conceptID,
 			"ready":      len(weak) == 0 && len(missing) == 0,
 			"weak":       weak,
 			"missing":    missing,
-		})
+		}
+		if el, err := s.eng.EligibilityFor(sid, conceptID); err == nil {
+			resp["eligible"] = el.Eligible
+			resp["state"] = el.State
+			resp["reason"] = el.Reason
+			resp["prerequisites"] = el.Prerequisites
+		}
+		writeJSON(w, resp)
 		return
 	}
 
@@ -1484,6 +1526,20 @@ func (s *Server) handleLessonConcept(w http.ResponseWriter, r *http.Request) {
 		if _, err := fmt.Sscanf(c, "%d", &n); err == nil && n > 0 && n <= 20 {
 			count = n
 		}
+	}
+
+	// Hard gate: a topic whose prerequisites are unmet cannot be started
+	// through /learn, whether the learner arrived from a recommendation, the
+	// curriculum browser, or a hand-typed URL. The readiness endpoint lets the
+	// UI explain this in advance; this is the enforcement behind that promise
+	// (invariant 3). Serving questions and anchoring answers for a locked
+	// concept would let the frontend's choice stand in for knowledge.
+	if el, err := s.eng.EligibilityFor(s.lessonStudentID(r), conceptID); err != nil {
+		writeError(w, "unknown concept", 404)
+		return
+	} else if !el.Eligible {
+		writeTopicLocked(w, el)
+		return
 	}
 	// P1 fresh variants: optional seed for a different parameter set, and
 	// exclude[] question texts the client already saw (miss => new variant,
@@ -2524,6 +2580,13 @@ func (s *Server) handleStudyAnswer(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "answer submitted too quickly", 400)
 		return
 	}
+	// Defense in depth behind the practice gate: an answer for a concept whose
+	// prerequisites are unmet is refused rather than recorded, so no path can
+	// turn a learner's choice into evidence for a topic they were not ready for.
+	if el, err := s.eng.EligibilityFor(studentID, req.ConceptID); err == nil && !el.Eligible {
+		writeTopicLocked(w, el)
+		return
+	}
 	res, err := s.eng.SubmitStudyAnswer(studentID, req.ConceptID, req.Answer, req.Elapsed, req.Question)
 	if err != nil {
 		if errors.Is(err, engine.ErrUnknownConcept) {
@@ -2577,6 +2640,40 @@ func (s *Server) ownsStudentID(r *http.Request, sid string) bool {
 		return strings.HasPrefix(sid, "guest_")
 	}
 	return true
+}
+
+// lessonStudentID resolves whose learning state a lesson request describes.
+// The validated bearer identity wins; otherwise an owned guest id from the query
+// is used. Empty means anonymous, whose state is all-unseen.
+func (s *Server) lessonStudentID(r *http.Request) string {
+	if sid, _ := r.Context().Value(authStudentKey{}).(string); sid != "" {
+		return sid
+	}
+	if sid := r.URL.Query().Get("student_id"); s.ownsStudentID(r, sid) {
+		return sid
+	}
+	return ""
+}
+
+// writeTopicLocked answers a request to start a concept whose prerequisites are
+// unmet, in the project's error envelope. The code is stable for the client to
+// branch on; the prerequisite ids let the UI name what to learn first.
+func writeTopicLocked(w http.ResponseWriter, el *engine.ConceptEligibility) {
+	ids := make([]string, 0, len(el.Prerequisites))
+	for _, p := range el.Prerequisites {
+		if !p.Met {
+			ids = append(ids, p.ConceptID)
+		}
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusForbidden)
+	_ = json.NewEncoder(w).Encode(map[string]interface{}{
+		"error": map[string]interface{}{
+			"code":    "TOPIC_LOCKED",
+			"message": "This topic has unmet prerequisites.",
+			"details": map[string]interface{}{"prerequisiteConceptIds": ids},
+		},
+	})
 }
 
 // getOnly rejects non-GET requests for read-only endpoints (health/config).
@@ -3623,19 +3720,28 @@ func (s *Server) handleMe(w http.ResponseWriter, r *http.Request) {
 		log.Printf("warning: failed to read role for %s: %v", studentID, err)
 		role = storage.RoleStudent
 	}
+	// Placement, so the client reads completion from the server rather than
+	// inferring it from local storage or from having displayed the last question.
+	// The timestamp is the diagnostic's historical record; the boolean is the
+	// gate. Absent (pre-column) means no date is shown, never an invented one.
+	var diagnosticCompletedAt string
+	if t, ok, err := s.repo.DiagnosticCompletedAt(studentID); err == nil && ok {
+		diagnosticCompletedAt = t.UTC().Format(time.RFC3339)
+	}
 	writeJSON(w, map[string]interface{}{
-		"student_id":           st.ID,
-		"name":                 st.Name,
-		"username":             st.Username,
-		"concepts_mastered":    scores.ConceptsMastered,
-		"current_streak":       scores.CurrentStreak,
-		"level":                scores.Level,
-		"diagnostic_completed": st.DiagnosticCompleted,
-		"avatar_url":           st.AvatarURL,
-		"email":                st.Email,
-		"email_verified":       st.EmailVerified,
-		"has_password":         st.PasswordHash != "",
-		"role":                 string(role),
+		"student_id":              st.ID,
+		"name":                    st.Name,
+		"username":                st.Username,
+		"concepts_mastered":       scores.ConceptsMastered,
+		"current_streak":          scores.CurrentStreak,
+		"level":                   scores.Level,
+		"diagnostic_completed":    st.DiagnosticCompleted,
+		"diagnostic_completed_at": diagnosticCompletedAt,
+		"avatar_url":              st.AvatarURL,
+		"email":                   st.Email,
+		"email_verified":          st.EmailVerified,
+		"has_password":            st.PasswordHash != "",
+		"role":                    string(role),
 	})
 }
 

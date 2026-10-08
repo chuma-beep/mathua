@@ -1844,6 +1844,7 @@ func (e *Engine) ApplyGoalResults(studentID string, session *diagnostic.Session)
 	copy(attempts, session.Attempts)
 	session.Unlock()
 	batch := make([]*storage.ConceptProgress, 0, len(attempts))
+	now := time.Now().UTC()
 	for _, att := range attempts {
 		// The diagnostic seeds placement; it must not destroy existing mastery.
 		// UpsertProgressBatch overwrites every column, so load the current row
@@ -1875,6 +1876,14 @@ func (e *Engine) ApplyGoalResults(studentID string, session *diagnostic.Session)
 		}
 		existing.Status = status
 		existing.WeaknessScore = weakness
+		// Placement is reachability, not evidence: the row records that the
+		// diagnostic established this concept as the learner's frontier, so its
+		// successors may be started. It is never MASTERED here, never counts as
+		// mastery, and never affects XP, the quiz gate or review (ADR-008,
+		// ADR-050). LastAttempted is stamped so the concept is a resumable
+		// candidate rather than an untouched one.
+		existing.PlacementSeeded = true
+		existing.LastAttempted = &now
 		batch = append(batch, existing)
 	}
 	if err := e.repo.UpsertProgressBatch(batch); err != nil {

@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS students (
     xp_today             INTEGER NOT NULL DEFAULT 0,
     xp_date              TEXT,
     diagnostic_completed INTEGER NOT NULL DEFAULT 0,
+    diagnostic_completed_at TEXT NOT NULL DEFAULT '',
     daily_xp_goal        INTEGER NOT NULL DEFAULT 30,
     settings             TEXT NOT NULL DEFAULT '{}',
     league               TEXT NOT NULL DEFAULT 'bronze',
@@ -57,6 +58,7 @@ CREATE TABLE IF NOT EXISTS concept_progress (
     sm2_efactor      DOUBLE PRECISION NOT NULL DEFAULT 2.5,
     mastered_at      TEXT,
     weakness_score   DOUBLE PRECISION NOT NULL DEFAULT 0,
+    placement_seeded INTEGER NOT NULL DEFAULT 0,
     PRIMARY KEY (student_id, concept_id)
 );
 
@@ -256,6 +258,7 @@ func pgAuthMigrate(db *sql.DB) error {
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS xp_today INTEGER NOT NULL DEFAULT 0",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS xp_date TEXT",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS diagnostic_completed INTEGER NOT NULL DEFAULT 0",
+		"ALTER TABLE students ADD COLUMN IF NOT EXISTS diagnostic_completed_at TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS daily_xp_goal INTEGER NOT NULL DEFAULT 30",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS settings TEXT NOT NULL DEFAULT '{}'",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS league TEXT NOT NULL DEFAULT 'bronze'",
@@ -271,6 +274,7 @@ func pgAuthMigrate(db *sql.DB) error {
 		"CREATE INDEX IF NOT EXISTS idx_students_email ON students(email)",
 		"CREATE INDEX IF NOT EXISTS idx_students_google_id ON students(google_id)",
 		"ALTER TABLE concept_progress ADD COLUMN IF NOT EXISTS weakness_score DOUBLE PRECISION NOT NULL DEFAULT 0",
+		"ALTER TABLE concept_progress ADD COLUMN IF NOT EXISTS placement_seeded INTEGER NOT NULL DEFAULT 0",
 		"ALTER TABLE active_sessions ADD COLUMN IF NOT EXISTS last_concept_id TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE active_sessions ADD COLUMN IF NOT EXISTS session_review INTEGER NOT NULL DEFAULT 0",
 		"ALTER TABLE active_sessions ADD COLUMN IF NOT EXISTS session_new INTEGER NOT NULL DEFAULT 0",
@@ -735,11 +739,37 @@ func (s *PostgresStore) GetXP(studentID string) (int, int, error) {
 }
 
 func (s *PostgresStore) SetDiagnosticCompleted(studentID string) error {
-	_, err := s.db.Exec("UPDATE students SET diagnostic_completed = 1 WHERE id = $1", studentID)
+	_, err := s.db.Exec(
+		"UPDATE students SET diagnostic_completed = 1, diagnostic_completed_at = CASE WHEN diagnostic_completed_at = '' THEN $1 ELSE diagnostic_completed_at END WHERE id = $2",
+		time.Now().UTC().Format(time.RFC3339), studentID,
+	)
 	if err != nil {
 		return fmt.Errorf("set diagnostic_completed: %w", err)
 	}
 	return nil
+}
+
+// DiagnosticCompletedAt mirrors SQLiteStore.DiagnosticCompletedAt: found is
+// false when the flag predates the timestamp column, so no date is invented.
+func (s *PostgresStore) DiagnosticCompletedAt(studentID string) (time.Time, bool, error) {
+	var raw string
+	err := s.db.QueryRow(
+		"SELECT diagnostic_completed_at FROM students WHERE id = $1", studentID,
+	).Scan(&raw)
+	if err == sql.ErrNoRows {
+		return time.Time{}, false, nil
+	}
+	if err != nil {
+		return time.Time{}, false, fmt.Errorf("get diagnostic completed_at: %w", err)
+	}
+	if raw == "" {
+		return time.Time{}, false, nil
+	}
+	t, err := time.Parse(time.RFC3339, raw)
+	if err != nil {
+		return time.Time{}, false, nil
+	}
+	return t, true, nil
 }
 
 func (s *PostgresStore) SetDailyXPGoal(studentID string, goal int) error {
@@ -901,7 +931,7 @@ func (s *PostgresStore) GetProgress(studentID, conceptID string) (*ConceptProgre
 		SELECT student_id, concept_id, status, streak, best_streak,
 		       avg_response_time, attempts, last_attempted, last_reviewed,
 		       next_review_due, sm2_repetitions, sm2_interval, sm2_efactor,
-		       mastered_at, weakness_score
+		       mastered_at, weakness_score, placement_seeded
 		FROM concept_progress
 		WHERE student_id = $1 AND concept_id = $2
 	`, studentID, conceptID)
@@ -918,7 +948,7 @@ func (s *PostgresStore) GetAllProgress(studentID string) (map[string]*ConceptPro
 		SELECT student_id, concept_id, status, streak, best_streak,
 		       avg_response_time, attempts, last_attempted, last_reviewed,
 		       next_review_due, sm2_repetitions, sm2_interval, sm2_efactor,
-		       mastered_at, weakness_score
+		       mastered_at, weakness_score, placement_seeded
 		FROM concept_progress
 		WHERE student_id = $1
 	`, studentID)
@@ -944,8 +974,8 @@ func (s *PostgresStore) UpsertProgress(p *ConceptProgress) error {
 			(student_id, concept_id, status, streak, best_streak,
 			 avg_response_time, attempts, last_attempted, last_reviewed,
 			 next_review_due, sm2_repetitions, sm2_interval, sm2_efactor,
-			 mastered_at, weakness_score)
-		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
+			 mastered_at, weakness_score, placement_seeded)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
 		ON CONFLICT(student_id, concept_id) DO UPDATE SET
 			status            = EXCLUDED.status,
 			streak            = EXCLUDED.streak,
@@ -965,7 +995,7 @@ func (s *PostgresStore) UpsertProgress(p *ConceptProgress) error {
 		p.AvgResponseTime, p.Attempts,
 		nullTime(p.LastAttempted), nullTime(p.LastReviewed),
 		nullTime(p.NextReviewDue), p.SM2Repetitions, p.SM2Interval,
-		p.SM2EFactor, nullTime(p.MasteredAt), p.WeaknessScore,
+		p.SM2EFactor, nullTime(p.MasteredAt), p.WeaknessScore, boolToInt(p.PlacementSeeded),
 	)
 	if err != nil {
 		return fmt.Errorf("upsert progress: %w", err)
@@ -986,8 +1016,8 @@ func (s *PostgresStore) UpsertProgressBatch(ps []*ConceptProgress) error {
 			(student_id, concept_id, status, streak, best_streak,
 			 avg_response_time, attempts, last_attempted, last_reviewed,
 			 next_review_due, sm2_repetitions, sm2_interval, sm2_efactor,
-			 mastered_at, weakness_score)
-		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
+			 mastered_at, weakness_score, placement_seeded)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
 		ON CONFLICT(student_id, concept_id) DO UPDATE SET
 			status            = EXCLUDED.status,
 			streak            = EXCLUDED.streak,
@@ -1001,7 +1031,8 @@ func (s *PostgresStore) UpsertProgressBatch(ps []*ConceptProgress) error {
 			sm2_interval      = EXCLUDED.sm2_interval,
 			sm2_efactor       = EXCLUDED.sm2_efactor,
 			mastered_at       = EXCLUDED.mastered_at,
-			weakness_score    = EXCLUDED.weakness_score
+			weakness_score    = EXCLUDED.weakness_score,
+			placement_seeded  = EXCLUDED.placement_seeded
 	`)
 	if err != nil {
 		tx.Rollback()
@@ -1014,7 +1045,7 @@ func (s *PostgresStore) UpsertProgressBatch(ps []*ConceptProgress) error {
 			p.AvgResponseTime, p.Attempts,
 			nullTime(p.LastAttempted), nullTime(p.LastReviewed),
 			nullTime(p.NextReviewDue), p.SM2Repetitions, p.SM2Interval,
-			p.SM2EFactor, nullTime(p.MasteredAt), p.WeaknessScore,
+			p.SM2EFactor, nullTime(p.MasteredAt), p.WeaknessScore, boolToInt(p.PlacementSeeded),
 		); err != nil {
 			tx.Rollback()
 			return fmt.Errorf("exec progress batch: %w", err)

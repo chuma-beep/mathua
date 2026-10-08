@@ -72,6 +72,7 @@ func authMigrate(db *sql.DB) error {
 		"ALTER TABLE students ADD COLUMN xp_today INTEGER NOT NULL DEFAULT 0",
 		"ALTER TABLE students ADD COLUMN xp_date TEXT",
 		"ALTER TABLE students ADD COLUMN diagnostic_completed INTEGER NOT NULL DEFAULT 0",
+		"ALTER TABLE students ADD COLUMN diagnostic_completed_at TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE students ADD COLUMN daily_xp_goal INTEGER NOT NULL DEFAULT 30",
 		"ALTER TABLE students ADD COLUMN settings TEXT NOT NULL DEFAULT '{}'",
 		"ALTER TABLE students ADD COLUMN league TEXT NOT NULL DEFAULT 'bronze'",
@@ -90,6 +91,7 @@ func authMigrate(db *sql.DB) error {
 		"CREATE INDEX IF NOT EXISTS idx_students_email ON students(email)",
 		"CREATE INDEX IF NOT EXISTS idx_students_google_id ON students(google_id)",
 		"ALTER TABLE concept_progress ADD COLUMN weakness_score REAL NOT NULL DEFAULT 0",
+		"ALTER TABLE concept_progress ADD COLUMN placement_seeded INTEGER NOT NULL DEFAULT 0",
 		"ALTER TABLE active_sessions ADD COLUMN last_concept_id TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE active_sessions ADD COLUMN session_review INTEGER NOT NULL DEFAULT 0",
 		"ALTER TABLE active_sessions ADD COLUMN session_new INTEGER NOT NULL DEFAULT 0",
@@ -583,11 +585,38 @@ func (s *SQLiteStore) GetXP(studentID string) (int, int, error) {
 }
 
 func (s *SQLiteStore) SetDiagnosticCompleted(studentID string) error {
-	_, err := s.db.Exec("UPDATE students SET diagnostic_completed = 1 WHERE id = ?", studentID)
+	_, err := s.db.Exec(
+		"UPDATE students SET diagnostic_completed = 1, diagnostic_completed_at = CASE WHEN diagnostic_completed_at = '' THEN ? ELSE diagnostic_completed_at END WHERE id = ?",
+		time.Now().UTC().Format(time.RFC3339), studentID,
+	)
 	if err != nil {
 		return fmt.Errorf("set diagnostic_completed: %w", err)
 	}
 	return nil
+}
+
+// DiagnosticCompletedAt reports when placement was persisted. found is false
+// when the flag was set before the timestamp column existed, in which case the
+// caller renders no date rather than inventing one.
+func (s *SQLiteStore) DiagnosticCompletedAt(studentID string) (time.Time, bool, error) {
+	var raw string
+	err := s.db.QueryRow(
+		"SELECT diagnostic_completed_at FROM students WHERE id = ?", studentID,
+	).Scan(&raw)
+	if err == sql.ErrNoRows {
+		return time.Time{}, false, nil
+	}
+	if err != nil {
+		return time.Time{}, false, fmt.Errorf("get diagnostic completed_at: %w", err)
+	}
+	if raw == "" {
+		return time.Time{}, false, nil
+	}
+	t, err := time.Parse(time.RFC3339, raw)
+	if err != nil {
+		return time.Time{}, false, nil
+	}
+	return t, true, nil
 }
 
 func (s *SQLiteStore) SetDailyXPGoal(studentID string, goal int) error {
@@ -749,7 +778,7 @@ func (s *SQLiteStore) GetProgress(studentID, conceptID string) (*ConceptProgress
 		SELECT student_id, concept_id, status, streak, best_streak,
 		       avg_response_time, attempts, last_attempted, last_reviewed,
 		       next_review_due, sm2_repetitions, sm2_interval, sm2_efactor,
-		       mastered_at, weakness_score
+		       mastered_at, weakness_score, placement_seeded
 		FROM concept_progress
 		WHERE student_id = ? AND concept_id = ?
 	`, studentID, conceptID)
@@ -766,7 +795,7 @@ func (s *SQLiteStore) GetAllProgress(studentID string) (map[string]*ConceptProgr
 		SELECT student_id, concept_id, status, streak, best_streak,
 		       avg_response_time, attempts, last_attempted, last_reviewed,
 		       next_review_due, sm2_repetitions, sm2_interval, sm2_efactor,
-		       mastered_at, weakness_score
+		       mastered_at, weakness_score, placement_seeded
 		FROM concept_progress
 		WHERE student_id = ?
 	`, studentID)
@@ -792,8 +821,8 @@ func (s *SQLiteStore) UpsertProgress(p *ConceptProgress) error {
 			(student_id, concept_id, status, streak, best_streak,
 			 avg_response_time, attempts, last_attempted, last_reviewed,
 			 next_review_due, sm2_repetitions, sm2_interval, sm2_efactor,
-			 mastered_at, weakness_score)
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 mastered_at, weakness_score, placement_seeded)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 		ON CONFLICT(student_id, concept_id) DO UPDATE SET
 			status            = excluded.status,
 			streak            = excluded.streak,
@@ -813,7 +842,7 @@ func (s *SQLiteStore) UpsertProgress(p *ConceptProgress) error {
 		p.AvgResponseTime, p.Attempts,
 		nullTime(p.LastAttempted), nullTime(p.LastReviewed),
 		nullTime(p.NextReviewDue), p.SM2Repetitions, p.SM2Interval,
-		p.SM2EFactor, nullTime(p.MasteredAt), p.WeaknessScore,
+		p.SM2EFactor, nullTime(p.MasteredAt), p.WeaknessScore, boolToInt(p.PlacementSeeded),
 	)
 	if err != nil {
 		return fmt.Errorf("upsert progress: %w", err)
@@ -834,8 +863,8 @@ func (s *SQLiteStore) UpsertProgressBatch(ps []*ConceptProgress) error {
 			(student_id, concept_id, status, streak, best_streak,
 			 avg_response_time, attempts, last_attempted, last_reviewed,
 			 next_review_due, sm2_repetitions, sm2_interval, sm2_efactor,
-			 mastered_at, weakness_score)
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+			 mastered_at, weakness_score, placement_seeded)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 		ON CONFLICT(student_id, concept_id) DO UPDATE SET
 			status            = excluded.status,
 			streak            = excluded.streak,
@@ -849,7 +878,8 @@ func (s *SQLiteStore) UpsertProgressBatch(ps []*ConceptProgress) error {
 			sm2_interval      = excluded.sm2_interval,
 			sm2_efactor       = excluded.sm2_efactor,
 			mastered_at       = excluded.mastered_at,
-			weakness_score    = excluded.weakness_score
+			weakness_score    = excluded.weakness_score,
+			placement_seeded  = excluded.placement_seeded
 	`)
 	if err != nil {
 		tx.Rollback()
@@ -862,7 +892,7 @@ func (s *SQLiteStore) UpsertProgressBatch(ps []*ConceptProgress) error {
 			p.AvgResponseTime, p.Attempts,
 			nullTime(p.LastAttempted), nullTime(p.LastReviewed),
 			nullTime(p.NextReviewDue), p.SM2Repetitions, p.SM2Interval,
-			p.SM2EFactor, nullTime(p.MasteredAt), p.WeaknessScore,
+			p.SM2EFactor, nullTime(p.MasteredAt), p.WeaknessScore, boolToInt(p.PlacementSeeded),
 		); err != nil {
 			tx.Rollback()
 			return fmt.Errorf("exec progress batch: %w", err)
@@ -1587,11 +1617,12 @@ func (s *SQLiteStore) LastQuizCompletion(studentID string) (*QuizCompletion, err
 func scanProgress(scanner interface{ Scan(...interface{}) error }) (*ConceptProgress, error) {
 	p := &ConceptProgress{}
 	var lastAtt, lastRev, nextRev, masterAt sql.NullString
+	var placementSeeded sql.NullInt64
 	err := scanner.Scan(
 		&p.StudentID, &p.ConceptID, &p.Status, &p.Streak, &p.BestStreak,
 		&p.AvgResponseTime, &p.Attempts, &lastAtt, &lastRev,
 		&nextRev, &p.SM2Repetitions, &p.SM2Interval, &p.SM2EFactor,
-		&masterAt, &p.WeaknessScore,
+		&masterAt, &p.WeaknessScore, &placementSeeded,
 	)
 	if err != nil {
 		return nil, err
@@ -1600,6 +1631,7 @@ func scanProgress(scanner interface{ Scan(...interface{}) error }) (*ConceptProg
 	p.LastReviewed = parseDate(lastRev)
 	p.NextReviewDue = parseDate(nextRev)
 	p.MasteredAt = parseDate(masterAt)
+	p.PlacementSeeded = placementSeeded.Valid && placementSeeded.Int64 == 1
 	return p, nil
 }
 

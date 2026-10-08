@@ -87,14 +87,17 @@ describe('/profile shows the report', () => {
     expect(api.getEfficacyTrend).not.toHaveBeenCalled()
   })
 
-  it('still owns the Next task, which is what makes it a hub', async () => {
+  it('still owns the learning tasks, which is what makes it a hub', async () => {
     render(<ProfilePage />)
-    const next = await screen.findByRole('region', { name: 'Next up' })
-    expect(next.querySelectorAll('a').length).toBeGreaterThan(0)
+    const learning = await screen.findByRole('region', { name: 'Your learning' })
+    // The cards are buttons (selection asks the server for eligibility first),
+    // and the "Choose what to learn" affordance is always present.
+    expect(learning.querySelectorAll('button').length).toBeGreaterThan(0)
+    expect(learning.querySelectorAll('a').length).toBeGreaterThan(0)
   })
 
 
-  it('answers "where am I" on the hub, above the Next task', async () => {
+  it('answers "where am I" on the hub, above the learning tasks', async () => {
     render(<ProfilePage />)
     const pos = await screen.findByRole('region', { name: 'Where you are' })
     // Scored against what the learner can reach, and naming that denominator. The block used
@@ -102,19 +105,10 @@ describe('/profile shows the report', () => {
     expect(pos.textContent).toMatch(/of \d+ you can reach/)
     expect(pos.textContent).not.toMatch(/concepts mastered/)
     expect(pos.textContent).not.toMatch(/still locked/i)
-    // It reads the same head the Next task does, so the position and the task
+    // It reads the same head the learning tasks do, so the position and the tasks
     // cannot disagree about what comes next.
     const regions = screen.getAllByRole('region').map(r => r.getAttribute('aria-label') ?? '')
-    expect(regions.indexOf('Where you are')).toBeLessThan(regions.indexOf('Next up'))
-
-    // ...and because it reads that same head, it needs no second button for it. Two CTAs for
-    // one task twenty lines apart is not emphasis. (The review-debt link inside this block is a
-    // different fact and stays, so the assertion is about the *head's* destination specifically.)
-    const nextUp = screen.getByRole('region', { name: 'Next up' })
-    const headHref = nextUp.querySelector('a[href]')?.getAttribute('href') ?? null
-    const posHrefs = [...pos.querySelectorAll('a[href]')].map((a) => a.getAttribute('href'))
-    expect(headHref).toBeTruthy()
-    expect(posHrefs).not.toContain(headHref)
+    expect(regions.indexOf('Where you are')).toBeLessThan(regions.indexOf('Your learning'))
   })
   it('orders Activity ahead of the rest of the report', async () => {
     render(<ProfilePage />)

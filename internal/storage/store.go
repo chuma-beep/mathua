@@ -61,6 +61,13 @@ type ConceptProgress struct {
 	SM2EFactor      float64    `json:"sm2_efactor,omitempty"`
 	MasteredAt      *time.Time `json:"mastered_at,omitempty"`
 	WeaknessScore   float64    `json:"weakness_score,omitempty"`
+	// PlacementSeeded marks a row written by the diagnostic's placement pass
+	// (ApplyGoalResults), not by demonstrated work. It grants reachability only:
+	// a placement-seeded concept satisfies its successors' prerequisites so the
+	// learner can start at their frontier, but it is never MASTERED and never
+	// counts toward mastery, XP, the quiz gate or review. Placement is not
+	// evidence (ADR-008, ADR-050).
+	PlacementSeeded bool `json:"placement_seeded,omitempty"`
 }
 
 type Session struct {
@@ -554,6 +561,12 @@ type Repository interface {
 	AddXP(studentID string, amount int) error
 	GetXP(studentID string) (total int, today int, err error)
 	SetDiagnosticCompleted(studentID string) error
+	// DiagnosticCompletedAt reports when placement completed. A separate call
+	// rather than a Student field for the same reason GetStudentRole is: widening
+	// Student means editing every fixed-column SELECT in both stores, and a
+	// missing timestamp is better read once where it is displayed than carried on
+	// every student load.
+	DiagnosticCompletedAt(studentID string) (time.Time, bool, error)
 	SetDailyXPGoal(studentID string, goal int) error
 	GetSettings(studentID string) (string, error)
 	UpdateSettings(studentID string, settings string) error
