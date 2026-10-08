@@ -34,7 +34,11 @@ export default function Header({ links }: HeaderProps) {
   const [navOpen, setNavOpen] = useState(false)
   const [avatarUrl, setAvatarUrl] = useState<string | undefined>(undefined)
   const [avatarPreset, setAvatarPreset] = useState<number | null>(null)
+  // The trigger and the panel are separate DOM subtrees now, so outside-click has to check both:
+  // the panel is no longer a descendant of the trigger, and treating it as outside would close
+  // the menu on the very mousedown that is about to activate a menu item.
   const menuRef = useRef<HTMLDivElement>(null)
+  const menuPanelRef = useRef<HTMLDivElement>(null)
   const navMenuRef = useRef<HTMLDivElement>(null)
   const compassRef = useRef<IconHandle>(null)
   const sunMoonRef = useRef<IconHandle>(null)
@@ -89,8 +93,9 @@ export default function Header({ links }: HeaderProps) {
 
   useEffect(() => {
     function onClick(e: MouseEvent) {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) setOpen(false)
-      if (navMenuRef.current && !navMenuRef.current.contains(e.target as Node)) setNavOpen(false)
+      const t = e.target as Node
+      if (!menuRef.current?.contains(t) && !menuPanelRef.current?.contains(t)) setOpen(false)
+      if (navMenuRef.current && !navMenuRef.current.contains(t)) setNavOpen(false)
     }
     function onKey(e: KeyboardEvent) {
       if (e.key === 'Escape') {
@@ -195,35 +200,6 @@ export default function Header({ links }: HeaderProps) {
                     preset={avatarPreset ?? undefined}
                   />
                 </button>
-                {open && (
-                  <div className="absolute right-0 top-[calc(100%+8px)] min-w-[160px] bg-mathua-surface border border-mathua-border shadow-lg py-1 z-50">
-                    <div className="px-3 py-2 border-b border-mathua-border">
-                      <div className="font-mono text-xs text-mathua-primary truncate">{user.name}</div>
-                      {user.username && <div className="font-mono text-[10px] text-mathua-muted truncate">@{user.username}</div>}
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setOpen(false)
-                        signOut()
-                        router.push('/login')
-                      }}
-                      className="w-full text-left px-3 py-2 font-mono text-xs text-mathua-muted hover:text-mathua-red hover:bg-mathua-surface-elevated transition-colors"
-                    >
-                      Sign out
-                    </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setOpen(false)
-                          router.push('/profile')
-                        }}
-                        className="w-full text-left px-3 py-2 font-mono text-xs text-mathua-muted hover:text-mathua-blue hover:bg-mathua-surface-elevated transition-colors"
-                      >
-                        Profile
-                      </button>
-                  </div>
-                )}
               </div>
             ) : null}
           </div>
@@ -264,6 +240,55 @@ export default function Header({ links }: HeaderProps) {
                   )}
 
 
+      {/* The profile menu hangs off <header> for the same reason the nav panel does: inside the
+          row it sits below `min-h-0 overflow-hidden`, which clips absolutely positioned children,
+          so it painted *behind* the page instead of over it — clicking the avatar put a menu under
+          the box below it. The clip has to stay (the collapse animation needs it), so the menu
+          moves out of the clipper instead of the clipper losing its clip.
+
+          Anchored to the header's own padding rather than to the button, because the button is
+          no longer an ancestor and `right-0` would have nothing to resolve against. The avatar
+          sits at the end of the same row the header's padding insets, so the two agree.
+
+          Gated on chromeVisible for the same reason as the nav panel: the trigger lives inside
+          the collapsed row, so a menu whose button is scrolled away is a floating menu with no
+          visible way to close it. */}
+      {open && chromeVisible && (
+        <div
+          ref={menuPanelRef}
+          role="menu"
+          aria-label="Profile"
+          className="absolute right-4 md:right-6 top-full min-w-[160px] bg-mathua-surface border border-mathua-border shadow-lg py-1 z-50"
+        >
+          <div className="px-3 py-2 border-b border-mathua-border">
+            <div className="font-mono text-xs text-mathua-primary truncate">{user?.name}</div>
+            {user?.username && <div className="font-mono text-[10px] text-mathua-muted truncate">@{user.username}</div>}
+          </div>
+          <button
+            type="button"
+            role="menuitem"
+            onClick={() => {
+              setOpen(false)
+              router.push('/profile')
+            }}
+            className="w-full text-left px-3 py-2 font-mono text-xs text-mathua-muted hover:text-mathua-blue hover:bg-mathua-surface-elevated transition-colors"
+          >
+            Profile
+          </button>
+          <button
+            type="button"
+            role="menuitem"
+            onClick={() => {
+              setOpen(false)
+              signOut()
+              router.push('/login')
+            }}
+            className="w-full text-left px-3 py-2 font-mono text-xs text-mathua-muted hover:text-mathua-red hover:bg-mathua-surface-elevated transition-colors"
+          >
+            Sign out
+          </button>
+        </div>
+      )}
     </header>
   )
 }
