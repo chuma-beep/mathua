@@ -252,7 +252,7 @@ export default function QuizHost() {
                     const label = conceptsData.find(c => c.id === id)?.label ?? id
                     return (
                       <li key={id}>
-                        <Link href={`/study?concept=${encodeURIComponent(id)}`} className="font-mono text-sm text-mathua-blue hover:underline">
+                        <Link href={`/learn?concept=${encodeURIComponent(id)}`} className="font-mono text-sm text-mathua-blue hover:underline">
                           {label} →
                         </Link>
                       </li>

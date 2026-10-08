@@ -366,10 +366,10 @@ export function CoverageSection() {
       <div className="flex flex-wrap items-end justify-between gap-2">
         <div className="section-label">( 05 · What Mathua covers )</div>
         <Link
-          href="/study"
+          href="/domains"
           className="font-mono text-[11px] text-mathua-muted transition-colors hover:text-mathua-blue"
         >
-          Browse all {conceptCount} concepts →
+          All {conceptCount} concepts by subject →
         </Link>
       </div>
       <div className="mt-6 grid gap-x-12 gap-y-6 md:grid-cols-2">

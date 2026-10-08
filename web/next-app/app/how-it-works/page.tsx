@@ -71,7 +71,7 @@ export default function HowItWorksPage() {
 
   return (
     <>
-      <Header links={[{ label: 'Study', href: '/study' }, { label: 'Docs', href: '/docs' }, { label: 'Note', href: '/note' }]} />
+      <Header links={[{ label: 'Learn', href: '/learn' }, { label: 'Docs', href: '/docs' }, { label: 'Note', href: '/note' }]} />
       <div className="min-h-screen w-full max-w-full min-w-0 overflow-x-hidden">
       <div className="flex max-w-[960px] mx-auto p-4 sm:p-[32px_24px] gap-4 sm:gap-10 max-md:flex-col max-md:pb-[calc(80px+env(safe-area-inset-bottom))] min-w-0">
         <NavSidebar activeSection={activeSection} />
@@ -105,8 +105,8 @@ export default function HowItWorksPage() {
               <a href="/onboard" style={{ fontFamily: "var(--font-jetbrains-mono), 'JetBrains Mono', monospace", fontSize: '13px', color: 'var(--bg)', background: 'var(--accent-blue)', padding: '10px 22px', textDecoration: 'none' }}>
                 Start diagnostic test →
               </a>
-              <a href="/study" style={{ fontFamily: "var(--font-jetbrains-mono), 'JetBrains Mono', monospace", fontSize: '13px', color: 'var(--text-secondary)', border: '0.5px solid var(--border-strong)', padding: '10px 22px', textDecoration: 'none' }}>
-                Open Study →
+              <a href="/learn" style={{ fontFamily: "var(--font-jetbrains-mono), 'JetBrains Mono', monospace", fontSize: '13px', color: 'var(--text-secondary)', border: '0.5px solid var(--border-strong)', padding: '10px 22px', textDecoration: 'none' }}>
+                Start learning →
               </a>
             </div>
           </section>

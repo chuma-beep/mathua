@@ -15,10 +15,9 @@ async function overflowPx(page: Page): Promise<number> {
 const ROUTES = [
   '/',
   '/profile',
-  '/study',
   '/learn',
   '/review',
-  '/study?concept=arith.add.single',
+  '/learn?concept=arith.add.single',
   '/graph',
   '/leaderboard',
   '/login',
@@ -175,7 +174,7 @@ test('chrome control appears wherever there is chrome, and only there', async ({
 // the same thing checked on a real phone viewport, through the real tab bar.
 test('/profile keeps the tab bar, so it is not a dead end on mobile', async ({ page }) => {
   await page.goto('/profile')
-  for (const label of ['Home', 'Learn', 'Study', 'Graph']) {
+  for (const label of ['Home', 'Learn', 'Domains', 'Graph']) {
     await expect(page.getByRole('link', { name: label, exact: true }).last()).toBeVisible()
   }
 
@@ -303,9 +302,13 @@ test('mobile pinch-zoom works on the concept map', async ({ page }) => {
 test('mobile info panel wraps without overflowing', async ({ page }) => {
   const target = sample.find(c => c.prerequisites.length > 2) ?? sample[10]
   await page.goto(`/graph?concept=${encodeURIComponent(target.id)}`)
-  const openBtn = page.getByText('Open concept →')
-  await expect(openBtn).toBeVisible({ timeout: 30_000 })
-  const box = await openBtn.boundingBox()
+  // The node action is now a link whose label follows the concept's state, not a fixed
+  // "Open concept". With no progress stubbed the concept reads as unseen, so it is the Learn
+  // half — and it is a link, because clicking a concept on the graph takes the learner to the
+  // place that teaches it rather than to an article they can read instead.
+  const action = page.getByRole('link', { name: 'Learn this →' })
+  await expect(action).toBeVisible({ timeout: 30_000 })
+  const box = await action.boundingBox()
   expect(box).toBeTruthy()
   const vw = page.viewportSize()!.width
   expect(box!.x).toBeGreaterThanOrEqual(0)
@@ -383,7 +386,8 @@ test('double-clicking Check Answer fires exactly one POST', async ({ page }) => 
     if (req.method() === 'POST' && (req.url().includes('/api/study/answer') || req.url().includes('/api/quiz/answer'))) answerPosts++
   })
 
-  // Mock Study seam: Study links into /learn (attempt-first feed) → SubmitAnswer.
+  // Mock the Learn seam: the attempt-first feed submits through POST /api/study/answer,
+  // which is the endpoint's name rather than a route the learner can visit.
   const LESSON = { title: 'Addition Basics', body: '# Addition Basics\nLearn', concepts: ['arith.add.single'] }
   const PRACTICE = { questions: [{ question: '5+4=?', answer: '9', explanation: '', source: 'curated' }], concept_id: 'arith.add.single' }
   const KP = { concept_id: 'arith.add.single', kps: [{ label: 'Use addition notation', section: 'Use Addition Notation', subgoals: [], worked_example: 'Add' }], diagram: '' }
@@ -406,10 +410,10 @@ test('double-clicking Check Answer fires exactly one POST', async ({ page }) => 
   await page.route('**/api/transcript**', r => r.fulfill({ json: { courses: [] } }))
   await page.route('**/api/efficacy**', r => r.fulfill({ json: { concepts_touched: 1, first_pass_rate: 1, second_pass_rate: 1, avg_attempts_per_concept: 1, total_attempts: 1 } }))
 
-  await page.goto('/study?lesson=' + encodeURIComponent(LESSON.title))
+  await page.goto('/learn?concept=arith.add.single')
+  // The teaching slice comes first and the question is behind it: the worked example is what
+  // the learner reads before being asked anything, and it is not the question itself.
   await expect(page.getByText('5+4=?')).toHaveCount(0)
-  await page.getByRole('link', { name: 'Start learning →' }).first().click()
-  await expect(page).toHaveURL(/\/learn\?concept=arith\.add\.single/)
   await page.getByRole('button', { name: 'Next →' }).click()
   await expect(page.getByText('5+4=?')).toBeVisible({ timeout: 30_000 })
 

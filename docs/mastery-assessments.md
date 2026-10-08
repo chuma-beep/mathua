@@ -214,11 +214,16 @@ re-derived from a moving window.
 ADR-046 names `Engine.ProgressionGate` as the single implementation and says it is called by
 `RecommendNext`, `NextQuestion` and the practice endpoint. Open: what does "blocked" refuse?
 
-The spec is explicit that it must **not** be a lock on the app — Study, Graph, History,
-Settings, and remediation all stay reachable. The remaining question is whether `/study`'s
-embedded practice and `/learn?concept=<a concept beyond the boundary>` are refusals or
-warnings, given ADR-021 made Study a reference-only surface and ADR-017 made `/learn` a soft
-dismissible banner rather than an auto-redirect.
+The spec is explicit that it must **not** be a lock on the app — Graph, History,
+Settings, and remediation all stay reachable. The remaining question is whether
+`/learn?concept=<a concept beyond the boundary>` is a refusal or a warning, given ADR-017 made
+`/learn` a soft dismissible banner rather than an auto-redirect.
+
+One half of that question is answered by closure rather than by decision. Study used to be a
+reference surface with its own embedded practice, and it asked whether that practice should
+refuse. Study is closed as a learner workflow (ADR-046), so the question no longer has two
+halves: there is one learning path, it asks one question, and whether *it* refuses is the
+question above.
 
 ---
 

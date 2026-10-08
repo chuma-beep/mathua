@@ -1129,23 +1129,30 @@ export interface RecommendationRes {
 /**
  * GET /api/next — the single answer to "what should I do now?".
  *
- * Fail-soft to a library recommendation rather than an empty response: the client used to
+ * Fail-soft to an orientation recommendation rather than an empty response: the client used to
  * assemble this from five requests plus a bundled copy of the corpus, and every one of those
  * had a fallback, so a network blip already degraded gracefully and must keep doing so.
+ *
+ * The fallback mirrors the server's own empty-state head (`internal/scheduler.Recommend`)
+ * word for word, href included. That is not tidiness: this is the one place the client
+ * answers a question the engine normally answers, and the two versions of "there is nothing
+ * for you right now" already disagreed once — this one still said "browse lessons", a route
+ * that has since been closed. Two copies of a fallback are two copies of the product's
+ * decision about what a learner with nothing to do should be told.
  */
 export async function getNext(exclude?: string[]): Promise<RecommendationRes> {
   const fallback: RecommendationRes = {
     primary: {
-      id: 'study',
+      id: 'graph',
       conceptId: '',
-      conceptTitle: 'Lesson library',
+      conceptTitle: 'Concept graph',
       kind: 'learn',
       reason: 'new',
       priority: 0,
-      action: { type: 'learn', href: '/study' },
-      badge: 'Library',
-      detail: 'Everything recommended is already learned — the reference library is open',
-      cta: 'Browse lessons →',
+      action: { type: 'learn', href: '/graph' },
+      badge: 'All learned',
+      detail: 'Nothing is due right now — the graph shows what builds on what you have',
+      cta: 'See the graph →',
     },
     alternatives: [],
     generatedAt: new Date().toISOString(),

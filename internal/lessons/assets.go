@@ -13,7 +13,7 @@ import (
 // This exists because the lesson model had nowhere to put a diagram. `Lesson` was
 // `{Title, Body, Concepts}` and `KP` was `{label, section, subgoals}`, so the only way a
 // figure could travel was as literal `![alt](path)` text inside one opaque string. That
-// works for `/study`, which renders the body verbatim, and it works *by accident* for
+// works for the reference panel, which renders the body verbatim, and it works *by accident* for
 // `/learn`, which renders one section of the body. It fails for everything else:
 //
 //   - Nothing can select the assets relevant to a specific learning step, because they are
@@ -26,7 +26,7 @@ import (
 //     rule to live, and nothing tested it.
 //
 // Assets are therefore parsed out of the body deterministically and exposed as data. The
-// body is left byte-for-byte intact: it remains the canonical reference prose that `/study`
+// body is left byte-for-byte intact: it remains the canonical reference prose the reference
 // renders, and it is the single source these are derived from, so the two cannot drift.
 
 type AssetKind string
@@ -332,7 +332,7 @@ func (l *Loader) AssetsFor(conceptID string) []Asset {
 // KPAssets returns the assets relevant to one learning step: those in the section that KP's
 // worked example is drawn from.
 //
-// This is the whole point of extracting them. `/study` shows every asset in document order,
+// This is the whole point of extracting them. The reference panel shows every asset in document order,
 // which is the reference view; `/learn` shows only these, so a shorter surface means less
 // irrelevant text rather than less instructional information.
 //

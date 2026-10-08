@@ -13,7 +13,7 @@ interface LessonAssetsProps {
 /**
  * A lesson's figures, rendered from the asset list rather than from the markdown.
  *
- * The lesson body remains canonical and `/study` renders it verbatim — this exists for the
+ * The lesson body remains canonical and the reference panel renders it verbatim — this exists for the
  * surface that shows only part of a lesson. `/learn` presents one knowledge point at a time,
  * and without this the figures in that knowledge point's section were dropped: the worked
  * example arrived as text with its diagram missing, and the concept-level diagram that the

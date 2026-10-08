@@ -24,7 +24,11 @@ test('search selects a concept and syncs the URL param', async ({ page }) => {
   await input.fill(target.label.slice(0, Math.max(4, target.label.length - 2)))
   await page.locator('button', { hasText: target.label }).first().click()
   await expect.poll(async () => page.url().includes(`concept=${encodeURIComponent(target.id)}`), { timeout: 30_000 }).toBe(true)
-  await expect(page.getByText('Open concept →')).toBeVisible({ timeout: 10_000 })
+  // The node action is chosen from the concept's own state: a concept still being learned is
+  // offered to Learn, one already demonstrated is offered to retrieval practice. With no
+  // progress stubbed, every concept reads as unseen, so this is the Learn half.
+  await expect(page.getByRole('link', { name: 'Learn this →' })).toBeVisible({ timeout: 10_000 })
+  await expect(page.getByText('Open concept →')).toHaveCount(0)
 })
 
 test('deep-link restores selection via ?concept=', async ({ page }) => {
@@ -34,7 +38,7 @@ test('deep-link restores selection via ?concept=', async ({ page }) => {
   await expect(page.locator('[data-testid="graph-wrapper"]')).toBeVisible({ timeout: 45_000 })
   await expect(page.locator('.react-flow__node').first()).toBeVisible({ timeout: 45_000 })
   await expect.poll(async () => await page.getByText(target.label).first().isVisible().catch(() => false), { timeout: 45_000 }).toBe(true)
-  await expect(page.getByText('Open concept →')).toBeVisible({ timeout: 10_000 })
+  await expect(page.getByRole('link', { name: 'Learn this →' })).toBeVisible({ timeout: 10_000 })
 })
 
 test('ambient flow toggle persists across reloads', async ({ page }) => {

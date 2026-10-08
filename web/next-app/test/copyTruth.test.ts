@@ -34,8 +34,8 @@ describe('learner-facing copy tells the truth', () => {
     { re: /\b20 XP\b/, what: 'a flat per-answer XP award the economy does not use' },
     { re: /\b150 XP\b/, what: 'the pre-rescale quiz gate; QuizGateXP is 50' },
     { re: /\b641\b/, what: 'a superseded concept count; the graph holds 657' },
-    { re: /2 in a row to advance before you practice/, what: 'an advance gate Study does not have' },
-    { re: /worked example first, then answer/, what: 'an answer step Study does not have' },
+    { re: /2 in a row to advance before you practice/, what: 'an advance gate the Learn loop does not have' },
+    { re: /worked example first, then answer/, what: 'an answer step the Learn loop does not have' },
   ]
 
   for (const { re, what } of stale) {
@@ -119,6 +119,7 @@ describe('navigation labels name where they actually go', () => {
     const host = read(join('app', 'review', 'ReviewHost.tsx'))
     const emptyState = host.slice(host.indexOf('All caught up'))
     expect(emptyState).not.toMatch(/Open Study/)
+    expect(emptyState).not.toMatch(/\/study/)
     expect(emptyState).toMatch(/href="\/learn"/)
   })
 
