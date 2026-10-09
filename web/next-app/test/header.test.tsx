@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll, beforeEach, vi } from 'vitest'
+import { describe, it, expect, beforeAll, beforeEach, afterEach, vi } from 'vitest'
 import { render, screen, fireEvent, within, cleanup } from '@testing-library/react'
 import Header from '../components/Header'
 
@@ -328,4 +328,61 @@ describe('Header profile menu', () => {
     expect(screen.queryByRole('menu', { name: 'Profile' })).toBeNull()
   })
 
+})
+
+// An administrator working from a phone had no route to administration: the desktop rail on
+// /profile carries the Admin entry, but /profile is one tap from the tab bar and no other surface
+// offered it, so the compass menu was the only place it could reach mobile. This is that test, on
+// the surface the phone actually renders.
+describe('Header compass menu and the Admin entry', () => {
+  afterEach(() => { mockUser = null })
+
+  const openCompass = () => fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }))
+  const hrefs = () => within(screen.getByRole('menu', { name: 'Site navigation' }))
+    .getAllByRole('menuitem').map(i => i.getAttribute('href'))
+
+  // Every staff role, not only `admin`: the server's staff set is moderator-or-above
+  // (storage.Role.IsStaff), and a moderator is a legitimate administrator.
+  it.each(['moderator', 'admin', 'owner'])('offers Admin to an %s', (role) => {
+    mockUser = { student_id: 's1', name: 'Nelson', username: 'wis', role }
+    render(<Header />)
+    openCompass()
+    expect(hrefs()).toContain('/admin')
+  })
+
+  it('withholds it from a learner', () => {
+    mockUser = { student_id: 's1', name: 'Nelson', username: 'wis', role: 'student' }
+    render(<Header />)
+    openCompass()
+    expect(hrefs()).not.toContain('/admin')
+  })
+
+  // A stale or pre-Admin-V2 cached bundle leaves `role` undefined. Reading that as staff would
+  // offer the entry to everyone; the server refuses it either way, but a broken invitation is
+  // worse than none.
+  it('withholds it when the role is missing', () => {
+    mockUser = { student_id: 's1', name: 'Nelson', username: 'wis' }
+    render(<Header />)
+    openCompass()
+    expect(hrefs()).not.toContain('/admin')
+  })
+
+  // The panel hangs off <header>, not off the trigger's wrapper, so the outside-mousedown test
+  // has to name the panel as well as the trigger. It did not, which closed the menu on the
+  // mousedown that was about to activate a link and unmounted it first: every destination in the
+  // mobile menu was present in the DOM and unreachable in the browser. A presence assertion
+  // cannot see that, so it is asserted here as behaviour — the link must still be attached after
+  // the mousedown that precedes its own activation. (e2e/admin.spec.ts drives the real click.)
+  it('keeps a menu link alive through its own mousedown, so it can be activated', () => {
+    mockUser = { student_id: 's1', name: 'Nelson', username: 'wis' }
+    render(<Header />)
+    openCompass()
+
+    const leaderboard = screen.getByRole('menuitem', { name: 'Leaderboard' })
+    fireEvent.mouseDown(leaderboard)
+    expect(screen.queryByRole('menu', { name: 'Site navigation' })).not.toBeNull()
+    // Still the same element, still attached, still pointing where it did.
+    expect(document.body.contains(leaderboard)).toBe(true)
+    expect(leaderboard.getAttribute('href')).toBe('/leaderboard')
+  })
 })

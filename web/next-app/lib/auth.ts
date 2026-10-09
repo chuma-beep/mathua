@@ -103,11 +103,26 @@ export interface UserInfo {
   /**
    * The account's administrative role, as reported by `/api/auth/me`.
    *
-   * Present so the app can *offer* an Admin entry, and nothing more. A missing field — an old
-   * build, a stale cached bundle — reads as a learner, which is the safe direction: the pages
-   * are still reachable by URL and the server refuses them.
+   * The four values mirror `storage.Role` (internal/storage/store.go:347). It said
+   * `'student' | 'admin'` while the server had sent four since Admin V2, so an
+   * `owner` did not type-check as staff and the type quietly narrowed what the
+   * app could offer. Present so the app can *offer* an Admin entry, and nothing
+   * more: a missing field — an old build, a stale cached bundle — reads as a
+   * learner, which is the safe direction, because the pages stay reachable by URL
+   * and the server refuses them.
    */
-  role?: 'student' | 'admin'
+  role?: 'student' | 'moderator' | 'admin' | 'owner'
+}
+
+/**
+ * Whether an account is staff (moderator, admin or owner), matching the server's
+ * `Role.IsStaff()`. An absent or unrecognised role is not staff.
+ *
+ * Offering the Admin entry is a convenience and grants nothing: every `/api/admin`
+ * route re-reads the role server-side (ADR-048, ADR-049).
+ */
+export function isStaffRole(role?: string): boolean {
+  return role === 'owner' || role === 'admin' || role === 'moderator'
 }
 
 export function setUserInfo(info: UserInfo) {

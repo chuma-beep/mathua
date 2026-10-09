@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { useTheme } from '../../hooks/useTheme'
-import { getUserInfo, ensureGuestId, ensureGuestToken, getGuestId, isLoggedIn, type UserInfo } from '../../lib/auth'
+import { getUserInfo, ensureGuestId, ensureGuestToken, getGuestId, isLoggedIn, isStaffRole, type UserInfo } from '../../lib/auth'
 import { ensureDicebearAvatar, resolveAvatar } from '../../lib/dicebear'
 import { getActivity, getProgress, getWeaknesses, getDueReviews, getEfficacy, getScores, getSettings, getMe } from '../../lib/api'
 import type { DailyActivity, Scores, WeaknessRes, ConceptProgress, EfficacyReport } from '../../lib/api'
@@ -36,9 +36,11 @@ import { HourglassIcon, PauseIcon } from '@animateicons/react/lucide'
 // and no theme control: three of the six paths — both error paths and the "Loading scores…"
 // wait — simply opted out, and the tab bar was never restored when BottomTabs came back. Wrapping
 // once makes a bare branch impossible to write by accident, which is the failure itself.
-function isStaffRole(role?: string): boolean {
-  return role === 'owner' || role === 'admin' || role === 'moderator'
-}
+//
+// `isStaffRole` used to live here as a second copy of the predicate, and it is now
+// imported from lib/auth: the copy here had no way to learn that the server's staff set is
+// moderator-or-above, so the two answers to "is this account staff" were free to disagree —
+// which is the duplicate-schema failure in its smallest form (ADR-043).
 
 function ProfileShell({
   children,

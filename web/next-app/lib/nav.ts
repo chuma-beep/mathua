@@ -47,6 +47,15 @@ export const LOGGED_IN_LINKS: NavLink[] = [
 
 export const LOGGED_OUT_LINKS: NavLink[] = [{ label: 'Login', href: '/login' }]
 
+// ADMIN_LINKS is the administrative entry, offered only to staff (moderator, admin, owner).
+//
+// It belongs in the mobile overflow specifically: the desktop rail on `/profile` has carried the
+// Admin entry since Admin V2, but on a phone `/profile` is reachable from the tab bar only, so an
+// administrator who used their phone had no route to administration at all except typing a URL.
+// Offering it grants nothing — every `/api/admin` route re-reads the role server-side
+// (ADR-048, ADR-049) — so this is the invitation the server was always the authority for.
+export const ADMIN_LINKS: NavLink[] = [{ label: 'Admin', href: '/admin' }]
+
 // Hrefs covered by the bottom tabs — never repeated in the compass menu.
 // Review is deliberately absent: the tab bar stays at five, and Review reaches
 // the header row and the compass overflow instead.
@@ -69,6 +78,11 @@ export function desktopLinks(loggedIn: boolean): NavLink[] {
 }
 
 // Mobile compass overflow: destinations missing from the bottom tabs.
-export function overflowLinks(loggedIn: boolean): NavLink[] {
-  return desktopLinks(loggedIn).filter(l => !TAB_HREFS.has(l.href))
+//
+// `isStaff` appends the Admin entry. It defaults to false, so a caller that has not asked the
+// question — a guest, a learner, or a component with no auth state — gets exactly the learner
+// menu it got before, and only an account the server has already identified as staff sees it.
+export function overflowLinks(loggedIn: boolean, isStaff = false): NavLink[] {
+  const base = desktopLinks(loggedIn).filter(l => !TAB_HREFS.has(l.href))
+  return isStaff ? [...base, ...ADMIN_LINKS] : base
 }

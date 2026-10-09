@@ -291,6 +291,36 @@ test.describe('administrator management', () => {
     await expect(page.getByTestId('profile-sidebar').getByRole('link', { name: 'Admin' })).toHaveCount(0)
   })
 
+  // The mobile case, on a phone viewport. The desktop rail on /profile has carried Admin since
+  // Admin V2, but /profile is one tap from the tab bar and no other surface offered it, so an
+  // administrator on a phone could reach administration only by typing the URL. This drives the
+  // real navigation a phone renders — the compass overflow in the header — not a resized desktop.
+  test('an administrator can reach /admin from a phone', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 })
+    stubApi(page, [ROOT, CONTRIBUTOR], 'owner')
+    stubLearnerApi(page)
+    await signIn(page, 'owner')
+    await page.goto('/learn')
+
+    await page.getByRole('button', { name: 'Open navigation menu' }).click()
+    const admin = page.getByRole('menu', { name: 'Site navigation' }).getByRole('menuitem', { name: 'Admin' })
+    await expect(admin).toBeVisible()
+    await admin.click()
+    await expect(page).toHaveURL(/\/admin/)
+    // Reaches the real page, not a 404 or a broken render.
+    await expect(page.getByRole('heading', { name: 'Overview' })).toBeVisible()
+  })
+
+  test('a learner is not offered the Admin entry on a phone', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 })
+    stubLearnerApi(page)
+    await signIn(page, 'student')
+    await page.goto('/learn')
+
+    await page.getByRole('button', { name: 'Open navigation menu' }).click()
+    await expect(page.getByRole('menu', { name: 'Site navigation' }).getByRole('menuitem', { name: 'Admin' })).toHaveCount(0)
+  })
+
   test('a staff member is still an ordinary learner', async ({ page }) => {
     stubApi(page, [ROOT, CONTRIBUTOR], 'owner')
     stubLearnerApi(page)

@@ -9,7 +9,7 @@ import { useAuthState } from '../hooks/useAuthState'
 import { useChrome } from '../hooks/useChrome'
 import { useInertWhen } from '../hooks/useInertWhen'
 import { registerChromePart } from '../lib/chrome'
-import { signOut } from '../lib/auth'
+import { signOut, isStaffRole } from '../lib/auth'
 import { resolveAvatar } from '../lib/dicebear'
 import Avatar from './Avatar'
 import { getSettings } from '../lib/api'
@@ -40,6 +40,7 @@ export default function Header({ links }: HeaderProps) {
   const menuRef = useRef<HTMLDivElement>(null)
   const menuPanelRef = useRef<HTMLDivElement>(null)
   const navMenuRef = useRef<HTMLDivElement>(null)
+  const navPanelRef = useRef<HTMLDivElement>(null)
   const compassRef = useRef<IconHandle>(null)
   const sunMoonRef = useRef<IconHandle>(null)
 
@@ -95,7 +96,12 @@ export default function Header({ links }: HeaderProps) {
     function onClick(e: MouseEvent) {
       const t = e.target as Node
       if (!menuRef.current?.contains(t) && !menuPanelRef.current?.contains(t)) setOpen(false)
-      if (navMenuRef.current && !navMenuRef.current.contains(t)) setNavOpen(false)
+      // The panel must be named here as well as the trigger. It hangs off <header> rather
+      // than off the trigger's wrapper, so a mousedown on one of its own links is not inside
+      // navMenuRef — and closing on it unmounted the link before the click could activate it,
+      // which is why every destination in the mobile menu was dead: the items were in the DOM
+      // and nothing could reach them.
+      if (navMenuRef.current && !navMenuRef.current.contains(t) && !navPanelRef.current?.contains(t)) setNavOpen(false)
     }
     function onKey(e: KeyboardEvent) {
       if (e.key === 'Escape') {
@@ -115,7 +121,12 @@ export default function Header({ links }: HeaderProps) {
   // missing from the bottom tabs) so nothing appears twice on one screen.
   // A custom links list (e.g. docs section menu) is shown in full.
   const displayLinks = links || desktopLinks(loggedIn)
-  const compassLinks = links || overflowLinks(loggedIn)
+  // The Admin entry reaches mobile through the compass overflow. The desktop rail on
+  // /profile has always carried it; a phone had no route to administration at all,
+  // because `/profile` is one tap from the tab bar and nothing on any other page
+  // offered it. The role comes from `/api/auth/me` via the session, and offering it
+  // grants nothing — the admin routes re-check it server-side.
+  const compassLinks = links || overflowLinks(loggedIn, isStaffRole(user?.role))
 
   return (
     // The header is sticky and therefore in flow, so hiding it with a transform
@@ -233,6 +244,7 @@ export default function Header({ links }: HeaderProps) {
                     <div
                       role="menu"
                       aria-label="Site navigation"
+                      ref={navPanelRef}
                       className="pointer-events-auto absolute right-4 md:right-6 top-full min-w-[200px] bg-mathua-surface border border-mathua-border shadow-lg py-1 z-50 md:hidden"
                     >
                       {compassLinks.map(link => {
