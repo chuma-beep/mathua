@@ -189,6 +189,25 @@ function stubLearnerApi(page: Page) {
   }
 }
 
+/**
+ * The account endpoint, for a session whose stored copy has no role.
+ *
+ * `LEARNER_API` deliberately does not cover `/api/auth/me`: it is the endpoint under test here,
+ * and stubbing it with the generic list is how the real fetch went unanswered in the first
+ * version of this test — a stub that returns nothing is indistinguishable from a server that
+ * says "not staff", which is the exact confusion this feature is about.
+ */
+function stubAccount(page: Page, role: Role) {
+  page.route('**/api/auth/me', (route) => {
+    if (route.request().method() === 'OPTIONS') return route.fulfill({ status: 204, headers: CORS })
+    return route.fulfill(json({
+      student_id: 'a-root', name: 'Root', username: 'root',
+      concepts_mastered: 0, current_streak: 0, level: 'Novice',
+      diagnostic_completed: true, role,
+    }))
+  })
+}
+
 const rowFor = (page: Page, email: string) => page.locator('tr', { has: page.getByText(email) })
 
 async function setRole(page: Page, email: string, role: Role) {
@@ -319,6 +338,58 @@ test.describe('administrator management', () => {
 
     await page.getByRole('button', { name: 'Open navigation menu' }).click()
     await expect(page.getByRole('menu', { name: 'Site navigation' }).getByRole('menuitem', { name: 'Admin' })).toHaveCount(0)
+  })
+
+  // The case that actually happened, and that every test above missed.
+  //
+  // The role lived only in `mathua_user`, written once at login. A phone signed in before
+  // Admin V2 has no `role` in it at all, and `establishSession` had been dropping `moderator`
+  // and `owner` anyway — so the Admin entry could not appear on that device at all, on a
+  // sidebar or in the compass menu, while a desktop that had re-authenticated showed it.
+  // Nothing re-read the role, so it never self-repaired. Every test that "proved" the entry
+  // worked wrote `role` straight into localStorage and skipped the login path that loses it.
+  //
+  // This drives a stale session — exactly what the phone has — and lets the app read the role
+  // from the server on load.
+  test('a session with no cached role picks the role up from the server on a phone', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 })
+    stubApi(page, [ROOT, CONTRIBUTOR], 'owner')
+    stubLearnerApi(page)
+    stubAccount(page, 'owner')
+    // A session written before roles existed: a token, and a user record with no `role`.
+    await page.addInitScript(() => {
+      localStorage.setItem('mathua_token', 'e2e-token')
+      localStorage.setItem('mathua_user', JSON.stringify({
+        student_id: 'a-root', name: 'Root', username: 'root',
+        concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: true,
+      }))
+    })
+
+    await page.goto('/learn')
+    await page.getByRole('button', { name: 'Open navigation menu' }).click()
+    await expect(page.getByRole('menu', { name: 'Site navigation' }).getByRole('menuitem', { name: 'Admin' }))
+      .toBeVisible({ timeout: 10_000 })
+
+    // …and the stale session is repaired, so the next page load needs no request.
+    const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('mathua_user') || '{}'))
+    expect(stored.role).toBe('owner')
+  })
+
+  // The sidebar is where a phone user looks first: /profile is one tap from the tab bar, and its
+  // sheet is the surface that was already carrying an Admin entry on desktop.
+  test('the sidebar sheet carries the Admin entry on a phone', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 })
+    stubApi(page, [ROOT, CONTRIBUTOR], 'owner')
+    stubLearnerApi(page)
+    stubAccount(page, 'owner')
+    await signIn(page, 'owner')
+
+    await page.goto('/profile')
+    // On a phone the sidebar is a sheet, mounted only while open (sidebar.tsx:190), so the entry
+    // lives inside it rather than on the page. The opener is the ghost SidebarTrigger /profile
+    // renders above the content on small screens, and it has no accessible name of its own.
+    await page.locator('button:has(span:text-is("λ"))').first().click()
+    await expect(page.getByRole('dialog').getByRole('link', { name: 'Admin' })).toBeVisible({ timeout: 10_000 })
   })
 
   test('a staff member is still an ordinary learner', async ({ page }) => {

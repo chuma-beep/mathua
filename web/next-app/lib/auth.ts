@@ -125,6 +125,24 @@ export function isStaffRole(role?: string): boolean {
   return role === 'owner' || role === 'admin' || role === 'moderator'
 }
 
+/** The four roles `storage.Role` defines. Anything else is not a role we offer. */
+export type AccountRole = 'student' | 'moderator' | 'admin' | 'owner'
+
+/**
+ * Narrows the server's `role` field to a known account role.
+ *
+ * `establishSession` kept only `'admin' | 'student'` while the server has sent four
+ * values since Admin V2, so a **moderator or owner was dropped at login**: the stored
+ * `mathua_user` carried no role, `isStaffRole` answered false, and the Admin entry
+ * appeared for no one — on a phone or anywhere. The type in `UserInfo` and the one in
+ * `MeSchema` both listed four; only this comparison had not been widened, which is
+ * the same duplicate-schema failure ADR-043 recorded, arriving as a string
+ * comparison nobody re-read. The check is now one function over the role list.
+ */
+export function isAccountRole(role: unknown): role is AccountRole {
+  return role === 'student' || role === 'moderator' || role === 'admin' || role === 'owner'
+}
+
 export function setUserInfo(info: UserInfo) {
   localStorage.setItem(USER_KEY, JSON.stringify(info))
   window.dispatchEvent(new Event('auth-changed'))
@@ -268,7 +286,7 @@ export async function establishSession(
         student_id: typeof me.student_id === 'string' ? me.student_id : partial.student_id,
         name: typeof me.name === 'string' ? me.name : partial.name,
       }
-      if (me.role === 'admin' || me.role === 'student') merged.role = me.role
+      if (isAccountRole(me.role)) merged.role = me.role
       if (typeof me.has_password === 'boolean') merged.has_password = me.has_password
       setUserInfo(merged)
       return merged
@@ -278,4 +296,54 @@ export async function establishSession(
   }
   setUserInfo({ ...partial })
   return { ...partial }
+}
+
+/**
+ * The account the server says this token belongs to, or null when it cannot say.
+ *
+ * This exists because the stored session is a *cache* of `/api/auth/me`, and a cache of a
+ * privilege is only as good as its last write. A phone that signed in before Admin V2 carries
+ * no `role` at all, and one that signed in after it had `moderator` and `owner` dropped by
+ * `establishSession`'s `'admin' | 'student'` comparison — so on that device the Admin entry
+ * could never appear, on a sidebar or anywhere, while a desktop that had re-authenticated
+ * showed it. The same person, two devices, one product defect.
+ *
+ * So the role is read from the server wherever it is offered, and this is what reads it. A
+ * successful read repairs the stored session through the normal `setUserInfo` path, which
+ * broadcasts `auth-changed` and updates every `useAuthState` consumer at once.
+ *
+ * Returns null on any failure. That is deliberately not "learner": an unread role must not be
+ * cached as one, or a phone offline at the wrong moment would store "not staff" permanently.
+ */
+export async function fetchMe(token?: string): Promise<UserInfo | null> {
+  const bearer = token ?? getToken()
+  if (!bearer) return null
+  try {
+    const res = await fetch(`${API_BASE}/api/auth/me`, {
+      headers: { Authorization: `Bearer ${bearer}` },
+      cache: 'no-store',
+    })
+    if (!res.ok) return null
+    const me = (await res.json()) as Partial<UserInfo> & { role?: unknown }
+    if (typeof me.student_id !== 'string') return null
+    const stored = getUserInfo()
+    const merged: UserInfo = {
+      ...(stored ?? {
+        student_id: me.student_id,
+        name: typeof me.name === 'string' ? me.name : '',
+        username: '',
+        concepts_mastered: 0,
+        current_streak: 0,
+        level: '',
+        diagnostic_completed: false,
+      }),
+      student_id: me.student_id,
+    }
+    if (isAccountRole(me.role)) merged.role = me.role
+    if (typeof me.name === 'string') merged.name = me.name
+    setUserInfo(merged)
+    return merged
+  } catch {
+    return null
+  }
 }

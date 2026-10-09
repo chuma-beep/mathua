@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { setToken, clearToken, getToken, authedFetch, getGuestToken, ensureGuestToken, getAuthHeaders } from '../lib/auth'
+import { setToken, clearToken, getToken, authedFetch, getGuestToken, ensureGuestToken, getAuthHeaders, establishSession, fetchMe, getUserInfo, setUserInfo, isStaffRole } from '../lib/auth'
 import { validateToken, login } from '../lib/api'
 
 function mockFetchOnce(res: Partial<Response> & { json?: () => Promise<object> }) {
@@ -149,5 +149,92 @@ describe('login persistence', () => {
     await getLessons('guest_1')
     const [, init] = fetchMock.mock.calls[0] as [string, RequestInit]
     expect(new Headers(init.headers).get('Authorization')).toBe('Bearer guest-tok')
+  })
+})
+
+// The role has four values, and this function used to keep two of them.
+//
+// A `moderator` or an `owner` signing in on a phone had its role dropped here, so the stored
+// session carried no `role`, `isStaffRole` answered false, and the Admin entry never appeared on
+// that device — on the sidebar or in the compass menu — while a desktop that had re-authenticated
+// showed it. The Admin link was therefore absent on exactly the devices nobody tests from.
+describe('establishSession keeps every role', () => {
+  beforeEach(() => {
+    localStorage.clear()
+    vi.unstubAllGlobals()
+  })
+  afterEach(() => vi.unstubAllGlobals())
+
+  it.each(['student', 'moderator', 'admin', 'owner'])('stores %s', async (role) => {
+    mockFetchOnce({ json: async () => ({ student_id: 's1', name: 'Root', role }) })
+    const me = await establishSession('tok', {
+      student_id: 's1', name: 'Root', username: 'root',
+      concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: true,
+    })
+    expect(me.role).toBe(role)
+    expect(getUserInfo()?.role).toBe(role)
+  })
+
+  it('treats the two staff roles as staff', async () => {
+    mockFetchOnce({ json: async () => ({ student_id: 's1', name: 'Root', role: 'owner' }) })
+    await establishSession('tok', {
+      student_id: 's1', name: 'Root', username: 'root',
+      concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: true,
+    })
+    expect(isStaffRole(getUserInfo()?.role)).toBe(true)
+  })
+
+  it('leaves the role unset when the server sends one this build does not know', async () => {
+    // A future role must not be cached as a privilege nobody has audited.
+    mockFetchOnce({ json: async () => ({ student_id: 's1', name: 'Root', role: 'superuser' }) })
+    const me = await establishSession('tok', {
+      student_id: 's1', name: 'Root', username: 'root',
+      concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: true,
+    })
+    expect(me.role).toBeUndefined()
+  })
+})
+
+// A session written before roles existed must repair itself rather than stay without one
+// forever. This is the phone: the session is old, the account is not.
+describe('fetchMe repairs a session with no cached role', () => {
+  beforeEach(() => {
+    localStorage.clear()
+    vi.unstubAllGlobals()
+  })
+  afterEach(() => vi.unstubAllGlobals())
+
+  it('writes the role the server reports', async () => {
+    setToken('tok')
+    setUserInfo({
+      student_id: 'a-root', name: 'Root', username: 'root',
+      concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: true,
+    })
+    expect(getUserInfo()?.role).toBeUndefined()
+
+    mockFetchOnce({ json: async () => ({ student_id: 'a-root', name: 'Root', role: 'moderator' }) })
+    const me = await fetchMe()
+    expect(me?.role).toBe('moderator')
+    expect(getUserInfo()?.role).toBe('moderator')
+  })
+
+  // "We could not ask" must never become "not staff": that would cache a wrong answer into the
+  // stored session, which is exactly the failure this repair exists to undo.
+  it('leaves the stored session untouched when the server cannot be reached', async () => {
+    setToken('tok')
+    setUserInfo({
+      student_id: 'a-root', name: 'Root', username: 'root',
+      concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: true,
+    })
+    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('offline')))
+    expect(await fetchMe()).toBeNull()
+    expect(getUserInfo()?.role).toBeUndefined()
+  })
+
+  it('does not cache a missing role as student', async () => {
+    setToken('tok')
+    mockFetchOnce({ json: async () => ({ student_id: 'a-root', name: 'Root' }) })
+    await fetchMe()
+    expect(getUserInfo()?.role).toBeUndefined()
   })
 })
