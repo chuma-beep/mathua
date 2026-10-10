@@ -480,14 +480,15 @@ footer .link-underline:hover {
    it reads as its own world rather than as chrome.
 
    Only the desktop attribute is read here, and the mobile one inside the media
-   query below. Pairing them in one selector list, as this used to, let the phone's
-   tone decide the desktop: an entry whose portrait is a dark print set dark ink and
-   a dark scrim on a desktop showing a pale landscape, so the footer changed
-   appearance depending on which entry the random pick happened to land on. */
+   query below. Pairing them in one selector list, as this used to, let the mobile
+   tone decide the desktop: an entry whose phone picture is a dark print set dark
+   ink and a dark scrim on a desktop showing a pale landscape, so the footer
+   changed appearance depending on which entry the random pick happened to land
+   on -- and the corner wash inherited the wrong colour with it. */
 .footer[data-tone-desktop='light'] {
   --footer-scrim: oklch(1 0 0);
   --footer-ink: oklch(0.18 0.01 264);
-  --footer-ink-muted: oklch(0.38 0.02 264);
+  --footer-ink-muted: oklch(0.28 0.02 264);
   --footer-rule: oklch(0.18 0.01 264 / 0.25);
 }
 
@@ -502,7 +503,7 @@ footer .link-underline:hover {
   .footer[data-tone-mobile='light'] {
     --footer-scrim: oklch(1 0 0);
     --footer-ink: oklch(0.18 0.01 264);
-    --footer-ink-muted: oklch(0.38 0.02 264);
+    --footer-ink-muted: oklch(0.28 0.02 264);
     --footer-rule: oklch(0.18 0.01 264 / 0.25);
   }
 
@@ -570,19 +571,58 @@ footer .link-underline:hover {
 .footer-scrim {
   grid-area: 1 / 1;
   pointer-events: none;
-  background:
-    linear-gradient(
-      to bottom,
-      color-mix(in srgb, var(--footer-scrim) 82%, transparent) 0%,
-      color-mix(in srgb, var(--footer-scrim) 46%, transparent) 26%,
-      transparent 44%
-    ),
-    linear-gradient(
-      to top,
-      color-mix(in srgb, var(--footer-scrim) 70%, transparent) 0%,
-      color-mix(in srgb, var(--footer-scrim) 30%, transparent) 18%,
-      transparent 34%
-    );
+  /* The gradients live in custom properties rather than inline in `background` so
+     the desktop rule can add a layer to the same stack instead of restating them. */
+  --footer-scrim-corner: radial-gradient(
+    95% 80% at 100% 0%,
+    color-mix(in srgb, var(--footer-scrim) 88%, transparent) 0%,
+    color-mix(in srgb, var(--footer-scrim) 55%, transparent) 40%,
+    transparent 72%
+  );
+  --footer-scrim-top: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--footer-scrim) 82%, transparent) 0%,
+    color-mix(in srgb, var(--footer-scrim) 46%, transparent) 26%,
+    transparent 44%
+  );
+  --footer-scrim-bottom: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--footer-scrim) 70%, transparent) 0%,
+    color-mix(in srgb, var(--footer-scrim) 30%, transparent) 18%,
+    transparent 34%
+  );
+  background: var(--footer-scrim-top), var(--footer-scrim-bottom);
+}
+
+/* The corner wash.
+
+   The two bands are horizontal, and they assume the top of a print is uniformly
+   toned. It is not. From md up the nav sits in the top-right corner, and on
+   `grey-mountains` that corner is a black tree -- so the LEARN and RESOURCES
+   columns were drawn in dark ink over black foliage and two of the links could
+   not be read at all. No horizontal gradient can be strong over black bark and
+   weak over pale sky at the same time.
+
+   Radial, anchored to that corner, because the brand sits in the top-left of the
+   same band and a `to bottom left` gradient strong enough for black bark is also
+   strong over the wordmark -- measured, and the brand washed to 3.8:1 while the
+   nav sat at 1.05:1. A circle centred on the corner falls off on both axes, so it
+   is strong where the nav is and reaches nothing by the time it gets to the brand.
+   Sized 95% x 80% and transparent by 72% of that radius, so it dies well above the
+   bottom band carrying the credits and well before the dark cliff at the right
+   edge.
+
+   It is a background layer and not a pseudo-element on purpose. Positioning
+   `.footer-scrim` is what a `::after` needs, and a positioned box paints above the
+   static `.footer-content` sharing its grid cell -- so the wash veiled the words
+   instead of sitting behind them and the brand faded to 1.7:1. A plain background
+   layer keeps the original paint order, where the content follows the scrim in the
+   DOM and wins. Dark tone paints with --footer-scrim like everything else, so this
+   follows the artwork rather than the theme. */
+@media (min-width: 768px) {
+  .footer-scrim {
+    background: var(--footer-scrim-corner), var(--footer-scrim-top), var(--footer-scrim-bottom);
+  }
 }
 
 .footer-credits {
