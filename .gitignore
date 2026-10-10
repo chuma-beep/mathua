@@ -115,9 +115,17 @@ tmp/
 temp/mathua.db*
 mathua.db*
 
-# GIMP working files. The artwork in public/ is edited in GIMP, and the .xcf is
-# the layered source at several megabytes -- committing it would put a binary
-# source file in the tree next to the flattened export the app actually serves.
+# Artwork working files, outside public/ on purpose.
+#
+# Anything in web/next-app/public/ is copied into out/ and deployed whether or not
+# the app links to it. The layered GIMP source and the lossless intermediate were
+# sitting in there alongside the flattened JPEG the login page actually uses, which
+# put 3.9 MB of unreferenced files in every build. They live in design/ now.
+design/
+
+# GIMP working files. Kept in case one is opened inside public/ again rather than
+# dragged out of it: it is the layered source at several megabytes, and committing
+# it would put a binary source file in the tree next to the export the app serves.
 *.xcf
 
 # Local analysis artifacts
