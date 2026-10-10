@@ -477,17 +477,21 @@ footer .link-underline:hover {
 }
 
 /* A pale print: dark text. The footer becomes a bright band, which is the point --
-   it reads as its own world rather than as chrome. */
-.footer[data-tone-desktop='light'],
-.footer[data-tone-mobile='light'] {
+   it reads as its own world rather than as chrome.
+
+   Only the desktop attribute is read here, and the mobile one inside the media
+   query below. Pairing them in one selector list, as this used to, let the phone's
+   tone decide the desktop: an entry whose portrait is a dark print set dark ink and
+   a dark scrim on a desktop showing a pale landscape, so the footer changed
+   appearance depending on which entry the random pick happened to land on. */
+.footer[data-tone-desktop='light'] {
   --footer-scrim: oklch(1 0 0);
   --footer-ink: oklch(0.18 0.01 264);
   --footer-ink-muted: oklch(0.38 0.02 264);
   --footer-rule: oklch(0.18 0.01 264 / 0.25);
 }
 
-.footer[data-tone-desktop='dark'],
-.footer[data-tone-mobile='dark'] {
+.footer[data-tone-desktop='dark'] {
   --footer-scrim: oklch(0.14 0.01 264);
   --footer-ink: oklch(1 0 0);
   --footer-ink-muted: oklch(0.88 0 0);
