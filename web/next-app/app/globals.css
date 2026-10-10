@@ -446,60 +446,160 @@ footer .link-underline:hover {
   opacity: 0.6;
 }
 
-/* Footer texture. It is an image file, so it cannot read the theme's custom
-   properties -- and it composites about twice as strongly on the dark
-   background as on the light one, so the two themes need different opacities
-   to read as equally subtle. */
-.footer-bg {
-  background-image: url('/footer-bg.avif');
-  opacity: 0.45;
+/* Footer artwork and text.
+
+   One grid cell holds both the picture and every word of the footer. The row is
+   therefore max(image height, content height): the artwork sets it when it is the
+   taller of the two, and the text sets it when the text is -- so a narrow screen,
+   a long translation, or a larger type size grows the footer instead of clipping
+   the content. That floor is the reason this is grid rather than a
+   position:absolute overlay, which would have no floor at all.
+
+   The picture is an <img> at width:100% / height:auto, so it is never cropped and
+   never stretched, and it needs no aspect ratio declared to CSS.
+
+   Ink comes from the picture, not the theme. Every word of the footer is drawn on
+   top of artwork that is shown in both themes unchanged, so the text has to suit
+   the artwork -- and the two pictures of one entry can be opposites. Hence two
+   tone attributes, read in the media query that selects the picture that goes
+   with them. */
+
+.footer {
+  --footer-ink: var(--text-primary);
+  --footer-ink-muted: var(--text-muted);
+  --footer-rule: var(--border);
+  display: grid;
+  /* Every word of the footer is drawn on the artwork, so the whole subtree takes
+     its ink from here. Without this the brand and the links inherit the page
+     body's colour instead -- correct on a page, invisible over a pale print in
+     the dark theme. */
+  color: var(--footer-ink);
 }
 
-.dark .footer-bg {
-  opacity: 0.17;
+/* A pale print: dark text. The footer becomes a bright band, which is the point --
+   it reads as its own world rather than as chrome. */
+.footer[data-tone-desktop='light'],
+.footer[data-tone-mobile='light'] {
+  --footer-scrim: oklch(1 0 0);
+  --footer-ink: oklch(0.18 0.01 264);
+  --footer-ink-muted: oklch(0.38 0.02 264);
+  --footer-rule: oklch(0.18 0.01 264 / 0.25);
 }
 
-/* Footer background art, behind the content: the luffy-bg silhouette, scaled to
-   the footer width and anchored to the foot. It is an RGBA silhouette, fully
-   transparent at the top and dense at the bottom, so it blends into --bg on its
-   own. Near-black, so .dark inverts it into a light silhouette; it is
-   greyscale, so invert alone is enough.
-
-   It shows on phones and tablets, up to lg. From lg up the footer is
-   deliberately plain -- page-colored with a hairline, no image -- so the art
-   layer is hidden rather than stretched across a wide box. */
-
-.footer-art {
-  background-image: url('/luffy-bg.avif');
-  background-size: 100% auto;
-  background-position: center bottom;
-  background-repeat: no-repeat;
+.footer[data-tone-desktop='dark'],
+.footer[data-tone-mobile='dark'] {
+  --footer-scrim: oklch(0.14 0.01 264);
+  --footer-ink: oklch(1 0 0);
+  --footer-ink-muted: oklch(0.88 0 0);
+  --footer-rule: oklch(1 0 0 / 0.28);
 }
 
-.dark .footer-art {
-  filter: invert(1);
-}
+@media (max-width: 639px) {
+  .footer[data-tone-mobile='light'] {
+    --footer-scrim: oklch(1 0 0);
+    --footer-ink: oklch(0.18 0.01 264);
+    --footer-ink-muted: oklch(0.38 0.02 264);
+    --footer-rule: oklch(0.18 0.01 264 / 0.25);
+  }
 
-@media (min-width: 1024px) {
-  .footer-art {
-    display: none;
+  .footer[data-tone-mobile='dark'] {
+    --footer-scrim: oklch(0.14 0.01 264);
+    --footer-ink: oklch(1 0 0);
+    --footer-ink-muted: oklch(0.88 0 0);
+    --footer-rule: oklch(1 0 0 / 0.28);
   }
 }
 
-/* From md up the layout is a row, so the nav columns sit top-right -- exactly
-   where the figure is, and the links land on his hat. A soft scrim in that
-   corner fades him back; it is transparent by 70% toward the bottom-left, so
-   his body, cape and the smoke keep full strength. color-mix on --bg tracks
-   both themes. Below md the figure lands under the nav instead, so it is not
-   needed. */
+.footer-art {
+  grid-area: 1 / 1;
+  /* Start-aligned, not stretched: if the text is the taller of the two, the
+     artwork keeps its own proportions and the footer simply grows below it. */
+  align-self: start;
+}
+
+.footer-art-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.footer-content {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2.5rem 1rem 2rem;
+}
+
+.footer-content-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
 @media (min-width: 768px) {
-  .footer-scrim {
-    background: linear-gradient(
-      to bottom left,
-      color-mix(in srgb, var(--bg) 90%, transparent) 0%,
-      color-mix(in srgb, var(--bg) 55%, transparent) 38%,
-      transparent 70%
+  .footer-content {
+    padding: 3.5rem 2.5rem 2.5rem;
+  }
+
+  .footer-content-row {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer-content {
+    padding: 3.5rem 2.5rem 2.5rem;
+  }
+}
+
+/* The scrim. Two bands, not a wash: the footer's words are all at the top and
+   the bottom, so the middle of the print is left exactly as chosen. Colour
+   follows the tone -- light ink needs a light scrim under it and vice versa --
+   because the alternative is text that is unreadable wherever the artwork happens
+   to be dark, which for these prints is the trees on the left and the rocks
+   along the bottom. */
+.footer-scrim {
+  grid-area: 1 / 1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--footer-scrim) 82%, transparent) 0%,
+      color-mix(in srgb, var(--footer-scrim) 46%, transparent) 26%,
+      transparent 44%
+    ),
+    linear-gradient(
+      to top,
+      color-mix(in srgb, var(--footer-scrim) 70%, transparent) 0%,
+      color-mix(in srgb, var(--footer-scrim) 30%, transparent) 18%,
+      transparent 34%
     );
+}
+
+.footer-credits {
+  color: var(--footer-ink-muted);
+  border-color: var(--footer-rule);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 0.75rem;
+  row-gap: 0.25rem;
+}
+
+/* The mobile tab bar is `fixed`, `h-[56px]`, at `bottom: max(12px, safe-area)`,
+   and the footer is the last element on the page, so the footer's bottom edge is
+   the document's bottom edge and the bar floats over it. That would hide the base
+   of the print -- the part that makes it a landscape rather than a crop of one.
+   This margin ends the artwork exactly where the bar begins. Zero from lg up,
+   where there is no bar. */
+@media (max-width: 1023px) {
+  .footer {
+    margin-bottom: max(68px, calc(56px + env(safe-area-inset-bottom)));
   }
 }
 
@@ -576,6 +676,7 @@ footer .link-underline:hover {
   width: 100%;
   min-width: 0;
 }
+
 
 math-field.mathua-math-field {
   display: block;
