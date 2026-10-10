@@ -115,6 +115,11 @@ tmp/
 temp/mathua.db*
 mathua.db*
 
+# GIMP working files. The artwork in public/ is edited in GIMP, and the .xcf is
+# the layered source at several megabytes -- committing it would put a binary
+# source file in the tree next to the flattened export the app actually serves.
+*.xcf
+
 # Local analysis artifacts
 .understand-anything/
 
