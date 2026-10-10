@@ -47,27 +47,27 @@ export interface FooterArt {
 
 export const FOOTER_ART: FooterArt[] = [
   {
-    desktop: { file: '/footer/coastal-town.jpg', width: 1672, height: 941, tone: 'light' },
+    desktop: { file: '/footer/coastal-town.jpg', width: 1672, height: 643, tone: 'light' },
     mobile: { file: '/footer/mobile-reader.jpg', width: 1080, height: 1920, tone: 'light' },
   },
   {
-    desktop: { file: '/footer/coastal-town.jpg', width: 1672, height: 941, tone: 'light' },
+    desktop: { file: '/footer/coastal-town.jpg', width: 1672, height: 643, tone: 'light' },
     mobile: { file: '/footer/mobile-coast.jpg', width: 675, height: 1200, tone: 'light' },
   },
   {
-    desktop: { file: '/footer/grey-mountains.jpg', width: 1920, height: 1080, tone: 'light' },
+    desktop: { file: '/footer/grey-mountains.jpg', width: 1920, height: 738, tone: 'light' },
     mobile: { file: '/footer/mobile-field.jpg', width: 638, height: 1140, tone: 'dark' },
   },
   {
-    desktop: { file: '/footer/coastal-town.jpg', width: 1672, height: 941, tone: 'light' },
+    desktop: { file: '/footer/coastal-town.jpg', width: 1672, height: 643, tone: 'light' },
     mobile: { file: '/footer/mobile-lighthouse.jpg', width: 816, height: 1456, tone: 'dark' },
   },
   {
-    desktop: { file: '/footer/grey-mountains.jpg', width: 1920, height: 1080, tone: 'light' },
+    desktop: { file: '/footer/grey-mountains.jpg', width: 1920, height: 738, tone: 'light' },
     mobile: { file: '/footer/mobile-clouds.jpg', width: 1290, height: 2580, tone: 'light' },
   },
   {
-    desktop: { file: '/footer/grey-mountains.jpg', width: 1920, height: 1080, tone: 'light' },
+    desktop: { file: '/footer/grey-mountains.jpg', width: 1920, height: 738, tone: 'light' },
     mobile: { file: '/footer/mobile-library.jpg', width: 723, height: 1076, tone: 'dark' },
   },
 ]
