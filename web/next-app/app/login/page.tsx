@@ -6,12 +6,10 @@ import { Suspense, useEffect, useReducer, useState } from 'react'
 import { useTheme } from '../../hooks/useTheme'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import Header from '../../components/Header'
-import BottomTabs from '../../components/BottomTabs'
-import Footer from '../../components/Footer'
 import SectionHeader from '../../components/SectionHeader'
 import { signup, login, validateToken, requestPasswordReset, completePasswordReset, startOAuthLogin, googleOneTap, OAUTH_LABELS, type OAuthProvider, API_BASE, getConfig } from '../../lib/api'
 import { establishSession, isLoggedIn } from '../../lib/auth'
+import { LOGIN_HERO } from '../../lib/loginHero'
 
 type LoginState = {
   tab: 'login' | 'signup'
@@ -190,7 +188,7 @@ function EyeIcon({ off }: { off?: boolean }) {
 
 function LoginInner() {
   const { mounted } = useTheme()
-  const { push } = useRouter()
+  const { push, back } = useRouter()
   const searchParams = useSearchParams()
   const [state, dispatch] = useReducer(loginReducer, initialState)
   const [googleReady, setGoogleReady] = useState(false)
@@ -370,14 +368,66 @@ function LoginInner() {
     } finally { dispatch({ type: 'SET_LOADING', loading: false }) }
   }
 
+  // One back control for the whole page. Going back in history is what "back"
+  // means to someone who arrived from somewhere in the app, but /login is also
+  // reachable cold -- a bookmark, a shared link, an expired email -- and there
+  // history is empty, so `router.back()` would leave them on a dead page with no
+  // way onward. Fall back to the landing page in that case.
+  const goBack = () => {
+    if (window.history.length > 1) back()
+    else push('/')
+  }
+
   return (
-    <>
-      <Header />
-      <div className="max-w-container mx-auto px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
-        <section className="pt-8 max-w-md mx-auto mt-8 sm:mt-12 min-w-0 overflow-hidden">
-          <span className="flex mb-4">
-            <Link href="/" className="text-mathua-secondary text-sm hover:text-mathua-blue">Back</Link>
-          </span>
+    <div className="min-h-screen lg:grid lg:grid-cols-2 lg:items-stretch">
+      {/* Hero. Desktop only: below lg it is hidden rather than stacked, because a
+          panel beside a form does not exist on a phone, and the form is the
+          reason to be on this page. It is decorative and carries no information
+          the form does not, so it is aria-hidden.
+
+          The picture fills the column top to bottom. The column is a grid item
+          that stretches to the row, and the row is the taller of the viewport and
+          the form beside it, so the picture is exactly as tall as the page is --
+          and on a window shorter than the form it scrolls with it. Whitespace
+          above or below the art would be a letterbox, and letterboxing a panel
+          this size reads as a mistake.
+
+          The image is absolutely positioned, and that is load-bearing. It used to
+          be `size-full` in normal flow, which is circular: the panel's height came
+          from the grid row, and the grid row's height came back from the image
+          resolving against that same panel. The row settled 14px taller than the
+          viewport -- 914px on an 860px one -- so the page scrolled by 54px for no
+          reason anyone could see. `absolute inset-0` takes the image out of flow,
+          so it contributes nothing to intrinsic height and the row is simply
+          max(viewport, form).
+
+          object-cover rather than object-fill: filling would stretch the drawing
+          to whatever the column happens to be. See LOGIN_HERO for the crop trade.
+
+          width/height are the real intrinsic size. Eagerly loaded, not lazy: it is
+          in the first viewport here, so lazy would only delay it. */}
+      <div aria-hidden="true" className="relative hidden lg:block overflow-hidden">
+        <img
+          src={LOGIN_HERO.file}
+          alt=""
+          width={LOGIN_HERO.width}
+          height={LOGIN_HERO.height}
+          decoding="async"
+          className="absolute inset-0 size-full object-cover"
+        />
+      </div>
+
+      <div className="flex flex-col px-4 sm:px-6 lg:px-10 xl:px-16 pb-[env(safe-area-inset-bottom)] overflow-x-hidden min-w-0">
+        <div className="flex-1 flex flex-col justify-center w-full max-w-md mx-auto py-10 lg:py-0 min-w-0">
+          <div className="mb-6">
+            <button
+              type="button"
+              onClick={goBack}
+              className="text-mathua-secondary text-sm hover:text-mathua-blue min-h-[44px]"
+            >
+              Back
+            </button>
+          </div>
           <SectionHeader label="Account" title={state.tab === 'login' ? 'Welcome back' : 'Create account'} />
           {authDisabled && (
             <p className="font-mono text-xs text-mathua-secondary text-center mt-4 mb-4">
@@ -557,11 +607,9 @@ function LoginInner() {
             </form>
             )}
           </div>
-        </section>
+        </div>
       </div>
-      <Footer />
-      <BottomTabs />
-    </>
+    </div>
   )
 }
 

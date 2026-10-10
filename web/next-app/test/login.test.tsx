@@ -47,8 +47,10 @@ vi.mock('../lib/api', () => ({
   API_BASE: '',
 }))
 
-vi.mock('../components/Header', () => ({ default: () => <div data-testid="header-stub" /> }))
-vi.mock('../components/Footer', () => ({ default: () => <div data-testid="footer-stub" /> }))
+// The login page renders no Header, Footer or BottomTabs, so neither is mocked
+// here. Those mocks existed to keep app chrome out of the assertions; with the
+// chrome gone from the page they would mock modules the page no longer imports,
+// which passes for the wrong reason and hides a reintroduced import.
 
 import LoginPage from '../app/login/page'
 
