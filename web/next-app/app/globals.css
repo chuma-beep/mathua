@@ -677,6 +677,33 @@ footer .link-underline:hover {
   min-width: 0;
 }
 
+/* The header is sticky, so it paints over whatever scrolls beneath it. Focusing an
+   element scrolls it into view, and on a page tall enough to allow it the browser
+   puts the element flush to the top of the viewport — exactly where the header
+   sits. The answer field was landing under it: focused, and impossible to click.
+
+   scroll-padding-top on the scrollport is the fix. It is the canonical one for a
+   sticky header, and it is the only one that covers focus-driven scrolling, which
+   is how the browser brings a field into view here. scroll-margin-top on the
+   element does not: the field is scrolled into view while the plain input is still
+   mounted and MathLive is still loading, and by the time the real field exists the
+   bad scroll has already happened.
+
+   It needs no tie to the header's height. That height is not a fact anyone should
+   have to keep in step — it moves with the type scale and the collapsed state.
+   This is breathing room, not a measurement, and 7rem is the margin the anchored
+   sections on the profile page already use.
+
+   Desktop only, and that boundary is load-bearing. On a phone the answer field is
+   driven through MathLive's virtual keypad, which measures against the viewport:
+   reserving 7rem at the top moved the keypad's own scroll anchoring and four
+   mobile-math and mobile specs failed against it. The overlap being fixed here is
+   the desktop header beside the form, and below lg there is no such overlap. */
+@media (min-width: 1024px) {
+  html {
+    scroll-padding-top: 7rem;
+  }
+}
 
 math-field.mathua-math-field {
   display: block;
