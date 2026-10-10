@@ -30,9 +30,17 @@ interface FooterProps {
 // theme has no say in it. It is declared per variant because the two pictures of
 // one entry can be opposites: the coastal town is cream, the blue field is not.
 //
-// Desktop ratios are 16:9 by design so the footer's height does not change from
-// visit to visit. Mobile ratios deliberately are not -- the portrait set ranges
-// from 9:16 to 2:3, and normalising it would mean cropping the two outliers.
+// Desktop ratios are 2.6:1 by design so the footer's height does not change from
+// visit to visit. At the original 16:9 it was a full screen of artwork -- 810px at
+// 1440 -- and the empty sky above the ridgeline was most of that. Mobile ratios
+// deliberately are not uniform: the portrait set ranges from 9:16 to 2:3, and
+// normalising it would mean cropping the two outliers.
+//
+// PROVENANCE: every file named below is shipped, and none of them has a recorded
+// author or licence. See the "Footer artwork" entry in THIRD_PARTY_NOTICES.md. The
+// contract `test/footerArt.test.tsx` enforces is about the files -- they exist,
+// declare their real dimensions, and carry a tone -- so replacing this set with
+// known-provenance artwork needs no change here.
 export interface FooterArtVariant {
   file: string
   width: number

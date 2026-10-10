@@ -116,6 +116,31 @@ Profile avatars are served by [DiceBear](https://www.dicebear.com). Individual a
 styles carry their own licences; see their
 [license overview](https://www.dicebear.com/licenses/).
 
+### Footer artwork — UNRESOLVED, do not ship without settling this
+
+The eight prints in `web/next-app/public/footer/` are shipped to every visitor: two
+desktop landscapes and six phone portraits, drawn full-bleed behind the footer.
+
+**Their provenance and licence are not established.** They were collected from image
+search without a recorded source, author, or licence, and nothing in the repository
+says otherwise. This entry is here because the obligation is real and unsatisfied,
+not because it is settled.
+
+What follows from that, stated plainly:
+
+- The files are **not** covered by Mathua's MIT licence. A licence covers what the
+  licensor may give; nothing here establishes that anyone did.
+- Redistributing them is the risk. Mathua publishes this repository and deploys the
+  static site from it, so the prints leave the machine.
+- Replacing them is the clean fix. The footer's contract is only that each file
+  exists, declares the real dimensions, and carries a tone — `test/footerArt.test.tsx`
+  holds that contract, and it names no particular picture. Dropping in known-provenance
+  artwork needs no code change.
+
+To resolve this: record the author, source URL and licence for each print below, or
+replace the set. Until one of those happens, treat every print in that directory as
+unlicensed.
+
 ### OpenStax, MIT OpenCourseWare, Art of Problem Solving
 
 Referenced for content design and curriculum structure. No code or content is taken
