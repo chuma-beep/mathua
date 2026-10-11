@@ -26,6 +26,7 @@ import {
 } from '../../components/SubmitErrorBlock'
 import { setUserInfo, getUserInfo } from '../../lib/auth'
 import { concepts as conceptsData } from '../../lib/conceptData'
+import { scopeSize } from '../../lib/diagnosticScope'
 import type { MathFocusHandle } from '@/components/math/MathInput'
 import { domainOrder, type DomainInfo } from './domains'
 import { DiagnosticStep, ResultsStep, WelcomeStep } from './steps'
@@ -35,6 +36,12 @@ type Step = 'welcome' | 'diagnostic' | 'results'
 // MA parity: the Diagnostic doesn't have to be completed at once — the
 // session id persists in sessionStorage so Back/refresh resumes it.
 const DIAG_KEY = 'mathua_diag_session_onboard'
+
+// The picked domains, separately from the session id above. "Select everything"
+// then an accidental refresh used to leave the learner staring at an empty grid
+// with no way to tell what they had chosen. Cleared when the plan loads, because
+// by then the selection has done its job and a later visit is a fresh start.
+const SELECTION_KEY = 'mathua_onboard_domains'
 
 export default function OnboardPage() {
   const { mounted } = useTheme()
@@ -86,7 +93,22 @@ export default function OnboardPage() {
       result.push({ name, count: concepts.length, concepts, selected: false })
     })
     result.sort((a, b) => domainOrder.indexOf(a.name) - domainOrder.indexOf(b.name))
-    setDomains(result)
+    // Restore a previous selection, but only over domains that still exist: a
+    // stale name from an older corpus is dropped rather than resurrected as an
+    // entry with no concepts behind it.
+    let restored: string[] = []
+    try {
+      const raw = sessionStorage.getItem(SELECTION_KEY)
+      if (raw) {
+        const parsed: unknown = JSON.parse(raw)
+        if (Array.isArray(parsed)) restored = parsed.filter((n): n is string => typeof n === 'string')
+      }
+    } catch {
+      restored = []
+    }
+    const known = new Set(result.map(d => d.name))
+    const keep = new Set(restored.filter(n => known.has(n)))
+    setDomains(result.map(d => ({ ...d, selected: keep.has(d.name) })))
     try {
       setHasPaused(!!sessionStorage.getItem(DIAG_KEY))
     } catch {
@@ -94,12 +116,28 @@ export default function OnboardPage() {
     }
   }, [mounted])
 
+  function persistSelection(next: DomainInfo[]) {
+    const chosen = next.flatMap(d => (d.selected ? [d.name] : []))
+    try {
+      if (chosen.length === 0) sessionStorage.removeItem(SELECTION_KEY)
+      else sessionStorage.setItem(SELECTION_KEY, JSON.stringify(chosen))
+    } catch { /* storage unavailable — the grid still works for this visit */ }
+  }
+
   function toggleDomain(name: string) {
-    setDomains(prev => prev.map(d => d.name === name ? { ...d, selected: !d.selected } : d))
+    setDomains(prev => {
+      const next = prev.map(d => d.name === name ? { ...d, selected: !d.selected } : d)
+      persistSelection(next)
+      return next
+    })
   }
 
   function selectAll() {
-    setDomains(prev => prev.map(d => ({ ...d, selected: true })))
+    setDomains(prev => {
+      const next = prev.map(d => ({ ...d, selected: true }))
+      persistSelection(next)
+      return next
+    })
   }
 
   function selectedConceptIds(): string[] {
@@ -108,6 +146,14 @@ export default function OnboardPage() {
       if (d.selected) ids.push(...d.concepts)
     }
     return ids
+  }
+
+  // What the assessment can actually reach. Not the number of ticked concepts:
+  // the server walks the same closure before it builds anything, and the flat sum
+  // both overstates the questions that will be asked and omits the prerequisites
+  // that come along for free.
+  function scopeCount(): number {
+    return scopeSize(selectedConceptIds())
   }
 
   async function startDiagnostic() {
@@ -251,6 +297,7 @@ export default function OnboardPage() {
       setStep('results')
       try {
         sessionStorage.removeItem(DIAG_KEY)
+        sessionStorage.removeItem(SELECTION_KEY)
       } catch { /* ignore */ }
       setHasPaused(false)
     } catch (e) {
@@ -369,7 +416,7 @@ export default function OnboardPage() {
               domains={domains}
               loading={loading}
               hasPaused={hasPaused}
-              selectedCount={selectedConceptIds().length}
+              selectedCount={scopeCount()}
               confirming={confirming}
               onToggle={toggleDomain}
               onSelectAll={selectAll}

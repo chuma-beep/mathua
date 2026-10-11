@@ -1,6 +1,7 @@
 'use client'
 
 import type { RefObject } from 'react'
+import Link from 'next/link'
 import KatexContent from '../../components/KatexContent'
 import SectionHeader from '../../components/SectionHeader'
 import ProgressBar from '../../components/ProgressBar'
@@ -52,7 +53,10 @@ export function WelcomeStep({
             Before you begin
           </h1>
           <p className="text-mathua-secondary text-sm mt-3 px-2">
-            Starting test on: {shown.join(', ')}{extra} · {selectedCount} concepts
+            Starting test on: {shown.join(', ')}{extra} · {selectedCount} concepts in scope
+          </p>
+          <p className="text-mathua-muted text-xs mt-2 px-2">
+            The test adapts as it goes and usually takes about 30–45 minutes.
           </p>
         </div>
         <BriefingCard eyebrow="What to expect" items={DIAGNOSTIC_BRIEFING} />
@@ -139,8 +143,23 @@ export function WelcomeStep({
           disabled={selectedCount === 0 || loading}
           className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-12 min-h-[44px] px-6 sm:px-10 font-medium text-sm disabled:opacity-50 max-w-full"
         >
-          {loading ? (<><Loading inline size={13} /> Loading…</>) : `Start diagnostic test (${selectedCount} concepts)`}
+          {loading ? (<><Loading inline size={13} /> Loading…</>) : `Start diagnostic test (${selectedCount} concepts in scope)`}
         </button>
+      </div>
+
+      {/* The way out, and the reason it is a link rather than a flag.
+          A learner can start any topic whose prerequisites are met without ever
+          taking the diagnostic: /learn?concept=… is gated server-side, not by
+          this flag, and /domains is already browsable. Nothing here records a
+          result, seeds placement, or grants credit — it only makes an existing
+          path findable from the screen a learner is actually looking at. */}
+      <div className="text-center px-4 mt-6">
+        <Link
+          href="/domains"
+          className="font-mono text-xs text-mathua-muted hover:text-mathua-blue underline underline-offset-2 min-h-[44px] inline-flex items-center"
+        >
+          Browse topics and start learning without the test →
+        </Link>
       </div>
     </div>
   )
