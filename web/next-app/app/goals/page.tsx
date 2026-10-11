@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, Suspense } from 'react'
+import { useState, useEffect, useMemo, Suspense } from 'react'
 import { useRouter } from 'next/navigation'
 import { useTheme } from '../../hooks/useTheme'
 import ProgressSummary from '../../components/ProgressSummary'
@@ -77,12 +77,25 @@ function GoalConfirmReview({
 
 function GoalsContent() {
   const { mounted } = useTheme()
-  const { push } = useRouter()
+  const { push, replace } = useRouter()
 
   const [step, setStep] = useState<Step>(() => {
     if (typeof window === 'undefined') return 'select'
     return new URLSearchParams(window.location.search).get('quiz') === '1' ? 'quiz' : 'select'
   })
+  // The domain picker and the diagnostic that it starts are /onboard's job now.
+  // Both screens used to live here too, which meant the scope count had to be
+  // corrected in two places and one of them kept drifting; this route keeps the
+  // quiz, which is what the profile page links, and sends everything else to the
+  // single implementation.
+  const isQuizMode = useMemo(
+    () => typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('quiz') === '1',
+    [],
+  )
+  useEffect(() => {
+    if (!mounted || isQuizMode) return
+    if (step === 'select' || step === 'diagnostic' || step === 'results') replace('/onboard')
+  }, [mounted, isQuizMode, step, replace])
   const [scores, setScores] = useState<Scores | null>(null)
 
   // Step 1: goal selection
