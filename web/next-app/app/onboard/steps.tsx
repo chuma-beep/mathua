@@ -42,7 +42,7 @@ export function WelcomeStep({
 }) {
   if (confirming) {
     const selected = domains.filter(d => d.selected)
-    const shown = selected.slice(0, 3).map(d => domainLabels[d.name] || d.name)
+    const shown = selected.slice(0, 3).map(d => domainLabels(d.name))
     const extra = selected.length > 3 ? ` +${selected.length - 3} more` : ''
     return (
       <div className="max-w-2xl mx-auto px-2">
@@ -101,7 +101,7 @@ export function WelcomeStep({
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3 mb-8 min-w-0">
         {domains.map(d => {
-          const label = domainLabels[d.name] || d.name
+          const label = domainLabels(d.name)
           return (
             <button
               type="button"
