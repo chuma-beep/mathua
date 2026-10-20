@@ -115,7 +115,7 @@ Since the numerator of the cosine similarity formula is equal to zero, the cosin
 
 ## Python implementation
 
-Below is an example of Python code for calculating the cosine similarity of vectors \(V_x\) and \(V_y\) that you can [test](https://trinket.io/python3/cd31924b04) on an online IDE.
+Below is an example of Python code for calculating the cosine similarity of vectors \(V_x\) and \(V_y\) that you can [test](https://coddy.tech/embed-editor?lang=matplotlib&theme=light&layout=stacked&code=aW1wb3J0IG51bXB5IGFzIG5wCiMgRGVmaW5lIHRoZSB2ZWN0b3JzClZ4ID0gbnAuYXJyYXkoWzAsIDEsIDAsIDEsIDAsIDEsIDEsIDBdKQpWeSA9IG5wLmFycmF5KFswLCAwLCAwLCAxLCAxLCAxLCAxLCAwXSkKIyBGdW5jdGlvbiB0byBjYWxjdWxhdGUgY29zaW5lIHNpbWlsYXJpdHkKZGVmIGNvc2luZV9zaW1pbGFyaXR5KHZlY3RvcjEsIHZlY3RvcjIpOgogICAgIyBDYWxjdWxhdGUgdGhlIGRvdCBwcm9kdWN0CiAgICBkb3RfcHJvZHVjdCA9IG5wLmRvdCh2ZWN0b3IxLCB2ZWN0b3IyKQogICAgIyBDYWxjdWxhdGUgdGhlIG5vcm1zIG9mIGVhY2ggdmVjdG9yCiAgICBub3JtMSA9IG5wLmxpbmFsZy5ub3JtKHZlY3RvcjEpCiAgICBub3JtMiA9IG5wLmxpbmFsZy5ub3JtKHZlY3RvcjIpCiAgICAjIENhbGN1bGF0ZSB0aGUgY29zaW5lIHNpbWlsYXJpdHkKICAgIGNvc2luZV9zaW0gPSBkb3RfcHJvZHVjdCAvIChub3JtMSAqIG5vcm0yKQogICAgcmV0dXJuIGNvc2luZV9zaW0KIyBDYWxjdWxhdGUgYW5kIHByaW50IHRoZSBjb3NpbmUgc2ltaWxhcml0eQpzaW1pbGFyaXR5ID0gY29zaW5lX3NpbWlsYXJpdHkoVngsIFZ5KQpwcmludChmIkNvc2luZSBzaW1pbGFyaXR5IChWeCxWeSk6IHtzaW1pbGFyaXR5fSIpCg) on an online IDE.
     
     
     import numpy as np
