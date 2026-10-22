@@ -291,12 +291,16 @@ export function DiagnosticStep({
   retryAvailable: boolean
   onRetryQuestion: () => void
 }) {
+  // The number of the question on screen. `progress.answered` already counts it once
+  // its feedback is showing, so adding one then labelled the result of question 1 as
+  // "Question 2" before Next had been pressed.
+  const shownNumber = progress ? progress.answered + (lastResult ? 0 : 1) : questionCount
   return (
     <>
-      <SectionHeader label={`Question ${progress ? progress.answered + 1 : questionCount}`} title={conceptName} />
+      <SectionHeader label={`Question ${shownNumber}`} title={conceptName} />
       <div className="max-w-2xl mx-auto px-2 sm:px-0 min-w-0 overflow-hidden">
         <ProgressBar
-          answered={progress ? progress.answered + 1 : questionCount}
+          answered={shownNumber}
           coverDone={progress ? progress.cover_done : 0}
           coverSize={progress ? progress.cover_size : 0}
         />

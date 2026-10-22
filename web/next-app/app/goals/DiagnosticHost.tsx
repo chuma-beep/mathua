@@ -54,6 +54,7 @@ export default function DiagnosticHost({
   const conceptId = useRef('')
   const diagGradingType = useRef('')
   const goalsInputRef = useRef<MathFocusHandle | null>(null)
+  const questionShownAt = useRef<number | null>(null)
   const startedRef = useRef(false)
 
   const [question, setQuestion] = useState('')
@@ -194,16 +195,23 @@ export default function DiagnosticHost({
   // Keyboard flow: the answer form unmounts while feedback shows, so the
   // cursor is restored here — whenever a fresh question is revealed.
   useEffect(() => {
-    if (!lastResult && question) goalsInputRef.current?.focus()
+    if (!lastResult && question) {
+      questionShownAt.current = Date.now()
+      goalsInputRef.current?.focus()
+    }
   }, [lastResult, question])
 
   async function submitAnswer(dontKnow = false) {
+    if (loading || lastResult) return
     if (!dontKnow && !answerInput.trim()) return
     setLoading(true)
     setSubmitError(null)
     try {
       const answer = dontKnow ? '' : answerInput.trim()
-      const elapsed = 5.0
+      // Measured, as /onboard does. This was a constant 5 seconds, and the server
+      // discounts a slow correct answer (internal/diagnostic/cat.go, slowFactor), so a
+      // diagnostic run from /goals never told a fluent answer from a laboured one.
+      const elapsed = Math.max(0.5, (Date.now() - (questionShownAt.current ?? Date.now())) / 1000)
       const data = await submitGoalAnswer(sessionId.current, conceptId.current, answer, elapsed, dontKnow)
       const correct = data.correct || false
       // An admitted unknown is not a wrong answer, so it does not get the wrong answer's words.
@@ -345,12 +353,16 @@ export default function DiagnosticHost({
     })
   }
 
+  // The question on screen. `progress.answered` already counts it while its feedback
+  // shows, so `+ 1` there labelled question 1's result "Question 2".
+  const shownNumber = progress ? progress.answered + (lastResult ? 0 : 1) : questionCount
+
   return (
     <>
-      <SectionHeader label={`Question ${progress ? progress.answered + 1 : questionCount}`} title={conceptName} />
+      <SectionHeader label={`Question ${shownNumber}`} title={conceptName} />
       <div className="max-w-2xl mx-auto min-w-0 overflow-hidden px-2 sm:px-0">
         <ProgressBar
-          answered={progress ? progress.answered + 1 : questionCount}
+          answered={shownNumber}
           coverDone={progress ? progress.cover_done : 0}
           coverSize={progress ? progress.cover_size : estimatedTotal}
         />

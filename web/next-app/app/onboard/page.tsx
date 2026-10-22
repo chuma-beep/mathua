@@ -293,6 +293,9 @@ export default function OnboardPage() {
   }
 
   async function submitAnswer(dontKnow = false) {
+    // One answer per question. The field's Enter listener can call this while the
+    // previous submit is in flight or its feedback is showing.
+    if (loading || lastResult) return
     if (!dontKnow && !answerInput.trim()) return
     setLoading(true)
     setSubmitError(null)

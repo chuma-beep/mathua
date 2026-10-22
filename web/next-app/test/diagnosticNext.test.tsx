@@ -348,6 +348,37 @@ describe('DiagnosticHost manual advance', () => {
     expect(await findAnswerField()).toBe(document.activeElement)
   })
 
+  it('numbers the question on screen, and reports how long it took', async () => {
+    // `progress.answered` already counts a question once its feedback is showing, so the
+    // label used to read "Question 2" over question 1's result. And the elapsed time
+    // sent was a constant 5 seconds, which the server's slow-answer weighting reads.
+    const now = vi.spyOn(Date, 'now').mockReturnValue(1_000_000)
+    render(
+      <DiagnosticHost
+        startIds={[]}
+        resumeId={null}
+        onComplete={() => {}}
+        onResumeExpired={() => {}}
+      />,
+    )
+    await screen.findByText('Q1 text')
+    expect(screen.getAllByText('Question 1')).toHaveLength(2)
+
+    typeAnswer(await findMathField(), '5')
+    now.mockReturnValue(1_012_000)
+    vi.mocked(submitGoalAnswer).mockClear()
+    fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
+    await screen.findByText('Nice!')
+    expect(vi.mocked(submitGoalAnswer).mock.calls[0]?.[3]).toBe(12)
+    expect(screen.getAllByText('Question 1')).toHaveLength(2)
+    expect(screen.queryAllByText('Question 2')).toHaveLength(0)
+
+    fireEvent.click(screen.getByRole('button', { name: 'Next →' }))
+    await screen.findByText('Q2 text')
+    expect(screen.getAllByText('Question 2')).toHaveLength(2)
+    now.mockRestore()
+  })
+
   // A diagnostic measures prior knowledge. A wrong answer must not hand back the solution, and a
   // regressed server that sends one anyway must not get it onto the screen — the client holds its
   // own copy of the contract. The cast is past the response type on purpose: the type no longer
