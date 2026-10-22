@@ -99,6 +99,11 @@ interface Props {
    * already true would not re-run the effect once the element finally exists.
    */
   focusRequest?: number
+  /**
+   * Take focus on mount. Set when the plain input shown while this chunk loaded had
+   * focus, because that input is removed in the same commit that mounts this field.
+   */
+  autoFocus?: boolean
 }
 
 export default function MathLiveField({
@@ -114,6 +119,7 @@ export default function MathLiveField({
   inlineShortcuts,
   handleRef,
   focusRequest = 0,
+  autoFocus = false,
 }: Props) {
   // Per-keystroke feedback Mathua does not want, configured off once per document.
   //
@@ -142,7 +148,7 @@ export default function MathLiveField({
   const onSubmitRef = useRef(onSubmit)
   onSubmitRef.current = onSubmit
   // installKeyboard is declared below; the pointerdown listener needs it now.
-  const installKeyboardRef = useRef<() => void>(() => {})
+  const installKeyboardRef = useRef<(show: boolean) => void>(() => {})
 
   // Stable on purpose: hosts pass a fresh arrow to `onChange` on every render, and an
   // `emit` that changed identity re-ran the sync effect below, which then wrote the
@@ -177,11 +183,46 @@ export default function MathLiveField({
     if (focusRequest > 0) handleRef?.current?.focus()
   }, [focusRequest, handleRef])
 
+  // The learner was typing into the loading input when this chunk arrived. That input
+  // is gone, and without this the caret went with it: focus fell to <body>, the next
+  // keystrokes reached nothing and Enter submitted nothing. The text they typed has
+  // already been pushed in by the value effect above, so the caret lands after it.
+  // Mount only, from the render-time value: the input's blur arrives after the swap.
+  const autoFocusOnMount = useRef(autoFocus)
+  useEffect(() => {
+    const el = ref.current
+    if (!el || !autoFocusOnMount.current) return
+    el.focus()
+    el.executeCommand('moveToMathfieldEnd')
+  }, [])
+
   // `disabled` is a property on the element, not a reflected attribute we can
   // rely on across React versions.
   useEffect(() => {
     const el = ref.current
-    if (el) el.readOnly = disabled
+    if (!el) return
+    el.readOnly = disabled
+    // MathLive 0.111 reflects `readOnly: true` as a `read-only` attribute but only
+    // removes an option's attribute when it differs from the default, and `false` is
+    // the default. So the attribute set while the first answer was being checked
+    // stayed on the element for the rest of the session, and anything keyed on it --
+    // the disabled style in app/globals.css -- saw every later question as read-only.
+    if (!disabled) el.removeAttribute('read-only')
+    // A checked answer leaves the field read-only with focus still in it, and on a
+    // touch screen the keypad stays up. It covers the feedback and the Next button
+    // underneath, so the learner sees a greyed-out Check button on a page that no
+    // longer responds to anything they can reach. MathLive's own hide-on-read-only
+    // path only fires from `setOptions` while the panel is already visible and the
+    // field reports focus, which a tap on Check has already taken away. Measured on a
+    // Pixel 7 profile: Next was under `.MLK__row` on every question.
+    //
+    // The keypad is a page-wide singleton, so it is left alone when another field (a
+    // sibling card in the Learn feed) is the one the learner is typing into.
+    if (disabled) {
+      const active = document.activeElement
+      if (active === el) el.blur()
+      if (active === el || !(active instanceof MathfieldElement)) window.mathVirtualKeyboard?.hide()
+    }
   }, [disabled])
 
   // Take the typed word, not the symbol it abbreviates. `{}` is the documented way to
@@ -227,7 +268,7 @@ export default function MathLiveField({
     if (el) el.mathModeSpace = '\\,'
   }, [])
 
-  const installKeyboard = useCallback(() => {
+  const installKeyboard = useCallback((show: boolean) => {
     const kb = typeof window === 'undefined' ? undefined : window.mathVirtualKeyboard
     if (!kb) return
     // The layout is a page-wide singleton, so every field installs its own on focus
@@ -252,7 +293,17 @@ export default function MathLiveField({
     // 4-row keypad over the answer on every focus of a desktop browser is the
     // "giant calculator" the design is supposed to avoid; on desktop the toggle
     // stays available for the symbolic keys.
-    if (window.matchMedia?.('(pointer: coarse)').matches) kb.show()
+    //
+    // Only on a tap, never on focus. Every show or hide makes MathLive dispatch
+    // `virtual-keyboard-toggle`, and the focused field answers it by blurring and
+    // refocusing its keyboard sink. Showing from the focus handler therefore re-entered
+    // itself through that refocus, and each blur armed MathLive's 300ms hide timer, so
+    // once a field had been focused before it was tapped -- every question after the
+    // first, where the host autofocuses it -- the keypad hid and reappeared about every
+    // 300ms for as long as the learner typed. Measured on a Pixel 7 profile. Focus
+    // still raises the keypad on a touch device: MathLive's own `focusin` listener
+    // does that, once.
+    if (show && window.matchMedia?.('(pointer: coarse)').matches) kb.show()
   }, [mode])
 
   installKeyboardRef.current = installKeyboard
@@ -266,6 +317,11 @@ export default function MathLiveField({
     if (!el) return
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key !== 'Enter') return
+      // A read-only field is one whose answer is being checked or has been. The
+      // submit button is disabled for the same state, but this listener bypasses
+      // it, so a second Enter while the first request was in flight sent the same
+      // answer twice and the host staged whichever next question came back last.
+      if (el.readOnly) return
       // Deliberately no preventDefault(). MathLive's own Enter handling commits the
       // expression; suppressing it makes the next keystroke replay the field's
       // contents, so "2+2" + Enter produced "2+22+2". Recorded, not assumed.
@@ -274,6 +330,58 @@ export default function MathLiveField({
     el.addEventListener('keydown', onKeyDown)
     return () => el.removeEventListener('keydown', onKeyDown)
   }, [])
+
+  // Keep a run of digits in the exponent it was typed into.
+  //
+  // MathLive's `smartSuperscript` (on by default) moves the caret out of an empty
+  // exponent after its first digit. That is what makes `x^2+1` typeable without an
+  // arrow key, and `e2e/math-input.spec.ts` relies on it. But it also splits every
+  // multi-digit exponent: typing `2^10` produced `2^1` followed by `0`, which reached
+  // the grader as the plain text `2^1 0`, and `99^99` arrived as `99^9 9`. A correct
+  // answer was marked wrong, and the self-check hint said `2^10` "simplifies to 0".
+  //
+  // A digit typed straight after a digit that leapt out of an exponent belongs to that
+  // exponent: no one writes `2^1` followed by a juxtaposed `0`. So that digit is put
+  // back inside, and the caret stays there for the rest of the digit run. The first
+  // non-digit leaves the exponent, which is the same thing `smartSuperscript` does for
+  // a single digit, so `2^10+1` reads as `2^{10}+1` and `2^10x` as `2^{10}x`.
+  //
+  // Capture phase on the host, so this runs before MathLive's handler on its keyboard
+  // sink inside the shadow root. Only typed keys take part: navigation, deletion, a
+  // modifier chord or the virtual keypad resets the run and is left to MathLive.
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    let prevDigit = false
+    let inExponentRun = false
+    const onKeyDown = (e: KeyboardEvent) => {
+      const typed = e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey
+      if (!typed || el.readOnly) {
+        prevDigit = false
+        inExponentRun = false
+        return
+      }
+      const digit = e.key >= '0' && e.key <= '9'
+      if (digit && prevDigit && !inExponentRun && el.selectionIsCollapsed) {
+        const before = el.getValue(0, el.position, 'latex')
+        if (/\^[0-9]$/.test(before)) {
+          e.preventDefault()
+          e.stopImmediatePropagation()
+          el.executeCommand('moveToPreviousChar')
+          el.insert(e.key)
+          inExponentRun = true
+          // `insert` from script raises no input event, so report the value here.
+          emit()
+          return
+        }
+      }
+      if (!digit && inExponentRun) el.executeCommand('moveAfterParent')
+      if (!digit) inExponentRun = false
+      prevDigit = digit
+    }
+    el.addEventListener('keydown', onKeyDown, true)
+    return () => el.removeEventListener('keydown', onKeyDown, true)
+  }, [emit])
 
   // Raise the keypad when the field is touched.
   //
@@ -291,7 +399,7 @@ export default function MathLiveField({
   useEffect(() => {
     const el = ref.current
     if (!el) return
-    const onPointerDown = () => installKeyboardRef.current()
+    const onPointerDown = () => installKeyboardRef.current(true)
     el.addEventListener('pointerdown', onPointerDown)
     return () => el.removeEventListener('pointerdown', onPointerDown)
   }, [])
@@ -365,7 +473,7 @@ export default function MathLiveField({
       placeholder={placeholder}
       aria-label={ariaLabel}
       onInput={emit}
-      onFocus={installKeyboard}
+      onFocus={() => installKeyboard(false)}
     />
   )
 }

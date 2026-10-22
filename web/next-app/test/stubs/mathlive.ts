@@ -25,6 +25,11 @@ export interface MathfieldElement extends HTMLElement {
   readOnly: boolean
   mathVirtualKeyboardPolicy: string
   getValue(format?: string): string
+  getValue(start: number, end: number, format?: string): string
+  position: number
+  selectionIsCollapsed: boolean
+  executeCommand(command: string): boolean
+  insert(s: string): boolean
   focus(): void
 }
 
@@ -75,7 +80,11 @@ class StubMathField extends HTMLElement implements MathfieldElement {
    * test/fixtures/mathlive-plain-text.json, and the exact-output assertions live in
    * test/plainAnswer.test.ts against that fixture.
    */
-  getValue(format?: string): string {
+  getValue(formatOrStart?: string | number, end?: number, _rangeFormat?: string): string {
+    // The range overload, `getValue(start, end, format)`, reads the text before the
+    // caret. The stub's caret is always at the end, so this is a slice of the LaTeX.
+    if (typeof formatOrStart === 'number') return this.#value.slice(formatOrStart, end)
+    const format = formatOrStart
     if (format !== 'plain-text') return this.#value
     return this.#value
       .replace(/\\frac\{([^{}]*)\}\{([^{}]*)\}/g, '($1)/($2)')
@@ -85,6 +94,26 @@ class StubMathField extends HTMLElement implements MathfieldElement {
       .replace(/\\div/g, ' -: ')
       .replace(/\\pi/g, 'pi')
       .replace(/\\left|\\right/g, '')
+  }
+
+  /** The caret. The stub has no cursor movement, so it is always at the end. */
+  get position(): number {
+    return this.#value.length
+  }
+
+  get selectionIsCollapsed(): boolean {
+    return true
+  }
+
+  /** Caret commands have nothing to move in the stub; the real ones are covered by e2e. */
+  executeCommand(_command: string): boolean {
+    return true
+  }
+
+  /** Inserts at the caret, which is the end, without firing `input` -- as MathLive does. */
+  insert(s: string): boolean {
+    this.#value += s
+    return true
   }
 
   focus() {

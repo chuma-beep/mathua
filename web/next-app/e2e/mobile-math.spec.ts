@@ -1,5 +1,5 @@
 import { test, expect, type Page } from './fixtures'
-import { answerField, answerLatex, focusAnswerField, setAnswer, typeIntoField, showVirtualKeyboard, keyboardRows, keyboardPanel, keyboardVisible, hideVirtualKeyboard, keycaps, glyphKeycap, loadingAnswerField, captureSubmittedAnswer, pressKeycap, useAlphabeticLayout, mathLiveSpacebar } from './helpers/answer'
+import { answerField, answerHasFocus, answerLatex, focusAnswerField, setAnswer, typeIntoField, showVirtualKeyboard, keyboardRows, keyboardPanel, keyboardVisible, hideVirtualKeyboard, keycaps, glyphKeycap, loadingAnswerField, captureSubmittedAnswer, pressKeycap, useAlphabeticLayout, mathLiveSpacebar } from './helpers/answer'
 import { installInstrumentation, delayMathLiveChunk } from './helpers/instrument'
 
 // Mobile behaviour, on a real touch device profile (Pixel 7, and a 320px viewport).
@@ -451,6 +451,61 @@ test.describe('the whole loop on a phone', () => {
     await answerField(page).tap()
     await expect(keyboardRows(page)).toBeVisible({ timeout: 10_000 })
     expect(await keyboardVisible(page)).toBe(true)
+  })
+
+  test('tapping a field that already has focus does not start a show/hide cycle', async ({ page }) => {
+    // Every answer host autofocuses the field when it reveals a question, so from the
+    // second question on the learner's first tap lands on a focused field. Showing the
+    // keypad from the focus handler re-entered itself through MathLive's
+    // `virtual-keyboard-toggle` refocus, and MathLive's 300ms focusout timer hid it
+    // again: hide and show alternated about every 300ms for as long as the learner
+    // typed. Measured on this profile against the diagnostic, where it made the page
+    // feel frozen.
+    await openLearn(page)
+    await setAnswer(page, '')
+    await answerField(page).evaluate(el => (el as HTMLElement).focus())
+    await page.waitForTimeout(400)
+    await page.evaluate(() => {
+      const w = window as unknown as {
+        mathVirtualKeyboard?: { show: () => void; hide: () => void }
+        __kbCalls?: { show: number; hide: number[] }
+      }
+      const kb = w.mathVirtualKeyboard
+      if (!kb) throw new Error('no virtual keyboard')
+      const calls = { show: 0, hide: [] as number[] }
+      w.__kbCalls = calls
+      const show = kb.show.bind(kb)
+      const hide = kb.hide.bind(kb)
+      kb.show = () => {
+        calls.show++
+        show()
+      }
+      kb.hide = () => {
+        calls.hide.push(performance.now())
+        hide()
+      }
+    })
+
+    // Into the text, not the centre: at 320px the centre of the field is MathLive's own
+    // keyboard-toggle icon, and a tap there toggles the panel on purpose.
+    const box = await answerField(page).boundingBox()
+    if (!box) throw new Error('no answer field')
+    await page.touchscreen.tap(box.x + 24, box.y + box.height / 2)
+    await expect(keyboardRows(page)).toBeVisible({ timeout: 10_000 })
+    await page.waitForTimeout(1500)
+
+    // MathLive may settle with a hide or two right after the tap at 320px (its own 300ms
+    // focusout timer); that is not the defect. The defect never settled: a hide about
+    // every 300ms for as long as the field had focus. So the last 900ms must be quiet,
+    // and the learner must be left with the keypad up and the caret in the field.
+    const calls = await page.evaluate(() => {
+      const c = (window as unknown as { __kbCalls: { show: number; hide: number[] } }).__kbCalls
+      const now = performance.now()
+      return { show: c.show, hide: c.hide.length, lateHides: c.hide.filter(t => now - t < 900).length }
+    })
+    expect(calls.lateHides, 'the keypad kept hiding while the field kept focus').toBe(0)
+    expect(await keyboardVisible(page)).toBe(true)
+    expect(await answerHasFocus(page)).toBe(true)
   })
 
   // The chain that works, asserted in order, so a regression in any link is

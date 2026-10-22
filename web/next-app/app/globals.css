@@ -787,9 +787,21 @@ math-field.mathua-math-field[data-status='incorrect'] {
   border-color: var(--accent-red);
 }
 
+/* `read-only` is the attribute MathLive reflects for `readOnly = true`; `readonly`
+   is the one its legacy setter writes. This used to match only the second, so a field
+   disabled by `MathLiveField` never looked disabled. */
+math-field.mathua-math-field[read-only],
 math-field.mathua-math-field[readonly] {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+/* Keep the page scrollable past the virtual keypad. The panel is fixed to the bottom
+   of the viewport, so without this the last screenful of a page -- an answer's
+   feedback and its Next button -- sat underneath it with no way to scroll it into
+   view. `MathLiveField` publishes the panel's height and open state on <html>. */
+html[data-mathua-keyboard='open'] body {
+  padding-bottom: var(--mathua-keyboard-height, 0px);
 }
 
 /* The selection and caret are MathLive's own variables. Mathua's accent at

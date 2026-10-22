@@ -45,6 +45,23 @@ export function fixFractionParens(s: string): string {
   return s.replace(FRACTION_PARENS_RE, '$1/$2')
 }
 
+// An exponent of digits only. A sign, a letter or an operator inside the parentheses
+// keeps them: `x^(-1)` and `x^(n+1)` must not lose their grouping.
+const EXPONENT_PARENS_RE = /\^\((\d+)\)/g
+
+/**
+ * `x^(12)` -> `x^12`.
+ *
+ * MathLive parenthesises every exponent longer than one character, so `3x^{12}-1`
+ * comes back as `3x^(12)-1`. That is the same parenthesisation as `(1)/(2)`, not the
+ * learner's, and leaving it in means the answer misses the grader's exact-match fast
+ * path and can only be graded by the SymPy service. Digits only, so nothing is
+ * regrouped.
+ */
+export function fixExponentParens(s: string): string {
+  return s.replace(EXPONENT_PARENS_RE, '^$1')
+}
+
 // Space between a name and its argument list or exponent.
 const SPACE_BEFORE_CALL_OR_POW = /(?<=[\w)])\s+(?=[(^])/g
 
@@ -98,6 +115,6 @@ export function toPlainAnswer(plainText: string): string {
   // Last, so it sees the text the other rules produced. Running it first would work on
   // a string `fixMixedNumbers` was about to rewrite.
   return fixImplicitLetterSpacing(
-    fixNameSpacing(fixFractionParens(fixMixedNumbers(fixDivision(plainText)))),
+    fixNameSpacing(fixExponentParens(fixFractionParens(fixMixedNumbers(fixDivision(plainText))))),
   )
 }

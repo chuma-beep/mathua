@@ -11,6 +11,7 @@ import {
   fixDivision,
   fixMixedNumbers,
   fixFractionParens,
+  fixExponentParens,
   fixNameSpacing,
   fixImplicitLetterSpacing,
   toPlainAnswer,
@@ -150,4 +151,17 @@ describe('fixFractionParens with a symbolic numerator', () => {
     expect(toPlainAnswer('(x + 1)/(y)')).toBe('(x + 1)/(y)')
   })
 })
+})
+describe('fixExponentParens', () => {
+  it('drops the parentheses MathLive puts around a multi-digit exponent', () => {
+    expect(fixExponentParens('3x^(12)-1')).toBe('3x^12-1')
+    expect(fixExponentParens('2^(10)')).toBe('2^10')
+    expect(toPlainAnswer('(x+1)^(20)+3')).toBe('(x+1)^20+3')
+  })
+
+  it('keeps a grouping that changes the meaning', () => {
+    expect(fixExponentParens('x^(-1)')).toBe('x^(-1)')
+    expect(fixExponentParens('x^(n+1)')).toBe('x^(n+1)')
+    expect(fixExponentParens('2^(1.5)')).toBe('2^(1.5)')
+  })
 })

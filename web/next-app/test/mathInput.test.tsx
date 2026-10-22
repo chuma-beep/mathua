@@ -157,6 +157,62 @@ describe('MathAnswerInput answer flow', () => {
     await waitFor(() => expect(el.value).toBe(''))
   })
 
+  it('does not submit on Enter while the answer is being checked', async () => {
+    // The Enter listener is native and bypasses the disabled Check button, so a second
+    // Enter during the request sent the same answer twice.
+    const onSubmit = vi.fn()
+    render(<MathAnswerInput value="4" onChange={() => {}} onSubmit={onSubmit} disabled gradingType="numeric" conceptId="arith.add.single" />)
+    fireEvent.keyDown(await mathField(), { key: 'Enter' })
+    expect(onSubmit).not.toHaveBeenCalled()
+  })
+
+  it('puts the keypad away once the answer is checked', async () => {
+    // The keypad stayed up over the feedback and the Next button on a phone, so the
+    // page looked frozen after the first answer.
+    const kb = window.mathVirtualKeyboard as unknown as { visible: boolean; show: () => void }
+    const { rerender } = render(<MathAnswerInput value="4" onChange={() => {}} gradingType="numeric" conceptId="arith.add.single" />)
+    const el = (await mathField()) as HTMLElement
+    el.focus()
+    kb.show()
+    rerender(<MathAnswerInput value="4" onChange={() => {}} disabled gradingType="numeric" conceptId="arith.add.single" />)
+    await waitFor(() => expect(kb.visible).toBe(false))
+    expect(document.activeElement).not.toBe(el)
+  })
+
+  it('keeps the caret when the editor replaces the loading input', async () => {
+    // The plain input shown while MathLive loads is removed when it arrives. Focus went
+    // with it, so a learner typing their first answer lost the rest of their keystrokes.
+    // A fresh module, because `lazy` remembers a resolved chunk and earlier tests in
+    // this file have already loaded it, so there would be no loading phase to observe.
+    vi.resetModules()
+    const { MathAnswerInput: FreshInput } = await import('../components/math/MathInput')
+    render(<FreshInput value="" onChange={() => {}} gradingType="numeric" conceptId="arith.add.single" />)
+    const loading = document.querySelector('input[data-mathua-loading="true"]') as HTMLInputElement | null
+    expect(loading).not.toBeNull()
+    loading?.focus()
+    const el = await mathField()
+    await waitFor(() => expect(document.activeElement).toBe(el))
+  })
+
+  it('keeps a typed run of digits in the exponent', async () => {
+    // MathLive leaves an empty exponent after its first digit, so `2^10` reached the
+    // grader as `2^1 0`. The second digit is claimed and put back into the exponent;
+    // anything that is not a digit is left to MathLive. Which slot it lands in is
+    // asserted against the real library in e2e/math-input.spec.ts.
+    render(<MathAnswerInput value="" onChange={() => {}} gradingType="numeric" conceptId="arith.add.single" />)
+    const el = (await mathField()) as HTMLElement & { value: string }
+    el.value = '2^1'
+    const press = (key: string) => {
+      const e = new KeyboardEvent('keydown', { key, bubbles: true, cancelable: true })
+      el.dispatchEvent(e)
+      return e.defaultPrevented
+    }
+    expect(press('1')).toBe(false)
+    expect(press('0')).toBe(true)
+    expect(el.value).toBe('2^10')
+    expect(press('+')).toBe(false)
+  })
+
   it('honours a focus request that arrives before the editor has loaded', async () => {
     // Every host autofocuses when a question is revealed, which on the first question
     // is before the MathLive chunk resolves. A focus call at that moment finds no

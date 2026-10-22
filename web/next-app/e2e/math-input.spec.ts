@@ -165,6 +165,19 @@ test.describe('structures, not strings', () => {
     expect(await answerLatex(page)).toMatch(/x\^\{?2n\+\}?/)
   })
 
+  test('a run of digits typed after ^ stays in the exponent', async ({ page }) => {
+    // MathLive's smartSuperscript leaves an empty exponent after its first digit, so
+    // `2^10` used to come out as `2^1` followed by `0`, and the self-check hint said it
+    // simplified to 0. The first non-digit still leaves the exponent.
+    await openLearn(page)
+    await fresh(page, '2^10')
+    expect(await answerLatex(page)).toBe('2^{10}')
+    await fresh(page, '3x^12-1')
+    expect(await answerLatex(page)).toBe('3x^{12}-1')
+    await fresh(page, 'x^2+1')
+    expect(await answerLatex(page)).toBe('x^2+1')
+  })
+
   test('the caret reaches the denominator of a fraction', async ({ page }) => {
     await openLearn(page)
     await fresh(page, '\\frac{1}{2}')

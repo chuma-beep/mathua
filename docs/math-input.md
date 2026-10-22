@@ -398,12 +398,32 @@ while being invisible in Chromium.
 
 MathLive already hides the keypad itself, from a `focusout` listener, when focus
 genuinely leaves the field. That is the behavior worth having, so the outside-tap
-listener was redundant *and* harmful. Mathua now hides the keypad in exactly one
-place: when a focused field unmounts, since the Learn feed swaps cards under you.
+listener was redundant *and* harmful. Mathua now hides the keypad in two places: when a
+focused field unmounts, since the Learn feed swaps cards under you, and when a field
+becomes read-only because its answer is being checked. The second is not an outside tap:
+focus has already gone to the Check button, and leaving the panel up put it over the
+feedback and the Next button on a phone, so the page looked frozen after an answer.
 
 `MathLiveField`'s `pointerdown` handler is the recovery path — it calls `show()`, and
 because `show()` only dispatches a message, calling it when the panel is already
 visible is harmless.
+
+### Show on a tap, never on focus
+
+`MathLiveField` also used to call `show()` from the field's focus handler. That one was
+not harmless. Every `show()` or `hide()` makes MathLive dispatch
+`virtual-keyboard-toggle`, and the focused field answers it by blurring and refocusing
+its keyboard sink. The refocus re-entered the focus handler, which called `show()` again,
+and each blur armed MathLive's 300ms `focusout` timer, which hid the panel. Once a field
+already had focus when the learner tapped it — every question after the first, because
+each answer host autofocuses the field when it reveals one — the panel hid and reappeared
+about every 300ms for as long as the learner typed. On a Pixel 7 profile it was
+continuous; a learner reported the diagnostic going unresponsive after a few questions.
+
+Focus now only installs the layout. On a touch device MathLive's own `focusin` listener
+still raises the panel, once, and `pointerdown` remains the explicit tap. A field whose
+focus arrives before it mounts — the plain input standing in while the chunk loads had it
+— takes focus on mount, so the caret is not lost to `<body>` when the editor arrives.
 
 ### Not yet fixed
 
@@ -502,7 +522,9 @@ does not cover the editor. What it cannot do is shrink the *page*, so
 | keypad state | `data-mathua-keyboard="open"｜"closed"` on `:root` |
 
 Stylesheets adapt to that instead of a hardcoded pixel height, which would be wrong on
-every device. Safe-area is handled where it already was — `ChromeToggle`,
+every device. `app/globals.css` pads `<body>` by the keypad's height while it is open, so
+the end of a page can be scrolled above the panel; at 320×568 the Check button is
+otherwise under it with no way to reach it. Safe-area is handled where it already was — `ChromeToggle`,
 `ConceptGraphFlow`, `/history` — and deliberately *not* added to the answer area, because
 MathLive's panel already sits above the home indicator and double-padding it would push
 the field away from the keypad.
