@@ -1,6 +1,7 @@
 package diagnostic
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/chuma-beep/mathua/internal/concepts"
@@ -40,6 +41,45 @@ func testDAG(t *testing.T) *concepts.DAG {
 func idFor(i int) string {
 	letters := "abcdefghij"
 	return string(letters[i])
+}
+
+// chainDAG builds an n-concept prerequisite chain, long enough that its covering
+// set is compressed and needs more probes than the question cap allows.
+func chainDAG(t *testing.T, n int) *concepts.DAG {
+	t.Helper()
+	raw := make([]concepts.Concept, n)
+	for i := range raw {
+		raw[i] = concepts.Concept{
+			ID:               chainID(i),
+			Label:            "Concept " + chainID(i),
+			Domain:           "d",
+			Subdomain:        "s",
+			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10},
+		}
+		if i > 0 {
+			raw[i].Prerequisites = []string{chainID(i - 1)}
+		}
+	}
+	d, err := concepts.Build(raw)
+	if err != nil {
+		t.Fatalf("build DAG: %v", err)
+	}
+	return d
+}
+
+func chainID(i int) string {
+	return fmt.Sprintf("c%02d", i)
+}
+
+func chainRegistry(t *testing.T, n int) *generator.Registry {
+	t.Helper()
+	r := generator.NewRegistry()
+	for i := 0; i < n; i++ {
+		if err := r.Register(chainID(i), &fakeGen{}); err != nil {
+			t.Fatalf("register: %v", err)
+		}
+	}
+	return r
 }
 
 func prereqsFor(i int) []string {
@@ -333,6 +373,48 @@ func TestEngine_Progress_BoundsAndMonotonic(t *testing.T) {
 	}
 	if final.CoverDone != final.CoverSize {
 		t.Errorf("expected full cover at done: %+v", final)
+	}
+}
+
+// The bar a learner sees is Progress's done/total fraction. A scope big enough
+// that its covering set needs more probes than the cap allows is the normal case:
+// Arithmetic's cover is 31 concepts, two probes each, against a 45-question cap.
+// Counting settled concepts over the whole cover made that bar sit at zero through
+// the first pass (nothing settles before its second probe) and end near half when
+// the cap finished the run. The numbers have to move on every answer and meet at
+// the end.
+func TestEngine_Progress_BarMovesOnEveryAnswerAndEndsFull(t *testing.T) {
+	e := NewEngine(chainDAG(t, 60), chainRegistry(t, 60))
+	s := e.Start()
+
+	start := e.Progress(s)
+	if start.Answered != 0 {
+		t.Fatalf("expected nothing asked before the first question: %+v", start)
+	}
+	// The cap, not the concept count, is what bounds this run: 30 cover concepts
+	// need 60 probes and the session stops at 45.
+	if start.CoverSize != maxTotalQuestions {
+		t.Fatalf("expected the bar's total to be this run's probe budget %d: %+v", maxTotalQuestions, start)
+	}
+
+	if answer(t, e, s, true, true) == "" {
+		t.Fatal("expected a first question")
+	}
+	if after := e.Progress(s); after.CoverDone == 0 {
+		t.Fatalf("expected the first answer to move the bar: %+v", after)
+	}
+
+	for i := 0; i < maxTotalQuestions+5 && !e.IsComplete(s); i++ {
+		if answer(t, e, s, true, true) == "" {
+			break
+		}
+	}
+	final := e.Progress(s)
+	if !final.Done {
+		t.Fatalf("expected the run to end at the cap: %+v", final)
+	}
+	if final.CoverDone != final.CoverSize {
+		t.Fatalf("bar ends at %d/%d instead of full: %+v", final.CoverDone, final.CoverSize, final)
 	}
 }
 
