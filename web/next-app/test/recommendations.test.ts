@@ -108,18 +108,25 @@ describe('fetchShelf', () => {
     expect(url).toContain('exclude=c')
   })
 
-  it('degrades to orientation rather than to nothing', async () => {
-    // Every one of the five requests this replaced had a fallback, so a network blip already
-    // degraded gracefully and must keep doing so. An empty home page would not.
-    //
-    // The fallback used to be the reference library. That was wrong twice over: the route is
-    // closed, and "go and read" is not the answer to "nothing is due today". It now matches the
-    // server's own empty-state fallback in internal/scheduler, because a client that invents a
-    // third answer to the same question is how the two come to describe one head differently.
-    vi.stubGlobal('fetch', vi.fn(async () => ({ ok: false, status: 500 })))
+  it('degrades to orientation only when the engine answered without a head', async () => {
+    // An older build or a proxy that drops `primary` must not turn the page into
+    // a render error, so the orientation card stays as the shape fallback.
+    vi.stubGlobal('fetch', vi.fn(async () => ({
+      ok: true, status: 200, json: async () => ({ alternatives: [], generatedAt: '' }),
+    })))
     const shelf = await fetchShelf()
     expect(shelf.next.href).toBe('/graph')
     expect(shelf.next.kind).toBe('new')
+  })
+
+  it('reports an outage as an outage, never as an empty queue', async () => {
+    // It used to answer a 500 with "All learned — nothing is due right now". With
+    // the API unreachable that is a lie about the one fact this page exists to
+    // state, and it makes the honest failure branch unreachable.
+    vi.stubGlobal('fetch', vi.fn(async () => ({
+      ok: false, status: 503, json: async () => ({ error: 'unavailable' }),
+    })))
+    await expect(fetchShelf()).rejects.toThrow(/Could not load what to study next/)
   })
 
   it('maps the paused head to a diagnostic, not a browse', () => {

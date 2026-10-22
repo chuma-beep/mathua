@@ -1253,16 +1253,17 @@ export interface RecommendationRes {
 /**
  * GET /api/next — the single answer to "what should I do now?".
  *
- * Fail-soft to an orientation recommendation rather than an empty response: the client used to
- * assemble this from five requests plus a bundled copy of the corpus, and every one of those
- * had a fallback, so a network blip already degraded gracefully and must keep doing so.
+ * A successful response with no head degrades to the same orientation card the
+ * server uses, so an older build or a proxy that drops the field cannot turn
+ * this page into a render error.
  *
- * The fallback mirrors the server's own empty-state head (`internal/scheduler.Recommend`)
- * word for word, href included. That is not tidiness: this is the one place the client
- * answers a question the engine normally answers, and the two versions of "there is nothing
- * for you right now" already disagreed once — this one still said "browse lessons", a route
- * that has since been closed. Two copies of a fallback are two copies of the product's
- * decision about what a learner with nothing to do should be told.
+ * A *failed* request does not. It used to return that card too, and the comment
+ * here used to defend it as graceful degradation. It is not: with the API
+ * blocked, the learn page told the learner "All learned — nothing is due right
+ * now" while their queue was untouched and simply unreachable. A learning app
+ * that reports an outage as an empty queue is lying about the one fact it
+ * exists to state, and the honest failure state cannot be reached at all
+ * because the error never leaves this function.
  */
 export async function getNext(exclude?: string[]): Promise<RecommendationRes> {
   const fallback: RecommendationRes = {
@@ -1284,20 +1285,11 @@ export async function getNext(exclude?: string[]): Promise<RecommendationRes> {
   const params = new URLSearchParams()
   if (exclude?.length) params.set('exclude', exclude.join(','))
   const qs = params.toString()
-  // The five requests this replaced each carried their own `.catch(...)` default, so a network
-  // blip degraded to a browse recommendation rather than to a dead end. One call has to keep
-  // that — but the absorption belongs here rather than in each caller, because a caller that
-  // swallows the error instead ends up holding a shelf it can never replace, and the Learn
-  // done card's failure branch (which exists precisely for this) stops being reachable.
-  try {
-    const res = await authedFetch(`${API_BASE}/api/next${qs ? `?${qs}` : ''}`, { cache: 'no-store' })
-    if (!res.ok) return fallback
-    const data = (await res.json()) as Partial<RecommendationRes>
-    if (!data.primary) return fallback
-    return { primary: data.primary, alternatives: data.alternatives ?? [], generatedAt: data.generatedAt ?? '' }
-  } catch {
-    return fallback
-  }
+  const res = await authedFetch(`${API_BASE}/api/next${qs ? `?${qs}` : ''}`, { cache: 'no-store' })
+  if (!res.ok) await throwWithResponse(res, 'Could not load what to study next')
+  const data = (await res.json()) as Partial<RecommendationRes>
+  if (!data.primary) return fallback
+  return { primary: data.primary, alternatives: data.alternatives ?? [], generatedAt: data.generatedAt ?? '' }
 }
 
 export interface EligibilityPrereq {

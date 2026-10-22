@@ -22,16 +22,47 @@ import { parseReturnStack } from '../../lib/learnReturn'
  */
 function LearnEntry() {
   const [shelf, setShelf] = useState<Shelf | null>(null)
+  const [failed, setFailed] = useState(false)
+  const [attempt, setAttempt] = useState(0)
 
   useEffect(() => {
     let cancelled = false
+    setFailed(false)
     fetchShelf()
       .then(s => { if (!cancelled) setShelf(s) })
-      .catch(() => { if (!cancelled) setShelf(null) })
+      .catch(() => { if (!cancelled) { setShelf(null); setFailed(true) } })
     return () => { cancelled = true }
-  }, [])
+  }, [attempt])
 
-  const loading = shelf === null
+  const loading = shelf === null && !failed
+
+  // The failure branch used to be unreachable: getNext answered an outage with
+  // "All learned", and this catch left shelf null, which read as loading and
+  // spun forever. Neither is true. The queue was not read, so say that.
+  if (failed) {
+    return (
+      <div className="mt-6 mb-16 px-4">
+        <div className="max-w-2xl mx-auto border border-mathua-border bg-mathua-surface p-4">
+          <p className="text-mathua-primary text-sm">Could not load what to study next.</p>
+          <p className="mt-1 font-mono text-xs text-mathua-muted">
+            The engine could not be reached, so your queue was not read. Nothing was lost.
+          </p>
+          <div className="mt-3 flex flex-wrap items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setAttempt(n => n + 1)}
+              className="font-mono text-xs px-3 py-1.5 border border-mathua-border text-mathua-primary hover:border-mathua-blue"
+            >
+              Try again
+            </button>
+            <Link href="/domains" className="font-mono text-xs text-mathua-blue hover:underline">
+              Browse domains
+            </Link>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   if (loading) {
     return <div className="p-6 font-mono text-xs text-mathua-muted">Loading…</div>

@@ -30,10 +30,18 @@ export default function HomePage() {
   }
 
   function handleGetStarted() {
+    // Navigate first, mint in the background.
+    //
+    // The token is only needed for the API calls the next page makes, and
+    // chaining the push onto it made this button look dead for the request's
+    // full ten-second timeout whenever that request stalled — a filtered or
+    // blocked API origin does exactly that. Ten seconds of nothing is
+    // indistinguishable from "the page won't load", which is how this was
+    // reported. The token still arrives before the first answer in every
+    // ordinary case, and if it never does the learn page is anonymously usable.
     ensureGuestId()
-    // Mint the guest token before landing so the first answer is graded against
-    // a server-side anchor and recorded against the guest id.
-    ensureGuestToken().finally(() => push('/learn'))
+    push('/learn')
+    void ensureGuestToken()
   }
 
   return (

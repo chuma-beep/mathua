@@ -276,6 +276,12 @@ type QuestionReport struct {
 	ResolvedBy string    `json:"resolved_by"`
 	ResolvedAt string    `json:"resolved_at"`
 	CreatedAt  time.Time `json:"created_at"`
+	// OriginReportID is the id this report carried in the database it was exported from, and
+	// "" for a report filed here. The row id is not that number: SQLite does not reuse an id
+	// from a rolled-back insert, so the two sequences drift as soon as anything fails, and a
+	// local "#94" can name a different report from the production #94 a colleague is looking
+	// at. Anything quoted outside the local database uses this field.
+	OriginReportID string `json:"origin_report_id,omitempty"`
 }
 
 // AdminInvitation is a pending offer of a staff role to an account.
@@ -654,6 +660,19 @@ type Repository interface {
 
 	CreateReport(r QuestionReport) (int64, error)
 	ListReports(status string, limit, offset int) ([]QuestionReport, error)
+	// GetReportByOrigin finds an imported report by the id it had in the database it came
+	// from, which is the number the admin page and a colleague both quote.
+	GetReportByOrigin(originID string) (*QuestionReport, error)
+
+	// ImportReport copies a report that came from another installation into this one.
+	//
+	// originID is that report's id where it was filed, and the unique index on it is what
+	// makes re-running an export a no-op: a partially applied import can be retried without
+	// duplicating the queue. The returned bool is false when the report was already present.
+	//
+	// There is deliberately no write-back. The import exists so the person fixing a reported
+	// question can reproduce it against a local database; the fix still travels as a commit.
+	ImportReport(originID string, r QuestionReport) (bool, error)
 
 	// Diagnostic sessions outlive the process that started them.
 	//

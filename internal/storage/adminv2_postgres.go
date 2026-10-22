@@ -53,6 +53,23 @@ func (s *PostgresStore) GetReport(id int64) (*QuestionReport, error) {
 	return &r, nil
 }
 
+// GetReportByOrigin mirrors the SQLite lookup; see that implementation for why the origin id
+// is not the row id.
+func (s *PostgresStore) GetReportByOrigin(originID string) (*QuestionReport, error) {
+	originID = strings.TrimSpace(originID)
+	if originID == "" {
+		return nil, nil
+	}
+	r, err := scanReportRow(s.db.QueryRow(reportSelectColumns+` WHERE origin_report_id = $1`, originID))
+	if err == sql.ErrNoRows {
+		return nil, nil
+	}
+	if err != nil {
+		return nil, err
+	}
+	return &r, nil
+}
+
 // ListUnsettledReportIDsForConcept mirrors the SQLite query; see that comment
 // for why settled reports are excluded.
 func (s *PostgresStore) ListUnsettledReportIDsForConcept(conceptID string) ([]int64, error) {

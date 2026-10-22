@@ -172,8 +172,14 @@ func main() {
 				os.Exit(1)
 			}
 			return
+		case "issues":
+			if err := issuesCommand(flag.Args()[1:]); err != nil {
+				fmt.Fprintf(os.Stderr, "error: %v\n", err)
+				os.Exit(1)
+			}
+			return
 		default:
-			fmt.Fprintf(os.Stderr, "unknown command %q. Available: admin\n", flag.Arg(0))
+			fmt.Fprintf(os.Stderr, "unknown command %q. Available: admin, issues\n", flag.Arg(0))
 			os.Exit(2)
 		}
 	}

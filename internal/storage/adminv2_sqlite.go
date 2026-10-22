@@ -59,6 +59,23 @@ func (s *SQLiteStore) GetReport(id int64) (*QuestionReport, error) {
 	return &r, nil
 }
 
+// GetReportByOrigin reads an imported report by the id it had where it was filed. It returns
+// (nil, nil) when nothing carries that origin, exactly as GetReport does for a missing row.
+func (s *SQLiteStore) GetReportByOrigin(originID string) (*QuestionReport, error) {
+	originID = strings.TrimSpace(originID)
+	if originID == "" {
+		return nil, nil
+	}
+	r, err := scanReportRow(s.db.QueryRow(reportSelectColumns+` WHERE origin_report_id = ?`, originID))
+	if err == sql.ErrNoRows {
+		return nil, nil
+	}
+	if err != nil {
+		return nil, err
+	}
+	return &r, nil
+}
+
 // UpdateReportStatusAudited applies a moderation decision and records it together.
 //
 // The report row is edited, never deleted. Resolving or dismissing stamps who decided and when
@@ -287,7 +304,7 @@ const reportSelectColumns = `SELECT id, reporter_id, concept_id, kind, question,
 	lesson_id, source, session_id, attempt_id,
 	answer_given, grading_type, answer_hint, answer_input_mode,
 	reason, detail, status,
-	resolution, resolved_by, resolved_at, created_at
+	resolution, resolved_by, resolved_at, created_at, origin_report_id
 	FROM question_reports`
 
 type rowScanner interface {
@@ -302,6 +319,7 @@ func scanReportRow(row rowScanner) (QuestionReport, error) {
 		&r.Explanation, &r.LessonID, &r.Source, &r.SessionID, &r.AttemptID,
 		&r.AnswerGiven, &r.GradingType, &r.AnswerHint, &r.AnswerInputMode,
 		&r.Reason, &r.Detail, &r.Status, &r.Resolution, &r.ResolvedBy, &r.ResolvedAt, &created,
+		&r.OriginReportID,
 	)
 	if err != nil {
 		return QuestionReport{}, err
