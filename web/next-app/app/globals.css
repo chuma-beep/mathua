@@ -742,6 +742,32 @@ footer .link-underline:hover {
   }
 }
 
+/* The other end of the same problem, below lg. The answer hosts focus their Next button
+   when feedback appears, and a plain focus scrolls it only as far as the bottom edge of
+   the viewport -- which is where the floating tab bar and its chevron toggle sit. On a
+   Pixel 7 profile the centre of Next hit the Domains tab, so the tap meant for the next
+   question left the diagnostic instead.
+
+   A margin on the element rather than padding on the scrollport, for the reason given
+   above: scroll padding on a phone moves MathLive's keypad anchoring. Focus alone does
+   not honour the margin when Next is already on screen, so the hosts focus it through
+   `lib/focusClearOfTabs.ts`, whose `scrollIntoView` does. 8rem clears the 56px bar, its
+   12px inset and the toggle above it.
+
+   While the chrome is scrolled away (`lib/chrome.ts`), it comes back after an idle pause,
+   and the sticky header is in flow: its return pushes everything down by about 60px.
+   Measured at 320x568, Next was placed correctly and then pushed under the returning
+   toggle, so a hidden chrome adds 4rem for the header it is about to reveal. */
+@media (max-width: 1023px) {
+  .clear-of-tabs {
+    scroll-margin-bottom: calc(8rem + env(safe-area-inset-bottom));
+  }
+
+  html[data-chrome='hidden'] .clear-of-tabs {
+    scroll-margin-bottom: calc(12rem + env(safe-area-inset-bottom));
+  }
+}
+
 math-field.mathua-math-field {
   display: block;
   box-sizing: border-box;

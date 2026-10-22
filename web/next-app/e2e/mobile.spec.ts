@@ -468,3 +468,63 @@ test('the assistant trigger does not cover the contents button', async ({ page }
   const overlap = c.x < a.x + a.width && a.x < c.x + c.width && c.y < a.y + a.height && a.y < c.y + c.height
   expect(overlap, `contents ${JSON.stringify(c)} overlaps assistant ${JSON.stringify(a)}`).toBe(false)
 })
+
+test('Next is tappable after an answer, not under the tab bar', async ({ page }) => {
+  // The diagnostic autofocuses Next when feedback appears. Focus scrolls it only as far
+  // as the bottom edge of the viewport, which is where the floating tab bar sits, so the
+  // tap meant for the next question landed on the Domains tab and ended the run.
+  const progress = { answered: 0, estimated_total: 25, min_total: 25, max_total: 45, cover_done: 0, cover_size: 5, done: false }
+  await page.route('**/api/goal/diagnostic', route =>
+    route.fulfill({ json: { session_id: 's1', concept_id: 'arith.add.single', concept_name: 'Single-digit addition', question: '2 + 3 = ?', done: false, progress } }),
+  )
+  await page.route('**/api/goal/diagnostic/answer', route =>
+    route.fulfill({
+      json: {
+        done: false,
+        correct: true,
+        feedback: 'Correct!',
+        concept_id: 'arith.add.single',
+        concept_name: 'Single-digit addition',
+        question: '4 + 4 = ?',
+        progress: { ...progress, answered: 1 },
+      },
+    }),
+  )
+
+  await page.goto('/goals')
+  await page.getByRole('button', { name: /Arithmetic/ }).first().tap()
+  await page.getByRole('button', { name: /Start diagnostic test/ }).tap()
+  await page.getByRole('button', { name: 'Begin diagnostic →' }).tap()
+  await expect(page.getByText('2 + 3 = ?')).toBeVisible({ timeout: 20_000 })
+
+  await enterAnswer(page, '5')
+  // At 320x568 the open keypad covers Check. A learner scrolls it up into view, which the
+  // page allows because <body> is padded by the keypad's height while it is open.
+  await page.evaluate(() => {
+    const check = [...document.querySelectorAll('button')].find(b => b.textContent?.trim() === 'Check Answer')
+    const plate = [...document.querySelectorAll('.MLK__plate')].find(p => p.getBoundingClientRect().height > 0)
+    if (!check || !plate) return
+    const overlap = check.getBoundingClientRect().bottom - plate.getBoundingClientRect().top + 12
+    if (overlap > 0) window.scrollBy(0, overlap)
+  })
+  const check = await page.getByRole('button', { name: 'Check Answer' }).first().boundingBox()
+  if (!check) throw new Error('no Check Answer button')
+  await page.touchscreen.tap(check.x + check.width / 2, check.y + check.height / 2)
+
+  const next = page.getByRole('button', { name: 'Next →' })
+  await expect(next).toBeFocused({ timeout: 20_000 })
+  // MathLive hides the keypad 300ms after focus leaves the field.
+  await page.waitForTimeout(500)
+  const box = await next.boundingBox()
+  if (!box) throw new Error('no Next button')
+  const hit = await page.evaluate(
+    ([x, y]) => {
+      const hit = document.elementFromPoint(x, y)?.closest('button, a')
+      return hit ? hit.getAttribute('aria-label') || hit.textContent?.trim() || hit.tagName : null
+    },
+    [box.x + box.width / 2, box.y + box.height / 2],
+  )
+  expect(hit, 'something is drawn over the centre of Next').toBe('Next →')
+  await page.touchscreen.tap(box.x + box.width / 2, box.y + box.height / 2)
+  await expect(page.getByText('4 + 4 = ?')).toBeVisible()
+})

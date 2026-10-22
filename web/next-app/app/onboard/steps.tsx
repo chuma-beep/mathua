@@ -15,6 +15,7 @@ import type { AnswerFormat } from '../../lib/answerFormat'
 import ChoiceOptions from '../../components/ChoiceOptions'
 import { domainLabels, type DomainInfo } from './domains'
 import { MathAnswerInput, type MathFocusHandle } from '@/components/math/MathInput'
+import { focusClearOfTabs } from '../../lib/focusClearOfTabs'
 
 export function WelcomeStep({
   domains,
@@ -396,9 +397,9 @@ export function DiagnosticStep({
           <div className="mb-4 text-center">
             <button
               type="button"
-              autoFocus
+              ref={focusClearOfTabs}
               onClick={onNext}
-              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-12 px-8 font-medium text-sm shrink-0"
+              className="clear-of-tabs border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-12 px-8 font-medium text-sm shrink-0"
             >
               Next →
             </button>

@@ -27,6 +27,7 @@ import SubmitErrorBlock, {
 } from '../../components/SubmitErrorBlock'
 import { GOALS_DIAG_KEY } from './constants'
 import { MathAnswerInput, type MathFocusHandle } from '@/components/math/MathInput'
+import { focusClearOfTabs } from '../../lib/focusClearOfTabs'
 
 const EMPTY_PLAN: GoalPlanRes = {
   readiness: 1,
@@ -492,9 +493,9 @@ export default function DiagnosticHost({
           <div className="mb-6 text-center">
             <button
               type="button"
-              autoFocus
+              ref={focusClearOfTabs}
               onClick={goNext}
-              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-12 px-8 font-medium text-sm shrink-0"
+              className="clear-of-tabs border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-12 px-8 font-medium text-sm shrink-0"
             >
               Next →
             </button>

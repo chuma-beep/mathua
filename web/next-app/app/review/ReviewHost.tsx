@@ -13,6 +13,7 @@ import { formatForGradingType, type AnswerFormat } from '../../lib/answerFormat'
 import ChoiceOptions from '../../components/ChoiceOptions'
 import SubmitErrorBlock, { toSubmitError, type SubmitError } from '../../components/SubmitErrorBlock'
 import { MathAnswerInput, type MathFocusHandle } from '@/components/math/MathInput'
+import { focusClearOfTabs } from '../../lib/focusClearOfTabs'
 
 type Phase = 'loading' | 'intro' | 'run' | 'done'
 
@@ -311,9 +312,9 @@ export default function ReviewHost() {
           <div className="mb-6 text-center">
             <button
               type="button"
-              autoFocus
+              ref={focusClearOfTabs}
               onClick={goNext}
-              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-12 px-8 font-medium text-sm shrink-0"
+              className="clear-of-tabs border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-12 px-8 font-medium text-sm shrink-0"
             >
               Next →
             </button>

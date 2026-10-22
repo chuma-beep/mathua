@@ -18,6 +18,7 @@ import SubmitErrorBlock, {
 } from '../../components/SubmitErrorBlock'
 import { concepts as conceptsData } from '../../lib/conceptData'
 import { MathAnswerInput, type MathFocusHandle } from '@/components/math/MathInput'
+import { focusClearOfTabs } from '../../lib/focusClearOfTabs'
 
 // 'failed' exists because 'done' used to carry two meanings. Any thrown request
 // set phase to 'done', and the done screen reads "No questions available" while
@@ -422,9 +423,9 @@ export default function QuizHost() {
           <div className="mb-6 text-center">
             <button
               type="button"
-              autoFocus
+              ref={focusClearOfTabs}
               onClick={goNextQuiz}
-              className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-12 px-8 font-medium text-sm shrink-0"
+              className="clear-of-tabs border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-12 px-8 font-medium text-sm shrink-0"
             >
               Next →
             </button>
