@@ -29,8 +29,7 @@ const PROG0 = {
   estimated_total: 25,
   min_total: 25,
   max_total: 45,
-  cover_done: 0,
-  cover_size: 5,
+  probe_budget: 45,
   done: false,
 }
 
@@ -55,7 +54,7 @@ vi.mock('../lib/api', async (importOriginal) => {
     concept_name: 'Q2 concept',
     question: 'Q2 text',
     grading_type: 'numeric',
-    progress: { ...PROG0, answered: 1, cover_done: 1 },
+    progress: { ...PROG0, answered: 1 },
   })),
   resumeGoalDiagnostic: vi.fn(),
   getGoalPlan: vi.fn(),
@@ -87,7 +86,7 @@ vi.mock('../lib/api', async (importOriginal) => {
     concept_name: 'Q3 concept',
     question: 'Q3 text',
     grading_type: 'numeric',
-    progress: { ...PROG0, answered: 1, cover_done: 1 },
+    progress: { ...PROG0, answered: 1 },
   })),
   skipQuizQuestion: vi.fn(async () => ({
     done: false,
@@ -478,7 +477,7 @@ describe('DiagnosticHost manual advance', () => {
       concept_name: 'Q2 concept',
       question: 'Q2 text',
       grading_type: 'numeric',
-      progress: { ...PROG0, answered: 1, cover_done: 1 },
+      progress: { ...PROG0, answered: 1 },
     })
     render(
       <DiagnosticHost
@@ -515,7 +514,7 @@ describe('DiagnosticHost manual advance', () => {
       question: 'Q2 text',
       grading_type: 'numeric',
       retry_available: true,
-      progress: { ...PROG0, answered: 1, cover_done: 1 },
+      progress: { ...PROG0, answered: 1 },
     })
     render(
       <DiagnosticHost

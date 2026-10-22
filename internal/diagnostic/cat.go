@@ -106,18 +106,18 @@ type Attempt struct {
 	BeliefSnapshot map[string]float64
 }
 
-// Progress is the backend truth for the progress bar (MA parity: no exact
-// total is promised — the Diagnostic is adaptive). CoverDone/CoverSize is
-// the monotonic coverage fraction (never decreases); Answered counts
-// questions answered; EstimatedTotal is a legacy hint kept for compat and
-// must NOT be displayed as a promise.
+// Progress is the backend truth for the progress bar. The bar is questions
+// delivered over this run's probe budget: two probes per cover concept, bounded
+// by maxTotalQuestions. Counting settled concepts instead left the bar at zero
+// through the first pass (nothing settles before its second probe) and unable to
+// reach a 31-concept cover inside the 45-question cap.
+// EstimatedTotal is a legacy hint that must NOT be displayed as a promise.
 type Progress struct {
 	Answered       int  `json:"answered"`
 	EstimatedTotal int  `json:"estimated_total"`
 	MinTotal       int  `json:"min_total"`
 	MaxTotal       int  `json:"max_total"`
-	CoverDone      int  `json:"cover_done"`
-	CoverSize      int  `json:"cover_size"`
+	ProbeBudget    int  `json:"probe_budget"`
 	Done           bool `json:"done"`
 }
 
@@ -767,9 +767,8 @@ func (e *Engine) IsComplete(s *Session) bool {
 	return s.State == StateDone
 }
 
-// Progress returns the backend truth for the progress bar (MA parity).
-// CoverDone/CoverSize is monotonic (doneSet only grows); display the bar
-// from cover fraction, never from the moving estimated_total denominator.
+// Progress returns the backend truth for the progress bar. The bar is Answered
+// over ProbeBudget, so it moves on every answer and fills when the run ends.
 func (e *Engine) Progress(s *Session) Progress {
 	s.Lock()
 	defer s.Unlock()
@@ -792,13 +791,16 @@ func (e *Engine) Progress(s *Session) Progress {
 	if est < answered {
 		est = answered
 	}
+	budget := 2 * len(cover)
+	if budget > maxTotalQuestions {
+		budget = maxTotalQuestions
+	}
 	return Progress{
 		Answered:       answered,
 		EstimatedTotal: est,
 		MinTotal:       minTotalQuestions,
 		MaxTotal:       maxTotalQuestions,
-		CoverDone:      coverDone,
-		CoverSize:      len(cover),
+		ProbeBudget:    budget,
 		Done:           s.State == StateDone,
 	}
 }

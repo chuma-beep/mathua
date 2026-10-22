@@ -69,7 +69,6 @@ export default function DiagnosticHost({
     answerInputMode?: string
   } | null>(null)
   const [questionCount, setQuestionCount] = useState(0)
-  const [estimatedTotal, setEstimatedTotal] = useState(0)
   const [progress, setProgress] = useState<DiagnosticProgress | null>(null)
   const [answerInput, setAnswerInput] = useState('')
   // Verdict only. A diagnostic measures prior knowledge, so the response no longer carries the
@@ -109,16 +108,7 @@ export default function DiagnosticHost({
       setAnswerFormat(formatForQuestion(res))
     diagGradingType.current = res.grading_type
       setQuestionCount(1)
-      // Backend truth first; frontend estimate as fallback for older servers.
-      if (res.progress && res.progress.cover_size > 0) {
-        setProgress(res.progress)
-        setEstimatedTotal(res.progress.cover_size)
-      } else {
-        // Fallback cover size: ~10 + log2(selected concepts)
-        const est = Math.min(10 + Math.ceil(Math.log2(Math.max(ids.length, 1)) * 5), 50)
-        setEstimatedTotal(est)
-        setProgress(null)
-      }
+      setProgress(res.progress ?? null)
       setAccuracy({ correct: 0, total: 0 })
       setLastResult(null)
       setAnswerInput('')
@@ -161,7 +151,6 @@ export default function DiagnosticHost({
     diagGradingType.current = data.grading_type
       if (data.progress) {
         setProgress(data.progress)
-        setEstimatedTotal(data.progress.cover_size)
         setQuestionCount(data.progress.answered + 1)
       }
       setLastResult(null)
@@ -216,9 +205,8 @@ export default function DiagnosticHost({
       setLastResult({ correct, feedback, conceptId: conceptId.current, dontKnow })
       setRetryAvailable(data.done ? false : data.retry_available === true)
       setRetryConcept(data.done ? '' : conceptId.current)
-      if (data.progress && data.progress.cover_size > 0) {
+      if (data.progress) {
         setProgress(data.progress)
-        setEstimatedTotal(data.progress.cover_size)
       }
 
       if (data.done) {
@@ -289,9 +277,8 @@ export default function DiagnosticHost({
         }, 800)
         return
       }
-      if (data.progress && data.progress.cover_size > 0) {
+      if (data.progress) {
         setProgress(data.progress)
-        setEstimatedTotal(data.progress.cover_size)
       }
       applyQuestion(data.question || '', data.concept_id || '', data.concept_name || '', data.grading_type || '', data)
     } catch (e) {
@@ -350,9 +337,8 @@ export default function DiagnosticHost({
       <SectionHeader label={`Question ${progress ? progress.answered + 1 : questionCount}`} title={conceptName} />
       <div className="max-w-2xl mx-auto min-w-0 overflow-hidden px-2 sm:px-0">
         <ProgressBar
-          answered={progress ? progress.answered + 1 : questionCount}
-          coverDone={progress ? progress.cover_done : 0}
-          coverSize={progress ? progress.cover_size : estimatedTotal}
+          answered={progress ? progress.answered : 0}
+          budget={progress ? progress.probe_budget : 0}
         />
 
         {/* Accuracy display */}

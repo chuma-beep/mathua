@@ -347,7 +347,7 @@ func TestEngine_Report_CompletionEstimatesAreNotFabricated(t *testing.T) {
 func TestEngine_Progress_BoundsAndMonotonic(t *testing.T) {
 	e := NewEngine(testDAG(t), mustRegistry(t))
 	s := e.Start()
-	prevCover := -1
+	prevAnswered := -1
 	for i := 0; i < 60 && !e.IsComplete(s); i++ {
 		p := e.Progress(s)
 		if p.EstimatedTotal < 25 || p.EstimatedTotal > 45 {
@@ -356,13 +356,13 @@ func TestEngine_Progress_BoundsAndMonotonic(t *testing.T) {
 		if p.Answered != s.totalAsked {
 			t.Fatalf("answered mismatch: progress=%d asked=%d", p.Answered, s.totalAsked)
 		}
-		if p.CoverSize <= 0 {
-			t.Fatalf("expected positive cover size: %+v", p)
+		if p.ProbeBudget <= 0 {
+			t.Fatalf("expected a positive probe budget: %+v", p)
 		}
-		if p.CoverDone < prevCover {
-			t.Fatalf("cover done decreased (bar would regress): prev=%d cur=%+v", prevCover, p)
+		if p.Answered < prevAnswered {
+			t.Fatalf("answered decreased (bar would regress): prev=%d cur=%+v", prevAnswered, p)
 		}
-		prevCover = p.CoverDone
+		prevAnswered = p.Answered
 		if answer(t, e, s, true, true) == "" {
 			break
 		}
@@ -371,8 +371,8 @@ func TestEngine_Progress_BoundsAndMonotonic(t *testing.T) {
 	if !final.Done {
 		t.Error("expected done progress after completion")
 	}
-	if final.CoverDone != final.CoverSize {
-		t.Errorf("expected full cover at done: %+v", final)
+	if final.Answered != final.ProbeBudget {
+		t.Errorf("expected full bar at done: %+v", final)
 	}
 }
 
@@ -393,14 +393,14 @@ func TestEngine_Progress_BarMovesOnEveryAnswerAndEndsFull(t *testing.T) {
 	}
 	// The cap, not the concept count, is what bounds this run: 30 cover concepts
 	// need 60 probes and the session stops at 45.
-	if start.CoverSize != maxTotalQuestions {
+	if start.ProbeBudget != maxTotalQuestions {
 		t.Fatalf("expected the bar's total to be this run's probe budget %d: %+v", maxTotalQuestions, start)
 	}
 
 	if answer(t, e, s, true, true) == "" {
 		t.Fatal("expected a first question")
 	}
-	if after := e.Progress(s); after.CoverDone == 0 {
+	if after := e.Progress(s); after.Answered != 1 {
 		t.Fatalf("expected the first answer to move the bar: %+v", after)
 	}
 
@@ -413,8 +413,8 @@ func TestEngine_Progress_BarMovesOnEveryAnswerAndEndsFull(t *testing.T) {
 	if !final.Done {
 		t.Fatalf("expected the run to end at the cap: %+v", final)
 	}
-	if final.CoverDone != final.CoverSize {
-		t.Fatalf("bar ends at %d/%d instead of full: %+v", final.CoverDone, final.CoverSize, final)
+	if final.Answered != final.ProbeBudget {
+		t.Fatalf("bar ends at %d/%d instead of full: %+v", final.Answered, final.ProbeBudget, final)
 	}
 }
 

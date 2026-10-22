@@ -2,22 +2,20 @@
 
 interface ProgressBarProps {
   answered: number
-  coverDone: number
-  coverSize: number
+  budget: number
   className?: string
 }
 
-// Shared progress bar for the Diagnostic (MA parity: adaptive, no exact
-// total is promised). The bar is driven by the monotonic cover fraction
-// (coverDone/coverSize, never decreases); visible copy is just the
-// "Progress bar" label and the question number.
-export default function ProgressBar({ answered, coverDone, coverSize, className = '' }: ProgressBarProps) {
+// Shared progress bar for the Diagnostic. The bar is questions answered over
+// this run's probe budget, so it moves on every answer and fills when the
+// session ends.
+export default function ProgressBar({ answered, budget, className = '' }: ProgressBarProps) {
   const safeAnswered = Math.max(0, answered)
-  const size = Math.max(0, coverSize)
-  const done = Math.min(Math.max(0, coverDone), Math.max(size, 1))
-  const pct = size > 0 ? Math.min((done / size) * 100, 100) : 0
-  const indeterminate = size <= 0
-  const questionLabel = `Question ${Math.max(safeAnswered, 1)}`
+  const total = Math.max(0, budget)
+  const done = Math.min(safeAnswered, total)
+  const pct = total > 0 ? (done / total) * 100 : 0
+  const indeterminate = total <= 0
+  const questionLabel = `Question ${Math.max(safeAnswered + 1, 1)}`
 
   return (
     <div className={`mb-4 ${className}`}>
@@ -42,7 +40,7 @@ export default function ProgressBar({ answered, coverDone, coverSize, className 
           role="progressbar"
           aria-label="Progress bar"
           aria-valuemin={0}
-          aria-valuemax={size}
+          aria-valuemax={total}
           aria-valuenow={done}
           aria-valuetext={questionLabel}
           className="h-1.5 bg-mathua-code rounded-full overflow-hidden"

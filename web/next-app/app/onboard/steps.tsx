@@ -296,9 +296,8 @@ export function DiagnosticStep({
       <SectionHeader label={`Question ${progress ? progress.answered + 1 : questionCount}`} title={conceptName} />
       <div className="max-w-2xl mx-auto px-2 sm:px-0 min-w-0 overflow-hidden">
         <ProgressBar
-          answered={progress ? progress.answered + 1 : questionCount}
-          coverDone={progress ? progress.cover_done : 0}
-          coverSize={progress ? progress.cover_size : 0}
+          answered={progress ? progress.answered : 0}
+          budget={progress ? progress.probe_budget : 0}
         />
         <div className="bg-mathua-surface border border-mathua-border rounded-none p-4 sm:p-6 mb-6 w-full max-w-full min-w-0 overflow-hidden">
           <div className="bg-mathua-code border border-mathua-border rounded-none p-4 sm:p-6 text-center mb-4 w-full max-w-full min-w-0 overflow-hidden">

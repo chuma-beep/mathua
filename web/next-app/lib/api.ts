@@ -598,8 +598,7 @@ export interface DiagnosticProgress {
   estimated_total: number
   min_total: number
   max_total: number
-  cover_done: number
-  cover_size: number
+  probe_budget: number
   done: boolean
 }
 

@@ -105,7 +105,7 @@ describe('/onboard domain selection', () => {
   it('sends the selected domains up as concept ids and nothing else', async () => {
     vi.mocked(api.startGoalDiagnostic).mockResolvedValue({
       session_id: 's1', concept_id: 'c1', concept_name: 'C', question: '1 + 1 = ?',
-      progress: { answered: 0, estimated_total: 25, min_total: 25, max_total: 45, cover_done: 0, cover_size: 5, done: false },
+      progress: { answered: 0, estimated_total: 25, min_total: 25, max_total: 45, probe_budget: 45, done: false },
     } as never)
     render(<OnboardPage />)
     await waitFor(() => expect(screen.getByText(domainLabel('arithmetic'))).toBeTruthy())
