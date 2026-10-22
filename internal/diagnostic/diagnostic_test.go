@@ -43,8 +43,7 @@ func idFor(i int) string {
 	return string(letters[i])
 }
 
-// chainDAG builds an n-concept prerequisite chain, long enough that its covering
-// set is compressed and needs more probes than the question cap allows.
+// chainDAG builds an n-concept prerequisite chain.
 func chainDAG(t *testing.T, n int) *concepts.DAG {
 	t.Helper()
 	raw := make([]concepts.Concept, n)
@@ -376,13 +375,11 @@ func TestEngine_Progress_BoundsAndMonotonic(t *testing.T) {
 	}
 }
 
-// The bar a learner sees is Progress's done/total fraction. A scope big enough
-// that its covering set needs more probes than the cap allows is the normal case:
-// Arithmetic's cover is 31 concepts, two probes each, against a 45-question cap.
-// Counting settled concepts over the whole cover made that bar sit at zero through
-// the first pass (nothing settles before its second probe) and end near half when
-// the cap finished the run. The numbers have to move on every answer and meet at
-// the end.
+// The bar a learner sees is Progress's answered over budget fraction. This chain
+// compresses to a cover of 30, which needs 60 probes, and the real Arithmetic
+// scope compresses to 31. The 45-question cap ends either run before the cover
+// settles. The old bar counted settled concepts, and 45 answers settle at most 22
+// concepts, so it could not fill.
 func TestEngine_Progress_BarMovesOnEveryAnswerAndEndsFull(t *testing.T) {
 	e := NewEngine(chainDAG(t, 60), chainRegistry(t, 60))
 	s := e.Start()
@@ -391,8 +388,7 @@ func TestEngine_Progress_BarMovesOnEveryAnswerAndEndsFull(t *testing.T) {
 	if start.Answered != 0 {
 		t.Fatalf("expected nothing asked before the first question: %+v", start)
 	}
-	// The cap, not the concept count, is what bounds this run: 30 cover concepts
-	// need 60 probes and the session stops at 45.
+	// 30 cover concepts need 60 probes, so the cap decides this run's budget.
 	if start.ProbeBudget != maxTotalQuestions {
 		t.Fatalf("expected the bar's total to be this run's probe budget %d: %+v", maxTotalQuestions, start)
 	}

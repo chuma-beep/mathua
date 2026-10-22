@@ -6,9 +6,8 @@ interface ProgressBarProps {
   className?: string
 }
 
-// Shared progress bar for the Diagnostic. The bar is questions answered over
-// this run's probe budget, so it moves on every answer and fills when the
-// session ends.
+// Shared progress bar for the Diagnostic. The budget is the probe count of this
+// run, not the cover size, so the bar tracks questions answered.
 export default function ProgressBar({ answered, budget, className = '' }: ProgressBarProps) {
   const safeAnswered = Math.max(0, answered)
   const total = Math.max(0, budget)

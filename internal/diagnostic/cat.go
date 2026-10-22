@@ -106,12 +106,11 @@ type Attempt struct {
 	BeliefSnapshot map[string]float64
 }
 
-// Progress is the backend truth for the progress bar. The bar is questions
-// delivered over this run's probe budget: two probes per cover concept, bounded
-// by maxTotalQuestions. Counting settled concepts instead left the bar at zero
-// through the first pass (nothing settles before its second probe) and unable to
-// reach a 31-concept cover inside the 45-question cap.
-// EstimatedTotal is a legacy hint that must NOT be displayed as a promise.
+// Progress is the backend truth for the progress bar. The bar is Answered over
+// ProbeBudget. The budget is two probes for each cover concept, and
+// maxTotalQuestions caps it. The bar used to count settled concepts over the
+// whole cover, so it moved only when a concept reached its second probe.
+// EstimatedTotal is a legacy hint, not a promise.
 type Progress struct {
 	Answered       int  `json:"answered"`
 	EstimatedTotal int  `json:"estimated_total"`
@@ -767,8 +766,7 @@ func (e *Engine) IsComplete(s *Session) bool {
 	return s.State == StateDone
 }
 
-// Progress returns the backend truth for the progress bar. The bar is Answered
-// over ProbeBudget, so it moves on every answer and fills when the run ends.
+// Progress reports the bar that the Progress type describes.
 func (e *Engine) Progress(s *Session) Progress {
 	s.Lock()
 	defer s.Unlock()
