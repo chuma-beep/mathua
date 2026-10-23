@@ -123,7 +123,7 @@ jobs:
       # hand the result over, rather than building again on two runners.
       - uses: actions/upload-artifact@v4
         with:
-          name: web-build
+          name: web-build-e2e
           path: web/next-app/out
           retention-days: 1
           if-no-files-found: error
@@ -152,8 +152,37 @@ jobs:
           retention-days: 7
           if-no-files-found: ignore
 
+  # The shards need the export, not the whole `web` job: typecheck, lint, unit
+  # tests and the build share one 214-second job, so the shards could not start
+  # until all of it finished. This job produces the same artifact on the same
+  # commit, so the shards start as soon as the export exists. `web` keeps its
+  # steps and its name, and a broken build still fails the pipeline because the
+  # shards need this job.
+  build:
+    name: Build the web export
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web/next-app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.22.1'
+          cache: npm
+          cache-dependency-path: web/next-app/package-lock.json
+      - run: npm ci
+      - run: npm run build
+        env:
+          NEXT_PUBLIC_API_URL: http://192.0.2.1:9099
+      - uses: actions/upload-artifact@v4
+        with:
+          name: web-build-e2e
+          path: web/next-app/out
+          retention-days: 1
+
   web-e2e:
-    needs: web
+    needs: build
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
