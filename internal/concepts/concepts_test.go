@@ -428,3 +428,42 @@ func TestConcept_KnowledgePointByOrdinal(t *testing.T) {
 		t.Errorf("expected Title Two, got %v", kp2)
 	}
 }
+
+func TestCurriculumEnrichment_LoadedAndVerified(t *testing.T) {
+	dag, err := LoadDir("../../data/concepts")
+	if err != nil {
+		t.Fatalf("load curriculum: %v", err)
+	}
+	if dag.Count() != 1250 {
+		t.Errorf("expected 1250 concepts, got %d", dag.Count())
+	}
+
+	encompassedCount := 0
+	keyPrereqCount := 0
+	for _, c := range dag.Order() {
+		if len(c.Encompasses) > 0 {
+			encompassedCount++
+		}
+		if len(c.KeyPrerequisites) > 0 {
+			keyPrereqCount++
+			for _, kp := range c.KeyPrerequisites {
+				found := false
+				for _, p := range c.Prerequisites {
+					if p == kp {
+						found = true
+						break
+					}
+				}
+				if !found {
+					t.Errorf("concept %s key_prerequisite %s is not in prerequisites %v", c.ID, kp, c.Prerequisites)
+				}
+			}
+		}
+	}
+	if encompassedCount < 50 {
+		t.Errorf("expected at least 50 concepts with encompasses populated, got %d", encompassedCount)
+	}
+	if keyPrereqCount < 50 {
+		t.Errorf("expected at least 50 concepts with key_prerequisites populated, got %d", keyPrereqCount)
+	}
+}

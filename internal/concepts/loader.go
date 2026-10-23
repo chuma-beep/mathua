@@ -93,10 +93,10 @@ func mergeEnrichment(dir string, raw []Concept) error {
 				return fmt.Errorf("enrichment id %q not found in DAG", e.ID)
 			}
 			if len(e.Encompasses) > 0 {
-				c.Encompasses = append(c.Encompasses, e.Encompasses...)
+				c.Encompasses = appendUnique(c.Encompasses, e.Encompasses)
 			}
 			if len(e.KeyPrerequisites) > 0 {
-				c.KeyPrerequisites = append(c.KeyPrerequisites, e.KeyPrerequisites...)
+				c.KeyPrerequisites = appendUnique(c.KeyPrerequisites, e.KeyPrerequisites)
 			}
 			if e.InterferenceGroup != "" {
 				if c.InterferenceGroup != "" && c.InterferenceGroup != e.InterferenceGroup {
@@ -124,6 +124,20 @@ func mergeEnrichment(dir string, raw []Concept) error {
 		}
 	}
 	return nil
+}
+
+func appendUnique(slice []string, items []string) []string {
+	seen := make(map[string]bool, len(slice))
+	for _, s := range slice {
+		seen[s] = true
+	}
+	for _, item := range items {
+		if !seen[item] {
+			seen[item] = true
+			slice = append(slice, item)
+		}
+	}
+	return slice
 }
 
 // Build validates a concept slice (no cycles, orphan prereqs, empty/duplicate IDs), topo-sorts, and returns a DAG.

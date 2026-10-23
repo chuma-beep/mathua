@@ -2,60 +2,1078 @@
   {
     "id": "calc.limit.concept",
     "heuristic": "calc.encompasses.alg",
-    "note": "calc.* encompasses alg.* — higher integration encompasses function concept for layering",
-    "encompasses": ["alg.func.concept"],
-    "key_prerequisites": ["alg.func.concept"],
+    "note": "calc.* encompasses alg.* \u2014 higher integration encompasses function concept for layering",
+    "encompasses": [
+      "alg.func.concept"
+    ],
+    "key_prerequisites": [
+      "alg.func.concept"
+    ],
     "variants": [
-      {"difficulty": 0.3, "time_thresh": 12.0, "label": "easy"},
-      {"difficulty": 0.7, "time_thresh": 15.0, "label": "hard"}
+      {
+        "difficulty": 0.3,
+        "time_thresh": 12.0,
+        "label": "easy"
+      },
+      {
+        "difficulty": 0.7,
+        "time_thresh": 15.0,
+        "label": "hard"
+      }
     ]
   },
   {
     "id": "calc.deriv.trig",
     "heuristic": "calc.encompasses.trig + interference",
-    "encompasses": ["trig.basics.sin_cos_def"],
+    "encompasses": [
+      "trig.basics.sin_cos_def"
+    ],
     "interference_group": "calc.deriv"
   },
   {
-    "heuristic": "trig siblings interfere — non-trivial group 5 members",
+    "heuristic": "trig siblings interfere \u2014 non-trivial group 5 members",
     "interference_group": "trig.basic",
-    "members": ["trig.basics.radians", "trig.basics.unit_circle", "trig.basics.sin_cos_def", "trig.basics.tan_def", "trig.basics.reciprocal"]
+    "members": [
+      "trig.basics.radians",
+      "trig.basics.unit_circle",
+      "trig.basics.sin_cos_def",
+      "trig.basics.tan_def",
+      "trig.basics.reciprocal"
+    ]
   },
   {
     "heuristic": "nt modular siblings interfere",
     "interference_group": "nt.modular",
-    "members": ["nt.basics.modular", "nt.basics.congruence", "nt.basics.bezout", "nt.basics.crt"]
+    "members": [
+      "nt.basics.modular",
+      "nt.basics.congruence",
+      "nt.basics.bezout",
+      "nt.basics.crt"
+    ]
   },
   {
-    "heuristic": "abstract group siblings interfere — normal/lagrange/quotient/action/sylow",
+    "heuristic": "abstract group siblings interfere \u2014 normal/lagrange/quotient/action/sylow",
     "interference_group": "abstract.group",
-    "members": ["abstract.group.normal", "abstract.group.lagrange", "abstract.group.quotient_group", "abstract.group.action", "abstract.group.sylow"]
+    "members": [
+      "abstract.group.normal",
+      "abstract.group.lagrange",
+      "abstract.group.quotient_group",
+      "abstract.group.action",
+      "abstract.group.sylow"
+    ]
   },
   {
     "heuristic": "discrete logic siblings interfere",
     "interference_group": "discrete.logic",
-    "members": ["discrete.logic.propositions", "discrete.logic.connectives", "discrete.logic.truth_tables", "discrete.logic.quantifiers", "discrete.logic.equivalence"]
+    "members": [
+      "discrete.logic.propositions",
+      "discrete.logic.connectives",
+      "discrete.logic.truth_tables",
+      "discrete.logic.quantifiers",
+      "discrete.logic.equivalence"
+    ]
   },
   {
-    "heuristic": "ml arch siblings interfere — cnn/rnn/transformer/gan",
+    "heuristic": "ml arch siblings interfere \u2014 cnn/rnn/transformer/gan",
     "interference_group": "ml.arch",
-    "members": ["ml.arch.cnn", "ml.arch.rnn", "ml.arch.transformer", "ml.arch.gan"]
+    "members": [
+      "ml.arch.cnn",
+      "ml.arch.rnn",
+      "ml.arch.transformer",
+      "ml.arch.gan"
+    ]
   },
   {
     "heuristic": "topo homotopy siblings interfere",
     "interference_group": "topo.homotopy",
-    "members": ["topo.homotopy", "topo.homotopy.fundamental", "topo.manifold", "topo.manifold.orientability"]
-  },
-  {
-    "id": "ml.regularization.dropout",
-    "heuristic": "ml dropout variants — easy/hard",
-    "variants": [
-      {"difficulty": 0.3, "time_thresh": 12.0, "label": "easy"},
-      {"difficulty": 0.7, "time_thresh": 18.0, "label": "hard"}
+    "members": [
+      "topo.homotopy",
+      "topo.homotopy.fundamental",
+      "topo.manifold",
+      "topo.manifold.orientability"
     ]
   },
   {
-    "heuristic": "new subdomains for ML beyond 20 — ml.reinforcement / ml.nlp",
-    "note": "Future ML 20→30 will split single subdomain machine_learning.neural_networks into ml.reinforcement and ml.nlp to restore scheduler dissimilarity (scheduler.go:80 NextSmart distinct subdomain filter) — reserve note, no interference yet"
+    "id": "ml.regularization.dropout",
+    "heuristic": "ml dropout variants \u2014 easy/hard",
+    "variants": [
+      {
+        "difficulty": 0.3,
+        "time_thresh": 12.0,
+        "label": "easy"
+      },
+      {
+        "difficulty": 0.7,
+        "time_thresh": 18.0,
+        "label": "hard"
+      }
+    ]
+  },
+  {
+    "heuristic": "new subdomains for ML beyond 20 \u2014 ml.reinforcement / ml.nlp",
+    "note": "Future ML 20\u219230 will split single subdomain machine_learning.neural_networks into ml.reinforcement and ml.nlp to restore scheduler dissimilarity (scheduler.go:80 NextSmart distinct subdomain filter) \u2014 reserve note, no interference yet"
+  },
+  {
+    "id": "arith.add.double",
+    "heuristic": "two-digit addition encompasses single-digit addition",
+    "key_prerequisites": [
+      "arith.add.single"
+    ],
+    "encompasses": [
+      "arith.add.single"
+    ]
+  },
+  {
+    "id": "arith.add.carry",
+    "heuristic": "addition with carrying encompasses multi-digit addition",
+    "key_prerequisites": [
+      "arith.add.double"
+    ],
+    "encompasses": [
+      "arith.add.double",
+      "arith.add.single"
+    ]
+  },
+  {
+    "id": "arith.add.triple",
+    "heuristic": "three-digit addition encompasses addition with carrying",
+    "key_prerequisites": [
+      "arith.add.carry"
+    ],
+    "encompasses": [
+      "arith.add.carry",
+      "arith.add.double"
+    ]
+  },
+  {
+    "id": "arith.sub.double",
+    "heuristic": "two-digit subtraction encompasses single-digit subtraction",
+    "key_prerequisites": [
+      "arith.sub.single"
+    ],
+    "encompasses": [
+      "arith.sub.single"
+    ]
+  },
+  {
+    "id": "arith.sub.borrow",
+    "heuristic": "subtraction with borrowing encompasses multi-digit subtraction",
+    "key_prerequisites": [
+      "arith.sub.double"
+    ],
+    "encompasses": [
+      "arith.sub.double",
+      "arith.sub.single"
+    ]
+  },
+  {
+    "id": "arith.mult.double",
+    "heuristic": "multi-digit multiplication encompasses times tables and carrying",
+    "key_prerequisites": [
+      "arith.mult.tables"
+    ],
+    "encompasses": [
+      "arith.mult.tables",
+      "arith.add.carry"
+    ]
+  },
+  {
+    "id": "arith.mult.triple",
+    "heuristic": "three-digit multiplication encompasses two-digit multiplication",
+    "key_prerequisites": [
+      "arith.mult.double"
+    ],
+    "encompasses": [
+      "arith.mult.double",
+      "arith.mult.tables"
+    ]
+  },
+  {
+    "id": "arith.div.basic",
+    "heuristic": "division without remainder encompasses multiplication recall",
+    "key_prerequisites": [
+      "arith.mult.tables"
+    ],
+    "encompasses": [
+      "arith.mult.tables"
+    ]
+  },
+  {
+    "id": "arith.div.remainder",
+    "heuristic": "division with remainder encompasses basic division",
+    "key_prerequisites": [
+      "arith.div.basic"
+    ],
+    "encompasses": [
+      "arith.div.basic",
+      "arith.sub.single"
+    ]
+  },
+  {
+    "id": "arith.div.long",
+    "heuristic": "long division encompasses division, multiplication and borrowing",
+    "key_prerequisites": [
+      "arith.div.remainder"
+    ],
+    "encompasses": [
+      "arith.div.basic",
+      "arith.mult.double",
+      "arith.sub.borrow"
+    ]
+  },
+  {
+    "id": "arith.factor.prime_fact",
+    "heuristic": "prime factorization encompasses prime identification and division",
+    "key_prerequisites": [
+      "arith.factor.prime"
+    ],
+    "encompasses": [
+      "arith.div.basic",
+      "arith.factor.prime"
+    ]
+  },
+  {
+    "id": "arith.factor.gcf",
+    "heuristic": "greatest common factor encompasses prime factorization",
+    "key_prerequisites": [
+      "arith.factor.prime_fact"
+    ],
+    "encompasses": [
+      "arith.factor.prime_fact"
+    ]
+  },
+  {
+    "id": "arith.factor.lcm",
+    "heuristic": "least common multiple encompasses greatest common factor",
+    "key_prerequisites": [
+      "arith.factor.gcf"
+    ],
+    "encompasses": [
+      "arith.factor.gcf"
+    ]
+  },
+  {
+    "id": "arith.order_ops.basic",
+    "heuristic": "order of operations encompasses multi-digit arithmetic",
+    "key_prerequisites": [
+      "arith.mult.double"
+    ],
+    "encompasses": [
+      "arith.add.triple",
+      "arith.mult.double"
+    ]
+  },
+  {
+    "id": "arith.order_ops.full",
+    "heuristic": "full order of operations encompasses basic BODMAS and exponents",
+    "key_prerequisites": [
+      "arith.order_ops.basic"
+    ],
+    "encompasses": [
+      "arith.order_ops.basic",
+      "arith.exp.evaluate"
+    ]
+  },
+  {
+    "id": "arith.order_ops.nested",
+    "heuristic": "nested operations encompass full order of operations",
+    "key_prerequisites": [
+      "arith.order_ops.full"
+    ],
+    "encompasses": [
+      "arith.order_ops.full"
+    ]
+  },
+  {
+    "id": "arith.neg.add_sub",
+    "heuristic": "negative addition and subtraction encompasses borrowing and line",
+    "key_prerequisites": [
+      "arith.sub.borrow"
+    ],
+    "encompasses": [
+      "arith.neg.number_line",
+      "arith.sub.single"
+    ]
+  },
+  {
+    "id": "arith.neg.mult_div",
+    "heuristic": "negative multiplication encompasses multi-digit multiplication",
+    "key_prerequisites": [
+      "arith.neg.add_sub"
+    ],
+    "encompasses": [
+      "arith.mult.double"
+    ]
+  },
+  {
+    "id": "frac.basics.equivalent",
+    "heuristic": "equivalent fractions encompass fraction parts",
+    "key_prerequisites": [
+      "arith.mult.tables"
+    ],
+    "encompasses": [
+      "frac.basics.parts"
+    ]
+  },
+  {
+    "id": "frac.ops.simplify",
+    "heuristic": "simplifying fractions encompasses equivalent fractions and GCF",
+    "key_prerequisites": [
+      "frac.basics.equivalent"
+    ],
+    "encompasses": [
+      "frac.basics.equivalent",
+      "arith.factor.gcf"
+    ]
+  },
+  {
+    "id": "frac.add.diff",
+    "heuristic": "adding different denominators encompasses common denominators and LCM",
+    "key_prerequisites": [
+      "frac.add.same"
+    ],
+    "encompasses": [
+      "frac.add.same",
+      "frac.basics.equivalent",
+      "arith.factor.lcm"
+    ]
+  },
+  {
+    "id": "frac.sub.diff",
+    "heuristic": "subtracting different denominators encompasses same denominators and LCM",
+    "key_prerequisites": [
+      "frac.sub.same"
+    ],
+    "encompasses": [
+      "frac.sub.same",
+      "frac.basics.equivalent",
+      "arith.factor.lcm"
+    ]
+  },
+  {
+    "id": "frac.ops.mult",
+    "heuristic": "multiplying fractions encompasses times tables",
+    "key_prerequisites": [
+      "arith.mult.tables"
+    ],
+    "encompasses": [
+      "frac.basics.parts",
+      "arith.mult.tables"
+    ]
+  },
+  {
+    "id": "frac.ops.div",
+    "heuristic": "dividing fractions encompasses fraction multiplication",
+    "key_prerequisites": [
+      "frac.ops.mult"
+    ],
+    "encompasses": [
+      "frac.ops.mult"
+    ]
+  },
+  {
+    "id": "frac.mixed.convert",
+    "heuristic": "converting mixed numbers encompasses division remainder",
+    "key_prerequisites": [
+      "arith.div.remainder"
+    ],
+    "encompasses": [
+      "frac.basics.parts",
+      "arith.div.remainder"
+    ]
+  },
+  {
+    "id": "frac.mixed.add",
+    "heuristic": "adding mixed numbers encompasses fraction addition and conversion",
+    "key_prerequisites": [
+      "frac.add.diff"
+    ],
+    "encompasses": [
+      "frac.add.diff",
+      "frac.mixed.convert"
+    ]
+  },
+  {
+    "id": "frac.mixed.sub",
+    "heuristic": "subtracting mixed numbers encompasses mixed addition and fraction subtraction",
+    "key_prerequisites": [
+      "frac.mixed.add"
+    ],
+    "encompasses": [
+      "frac.mixed.add",
+      "frac.sub.diff"
+    ]
+  },
+  {
+    "id": "frac.mixed.mult",
+    "heuristic": "multiplying mixed numbers encompasses fraction multiplication and conversion",
+    "key_prerequisites": [
+      "frac.ops.mult"
+    ],
+    "encompasses": [
+      "frac.ops.mult",
+      "frac.mixed.convert"
+    ]
+  },
+  {
+    "id": "frac.mixed.div",
+    "heuristic": "dividing mixed numbers encompasses fraction division and conversion",
+    "key_prerequisites": [
+      "frac.ops.div"
+    ],
+    "encompasses": [
+      "frac.ops.div",
+      "frac.mixed.convert"
+    ]
+  },
+  {
+    "id": "frac.order_ops",
+    "heuristic": "fraction order of operations encompasses addition and multiplication",
+    "key_prerequisites": [
+      "frac.add.diff"
+    ],
+    "encompasses": [
+      "frac.add.diff",
+      "frac.ops.mult"
+    ]
+  },
+  {
+    "id": "prealg.expr.evaluate",
+    "heuristic": "evaluating expressions encompasses full order of operations",
+    "key_prerequisites": [
+      "arith.order_ops.full"
+    ],
+    "encompasses": [
+      "arith.order_ops.full"
+    ]
+  },
+  {
+    "id": "prealg.expr.like_terms",
+    "heuristic": "combining like terms encompasses expression evaluation",
+    "key_prerequisites": [
+      "prealg.expr.evaluate"
+    ],
+    "encompasses": [
+      "prealg.expr.evaluate"
+    ]
+  },
+  {
+    "id": "prealg.expr.distribute",
+    "heuristic": "distributive property encompasses like terms and multiplication",
+    "key_prerequisites": [
+      "prealg.expr.like_terms"
+    ],
+    "encompasses": [
+      "prealg.expr.like_terms",
+      "arith.mult.tables"
+    ]
+  },
+  {
+    "id": "prealg.eq.two_step",
+    "heuristic": "two-step equations encompass one-step addition and multiplication",
+    "key_prerequisites": [
+      "prealg.eq.one_step_mult"
+    ],
+    "encompasses": [
+      "prealg.eq.one_step_add",
+      "prealg.eq.one_step_mult"
+    ]
+  },
+  {
+    "id": "prealg.ineq.two_step",
+    "heuristic": "two-step inequalities encompass one-step inequalities and two-step equations",
+    "key_prerequisites": [
+      "prealg.eq.two_step"
+    ],
+    "encompasses": [
+      "prealg.ineq.one_step",
+      "prealg.eq.two_step"
+    ]
+  },
+  {
+    "id": "alg.eq.multi_step",
+    "heuristic": "multi-step equations encompass two-step equations and distribution",
+    "key_prerequisites": [
+      "prealg.eq.two_step"
+    ],
+    "encompasses": [
+      "prealg.eq.two_step",
+      "prealg.expr.distribute"
+    ]
+  },
+  {
+    "id": "alg.eq.vars_both_sides",
+    "heuristic": "variables on both sides encompass multi-step equations",
+    "key_prerequisites": [
+      "alg.eq.multi_step"
+    ],
+    "encompasses": [
+      "alg.eq.multi_step"
+    ]
+  },
+  {
+    "id": "alg.ineq.multi_step",
+    "heuristic": "multi-step inequalities encompass two-step inequalities and multi-step equations",
+    "key_prerequisites": [
+      "alg.eq.multi_step"
+    ],
+    "encompasses": [
+      "prealg.ineq.two_step",
+      "alg.eq.multi_step"
+    ]
+  },
+  {
+    "id": "alg.systems.substitution",
+    "heuristic": "substitution systems encompass multi-step linear equations",
+    "key_prerequisites": [
+      "alg.linear.slope_intercept"
+    ],
+    "encompasses": [
+      "alg.eq.multi_step"
+    ]
+  },
+  {
+    "id": "alg.systems.elimination",
+    "heuristic": "elimination systems encompass substitution and multi-step equations",
+    "key_prerequisites": [
+      "alg.systems.substitution"
+    ],
+    "encompasses": [
+      "alg.eq.multi_step"
+    ]
+  },
+  {
+    "id": "alg.poly.mult_mono",
+    "heuristic": "monomial multiplication encompasses distribution and exponent product rule",
+    "key_prerequisites": [
+      "prealg.expr.distribute"
+    ],
+    "encompasses": [
+      "prealg.expr.distribute",
+      "arith.exp.product_rule"
+    ]
+  },
+  {
+    "id": "alg.poly.foil",
+    "heuristic": "binomial FOIL encompasses monomial multiplication and distribution",
+    "key_prerequisites": [
+      "alg.poly.mult_mono"
+    ],
+    "encompasses": [
+      "alg.poly.mult_mono",
+      "prealg.expr.distribute"
+    ]
+  },
+  {
+    "id": "alg.factor.gcf",
+    "heuristic": "polynomial GCF factoring encompasses integer GCF and monomial multiplication",
+    "key_prerequisites": [
+      "arith.factor.gcf"
+    ],
+    "encompasses": [
+      "arith.factor.gcf",
+      "alg.poly.mult_mono"
+    ]
+  },
+  {
+    "id": "alg.factor.trinomial",
+    "heuristic": "trinomial factoring encompasses polynomial GCF and factor finding",
+    "key_prerequisites": [
+      "alg.poly.foil"
+    ],
+    "encompasses": [
+      "alg.factor.gcf",
+      "arith.factor.find"
+    ]
+  },
+  {
+    "id": "alg.factor.diff_squares",
+    "heuristic": "difference of squares factoring encompasses special products",
+    "key_prerequisites": [
+      "alg.factor.trinomial"
+    ],
+    "encompasses": [
+      "alg.poly.special"
+    ]
+  },
+  {
+    "id": "alg.factor.ac_method",
+    "heuristic": "AC method factoring encompasses trinomial factoring and GCF",
+    "key_prerequisites": [
+      "alg.factor.trinomial"
+    ],
+    "encompasses": [
+      "alg.factor.trinomial",
+      "alg.factor.gcf"
+    ]
+  },
+  {
+    "id": "alg.quad.solve_factor",
+    "heuristic": "solving quadratics by factoring encompasses trinomial factoring and linear solving",
+    "key_prerequisites": [
+      "alg.factor.trinomial"
+    ],
+    "encompasses": [
+      "alg.factor.trinomial",
+      "prealg.eq.two_step"
+    ]
+  },
+  {
+    "id": "alg.quad.complete_square",
+    "heuristic": "completing the square encompasses square roots and two-step solving",
+    "key_prerequisites": [
+      "alg.quad.solve_factor"
+    ],
+    "encompasses": [
+      "arith.sqrt.perfect",
+      "prealg.eq.two_step"
+    ]
+  },
+  {
+    "id": "alg.quad.formula",
+    "heuristic": "quadratic formula encompasses completing the square, square root simplification and order of operations",
+    "key_prerequisites": [
+      "alg.quad.complete_square"
+    ],
+    "encompasses": [
+      "arith.sqrt.simplify",
+      "arith.order_ops.full"
+    ]
+  },
+  {
+    "id": "alg.rational.simplify",
+    "heuristic": "simplifying rational expressions encompasses factoring and fraction reduction",
+    "key_prerequisites": [
+      "alg.factor.trinomial"
+    ],
+    "encompasses": [
+      "alg.factor.trinomial",
+      "alg.factor.diff_squares",
+      "frac.ops.simplify"
+    ]
+  },
+  {
+    "id": "alg.rational.mult_div",
+    "heuristic": "multiplying rational expressions encompasses simplification and fraction multiplication",
+    "key_prerequisites": [
+      "alg.rational.simplify"
+    ],
+    "encompasses": [
+      "alg.rational.simplify",
+      "frac.ops.mult",
+      "frac.ops.div"
+    ]
+  },
+  {
+    "id": "alg.rational.add_sub",
+    "heuristic": "adding rational expressions encompasses simplification and fraction addition",
+    "key_prerequisites": [
+      "alg.rational.simplify"
+    ],
+    "encompasses": [
+      "alg.rational.simplify",
+      "frac.add.diff"
+    ]
+  },
+  {
+    "id": "alg.eq.rational",
+    "heuristic": "solving rational equations encompasses rational simplification and multi-step equations",
+    "key_prerequisites": [
+      "alg.eq.multi_step"
+    ],
+    "encompasses": [
+      "alg.rational.simplify",
+      "alg.eq.multi_step"
+    ]
+  },
+  {
+    "id": "geo.triangle.pythagorean",
+    "heuristic": "pythagorean theorem encompasses square roots and exponents",
+    "key_prerequisites": [
+      "arith.sqrt.perfect"
+    ],
+    "encompasses": [
+      "arith.sqrt.perfect",
+      "arith.exp.evaluate"
+    ]
+  },
+  {
+    "id": "geo.circle.area",
+    "heuristic": "circle area encompasses circumference and exponents",
+    "key_prerequisites": [
+      "geo.circle.circumference"
+    ],
+    "encompasses": [
+      "geo.circle.circumference",
+      "arith.exp.evaluate"
+    ]
+  },
+  {
+    "id": "linalg.matrix.mult",
+    "heuristic": "matrix multiplication encompasses vector dot product and matrix addition",
+    "key_prerequisites": [
+      "linalg.vector.dot"
+    ],
+    "encompasses": [
+      "linalg.vector.dot",
+      "linalg.matrix.add"
+    ]
+  },
+  {
+    "id": "linalg.det.2x2",
+    "heuristic": "2x2 determinant encompasses multiplication and subtraction",
+    "key_prerequisites": [
+      "linalg.matrix.mult"
+    ],
+    "encompasses": [
+      "arith.mult.double",
+      "arith.sub.double"
+    ]
+  },
+  {
+    "id": "linalg.det.3x3",
+    "heuristic": "3x3 determinant encompasses 2x2 determinants",
+    "key_prerequisites": [
+      "linalg.det.2x2"
+    ],
+    "encompasses": [
+      "linalg.det.2x2"
+    ]
+  },
+  {
+    "id": "linalg.systems.matrix",
+    "heuristic": "matrix systems encompass matrix multiplication and elimination",
+    "key_prerequisites": [
+      "linalg.matrix.identity"
+    ],
+    "encompasses": [
+      "linalg.matrix.mult",
+      "alg.systems.elimination"
+    ]
+  },
+  {
+    "id": "linalg.eigen.compute",
+    "heuristic": "computing eigenvalues encompasses determinants and quadratic formula",
+    "key_prerequisites": [
+      "linalg.eigen.concept"
+    ],
+    "encompasses": [
+      "linalg.det.2x2",
+      "alg.quad.formula"
+    ]
+  },
+  {
+    "id": "complex.ops.mult",
+    "heuristic": "complex multiplication encompasses complex addition and FOIL",
+    "key_prerequisites": [
+      "alg.poly.foil"
+    ],
+    "encompasses": [
+      "complex.ops.add_sub",
+      "alg.poly.foil"
+    ]
+  },
+  {
+    "id": "complex.ops.divide",
+    "heuristic": "complex division encompasses complex multiplication and conjugate",
+    "key_prerequisites": [
+      "complex.ops.conjugate"
+    ],
+    "encompasses": [
+      "complex.ops.mult",
+      "complex.ops.conjugate"
+    ]
+  },
+  {
+    "id": "complex.adv.polar",
+    "heuristic": "polar complex form encompasses unit circle and complex division",
+    "key_prerequisites": [
+      "trig.basics.unit_circle"
+    ],
+    "encompasses": [
+      "trig.basics.unit_circle",
+      "complex.ops.divide"
+    ]
+  },
+  {
+    "id": "trig.basics.tan_def",
+    "heuristic": "tangent definition encompasses sine and cosine and fraction division",
+    "key_prerequisites": [
+      "trig.basics.sin_cos_def"
+    ],
+    "encompasses": [
+      "trig.basics.sin_cos_def",
+      "frac.ops.div"
+    ]
+  },
+  {
+    "id": "trig.basics.reciprocal",
+    "heuristic": "reciprocal trig functions encompass sine, cosine and reciprocals",
+    "key_prerequisites": [
+      "trig.basics.tan_def"
+    ],
+    "encompasses": [
+      "trig.basics.sin_cos_def",
+      "frac.reciprocal"
+    ]
+  },
+  {
+    "id": "trig.ident.pythagorean",
+    "heuristic": "pythagorean trig identity encompasses sine, cosine and pythagorean theorem",
+    "key_prerequisites": [
+      "trig.basics.sin_cos_def"
+    ],
+    "encompasses": [
+      "trig.basics.sin_cos_def",
+      "geo.triangle.pythagorean"
+    ]
+  },
+  {
+    "id": "trig.graph.cos",
+    "heuristic": "cosine graph encompasses sine graph",
+    "key_prerequisites": [
+      "trig.graph.sin"
+    ],
+    "encompasses": [
+      "trig.graph.sin"
+    ]
+  },
+  {
+    "id": "trig.graph.period",
+    "heuristic": "period and amplitude encompass sine and cosine graphs",
+    "key_prerequisites": [
+      "trig.graph.cos"
+    ],
+    "encompasses": [
+      "trig.graph.sin",
+      "trig.graph.cos"
+    ]
+  },
+  {
+    "id": "trig.adv.law_cosines",
+    "heuristic": "law of cosines encompasses right triangle trig and quadratic formula",
+    "key_prerequisites": [
+      "trig.adv.law_sines"
+    ],
+    "encompasses": [
+      "trig.basics.sin_cos_def",
+      "alg.quad.formula"
+    ]
+  },
+  {
+    "id": "precalc.func.transformations",
+    "heuristic": "function transformations encompass function notation and evaluation",
+    "key_prerequisites": [
+      "alg.func.concept"
+    ],
+    "encompasses": [
+      "alg.func.notation",
+      "alg.func.evaluate"
+    ]
+  },
+  {
+    "id": "precalc.func.composition_value",
+    "heuristic": "evaluating composition of functions encompasses function evaluation",
+    "key_prerequisites": [
+      "precalc.func.inverse_value"
+    ],
+    "encompasses": [
+      "alg.func.evaluate"
+    ]
+  },
+  {
+    "id": "precalc.polar.coordinates",
+    "heuristic": "polar coordinates encompass radians and sine and cosine",
+    "key_prerequisites": [
+      "trig.basics.sin_cos_def"
+    ],
+    "encompasses": [
+      "trig.basics.radians",
+      "trig.basics.sin_cos_def"
+    ]
+  },
+  {
+    "id": "precalc.partial_fractions",
+    "heuristic": "partial fractions encompass trinomial factoring, polynomial division and substitution systems",
+    "key_prerequisites": [
+      "alg.factor.trinomial"
+    ],
+    "encompasses": [
+      "alg.factor.trinomial",
+      "alg.poly.division",
+      "alg.systems.substitution"
+    ]
+  },
+  {
+    "id": "calc.deriv.sum_rule",
+    "heuristic": "sum rule encompasses power rule",
+    "key_prerequisites": [
+      "calc.deriv.power_rule"
+    ],
+    "encompasses": [
+      "calc.deriv.power_rule"
+    ]
+  },
+  {
+    "id": "calc.deriv.product_rule",
+    "heuristic": "product rule encompasses power rule",
+    "key_prerequisites": [
+      "calc.deriv.sum_rule"
+    ],
+    "encompasses": [
+      "calc.deriv.power_rule"
+    ]
+  },
+  {
+    "id": "calc.deriv.quotient_rule",
+    "heuristic": "quotient rule encompasses power rule and product rule",
+    "key_prerequisites": [
+      "calc.deriv.product_rule"
+    ],
+    "encompasses": [
+      "calc.deriv.power_rule"
+    ]
+  },
+  {
+    "id": "calc.deriv.chain_rule",
+    "heuristic": "chain rule encompasses power rule and composite functions",
+    "key_prerequisites": [
+      "calc.deriv.product_rule"
+    ],
+    "encompasses": [
+      "calc.deriv.power_rule",
+      "alg.func.composite"
+    ]
+  },
+  {
+    "id": "calc.deriv.implicit",
+    "heuristic": "implicit differentiation encompasses chain rule and equation solving",
+    "key_prerequisites": [
+      "calc.deriv.chain_rule"
+    ],
+    "encompasses": [
+      "calc.deriv.chain_rule",
+      "alg.eq.vars_both_sides"
+    ]
+  },
+  {
+    "id": "calc.deriv.related_rates",
+    "heuristic": "related rates encompass implicit differentiation and word problems",
+    "key_prerequisites": [
+      "calc.deriv.implicit"
+    ],
+    "encompasses": [
+      "calc.deriv.implicit",
+      "prealg.eq.word"
+    ]
+  },
+  {
+    "id": "calc.deriv.optimization",
+    "heuristic": "optimization encompasses derivatives and quadratic formula",
+    "key_prerequisites": [
+      "calc.deriv.applications"
+    ],
+    "encompasses": [
+      "calc.deriv.power_rule",
+      "alg.quad.formula"
+    ]
+  },
+  {
+    "id": "calc.integral.power_rule",
+    "heuristic": "integration power rule encompasses indefinite integrals and fractions",
+    "key_prerequisites": [
+      "calc.integral.indefinite"
+    ],
+    "encompasses": [
+      "calc.integral.indefinite",
+      "frac.basics.parts"
+    ]
+  },
+  {
+    "id": "calc.integral.definite",
+    "heuristic": "definite integrals encompass antiderivatives and fraction arithmetic",
+    "key_prerequisites": [
+      "calc.integral.power_rule"
+    ],
+    "encompasses": [
+      "calc.integral.indefinite",
+      "frac.add.diff"
+    ]
+  },
+  {
+    "id": "calc.integral.ftc",
+    "heuristic": "fundamental theorem of calculus encompasses definite integrals and derivative concept",
+    "key_prerequisites": [
+      "calc.integral.definite"
+    ],
+    "encompasses": [
+      "calc.integral.definite",
+      "calc.deriv.concept"
+    ]
+  },
+  {
+    "id": "calc.integral.substitution",
+    "heuristic": "u-substitution encompasses power rule integration and chain rule",
+    "key_prerequisites": [
+      "calc.deriv.chain_rule"
+    ],
+    "encompasses": [
+      "calc.integral.power_rule",
+      "calc.deriv.chain_rule"
+    ]
+  },
+  {
+    "id": "calc.integral.parts",
+    "heuristic": "integration by parts encompasses u-substitution and product rule",
+    "key_prerequisites": [
+      "calc.integral.substitution"
+    ],
+    "encompasses": [
+      "calc.integral.substitution",
+      "calc.deriv.product_rule"
+    ]
+  },
+  {
+    "id": "calc.integral.area_between",
+    "heuristic": "area between curves encompasses definite integrals and inequalities",
+    "key_prerequisites": [
+      "calc.integral.definite"
+    ],
+    "encompasses": [
+      "calc.integral.definite",
+      "alg.ineq.compound"
+    ]
+  },
+  {
+    "id": "calc.integral.volume",
+    "heuristic": "volume of revolution encompasses definite integrals and circle area",
+    "key_prerequisites": [
+      "calc.integral.area_between"
+    ],
+    "encompasses": [
+      "calc.integral.definite",
+      "geo.circle.area"
+    ]
+  },
+  {
+    "id": "calc.integral.partial_fractions",
+    "heuristic": "integration by partial fractions encompasses u-substitution and factoring",
+    "key_prerequisites": [
+      "calc.integral.parts"
+    ],
+    "encompasses": [
+      "calc.integral.substitution",
+      "alg.factor.trinomial"
+    ]
+  },
+  {
+    "id": "calc.multi.double_integral_rect",
+    "heuristic": "double integrals encompass single definite integrals",
+    "key_prerequisites": [
+      "calc.integral.definite"
+    ],
+    "encompasses": [
+      "calc.integral.definite"
+    ]
   }
 ]

@@ -48,4 +48,16 @@ describe('the report sheet', () => {
       kind: 'question',
     })
   })
+
+  it('resets the confirmation when the question changes', async () => {
+    const { rerender } = render(<ReportButton kind="question" conceptId="a" question="q1" />)
+    fireEvent.click(screen.getByRole('button', { name: /report a problem/i }))
+    fireEvent.click(screen.getByRole('button', { name: /send report/i }))
+
+    await waitFor(() => expect(screen.getByText(/thanks — reported/i)).toBeInTheDocument())
+
+    rerender(<ReportButton kind="question" conceptId="a" question="q2" />)
+    expect(screen.queryByText(/thanks — reported/i)).not.toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /report a problem/i })).toBeInTheDocument()
+  })
 })
