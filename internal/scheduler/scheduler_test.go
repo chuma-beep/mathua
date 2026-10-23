@@ -529,3 +529,99 @@ func TestEffectiveState_FSRS(t *testing.T) {
 		t.Errorf("expected status MASTERED, got %v", statusFresh)
 	}
 }
+
+func TestNextSmart_InterleavingWindow_OnlyLastTwoTasks(t *testing.T) {
+	raw := []concepts.Concept{
+		{ID: "c1", Label: "Concept 1", Domain: "d", Subdomain: "s1", MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
+		{ID: "c2", Label: "Concept 2", Domain: "d", Subdomain: "s2", MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
+		{ID: "c3", Label: "Concept 3", Domain: "d", Subdomain: "s3", MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
+		{ID: "c4", Label: "Concept 4", Domain: "d", Subdomain: "s1", MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
+	}
+	d, err := concepts.Build(raw)
+	if err != nil {
+		t.Fatalf("build: %v", err)
+	}
+	s := New(d)
+	snap := map[string]*ConceptSnapshot{}
+	// History has 3 tasks: c1 (s1), c2 (s2), c3 (s3).
+	// Interleaving window considers only the last 2 tasks (c2 and c3).
+	// Therefore c4 (with subdomain s1) is NOT excluded by the interleaving window.
+	cands := s.NextSmart(snap, []string{"c1", "c2", "c3"}, 0, 0, nil)
+	if len(cands) == 0 {
+		t.Fatal("expected candidates")
+	}
+	foundC4 := false
+	for _, c := range cands {
+		if c.Concept.ID == "c4" {
+			foundC4 = true
+			break
+		}
+	}
+	if !foundC4 {
+		t.Error("expected c4 (subdomain s1) to be eligible because s1 was outside the 2-task interleaving window")
+	}
+}
+
+func TestComputePriorityWithContext_LayeringAndInterference(t *testing.T) {
+	now := time.Now().UTC()
+	snap := &ConceptSnapshot{
+		LastAttempted:  now.Add(-24 * time.Hour),
+		Streak:         1,
+		RequiredStreak: 4,
+		WeaknessScore:  0.5,
+	}
+	basePriority := computePriority(snap, now, false)
+
+	concept := &concepts.Concept{
+		ID:                "calc.limit",
+		Encompasses:       []string{"alg.func"},
+		InterferenceGroup: "func_group",
+	}
+
+	// 1. Weakness >= 0.6 on encompassed prereq adds +2 layering bonus.
+	weaknessMap := map[string]float64{"alg.func": 0.8}
+	pLayering := ComputePriorityWithContext(snap, now, false, concept, weaknessMap, nil)
+	if math.Abs(pLayering-(basePriority+2.0)) > 1e-9 {
+		t.Errorf("expected base + 2.0 layering bonus, got %f vs base %f", pLayering, basePriority)
+	}
+
+	// 2. Sharing recent interference group subtracts 3.0 penalty.
+	recentGroups := map[string]bool{"func_group": true}
+	pInterfere := ComputePriorityWithContext(snap, now, false, concept, nil, recentGroups)
+	if math.Abs(pInterfere-(basePriority-3.0)) > 1e-9 {
+		t.Errorf("expected base - 3.0 interference penalty, got %f vs base %f", pInterfere, basePriority)
+	}
+
+	// 3. Combined layering (+2) and interference (-3) nets -1.0.
+	pBoth := ComputePriorityWithContext(snap, now, false, concept, weaknessMap, recentGroups)
+	if math.Abs(pBoth-(basePriority-1.0)) > 1e-9 {
+		t.Errorf("expected base - 1.0 combined adjustment, got %f vs base %f", pBoth, basePriority)
+	}
+}
+
+func TestNextSmart_TopThreeDissimilarOrdering(t *testing.T) {
+	raw := []concepts.Concept{
+		{ID: "c1", Label: "Concept 1", Domain: "d", Subdomain: "subA", MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
+		{ID: "c2", Label: "Concept 2", Domain: "d", Subdomain: "subB", MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
+		{ID: "c3", Label: "Concept 3", Domain: "d", Subdomain: "subC", MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
+		{ID: "c4", Label: "Concept 4", Domain: "d", Subdomain: "subD", MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
+		{ID: "c5", Label: "Concept 5", Domain: "d", Subdomain: "subA", MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10}},
+	}
+	d, err := concepts.Build(raw)
+	if err != nil {
+		t.Fatalf("build: %v", err)
+	}
+	s := New(d)
+	snap := map[string]*ConceptSnapshot{}
+	cands := s.NextSmart(snap, nil, 0, 0, nil)
+	if len(cands) != 3 {
+		t.Fatalf("expected 3 dissimilar candidates, got %d", len(cands))
+	}
+	seenSubs := map[string]bool{}
+	for _, c := range cands {
+		if seenSubs[c.Concept.Subdomain] {
+			t.Errorf("duplicate subdomain %s among top 3 dissimilar candidates", c.Concept.Subdomain)
+		}
+		seenSubs[c.Concept.Subdomain] = true
+	}
+}

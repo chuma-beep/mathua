@@ -140,17 +140,35 @@ func (s *Scheduler) NextSmart(
 			break
 		}
 	}
+	if len(out) < 3 {
+		for _, c := range candidates {
+			if added[c.Concept.ID] {
+				continue
+			}
+			out = append(out, NextConcept{Concept: c.Concept, IsReview: c.IsReview})
+			added[c.Concept.ID] = true
+			if len(out) >= 3 {
+				break
+			}
+		}
+	}
 	return out
 }
 
 // buildCandidatesAdvanced adds PR 1.4 edges to candidate construction:
-// interleaving exclusion (same Subdomain as last 2), layering +2, non-interference -3.
+// interleaving exclusion (same Subdomain as last 2 tasks), layering +2, non-interference -3.
 func buildCandidatesAdvanced(dag *concepts.DAG, snapshots map[string]*ConceptSnapshot, now time.Time, prevIDs []string, weakness map[string]float64) []Candidate {
 	prevSet := make(map[string]bool, len(prevIDs))
-	prevSubs := make(map[string]bool)
-	prevGroups := make(map[string]bool)
 	for _, id := range prevIDs {
 		prevSet[id] = true
+	}
+	windowIDs := prevIDs
+	if len(windowIDs) > 2 {
+		windowIDs = windowIDs[len(windowIDs)-2:]
+	}
+	prevSubs := make(map[string]bool)
+	prevGroups := make(map[string]bool)
+	for _, id := range windowIDs {
 		if c := dag.Concept(id); c != nil {
 			if c.Subdomain != "" {
 				prevSubs[c.Subdomain] = true
@@ -167,16 +185,12 @@ func buildCandidatesAdvanced(dag *concepts.DAG, snapshots map[string]*ConceptSna
 		if prevSet[c.ID] {
 			continue
 		}
-		// Interleaving window: skip same subdomain as recent practice, but never
-		// starve the session (fall back if the filter empties the set).
+		// Interleaving window: skip same subdomain as recent practice (last 2 tasks),
+		// but never starve the session (fall back if the filter empties the set).
 		if len(prevSubs) > 0 && prevSubs[c.Subdomain] {
 			continue
 		}
-		priority := cand.Priority
-		priority += layeringBonus(c, weakness)
-		if prevGroups[c.InterferenceGroup] {
-			priority -= 3.0
-		}
+		priority := ComputePriorityWithContext(snapshots[c.ID], now, cand.IsReview, c, weakness, prevGroups)
 		out = append(out, Candidate{Concept: c, IsReview: cand.IsReview, Priority: priority})
 	}
 	if len(out) == 0 {
@@ -184,6 +198,26 @@ func buildCandidatesAdvanced(dag *concepts.DAG, snapshots map[string]*ConceptSna
 		out = base
 	}
 	return out
+}
+
+// ComputePriorityWithContext computes priority including layering bonus (+2 if encompasses
+// a weak prerequisite) and non-interference penalty (-3 if sharing an interference group).
+func ComputePriorityWithContext(
+	snap *ConceptSnapshot,
+	now time.Time,
+	isDecaying bool,
+	c *concepts.Concept,
+	weakness map[string]float64,
+	recentInterferenceGroups map[string]bool,
+) float64 {
+	p := computePriority(snap, now, isDecaying)
+	if c != nil {
+		p += layeringBonus(c, weakness)
+		if c.InterferenceGroup != "" && recentInterferenceGroups != nil && recentInterferenceGroups[c.InterferenceGroup] {
+			p -= 3.0
+		}
+	}
+	return p
 }
 
 // layeringBonus: +2 when this concept encompasses a weak prerequisite
