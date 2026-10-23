@@ -119,14 +119,13 @@ jobs:
       - run: npm run build
         env:
           NEXT_PUBLIC_API_URL: http://192.0.2.1:9099
-      # e2e runs in its own jobs and needs the exported site. Build once here and
-      # hand the result over, rather than building again on two runners.
-      - uses: actions/upload-artifact@v4
-        with:
-          name: web-build
-          path: web/next-app/out
-          retention-days: 1
-          if-no-files-found: error
+      # This build is not what the e2e shards use: `build` publishes
+      # `web-build-e2e` for them, so they no longer wait for this job. It stays
+      # here because `web` is one of the seven required checks, and that is the
+      # job that must fail when the export cannot be produced — a failing `build`
+      # job would otherwise reach a merge only through a skipped shard.
+      # The artifact this job used to upload (web-build) had no consumer left
+      # once the shards moved, so it is gone rather than left as a trap.
       # Repo-root: aislop reads .aislop/config.yml (excludes vendored/generated).
       #
       # This runs last on purpose. It exits 1 on any error, and a failed step skips
