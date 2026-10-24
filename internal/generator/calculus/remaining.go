@@ -48,14 +48,37 @@ func (g *averageValueGen) Generate(ctx generator.GeneratorContext) generator.Pro
 type crossSectionGen struct{}
 
 func (g *crossSectionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	n := 3 * (1 + rand.Intn(3+int(ctx.Difficulty*3))) // the side is x, over [0, n]
-	v := n * n * n / 3
+	// n is a multiple of six so every cross-section below gives an integer
+	// volume: n^3/3, 4n^3/3, n^3/6 and n^3/12 all divide. One square section
+	// left the concept with a single question however the side moved.
+	n := 6 * (1 + rand.Intn(1+int(ctx.Difficulty*2)))
+	shape := []string{"square", "double square", "triangle", "half square"}[rand.Intn(4)]
+	var v int
+	var section, areaText string
+	switch shape {
+	case "square":
+		v = n * n * n / 3
+		section = "a square with side \\(s(x) = x\\)"
+		areaText = "s(x)^2 = x^2"
+	case "double square":
+		v = 4 * n * n * n / 3
+		section = "a square with side \\(s(x) = 2x\\)"
+		areaText = "s(x)^2 = 4x^2"
+	case "triangle":
+		v = n * n * n / 6
+		section = "an isosceles right triangle with legs \\(s(x) = x\\)"
+		areaText = "s(x)^2/2 = x^2/2"
+	default:
+		v = n * n * n / 12
+		section = "a square with side \\(s(x) = x/2\\)"
+		areaText = "s(x)^2 = x^2/4"
+	}
 	return generator.Problem{
-		Question: fmt.Sprintf("A solid has, for each \\(x\\) between 0 and %d, a square cross-section perpendicular to the x-axis with side \\(s(x) = x\\). What is the volume of the solid?", n),
+		Question: fmt.Sprintf("A solid has, for each \\(x\\) between 0 and %d, %s perpendicular to the x-axis. What is the volume of the solid?", n, section),
 		Answer:   fmt.Sprintf("%d", v),
-		Explanation: fmt.Sprintf("Each cross-section has area s(x)^2 = x^2, and the volume is the integral of that area along the axis: the integral of x^2 from 0 to %d is %d^3/3 = %d.",
-			n, n, v),
-		Facts: map[string]string{"volume": fmt.Sprintf("%d", v)},
+		Explanation: fmt.Sprintf("Each cross-section has area %s, so the volume is the integral of that area along the axis: integrating over \\(x\\) from 0 to %d gives %d.",
+			areaText, n, v),
+		Facts: map[string]string{"volume": fmt.Sprintf("%d", v), "shape": shape, "n": fmt.Sprintf("%d", n)},
 	}
 }
 

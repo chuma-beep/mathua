@@ -1527,6 +1527,24 @@ func (g *arcLengthGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		{"What is the arc length of \\(y=4x\\) from \\(x=0\\) to 2?", "2sqrt(17)", "f'(x)=4, so L = ∫₀²√17 dx = 2√17."},
 		{"What integrand replaces √(1+(f')²) for a parametric curve \\((x(t),y(t))\\)?", "sqrt((dx/dt)^2+(dy/dt)^2)", "Parametric arc length uses ∫√((dx/dt)²+(dy/dt)²)dt."},
 	}
+	// Computed shapes: a line y = m x over a drawn interval gives length
+	// b sqrt(1 + m^2), and the parametric line (3t, 4t) moves at constant
+	// speed 5, so both vary with the parameters rather than with a fixed six.
+	m := 1 + rand.Intn(6)
+	b := 1 + rand.Intn(5)
+	length := fmt.Sprintf("%dsqrt(%d)", b, 1+m*m)
+	if b == 1 {
+		length = fmt.Sprintf("sqrt(%d)", 1+m*m)
+	}
+	k := 1 + rand.Intn(5)
+	tableEasy = append(tableEasy,
+		entry{fmt.Sprintf("What is the arc length of \\(y=%dx\\) from \\(x=0\\) to %d?", m, b), length,
+			fmt.Sprintf("f'(x) = %d, so the integrand is sqrt(1+%d) and L = %d sqrt(%d).", m, m*m, b, 1+m*m)},
+		entry{fmt.Sprintf("For \\(y=%dx\\), what is \\((f')^2\\)? (enter a number)", m), strconv.Itoa(m * m),
+			fmt.Sprintf("The derivative of %dx is the constant %d, so its square is %d.", m, m, m*m)},
+		entry{fmt.Sprintf("What is the arc length of the parametric curve \\((x,y)=(3t,4t)\\) from \\(t=0\\) to %d?", k), strconv.Itoa(5 * k),
+			fmt.Sprintf("The speed is sqrt(3^2+4^2) = 5, so the length is 5 times %d.", k)},
+	)
 	pool := tableEasy
 	if scale > 3 {
 		pool = append(tableEasy, tableHard...)
