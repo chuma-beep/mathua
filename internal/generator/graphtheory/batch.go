@@ -31,13 +31,7 @@ import (
 type isomorphismGen struct{}
 
 func (g *isomorphismGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
+	claims := []graphClaim{
 		{
 			question:    "Which quantity is an isomorphism invariant of a graph?",
 			correct:     "the multiset of vertex degrees",
@@ -69,6 +63,7 @@ func (g *isomorphismGen) Generate(ctx generator.GeneratorContext) generator.Prob
 			reason:      "Identity, inverse and composition of adjacency-preserving bijections give the three relation laws.",
 		},
 	}
+	claims = append(claims, computedGraphClaims("graph.isomorphism")...)
 	c := claims[rand.Intn(len(claims))]
 	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
 	p.Explanation = c.reason
@@ -109,13 +104,7 @@ func (g *complementGen) Generate(ctx generator.GeneratorContext) generator.Probl
 type subgraphGen struct{}
 
 func (g *subgraphGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
+	claims := []graphClaim{
 		{
 			question:    "An induced subgraph on a vertex set S contains...",
 			correct:     "all edges of G with both ends in S",
@@ -147,6 +136,7 @@ func (g *subgraphGen) Generate(ctx generator.GeneratorContext) generator.Problem
 			reason:      "Once the vertex set is fixed, the induced subgraph keeps exactly the edges inside it.",
 		},
 	}
+	claims = append(claims, computedGraphClaims("graph.subgraph")...)
 	c := claims[rand.Intn(len(claims))]
 	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
 	p.Explanation = c.reason
@@ -160,13 +150,7 @@ func (g *subgraphGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type homomorphismGen struct{}
 
 func (g *homomorphismGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
+	claims := []graphClaim{
 		{
 			question:    "A graph homomorphism f: G -> H maps...",
 			correct:     "every edge of G to an edge of H",
@@ -198,6 +182,7 @@ func (g *homomorphismGen) Generate(ctx generator.GeneratorContext) generator.Pro
 			reason:      "Several vertices may map to the same target, which is what allows a coloring to collapse a large graph onto a small one.",
 		},
 	}
+	claims = append(claims, computedGraphClaims("graph.homomorphism")...)
 	c := claims[rand.Intn(len(claims))]
 	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
 	p.Explanation = c.reason
@@ -461,13 +446,7 @@ func (g *connectivityGen) Generate(ctx generator.GeneratorContext) generator.Pro
 type mengerGen struct{}
 
 func (g *mengerGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
+	claims := []graphClaim{
 		{
 			question:    "Menger's theorem equates the maximum number of internally vertex-disjoint u-v paths with...",
 			correct:     "the minimum size of a vertex cut separating u and v",
@@ -499,6 +478,7 @@ func (g *mengerGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 			reason:      "Packing paths and cutting them are dual optimisation problems with the same optimum.",
 		},
 	}
+	claims = append(claims, computedGraphClaims("graph.menger")...)
 	c := claims[rand.Intn(len(claims))]
 	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
 	p.Explanation = c.reason
@@ -561,13 +541,7 @@ func (g *matchingGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type perfectMatchingGen struct{}
 
 func (g *perfectMatchingGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
+	claims := []graphClaim{
 		{
 			question:    "A perfect matching covers...",
 			correct:     "every vertex exactly once",
@@ -599,6 +573,7 @@ func (g *perfectMatchingGen) Generate(ctx generator.GeneratorContext) generator.
 			reason:      "No matching can use more edges than one that already covers every vertex.",
 		},
 	}
+	claims = append(claims, computedGraphClaims("graph.perfect_matching")...)
 	c := claims[rand.Intn(len(claims))]
 	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
 	p.Explanation = c.reason
@@ -760,13 +735,7 @@ func (g *chromaticPolynomialGen) Generate(ctx generator.GeneratorContext) genera
 type brooksGen struct{}
 
 func (g *brooksGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
+	claims := []graphClaim{
 		{
 			question:    "Brooks' theorem bounds the chromatic number by...",
 			correct:     "the maximum degree, except for complete graphs and odd cycles",
@@ -798,6 +767,7 @@ func (g *brooksGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 			reason:      "Every vertex has at most two neighbours, so the component is a path or a cycle.",
 		},
 	}
+	claims = append(claims, computedGraphClaims("graph.brooks")...)
 	c := claims[rand.Intn(len(claims))]
 	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
 	p.Explanation = c.reason
@@ -842,13 +812,7 @@ func (g *edgeColoringGen) Generate(ctx generator.GeneratorContext) generator.Pro
 type perfectGraphGen struct{}
 
 func (g *perfectGraphGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
+	claims := []graphClaim{
 		{
 			question:    "A graph is perfect when...",
 			correct:     "omega(H) = chi(H) for every induced subgraph H",
@@ -880,6 +844,7 @@ func (g *perfectGraphGen) Generate(ctx generator.GeneratorContext) generator.Pro
 			reason:      "Chordal graphs have a perfect elimination ordering, which makes clique number and chromatic number agree on every induced subgraph.",
 		},
 	}
+	claims = append(claims, computedGraphClaims("graph.perfect_graph")...)
 	c := claims[rand.Intn(len(claims))]
 	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
 	p.Explanation = c.reason

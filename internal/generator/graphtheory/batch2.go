@@ -24,13 +24,7 @@ import (
 type kuratowskiGen struct{}
 
 func (g *kuratowskiGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
+	claims := []graphClaim{
 		{
 			question:    "Kuratowski's theorem says a finite graph is planar exactly when it contains no subdivision of...",
 			correct:     "K_5 or K_{3,3}",
@@ -62,6 +56,7 @@ func (g *kuratowskiGen) Generate(ctx generator.GeneratorContext) generator.Probl
 			reason:      "Cycles, paths and trees all embed in the plane; K_{3,3} does not, by Kuratowski's theorem.",
 		},
 	}
+	claims = append(claims, computedGraphClaims("graph.kuratowski")...)
 	c := claims[rand.Intn(len(claims))]
 	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
 	p.Explanation = c.reason
@@ -75,13 +70,7 @@ func (g *kuratowskiGen) Generate(ctx generator.GeneratorContext) generator.Probl
 type minorGen struct{}
 
 func (g *minorGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
+	claims := []graphClaim{
 		{
 			question:    "A graph H is a minor of G when H can be obtained from G by...",
 			correct:     "deleting vertices, deleting edges and contracting edges",
@@ -113,6 +102,7 @@ func (g *minorGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 			reason:      "K_5 is not planar and planarity is minor-closed, so a graph that contains K_5 as a minor cannot be planar.",
 		},
 	}
+	claims = append(claims, computedGraphClaims("graph.minor")...)
 	c := claims[rand.Intn(len(claims))]
 	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
 	p.Explanation = c.reason
@@ -564,13 +554,7 @@ func (g *ramseyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type randomThresholdGen struct{}
 
 func (g *randomThresholdGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
+	claims := []graphClaim{
 		{
 			question:    "In the Erdős–Rényi model G(n,p), each possible edge is present...",
 			correct:     "independently with probability p",
@@ -602,6 +586,7 @@ func (g *randomThresholdGen) Generate(ctx generator.GeneratorContext) generator.
 			reason:      "An isolated vertex is the last obstruction to connectivity, and it survives below (log n)/n.",
 		},
 	}
+	claims = append(claims, computedGraphClaims("graph.random_threshold")...)
 	c := claims[rand.Intn(len(claims))]
 	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
 	p.Explanation = c.reason
@@ -720,13 +705,7 @@ func (g *tournamentGen) Generate(ctx generator.GeneratorContext) generator.Probl
 type strongConnectivityGen struct{}
 
 func (g *strongConnectivityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
+	claims := []graphClaim{
 		{
 			question:    "A digraph is strongly connected when...",
 			correct:     "every vertex reaches every other vertex by a directed path",
@@ -758,6 +737,7 @@ func (g *strongConnectivityGen) Generate(ctx generator.GeneratorContext) generat
 			reason:      "The components are the vertices of the condensation, so it is a single vertex precisely when the digraph is strongly connected.",
 		},
 	}
+	claims = append(claims, computedGraphClaims("graph.strong_connectivity")...)
 	c := claims[rand.Intn(len(claims))]
 	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
 	p.Explanation = c.reason
@@ -771,13 +751,7 @@ func (g *strongConnectivityGen) Generate(ctx generator.GeneratorContext) generat
 type topologicalSortGen struct{}
 
 func (g *topologicalSortGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
+	claims := []graphClaim{
 		{
 			question:    "A topological order of a digraph exists exactly when the digraph is...",
 			correct:     "a DAG",
@@ -809,6 +783,7 @@ func (g *topologicalSortGen) Generate(ctx generator.GeneratorContext) generator.
 			reason:      "The order is not unique in general, and any of the eligible vertices may be taken next.",
 		},
 	}
+	claims = append(claims, computedGraphClaims("graph.topological_sort")...)
 	c := claims[rand.Intn(len(claims))]
 	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
 	p.Explanation = c.reason
