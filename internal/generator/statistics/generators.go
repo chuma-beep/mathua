@@ -316,28 +316,6 @@ func (g *rangeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	}
 }
 
-type sampleSpaceGen struct{}
-
-func (g *sampleSpaceGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scenarios := []struct {
-		question string
-		count    int
-		expl     string
-	}{
-		{"rolling a standard six-sided die", 6, "A die has 6 faces: 1, 2, 3, 4, 5, 6"},
-		{"flipping a coin", 2, "A coin has 2 outcomes: Heads, Tails"},
-		{"rolling a die and flipping a coin", 12, "6 die outcomes x 2 coin outcomes = 12"},
-		{"selecting a card from a standard 52-card deck", 52, "There are 52 unique cards in a standard deck"},
-		{"spinning a spinner with 4 equal sections labeled A-D", 4, "4 sections: A, B, C, D"},
-	}
-	pick := rand.Intn(len(scenarios))
-	return generator.Problem{
-		Question:    fmt.Sprintf("List all possible outcomes when %s. How many total outcomes are there?", scenarios[pick].question),
-		Answer:      strconv.Itoa(scenarios[pick].count),
-		Explanation: scenarios[pick].expl,
-	}
-}
-
 // distinctColors returns n different colour names.
 //
 // The bag questions used to draw each colour independently, so a bag could read

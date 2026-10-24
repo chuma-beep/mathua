@@ -23,6 +23,8 @@ package odes
 // the answer from those facts.
 
 import (
+	"fmt"
+	"math"
 	"math/rand"
 	"strconv"
 
@@ -519,56 +521,51 @@ func (g *predatorPreyGen) Generate(ctx generator.GeneratorContext) generator.Pro
 type heunGen struct{}
 
 func (g *heunGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question  string
-		answer    string
-		function  string
-		y0, t0, h float64
-		reason    string
+	functions := []string{"y", "double", "square", "tplusy"}
+	name := functions[rand.Intn(len(functions))]
+	y0 := float64(1 + rand.Intn(3))
+	t0 := float64(rand.Intn(3))
+	steps := []float64{0.1, 0.05, 0.2}
+	h := steps[rand.Intn(len(steps))]
+
+	slope := func(tv, y float64) float64 {
+		switch name {
+		case "y":
+			return y
+		case "double":
+			return 2 * y
+		case "square":
+			return y * y
+		default:
+			return tv + y
+		}
 	}
-	claims := []claim{
-		{
-			question: "Use one step of Heun's method with h = 0.1 to estimate y(0.1) for y' = y with y(0) = 1. (enter a decimal)",
-			answer:   "1.105", function: "y", y0: 1, t0: 0, h: 0.1,
-			reason: "The predictor is 1 + 0.1(1) = 1.1, and the corrector is 1 + 0.05(1 + 1.1) = 1.105.",
-		},
-		{
-			question: "Use one step of Heun's method with h = 0.1 to estimate y(0.1) for y' = 2y with y(0) = 1. (enter a decimal)",
-			answer:   "1.22", function: "double", y0: 1, t0: 0, h: 0.1,
-			reason: "The predictor is 1 + 0.1(2) = 1.2, and the corrector is 1 + 0.05(2 + 2.4) = 1.22.",
-		},
-		{
-			question: "Use one step of Heun's method with h = 0.1 to estimate y(0.1) for y' = y^2 with y(0) = 1. (enter a decimal)",
-			answer:   "1.1105", function: "square", y0: 1, t0: 0, h: 0.1,
-			reason: "The predictor is 1.1; the slopes are 1 and 1.21, so the corrector is 1 + 0.05(2.21) = 1.1105.",
-		},
-		{
-			question: "Use one step of Heun's method with h = 0.1 to estimate y(0.1) for y' = y^2 with y(0) = 2. (enter a decimal)",
-			answer:   "2.488", function: "square", y0: 2, t0: 0, h: 0.1,
-			reason: "The predictor is 2.4; the slopes are 4 and 5.76, so the corrector is 2 + 0.05(9.76) = 2.488.",
-		},
-		{
-			question: "Use one step of Heun's method with h = 0.1 to estimate y(0.1) for y' = t + y with y(0) = 1. (enter a decimal)",
-			answer:   "1.11", function: "tplusy", y0: 1, t0: 0, h: 0.1,
-			reason: "The predictor is 1.1; the slopes are 1 and 1.2, so the corrector is 1 + 0.05(2.2) = 1.11.",
-		},
-		{
-			question: "Use one step of Heun's method with h = 0.1 to estimate y(1.1) for y' = t + y with y(1) = 2. (enter a decimal)",
-			answer:   "2.32", function: "tplusy", y0: 2, t0: 1, h: 0.1,
-			reason: "The predictor is 2.3; the slopes are 3 and 3.4, so the corrector is 2 + 0.05(6.4) = 2.32.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
+	predictor := y0 + h*slope(t0, y0)
+	value := y0 + h/2*(slope(t0, y0)+slope(t0+h, predictor))
+	// Round before printing: a binary float renders 3.32 as 3.3200000000000003.
+	answer := strconv.FormatFloat(math.Round(value*1e6)/1e6, 'f', -1, 64)
+
+	symbol := map[string]string{
+		"y": "y", "double": "2y", "square": "y^2", "tplusy": "t + y",
+	}[name]
 	return generator.Problem{
-		Question:    c.question,
-		Answer:      c.answer,
-		Explanation: c.reason,
+		Question: fmt.Sprintf("Use one step of Heun's method with h = %s to estimate y(%s) for y' = %s with y(%s) = %s. (enter a decimal)",
+			trimFloat(h), trimFloat(t0+h), symbol, trimFloat(t0), trimFloat(y0)),
+		Answer: answer,
+		Explanation: fmt.Sprintf("The predictor is %s. The slopes at the start and at the predictor are %s and %s, so the corrector is %s.",
+			trimFloat(predictor), trimFloat(slope(t0, y0)), trimFloat(slope(t0+h, predictor)), answer),
 		Facts: map[string]string{
-			"function": c.function,
-			"y0":       strconv.FormatFloat(c.y0, 'g', -1, 64),
-			"t0":       strconv.FormatFloat(c.t0, 'g', -1, 64),
-			"h":        strconv.FormatFloat(c.h, 'g', -1, 64),
-			"answer":   c.answer,
+			"function": name,
+			"y0":       trimFloat(y0),
+			"t0":       trimFloat(t0),
+			"h":        trimFloat(h),
+			"answer":   answer,
 		},
 	}
+}
+
+// trimFloat renders a float without a trailing .0 so the stem reads 0 and 0.1
+// rather than 0.000000 and 0.100000.
+func trimFloat(v float64) string {
+	return strconv.FormatFloat(v, 'f', -1, 64)
 }

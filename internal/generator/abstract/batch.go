@@ -27,7 +27,6 @@ package abstract
 
 import (
 	"math/rand"
-	"strconv"
 
 	"github.com/chuma-beep/mathua/internal/generator"
 )
@@ -214,99 +213,6 @@ func (g *simpleGroupGen) Generate(ctx generator.GeneratorContext) generator.Prob
 // ---------------------------------------------------------------------------
 // 4. p-groups (numeric)
 // ---------------------------------------------------------------------------
-
-type pGroupGen struct{}
-
-func (g *pGroupGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question string
-		answer   int
-		kind     string // "least" or "concrete"
-		prime    int
-		group    string
-		reason   string
-	}
-	// The least-possible-center family: |Z(G)| is divisible by p and p is
-	// attained, for example by the nonabelian group of order p^3.
-	least := []claim{
-		{
-			question: "A finite group G has order 27 = 3^3. Its center is nontrivial and |Z(G)| is divisible by 3. What is the least possible value of |Z(G)|? (enter a number)",
-			answer:   3, kind: "least", prime: 3,
-			reason: "The class equation forces |Z(G)| to be divisible by 3, and a group of order 27 with center of order 3 exists, so the least value is 3.",
-		},
-		{
-			question: "A finite group G has order 8 = 2^3. Its center is nontrivial and |Z(G)| is divisible by 2. What is the least possible value of |Z(G)|? (enter a number)",
-			answer:   2, kind: "least", prime: 2,
-			reason: "|Z(G)| is divisible by 2 and can be as small as 2, as in D_4 and Q_8, so the least value is 2.",
-		},
-		{
-			question: "A finite group G has order 16 = 2^4. Its center is nontrivial and |Z(G)| is divisible by 2. What is the least possible value of |Z(G)|? (enter a number)",
-			answer:   2, kind: "least", prime: 2,
-			reason: "A group of order 16 can have a center of order 2, and no smaller positive multiple of 2 exists, so the least value is 2.",
-		},
-		{
-			question: "A finite group G has order 343 = 7^3. Its center is nontrivial and |Z(G)| is divisible by 7. What is the least possible value of |Z(G)|? (enter a number)",
-			answer:   7, kind: "least", prime: 7,
-			reason: "The class equation forces |Z(G)| to be divisible by 7, and the nonabelian group of order 343 has center of order 7, so the least value is 7.",
-		},
-		{
-			question: "A finite group G has order 81 = 3^4. Its center is nontrivial and |Z(G)| is divisible by 3. What is the least possible value of |Z(G)|? (enter a number)",
-			answer:   3, kind: "least", prime: 3,
-			reason: "The class equation forces |Z(G)| to be divisible by 3, and 3 is attained, so the least value is 3.",
-		},
-		{
-			question: "A finite group G has order 125 = 5^3. Its center is nontrivial and |Z(G)| is divisible by 5. What is the least possible value of |Z(G)|? (enter a number)",
-			answer:   5, kind: "least", prime: 5,
-			reason: "|Z(G)| is divisible by 5 and can equal 5, so the least value is 5.",
-		},
-	}
-	concrete := []claim{
-		{
-			question: "The quaternion group Q_8 has order 8. What is the order of its center Z(Q_8)? (enter a number)",
-			answer:   2, kind: "concrete", prime: 2, group: "Q_8",
-			reason: "The center of Q_8 is {1, -1}, so its order is 2.",
-		},
-		{
-			question: "The dihedral group D_4 has order 8. What is the order of its center? (enter a number)",
-			answer:   2, kind: "concrete", prime: 2, group: "D_4",
-			reason: "The center of D_4 is {e, r^2}, so its order is 2.",
-		},
-		{
-			question: "The dihedral group D_8 has order 16. What is the order of its center? (enter a number)",
-			answer:   2, kind: "concrete", prime: 2, group: "D_8",
-			reason: "The center of D_8 is {e, r^4}, so its order is 2.",
-		},
-		{
-			question: "The cyclic group Z_9 has order 9. What is the order of its center? (enter a number)",
-			answer:   9, kind: "concrete", prime: 3, group: "Z_9",
-			reason: "Z_9 is abelian, so its center is all of Z_9 and has order 9.",
-		},
-		{
-			question: "The Klein four-group V_4 has order 4. What is the order of its center? (enter a number)",
-			answer:   4, kind: "concrete", prime: 2, group: "V_4",
-			reason: "V_4 is abelian, so its center is all of V_4 and has order 4.",
-		},
-		{
-			question: "The group of upper unitriangular 3x3 matrices over F_3 has order 27. What is the order of its center? (enter a number)",
-			answer:   3, kind: "concrete", prime: 3, group: "Heisenberg(3)",
-			reason: "The center consists of the matrices that differ from the identity only in the top-right entry, of which there are 3.",
-		},
-	}
-	claims := least
-	if rand.Intn(2) == 0 {
-		claims = concrete
-	}
-	c := claims[rand.Intn(len(claims))]
-	return generator.Problem{
-		Question:    c.question,
-		Answer:      strconv.Itoa(c.answer),
-		Explanation: c.reason,
-		Facts: map[string]string{
-			"kind": c.kind, "prime": strconv.Itoa(c.prime),
-			"group": c.group, "answer": strconv.Itoa(c.answer),
-		},
-	}
-}
 
 // ---------------------------------------------------------------------------
 // 5. Composition series
@@ -566,95 +472,6 @@ func (g *euclideanGen) Generate(ctx generator.GeneratorContext) generator.Proble
 // ---------------------------------------------------------------------------
 // 10. Characteristic of a field (numeric)
 // ---------------------------------------------------------------------------
-
-type characteristicGen struct{}
-
-func (g *characteristicGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question string
-		answer   int
-		kind     string
-		prime    int
-		order    int
-		reason   string
-	}
-	// kind "F_p" means order == prime; "F_pn" means order is a power of the
-	// prime larger than it; "char0" means the characteristic is 0. The test
-	// recomputes the expected value from kind, prime and order.
-	finite := []claim{
-		{
-			question: "What is the characteristic of the field F_11 (equivalently Z/11Z)? (enter a number)",
-			answer:   11, kind: "F_p", prime: 11, order: 11,
-			reason: "Adding the identity 1 in F_11 returns 0 after 11 additions and not before, so the characteristic is 11.",
-		},
-		{
-			question: "What is the characteristic of the field F_7 (equivalently Z/7Z)? (enter a number)",
-			answer:   7, kind: "F_p", prime: 7, order: 7,
-			reason: "The characteristic of F_p is p, so it is 7 for F_7.",
-		},
-		{
-			question: "What is the characteristic of the field F_2 (equivalently Z/2Z)? (enter a number)",
-			answer:   2, kind: "F_p", prime: 2, order: 2,
-			reason: "In F_2, 1 + 1 = 0, so the characteristic is 2.",
-		},
-		{
-			question: "The field F_9 has 9 = 3^2 elements. What is its characteristic? (enter a number)",
-			answer:   3, kind: "F_pn", prime: 3, order: 9,
-			reason: "F_9 contains a copy of F_3, and adding 1 three times gives 0; the field order 9 is not the characteristic.",
-		},
-		{
-			question: "The field F_8 has 8 = 2^3 elements. What is its characteristic? (enter a number)",
-			answer:   2, kind: "F_pn", prime: 2, order: 8,
-			reason: "F_8 has prime subfield F_2, so its characteristic is 2, not the field order 8.",
-		},
-		{
-			question: "The field F_25 has 25 = 5^2 elements. What is its characteristic? (enter a number)",
-			answer:   5, kind: "F_pn", prime: 5, order: 25,
-			reason: "F_25 has prime subfield F_5, so its characteristic is 5, not 25.",
-		},
-		{
-			question: "The field F_27 has 27 = 3^3 elements. What is its characteristic? (enter a number)",
-			answer:   3, kind: "F_pn", prime: 3, order: 27,
-			reason: "The characteristic of F_{p^n} is p, so it is 3 here, not the field order 27.",
-		},
-	}
-	zero := []claim{
-		{
-			question: "What is the characteristic of the field Q? (enter a number)",
-			answer:   0, kind: "char0",
-			reason: "No positive multiple of 1 equals 0 in Q, so the characteristic is 0 by definition.",
-		},
-		{
-			question: "What is the characteristic of the field R? (enter a number)",
-			answer:   0, kind: "char0",
-			reason: "No positive multiple of 1 equals 0 in R, so the characteristic is 0.",
-		},
-		{
-			question: "What is the characteristic of the field C? (enter a number)",
-			answer:   0, kind: "char0",
-			reason: "C contains Q and no positive multiple of 1 vanishes, so its characteristic is 0.",
-		},
-		{
-			question: "What is the characteristic of the field Q(sqrt(2))? (enter a number)",
-			answer:   0, kind: "char0",
-			reason: "Q(sqrt(2)) contains Q, so it has characteristic 0.",
-		},
-	}
-	claims := finite
-	if rand.Intn(4) == 0 {
-		claims = zero
-	}
-	c := claims[rand.Intn(len(claims))]
-	return generator.Problem{
-		Question:    c.question,
-		Answer:      strconv.Itoa(c.answer),
-		Explanation: c.reason,
-		Facts: map[string]string{
-			"kind": c.kind, "prime": strconv.Itoa(c.prime),
-			"order": strconv.Itoa(c.order), "answer": strconv.Itoa(c.answer),
-		},
-	}
-}
 
 // ---------------------------------------------------------------------------
 // 11. Algebraic and transcendental elements

@@ -932,49 +932,20 @@ func (g *graphPathsGen) Generate(ctx generator.GeneratorContext) generator.Probl
 type treesGen struct{}
 
 func (g *treesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type qType struct {
-		question string
-		answer   string
-		exp      string
+	n := 2 + rand.Intn(39)
+	if rand.Intn(2) == 0 {
+		return generator.Problem{
+			Question:    fmt.Sprintf("A tree has %d vertices. How many edges does it have?", n),
+			Answer:      strconv.Itoa(n - 1),
+			Explanation: fmt.Sprintf("A tree with n vertices always has n-1 edges: %d - 1 = %d, because a connected acyclic graph on n vertices has exactly n-1 edges.", n, n-1),
+			Facts:       map[string]string{"vertices": strconv.Itoa(n), "edges": strconv.Itoa(n - 1)},
+		}
 	}
-	questions := []qType{
-		{
-			"A tree has 10 vertices. How many edges does it have?",
-			"9",
-			"A tree with n vertices always has n-1 edges. 10 − 1 = 9.",
-		},
-		{
-			"A tree has 7 vertices. How many edges does it have?",
-			"6",
-			"A tree with n vertices always has n-1 edges. 7 − 1 = 6.",
-		},
-		{
-			"A tree has 15 vertices. How many edges does it have?",
-			"14",
-			"A tree with n vertices always has n-1 edges. 15 − 1 = 14.",
-		},
-		{
-			"A tree has 12 edges. How many vertices does it have?",
-			"13",
-			"A tree with n edges always has n+1 vertices. 12 + 1 = 13.",
-		},
-		{
-			"A tree has 8 edges. How many vertices does it have?",
-			"9",
-			"A tree with n edges always has n+1 vertices. 8 + 1 = 9.",
-		},
-		{
-			"A connected graph with 6 vertices and no cycles has how many edges?",
-			"5",
-			"A connected acyclic graph is a tree, so edges = vertices − 1 = 5.",
-		},
-	}
-
-	q := questions[rand.Intn(len(questions))]
 	return generator.Problem{
-		Question:    q.question,
-		Answer:      q.answer,
-		Explanation: q.exp,
+		Question:    fmt.Sprintf("A tree has %d edges. How many vertices does it have?", n-1),
+		Answer:      strconv.Itoa(n),
+		Explanation: fmt.Sprintf("A tree with m edges has m+1 vertices: %d + 1 = %d.", n-1, n),
+		Facts:       map[string]string{"vertices": strconv.Itoa(n), "edges": strconv.Itoa(n - 1)},
 	}
 }
 

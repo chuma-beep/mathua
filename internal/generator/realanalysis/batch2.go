@@ -558,27 +558,18 @@ func (g *riemannGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 type ftcGen struct{}
 
 func (g *ftcGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		a, c, b int
-	}
-	claims := []claim{
-		{a: 2, c: 1, b: 3},
-		{a: 1, c: 0, b: 4},
-		{a: 3, c: 2, b: 2},
-		{a: 2, c: 3, b: 1},
-		{a: 1, c: 1, b: 5},
-		{a: 4, c: 0, b: 2},
-	}
-	c := claims[rand.Intn(len(claims))]
-	value := float64(c.a)*float64(c.b*c.b)/2 + float64(c.c*c.b)
+	a := 1 + rand.Intn(6)
+	c := rand.Intn(6)
+	b := 2 + rand.Intn(8)
+	value := float64(a)*float64(b*b)/2 + float64(c*b)
 	answer := decimal6(value)
 	return generator.Problem{
 		Question: "By the fundamental theorem of calculus, the integral from 0 to b of (a·t + c) with respect to t is a·b²/2 + c·b. For a = " +
-			strconv.Itoa(c.a) + ", c = " + strconv.Itoa(c.c) + " and b = " + strconv.Itoa(c.b) + ", what is the value? (enter a decimal)",
+			strconv.Itoa(a) + ", c = " + strconv.Itoa(c) + " and b = " + strconv.Itoa(b) + ", what is the value? (enter a decimal)",
 		Answer:      answer,
 		Explanation: "An antiderivative of a·t + c is a·t²/2 + c·t, and evaluating it at b and at 0 gives a·b²/2 + c·b = " + answer + ".",
 		Facts: map[string]string{
-			"a": strconv.Itoa(c.a), "c": strconv.Itoa(c.c), "b": strconv.Itoa(c.b), "answer": answer,
+			"a": strconv.Itoa(a), "c": strconv.Itoa(c), "b": strconv.Itoa(b), "answer": answer,
 		},
 	}
 }
@@ -590,7 +581,9 @@ func (g *ftcGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type partsGen struct{}
 
 func (g *partsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	claims := []int{1, 2, 3}
+	// Six upper limits instead of three. The value is computed from the closed
+	// form rather than looked up, so each limit is a different problem.
+	claims := []int{1, 2, 3, 4, 5, 6}
 	b := claims[rand.Intn(len(claims))]
 	value := float64(b-1)*math.Exp(float64(b)) + 1
 	answer := decimal6(value)
@@ -612,8 +605,9 @@ func (g *partsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type improperGen struct{}
 
 func (g *improperGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	claims := []int{2, 3, 4, 5, 6, 10}
-	p := claims[rand.Intn(len(claims))]
+	// Every exponent above one is convergent, so the pool is the range rather
+	// than a short list of selected values.
+	p := 2 + rand.Intn(38)
 	answer := decimal6(1 / float64(p-1))
 	return generator.Problem{
 		Question: "The improper integral from 1 to infinity of x^(−p) converges exactly when p > 1, to 1/(p − 1). For p = " +

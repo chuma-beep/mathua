@@ -255,8 +255,20 @@ func TestRaiseNumericRecompute(t *testing.T) {
 	for i := 0; i < 200; i++ {
 		p := calcBatchSample(t, reg, "calc.series.gamma", i)
 		n := calcFactInt(t, p, "n")
-		if want := strconv.Itoa(calcFact(n - 1)); p.Answer != want {
-			t.Fatalf("gamma: n=%d answers %s, want %s", n, p.Answer, want)
+		// Three shapes share this concept, so the expectation follows the shape
+		// rather than assuming the factorial form. The ratio forms are the
+		// recurrence itself and have no factorial in the answer.
+		want := ""
+		switch p.Facts["shape"] {
+		case "ratio1":
+			want = strconv.Itoa(n)
+		case "ratio2":
+			want = strconv.Itoa(n * (n + 1))
+		default:
+			want = strconv.Itoa(calcFact(n - 1))
+		}
+		if p.Answer != want {
+			t.Fatalf("gamma: n=%d shape=%s answers %s, want %s", n, p.Facts["shape"], p.Answer, want)
 		}
 	}
 

@@ -537,15 +537,16 @@ func (g *proportionsGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type asymptotesGen struct{}
 
 func (g *asymptotesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct{ a, m, n int }
-	claims := []claim{
-		{a: 1, m: 2, n: 5},
-		{a: 3, m: -4, n: 1},
-		{a: 2, m: 3, n: 7},
-		{a: 5, m: -2, n: 6},
-		{a: 1, m: 4, n: 9},
+	c := struct{ a, m, n int }{a: rand.Intn(9) + 1}
+	for {
+		c.m = rand.Intn(17) - 8
+		c.n = rand.Intn(17) - 8
+		// Both asymptotes must exist and be distinct, and neither may sit at
+		// zero: a zero root would print the constant term as "+ 0".
+		if c.m != 0 && c.n != 0 && c.m != c.n && c.m+c.n != 0 {
+			break
+		}
 	}
-	c := claims[rand.Intn(len(claims))]
 	// f(x) = (x + a) / ((x - m)(x - n)). The denominator expands to
 	// x^2 - (m+n)x + mn.
 	b := -(c.m + c.n)
@@ -555,12 +556,9 @@ func (g *asymptotesGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		larger = c.n
 	}
 	return generator.Problem{
-		Question: "The rational function f(x) = (x + " + strconv.Itoa(c.a) + ")/(x^2 + " + strconv.Itoa(b) + "x + " +
-			strconv.Itoa(d) + ") has two vertical asymptotes. What is the larger one?",
-		Answer: strconv.Itoa(larger),
-		Explanation: "The denominator factors as (x - " + strconv.Itoa(c.m) + ")(x - " + strconv.Itoa(c.n) +
-			"), so the vertical asymptotes are at " + strconv.Itoa(c.m) + " and " + strconv.Itoa(c.n) + ", and the larger is " +
-			strconv.Itoa(larger) + ".",
+		Question:    fmt.Sprintf("The rational function f(x) = (x + %d)/(x^2 %+dx %+d) has two vertical asymptotes. What is the larger one?", c.a, b, d),
+		Answer:      strconv.Itoa(larger),
+		Explanation: fmt.Sprintf("The denominator factors as (x%+d)(x%+d), so the vertical asymptotes are at %d and %d, and the larger is %d.", -c.m, -c.n, c.m, c.n, larger),
 		Facts: map[string]string{
 			"a": strconv.Itoa(c.a), "b": strconv.Itoa(b), "d": strconv.Itoa(d),
 			"m": strconv.Itoa(c.m), "n": strconv.Itoa(c.n), "answer": strconv.Itoa(larger),
@@ -575,15 +573,11 @@ func (g *asymptotesGen) Generate(ctx generator.GeneratorContext) generator.Probl
 type threeVarGen struct{}
 
 func (g *threeVarGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct{ x, y, z int }
-	claims := []claim{
-		{x: 2, y: 3, z: 1},
-		{x: 5, y: 1, z: 4},
-		{x: 3, y: 4, z: 2},
-		{x: 6, y: 2, z: 3},
-		{x: 4, y: 5, z: 1},
+	c := struct{ x, y, z int }{
+		x: rand.Intn(8) + 2,
+		y: rand.Intn(9) + 1,
+		z: rand.Intn(9) + 1,
 	}
-	c := claims[rand.Intn(len(claims))]
 	a := c.x + c.y + c.z
 	b := c.x - c.y + c.z
 	d := c.x + c.y - c.z
@@ -718,25 +712,22 @@ func (g *inductionGen) Generate(ctx generator.GeneratorContext) generator.Proble
 type rationalRootGen struct{}
 
 func (g *rationalRootGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct{ r1, r2, r3 int }
-	claims := []claim{
-		{r1: 2, r2: -1, r3: -3},
-		{r1: 3, r2: -2, r3: -5},
-		{r1: 4, r2: -1, r3: -2},
-		{r1: 5, r2: -3, r3: -1},
-		{r1: 1, r2: -2, r3: -4},
+	c := struct{ r1, r2, r3 int }{r1: rand.Intn(9) + 1}
+	c.r2 = -(rand.Intn(9) + 1)
+	for {
+		c.r3 = -(rand.Intn(9) + 1)
+		if c.r3 != c.r2 {
+			break
+		}
 	}
-	c := claims[rand.Intn(len(claims))]
 	b := -(c.r1 + c.r2 + c.r3)
 	d := c.r1*c.r2 + c.r1*c.r3 + c.r2*c.r3
 	e := -(c.r1 * c.r2 * c.r3)
 	return generator.Problem{
-		Question: "The monic polynomial x^3 + " + strconv.Itoa(b) + "x^2 + " + strconv.Itoa(d) + "x + " + strconv.Itoa(e) +
-			" has three integer roots. By the rational root theorem, what is its positive root?",
-		Answer: strconv.Itoa(c.r1),
-		Explanation: "The polynomial factors as (x - " + strconv.Itoa(c.r1) + ")(x + " + strconv.Itoa(-c.r2) +
-			")(x + " + strconv.Itoa(-c.r3) + "), so the roots are " + strconv.Itoa(c.r1) + ", " + strconv.Itoa(c.r2) +
-			" and " + strconv.Itoa(c.r3) + ", and the positive one is " + strconv.Itoa(c.r1) + ".",
+		Question: fmt.Sprintf("The monic polynomial x^3 %+dx^2 %+dx %+d has three integer roots. By the rational root theorem, what is its positive root?", b, d, e),
+		Answer:   strconv.Itoa(c.r1),
+		Explanation: fmt.Sprintf("The polynomial factors as (x %+d)(x %+d)(x %+d), so the roots are %d, %d and %d, and the positive one is %d.",
+			-c.r1, -c.r2, -c.r3, c.r1, c.r2, c.r3, c.r1),
 		Facts: map[string]string{
 			"b": strconv.Itoa(b), "d": strconv.Itoa(d), "e": strconv.Itoa(e),
 			"r1": strconv.Itoa(c.r1), "r2": strconv.Itoa(c.r2), "r3": strconv.Itoa(c.r3),

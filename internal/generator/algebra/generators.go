@@ -537,8 +537,11 @@ func (g *sysWordGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 type polyConceptGen struct{}
 
 func (g *polyConceptGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	coeff := rand.Intn(6) + 2
-	exp := rand.Intn(3) + 2
+	// The schema describes the leading term, so the degree question stays and
+	// the coefficient and exponent move. The exponent runs to 9 because above
+	// that the printed term stops being readable at a glance.
+	coeff := rand.Intn(11) + 2
+	exp := rand.Intn(8) + 2
 	return generator.Problem{
 		Question:    fmt.Sprintf("What is the degree of \\(%dx^{%d} + 3x + 1\\)?", coeff, exp),
 		Answer:      fmt.Sprintf("%d", exp),
@@ -892,8 +895,8 @@ func (g *funcQuadGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type algExpConceptGen struct{}
 
 func (g *algExpConceptGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	a := rand.Intn(3) + 2
-	x := rand.Intn(4) + 1
+	a := rand.Intn(8) + 2
+	x := rand.Intn(6) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("If \\(f(x) = %d^{x}\\), find \\(f(%d)\\).", a, x),
 		Answer:      fmt.Sprintf("%d", mathutil.IntPow(a, x)),
@@ -905,8 +908,8 @@ func (g *algExpConceptGen) Generate(ctx generator.GeneratorContext) generator.Pr
 type algExpEvaluateGen struct{}
 
 func (g *algExpEvaluateGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	a := rand.Intn(3) + 2
-	x := rand.Intn(4) + 2
+	a := rand.Intn(8) + 3
+	x := rand.Intn(6) + 2
 	return generator.Problem{
 		Question:    fmt.Sprintf("Evaluate: \\(%d^{%d}\\)", a, x),
 		Answer:      fmt.Sprintf("%d", mathutil.IntPow(a, x)),
@@ -939,8 +942,8 @@ func (g *logConceptGen) Generate(ctx generator.GeneratorContext) generator.Probl
 type logEvaluateGen struct{}
 
 func (g *logEvaluateGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	base := rand.Intn(3) + 2
-	exp := rand.Intn(4) + 1
+	base := rand.Intn(9) + 2
+	exp := rand.Intn(6) + 1
 	val := mathutil.IntPow(base, exp)
 	return generator.Problem{
 		Question:    fmt.Sprintf("Evaluate: \\(\\log_{%d}(%d)\\)", base, val),
@@ -1369,7 +1372,9 @@ func (g *eqTrinomialGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type funcAbsValGen struct{}
 
 func (g *funcAbsValGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	x := rand.Intn(10) - 5
+	// The authored walkthrough fixes the shape as f(x) = |x| evaluated at x, so
+	// the widening is the range of x rather than a second family of functions.
+	x := rand.Intn(81) - 40
 	return generator.Problem{
 		Question:    fmt.Sprintf("If \\(f(x) = |x|\\), what is \\(f(%d)\\)?", x),
 		Answer:      fmt.Sprintf("%d", mathutil.Abs(x)),
@@ -1490,7 +1495,10 @@ func (g *funcInverseGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type monotonicityGen struct{}
 
 func (g *monotonicityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	a := rand.Intn(5) + 1
+	// The authored walkthrough describes f(x) = ax and asks which way it goes,
+	// so the slope is the only free parameter. Both signs must stay reachable,
+	// otherwise the question is answerable without reading it.
+	a := rand.Intn(25) + 1
 	if rand.Intn(2) == 0 {
 		a = -a
 	}
@@ -1505,8 +1513,10 @@ func (g *monotonicityGen) Generate(ctx generator.GeneratorContext) generator.Pro
 type funcRationalGen struct{}
 
 func (g *funcRationalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	a := rand.Intn(4) + 1
-	b := rand.Intn(4) + 1
+	// The authored walkthrough describes a/(x - b), so only a and b are free.
+	// b reaches further than a because the asymptote is what the learner reads.
+	a := rand.Intn(9) + 1
+	b := rand.Intn(15) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("What is the vertical asymptote of \\(f(x) = \\frac{%d}{x-%d}\\)?", a, b),
 		Answer:      fmt.Sprintf("%d", b),
@@ -1518,20 +1528,36 @@ func (g *funcRationalGen) Generate(ctx generator.GeneratorContext) generator.Pro
 type funcSigmoidGen struct{}
 
 func (g *funcSigmoidGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		question string
-		answer   string
-		exp      string
-	}
-	entries := []entry{
-		{"How many integers lie in the range of the sigmoid function \\(\\sigma(x) = 1/(1+e^{-x})\\)? (enter a number)", "0", "The sigmoid maps all real numbers to the open interval \\((0,1)\\), which contains no integers."},
-		{"What is \\(\\sigma(0)\\) for the sigmoid function?", "0.5", "\\(\\sigma(0) = 1/(1+e^{0}) = 1/2 = 0.5\\)."},
-		{"The sigmoid function is commonly used as an ____ function in neural networks.", "activation", "The sigmoid is a popular activation function that introduces non-linearity."},
-		{"As \\(x \\to \\infty\\), \\(\\sigma(x)\\) approaches ____.", "1", "As \\(x \\to \\infty\\), \\(e^{-x} \\to 0\\), so \\(\\sigma(x) \\to 1\\)."},
-	}
-	e := entries[rand.Intn(len(entries))]
-	return generator.Problem{
-		Question: e.question, Answer: e.answer, Explanation: e.exp,
+	// Every question is evaluated at a point where the sigmoid is exactly rational, so
+	// the answer is an exact fraction rather than a rounded decimal and symbolic grading
+	// compares it without a tolerance.
+	ks := []int{2, 3, 4, 5, 6, 9, 11}
+	k := ks[rand.Intn(len(ks))]
+	switch rand.Intn(3) {
+	case 0:
+		return generator.Problem{
+			Question: fmt.Sprintf("Evaluate \\(\\sigma(x)\\) at \\(x = \\ln %d\\), where \\(\\sigma(x) = 1/(1+e^{-x})\\).", k),
+			Answer:   fmt.Sprintf("%d/%d", k, k+1),
+			Explanation: fmt.Sprintf("\\(e^{-\\ln %d} = 1/%d\\), so \\(\\sigma(\\ln %d) = 1/(1+1/%d) = %d/%d\\).",
+				k, k, k, k, k, k+1),
+			Facts: map[string]string{"k": strconv.Itoa(k), "x": "ln " + strconv.Itoa(k)},
+		}
+	case 1:
+		return generator.Problem{
+			Question: fmt.Sprintf("Evaluate \\(\\sigma(x)\\) at \\(x = -\\ln %d\\), where \\(\\sigma(x) = 1/(1+e^{-x})\\).", k),
+			Answer:   fmt.Sprintf("1/%d", k+1),
+			Explanation: fmt.Sprintf("\\(e^{\\ln %d} = %d\\), so \\(\\sigma(-\\ln %d) = 1/(1+%d) = 1/%d\\).",
+				k, k, k, k, k+1),
+			Facts: map[string]string{"k": strconv.Itoa(k), "x": "-ln " + strconv.Itoa(k)},
+		}
+	default:
+		return generator.Problem{
+			Question: fmt.Sprintf("What is the slope of \\(\\sigma(kx)\\) at \\(x = 0\\), where \\(\\sigma(u) = 1/(1+e^{-u})\\) and \\(k = %d\\)?", k),
+			Answer:   fmt.Sprintf("%d/4", k),
+			Explanation: fmt.Sprintf("\\(\\sigma'(u) = \\sigma(u)(1-\\sigma(u))\\) and \\(\\sigma(0) = 1/2\\), so the chain rule gives \\(k \\cdot (1/2)(1/2) = %d/4\\).",
+				k),
+			Facts: map[string]string{"k": strconv.Itoa(k), "x": "0"},
+		}
 	}
 }
 
@@ -1559,12 +1585,29 @@ func (g *funcSignGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type ineqAbsValGen struct{}
 
 func (g *ineqAbsValGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	a := rand.Intn(5) + 1
-	return generator.Problem{
-		Question:    fmt.Sprintf("What is the largest integer \\(x\\) with \\(|x| < %d\\)? (enter a number)", a),
-		Answer:      fmt.Sprintf("%d", a-1),
-		Explanation: fmt.Sprintf("\\(|x| < %d\\) means \\(-%d < x < %d\\), so the largest integer is %d", a, a, a, a-1),
-		Facts:       map[string]string{"a": strconv.Itoa(a), "x": strconv.Itoa(a - 1)},
+	a := rand.Intn(18) + 3
+	switch rand.Intn(3) {
+	case 0:
+		return generator.Problem{
+			Question:    fmt.Sprintf("What is the largest integer \\(x\\) with \\(|x| < %d\\)? (enter a number)", a),
+			Answer:      fmt.Sprintf("%d", a-1),
+			Explanation: fmt.Sprintf("\\(|x| < %d\\) means \\(-%d < x < %d\\), so the largest integer is %d", a, a, a, a-1),
+			Facts:       map[string]string{"a": strconv.Itoa(a), "x": strconv.Itoa(a - 1)},
+		}
+	case 1:
+		return generator.Problem{
+			Question:    fmt.Sprintf("What is the largest integer \\(x\\) with \\(|x| \\leq %d\\)? (enter a number)", a),
+			Answer:      fmt.Sprintf("%d", a),
+			Explanation: fmt.Sprintf("\\(|x| \\leq %d\\) means \\(-%d \\leq x \\leq %d\\), and %d is included, so the largest integer is %d", a, a, a, a, a),
+			Facts:       map[string]string{"a": strconv.Itoa(a), "x": strconv.Itoa(a)},
+		}
+	default:
+		return generator.Problem{
+			Question:    fmt.Sprintf("What is the smallest integer \\(x\\) with \\(|x| > %d\\)? (enter a number)", a),
+			Answer:      fmt.Sprintf("%d", a+1),
+			Explanation: fmt.Sprintf("\\(|x| > %d\\) excludes every value from \\(-%d\\) to %d, so the smallest integer above the gap is %d", a, a, a, a+1),
+			Facts:       map[string]string{"a": strconv.Itoa(a), "x": strconv.Itoa(a + 1)},
+		}
 	}
 }
 
@@ -1648,24 +1691,42 @@ func (g *ineqLogGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 type ineqQuadraticGen struct{}
 
 func (g *ineqQuadraticGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	r := rand.Intn(5) + 1
+	r := rand.Intn(18) + 2
+	// The endpoint case is the one learners get wrong: a strict inequality
+	// excludes the root, an inclusive one includes it.
+	if rand.Intn(2) == 0 {
+		return generator.Problem{
+			Question:    fmt.Sprintf("What is the largest integer \\(x\\) with \\(x^{2} - %d < 0\\)? (enter a number)", r*r),
+			Answer:      fmt.Sprintf("%d", r-1),
+			Explanation: fmt.Sprintf("\\(x^{2} - %d < 0\\) → \\((x-%d)(x+%d) < 0\\) → \\(-%d < x < %d\\), so the largest integer is %d", r*r, r, r, r, r, r-1),
+			Facts:       map[string]string{"r2": strconv.Itoa(r * r), "r": strconv.Itoa(r), "x": strconv.Itoa(r - 1)},
+		}
+	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("What is the largest integer \\(x\\) with \\(x^{2} - %d < 0\\)? (enter a number)", r*r),
-		Answer:      fmt.Sprintf("%d", r-1),
-		Explanation: fmt.Sprintf("\\(x^{2} - %d < 0\\) → \\((x-%d)(x+%d) < 0\\) → \\(-%d < x < %d\\), so the largest integer is %d", r*r, r, r, r, r, r-1),
-		Facts:       map[string]string{"r2": strconv.Itoa(r * r), "r": strconv.Itoa(r), "x": strconv.Itoa(r - 1)},
+		Question:    fmt.Sprintf("What is the largest integer \\(x\\) with \\(x^{2} - %d \\leq 0\\)? (enter a number)", r*r),
+		Answer:      fmt.Sprintf("%d", r),
+		Explanation: fmt.Sprintf("\\(x^{2} \\leq %d\\) allows \\(x = %d\\) as well as every value between \\(-%d\\) and %d, so the largest integer is %d", r*r, r, r, r, r),
+		Facts:       map[string]string{"r2": strconv.Itoa(r * r), "r": strconv.Itoa(r), "x": strconv.Itoa(r)},
 	}
 }
 
 type ineqRationalGen struct{}
 
 func (g *ineqRationalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	a := rand.Intn(5) + 1
+	a := rand.Intn(18) + 2
+	if rand.Intn(2) == 0 {
+		return generator.Problem{
+			Question:    fmt.Sprintf("What is the smallest integer \\(x\\) with \\(\\frac{1}{x-%d} > 0\\)? (enter a number)", a),
+			Answer:      fmt.Sprintf("%d", a+1),
+			Explanation: fmt.Sprintf("The numerator 1 is always positive, so \\(\\frac{1}{x-%d} > 0\\) when \\(x-%d > 0\\) → \\(x > %d\\); the smallest integer is %d", a, a, a, a+1),
+			Facts:       map[string]string{"a": strconv.Itoa(a), "ans": strconv.Itoa(a + 1)},
+		}
+	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("What is the smallest integer \\(x\\) with \\(\\frac{1}{x-%d} > 0\\)? (enter a number)", a),
-		Answer:      fmt.Sprintf("%d", a+1),
-		Explanation: fmt.Sprintf("The numerator 1 is always positive, so \\(\\frac{1}{x-%d} > 0\\) when \\(x-%d > 0\\) → \\(x > %d\\); the smallest integer is %d", a, a, a, a+1),
-		Facts:       map[string]string{"a": strconv.Itoa(a), "ans": strconv.Itoa(a + 1)},
+		Question:    fmt.Sprintf("What is the largest integer \\(x\\) with \\(\\frac{1}{x-%d} < 0\\)? (enter a number)", a),
+		Answer:      fmt.Sprintf("%d", a-1),
+		Explanation: fmt.Sprintf("A negative reciprocal needs a negative denominator, so \\(x-%d < 0\\) → \\(x < %d\\); the largest integer is %d", a, a, a-1),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "ans": strconv.Itoa(a - 1)},
 	}
 }
 
@@ -1851,11 +1912,19 @@ func (g *quadComplexGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type quadIncompleteGen struct{}
 
 func (g *quadIncompleteGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	k := rand.Intn(5) + 1
+	k := rand.Intn(18) + 2
+	if rand.Intn(2) == 0 {
+		return generator.Problem{
+			Question:    fmt.Sprintf("Solve: \\(x^{2} - %d = 0\\)", k*k),
+			Answer:      fmt.Sprintf("%d,%d", k, -k),
+			Explanation: fmt.Sprintf("\\(x^{2} = %d\\) → \\(x = \\pm \\sqrt{%d} = \\pm %d\\)", k*k, k*k, k),
+			Facts:       map[string]string{"k2": strconv.Itoa(k * k), "k": strconv.Itoa(k)},
+		}
+	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: \\(x^{2} - %d = 0\\)", k*k),
+		Question:    fmt.Sprintf("Solve: \\(x^{2} = %d\\)", k*k),
 		Answer:      fmt.Sprintf("%d,%d", k, -k),
-		Explanation: fmt.Sprintf("\\(x^{2} = %d\\) → \\(x = \\pm \\sqrt{%d} = \\pm %d\\)", k*k, k*k, k),
+		Explanation: fmt.Sprintf("Taking the square root of both sides gives \\(x = \\pm %d\\), and %d is a perfect square, so both roots are integers.", k, k*k),
 		Facts:       map[string]string{"k2": strconv.Itoa(k * k), "k": strconv.Itoa(k)},
 	}
 }
@@ -1871,13 +1940,33 @@ func (g *quadIncompleteGen) Generate(ctx generator.GeneratorContext) generator.P
 type quadParametricGen struct{}
 
 func (g *quadParametricGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	p := rand.Intn(5) + 1
+	p := rand.Intn(29) + 2
 	k := 2 * p
-	return generator.Problem{
-		Question:    fmt.Sprintf("For what positive value of \\(k\\) does \\(x^{2} + kx + %d = 0\\) have exactly one solution?", p*p),
-		Answer:      strconv.Itoa(k),
-		Explanation: fmt.Sprintf("Exactly one solution means the discriminant is zero: \\(k^{2} - 4(%d) = 0\\), so \\(k^{2} = %d\\) and the positive value is \\(k = %d\\).", p*p, k*k, k),
-		Facts:       map[string]string{"coef": strconv.Itoa(k), "const": strconv.Itoa(p * p), "k": strconv.Itoa(k)},
+	// Three ways of asking the same discriminant condition, so the answer set is
+	// not one number per parameter: k from the constant, the constant from k, and
+	// the negative middle coefficient.
+	switch rand.Intn(3) {
+	case 0:
+		return generator.Problem{
+			Question:    fmt.Sprintf("For what positive value of \\(k\\) does \\(x^{2} + kx + %d = 0\\) have exactly one solution?", p*p),
+			Answer:      strconv.Itoa(k),
+			Explanation: fmt.Sprintf("Exactly one solution means the discriminant is zero: \\(k^{2} - 4(%d) = 0\\), so \\(k^{2} = %d\\) and the positive value is \\(k = %d\\).", p*p, k*k, k),
+			Facts:       map[string]string{"shape": "askK", "coef": strconv.Itoa(k), "const": strconv.Itoa(p * p), "k": strconv.Itoa(k), "answer": strconv.Itoa(k)},
+		}
+	case 1:
+		return generator.Problem{
+			Question:    fmt.Sprintf("For what positive value of \\(c\\) does \\(x^{2} + %dx + c = 0\\) have exactly one solution?", k),
+			Answer:      strconv.Itoa(p * p),
+			Explanation: fmt.Sprintf("The discriminant is \\(%d^{2} - 4c\\), and it must be zero: \\(4c = %d\\), so \\(c = %d\\).", k, k*k, p*p),
+			Facts:       map[string]string{"shape": "askC", "coef": strconv.Itoa(k), "const": strconv.Itoa(p * p), "k": strconv.Itoa(k), "answer": strconv.Itoa(p * p)},
+		}
+	default:
+		return generator.Problem{
+			Question:    fmt.Sprintf("For what positive value of \\(k\\) does \\(x^{2} - kx + %d = 0\\) have exactly one solution?", p*p),
+			Answer:      strconv.Itoa(k),
+			Explanation: fmt.Sprintf("The discriminant is \\(k^{2} - 4(%d)\\), which is zero when \\(k = %d\\) for the positive choice.", p*p, k),
+			Facts:       map[string]string{"shape": "askKNeg", "coef": strconv.Itoa(-k), "const": strconv.Itoa(p * p), "k": strconv.Itoa(k), "answer": strconv.Itoa(k)},
+		}
 	}
 }
 

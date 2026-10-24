@@ -254,7 +254,10 @@ func (g *crtGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type wilsonGen struct{}
 
 func (g *wilsonGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	primes := []int{5, 7, 11, 13}
+	// Any prime works: the factorial is computed modulo p rather than recalled,
+	// so the answer is derived for each draw. The list spans small primes where
+	// Wilson is checkable by hand up to 29 where it is not.
+	primes := []int{3, 5, 7, 11, 13, 17, 19, 23, 29}
 	p := primes[rand.Intn(len(primes))]
 	// (p-1)! mod p = p-1 by Wilson
 	fact := 1
@@ -418,43 +421,6 @@ func (g *pntGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
 
-type dirichletGen struct{}
-
-func (g *dirichletGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type entry struct {
-		q string
-		a string
-		e string
-	}
-	easy := []entry{
-		{"Does Dirichlet's theorem guarantee infinitely many primes ≡1 mod4? (yes/no)", "yes", "Primes ≡a mod m with gcd(a,m)=1 are infinite."},
-		{"Does arithmetic progression 3,7,11,... (≡3 mod4) have infinitely many primes? (yes/no)", "yes", "Dirichlet with a=3,m=4."},
-		{"Is progression 2,4,6,... expected to have infinitely many primes? (yes/no)", "no", "All even >2 are composite; gcd(2,2)≠1."},
-	}
-	hard := []entry{
-		{"Does Dirichlet require gcd(a,m)=1? (yes/no)", "yes", "Otherwise progression has common divisor."},
-		{"Is L(1,χ)≠0 the key non-vanishing for Dirichlet? (yes/no)", "yes", "Non-vanishing of L at 1 proves theorem."},
-		{"Does Dirichlet generalize Euclid's infinitude? (yes/no)", "yes", "Euclid is case m=1 or a=1 mod m."},
-	}
-	if rand.Intn(3) == 0 {
-		// typed production: smallest prime in a progression (unique answers).
-		prod := []entry{
-			{"What is the smallest prime ≡3 mod 4? (enter a number)", "3", "3 ≡ 3 mod 4 and 3 is prime."},
-			{"What is the smallest prime ≡1 mod 4? (enter a number)", "5", "Numbers ≡1 mod 4: 1,5,...; 5 is the first prime."},
-			{"What is the smallest prime ≡2 mod 3? (enter a number)", "2", "2 ≡ 2 mod 3 and 2 is prime."},
-		}
-		v := prod[rand.Intn(len(prod))]
-		return generator.Problem{Question: v.q, Answer: v.a, Explanation: v.e}
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
-}
-
 type sieveGen struct{}
 
 func (g *sieveGen) Generate(ctx generator.GeneratorContext) generator.Problem {
@@ -519,120 +485,6 @@ func (g *zetaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 			{"What is zeta(2)? (type like pi^2/6)", "pi^2/6", "Basel problem: zeta(2) = pi^2/6."},
 			{"What is the residue of zeta at its pole s=1? (enter a number)", "1", "Zeta has a simple pole at s=1 with residue 1."},
 			{"What is zeta(4)? (type like pi^4/90)", "pi^4/90", "zeta(4) = pi^4/90."},
-		}
-		v := prod[rand.Intn(len(prod))]
-		return generator.Problem{Question: v.q, Answer: v.a, Explanation: v.e}
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
-}
-
-type chebyshevGen struct{}
-
-func (g *chebyshevGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type entry struct {
-		q string
-		a string
-		e string
-	}
-	easy := []entry{
-		{"Is ψ(x)=∑_{n≤x}Λ(n) Chebyshev function? (yes/no)", "yes", "Von Mangoldt weight."},
-		{"Does θ(x)=∑_{p≤x}log p count primes with log weight? (yes/no)", "yes", "Chebyshev θ."},
-		{"Is PNT equivalent to ψ(x)∼x? (yes/no)", "yes", "Chebyshev form."},
-		{"Is ψ(x) the same as π(x)? (yes/no)", "no", "ψ weights prime powers by log p; π just counts primes."},
-	}
-	hard := []entry{
-		{"Does explicit formula ψ(x)=x-∑_ρ x^ρ/ρ - log(2π) hold? (yes/no)", "yes", "Over zeros of ζ."},
-		{"Is θ(x)∼x equivalent to PNT? (yes/no)", "yes", "Chebyshev equivalence."},
-		{"Does Chebyshev show π(x)≍x/log x with constants? (yes/no)", "yes", "Chebyshev bounds."},
-	}
-	if rand.Intn(3) == 0 {
-		// typed production: prime-power counts behind ψ (unique answers).
-		prod := []entry{
-			{"How many prime powers n ≤ 5 are there? (enter a number)", "4", "2,3,4,5 (primes plus 4 = 2^2)."},
-			{"How many prime powers n ≤ 10 are there? (enter a number)", "7", "2,3,4,5,7,8,9."},
-			{"How many prime powers n ≤ 15 are there? (enter a number)", "9", "2,3,4,5,7,8,9,11,13."},
-		}
-		v := prod[rand.Intn(len(prod))]
-		return generator.Problem{Question: v.q, Answer: v.a, Explanation: v.e}
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
-}
-
-type ellipticCurveGen struct{}
-
-func (g *ellipticCurveGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type entry struct {
-		q string
-		a string
-		e string
-	}
-	easy := []entry{
-		{"Is elliptic curve E: y^2=x^3+ax+b with discriminant Δ≠0? (yes/no)", "yes", "Nonsingular cubic."},
-		{"Does E have group law via chord-tangent? (yes/no)", "yes", "Points form abelian group."},
-		{"Is BSD conjecture about rank of E(Q) and L(E,1)? (yes/no)", "yes", "Birch and Swinnerton-Dyer."},
-		{"Is y^2=x^3 (a=b=0) an elliptic curve? (yes/no)", "no", "Δ = 0: the cubic has a singular cusp, so it is not elliptic."},
-	}
-	hard := []entry{
-		{"Does Hasse bound |#E(F_p)-(p+1)|≤2√p hold? (yes/no)", "yes", "Hasse-Weil."},
-		{"Is elliptic curve used in factorization (ECM) and cryptography? (yes/no)", "yes", "ECM and ECC."},
-		{"Does Mordell-Weil state E(Q) finitely generated? (yes/no)", "yes", "E(Q)≅Z^r×torsion."},
-	}
-	if rand.Intn(3) == 0 {
-		// typed production: discriminant quantity 4a^3+27b^2 (unique answers).
-		prod := []entry{
-			{"For E: y^2=x^3+1 (a=0,b=1), what is 4a^3+27b^2? (enter a number)", "27", "4(0)+27(1) = 27, so discriminant Δ = -16(27) ≠ 0."},
-			{"For E: y^2=x^3+x (a=1,b=0), what is 4a^3+27b^2? (enter a number)", "4", "4(1)+27(0) = 4, so Δ = -64 ≠ 0."},
-			{"For E: y^2=x^3+x+1 (a=1,b=1), what is 4a^3+27b^2? (enter a number)", "31", "4(1)+27(1) = 31, so Δ = -496 ≠ 0."},
-		}
-		v := prod[rand.Intn(len(prod))]
-		return generator.Problem{Question: v.q, Answer: v.a, Explanation: v.e}
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
-}
-
-type continuedFractionsGen struct{}
-
-func (g *continuedFractionsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type entry struct {
-		q string
-		a string
-		e string
-	}
-	easy := []entry{
-		{"Is continued fraction [a0;a1,a2,...] = a0+1/(a1+1/(a2+...))? (yes/no)", "yes", "Definition."},
-		{"Do convergents p_k/q_k give best rational approximations? (yes/no)", "yes", "Best approximations."},
-		{"Is √2 = [1;2,2,2,...]? (yes/no)", "yes", "Periodic for quadratic irrationals."},
-		{"Is the continued fraction of every real number finite? (yes/no)", "no", "Only rationals have finite expansions; irrationals are infinite."},
-	}
-	hard := []entry{
-		{"Does Lagrange show periodic CF ⇔ quadratic irrational? (yes/no)", "yes", "Lagrange's theorem."},
-		{"Is e = [2;1,2,1,1,4,1,1,6,...] pattern? (yes/no)", "yes", "Continued fraction for e."},
-		{"Does CF of π start [3;7,15,1,292,...]? (yes/no)", "yes", "Approximation 22/7 from first term."},
-	}
-	if rand.Intn(3) == 0 {
-		// typed production: short convergents as fractions (unique answers).
-		prod := []entry{
-			{"What fraction is [1;2]? (type like 3/2)", "3/2", "[1;2] = 1 + 1/2 = 3/2."},
-			{"What fraction is [2;2]? (type like 5/2)", "5/2", "[2;2] = 2 + 1/2 = 5/2."},
-			{"What fraction is [3;7]? (type like 22/7)", "22/7", "[3;7] = 3 + 1/7 = 22/7."},
 		}
 		v := prod[rand.Intn(len(prod))]
 		return generator.Problem{Question: v.q, Answer: v.a, Explanation: v.e}

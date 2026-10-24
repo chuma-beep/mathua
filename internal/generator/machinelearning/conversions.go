@@ -278,30 +278,35 @@ func (g *cnnConvertedGen) Generate(ctx generator.GeneratorContext) generator.Pro
 type calibrationConvertedGen struct{}
 
 func (g *calibrationConvertedGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		n1, acc1, conf1 int
-		n2, acc2, conf2 int
+	// The gap and the bin weights are drawn, and the answer is the weighted average of the
+	// gaps, so the arithmetic is exact: the weights are multiples of 20 out of 100 and the
+	// gaps are multiples of 5, which keeps the division integral.
+	gaps := []int{5, 10, 15, 20, 25}
+	confs := []int{70, 75, 80, 85, 90, 95}
+	k := rand.Intn(4) + 1 // bin one holds 20k of the 100 examples
+	n1, n2 := 20*k, 100-20*k
+	g1 := gaps[rand.Intn(len(gaps))]
+	g2 := gaps[rand.Intn(len(gaps))]
+	conf1 := confs[rand.Intn(len(confs))]
+	conf2 := confs[rand.Intn(len(confs))]
+	acc1 := conf1 - g1
+	acc2 := conf2 - g2
+	if acc1 <= 0 || acc2 <= 0 {
+		acc1, acc2 = conf1, conf2
+		g1, g2 = 0, 0
 	}
-	claims := []claim{
-		{n1: 20, acc1: 60, conf1: 80, n2: 80, acc2: 90, conf2: 85},   // 8
-		{n1: 60, acc1: 70, conf1: 80, n2: 40, acc2: 90, conf2: 80},   // 10
-		{n1: 40, acc1: 50, conf1: 70, n2: 60, acc2: 80, conf2: 60},   // 20
-		{n1: 100, acc1: 90, conf1: 95, n2: 100, acc2: 70, conf2: 75}, // 5
-	}
-	c := claims[rand.Intn(len(claims))]
-	total := c.n1 + c.n2
-	weighted := c.n1*absInt(c.acc1-c.conf1) + c.n2*absInt(c.acc2-c.conf2)
-	ece := weighted / total
+	weighted := n1*g1 + n2*g2
+	ece := weighted / 100
 	return generator.Problem{
 		Question: fmt.Sprintf("A model is checked in two confidence bins. The first holds %d examples with %d percent accuracy at %d percent confidence; the second holds %d examples with %d percent accuracy at %d percent confidence. What is the expected calibration error, in percentage points?",
-			c.n1, c.acc1, c.conf1, c.n2, c.acc2, c.conf2),
+			n1, acc1, conf1, n2, acc2, conf2),
 		Answer: fmt.Sprintf("%d", ece),
 		Explanation: fmt.Sprintf("The gaps between accuracy and confidence are %d and %d points. Weighting them by the %d and %d examples and dividing by %d gives an expected calibration error of %d points.",
-			absInt(c.acc1-c.conf1), absInt(c.acc2-c.conf2), c.n1, c.n2, total, ece),
+			g1, g2, n1, n2, n1+n2, ece),
 		Facts: map[string]string{
-			"bin_one": fmt.Sprintf("%d examples, %d accuracy, %d confidence", c.n1, c.acc1, c.conf1),
-			"bin_two": fmt.Sprintf("%d examples, %d accuracy, %d confidence", c.n2, c.acc2, c.conf2),
-			"samples": fmt.Sprintf("%d", total),
+			"bin_one": fmt.Sprintf("%d examples, %d accuracy, %d confidence", n1, acc1, conf1),
+			"bin_two": fmt.Sprintf("%d examples, %d accuracy, %d confidence", n2, acc2, conf2),
+			"samples": fmt.Sprintf("%d", n1+n2),
 			"answer":  fmt.Sprintf("%d", ece),
 		},
 	}

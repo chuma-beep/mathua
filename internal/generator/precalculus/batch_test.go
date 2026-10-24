@@ -308,29 +308,47 @@ func TestBatchResultantRecomputes(t *testing.T) {
 
 func TestBatchDecompositionMatchesTable(t *testing.T) {
 	reg := pcBatchRegistry(t)
-	want := map[string]string{
-		"square_shift": "x+1",
-		"sqrt":         "x^2+1",
-		"reciprocal":   "x-3",
-		"exp":          "2*x",
-		"cube":         "x-1",
-		"log":          "x^2",
+	kinds := map[string]bool{
+		"square_shift": true,
+		"sqrt":         true,
+		"reciprocal":   true,
+		"exp":          true,
+		"cube":         true,
+		"log":          true,
 	}
 	seen := map[string]bool{}
 	for i := 0; i < 300; i++ {
 		p := pcBatchSample(t, reg, "precalc.func.decomposition", i)
 		kind := p.Facts["kind"]
 		seen[kind] = true
-		w, ok := want[kind]
-		if !ok {
+		if !kinds[kind] {
 			t.Fatalf("decomposition: unknown kind %q", kind)
 		}
-		if p.Answer != w {
-			t.Fatalf("decomposition: kind %s answers %q, want %q", kind, p.Answer, w)
+		var want string
+		switch kind {
+		case "square_shift", "cube", "reciprocal":
+			a, err := strconv.Atoi(p.Facts["a"])
+			if err != nil {
+				t.Fatalf("decomposition: %s has a non-numeric shift %q", kind, p.Facts["a"])
+			}
+			if a >= 0 {
+				want = "x+" + strconv.Itoa(a)
+			} else {
+				want = "x-" + strconv.Itoa(-a)
+			}
+		case "sqrt":
+			want = "x^2+" + p.Facts["a"]
+		case "exp":
+			want = p.Facts["k"] + "*x"
+		case "log":
+			want = "x^" + p.Facts["k"]
+		}
+		if p.Answer != want {
+			t.Fatalf("decomposition: kind %s answers %q, want %q", kind, p.Answer, want)
 		}
 	}
-	if len(seen) != len(want) {
-		t.Fatalf("decomposition: expected all %d kinds, saw %v", len(want), seen)
+	if len(seen) != len(kinds) {
+		t.Fatalf("decomposition: expected all %d kinds, saw %v", len(kinds), seen)
 	}
 }
 

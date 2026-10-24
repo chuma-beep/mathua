@@ -150,17 +150,22 @@ func (g *polarAreaGen) Generate(ctx generator.GeneratorContext) generator.Proble
 type polarSlopeGen struct{}
 
 func (g *polarSlopeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	// r = a is a circle: dy/dx = -cot(theta), which is -1, 1 or 0 at these angles.
-	type entry struct {
-		label string
-		value int
+	// r = 5 is a circle: dy/dx = -cot(theta). Choosing theta with tan(theta) = b/a
+	// from a Pythagorean triple keeps the slope an exact decimal while varying the
+	// angle.
+	pairs := [][2]int{{1, 1}, {3, 4}, {4, 3}, {5, 12}, {12, 5}, {8, 15}, {15, 8}, {7, 24}, {24, 7}}
+	p := pairs[rand.Intn(len(pairs))]
+	a, b := p[0], p[1]
+	if rand.Intn(2) == 0 {
+		a, b = -a, -b
 	}
-	angles := []entry{{"\\pi/4", -1}, {"3\\pi/4", 1}, {"\\pi/2", 0}, {"5\\pi/4", -1}}
-	e := angles[rand.Intn(len(angles))]
+	value := -float64(a) / float64(b)
+	answer := decimal(value, 4)
 	return generator.Problem{
-		Question:    fmt.Sprintf("The curve \\(r = 5\\) is a circle in polar coordinates. Find \\(\\frac{dy}{dx}\\) at \\(\\theta = %s\\).", e.label),
-		Answer:      fmt.Sprintf("%d", e.value),
-		Explanation: fmt.Sprintf("For a polar curve, dy/dx is (r' sin t + r cos t)/(r' cos t - r sin t). With r constant its derivative is zero, leaving -cot t, and at this angle that is %d. That agrees with the tangent to the circle at that point.", e.value),
-		Facts:       map[string]string{"slope": fmt.Sprintf("%d", e.value)},
+		Question: fmt.Sprintf("The curve \\(r = 5\\) is a circle in polar coordinates. Find \\(\\frac{dy}{dx}\\) at \\(\\theta\\) where \\(\\tan\\theta = %d/%d\\). (enter a decimal)", b, a),
+		Answer:   answer,
+		Explanation: fmt.Sprintf("For a polar curve, dy/dx is (r' sin t + r cos t)/(r' cos t - r sin t). With r constant its derivative is zero, leaving -cot t = -%d/%d = %s. That agrees with the tangent to the circle at that point.",
+			a, b, answer),
+		Facts: map[string]string{"slope": answer},
 	}
 }

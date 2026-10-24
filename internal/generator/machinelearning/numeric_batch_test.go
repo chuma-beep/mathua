@@ -6,6 +6,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"unicode"
 
 	"github.com/chuma-beep/mathua/internal/generator"
 )
@@ -146,9 +147,10 @@ func TestMLBatchAnswerIsNotReadableOffTheQuestion(t *testing.T) {
 	cases := []struct {
 		id       string
 		excluded []string
+		token    bool
 	}{
-		{"ml.linreg.least_squares", []string{"b", "y1", "y2"}},
-		{"ml.linreg.predict", []string{"m", "x"}},
+		{"ml.linreg.least_squares", []string{"b", "y1", "y2"}, true},
+		{"ml.linreg.predict", []string{"m", "x"}, false},
 	}
 	reg := testMLRegistry(t)
 	for _, c := range cases {
@@ -164,6 +166,12 @@ func TestMLBatchAnswerIsNotReadableOffTheQuestion(t *testing.T) {
 				if p.Facts[key] == p.Answer {
 					t.Fatalf("%s: fact %s = %s is the answer itself: %s", c.id, key, p.Answer, p.Question)
 				}
+			}
+			// A printed coordinate equal to the negative of the answer repeats it
+			// as a token: the answer 10 beside the point (1, -10) is readable off
+			// the stem even though no coordinate equals 10.
+			if c.token && len(p.Answer) >= 2 && stemHasToken(p.Question, p.Answer) {
+				t.Fatalf("%s: answer %s appears as a token in the stem: %s", c.id, p.Answer, p.Question)
 			}
 		}
 	}
@@ -188,4 +196,18 @@ func TestMLBatchVarianceAnswersVary(t *testing.T) {
 	if len(seen) < 40 {
 		t.Fatalf("explained-variance serves only %d distinct answers at full difficulty, want at least 40", len(seen))
 	}
+}
+
+// stemHasToken reports whether token appears in stem as a whole alphanumeric
+// token, so that a minus sign or a surrounding delimiter cannot hide it.
+func stemHasToken(stem, token string) bool {
+	fields := strings.FieldsFunc(stem, func(r rune) bool {
+		return !unicode.IsLetter(r) && !unicode.IsDigit(r)
+	})
+	for _, f := range fields {
+		if f == token {
+			return true
+		}
+	}
+	return false
 }

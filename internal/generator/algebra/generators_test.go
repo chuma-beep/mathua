@@ -75,27 +75,60 @@ func TestIrrationalFuncGen(t *testing.T) { fuzzGen(t, &irrationalFuncGen{}) }
 // and the equation had no k in it. The answer was unrelated to the printed
 // quadratic as well. This pins the equation a learner reads against the answer.
 func TestQuadParametricAsksForAParameterItPrints(t *testing.T) {
+	// The generator asks the same discriminant condition three ways. Each shape
+	// must print the quantity it asks for, and the facts must agree with the
+	// answer, so the check switches on the recorded shape instead of assuming
+	// one of them.
 	for i := 0; i < 100; i++ {
 		p := (&quadParametricGen{}).Generate(generator.GeneratorContext{})
-		if !strings.Contains(p.Question, "kx") {
-			t.Fatalf("question does not print the parameter it asks for: %q", p.Question)
-		}
-		k, err := strconv.Atoi(p.Answer)
-		if err != nil {
-			t.Fatalf("answer %q is not an integer", p.Answer)
-		}
-		c, err := strconv.Atoi(p.Facts["const"])
+		constant, err := strconv.Atoi(p.Facts["const"])
 		if err != nil {
 			t.Fatalf("const fact %q is not an integer", p.Facts["const"])
 		}
-		if k*k != 4*c {
-			t.Fatalf("k=%d gives discriminant %d for x^2 + kx + %d, want zero", k, k*k-4*c, c)
+		answer, err := strconv.Atoi(p.Answer)
+		if err != nil {
+			t.Fatalf("answer %q is not an integer", p.Answer)
 		}
-		if p.Facts["k"] != p.Answer || p.Facts["coef"] != p.Answer {
-			t.Fatalf("facts disagree with the answer: %v", p.Facts)
+		if _, err := strconv.Atoi(p.Facts["coef"]); err != nil {
+			t.Fatalf("coef fact %q is not an integer", p.Facts["coef"])
 		}
-		if !strings.Contains(p.Question, strconv.Itoa(c)) {
-			t.Fatalf("constant %d is not printed in %q", c, p.Question)
+		switch p.Facts["shape"] {
+		case "askK":
+			if !strings.Contains(p.Question, "kx") {
+				t.Fatalf("question does not print the parameter it asks for: %q", p.Question)
+			}
+			if answer*answer != 4*constant {
+				t.Fatalf("k=%d gives discriminant %d for x^2 + kx + %d, want zero", answer, answer*answer-4*constant, constant)
+			}
+			if p.Facts["coef"] != p.Answer || p.Facts["k"] != p.Answer {
+				t.Fatalf("facts disagree with the answer: %v", p.Facts)
+			}
+			if !strings.Contains(p.Question, strconv.Itoa(constant)) {
+				t.Fatalf("constant %d is not printed in %q", constant, p.Question)
+			}
+		case "askC":
+			if !strings.Contains(p.Question, p.Facts["coef"]+"x") {
+				t.Fatalf("middle coefficient is not printed in %q", p.Question)
+			}
+			if p.Answer != p.Facts["const"] {
+				t.Fatalf("answer %q is not the constant %q", p.Answer, p.Facts["const"])
+			}
+			coef, _ := strconv.Atoi(p.Facts["coef"])
+			if coef*coef != 4*answer {
+				t.Fatalf("coef=%d gives discriminant %d for x^2 + %dx + c, want zero", coef, coef*coef-4*answer, coef)
+			}
+		case "askKNeg":
+			if !strings.Contains(p.Question, "- kx") {
+				t.Fatalf("question does not print the negative parameter it asks for: %q", p.Question)
+			}
+			if answer*answer != 4*constant {
+				t.Fatalf("k=%d gives discriminant %d for x^2 - kx + %d, want zero", answer, answer*answer-4*constant, constant)
+			}
+			if p.Facts["coef"] != "-"+p.Answer {
+				t.Fatalf("coef fact %q is not the negative of the answer %q", p.Facts["coef"], p.Answer)
+			}
+		default:
+			t.Fatalf("unknown shape %q", p.Facts["shape"])
 		}
 	}
 }

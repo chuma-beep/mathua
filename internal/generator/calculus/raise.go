@@ -499,14 +499,31 @@ func (g *dirichletTestGen) Generate(ctx generator.GeneratorContext) generator.Pr
 type gammaFunctionGen struct{}
 
 func (g *gammaFunctionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	n := 4 + rand.Intn(5) // 4..8
+	n := randRange(ctx.Difficulty, 3, 13)
+	switch rand.Intn(3) {
+	case 0:
+		// The recurrence is the idea; the factorial is the computation.
+		return generator.Problem{
+			Question:    fmt.Sprintf("Use \\(\\Gamma(n+1)=n\\Gamma(n)\\). What is \\(\\Gamma(%d)/\\Gamma(%d)\\)?", n+1, n),
+			Answer:      strconv.Itoa(n),
+			Explanation: fmt.Sprintf("\\(\\Gamma(%d)=%d\\,\\Gamma(%d)\\), so the ratio is %d.", n+1, n, n, n),
+			Facts:       map[string]string{"n": strconv.Itoa(n), "shape": "ratio1"},
+		}
+	case 1:
+		return generator.Problem{
+			Question:    fmt.Sprintf("Use \\(\\Gamma(n+1)=n\\Gamma(n)\\) twice. What is \\(\\Gamma(%d)/\\Gamma(%d)\\)?", n+2, n),
+			Answer:      strconv.Itoa(n * (n + 1)),
+			Explanation: fmt.Sprintf("\\(\\Gamma(%d)=(%d)(%d)\\Gamma(%d)\\), so the ratio is %d × %d = %d.", n+2, n+1, n, n, n+1, n, n*(n+1)),
+			Facts:       map[string]string{"n": strconv.Itoa(n), "shape": "ratio2"},
+		}
+	}
 	value := calcFact(n - 1)
 	answer := strconv.Itoa(value)
 	return generator.Problem{
-		Question:    fmt.Sprintf("The gamma function satisfies \\(\\Gamma(n) = (n-1)!\\) for positive integers. What is \\(\\Gamma(%d)\\)? (enter a number)", n),
+		Question:    fmt.Sprintf("The gamma function satisfies \\(\\Gamma(n) = (n-1)!\\) for positive integers. What is \\(\\Gamma(%d)\\)?", n),
 		Answer:      answer,
 		Explanation: fmt.Sprintf("\\(\\Gamma(%d) = %d! = %d\\).", n, n-1, value),
-		Facts:       map[string]string{"n": strconv.Itoa(n), "value": answer},
+		Facts:       map[string]string{"n": strconv.Itoa(n), "value": answer, "shape": "factorial"},
 	}
 }
 
@@ -615,7 +632,7 @@ func (g *consumerSurplusGen) Generate(ctx generator.GeneratorContext) generator.
 type fourierCoefficientsGen struct{}
 
 func (g *fourierCoefficientsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	n := 1 + rand.Intn(4) // 1..4
+	n := randRange(ctx.Difficulty, 1, 2+int(ctx.Difficulty*8)) // 1..10 at full difficulty
 	sign := 1.0
 	if n%2 == 0 {
 		sign = -1.0
@@ -766,17 +783,23 @@ func (g *eulerHomogeneousGen) Generate(ctx generator.GeneratorContext) generator
 type lineScalarGen struct{}
 
 func (g *lineScalarGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type segment struct{ a, b, length int }
-	segments := []segment{{3, 4, 5}, {6, 8, 10}, {8, 15, 17}, {5, 12, 13}}
-	s := segments[rand.Intn(len(segments))]
-	value := float64(s.a*s.length) / 2
+	// Primitive Pythagorean triples from m > n, scaled, so the segment length is a
+	// whole number and the integral stays exact.
+	m := randRange(ctx.Difficulty, 2, 4+int(ctx.Difficulty*4))
+	n := randRange(ctx.Difficulty, 1, m-1)
+	a := m*m - n*n
+	b := 2 * m * n
+	length := m*m + n*n
+	k := randRange(ctx.Difficulty, 1, 4)
+	a, b, length = k*a, k*b, k*length
+	value := float64(a) * float64(length) / 2
 	answer := calcDec(value)
 	return generator.Problem{
-		Question: fmt.Sprintf("Let \\(C\\) be the straight segment from \\((0,0)\\) to \\((%d,%d)\\). Evaluate the scalar line integral \\(\\int_C x\\,ds\\). (enter a decimal)", s.a, s.b),
+		Question: fmt.Sprintf("Let \\(C\\) be the straight segment from \\((0,0)\\) to \\((%d,%d)\\). Evaluate the scalar line integral \\(\\int_C x\\,ds\\). (enter a decimal)", a, b),
 		Answer:   answer,
-		Explanation: fmt.Sprintf("The segment has length %d, and \\(x\\) averages \\(%d/2\\) along it, so \\(\\int_C x\\,ds = %d \\cdot %d/2 = %s\\).",
-			s.length, s.a, s.length, s.a, answer),
-		Facts: map[string]string{"a": strconv.Itoa(s.a), "b": strconv.Itoa(s.b), "length": strconv.Itoa(s.length), "answer": answer},
+		Explanation: fmt.Sprintf("The segment has length %d, and x averages %s along it, so the integral is %d times %s = %s.",
+			length, decimal(float64(a)/2, 2), length, decimal(float64(a)/2, 2), answer),
+		Facts: map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "length": strconv.Itoa(length), "answer": answer},
 	}
 }
 

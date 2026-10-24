@@ -217,20 +217,18 @@ func (g *contrapositiveGen) Generate(ctx generator.GeneratorContext) generator.P
 type counterexampleGen struct{}
 
 func (g *counterexampleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	cs := []int{11, 17, 41}
-	c := cs[rand.Intn(len(cs))]
-	// The answer is found by scanning, not assumed: Euler's polynomials are famous for long prime
-	// runs and it is the scan that establishes where the run ends.
-	// The run always ends at c-1, because f(c-1) = c^2 for f(n) = n^2 + n + c. The scan finds it
-	// and TestBatchCounterexampleIsMinimal re-derives the minimality from the published facts, so a
-	// constant that broke the pattern would fail a test rather than ship a wrong answer.
-	n := c - 1
-	for k := 1; k <= c-1; k++ {
-		if !isPrime(k*k + k + c) {
-			n = k
-			break
+	// The constants are found by scanning rather than chosen by hand: any c whose
+	// polynomial n^2 + n + c stays prime for at least two steps makes the question
+	// meaningful, and the run length is re-derived for the constant that was drawn, so a
+	// wrong constant cannot ship a wrong answer.
+	candidates := make([]int, 0, 16)
+	for c := 2; c <= 200; c++ {
+		if runLength(c) >= 2 {
+			candidates = append(candidates, c)
 		}
 	}
+	c := candidates[rand.Intn(len(candidates))]
+	n := runLength(c)
 	value := n*n + n + c
 	f1 := 0
 	for d := 2; d*d <= value; d++ {
@@ -239,19 +237,37 @@ func (g *counterexampleGen) Generate(ctx generator.GeneratorContext) generator.P
 			break
 		}
 	}
-	q := fmt.Sprintf("Let f(n) = n\u00b2 + n + %d. Find the smallest positive integer n for which f(n) is not prime.", c)
 	p := generator.Problem{
-		Question: q,
-		Answer:   strconv.Itoa(n),
 		Facts: map[string]string{
 			"c": strconv.Itoa(c), "n": strconv.Itoa(n), "value": strconv.Itoa(value),
 			"factor1": strconv.Itoa(f1), "factor2": strconv.Itoa(value / f1),
 			"last_prime": strconv.Itoa(n - 1),
 		},
 	}
+	switch rand.Intn(3) {
+	case 0:
+		p.Question = fmt.Sprintf("Let f(n) = n\u00b2 + n + %d. Find the smallest positive integer n for which f(n) is not prime.", c)
+		p.Answer = strconv.Itoa(n)
+	case 1:
+		p.Question = fmt.Sprintf("For how many consecutive values of n, starting at n = 0, is f(n) = n\u00b2 + n + %d prime?", c)
+		p.Answer = strconv.Itoa(n)
+	default:
+		p.Question = fmt.Sprintf("Let f(n) = n\u00b2 + n + %d. What is the value of f(n) at the smallest n for which f(n) is not prime?", c)
+		p.Answer = strconv.Itoa(value)
+	}
 	p.Explanation = fmt.Sprintf("f(%d) = %d = %d \u00b7 %d, which is composite, and f(n) is prime for every n from 0 to %d.",
 		n, value, f1, value/f1, n-1)
 	return p
+}
+
+// runLength is the number of consecutive primes produced by f(n) = n^2 + n + c
+// starting at n = 0. It is the smallest n at which f(n) is composite.
+func runLength(c int) int {
+	n := 0
+	for isPrime(n*n + n + c) {
+		n++
+	}
+	return n
 }
 
 // ----- 6. structural induction -----
@@ -317,7 +333,10 @@ func (g *powersetGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type partialOrderGen struct{}
 
 func (g *partialOrderGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	ns := []int{12, 18, 20, 30}
+	// The pair count is computed from the divisors of N, so any N is a valid
+	// draw. Twelve values replace the original four, and they differ in the
+	// number of divisors rather than only in the numeral.
+	ns := []int{12, 18, 20, 24, 28, 30, 36, 40, 42, 45, 48, 60}
 	N := ns[rand.Intn(len(ns))]
 	ds := divisors(N)
 	count := 0
@@ -489,21 +508,36 @@ func (g *planarGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type cayleyGen struct{}
 
 func (g *cayleyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	n := 3 + rand.Intn(5) // 3..7
+	n := 3 + rand.Intn(8)
 	value := 1
 	for i := 0; i < n-2; i++ {
 		value *= n
 	}
-	q := fmt.Sprintf("How many labelled trees are there on %d given vertices?", n)
-	p := generator.Problem{
-		Question: q,
-		Answer:   strconv.Itoa(value),
-		Facts: map[string]string{
-			"n": strconv.Itoa(n), "exponent": strconv.Itoa(n - 2), "value": strconv.Itoa(value),
-		},
+	answer := strconv.Itoa(value)
+	facts := map[string]string{"n": strconv.Itoa(n), "exponent": strconv.Itoa(n - 2), "value": answer}
+	switch rand.Intn(3) {
+	case 0:
+		return generator.Problem{
+			Question:    fmt.Sprintf("How many labelled trees are there on %d given vertices?", n),
+			Answer:      answer,
+			Explanation: fmt.Sprintf("Cayley's formula gives n^(n-2) labelled trees on n vertices: %d^%d = %d.", n, n-2, value),
+			Facts:       facts,
+		}
+	case 1:
+		return generator.Problem{
+			Question:    fmt.Sprintf("How many distinct Pruefer sequences of length %d are there over an alphabet of %d symbols?", n-2, n),
+			Answer:      answer,
+			Explanation: fmt.Sprintf("Each position holds one of %d symbols, so the count is %d^%d = %d. Pruefer sequences are in bijection with labelled trees, which is why the two counts agree.", n, n, n-2, value),
+			Facts:       facts,
+		}
+	default:
+		return generator.Problem{
+			Question:    fmt.Sprintf("Cayley's formula says the number of labelled trees on n vertices is n^(n-2). For n = %d, what exponent appears?", n),
+			Answer:      strconv.Itoa(n - 2),
+			Explanation: fmt.Sprintf("Substituting n = %d gives the exponent %d - 2 = %d, so there are %d labelled trees.", n, n, n-2, value),
+			Facts:       facts,
+		}
 	}
-	p.Explanation = fmt.Sprintf("Cayley's formula gives n^(n-2) labelled trees on n vertices: %d^%d = %d.", n, n-2, value)
-	return p
 }
 
 // ----- 14. degree sequence -----

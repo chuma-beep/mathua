@@ -517,124 +517,6 @@ func (g *argumentGen) Generate(ctx generator.GeneratorContext) generator.Problem
 	}
 }
 
-type eulerIdentityGen struct{}
-
-func (g *eulerIdentityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type entry struct {
-		q string
-		a string
-		e string
-	}
-	tableEasy := []entry{
-		{"What is \\(e^{i\\pi} + 1\\)? (enter a number)", "0", "Euler's identity: e^{iπ} + 1 = 0."},
-		{"What is \\(e^{i\\pi}\\)?", "-1", "Euler's identity: e^{iπ} = -1."},
-		{"Does \\(e^{i\\pi} = -1\\) hold? (yes/no)", "yes", "Yes, Euler's identity gives e^{iπ} = cos π + i sin π = -1."},
-		{"What is \\(e^{i\\pi/2}\\)?", "i", "e^{iπ/2} = cos(π/2) + i sin(π/2) = i."},
-		{"Is \\(e^{i\\pi} = 1\\)? (yes/no)", "no", "e^{iπ} = -1, not 1."},
-	}
-	tableHard := []entry{
-		{"What is \\(e^{2i\\pi}\\)?", "1", "Full turn: cos(2π) + i sin(2π) = 1."},
-		{"What is \\(|e^{i\\theta}|\\) for real \\(\\theta\\)? (enter a number)", "1", "e^{iθ} lies on the unit circle, so its modulus is 1."},
-		{"Does \\(e^{i\\theta}\\) stay on the unit circle for real \\(\\theta\\)? (yes/no)", "yes", "|e^{iθ}| = 1 for all real θ."},
-	}
-	pool := tableEasy
-	if scale > 3 {
-		pool = append(tableEasy, tableHard...)
-	}
-	t := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: t.q, Answer: t.a, Explanation: t.e}
-}
-
-type cauchyRiemannGen struct{}
-
-func (g *cauchyRiemannGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type qa struct {
-		q string
-		a string
-		e string
-	}
-	tableEasy := []qa{
-		{q: "For \\(f(z)=z^{2}\\) with \\(u=x^{2}-y^{2}\\), what is \\(u_{x}\\) at \\((1,1)\\)? (enter a number)", a: "2", e: "u_x = 2x, so at (1,1) it is 2."},
-		{q: "For \\(f(z)=\\bar{z}\\) with \\(u=x\\), what is \\(u_{x}\\)? (enter a number)", a: "1", e: "u = x differentiates to u_x = 1."},
-		{q: "For \\(f(z)=z^{2}\\), do the Cauchy-Riemann equations hold everywhere? (yes/no)", a: "yes", e: "f(z)=z² is entire; u=x²-y², v=2xy satisfy u_x=v_y and u_y=-v_x everywhere."},
-		{q: "For \\(f(z)=\\bar{z}\\), do the Cauchy-Riemann equations hold? (yes/no)", a: "no", e: "f(z)=x-iy has u_x=1, v_y=-1, so u_x≠v_y; not analytic anywhere."},
-		{q: "If \\(f\\) is analytic, must \\(u_x = v_y\\) hold? (yes/no)", a: "yes", e: "This is the first Cauchy-Riemann equation characterizing analytic functions."},
-		{q: "For \\(f(z)=z\\) with \\(v=y\\), what is \\(v_{y}\\)? (enter a number)", a: "1", e: "v = y differentiates to v_y = 1."},
-	}
-	tableHard := []qa{
-		{q: "For \\(f(z)=e^{z}\\) with \\(u=e^{x}\\cos y\\), what is \\(u_{x}\\) at \\((0,0)\\)? (enter a number)", a: "1", e: "u_x = e^x cos y, so at (0,0) it is 1."},
-		{q: "For \\(f(z)=|z|^{2}\\) with \\(u=x^{2}+y^{2}\\), do CR hold at \\((1,0)\\)? (yes/no)", a: "no", e: "u_x = 2x = 2 but v_y = 0 there, so u_x≠v_y."},
-		{q: "Does analyticity on a domain imply CR at every point of it? (yes/no)", a: "yes", e: "Analytic functions satisfy CR everywhere in their domain."},
-	}
-	pool := tableEasy
-	if scale > 3 {
-		pool = append(tableEasy, tableHard...)
-	}
-	t := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: t.q, Answer: t.a, Explanation: t.e}
-}
-
-type residueGen struct{}
-
-func (g *residueGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type qa struct {
-		q string
-		a string
-		e string
-	}
-	tableEasy := []qa{
-		{q: "For \\(f(z)=1/z\\), what is \\(\\operatorname{Res}(f,0)\\)? (enter a number)", a: "1", e: "The Laurent coefficient of 1/z at 0 is 1, so Res(f,0)=1."},
-		{q: "If \\(f\\) has a simple pole at \\(z_0\\) with numerator \\(g(z_0)\\neq0\\), is \\(\\operatorname{Res}(f,z_0)=g(z_0)/h'(z_0)\\) when \\(f=g/h\\)? (yes/no)", a: "yes", e: "For a simple pole, Res = g(z₀)/h'(z₀)."},
-		{q: "Does \\(\\oint_C f(z)dz = 2\\pi i \\sum \\operatorname{Res}(f, z_k)\\) hold for \\(f\\) analytic inside \\(C\\) except at poles? (yes/no)", a: "yes", e: "This is the residue theorem."},
-		{q: "For \\(f(z)=1/z^{2}\\), what is \\(\\operatorname{Res}(f,0)\\)? (enter a number)", a: "0", e: "The coefficient of 1/z in 1/z² is 0."},
-		{q: "Is the residue of \\(1/z\\) at 0 equal to 0? (yes/no)", a: "no", e: "The residue is 1, the coefficient of 1/z."},
-	}
-	tableHard := []qa{
-		{q: "For \\(f(z)=e^{z}/z\\), what is \\(\\operatorname{Res}(f,0)\\)? (enter a number)", a: "1", e: "e^z/z = 1/z + 1 + ..., so a_{-1} = 1."},
-		{q: "For \\(f(z)=1/(z(z-1))\\), what is \\(\\operatorname{Res}(f,0)\\)? (enter a number)", a: "-1", e: "Simple pole with h(z)=z(z-1), h'(0)=-1, so Res = 1/(-1) = -1."},
-		{q: "Is the sum of all residues of a rational function on the sphere 0? (yes/no)", a: "yes", e: "Residues including infinity sum to zero."},
-	}
-	pool := tableEasy
-	if scale > 3 {
-		pool = append(tableEasy, tableHard...)
-	}
-	t := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: t.q, Answer: t.a, Explanation: t.e}
-}
-
-type analyticGen struct{}
-
-func (g *analyticGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type qa struct {
-		q string
-		a string
-		e string
-	}
-	easy := []qa{
-		{q: "Is f(z)=z^2 analytic everywhere? (yes/no)", a: "yes", e: "Polynomials are entire; CR holds everywhere."},
-		{q: "Is f(z)=conj(z) analytic anywhere? (yes/no)", a: "no", e: "Conjugate fails CR everywhere."},
-		{q: "For f(z)=z^2, what is f'(0)? (enter a number)", a: "0", e: "f'(z)=2z, so f'(0)=0."},
-		{q: "For f(z)=2z+1, what is f'(0)? (enter a number)", a: "2", e: "f'(z)=2 everywhere, so f'(0)=2."},
-		{q: "Does analytic imply continuous? (yes/no)", a: "yes", e: "Differentiable implies continuous."},
-		{q: "For f(z)=z^3, what is f'(1)? (enter a number)", a: "3", e: "f'(z)=3z^2, so f'(1)=3."},
-	}
-	hard := []qa{
-		{q: "Is f(z)=|z|^2 analytic only at 0? (yes/no)", a: "yes", e: "CR only at origin for |z|^2."},
-		{q: "Does analytic on domain imply infinitely differentiable? (yes/no)", a: "yes", e: "Complex analytic ⇒ holomorphic ⇒ C∞."},
-		{q: "Is Liouville's theorem: bounded entire ⇒ constant? (yes/no)", a: "yes", e: "Bounded entire functions are constant."},
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
-}
-
 type laurentGen struct{}
 
 func (g *laurentGen) Generate(ctx generator.GeneratorContext) generator.Problem {
@@ -694,36 +576,6 @@ func (g *contourGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
 
-type harmonicGen struct{}
-
-func (g *harmonicGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type qa struct {
-		q string
-		a string
-		e string
-	}
-	easy := []qa{
-		{q: "For u=x^2-y^2, what is u_xx? (enter a number)", a: "2", e: "u_x=2x, so u_xx=2."},
-		{q: "For u=xy, what is the Laplacian u_xx+u_yy? (enter a number)", a: "0", e: "u_xx=0 and u_yy=0, so the sum is 0."},
-		{q: "Is the real part of an analytic function harmonic? (yes/no)", a: "yes", e: "u = Re f satisfies Laplace Δu=0 via CR."},
-		{q: "Is u=x^3 harmonic? (yes/no)", a: "no", e: "u_xx=6x and u_yy=0; the sum 6x is not identically 0."},
-		{q: "Is a constant function harmonic? (yes/no)", a: "yes", e: "Δc=0."},
-		{q: "For u=2xy, what is u_xy? (enter a number)", a: "2", e: "u_x=2y, so u_xy=2."},
-	}
-	hard := []qa{
-		{q: "Does harmonic conjugate v exist locally for harmonic u? (yes/no)", a: "yes", e: "On simply connected domain, harmonic has conjugate making u+iv analytic."},
-		{q: "Does maximum principle hold: harmonic non-constant has no interior max? (yes/no)", a: "yes", e: "Interior max forces constancy."},
-		{q: "Is Poisson integral formula for harmonic on disk? (yes/no)", a: "yes", e: "Harmonic extension of boundary values."},
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
-}
-
 type riemannSphereGen struct{}
 
 func (g *riemannSphereGen) Generate(ctx generator.GeneratorContext) generator.Problem {
@@ -745,36 +597,6 @@ func (g *riemannSphereGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		{q: "Is meromorphic on sphere = rational function? (yes/no)", a: "yes", e: "Meromorphic on compact sphere must be rational."},
 		{q: "Does Möbius transformation correspond to rotation of sphere? (yes/no)", a: "yes", e: "Automorphisms of sphere are Möbius."},
 		{q: "Is ∞ a point where 1/z has a pole? (yes/no)", a: "yes", e: "Behaviour at ∞ via chart w=1/z."},
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
-}
-
-type conformalGen struct{}
-
-func (g *conformalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type qa struct {
-		q string
-		a string
-		e string
-	}
-	easy := []qa{
-		{q: "For w=z^2, what is w'(1)? (enter a number)", a: "2", e: "w'=2z, so w'(1)=2."},
-		{q: "For w=e^z, what is w'(0)? (enter a number)", a: "1", e: "w'=e^z, so w'(0)=1."},
-		{q: "Is w=z^2 conformal at 0? (yes/no)", a: "no", e: "w'(0)=0 doubles angles there, so not conformal at 0."},
-		{q: "Is a Mobius transformation conformal? (yes/no)", a: "yes", e: "Mobius analytic with nonzero derivative."},
-		{q: "Is a conformal map angle-preserving where f' is nonzero? (yes/no)", a: "yes", e: "Analytic with nonzero derivative preserves angles."},
-		{q: "For w=3z, what is w'(2)? (enter a number)", a: "3", e: "w'=3 everywhere, so w'(2)=3."},
-	}
-	hard := []qa{
-		{q: "Does Riemann mapping map simply connected domain to unit disk conformally? (yes/no)", a: "yes", e: "Riemann mapping theorem."},
-		{q: "Is conformal at point equivalent to complex differentiable with nonzero derivative? (yes/no)", a: "yes", e: "Definition."},
-		{q: "Does conformal preserve orientation? (yes/no)", a: "yes", e: "Positive Jacobian."},
 	}
 	pool := easy
 	if scale > 3 {
@@ -833,65 +655,6 @@ func (g *powerSeriesGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		{q: "Is power series of e^z entire (radius ∞)? (yes/no)", a: "yes", e: "No finite singularity."},
 		{q: "Does Hadamard formula give 1/R=limsup |a_n|^{1/n}? (yes/no)", a: "yes", e: "Root test."},
 		{q: "Is analytic continuation possible beyond disk via overlapping disks? (yes/no)", a: "yes", e: "Analytic continuation."},
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
-}
-
-type mobiusTransformGen struct{}
-
-func (g *mobiusTransformGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type qa struct {
-		q string
-		a string
-		e string
-	}
-	easy := []qa{
-		{q: "For w=(z-1)/(z+1), what is w(1)? (enter a number)", a: "0", e: "(1-1)/(1+1)=0."},
-		{q: "For w=1/z, what is w(-1)? (enter a number)", a: "-1", e: "1/(-1)=-1."},
-		{q: "Is w=1/z a Mobius transformation? (yes/no)", a: "yes", e: "a=0,b=1,c=1,d=0 with ad-bc=-1."},
-		{q: "Is a Mobius map fixed by prescribing images of only 2 points? (yes/no)", a: "no", e: "Three points are needed; the action is 3-transitive."},
-		{q: "Does a Mobius map send circles and lines to circles and lines? (yes/no)", a: "yes", e: "Circle-preserving on the sphere."},
-		{q: "For w=2z, what is w(3)? (enter a number)", a: "6", e: "2 times 3 is 6."},
-	}
-	hard := []qa{
-		{q: "Does group of Möbius is PSL(2,C)? (yes/no)", a: "yes", e: "Projective linear group."},
-		{q: "Can any 3 points be mapped to 0,1,∞ by Möbius? (yes/no)", a: "yes", e: "3-transitive."},
-		{q: "Is w=1/z Möbius? (yes/no)", a: "yes", e: "a=0,b=1,c=1,d=0."},
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
-}
-
-type schwarzLemmaGen struct{}
-
-func (g *schwarzLemmaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type qa struct {
-		q string
-		a string
-		e string
-	}
-	easy := []qa{
-		{q: "For f(z)=z/2 on the unit disk, what is |f'(0)|? (enter a fraction like 1/2)", a: "1/2", e: "f'(z)=1/2 everywhere, so |f'(0)|=1/2."},
-		{q: "For f(z)=z^2, what is f'(0)? (enter a number)", a: "0", e: "f'(z)=2z vanishes at 0."},
-		{q: "Does Schwarz lemma give |f'(0)| at most 1 when f(0)=0 and |f| at most 1? (yes/no)", a: "yes", e: "Derivative bound of the lemma."},
-		{q: "Does the lemma apply when f(0)=1? (yes/no)", a: "no", e: "The hypothesis f(0)=0 fails."},
-		{q: "Does equality |f(z0)|=|z0| force a rotation? (yes/no)", a: "yes", e: "Equality case is f(z)=e^{iθ}z."},
-	}
-	hard := []qa{
-		{q: "Is Schwarz-Pick: |f(z1)-f(z2)|/|1-\\bar{f(z2)}f(z1)| ≤ |z1-z2|/|1-\\bar{z2}z1|? (yes/no)", a: "yes", e: "Invariant form."},
-		{q: "Is the extremal for |f'(0)| at most 1 attained by a rotation? (yes/no)", a: "yes", e: "Rotations give |f'(0)|=1."},
-		{q: "Is automorphisms of disk are Möbius (z-a)/(1-\\bar{a}z)? (yes/no)", a: "yes", e: "Disk automorphisms."},
 	}
 	pool := easy
 	if scale > 3 {

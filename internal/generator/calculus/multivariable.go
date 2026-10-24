@@ -45,19 +45,6 @@ func scaleMV(difficulty float64, floor, extra int) int {
 }
 
 // parametricDerivativeGen asks for dy/dx on x = t^2, y = t^3 at an even t, where it is 3t/2 = 3k.
-type parametricDerivativeGen struct{}
-
-func (g *parametricDerivativeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	k := 1 + pickMV(scaleMV(ctx.Difficulty, 2, 4))
-	t := 2 * k
-	return generator.Problem{
-		Question: fmt.Sprintf("For the curve \\(x = t^2,\\ y = t^3\\), find \\(\\frac{dy}{dx}\\) at \\(t = %d\\).", t),
-		Answer:   fmt.Sprintf("%d", 3*k),
-		Explanation: fmt.Sprintf("Divide the two derivatives: dy/dx = (dy/dt)/(dx/dt) = 3t^2/2t = 3t/2. At t = %d that is 3(%d)/2 = %d.",
-			t, t, 3*k),
-		Facts: map[string]string{"t": fmt.Sprintf("%d", t), "slope": fmt.Sprintf("%d", 3*k)},
-	}
-}
 
 // arcLengthParametricGen uses a Pythagorean direction, so the length of the segment comes out whole.
 type arcLengthParametricGen struct{}
@@ -84,18 +71,6 @@ func (g *arcLengthParametricGen) Generate(ctx generator.GeneratorContext) genera
 
 // curvatureGen asks for the curvature of y = a x^2 at the origin, where y' = 0 and so the curvature
 // is just |y”| = 2a.
-type curvatureGen struct{}
-
-func (g *curvatureGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	a := 1 + pickMV(scaleMV(ctx.Difficulty, 3, 3))
-	return generator.Problem{
-		Question: fmt.Sprintf("Find the curvature of \\(y = %dx^2\\) at \\(x = 0\\).", a),
-		Answer:   fmt.Sprintf("%d", 2*a),
-		Explanation: fmt.Sprintf("Curvature is |y''| / (1 + (y')^2)^(3/2). Here y' = %dx and y'' = %d, so at x = 0 the slope term vanishes and the curvature is %d.",
-			2*a, 2*a, 2*a),
-		Facts: map[string]string{"a": fmt.Sprintf("%d", a), "curvature": fmt.Sprintf("%d", 2*a)},
-	}
-}
 
 // lineIntegralGen integrates the field (x, y) -- the gradient of (x^2 + y^2)/2 -- along a straight
 // segment from the origin. Both offsets are even, so the potential difference is whole.

@@ -30,7 +30,10 @@ func convInt(n int) string { return strconv.Itoa(n) }
 type domainConvertedGen struct{}
 
 func (g *domainConvertedGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	k := 1 + rand.Intn(19)
+	// The shape is fixed by the authored walkthrough in data/lessons/solutions,
+	// which describes \sqrt{x - k} and names the facts k and answer, so variety
+	// comes from the shift rather than from a second family of functions.
+	k := 1 + rand.Intn(60)
 	return generator.Problem{
 		Question: fmt.Sprintf("The function \\(f(x) = \\sqrt{x - %d}\\) is defined over the reals only where the radicand is not negative. What is the smallest integer in its domain?", k),
 		Answer:   convInt(k),

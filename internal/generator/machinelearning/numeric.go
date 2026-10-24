@@ -50,8 +50,11 @@ func (g *leastSquaresGen) Generate(ctx generator.GeneratorContext) generator.Pro
 	y1 := m + b + delta
 	y2 := 2*m + b
 
-	// Ensure the slope is not read off from any coordinate: y0 != m, y1 != m, y2 != m, b != 0
-	for b == 0 || y0 == m || y1 == m || y2 == m || y0 == -m || y2 == -m {
+	// Ensure the slope is not read off from any coordinate. A printed coordinate
+	// equal to the slope, or to its negative, repeats the answer in the stem: the
+	// answer 10 next to a point (1, -10) is a leak even though no coordinate is
+	// the slope itself.
+	for b == 0 || y0 == m || y1 == m || y2 == m || y0 == -m || y1 == -m || y2 == -m {
 		b = rand.Intn(2*maxB+1) - maxB
 		delta = deltas[rand.Intn(len(deltas))]
 		y0 = b

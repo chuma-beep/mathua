@@ -609,51 +609,6 @@ func (g *expectationGen) Generate(ctx generator.GeneratorContext) generator.Prob
 // Variance by the second moment (numeric)
 // ---------------------------------------------------------------------------
 
-type varianceGen struct{}
-
-func (g *varianceGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		values  []int
-		weights []int
-		den     int
-		reason  string
-	}
-	claims := []claim{
-		{values: []int{0, 2}, weights: []int{5, 5}, den: 10, reason: "E[X] = 1 and E[X²] = 2, so Var(X) = 2 − 1 = 1."},
-		{values: []int{0, 1, 2}, weights: []int{25, 50, 25}, den: 100, reason: "E[X] = 1 and E[X²] = 1.5, so Var(X) = 0.5."},
-		{values: []int{0, 1, 2}, weights: []int{2, 3, 5}, den: 10, reason: "E[X] = 1.3 and E[X²] = 2.3, so Var(X) = 2.3 − 1.69 = 0.61."},
-		{values: []int{1, 4}, weights: []int{6, 4}, den: 10, reason: "E[X] = 2.2 and E[X²] = 7, so Var(X) = 7 − 4.84 = 2.16."},
-		{values: []int{0, 2, 4}, weights: []int{50, 25, 25}, den: 100, reason: "E[X] = 1.5 and E[X²] = 5, so Var(X) = 5 − 2.25 = 2.75."},
-		{values: []int{0, 3}, weights: []int{5, 5}, den: 10, reason: "E[X] = 1.5 and E[X²] = 4.5, so Var(X) = 4.5 − 2.25 = 2.25."},
-	}
-	c := claims[rand.Intn(len(claims))]
-	sw, sw2 := 0, 0
-	for i, w := range c.weights {
-		sw += c.values[i] * w
-		sw2 += c.values[i] * c.values[i] * w
-	}
-	// Var = (den·Σx²w − (Σxw)²) / den², kept in integers until the last step.
-	num := c.den*sw2 - sw*sw
-	answer := decimal6(float64(num) / float64(c.den*c.den))
-	vals := make([]string, len(c.values))
-	wts := make([]string, len(c.weights))
-	for i := range c.values {
-		vals[i] = strconv.Itoa(c.values[i])
-		wts[i] = strconv.Itoa(c.weights[i])
-	}
-	return generator.Problem{
-		Question: "A discrete random variable X takes the values " + strings.Join(vals, ", ") +
-			" with probabilities proportional to the weights " + strings.Join(wts, ", ") +
-			" (the weights sum to " + strconv.Itoa(c.den) + "). What is Var(X) = E[X²] − (E[X])²? (enter a decimal)",
-		Answer:      answer,
-		Explanation: "Compute the mean and the second moment, then subtract the square of the mean; " + c.reason,
-		Facts: map[string]string{
-			"values": strings.Join(vals, ","), "weights": strings.Join(wts, ","),
-			"den": strconv.Itoa(c.den), "answer": answer,
-		},
-	}
-}
-
 // ---------------------------------------------------------------------------
 // Moment generating functions (numeric)
 // ---------------------------------------------------------------------------

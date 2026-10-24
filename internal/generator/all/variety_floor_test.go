@@ -102,13 +102,25 @@ func TestConceptVarietyFloor(t *testing.T) {
 	reg := Registry()
 
 	if *updateVariety {
+		previous := make(map[string]int)
+		if raw, err := os.ReadFile(varietyBaselinePath); err == nil {
+			_ = json.Unmarshal(raw, &previous)
+		}
 		baseline := make(map[string]int, len(ids))
+		kept := 0
 		for _, id := range ids {
 			lowest := varietyDraws + 1
 			for run := 0; run < varietyRuns; run++ {
 				if n := distinctStems(reg, id, varietyDraws); n < lowest {
 					lowest = n
 				}
+			}
+			// A ratchet only ratchets up. A re-measure below the recorded figure
+			// on an untouched generator is sampling noise, and accepting it would
+			// quietly lower the floor this file exists to hold.
+			if old, ok := previous[id]; ok && old > lowest {
+				lowest = old
+				kept++
 			}
 			baseline[id] = lowest
 		}
@@ -119,7 +131,7 @@ func TestConceptVarietyFloor(t *testing.T) {
 		if err := os.WriteFile(varietyBaselinePath, append(out, '\n'), 0o644); err != nil {
 			t.Fatalf("write baseline: %v", err)
 		}
-		t.Logf("wrote %s for %d concepts", varietyBaselinePath, len(baseline))
+		t.Logf("wrote %s for %d concepts (%d kept above the re-measured value)", varietyBaselinePath, len(baseline), kept)
 		return
 	}
 

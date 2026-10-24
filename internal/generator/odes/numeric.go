@@ -202,8 +202,11 @@ func (g *eulerStepsGen) Generate(ctx generator.GeneratorContext) generator.Probl
 type laplaceValueGen struct{}
 
 func (g *laplaceValueGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	minN := mathutil.ScaleInt(ctx.Difficulty, 3, 4)
-	maxN := mathutil.ScaleInt(ctx.Difficulty, 4, 7)
+	// The power is drawn from a range that widens with difficulty. It used to
+	// span four values in total, so a learner reviewing this concept saw the
+	// same factorial asked four ways and nothing else.
+	minN := mathutil.ScaleInt(ctx.Difficulty, 2, 5)
+	maxN := mathutil.ScaleInt(ctx.Difficulty, 5, 9)
 	n := minN + rand.Intn(maxN-minN+1)
 	f := 1
 	for i := 2; i <= n; i++ {

@@ -511,8 +511,8 @@ func abs(n int) int {
 type negativeBaseGen struct{}
 
 func (g *negativeBaseGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	base := rand.Intn(4) + 2  // 2..5
-	power := rand.Intn(2) + 2 // 2..3
+	base := rand.Intn(8) + 2  // 2..9
+	power := rand.Intn(4) + 1 // 1..4, so both parities and both signs occur
 	parenthesized := rand.Intn(2) == 0
 	if ctx.KPOrdinal == 1 {
 		parenthesized = false

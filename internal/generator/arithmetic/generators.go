@@ -611,9 +611,11 @@ func (g *compositeGen) Generate(ctx generator.GeneratorContext) generator.Proble
 type expConceptGen struct{}
 
 func (g *expConceptGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	// Difficulty still sets the size of the base, but the exponent reaches 5 so
+	// that equal bases are not the only thing separating two draws.
 	scale := int(1 + ctx.Difficulty*5)
-	base := rand.Intn(max(1, scale)) + 2
-	exp := rand.Intn(3) + 2
+	base := rand.Intn(3+scale*2) + 2
+	exp := rand.Intn(4) + 2
 	return generator.Problem{
 		Question:    fmt.Sprintf("What is the value of \\(%d^{%d}\\)?", base, exp),
 		Answer:      fmt.Sprintf("%d", mathutil.IntPow(base, exp)),

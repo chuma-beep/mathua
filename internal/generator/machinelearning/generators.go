@@ -169,29 +169,11 @@ func (g *gradientDescentGen) Generate(ctx generator.GeneratorContext) generator.
 	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.exp}
 }
 
-type crossEntropyGen struct{}
-
-func (g *crossEntropyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct{ question, answer, exp string }
-	entries := []entry{{"Cross-entropy loss between true label 1 and prediction 0.8 is (-log(0.8)≈?) (0.22/1.20)", "0.22", "CE = -log(0.8) ≈ 0.22."}, {"Cross-entropy is appropriate for ____ tasks.", "classification", "Cross-entropy for classification."}, {"Binary cross-entropy for target 0 and prediction 0.1 is (-log(0.9)≈?) (0.10/2.30)", "0.10", "CE = -log(0.9) ≈ 0.10."}, {"Does cross-entropy penalize confident wrong predictions more than MSE? (yes/no)", "yes", "CE grows ∞ as p→0."}}
-	e := entries[rand.Intn(len(entries))]
-	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.exp}
-}
-
 type regularizationGen struct{}
 
 func (g *regularizationGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct{ question, answer, exp string }
 	entries := []entry{{"L2 regularization adds λ||w||² to the loss. What does λ control? (regularization strength)", "regularization strength", "λ trades off."}, {"Does L2 regularization shrink weights toward zero? (yes/no)", "yes", "Gradient 2λw pulls."}, {"What is the gradient of λ||w||² w.r.t w? (2λw)", "2λw", "d/dw λw² = 2λw."}, {"Is regularization used to reduce overfitting? (yes/no)", "yes", "Penalizing large weights."}}
-	e := entries[rand.Intn(len(entries))]
-	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.exp}
-}
-
-type overfittingGen struct{}
-
-func (g *overfittingGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct{ question, answer, exp string }
-	entries := []entry{{"Overfitting is when training error is ____ than test error. (lower/higher)", "lower", "Training lower."}, {"What curve shape indicates overfitting when plotting error vs model capacity?", "U-shaped test error", "Test drops then rises."}, {"Does more training data generally reduce overfitting? (yes/no)", "yes", "More samples."}, {"Which error measures generalization: training or test error?", "test", "Test error."}}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.exp}
 }
@@ -326,21 +308,6 @@ func (g *adamDetailsGen) Generate(ctx generator.GeneratorContext) generator.Prob
 	type entry struct{ question, answer, exp string }
 	easy := []entry{{"First Adam step with gradient 2, beta1=0.9, beta2=0.999, eta=0.1: what is the update magnitude?", "0.1", "Bias-corrected m-hat=2, v-hat=4, so 0.1*2/sqrt(4) = 0.1."}, {"After step 1 with beta1=0.9, m=0.18. What is bias-corrected m-hat?", "1.8", "Divide out the initialization bias: 0.18/0.1 = 1.8."}, {"With beta=0.9, the effective memory horizon is roughly how many steps?", "10", "Horizon is about 1/(1-beta) = 1/0.1 = 10."}, {"Adam default beta1 equals what?", "0.9", "Standard defaults: beta1=0.9, beta2=0.999."}, {"Does Adam maintain first and second moment estimates? (yes/no)", "yes", "m tracks mean gradient, v tracks mean squared gradient."}, {"Is Adam non-adaptive with one global step size? (yes/no)", "no", "Each weight gets its own effective rate eta/sqrt(v)."}}
 	hard := []entry{{"Does Adam update = -η m̂/(√v̂+ε)? (yes/no)", "yes", "Rule."}, {"Is Adam adaptive per-parameter? (yes/no)", "yes", "Per-weight."}, {"Does Adam combine momentum and RMSProp? (yes/no)", "yes", "Hybrid."}}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.exp}
-}
-
-type calibrationGen struct{}
-
-func (g *calibrationGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type entry struct{ question, answer, exp string }
-	easy := []entry{{"A bin holds 100 of 200 samples with |acc-conf|=0.2. What is its ECE contribution?", "0.1", "Weight 100/200 = 0.5 times gap 0.2 gives 0.1."}, {"100 predictions at 80 percent confidence with 80 correct are miscalibrated by how much?", "0", "Accuracy 0.8 matches confidence 0.8: gap 0, calibrated."}, {"60 correct of 100 at 80 percent confidence means overconfidence by what fraction?", "0.2", "Confidence 0.8 minus accuracy 0.6 gives 0.2 overconfidence."}, {"Reliability diagrams bin predictions by what: confidence or loss?", "confidence", "Predictions group by confidence; accuracy plots per bin."}, {"Is a calibrated classifier's confidence approximately its accuracy? (yes/no)", "yes", "Calibration means confidence matches empirical accuracy."}, {"Does temperature scaling change the predicted class? (yes/no)", "no", "Scaling logits keeps argmax fixed; only confidence changes."}}
-	hard := []entry{{"Does overconfidence mean ECE high? (yes/no)", "yes", "Gap."}, {"Is temperature scaling a calibration method? (yes/no)", "yes", "Softmax temp."}, {"Does well-calibrated with 80% conf mean 80% correct? (yes/no)", "yes", "Definition."}}
 	pool := easy
 	if scale > 3 {
 		pool = append(easy, hard...)
