@@ -27,7 +27,6 @@ package abstract
 
 import (
 	"math/rand"
-	"strconv"
 
 	"github.com/chuma-beep/mathua/internal/generator"
 )
@@ -473,95 +472,6 @@ func (g *euclideanGen) Generate(ctx generator.GeneratorContext) generator.Proble
 // ---------------------------------------------------------------------------
 // 10. Characteristic of a field (numeric)
 // ---------------------------------------------------------------------------
-
-type characteristicGen struct{}
-
-func (g *characteristicGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question string
-		answer   int
-		kind     string
-		prime    int
-		order    int
-		reason   string
-	}
-	// kind "F_p" means order == prime; "F_pn" means order is a power of the
-	// prime larger than it; "char0" means the characteristic is 0. The test
-	// recomputes the expected value from kind, prime and order.
-	finite := []claim{
-		{
-			question: "What is the characteristic of the field F_11 (equivalently Z/11Z)? (enter a number)",
-			answer:   11, kind: "F_p", prime: 11, order: 11,
-			reason: "Adding the identity 1 in F_11 returns 0 after 11 additions and not before, so the characteristic is 11.",
-		},
-		{
-			question: "What is the characteristic of the field F_7 (equivalently Z/7Z)? (enter a number)",
-			answer:   7, kind: "F_p", prime: 7, order: 7,
-			reason: "The characteristic of F_p is p, so it is 7 for F_7.",
-		},
-		{
-			question: "What is the characteristic of the field F_2 (equivalently Z/2Z)? (enter a number)",
-			answer:   2, kind: "F_p", prime: 2, order: 2,
-			reason: "In F_2, 1 + 1 = 0, so the characteristic is 2.",
-		},
-		{
-			question: "The field F_9 has 9 = 3^2 elements. What is its characteristic? (enter a number)",
-			answer:   3, kind: "F_pn", prime: 3, order: 9,
-			reason: "F_9 contains a copy of F_3, and adding 1 three times gives 0; the field order 9 is not the characteristic.",
-		},
-		{
-			question: "The field F_8 has 8 = 2^3 elements. What is its characteristic? (enter a number)",
-			answer:   2, kind: "F_pn", prime: 2, order: 8,
-			reason: "F_8 has prime subfield F_2, so its characteristic is 2, not the field order 8.",
-		},
-		{
-			question: "The field F_25 has 25 = 5^2 elements. What is its characteristic? (enter a number)",
-			answer:   5, kind: "F_pn", prime: 5, order: 25,
-			reason: "F_25 has prime subfield F_5, so its characteristic is 5, not 25.",
-		},
-		{
-			question: "The field F_27 has 27 = 3^3 elements. What is its characteristic? (enter a number)",
-			answer:   3, kind: "F_pn", prime: 3, order: 27,
-			reason: "The characteristic of F_{p^n} is p, so it is 3 here, not the field order 27.",
-		},
-	}
-	zero := []claim{
-		{
-			question: "What is the characteristic of the field Q? (enter a number)",
-			answer:   0, kind: "char0",
-			reason: "No positive multiple of 1 equals 0 in Q, so the characteristic is 0 by definition.",
-		},
-		{
-			question: "What is the characteristic of the field R? (enter a number)",
-			answer:   0, kind: "char0",
-			reason: "No positive multiple of 1 equals 0 in R, so the characteristic is 0.",
-		},
-		{
-			question: "What is the characteristic of the field C? (enter a number)",
-			answer:   0, kind: "char0",
-			reason: "C contains Q and no positive multiple of 1 vanishes, so its characteristic is 0.",
-		},
-		{
-			question: "What is the characteristic of the field Q(sqrt(2))? (enter a number)",
-			answer:   0, kind: "char0",
-			reason: "Q(sqrt(2)) contains Q, so it has characteristic 0.",
-		},
-	}
-	claims := finite
-	if rand.Intn(4) == 0 {
-		claims = zero
-	}
-	c := claims[rand.Intn(len(claims))]
-	return generator.Problem{
-		Question:    c.question,
-		Answer:      strconv.Itoa(c.answer),
-		Explanation: c.reason,
-		Facts: map[string]string{
-			"kind": c.kind, "prime": strconv.Itoa(c.prime),
-			"order": strconv.Itoa(c.order), "answer": strconv.Itoa(c.answer),
-		},
-	}
-}
 
 // ---------------------------------------------------------------------------
 // 11. Algebraic and transcendental elements
