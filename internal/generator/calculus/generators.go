@@ -1611,6 +1611,36 @@ func (g *improperIntegralGen) Generate(ctx generator.GeneratorContext) generator
 		{"Determine if \\(\\int_{0}^{1} \\frac{1}{\\sqrt{x}} \\, dx\\) converges or diverges.", "converges (to 2)", "∫₀¹ x^{-1/2}dx = lim_{a→0+} [2√x]ₐ¹ = 2. The integral converges to 2."},
 		{"Determine if \\(\\int_{1}^{\\infty} \\frac{1}{\\sqrt{x}} \\, dx\\) converges or diverges.", "diverges", "Here p=1/2 ≤ 1, so the p-integral diverges."},
 	}
+	// Three computed families, because six fixed rows were the whole supply
+	// however the difficulty moved: a convergent p-integral, a divergent
+	// integral at zero, and a fractional exponent that still converges.
+	k := 2 + rand.Intn(6)
+	toOne := "1"
+	if k > 2 {
+		toOne = fmt.Sprintf("1/%d", k-1)
+	}
+	tableEasy = append(tableEasy, entry{
+		fmt.Sprintf("Determine if \\(\\int_{1}^{\\infty} \\frac{1}{x^{%d}} \\, dx\\) converges or diverges.", k),
+		fmt.Sprintf("converges (to %s)", toOne),
+		fmt.Sprintf("The p-integral converges for p>1, and here p=%d, so the value is 1/(%d) = %s.", k, k-1, toOne),
+	})
+	q := 2 + rand.Intn(3)
+	tableEasy = append(tableEasy, entry{
+		fmt.Sprintf("Determine if \\(\\int_{0}^{1} \\frac{1}{x^{%d}} \\, dx\\) converges or diverges.", q),
+		"diverges",
+		fmt.Sprintf("Near zero the integrand grows like x^{-%d}, and an exponent of -%d or steeper diverges there.", q, q),
+	})
+	m := 2 + rand.Intn(3)
+	mVal := fmt.Sprintf("%d", m)
+	if m > 2 {
+		mVal = fmt.Sprintf("%d/%d", m, m-1)
+	}
+	tableEasy = append(tableEasy, entry{
+		fmt.Sprintf("Determine if \\(\\int_{0}^{1} \\frac{1}{x^{1/%d}} \\, dx\\) converges or diverges.", m),
+		fmt.Sprintf("converges (to %s)", mVal),
+		fmt.Sprintf("The exponent -1/%d is greater than -1, so the integral converges to %s.", m, mVal),
+	})
+
 	pool := tableEasy
 	if scale > 3 {
 		pool = append(tableEasy, tableHard...)

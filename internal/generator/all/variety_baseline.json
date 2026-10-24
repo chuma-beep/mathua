@@ -305,7 +305,7 @@
   "calc.integral.fourier_coefficients": 9,
   "calc.integral.ftc": 37,
   "calc.integral.hydrostatic": 6,
-  "calc.integral.improper": 6,
+  "calc.integral.improper": 12,
   "calc.integral.improper_compare": 19,
   "calc.integral.indefinite": 26,
   "calc.integral.irrational": 7,
