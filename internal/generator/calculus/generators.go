@@ -863,6 +863,34 @@ func (g *integralPartsGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		{"Find \\(\\int x^{2} e^{x} \\, dx\\).", "x^2e^x-2xe^x+2e^x+C", "Apply parts twice: ∫x²e^x dx = x²e^x - ∫2xe^x dx = x²e^x - 2xe^x + 2e^x + C."},
 		{"Find \\(\\int x \\ln(x) \\, dx\\).", "x^2ln(x)/2-x^2/4+C", "Let u=ln(x), dv=x dx → du=dx/x, v=x²/2. ∫x·ln(x)dx = x²ln(x)/2 - ∫x/2 dx = x²ln(x)/2 - x²/4 + C."},
 	}
+	// The table held six shapes, so a learner met the whole supply in six
+	// questions. The families below draw their coefficient, which leaves the
+	// reasoning identical while the integral changes.
+	k := 3 + rand.Intn(4)
+	a := 2 + rand.Intn(4)
+	m := 2 + rand.Intn(3)
+	tableHard = append(tableHard,
+		entry{
+			fmt.Sprintf("Find \\(\\int x e^{%dx} \\, dx\\).", k),
+			fmt.Sprintf("(%dx-1)e^(%dx)/%d+C", k, k, k*k),
+			fmt.Sprintf("Let u=x and dv=e^{%dx}dx, so v=e^{%dx}/%d. Parts gives (%dx-1)e^(%dx)/%d + C.", k, k, k, k, k, k*k),
+		},
+		entry{
+			fmt.Sprintf("Find \\(\\int x \\cos(%dx) \\, dx\\).", a),
+			fmt.Sprintf("x sin(%dx)/%d + cos(%dx)/%d + C", a, a, a, a*a),
+			fmt.Sprintf("Let u=x and dv=cos(%dx)dx, so v=sin(%dx)/%d. Parts gives x sin(%dx)/%d + cos(%dx)/%d + C.", a, a, a, a, a, a, a*a),
+		},
+		entry{
+			fmt.Sprintf("Find \\(\\int x \\sin(%dx) \\, dx\\).", a),
+			fmt.Sprintf("-x cos(%dx)/%d + sin(%dx)/%d + C", a, a, a, a*a),
+			fmt.Sprintf("Let u=x and dv=sin(%dx)dx, so v=-cos(%dx)/%d. Parts gives -x cos(%dx)/%d + sin(%dx)/%d + C.", a, a, a, a, a, a, a*a),
+		},
+		entry{
+			fmt.Sprintf("Find \\(\\int x^{%d} \\ln(x) \\, dx\\).", m),
+			fmt.Sprintf("x^%d ln(x)/%d - x^%d/%d + C", m+1, m+1, m+1, (m+1)*(m+1)),
+			fmt.Sprintf("Let u=ln(x) and dv=x^{%d}dx, so v=x^%d/%d. Parts gives x^%d ln(x)/%d - x^%d/%d + C.", m, m+1, m+1, m+1, m+1, m+1, (m+1)*(m+1)),
+		},
+	)
 	pool := tableEasy
 	if scale > 3 {
 		pool = append(tableEasy, tableHard...)
