@@ -562,14 +562,40 @@ func (g *numericalErrorGen) Generate(ctx generator.GeneratorContext) generator.P
 type doublePolarGen struct{}
 
 func (g *doublePolarGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	r := 1 + rand.Intn(6)
-	answer := strconv.Itoa(r * r)
+	// The radius alone gave six situations, so the region now varies: a disk, an
+	// annulus and a semicircle all have areas that are integer multiples of pi,
+	// which keeps the answer typeable as a number.
+	r := 2 + rand.Intn(5)
+	shape := "disk"
+	var multiple int
+	switch rand.Intn(3) {
+	case 1:
+		shape = "annulus"
+		multiple = r*r - 1
+	case 2:
+		shape = "semicircle"
+		multiple = 2 * r * r
+	default:
+		multiple = r * r
+	}
+	answer := strconv.Itoa(multiple)
+	var question, explanation string
+	switch shape {
+	case "annulus":
+		question = fmt.Sprintf("Let \\(D\\) be the annulus \\(1 \\le r \\le %d\\) centred at the origin. The area of \\(D\\) is a multiple of \\(\\pi\\). What is that multiple, that is, \\(\\iint_D dA\\) divided by \\(\\pi\\)? (enter a number)", r)
+		explanation = fmt.Sprintf("In polar coordinates the area element is \\(r\\,dr\\,d\\theta\\), so the area is \\(\\int_0^{2\\pi}\\int_1^{%d} r\\,dr\\,d\\theta = \\pi \\cdot (%d - 1)\\), and the multiple is %d.", r, r*r, multiple)
+	case "semicircle":
+		question = fmt.Sprintf("Let \\(D\\) be the upper half of the disk of radius %d centred at the origin, so \\(0 \\le \\theta \\le \\pi\\). The area of \\(D\\) is a multiple of \\(\\pi\\). What is that multiple? (enter a number)", r)
+		explanation = fmt.Sprintf("The area element is \\(r\\,dr\\,d\\theta\\), and the angle now runs over half a turn, so the area is \\(\\pi \\cdot %d^2 / 2 = \\pi \\cdot %d\\), giving %d.", r, multiple, multiple)
+	default:
+		question = fmt.Sprintf("Let \\(D\\) be the disk of radius %d centred at the origin. The area of \\(D\\) is a multiple of \\(\\pi\\). What is that multiple, that is, \\(\\iint_D dA\\) divided by \\(\\pi\\)? (enter a number)", r)
+		explanation = fmt.Sprintf("In polar coordinates the area element is \\(r\\,dr\\,d\\theta\\), so the area is \\(\\int_0^{2\\pi}\\int_0^{%d} r\\,dr\\,d\\theta = \\pi \\cdot %d\\), and the multiple is %d.", r, r*r, multiple)
+	}
 	return generator.Problem{
-		Question: fmt.Sprintf("Let \\(D\\) be the disk of radius %d centred at the origin. The area of \\(D\\) is a multiple of \\(\\pi\\). What is that multiple, that is, \\(\\iint_D dA\\) divided by \\(\\pi\\)? (enter a number)", r),
-		Answer:   answer,
-		Explanation: fmt.Sprintf("In polar coordinates the area element is \\(r\\,dr\\,d\\theta\\), so the area is \\(\\int_0^{2\\pi}\\int_0^{%d} r\\,dr\\,d\\theta = \\pi \\cdot %d\\), and the multiple is %d.",
-			r, r*r, r*r),
-		Facts: map[string]string{"r": strconv.Itoa(r), "answer": answer},
+		Question:    question,
+		Answer:      answer,
+		Explanation: explanation,
+		Facts:       map[string]string{"r": strconv.Itoa(r), "shape": shape, "answer": answer},
 	}
 }
 
