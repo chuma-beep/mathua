@@ -581,13 +581,37 @@ type surfaceScalarGen struct{}
 
 func (g *surfaceScalarGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	r := 1 + rand.Intn(5)
-	answer := strconv.Itoa(r * r * r)
-	return generator.Problem{
-		Question: fmt.Sprintf("Let \\(S\\) be the upper hemisphere of radius %d centred at the origin, with \\(z \\ge 0\\). Evaluate \\(\\iint_S z\\,dS\\) and divide by \\(\\pi\\). What is that number? (enter a number)", r),
-		Answer:   answer,
-		Explanation: fmt.Sprintf("On the hemisphere \\(z = %d\\cos\\varphi\\) and \\(dS = %d^{2}\\sin\\varphi\\,d\\varphi\\,d\\theta\\), so the integral is \\(2\\pi \\cdot %d^{3} \\cdot \\tfrac{1}{2} = \\pi \\cdot %d\\) and the multiple is %d.",
-			r, r, r, r*r*r, r*r*r),
-		Facts: map[string]string{"r": strconv.Itoa(r), "answer": answer},
+	// Four shapes rather than one, because the radius alone gave five
+	// situations: the question never changed, only the number in it.
+	switch rand.Intn(4) {
+	case 0:
+		return generator.Problem{
+			Question:    fmt.Sprintf("Let \\(S\\) be the upper hemisphere of radius %d centred at the origin, with \\(z \\ge 0\\). Evaluate \\(\\iint_S z\\,dS\\) and divide by \\(\\pi\\). What is that number? (enter a number)", r),
+			Answer:      strconv.Itoa(r * r * r),
+			Explanation: fmt.Sprintf("On the hemisphere \\(z = %d\\cos\\varphi\\) and \\(dS = %d^{2}\\sin\\varphi\\,d\\varphi\\,d\\theta\\), so the integral is \\(2\\pi \\cdot %d^{3} \\cdot \\tfrac{1}{2} = \\pi \\cdot %d\\) and the multiple is %d.", r, r, r, r*r*r, r*r*r),
+			Facts:       map[string]string{"shape": "hemisphere", "r": strconv.Itoa(r), "answer": strconv.Itoa(r * r * r)},
+		}
+	case 1:
+		return generator.Problem{
+			Question:    fmt.Sprintf("A sphere has radius %d. What is its surface area divided by \\(\\pi\\)? (enter a number)", r),
+			Answer:      strconv.Itoa(4 * r * r),
+			Explanation: fmt.Sprintf("The surface area of a sphere is \\(4\\pi r^{2}\\), so with \\(r = %d\\) the area divided by \\(\\pi\\) is \\(4 \\cdot %d = %d\\).", r, r*r, 4*r*r),
+			Facts:       map[string]string{"shape": "sphere", "r": strconv.Itoa(r), "answer": strconv.Itoa(4 * r * r)},
+		}
+	case 2:
+		return generator.Problem{
+			Question:    fmt.Sprintf("A disk has radius %d. What is its area divided by \\(\\pi\\)? (enter a number)", r),
+			Answer:      strconv.Itoa(r * r),
+			Explanation: fmt.Sprintf("The area of a disk is \\(\\pi r^{2}\\), so with \\(r = %d\\) the area divided by \\(\\pi\\) is %d.", r, r*r),
+			Facts:       map[string]string{"shape": "disk", "r": strconv.Itoa(r), "answer": strconv.Itoa(r * r)},
+		}
+	default:
+		return generator.Problem{
+			Question:    fmt.Sprintf("A right circular cylinder has radius %d and height %d. What is its lateral surface area divided by \\(\\pi\\)? (enter a number)", r, r),
+			Answer:      strconv.Itoa(2 * r * r),
+			Explanation: fmt.Sprintf("The lateral surface area is \\(2\\pi r h\\), and with \\(r = h = %d\\) that is \\(2\\pi \\cdot %d\\), so the multiple of \\(\\pi\\) is %d.", r, r*r, 2*r*r),
+			Facts:       map[string]string{"shape": "cylinder", "r": strconv.Itoa(r), "answer": strconv.Itoa(2 * r * r)},
+		}
 	}
 }
 
