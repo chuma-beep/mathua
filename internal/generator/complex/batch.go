@@ -421,51 +421,7 @@ func (g *conjugateRootsGen) Generate(ctx generator.GeneratorContext) generator.P
 
 // ----- 9. trig from exponentials -----
 
-type trigExponentialGen struct{}
-
-func (g *trigExponentialGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	const (
-		cosIdent  = "(e^(i\u03b8) + e^(-i\u03b8))/2"
-		sinIdent  = "(e^(i\u03b8) - e^(-i\u03b8))/(2i)"
-		cosSigned = "(e^(i\u03b8) - e^(-i\u03b8))/2"
-		cosOverI  = "(e^(i\u03b8) + e^(-i\u03b8))/(2i)"
-	)
-	if rand.Intn(2) == 0 {
-		pr := generator.MultipleChoice(
-			"Which identity expresses \u03b8 in the form cos \u03b8 = ...?",
-			cosIdent, sinIdent, cosSigned, cosOverI)
-		pr.Facts = map[string]string{"asked": "cos", "cos": cosIdent, "sin": sinIdent, "value": cosIdent}
-		pr.Explanation = "Adding the two exponentials cancels the sine terms: e^(i\u03b8) + e^(-i\u03b8) = 2 cos \u03b8, so cos \u03b8 = (e^(i\u03b8) + e^(-i\u03b8))/2."
-		return pr
-	}
-	pr := generator.MultipleChoice(
-		"Which identity expresses \u03b8 in the form sin \u03b8 = ...?",
-		sinIdent, cosIdent, cosSigned, cosOverI)
-	pr.Facts = map[string]string{"asked": "sin", "cos": cosIdent, "sin": sinIdent, "value": sinIdent}
-	pr.Explanation = "Subtracting the two exponentials cancels the cosine terms: e^(i\u03b8) - e^(-i\u03b8) = 2i sin \u03b8, so sin \u03b8 = (e^(i\u03b8) - e^(-i\u03b8))/(2i)."
-	return pr
-}
-
 // ----- 10. hyperbolic on imaginary arguments -----
-
-type hyperbolicGen struct{}
-
-func (g *hyperbolicGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	if rand.Intn(2) == 0 {
-		pr := generator.MultipleChoice(
-			"For real \u03b8, which real function equals cosh(i\u03b8)?",
-			"cos \u03b8", "sin \u03b8", "i sin \u03b8", "cosh \u03b8")
-		pr.Facts = map[string]string{"fn": "cosh", "argument": "i\u03b8", "value": "cos \u03b8"}
-		pr.Explanation = "cosh(ix) = (e^(ix) + e^(-ix))/2, which is exactly the identity for cos x, so cosh(i\u03b8) = cos \u03b8."
-		return pr
-	}
-	pr := generator.MultipleChoice(
-		"For real \u03b8, which function equals sinh(i\u03b8)?",
-		"i sin \u03b8", "sin \u03b8", "cos \u03b8", "i cosh \u03b8")
-	pr.Facts = map[string]string{"fn": "sinh", "argument": "i\u03b8", "value": "i sin \u03b8"}
-	pr.Explanation = "sinh(ix) = (e^(ix) - e^(-ix))/2, and e^(ix) - e^(-ix) = 2i sin x, so sinh(i\u03b8) = i sin \u03b8."
-	return pr
-}
 
 // ----- 11. complex geometric series -----
 
