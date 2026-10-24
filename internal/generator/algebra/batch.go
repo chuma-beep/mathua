@@ -227,7 +227,7 @@ func (g *groupingGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type cubesGen struct{}
 
 func (g *cubesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	n := rand.Intn(5) + 2 // 2..6
+	n := rand.Intn(11) + 2 // 2..12, so the cube stays inside a readable integer
 	n3 := n * n * n
 	sum := rand.Intn(2) == 0
 	var kind, poly, linear, quadratic string
