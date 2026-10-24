@@ -344,117 +344,17 @@ func (g *advancedIneqGen) Generate(ctx generator.GeneratorContext) generator.Pro
 // The tangent graph (multiple choice)
 // ---------------------------------------------------------------------------
 
-type tanGraphGen struct{}
-
-func (g *tanGraphGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return trigPickMC([]trigMCClaim{
-		{
-			q:           "The period of the graph of y = tan x is...",
-			correct:     "180 degrees",
-			distractors: []string{"360 degrees", "90 degrees", "720 degrees"},
-			reason:      "The tangent repeats after a half-turn, because shifting by 180 degrees adds a half-turn to both the sine and the cosine and leaves their ratio unchanged.",
-		},
-		{
-			q:           "The graph of y = tan x has vertical asymptotes at...",
-			correct:     "x = 90 + 180k",
-			distractors: []string{"x = 180k", "x = 90 + 360k", "x = 45 + 180k"},
-			reason:      "The tangent is undefined where the cosine is zero, which happens at the odd multiples of 90 degrees.",
-		},
-		{
-			q:           "As x approaches 90 degrees from below, tan x...",
-			correct:     "increases without bound",
-			distractors: []string{"approaches zero", "decreases without bound", "approaches one"},
-			reason:      "The sine approaches one while the cosine approaches zero through positive values, so the ratio grows without bound.",
-		},
-	})
-}
-
 // ---------------------------------------------------------------------------
 // Graph transformations (multiple choice)
 // ---------------------------------------------------------------------------
-
-type graphTransformGen struct{}
-
-func (g *graphTransformGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return trigPickMC([]trigMCClaim{
-		{
-			q:           "For y = a sin(b(x - c)) + d, the amplitude of the graph is...",
-			correct:     "the absolute value of a",
-			distractors: []string{"a itself, even when a is negative", "the absolute value of b", "d itself"},
-			reason:      "The coefficient in front of the sine stretches the wave vertically, and the amplitude is a distance, so it is never negative.",
-		},
-		{
-			q:           "For y = a sin(b(x - c)) + d, the period of the graph is...",
-			correct:     "360 degrees divided by the absolute value of b",
-			distractors: []string{"360 degrees divided by b only when b is positive", "the absolute value of b times 360 degrees", "360 degrees minus c"},
-			reason:      "The factor b compresses the argument, so the wave completes one cycle when the argument advances by 360 degrees.",
-		},
-		{
-			q:           "For y = a sin(b(x - c)) + d, the vertical shift of the graph is...",
-			correct:     "d, upward when d is positive",
-			distractors: []string{"c, rightward when c is positive", "a, upward when a is positive", "the product of a and d"},
-			reason:      "Adding d after the sine has been evaluated moves every value up by d, which shifts the midline and not the amplitude.",
-		},
-	})
-}
 
 // ---------------------------------------------------------------------------
 // Inverse graphs (multiple choice)
 // ---------------------------------------------------------------------------
 
-type inverseGraphGen struct{}
-
-func (g *inverseGraphGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return trigPickMC([]trigMCClaim{
-		{
-			q:           "The domain of the arcsine function is...",
-			correct:     "the closed interval from -1 to 1",
-			distractors: []string{"all real numbers", "the closed interval from 0 to 1", "the closed interval from -90 to 90"},
-			reason:      "The sine only produces values between -1 and 1, so only those values can be fed back into the arcsine.",
-		},
-		{
-			q:           "The range of the arcsine function is...",
-			correct:     "the closed interval from -90 to 90 degrees",
-			distractors: []string{"the closed interval from 0 to 180 degrees", "all real numbers", "the closed interval from -1 to 1"},
-			reason:      "The sine is restricted to the interval from -90 to 90 degrees before inverting, because that is where it is one-to-one.",
-		},
-		{
-			q:           "The range of the arccosine function is...",
-			correct:     "the closed interval from 0 to 180 degrees",
-			distractors: []string{"the closed interval from -90 to 90 degrees", "the closed interval from 0 to 90 degrees", "all real numbers"},
-			reason:      "The cosine is one-to-one on the interval from 0 to 180 degrees, and that interval becomes the range of its inverse.",
-		},
-	})
-}
-
 // ---------------------------------------------------------------------------
 // Reciprocal graphs (multiple choice)
 // ---------------------------------------------------------------------------
-
-type reciprocalGraphGen struct{}
-
-func (g *reciprocalGraphGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return trigPickMC([]trigMCClaim{
-		{
-			q:           "Where sin x is zero, the graph of csc x has...",
-			correct:     "a vertical asymptote",
-			distractors: []string{"a zero", "a local maximum", "a horizontal asymptote"},
-			reason:      "The cosecant is the reciprocal of the sine, so dividing by a value that approaches zero sends the graph to infinity.",
-		},
-		{
-			q:           "The range of y = sec x is...",
-			correct:     "all values at least 1 or at most -1",
-			distractors: []string{"all values between -1 and 1", "all real numbers", "all values at least 0"},
-			reason:      "The secant is the reciprocal of a cosine whose magnitude never exceeds one, so the reciprocal never has magnitude below one.",
-		},
-		{
-			q:           "The graph of y = csc x is obtained from the graph of y = sin x by...",
-			correct:     "replacing each value with its reciprocal, so the zeros become asymptotes",
-			distractors: []string{"shifting the graph up by one", "reflecting the graph in the horizontal axis", "compressing the graph horizontally by a factor of two"},
-			reason:      "The two graphs share the same sign pattern and meet where the sine is one or minus one, and they separate wherever the sine is small.",
-		},
-	})
-}
 
 // ---------------------------------------------------------------------------
 // Hyperbolic identities (multiple choice)
