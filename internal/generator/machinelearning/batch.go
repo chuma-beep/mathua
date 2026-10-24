@@ -268,57 +268,6 @@ func (g *maeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 // 5. The confusion matrix (numeric)
 // ---------------------------------------------------------------------------
 
-type confusionMatrixGen struct{}
-
-func (g *confusionMatrixGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question string
-		answer   string
-		tp, fp   int
-		fn, tn   int
-		ask      string
-		reason   string
-	}
-	claims := []claim{
-		{
-			question: "A classifier gives TP = 8, FP = 2, FN = 3 and TN = 7. How many cases are there in total? (enter a number)",
-			answer:   "20", tp: 8, fp: 2, fn: 3, tn: 7, ask: "total",
-			reason: "Every case is one of the four cells, so the total is 8 + 2 + 3 + 7 = 20.",
-		},
-		{
-			question: "A classifier gives TP = 12, FP = 4, FN = 6 and TN = 18. How many actual positives are there? (enter a number)",
-			answer:   "18", tp: 12, fp: 4, fn: 6, tn: 18, ask: "actual_pos",
-			reason: "Actual positives are the true positives plus the false negatives: 12 + 6 = 18.",
-		},
-		{
-			question: "A classifier gives TP = 5, FP = 1, FN = 5 and TN = 9. How many cases did it predict positive? (enter a number)",
-			answer:   "6", tp: 5, fp: 1, fn: 5, tn: 9, ask: "predicted_pos",
-			reason: "Predicted positives are the true positives plus the false positives: 5 + 1 = 6.",
-		},
-		{
-			question: "A classifier gives TP = 20, FP = 5, FN = 0 and TN = 15. How many predictions were correct? (enter a number)",
-			answer:   "35", tp: 20, fp: 5, fn: 0, tn: 15, ask: "correct",
-			reason: "Correct predictions are the true positives plus the true negatives: 20 + 15 = 35.",
-		},
-		{
-			question: "A classifier gives TP = 7, FP = 3, FN = 2 and TN = 8. How many actual negatives are there? (enter a number)",
-			answer:   "11", tp: 7, fp: 3, fn: 2, tn: 8, ask: "actual_neg",
-			reason: "Actual negatives are the false positives plus the true negatives: 3 + 8 = 11.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	return generator.Problem{
-		Question:    c.question,
-		Answer:      c.answer,
-		Explanation: c.reason,
-		Facts: map[string]string{
-			"tp": strconv.Itoa(c.tp), "fp": strconv.Itoa(c.fp),
-			"fn": strconv.Itoa(c.fn), "tn": strconv.Itoa(c.tn),
-			"ask": c.ask, "answer": c.answer,
-		},
-	}
-}
-
 // ---------------------------------------------------------------------------
 // 6. The F1 score (numeric)
 // ---------------------------------------------------------------------------
@@ -452,60 +401,6 @@ func (g *kmeansGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 // ---------------------------------------------------------------------------
 // 8. Feature scaling (numeric)
 // ---------------------------------------------------------------------------
-
-type scalingGen struct{}
-
-func (g *scalingGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question string
-		answer   string
-		x, mean  int
-		sd       int
-		reason   string
-	}
-	claims := []claim{
-		{
-			question: "A feature value is 10, the training mean is 4 and the training standard deviation is 2. What is the standardized value (x - mean) / sd? (enter a number)",
-			answer:   "3", x: 10, mean: 4, sd: 2,
-			reason: "(10 - 4)/2 = 6/2 = 3.",
-		},
-		{
-			question: "A feature value is 5, the training mean is 5 and the training standard deviation is 2. What is the standardized value (x - mean) / sd? (enter a number)",
-			answer:   "0", x: 5, mean: 5, sd: 2,
-			reason: "A value at the mean has z-score (5 - 5)/2 = 0.",
-		},
-		{
-			question: "A feature value is 8, the training mean is 2 and the training standard deviation is 3. What is the standardized value (x - mean) / sd? (enter a number)",
-			answer:   "2", x: 8, mean: 2, sd: 3,
-			reason: "(8 - 2)/3 = 6/3 = 2.",
-		},
-		{
-			question: "A feature value is 1, the training mean is 5 and the training standard deviation is 2. What is the standardized value (x - mean) / sd? (enter a number)",
-			answer:   "-2", x: 1, mean: 5, sd: 2,
-			reason: "(1 - 5)/2 = -4/2 = -2.",
-		},
-		{
-			question: "A feature value is 12, the training mean is 10 and the training standard deviation is 1. What is the standardized value (x - mean) / sd? (enter a number)",
-			answer:   "2", x: 12, mean: 10, sd: 1,
-			reason: "(12 - 10)/1 = 2.",
-		},
-		{
-			question: "A feature value is 0, the training mean is 10 and the training standard deviation is 5. What is the standardized value (x - mean) / sd? (enter a number)",
-			answer:   "-2", x: 0, mean: 10, sd: 5,
-			reason: "(0 - 10)/5 = -2.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	return generator.Problem{
-		Question:    c.question,
-		Answer:      c.answer,
-		Explanation: c.reason,
-		Facts: map[string]string{
-			"x": strconv.Itoa(c.x), "mean": strconv.Itoa(c.mean), "sd": strconv.Itoa(c.sd),
-			"answer": c.answer,
-		},
-	}
-}
 
 // ---------------------------------------------------------------------------
 // 9. One-hot encoding
