@@ -161,7 +161,7 @@ func (g *transformationsGen) Generate(ctx generator.GeneratorContext) generator.
 type inverseDomainGen struct{}
 
 func (g *inverseDomainGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return algPickMC([]algMCClaim{
+	claims := []algMCClaim{
 		{
 			q:           "If f has domain [0, infinity) and range [2, 5], then the domain of the inverse function is...",
 			correct:     "[2, 5]",
@@ -180,7 +180,8 @@ func (g *inverseDomainGen) Generate(ctx generator.GeneratorContext) generator.Pr
 			distractors: []string{"is always invertible", "has an inverse equal to its reciprocal", "is its own inverse"},
 			reason:      "An inverse must send each output back to one input, which requires distinct inputs to give distinct outputs.",
 		},
-	})
+	}
+	return algPickMC(append(claims, computedAlgClaims("alg.func.inverse_domain")...))
 }
 
 // ---------------------------------------------------------------------------
@@ -256,7 +257,7 @@ func (g *compoundGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type logGraphGen struct{}
 
 func (g *logGraphGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return algPickMC([]algMCClaim{
+	claims := []algMCClaim{
 		{
 			q:           "The graph of y = log base b of x, with b > 1, ...",
 			correct:     "has a vertical asymptote at x = 0 and passes through the point (1, 0)",
@@ -275,7 +276,8 @@ func (g *logGraphGen) Generate(ctx generator.GeneratorContext) generator.Problem
 			distractors: []string{"the x-axis", "the y-axis", "the line y = -x"},
 			reason:      "A function and its inverse are mirror images across the line y = x, which is the swap of input and output.",
 		},
-	})
+	}
+	return algPickMC(append(claims, computedAlgClaims("alg.log.graph")...))
 }
 
 // ---------------------------------------------------------------------------
@@ -602,7 +604,7 @@ func (g *threeVarGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type matricesGen struct{}
 
 func (g *matricesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return algPickMC([]algMCClaim{
+	claims := []algMCClaim{
 		{
 			q:           "A system of linear equations is solved by row-reducing its augmented matrix, which...",
 			correct:     "holds the coefficients of the variables in the left columns and the constants in the rightmost column",
@@ -621,7 +623,8 @@ func (g *matricesGen) Generate(ctx generator.GeneratorContext) generator.Problem
 			distractors: []string{"exactly one solution", "infinitely many solutions", "a solution equal to that constant"},
 			reason:      "That row states 0 equals a nonzero number, which no values of the variables can satisfy.",
 		},
-	})
+	}
+	return algPickMC(append(claims, computedAlgClaims("alg.systems.matrices")...))
 }
 
 // ---------------------------------------------------------------------------
@@ -683,7 +686,7 @@ func (g *sigmaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type inductionGen struct{}
 
 func (g *inductionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return algPickMC([]algMCClaim{
+	claims := []algMCClaim{
 		{
 			q:           "A proof by induction establishes a statement by proving...",
 			correct:     "a base case and an induction step that passes from n to n + 1",
@@ -702,7 +705,8 @@ func (g *inductionGen) Generate(ctx generator.GeneratorContext) generator.Proble
 			distractors: []string{"still proves the statement", "proves it for every n except the base", "proves the converse instead"},
 			reason:      "Without a starting point the chain never begins, so no instance is reached.",
 		},
-	})
+	}
+	return algPickMC(append(claims, computedAlgClaims("alg.seq.induction")...))
 }
 
 // ---------------------------------------------------------------------------

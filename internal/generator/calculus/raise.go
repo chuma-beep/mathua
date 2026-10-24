@@ -742,7 +742,7 @@ func (g *inverseFunctionGen) Generate(ctx generator.GeneratorContext) generator.
 type iteratedLimitsGen struct{}
 
 func (g *iteratedLimitsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return calcPickMC([]calcMCClaim{
+	claims := []calcMCClaim{
 		{
 			q:           "For a function of two variables, the two iterated limits...",
 			correct:     "can be different, so the order in which they are taken matters",
@@ -761,7 +761,8 @@ func (g *iteratedLimitsGen) Generate(ctx generator.GeneratorContext) generator.P
 			distractors: []string{"the double limit exists whenever the iterated limits agree", "the function is continuous at the origin", "the iterated limits are unequal"},
 			reason:      "Along either axis the quotient is 0, so both iterated limits are 0, but along \\(y = x\\) it is \\(1/2\\), so the double limit does not exist.",
 		},
-	})
+	}
+	return calcPickMC(append(claims, computedMultiClaims("calc.multi.iterated_limits")...))
 }
 
 // ---------------------------------------------------------------------------
@@ -861,7 +862,7 @@ func (g *fluxGeneralGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type vectorIdentitiesGen struct{}
 
 func (g *vectorIdentitiesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return calcPickMC([]calcMCClaim{
+	claims := []calcMCClaim{
 		{
 			q:           "For any smooth vector field, the divergence of the curl is...",
 			correct:     "zero",
@@ -880,5 +881,6 @@ func (g *vectorIdentitiesGen) Generate(ctx generator.GeneratorContext) generator
 			distractors: []string{"every vector field is a gradient", "every vector field is a curl", "divergence and curl are inverses"},
 			reason:      "Both identities come from the equality of mixed partial derivatives, so they hold for every smooth field of the right kind.",
 		},
-	})
+	}
+	return calcPickMC(append(claims, computedMultiClaims("calc.vec.identities")...))
 }

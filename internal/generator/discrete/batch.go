@@ -157,6 +157,30 @@ func (g *predicatesGen) Generate(ctx generator.GeneratorContext) generator.Probl
 			"\u2200x (x\u00b2 < 0)", "\u00ac\u2200x (x\u00b2 \u2265 0)", "\u2200x (x\u00b2 > 0)",
 			"One counterexample refutes a universal claim, and it must satisfy the strict negation."},
 	}
+	// The three claims above are fixed sentences, so a learner meets the whole
+	// supply in three questions. These carry a drawn number, which changes the
+	// statements while keeping the reasoning identical.
+	a := 2 + rand.Intn(8)
+	b := a + 2 + rand.Intn(9)
+	entries = append(entries,
+		entry{
+			fmt.Sprintf("\u2200x (x < %d)", a), fmt.Sprintf("\u2203x (x \u2265 %d)", a),
+			fmt.Sprintf("\u2203x (x < %d)", a), fmt.Sprintf("\u2200x (x \u2265 %d)", a),
+			fmt.Sprintf("\u2203x (x \u2264 %d)", a),
+			"Negating a universal swaps the quantifier and negates the bound, so < becomes \u2265.",
+		},
+		entry{
+			fmt.Sprintf("\u2203x (x + %d = %d)", a, b), fmt.Sprintf("\u2200x (x + %d \u2260 %d)", a, b),
+			fmt.Sprintf("\u2200x (x + %d = %d)", a, b), fmt.Sprintf("\u2203x (x + %d \u2260 %d)", a, b),
+			fmt.Sprintf("\u2200x (x - %d \u2260 %d)", a, b),
+			"An existential becomes universal, and the equation becomes its negation.",
+		},
+		entry{
+			fmt.Sprintf("\u2200x (x\u00b2 \u2265 %d)", a), fmt.Sprintf("\u2203x (x\u00b2 < %d)", a),
+			fmt.Sprintf("\u2203x (x\u00b2 \u2265 %d)", a), fmt.Sprintf("\u2200x (x\u00b2 < %d)", a),
+			fmt.Sprintf("\u2203x (x\u00b2 \u2264 %d)", a),
+			"One counterexample refutes a universal claim, and it must satisfy the strict negation.",
+		})
 	e := entries[rand.Intn(len(entries))]
 	q := fmt.Sprintf("Which statement is the negation of %s over the integers?", e.original)
 	p := generator.MultipleChoice(q, e.negation, e.swapped, e.unchanged, e.wrongQuantifier)
@@ -197,6 +221,23 @@ func (g *contrapositiveGen) Generate(ctx generator.GeneratorContext) generator.P
 		{"x > 3", "x\u00b2 > 9", "x \u2264 3", "x\u00b2 \u2264 9"},
 		{"a divides 12", "a divides 24", "a does not divide 12", "a does not divide 24"},
 	}
+	// The three pairs above are fixed, so the concept had three questions in
+	// total. A drawn factor keeps the logic identical while the statements change.
+	d := 2 + rand.Intn(4)
+	k := 2 + rand.Intn(3)
+	pairs = append(pairs,
+		pair{
+			fmt.Sprintf("n is a multiple of %d", d), fmt.Sprintf("n is a multiple of %d", d*k),
+			fmt.Sprintf("n is not a multiple of %d", d), fmt.Sprintf("n is not a multiple of %d", d*k),
+		},
+		pair{
+			fmt.Sprintf("x > %d", d), fmt.Sprintf("x + %d > %d", k, d+k),
+			fmt.Sprintf("x \u2264 %d", d), fmt.Sprintf("x + %d \u2264 %d", k, d+k),
+		},
+		pair{
+			fmt.Sprintf("n is a multiple of %d", d), fmt.Sprintf("n\u00b2 is a multiple of %d", d*d),
+			fmt.Sprintf("n is not a multiple of %d", d), fmt.Sprintf("n\u00b2 is not a multiple of %d", d*d),
+		})
 	s := pairs[rand.Intn(len(pairs))]
 	correct := fmt.Sprintf("If %s then %s", s.notQ, s.notP)
 	converse := fmt.Sprintf("If %s then %s", s.q, s.p)
