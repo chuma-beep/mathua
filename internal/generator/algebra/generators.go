@@ -892,8 +892,8 @@ func (g *funcQuadGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type algExpConceptGen struct{}
 
 func (g *algExpConceptGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	a := rand.Intn(3) + 2
-	x := rand.Intn(4) + 1
+	a := rand.Intn(8) + 2
+	x := rand.Intn(6) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("If \\(f(x) = %d^{x}\\), find \\(f(%d)\\).", a, x),
 		Answer:      fmt.Sprintf("%d", mathutil.IntPow(a, x)),
@@ -905,8 +905,8 @@ func (g *algExpConceptGen) Generate(ctx generator.GeneratorContext) generator.Pr
 type algExpEvaluateGen struct{}
 
 func (g *algExpEvaluateGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	a := rand.Intn(3) + 2
-	x := rand.Intn(4) + 2
+	a := rand.Intn(8) + 3
+	x := rand.Intn(6) + 2
 	return generator.Problem{
 		Question:    fmt.Sprintf("Evaluate: \\(%d^{%d}\\)", a, x),
 		Answer:      fmt.Sprintf("%d", mathutil.IntPow(a, x)),
@@ -939,8 +939,8 @@ func (g *logConceptGen) Generate(ctx generator.GeneratorContext) generator.Probl
 type logEvaluateGen struct{}
 
 func (g *logEvaluateGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	base := rand.Intn(3) + 2
-	exp := rand.Intn(4) + 1
+	base := rand.Intn(9) + 2
+	exp := rand.Intn(6) + 1
 	val := mathutil.IntPow(base, exp)
 	return generator.Problem{
 		Question:    fmt.Sprintf("Evaluate: \\(\\log_{%d}(%d)\\)", base, val),
