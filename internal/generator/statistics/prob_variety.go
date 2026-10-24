@@ -5,6 +5,7 @@ import (
 	"math"
 	"math/rand"
 	"strconv"
+	"strings"
 
 	"github.com/chuma-beep/mathua/internal/generator"
 )
@@ -85,13 +86,11 @@ func (g *chiSquareTestGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		chi += float64(diff*diff) / float64(expected)
 		parts[i] = fmt.Sprintf("%d", diff*diff)
 	}
-	obs := ""
+	obsParts := make([]string, len(observed))
 	for i, o := range observed {
-		if i > 0 {
-			obs += ", "
-		}
-		obs += strconv.Itoa(o)
+		obsParts[i] = strconv.Itoa(o)
 	}
+	obs := strings.Join(obsParts, ", ")
 	return generator.Problem{
 		Question: fmt.Sprintf("A goodness-of-fit test compares observed counts %s with %d expected counts of %d each. What is chi-square = sum (O - E)^2/E?", obs, k, expected),
 		Answer:   statTrim(chi),
@@ -110,24 +109,14 @@ func (g *chiSquareTestGen) Generate(ctx generator.GeneratorContext) generator.Pr
 // repeatInt renders the same count k times, which is what the batch test reads
 // to recompute chi-square independently.
 func repeatInt(v, k int) string {
-	out := ""
-	for i := 0; i < k; i++ {
-		if i > 0 {
-			out += ","
-		}
-		out += strconv.Itoa(v)
+	parts := make([]string, k)
+	for i := range parts {
+		parts[i] = strconv.Itoa(v)
 	}
-	return out
+	return strings.Join(parts, ",")
 }
 
 // joinStrings joins with commas for the explanation text.
 func joinStrings(parts []string) string {
-	out := ""
-	for i, p := range parts {
-		if i > 0 {
-			out += ", "
-		}
-		out += p
-	}
-	return out
+	return strings.Join(parts, ", ")
 }
