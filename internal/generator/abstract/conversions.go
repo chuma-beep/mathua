@@ -114,8 +114,7 @@ func (g *lagrangeIndexGen) Generate(ctx generator.GeneratorContext) generator.Pr
 type cyclicGeneratorsGen struct{}
 
 func (g *cyclicGeneratorsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	ns := []int{7, 8, 9, 10, 12, 14, 15, 16, 18, 20, 24, 30}
-	n := ns[rand.Intn(len(ns))]
+	n := 5 + rand.Intn(32)
 	phi := abstractTotient(n)
 	return generator.Problem{
 		Question: fmt.Sprintf("The cyclic group of order %d is written additively as the integers modulo %d. How many of its elements generate the whole group?", n, n),
@@ -156,7 +155,7 @@ func (g *symmetricOrderGen) Generate(ctx generator.GeneratorContext) generator.P
 type dihedralOrderGen struct{}
 
 func (g *dihedralOrderGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	n := 3 + rand.Intn(10)
+	n := 3 + rand.Intn(22)
 	order := 2 * n
 	return generator.Problem{
 		Question: fmt.Sprintf("The dihedral group of a regular %d-gon consists of its rotations and reflections. What is the order of that group?", n),
@@ -252,8 +251,7 @@ func (g *kernelSizeGen) Generate(ctx generator.GeneratorContext) generator.Probl
 type automorphismCountGen struct{}
 
 func (g *automorphismCountGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	ns := []int{5, 7, 8, 9, 10, 12, 15, 16, 20, 24}
-	n := ns[rand.Intn(len(ns))]
+	n := 5 + rand.Intn(32)
 	phi := abstractTotient(n)
 	return generator.Problem{
 		Question: fmt.Sprintf("An automorphism of the cyclic group of order %d sends a generator to another generator. How many automorphisms does that group have?", n),
