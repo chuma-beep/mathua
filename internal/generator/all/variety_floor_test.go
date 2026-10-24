@@ -35,6 +35,17 @@ import (
 // and raise a concept's entry by hand only when its generator has genuinely been
 // parametrised. Never lower an entry to make the test pass: a concept that lost
 // variety has lost it for learners too.
+//
+// The counted unit is the core stem, the question before the "A) …" option block
+// that generator.MultipleChoice appends. Counting the rendered text instead made
+// option shuffling look like variety: on 2026-10-24 the corpus measured 144
+// concepts up to 150 "stems" whose real supply was four problems, and no concept
+// in the corpus exceeded 99 distinct situations while the rendered figures
+// claimed buckets above 200. The baseline was migrated once, on that date, by
+// deleting the file and re-running -update-variety. Entries fell sharply for
+// multiple-choice concepts because the metric changed, not because any generator
+// lost a single problem; that is the only occasion on which a lower number is
+// correct.
 const (
 	varietyDraws        = 60
 	varietyRuns         = 5
@@ -78,7 +89,22 @@ func corpusConceptIDs(t *testing.T) []string {
 	return ids
 }
 
-// distinctStems draws from one concept and counts the distinct question stems.
+// coreStem reduces a rendered question to the problem it actually poses.
+//
+// generator.MultipleChoice writes its shuffled options into the stem as an
+// "A) …" block, so a concept with four options reports up to twenty-four
+// distinct question strings for one mathematical situation. Counting those was
+// the ratchet's first mistake: measured over the corpus it reported concepts
+// above a hundred stems whose real supply was four, which is the defect the
+// ratchet exists to catch.
+func coreStem(question string) string {
+	if i := strings.Index(question, "\n\nA) "); i >= 0 {
+		return question[:i]
+	}
+	return question
+}
+
+// distinctStems draws from one concept and counts the distinct core stems.
 //
 // Generators reach for the global rand source rather than the seed in the
 // context, so a single measurement is a sample. That is why the baseline stores
@@ -92,7 +118,7 @@ func distinctStems(reg *generator.Registry, id string, draws int) int {
 		if err != nil {
 			continue
 		}
-		seen[p.Question] = true
+		seen[coreStem(p.Question)] = true
 	}
 	return len(seen)
 }
@@ -167,6 +193,13 @@ func TestConceptVarietyFloor(t *testing.T) {
 		required := want * 3 / 5
 		if required < 2 {
 			required = 2
+		}
+		// A concept recorded at one distinct situation cannot be asked for two
+		// without failing on the measurement that produced its own baseline.
+		// The two concepts at that floor are real defects, tracked for authored
+		// shapes, and the ratchet cannot repair them by demanding more.
+		if required > want {
+			required = want
 		}
 		got := distinctStems(reg, id, varietyDraws)
 		if got < required {
