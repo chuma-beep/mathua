@@ -226,25 +226,6 @@ func (g *sumToProductGen) Generate(ctx generator.GeneratorContext) generator.Pro
 // Triple angle (numeric)
 // ---------------------------------------------------------------------------
 
-type tripleAngleGen struct{}
-
-func (g *tripleAngleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type triple struct{ opp, adj, hyp int }
-	triples := []triple{{3, 4, 5}, {5, 12, 13}, {8, 15, 17}, {7, 24, 25}, {20, 21, 29}, {9, 40, 41}}
-	tr := triples[rand.Intn(len(triples))]
-	// sin(3t) = 3 sin t - 4 sin^3 t = (3*opp*hyp^2 - 4*opp^3)/hyp^3
-	num := 3*tr.opp*tr.hyp*tr.hyp - 4*tr.opp*tr.opp*tr.opp
-	den := tr.hyp * tr.hyp * tr.hyp
-	answer := trigFrac(num, den)
-	return generator.Problem{
-		Question: fmt.Sprintf("If \\(\\sin\\theta = %d/%d\\) and \\(\\theta\\) is acute, what is \\(\\sin(3\\theta)\\)? Give an exact fraction.", tr.opp, tr.hyp),
-		Answer:   answer,
-		Explanation: fmt.Sprintf("The triple-angle identity is \\(\\sin(3\\theta) = 3\\sin\\theta - 4\\sin^3\\theta\\). With \\(\\sin\\theta = %d/%d\\) the first term is \\(%d/%d\\) and the second is \\(4 \\cdot %d/%d\\), so the difference is \\(%s\\). Because the angle is acute the sine is positive and no sign choice is needed.",
-			tr.opp, tr.hyp, 3*tr.opp, tr.hyp, tr.opp*tr.opp*tr.opp, den, answer),
-		Facts: map[string]string{"opp": strconv.Itoa(tr.opp), "hyp": strconv.Itoa(tr.hyp), "answer": answer},
-	}
-}
-
 // ---------------------------------------------------------------------------
 // Power reduction (numeric)
 // ---------------------------------------------------------------------------
@@ -329,31 +310,6 @@ func (g *generalSolutionGen) Generate(ctx generator.GeneratorContext) generator.
 // ---------------------------------------------------------------------------
 // Linear equations (numeric)
 // ---------------------------------------------------------------------------
-
-type linearEqGen struct{}
-
-func (g *linearEqGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		a, b  int
-		root  int
-		ratio string
-	}
-	claims := []claim{
-		{2, 1, 30, "1/2"},
-		{2, -1, 210, "-1/2"},
-		{2, 2, 90, "1"},
-		{2, -2, 270, "-1"},
-		{1, 0, 0, "0"},
-	}
-	c := claims[rand.Intn(len(claims))]
-	return generator.Problem{
-		Question: fmt.Sprintf("Solve \\(%d\\sin x = %d\\) for the smallest nonnegative solution in degrees.", c.a, c.b),
-		Answer:   strconv.Itoa(c.root),
-		Explanation: fmt.Sprintf("Dividing both sides by %d gives \\(\\sin x = %s\\). The smallest nonnegative angle with that sine is \\(%d^{\\circ}\\), which is read from the unit circle after the reference value is known. A linear trigonometric equation is reduced to a reference value this way before the general solution is read off.",
-			c.a, c.ratio, c.root),
-		Facts: map[string]string{"a": strconv.Itoa(c.a), "b": strconv.Itoa(c.b), "ratio": c.ratio, "answer": strconv.Itoa(c.root)},
-	}
-}
 
 // ---------------------------------------------------------------------------
 // Advanced inequalities (multiple choice)

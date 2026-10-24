@@ -261,8 +261,8 @@ func TestRaiseNumericRecompute(t *testing.T) {
 
 	for i := 0; i < 200; i++ {
 		p := trigRaiseSample(t, reg, "trig.ident.triple_angle", i)
-		opp := trigRaiseIntFact(t, p, "opp")
 		hyp := trigRaiseIntFact(t, p, "hyp")
+		opp := trigRaiseIntFact(t, p, "opp")
 		num := 3*opp*hyp*hyp - 4*opp*opp*opp
 		want := trigFrac(num, hyp*hyp*hyp)
 		if p.Answer != want {

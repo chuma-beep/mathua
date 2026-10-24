@@ -401,65 +401,6 @@ func (g *proportionSEGen) Generate(ctx generator.GeneratorContext) generator.Pro
 // 7. The chi-square goodness-of-fit test (numeric)
 // ---------------------------------------------------------------------------
 
-type chiSquareTestGen struct{}
-
-func (g *chiSquareTestGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question string
-		answer   string
-		observed []int
-		expected []int
-		reason   string
-	}
-	claims := []claim{
-		{
-			question: "A goodness-of-fit test compares observed counts 10, 10, 10 with expected counts 10, 10, 10. What is chi-square = sum (O - E)^2/E? (enter a number)",
-			answer:   "0", observed: []int{10, 10, 10}, expected: []int{10, 10, 10},
-			reason: "Every observed count equals its expected count, so every term is zero.",
-		},
-		{
-			question: "A goodness-of-fit test compares observed counts 12, 9, 9 with expected counts 10, 10, 10. What is chi-square = sum (O - E)^2/E? (enter a decimal)",
-			answer:   "0.6", observed: []int{12, 9, 9}, expected: []int{10, 10, 10},
-			reason: "The terms are 4/10, 1/10 and 1/10, summing to 0.6.",
-		},
-		{
-			question: "A goodness-of-fit test compares observed counts 15, 5 with expected counts 10, 10. What is chi-square = sum (O - E)^2/E? (enter a number)",
-			answer:   "5", observed: []int{15, 5}, expected: []int{10, 10},
-			reason: "The terms are 25/10 and 25/10, summing to 5.",
-		},
-		{
-			question: "A goodness-of-fit test compares observed counts 12, 8, 10, 10 with expected counts 10, 10, 10, 10. What is chi-square = sum (O - E)^2/E? (enter a decimal)",
-			answer:   "0.8", observed: []int{12, 8, 10, 10}, expected: []int{10, 10, 10, 10},
-			reason: "The terms are 4/10, 4/10, 0 and 0, summing to 0.8.",
-		},
-		{
-			question: "A goodness-of-fit test compares observed counts 18, 12 with expected counts 15, 15. What is chi-square = sum (O - E)^2/E? (enter a decimal)",
-			answer:   "1.2", observed: []int{18, 12}, expected: []int{15, 15},
-			reason: "The terms are 9/15 and 9/15, summing to 1.2.",
-		},
-		{
-			question: "A goodness-of-fit test compares observed counts 8, 12, 10 with expected counts 10, 10, 10. What is chi-square = sum (O - E)^2/E? (enter a decimal)",
-			answer:   "0.8", observed: []int{8, 12, 10}, expected: []int{10, 10, 10},
-			reason: "The terms are 4/10, 4/10 and 0, summing to 0.8.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	obs := make([]string, len(c.observed))
-	exp := make([]string, len(c.expected))
-	for i := range c.observed {
-		obs[i] = strconv.Itoa(c.observed[i])
-		exp[i] = strconv.Itoa(c.expected[i])
-	}
-	return generator.Problem{
-		Question:    c.question,
-		Answer:      c.answer,
-		Explanation: c.reason,
-		Facts: map[string]string{
-			"observed": strings.Join(obs, ","), "expected": strings.Join(exp, ","), "answer": c.answer,
-		},
-	}
-}
-
 // ---------------------------------------------------------------------------
 // 8. One-way ANOVA (numeric)
 // ---------------------------------------------------------------------------
