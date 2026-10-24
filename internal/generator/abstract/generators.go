@@ -80,11 +80,9 @@ func (g *groupDefGen) Generate(ctx generator.GeneratorContext) generator.Problem
 			{"integers", "multiplication", "inverses", "2 has no integer multiplicative inverse: inverses fail."},
 		}
 		f := failTable[rand.Intn(len(failTable))]
-		return generator.Problem{
-			Question:    fmt.Sprintf("The set of %s under %s is NOT a group. Which axiom fails: closure, identity, or inverses? (type one word)", f.set, f.operation),
-			Answer:      f.axiom,
-			Explanation: f.reason,
-		}
+		return groupChoice(
+			fmt.Sprintf("The set of %s under %s is NOT a group. Which axiom fails?", f.set, f.operation),
+			f.axiom, f.reason, "closure", "identity", "inverses")
 	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Is the set of %s under %s a group? (yes/no)", e.set, e.operation),
@@ -128,13 +126,9 @@ func (g *groupExamplesGen) Generate(ctx generator.GeneratorContext) generator.Pr
 			{"What is the order of S_3? (enter a number)", "6", "S_3 has 3! = 6 permutations."},
 		}
 		v := invTable[rand.Intn(len(invTable))]
-		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
+		return groupChoice(v.question, v.answer, v.reason, "0", "1", "2", "4", "5", "6")
 	}
-	return generator.Problem{
-		Question:    fmt.Sprintf("Is %s under %s a group? (yes/no)", e.set, e.operation),
-		Answer:      e.isGroup,
-		Explanation: e.reason,
-	}
+	return groupYesNo(fmt.Sprintf("Is %s under %s a group? (yes/no)", e.set, e.operation), e.isGroup, e.reason)
 }
 
 // ----- 3. subgroup -----
@@ -1242,7 +1236,7 @@ func (g *nilpotentGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
 	}
 	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return groupYesNo(e.q, e.a, e.e)
 }
 
 type tensorGen struct{}
@@ -1326,7 +1320,7 @@ func (g *solvableGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
 	}
 	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return groupYesNo(e.q, e.a, e.e)
 }
 
 type freeGroupGen struct{}
@@ -1368,7 +1362,7 @@ func (g *freeGroupGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
 	}
 	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return groupYesNo(e.q, e.a, e.e)
 }
 
 type noetherianGen struct{}
