@@ -59,7 +59,7 @@ Locates a student's knowledge frontier using a compressed covering set + info-ga
 
 The engine asks two probes per concept in the cover. It stops at 25 questions once the cover is finished. A narrow scope runs out of cover first and stops sooner. A five-concept scope asks ten questions and still reports `min_total: 25`. The engine does not pad the difference.
 
-The engine targets `80%` difficulty via `engine.computeDifficulty` (`internal/engine/engine.go:486`, `weakness→difficulty` 0.3–0.8).
+The engine targets `80%` difficulty via `engine.computeDifficulty` (`internal/engine/engine.go:552`, `weakness→difficulty` 0.3–0.8).
 
 ## Full documentation
 

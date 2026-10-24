@@ -39,7 +39,7 @@ export function formatForGradingType(gradingType?: string): AnswerFormat {
     case 'symbolic':
       return { hint: 'Answer in simplest form', inputMode: 'text' }
     case 'multiple_choice':
-      return { hint: 'Type the exact answer', inputMode: 'text' }
+      return { hint: 'Select an option or type its letter', inputMode: 'text' }
     case 'comparison':
       return { hint: 'Answer <, > or =', inputMode: 'text' }
     case 'ordering':

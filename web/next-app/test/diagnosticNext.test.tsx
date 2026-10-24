@@ -26,7 +26,7 @@ describe('formatForGradingType', () => {
   it('maps known types to hint + keyboard, unknowns to generic text', () => {
     expect(formatForGradingType('numeric')).toEqual({ hint: 'Answer with a number, fraction or mixed number (e.g. 4 1/10)', inputMode: 'numeric' })
     expect(formatForGradingType('expression').inputMode).toBe('text')
-    expect(formatForGradingType('multiple_choice').hint).toBe('Type the exact answer')
+    expect(formatForGradingType('multiple_choice').hint).toBe('Select an option or type its letter')
     expect(formatForGradingType(undefined)).toEqual({ hint: 'Answer in the form shown', inputMode: 'text' })
     expect(formatForGradingType('bogus')).toEqual({ hint: 'Answer in the form shown', inputMode: 'text' })
   })

@@ -1074,8 +1074,23 @@ func TestResolveChoiceAnswerMapsALetterToTheAuthoredOption(t *testing.T) {
 	if got := resolveChoiceAnswer(question, "D"); got != "down on the left" {
 		t.Errorf("D resolved to %q, want the authored text", got)
 	}
+	if got := resolveChoiceAnswer(question, "D)"); got != "down on the left" {
+		t.Errorf("D) resolved to %q, want the authored text", got)
+	}
+	if got := resolveChoiceAnswer(question, "(d)"); got != "down on the left" {
+		t.Errorf("(d) resolved to %q, want the authored text", got)
+	}
+	if got := resolveChoiceAnswer(question, "Option D"); got != "down on the left" {
+		t.Errorf("Option D resolved to %q, want the authored text", got)
+	}
 	if got := resolveChoiceAnswer(question, " c "); got != `\(x^{2}<0\)` {
 		t.Errorf("lowercase letter with spaces resolved to %q", got)
+	}
+	if got := resolveChoiceAnswer(question, "downontheleft"); got != "down on the left" {
+		t.Errorf("downontheleft without spaces resolved to %q, want the authored text", got)
+	}
+	if got := resolveChoiceAnswer(question, "down on the left."); got != "down on the left" {
+		t.Errorf("down on the left with trailing dot resolved to %q, want the authored text", got)
 	}
 	if got := resolveChoiceAnswer(question, "1 − P(A)"); got != "1 − P(A)" {
 		t.Errorf("a full option text was rewritten to %q", got)

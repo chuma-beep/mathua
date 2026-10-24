@@ -6,6 +6,7 @@ import (
 )
 
 var singleLetterRe = regexp.MustCompile(`\b[A-Za-z]\b`)
+var choicePrefixRe = regexp.MustCompile(`^(?i)(?:option|choice)?\s*\(?([A-E])(?:\)|\.|\:)?$`)
 
 // A plain multi-word phrase, the only shape where the answer field can lose a
 // word boundary without changing meaning.
@@ -24,8 +25,8 @@ var wordPhraseRe = regexp.MustCompile(`^[A-Za-z]+(?:\s+[A-Za-z]+)+$`)
 // here. The answer must be letters only, so a collapsed phrase cannot absorb
 // digits, operators or a fraction.
 func samePhrase(expected, answer string) bool {
-	e := strings.ToLower(strings.TrimSpace(expected))
-	a := strings.ToLower(strings.TrimSpace(answer))
+	e := strings.TrimRight(strings.ToLower(strings.TrimSpace(expected)), ".!?,;")
+	a := strings.TrimRight(strings.ToLower(strings.TrimSpace(answer)), ".!?,;")
 	if !wordPhraseRe.MatchString(e) || a == "" {
 		return false
 	}
@@ -49,15 +50,22 @@ func (g *choiceGrader) grade(expected, answer string) Result {
 	if strings.EqualFold(e, a) {
 		return Result{Correct: true, Score: 1}
 	}
+	if strings.EqualFold(strings.TrimRight(e, ".!?,;"), strings.TrimRight(a, ".!?,;")) {
+		return Result{Correct: true, Score: 1}
+	}
 	if samePhrase(e, a) {
 		return Result{Correct: true, Score: 1}
 	}
 
-	// If answer is a single letter, look for that letter in expected
-	if singleLetterRe.MatchString(a) && len(strings.TrimSpace(a)) == 1 {
+	// If answer is a single letter or labeled choice, look for that letter in expected
+	answerLetter := a
+	if m := choicePrefixRe.FindStringSubmatch(a); len(m) > 1 {
+		answerLetter = m[1]
+	}
+	if singleLetterRe.MatchString(answerLetter) && len(strings.TrimSpace(answerLetter)) == 1 {
 		letters := singleLetterRe.FindAllString(e, -1)
 		for _, l := range letters {
-			if strings.EqualFold(l, a) {
+			if strings.EqualFold(l, answerLetter) {
 				return Result{Correct: true, Score: 1}
 			}
 		}

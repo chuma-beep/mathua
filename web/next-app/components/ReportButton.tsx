@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { submitReport, type ReportKind, type ReportReason } from '../lib/api'
 
 interface ReportButtonProps {
@@ -39,6 +39,19 @@ export default function ReportButton(props: ReportButtonProps) {
   const [sending, setSending] = useState(false)
   const [sent, setSent] = useState(false)
   const [error, setError] = useState('')
+
+  useEffect(() => {
+    setSent(false)
+    setError('')
+  }, [props.question, props.conceptId, props.attemptId])
+
+  useEffect(() => {
+    if (!sent) return
+    const timer = setTimeout(() => {
+      setSent(false)
+    }, 4000)
+    return () => clearTimeout(timer)
+  }, [sent])
 
   async function handleSubmit() {
     if (sending || sent) return

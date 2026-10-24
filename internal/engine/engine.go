@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"hash/fnv"
 	"log"
+	"regexp"
 	"sort"
 	"strings"
 	"sync"
@@ -3171,13 +3172,45 @@ func (e *Engine) BackfillWeeklyXP(now time.Time) (int, error) {
 // Multi-character answers, and stems without a parseable option list, pass
 // through untouched: this must never let a learner answer a numeric question by
 // typing a letter.
+var choicePrefixRe = regexp.MustCompile(`^(?i)(?:option|choice)?\s*\(?([A-E])(?:\)|\.|\:)?$`)
+
+func collapseAlphanumeric(s string) string {
+	var b strings.Builder
+	for _, r := range strings.ToLower(s) {
+		if (r >= 'a' && r <= 'z') || (r >= '0' && r <= '9') {
+			b.WriteRune(r)
+		}
+	}
+	return b.String()
+}
+
 func resolveChoiceAnswer(question, answer string) string {
-	letter := strings.ToUpper(strings.TrimSpace(answer))
-	if len(letter) != 1 || letter[0] < 'A' || letter[0] > 'E' {
+	opts := generator.ChoiceOptions(question)
+	if len(opts) == 0 {
 		return answer
 	}
-	if text, ok := generator.ChoiceOptions(question)[letter]; ok {
-		return text
+	trimmed := strings.TrimSpace(answer)
+	if m := choicePrefixRe.FindStringSubmatch(trimmed); len(m) > 1 {
+		letter := strings.ToUpper(m[1])
+		if text, ok := opts[letter]; ok {
+			return text
+		}
+	}
+	for _, text := range opts {
+		if strings.EqualFold(trimmed, strings.TrimSpace(text)) {
+			return text
+		}
+		if strings.EqualFold(strings.TrimRight(trimmed, ".!?,;"), strings.TrimRight(strings.TrimSpace(text), ".!?,;")) {
+			return text
+		}
+	}
+	ca := collapseAlphanumeric(trimmed)
+	if ca != "" {
+		for _, text := range opts {
+			if ca == collapseAlphanumeric(text) {
+				return text
+			}
+		}
 	}
 	return answer
 }

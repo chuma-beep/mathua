@@ -42,3 +42,30 @@ func TestChoice_PhraseIgnoresOuterWhitespace(t *testing.T) {
 		t.Error("padded phrase was marked wrong")
 	}
 }
+
+// TestChoice_PhraseWithPunctuation covers phrases ending with a period or comma
+// where MathLive lost whitespace on answer submission.
+func TestChoice_PhraseWithPunctuation(t *testing.T) {
+	r := NewRouter()
+	const expected = "Division by zero is undefined."
+	for _, answer := range []string{
+		"division by zero is undefined.",
+		"division by zero is undefined",
+		"divisionbyzeroisundefined.",
+		"DivisionByZeroIsUndefined",
+	} {
+		if res := r.Grade(GradingMultipleChoice, expected, answer); !res.Correct {
+			t.Errorf("answer %q to expected %q was marked wrong", answer, expected)
+		}
+	}
+}
+
+// TestChoice_LabeledChoiceVariants covers student inputs such as "A)", "(A)" or "Option A".
+func TestChoice_LabeledChoiceVariants(t *testing.T) {
+	r := NewRouter()
+	for _, answer := range []string{"A", "a", "A)", "a)", "(A)", "(a)", "Option A", "option a", "Choice A", "A."} {
+		if res := r.Grade(GradingMultipleChoice, "Option A", answer); !res.Correct {
+			t.Errorf("answer %q to expected %q was marked wrong", answer, "Option A")
+		}
+	}
+}

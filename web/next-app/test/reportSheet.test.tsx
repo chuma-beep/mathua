@@ -48,4 +48,31 @@ describe('the report sheet', () => {
       kind: 'question',
     })
   })
+
+  it('resets confirmation when question prop changes', async () => {
+    const { rerender } = render(<ReportButton kind="question" conceptId="a" question="q1" />)
+    fireEvent.click(screen.getByRole('button', { name: /report a problem/i }))
+    fireEvent.click(screen.getByRole('button', { name: /send report/i }))
+
+    await waitFor(() => expect(screen.getByText(/thanks — reported/i)).toBeInTheDocument())
+
+    rerender(<ReportButton kind="question" conceptId="a" question="q2" />)
+    expect(screen.getByRole('button', { name: /report a problem/i })).toBeInTheDocument()
+  })
+
+  it('reverts confirmation message after timeout', async () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true })
+    try {
+      render(<ReportButton kind="question" conceptId="a" question="q1" />)
+      fireEvent.click(screen.getByRole('button', { name: /report a problem/i }))
+      fireEvent.click(screen.getByRole('button', { name: /send report/i }))
+
+      await waitFor(() => expect(screen.getByText(/thanks — reported/i)).toBeInTheDocument())
+
+      await vi.advanceTimersByTimeAsync(4100)
+      expect(screen.getByRole('button', { name: /report a problem/i })).toBeInTheDocument()
+    } finally {
+      vi.useRealTimers()
+    }
+  })
 })
