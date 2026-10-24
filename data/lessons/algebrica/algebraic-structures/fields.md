@@ -79,7 +79,7 @@ Every field \(F\) has an associated non-negative integer called its characterist
 If no such \(n\) exists, the characteristic is defined to be 0. The characteristic of a field is always either zero or a prime number. If the characteristic were a composite number \(n = ab\) with \(1 < a, b < n\), one could write:
 
 \[
-0 = \\underbrace{1 + \\cdots + 1}\_{n} = \\left(\\underbrace{1 + \\cdots + 1}\_{a}\\right) \\cdot \\left(\\underbrace{1 + \\cdots + 1}\_{b}\\right)
+0 = \\underbrace{1 + \\cdots + 1}_{n} = \\left(\\underbrace{1 + \\cdots + 1}_{a}\\right) \\cdot \\left(\\underbrace{1 + \\cdots + 1}_{b}\\right)
 \]
 
 Since a field has no zero divisors, one of the two factors would have to be zero, contradicting the minimality of \(n\). The fields \(\\mathbb{Q}\), \(\\mathbb{R}\), and \(\\mathbb{C}\) all have characteristic zero. The finite field \(\\mathbb{F}_p\) has characteristic \(p\).

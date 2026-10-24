@@ -73,7 +73,7 @@ The exponential function exhibits first-order behaviour near the origin: the dev
 \]
 This limit reflects the fact that the derivative of \(e^x\) at the origin equals one:
 \[
-\left.\frac{d}{dx}e^x\right|\_{x=0} = 1
+\left.\frac{d}{dx}e^x\right|_{x=0} = 1
 \]
 This result follows directly from the Taylor expansion of \(e^x\) near the origin:
 \[
@@ -95,7 +95,7 @@ For the natural logarithm, the following limit holds:
 \]
 This result corresponds to the derivative of \(\ln x\) evaluated at \(x = 1\):
 \[
-\left.\frac{d}{dx}\ln x\right|\_{x=1} = 1
+\left.\frac{d}{dx}\ln x\right|_{x=1} = 1
 \]
 More generally, for any real constant \(a\) we have:
 \[

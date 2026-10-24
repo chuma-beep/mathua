@@ -117,7 +117,9 @@ var (
 	// underline of a subscript becomes a literal underscore, so
 	// \underbrace{...}\_{n} prints the braces instead of stacking the
 	// label. Seen in the powers lesson, where KaTeX fell back to raw source.
-	escapedScriptRe = regexp.MustCompile(`\}\\([_^])\{`)
+	// The escape can follow any character, not only a closing brace:
+	// \right|\_{x=0} in remarkable-limits does the same damage after a bar.
+	escapedScriptRe = regexp.MustCompile(`\\([_^])\{`)
 	argCorruptRe    = regexp.MustCompile(`\\(mathrm|text|mbox|mathbf|mathit|mathsf|mathtt|textrm|textbf|textit|textup|textnormal|operatorname)\}\{`)
 	punctEscapeRe   = regexp.MustCompile(`\\([+.=])`)
 	// Scrape artifacts: a dangling backslash at the end of math content, and

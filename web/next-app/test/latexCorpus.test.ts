@@ -168,6 +168,22 @@ describe('lesson corpus renders through KaTeX', () => {
 
         if (LEAK_RE.test(prose)) add(rel, 'raw latex in prose')
 
+        // A display block the pipeline failed to wrap never reaches KaTeX, so
+        // no renderer error can reveal it. Ask the question directly: after
+        // preparation, no math delimiter should survive.
+        if (prepared.includes('$$')) add(rel, 'unwrapped display math')
+
+        // The escaping pass that produced lesson sources can turn a subscript
+        // underscore into \_, which KaTeX renders as a literal underscore
+        // instead of throwing. The powers lesson shipped that on 2026-10-24 and
+        // both the KaTeX gate and the Go brace check passed it, so the check
+        // has to be structural rather than an exception.
+        const innerRe = /<span class="math-(?:display|inline)">([\s\S]*?)<\/span>/g
+        let im: RegExpExecArray | null
+        while ((im = innerRe.exec(prepared)) !== null) {
+          if (/\\[_^]+\{/.test(unescapeHtml(im[1]))) add(rel, 'escaped script')
+        }
+
         // An Example heading immediately followed by its Solution marker means
         // the statement text was lost in ingestion.
         const lines = bodies[rel].split('\n')

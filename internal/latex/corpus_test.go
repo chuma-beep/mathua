@@ -3,6 +3,7 @@ package latex
 import (
 	"encoding/json"
 	"flag"
+	"fmt"
 	"io/fs"
 	"os"
 	"path/filepath"
@@ -176,5 +177,64 @@ func TestCorpusGate(t *testing.T) {
 		if _, ok := fresh[file]; !ok {
 			t.Errorf("%s: no longer warns; remove it from the baseline (-update)", file)
 		}
+	}
+}
+
+// escapedScriptSrc matches a backslash-escaped script marker followed by a
+// brace, as in `\underbrace{a \cdots a}\_{n \text{ times}}`.
+//
+// The escaping pass that produces lesson sources turns a subscript's underscore
+// into \_, which still leaves balanced braces and therefore passes both the
+// brace check and KaTeX: KaTeX renders \_{n} as a literal underscore with a
+// subscript, so nothing throws and the learner sees a wrong formula rather than
+// an error. The powers lesson shipped exactly that on 2026-10-24 and the
+// KaTeX corpus gate passed it. Only a source-level rule catches the class,
+// because the failure is silent in every renderer.
+var escapedScriptSrc = regexp.MustCompile(`\\[_^]+\{`)
+
+// TestCorpusSourceHasNoCorruptedScripts checks the raw lesson sources, before
+// canonicalization can repair them.
+//
+// Scope is the single-backslash form. A separate family of files doubles every
+// LaTeX command instead (\underbrace, \frac, \left: six files carry \frac,
+// three \left and one \underbrace, for example
+// algebrica/algebraic-structures/fields.md). Halving those wholesale is unsafe
+// because \\ is also the row separator inside align and matrix, so that repair
+// has to be done per environment and belongs in its own change.
+//
+// TestCorpusGate validates the canonicalized form, and Canonicalize now repairs
+// an escaped script. Repairing it is right for serving and wrong for authoring:
+// the file on disk stays corrupted, and any consumer that reads the source
+// without canonicalizing sees the broken formula. This test keeps the source
+// clean so the repair stays a safety net rather than the thing keeping the
+// corpus readable.
+func TestCorpusSourceHasNoCorruptedScripts(t *testing.T) {
+	const corpusRoot = "../../data/lessons"
+	if _, err := os.Stat(corpusRoot); err != nil {
+		t.Skip("lesson corpus not present")
+	}
+
+	var problems []string
+	err := filepath.WalkDir(corpusRoot, func(path string, d fs.DirEntry, err error) error {
+		if err != nil || d.IsDir() || !strings.HasSuffix(path, ".md") {
+			return err
+		}
+		data, readErr := os.ReadFile(path)
+		if readErr != nil {
+			return readErr
+		}
+		for i, line := range strings.Split(string(data), "\n") {
+			if escapedScriptSrc.MatchString(line) {
+				problems = append(problems, fmt.Sprintf("%s:%d: %s", path, i+1, strings.TrimSpace(line)))
+			}
+		}
+		return nil
+	})
+	if err != nil {
+		t.Fatalf("walk corpus: %v", err)
+	}
+	sort.Strings(problems)
+	for _, p := range problems {
+		t.Errorf("corrupted script in lesson source (- for _ or ^ in a subscript): %s", p)
 	}
 }
