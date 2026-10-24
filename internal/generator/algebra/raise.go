@@ -126,7 +126,7 @@ func (g *piecewiseGen) Generate(ctx generator.GeneratorContext) generator.Proble
 type transformationsGen struct{}
 
 func (g *transformationsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return algPickMC([]algMCClaim{
+	claims := []algMCClaim{
 		{
 			q:           "Compared with the graph of y = f(x), the graph of y = f(x) + 3 is...",
 			correct:     "shifted up three units",
@@ -151,7 +151,8 @@ func (g *transformationsGen) Generate(ctx generator.GeneratorContext) generator.
 			distractors: []string{"stretched horizontally by a factor of two", "compressed vertically by a factor of two", "shifted right two units"},
 			reason:      "Multiplying the input by two makes each output happen twice as soon, which squeezes the graph horizontally.",
 		},
-	})
+	}
+	return algPickMC(append(claims, computedTransformationClaims()...))
 }
 
 // ---------------------------------------------------------------------------

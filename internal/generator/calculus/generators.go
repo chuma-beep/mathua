@@ -1637,17 +1637,13 @@ func (g *numericalIntegralGen) Generate(ctx generator.GeneratorContext) generato
 type riemannCriteriaGen struct{}
 
 func (g *riemannCriteriaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		q, a, e string
+	claims := []conceptClaim{
+		{question: "Is f(x)=x² Riemann integrable on [0,1]?", correct: "yes", reason: "x² is continuous on [0,1], and continuous functions on closed intervals are Riemann integrable.", distractors: []string{"no"}},
+		{question: "Is f(x)={0 for x rational, 1 for x irrational} Riemann integrable on [0,1]?", correct: "no", reason: "The upper sum = 1 and lower sum = 0 for any partition, so the integral does not exist (Dirichlet function).", distractors: []string{"yes"}},
+		{question: "Is f(x)=1/x Riemann integrable on [0,1]?", correct: "no", reason: "1/x is unbounded near 0, so it is not Riemann integrable on [0,1] (though the improper integral exists).", distractors: []string{"yes"}},
+		{question: "Is a function with finitely many discontinuities Riemann integrable?", correct: "yes", reason: "A bounded function with finitely many discontinuities on [a,b] is Riemann integrable.", distractors: []string{"no"}},
 	}
-	table := []entry{
-		{"Is f(x)=x² Riemann integrable on [0,1]?", "yes", "x² is continuous on [0,1], and continuous functions on closed intervals are Riemann integrable."},
-		{"Is f(x)={0 for x rational, 1 for x irrational} Riemann integrable on [0,1]?", "no", "The upper sum = 1 and lower sum = 0 for any partition, so the integral does not exist (Dirichlet function)."},
-		{"Is f(x)=1/x Riemann integrable on [0,1]?", "no", "1/x is unbounded near 0, so it is not Riemann integrable on [0,1] (though the improper integral exists)."},
-		{"Is a function with finitely many discontinuities Riemann integrable?", "yes", "A bounded function with finitely many discontinuities on [a,b] is Riemann integrable."},
-	}
-	e := table[rand.Intn(len(table))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return conceptPickMC(append(claims, computedConceptClaims("calc.integral.riemann_criteria")...))
 }
 
 type trigIntegralsGen struct{}
@@ -1819,17 +1815,13 @@ func (g *bigOGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type littleOGen struct{}
 
 func (g *littleOGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		q, a, e string
+	claims := []conceptClaim{
+		{question: "What does f(x)=o(g(x)) as x→∞ mean? (yes/no: f(x)/g(x) tends to 0)", correct: "yes", reason: "f=o(g) means that f(x)/g(x) → 0 as x → ∞ (f grows strictly slower than g).", distractors: []string{"no"}},
+		{question: "Is x²=o(x³) as x→∞?", correct: "yes", reason: "x²/x³ = 1/x → 0, so x²=o(x³).", distractors: []string{"no"}},
+		{question: "Is x³=o(x³) as x→∞?", correct: "no", reason: "x³/x³ = 1 → 1, not 0, so x³≠o(x³). However, x³=O(x³).", distractors: []string{"yes"}},
+		{question: "What is the difference between O and o? (yes/no: o needs ratio → 0, O allows any bounded ratio)", correct: "yes", reason: "f=O(g) means |f|≤M·|g| for large x. f=o(g) means f/g → 0, which is a stricter requirement: o requires ratio → 0; O allows any bounded ratio.", distractors: []string{"no"}},
 	}
-	table := []entry{
-		{"What does f(x)=o(g(x)) as x→∞ mean? (yes/no: f(x)/g(x) tends to 0)", "yes", "f=o(g) means that f(x)/g(x) → 0 as x → ∞ (f grows strictly slower than g)."},
-		{"Is x²=o(x³) as x→∞?", "yes", "x²/x³ = 1/x → 0, so x²=o(x³)."},
-		{"Is x³=o(x³) as x→∞?", "no", "x³/x³ = 1 → 1, not 0, so x³≠o(x³). However, x³=O(x³)."},
-		{"What is the difference between O and o? (yes/no: o needs ratio → 0, O allows any bounded ratio)", "yes", "f=O(g) means |f|≤M·|g| for large x. f=o(g) means f/g → 0, which is a stricter requirement: o requires ratio → 0; O allows any bounded ratio."},
-	}
-	e := table[rand.Intn(len(table))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return conceptPickMC(append(claims, computedConceptClaims("calc.limit.little_o")...))
 }
 
 type uniformContinuityGen struct{}
@@ -1852,17 +1844,13 @@ func (g *uniformContinuityGen) Generate(ctx generator.GeneratorContext) generato
 type weierstrassLimitGen struct{}
 
 func (g *weierstrassLimitGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		q, a, e string
+	claims := []conceptClaim{
+		{question: "What does the extreme value theorem (Weierstrass) state? (yes/no: continuous f on [a,b] attains max and min)", correct: "yes", reason: "If f is continuous on [a,b], then there exist c,d∈[a,b] such that f(c)≤f(x)≤f(d) for all x∈[a,b]: a continuous function on [a,b] attains its max and min.", distractors: []string{"no"}},
+		{question: "Does the extreme value theorem apply to f(x)=1/x on (0,1]?", correct: "no", reason: "The interval must be closed. (0,1] is not closed, and in fact 1/x → ∞ as x→0+.", distractors: []string{"yes"}},
+		{question: "Does the extreme value theorem apply to f(x)=x on [0,1]?", correct: "yes", reason: "f(x)=x is continuous on the closed bounded interval [0,1], so it attains max=1 at x=1 and min=0 at x=0.", distractors: []string{"no"}},
+		{question: "Does the extreme value theorem apply to f(x)={x for x<1, 2 for x=1} on [0,1]?", correct: "no", reason: "f is not continuous on [0,1] (jump at x=1), so the EVT does not apply.", distractors: []string{"yes"}},
 	}
-	table := []entry{
-		{"What does the extreme value theorem (Weierstrass) state? (yes/no: continuous f on [a,b] attains max and min)", "yes", "If f is continuous on [a,b], then there exist c,d∈[a,b] such that f(c)≤f(x)≤f(d) for all x∈[a,b]: a continuous function on [a,b] attains its max and min."},
-		{"Does the extreme value theorem apply to f(x)=1/x on (0,1]?", "no", "The interval must be closed. (0,1] is not closed, and in fact 1/x → ∞ as x→0+."},
-		{"Does the extreme value theorem apply to f(x)=x on [0,1]?", "yes", "f(x)=x is continuous on the closed bounded interval [0,1], so it attains max=1 at x=1 and min=0 at x=0."},
-		{"Does the extreme value theorem apply to f(x)={x for x<1, 2 for x=1} on [0,1]?", "no", "f is not continuous on [0,1] (jump at x=1), so the EVT does not apply."},
-	}
-	e := table[rand.Intn(len(table))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return conceptPickMC(append(claims, computedConceptClaims("calc.limit.weierstrass")...))
 }
 
 // --- Sequence generators ---
@@ -1946,17 +1934,13 @@ func (g *seqConvergenceGen) Generate(ctx generator.GeneratorContext) generator.P
 type cauchySeqGen struct{}
 
 func (g *cauchySeqGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		q, a, e string
+	claims := []conceptClaim{
+		{question: "Does Cauchy mean terms get arbitrarily close as n increases? (yes/no)", correct: "yes", reason: "A sequence is Cauchy where for any ε>0, there exists N such that |aₘ-aₙ|<ε for all m,n>N; terms get arbitrarily close as n increases.", distractors: []string{"no"}},
+		{question: "In ℝ, do all Cauchy sequences converge?", correct: "yes", reason: "ℝ is complete, every Cauchy sequence in ℝ converges to a real number.", distractors: []string{"no"}},
+		{question: "In ℚ, do all Cauchy sequences converge?", correct: "no", reason: "ℚ is not complete. E.g., a sequence of rationals converging to √2 is Cauchy in ℚ but does not converge in ℚ.", distractors: []string{"yes"}},
+		{question: "Is every convergent sequence Cauchy?", correct: "yes", reason: "Every convergent sequence is Cauchy. In ℝ, the converse also holds: Cauchy ⟺ convergent.", distractors: []string{"no"}},
 	}
-	table := []entry{
-		{"Does Cauchy mean terms get arbitrarily close as n increases? (yes/no)", "yes", "A sequence is Cauchy where for any ε>0, there exists N such that |aₘ-aₙ|<ε for all m,n>N; terms get arbitrarily close as n increases."},
-		{"In ℝ, do all Cauchy sequences converge?", "yes", "ℝ is complete, every Cauchy sequence in ℝ converges to a real number."},
-		{"In ℚ, do all Cauchy sequences converge?", "no", "ℚ is not complete. E.g., a sequence of rationals converging to √2 is Cauchy in ℚ but does not converge in ℚ."},
-		{"Is every convergent sequence Cauchy?", "yes", "Every convergent sequence is Cauchy. In ℝ, the converse also holds: Cauchy ⟺ convergent."},
-	}
-	e := table[rand.Intn(len(table))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return conceptPickMC(append(claims, computedConceptClaims("calc.seq.cauchy")...))
 }
 
 type monotoneSeqGen struct{}
@@ -2143,17 +2127,13 @@ func (g *fourierSeriesGen) Generate(ctx generator.GeneratorContext) generator.Pr
 type functionSeriesGen struct{}
 
 func (g *functionSeriesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		q, a, e string
+	claims := []conceptClaim{
+		{question: "Is a function series one where each term is a function? (yes/no)", correct: "yes", reason: "A function series sum f(n)(x) is the sum of a sequence of functions; sum f_n(x) where each term is a function.", distractors: []string{"no"}},
+		{question: "Does pointwise convergence mean convergence for each fixed x? (yes/no)", correct: "yes", reason: "The series converges pointwise if for each x in the domain, the numerical series converges; sum f_n(x) converges for each fixed x.", distractors: []string{"no"}},
+		{question: "Does uniform convergence mean partial sums converge uniformly? (yes/no)", correct: "yes", reason: "The series converges uniformly if the sequence of partial sums converges uniformly; partial sums converge uniformly.", distractors: []string{"no"}},
+		{question: "Which convergence does the Weierstrass M-test give? (enter uniform)", correct: "uniform", reason: "Weierstrass M-test for testing uniform convergence: if |f(n)(x)| ≤ M(n) and sum M(n) converges, then sum f(n)(x) converges uniformly and absolutely.", distractors: []string{"pointwise", "absolutely", "almost everywhere"}},
 	}
-	table := []entry{
-		{"Is a function series one where each term is a function? (yes/no)", "yes", "A function series sum f(n)(x) is the sum of a sequence of functions; sum f_n(x) where each term is a function."},
-		{"Does pointwise convergence mean convergence for each fixed x? (yes/no)", "yes", "The series converges pointwise if for each x in the domain, the numerical series converges; sum f_n(x) converges for each fixed x."},
-		{"Does uniform convergence mean partial sums converge uniformly? (yes/no)", "yes", "The series converges uniformly if the sequence of partial sums converges uniformly; partial sums converge uniformly."},
-		{"Which convergence does the Weierstrass M-test give? (enter uniform)", "uniform", "Weierstrass M-test for testing uniform convergence: if |f(n)(x)| ≤ M(n) and sum M(n) converges, then sum f(n)(x) converges uniformly and absolutely."},
-	}
-	e := table[rand.Intn(len(table))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return conceptPickMC(append(claims, computedConceptClaims("calc.series.function_series")...))
 }
 
 type derivTrigOtherGen struct{}
@@ -2457,13 +2437,16 @@ type derivCurveSketchGen struct{}
 // y for yes and was marked wrong (report 118), and no form of the answer was
 // typeable in a maths editor.
 func (g *derivCurveSketchGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
+	// Every entry is a choice. Three of the four used to answer "yes"/"no" on a
+	// concept graded symbolic, so the client showed a maths field: a learner typed
+	// y for yes and was marked wrong (report 118).
+	type row struct {
 		q       string
 		a       string
 		e       string
 		options []string
 	}
-	table := []entry{
+	table := []row{
 		{
 			q:       "Where is the inflection point of \\(f(x)=x^{3}-3x\\)?",
 			a:       "0",
@@ -2489,16 +2472,22 @@ func (g *derivCurveSketchGen) Generate(ctx generator.GeneratorContext) generator
 			options: []string{"yes", "no"},
 		},
 	}
-	e := table[rand.Intn(len(table))]
-	distractors := make([]string, 0, len(e.options))
-	for _, o := range e.options {
-		if o != e.a {
-			distractors = append(distractors, o)
+	claims := make([]conceptClaim, 0, len(table))
+	for _, e := range table {
+		distractors := make([]string, 0, len(e.options))
+		for _, o := range e.options {
+			if o != e.a {
+				distractors = append(distractors, o)
+			}
 		}
+		claims = append(claims, conceptClaim{
+			question:    e.q,
+			correct:     e.a,
+			distractors: distractors,
+			reason:      e.e,
+		})
 	}
-	p := generator.MultipleChoice(e.q, e.a, distractors...)
-	p.Explanation = e.e
-	return p
+	return conceptPickMC(append(claims, computedCurveSketchClaims()...))
 }
 
 type derivTangentLineGen struct{}
@@ -3354,17 +3343,13 @@ func (g *integralSimpsonGen) Generate(ctx generator.GeneratorContext) generator.
 type integralPTestGen struct{}
 
 func (g *integralPTestGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		q, a, e string
+	claims := []conceptClaim{
+		{question: "What is the smallest integer p for which \\(\\int_{1}^{\\infty}dx/x^{p}\\) converges? (enter a number)", correct: "2", reason: "The \\(p\\)-integral converges iff \\(p>1\\): smallest integer 2.", distractors: []string{"1", "3", "0"}},
+		{question: "Does \\(\\int_{1}^{\\infty}dx/x^{3}\\) converge? (yes/no)", correct: "yes", reason: "Since \\(p=3>1\\), the integral converges.", distractors: []string{"no"}},
+		{question: "Does \\(\\int_{1}^{\\infty}dx/x\\) converge? (yes/no)", correct: "no", reason: "The harmonic case \\(p=1\\) diverges (logarithmic growth).", distractors: []string{"yes"}},
+		{question: "Does \\(\\int_{0}^{1}dx/x^{p}\\) converge for \\(p<1\\)? (yes/no)", correct: "yes", reason: "At 0, \\(\\int_{0}^{1}dx/x^{p}\\) converges iff \\(p<1\\) (flipped condition).", distractors: []string{"no"}},
 	}
-	table := []entry{
-		{"What is the smallest integer p for which \\(\\int_{1}^{\\infty}dx/x^{p}\\) converges? (enter a number)", "2", "The \\(p\\)-integral converges iff \\(p>1\\): smallest integer 2."},
-		{"Does \\(\\int_{1}^{\\infty}dx/x^{3}\\) converge? (yes/no)", "yes", "Since \\(p=3>1\\), the integral converges."},
-		{"Does \\(\\int_{1}^{\\infty}dx/x\\) converge? (yes/no)", "no", "The harmonic case \\(p=1\\) diverges (logarithmic growth)."},
-		{"Does \\(\\int_{0}^{1}dx/x^{p}\\) converge for \\(p<1\\)? (yes/no)", "yes", "At 0, \\(\\int_{0}^{1}dx/x^{p}\\) converges iff \\(p<1\\) (flipped condition)."},
-	}
-	e := table[rand.Intn(len(table))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return conceptPickMC(append(claims, computedConceptClaims("calc.integral.p_test")...))
 }
 
 type ratioTestGen struct{}
@@ -3757,17 +3742,13 @@ func (g *expLimitGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type boundedSeqGen struct{}
 
 func (g *boundedSeqGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		q, a, e string
+	claims := []conceptClaim{
+		{question: "Is \\(a_{n}=(-1)^{n}\\) bounded? (yes/no)", correct: "yes", reason: "It oscillates between -1 and 1: bounded (|a_n|≤1) but divergent.", distractors: []string{"no"}},
+		{question: "Does every convergent sequence have to be bounded?", correct: "yes", reason: "Convergence forces boundedness (terms eventually stay near the limit).", distractors: []string{"no"}},
+		{question: "Is \\(a_{n}=n^{2}\\) bounded?", correct: "no", reason: "It grows without bound.", distractors: []string{"yes"}},
+		{question: "Is a bounded sequence always convergent?", correct: "no", reason: "\\((-1)^{n}\\) is bounded yet oscillates: boundedness is necessary, not sufficient.", distractors: []string{"yes"}},
 	}
-	table := []entry{
-		{"Is \\(a_{n}=(-1)^{n}\\) bounded? (yes/no)", "yes", "It oscillates between -1 and 1: bounded (|a_n|≤1) but divergent."},
-		{"Does every convergent sequence have to be bounded?", "yes", "Convergence forces boundedness (terms eventually stay near the limit)."},
-		{"Is \\(a_{n}=n^{2}\\) bounded?", "no", "It grows without bound."},
-		{"Is a bounded sequence always convergent?", "no", "\\((-1)^{n}\\) is bounded yet oscillates: boundedness is necessary, not sufficient."},
-	}
-	e := table[rand.Intn(len(table))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return conceptPickMC(append(claims, computedConceptClaims("calc.seq.bounded")...))
 }
 
 type convergenceGen struct{}

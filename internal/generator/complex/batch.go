@@ -596,6 +596,25 @@ func (g *openSetGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 		{"{z : Re z > 0}", "open, not closed", "the boundary line Re z = 0 is excluded, and each point has room to its left and right"},
 		{"{z : Re z \u2265 0}", "closed, not open", "the boundary line is included, and a point on it cannot move left at all"},
 	}
+	// Draw the radius and the shifts, so the set in the stem is not one of a
+	// fixed four. The classification is unchanged, only the set varies.
+	r := 2 + rand.Intn(9)
+	a := 1 + rand.Intn(6)
+	b := 1 + rand.Intn(6)
+	entries = append(entries,
+		entry{fmt.Sprintf("{z : |z| < %d}", r), "open, not closed",
+			fmt.Sprintf("the circle |z| = %d is excluded, so every point inside has room in all directions", r)},
+		entry{fmt.Sprintf("{z : |z| \u2264 %d}", r), "closed, not open",
+			fmt.Sprintf("the circle |z| = %d belongs to the set, so a point on it has no disk that stays inside", r)},
+		entry{fmt.Sprintf("{z : Re z > %d}", a), "open, not closed",
+			fmt.Sprintf("the line Re z = %d is excluded, so each point keeps room to move left and right", a)},
+		entry{fmt.Sprintf("{z : Re z \u2264 %d}", a), "closed, not open",
+			fmt.Sprintf("the line Re z = %d belongs to the set, and a point on it cannot move in the excluded direction", a)},
+		entry{fmt.Sprintf("{z : Im z \u2265 %d}", b), "closed, not open",
+			fmt.Sprintf("the line Im z = %d belongs to the set and bounds it below", b)},
+		entry{fmt.Sprintf("{z : |z - %d| < %d}", b, r), "open, not closed",
+			fmt.Sprintf("the circle of radius %d about %d is excluded, so every point inside has room", r, b)},
+	)
 	e := entries[rand.Intn(len(entries))]
 	pr := generator.MultipleChoice(
 		fmt.Sprintf("Classify the set \\(%s\\) in the complex plane.", e.set),

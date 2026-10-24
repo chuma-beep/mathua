@@ -197,3 +197,64 @@ func powInt(base, exp int) int {
 	}
 	return out
 }
+
+// computedDirichletClaims asks the same questions about the Dirichlet function
+// with drawn points, because four fixed sentences give a learner the whole
+// supply in four questions.
+func computedDirichletClaims() []algMCClaim {
+	r := 1 + rand.Intn(9)
+	s := r + 1 + rand.Intn(5)
+	return []algMCClaim{
+		{
+			q:           fmt.Sprintf("What is D(%d/%d) for the Dirichlet function, 1 on rationals and 0 on irrationals?", r, s),
+			correct:     "1",
+			reason:      fmt.Sprintf("%d/%d is rational, so D takes the value 1 there.", r, s),
+			distractors: []string{"0", "1/2", "2"},
+		},
+		{
+			q:           fmt.Sprintf("Where is the Dirichlet function continuous when tested at x = sqrt(%d)?", r+1),
+			correct:     "nowhere",
+			reason:      "The Dirichlet function is discontinuous at every real number, rational or irrational.",
+			distractors: []string{"everywhere", "at the rationals only", "at the irrationals only"},
+		},
+		{
+			q:           fmt.Sprintf("How many intervals of the form [%d, %d] admit a Riemann integral of the Dirichlet function?", r, s),
+			correct:     "none",
+			reason:      "On any interval the upper sum is the width and the lower sum is 0, so the two never meet.",
+			distractors: []string{"all of them", "only those of integer length", "only those starting at zero"},
+		},
+	}
+}
+
+// computedTransformationClaims adds transformation questions whose shifts
+// vary with the draw, instead of the same four fixed shifts.
+func computedTransformationClaims() []algMCClaim {
+	k := 2 + rand.Intn(7)
+	m := 2 + rand.Intn(4)
+	return []algMCClaim{
+		{
+			q:           fmt.Sprintf("Compared with the graph of y = f(x), the graph of y = f(x) + %d is...", k),
+			correct:     fmt.Sprintf("shifted up %d units", k),
+			distractors: algDistinct(fmt.Sprintf("shifted up %d units", k), fmt.Sprintf("shifted down %d units", k), fmt.Sprintf("shifted right %d units", k), fmt.Sprintf("stretched vertically by a factor of %d", k)),
+			reason:      fmt.Sprintf("Adding %d outside the function raises every output by %d, so the graph moves up by that amount.", k, k),
+		},
+		{
+			q:           fmt.Sprintf("The graph of y = f(x - %d) is the graph of y = f(x)...", k),
+			correct:     fmt.Sprintf("shifted right %d units", k),
+			distractors: algDistinct(fmt.Sprintf("shifted right %d units", k), fmt.Sprintf("shifted left %d units", k), fmt.Sprintf("shifted up %d units", k), fmt.Sprintf("stretched horizontally by a factor of %d", k)),
+			reason:      fmt.Sprintf("The input %d now produces the output the argument 0 produced before, so the graph moves right by %d.", k, k),
+		},
+		{
+			q:           fmt.Sprintf("The graph of y = f(%dx) is the graph of y = f(x)...", m),
+			correct:     fmt.Sprintf("compressed horizontally by a factor of %d", m),
+			distractors: algDistinct(fmt.Sprintf("compressed horizontally by a factor of %d", m), fmt.Sprintf("stretched horizontally by a factor of %d", m), fmt.Sprintf("compressed vertically by a factor of %d", m), fmt.Sprintf("shifted right %d units", m)),
+			reason:      fmt.Sprintf("Multiplying the input by %d makes each output occur %d times sooner, which squeezes the graph horizontally.", m, m),
+		},
+		{
+			q:           fmt.Sprintf("The graph of y = f(x) - %d is the graph of y = f(x)...", k),
+			correct:     fmt.Sprintf("shifted down %d units", k),
+			distractors: algDistinct(fmt.Sprintf("shifted down %d units", k), fmt.Sprintf("shifted up %d units", k), fmt.Sprintf("shifted left %d units", k), fmt.Sprintf("stretched vertically by a factor of %d", k)),
+			reason:      fmt.Sprintf("Subtracting %d outside the function lowers every output by %d, so the graph moves down.", k, k),
+		},
+	}
+}

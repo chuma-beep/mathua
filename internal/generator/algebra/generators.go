@@ -1400,21 +1400,13 @@ func (g *funcCompositeGen) Generate(ctx generator.GeneratorContext) generator.Pr
 type funcDirichletGen struct{}
 
 func (g *funcDirichletGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		question string
-		answer   string
-		exp      string
+	claims := []algMCClaim{
+		{q: "For the Dirichlet function (1 on rationals, 0 on irrationals), what is D(1/2)?", correct: "1", reason: "D(x) is 1 when x is rational and 0 when x is irrational, and 1/2 is rational, so D(1/2) = 1, although the function is nowhere continuous.", distractors: []string{"0", "1/2", "2"}},
+		{q: "Is the Dirichlet function continuous anywhere?", correct: "no", reason: "It is discontinuous at every point: every disk around any point contains both rationals and irrationals.", distractors: []string{"yes"}},
+		{q: "Is the Dirichlet function periodic?", correct: "yes", reason: "Any rational shift maps rationals to rationals and irrationals to irrationals, so every rational is a period.", distractors: []string{"no"}},
+		{q: "Is the Dirichlet function Riemann integrable on [0, 1]?", correct: "no", reason: "Every interval contains points where D is 1 and points where it is 0, so upper sums stay 1 and lower sums stay 0.", distractors: []string{"yes"}},
 	}
-	entries := []entry{
-		{"For the Dirichlet function (1 on rationals, 0 on irrationals), what is D(1/2)? (enter a number)", "1", "The Dirichlet function is D(x) = 1 if x is rational, 0 if x is irrational. Since 1/2 is rational, D(1/2) = 1. It is nowhere continuous."},
-		{"Is the Dirichlet function continuous anywhere? (yes/no)", "no", "The Dirichlet function is discontinuous at every point."},
-		{"Is the Dirichlet function periodic? (yes/no)", "yes", "The Dirichlet function is periodic with any rational period."},
-		{"Is the Dirichlet function Riemann integrable? (yes/no)", "no", "The Dirichlet function is not Riemann integrable on any interval."},
-	}
-	e := entries[rand.Intn(len(entries))]
-	return generator.Problem{
-		Question: e.question, Answer: e.answer, Explanation: e.exp,
-	}
+	return algPickMC(append(claims, computedDirichletClaims()...))
 }
 
 type funcDomainGen struct{}

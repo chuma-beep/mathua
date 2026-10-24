@@ -43,7 +43,11 @@ func Register(reg *generator.Registry) {
 type pointsLinesGen struct{}
 
 func (g *pointsLinesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	items := []string{"point", "line", "ray", "line segment"}
+	// Plane is a fifth term rather than a rewording of the other four: the
+	// concept is the vocabulary of basic figures, and a plane is one of them.
+	// With five candidates and a cap of four options, MultipleChoice keeps the
+	// answer and three distractors, which is what the client renders.
+	items := []string{"point", "line", "ray", "line segment", "plane"}
 	// Predicates, not noun phrases, because the stem supplies the noun. The
 	// earlier stem was `What is: %s?` with `has two endpoints`, which asked
 	// "What is: has two endpoints?", a sentence with its subject missing, on a
@@ -54,8 +58,9 @@ func (g *pointsLinesGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		"goes forever in two directions",
 		"has one endpoint and goes forever",
 		"has two endpoints",
+		"is a flat surface with no thickness",
 	}
-	i := rand.Intn(4)
+	i := rand.Intn(len(items))
 	// The answer is a phrase, so it has to be recognisable rather than typeable:
 	// a learner who knows the term was still stuck behind a math field, which
 	// dropped the space in "line segment" and compared the wreckage to the
@@ -422,9 +427,19 @@ func (g *quadPerimGen) Generate(ctx generator.GeneratorContext) generator.Proble
 type circlePartsGen struct{}
 
 func (g *circlePartsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	parts := []string{"radius", "diameter", "circumference", "chord"}
-	descs := []string{"distance from center to edge", "distance across the circle through center", "distance around the circle", "a line from one edge to another (not through center)"}
-	i := rand.Intn(4)
+	// Seven parts rather than four, because the concept is the vocabulary of the
+	// circle and the first version stopped at the four every diagram labels.
+	parts := []string{"radius", "diameter", "circumference", "chord", "arc", "tangent", "secant"}
+	descs := []string{
+		"distance from center to edge",
+		"distance across the circle through center",
+		"distance around the circle",
+		"a line from one edge to another (not through center)",
+		"piece of the circle between two points on it",
+		"line touching the circle at exactly one point",
+		"line cutting the circle at two points",
+	}
+	i := rand.Intn(len(parts))
 	others := make([]string, 0, len(parts)-1)
 	for _, part := range parts {
 		if part != parts[i] {

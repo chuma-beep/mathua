@@ -116,6 +116,26 @@ func (g *inferenceGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		{"affirming the consequent", "p \u2192 q and q", "p", false},
 		{"denying the antecedent", "p \u2192 q and \u00acp", "\u00acq", false},
 	}
+	// The four forms are the whole answer set, so variety has to come from the
+	// propositions rather than from the form names. Draw a statement pair and
+	// instantiate each form with it.
+	pairs := [][2]string{
+		{"it rains", "the ground is wet"},
+		{"n is even", "n squared is even"},
+		{"a function is differentiable", "it is continuous"},
+		{"x is a multiple of 4", "x is even"},
+		{"the alarm rings", "the doors unlock"},
+		{"a number is prime and above 2", "it is odd"},
+	}
+	pr := pairs[rand.Intn(len(pairs))]
+	pq := pr[0]
+	qq := pr[1]
+	forms = append(forms,
+		form{"modus ponens", fmt.Sprintf("if %s then %s, and %s", pq, qq, pq), qq, true},
+		form{"modus tollens", fmt.Sprintf("if %s then %s, and not %s", pq, qq, qq), "not " + pq, true},
+		form{"affirming the consequent", fmt.Sprintf("if %s then %s, and %s", pq, qq, qq), pq, false},
+		form{"denying the antecedent", fmt.Sprintf("if %s then %s, and not %s", pq, qq, pq), "not " + qq, false},
+	)
 	f := forms[rand.Intn(len(forms))]
 	q := fmt.Sprintf("Consider the argument: premises %s; conclusion %s. Which argument form is it?", f.premises, f.conclusion)
 	var others []string
