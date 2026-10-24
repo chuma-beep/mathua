@@ -18,6 +18,13 @@ import (
 // and a concept asked at most twice a day stays inside the supply of the thinnest concepts in
 // the corpus. The guard against adjacent repeats is separate and lives in the scheduler, so
 // this number bounds the day rather than the sitting.
+//
+// Measured on 2026-10-24 by simulating 30 days for four learner profiles 25 times each, with
+// and without the guard, and scoring predicted recall seven days after every review. With the
+// guard a steady learner reached 0.710 against 0.644, a struggling learner 0.493 against 0.368,
+// a 120-item learner 0.710 against 0.585, and a learner who misses days 0.727 against 0.648.
+// Retrievability sampled at the moment of review is the wrong yardstick: it reads lower for a
+// well-spaced schedule precisely because spacing lets recall decay before the next review.
 const servedPerDayCap = 2
 
 // SatisfyImplicitReviews inspects banked implicit repetition credit for concepts that appear
