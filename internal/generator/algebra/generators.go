@@ -537,8 +537,11 @@ func (g *sysWordGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 type polyConceptGen struct{}
 
 func (g *polyConceptGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	coeff := rand.Intn(6) + 2
-	exp := rand.Intn(3) + 2
+	// The schema describes the leading term, so the degree question stays and
+	// the coefficient and exponent move. The exponent runs to 9 because above
+	// that the printed term stops being readable at a glance.
+	coeff := rand.Intn(11) + 2
+	exp := rand.Intn(8) + 2
 	return generator.Problem{
 		Question:    fmt.Sprintf("What is the degree of \\(%dx^{%d} + 3x + 1\\)?", coeff, exp),
 		Answer:      fmt.Sprintf("%d", exp),
@@ -1369,7 +1372,9 @@ func (g *eqTrinomialGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type funcAbsValGen struct{}
 
 func (g *funcAbsValGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	x := rand.Intn(10) - 5
+	// The authored walkthrough fixes the shape as f(x) = |x| evaluated at x, so
+	// the widening is the range of x rather than a second family of functions.
+	x := rand.Intn(81) - 40
 	return generator.Problem{
 		Question:    fmt.Sprintf("If \\(f(x) = |x|\\), what is \\(f(%d)\\)?", x),
 		Answer:      fmt.Sprintf("%d", mathutil.Abs(x)),
@@ -1490,7 +1495,10 @@ func (g *funcInverseGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type monotonicityGen struct{}
 
 func (g *monotonicityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	a := rand.Intn(5) + 1
+	// The authored walkthrough describes f(x) = ax and asks which way it goes,
+	// so the slope is the only free parameter. Both signs must stay reachable,
+	// otherwise the question is answerable without reading it.
+	a := rand.Intn(25) + 1
 	if rand.Intn(2) == 0 {
 		a = -a
 	}
@@ -1505,8 +1513,10 @@ func (g *monotonicityGen) Generate(ctx generator.GeneratorContext) generator.Pro
 type funcRationalGen struct{}
 
 func (g *funcRationalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	a := rand.Intn(4) + 1
-	b := rand.Intn(4) + 1
+	// The authored walkthrough describes a/(x - b), so only a and b are free.
+	// b reaches further than a because the asymptote is what the learner reads.
+	a := rand.Intn(9) + 1
+	b := rand.Intn(15) + 1
 	return generator.Problem{
 		Question:    fmt.Sprintf("What is the vertical asymptote of \\(f(x) = \\frac{%d}{x-%d}\\)?", a, b),
 		Answer:      fmt.Sprintf("%d", b),
