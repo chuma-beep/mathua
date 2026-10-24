@@ -216,7 +216,7 @@ func (g *interchangeGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type openClosedGen struct{}
 
 func (g *openClosedGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return pickMC([]mcClaim{
+	claims := []mcClaim{
 		{
 			q:           "A subset of a metric space is open when...",
 			correct:     "every point of it has an open ball contained in the set",
@@ -235,7 +235,8 @@ func (g *openClosedGen) Generate(ctx generator.GeneratorContext) generator.Probl
 			distractors: []string{"always open", "always closed", "always empty"},
 			reason:      "Intersecting the balls of radius 1/n about a point shrinks to a point, which is not open.",
 		},
-	})
+	}
+	return pickMC(append(claims, computedMetricClaims("ra.metric.open_closed")...))
 }
 
 // ---------------------------------------------------------------------------
@@ -245,7 +246,7 @@ func (g *openClosedGen) Generate(ctx generator.GeneratorContext) generator.Probl
 type closureGen struct{}
 
 func (g *closureGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return pickMC([]mcClaim{
+	claims := []mcClaim{
 		{
 			q:           "The closure of a set is...",
 			correct:     "the set together with all of its limit points",
@@ -264,7 +265,8 @@ func (g *closureGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 			distractors: []string{"the points that belong to the set and to its complement", "the isolated points of the set", "the complement of the set"},
 			reason:      "A boundary point is one every ball around which meets the set and its complement.",
 		},
-	})
+	}
+	return pickMC(append(claims, computedMetricClaims("ra.metric.closure")...))
 }
 
 // ---------------------------------------------------------------------------
@@ -274,7 +276,7 @@ func (g *closureGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 type metricConvGen struct{}
 
 func (g *metricConvGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return pickMC([]mcClaim{
+	claims := []mcClaim{
 		{
 			q:           "A sequence in a metric space converges to a point when...",
 			correct:     "for every positive epsilon there is an index beyond which the distance to the point is below epsilon",
@@ -293,7 +295,8 @@ func (g *metricConvGen) Generate(ctx generator.GeneratorContext) generator.Probl
 			distractors: []string{"always converges", "always has a convergent subsequence", "converges exactly when it is bounded"},
 			reason:      "Convergence of every Cauchy sequence is completeness, which is an extra assumption.",
 		},
-	})
+	}
+	return pickMC(append(claims, computedMetricClaims("ra.metric.convergence")...))
 }
 
 // ---------------------------------------------------------------------------
@@ -303,7 +306,7 @@ func (g *metricConvGen) Generate(ctx generator.GeneratorContext) generator.Probl
 type completeGen struct{}
 
 func (g *completeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return pickMC([]mcClaim{
+	claims := []mcClaim{
 		{
 			q:           "A metric space is complete when...",
 			correct:     "every Cauchy sequence in it converges to a point of the space",
@@ -322,7 +325,8 @@ func (g *completeGen) Generate(ctx generator.GeneratorContext) generator.Problem
 			distractors: []string{"complete", "compact", "equivalent to the reals"},
 			reason:      "Truncations of the square root of two are Cauchy in the rationals and have no rational limit.",
 		},
-	})
+	}
+	return pickMC(append(claims, computedMetricClaims("ra.metric.complete")...))
 }
 
 // ---------------------------------------------------------------------------
@@ -332,7 +336,7 @@ func (g *completeGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type metricCompactGen struct{}
 
 func (g *metricCompactGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return pickMC([]mcClaim{
+	claims := []mcClaim{
 		{
 			q:           "A metric space is compact when...",
 			correct:     "every open cover has a finite subcover",
@@ -351,7 +355,8 @@ func (g *metricCompactGen) Generate(ctx generator.GeneratorContext) generator.Pr
 			distractors: []string{"is uniformly continuous only if the space is an interval", "is injective", "has a continuous inverse"},
 			reason:      "The image of a compact set is compact, and a compact subset of the reals is closed and bounded.",
 		},
-	})
+	}
+	return pickMC(append(claims, computedMetricClaims("ra.metric.compact")...))
 }
 
 // ---------------------------------------------------------------------------
@@ -361,7 +366,7 @@ func (g *metricCompactGen) Generate(ctx generator.GeneratorContext) generator.Pr
 type metricContinuityGen struct{}
 
 func (g *metricContinuityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return pickMC([]mcClaim{
+	claims := []mcClaim{
 		{
 			q:           "A function between metric spaces is continuous at a point when...",
 			correct:     "for every positive epsilon there is a positive delta that keeps images within epsilon whenever inputs are within delta",
@@ -380,7 +385,8 @@ func (g *metricContinuityGen) Generate(ctx generator.GeneratorContext) generator
 			distractors: []string{"a bijection", "an isometry", "Lipschitz"},
 			reason:      "Compactness upgrades pointwise continuity to a single delta for the whole domain.",
 		},
-	})
+	}
+	return pickMC(append(claims, computedMetricClaims("ra.metric.continuity")...))
 }
 
 // ---------------------------------------------------------------------------
@@ -390,7 +396,7 @@ func (g *metricContinuityGen) Generate(ctx generator.GeneratorContext) generator
 type baireGen struct{}
 
 func (g *baireGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return pickMC([]mcClaim{
+	claims := []mcClaim{
 		{
 			q:           "The Baire category theorem says a complete metric space...",
 			correct:     "cannot be written as a countable union of nowhere dense sets",
@@ -409,7 +415,8 @@ func (g *baireGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 			distractors: []string{"a set that is not open", "a countable set", "a set containing no interval"},
 			reason:      "Meagre or first category is exactly a countable union of sets with empty interior closure.",
 		},
-	})
+	}
+	return pickMC(append(claims, computedMetricClaims("ra.metric.baire")...))
 }
 
 // ---------------------------------------------------------------------------
@@ -419,7 +426,7 @@ func (g *baireGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type equivalentGen struct{}
 
 func (g *equivalentGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return pickMC([]mcClaim{
+	claims := []mcClaim{
 		{
 			q:           "Two metrics on a set are topologically equivalent when...",
 			correct:     "they have the same open sets, hence the same convergent sequences",
@@ -438,7 +445,8 @@ func (g *equivalentGen) Generate(ctx generator.GeneratorContext) generator.Probl
 			distractors: []string{"they have the same open sets, which is the same condition", "they are equal on a dense subset", "they both make the space complete"},
 			reason:      "A two-sided constant bound forces the same topology and also controls Cauchy sequences and completeness.",
 		},
-	})
+	}
+	return pickMC(append(claims, computedMetricClaims("ra.metric.equivalent")...))
 }
 
 // ---------------------------------------------------------------------------
