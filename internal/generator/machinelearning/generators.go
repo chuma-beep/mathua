@@ -169,29 +169,11 @@ func (g *gradientDescentGen) Generate(ctx generator.GeneratorContext) generator.
 	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.exp}
 }
 
-type crossEntropyGen struct{}
-
-func (g *crossEntropyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct{ question, answer, exp string }
-	entries := []entry{{"Cross-entropy loss between true label 1 and prediction 0.8 is (-log(0.8)≈?) (0.22/1.20)", "0.22", "CE = -log(0.8) ≈ 0.22."}, {"Cross-entropy is appropriate for ____ tasks.", "classification", "Cross-entropy for classification."}, {"Binary cross-entropy for target 0 and prediction 0.1 is (-log(0.9)≈?) (0.10/2.30)", "0.10", "CE = -log(0.9) ≈ 0.10."}, {"Does cross-entropy penalize confident wrong predictions more than MSE? (yes/no)", "yes", "CE grows ∞ as p→0."}}
-	e := entries[rand.Intn(len(entries))]
-	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.exp}
-}
-
 type regularizationGen struct{}
 
 func (g *regularizationGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	type entry struct{ question, answer, exp string }
 	entries := []entry{{"L2 regularization adds λ||w||² to the loss. What does λ control? (regularization strength)", "regularization strength", "λ trades off."}, {"Does L2 regularization shrink weights toward zero? (yes/no)", "yes", "Gradient 2λw pulls."}, {"What is the gradient of λ||w||² w.r.t w? (2λw)", "2λw", "d/dw λw² = 2λw."}, {"Is regularization used to reduce overfitting? (yes/no)", "yes", "Penalizing large weights."}}
-	e := entries[rand.Intn(len(entries))]
-	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.exp}
-}
-
-type overfittingGen struct{}
-
-func (g *overfittingGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct{ question, answer, exp string }
-	entries := []entry{{"Overfitting is when training error is ____ than test error. (lower/higher)", "lower", "Training lower."}, {"What curve shape indicates overfitting when plotting error vs model capacity?", "U-shaped test error", "Test drops then rises."}, {"Does more training data generally reduce overfitting? (yes/no)", "yes", "More samples."}, {"Which error measures generalization: training or test error?", "test", "Test error."}}
 	e := entries[rand.Intn(len(entries))]
 	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.exp}
 }
