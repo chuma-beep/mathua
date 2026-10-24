@@ -385,10 +385,14 @@ func (g *tensorGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		m := 3 + rand.Intn(10)
 		n := 3 + rand.Intn(10)
 		v := fieldGCD(m, n)
+		// The stem must not state the isomorphism. Printing
+		// "≅ Z/gcd(m,n)Z" alongside m and n turns a tensor product into a
+		// gcd exercise, so the question asks for the order and the
+		// explanation supplies the structure.
 		return groupChoice(
-			fmt.Sprintf("Z/%dZ ⊗_Z Z/%dZ ≅ Z/gcd(%d,%d)Z. How many elements does the tensor have?", m, n, m, n),
+			fmt.Sprintf("How many elements does the tensor product Z/%dZ ⊗_Z Z/%dZ have?", m, n),
 			strconv.Itoa(v),
-			fmt.Sprintf("The gcd of %d and %d is %d, so the tensor is cyclic of order %d.", m, n, v, v),
+			fmt.Sprintf("Cyclic abelian groups satisfy Z/%dZ ⊗_Z Z/%dZ ≅ Z/gcd(%d,%d)Z. The gcd is %d, so the tensor has %d elements.", m, n, m, n, v, v),
 			strconv.Itoa(m+n), strconv.Itoa(m*n), strconv.Itoa(v+1),
 		)
 	}
