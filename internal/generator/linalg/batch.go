@@ -22,7 +22,6 @@ package linalg
 import (
 	"math/rand"
 	"strconv"
-	"strings"
 
 	"github.com/chuma-beep/mathua/internal/generator"
 )
@@ -95,67 +94,6 @@ func (g *spaceAxiomsGen) Generate(ctx generator.GeneratorContext) generator.Prob
 // ---------------------------------------------------------------------------
 // 2. Kernel and image (numeric)
 // ---------------------------------------------------------------------------
-
-type kernelGen struct{}
-
-func (g *kernelGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question string
-		answer   string
-		rows     [][]int
-		n        int
-		reason   string
-	}
-	claims := []claim{
-		{
-			question: "The linear map T(x) = Ax has matrix A = [[1, 0], [0, 1]]. What is the dimension of the kernel of T? (enter a number)",
-			answer:   "0", rows: [][]int{{1, 0}, {0, 1}}, n: 2,
-			reason: "The identity has rank 2, so rank-nullity gives nullity 2 - 2 = 0: only the zero vector maps to zero.",
-		},
-		{
-			question: "The linear map T(x) = Ax has matrix A = [[1, 2], [2, 4]]. What is the dimension of the kernel of T? (enter a number)",
-			answer:   "1", rows: [][]int{{1, 2}, {2, 4}}, n: 2,
-			reason: "The second row is twice the first, so the rank is 1 and the nullity is 2 - 1 = 1.",
-		},
-		{
-			question: "The linear map T(x) = Ax has matrix A = [[1, 0, 0], [0, 1, 0]]. What is the dimension of the kernel of T? (enter a number)",
-			answer:   "1", rows: [][]int{{1, 0, 0}, {0, 1, 0}}, n: 3,
-			reason: "The rank is 2, so the nullity is 3 - 2 = 1: the third coordinate is free.",
-		},
-		{
-			question: "The linear map T(x) = Ax has matrix A = [[1, 1], [1, 1]]. What is the dimension of the kernel of T? (enter a number)",
-			answer:   "1", rows: [][]int{{1, 1}, {1, 1}}, n: 2,
-			reason: "Both rows are equal, so the rank is 1 and the nullity is 1; the vector (1, -1) spans the kernel.",
-		},
-		{
-			question: "The linear map T(x) = Ax has matrix A = [[0, 0], [0, 0]]. What is the dimension of the kernel of T? (enter a number)",
-			answer:   "2", rows: [][]int{{0, 0}, {0, 0}}, n: 2,
-			reason: "The zero matrix has rank 0, so every vector is in the kernel and the nullity is 2.",
-		},
-		{
-			question: "The linear map T(x) = Ax has matrix A = [[1, 0, 0], [0, 0, 0], [0, 0, 1]]. What is the dimension of the kernel of T? (enter a number)",
-			answer:   "1", rows: [][]int{{1, 0, 0}, {0, 0, 0}, {0, 0, 1}}, n: 3,
-			reason: "The rank is 2, so the nullity is 3 - 2 = 1; the second coordinate is free.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	parts := make([]string, len(c.rows))
-	for i, row := range c.rows {
-		cells := make([]string, len(row))
-		for j, v := range row {
-			cells[j] = strconv.Itoa(v)
-		}
-		parts[i] = strings.Join(cells, ",")
-	}
-	return generator.Problem{
-		Question:    c.question,
-		Answer:      c.answer,
-		Explanation: c.reason,
-		Facts: map[string]string{
-			"rows": strings.Join(parts, ";"), "n": strconv.Itoa(c.n), "answer": c.answer,
-		},
-	}
-}
 
 // ---------------------------------------------------------------------------
 // 3. Injective, surjective and invertible maps
