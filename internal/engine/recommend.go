@@ -12,6 +12,14 @@ import (
 	"github.com/chuma-beep/mathua/internal/storage"
 )
 
+// servedPerDayCap is how many times one concept may be served in a day before the scheduler
+// drops it from the ranked list. Two is chosen rather than tuned: the spacing literature puts
+// massed practice several tenths of a standard deviation below spaced practice in mathematics,
+// and a concept asked at most twice a day stays inside the supply of the thinnest concepts in
+// the corpus. The guard against adjacent repeats is separate and lives in the scheduler, so
+// this number bounds the day rather than the sitting.
+const servedPerDayCap = 2
+
 // SatisfyImplicitReviews inspects banked implicit repetition credit for concepts that appear
 // due for explicit spaced review. If an encompassed concept has banked sufficient implicit credit,
 // it projects the credit, advances the review interval and updates storage.
@@ -374,6 +382,29 @@ func (e *Engine) RecommendNext(studentID string, exclude []string) (scheduler.Re
 		}
 	}
 
+	// Count what was already served today, so the candidate loop can drop a concept that has
+	// reached its cap. Without this the cap in the scheduler is inert: it defends a limit no
+	// caller supplies. A read failure leaves the map nil, which restores adjacency-only
+	// behaviour rather than failing the recommendation, because a missing cap degrades variety
+	// while a failed recommendation hides the next card entirely.
+	servedToday := map[string]int{}
+	if attempts, err := e.repo.GetAttemptsForStudent(studentID); err == nil {
+		dayStart := time.Now().UTC().Truncate(24 * time.Hour)
+		for _, a := range attempts {
+			if a.Timestamp.UTC().Before(dayStart) {
+				continue
+			}
+			// Placement answers are evidence about what the learner already knows, not
+			// practice served from this concept, so they must not consume the practice
+			// budget. Counting them made a freshly placed learner look capped out and the
+			// recommendation fall back to the graph.
+			if a.Source == "diagnostic" {
+				continue
+			}
+			servedToday[a.ConceptID]++
+		}
+	}
+
 	return scheduler.New(e.dag).Recommend(scheduler.RecommendInput{
 		Snapshots:           snapshots,
 		Now:                 time.Now(),
@@ -387,6 +418,8 @@ func (e *Engine) RecommendNext(studentID string, exclude []string) (scheduler.Re
 		KeyPrerequisites:    remQueue,
 		RemedialConcepts:    remQueue,
 		LastConceptID:       lastConceptID,
+		ServedToday:         servedToday,
+		ServedPerDay:        servedPerDayCap,
 	}), nil
 }
 
