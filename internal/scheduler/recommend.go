@@ -137,6 +137,19 @@ type RecommendInput struct {
 	RemedialConcepts []string
 	// HaltedConceptID is an optional halted concept identifier whose KeyPrerequisites are targeted.
 	HaltedConceptID string
+
+	// ServedToday counts how many items each concept has already supplied today. A concept
+	// with no entry has served none. The scheduler cannot derive this itself, because a
+	// progress row records only the last attempt, so a caller that tracks attempts passes
+	// the counts here.
+	ServedToday map[string]int
+	// ServedPerDay is the ceiling on items one concept may supply in a day. Zero means two,
+	// because a learner who is asked the same concept five times in a sitting meets the few
+	// situations it holds and is taught the answer key rather than the mathematics.
+	ServedPerDay int
+	// LastConceptID is the concept of the most recent item. It is demoted below every other
+	// candidate so nothing is offered twice in a row.
+	LastConceptID string
 }
 
 // RecommendCaps bound the set. Five is the number of cards the existing shelf shows, so the
@@ -386,6 +399,11 @@ func (s *Scheduler) selectTasks(in RecommendInput, now time.Time) []Recommendati
 
 // conceptRecommendations scores every concept the learner is allowed to work on and renders
 // each as a Recommendation, most valuable first.
+// stickyPenalty pushes the concept of the previous item below every other candidate, so a
+// learner is not asked the same concept twice in a row. It is far larger than any priority
+// term, which is the point: adjacency is not a tie-break.
+const stickyPenalty = 1e6
+
 func (s *Scheduler) conceptRecommendations(in RecommendInput, now time.Time, cap int) []Recommendation {
 	excluded := make(map[string]bool, len(in.ExcludeConceptIds))
 	for _, id := range in.ExcludeConceptIds {
@@ -393,9 +411,20 @@ func (s *Scheduler) conceptRecommendations(in RecommendInput, now time.Time, cap
 	}
 
 	cands := buildCandidates(s.dag, in.Snapshots, now, "")
+	// A concept asked repeatedly in one sitting exhausts whatever supply it holds. Measured
+	// over a simulated month of study, one hundred concepts were asked more than once in a
+	// day and the worst was asked five times from five situations, so the same item came back
+	// minutes apart. The cap and the demotion below are the guard for that.
+	limit := in.ServedPerDay
+	if limit <= 0 {
+		limit = 2
+	}
 	ranked := make([]Recommendation, 0, len(cands))
 	for _, c := range cands {
 		if excluded[c.Concept.ID] {
+			continue
+		}
+		if in.ServedToday != nil && in.ServedToday[c.Concept.ID] >= limit {
 			continue
 		}
 		b, kind, reason := classify(c, in)
@@ -403,6 +432,9 @@ func (s *Scheduler) conceptRecommendations(in RecommendInput, now time.Time, cap
 			continue
 		}
 		priority := c.Priority
+		if c.Concept.ID == in.LastConceptID {
+			priority -= stickyPenalty
+		}
 		if c.Concept.Subdomain != "" {
 			// A small subdomain bonus so interleaved practice is preferred over two adjacent
 			// nodes in one topic. This is NextSmart's interleaving rule, expressed as a

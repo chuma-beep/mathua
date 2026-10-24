@@ -362,6 +362,18 @@ func (e *Engine) RecommendNext(studentID string, exclude []string) (scheduler.Re
 		diagnosticCompleted = st.DiagnosticCompleted
 	}
 
+	// The most recent attempt names the concept just served. Passing it demotes that concept
+	// below every other candidate, so the next card is not the one the learner finished a
+	// moment ago, which on a thin concept is a repeat of the same situation.
+	var lastConceptID string
+	var lastAttempted time.Time
+	for _, p := range progress {
+		if p.LastAttempted != nil && p.LastAttempted.After(lastAttempted) {
+			lastAttempted = *p.LastAttempted
+			lastConceptID = p.ConceptID
+		}
+	}
+
 	return scheduler.New(e.dag).Recommend(scheduler.RecommendInput{
 		Snapshots:           snapshots,
 		Now:                 time.Now(),
@@ -374,6 +386,7 @@ func (e *Engine) RecommendNext(studentID string, exclude []string) (scheduler.Re
 		DiagnosticCompleted: diagnosticCompleted,
 		KeyPrerequisites:    remQueue,
 		RemedialConcepts:    remQueue,
+		LastConceptID:       lastConceptID,
 	}), nil
 }
 
