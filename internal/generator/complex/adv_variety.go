@@ -148,25 +148,6 @@ func intPowLocal(base, exp int) int {
 
 type eulerIdentityGen struct{}
 
-func (g *eulerIdentityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	k := 1 + rand.Intn(4)
-	values := map[int]string{1: "i", 2: "-1", 3: "-i", 4: "1"}
-	angles := map[int]string{1: `\pi/2`, 2: `\pi`, 3: `3\pi/2`, 4: `2\pi`}
-	answer := values[k]
-	others := []string{}
-	for j := 1; j <= 4; j++ {
-		if j != k {
-			others = append(others, values[j])
-		}
-	}
-	return complexChoice(
-		fmt.Sprintf("Use Euler's formula to evaluate \\(e^{i%s}\\).", angles[k]),
-		answer,
-		fmt.Sprintf("\\(e^{i\\theta}=\\cos\\theta+i\\sin\\theta\\), and at \\(\\theta=%s\\) the cosine and sine give %s.", angles[k], answer),
-		others...,
-	)
-}
-
 // unitCoef renders a coefficient for a term x, dropping a leading one.
 func unitCoef(c int) string {
 	if c == 1 {
