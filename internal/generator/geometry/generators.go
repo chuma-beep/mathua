@@ -207,8 +207,8 @@ func (g *verticalAnglesGen) Generate(ctx generator.GeneratorContext) generator.P
 	}
 	ans := 180 - d
 	return generator.Problem{
-		Question: fmt.Sprintf("Two lines intersect. An angle adjacent to \\(\\angle 1\\) measures %d degrees. What is the measure of the vertical angle to \\(\\angle 1\\) (in degrees)?", d),
-		Answer:   fmt.Sprintf("%d", ans),
+		Question:    fmt.Sprintf("Two lines intersect. An angle adjacent to \\(\\angle 1\\) measures %d degrees. What is the measure of the vertical angle to \\(\\angle 1\\) (in degrees)?", d),
+		Answer:      fmt.Sprintf("%d", ans),
 		Explanation: fmt.Sprintf("Adjacent angles along a straight line are supplementary (sum to 180 degrees), so \\(\\angle 1 = 180 - %d = %d^\\circ\\). Vertical angles are equal, so the vertical angle also measures %d degrees.", d, ans, ans),
 		Facts: map[string]string{
 			"adjacent": strconv.Itoa(d),
