@@ -335,34 +335,44 @@ func (g *f1Gen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	}
 	claims := []claim{
 		{
-			question: "A classifier has precision 0.6 and recall 0.6. What is its F1 score? (enter a decimal)",
-			answer:   "0.6", precision: 0.6, recall: 0.6,
-			reason: "With equal precision and recall, F1 is that common value: 2*0.6*0.6/(0.6+0.6) = 0.6.",
-		},
-		{
-			question: "A classifier has precision 0.5 and recall 0.5. What is its F1 score? (enter a decimal)",
-			answer:   "0.5", precision: 0.5, recall: 0.5,
-			reason: "With equal precision and recall, F1 is their common value, 0.5.",
-		},
-		{
-			question: "A classifier has precision 0.75 and recall 0.75. What is its F1 score? (enter a decimal)",
-			answer:   "0.75", precision: 0.75, recall: 0.75,
-			reason: "With equal precision and recall, F1 is their common value, 0.75.",
-		},
-		{
-			question: "A classifier has precision 0.8 and recall 0.8. What is its F1 score? (enter a decimal)",
-			answer:   "0.8", precision: 0.8, recall: 0.8,
-			reason: "With equal precision and recall, F1 is their common value, 0.8.",
-		},
-		{
 			question: "A classifier has precision 1 and recall 0.6. What is its F1 score? (enter a decimal)",
 			answer:   "0.75", precision: 1, recall: 0.6,
 			reason: "F1 = 2*1*0.6/(1+0.6) = 1.2/1.6 = 0.75.",
 		},
 		{
-			question: "A classifier has precision 0.9 and recall 0.9. What is its F1 score? (enter a decimal)",
-			answer:   "0.9", precision: 0.9, recall: 0.9,
-			reason: "With equal precision and recall, F1 is their common value, 0.9.",
+			question: "A classifier has precision 0.6 and recall 0.4. What is its F1 score? (enter a decimal)",
+			answer:   "0.48", precision: 0.6, recall: 0.4,
+			reason: "F1 = 2*0.6*0.4/(0.6+0.4) = 0.48/1.0 = 0.48.",
+		},
+		{
+			question: "A classifier has precision 0.6 and recall 0.9. What is its F1 score? (enter a decimal)",
+			answer:   "0.72", precision: 0.6, recall: 0.9,
+			reason: "F1 = 2*0.6*0.9/(0.6+0.9) = 1.08/1.5 = 0.72.",
+		},
+		{
+			question: "A classifier has precision 0.5 and recall 0.75. What is its F1 score? (enter a decimal)",
+			answer:   "0.6", precision: 0.5, recall: 0.75,
+			reason: "F1 = 2*0.5*0.75/(0.5+0.75) = 0.75/1.25 = 0.6.",
+		},
+		{
+			question: "A classifier has precision 0.25 and recall 1. What is its F1 score? (enter a decimal)",
+			answer:   "0.4", precision: 0.25, recall: 1,
+			reason: "F1 = 2*0.25*1/(0.25+1) = 0.5/1.25 = 0.4.",
+		},
+		{
+			question: "A classifier has precision 0.3 and recall 0.7. What is its F1 score? (enter a decimal)",
+			answer:   "0.42", precision: 0.3, recall: 0.7,
+			reason: "F1 = 2*0.3*0.7/(0.3+0.7) = 0.42/1.0 = 0.42.",
+		},
+		{
+			question: "A classifier has precision 0.2 and recall 0.8. What is its F1 score? (enter a decimal)",
+			answer:   "0.32", precision: 0.2, recall: 0.8,
+			reason: "F1 = 2*0.2*0.8/(0.2+0.8) = 0.32/1.0 = 0.32.",
+		},
+		{
+			question: "A classifier has precision 0.1 and recall 0.9. What is its F1 score? (enter a decimal)",
+			answer:   "0.18", precision: 0.1, recall: 0.9,
+			reason: "F1 = 2*0.1*0.9/(0.1+0.9) = 0.18/1.0 = 0.18.",
 		},
 	}
 	c := claims[rand.Intn(len(claims))]

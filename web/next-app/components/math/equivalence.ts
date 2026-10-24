@@ -155,7 +155,8 @@ export function simplificationHint(
 ): { latex: string; text: string } | null {
   // Nothing to simplify in a lone symbol, and no reason to pay for a parse.
   if (!HAS_ARITHMETIC.test(latex)) return null
-  const expr = tryParse(engine, latex)
+  const cleaned = stripLatexSpaces(latex)
+  const expr = tryParse(engine, cleaned)
   if (!expr) return null
 
   let simplified: string
@@ -165,7 +166,7 @@ export function simplificationHint(
     // `ce.parse` canonicalises eagerly, so the *parsed* form is already the answer.
     // The comparison has to be against what the learner actually wrote, or every
     // expression looks identical to its own simplification and the hint never fires.
-    asTyped = engine.rawOf(latex)
+    asTyped = engine.rawOf(cleaned)
   } catch {
     return null
   }
@@ -260,10 +261,22 @@ function stripWhitespace(s: string): string {
 // present is what keeps that out of a learner-facing hint.
 const HAS_ARITHMETIC = /[0-9]|\^|[{}]|\\frac|\\sqrt|[+\-*/=]/u
 
+/**
+ * Remove LaTeX spacing macros from raw formula strings.
+ *
+ * MathLive inserts spacing commands such as `\;`, `\,` and `\:` when learners
+ * press the spacebar. Compute Engine misparses tokens preceded by spacing macros
+ * around operators (for example reading `16x^2 \; + \; 8x` as a product).
+ */
+export function stripLatexSpaces(s: string): string {
+  return s.replace(/\\[;,:\!\s]|\\(?:quad|qquad|thinspace|medspace|thickspace|enspace)\b/g, ' ')
+}
+
 function tryParse(engine: Engine, latex: string): Expression | null {
-  if (!latex.trim()) return null
+  const cleaned = stripLatexSpaces(latex)
+  if (!cleaned.trim()) return null
   try {
-    const e = engine.parse(latex)
+    const e = engine.parse(cleaned)
     return engine.valid(e) ? e : null
   } catch {
     return null

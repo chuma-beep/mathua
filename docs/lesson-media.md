@@ -5,8 +5,8 @@ a report, because the remaining decisions are per instance.
 
 ## A. Orphan caption candidates
 
-149 paragraphs across 46 lessons look like a figure caption whose image
-was dropped while its text was kept: **49 certain**, **33 strong**, **67 likely**.
+141 paragraphs across 42 lessons look like a figure caption whose image
+was dropped while its text was kept: **49 certain**, **33 strong**, **59 likely**.
 
 `certain` opens with an auto-numbered `Figure 3.2` / `Table 1.4` label, which PreTeXt
 generates for a figure or table and which survives ingestion — no judgement needed.
@@ -58,14 +58,6 @@ so the tiers below do not treat it as evidence either way.
 | `teaching/alg.seq.sum_arith.md` | 33 | likely | *Values of $\operatorname{sqrt}(x)$* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/alg.seq.sum_arith.md` | 195 | likely | *Unemployment in the United States* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/alg.systems.word.md` | 45 | likely | *Amount in Savings Account* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/arith.neg.add_sub.md` | 195 | likely | *Viewing $3\cdot(-7)$ as repeated addition* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/arith.neg.add_sub.md` | 201 | likely | *Viewing $-3\cdot(-7)$ as repeated subtraction* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/arith.neg.mult_div.md` | 195 | likely | *Viewing $3\cdot(-7)$ as repeated addition* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/arith.neg.mult_div.md` | 201 | likely | *Viewing $-3\cdot(-7)$ as repeated subtraction* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/arith.neg.number_line.md` | 195 | likely | *Viewing $3\cdot(-7)$ as repeated addition* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/arith.neg.number_line.md` | 201 | likely | *Viewing $-3\cdot(-7)$ as repeated subtraction* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/arith.neg.order_ops.md` | 195 | likely | *Viewing $3\cdot(-7)$ as repeated addition* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/arith.neg.order_ops.md` | 201 | likely | *Viewing $-3\cdot(-7)$ as repeated subtraction* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/arith.sci_notation.ops.md` | 26 | likely | *Whole Number Powers of 10* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/arith.sci_notation.ops.md` | 84 | likely | *Negative Integer Powers of 10* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/arith.sqrt.perfect.md` | 15 | likely | *$\abs{2}$ and $\abs{-2}$* | teaching corpus: standalone emphasis is the dropped-figure shape |
@@ -212,7 +204,7 @@ so the tiers below do not treat it as evidence either way.
 
 ## C. Shipped but unreferenced
 
-693 diagrams ship, 387 URLs are referenced by lesson bodies, and
+695 diagrams ship, 389 URLs are referenced by lesson bodies, and
 **286 content diagrams are referenced by nothing** (site chrome
 with dark/light variants is excluded — components reference those).
 

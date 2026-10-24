@@ -8,8 +8,8 @@ it. The measurement belongs to `scripts/audit_lesson_media.py`, which writes
 
 ## 1. What is missing
 
-149 paragraphs across 46 lessons read as a caption whose image was dropped: 49 `certain`, 33 `strong`
-and 67 `likely`. Every one sits
+141 paragraphs across 42 lessons read as a caption whose image was dropped: 49 `certain`, 33 `strong`
+and 59 `likely`. Every one sits
 in `data/lessons/teaching/`. The `certain` tier — the one that opened with an
 auto-numbered `Figure 3.2` label, which the PreTeXt conversion emits for a figure and keeps when it
 drops the image, so that it needed no judgement — holds 49 rows again, every one of them restored by

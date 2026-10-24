@@ -198,13 +198,23 @@ func (g *complementaryGen) Generate(ctx generator.GeneratorContext) generator.Pr
 type verticalAnglesGen struct{}
 
 func (g *verticalAnglesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*5)
-	a := rand.Intn(max(1, scale*30)) + 1
+	// An angle adjacent to angle 1 has measure d degrees. Find the vertical angle to angle 1.
+	// This tests supplementary adjacent angles and vertical angle equality without reading
+	// off the answer from the stem.
+	d := 20 + rand.Intn(141) // 20 to 160
+	if d == 90 {
+		d = 85
+	}
+	ans := 180 - d
 	return generator.Problem{
-		Question:    fmt.Sprintf("Two lines intersect. One angle is %d degrees. What is the vertical angle?", a),
-		Answer:      fmt.Sprintf("%d", a),
-		Explanation: fmt.Sprintf("Vertical angles are equal: %d = %d.", a, a),
-		Facts:       map[string]string{"a": strconv.Itoa(a)},
+		Question: fmt.Sprintf("Two lines intersect. An angle adjacent to \\(\\angle 1\\) measures %d degrees. What is the measure of the vertical angle to \\(\\angle 1\\) (in degrees)?", d),
+		Answer:   fmt.Sprintf("%d", ans),
+		Explanation: fmt.Sprintf("Adjacent angles along a straight line are supplementary (sum to 180 degrees), so \\(\\angle 1 = 180 - %d = %d^\\circ\\). Vertical angles are equal, so the vertical angle also measures %d degrees.", d, ans, ans),
+		Facts: map[string]string{
+			"adjacent": strconv.Itoa(d),
+			"a":        strconv.Itoa(ans),
+			"vertical": strconv.Itoa(ans),
+		},
 	}
 }
 

@@ -31,19 +31,19 @@ Unfortunately, the symbol we use for subtraction looks just like the symbol we u
 
 Identify "Minus" Signs
 
-$1-9$ has  negative signs and  subtraction signs.
+How many negative signs and subtraction signs does $1-9$ have?
 
 Solution
 
 $1-9$ has zero negative signs and one subtraction sign.
 
-$-12+(-50)$ has  negative signs and  subtraction signs.
+How many negative signs and subtraction signs does $-12+(-50)$ have?
 
 Solution
 
 $-12+(-50)$ has two negative signs and zero subtraction signs.
 
-$\dfrac{-13-(-15)-17}{23-4}$ has  negative signs and  subtraction signs.
+How many negative signs and subtraction signs does $\dfrac{-13-(-15)-17}{23-4}$ have?
 
 Solution
 
@@ -190,17 +190,17 @@ Since we are subtracting a positive number from a negative number, the result sh
 
 ## Multiplying
 
-Multiplication with negative numbers is possible too. We can view multiplication as repeated addition. For example $3\cdot7=7+7+7$. We can do the same when there is a negative number in the product.  the figure  represents $3\cdot(-7)$.
+Multiplication with negative numbers is possible too. We can view multiplication as repeated addition. For example $3\cdot7=7+7+7$. We can do the same when there is a negative number in the product. The first figure represents $3\cdot(-7)$.
 
-*Viewing $3\cdot(-7)$ as repeated addition*
+![Viewing $3\cdot(-7)$ as repeated addition](/diagrams/arithmetic/neg-mult-repeated-add.svg)
 
-the figure  illustrates that $3\cdot(-7)=-21$. Notice how a positive number multiplied by a negative number will make a negative result.
+The figure illustrates that $3\cdot(-7)=-21$. Notice how a positive number multiplied by a negative number will make a negative result.
 
-What about the product $-3\cdot(-7)$, where both factors are negative? Should the result be positive or negative? If $3\cdot(-7)$ can be seen as *adding*$-7$ three times as in  the figure , then it isn't too crazy to interpret $-3\cdot(-7)$ as *subtracting*$-7$ three times. Or in other words, as *adding*7 three times. This is illustrated in  the figure .
+What about the product $-3\cdot(-7)$, where both factors are negative? Should the result be positive or negative? If $3\cdot(-7)$ can be seen as *adding* $-7$ three times as in the first figure, then it is natural to interpret $-3\cdot(-7)$ as *subtracting* $-7$ three times. In other words, as *adding* 7 three times. This is illustrated in the second figure.
 
-*Viewing $-3\cdot(-7)$ as repeated subtraction*
+![Viewing $-3\cdot(-7)$ as repeated subtraction](/diagrams/arithmetic/neg-mult-repeated-sub.svg)
 
-This illustrates that $-3\cdot(-7)=21$, and it seems that a negative number times a negative number gives a positive result.
+This illustrates that $-3\cdot(-7)=21$, and it shows that a negative number times a negative number gives a positive result.
 
 Positive and negative numbers are not the whole story. The number 0 is neither positive nor negative. What happens with multiplication by 0? You can choose to view $7\cdot0$ as adding the number 0 seven times. And you can choose to view $0\cdot7$ as adding the number 7 zero times. Either way, the result is 0.
 

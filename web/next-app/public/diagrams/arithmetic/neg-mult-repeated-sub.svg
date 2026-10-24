@@ -1,0 +1,45 @@
+<svg width="480" height="180" viewBox="0 0 480 180" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow-right" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#E6E6E6"/>
+    </marker>
+  </defs>
+
+  <!-- Title / Identity -->
+  <text x="240" y="25" font-size="14" font-family="monospace" fill="#BABABA" text-anchor="middle">−3 · (−7) = −(−7) − (−7) − (−7) = 21</text>
+
+  <!-- Number line -->
+  <line x1="30" y1="110" x2="450" y2="110" stroke="#BABABA" stroke-width="2"/>
+  <!-- Arrows on number line ends -->
+  <polygon points="30,106 20,110 30,114" fill="#BABABA"/>
+  <polygon points="450,106 460,110 450,114" fill="#BABABA"/>
+
+  <!-- Ticks -->
+  <line x1="80" y1="104" x2="80" y2="116" stroke="#E6E6E6" stroke-width="2.5"/>
+  <line x1="180" y1="104" x2="180" y2="116" stroke="#BABABA" stroke-width="2"/>
+  <line x1="280" y1="104" x2="280" y2="116" stroke="#BABABA" stroke-width="2"/>
+  <line x1="380" y1="104" x2="380" y2="116" stroke="#BABABA" stroke-width="2"/>
+
+  <!-- Tick labels -->
+  <g font-size="13" font-family="monospace" fill="#BABABA" text-anchor="middle">
+    <text x="80" y="135" fill="#E6E6E6" font-weight="bold">0</text>
+    <text x="180" y="135">7</text>
+    <text x="280" y="135">14</text>
+    <text x="380" y="135">21</text>
+  </g>
+
+  <!-- Jumps (moving right) -->
+  <path d="M 80 102 Q 130 55 178 100" fill="none" stroke="#E6E6E6" stroke-width="2" marker-end="url(#arrow-right)"/>
+  <path d="M 180 102 Q 230 55 278 100" fill="none" stroke="#E6E6E6" stroke-width="2" marker-end="url(#arrow-right)"/>
+  <path d="M 280 102 Q 330 55 378 100" fill="none" stroke="#E6E6E6" stroke-width="2" marker-end="url(#arrow-right)"/>
+
+  <!-- Jump labels -->
+  <g font-size="12" font-family="monospace" fill="#E6E6E6" text-anchor="middle">
+    <text x="130" y="55">+7</text>
+    <text x="230" y="55">+7</text>
+    <text x="330" y="55">+7</text>
+  </g>
+
+  <!-- Explanatory footer -->
+  <text x="240" y="165" font-size="12" fill="#8a8f98" text-anchor="middle">Subtracting negative steps moves to the right</text>
+</svg>

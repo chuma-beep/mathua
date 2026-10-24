@@ -1,11 +1,15 @@
 {
   "concept": "geo.basic.vertical",
-  "setup": "Two lines cross, and one of the four angles formed measures [[a]] degrees.",
+  "setup": "Two straight lines intersect, and an angle adjacent to the target angle measures [[adjacent]] degrees.",
   "steps": [
     {
+      "fact": "adjacent",
+      "say": "Adjacent angles along a straight line are supplementary and sum to 180 degrees, so the target angle measures 180 - [[adjacent]] = [[a]] degrees."
+    },
+    {
       "fact": "a",
-      "say": "Opposite angles at a crossing are called vertical angles, and they are always equal to each other — the two on either side take [[a]] and its leftover, which are the same pair of numbers."
+      "say": "Opposite angles formed by two intersecting lines are vertical angles, which are always equal. Therefore, the vertical angle also measures [[a]] degrees."
     }
   ],
-  "answer": "The vertical angle is also [[a]] degrees."
+  "answer": "The vertical angle measures [[a]] degrees."
 }

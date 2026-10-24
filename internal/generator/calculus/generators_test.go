@@ -2,6 +2,7 @@ package calculus
 
 import (
 	"math/rand"
+	"regexp"
 	"strings"
 	"testing"
 
@@ -229,6 +230,22 @@ func TestSeqConvergenceAnswersAreChoices(t *testing.T) {
 		}
 		if p.Explanation == "" {
 			t.Fatalf("no explanation for %q", p.Question)
+		}
+	}
+}
+
+func TestClosedExtrema_ReadOffAvoidance(t *testing.T) {
+	g := &closedExtremaGen{}
+	for i := 0; i < 500; i++ {
+		p := g.Generate(generator.GeneratorContext{
+			Difficulty: rand.Float64(),
+			Seed:       int64(i*43 + 17),
+		})
+		ans := strings.TrimSpace(p.Answer)
+		// Check that numeric answer does not appear verbatim in question
+		pattern := `(^|\D)` + ans + `(\D|$)`
+		if matched, _ := regexp.MatchString(pattern, p.Question); matched {
+			t.Fatalf("draw %d: closed extrema question %q prints answer %q in stem", i, p.Question, ans)
 		}
 	}
 }

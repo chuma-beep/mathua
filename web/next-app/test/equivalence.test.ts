@@ -7,7 +7,7 @@
 
 import { describe, it, expect, beforeAll } from 'vitest'
 import { ComputeEngine } from '@cortex-js/compute-engine'
-import { loadEngine, equivalence, simplificationHint, type Engine, resetEngineForTests } from '../components/math/equivalence'
+import { loadEngine, equivalence, simplificationHint, stripLatexSpaces, type Engine, resetEngineForTests } from '../components/math/equivalence'
 
 let engine: Engine
 
@@ -101,6 +101,14 @@ describe('simplificationHint', () => {
 
   it('says something the learner can act on', () => {
     expect(simplificationHint(engine, '2(x+1)')?.text).toBe('That simplifies to 2x + 2.')
+  })
+
+  it('normalises MathLive spacing macros so sums are not misparsed as products', () => {
+    // MathLive inserts spacing commands like `\;` on spacebar presses.
+    // Compute Engine must not read `16x^2 \; + \; 8x \; + \; 1` as `128x^3`.
+    expect(simplificationHint(engine, '16x^2 \\; + \\; 8x \\; + \\; 1')).toBeNull()
+    expect(simplificationHint(engine, '\\frac{1}{2} \\; + \\; \\frac{1}{3}')?.latex).toBe('5/6')
+    expect(stripLatexSpaces('16x^2 \\; + \\; 8x \\; + \\; 1')).toBe('16x^2   +   8x   +   1')
   })
 })
 

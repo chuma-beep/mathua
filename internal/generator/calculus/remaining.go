@@ -94,18 +94,38 @@ func (g *tangentPlaneGen) Generate(ctx generator.GeneratorContext) generator.Pro
 	}
 }
 
-// closedExtremaGen uses a downward bowl on a disc, whose maximum is at the centre.
+// closedExtremaGen tests finding extrema on a closed region by checking the boundary.
 type closedExtremaGen struct{}
 
 func (g *closedExtremaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	c := 5 + rand.Intn(20+int(ctx.Difficulty*20))
-	a := 1 + rand.Intn(3+int(ctx.Difficulty*3))
-	b := 1 + rand.Intn(3+int(ctx.Difficulty*3))
+	c := 25 + rand.Intn(20+int(ctx.Difficulty*20))
+	a := 1 + rand.Intn(3+int(ctx.Difficulty*2)) // 1 to 4
+	b := 1 + rand.Intn(3+int(ctx.Difficulty*2)) // 1 to 4
+	maxCoeff := a
+	if b > maxCoeff {
+		maxCoeff = b
+	}
+
+	if rand.Float64() < 0.5 {
+		// Minimum of a downward paraboloid on x^2 + y^2 <= 4
+		minVal := c - 4*maxCoeff
+		return generator.Problem{
+			Question: fmt.Sprintf("Find the minimum value of \\(f(x,y) = %d - %dx^2 - %dy^2\\) on the closed disc \\(x^2 + y^2 \\le 4\\).", c, a, b),
+			Answer:   fmt.Sprintf("%d", minVal),
+			Explanation: fmt.Sprintf("The interior critical point (0,0) is a local maximum with value %d. By the Extreme Value Theorem, the minimum occurs on the boundary circle \\(x^2 + y^2 = 4\\). Parameterizing the boundary gives \\(f(\\theta) = %d - 4(%d\\cos^2\\theta + %d\\sin^2\\theta)\\). The minimum occurs where the larger coefficient %d is multiplied by 4, yielding %d - 4(%d) = %d.",
+				c, c, a, b, maxCoeff, c, maxCoeff, minVal),
+			Facts: map[string]string{"minimum": fmt.Sprintf("%d", minVal), "constant": fmt.Sprintf("%d", c)},
+		}
+	}
+
+	// Maximum of an upward paraboloid on x^2 + y^2 <= 4
+	maxVal := c + 4*maxCoeff
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find the maximum value of \\(f(x,y) = %d - %dx^2 - %dy^2\\) on the closed disc \\(x^2 + y^2 \\le 4\\).", c, a, b),
-		Answer:      fmt.Sprintf("%d", c),
-		Explanation: fmt.Sprintf("A closed and bounded region always has a maximum, and here the function decreases as either variable moves away from the origin, so the maximum is at the interior critical point (0,0), where the value is %d. The boundary circle gives smaller values, which is why it need not be checked further once the interior point wins.", c),
-		Facts:       map[string]string{"maximum": fmt.Sprintf("%d", c)},
+		Question: fmt.Sprintf("Find the maximum value of \\(f(x,y) = %dx^2 + %dy^2 + %d\\) on the closed disc \\(x^2 + y^2 \\le 4\\).", a, b, c),
+		Answer:   fmt.Sprintf("%d", maxVal),
+		Explanation: fmt.Sprintf("The interior critical point (0,0) is a local minimum with value %d. By the Extreme Value Theorem, the maximum occurs on the boundary circle \\(x^2 + y^2 = 4\\). On the boundary, the maximum is reached when the larger coefficient %d takes the full radius squared of 4, giving 4(%d) + %d = %d.",
+			c, maxCoeff, maxCoeff, c, maxVal),
+		Facts: map[string]string{"maximum": fmt.Sprintf("%d", maxVal), "constant": fmt.Sprintf("%d", c)},
 	}
 }
 

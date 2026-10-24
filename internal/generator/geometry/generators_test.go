@@ -2,6 +2,7 @@ package geometry
 
 import (
 	"math/rand"
+	"regexp"
 	"strconv"
 	"strings"
 	"testing"
@@ -97,5 +98,21 @@ func TestCircleAnswersCarryTwoDecimalPlaces(t *testing.T) {
 				}
 			}
 		})
+	}
+}
+
+func TestVerticalAngles_ReadOffAvoidance(t *testing.T) {
+	gen := &verticalAnglesGen{}
+	for i := 0; i < 500; i++ {
+		p := gen.Generate(generator.GeneratorContext{
+			Difficulty: rand.Float64(),
+			Seed:       int64(i*37 + 11),
+		})
+		ans := strings.TrimSpace(p.Answer)
+		// Check that the numerical answer does not appear verbatim in the stem
+		pattern := `(^|\D)` + ans + `(\D|$)`
+		if matched, _ := regexp.MatchString(pattern, p.Question); matched {
+			t.Fatalf("draw %d: vertical angles question %q prints answer %q in stem", i, p.Question, ans)
+		}
 	}
 }
