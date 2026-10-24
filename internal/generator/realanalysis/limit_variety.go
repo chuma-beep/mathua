@@ -50,7 +50,7 @@ func computedLimitClaims(id string) []mcClaim {
 				reason:      fmt.Sprintf("The quotient equals 1 wherever it is defined, so the limit is 1 and redefining the single value removes the gap."),
 			},
 			{
-				q:           fmt.Sprintf("The function 1/(x − %d)%d has at x = %d...", a, k, a),
+				q:           fmt.Sprintf("The function 1/(x − %d)^%d has at x = %d...", a, k, a),
 				correct:     "an essential discontinuity",
 				distractors: []string{"a removable discontinuity", "a jump discontinuity", "no discontinuity"},
 				reason:      fmt.Sprintf("The function is unbounded near %d, so neither one-sided limit is finite.", a),
@@ -89,7 +89,9 @@ func computedLimitClaims(id string) []mcClaim {
 func computedDerivClaims(id string) []mcClaim {
 	a := 2 + rand.Intn(7)
 	p := 2 + rand.Intn(3)
-	r := 1 + rand.Intn(4)
+	// The uniform-convergence claim uses [0, 1/r], so r must exceed 1 or the
+	// interval reaches the endpoint where the limit jumps.
+	r := 2 + rand.Intn(4)
 	switch id {
 	case "ra.deriv.darboux":
 		return []mcClaim{
@@ -113,7 +115,6 @@ func computedDerivClaims(id string) []mcClaim {
 			},
 		}
 	case "ra.deriv.interchange":
-		n := 2 + rand.Intn(6)
 		return []mcClaim{
 			{
 				q:           fmt.Sprintf("If f_n → f uniformly on [0, %d], does the integral of f equal the limit of the integrals?", a),
@@ -122,10 +123,10 @@ func computedDerivClaims(id string) []mcClaim {
 				reason:      "Uniform convergence bounds the error in the integral by the sup norm times the length of the interval.",
 			},
 			{
-				q:           fmt.Sprintf("Does f_n(x) = x^%d converge uniformly on [0, 1]?", n),
+				q:           "Does the sequence f_n(x) = x^n converge uniformly on [0, 1]?",
 				correct:     "no",
 				distractors: []string{"yes", "yes, because the limit is continuous", "only when the exponent is even"},
-				reason:      fmt.Sprintf("The limit jumps from 0 to 1 at x = 1, so the sup distance stays 1 however large n is."),
+				reason:      "The limit jumps from 0 to 1 at x = 1, so the sup distance stays 1 however large n is.",
 			},
 			{
 				q:           "If f_n → f pointwise on [0, 1] and every f_n is continuous, must the limit of the integrals equal the integral of the limit?",
@@ -143,10 +144,10 @@ func computedDerivClaims(id string) []mcClaim {
 				reason:      fmt.Sprintf("The sup distance is %d/n, which tends to zero.", a),
 			},
 			{
-				q:           fmt.Sprintf("Does f_n(x) = x^n converge uniformly on [0, %d] for %d < 1?", r, r),
+				q:           fmt.Sprintf("Does the sequence f_n(x) = x^n converge uniformly on [0, 1/%d]?", r),
 				correct:     "yes",
-				distractors: []string{"no", "only pointwise", "only when the ratio equals 1"},
-				reason:      "On a closed interval strictly inside the unit disc the sup norm is r^n, which tends to zero.",
+				distractors: []string{"no", "only pointwise", "only when the right endpoint reaches 1"},
+				reason:      fmt.Sprintf("The sup distance is (1/%d)^n, which tends to zero, because the interval stops strictly short of 1.", r),
 			},
 			{
 				q:           fmt.Sprintf("If every f_n is continuous and f_n → f uniformly, is f continuous?"),
