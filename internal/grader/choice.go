@@ -8,6 +8,11 @@ import (
 var singleLetterRe = regexp.MustCompile(`\b[A-Za-z]\b`)
 var choicePrefixRe = regexp.MustCompile(`^(?i)(?:option|choice)?\s*\(?([A-E])(?:\)|\.|\:)?$`)
 
+// A prose string, which may name an option letter but is not a mathematical
+// expression. It has to start with a letter and contain no operator or sign, so
+// "-i" and "x + 1" cannot be read as prose.
+var proseRe = regexp.MustCompile(`^[A-Za-z][A-Za-z .,!?;:]*$`)
+
 // A plain multi-word phrase, the only shape where the answer field can lose a
 // word boundary without changing meaning.
 var wordPhraseRe = regexp.MustCompile(`^[A-Za-z]+(?:\s+[A-Za-z]+)+$`)
@@ -62,7 +67,10 @@ func (g *choiceGrader) grade(expected, answer string) Result {
 	if m := choicePrefixRe.FindStringSubmatch(a); len(m) > 1 {
 		answerLetter = m[1]
 	}
-	if singleLetterRe.MatchString(answerLetter) && len(strings.TrimSpace(answerLetter)) == 1 {
+	// The mirrored rule needs the mirror guard: with expected "-i" and answer
+	// "i" the letter i again appears in a symbol, and the same wrong sign is
+	// accepted from the other direction.
+	if singleLetterRe.MatchString(answerLetter) && len(strings.TrimSpace(answerLetter)) == 1 && proseRe.MatchString(e) {
 		letters := singleLetterRe.FindAllString(e, -1)
 		for _, l := range letters {
 			if strings.EqualFold(l, answerLetter) {
@@ -71,8 +79,15 @@ func (g *choiceGrader) grade(expected, answer string) Result {
 		}
 	}
 
-	// If expected is a single letter, look for it in the answer's letters
-	if singleLetterRe.MatchString(e) && len(strings.TrimSpace(e)) == 1 {
+	// If expected is a single letter, look for it in the answer's letters.
+	//
+	// This is for a prose answer that names the option, such as "The correct
+	// answer is B." It must not apply to a mathematical answer, because a
+	// single-letter expected value is usually a symbol rather than an option
+	// label: without this guard the answer "i" accepted "-i", since the letter
+	// i appears inside it, and every imaginary-unit question marked the wrong
+	// sign correct.
+	if singleLetterRe.MatchString(e) && len(strings.TrimSpace(e)) == 1 && proseRe.MatchString(a) {
 		letters := singleLetterRe.FindAllString(a, -1)
 		for _, l := range letters {
 			if strings.EqualFold(l, e) {

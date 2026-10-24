@@ -186,3 +186,31 @@ func TestGrader_Symbolic_ConstEvalMismatch(t *testing.T) {
 		t.Errorf("expected correct for 10 - 3 * 2 vs 4, got %+v", resMatch)
 	}
 }
+
+// A single-letter expected answer is a symbol far more often than an option
+// label, so the prose fallback must not accept a mathematical expression that
+// merely contains that letter. Before this rule, expected "i" accepted "-i",
+// and every imaginary-unit question marked the opposite sign correct.
+func TestGrader_Choice_SymbolAnswerIsNotMatchedByLetter(t *testing.T) {
+	r := NewRouter()
+	defer r.Close()
+
+	cases := []struct {
+		expected, answer string
+		want             bool
+	}{
+		{"i", "i", true},
+		{"i", "-i", false},
+		{"-i", "i", false},
+		{"i", "i^2", false},
+		{"x", "x + 1", false},
+		{"B", "The correct answer is B.", true},
+		{"C", "The choice is D.", false},
+	}
+	for _, c := range cases {
+		got := r.Grade(GradingMultipleChoice, c.expected, c.answer)
+		if got.Correct != c.want {
+			t.Errorf("Grade(%q, %q).Correct = %v, want %v", c.expected, c.answer, got.Correct, c.want)
+		}
+	}
+}
