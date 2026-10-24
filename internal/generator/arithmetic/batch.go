@@ -372,53 +372,51 @@ func (g *interpretRemainderGen) Generate(ctx generator.GeneratorContext) generat
 
 type divZeroGen struct{}
 
+// Generate asks which statement about division by zero is true.
+//
+// The three knowledge points teach three separate claims: division by zero is
+// undefined, a zero numerator over a nonzero denominator is zero, and a
+// concrete expression has no value. Only the third carries a number, so it
+// draws a dividend. Holding that dividend fixed left the concept with three
+// questions in total, which is the entire supply a learner could meet.
 func (g *divZeroGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		correct     string
-		distractors []string
-		reason      string
+	claim := ctx.KPOrdinal
+	if claim < 1 || claim > 3 {
+		claim = rand.Intn(3) + 1
 	}
-	claims := []claim{
-		{
-			correct: "Division by zero is undefined.",
-			distractors: []string{
-				"Zero divided by any nonzero number is undefined.",
-				"Any number divided by zero equals zero.",
-				"Zero divided by zero equals one.",
-			},
-			reason: "No number multiplied by zero gives a nonzero dividend, so the quotient has no value.",
-		},
-		{
-			correct: "Zero divided by any nonzero number equals zero.",
-			distractors: []string{
-				"Zero divided by any nonzero number is undefined.",
-				"Any number divided by zero equals zero.",
-				"Zero divided by zero equals one.",
-			},
-			reason: "Zero shared into any nonzero number of groups leaves zero in each group.",
-		},
-		{
-			correct: "The expression 5 ÷ 0 has no value.",
-			distractors: []string{
-				"The expression 5 ÷ 0 equals 0.",
-				"The expression 5 ÷ 0 equals 5.",
-				"The expression 0 ÷ 5 has no value.",
-			},
-			reason: "No number multiplied by zero gives 5, so 5 ÷ 0 has no value.",
-		},
+	dividend := rand.Intn(98) + 2 // 2..99, so the quotients never coincide
+	switch claim {
+	case 1:
+		correct := "Division by zero is undefined."
+		p := generator.MultipleChoice("Which statement is true?", correct,
+			"Zero divided by any nonzero number is undefined.",
+			"Any number divided by zero equals zero.",
+			"Zero divided by zero equals one.")
+		p.Explanation = "No number multiplied by zero gives a nonzero dividend, so the quotient has no value."
+		p.Facts = map[string]string{"claim": "undefined", "answer": correct, "reason": p.Explanation}
+		return p
+	case 2:
+		correct := "Zero divided by any nonzero number equals zero."
+		p := generator.MultipleChoice("Which statement is true?", correct,
+			"Zero divided by any nonzero number is undefined.",
+			"Any number divided by zero equals zero.",
+			"Zero divided by zero equals one.")
+		p.Explanation = "Zero shared into any nonzero number of groups leaves zero in each group."
+		p.Facts = map[string]string{"claim": "zero_numerator", "answer": correct, "reason": p.Explanation}
+		return p
 	}
-	idx := rand.Intn(len(claims))
-	if ctx.KPOrdinal == 1 {
-		idx = 0
-	} else if ctx.KPOrdinal == 2 {
-		idx = 1
-	} else if ctx.KPOrdinal == 3 {
-		idx = 2
+	correct := fmt.Sprintf("The expression %d ÷ 0 has no value.", dividend)
+	p := generator.MultipleChoice("Which statement is true?", correct,
+		fmt.Sprintf("The expression %d ÷ 0 equals 0.", dividend),
+		fmt.Sprintf("The expression %d ÷ 0 equals %d.", dividend, dividend),
+		fmt.Sprintf("The expression 0 ÷ %d has no value.", dividend))
+	p.Explanation = fmt.Sprintf("No number multiplied by zero gives %d, so %d ÷ 0 has no value.", dividend, dividend)
+	p.Facts = map[string]string{
+		"claim":    "concrete",
+		"dividend": strconv.Itoa(dividend),
+		"answer":   correct,
+		"reason":   p.Explanation,
 	}
-	c := claims[idx]
-	p := generator.MultipleChoice("Which statement is true?", c.correct, c.distractors...)
-	p.Explanation = c.reason
-	p.Facts = map[string]string{"answer": c.correct, "reason": c.reason}
 	return p
 }
 

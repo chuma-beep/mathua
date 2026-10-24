@@ -181,7 +181,7 @@
   "arith.div.long": 54,
   "arith.div.remainder": 45,
   "arith.div.word": 58,
-  "arith.div.zero": 3,
+  "arith.div.zero": 17,
   "arith.estimate.product": 60,
   "arith.estimate.sum": 60,
   "arith.exp.concept": 28,

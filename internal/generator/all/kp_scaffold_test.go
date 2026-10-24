@@ -32,8 +32,16 @@ func TestGenerators_DeterministicKPOrdinalVariants(t *testing.T) {
 		if err != nil {
 			t.Fatalf("unexpected error: %v", err)
 		}
-		if p3.Answer != "The expression 5 ÷ 0 has no value." {
-			t.Errorf("expected KP 3 answer to be expression statement, got %q", p3.Answer)
+		// The third knowledge point is the concrete expression claim. Its
+		// dividend is drawn, so the guarantee is the claim's shape and its
+		// published dividend rather than the number 5 that this test used to
+		// pin when the generator could only produce three questions in total.
+		want := "The expression " + p3.Facts["dividend"] + " ÷ 0 has no value."
+		if p3.Facts["claim"] != "concrete" || p3.Answer != want {
+			t.Errorf("expected KP 3 answer to be a concrete expression statement, got %q with claim %q", p3.Answer, p3.Facts["claim"])
+		}
+		if p3.Facts["dividend"] == "" {
+			t.Errorf("expected KP 3 to publish the dividend it asks about")
 		}
 	})
 
