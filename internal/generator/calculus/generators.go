@@ -3,6 +3,7 @@ package calculus
 import (
 	"fmt"
 	"math/rand"
+	"strconv"
 	"strings"
 
 	"github.com/chuma-beep/mathua/internal/generator"
@@ -3071,16 +3072,34 @@ func (g *nthTermGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 type telescopingSeriesGen struct{}
 
 func (g *telescopingSeriesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		q, a, e string
+	k := randRange(ctx.Difficulty, 1, 9)
+	switch rand.Intn(4) {
+	case 0:
+		return generator.Problem{
+			Question:    fmt.Sprintf("Find \\(\\sum_{n=1}^{\\infty}\\left(\\frac{%d}{n}-\\frac{%d}{n+1}\\right)\\).", k, k),
+			Answer:      strconv.Itoa(k),
+			Explanation: fmt.Sprintf("Every partial sum collapses to \\(%d-\\frac{%d}{N+1}\\), which tends to %d.", k, k, k),
+		}
+	case 1:
+		a := randRange(ctx.Difficulty, 1, 5)
+		return generator.Problem{
+			Question:    fmt.Sprintf("Find \\(\\sum_{n=1}^{\\infty}\\left(\\frac{1}{n+%d}-\\frac{1}{n+%d}\\right)\\).", a, a+1),
+			Answer:      fmt.Sprintf("1/%d", a+1),
+			Explanation: fmt.Sprintf("The partial sums collapse to \\(\\frac{1}{%d}-\\frac{1}{N+%d}\\), so the series has value \\(1/%d\\).", a+1, a+1, a+1),
+		}
+	case 2:
+		return generator.Problem{
+			Question:    fmt.Sprintf("Find \\(\\sum_{n=1}^{\\infty}\\frac{%d}{n(n+1)}\\) via partial fractions.", k),
+			Answer:      strconv.Itoa(k),
+			Explanation: fmt.Sprintf("\\(\\frac{%d}{n(n+1)}=\\frac{%d}{n}-\\frac{%d}{n+1}\\), and the partial sums telescope to %d.", k, k, k, k),
+		}
+	default:
+		return generator.Problem{
+			Question:    "Do the interior terms cancel in a telescoping partial sum? (yes/no)",
+			Answer:      "yes",
+			Explanation: "Writing each term as a difference makes consecutive terms cancel, so only the first and last survive.",
+		}
 	}
-	table := []entry{
-		{"Find \\(\\sum_{n=1}^{\\infty}(1/n-1/(n+1))\\).", "1", "Partial sums telescope: \\(1-1/(N+1)\\to 1\\)."},
-		{"Do interior terms cancel in telescoping partial sums? (yes/no)", "yes", "Telescoping: write terms as differences so consecutive terms cancel; interior terms cancel in partial sums."},
-		{"Find \\(\\sum_{n=1}^{\\infty}(1/(n(n+1)))\\) via partial fractions.", "1", "\\(1/(n(n+1)) = 1/n-1/(n+1)\\), telescoping to 1."},
-	}
-	e := table[rand.Intn(len(table))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
 
 type directCompareGen struct{}
@@ -3139,110 +3158,235 @@ func (g *absoluteConvergenceGen) Generate(ctx generator.GeneratorContext) genera
 type alternatingRemainderGen struct{}
 
 func (g *alternatingRemainderGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		q, a, e string
+	p := randRange(ctx.Difficulty, 1, 3)
+	n := randRange(ctx.Difficulty, 4, 20)
+	first := n + 1
+	den := intPow(first, p)
+	if p == 1 {
+		return generator.Problem{
+			Question:    fmt.Sprintf("Bound the error from stopping \\(\\sum (-1)^{n}/n\\) after \\(n=%d\\).", n),
+			Answer:      fmt.Sprintf("1/%d", first),
+			Explanation: fmt.Sprintf("For an alternating series the error is at most the first omitted term: \\(a_{%d}=1/%d\\).", first, first),
+		}
 	}
-	table := []entry{
-		{"Bound the error stopping \\(\\sum (-1)^{n}/n\\) at \\(n=10\\).", "1/11", "Remainder \\(\\leq\\) first omitted term: \\(a_{11} = 1/11\\)."},
-		{"Alternating remainders use the first omitted term. Stopped at n=10, which term number bounds the error? (enter a number)", "11", "Truncation error is at most the first dropped term: a_11."},
-		{"Bound the error stopping \\(\\sum (-1)^{n}/n^{2}\\) at \\(n=5\\).", "1/36", "First omitted term: \\(1/6^{2} = 1/36\\)."},
+	if rand.Intn(2) == 0 {
+		return generator.Problem{
+			Question:    fmt.Sprintf("Bound the error from stopping \\(\\sum (-1)^{n}/n^{%d}\\) after \\(n=%d\\).", p, n),
+			Answer:      fmt.Sprintf("1/%d", den),
+			Explanation: fmt.Sprintf("The first omitted term bounds the error: \\(1/%d^{%d}=1/%d\\).", first, p, den),
+		}
 	}
-	e := table[rand.Intn(len(table))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return generator.Problem{
+		Question:    fmt.Sprintf("An alternating series is stopped after the term with \\(n=%d\\). Which term number bounds the truncation error? (enter a number)", n),
+		Answer:      strconv.Itoa(first),
+		Explanation: fmt.Sprintf("The error is at most the first dropped term, which is \\(a_{%d}\\).", first),
+	}
 }
 
 type convergenceRadiusGen struct{}
 
 func (g *convergenceRadiusGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		q, a, e string
+	c := randRange(ctx.Difficulty, 2, 9)
+	switch rand.Intn(6) {
+	case 0:
+		return generator.Problem{
+			Question:    fmt.Sprintf("What is the radius of convergence of \\(\\sum x^{n}/%d^{n}\\)?", c),
+			Answer:      strconv.Itoa(c),
+			Explanation: fmt.Sprintf("The ratio test gives \\(|x|/%d<1\\), so \\(R=%d\\).", c, c),
+		}
+	case 1:
+		return generator.Problem{
+			Question:    fmt.Sprintf("What is the radius of convergence of \\(\\sum %d^{n}x^{n}\\)?", c),
+			Answer:      fmt.Sprintf("1/%d", c),
+			Explanation: fmt.Sprintf("The ratio test gives \\(%d|x|<1\\), so \\(R=1/%d\\).", c, c),
+		}
+	case 2:
+		return generator.Problem{
+			Question:    "What is the radius of convergence of \\(\\sum x^{n}\\)?",
+			Answer:      "1",
+			Explanation: "The ratio test gives \\(|x|<1\\), so \\(R=1\\).",
+		}
+	case 3:
+		return generator.Problem{
+			Question:    "What is the radius of convergence of \\(\\sum x^{n}/n!\\)?",
+			Answer:      "infinity",
+			Explanation: "The ratio test gives \\(L=0\\) for every \\(x\\), so \\(R=\\infty\\).",
+		}
+	case 4:
+		return generator.Problem{
+			Question:    "What is the radius of convergence of \\(\\sum n!x^{n}\\)?",
+			Answer:      "0",
+			Explanation: "The ratio test diverges for every \\(x\\neq 0\\), so \\(R=0\\).",
+		}
+	default:
+		return generator.Problem{
+			Question:    "What does the interval of convergence add to the radius?",
+			Answer:      "endpoint checks",
+			Explanation: "The radius gives the open interval; each endpoint must be tested separately.",
+		}
 	}
-	table := []entry{
-		{"What is the radius of convergence of \\(\\sum x^{n}/n!\\)?", "infinity", "Ratio test gives \\(L=0\\) for all \\(x\\): \\(R=\\infty\\)."},
-		{"What is the radius of convergence of \\(\\sum x^{n}\\)?", "1", "Geometric in \\(x\\): converges for \\(|x|<1\\), so \\(R=1\\)."},
-		{"What does the interval of convergence add to the radius?", "endpoint checks", "Radius gives the open interval; each endpoint must be tested separately."},
-		{"What is the radius of convergence of \\(\\sum n!x^{n}\\)?", "0", "Ratio test diverges for all \\(x\\neq 0\\): \\(R=0\\)."},
-	}
-	e := table[rand.Intn(len(table))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
 
 type epsilonDeltaGen struct{}
 
 func (g *epsilonDeltaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		q, a, e string
+	k := randRange(ctx.Difficulty, 2, 9)
+	a := randRange(ctx.Difficulty, 1, 5)
+	switch rand.Intn(3) {
+	case 0:
+		return generator.Problem{
+			Question:    fmt.Sprintf("Prove \\(\\lim_{x\\to %d}%dx = %d\\): what number \\(N\\) satisfies \\(\\delta=\\varepsilon/N\\)? (enter a number)", a, k, k*a),
+			Answer:      strconv.Itoa(k),
+			Explanation: fmt.Sprintf("\\(|%dx-%d| = %d|x-%d| < \\varepsilon\\) when \\(|x-%d|<\\varepsilon/%d\\), so \\(N=%d\\).", k, k*a, k, a, a, k, k),
+		}
+	case 1:
+		return generator.Problem{
+			Question:    "Does the epsilon-delta definition require a delta for every epsilon? (yes/no)",
+			Answer:      "yes",
+			Explanation: "For every tolerance there is a distance keeping the output within it: given \\(\\varepsilon>0\\) there is \\(\\delta>0\\) with \\(0<|x-x_0|<\\delta\\) implying \\(|f(x)-L|<\\varepsilon\\).",
+		}
+	default:
+		return generator.Problem{
+			Question:    "In epsilon-delta, what does delta control?",
+			Answer:      "how close x must be to x_0",
+			Explanation: "\\(\\delta\\) bounds the input distance while \\(\\varepsilon\\) bounds the output error.",
+		}
 	}
-	table := []entry{
-		{"Does the epsilon-delta definition require a delta for every epsilon? (yes/no)", "yes", "For every tolerance epsilon there is a distance delta keeping f within epsilon of the limit: given ε>0 there is δ>0 with 0<|x-x₀|<δ implying |f(x)-L|<ε."},
-		{"In epsilon-delta, what does δ control?", "how close x must be to x_0", "\\(\\delta\\) bounds the input distance; \\(\\varepsilon\\) bounds the output error."},
-		{"Prove \\(\\lim_{x\\to 2}3x = 6\\): what number \\(N\\) satisfies \\(\\delta=\\varepsilon/N\\)? (enter a number)", "3", "\\(|3x-6| = 3|x-2| < \\varepsilon\\) when \\(|x-2|<\\varepsilon/3\\): delta = epsilon/3, so N=3."},
-	}
-	e := table[rand.Intn(len(table))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
 
 type oneSidedLimitGen struct{}
 
 func (g *oneSidedLimitGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		q, a, e string
+	a := randRange(ctx.Difficulty, 1, 6)
+	switch rand.Intn(4) {
+	case 0:
+		return generator.Problem{
+			Question:    fmt.Sprintf("Find \\(\\lim_{x\\to %d^{+}}\\frac{|x-%d|}{x-%d}\\).", a, a, a),
+			Answer:      "1",
+			Explanation: fmt.Sprintf("For \\(x>%d\\) the numerator equals the denominator, so the quotient is 1.", a),
+		}
+	case 1:
+		return generator.Problem{
+			Question:    fmt.Sprintf("Find \\(\\lim_{x\\to %d^{-}}\\frac{|x-%d|}{x-%d}\\).", a, a, a),
+			Answer:      "-1",
+			Explanation: fmt.Sprintf("For \\(x<%d\\) the numerator is the negative of the denominator, so the quotient is -1.", a),
+		}
+	case 2:
+		return generator.Problem{
+			Question:    fmt.Sprintf("Find \\(\\lim_{x\\to %d}\\frac{x^{2}-%d}{x-%d}\\).", a, a*a, a),
+			Answer:      strconv.Itoa(2 * a),
+			Explanation: fmt.Sprintf("Factor: \\(\\frac{(x-%d)(x+%d)}{x-%d}=x+%d\\), which tends to %d.", a, a, a, a, 2*a),
+		}
+	default:
+		return generator.Problem{
+			Question:    "How many one-sided limits must agree for a two-sided limit to exist? (enter a number)",
+			Answer:      "2",
+			Explanation: "\\(\\lim_{x\\to a}f\\) exists exactly when both one-sided limits exist and are equal.",
+		}
 	}
-	table := []entry{
-		{"Does lim as x approaches 0 from the right of 1/x diverge to positive infinity? (enter 1 for yes, 0 for no)", "1", "From the right, \\(1/x\\) grows without bound: \\(+\\infty\\)."},
-		{"Is lim as x approaches 0 from the left of 1/x equal to positive infinity? (enter 1 for yes, 0 for no)", "0", "From the left, \\(1/x\\) dives to \\(-\\infty\\), not \\(+\\infty\\)."},
-		{"How many one-sided limits must agree for a two-sided limit to exist? (enter a number)", "2", "\\(\\lim_{x\\to a}f\\) exists iff both one-sided limits exist and are equal."},
-		{"Find \\(\\lim_{x\\to 1^{+}}|x-1|/(x-1)\\).", "1", "For \\(x>1\\), the quotient is 1."},
-	}
-	e := table[rand.Intn(len(table))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
 
 type infiniteLimitGen struct{}
 
 func (g *infiniteLimitGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		q, a, e string
+	a := randRange(ctx.Difficulty, 1, 6)
+	c := randRange(ctx.Difficulty, 1, 5)
+	switch rand.Intn(5) {
+	case 0:
+		return generator.Problem{
+			Question:    fmt.Sprintf("Find \\(\\lim_{x\\to %d}\\frac{%d}{(x-%d)^{2}}\\).", a, c, a),
+			Answer:      "infinity",
+			Explanation: fmt.Sprintf("\\(%d/(x-%d)^{2}\\) grows without bound from both sides, so the limit is \\(+\\infty\\).", c, a),
+		}
+	case 1:
+		return generator.Problem{
+			Question:    fmt.Sprintf("Find \\(\\lim_{x\\to %d^{+}}\\frac{%d}{x-%d}\\).", a, c, a),
+			Answer:      "infinity",
+			Explanation: fmt.Sprintf("For \\(x>%d\\) the denominator is positive and tiny, so the quotient tends to \\(+\\infty\\).", a),
+		}
+	case 2:
+		return generator.Problem{
+			Question:    fmt.Sprintf("Find \\(\\lim_{x\\to %d^{-}}\\frac{%d}{x-%d}\\).", a, c, a),
+			Answer:      "-infinity",
+			Explanation: fmt.Sprintf("For \\(x<%d\\) the denominator is negative and tiny, so the quotient tends to \\(-\\infty\\).", a),
+		}
+	case 3:
+		return generator.Problem{
+			Question:    fmt.Sprintf("What asymptote does \\(\\lim_{x\\to %d}\\frac{%d}{x-%d}=\\pm\\infty\\) signal? (enter vertical or horizontal)", a, c, a),
+			Answer:      "vertical",
+			Explanation: fmt.Sprintf("An infinite limit at a finite input means \\(x=%d\\) is a vertical asymptote.", a),
+		}
+	default:
+		return generator.Problem{
+			Question:    "Find \\(\\lim_{x\\to 0}\\frac{1}{x^{2}}\\).",
+			Answer:      "infinity",
+			Explanation: "\\(1/x^{2}\\) tends to \\(+\\infty\\) from both sides.",
+		}
 	}
-	table := []entry{
-		{"Find \\(\\lim_{x\\to 0}1/x^{2}\\).", "infinity", "\\(1/x^{2} \\to +\\infty\\) from both sides."},
-		{"What asymptote does an infinite limit signal?", "vertical", "\\(\\lim_{x\\to a}f = \\pm\\infty\\) means \\(x=a\\) is a vertical asymptote."},
-		{"Find \\(\\lim_{x\\to 2^{+}}1/(x-2)\\).", "infinity", "Denominator positive and tiny: \\(+\\infty\\)."},
-		{"Find \\(\\lim_{x\\to 2^{-}}1/(x-2)\\).", "-infinity", "Denominator negative and tiny: \\(-\\infty\\)."},
-	}
-	e := table[rand.Intn(len(table))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
 
 type sineLimitGen struct{}
 
 func (g *sineLimitGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		q, a, e string
+	k := randRange(ctx.Difficulty, 1, 9)
+	switch rand.Intn(4) {
+	case 0:
+		return generator.Problem{
+			Question:    fmt.Sprintf("Find \\(\\lim_{x\\to 0}\\frac{\\sin(%dx)}{x}\\).", k),
+			Answer:      strconv.Itoa(k),
+			Explanation: fmt.Sprintf("\\(\\frac{\\sin(%dx)}{x} = %d\\cdot\\frac{\\sin(%dx)}{%dx} \\to %d\\).", k, k, k, k, k),
+		}
+	case 1:
+		return generator.Problem{
+			Question:    fmt.Sprintf("Find \\(\\lim_{x\\to 0}\\frac{\\tan(%dx)}{x}\\).", k),
+			Answer:      strconv.Itoa(k),
+			Explanation: fmt.Sprintf("\\(\\frac{\\tan(%dx)}{x} = %d\\cdot\\frac{\\sin(%dx)}{%dx}\\cdot\\frac{1}{\\cos(%dx)} \\to %d\\).", k, k, k, k, k, k),
+		}
+	case 2:
+		return generator.Problem{
+			Question:    fmt.Sprintf("Find \\(\\lim_{x\\to 0}\\frac{1-\\cos(%dx)}{x^{2}}\\).", k),
+			Answer:      decimal(float64(k*k)/2, 1),
+			Explanation: fmt.Sprintf("\\(1-\\cos(%dx) \\approx \\frac{(%dx)^{2}}{2}\\), so the quotient tends to \\(%d/2\\).", k, k, k*k),
+		}
+	default:
+		return generator.Problem{
+			Question:    fmt.Sprintf("Find \\(\\lim_{x\\to 0}\\frac{x}{\\sin(%dx)}\\).", k),
+			Answer:      fmt.Sprintf("1/%d", k),
+			Explanation: fmt.Sprintf("\\(\\frac{x}{\\sin(%dx)} = \\frac{1}{%d}\\cdot\\frac{%dx}{\\sin(%dx)} \\to 1/%d\\).", k, k, k, k, k),
+		}
 	}
-	table := []entry{
-		{"Find \\(\\lim_{x\\to 0}\\sin(x)/x\\).", "1", "The fundamental trigonometric limit equals 1."},
-		{"Find \\(\\lim_{x\\to 0}\\sin(3x)/x\\).", "3", "\\(\\sin(3x)/x = 3\\cdot\\sin(3x)/(3x) \\to 3\\)."},
-		{"Find \\(\\lim_{x\\to 0}(1-\\cos(x))/x\\).", "0", "Standard companion limit: \\((1-\\cos x)/x \\to 0\\)."},
-		{"Find \\(\\lim_{x\\to 0}\\tan(x)/x\\).", "1", "\\(\\tan x/x = (\\sin x/x)\\cdot(1/\\cos x) \\to 1\\)."},
-	}
-	e := table[rand.Intn(len(table))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
 
 type expLimitGen struct{}
 
 func (g *expLimitGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		q, a, e string
+	k := randRange(ctx.Difficulty, 1, 9)
+	switch rand.Intn(4) {
+	case 0:
+		return generator.Problem{
+			Question:    fmt.Sprintf("Find \\(\\lim_{x\\to 0}\\frac{e^{%dx}-1}{x}\\).", k),
+			Answer:      strconv.Itoa(k),
+			Explanation: fmt.Sprintf("\\(\\frac{e^{%dx}-1}{x} = %d\\cdot\\frac{e^{%dx}-1}{%dx} \\to %d\\).", k, k, k, k, k),
+		}
+	case 1:
+		return generator.Problem{
+			Question:    fmt.Sprintf("Find \\(\\lim_{x\\to 0}\\frac{\\ln(1+%dx)}{x}\\).", k),
+			Answer:      strconv.Itoa(k),
+			Explanation: fmt.Sprintf("\\(\\frac{\\ln(1+%dx)}{x} = %d\\cdot\\frac{\\ln(1+%dx)}{%dx} \\to %d\\).", k, k, k, k, k),
+		}
+	case 2:
+		return generator.Problem{
+			Question:    fmt.Sprintf("Find \\(\\lim_{n\\to\\infty}\\left(1+\\frac{%d}{n}\\right)^{n}\\).", k),
+			Answer:      fmt.Sprintf("e^%d", k),
+			Explanation: fmt.Sprintf("\\(\\left(1+\\frac{%d}{n}\\right)^{n} \\to e^{%d}\\).", k, k),
+		}
+	default:
+		return generator.Problem{
+			Question:    fmt.Sprintf("Find \\(\\lim_{n\\to\\infty}\\left(1+\\frac{1}{n}\\right)^{%dn}\\).", k),
+			Answer:      fmt.Sprintf("e^%d", k),
+			Explanation: fmt.Sprintf("The inner bracket tends to \\(e\\), so the %dth power tends to \\(e^{%d}\\).", k, k),
+		}
 	}
-	table := []entry{
-		{"Find \\(\\lim_{x\\to 0}(e^{x}-1)/x\\).", "1", "The fundamental exponential limit equals 1."},
-		{"Find \\(\\lim_{n\\to\\infty}(1+1/n)^{n}\\).", "e", "This limit defines \\(e\\)."},
-		{"Find \\(\\lim_{x\\to 0}\\ln(1+x)/x\\).", "1", "The logarithmic companion limit equals 1."},
-	}
-	e := table[rand.Intn(len(table))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
 
 type boundedSeqGen struct{}
