@@ -570,6 +570,20 @@ func (g *hydrostaticGen) Generate(ctx generator.GeneratorContext) generator.Prob
 			reason: "The integral is 2 * (25 - 9)/2 = 16, so F = 10 * 16 = 160.",
 		},
 	}
+	// Draw the plate instead of reciting four of them. The depth gap is even so
+	// the integral w*(b^2-a^2)/2 stays an integer.
+	w := 1 + rand.Intn(5)
+	a := rand.Intn(3)
+	b := a + 2 + 2*rand.Intn(2)
+	integral := w * (b*b - a*a) / 2
+	claims = append(claims,
+		claim{
+			question: fmt.Sprintf("A vertical rectangular plate is %d metres wide, with its top edge at depth %d and its bottom edge at depth %d. Taking rho*g = 10, what is the hydrostatic force? (enter a number)", w, a, b),
+			answer:   strconv.Itoa(10 * integral),
+			w:        w, a: a, b: b,
+			reason: fmt.Sprintf("The integral is %d * (%d^2 - %d^2)/2 = %d, so F = 10 * %d = %d.", w, b, a, integral, integral, 10*integral),
+		},
+	)
 	c := claims[rand.Intn(len(claims))]
 	return generator.Problem{
 		Question:    c.question,
