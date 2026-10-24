@@ -1669,23 +1669,6 @@ func (g *trigIntegralsGen) Generate(ctx generator.GeneratorContext) generator.Pr
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
 
-type trigSubstitutionGen struct{}
-
-func (g *trigSubstitutionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		q, a, e string
-	}
-	table := []entry{
-		{"What substitution is used for \\(\\sqrt{a^{2}-x^{2}}\\)? (enter as x = ...)", "x = a*sin(theta)", "For \\(\\sqrt{a^{2}-x^{2}}\\), let \\(x=a\\sin(\\theta)\\), then \\(dx=a\\cos(\\theta)d\\theta\\) and \\(\\sqrt{a^{2}-x^{2}} = a\\cos(\\theta)\\)."},
-		{"What substitution is used for \\(\\sqrt{a^{2}+x^{2}}\\)? (enter as x = ...)", "x = a*tan(theta)", "For \\(\\sqrt{a^{2}+x^{2}}\\), let \\(x=a\\tan(\\theta)\\), then \\(dx=a\\sec^{2}(\\theta)d\\theta\\) and \\(\\sqrt{a^{2}+x^{2}} = a\\sec(\\theta)\\)."},
-		{"What substitution is used for \\(\\sqrt{x^{2}-a^{2}}\\)? (enter as x = ...)", "x = a*sec(theta)", "For \\(\\sqrt{x^{2}-a^{2}}\\), let \\(x=a\\sec(\\theta)\\), then \\(dx=a\\sec(\\theta)\\tan(\\theta)d\\theta\\) and \\(\\sqrt{x^{2}-a^{2}} = a\\tan(\\theta)\\)."},
-		{"Find \\(\\int \\frac{1}{\\sqrt{1-x^{2}}} \\, dx\\).", "arcsin(x)+C", "Let \\(x=\\sin(\\theta), dx=\\cos(\\theta)d\\theta\\). \\(\\int \\frac{\\cos(\\theta)}{\\cos(\\theta)} d\\theta = \\int d\\theta = \\theta+C = \\arcsin(x)+C\\)."},
-		{"Find \\(\\int \\frac{1}{1+x^{2}} \\, dx\\).", "arctan(x)+C", "Let \\(x=\\tan(\\theta), dx=\\sec^{2}(\\theta)d\\theta\\). \\(\\int \\frac{\\sec^{2}(\\theta)}{1+\\tan^{2}(\\theta)} d\\theta = \\int d\\theta = \\theta+C = \\arctan(x)+C\\)."},
-	}
-	e := table[rand.Intn(len(table))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
-}
-
 type weierstrassSubGen struct{}
 
 func (g *weierstrassSubGen) Generate(ctx generator.GeneratorContext) generator.Problem {
@@ -1988,22 +1971,6 @@ func (g *monotoneSeqGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		{"Does a(n) = 1-1/n converge? (yes/no)", "yes", "a(n) increases: 1-1/(n+1) > 1-1/n. It is bounded above by 1. By the monotone convergence theorem, it converges to 1; it is bounded and increasing."},
 		{"Does a(n) = n converge? (yes/no)", "no", "a(n) is increasing but not bounded above (unbounded), so it diverges."},
 		{"If a sequence is not monotone, can it still converge?", "yes", "E.g., aₙ = (-1)ⁿ/n is not monotone but converges to 0."},
-	}
-	e := table[rand.Intn(len(table))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
-}
-
-type eulerSeqGen struct{}
-
-func (g *eulerSeqGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		q, a, e string
-	}
-	table := []entry{
-		{"Which expression defines Euler's number e? (enter (1+1/n)^n)", "(1+1/n)^n", "e = lim (1+1/n)^n ≈ 2.71828..."},
-		{"What is \\(e\\) to 3 decimal places?", "2.718", "\\(e = \\lim (1+1/n)^{n} = 2.718281828...\\)"},
-		{"What is the limit of (1+1/n)^n? (enter e)", "e", "e = 1 + 1/1! + 1/2! + 1/3! + ... = sum 1/n!; the sequence (1+1/n)^n tends to e."},
-		{"Is e irrational? (yes/no)", "yes", "e is irrational (proved by Euler). It is also transcendental."},
 	}
 	e := table[rand.Intn(len(table))]
 	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
@@ -3382,21 +3349,6 @@ func (g *integralSimpsonGen) Generate(ctx generator.GeneratorContext) generator.
 				"Subgoal 3: Calculate: \\(\\frac{%d^3}{3} = \\frac{%d}{3} = %d\\).", b, b, b, b*b*b, ans),
 		}
 	}
-}
-
-type integralImproperCompareGen struct{}
-
-func (g *integralImproperCompareGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		q, a, e string
-	}
-	table := []entry{
-		{"For \\(\\int_{1}^{\\infty} dx/x^{p}\\), what is the smallest integer \\(p\\) giving convergence? (enter a number)", "2", "Comparison test: the p-integral converges iff p>1, so the smallest integer is 2. Domination (0≤f≤g with ∫g convergent) preserves convergence; divergence of the smaller forces divergence of the larger."},
-		{"Does \\(\\int_{1}^{\\infty} dx/(x^{2}+1)\\) converge? (yes/no)", "yes", "\\(1/(x^{2}+1) \\leq 1/x^{2}\\) and \\(\\int_{1}^{\\infty}dx/x^{2}\\) converges, so yes by comparison with 1/x^2."},
-		{"Does \\(\\int_{1}^{\\infty} dx/\\sqrt{x}\\) converge? (yes/no)", "no", "By p-comparison with p=1/2 ≤ 1 it diverges: no, it diverges like p=1/2."},
-	}
-	e := table[rand.Intn(len(table))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
 }
 
 type integralPTestGen struct{}
