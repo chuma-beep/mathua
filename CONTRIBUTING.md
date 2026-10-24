@@ -238,8 +238,8 @@ A validator runs on every pull request. It checks invariants before any merge ca
 
 1. **No cycles** — including `prerequisites` + `encompasses` edges (`internal/concepts/loader.go` Kahn’s)
 2. **No orphans** — every `prerequisites`/`encompasses`/`key_prerequisites` must exist (`internal/concepts/loader.go`)
-3. **No dup IDs, no empty label/domain, valid `mastery_threshold`** (`loader.go:303`)
-4. **No singleton `interference_group`** (`internal/concepts/loader.go`), valid `grading_type` enum (9 values `loader.go:297`), `variants` `0.1–1.0` difficulty
+3. **No dup IDs, no empty label/domain, valid `mastery_threshold`** (`internal/concepts/loader.go`)
+4. **No singleton `interference_group`** (`internal/concepts/loader.go`), valid `grading_type` enum (9 values `internal/concepts/loader.go`), `variants` `0.1–1.0` difficulty
 
 A second audit guards the lesson corpus (`python3 scripts/audit_lessons.py:191`). It fails on these conditions:
 
