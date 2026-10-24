@@ -31,16 +31,37 @@ const CONCEPT = 'arith.add.single'
  * reason, so the switcher is asserted rather than assumed.
  */
 async function switchLayer(page: Page, label: string) {
-  // Forced: the switcher entries are small toolbar targets that Playwright's
-  // stability check rejects, and MathLive's own handler reads `data-layer` from the
-  // event target regardless of how the event was produced.
-  await page
+  // The switcher entries are small toolbar targets and Playwright's stability check
+  // rejects them, while a forced click still hit-tests the element centre: on CI that is
+  // where the `abc` switch silently did nothing three attempts in a row, which is why the
+  // keypad never reached the comparison row. MathLive's own handler reads `data-layer`
+  // from the event target regardless of how the event was produced, so a DOM click sent
+  // through `evaluate` reaches it without depending on layout, viewport or a pointer
+  // resting over the right pixel.
+  const entry = page
     // `:visible` matters: MathLive renders one toolbar per layout and only the active
     // one is shown, so the first match in DOM order is usually a hidden copy.
     .locator('.MLK__toolbar .layer-switch:visible')
     .filter({ hasText: new RegExp(`^${label}$`) })
     .first()
-    .click({ force: true })
+  await expect(entry).toBeAttached()
+  // MathLive reads `data-layer` in a `pointerdown` handler bound to the keyboard
+  // root, so a `click` is the wrong event entirely and a real mouse press is
+  // hit-tested against whatever is painted over the entry. Dispatching the
+  // pointerdown the handler actually listens for, on the entry itself, is both
+  // the faithful event and immune to occlusion.
+  await entry.evaluate((el) =>
+    el.dispatchEvent(
+      new PointerEvent('pointerdown', {
+        bubbles: true,
+        cancelable: true,
+        button: 0,
+        pointerId: 1,
+        isPrimary: true,
+        pointerType: 'touch',
+      }),
+    ),
+  )
 }
 
 async function openLearn(
@@ -587,23 +608,20 @@ test.describe('the whole loop on a phone', () => {
     await setAnswer(page, '')
     await answerField(page).tap()
     await expect(keyboardRows(page)).toBeVisible({ timeout: 10_000 })
-// Reached through MathLive's own toolbar switcher, because that is the only
+    // Reached through MathLive's own toolbar switcher, because that is the only
     // mechanism that works: a keycap with a `layer` property only gains a CSS class and
     // does nothing when pressed, while the toolbar emits `data-layer` and assigns
-    // `currentLayer`. Layers were unreachable before this for the same reason.
+    // `currentLayer`. Pages were unreachable before this for the same reason.
     //
-    // The two switches are inside the retry on purpose. MathLive assigns `currentLayer` and
-    // re-renders the keypad asynchronously, and under CI's two workers that re-render can land
-    // after both switches were sent, so switching once and then reading the keypad asserts
-    // that the first switch took and measures the second one's re-render, which fails as
-    // "the ≥ key is missing". Retrying the whole sequence states the actual property: eventually
-    // both switches land and the key is there.
+    // Each switch is asserted by the keycap it reveals rather than by replaying the taps
+    // until one sticks. `√` proves the structure page arrived and `≥` exists on the `abc`
+    // page alone, so seeing it is proof that both switches took. A failure now names the
+    // page that did not arrive instead of timing out on an anonymous predicate.
+    await switchLayer(page, '±÷')
+    await expect(keycaps(page).filter({ hasText: /√/ }).first()).toBeVisible({ timeout: 5_000 })
+    await switchLayer(page, 'abc')
     const ge = keycaps(page).filter({ hasText: /≥/ })
-    await expect(async () => {
-      await switchLayer(page, '±÷')
-      await switchLayer(page, 'abc')
-      await expect(ge).toBeVisible({ timeout: 1_000 })
-    }).toPass({ timeout: 20_000 })
+    await expect(ge.first()).toBeVisible({ timeout: 5_000 })
     await ge.first().tap()
     await page.waitForTimeout(150)
     expect(await answerLatex(page)).toBe('\\ge')
