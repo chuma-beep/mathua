@@ -355,7 +355,9 @@ func TestBatchHeunRecomputes(t *testing.T) {
 		if err != nil {
 			t.Fatalf("heun: non-numeric answer %q", p.Answer)
 		}
-		if math.Abs(answer-want) > 1e-9 {
+		// The published answer is rounded to six decimal places so it reads as
+		// 1.052563 rather than 1.052562500000001, so compare at that precision.
+		if math.Abs(answer-want) > 1e-6 {
 			t.Fatalf("heun: function=%s y0=%v t0=%v h=%v answers %v, want %v",
 				p.Facts["function"], y0, t0, h, answer, want)
 		}
