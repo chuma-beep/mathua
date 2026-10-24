@@ -294,3 +294,18 @@ func TestCanonicalizeFactorialAndListsAreMath(t *testing.T) {
 		t.Errorf("prose pairing must stay escaped: %q", got)
 	}
 }
+
+// TestRepairEscapedScript pins the shape that broke the powers lesson: an
+// escaping pass turned the underscore of an underbrace label into a literal
+// underscore, so KaTeX saw an unclosed text argument and rendered the source
+// instead of the formula.
+func TestRepairEscapedScript(t *testing.T) {
+	in := "\\[a^n \\cdot a^m = \\underbrace{a \\cdots a}\\_{n \\text{ times}} = a^{n+m}\\]"
+	got := Canonicalize(in, Algebrica)
+	if strings.Contains(got, `}\_{`) {
+		t.Fatalf("escaped subscript survived: %q", got)
+	}
+	if !strings.Contains(got, `}_{n \text{ times}}`) {
+		t.Fatalf("label not restored: %q", got)
+	}
+}

@@ -66,7 +66,7 @@ The form \( 0^0 \) is therefore left undefined in the context of limits. More ge
 The product of two or more powers with the same base \(a\) is a power with the same base and exponent equal to the sum of the exponents:
 \[a^n \cdot a^m = a^{n+m}\]
 To see why this holds, observe that \( a^n \) represents the product of \( n \) factors equal to \( a \), and \( a^m \) represents the product of \( m \) such factors. Concatenating these two products gives a total of \( n+m \) factors, which is precisely \( a^{n+m} \). In formal terms, the argument reads as follows:
-\[a^n \cdot a^m = \underbrace{a \cdot a \cdots a}\_{n \text{ times}} \cdot \underbrace{a \cdot a \cdots a}\_{m \text{ times}} = \underbrace{a \cdot a \cdots a}\_{n+m \text{ times}} = a^{n+m}\]
+\[a^n \cdot a^m = \underbrace{a \cdot a \cdots a}_{n \text{ times}} \cdot \underbrace{a \cdot a \cdots a}_{m \text{ times}} = \underbrace{a \cdot a \cdots a}_{n+m \text{ times}} = a^{n+m}\]
 This reasoning applies directly to positive integer exponents, as it relies on counting factors. For integer, rational, or real exponents, the same result follows from the definition \( a^x = e^{x \ln a} \). Since the exponential function satisfies \( e^u \cdot e^v = e^{u+v} \), we have the following:
 \[a^n \cdot a^m = e^{n \ln a} \cdot e^{m \ln a} = e^{(n+m) \ln a} = a^{n+m}\]
 

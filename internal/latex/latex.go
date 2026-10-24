@@ -113,6 +113,11 @@ var (
 	fracCorruptRe   = regexp.MustCompile(`\\([dt]?frac)\}\{([^{}]*)\}\{([^{}]*)\}\}`)
 	sqrtCorruptRe   = regexp.MustCompile(`\\sqrt\{\}\{([^{}]*)\}\}`)
 	scriptCorruptRe = regexp.MustCompile(`([_^])\}\{`)
+	// An argument's script that lost its brace to an escaping pass: the
+	// underline of a subscript becomes a literal underscore, so
+	// \underbrace{...}\_{n} prints the braces instead of stacking the
+	// label. Seen in the powers lesson, where KaTeX fell back to raw source.
+	escapedScriptRe = regexp.MustCompile(`\}\\([_^])\{`)
 	argCorruptRe    = regexp.MustCompile(`\\(mathrm|text|mbox|mathbf|mathit|mathsf|mathtt|textrm|textbf|textit|textup|textnormal|operatorname)\}\{`)
 	punctEscapeRe   = regexp.MustCompile(`\\([+.=])`)
 	// Scrape artifacts: a dangling backslash at the end of math content, and
@@ -127,6 +132,7 @@ func repairBraces(s string) string {
 		s = fracCorruptRe.ReplaceAllString(s, `\$1{$2}{$3}`)
 		s = sqrtCorruptRe.ReplaceAllString(s, `\sqrt{$1}`)
 		s = scriptCorruptRe.ReplaceAllString(s, `$1{`)
+		s = escapedScriptRe.ReplaceAllString(s, `}$1{`)
 		s = argCorruptRe.ReplaceAllString(s, `\$1{`)
 		if s == prev {
 			break
