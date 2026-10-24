@@ -172,24 +172,6 @@ func (g *dihedralOrderGen) Generate(ctx generator.GeneratorContext) generator.Pr
 // Order of a finite field
 // ---------------------------------------------------------------------------
 
-type finiteFieldOrderGen struct{}
-
-func (g *finiteFieldOrderGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	ps := []int{2, 3, 5, 7}
-	p := ps[rand.Intn(len(ps))]
-	n := 1 + rand.Intn(4)
-	order := abstractPow(p, n)
-	return generator.Problem{
-		Question: fmt.Sprintf("Every finite field has p to the n elements for a prime p and a positive integer n. For p = %d and n = %d, how many elements does the field have?", p, n),
-		Answer:   fmt.Sprintf("%d", order),
-		Explanation: fmt.Sprintf("The field is a vector space of dimension %d over its prime field with %d elements, so it has %d to the %d elements, which is %d.",
-			n, p, p, n, order),
-		Facts: map[string]string{
-			"p": fmt.Sprintf("%d", p), "n": fmt.Sprintf("%d", n), "answer": fmt.Sprintf("%d", order),
-		},
-	}
-}
-
 // ---------------------------------------------------------------------------
 // Orbit-stabilizer: the size of an orbit
 // ---------------------------------------------------------------------------
