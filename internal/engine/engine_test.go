@@ -1055,8 +1055,8 @@ func TestEngine_StudyPath_NegativeXPOnRush(t *testing.T) {
 	if err != nil {
 		t.Fatalf("study submit 2: %v", err)
 	}
-	if r2.XP != -1 {
-		t.Errorf("expected -1 XP second study rush, got %d", r2.XP)
+	if r2.XP != xppolicy.RushPenalty {
+		t.Errorf("expected %d XP second study rush, got %d", xppolicy.RushPenalty, r2.XP)
 	}
 	if !r2.Halted {
 		t.Error("expected halted flag after 2 consecutive study misses")
@@ -2598,5 +2598,35 @@ func TestEngine_FSRS_LiveStateTransitions(t *testing.T) {
 	}
 	if dueCount < 1 {
 		t.Errorf("expected at least 1 review due when FSRS retrievability decays, got %d", dueCount)
+	}
+}
+
+func TestEngine_AntiGuessing_SlowMissBreaksTheRun(t *testing.T) {
+	e := testEngine(t)
+	st, _ := e.CreateStudent("guess_slow")
+	sess, _ := e.repo.CreateSession(st.ID)
+
+	// First rapid miss: the run starts but nothing is charged yet.
+	q1, _ := e.NextQuestion(sess.ID, st.ID)
+	if res, _ := e.SubmitAnswer(sess.ID, st.ID, q1.AttemptID, "wrong", 1.0); res.XP != 0 {
+		t.Errorf("expected 0 XP first rapid miss, got %d", res.XP)
+	}
+
+	// A slow wrong answer is considered, so it ends the run rather than extending it.
+	q2, _ := e.NextQuestion(sess.ID, st.ID)
+	if res, _ := e.SubmitAnswer(sess.ID, st.ID, q2.AttemptID, "wrong", 9.0); res.XP != 0 {
+		t.Errorf("expected 0 XP for a considered miss, got %d", res.XP)
+	}
+
+	// The next rapid miss is the first of a new run, so it is not penalised.
+	q3, _ := e.NextQuestion(sess.ID, st.ID)
+	if res, _ := e.SubmitAnswer(sess.ID, st.ID, q3.AttemptID, "wrong", 1.0); res.XP != 0 {
+		t.Errorf("expected 0 XP after the run was broken, got %d", res.XP)
+	}
+
+	// A second consecutive rapid miss is what earns the penalty.
+	q4, _ := e.NextQuestion(sess.ID, st.ID)
+	if res, _ := e.SubmitAnswer(sess.ID, st.ID, q4.AttemptID, "wrong", 1.0); res.XP != xppolicy.RushPenalty {
+		t.Errorf("expected %d XP for two consecutive rapid misses, got %d", xppolicy.RushPenalty, res.XP)
 	}
 }

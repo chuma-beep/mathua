@@ -33,7 +33,7 @@ _Avoid_: flat per-question XP, word as separate prereq depth (temporary node, fu
 **Quiz (50 XP gate)** — Q3 was MA-verbatim `150 XP` (`improve.md:27`); rescaled to `50 XP` with the small-awards economy (same ~5-lesson cadence, smaller numbers — user-tuned economy supersedes MA fidelity, see ADR-020). Timed closed-book, `80%` difficulty via `computeDifficulty`, diverse recents, immediate remedial + retake (`internal/quiz/quiz.go:1`). Daily goal `10` (drift fix shipped: versioned backfill in `sqlite.go`). Banner: `Study → Take Test` + `Profile` due-reviews.
 _Avoid_: 1–2 lesson gate, 30 XP shortcut
 
-**XP** — `Award` in `internal/xp/policy.go` (`EffortBase` clamped to 1-5, × `PerformanceMultiplier` 1.1 inside the time threshold and 1.0 outside; no time or streak multiplier): an effort-derived approximation, never exact time accounting. Miss 0, rush −1, diagnostic 0 XP. Daily goal `30` (`xp.DefaultDailyGoal`). Verified via `go vet` + `learn → answer → profile` `playwright`.
+**XP** — `Award` in `internal/xp/policy.go` (`EffortBase` clamped to 1-5, × `PerformanceMultiplier` 1.1 inside the time threshold and 1.0 outside; no time or streak multiplier): an effort-derived approximation, never exact time accounting. Miss 0, rush −5, diagnostic 0 XP. Daily goal `30` (`xp.DefaultDailyGoal`). Verified via `go vet` + `learn → answer → profile` `playwright`.
 
 **GUEST_KEY** — `mathua_guest_id` persisted so guest `/profile` survives reload (`lib/auth.ts:4`).
 

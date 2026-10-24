@@ -73,8 +73,11 @@ const (
 // an oversight — see TestDailyGoalImpliedCadence, which reports it.
 const QuizGateXP = 50
 
-// RushPenalty is the negative XP assigned for rushing/guessing.
-const RushPenalty = -1
+// RushPenalty is the negative XP assigned for rushing/guessing. It must stay
+// large enough to register against an award of 1-5 XP and small enough that a
+// single lapse cannot erase a day of work: two successive guesses cost -10,
+// which is a third of the default daily goal.
+const RushPenalty = -5
 
 // RushAfter is how many sub-2-second wrong answers earn the penalty. It used to differ
 // between hosts — the practice path counted its own rushCount, the study/quiz path required

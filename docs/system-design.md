@@ -411,7 +411,7 @@ The web server exposes a REST API through Go's standard `net/http` package. No e
 | GET | `/api/lessons/{id}/kp` | no | KP shards (3 per concept) with worked example |
 | POST | `/api/study/answer` | write: writeLimiter, optional | Study seam `LessonQuiz→SubmitAnswer` (`CONTEXT.md` Seam) — graded against the server-side anchor, never a client-supplied expected; 409 + re-serve when no anchor exists, `student_id` impersonation guard |
 | POST | `/api/quiz/session` | write: writeLimiter, optional | Quiz every 50 XP at 80% difficulty (`quiz.go:1`) |
-| POST | `/api/quiz/answer` | write: writeLimiter, optional | Submit quiz answer (`TaskQuiz 20` `engine.go:1126`) |
+| POST | `/api/quiz/answer` | write: writeLimiter, optional | Submit quiz answer; a correct answer earns 20 XP through `QuizXP` (`internal/engine/engine.go`) |
 | GET | `/api/admin/overview` | **admin** | Counts for the admin landing page: accounts, administrators, corpus size, stored questions, recent audit events |
 | GET | `/api/admin/users` | **admin** | Search accounts by email / id / username / name (`?q=&limit=&offset=`). Projects `storage.AdminUser`, which has no field for a credential or for learning state |
 | PATCH | `/api/admin/users/{id}` | **admin** | `{"role":"owner"\|"admin"\|"moderator"\|"student"}` — the only mutation. The body contributes one field; every other key is ignored. Refuses 409 when it would leave zero administrators, and audits the change. See `docs/administration.md` for the permission matrix and `CanAssign` |

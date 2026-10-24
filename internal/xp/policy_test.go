@@ -37,8 +37,8 @@ func TestAwardMissIsZero(t *testing.T) {
 			t.Errorf("Award(false, ..., %q) = %d, want 0", task, got)
 		}
 	}
-	if RushPenalty != -1 {
-		t.Errorf("RushPenalty = %d, want -1 (engine rush paths)", RushPenalty)
+	if RushPenalty != -5 {
+		t.Errorf("RushPenalty = %d, want -5 (engine rush paths)", RushPenalty)
 	}
 }
 

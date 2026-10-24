@@ -1433,9 +1433,12 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 	if !gr.Correct && elapsedSeconds < xppolicy.RushSeconds {
 		as.rushCount++
 		if as.rushCount >= xppolicy.RushAfter {
-			xp = -5
+			xp = xppolicy.RushPenalty
 		}
-	} else if gr.Correct {
+	} else {
+		// Any other outcome breaks the run. A slow wrong answer is a considered
+		// wrong answer, not a guess, so it must not leave the counter part-way to
+		// a penalty; before this, a slow miss between two fast ones still cost XP.
 		as.rushCount = 0
 	}
 	if xp != 0 {
