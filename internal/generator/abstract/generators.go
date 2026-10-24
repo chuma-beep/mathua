@@ -843,7 +843,7 @@ func (g *polynomialRingGen) Generate(ctx generator.GeneratorContext) generator.P
 		pool = append(tableEasy, tableHard...)
 	}
 	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
+	return groupYesNo(e.question, e.answer, e.reason)
 }
 
 // ----- 16. group action -----
@@ -977,10 +977,10 @@ func (g *ufdGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 			{"x^2-1 factors over Q. How many linear factors? (enter a number)", "2", "x^2-1 = (x-1)(x+1): two linear factors."},
 		}
 		u := ufdTable[rand.Intn(len(ufdTable))]
-		return generator.Problem{Question: u.question, Answer: u.answer, Explanation: u.reason}
+		return groupChoice(u.question, u.answer, u.reason, choicesFor(u.answer)...)
 	}
 	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return groupYesNo(e.q, e.a, e.e)
 }
 
 // ----- 19. field extension -----
@@ -1023,10 +1023,10 @@ func (g *localizationGen) Generate(ctx generator.GeneratorContext) generator.Pro
 			{"In Z[1/2], what is 2/4 reduced? (enter a fraction like 1/2)", "1/2", "Cancel 2: 2/4 = 1/2."},
 		}
 		v := locTable[rand.Intn(len(locTable))]
-		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
+		return groupChoice(v.question, v.answer, v.reason, choicesFor(v.answer)...)
 	}
 	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return groupYesNo(e.q, e.a, e.e)
 }
 
 type finiteFieldGen struct{}
@@ -1233,10 +1233,10 @@ func (g *noetherianGen) Generate(ctx generator.GeneratorContext) generator.Probl
 			{"In the PID Z, the ideal (6,10) equals (d) for d=gcd(6,10). What is d? (enter a number)", "2", "gcd(6,10) = 2, so (6,10) = (2)."},
 		}
 		v := noeTable[rand.Intn(len(noeTable))]
-		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
+		return groupChoice(v.question, v.answer, v.reason, choicesFor(v.answer)...)
 	}
 	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return groupYesNo(e.q, e.a, e.e)
 }
 
 type commutatorGen struct{}
