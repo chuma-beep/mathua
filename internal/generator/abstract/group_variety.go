@@ -26,6 +26,16 @@ func otherAnswer(a string) string {
 	return "yes"
 }
 
+// choicesFor builds plausible distractors for an answer that may be numeric or
+// a word. A numeric answer needs numeric neighbours rather than a yes/no
+// alternative, which would make the question impossible to answer sensibly.
+func choicesFor(answer string) []string {
+	if n, err := strconv.Atoi(answer); err == nil {
+		return []string{strconv.Itoa(n - 1), strconv.Itoa(n + 1), strconv.Itoa(n + 2)}
+	}
+	return []string{otherAnswer(answer)}
+}
+
 // groupYesNo turns a yes/no row into a multiple choice question. The concept is
 // graded multiple_choice, so a bare "yes" with no options cannot be answered in
 // the client.
