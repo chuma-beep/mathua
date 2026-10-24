@@ -9,8 +9,10 @@ package graphtheory
 // the answer from those facts rather than trusting the author's arithmetic.
 
 import (
+	"fmt"
 	"math/rand"
 	"strconv"
+	"strings"
 
 	"github.com/chuma-beep/mathua/internal/generator"
 )
@@ -479,26 +481,17 @@ func (g *spectralGapGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type mantelGen struct{}
 
 func (g *mantelGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		n      int
-		answer string
-		reason string
-	}
-	claims := []claim{
-		{n: 3, answer: "2", reason: "floor(3^2/4) = 2: a triangle-free graph on 3 vertices has at most 2 edges, P_3."},
-		{n: 4, answer: "4", reason: "floor(4^2/4) = 4: K_{2,2} is triangle-free and has 4 edges."},
-		{n: 5, answer: "6", reason: "floor(5^2/4) = 6: K_{2,3} attains it."},
-		{n: 6, answer: "9", reason: "floor(6^2/4) = 9: the balanced complete bipartite graph K_{3,3}."},
-		{n: 7, answer: "12", reason: "floor(7^2/4) = 12: K_{3,4}."},
-		{n: 8, answer: "16", reason: "floor(8^2/4) = 16: K_{4,4}."},
-	}
-	c := claims[rand.Intn(len(claims))]
+	n := 3 + rand.Intn(22)
+	max := n * n / 4
+	left := n / 2
+	right := n - left
+	answer := strconv.Itoa(max)
 	return generator.Problem{
-		Question: "By Mantel's theorem, what is the maximum number of edges in a triangle-free graph on " +
-			strconv.Itoa(c.n) + " vertices? (enter a number)",
-		Answer:      c.answer,
-		Explanation: c.reason,
-		Facts:       map[string]string{"n": strconv.Itoa(c.n), "answer": c.answer},
+		Question: fmt.Sprintf("By Mantel's theorem, what is the maximum number of edges in a triangle-free graph on %d vertices? (enter a number)", n),
+		Answer:   answer,
+		Explanation: fmt.Sprintf("The bound is floor(n^2/4), attained by the balanced complete bipartite graph: floor(%d^2/4) = %d, with parts of sizes %d and %d, so %d times %d edges.",
+			n, max, left, right, left, right),
+		Facts: map[string]string{"n": strconv.Itoa(n), "answer": answer},
 	}
 }
 
@@ -829,40 +822,70 @@ func (g *topologicalSortGen) Generate(ctx generator.GeneratorContext) generator.
 type dagPathsGen struct{}
 
 func (g *dagPathsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question string
-		answer   string
-		nodes    int
-		edges    string
-		s, t     int
-		reason   string
+	// A layered DAG: edges only run from one layer to the next, ending at a
+	// single sink, so the path count is computed by dynamic programming rather
+	// than read from a table.
+	layers := 2 + rand.Intn(3)
+	width := 1 + rand.Intn(3)
+	nodes := layers*width + 1
+	sink := nodes - 1
+	counts := make([]int, width)
+	for i := range counts {
+		counts[i] = 1
 	}
-	claims := []claim{
-		{question: "In the DAG with vertices 0..2 and edges 0->1, 1->2, how many directed paths go from 0 to 2? (enter a number)",
-			answer: "1", nodes: 3, edges: "0,1;1,2", s: 0, t: 2,
-			reason: "The only path is 0-1-2."},
-		{question: "In the DAG with vertices 0..3 and edges 0->1, 0->2, 1->3, 2->3, how many directed paths go from 0 to 3? (enter a number)",
-			answer: "2", nodes: 4, edges: "0,1;0,2;1,3;2,3", s: 0, t: 3,
-			reason: "The two paths are 0-1-3 and 0-2-3."},
-		{question: "In the DAG with vertices 0..3 and edges 0->1, 1->3, 0->2, 2->1, 2->3, how many directed paths go from 0 to 3? (enter a number)",
-			answer: "3", nodes: 4, edges: "0,1;1,3;0,2;2,1;2,3", s: 0, t: 3,
-			reason: "The paths are 0-1-3, 0-2-1-3 and 0-2-3."},
-		{question: "In the DAG with vertices 0..4 and edges 0->1, 0->2, 1->3, 2->3, 3->4, how many directed paths go from 0 to 4? (enter a number)",
-			answer: "2", nodes: 5, edges: "0,1;0,2;1,3;2,3;3,4", s: 0, t: 4,
-			reason: "The paths are 0-1-3-4 and 0-2-3-4."},
-		{question: "In the DAG with vertices 0..4 and edges 0->1, 0->2, 1->2, 1->3, 2->3, 3->4, how many directed paths go from 0 to 4? (enter a number)",
-			answer: "3", nodes: 5, edges: "0,1;0,2;1,2;1,3;2,3;3,4", s: 0, t: 4,
-			reason: "The paths are 0-1-3-4, 0-1-2-3-4 and 0-2-3-4."},
+	edges := [][2]int{}
+	for l := 0; l < layers-1; l++ {
+		next := make([]int, width)
+		for j := 0; j < width; j++ {
+			for i := 0; i < width; i++ {
+				if rand.Intn(4) == 0 {
+					continue
+				}
+				edges = append(edges, [2]int{l*width + i, (l+1)*width + j})
+				next[j] += counts[i]
+			}
+			if next[j] == 0 {
+				i := rand.Intn(width)
+				edges = append(edges, [2]int{l*width + i, (l+1)*width + j})
+				next[j] += counts[i]
+			}
+		}
+		counts = next
 	}
-	c := claims[rand.Intn(len(claims))]
+	total := 0
+	for j := 0; j < width; j++ {
+		edges = append(edges, [2]int{(layers-1)*width + j, sink})
+		total += counts[j]
+	}
+	parts := make([]string, 0, len(edges))
+	for _, e := range edges {
+		parts = append(parts, strconv.Itoa(e[0])+","+strconv.Itoa(e[1]))
+	}
+	// Count only paths that start at vertex 0. Edges were appended layer by
+	// layer, so a single forward sweep is a topological order.
+	paths := make([]int, nodes)
+	paths[0] = 1
+	for _, e := range edges {
+		paths[e[1]] += paths[e[0]]
+	}
+	total = paths[sink]
 	return generator.Problem{
-		Question: c.question,
-		Answer:   c.answer,
-		Explanation: c.reason + " A dynamic program over a topological order adds the path counts of each " +
-			"vertex's predecessors, so every path is counted exactly once.",
+		Question: fmt.Sprintf("In the DAG with vertices 0..%d and edges %s, how many directed paths go from 0 to %d? (enter a number)", sink, edgeList(parts), sink),
+		Answer:   strconv.Itoa(total),
+		Explanation: "A dynamic program over a topological order adds the path counts of each vertex's predecessors, " +
+			"so every path is counted exactly once.",
 		Facts: map[string]string{
-			"nodes": strconv.Itoa(c.nodes), "edges": c.edges,
-			"s": strconv.Itoa(c.s), "t": strconv.Itoa(c.t), "answer": c.answer,
+			"nodes": strconv.Itoa(nodes), "edges": strings.Join(parts, ";"),
+			"s": "0", "t": strconv.Itoa(sink), "answer": strconv.Itoa(total),
 		},
 	}
+}
+
+// edgeList renders edges for the question text, e.g. 0->1, 1->2.
+func edgeList(parts []string) string {
+	out := make([]string, 0, len(parts))
+	for _, p := range parts {
+		out = append(out, strings.Replace(p, ",", "->", 1))
+	}
+	return strings.Join(out, ", ")
 }
