@@ -260,26 +260,3 @@ func (g *residueGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 		)
 	}
 }
-
-type schwarzLemmaGen struct{}
-
-func (g *schwarzLemmaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	switch rand.Intn(2) {
-	case 0:
-		return complexChoice(
-			"If \\(f\\) maps the unit disc to itself and \\(f(0)=0\\), what is the largest possible value of \\(|f'(0)|\\)?",
-			"1",
-			"Schwarz lemma gives \\(|f'(0)\\|\\) at most 1, and equality happens exactly for a rotation \\(f(z)=cz\\) with \\(|c|=1\\).",
-			"2", "1/2", "0",
-		)
-	default:
-		return complexChoice(
-			"Under Schwarz lemma, when does \\(|f'(0)|=1\\) hold?",
-			"when f is a rotation",
-			"Equality forces the function to be a rotation of the disc, which is the lemma's equality case.",
-			"never",
-			"when f is constant",
-			"when f has a pole in the disc",
-		)
-	}
-}
