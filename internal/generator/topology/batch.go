@@ -345,13 +345,7 @@ func (g *completeGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type basisGen struct{}
 
 func (g *basisGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
+	claims := []topoClaim{
 		{
 			question:    "A basis for a topology is a collection of open sets such that...",
 			correct:     "every open set is a union of basis elements",
@@ -377,6 +371,7 @@ func (g *basisGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 			reason:      "A subbasis is the raw generating family; taking finite intersections produces a basis, and unions of that basis produce the topology.",
 		},
 	}
+	claims = append(claims, computedTopoClaims("topo.metric.basis")...)
 	c := claims[rand.Intn(len(claims))]
 	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
 	p.Explanation = c.reason
@@ -390,13 +385,7 @@ func (g *basisGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type subspaceGen struct{}
 
 func (g *subspaceGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
+	claims := []topoClaim{
 		{
 			question:    "For a subset A of a space X, a set U is open in the subspace topology exactly when...",
 			correct:     "U is the intersection of A with an open set of X",
@@ -422,6 +411,7 @@ func (g *subspaceGen) Generate(ctx generator.GeneratorContext) generator.Problem
 			reason:      "Separating two points by disjoint ambient opens and intersecting both with the subspace gives disjoint subspace opens.",
 		},
 	}
+	claims = append(claims, computedTopoClaims("topo.metric.subspace")...)
 	c := claims[rand.Intn(len(claims))]
 	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
 	p.Explanation = c.reason
@@ -435,13 +425,7 @@ func (g *subspaceGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type denseGen struct{}
 
 func (g *denseGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
+	claims := []topoClaim{
 		{
 			question:    "A subset D of a space X is dense exactly when...",
 			correct:     "every nonempty open set meets D",
@@ -467,6 +451,7 @@ func (g *denseGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 			reason:      "Dense means closure equal to the whole space; the set itself need not be closed.",
 		},
 	}
+	claims = append(claims, computedTopoClaims("topo.metric.dense")...)
 	c := claims[rand.Intn(len(claims))]
 	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
 	p.Explanation = c.reason
