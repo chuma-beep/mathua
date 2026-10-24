@@ -36,16 +36,26 @@ import (
 // parametrised. Never lower an entry to make the test pass: a concept that lost
 // variety has lost it for learners too.
 //
-// The counted unit is the core stem, the question before the "A) …" option block
-// that generator.MultipleChoice appends. Counting the rendered text instead made
-// option shuffling look like variety: on 2026-10-24 the corpus measured 144
-// concepts up to 150 "stems" whose real supply was four problems, and no concept
-// in the corpus exceeded 99 distinct situations while the rendered figures
-// claimed buckets above 200. The baseline was migrated once, on that date, by
-// deleting the file and re-running -update-variety. Entries fell sharply for
-// multiple-choice concepts because the metric changed, not because any generator
-// lost a single problem; that is the only occasion on which a lower number is
-// correct.
+// The counted unit is one mathematical situation: the core stem, the question
+// before the "A) …" option block that generator.MultipleChoice appends, together
+// with the option texts in sorted order. That key took two corrections to reach,
+// and both were found by inspecting a generator rather than by trusting the
+// number. Counting the rendered text made option shuffling look like variety: on
+// 2026-10-24 the corpus measured 144 concepts up to 150 "stems" whose real
+// supply was four problems, and no concept exceeded 99 distinct situations while
+// the rendered figures claimed buckets above 200. Stripping the option block
+// entirely then hid the opposite defect, because a concept whose question is
+// fixed and whose options vary poses one problem per option set:
+// complex.topology.domain reported a single problem for fifteen. Sorting the
+// options keeps the first fix without the second error. The baseline was
+// re-measured from scratch after each correction, by deleting the file and
+// re-running -update-variety, because a metric change is the only occasion on
+// which a lower number is correct.
+//
+// A metric aggregated over 1,250 generators will be wrong for some of them, so
+// spot-check any figure against the generator it describes before building a
+// plan on it. Both corrections above came from doing that and finding the number
+// did not match the questions.
 const (
 	varietyDraws        = 60
 	varietyRuns         = 5
@@ -89,14 +99,23 @@ func corpusConceptIDs(t *testing.T) []string {
 	return ids
 }
 
-// coreStem reduces a rendered question to the problem it actually poses.
+// canonicalProblem reduces a rendered question to the problem it actually
+// poses.
 //
 // generator.MultipleChoice writes its shuffled options into the stem as an
 // "A) …" block, so a concept with four options reports up to twenty-four
 // distinct question strings for one mathematical situation. Counting those was
 // the ratchet's first mistake: measured over the corpus it reported concepts
-// above a hundred stems whose real supply was four, which is the defect the
-// ratchet exists to catch.
+// above a hundred stems whose real supply was four.
+//
+// Stripping the options entirely is the second mistake, and it hides the
+// opposite defect. complex.topology.domain asks one question, "which of these
+// sets is a domain", and varies only which sets are offered, so stripping the
+// block reports one problem for a concept that poses four. A permutation is not
+// a new problem; a different option set is. The counted unit is therefore the
+// core stem plus the option texts in sorted order, which is one key per
+// mathematical situation however the letters happen to fall.
+// coreStem is the question without its option block.
 func coreStem(question string) string {
 	if i := strings.Index(question, "\n\nA) "); i >= 0 {
 		return question[:i]
@@ -104,7 +123,22 @@ func coreStem(question string) string {
 	return question
 }
 
-// distinctStems draws from one concept and counts the distinct core stems.
+func canonicalProblem(question string) string {
+	core := coreStem(question)
+	options := generator.ChoiceOptions(question)
+	if len(options) == 0 {
+		return core
+	}
+	texts := make([]string, 0, len(options))
+	for _, text := range options {
+		texts = append(texts, text)
+	}
+	sort.Strings(texts)
+	return core + "\n" + strings.Join(texts, "\n")
+}
+
+// distinctStems draws from one concept and counts the distinct problems it
+// poses, as defined by canonicalProblem.
 //
 // Generators reach for the global rand source rather than the seed in the
 // context, so a single measurement is a sample. That is why the baseline stores
@@ -118,7 +152,7 @@ func distinctStems(reg *generator.Registry, id string, draws int) int {
 		if err != nil {
 			continue
 		}
-		seen[coreStem(p.Question)] = true
+		seen[canonicalProblem(p.Question)] = true
 	}
 	return len(seen)
 }
