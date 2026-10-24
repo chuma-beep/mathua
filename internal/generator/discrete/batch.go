@@ -508,21 +508,36 @@ func (g *planarGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type cayleyGen struct{}
 
 func (g *cayleyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	n := 3 + rand.Intn(5) // 3..7
+	n := 3 + rand.Intn(8)
 	value := 1
 	for i := 0; i < n-2; i++ {
 		value *= n
 	}
-	q := fmt.Sprintf("How many labelled trees are there on %d given vertices?", n)
-	p := generator.Problem{
-		Question: q,
-		Answer:   strconv.Itoa(value),
-		Facts: map[string]string{
-			"n": strconv.Itoa(n), "exponent": strconv.Itoa(n - 2), "value": strconv.Itoa(value),
-		},
+	answer := strconv.Itoa(value)
+	facts := map[string]string{"n": strconv.Itoa(n), "exponent": strconv.Itoa(n - 2), "value": answer}
+	switch rand.Intn(3) {
+	case 0:
+		return generator.Problem{
+			Question:    fmt.Sprintf("How many labelled trees are there on %d given vertices?", n),
+			Answer:      answer,
+			Explanation: fmt.Sprintf("Cayley's formula gives n^(n-2) labelled trees on n vertices: %d^%d = %d.", n, n-2, value),
+			Facts:       facts,
+		}
+	case 1:
+		return generator.Problem{
+			Question:    fmt.Sprintf("How many distinct Pruefer sequences of length %d are there over an alphabet of %d symbols?", n-2, n),
+			Answer:      answer,
+			Explanation: fmt.Sprintf("Each position holds one of %d symbols, so the count is %d^%d = %d. Pruefer sequences are in bijection with labelled trees, which is why the two counts agree.", n, n, n-2, value),
+			Facts:       facts,
+		}
+	default:
+		return generator.Problem{
+			Question:    fmt.Sprintf("Cayley's formula says the number of labelled trees on n vertices is n^(n-2). For n = %d, what exponent appears?", n),
+			Answer:      strconv.Itoa(n - 2),
+			Explanation: fmt.Sprintf("Substituting n = %d gives the exponent %d - 2 = %d, so there are %d labelled trees.", n, n, n-2, value),
+			Facts:       facts,
+		}
 	}
-	p.Explanation = fmt.Sprintf("Cayley's formula gives n^(n-2) labelled trees on n vertices: %d^%d = %d.", n, n-2, value)
-	return p
 }
 
 // ----- 14. degree sequence -----

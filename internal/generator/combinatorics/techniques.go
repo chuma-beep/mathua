@@ -14,6 +14,8 @@ package combinatorics
 // generator never indexes past them.
 import (
 	"fmt"
+	"math/rand"
+	"strconv"
 
 	"github.com/chuma-beep/mathua/internal/generator"
 )
@@ -106,20 +108,56 @@ func (g *stirlingSecondGen) Generate(ctx generator.GeneratorContext) generator.P
 type bellGen struct{}
 
 func (g *bellGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	// Bell numbers for n = 1..8; the table stops where the value still reads as a count a learner
-	// could check by hand.
-	bell := []int{1, 2, 5, 15, 52, 203, 877, 4140}
-	n := 1 + pick(2+int(ctx.Difficulty*4))
-	if n > len(bell) {
-		n = len(bell)
+	// Bell numbers up to B(15); beyond that the value stops reading as a count
+	// a learner could check, but every result here is computed, not looked up.
+	n := 1 + pick(2+int(ctx.Difficulty*13))
+	if n > 15 {
+		n = 15
 	}
-	return generator.Problem{
-		Question: fmt.Sprintf("In how many ways can a set of %d distinct items be split into non-empty groups, where the number of groups is not fixed and the groups are not labelled?", n),
-		Answer:   fmt.Sprintf("%d", bell[n-1]),
-		Explanation: fmt.Sprintf("That is the Bell number B(%d) = %d: sum the Stirling numbers S(%d, k) over every k from 1 to %d, which counts the same partitions split by how many groups they have.",
-			n, bell[n-1], n, n),
-		Facts: map[string]string{"B": fmt.Sprintf("%d", bell[n-1])},
+	b := bellNumber(n)
+	switch rand.Intn(3) {
+	case 0:
+		return generator.Problem{
+			Question:    fmt.Sprintf("In how many ways can a set of %d distinct items be split into non-empty groups, where the number of groups is not fixed and the groups are not labelled?", n),
+			Answer:      strconv.Itoa(b),
+			Explanation: fmt.Sprintf("That is the Bell number B(%d) = %d: sum the Stirling numbers S(%d, k) over every k from 1 to %d, which counts the same partitions split by how many groups they have.", n, b, n, n),
+			Facts:       map[string]string{"B": strconv.Itoa(b), "n": strconv.Itoa(n)},
+		}
+	case 1:
+		return generator.Problem{
+			Question:    fmt.Sprintf("What is the Bell number B(%d), the number of partitions of a set with %d elements?", n, n),
+			Answer:      strconv.Itoa(b),
+			Explanation: fmt.Sprintf("B(%d) = %d. The recurrence B(n+1) = sum over k of C(n,k) B(k) adds the block containing the (n+1)-th element, so the count grows faster than any polynomial.", n, b),
+			Facts:       map[string]string{"B": strconv.Itoa(b), "n": strconv.Itoa(n)},
+		}
+	default:
+		return generator.Problem{
+			Question:    fmt.Sprintf("A poem has %d lines. How many rhyme schemes are possible, counting schemes that match in pattern as the same?", n),
+			Answer:      strconv.Itoa(b),
+			Explanation: fmt.Sprintf("Each rhyme scheme is a partition of the %d line positions into rhyme classes, so the count is B(%d) = %d.", n, n, b),
+			Facts:       map[string]string{"B": strconv.Itoa(b), "n": strconv.Itoa(n)},
+		}
 	}
+}
+
+// bellNumber returns the Bell number B(n) through the Stirling recurrence, so
+// the generator owns no table of values.
+func bellNumber(n int) int {
+	stirling := make([][]int, n+1)
+	for i := range stirling {
+		stirling[i] = make([]int, n+1)
+	}
+	stirling[0][0] = 1
+	for i := 1; i <= n; i++ {
+		for k := 1; k <= i; k++ {
+			stirling[i][k] = stirling[i-1][k-1] + k*stirling[i-1][k]
+		}
+	}
+	total := 0
+	for k := 0; k <= n; k++ {
+		total += stirling[n][k]
+	}
+	return total
 }
 
 // integerPartitionGen asks for the number of ways to write n as a sum of positive integers where
