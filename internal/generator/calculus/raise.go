@@ -165,7 +165,7 @@ func (g *ivtValueGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type limsupGen struct{}
 
 func (g *limsupGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return calcPickMC([]calcMCClaim{
+	claims := []calcMCClaim{
 		{
 			q:           "The limit superior of a bounded sequence is...",
 			correct:     "the infimum over n of the supremum of the terms from n onward",
@@ -184,7 +184,8 @@ func (g *limsupGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 			distractors: []string{"its limit superior is finite", "it has a convergent subsequence", "it is monotone"},
 			reason:      "Equality of the two shrinking bounds is the same as the tail of the sequence closing in on one value.",
 		},
-	})
+	}
+	return calcPickMC(append(claims, computedThinClaims("calc.limit.limsup")...))
 }
 
 // ---------------------------------------------------------------------------
@@ -194,7 +195,7 @@ func (g *limsupGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type oscillationGen struct{}
 
 func (g *oscillationGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return calcPickMC([]calcMCClaim{
+	claims := []calcMCClaim{
 		{
 			q:           "The oscillation of a function on a set is...",
 			correct:     "the supremum of the function on the set minus its infimum on the set",
@@ -213,7 +214,8 @@ func (g *oscillationGen) Generate(ctx generator.GeneratorContext) generator.Prob
 			distractors: []string{"oscillation 0 on every such interval", "oscillation 1 on every such interval", "finite oscillation only on small intervals"},
 			reason:      "The sine takes values arbitrarily close to both 1 and -1 in any neighbourhood of 0, so the spread is 2.",
 		},
-	})
+	}
+	return calcPickMC(append(claims, computedThinClaims("calc.limit.oscillation")...))
 }
 
 // ---------------------------------------------------------------------------
@@ -223,7 +225,7 @@ func (g *oscillationGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type inverseHyperbolicGen struct{}
 
 func (g *inverseHyperbolicGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return calcPickMC([]calcMCClaim{
+	claims := []calcMCClaim{
 		{
 			q:           "The derivative of \\(\\operatorname{arsinh}(x)\\) is...",
 			correct:     "1/√(1+x²)",
@@ -242,7 +244,8 @@ func (g *inverseHyperbolicGen) Generate(ctx generator.GeneratorContext) generato
 			distractors: []string{"1/√(1+x²)", "1/√(1−x²)", "1/(1−x²)"},
 			reason:      "From \\(x=\\cosh y\\), \\(dx/dy=\\sinh y\\) with \\(\\sinh y=\\sqrt{x^{2}-1}\\) for positive y.",
 		},
-	})
+	}
+	return calcPickMC(append(claims, computedThinClaims("calc.deriv.inverse_hyperbolic")...))
 }
 
 // ---------------------------------------------------------------------------
@@ -294,7 +297,7 @@ func (g *newtonConvergenceGen) Generate(ctx generator.GeneratorContext) generato
 type convexJensenGen struct{}
 
 func (g *convexJensenGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return calcPickMC([]calcMCClaim{
+	claims := []calcMCClaim{
 		{
 			q:           "A twice-differentiable function on an interval is convex exactly when...",
 			correct:     "its second derivative is nonnegative throughout the interval",
@@ -313,7 +316,8 @@ func (g *convexJensenGen) Generate(ctx generator.GeneratorContext) generator.Pro
 			distractors: []string{"must be differentiable everywhere", "must be bounded", "must be increasing"},
 			reason:      "Convexity forces continuity on the open interval, but not differentiability or monotonicity; the chord condition is the definition's geometric face.",
 		},
-	})
+	}
+	return calcPickMC(append(claims, computedThinClaims("calc.deriv.convex_jensen")...))
 }
 
 // ---------------------------------------------------------------------------
@@ -345,7 +349,7 @@ func (g *marginalAnalysisGen) Generate(ctx generator.GeneratorContext) generator
 type epsilonDeltaDerivGen struct{}
 
 func (g *epsilonDeltaDerivGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return calcPickMC([]calcMCClaim{
+	claims := []calcMCClaim{
 		{
 			q:           "The statement that \\(f'(a) = L\\) means...",
 			correct:     "for every ε > 0 there is δ > 0 such that 0 < |x−a| < δ makes the difference quotient within ε of L",
@@ -364,7 +368,8 @@ func (g *epsilonDeltaDerivGen) Generate(ctx generator.GeneratorContext) generato
 			distractors: []string{"the derivative exists wherever both one-sided derivatives exist", "the derivative is always linear", "the function must be convex"},
 			reason:      "The absolute value has one-sided slopes -1 and 1 at 0; the two-sided limit sees the disagreement and does not exist.",
 		},
-	})
+	}
+	return calcPickMC(append(claims, computedThinClaims("calc.deriv.epsilon_delta_deriv")...))
 }
 
 // ---------------------------------------------------------------------------
@@ -374,7 +379,7 @@ func (g *epsilonDeltaDerivGen) Generate(ctx generator.GeneratorContext) generato
 type seriesOperationsGen struct{}
 
 func (g *seriesOperationsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return calcPickMC([]calcMCClaim{
+	claims := []calcMCClaim{
 		{
 			q:           "The sum of two convergent series is...",
 			correct:     "a convergent series whose sum is the sum of the two sums",
@@ -393,7 +398,8 @@ func (g *seriesOperationsGen) Generate(ctx generator.GeneratorContext) generator
 			distractors: []string{"always changes the sum", "may make it diverge", "requires absolute convergence to preserve the sum"},
 			reason:      "Grouping picks out a subsequence of the partial sums, and a subsequence of a convergent sequence has the same limit.",
 		},
-	})
+	}
+	return calcPickMC(append(claims, computedThinClaims("calc.series.operations")...))
 }
 
 // ---------------------------------------------------------------------------
@@ -441,7 +447,7 @@ func (g *cauchyProductGen) Generate(ctx generator.GeneratorContext) generator.Pr
 type pSeriesGen struct{}
 
 func (g *pSeriesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return calcPickMC([]calcMCClaim{
+	claims := []calcMCClaim{
 		{
 			q:           "The p-series with terms \\(1/n^{p}\\) converges exactly when...",
 			correct:     "p > 1",
@@ -460,7 +466,8 @@ func (g *pSeriesGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 			distractors: []string{"converges, because its terms tend to zero", "converges, because its terms decrease", "converges to 2"},
 			reason:      "Tending to zero is necessary but not sufficient; with p = 1/2 the p-series is below the threshold and diverges.",
 		},
-	})
+	}
+	return calcPickMC(append(claims, computedThinClaims("calc.series.p_series")...))
 }
 
 // ---------------------------------------------------------------------------
@@ -470,7 +477,7 @@ func (g *pSeriesGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 type dirichletTestGen struct{}
 
 func (g *dirichletTestGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	return calcPickMC([]calcMCClaim{
+	claims := []calcMCClaim{
 		{
 			q:           "Dirichlet's test says that \\(\\sum a_n b_n\\) converges when...",
 			correct:     "the partial sums of a(n) are bounded and b(n) decreases to zero",
@@ -489,7 +496,8 @@ func (g *dirichletTestGen) Generate(ctx generator.GeneratorContext) generator.Pr
 			distractors: []string{"the cancelling factor is absolutely summable", "the two factors are interchanged", "the series has positive terms"},
 			reason:      "Abel's test handles a factor converging to a nonzero limit by subtracting that limit and applying Dirichlet to the remainder.",
 		},
-	})
+	}
+	return calcPickMC(append(claims, computedThinClaims("calc.series.dirichlet_test")...))
 }
 
 // ---------------------------------------------------------------------------
