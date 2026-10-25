@@ -8,7 +8,18 @@
 
 Which (if any) of the graphs below are the same?
 
+![Five vertices in two rows, with every top vertex connected to every bottom vertex](/diagrams/graphs/sec_gt-intro-2-2-1.svg)
+![Five vertices in a pentagon, each connected to its two neighbours](/diagrams/graphs/sec_gt-intro-2-2-2.svg)
+![Five vertices in a diamond with one in the middle](/diagrams/graphs/sec_gt-intro-2-2-3.svg)
+![Five vertices in a pentagon, joined as a five-pointed star](/diagrams/graphs/sec_gt-intro-2-2-4.svg)
+![Five vertices, with the centre vertex joined to all four outer vertices](/diagrams/graphs/sec_gt-intro-2-2-5.svg)
+
 The graphs above are unlabeled. Usually we think of a graph as having a specific set of vertices. Which (if any) of the graphs below are the same?
+
+![Six labeled vertices in two rows, joined like two crossing squares](/diagrams/graphs/sec_gt-intro-2-4-1.svg)
+![Six labeled vertices in two rows, joined like two adjacent squares](/diagrams/graphs/sec_gt-intro-2-4-2.svg)
+![Six labeled vertices in two rows, with the middle labels swapped](/diagrams/graphs/sec_gt-intro-2-4-3.svg)
+![Six labeled vertices in two rows, using v labels](/diagrams/graphs/sec_gt-intro-2-4-4.svg)
 
 Actually, all the graphs we have seen above are just _drawings_ of graphs. A graph is really an abstract mathematical object consisting of two sets \(V\) and \(E\) where \(E\) is a set of 2-element subsets of \(V\text{.}\) Are the graphs below the same or different?
 
@@ -44,7 +55,12 @@ Here we have a graph with four vertices (the letters \(a, b, c, d\)) and five ed
 
 Looking at sets and sets of 2-element sets is difficult to process. That is why we often draw a representation of these sets. We put a dot down for each vertex, and connect two dots with a line precisely when those two vertices are one of the 2-element subsets in our set of edges. Thus one way to draw the graph described above is this:
 
+![Four vertices in a square, with edges on the border and one diagonal](/diagrams/graphs/sec_gt-intro-9.svg)
+
 However we could also have drawn the graph differently. For example either of these:
+
+![The same graph drawn with a different placement of the vertices](/diagrams/graphs/sec_gt-intro-11-1.svg)
+![The same graph drawn as a row with two crossing curved edges](/diagrams/graphs/sec_gt-intro-11-2.svg)
 
 We should be careful about what it means for two graphs to be “the same.” Actually, given our definition, this is easy: Are the vertex sets equal? Are the edge sets equal? We know what it means for sets to be equal, and graphs are nothing but a pair of two special sorts of sets.
 
@@ -57,6 +73,8 @@ G_1 = (\{a,b,c\}, \{\{a,b\}, \{b,c\}\}); \qquad G_2 = (\{a,b,c\}, \{\{a,c\}, \{c
 $$
 
 Even if two graphs are not _equal_ , they might be _basically_ the same. The graphs in the previous example could be drawn like this:
+
+![Two three-vertex graphs drawn as rows, showing the same path with different labels](/diagrams/graphs/sec_gt-intro-15.svg)
 
 Graphs that are basically the same (but perhaps not equal) are called isomorphic. We will give a precise definition of this term after a quick example:
 
@@ -71,6 +89,9 @@ $$ $$
 G_2 = (V_2, E_2) \text{ where }
 V_2 = \{u,v,w\} \text{ and }E_2 = \{\{u,v\}, \{u,w\}, \{v,w\}\}.
 $$
+
+![A triangle with vertices a, b and c](/diagrams/graphs/sec_gt-intro-17-2-2-1.svg)
+![A triangle with vertices u, v and w](/diagrams/graphs/sec_gt-intro-17-2-2-2.svg)
 
 Are these graphs the same?
 
@@ -92,13 +113,21 @@ Decide whether the graphs \(G_1 = (V_1, E_1)\) and \(G_2 = (V_2, E_2)\) are equa
 
 \(V_2 = \{a,b,c,d\}\text{,}\) \(E_2 = \{\{a,b\}, \{a,c\}, \{b,c\}, \{c,d\}\}\)
 
+![The first four-vertex graph drawn as a diamond](/diagrams/graphs/sec_gt-intro-21-3-4-1.svg)
+![The second four-vertex graph drawn as a diamond](/diagrams/graphs/sec_gt-intro-21-3-4-2.svg)
+
 Sometimes we will talk about a graph with a special name (like \(K_n\) or the _Petersen graph_) or perhaps draw a graph without any labels. In this case we are really referring to _all_ graphs isomorphic to any copy of that particular graph. A collection of isomorphic graphs is often called an isomorphism class.  1
 
 This is not unlike geometry, where we might have more than one copy of a particular triangle. There instead of _isomorphic_ we say _congruent_.
 
 There are other relationships between graphs that we care about, other than equality and being isomorphic. For example, compare the following pair of graphs:
 
+![A complete graph on six vertices drawn as a hexagon](/diagrams/graphs/sec_gt-intro-24-1.svg)
+![A complete graph on four vertices drawn as a diamond](/diagrams/graphs/sec_gt-intro-24-2.svg)
+
 These are definitely not isomorphic, but notice that the graph on the right looks like it might be part of the graph on the left, especially if we draw it like this:
+
+![The six-vertex graph with a four-vertex subgraph highlighted](/diagrams/graphs/sec_gt-intro-26.svg)
 
 We would like to say that the smaller graph is a _subgraph_ of the larger.
 
@@ -116,6 +145,11 @@ Notice that every induced subgraph is also an ordinary subgraph, but not convers
 
 Consider the graphs:
 
+![The large graph G1 on six vertices](/diagrams/graphs/sec_gt-intro-31-1-2-1.svg)
+![The induced subgraph G2](/diagrams/graphs/sec_gt-intro-31-1-2-2.svg)
+![A subgraph G3 that deletes an edge as well as vertices](/diagrams/graphs/sec_gt-intro-31-1-2-3.svg)
+![A graph G4 that is not a subgraph of G1](/diagrams/graphs/sec_gt-intro-31-1-2-4.svg)
+
 Here both \(G_2\) and \(G_3\) are subgraphs of \(G_1\text{.}\) But only \(G_2\) is an _induced_ subgraph. Every edge in \(G_1\) that connects vertices in \(G_2\) is also an edge in \(G_2\text{.}\) In \(G_3\text{,}\) the edge \(\{a,b\}\) is in \(E_1\) but not \(E_3\text{,}\) even though vertices \(a\) and \(b\) are in \(V_3\text{.}\)
 
 The graph \(G_4\) is NOT a subgraph of \(G_1\text{,}\) even though it looks like all we did is remove vertex \(e\text{.}\) The reason is that in \(E_4\) we have the edge \(\{c,f\}\) but this is not an element of \(E_1\text{,}\) so we don’t have the required \(E_4 \subseteq E_1\text{.}\)
@@ -125,6 +159,8 @@ Back to some basic graph theory definitions. Notice that all the graphs we have 
 That said, there are times we want to consider double (or more) edges and single edge loops. For example, the “graph” we drew for the Bridges of Königsberg problem had double edges because there really are two bridges connecting a particular island to the near shore. We will call these objects multigraphs. This is a good name: a _multiset_ is a set in which we are allowed to include a single element multiple times.
 
 The graphs above are also connected: you can get from any vertex to any other vertex by following some path of edges. A graph that is not connected can be thought of as two separate graphs drawn close together. For example, the following graph is NOT connected because there is no path from \(a\) to \(b\text{:}\)
+
+![A graph made of two separate diamond-shaped components, labeled a on the left and b on the right](/diagrams/graphs/ex-gt-non-connected.svg)
 
 Vertices in a graph do not always have edges between them. If we add all possible edges, then the resulting graph is called complete. That is, a graph is complete if every pair of vertices is connected by an edge. Since a graph is determined completely by which vertices are adjacent to which other vertices, there is only one complete graph with a given number of vertices. We give these a special name: \(K_n\) is the complete graph on \(n\) vertices.
 
@@ -190,17 +226,25 @@ Some graphs are used more than others, and get special names.
 
 The complete graph on \(n\) vertices.
 
+![The complete graph K5](/diagrams/graphs/sec_gt-intro-50-11-1.svg)
+
 \(K_{m,n}\)
 
 The complete bipartite graph with sets of \(m\) and \(n\) vertices.
+
+![The complete bipartite graph K2,3](/diagrams/graphs/sec_gt-intro-50-11-2.svg)
 
 \(C_n\)
 
 The cycle on \(n\) vertices, just one big loop.
 
+![The cycle C6](/diagrams/graphs/sec_gt-intro-50-11-3.svg)
+
 \(P_n\)
 
 The path on \(n+1\) vertices (so \(n\) edges), just one long path.
+
+![The path P5 on six vertices](/diagrams/graphs/sec_gt-intro-50-11-4.svg)
 
 ### Graph Theory Definitions.
 

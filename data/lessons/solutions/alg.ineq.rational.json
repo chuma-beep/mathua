@@ -1,14 +1,26 @@
 {
   "concept": "alg.ineq.rational",
-  "setup": "You want the smallest integer x with 1/(x − [[a]]) > 0.",
+  "setup": "You want the [[extreme]] integer x with 1/(x − [[a]]) [[relation]] 0.",
   "steps": [
     {
-      "fact": "a",
+      "fact": "positive_branch",
+      "optional": true,
       "say": "The numerator 1 is positive and always will be, so the fraction is positive exactly when its denominator is. That also means x = [[a]] is excluded, where the fraction is undefined."
     },
     {
-      "fact": "ans",
-      "say": "So x − [[a]] > 0, and the smallest whole number above that is [[ans]]."
+      "fact": "positive_answer",
+      "optional": true,
+      "say": "So x − [[a]] > 0, which means x > [[a]]. The smallest whole number above [[a]] is [[ans]]."
+    },
+    {
+      "fact": "negative_branch",
+      "optional": true,
+      "say": "The numerator 1 is positive and always will be, so the fraction is negative exactly when its denominator is negative. That also means x = [[a]] is excluded, where the fraction is undefined."
+    },
+    {
+      "fact": "negative_answer",
+      "optional": true,
+      "say": "So x − [[a]] < 0, which means x < [[a]]. The largest whole number below [[a]] is [[ans]]."
     }
   ],
   "answer": "So the answer is [[ans]]."

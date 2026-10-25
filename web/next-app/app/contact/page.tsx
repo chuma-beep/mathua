@@ -101,10 +101,12 @@ export default function ContactPage() {
 
         <h2 style={h2Style}>A question is wrong</h2>
         <p style={textStyle}>
-          Use the report control on the question itself. Choose <em>Report a problem</em>, then
-          say what you expected. The report keeps the question, the answer you gave, the answer
-          Mathua expected and how your answer was being read, so the problem can be replayed
-          exactly instead of guessed at from a description.
+          Use the report control on the question itself in Learn, a quiz, a review, a diagnostic
+          or a concept reference. Choose <em>Report a problem</em>, then say what you expected.
+          The report keeps the question, the answer you gave, the answer Mathua expected and how
+          your answer was being read, so the problem can be replayed exactly instead of guessed
+          at from a description. In History, open the concept and report from there, or use the
+          message box and include the concept and question.
         </p>
         <p style={textStyle}>
           That is the right route for a wrong expected answer, a question that cannot be typed

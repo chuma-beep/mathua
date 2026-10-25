@@ -24,6 +24,8 @@ describe('the contact page', () => {
     render(<ContactPage />)
     expect(screen.getByRole('heading', { name: 'A question is wrong' })).toBeInTheDocument()
     expect(screen.getByText(/Report a problem/)).toBeInTheDocument()
+    expect(screen.getByText(/Learn, a quiz, a review, a diagnostic/)).toBeInTheDocument()
+    expect(screen.getByText(/In History, open the concept/)).toBeInTheDocument()
   })
 
   it('offers the box on the page itself, not only an external channel', () => {

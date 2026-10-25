@@ -628,3 +628,24 @@ func orphanCaptions(body string) []string {
 	}
 	return out
 }
+
+func TestGraphBasicsLessonKeepsItsFigures(t *testing.T) {
+	body, err := os.ReadFile("../../data/lessons/teaching/discrete.graphs.basics.md")
+	if err != nil {
+		t.Fatalf("read lesson: %v", err)
+	}
+	refs := regexp.MustCompile(`!\[[^\]]*\]\(/diagrams/graphs/[^)]+\.svg\)`).FindAllString(string(body), -1)
+	if len(refs) < 25 {
+		t.Fatalf("graph basics lesson has %d figures, want at least 25: the text refers to graphs that are not drawn", len(refs))
+	}
+	for _, want := range []string{
+		"sec_gt-intro-2-2-1.svg",
+		"sec_gt-intro-31-1-2-1.svg",
+		"ex-gt-non-connected.svg",
+		"sec_gt-intro-50-11-1.svg",
+	} {
+		if !strings.Contains(string(body), want) {
+			t.Fatalf("graph basics lesson lost its %s figure", want)
+		}
+	}
+}

@@ -307,6 +307,48 @@ func TestEngine_Report_Fields(t *testing.T) {
 	}
 }
 
+func TestEngine_Report_DistinguishesUnassessedAndInsufficientEvidence(t *testing.T) {
+	e := NewEngine(testDAG(t), mustRegistry(t))
+	s := e.Start()
+	unassessed := s.order[0]
+	uncertain := s.order[1]
+	gap := s.order[2]
+
+	s.beliefs[uncertain.ID] = beliefThreshold - 0.2
+	s.confidence[uncertain.ID] = 0.5
+	s.beliefs[gap.ID] = beliefThreshold - 0.4
+	s.confidence[gap.ID] = 1.0
+
+	rep := e.Report(s)
+	if !domainHas(rep.UnassessedByDomain, unassessed.Domain, unassessed.Label) {
+		t.Errorf("unprobed concept was not reported as unassessed: %v", rep.UnassessedByDomain)
+	}
+	if !domainHas(rep.InsufficientEvidenceByDomain, uncertain.Domain, uncertain.Label) {
+		t.Errorf("single-probe concept was not reported as insufficient evidence: %v", rep.InsufficientEvidenceByDomain)
+	}
+	if domainHas(rep.GapsByDomain, uncertain.Domain, uncertain.Label) {
+		t.Errorf("single-probe concept was reported as a demonstrated gap: %v", rep.GapsByDomain)
+	}
+	if !domainHas(rep.GapsByDomain, gap.Domain, gap.Label) {
+		t.Errorf("two-probe low-belief concept was not reported as a gap: %v", rep.GapsByDomain)
+	}
+	if domainHas(rep.UnassessedByDomain, gap.Domain, gap.Label) {
+		t.Errorf("probed concept was still reported as unassessed: %v", rep.UnassessedByDomain)
+	}
+	if _, ok := rep.MasteryLevels[unassessed.ID]; ok {
+		t.Error("unprobed concept leaked into mastery levels")
+	}
+}
+
+func domainHas(m map[string][]string, domain, label string) bool {
+	for _, got := range m[domain] {
+		if got == label {
+			return true
+		}
+	}
+	return false
+}
+
 func TestEngine_Supplemental_LowConfidenceExtends(t *testing.T) {
 	e := NewEngine(testDAG(t), mustRegistry(t))
 	s := e.Start()

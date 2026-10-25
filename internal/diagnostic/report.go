@@ -15,8 +15,17 @@ type DiagnosticReport struct {
 	// FrontierConditional marks a provisional frontier: the frontier concept
 	// was barely passed (MA "conditionally completed"), tasks assume it
 	// known but must fall back along its prerequisites on struggle.
-	FrontierConditional bool                `json:"frontier_conditional"`
-	GapsByDomain        map[string][]string `json:"gaps_by_domain"`
+	FrontierConditional bool `json:"frontier_conditional"`
+	// GapsByDomain lists concepts with enough evidence to call a gap: at
+	// least two probes and belief below the known cutoff. A concept that was
+	// never probed is not a gap, and neither is one with a single probe.
+	GapsByDomain map[string][]string `json:"gaps_by_domain"`
+	// UnassessedByDomain lists covered concepts the diagnostic never probed.
+	// They are unknown, not demonstrated gaps.
+	UnassessedByDomain map[string][]string `json:"unassessed_by_domain"`
+	// InsufficientEvidenceByDomain lists concepts that were probed once but
+	// did not reach the confidence needed to call a gap.
+	InsufficientEvidenceByDomain map[string][]string `json:"insufficient_evidence_by_domain"`
 	// ConditionallyCompleted lists probed concepts with belief just above
 	// the known cutoff (MA: "barely place out"). Assumed known initially;
 	// struggle on dependents falls back to these first.
@@ -45,13 +54,15 @@ func (e *Engine) Report(s *Session) *DiagnosticReport {
 	defer s.Unlock()
 
 	rep := &DiagnosticReport{
-		FrontierIdx:    -1,
-		GapsByDomain:   map[string][]string{},
-		MasteryLevels:  map[string]float64{},
-		Confidence:     map[string]float64{},
-		TotalQuestions: s.totalAsked,
-		Theta:          s.theta,
-		SE:             s.se,
+		FrontierIdx:                  -1,
+		GapsByDomain:                 map[string][]string{},
+		UnassessedByDomain:           map[string][]string{},
+		InsufficientEvidenceByDomain: map[string][]string{},
+		MasteryLevels:                map[string]float64{},
+		Confidence:                   map[string]float64{},
+		TotalQuestions:               s.totalAsked,
+		Theta:                        s.theta,
+		SE:                           s.se,
 	}
 
 	var confSum float64
@@ -59,13 +70,19 @@ func (e *Engine) Report(s *Session) *DiagnosticReport {
 	conditional := map[string]bool{}
 	for _, c := range s.order {
 		b := s.beliefs[c.ID]
-		if b >= 0.05 && b <= 0.95 {
+		conf := s.confidence[c.ID]
+		if conf > 0 && b >= 0.05 && b <= 0.95 {
 			rep.MasteryLevels[c.ID] = b
 		}
-		rep.Confidence[c.ID] = s.confidence[c.ID]
-		confSum += s.confidence[c.ID]
+		rep.Confidence[c.ID] = conf
+		confSum += conf
 		confCount++
-		if b < beliefThreshold {
+		switch {
+		case conf == 0:
+			rep.UnassessedByDomain[c.Domain] = append(rep.UnassessedByDomain[c.Domain], c.Label)
+		case b < beliefThreshold && conf < confidenceThreshold:
+			rep.InsufficientEvidenceByDomain[c.Domain] = append(rep.InsufficientEvidenceByDomain[c.Domain], c.Label)
+		case b < beliefThreshold:
 			rep.GapsByDomain[c.Domain] = append(rep.GapsByDomain[c.Domain], c.Label)
 		}
 		// MA "conditionally completed": probed, barely above the known
@@ -86,9 +103,15 @@ func (e *Engine) Report(s *Session) *DiagnosticReport {
 		rep.PlacementCourseID = domainToCourse(s.order[rep.FrontierIdx])
 		rep.FrontierConditional = conditional[s.order[rep.FrontierIdx].ID]
 	}
-	// Deterministic gap order.
-	for d := range rep.GapsByDomain {
-		sort.Strings(rep.GapsByDomain[d])
+	// Deterministic order for every report bucket.
+	for _, m := range []map[string][]string{
+		rep.GapsByDomain,
+		rep.UnassessedByDomain,
+		rep.InsufficientEvidenceByDomain,
+	} {
+		for d := range m {
+			sort.Strings(m[d])
+		}
 	}
 	return rep
 }

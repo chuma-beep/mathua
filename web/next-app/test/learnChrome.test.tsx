@@ -117,6 +117,14 @@ describe('/learn chrome', () => {
 
   // Steps listed before the question read as a syllabus, and the effect was to tick them off
   // and skip the work. They now appear once the section has actually been attempted.
+  it('offers a report control on a Learn question', async () => {
+    render(<LearnStepper conceptId={CID} />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
+    const report = await screen.findByRole('button', { name: 'Report a problem' })
+    fireEvent.click(report)
+    expect(await screen.findByRole('dialog', { name: 'Report a problem' })).toBeTruthy()
+  })
+
   it('reveals the steps only after the section is attempted', async () => {
     render(<LearnStepper conceptId={CID} />)
     fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))

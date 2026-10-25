@@ -9,7 +9,45 @@ import (
 
 	"github.com/chuma-beep/mathua/internal/generator"
 	"github.com/chuma-beep/mathua/internal/grader"
+	"github.com/chuma-beep/mathua/internal/solutions"
 )
+
+func TestIneqRationalSolutionCoversBothBranches(t *testing.T) {
+	loader, err := solutions.Load("../../../data/lessons/solutions")
+	if err != nil {
+		t.Fatalf("load solutions: %v", err)
+	}
+	g := &ineqRationalGen{}
+	seen := map[string]bool{}
+	for i := 0; i < 400; i++ {
+		p := g.Generate(generator.GeneratorContext{})
+		extreme := p.Facts["extreme"]
+		seen[extreme] = true
+		got := loader.Assemble("alg.ineq.rational", p.Facts, p.Explanation)
+		if got == p.Explanation {
+			schema, ok := loader.Schema("alg.ineq.rational")
+			t.Fatalf("schema was not used for %s branch: %q (loaded=%v facts=%v missing=%v)", extreme, p.Question, ok, p.Facts, solutions.Missing(schema, p.Facts))
+		}
+		if !strings.Contains(got, "The numerator 1 is positive") {
+			t.Fatalf("%s branch lacks the numerator reasoning: %q", extreme, got)
+		}
+		switch extreme {
+		case "smallest":
+			if !strings.Contains(got, "smallest") || !strings.Contains(got, "x >") || strings.Contains(got, "largest") {
+				t.Fatalf("smallest branch got the wrong walkthrough: %q", got)
+			}
+		case "largest":
+			if !strings.Contains(got, "largest") || !strings.Contains(got, "x <") || strings.Contains(got, "smallest") {
+				t.Fatalf("largest branch got the wrong walkthrough: %q", got)
+			}
+		default:
+			t.Fatalf("unexpected extreme fact %q", extreme)
+		}
+	}
+	if !seen["smallest"] || !seen["largest"] {
+		t.Fatalf("both branches were not generated: %v", seen)
+	}
+}
 
 func fuzzGen(t *testing.T, gen generator.Generator) {
 	t.Helper()

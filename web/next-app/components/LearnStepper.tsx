@@ -10,6 +10,7 @@ import { stemWithoutChoices } from '../lib/choices'
 import ConceptReference from './ConceptReference'
 import PrerequisitePanel from './PrerequisitePanel'
 import { getLessonKPs, getLessonPractice, getLessonReadiness, submitStudyAnswer, getProgress, getErrorStatus, type EligibilityPrereq, type KpInfo, type PracticeQuestion, type ReadinessRes, type ConceptProgress } from '../lib/api'
+import ReportButton from './ReportButton'
 import { getUserInfo } from '../lib/auth'
 import { upcomingLocked, hrefConceptId, type Shelf, type LockedSuccessor } from '../lib/nextUp'
 import { backTarget, learnConceptPath, pushReturn, studyConceptPath, withReturnStack, type ReturnEntry } from '../lib/learnReturn'
@@ -802,6 +803,19 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
                 </form>
               )}
               {!locked && <p className="mt-2 font-mono text-[11px] text-mathua-muted">{format.hint}</p>}
+              <div className="mt-2 flex justify-end">
+                <ReportButton
+                  key={`learn-${qe.key}`}
+                  conceptId={conceptId}
+                  kind="question"
+                  question={qe.q.question}
+                  source="practice"
+                  answerGiven={qe.answer}
+                  gradingType={conceptGradingType}
+                  answerHint={format.hint}
+                  answerInputMode={format.inputMode}
+                />
+              </div>
               {locked && qe.feedback && (
                 <div className="mt-3">
                   <p className={`font-mono text-xs ${qe.feedback.correct ? 'text-green-400' : 'text-red-400'}`}>

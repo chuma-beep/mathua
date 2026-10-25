@@ -1709,7 +1709,7 @@ func TestGoalDiagnostic_FullFlowReport(t *testing.T) {
 	if rep == nil {
 		t.Fatalf("expected report, got %v", done)
 	}
-	for _, key := range []string{"placement_course_id", "frontier_idx", "frontier_label", "gaps_by_domain", "mastery_levels", "confidence", "completion_estimates", "total_questions"} {
+	for _, key := range []string{"placement_course_id", "frontier_idx", "frontier_label", "gaps_by_domain", "unassessed_by_domain", "insufficient_evidence_by_domain", "mastery_levels", "confidence", "completion_estimates", "total_questions"} {
 		if _, ok := rep[key]; !ok {
 			t.Errorf("expected report key %q, got %v", key, rep)
 		}
