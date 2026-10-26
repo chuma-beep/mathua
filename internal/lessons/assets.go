@@ -99,7 +99,7 @@ type Asset struct {
 // image, and the corpus has 39 such links. Every figure reference in the corpus is a .svg or
 // a .png, so requiring that costs nothing and removes the whole class.
 var imageRe = regexp.MustCompile(
-	`!\[((?:[^\]\\]|\\.|\])*)\]\(\s*([^)\s<]*\.(?:svg|png|jpe?g|webp|gif))\s*\)`)
+	`!\[((?:[^\]\\]|\\.|\])*?)\]\(\s*([^)\s<]*\.(?:svg|png|jpe?g|webp|gif))\s*\)`)
 
 // A paragraph break. A markdown image reference cannot span one, and matching per paragraph
 // is what stops an exclamation mark in one sentence from pairing with a link's `](` several

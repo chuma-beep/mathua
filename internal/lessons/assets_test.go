@@ -629,6 +629,21 @@ func orphanCaptions(body string) []string {
 	return out
 }
 
+func TestConsecutiveImageRefsAreSeparateAssets(t *testing.T) {
+	body := "![The interval [a, b] has two parts](/diagrams/graphs/a.svg)\n" +
+		"![The second figure](/diagrams/graphs/b.svg)\n" +
+		"![The third figure](/diagrams/graphs/c.svg)"
+	got := ExtractAssets(body, nil)
+	if len(got) != 3 {
+		t.Fatalf("extracted %d assets from three consecutive image references: %v", len(got), got)
+	}
+	for i, want := range []string{"a.svg", "b.svg", "c.svg"} {
+		if got[i].ID != want {
+			t.Errorf("asset %d is %q, want %q", i, got[i].ID, want)
+		}
+	}
+}
+
 func TestGraphBasicsLessonKeepsItsFigures(t *testing.T) {
 	body, err := os.ReadFile("../../data/lessons/teaching/discrete.graphs.basics.md")
 	if err != nil {
@@ -637,6 +652,10 @@ func TestGraphBasicsLessonKeepsItsFigures(t *testing.T) {
 	refs := regexp.MustCompile(`!\[[^\]]*\]\(/diagrams/graphs/[^)]+\.svg\)`).FindAllString(string(body), -1)
 	if len(refs) < 25 {
 		t.Fatalf("graph basics lesson has %d figures, want at least 25: the text refers to graphs that are not drawn", len(refs))
+	}
+	assets := ExtractAssets(string(body), nil)
+	if len(assets) != len(refs) {
+		t.Fatalf("extracted %d assets for %d figure references: consecutive figures are being swallowed by the image pattern", len(assets), len(refs))
 	}
 	for _, want := range []string{
 		"sec_gt-intro-2-2-1.svg",
