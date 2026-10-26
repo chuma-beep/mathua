@@ -324,11 +324,11 @@ figure already on disk could be dropped in without authoring anything.
 | `authored/geo.circle.inscribed_angle.md` | no |, | `unit-circle-1.svg`, `unit-circle-2.svg`, `unit-circle-3.svg`, `unit-circle-4.svg` |
 | `authored/geo.circle.tangent_chord.md` | no |, | `unit-circle-1.svg`, `unit-circle-2.svg`, `unit-circle-3.svg`, `unit-circle-4.svg` |
 | `authored/geo.circle.tangent_length.md` | no |, | `unit-circle-1.svg`, `unit-circle-2.svg`, `unit-circle-3.svg`, `unit-circle-4.svg` |
-| `authored/geo.triangle.exterior_angle.md` | no |, | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry–3.svg`, `right-triangle-trigonometry–4.svg`, `right-triangle-trigonometry–5.svg` |
-| `authored/geo.triangle.inequality.md` | no |, | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry–3.svg`, `right-triangle-trigonometry–4.svg`, `right-triangle-trigonometry–5.svg` |
-| `authored/geo.triangle.isosceles.md` | no |, | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry–3.svg`, `right-triangle-trigonometry–4.svg`, `right-triangle-trigonometry–5.svg` |
-| `authored/geo.triangle.midsegment.md` | no |, | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry–3.svg`, `right-triangle-trigonometry–4.svg`, `right-triangle-trigonometry–5.svg` |
-| `authored/geo.triangle.special_right.md` | no |, | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry–3.svg`, `right-triangle-trigonometry–4.svg`, `right-triangle-trigonometry–5.svg` |
+| `authored/geo.triangle.exterior_angle.md` | no |, | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry-3.svg`, `right-triangle-trigonometry-4.svg`, `right-triangle-trigonometry-5.svg` |
+| `authored/geo.triangle.inequality.md` | no |, | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry-3.svg`, `right-triangle-trigonometry-4.svg`, `right-triangle-trigonometry-5.svg` |
+| `authored/geo.triangle.isosceles.md` | no |, | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry-3.svg`, `right-triangle-trigonometry-4.svg`, `right-triangle-trigonometry-5.svg` |
+| `authored/geo.triangle.midsegment.md` | no |, | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry-3.svg`, `right-triangle-trigonometry-4.svg`, `right-triangle-trigonometry-5.svg` |
+| `authored/geo.triangle.special_right.md` | no |, | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry-3.svg`, `right-triangle-trigonometry-4.svg`, `right-triangle-trigonometry-5.svg` |
 | `authored/nt.prime.exponent.md` | no |, | `factor-prime-fact.svg`, `factor-prime.svg` |
 | `authored/nt.pythagorean.hypotenuse.md` | no |, | `pythagorean-theorem-1.svg`, `pythagorean-theorem-2.svg`, `pythagorean-theorem-3.svg` |
 | `authored/prealg.measure.convert.md` | no |, | `angles-and-angular-measure-1.svg`, `angles-and-angular-measure-2.svg` |
@@ -397,9 +397,9 @@ figure already on disk could be dropped in without authoring anything.
 | `teaching/geo.circle.area.md` | no |, | `unit-circle-1.svg`, `unit-circle-2.svg`, `unit-circle-3.svg`, `unit-circle-4.svg` |
 | `teaching/geo.circle.circumference.md` | no |, | `unit-circle-1.svg`, `unit-circle-2.svg`, `unit-circle-3.svg`, `unit-circle-4.svg` |
 | `teaching/geo.circle.parts.md` | no |, | `unit-circle-1.svg`, `unit-circle-2.svg`, `unit-circle-3.svg`, `unit-circle-4.svg` |
-| `teaching/geo.triangle.angles.md` | no |, | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry–3.svg`, `right-triangle-trigonometry–4.svg`, `right-triangle-trigonometry–5.svg` |
-| `teaching/geo.triangle.area.md` | no |, | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry–3.svg`, `right-triangle-trigonometry–4.svg`, `right-triangle-trigonometry–5.svg` |
-| `teaching/geo.triangle.types.md` | no |, | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry–3.svg`, `right-triangle-trigonometry–4.svg`, `right-triangle-trigonometry–5.svg` |
+| `teaching/geo.triangle.angles.md` | no |, | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry-3.svg`, `right-triangle-trigonometry-4.svg`, `right-triangle-trigonometry-5.svg` |
+| `teaching/geo.triangle.area.md` | no |, | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry-3.svg`, `right-triangle-trigonometry-4.svg`, `right-triangle-trigonometry-5.svg` |
+| `teaching/geo.triangle.types.md` | no |, | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry-3.svg`, `right-triangle-trigonometry-4.svg`, `right-triangle-trigonometry-5.svg` |
 | `teaching/linalg.quadratic.definite.md` | no |, | `geometric-interpretation-quadratic-equations-1.svg`, `geometric-interpretation-quadratic-equations-2.svg`, `geometric-interpretation-quadratic-equations-3.svg`, `geometric-interpretation-quadratic-inequalities-1.svg`, `geometric-interpretation-quadratic-inequalities-2.svg`, `quadratic-inequalities-1.svg`, `quadratic-inequalities-2.svg`, `quadratic-inequalities-4.svg` |
 | `teaching/linalg.systems.matrix.md` | no |, | `systems-of-linear-equations-in-two-variables-1.svg` |
 | `teaching/linalg.vector.cross.md` | no |, | `vector-and-parametric-equations-of-a-line-1.svg`, `vector-spaces-1.svg` |
