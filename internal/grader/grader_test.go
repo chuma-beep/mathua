@@ -320,11 +320,23 @@ func TestSymbolic_Grade_ExactMatch(t *testing.T) {
 	}
 }
 
-func TestSymbolic_Grade_ExponentNotation(t *testing.T) {
+func TestSymbolic_Grade_ExponentParentheses(t *testing.T) {
 	r := NewRouter()
-	res := r.Grade(GradingPolynomial, "x**2 + 1", "x^2 + 1")
-	if !res.Correct {
-		t.Error("expected ** and ^ to be equivalent")
+	for _, tc := range []struct{ expected, answer string }{
+		{"8x^31", "8x^(31)"},
+		{"x^12", "x^(12)"},
+		{"3x^12-1", "3x^(12)-1"},
+		{"2^(10)", "2^10"},
+		{"x^2 + 1", "x**2 + 1"},
+	} {
+		if res := r.Grade(GradingPolynomial, tc.expected, tc.answer); !res.Correct {
+			t.Errorf("expected %q == %q to be correct", tc.expected, tc.answer)
+		}
+	}
+	for _, expr := range []string{"x^(-1)", "x^(n+1)", "2^(1.5)"} {
+		if got := normaliseSymbolic(expr); got != expr {
+			t.Errorf("normaliseSymbolic(%q) = %q, want the grouping kept", expr, got)
+		}
 	}
 }
 

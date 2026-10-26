@@ -2,6 +2,8 @@ package fractions
 
 import (
 	"math/rand"
+	"regexp"
+	"strconv"
 	"strings"
 	"testing"
 
@@ -134,6 +136,35 @@ func TestRibbonIsNeverCutIntoItsOwnLength(t *testing.T) {
 		}
 		if strings.Contains(p.Question, "1 metres") {
 			t.Fatalf("singular length reads as plural: %q", p.Question)
+		}
+	}
+}
+
+func TestCrossComparePrintedProductsMatchFacts(t *testing.T) {
+	g := &crossCompareGen{}
+	re := regexp.MustCompile(`\\\((\d+) \\times (\d+) - (\d+) \\times (\d+)\\\)`)
+	for i := 0; i < 500; i++ {
+		p := g.Generate(generator.GeneratorContext{Difficulty: rand.Float64()})
+		m := re.FindStringSubmatch(p.Question)
+		if m == nil {
+			t.Fatalf("question does not show the cross products: %q", p.Question)
+		}
+		nums := make([]int, 4)
+		for j, raw := range m[1:] {
+			v, err := strconv.Atoi(raw)
+			if err != nil {
+				t.Fatalf("parse %q: %v", raw, err)
+			}
+			nums[j] = v
+		}
+		if got, want := strconv.Itoa(nums[0]*nums[1]), p.Facts["left"]; got != want {
+			t.Fatalf("printed first product is %s, facts say %s: %q", got, want, p.Question)
+		}
+		if got, want := strconv.Itoa(nums[2]*nums[3]), p.Facts["right"]; got != want {
+			t.Fatalf("printed second product is %s, facts say %s: %q", got, want, p.Question)
+		}
+		if want := p.Facts["difference"] + "/1"; p.Answer != want {
+			t.Fatalf("answer %q, want %q", p.Answer, want)
 		}
 	}
 }
