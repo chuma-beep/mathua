@@ -204,7 +204,7 @@ make e2e-diagnosis
 Mathua includes a built-in lesson system. Each concept can have an associated lesson, a markdown file that teaches the material. Lessons live under `data/lessons/` and are registered in `data/lessons/lessons.json`, which maps concept IDs to file paths:
 
 ```json
-  { "concept_id": "calc.deriv.power_rule", "source": "advanced/polynomials/polynomials.md" }
+  { "concept_id": "calc.deriv.power_rule", "source": "algebrica/polynomials/polynomials.md" }
 ```
 
 Multiple concepts can share a single lesson file. Lesson content is written in Markdown with LaTeX via `\( ... \)` or `\[ ... \]` delimiters and rendered inside the app as a sidebar panel alongside practice problems.
