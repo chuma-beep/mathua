@@ -39,7 +39,10 @@ func TestMyLeague_SeatsAndRanksTheCallersCohort(t *testing.T) {
 		ids = append(ids, st.ID)
 	}
 
-	now := time.Date(2026, 10, 21, 12, 0, 0, 0, time.UTC)
+	// AwardXP stamps the live week. Pinning a past Monday made this test pass
+	// until the calendar moved and then fail with an empty board, so the week
+	// is read from the same clock the awards used.
+	now := time.Now().UTC()
 	board, err := NewComputer(repo).MyLeague(ids[0], now)
 	if err != nil {
 		t.Fatalf("my league: %v", err)
@@ -50,8 +53,8 @@ func TestMyLeague_SeatsAndRanksTheCallersCohort(t *testing.T) {
 	if board.Size != 8 || len(board.Members) != 8 {
 		t.Fatalf("size = %d members = %d, want 8/8", board.Size, len(board.Members))
 	}
-	if board.WeekStart.Format("2006-01-02") != "2026-10-19" {
-		t.Errorf("week start = %s, want 2026-10-19", board.WeekStart)
+	if want := WeekStart(now); !board.WeekStart.Equal(want) {
+		t.Errorf("week start = %s, want %s", board.WeekStart, want)
 	}
 	if board.Me == nil || board.Me.Rank != 8 || board.Me.XP != 10 {
 		t.Errorf("me = %+v, want rank 8 with 10 XP", board.Me)

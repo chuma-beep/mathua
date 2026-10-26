@@ -29,10 +29,24 @@ vi.mock('../components/AdminNav', () => ({ default: () => <nav>sections</nav> })
 // it belongs to. A page that fetched every roster up front would still pass a "does it render"
 // test, so the mock counts the calls instead.
 
+// The page asks for the live week, so the fixture must answer with that same
+// week. Pinning a past Monday made "one request" become two once the date moved
+// on, because the page adopted the response week and reloaded.
+function currentWeekKey(): string {
+  const now = new Date()
+  const day = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()))
+  day.setUTCDate(day.getUTCDate() - ((day.getUTCDay() + 6) % 7))
+  return day.toISOString().slice(0, 10)
+}
+
+const thisWeek = currentWeekKey()
+const weekEnd = new Date(`${thisWeek}T00:00:00Z`)
+weekEnd.setUTCDate(weekEnd.getUTCDate() + 7)
+
 const pyramid = {
-  week: '2026-10-19',
-  week_start: '2026-10-19T00:00:00Z',
-  week_end: '2026-10-26T00:00:00Z',
+  week: thisWeek,
+  week_start: `${thisWeek}T00:00:00Z`,
+  week_end: weekEnd.toISOString(),
   promote: 5,
   demote: 5,
   seats: 40,
