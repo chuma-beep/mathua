@@ -1814,14 +1814,14 @@ func (g *ineqRationalGen) Generate(ctx generator.GeneratorContext) generator.Pro
 			Question:    fmt.Sprintf("What is the smallest integer \\(x\\) with \\(\\frac{1}{x-%d} > 0\\)? (enter a number)", a),
 			Answer:      fmt.Sprintf("%d", a+1),
 			Explanation: fmt.Sprintf("The numerator 1 is always positive, so \\(\\frac{1}{x-%d} > 0\\) when \\(x-%d > 0\\) → \\(x > %d\\); the smallest integer is %d", a, a, a, a+1),
-			Facts:       map[string]string{"a": strconv.Itoa(a), "ans": strconv.Itoa(a + 1)},
+			Facts:       map[string]string{"a": strconv.Itoa(a), "ans": strconv.Itoa(a + 1), "which": "smallest", "sign": ">"},
 		}
 	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("What is the largest integer \\(x\\) with \\(\\frac{1}{x-%d} < 0\\)? (enter a number)", a),
 		Answer:      fmt.Sprintf("%d", a-1),
 		Explanation: fmt.Sprintf("A negative reciprocal needs a negative denominator, so \\(x-%d < 0\\) → \\(x < %d\\); the largest integer is %d", a, a, a-1),
-		Facts:       map[string]string{"a": strconv.Itoa(a), "ans": strconv.Itoa(a - 1)},
+		Facts:       map[string]string{"a": strconv.Itoa(a), "ans": strconv.Itoa(a - 1), "which": "largest", "sign": "<"},
 	}
 }
 
