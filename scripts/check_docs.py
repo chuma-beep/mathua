@@ -1191,6 +1191,37 @@ def check_toolchain(rep: Report) -> None:
                     rep.error(f"{doc}:{line_no}", "go-version",
                               f'"{hm.group(0)}" but go.mod targets {floor}+')
 
+    # Node: .mise.toml owns the version. .nvmrc, the CI setup-node pins and the
+    # Dockerfile image must carry the same string, and a doc that says "Node 24"
+    # must name that major. The web build scripts import TypeScript files
+    # straight into Node, so a contributor on the wrong major gets
+    # ERR_UNKNOWN_FILE_EXTENSION three commands after a clean install.
+    nm = re.search(r'^node\s*=\s*"([0-9.]+)"', read(".mise.toml"), re.M)
+    if not nm:
+        rep.error(".mise.toml", "node-version", "no node pin found")
+        return
+    node = nm.group(1)
+    major = node.split(".")[0]
+    nvmrc = read(".nvmrc").strip()
+    if nvmrc != node:
+        rep.error(".nvmrc", "node-version", f".nvmrc pins {nvmrc!r} but .mise.toml pins {node!r}")
+    for line_no, line in enumerate(read(".github/workflows/ci.yml").split("\n"), 1):
+        for hm in re.finditer(r"node-version:\s*'([0-9.]+)'", line):
+            if hm.group(1) != node:
+                rep.error(f".github/workflows/ci.yml:{line_no}", "node-version",
+                          f"CI installs Node {hm.group(1)} but .mise.toml pins {node}")
+    for line_no, line in enumerate(read("Dockerfile").split("\n"), 1):
+        for hm in re.finditer(r"^FROM node:([0-9.]+)", line):
+            if hm.group(1) != node:
+                rep.error(f"Dockerfile:{line_no}", "node-version",
+                          f"the image builds on Node {hm.group(1)} but .mise.toml pins {node}")
+    for doc in ("README.md", "CONTRIBUTING.md"):
+        for line_no, line in enumerate(read(doc).split("\n"), 1):
+            for hm in re.finditer(r"\bNode\s+(\d+)\b", line):
+                if hm.group(1) != major:
+                    rep.error(f"{doc}:{line_no}", "node-version",
+                              f'"{hm.group(0)}" but .mise.toml pins Node {major}')
+
 
 def check_sm2_intervals(rep: Report) -> None:
     """A quoted first-or-second SM-2 interval must match the code.

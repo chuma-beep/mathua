@@ -76,7 +76,7 @@ secret is involved, because a shared password cannot say which person used it.
 
 One administrator can demote nobody, including themselves. Promote a second administrator first.
 
-> **Requirements:** Go 1.26+ (module targets `go 1.26.6`; CI/Docker build with 1.27). Python 3.11+ with `sympy` (pinned in `grading/requirements.txt`) grades `symbolic`/`polynomial`/`expression`/`complex` answers, **required for those ~32% of concepts**; the production Docker image installs it and fails the build if grading is unavailable. Runs without Python only for the pure-Go grading types.
+> **Requirements:** Go 1.26+ (module targets `go 1.26.6`; CI/Docker build with 1.27). Python 3.11+ with `sympy` (pinned in `grading/requirements.txt`) grades `symbolic`/`polynomial`/`expression`/`complex` answers, **required for those ~32% of concepts**; the production Docker image installs it and fails the build if grading is unavailable. Runs without Python only for the pure-Go grading types. **Node 24** builds the web app in `web/next-app`. `.nvmrc` pins the exact version.
 >
 > **Env:** `DATABASE_URL` (`sqlite:mathua.db` default, or `postgres://` for production via `pgx` `postgres.go:21` / `main.go:69`), `PORT` (default `8080`), `JWT_SECRET` (hex 32 bytes or raw ≥32 chars, **required in production**, else random per run and tokens invalidate on restart `internal/auth/auth.go:45`), `CORS_ALLOWED_ORIGINS` (comma-separated allowlist, empty = allow all dev; supports `*` wildcard suffix like `https://*.vercel.app` for previews `internal/server/server.go:32`), On Fly: `fly secrets set JWT_SECRET=$(openssl rand -hex 32) CORS_ALLOWED_ORIGINS=https://mathua.vercel.app,https://*.vercel.app`. See `.env.example`.
 

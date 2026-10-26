@@ -18,6 +18,8 @@ go build ./cmd/mathua
 
 SQLite keeps its data in `mathua.db` in the working directory. Local development needs no database service and no `DATABASE_URL`.
 
+The web app lives in `web/next-app` and needs Node 24. `.nvmrc` and `.mise.toml` pin the exact version. Its build scripts import TypeScript files straight into Node, and older versions cannot load them. `npm ci` refuses a Node outside the `engines` range in `package.json`, so a wrong version fails at install and not three commands later.
+
 Postgres runs the same code. Set `DATABASE_URL` to run against a Postgres instance instead:
 
 ```bash
