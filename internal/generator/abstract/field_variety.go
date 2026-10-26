@@ -112,7 +112,11 @@ func (g *fieldExtensionGen) Generate(ctx generator.GeneratorContext) generator.P
 	if int(1+ctx.Difficulty*4) > 3 {
 		pool = append(easy, hard...)
 	}
-	switch rand.Intn(3) {
+	// Three computed shapes and the pool share the draw. Every branch of this
+	// switch returns, so the pool draw after it is only reachable when the
+	// switch has a case it does not cover: with Intn(3) and a default, it was
+	// built on every call and served on none.
+	switch rand.Intn(4) {
 	case 0:
 		primes := []int{2, 3, 5, 7}
 		p := primes[rand.Intn(len(primes))]
@@ -132,7 +136,7 @@ func (g *fieldExtensionGen) Generate(ctx generator.GeneratorContext) generator.P
 			fmt.Sprintf("The Galois group is (Z/%dZ)^×, which has φ(%d) = %d elements, so the degree is %d.", p, p, deg, deg),
 			strconv.Itoa(p), strconv.Itoa(p+1), strconv.Itoa(2*p),
 		)
-	default:
+	case 2:
 		m := 2 + rand.Intn(3)
 		n := 2 + rand.Intn(3)
 		return groupChoice(
@@ -170,7 +174,11 @@ func (g *galoisGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	if int(1+ctx.Difficulty*4) > 3 {
 		pool = append(easy, hard...)
 	}
-	switch rand.Intn(3) {
+	// Three computed shapes and the pool share the draw. Every branch of this
+	// switch returns, so the pool draw after it is only reachable when the
+	// switch has a case it does not cover: with Intn(3) and a default, it was
+	// built on every call and served on none.
+	switch rand.Intn(4) {
 	case 0:
 		return groupChoice(
 			"Q(√2,√3) is the splitting field of (x^2-2)(x^2-3). Which group is Gal(Q(√2,√3)/Q)?",
@@ -190,7 +198,7 @@ func (g *galoisGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 			fmt.Sprintf("The fundamental theorem gives [K^H:Q] = |G|/|H| = %d/%d = %d.", gorder, horder, gorder/horder),
 			strconv.Itoa(gorder-horder), strconv.Itoa(gorder*horder), strconv.Itoa(horder),
 		)
-	default:
+	case 2:
 		ns := []int{3, 4, 5}
 		n := ns[rand.Intn(len(ns))]
 		fact := 1
@@ -232,7 +240,11 @@ func (g *galoisGroupGen) Generate(ctx generator.GeneratorContext) generator.Prob
 	if int(1+ctx.Difficulty*4) > 3 {
 		pool = append(easy, hard...)
 	}
-	switch rand.Intn(3) {
+	// Three computed shapes and the pool share the draw. Every branch of this
+	// switch returns, so the pool draw after it is only reachable when the
+	// switch has a case it does not cover: with Intn(3) and a default, it was
+	// built on every call and served on none.
+	switch rand.Intn(4) {
 	case 0:
 		primes := []int{2, 3, 5, 7, 11}
 		p := primes[rand.Intn(len(primes))]
@@ -253,7 +265,7 @@ func (g *galoisGroupGen) Generate(ctx generator.GeneratorContext) generator.Prob
 			fmt.Sprintf("The Galois group is (Z/%dZ)^× of order φ(%d) = %d, so the degree is %d.", n, n, deg, deg),
 			strconv.Itoa(n), strconv.Itoa(n-1), strconv.Itoa(deg+1),
 		)
-	default:
+	case 2:
 		ns := []int{3, 4, 5}
 		n := ns[rand.Intn(len(ns))]
 		fact := 1

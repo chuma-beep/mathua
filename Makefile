@@ -15,6 +15,7 @@ test:
 	python3 scripts/check_duplicate_tests.py
 	@unformatted="$$(gofmt -l $$(git ls-files '*.go'))"; \
 	if [ -n "$$unformatted" ]; then echo "gofmt needed on:"; echo "$$unformatted"; exit 1; fi
+	go vet ./...
 	go test ./...
 
 # The browser suite runs against the static export, so it needs a fresh `out/`

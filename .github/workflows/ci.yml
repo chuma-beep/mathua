@@ -41,6 +41,11 @@ jobs:
       - run: pip install -r grading/requirements.txt latex2sympy2 antlr4-python3-runtime==4.7.2
       - run: go mod tidy
       - run: go build ./...
+      # go test runs only a subset of vet, and the unreachable-code check is not
+      # in it. Three generators in internal/generator/abstract built a question
+      # pool on every call and served it on none, go vet named the dead draw,
+      # and nothing here ran go vet, so the rows reached main unasked.
+      - run: go vet ./...
       # Two green pull requests can still land an uncompilable package, because
       # each suite was written against a main that lacked its sibling. That
       # happened twice on 2026-10-23 (three TestCheckPassword declarations in
