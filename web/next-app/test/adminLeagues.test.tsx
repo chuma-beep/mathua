@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import AdminLeaguesPage from '../app/admin/leagues/page'
 import { getAdminLeagues } from '../lib/api'
@@ -59,10 +59,20 @@ const roster = {
 }
 
 beforeEach(() => {
+  // The page reads "this week" from the browser clock and the fixtures below are the week of
+  // 2026-10-19. Pin the clock inside that week, or the later-week button stops being disabled
+  // and the page asks for a second week as soon as the real calendar moves on, which is how
+  // these tests went red at 2026-10-26 00:00 UTC without a code change. Only Date is faked:
+  // the timers stay real so findBy and waitFor keep working.
+  vi.useFakeTimers({ toFake: ['Date'], now: new Date('2026-10-21T12:00:00Z') })
   vi.mocked(getAdminLeagues).mockReset()
   vi.mocked(getAdminLeagues).mockImplementation(async (query = {}) =>
     query.tier ? (roster as never) : (pyramid as never),
   )
+})
+
+afterEach(() => {
+  vi.useRealTimers()
 })
 
 describe('admin leagues', () => {

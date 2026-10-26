@@ -39,7 +39,11 @@ func TestMyLeague_SeatsAndRanksTheCallersCohort(t *testing.T) {
 		ids = append(ids, st.ID)
 	}
 
-	now := time.Date(2026, 10, 21, 12, 0, 0, 0, time.UTC)
+	// AwardXP stamps every event with the wall clock, so the week under test
+	// has to be the week the test runs in. A fixed date here read the league of
+	// a week the events were not in once that week had passed: this test went
+	// red at 2026-10-26 00:00 UTC without a code change.
+	now := time.Now().UTC()
 	board, err := NewComputer(repo).MyLeague(ids[0], now)
 	if err != nil {
 		t.Fatalf("my league: %v", err)
@@ -50,8 +54,8 @@ func TestMyLeague_SeatsAndRanksTheCallersCohort(t *testing.T) {
 	if board.Size != 8 || len(board.Members) != 8 {
 		t.Fatalf("size = %d members = %d, want 8/8", board.Size, len(board.Members))
 	}
-	if board.WeekStart.Format("2006-01-02") != "2026-10-19" {
-		t.Errorf("week start = %s, want 2026-10-19", board.WeekStart)
+	if want := WeekStart(now); !board.WeekStart.Equal(want) {
+		t.Errorf("week start = %s, want %s", board.WeekStart, want)
 	}
 	if board.Me == nil || board.Me.Rank != 8 || board.Me.XP != 10 {
 		t.Errorf("me = %+v, want rank 8 with 10 XP", board.Me)
