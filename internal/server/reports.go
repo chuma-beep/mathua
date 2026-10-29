@@ -31,8 +31,8 @@ var (
 		"formatting": true, "other": true,
 	}
 	validReportSources = map[string]bool{
-		"study": true, "diagnostic": true, "quiz": true, "lesson": true,
-		"concept": true, "review": true, "contact": true,
+		"study": true, "practice": true, "diagnostic": true, "quiz": true,
+		"lesson": true, "concept": true, "review": true, "contact": true,
 	}
 )
 
