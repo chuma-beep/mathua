@@ -78,7 +78,6 @@ const setup = (opts: { missing?: { id: string; label: string; status?: string }[
 }
 
 const answerOnce = async () => {
-  fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
   await waitFor(() => expect(answerField()).toBeTruthy())
   const input = answerField()
   typeAnswer(input, '5')
