@@ -118,6 +118,8 @@ export interface AppSidebarProps {
    */
   showLeaderboards?: boolean
   notificationUnread?: number
+  /** Open reports in the moderation queue. Only used for the Admin entry. */
+  adminReports?: number
 }
 
 export function AppSidebar({
@@ -132,6 +134,7 @@ export function AppSidebar({
   isAdmin = false,
   showLeaderboards = true,
   notificationUnread = 0,
+  adminReports = 0,
 }: AppSidebarProps) {
   const pathname = usePathname()
   // Contact is one control, not two destinations: the page and the Discord
@@ -231,6 +234,16 @@ export function AppSidebar({
                           <Link href={item.href}>
                             <Icon className="shrink-0" />
                             <span className="group-data-[collapsible=icon]:hidden">{item.label}</span>
+                            {item.href === '/admin' && adminReports > 0 && (
+                              <>
+                                <span className="ml-auto h-2 w-2 shrink-0 rounded-full bg-mathua-red" aria-hidden="true" />
+                                <span className="sr-only">
+                                  {adminReports === 1
+                                    ? '1 report needs attention'
+                                    : `${adminReports} reports need attention`}
+                                </span>
+                              </>
+                            )}
                           </Link>
                         )}
                       </SidebarMenuButton>
