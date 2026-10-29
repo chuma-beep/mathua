@@ -1048,9 +1048,9 @@ func (g *rationalRootGen) Generate(ctx generator.GeneratorContext) generator.Pro
 	d := c.r1*c.r2 + c.r1*c.r3 + c.r2*c.r3
 	e := -(c.r1 * c.r2 * c.r3)
 	return generator.Problem{
-		Question: fmt.Sprintf("The monic polynomial x^3 %+dx^2 %+dx %+d has three integer roots. By the rational root theorem, what is its positive root?", b, d, e),
+		Question: fmt.Sprintf("The monic polynomial \\(x^3 %+d x^2 %+d x %+d\\) has three integer roots. By the rational root theorem, what is its positive root?", b, d, e),
 		Answer:   strconv.Itoa(c.r1),
-		Explanation: fmt.Sprintf("The polynomial factors as (x %+d)(x %+d)(x %+d), so the roots are %d, %d and %d, and the positive one is %d.",
+		Explanation: fmt.Sprintf("The polynomial factors as \\((x %+d)(x %+d)(x %+d)\\), so the roots are %d, %d and %d, and the positive one is %d.",
 			-c.r1, -c.r2, -c.r3, c.r1, c.r2, c.r3, c.r1),
 		Facts: map[string]string{
 			"b": strconv.Itoa(b), "d": strconv.Itoa(d), "e": strconv.Itoa(e),

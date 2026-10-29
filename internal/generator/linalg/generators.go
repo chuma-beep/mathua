@@ -66,7 +66,22 @@ func retryable(attempt int) bool { return attempt < generator.MaxDrawAttempts }
 
 type vectorConceptGen struct{}
 
+// The concept has three knowledge points: the geometric picture, components
+// and unit direction, and vector operations. Practice passes the current
+// knowledge-point ordinal, so each rung must ask its own question rather than
+// repeating the magnitude prompt from the first rung.
 func (g *vectorConceptGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	switch ctx.KPOrdinal {
+	case 2:
+		return vectorComponentProblem(ctx)
+	case 3:
+		return vectorOperationProblem(ctx)
+	default:
+		return vectorMagnitudeProblem(ctx)
+	}
+}
+
+func vectorMagnitudeProblem(ctx generator.GeneratorContext) generator.Problem {
 	tier := mathutil.DifficultyTier(ctx.Difficulty)
 	var x, y, mag int
 	var q, ex string
@@ -108,6 +123,96 @@ func (g *vectorConceptGen) Generate(ctx generator.GeneratorContext) generator.Pr
 			"y":      strconv.Itoa(y),
 			"answer": strconv.Itoa(mag),
 		},
+	}
+}
+
+// vectorComponentProblem asks for one component after the direction vector is
+// scaled to a given magnitude. It keeps the answer an integer while exercising
+// the unit-direction subgoal from the components knowledge point.
+func vectorComponentProblem(ctx generator.GeneratorContext) generator.Problem {
+	tier := mathutil.DifficultyTier(ctx.Difficulty)
+	for attempt := 0; ; attempt++ {
+		m := smallInt(2, 4+tier*2)
+		n := smallInt(1, m-1)
+		k := smallInt(1, 2+tier)
+		x := k * (m*m - n*n)
+		y := k * (2 * m * n)
+		mag := k * (m*m + n*n)
+		if rand.Intn(2) == 0 {
+			x, y = y, x
+		}
+		if tier > 0 && rand.Intn(2) == 0 {
+			x = -x
+		}
+		if tier > 0 && rand.Intn(2) == 0 {
+			y = -y
+		}
+		scale := smallInt(2, 4+tier)
+		wanted := x * scale
+		question := fmt.Sprintf("A vector of magnitude \\(%d\\) points in the direction of \\((%d,%d)\\). What is its \\(x\\)-component?", mag*scale, x, y)
+		if containsWord(question, strconv.Itoa(wanted)) {
+			if retryable(attempt) {
+				continue
+			}
+		}
+		return generator.Problem{
+			Question: question,
+			Answer:   strconv.Itoa(wanted),
+			Explanation: fmt.Sprintf("The direction vector \\((%d,%d)\\) has magnitude \\(%d\\). Scaling it to magnitude \\(%d\\) multiplies each component by \\(%d/%d = %d\\), so the \\(x\\)-component is \\(%d \\cdot %d = %d\\).",
+				x, y, mag, mag*scale, mag*scale, mag, scale, scale, x, wanted),
+			Facts: map[string]string{
+				"x":         strconv.Itoa(x),
+				"y":         strconv.Itoa(y),
+				"magnitude": strconv.Itoa(mag),
+				"scale":     strconv.Itoa(scale),
+				"answer":    strconv.Itoa(wanted),
+			},
+		}
+	}
+}
+
+// vectorOperationProblem asks for one coordinate of a sum. The concept is
+// graded as a number, so the question targets a single component rather than
+// the tuple that the separate vector-addition concept uses.
+func vectorOperationProblem(ctx generator.GeneratorContext) generator.Problem {
+	tier := mathutil.DifficultyTier(ctx.Difficulty)
+	bound := 3 + tier*3
+	for attempt := 0; ; attempt++ {
+		a := smallInt(1, bound)
+		b := smallInt(1, bound)
+		c := smallInt(1, bound)
+		d := smallInt(1, bound)
+		if rand.Intn(2) == 0 {
+			a = -a
+		}
+		if rand.Intn(2) == 0 {
+			b = -b
+		}
+		if rand.Intn(2) == 0 {
+			c = -c
+		}
+		if rand.Intn(2) == 0 {
+			d = -d
+		}
+		answer := a + c
+		question := fmt.Sprintf("Given \\(\\mathbf{u}=(%d,%d)\\) and \\(\\mathbf{v}=(%d,%d)\\), what is the \\(x\\)-component of \\(\\mathbf{u}+\\mathbf{v}\\)?", a, b, c, d)
+		if containsWord(question, strconv.Itoa(answer)) {
+			if retryable(attempt) {
+				continue
+			}
+		}
+		return generator.Problem{
+			Question:    question,
+			Answer:      strconv.Itoa(answer),
+			Explanation: fmt.Sprintf("Add the \\(x\\)-components: \\(%d + (%d) = %d\\). The \\(y\\)-components add independently: \\(%d + (%d) = %d\\).", a, c, answer, b, d, b+d),
+			Facts: map[string]string{
+				"u1":     strconv.Itoa(a),
+				"u2":     strconv.Itoa(b),
+				"v1":     strconv.Itoa(c),
+				"v2":     strconv.Itoa(d),
+				"answer": strconv.Itoa(answer),
+			},
+		}
 	}
 }
 

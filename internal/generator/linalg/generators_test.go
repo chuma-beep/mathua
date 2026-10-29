@@ -2,6 +2,7 @@ package linalg
 
 import (
 	"math/rand"
+	"strconv"
 	"strings"
 	"testing"
 
@@ -20,7 +21,42 @@ func fuzzGen(t *testing.T, gen generator.Generator) {
 	}
 }
 
-func TestVectorConceptGen(t *testing.T)    { fuzzGen(t, &vectorConceptGen{}) }
+func TestVectorConceptGen(t *testing.T) { fuzzGen(t, &vectorConceptGen{}) }
+
+func TestVectorConceptGenFollowsTheKnowledgePoint(t *testing.T) {
+	g := &vectorConceptGen{}
+
+	for i := 0; i < 40; i++ {
+		p := g.Generate(generator.GeneratorContext{Difficulty: 0.5, KPOrdinal: 1})
+		if !strings.Contains(p.Question, "magnitude of vector") {
+			t.Fatalf("KP1 question is not a magnitude prompt: %q", p.Question)
+		}
+	}
+
+	for i := 0; i < 40; i++ {
+		p := g.Generate(generator.GeneratorContext{Difficulty: 0.5, KPOrdinal: 2})
+		if !strings.Contains(p.Question, "points in the direction of") {
+			t.Fatalf("KP2 question does not ask for a component from a direction: %q", p.Question)
+		}
+		x, _ := strconv.Atoi(p.Facts["x"])
+		scale, _ := strconv.Atoi(p.Facts["scale"])
+		if want := strconv.Itoa(x * scale); p.Answer != want {
+			t.Fatalf("KP2 answer %q does not match x*scale %q: %q", p.Answer, want, p.Question)
+		}
+	}
+
+	for i := 0; i < 40; i++ {
+		p := g.Generate(generator.GeneratorContext{Difficulty: 0.5, KPOrdinal: 3})
+		if !strings.Contains(p.Question, `\mathbf{u}`) || !strings.Contains(p.Question, `\mathbf{v}`) {
+			t.Fatalf("KP3 question does not ask about two named vectors: %q", p.Question)
+		}
+		u1, _ := strconv.Atoi(p.Facts["u1"])
+		v1, _ := strconv.Atoi(p.Facts["v1"])
+		if want := strconv.Itoa(u1 + v1); p.Answer != want {
+			t.Fatalf("KP3 answer %q does not match u1+v1 %q: %q", p.Answer, want, p.Question)
+		}
+	}
+}
 func TestVectorAddGen(t *testing.T)        { fuzzGen(t, &vectorAddGen{}) }
 func TestVectorDotGen(t *testing.T)        { fuzzGen(t, &vectorDotGen{}) }
 func TestMatrixConceptGen(t *testing.T)    { fuzzGen(t, &matrixConceptGen{}) }

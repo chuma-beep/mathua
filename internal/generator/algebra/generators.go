@@ -920,7 +920,22 @@ func (g *algExpEvaluateGen) Generate(ctx generator.GeneratorContext) generator.P
 
 type logConceptGen struct{}
 
+// The concept has three knowledge points: the definition, the basic
+// identities, and the logarithmic function. The generator used to return the
+// conversion prompt on every rung, so a learner who reached the identities or
+// the function still saw only "write as a logarithm".
 func (g *logConceptGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	switch ctx.KPOrdinal {
+	case 2:
+		return logIdentityProblem()
+	case 3:
+		return logarithmicFunctionProblem()
+	default:
+		return logDefinitionProblem()
+	}
+}
+
+func logDefinitionProblem() generator.Problem {
 	base := rand.Intn(3) + 2
 	exp := rand.Intn(4) + 1
 	val := mathutil.IntPow(base, exp)
@@ -937,6 +952,70 @@ func (g *logConceptGen) Generate(ctx generator.GeneratorContext) generator.Probl
 	p.Explanation = fmt.Sprintf("\\(\\log_{%d}(%d) = %d\\)", base, val, exp)
 	p.Facts = map[string]string{"base": strconv.Itoa(base), "exp": strconv.Itoa(exp), "val": strconv.Itoa(val)}
 	return p
+}
+
+func logIdentityProblem() generator.Problem {
+	base := rand.Intn(8) + 2
+	switch rand.Intn(3) {
+	case 0:
+		return generator.MultipleChoice(
+			fmt.Sprintf("What is \\(\\log_{%d}(1)\\)?", base),
+			"0",
+			"1",
+			strconv.Itoa(base),
+			"undefined",
+		)
+	case 1:
+		return generator.MultipleChoice(
+			fmt.Sprintf("What is \\(\\log_{%d}(%d)\\)?", base, base),
+			"1",
+			"0",
+			strconv.Itoa(base),
+			"undefined",
+		)
+	default:
+		value := rand.Intn(8) + 2
+		for value == base {
+			value = rand.Intn(8) + 2
+		}
+		return generator.MultipleChoice(
+			fmt.Sprintf("Simplify \\(%d^{\\log_{%d}(%d)}\\).", base, base, value),
+			strconv.Itoa(value),
+			strconv.Itoa(base),
+			fmt.Sprintf("log_%d(%d)", base, value),
+			"1",
+		)
+	}
+}
+
+func logarithmicFunctionProblem() generator.Problem {
+	base := rand.Intn(8) + 2
+	switch rand.Intn(3) {
+	case 0:
+		return generator.MultipleChoice(
+			fmt.Sprintf("What is the domain of \\(f(x)=\\log_{%d}(x)\\)?", base),
+			"\\(x>0\\)",
+			"\\(x\\ge0\\)",
+			"all real numbers",
+			"\\(x\\ne0\\)",
+		)
+	case 1:
+		return generator.MultipleChoice(
+			fmt.Sprintf("The graph of \\(y=\\log_{%d}(x)\\) has a vertical asymptote at ...", base),
+			"\\(x=0\\)",
+			"\\(y=0\\)",
+			"\\(x=1\\)",
+			"no vertical asymptote",
+		)
+	default:
+		return generator.MultipleChoice(
+			fmt.Sprintf("As \\(x\\to0^{+}\\), \\(\\log_{%d}(x)\\to\\) ...", base),
+			"\\(-\\infty\\)",
+			"0",
+			"1",
+			"\\(\\infty\\)",
+		)
+	}
 }
 
 type logEvaluateGen struct{}

@@ -300,6 +300,16 @@ func TestRaiseNumericRecompute(t *testing.T) {
 	}
 }
 
+func TestRationalRootQuestionTypesetsThePolynomial(t *testing.T) {
+	p := (&rationalRootGen{}).Generate(generator.GeneratorContext{})
+	if !strings.Contains(p.Question, `\(x^3`) || !strings.Contains(p.Question, `\)`) {
+		t.Fatalf("rational-root question is not typeset: %q", p.Question)
+	}
+	if !strings.Contains(p.Explanation, `\(`) || !strings.Contains(p.Explanation, `\)`) {
+		t.Fatalf("rational-root explanation is not typeset: %q", p.Explanation)
+	}
+}
+
 func TestRadicalSimplifyUsesMathForVariables(t *testing.T) {
 	p := (&radicalSimplifyGen{}).Generate(generator.GeneratorContext{Difficulty: 0.5})
 	if !strings.Contains(p.Question, `\(a\sqrt{b}\)`) {
