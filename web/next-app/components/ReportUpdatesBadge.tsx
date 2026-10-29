@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { listMyReports } from '../lib/api'
+import { listAnnouncements, listMyReports } from '../lib/api'
 
 // A small count beside the avatar. The page that clears it dispatches
 // report-updates-changed, so the badge clears without a reload.
@@ -15,21 +15,37 @@ export default function ReportUpdatesBadge({ enabled }: { enabled: boolean }) {
       return
     }
     let cancelled = false
-    const load = () => {
-      listMyReports()
-        .then((data) => {
-          if (!cancelled) setUnread(data.unread)
-        })
-        .catch(() => {
-          // A transient failure must not put an error in the header. The page
-          // itself reports the failure when the learner opens it.
-        })
+    const load = async () => {
+      const [reports, announcements] = await Promise.allSettled([listMyReports(), listAnnouncements()])
+      if (cancelled) return
+      let total = 0
+      let loaded = false
+      if (reports.status === 'fulfilled') {
+        total += reports.value.unread
+        loaded = true
+      }
+      if (announcements.status === 'fulfilled') {
+        total += announcements.value.unread
+        loaded = true
+      }
+      // A transient failure must not put an error in the header. The page
+      // itself reports the failure when the learner opens it.
+      if (loaded) setUnread(total)
     }
-    load()
+    void load()
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') void load()
+    }
     window.addEventListener('report-updates-changed', load)
+    window.addEventListener('announcements-changed', load)
+    window.addEventListener('focus', load)
+    document.addEventListener('visibilitychange', onVisible)
     return () => {
       cancelled = true
       window.removeEventListener('report-updates-changed', load)
+      window.removeEventListener('announcements-changed', load)
+      window.removeEventListener('focus', load)
+      document.removeEventListener('visibilitychange', onVisible)
     }
   }, [enabled])
 

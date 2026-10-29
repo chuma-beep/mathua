@@ -2194,6 +2194,80 @@ export async function clearMyReports(): Promise<void> {
 	if (!res.ok) await throwWithResponse(res, 'Could not clear your reports')
 }
 
+const AnnouncementSchema = z.object({
+	id: z.string(),
+	title: z.string(),
+	body: z.string(),
+	published: z.boolean(),
+	created_at: z.string(),
+	published_at: z.string(),
+	read: z.boolean().optional(),
+})
+export type Announcement = z.infer<typeof AnnouncementSchema>
+
+export interface MyAnnouncementsResponse {
+	announcements: Announcement[]
+	unread: number
+}
+
+export async function listAnnouncements(): Promise<MyAnnouncementsResponse> {
+	const res = await authedFetch(`${API_BASE}/api/announcements`, { cache: 'no-store' })
+	if (!res.ok) await throwWithResponse(res, 'Could not load announcements')
+	const data = (await res.json()) as { announcements?: unknown; unread?: unknown }
+	return {
+		announcements: validateResponse(z.array(AnnouncementSchema), data.announcements ?? [], 'announcements'),
+		unread: typeof data.unread === 'number' ? data.unread : 0,
+	}
+}
+
+export async function markAnnouncementsRead(): Promise<void> {
+	const res = await authedFetch(`${API_BASE}/api/announcements/read`, { method: 'POST' })
+	if (!res.ok) await throwWithResponse(res, 'Could not mark announcements as read')
+}
+
+export async function clearAnnouncements(): Promise<void> {
+	const res = await authedFetch(`${API_BASE}/api/announcements/clear`, { method: 'POST' })
+	if (!res.ok) await throwWithResponse(res, 'Could not clear announcements')
+}
+
+export async function listAdminAnnouncements(): Promise<{ announcements: Announcement[] }> {
+	const res = await authedFetch(`${API_BASE}/api/admin/announcements`, { cache: 'no-store' })
+	if (!res.ok) await throwWithResponse(res, 'Could not load announcements')
+	const data = (await res.json()) as { announcements?: unknown }
+	return { announcements: validateResponse(z.array(AnnouncementSchema), data.announcements ?? [], 'adminAnnouncements') }
+}
+
+export interface AnnouncementInput {
+	title: string
+	body: string
+	published: boolean
+}
+
+export async function createAdminAnnouncement(input: AnnouncementInput): Promise<Announcement> {
+	const res = await authedFetch(`${API_BASE}/api/admin/announcements`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(input),
+	})
+	if (!res.ok) await throwWithResponse(res, 'Could not create the announcement')
+	const data = (await res.json()) as { announcement?: unknown }
+	return validateResponse(AnnouncementSchema, data.announcement, 'createAnnouncement')
+}
+
+export async function updateAdminAnnouncement(
+	id: string,
+	input: Partial<AnnouncementInput>,
+): Promise<Announcement> {
+	const res = await authedFetch(`${API_BASE}/api/admin/announcements/${encodeURIComponent(id)}`, {
+		method: 'PATCH',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(input),
+	})
+	if (!res.ok) await throwWithResponse(res, 'Could not update the announcement')
+	const data = (await res.json()) as { announcement?: unknown }
+	return validateResponse(AnnouncementSchema, data.announcement, 'updateAnnouncement')
+}
+
 export async function listAdminReports(status?: string): Promise<{ reports: QuestionReport[] }> {
 	const qs = status && status !== 'all' ? `?status=${encodeURIComponent(status)}` : ''
 	const res = await authedFetch(`${API_BASE}/api/admin/reports${qs}`, { cache: 'no-store' })

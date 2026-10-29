@@ -97,6 +97,12 @@ export const test = base.extend({
     await context.route('**/api/reviews/due**', (route) =>
       route.fulfill({ json: { count: 0 } }),
     )
+    // The sidebar shell and the notifications page ask for product
+    // announcements. An account with no announcements is the default; a spec
+    // that wants an unread item registers its own route later and wins.
+    await context.route('**/api/announcements**', (route) =>
+      route.fulfill({ json: { announcements: [], unread: 0 } }),
+    )
     // The profile card and the timed-quiz page ask for eligibility on load. A
     // learner below the gate is the default empty account; a spec that wants
     // the run registers its own route later and wins.

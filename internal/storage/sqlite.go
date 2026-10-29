@@ -1441,6 +1441,8 @@ func (s *SQLiteStore) DeleteAccount(studentID string) error {
 		{"DELETE FROM student_remedial_queue WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM server_sessions WHERE kind IN ('study_expected','study_plan','study_plan_prefs') AND (key = ? OR key LIKE ? || '|%')", []interface{}{studentID, studentID}},
 		{"DELETE FROM question_reports WHERE reporter_id = ?", []interface{}{studentID}},
+		{"DELETE FROM announcement_reads WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM announcement_views WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM ai_usage WHERE usage_key = ?", []interface{}{studentID}},
 		{"DELETE FROM students WHERE id = ?", []interface{}{studentID}},
 	}

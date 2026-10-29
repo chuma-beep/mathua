@@ -26,6 +26,9 @@ var staffOnlyRoutes = []struct{ method, path string }{
 	{"POST", "/api/admin/invitations"},
 	{"GET", "/api/admin/audit"},
 	{"GET", "/api/admin/content"},
+	{"GET", "/api/admin/announcements"},
+	{"POST", "/api/admin/announcements"},
+	{"PATCH", "/api/admin/announcements/someone"},
 }
 
 func TestAdminUserDetailCarriesActivityAndReports(t *testing.T) {
@@ -162,6 +165,7 @@ func TestModeratorScopeIsReportsAndContentOnly(t *testing.T) {
 		{"GET", "/api/admin/overview"},
 		{"GET", "/api/admin/reports"},
 		{"GET", "/api/admin/content"},
+		{"GET", "/api/admin/announcements"},
 	}
 	for _, rt := range allowed {
 		if rec := e.do(t, rt.method, rt.path, e.studentTok, ""); rec.Code != 200 {
@@ -173,6 +177,8 @@ func TestModeratorScopeIsReportsAndContentOnly(t *testing.T) {
 		{"GET", "/api/admin/admins"},
 		{"GET", "/api/admin/invitations"},
 		{"GET", "/api/admin/audit"},
+		{"POST", "/api/admin/announcements"},
+		{"PATCH", "/api/admin/announcements/someone"},
 	}
 	for _, rt := range denied {
 		if rec := e.do(t, rt.method, rt.path, e.studentTok, ""); rec.Code != 403 {

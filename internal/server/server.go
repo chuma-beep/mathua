@@ -544,6 +544,9 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/reports/mine", logRequest(cors(s.authMiddleware(s.handleMyReports))))
 	mux.HandleFunc("/api/reports/mine/read", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleMyReportsRead)))))
 	mux.HandleFunc("/api/reports/mine/clear", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleMyReportsClear)))))
+	mux.HandleFunc("/api/announcements", logRequest(cors(s.authMiddleware(s.handleAnnouncements))))
+	mux.HandleFunc("/api/announcements/read", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleAnnouncementsRead)))))
+	mux.HandleFunc("/api/announcements/clear", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleAnnouncementsClear)))))
 	// Admin V2. Every route names the permission it needs, and requirePermission enforces it
 	// server-side on every request from the role the database holds, never from anything the
 	// client sends. The password login above is the old content-triage gate; it is not this
@@ -571,6 +574,11 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/admin/invitations/", logRequest(cors(s.requirePermission(admin.AdminsRead, s.handleAdminInvitationRevoke))))
 	mux.HandleFunc("/api/admin/audit", logRequest(cors(s.requirePermission(admin.AuditRead, s.handleAdminAudit))))
 	mux.HandleFunc("/api/admin/content", logRequest(cors(s.requirePermission(admin.ContentRead, s.handleAdminContent))))
+	// Announcements are content. Reading uses content.read; creating and
+	// publishing re-check content.manage inside the handlers, so a moderator
+	// can inspect the queue without gaining a broadcast channel.
+	mux.HandleFunc("/api/admin/announcements", logRequest(cors(s.requirePermission(admin.ContentRead, s.handleAdminAnnouncements))))
+	mux.HandleFunc("/api/admin/announcements/", logRequest(cors(s.requirePermission(admin.ContentRead, s.handleAdminAnnouncement))))
 	// The lab. Read-only by construction: generate serves what the generator
 	// would produce, grade runs the same pure GradeAnswer the report replay
 	// uses, and neither touches a learner's evidence. content.read is inspection,

@@ -494,6 +494,38 @@ type ReviewSubmissionStore interface {
 	CommitReviewSubmission(ReviewSubmissionCommit) (ReviewSubmissionOutcome, error)
 }
 
+// Announcement is a product update shown in the learner notification center.
+// Body is Markdown rendered with the same sanitizer as lesson content.
+type Announcement struct {
+	ID          string
+	Title       string
+	Body        string
+	Published   bool
+	CreatedAt   time.Time
+	PublishedAt time.Time
+	CreatedBy   string
+	Read        bool
+}
+
+// AnnouncementRead records that a learner has seen a published announcement.
+type AnnouncementRead struct {
+	StudentID      string
+	AnnouncementID string
+	ReadAt         time.Time
+}
+
+// AnnouncementStore is the announcement surface. It is separate from
+// Repository so existing test doubles do not need every method.
+type AnnouncementStore interface {
+	ListPublishedAnnouncements(studentID string) ([]Announcement, error)
+	MarkAnnouncementsRead(studentID string, now time.Time) error
+	ClearAnnouncements(studentID string, clearedAt time.Time) error
+	ListAnnouncements() ([]Announcement, error)
+	GetAnnouncement(id string) (*Announcement, error)
+	CreateAnnouncement(a Announcement) (*Announcement, error)
+	UpdateAnnouncement(id, title, body string, published bool, now time.Time) (*Announcement, error)
+}
+
 // MaxRemedialQueue caps the per-student remedial queue.
 const MaxRemedialQueue = 10
 
@@ -779,6 +811,8 @@ const (
 	ActionAdminInviteAccept   = "ADMIN_INVITE_ACCEPT"
 	ActionReportStatusChange  = "REPORT_STATUS_CHANGE"
 	ActionContentStatusChange = "CONTENT_STATUS_CHANGE"
+	ActionAnnouncementCreate  = "ANNOUNCEMENT_CREATE"
+	ActionAnnouncementUpdate  = "ANNOUNCEMENT_UPDATE"
 )
 
 // Repository interface

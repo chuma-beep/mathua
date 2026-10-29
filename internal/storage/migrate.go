@@ -422,6 +422,38 @@ CREATE TABLE IF NOT EXISTS admin_invitations (
 CREATE UNIQUE INDEX IF NOT EXISTS idx_admin_invitations_token ON admin_invitations(token_hash);
 CREATE INDEX IF NOT EXISTS idx_admin_invitations_email ON admin_invitations(email);
 
+-- Product announcements. They are global rows, so ResetProgress and account
+-- deletion never remove the announcement itself. Reads are per learner and are
+-- removed with the account. Body is Markdown rendered through the lesson
+-- sanitizer on the client.
+CREATE TABLE IF NOT EXISTS announcements (
+    id           TEXT PRIMARY KEY,
+    title        TEXT NOT NULL,
+    body         TEXT NOT NULL,
+    published    INTEGER NOT NULL DEFAULT 0,
+    created_at   INTEGER NOT NULL,
+    published_at INTEGER NOT NULL DEFAULT 0,
+    created_by   TEXT NOT NULL DEFAULT ''
+);
+
+CREATE INDEX IF NOT EXISTS idx_announcements_published ON announcements(published, published_at);
+
+CREATE TABLE IF NOT EXISTS announcement_reads (
+    student_id      TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    announcement_id TEXT NOT NULL REFERENCES announcements(id) ON DELETE CASCADE,
+    read_at         INTEGER NOT NULL,
+    PRIMARY KEY (student_id, announcement_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_announcement_reads_announcement ON announcement_reads(announcement_id);
+
+-- Announcement clears hide the current feed from one learner without deleting
+-- the global announcement or another learner's feed.
+CREATE TABLE IF NOT EXISTS announcement_views (
+    student_id TEXT PRIMARY KEY REFERENCES students(id) ON DELETE CASCADE,
+    cleared_at INTEGER NOT NULL
+);
+
 -- Administration. The role column itself is added by the migration list below rather than
 -- here: this DDL runs on every boot, and ALTER TABLE ADD COLUMN is not idempotent. The
 -- default is 'student', so every existing row is a learner until an operator promotes it.

@@ -475,6 +475,37 @@ CREATE TABLE IF NOT EXISTS schema_migrations (
     applied_at TEXT NOT NULL DEFAULT (now()::text)
 );
 
+-- Product announcements. They are global rows, so ResetProgress and account
+-- deletion never remove the announcement itself. Reads are per learner and are
+-- removed with the account.
+CREATE TABLE IF NOT EXISTS announcements (
+    id           TEXT PRIMARY KEY,
+    title        TEXT NOT NULL,
+    body         TEXT NOT NULL,
+    published    INTEGER NOT NULL DEFAULT 0,
+    created_at   BIGINT NOT NULL,
+    published_at BIGINT NOT NULL DEFAULT 0,
+    created_by   TEXT NOT NULL DEFAULT ''
+);
+
+CREATE INDEX IF NOT EXISTS idx_announcements_published ON announcements(published, published_at);
+
+CREATE TABLE IF NOT EXISTS announcement_reads (
+    student_id      TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    announcement_id TEXT NOT NULL REFERENCES announcements(id) ON DELETE CASCADE,
+    read_at         BIGINT NOT NULL,
+    PRIMARY KEY (student_id, announcement_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_announcement_reads_announcement ON announcement_reads(announcement_id);
+
+-- Announcement clears hide the current feed from one learner without deleting
+-- the global announcement or another learner's feed.
+CREATE TABLE IF NOT EXISTS announcement_views (
+    student_id TEXT PRIMARY KEY REFERENCES students(id) ON DELETE CASCADE,
+    cleared_at BIGINT NOT NULL
+);
+
 -- Administration. actor_id is deliberately not a foreign key to students(id): a trail that is
 -- deleted along with the account it records is not a trail. before_json/after_json carry the
 -- non-sensitive AdminUser projection only, so a credential cannot reach them.
@@ -1831,6 +1862,8 @@ func (s *PostgresStore) DeleteAccount(studentID string) error {
 		{"DELETE FROM student_remedial_queue WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM server_sessions WHERE kind IN ('study_expected','study_plan','study_plan_prefs') AND (key = $1 OR key LIKE $1 || '|%')", []interface{}{studentID}},
 		{"DELETE FROM question_reports WHERE reporter_id = $1", []interface{}{studentID}},
+		{"DELETE FROM announcement_reads WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM announcement_views WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM ai_usage WHERE usage_key = $1", []interface{}{studentID}},
 		{"DELETE FROM students WHERE id = $1", []interface{}{studentID}},
 	}

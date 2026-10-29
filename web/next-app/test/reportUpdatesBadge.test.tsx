@@ -1,15 +1,17 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import ReportUpdatesBadge from '../components/ReportUpdatesBadge'
-import { listMyReports } from '../lib/api'
+import { listAnnouncements, listMyReports } from '../lib/api'
 
 vi.mock('../lib/api', async (importOriginal) => ({
   ...(await importOriginal<typeof import('../lib/api')>()),
   listMyReports: vi.fn(),
+  listAnnouncements: vi.fn(),
 }))
 
 beforeEach(() => {
   vi.clearAllMocks()
+  vi.mocked(listAnnouncements).mockResolvedValue({ unread: 0, announcements: [] })
 })
 
 describe('the report update badge', () => {

@@ -5,7 +5,7 @@ import Link from 'next/link'
 import AppShell from '@/components/app-shell'
 import Footer from '@/components/Footer'
 import KatexContent from '@/components/KatexContent'
-import { clearMyReports, listMyReports, markMyReportsRead, type QuestionReport } from '@/lib/api'
+import { clearAnnouncements, clearMyReports, listAnnouncements, listMyReports, markAnnouncementsRead, markMyReportsRead, type Announcement, type QuestionReport } from '@/lib/api'
 import { useAuthState } from '@/hooks/useAuthState'
 
 function statusLabel(status: string): string {
@@ -50,7 +50,9 @@ function fmtDate(value?: string): string {
 export default function MyReportsPage() {
   const { loggedIn, user } = useAuthState()
   const [reports, setReports] = useState<QuestionReport[]>([])
+  const [announcements, setAnnouncements] = useState<Announcement[]>([])
   const [unread, setUnread] = useState(0)
+  const [announcementUnread, setAnnouncementUnread] = useState(0)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [confirmClear, setConfirmClear] = useState(false)
@@ -74,6 +76,20 @@ export default function MyReportsPage() {
           // Keep the unread marker and the list.
         }
       }
+
+      // Announcements are a separate feed. A failure there must not hide the
+      // report history that already loaded.
+      try {
+        const feed = await listAnnouncements()
+        setAnnouncements(feed.announcements)
+        setAnnouncementUnread(feed.unread)
+        if (feed.unread > 0) {
+          await markAnnouncementsRead()
+          window.dispatchEvent(new Event('announcements-changed'))
+        }
+      } catch {
+        // Keep the report list usable.
+      }
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Your reports could not be loaded.')
     } finally {
@@ -89,17 +105,31 @@ export default function MyReportsPage() {
   async function handleClear() {
     setClearing(true)
     setClearError('')
-    try {
-      await clearMyReports()
+    const [reportsResult, announcementsResult] = await Promise.allSettled([
+      clearMyReports(),
+      clearAnnouncements(),
+    ])
+    let failed = false
+    if (reportsResult.status === 'fulfilled') {
       setReports([])
       setUnread(0)
-      setConfirmClear(false)
       window.dispatchEvent(new Event('report-updates-changed'))
-    } catch (e) {
-      setClearError(e instanceof Error ? e.message : 'Your history could not be cleared.')
-    } finally {
-      setClearing(false)
+    } else {
+      failed = true
     }
+    if (announcementsResult.status === 'fulfilled') {
+      setAnnouncements([])
+      setAnnouncementUnread(0)
+      window.dispatchEvent(new Event('announcements-changed'))
+    } else {
+      failed = true
+    }
+    if (failed) {
+      setClearError('Some notifications could not be cleared. Try again.')
+    } else {
+      setConfirmClear(false)
+    }
+    setClearing(false)
   }
 
   return (
@@ -110,17 +140,17 @@ export default function MyReportsPage() {
           <div>
             <h1 className="font-mono text-xl text-mathua-primary">Notifications</h1>
             <p className="mt-1 text-sm text-mathua-secondary">
-              Updates on the problems you reported and what moderation decided.
+              Product updates and the verdicts on the problems you reported.
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            {reports.length > 0 && (
+            {(reports.length > 0 || announcements.length > 0) && (
               <button
                 type="button"
                 onClick={() => { setConfirmClear(true); setClearError('') }}
                 className="font-mono text-[11px] text-mathua-muted underline underline-offset-2 hover:text-mathua-red"
               >
-                Clear history
+                Clear notifications
               </button>
             )}
             <Link
@@ -135,7 +165,8 @@ export default function MyReportsPage() {
         {confirmClear && (
           <div className="mt-6 border border-mathua-border bg-mathua-surface p-4">
             <p className="text-sm text-mathua-secondary">
-              Clear this list? The reports stay with moderation, but they leave your history.
+              Clear your notifications? Your report history will be cleared and announcements will leave
+              your feed. The reports themselves stay with moderation.
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
               <button
@@ -144,7 +175,7 @@ export default function MyReportsPage() {
                 disabled={clearing}
                 className="border border-mathua-red px-3 h-9 font-mono text-xs text-mathua-red disabled:opacity-50"
               >
-                {clearing ? 'Clearing…' : 'Yes, clear history'}
+                {clearing ? 'Clearing…' : 'Yes, clear notifications'}
               </button>
               <button
                 type="button"
@@ -165,6 +196,13 @@ export default function MyReportsPage() {
           </p>
         )}
 
+        {announcementUnread > 0 && (
+          <p className="mt-6 border border-[var(--accent-blue)]/40 bg-mathua-surface px-4 py-3 font-mono text-[11px] text-mathua-secondary">
+            {announcementUnread === 1 ? '1 new announcement.' : `${announcementUnread} new announcements.`} The
+            unread marker clears after this page opens.
+          </p>
+        )}
+
         {!loggedIn && (
           <p className="mt-8 border border-mathua-border bg-mathua-surface p-4 text-sm text-mathua-secondary">
             <Link href="/login" className="text-mathua-blue underline underline-offset-2">
@@ -180,6 +218,27 @@ export default function MyReportsPage() {
           <p className="mt-8 border border-[var(--accent-red)]/40 bg-mathua-surface p-4 font-mono text-xs text-mathua-secondary">
             {error}
           </p>
+        )}
+
+        {loggedIn && !loading && !error && announcements.length > 0 && (
+          <section className="mt-8" aria-labelledby="announcements-heading">
+            <h2 id="announcements-heading" className="font-mono text-sm uppercase tracking-wider text-mathua-muted">
+              Announcements
+            </h2>
+            <ul className="mt-3 space-y-3">
+              {announcements.map((announcement) => (
+                <li key={announcement.id} className="border border-mathua-border bg-mathua-surface p-4">
+                  <div className="flex flex-wrap items-baseline justify-between gap-2">
+                    <h3 className="font-mono text-xs text-mathua-primary">{announcement.title}</h3>
+                    <span className="font-mono text-[10px] text-mathua-muted">
+                      {fmtDate(announcement.published_at || announcement.created_at)}
+                    </span>
+                  </div>
+                  <KatexContent className="mt-3 text-sm text-mathua-secondary">{announcement.body}</KatexContent>
+                </li>
+              ))}
+            </ul>
+          </section>
         )}
 
         {loggedIn && !loading && !error && reports.length === 0 && (
