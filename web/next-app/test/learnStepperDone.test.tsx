@@ -492,6 +492,98 @@ function waitForTimeout(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
 
+describe('LearnStepper grading recovery', () => {
+  it('offers the prerequisite named by TOPIC_LOCKED after a miss instead of another Check', async () => {
+    vi.mocked(getLessonReadiness).mockResolvedValue({
+      concept_id: CID, eligible: true, ready: false, weak: [], missing: [],
+      prerequisites: [{ conceptId: 'arith.mult.2_5_10', title: 'Times tables 2, 5 and 10', state: 'in_progress', met: true }],
+    })
+    render(<LearnStepper conceptId={CID} />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
+    await answerCurrent('6')
+    await screen.findByText('4 + 1 = ?')
+    vi.mocked(submitStudyAnswer).mockRejectedValueOnce(Object.assign(new Error('This topic has unmet prerequisites.'), {
+      status: 403, code: 'TOPIC_LOCKED', prerequisiteConceptIds: ['arith.mult.2_5_10'],
+    }))
+
+    await answerCurrent('5')
+    expect(await screen.findByRole('alert')).toHaveTextContent(/prerequisite practice/)
+    const panel = screen.getByRole('note', { name: 'Prerequisites' })
+    expect(panel).toHaveTextContent('Times tables 2, 5 and 10')
+    expect(panel).toHaveTextContent('In progress')
+    expect(screen.queryByText(/already learned what this builds on/)).toBeNull()
+    const study = within(panel).getByRole('link', { name: 'Study →' })
+    expect(study.getAttribute('href')).toContain('/study?concept=arith.mult.2_5_10')
+    expect(study.getAttribute('href')).toContain(`return=${encodeURIComponent(`/learn?concept=${CID}`)}`)
+    expect(screen.getByText('Your answer: 5')).toBeTruthy()
+    expect(screen.getByText(/you answered “6”/)).toBeTruthy()
+    expect(screen.getByText(/0\/1 correct/)).toBeTruthy()
+    expect(screen.queryByRole('button', { name: 'Check' })).toBeNull()
+    expect(screen.queryByText(/connection/)).toBeNull()
+
+    fireEvent.click(screen.getByRole('button', { name: 'Restart lesson' }))
+    fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
+    await answerCurrent('5')
+    expect(await screen.findByText(/1\/1 correct/)).toBeTruthy()
+    expect(screen.queryByRole('alert')).toBeNull()
+  })
+
+  it('shows a failed submission beside the current question after a miss and clears it on retry', async () => {
+    render(<LearnStepper conceptId={CID} />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
+    await answerCurrent('6')
+    await screen.findByText('4 + 1 = ?')
+    vi.mocked(submitStudyAnswer).mockRejectedValueOnce(new TypeError('Failed to fetch'))
+
+    await answerCurrent('5')
+    const card = answerCard(answerField())
+    expect(await within(card).findByRole('alert')).toHaveTextContent(/connection/i)
+    expect(within(card).getByRole('button', { name: 'Check' })).toBeEnabled()
+    expect(screen.getByText(/you answered “6”/)).toBeTruthy()
+    expect(screen.getByText(/0\/1 correct/)).toBeTruthy()
+
+    await answerCurrent('5')
+    await waitFor(() => expect(screen.getByText(/1\/2 correct/)).toBeTruthy())
+    expect(screen.queryByRole('alert')).toBeNull()
+    expect(submitStudyAnswer).toHaveBeenLastCalledWith(CID, '5', expect.any(Number), '4 + 1 = ?')
+  })
+
+  it('unlocks Check when both the question expires and its replacement request fails', async () => {
+    render(<LearnStepper conceptId={CID} />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
+    await findMathField()
+    vi.mocked(submitStudyAnswer).mockRejectedValueOnce(Object.assign(new Error('expired'), { status: 409 }))
+    vi.mocked(getLessonPractice).mockRejectedValueOnce(new TypeError('Failed to fetch'))
+
+    await answerCurrent('5')
+    const card = answerCard(answerField())
+    expect(await within(card).findByRole('alert')).toHaveTextContent(/replacement/i)
+    expect(within(card).getByRole('button', { name: 'Check' })).toBeEnabled()
+    expect(answerField()).not.toBeDisabled()
+    expect(screen.getByText('2 + 3 = ?')).toBeTruthy()
+    expect(screen.queryByText(/correct$/)).toBeNull()
+
+    await answerCurrent('5')
+    expect(await screen.findByText(/1\/1 correct/)).toBeTruthy()
+    expect(screen.queryByRole('alert')).toBeNull()
+  })
+
+  it('explains an unavailable grader without counting a miss', async () => {
+    vi.mocked(submitStudyAnswer).mockResolvedValueOnce({ correct: false, ungraded: true, feedback: 'Grader unavailable', xp: 0 })
+    render(<LearnStepper conceptId={CID} />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
+    await answerCurrent('5')
+
+    const card = answerCard(answerField())
+    expect(await within(card).findByRole('alert')).toHaveTextContent(/grader/i)
+    expect(within(card).getByRole('button', { name: 'Check' })).toBeEnabled()
+    expect(screen.queryByText(/Not quite/)).toBeNull()
+    await answerCurrent('5')
+    expect(await screen.findByText(/1\/1 correct/)).toBeTruthy()
+    expect(screen.queryByRole('alert')).toBeNull()
+  })
+})
+
 describe('LearnStepper question handoff', () => {
   beforeEach(() => {
     vi.clearAllMocks()

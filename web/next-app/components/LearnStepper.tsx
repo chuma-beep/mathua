@@ -9,7 +9,7 @@ import ChoiceOptions from './ChoiceOptions'
 import { stemWithoutChoices } from '../lib/choices'
 import ConceptReference from './ConceptReference'
 import PrerequisitePanel from './PrerequisitePanel'
-import { getLessonKPs, getLessonPractice, getLessonReadiness, submitStudyAnswer, getProgress, getErrorStatus, type EligibilityPrereq, type KpInfo, type PracticeQuestion, type ReadinessRes, type ConceptProgress } from '../lib/api'
+import { getLessonKPs, getLessonPractice, getLessonReadiness, submitStudyAnswer, getProgress, getErrorStatus, getTopicLockedPrerequisites, type EligibilityPrereq, type KpInfo, type PracticeQuestion, type ReadinessRes, type ConceptProgress } from '../lib/api'
 import ReportButton from './ReportButton'
 import { getUserInfo } from '../lib/auth'
 import { upcomingLocked, hrefConceptId, type Shelf, type LockedSuccessor } from '../lib/nextUp'
@@ -32,6 +32,8 @@ interface QEntry {
   q: PracticeQuestion
   answer: string
   checking: boolean
+  error?: string
+  blockedPrerequisiteIds?: string[]
   servedAt: number
   feedback: { correct: boolean; text: string; expected: string; diagnosis?: string; xp: number } | null
 }
@@ -137,6 +139,7 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
   const lastEntryKey = lastEntry?.key
   const lastEntryKind = lastEntry?.kind
   const practiceStarted = entries.some(e => e.kind === 'q')
+  const practiceBlocked = entries.some(e => e.kind === 'q' && e.blockedPrerequisiteIds !== undefined)
   const conceptGradingType = concepts.find(c => c.id === conceptId)?.grading_type
   // The served question carries the format its answer actually needs. The
   // concept record only names the grading type, which is why a numeric concept
@@ -405,13 +408,13 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
 
   async function handleCheck(key: number) {
     const entry = entries.find(e => e.key === key && e.kind === 'q') as QEntry | undefined
-    if (!entry || !entry.answer.trim() || entry.checking || entry.feedback) return
-    setEntry(key, { checking: true })
+    if (!entry || !entry.answer.trim() || entry.checking || entry.feedback || entry.blockedPrerequisiteIds !== undefined) return
+    setEntry(key, { checking: true, error: '' })
     const elapsed = Math.max(0.5, (Date.now() - entry.servedAt) / 1000)
     try {
       const res = await submitStudyAnswer(conceptId, entry.answer.trim(), elapsed, entry.q.question)
       if (res.ungraded) {
-        setEntry(key, { checking: false })
+        setEntry(key, { error: 'The grader is temporarily unavailable. Your answer is kept. Press Check to retry.' })
         return
       }
       setAnsweredCount(n => n + 1)
@@ -487,31 +490,48 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
         })
       }
     } catch (e) {
+      const blockedPrerequisiteIds = getTopicLockedPrerequisites(e)
+      if (blockedPrerequisiteIds !== null) {
+        setEntry(key, {
+          blockedPrerequisiteIds,
+          error: 'This topic now needs prerequisite practice before you can continue. This answer was not graded.',
+        })
+        return
+      }
       // The server is the only grader. This never decides whether the answer
       // was right, a network fault or an expired server-side record is not a
       // miss, and grading locally would have made it one.
       //
-      // 409 means the server has no record of this question, so resubmitting
-      // it could never succeed: re-serve instead, which writes a fresh record
-      // and leaves the learner with a question they can actually answer. Any
-      // other failure keeps the question and the learner's answer so a retry
-      // can succeed. Nothing was recorded either way, no attempt, streak,
-      // weakness or XP moved.
+      // Re-serve a rejected question on 409, including an expired server-side
+      // record. If that fetch also fails, keep the answer and release Check.
+      // A transport failure alone cannot tell us whether the server recorded
+      // the answer.
       if (getErrorStatus(e) === 409) {
-        const fresh = await refill(difficulty, seenRef.current)
-        if (fresh.length > 0) {
-          seenRef.current = [...seenRef.current, fresh[0].question].slice(-20)
-          setEntry(key, { checking: false, q: fresh[0], answer: '', servedAt: Date.now() })
-          setBuffer(prev => [...prev, ...fresh.slice(1)].slice(0, 6))
-          setError('That question had expired on the server, so it could not be graded. Here is a fresh one, nothing was recorded.')
-          return
+        try {
+          const fresh = await refill(difficulty, seenRef.current)
+          if (fresh.length > 0) {
+            seenRef.current = [...seenRef.current, fresh[0].question].slice(-20)
+            setEntry(key, { q: fresh[0], answer: '', servedAt: Date.now(), error: 'That question could not be graded. Here is a fresh one. Enter your answer and press Check.' })
+            setBuffer(prev => [...prev, ...fresh.slice(1)].slice(0, 6))
+            return
+          }
+        } catch {
+          // Replacement failures must also release the submit control.
         }
-        setError('That question had expired and no replacement could be loaded. Reload to continue.')
-        setEntry(key, { checking: false })
+        setEntry(key, { error: 'That question could not be graded and no replacement could be loaded. Press Check to try again or reload the lesson.' })
         return
       }
+      const status = getErrorStatus(e)
+      const message = status === 401
+        ? 'Your session ended. Sign in again to submit your answer.'
+        : status === 429
+          ? 'Too many requests. Wait a moment and press Check again. Your answer is kept.'
+          : status !== undefined
+            ? `The server could not grade this answer (HTTP ${status}). Your answer is kept. Press Check to retry.`
+            : 'Could not reach the server to grade that answer. Check your connection and press Check to retry. Your answer is kept.'
+      setEntry(key, { error: message })
+    } finally {
       setEntry(key, { checking: false })
-      setError('Could not reach the server to grade that answer. Check your connection and submit again, nothing was recorded.')
     }
   }
 
@@ -596,7 +616,7 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
         )}
       </div>
 
-      {prerequisites.length > 0 && !bannerDismissed && (
+      {prerequisites.length > 0 && !bannerDismissed && !practiceBlocked && (
         <PrerequisitePanel
           prerequisites={prerequisites}
           returnStack={prereqStack}
@@ -809,11 +829,12 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
           }
           const qe = e as QEntry
           const locked = qe.feedback !== null
+          const blocked = qe.blockedPrerequisiteIds !== undefined
           return (
             <div key={qe.key} ref={qe.key === lastEntryKey ? questionCardRef : undefined} className={`clear-of-tabs border bg-mathua-surface p-6 ${qe.feedback?.correct ? 'border-mathua-green-faint' : qe.feedback ? 'border-mathua-red-faint' : 'border-mathua-border'}`}>
               <KatexContent className="text-sm text-mathua-primary font-mono whitespace-pre-wrap">{stemWithoutChoices(qe.q.question)}</KatexContent>
-              <ChoiceOptions question={qe.q.question} value={qe.answer} onPick={v => setEntry(qe.key, { answer: v })} disabled={locked || qe.checking} />
-              {!locked && (
+              <ChoiceOptions question={qe.q.question} value={qe.answer} onPick={v => setEntry(qe.key, { answer: v })} disabled={locked || blocked || qe.checking} />
+              {!locked && !blocked && (
                 <form ref={qe.key === lastEntryKey ? answerFormRef : undefined} onSubmit={ev => { ev.preventDefault(); handleCheck(qe.key) }} className="clear-of-tabs mt-3 flex flex-col sm:flex-row gap-2">
                   <label htmlFor={`learn-answer-${qe.key}`} className="sr-only">Your answer</label>
                   <MathAnswerInput
@@ -833,7 +854,25 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
                   <button type="submit" disabled={qe.checking || !qe.answer.trim()} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-6 h-12 text-sm font-mono disabled:opacity-50 w-auto self-end sm:self-auto shrink-0">Check</button>
                 </form>
               )}
-              {!locked && <p className="mt-2 font-mono text-[11px] text-mathua-muted">{format.hint}</p>}
+              {!locked && !blocked && <p className="mt-2 font-mono text-[11px] text-mathua-muted">{format.hint}</p>}
+              {!locked && qe.error && <p role="alert" className="mt-2 font-mono text-xs text-red-400">{qe.error}</p>}
+              {blocked && (
+                <div>
+                  <p className="mt-2 font-mono text-xs text-mathua-secondary">Your answer: {qe.answer}</p>
+                  <PrerequisitePanel
+                    heading="Review prerequisites to continue"
+                    intro="Study the prerequisites below, then use their practice action. Return here when you are ready."
+                    prerequisites={(qe.blockedPrerequisiteIds?.length ? qe.blockedPrerequisiteIds : prerequisites.flatMap(p => p.met ? [] : [p.conceptId])).map(id => ({
+                      conceptId: id,
+                      title: prerequisites.find(p => p.conceptId === id)?.title ?? concepts.find(c => c.id === id)?.label ?? id,
+                      state: prerequisites.find(p => p.conceptId === id)?.state ?? '',
+                      met: false,
+                    }))}
+                    returnStack={prereqStack}
+                  />
+                  <button type="button" onClick={practiceAgain} className="mt-3 border border-mathua-border px-4 py-2 font-mono text-xs text-mathua-secondary hover:text-mathua-blue">Restart lesson</button>
+                </div>
+              )}
               <div className="mt-2 flex justify-end">
                 <ReportButton
                   key={`learn-${qe.key}`}
