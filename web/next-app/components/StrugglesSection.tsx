@@ -7,9 +7,10 @@ interface Props {
   weaknesses: WeaknessRes | null
 }
 
-// A one-line "needs attention" summary: how many concepts are weak, and the way to review them.
+// A one-line "needs attention" summary: how many concepts are weak, and the way to practise them.
 // It was a boxed panel with a per-concept bar list and a per-domain expander, the heaviest block
 // on the page and every number in it was decided by the same count this now states outright.
+// This is a weakness count, not the spaced-review due count, so the action must open practice.
 export default function StrugglesSection({ weaknesses }: Props) {
   const entries = weaknesses?.by_domain ?? {}
   const domains = Object.keys(entries)
@@ -40,10 +41,10 @@ export default function StrugglesSection({ weaknesses }: Props) {
           </span>
         </span>
         <Link
-          href="/review"
+          href="/learn"
           className="shrink-0 font-mono text-[11px] text-mathua-blue hover:text-mathua-blue-hover whitespace-nowrap"
         >
-          Review now →
+          Practice now →
         </Link>
       </div>
     </div>
