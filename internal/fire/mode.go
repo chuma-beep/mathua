@@ -17,8 +17,9 @@ const (
 	// banked ordinals.
 	Shadow Mode = "shadow"
 	// Active may apply banked ordinals to eligible targets. It requires an
-	// explicit acknowledgement and a non-empty server-side cohort allowlist.
-	// Applying credit never grants XP or changes mastery evidence.
+	// explicit acknowledgement and a non-empty server-side scope, either a
+	// student allowlist or the "all" scope. Applying credit never grants XP or
+	// changes mastery evidence.
 	Active Mode = "active"
 	// Off does not allocate credit and does not apply FIRe outbox effects.
 	Off Mode = "off"
@@ -34,6 +35,7 @@ type Config struct {
 	Mode     Mode
 	Cohort   string
 	Allow    map[string]struct{}
+	AllowAll bool
 	Degraded string
 }
 
@@ -52,15 +54,17 @@ func Parse(raw string) Mode {
 
 // ParseConfig resolves the mode and the activation guards. Active is only
 // returned when the acknowledgement is exact, the cohort name is stable and
-// non-empty and the allowlist contains at least one student ID. Every other
-// combination degrades to Shadow and records why, so a typo cannot activate
-// scheduling effects.
+// non-empty and the scope is either the "all" token or at least one student ID.
+// Every other combination degrades to Shadow and records why, so a typo cannot
+// activate scheduling effects.
 func ParseConfig(raw, acknowledgement, cohort, allowlist string) Config {
 	cfg := Config{
 		Mode:   Parse(raw),
 		Cohort: strings.TrimSpace(cohort),
-		Allow:  parseAllowlist(allowlist),
 	}
+	allow, allowAll, scopeErr := parseAllowlist(allowlist)
+	cfg.Allow = allow
+	cfg.AllowAll = allowAll
 	if cfg.Mode != Active {
 		return cfg
 	}
@@ -74,31 +78,56 @@ func ParseConfig(raw, acknowledgement, cohort, allowlist string) Config {
 		cfg.Degraded = "activation cohort is empty"
 		return cfg
 	}
-	if len(cfg.Allow) == 0 {
+	if scopeErr != "" {
 		cfg.Mode = Shadow
-		cfg.Degraded = "activation allowlist is empty"
+		cfg.Degraded = scopeErr
+		return cfg
+	}
+	if !cfg.AllowAll && len(cfg.Allow) == 0 {
+		cfg.Mode = Shadow
+		cfg.Degraded = "activation scope is empty"
 		return cfg
 	}
 	return cfg
 }
 
-func parseAllowlist(raw string) map[string]struct{} {
-	out := map[string]struct{}{}
-	for _, part := range strings.Split(raw, ",") {
-		if id := strings.TrimSpace(part); id != "" {
-			out[id] = struct{}{}
-		}
+// parseAllowlist reads the scope. The bare token "all" or "*" selects every
+// learner, including accounts created later. Mixing that token with explicit
+// IDs is ambiguous, so it degrades instead of silently choosing one meaning.
+func parseAllowlist(raw string) (map[string]struct{}, bool, string) {
+	trimmed := strings.TrimSpace(raw)
+	if strings.EqualFold(trimmed, "all") || trimmed == "*" {
+		return map[string]struct{}{}, true, ""
 	}
-	return out
+	out := map[string]struct{}{}
+	for _, part := range strings.Split(trimmed, ",") {
+		id := strings.TrimSpace(part)
+		if id == "" {
+			continue
+		}
+		if strings.EqualFold(id, "all") || id == "*" {
+			return map[string]struct{}{}, false, "activation scope mixes all with explicit student IDs"
+		}
+		out[id] = struct{}{}
+	}
+	return out, false, ""
 }
 
 // ActiveFor reports whether FIRe may apply credit for this learner. Both the
-// mode and the server-side allowlist must agree.
+// mode and the server-side scope must agree. An empty learner ID is never
+// active, even under the all-learners scope.
 func (c Config) ActiveFor(studentID string) bool {
 	if c.Mode != Active {
 		return false
 	}
-	_, ok := c.Allow[strings.TrimSpace(studentID)]
+	id := strings.TrimSpace(studentID)
+	if id == "" {
+		return false
+	}
+	if c.AllowAll {
+		return true
+	}
+	_, ok := c.Allow[id]
 	return ok
 }
 
@@ -126,6 +155,9 @@ func (c Config) Describe() string {
 		return fmt.Sprintf("%s (degraded: %s)", c.Mode, c.Degraded)
 	}
 	if c.Mode == Active {
+		if c.AllowAll {
+			return fmt.Sprintf("%s (cohort %s, all learners)", c.Mode, c.Cohort)
+		}
 		return fmt.Sprintf("%s (cohort %s, %d learners)", c.Mode, c.Cohort, len(c.Allow))
 	}
 	return string(c.Mode)

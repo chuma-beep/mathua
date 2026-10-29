@@ -101,9 +101,10 @@ values at startup:
   alter question serving.
 - `off` disables FIRe. The engine does not allocate ledger rows and drains any
   queued `implicit_credit` effect without applying it.
-- `active` applies banked ordinals to eligible review schedules for an explicit
-  cohort. Active mode requires the acknowledgement, cohort and allowlist in
-  `docs/fire-activation.md`, plus a durable activation row. If any guard is
+- `active` applies banked ordinals to eligible review schedules for a configured
+  cohort and scope. Active mode requires the acknowledgement, cohort and scope
+  in `docs/fire-activation.md`, plus a durable activation row. The scope is a
+  student allowlist or `all`, which includes future accounts. If any guard is
   missing, the process degrades to `shadow`.
 
 Empty, unset, malformed or unknown values resolve to `shadow`, so a typo cannot

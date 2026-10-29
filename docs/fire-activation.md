@@ -2,7 +2,8 @@
 
 FIRe has three modes: `off`, `shadow` and `active`. Production starts in `shadow`.
 Active mode applies banked implicit repetitions to eligible review schedules for
-an explicit cohort. It does not grant XP and does not change mastery evidence.
+a configured cohort and scope. It does not grant XP and does not change mastery
+evidence.
 
 ## Activation requires two keys
 
@@ -14,14 +15,19 @@ The process configuration comes from these environment variables:
 - `MATHUA_FIRE_MODE=active`
 - `MATHUA_FIRE_ACK="I acknowledge that FIRe may apply schedule changes"`
 - `MATHUA_FIRE_COHORT=<stable cohort name>`
-- `MATHUA_FIRE_ALLOWLIST=<comma-separated student IDs>`
+- `MATHUA_FIRE_ALLOWLIST=<comma-separated student IDs>` or `all`
+
+Set `MATHUA_FIRE_ALLOWLIST=all` to apply active FIRe to every learner, including
+accounts created after activation. `all` must be the only token. Mixing `all`
+with student IDs is ambiguous and degrades to shadow. The `*` token has the same
+meaning.
 
 The durable row comes from `mathua fire activate` or the owner-only admin
 endpoint. Startup checks that the row is active and that its cohort equals the
 environment cohort. A missing row, a shadow row or a cohort mismatch degrades
 active to shadow and logs the reason.
 
-The acknowledgement is an exact string. An empty cohort, an empty allowlist or a
+The acknowledgement is an exact string. An empty cohort, an empty scope or a
 wrong acknowledgement degrades to shadow.
 
 ## Operator commands
@@ -32,6 +38,7 @@ Run these commands with shell access to the deployment:
 mathua fire status
 mathua fire report
 mathua fire activate --ack "I acknowledge that FIRe may apply schedule changes" --cohort pilot --allowlist <id>,<id> --actor <email>
+mathua fire activate --ack "I acknowledge that FIRe may apply schedule changes" --cohort all-users --allowlist all --actor <email>
 mathua fire deactivate --actor <email>
 ```
 
@@ -63,6 +70,9 @@ The activation request body is:
 {"ack":"I acknowledge that FIRe may apply schedule changes","cohort":"pilot","allowlist":"<id>,<id>"}
 ```
 
+Use `"allowlist":"all"` for every learner. The environment must carry the same
+scope, and the process must restart.
+
 The durable row does not change the running process. Set the environment values
 and restart the process to apply the mode. This is deliberate: a row written by
 mistake cannot move schedules without a second operator action.
@@ -82,7 +92,7 @@ weakness, placement state or the source concept.
 
 ## Scheduler read paths
 
-Four read paths call `SatisfyImplicitReviews` for an allowlisted learner:
+Four read paths call `SatisfyImplicitReviews` for a learner in the configured scope:
 
 - `NextQuestion`, when a study or practice question is served.
 - `NextReviewQuestion`, when a spaced-review question is served.
@@ -176,5 +186,6 @@ plan and an explicit operator decision.
 
 Active FIRe does not prove that an implicit repetition improves recall. Shadow
 projection stores counterfactual due dates. Active mode changes the real review
-queue for the selected cohort. Keep the cohort small until the report and the
-conflict rate are stable.
+queue for the selected cohort. An explicit allowlist is the narrowest scope.
+`all` applies to every current and future learner, so use it only after the
+report and the conflict rate are stable and the rollback path is ready.

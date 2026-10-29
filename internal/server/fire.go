@@ -31,6 +31,7 @@ func (s *Server) handleAdminFire(w http.ResponseWriter, r *http.Request) {
 		"mode":           cfg.Mode,
 		"cohort":         cfg.Cohort,
 		"allowlist_size": len(cfg.Allow),
+		"allow_all":      cfg.AllowAll,
 		"degraded":       cfg.Degraded,
 		"description":    cfg.Describe(),
 		"activation":     act,
