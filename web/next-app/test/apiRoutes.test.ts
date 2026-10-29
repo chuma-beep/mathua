@@ -77,6 +77,13 @@ describe('every API route has a caller', () => {
       // which no page requests. Same shape as the session routes this replaced.
       ['/api/courses', 'frontend reads /api/transcript; e2e mocks this but no page requests it'],
       ['/api/courses/', 'frontend reads /api/transcript; e2e mocks this but no page requests it'],
+      // FIRe activation is an operator action, not a learner surface. The
+      // documented path is the `mathua fire` CLI and the admin API used by an
+      // operator with owner credentials, so no page in this app calls it.
+      ['/api/admin/fire', 'operator status endpoint; see docs/fire-activation.md'],
+      ['/api/admin/fire/report', 'operator dry-run endpoint; see docs/fire-activation.md'],
+      ['/api/admin/fire/activate', 'owner-only activation endpoint; see docs/fire-activation.md'],
+      ['/api/admin/fire/deactivate', 'owner-only deactivation endpoint; see docs/fire-activation.md'],
     ])
 
     const orphans = routes.filter(r => {

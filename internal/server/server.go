@@ -579,6 +579,12 @@ func (s *Server) Register(mux *http.ServeMux) {
 	// can inspect the queue without gaining a broadcast channel.
 	mux.HandleFunc("/api/admin/announcements", logRequest(cors(s.requirePermission(admin.ContentRead, s.handleAdminAnnouncements))))
 	mux.HandleFunc("/api/admin/announcements/", logRequest(cors(s.requirePermission(admin.ContentRead, s.handleAdminAnnouncement))))
+	// FIRe status and dry-run are inspection. Activation changes scheduling for
+	// real learners, so the handlers additionally require the owner role.
+	mux.HandleFunc("/api/admin/fire", logRequest(cors(s.requirePermission(admin.ContentRead, s.handleAdminFire))))
+	mux.HandleFunc("/api/admin/fire/report", logRequest(cors(s.requirePermission(admin.ContentRead, s.handleAdminFireReport))))
+	mux.HandleFunc("/api/admin/fire/activate", logRequest(cors(s.requirePermission(admin.ContentManage, s.handleAdminFireActivate))))
+	mux.HandleFunc("/api/admin/fire/deactivate", logRequest(cors(s.requirePermission(admin.ContentManage, s.handleAdminFireDeactivate))))
 	// The lab. Read-only by construction: generate serves what the generator
 	// would produce, grade runs the same pure GradeAnswer the report replay
 	// uses, and neither touches a learner's evidence. content.read is inspection,

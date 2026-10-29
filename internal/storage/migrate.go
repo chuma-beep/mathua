@@ -570,6 +570,44 @@ CREATE TABLE IF NOT EXISTS implicit_credit_ordinals (
     PRIMARY KEY (student_id, target_concept_id, credit_epoch, ordinal)
 );
 
+-- Active FIRe applications. One row per ordinal actually applied to a real
+-- due date. The unique keys make a retry or a second worker replay, never a
+-- second scheduling transition.
+CREATE TABLE IF NOT EXISTS implicit_credit_applications (
+    student_id         TEXT    NOT NULL,
+    target_concept_id  TEXT    NOT NULL,
+    credit_epoch       INTEGER NOT NULL,
+    ordinal            INTEGER NOT NULL,
+    source_concept_id  TEXT    NOT NULL DEFAULT '',
+    source_attempt_id  TEXT    NOT NULL,
+    applied_at         INTEGER NOT NULL,
+    actual_due         TEXT    NOT NULL DEFAULT '',
+    proposed_due       TEXT    NOT NULL DEFAULT '',
+    stability_before   REAL,
+    stability_after    REAL,
+    difficulty_before  REAL,
+    difficulty_after   REAL,
+    reviews_deferred   INTEGER NOT NULL DEFAULT 0,
+    PRIMARY KEY (student_id, target_concept_id, credit_epoch, ordinal),
+    UNIQUE (student_id, source_attempt_id, target_concept_id, credit_epoch)
+);
+
+CREATE INDEX IF NOT EXISTS idx_credit_applications_attempt
+    ON implicit_credit_applications(student_id, source_attempt_id);
+
+-- Durable activation state. Environment configuration may request active
+-- mode, but this row is the server-side acknowledgement an operator must
+-- write before any credit can be applied.
+CREATE TABLE IF NOT EXISTS fire_activations (
+    id              TEXT PRIMARY KEY,
+    mode            TEXT NOT NULL,
+    cohort          TEXT NOT NULL,
+    acknowledged_by TEXT NOT NULL,
+    acknowledged_at INTEGER NOT NULL,
+    updated_at      INTEGER NOT NULL,
+    revision        INTEGER NOT NULL
+);
+
 -- Targeted remedial queue: 2-miss halt remedial prerequisites survive Fly.io restarts.
 CREATE TABLE IF NOT EXISTS student_remedial_queue (
     student_id TEXT NOT NULL,
