@@ -13,13 +13,16 @@ describe('the contact box', () => {
     vi.mocked(api.submitReport).mockReset()
   })
 
-  it('will not send a message too short to act on', () => {
+  it('explains why a short message is not sent', async () => {
     render(<ContactBox />)
     const send = screen.getByRole('button', { name: 'Send message' })
-    expect(send).toBeDisabled()
+    expect(send).toBeEnabled()
 
     fireEvent.change(screen.getByLabelText('Your message'), { target: { value: 'hi' } })
-    expect(send).toBeDisabled()
+    fireEvent.click(send)
+
+    expect(await screen.findByRole('alert')).toHaveTextContent('Add at least 10 characters')
+    expect(api.submitReport).not.toHaveBeenCalled()
 
     fireEvent.change(screen.getByLabelText('Your message'), {
       target: { value: 'I cannot sign in and the reset link does nothing.' },
