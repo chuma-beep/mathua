@@ -74,6 +74,7 @@ func fireCommand(args []string) error {
 			"configured_mode": cfg.Mode,
 			"cohort":          cfg.Cohort,
 			"allowlist_size":  len(cfg.Allow),
+			"allow_all":       cfg.AllowAll,
 			"degraded":        cfg.Degraded,
 			"description":     cfg.Describe(),
 			"activation":      act,
@@ -113,7 +114,7 @@ func activateFIRe(repo storage.Repository, args []string) error {
 		return errors.New("activation requires --cohort")
 	}
 	if strings.TrimSpace(opts.allowlist) == "" {
-		return errors.New("activation requires --allowlist with at least one student ID")
+		return errors.New("activation requires --allowlist with at least one student ID or all")
 	}
 	// Validate the full configuration before recording the row, so a typo is
 	// rejected here instead of silently degrading at the next startup.

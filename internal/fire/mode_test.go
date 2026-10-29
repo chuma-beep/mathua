@@ -37,8 +37,11 @@ func TestParseConfigFailsClosed(t *testing.T) {
 		{"off needs no acknowledgement", "off", "", "", "", Off},
 		{"active needs acknowledgement", "active", "", "pilot", "s1", Shadow},
 		{"active needs cohort", "active", ActivationToken, "", "s1", Shadow},
-		{"active needs allowlist", "active", ActivationToken, "pilot", "", Shadow},
+		{"active needs scope", "active", ActivationToken, "pilot", "", Shadow},
 		{"active accepted", "active", ActivationToken, "pilot", "s1,s2", Active},
+		{"active all accepted", "active", ActivationToken, "pilot", "all", Active},
+		{"active wildcard accepted", "active", ActivationToken, "pilot", "*", Active},
+		{"active mixed all rejected", "active", ActivationToken, "pilot", "all,s1", Shadow},
 		{"unknown falls back", "nonsense", ActivationToken, "pilot", "s1", Shadow},
 	}
 	for _, tc := range cases {
@@ -60,6 +63,30 @@ func TestActiveForRequiresTheAllowlist(t *testing.T) {
 	shadow := ParseConfig("shadow", "", "", "")
 	if shadow.ActiveFor("s1") {
 		t.Fatal("shadow must never be active")
+	}
+}
+
+func TestAllScopeIncludesEveryLearner(t *testing.T) {
+	cfg := ParseConfig("active", ActivationToken, "all-users", "all")
+	if !cfg.AllowAll {
+		t.Fatal("the all token must select every learner")
+	}
+	if !cfg.ActiveFor("s1") || !cfg.ActiveFor("a-new-account") {
+		t.Fatal("the all scope must include existing and future learners")
+	}
+	if cfg.ActiveFor("") {
+		t.Fatal("the all scope must not include an empty learner ID")
+	}
+	shadow := ParseConfig("shadow", "", "", "all")
+	if shadow.ActiveFor("s1") {
+		t.Fatal("shadow must never apply credit")
+	}
+}
+
+func TestAllScopeDescribeIsExplicit(t *testing.T) {
+	cfg := ParseConfig("active", ActivationToken, "all-users", "all")
+	if got := cfg.Describe(); got != "active (cohort all-users, all learners)" {
+		t.Fatalf("Describe() = %q", got)
 	}
 }
 
