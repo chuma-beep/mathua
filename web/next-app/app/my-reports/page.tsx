@@ -191,15 +191,13 @@ export default function MyReportsPage() {
 
         {unread > 0 && (
           <p className="mt-6 border border-[var(--accent-blue)]/40 bg-mathua-surface px-4 py-3 font-mono text-[11px] text-mathua-secondary">
-            {unread === 1 ? '1 report has a new verdict.' : `${unread} reports have new verdicts.`} The
-            unread marker clears after this page opens.
+            {unread === 1 ? '1 report has a new verdict.' : `${unread} reports have new verdicts.`}
           </p>
         )}
 
         {announcementUnread > 0 && (
           <p className="mt-6 border border-[var(--accent-blue)]/40 bg-mathua-surface px-4 py-3 font-mono text-[11px] text-mathua-secondary">
-            {announcementUnread === 1 ? '1 new announcement.' : `${announcementUnread} new announcements.`} The
-            unread marker clears after this page opens.
+            {announcementUnread === 1 ? '1 new announcement.' : `${announcementUnread} new announcements.`}
           </p>
         )}
 
