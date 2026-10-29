@@ -82,6 +82,7 @@ describe('the learner report history', () => {
     expect(await screen.findByText('Resolved')).toBeTruthy()
     expect(screen.getByText('The expected answer was corrected.')).toBeTruthy()
     expect(screen.getByText(/1 report has a new verdict/)).toBeTruthy()
+    expect(screen.queryByText(/unread marker/i)).toBeNull()
     expect(markMyReportsRead).toHaveBeenCalledTimes(1)
   })
 
@@ -119,6 +120,7 @@ describe('the learner report history', () => {
     expect(screen.getByText('Timed quizzes are live')).toBeTruthy()
     expect(screen.getByText(/Try the new/)).toBeTruthy()
     expect(screen.getByText(/1 new announcement/)).toBeTruthy()
+    expect(screen.queryByText(/unread marker/i)).toBeNull()
     expect(markAnnouncementsRead).toHaveBeenCalledTimes(1)
   })
 

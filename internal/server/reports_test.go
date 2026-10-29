@@ -76,6 +76,28 @@ func TestCreateReport_DiagnosticSource(t *testing.T) {
 	}
 }
 
+// The lesson practice runner reports with source "practice". It is a distinct
+// arrival point from study, so the server must accept it or the report button
+// in a lesson fails before the moderation queue ever sees the report.
+func TestCreateReport_PracticeSource(t *testing.T) {
+	s := testServer(t)
+	mux := http.NewServeMux()
+	s.Register(mux)
+
+	body, _ := json.Marshal(map[string]string{
+		"concept_id": "arith.add.basic",
+		"kind":       "question",
+		"question":   "1+1=?",
+		"reason":     "wrong_answer",
+		"source":     "practice",
+	})
+	rec := httptest.NewRecorder()
+	mux.ServeHTTP(rec, httptest.NewRequest("POST", "/api/reports", bytes.NewReader(body)))
+	if rec.Code != 200 {
+		t.Fatalf("expected 200 for practice source, got %d: %s", rec.Code, rec.Body.String())
+	}
+}
+
 func TestCreateReport_InvalidSource(t *testing.T) {
 	s := testServer(t)
 	mux := http.NewServeMux()

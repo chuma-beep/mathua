@@ -30,7 +30,7 @@ export default function ContactBox() {
   const fileRef = useRef<HTMLInputElement>(null)
 
   const trimmed = text.trim()
-  const canSend = trimmed.length >= MIN && !busy && !imageError
+  const canSend = !busy && !imageError
 
   function pickImage(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0] ?? null
@@ -57,6 +57,11 @@ export default function ContactBox() {
   async function send(event: FormEvent) {
     event.preventDefault()
     if (!canSend) return
+    if (trimmed.length < MIN) {
+      setError(`Add at least ${MIN} characters so the message is actionable.`)
+      return
+    }
+    if (imageError) return
     setBusy(true)
     setError('')
     try {
@@ -113,7 +118,10 @@ export default function ContactBox() {
       <textarea
         id={fieldId}
         value={text}
-        onChange={(event) => setText(event.target.value)}
+        onChange={(event) => {
+          setText(event.target.value)
+          if (error) setError('')
+        }}
         maxLength={MAX}
         rows={6}
         required
