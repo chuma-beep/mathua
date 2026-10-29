@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, fireEvent, within, waitFor } from '@testing-library/react'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { act, render, screen, fireEvent, within, waitFor } from '@testing-library/react'
 import LearnStepper, { headConceptId } from '../components/LearnStepper'
 import {
   getLessonKPs,
@@ -14,7 +14,7 @@ import {
   getNext,
 } from '../lib/api'
 import { getUserInfo } from '../lib/auth'
-import { answerCard, answerField, typeAnswer } from './helpers/answerInput'
+import { answerCard, answerField, answerFields, findMathField, typeAnswer } from './helpers/answerInput'
 
 vi.mock('../lib/api', async (importOriginal) => {
   const mod = await importOriginal<typeof import('../lib/api')>()
@@ -491,3 +491,121 @@ describe('LearnStepper header tally', () => {
 function waitForTimeout(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
+
+describe('LearnStepper question handoff', () => {
+  beforeEach(() => {
+    vi.clearAllMocks()
+  })
+
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
+  it('reveals the first question card and focuses its input without following edits', async () => {
+    render(<LearnStepper conceptId={CID} />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
+    const input = await findMathField()
+    await waitFor(() => expect(input).toHaveFocus())
+    const scroll = vi.mocked(Element.prototype.scrollIntoView)
+    expect(scroll.mock.contexts.at(-1)).toBe(answerCard(input))
+    expect(scroll).toHaveBeenLastCalledWith({ behavior: 'smooth', block: 'nearest' })
+    expect(screen.queryByRole('button', { name: 'Next →' })).toBeNull()
+
+    const scrollCount = scroll.mock.calls.length
+    const report = within(answerCard(input)).getByRole('button', { name: /report a problem/i })
+    report.focus()
+    typeAnswer(input, '5')
+    expect(report).toHaveFocus()
+    expect(scroll).toHaveBeenCalledTimes(scrollCount)
+  })
+
+  it.each(['5', 'wrong'])('reveals and focuses the next card after answering %s', async value => {
+    render(<LearnStepper conceptId={CID} />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
+    const previous = await findMathField()
+    await answerCurrent(value)
+    expect(await screen.findByText('4 + 1 = ?')).toBeTruthy()
+    const input = await findMathField()
+    expect(input).not.toBe(previous)
+    await waitFor(() => expect(input).toHaveFocus())
+    expect(answerFields()).toHaveLength(1)
+    expect(vi.mocked(Element.prototype.scrollIntoView).mock.contexts.at(-1)).toBe(answerCard(input))
+  })
+
+  it('keeps the answer visible when the card is taller than the viewport', async () => {
+    const original = HTMLElement.prototype.getBoundingClientRect
+    vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(function (this: HTMLElement) {
+      const rect = original.call(this)
+      return this.classList.contains('bg-mathua-surface')
+        ? DOMRect.fromRect({ height: window.innerHeight + 1 })
+        : rect
+    })
+    render(<LearnStepper conceptId={CID} />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
+    const input = await findMathField()
+    await waitFor(() => expect(input).toHaveFocus())
+    expect(vi.mocked(Element.prototype.scrollIntoView).mock.contexts.at(-1)).toBe(input.closest('form'))
+  })
+
+  it('respects reduced motion when revealing a question', async () => {
+    const matchMedia = window.matchMedia
+    vi.spyOn(window, 'matchMedia').mockImplementation(query => ({
+      ...matchMedia(query), matches: query === '(prefers-reduced-motion: reduce)',
+    }))
+    render(<LearnStepper conceptId={CID} />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
+    await findMathField()
+    expect(Element.prototype.scrollIntoView).toHaveBeenLastCalledWith({ behavior: 'auto', block: 'nearest' })
+  })
+
+  it('starts only once even when Next is clicked repeatedly before rendering', async () => {
+    render(<LearnStepper conceptId={CID} />)
+    const next = await screen.findByRole('button', { name: 'Next →' })
+    act(() => {
+      fireEvent.click(next)
+      fireEvent.click(next)
+      fireEvent.click(next)
+    })
+    await findMathField()
+    expect(answerFields()).toHaveLength(1)
+    expect(screen.queryByText('4 + 1 = ?')).toBeNull()
+    expect(screen.queryByRole('button', { name: 'Next →' })).toBeNull()
+  })
+
+  it('disables Next during loading and allows a retry after failure', async () => {
+    vi.mocked(getLessonPractice).mockResolvedValueOnce({ concept_id: CID, questions: [] })
+    let rejectRequest!: (reason: Error) => void
+    vi.mocked(getLessonPractice).mockImplementationOnce(() => new Promise((_resolve, reject) => {
+      rejectRequest = reject
+    }))
+    render(<LearnStepper conceptId={CID} />)
+    const next = await screen.findByRole('button', { name: 'Next →' })
+    fireEvent.click(next)
+    expect(next).toBeDisabled()
+    fireEvent.click(next)
+    expect(getLessonPractice).toHaveBeenCalledTimes(2)
+
+    await act(async () => rejectRequest(new Error('offline')))
+    expect(next).toBeEnabled()
+    expect(screen.getByText(/Could not load a question/)).toBeTruthy()
+
+    fireEvent.click(next)
+    await findMathField()
+    expect(answerFields()).toHaveLength(1)
+    expect(screen.queryByText(/Could not load a question/)).toBeNull()
+  })
+
+  it('can start again after completing and restarting the lesson', async () => {
+    render(<LearnStepper conceptId={CID} />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
+    await findMathField()
+    await answerCurrent('5')
+    await screen.findByText('4 + 1 = ?')
+    await answerCurrent('5')
+    fireEvent.click(await screen.findByRole('button', { name: 'Practice again' }))
+    fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
+    const input = await findMathField()
+    await waitFor(() => expect(input).toHaveFocus())
+    expect(answerFields()).toHaveLength(1)
+  })
+})
