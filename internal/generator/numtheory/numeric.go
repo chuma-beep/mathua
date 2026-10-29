@@ -223,12 +223,30 @@ func (g *baseConvertGen) Generate(ctx generator.GeneratorContext) generator.Prob
 	}
 	numeral := b.String()
 	return generator.Problem{
-		Question: fmt.Sprintf("What is the value of the numeral %s in base %d?", numeral, base),
+		Question: fmt.Sprintf("What is the value of the numeral %s in base %d, written in base ten?", numeral, base),
 		Answer:   fmt.Sprintf("%d", val),
-		Explanation: fmt.Sprintf("Each digit is a coefficient on a power of the base: the numeral %s means the digits weighted by %d^0, %d^1 and so on, summed to %d. That is the same place-value rule as base ten, with the powers of ten replaced.",
-			numeral, base, base, val),
+		Explanation: fmt.Sprintf("The numeral %s in base %d expands as %s = %d. Each digit is a coefficient on a power of the base, the same place-value rule as base ten, with powers of %d instead of powers of ten.",
+			numeral, base, baseConvertExpansion(numeral, base), val, base),
 		Facts: map[string]string{"value": fmt.Sprintf("%d", val), "base": fmt.Sprintf("%d", base)},
 	}
+}
+
+// baseConvertExpansion spells out the place-value sum, so the explanation
+// shows the arithmetic rather than only describing it.
+func baseConvertExpansion(numeral string, base int) string {
+	var b strings.Builder
+	for i, ch := range numeral {
+		if i > 0 {
+			b.WriteString(" + ")
+		}
+		digit := int(ch - '0')
+		place := 1
+		for j := 0; j < len(numeral)-1-i; j++ {
+			place *= base
+		}
+		fmt.Fprintf(&b, "%d×%d", digit, place)
+	}
+	return b.String()
 }
 
 // gcdInt is the Euclidean algorithm, used for the coprimality conditions.
