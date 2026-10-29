@@ -230,3 +230,34 @@ func TestStatBatchAnswersVary(t *testing.T) {
 		}
 	}
 }
+
+func TestZScoreExplanationNamesTheSignRule(t *testing.T) {
+	reg := testStatRegistry(t)
+	const rule = "A value above the mean has a positive z-score and a value below the mean has a negative z-score."
+	for i := 0; i < 200; i++ {
+		p, err := reg.GenerateContext("stat.zscore.value", generator.GeneratorContext{
+			Difficulty: 0.8,
+			Seed:       int64(60000 + i),
+		})
+		if err != nil {
+			t.Fatalf("generate failed: %v", err)
+		}
+		if !strings.Contains(p.Explanation, rule) {
+			t.Fatalf("explanation does not state the sign rule: %s", p.Explanation)
+		}
+		dist := statProbeMeanSd.FindStringSubmatch(p.Question)
+		value := statProbeValue.FindStringSubmatch(p.Question)
+		if dist == nil || value == nil {
+			t.Fatalf("question does not print mean, deviation and value: %q", p.Question)
+		}
+		mean, _ := strconv.Atoi(dist[1])
+		x, _ := strconv.Atoi(value[1])
+		answer, _ := strconv.Atoi(p.Answer)
+		if x > mean && answer <= 0 {
+			t.Fatalf("value above the mean has a non-positive z-score: %s", p.Question)
+		}
+		if x < mean && answer >= 0 {
+			t.Fatalf("value below the mean has a non-negative z-score: %s", p.Question)
+		}
+	}
+}

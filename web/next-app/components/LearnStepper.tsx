@@ -18,7 +18,7 @@ import { fetchShelf } from '../lib/recommendations'
 import { REQUIRED_IN_A_ROW } from '../lib/progression'
 import { formatForGradingType, type AnswerFormat } from '../lib/answerFormat'
 import { countsAsMastered } from '../lib/progress'
-import { MathAnswerInput } from './math/MathInput'
+import { MathAnswerInput, type MathFocusHandle } from './math/MathInput'
 import { concepts } from '../lib/conceptData'
 
 // Append-only learning feed: intro once, then each submit locks its card and
@@ -118,6 +118,7 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
   const [misses, setMisses] = useState(0)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(true)
+  const [startingPractice, setStartingPractice] = useState(false)
   // Next head for the done state: re-fetched on entering done (after the
   // scheduler ingests the last answer), so Continue names what will load.
   // No navigation until the click, learner disposes via the alternatives.
@@ -127,7 +128,15 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
   const nextFetchedRef = useRef(false)
   const seenRef = useRef<string[]>([])
   const bottomRef = useRef<HTMLDivElement>(null)
+  const questionCardRef = useRef<HTMLDivElement>(null)
+  const answerFormRef = useRef<HTMLFormElement>(null)
+  const answerFocusRef = useRef<MathFocusHandle | null>(null)
+  const practiceStartedRef = useRef(false)
   const reduceMotion = useRef(false)
+  const lastEntry = entries[entries.length - 1]
+  const lastEntryKey = lastEntry?.key
+  const lastEntryKind = lastEntry?.kind
+  const practiceStarted = entries.some(e => e.kind === 'q')
   const conceptGradingType = concepts.find(c => c.id === conceptId)?.grading_type
   // The served question carries the format its answer actually needs. The
   // concept record only names the grading type, which is why a numeric concept
@@ -148,9 +157,22 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
     reduceMotion.current = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
   }, [])
 
-  const scrollToBottom = useCallback(() => {
-    bottomRef.current?.scrollIntoView({ behavior: reduceMotion.current ? 'auto' : 'smooth', block: 'nearest' })
-  }, [])
+  // Follow new cards after they mount, never answer edits or feedback updates.
+  useEffect(() => {
+    const options: ScrollIntoViewOptions = { behavior: reduceMotion.current ? 'auto' : 'smooth', block: 'nearest' }
+    if (lastEntryKind === 'done') {
+      bottomRef.current?.scrollIntoView(options)
+      return
+    }
+    const card = questionCardRef.current
+    if (lastEntryKind !== 'q' || !card) return
+    answerFocusRef.current?.focus()
+    const topPadding = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0
+    const bottomMargin = parseFloat(getComputedStyle(card).scrollMarginBottom) || 0
+    const availableHeight = (window.visualViewport?.height ?? window.innerHeight) - topPadding - bottomMargin
+    const target = card.getBoundingClientRect().height <= availableHeight ? card : answerFormRef.current
+    target?.scrollIntoView(options)
+  }, [lastEntryKey, lastEntryKind])
 
   const refill = useCallback(async (diff: number, exclude: string[]): Promise<PracticeQuestion[]> => {
     const pr = await getLessonPractice(conceptId, 3, { seed: Date.now() % 100000, exclude, difficulty: diff, kp_ordinal: kpIndex + 1 })
@@ -164,6 +186,8 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
   }, [conceptId, kpIndex])
 
   const load = useCallback(async () => {
+    practiceStartedRef.current = false
+    setStartingPractice(false)
     setLoading(true)
     setError('')
     setIneligible(null)
@@ -288,21 +312,23 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
   }
 
   function appendAfter(ms: number, fn: () => void) {
-    window.setTimeout(() => {
-      fn()
-      scrollToBottom()
-    }, ms)
+    window.setTimeout(fn, ms)
   }
 
   async function startPracticing() {
+    if (practiceStartedRef.current) return
+    practiceStartedRef.current = true
+    setStartingPractice(true)
+    setError('')
     const q = await takeNext(difficulty)
+    setStartingPractice(false)
     if (!q) {
-      setError('Could not load a question, check your connection and reload.')
+      practiceStartedRef.current = false
+      setError('Could not load a question. Check your connection and try again.')
       return
     }
     const entry: QEntry = { key: nextKey(), kind: 'q', kpIndex, q, answer: '', checking: false, servedAt: Date.now(), feedback: null }
     setEntries(prev => [...prev, entry])
-    scrollToBottom()
   }
 
   function setEntry(key: number, patch: Partial<QEntry>) {
@@ -671,9 +697,11 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
                     scaffolding for the question that follows (example-problem
                     pair), so the label must not invite bypassing it. */}
                 <div className="mt-5 flex flex-wrap items-center gap-3">
-                  <button type="button" onClick={startPracticing} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-6 py-2.5 font-mono text-xs min-h-[44px]">
-                    {isMastered ? 'Practice again →' : 'Next →'}
-                  </button>
+                  {!practiceStarted && (
+                    <button type="button" onClick={startPracticing} disabled={startingPractice} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-6 py-2.5 font-mono text-xs min-h-[44px] disabled:opacity-50">
+                      {isMastered ? 'Practice again →' : 'Next →'}
+                    </button>
+                  )}
                   {isMastered && (
                     <Link
                       href={nextShelf ? nextShelf.next.href : '/learn'}
@@ -782,14 +810,15 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
           const qe = e as QEntry
           const locked = qe.feedback !== null
           return (
-            <div key={qe.key} className={`border bg-mathua-surface p-6 ${qe.feedback?.correct ? 'border-mathua-green-faint' : qe.feedback ? 'border-mathua-red-faint' : 'border-mathua-border'}`}>
+            <div key={qe.key} ref={qe.key === lastEntryKey ? questionCardRef : undefined} className={`clear-of-tabs border bg-mathua-surface p-6 ${qe.feedback?.correct ? 'border-mathua-green-faint' : qe.feedback ? 'border-mathua-red-faint' : 'border-mathua-border'}`}>
               <KatexContent className="text-sm text-mathua-primary font-mono whitespace-pre-wrap">{stemWithoutChoices(qe.q.question)}</KatexContent>
               <ChoiceOptions question={qe.q.question} value={qe.answer} onPick={v => setEntry(qe.key, { answer: v })} disabled={locked || qe.checking} />
               {!locked && (
-                <form onSubmit={ev => { ev.preventDefault(); handleCheck(qe.key) }} className="mt-3 flex flex-col sm:flex-row gap-2">
+                <form ref={qe.key === lastEntryKey ? answerFormRef : undefined} onSubmit={ev => { ev.preventDefault(); handleCheck(qe.key) }} className="clear-of-tabs mt-3 flex flex-col sm:flex-row gap-2">
                   <label htmlFor={`learn-answer-${qe.key}`} className="sr-only">Your answer</label>
                   <MathAnswerInput
                     id={`learn-answer-${qe.key}`}
+                    focusRef={qe.key === lastEntryKey ? answerFocusRef : undefined}
                     value={qe.answer}
                     onChange={v => setEntry(qe.key, { answer: v })}
                     onSubmit={() => handleCheck(qe.key)}
