@@ -546,6 +546,7 @@ func holdCreditRaceLock(t *testing.T, repo Repository, studentID string) func() 
 func TestCreditCannotBeRecreatedByResetOrDeleteRace(t *testing.T) {
 	for name, repo := range creditStores(t) {
 		for _, action := range []string{"reset", "delete"} {
+			name, repo, action := name, repo, action
 			t.Run(name+"/"+action, func(t *testing.T) {
 				alloc, apply, _ := creditApplyStore(t, repo)
 				activateCreditTest(t, repo, "test")
@@ -560,7 +561,7 @@ func TestCreditCannotBeRecreatedByResetOrDeleteRace(t *testing.T) {
 				started := make(chan struct{})
 				var wg sync.WaitGroup
 				wg.Add(2)
-				go func() {
+				go func(repo Repository, action string) {
 					defer wg.Done()
 					close(started)
 					var err error
@@ -572,7 +573,7 @@ func TestCreditCannotBeRecreatedByResetOrDeleteRace(t *testing.T) {
 					if err != nil {
 						t.Errorf("%s: %v", action, err)
 					}
-				}()
+				}(repo, action)
 				<-started
 				time.Sleep(10 * time.Millisecond)
 				go func() {
@@ -702,6 +703,7 @@ func TestPostgresResetAndDeleteTakeTheStudentCreditLock(t *testing.T) {
 		t.Fatalf("unexpected store %T", repo)
 	}
 	for _, action := range []string{"reset", "delete"} {
+		action := action
 		t.Run(action, func(t *testing.T) {
 			st := seedStudent(t, repo)
 			ctx := context.Background()
@@ -714,14 +716,14 @@ func TestPostgresResetAndDeleteTakeTheStudentCreditLock(t *testing.T) {
 			}
 			started := make(chan struct{})
 			done := make(chan error, 1)
-			go func() {
+			go func(repo Repository, action string) {
 				close(started)
 				if action == "reset" {
 					done <- repo.ResetProgress(st.ID)
 				} else {
 					done <- repo.DeleteAccount(st.ID)
 				}
-			}()
+			}(repo, action)
 			<-started
 			select {
 			case err := <-done:
