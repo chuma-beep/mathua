@@ -272,7 +272,7 @@ func (g *zscoreGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 
 	ans := strconv.Itoa(k)
 	q := fmt.Sprintf("A distribution has mean %d and standard deviation %d. Find the z-score of the value %d.", mean, sd, x)
-	exp := fmt.Sprintf("Subgoal 1: State governing formula. The standard score or z-score transforms an observed value \\(x\\) into standard deviation units relative to the distribution mean \\(\\mu\\): \\(z = \\frac{x - \\mu}{\\sigma}\\).\n\nSubgoal 2: Substitute parameters. Given mean \\(\\mu = %d\\), standard deviation \\(\\sigma = %d\\) and value \\(x = %d\\), substitute into the formula: \\(z = \\frac{%d - %d}{%d}\\).\n\nSubgoal 3: Evaluate and simplify. Compute the deviation in the numerator \\(%d - %d = %d\\) and divide by the standard deviation: \\(z = \\frac{%d}{%d} = %d\\).",
+	exp := fmt.Sprintf("Subgoal 1: State governing formula. The standard score or z-score transforms an observed value \\(x\\) into standard deviation units relative to the distribution mean \\(\\mu\\): \\(z = \\frac{x - \\mu}{\\sigma}\\).\n\nSubgoal 2: Substitute parameters. Given mean \\(\\mu = %d\\), standard deviation \\(\\sigma = %d\\) and value \\(x = %d\\), substitute into the formula: \\(z = \\frac{%d - %d}{%d}\\).\n\nSubgoal 3: Evaluate and simplify. Compute the deviation in the numerator \\(%d - %d = %d\\) and divide by the standard deviation: \\(z = \\frac{%d}{%d} = %d\\). A value above the mean has a positive z-score and a value below the mean has a negative z-score.",
 		mean, sd, x, x, mean, sd,
 		x, mean, x-mean, x-mean, sd, k)
 
