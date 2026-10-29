@@ -12,7 +12,7 @@ client request cannot activate FIRe. A learner request cannot activate FIRe.
 The process configuration comes from these environment variables:
 
 - `MATHUA_FIRE_MODE=active`
-- `MATHUA_FIRE_ACK=I-ACKNOWLEDGE-FIRE-APPLIES-SCHEDULE-CHANGES`
+- `MATHUA_FIRE_ACK="I acknowledge that FIRe may apply schedule changes"`
 - `MATHUA_FIRE_COHORT=<stable cohort name>`
 - `MATHUA_FIRE_ALLOWLIST=<comma-separated student IDs>`
 
@@ -31,7 +31,7 @@ Run these commands with shell access to the deployment:
 ```text
 mathua fire status
 mathua fire report
-mathua fire activate --ack I-ACKNOWLEDGE-FIRE-APPLIES-SCHEDULE-CHANGES --cohort pilot --allowlist <id>,<id> --actor <email>
+mathua fire activate --ack "I acknowledge that FIRe may apply schedule changes" --cohort pilot --allowlist <id>,<id> --actor <email>
 mathua fire deactivate --actor <email>
 ```
 
@@ -60,7 +60,7 @@ Only an owner can call these endpoints with `content.manage`:
 The activation request body is:
 
 ```json
-{"ack":"I-ACKNOWLEDGE-FIRE-APPLIES-SCHEDULE-CHANGES","cohort":"pilot","allowlist":"<id>,<id>"}
+{"ack":"I acknowledge that FIRe may apply schedule changes","cohort":"pilot","allowlist":"<id>,<id>"}
 ```
 
 The durable row does not change the running process. Set the environment values

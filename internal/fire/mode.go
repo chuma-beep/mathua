@@ -26,7 +26,7 @@ const (
 
 // ActivationToken is the exact value the server requires before it will run
 // FIRe in active mode. A client-provided flag is never consulted.
-const ActivationToken = "I-ACKNOWLEDGE-FIRE-APPLIES-SCHEDULE-CHANGES"
+const ActivationToken = "I acknowledge that FIRe may apply schedule changes"
 
 // Config is the fully resolved FIRe startup configuration. Mode has already
 // failed closed to Shadow if Active was requested without its guards.

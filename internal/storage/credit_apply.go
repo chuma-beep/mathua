@@ -225,7 +225,11 @@ func (s *SQLiteStore) ApplyCredit(req CreditApplyRequest) (CreditApplication, er
 			out.Reason = reason
 			return nil
 		}
-		actualDue, _ := parseCreditTime(row.Due)
+		actualDue, ok := parseCreditTime(row.Due)
+		if !ok {
+			out.Reason = "no_due_date"
+			return nil
+		}
 		if actualDue.After(now) {
 			out.Reason = "not_due"
 			return nil
@@ -270,7 +274,11 @@ func (s *SQLiteStore) ApplyCredit(req CreditApplyRequest) (CreditApplication, er
 		if err != nil {
 			return fmt.Errorf("credit: update progress: %w", err)
 		}
-		if n, _ := res.RowsAffected(); n == 0 {
+		n, err := res.RowsAffected()
+		if err != nil {
+			return fmt.Errorf("credit: count progress update: %w", err)
+		}
+		if n == 0 {
 			out.Reason = "due_moved"
 			return nil
 		}
@@ -282,7 +290,11 @@ func (s *SQLiteStore) ApplyCredit(req CreditApplyRequest) (CreditApplication, er
 		if err != nil {
 			return fmt.Errorf("credit: consume ordinal: %w", err)
 		}
-		if n, _ := res.RowsAffected(); n == 0 {
+		n, err = res.RowsAffected()
+		if err != nil {
+			return fmt.Errorf("credit: count ordinal update: %w", err)
+		}
+		if n == 0 {
 			return fmt.Errorf("%w: ordinal %d changed", ErrCreditOrdinalStateChanged, ordinal)
 		}
 		_, err = conn.ExecContext(ctx, `
@@ -359,7 +371,11 @@ func (s *SQLiteStore) PreviewCredit(req CreditApplyRequest) (CreditApplication, 
 		out.Reason = reason
 		return out, nil
 	}
-	actualDue, _ := parseCreditTime(row.Due)
+	actualDue, ok := parseCreditTime(row.Due)
+	if !ok {
+		out.Reason = "no_due_date"
+		return out, nil
+	}
 	if actualDue.After(now) {
 		out.Reason = "not_due"
 		return out, nil
@@ -644,7 +660,11 @@ func (s *PostgresStore) ApplyCredit(req CreditApplyRequest) (CreditApplication, 
 		out.Reason = reason
 		return out, nil
 	}
-	actualDue, _ := parseCreditTime(row.Due)
+	actualDue, ok := parseCreditTime(row.Due)
+	if !ok {
+		out.Reason = "no_due_date"
+		return out, nil
+	}
 	if actualDue.After(now) {
 		out.Reason = "not_due"
 		return out, nil
@@ -699,7 +719,11 @@ func (s *PostgresStore) ApplyCredit(req CreditApplyRequest) (CreditApplication, 
 	if err != nil {
 		return out, fmt.Errorf("credit: update progress: %w", err)
 	}
-	if n, _ := res.RowsAffected(); n == 0 {
+	n, err := res.RowsAffected()
+	if err != nil {
+		return out, fmt.Errorf("credit: count progress update: %w", err)
+	}
+	if n == 0 {
 		out.Reason = "due_moved"
 		return out, nil
 	}
@@ -711,7 +735,11 @@ func (s *PostgresStore) ApplyCredit(req CreditApplyRequest) (CreditApplication, 
 	if err != nil {
 		return out, fmt.Errorf("credit: consume ordinal: %w", err)
 	}
-	if n, _ := res.RowsAffected(); n == 0 {
+	n, err = res.RowsAffected()
+	if err != nil {
+		return out, fmt.Errorf("credit: count ordinal update: %w", err)
+	}
+	if n == 0 {
 		return out, fmt.Errorf("%w: ordinal %d changed", ErrCreditOrdinalStateChanged, ordinal)
 	}
 	_, err = tx.ExecContext(ctx, `
@@ -795,7 +823,11 @@ func (s *PostgresStore) PreviewCredit(req CreditApplyRequest) (CreditApplication
 		out.Reason = reason
 		return out, nil
 	}
-	actualDue, _ := parseCreditTime(row.Due)
+	actualDue, ok := parseCreditTime(row.Due)
+	if !ok {
+		out.Reason = "no_due_date"
+		return out, nil
+	}
 	if actualDue.After(now) {
 		out.Reason = "not_due"
 		return out, nil
