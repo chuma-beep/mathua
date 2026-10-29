@@ -64,6 +64,22 @@ type CreditOrdinal struct {
 	Attempts          int
 }
 
+// CreditOrdinalDetail adds the owner to a banked ordinal for the read-only
+// dry-run report. It is separate so existing callers that only have a student
+// ID are unchanged.
+type CreditOrdinalDetail struct {
+	StudentID string
+	CreditOrdinal
+	// Target progress fields let an active caller avoid opening a transaction
+	// for a target whose due date is still in the future. ApplyCredit remains
+	// the authority; these fields are only a prefilter.
+	HasProgress     bool
+	TargetStatus    string
+	TargetDue       string
+	PlacementSeeded int
+	IsProvisional   int
+}
+
 // CreditAccount is the derived balance for one target in one epoch. Retained is
 // the sum of non-voided retained units; Banked counts every ordinal in the
 // epoch, including projected and stale ones, because MaxBank is a lifetime cap.
@@ -112,4 +128,82 @@ type CreditStore interface {
 	VoidCreditEvent(studentID, attemptID, conceptID, reason string) error
 	// GetBankedOrdinals returns the count of unprojected banked ordinals per concept for a student.
 	GetBankedOrdinals(studentID string) (map[string]int, error)
+}
+
+// CreditApplyRequest asks the store to apply at most one banked ordinal to one
+// target. The store verifies mode-independent eligibility and the due-date
+// baseline in the same transaction as the progress update.
+type CreditApplyRequest struct {
+	StudentID       string
+	TargetConceptID string
+	SourceConceptID string
+	SourceAttemptID string
+	Epoch           int64
+	Ordinal         int
+	// Cohort is the durable activation cohort the caller is running under.
+	// ApplyCredit checks it against fire_activations in the same transaction.
+	Cohort string
+	Now    time.Time
+}
+
+// CreditApplication is the committed or replayed result of applying one
+// ordinal. An ineligible request returns Applied=false with a Reason and no
+// write. The due dates are RFC3339 strings so both stores report one shape.
+type CreditApplication struct {
+	StudentID        string
+	TargetConceptID  string
+	SourceConceptID  string
+	SourceAttemptID  string
+	Epoch            int64
+	Ordinal          int
+	Applied          bool
+	Replayed         bool
+	Reason           string
+	ActualDue        string
+	ProposedDue      string
+	StabilityBefore  float64
+	StabilityAfter   float64
+	DifficultyBefore float64
+	DifficultyAfter  float64
+	ReviewsDeferred  int
+}
+
+// CreditOrdinalStore exposes the banked ordinal detail active mode needs to
+// derive a stable application key. It is optional so a shadow-only fake does
+// not have to implement it.
+type CreditOrdinalStore interface {
+	BankedOrdinalDetails(studentID string) ([]CreditOrdinalDetail, error)
+	AllBankedOrdinalDetails() ([]CreditOrdinalDetail, error)
+}
+
+// CreditApplyStore is the active-mode application surface. It is separate from
+// CreditStore so shadow-only stores and tests keep compiling without a second
+// implementation.
+type CreditApplyStore interface {
+	ApplyCredit(req CreditApplyRequest) (CreditApplication, error)
+	CreditApplications(studentID, targetConceptID string, limit int) ([]CreditApplication, error)
+}
+
+// CreditPreviewStore computes the same decision as ApplyCredit without writing.
+// It exists only for the dry-run command.
+type CreditPreviewStore interface {
+	PreviewCredit(req CreditApplyRequest) (CreditApplication, error)
+}
+
+// FireActivation is the durable, server-side activation record. Environment
+// variables can request Active, but only this record plus the fire.Config
+// allowlist can authorize application.
+type FireActivation struct {
+	Mode           string
+	Cohort         string
+	AcknowledgedBy string
+	AcknowledgedAt time.Time
+	UpdatedAt      time.Time
+	Revision       int64
+}
+
+// FireActivationStore persists the activation record and its audit history.
+type FireActivationStore interface {
+	GetFireActivation() (*FireActivation, error)
+	SetFireActivation(a FireActivation) (FireActivation, error)
 }

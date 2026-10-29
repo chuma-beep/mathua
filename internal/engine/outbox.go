@@ -23,6 +23,7 @@ type studyEffectPayload struct {
 	AttemptID  string   `json:"attempt_id,omitempty"`
 	ConceptIDs []string `json:"concept_ids,omitempty"`
 	Correct    bool     `json:"correct"`
+	Source     string   `json:"source,omitempty"`
 }
 
 func studyEffectJSON(p studyEffectPayload) string {
@@ -37,7 +38,7 @@ func studyEffectJSON(p studyEffectPayload) string {
 // studyEffectsFor lists the post-commit work in the order the outbox should
 // apply it. The rows are written in the same transaction as the answer, so a
 // crash after commit leaves durable work instead of a log line.
-func (e *Engine) studyEffectsFor(conceptID, attemptID string, correct, halted bool, remedial []string) []storage.StudyEffectInput {
+func (e *Engine) studyEffectsFor(source, conceptID, attemptID string, correct, halted bool, remedial []string) []storage.StudyEffectInput {
 	effects := []storage.StudyEffectInput{
 		{Effect: studyEffectPropagateWeakness},
 	}
@@ -48,6 +49,7 @@ func (e *Engine) studyEffectsFor(conceptID, attemptID string, correct, halted bo
 				ConceptID: conceptID,
 				AttemptID: attemptID,
 				Correct:   correct,
+				Source:    source,
 			}),
 		})
 	}
@@ -134,16 +136,26 @@ func (e *Engine) applyStudyEffect(effect storage.StudyAnswerEffect) error {
 	case studyEffectPropagateWeakness:
 		return e.propagateWeakness(effect.StudentID)
 	case studyEffectImplicitCredit:
+		if effect.Attempts > 0 {
+			e.fireStats.Retries.Add(1)
+		}
 		if e.fireMode == fire.Off {
 			// An effect queued before the mode changed must be drained, not
 			// retried forever. Off means no ledger write and no projection.
 			return nil
+		}
+		source := p.Source
+		if source == "" {
+			// Effects queued before source was recorded drained from the
+			// practice path they were written for.
+			source = "practice"
 		}
 		return e.allocateImplicitCreditErr(gradedAttempt{
 			studentID: effect.StudentID,
 			conceptID: p.ConceptID,
 			attemptID: p.AttemptID,
 			correct:   p.Correct,
+			source:    source,
 		})
 	case studyEffectProvisional:
 		_, err := e.CheckProvisionalFallback(effect.StudentID, p.ConceptID)

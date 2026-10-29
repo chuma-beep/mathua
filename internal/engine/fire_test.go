@@ -317,7 +317,7 @@ func TestEngine_FIRe_OffDoesNotAllocateOrQueueCredit(t *testing.T) {
 	if e.fireMode != fire.Off {
 		t.Fatalf("fire mode = %s, want off", e.fireMode)
 	}
-	for _, effect := range e.studyEffectsFor("adv", "attempt-off", true, false, nil) {
+	for _, effect := range e.studyEffectsFor("practice", "adv", "attempt-off", true, false, nil) {
 		if effect.Effect == studyEffectImplicitCredit {
 			t.Fatal("off mode queued an implicit_credit effect")
 		}

@@ -2,8 +2,11 @@ package engine
 
 import (
 	"fmt"
+	"log"
+	"strings"
 	"time"
 
+	"github.com/chuma-beep/mathua/internal/fire"
 	"github.com/chuma-beep/mathua/internal/mastery"
 	"github.com/chuma-beep/mathua/internal/scheduler"
 	"github.com/chuma-beep/mathua/internal/storage"
@@ -24,11 +27,119 @@ import (
 // well-spaced schedule precisely because spacing lets recall decay before the next review.
 const servedPerDayCap = 2
 
-// SatisfyImplicitReviews is intentionally inert while FIRe has no active mode.
-// Shadow records ledger observations; projection would write authoritative
-// progress, so it is not permitted. The method remains as the seam an active
-// mode would have to fill, and every serving path can keep calling it safely.
-func (e *Engine) SatisfyImplicitReviews(string) error { return nil }
+// SatisfyImplicitReviews applies at most one banked ordinal per eligible target
+// when FIRe is active and the learner is inside the activation cohort. Shadow
+// remains inert: recording an observation must never move a due date. The
+// application is durable, so a crash after commit cannot apply the same ordinal
+// twice and a crash before commit leaves it banked for a safe retry.
+func conflictReason(reason string) bool {
+	switch reason {
+	case "stale_baseline", "due_moved", "epoch_closed", "cohort_mismatch", "activation_unavailable":
+		return true
+	default:
+		return false
+	}
+}
+
+func (e *Engine) SatisfyImplicitReviews(studentID string) error {
+	if studentID == "" || e.fireMode != fire.Active || !e.fireConfig.ActiveFor(studentID) {
+		return nil
+	}
+	ordinals, ok := e.repo.(storage.CreditOrdinalStore)
+	if !ok {
+		return nil
+	}
+	applications, ok := e.repo.(storage.CreditApplyStore)
+	if !ok {
+		return nil
+	}
+	details, err := ordinals.BankedOrdinalDetails(studentID)
+	if err != nil {
+		return fmt.Errorf("load banked ordinals: %w", err)
+	}
+	// The store returns every banked ordinal. Filter to targets that can
+	// actually accept credit before opening a transaction, so a large backlog
+	// of future targets cannot starve a due one or make every question-serving
+	// call pay for transactions that can only answer not_due.
+	now := nowUTC()
+	seenTargets := make(map[string]bool)
+	applied := 0
+	for _, o := range details {
+		if !creditTargetReady(o, now) || seenTargets[o.ConceptID] {
+			continue
+		}
+		seenTargets[o.ConceptID] = true
+		req := storage.CreditApplyRequest{
+			StudentID:       studentID,
+			TargetConceptID: o.ConceptID,
+			SourceConceptID: "",
+			SourceAttemptID: fmt.Sprintf("fire-review:%s:%s:%d:%d", studentID, o.ConceptID, o.Epoch, o.Ordinal),
+			Epoch:           o.Epoch,
+			Ordinal:         o.Ordinal,
+			Cohort:          e.fireConfig.Cohort,
+			Now:             now,
+		}
+		start := time.Now()
+		res, err := applications.ApplyCredit(req)
+		e.fireStats.LatencyMicros.Add(time.Since(start).Microseconds())
+		e.fireStats.LatencyCount.Add(1)
+		if err != nil {
+			e.fireStats.Failures.Add(1)
+			log.Printf("warning: apply implicit credit %s/%s: %v", studentID, o.ConceptID, err)
+			continue
+		}
+		switch {
+		case res.Replayed:
+			e.fireStats.Replays.Add(1)
+		case res.Applied:
+			e.fireStats.Applications.Add(1)
+			e.fireStats.DueShifts.Add(1)
+			applied++
+			log.Printf("fire: applied ordinal %d to %s/%s, due %s -> %s", o.Ordinal, studentID, o.ConceptID, res.ActualDue, res.ProposedDue)
+		case conflictReason(res.Reason):
+			e.fireStats.Conflicts.Add(1)
+			log.Printf("fire: conflict on ordinal %d for %s/%s: %s", o.Ordinal, studentID, o.ConceptID, res.Reason)
+		case res.Reason != "":
+			// Waiting states such as not_due are expected while credit is
+			// banked and must not feed the conflict alert.
+			log.Printf("fire: deferred ordinal %d for %s/%s: %s", o.Ordinal, studentID, o.ConceptID, res.Reason)
+		}
+		if applied >= 32 {
+			break
+		}
+	}
+	return nil
+}
+
+// creditTargetReady is only a prefilter for SatisfyImplicitReviews. It mirrors
+// the cheap, time-dependent half of creditReasonEligible. ApplyCredit checks
+// the authoritative mode, activation, epoch and due baseline in its
+// transaction.
+func creditTargetReady(o storage.CreditOrdinalDetail, now time.Time) bool {
+	if !o.HasProgress || o.PlacementSeeded != 0 || o.IsProvisional != 0 {
+		return false
+	}
+	switch strings.ToUpper(strings.TrimSpace(o.TargetStatus)) {
+	case "MASTERED", "DECAYING":
+	default:
+		return false
+	}
+	due, ok := parseCreditDue(o.TargetDue)
+	return ok && !due.After(now)
+}
+
+func parseCreditDue(raw string) (time.Time, bool) {
+	raw = strings.TrimSpace(raw)
+	if raw == "" {
+		return time.Time{}, false
+	}
+	for _, layout := range []string{time.RFC3339Nano, time.RFC3339, "2006-01-02 15:04:05"} {
+		if t, err := time.Parse(layout, raw); err == nil {
+			return t.UTC(), true
+		}
+	}
+	return time.Time{}, false
+}
 
 // conceptSnapshots assembles the scheduler's view of a learner.
 //
@@ -46,6 +157,14 @@ func (e *Engine) conceptSnapshotsFrom(studentID string, progress map[string]*sto
 		}
 	}
 
+	banked := map[string]int{}
+	if studentID != "" {
+		if cs, ok := e.repo.(storage.CreditStore); ok {
+			if got, err := cs.GetBankedOrdinals(studentID); err == nil {
+				banked = got
+			}
+		}
+	}
 	snapshots := make(map[string]*scheduler.ConceptSnapshot, len(progress))
 	for cid, p := range progress {
 		reqStreak := 0
@@ -57,6 +176,10 @@ func (e *Engine) conceptSnapshotsFrom(studentID string, progress map[string]*sto
 		speed := 1.0
 		if speeds != nil && speeds[cid] != nil {
 			speed = speeds[cid].LearningSpeed
+		}
+		encompassed := false
+		if c := e.dag.Concept(cid); c != nil && len(c.Encompasses) > 0 {
+			encompassed = true
 		}
 		snapshots[cid] = &scheduler.ConceptSnapshot{
 			Status:         mastery.Status(p.Status),
@@ -76,6 +199,8 @@ func (e *Engine) conceptSnapshotsFrom(studentID string, progress map[string]*sto
 			FSRSStability:  p.FSRSStability,
 			FSRSDifficulty: p.FSRSDifficulty,
 			FSRSLastReview: p.FSRSLastReview,
+			BankedOrdinals: banked[cid],
+			Encompassed:    encompassed,
 		}
 	}
 	// Concepts never attempted still need a snapshot: prereqsMet returns false for a missing
@@ -86,6 +211,7 @@ func (e *Engine) conceptSnapshotsFrom(studentID string, progress map[string]*sto
 				Status:         mastery.StatusUnseen,
 				RequiredStreak: c.MasteryThreshold.Streak,
 				TimeThreshold:  c.MasteryThreshold.AvgTimeSeconds,
+				Encompassed:    len(c.Encompasses) > 0,
 			}
 		}
 	}

@@ -813,6 +813,8 @@ const (
 	ActionContentStatusChange = "CONTENT_STATUS_CHANGE"
 	ActionAnnouncementCreate  = "ANNOUNCEMENT_CREATE"
 	ActionAnnouncementUpdate  = "ANNOUNCEMENT_UPDATE"
+	ActionFireActivation      = "FIRE_ACTIVATION"
+	ActionFireDeactivation    = "FIRE_DEACTIVATION"
 )
 
 // Repository interface

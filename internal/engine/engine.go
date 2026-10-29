@@ -221,9 +221,12 @@ type Engine struct {
 	diag     *diagnostic.Engine
 	ll       *lessons.Loader
 	planner  *planning.Planner
-	// fireMode is resolved once at startup. The engine never reads the
-	// environment, so every path in this process sees the same mode.
-	fireMode fire.Mode
+	// fireConfig is resolved once at startup. The engine never reads the
+	// environment, so every path in this process sees the same mode and cohort.
+	fireConfig fire.Config
+	fireMode   fire.Mode
+	// fireStats holds process-local FIRe counters for the operator report.
+	fireStats FIReMetrics
 
 	mu         sync.Mutex
 	sessions   map[string]*activeSession
@@ -272,12 +275,23 @@ const maxQuizRemedial = 10
 type Option func(*Engine)
 
 // WithFIReMode sets the already-resolved FIRe mode. Parsing belongs at the
-// process edge, not here.
+// process edge, not here. Active must carry a config through WithFIReConfig;
+// this setter alone can never authorize an application because it has no
+// allowlist.
 func WithFIReMode(mode fire.Mode) Option {
 	return func(e *Engine) {
 		if mode == fire.Off || mode == fire.Shadow {
 			e.fireMode = mode
+			e.fireConfig.Mode = mode
 		}
+	}
+}
+
+// WithFIReConfig installs the fully resolved mode and activation cohort.
+func WithFIReConfig(cfg fire.Config) Option {
+	return func(e *Engine) {
+		e.fireConfig = cfg
+		e.fireMode = cfg.Mode
 	}
 }
 
@@ -295,6 +309,7 @@ func New(repo storage.Repository, dag *concepts.DAG, reg *generator.Registry, ll
 		ll:            ll,
 		planner:       planner,
 		fireMode:      fire.Shadow,
+		fireConfig:    fire.ParseConfig("shadow", "", "", ""),
 		sessions:      make(map[string]*activeSession),
 		activePath:    make(map[string]map[string]bool),
 		studyMisses:   make(map[string]int),
@@ -1460,6 +1475,7 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 		difficulty:     difficultyOrNil(sessionFields.questionDifficulty),
 		kpOrdinal:      sessionFields.kpOrdinal,
 		review:         sessionFields.isReview,
+		source:         sourceForTask(sessionFields.isReview),
 	}
 	// Review answers commit the progress transition, the attempt, the review
 	// event and XP in one transaction. Computing the transition here leaves the
@@ -1674,6 +1690,9 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 				log.Printf("warning: failed to add XP for student %s: %v", studentID, err)
 			}
 		}
+		// Credit is allocated only after the attempt is durable. A rejected or
+		// failed attempt record must not leave a banked ordinal behind.
+		e.allocateImplicitCredit(ga)
 	}
 
 	e.mu.Lock()
@@ -1975,6 +1994,7 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 		difficulty:     difficulty,
 		review:         false,
 		operation:      operation,
+		source:         sourceForTaskType(taskType),
 	}
 	var newStatus mastery.Status
 	var evidence mastery.Evidence
@@ -2219,7 +2239,7 @@ func (e *Engine) commitStudyAnswer(studentID, conceptID, submissionID, answer st
 		TopicSpeed:   topicSpeed,
 		XPAmount:     xp,
 		XPReason:     xpReasonForOperation(ga.operation),
-		Effects:      e.studyEffectsFor(conceptID, ga.attemptID, gr.Correct, halted, remedial),
+		Effects:      e.studyEffectsFor(ga.source, conceptID, ga.attemptID, gr.Correct, halted, remedial),
 	})
 	if err != nil {
 		return nil, err
@@ -3775,6 +3795,9 @@ type gradedAttempt struct {
 	// Practice, mastery checks and timed quizzes are mastery evidence, but
 	// they must not move the FSRS clock or create a review event.
 	review bool
+	// source is the stored attempt source: practice, review, quiz and so on.
+	// FIRe credit is only allocated from a qualifying practice attempt.
+	source string
 }
 
 // applyGradedAttempt is the single mastery authority.
@@ -4057,6 +4080,10 @@ func (e *Engine) applyGradedAttempt(progress *storage.ConceptProgress, o gradedA
 	if err := e.writeGradedProgress(progress, topicSpeed, kpUpdate, o); err != nil {
 		return status, evidence, err
 	}
+	// Legacy callers (the mastery check and direct tests) write progress and
+	// the attempt separately, so this is the earliest point the source is
+	// known. The production practice path allocates after RecordAttempt.
+	e.allocateImplicitCredit(o)
 	return status, evidence, nil
 }
 
@@ -4075,7 +4102,6 @@ func (e *Engine) writeGradedProgress(progress *storage.ConceptProgress, topicSpe
 	}
 	e.publishKPState(kpUpdate)
 	e.PropagateWeakness(o.studentID)
-	e.allocateImplicitCredit(o)
 	return nil
 }
 
@@ -4092,6 +4118,15 @@ func (e *Engine) allocateImplicitCreditErr(o gradedAttempt) error {
 	if e.fireMode == fire.Off || !o.correct || e.dag == nil {
 		return nil
 	}
+	// Only a persisted practice attempt may create credit. A mastery check,
+	// timed quiz, diagnostic, review retry or synthetic scaffold is evidence
+	// but not the downstream practice FIRe models.
+	if o.source != "" && o.source != "practice" {
+		return nil
+	}
+	if e.fireConfig.Mode == fire.Active && !e.fireConfig.ActiveFor(o.studentID) {
+		return nil
+	}
 	c := e.dag.Concept(o.conceptID)
 	if c == nil || len(c.Encompasses) == 0 {
 		return nil
@@ -4102,17 +4137,35 @@ func (e *Engine) allocateImplicitCreditErr(o gradedAttempt) error {
 	}
 	cands := make([]storage.CreditCandidate, 0, len(c.Encompasses))
 	for _, eid := range c.Encompasses {
+		if eid == o.conceptID {
+			continue
+		}
 		cands = append(cands, storage.CreditCandidate{
 			ConceptID: eid,
 			RawUnits:  repetition.Micro,
 		})
 	}
+	if len(cands) == 0 {
+		return nil
+	}
 	attemptKey := o.attemptID
 	if attemptKey == "" {
 		attemptKey = fmt.Sprintf("attempt:%s:%s:%d", o.studentID, o.conceptID, nowUTC().UnixNano())
 	}
-	if _, _, err := cs.AllocateCredit(o.studentID, attemptKey, 0, cands); err != nil {
+	start := time.Now()
+	_, fresh, err := cs.AllocateCredit(o.studentID, attemptKey, 0, cands)
+	e.fireStats.LatencyMicros.Add(time.Since(start).Microseconds())
+	e.fireStats.LatencyCount.Add(1)
+	if err != nil {
+		e.fireStats.Failures.Add(1)
 		return err
+	}
+	if fresh {
+		e.fireStats.Allocations.Add(1)
+	} else {
+		e.fireStats.Replays.Add(1)
+		// A retry found the durable allocation. That is the intended
+		// idempotent outcome, not a new observation.
 	}
 	// Shadow records the observation and stops. SatisfyImplicitReviews is
 	// deliberately not called: projecting here would move a due date.

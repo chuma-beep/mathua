@@ -459,6 +459,38 @@ CREATE TABLE IF NOT EXISTS implicit_credit_ordinals (
     PRIMARY KEY (student_id, target_concept_id, credit_epoch, ordinal)
 );
 
+CREATE TABLE IF NOT EXISTS implicit_credit_applications (
+    student_id        TEXT   NOT NULL,
+    target_concept_id TEXT   NOT NULL,
+    credit_epoch      BIGINT NOT NULL,
+    ordinal           INTEGER NOT NULL,
+    source_concept_id TEXT   NOT NULL DEFAULT '',
+    source_attempt_id TEXT   NOT NULL,
+    applied_at        BIGINT NOT NULL,
+    actual_due        TEXT   NOT NULL DEFAULT '',
+    proposed_due      TEXT   NOT NULL DEFAULT '',
+    stability_before  DOUBLE PRECISION,
+    stability_after   DOUBLE PRECISION,
+    difficulty_before DOUBLE PRECISION,
+    difficulty_after  DOUBLE PRECISION,
+    reviews_deferred  INTEGER NOT NULL DEFAULT 0,
+    PRIMARY KEY (student_id, target_concept_id, credit_epoch, ordinal),
+    UNIQUE (student_id, source_attempt_id, target_concept_id, credit_epoch)
+);
+
+CREATE INDEX IF NOT EXISTS idx_credit_applications_attempt
+    ON implicit_credit_applications(student_id, source_attempt_id);
+
+CREATE TABLE IF NOT EXISTS fire_activations (
+    id              TEXT PRIMARY KEY,
+    mode            TEXT NOT NULL,
+    cohort          TEXT NOT NULL,
+    acknowledged_by TEXT NOT NULL,
+    acknowledged_at BIGINT NOT NULL,
+    updated_at      BIGINT NOT NULL,
+    revision        BIGINT NOT NULL
+);
+
 -- Targeted remedial queue: 2-miss halt remedial prerequisites survive restarts.
 CREATE TABLE IF NOT EXISTS student_remedial_queue (
     student_id TEXT NOT NULL,
@@ -1786,6 +1818,10 @@ func (s *PostgresStore) ResetProgress(studentID string) error {
 	if err != nil {
 		return fmt.Errorf("begin progress reset: %w", err)
 	}
+	if err := lockStudentCreditTx(context.Background(), tx, studentID); err != nil {
+		tx.Rollback()
+		return err
+	}
 	exec := func(stmt string, args ...interface{}) error {
 		if _, err := tx.Exec(stmt, args...); err != nil {
 			tx.Rollback()
@@ -1802,6 +1838,11 @@ func (s *PostgresStore) ResetProgress(studentID string) error {
 		{"DELETE FROM study_answer_effects WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM active_sessions WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM sessions WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM implicit_credit_applications WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM implicit_credit_ordinals WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM implicit_credit_events WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM implicit_credit_allocations WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM implicit_credit_targets WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM concept_progress WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM student_topic_speed WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM quiz_completions WHERE student_id = $1", []interface{}{studentID}},
@@ -1831,6 +1872,10 @@ func (s *PostgresStore) DeleteAccount(studentID string) error {
 	if err != nil {
 		return fmt.Errorf("begin account delete: %w", err)
 	}
+	if err := lockStudentCreditTx(context.Background(), tx, studentID); err != nil {
+		tx.Rollback()
+		return err
+	}
 	exec := func(stmt string, args ...interface{}) error {
 		if _, err := tx.Exec(stmt, args...); err != nil {
 			tx.Rollback()
@@ -1852,6 +1897,11 @@ func (s *PostgresStore) DeleteAccount(studentID string) error {
 		{"DELETE FROM study_answer_effects WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM active_sessions WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM sessions WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM implicit_credit_applications WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM implicit_credit_ordinals WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM implicit_credit_events WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM implicit_credit_allocations WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM implicit_credit_targets WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM concept_progress WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM student_topic_speed WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM quiz_completions WHERE student_id = $1", []interface{}{studentID}},
