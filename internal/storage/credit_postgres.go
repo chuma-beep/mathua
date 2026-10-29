@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/chuma-beep/mathua/internal/repetition"
@@ -20,6 +21,9 @@ import (
 var _ CreditStore = (*PostgresStore)(nil)
 
 func (s *PostgresStore) pgTargetEpoch(ctx context.Context, tx *sql.Tx, studentID, conceptID string) (int64, error) {
+	if err := lockStudentCreditTx(ctx, tx, studentID); err != nil {
+		return 0, err
+	}
 	if _, err := tx.ExecContext(ctx, `
 		INSERT INTO implicit_credit_targets (student_id, target_concept_id, credit_epoch, created_at)
 		VALUES ($1, $2, 1, $3)
@@ -36,6 +40,23 @@ func (s *PostgresStore) pgTargetEpoch(ctx context.Context, tx *sql.Tx, studentID
 		return 0, fmt.Errorf("credit: lock target: %w", err)
 	}
 	return epoch, nil
+}
+
+// lockStudentCreditTx serialises every credit write for one learner with
+// ResetProgress and DeleteAccount. Row locks on credit tables alone are not
+// enough: reset deletes those rows before the progress row, so an application
+// that already held its ordinal could insert its audit row after reset had
+// swept applications. The advisory lock is taken first by every writer, so
+// reset either runs before the application (which then finds no target) or
+// after it (which then removes the application with the rest of the credit).
+func lockStudentCreditTx(ctx context.Context, tx *sql.Tx, studentID string) error {
+	if strings.TrimSpace(studentID) == "" {
+		return fmt.Errorf("credit: empty student")
+	}
+	if _, err := tx.ExecContext(ctx, `SELECT pg_advisory_xact_lock(hashtextextended($1, 0))`, studentID); err != nil {
+		return fmt.Errorf("credit: lock student: %w", err)
+	}
+	return nil
 }
 
 func (s *PostgresStore) pgAccount(ctx context.Context, q interface {
@@ -81,6 +102,9 @@ func (s *PostgresStore) AllocateCredit(studentID, attemptID string, epoch int64,
 		return out, false, err
 	}
 	defer tx.Rollback()
+	if err := lockStudentCreditTx(ctx, tx, studentID); err != nil {
+		return out, false, err
+	}
 
 	var marker int
 	err = tx.QueryRowContext(ctx, `
@@ -254,6 +278,9 @@ func (s *PostgresStore) ProjectCredit(studentID, conceptID string, epoch int64, 
 		return nil, err
 	}
 	defer tx.Rollback()
+	if err := lockStudentCreditTx(ctx, tx, studentID); err != nil {
+		return nil, err
+	}
 
 	if epoch <= 0 {
 		var err error
@@ -402,6 +429,9 @@ func (s *PostgresStore) ResetCreditEpoch(studentID, conceptID string) (int64, er
 		return 0, err
 	}
 	defer tx.Rollback()
+	if err := lockStudentCreditTx(ctx, tx, studentID); err != nil {
+		return 0, err
+	}
 
 	epoch, err := s.pgTargetEpoch(ctx, tx, studentID, conceptID)
 	if err != nil {
@@ -433,6 +463,9 @@ func (s *PostgresStore) VoidCreditEvent(studentID, attemptID, conceptID, reason 
 		return err
 	}
 	defer tx.Rollback()
+	if err := lockStudentCreditTx(ctx, tx, studentID); err != nil {
+		return err
+	}
 
 	epoch, err := s.pgTargetEpoch(ctx, tx, studentID, conceptID)
 	if err != nil {

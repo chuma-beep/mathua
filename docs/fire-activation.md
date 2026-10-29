@@ -80,6 +80,51 @@ An implicit review is a scheduling event. It is not evidence that the learner
 answered correctly. It does not change XP, attempts, streak, mastery status,
 weakness, placement state or the source concept.
 
+## Scheduler read paths
+
+Four read paths call `SatisfyImplicitReviews` for an allowlisted learner:
+
+- `NextQuestion`, when a study or practice question is served.
+- `NextReviewQuestion`, when a spaced-review question is served.
+- `ReviewsDue`, when the profile or dashboard reads the due count.
+- `conceptSnapshots`, when the recommender builds its view.
+
+Each call applies at most one ordinal per target and at most 32 ordinals in
+total. A repeated read cannot apply the same ordinal twice: the ordinal moves
+from `banked` to `projected`, the application key is unique and a retry reads
+the stored row. A storage failure is logged and the ordinary learning response
+continues. The next read can retry the same banked ordinal.
+
+The 32-application bound is per call, not per lifetime. A large bank drains over
+successive reads. The prefilter skips future and ineligible targets before a
+transaction is opened, so a backlog of future targets cannot starve a due one.
+
+## Explicit review precedence
+
+A later explicit review is real learner evidence and takes precedence over an
+earlier implicit application. If an explicit review commits first, the
+application's due-baseline check sees the moved date and returns `stale_baseline`
+without writing. If an application commits first, the explicit review runs from
+the new schedule and can shorten or extend it. In both cases the application row
+remains the audit record of what FIRe changed.
+
+A retry cannot apply one ordinal twice, and an application cannot overwrite a
+newer explicit review because the progress update is conditional on the exact
+due date it read.
+
+## Reset, deletion and activation races
+
+On PostgreSQL every credit writer takes a per-student transaction advisory lock
+before touching a credit table. `ResetProgress` and `DeleteAccount` take the same
+lock. On SQLite the write transaction serialises them. The result is that a
+reset either runs before the application, so the application finds no target and
+writes nothing, or after it, so the reset removes the application with the rest
+of the learner's credit. A reset cannot leave an application row behind.
+
+The row update increments the activation revision and returns it with
+`RETURNING`. Two concurrent operator changes cannot both write the same revision
+number.
+
 ## Metrics
 
 `GET /api/admin/fire` returns process counters:

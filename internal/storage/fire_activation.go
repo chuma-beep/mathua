@@ -73,22 +73,23 @@ func (a fireActivationAccess) set(in FireActivation) (FireActivation, error) {
 		return FireActivation{}, err
 	}
 	defer tx.Rollback()
+	// The revision is part of the audit trail, so it must advance once per
+	// accepted change. Reading it first and writing revision+1 lets two
+	// operators read the same value and commit the same revision. RETURNING
+	// makes the increment happen in the row update itself on both engines.
 	var revision int64
-	_ = tx.QueryRowContext(context.Background(), a.rebind(`
-		SELECT revision FROM fire_activations WHERE id = ?
-	`), fireActivationID).Scan(&revision)
-	revision++
-	_, err = tx.ExecContext(context.Background(), a.rebind(`
+	err = tx.QueryRowContext(context.Background(), a.rebind(`
 		INSERT INTO fire_activations (id, mode, cohort, acknowledged_by, acknowledged_at, updated_at, revision)
-		VALUES (?, ?, ?, ?, ?, ?, ?)
+		VALUES (?, ?, ?, ?, ?, ?, 1)
 		ON CONFLICT(id) DO UPDATE SET
 			mode = excluded.mode,
 			cohort = excluded.cohort,
 			acknowledged_by = excluded.acknowledged_by,
 			acknowledged_at = excluded.acknowledged_at,
 			updated_at = excluded.updated_at,
-			revision = excluded.revision
-	`), fireActivationID, mode, cohort, by, ackAt.UnixNano(), now.UnixNano(), revision)
+			revision = fire_activations.revision + 1
+		RETURNING revision
+	`), fireActivationID, mode, cohort, by, ackAt.UnixNano(), now.UnixNano()).Scan(&revision)
 	if err != nil {
 		return FireActivation{}, fmt.Errorf("fire activation: write: %w", err)
 	}

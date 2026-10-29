@@ -197,3 +197,230 @@ func TestFIReActiveDoesNotStarveADueTargetBehindFutureTargets(t *testing.T) {
 		t.Fatalf("future target was moved: %v", future.NextReviewDue)
 	}
 }
+
+type fireApplyFailureStore struct {
+	storage.Repository
+	ordinals storage.CreditOrdinalStore
+	apply    storage.CreditApplyStore
+	err      error
+}
+
+func (s fireApplyFailureStore) BankedOrdinalDetails(studentID string) ([]storage.CreditOrdinalDetail, error) {
+	return s.ordinals.BankedOrdinalDetails(studentID)
+}
+
+func (s fireApplyFailureStore) AllBankedOrdinalDetails() ([]storage.CreditOrdinalDetail, error) {
+	return s.ordinals.AllBankedOrdinalDetails()
+}
+
+func (s fireApplyFailureStore) CreditApplications(studentID, targetConceptID string, limit int) ([]storage.CreditApplication, error) {
+	return s.apply.CreditApplications(studentID, targetConceptID, limit)
+}
+
+func (s fireApplyFailureStore) ApplyCredit(storage.CreditApplyRequest) (storage.CreditApplication, error) {
+	return storage.CreditApplication{}, s.err
+}
+
+func TestFIReRepeatedReadsApplyOneOrdinalOnce(t *testing.T) {
+	e, repo := fireEngine(t)
+	st, err := e.CreateStudent("repeat reader")
+	if err != nil {
+		t.Fatalf("create student: %v", err)
+	}
+	e.fireConfig = fire.Config{Mode: fire.Active, Cohort: "test", Allow: map[string]struct{}{st.ID: {}}}
+	e.fireMode = fire.Active
+	now := time.Now().UTC()
+	if _, err := e.SetFIReActivation(storage.FireActivation{
+		Mode: string(fire.Active), Cohort: "test", AcknowledgedBy: "test",
+		AcknowledgedAt: now, UpdatedAt: now,
+	}); err != nil {
+		t.Fatalf("activate: %v", err)
+	}
+	due := now.AddDate(0, 0, -1)
+	seedFireTarget(t, repo, st.ID, "prereq", due)
+	if _, _, err := repo.(storage.CreditStore).AllocateCredit(st.ID, "attempt-repeat", 1, []storage.CreditCandidate{{ConceptID: "prereq", RawUnits: repetition.Micro}}); err != nil {
+		t.Fatalf("allocate: %v", err)
+	}
+	for i := 0; i < 5; i++ {
+		if _, err := e.ReviewsDue(st.ID); err != nil {
+			t.Fatalf("reviews due %d: %v", i, err)
+		}
+	}
+	apps, err := repo.(storage.CreditApplyStore).CreditApplications(st.ID, "prereq", 10)
+	if err != nil {
+		t.Fatalf("applications: %v", err)
+	}
+	if len(apps) != 1 {
+		t.Fatalf("repeated reads applied %d ordinals, want 1", len(apps))
+	}
+	after, err := repo.GetProgress(st.ID, "prereq")
+	if err != nil {
+		t.Fatalf("progress: %v", err)
+	}
+	if after.NextReviewDue == nil || !after.NextReviewDue.After(due.Truncate(time.Second)) {
+		t.Fatalf("due did not move exactly once: %v", after.NextReviewDue)
+	}
+}
+
+func TestFIReSatisfyIsBoundedPerRead(t *testing.T) {
+	e, repo := fireEngine(t)
+	st, err := e.CreateStudent("bounded reader")
+	if err != nil {
+		t.Fatalf("create student: %v", err)
+	}
+	e.fireConfig = fire.Config{Mode: fire.Active, Cohort: "test", Allow: map[string]struct{}{st.ID: {}}}
+	e.fireMode = fire.Active
+	now := time.Now().UTC()
+	if _, err := e.SetFIReActivation(storage.FireActivation{
+		Mode: string(fire.Active), Cohort: "test", AcknowledgedBy: "test",
+		AcknowledgedAt: now, UpdatedAt: now,
+	}); err != nil {
+		t.Fatalf("activate: %v", err)
+	}
+	due := now.AddDate(0, 0, -1)
+	for i := 0; i < 35; i++ {
+		conceptID := fmt.Sprintf("due-%02d", i)
+		seedFireTarget(t, repo, st.ID, conceptID, due)
+		if _, _, err := repo.(storage.CreditStore).AllocateCredit(st.ID, "attempt-"+conceptID, 1, []storage.CreditCandidate{{ConceptID: conceptID, RawUnits: repetition.Micro}}); err != nil {
+			t.Fatalf("allocate %s: %v", conceptID, err)
+		}
+	}
+	if err := e.SatisfyImplicitReviews(st.ID); err != nil {
+		t.Fatalf("first satisfy: %v", err)
+	}
+	apps, err := repo.(storage.CreditApplyStore).CreditApplications(st.ID, "", 100)
+	if err != nil {
+		t.Fatalf("applications: %v", err)
+	}
+	if len(apps) != 32 {
+		t.Fatalf("first read applied %d, want 32", len(apps))
+	}
+	if err := e.SatisfyImplicitReviews(st.ID); err != nil {
+		t.Fatalf("second satisfy: %v", err)
+	}
+	apps, err = repo.(storage.CreditApplyStore).CreditApplications(st.ID, "", 100)
+	if err != nil {
+		t.Fatalf("applications after second: %v", err)
+	}
+	if len(apps) != 35 {
+		t.Fatalf("second read left %d applications, want 35", len(apps))
+	}
+}
+
+func TestFIReApplyFailureDoesNotBreakLearningReads(t *testing.T) {
+	e, repo := fireEngine(t)
+	st, err := e.CreateStudent("failure reader")
+	if err != nil {
+		t.Fatalf("create student: %v", err)
+	}
+	e.fireConfig = fire.Config{Mode: fire.Active, Cohort: "test", Allow: map[string]struct{}{st.ID: {}}}
+	e.fireMode = fire.Active
+	now := time.Now().UTC()
+	if _, err := e.SetFIReActivation(storage.FireActivation{
+		Mode: string(fire.Active), Cohort: "test", AcknowledgedBy: "test",
+		AcknowledgedAt: now, UpdatedAt: now,
+	}); err != nil {
+		t.Fatalf("activate: %v", err)
+	}
+	due := now.AddDate(0, 0, -1)
+	seedFireTarget(t, repo, st.ID, "prereq", due)
+	if _, _, err := repo.(storage.CreditStore).AllocateCredit(st.ID, "attempt-failure", 1, []storage.CreditCandidate{{ConceptID: "prereq", RawUnits: repetition.Micro}}); err != nil {
+		t.Fatalf("allocate: %v", err)
+	}
+	e.repo = fireApplyFailureStore{
+		Repository: repo,
+		ordinals:   repo.(storage.CreditOrdinalStore),
+		apply:      repo.(storage.CreditApplyStore),
+		err:        fmt.Errorf("injected apply failure"),
+	}
+	if _, err := e.ReviewsDue(st.ID); err != nil {
+		t.Fatalf("reviews due failed after apply error: %v", err)
+	}
+	sess, err := repo.CreateSession(st.ID)
+	if err != nil {
+		t.Fatalf("create session: %v", err)
+	}
+	if _, err := e.NextQuestion(sess.ID, st.ID); err != nil {
+		t.Fatalf("next question failed after apply error: %v", err)
+	}
+}
+
+func seedFireTarget(t *testing.T, repo storage.Repository, studentID, conceptID string, due time.Time) {
+	t.Helper()
+	last := due.AddDate(0, 0, -10)
+	stability := 4.0
+	difficulty := 5.0
+	if err := repo.UpsertProgress(&storage.ConceptProgress{
+		StudentID: studentID, ConceptID: conceptID, Status: string(mastery.StatusMastered),
+		Streak: 3, BestStreak: 4, Attempts: 9, LastAttempted: &last, LastReviewed: &last,
+		NextReviewDue: &due, SM2Repetitions: 3, SM2Interval: 10, SM2EFactor: 2.5,
+		MasteredAt: &last, FSRSStability: &stability, FSRSDifficulty: &difficulty, FSRSLastReview: &last,
+	}); err != nil {
+		t.Fatalf("seed %s: %v", conceptID, err)
+	}
+}
+
+func TestFIReApplicationDoesNotBlockALaterExplicitReview(t *testing.T) {
+	e, repo := fireEngine(t)
+	st, err := e.CreateStudent("explicit review learner")
+	if err != nil {
+		t.Fatalf("create student: %v", err)
+	}
+	e.fireConfig = fire.Config{Mode: fire.Active, Cohort: "test", Allow: map[string]struct{}{st.ID: {}}}
+	e.fireMode = fire.Active
+	now := time.Now().UTC()
+	if _, err := e.SetFIReActivation(storage.FireActivation{
+		Mode: string(fire.Active), Cohort: "test", AcknowledgedBy: "test",
+		AcknowledgedAt: now, UpdatedAt: now,
+	}); err != nil {
+		t.Fatalf("activate: %v", err)
+	}
+	due := now.Add(-time.Hour)
+	seedFireTarget(t, repo, st.ID, "prereq", due)
+	if _, _, err := repo.(storage.CreditStore).AllocateCredit(st.ID, "attempt-explicit", 1, []storage.CreditCandidate{{ConceptID: "prereq", RawUnits: repetition.Micro}}); err != nil {
+		t.Fatalf("allocate: %v", err)
+	}
+	if err := e.SatisfyImplicitReviews(st.ID); err != nil {
+		t.Fatalf("satisfy: %v", err)
+	}
+	afterFIRe, err := repo.GetProgress(st.ID, "prereq")
+	if err != nil {
+		t.Fatalf("progress after fire: %v", err)
+	}
+	if afterFIRe.NextReviewDue == nil || !afterFIRe.NextReviewDue.After(now) {
+		t.Fatalf("fire did not schedule a review: %v", afterFIRe.NextReviewDue)
+	}
+	// Simulate time reaching the FIRe-proposed due date, then let the learner
+	// answer the review explicitly. The review is real evidence and owns the
+	// schedule from here; the FIRe row remains the audit of what it changed.
+	dueNow := time.Now().UTC().Add(-time.Second)
+	afterFIRe.NextReviewDue = &dueNow
+	if err := repo.UpsertProgress(afterFIRe); err != nil {
+		t.Fatalf("make review due: %v", err)
+	}
+	sess, err := repo.CreateSession(st.ID)
+	if err != nil {
+		t.Fatalf("create session: %v", err)
+	}
+	q, err := e.NextReviewQuestion(sess.ID, st.ID)
+	if err != nil || q == nil {
+		t.Fatalf("next review: %v, %v", q, err)
+	}
+	if _, err := e.SubmitAnswer(sess.ID, st.ID, q.AttemptID, "10", 5); err != nil {
+		t.Fatalf("submit review: %v", err)
+	}
+	afterReview, err := repo.GetProgress(st.ID, "prereq")
+	if err != nil {
+		t.Fatalf("progress after review: %v", err)
+	}
+	if afterReview.NextReviewDue == nil || !afterReview.NextReviewDue.After(dueNow) {
+		t.Fatalf("explicit review did not take precedence: %v", afterReview.NextReviewDue)
+	}
+	apps, err := repo.(storage.CreditApplyStore).CreditApplications(st.ID, "prereq", 10)
+	if err != nil {
+		t.Fatalf("applications: %v", err)
+	}
+	if len(apps) != 1 {
+		t.Fatalf("applications = %d, want the one FIRe row", len(apps))
+	}
+}

@@ -1,13 +1,17 @@
 package storage
 
 import (
+	"context"
 	"crypto/sha256"
+	"database/sql"
 	"encoding/hex"
 	"os"
 	"path/filepath"
+	"sync"
 	"testing"
 	"time"
 
+	"github.com/chuma-beep/mathua/internal/fsrs"
 	"github.com/chuma-beep/mathua/internal/mastery"
 	"github.com/chuma-beep/mathua/internal/repetition"
 )
@@ -501,6 +505,239 @@ func TestCreditBaselineComparesInstantsNotStringShapes(t *testing.T) {
 		t.Run(tc.name, func(t *testing.T) {
 			if got := creditBaselineMatches(tc.baseline, tc.actual); got != tc.want {
 				t.Fatalf("creditBaselineMatches(%q, %q) = %v, want %v", tc.baseline, tc.actual, got, tc.want)
+			}
+		})
+	}
+}
+
+func holdCreditRaceLock(t *testing.T, repo Repository, studentID string) func() {
+	t.Helper()
+	ctx := context.Background()
+	switch s := repo.(type) {
+	case *SQLiteStore:
+		conn, err := s.db.Conn(ctx)
+		if err != nil {
+			t.Fatalf("lock connection: %v", err)
+		}
+		if _, err := conn.ExecContext(ctx, "BEGIN IMMEDIATE"); err != nil {
+			conn.Close()
+			t.Fatalf("begin immediate: %v", err)
+		}
+		return func() {
+			_, _ = conn.ExecContext(ctx, "COMMIT")
+			_ = conn.Close()
+		}
+	case *PostgresStore:
+		tx, err := s.db.BeginTx(ctx, nil)
+		if err != nil {
+			t.Fatalf("lock transaction: %v", err)
+		}
+		if _, err := tx.ExecContext(ctx, `SELECT pg_advisory_xact_lock(hashtextextended($1, 0))`, studentID); err != nil {
+			tx.Rollback()
+			t.Fatalf("advisory lock: %v", err)
+		}
+		return func() { _ = tx.Rollback() }
+	default:
+		t.Fatalf("unsupported store %T", repo)
+		return func() {}
+	}
+}
+
+func TestCreditCannotBeRecreatedByResetOrDeleteRace(t *testing.T) {
+	for name, repo := range creditStores(t) {
+		for _, action := range []string{"reset", "delete"} {
+			t.Run(name+"/"+action, func(t *testing.T) {
+				alloc, apply, _ := creditApplyStore(t, repo)
+				activateCreditTest(t, repo, "test")
+				st := seedStudent(t, repo)
+				now := time.Now().UTC()
+				seedMasteredTarget(t, repo, st.ID, "target", now.AddDate(0, 0, -1))
+				if _, _, err := alloc.AllocateCredit(st.ID, "attempt-race-reset", 1, []CreditCandidate{{ConceptID: "target", RawUnits: repetition.Micro}}); err != nil {
+					t.Fatalf("allocate: %v", err)
+				}
+
+				release := holdCreditRaceLock(t, repo, st.ID)
+				started := make(chan struct{})
+				var wg sync.WaitGroup
+				wg.Add(2)
+				go func() {
+					defer wg.Done()
+					close(started)
+					var err error
+					if action == "reset" {
+						err = repo.ResetProgress(st.ID)
+					} else {
+						err = repo.DeleteAccount(st.ID)
+					}
+					if err != nil {
+						t.Errorf("%s: %v", action, err)
+					}
+				}()
+				<-started
+				time.Sleep(10 * time.Millisecond)
+				go func() {
+					defer wg.Done()
+					_, _ = apply.ApplyCredit(CreditApplyRequest{
+						StudentID: st.ID, TargetConceptID: "target", SourceConceptID: "source",
+						SourceAttemptID: "attempt-race-reset", Epoch: 1, Cohort: "test", Now: now,
+					})
+				}()
+				time.Sleep(10 * time.Millisecond)
+				release()
+
+				done := make(chan struct{})
+				go func() { wg.Wait(); close(done) }()
+				select {
+				case <-done:
+				case <-time.After(10 * time.Second):
+					t.Fatal("reset/delete and application did not finish")
+				}
+
+				apps, err := apply.CreditApplications(st.ID, "target", 10)
+				if err != nil {
+					t.Fatalf("applications: %v", err)
+				}
+				if len(apps) != 0 {
+					t.Fatalf("credit was recreated after %s: %+v", action, apps)
+				}
+				ordinals, err := repo.(CreditOrdinalStore).BankedOrdinalDetails(st.ID)
+				if err != nil {
+					t.Fatalf("ordinals: %v", err)
+				}
+				if len(ordinals) != 0 {
+					t.Fatalf("ordinals survived %s: %+v", action, ordinals)
+				}
+				progress, err := repo.GetProgress(st.ID, "target")
+				if err != nil {
+					t.Fatalf("progress: %v", err)
+				}
+				if progress != nil {
+					t.Fatalf("progress survived %s: %+v", action, progress)
+				}
+			})
+		}
+	}
+}
+
+func TestApplyCreditRejectsAStaleOrdinalBaseline(t *testing.T) {
+	for name, repo := range creditStores(t) {
+		t.Run(name, func(t *testing.T) {
+			alloc, apply, _ := creditApplyStore(t, repo)
+			activateCreditTest(t, repo, "test")
+			st := seedStudent(t, repo)
+			now := time.Now().UTC()
+			oldDue := now.AddDate(0, 0, -2).Truncate(time.Second)
+			p := seedMasteredTarget(t, repo, st.ID, "target", oldDue)
+			if _, _, err := alloc.AllocateCredit(st.ID, "attempt-stale", 1, []CreditCandidate{{ConceptID: "target", RawUnits: repetition.Micro}}); err != nil {
+				t.Fatalf("allocate: %v", err)
+			}
+			var err error
+			switch s := repo.(type) {
+			case *SQLiteStore:
+				_, err = s.db.Exec(`UPDATE implicit_credit_ordinals SET baseline_due = ? WHERE student_id = ? AND target_concept_id = ?`, oldDue.Format(time.RFC3339), st.ID, "target")
+			case *PostgresStore:
+				_, err = s.db.Exec(`UPDATE implicit_credit_ordinals SET baseline_due = $1 WHERE student_id = $2 AND target_concept_id = $3`, oldDue.Format(time.RFC3339), st.ID, "target")
+			}
+			if err != nil {
+				t.Fatalf("set baseline: %v", err)
+			}
+			newer := now.Add(-time.Hour).Truncate(time.Second)
+			p.NextReviewDue = &newer
+			p.FSRSLastReview = &now
+			if err := repo.UpsertProgress(p); err != nil {
+				t.Fatalf("move due: %v", err)
+			}
+			res, err := apply.ApplyCredit(CreditApplyRequest{
+				StudentID: st.ID, TargetConceptID: "target", SourceConceptID: "source",
+				SourceAttemptID: "attempt-stale", Epoch: 1, Cohort: "test", Now: now,
+			})
+			if err != nil {
+				t.Fatalf("apply: %v", err)
+			}
+			if res.Applied || res.Reason != "stale_baseline" {
+				t.Fatalf("result = %+v, want stale_baseline", res)
+			}
+			after, err := repo.GetProgress(st.ID, "target")
+			if err != nil {
+				t.Fatalf("progress: %v", err)
+			}
+			if after.NextReviewDue == nil || !after.NextReviewDue.Equal(newer) {
+				t.Fatalf("newer schedule was overwritten: %v", after.NextReviewDue)
+			}
+		})
+	}
+}
+
+func TestCreditNextStateUsesTheFirstReviewBranch(t *testing.T) {
+	now := time.Date(2026, 10, 29, 12, 0, 0, 0, time.UTC)
+	due := now.AddDate(0, 0, -1)
+	row := creditTargetRow{
+		Status:      "MASTERED",
+		Due:         sql.NullString{String: due.Format(time.RFC3339), Valid: true},
+		SM2Interval: 0,
+	}
+	stability, difficulty, next, err := creditNextState(row, due, now)
+	if err != nil {
+		t.Fatalf("creditNextState: %v", err)
+	}
+	p := fsrs.DefaultParameters()
+	if stability != p.InitialStability(fsrs.Good) {
+		t.Fatalf("stability = %v, want initial Good %v", stability, p.InitialStability(fsrs.Good))
+	}
+	if difficulty != p.InitialDifficulty(fsrs.Good) {
+		t.Fatalf("difficulty = %v, want initial Good %v", difficulty, p.InitialDifficulty(fsrs.Good))
+	}
+	if !next.After(now) {
+		t.Fatalf("next due = %v, want after now", next)
+	}
+}
+
+func TestPostgresResetAndDeleteTakeTheStudentCreditLock(t *testing.T) {
+	repo := creditStores(t)["postgres"]
+	if repo == nil {
+		t.Skip("postgres not configured")
+	}
+	pg, ok := repo.(*PostgresStore)
+	if !ok {
+		t.Fatalf("unexpected store %T", repo)
+	}
+	for _, action := range []string{"reset", "delete"} {
+		t.Run(action, func(t *testing.T) {
+			st := seedStudent(t, repo)
+			ctx := context.Background()
+			lock, err := pg.db.BeginTx(ctx, nil)
+			if err != nil {
+				t.Fatalf("lock tx: %v", err)
+			}
+			if _, err := lock.ExecContext(ctx, `SELECT pg_advisory_xact_lock(hashtextextended($1, 0))`, st.ID); err != nil {
+				t.Fatalf("advisory lock: %v", err)
+			}
+			started := make(chan struct{})
+			done := make(chan error, 1)
+			go func() {
+				close(started)
+				if action == "reset" {
+					done <- repo.ResetProgress(st.ID)
+				} else {
+					done <- repo.DeleteAccount(st.ID)
+				}
+			}()
+			<-started
+			select {
+			case err := <-done:
+				t.Fatalf("%s did not wait for the credit lock: %v", action, err)
+			case <-time.After(100 * time.Millisecond):
+			}
+			if err := lock.Rollback(); err != nil {
+				t.Fatalf("release lock: %v", err)
+			}
+			select {
+			case err := <-done:
+				if err != nil {
+					t.Fatalf("%s: %v", action, err)
+				}
+			case <-time.After(5 * time.Second):
+				t.Fatalf("%s did not finish after the lock was released", action)
 			}
 		})
 	}

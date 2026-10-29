@@ -117,11 +117,18 @@ func creditReasonEligible(row creditTargetRow) string {
 
 func creditNextState(row creditTargetRow, due, now time.Time) (stability, difficulty float64, next time.Time, err error) {
 	p := fsrs.DefaultParameters()
+	hasStability := row.Stability.Valid && !math.IsNaN(row.Stability.Float64) && row.Stability.Float64 > 0
 	stability = 0
-	if row.Stability.Valid && !math.IsNaN(row.Stability.Float64) && row.Stability.Float64 > 0 {
+	if hasStability {
 		stability = row.Stability.Float64
 	}
-	if stability <= 0 {
+	// This mirrors the first-review branch of computeGradedAttempt: a concept
+	// with neither FSRS stability nor a usable SM-2 interval starts at the
+	// initial Good state rather than taking a transition from that state.
+	firstReview := !hasStability && row.SM2Interval < 1
+	if firstReview {
+		stability = p.InitialStability(fsrs.Good)
+	} else if !hasStability {
 		if seeded, seedErr := fsrs.SeedFromInterval(row.SM2Interval, due, now); seedErr == nil {
 			stability = seeded.Stability
 		} else {
@@ -135,18 +142,31 @@ func creditNextState(row creditTargetRow, due, now time.Time) (stability, diffic
 	if row.Difficulty.Valid && !math.IsNaN(row.Difficulty.Float64) && row.Difficulty.Float64 > 0 {
 		difficulty = row.Difficulty.Float64
 	}
-	last := due
+	if firstReview {
+		// The explicit path resets both values on the first review rather than
+		// transitioning from a partially populated row.
+		difficulty = p.InitialDifficulty(fsrs.Good)
+	}
+	// A missing review timestamp means the elapsed interval is unknown, not
+	// that it equals the due date. computeGradedAttempt treats that as zero.
+	last := time.Time{}
 	if t, ok := parseCreditTime(row.SRSLastReview); ok {
 		last = t
 	} else if t, ok := parseCreditTime(row.LastReviewed); ok {
 		last = t
 	}
-	elapsed := now.Sub(last).Hours() / 24
+	elapsed := 0.0
+	if !last.IsZero() {
+		elapsed = now.Sub(last).Hours() / 24
+	}
 	if elapsed < 0 || math.IsNaN(elapsed) || math.IsInf(elapsed, 0) {
 		elapsed = 0
 	}
-	nextStability := p.NextStability(stability, difficulty, p.Retrievability(elapsed, stability), fsrs.Good)
-	nextDifficulty := p.NextDifficulty(difficulty, fsrs.Good)
+	nextStability, nextDifficulty := stability, difficulty
+	if !firstReview {
+		nextStability = p.NextStability(stability, difficulty, p.Retrievability(elapsed, stability), fsrs.Good)
+		nextDifficulty = p.NextDifficulty(difficulty, fsrs.Good)
+	}
 	step := p.Interval(nextStability)
 	if step < 1 {
 		step = 1
@@ -597,6 +617,9 @@ func (s *PostgresStore) ApplyCredit(req CreditApplyRequest) (CreditApplication, 
 		return out, err
 	}
 	defer tx.Rollback()
+	if err := lockStudentCreditTx(ctx, tx, out.StudentID); err != nil {
+		return out, err
+	}
 	var epoch int64
 	err = tx.QueryRowContext(ctx, `
 		SELECT credit_epoch FROM implicit_credit_targets

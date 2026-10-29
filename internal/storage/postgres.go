@@ -1818,6 +1818,10 @@ func (s *PostgresStore) ResetProgress(studentID string) error {
 	if err != nil {
 		return fmt.Errorf("begin progress reset: %w", err)
 	}
+	if err := lockStudentCreditTx(context.Background(), tx, studentID); err != nil {
+		tx.Rollback()
+		return err
+	}
 	exec := func(stmt string, args ...interface{}) error {
 		if _, err := tx.Exec(stmt, args...); err != nil {
 			tx.Rollback()
@@ -1867,6 +1871,10 @@ func (s *PostgresStore) DeleteAccount(studentID string) error {
 	tx, err := s.db.Begin()
 	if err != nil {
 		return fmt.Errorf("begin account delete: %w", err)
+	}
+	if err := lockStudentCreditTx(context.Background(), tx, studentID); err != nil {
+		tx.Rollback()
+		return err
 	}
 	exec := func(stmt string, args ...interface{}) error {
 		if _, err := tx.Exec(stmt, args...); err != nil {
