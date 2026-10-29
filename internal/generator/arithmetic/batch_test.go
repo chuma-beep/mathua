@@ -686,3 +686,40 @@ func TestArithDivisionByZeroOffersFullSentences(t *testing.T) {
 		}
 	}
 }
+
+func TestArithDivisionByZeroVariesConcretePrompts(t *testing.T) {
+	reg := arithRegistry(t)
+	for _, kp := range []int{1, 2} {
+		seen := map[string]bool{}
+		for i := 0; i < 40; i++ {
+			p, err := reg.GenerateContext("arith.div.zero", generator.GeneratorContext{
+				KPOrdinal: kp,
+				Seed:      int64(7200 + i),
+			})
+			if err != nil {
+				t.Fatalf("KP %d: generate: %v", kp, err)
+			}
+			if !strings.Contains(p.Question, "÷") {
+				t.Fatalf("KP %d: prompt has no concrete expression: %s", kp, p.Question)
+			}
+			opts := arithOptionsOf(p.Question)
+			if len(opts) != 4 {
+				t.Fatalf("KP %d: got %d options, want 4: %s", kp, len(opts), p.Question)
+			}
+			found := false
+			for _, o := range opts {
+				if o == p.Answer {
+					found = true
+					break
+				}
+			}
+			if !found {
+				t.Fatalf("KP %d: correct answer %q is missing from %s", kp, p.Answer, p.Question)
+			}
+			seen[p.Question] = true
+		}
+		if len(seen) < 20 {
+			t.Fatalf("KP %d produced only %d distinct prompts in 40 samples", kp, len(seen))
+		}
+	}
+}
