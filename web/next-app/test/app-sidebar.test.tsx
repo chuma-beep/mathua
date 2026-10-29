@@ -55,6 +55,11 @@ describe('AppSidebar', () => {
     expect(screen.getByText('2 unread notifications')).toBeInTheDocument()
   })
 
+  it('shows the moderation queue alert on the Admin item', () => {
+    renderSidebar({ isAdmin: true, adminReports: 3 })
+    expect(screen.getByText('3 reports need attention')).toBeInTheDocument()
+  })
+
   it('renders Navigate group without a Diagnostic entry (no CTA duplication)', () => {
     renderSidebar()
     expect(screen.getByText('Navigate')).toBeInTheDocument()

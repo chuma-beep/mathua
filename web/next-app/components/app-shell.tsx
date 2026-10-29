@@ -8,7 +8,7 @@ import BottomTabs from './BottomTabs'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from './ui/sidebar'
 import { useAuthState } from '../hooks/useAuthState'
 import { isStaffRole } from '../lib/auth'
-import { getDueReviews, getSettings, listAnnouncements, listMyReports } from '../lib/api'
+import { adminOverview, getDueReviews, getSettings, listAnnouncements, listMyReports } from '../lib/api'
 import { resolveAvatar } from '../lib/dicebear'
 
 type AppShellProps = {
@@ -29,6 +29,7 @@ export default function AppShell({ children, ...overrides }: AppShellProps) {
   // destination the learner has not actually turned off.
   const [showLeaderboards, setShowLeaderboards] = useState(true)
   const [notificationUnread, setNotificationUnread] = useState(0)
+  const [adminReports, setAdminReports] = useState(0)
 
   useEffect(() => {
     if (!loggedIn || !user) {
@@ -118,6 +119,36 @@ export default function AppShell({ children, ...overrides }: AppShellProps) {
     }
   }, [loggedIn])
 
+  useEffect(() => {
+    if (!loggedIn || !user || !isStaffRole(user.role)) {
+      setAdminReports(0)
+      return
+    }
+    let live = true
+    const load = () => {
+      adminOverview()
+        .then((data) => {
+          if (live) setAdminReports(data.reports.outstanding)
+        })
+        .catch(() => {
+          // The moderation count is an extra. A failed call must not take the
+          // shell down or leave a stale dot on screen.
+          if (live) setAdminReports(0)
+        })
+    }
+    void load()
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') void load()
+    }
+    window.addEventListener('focus', load)
+    document.addEventListener('visibilitychange', onVisible)
+    return () => {
+      live = false
+      window.removeEventListener('focus', load)
+      document.removeEventListener('visibilitychange', onVisible)
+    }
+  }, [loggedIn, user])
+
   return (
     <>
       <SidebarProvider>
@@ -133,6 +164,7 @@ export default function AppShell({ children, ...overrides }: AppShellProps) {
           dueReviews={overrides.dueReviews ?? dueReviews}
           showLeaderboards={overrides.showLeaderboards ?? showLeaderboards}
           notificationUnread={overrides.notificationUnread ?? notificationUnread}
+          adminReports={overrides.adminReports ?? adminReports}
         />
         <SidebarInset>
           <div className="mb-2 flex items-center justify-between md:hidden px-4 sm:px-6 pt-8">
