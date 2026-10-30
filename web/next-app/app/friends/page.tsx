@@ -82,7 +82,10 @@ function FriendRow({ friend, onRemove, onBlock, busy }: {
           {friend.name}
         </Link>
         <p className="truncate font-mono text-[11px] text-mathua-muted">
-          {friend.mastered} mastered{friend.friends_since ? ` · since ${dateLabel(friend.friends_since)}` : ''}
+          {friend.mastered} mastered
+          {friend.friends_since && (
+            <span className="hidden sm:inline"> · since {dateLabel(friend.friends_since)}</span>
+          )}
         </p>
       </div>
       <div className="flex shrink-0 items-center gap-1">
