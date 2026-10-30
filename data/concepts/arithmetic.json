@@ -398,7 +398,7 @@
   "label": "Prime factorization",
   "domain": "arithmetic",
   "subdomain": "arithmetic.factors",
-  "grading_type": "ordering",
+  "grading_type": "numeric",
   "prerequisites": [
    "arith.factor.prime"
   ],

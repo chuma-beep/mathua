@@ -704,26 +704,47 @@ func (g *varianceGen) Generate(ctx generator.GeneratorContext) generator.Problem
 	scale := int(1 + ctx.Difficulty*5)
 	vals := make([]int, 5)
 	sum := 0
+	sumSq := 0
 	for i := range vals {
 		vals[i] = (rand.Intn(max(4, scale*4)) + 1) * 2
 		sum += vals[i]
+		sumSq += vals[i] * vals[i]
 	}
-	mean := float64(sum) / float64(len(vals))
-	var ss float64
-	for _, v := range vals {
-		d := float64(v) - mean
-		ss += d * d
+	// The population variance of integers is a rational, not an integer. The
+	// old answer used %.0f, so the set 24, 8, 18, 4, 12 was graded against 51
+	// when its variance is 50.56, and the explanation rounded the numerator
+	// too. Compute it as an exact fraction in lowest terms: the symbolic
+	// grader accepts it and a learner can match the number in the working.
+	n := len(vals)
+	num := n*sumSq - sum*sum
+	den := n * n
+	div := varianceGCD(num, den)
+	num /= div
+	den /= div
+	answer := strconv.Itoa(num)
+	if den != 1 {
+		answer = fmt.Sprintf("%d/%d", num, den)
 	}
-	popVar := ss / float64(len(vals))
 	valStrs := make([]string, len(vals))
 	for i, v := range vals {
 		valStrs[i] = strconv.Itoa(v)
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find the population variance of: %s", strings.Join(valStrs, ", ")),
-		Answer:      fmt.Sprintf("%.0f", popVar),
-		Explanation: fmt.Sprintf("\\(\\text{Mean} = \\frac{%d}{%d} = %.0f\\). \\(\\text{Variance} = \\frac{\\Sigma(x_i - \\bar{x})^{2}}{n} = \\frac{%.0f}{%d} = %.0f\\)", sum, len(vals), mean, ss, len(vals), popVar),
+		Question: fmt.Sprintf("Find the population variance of: %s", strings.Join(valStrs, ", ")),
+		Answer:   answer,
+		Explanation: fmt.Sprintf("\\(\\text{Mean} = \\frac{%d}{%d} = %.2f\\). \\(\\text{Variance} = \\frac{\\Sigma(x_i - \\bar{x})^{2}}{n} = \\frac{%d}{%d} = %s \\approx %.2f\\)",
+			sum, n, float64(sum)/float64(n), num, den, answer, float64(num)/float64(den)),
 	}
+}
+
+func varianceGCD(a, b int) int {
+	for b != 0 {
+		a, b = b, a%b
+	}
+	if a < 0 {
+		return -a
+	}
+	return a
 }
 
 // ----- stat.dist.* (probability distributions) -----

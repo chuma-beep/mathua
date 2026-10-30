@@ -273,6 +273,15 @@ func (s *Scheduler) Recommend(in RecommendInput) RecommendationResponse {
 		if c == nil {
 			continue
 		}
+		// A remedial entry is a concept to practise again, not permission to
+		// skip its prerequisites. Report 345 showed "Commutator subgroup and
+		// abelianization" as a practice task with three prerequisites not
+		// started, because a diagnostic miss put the concept itself in the
+		// remedial queue. If it is not reachable yet, the ordinary candidate
+		// list will offer what is.
+		if !prereqsMet(s.dag, c, in.Snapshots, now) {
+			continue
+		}
 		// Priority 200 ensures targeted remediation outranks regular tasks.
 		r := s.render(c, KindPractice, ReasonPrerequisite, 200.0)
 		r.bucket = bucketRemediation
