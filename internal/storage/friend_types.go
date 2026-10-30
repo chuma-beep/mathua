@@ -20,7 +20,7 @@ const (
 var (
 	ErrFriendNotFound      = errors.New("friend target not found")
 	ErrFriendBlocked       = errors.New("friend target blocked")
-	ErrFriendNotVerified   = errors.New("email verification required")
+	ErrFriendLimit         = errors.New("too many pending friend requests")
 	ErrFriendSelf          = errors.New("cannot friend yourself")
 	ErrFriendVisibilityOff = errors.New("friends visibility disabled")
 )

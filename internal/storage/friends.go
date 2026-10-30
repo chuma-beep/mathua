@@ -15,6 +15,11 @@ type friendAccess struct {
 	rebind func(string) string
 }
 
+// friendPendingLimit bounds how many requests one account can leave waiting.
+// It replaces the verified-email gate: the point is to stop an account from
+// spraying requests, and that is a count of behaviour rather than a credential.
+const friendPendingLimit = 20
+
 func (s *SQLiteStore) friends() *friendAccess {
 	return &friendAccess{db: s.db, rebind: rebindQuestion}
 }
@@ -200,8 +205,17 @@ func (a *friendAccess) sendFriendRequest(studentID, targetProfileID string, now 
 	if friendVisibility(caller.Settings) == "nobody" || friendVisibility(target.Settings) == "nobody" {
 		return Friendship{}, ErrFriendVisibilityOff
 	}
-	if !caller.EmailVerified && !a.hasVerifiedIdentity(caller.ID) {
-		return Friendship{}, ErrFriendNotVerified
+	// A verified email was required to send requests. That excluded every
+	// account made with only a username, including guests that later became
+	// real learners, and asked Google users to verify an address Google had
+	// already verified. The barrier that remains is the pending cap: one
+	// account cannot pile up requests indefinitely.
+	pending, err := a.pendingOutgoing(caller.ID)
+	if err != nil {
+		return Friendship{}, fmt.Errorf("count pending friend requests: %w", err)
+	}
+	if pending >= friendPendingLimit {
+		return Friendship{}, ErrFriendLimit
 	}
 
 	low, high := canonicalPair(caller.ID, target.ID)
@@ -828,16 +842,14 @@ func (s *PostgresStore) RotateFriendCode(studentID string, now time.Time) (strin
 	return s.friends().rotateFriendCode(studentID, now)
 }
 
-// hasVerifiedIdentity reports whether any linked provider attests the mailbox.
-// Google sign-in sets this on the identity row, so an account whose
-// students.email_verified flag was never updated can still send friend
-// requests without being asked to verify an address the provider already
-// verified.
-func (a *friendAccess) hasVerifiedIdentity(studentID string) bool {
-	var one int
+// pendingOutgoing counts requests this account has sent that nobody has
+// answered yet. Accepted requests no longer count, so a learner who is active
+// on the surface never hits the cap.
+func (a *friendAccess) pendingOutgoing(studentID string) (int, error) {
+	var n int
 	err := a.db.QueryRow(
-		a.rebind("SELECT 1 FROM identities WHERE student_id = ? AND email_verified = 1 LIMIT 1"),
+		a.rebind("SELECT COUNT(*) FROM friendships WHERE status = 'pending' AND requested_by = ?"),
 		studentID,
-	).Scan(&one)
-	return err == nil
+	).Scan(&n)
+	return n, err
 }
