@@ -514,3 +514,20 @@ func newFriendConcurrencyStore(t *testing.T) Repository {
 	t.Cleanup(func() { store.Close() })
 	return store
 }
+
+// A Google identity attests the mailbox even when the students.email_verified
+// flag was never updated. The friends gate must accept that proof instead of
+// asking a Google user to verify the same address again.
+func TestFriendRequestAcceptsAProviderVerifiedIdentity(t *testing.T) {
+	repo := newTestStore(t)
+	store := friendStore(t, repo)
+	a := createFriendUser(t, repo, "Ada", false)
+	b := createFriendUser(t, repo, "Grace", true)
+	if err := repo.CreateIdentity("google", "google-"+newUUID()[:8], a.ID, "ada@example.com", true); err != nil {
+		t.Fatalf("create identity: %v", err)
+	}
+	target := friendIdentity(t, store, b.ID)
+	if _, err := store.SendFriendRequest(a.ID, target.ProfileID, time.Now()); err != nil {
+		t.Fatalf("verified identity could not send a request: %v", err)
+	}
+}
