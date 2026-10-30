@@ -200,7 +200,7 @@ func (a *friendAccess) sendFriendRequest(studentID, targetProfileID string, now 
 	if friendVisibility(caller.Settings) == "nobody" || friendVisibility(target.Settings) == "nobody" {
 		return Friendship{}, ErrFriendVisibilityOff
 	}
-	if !caller.EmailVerified {
+	if !caller.EmailVerified && !a.hasVerifiedIdentity(caller.ID) {
 		return Friendship{}, ErrFriendNotVerified
 	}
 
@@ -826,4 +826,18 @@ func (s *PostgresStore) FriendsLeaderboard(studentID, view string, week time.Tim
 
 func (s *PostgresStore) RotateFriendCode(studentID string, now time.Time) (string, error) {
 	return s.friends().rotateFriendCode(studentID, now)
+}
+
+// hasVerifiedIdentity reports whether any linked provider attests the mailbox.
+// Google sign-in sets this on the identity row, so an account whose
+// students.email_verified flag was never updated can still send friend
+// requests without being asked to verify an address the provider already
+// verified.
+func (a *friendAccess) hasVerifiedIdentity(studentID string) bool {
+	var one int
+	err := a.db.QueryRow(
+		a.rebind("SELECT 1 FROM identities WHERE student_id = ? AND email_verified = 1 LIMIT 1"),
+		studentID,
+	).Scan(&one)
+	return err == nil
 }

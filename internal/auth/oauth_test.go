@@ -272,3 +272,39 @@ func TestOAuth_BlockedProviderNameFallsBack(t *testing.T) {
 		t.Errorf("name = %q, want the real name %q", st3.Name, "Kshitij")
 	}
 }
+
+// A Google login is proof of the mailbox. An account that carries a Google
+// identity but still has email_verified=false, as older accounts did, must be
+// repaired on the next Google login instead of asking the learner to verify an
+// address Google already verified.
+func TestOAuth_GoogleLoginRepairsTheVerifiedFlag(t *testing.T) {
+	svc := newTestService(t)
+	repo := svc.repo
+	tok, st, err := svc.LoginOrCreateOAuth(OAuthProfile{
+		Provider: "google", ProviderID: "google-uid-2",
+		Email: "grace@example.com", EmailVerified: true, Name: "Grace",
+	})
+	if err != nil || tok == "" {
+		t.Fatalf("first login: %v", err)
+	}
+	if err := repo.SetEmailVerified(st.ID, false); err != nil {
+		t.Fatal(err)
+	}
+	_, again, err := svc.LoginOrCreateOAuth(OAuthProfile{
+		Provider: "google", ProviderID: "google-uid-2",
+		Email: "grace@example.com", EmailVerified: true, Name: "Grace",
+	})
+	if err != nil {
+		t.Fatalf("second login: %v", err)
+	}
+	if !again.EmailVerified {
+		t.Error("returned student is still unverified")
+	}
+	fresh, err := repo.GetStudent(st.ID)
+	if err != nil || fresh == nil {
+		t.Fatalf("reload: %v", err)
+	}
+	if !fresh.EmailVerified {
+		t.Error("stored row is still unverified after a Google login")
+	}
+}
