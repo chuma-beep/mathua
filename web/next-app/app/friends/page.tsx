@@ -13,8 +13,8 @@ import {
   blockFriend,
   cancelFriendRequest,
   declineFriendRequest,
-  getConfig,
   getErrorMessage,
+  getErrorStatus,
   getFriends,
   getFriendsLeaderboard,
   removeFriend,
@@ -26,9 +26,15 @@ import {
   type FriendsFeed,
   type FriendSummary,
 } from '../../lib/api'
+import { useAuthState } from '../../hooks/useAuthState'
 import { dicebearUrl, isDicebearStyle } from '../../lib/dicebear'
 
 type LeaderboardView = 'weekly' | 'all_time'
+// The page must distinguish four outcomes that used to collapse into one
+// message: signed out, feature disabled, network failure and ready. Treating a
+// failed config read as "disabled" told a signed-in learner on a working server
+// that friends did not exist.
+type Availability = 'checking' | 'ready' | 'guest' | 'disabled' | 'error'
 
 // The friends surface is deliberately one page. Requests, the friend code and
 // the friends leaderboard are all about the same small group, and splitting
@@ -139,7 +145,8 @@ function RequestRow({ request, onAccept, onDecline, onCancel, busy }: {
 }
 
 export default function FriendsPage() {
-  const [enabled, setEnabled] = useState<boolean | null>(null)
+  const { loggedIn } = useAuthState()
+  const [availability, setAvailability] = useState<Availability>('checking')
   const [feed, setFeed] = useState<FriendsFeed | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -151,6 +158,7 @@ export default function FriendsPage() {
   const [view, setView] = useState<LeaderboardView>('weekly')
   const [rows, setRows] = useState<FriendLeaderboardRow[]>([])
   const [rowsLoading, setRowsLoading] = useState(false)
+  const [attempt, setAttempt] = useState(0)
 
   const load = useCallback(async () => {
     const next = await getFriends()
@@ -158,33 +166,40 @@ export default function FriendsPage() {
   }, [])
 
   useEffect(() => {
+    if (!loggedIn) {
+      setAvailability('guest')
+      setLoading(false)
+      return
+    }
     let cancelled = false
-    getConfig().then(async (cfg) => {
-      if (cancelled) return
-      const on = cfg?.friends_enabled === true
-      setEnabled(on)
-      if (!on) {
-        setLoading(false)
-        return
-      }
-      try {
-        await load()
-      } catch (e) {
-        if (!cancelled) setError(getErrorMessage(e))
-      } finally {
+    setLoading(true)
+    setError('')
+    getFriends()
+      .then((next) => {
+        if (cancelled) return
+        setFeed(next)
+        setAvailability('ready')
+      })
+      .catch((e) => {
+        if (cancelled) return
+        const status = getErrorStatus(e)
+        if (status === 404) {
+          setAvailability('disabled')
+        } else if (status === 401) {
+          setAvailability('guest')
+        } else {
+          setAvailability('error')
+          setError(getErrorMessage(e))
+        }
+      })
+      .finally(() => {
         if (!cancelled) setLoading(false)
-      }
-    }).catch(() => {
-      if (!cancelled) {
-        setEnabled(false)
-        setLoading(false)
-      }
-    })
+      })
     return () => { cancelled = true }
-  }, [load])
+  }, [loggedIn, attempt])
 
   useEffect(() => {
-    if (enabled !== true) return
+    if (availability !== 'ready') return
     let cancelled = false
     setRowsLoading(true)
     getFriendsLeaderboard(view)
@@ -192,7 +207,7 @@ export default function FriendsPage() {
       .catch(() => { if (!cancelled) setRows([]) })
       .finally(() => { if (!cancelled) setRowsLoading(false) })
     return () => { cancelled = true }
-  }, [enabled, view, feed])
+  }, [availability, view, feed])
 
   const run = async (action: () => Promise<void>, message?: string) => {
     setBusy(true)
@@ -264,7 +279,27 @@ export default function FriendsPage() {
     )
   }
 
-  if (enabled === false) {
+  if (availability === 'guest') {
+    return (
+      <AppShell>
+        <div className="mx-auto w-full max-w-[920px] px-4 sm:px-6 py-8 sm:py-12 min-w-0">
+          <SectionHeader label="Your circle" title="Friends" />
+          <div className="border border-mathua-border bg-mathua-surface p-6">
+            <p className="text-sm text-mathua-primary">Sign in to use friends.</p>
+            <p className="mt-2 font-mono text-[11px] text-mathua-muted">
+              Friends are per account, so this page needs a signed-in learner.
+            </p>
+            <Link href="/login" className="mt-4 inline-block font-mono text-[11px] uppercase tracking-wider text-mathua-blue hover:underline">
+              Sign in
+            </Link>
+          </div>
+        </div>
+        <Footer />
+      </AppShell>
+    )
+  }
+
+  if (availability === 'disabled') {
     return (
       <AppShell>
         <div className="mx-auto w-full max-w-[920px] px-4 sm:px-6 py-8 sm:py-12 min-w-0">
@@ -274,6 +309,29 @@ export default function FriendsPage() {
             <p className="mt-2 font-mono text-[11px] text-mathua-muted">
               Start the API with MATHUA_FRIENDS=on to preview this page locally.
             </p>
+          </div>
+        </div>
+        <Footer />
+      </AppShell>
+    )
+  }
+
+  if (availability === 'error') {
+    return (
+      <AppShell>
+        <div className="mx-auto w-full max-w-[920px] px-4 sm:px-6 py-8 sm:py-12 min-w-0">
+          <SectionHeader label="Your circle" title="Friends" />
+          <div className="border border-mathua-border bg-mathua-surface p-6">
+            <p role="alert" className="text-sm text-mathua-primary">
+              {error || 'Could not load friends.'}
+            </p>
+            <button
+              type="button"
+              onClick={() => setAttempt((value) => value + 1)}
+              className="mt-4 h-9 border border-mathua-border px-3 font-mono text-[10px] uppercase tracking-wider text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue"
+            >
+              Try again
+            </button>
           </div>
         </div>
         <Footer />

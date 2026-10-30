@@ -1,17 +1,20 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import FriendsPage from '../app/friends/page'
-import { getConfig, getFriends, getFriendsLeaderboard } from '../lib/api'
+import { getFriends, getFriendsLeaderboard } from '../lib/api'
 
 vi.mock('../components/app-shell', () => ({
   default: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+}))
+
+vi.mock('../hooks/useAuthState', () => ({
+  useAuthState: () => ({ loggedIn: true, user: null }),
 }))
 
 vi.mock('../lib/api', async (importOriginal) => {
   const actual = await importOriginal<typeof import('../lib/api')>()
   return {
     ...actual,
-    getConfig: vi.fn(),
     getFriends: vi.fn(),
     getFriendsLeaderboard: vi.fn(),
     sendFriendRequest: vi.fn(),
@@ -46,7 +49,6 @@ describe('FriendsPage', () => {
   })
 
   it('shows the friend code and accepted friends when the surface is enabled', async () => {
-    vi.mocked(getConfig).mockResolvedValue({ auth_enabled: true, friends_enabled: true })
     vi.mocked(getFriends).mockResolvedValue(feed)
     render(<FriendsPage />)
     expect(await screen.findByText('ABCD2345')).toBeDefined()
@@ -54,10 +56,15 @@ describe('FriendsPage', () => {
     expect(screen.getByText(/4 mastered/)).toBeDefined()
   })
 
-  it('explains that the surface is off rather than showing a broken page', async () => {
-    vi.mocked(getConfig).mockResolvedValue({ auth_enabled: true, friends_enabled: false })
+  it('explains that the surface is off when the API answers 404', async () => {
+    vi.mocked(getFriends).mockRejectedValue(Object.assign(new Error('not found'), { status: 404 }))
     render(<FriendsPage />)
     expect(await screen.findByText('Friends are not enabled on this server.')).toBeDefined()
-    expect(getFriends).not.toHaveBeenCalled()
+  })
+
+  it('asks a signed-out learner to sign in instead of claiming the feature is off', async () => {
+    vi.mocked(getFriends).mockRejectedValue(Object.assign(new Error('not authenticated'), { status: 401 }))
+    render(<FriendsPage />)
+    expect(await screen.findByText('Sign in to use friends.')).toBeDefined()
   })
 })
