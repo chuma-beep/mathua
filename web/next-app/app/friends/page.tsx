@@ -341,14 +341,15 @@ export default function FriendsPage() {
 
   const friendCount = feed?.friends.length ?? 0
   const incomingCount = feed?.incoming.length ?? 0
+  const outgoingCount = feed?.outgoing.length ?? 0
 
   return (
     <AppShell>
-      <div className="mx-auto w-full max-w-[920px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
+      <div className="mx-auto w-full max-w-[1040px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
         <SectionHeader label="Your circle" title="Friends" />
         <p className="mb-6 max-w-[62ch] text-sm text-mathua-secondary">
-          Add someone by username or friend code. Friends see each other&apos;s names and a shared view of mastered concepts.
-          Nothing about answers, attempts or weaknesses is shared.
+          Add someone by username or friend code. Friends see each other&apos;s names and a shared view of mastered
+          concepts. Nothing about answers, attempts or weaknesses is shared.
         </p>
 
         {error && (
@@ -362,168 +363,218 @@ export default function FriendsPage() {
           </div>
         )}
 
-        <section className="mb-8 border border-mathua-border bg-mathua-surface p-4">
-          <div className="flex flex-wrap items-start justify-between gap-4">
-            <div className="min-w-0">
+        {/* Connect: the code and the add field are one job, so they share one
+            panel. Splitting them into two cards made the page read as two
+            unrelated forms and put the primary action below the fold on a
+            phone. */}
+        <section aria-label="Connect" className="mb-8 border border-mathua-border bg-mathua-surface">
+          <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
+            <div className="min-w-0 p-4 sm:p-5 md:border-r md:border-mathua-border">
               <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-mathua-muted">Your friend code</p>
-              <p className="mt-1 font-mono text-2xl tracking-[0.2em] text-mathua-primary">{feed?.identity.friend_code ?? '-'}</p>
-              <p className="mt-1 break-all font-mono text-[10px] text-mathua-muted">Profile {feed?.identity.profile_id ?? '-'}</p>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              <button type="button" onClick={copyCode} className="h-9 border border-mathua-border px-3 font-mono text-[10px] uppercase tracking-wider text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue">
-                {copied ? 'Copied' : 'Copy code'}
-              </button>
-              {confirmRotate ? (
-                <>
-                  <button type="button" onClick={handleRotate} disabled={busy} className="h-9 bg-mathua-red px-3 font-mono text-[10px] uppercase tracking-wider text-white disabled:opacity-50">
-                    Confirm rotate
-                  </button>
-                  <button type="button" onClick={() => setConfirmRotate(false)} className="h-9 border border-mathua-border px-3 font-mono text-[10px] uppercase tracking-wider text-mathua-secondary">
-                    Cancel
-                  </button>
-                </>
-              ) : (
-                <button type="button" onClick={() => setConfirmRotate(true)} className="h-9 border border-mathua-border px-3 font-mono text-[10px] uppercase tracking-wider text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue">
-                  Rotate code
+              <div className="mt-1 flex flex-wrap items-center gap-3">
+                <p className="font-mono text-[1.6rem] leading-none tracking-[0.2em] text-mathua-primary">
+                  {feed?.identity.friend_code ?? '-'}
+                </p>
+                <button
+                  type="button"
+                  onClick={copyCode}
+                  className="h-8 border border-mathua-border px-2 font-mono text-[10px] uppercase tracking-wider text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue"
+                >
+                  {copied ? 'Copied' : 'Copy'}
                 </button>
+              </div>
+              <p className="mt-2 break-all font-mono text-[10px] text-mathua-muted">
+                Profile {feed?.identity.profile_id ?? '-'}
+              </p>
+              <div className="mt-4 flex flex-wrap items-center gap-2">
+                {confirmRotate ? (
+                  <>
+                    <button
+                      type="button"
+                      onClick={handleRotate}
+                      disabled={busy}
+                      className="h-8 bg-mathua-red px-3 font-mono text-[10px] uppercase tracking-wider text-white disabled:opacity-50"
+                    >
+                      Confirm rotate
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setConfirmRotate(false)}
+                      className="h-8 border border-mathua-border px-3 font-mono text-[10px] uppercase tracking-wider text-mathua-secondary"
+                    >
+                      Cancel
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => setConfirmRotate(true)}
+                    className="h-8 border border-mathua-border px-3 font-mono text-[10px] uppercase tracking-wider text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue"
+                  >
+                    Rotate code
+                  </button>
+                )}
+              </div>
+              {confirmRotate && (
+                <p className="mt-2 font-mono text-[10px] text-mathua-red">
+                  Rotating invalidates the old code. Anyone who saved it cannot use it to find you again.
+                </p>
               )}
             </div>
-          </div>
-          {confirmRotate && (
-            <p className="mt-3 font-mono text-[11px] text-mathua-red">
-              Rotating invalidates the old code. Anyone who saved it cannot use it to find you again.
-            </p>
-          )}
-        </section>
 
-        <section className="mb-8">
-          <h2 className="mb-3 font-serif text-[1.05rem] text-mathua-primary">Add a friend</h2>
-          <form onSubmit={handleSend} className="flex flex-wrap gap-2">
-            <label htmlFor="friend-query" className="sr-only">Username or friend code</label>
-            <input
-              id="friend-query"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="username or friend code"
-              autoComplete="off"
-              className="h-11 min-w-0 flex-1 border border-mathua-border bg-mathua-code px-3 font-mono text-xs text-mathua-primary outline-none focus:border-mathua-blue"
-            />
-            <button
-              type="submit"
-              disabled={busy || !query.trim()}
-              className="h-11 bg-mathua-blue px-4 font-mono text-[11px] uppercase tracking-wider text-white disabled:opacity-50"
-            >
-              Send request
-            </button>
-          </form>
-          <p className="mt-2 font-mono text-[10px] text-mathua-muted">
-            A request is accepted when the other learner sends one back.
-          </p>
-        </section>
-
-        {incomingCount > 0 && (
-          <section className="mb-8">
-            <h2 className="mb-3 font-serif text-[1.05rem] text-mathua-primary">
-              Requests <span className="font-mono text-xs text-mathua-muted">({incomingCount} incoming)</span>
-            </h2>
-            <ul className="space-y-2">
-              {feed?.incoming.map((request) => (
-                <RequestRow
-                  key={`in-${request.profile_id}`}
-                  request={request}
-                  busy={busy}
-                  onAccept={() => run(() => acceptFriendRequest(request.profile_id), 'Friend request accepted.')}
-                  onDecline={() => run(() => declineFriendRequest(request.profile_id), 'Friend request declined.')}
+            <div className="min-w-0 border-t border-mathua-border p-4 sm:p-5 md:border-t-0">
+              <label htmlFor="friend-query" className="font-mono text-[10px] uppercase tracking-[0.15em] text-mathua-muted">
+                Add a friend
+              </label>
+              <form onSubmit={handleSend} className="mt-2 flex flex-wrap gap-2">
+                <input
+                  id="friend-query"
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="username or friend code"
+                  autoComplete="off"
+                  className="h-11 min-w-0 flex-1 border border-mathua-border bg-mathua-code px-3 font-mono text-xs text-mathua-primary outline-none focus:border-mathua-blue"
                 />
-              ))}
-              {feed?.outgoing.map((request) => (
-                <RequestRow
-                  key={`out-${request.profile_id}`}
-                  request={request}
-                  busy={busy}
-                  onCancel={() => run(() => cancelFriendRequest(request.profile_id), 'Friend request cancelled.')}
-                />
-              ))}
-            </ul>
-          </section>
-        )}
-
-        <section className="mb-8">
-          <h2 className="mb-3 font-serif text-[1.05rem] text-mathua-primary">
-            Friends <span className="font-mono text-xs text-mathua-muted">({friendCount})</span>
-          </h2>
-          {friendCount === 0 ? (
-            <div className="border border-mathua-border bg-mathua-surface p-6">
-              <p className="text-sm text-mathua-primary">No friends yet.</p>
-              <p className="mt-1 font-mono text-[11px] text-mathua-muted">
-                Share your friend code, or add someone with theirs.
+                <button
+                  type="submit"
+                  disabled={busy || !query.trim()}
+                  className="h-11 bg-mathua-blue px-4 font-mono text-[11px] uppercase tracking-wider text-white disabled:opacity-50"
+                >
+                  Send request
+                </button>
+              </form>
+              <p className="mt-2 font-mono text-[10px] text-mathua-muted">
+                A request is accepted when the other learner accepts it, or sends one back.
               </p>
             </div>
-          ) : (
-            <ul className="space-y-2">
-              {feed?.friends.map((friend) => (
-                <FriendRow
-                  key={friend.profile_id}
-                  friend={friend}
-                  busy={busy}
-                  onRemove={() => run(() => removeFriend(friend.profile_id), `${friend.name} removed.`)}
-                  onBlock={() => run(() => blockFriend(friend.profile_id), `${friend.name} blocked.`)}
-                />
-              ))}
-            </ul>
-          )}
+          </div>
         </section>
 
-        <section>
-          <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-            <h2 className="font-serif text-[1.05rem] text-mathua-primary">Friends leaderboard</h2>
-            <div className="flex gap-2" role="tablist" aria-label="Friends leaderboard period">
-              {(['weekly', 'all_time'] as LeaderboardView[]).map((id) => (
-                <button
-                  key={id}
-                  type="button"
-                  role="tab"
-                  aria-selected={view === id}
-                  onClick={() => setView(id)}
-                  className={`h-8 border px-3 font-mono text-[10px] uppercase tracking-wider ${
-                    view === id
-                      ? 'border-mathua-blue bg-mathua-blue text-white'
-                      : 'border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue'
-                  }`}
-                >
-                  {id === 'weekly' ? 'This week' : 'All time'}
-                </button>
-              ))}
-            </div>
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)]">
+          <div className="min-w-0">
+            {(incomingCount > 0 || outgoingCount > 0) && (
+              <section className="mb-8" aria-label="Requests">
+                <h2 className="mb-3 font-serif text-[1.05rem] text-mathua-primary">
+                  Requests
+                  {incomingCount > 0 && (
+                    <span className="ml-2 font-mono text-xs text-mathua-muted">{incomingCount} waiting</span>
+                  )}
+                </h2>
+                {incomingCount > 0 && (
+                  <>
+                    <h3 className="mb-2 font-mono text-[10px] uppercase tracking-[0.15em] text-mathua-muted">
+                      Waiting for you
+                    </h3>
+                    <ul className="mb-4 space-y-2">
+                      {feed?.incoming.map((request) => (
+                        <RequestRow
+                          key={`in-${request.profile_id}`}
+                          request={request}
+                          busy={busy}
+                          onAccept={() => run(() => acceptFriendRequest(request.profile_id), 'Friend request accepted.')}
+                          onDecline={() => run(() => declineFriendRequest(request.profile_id), 'Friend request declined.')}
+                        />
+                      ))}
+                    </ul>
+                  </>
+                )}
+                {outgoingCount > 0 && (
+                  <>
+                    <h3 className="mb-2 font-mono text-[10px] uppercase tracking-[0.15em] text-mathua-muted">Sent</h3>
+                    <ul className="space-y-2">
+                      {feed?.outgoing.map((request) => (
+                        <RequestRow
+                          key={`out-${request.profile_id}`}
+                          request={request}
+                          busy={busy}
+                          onCancel={() => run(() => cancelFriendRequest(request.profile_id), 'Friend request cancelled.')}
+                        />
+                      ))}
+                    </ul>
+                  </>
+                )}
+              </section>
+            )}
+
+            <section aria-label="Friends">
+              <h2 className="mb-3 font-serif text-[1.05rem] text-mathua-primary">
+                Friends <span className="ml-1 font-mono text-xs text-mathua-muted">{friendCount}</span>
+              </h2>
+              {friendCount === 0 ? (
+                <div className="border border-mathua-border bg-mathua-surface p-6">
+                  <p className="text-sm text-mathua-primary">No friends yet.</p>
+                  <p className="mt-1 font-mono text-[11px] text-mathua-muted">
+                    Share the code above, or add someone with theirs.
+                  </p>
+                </div>
+              ) : (
+                <ul className="space-y-2">
+                  {feed?.friends.map((friend) => (
+                    <FriendRow
+                      key={friend.profile_id}
+                      friend={friend}
+                      busy={busy}
+                      onRemove={() => run(() => removeFriend(friend.profile_id), `${friend.name} removed.`)}
+                      onBlock={() => run(() => blockFriend(friend.profile_id), `${friend.name} blocked.`)}
+                    />
+                  ))}
+                </ul>
+              )}
+            </section>
           </div>
-          {rowsLoading ? (
-            <p className="font-mono text-[11px] text-mathua-muted">Loading standings</p>
-          ) : rows.length === 0 ? (
-            <div className="border border-mathua-border bg-mathua-surface p-6">
-              <p className="text-sm text-mathua-primary">No standings yet.</p>
-              <p className="mt-1 font-mono text-[11px] text-mathua-muted">Add a friend or earn XP to appear here.</p>
+
+          <aside className="min-w-0 self-start lg:sticky lg:top-6" aria-label="Friends leaderboard">
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+              <h2 className="font-serif text-[1.05rem] text-mathua-primary">Friends leaderboard</h2>
+              <div className="flex gap-1" role="tablist" aria-label="Friends leaderboard period">
+                {(['weekly', 'all_time'] as LeaderboardView[]).map((id) => (
+                  <button
+                    key={id}
+                    type="button"
+                    role="tab"
+                    aria-selected={view === id}
+                    onClick={() => setView(id)}
+                    className={`h-8 border px-2 font-mono text-[10px] uppercase tracking-wider ${
+                      view === id
+                        ? 'border-mathua-blue bg-mathua-blue text-white'
+                        : 'border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue'
+                    }`}
+                  >
+                    {id === 'weekly' ? 'Week' : 'All time'}
+                  </button>
+                ))}
+              </div>
             </div>
-          ) : (
-            <ol className="divide-y divide-mathua-border border border-mathua-border">
-              {rows.map((row, index) => (
-                <li key={row.profile_id} className="flex items-center gap-3 px-3 py-2.5">
-                  <span className="w-6 shrink-0 font-mono text-[11px] text-mathua-muted">{index + 1}</span>
-                  <Avatar
-                    seed={row.profile_id}
-                    name={row.name}
-                    size={28}
-                    url={avatarImage(row.avatar)}
-                    preset={row.avatar.avatar_preset ?? null}
-                  />
-                  <span className="min-w-0 flex-1 truncate text-sm text-mathua-primary">
-                    {row.name}{row.is_me ? ' (you)' : ''}
-                  </span>
-                  <span className="shrink-0 font-mono text-[11px] tabular-nums text-mathua-secondary">{row.xp} XP</span>
-                </li>
-              ))}
-            </ol>
-          )}
-        </section>
+            {rowsLoading ? (
+              <p className="font-mono text-[11px] text-mathua-muted">Loading standings</p>
+            ) : rows.length === 0 ? (
+              <div className="border border-mathua-border bg-mathua-surface p-4">
+                <p className="text-sm text-mathua-primary">No standings yet.</p>
+                <p className="mt-1 font-mono text-[11px] text-mathua-muted">Add a friend or earn XP to appear here.</p>
+              </div>
+            ) : (
+              <ol className="divide-y divide-mathua-border border border-mathua-border">
+                {rows.map((row, index) => (
+                  <li key={row.profile_id} className="flex items-center gap-2 px-3 py-2">
+                    <span className="w-5 shrink-0 font-mono text-[11px] text-mathua-muted">{index + 1}</span>
+                    <Avatar
+                      seed={row.profile_id}
+                      name={row.name}
+                      size={24}
+                      url={avatarImage(row.avatar)}
+                      preset={row.avatar.avatar_preset ?? null}
+                    />
+                    <span className="min-w-0 flex-1 truncate text-sm text-mathua-primary">
+                      {row.name}
+                      {row.is_me ? ' (you)' : ''}
+                    </span>
+                    <span className="shrink-0 font-mono text-[11px] tabular-nums text-mathua-secondary">{row.xp} XP</span>
+                  </li>
+                ))}
+              </ol>
+            )}
+          </aside>
+        </div>
       </div>
       <Footer />
     </AppShell>
