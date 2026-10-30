@@ -2748,15 +2748,18 @@ func searchAdminUsersPG(q adminQueryerPG, query string, limit, offset int) ([]Ad
 }
 
 func (s *PostgresStore) RecordAdminAudit(rec AdminAuditRecord) (int64, error) {
-	res, err := s.db.Exec(
+	// lib/pq does not implement LastInsertId, so the id has to come back from
+	// the insert itself. Without this every audit write failed on Postgres.
+	var id int64
+	err := s.db.QueryRow(
 		`INSERT INTO admin_audit (actor_id, action, entity_type, entity_id, before_json, after_json, created_at)
-		 VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+		 VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id`,
 		rec.ActorID, rec.Action, rec.EntityType, rec.EntityID,
-		rec.BeforeJSON, rec.AfterJSON, formatReportTime(parseReportTime(rec.CreatedAt)))
+		rec.BeforeJSON, rec.AfterJSON, formatReportTime(parseReportTime(rec.CreatedAt))).Scan(&id)
 	if err != nil {
 		return 0, fmt.Errorf("record admin audit: %w", err)
 	}
-	return res.LastInsertId()
+	return id, nil
 }
 
 func (s *PostgresStore) ListAdminAudit(limit, offset int) ([]AdminAuditRecord, error) {
