@@ -30,9 +30,15 @@ const FILTERS: { key: string; label: string }[] = [
   { key: 'all', label: 'All' },
 ]
 
+const PAGE_SIZE = 20
+
 export default function AdminReportsPage() {
   const { can } = useAdminMe()
   const [filter, setFilter] = useState('open')
+  const [query, setQuery] = useState('')
+  const [appliedQuery, setAppliedQuery] = useState('')
+  const [offset, setOffset] = useState(0)
+  const [total, setTotal] = useState(0)
   const [reports, setReports] = useState<QuestionReport[] | null>(null)
   const [error, setError] = useState('')
 
@@ -53,10 +59,10 @@ export default function AdminReportsPage() {
 
   const load = useCallback(() => {
     setError('')
-    listAdminReports(filter)
-      .then((r) => setReports(r.reports))
-      .catch((e) => { setError(getErrorMessage(e)); setReports([]) })
-  }, [filter])
+    listAdminReports(filter, appliedQuery, PAGE_SIZE, offset)
+      .then((r) => { setReports(r.reports); setTotal(r.total ?? r.reports.length) })
+      .catch((e) => { setError(getErrorMessage(e)); setReports([]); setTotal(0) })
+  }, [filter, appliedQuery, offset])
 
   useEffect(() => { load() }, [load])
 
@@ -66,12 +72,38 @@ export default function AdminReportsPage() {
         <SectionHeader label="Administration" title="Reports" />
         <AdminNav />
 
+        <form
+          onSubmit={(event) => { event.preventDefault(); setAppliedQuery(query.trim()); setOffset(0) }}
+          className="mb-4 flex flex-wrap gap-2"
+        >
+          <label htmlFor="report-search" className="sr-only">Search reports</label>
+          <input
+            id="report-search"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search concept, question, reporter or resolution"
+            className="h-9 min-w-0 flex-1 border border-mathua-border bg-mathua-code px-3 font-mono text-xs text-mathua-primary outline-none focus:border-mathua-blue"
+          />
+          <button type="submit" className="h-9 border border-mathua-blue px-3 font-mono text-xs text-mathua-blue hover:bg-mathua-blue hover:text-white">
+            Search
+          </button>
+          {(appliedQuery || query) && (
+            <button
+              type="button"
+              onClick={() => { setQuery(''); setAppliedQuery(''); setOffset(0) }}
+              className="h-9 border border-mathua-border px-3 font-mono text-xs text-mathua-secondary hover:text-mathua-blue"
+            >
+              Clear
+            </button>
+          )}
+        </form>
+
         <div className="mb-4 flex flex-wrap gap-2">
           {FILTERS.map((f) => (
             <button
               key={f.key}
               type="button"
-              onClick={() => setFilter(f.key)}
+              onClick={() => { setFilter(f.key); setOffset(0) }}
               className={
                 filter === f.key
                   ? 'border border-mathua-blue text-mathua-blue px-3 h-9 font-mono text-xs'
@@ -120,6 +152,32 @@ export default function AdminReportsPage() {
             )
           })}
         </div>
+
+        {total > PAGE_SIZE && (
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-mathua-border pt-4">
+            <span className="font-mono text-[11px] text-mathua-muted">
+              {offset + 1}–{Math.min(offset + (reports?.length ?? 0), total)} of {total}
+            </span>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                disabled={offset === 0}
+                onClick={() => setOffset(Math.max(0, offset - PAGE_SIZE))}
+                className="h-8 border border-mathua-border px-3 font-mono text-[10px] uppercase tracking-wider text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue disabled:opacity-40"
+              >
+                Previous
+              </button>
+              <button
+                type="button"
+                disabled={offset + PAGE_SIZE >= total}
+                onClick={() => setOffset(offset + PAGE_SIZE)}
+                className="h-8 border border-mathua-border px-3 font-mono text-[10px] uppercase tracking-wider text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue disabled:opacity-40"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        )}
       </main>
       <Footer />
     </AppShell>

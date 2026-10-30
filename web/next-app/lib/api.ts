@@ -2107,11 +2107,16 @@ export async function setUserRole(userId: string, role: Role): Promise<{ user: A
 	}
 }
 
-export async function listAdminAudit(): Promise<AdminAuditRes> {
-	const res = await authedFetch(`${API_BASE}/api/admin/audit`, { cache: 'no-store' })
+export async function listAdminAudit(query = '', limit = 50, offset = 0): Promise<AdminAuditRes & { total?: number }> {
+	const params = new URLSearchParams({ limit: String(limit), offset: String(offset) })
+	if (query.trim()) params.set('q', query.trim())
+	const res = await authedFetch(`${API_BASE}/api/admin/audit?${params.toString()}`, { cache: 'no-store' })
 	if (!res.ok) await throwWithResponse(res, 'Could not load the audit log')
-	const data = (await res.json()) as { events?: unknown }
-	return { events: validateResponse(z.array(AdminAuditEventSchema), data.events ?? [], 'adminAudit') }
+	const data = (await res.json()) as { events?: unknown; total?: number }
+	return {
+		events: validateResponse(z.array(AdminAuditEventSchema), data.events ?? [], 'adminAudit'),
+		total: typeof data.total === 'number' ? data.total : (data.events as unknown[] | undefined)?.length ?? 0,
+	}
 }
 
 // ── Admin V2 ──────────────────────────────────────────────────────────────
@@ -2405,12 +2410,17 @@ export async function updateAdminAnnouncement(
 	return validateResponse(AnnouncementSchema, data.announcement, 'updateAnnouncement')
 }
 
-export async function listAdminReports(status?: string): Promise<{ reports: QuestionReport[] }> {
-	const qs = status && status !== 'all' ? `?status=${encodeURIComponent(status)}` : ''
-	const res = await authedFetch(`${API_BASE}/api/admin/reports${qs}`, { cache: 'no-store' })
+export async function listAdminReports(status?: string, query = '', limit = 20, offset = 0): Promise<{ reports: QuestionReport[]; total?: number }> {
+	const params = new URLSearchParams({ limit: String(limit), offset: String(offset) })
+	if (status && status !== 'all') params.set('status', status)
+	if (query.trim()) params.set('q', query.trim())
+	const res = await authedFetch(`${API_BASE}/api/admin/reports?${params.toString()}`, { cache: 'no-store' })
 	if (!res.ok) await throwWithResponse(res, 'Could not load reports')
-	const data = (await res.json()) as { reports?: unknown }
-	return { reports: validateResponse(z.array(QuestionReportSchema), data.reports ?? [], 'adminReports') }
+	const data = (await res.json()) as { reports?: unknown; total?: number }
+	return {
+		reports: validateResponse(z.array(QuestionReportSchema), data.reports ?? [], 'adminReports'),
+		total: typeof data.total === 'number' ? data.total : (data.reports as unknown[] | undefined)?.length ?? 0,
+	}
 }
 
 export async function getAdminReportImage(id: number): Promise<Blob> {
