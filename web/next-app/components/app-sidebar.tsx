@@ -23,6 +23,7 @@ import {
   Settings,
   SunMoon,
   Trophy,
+  Users,
   type IconComponent,
   type IconHandle,
 } from './icons'
@@ -68,6 +69,7 @@ const NAV_ITEMS: SidebarNavItem[] = [
   { label: 'Graph', href: '/graph', icon: Network },
   { label: 'Domains', href: '/domains', icon: Layers },
   { label: 'Leaderboard', href: '/leaderboard', icon: Trophy },
+  { label: 'Friends', href: '/friends', icon: Users },
   { label: 'History', href: '/history', icon: ChartNoAxesColumn },
   { label: 'Reports', href: '/reports', icon: FileText },
   { label: 'Settings', href: '/settings', icon: Settings },
@@ -117,6 +119,13 @@ export interface AppSidebarProps {
    * leaderboards off asked for the surface to go away, not only for their name.
    */
   showLeaderboards?: boolean
+  /**
+   * Whether to offer the Friends entry. The server gates the whole surface
+   * behind MATHUA_FRIENDS, so the navigation follows /api/config rather than
+   * implying a page that answers 404. Default false: a failed config read must
+   * not advertise a disabled feature.
+   */
+  showFriends?: boolean
   notificationUnread?: number
   /** Open reports in the moderation queue. Only used for the Admin entry. */
   adminReports?: number
@@ -133,6 +142,7 @@ export function AppSidebar({
   dueReviews = 0,
   isAdmin = false,
   showLeaderboards = true,
+  showFriends = false,
   notificationUnread = 0,
   adminReports = 0,
 }: AppSidebarProps) {
@@ -219,6 +229,7 @@ export function AppSidebar({
                   The server refuses either way, see AppSidebarProps.isAdmin. */}
               {(isAdmin ? [...NAV_ITEMS, ADMIN_ITEM] : NAV_ITEMS)
                 .filter((item) => showLeaderboards || item.href !== '/leaderboard')
+                .filter((item) => showFriends || item.href !== '/friends')
                 .map((item) => {
                   const active = pathname === item.href || pathname.startsWith(item.href + '/')
                   const Icon = item.icon

@@ -18,6 +18,8 @@ CREATE TABLE IF NOT EXISTS students (
     league_week          TEXT NOT NULL DEFAULT '',
     league_moved         INTEGER NOT NULL DEFAULT 0,
     share_token          TEXT NOT NULL DEFAULT '',
+    profile_id           TEXT NOT NULL DEFAULT '',
+    friend_code          TEXT NOT NULL DEFAULT '',
     email                TEXT NOT NULL DEFAULT '',
     google_id            TEXT NOT NULL DEFAULT '',
     avatar_url           TEXT NOT NULL DEFAULT '',
@@ -619,6 +621,35 @@ CREATE TABLE IF NOT EXISTS student_remedial_queue (
 );
 
 CREATE INDEX IF NOT EXISTS idx_remedial_queue_student ON student_remedial_queue(student_id, priority, created_at);
+
+-- Mutual friendships. The pair is stored in lexicographic order so a request
+-- in either direction collides on the same primary key instead of creating a
+-- second row. requested_by preserves who asked; a reciprocal request promotes
+-- the pending row to accepted.
+CREATE TABLE IF NOT EXISTS friendships (
+    student_a    TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    student_b    TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    status       TEXT NOT NULL CHECK (status IN ('pending', 'accepted')),
+    requested_by TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    created_at   INTEGER NOT NULL,
+    responded_at INTEGER NOT NULL DEFAULT 0,
+    PRIMARY KEY (student_a, student_b),
+    CHECK (student_a < student_b),
+    CHECK (requested_by = student_a OR requested_by = student_b)
+);
+
+CREATE INDEX IF NOT EXISTS idx_friendships_a_status ON friendships(student_a, status);
+CREATE INDEX IF NOT EXISTS idx_friendships_b_status ON friendships(student_b, status);
+
+CREATE TABLE IF NOT EXISTS friend_blocks (
+    blocker_id TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    blocked_id TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    created_at INTEGER NOT NULL,
+    PRIMARY KEY (blocker_id, blocked_id),
+    CHECK (blocker_id <> blocked_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_friend_blocks_blocked ON friend_blocks(blocked_id);
 
 CREATE TABLE IF NOT EXISTS schema_migrations (
     version    INTEGER PRIMARY KEY,

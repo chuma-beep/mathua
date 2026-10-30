@@ -186,6 +186,10 @@ type Server struct {
 	// ipHeader is the trusted client-IP header, or "" to use the socket
 	// address. See resolveTrustedIPHeader.
 	ipHeader string
+	// friendsEnabled gates the whole friends surface. The storage layer landed
+	// dark, and this flag is what keeps it dark until the public rollout is
+	// explicitly cleared. When false every /api/friends route answers 404.
+	friendsEnabled bool
 }
 
 // AILimits are the per-request token budgets the AI handlers apply.
@@ -210,6 +214,14 @@ func WithAI(chain *ai.Chain, quota *ai.Quota, limits AILimits) Option {
 		if limits.GoalMaxTokens > 0 {
 			s.aiGoalMaxTokens = limits.GoalMaxTokens
 		}
+	}
+}
+
+// WithFriends exposes the friends API. It is default-off and wired from
+// MATHUA_FRIENDS so that shipping the storage layer does not ship the surface.
+func WithFriends(enabled bool) Option {
+	return func(s *Server) {
+		s.friendsEnabled = enabled
 	}
 }
 
@@ -547,6 +559,10 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/announcements", logRequest(cors(s.authMiddleware(s.handleAnnouncements))))
 	mux.HandleFunc("/api/announcements/read", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleAnnouncementsRead)))))
 	mux.HandleFunc("/api/announcements/clear", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleAnnouncementsClear)))))
+	// Friends. Every route is behind MATHUA_FRIENDS; the handlers answer 404
+	// rather than pretending the surface is empty when the flag is off.
+	mux.HandleFunc("/api/friends", logRequest(cors(s.authMiddleware(s.handleFriends))))
+	mux.HandleFunc("/api/friends/", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleFriendRoute)))))
 	// Admin V2. Every route names the permission it needs, and requirePermission enforces it
 	// server-side on every request from the role the database holds, never from anything the
 	// client sends. The password login above is the old content-triage gate; it is not this
@@ -702,6 +718,7 @@ func (s *Server) handleConfig(w http.ResponseWriter, r *http.Request) {
 	// operational detail that a client has no use for and an attacker does, so
 	// none of them cross this boundary.
 	cfg["ai_enabled"] = s.aiChain != nil && s.aiChain.Enabled()
+	cfg["friends_enabled"] = s.friendsEnabled
 	if v := os.Getenv("GOOGLE_CLIENT_ID"); v != "" {
 		cfg["google_client_id"] = v
 	} else if v := os.Getenv("GOOGLE_OAUTH_CLIENT_ID"); v != "" {

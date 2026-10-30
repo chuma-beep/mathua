@@ -337,10 +337,14 @@ func main() {
 	} else {
 		fmt.Println("ai disabled")
 	}
+	friendsEnabled := strings.EqualFold(strings.TrimSpace(os.Getenv("MATHUA_FRIENDS")), "on")
+	if friendsEnabled {
+		fmt.Println("friends enabled: /api/friends is live")
+	}
 	srv := server.New(eng, repo, authSvc, server.WithAI(aiChain, aiQuota, server.AILimits{
 		AssistantMaxTokens: aiSettings.AssistantMaxTokens,
 		GoalMaxTokens:      aiSettings.GoalMaxTokens,
-	}))
+	}), server.WithFriends(friendsEnabled))
 	mux := http.NewServeMux()
 	srv.Register(mux)
 	if info, err := os.Stat("web/next-app/out"); err == nil && info.IsDir() {
