@@ -15,6 +15,15 @@ export const lessonMacros: Record<string, string> = macrosJson as Record<string,
 // below never mistake it for a math boundary. Restored at the end.
 const ESC_DOLLAR = '\u0000MU-ESC-DOLLAR\u0000'
 
+// The Algebrica corpus is inconsistent: some files double every backslash,
+// others double only the commands. `\\times` reaches KaTeX as `\\` (a line
+// break) followed by the word "times". Collapse a doubled backslash when a
+// command or punctuation follows; leave `\\` at a line end or before `[`
+// alone, because those are real row breaks with optional spacing.
+function fixDoubledCommands(s: string): string {
+  return s.replace(/\\\\(?=[a-zA-Z,;:!])/g, '\\')
+}
+
 function escapeHtmlMath(s: string): string {
   // Span HTML is inline raw HTML inside markdown: remark parses it line-wise
   // and runs backslash-escape processing on anything that looks like text,
@@ -66,10 +75,12 @@ export function prepareLessonMath(input: string): string {
     if (clean.includes('\n')) return '\n$$\n' + clean.trim() + '\n$$\n'
     return '$' + clean + '$'
   })
-  // Wikipedia style: \(...\), backslashes inside are already single
+  // Wikipedia style: \(...\), backslashes inside are usually single but the
+  // corpus also carries doubled commands such as \\times.
   content = content.replace(/\\\(([\s\S]*?)\\\)/g, (_, inner) => {
-    if (inner.includes('\n')) return '\n$$\n' + inner.trim() + '\n$$\n'
-    return '$' + inner + '$'
+    const clean = fixDoubledCommands(inner)
+    if (clean.includes('\n')) return '\n$$\n' + clean.trim() + '\n$$\n'
+    return '$' + clean + '$'
   })
 
   // --- Display math ---
@@ -93,10 +104,11 @@ export function prepareLessonMath(input: string): string {
   })
   // Wikipedia style: \[...\]
   content = content.replace(/\\\[([\s\S]*?)\\\]/g, (_, inner) => {
-    if (inner.includes('\n')) {
-      return '\n$$\n' + inner.trim() + '\n$$\n'
+    const clean = fixDoubledCommands(inner)
+    if (clean.includes('\n')) {
+      return '\n$$\n' + clean.trim() + '\n$$\n'
     }
-    return '$\\displaystyle ' + inlineSafe(inner.trim()) + '$'
+    return '$\\displaystyle ' + inlineSafe(clean.trim()) + '$'
   })
 
   // ORCCA content wraps multi-line display math (aligned, array) in single
@@ -138,12 +150,12 @@ export function prepareLessonMath(input: string): string {
 
   // Display math: $$...$$
   content = content.replace(/\$\$([\s\S]*?)\$\$/g, (_, inner: string) => {
-    return '<span class="math-display">' + escapeHtmlMath(unwrapTextCommand(inner.trim())) + '</span>'
+    return '<span class="math-display">' + escapeHtmlMath(unwrapTextCommand(fixDoubledCommands(inner.trim()))) + '</span>'
   })
 
   // Inline math: $...$
   content = content.replace(/\$([^$]+?)\$/g, (_, inner: string) => {
-    const trimmed = unwrapTextCommand(inner.trim())
+    const trimmed = unwrapTextCommand(fixDoubledCommands(inner.trim()))
     if (trimmed.includes('\n')) {
       return '<span class="math-display">' + escapeHtmlMath(trimmed) + '</span>'
     }
