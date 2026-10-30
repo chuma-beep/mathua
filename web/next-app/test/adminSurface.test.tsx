@@ -233,7 +233,10 @@ describe('the audit page is read-only', () => {
     render(<AdminAuditPage />)
     await screen.findByText('ADMIN_PROMOTE_USER')
 
-    expect(document.querySelectorAll('input, textarea, select')).toHaveLength(0)
+    expect(document.querySelectorAll('textarea, select')).toHaveLength(0)
+    const inputs = [...document.querySelectorAll('input')]
+    expect(inputs).toHaveLength(1)
+    expect(inputs[0].id).toBe('audit-search')
     for (const name of [/edit/i, /^delete/i, /remove/i, /correct/i, /annotate/i, /note/i]) {
       expect(screen.queryByRole('button', { name })).toBeNull()
       expect(screen.queryByRole('link', { name })).toBeNull()

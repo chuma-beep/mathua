@@ -75,6 +75,21 @@ func (s *Server) handleAdminReports(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "invalid status", 400)
 		return
 	}
+	if search, ok := s.repo.(storage.ReportSearchStore); ok {
+		query := strings.TrimSpace(q.Get("q"))
+		limit := adminLimit(q.Get("limit"), 20, 100)
+		offset := adminOffset(q.Get("offset"))
+		found, total, err := search.SearchReports(status, query, limit, offset)
+		if err != nil {
+			writeError(w, "failed to list reports", 500)
+			return
+		}
+		if found == nil {
+			found = []storage.QuestionReport{}
+		}
+		writeJSON(w, map[string]interface{}{"reports": found, "total": total, "limit": limit, "offset": offset})
+		return
+	}
 	reports, err := s.repo.ListReports(status, adminLimit(q.Get("limit"), 50, 200), adminOffset(q.Get("offset")))
 	if err != nil {
 		writeError(w, "failed to list reports", 500)
@@ -910,6 +925,18 @@ func (s *Server) handleAdminAudit(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		writeJSON(w, map[string]interface{}{"events": records})
+		return
+	}
+	if search, ok := s.repo.(storage.AuditSearchStore); ok {
+		query := strings.TrimSpace(q.Get("q"))
+		limit := adminLimit(q.Get("limit"), 50, 200)
+		offset := adminOffset(q.Get("offset"))
+		records, total, err := search.SearchAdminAudit(query, limit, offset)
+		if err != nil {
+			writeError(w, "failed to read audit log", 500)
+			return
+		}
+		writeJSON(w, map[string]interface{}{"events": records, "total": total, "limit": limit, "offset": offset})
 		return
 	}
 	records, err := s.repo.ListAdminAudit(adminLimit(q.Get("limit"), 50, 200), adminOffset(q.Get("offset")))
