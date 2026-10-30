@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 import AppShell from '../../../components/app-shell'
 import Footer from '../../../components/Footer'
@@ -20,18 +20,25 @@ import { listAdminAudit, getErrorMessage, type AdminAuditEvent } from '../../../
 // No filter and no search yet. Both are future work and neither is needed at this size; a
 // filter control that hides events invites an administrator to curate the view of their own
 // trail, which is the wrong direction.
+const PAGE_SIZE = 50
+
 export default function AdminAuditPage() {
   const [events, setEvents] = useState<AdminAuditEvent[] | null>(null)
   const [error, setError] = useState('')
   const [openId, setOpenId] = useState<number | null>(null)
+  const [query, setQuery] = useState('')
+  const [appliedQuery, setAppliedQuery] = useState('')
+  const [offset, setOffset] = useState(0)
+  const [total, setTotal] = useState(0)
 
-  useEffect(() => {
-    let cancelled = false
-    listAdminAudit()
-      .then((res) => { if (!cancelled) setEvents(res.events) })
-      .catch((e) => { if (!cancelled) setError(getErrorMessage(e)) })
-    return () => { cancelled = true }
-  }, [])
+  const load = useCallback(() => {
+    setError('')
+    listAdminAudit(appliedQuery, PAGE_SIZE, offset)
+      .then((res) => { setEvents(res.events); setTotal(res.total ?? res.events.length) })
+      .catch((e) => { setError(getErrorMessage(e)); setEvents([]); setTotal(0) })
+  }, [appliedQuery, offset])
+
+  useEffect(() => { load() }, [load])
 
   const { isStaff } = useAdminMe()
 
@@ -40,6 +47,32 @@ export default function AdminAuditPage() {
       <main className="mx-auto w-full max-w-[820px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
         <SectionHeader label="Administration" title="Audit" />
         <AdminNav />
+
+        <form
+          onSubmit={(event) => { event.preventDefault(); setAppliedQuery(query.trim()); setOffset(0) }}
+          className="mb-4 flex flex-wrap gap-2"
+        >
+          <label htmlFor="audit-search" className="sr-only">Search the audit log</label>
+          <input
+            id="audit-search"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search action, actor, entity or payload"
+            className="h-9 min-w-0 flex-1 border border-mathua-border bg-mathua-code px-3 font-mono text-xs text-mathua-primary outline-none focus:border-mathua-blue"
+          />
+          <button type="submit" className="h-9 border border-mathua-blue px-3 font-mono text-xs text-mathua-blue hover:bg-mathua-blue hover:text-white">
+            Search
+          </button>
+          {(appliedQuery || query) && (
+            <button
+              type="button"
+              onClick={() => { setQuery(''); setAppliedQuery(''); setOffset(0) }}
+              className="h-9 border border-mathua-border px-3 font-mono text-xs text-mathua-secondary hover:text-mathua-blue"
+            >
+              Clear
+            </button>
+          )}
+        </form>
 
         {!isStaff && (
           <p role="status" className="border border-mathua-border bg-mathua-surface p-4 font-mono text-xs text-mathua-secondary">
@@ -97,6 +130,32 @@ export default function AdminAuditPage() {
               )
             })}
           </ol>
+        )}
+
+        {total > PAGE_SIZE && (
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-mathua-border pt-4">
+            <span className="font-mono text-[11px] text-mathua-muted">
+              {offset + 1}–{Math.min(offset + (events?.length ?? 0), total)} of {total}
+            </span>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                disabled={offset === 0}
+                onClick={() => setOffset(Math.max(0, offset - PAGE_SIZE))}
+                className="h-8 border border-mathua-border px-3 font-mono text-[10px] uppercase tracking-wider text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue disabled:opacity-40"
+              >
+                Previous
+              </button>
+              <button
+                type="button"
+                disabled={offset + PAGE_SIZE >= total}
+                onClick={() => setOffset(offset + PAGE_SIZE)}
+                className="h-8 border border-mathua-border px-3 font-mono text-[10px] uppercase tracking-wider text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue disabled:opacity-40"
+              >
+                Next
+              </button>
+            </div>
+          </div>
         )}
 
         <Link href="/admin" className="mt-10 inline-block font-mono text-xs text-mathua-secondary hover:text-mathua-blue">
