@@ -8,7 +8,7 @@ import BottomTabs from './BottomTabs'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from './ui/sidebar'
 import { useAuthState } from '../hooks/useAuthState'
 import { isStaffRole } from '../lib/auth'
-import { adminOverview, getDueReviews, getSettings, listAnnouncements, listMyReports } from '../lib/api'
+import { adminOverview, getConfig, getDueReviews, getSettings, listAnnouncements, listMyReports } from '../lib/api'
 import { resolveAvatar } from '../lib/dicebear'
 
 type AppShellProps = {
@@ -28,6 +28,7 @@ export default function AppShell({ children, ...overrides }: AppShellProps) {
   // the rows. Default true so a slow or failed settings call never removes a
   // destination the learner has not actually turned off.
   const [showLeaderboards, setShowLeaderboards] = useState(true)
+  const [showFriends, setShowFriends] = useState(false)
   const [notificationUnread, setNotificationUnread] = useState(0)
   const [adminReports, setAdminReports] = useState(0)
 
@@ -61,6 +62,22 @@ export default function AppShell({ children, ...overrides }: AppShellProps) {
       window.removeEventListener('settings-changed', load)
     }
   }, [loggedIn, user])
+
+  useEffect(() => {
+    // The friends surface is server-gated. A failed read leaves the entry
+    // hidden: advertising a page that answers 404 is worse than omitting it.
+    let live = true
+    getConfig()
+      .then((cfg) => {
+        if (live) setShowFriends(cfg?.friends_enabled === true)
+      })
+      .catch(() => {
+        if (live) setShowFriends(false)
+      })
+    return () => {
+      live = false
+    }
+  }, [])
 
   useEffect(() => {
     if (!loggedIn) {
@@ -163,6 +180,7 @@ export default function AppShell({ children, ...overrides }: AppShellProps) {
           avatarPreset={overrides.avatarPreset !== undefined ? overrides.avatarPreset : avatarPreset}
           dueReviews={overrides.dueReviews ?? dueReviews}
           showLeaderboards={overrides.showLeaderboards ?? showLeaderboards}
+          showFriends={overrides.showFriends ?? showFriends}
           notificationUnread={overrides.notificationUnread ?? notificationUnread}
           adminReports={overrides.adminReports ?? adminReports}
         />

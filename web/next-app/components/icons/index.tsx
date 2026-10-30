@@ -46,6 +46,7 @@ import {
   SunMoonIcon,
   TrophyIcon,
   UserIcon,
+  UsersIcon,
   ChevronDownIcon,
   ChevronUpIcon,
   ArrowUpIcon,
@@ -138,6 +139,9 @@ export const Shield = wrap(ShieldIcon as never)
 export const SunMoon = wrap(SunMoonIcon as never)
 export const Trophy = wrap(TrophyIcon as never)
 export const User = wrap(UserIcon as never)
+// The friends destination. A pair rather than one person: the surface is about
+// the relationship, and a single user icon would read as the profile page.
+export const Users = wrap(UsersIcon as never)
 export const ChevronDown = wrap(ChevronDownIcon as never)
 export const ChevronUp = wrap(ChevronUpIcon as never)
 
@@ -179,6 +183,7 @@ export const ICON_NAMES = [
   'SunMoon',
   'Trophy',
   'User',
+  'Users',
   'ChevronDown',
   'ChevronUp',
   'MessagesSquare',
