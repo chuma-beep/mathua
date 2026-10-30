@@ -276,7 +276,7 @@ export default function ProfilePage() {
 
   if (loading) {
     return (
-      <ProfileShell name="…" studentId="…">
+      <ProfileShell name="…" studentId="…" showFriends={friendsEnabled}>
         <ProfileSkeleton />
       </ProfileShell>
     )
@@ -284,7 +284,7 @@ export default function ProfilePage() {
 
   if (error) {
     return (
-      <ProfileShell name="…" studentId="…">
+      <ProfileShell name="…" studentId="…" showFriends={friendsEnabled}>
         <div className="mx-auto px-4 sm:px-6 py-20 overflow-x-hidden min-w-0">
           <div
             style={{
@@ -303,7 +303,7 @@ export default function ProfilePage() {
 
   if (!user) {
     return (
-      <ProfileShell name="Guest" studentId={getGuestId() || 'guest'}>
+      <ProfileShell name="Guest" studentId={getGuestId() || 'guest'} showFriends={friendsEnabled}>
           <div id="profile-main" className="mx-auto w-full max-w-[820px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
           <div className="border border-mathua-border p-6 text-center bg-mathua-surface min-w-0">
             <h2 className="font-serif text-[1.2rem] text-mathua-primary mb-2">Welcome to your profile</h2>
@@ -334,7 +334,7 @@ export default function ProfilePage() {
     // Show actionable error with sign-in CTA instead of hanging.
     if (error) {
       return (
-        <ProfileShell name={user.name} studentId={user.student_id} isAdmin={isStaffRole(user.role)}>
+        <ProfileShell name={user.name} studentId={user.student_id} isAdmin={isStaffRole(user.role)} showFriends={friendsEnabled}>
           <div className="mx-auto px-4 sm:px-6 py-20 overflow-x-hidden min-w-0">
             <div style={{ fontFamily: monoFont, fontSize: 13, color: 'var(--text-muted)', textAlign: 'center' }}>
               {error}
@@ -348,7 +348,7 @@ export default function ProfilePage() {
       )
     }
     return (
-      <ProfileShell name={user.name} studentId={user.student_id} isAdmin={isStaffRole(user.role)}>
+      <ProfileShell name={user.name} studentId={user.student_id} isAdmin={isStaffRole(user.role)} showFriends={friendsEnabled}>
         <div className="mx-auto px-4 sm:px-6 py-20 overflow-x-hidden min-w-0">
           <div style={{ fontFamily: monoFont, fontSize: 13, color: 'var(--text-muted)', textAlign: 'center' }}>
             Loading scores…
