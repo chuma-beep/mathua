@@ -20,6 +20,12 @@ import Loading from '../../components/Loading'
 import Avatar from '../../components/Avatar'
 
 type LeaderboardPrivacy = NonNullable<UserSettings['leaderboard_privacy']>
+type FriendsVisibility = NonNullable<UserSettings['friends_visibility']>
+
+const FRIENDS_VISIBILITY_CHOICES: { value: FriendsVisibility; label: string }[] = [
+  { value: 'friends', label: 'Visible to friends' },
+  { value: 'nobody', label: 'Turn off friends' },
+]
 
 // Three explicit choices, because the middle one is the point: a learner who
 // wants to compete but not be named should not have to disappear from the board
@@ -60,6 +66,7 @@ export default function SettingsPage() {
   const [idBusy, setIdBusy] = useState(false)
   const [idMsg, setIdMsg] = useState('')
   const [providers, setProviders] = useState<OAuthProvider[]>([])
+  const [friendsEnabled, setFriendsEnabled] = useState(false)
   const [verifyMsg, setVerifyMsg] = useState('')
   const [verifyBusy, setVerifyBusy] = useState(false)
 
@@ -82,6 +89,7 @@ export default function SettingsPage() {
       getScores(info.student_id).then(s => setDailyGoal(s.daily_xp_goal)).catch(() => {})
     }
     getConfig().then(cfg => {
+      setFriendsEnabled(cfg?.friends_enabled === true)
       if (cfg && Array.isArray(cfg.providers)) {
         setProviders(cfg.providers.filter((p): p is OAuthProvider => p in OAUTH_LABELS))
       }
@@ -155,6 +163,31 @@ export default function SettingsPage() {
   }
 
   const leaderboardPrivacy = settings.leaderboard_privacy ?? 'named'
+
+  // Friends visibility is the same shape of decision as leaderboard privacy:
+  // the server reads the stored key on every friend read, so the control reverts
+  // if the save fails rather than leaving the UI claiming a state the server
+  // never accepted.
+  const handleFriendsVisibility = async (value: FriendsVisibility) => {
+    const previous = settings.friends_visibility ?? 'friends'
+    if (previous === value) return
+    const next: UserSettings = { ...settings, friends_visibility: value }
+    setSettings(next)
+    setSaved(false)
+    try {
+      await updateSettings(next)
+      setSaved(true)
+      window.dispatchEvent(new Event('settings-changed'))
+      setTimeout(() => setSaved(false), 2000)
+    } catch {
+      console.error('updateSettings failed')
+      setSettings(current => ({ ...current, friends_visibility: previous }))
+      setSaveError('Couldn\u2019t save, check your connection and try again.')
+      setTimeout(() => setSaveError(''), 3000)
+    }
+  }
+
+  const friendsVisibility = settings.friends_visibility ?? 'friends'
 
   const paused = !!settings.pause_until
   const pausedLabel = (() => {
@@ -515,6 +548,40 @@ export default function SettingsPage() {
                   })}
                 </div>
               </div>
+
+              {friendsEnabled && (
+                <div className="border-t border-mathua-border pt-6 min-w-0">
+                  <span id="friends-visibility-label" className="font-mono text-sm text-mathua-primary">Friends</span>
+                  <p id="friends-visibility-help" className="text-mathua-muted text-xs mt-1">
+                    Friends see your name and a shared view of mastered concepts. Turning friends off hides you from their lists and stops new requests. Nothing about answers, attempts or weaknesses is shared either way.
+                  </p>
+                  <div
+                    role="group"
+                    aria-labelledby="friends-visibility-label"
+                    aria-describedby="friends-visibility-help"
+                    className="flex flex-wrap gap-2 mt-3"
+                  >
+                    {FRIENDS_VISIBILITY_CHOICES.map(choice => {
+                      const selected = friendsVisibility === choice.value
+                      return (
+                        <button
+                          key={choice.value}
+                          type="button"
+                          aria-pressed={selected}
+                          onClick={() => handleFriendsVisibility(choice.value)}
+                          className={`border rounded-none px-4 h-9 text-xs font-mono transition-colors ${
+                            selected
+                              ? 'border-mathua-blue text-mathua-blue bg-mathua-blue-faint'
+                              : 'border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue'
+                          }`}
+                        >
+                          {choice.label}
+                        </button>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
 
               <div className="border-t border-mathua-border pt-6 min-w-0">
                 <span className="font-mono text-sm text-mathua-primary">Profile</span>

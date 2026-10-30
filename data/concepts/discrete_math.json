@@ -117,7 +117,7 @@
     "label": "Pascal's triangle and binomial theorem",
     "domain": "discrete_math",
     "subdomain": "discrete_math.combinatorics",
-    "grading_type": "multiple_choice",
+    "grading_type": "ordering",
     "prerequisites": [
       "discrete.combinatorics.combinations",
       "alg.poly.special"

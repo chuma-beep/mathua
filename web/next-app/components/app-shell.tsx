@@ -8,7 +8,7 @@ import BottomTabs from './BottomTabs'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from './ui/sidebar'
 import { useAuthState } from '../hooks/useAuthState'
 import { isStaffRole } from '../lib/auth'
-import { adminOverview, getDueReviews, getSettings, listAnnouncements, listMyReports } from '../lib/api'
+import { adminOverview, getConfig, getDueReviews, getSettings, listAnnouncements, listMyReports } from '../lib/api'
 import { resolveAvatar } from '../lib/dicebear'
 
 type AppShellProps = {
@@ -28,6 +28,7 @@ export default function AppShell({ children, ...overrides }: AppShellProps) {
   // the rows. Default true so a slow or failed settings call never removes a
   // destination the learner has not actually turned off.
   const [showLeaderboards, setShowLeaderboards] = useState(true)
+  const [showFriends, setShowFriends] = useState(false)
   const [notificationUnread, setNotificationUnread] = useState(0)
   const [adminReports, setAdminReports] = useState(0)
 
@@ -61,6 +62,40 @@ export default function AppShell({ children, ...overrides }: AppShellProps) {
       window.removeEventListener('settings-changed', load)
     }
   }, [loggedIn, user])
+
+  useEffect(() => {
+    // The friends surface is server-gated. A failed read must not be treated as
+    // "disabled" for the rest of the session: a challenge page, a sleeping
+    // connection or a deploy in progress would then hide the entry until the
+    // next full reload. Retry on failure and re-check when the tab returns.
+    let live = true
+    let timer: ReturnType<typeof setTimeout> | undefined
+    const load = () => {
+      getConfig()
+        .then((cfg) => {
+          if (!live || !cfg) {
+            if (live) timer = setTimeout(load, 3000)
+            return
+          }
+          setShowFriends(cfg.friends_enabled === true)
+        })
+        .catch(() => {
+          if (live) timer = setTimeout(load, 3000)
+        })
+    }
+    load()
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') load()
+    }
+    window.addEventListener('focus', load)
+    document.addEventListener('visibilitychange', onVisible)
+    return () => {
+      live = false
+      if (timer) clearTimeout(timer)
+      window.removeEventListener('focus', load)
+      document.removeEventListener('visibilitychange', onVisible)
+    }
+  }, [])
 
   useEffect(() => {
     if (!loggedIn) {
@@ -163,6 +198,7 @@ export default function AppShell({ children, ...overrides }: AppShellProps) {
           avatarPreset={overrides.avatarPreset !== undefined ? overrides.avatarPreset : avatarPreset}
           dueReviews={overrides.dueReviews ?? dueReviews}
           showLeaderboards={overrides.showLeaderboards ?? showLeaderboards}
+          showFriends={overrides.showFriends ?? showFriends}
           notificationUnread={overrides.notificationUnread ?? notificationUnread}
           adminReports={overrides.adminReports ?? adminReports}
         />

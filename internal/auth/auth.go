@@ -307,6 +307,17 @@ func (a *AuthService) LoginOrCreateOAuth(p OAuthProfile) (string, *storage.Stude
 			}
 			st.AvatarURL = p.AvatarURL
 		}
+		// A provider that attests the mailbox is stronger evidence than the
+		// flag stored at signup. Without this, an account created with a
+		// password and later signed in with Google kept email_verified=false,
+		// and the friends gate asked a Google user to verify an address Google
+		// had already verified.
+		if p.EmailVerified && !st.EmailVerified {
+			if err := a.repo.SetEmailVerified(st.ID, true); err != nil {
+				return "", nil, err
+			}
+			st.EmailVerified = true
+		}
 		tok, err := generateToken(st.ID)
 		if err != nil {
 			return "", nil, err
@@ -319,6 +330,12 @@ func (a *AuthService) LoginOrCreateOAuth(p OAuthProfile) (string, *storage.Stude
 		} else if st != nil && (st.EmailVerified || st.PasswordHash == "") {
 			if err := a.repo.CreateIdentity(p.Provider, p.ProviderID, st.ID, p.Email, true); err != nil {
 				return "", nil, err
+			}
+			if !st.EmailVerified {
+				if err := a.repo.SetEmailVerified(st.ID, true); err != nil {
+					return "", nil, err
+				}
+				st.EmailVerified = true
 			}
 			if p.AvatarURL != "" && st.AvatarURL == "" {
 				_ = a.repo.SetAvatarURL(st.ID, p.AvatarURL)

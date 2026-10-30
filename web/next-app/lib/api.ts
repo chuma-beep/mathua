@@ -560,6 +560,12 @@ export interface ConfigRes {
 	 * are not attempted and the deterministic paths stand alone.
 	 */
 	ai_enabled?: boolean
+	/**
+	 * Whether the friends surface is exposed. The storage layer ships dark, so
+	 * a deployment without MATHUA_FRIENDS=on answers 404 on every friends route
+	 * and the navigation must not offer a page that cannot load.
+	 */
+	friends_enabled?: boolean
 }
 
 export async function getConfig(): Promise<ConfigRes | null> {
@@ -942,6 +948,10 @@ export interface UserSettings {
 	// the same key from the opaque settings blob; a missing key means "named",
 	// which is the behaviour that existed before the setting.
 	leaderboard_privacy?: 'named' | 'anonymous' | 'hidden'
+	// Whether accepted friends can see this learner's name and shared graph.
+	// A missing key means "friends", the RFC default; `nobody` hides the
+	// learner from lists and revokes profile and graph access immediately.
+	friends_visibility?: 'friends' | 'nobody'
 }
 
 export async function getSettings(): Promise<UserSettings> {
@@ -2112,11 +2122,16 @@ export async function setUserRole(userId: string, role: Role): Promise<{ user: A
 	}
 }
 
-export async function listAdminAudit(): Promise<AdminAuditRes> {
-	const res = await authedFetch(`${API_BASE}/api/admin/audit`, { cache: 'no-store' })
+export async function listAdminAudit(query = '', limit = 50, offset = 0): Promise<AdminAuditRes & { total?: number }> {
+	const params = new URLSearchParams({ limit: String(limit), offset: String(offset) })
+	if (query.trim()) params.set('q', query.trim())
+	const res = await authedFetch(`${API_BASE}/api/admin/audit?${params.toString()}`, { cache: 'no-store' })
 	if (!res.ok) await throwWithResponse(res, 'Could not load the audit log')
-	const data = (await res.json()) as { events?: unknown }
-	return { events: validateResponse(z.array(AdminAuditEventSchema), data.events ?? [], 'adminAudit') }
+	const data = (await res.json()) as { events?: unknown; total?: number }
+	return {
+		events: validateResponse(z.array(AdminAuditEventSchema), data.events ?? [], 'adminAudit'),
+		total: typeof data.total === 'number' ? data.total : (data.events as unknown[] | undefined)?.length ?? 0,
+	}
 }
 
 // ── Admin V2 ──────────────────────────────────────────────────────────────
@@ -2245,6 +2260,133 @@ export async function clearAnnouncements(): Promise<void> {
 	if (!res.ok) await throwWithResponse(res, 'Could not clear announcements')
 }
 
+// Friends. The flag is server-owned; a 404 here means the deployment has not
+// cleared the surface, not that the page is broken, so callers should treat it
+// as "not available" rather than an error to retry.
+export interface FriendAvatar {
+	avatar_url?: string
+	avatar_dicebear?: { style: string; seed: string } | null
+	avatar_preset?: number | null
+}
+
+export interface FriendIdentity {
+	profile_id: string
+	friend_code: string
+}
+
+export interface FriendSummary {
+	profile_id: string
+	name: string
+	username?: string
+	avatar: FriendAvatar
+	xp_total: number
+	mastered: number
+	friends_since?: string
+}
+
+export interface FriendRequest {
+	profile_id: string
+	name: string
+	username?: string
+	avatar: FriendAvatar
+	direction: 'incoming' | 'outgoing'
+	created_at: string
+}
+
+export interface FriendsFeed {
+	identity: FriendIdentity
+	friends: FriendSummary[]
+	incoming: FriendRequest[]
+	outgoing: FriendRequest[]
+}
+
+export interface FriendGraphNode {
+	concept_id: string
+	status: string
+}
+
+export interface FriendLeaderboardRow {
+	profile_id: string
+	name: string
+	username?: string
+	avatar: FriendAvatar
+	xp: number
+	mastered: number
+	is_me: boolean
+}
+
+export async function getFriends(): Promise<FriendsFeed> {
+	const res = await authedFetch(`${API_BASE}/api/friends`, { cache: 'no-store' })
+	if (!res.ok) await throwWithResponse(res, 'Could not load friends')
+	return (await res.json()) as FriendsFeed
+}
+
+async function friendPost(path: string, body: Record<string, string>): Promise<Response> {
+	const res = await authedFetch(`${API_BASE}/api/friends/${path}`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(body),
+	})
+	if (!res.ok) await throwWithResponse(res, 'Friend action failed')
+	return res
+}
+
+export async function sendFriendRequest(query: string): Promise<'pending' | 'accepted'> {
+	const res = await friendPost('requests', { query })
+	const data = (await res.json()) as { status?: string }
+	return data.status === 'accepted' ? 'accepted' : 'pending'
+}
+
+export async function acceptFriendRequest(profileId: string): Promise<void> {
+	await friendPost('requests/accept', { profile_id: profileId })
+}
+
+export async function declineFriendRequest(profileId: string): Promise<void> {
+	await friendPost('requests/decline', { profile_id: profileId })
+}
+
+export async function cancelFriendRequest(profileId: string): Promise<void> {
+	await friendPost('requests/cancel', { profile_id: profileId })
+}
+
+export async function removeFriend(profileId: string): Promise<void> {
+	await friendPost('remove', { profile_id: profileId })
+}
+
+export async function blockFriend(profileId: string): Promise<void> {
+	await friendPost('block', { profile_id: profileId })
+}
+
+export async function unblockFriend(profileId: string): Promise<void> {
+	await friendPost('unblock', { profile_id: profileId })
+}
+
+export async function rotateFriendCode(): Promise<string> {
+	const res = await friendPost('code/rotate', {})
+	const data = (await res.json()) as { friend_code?: string }
+	return data.friend_code ?? ''
+}
+
+export async function getFriendProfile(profileId: string): Promise<FriendSummary> {
+	const res = await authedFetch(`${API_BASE}/api/friends/profile?profile_id=${encodeURIComponent(profileId)}`, { cache: 'no-store' })
+	if (!res.ok) await throwWithResponse(res, 'Could not load this friend')
+	return (await res.json()) as FriendSummary
+}
+
+export async function getFriendGraph(profileId: string): Promise<FriendGraphNode[]> {
+	const res = await authedFetch(`${API_BASE}/api/friends/graph?profile_id=${encodeURIComponent(profileId)}`, { cache: 'no-store' })
+	if (!res.ok) await throwWithResponse(res, 'Could not load this graph')
+	const data = (await res.json()) as { nodes?: FriendGraphNode[] }
+	return data.nodes ?? []
+}
+
+export async function getFriendsLeaderboard(view: 'weekly' | 'all_time'): Promise<FriendLeaderboardRow[]> {
+	const res = await authedFetch(`${API_BASE}/api/friends/leaderboard?view=${view}`, { cache: 'no-store' })
+	if (!res.ok) await throwWithResponse(res, 'Could not load the friends leaderboard')
+	const data = (await res.json()) as { rows?: FriendLeaderboardRow[] }
+	return data.rows ?? []
+}
+
 export async function listAdminAnnouncements(): Promise<{ announcements: Announcement[] }> {
 	const res = await authedFetch(`${API_BASE}/api/admin/announcements`, { cache: 'no-store' })
 	if (!res.ok) await throwWithResponse(res, 'Could not load announcements')
@@ -2283,12 +2425,17 @@ export async function updateAdminAnnouncement(
 	return validateResponse(AnnouncementSchema, data.announcement, 'updateAnnouncement')
 }
 
-export async function listAdminReports(status?: string): Promise<{ reports: QuestionReport[] }> {
-	const qs = status && status !== 'all' ? `?status=${encodeURIComponent(status)}` : ''
-	const res = await authedFetch(`${API_BASE}/api/admin/reports${qs}`, { cache: 'no-store' })
+export async function listAdminReports(status?: string, query = '', limit = 20, offset = 0): Promise<{ reports: QuestionReport[]; total?: number }> {
+	const params = new URLSearchParams({ limit: String(limit), offset: String(offset) })
+	if (status && status !== 'all') params.set('status', status)
+	if (query.trim()) params.set('q', query.trim())
+	const res = await authedFetch(`${API_BASE}/api/admin/reports?${params.toString()}`, { cache: 'no-store' })
 	if (!res.ok) await throwWithResponse(res, 'Could not load reports')
-	const data = (await res.json()) as { reports?: unknown }
-	return { reports: validateResponse(z.array(QuestionReportSchema), data.reports ?? [], 'adminReports') }
+	const data = (await res.json()) as { reports?: unknown; total?: number }
+	return {
+		reports: validateResponse(z.array(QuestionReportSchema), data.reports ?? [], 'adminReports'),
+		total: typeof data.total === 'number' ? data.total : (data.reports as unknown[] | undefined)?.length ?? 0,
+	}
 }
 
 export async function getAdminReportImage(id: number): Promise<Blob> {

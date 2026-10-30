@@ -532,22 +532,37 @@ type ratioConceptGen struct{}
 // The answer is a ratio, and the grader already rejects anything without a
 // colon. Numeric grading put a keypad with no colon in front of it.
 func (g *ratioConceptGen) AnswerFormat() generator.AnswerFormat {
-	return generator.AnswerFormat{Hint: "Ratio as a:b, e.g. 4:7", InputMode: "text"}
+	return generator.AnswerFormat{Hint: "Ratio as a:b or a/b, e.g. 4:7", InputMode: "text"}
+}
+
+// normaliseRatio reads the three forms a learner actually writes: a:b, a/b
+// and "a to b". Report 351 answered 5/2 for 5:2 and was told the format was
+// invalid, which is a presentation difference rather than a wrong ratio.
+func normaliseRatio(s string) (int, int, bool) {
+	s = strings.ToLower(strings.TrimSpace(s))
+	s = strings.ReplaceAll(s, " to ", ":")
+	s = strings.ReplaceAll(s, "/", ":")
+	s = strings.ReplaceAll(s, "÷", ":")
+	parts := strings.SplitN(s, ":", 2)
+	if len(parts) != 2 {
+		return 0, 0, false
+	}
+	a, errA := strconv.Atoi(strings.TrimSpace(parts[0]))
+	b, errB := strconv.Atoi(strings.TrimSpace(parts[1]))
+	if errA != nil || errB != nil || b == 0 {
+		return 0, 0, false
+	}
+	return a, b, true
 }
 
 func (g *ratioConceptGen) Grade(expected, userAnswer string) grader.Result {
-	eParts := strings.SplitN(expected, ":", 2)
-	aParts := strings.SplitN(userAnswer, ":", 2)
-	if len(eParts) != 2 || len(aParts) != 2 {
-		return grader.Result{Correct: false, Score: 0, Feedback: "Invalid ratio format (use a:b)"}
+	e1, e2, eOK := normaliseRatio(expected)
+	a1, a2, aOK := normaliseRatio(userAnswer)
+	if !eOK || !aOK {
+		return grader.Result{Correct: false, Score: 0, Feedback: "Enter the ratio as a:b or a/b"}
 	}
-	e1, err1 := strconv.Atoi(strings.TrimSpace(eParts[0]))
-	e2, err2 := strconv.Atoi(strings.TrimSpace(eParts[1]))
-	a1, err3 := strconv.Atoi(strings.TrimSpace(aParts[0]))
-	a2, err4 := strconv.Atoi(strings.TrimSpace(aParts[1]))
-	if err1 != nil || err2 != nil || err3 != nil || err4 != nil {
-		return grader.Result{Correct: false, Score: 0, Feedback: "Invalid ratio format"}
-	}
+	// The question asks for simplest form, so an equivalent but unreduced
+	// answer such as 6:4 for 3:2 is still not the requested answer.
 	if e1 == a1 && e2 == a2 {
 		return grader.Result{Correct: true, Score: 1}
 	}
@@ -561,12 +576,35 @@ func (g *ratioConceptGen) Generate(ctx generator.GeneratorContext) generator.Pro
 	for a == b {
 		b = rand.Intn(max(1, scale*2)) + 1
 	}
+	// The prompt says "in simplest form", so the stored answer has to be the
+	// reduced pair. The old generator stored a:b unchanged, which marked a
+	// correctly simplified answer wrong whenever the two numbers shared a
+	// factor.
+	div := ratioGCD(a, b)
+	sa, sb := a/div, b/div
+	explanation := fmt.Sprintf("%d:%d", sa, sb)
+	if div > 1 {
+		explanation = fmt.Sprintf("%d:%d = %d:%d", a, b, sa, sb)
+	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Write the ratio of %d to %d in simplest form.", a, b),
-		Answer:      fmt.Sprintf("%d:%d", a, b),
-		Explanation: fmt.Sprintf("%d:%d", a, b),
+		Answer:      fmt.Sprintf("%d:%d", sa, sb),
+		Explanation: explanation,
 		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b)},
 	}
+}
+
+func ratioGCD(a, b int) int {
+	for b != 0 {
+		a, b = b, a%b
+	}
+	if a < 0 {
+		return -a
+	}
+	if a == 0 {
+		return 1
+	}
+	return a
 }
 
 type ratioSimplifyGen struct{}
