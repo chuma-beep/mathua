@@ -714,3 +714,58 @@ func TestRecommend_TargetedRemediation_FallsBackToDAGPrereqWhenNoKeyPrerequisite
 		t.Errorf("primary reason = %q, want %q", got.Primary.Reason, ReasonPrerequisite)
 	}
 }
+
+// Report 345: a diagnostic miss put an abstract algebra concept in the
+// remedial queue, and it was offered as a practice task while all three of its
+// prerequisites were still not started. Remediation must respect the same
+// reachability rule as every other candidate.
+func TestRecommend_RemedialConceptWaitsForItsPrerequisites(t *testing.T) {
+	d, err := concepts.Build([]concepts.Concept{
+		{
+			ID: "a", Label: "Concept A", Domain: "d", Subdomain: "s-a",
+			Prerequisites:    []string{},
+			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10},
+		},
+		{
+			ID: "b", Label: "Concept B", Domain: "d", Subdomain: "s-b",
+			Prerequisites:    []string{"a"},
+			MasteryThreshold: concepts.MasteryThreshold{Streak: 3, AvgTimeSeconds: 10},
+		},
+	})
+	if err != nil {
+		t.Fatalf("build DAG: %v", err)
+	}
+	s := New(d)
+	now := time.Now()
+	in := RecommendInput{
+		Now:              now,
+		AttemptedDays:    10,
+		ConceptsMastered: 1,
+		RemedialConcepts: []string{"b"},
+		Snapshots: map[string]*ConceptSnapshot{
+			"b": {Status: mastery.StatusMastered, WeaknessScore: 0.9, LastAttempted: now},
+		},
+	}
+
+	got := s.Recommend(in)
+	if got.Primary != nil && got.Primary.ConceptID == "b" {
+		t.Fatal("remedial concept b was primary while its prerequisite a was unstarted")
+	}
+	for _, alt := range got.Alternatives {
+		if alt.ConceptID == "b" {
+			t.Fatalf("remedial concept b appeared as an alternative while a was unstarted: %+v", alt)
+		}
+	}
+
+	in.Snapshots["a"] = masteredAt(now)
+	got = s.Recommend(in)
+	found := got.Primary != nil && got.Primary.ConceptID == "b"
+	for _, alt := range got.Alternatives {
+		if alt.ConceptID == "b" {
+			found = true
+		}
+	}
+	if !found {
+		t.Fatalf("remedial concept b was not offered after its prerequisite was mastered: %+v", got)
+	}
+}
