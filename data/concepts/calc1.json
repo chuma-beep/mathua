@@ -1,0 +1,1109 @@
+[
+  {
+    "id": "calc.limit.concept",
+    "label": "Concept of a limit",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.func.concept",
+      "alg.seq.geometric"
+    ],
+    "encompasses": [
+      "alg.func.concept"
+    ],
+    "key_prerequisites": [
+      "alg.func.concept"
+    ],
+    "variants": [
+      {
+        "difficulty": 0.3,
+        "time_thresh": 12.0,
+        "label": "easy"
+      },
+      {
+        "difficulty": 0.7,
+        "time_thresh": 15.0,
+        "label": "hard"
+      }
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "calc.limit.numeric",
+    "label": "Estimate limits numerically",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.limit.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "calc.limit.properties",
+    "label": "Limit laws and properties",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.limit.numeric"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "calc.limit.infinity",
+    "label": "Limits at infinity",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.limit.properties",
+      "alg.exp.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "calc.limit.continuity",
+    "label": "Continuity and types of discontinuity",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "calc.limit.properties"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "calc.deriv.concept",
+    "label": "Derivative as slope of tangent line",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.limit.continuity",
+      "alg.linear.slope"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "calc.deriv.power_rule",
+    "label": "Power rule for differentiation",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "polynomial",
+    "prerequisites": [
+      "calc.deriv.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "calc.deriv.sum_rule",
+    "label": "Sum and difference rules",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "polynomial",
+    "prerequisites": [
+      "calc.deriv.power_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "calc.deriv.product_rule",
+    "label": "Product rule",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.deriv.sum_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "calc.deriv.quotient_rule",
+    "label": "Quotient rule",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.deriv.product_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "calc.deriv.chain_rule",
+    "label": "Chain rule",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.deriv.product_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "calc.deriv.trig",
+    "label": "Derivatives of sine and cosine",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.deriv.chain_rule",
+      "trig.graph.sin"
+    ],
+    "encompasses": [
+      "trig.basics.sin_cos_def"
+    ],
+    "interference_group": "calc.deriv",
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "calc.deriv.exp_log",
+    "label": "Derivatives of e^x and ln(x)",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.deriv.chain_rule",
+      "alg.log.properties"
+    ],
+    "interference_group": "calc.deriv",
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "calc.deriv.applications",
+    "label": "Applications: velocity and acceleration",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.power_rule",
+      "prealg.eq.word"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "calc.deriv.optimization",
+    "label": "Optimization problems",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.applications",
+      "alg.quad.formula"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "calc.integral.indefinite",
+    "label": "Indefinite integrals and antiderivatives",
+    "domain": "calc1",
+    "subdomain": "calculus.integrals",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.deriv.power_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "calc.integral.power_rule",
+    "label": "Power rule for integration",
+    "domain": "calc1",
+    "subdomain": "calculus.integrals",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.integral.indefinite"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "calc.integral.definite",
+    "label": "Definite integrals and area",
+    "domain": "calc1",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.power_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "calc.integral.ftc",
+    "label": "Fundamental Theorem of Calculus",
+    "domain": "calc1",
+    "subdomain": "calculus.integrals",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.integral.definite",
+      "calc.deriv.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "calc.deriv.implicit",
+    "label": "Implicit differentiation",
+    "domain": "calc1",
+    "subdomain": "calculus.advanced",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.deriv.chain_rule",
+      "alg.eq.vars_both_sides"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "calc.deriv.related_rates",
+    "label": "Related rates",
+    "domain": "calc1",
+    "subdomain": "calculus.advanced",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.deriv.implicit",
+      "prealg.eq.word"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "calc.limit.algebra",
+    "label": "Algebra of limits",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.limit.properties"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.limit.squeeze",
+    "label": "Squeeze theorem",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.limit.properties"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.limit.asymptotes",
+    "label": "Asymptotes of functions",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.limit.infinity"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.limit.indeterminate",
+    "label": "Indeterminate forms of limits",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.limit.properties"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.limit.little_o",
+    "label": "Little-o notation",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "calc.limit.properties"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.limit.big_o",
+    "label": "Big O notation",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.limit.properties"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.limit.lhopital",
+    "label": "L'Hopital's rule",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.limit.indeterminate",
+      "calc.deriv.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.limit.weierstrass",
+    "label": "Weierstrass extreme value theorem",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.limit.continuity"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.limit.discontinuity",
+    "label": "Types of discontinuities",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "calc.limit.continuity"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.deriv.difference_quotient",
+    "label": "Difference quotient",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.limit.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.deriv.differential",
+    "label": "Differential of a function",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.deriv.non_differentiability",
+    "label": "Points of non-differentiability",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.deriv.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.deriv.rolle",
+    "label": "Rolle's theorem",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.limit.continuity",
+      "calc.deriv.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.deriv.mvt",
+    "label": "Mean value theorem (Lagrange)",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.rolle"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.deriv.cauchy_mvt",
+    "label": "Cauchy's mean value theorem",
+    "domain": "calc1",
+    "subdomain": "calculus.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.mvt"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.deriv.fermat",
+    "label": "Fermat's theorem on stationary points",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.deriv.convexity",
+    "label": "Convexity and concavity of functions",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.deriv.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.seq.concept",
+    "label": "Sequences: definition and notation",
+    "domain": "calc1",
+    "subdomain": "calculus.sequences",
+    "grading_type": "tuple",
+    "prerequisites": [
+      "calc.limit.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.seq.convergence",
+    "label": "Convergent and divergent sequences",
+    "domain": "calc1",
+    "subdomain": "calculus.sequences",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "calc.seq.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.deriv.trig_other",
+    "label": "Derivatives of tangent, secant, cosecant, cotangent",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.deriv.trig"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 45
+    }
+  },
+  {
+    "id": "calc.deriv.inverse_trig",
+    "label": "Derivatives of inverse trigonometric functions",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.deriv.trig"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 60
+    }
+  },
+  {
+    "id": "calc.deriv.general_exp",
+    "label": "Derivatives of exponential functions with general base",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.deriv.exp_log"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 45
+    }
+  },
+  {
+    "id": "calc.deriv.log_diff",
+    "label": "Logarithmic differentiation",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.deriv.exp_log",
+      "calc.deriv.implicit"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 90
+    }
+  },
+  {
+    "id": "calc.deriv.higher_order",
+    "label": "Higher-order derivatives",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.deriv.chain_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 60
+    }
+  },
+  {
+    "id": "calc.deriv.inverse_func",
+    "label": "Derivatives of inverse functions",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.deriv.chain_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 60
+    }
+  },
+  {
+    "id": "calc.deriv.critical_points",
+    "label": "Critical points and the first derivative test",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.deriv.fermat"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 90
+    }
+  },
+  {
+    "id": "calc.deriv.second_test",
+    "label": "Second derivative test for local extrema",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.deriv.critical_points"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 90
+    }
+  },
+  {
+    "id": "calc.deriv.inflection",
+    "label": "Inflection points of functions",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.deriv.convexity"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 90
+    }
+  },
+  {
+    "id": "calc.deriv.global_extrema",
+    "label": "Global maxima and minima on closed intervals",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.deriv.critical_points",
+      "calc.limit.weierstrass"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.deriv.curve_sketch",
+    "label": "Curve sketching with derivatives and asymptotes",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.deriv.second_test",
+      "calc.limit.asymptotes"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.deriv.tangent_line",
+    "label": "Equation of the tangent line",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.deriv.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 60
+    }
+  },
+  {
+    "id": "calc.deriv.linear_approx",
+    "label": "Linear approximation of functions",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.deriv.differential"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 90
+    }
+  },
+  {
+    "id": "calc.deriv.newton",
+    "label": "Newton's method for approximating roots",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.linear_approx"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.deriv.error_prop",
+    "label": "Error propagation with differentials",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.differential"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.deriv.implicit_second",
+    "label": "Second derivatives of implicit functions",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.deriv.implicit",
+      "calc.deriv.higher_order"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.deriv.chain_power",
+    "label": "Derivatives of composite power functions f(x)^g(x)",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.deriv.chain_rule",
+      "calc.deriv.log_diff"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.deriv.diff_continuity",
+    "label": "Differentiability implies continuity",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.deriv.non_differentiability"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 60
+    }
+  },
+  {
+    "id": "calc.limit.epsilon_delta",
+    "label": "Epsilon-delta definition of a limit",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.limit.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.limit.one_sided",
+    "label": "One-sided limits",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.limit.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 45
+    }
+  },
+  {
+    "id": "calc.limit.infinite",
+    "label": "Infinite limits and vertical asymptotes",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.limit.asymptotes"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 60
+    }
+  },
+  {
+    "id": "calc.limit.sine_limit",
+    "label": "Fundamental trigonometric limit sin(x)/x",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.limit.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 60
+    }
+  },
+  {
+    "id": "calc.limit.exp_limit",
+    "label": "Fundamental exponential limit",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.limit.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 60
+    }
+  },
+  {
+    "id": "calc.vec.parametric_derivative",
+    "label": "The derivative of a parametrised curve",
+    "domain": "calc1",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.chain_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "calc.deriv.hyperbolic",
+    "label": "Derivatives of hyperbolic functions",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.deriv.exp_log",
+      "calc.deriv.chain_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.deriv.parametric_second",
+    "label": "The second derivative of a parametric curve",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.vec.parametric_derivative",
+      "calc.deriv.chain_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.deriv.finite_difference",
+    "label": "Finite differences",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.concept",
+      "calc.deriv.tangent_line"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "calc.limit.intermediate_value",
+    "label": "Intermediate value theorem applications",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.limit.continuity"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.limit.limsup",
+    "label": "Limit superior and inferior",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "calc.seq.convergence"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "calc.limit.oscillation",
+    "label": "Oscillation of a function",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "calc.limit.discontinuity"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "calc.deriv.inverse_hyperbolic",
+    "label": "Derivatives of inverse hyperbolic functions",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "calc.deriv.inverse_trig"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "calc.deriv.mvt_applications",
+    "label": "Mean value theorem applications",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.mvt"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.deriv.newton_convergence",
+    "label": "Convergence of Newton's method",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.newton"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.deriv.convex_jensen",
+    "label": "Convexity and Jensen's inequality",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "calc.deriv.convexity"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "calc.deriv.marginal_analysis",
+    "label": "Marginal analysis",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.applications"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.deriv.epsilon_delta_deriv",
+    "label": "Epsilon-delta definition of the derivative",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "calc.deriv.difference_quotient"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25.0
+    }
+  }
+]

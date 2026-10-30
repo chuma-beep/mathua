@@ -100,7 +100,9 @@ describe('domain → keyboard mode', () => {
     ['complex_numbers', 'algebra'],
     ['trigonometry', 'algebra'],
     ['geometry', 'geometry'],
-    ['calculus', 'calculus'],
+    ['calc1', 'calculus'],
+    ['calc2', 'calculus'],
+    ['calc3', 'calculus'],
     ['differential_equations', 'calculus'],
   ])('%s → %s', (domain, mode) => {
     expect(keyboardModeForDomain(domain)).toBe(mode)

@@ -60,3 +60,4 @@ One file per decision. The domain language stays in [`CONTEXT.md`](../../CONTEXT
 | [ADR-054](ADR-054-reference-access-is-not-learning-eligibility-and.md) | Reference access is not learning eligibility, and `/study` is restored as a context-bound reference page | 2026-10-11 |
 | [ADR-055](ADR-055-ai-augmentation-is-a-registry-of-declared-policies.md) | AI augmentation is a registry of declared policies, not a trusted provider list | 2026-10-16 |
 | [ADR-056](ADR-056-timed-quizzes-assess-fluency-and-spaced-review.md) | A timed quiz assesses fluency; spaced review owns the FSRS schedule | 2026-10-28 |
+| [ADR-057](ADR-057-calculus-is-three-courses-and-three-domains.md) | Calculus is three courses, so it is three domains | 2026-10-30 |

@@ -13,19 +13,19 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 | Metric | Value |
 |---|---|
 | Total concepts | 1250 |
-| Total units | 124 |
+| Total units | 132 |
 | Minimum unit size | 1 |
-| Median unit size | 6 |
-| Maximum unit size | 61 |
+| Median unit size | 7 |
+| Maximum unit size | 42 |
 | Singleton units | 27 |
-| Units with <= 3 concepts | 38 |
-| Units with > 25 concepts | 11 |
-| Units with > 50 concepts | 3 |
-| Cross-unit prerequisite edges (derived) | 377 |
+| Units with <= 3 concepts | 39 |
+| Units with > 25 concepts | 9 |
+| Units with > 50 concepts | 0 |
+| Cross-unit prerequisite edges (derived) | 413 |
 | Backward band edges | 0 |
 
-If the learner is assessed once per unit, then 124 assessments cover the corpus, and the
-median is one assessment per 6 concepts. That is the frequency question this report
+If the learner is assessed once per unit, then 132 assessments cover the corpus, and the
+median is one assessment per 7 concepts. That is the frequency question this report
 exists to make concrete.
 
 ## Proposed units
@@ -48,11 +48,19 @@ exists to make concrete.
 | `arithmetic.b1` | arithmetic | 1 | 16 | 7 | 3–5 |
 | `arithmetic.b2` | arithmetic | 2 | 16 | 9 | 6–8 |
 | `arithmetic.b3` | arithmetic | 3 | 20 | 5 | 9–11 |
-| `calculus.b8` | calculus | 8 | 1 | 1 | 26–26 |
-| `calculus.b9` | calculus | 9 | 28 | 4 | 27–29 |
-| `calculus.b10` | calculus | 10 | 59 | 7 | 30–32 |
-| `calculus.b11` | calculus | 11 | 56 | 6 | 33–35 |
-| `calculus.b12` | calculus | 12 | 61 | 7 | 36–38 |
+| `calc1.b8` | calc1 | 8 | 1 | 1 | 26–26 |
+| `calc1.b9` | calc1 | 9 | 18 | 3 | 27–29 |
+| `calc1.b10` | calc1 | 10 | 26 | 3 | 30–32 |
+| `calc1.b11` | calc1 | 11 | 21 | 4 | 33–35 |
+| `calc1.b12` | calc1 | 12 | 10 | 2 | 36–37 |
+| `calc2.b9` | calc2 | 9 | 3 | 2 | 29–29 |
+| `calc2.b10` | calc2 | 10 | 23 | 1 | 30–32 |
+| `calc2.b11` | calc2 | 11 | 14 | 1 | 33–35 |
+| `calc2.b12` | calc2 | 12 | 23 | 3 | 36–37 |
+| `calc3.b9` | calc3 | 9 | 5 | 1 | 28–29 |
+| `calc3.b10` | calc3 | 10 | 8 | 3 | 31–32 |
+| `calc3.b11` | calc3 | 11 | 20 | 5 | 33–35 |
+| `calc3.b12` | calc3 | 12 | 28 | 5 | 36–38 |
 | `complex_numbers.b3` | complex_numbers | 3 | 4 | 2 | 10–11 |
 | `complex_numbers.b6` | complex_numbers | 6 | 1 | 1 | 20–20 |
 | `complex_numbers.b7` | complex_numbers | 7 | 10 | 2 | 21–23 |
@@ -135,9 +143,9 @@ exists to make concrete.
 | `probability_theory.b4` | probability_theory | 4 | 31 | 7 | 12–14 |
 | `probability_theory.b5` | probability_theory | 5 | 15 | 4 | 15–17 |
 | `probability_theory.b6` | probability_theory | 6 | 2 | 2 | 18–18 |
-| `real_analysis.b9` | real_analysis | 9 | 5 | 3 | 28–29 |
-| `real_analysis.b10` | real_analysis | 10 | 26 | 5 | 30–32 |
-| `real_analysis.b11` | real_analysis | 11 | 15 | 4 | 33–35 |
+| `real_analysis.b9` | real_analysis | 9 | 7 | 3 | 27–29 |
+| `real_analysis.b10` | real_analysis | 10 | 28 | 5 | 30–32 |
+| `real_analysis.b11` | real_analysis | 11 | 16 | 4 | 33–35 |
 | `real_analysis.b12` | real_analysis | 12 | 4 | 1 | 36–37 |
 | `statistics.b0` | statistics | 0 | 2 | 1 | 1–2 |
 | `statistics.b1` | statistics | 1 | 1 | 1 | 3–3 |
@@ -170,17 +178,17 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 162 | 5 | 56 | 28 | 53 | 6 | 0 |
-| 3 | 124 | 6 | 61 | 27 | 38 | 11 | 0 |
-| 4 | 98 | 9 | 78 | 11 | 26 | 10 | 0 |
-| 5 | 84 | 9 | 89 | 8 | 18 | 12 | 0 |
-| 6 | 81 | 11 | 115 | 10 | 19 | 17 | 0 |
-| 8 | 63 | 13 | 139 | 6 | 11 | 18 | 0 |
-| 10 | 53 | 17 | 176 | 4 | 9 | 17 | 0 |
-| 12 | 54 | 16 | 144 | 2 | 7 | 20 | 0 |
-| 15 | 42 | 22 | 176 | 1 | 4 | 20 | 0 |
-| 20 | 35 | 31 | 205 | 2 | 4 | 20 | 0 |
-| 45 | 21 | 45 | 205 | 0 | 0 | 21 | 0 |
+| 2 | 173 | 5 | 39 | 30 | 56 | 2 | 0 |
+| 3 | 132 | 7 | 42 | 27 | 39 | 9 | 0 |
+| 4 | 105 | 10 | 63 | 12 | 27 | 12 | 0 |
+| 5 | 90 | 10 | 81 | 8 | 19 | 13 | 0 |
+| 6 | 87 | 11 | 77 | 10 | 20 | 18 | 0 |
+| 8 | 67 | 15 | 82 | 6 | 11 | 21 | 0 |
+| 10 | 57 | 17 | 100 | 4 | 10 | 18 | 0 |
+| 12 | 58 | 16 | 83 | 2 | 7 | 22 | 0 |
+| 15 | 46 | 21 | 119 | 1 | 5 | 21 | 0 |
+| 20 | 37 | 37 | 100 | 2 | 4 | 22 | 0 |
+| 45 | 23 | 50 | 124 | 0 | 0 | 23 | 0 |
 
 **No width is clean.** Small widths fragment, at 3 there are 27 singleton units, which is a
 quiz per concept and is exactly what §12 rules out. Large widths stop fragmenting but produce
