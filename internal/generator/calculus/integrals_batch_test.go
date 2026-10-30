@@ -1,10 +1,8 @@
 package calculus
 
 import (
-	"encoding/json"
 	"fmt"
 	"math/rand"
-	"os"
 	"strconv"
 	"strings"
 	"testing"
@@ -30,32 +28,12 @@ func integralsBatchRegistry(t *testing.T) *generator.Registry {
 	return reg
 }
 
-func integralsBatchShippedTypes(t *testing.T) map[string]string {
-	t.Helper()
-	raw, err := os.ReadFile("../../../data/concepts/calculus.json")
-	if err != nil {
-		t.Fatalf("read corpus: %v", err)
-	}
-	var concepts []struct {
-		ID          string `json:"id"`
-		GradingType string `json:"grading_type"`
-	}
-	if err := json.Unmarshal(raw, &concepts); err != nil {
-		t.Fatalf("unmarshal corpus: %v", err)
-	}
-	out := make(map[string]string, len(concepts))
-	for _, c := range concepts {
-		out[c.ID] = c.GradingType
-	}
-	return out
-}
-
 func TestIntegralsBatch_ShippedTypesAreNumeric(t *testing.T) {
-	shipped := integralsBatchShippedTypes(t)
+	shipped := calcShippedTypes(t)
 	for _, id := range integralsBatchIDs {
 		gt, ok := shipped[id]
 		if !ok {
-			t.Errorf("concept %s missing from calculus.json", id)
+			t.Errorf("concept %s missing from the corpus", id)
 			continue
 		}
 		if gt != "numeric" {

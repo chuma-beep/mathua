@@ -405,18 +405,14 @@
       "calc.deriv.marginal_analysis",
       "calc.deriv.epsilon_delta_deriv",
       "calc.deriv.cauchy_mvt",
-      "calc.deriv.chain_multi",
       "calc.deriv.chain_power",
-      "calc.deriv.clairaut",
       "calc.deriv.critical_points",
       "calc.deriv.curve_sketch",
       "calc.deriv.diff_continuity",
-      "calc.deriv.directional",
       "calc.deriv.error_prop",
       "calc.deriv.fermat",
       "calc.deriv.general_exp",
       "calc.deriv.global_extrema",
-      "calc.deriv.gradient",
       "calc.deriv.implicit_second",
       "calc.deriv.inflection",
       "calc.deriv.inverse_func",
@@ -425,7 +421,6 @@
       "calc.deriv.quotient_rule",
       "calc.deriv.related_rates",
       "calc.deriv.second_test",
-      "calc.deriv.total_diff",
       "calc.deriv.trig_other",
       "calc.limit.algebra",
       "calc.limit.asymptotes",
@@ -437,7 +432,11 @@
       "calc.limit.one_sided",
       "calc.limit.sine_limit",
       "calc.limit.squeeze",
-      "calc.limit.weierstrass"
+      "calc.limit.weierstrass",
+      "calc.limit.lhopital",
+      "calc.limit.indeterminate",
+      "calc.limit.epsilon_delta",
+      "calc.deriv.implicit"
     ]
   },
   {
@@ -487,7 +486,11 @@
       "calc.series.radius",
       "calc.series.remainder",
       "calc.series.root_test",
-      "calc.series.telescoping"
+      "calc.series.telescoping",
+      "calc.series.geometric",
+      "calc.series.ratio_test",
+      "calc.seq.bounded",
+      "calc.seq.monotone"
     ]
   },
   {
@@ -544,7 +547,12 @@
       "calc.vec.flux_general",
       "calc.vec.identities",
       "calc.seq.euler",
-      "calc.seq.function_sequences"
+      "calc.seq.function_sequences",
+      "calc.deriv.gradient",
+      "calc.deriv.directional",
+      "calc.deriv.chain_multi",
+      "calc.deriv.clairaut",
+      "calc.deriv.total_diff"
     ]
   },
   {

@@ -83,7 +83,9 @@ The count of unreachable concepts by domain:
 
 | Domain | Concepts | Unreachable |
 |---|---|---|
-| calculus | 205 | 0 |
+| calc1 | 76 | 0 |
+| calc2 | 63 | 0 |
+| calc3 | 61 | 0 |
 | algebra | 124 | 0 |
 | topology | 42 | 0 |
 | statistics | 55 | 0 |
@@ -103,11 +105,12 @@ The count of unreachable concepts by domain:
 | graph_theory | 40 | 0 |
 | probability_theory | 50 | 0 |
 | numerical_analysis | 40 | 0 |
-| real_analysis | 50 | 0 |
+| real_analysis | 55 | 0 |
 
 Two structural facts sit behind that table. First, a course is a *sampled* path, not a domain
-cover: `calc1` targets 51 calculus concepts and `calc2` targets 42, and their closures reach 80 and
-74 of the domain's 205, so the two courses are stages rather than a partition. Second, one whole
+cover: `calc1` targets 50 of the 76 in its domain, `calc2` targets 46 of the 63 in its domain and
+`calc3` targets 54 of the 61 in its domain, so the three courses are stages rather than a partition.
+Second, one whole
 domain still has no course of its own: `trigonometry` is reached only by the closures of `a2` and
 `pc`, which bring in 54 and 29 of its 68 concepts, so a learner meets trigonometry as algebra and
 precalculus material rather than as a trigonometry syllabus.
@@ -121,7 +124,7 @@ largest first:
 | Domain | Concepts | `multiple_choice` |
 |---|---|---|
 | topology | 42 | 35 |
-| real_analysis | 50 | 34 |
+| real_analysis | 55 | 33 |
 | abstract_algebra | 45 | 33 |
 | differential_equations | 42 | 28 |
 | discrete_math | 55 | 26 |
@@ -131,7 +134,7 @@ largest first:
 | machine_learning | 45 | 19 |
 | numerical_analysis | 40 | 18 |
 
-Against that, `calculus` carries 87 `symbolic` concepts and `algebra` carries 36. The pool
+Against that, the three calculus domains carry 82 `symbolic` concepts and `algebra` carries 36. The pool
 ratchet in `internal/generator/pools_test.go` exists for exactly this surface, and it runs at two
 depths. An easy pool that yields a single distinct answer, or that is yes/no only, is a
 violation, and that check is baseline-backed: `scripts/audit_baseline.json` is empty on both keys
@@ -351,8 +354,9 @@ also the gate on a new domain (section 5.4), because a domain with no course tar
 unreachable were added, subject by subject, to the courses that teach them, so the catalog now
 reaches all 1250 and the table in section 4.1 reads zero on every row. That is the curriculum work
 the paragraph above says the fix has to be, done deliberately rather than by a closure rule, and it
-does not make the courses domain covers: `calc1` still reaches 80 of the domain's 205 calculus
-concepts, and trigonometry still has no course of its own.
+does not make the courses domain covers: `calc1` reaches all 76 concepts in its own domain and
+shares the rest of the calculus corpus with `calc2` and `calc3`, and trigonometry still has no
+course of its own.
 
 ### 5.2 Producing an answer in a multiple-choice domain
 
@@ -425,8 +429,10 @@ section 6 used, largest deficit first.
 | number_theory | university | 42 | 42 | +0 |
 | differential_equations | university | 42 | 42 | +0 |
 | precalculus | bridge | 50 | 50 | +0 |
-| real_analysis | university | 50 | 50 | +0 |
-| calculus | bridge | 205 | 205 | +0 |
+| real_analysis | university | 55 | 55 | +0 |
+| calc1 | bridge | 76 | 76 | +0 |
+| calc2 | bridge | 63 | 63 | +0 |
+| calc3 | bridge | 61 | 61 | +0 |
 | algebra | school | 124 | 124 | +0 |
 | trigonometry | school | 68 | 68 | +0 |
 

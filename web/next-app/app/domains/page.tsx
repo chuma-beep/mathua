@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import AppShell from '../../components/app-shell'
@@ -102,6 +102,10 @@ export default function DomainsPage() {
     for (const d of domains) if (!out.includes(d)) out.push(d)
     return out
   }, [domains])
+
+  // A group heading earns its space only when the subject has more than one
+  // row. With a single calculus domain the row says "Calculus I" on its own.
+  const calcCount = ordered.filter((d) => d.id.startsWith('calc')).length
 
   const openDomain = useCallback(async (id: string) => {
     setSelected(id)
@@ -233,24 +237,41 @@ export default function DomainsPage() {
             )}
 
             <ul className="border border-mathua-border divide-y divide-mathua-border bg-mathua-surface">
-              {ordered.map((d) => (
-                <li key={d.id}>
-                  <button
-                    type="button"
-                    onClick={() => void openDomain(d.id)}
-                    className="w-full text-left px-4 py-3 hover:bg-mathua-blue-faint transition-colors"
-                  >
-                    <span className="flex items-baseline justify-between gap-3 min-w-0">
-                      <span className="font-mono text-xs text-mathua-primary truncate">
-                        {domainLabel(d.id)}
-                      </span>
-                      <span className="shrink-0 font-mono text-[11px] text-mathua-secondary">
-                        {available(d)} / {d.conceptCount} concepts available
-                      </span>
-                    </span>
-                  </button>
-                </li>
-              ))}
+              {ordered.map((d, i) => {
+                // The three calculus domains are one subject broken into stages.
+                // The heading keeps the top-level picker reading as a list of
+                // subjects without hiding the per-course rows that carry the
+                // counts and the diagnostic scope.
+                const startsCalculus =
+                  calcCount > 1 &&
+                  d.id.startsWith('calc') &&
+                  (i === 0 || !ordered[i - 1].id.startsWith('calc'))
+                return (
+                  <Fragment key={d.id}>
+                    {startsCalculus && (
+                      <li className="px-4 py-2 font-mono text-[10px] uppercase tracking-wider text-mathua-muted">
+                        Calculus
+                      </li>
+                    )}
+                    <li>
+                      <button
+                        type="button"
+                        onClick={() => void openDomain(d.id)}
+                        className="w-full text-left px-4 py-3 hover:bg-mathua-blue-faint transition-colors"
+                      >
+                        <span className="flex items-baseline justify-between gap-3 min-w-0">
+                          <span className="font-mono text-xs text-mathua-primary truncate">
+                            {domainLabel(d.id)}
+                          </span>
+                          <span className="shrink-0 font-mono text-[11px] text-mathua-secondary">
+                            {available(d)} / {d.conceptCount} concepts available
+                          </span>
+                        </span>
+                      </button>
+                    </li>
+                  </Fragment>
+                )
+              })}
             </ul>
           </>
         ) : (

@@ -1,0 +1,892 @@
+[
+  {
+    "id": "calc.integral.substitution",
+    "label": "U-substitution",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.integral.power_rule",
+      "calc.deriv.chain_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "calc.integral.area_between",
+    "label": "Area between two curves",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.definite",
+      "alg.ineq.compound"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "calc.integral.volume",
+    "label": "Volume of solids of revolution",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.integral.area_between",
+      "geo.circle.area"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "calc.integral.disc",
+    "label": "Disc method for volumes of revolution",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.definite"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.integral.washer",
+    "label": "Washer method for volumes of revolution",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.definite"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.integral.shell",
+    "label": "Shell method for volumes of revolution",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.definite"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.integral.parts",
+    "label": "Integration by parts",
+    "domain": "calc2",
+    "subdomain": "calculus.advanced",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.integral.substitution",
+      "calc.deriv.product_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "calc.integral.partial_fractions",
+    "label": "Integration by partial fractions",
+    "domain": "calc2",
+    "subdomain": "calculus.advanced",
+    "grading_type": "expression",
+    "prerequisites": [
+      "calc.integral.parts",
+      "alg.factor.trinomial"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "calc.integral.improper",
+    "label": "Improper integrals",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.integral.definite"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.integral.trig_integrals",
+    "label": "Integrals of trigonometric functions",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.integral.indefinite"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.integral.trig_substitution",
+    "label": "Trigonometric substitution for integrals",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.integral.substitution"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.integral.weierstrass_sub",
+    "label": "Weierstrass substitution (tangent half-angle)",
+    "domain": "calc2",
+    "subdomain": "calculus.advanced",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.integral.substitution"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.integral.numerical",
+    "label": "Numerical integration",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.integral.definite"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.integral.arc_length",
+    "label": "Arc length of a curve",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.integral.definite"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.integral.exp_integral",
+    "label": "Integral of exponential functions",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.integral.indefinite"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.seq.monotone",
+    "label": "Monotone sequences",
+    "domain": "calc2",
+    "subdomain": "calculus.sequences",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.seq.convergence"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.series.concept",
+    "label": "Series: definition and convergence",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.seq.convergence"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.series.harmonic",
+    "label": "Harmonic series",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.series.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.series.positive_terms",
+    "label": "Series with positive terms",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.series.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.series.integral_test",
+    "label": "Integral test for series convergence",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.series.positive_terms"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.series.root_test",
+    "label": "Root test for series convergence",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.series.positive_terms"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.series.alternating",
+    "label": "Alternating series and Leibniz criterion",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.series.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.series.function_series",
+    "label": "Series of functions",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.series.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.series.power",
+    "label": "Power series",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.series.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.series.taylor",
+    "label": "Taylor series",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.series.power"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.series.fourier",
+    "label": "Fourier series",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.series.function_series"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.integral.net_change",
+    "label": "Net change theorem",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.ftc"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 60
+    }
+  },
+  {
+    "id": "calc.integral.variable_limits",
+    "label": "Differentiation of integrals with variable limits",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.integral.ftc"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 60
+    }
+  },
+  {
+    "id": "calc.integral.mvt",
+    "label": "Mean value theorem for integrals",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.definite"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 90
+    }
+  },
+  {
+    "id": "calc.integral.work",
+    "label": "Work computed by integration",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.definite"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.integral.center_mass",
+    "label": "Center of mass by integration",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.definite"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.integral.surface_area",
+    "label": "Surface area of solids of revolution",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.integral.arc_length"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.integral.trapezoid",
+    "label": "Trapezoidal rule for numerical integration",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.numerical"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.integral.simpson",
+    "label": "Simpson's rule for numerical integration",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.trapezoid"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.integral.improper_compare",
+    "label": "Comparison test for improper integrals",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.integral.improper"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.integral.p_test",
+    "label": "p-integral test for improper integrals",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.integral.improper_compare"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 90
+    }
+  },
+  {
+    "id": "calc.series.ratio_test",
+    "label": "Ratio test for series convergence",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.series.positive_terms"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 90
+    }
+  },
+  {
+    "id": "calc.series.geometric",
+    "label": "Geometric series and its sum",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.series.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 60
+    }
+  },
+  {
+    "id": "calc.series.nth_term",
+    "label": "nth-term divergence test",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.series.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 60
+    }
+  },
+  {
+    "id": "calc.series.telescoping",
+    "label": "Telescoping series",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.series.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 90
+    }
+  },
+  {
+    "id": "calc.series.direct_compare",
+    "label": "Direct comparison test for series",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.series.positive_terms"
+    ],
+    "mastery_threshold": {
+      "streak": 5,
+      "avg_time_seconds": 90
+    }
+  },
+  {
+    "id": "calc.series.limit_compare",
+    "label": "Limit comparison test for series",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.series.direct_compare"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.series.absolute",
+    "label": "Absolute and conditional convergence",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.series.alternating"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 90
+    }
+  },
+  {
+    "id": "calc.series.remainder",
+    "label": "Alternating series remainder estimate",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.alternating"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 90
+    }
+  },
+  {
+    "id": "calc.series.radius",
+    "label": "Radius and interval of convergence",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.series.power"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.seq.bounded",
+    "label": "Bounded sequences",
+    "domain": "calc2",
+    "subdomain": "calculus.sequences",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.seq.convergence"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 60
+    }
+  },
+  {
+    "id": "calc.integral.convergence",
+    "label": "Convergence tests for improper integrals",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.integral.improper"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.integral.irrational",
+    "label": "Integrals of irrational functions",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.integral.substitution"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.integral.strategy",
+    "label": "Integration strategies (method selection)",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "calc.integral.parts"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "calc.integral.reduction",
+    "label": "Reduction formulas for integrals",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.integral.parts"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.integral.hydrostatic",
+    "label": "Hydrostatic force",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.definite",
+      "calc.integral.work"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.integral.pappus",
+    "label": "Pappus's centroid theorem",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.integral.center_mass",
+      "calc.integral.surface_area"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.integral.moment_inertia",
+    "label": "Moment of inertia",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.center_mass",
+      "calc.integral.definite"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.series.operations",
+    "label": "Operations on series",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "calc.series.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "calc.series.binomial",
+    "label": "The binomial series",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.taylor"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.series.cauchy_product",
+    "label": "The Cauchy product",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.absolute"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.series.p_series",
+    "label": "The p-series",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "calc.series.integral_test"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "calc.series.dirichlet_test",
+    "label": "Dirichlet's test",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "calc.series.alternating"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "calc.series.gamma",
+    "label": "The gamma function",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.improper"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.integral.numerical_error",
+    "label": "Error bounds for numerical integration",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.trapezoid"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.integral.beta",
+    "label": "The beta function",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.improper"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.integral.consumer_surplus",
+    "label": "Consumer surplus",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.area_between"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.integral.fourier_coefficients",
+    "label": "Fourier coefficients",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.fourier"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  }
+]

@@ -704,5 +704,75 @@
       "streak": 10,
       "avg_time_seconds": 33.0
     }
+  },
+  {
+    "id": "calc.limit.supremum",
+    "label": "Supremum and infimum",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.order",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.limit.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.limit.uniform_continuity",
+    "label": "Uniform continuity",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.limit",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.limit.continuity"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.integral.riemann_criteria",
+    "label": "Riemann integrability criteria",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.deriv",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.integral.definite"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.seq.cauchy",
+    "label": "Cauchy sequences",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.seq",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.seq.convergence"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "calc.series.cauchy_criterion",
+    "label": "Cauchy's convergence criterion for series",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.seq",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "calc.series.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
   }
 ]

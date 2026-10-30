@@ -3,10 +3,10 @@
   "generated_by": "go run ./cmd/masteryunits",
   "rule": "unit = (domain, floor(conceptDepth / bandWidth)); conceptDepth = the concept's level in the concept DAG's own topological order",
   "band_width": 3,
-  "note": "DRAFT — ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
+  "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
   "concept_count": 1250,
-  "unit_count": 124,
+  "unit_count": 132,
   "units": [
     {
       "id": "abstract_algebra.b6",
@@ -517,9 +517,9 @@
       "concept_count": 20
     },
     {
-      "id": "calculus.b8",
-      "title": "Calculus · Stage 9",
-      "domain": "calculus",
+      "id": "calc1.b8",
+      "title": "Calc1 · Stage 9",
+      "domain": "calc1",
       "band": 8,
       "depth_min": 26,
       "depth_max": 26,
@@ -532,17 +532,16 @@
       "concept_count": 1
     },
     {
-      "id": "calculus.b9",
-      "title": "Calculus · Stage 10",
-      "domain": "calculus",
+      "id": "calc1.b9",
+      "title": "Calc1 · Stage 10",
+      "domain": "calc1",
       "band": 9,
       "depth_min": 27,
       "depth_max": 29,
       "subdomains": [
         "calculus.derivatives",
         "calculus.limits",
-        "calculus.sequences",
-        "calculus.series"
+        "calculus.sequences"
       ],
       "concept_ids": [
         "calc.deriv.difference_quotient",
@@ -561,40 +560,25 @@
         "calc.limit.properties",
         "calc.limit.sine_limit",
         "calc.limit.squeeze",
-        "calc.limit.supremum",
-        "calc.seq.arithmetic_sum",
-        "calc.seq.bounded",
-        "calc.seq.cauchy",
         "calc.seq.concept",
-        "calc.seq.convergence",
-        "calc.seq.euler",
-        "calc.seq.function_sequences",
-        "calc.seq.limit_value",
-        "calc.seq.monotone",
-        "calc.seq.recursive_value",
-        "calc.series.concept"
+        "calc.seq.convergence"
       ],
-      "concept_count": 28
+      "concept_count": 18
     },
     {
-      "id": "calculus.b10",
-      "title": "Calculus · Stage 11",
-      "domain": "calculus",
+      "id": "calc1.b10",
+      "title": "Calc1 · Stage 11",
+      "domain": "calc1",
       "band": 10,
       "depth_min": 30,
       "depth_max": 32,
       "subdomains": [
-        "calculus.advanced",
         "calculus.derivatives",
         "calculus.integrals",
-        "calculus.limits",
-        "calculus.multivariable",
-        "calculus.series",
-        "calculus.vector"
+        "calculus.limits"
       ],
       "concept_ids": [
         "calc.deriv.applications",
-        "calc.deriv.chain_multi",
         "calc.deriv.concept",
         "calc.deriv.convex_jensen",
         "calc.deriv.convexity",
@@ -604,19 +588,14 @@
         "calc.deriv.error_prop",
         "calc.deriv.fermat",
         "calc.deriv.finite_difference",
-        "calc.deriv.gradient",
         "calc.deriv.inflection",
-        "calc.deriv.jacobian",
         "calc.deriv.linear_approx",
         "calc.deriv.mvt",
         "calc.deriv.non_differentiability",
-        "calc.deriv.partial",
-        "calc.deriv.partial_higher",
         "calc.deriv.power_rule",
         "calc.deriv.rolle",
         "calc.deriv.sum_rule",
         "calc.deriv.tangent_line",
-        "calc.deriv.total_diff",
         "calc.integral.indefinite",
         "calc.limit.asymptotes",
         "calc.limit.discontinuity",
@@ -624,13 +603,105 @@
         "calc.limit.intermediate_value",
         "calc.limit.lhopital",
         "calc.limit.oscillation",
-        "calc.limit.uniform_continuity",
-        "calc.limit.weierstrass",
-        "calc.multi.euler_homogeneous",
+        "calc.limit.weierstrass"
+      ],
+      "concept_count": 26
+    },
+    {
+      "id": "calc1.b11",
+      "title": "Calc1 · Stage 12",
+      "domain": "calc1",
+      "band": 11,
+      "depth_min": 33,
+      "depth_max": 35,
+      "subdomains": [
+        "calculus.advanced",
+        "calculus.derivatives",
+        "calculus.integrals",
+        "calculus.multivariable"
+      ],
+      "concept_ids": [
+        "calc.deriv.cauchy_mvt",
+        "calc.deriv.chain_rule",
+        "calc.deriv.curve_sketch",
+        "calc.deriv.exp_log",
+        "calc.deriv.global_extrema",
+        "calc.deriv.higher_order",
+        "calc.deriv.implicit",
+        "calc.deriv.inverse_func",
+        "calc.deriv.marginal_analysis",
+        "calc.deriv.mvt_applications",
+        "calc.deriv.newton",
+        "calc.deriv.newton_convergence",
+        "calc.deriv.optimization",
+        "calc.deriv.product_rule",
+        "calc.deriv.quotient_rule",
+        "calc.deriv.second_test",
+        "calc.deriv.trig",
+        "calc.integral.definite",
+        "calc.integral.ftc",
+        "calc.integral.power_rule",
+        "calc.vec.parametric_derivative"
+      ],
+      "concept_count": 21
+    },
+    {
+      "id": "calc1.b12",
+      "title": "Calc1 · Stage 13",
+      "domain": "calc1",
+      "band": 12,
+      "depth_min": 36,
+      "depth_max": 37,
+      "subdomains": [
+        "calculus.advanced",
+        "calculus.derivatives"
+      ],
+      "concept_ids": [
+        "calc.deriv.chain_power",
+        "calc.deriv.general_exp",
+        "calc.deriv.hyperbolic",
+        "calc.deriv.implicit_second",
+        "calc.deriv.inverse_hyperbolic",
+        "calc.deriv.inverse_trig",
+        "calc.deriv.log_diff",
+        "calc.deriv.parametric_second",
+        "calc.deriv.related_rates",
+        "calc.deriv.trig_other"
+      ],
+      "concept_count": 10
+    },
+    {
+      "id": "calc2.b9",
+      "title": "Calc2 · Stage 10",
+      "domain": "calc2",
+      "band": 9,
+      "depth_min": 29,
+      "depth_max": 29,
+      "subdomains": [
+        "calculus.sequences",
+        "calculus.series"
+      ],
+      "concept_ids": [
+        "calc.seq.bounded",
+        "calc.seq.monotone",
+        "calc.series.concept"
+      ],
+      "concept_count": 3
+    },
+    {
+      "id": "calc2.b10",
+      "title": "Calc2 · Stage 11",
+      "domain": "calc2",
+      "band": 10,
+      "depth_min": 30,
+      "depth_max": 32,
+      "subdomains": [
+        "calculus.series"
+      ],
+      "concept_ids": [
         "calc.series.absolute",
         "calc.series.alternating",
         "calc.series.binomial",
-        "calc.series.cauchy_criterion",
         "calc.series.cauchy_product",
         "calc.series.direct_compare",
         "calc.series.dirichlet_test",
@@ -650,67 +721,140 @@
         "calc.series.remainder",
         "calc.series.root_test",
         "calc.series.taylor",
-        "calc.series.telescoping",
-        "calc.vec.curl"
+        "calc.series.telescoping"
       ],
-      "concept_count": 59
+      "concept_count": 23
     },
     {
-      "id": "calculus.b11",
-      "title": "Calculus · Stage 12",
-      "domain": "calculus",
+      "id": "calc2.b11",
+      "title": "Calc2 · Stage 12",
+      "domain": "calc2",
+      "band": 11,
+      "depth_min": 33,
+      "depth_max": 35,
+      "subdomains": [
+        "calculus.integrals"
+      ],
+      "concept_ids": [
+        "calc.integral.arc_length",
+        "calc.integral.area_between",
+        "calc.integral.center_mass",
+        "calc.integral.disc",
+        "calc.integral.exp_integral",
+        "calc.integral.fourier_coefficients",
+        "calc.integral.improper",
+        "calc.integral.mvt",
+        "calc.integral.numerical",
+        "calc.integral.shell",
+        "calc.integral.substitution",
+        "calc.integral.trig_integrals",
+        "calc.integral.washer",
+        "calc.integral.work"
+      ],
+      "concept_count": 14
+    },
+    {
+      "id": "calc2.b12",
+      "title": "Calc2 · Stage 13",
+      "domain": "calc2",
+      "band": 12,
+      "depth_min": 36,
+      "depth_max": 37,
+      "subdomains": [
+        "calculus.advanced",
+        "calculus.integrals",
+        "calculus.series"
+      ],
+      "concept_ids": [
+        "calc.integral.beta",
+        "calc.integral.consumer_surplus",
+        "calc.integral.convergence",
+        "calc.integral.hydrostatic",
+        "calc.integral.improper_compare",
+        "calc.integral.irrational",
+        "calc.integral.moment_inertia",
+        "calc.integral.net_change",
+        "calc.integral.numerical_error",
+        "calc.integral.p_test",
+        "calc.integral.pappus",
+        "calc.integral.partial_fractions",
+        "calc.integral.parts",
+        "calc.integral.reduction",
+        "calc.integral.simpson",
+        "calc.integral.strategy",
+        "calc.integral.surface_area",
+        "calc.integral.trapezoid",
+        "calc.integral.trig_substitution",
+        "calc.integral.variable_limits",
+        "calc.integral.volume",
+        "calc.integral.weierstrass_sub",
+        "calc.series.gamma"
+      ],
+      "concept_count": 23
+    },
+    {
+      "id": "calc3.b9",
+      "title": "Calc3 · Stage 10",
+      "domain": "calc3",
+      "band": 9,
+      "depth_min": 28,
+      "depth_max": 29,
+      "subdomains": [
+        "calculus.sequences"
+      ],
+      "concept_ids": [
+        "calc.seq.arithmetic_sum",
+        "calc.seq.euler",
+        "calc.seq.function_sequences",
+        "calc.seq.limit_value",
+        "calc.seq.recursive_value"
+      ],
+      "concept_count": 5
+    },
+    {
+      "id": "calc3.b10",
+      "title": "Calc3 · Stage 11",
+      "domain": "calc3",
+      "band": 10,
+      "depth_min": 31,
+      "depth_max": 32,
+      "subdomains": [
+        "calculus.advanced",
+        "calculus.multivariable",
+        "calculus.vector"
+      ],
+      "concept_ids": [
+        "calc.deriv.chain_multi",
+        "calc.deriv.gradient",
+        "calc.deriv.jacobian",
+        "calc.deriv.partial",
+        "calc.deriv.partial_higher",
+        "calc.deriv.total_diff",
+        "calc.multi.euler_homogeneous",
+        "calc.vec.curl"
+      ],
+      "concept_count": 8
+    },
+    {
+      "id": "calc3.b11",
+      "title": "Calc3 · Stage 12",
+      "domain": "calc3",
       "band": 11,
       "depth_min": 33,
       "depth_max": 35,
       "subdomains": [
         "calculus.advanced",
-        "calculus.derivatives",
         "calculus.integrals",
         "calculus.multivariable",
         "calculus.polar",
         "calculus.vector"
       ],
       "concept_ids": [
-        "calc.deriv.cauchy_mvt",
-        "calc.deriv.chain_rule",
         "calc.deriv.clairaut",
-        "calc.deriv.curve_sketch",
         "calc.deriv.directional",
-        "calc.deriv.exp_log",
-        "calc.deriv.global_extrema",
-        "calc.deriv.higher_order",
-        "calc.deriv.implicit",
-        "calc.deriv.inverse_func",
-        "calc.deriv.marginal_analysis",
-        "calc.deriv.mvt_applications",
-        "calc.deriv.newton",
-        "calc.deriv.newton_convergence",
-        "calc.deriv.optimization",
-        "calc.deriv.product_rule",
-        "calc.deriv.quotient_rule",
-        "calc.deriv.second_test",
-        "calc.deriv.trig",
-        "calc.integral.arc_length",
-        "calc.integral.area_between",
         "calc.integral.average_value",
-        "calc.integral.center_mass",
         "calc.integral.cross_section_volume",
-        "calc.integral.definite",
-        "calc.integral.disc",
-        "calc.integral.exp_integral",
-        "calc.integral.fourier_coefficients",
-        "calc.integral.ftc",
-        "calc.integral.improper",
         "calc.integral.mass_density",
-        "calc.integral.mvt",
-        "calc.integral.numerical",
-        "calc.integral.power_rule",
-        "calc.integral.riemann_criteria",
-        "calc.integral.shell",
-        "calc.integral.substitution",
-        "calc.integral.trig_integrals",
-        "calc.integral.washer",
-        "calc.integral.work",
         "calc.multi.closed_extrema",
         "calc.multi.coordinates_jacobian",
         "calc.multi.double_integral_rect",
@@ -725,64 +869,29 @@
         "calc.vec.curl_3d",
         "calc.vec.divergence",
         "calc.vec.identities",
-        "calc.vec.jacobian_value",
-        "calc.vec.parametric_derivative"
+        "calc.vec.jacobian_value"
       ],
-      "concept_count": 56
+      "concept_count": 20
     },
     {
-      "id": "calculus.b12",
-      "title": "Calculus · Stage 13",
-      "domain": "calculus",
+      "id": "calc3.b12",
+      "title": "Calc3 · Stage 13",
+      "domain": "calc3",
       "band": 12,
       "depth_min": 36,
       "depth_max": 38,
       "subdomains": [
-        "calculus.advanced",
         "calculus.derivatives",
         "calculus.integrals",
         "calculus.multivariable",
         "calculus.polar",
-        "calculus.series",
         "calculus.vector"
       ],
       "concept_ids": [
-        "calc.deriv.chain_power",
-        "calc.deriv.general_exp",
         "calc.deriv.higher_order_value",
-        "calc.deriv.hyperbolic",
-        "calc.deriv.implicit_second",
-        "calc.deriv.inverse_hyperbolic",
-        "calc.deriv.inverse_trig",
-        "calc.deriv.log_diff",
-        "calc.deriv.parametric_second",
-        "calc.deriv.related_rates",
-        "calc.deriv.trig_other",
-        "calc.integral.beta",
-        "calc.integral.consumer_surplus",
-        "calc.integral.convergence",
         "calc.integral.double_polar",
-        "calc.integral.hydrostatic",
-        "calc.integral.improper_compare",
-        "calc.integral.irrational",
-        "calc.integral.moment_inertia",
-        "calc.integral.net_change",
-        "calc.integral.numerical_error",
-        "calc.integral.p_test",
-        "calc.integral.pappus",
-        "calc.integral.partial_fractions",
-        "calc.integral.parts",
-        "calc.integral.reduction",
-        "calc.integral.simpson",
-        "calc.integral.strategy",
         "calc.integral.substitution_value",
-        "calc.integral.surface_area",
         "calc.integral.surface_scalar",
-        "calc.integral.trapezoid",
-        "calc.integral.trig_substitution",
-        "calc.integral.variable_limits",
-        "calc.integral.volume",
-        "calc.integral.weierstrass_sub",
         "calc.multi.change_order",
         "calc.multi.double_integral_region",
         "calc.multi.implicit_function",
@@ -791,7 +900,6 @@
         "calc.multi.triple_integral_box",
         "calc.polar.arc_length",
         "calc.polar.slope",
-        "calc.series.gamma",
         "calc.vec.arc_length",
         "calc.vec.conservative_test",
         "calc.vec.curvature",
@@ -809,7 +917,7 @@
         "calc.vec.torsion",
         "calc.vec.work"
       ],
-      "concept_count": 61
+      "concept_count": 28
     },
     {
       "id": "complex_numbers.b3",
@@ -2706,7 +2814,7 @@
       "title": "Real Analysis · Stage 10",
       "domain": "real_analysis",
       "band": 9,
-      "depth_min": 28,
+      "depth_min": 27,
       "depth_max": 29,
       "subdomains": [
         "real_analysis.limit",
@@ -2714,13 +2822,15 @@
         "real_analysis.seq"
       ],
       "concept_ids": [
+        "calc.limit.supremum",
+        "calc.seq.cauchy",
         "ra.limit.function",
         "ra.order.completeness",
         "ra.order.extended",
         "ra.order.supremum",
         "ra.seq.convergence"
       ],
-      "concept_count": 5
+      "concept_count": 7
     },
     {
       "id": "real_analysis.b10",
@@ -2737,6 +2847,8 @@
         "real_analysis.seq"
       ],
       "concept_ids": [
+        "calc.limit.uniform_continuity",
+        "calc.series.cauchy_criterion",
         "ra.deriv.lhopital",
         "ra.deriv.power_series",
         "ra.limit.compact",
@@ -2764,7 +2876,7 @@
         "ra.seq.subsequence",
         "ra.seq.tests"
       ],
-      "concept_count": 26
+      "concept_count": 28
     },
     {
       "id": "real_analysis.b11",
@@ -2780,6 +2892,7 @@
         "real_analysis.seq"
       ],
       "concept_ids": [
+        "calc.integral.riemann_criteria",
         "ra.deriv.chain",
         "ra.deriv.darboux",
         "ra.deriv.interchange",
@@ -2796,7 +2909,7 @@
         "ra.order.uncountable",
         "ra.seq.rearrangement"
       ],
-      "concept_count": 15
+      "concept_count": 16
     },
     {
       "id": "real_analysis.b12",

@@ -22,12 +22,12 @@ test('domains prerequisite dialog opens for a bottom row and returns to target',
   await page.route('**/api/curriculum/domains', (route) => route.fulfill({
     json: {
       domains: [
-        { id: 'calculus', conceptCount: 31, masteredCount: 0, unlockedCount: 0, inProgressCount: 0 },
+        { id: 'calc1', conceptCount: 31, masteredCount: 0, unlockedCount: 0, inProgressCount: 0 },
       ],
     },
   }))
-  await page.route('**/api/curriculum/domains/calculus', (route) => route.fulfill({
-    json: { domain: { id: 'calculus' }, topics },
+  await page.route('**/api/curriculum/domains/calc1', (route) => route.fulfill({
+    json: { domain: { id: 'calc1' }, topics },
   }))
   await page.route('**/api/lessons/**', (route) => {
     const url = route.request().url()

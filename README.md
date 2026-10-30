@@ -17,7 +17,7 @@
 [![React](https://img.shields.io/badge/React-18+-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev)
 [![License](https://img.shields.io/badge/license-MIT-c8a96e?style=flat-square)](LICENSE)
 [![Concepts](https://img.shields.io/badge/concepts-1250-a8a0f0?style=flat-square)](#content)
-[![Domains](https://img.shields.io/badge/domains-21-c8a96e?style=flat-square)](#content)
+[![Domains](https://img.shields.io/badge/domains-23-c8a96e?style=flat-square)](#content)
 
 </div>
 
@@ -88,7 +88,7 @@ One administrator can demote nobody, including themselves. Promote a second admi
 
 All math knowledge in Mathua is a directed acyclic graph. Each node is an atomic concept, something small enough to fail independently. Each edge is a prerequisite relationship.
 
-The graph contains **1250 concepts** across **21 domains** (1250 KP shard files × 3 = 3750 KPs). The scheduler reads your progress and the graph structure to decide what to show next, it will never surface a concept whose prerequisites you have not mastered.
+The graph contains **1250 concepts** across **23 domains** (1250 KP shard files × 3 = 3750 KPs). The scheduler reads your progress and the graph structure to decide what to show next, it will never surface a concept whose prerequisites you have not mastered.
 
 ### Mastery gating
 
@@ -132,7 +132,9 @@ When a concept reaches MASTERED, Mathua schedules its next review using SM-2 sca
 | Geometry | 45 |
 | Trigonometry | 68 |
 | Precalculus | 50 |
-| Calculus | 205 |
+| Calculus I | 76 |
+| Calculus II | 63 |
+| Calculus III | 61 |
 | Statistics | 55 |
 | Linear Algebra | 45 |
 | Discrete Math | 55 |
@@ -145,7 +147,7 @@ When a concept reaches MASTERED, Mathua schedules its next review using SM-2 sca
 | Graph Theory | 40 |
 | Probability Theory | 50 |
 | Numerical Analysis | 40 |
-| Real Analysis | 50 |
+| Real Analysis | 55 |
 | **Total** | **1250** |
 
 ---

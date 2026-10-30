@@ -16,6 +16,7 @@ import (
 	"fmt"
 	"math"
 	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 	"testing"
@@ -54,18 +55,27 @@ type calcCorpusConcept struct {
 
 func calcShippedTypes(t *testing.T) map[string]string {
 	t.Helper()
-	raw, err := os.ReadFile("../../../data/concepts/calculus.json")
+	paths, err := filepath.Glob("../../../data/concepts/*.json")
 	if err != nil {
-		t.Fatalf("read corpus: %v", err)
-	}
-	var rows []calcCorpusConcept
-	if err := json.Unmarshal(raw, &rows); err != nil {
-		t.Fatalf("parse corpus: %v", err)
+		t.Fatalf("list corpus: %v", err)
 	}
 	out := map[string]string{}
-	for _, r := range rows {
-		if r.ID != "" {
-			out[r.ID] = r.GradingType
+	for _, path := range paths {
+		if filepath.Base(path) == "enrichment.json" {
+			continue
+		}
+		raw, err := os.ReadFile(path)
+		if err != nil {
+			t.Fatalf("read corpus %s: %v", path, err)
+		}
+		var rows []calcCorpusConcept
+		if err := json.Unmarshal(raw, &rows); err != nil {
+			t.Fatalf("parse corpus %s: %v", path, err)
+		}
+		for _, r := range rows {
+			if strings.HasPrefix(r.ID, "calc.") {
+				out[r.ID] = r.GradingType
+			}
 		}
 	}
 	return out
