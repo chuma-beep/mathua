@@ -246,7 +246,6 @@ export default function FriendsPage() {
     try {
       const code = await rotateFriendCode()
       setFeed((current) => current ? { ...current, identity: { ...current.identity, friend_code: code } } : current)
-      setNotice('New friend code created. The old code no longer works.')
     } catch (e) {
       setError(getErrorMessage(e))
     } finally {
