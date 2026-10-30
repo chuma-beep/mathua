@@ -64,18 +64,36 @@ export default function AppShell({ children, ...overrides }: AppShellProps) {
   }, [loggedIn, user])
 
   useEffect(() => {
-    // The friends surface is server-gated. A failed read leaves the entry
-    // hidden: advertising a page that answers 404 is worse than omitting it.
+    // The friends surface is server-gated. A failed read must not be treated as
+    // "disabled" for the rest of the session: a challenge page, a sleeping
+    // connection or a deploy in progress would then hide the entry until the
+    // next full reload. Retry on failure and re-check when the tab returns.
     let live = true
-    getConfig()
-      .then((cfg) => {
-        if (live) setShowFriends(cfg?.friends_enabled === true)
-      })
-      .catch(() => {
-        if (live) setShowFriends(false)
-      })
+    let timer: ReturnType<typeof setTimeout> | undefined
+    const load = () => {
+      getConfig()
+        .then((cfg) => {
+          if (!live || !cfg) {
+            if (live) timer = setTimeout(load, 3000)
+            return
+          }
+          setShowFriends(cfg.friends_enabled === true)
+        })
+        .catch(() => {
+          if (live) timer = setTimeout(load, 3000)
+        })
+    }
+    load()
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') load()
+    }
+    window.addEventListener('focus', load)
+    document.addEventListener('visibilitychange', onVisible)
     return () => {
       live = false
+      if (timer) clearTimeout(timer)
+      window.removeEventListener('focus', load)
+      document.removeEventListener('visibilitychange', onVisible)
     }
   }, [])
 
