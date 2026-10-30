@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import FriendsPage from '../app/friends/page'
 import { getFriends, getFriendsLeaderboard } from '../lib/api'
 
@@ -66,5 +66,15 @@ describe('FriendsPage', () => {
     vi.mocked(getFriends).mockRejectedValue(Object.assign(new Error('not authenticated'), { status: 401 }))
     render(<FriendsPage />)
     expect(await screen.findByText('Sign in to use friends.')).toBeDefined()
+  })
+})
+
+describe('friend row actions', () => {
+  it('keeps Block and Remove behind one menu', async () => {
+    vi.mocked(getFriends).mockResolvedValue(feed)
+    render(<FriendsPage />)
+    fireEvent.click(await screen.findByRole('button', { name: 'More actions for Grace Hopper' }))
+    expect(screen.getByRole('menuitem', { name: 'Block' })).toBeDefined()
+    expect(screen.getByRole('menuitem', { name: 'Remove friend' })).toBeDefined()
   })
 })

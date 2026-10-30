@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import AppShell from '../../components/app-shell'
 import SectionHeader from '../../components/SectionHeader'
@@ -74,6 +74,28 @@ function FriendRow({ friend, onRemove, onBlock, busy }: {
   onBlock: () => void
   busy: boolean
 }) {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const menuRef = useRef<HTMLDivElement | null>(null)
+
+  // The actions are destructive, so they live behind one control instead of
+  // two buttons beside every name. That keeps a 100-friend list readable and
+  // makes an accidental remove require two deliberate clicks.
+  useEffect(() => {
+    if (!menuOpen) return
+    const onPointer = (event: MouseEvent) => {
+      if (!menuRef.current?.contains(event.target as Node)) setMenuOpen(false)
+    }
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setMenuOpen(false)
+    }
+    document.addEventListener('mousedown', onPointer)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onPointer)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [menuOpen])
+
   return (
     <li className="flex items-center gap-3 border border-mathua-border bg-mathua-surface px-3 py-3 min-w-0">
       <PersonAvatar person={friend} />
@@ -82,27 +104,48 @@ function FriendRow({ friend, onRemove, onBlock, busy }: {
           {friend.name}
         </Link>
         <p className="truncate font-mono text-[11px] text-mathua-muted">
-          {friend.mastered} mastered{friend.friends_since ? ` · since ${dateLabel(friend.friends_since)}` : ''}
+          {friend.mastered} mastered
+          {friend.friends_since && (
+            <span className="hidden sm:inline"> · since {dateLabel(friend.friends_since)}</span>
+          )}
         </p>
       </div>
-      <div className="flex shrink-0 items-center gap-1">
+      <div ref={menuRef} className="relative shrink-0">
         <button
           type="button"
-          onClick={onRemove}
+          onClick={() => setMenuOpen((open) => !open)}
           disabled={busy}
-          className="h-8 border border-mathua-border px-2 font-mono text-[10px] uppercase tracking-wider text-mathua-secondary hover:border-mathua-red hover:text-mathua-red disabled:opacity-50"
+          aria-haspopup="menu"
+          aria-expanded={menuOpen}
+          aria-label={`More actions for ${friend.name}`}
+          className="flex h-8 w-8 items-center justify-center border border-mathua-border font-mono text-sm leading-none text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue disabled:opacity-50"
         >
-          Remove
+          ···
         </button>
-        <button
-          type="button"
-          onClick={onBlock}
-          disabled={busy}
-          className="h-8 border border-mathua-border px-2 font-mono text-[10px] uppercase tracking-wider text-mathua-secondary hover:border-mathua-red hover:text-mathua-red disabled:opacity-50"
-          aria-label={`Block ${friend.name}`}
-        >
-          Block
-        </button>
+        {menuOpen && (
+          <div
+            role="menu"
+            aria-label={`Actions for ${friend.name}`}
+            className="absolute right-0 top-9 z-20 w-44 border border-mathua-border bg-mathua-surface shadow-lg"
+          >
+            <button
+              type="button"
+              role="menuitem"
+              onClick={() => { setMenuOpen(false); onBlock() }}
+              className="block w-full px-3 py-2 text-left font-mono text-[11px] uppercase tracking-wider text-mathua-secondary hover:bg-mathua-code hover:text-mathua-primary"
+            >
+              Block
+            </button>
+            <button
+              type="button"
+              role="menuitem"
+              onClick={() => { setMenuOpen(false); onRemove() }}
+              className="block w-full border-t border-mathua-border px-3 py-2 text-left font-mono text-[11px] uppercase tracking-wider text-mathua-red hover:bg-mathua-red hover:text-white"
+            >
+              Remove friend
+            </button>
+          </div>
+        )}
       </div>
     </li>
   )
@@ -159,6 +202,10 @@ export default function FriendsPage() {
   const [rows, setRows] = useState<FriendLeaderboardRow[]>([])
   const [rowsLoading, setRowsLoading] = useState(false)
   const [attempt, setAttempt] = useState(0)
+  // The feed can hold more requests than fit on one screen. Preview the first
+  // few and let the learner open the rest rather than turning the page into a
+  // wall of Accept buttons.
+  const [showAllRequests, setShowAllRequests] = useState(false)
 
   const load = useCallback(async () => {
     const next = await getFriends()
@@ -342,6 +389,11 @@ export default function FriendsPage() {
   const friendCount = feed?.friends.length ?? 0
   const incomingCount = feed?.incoming.length ?? 0
   const outgoingCount = feed?.outgoing.length ?? 0
+  const incomingPreview = 5
+  const outgoingPreview = 3
+  const incomingShown = showAllRequests ? (feed?.incoming ?? []) : (feed?.incoming ?? []).slice(0, incomingPreview)
+  const outgoingShown = showAllRequests ? (feed?.outgoing ?? []) : (feed?.outgoing ?? []).slice(0, outgoingPreview)
+  const requestsHidden = incomingCount > incomingPreview || outgoingCount > outgoingPreview
 
   return (
     <AppShell>
@@ -466,7 +518,7 @@ export default function FriendsPage() {
                       Waiting for you
                     </h3>
                     <ul className="mb-4 space-y-2">
-                      {feed?.incoming.map((request) => (
+                      {incomingShown.map((request) => (
                         <RequestRow
                           key={`in-${request.profile_id}`}
                           request={request}
@@ -482,7 +534,7 @@ export default function FriendsPage() {
                   <>
                     <h3 className="mb-2 font-mono text-[10px] uppercase tracking-[0.15em] text-mathua-muted">Sent</h3>
                     <ul className="space-y-2">
-                      {feed?.outgoing.map((request) => (
+                      {outgoingShown.map((request) => (
                         <RequestRow
                           key={`out-${request.profile_id}`}
                           request={request}
@@ -492,6 +544,15 @@ export default function FriendsPage() {
                       ))}
                     </ul>
                   </>
+                )}
+                {requestsHidden && (
+                  <button
+                    type="button"
+                    onClick={() => setShowAllRequests((value) => !value)}
+                    className="mt-3 h-8 border border-mathua-border px-3 font-mono text-[10px] uppercase tracking-wider text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue"
+                  >
+                    {showAllRequests ? 'Show fewer requests' : `Show all ${incomingCount + outgoingCount} requests`}
+                  </button>
                 )}
               </section>
             )}
