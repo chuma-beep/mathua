@@ -103,6 +103,10 @@ export default function DomainsPage() {
     return out
   }, [domains])
 
+  // A group heading earns its space only when the subject has more than one
+  // row. With a single calculus domain the row says "Calculus I" on its own.
+  const calcCount = ordered.filter((d) => d.id.startsWith('calc')).length
+
   const openDomain = useCallback(async (id: string) => {
     setSelected(id)
     setDialog(null)
@@ -239,7 +243,9 @@ export default function DomainsPage() {
                 // subjects without hiding the per-course rows that carry the
                 // counts and the diagnostic scope.
                 const startsCalculus =
-                  d.id.startsWith('calc') && (i === 0 || !ordered[i - 1].id.startsWith('calc'))
+                  calcCount > 1 &&
+                  d.id.startsWith('calc') &&
+                  (i === 0 || !ordered[i - 1].id.startsWith('calc'))
                 return (
                   <Fragment key={d.id}>
                     {startsCalculus && (
