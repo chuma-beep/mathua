@@ -622,6 +622,17 @@ func (a *friendAccess) friendsLeaderboard(studentID, view string, week time.Time
 	if since.IsZero() {
 		since = time.Now().UTC().AddDate(0, 0, -7)
 	}
+	weekly := map[string]int{}
+	if view == "weekly" {
+		ids := make([]string, 0, len(entries))
+		for _, e := range entries {
+			ids = append(ids, e.studentID)
+		}
+		weekly, err = a.weeklyXPMany(ids, since)
+		if err != nil {
+			return nil, err
+		}
+	}
 	out := make([]FriendLeaderboardRow, 0, len(entries))
 	for _, e := range entries {
 		if friendLeaderboardHidden(e.settings) {
@@ -629,10 +640,7 @@ func (a *friendAccess) friendsLeaderboard(studentID, view string, week time.Time
 		}
 		xp := e.xpTotal
 		if view == "weekly" {
-			xp, err = a.weeklyXP(e.studentID, since)
-			if err != nil {
-				return nil, err
-			}
+			xp = weekly[e.studentID]
 		}
 		mastered := e.mastered
 		if e.isMe {
@@ -670,15 +678,40 @@ func (a *friendAccess) masteredCount(studentID string) (int, error) {
 	return n, nil
 }
 
-func (a *friendAccess) weeklyXP(studentID string, since time.Time) (int, error) {
-	var n int
-	if err := a.db.QueryRow(
-		a.rebind("SELECT COALESCE(SUM(amount), 0) FROM xp_events WHERE student_id = ? AND created_at >= ?"),
-		studentID, since.UTC().UnixNano(),
-	).Scan(&n); err != nil {
-		return 0, fmt.Errorf("sum weekly XP: %w", err)
+// weeklyXPMany sums one week of XP for every listed friend in one query.
+// The per-friend version ran one query per row, so a learner with 100 friends
+// paid 100 round trips on every load and every accept or remove.
+func (a *friendAccess) weeklyXPMany(ids []string, since time.Time) (map[string]int, error) {
+	out := make(map[string]int, len(ids))
+	if len(ids) == 0 {
+		return out, nil
 	}
-	return n, nil
+	placeholders := strings.TrimSuffix(strings.Repeat("?,", len(ids)), ",")
+	args := make([]interface{}, 0, len(ids)+1)
+	args = append(args, since.UTC().UnixNano())
+	for _, id := range ids {
+		args = append(args, id)
+	}
+	rows, err := a.db.Query(
+		a.rebind("SELECT student_id, COALESCE(SUM(amount), 0) FROM xp_events WHERE created_at >= ? AND student_id IN ("+placeholders+") GROUP BY student_id"),
+		args...,
+	)
+	if err != nil {
+		return nil, fmt.Errorf("sum weekly XP: %w", err)
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var id string
+		var xp int
+		if err := rows.Scan(&id, &xp); err != nil {
+			return nil, fmt.Errorf("scan weekly XP: %w", err)
+		}
+		out[id] = xp
+	}
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("sum weekly XP: %w", err)
+	}
+	return out, nil
 }
 
 func (a *friendAccess) rotateFriendCode(studentID string, now time.Time) (string, error) {

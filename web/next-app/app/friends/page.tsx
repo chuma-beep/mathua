@@ -162,6 +162,10 @@ export default function FriendsPage() {
   const [rows, setRows] = useState<FriendLeaderboardRow[]>([])
   const [rowsLoading, setRowsLoading] = useState(false)
   const [attempt, setAttempt] = useState(0)
+  // The feed can hold more requests than fit on one screen. Preview the first
+  // few and let the learner open the rest rather than turning the page into a
+  // wall of Accept buttons.
+  const [showAllRequests, setShowAllRequests] = useState(false)
 
   const load = useCallback(async () => {
     const next = await getFriends()
@@ -345,6 +349,11 @@ export default function FriendsPage() {
   const friendCount = feed?.friends.length ?? 0
   const incomingCount = feed?.incoming.length ?? 0
   const outgoingCount = feed?.outgoing.length ?? 0
+  const incomingPreview = 5
+  const outgoingPreview = 3
+  const incomingShown = showAllRequests ? (feed?.incoming ?? []) : (feed?.incoming ?? []).slice(0, incomingPreview)
+  const outgoingShown = showAllRequests ? (feed?.outgoing ?? []) : (feed?.outgoing ?? []).slice(0, outgoingPreview)
+  const requestsHidden = incomingCount > incomingPreview || outgoingCount > outgoingPreview
 
   return (
     <AppShell>
@@ -469,7 +478,7 @@ export default function FriendsPage() {
                       Waiting for you
                     </h3>
                     <ul className="mb-4 space-y-2">
-                      {feed?.incoming.map((request) => (
+                      {incomingShown.map((request) => (
                         <RequestRow
                           key={`in-${request.profile_id}`}
                           request={request}
@@ -485,7 +494,7 @@ export default function FriendsPage() {
                   <>
                     <h3 className="mb-2 font-mono text-[10px] uppercase tracking-[0.15em] text-mathua-muted">Sent</h3>
                     <ul className="space-y-2">
-                      {feed?.outgoing.map((request) => (
+                      {outgoingShown.map((request) => (
                         <RequestRow
                           key={`out-${request.profile_id}`}
                           request={request}
@@ -495,6 +504,15 @@ export default function FriendsPage() {
                       ))}
                     </ul>
                   </>
+                )}
+                {requestsHidden && (
+                  <button
+                    type="button"
+                    onClick={() => setShowAllRequests((value) => !value)}
+                    className="mt-3 h-8 border border-mathua-border px-3 font-mono text-[10px] uppercase tracking-wider text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue"
+                  >
+                    {showAllRequests ? 'Show fewer requests' : `Show all ${incomingCount + outgoingCount} requests`}
+                  </button>
                 )}
               </section>
             )}
