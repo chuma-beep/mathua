@@ -51,7 +51,7 @@ function avatarImage(avatar: FriendAvatar): string | undefined {
   return pick && isDicebearStyle(pick.style) ? dicebearUrl(pick.style, pick.seed) : undefined
 }
 
-function PersonAvatar({ person, size = 40 }: { person: FriendSummary | FriendRequest; size?: number }) {
+function PersonAvatar({ person, size = 40 }: { person: { profile_id: string; name: string; avatar: FriendAvatar }; size?: number }) {
   return (
     <Avatar
       seed={person.profile_id}
@@ -69,10 +69,21 @@ function dateLabel(value?: string): string {
   return isNaN(date.getTime()) ? '' : date.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })
 }
 
-function FriendRow({ friend, onRemove, onBlock, busy }: {
-  friend: FriendSummary
-  onRemove: () => void
-  onBlock: () => void
+type CombinedFriend = {
+  profile_id: string
+  name: string
+  avatar: FriendAvatar
+  mastered: number
+  friends_since?: string
+  xp: number | null
+  is_me: boolean
+}
+
+function FriendRow({ friend, rank, onRemove, onBlock, busy }: {
+  friend: CombinedFriend
+  rank: number
+  onRemove?: () => void
+  onBlock?: () => void
   busy: boolean
 }) {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -99,11 +110,16 @@ function FriendRow({ friend, onRemove, onBlock, busy }: {
 
   return (
     <li className="flex items-center gap-3 border border-mathua-border bg-mathua-surface px-3 py-3 min-w-0">
+      <span className="w-5 shrink-0 font-mono text-[11px] tabular-nums text-mathua-muted">{rank}</span>
       <PersonAvatar person={friend} />
       <div className="min-w-0 flex-1">
-        <Link href={`/friends/view?id=${encodeURIComponent(friend.profile_id)}`} className="block truncate text-sm text-mathua-primary hover:text-mathua-blue">
-          {friend.name}
-        </Link>
+        {friend.is_me ? (
+          <span className="block truncate text-sm text-mathua-primary">{friend.name} (you)</span>
+        ) : (
+          <Link href={`/friends/view?id=${encodeURIComponent(friend.profile_id)}`} className="block truncate text-sm text-mathua-primary hover:text-mathua-blue">
+            {friend.name}
+          </Link>
+        )}
         <p className="truncate font-mono text-[11px] text-mathua-muted">
           {friend.mastered} mastered
           {friend.friends_since && (
@@ -111,43 +127,48 @@ function FriendRow({ friend, onRemove, onBlock, busy }: {
           )}
         </p>
       </div>
-      <div ref={menuRef} className="relative shrink-0">
-        <button
-          type="button"
-          onClick={() => setMenuOpen((open) => !open)}
-          disabled={busy}
-          aria-haspopup="menu"
-          aria-expanded={menuOpen}
-          aria-label={`More actions for ${friend.name}`}
-          className="flex h-8 w-8 items-center justify-center text-mathua-secondary hover:text-mathua-blue disabled:opacity-50"
-        >
-          <EllipsisVertical />
-        </button>
-        {menuOpen && (
-          <div
-            role="menu"
-            aria-label={`Actions for ${friend.name}`}
-            className="absolute right-0 top-9 z-20 w-44 border border-mathua-border bg-mathua-surface shadow-lg"
+      <span className="shrink-0 font-mono text-[11px] tabular-nums text-mathua-secondary">
+        {friend.xp == null ? '—' : `${friend.xp} XP`}
+      </span>
+      {!friend.is_me && (
+        <div ref={menuRef} className="relative shrink-0">
+          <button
+            type="button"
+            onClick={() => setMenuOpen((open) => !open)}
+            disabled={busy}
+            aria-haspopup="menu"
+            aria-expanded={menuOpen}
+            aria-label={`More actions for ${friend.name}`}
+            className="flex h-8 w-8 items-center justify-center text-mathua-secondary hover:text-mathua-blue disabled:opacity-50"
           >
-            <button
-              type="button"
-              role="menuitem"
-              onClick={() => { setMenuOpen(false); onBlock() }}
-              className="block w-full px-3 py-2 text-left font-mono text-[11px] uppercase tracking-wider text-mathua-secondary hover:bg-mathua-code hover:text-mathua-primary"
+            <EllipsisVertical />
+          </button>
+          {menuOpen && (
+            <div
+              role="menu"
+              aria-label={`Actions for ${friend.name}`}
+              className="absolute right-0 top-9 z-20 w-44 border border-mathua-border bg-mathua-surface shadow-lg"
             >
-              Block
-            </button>
-            <button
-              type="button"
-              role="menuitem"
-              onClick={() => { setMenuOpen(false); onRemove() }}
-              className="block w-full border-t border-mathua-border px-3 py-2 text-left font-mono text-[11px] uppercase tracking-wider text-mathua-red hover:bg-mathua-red hover:text-white"
-            >
-              Remove friend
-            </button>
-          </div>
-        )}
-      </div>
+              <button
+                type="button"
+                role="menuitem"
+                onClick={() => { setMenuOpen(false); onBlock?.() }}
+                className="block w-full px-3 py-2 text-left font-mono text-[11px] uppercase tracking-wider text-mathua-secondary hover:bg-mathua-code hover:text-mathua-primary"
+              >
+                Block
+              </button>
+              <button
+                type="button"
+                role="menuitem"
+                onClick={() => { setMenuOpen(false); onRemove?.() }}
+                className="block w-full border-t border-mathua-border px-3 py-2 text-left font-mono text-[11px] uppercase tracking-wider text-mathua-red hover:bg-mathua-red hover:text-white"
+              >
+                Remove friend
+              </button>
+            </div>
+          )}
+        </div>
+      )}
     </li>
   )
 }
@@ -201,7 +222,6 @@ export default function FriendsPage() {
   const [confirmRotate, setConfirmRotate] = useState(false)
   const [view, setView] = useState<LeaderboardView>('weekly')
   const [rows, setRows] = useState<FriendLeaderboardRow[]>([])
-  const [rowsLoading, setRowsLoading] = useState(false)
   const [attempt, setAttempt] = useState(0)
   // The feed can hold more requests than fit on one screen. Preview the first
   // few and let the learner open the rest rather than turning the page into a
@@ -249,11 +269,9 @@ export default function FriendsPage() {
   useEffect(() => {
     if (availability !== 'ready') return
     let cancelled = false
-    setRowsLoading(true)
     getFriendsLeaderboard(view)
       .then((next) => { if (!cancelled) setRows(next) })
       .catch(() => { if (!cancelled) setRows([]) })
-      .finally(() => { if (!cancelled) setRowsLoading(false) })
     return () => { cancelled = true }
   }, [availability, view, feed])
 
@@ -396,6 +414,32 @@ export default function FriendsPage() {
   const outgoingShown = showAllRequests ? (feed?.outgoing ?? []) : (feed?.outgoing ?? []).slice(0, outgoingPreview)
   const requestsHidden = incomingCount > incomingPreview || outgoingCount > outgoingPreview
 
+  // One list, not a friends list plus a leaderboard that repeats the same
+  // people. XP comes from the leaderboard response so hidden learners are the
+  // only ones without a number, and they sort after everyone who has one.
+  const xpByProfile = new Map(rows.map((row) => [row.profile_id, row.xp]))
+  const meRow = rows.find((row) => row.is_me)
+  const combined: CombinedFriend[] = (feed?.friends ?? []).map((friend) => ({
+    profile_id: friend.profile_id,
+    name: friend.name,
+    avatar: friend.avatar,
+    mastered: friend.mastered,
+    friends_since: friend.friends_since,
+    xp: xpByProfile.get(friend.profile_id) ?? null,
+    is_me: false,
+  }))
+  if (meRow) {
+    combined.push({
+      profile_id: meRow.profile_id,
+      name: meRow.name,
+      avatar: meRow.avatar,
+      mastered: meRow.mastered,
+      xp: meRow.xp,
+      is_me: true,
+    })
+  }
+  combined.sort((a, b) => (b.xp ?? -1) - (a.xp ?? -1) || a.name.localeCompare(b.name))
+
   return (
     <AppShell>
       <div className="mx-auto w-full max-w-[1040px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
@@ -503,7 +547,7 @@ export default function FriendsPage() {
           </div>
         </section>
 
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)]">
+        <div className="min-w-0">
           <div className="min-w-0">
             {(incomingCount > 0 || outgoingCount > 0) && (
               <section className="mb-8" aria-label="Requests">
@@ -559,9 +603,29 @@ export default function FriendsPage() {
             )}
 
             <section aria-label="Friends">
-              <h2 className="mb-3 font-serif text-[1.05rem] text-mathua-primary">
-                Friends <span className="ml-1 font-mono text-xs text-mathua-muted">{friendCount}</span>
-              </h2>
+              <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+                <h2 className="font-serif text-[1.05rem] text-mathua-primary">
+                  Friends <span className="ml-1 font-mono text-xs text-mathua-muted">{friendCount}</span>
+                </h2>
+                <div className="flex gap-1" role="tablist" aria-label="Friends standings period">
+                  {(['weekly', 'all_time'] as LeaderboardView[]).map((id) => (
+                    <button
+                      key={id}
+                      type="button"
+                      role="tab"
+                      aria-selected={view === id}
+                      onClick={() => setView(id)}
+                      className={`h-8 border px-2 font-mono text-[10px] uppercase tracking-wider ${
+                        view === id
+                          ? 'border-mathua-blue bg-mathua-blue text-white'
+                          : 'border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue'
+                      }`}
+                    >
+                      {id === 'weekly' ? 'Week' : 'All time'}
+                    </button>
+                  ))}
+                </div>
+              </div>
               {friendCount === 0 ? (
                 <div className="border border-mathua-border bg-mathua-surface p-6">
                   <p className="text-sm text-mathua-primary">No friends yet.</p>
@@ -571,71 +635,20 @@ export default function FriendsPage() {
                 </div>
               ) : (
                 <ul className="space-y-2">
-                  {feed?.friends.map((friend) => (
+                  {combined.map((friend, index) => (
                     <FriendRow
                       key={friend.profile_id}
                       friend={friend}
+                      rank={index + 1}
                       busy={busy}
-                      onRemove={() => run(() => removeFriend(friend.profile_id), `${friend.name} removed.`)}
-                      onBlock={() => run(() => blockFriend(friend.profile_id), `${friend.name} blocked.`)}
+                      onRemove={friend.is_me ? undefined : () => run(() => removeFriend(friend.profile_id), `${friend.name} removed.`)}
+                      onBlock={friend.is_me ? undefined : () => run(() => blockFriend(friend.profile_id), `${friend.name} blocked.`)}
                     />
                   ))}
                 </ul>
               )}
             </section>
           </div>
-
-          <aside className="min-w-0 self-start lg:sticky lg:top-6" aria-label="Friends leaderboard">
-            <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
-              <h2 className="font-serif text-[1.05rem] text-mathua-primary">Friends leaderboard</h2>
-              <div className="flex gap-1" role="tablist" aria-label="Friends leaderboard period">
-                {(['weekly', 'all_time'] as LeaderboardView[]).map((id) => (
-                  <button
-                    key={id}
-                    type="button"
-                    role="tab"
-                    aria-selected={view === id}
-                    onClick={() => setView(id)}
-                    className={`h-8 border px-2 font-mono text-[10px] uppercase tracking-wider ${
-                      view === id
-                        ? 'border-mathua-blue bg-mathua-blue text-white'
-                        : 'border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue'
-                    }`}
-                  >
-                    {id === 'weekly' ? 'Week' : 'All time'}
-                  </button>
-                ))}
-              </div>
-            </div>
-            {rowsLoading ? (
-              <p className="font-mono text-[11px] text-mathua-muted">Loading standings</p>
-            ) : rows.length === 0 ? (
-              <div className="border border-mathua-border bg-mathua-surface p-4">
-                <p className="text-sm text-mathua-primary">No standings yet.</p>
-                <p className="mt-1 font-mono text-[11px] text-mathua-muted">Add a friend or earn XP to appear here.</p>
-              </div>
-            ) : (
-              <ol className="divide-y divide-mathua-border border border-mathua-border">
-                {rows.map((row, index) => (
-                  <li key={row.profile_id} className="flex items-center gap-2 px-3 py-2">
-                    <span className="w-5 shrink-0 font-mono text-[11px] text-mathua-muted">{index + 1}</span>
-                    <Avatar
-                      seed={row.profile_id}
-                      name={row.name}
-                      size={24}
-                      url={avatarImage(row.avatar)}
-                      preset={row.avatar.avatar_preset ?? null}
-                    />
-                    <span className="min-w-0 flex-1 truncate text-sm text-mathua-primary">
-                      {row.name}
-                      {row.is_me ? ' (you)' : ''}
-                    </span>
-                    <span className="shrink-0 font-mono text-[11px] tabular-nums text-mathua-secondary">{row.xp} XP</span>
-                  </li>
-                ))}
-              </ol>
-            )}
-          </aside>
         </div>
       </div>
       <Footer />

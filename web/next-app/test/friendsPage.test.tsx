@@ -54,6 +54,9 @@ describe('FriendsPage', () => {
     expect(await screen.findByText('ABCD2345')).toBeDefined()
     expect(await screen.findByText('Grace Hopper')).toBeDefined()
     expect(screen.getByText(/4 mastered/)).toBeDefined()
+    // One list, not a friends list plus a separate standings block.
+    expect(screen.queryByText('Friends leaderboard')).toBeNull()
+    expect(screen.getAllByText('—').length).toBeGreaterThan(0)
   })
 
   it('explains that the surface is off when the API answers 404', async () => {
