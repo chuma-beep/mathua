@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useTheme } from '../../hooks/useTheme'
 import { getUserInfo, ensureGuestId, ensureGuestToken, getGuestId, isLoggedIn, isStaffRole, type UserInfo } from '../../lib/auth'
 import { ensureDicebearAvatar, resolveAvatar } from '../../lib/dicebear'
-import { getActivity, getProgress, getWeaknesses, getDueReviews, getEfficacy, getScores, getSettings, getMe, getTimedQuiz } from '../../lib/api'
+import { getActivity, getProgress, getWeaknesses, getDueReviews, getEfficacy, getScores, getSettings, getMe, getTimedQuiz, getConfig } from '../../lib/api'
 import type { DailyActivity, Scores, WeaknessRes, ConceptProgress, EfficacyReport, TimedQuizSummaryRes } from '../../lib/api'
 import ProfileHeader from '../../components/ProfileHeader'
 import ActivityHeatmap from '../../components/ActivityHeatmap'
@@ -94,12 +94,32 @@ export default function ProfilePage() {
   const [goalOverride, setGoalOverride] = useState<number | null>(null)
   const [avatarUrl, setAvatarUrl] = useState<string | undefined>(undefined)
   const [avatarPreset, setAvatarPreset] = useState<number | null>(null)
+  // /profile builds its own shell instead of using AppShell, so it has to read
+  // the friends flag itself. Without this the sidebar entry appeared on every
+  // AppShell page and vanished only here.
+  const [friendsEnabled, setFriendsEnabled] = useState(false)
 
   // Guest daily-goal override (server default applies otherwise).
   useEffect(() => {
     if (mounted && !getUserInfo()) {
       setGoalOverride(getGuestGoal())
     }
+  }, [mounted])
+
+  // The friends entry follows a server flag. /profile owns its shell, so this
+  // is the one page that has to ask for the flag itself; a failed read leaves
+  // the entry hidden rather than offering a page that may answer 404.
+  useEffect(() => {
+    if (!mounted) return
+    let live = true
+    getConfig()
+      .then((cfg) => {
+        if (live) setFriendsEnabled(cfg?.friends_enabled === true)
+      })
+      .catch(() => {
+        if (live) setFriendsEnabled(false)
+      })
+    return () => { live = false }
   }, [mounted])
 
   const effScores = useMemo(
@@ -349,6 +369,7 @@ export default function ProfilePage() {
       avatarPreset={avatarPreset}
       dueReviews={dueReviews}
       isAdmin={isStaffRole(user.role)}
+      showFriends={friendsEnabled}
     >
         <a href="#profile-main" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-mathua-surface focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:text-mathua-blue">
           Skip to profile content
