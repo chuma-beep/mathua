@@ -46,6 +46,8 @@ CREATE TABLE IF NOT EXISTS students (
     league_week          TEXT NOT NULL DEFAULT '',
     league_moved         INTEGER NOT NULL DEFAULT 0,
     share_token          TEXT NOT NULL DEFAULT '',
+    profile_id           TEXT NOT NULL DEFAULT '',
+    friend_code          TEXT NOT NULL DEFAULT '',
     course_id            TEXT,
     email                TEXT NOT NULL DEFAULT '',
     google_id            TEXT NOT NULL DEFAULT '',
@@ -555,6 +557,31 @@ CREATE TABLE IF NOT EXISTS admin_audit (
 CREATE INDEX IF NOT EXISTS idx_admin_audit_created ON admin_audit(created_at);
 CREATE INDEX IF NOT EXISTS idx_admin_audit_actor   ON admin_audit(actor_id);
 CREATE INDEX IF NOT EXISTS idx_admin_audit_entity   ON admin_audit(entity_type, entity_id);
+
+CREATE TABLE IF NOT EXISTS friendships (
+    student_a    TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    student_b    TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    status       TEXT NOT NULL CHECK (status IN ('pending', 'accepted')),
+    requested_by TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    created_at   BIGINT NOT NULL,
+    responded_at BIGINT NOT NULL DEFAULT 0,
+    PRIMARY KEY (student_a, student_b),
+    CHECK (student_a < student_b),
+    CHECK (requested_by = student_a OR requested_by = student_b)
+);
+
+CREATE INDEX IF NOT EXISTS idx_friendships_a_status ON friendships(student_a, status);
+CREATE INDEX IF NOT EXISTS idx_friendships_b_status ON friendships(student_b, status);
+
+CREATE TABLE IF NOT EXISTS friend_blocks (
+    blocker_id TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    blocked_id TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    created_at BIGINT NOT NULL,
+    PRIMARY KEY (blocker_id, blocked_id),
+    CHECK (blocker_id <> blocked_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_friend_blocks_blocked ON friend_blocks(blocked_id);
 `
 
 func NewPostgresStore(dsn string) (*PostgresStore, error) {
@@ -620,6 +647,8 @@ func pgAuthMigrate(db *sql.DB) error {
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS league_week TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS league_moved INTEGER NOT NULL DEFAULT 0",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS share_token TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE students ADD COLUMN IF NOT EXISTS profile_id TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE students ADD COLUMN IF NOT EXISTS friend_code TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE report_views ADD COLUMN IF NOT EXISTS cleared_at TEXT NOT NULL DEFAULT ''",
 		"CREATE INDEX IF NOT EXISTS idx_students_username ON students(username)",
 		"CREATE INDEX IF NOT EXISTS idx_students_share ON students(share_token)",
@@ -738,6 +767,11 @@ func pgAuthMigrate(db *sql.DB) error {
 			return err
 		}
 	}
+	// Give existing accounts their stable public identity before the unique
+	// indexes below make either lookup key ambiguous.
+	if err := backfillFriendIdentities(db, rebindDollars); err != nil {
+		return err
+	}
 	// Back the app-level one-email-one-account 409s with a partial unique
 	// index (case-insensitive, legacy '' rows excluded). Retried each boot
 	// until clean so dirty databases still start; see the SQLite twin.
@@ -840,9 +874,17 @@ func (s *PostgresStore) Close() error {
 func (s *PostgresStore) CreateStudent(name string) (*Student, error) {
 	id := newUUID()
 	now := time.Now().UTC()
-	_, err := s.db.Exec(
-		"INSERT INTO students (id, name, settings, created_at) VALUES ($1, $2, '{}', $3)",
-		id, name, now.Format(time.RFC3339),
+	profileID, err := newProfileID()
+	if err != nil {
+		return nil, fmt.Errorf("create student: %w", err)
+	}
+	friendCode, err := newFriendCode()
+	if err != nil {
+		return nil, fmt.Errorf("create student: %w", err)
+	}
+	_, err = s.db.Exec(
+		"INSERT INTO students (id, profile_id, friend_code, name, settings, created_at) VALUES ($1, $2, $3, $4, '{}', $5)",
+		id, profileID, friendCode, name, now.Format(time.RFC3339),
 	)
 	if err != nil {
 		return nil, fmt.Errorf("create student: %w", err)
@@ -862,9 +904,17 @@ func (s *PostgresStore) ClaimGuestStudent(id, name string) (*Student, error) {
 		name = "Guest"
 	}
 	now := time.Now().UTC()
-	_, err := s.db.Exec(
-		"INSERT INTO students (id, name, settings, created_at) VALUES ($1, $2, '{}', $3) ON CONFLICT (id) DO NOTHING",
-		id, name, now.Format(time.RFC3339),
+	profileID, err := newProfileID()
+	if err != nil {
+		return nil, fmt.Errorf("claim guest student: %w", err)
+	}
+	friendCode, err := newFriendCode()
+	if err != nil {
+		return nil, fmt.Errorf("claim guest student: %w", err)
+	}
+	_, err = s.db.Exec(
+		"INSERT INTO students (id, profile_id, friend_code, name, settings, created_at) VALUES ($1, $2, $3, $4, '{}', $5) ON CONFLICT (id) DO NOTHING",
+		id, profileID, friendCode, name, now.Format(time.RFC3339),
 	)
 	if err != nil {
 		return nil, fmt.Errorf("claim guest student: %w", err)
@@ -885,9 +935,17 @@ func (s *PostgresStore) ClaimGuestStudent(id, name string) (*Student, error) {
 func (s *PostgresStore) CreateUser(name, username, passwordHash string) (*Student, error) {
 	id := newUUID()
 	now := time.Now().UTC()
-	_, err := s.db.Exec(
-		"INSERT INTO students (id, name, username, password_hash, settings, created_at) VALUES ($1, $2, $3, $4, '{}', $5)",
-		id, name, username, passwordHash, now.Format(time.RFC3339),
+	profileID, err := newProfileID()
+	if err != nil {
+		return nil, fmt.Errorf("create user: %w", err)
+	}
+	friendCode, err := newFriendCode()
+	if err != nil {
+		return nil, fmt.Errorf("create user: %w", err)
+	}
+	_, err = s.db.Exec(
+		"INSERT INTO students (id, profile_id, friend_code, name, username, password_hash, settings, created_at) VALUES ($1, $2, $3, $4, $5, $6, '{}', $7)",
+		id, profileID, friendCode, name, username, passwordHash, now.Format(time.RFC3339),
 	)
 	if err != nil {
 		return nil, fmt.Errorf("create user: %w", err)
@@ -959,9 +1017,17 @@ func (s *PostgresStore) FindByEmail(email string) (*Student, error) {
 func (s *PostgresStore) CreateGoogleUser(name, email, googleID, avatarURL string) (*Student, error) {
 	id := newUUID()
 	now := time.Now().UTC()
-	_, err := s.db.Exec(
-		"INSERT INTO students (id, name, email, email_verified, google_id, avatar_url, settings, created_at) VALUES ($1, $2, $3, 1, $4, $5, '{}', $6)",
-		id, name, email, googleID, avatarURL, now.Format(time.RFC3339),
+	profileID, err := newProfileID()
+	if err != nil {
+		return nil, fmt.Errorf("create google user: %w", err)
+	}
+	friendCode, err := newFriendCode()
+	if err != nil {
+		return nil, fmt.Errorf("create google user: %w", err)
+	}
+	_, err = s.db.Exec(
+		"INSERT INTO students (id, profile_id, friend_code, name, email, email_verified, google_id, avatar_url, settings, created_at) VALUES ($1, $2, $3, $4, $5, 1, $6, $7, '{}', $8)",
+		id, profileID, friendCode, name, email, googleID, avatarURL, now.Format(time.RFC3339),
 	)
 	if err != nil {
 		return nil, fmt.Errorf("create google user: %w", err)
@@ -1119,9 +1185,17 @@ func (s *PostgresStore) CreateOAuthUser(provider, providerID, name, email string
 	if name == "" {
 		name = email
 	}
-	_, err := s.db.Exec(
-		"INSERT INTO students (id, name, email, email_verified, avatar_url, settings, created_at) VALUES ($1, $2, $3, $4, $5, '{}', $6)",
-		id, name, email, ev, avatarURL, now.Format(time.RFC3339),
+	profileID, err := newProfileID()
+	if err != nil {
+		return nil, fmt.Errorf("create oauth user: %w", err)
+	}
+	friendCode, err := newFriendCode()
+	if err != nil {
+		return nil, fmt.Errorf("create oauth user: %w", err)
+	}
+	_, err = s.db.Exec(
+		"INSERT INTO students (id, profile_id, friend_code, name, email, email_verified, avatar_url, settings, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, '{}', $8)",
+		id, profileID, friendCode, name, email, ev, avatarURL, now.Format(time.RFC3339),
 	)
 	if err != nil {
 		return nil, fmt.Errorf("create oauth user: %w", err)
@@ -1915,6 +1989,8 @@ func (s *PostgresStore) DeleteAccount(studentID string) error {
 		{"DELETE FROM announcement_reads WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM announcement_views WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM ai_usage WHERE usage_key = $1", []interface{}{studentID}},
+		{"DELETE FROM friendships WHERE student_a = $1 OR student_b = $1", []interface{}{studentID}},
+		{"DELETE FROM friend_blocks WHERE blocker_id = $1 OR blocked_id = $1", []interface{}{studentID}},
 		{"DELETE FROM students WHERE id = $1", []interface{}{studentID}},
 	}
 	for _, st := range stmts {

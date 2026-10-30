@@ -110,6 +110,8 @@ func authMigrate(db *sql.DB) error {
 		"ALTER TABLE students ADD COLUMN league_week TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE students ADD COLUMN league_moved INTEGER NOT NULL DEFAULT 0",
 		"ALTER TABLE students ADD COLUMN share_token TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE students ADD COLUMN profile_id TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE students ADD COLUMN friend_code TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE report_views ADD COLUMN cleared_at TEXT NOT NULL DEFAULT ''",
 		"CREATE INDEX IF NOT EXISTS idx_students_username ON students(username)",
 		"CREATE INDEX IF NOT EXISTS idx_students_share ON students(share_token)",
@@ -169,6 +171,11 @@ func authMigrate(db *sql.DB) error {
 				return err
 			}
 		}
+	}
+	// Give existing accounts their stable public identity before the unique
+	// indexes below make either lookup key ambiguous.
+	if err := backfillFriendIdentities(db, rebindQuestion); err != nil {
+		return err
 	}
 	// Back the app-level one-email-one-account 409s with a partial unique
 	// index (case-insensitive, legacy '' rows excluded). Retried each boot
@@ -314,9 +321,17 @@ func (s *SQLiteStore) Close() error {
 func (s *SQLiteStore) CreateStudent(name string) (*Student, error) {
 	id := newUUID()
 	now := time.Now().UTC()
-	_, err := s.db.Exec(
-		"INSERT INTO students (id, name, settings, created_at) VALUES (?, ?, '{}', ?)",
-		id, name, now.Format(time.RFC3339),
+	profileID, err := newProfileID()
+	if err != nil {
+		return nil, fmt.Errorf("create student: %w", err)
+	}
+	friendCode, err := newFriendCode()
+	if err != nil {
+		return nil, fmt.Errorf("create student: %w", err)
+	}
+	_, err = s.db.Exec(
+		"INSERT INTO students (id, profile_id, friend_code, name, settings, created_at) VALUES (?, ?, ?, ?, '{}', ?)",
+		id, profileID, friendCode, name, now.Format(time.RFC3339),
 	)
 	if err != nil {
 		return nil, fmt.Errorf("create student: %w", err)
@@ -336,9 +351,17 @@ func (s *SQLiteStore) ClaimGuestStudent(id, name string) (*Student, error) {
 		name = "Guest"
 	}
 	now := time.Now().UTC()
-	_, err := s.db.Exec(
-		"INSERT OR IGNORE INTO students (id, name, settings, created_at) VALUES (?, ?, '{}', ?)",
-		id, name, now.Format(time.RFC3339),
+	profileID, err := newProfileID()
+	if err != nil {
+		return nil, fmt.Errorf("claim guest student: %w", err)
+	}
+	friendCode, err := newFriendCode()
+	if err != nil {
+		return nil, fmt.Errorf("claim guest student: %w", err)
+	}
+	_, err = s.db.Exec(
+		"INSERT OR IGNORE INTO students (id, profile_id, friend_code, name, settings, created_at) VALUES (?, ?, ?, ?, '{}', ?)",
+		id, profileID, friendCode, name, now.Format(time.RFC3339),
 	)
 	if err != nil {
 		return nil, fmt.Errorf("claim guest student: %w", err)
@@ -359,9 +382,17 @@ func (s *SQLiteStore) ClaimGuestStudent(id, name string) (*Student, error) {
 func (s *SQLiteStore) CreateUser(name, username, passwordHash string) (*Student, error) {
 	id := newUUID()
 	now := time.Now().UTC()
-	_, err := s.db.Exec(
-		"INSERT INTO students (id, name, username, password_hash, settings, created_at) VALUES (?, ?, ?, ?, '{}', ?)",
-		id, name, username, passwordHash, now.Format(time.RFC3339),
+	profileID, err := newProfileID()
+	if err != nil {
+		return nil, fmt.Errorf("create user: %w", err)
+	}
+	friendCode, err := newFriendCode()
+	if err != nil {
+		return nil, fmt.Errorf("create user: %w", err)
+	}
+	_, err = s.db.Exec(
+		"INSERT INTO students (id, profile_id, friend_code, name, username, password_hash, settings, created_at) VALUES (?, ?, ?, ?, ?, ?, '{}', ?)",
+		id, profileID, friendCode, name, username, passwordHash, now.Format(time.RFC3339),
 	)
 	if err != nil {
 		return nil, fmt.Errorf("create user: %w", err)
@@ -487,9 +518,17 @@ func (s *SQLiteStore) FindByEmail(email string) (*Student, error) {
 func (s *SQLiteStore) CreateGoogleUser(name, email, googleID, avatarURL string) (*Student, error) {
 	id := newUUID()
 	now := time.Now().UTC()
-	_, err := s.db.Exec(
-		"INSERT INTO students (id, name, email, email_verified, google_id, avatar_url, settings, created_at) VALUES (?, ?, ?, 1, ?, ?, '{}', ?)",
-		id, name, email, googleID, avatarURL, now.Format(time.RFC3339),
+	profileID, err := newProfileID()
+	if err != nil {
+		return nil, fmt.Errorf("create google user: %w", err)
+	}
+	friendCode, err := newFriendCode()
+	if err != nil {
+		return nil, fmt.Errorf("create google user: %w", err)
+	}
+	_, err = s.db.Exec(
+		"INSERT INTO students (id, profile_id, friend_code, name, email, email_verified, google_id, avatar_url, settings, created_at) VALUES (?, ?, ?, ?, ?, 1, ?, ?, '{}', ?)",
+		id, profileID, friendCode, name, email, googleID, avatarURL, now.Format(time.RFC3339),
 	)
 	if err != nil {
 		return nil, fmt.Errorf("create google user: %w", err)
@@ -652,9 +691,17 @@ func (s *SQLiteStore) CreateOAuthUser(provider, providerID, name, email string, 
 	if name == "" {
 		name = email
 	}
-	_, err := s.db.Exec(
-		"INSERT INTO students (id, name, email, email_verified, avatar_url, settings, created_at) VALUES (?, ?, ?, ?, ?, '{}', ?)",
-		id, name, email, ev, avatarURL, now.Format(time.RFC3339),
+	profileID, err := newProfileID()
+	if err != nil {
+		return nil, fmt.Errorf("create oauth user: %w", err)
+	}
+	friendCode, err := newFriendCode()
+	if err != nil {
+		return nil, fmt.Errorf("create oauth user: %w", err)
+	}
+	_, err = s.db.Exec(
+		"INSERT INTO students (id, profile_id, friend_code, name, email, email_verified, avatar_url, settings, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, '{}', ?)",
+		id, profileID, friendCode, name, email, ev, avatarURL, now.Format(time.RFC3339),
 	)
 	if err != nil {
 		return nil, fmt.Errorf("create oauth user: %w", err)
@@ -1454,6 +1501,8 @@ func (s *SQLiteStore) DeleteAccount(studentID string) error {
 		{"DELETE FROM announcement_reads WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM announcement_views WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM ai_usage WHERE usage_key = ?", []interface{}{studentID}},
+		{"DELETE FROM friendships WHERE student_a = ? OR student_b = ?", []interface{}{studentID, studentID}},
+		{"DELETE FROM friend_blocks WHERE blocker_id = ? OR blocked_id = ?", []interface{}{studentID, studentID}},
 		{"DELETE FROM students WHERE id = ?", []interface{}{studentID}},
 	}
 	for _, st := range stmts {
