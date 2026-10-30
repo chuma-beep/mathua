@@ -280,14 +280,29 @@ export function getErrorMessage(err: unknown): string {
   return String(err)
 }
 
+// oxlint-disable-next-line anti-slop/no-unknown-parameters -- API failures are catch values
+export function getTopicLockedPrerequisites(err: unknown): string[] | null {
+  if (!(err instanceof Error)) return null
+  const e = err as Error & { status?: number; code?: string; prerequisiteConceptIds?: string[] }
+  return e.status === 403 && e.code === 'TOPIC_LOCKED' ? e.prerequisiteConceptIds ?? [] : null
+}
+
 async function throwWithResponse(res: Response, fallbackMsg: string): Promise<never> {
   let serverMessage = ''
+  let code: string | undefined
+  let prerequisiteConceptIds: string[] | undefined
   try {
-    const data = await res.json() as { error?: string }
+    const data = await res.json() as { error?: string | { code?: string; message?: string; details?: { prerequisiteConceptIds?: unknown } } }
     if (data && typeof data.error === 'string') serverMessage = data.error
+    else if (data?.error && typeof data.error === 'object') {
+      if (typeof data.error.message === 'string') serverMessage = data.error.message
+      if (typeof data.error.code === 'string') code = data.error.code
+      const ids = data.error.details?.prerequisiteConceptIds
+      if (Array.isArray(ids)) prerequisiteConceptIds = ids.filter((id): id is string => typeof id === 'string')
+    }
   } catch { /* ignore json parse */ }
   const msg = serverMessage ? `${fallbackMsg}: ${serverMessage}` : fallbackMsg
-  throw Object.assign(new Error(msg), { status: res.status, serverMessage })
+  throw Object.assign(new Error(msg), { status: res.status, serverMessage, code, prerequisiteConceptIds })
 }
 
 export async function getProgress(studentID: string): Promise<Record<string, ConceptProgress>> {

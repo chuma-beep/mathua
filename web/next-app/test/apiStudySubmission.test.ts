@@ -11,7 +11,7 @@ vi.mock('../lib/auth', async (importOriginal) => {
 })
 
 import { authedFetch } from '../lib/auth'
-import { submitStudyAnswer } from '../lib/api'
+import { getErrorMessage, getTopicLockedPrerequisites, submitStudyAnswer } from '../lib/api'
 
 const ok = () =>
   new Response(JSON.stringify({ correct: true, feedback: 'Correct', xp: 1 }), {
@@ -38,5 +38,22 @@ describe('submitStudyAnswer submission id', () => {
     expect(bodies[1].submission_id).toBeTruthy()
     expect(bodies[0].submission_id).not.toBe(bodies[1].submission_id)
     expect(vi.mocked(authedFetch).mock.calls[0][1]).toMatchObject({ retryAttempts: 1 })
+  })
+
+  it('preserves the structured topic-lock reason and prerequisite ids', async () => {
+    vi.mocked(authedFetch).mockResolvedValueOnce(new Response(JSON.stringify({
+      error: { code: 'TOPIC_LOCKED', message: 'This topic has unmet prerequisites.', details: { prerequisiteConceptIds: ['arith.mult.2_5_10'] } },
+    }), { status: 403 }))
+
+    const error = await submitStudyAnswer('arith.exp.concept', '256', 5, '4^5').catch(e => e)
+    expect(getErrorMessage(error)).toBe('This topic has unmet prerequisites.')
+    expect(getTopicLockedPrerequisites(error)).toEqual(['arith.mult.2_5_10'])
+  })
+
+  it('keeps ordinary forbidden errors distinct from topic locks', async () => {
+    vi.mocked(authedFetch).mockResolvedValueOnce(new Response(JSON.stringify({ error: 'student_id not permitted' }), { status: 403 }))
+    const error = await submitStudyAnswer('a', '4', 5, '2+2').catch(e => e)
+    expect(getErrorMessage(error)).toBe('student_id not permitted')
+    expect(getTopicLockedPrerequisites(error)).toBeNull()
   })
 })
