@@ -412,8 +412,8 @@ func writeFriendError(w http.ResponseWriter, err error) {
 		writeError(w, "not found", 404)
 	case errors.Is(err, storage.ErrFriendSelf):
 		writeError(w, "you cannot friend yourself", 400)
-	case errors.Is(err, storage.ErrFriendNotVerified):
-		writeError(w, "verify your email address before sending friend requests", 403)
+	case errors.Is(err, storage.ErrFriendLimit):
+		writeError(w, "too many pending friend requests; wait for a reply before sending more", 429)
 	case errors.Is(err, storage.ErrFriendVisibilityOff):
 		writeError(w, "this learner has turned off friends", 403)
 	default:

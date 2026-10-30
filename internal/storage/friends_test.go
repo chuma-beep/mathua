@@ -4,6 +4,7 @@ import (
 	"errors"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"sync"
 	"testing"
@@ -102,10 +103,6 @@ func TestFriendRequestLifecycle(t *testing.T) {
 
 	if _, err := store.SendFriendRequest(a.ID, ai.ProfileID, time.Now().UTC()); !errors.Is(err, ErrFriendSelf) {
 		t.Fatalf("self request error = %v, want ErrFriendSelf", err)
-	}
-	unverified := createFriendUser(t, repo, "carol", false)
-	if _, err := store.SendFriendRequest(unverified.ID, ai.ProfileID, time.Now().UTC()); !errors.Is(err, ErrFriendNotVerified) {
-		t.Fatalf("unverified request error = %v, want ErrFriendNotVerified", err)
 	}
 
 	f, err := store.SendFriendRequest(a.ID, bi.ProfileID, time.Now().UTC())
@@ -515,19 +512,31 @@ func newFriendConcurrencyStore(t *testing.T) Repository {
 	return store
 }
 
-// A Google identity attests the mailbox even when the students.email_verified
-// flag was never updated. The friends gate must accept that proof instead of
-// asking a Google user to verify the same address again.
-func TestFriendRequestAcceptsAProviderVerifiedIdentity(t *testing.T) {
+// An account made with only a username has no email to verify, and a guest
+// that became a learner never had one. They can send requests; the pending cap
+// is what limits abuse.
+func TestFriendRequestNeedsNoEmail(t *testing.T) {
 	repo := newTestStore(t)
 	store := friendStore(t, repo)
 	a := createFriendUser(t, repo, "Ada", false)
 	b := createFriendUser(t, repo, "Grace", true)
-	if err := repo.CreateIdentity("google", "google-"+newUUID()[:8], a.ID, "ada@example.com", true); err != nil {
-		t.Fatalf("create identity: %v", err)
-	}
 	target := friendIdentity(t, store, b.ID)
 	if _, err := store.SendFriendRequest(a.ID, target.ProfileID, time.Now()); err != nil {
-		t.Fatalf("verified identity could not send a request: %v", err)
+		t.Fatalf("an account without an email could not send a request: %v", err)
+	}
+}
+
+func TestFriendRequestPendingCap(t *testing.T) {
+	repo := newTestStore(t)
+	store := friendStore(t, repo)
+	sender := createFriendUser(t, repo, "Sender", true)
+	var lastErr error
+	for i := 0; i <= friendPendingLimit; i++ {
+		target := createFriendUser(t, repo, "Target"+strconv.Itoa(i), true)
+		identity := friendIdentity(t, store, target.ID)
+		_, lastErr = store.SendFriendRequest(sender.ID, identity.ProfileID, time.Now())
+	}
+	if !errors.Is(lastErr, ErrFriendLimit) {
+		t.Fatalf("request %d error = %v, want ErrFriendLimit", friendPendingLimit+1, lastErr)
 	}
 }
