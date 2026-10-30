@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import AppShell from '../../components/app-shell'
+import { EllipsisVertical } from '../../components/icons'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import Loading from '../../components/Loading'
@@ -118,9 +119,9 @@ function FriendRow({ friend, onRemove, onBlock, busy }: {
           aria-haspopup="menu"
           aria-expanded={menuOpen}
           aria-label={`More actions for ${friend.name}`}
-          className="flex h-8 w-8 items-center justify-center border border-mathua-border font-mono text-sm leading-none text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue disabled:opacity-50"
+          className="flex h-8 w-8 items-center justify-center text-mathua-secondary hover:text-mathua-blue disabled:opacity-50"
         >
-          ···
+          <EllipsisVertical />
         </button>
         {menuOpen && (
           <div

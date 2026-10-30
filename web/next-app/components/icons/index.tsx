@@ -30,6 +30,7 @@ import {
   ChevronsRightIcon,
   CompassIcon as CompassAnimatedIcon,
   Dice5Icon,
+  EllipsisVerticalIcon,
   FileTextIcon,
   HandshakeIcon,
   HouseIcon,
@@ -159,6 +160,10 @@ export const ArrowUp = wrap(ArrowUpIcon as never)
 // is called out here rather than left to be noticed.
 export const Dices = wrap(Dice5Icon as never)
 
+// A row's overflow control. Vertical rather than horizontal so it reads as a
+// menu beside the name instead of a pause in the line of text.
+export const EllipsisVertical = wrap(EllipsisVerticalIcon as never)
+
 /** Every icon this module exports, so a guard can check the surface without parsing JSX. */
 export const ICON_NAMES = [
   'BookOpen',
@@ -168,6 +173,7 @@ export const ICON_NAMES = [
   'ChevronsRight',
   'Compass',
   'Dices',
+  'EllipsisVertical',
   'FileText',
   'Handshake',
   'House',
