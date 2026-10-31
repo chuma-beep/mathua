@@ -248,8 +248,24 @@ func TestRaiseNumericRecompute(t *testing.T) {
 	for i := 0; i < 200; i++ {
 		p := calcBatchSample(t, reg, "calc.series.cauchy_product", i)
 		n := calcFactInt(t, p, "n")
-		if want := strconv.Itoa(n + 1); p.Answer != want {
-			t.Fatalf("cauchy product: n=%d answers %s, want %s", n, p.Answer, want)
+		// Three products share this concept, so the expectation follows the
+		// shape rather than assuming the unit geometric factor everywhere.
+		want := ""
+		switch p.Facts["shape"] {
+		case "geometric":
+			a := calcFactInt(t, p, "a")
+			sum := 0
+			for k := 0; k <= n; k++ {
+				sum = sum*a + 1
+			}
+			want = strconv.Itoa(sum)
+		case "even":
+			want = strconv.Itoa(n/2 + 1)
+		default:
+			want = strconv.Itoa(n + 1)
+		}
+		if p.Answer != want {
+			t.Fatalf("cauchy product: n=%d shape=%s answers %s, want %s", n, p.Facts["shape"], p.Answer, want)
 		}
 	}
 

@@ -463,7 +463,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.group.center",
     "label": "Center of a group",
     "mastery_threshold": {
@@ -524,7 +524,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.group.composition_series",
     "label": "Composition series",
     "mastery_threshold": {
@@ -539,7 +539,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.rings.zero_divisor",
     "label": "Zero divisors and cancellation",
     "mastery_threshold": {
@@ -553,7 +553,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.rings.integral_domain",
     "label": "Integral domains",
     "mastery_threshold": {
@@ -568,7 +568,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.rings.prime_ideal",
     "label": "Prime and maximal ideals",
     "mastery_threshold": {
@@ -630,7 +630,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.structures.submodule",
     "label": "Submodules and quotient modules",
     "mastery_threshold": {
@@ -645,7 +645,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.structures.module_hom",
     "label": "Module homomorphisms",
     "mastery_threshold": {
@@ -7390,7 +7390,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "discrete.logic.propositions",
     "label": "Propositional logic: statements and truth values",
     "mastery_threshold": {
@@ -7404,7 +7404,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "discrete.logic.connectives",
     "label": "Logical connectives: AND, OR, NOT, IMPLIES",
     "mastery_threshold": {
@@ -7418,7 +7418,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "discrete.logic.truth_tables",
     "label": "Truth tables",
     "mastery_threshold": {
@@ -7432,7 +7432,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "discrete.logic.quantifiers",
     "label": "Quantifiers: universal and existential",
     "mastery_threshold": {
@@ -7460,7 +7460,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "discrete.sets.venn",
     "label": "Venn diagrams",
     "mastery_threshold": {
@@ -7532,7 +7532,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "discrete.graphs.paths",
     "label": "Paths, cycles, and connectivity",
     "mastery_threshold": {
@@ -12164,6 +12164,9 @@
       "streak": 10
     },
     "prerequisites": [
+      "alg.poly.concept",
+      "alg.poly.foil",
+      "geo.coord.plot",
       "numa.errors.absolute"
     ],
     "subdomain": "numerical_analysis.interp"
@@ -16397,7 +16400,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.basics.open_closed",
     "label": "Open and closed sets",
     "mastery_threshold": {
@@ -16411,7 +16414,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.basics.continuous",
     "label": "Continuity in topological spaces",
     "mastery_threshold": {
@@ -16426,7 +16429,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.compact",
     "label": "Compact sets",
     "mastery_threshold": {
@@ -16441,7 +16444,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.connected",
     "label": "Connected spaces",
     "mastery_threshold": {

@@ -26,7 +26,10 @@ package abstract
 // characteristic p, not p^n, and that distinction is a question in its own right.
 
 import (
+	"fmt"
 	"math/rand"
+	"strconv"
+	"strings"
 
 	"github.com/chuma-beep/mathua/internal/generator"
 )
@@ -52,54 +55,43 @@ func registerBatch(reg *generator.Registry) {
 type groupCenterGen struct{}
 
 func (g *groupCenterGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
+	type centerCase struct {
+		group  string
+		order  int
+		reason string
 	}
-	claims := []claim{
-		{
-			question:    "What is the center Z(S_3) of the symmetric group S_3?",
-			correct:     "Z(S_3) = {e}",
-			distractors: []string{"Z(S_3) = S_3", "Z(S_3) = {e, (1 2)}", "Z(S_3) = {e, (1 2 3)}"},
-			reason:      "Only the identity commutes with every permutation; a transposition and a 3-cycle do not commute, so nothing else is central.",
-		},
-		{
-			question:    "What is the center Z(D_4) of the dihedral group D_4 of order 8?",
-			correct:     "Z(D_4) = {e, r^2}",
-			distractors: []string{"Z(D_4) = {e}", "Z(D_4) = D_4", "Z(D_4) = {e, r, r^2, r^3}"},
-			reason:      "The half-turn r^2 commutes with every rotation and every reflection, and no other nonidentity element does.",
-		},
-		{
-			question:    "What is the center Z(Q_8) of the quaternion group Q_8?",
-			correct:     "Z(Q_8) = {1, -1}",
-			distractors: []string{"Z(Q_8) = {1}", "Z(Q_8) = Q_8", "Z(Q_8) = {1, i, -1, -i}"},
-			reason:      "The scalars 1 and -1 commute with every element; i and j anticommute, so no other element is central.",
-		},
-		{
-			question:    "What is the center of the cyclic group Z_8 (addition mod 8)?",
-			correct:     "Z(Z_8) = Z_8",
-			distractors: []string{"Z(Z_8) = {0}", "Z(Z_8) = {0, 2, 4, 6}", "Z(Z_8) = {0, 4}"},
-			reason:      "Z_8 is abelian, so every element commutes with every other and the whole group is its own center.",
-		},
-		{
-			question:    "What is the center of the Klein four-group V_4 = {e, a, b, ab}?",
-			correct:     "Z(V_4) = V_4",
-			distractors: []string{"Z(V_4) = {e}", "Z(V_4) = {e, a}", "Z(V_4) = {e, a, b}"},
-			reason:      "V_4 is abelian, so its center is the whole group.",
-		},
-		{
-			question:    "For any group G, the center Z(G) is which kind of subgroup?",
-			correct:     "a normal subgroup of G",
-			distractors: []string{"a subgroup that need not be normal", "a quotient of G", "a subgroup of the quotient G/Z(G)"},
-			reason:      "Every central element commutes with all of G, so gZ(G)g^-1 = Z(G) for every g and Z(G) is normal.",
-		},
+	var c centerCase
+	switch rand.Intn(7) {
+	case 0:
+		c = centerCase{"S_3", 1, "Only the identity commutes with every permutation, so the center of S_3 is trivial."}
+	case 1:
+		n := 3 + rand.Intn(8)
+		if n%2 == 0 {
+			c = centerCase{fmt.Sprintf("D_%d", n), 2, fmt.Sprintf("The half-turn r^(%d/2) commutes with every rotation and every reflection, and no other nonidentity element does.", n)}
+		} else {
+			c = centerCase{fmt.Sprintf("D_%d", n), 1, fmt.Sprintf("For odd n the dihedral group D_%d has trivial center.", n)}
+		}
+	case 2:
+		n := 2 + rand.Intn(11)
+		c = centerCase{fmt.Sprintf("Z_%d", n), n, fmt.Sprintf("Z_%d is cyclic, hence abelian, so every element is central and the center is the whole group.", n)}
+	case 3:
+		n := 3 + rand.Intn(4)
+		c = centerCase{fmt.Sprintf("S_%d", n), 1, fmt.Sprintf("For n >= 3 the center of S_%d is trivial.", n)}
+	case 4:
+		p := []int{2, 3, 5}[rand.Intn(3)]
+		c = centerCase{fmt.Sprintf("GL(2,%d)", p), p - 1, fmt.Sprintf("The center of GL(2,%d) is the set of nonzero scalar matrices lambda I, so it has order %d.", p, p-1)}
+	case 5:
+		c = centerCase{"Q_8", 2, "Only 1 and -1 commute with every element of the quaternion group, so the center has order 2."}
+	default:
+		c = centerCase{"V_4", 4, "V_4 is abelian, so every element is central and the center is the whole group."}
 	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	answer := strconv.Itoa(c.order)
+	return generator.Problem{
+		Question:    fmt.Sprintf("What is the order of the center Z(%s)? (enter a number)", c.group),
+		Answer:      answer,
+		Explanation: c.reason,
+		Facts:       map[string]string{"group": c.group, "order": answer},
+	}
 }
 
 // ---------------------------------------------------------------------------
@@ -221,48 +213,37 @@ func (g *simpleGroupGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type compositionSeriesGen struct{}
 
 func (g *compositionSeriesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
+	type seriesCase struct {
+		group  string
+		length int
+		reason string
 	}
-	claims := []claim{
-		{
-			question:    "How many factors does a composition series of the cyclic group Z_12 have? (enter a number)",
-			correct:     "3",
-			distractors: []string{"2", "4", "1"},
-			reason:      "The composition factors of Z_12 are Z_2, Z_2 and Z_3, so the series has three factors.",
-		},
-		{
-			question:    "How many factors does a composition series of Z_6 have? (enter a number)",
-			correct:     "2",
-			distractors: []string{"1", "3", "6"},
-			reason:      "6 = 2 * 3, so the composition factors are Z_2 and Z_3: two of them.",
-		},
-		{
-			question:    "What are the composition factors of Z_12, up to order?",
-			correct:     "Z_2, Z_2, Z_3",
-			distractors: []string{"Z_4, Z_3", "Z_6, Z_2", "Z_12"},
-			reason:      "A composition series refines 12 = 2 * 2 * 3 into factors of prime order, giving Z_2, Z_2, Z_3.",
-		},
-		{
-			question:    "The Jordan-Holder theorem says two composition series of the same finite group...",
-			correct:     "have the same multiset of composition factors",
-			distractors: []string{"have the same length but may have different factors", "end in the same proper normal subgroup", "are the same series"},
-			reason:      "Jordan-Holder makes the multiset of composition factors an invariant of the group, even when the series itself is not unique.",
-		},
-		{
-			question:    "The composition factors of a solvable group are...",
-			correct:     "cyclic groups of prime order",
-			distractors: []string{"nonabelian simple groups", "trivial groups", "fields"},
-			reason:      "A solvable group has a composition series with abelian factors, and the simple abelian groups are exactly the cyclic groups of prime order.",
-		},
+	n := 2 + rand.Intn(29)
+	omega := 0
+	for m := n; m > 1; {
+		d := 2
+		for m%d != 0 {
+			d++
+		}
+		omega++
+		m /= d
 	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	cases := []seriesCase{
+		{fmt.Sprintf("Z_%d", n), omega, fmt.Sprintf("%d factors into %d primes counted with multiplicity, so Z_%d has a composition series of length %d.", n, omega, n, omega)},
+		{"S_3", 2, "S_3 > A_3 > {e} has two factors."},
+		{"S_4", 4, "S_4 > A_4 > V_4 > C_2 > {e} has four factors."},
+		{"S_5", 2, "S_5 > A_5 > {e} has two factors because A_5 is simple."},
+		{"D_4", 3, "D_4 > <r> > <r^2> > {e} has three factors."},
+		{"Q_8", 3, "Q_8 > <i> > <-1> > {e} has three factors."},
+		{"V_4", 2, "V_4 > C_2 > {e} has two factors."},
+	}
+	c := cases[rand.Intn(len(cases))]
+	return generator.Problem{
+		Question:    fmt.Sprintf("How many factors does a composition series of %s have? (enter a number)", c.group),
+		Answer:      strconv.Itoa(c.length),
+		Explanation: c.reason,
+		Facts:       map[string]string{"group": c.group, "length": strconv.Itoa(c.length)},
+	}
 }
 
 // ---------------------------------------------------------------------------
@@ -272,48 +253,27 @@ func (g *compositionSeriesGen) Generate(ctx generator.GeneratorContext) generato
 type zeroDivisorGen struct{}
 
 func (g *zeroDivisorGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
+	n := 4 + rand.Intn(27)
+	phi := 0
+	for a := 1; a <= n; a++ {
+		if intGCD(a, n) == 1 {
+			phi++
+		}
 	}
-	claims := []claim{
-		{
-			question:    "Which nonzero element of Z_4 is a zero divisor?",
-			correct:     "2",
-			distractors: []string{"1", "3", "0"},
-			reason:      "2 * 2 = 0 mod 4, so 2 is a zero divisor; 1 and 3 are units and 0 is excluded by the question.",
-		},
-		{
-			question:    "In Z_6, which product is zero with both factors nonzero?",
-			correct:     "2 * 3",
-			distractors: []string{"1 * 5", "5 * 5", "2 * 2"},
-			reason:      "2 * 3 = 6 = 0 mod 6, and both factors are nonzero, so 2 and 3 are zero divisors.",
-		},
-		{
-			question:    "Which ring has no zero divisors?",
-			correct:     "Z_7",
-			distractors: []string{"Z_4", "Z_6", "Z_8"},
-			reason:      "Z_7 is a field, so it has no zero divisors; each of Z_4, Z_6 and Z_8 has nonzero elements with zero product.",
-		},
-		{
-			question:    "In an integral domain, if a and b are nonzero then ab is...",
-			correct:     "never zero",
-			distractors: []string{"sometimes zero", "always zero", "always a unit"},
-			reason:      "An integral domain has no zero divisors, so a product of two nonzero elements cannot be zero.",
-		},
-		{
-			question:    "The cancellation law (ab = ac with a nonzero implies b = c) holds in which of these rings?",
-			correct:     "Z_7",
-			distractors: []string{"Z_4", "Z_6", "Z_8"},
-			reason:      "Cancellation is equivalent to having no zero divisors, which holds exactly in an integral domain such as Z_7.",
-		},
+	count := n - phi - 1
+	return generator.Problem{
+		Question:    fmt.Sprintf("How many nonzero zero divisors does Z_%d have? (enter a number)", n),
+		Answer:      strconv.Itoa(count),
+		Explanation: fmt.Sprintf("Z_%d has %d units and the zero element, so the other %d nonzero elements are zero divisors.", n, phi, count),
+		Facts:       map[string]string{"n": strconv.Itoa(n), "count": strconv.Itoa(count)},
 	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+}
+
+func intGCD(a, b int) int {
+	for b != 0 {
+		a, b = b, a%b
+	}
+	return a
 }
 
 // ---------------------------------------------------------------------------
@@ -323,48 +283,54 @@ func (g *zeroDivisorGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type integralDomainGen struct{}
 
 func (g *integralDomainGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
+	type ringCase struct {
+		name     string
+		isDomain bool
+		reason   string
 	}
-	claims := []claim{
-		{
-			question:    "Which of the following is an integral domain?",
-			correct:     "Z_7",
-			distractors: []string{"Z_6", "Z_8", "Z_10"},
-			reason:      "Z_7 is a field, and every field is an integral domain; Z_6, Z_8 and Z_10 all have zero divisors.",
-		},
-		{
-			question:    "Is the ring M_2(R) of 2x2 real matrices an integral domain? (yes/no)",
-			correct:     "no",
-			distractors: []string{"yes", "only over Q", "only if the matrices commute"},
-			reason:      "Take the matrices with a 1 in the top-left corner and in the bottom-right corner; their product is zero, so M_2(R) has zero divisors.",
-		},
-		{
-			question:    "Every finite integral domain is...",
-			correct:     "a field",
-			distractors: []string{"a UFD but not a field", "a ring with zero divisors", "a group under multiplication"},
-			reason:      "In a finite integral domain, multiplication by a nonzero a is injective and hence surjective, so a has an inverse.",
-		},
-		{
-			question:    "Is Z[x] an integral domain? (yes/no)",
-			correct:     "yes",
-			distractors: []string{"no", "only if x is invertible", "only when the degree is at most one"},
-			reason:      "Z is an integral domain, and the polynomial ring over an integral domain is again an integral domain.",
-		},
-		{
-			question:    "Which condition defines an integral domain?",
-			correct:     "a commutative ring with identity, no zero divisors, and 1 not equal to 0",
-			distractors: []string{"a commutative ring in which every nonzero element is a unit", "a ring with no ideals", "a group under both operations"},
-			reason:      "An integral domain is a nonzero commutative ring with identity that has no zero divisors.",
-		},
+	rings := []ringCase{
+		{"Z_6", false, "2 * 3 = 0 in Z_6"},
+		{"Z_7", true, "Z_7 is a field"},
+		{"Z_8", false, "2 * 4 = 0 in Z_8"},
+		{"Z_10", false, "2 * 5 = 0 in Z_10"},
+		{"Z_12", false, "3 * 4 = 0 in Z_12"},
+		{"M_2(R)", false, "the matrix units E_11 and E_22 multiply to zero"},
+		{"Z[x]", true, "a polynomial ring over an integral domain is an integral domain"},
+		{"Q", true, "Q is a field"},
+		{"R", true, "R is a field"},
+		{"C", true, "C is a field"},
+		{"Z_4", false, "2 * 2 = 0 in Z_4"},
+		{"F_5", true, "F_5 is a field"},
+		{"Z_2[x]", true, "a polynomial ring over a field is an integral domain"},
+		{"Z_2 x Z_2", false, "(1,0) * (0,1) = (0,0)"},
+		{"Z[i]", true, "the Gaussian integers sit inside C and have no zero divisors"},
+		{"Z_5[x]", true, "a polynomial ring over a field is an integral domain"},
 	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	idx := rand.Perm(len(rings))[:4]
+	chosen := make([]ringCase, 0, 4)
+	parts := make([]string, 0, 4)
+	count := 0
+	for i, j := range idx {
+		chosen = append(chosen, rings[j])
+		parts = append(parts, fmt.Sprintf("(%s) %s", string(rune('a'+i)), rings[j].name))
+		if rings[j].isDomain {
+			count++
+		}
+	}
+	explainParts := make([]string, 0, 4)
+	for _, r := range chosen {
+		if r.isDomain {
+			explainParts = append(explainParts, fmt.Sprintf("%s is an integral domain because %s", r.name, r.reason))
+		} else {
+			explainParts = append(explainParts, fmt.Sprintf("%s is not an integral domain because %s", r.name, r.reason))
+		}
+	}
+	return generator.Problem{
+		Question:    fmt.Sprintf("How many of these rings are integral domains? %s (enter a number)", strings.Join(parts, " ")),
+		Answer:      strconv.Itoa(count),
+		Explanation: strings.Join(explainParts, "; ") + ".",
+		Facts:       map[string]string{"count": strconv.Itoa(count), "rings": strings.Join(parts, " ")},
+	}
 }
 
 // ---------------------------------------------------------------------------
@@ -374,48 +340,38 @@ func (g *integralDomainGen) Generate(ctx generator.GeneratorContext) generator.P
 type primeIdealGen struct{}
 
 func (g *primeIdealGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
+	n := 2 + rand.Intn(59)
+	primes := distinctPrimeFactors(n)
+	kind := "prime"
+	if rand.Intn(2) == 0 {
+		kind = "maximal"
 	}
-	claims := []claim{
-		{
-			question:    "In a commutative ring R with identity, an ideal P is prime exactly when...",
-			correct:     "R/P is an integral domain",
-			distractors: []string{"R/P is a field", "R/P is a group under multiplication", "P is principal"},
-			reason:      "R/P is an integral domain exactly when P is prime, for R commutative with identity.",
-		},
-		{
-			question:    "In a commutative ring R with identity, an ideal M is maximal exactly when...",
-			correct:     "R/M is a field",
-			distractors: []string{"R/M is an integral domain but not a field", "M is principal", "M contains every prime ideal"},
-			reason:      "M is maximal exactly when R/M has no nontrivial proper ideals, which is the same as every nonzero class being invertible.",
-		},
-		{
-			question:    "Which ideal of Z is prime?",
-			correct:     "(5)",
-			distractors: []string{"(4)", "(6)", "(9)"},
-			reason:      "Z/(n) is an integral domain exactly when n is prime, and 5 is prime.",
-		},
-		{
-			question:    "Which ideal of Z is maximal?",
-			correct:     "(7)",
-			distractors: []string{"(0)", "(4)", "(6)"},
-			reason:      "In Z the nonzero prime ideals are maximal; (0) is prime but not maximal because Z is not a field.",
-		},
-		{
-			question:    "Is the ideal (x) prime in Z[x]? (yes/no)",
-			correct:     "yes",
-			distractors: []string{"no", "only if x is invertible", "only when Z[x] is a field"},
-			reason:      "Z[x]/(x) is isomorphic to Z, an integral domain, so (x) is prime; it is not maximal because Z is not a field.",
-		},
+	factors := make([]string, 0, len(primes))
+	for _, p := range primes {
+		factors = append(factors, fmt.Sprintf("(%d)", p))
 	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return generator.Problem{
+		Question:    fmt.Sprintf("How many %s ideals does Z_%d have? (enter a number)", kind, n),
+		Answer:      strconv.Itoa(len(primes)),
+		Explanation: fmt.Sprintf("The %s ideals of Z_%d correspond to the distinct prime divisors of %d, namely %s.", kind, n, n, strings.Join(factors, ", ")),
+		Facts:       map[string]string{"n": strconv.Itoa(n), "count": strconv.Itoa(len(primes)), "kind": kind},
+	}
+}
+
+func distinctPrimeFactors(n int) []int {
+	factors := make([]int, 0, 4)
+	for d := 2; d*d <= n; d++ {
+		if n%d == 0 {
+			factors = append(factors, d)
+			for n%d == 0 {
+				n /= d
+			}
+		}
+	}
+	if n > 1 {
+		factors = append(factors, n)
+	}
+	return factors
 }
 
 // ---------------------------------------------------------------------------
@@ -537,48 +493,81 @@ func (g *algebraicElementGen) Generate(ctx generator.GeneratorContext) generator
 type submoduleGen struct{}
 
 func (g *submoduleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
+	switch rand.Intn(4) {
+	case 0:
+		n := 2 + rand.Intn(29)
+		count := 0
+		for d := 1; d <= n; d++ {
+			if n%d == 0 {
+				count++
+			}
+		}
+		return generator.Problem{
+			Question:    fmt.Sprintf("How many submodules does the Z-module Z_%d have? (enter a number)", n),
+			Answer:      strconv.Itoa(count),
+			Explanation: fmt.Sprintf("Submodules of Z_%d correspond to divisors of %d, and %d has %d divisors.", n, n, n, count),
+			Facts:       map[string]string{"n": strconv.Itoa(n), "count": strconv.Itoa(count)},
+		}
+	case 1:
+		n := 6 + rand.Intn(19)
+		var divisors []int
+		for d := 1; d <= n; d++ {
+			if n%d == 0 {
+				divisors = append(divisors, d)
+			}
+		}
+		d := divisors[rand.Intn(len(divisors))]
+		size := n / d
+		return generator.Problem{
+			Question:    fmt.Sprintf("How many elements does the submodule generated by %d in Z_%d have? (enter a number)", d, n),
+			Answer:      strconv.Itoa(size),
+			Explanation: fmt.Sprintf("The submodule is the set of multiples of %d mod %d, which has %d elements.", d, n, size),
+			Facts:       map[string]string{"n": strconv.Itoa(n), "d": strconv.Itoa(d), "size": strconv.Itoa(size)},
+		}
+	case 2:
+		n := 6 + rand.Intn(19)
+		var divisors []int
+		for d := 1; d <= n; d++ {
+			if n%d == 0 {
+				divisors = append(divisors, d)
+			}
+		}
+		d := divisors[rand.Intn(len(divisors))]
+		return generator.Problem{
+			Question:    fmt.Sprintf("What is the order of the quotient Z_%d / <%d>? (enter a number)", n, d),
+			Answer:      strconv.Itoa(d),
+			Explanation: fmt.Sprintf("The subgroup <%d> has %d elements, so the quotient has %d / %d = %d elements.", d, n/d, n, n/d, d),
+			Facts:       map[string]string{"n": strconv.Itoa(n), "d": strconv.Itoa(d), "order": strconv.Itoa(d)},
+		}
+	default:
+		m := 2 + rand.Intn(2)
+		k := 1 + rand.Intn(m)
+		var vecs []string
+		for j := 0; j < k; j++ {
+			parts := make([]string, m)
+			for i := 0; i < m; i++ {
+				if i == j {
+					parts[i] = "1"
+				} else {
+					parts[i] = "0"
+				}
+			}
+			vecs = append(vecs, fmt.Sprintf("(%s)", strings.Join(parts, ", ")))
+		}
+		return generator.Problem{
+			Question:    fmt.Sprintf("What is the dimension of the subspace of R^%d spanned by %s? (enter a number)", m, joinWithAnd(vecs)),
+			Answer:      strconv.Itoa(k),
+			Explanation: fmt.Sprintf("The %d chosen standard basis vectors are linearly independent, so they span a subspace of dimension %d.", k, k),
+			Facts:       map[string]string{"m": strconv.Itoa(m), "dimension": strconv.Itoa(k)},
+		}
 	}
-	claims := []claim{
-		{
-			question:    "A subset N of an R-module M is a submodule exactly when...",
-			correct:     "N is closed under addition and under scalar multiplication and contains 0",
-			distractors: []string{"N is closed under addition only", "N is a subgroup of M under addition only", "N is closed under scalar multiplication only"},
-			reason:      "A submodule is an additive subgroup of M that is also closed under the action of R.",
-		},
-		{
-			question:    "Which is a submodule of the Z-module Z_6?",
-			correct:     "{0, 2, 4}",
-			distractors: []string{"{0, 1, 2}", "{2, 4, 5}", "{1, 3, 5}"},
-			reason:      "{0, 2, 4} is closed under addition mod 6 and under integer scaling; the others are not even subgroups.",
-		},
-		{
-			question:    "The quotient M/N of a module by a submodule N is...",
-			correct:     "a module over the same ring",
-			distractors: []string{"a ring", "a field", "a group but not a module"},
-			reason:      "Addition and scalar multiplication descend to the cosets of N, giving a module over the original ring.",
-		},
-		{
-			question:    "Which is a submodule of R^2 over R?",
-			correct:     "the x-axis {(x, 0)}",
-			distractors: []string{"the line {(x, 1)}", "the unit circle", "the set {(1, 2)}"},
-			reason:      "The x-axis contains 0 and is closed under vector addition and real scaling.",
-		},
-		{
-			question:    "If N is a submodule of M and the quotient map sends m to m + N, its kernel is...",
-			correct:     "the submodule N",
-			distractors: []string{"the zero submodule {0}", "the whole module M", "the quotient module M/N"},
-			reason:      "The coset m + N is the zero coset exactly when m lies in N, so the kernel is N.",
-		},
+}
+
+func joinWithAnd(parts []string) string {
+	if len(parts) == 1 {
+		return parts[0]
 	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return strings.Join(parts[:len(parts)-1], ", ") + " and " + parts[len(parts)-1]
 }
 
 // ---------------------------------------------------------------------------
@@ -588,46 +577,36 @@ func (g *submoduleGen) Generate(ctx generator.GeneratorContext) generator.Proble
 type moduleHomGen struct{}
 
 func (g *moduleHomGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
+	switch rand.Intn(3) {
+	case 0:
+		m := 2 + rand.Intn(11)
+		n := 2 + rand.Intn(11)
+		count := intGCD(m, n)
+		return generator.Problem{
+			Question:    fmt.Sprintf("How many Z-module homomorphisms are there from Z_%d to Z_%d? (enter a number)", m, n),
+			Answer:      strconv.Itoa(count),
+			Explanation: fmt.Sprintf("A homomorphism is fixed by the image a of 1, which must satisfy %d a = 0 in Z_%d; there are gcd(%d, %d) = %d such a.", m, n, m, n, count),
+			Facts:       map[string]string{"m": strconv.Itoa(m), "n": strconv.Itoa(n), "count": strconv.Itoa(count)},
+		}
+	case 1:
+		m := 1 + rand.Intn(5)
+		n := 1 + rand.Intn(5)
+		dim := m * n
+		return generator.Problem{
+			Question:    fmt.Sprintf("What is the dimension of Hom_R(R^%d, R^%d) as a vector space? (enter a number)", m, n),
+			Answer:      strconv.Itoa(dim),
+			Explanation: fmt.Sprintf("A linear map R^%d to R^%d is an %d by %d matrix, and the space of such matrices has dimension %d.", m, n, m, n, dim),
+			Facts:       map[string]string{"m": strconv.Itoa(m), "n": strconv.Itoa(n), "dim": strconv.Itoa(dim)},
+		}
+	default:
+		m := 2 + rand.Intn(9)
+		rank := rand.Intn(m + 1)
+		nullity := m - rank
+		return generator.Problem{
+			Question:    fmt.Sprintf("A linear map from R^%d to R^%d has rank %d. What is the dimension of its kernel? (enter a number)", m, m, rank),
+			Answer:      strconv.Itoa(nullity),
+			Explanation: fmt.Sprintf("By rank-nullity, dim kernel = %d - %d = %d.", m, rank, nullity),
+			Facts:       map[string]string{"m": strconv.Itoa(m), "rank": strconv.Itoa(rank), "nullity": strconv.Itoa(nullity)},
+		}
 	}
-	claims := []claim{
-		{
-			question:    "A map f: M -> N of R-modules is a module homomorphism exactly when...",
-			correct:     "f(x + y) = f(x) + f(y) and f(rx) = r f(x)",
-			distractors: []string{"f(x + y) = f(x) f(y)", "f(rx) = f(r) f(x)", "f(x + y) = f(x) + f(y) only"},
-			reason:      "A module map preserves addition and the ring action; the scalar r is not an argument of f.",
-		},
-		{
-			question:    "The kernel of a module homomorphism f: M -> N is...",
-			correct:     "a submodule of M",
-			distractors: []string{"a submodule of N", "an ideal of R", "a quotient module of N"},
-			reason:      "If f(x) = f(y) = 0 then f(x + y) = 0 and f(rx) = r f(x) = 0, so the kernel is a submodule of the domain.",
-		},
-		{
-			question:    "A module homomorphism is injective exactly when...",
-			correct:     "its kernel is {0}",
-			distractors: []string{"its image is {0}", "it is surjective", "its kernel is the whole module"},
-			reason:      "f(x) = f(y) exactly when f(x - y) = 0, so injectivity is equivalent to a trivial kernel.",
-		},
-		{
-			question:    "How many Z-module homomorphisms are there from Z_2 to Z_4? (enter a number)",
-			correct:     "2",
-			distractors: []string{"1", "4", "0"},
-			reason:      "A homomorphism is fixed by the image of 1, which must satisfy 2a = 0 in Z_4; a = 0 and a = 2 both work.",
-		},
-		{
-			question:    "The image of a module homomorphism f: M -> N is...",
-			correct:     "a submodule of N",
-			distractors: []string{"a submodule of M", "a quotient of N", "an ideal of R"},
-			reason:      "The image is closed under addition and scalar multiplication inside the codomain.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
 }

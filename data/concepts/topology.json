@@ -19,7 +19,7 @@
     "label": "Open and closed sets",
     "domain": "topology",
     "subdomain": "topology.basics",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.basics.metric"
     ],
@@ -33,7 +33,7 @@
     "label": "Continuity in topological spaces",
     "domain": "topology",
     "subdomain": "topology.basics",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.basics.open_closed",
       "calc.limit.continuity"
@@ -48,7 +48,7 @@
     "label": "Compact sets",
     "domain": "topology",
     "subdomain": "topology.compact",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.basics.open_closed",
       "topo.basics.continuous"
@@ -63,7 +63,7 @@
     "label": "Connected spaces",
     "domain": "topology",
     "subdomain": "topology.connected",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.basics.open_closed"
     ],
@@ -330,7 +330,7 @@
   },
   {
     "id": "topo.compactification.stone_cech",
-    "label": "Stone-\u010cech compactification",
+    "label": "Stone-Čech compactification",
     "domain": "topology",
     "subdomain": "topology.compact",
     "grading_type": "multiple_choice",

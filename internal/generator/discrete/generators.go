@@ -61,29 +61,22 @@ func (g *propositionsGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		{"1 + 1 = 3", "yes", "It is a declarative statement with a definite truth value (false)."},
 		{"This sentence is false.", "no", "It is a paradox, it cannot have a consistent truth value."},
 	}
-	// Production question: count propositions in a random triple, so the
-	// pool has typed numeric answers (0-3) alongside yes/no recognition.
-	if rand.Intn(2) == 0 {
-		idx := rand.Perm(len(table))[:3]
-		count := 0
-		parts := make([]string, 3)
-		for i, j := range idx {
-			if table[j].isProp == "yes" {
-				count++
-			}
-			parts[i] = fmt.Sprintf("(%s) '%s'", string(rune('a'+i)), table[j].statement)
+	// Production question: count propositions in a random sample of 3-5
+	// statements, so every draw has a typed numeric answer.
+	k := 3 + rand.Intn(3)
+	idx := rand.Perm(len(table))[:k]
+	count := 0
+	parts := make([]string, k)
+	for i, j := range idx {
+		if table[j].isProp == "yes" {
+			count++
 		}
-		return generator.Problem{
-			Question:    fmt.Sprintf("How many of these are propositions? %s (enter a number)", strings.Join(parts, " ")),
-			Answer:      fmt.Sprintf("%d", count),
-			Explanation: fmt.Sprintf("%d of the 3 statements are declarative with a definite truth value.", count),
-		}
+		parts[i] = fmt.Sprintf("(%s) '%s'", string(rune('a'+i)), table[j].statement)
 	}
-	e := table[rand.Intn(len(table))]
 	return generator.Problem{
-		Question:    fmt.Sprintf("Is '%s' a proposition? (yes/no)", e.statement),
-		Answer:      e.isProp,
-		Explanation: e.reason,
+		Question:    fmt.Sprintf("How many of these are propositions? %s (enter a number)", strings.Join(parts, " ")),
+		Answer:      fmt.Sprintf("%d", count),
+		Explanation: fmt.Sprintf("%d of the %d statements are declarative with a definite truth value.", count, k),
 	}
 }
 
@@ -92,50 +85,39 @@ func (g *propositionsGen) Generate(ctx generator.GeneratorContext) generator.Pro
 type connectivesGen struct{}
 
 func (g *connectivesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type assignment struct {
-		p, q  bool
-		label string
-	}
-	assignments := []assignment{
-		{true, true, "p=True, q=True"},
-		{true, false, "p=True, q=False"},
-		{false, true, "p=False, q=True"},
-		{false, false, "p=False, q=False"},
-	}
-	a := assignments[rand.Intn(len(assignments))]
-
 	type conn struct {
-		name string
+		expr string
 		fn   func(p, q bool) bool
 	}
 	conns := []conn{
-		{"AND", func(p, q bool) bool { return p && q }},
-		{"OR", func(p, q bool) bool { return p || q }},
-		{"NAND", func(p, q bool) bool { return !(p && q) }},
-		{"NOR", func(p, q bool) bool { return !(p || q) }},
-		{"XOR", func(p, q bool) bool { return p != q }},
+		{"p AND q", func(p, q bool) bool { return p && q }},
+		{"p OR q", func(p, q bool) bool { return p || q }},
+		{"p NAND q", func(p, q bool) bool { return !(p && q) }},
+		{"p NOR q", func(p, q bool) bool { return !(p || q) }},
+		{"p XOR q", func(p, q bool) bool { return p != q }},
+		{"NOT p", func(p, q bool) bool { return !p }},
+		{"p -> q", func(p, q bool) bool { return !p || q }},
+		{"p <-> q", func(p, q bool) bool { return p == q }},
+		{"NOT q", func(p, q bool) bool { return !q }},
+		{"p AND NOT q", func(p, q bool) bool { return p && !q }},
+		{"NOT p AND q", func(p, q bool) bool { return !p && q }},
+		{"NOT p OR q", func(p, q bool) bool { return !p || q }},
+		{"p OR NOT q", func(p, q bool) bool { return p || !q }},
+		{"p XNOR q", func(p, q bool) bool { return p == q }},
 	}
 	c := conns[rand.Intn(len(conns))]
-	result := c.fn(a.p, a.q)
-
-	// Also sometimes ask about NOT
-	if rand.Intn(3) == 0 {
-		val := rand.Intn(2) == 0
-		label := "p=True"
-		if !val {
-			label = "p=False"
-		}
-		return generator.Problem{
-			Question:    fmt.Sprintf("Given %s, what is NOT p? (true/false)", label),
-			Answer:      boolStr(!val),
-			Explanation: fmt.Sprintf("NOT %s = %s", boolStr(val), boolStr(!val)),
+	count := 0
+	for p := 0; p < 2; p++ {
+		for q := 0; q < 2; q++ {
+			if c.fn(p == 1, q == 1) {
+				count++
+			}
 		}
 	}
-
 	return generator.Problem{
-		Question:    fmt.Sprintf("Given %s, what is p %s q? (true/false)", a.label, c.name),
-		Answer:      boolStr(result),
-		Explanation: fmt.Sprintf("p=%s, q=%s => p %s q = %s", boolStr(a.p), boolStr(a.q), c.name, boolStr(result)),
+		Question:    fmt.Sprintf("Of the four assignments of p and q, for how many is %s true? (enter a number)", c.expr),
+		Answer:      strconv.Itoa(count),
+		Explanation: fmt.Sprintf("Exactly %d of the four assignments make %s true.", count, c.expr),
 	}
 }
 
@@ -168,40 +150,46 @@ func (g *truthTablesGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		vars = 2
 	}
 
-	if rand.Intn(2) == 0 {
-		rows := 1 << vars
+	rows := 1 << vars
+	trueRows := 0
+	for mask := 0; mask < rows; mask++ {
+		p := mask&1 != 0
+		q := mask&2 != 0
+		var v bool
+		switch e.name {
+		case "p AND q":
+			v = p && q
+		case "p OR q":
+			v = p || q
+		case "NOT p":
+			v = !p
+		case "p XOR q":
+			v = p != q
+		}
+		if v {
+			trueRows++
+		}
+	}
+	switch rand.Intn(3) {
+	case 0:
 		return generator.Problem{
-			Question:    fmt.Sprintf("How many rows are in a truth table for \\(%s\\)?", e.description),
+			Question:    fmt.Sprintf("How many rows are in a truth table for %s?", e.description),
 			Answer:      fmt.Sprintf("%d", rows),
 			Explanation: fmt.Sprintf("With %d variable(s), there are 2^%d = %d rows.", vars, vars, rows),
 		}
-	}
-
-	if vars == 1 {
-		val := rand.Intn(2) == 0
-		result := !val
+	case 1:
 		return generator.Problem{
-			Question:    fmt.Sprintf("Given p=%s, what is NOT p? (true/false)", boolStr(val)),
-			Answer:      boolStr(result),
-			Explanation: fmt.Sprintf("NOT %s = %s", boolStr(val), boolStr(result)),
+			Question:    fmt.Sprintf("How many of the %d rows in the truth table for %s are true?", rows, e.description),
+			Answer:      fmt.Sprintf("%d", trueRows),
+			Explanation: fmt.Sprintf("%s is true in %d of the %d rows.", e.description, trueRows, rows),
 		}
-	}
-
-	p := rand.Intn(2) == 0
-	q := rand.Intn(2) == 0
-	var result bool
-	switch e.name {
-	case "p AND q":
-		result = p && q
-	case "p OR q":
-		result = p || q
-	case "p XOR q":
-		result = p != q
-	}
-	return generator.Problem{
-		Question:    fmt.Sprintf("Given p=%s, q=%s, what is %s? (true/false)", boolStr(p), boolStr(q), e.description),
-		Answer:      boolStr(result),
-		Explanation: fmt.Sprintf("p=%s, q=%s => %s = %s", boolStr(p), boolStr(q), e.description, boolStr(result)),
+	default:
+		falseRows := rows - trueRows
+		return generator.Problem{
+			Question:    fmt.Sprintf("How many of the %d rows in the truth table for %s are false?", rows, e.description),
+			Answer:      fmt.Sprintf("%d", falseRows),
+			Explanation: fmt.Sprintf("%s is false in %d of the %d rows.", e.description, falseRows, rows),
+		}
 	}
 }
 
@@ -221,120 +209,27 @@ func (g *quantifiersGen) Generate(ctx generator.GeneratorContext) generator.Prob
 	setStr := formatSet(s)
 
 	type qEntry struct {
-		cond     func(x int) bool
-		condDesc string
-		isForAll bool
-		expected string
-		reason   string
+		cond func(x int) bool
+		desc string
 	}
-
 	entries := []qEntry{
-		{func(x int) bool { return x > 0 }, "> 0", true, "true", "All elements are > 0."},
-		{func(x int) bool { return x > 0 }, "> 0", false, "true", "At least one element is > 0."},
-		{func(x int) bool { return x > 5 }, "> 5", true, "false", "Not all elements are > 5."},
-		{func(x int) bool { return x > 5 }, "> 5", false, "",
-			""},
-		{func(x int) bool { return x < 10 }, "< 10", true, "",
-			""},
-		{func(x int) bool { return x == 0 }, "= 0", false, "",
-			""},
-		{func(x int) bool { return x%2 == 0 }, "is even", true, "",
-			""},
-		{func(x int) bool { return x%2 == 0 }, "is even", false, "",
-			""},
+		{func(x int) bool { return x > 0 }, "> 0"},
+		{func(x int) bool { return x > 5 }, "> 5"},
+		{func(x int) bool { return x < 10 }, "< 10"},
+		{func(x int) bool { return x == 0 }, "= 0"},
+		{func(x int) bool { return x%2 == 0 }, "is even"},
 	}
-
-	// Compute correct answers for entries with empty expected/reason
-	for i, e := range entries {
-		switch {
-		case e.condDesc == "> 5" && !e.isForAll:
-			allFalse := true
-			for _, v := range s {
-				if e.cond(v) {
-					allFalse = false
-					break
-				}
-			}
-			if allFalse {
-				entries[i].expected = "false"
-				entries[i].reason = "No element is > 5."
-			} else {
-				entries[i].expected = "true"
-				entries[i].reason = "At least one element is > 5."
-			}
-		case e.condDesc == "< 10" && e.isForAll:
-			allOk := true
-			for _, v := range s {
-				if !e.cond(v) {
-					allOk = false
-					break
-				}
-			}
-			if allOk {
-				entries[i].expected = "true"
-				entries[i].reason = "All elements are < 10."
-			} else {
-				entries[i].expected = "false"
-				entries[i].reason = "Not all elements are < 10."
-			}
-		case e.condDesc == "= 0" && !e.isForAll:
-			hasZero := false
-			for _, v := range s {
-				if e.cond(v) {
-					hasZero = true
-					break
-				}
-			}
-			if hasZero {
-				entries[i].expected = "true"
-				entries[i].reason = "0 is in the set."
-			} else {
-				entries[i].expected = "false"
-				entries[i].reason = "No element equals 0."
-			}
-		case e.condDesc == "is even" && e.isForAll:
-			allEven := true
-			for _, v := range s {
-				if !e.cond(v) {
-					allEven = false
-					break
-				}
-			}
-			if allEven {
-				entries[i].expected = "true"
-				entries[i].reason = "All elements are even."
-			} else {
-				entries[i].expected = "false"
-				entries[i].reason = "Not all elements are even."
-			}
-		case e.condDesc == "is even" && !e.isForAll:
-			hasEven := false
-			for _, v := range s {
-				if e.cond(v) {
-					hasEven = true
-					break
-				}
-			}
-			if hasEven {
-				entries[i].expected = "true"
-				entries[i].reason = "At least one element is even."
-			} else {
-				entries[i].expected = "false"
-				entries[i].reason = "No element is even."
-			}
+	e := entries[rand.Intn(len(entries))]
+	count := 0
+	for _, v := range s {
+		if e.cond(v) {
+			count++
 		}
 	}
-
-	e := entries[rand.Intn(len(entries))]
-	quant := "\\forall"
-	if !e.isForAll {
-		quant = "\\exists"
-	}
-
 	return generator.Problem{
-		Question:    fmt.Sprintf("Is \\(%s x \\in %s: x %s\\) true? (true/false)", quant, setStr, e.condDesc),
-		Answer:      e.expected,
-		Explanation: fmt.Sprintf("%sx ∈ %s: x %s is %s because %s", quant, setStr, e.condDesc, e.expected, e.reason),
+		Question:    fmt.Sprintf("How many elements of %s satisfy x %s? (enter a number)", setStr, e.desc),
+		Answer:      strconv.Itoa(count),
+		Explanation: fmt.Sprintf("Counting the elements of %s with x %s gives %d.", setStr, e.desc, count),
 	}
 }
 
@@ -877,24 +772,18 @@ func (g *graphPathsGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		}
 		pathStr = strings.Join(rev, "-")
 	}
-	switch rand.Intn(4) {
+	compSize := 0
+	for i := 0; i < n; i++ {
+		if comp[i] == comp[0] {
+			compSize++
+		}
+	}
+	switch rand.Intn(3) {
 	case 0:
-		ans := "no"
-		exp := fmt.Sprintf("There is no path from %s to %s (different components).", src, dst)
-		if dist[n-1] != -1 {
-			ans = "yes"
-			exp = fmt.Sprintf("There is a path: %s.", pathStr)
-		}
-		return generator.Problem{
-			Question:    fmt.Sprintf("In the graph with edges %s, is there a path from %s to %s? (yes/no)", graphStr, src, dst),
-			Answer:      ans,
-			Explanation: exp,
-		}
-	case 1:
 		if dist[n-1] == -1 {
 			return generator.Problem{
-				Question:    fmt.Sprintf("In the graph with edges %s, what is the length of the shortest path from %s to %s? (if none, write 'none')", graphStr, src, dst),
-				Answer:      "none",
+				Question:    fmt.Sprintf("In the graph with edges %s, what is the length of the shortest path from %s to %s? (enter -1 if there is no path)", graphStr, src, dst),
+				Answer:      "-1",
 				Explanation: fmt.Sprintf("There is no path from %s to %s (the graph is disconnected).", src, dst),
 			}
 		}
@@ -903,19 +792,7 @@ func (g *graphPathsGen) Generate(ctx generator.GeneratorContext) generator.Probl
 			Answer:      fmt.Sprintf("%d", dist[n-1]),
 			Explanation: fmt.Sprintf("The shortest path is %s (%d edges).", pathStr, dist[n-1]),
 		}
-	case 2:
-		ans := "no"
-		exp := fmt.Sprintf("The graph splits into %d components, so it is disconnected.", ncomp)
-		if ncomp == 1 {
-			ans = "yes"
-			exp = "Every vertex can be reached from every other, so the graph is connected."
-		}
-		return generator.Problem{
-			Question:    fmt.Sprintf("Is the graph with edges %s connected? (yes/no)", graphStr),
-			Answer:      ans,
-			Explanation: exp,
-		}
-	default:
+	case 1:
 		var parts []string
 		for c := 1; c <= ncomp; c++ {
 			var vs []string
@@ -930,6 +807,12 @@ func (g *graphPathsGen) Generate(ctx generator.GeneratorContext) generator.Probl
 			Question:    fmt.Sprintf("How many connected components does the graph with edges %s have? (enter a number)", graphStr),
 			Answer:      fmt.Sprintf("%d", ncomp),
 			Explanation: fmt.Sprintf("The components are %s, so there are %d.", strings.Join(parts, " and "), ncomp),
+		}
+	default:
+		return generator.Problem{
+			Question:    fmt.Sprintf("In the graph with edges %s, how many vertices are in the connected component that contains %s?", graphStr, src),
+			Answer:      fmt.Sprintf("%d", compSize),
+			Explanation: fmt.Sprintf("The component containing %s has %d vertices.", src, compSize),
 		}
 	}
 }

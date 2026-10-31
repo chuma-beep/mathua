@@ -466,7 +466,7 @@
     "label": "Center of a group",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.groups",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "abstract.group.def",
       "abstract.group.subgroup"
@@ -527,7 +527,7 @@
     "label": "Composition series",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.groups",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "abstract.group.simple",
       "abstract.group.quotient_group"
@@ -542,7 +542,7 @@
     "label": "Zero divisors and cancellation",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.rings",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "abstract.rings.def"
     ],
@@ -556,7 +556,7 @@
     "label": "Integral domains",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.rings",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "abstract.rings.def",
       "abstract.rings.zero_divisor"
@@ -571,7 +571,7 @@
     "label": "Prime and maximal ideals",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.rings",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "abstract.rings.ideal",
       "abstract.rings.quotient",
@@ -633,7 +633,7 @@
     "label": "Submodules and quotient modules",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.structures",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "abstract.structures.module",
       "abstract.group.subgroup"
@@ -648,7 +648,7 @@
     "label": "Module homomorphisms",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.structures",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "abstract.structures.module",
       "abstract.group.homomorphism"
