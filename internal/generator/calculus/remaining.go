@@ -87,13 +87,36 @@ type changeOrderGen struct{}
 
 func (g *changeOrderGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	n := 2 * (1 + rand.Intn(3+int(ctx.Difficulty*4)))
-	v := n * n * n / 2
-	return generator.Problem{
-		Question: fmt.Sprintf("Evaluate \\(\\iint_R (x + y)\\,dA\\) where \\(R\\) is the triangle \\(0 \\le y \\le x \\le %d\\).", n),
-		Answer:   fmt.Sprintf("%d", v),
-		Explanation: fmt.Sprintf("Integrating in y first runs from 0 to x, giving %dx^2/2; integrating that in x from 0 to %d gives %d^3/2 = %d. The other order gives the same value, which is Fubini's theorem, but needs the region written as type II limits.",
-			n, n, n, v),
-		Facts: map[string]string{"value": fmt.Sprintf("%d", v)},
+	switch rand.Intn(3) {
+	case 0:
+		v := n * n * n / 2
+		return generator.Problem{
+			Question: fmt.Sprintf("Evaluate \\(\\iint_R (x + y)\\,dA\\) where \\(R\\) is the triangle \\(0 \\le y \\le x \\le %d\\).", n),
+			Answer:   fmt.Sprintf("%d", v),
+			Explanation: fmt.Sprintf("Integrating in y first runs from 0 to x, giving %dx^2/2; integrating that in x from 0 to %d gives %d^3/2 = %d. The other order gives the same value, which is Fubini's theorem, but needs the region written as type II limits.",
+				n, n, n, v),
+			Facts: map[string]string{"value": fmt.Sprintf("%d", v)},
+		}
+	case 1:
+		v := n * n * n
+		return generator.Problem{
+			Question: fmt.Sprintf("Evaluate \\(\\iint_R (x + y)\\,dA\\) where \\(R\\) is the square \\(0 \\le x \\le %d\\), \\(0 \\le y \\le %d\\).", n, n),
+			Answer:   fmt.Sprintf("%d", v),
+			Explanation: fmt.Sprintf("The square separates into %d times the integral of x plus %d times the integral of y, and each is %d^2/2, so the total is %d^3 = %d.",
+				n, n, n, n, v),
+			Facts: map[string]string{"value": fmt.Sprintf("%d", v)},
+		}
+	default:
+		a := 1 + rand.Intn(3+int(ctx.Difficulty*3))
+		b := 1 + rand.Intn(3+int(ctx.Difficulty*3))
+		v := a * b * (a + b) / 2
+		return generator.Problem{
+			Question: fmt.Sprintf("Evaluate \\(\\iint_R (x + y)\\,dA\\) where \\(R\\) is the rectangle \\(0 \\le x \\le %d\\), \\(0 \\le y \\le %d\\).", a, b),
+			Answer:   fmt.Sprintf("%d", v),
+			Explanation: fmt.Sprintf("Separating the integrand gives b times the integral of x from 0 to %d, which is %d, plus a times the integral of y from 0 to %d, which is %d; the total is %d.",
+				a, b*a*a/2, b, a*b*b/2, v),
+			Facts: map[string]string{"value": fmt.Sprintf("%d", v)},
+		}
 	}
 }
 

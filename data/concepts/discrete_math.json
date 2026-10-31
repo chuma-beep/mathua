@@ -4,7 +4,7 @@
     "label": "Propositional logic: statements and truth values",
     "domain": "discrete_math",
     "subdomain": "discrete_math.logic",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "prealg.var.concept"
     ],
@@ -18,7 +18,7 @@
     "label": "Logical connectives: AND, OR, NOT, IMPLIES",
     "domain": "discrete_math",
     "subdomain": "discrete_math.logic",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.logic.propositions"
     ],
@@ -32,7 +32,7 @@
     "label": "Truth tables",
     "domain": "discrete_math",
     "subdomain": "discrete_math.logic",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.logic.connectives"
     ],
@@ -46,7 +46,7 @@
     "label": "Quantifiers: universal and existential",
     "domain": "discrete_math",
     "subdomain": "discrete_math.logic",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.logic.truth_tables"
     ],
@@ -74,7 +74,7 @@
     "label": "Venn diagrams",
     "domain": "discrete_math",
     "subdomain": "discrete_math.sets",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.sets.operations"
     ],
@@ -146,7 +146,7 @@
     "label": "Paths, cycles, and connectivity",
     "domain": "discrete_math",
     "subdomain": "discrete_math.graph_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.graphs.basics"
     ],

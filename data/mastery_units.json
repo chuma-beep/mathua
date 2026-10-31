@@ -6,7 +6,7 @@
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
   "concept_count": 1250,
-  "unit_count": 132,
+  "unit_count": 131,
   "units": [
     {
       "id": "abstract_algebra.b6",
@@ -2240,8 +2240,7 @@
       "depth_min": 0,
       "depth_max": 2,
       "subdomains": [
-        "numerical_analysis.errors",
-        "numerical_analysis.interp"
+        "numerical_analysis.errors"
       ],
       "concept_ids": [
         "numa.errors.absolute",
@@ -2249,45 +2248,22 @@
         "numa.errors.conditioning",
         "numa.errors.roundoff",
         "numa.errors.stability",
-        "numa.errors.taylor",
-        "numa.interp.divided_differences",
-        "numa.interp.error",
-        "numa.interp.lagrange",
-        "numa.interp.least_squares"
+        "numa.errors.taylor"
       ],
-      "concept_count": 10
+      "concept_count": 6
     },
     {
-      "id": "numerical_analysis.b1",
-      "title": "Numerical Analysis · Stage 2",
+      "id": "numerical_analysis.b6",
+      "title": "Numerical Analysis · Stage 7",
       "domain": "numerical_analysis",
-      "band": 1,
-      "depth_min": 3,
-      "depth_max": 3,
+      "band": 6,
+      "depth_min": 20,
+      "depth_max": 20,
       "subdomains": [
         "numerical_analysis.interp"
       ],
       "concept_ids": [
-        "numa.interp.chebyshev",
-        "numa.interp.extrapolation",
-        "numa.interp.normal_equations",
-        "numa.interp.orthogonal",
-        "numa.interp.splines"
-      ],
-      "concept_count": 5
-    },
-    {
-      "id": "numerical_analysis.b4",
-      "title": "Numerical Analysis · Stage 5",
-      "domain": "numerical_analysis",
-      "band": 4,
-      "depth_min": 14,
-      "depth_max": 14,
-      "subdomains": [
-        "numerical_analysis.linear"
-      ],
-      "concept_ids": [
-        "numa.linear.least_squares_qr"
+        "numa.interp.lagrange"
       ],
       "concept_count": 1
     },
@@ -2296,15 +2272,24 @@
       "title": "Numerical Analysis · Stage 8",
       "domain": "numerical_analysis",
       "band": 7,
-      "depth_min": 23,
+      "depth_min": 21,
       "depth_max": 23,
       "subdomains": [
+        "numerical_analysis.interp",
         "numerical_analysis.linear"
       ],
       "concept_ids": [
-        "numa.linear.elimination"
+        "numa.interp.chebyshev",
+        "numa.interp.divided_differences",
+        "numa.interp.error",
+        "numa.interp.extrapolation",
+        "numa.interp.least_squares",
+        "numa.interp.normal_equations",
+        "numa.interp.orthogonal",
+        "numa.interp.splines",
+        "numa.linear.least_squares_qr"
       ],
-      "concept_count": 1
+      "concept_count": 9
     },
     {
       "id": "numerical_analysis.b8",
@@ -2317,13 +2302,14 @@
         "numerical_analysis.linear"
       ],
       "concept_ids": [
+        "numa.linear.elimination",
         "numa.linear.gauss_seidel",
         "numa.linear.jacobi",
         "numa.linear.lu",
         "numa.linear.pivoting",
         "numa.linear.power"
       ],
-      "concept_count": 5
+      "concept_count": 6
     },
     {
       "id": "numerical_analysis.b10",

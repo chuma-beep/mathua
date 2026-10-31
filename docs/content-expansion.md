@@ -123,18 +123,18 @@ largest first:
 
 | Domain | Concepts | `multiple_choice` |
 |---|---|---|
-| topology | 42 | 35 |
+| topology | 42 | 30 |
 | real_analysis | 55 | 33 |
-| abstract_algebra | 45 | 33 |
-| differential_equations | 42 | 28 |
-| discrete_math | 55 | 26 |
+| abstract_algebra | 45 | 19 |
+| trigonometry | 68 | 22 |
 | probability_theory | 50 | 21 |
-| complex_numbers | 42 | 20 |
-| number_theory | 42 | 19 |
+| discrete_math | 55 | 16 |
 | machine_learning | 45 | 19 |
+| complex_numbers | 42 | 19 |
 | numerical_analysis | 40 | 18 |
+| number_theory | 42 | 16 |
 
-Against that, the three calculus domains carry 82 `symbolic` concepts and `algebra` carries 36. The pool
+Against that, the three calculus domains carry 72 `symbolic` and 15 `expression` concepts, and `algebra` carries 29 `symbolic` and 13 `expression`. The pool
 ratchet in `internal/generator/pools_test.go` exists for exactly this surface, and it runs at two
 depths. An easy pool that yields a single distinct answer, or that is yes/no only, is a
 violation, and that check is baseline-backed: `scripts/audit_baseline.json` is empty on both keys

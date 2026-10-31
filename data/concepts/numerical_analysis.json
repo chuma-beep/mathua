@@ -216,6 +216,9 @@
     "subdomain": "numerical_analysis.interp",
     "grading_type": "numeric",
     "prerequisites": [
+      "alg.poly.concept",
+      "alg.poly.foil",
+      "geo.coord.plot",
       "numa.errors.absolute"
     ],
     "mastery_threshold": {

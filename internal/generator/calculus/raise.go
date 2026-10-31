@@ -429,14 +429,38 @@ type cauchyProductGen struct{}
 
 func (g *cauchyProductGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	n := 2 + rand.Intn(7) // 2..8
-	coeff := n + 1
-	answer := strconv.Itoa(coeff)
-	return generator.Problem{
-		Question: fmt.Sprintf("Multiply the two geometric series \\(1+x+x^{2}+\\cdots\\) and \\(1+x+x^{2}+\\cdots\\) as a Cauchy product. What is the coefficient of \\(x^{%d}\\) in the product? (enter a number)", n),
-		Answer:   answer,
-		Explanation: fmt.Sprintf("The coefficient of \\(x^{%d}\\) is the number of pairs of indices adding to it, 0+%d through %d+0, which is %d.",
-			n, n, n, coeff),
-		Facts: map[string]string{"n": strconv.Itoa(n), "coeff": answer},
+	switch rand.Intn(3) {
+	case 0:
+		coeff := n + 1
+		return generator.Problem{
+			Question: fmt.Sprintf("Multiply the two geometric series \\(1+x+x^{2}+\\cdots\\) and \\(1+x+x^{2}+\\cdots\\) as a Cauchy product. What is the coefficient of \\(x^{%d}\\) in the product? (enter a number)", n),
+			Answer:   strconv.Itoa(coeff),
+			Explanation: fmt.Sprintf("The coefficient of \\(x^{%d}\\) is the number of pairs of indices adding to it, 0+%d through %d+0, which is %d.",
+				n, n, n, coeff),
+			Facts: map[string]string{"n": strconv.Itoa(n), "shape": "unit", "coeff": strconv.Itoa(coeff)},
+		}
+	case 1:
+		a := 2 + rand.Intn(3) // 2..4
+		coeff := 0
+		for k := 0; k <= n; k++ {
+			coeff = coeff*a + 1
+		}
+		return generator.Problem{
+			Question: fmt.Sprintf("Multiply \\(1+x+x^{2}+\\cdots\\) and \\(1+%dx+%d^{2}x^{2}+\\cdots\\) as a Cauchy product. What is the coefficient of \\(x^{%d}\\)? (enter a number)", a, a, n),
+			Answer:   strconv.Itoa(coeff),
+			Explanation: fmt.Sprintf("The coefficient is \\(1+%d+%d^{2}+\\cdots+%d^{%d} = %d\\).",
+				a, a, a, n, coeff),
+			Facts: map[string]string{"n": strconv.Itoa(n), "shape": "geometric", "a": strconv.Itoa(a), "coeff": strconv.Itoa(coeff)},
+		}
+	default:
+		coeff := n/2 + 1
+		return generator.Problem{
+			Question: fmt.Sprintf("Multiply \\(1+x+x^{2}+\\cdots\\) and \\(1+x^{2}+x^{4}+\\cdots\\) as a Cauchy product. What is the coefficient of \\(x^{%d}\\)? (enter a number)", n),
+			Answer:   strconv.Itoa(coeff),
+			Explanation: fmt.Sprintf("Only the even powers of the second series contribute, so the coefficient is the number of even integers from 0 to %d, which is %d.",
+				n, coeff),
+			Facts: map[string]string{"n": strconv.Itoa(n), "shape": "even", "coeff": strconv.Itoa(coeff)},
+		}
 	}
 }
 
@@ -734,8 +758,8 @@ func (g *surfaceScalarGen) Generate(ctx generator.GeneratorContext) generator.Pr
 type betaFunctionGen struct{}
 
 func (g *betaFunctionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	m := 2 + rand.Intn(3) // 2..4
-	n := 2 + rand.Intn(3) // 2..4
+	m := 2 + rand.Intn(4) // 2..5
+	n := 2 + rand.Intn(4) // 2..5
 	num := calcFact(m-1) * calcFact(n-1)
 	den := calcFact(m + n - 1)
 	answer := calcFraction(num, den)
@@ -776,7 +800,7 @@ func (g *consumerSurplusGen) Generate(ctx generator.GeneratorContext) generator.
 type fourierCoefficientsGen struct{}
 
 func (g *fourierCoefficientsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	n := randRange(ctx.Difficulty, 1, 2+int(ctx.Difficulty*8)) // 1..10 at full difficulty
+	n := randRange(ctx.Difficulty, 1, 2+int(ctx.Difficulty*18)) // 1..20 at full difficulty
 	sign := 1.0
 	if n%2 == 0 {
 		sign = -1.0
@@ -859,8 +883,8 @@ func (g *implicitFunctionGen) Generate(ctx generator.GeneratorContext) generator
 type inverseFunctionGen struct{}
 
 func (g *inverseFunctionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	x := 1 + rand.Intn(3)
-	y := 1 + rand.Intn(3)
+	x := 1 + rand.Intn(5)
+	y := 1 + rand.Intn(5)
 	det := 4 * (x*x + y*y)
 	answer := strconv.Itoa(det)
 	return generator.Problem{
@@ -908,8 +932,8 @@ func (g *iteratedLimitsGen) Generate(ctx generator.GeneratorContext) generator.P
 type eulerHomogeneousGen struct{}
 
 func (g *eulerHomogeneousGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	x := 1 + rand.Intn(3)
-	y := 1 + rand.Intn(3)
+	x := 1 + rand.Intn(6)
+	y := 1 + rand.Intn(6)
 	f := x*x*x + 3*x*y*y
 	value := 3 * f
 	answer := strconv.Itoa(value)

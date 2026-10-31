@@ -195,66 +195,63 @@ func (g *parametricSecondGen) Generate(ctx generator.GeneratorContext) generator
 
 type finiteDifferenceGen struct{}
 
+// formatBatchValue keeps computed answers readable: floating point arithmetic
+// can leave 6.100000000000001 where the learner should see 6.1.
+func formatBatchValue(v float64) string {
+	return strconv.FormatFloat(math.Round(v*1e9)/1e9, 'g', -1, 64)
+}
+
 func (g *finiteDifferenceGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question string
-		answer   string
-		method   string
-		function string
-		x, h     float64
-		reason   string
+	methods := []string{"forward", "backward", "central"}
+	method := methods[rand.Intn(len(methods))]
+	function := "square"
+	functionLabel := "x^2"
+	if rand.Intn(2) == 1 {
+		function = "cube"
+		functionLabel = "x^3"
 	}
-	claims := []claim{
-		{
-			question: "Use the forward difference (f(x+h) - f(x))/h for f(x) = x^2 at x = 3 with h = 0.1. What is the estimate? (enter a decimal)",
-			answer:   "6.1", method: "forward", function: "square", x: 3, h: 0.1,
-			reason: "f(3.1) = 9.61 and f(3) = 9, so (9.61 - 9)/0.1 = 6.1.",
-		},
-		{
-			question: "Use the backward difference (f(x) - f(x-h))/h for f(x) = x^2 at x = 3 with h = 0.1. What is the estimate? (enter a decimal)",
-			answer:   "5.9", method: "backward", function: "square", x: 3, h: 0.1,
-			reason: "f(3) = 9 and f(2.9) = 8.41, so (9 - 8.41)/0.1 = 5.9.",
-		},
-		{
-			question: "Use the central difference (f(x+h) - f(x-h))/(2h) for f(x) = x^2 at x = 3 with h = 0.1. What is the estimate? (enter a number)",
-			answer:   "6", method: "central", function: "square", x: 3, h: 0.1,
-			reason: "The central difference averages the two one-sided estimates, (9.61 - 8.41)/0.2 = 6.",
-		},
-		{
-			question: "Use the forward difference (f(x+h) - f(x))/h for f(x) = x^3 at x = 2 with h = 0.1. What is the estimate? (enter a decimal)",
-			answer:   "12.61", method: "forward", function: "cube", x: 2, h: 0.1,
-			reason: "f(2.1) = 9.261 and f(2) = 8, so (9.261 - 8)/0.1 = 12.61.",
-		},
-		{
-			question: "Use the central difference (f(x+h) - f(x-h))/(2h) for f(x) = x^3 at x = 2 with h = 0.1. What is the estimate? (enter a decimal)",
-			answer:   "12.01", method: "central", function: "cube", x: 2, h: 0.1,
-			reason: "f(2.1) = 9.261 and f(1.9) = 6.859, so (9.261 - 6.859)/0.2 = 12.01.",
-		},
-		{
-			question: "Use the forward difference (f(x+h) - f(x))/h for f(x) = x^2 at x = 4 with h = 0.5. What is the estimate? (enter a decimal)",
-			answer:   "8.5", method: "forward", function: "square", x: 4, h: 0.5,
-			reason: "f(4.5) = 20.25 and f(4) = 16, so (20.25 - 16)/0.5 = 8.5.",
-		},
-		{
-			question: "Use the backward difference (f(x) - f(x-h))/h for f(x) = x^2 at x = 4 with h = 0.5. What is the estimate? (enter a decimal)",
-			answer:   "7.5", method: "backward", function: "square", x: 4, h: 0.5,
-			reason: "f(4) = 16 and f(3.5) = 12.25, so (16 - 12.25)/0.5 = 7.5.",
-		},
-		{
-			question: "Use the central difference (f(x+h) - f(x-h))/(2h) for f(x) = x^2 at x = 1 with h = 0.25. What is the estimate? (enter a number)",
-			answer:   "2", method: "central", function: "square", x: 1, h: 0.25,
-			reason: "f(1.25) = 1.5625 and f(0.75) = 0.5625, so (1.5625 - 0.5625)/0.5 = 2.",
-		},
+	x := float64(1 + rand.Intn(5))
+	steps := []float64{0.1, 0.2, 0.25, 0.5}
+	h := steps[rand.Intn(len(steps))]
+	f := func(v float64) float64 {
+		if function == "cube" {
+			return v * v * v
+		}
+		return v * v
 	}
-	c := claims[rand.Intn(len(claims))]
+	var value float64
+	var formula string
+	var reason string
+	switch method {
+	case "forward":
+		formula = "(f(x+h) - f(x))/h"
+		value = (f(x+h) - f(x)) / h
+		reason = fmt.Sprintf("f(%s) = %s and f(%s) = %s, so (%s - %s)/%s = %s.",
+			formatBatchValue(x+h), formatBatchValue(f(x+h)), formatBatchValue(x), formatBatchValue(f(x)),
+			formatBatchValue(f(x+h)), formatBatchValue(f(x)), formatBatchValue(h), formatBatchValue(value))
+	case "backward":
+		formula = "(f(x) - f(x-h))/h"
+		value = (f(x) - f(x-h)) / h
+		reason = fmt.Sprintf("f(%s) = %s and f(%s) = %s, so (%s - %s)/%s = %s.",
+			formatBatchValue(x), formatBatchValue(f(x)), formatBatchValue(x-h), formatBatchValue(f(x-h)),
+			formatBatchValue(f(x)), formatBatchValue(f(x-h)), formatBatchValue(h), formatBatchValue(value))
+	default:
+		method = "central"
+		formula = "(f(x+h) - f(x-h))/(2h)"
+		value = (f(x+h) - f(x-h)) / (2 * h)
+		reason = fmt.Sprintf("f(%s) = %s and f(%s) = %s, so (%s - %s)/%s = %s.",
+			formatBatchValue(x+h), formatBatchValue(f(x+h)), formatBatchValue(x-h), formatBatchValue(f(x-h)),
+			formatBatchValue(f(x+h)), formatBatchValue(f(x-h)), formatBatchValue(2*h), formatBatchValue(value))
+	}
+	answer := formatBatchValue(value)
 	return generator.Problem{
-		Question:    c.question,
-		Answer:      c.answer,
-		Explanation: c.reason,
+		Question: fmt.Sprintf("Use the %s difference %s for f(x) = %s at x = %s with h = %s. What is the estimate? (enter a decimal)",
+			method, formula, functionLabel, formatBatchValue(x), formatBatchValue(h)),
+		Answer:      answer,
+		Explanation: reason,
 		Facts: map[string]string{
-			"method": c.method, "function": c.function,
-			"x": strconv.FormatFloat(c.x, 'g', -1, 64),
-			"h": strconv.FormatFloat(c.h, 'g', -1, 64), "answer": c.answer,
+			"method": method, "function": function,
+			"x": formatBatchValue(x), "h": formatBatchValue(h), "answer": answer,
 		},
 	}
 }
@@ -266,73 +263,35 @@ func (g *finiteDifferenceGen) Generate(ctx generator.GeneratorContext) generator
 type polarArcLengthGen struct{}
 
 func (g *polarArcLengthGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question string
-		answer   string
-		kind     string
-		a        int
-		bLabel   string
-		reason   string
+	// One draw in four is a cardioid, whose length does not depend on its size
+	// once the curve is written r = 1 + cos(theta). The rest vary the radius of
+	// the secant spiral, which keeps the length equal to its coefficient.
+	if rand.Intn(4) == 0 {
+		b0 := "pi"
+		answer := "4"
+		reason := "The integrand simplifies to 2*cos(theta/2), whose integral from 0 to pi is 4."
+		if rand.Intn(2) == 1 {
+			b0 = "2*pi"
+			answer = "8"
+			reason = "The full cardioid has arc length 8: twice the half-cardioid length 4."
+		}
+		return generator.Problem{
+			Question:    fmt.Sprintf("The cardioid r = 1 + cos(theta) is traced from theta = 0 to theta = %s. What is its arc length L = integral of sqrt(r^2 + (dr/dtheta)^2) dtheta? (enter a number)", b0),
+			Answer:      answer,
+			Explanation: reason,
+			Facts: map[string]string{
+				"kind": "cardioid", "a": "1", "b0": b0, "answer": answer,
+			},
+		}
 	}
-	claims := []claim{
-		{
-			question: "The polar curve r = sec(theta) is traced from theta = 0 to theta = pi/4. What is its arc length L = integral of sqrt(r^2 + (dr/dtheta)^2) dtheta? (enter a number)",
-			answer:   "1", kind: "sec", a: 1, bLabel: "pi/4",
-			reason: "For r = sec(theta), r^2 + (r')^2 = sec^2(theta), so L = tan(theta) from 0 to pi/4 = 1.",
-		},
-		{
-			question: "The polar curve r = 2*sec(theta) is traced from theta = 0 to theta = pi/4. What is its arc length L = integral of sqrt(r^2 + (dr/dtheta)^2) dtheta? (enter a number)",
-			answer:   "2", kind: "sec", a: 2, bLabel: "pi/4",
-			reason: "The integrand is 2*sec^2(theta), so L = 2 tan(theta) from 0 to pi/4 = 2.",
-		},
-		{
-			question: "The polar curve r = 3*sec(theta) is traced from theta = 0 to theta = pi/4. What is its arc length L = integral of sqrt(r^2 + (dr/dtheta)^2) dtheta? (enter a number)",
-			answer:   "3", kind: "sec", a: 3, bLabel: "pi/4",
-			reason: "The integrand is 3*sec^2(theta), so L = 3 tan(theta) from 0 to pi/4 = 3.",
-		},
-		{
-			question: "The polar curve r = 4*sec(theta) is traced from theta = 0 to theta = pi/4. What is its arc length L = integral of sqrt(r^2 + (dr/dtheta)^2) dtheta? (enter a number)",
-			answer:   "4", kind: "sec", a: 4, bLabel: "pi/4",
-			reason: "The integrand is 4*sec^2(theta), so L = 4 tan(theta) from 0 to pi/4 = 4.",
-		},
-		{
-			question: "The cardioid r = 1 + cos(theta) is traced from theta = 0 to theta = pi. What is its arc length L = integral of sqrt(r^2 + (dr/dtheta)^2) dtheta? (enter a number)",
-			answer:   "4", kind: "cardioid", a: 1, bLabel: "pi",
-			reason: "The integrand simplifies to 2*cos(theta/2), whose integral from 0 to pi is 4.",
-		},
-		{
-			question: "The cardioid r = 1 + cos(theta) is traced from theta = 0 to theta = 2*pi. What is its arc length L = integral of sqrt(r^2 + (dr/dtheta)^2) dtheta? (enter a number)",
-			answer:   "8", kind: "cardioid", a: 1, bLabel: "2*pi",
-			reason: "The full cardioid has arc length 8: twice the half-cardioid length 4.",
-		},
-		{
-			question: "The polar curve r = 5*sec(theta) is traced from theta = 0 to theta = pi/4. What is its arc length L = integral of sqrt(r^2 + (dr/dtheta)^2) dtheta? (enter a number)",
-			answer:   "5", kind: "sec", a: 5, bLabel: "pi/4",
-			reason: "The integrand is 5*sec^2(theta), so L = 5 tan(theta) from 0 to pi/4 = 5.",
-		},
-		{
-			question: "The polar curve r = 6*sec(theta) is traced from theta = 0 to theta = pi/4. What is its arc length L = integral of sqrt(r^2 + (dr/dtheta)^2) dtheta? (enter a number)",
-			answer:   "6", kind: "sec", a: 6, bLabel: "pi/4",
-			reason: "The integrand is 6*sec^2(theta), so L = 6 tan(theta) from 0 to pi/4 = 6.",
-		},
-		{
-			question: "The polar curve r = 7*sec(theta) is traced from theta = 0 to theta = pi/4. What is its arc length L = integral of sqrt(r^2 + (dr/dtheta)^2) dtheta? (enter a number)",
-			answer:   "7", kind: "sec", a: 7, bLabel: "pi/4",
-			reason: "The integrand is 7*sec^2(theta), so L = 7 tan(theta) from 0 to pi/4 = 7.",
-		},
-		{
-			question: "The polar curve r = 8*sec(theta) is traced from theta = 0 to theta = pi/4. What is its arc length L = integral of sqrt(r^2 + (dr/dtheta)^2) dtheta? (enter a number)",
-			answer:   "8", kind: "sec", a: 8, bLabel: "pi/4",
-			reason: "The integrand is 8*sec^2(theta), so L = 8 tan(theta) from 0 to pi/4 = 8.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
+	a := 1 + rand.Intn(12)
+	answer := strconv.Itoa(a)
 	return generator.Problem{
-		Question:    c.question,
-		Answer:      c.answer,
-		Explanation: c.reason,
+		Question:    fmt.Sprintf("The polar curve r = %d*sec(theta) is traced from theta = 0 to theta = pi/4. What is its arc length L = integral of sqrt(r^2 + (dr/dtheta)^2) dtheta? (enter a number)", a),
+		Answer:      answer,
+		Explanation: fmt.Sprintf("The integrand is %d*sec^2(theta), so L = %d tan(theta) from 0 to pi/4 = %d.", a, a, a),
 		Facts: map[string]string{
-			"kind": c.kind, "a": strconv.Itoa(c.a), "b0": c.bLabel, "answer": c.answer,
+			"kind": "sec", "a": strconv.Itoa(a), "b0": "pi/4", "answer": answer,
 		},
 	}
 }
@@ -344,55 +303,27 @@ func (g *polarArcLengthGen) Generate(ctx generator.GeneratorContext) generator.P
 type torsionGen struct{}
 
 func (g *torsionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question string
-		answer   string
-		rp, rpp  [3]int
-		rppp     [3]int
-		reason   string
-	}
-	claims := []claim{
-		{
-			question: "A regular space curve has r' = (1, 0, 0), r'' = (0, 2, 0) and r''' = (0, 0, 6) at a point. What is its torsion tau = ((r' x r'') . r''')/|r' x r''|^2? (enter a number)",
-			answer:   "3", rp: [3]int{1, 0, 0}, rpp: [3]int{0, 2, 0}, rppp: [3]int{0, 0, 6},
-			reason: "r' x r'' = (0, 0, 2), its squared length is 4, and the dot product with r''' is 12, so tau = 12/4 = 3.",
-		},
-		{
-			question: "A regular space curve has r' = (0, 1, 1), r'' = (-1, 0, 0) and r''' = (0, -1, 0) at a point. What is its torsion tau = ((r' x r'') . r''')/|r' x r''|^2? (enter a decimal)",
-			answer:   "0.5", rp: [3]int{0, 1, 1}, rpp: [3]int{-1, 0, 0}, rppp: [3]int{0, -1, 0},
-			reason: "r' x r'' = (0, -1, 1), its squared length is 2, and the dot product with r''' is 1, so tau = 0.5.",
-		},
-		{
-			question: "A regular space curve has r' = (0, 1, 0), r'' = (-1, 0, 0) and r''' = (0, -1, 0) at a point. What is its torsion tau = ((r' x r'') . r''')/|r' x r''|^2? (enter a number)",
-			answer:   "0", rp: [3]int{0, 1, 0}, rpp: [3]int{-1, 0, 0}, rppp: [3]int{0, -1, 0},
-			reason: "r' x r'' = (0, 0, 1), and its dot product with r''' is 0, so the torsion is 0: the curve is planar.",
-		},
-		{
-			question: "A regular space curve has r' = (1, 0, 0), r'' = (0, 4, 0) and r''' = (0, 0, 6) at a point. What is its torsion tau = ((r' x r'') . r''')/|r' x r''|^2? (enter a decimal)",
-			answer:   "1.5", rp: [3]int{1, 0, 0}, rpp: [3]int{0, 4, 0}, rppp: [3]int{0, 0, 6},
-			reason: "r' x r'' = (0, 0, 4), its squared length is 16, and the dot product with r''' is 24, so tau = 24/16 = 1.5.",
-		},
-		{
-			question: "A regular space curve has r' = (1, 0, 0), r'' = (0, 2, 0) and r''' = (0, 0, 12) at a point. What is its torsion tau = ((r' x r'') . r''')/|r' x r''|^2? (enter a number)",
-			answer:   "6", rp: [3]int{1, 0, 0}, rpp: [3]int{0, 2, 0}, rppp: [3]int{0, 0, 12},
-			reason: "r' x r'' = (0, 0, 2), its squared length is 4, and the dot product with r''' is 24, so tau = 6.",
-		},
-		{
-			question: "A regular space curve has r' = (0, 2, 1), r'' = (-2, 0, 0) and r''' = (0, -2, 0) at a point. What is its torsion tau = ((r' x r'') . r''')/|r' x r''|^2? (enter a decimal)",
-			answer:   "0.2", rp: [3]int{0, 2, 1}, rpp: [3]int{-2, 0, 0}, rppp: [3]int{0, -2, 0},
-			reason: "r' x r'' = (0, -2, 4), its squared length is 20, and the dot product with r''' is 4, so tau = 0.2.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
+	// r' and r'' span the osculating plane and r''' is normal to it, so the
+	// triple product is easy to state and the torsion is the integer multiplier
+	// on r''' divided by a*b.
+	a := 1 + rand.Intn(4)
+	b := 1 + rand.Intn(4)
+	m := rand.Intn(4)
+	rp := [3]int{a, 0, 0}
+	rpp := [3]int{0, b, 0}
+	rppp := [3]int{0, 0, m * a * b}
+	answer := strconv.Itoa(m)
 	return generator.Problem{
-		Question:    c.question,
-		Answer:      c.answer,
-		Explanation: c.reason,
+		Question: fmt.Sprintf("A regular space curve has r' = %s, r'' = %s and r''' = %s at a point. What is its torsion tau = ((r' x r'') . r''')/|r' x r''|^2? (enter a number)",
+			frenetString(rp), frenetString(rpp), frenetString(rppp)),
+		Answer: answer,
+		Explanation: fmt.Sprintf("r' x r'' = (0, 0, %d), its squared length is %d, and the dot product with r''' is %d, so tau = %d/%d = %s.",
+			a*b, a*a*b*b, m*a*a*b*b, m*a*a*b*b, a*a*b*b, answer),
 		Facts: map[string]string{
-			"rp":     strconv.Itoa(c.rp[0]) + "," + strconv.Itoa(c.rp[1]) + "," + strconv.Itoa(c.rp[2]),
-			"rpp":    strconv.Itoa(c.rpp[0]) + "," + strconv.Itoa(c.rpp[1]) + "," + strconv.Itoa(c.rpp[2]),
-			"rppp":   strconv.Itoa(c.rppp[0]) + "," + strconv.Itoa(c.rppp[1]) + "," + strconv.Itoa(c.rppp[2]),
-			"answer": c.answer,
+			"rp":     frenetFactsString(rp),
+			"rpp":    frenetFactsString(rpp),
+			"rppp":   frenetFactsString(rppp),
+			"answer": answer,
 		},
 	}
 }
@@ -422,25 +353,24 @@ func frenetString(v [3]int) string {
 // frenetGen asks for the whole frame, not just the binormal: the concept is
 // named for the frame, and a question that returns one of its three vectors
 // tests a third of the concept.
+func frenetFactsString(v [3]int) string {
+	return strconv.Itoa(v[0]) + "," + strconv.Itoa(v[1]) + "," + strconv.Itoa(v[2])
+}
+
 func (g *frenetGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		rp, rpp [3]int
+	axes := [][3]int{{1, 0, 0}, {-1, 0, 0}, {0, 1, 0}, {0, -1, 0}, {0, 0, 1}, {0, 0, -1}}
+	rp := axes[rand.Intn(len(axes))]
+	perp := make([][3]int, 0, 4)
+	for _, axis := range axes {
+		if axis[0]*rp[0]+axis[1]*rp[1]+axis[2]*rp[2] == 0 {
+			perp = append(perp, axis)
+		}
 	}
-	claims := []claim{
-		{rp: [3]int{0, 1, 0}, rpp: [3]int{-1, 0, 0}},
-		{rp: [3]int{1, 0, 0}, rpp: [3]int{0, 2, 0}},
-		{rp: [3]int{1, 0, 0}, rpp: [3]int{0, -2, 0}},
-		{rp: [3]int{1, 0, 0}, rpp: [3]int{0, 0, 2}},
-		{rp: [3]int{0, 0, 1}, rpp: [3]int{-1, 0, 0}},
-		{rp: [3]int{1, 0, 0}, rpp: [3]int{0, 0, -2}},
-		{rp: [3]int{0, 1, 0}, rpp: [3]int{0, 0, 2}},
-		{rp: [3]int{0, 1, 0}, rpp: [3]int{0, 0, -2}},
-		{rp: [3]int{0, 0, 1}, rpp: [3]int{1, 0, 0}},
-	}
-	c := claims[rand.Intn(len(claims))]
-	// Every r' in the table is a unit axis vector, so T is r' itself.
-	tangent := c.rp
-	cross := frenetCrossInt(c.rp, c.rpp)
+	scale := 1 + rand.Intn(3)
+	base := perp[rand.Intn(len(perp))]
+	rpp := [3]int{base[0] * scale, base[1] * scale, base[2] * scale}
+	tangent := rp
+	cross := frenetCrossInt(rp, rpp)
 	norm := frenetNormInt(cross)
 	binormal := [3]int{cross[0] / norm, cross[1] / norm, cross[2] / norm}
 	normal := frenetCrossInt(binormal, tangent)
@@ -450,13 +380,13 @@ func (g *frenetGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		binormal[0], binormal[1], binormal[2])
 	return generator.Problem{
 		Question: fmt.Sprintf("For a regular space curve with r' = %s and r'' = %s at a point, the Frenet frame is (T, N, B) with T = r'/|r'|, B = (r' x r'')/|r' x r''| and N = B x T. Enter the nine components in the order (Tx, Ty, Tz, Nx, Ny, Nz, Bx, By, Bz).",
-			frenetString(c.rp), frenetString(c.rpp)),
+			frenetString(rp), frenetString(rpp)),
 		Answer: answer,
 		Explanation: fmt.Sprintf("r' is already a unit vector, so T = %s. r' x r'' = %s has length %d, so B = %s. Then N = B x T = %s, which points the same way as the component of r'' perpendicular to T.",
 			frenetString(tangent), frenetString(cross), norm, frenetString(binormal), frenetString(normal)),
 		Facts: map[string]string{
-			"rp":     strconv.Itoa(c.rp[0]) + "," + strconv.Itoa(c.rp[1]) + "," + strconv.Itoa(c.rp[2]),
-			"rpp":    strconv.Itoa(c.rpp[0]) + "," + strconv.Itoa(c.rpp[1]) + "," + strconv.Itoa(c.rpp[2]),
+			"rp":     frenetFactsString(rp),
+			"rpp":    frenetFactsString(rpp),
 			"answer": answer,
 		},
 	}
@@ -469,58 +399,37 @@ func (g *frenetGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type taylor2Gen struct{}
 
 func (g *taylor2Gen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question string
-		answer   string
-		f0, fx   float64
-		fy       float64
-		fxx, fxy float64
-		fyy      float64
-		dx, dy   float64
-		reason   string
-	}
-	claims := []claim{
-		{
-			question: "At the expansion point, f = 5, fx = 2, fy = 4, fxx = 2, fxy = 0 and fyy = 2. For dx = 0.1 and dy = 0.1, what is the second-order Taylor approximation f + fx dx + fy dy + (1/2)(fxx dx^2 + 2 fxy dx dy + fyy dy^2)? (enter a decimal)",
-			answer:   "5.62", f0: 5, fx: 2, fy: 4, fxx: 2, fxy: 0, fyy: 2, dx: 0.1, dy: 0.1,
-			reason: "The linear part is 0.2 + 0.4 = 0.6 and the Hessian part is 0.5(0.02 + 0 + 0.02) = 0.02, so the value is 5.62.",
-		},
-		{
-			question: "At the expansion point, f = 0, fx = 0, fy = 0, fxx = 2, fxy = 0 and fyy = 2. For dx = 1 and dy = 1, what is the second-order Taylor approximation f + fx dx + fy dy + (1/2)(fxx dx^2 + 2 fxy dx dy + fyy dy^2)? (enter a number)",
-			answer:   "2", f0: 0, fx: 0, fy: 0, fxx: 2, fxy: 0, fyy: 2, dx: 1, dy: 1,
-			reason: "The linear part vanishes and the Hessian part is 0.5(2 + 0 + 2) = 2.",
-		},
-		{
-			question: "At the expansion point, f = 2, fx = 3, fy = 1, fxx = 2, fxy = 1 and fyy = 0. For dx = 0.1 and dy = 0.2, what is the second-order Taylor approximation f + fx dx + fy dy + (1/2)(fxx dx^2 + 2 fxy dx dy + fyy dy^2)? (enter a decimal)",
-			answer:   "2.53", f0: 2, fx: 3, fy: 1, fxx: 2, fxy: 1, fyy: 0, dx: 0.1, dy: 0.2,
-			reason: "The linear part is 0.3 + 0.2 = 0.5 and the Hessian part is 0.5(0.02 + 0.04 + 0) = 0.03, so the value is 2.53.",
-		},
-		{
-			question: "At the expansion point, f = 3, fx = 4, fy = -2, fxx = 2, fxy = 0 and fyy = -2. For dx = 0.1 and dy = 0.1, what is the second-order Taylor approximation f + fx dx + fy dy + (1/2)(fxx dx^2 + 2 fxy dx dy + fyy dy^2)? (enter a decimal)",
-			answer:   "3.2", f0: 3, fx: 4, fy: -2, fxx: 2, fxy: 0, fyy: -2, dx: 0.1, dy: 0.1,
-			reason: "The linear part is 0.4 - 0.2 = 0.2 and the Hessian part is 0.5(0.02 - 0.02) = 0, so the value is 3.2.",
-		},
-		{
-			question: "At the expansion point, f = 2, fx = 2, fy = 1, fxx = 0, fxy = 1 and fyy = 0. For dx = 0.1 and dy = 0.1, what is the second-order Taylor approximation f + fx dx + fy dy + (1/2)(fxx dx^2 + 2 fxy dx dy + fyy dy^2)? (enter a decimal)",
-			answer:   "2.31", f0: 2, fx: 2, fy: 1, fxx: 0, fxy: 1, fyy: 0, dx: 0.1, dy: 0.1,
-			reason: "The linear part is 0.2 + 0.1 = 0.3 and the Hessian part is 0.5(0 + 0.02 + 0) = 0.01, so the value is 2.31.",
-		},
-		{
-			question: "At the expansion point, f = 5, fx = 4, fy = 2, fxx = 2, fxy = 0 and fyy = 2. For dx = -0.1 and dy = 0.2, what is the second-order Taylor approximation f + fx dx + fy dy + (1/2)(fxx dx^2 + 2 fxy dx dy + fyy dy^2)? (enter a decimal)",
-			answer:   "5.05", f0: 5, fx: 4, fy: 2, fxx: 2, fxy: 0, fyy: 2, dx: -0.1, dy: 0.2,
-			reason: "The linear part is -0.4 + 0.4 = 0 and the Hessian part is 0.5(0.02 + 0 + 0.08) = 0.05, so the value is 5.05.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	format := func(v float64) string { return strconv.FormatFloat(v, 'g', -1, 64) }
+	f0 := float64(rand.Intn(6))
+	fx := float64(rand.Intn(8) - 3)
+	fy := float64(rand.Intn(8) - 3)
+	fxx := float64(2 * (rand.Intn(3) - 1))
+	fxy := float64(2 * (rand.Intn(3) - 1))
+	fyy := float64(2 * (rand.Intn(3) - 1))
+	steps := []float64{-0.2, -0.1, 0.1, 0.2}
+	dx := steps[rand.Intn(len(steps))]
+	dy := steps[rand.Intn(len(steps))]
+	value := f0 + fx*dx + fy*dy + 0.5*(fxx*dx*dx+2*fxy*dx*dy+fyy*dy*dy)
+	answer := formatBatchValue(value)
+	linearX := fx * dx
+	linearY := fy * dy
+	hessianXX := fxx * dx * dx
+	hessianXY := 2 * fxy * dx * dy
+	hessianYY := fyy * dy * dy
+	hessian := 0.5 * (hessianXX + hessianXY + hessianYY)
 	return generator.Problem{
-		Question:    c.question,
-		Answer:      c.answer,
-		Explanation: c.reason,
+		Question: fmt.Sprintf("At the expansion point, f = %s, fx = %s, fy = %s, fxx = %s, fxy = %s and fyy = %s. For dx = %s and dy = %s, what is the second-order Taylor approximation f + fx dx + fy dy + (1/2)(fxx dx^2 + 2 fxy dx dy + fyy dy^2)? (enter a decimal)",
+			formatBatchValue(f0), formatBatchValue(fx), formatBatchValue(fy),
+			formatBatchValue(fxx), formatBatchValue(fxy), formatBatchValue(fyy),
+			formatBatchValue(dx), formatBatchValue(dy)),
+		Answer: answer,
+		Explanation: fmt.Sprintf("The linear part is %s + %s = %s and the Hessian part is 0.5(%s + %s + %s) = %s, so the value is %s.",
+			formatBatchValue(linearX), formatBatchValue(linearY), formatBatchValue(linearX+linearY),
+			formatBatchValue(hessianXX), formatBatchValue(hessianXY), formatBatchValue(hessianYY),
+			formatBatchValue(hessian), answer),
 		Facts: map[string]string{
-			"f0": format(c.f0), "fx": format(c.fx), "fy": format(c.fy),
-			"fxx": format(c.fxx), "fxy": format(c.fxy), "fyy": format(c.fyy),
-			"dx": format(c.dx), "dy": format(c.dy), "answer": c.answer,
+			"f0": formatBatchValue(f0), "fx": formatBatchValue(fx), "fy": formatBatchValue(fy),
+			"fxx": formatBatchValue(fxx), "fxy": formatBatchValue(fxy), "fyy": formatBatchValue(fyy),
+			"dx": formatBatchValue(dx), "dy": formatBatchValue(dy), "answer": answer,
 		},
 	}
 }

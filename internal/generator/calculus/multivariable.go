@@ -52,20 +52,22 @@ type arcLengthParametricGen struct{}
 func (g *arcLengthParametricGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	// Three directions at every difficulty: the practice feed asks for three questions, so a
 	// bank of two cannot fill one request.
-	easy := [][3]int{{3, 4, 5}, {6, 8, 10}, {9, 12, 15}}
-	hard := [][3]int{{5, 12, 13}, {8, 15, 17}, {7, 24, 25}}
+	easy := [][3]int{{3, 4, 5}, {6, 8, 10}, {9, 12, 15}, {12, 16, 20}}
+	hard := [][3]int{{5, 12, 13}, {8, 15, 17}, {7, 24, 25}, {20, 21, 29}, {9, 40, 41}}
 	triples := hard
 	if ctx.Difficulty < 0.45 {
 		triples = easy
 	}
 	tr := triples[pickMV(len(triples))]
+	t0 := 1 + pickMV(3)
+	length := tr[2] * t0
 	return generator.Problem{
-		Question: fmt.Sprintf("Find the arc length of the curve \\(x = %dt,\\ y = %dt\\) for \\(0 \\le t \\le 1\\).", tr[0], tr[1]),
-		Answer:   fmt.Sprintf("%d", tr[2]),
-		Explanation: fmt.Sprintf("Arc length is the integral of sqrt((dx/dt)^2 + (dy/dt)^2), and here the integrand is the constant sqrt(%d^2 + %d^2) = %d, so over an interval of length 1 the length is %d.",
-			tr[0], tr[1], tr[2], tr[2]),
+		Question: fmt.Sprintf("Find the arc length of the curve \\(x = %dt,\\ y = %dt\\) for \\(0 \\le t \\le %d\\).", tr[0], tr[1], t0),
+		Answer:   fmt.Sprintf("%d", length),
+		Explanation: fmt.Sprintf("Arc length is the integral of sqrt((dx/dt)^2 + (dy/dt)^2), and here the integrand is the constant sqrt(%d^2 + %d^2) = %d, so over an interval of length %d the length is %d.",
+			tr[0], tr[1], tr[2], t0, length),
 		Facts: map[string]string{"dx": fmt.Sprintf("%d", tr[0]), "dy": fmt.Sprintf("%d", tr[1]),
-			"length": fmt.Sprintf("%d", tr[2])},
+			"length": fmt.Sprintf("%d", length)},
 	}
 }
 
@@ -90,17 +92,40 @@ func (g *lineIntegralGen) Generate(ctx generator.GeneratorContext) generator.Pro
 	}
 }
 
-// jacobianValueGen evaluates the polar Jacobian determinant, which is r, at a sample radius.
+// jacobianValueGen evaluates a Jacobian determinant at a sample point. The
+// answer is always a whole number: polar gives r, a scaled polar map gives
+// ab r, and spherical at the equator gives r squared.
 type jacobianValueGen struct{}
 
 func (g *jacobianValueGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	r := 1 + pickMV(scaleMV(ctx.Difficulty, 3, 5))
-	return generator.Problem{
-		Question: fmt.Sprintf("For the change of variables \\(x = r\\cos\\theta,\\ y = r\\sin\\theta\\), evaluate the Jacobian determinant \\(\\frac{\\partial(x,y)}{\\partial(r,\\theta)}\\) at \\(r = %d\\).", r),
-		Answer:   fmt.Sprintf("%d", r),
-		Explanation: fmt.Sprintf("The matrix of partials has determinant (cos t)(r cos t) - (-r sin t)(sin t) = r(sin^2 t + cos^2 t) = r, so at r = %d it is %d -- which is also why an area element in polar coordinates carries a factor of r.",
-			r, r),
-		Facts: map[string]string{"r": fmt.Sprintf("%d", r), "jacobian": fmt.Sprintf("%d", r)},
+	switch rand.Intn(3) {
+	case 0:
+		return generator.Problem{
+			Question: fmt.Sprintf("For the change of variables \\(x = r\\cos\\theta,\\ y = r\\sin\\theta\\), evaluate the Jacobian determinant \\(\\frac{\\partial(x,y)}{\\partial(r,\\theta)}\\) at \\(r = %d\\).", r),
+			Answer:   fmt.Sprintf("%d", r),
+			Explanation: fmt.Sprintf("The matrix of partials has determinant (cos t)(r cos t) - (-r sin t)(sin t) = r(sin^2 t + cos^2 t) = r, so at r = %d it is %d -- which is also why an area element in polar coordinates carries a factor of r.",
+				r, r),
+			Facts: map[string]string{"r": fmt.Sprintf("%d", r), "jacobian": fmt.Sprintf("%d", r)},
+		}
+	case 1:
+		a := 2 + rand.Intn(2)
+		b := 2 + rand.Intn(2)
+		j := a * b * r
+		return generator.Problem{
+			Question:    fmt.Sprintf("For the change of variables \\(x = %d r\\cos\\theta,\\ y = %d r\\sin\\theta\\), evaluate the Jacobian determinant \\(\\frac{\\partial(x,y)}{\\partial(r,\\theta)}\\) at \\(r = %d\\).", a, b, r),
+			Answer:      fmt.Sprintf("%d", j),
+			Explanation: fmt.Sprintf("The map is a polar map scaled by %d in x and %d in y, so the determinant is the product of the scales times r: %d * %d * %d = %d.", a, b, a, b, r, j),
+			Facts:       map[string]string{"r": fmt.Sprintf("%d", r), "jacobian": fmt.Sprintf("%d", j)},
+		}
+	default:
+		j := r * r
+		return generator.Problem{
+			Question:    fmt.Sprintf("For spherical coordinates \\(x = r\\sin\\phi\\cos\\theta,\\ y = r\\sin\\phi\\sin\\theta,\\ z = r\\cos\\phi\\), evaluate the Jacobian determinant \\(\\frac{\\partial(x,y,z)}{\\partial(r,\\phi,\\theta)}\\) at \\(\\phi = \\pi/2\\) and \\(r = %d\\).", r),
+			Answer:      fmt.Sprintf("%d", j),
+			Explanation: fmt.Sprintf("The spherical Jacobian is r^2 sin(phi). At phi = pi/2, sin(phi) = 1, so the determinant is r^2 = %d.", j),
+			Facts:       map[string]string{"r": fmt.Sprintf("%d", r), "jacobian": fmt.Sprintf("%d", j)},
+		}
 	}
 }
 
