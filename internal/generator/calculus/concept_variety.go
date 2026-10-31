@@ -46,10 +46,18 @@ func conceptDistinct(correct string, candidates ...string) []string {
 	return out
 }
 
-// conceptPickMC renders one claim of the pool as a four-option question.
+// conceptPickMC renders one claim of the pool as a question. A verdict claim
+// keeps the two options it actually has, because padding yes/no with "none of
+// these" or "0" turns a clear question into a four-way guess with two decoys
+// that cannot be true.
 func conceptPickMC(claims []conceptClaim) generator.Problem {
 	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, conceptDistinct(c.correct, c.distractors...)...)
+	var p generator.Problem
+	if len(c.distractors) == 1 && opposite(c.correct) == c.distractors[0] {
+		p = generator.MultipleChoice(c.question, c.correct, c.distractors[0])
+	} else {
+		p = generator.MultipleChoice(c.question, c.correct, conceptDistinct(c.correct, c.distractors...)...)
+	}
 	p.Explanation = c.reason
 	return p
 }

@@ -356,26 +356,28 @@ func computedVarietyClaims(id string) []conceptClaim {
 			},
 		}
 	case "calc.series.taylor":
-		n := 1 + rand.Intn(5)
+		n := 2 + rand.Intn(5)
 		k := 1 + rand.Intn(3)
 		nFact := calcFact(n)
 		kFact := calcFact(2*k + 1)
 		sign := ""
-		if k%2 == 0 {
+		otherSign := "-"
+		if k%2 == 1 {
 			sign = "-"
+			otherSign = ""
 		}
 		return []conceptClaim{
 			{
 				question:    fmt.Sprintf("What is the coefficient of x^{%d} in the Taylor series of e^x at 0?", n),
 				correct:     fmt.Sprintf("1/%d", nFact),
 				reason:      fmt.Sprintf("The coefficient is 1/n! with n=%d, which is 1/%d.", n, nFact),
-				distractors: []string{"1", fmt.Sprintf("%d", n), fmt.Sprintf("1/%d", n)},
+				distractors: []string{fmt.Sprintf("1/%d", n+1), fmt.Sprintf("1/%d", n+2), fmt.Sprintf("%d", n)},
 			},
 			{
 				question:    fmt.Sprintf("What is the coefficient of x^{%d} in the Taylor series of sin(x) at 0?", 2*k+1),
 				correct:     fmt.Sprintf("%s1/%d", sign, kFact),
 				reason:      fmt.Sprintf("The coefficient is (-1)^k/(2k+1)! with k=%d, which is %s1/%d.", k, sign, kFact),
-				distractors: []string{fmt.Sprintf("1/%d", kFact), fmt.Sprintf("-1/%d", kFact), "1"},
+				distractors: []string{fmt.Sprintf("%s1/%d", otherSign, kFact), "1", fmt.Sprintf("1/%d", 2*k+1)},
 			},
 			{
 				question:    "What is the Taylor series of 1/(1-x) at 0?",
