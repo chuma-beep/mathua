@@ -183,6 +183,53 @@ describe('LearnStepper done state (PR5)', () => {
     expect(screen.getByRole('button', { name: 'Practice again →' })).toBeTruthy()
   })
 
+  it('never renders a Continue link back to the concept just mastered', async () => {
+    vi.mocked(getLessonReadiness).mockResolvedValueOnce({
+      concept_id: CID,
+      ready: true,
+      weak: [],
+      missing: [],
+      state: 'mastered',
+      eligible: true,
+    })
+    vi.mocked(getNext).mockResolvedValue({
+      primary: {
+        id: CID, conceptId: CID, conceptTitle: 'This concept', kind: 'learn', reason: 'new', priority: 2,
+        action: { type: 'learn', href: `/learn?concept=${CID}` },
+        badge: 'New', detail: 'Ready to learn', cta: 'Start →',
+      },
+      alternatives: [],
+      generatedAt: '',
+    })
+    render(<LearnStepper conceptId={CID} />)
+
+    expect(await screen.findByText(/You have mastered this concept/)).toBeTruthy()
+    // The fallback goes to the picker, never to this lesson again.
+    const links = await screen.findAllByRole('link', { name: /Continue to Next Concept/ })
+    for (const link of links) {
+      expect(link.getAttribute('href') ?? '').not.toContain(`concept=${CID}`)
+    }
+  })
+
+  it('does not claim prerequisites are learned when they are only unlocked', async () => {
+    vi.mocked(getLessonReadiness).mockResolvedValueOnce({
+      concept_id: CID,
+      ready: true,
+      weak: [],
+      missing: [],
+      state: 'mastered',
+      eligible: true,
+      prerequisites: [
+        { conceptId: 'p1', title: 'Slope-intercept form', state: 'unlocked', met: true },
+        { conceptId: 'p2', title: 'Slope of a line from two points', state: 'upcoming', met: true },
+      ],
+    })
+    render(<LearnStepper conceptId={CID} />)
+
+    expect(await screen.findByText(/These prerequisites are not started yet/)).toBeTruthy()
+    expect(screen.queryByText(/You have already learned what this builds on/)).toBeNull()
+  })
+
   it('guards same-concept heads by id even when query params differ', () => {
     expect(headConceptId(`/learn?concept=${CID}&seed=42&difficulty=0.7&exclude=a`)).toBe(CID)
     expect(headConceptId('/learn?concept=other.id')).toBe('other.id')
