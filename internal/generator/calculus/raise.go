@@ -59,7 +59,7 @@ func registerRaise(reg *generator.Registry) {
 	reg.Register("calc.integral.consumer_surplus", &consumerSurplusGen{})
 	reg.Register("calc.integral.fourier_coefficients", &fourierCoefficientsGen{})
 
-	reg.Register("calc.multi.lagrange_two", &lagrangeTwoGen{})
+	reg.Register("calc.multi.lagrange_two", &varietyWrap{id: "calc.multi.lagrange_two", inner: &lagrangeTwoGen{}})
 	reg.Register("calc.multi.implicit_function", &implicitFunctionGen{})
 	reg.Register("calc.multi.inverse_function", &inverseFunctionGen{})
 	reg.Register("calc.multi.iterated_limits", &iteratedLimitsGen{})
