@@ -123,9 +123,9 @@ largest first:
 
 | Domain | Concepts | `multiple_choice` |
 |---|---|---|
-| topology | 42 | 30 |
-| real_analysis | 55 | 33 |
-| abstract_algebra | 45 | 19 |
+| topology | 42 | 0 |
+| real_analysis | 55 | 0 |
+| abstract_algebra | 45 | 0 |
 | trigonometry | 68 | 22 |
 | probability_theory | 50 | 21 |
 | discrete_math | 55 | 16 |

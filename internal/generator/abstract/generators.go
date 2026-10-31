@@ -3,7 +3,6 @@ package abstract
 import (
 	"fmt"
 	"math/rand"
-	"strconv"
 
 	"github.com/chuma-beep/mathua/internal/generator"
 	"github.com/chuma-beep/mathua/internal/mathutil"
@@ -50,67 +49,7 @@ func Register(reg *generator.Registry) {
 type groupDefGen struct{}
 
 func (g *groupDefGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	mode := rand.Intn(4)
-	switch mode {
-	case 0:
-		// Dynamic multiples kZ under addition
-		k := 2 + rand.Intn(10)
-		q := fmt.Sprintf("Is the set of multiples %d\\mathbb{Z} under addition a group? (yes/no)", k)
-		ex := fmt.Sprintf("Multiples of %d under addition are closed, associative, have identity 0 = %d(0) and each %dn has inverse %d(-n), satisfying all group axioms.", k, k, k, k)
-		return groupYesNo(q, "yes", ex)
-	case 1:
-		// Integers modulo m without zero under multiplication
-		primes := []int{3, 5, 7, 11, 13, 17, 19}
-		composites := []int{4, 6, 8, 9, 10, 12, 14, 15, 16}
-		if rand.Intn(2) == 0 {
-			p := primes[rand.Intn(len(primes))]
-			q := fmt.Sprintf("Is the set \\(\\mathbb{Z}_{%d} \\setminus \\{0\\}\\) under multiplication modulo %d a group? (yes/no)", p, p)
-			ex := fmt.Sprintf("Because %d is prime, every non-zero residue is coprime to %d and possesses a modular inverse, forming a group under multiplication.", p, p)
-			return groupYesNo(q, "yes", ex)
-		}
-		m := composites[rand.Intn(len(composites))]
-		q := fmt.Sprintf("Is the set \\(\\mathbb{Z}_{%d} \\setminus \\{0\\}\\) under multiplication modulo %d a group? (yes/no)", m, m)
-		ex := fmt.Sprintf("Because %d is composite, it contains non-trivial factors whose product is 0 mod %d, violating closure and inverse axioms.", m, m)
-		return groupYesNo(q, "no", ex)
-	case 2:
-		// Failing axioms identification
-		type failItem struct {
-			set       string
-			operation string
-			axiom     string
-			reason    string
-		}
-		fails := []failItem{
-			{"natural numbers \\(\\mathbb{N}\\)", "addition", "inverses", "Positive natural numbers have no additive inverses in N."},
-			{"odd integers", "addition", "closure", "Adding two odd integers produces an even integer, which leaves the set."},
-			{"integers \\(\\mathbb{Z}\\)", "multiplication", "inverses", "Integers other than 1 and -1 lack multiplicative inverses in Z."},
-			{"positive integers", "multiplication", "inverses", "Integers greater than 1 have no multiplicative inverse in the positive integers."},
-			{"positive rational numbers", "addition", "identity", "The additive identity 0 is not positive, so no identity exists in the set."},
-			{"even integers", "multiplication", "identity", "The multiplicative identity 1 is odd, so the set has no identity element."},
-		}
-		item := fails[rand.Intn(len(fails))]
-		q := fmt.Sprintf("The set of %s under %s is NOT a group. Which axiom fails?", item.set, item.operation)
-		return groupChoice(q, item.axiom, item.reason, "closure", "identity", "inverses")
-	default:
-		// Standard structures
-		type stdItem struct {
-			set       string
-			operation string
-			isGroup   string
-			reason    string
-		}
-		stds := []stdItem{
-			{"rational numbers \\(\\mathbb{Q}\\)", "addition", "yes", "Rationals under addition satisfy closure, associativity, identity 0 and inverses -a."},
-			{"real numbers \\(\\mathbb{R}\\)", "addition", "yes", "Real numbers under addition satisfy closure, associativity, identity 0 and inverses -a."},
-			{"non-zero rational numbers \\(\\mathbb{Q} \\setminus \\{0\\}\\)", "multiplication", "yes", "Non-zero rationals under multiplication satisfy all group properties with identity 1 and inverses 1/a."},
-			{"non-zero real numbers \\(\\mathbb{R} \\setminus \\{0\\}\\)", "multiplication", "yes", "Non-zero reals under multiplication form a group with identity 1 and inverses 1/a."},
-			{"invertible 2x2 real matrices \\(\\operatorname{GL}_2(\\mathbb{R})\\)", "multiplication", "yes", "Invertible matrices under multiplication form the general linear group with identity I and matrix inverses."},
-			{"all 2x2 real matrices \\(M_2(\\mathbb{R})\\)", "multiplication", "no", "Singular matrices with zero determinant have no multiplicative inverse."},
-		}
-		item := stds[rand.Intn(len(stds))]
-		q := fmt.Sprintf("Is the set of %s under %s a group? (yes/no)", item.set, item.operation)
-		return groupYesNo(q, item.isGroup, item.reason)
-	}
+	return groupDefProblem()
 }
 
 // ----- 2. group.examples -----
@@ -118,56 +57,7 @@ func (g *groupDefGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type groupExamplesGen struct{}
 
 func (g *groupExamplesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	mode := rand.Intn(5)
-	switch mode {
-	case 0:
-		// Order of Dihedral group D_{2n}
-		n := 3 + rand.Intn(10)
-		ans := strconv.Itoa(2 * n)
-		q := fmt.Sprintf("What is the order of the group of symmetries of a regular %d-gon? (enter a number)", n)
-		ex := fmt.Sprintf("A regular %d-gon has %d rotations and %d reflections, giving total order 2(%d) = %d.", n, n, n, n, 2*n)
-		return groupChoice(q, ans, ex, strconv.Itoa(n), strconv.Itoa(2*n-2), strconv.Itoa(2*n+2))
-	case 1:
-		// Order of unit groups U(p)
-		primes := []int{3, 5, 7, 11, 13, 17}
-		p := primes[rand.Intn(len(primes))]
-		ans := strconv.Itoa(p - 1)
-		q := fmt.Sprintf("What is the order of the group of units \\(U(%d) = \\mathbb{Z}_{%d}^\\times\\) under multiplication? (enter a number)", p, p)
-		ex := fmt.Sprintf("Because %d is prime, all residues from 1 to %d are coprime to %d, so the order is %d - 1 = %d.", p, p-1, p, p, p-1)
-		return groupChoice(q, ans, ex, strconv.Itoa(p), strconv.Itoa(p-2), strconv.Itoa(p+1))
-	case 2:
-		// Additive inverse in Z_n
-		n := 5 + rand.Intn(15)
-		a := 1 + rand.Intn(n-2)
-		for 2*a == n {
-			a = 1 + rand.Intn(n-2)
-		}
-		inv := n - a
-		ans := strconv.Itoa(inv)
-		q := fmt.Sprintf("What is the additive inverse of %d in the group \\(\\mathbb{Z}_{%d}\\)? (enter a number)", a, n)
-		ex := fmt.Sprintf("In \\(\\mathbb{Z}_{%d}\\), %d + %d = %d \\equiv 0 \\pmod{%d}, so the inverse is %d.", n, a, inv, n, n, inv)
-		return groupChoice(q, ans, ex, strconv.Itoa(a), strconv.Itoa((inv+1)%n), strconv.Itoa((inv+n-1)%n))
-	case 3:
-		// Abelian property questions
-		if rand.Intn(2) == 0 {
-			n := 3 + rand.Intn(5)
-			q := fmt.Sprintf("Is the symmetric group \\(S_{%d}\\) abelian? (yes/no)", n)
-			ex := fmt.Sprintf("For n >= 3, disjoint transposition and 3-cycle products do not commute, so S_%d is non-abelian.", n)
-			return groupYesNo(q, "no", ex)
-		}
-		n := 3 + rand.Intn(5)
-		q := fmt.Sprintf("Is the dihedral group \\(D_{%d}\\) of symmetries of a regular %d-gon abelian? (yes/no)", 2*n, n)
-		ex := fmt.Sprintf("For n >= 3, reflecting and then rotating does not equal rotating and then reflecting, so D_%d is non-abelian.", 2*n)
-		return groupYesNo(q, "no", ex)
-	default:
-		// Order of alternating group A_n
-		n := 3 + rand.Intn(4) // 3 to 6
-		order := abstractFactorial(n) / 2
-		ans := strconv.Itoa(order)
-		q := fmt.Sprintf("What is the order of the alternating group \\(A_{%d}\\)? (enter a number)", n)
-		ex := fmt.Sprintf("The alternating group contains exactly half the permutations of S_%d, giving order %d! / 2 = %d / 2 = %d.", n, n, abstractFactorial(n), order)
-		return groupChoice(q, ans, ex, strconv.Itoa(abstractFactorial(n)), strconv.Itoa(order-1), strconv.Itoa(order+2))
-	}
+	return groupExamplesProblem()
 }
 
 // ----- 3. subgroup -----
@@ -247,79 +137,7 @@ func (g *subgroupGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type ringGen struct{}
 
 func (g *ringGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	mode := rand.Intn(4)
-	switch mode {
-	case 0:
-		// Modular field checks
-		primes := []int{2, 3, 5, 7, 11, 13, 17, 19, 23}
-		composites := []int{4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 25}
-		if rand.Intn(2) == 0 {
-			p := primes[rand.Intn(len(primes))]
-			q := fmt.Sprintf("Is \\(\\mathbb{Z}_{%d}\\) a field under addition and multiplication modulo %d? (yes/no)", p, p)
-			ex := fmt.Sprintf("Because %d is prime, every non-zero element has a multiplicative inverse, so \\(\\mathbb{Z}_{%d}\\) is a field.", p, p)
-			return groupYesNo(q, "yes", ex)
-		}
-		m := composites[rand.Intn(len(composites))]
-		q := fmt.Sprintf("Is \\(\\mathbb{Z}_{%d}\\) a field under addition and multiplication modulo %d? (yes/no)", m, m)
-		ex := fmt.Sprintf("Because %d is composite, its non-trivial divisors are zero divisors and lack multiplicative inverses, so it is not a field.", m)
-		return groupYesNo(q, "no", ex)
-	case 1:
-		// Witness non-unit element
-		type witEntry struct {
-			set    string
-			wit    string
-			d1, d2 string
-			reason string
-		}
-		witTable := []witEntry{
-			{"\\(\\mathbb{Z}\\) (integers)", "2", "0", "1", "2 has no integer multiplicative inverse: no integer times 2 is 1."},
-			{"\\(\\mathbb{Z}_4\\)", "2", "1", "3", "2 * 2 = 4 = 0 mod 4, so 2 is a zero divisor with no inverse."},
-			{"\\(\\mathbb{Z}_6\\)", "2", "1", "5", "2 * 3 = 6 = 0 mod 6, so 2 has no multiplicative inverse mod 6."},
-			{"\\(\\mathbb{Z}_8\\)", "2", "1", "3", "2 * 4 = 8 = 0 mod 8, so 2 has no inverse mod 8."},
-			{"\\(\\mathbb{Z}_9\\)", "3", "1", "2", "3 * 3 = 9 = 0 mod 9, so 3 has no multiplicative inverse mod 9."},
-			{"\\(\\mathbb{Z}_{10}\\)", "2", "1", "3", "2 * 5 = 10 = 0 mod 10, so 2 has no inverse mod 10."},
-			{"\\(\\mathbb{Z}_{12}\\)", "2", "1", "5", "2 * 6 = 12 = 0 mod 12, so 2 has no inverse mod 12."},
-			{"\\(\\mathbb{Z}_{14}\\)", "2", "1", "3", "2 * 7 = 14 = 0 mod 14, so 2 has no inverse mod 14."},
-			{"\\(\\mathbb{Z}_{15}\\)", "3", "1", "2", "3 * 5 = 15 = 0 mod 15, so 3 has no inverse mod 15."},
-			{"\\(\\mathbb{Z}_{21}\\)", "3", "1", "2", "3 * 7 = 21 = 0 mod 21, so 3 has no inverse mod 21."},
-			{"\\(\\mathbb{Z}_{25}\\)", "5", "1", "2", "5 * 5 = 25 = 0 mod 25, so 5 has no inverse mod 25."},
-			{"\\(\\mathbb{Z}[i]\\) (Gaussian integers)", "2", "0", "1", "2 has no inverse in Z[i] because (a+bi)(c+di)=1 requires norm 1 while N(2)=4."},
-		}
-		w := witTable[rand.Intn(len(witTable))]
-		q := fmt.Sprintf("What is the smallest positive integer with no multiplicative inverse in %s? (enter a number)", w.set)
-		return groupChoice(q, w.wit, w.reason, w.d1, w.d2, "4")
-	case 2:
-		// Standard set ring and field queries
-		type setEntry struct {
-			set     string
-			isRing  string
-			isField string
-			rReason string
-			fReason string
-		}
-		sets := []setEntry{
-			{"\\(\\mathbb{Q}\\) (rational numbers)", "yes", "yes", "Q is a commutative ring with unity under addition and multiplication.", "Q is a field because every non-zero rational a/b has inverse b/a."},
-			{"\\(\\mathbb{R}\\) (real numbers)", "yes", "yes", "R is a commutative ring with unity under standard arithmetic.", "R is a field because every non-zero real number has a multiplicative inverse."},
-			{"\\(\\mathbb{Z}\\) (integers)", "yes", "no", "Z is a ring with unity under addition and multiplication.", "Z is not a field because elements other than 1 and -1 lack multiplicative inverses in Z."},
-			{"\\(2\\mathbb{Z}\\) (even integers)", "yes", "no", "2Z is a ring without unity (a rng) under addition and multiplication.", "2Z is not a field because it has no multiplicative identity."},
-			{"\\(\\mathbb{Z}[i]\\) (Gaussian integers)", "yes", "no", "Gaussian integers a+bi form an integral domain under addition and multiplication.", "Gaussian integers do not form a field because non-units like 2 have no inverse in Z[i]."},
-			{"\\(M_2(\\mathbb{R})\\) (2x2 real matrices)", "yes", "no", "Square matrices under matrix addition and multiplication form a non-commutative ring with identity.", "M_2(R) is not a field because matrix multiplication is non-commutative and singular matrices lack inverses."},
-			{"\\(\\mathbb{R}[x]\\) (polynomials with real coefficients)", "yes", "no", "Polynomials form a commutative ring with unity under polynomial addition and multiplication.", "R[x] is not a field because non-constant polynomials have no polynomial multiplicative inverse."},
-		}
-		s := sets[rand.Intn(len(sets))]
-		if rand.Intn(2) == 0 {
-			q := fmt.Sprintf("Is %s a ring under addition and multiplication? (yes/no)", s.set)
-			return groupYesNo(q, s.isRing, s.rReason)
-		}
-		q := fmt.Sprintf("Is %s a field under addition and multiplication? (yes/no)", s.set)
-		return groupYesNo(q, s.isField, s.fReason)
-	default:
-		// Modular ring verification
-		m := 2 + rand.Intn(20)
-		q := fmt.Sprintf("Is \\(\\mathbb{Z}_{%d}\\) a commutative ring with unity under addition and multiplication modulo %d? (yes/no)", m, m)
-		ex := fmt.Sprintf("For every integer n >= 2, the integers modulo n form a commutative ring with identity element 1.")
-		return groupYesNo(q, "yes", ex)
-	}
+	return ringAxiomsProblem()
 }
 
 // ----- 5. homomorphism -----
@@ -379,51 +197,7 @@ func (g *homomorphismGen) Generate(ctx generator.GeneratorContext) generator.Pro
 type fieldGen struct{}
 
 func (g *fieldGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		set     string
-		isField string
-		reason  string
-	}
-	table := []entry{
-		{"Q (rational numbers)", "yes", "Q is a field: every non-zero rational a/b has inverse b/a, and all field axioms are satisfied."},
-		{"R (real numbers)", "yes", "R is a field: every non-zero real has a multiplicative inverse, satisfying all field axioms."},
-		{"C (complex numbers)", "yes", "C is a field: every non-zero complex number a+bi has inverse (a-bi)/(a²+b²)."},
-		{"Z (integers)", "no", "Z is not a field: most integers lack multiplicative inverses (e.g., 2 has no inverse in Z)."},
-		{"2Z (even integers)", "no", "2Z is not a field: it has no multiplicative identity and lacks inverses."},
-		{"Z₅ (integers mod 5)", "yes", "Z₅ is a field because 5 is prime; every non-zero element has a multiplicative inverse mod 5."},
-		{"Z₆ (integers mod 6)", "no", "Z₆ is not a field: 2 and 3 are zero divisors with no multiplicative inverses mod 6."},
-		{"Z₁₁ (integers mod 11)", "yes", "Z₁₁ is a field because 11 is prime; every non-zero element is invertible mod 11."},
-		{"n×n matrices over R (n≥2)", "no", "Matrix multiplication is not commutative and many matrices have no inverse, so it fails field axioms."},
-		{"Z[i] (Gaussian integers)", "no", "Gaussian integers form a ring but not a field: 2 has no inverse in Z[i]."},
-		{"F₄ (finite field with 4 elements)", "yes", "F₄ exists because 4=2² is a prime power. Every non-zero element has an inverse."},
-	}
-	e := table[rand.Intn(len(table))]
-	if rand.Intn(2) == 0 {
-		return generator.Problem{
-			Question:    fmt.Sprintf("Is %s a field under addition and multiplication? (yes/no)", e.set),
-			Answer:      e.isField,
-			Explanation: e.reason,
-		}
-	}
-	// characteristic question
-	charTable := []struct {
-		field  string
-		char   string
-		reason string
-	}{
-		{"Q", "0", "Q has characteristic 0: no finite sum of 1s equals 0."},
-		{"R", "0", "R has characteristic 0: no finite sum of 1s equals 0."},
-		{"C", "0", "C has characteristic 0: no finite sum of 1s equals 0."},
-		{"Z₅", "5", "Z₅ has characteristic 5: 1+1+1+1+1 = 5 ≡ 0 mod 5."},
-		{"Z₁₁", "11", "Z₁₁ has characteristic 11: 1+1+...+1 (11 times) ≡ 0 mod 11."},
-		{"F₄", "2", "F₄ has characteristic 2: 1+1 = 0 in any field of order 2ⁿ."},
-	}
-	c := charTable[rand.Intn(len(charTable))]
-	return generator.Problem{
-		Question:    fmt.Sprintf("What is the characteristic of %s?", c.field),
-		Answer:      c.char,
-		Explanation: c.reason,
-	}
+	return fieldExamplesProblem()
 }
 
 // ----- 7. module -----
@@ -876,34 +650,7 @@ func (g *quotientGroupGen) Generate(ctx generator.GeneratorContext) generator.Pr
 type polynomialRingGen struct{}
 
 func (g *polynomialRingGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type entry struct {
-		question string
-		answer   string
-		reason   string
-	}
-	tableEasy := []entry{
-		{"What ring is R[x] / (x) isomorphic to?", "R", "Quotient by the ideal (x) evaluates polynomials at 0, leaving constants R."},
-		{"What ring is Z[x] / (x) isomorphic to?", "Z", "Evaluating at 0 kills (x), leaving constants Z."},
-		{"What field is R[x] / (x^2+1) isomorphic to?", "C", "x^2+1 is irreducible over R, so the quotient is a field extension C."},
-		{"In Q[x]/(x^2-2), what does the class of x square to?", "2", "x^2 = 2 in the quotient, so the class behaves as sqrt(2)."},
-		{"Is Q[x] a PID? (yes/no)", "yes", "Polynomial ring over a field is a PID."},
-		{"Is Z[x] a PID? (yes/no)", "no", "The ideal (2,x) is not principal, so Z[x] is not a PID."},
-	}
-	tableHard := []entry{
-		{"Is R[x]/(x^2) a field? (yes/no)", "no", "x^2 is not irreducible (has repeated root), quotient has zero divisors, so not a field."},
-		{"In R[x]/(x^2), the class of x is nonzero but squares to zero. Name it (the zero divisor).", "x", "The class of x is nonzero (x is not a multiple of x^2) and x*x = x^2 = 0 in the quotient."},
-		{"What is the minimal polynomial of sqrt(2) over Q? (type like x^2-2)", "x^2-2", "sqrt(2) satisfies x^2-2=0, irreducible over Q by Eisenstein/rational root test."},
-		{"What is Q[x]/(x^2-2) isomorphic to? (type like Q(sqrt(2)))", "Q(sqrt(2))", "Adjoining a root of the irreducible x^2-2 gives Q(sqrt(2))."},
-		{"Does Z[x] contain Q? (yes/no)", "no", "Z[x] has integer coefficients only; Q requires rational coefficients."},
-		{"Is the ideal (2,x) in Z[x] maximal? (yes/no)", "yes", "Quotient Z[x]/(2,x) ≅ Z_2, a field, so maximal."},
-	}
-	pool := tableEasy
-	if scale > 3 {
-		pool = append(tableEasy, tableHard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return groupYesNo(e.question, e.answer, e.reason)
+	return polynomialRingsProblem()
 }
 
 // ----- 16. group action -----
@@ -1003,44 +750,7 @@ func (g *sylowGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type ufdGen struct{}
 
 func (g *ufdGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type entry struct {
-		q string
-		a string
-		e string
-	}
-	easy := []entry{
-		{"Is Z a UFD? (yes/no)", "yes", "Integers have unique prime factorization."},
-		{"Is Z[√-5] a UFD? (yes/no)", "no", "6=2·3=(1+√-5)(1-√-5) gives non-unique factorization."},
-		{"Does PID imply UFD? (yes/no)", "yes", "Every PID is a UFD."},
-		{"Is Q[x] a UFD? (yes/no)", "yes", "Polynomial ring over a field is a UFD."},
-	}
-	hard := []entry{
-		{"Is Gauss's lemma used to prove Z[x] is a UFD if Z is? (yes/no)", "yes", "Content and primitive polynomials give UFD lift."},
-		{"Does UFD require every irreducible is prime? (yes/no)", "yes", "Irreducible ⇒ prime characterizes UFDs among domains."},
-		{"Is R[x] with R a UFD itself a UFD? (yes/no)", "yes", "Polynomial ring over a UFD is a UFD."},
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	if rand.Intn(3) == 0 {
-		// production: count factors / factorizations (unique answers).
-		type ufdEntry struct {
-			question string
-			answer   string
-			reason   string
-		}
-		ufdTable := []ufdEntry{
-			{"How many prime factors (with multiplicity) does 12 have in Z? (enter a number)", "3", "12 = 2·2·3: three prime factors."},
-			{"In 6 = 2·3 = (1+√-5)(1-√-5), how many distinct factorizations are shown? (enter a number)", "2", "Two genuinely different factorizations: witnesses non-uniqueness."},
-			{"x^2-1 factors over Q. How many linear factors? (enter a number)", "2", "x^2-1 = (x-1)(x+1): two linear factors."},
-		}
-		u := ufdTable[rand.Intn(len(ufdTable))]
-		return groupChoice(u.question, u.answer, u.reason, choicesFor(u.answer)...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return groupYesNo(e.q, e.a, e.e)
+	return ufdProblem()
 }
 
 // ----- 19. field extension -----
@@ -1050,43 +760,7 @@ func (g *ufdGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type localizationGen struct{}
 
 func (g *localizationGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type entry struct {
-		q string
-		a string
-		e string
-	}
-	easy := []entry{
-		{"Is localization S^{-1}R inverting elements of S? (yes/no)", "yes", "Fractions r/s with s∈S."},
-		{"Is R localized at prime ideal a local ring? (yes/no)", "yes", "R_p has unique maximal ideal."},
-		{"Does localization at S={1,2,4,8,...} give Z[1/2]? (yes/no)", "yes", "Invert powers of 2."},
-	}
-	hard := []entry{
-		{"Is field of fractions of integral domain localization at nonzero elements? (yes/no)", "yes", "S=R\\{0}."},
-		{"Does localization preserve exactness? (yes/no)", "yes", "Localization is exact functor."},
-		{"Is Z_{(p)} localization at complement of (p) local? (yes/no)", "yes", "Local ring at p."},
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	if rand.Intn(3) == 0 {
-		// production: fractions and maximal-ideal counts (unique answers).
-		type locEntry struct {
-			question string
-			answer   string
-			reason   string
-		}
-		locTable := []locEntry{
-			{"In Z[1/2], what is 1/2+1/4? (enter a fraction like 3/4)", "3/4", "Common denominator 4: 2/4+1/4=3/4."},
-			{"How many maximal ideals does the local ring Z_(p) have? (enter a number)", "1", "Local means unique maximal ideal."},
-			{"In Z[1/2], what is 2/4 reduced? (enter a fraction like 1/2)", "1/2", "Cancel 2: 2/4 = 1/2."},
-		}
-		v := locTable[rand.Intn(len(locTable))]
-		return groupChoice(v.question, v.answer, v.reason, choicesFor(v.answer)...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return groupYesNo(e.q, e.a, e.e)
+	return localizationProblem()
 }
 
 type finiteFieldGen struct{}
@@ -1134,169 +808,25 @@ func (g *finiteFieldGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type nilpotentGen struct{}
 
 func (g *nilpotentGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type entry struct {
-		q string
-		a string
-		e string
-	}
-	easy := []entry{
-		{"Is p-group nilpotent? (yes/no)", "yes", "Finite p-groups are nilpotent."},
-		{"Is nilpotent ⇒ solvable? (yes/no)", "yes", "Nilpotent groups are solvable."},
-		{"Does direct product of p-groups give nilpotent? (yes/no)", "yes", "Product of its Sylow subgroups."},
-	}
-	hard := []entry{
-		{"Is upper unitriangular group nilpotent? (yes/no)", "yes", "Heisenberg group nilpotent."},
-		{"Is S_3 nilpotent? (yes/no)", "no", "S_3 not nilpotent (nor its Sylow structure)."},
-		{"Does nilpotent have central series reaching G? (yes/no)", "yes", "Upper central series."},
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	if rand.Intn(3) == 0 {
-		// production: Sylow counts and nilpotency classes (unique answers).
-		type nilEntry struct {
-			question string
-			answer   string
-			reason   string
-		}
-		nilTable := []nilEntry{
-			{"A nilpotent group of order 12=2^2·3 has unique Sylow subgroups. How many Sylow subgroups total? (enter a number)", "2", "One Sylow 2-subgroup and one Sylow 3-subgroup."},
-			{"A_3 is abelian, hence nilpotent of class 1. What is its class? (enter a number)", "1", "Abelian groups have trivial commutators: class 1."},
-			{"A group of order 8=2^3 is a 2-group. What prime? (enter a number)", "2", "8 = 2^3: it is a 2-group, hence nilpotent."},
-		}
-		v := nilTable[rand.Intn(len(nilTable))]
-		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
-	}
-	e := pool[rand.Intn(len(pool))]
-	return groupYesNo(e.q, e.a, e.e)
+	return nilpotentGroupsProblem()
 }
 
 type solvableGen struct{}
 
 func (g *solvableGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type entry struct {
-		q string
-		a string
-		e string
-	}
-	easy := []entry{
-		{"Is solvable group one with subnormal series with abelian quotients? (yes/no)", "yes", "Derived series reaches 1."},
-		{"Is S_3 solvable? (yes/no)", "yes", "S_3 has series 1◃A_3◃S_3 with abelian quotients."},
-		{"Is S_5 solvable? (yes/no)", "no", "S_n for n≥5 non-solvable."},
-	}
-	hard := []entry{
-		{"Does Galois solvability correspond to group solvability? (yes/no)", "yes", "Polynomial solvable by radicals iff Galois group solvable."},
-		{"Is every p-group solvable? (yes/no)", "yes", "p-groups nilpotent ⇒ solvable."},
-		{"Does composition series refine solvable series? (yes/no)", "yes", "Jordan-Hölder."},
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	if rand.Intn(3) == 0 {
-		// production: orders inside solvable series (unique answers).
-		type solEntry struct {
-			question string
-			answer   string
-			reason   string
-		}
-		solTable := []solEntry{
-			{"S_3 has series 1◃A_3◃S_3. What is |A_3|? (enter a number)", "3", "A_3 has the 3 even permutations."},
-			{"S_n is non-solvable for n≥5. What is the smallest such n? (enter a number)", "5", "S_5 is the smallest non-solvable symmetric group."},
-			{"Derived series of S_3: S_3' = A_3, A_3' = 1. How many steps to reach 1? (enter a number)", "2", "Two derived subgroups: S_3 → A_3 → 1."},
-		}
-		v := solTable[rand.Intn(len(solTable))]
-		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
-	}
-	e := pool[rand.Intn(len(pool))]
-	return groupYesNo(e.q, e.a, e.e)
+	return solvableGroupsProblem()
 }
 
 type freeGroupGen struct{}
 
 func (g *freeGroupGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type entry struct {
-		q string
-		a string
-		e string
-	}
-	easy := []entry{
-		{"Is free group on 1 generator isomorphic to Z? (yes/no)", "yes", "F_1 ≅ Z."},
-		{"Does free group have presentation with no relations? (yes/no)", "yes", "Free = no relations."},
-		{"Is every group quotient of a free group? (yes/no)", "yes", "Free groups are free objects."},
-	}
-	hard := []entry{
-		{"Is free group on 2 generators non-abelian? (yes/no)", "yes", "F_2 non-abelian."},
-		{"Does Nielsen-Schreier state subgroups of free are free? (yes/no)", "yes", "Subgroups of free are free."},
-		{"Is free product Z * Z = F_2? (yes/no)", "yes", "Free product of Z's."},
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	if rand.Intn(3) == 0 {
-		// production: ranks and generator counts (unique answers).
-		type freeEntry struct {
-			question string
-			answer   string
-			reason   string
-		}
-		freeTable := []freeEntry{
-			{"F_1 ≅ Z. What is the rank of F_1? (enter a number)", "1", "One generator: rank 1."},
-			{"F_n/[F_n,F_n] ≅ Z^n. For n=3, what is the rank? (enter a number)", "3", "Abelianization of F_3 is Z^3."},
-			{"Z * Z ≅ F_2. How many generators? (enter a number)", "2", "Free product of two Z's: two generators."},
-		}
-		v := freeTable[rand.Intn(len(freeTable))]
-		return generator.Problem{Question: v.question, Answer: v.answer, Explanation: v.reason}
-	}
-	e := pool[rand.Intn(len(pool))]
-	return groupYesNo(e.q, e.a, e.e)
+	return freeGroupsProblem()
 }
 
 type noetherianGen struct{}
 
 func (g *noetherianGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type entry struct {
-		q string
-		a string
-		e string
-	}
-	easy := []entry{
-		{"Is Z Noetherian? (yes/no)", "yes", "PID ⇒ Noetherian, ACC on ideals."},
-		{"Does Hilbert basis say R Noetherian ⇒ R[x] Noetherian? (yes/no)", "yes", "Hilbert basis theorem."},
-		{"Is field Noetherian? (yes/no)", "yes", "Field has only 0 and itself."},
-	}
-	hard := []entry{
-		{"Is k[x1,x2,...] infinite variables non-Noetherian? (yes/no)", "yes", "Chain (x1) ⊂ (x1,x2) ⊂ ... never stabilizes."},
-		{"Are Noetherian rings closed under quotient? (yes/no)", "yes", "Quotient of Noetherian is Noetherian."},
-		{"Is localization of Noetherian Noetherian? (yes/no)", "yes", "Localization preserves Noetherian."},
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	if rand.Intn(3) == 0 {
-		// production: ideal counts and principal generators (unique answers).
-		type noeEntry struct {
-			question string
-			answer   string
-			reason   string
-		}
-		noeTable := []noeEntry{
-			{"A field has exactly how many ideals? (enter a number)", "2", "Only 0 and the field itself."},
-			{"Ideals of Z/12Z correspond to divisors of 12. How many divisors does 12 have? (enter a number)", "6", "1, 2, 3, 4, 6, 12: six divisors, six ideals."},
-			{"In the PID Z, the ideal (6,10) equals (d) for d=gcd(6,10). What is d? (enter a number)", "2", "gcd(6,10) = 2, so (6,10) = (2)."},
-		}
-		v := noeTable[rand.Intn(len(noeTable))]
-		return groupChoice(v.question, v.answer, v.reason, choicesFor(v.answer)...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return groupYesNo(e.q, e.a, e.e)
+	return noetherianRingsProblem()
 }
 
 type commutatorGen struct{}

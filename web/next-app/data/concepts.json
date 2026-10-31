@@ -1,7 +1,7 @@
 [
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.group.def",
     "label": "Definition of a group",
     "mastery_threshold": {
@@ -16,7 +16,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.group.examples",
     "label": "Examples of groups",
     "mastery_threshold": {
@@ -74,7 +74,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.rings.def",
     "label": "Rings and fields",
     "mastery_threshold": {
@@ -104,7 +104,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.structures.field",
     "label": "Fields: definition, examples, and properties",
     "mastery_threshold": {
@@ -118,7 +118,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.structures.module",
     "label": "Modules: definition, examples, and properties",
     "mastery_threshold": {
@@ -234,7 +234,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.rings.polynomial",
     "label": "Polynomial rings and field extensions",
     "mastery_threshold": {
@@ -278,7 +278,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.rings.ufd",
     "label": "Unique factorization domains",
     "mastery_threshold": {
@@ -292,7 +292,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.field.extension",
     "label": "Field extensions and splitting fields",
     "mastery_threshold": {
@@ -307,7 +307,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.structures.galois",
     "label": "Galois correspondence",
     "mastery_threshold": {
@@ -322,7 +322,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.rings.localization",
     "label": "Localization of rings",
     "mastery_threshold": {
@@ -350,7 +350,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.group.nilpotent",
     "label": "Nilpotent and solvable groups",
     "mastery_threshold": {
@@ -364,7 +364,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.structures.tensor",
     "label": "Tensor products of modules",
     "mastery_threshold": {
@@ -379,7 +379,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.group.solvable",
     "label": "Solvable groups and composition series",
     "mastery_threshold": {
@@ -393,7 +393,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.group.free",
     "label": "Free groups and presentations",
     "mastery_threshold": {
@@ -407,7 +407,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.rings.noetherian",
     "label": "Noetherian rings and Hilbert basis theorem",
     "mastery_threshold": {
@@ -421,7 +421,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.field.galois_group",
     "label": "Galois groups of polynomials",
     "mastery_threshold": {
@@ -435,7 +435,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.structures.exact_sequence",
     "label": "Exact sequences",
     "mastery_threshold": {
@@ -493,7 +493,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.group.simple",
     "label": "Simple groups",
     "mastery_threshold": {
@@ -615,7 +615,7 @@
   },
   {
     "domain": "abstract_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "abstract.field.algebraic",
     "label": "Algebraic and transcendental elements",
     "mastery_threshold": {
@@ -14832,7 +14832,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.order.completeness",
     "label": "The completeness axiom",
     "mastery_threshold": {
@@ -14860,7 +14860,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.order.nested_intervals",
     "label": "Nested intervals",
     "mastery_threshold": {
@@ -14874,7 +14874,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.order.density",
     "label": "Density of the rationals",
     "mastery_threshold": {
@@ -14888,7 +14888,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.order.countable",
     "label": "Countable sets",
     "mastery_threshold": {
@@ -14902,7 +14902,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.order.uncountable",
     "label": "The uncountability of the reals",
     "mastery_threshold": {
@@ -14916,7 +14916,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.order.extended",
     "label": "The extended real line",
     "mastery_threshold": {
@@ -14959,7 +14959,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.seq.subsequence",
     "label": "Subsequences",
     "mastery_threshold": {
@@ -14973,7 +14973,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.seq.bolzano_weierstrass",
     "label": "The Bolzano-Weierstrass theorem",
     "mastery_threshold": {
@@ -14988,7 +14988,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.seq.cauchy",
     "label": "Cauchy sequences",
     "mastery_threshold": {
@@ -15017,7 +15017,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.seq.tests",
     "label": "Comparison and ratio tests",
     "mastery_threshold": {
@@ -15032,7 +15032,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.seq.absolute",
     "label": "Absolute and conditional convergence",
     "mastery_threshold": {
@@ -15046,7 +15046,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.seq.rearrangement",
     "label": "Rearrangement of series",
     "mastery_threshold": {
@@ -15060,7 +15060,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.seq.cauchy_criterion",
     "label": "The Cauchy criterion for series",
     "mastery_threshold": {
@@ -15088,7 +15088,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.limit.sequential",
     "label": "The sequential criterion",
     "mastery_threshold": {
@@ -15103,7 +15103,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.limit.continuity",
     "label": "Continuity and its algebra",
     "mastery_threshold": {
@@ -15117,7 +15117,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.limit.ivt",
     "label": "The intermediate value theorem",
     "mastery_threshold": {
@@ -15131,7 +15131,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.limit.evt",
     "label": "The extreme value theorem",
     "mastery_threshold": {
@@ -15145,7 +15145,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.limit.uniform",
     "label": "Uniform continuity",
     "mastery_threshold": {
@@ -15160,7 +15160,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.limit.compact",
     "label": "Compactness and Heine-Borel",
     "mastery_threshold": {
@@ -15174,7 +15174,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.limit.connected",
     "label": "Connected sets",
     "mastery_threshold": {
@@ -15188,7 +15188,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.limit.discontinuity",
     "label": "Classification of discontinuities",
     "mastery_threshold": {
@@ -15202,7 +15202,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.limit.monotone_fn",
     "label": "Monotone functions",
     "mastery_threshold": {
@@ -15286,7 +15286,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.deriv.darboux",
     "label": "Darboux's theorem",
     "mastery_threshold": {
@@ -15342,7 +15342,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.deriv.uniform_conv",
     "label": "Uniform convergence",
     "mastery_threshold": {
@@ -15370,7 +15370,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.deriv.interchange",
     "label": "Interchange of limits",
     "mastery_threshold": {
@@ -15398,7 +15398,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.metric.open_closed",
     "label": "Open and closed sets",
     "mastery_threshold": {
@@ -15412,7 +15412,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.metric.closure",
     "label": "Closure and interior",
     "mastery_threshold": {
@@ -15426,7 +15426,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.metric.convergence",
     "label": "Convergence in metric spaces",
     "mastery_threshold": {
@@ -15440,7 +15440,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.metric.complete",
     "label": "Completeness",
     "mastery_threshold": {
@@ -15454,7 +15454,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.metric.compact",
     "label": "Compactness",
     "mastery_threshold": {
@@ -15468,7 +15468,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.metric.continuity",
     "label": "Continuity in metric spaces",
     "mastery_threshold": {
@@ -15496,7 +15496,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.metric.baire",
     "label": "Baire's category theorem",
     "mastery_threshold": {
@@ -15510,7 +15510,7 @@
   },
   {
     "domain": "real_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ra.metric.equivalent",
     "label": "Equivalent metrics",
     "mastery_threshold": {
@@ -16385,7 +16385,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.basics.metric",
     "label": "Metric spaces",
     "mastery_threshold": {
@@ -16458,7 +16458,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.hausdorff",
     "label": "Hausdorff spaces",
     "mastery_threshold": {
@@ -16473,7 +16473,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.quotient",
     "label": "Quotient topology",
     "mastery_threshold": {
@@ -16487,7 +16487,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.product",
     "label": "Product topology",
     "mastery_threshold": {
@@ -16501,7 +16501,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.urysohn",
     "label": "Urysohn's lemma",
     "mastery_threshold": {
@@ -16515,7 +16515,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.metrization",
     "label": "Urysohn metrization theorem",
     "mastery_threshold": {
@@ -16530,7 +16530,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.connected.path",
     "label": "Path-connected spaces",
     "mastery_threshold": {
@@ -16544,7 +16544,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.compact.local",
     "label": "Local compactness",
     "mastery_threshold": {
@@ -16558,7 +16558,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.separation.tietze",
     "label": "Tietze extension theorem",
     "mastery_threshold": {
@@ -16572,7 +16572,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.homotopy",
     "label": "Homotopy and fundamental group",
     "mastery_threshold": {
@@ -16587,7 +16587,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.manifold",
     "label": "Topological manifolds",
     "mastery_threshold": {
@@ -16602,7 +16602,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.connected.local_path",
     "label": "Locally path-connected spaces",
     "mastery_threshold": {
@@ -16616,7 +16616,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.compact.one_point",
     "label": "One-point compactification",
     "mastery_threshold": {
@@ -16630,7 +16630,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.separation.completely_regular",
     "label": "Completely regular spaces",
     "mastery_threshold": {
@@ -16658,7 +16658,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.manifold.orientability",
     "label": "Orientability of manifolds",
     "mastery_threshold": {
@@ -16672,7 +16672,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.embedding",
     "label": "Embedding theorems",
     "mastery_threshold": {
@@ -16686,7 +16686,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.knot",
     "label": "Knot theory basics",
     "mastery_threshold": {
@@ -16700,7 +16700,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.cohomology",
     "label": "Cohomology",
     "mastery_threshold": {
@@ -16714,7 +16714,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.compactification.stone_cech",
     "label": "Stone-Čech compactification",
     "mastery_threshold": {
@@ -16743,7 +16743,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.covering",
     "label": "Covering spaces",
     "mastery_threshold": {
@@ -16758,7 +16758,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.fundamental.van_kampen",
     "label": "Van Kampen theorem",
     "mastery_threshold": {
@@ -16773,7 +16773,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.fiber_bundle",
     "label": "Fiber bundles",
     "mastery_threshold": {
@@ -16788,7 +16788,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.homology.cellular",
     "label": "Cellular homology",
     "mastery_threshold": {
@@ -16803,7 +16803,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.cohomology.de_rham",
     "label": "De Rham cohomology",
     "mastery_threshold": {
@@ -16846,7 +16846,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.metric.limit_point",
     "label": "Limit points",
     "mastery_threshold": {
@@ -16874,7 +16874,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.metric.complete",
     "label": "Completeness and Cauchy sequences",
     "mastery_threshold": {
@@ -16888,7 +16888,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.metric.basis",
     "label": "Bases and subbases",
     "mastery_threshold": {
@@ -16902,7 +16902,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.metric.subspace",
     "label": "The subspace topology",
     "mastery_threshold": {
@@ -16916,7 +16916,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.metric.dense",
     "label": "Dense sets and separability",
     "mastery_threshold": {
@@ -16930,7 +16930,7 @@
   },
   {
     "domain": "topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "topo.invariant.homeomorphism",
     "label": "Homeomorphisms",
     "mastery_threshold": {

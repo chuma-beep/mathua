@@ -299,109 +299,31 @@ func (g *fundamentalGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type orientabilityGen struct{}
 
 func (g *orientabilityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type entry struct {
-		question string
-		answer   string
-		reason   string
-	}
-	easy := []entry{
-		{"Which band is non-orientable: cylinder or Mobius? (type one word)", "Mobius", "The Mobius band has one side: a loop around it flips orientation."},
-		{"Is S^2 orientable? (yes/no)", "yes", "Sphere is orientable (outward normal field)."},
-		{"Is Mobius band orientable? (yes/no)", "no", "Möbius has one side, non-orientable."},
-		{"Is torus T^2 orientable? (yes/no)", "yes", "Torus is orientable."},
-	}
-	hard := []entry{
-		{"Is Klein bottle non-orientable? (yes/no)", "yes", "Contains Möbius band."},
-		{"Does orientability mean consistent choice of local orientation? (yes/no)", "yes", "Atlas with positive Jacobian transitions."},
-		{"Is R^n orientable? (yes/no)", "yes", "Euclidean space orientable."},
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
+	return orientabilityProblem()
 }
 
 type embeddingGen struct{}
 
 func (g *embeddingGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type entry struct{ q, a, e string }
-	easy := []entry{
-		{"What is the Whitney target for a closed n-manifold? (type like R^2n)", "R^2n", "Whitney embeds closed n-manifolds in R^2n."},
-		{"Is an embedding an injective immersion homeomorphic onto its image? (yes/no)", "yes", "Embedding definition."},
-		{"Is the Alexander horned sphere tame? (yes/no)", "no", "It is the classic wild embedding of S^2 in R^3."},
-		{"Does Whitney embedding embed n-manifolds in R^2n? (yes/no)", "yes", "Whitney theorem."},
-	}
-	hard := []entry{{"Does Nash embed Riemannian manifold isometrically in R^n? (yes/no)", "yes", "Nash embedding."}, {"Is Alexander horned sphere embedding wild? (yes/no)", "yes", "Wild embedding."}, {"Does Schoenflies generalize Jordan curve? (yes/no)", "yes", "Sphere."}}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return embeddingProblem()
 }
 
 type knotGen struct{}
 
 func (g *knotGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type entry struct{ q, a, e string }
-	easy := []entry{
-		{"What is the crossing number of the trefoil?", "3", "Three crossings: the simplest nontrivial knot."},
-		{"Is the unknot trivial? (yes/no)", "yes", "Unknotted circle bounds a disc."},
-		{"Is the figure-eight knot the same as the trefoil? (yes/no)", "no", "Figure-eight is 4_1 with four crossings; trefoil is 3_1."},
-		{"Does the trefoil have crossing number 3? (yes/no)", "yes", "Simplest nontrivial knot."},
-	}
-	hard := []entry{{"Is Jones polynomial knot invariant? (yes/no)", "yes", "Jones."}, {"Does Gordon-Luecke show knot determined by complement? (yes/no)", "yes", "Knot complement."}, {"Is figure-eight knot 4_1? (yes/no)", "yes", "Four crossings."}}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return knotProblem()
 }
 
 type cohomologyGen struct{}
 
 func (g *cohomologyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type entry struct{ q, a, e string }
-	easy := []entry{
-		{"What is H^0 of a connected space? (type like Z)", "Z", "H^0 counts components: one copy of Z per component."},
-		{"Is cohomology dual to homology? (yes/no)", "yes", "Universal coefficients pair them."},
-		{"Does de Rham cohomology use differential forms? (yes/no)", "yes", "Smooth manifolds: closed forms modulo exact."},
-		{"Is H^0 the group counting connected components? (yes/no)", "yes", "H^0 records components."},
-	}
-	hard := []entry{{"Does cohomology ring have cup product? (yes/no)", "yes", "Ring structure."}, {"Is singular cohomology homotopy invariant? (yes/no)", "yes", "Homotopy."}, {"Does Poincaré duality hold for compact orientable manifold? (yes/no)", "yes", "Duality."}}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return cohomologyProblem()
 }
 
 type stoneCechGen struct{}
 
 func (g *stoneCechGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type entry struct{ q, a, e string }
-	easy := []entry{
-		{"Which compactification is largest: one-point or Stone-Cech? (type with hyphen)", "Stone-Cech", "Stone-Cech is the universal (largest) compactification of Tychonoff spaces."},
-		{"Does beta N contain a remainder N*? (yes/no)", "yes", "The growth beta N minus N is the remainder."},
-		{"Is beta R metrizable? (yes/no)", "no", "Stone-Cech remainders are huge and non-metrizable."},
-		{"Is Tychonoff exactly embeddable in compact Hausdorff? (yes/no)", "yes", "Characterization of Tychonoff spaces."},
-	}
-	hard := []entry{{"Is βR not metrizable? (yes/no)", "yes", "Huge."}, {"Does Stone-Čech of discrete is ultrafilters? (yes/no)", "yes", "βD."}, {"Is completely regular iff subspace of compact Hausdorff? (yes/no)", "yes", "Tychonoff."}}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return stoneCechProblem()
 }
 
 // dimensionGen asks for the Lebesgue covering dimension of a space whose
@@ -452,279 +374,19 @@ func (g *dimensionGen) Generate(ctx generator.GeneratorContext) generator.Proble
 type coveringGen struct{}
 
 func (g *coveringGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	mode := rand.Intn(4)
-	switch mode {
-	case 0:
-		// Composed covering map degree: p(z) = z^a, q(z) = z^b => (p o q)(z) = z^(a*b)
-		a := rand.Intn(3) + 2 // 2 to 4
-		b := rand.Intn(3) + 2 // 2 to 4
-		deg := a * b
-		ansStr := strconv.Itoa(deg)
-		q := fmt.Sprintf("Let \\(p: S^1 \\to S^1\\) be the %d-sheeted covering \\(z \\mapsto z^{%d}\\), and let \\(q: S^1 \\to S^1\\) be the %d-sheeted covering \\(z \\mapsto z^{%d}\\). How many sheets does the composite covering map \\(p \\circ q\\) have?", a, a, b, b)
-		ex := fmt.Sprintf("The composite covering map is given by \\((p \\circ q)(z) = p(z^{%d}) = (z^{%d})^{%d} = z^{%d}\\), which has degree %d and therefore %d sheets.", b, b, a, deg, deg, deg)
-		return generator.Problem{
-			Question:    q,
-			Answer:      ansStr,
-			Explanation: ex,
-			Facts: map[string]string{
-				"a":      strconv.Itoa(a),
-				"b":      strconv.Itoa(b),
-				"answer": ansStr,
-			},
-		}
-	case 1:
-		// Genus of covering surface: chi(tilde{X}) = d * chi(X) = d * (2 - 2g) = 2 - 2*tilde{g}
-		// If g=2, chi(X) = -2. For d=3: chi(tilde{X}) = -6 => 2 - 2*tilde{g} = -6 => tilde{g} = 4.
-		// For d=2: chi = -4 => 2 - 2*tilde{g} = -4 => tilde{g} = 3.
-		// For d=4: chi = -8 => 2 - 2*tilde{g} = -8 => tilde{g} = 5.
-		type covSurface struct {
-			g, d, tildeG int
-		}
-		cases := []covSurface{
-			{2, 2, 3},
-			{2, 3, 4},
-			{2, 4, 5},
-			{3, 2, 5},
-		}
-		c := cases[rand.Intn(len(cases))]
-		ansStr := strconv.Itoa(c.tildeG)
-		q := fmt.Sprintf("Let \\(X\\) be a closed orientable surface of genus %d. If \\(\\tilde{X} \\to X\\) is a connected %d-fold covering space, what is the genus of \\(\\tilde{X}\\)?", c.g, c.d)
-		chiX := 2 - 2*c.g
-		chiCover := c.d * chiX
-		ex := fmt.Sprintf("The Euler characteristic of \\(X\\) is \\(\\chi(X) = 2 - 2(%d) = %d\\). The covering space has Euler characteristic \\(\\chi(\\tilde{X}) = %d \\times (%d) = %d\\). Solving \\(2 - 2\\tilde{g} = %d\\) yields genus \\(\\tilde{g} = %d\\).", c.g, chiX, c.d, chiX, chiCover, chiCover, c.tildeG)
-		return generator.Problem{
-			Question:    q,
-			Answer:      ansStr,
-			Explanation: ex,
-			Facts: map[string]string{
-				"g":      strconv.Itoa(c.g),
-				"d":      strconv.Itoa(c.d),
-				"answer": ansStr,
-			},
-		}
-	case 2:
-		// Euler characteristic of covering space chi(tilde{X}) = d * chi(X)
-		// We use strictly negative chi(X) <= -1 with d >= 2, ensuring chi(tilde{X}) < chi(X)
-		type covChiCase struct {
-			d, chiX, ans int
-		}
-		cases := []covChiCase{
-			{2, -2, -4},
-			{3, -2, -6},
-			{4, -2, -8},
-			{2, -3, -6},
-			{3, -3, -9},
-			{2, -1, -2},
-			{3, -1, -3},
-		}
-		c := cases[rand.Intn(len(cases))]
-		ansStr := strconv.Itoa(c.ans)
-		q := fmt.Sprintf("If a compact surface \\(X\\) has Euler characteristic \\(\\chi(X) = %d\\) and \\(\\tilde{X} \\to X\\) is a %d-sheeted covering space, what is \\(\\chi(\\tilde{X})\\)?", c.chiX, c.d)
-		ex := fmt.Sprintf("The Euler characteristic of an \\(n\\)-sheeted covering satisfies \\(\\chi(\\tilde{X}) = n \\cdot \\chi(X) = %d \\times (%d) = %d\\).", c.d, c.chiX, c.ans)
-		return generator.Problem{
-			Question:    q,
-			Answer:      ansStr,
-			Explanation: ex,
-			Facts: map[string]string{
-				"d":      strconv.Itoa(c.d),
-				"chiX":   strconv.Itoa(c.chiX),
-				"answer": ansStr,
-			},
-		}
-	default:
-		// Universal cover fundamental group
-		correct := `\{0\}`
-		dist1 := `\(\mathbb{Z}\)`
-		dist2 := `\(\mathbb{Z} \times \mathbb{Z}\)`
-		dist3 := `\(\mathbb{Z}/2\mathbb{Z}\)`
-		choices := []string{correct, dist1, dist2, dist3}
-		rand.Shuffle(len(choices), func(i, j int) { choices[i], choices[j] = choices[j], choices[i] })
-		q := fmt.Sprintf("By definition, what is the fundamental group \\(\\pi_1(\\tilde{X})\\) of the universal covering space of a connected manifold \\(X\\)?\n\nA) %s\n\nB) %s\n\nC) %s\n\nD) %s",
-			choices[0], choices[1], choices[2], choices[3])
-		ex := "The universal covering space is simply connected by definition, which means its fundamental group is trivial: \\(\\pi_1(\\tilde{X}) = \\{0\\}\\)."
-		return generator.Problem{
-			Question:    q,
-			Answer:      correct,
-			Explanation: ex,
-			Facts: map[string]string{
-				"answer": correct,
-			},
-		}
-	}
+	return coveringProblem()
 }
 
 type vanKampenGen struct{}
 
 func (g *vanKampenGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	mode := rand.Intn(4)
-	switch mode {
-	case 0:
-		// Standard symmetric presentation of genus g surface fundamental group has 2g generators
-		gVal := rand.Intn(3) + 2 // 2 to 4
-		ans := 2 * gVal
-		ansStr := strconv.Itoa(ans)
-		q := fmt.Sprintf("By the Seifert–van Kampen theorem, the fundamental group of a closed orientable surface of genus %d has standard presentation \\(\\langle a_1, b_1, \\dots, a_g, b_g \\mid \\prod_{i=1}^g [a_i, b_i] = 1\\rangle\\). How many generators appear in this presentation?", gVal)
-		ex := fmt.Sprintf("Each of the %d handles contributes a pair of loops \\(a_i\\) and \\(b_i\\), giving exactly \\(2g = 2(%d) = %d\\) generators.", gVal, gVal, ans)
-		return generator.Problem{
-			Question:    q,
-			Answer:      ansStr,
-			Explanation: ex,
-			Facts: map[string]string{
-				"genus":  strconv.Itoa(gVal),
-				"answer": ansStr,
-			},
-		}
-	case 1:
-		// Fundamental group of torus T^2
-		correct := `\(\mathbb{Z} \times \mathbb{Z}\)`
-		dist1 := `\(\mathbb{Z} * \mathbb{Z}\)`
-		dist2 := `\(\mathbb{Z}\)`
-		dist3 := `\(\{0\}\)`
-		choices := []string{correct, dist1, dist2, dist3}
-		rand.Shuffle(len(choices), func(i, j int) { choices[i], choices[j] = choices[j], choices[i] })
-		q := fmt.Sprintf("By the Seifert–van Kampen theorem applied to the standard planar square cell with boundary \\(a b a^{-1} b^{-1}\\), what is the fundamental group \\(\\pi_1(T^2)\\) of the 2-torus?\n\nA) %s\n\nB) %s\n\nC) %s\n\nD) %s",
-			choices[0], choices[1], choices[2], choices[3])
-		ex := "The fundamental group of the 1-skeleton is \\(F_2 = \\langle a, b \\rangle\\), and attaching the 2-cell imposes the single relation \\(a b a^{-1} b^{-1} = 1\\), giving the abelian presentation \\(\\langle a, b \\mid [a, b] = 1\\rangle \\cong \\mathbb{Z} \\times \\mathbb{Z}\\)."
-		return generator.Problem{
-			Question:    q,
-			Answer:      correct,
-			Explanation: ex,
-			Facts: map[string]string{
-				"answer": correct,
-			},
-		}
-	case 2:
-		// Klein bottle abelianization
-		correct := `\(\mathbb{Z} \times \mathbb{Z}/2\mathbb{Z}\)`
-		dist1 := `\(\mathbb{Z} \times \mathbb{Z}\)`
-		dist2 := `\(\{0\}\)`
-		dist3 := `\(\mathbb{Z} * \mathbb{Z}\)`
-		choices := []string{correct, dist1, dist2, dist3}
-		rand.Shuffle(len(choices), func(i, j int) { choices[i], choices[j] = choices[j], choices[i] })
-		q := fmt.Sprintf("By the Seifert–van Kampen theorem, the Klein bottle has fundamental group presentation \\(\\langle a, b \\mid a b a^{-1} b = 1\\rangle\\). What is the first homology group \\(H_1(K; \\mathbb{Z})\\) obtained by abelianizing this group?\n\nA) %s\n\nB) %s\n\nC) %s\n\nD) %s",
-			choices[0], choices[1], choices[2], choices[3])
-		ex := "Abelianizing the relation gives \\(a + b - a + b = 0\\), which simplifies to \\(2b = 0\\). Since \\(a\\) is unconstrained and \\(b\\) has order 2, the abelianization is \\(\\mathbb{Z} \\times \\mathbb{Z}/2\\mathbb{Z}\\)."
-		return generator.Problem{
-			Question:    q,
-			Answer:      correct,
-			Explanation: ex,
-			Facts: map[string]string{
-				"answer": correct,
-			},
-		}
-	default:
-		// Rank of H_1 of wedge of k 2-tori: each torus has H_1 = Z^2, so wedge has rank 2k
-		k := rand.Intn(4) + 2 // 2 to 5
-		ans := 2 * k
-		ansStr := strconv.Itoa(ans)
-		q := fmt.Sprintf("What is the rank of the first homology group \\(H_1\\left(\\bigvee_{i=1}^{%d} T^2; \\mathbb{Z}\\right)\\) of a wedge sum of %d 2-dimensional tori?", k, k)
-		ex := fmt.Sprintf("For a wedge sum, \\(H_1\\left(\\bigvee_{i=1}^{%d} T^2\\right) \\cong \\bigoplus_{i=1}^{%d} H_1(T^2) \\cong \\bigoplus_{i=1}^{%d} \\mathbb{Z}^2 \\cong \\mathbb{Z}^{%d}\\), which has rank %d.", k, k, k, ans, ans)
-		return generator.Problem{
-			Question:    q,
-			Answer:      ansStr,
-			Explanation: ex,
-			Facts: map[string]string{
-				"k":      strconv.Itoa(k),
-				"answer": ansStr,
-			},
-		}
-	}
+	return vanKampenProblem()
 }
 
 type fiberBundleGen struct{}
 
 func (g *fiberBundleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	mode := rand.Intn(4)
-	switch mode {
-	case 0:
-		// Hopf fibrations fiber dimension
-		type hopfCase struct {
-			total, base, fiber int
-		}
-		cases := []hopfCase{
-			{3, 2, 1},
-			{7, 4, 3},
-			{15, 8, 7},
-		}
-		c := cases[rand.Intn(len(cases))]
-		ansStr := strconv.Itoa(c.fiber)
-		q := fmt.Sprintf("In the Hopf fibration \\(S^{%d} \\to S^{%d}\\), what is the topological dimension of the fiber sphere?", c.total, c.base)
-		ex := fmt.Sprintf("The Hopf fibration has total space \\(S^{%d}\\) and base \\(S^{%d}\\). The fiber is \\(S^{%d}\\), which has dimension %d.", c.total, c.base, c.fiber, c.fiber)
-		return generator.Problem{
-			Question:    q,
-			Answer:      ansStr,
-			Explanation: ex,
-			Facts: map[string]string{
-				"total":  strconv.Itoa(c.total),
-				"base":   strconv.Itoa(c.base),
-				"fiber":  ansStr,
-				"answer": ansStr,
-			},
-		}
-	case 1:
-		// Total space dimension of tangent bundle TM for n-dimensional manifold: dim(TM) = 2n
-		n := rand.Intn(4) + 3 // 3 to 6
-		ans := 2 * n
-		ansStr := strconv.Itoa(ans)
-		q := fmt.Sprintf("What is the manifold dimension of the total space of the tangent bundle \\(T M\\) of an %d-dimensional smooth manifold \\(M\\)?", n)
-		ex := fmt.Sprintf("The tangent bundle \\(T M\\) has base dimension \\(\\dim(M) = %d\\) and fiber dimension \\(\\dim(T_p M) = %d\\), so the total space has dimension \\(%d + %d = %d\\).", n, n, n, n, ans)
-		return generator.Problem{
-			Question:    q,
-			Answer:      ansStr,
-			Explanation: ex,
-			Facts: map[string]string{
-				"n":      strconv.Itoa(n),
-				"answer": ansStr,
-			},
-		}
-	case 2:
-		// Euler characteristic product for surface bundles
-		// chi(B) = 2 - 2*gB, chi(F) = 2 - 2*gF
-		type bundleCase struct {
-			gB, gF, chiE int
-		}
-		cases := []bundleCase{
-			{2, 2, 4},
-			{2, 3, 8},
-			{3, 2, 8},
-			{3, 3, 16},
-		}
-		c := cases[rand.Intn(len(cases))]
-		ansStr := strconv.Itoa(c.chiE)
-		q := fmt.Sprintf("For a fiber bundle \\(F \\hookrightarrow E \\to B\\) where base \\(B\\) is a closed surface of genus %d and fiber \\(F\\) is a closed surface of genus %d, what is the Euler characteristic \\(\\chi(E)\\)?", c.gB, c.gF)
-		chiB := 2 - 2*c.gB
-		chiF := 2 - 2*c.gF
-		ex := fmt.Sprintf("The Euler characteristics are \\(\\chi(B) = 2 - 2(%d) = %d\\) and \\(\\chi(F) = 2 - 2(%d) = %d\\). By multiplicativity, \\(\\chi(E) = \\chi(B) \\cdot \\chi(F) = (%d) \\times (%d) = %d\\).", c.gB, chiB, c.gF, chiF, chiB, chiF, c.chiE)
-		return generator.Problem{
-			Question:    q,
-			Answer:      ansStr,
-			Explanation: ex,
-			Facts: map[string]string{
-				"gB":     strconv.Itoa(c.gB),
-				"gF":     strconv.Itoa(c.gF),
-				"answer": ansStr,
-			},
-		}
-	default:
-		// Vector bundle fiber type
-		correct := `\(\mathbb{R}^n\)`
-		dist1 := `\(S^n\)`
-		dist2 := `\(\mathbb{R}^{n+1}\)`
-		dist3 := `\(S^{n-1}\)`
-		choices := []string{correct, dist1, dist2, dist3}
-		rand.Shuffle(len(choices), func(i, j int) { choices[i], choices[j] = choices[j], choices[i] })
-		q := fmt.Sprintf("What is the typical fiber of the tangent bundle \\(T M\\) of an \\(n\\)-dimensional smooth manifold \\(M\\)?\n\nA) %s\n\nB) %s\n\nC) %s\n\nD) %s",
-			choices[0], choices[1], choices[2], choices[3])
-		ex := "The tangent space \\(T_p M\\) at any point \\(p \\in M\\) is an \\(n\\)-dimensional real vector space, isomorphic to \\(\\mathbb{R}^n\\)."
-		return generator.Problem{
-			Question:    q,
-			Answer:      correct,
-			Explanation: ex,
-			Facts: map[string]string{
-				"answer": correct,
-			},
-		}
-	}
+	return fiberBundleProblem()
 }
 
 type cellularHomologyGen struct{}

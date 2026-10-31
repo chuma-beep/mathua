@@ -4,7 +4,7 @@
     "label": "Definition of a group",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.groups",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.logic.quantifiers",
       "nt.basics.modular"
@@ -19,7 +19,7 @@
     "label": "Examples of groups",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.groups",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "abstract.group.def"
     ],
@@ -77,7 +77,7 @@
     "label": "Rings and fields",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.rings",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "abstract.group.subgroup",
       "alg.factor.diff_squares"
@@ -107,7 +107,7 @@
     "label": "Fields: definition, examples, and properties",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.structures",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "abstract.rings.def"
     ],
@@ -121,7 +121,7 @@
     "label": "Modules: definition, examples, and properties",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.structures",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "abstract.structures.field"
     ],
@@ -237,7 +237,7 @@
     "label": "Polynomial rings and field extensions",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.rings",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "abstract.rings.ideal",
       "abstract.structures.field"
@@ -281,7 +281,7 @@
     "label": "Unique factorization domains",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.rings",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "abstract.rings.polynomial"
     ],
@@ -295,7 +295,7 @@
     "label": "Field extensions and splitting fields",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.fields",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "abstract.rings.ufd",
       "abstract.rings.quotient"
@@ -310,7 +310,7 @@
     "label": "Galois correspondence",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.structures",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "abstract.field.extension",
       "abstract.group.sylow"
@@ -325,7 +325,7 @@
     "label": "Localization of rings",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.rings",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "abstract.rings.ufd"
     ],
@@ -353,7 +353,7 @@
     "label": "Nilpotent and solvable groups",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.groups",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "abstract.group.sylow"
     ],
@@ -367,7 +367,7 @@
     "label": "Tensor products of modules",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.structures",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "abstract.structures.module",
       "abstract.rings.localization"
@@ -382,7 +382,7 @@
     "label": "Solvable groups and composition series",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.groups",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "abstract.group.nilpotent"
     ],
@@ -396,7 +396,7 @@
     "label": "Free groups and presentations",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.groups",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "abstract.group.solvable"
     ],
@@ -410,7 +410,7 @@
     "label": "Noetherian rings and Hilbert basis theorem",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.rings",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "abstract.rings.localization"
     ],
@@ -424,7 +424,7 @@
     "label": "Galois groups of polynomials",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.fields",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "abstract.field.finite"
     ],
@@ -438,7 +438,7 @@
     "label": "Exact sequences",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.structures",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "abstract.structures.tensor"
     ],
@@ -496,7 +496,7 @@
     "label": "Simple groups",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.groups",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "abstract.group.normal",
       "abstract.group.quotient_group"
@@ -618,7 +618,7 @@
     "label": "Algebraic and transcendental elements",
     "domain": "abstract_algebra",
     "subdomain": "abstract_algebra.fields",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "abstract.field.extension",
       "abstract.rings.polynomial"

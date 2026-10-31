@@ -18,7 +18,7 @@
     "label": "The completeness axiom",
     "domain": "real_analysis",
     "subdomain": "real_analysis.order",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ra.order.supremum"
     ],
@@ -46,7 +46,7 @@
     "label": "Nested intervals",
     "domain": "real_analysis",
     "subdomain": "real_analysis.order",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ra.order.completeness"
     ],
@@ -60,7 +60,7 @@
     "label": "Density of the rationals",
     "domain": "real_analysis",
     "subdomain": "real_analysis.order",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ra.order.archimedean"
     ],
@@ -74,7 +74,7 @@
     "label": "Countable sets",
     "domain": "real_analysis",
     "subdomain": "real_analysis.order",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ra.order.density"
     ],
@@ -88,7 +88,7 @@
     "label": "The uncountability of the reals",
     "domain": "real_analysis",
     "subdomain": "real_analysis.order",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ra.order.countable"
     ],
@@ -102,7 +102,7 @@
     "label": "The extended real line",
     "domain": "real_analysis",
     "subdomain": "real_analysis.order",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ra.order.supremum"
     ],
@@ -145,7 +145,7 @@
     "label": "Subsequences",
     "domain": "real_analysis",
     "subdomain": "real_analysis.seq",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ra.seq.convergence"
     ],
@@ -159,7 +159,7 @@
     "label": "The Bolzano-Weierstrass theorem",
     "domain": "real_analysis",
     "subdomain": "real_analysis.seq",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ra.seq.subsequence",
       "calc.seq.bounded"
@@ -174,7 +174,7 @@
     "label": "Cauchy sequences",
     "domain": "real_analysis",
     "subdomain": "real_analysis.seq",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "calc.seq.cauchy",
       "ra.seq.convergence"
@@ -203,7 +203,7 @@
     "label": "Comparison and ratio tests",
     "domain": "real_analysis",
     "subdomain": "real_analysis.seq",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "calc.series.ratio_test",
       "calc.series.direct_compare"
@@ -218,7 +218,7 @@
     "label": "Absolute and conditional convergence",
     "domain": "real_analysis",
     "subdomain": "real_analysis.seq",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "calc.series.absolute"
     ],
@@ -232,7 +232,7 @@
     "label": "Rearrangement of series",
     "domain": "real_analysis",
     "subdomain": "real_analysis.seq",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ra.seq.absolute"
     ],
@@ -246,7 +246,7 @@
     "label": "The Cauchy criterion for series",
     "domain": "real_analysis",
     "subdomain": "real_analysis.seq",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "calc.series.cauchy_criterion"
     ],
@@ -274,7 +274,7 @@
     "label": "The sequential criterion",
     "domain": "real_analysis",
     "subdomain": "real_analysis.limit",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ra.limit.function",
       "ra.seq.convergence"
@@ -289,7 +289,7 @@
     "label": "Continuity and its algebra",
     "domain": "real_analysis",
     "subdomain": "real_analysis.limit",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "calc.limit.continuity"
     ],
@@ -303,7 +303,7 @@
     "label": "The intermediate value theorem",
     "domain": "real_analysis",
     "subdomain": "real_analysis.limit",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ra.limit.continuity"
     ],
@@ -317,7 +317,7 @@
     "label": "The extreme value theorem",
     "domain": "real_analysis",
     "subdomain": "real_analysis.limit",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ra.limit.continuity"
     ],
@@ -331,7 +331,7 @@
     "label": "Uniform continuity",
     "domain": "real_analysis",
     "subdomain": "real_analysis.limit",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "calc.limit.uniform_continuity",
       "ra.limit.continuity"
@@ -346,7 +346,7 @@
     "label": "Compactness and Heine-Borel",
     "domain": "real_analysis",
     "subdomain": "real_analysis.limit",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ra.limit.evt"
     ],
@@ -360,7 +360,7 @@
     "label": "Connected sets",
     "domain": "real_analysis",
     "subdomain": "real_analysis.limit",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "calc.limit.continuity"
     ],
@@ -374,7 +374,7 @@
     "label": "Classification of discontinuities",
     "domain": "real_analysis",
     "subdomain": "real_analysis.limit",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "calc.limit.discontinuity"
     ],
@@ -388,7 +388,7 @@
     "label": "Monotone functions",
     "domain": "real_analysis",
     "subdomain": "real_analysis.limit",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ra.seq.monotone"
     ],
@@ -472,7 +472,7 @@
     "label": "Darboux's theorem",
     "domain": "real_analysis",
     "subdomain": "real_analysis.deriv",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ra.deriv.mvt"
     ],
@@ -528,7 +528,7 @@
     "label": "Uniform convergence",
     "domain": "real_analysis",
     "subdomain": "real_analysis.deriv",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ra.limit.uniform"
     ],
@@ -556,7 +556,7 @@
     "label": "Interchange of limits",
     "domain": "real_analysis",
     "subdomain": "real_analysis.deriv",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ra.deriv.uniform_conv"
     ],
@@ -584,7 +584,7 @@
     "label": "Open and closed sets",
     "domain": "real_analysis",
     "subdomain": "real_analysis.metric",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ra.metric.spaces"
     ],
@@ -598,7 +598,7 @@
     "label": "Closure and interior",
     "domain": "real_analysis",
     "subdomain": "real_analysis.metric",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ra.metric.open_closed"
     ],
@@ -612,7 +612,7 @@
     "label": "Convergence in metric spaces",
     "domain": "real_analysis",
     "subdomain": "real_analysis.metric",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ra.metric.spaces"
     ],
@@ -626,7 +626,7 @@
     "label": "Completeness",
     "domain": "real_analysis",
     "subdomain": "real_analysis.metric",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ra.seq.cauchy"
     ],
@@ -640,7 +640,7 @@
     "label": "Compactness",
     "domain": "real_analysis",
     "subdomain": "real_analysis.metric",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ra.limit.compact"
     ],
@@ -654,7 +654,7 @@
     "label": "Continuity in metric spaces",
     "domain": "real_analysis",
     "subdomain": "real_analysis.metric",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ra.limit.continuity"
     ],
@@ -682,7 +682,7 @@
     "label": "Baire's category theorem",
     "domain": "real_analysis",
     "subdomain": "real_analysis.metric",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ra.metric.complete"
     ],
@@ -696,7 +696,7 @@
     "label": "Equivalent metrics",
     "domain": "real_analysis",
     "subdomain": "real_analysis.metric",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ra.metric.open_closed"
     ],
