@@ -544,19 +544,15 @@ func (g *submoduleGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		k := 1 + rand.Intn(m)
 		var vecs []string
 		for j := 0; j < k; j++ {
-			v := "("
+			parts := make([]string, m)
 			for i := 0; i < m; i++ {
-				if i > 0 {
-					v += ", "
-				}
 				if i == j {
-					v += "1"
+					parts[i] = "1"
 				} else {
-					v += "0"
+					parts[i] = "0"
 				}
 			}
-			v += ")"
-			vecs = append(vecs, v)
+			vecs = append(vecs, fmt.Sprintf("(%s)", strings.Join(parts, ", ")))
 		}
 		return generator.Problem{
 			Question:    fmt.Sprintf("What is the dimension of the subspace of R^%d spanned by %s? (enter a number)", m, joinWithAnd(vecs)),
