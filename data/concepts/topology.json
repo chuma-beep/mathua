@@ -4,7 +4,7 @@
     "label": "Metric spaces",
     "domain": "topology",
     "subdomain": "topology.basics",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "calc.limit.continuity",
       "linalg.vector.dot"
@@ -77,7 +77,7 @@
     "label": "Hausdorff spaces",
     "domain": "topology",
     "subdomain": "topology.separation",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.basics.metric",
       "topo.basics.continuous"
@@ -92,7 +92,7 @@
     "label": "Quotient topology",
     "domain": "topology",
     "subdomain": "topology.constructions",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.basics.continuous"
     ],
@@ -106,7 +106,7 @@
     "label": "Product topology",
     "domain": "topology",
     "subdomain": "topology.constructions",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.basics.open_closed"
     ],
@@ -120,7 +120,7 @@
     "label": "Urysohn's lemma",
     "domain": "topology",
     "subdomain": "topology.separation",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.hausdorff"
     ],
@@ -134,7 +134,7 @@
     "label": "Urysohn metrization theorem",
     "domain": "topology",
     "subdomain": "topology.metrization",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.urysohn",
       "topo.basics.metric"
@@ -149,7 +149,7 @@
     "label": "Path-connected spaces",
     "domain": "topology",
     "subdomain": "topology.connected",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.connected"
     ],
@@ -163,7 +163,7 @@
     "label": "Local compactness",
     "domain": "topology",
     "subdomain": "topology.compact",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.compact"
     ],
@@ -177,7 +177,7 @@
     "label": "Tietze extension theorem",
     "domain": "topology",
     "subdomain": "topology.separation",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.urysohn"
     ],
@@ -191,7 +191,7 @@
     "label": "Homotopy and fundamental group",
     "domain": "topology",
     "subdomain": "topology.algebraic",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.connected.path",
       "abstract.group.def"
@@ -206,7 +206,7 @@
     "label": "Topological manifolds",
     "domain": "topology",
     "subdomain": "topology.manifolds",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.homotopy",
       "topo.product"
@@ -221,7 +221,7 @@
     "label": "Locally path-connected spaces",
     "domain": "topology",
     "subdomain": "topology.connected",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.connected.path"
     ],
@@ -235,7 +235,7 @@
     "label": "One-point compactification",
     "domain": "topology",
     "subdomain": "topology.compact",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.compact.local"
     ],
@@ -249,7 +249,7 @@
     "label": "Completely regular spaces",
     "domain": "topology",
     "subdomain": "topology.separation",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.separation.tietze"
     ],
@@ -277,7 +277,7 @@
     "label": "Orientability of manifolds",
     "domain": "topology",
     "subdomain": "topology.manifolds",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.manifold"
     ],
@@ -291,7 +291,7 @@
     "label": "Embedding theorems",
     "domain": "topology",
     "subdomain": "topology.manifolds",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.manifold.orientability"
     ],
@@ -305,7 +305,7 @@
     "label": "Knot theory basics",
     "domain": "topology",
     "subdomain": "topology.knot",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.homotopy.fundamental"
     ],
@@ -319,7 +319,7 @@
     "label": "Cohomology",
     "domain": "topology",
     "subdomain": "topology.algebraic",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.homotopy.fundamental"
     ],
@@ -333,7 +333,7 @@
     "label": "Stone-Čech compactification",
     "domain": "topology",
     "subdomain": "topology.compact",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.compact.one_point",
       "topo.separation.completely_regular"
@@ -362,7 +362,7 @@
     "label": "Covering spaces",
     "domain": "topology",
     "subdomain": "topology.covering",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.connected.path",
       "topo.homotopy"
@@ -377,7 +377,7 @@
     "label": "Van Kampen theorem",
     "domain": "topology",
     "subdomain": "topology.algebraic",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.homotopy.fundamental",
       "topo.covering"
@@ -392,7 +392,7 @@
     "label": "Fiber bundles",
     "domain": "topology",
     "subdomain": "topology.manifolds",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.manifold",
       "topo.covering"
@@ -407,7 +407,7 @@
     "label": "Cellular homology",
     "domain": "topology",
     "subdomain": "topology.algebraic",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.homotopy.fundamental",
       "topo.compact"
@@ -422,7 +422,7 @@
     "label": "De Rham cohomology",
     "domain": "topology",
     "subdomain": "topology.algebraic",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.cohomology",
       "topo.manifold.orientability"
@@ -465,7 +465,7 @@
     "label": "Limit points",
     "domain": "topology",
     "subdomain": "topology.basics",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.basics.open_closed"
     ],
@@ -493,7 +493,7 @@
     "label": "Completeness and Cauchy sequences",
     "domain": "topology",
     "subdomain": "topology.basics",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.metric.convergence"
     ],
@@ -507,7 +507,7 @@
     "label": "Bases and subbases",
     "domain": "topology",
     "subdomain": "topology.constructions",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.basics.open_closed"
     ],
@@ -521,7 +521,7 @@
     "label": "The subspace topology",
     "domain": "topology",
     "subdomain": "topology.constructions",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.basics.open_closed"
     ],
@@ -535,7 +535,7 @@
     "label": "Dense sets and separability",
     "domain": "topology",
     "subdomain": "topology.constructions",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.metric.interior"
     ],
@@ -549,7 +549,7 @@
     "label": "Homeomorphisms",
     "domain": "topology",
     "subdomain": "topology.invariants",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "topo.basics.continuous",
       "topo.connected"

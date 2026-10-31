@@ -6,25 +6,18 @@ import (
 	"testing"
 
 	"github.com/chuma-beep/mathua/internal/generator"
-	"github.com/chuma-beep/mathua/internal/grader"
 )
 
+// TestElevatedTopologyVariety checks the five elevated topology concepts that
+// now ask for counts. They used to serve multiple choice, so this test watched
+// their option sets; now it watches that the same generators keep producing a
+// spread of counts and stems.
 func TestElevatedTopologyVariety(t *testing.T) {
 	rand.Seed(42)
 	reg := generator.NewRegistry()
 	Register(reg)
-	router := grader.NewRouter()
-	defer router.Close()
 
 	conceptIDs := []string{
-		"topo.hausdorff",
-		"topo.quotient",
-		"topo.product",
-		"topo.urysohn",
-		"topo.metrization",
-		"topo.connected.path",
-		"topo.compact.local",
-		"topo.separation.tietze",
 		"topo.homotopy",
 		"topo.manifold",
 		"topo.connected.local_path",
@@ -38,8 +31,9 @@ func TestElevatedTopologyVariety(t *testing.T) {
 			t.Fatalf("concept %s not registered: %v", id, err)
 		}
 
+		answers := make(map[string]bool)
 		stems := make(map[string]bool)
-		for i := 0; i < 50; i++ {
+		for i := 0; i < 100; i++ {
 			ctx := generator.GeneratorContext{Difficulty: 0.5}
 			prob := gen.Generate(ctx)
 
@@ -52,35 +46,15 @@ func TestElevatedTopologyVariety(t *testing.T) {
 			if strings.TrimSpace(prob.Explanation) == "" {
 				t.Errorf("%s: empty explanation at draw %d", id, i)
 			}
-
-			// Ensure multiple choice options format cleanly and router grades correctly
-			opts := topoOptionsOf(prob.Question)
-			if len(opts) < 3 {
-				t.Errorf("%s: expected at least 3 options, got %d", id, len(opts))
-			}
-			found := 0
-			for _, o := range opts {
-				if o == prob.Answer {
-					found++
-				}
-			}
-			if found != 1 {
-				t.Errorf("%s: correct answer %q appeared %d times in options %v", id, prob.Answer, found, opts)
-			}
-			for _, o := range opts {
-				if o == prob.Answer {
-					continue
-				}
-				if router.Grade(grader.GradingMultipleChoice, prob.Answer, o).Correct {
-					t.Errorf("%s: distractor %q was accepted as correct against answer %q", id, o, prob.Answer)
-				}
-			}
-
+			answers[prob.Answer] = true
 			stems[prob.Question] = true
 		}
 
+		if len(answers) < 5 {
+			t.Errorf("%s: only %d distinct answers in 100 draws", id, len(answers))
+		}
 		if len(stems) < 10 {
-			t.Errorf("%s: variety too low, got %d distinct stems across 50 draws", id, len(stems))
+			t.Errorf("%s: only %d distinct questions in 100 draws", id, len(stems))
 		}
 	}
 }

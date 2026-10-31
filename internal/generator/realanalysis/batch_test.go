@@ -61,27 +61,7 @@ var raBatchIDs = []string{
 	"ra.limit.compact",
 }
 
-var raMCIDs = []string{
-	"ra.order.completeness",
-	"ra.order.nested_intervals",
-	"ra.order.density",
-	"ra.order.countable",
-	"ra.order.uncountable",
-	"ra.order.extended",
-	"ra.seq.subsequence",
-	"ra.seq.bolzano_weierstrass",
-	"ra.seq.cauchy",
-	"ra.seq.tests",
-	"ra.seq.absolute",
-	"ra.seq.rearrangement",
-	"ra.seq.cauchy_criterion",
-	"ra.limit.sequential",
-	"ra.limit.continuity",
-	"ra.limit.ivt",
-	"ra.limit.evt",
-	"ra.limit.uniform",
-	"ra.limit.compact",
-}
+var raMCIDs = []string{}
 
 func raShippedTypes(t *testing.T) map[string]string {
 	t.Helper()

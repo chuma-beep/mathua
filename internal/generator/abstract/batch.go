@@ -158,48 +158,7 @@ func (g *automorphismGen) Generate(ctx generator.GeneratorContext) generator.Pro
 type simpleGroupGen struct{}
 
 func (g *simpleGroupGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Which of the following groups is simple?",
-			correct:     "A_5",
-			distractors: []string{"Z_6", "S_3", "D_4"},
-			reason:      "A_5 has no nontrivial proper normal subgroup; Z_6, S_3 and D_4 each do.",
-		},
-		{
-			question:    "Is the cyclic group Z_7 simple? (yes/no)",
-			correct:     "yes",
-			distractors: []string{"no", "only if 7 is even", "only if Z_7 is nonabelian"},
-			reason:      "A cyclic group of prime order has no nontrivial proper subgroup at all, so it is simple.",
-		},
-		{
-			question:    "Which is the smallest nonabelian simple group?",
-			correct:     "A_5",
-			distractors: []string{"Z_2", "S_3", "D_4"},
-			reason:      "A_5 has order 60, and every smaller nonabelian group has a nontrivial proper normal subgroup.",
-		},
-		{
-			question:    "Is Z_6 simple? (yes/no)",
-			correct:     "no",
-			distractors: []string{"yes", "only if 6 is prime", "it has no normal subgroups"},
-			reason:      "Z_6 has the nontrivial proper normal subgroup {0, 3}, isomorphic to Z_2.",
-		},
-		{
-			question:    "Which of the following groups is simple?",
-			correct:     "Z_5",
-			distractors: []string{"Z_4", "Z_6", "Z_8"},
-			reason:      "A cyclic group is simple exactly when its order is prime, so Z_5 qualifies and Z_4, Z_6, Z_8 do not.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return simpleGroupsProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -436,54 +395,7 @@ func (g *euclideanGen) Generate(ctx generator.GeneratorContext) generator.Proble
 type algebraicElementGen struct{}
 
 func (g *algebraicElementGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Is sqrt(2) algebraic or transcendental over Q?",
-			correct:     "algebraic",
-			distractors: []string{"transcendental", "neither", "both"},
-			reason:      "sqrt(2) is a root of x^2 - 2, a nonzero polynomial over Q, so it is algebraic over Q.",
-		},
-		{
-			question:    "Is pi algebraic over Q? (yes/no)",
-			correct:     "no",
-			distractors: []string{"yes", "only if pi is rational", "only over C"},
-			reason:      "pi is transcendental over Q: no nonzero polynomial with rational coefficients has pi as a root.",
-		},
-		{
-			question:    "Which polynomial is the minimal polynomial of sqrt(2) over Q?",
-			correct:     "x^2 - 2",
-			distractors: []string{"x - 2", "x^2 + 2", "x^2 - 4"},
-			reason:      "x^2 - 2 is monic, irreducible over Q, and has sqrt(2) as a root.",
-		},
-		{
-			question:    "The degree [Q(sqrt(2)) : Q] is...",
-			correct:     "2",
-			distractors: []string{"1", "4", "infinite"},
-			reason:      "The minimal polynomial x^2 - 2 has degree 2, and the extension degree equals the degree of the minimal polynomial.",
-		},
-		{
-			question:    "Which number is algebraic over Q?",
-			correct:     "sqrt(3)",
-			distractors: []string{"pi", "e", "1/pi"},
-			reason:      "sqrt(3) is a root of x^2 - 3, while pi, e and 1/pi are transcendental.",
-		},
-		{
-			question:    "If alpha is algebraic over a field F, then F(alpha) is...",
-			correct:     "a finite extension of F",
-			distractors: []string{"an infinite extension of F", "equal to F", "a transcendental extension of F"},
-			reason:      "Adjoining an algebraic element adds only the finitely many powers below its minimal polynomial, so the degree is finite.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return algebraicElementsProblem()
 }
 
 // ---------------------------------------------------------------------------

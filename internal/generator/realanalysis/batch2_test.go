@@ -46,22 +46,7 @@ var raBatch2IDs = []string{
 	"ra.metric.equivalent",
 }
 
-var raBatch2MCIDs = []string{
-	"ra.limit.connected",
-	"ra.limit.discontinuity",
-	"ra.limit.monotone_fn",
-	"ra.deriv.darboux",
-	"ra.deriv.uniform_conv",
-	"ra.deriv.interchange",
-	"ra.metric.open_closed",
-	"ra.metric.closure",
-	"ra.metric.convergence",
-	"ra.metric.complete",
-	"ra.metric.compact",
-	"ra.metric.continuity",
-	"ra.metric.baire",
-	"ra.metric.equivalent",
-}
+var raBatch2MCIDs = []string{}
 
 func TestRABatch2AnswersGradeWithTheirShippedType(t *testing.T) {
 	types := raShippedTypes(t)
