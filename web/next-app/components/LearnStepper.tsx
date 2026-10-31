@@ -290,6 +290,13 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
     }).finally(() => setNextLoading(false))
   }, [hasDone, isMastered, conceptId])
 
+  // Only a real concept change may render a navigating <Link>. A same-concept
+  // href (however many query params it carries) would leave the learner on the
+  // page they just finished, so every Continue surface shares this guard
+  // instead of trusting the server to exclude the current concept.
+  const nextHeadId = nextShelf ? hrefConceptId(nextShelf.next.href) : null
+  const canContinue = !nextLoading && !!nextShelf && nextHeadId !== null && nextHeadId !== conceptId
+
   // Take the next question: buffer first, fetching when empty.
   async function takeNext(diff: number): Promise<PracticeQuestion | null> {
     if (buffer.length > 0) {
@@ -587,10 +594,19 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
     }))
   })()
   const unmetPrereqs = prerequisites.filter(p => !p.met)
+  // `met` is eligibility, not learning: the server marks a prerequisite met when
+  // the learner may proceed past it, which includes one that is unlocked but
+  // untouched. The panel prints the state per row, so the intro must not claim
+  // the learner has "already learned" a row that reads Not started.
+  const unstartedPrereqs = prerequisites.filter(p => p.met && (p.state === 'unlocked' || p.state === 'upcoming'))
   const dueReviewPrereqs = prerequisites.filter(p => p.met && p.state === 'due_for_review')
   const prereqIntro = (() => {
     const names = (unmetPrereqs.length > 0 ? unmetPrereqs : dueReviewPrereqs)
       .slice(0, 3).map(p => p.title).join(', ')
+    if (unmetPrereqs.length === 0 && unstartedPrereqs.length > 0) {
+      const unstarted = unstartedPrereqs.slice(0, 3).map(p => p.title).join(', ')
+      return `These prerequisites are not started yet: ${unstarted}. Study them first or continue anyway.`
+    }
     if (unmetPrereqs.length === 0 && dueReviewPrereqs.length > 0) {
       return `You have already learned ${names}, a short check is due or continue anyway.`
     }
@@ -638,7 +654,7 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-2 shrink-0">
-              {nextShelf && (
+              {canContinue && nextShelf && (
                 <Link
                   href={nextShelf.next.href}
                   className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-4 py-2 font-mono text-xs inline-flex items-center min-h-[40px]"
@@ -651,7 +667,7 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
                   Finding next concept…
                 </span>
               )}
-              {!nextLoading && !nextShelf && (
+              {!nextLoading && !canContinue && (
                 <Link
                   href="/learn"
                   className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-4 py-2 font-mono text-xs inline-flex items-center min-h-[40px]"
@@ -722,9 +738,9 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
                       {isMastered ? 'Practice again →' : 'Next →'}
                     </button>
                   )}
-                  {isMastered && (
+                  {isMastered && canContinue && nextShelf && (
                     <Link
-                      href={nextShelf ? nextShelf.next.href : '/learn'}
+                      href={nextShelf.next.href}
                       className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue px-6 py-2.5 font-mono text-xs min-h-[44px] inline-flex items-center"
                     >
                       Continue to Next Concept →
@@ -763,12 +779,6 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
             )
           }
           if (e.kind === 'done') {
-            const headId = nextShelf ? hrefConceptId(nextShelf.next.href) : null
-            // Only a real concept change may render a navigating <Link>: the
-            // stepper keys everything off conceptId, so a same-concept href
-            // (however many query params it carries) would scroll to top and
-            // strand the learner.
-            const canContinue = !nextLoading && nextShelf && headId !== null && headId !== conceptId
             const upcoming: LockedSuccessor[] = upcomingLocked(catalogEntries(), shelfProgress, conceptId)
             return (
               <div key={e.key} className="border border-mathua-green-faint bg-mathua-surface p-6">
