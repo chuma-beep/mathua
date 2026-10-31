@@ -135,7 +135,12 @@ function LearnContent() {
       <div className="max-w-2xl mx-auto mb-4">
         <Link href="/profile" className="font-mono text-xs text-mathua-secondary hover:text-mathua-blue">← Profile</Link>
       </div>
-      <LearnStepper conceptId={concept} returnStack={returnStack} />
+      {/* Key the stepper on the concept. A Continue link is a client-side
+          navigation from /learn?concept=A to /learn?concept=B, and without a
+          key React reuses the instance: the old lesson, readiness and mastered
+          banner stay on screen under the new URL, so the link appears to do
+          nothing. Remounting is also what lets the loaders run for B. */}
+      <LearnStepper key={concept ?? 'none'} conceptId={concept} returnStack={returnStack} />
       <div className="max-w-2xl mx-auto">
         <LessonCredits conceptId={concept} />
       </div>
