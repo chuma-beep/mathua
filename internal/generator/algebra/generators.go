@@ -1731,9 +1731,9 @@ func (g *ineqAbsValGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		}
 	default:
 		return generator.Problem{
-			Question:    fmt.Sprintf("What is the smallest integer \\(x\\) with \\(|x| > %d\\)? (enter a number)", a),
+			Question:    fmt.Sprintf("What is the smallest positive integer \\(x\\) with \\(|x| > %d\\)? (enter a number)", a),
 			Answer:      fmt.Sprintf("%d", a+1),
-			Explanation: fmt.Sprintf("\\(|x| > %d\\) excludes every value from \\(-%d\\) to %d, so the smallest integer above the gap is %d", a, a, a, a+1),
+			Explanation: fmt.Sprintf("\\(|x| > %d\\) excludes every value from \\(-%d\\) to %d. Among positive integers the smallest above the gap is %d", a, a, a, a+1),
 			Facts:       map[string]string{"a": strconv.Itoa(a), "x": strconv.Itoa(a + 1)},
 		}
 	}
@@ -2180,7 +2180,8 @@ func (g *gaussianElimGen) Generate(ctx generator.GeneratorContext) generator.Pro
 	y := rand.Intn(5) - 2
 	a := rand.Intn(4) + 1
 	b := rand.Intn(4) + 1
-	c := rand.Intn(4) + 1
+	// c is a multiple of a so the row-echelon entries stay integers.
+	c := a * (rand.Intn(2) + 1)
 	d := rand.Intn(4) + 1
 	// Ensure determinant ≠ 0
 	for a*d-b*c == 0 {
@@ -2198,9 +2199,9 @@ func (g *gaussianElimGen) Generate(ctx generator.GeneratorContext) generator.Pro
 	}
 	// Row echelon form question
 	return generator.Problem{
-		Question:    fmt.Sprintf("Put the system \\(%dx + %dy = %d\\), \\(%dx + %dy = %d\\) into row echelon form.", a, b, e1, c, d, e2),
-		Answer:      fmt.Sprintf("[[%d,%d,%d],[0,%d,%d]]", a, b, e1, d-c*b/a, e2-c*e1/a),
-		Explanation: fmt.Sprintf("The augmented matrix [[%d,%d,%d],[%d,%d,%d]] can be reduced.", a, b, e1, c, d, e2),
+		Question:    fmt.Sprintf("Put the system \\(%dx + %dy = %d\\), \\(%dx + %dy = %d\\) into row echelon form. Enter the six entries of the augmented matrix row by row, separated by commas.", a, b, e1, c, d, e2),
+		Answer:      fmt.Sprintf("%d,%d,%d,0,%d,%d", a, b, e1, d-c*b/a, e2-c*e1/a),
+		Explanation: fmt.Sprintf("The augmented matrix [[%d,%d,%d],[%d,%d,%d]] reduces to [[%d,%d,%d],[0,%d,%d]].", a, b, e1, c, d, e2, a, b, e1, d-c*b/a, e2-c*e1/a),
 		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "d": strconv.Itoa(d), "e1": strconv.Itoa(e1), "e2": strconv.Itoa(e2), "is_echelon": "yes"},
 	}
 }

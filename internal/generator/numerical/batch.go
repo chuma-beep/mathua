@@ -56,7 +56,7 @@ func (g *absRelErrorGen) Generate(ctx generator.GeneratorContext) generator.Prob
 	relErr := float64(delta) / float64(tVal)
 	ans := decimal6(relErr)
 
-	q := fmt.Sprintf("A quantity has true value %d and is approximated by %d. What is the relative error |approx − true|/|true|? (enter a decimal)", tVal, approx)
+	q := fmt.Sprintf("A quantity has true value %d and is approximated by %d. What is the relative error |approx − true|/|true|? (enter a decimal with a decimal point, rounded to 6 decimal places)", tVal, approx)
 	exp := fmt.Sprintf("Subgoal 1: State governing formula. The relative error measures the magnitude of approximation error relative to the true quantity: \\(\\text{RelErr} = \\frac{|\\text{approx} - \\text{true}|}{|\\text{true}|}\\).\n\nSubgoal 2: Substitute parameters. Given true value %d and approximation %d, substitute into the formula: \\(\\text{RelErr} = \\frac{|%d - %d|}{|%d|}\\).\n\nSubgoal 3: Evaluate and simplify. Compute the absolute difference \\(|%d - %d| = %d\\) and divide by %d: \\(\\text{RelErr} = \\frac{%d}{%d} = %s\\).",
 		tVal, approx, approx, tVal, tVal,
 		approx, tVal, delta, tVal, delta, tVal, ans)
@@ -381,7 +381,7 @@ func (g *orderGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 
 	ans := decimal6(float64(c-b) / float64(b-a))
 
-	q := fmt.Sprintf("The errors of an iterative method satisfy e_{k+2} ≈ e_{k+1}^p / e_k^{p−1}. From three successive errors of 10^-%d, 10^-%d and 10^-%d, estimate the order p as log(e_{k+2}/e_{k+1}) divided by log(e_{k+1}/e_k). (enter a decimal)",
+	q := fmt.Sprintf("The errors of an iterative method satisfy \\(e_{k+2} \\approx e_{k+1}^{p}/e_k^{p-1}\\). From three successive errors of \\(10^{-%d}\\), \\(10^{-%d}\\) and \\(10^{-%d}\\), estimate the order \\(p = \\frac{\\log(e_{k+2}/e_{k+1})}{\\log(e_{k+1}/e_k)}\\). (enter a decimal with a decimal point)",
 		a, b, c)
 	exp := fmt.Sprintf("Subgoal 1: State governing formula. The order of convergence p satisfies \\(p = \\frac{\\log(e_{k+2}/e_{k+1})}{\\log(e_{k+1}/e_k)}\\). For error powers \\(e_i = 10^{-a_i}\\), this logarithmic ratio reduces directly to the exponent difference ratio: \\(p = \\frac{c - b}{b - a}\\).\n\nSubgoal 2: Substitute parameters. Substitute exponents \\(a = %d\\), \\(b = %d\\) and \\(c = %d\\): \\(p = \\frac{%d - %d}{%d - %d}\\).\n\nSubgoal 3: Evaluate and simplify. Compute numerator \\(%d - %d = %d\\) and denominator \\(%d - %d = %d\\), then divide: \\(p = \\frac{%d}{%d} = %s\\).",
 		a, b, c, c, b, b, a,

@@ -341,6 +341,30 @@ func (g *ineqWordGen) Generate(ctx generator.GeneratorContext) generator.Problem
 				return fmt.Sprintf("A rental company charges a $%d fee plus $%d per hour. You can spend at most $%d. What is the greatest whole number of hours you can rent?", fixed, rate, limit)
 			},
 		},
+		{
+			context: "printing order", relation: "at most", ask: "greatest",
+			build: func(fixed, rate, limit int) string {
+				return fmt.Sprintf("A print shop charges a $%d setup fee plus $%d per page. Your budget is at most $%d. What is the greatest whole number of pages you can print?", fixed, rate, limit)
+			},
+		},
+		{
+			context: "streaming plan", relation: "at most", ask: "greatest",
+			build: func(fixed, rate, limit int) string {
+				return fmt.Sprintf("A streaming service charges $%d to join plus $%d per month. You can spend at most $%d in total. What is the greatest whole number of months you can subscribe?", fixed, rate, limit)
+			},
+		},
+		{
+			context: "savings goal", relation: "at least", ask: "least",
+			build: func(fixed, rate, limit int) string {
+				return fmt.Sprintf("You have saved $%d and save $%d each week. Your goal is at least $%d. What is the least whole number of weeks needed?", fixed, rate, limit)
+			},
+		},
+		{
+			context: "catering order", relation: "at most", ask: "greatest",
+			build: func(fixed, rate, limit int) string {
+				return fmt.Sprintf("A caterer charges a $%d delivery fee plus $%d per guest. You can spend at most $%d. What is the greatest whole number of guests you can invite?", fixed, rate, limit)
+			},
+		},
 	}
 	c := contexts[rand.Intn(len(contexts))]
 	bound := rand.Intn(8) + 3 // 3..10
