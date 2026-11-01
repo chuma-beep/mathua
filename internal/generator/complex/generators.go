@@ -520,148 +520,31 @@ func (g *argumentGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type laurentGen struct{}
 
 func (g *laurentGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type qa struct {
-		q string
-		a string
-		e string
-	}
-	easy := []qa{
-		{q: "For f(z)=1/z, what is a_{-1} at 0? (enter a number)", a: "1", e: "1/z = z^{-1} is its own Laurent series; principal part is 1/z."},
-		{q: "For f(z)=1/z^2, what is the residue at 0? (enter a number)", a: "0", e: "The z^{-1} slot is empty, so a_{-1}=0."},
-		{q: "Does a Laurent series include negative powers for poles? (yes/no)", a: "yes", e: "Taylor has only non-negative powers; Laurent adds the principal part."},
-		{q: "Is 1/z analytic at 0 (a removable singularity)? (yes/no)", a: "no", e: "1/z blows up at 0; it is a pole, not removable."},
-		{q: "For f(z)=1/z^3, what is a_{-1} at 0? (enter a number)", a: "0", e: "Only the z^{-3} term is nonzero; a_{-1}=0."},
-		{q: "Is the coefficient a_{-1} the residue? (yes/no)", a: "yes", e: "Residue is Laurent a_{-1}."},
-	}
-	hard := []qa{
-		{q: "Is classification: pole (finite principal part), essential (infinite), removable (none)? (yes/no)", a: "yes", e: "Laurent principal part classifies singularities."},
-		{q: "Does e^{1/z} have infinitely many negative terms at 0? (yes/no)", a: "yes", e: "Essential singularity: Laurent has infinite principal part."},
-		{q: "Is annulus 0<|z|<1 the domain for Laurent of 1/(z(1-z))? (yes/no)", a: "yes", e: "Poles at 0,1; annuli determined by radii to nearest singularities."},
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return laurentProblem()
 }
 
 type contourGen struct{}
 
 func (g *contourGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type qa struct {
-		q string
-		a string
-		e string
-	}
-	easy := []qa{
-		{q: "What is the contour integral over |z|=1 of dz/z, divided by 2πi? (enter a number)", a: "1", e: "Residue 1 at 0 inside, so the integral is 2πi; divided by 2πi gives 1."},
-		{q: "What is the contour integral over |z|=1 of dz/z^2, divided by 2πi? (enter a number)", a: "0", e: "Residue 0 at the double pole, so the integral is 0."},
-		{q: "Is a contour integral independent of path in a simply connected analytic domain? (yes/no)", a: "yes", e: "Cauchy's theorem: integral around null-homotopic loop is 0."},
-		{q: "Does the ML-estimate bound |integral| by M times L? (yes/no)", a: "yes", e: "ML inequality: sup |f| times length."},
-		{q: "Is the integral of dz/z around |z|=1 equal to 0? (yes/no)", a: "no", e: "It is 2πi, nonzero: the pole at 0 is enclosed."},
-	}
-	hard := []qa{
-		{q: "Does Cauchy integral formula give f(a)=∮ f(z)/(z-a) dz /2πi? (yes/no)", a: "yes", e: "Cauchy's formula for analytic f."},
-		{q: "Is real integral ∫_{-∞}^{∞} dx/(x^2+1)=π via contour? (yes/no)", a: "yes", e: "Semicircle contour with poles at ±i gives π."},
-		{q: "Does deformation of contour not cross singularities preserve integral? (yes/no)", a: "yes", e: "Homotopy invariance."},
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return contourProblem()
 }
 
 type riemannSphereGen struct{}
 
 func (g *riemannSphereGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type qa struct {
-		q string
-		a string
-		e string
-	}
-	easy := []qa{
-		{q: "How many points are added to C to form the Riemann sphere? (enter a number)", a: "1", e: "One point at infinity compactifies C."},
-		{q: "Under w=1/z, where does 0 go? (enter infinity for the point at infinity)", a: "infinity", e: "1/0 is the north pole: infinity."},
-		{q: "Is the extended complex plane compact? (yes/no)", a: "yes", e: "One-point compactification of C."},
-		{q: "Is C itself compact? (yes/no)", a: "no", e: "C is not compact; adding infinity compactifies it."},
-		{q: "Does stereographic projection send circles on the sphere to circles or lines? (yes/no)", a: "yes", e: "Circles correspond, lines being circles through infinity."},
-		{q: "Under w=1/z, where does infinity go? (enter a number)", a: "0", e: "Large |z| gives small |w|; infinity maps to 0."},
-	}
-	hard := []qa{
-		{q: "Is meromorphic on sphere = rational function? (yes/no)", a: "yes", e: "Meromorphic on compact sphere must be rational."},
-		{q: "Does Möbius transformation correspond to rotation of sphere? (yes/no)", a: "yes", e: "Automorphisms of sphere are Möbius."},
-		{q: "Is ∞ a point where 1/z has a pole? (yes/no)", a: "yes", e: "Behaviour at ∞ via chart w=1/z."},
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return riemannSphereProblem()
 }
 
 type cauchyGoursatGen struct{}
 
 func (g *cauchyGoursatGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type qa struct {
-		q string
-		a string
-		e string
-	}
-	easy := []qa{
-		{q: "What is the integral of z^2 around any closed contour? (enter a number)", a: "0", e: "z^2 is entire with antiderivative z^3/3, so closed loops give 0."},
-		{q: "What is the integral of 1/z around |z|=1, divided by 2πi? (enter a number)", a: "1", e: "Interior pole of residue 1 gives 2πi; divided by 2πi is 1."},
-		{q: "Does Cauchy-Goursat state the integral is 0 for f analytic inside simple closed C? (yes/no)", a: "yes", e: "Integral around null-homotopic loop zero."},
-		{q: "Does the theorem give integral zero when f has a pole inside C? (yes/no)", a: "no", e: "The analyticity hypothesis fails; e.g. 1/z gives 2πi."},
-		{q: "Did Goursat remove the continuity-of-f' assumption? (yes/no)", a: "yes", e: "Goursat needs only analyticity."},
-	}
-	hard := []qa{
-		{q: "Does Cauchy-Goursat imply existence of antiderivative locally? (yes/no)", a: "yes", e: "Integral independent of path."},
-		{q: "Is triangle version used to prove analytic ⇒ infinitely differentiable? (yes/no)", a: "yes", e: "Goursat lemma."},
-		{q: "Does proof subdivide triangle into 4 smaller triangles? (yes/no)", a: "yes", e: "Goursat's bisection."},
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return cauchyGoursatProblem()
 }
 
 type powerSeriesGen struct{}
 
 func (g *powerSeriesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type qa struct {
-		q string
-		a string
-		e string
-	}
-	easy := []qa{
-		{q: "What is the radius of convergence of 1/(1-z) at 0? (enter a number)", a: "1", e: "Pole at z=1, distance 1 from 0."},
-		{q: "What is the z^2 coefficient of e^z at 0? (enter a fraction like 1/2)", a: "1/2", e: "Taylor term is z^2/2, so the coefficient is 1/2."},
-		{q: "Does uniform convergence allow termwise differentiation inside the radius? (yes/no)", a: "yes", e: "Inside radius, differentiate term by term."},
-		{q: "Does sum z^n converge at z=2? (yes/no)", a: "no", e: "Terms 2^n do not tend to 0; radius is 1."},
-		{q: "Is the radius of 1/(1-z) equal to 2? (yes/no)", a: "no", e: "The pole at distance 1 gives radius 1, not 2."},
-	}
-	hard := []qa{
-		{q: "Is power series of e^z entire (radius ∞)? (yes/no)", a: "yes", e: "No finite singularity."},
-		{q: "Does Hadamard formula give 1/R=limsup |a_n|^{1/n}? (yes/no)", a: "yes", e: "Root test."},
-		{q: "Is analytic continuation possible beyond disk via overlapping disks? (yes/no)", a: "yes", e: "Analytic continuation."},
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return powerSeriesProblem()
 }
 
 // ----- complex logarithm -----

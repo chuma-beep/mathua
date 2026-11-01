@@ -80,48 +80,7 @@ func (g *absRelErrorGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type roundoffGen struct{}
 
 func (g *roundoffGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Machine epsilon is...",
-			correct:     "the gap between one and the next representable floating-point number",
-			distractors: []string{"the smallest positive number a machine can hold", "the largest exponent", "the number of decimal digits printed"},
-			reason:      "It measures the relative spacing of the floats near one, which is the natural unit of roundoff.",
-		},
-		{
-			question:    "The number nought point one cannot be stored exactly in binary floating point because...",
-			correct:     "its binary expansion does not terminate, so it must be rounded",
-			distractors: []string{"it is larger than one", "it is negative", "the machine runs out of memory"},
-			reason:      "Only fractions whose denominator is a power of two terminate in binary.",
-		},
-		{
-			question:    "Roundoff error is unavoidable in floating-point arithmetic because...",
-			correct:     "the machine keeps only finitely many significant digits",
-			distractors: []string{"algorithms are written badly", "the input data are always noisy", "mathematics is inexact"},
-			reason:      "Every real number is rounded to the nearest member of a finite set.",
-		},
-		{
-			question:    "A single rounding of a real number to the nearest float produces a relative error no larger than...",
-			correct:     "about half of machine epsilon",
-			distractors: []string{"one", "the square root of machine epsilon", "the number itself"},
-			reason:      "Rounding to nearest can never be off by more than half the gap to the next float.",
-		},
-		{
-			question:    "Floating-point addition is not associative, so...",
-			correct:     "the order of a sum can change the computed result",
-			distractors: []string{"addition is undefined", "the sum is always exact", "subtraction is impossible"},
-			reason:      "Each intermediate result is rounded, so regrouping changes which roundings occur.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return roundoffProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -198,48 +157,7 @@ func (g *conditioningGen) Generate(ctx generator.GeneratorContext) generator.Pro
 type stabilityGen struct{}
 
 func (g *stabilityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "An algorithm is backward stable when...",
-			correct:     "it returns the exact answer to a nearby problem",
-			distractors: []string{"it is fast", "it uses little memory", "it returns the exact answer to the given problem"},
-			reason:      "The rounding is pushed back into a small perturbation of the data, which the condition number then amplifies.",
-		},
-		{
-			question:    "A stable algorithm applied to an ill-conditioned problem...",
-			correct:     "can still return an inaccurate answer, because the problem amplifies the perturbation",
-			distractors: []string{"always returns an accurate answer", "cannot be implemented", "has no rounding error"},
-			reason:      "Stability controls the algorithm; the condition number controls the problem and the two multiply.",
-		},
-		{
-			question:    "The condition number of a problem measures...",
-			correct:     "how much a relative change in the data can change the relative answer",
-			distractors: []string{"the speed of the algorithm", "the memory it uses", "the order of convergence"},
-			reason:      "It is a property of the problem alone, independent of the method chosen to solve it.",
-		},
-		{
-			question:    "A backward-stable algorithm guarantees that the computed result is the exact result of...",
-			correct:     "a problem whose data differ from the given data by a small relative amount",
-			distractors: []string{"the given problem exactly", "any problem of the same size", "the problem in infinite precision"},
-			reason:      "That is the definition of backward stability.",
-		},
-		{
-			question:    "For a well-conditioned problem with condition number near one, a backward-stable algorithm...",
-			correct:     "has a relative error of the order of machine epsilon",
-			distractors: []string{"has a relative error near one", "has no error at all", "diverges"},
-			reason:      "The small backward perturbation passes through a problem that barely amplifies it.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return stabilityProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -249,48 +167,7 @@ func (g *stabilityGen) Generate(ctx generator.GeneratorContext) generator.Proble
 type taylorErrorGen struct{}
 
 func (g *taylorErrorGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "The truncation error of a numerical method is the error made by...",
-			correct:     "replacing an exact process with a finite approximation",
-			distractors: []string{"finite-precision arithmetic", "noisy input data", "a badly chosen algorithm"},
-			reason:      "It is the price of cutting off a series or a limiting process and it is separate from roundoff.",
-		},
-		{
-			question:    "For a method of order n the local truncation error behaves like...",
-			correct:     "a constant times the step raised to the power n plus one",
-			distractors: []string{"the step itself", "one over the step", "a constant, independent of the step"},
-			reason:      "The leading term left after a Taylor expansion of order n is the next one.",
-		},
-		{
-			question:    "Halving the step of a second-order method reduces its global error by about...",
-			correct:     "a factor of four",
-			distractors: []string{"a factor of two", "a factor of eight", "nothing"},
-			reason:      "A second-order method has global error proportional to the square of the step.",
-		},
-		{
-			question:    "Taylor's theorem with remainder is used in numerical analysis to...",
-			correct:     "bound the truncation error of a difference formula",
-			distractors: []string{"compute exact derivatives", "solve linear systems", "factor a matrix"},
-			reason:      "The remainder term is exactly the error the formula makes.",
-		},
-		{
-			question:    "The global error of a one-step method accumulates...",
-			correct:     "over the whole interval, not just one step",
-			distractors: []string{"over one step only", "over the number of digits", "only from the input data"},
-			reason:      "The local errors of many steps add up, which is why the global order is one lower than the local order.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return taylorErrorProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -485,48 +362,7 @@ func (g *secantGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type falsePositionGen struct{}
 
 func (g *falsePositionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "The method of false position keeps a bracket of the root and updates...",
-			correct:     "one endpoint, by the intercept of the line joining the two endpoints",
-			distractors: []string{"both endpoints by halving", "the midpoint of the bracket", "the derivative at the midpoint"},
-			reason:      "It is the secant method constrained to keep the sign change inside the bracket.",
-		},
-		{
-			question:    "False position usually converges...",
-			correct:     "faster than bisection but slower than Newton",
-			distractors: []string{"faster than Newton", "more slowly than bisection", "at exactly the bisection rate"},
-			reason:      "It uses the function values to place the new endpoint, which beats halving but lacks the derivative's speed.",
-		},
-		{
-			question:    "A known weakness of false position is that...",
-			correct:     "one endpoint can stay fixed for many iterations when the function is very curved",
-			distractors: []string{"it needs the derivative", "it cannot start without a bracket", "it always diverges"},
-			reason:      "The interpolation can land very close to one side, so the other endpoint moves little.",
-		},
-		{
-			question:    "Compared with the secant method, false position...",
-			correct:     "keeps the root bracketed",
-			distractors: []string{"does not bracket the root", "requires the derivative", "cannot converge superlinearly"},
-			reason:      "Dropping the secant point that would leave the bracket is what distinguishes the two methods.",
-		},
-		{
-			question:    "False position needs to begin with...",
-			correct:     "two points where the function has opposite signs",
-			distractors: []string{"one point and the derivative", "two points with the same sign", "no points at all"},
-			reason:      "The sign change is the bracket that guarantees a root inside.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return falsePositionProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -571,48 +407,7 @@ func (g *orderGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type multipleRootGen struct{}
 
 func (g *multipleRootGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "At a root of multiplicity m, the ordinary Newton iteration converges...",
-			correct:     "linearly rather than quadratically",
-			distractors: []string{"quadratically", "not at all", "cubically"},
-			reason:      "The zero of the derivative at the root removes the quadratic term that normally drives the fast convergence in the root",
-		},
-		{
-			question:    "The modified Newton iteration for a root of multiplicity m...",
-			correct:     "multiplies the Newton step by m",
-			distractors: []string{"divides the Newton step by m", "drops the derivative", "uses the second derivative only"},
-			reason:      "Restoring the quadratic rate needs a step m times the ordinary one.",
-		},
-		{
-			question:    "A function with a double root has...",
-			correct:     "both the function and its derivative equal to zero at the root",
-			distractors: []string{"only the function equal to zero", "only the derivative equal to zero", "neither equal to zero"},
-			reason:      "Multiplicity counts how many derivatives vanish with the function.",
-		},
-		{
-			question:    "Near a simple root, Newton's method converges...",
-			correct:     "quadratically",
-			distractors: []string{"linearly", "cubically", "not at all"},
-			reason:      "A nonzero derivative at the root gives the doubling of correct digits each step.",
-		},
-		{
-			question:    "Detecting a multiple root numerically is hard because...",
-			correct:     "the function is flat near the root, so small errors blur the multiplicity",
-			distractors: []string{"the derivative is infinite there", "the function is discontinuous", "there is no root"},
-			reason:      "Near a repeated root the graph is tangent to the axis and the tiny function values are dominated by roundoff.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return multipleRootProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -622,48 +417,7 @@ func (g *multipleRootGen) Generate(ctx generator.GeneratorContext) generator.Pro
 type bracketingGen struct{}
 
 func (g *bracketingGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "A bracketing method needs...",
-			correct:     "two points where the function has opposite signs",
-			distractors: []string{"one point and the derivative", "two points with the same sign", "no starting points"},
-			reason:      "The sign change guarantees a root inside the interval by continuity.",
-		},
-		{
-			question:    "An open method needs...",
-			correct:     "one or two starting guesses and may diverge",
-			distractors: []string{"a sign change to begin", "an interval that contains the root", "a guaranteed bracket"},
-			reason:      "Without a bracket there is no guarantee, so the method can wander or cycle.",
-		},
-		{
-			question:    "Bisection is guaranteed to converge...",
-			correct:     "whenever the initial interval brackets a root",
-			distractors: []string{"for any starting points", "only for polynomials", "only when the derivative is known"},
-			reason:      "Halving a bracket that contains a sign change keeps it containing one.",
-		},
-		{
-			question:    "Newton's method can fail when...",
-			correct:     "the derivative is zero or the iterate leaves the region of attraction",
-			distractors: []string{"the function is continuous", "a bracket is given", "the root is simple"},
-			reason:      "A vanishing derivative makes the step infinite and a distant iterate can converge elsewhere or diverge.",
-		},
-		{
-			question:    "The secant method differs from false position in that...",
-			correct:     "it does not keep the root bracketed",
-			distractors: []string{"it needs the derivative", "it halves the interval", "it cannot converge superlinearly"},
-			reason:      "The secant method uses the newest two points even if the bracket is lost, which speeds it up and weakens the guarantee.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return bracketingProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -834,48 +588,7 @@ func (g *dividedDiffGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type interpErrorGen struct{}
 
 func (g *interpErrorGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "The error of polynomial interpolation at a point is proportional to...",
-			correct:     "the product of the distances from that point to the interpolation nodes",
-			distractors: []string{"the spacing of the nodes only", "the number of nodes", "the derivative at the nodes"},
-			reason:      "The node product vanishes at the nodes and grows between them and it multiplies the derivative term.",
-		},
-		{
-			question:    "By the interpolation error formula, the error involves the (n+1)-th derivative...",
-			correct:     "evaluated at some unknown point of the interval",
-			distractors: []string{"at the left endpoint", "at a node", "at infinity"},
-			reason:      "The remainder theorem places the unknown point strictly inside the interval.",
-		},
-		{
-			question:    "Adding more equally spaced nodes can...",
-			correct:     "make the error worse near the ends, as Runge's example shows",
-			distractors: []string{"always reduce the maximum error", "never change the error", "remove the need for a derivative"},
-			reason:      "Runge's phenomenon is the blow-up of the interpolant's edges when the nodes are equally spaced.",
-		},
-		{
-			question:    "The interpolation error is zero at...",
-			correct:     "the interpolation nodes",
-			distractors: []string{"the midpoint", "every point", "no point"},
-			reason:      "The interpolant matches the function exactly at the data.",
-		},
-		{
-			question:    "The error formula shows that accuracy depends on...",
-			correct:     "both the node spacing and the size of the derivatives",
-			distractors: []string{"only the node spacing", "only the function values", "neither"},
-			reason:      "The node product and the derivative bound enter as a product.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return interpErrorProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -885,48 +598,7 @@ func (g *interpErrorGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type chebyshevGen struct{}
 
 func (g *chebyshevGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Chebyshev nodes are...",
-			correct:     "the roots of a Chebyshev polynomial, clustered toward the ends of the interval",
-			distractors: []string{"equally spaced points", "the endpoints only", "random points"},
-			reason:      "Their clustering tames the edge growth that equally spaced nodes provoke.",
-		},
-		{
-			question:    "Using Chebyshev nodes helps because they...",
-			correct:     "minimise the maximum absolute value of the node product in the error formula",
-			distractors: []string{"make the function linear", "remove the derivative term", "use fewer nodes"},
-			reason:      "The node product is exactly what the Chebyshev construction minimises.",
-		},
-		{
-			question:    "Chebyshev nodes cluster near...",
-			correct:     "the endpoints of the interval",
-			distractors: []string{"the centre", "the left endpoint only", "the data values"},
-			reason:      "The density rises where the equally spaced error is worst.",
-		},
-		{
-			question:    "Runge's phenomenon on equally spaced nodes is...",
-			correct:     "the error blowing up near the interval ends",
-			distractors: []string{"the error at the centre", "a machine-precision effect", "a monotone convergence"},
-			reason:      "It is the failure of equally spaced interpolation to converge for smooth functions with large higher derivatives.",
-		},
-		{
-			question:    "Among all choices of nodes, the Chebyshev nodes give the node product...",
-			correct:     "the smallest possible maximum absolute value",
-			distractors: []string{"the largest possible maximum", "a vanishing derivative", "no zeros"},
-			reason:      "This is the minimax property of the Chebyshev polynomial.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return chebyshevProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -936,48 +608,7 @@ func (g *chebyshevGen) Generate(ctx generator.GeneratorContext) generator.Proble
 type splinesGen struct{}
 
 func (g *splinesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "A cubic spline is...",
-			correct:     "a piecewise cubic that matches the values and the first two derivatives at the knots",
-			distractors: []string{"a single high-degree polynomial", "a piecewise linear function", "a rational function"},
-			reason:      "The derivative matching makes the curve smooth across each knot.",
-		},
-		{
-			question:    "Splines are preferred to one interpolating polynomial because...",
-			correct:     "they avoid the wild oscillation of high-degree polynomials",
-			distractors: []string{"they are exact", "they need no data", "they are linear"},
-			reason:      "Low-degree pieces keep the interpolant close to the data between the knots.",
-		},
-		{
-			question:    "The natural cubic spline has...",
-			correct:     "zero second derivative at the two endpoints",
-			distractors: []string{"zero first derivative at the endpoints", "a prescribed slope everywhere", "no boundary conditions"},
-			reason:      "Two extra conditions are needed to pin down the otherwise free end pieces.",
-		},
-		{
-			question:    "The interpolation error of a cubic spline behaves like...",
-			correct:     "a constant times the fourth power of the knot spacing",
-			distractors: []string{"the square of the knot spacing", "the knot spacing", "a constant"},
-			reason:      "The fourth-order behaviour comes from bounding the fourth derivative on each piece.",
-		},
-		{
-			question:    "A spline of degree one is...",
-			correct:     "a piecewise linear interpolant",
-			distractors: []string{"a quadratic", "a cubic", "a constant"},
-			reason:      "Degree counts the highest power used on each piece.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return splinesProblem()
 }
 
 func absInt(n int) int {

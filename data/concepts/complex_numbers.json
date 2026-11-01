@@ -190,7 +190,7 @@
     "label": "Euler's identity",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "complex.adv.exponential"
     ],
@@ -204,7 +204,7 @@
     "label": "Cauchy-Riemann equations",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "complex.adv.polar",
       "calc.deriv.partial"
@@ -219,7 +219,7 @@
     "label": "Residues and the residue theorem",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "complex.adv.cauchy_riemann"
     ],
@@ -233,7 +233,7 @@
     "label": "Analytic functions",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "complex.adv.cauchy_riemann"
     ],
@@ -247,7 +247,7 @@
     "label": "Laurent series",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "complex.adv.analytic"
     ],
@@ -261,7 +261,7 @@
     "label": "Contour integration",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "complex.series.laurent",
       "calc.integral.definite"
@@ -276,7 +276,7 @@
     "label": "Harmonic functions and mean value",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "complex.adv.analytic"
     ],
@@ -290,7 +290,7 @@
     "label": "Riemann sphere and stereographic projection",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "complex.adv.polar",
       "topo.manifold"
@@ -305,7 +305,7 @@
     "label": "Conformal mappings",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "complex.adv.analytic"
     ],
@@ -319,7 +319,7 @@
     "label": "Cauchy-Goursat theorem",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "complex.adv.analytic"
     ],
@@ -333,7 +333,7 @@
     "label": "Power series and radius of convergence",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "complex.adv.analytic",
       "calc.series.power"
@@ -348,7 +348,7 @@
     "label": "Möbius transformations",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "complex.topology.riemann_sphere"
     ],
@@ -362,7 +362,7 @@
     "label": "Schwarz lemma",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "complex.adv.conformal"
     ],
@@ -432,7 +432,7 @@
     "label": "Loci in the complex plane",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.basics",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "complex.ops.modulus",
       "alg.linear.parallel_perp"
@@ -477,7 +477,7 @@
     "label": "Conjugate roots of real polynomials",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "complex.ops.conjugate",
       "alg.poly.roots"
@@ -492,7 +492,7 @@
     "label": "Trigonometric functions from exponentials",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "complex.adv.exponential",
       "trig.ident.identities"
@@ -507,7 +507,7 @@
     "label": "Hyperbolic functions on imaginary arguments",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "complex.adv.exponential"
     ],
@@ -579,7 +579,7 @@
     "label": "Open and closed sets in the plane",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "complex.ops.modulus",
       "topo.basics.open_closed"
@@ -594,7 +594,7 @@
     "label": "Domains in the complex plane",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.topology",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "complex.topology.open_sets",
       "topo.connected"

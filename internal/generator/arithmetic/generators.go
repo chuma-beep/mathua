@@ -497,23 +497,7 @@ func (g *factorFindGen) Grade(expected, answer string) grader.Result {
 type primeGen struct{}
 
 func (g *primeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*5)
-	primes := []int{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47}
-	composites := []int{4, 6, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 22, 24, 25}
-	if rand.Intn(2) == 0 {
-		p := primes[rand.Intn(min(len(primes), scale*3))]
-		// A yes/no verdict is a word, so it is offered rather than typed.
-		choice := generator.MultipleChoice(fmt.Sprintf("Is %d prime?", p), "yes", "no")
-		choice.Explanation = fmt.Sprintf("%d is prime, only divisible by 1 and itself.", p)
-		choice.Facts = map[string]string{"p": strconv.Itoa(p)}
-		return choice
-	}
-	c := composites[rand.Intn(min(len(composites), scale*3))]
-	choice := generator.MultipleChoice(fmt.Sprintf("Is %d prime?", c), "no", "yes")
-	choice.Explanation = fmt.Sprintf("%d is composite.", c)
-	// Same key as the prime branch: one schema covers both verdicts.
-	choice.Facts = map[string]string{"p": strconv.Itoa(c)}
-	return choice
+	return primeProblem()
 }
 
 type primeFactGen struct{}
@@ -527,7 +511,7 @@ func (g *primeFactGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		fStr[i] = strconv.Itoa(f)
 	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("Find the prime factorization of %d.", n),
+		Question:    fmt.Sprintf("Find the prime factorization of %d. Enter the factors separated by commas, smallest first.", n),
 		Answer:      strings.Join(fStr, ","),
 		Explanation: fmt.Sprintf("%d = %s", n, strings.Join(fStr, " x ")),
 		Facts:       map[string]string{"n": strconv.Itoa(n), "factors": strings.Join(fStr, " × ")},
@@ -581,31 +565,7 @@ func (g *lcmGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type compositeGen struct{}
 
 func (g *compositeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*5)
-	n := rand.Intn(scale*20) + 4
-	isComposite := false
-	for i := 2; i*i <= n; i++ {
-		if n%i == 0 {
-			isComposite = true
-			break
-		}
-	}
-	ans := "no"
-	exp := fmt.Sprintf("%d is prime.", n)
-	if isComposite {
-		ans = "yes"
-		exp = fmt.Sprintf("%d is composite.", n)
-	}
-	// "yes" and "no" are words, so the learner needs options: the math field
-	// strips the spaces a typed sentence relies on.
-	other := "no"
-	if ans == "no" {
-		other = "yes"
-	}
-	p := generator.MultipleChoice(fmt.Sprintf("Is %d composite?", n), ans, other)
-	p.Explanation = exp
-	p.Facts = map[string]string{"n": strconv.Itoa(n), "ans": ans, "is_composite": strconv.FormatBool(isComposite)}
-	return p
+	return compositeProblem()
 }
 
 type expConceptGen struct{}

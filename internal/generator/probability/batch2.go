@@ -123,48 +123,7 @@ func (g *jointDensityGen) Generate(ctx generator.GeneratorContext) generator.Pro
 type rvIndependenceGen struct{}
 
 func (g *rvIndependenceGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Two random variables X and Y are independent when...",
-			correct:     "the joint distribution factors into the product of the marginals everywhere",
-			distractors: []string{"their covariance is zero", "they are uncorrelated", "they have the same distribution"},
-			reason:      "Independence is the product rule for the whole joint law, which is strictly stronger than a zero covariance.",
-		},
-		{
-			question:    "If X and Y are independent, then E[XY] equals...",
-			correct:     "E[X]E[Y]",
-			distractors: []string{"E[X] + E[Y]", "zero", "Var(X)Var(Y)"},
-			reason:      "Independence factors the expectation of the product into the product of the expectations.",
-		},
-		{
-			question:    "Independence of two variables with finite variances implies...",
-			correct:     "zero covariance",
-			distractors: []string{"equal means", "a symmetric joint density", "zero variance"},
-			reason:      "E[XY] = E[X]E[Y] makes the covariance E[XY] − E[X]E[Y] vanish.",
-		},
-		{
-			question:    "Which of these is not implied by a zero covariance?",
-			correct:     "independence",
-			distractors: []string{"uncorrelatedness", "finite means", "finite variances"},
-			reason:      "Uncorrelated does not imply independent; a nonlinear dependence can leave the covariance at zero.",
-		},
-		{
-			question:    "For independent continuous variables the joint density is...",
-			correct:     "the product of the marginal densities",
-			distractors: []string{"the sum of the marginal densities", "the average of the marginal densities", "the ratio of the marginal densities"},
-			reason:      "Independence factors the joint density just as it factors the joint mass function.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return rvIndependenceProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -429,48 +388,7 @@ func (g *correlationGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type convergenceInProbabilityGen struct{}
 
 func (g *convergenceInProbabilityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Convergence in probability of X_n to X means that for every positive ε...",
-			correct:     "P(|X_n − X| > ε) tends to zero",
-			distractors: []string{"X_n equals X eventually", "the distribution functions converge pointwise", "the means converge"},
-			reason:      "The defining requirement is that the probability of a departure larger than ε vanishes.",
-		},
-		{
-			question:    "Convergence in probability implies...",
-			correct:     "convergence in distribution",
-			distractors: []string{"almost-sure convergence", "convergence of the densities", "convergence of every moment"},
-			reason:      "The CDFs of a sequence converging in probability converge weakly; the converse fails.",
-		},
-		{
-			question:    "The weak law of large numbers is a statement of...",
-			correct:     "convergence in probability",
-			distractors: []string{"almost-sure convergence", "convergence in distribution", "convergence in mean square"},
-			reason:      "The sample mean converges in probability to the population mean.",
-		},
-		{
-			question:    "Which of these does convergence in probability not imply?",
-			correct:     "almost-sure convergence",
-			distractors: []string{"convergence in distribution", "uniqueness of the limit in probability", "the existence of an almost-surely convergent subsequence"},
-			reason:      "Almost-sure convergence is strictly stronger; a subsequence converges almost surely, but not the whole sequence.",
-		},
-		{
-			question:    "If X_n converges in probability to a constant, then X_n also converges to it...",
-			correct:     "in distribution",
-			distractors: []string{"almost surely", "in mean square", "uniformly"},
-			reason:      "Convergence in probability is stronger than convergence in distribution in general.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return convergenceInProbabilityProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -480,48 +398,7 @@ func (g *convergenceInProbabilityGen) Generate(ctx generator.GeneratorContext) g
 type convergenceInDistributionGen struct{}
 
 func (g *convergenceInDistributionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Convergence in distribution means that...",
-			correct:     "the distribution functions converge at every point where the limit is continuous",
-			distractors: []string{"the variables converge pointwise", "the probabilities of every event converge", "the densities converge pointwise"},
-			reason:      "Weak convergence constrains the laws, not the variables or their densities.",
-		},
-		{
-			question:    "Convergence in distribution is equivalent to...",
-			correct:     "E[g(X_n)] tending to E[g(X)] for every bounded continuous g",
-			distractors: []string{"convergence of all moments", "convergence in probability", "almost-sure convergence"},
-			reason:      "The portmanteau characterisation uses bounded continuous test functions.",
-		},
-		{
-			question:    "Convergence in distribution alone does not determine...",
-			correct:     "the joint behaviour of the variables",
-			distractors: []string{"the limiting distribution", "the limiting distribution function", "the limit of E[g(X_n)] for bounded continuous g"},
-			reason:      "Each variable is controlled only through its own law, so joint structure is invisible.",
-		},
-		{
-			question:    "The central limit theorem is a statement of...",
-			correct:     "convergence in distribution",
-			distractors: []string{"convergence in probability", "almost-sure convergence", "uniform convergence of the densities"},
-			reason:      "The standardised sum converges weakly to the standard normal.",
-		},
-		{
-			question:    "A sequence can converge in distribution but not in probability when...",
-			correct:     "the variables are not all defined on the same probability space",
-			distractors: []string{"the variables are independent", "the variables are identically distributed", "the limit is normal"},
-			reason:      "Weak convergence is a statement about the laws and does not relate the variables to a common limit.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return convergenceInDistributionProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -531,48 +408,7 @@ func (g *convergenceInDistributionGen) Generate(ctx generator.GeneratorContext) 
 type almostSureGen struct{}
 
 func (g *almostSureGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Almost-sure convergence of X_n to X means that...",
-			correct:     "the set of outcomes on which X_n converges to X has probability one",
-			distractors: []string{"P(|X_n − X| > ε) tends to zero for each ε", "the distribution functions converge", "the means converge"},
-			reason:      "The convergence happens for almost every outcome, a statement about the sample paths.",
-		},
-		{
-			question:    "Almost-sure convergence implies...",
-			correct:     "convergence in probability",
-			distractors: []string{"the reverse implication", "nothing about convergence in distribution", "uniform convergence"},
-			reason:      "The strong mode implies the weak one, and the converse does not hold.",
-		},
-		{
-			question:    "The strong law of large numbers is a statement of...",
-			correct:     "almost-sure convergence",
-			distractors: []string{"convergence in probability", "convergence in distribution", "convergence in mean square"},
-			reason:      "The sample mean converges to the population mean for almost every outcome.",
-		},
-		{
-			question:    "A sequence that converges in probability has...",
-			correct:     "an almost-surely convergent subsequence",
-			distractors: []string{"a unique almost-sure limit on the whole sequence", "no convergent subsequence", "a normally distributed limit"},
-			reason:      "The subsequence theorem extracts almost-sure convergence along a subsequence.",
-		},
-		{
-			question:    "The Borel-Cantelli lemma is the tool that turns a summable tail of probabilities into...",
-			correct:     "an almost-sure statement",
-			distractors: []string{"a convergence-in-probability statement", "a distributional statement", "a monotonicity statement"},
-			reason:      "It shows that a finite total probability leaves only finitely many of the events occurring, almost surely.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return almostSureProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -582,48 +418,7 @@ func (g *almostSureGen) Generate(ctx generator.GeneratorContext) generator.Probl
 type strongLawGen struct{}
 
 func (g *strongLawGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "The strong law of large numbers says that the sample mean converges to the population mean...",
-			correct:     "almost surely",
-			distractors: []string{"in probability", "in distribution", "in mean square"},
-			reason:      "The strong law is the almost-sure version of the law of large numbers.",
-		},
-		{
-			question:    "The strong law needs the observations to...",
-			correct:     "be independent and identically distributed with a finite mean",
-			distractors: []string{"have a finite variance", "be normally distributed", "be bounded"},
-			reason:      "A finite mean and independence are enough; a finite variance is not required.",
-		},
-		{
-			question:    "Compared with the weak law, the strong law draws...",
-			correct:     "a stronger conclusion",
-			distractors: []string{"a weaker conclusion", "an equivalent conclusion", "a conclusion only about variances"},
-			reason:      "Almost-sure convergence implies convergence in probability, so the strong law is stronger.",
-		},
-		{
-			question:    "The strong law can fail for a distribution with...",
-			correct:     "an infinite mean",
-			distractors: []string{"an infinite variance", "a skewed shape", "a bounded support"},
-			reason:      "The Cauchy distribution has no mean, and its sample average does not settle down.",
-		},
-		{
-			question:    "The almost-sure limit of the sample mean is...",
-			correct:     "the population mean",
-			distractors: []string{"the median", "the standard deviation", "the mode"},
-			reason:      "The limit is the expectation of the distribution, when it exists.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return strongLawProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -633,48 +428,7 @@ func (g *strongLawGen) Generate(ctx generator.GeneratorContext) generator.Proble
 type borelCantelliGen struct{}
 
 func (g *borelCantelliGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "The first Borel-Cantelli lemma says that if the probabilities of the events sum to a finite total, then...",
-			correct:     "almost surely only finitely many of the events occur",
-			distractors: []string{"almost surely infinitely many occur", "the events are independent", "the limit of the probabilities is zero"},
-			reason:      "A summable total probability leaves only finitely many events occurring, and no independence is needed.",
-		},
-		{
-			question:    "The second Borel-Cantelli lemma needs the events to be independent and the probabilities to...",
-			correct:     "sum to infinity",
-			distractors: []string{"sum to a finite total", "be equal", "decrease to zero"},
-			reason:      "Independence with a divergent sum forces infinitely many of the events to occur.",
-		},
-		{
-			question:    "When the events are independent and their probabilities sum to infinity, almost surely...",
-			correct:     "infinitely many of them occur",
-			distractors: []string{"only finitely many occur", "exactly one occurs", "none occur"},
-			reason:      "This is the content of the second lemma.",
-		},
-		{
-			question:    "Borel-Cantelli is used to prove...",
-			correct:     "almost-sure results such as the strong law of large numbers",
-			distractors: []string{"the central limit theorem", "Chebyshev's inequality", "Bayes' theorem"},
-			reason:      "It converts statements about sums of probabilities into almost-sure statements about tails.",
-		},
-		{
-			question:    "Both lemmas concern the probability that...",
-			correct:     "infinitely many of a sequence of events occur",
-			distractors: []string{"exactly one of the events occurs", "the union of the first finitely many occurs", "the intersection of all the events occurs"},
-			reason:      "The event of interest is the limsup of the sequence, the set of outcomes in infinitely many of the events.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return borelCantelliProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -684,48 +438,7 @@ func (g *borelCantelliGen) Generate(ctx generator.GeneratorContext) generator.Pr
 type slutskyGen struct{}
 
 func (g *slutskyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Slutsky's theorem says that if X_n converges in distribution to X and Y_n converges in probability to a constant c, then X_n + Y_n converges in distribution to...",
-			correct:     "X + c",
-			distractors: []string{"the standard normal", "c times X", "the variable Y_n"},
-			reason:      "A probability limit may be added into a distributional limit as a constant.",
-		},
-		{
-			question:    "Slutsky's theorem is most often used to replace a random denominator by...",
-			correct:     "its probability limit",
-			distractors: []string{"its expectation", "its variance", "its median"},
-			reason:      "A statistic divided by a consistent estimate of its scale converges to the standard limit.",
-		},
-		{
-			question:    "The theorem combines convergence of one sequence in distribution with convergence of the other...",
-			correct:     "in probability",
-			distractors: []string{"in probability for both", "in distribution for both", "almost surely for both"},
-			reason:      "One factor may be weak and the other must be strong enough to collapse to a constant.",
-		},
-		{
-			question:    "If Y_n converges in probability to a nonzero constant c, then 1/Y_n converges in probability to...",
-			correct:     "1/c",
-			distractors: []string{"c squared", "zero", "one"},
-			reason:      "The reciprocal is continuous at a nonzero limit, so the continuous mapping theorem applies.",
-		},
-		{
-			question:    "Slutsky's theorem follows from...",
-			correct:     "the continuous mapping theorem together with the weak convergence of the distributional factor",
-			distractors: []string{"the strong law alone", "Chebyshev's inequality", "the Borel-Cantelli lemmas"},
-			reason:      "It is an application of continuous mapping to a pair that is tight in one coordinate.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return slutskyProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -808,48 +521,7 @@ func (g *deltaMethodGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type characteristicGen struct{}
 
 func (g *characteristicGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "The characteristic function of X is...",
-			correct:     "the expectation of e^{itX} as a function of the real parameter t",
-			distractors: []string{"the expectation of e^{tX}", "the expectation of X e^{tX}", "the density of X"},
-			reason:      "The imaginary unit in the exponent keeps the modulus at one.",
-		},
-		{
-			question:    "Unlike the moment generating function, the characteristic function...",
-			correct:     "always exists",
-			distractors: []string{"exists only for small t", "requires finite moments", "is undefined for discrete variables"},
-			reason:      "The modulus of e^{itX} is one, so the expectation is finite for every distribution.",
-		},
-		{
-			question:    "The characteristic function of a symmetric distribution is...",
-			correct:     "real-valued",
-			distractors: []string{"purely imaginary", "complex with a nonzero imaginary part", "constant"},
-			reason:      "A symmetric law makes the sine terms cancel, leaving the cosine terms.",
-		},
-		{
-			question:    "A characteristic function is...",
-			correct:     "uniformly continuous and bounded by one in modulus",
-			distractors: []string{"unbounded", "always equal to one", "necessarily real"},
-			reason:      "The defining integral is bounded by one, and uniform continuity follows from dominated convergence.",
-		},
-		{
-			question:    "The characteristic function of a sum of independent variables is...",
-			correct:     "the product of their characteristic functions",
-			distractors: []string{"the sum of their characteristic functions", "the average of them", "the maximum of them"},
-			reason:      "Independence factors the expectation of the exponential of the sum.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return characteristicFunctionProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -900,48 +572,7 @@ func (g *characteristicMomentsGen) Generate(ctx generator.GeneratorContext) gene
 type characteristicSumsGen struct{}
 
 func (g *characteristicSumsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "If X and Y are independent, the characteristic function of X + Y is...",
-			correct:     "the product of their characteristic functions",
-			distractors: []string{"their sum", "their difference", "their average"},
-			reason:      "Independence factors the expectation of e^{it(X+Y)}.",
-		},
-		{
-			question:    "Without independence, the characteristic function of a sum is...",
-			correct:     "given by the joint characteristic function along a diagonal, not a simple product",
-			distractors: []string{"still the product", "the sum of the two functions", "undefined"},
-			reason:      "The joint transform is needed when the variables are dependent.",
-		},
-		{
-			question:    "The characteristic function of a pair factorises if and only if...",
-			correct:     "the variables are independent",
-			distractors: []string{"they are uncorrelated", "they have the same distribution", "their means are zero"},
-			reason:      "Factorisation of the joint transform is equivalent to independence, unlike a zero covariance.",
-		},
-		{
-			question:    "Characteristic functions turn a convolution of distributions into...",
-			correct:     "a multiplication",
-			distractors: []string{"an addition", "a division", "a composition"},
-			reason:      "The Fourier transform diagonalises convolution into pointwise multiplication.",
-		},
-		{
-			question:    "The product of the characteristic functions of independent variables is...",
-			correct:     "the characteristic function of their sum",
-			distractors: []string{"the characteristic function of their product", "their joint density", "their covariance"},
-			reason:      "This is the product rule for independent sums.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return characteristicSumsProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -951,48 +582,7 @@ func (g *characteristicSumsGen) Generate(ctx generator.GeneratorContext) generat
 type continuityTheoremGen struct{}
 
 func (g *continuityTheoremGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "The continuity theorem says that a sequence of distributions converges if and only if...",
-			correct:     "their characteristic functions converge pointwise to a function continuous at zero",
-			distractors: []string{"their densities converge", "their moments converge", "their means converge"},
-			reason:      "Pointwise convergence of the transforms, with continuity at the origin, is equivalent to weak convergence.",
-		},
-		{
-			question:    "If the characteristic functions converge to a limit that is itself a characteristic function, then...",
-			correct:     "the distributions converge weakly to the corresponding distribution",
-			distractors: []string{"the variables converge in probability", "the densities converge uniformly", "the supports converge"},
-			reason:      "The limit transform identifies the limiting law.",
-		},
-		{
-			question:    "The continuity theorem is the main tool in...",
-			correct:     "proving the central limit theorem",
-			distractors: []string{"proving Chebyshev's inequality", "computing conditional expectations", "finding stationary distributions"},
-			reason:      "The characteristic function of a standardised sum has a recognisable limit, the standard normal transform.",
-		},
-		{
-			question:    "Pointwise convergence of characteristic functions gives convergence of the distributions when the limit is...",
-			correct:     "continuous at zero",
-			distractors: []string{"differentiable everywhere", "bounded", "monotone"},
-			reason:      "Continuity at the origin is the technical condition that rules out mass escaping to infinity.",
-		},
-		{
-			question:    "The continuity theorem is used to establish convergence of...",
-			correct:     "the distributions, not necessarily the variables",
-			distractors: []string{"the variables almost surely", "the densities everywhere", "the moments"},
-			reason:      "It is a weak-convergence statement, about the laws rather than the sample paths.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return continuityTheoremProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -1002,48 +592,7 @@ func (g *continuityTheoremGen) Generate(ctx generator.GeneratorContext) generato
 type characteristicCLTGen struct{}
 
 func (g *characteristicCLTGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "In the characteristic-function proof of the central limit theorem, the log of the transform of the standardised sum is expanded...",
-			correct:     "as −σ²t²/(2n) plus a term that vanishes as n grows",
-			distractors: []string{"as σ²t²/2", "as t", "as a constant"},
-			reason:      "The quadratic term survives the multiplication of the n transforms and the rest vanishes.",
-		},
-		{
-			question:    "Multiplying the characteristic functions of the standardised sum gives an expression whose limit is...",
-			correct:     "e^{−t²/2}",
-			distractors: []string{"e^{t²/2}", "one", "a linear function of t"},
-			reason:      "The quadratic exponent accumulates to the standard normal transform.",
-		},
-		{
-			question:    "The limit e^{−t²/2} is the characteristic function of...",
-			correct:     "the standard normal distribution",
-			distractors: []string{"the uniform distribution", "the exponential distribution", "the Cauchy distribution"},
-			reason:      "That transform identifies the standard normal law uniquely.",
-		},
-		{
-			question:    "The proof establishes convergence of the standardised sum...",
-			correct:     "in distribution",
-			distractors: []string{"almost surely", "in probability", "in mean square"},
-			reason:      "The continuity theorem yields weak convergence, which is what the central limit theorem claims.",
-		},
-		{
-			question:    "A key step in the proof uses independence to...",
-			correct:     "factor the characteristic function of the sum into a product",
-			distractors: []string{"compute the density directly", "apply Chebyshev's inequality", "bound the support"},
-			reason:      "The product rule for independent sums is what makes the n-th power appear.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return characteristicCLTProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -1264,46 +813,5 @@ func (g *randomWalkGen) Generate(ctx generator.GeneratorContext) generator.Probl
 type martingaleGen struct{}
 
 func (g *martingaleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "A sequence is a martingale when...",
-			correct:     "E[M_{n+1} | M_0, ..., M_n] = M_n",
-			distractors: []string{"E[M_n] = 0 for every n", "the increments are independent", "M_n is constant in n"},
-			reason:      "The conditional expectation of the next value, given the past, is the present value.",
-		},
-		{
-			question:    "A martingale's expectation as a function of time is...",
-			correct:     "constant",
-			distractors: []string{"increasing without bound", "always zero", "decaying to zero"},
-			reason:      "Taking expectations of the defining equation gives E[M_{n+1}] = E[M_n].",
-		},
-		{
-			question:    "Which is the canonical example of a martingale?",
-			correct:     "a symmetric random walk",
-			distractors: []string{"a monotone increasing sequence", "the running maximum of a random walk", "a deterministic trend"},
-			reason:      "A fair random walk has conditional mean equal to its current value.",
-		},
-		{
-			question:    "The optional stopping theorem says that for a suitable stopping time T...",
-			correct:     "E[M_T] = E[M_0] under conditions that rule out the abuse of stopping",
-			distractors: []string{"E[M_T] = 0 always", "the stopped process diverges", "the stopping time has no expectation"},
-			reason:      "Boundedness or integrability conditions are needed, which is why the theorem is easy to misuse.",
-		},
-		{
-			question:    "For a symmetric random walk S_n, the quantity S_n² − n is...",
-			correct:     "a martingale",
-			distractors: []string{"increasing in n", "constant in n", "a stopping time"},
-			reason:      "The compensating drift n removes the growth in the second moment, leaving a martingale.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return martingaleProblem()
 }

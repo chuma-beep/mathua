@@ -4,7 +4,7 @@
     "label": "Probability axioms",
     "domain": "probability_theory",
     "subdomain": "probability_theory.foundations",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "stat.prob.sample_space"
     ],
@@ -18,7 +18,7 @@
     "label": "Sigma-algebras and events",
     "domain": "probability_theory",
     "subdomain": "probability_theory.foundations",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "prob.space.axioms"
     ],
@@ -46,7 +46,7 @@
     "label": "Continuity of probability",
     "domain": "probability_theory",
     "subdomain": "probability_theory.foundations",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "prob.space.axioms"
     ],
@@ -103,7 +103,7 @@
     "label": "Pairwise and mutual independence",
     "domain": "probability_theory",
     "subdomain": "probability_theory.foundations",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "stat.prob.compound"
     ],
@@ -117,7 +117,7 @@
     "label": "Random variables",
     "domain": "probability_theory",
     "subdomain": "probability_theory.random_variables",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "stat.prob.discrete_rv"
     ],
@@ -131,7 +131,7 @@
     "label": "The distribution function",
     "domain": "probability_theory",
     "subdomain": "probability_theory.random_variables",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "stat.prob.continuous_rv"
     ],
@@ -257,7 +257,7 @@
     "label": "The memoryless property",
     "domain": "probability_theory",
     "subdomain": "probability_theory.distributions",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "stat.dist.geometric"
     ],
@@ -285,7 +285,7 @@
     "label": "The exponential family",
     "domain": "probability_theory",
     "subdomain": "probability_theory.distributions",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "stat.dist.normal"
     ],
@@ -327,7 +327,7 @@
     "label": "The weak law of large numbers",
     "domain": "probability_theory",
     "subdomain": "probability_theory.limits",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "prob.limit.chebyshev"
     ],
@@ -383,7 +383,7 @@
     "label": "Independent random variables",
     "domain": "probability_theory",
     "subdomain": "probability_theory.joint",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "prob.joint.marginal"
     ],
@@ -468,7 +468,7 @@
     "label": "Convergence in probability",
     "domain": "probability_theory",
     "subdomain": "probability_theory.convergence",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "prob.limit.weak_law"
     ],
@@ -482,7 +482,7 @@
     "label": "Convergence in distribution",
     "domain": "probability_theory",
     "subdomain": "probability_theory.convergence",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "prob.conv.in_probability"
     ],
@@ -496,7 +496,7 @@
     "label": "Almost-sure convergence",
     "domain": "probability_theory",
     "subdomain": "probability_theory.convergence",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "prob.conv.in_probability"
     ],
@@ -510,7 +510,7 @@
     "label": "The strong law of large numbers",
     "domain": "probability_theory",
     "subdomain": "probability_theory.convergence",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "prob.limit.weak_law"
     ],
@@ -524,7 +524,7 @@
     "label": "The Borel-Cantelli lemmas",
     "domain": "probability_theory",
     "subdomain": "probability_theory.convergence",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "prob.space.continuity"
     ],
@@ -538,7 +538,7 @@
     "label": "Slutsky's theorem",
     "domain": "probability_theory",
     "subdomain": "probability_theory.convergence",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "prob.conv.in_distribution"
     ],
@@ -566,7 +566,7 @@
     "label": "Characteristic functions",
     "domain": "probability_theory",
     "subdomain": "probability_theory.characteristic",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "prob.rv.mgf"
     ],
@@ -594,7 +594,7 @@
     "label": "Characteristic functions of sums",
     "domain": "probability_theory",
     "subdomain": "probability_theory.characteristic",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "prob.chf.definition"
     ],
@@ -608,7 +608,7 @@
     "label": "The continuity theorem",
     "domain": "probability_theory",
     "subdomain": "probability_theory.characteristic",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "prob.chf.definition"
     ],
@@ -622,7 +622,7 @@
     "label": "The central limit theorem by characteristic functions",
     "domain": "probability_theory",
     "subdomain": "probability_theory.characteristic",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "prob.chf.continuity",
       "prob.limit.clt"
@@ -693,7 +693,7 @@
     "label": "Martingales",
     "domain": "probability_theory",
     "subdomain": "probability_theory.processes",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "prob.expect.conditional"
     ],

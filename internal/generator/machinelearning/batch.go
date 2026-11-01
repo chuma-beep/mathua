@@ -127,48 +127,7 @@ func (g *sigmoidGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 type logisticRegressionGen struct{}
 
 func (g *logisticRegressionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Logistic regression turns a linear score into...",
-			correct:     "a probability through the sigmoid",
-			distractors: []string{"a real number through the identity", "a class through a step function", "a distance through the absolute value"},
-			reason:      "The linear score w*x + b is passed through the sigmoid, which maps every real number into the interval from 0 to 1.",
-		},
-		{
-			question:    "Which loss is the natural training objective for logistic regression?",
-			correct:     "cross-entropy",
-			distractors: []string{"mean squared error", "mean absolute error", "hinge loss"},
-			reason:      "Cross-entropy is the negative log-likelihood of the Bernoulli label, so it matches the probabilistic output of the model.",
-		},
-		{
-			question:    "The decision boundary of logistic regression is...",
-			correct:     "a hyperplane where the linear score is zero",
-			distractors: []string{"a circle centred on the mean", "a quadratic curve", "the convex hull of the positive points"},
-			reason:      "The model predicts above one half exactly when the linear score is positive, and the score is zero on a hyperplane.",
-		},
-		{
-			question:    "If the predicted probability is 0.9, how is the point classified at a 0.5 threshold?",
-			correct:     "positive",
-			distractors: []string{"negative", "undecided", "it depends on the sign of the bias"},
-			reason:      "A probability above 0.5 falls on the positive side of the threshold, regardless of the individual weights.",
-		},
-		{
-			question:    "Logistic regression is called a linear classifier because...",
-			correct:     "its decision boundary is linear in the inputs",
-			distractors: []string{"its loss is linear in the parameters", "it can use only one feature", "its output is a linear function"},
-			reason:      "The probability is nonlinear, but the boundary where the probability equals one half is the linear equation w*x + b = 0.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return logisticRegressionProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -178,48 +137,7 @@ func (g *logisticRegressionGen) Generate(ctx generator.GeneratorContext) generat
 type vanishingGradientGen struct{}
 
 func (g *vanishingGradientGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Why can deep sigmoid networks suffer from vanishing gradients?",
-			correct:     "the sigmoid derivative is at most 0.25, so repeated multiplication shrinks it",
-			distractors: []string{"the sigmoid derivative is above 1, so gradients explode", "the sigmoid is not differentiable", "the loss is unbounded"},
-			reason:      "The sigmoid derivative peaks at 0.25, so a product of many layer derivatives shrinks toward zero as depth grows.",
-		},
-		{
-			question:    "Exploding gradients are most often caused by...",
-			correct:     "repeated multiplication by factors larger than 1",
-			distractors: []string{"a learning rate of zero", "too few layers", "using cross-entropy"},
-			reason:      "If the layer derivatives or weights have magnitude above 1, their product grows exponentially with depth.",
-		},
-		{
-			question:    "Which remedy targets vanishing gradients?",
-			correct:     "ReLU activations and residual connections",
-			distractors: []string{"tiny random weight initialization", "removing normalization", "increasing only the batch size"},
-			reason:      "ReLU keeps a derivative of 1 on the positive side, and residual connections give gradients a short path back.",
-		},
-		{
-			question:    "In a deep network, the gradient at an early layer is...",
-			correct:     "a product of many layer derivatives",
-			distractors: []string{"the sum of the layer outputs", "independent of depth", "always equal to the loss"},
-			reason:      "The chain rule multiplies one local derivative per layer, so depth appears as a product and drives vanishing or explosion.",
-		},
-		{
-			question:    "Gradient clipping is used to...",
-			correct:     "cap the gradient norm and stop an exploding update",
-			distractors: []string{"raise the learning rate", "remove the bias terms", "make the loss convex"},
-			reason:      "Clipping bounds the size of the update when a rare batch produces an unusually large gradient.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return vanishingGradientProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -478,48 +396,7 @@ func (g *oneHotGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type imbalanceGen struct{}
 
 func (g *imbalanceGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "A dataset has 990 negatives and 10 positives. A model that always predicts negative has what accuracy?",
-			correct:     "99%",
-			distractors: []string{"50%", "10%", "1%"},
-			reason:      "It is right on the 990 negatives and wrong on the 10 positives, so its accuracy is 990/1000 = 99%.",
-		},
-		{
-			question:    "Which technique directly addresses class imbalance?",
-			correct:     "resampling or class weights",
-			distractors: []string{"one-hot encoding", "a larger learning rate", "removing the minority class"},
-			reason:      "Resampling changes the class frequencies and class weights change their cost; neither discards the minority class.",
-		},
-		{
-			question:    "Why is accuracy misleading on imbalanced data?",
-			correct:     "the majority class dominates the count",
-			distractors: []string{"the loss is always convex", "the model cannot output probabilities", "the test set is too large"},
-			reason:      "A model can score high by always predicting the majority class, so the errors that matter disappear into the average.",
-		},
-		{
-			question:    "Undersampling the majority class...",
-			correct:     "discards data and can raise variance",
-			distractors: []string{"increases the majority count", "guarantees better precision", "removes the need for validation"},
-			reason:      "Throwing away majority examples balances the classes but spends information, so estimates become noisier.",
-		},
-		{
-			question:    "When positives are rare, which metrics are more informative than accuracy?",
-			correct:     "precision and recall",
-			distractors: []string{"mean squared error", "the parameter count", "training time"},
-			reason:      "Precision and recall report the two error types separately, which accuracy hides when one class dominates.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return imbalanceProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -589,46 +466,5 @@ func (g *giniGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type ensembleGen struct{}
 
 func (g *ensembleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Bagging trains many models on...",
-			correct:     "bootstrap samples of the training data",
-			distractors: []string{"the same data with shuffled labels", "successively reweighted copies", "the test set"},
-			reason:      "Each model sees a resample drawn with replacement, so the models differ while staying trained on real data.",
-		},
-		{
-			question:    "Random forests add which ingredient to bagging?",
-			correct:     "a random subset of features at each split",
-			distractors: []string{"a larger learning rate", "one-hot encoding", "a single deep tree"},
-			reason:      "Restricting the candidate features decorrelates the trees, which makes the average more reliable.",
-		},
-		{
-			question:    "Bagging mainly reduces...",
-			correct:     "variance",
-			distractors: []string{"bias", "the number of features", "the training set size"},
-			reason:      "Averaging many high-variance models cancels part of their independent error, but each model keeps its own bias.",
-		},
-		{
-			question:    "Boosting mainly reduces...",
-			correct:     "bias",
-			distractors: []string{"variance only", "the number of trees", "the need for validation"},
-			reason:      "Each new weak learner corrects the residual errors of the current ensemble, so the fit improves where it was too simple.",
-		},
-		{
-			question:    "Averaging many high-variance trees helps because...",
-			correct:     "their errors are partly independent and cancel",
-			distractors: []string{"each tree has zero bias", "the average is always unbiased", "the trees see the test data"},
-			reason:      "The variance of an average shrinks when the components are not perfectly correlated, which is why the feature subsampling matters.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return ensembleProblem()
 }

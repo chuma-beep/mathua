@@ -274,7 +274,7 @@ func (g *vertexFormGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		formatPoly(polyTerm{1, 2}, polyTerm{b, 1}, polyTerm{h * h, 0}))
 	return generator.Problem{
 		Question: fmt.Sprintf("Write \\(y = %s\\) in vertex form \\(y = (x - h)^2 + k\\). "+
-			"Enter \\(h\\) and \\(k\\) as a comma-separated pair.", quad),
+			"Enter \\(h\\) and \\(k\\) as a comma-separated pair without parentheses.", quad),
 		Answer: fmt.Sprintf("%d,%d", h, k),
 		Explanation: fmt.Sprintf("Half of the \\(x\\)-coefficient is %d, so the square is \\(%s\\). "+
 			"The square contributes %d as its constant and the polynomial's constant is %d, "+
@@ -347,7 +347,7 @@ type endBehaviorGen struct{}
 
 func (g *endBehaviorGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	degree := []int{2, 3, 4, 5}[rand.Intn(4)]
-	lead := rand.Intn(8) - 4 // -4..3
+	lead := rand.Intn(8) - 4
 	if lead == 0 {
 		lead = 2
 	}
@@ -357,37 +357,25 @@ func (g *endBehaviorGen) Generate(ctx generator.GeneratorContext) generator.Prob
 	}
 	poly := formatPoly(terms...)
 	even := degree%2 == 0
-	var answer, parity string
+	upEnds := 1
 	if even {
-		parity = "even"
+		upEnds = 0
 		if lead > 0 {
-			answer = "up on both ends"
-		} else {
-			answer = "down on both ends"
+			upEnds = 2
 		}
+	} else if lead < 0 {
+		upEnds = 1
 	} else {
-		parity = "odd"
-		if lead > 0 {
-			answer = "down on the left, up on the right"
-		} else {
-			answer = "up on the left, down on the right"
-		}
+		upEnds = 1
 	}
-	p := generator.MultipleChoice(
-		fmt.Sprintf("Describe the end behavior of \\(f(x) = %s\\).", poly),
-		answer,
-		"up on both ends",
-		"down on both ends",
-		"down on the left, up on the right",
-		"up on the left, down on the right",
-	)
-	p.Facts = map[string]string{
-		"poly": poly, "degree": strconv.Itoa(degree), "leading": strconv.Itoa(lead),
-		"parity": parity, "behavior": answer,
+	return generator.Problem{
+		Question:    fmt.Sprintf("How many ends of \\(f(x) = %s\\) go up? (enter 0, 1 or 2)", poly),
+		Answer:      strconv.Itoa(upEnds),
+		Explanation: fmt.Sprintf("The degree is %d and the leading coefficient is %d, so %d of the two ends go up.", degree, lead, upEnds),
+		Facts: map[string]string{
+			"poly": poly, "degree": strconv.Itoa(degree), "leading": strconv.Itoa(lead), "up_ends": strconv.Itoa(upEnds),
+		},
 	}
-	p.Explanation = fmt.Sprintf("The degree is %d (%s) and the leading coefficient is %d, so the end behavior is %s.",
-		degree, parity, lead, answer)
-	return p
 }
 
 // ---------------------------------------------------------------------------
@@ -692,44 +680,5 @@ func (g *changeBaseGen) Generate(ctx generator.GeneratorContext) generator.Probl
 type conicClassifyGen struct{}
 
 func (g *conicClassifyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	var equation, class, reason string
-	switch rand.Intn(4) {
-	case 0:
-		r := rand.Intn(7) + 2 // 2..8
-		equation = fmt.Sprintf("x^2 + y^2 = %d", r*r)
-		class = "circle"
-		reason = "Both variables are squared with the same coefficient and there is no linear term, so the conic is a circle."
-	case 1:
-		a := rand.Intn(3) + 1
-		if rand.Intn(2) == 0 {
-			a = -a
-		}
-		b := rand.Intn(7) - 3
-		c := rand.Intn(11) - 5
-		equation = "y = " + formatPoly(polyTerm{a, 2}, polyTerm{b, 1}, polyTerm{c, 0})
-		class = "parabola"
-		reason = "Only one variable is squared, so the conic is a parabola."
-	case 2:
-		p := rand.Intn(7) + 2 // 2..8
-		q := rand.Intn(7) + 2
-		if p == q {
-			q++
-		}
-		equation = fmt.Sprintf("x^2/%d + y^2/%d = 1", p*p, q*q)
-		class = "ellipse"
-		reason = "Both variables are squared with the same sign but unequal coefficients, so the conic is an ellipse."
-	default:
-		p := rand.Intn(7) + 2
-		q := rand.Intn(7) + 2
-		equation = fmt.Sprintf("x^2/%d - y^2/%d = 1", p*p, q*q)
-		class = "hyperbola"
-		reason = "The squared terms have opposite signs, so the conic is a hyperbola."
-	}
-	p := generator.MultipleChoice(
-		fmt.Sprintf("Classify the conic \\(%s\\).", equation),
-		class, "circle", "ellipse", "parabola", "hyperbola",
-	)
-	p.Facts = map[string]string{"equation": equation, "class": class, "reason": reason}
-	p.Explanation = reason
-	return p
+	return conicClassifyProblem()
 }

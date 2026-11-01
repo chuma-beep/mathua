@@ -126,148 +126,51 @@ func (g *piecewiseGen) Generate(ctx generator.GeneratorContext) generator.Proble
 type transformationsGen struct{}
 
 func (g *transformationsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	x0 := rand.Intn(9) - 4
+	y0 := rand.Intn(9) - 4
+	k := rand.Intn(8) + 2
+	c := rand.Intn(5) + 2
 	mode := rand.Intn(6)
+	var question, explanation, answer string
+	var coord string
 	switch mode {
 	case 0:
-		// Vertical shifts
-		k := rand.Intn(8) + 2
-		if rand.Intn(2) == 0 {
-			q := fmt.Sprintf("Compared with the graph of y = f(x), the graph of y = f(x) + %d is...", k)
-			correct := fmt.Sprintf("shifted up %d units", k)
-			dist := []string{
-				fmt.Sprintf("shifted down %d units", k),
-				fmt.Sprintf("shifted right %d units", k),
-				fmt.Sprintf("stretched vertically by a factor of %d", k),
-			}
-			p := generator.MultipleChoice(q, correct, dist...)
-			p.Explanation = "Adding a positive constant outside the function shifts every point vertically upwards."
-			return p
-		}
-		q := fmt.Sprintf("Compared with the graph of y = f(x), the graph of y = f(x) - %d is...", k)
-		correct := fmt.Sprintf("shifted down %d units", k)
-		dist := []string{
-			fmt.Sprintf("shifted up %d units", k),
-			fmt.Sprintf("shifted left %d units", k),
-			fmt.Sprintf("compressed vertically by a factor of %d", k),
-		}
-		p := generator.MultipleChoice(q, correct, dist...)
-		p.Explanation = "Subtracting a positive constant outside the function shifts every point vertically downwards."
-		return p
+		coord = "y"
+		answer = strconv.Itoa(y0 + k)
+		question = fmt.Sprintf("If \\((%d, %d)\\) lies on \\(y = f(x)\\), what is the y-coordinate of the corresponding point on \\(y = f(x) + %d\\)? (enter a number)", x0, y0, k)
+		explanation = fmt.Sprintf("Adding %d outside the function adds %d to every y-coordinate: \\(%d + %d = %d\\).", k, k, y0, k, y0+k)
 	case 1:
-		// Horizontal shifts
-		k := rand.Intn(8) + 2
-		if rand.Intn(2) == 0 {
-			q := fmt.Sprintf("The graph of y = f(x - %d) is the graph of y = f(x)...", k)
-			correct := fmt.Sprintf("shifted right %d units", k)
-			dist := []string{
-				fmt.Sprintf("shifted left %d units", k),
-				fmt.Sprintf("shifted up %d units", k),
-				fmt.Sprintf("stretched horizontally by a factor of %d", k),
-			}
-			p := generator.MultipleChoice(q, correct, dist...)
-			p.Explanation = "Subtracting inside the argument shifts the graph horizontally to the right."
-			return p
-		}
-		q := fmt.Sprintf("The graph of y = f(x + %d) is the graph of y = f(x)...", k)
-		correct := fmt.Sprintf("shifted left %d units", k)
-		dist := []string{
-			fmt.Sprintf("shifted right %d units", k),
-			fmt.Sprintf("shifted down %d units", k),
-			fmt.Sprintf("compressed horizontally by a factor of %d", k),
-		}
-		p := generator.MultipleChoice(q, correct, dist...)
-		p.Explanation = "Adding inside the argument shifts the graph horizontally to the left."
-		return p
+		coord = "x"
+		answer = strconv.Itoa(x0 + k)
+		question = fmt.Sprintf("If \\((%d, %d)\\) lies on \\(y = f(x)\\), what is the x-coordinate of the corresponding point on \\(y = f(x - %d)\\)? (enter a number)", x0, y0, k)
+		explanation = fmt.Sprintf("Replacing x by x - %d shifts the graph right by %d: \\(%d + %d = %d\\).", k, k, x0, k, x0+k)
 	case 2:
-		// Vertical scaling
-		c := rand.Intn(5) + 2
-		if rand.Intn(2) == 0 {
-			q := fmt.Sprintf("The graph of y = %d f(x) is the graph of y = f(x)...", c)
-			correct := fmt.Sprintf("stretched vertically by a factor of %d", c)
-			dist := []string{
-				fmt.Sprintf("compressed vertically by a factor of %d", c),
-				fmt.Sprintf("stretched horizontally by a factor of %d", c),
-				fmt.Sprintf("shifted up %d units", c),
-			}
-			p := generator.MultipleChoice(q, correct, dist...)
-			p.Explanation = "Multiplying outside by c > 1 scales every y-coordinate by c, stretching vertically."
-			return p
-		}
-		q := fmt.Sprintf("The graph of y = (1/%d) f(x) is the graph of y = f(x)...", c)
-		correct := fmt.Sprintf("compressed vertically by a factor of %d", c)
-		dist := []string{
-			fmt.Sprintf("stretched vertically by a factor of %d", c),
-			fmt.Sprintf("compressed horizontally by a factor of %d", c),
-			fmt.Sprintf("shifted down %d units", c),
-		}
-		p := generator.MultipleChoice(q, correct, dist...)
-		p.Explanation = "Multiplying outside by 1/c compresses the graph vertically towards the x-axis."
-		return p
+		coord = "y"
+		answer = strconv.Itoa(c * y0)
+		question = fmt.Sprintf("If \\((%d, %d)\\) lies on \\(y = f(x)\\), what is the y-coordinate of the corresponding point on \\(y = %d f(x)\\)? (enter a number)", x0, y0, c)
+		explanation = fmt.Sprintf("The vertical scale factor multiplies every y-coordinate by %d: \\(%d \\times %d = %d\\).", c, c, y0, c*y0)
 	case 3:
-		// Horizontal scaling
-		c := rand.Intn(5) + 2
-		if rand.Intn(2) == 0 {
-			q := fmt.Sprintf("The graph of y = f(%dx) is the graph of y = f(x)...", c)
-			correct := fmt.Sprintf("compressed horizontally by a factor of %d", c)
-			dist := []string{
-				fmt.Sprintf("stretched horizontally by a factor of %d", c),
-				fmt.Sprintf("compressed vertically by a factor of %d", c),
-				fmt.Sprintf("shifted right %d units", c),
-			}
-			p := generator.MultipleChoice(q, correct, dist...)
-			p.Explanation = "Multiplying inside by c > 1 speeds up input progression, compressing horizontally."
-			return p
-		}
-		q := fmt.Sprintf("The graph of y = f(x/%d) is the graph of y = f(x)...", c)
-		correct := fmt.Sprintf("stretched horizontally by a factor of %d", c)
-		dist := []string{
-			fmt.Sprintf("compressed horizontally by a factor of %d", c),
-			fmt.Sprintf("stretched vertically by a factor of %d", c),
-			fmt.Sprintf("shifted left %d units", c),
-		}
-		p := generator.MultipleChoice(q, correct, dist...)
-		p.Explanation = "Dividing inside by c stretches the graph horizontally by a factor of c."
-		return p
+		x0 = (rand.Intn(7) - 3) * c
+		coord = "x"
+		answer = strconv.Itoa(x0 / c)
+		question = fmt.Sprintf("If \\((%d, %d)\\) lies on \\(y = f(x)\\), what is the x-coordinate of the corresponding point on \\(y = f(%d x)\\)? (enter a number)", x0, y0, c)
+		explanation = fmt.Sprintf("The horizontal scale factor %d divides every x-coordinate: \\(%d / %d = %d\\).", c, x0, c, x0/c)
 	case 4:
-		// Reflections
-		if rand.Intn(2) == 0 {
-			q := "The graph of y = -f(x) is the graph of y = f(x)..."
-			correct := "reflected across the x-axis"
-			dist := []string{
-				"reflected across the y-axis",
-				"shifted down one unit",
-				"rotated a quarter turn",
-			}
-			p := generator.MultipleChoice(q, correct, dist...)
-			p.Explanation = "Negating the output reverses the sign of every y-coordinate, reflecting across the x-axis."
-			return p
-		}
-		q := "The graph of y = f(-x) is the graph of y = f(x)..."
-		correct := "reflected across the y-axis"
-		dist := []string{
-			"reflected across the x-axis",
-			"shifted left one unit",
-			"inverted across the origin",
-		}
-		p := generator.MultipleChoice(q, correct, dist...)
-		p.Explanation = "Negating the input reverses the sign of every x-coordinate, reflecting across the y-axis."
-		return p
+		coord = "y"
+		answer = strconv.Itoa(-y0)
+		question = fmt.Sprintf("If \\((%d, %d)\\) lies on \\(y = f(x)\\), what is the y-coordinate of the corresponding point on \\(y = -f(x)\\)? (enter a number)", x0, y0)
+		explanation = fmt.Sprintf("The reflection across the x-axis negates every y-coordinate: \\(-%d = %d\\).", y0, -y0)
 	default:
-		// Point tracking under combined shift
-		x0 := rand.Intn(9) - 4
-		y0 := rand.Intn(9) - 4
-		h := rand.Intn(5) + 1
-		k := rand.Intn(5) + 1
-		q := fmt.Sprintf("If the point (%d, %d) lies on the graph of y = f(x), which point must lie on the graph of y = f(x - %d) + %d?", x0, y0, h, k)
-		correct := fmt.Sprintf("(%d, %d)", x0+h, y0+k)
-		dist := []string{
-			fmt.Sprintf("(%d, %d)", x0-h, y0+k),
-			fmt.Sprintf("(%d, %d)", x0+h, y0-k),
-			fmt.Sprintf("(%d, %d)", x0-h, y0-k),
-		}
-		p := generator.MultipleChoice(q, correct, dist...)
-		p.Explanation = fmt.Sprintf("The transformation shifts right by %d and up by %d: (%d + %d, %d + %d) = (%d, %d).", h, k, x0, h, y0, k, x0+h, y0+k)
-		return p
+		coord = "x"
+		answer = strconv.Itoa(-x0)
+		question = fmt.Sprintf("If \\((%d, %d)\\) lies on \\(y = f(x)\\), what is the x-coordinate of the corresponding point on \\(y = f(-x)\\)? (enter a number)", x0, y0)
+		explanation = fmt.Sprintf("The reflection across the y-axis negates every x-coordinate: \\(-%d = %d\\).", x0, -x0)
+	}
+	return generator.Problem{
+		Question:    question,
+		Answer:      answer,
+		Explanation: explanation,
+		Facts:       map[string]string{"x": strconv.Itoa(x0), "y": strconv.Itoa(y0), "mode": strconv.Itoa(mode), "answer": answer, "coordinate": coord},
 	}
 }
 
@@ -278,99 +181,55 @@ func (g *transformationsGen) Generate(ctx generator.GeneratorContext) generator.
 type inverseDomainGen struct{}
 
 func (g *inverseDomainGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	mode := rand.Intn(5)
+	mode := rand.Intn(4)
 	switch mode {
 	case 0:
-		// Bounded interval domain and range swap
 		a := rand.Intn(5) - 4
 		b := a + rand.Intn(4) + 1
 		c := b + rand.Intn(4) + 1
 		d := c + rand.Intn(4) + 2
-		q := fmt.Sprintf("If a one-to-one function f has domain [%d, %d] and range [%d, %d], what is the domain of its inverse function f^{-1}?", a, b, c, d)
-		correct := fmt.Sprintf("[%d, %d]", c, d)
-		dist := []string{
-			fmt.Sprintf("[%d, %d]", a, b),
-			fmt.Sprintf("[%d, %d]", a, d),
-			"the whole real line",
+		return generator.Problem{
+			Question:    fmt.Sprintf("A one-to-one function \\(f\\) has domain \\([%d, %d]\\) and range \\([%d, %d]\\). What is the lower endpoint of the domain of \\(f^{-1}\\)? (enter a number)", a, b, c, d),
+			Answer:      strconv.Itoa(c),
+			Explanation: fmt.Sprintf("The domain of \\(f^{-1}\\) is the range of \\(f\\), so it is \\([%d, %d]\\) and its lower endpoint is %d.", c, d, c),
+			Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "d": strconv.Itoa(d)},
 		}
-		p := generator.MultipleChoice(q, correct, dist...)
-		p.Explanation = fmt.Sprintf("The inverse function swaps inputs and outputs, so the domain of f^{-1} is the range of f: [%d, %d].", c, d)
-		return p
 	case 1:
-		// Square root function
 		a := rand.Intn(7) + 1
 		b := rand.Intn(6) + 1
 		for b == a {
 			b = rand.Intn(6) + 1
 		}
-		q := fmt.Sprintf("The one-to-one function f(x) = \\sqrt{x - %d} + %d has domain [%d, \\infty). What is the domain of its inverse f^{-1}?", a, b, a)
-		correct := fmt.Sprintf("[%d, \\infty)", b)
-		dist := []string{
-			fmt.Sprintf("[%d, \\infty)", a),
-			fmt.Sprintf("(-\\infty, %d]", b),
-			"all real numbers",
+		return generator.Problem{
+			Question:    fmt.Sprintf("The one-to-one function \\(f(x) = \\sqrt{x - %d} + %d\\) has domain \\([%d, \\infty)\\). What is the lower endpoint of the domain of \\(f^{-1}\\)? (enter a number)", a, b, a),
+			Answer:      strconv.Itoa(b),
+			Explanation: fmt.Sprintf("The square root is at least 0, so the range of \\(f\\) is \\([%d, \\infty)\\), which is the domain of \\(f^{-1}\\).", b),
+			Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b)},
 		}
-		p := generator.MultipleChoice(q, correct, dist...)
-		p.Explanation = fmt.Sprintf("Since sqrt(x - %d) >= 0, the range of f is [%d, infinity), which becomes the domain of f^{-1}.", a, b)
-		return p
 	case 2:
-		// Restricted quadratic
 		a := rand.Intn(6) + 1
 		b := rand.Intn(6) + 1
 		for b == a {
 			b = rand.Intn(6) + 1
 		}
-		q := fmt.Sprintf("The quadratic function f(x) = (x - %d)^2 + %d with restricted domain [%d, \\infty) has an inverse. What is the domain of f^{-1}?", a, b, a)
-		correct := fmt.Sprintf("[%d, \\infty)", b)
-		dist := []string{
-			fmt.Sprintf("[%d, \\infty)", a),
-			fmt.Sprintf("(-\\infty, %d]", b),
-			"[0, \\infty)",
+		return generator.Problem{
+			Question:    fmt.Sprintf("The quadratic \\(f(x) = (x - %d)^2 + %d\\) with domain \\([%d, \\infty)\\) has an inverse. What is the lower endpoint of the domain of \\(f^{-1}\\)? (enter a number)", a, b, a),
+			Answer:      strconv.Itoa(b),
+			Explanation: fmt.Sprintf("The minimum value of \\(f\\) is %d, so its range is \\([%d, \\infty)\\) and that is the domain of \\(f^{-1}\\).", b, b),
+			Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b)},
 		}
-		p := generator.MultipleChoice(q, correct, dist...)
-		p.Explanation = fmt.Sprintf("The minimum value of f on this restricted domain is %d, so its range is [%d, infinity), which is the domain of f^{-1}.", b, b)
-		return p
-	case 3:
-		// Exponential function inverse
+	default:
 		a := rand.Intn(5) + 1
 		b := rand.Intn(5) + 1
 		for b == a {
 			b = rand.Intn(5) + 1
 		}
-		q := fmt.Sprintf("The exponential function f(x) = e^{x - %d} + %d is strictly increasing. What is the domain of its inverse function f^{-1}?", a, b)
-		correct := fmt.Sprintf("(%d, \\infty)", b)
-		dist := []string{
-			"(-\\infty, \\infty)",
-			fmt.Sprintf("[%d, \\infty)", b),
-			fmt.Sprintf("(%d, \\infty)", a),
+		return generator.Problem{
+			Question:    fmt.Sprintf("The increasing function \\(f(x) = e^{x - %d} + %d\\) has domain all real numbers. What is the lower endpoint of the domain of \\(f^{-1}\\)? (enter a number)", a, b),
+			Answer:      strconv.Itoa(b),
+			Explanation: fmt.Sprintf("Since \\(e^{x - %d} > 0\\), the range of \\(f\\) is \\((%d, \\infty)\\), so the lower endpoint is %d.", a, b, b),
+			Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b)},
 		}
-		p := generator.MultipleChoice(q, correct, dist...)
-		p.Explanation = fmt.Sprintf("Since e^{x - %d} > 0 for all x, the range of f is (%d, infinity), which is the domain of f^{-1}.", a, b)
-		return p
-	default:
-		// Conceptual principles
-		if rand.Intn(2) == 0 {
-			q := "The domain of the inverse function f^{-1} is always identical to..."
-			correct := "the range of the original function f"
-			dist := []string{
-				"the domain of the original function f",
-				"the set of all non-zero real numbers",
-				"the interval where f is increasing",
-			}
-			p := generator.MultipleChoice(q, correct, dist...)
-			p.Explanation = "Because f^{-1}(y) = x exactly when f(x) = y, the allowed inputs to f^{-1} are the outputs of f."
-			return p
-		}
-		q := "A function f has a well-defined inverse function f^{-1} on its domain if and only if..."
-		correct := "f is one-to-one (passes the horizontal line test)"
-		dist := []string{
-			"f is a continuous polynomial",
-			"f passes through the origin (0, 0)",
-			"f is symmetric across the y-axis",
-		}
-		p := generator.MultipleChoice(q, correct, dist...)
-		p.Explanation = "An inverse requires that every output corresponds to exactly one unique input, which is the definition of a one-to-one function."
-		return p
 	}
 }
 
@@ -447,89 +306,65 @@ func (g *compoundGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type logGraphGen struct{}
 
 func (g *logGraphGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	mode := rand.Intn(5)
-	switch mode {
+	b := rand.Intn(8) + 2
+	h := rand.Intn(8) + 1
+	switch rand.Intn(5) {
 	case 0:
-		// Vertical asymptote with shift
-		b := rand.Intn(8) + 2
-		h := rand.Intn(9) + 1
 		if rand.Intn(2) == 0 {
-			q := fmt.Sprintf("What is the vertical asymptote of the logarithmic function y = \\log_{%d}(x - %d)?", b, h)
-			correct := fmt.Sprintf("x = %d", h)
-			dist := []string{
-				fmt.Sprintf("x = -%d", h),
-				fmt.Sprintf("y = %d", h),
-				"x = 0",
+			return generator.Problem{
+				Question:    fmt.Sprintf("What is the x-coordinate of the vertical asymptote of \\(y = \\log_{%d}(x - %d)\\)? (enter a number)", b, h),
+				Answer:      strconv.Itoa(h),
+				Explanation: fmt.Sprintf("The argument must be positive: \\(x - %d > 0\\), so the asymptote is \\(x = %d\\).", h, h),
+				Facts:       map[string]string{"base": strconv.Itoa(b), "shift": strconv.Itoa(h), "answer": strconv.Itoa(h)},
 			}
-			p := generator.MultipleChoice(q, correct, dist...)
-			p.Explanation = fmt.Sprintf("The argument of the logarithm must be positive: x - %d > 0 means the vertical asymptote is x = %d.", h, h)
-			return p
 		}
-		q := fmt.Sprintf("What is the vertical asymptote of the logarithmic function y = \\log_{%d}(x + %d)?", b, h)
-		correct := fmt.Sprintf("x = -%d", h)
-		dist := []string{
-			fmt.Sprintf("x = %d", h),
-			fmt.Sprintf("y = -%d", h),
-			"x = 0",
+		return generator.Problem{
+			Question:    fmt.Sprintf("What is the x-coordinate of the vertical asymptote of \\(y = \\log_{%d}(x + %d)\\)? (enter a number)", b, h),
+			Answer:      strconv.Itoa(-h),
+			Explanation: fmt.Sprintf("Set the argument to zero: \\(x + %d = 0\\), so the asymptote is \\(x = %d\\).", h, -h),
+			Facts:       map[string]string{"base": strconv.Itoa(b), "shift": strconv.Itoa(-h), "answer": strconv.Itoa(-h)},
 		}
-		p := generator.MultipleChoice(q, correct, dist...)
-		p.Explanation = fmt.Sprintf("Setting the argument to zero gives x + %d = 0, so the vertical asymptote is x = -%d.", h, h)
-		return p
 	case 1:
-		// x-intercept
-		b := rand.Intn(8) + 2
-		h := rand.Intn(7) + 1
-		q := fmt.Sprintf("What is the x-intercept of the graph of y = \\log_{%d}(x - %d)?", b, h)
-		correct := fmt.Sprintf("(%d, 0)", h+1)
-		dist := []string{
-			fmt.Sprintf("(%d, 0)", h),
-			fmt.Sprintf("(%d, 0)", h+b),
-			fmt.Sprintf("(0, %d)", h+1),
+		return generator.Problem{
+			Question:    fmt.Sprintf("What is the x-coordinate of the x-intercept of \\(y = \\log_{%d}(x - %d)\\)? (enter a number)", b, h),
+			Answer:      strconv.Itoa(h + 1),
+			Explanation: fmt.Sprintf("The logarithm is zero when its argument is 1: \\(x - %d = 1\\), so \\(x = %d\\).", h, h+1),
+			Facts:       map[string]string{"base": strconv.Itoa(b), "shift": strconv.Itoa(h), "answer": strconv.Itoa(h + 1)},
 		}
-		p := generator.MultipleChoice(q, correct, dist...)
-		p.Explanation = fmt.Sprintf("The logarithm is zero when its argument equals 1: x - %d = 1 implies x = %d.", h, h+1)
-		return p
 	case 2:
-		// Domain of shifted logarithm
-		b := rand.Intn(8) + 2
-		h := rand.Intn(8) + 1
-		q := fmt.Sprintf("What is the domain of the logarithmic function f(x) = \\log_{%d}(x - %d)?", b, h)
-		correct := fmt.Sprintf("(%d, \\infty)", h)
-		dist := []string{
-			fmt.Sprintf("[%d, \\infty)", h),
-			fmt.Sprintf("(-\\infty, %d)", h),
-			"all real numbers",
+		return generator.Problem{
+			Question:    fmt.Sprintf("What is the lower endpoint of the domain of \\(f(x) = \\log_{%d}(x - %d)\\)? (enter a number)", b, h),
+			Answer:      strconv.Itoa(h),
+			Explanation: fmt.Sprintf("The argument must be strictly positive: \\(x - %d > 0\\), so the domain is \\((%d, \\infty)\\).", h, h),
+			Facts:       map[string]string{"base": strconv.Itoa(b), "shift": strconv.Itoa(h), "answer": strconv.Itoa(h)},
 		}
-		p := generator.MultipleChoice(q, correct, dist...)
-		p.Explanation = fmt.Sprintf("The argument must be strictly positive: x - %d > 0 gives domain (%d, infinity).", h, h)
-		return p
 	case 3:
-		// Reflection across y = x
-		b := rand.Intn(8) + 2
-		q := fmt.Sprintf("The graph of y = \\log_{%d}(x) is the geometric reflection of the graph of y = %d^x across...", b, b)
-		correct := "the line y = x"
-		dist := []string{
-			"the x-axis",
-			"the y-axis",
-			"the line y = -x",
+		k := rand.Intn(3) + 1
+		x := h + algPowInt(b, k)
+		return generator.Problem{
+			Question:    fmt.Sprintf("Solve \\(\\log_{%d}(x - %d) = %d\\) for \\(x\\). (enter a number)", b, h, k),
+			Answer:      strconv.Itoa(x),
+			Explanation: fmt.Sprintf("Rewrite as an exponential: \\(x - %d = %d^{%d} = %d\\), so \\(x = %d\\).", h, b, k, algPowInt(b, k), x),
+			Facts:       map[string]string{"base": strconv.Itoa(b), "shift": strconv.Itoa(h), "exponent": strconv.Itoa(k), "answer": strconv.Itoa(x)},
 		}
-		p := generator.MultipleChoice(q, correct, dist...)
-		p.Explanation = "Logarithmic and exponential functions with base b are mutual inverses, so their graphs reflect across the diagonal line y = x."
-		return p
 	default:
-		// Growth rate for base > 1
-		b := rand.Intn(8) + 2
-		q := fmt.Sprintf("For base b = %d (b > 1), as x increases towards infinity, the graph of y = \\log_{%d}(x)...", b, b)
-		correct := "increases without bound, but slower than any linear function"
-		dist := []string{
-			"approaches a horizontal asymptote",
-			"is bounded above by y = 100",
-			"eventually decreases towards zero",
+		k := rand.Intn(4) + 1
+		val := algPowInt(b, k)
+		return generator.Problem{
+			Question:    fmt.Sprintf("What is \\(\\log_{%d}(%d)\\)? (enter a number)", b, val),
+			Answer:      strconv.Itoa(k),
+			Explanation: fmt.Sprintf("\\(%d^{%d} = %d\\), so the logarithm is %d.", b, k, val, k),
+			Facts:       map[string]string{"base": strconv.Itoa(b), "value": strconv.Itoa(val), "answer": strconv.Itoa(k)},
 		}
-		p := generator.MultipleChoice(q, correct, dist...)
-		p.Explanation = "The logarithm is strictly increasing and unbounded as x -> infinity, but its derivative 1/(x ln b) -> 0 so it grows slower than any linear function."
-		return p
 	}
+}
+
+func algPowInt(base, exp int) int {
+	out := 1
+	for i := 0; i < exp; i++ {
+		out *= base
+	}
+	return out
 }
 
 // ---------------------------------------------------------------------------
@@ -855,95 +690,43 @@ func (g *threeVarGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type matricesGen struct{}
 
 func (g *matricesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	mode := rand.Intn(5)
-	switch mode {
+	switch rand.Intn(3) {
 	case 0:
-		// Augmented matrix dimensions
-		eqs := rand.Intn(3) + 2 // 2, 3, 4
+		eqs := rand.Intn(3) + 2
 		vars := rand.Intn(3) + 2
-		q := fmt.Sprintf("What are the dimensions (rows x columns) of the augmented matrix representing a linear system of %d equations in %d variables?", eqs, vars)
-		correct := fmt.Sprintf("%d x %d", eqs, vars+1)
-		dist := []string{
-			fmt.Sprintf("%d x %d", eqs, vars),
-			fmt.Sprintf("%d x %d", eqs, vars+2),
-			fmt.Sprintf("%d x %d", eqs+1, vars),
+		entries := eqs * (vars + 1)
+		return generator.Problem{
+			Question:    fmt.Sprintf("How many entries does the augmented matrix for a linear system of %d equations in %d variables have? (enter a number)", eqs, vars),
+			Answer:      strconv.Itoa(entries),
+			Explanation: fmt.Sprintf("The matrix has %d rows and %d columns, so it has \\(%d \\times %d = %d\\) entries.", eqs, vars+1, eqs, vars+1, entries),
+			Facts:       map[string]string{"equations": strconv.Itoa(eqs), "variables": strconv.Itoa(vars), "entries": strconv.Itoa(entries)},
 		}
-		p := generator.MultipleChoice(q, correct, dist...)
-		p.Explanation = fmt.Sprintf("The augmented matrix has one row per equation (%d) and one column per variable plus one for constants (%d + 1 = %d).", eqs, vars, vars+1)
-		return p
 	case 1:
-		// Inconsistent row
-		c := rand.Intn(9) + 1
-		if rand.Intn(2) == 0 {
-			c = -c
-		}
-		q := fmt.Sprintf("If the reduced row echelon form of an augmented matrix contains a row [0  0  0 | %d], the linear system has...", c)
-		correct := "no solution (the system is inconsistent)"
-		dist := []string{
-			"exactly one unique solution",
-			"infinitely many solutions",
-			fmt.Sprintf("a solution where the last variable equals %d", c),
-		}
-		p := generator.MultipleChoice(q, correct, dist...)
-		p.Explanation = fmt.Sprintf("The row translates to 0x + 0y + 0z = %d, which is 0 = %d, an impossibility.", c, c)
-		return p
-	case 2:
-		// Dependent / infinite solutions. A zero row alone does not imply a
-		// free variable: [1 0 0 | 1; 0 1 0 | 2; 0 0 1 | 3; 0 0 0 | 0] is a
-		// consistent four-by-three system with a zero row and a unique
-		// solution. What produces the free variable is the rank falling below
-		// the number of variables, so the question states the rank.
-		vars := rand.Intn(2) + 3 // 3 or 4
+		vars := rand.Intn(3) + 3
 		rank := vars - 1
-		q := fmt.Sprintf("In a consistent linear system of %d variables, row reduction yields %d nonzero rows. The system has...", vars, rank)
-		correct := "infinitely many solutions (at least one free variable)"
-		dist := []string{
-			"no solution",
-			"a unique solution",
-			"exactly two solutions",
+		free := vars - rank
+		return generator.Problem{
+			Question:    fmt.Sprintf("A consistent linear system in %d variables has rank %d. How many free variables does it have? (enter a number)", vars, rank),
+			Answer:      strconv.Itoa(free),
+			Explanation: fmt.Sprintf("The number of free variables is the number of variables minus the rank: \\(%d - %d = %d\\).", vars, rank, free),
+			Facts:       map[string]string{"variables": strconv.Itoa(vars), "rank": strconv.Itoa(rank), "free": strconv.Itoa(free)},
 		}
-		p := generator.MultipleChoice(q, correct, dist...)
-		p.Explanation = fmt.Sprintf("The system has %d variables and rank %d, so it has %d - %d = 1 free variable and infinitely many solutions. A zero row on its own would only mark a redundant equation.", vars, rank, vars, rank)
-		return p
-	case 3:
-		// Read-off unique solution
+	default:
 		v := rand.Intn(15) - 7
 		rowIdx := rand.Intn(3)
-		var varName string
-		var rowStr string
-		switch rowIdx {
-		case 0:
-			varName = "x"
-			rowStr = fmt.Sprintf("[1  0  0 | %d]", v)
-		case 1:
-			varName = "y"
-			rowStr = fmt.Sprintf("[0  1  0 | %d]", v)
-		default:
-			varName = "z"
-			rowStr = fmt.Sprintf("[0  0  1 | %d]", v)
+		vars := []string{"x", "y", "z"}
+		row := fmt.Sprintf("[1  0  0 | %d]", v)
+		if rowIdx == 1 {
+			row = fmt.Sprintf("[0  1  0 | %d]", v)
+		} else if rowIdx == 2 {
+			row = fmt.Sprintf("[0  0  1 | %d]", v)
 		}
-		q := fmt.Sprintf("In the reduced row echelon form of a system in variables (x, y, z), row %d is %s. What is the value of %s?", rowIdx+1, rowStr, varName)
-		correct := strconv.Itoa(v)
-		dist := []string{
-			strconv.Itoa(v + 1),
-			strconv.Itoa(v - 1),
-			strconv.Itoa(v + 2),
+		return generator.Problem{
+			Question:    fmt.Sprintf("In reduced row echelon form, row %d of a system in \\((x, y, z)\\) is %s. What is the value of \\(%s\\)? (enter a number)", rowIdx+1, row, vars[rowIdx]),
+			Answer:      strconv.Itoa(v),
+			Explanation: fmt.Sprintf("The row translates directly to \\(%s = %d\\).", vars[rowIdx], v),
+			Facts:       map[string]string{"row": strconv.Itoa(rowIdx + 1), "variable": vars[rowIdx], "value": strconv.Itoa(v)},
 		}
-		p := generator.MultipleChoice(q, correct, dist...)
-		p.Explanation = fmt.Sprintf("%s directly translates to 1%s = %d.", rowStr, varName, v)
-		return p
-	default:
-		// Valid elementary row operations
-		q := "Which of the following is a valid elementary row operation used in Gaussian elimination?"
-		correct := "adding a scalar multiple of one row to another row"
-		dist := []string{
-			"multiplying two different rows together entry by entry",
-			"adding a nonzero constant to every entry in a row",
-			"squaring every entry in a row",
-		}
-		p := generator.MultipleChoice(q, correct, dist...)
-		p.Explanation = "The three elementary row operations are swapping rows, scaling a row by a nonzero constant and adding a multiple of one row to another."
-		return p
 	}
 }
 
@@ -1006,27 +789,7 @@ func (g *sigmaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type inductionGen struct{}
 
 func (g *inductionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	claims := []algMCClaim{
-		{
-			q:           "A proof by induction establishes a statement by proving...",
-			correct:     "a base case and an induction step that passes from n to n + 1",
-			distractors: []string{"only the base case", "the statement for one very large n", "the statement for every n without a base case"},
-			reason:      "The base case starts the chain and the induction step carries it forward to every later integer.",
-		},
-		{
-			q:           "The induction step assumes...",
-			correct:     "the statement holds for some n and then proves it for n + 1",
-			distractors: []string{"the statement for n + 1 and derives it for n", "the statement for every n at once", "only the base case and nothing else"},
-			reason:      "The step is a conditional: if the statement is true at one rung, it is true at the next.",
-		},
-		{
-			q:           "If the base case fails but the induction step is valid, the proof...",
-			correct:     "does not establish the statement",
-			distractors: []string{"still proves the statement", "proves it for every n except the base", "proves the converse instead"},
-			reason:      "Without a starting point the chain never begins, so no instance is reached.",
-		},
-	}
-	return algPickMC(append(claims, computedAlgClaims("alg.seq.induction")...))
+	return inductionProblem()
 }
 
 // ---------------------------------------------------------------------------

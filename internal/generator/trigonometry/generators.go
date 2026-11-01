@@ -55,44 +55,7 @@ type radiansGen struct{}
 // options are plain text so they render in a button, and the answer is the
 // option's own text so a tap resolves to it.
 func (g *radiansGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	table := []struct {
-		deg   int
-		label string
-	}{
-		{30, "\u03c0/6"},
-		{45, "\u03c0/4"},
-		{60, "\u03c0/3"},
-		{90, "\u03c0/2"},
-		{180, "\u03c0"},
-		{270, "3\u03c0/2"},
-		{360, "2\u03c0"},
-	}
-	made := make([]string, len(table))
-	for i, e := range table {
-		made[i] = e.label
-	}
-	i := rand.Intn(len(table))
-	e := table[i]
-	if rand.Intn(2) == 0 {
-		p := generator.MultipleChoice(
-			fmt.Sprintf("Convert \\(%d^{\\circ}\\) to radians.", e.deg),
-			e.label, others(made, e.label)...,
-		)
-		p.Explanation = fmt.Sprintf("\\(%d^{\\circ} \\times \\frac{\\pi}{180} = %s\\).", e.deg, e.label)
-		p.Facts = map[string]string{"deg": strconv.Itoa(e.deg), "rad": e.label, "factor": "\\frac{\\pi}{180}"}
-		return p
-	}
-	degrees := make([]string, len(table))
-	for j, other := range table {
-		degrees[j] = strconv.Itoa(other.deg)
-	}
-	p := generator.MultipleChoice(
-		fmt.Sprintf("Convert %s radians to degrees.", e.label),
-		strconv.Itoa(e.deg), others(degrees, strconv.Itoa(e.deg))...,
-	)
-	p.Explanation = fmt.Sprintf("%s \\(\\times \\frac{180}{\\pi} = %d^{\\circ}\\).", e.label, e.deg)
-	p.Facts = map[string]string{"deg": strconv.Itoa(e.deg), "rad": e.label, "factor": "\\frac{180}{\\pi}"}
-	return p
+	return angleConversionProblem()
 }
 
 // others returns every value except one, for use as distractors.
@@ -147,26 +110,7 @@ func bare(v string) string {
 }
 
 func (g *unitCircleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	// Easy → pick from quadrant 1 + axes; Hard → pick from any quadrant
-	var candidates []struct {
-		deg      int
-		sin, cos string
-	}
-	for _, a := range unitCircleAngles {
-		if ctx.Difficulty > 0.4 || a.easy {
-			candidates = append(candidates, struct {
-				deg      int
-				sin, cos string
-			}{a.deg, a.sin, a.cos})
-		}
-	}
-	a := candidates[rand.Intn(len(candidates))]
-	angle := fmt.Sprintf("%d^{\\circ}", a.deg)
-	label := fmt.Sprintf("\\(%s\\)", angle)
-	if rand.Intn(2) == 0 {
-		return unitCircleProblem(angle, fmt.Sprintf("What is \\(\\sin(%s)\\)?", angle), a.sin, "\\sin", label)
-	}
-	return unitCircleProblem(angle, fmt.Sprintf("What is \\(\\cos(%s)\\)?", angle), a.cos, "\\cos", label)
+	return unitCircleFactsProblem()
 }
 
 // unitCirclePlainValues are the answers a unit-circle question can have, written
@@ -381,40 +325,7 @@ func (g *pythagoreanIDGen) Generate(ctx generator.GeneratorContext) generator.Pr
 type specialAnglesGen struct{}
 
 func (g *specialAnglesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		label string
-		sin   string
-		cos   string
-		tan   string
-	}
-	table := []entry{
-		{"\\(30^{\\circ}\\)", "1/2", "\u221a3/2", "\u221a3/3"},
-		{"\\(45^{\\circ}\\)", "\u221a2/2", "\u221a2/2", "1"},
-		{"\\(60^{\\circ}\\)", "\u221a3/2", "1/2", "\u221a3"},
-	}
-	e := table[rand.Intn(len(table))]
-	funcs := []struct {
-		name string
-		val  string
-	}{
-		{"sin", e.sin},
-		{"cos", e.cos},
-		{"tan", e.tan},
-	}
-	fn := funcs[rand.Intn(3)]
-	pool := []string{"1/2", "\u221a2/2", "\u221a3/2", "\u221a3/3", "1", "\u221a3"}
-	distractors := make([]string, 0, len(pool))
-	for _, v := range pool {
-		if v != fn.val {
-			distractors = append(distractors, v)
-		}
-	}
-	p := generator.MultipleChoice(
-		fmt.Sprintf("What is the exact value of %s(%s)?", fn.name, e.label),
-		fn.val, distractors...)
-	p.Explanation = fmt.Sprintf("%s(%s) = %s.", fn.name, e.label, fn.val)
-	p.Facts = map[string]string{"fn": fn.name, "label": e.label, "val": fn.val}
-	return p
+	return specialAngleProblem()
 }
 
 // trig.basics.reference_angle is also a multiple-choice concept, and it answered
@@ -423,55 +334,13 @@ func (g *specialAnglesGen) Generate(ctx generator.GeneratorContext) generator.Pr
 type referenceAngleGen struct{}
 
 func (g *referenceAngleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		angle int
-		ref   int
-	}
-	table := []entry{
-		{120, 60},
-		{135, 45},
-		{150, 30},
-		{210, 30},
-		{225, 45},
-		{240, 60},
-		{300, 60},
-		{315, 45},
-		{330, 30},
-	}
-	e := table[rand.Intn(len(table))]
-	ans := fmt.Sprintf("%d\u00b0", e.ref)
-	var distractors []string
-	for _, v := range []string{"30\u00b0", "45\u00b0", "60\u00b0"} {
-		if v != ans {
-			distractors = append(distractors, v)
-		}
-	}
-	p := generator.MultipleChoice(
-		fmt.Sprintf("What is the reference angle for %d\u00b0?", e.angle), ans, distractors...)
-	p.Explanation = fmt.Sprintf("The reference angle for %d\u00b0 is the acute angle it makes with the x-axis: %s.", e.angle, ans)
-	p.Facts = map[string]string{"angle": strconv.Itoa(e.angle), "ref": strconv.Itoa(e.ref)}
-	return p
+	return referenceAngleProblem()
 }
 
 type graphSinGen struct{}
 
 func (g *graphSinGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	questions := []struct {
-		q, a, e string
-	}{
-		{"What is \\(\\sin(0)\\)?", "0", "\\(\\sin(0) = 0\\)"},
-		{"What is the maximum value of \\(y = \\sin(x)\\)?", "1", "The sine function has a maximum value of 1."},
-		{"What is the minimum value of \\(y = \\sin(x)\\)?", "-1", "The sine function has a minimum value of -1."},
-		{"What is the period of \\(y = \\sin(x)\\)?", "\\(360^{\\circ}\\)", "The period of \\(\\sin(x)\\) is \\(360^{\\circ}\\) (\\(2\\pi\\) radians)."},
-		{"What is the amplitude of \\(y = \\sin(x)\\)?", "1", "The amplitude of \\(\\sin(x)\\) is 1."},
-		{"What is \\(\\sin(90^{\\circ})\\)?", "1", "\\(\\sin(90^{\\circ}) = 1\\)"},
-		{"What is \\(\\sin(180^{\\circ})\\)?", "0", "\\(\\sin(180^{\\circ}) = 0\\)"},
-		{"What is \\(\\sin(270^{\\circ})\\)?", "-1", "\\(\\sin(270^{\\circ}) = -1\\)"},
-		{"What is \\(\\sin(360^{\\circ})\\)?", "0", "\\(\\sin(360^{\\circ}) = 0\\)"},
-		{"Where does \\(\\sin(x)\\) start on the \\(y\\)-axis?", "0", "\\(\\sin(0) = 0\\)"},
-	}
-	q := questions[rand.Intn(len(questions))]
-	return graphTrigProblem(q.q, q.a, q.e)
+	return sineGraphProblem()
 }
 
 // graphNumberValues and graphDegreeValues are the answer families a sine or
@@ -507,22 +376,7 @@ func graphValueDistractors(want string) []string {
 type graphCosGen struct{}
 
 func (g *graphCosGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	questions := []struct {
-		q, a, e string
-	}{
-		{"What is \\(\\cos(0)\\)?", "1", "\\(\\cos(0) = 1\\)"},
-		{"What is the maximum value of \\(y = \\cos(x)\\)?", "1", "The cosine function has a maximum value of 1."},
-		{"What is the minimum value of \\(y = \\cos(x)\\)?", "-1", "The cosine function has a minimum value of -1."},
-		{"What is the period of \\(y = \\cos(x)\\)?", "\\(360^{\\circ}\\)", "The period of \\(\\cos(x)\\) is \\(360^{\\circ}\\) (\\(2\\pi\\) radians)."},
-		{"What is the amplitude of \\(y = \\cos(x)\\)?", "1", "The amplitude of \\(\\cos(x)\\) is 1."},
-		{"What is \\(\\cos(90^{\\circ})\\)?", "0", "\\(\\cos(90^{\\circ}) = 0\\)"},
-		{"What is \\(\\cos(180^{\\circ})\\)?", "-1", "\\(\\cos(180^{\\circ}) = -1\\)"},
-		{"What is \\(\\cos(270^{\\circ})\\)?", "0", "\\(\\cos(270^{\\circ}) = 0\\)"},
-		{"What is \\(\\cos(360^{\\circ})\\)?", "1", "\\(\\cos(360^{\\circ}) = 1\\)"},
-		{"Where does \\(\\cos(x)\\) start on the \\(y\\)-axis?", "1", "\\(\\cos(0) = 1\\)"},
-	}
-	q := questions[rand.Intn(len(questions))]
-	return graphTrigProblem(q.q, q.a, q.e)
+	return cosineGraphProblem()
 }
 
 type periodGen struct{}
@@ -561,38 +415,7 @@ func (g *periodGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type inverseGen struct{}
 
 func (g *inverseGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		f      string
-		val    string
-		result string
-		desc   string
-	}
-	table := []entry{
-		{"\\(\\arcsin(0)\\)", "0", "\\(0^{\\circ}\\)", "\\(\\arcsin(0) = 0^{\\circ}\\)"},
-		{"\\(\\arcsin(1/2)\\)", "1/2", "\\(30^{\\circ}\\)", "\\(\\arcsin(1/2) = 30^{\\circ}\\)"},
-		{"\\(\\arcsin(\\sqrt{2}/2)\\)", "\\(\\sqrt{2}/2\\)", "\\(45^{\\circ}\\)", "\\(\\arcsin(\\sqrt{2}/2) = 45^{\\circ}\\)"},
-		{"\\(\\arcsin(\\sqrt{3}/2)\\)", "\\(\\sqrt{3}/2\\)", "\\(60^{\\circ}\\)", "\\(\\arcsin(\\sqrt{3}/2) = 60^{\\circ}\\)"},
-		{"\\(\\arcsin(1)\\)", "1", "\\(90^{\\circ}\\)", "\\(\\arcsin(1) = 90^{\\circ}\\)"},
-		{"\\(\\arccos(1)\\)", "1", "\\(0^{\\circ}\\)", "\\(\\arccos(1) = 0^{\\circ}\\)"},
-		{"\\(\\arccos(\\sqrt{3}/2)\\)", "\\(\\sqrt{3}/2\\)", "\\(30^{\\circ}\\)", "\\(\\arccos(\\sqrt{3}/2) = 30^{\\circ}\\)"},
-		{"\\(\\arccos(\\sqrt{2}/2)\\)", "\\(\\sqrt{2}/2\\)", "\\(45^{\\circ}\\)", "\\(\\arccos(\\sqrt{2}/2) = 45^{\\circ}\\)"},
-		{"\\(\\arccos(1/2)\\)", "1/2", "\\(60^{\\circ}\\)", "\\(\\arccos(1/2) = 60^{\\circ}\\)"},
-		{"\\(\\arccos(0)\\)", "0", "\\(90^{\\circ}\\)", "\\(\\arccos(0) = 90^{\\circ}\\)"},
-		{"\\(\\arctan(0)\\)", "0", "\\(0^{\\circ}\\)", "\\(\\arctan(0) = 0^{\\circ}\\)"},
-		{"\\(\\arctan(\\sqrt{3}/3)\\)", "\\(\\sqrt{3}/3\\)", "\\(30^{\\circ}\\)", "\\(\\arctan(\\sqrt{3}/3) = 30^{\\circ}\\)"},
-		{"\\(\\arctan(1)\\)", "1", "\\(45^{\\circ}\\)", "\\(\\arctan(1) = 45^{\\circ}\\)"},
-		{"\\(\\arctan(\\sqrt{3})\\)", "\\(\\sqrt{3}\\)", "\\(60^{\\circ}\\)", "\\(\\arctan(\\sqrt{3}) = 60^{\\circ}\\)"},
-		{"\\(\\arcsin(-1/2)\\)", "-1/2", "\\(-30^{\\circ}\\)", "\\(\\arcsin(-1/2) = -30^{\\circ}\\)"},
-		{"\\(\\arccos(-1/2)\\)", "-1/2", "\\(120^{\\circ}\\)", "\\(\\arccos(-1/2) = 120^{\\circ}\\)"},
-	}
-	e := table[rand.Intn(len(table))]
-	// The answer is an angle, and a degree sign has no key on a phone keypad, so
-	// it is served as a tap. Report 28 was the same defect on special angles.
-	answer := strings.ReplaceAll(bare(e.result), "^{\\circ}", "°")
-	p := generator.MultipleChoice(
-		fmt.Sprintf("What is %s?", e.f), answer, inverseAngleDistractors(answer)...)
-	p.Explanation = e.desc
-	return p
+	return inverseFunctionProblem()
 }
 
 // inverseAngleValues are the principal angles an inverse-function question can
@@ -1110,85 +933,26 @@ func (g *cosecantFuncGen) Generate(ctx generator.GeneratorContext) generator.Pro
 type arcsineFuncGen struct{}
 
 func (g *arcsineFuncGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	easy := []funcEntry{
-		{"What is the domain of \\(\\arcsin(x)\\)? (type like [-1,1])", "[-1,1]", "Arcsine accepts exactly the sine values: \\([-1, 1]\\)."},
-		{"What is the range of \\(\\arcsin(x)\\)? (type like [-pi/2,pi/2])", "[-pi/2,pi/2]", "The restricted sine branch maps \\([-\\pi/2, \\pi/2]\\) onto \\([-1, 1]\\)."},
-		{"What is \\(\\arcsin(0)\\)? (enter a number)", "0", "\\(\\arcsin(0) = 0\\): the only root of the function."},
-		{"What is \\(\\arcsin(1)\\)? (type like pi/2)", "pi/2", "\\(\\arcsin(1) = \\pi/2\\): the maximum, at the right endpoint."},
-		{"Is \\(\\arcsin(x)\\) odd, even, or neither? (type one word)", "odd", "\\(\\arcsin(-x) = -\\arcsin(x)\\), so arcsine is odd."},
-		{"What is the derivative of \\(\\arcsin(x)\\)?", "1/sqrt(1-x^2)", "\\(d/dx \\arcsin(x) = 1/\\sqrt{1-x^{2}}\\) on \\((-1, 1)\\)."},
-		{"Is \\(\\arcsin(x)\\) increasing or decreasing on its domain? (type one word)", "increasing", "The derivative \\(1/\\sqrt{1-x^{2}}\\) is positive on \\((-1, 1)\\)."},
-	}
-	hard := []funcEntry{
-		{"What is \\(\\arcsin(-1)\\)? (type like -pi/2)", "-pi/2", "\\(\\arcsin(-1) = -\\pi/2\\): the minimum, at the left endpoint."},
-		{"What is \\(\\sin(\\arcsin(1/2))\\)? (enter a fraction like 1/2)", "1/2", "Applying sine after arcsine returns the argument: \\(1/2\\)."},
-		{"What is \\(\\arcsin(x) + \\arccos(x)\\)? (type like pi/2)", "pi/2", "The complementary inverse pair sums to \\(\\pi/2\\) for every \\(x\\)."},
-		{"Evaluate the integral of \\(\\arcsin(x)\\) from 0 to 1. (type like pi/2 - 1)", "pi/2 - 1", "The antiderivative \\(x\\arcsin(x) + \\sqrt{1-x^{2}}\\) gives \\(\\pi/2 - 1\\)."},
-	}
-	return funcPool(ctx, easy, hard)
+	return arcsineProblem()
 }
 
 // arccosine as a real function
 type arccosineFuncGen struct{}
 
 func (g *arccosineFuncGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	easy := []funcEntry{
-		{"What is the domain of \\(\\arccos(x)\\)? (type like [-1,1])", "[-1,1]", "Arccosine accepts exactly the cosine values: \\([-1, 1]\\)."},
-		{"What is the range of \\(\\arccos(x)\\)? (type like [0,pi])", "[0,pi]", "The restricted cosine branch maps \\([0, \\pi]\\) onto \\([-1, 1]\\)."},
-		{"What is \\(\\arccos(1)\\)? (enter a number)", "0", "\\(\\arccos(1) = 0\\): the only root of the function."},
-		{"What is \\(\\arccos(0)\\)? (type like pi/2)", "pi/2", "\\(\\arccos(0) = \\pi/2\\): the midpoint value."},
-		{"Is \\(\\arccos(x)\\) odd, even, or neither? (type one word)", "neither", "\\(\\arccos(-x) = \\pi - \\arccos(x)\\): neither even nor odd."},
-		{"What is the derivative of \\(\\arccos(x)\\)?", "-1/sqrt(1-x^2)", "\\(d/dx \\arccos(x) = -1/\\sqrt{1-x^{2}}\\) on \\((-1, 1)\\)."},
-		{"Is \\(\\arccos(x)\\) increasing or decreasing on its domain? (type one word)", "decreasing", "The derivative \\(-1/\\sqrt{1-x^{2}}\\) is negative on \\((-1, 1)\\)."},
-	}
-	hard := []funcEntry{
-		{"What is \\(\\arccos(-1)\\)? (type like pi)", "pi", "\\(\\arccos(-1) = \\pi\\): the maximum, at the left endpoint."},
-		{"What is \\(\\cos(\\arccos(1/2))\\)? (enter a fraction like 1/2)", "1/2", "Applying cosine after arccosine returns the argument: \\(1/2\\)."},
-		{"Evaluate the integral of \\(\\arccos(x)\\) from -1 to 1. (type like pi)", "pi", "Point symmetry about \\((0, \\pi/2)\\) makes the area \\(2 \\times \\pi/2 = \\pi\\)."},
-	}
-	return funcPool(ctx, easy, hard)
+	return arccosineProblem()
 }
 
 // arctangent as a real function
 type arctangentFuncGen struct{}
 
 func (g *arctangentFuncGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	easy := []funcEntry{
-		{"What is the domain of \\(\\arctan(x)\\)? (type: all reals)", "all reals", "Every real number is a tangent value, so the domain is all of \\(\\mathbb{R}\\)."},
-		{"What is the range of \\(\\arctan(x)\\)? (type like (-pi/2,pi/2))", "(-pi/2,pi/2)", "The principal tangent branch maps \\((-\\pi/2, \\pi/2)\\) onto \\(\\mathbb{R}\\)."},
-		{"What is \\(\\arctan(0)\\)? (enter a number)", "0", "\\(\\arctan(0) = 0\\): the only root of the function."},
-		{"What is \\(\\arctan(1)\\)? (type like pi/4)", "pi/4", "\\(\\tan(\\pi/4) = 1\\), so \\(\\arctan(1) = \\pi/4\\)."},
-		{"Is \\(\\arctan(x)\\) odd, even, or neither? (type one word)", "odd", "\\(\\arctan(-x) = -\\arctan(x)\\), so arctangent is odd."},
-		{"What is the limit of \\(\\arctan(x)\\) as \\(x \\to +\\infty\\)? (type like pi/2)", "pi/2", "The graph has the horizontal asymptote \\(y = \\pi/2\\)."},
-		{"What is the derivative of \\(\\arctan(x)\\)?", "1/(1+x^2)", "\\(d/dx \\arctan(x) = 1/(1+x^{2})\\) on all of \\(\\mathbb{R}\\)."},
-	}
-	hard := []funcEntry{
-		{"What is \\(\\arctan(-1)\\)? (type like -pi/4)", "-pi/4", "Arctangent is odd, so \\(\\arctan(-1) = -\\arctan(1) = -\\pi/4\\)."},
-		{"What is the limit of \\(\\arctan(x)\\) as \\(x \\to -\\infty\\)? (type like -pi/2)", "-pi/2", "The graph has the horizontal asymptote \\(y = -\\pi/2\\)."},
-		{"Is \\(\\arctan(x)\\) increasing or decreasing on its domain? (type one word)", "increasing", "The derivative \\(1/(1+x^{2})\\) is positive everywhere."},
-		{"Evaluate the integral of \\(1/(1+x^2)\\) from \\(-\\infty\\) to \\(+\\infty\\). (type like pi)", "pi", "The integral representation of arctangent gives \\(\\pi/2 - (-\\pi/2) = \\pi\\)."},
-	}
-	return funcPool(ctx, easy, hard)
+	return arctangentProblem()
 }
 
 // arccotangent as a real function
 type arccotangentFuncGen struct{}
 
 func (g *arccotangentFuncGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	easy := []funcEntry{
-		{"What is the domain of \\(\\mathrm{arccot}(x)\\)? (type: all reals)", "all reals", "Every real number is a cotangent value, so the domain is all of \\(\\mathbb{R}\\)."},
-		{"What is the range of \\(\\mathrm{arccot}(x)\\)? (type like (0,pi))", "(0,pi)", "The principal cotangent branch maps \\((0, \\pi)\\) onto \\(\\mathbb{R}\\)."},
-		{"What is \\(\\mathrm{arccot}(0)\\)? (type like pi/2)", "pi/2", "The cotangent vanishes at \\(\\pi/2\\), so \\(\\mathrm{arccot}(0) = \\pi/2\\)."},
-		{"Is \\(\\mathrm{arccot}(x)\\) odd, even, or neither? (type one word)", "neither", "\\(\\mathrm{arccot}(-x) = \\pi - \\mathrm{arccot}(x)\\): neither even nor odd."},
-		{"What is the derivative of \\(\\mathrm{arccot}(x)\\)?", "-1/(1+x^2)", "\\(d/dx \\mathrm{arccot}(x) = -1/(1+x^{2})\\) on all of \\(\\mathbb{R}\\)."},
-		{"What is the limit of \\(\\mathrm{arccot}(x)\\) as \\(x \\to +\\infty\\)? (enter a number)", "0", "The graph has the horizontal asymptote \\(y = 0\\)."},
-		{"Is \\(\\mathrm{arccot}(x)\\) increasing or decreasing on its domain? (type one word)", "decreasing", "The derivative \\(-1/(1+x^{2})\\) is negative everywhere."},
-	}
-	hard := []funcEntry{
-		{"What is \\(\\mathrm{arccot}(1)\\)? (type like pi/4)", "pi/4", "The cotangent equals 1 at \\(\\pi/4\\), so \\(\\mathrm{arccot}(1) = \\pi/4\\)."},
-		{"What is the limit of \\(\\mathrm{arccot}(x)\\) as \\(x \\to -\\infty\\)? (type like pi)", "pi", "The graph has the horizontal asymptote \\(y = \\pi\\)."},
-		{"What is \\(\\arctan(x) + \\mathrm{arccot}(x)\\)? (type like pi/2)", "pi/2", "The complementary inverse pair sums to \\(\\pi/2\\) for every real \\(x\\)."},
-		{"What is \\(\\mathrm{arccot}(-1)\\)? (type like 3pi/4)", "3pi/4", "By symmetry \\(\\mathrm{arccot}(-1) = \\pi - \\pi/4 = 3\\pi/4\\)."},
-	}
-	return funcPool(ctx, easy, hard)
+	return arccotangentProblem()
 }

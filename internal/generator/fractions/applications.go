@@ -65,7 +65,7 @@ func (g *asDivisionGen) Generate(ctx generator.GeneratorContext) generator.Probl
 	}
 	n, dd := reduce(a, b)
 	return generator.Problem{
-		Question: fmt.Sprintf("A ribbon %s long is cut into %d equal pieces. How long is each piece, as a fraction of a metre in lowest terms?", metresWord(a), b),
+		Question: fmt.Sprintf("A ribbon %s long is cut into %d equal pieces. How long is each piece, as a fraction of a metre in lowest terms? (enter a fraction such as 3/2)", metresWord(a), b),
 		Answer:   fmt.Sprintf("%d/%d", n, dd),
 		Explanation: fmt.Sprintf("Sharing %d equally among %d is the division %d ÷ %d, and a division can be written as a fraction: %d/%d, which reduces to %d/%d. That is why the fraction bar is a division sign.",
 			a, b, a, b, a, b, n, dd),

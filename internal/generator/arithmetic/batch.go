@@ -77,9 +77,9 @@ func (g *compareWholeGen) Generate(ctx generator.GeneratorContext) generator.Pro
 		parts[i] = strconv.Itoa(n)
 	}
 	answer := strings.Join(parts, ",")
-	display := fmt.Sprintf("%d; %d; %d", nums[0], nums[1], nums[2])
+	display := fmt.Sprintf("%d, %d, %d", nums[0], nums[1], nums[2])
 	return generator.Problem{
-		Question:    fmt.Sprintf("Order these numbers from least to greatest: %s. Enter them separated by commas.", display),
+		Question:    fmt.Sprintf("Order these numbers from least to greatest: %s. Enter them separated by commas, without spaces.", display),
 		Answer:      answer,
 		Explanation: fmt.Sprintf("Compare the values place by place; the order is %s.", strings.ReplaceAll(answer, ",", ", ")),
 		Facts:       map[string]string{"numbers": display, "ordered": answer},
@@ -382,51 +382,7 @@ type divZeroGen struct{}
 // expression. The numbers are the part that varies; the correct claim is
 // stable, which is what the knowledge point is assessing.
 func (g *divZeroGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	claim := ctx.KPOrdinal
-	if claim < 1 || claim > 3 {
-		claim = rand.Intn(3) + 1
-	}
-	dividend := rand.Intn(98) + 2 // 2..99, so the quotients never coincide
-	divisor := rand.Intn(98) + 2
-	switch claim {
-	case 1:
-		correct := "Division by zero is undefined."
-		p := generator.MultipleChoice(
-			fmt.Sprintf("Consider the expression %d ÷ 0. Which statement is true?", dividend),
-			correct,
-			fmt.Sprintf("%d ÷ 0 equals 0.", dividend),
-			fmt.Sprintf("%d ÷ 0 equals %d.", dividend, dividend),
-			fmt.Sprintf("0 ÷ %d is undefined.", dividend),
-		)
-		p.Explanation = fmt.Sprintf("No number multiplied by zero gives %d, so %d ÷ 0 has no value. Division by zero is undefined.", dividend, dividend)
-		p.Facts = map[string]string{"claim": "undefined", "dividend": strconv.Itoa(dividend), "answer": correct, "reason": p.Explanation}
-		return p
-	case 2:
-		correct := "Zero divided by any nonzero number equals zero."
-		p := generator.MultipleChoice(
-			fmt.Sprintf("Consider the expression 0 ÷ %d. Which statement is true?", divisor),
-			correct,
-			fmt.Sprintf("0 ÷ %d is undefined.", divisor),
-			fmt.Sprintf("0 ÷ %d equals %d.", divisor, divisor),
-			fmt.Sprintf("%d ÷ 0 equals 0.", divisor),
-		)
-		p.Explanation = fmt.Sprintf("The equation %d × q = 0 has exactly one solution, q = 0, so 0 ÷ %d = 0.", divisor, divisor)
-		p.Facts = map[string]string{"claim": "zero_numerator", "divisor": strconv.Itoa(divisor), "answer": correct, "reason": p.Explanation}
-		return p
-	}
-	correct := fmt.Sprintf("The expression %d ÷ 0 has no value.", dividend)
-	p := generator.MultipleChoice("Which statement is true?", correct,
-		fmt.Sprintf("The expression %d ÷ 0 equals 0.", dividend),
-		fmt.Sprintf("The expression %d ÷ 0 equals %d.", dividend, dividend),
-		fmt.Sprintf("The expression 0 ÷ %d has no value.", dividend))
-	p.Explanation = fmt.Sprintf("No number multiplied by zero gives %d, so %d ÷ 0 has no value.", dividend, dividend)
-	p.Facts = map[string]string{
-		"claim":    "concrete",
-		"dividend": strconv.Itoa(dividend),
-		"answer":   correct,
-		"reason":   p.Explanation,
-	}
-	return p
+	return divisionByZeroProblem()
 }
 
 // ---------------------------------------------------------------------------

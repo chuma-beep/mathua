@@ -130,19 +130,7 @@ var trigRaiseIDs = []string{
 	"trig.adv.vector_projection",
 }
 
-var trigRaiseMCIDs = []string{
-	"trig.ident.product_to_sum",
-	"trig.ident.sum_to_product",
-	"trig.ident.pythagorean_variants",
-	"trig.eq.general_solution",
-	"trig.ineq.advanced",
-	"trig.graph.tan",
-	"trig.graph.transformations",
-	"trig.graph.inverse",
-	"trig.graph.reciprocal",
-	"trig.hyperbolic.identities",
-	"trig.hyperbolic.derivative",
-}
+var trigRaiseMCIDs = []string{}
 
 func TestRaiseAnswersGradeWithTheirShippedType(t *testing.T) {
 	types := trigShippedTypes(t)
@@ -172,6 +160,9 @@ func TestRaiseAnswersGradeWithTheirShippedType(t *testing.T) {
 }
 
 func TestRaiseMultipleChoiceRejectsEveryDistractor(t *testing.T) {
+	if len(trigRaiseMCIDs) == 0 {
+		t.Skip("the raise pool now serves computed count problems")
+	}
 	types := trigShippedTypes(t)
 	reg := trigRaiseRegistry(t)
 	router := grader.NewRouter()

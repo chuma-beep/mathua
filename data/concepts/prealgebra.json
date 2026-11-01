@@ -620,7 +620,7 @@
     "label": "Properties of real numbers",
     "domain": "prealgebra",
     "subdomain": "prealgebra.variables",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "prealg.var.concept"
     ],
@@ -634,7 +634,7 @@
     "label": "Real numbers and the number line",
     "domain": "prealgebra",
     "subdomain": "prealgebra.variables",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "dec.basics.compare"
     ],
@@ -754,7 +754,7 @@
     "label": "Compare unit prices to find the better buy",
     "domain": "prealgebra",
     "subdomain": "prealgebra.ratios",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ratio.ops.rate",
       "dec.ops.div.word"
@@ -814,7 +814,7 @@
     "label": "Graph an inequality on a number line",
     "domain": "prealgebra",
     "subdomain": "prealgebra.inequalities",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "prealg.ineq.one_step",
       "prealg.real.concept"

@@ -45,17 +45,7 @@ var numaBatch2IDs = []string{
 	"numa.linear.least_squares_qr",
 }
 
-var numaBatch2MCIDs = []string{
-	"numa.interp.orthogonal",
-	"numa.interp.extrapolation",
-	"numa.integration.error",
-	"numa.integration.romberg",
-	"numa.integration.adaptive",
-	"numa.integration.improper",
-	"numa.linear.pivoting",
-	"numa.linear.gauss_seidel",
-	"numa.linear.least_squares_qr",
-}
+var numaBatch2MCIDs = []string{}
 
 func TestBatch2AnswersGradeWithTheirShippedType(t *testing.T) {
 	types := numaShippedTypes(t)
@@ -91,6 +81,9 @@ func TestBatch2AnswersGradeWithTheirShippedType(t *testing.T) {
 }
 
 func TestBatch2MultipleChoiceRejectsEveryDistractor(t *testing.T) {
+	if len(numaBatch2MCIDs) == 0 {
+		t.Skip("the numerical batch now serves computed count problems")
+	}
 	types := numaShippedTypes(t)
 	reg := numaRegistry(t)
 	router := grader.NewRouter()

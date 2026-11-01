@@ -751,7 +751,7 @@
     "label": "Lagrange multipliers with two constraints",
     "domain": "calc3",
     "subdomain": "calculus.multivariable",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "calc.multi.lagrange"
     ],
@@ -793,7 +793,7 @@
     "label": "Iterated limits",
     "domain": "calc3",
     "subdomain": "calculus.multivariable",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "calc.multi.double_integral_region"
     ],
@@ -863,7 +863,7 @@
     "label": "Vector identities",
     "domain": "calc3",
     "subdomain": "calculus.vector",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "calc.vec.curl_3d"
     ],

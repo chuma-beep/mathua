@@ -4,7 +4,7 @@
     "label": "Divisibility rules",
     "domain": "number_theory",
     "subdomain": "number_theory.basics",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "arith.factor.find"
     ],
@@ -48,7 +48,7 @@
     "label": "Congruence relations",
     "domain": "number_theory",
     "subdomain": "number_theory.basics",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "nt.basics.modular"
     ],
@@ -92,7 +92,7 @@
     "label": "Linear Diophantine equations",
     "domain": "number_theory",
     "subdomain": "number_theory.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "nt.basics.gcd_euclidean",
       "alg.eq.vars_both_sides"
@@ -118,7 +118,7 @@
   },
   {
     "id": "nt.basics.bezout",
-    "label": "B\u00e9zout's identity",
+    "label": "Bézout's identity",
     "domain": "number_theory",
     "subdomain": "number_theory.basics",
     "grading_type": "numeric",
@@ -164,7 +164,7 @@
     "label": "Infinitude of primes",
     "domain": "number_theory",
     "subdomain": "number_theory.basics",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "nt.basics.divisibility"
     ],
@@ -192,7 +192,7 @@
     "label": "Quadratic reciprocity",
     "domain": "number_theory",
     "subdomain": "number_theory.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "nt.adv.legendre"
     ],
@@ -220,7 +220,7 @@
     "label": "Primitive roots",
     "domain": "number_theory",
     "subdomain": "number_theory.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "nt.basics.order_mod",
       "nt.adv.euler_phi"
@@ -232,7 +232,7 @@
   },
   {
     "id": "nt.adv.mobius",
-    "label": "M\u00f6bius function and inversion",
+    "label": "Möbius function and inversion",
     "domain": "number_theory",
     "subdomain": "number_theory.advanced",
     "grading_type": "numeric",
@@ -249,7 +249,7 @@
     "label": "Prime number theorem",
     "domain": "number_theory",
     "subdomain": "number_theory.analytic",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "nt.adv.mobius",
       "nt.basics.prime_inf"
@@ -264,7 +264,7 @@
     "label": "Dirichlet's theorem on arithmetic progressions",
     "domain": "number_theory",
     "subdomain": "number_theory.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "nt.adv.primitive_root",
       "nt.adv.legendre"
@@ -279,7 +279,7 @@
     "label": "Sieve of Eratosthenes and Brun's sieve",
     "domain": "number_theory",
     "subdomain": "number_theory.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "nt.analytic.prime_number_theorem"
     ],
@@ -293,7 +293,7 @@
     "label": "Riemann zeta function",
     "domain": "number_theory",
     "subdomain": "number_theory.analytic",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "nt.analytic.prime_number_theorem"
     ],
@@ -307,7 +307,7 @@
     "label": "Chebyshev functions",
     "domain": "number_theory",
     "subdomain": "number_theory.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "nt.analytic.zeta"
     ],
@@ -321,7 +321,7 @@
     "label": "Elliptic curves and BSD",
     "domain": "number_theory",
     "subdomain": "number_theory.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "nt.adv.dirichlet"
     ],
@@ -335,7 +335,7 @@
     "label": "Continued fractions",
     "domain": "number_theory",
     "subdomain": "number_theory.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "nt.basics.order_mod"
     ],
@@ -349,7 +349,7 @@
     "label": "Class numbers",
     "domain": "number_theory",
     "subdomain": "number_theory.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "nt.adv.chebyshev"
     ],
@@ -559,7 +559,7 @@
     "label": "The Miller-Rabin test",
     "domain": "number_theory",
     "subdomain": "number_theory.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "nt.adv.fermat_little"
     ],
@@ -587,7 +587,7 @@
     "label": "Bertrand's postulate",
     "domain": "number_theory",
     "subdomain": "number_theory.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "nt.basics.prime_inf"
     ],

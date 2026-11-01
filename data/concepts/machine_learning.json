@@ -81,7 +81,7 @@
     "label": "Cross-entropy loss",
     "domain": "machine_learning",
     "subdomain": "machine_learning.neural_networks",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ml.loss.mse"
     ],
@@ -110,7 +110,7 @@
     "label": "Overfitting and generalization",
     "domain": "machine_learning",
     "subdomain": "machine_learning.neural_networks",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ml.regularization"
     ],
@@ -153,7 +153,7 @@
     "label": "Dropout regularization",
     "domain": "machine_learning",
     "subdomain": "machine_learning.neural_networks",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ml.regularization"
     ],
@@ -181,7 +181,7 @@
     "label": "Recurrent neural networks",
     "domain": "machine_learning",
     "subdomain": "machine_learning.neural_networks",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ml.arch.cnn"
     ],
@@ -195,7 +195,7 @@
     "label": "Batch normalization",
     "domain": "machine_learning",
     "subdomain": "machine_learning.neural_networks",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ml.optim.momentum"
     ],
@@ -209,7 +209,7 @@
     "label": "ROC curves and evaluation metrics",
     "domain": "machine_learning",
     "subdomain": "machine_learning.neural_networks",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ml.validation"
     ],
@@ -223,7 +223,7 @@
     "label": "Transformers and attention",
     "domain": "machine_learning",
     "subdomain": "machine_learning.neural_networks",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ml.arch.rnn"
     ],
@@ -237,7 +237,7 @@
     "label": "Generative adversarial networks",
     "domain": "machine_learning",
     "subdomain": "machine_learning.neural_networks",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ml.arch.cnn"
     ],
@@ -251,7 +251,7 @@
     "label": "Adam optimizer details",
     "domain": "machine_learning",
     "subdomain": "machine_learning.neural_networks",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ml.optim.momentum"
     ],
@@ -279,7 +279,7 @@
     "label": "Data augmentation",
     "domain": "machine_learning",
     "subdomain": "machine_learning.neural_networks",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ml.regularization.dropout"
     ],
@@ -293,7 +293,7 @@
     "label": "Transformers for NLP",
     "domain": "machine_learning",
     "subdomain": "machine_learning.nlp",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ml.arch.transformer"
     ],
@@ -307,7 +307,7 @@
     "label": "Q-learning",
     "domain": "machine_learning",
     "subdomain": "machine_learning.reinforcement",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ml.arch.transformer"
     ],
@@ -321,7 +321,7 @@
     "label": "Policy gradients",
     "domain": "machine_learning",
     "subdomain": "machine_learning.reinforcement",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ml.reinforcement.qlearning"
     ],
@@ -335,7 +335,7 @@
     "label": "BERT and pretraining",
     "domain": "machine_learning",
     "subdomain": "machine_learning.nlp",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ml.nlp.transformer"
     ],
@@ -349,7 +349,7 @@
     "label": "Actor-critic methods",
     "domain": "machine_learning",
     "subdomain": "machine_learning.reinforcement",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ml.reinforcement.policy_gradient"
     ],
@@ -490,7 +490,7 @@
     "label": "Logistic regression",
     "domain": "machine_learning",
     "subdomain": "machine_learning.regression",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ml.activation.sigmoid",
       "ml.loss.cross_entropy"
@@ -505,7 +505,7 @@
     "label": "Vanishing and exploding gradients",
     "domain": "machine_learning",
     "subdomain": "machine_learning.neural_networks",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ml.backpropagation",
       "ml.activation.sigmoid"
@@ -610,7 +610,7 @@
     "label": "Class imbalance",
     "domain": "machine_learning",
     "subdomain": "machine_learning.data",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ml.eval.accuracy",
       "ml.validation"
@@ -640,7 +640,7 @@
     "label": "Bagging and random forests",
     "domain": "machine_learning",
     "subdomain": "machine_learning.trees",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ml.tree.gini",
       "ml.validation"

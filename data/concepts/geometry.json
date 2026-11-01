@@ -1,645 +1,645 @@
 [
- {
-  "id": "geo.basic.points_lines",
-  "label": "Points, lines, and planes",
-  "domain": "geometry",
-  "subdomain": "geometry.basics",
-  "grading_type": "multiple_choice",
-  "prerequisites": [],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 8.0
-  }
- },
- {
-  "id": "geo.basic.angles",
-  "label": "Types of angles: acute, right, obtuse",
-  "domain": "geometry",
-  "subdomain": "geometry.basics",
-  "grading_type": "multiple_choice",
-  "prerequisites": [
-   "geo.basic.points_lines"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 8.0
-  }
- },
- {
-  "id": "geo.basic.angle_measure",
-  "label": "Measuring angles in degrees",
-  "domain": "geometry",
-  "subdomain": "geometry.basics",
-  "grading_type": "multiple_choice",
-  "prerequisites": [
-   "geo.basic.angles"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 10.0
-  }
- },
- {
-  "id": "geo.basic.complementary",
-  "label": "Complementary and supplementary angles",
-  "domain": "geometry",
-  "subdomain": "geometry.basics",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.basic.angle_measure"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 10.0
-  }
- },
- {
-  "id": "geo.basic.vertical",
-  "label": "Vertical angles and parallel lines",
-  "domain": "geometry",
-  "subdomain": "geometry.basics",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.basic.complementary"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 12.0
-  }
- },
- {
-  "id": "geo.triangle.types",
-  "label": "Types of triangles",
-  "domain": "geometry",
-  "subdomain": "geometry.triangles",
-  "grading_type": "multiple_choice",
-  "prerequisites": [
-   "geo.basic.angles"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 8.0
-  }
- },
- {
-  "id": "geo.triangle.angles",
-  "label": "Triangle angle sum is 180 degrees",
-  "domain": "geometry",
-  "subdomain": "geometry.triangles",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.triangle.types",
-   "geo.basic.angle_measure"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 10.0
-  }
- },
- {
-  "id": "geo.triangle.area",
-  "label": "Area of a triangle",
-  "domain": "geometry",
-  "subdomain": "geometry.triangles",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.triangle.types",
-   "arith.mult.double"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 12.0
-  }
- },
- {
-  "id": "geo.triangle.pythagorean",
-  "label": "Pythagorean theorem",
-  "domain": "geometry",
-  "subdomain": "geometry.triangles",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.triangle.area",
-   "arith.sqrt.perfect",
-   "arith.exp.evaluate"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 18.0
-  }
- },
- {
-  "id": "geo.triangle.pythagorean.word",
-  "label": "Pythagorean word problems",
-  "domain": "geometry",
-  "subdomain": "geometry.triangles",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.triangle.pythagorean"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 25.0
-  }
- },
- {
-  "id": "geo.quad.types",
-  "label": "Types of quadrilaterals",
-  "domain": "geometry",
-  "subdomain": "geometry.shapes",
-  "grading_type": "multiple_choice",
-  "prerequisites": [
-   "geo.basic.angles"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 8.0
-  }
- },
- {
-  "id": "geo.quad.area",
-  "label": "Area of rectangles and parallelograms",
-  "domain": "geometry",
-  "subdomain": "geometry.shapes",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.quad.types",
-   "arith.mult.double"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 12.0
-  }
- },
- {
-  "id": "geo.quad.perimeter",
-  "label": "Perimeter of polygons",
-  "domain": "geometry",
-  "subdomain": "geometry.shapes",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.quad.types",
-   "arith.add.double"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 10.0
-  }
- },
- {
-  "id": "geo.circle.parts",
-  "label": "Parts of a circle: radius, diameter, chord",
-  "domain": "geometry",
-  "subdomain": "geometry.circles",
-  "grading_type": "multiple_choice",
-  "prerequisites": [
-   "geo.basic.points_lines"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 8.0
-  }
- },
- {
-  "id": "geo.circle.circumference",
-  "label": "Circumference of a circle",
-  "domain": "geometry",
-  "subdomain": "geometry.circles",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.circle.parts",
-   "dec.ops.mult"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 15.0
-  }
- },
- {
-  "id": "geo.circle.area",
-  "label": "Area of a circle",
-  "domain": "geometry",
-  "subdomain": "geometry.circles",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.circle.circumference",
-   "arith.exp.evaluate"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 15.0
-  }
- },
- {
-  "id": "geo.coord.plot",
-  "label": "Plot points on the coordinate plane",
-  "domain": "geometry",
-  "subdomain": "geometry.coordinate",
-  "grading_type": "multiple_choice",
-  "prerequisites": [
-   "arith.neg.number_line"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 10.0
-  }
- },
- {
-  "id": "geo.coord.distance",
-  "label": "Distance between two points",
-  "domain": "geometry",
-  "subdomain": "geometry.coordinate",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.coord.plot",
-   "geo.triangle.pythagorean"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 18.0
-  }
- },
- {
-  "id": "geo.coord.midpoint",
-  "label": "Midpoint of a line segment",
-  "domain": "geometry",
-  "subdomain": "geometry.coordinate",
-  "grading_type": "tuple",
-  "prerequisites": [
-   "geo.coord.plot",
-   "dec.ops.add"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 15.0
-  }
- },
- {
-  "id": "geo.solid.volume_rect",
-  "label": "Volume of rectangular prism",
-  "domain": "geometry",
-  "subdomain": "geometry.solid",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.quad.area",
-   "arith.mult.triple"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 15.0
-  }
- },
- {
-  "id": "geo.solid.surface_area",
-  "label": "Surface area of rectangular prism",
-  "domain": "geometry",
-  "subdomain": "geometry.solid",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.solid.volume_rect"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 18.0
-  }
- },
- {
-  "id": "geo.coord.lines",
-  "label": "Lines in the coordinate plane",
-  "domain": "geometry",
-  "subdomain": "geometry.coordinate",
-  "grading_type": "symbolic",
-  "prerequisites": [
-   "alg.linear.slope_intercept"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "geo.coord.polar",
-  "label": "Polar coordinates",
-  "domain": "geometry",
-  "subdomain": "geometry.coordinate",
-  "grading_type": "tuple",
-  "prerequisites": [
-   "geo.coord.distance"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
+  {
+    "id": "geo.basic.points_lines",
+    "label": "Points, lines, and planes",
+    "domain": "geometry",
+    "subdomain": "geometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 8.0
+    }
   },
- {
-  "id": "geo.similar.ratio",
-  "label": "Similar figures and scale factors",
-  "domain": "geometry",
-  "subdomain": "geometry.similar",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.triangle.types"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
- },
- {
-  "id": "geo.similar.missing_side",
-  "label": "Finding a missing side by proportionality",
-  "domain": "geometry",
-  "subdomain": "geometry.similar",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.similar.ratio"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
- },
- {
-  "id": "geo.transform.dilation",
-  "label": "Dilations",
-  "domain": "geometry",
-  "subdomain": "geometry.transform",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.similar.ratio"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
- },
- {
-  "id": "geo.polygon.interior_angles",
-  "label": "The interior-angle sum of a polygon",
-  "domain": "geometry",
-  "subdomain": "geometry.polygons",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.quad.types"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
- },
- {
-  "id": "geo.polygon.exterior_angle",
-  "label": "Exterior angles of a regular polygon",
-  "domain": "geometry",
-  "subdomain": "geometry.polygons",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.polygon.interior_angles"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
- },
- {
-  "id": "geo.circle.inscribed_angle",
-  "label": "Inscribed and central angles",
-  "domain": "geometry",
-  "subdomain": "geometry.circles",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.basic.angles"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
- },
- {
-  "id": "geo.circle.chord",
-  "label": "Chords and the perpendicular from the centre",
-  "domain": "geometry",
-  "subdomain": "geometry.circles",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.triangle.pythagorean",
-   "geo.circle.parts"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
- },
- {
-  "id": "geo.triangle.special_right",
-  "label": "The 30-60-90 triangle",
-  "domain": "geometry",
-  "subdomain": "geometry.triangles",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.triangle.pythagorean"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
+  {
+    "id": "geo.basic.angles",
+    "label": "Types of angles: acute, right, obtuse",
+    "domain": "geometry",
+    "subdomain": "geometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.basic.points_lines"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 8.0
+    }
   },
- {
-  "id": "geo.triangle.inequality",
-  "label": "The triangle inequality",
-  "domain": "geometry",
-  "subdomain": "geometry.triangles",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.triangle.types"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
- },
- {
-  "id": "geo.similar.area_ratio",
-  "label": "Areas of similar figures",
-  "domain": "geometry",
-  "subdomain": "geometry.similar",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.similar.ratio"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
- },
- {
-  "id": "geo.circle.tangent_length",
-  "label": "Tangent lines from a point",
-  "domain": "geometry",
-  "subdomain": "geometry.circles",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.triangle.pythagorean",
-   "geo.circle.chord"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
- },
- {
-  "id": "geo.solid.pyramid_volume",
-  "label": "The volume of a pyramid",
-  "domain": "geometry",
-  "subdomain": "geometry.solid",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.solid.volume_rect"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
+  {
+    "id": "geo.basic.angle_measure",
+    "label": "Measuring angles in degrees",
+    "domain": "geometry",
+    "subdomain": "geometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.basic.angles"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 10.0
+    }
   },
- {
-  "id": "geo.triangle.exterior_angle",
-  "label": "The exterior angle theorem",
-  "domain": "geometry",
-  "subdomain": "geometry.triangles",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.triangle.angles"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
- },
- {
-  "id": "geo.triangle.midsegment",
-  "label": "Midsegments",
-  "domain": "geometry",
-  "subdomain": "geometry.triangles",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.similar.ratio"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
- },
- {
-  "id": "geo.triangle.isosceles",
-  "label": "Isosceles triangles",
-  "domain": "geometry",
-  "subdomain": "geometry.triangles",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.triangle.angles"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
- },
- {
-  "id": "geo.circle.cyclic_quad",
-  "label": "Cyclic quadrilaterals",
-  "domain": "geometry",
-  "subdomain": "geometry.circles",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.circle.inscribed_angle"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
- },
- {
-  "id": "geo.solid.prism_volume",
-  "label": "The volume of a prism",
-  "domain": "geometry",
-  "subdomain": "geometry.solid",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.quad.area"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
+  {
+    "id": "geo.basic.complementary",
+    "label": "Complementary and supplementary angles",
+    "domain": "geometry",
+    "subdomain": "geometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.basic.angle_measure"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 10.0
+    }
   },
- {
-  "id": "geo.coord.slope",
-  "label": "Slope from two points",
-  "domain": "geometry",
-  "subdomain": "geometry.coordinate",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.coord.lines"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
+  {
+    "id": "geo.basic.vertical",
+    "label": "Vertical angles and parallel lines",
+    "domain": "geometry",
+    "subdomain": "geometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.basic.complementary"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "geo.triangle.types",
+    "label": "Types of triangles",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.basic.angles"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "geo.triangle.angles",
+    "label": "Triangle angle sum is 180 degrees",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.types",
+      "geo.basic.angle_measure"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "geo.triangle.area",
+    "label": "Area of a triangle",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.types",
+      "arith.mult.double"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "geo.triangle.pythagorean",
+    "label": "Pythagorean theorem",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.area",
+      "arith.sqrt.perfect",
+      "arith.exp.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "geo.triangle.pythagorean.word",
+    "label": "Pythagorean word problems",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.pythagorean"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "geo.quad.types",
+    "label": "Types of quadrilaterals",
+    "domain": "geometry",
+    "subdomain": "geometry.shapes",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.basic.angles"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "geo.quad.area",
+    "label": "Area of rectangles and parallelograms",
+    "domain": "geometry",
+    "subdomain": "geometry.shapes",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.quad.types",
+      "arith.mult.double"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "geo.quad.perimeter",
+    "label": "Perimeter of polygons",
+    "domain": "geometry",
+    "subdomain": "geometry.shapes",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.quad.types",
+      "arith.add.double"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "geo.circle.parts",
+    "label": "Parts of a circle: radius, diameter, chord",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.basic.points_lines"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 8.0
+    }
+  },
+  {
+    "id": "geo.circle.circumference",
+    "label": "Circumference of a circle",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.circle.parts",
+      "dec.ops.mult"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "geo.circle.area",
+    "label": "Area of a circle",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.circle.circumference",
+      "arith.exp.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "geo.coord.plot",
+    "label": "Plot points on the coordinate plane",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.neg.number_line"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 10.0
+    }
+  },
+  {
+    "id": "geo.coord.distance",
+    "label": "Distance between two points",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.coord.plot",
+      "geo.triangle.pythagorean"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "geo.coord.midpoint",
+    "label": "Midpoint of a line segment",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "tuple",
+    "prerequisites": [
+      "geo.coord.plot",
+      "dec.ops.add"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "geo.solid.volume_rect",
+    "label": "Volume of rectangular prism",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.quad.area",
+      "arith.mult.triple"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "geo.solid.surface_area",
+    "label": "Surface area of rectangular prism",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.solid.volume_rect"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "geo.coord.lines",
+    "label": "Lines in the coordinate plane",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.linear.slope_intercept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "geo.coord.polar",
+    "label": "Polar coordinates",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "tuple",
+    "prerequisites": [
+      "geo.coord.distance"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "geo.similar.ratio",
+    "label": "Similar figures and scale factors",
+    "domain": "geometry",
+    "subdomain": "geometry.similar",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.types"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "geo.similar.missing_side",
+    "label": "Finding a missing side by proportionality",
+    "domain": "geometry",
+    "subdomain": "geometry.similar",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.similar.ratio"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "geo.transform.dilation",
+    "label": "Dilations",
+    "domain": "geometry",
+    "subdomain": "geometry.transform",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.similar.ratio"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "geo.polygon.interior_angles",
+    "label": "The interior-angle sum of a polygon",
+    "domain": "geometry",
+    "subdomain": "geometry.polygons",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.quad.types"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "geo.polygon.exterior_angle",
+    "label": "Exterior angles of a regular polygon",
+    "domain": "geometry",
+    "subdomain": "geometry.polygons",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.polygon.interior_angles"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "geo.circle.inscribed_angle",
+    "label": "Inscribed and central angles",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.basic.angles"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "geo.circle.chord",
+    "label": "Chords and the perpendicular from the centre",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.pythagorean",
+      "geo.circle.parts"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "geo.triangle.special_right",
+    "label": "The 30-60-90 triangle",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.pythagorean"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "geo.triangle.inequality",
+    "label": "The triangle inequality",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.types"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "geo.similar.area_ratio",
+    "label": "Areas of similar figures",
+    "domain": "geometry",
+    "subdomain": "geometry.similar",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.similar.ratio"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "geo.circle.tangent_length",
+    "label": "Tangent lines from a point",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.pythagorean",
+      "geo.circle.chord"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "geo.solid.pyramid_volume",
+    "label": "The volume of a pyramid",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.solid.volume_rect"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "geo.triangle.exterior_angle",
+    "label": "The exterior angle theorem",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.angles"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "geo.triangle.midsegment",
+    "label": "Midsegments",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.similar.ratio"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "geo.triangle.isosceles",
+    "label": "Isosceles triangles",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.angles"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "geo.circle.cyclic_quad",
+    "label": "Cyclic quadrilaterals",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.circle.inscribed_angle"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "geo.solid.prism_volume",
+    "label": "The volume of a prism",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.quad.area"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "geo.coord.slope",
+    "label": "Slope from two points",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.coord.lines"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "geo.coord.distance_3d",
+    "label": "Distance in three dimensions",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.coord.distance"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "geo.quad.trapezoid_area",
+    "label": "The area of a trapezoid",
+    "domain": "geometry",
+    "subdomain": "geometry.shapes",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.quad.area"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "geo.solid.similar_volume",
+    "label": "Volumes of similar solids",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.solid.prism_volume",
+      "geo.similar.ratio"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "geo.circle.tangent_chord",
+    "label": "The tangent-chord angle",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.circle.tangent_length",
+      "geo.circle.inscribed_angle"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
   }
- },
- {
-  "id": "geo.coord.distance_3d",
-  "label": "Distance in three dimensions",
-  "domain": "geometry",
-  "subdomain": "geometry.coordinate",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.coord.distance"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
- },
- {
-  "id": "geo.quad.trapezoid_area",
-  "label": "The area of a trapezoid",
-  "domain": "geometry",
-  "subdomain": "geometry.shapes",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.quad.area"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
- },
- {
-  "id": "geo.solid.similar_volume",
-  "label": "Volumes of similar solids",
-  "domain": "geometry",
-  "subdomain": "geometry.solid",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.solid.prism_volume",
-   "geo.similar.ratio"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
- },
- {
-  "id": "geo.circle.tangent_chord",
-  "label": "The tangent-chord angle",
-  "domain": "geometry",
-  "subdomain": "geometry.circles",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.circle.tangent_length",
-   "geo.circle.inscribed_angle"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
- }
 ]

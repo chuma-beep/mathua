@@ -546,48 +546,7 @@ func (g *carmichaelFunctionGen) Generate(ctx generator.GeneratorContext) generat
 type millerRabinGen struct{}
 
 func (g *millerRabinGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "The Miller-Rabin test is based on which congruence?",
-			correct:     "a^(n-1) = 1 mod n together with the square-root-of-1 structure",
-			distractors: []string{"n divides (n-1)! + 1", "a^2 = 1 mod n for every a", "n divides 2^n - 2"},
-			reason:      "The test strengthens Fermat's congruence by examining the repeated square roots of 1 that appear on the way to a^(n-1).",
-		},
-		{
-			question:    "A strong probable prime to base a...",
-			correct:     "passes the Miller-Rabin test for that base",
-			distractors: []string{"is necessarily prime", "fails Fermat's test", "is a Carmichael number"},
-			reason:      "Passing one base is evidence of primality, not proof: a strong pseudoprime can pass a chosen base.",
-		},
-		{
-			question:    "The Miller-Rabin error probability is reduced by...",
-			correct:     "testing more independent bases",
-			distractors: []string{"using a larger modulus only", "repeating the same base", "checking divisibility by 2"},
-			reason:      "Each independent base cuts the false-positive probability, and a few dozen bases make the error astronomically small.",
-		},
-		{
-			question:    "A composite that passes Miller-Rabin for a base is called...",
-			correct:     "a strong pseudoprime to that base",
-			distractors: []string{"a Carmichael prime", "a Mersenne prime", "a Fermat prime"},
-			reason:      "Strong pseudoprimes are the composites that survive the strong test for a particular base.",
-		},
-		{
-			question:    "Why does Miller-Rabin beat trial division for large n?",
-			correct:     "it runs in polynomial time in log n",
-			distractors: []string{"it factors n completely", "it proves primality with certainty", "it needs no modular arithmetic"},
-			reason:      "Trial division is exponential in the number of digits; Miller-Rabin uses fast modular exponentiation and is polynomial in log n.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return millerRabinProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -663,46 +622,5 @@ func (g *primeGapGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type bertrandGen struct{}
 
 func (g *bertrandGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Bertrand's postulate says that for every integer n > 1 there is...",
-			correct:     "a prime p with n < p < 2n",
-			distractors: []string{"a prime p with 2n < p < 3n", "a perfect square between n and 2n", "a twin prime pair below n"},
-			reason:      "The postulate guarantees at least one prime in every interval (n, 2n) with n > 1.",
-		},
-		{
-			question:    "Which statement is equivalent to Bertrand's postulate?",
-			correct:     "the prime counting function satisfies pi(2n) > pi(n) for n > 1",
-			distractors: []string{"pi(n) grows like n/log n", "there are infinitely many twin primes", "every even number is a sum of two primes"},
-			reason:      "A prime strictly between n and 2n is exactly what makes the count at 2n exceed the count at n.",
-		},
-		{
-			question:    "Bertrand's postulate guarantees a prime between...",
-			correct:     "100 and 200",
-			distractors: []string{"200 and 300", "1000 and 1001", "1 and 2"},
-			reason:      "Apply the postulate with n = 100: some prime lies strictly between 100 and 200.",
-		},
-		{
-			question:    "Bertrand's postulate is weaker than which result?",
-			correct:     "the prime number theorem",
-			distractors: []string{"the fundamental theorem of arithmetic", "Euler's theorem", "the sieve of Eratosthenes"},
-			reason:      "The prime number theorem gives the asymptotic density of the primes, from which the existence of a prime in (n, 2n) follows for large n.",
-		},
-		{
-			question:    "Who first proved Bertrand's postulate?",
-			correct:     "Chebyshev",
-			distractors: []string{"Euler", "Fermat", "Gauss"},
-			reason:      "Chebyshev proved the postulate in 1850; Erdős later gave an elementary proof.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return bertrandProblem()
 }

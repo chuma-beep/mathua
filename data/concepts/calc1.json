@@ -80,7 +80,7 @@
     "label": "Continuity and types of discontinuity",
     "domain": "calc1",
     "subdomain": "calculus.limits",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "calc.limit.properties"
     ],
@@ -387,7 +387,7 @@
     "label": "Little-o notation",
     "domain": "calc1",
     "subdomain": "calculus.limits",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "calc.limit.properties"
     ],
@@ -444,7 +444,7 @@
     "label": "Types of discontinuities",
     "domain": "calc1",
     "subdomain": "calculus.limits",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "calc.limit.continuity"
     ],
@@ -585,7 +585,7 @@
     "label": "Convergent and divergent sequences",
     "domain": "calc1",
     "subdomain": "calculus.sequences",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "calc.seq.concept"
     ],
@@ -999,7 +999,7 @@
     "label": "Limit superior and inferior",
     "domain": "calc1",
     "subdomain": "calculus.limits",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "calc.seq.convergence"
     ],
@@ -1013,7 +1013,7 @@
     "label": "Oscillation of a function",
     "domain": "calc1",
     "subdomain": "calculus.limits",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "calc.limit.discontinuity"
     ],
@@ -1027,7 +1027,7 @@
     "label": "Derivatives of inverse hyperbolic functions",
     "domain": "calc1",
     "subdomain": "calculus.derivatives",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "calc.deriv.inverse_trig"
     ],
@@ -1069,7 +1069,7 @@
     "label": "Convexity and Jensen's inequality",
     "domain": "calc1",
     "subdomain": "calculus.derivatives",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "calc.deriv.convexity"
     ],
@@ -1097,7 +1097,7 @@
     "label": "Epsilon-delta definition of the derivative",
     "domain": "calc1",
     "subdomain": "calculus.derivatives",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "calc.deriv.difference_quotient"
     ],

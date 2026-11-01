@@ -60,7 +60,7 @@
     "label": "Set operations: union, intersection, complement",
     "domain": "discrete_math",
     "subdomain": "discrete_math.sets",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.logic.propositions"
     ],
@@ -189,7 +189,7 @@
     "label": "Mathematical induction",
     "domain": "discrete_math",
     "subdomain": "discrete_math.proof",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.sequences.recurrence",
       "discrete.logic.quantifiers"
@@ -218,7 +218,7 @@
     "label": "Logical equivalence, De Morgan and normal forms",
     "domain": "discrete_math",
     "subdomain": "discrete_math.logic",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.logic.truth_tables",
       "discrete.logic.quantifiers"
@@ -233,7 +233,7 @@
     "label": "Relations, functions and partitions",
     "domain": "discrete_math",
     "subdomain": "discrete_math.sets",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.sets.venn",
       "discrete.logic.quantifiers"
@@ -262,7 +262,7 @@
     "label": "Eulerian trails, Hamiltonian and coloring",
     "domain": "discrete_math",
     "subdomain": "discrete_math.graph_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.graphs.paths",
       "discrete.graphs.trees"
@@ -277,7 +277,7 @@
     "label": "Strong induction and well-ordering",
     "domain": "discrete_math",
     "subdomain": "discrete_math.proof",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.proof.induction",
       "discrete.sequences.recurrence"
@@ -306,7 +306,7 @@
     "label": "Graph coloring and chromatic number",
     "domain": "discrete_math",
     "subdomain": "discrete_math.graph_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.graphs.eulerian"
     ],
@@ -320,7 +320,7 @@
     "label": "Proof by contradiction",
     "domain": "discrete_math",
     "subdomain": "discrete_math.proof",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.logic.equivalence"
     ],
@@ -348,7 +348,7 @@
     "label": "Generating functions",
     "domain": "discrete_math",
     "subdomain": "discrete_math.recurrence",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.sequences.recurrence",
       "discrete.proof.strong_induction"
@@ -565,7 +565,7 @@
     "label": "Valid argument forms and fallacies",
     "domain": "discrete_math",
     "subdomain": "discrete_math.logic",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.logic.equivalence"
     ],
@@ -579,7 +579,7 @@
     "label": "Nested quantifiers and their negations",
     "domain": "discrete_math",
     "subdomain": "discrete_math.logic",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.logic.quantifiers",
       "discrete.logic.equivalence"
@@ -594,7 +594,7 @@
     "label": "Tautologies, contradictions and contingencies",
     "domain": "discrete_math",
     "subdomain": "discrete_math.logic",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.logic.truth_tables",
       "discrete.logic.equivalence"
@@ -609,7 +609,7 @@
     "label": "Proof by contrapositive",
     "domain": "discrete_math",
     "subdomain": "discrete_math.proof",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.logic.equivalence",
       "discrete.proof.contradiction"
@@ -638,7 +638,7 @@
     "label": "Structural induction",
     "domain": "discrete_math",
     "subdomain": "discrete_math.proof",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.proof.strong_induction",
       "discrete.graphs.trees"
@@ -682,7 +682,7 @@
     "label": "Countable and uncountable sets",
     "domain": "discrete_math",
     "subdomain": "discrete_math.sets",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.sets.relations",
       "discrete.proof.contradiction"
@@ -785,7 +785,7 @@
     "label": "Comparing growth rates",
     "domain": "discrete_math",
     "subdomain": "discrete_math.recurrence",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.combinatorics.factorial",
       "discrete.sequences.recurrence"

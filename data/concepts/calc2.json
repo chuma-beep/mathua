@@ -681,7 +681,7 @@
     "label": "Integration strategies (method selection)",
     "domain": "calc2",
     "subdomain": "calculus.integrals",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "calc.integral.parts"
     ],
@@ -754,7 +754,7 @@
     "label": "Operations on series",
     "domain": "calc2",
     "subdomain": "calculus.series",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "calc.series.concept"
     ],
@@ -796,7 +796,7 @@
     "label": "The p-series",
     "domain": "calc2",
     "subdomain": "calculus.series",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "calc.series.integral_test"
     ],
@@ -810,7 +810,7 @@
     "label": "Dirichlet's test",
     "domain": "calc2",
     "subdomain": "calculus.series",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "calc.series.alternating"
     ],

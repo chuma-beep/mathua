@@ -497,7 +497,7 @@
     "label": "Vector spaces and their axioms",
     "domain": "linear_algebra",
     "subdomain": "linear_algebra.vectors",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "linalg.vector.add"
     ],
@@ -526,7 +526,7 @@
     "label": "Injective, surjective and invertible maps",
     "domain": "linear_algebra",
     "subdomain": "linear_algebra.transformations",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "linalg.transform.kernel",
       "linalg.matrix.identity"
@@ -586,7 +586,7 @@
     "label": "The spectral theorem for symmetric matrices",
     "domain": "linear_algebra",
     "subdomain": "linear_algebra.eigenvalues",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "linalg.eigen.diagonalization",
       "linalg.inner_product"
@@ -601,7 +601,7 @@
     "label": "Quadratic forms and definiteness",
     "domain": "linear_algebra",
     "subdomain": "linear_algebra.eigenvalues",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "linalg.symmetric.spectral",
       "linalg.det.2x2"
@@ -645,7 +645,7 @@
     "label": "The Cayley-Hamilton theorem",
     "domain": "linear_algebra",
     "subdomain": "linear_algebra.eigenvalues",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "linalg.eigen.diagonalization",
       "linalg.matrix.mult"

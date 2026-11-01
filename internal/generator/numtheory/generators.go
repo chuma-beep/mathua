@@ -41,41 +41,14 @@ type divisibilityGen struct{}
 
 func (g *divisibilityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	if rand.Intn(2) == 0 {
-		// typed production: quotient of a divisible pair
-		d := rand.Intn(max(1, scale*10)) + 2
-		q := rand.Intn(max(1, scale*12)) + 2
-		a := d * q
-		return generator.Problem{
-			Question:    fmt.Sprintf("What is %d / %d? (enter a number)", a, d),
-			Answer:      fmt.Sprintf("%d", q),
-			Explanation: fmt.Sprintf("%d = %d x %d, so the quotient is %d.", a, d, q, q),
-		}
-	}
-	a := rand.Intn(max(1, scale*45)) + 6
-	d := rand.Intn(max(1, scale*10)) + 2
-	divisible := a%d == 0
-	if rand.Intn(max(1, scale*2)) == 0 {
-		for a%d == 0 {
-			a = rand.Intn(max(1, scale*45)) + 6
-		}
-		divisible = false
-	} else {
-		for a%d != 0 {
-			a = rand.Intn(max(1, scale*45)) + 6
-		}
-		divisible = true
-	}
-	ans := "no"
-	exp := fmt.Sprintf("%d / %d = %d, which is not an integer.", a, d, a/d)
-	if divisible {
-		ans = "yes"
-		exp = fmt.Sprintf("%d / %d = %d, which is an integer.", a, d, a/d)
-	}
+	d := 2 + rand.Intn(scale*10-1)
+	q := 2 + rand.Intn(scale*12-1)
+	a := d * q
 	return generator.Problem{
-		Question:    fmt.Sprintf("Is %d divisible by %d? (yes/no)", a, d),
-		Answer:      ans,
-		Explanation: exp,
+		Question:    fmt.Sprintf("What is %d / %d? (enter a number)", a, d),
+		Answer:      fmt.Sprintf("%d", q),
+		Explanation: fmt.Sprintf("%d / %d = %d because %d = %d x %d.", a, d, q, a, d, q),
+		Facts:       map[string]string{"a": fmt.Sprintf("%d", a), "d": fmt.Sprintf("%d", d), "quotient": fmt.Sprintf("%d", q)},
 	}
 }
 
@@ -110,34 +83,14 @@ func (g *modularGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 type congruenceGen struct{}
 
 func (g *congruenceGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*5)
-	m := rand.Intn(max(1, scale*10)) + 2
-	a := rand.Intn(max(1, scale*30)) + 1
-	if rand.Intn(2) == 0 {
-		// typed production: least residue
-		r := a % m
-		return generator.Problem{
-			Question:    fmt.Sprintf("What is the least residue of %d mod %d? (enter a number)", a, m),
-			Answer:      fmt.Sprintf("%d", r),
-			Explanation: fmt.Sprintf("%d = %d x %d + %d, so the least residue is %d.", a, m, a/m, r, r),
-		}
-	}
-	b := a + m*rand.Intn(max(1, scale*5))
-	congruent := true
-	if rand.Intn(max(1, scale*2)) == 0 {
-		b = a + m*rand.Intn(max(1, scale*5)) + rand.Intn(m-1) + 1
-		congruent = false
-	}
-	ans := "no"
-	exp := fmt.Sprintf("\\(%d - %d = %d\\), which is not divisible by %d, so \\(%d \\not\\equiv %d \\pmod{%d}\\).", a, b, a-b, m, a, b, m)
-	if congruent {
-		ans = "yes"
-		exp = fmt.Sprintf("\\(%d - %d = %d\\), which is divisible by %d, so \\(%d \\equiv %d \\pmod{%d}\\).", a, b, a-b, m, a, b, m)
-	}
+	m := 2 + rand.Intn(29)
+	a := rand.Intn(500)
+	r := ((a % m) + m) % m
 	return generator.Problem{
-		Question:    fmt.Sprintf("Is \\(%d \\equiv %d \\pmod{%d}\\)? (yes/no)", a, b, m),
-		Answer:      ans,
-		Explanation: exp,
+		Question:    fmt.Sprintf("What is the least residue of %d mod %d? (enter a number)", a, m),
+		Answer:      fmt.Sprintf("%d", r),
+		Explanation: fmt.Sprintf("%d = %d x %d + %d, so the least residue is %d.", a, m, (a-r)/m, r, r),
+		Facts:       map[string]string{"a": fmt.Sprintf("%d", a), "m": fmt.Sprintf("%d", m), "residue": fmt.Sprintf("%d", r)},
 	}
 }
 
@@ -183,19 +136,15 @@ type diophantineGen struct{}
 
 func (g *diophantineGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	x := rand.Intn(max(1, scale*10)) + 1
-	y := rand.Intn(max(1, scale*10)) + 1
+	x := 1 + rand.Intn(scale*10)
+	y := 1 + rand.Intn(scale*10)
 	c := 3*x + 5*y
-	correct := fmt.Sprintf("(%d, %d)", x, y)
-	p := generator.MultipleChoice(
-		fmt.Sprintf("Which ordered pair is an integer solution to \\(3x + 5y = %d\\)?", c),
-		correct,
-		fmt.Sprintf("(%d, %d)", x+1, y),
-		fmt.Sprintf("(%d, %d)", x, y+1),
-		fmt.Sprintf("(%d, %d)", x+1, y+1),
-	)
-	p.Explanation = fmt.Sprintf("3(%d) + 5(%d) = %d + %d = %d. The other pairs change the left side by 3 or 5.", x, y, 3*x, 5*y, c)
-	return p
+	return generator.Problem{
+		Question:    fmt.Sprintf("A solution of 3x + 5y = %d has x = %d. What is y? (enter a number)", c, x),
+		Answer:      fmt.Sprintf("%d", y),
+		Explanation: fmt.Sprintf("Substitute x = %d: 3 x %d + 5y = %d, so 5y = %d and y = %d.", x, x, c, c-3*x, y),
+		Facts:       map[string]string{"c": fmt.Sprintf("%d", c), "x": fmt.Sprintf("%d", x), "y": fmt.Sprintf("%d", y)},
+	}
 }
 
 type cryptoGen struct{}
@@ -280,25 +229,17 @@ type primeInfGen struct{}
 
 func (g *primeInfGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	sets := [][]int{{2, 3}, {2, 3, 5}, {2, 3, 5, 7}, {3, 5, 7}}
-	primes := sets[rand.Intn(len(sets))]
+	set := sets[rand.Intn(len(sets))]
 	prod := 1
-	for _, p := range primes {
+	for _, p := range set {
 		prod *= p
 	}
 	n := prod + 1
-	if rand.Intn(2) == 0 {
-		// typed production: the Euclid number itself
-		return generator.Problem{
-			Question:    fmt.Sprintf("Euclid's construction: \\(N = %s + 1\\). What is \\(N\\)? (enter a number)", joinProd(primes)),
-			Answer:      fmt.Sprintf("%d", n),
-			Explanation: fmt.Sprintf("Multiply out \\(%s\\) and add 1: \\(N=%d\\), which brings a new prime factor.", joinProd(primes), n),
-		}
-	}
-	// question: is n divisible by any listed prime? always no
 	return generator.Problem{
-		Question:    fmt.Sprintf("Euclid's construction: \\(N = %s + 1 = %d\\) where the product is over %v. Is \\(N\\) divisible by any of %v? (yes/no)", joinProd(primes), n, primes, primes),
-		Answer:      "no",
-		Explanation: fmt.Sprintf("If \\(N\\) were divisible by any \\(p\\) in the set, \\(p\\) would divide \\(N - \\text{product}=1\\), impossible. So \\(N\\) has a new prime factor."),
+		Question:    fmt.Sprintf("Euclid's construction: N = %d + 1. What is N? (enter a number)", prod),
+		Answer:      fmt.Sprintf("%d", n),
+		Explanation: fmt.Sprintf("Multiply the listed primes to get %d, then add 1, so N = %d.", prod, n),
+		Facts:       map[string]string{"product": fmt.Sprintf("%d", prod), "N": fmt.Sprintf("%d", n)},
 	}
 }
 
@@ -316,226 +257,35 @@ func joinProd(primes []int) string {
 type quadraticReciprocityGen struct{}
 
 func (g *quadraticReciprocityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type entry struct {
-		q string
-		a string
-		e string
-	}
-	easy := []entry{
-		{"Does quadratic reciprocity relate (p/q) and (q/p) for odd primes p,q? (yes/no)", "yes", "(p/q)(q/p)=(-1)^{(p-1)(q-1)/4}."},
-		{"If p=5,q=7, does (5/7)=(7/5) hold? (yes/no)", "yes", "Both ≡1 mod4, so sign is +1."},
-		{"Is (3/11) = -(11/3) ? (yes/no)", "yes", "3≡3 mod4,11≡3 mod4 → sign -1."},
-		{"If p=3,q=7, does (3/7)=(7/3) hold? (yes/no)", "no", "3 and 7 are both 3 mod 4, so the reciprocity sign is -1."},
-	}
-	hard := []entry{
-		{"What is (3/5) using reciprocity? (enter -1,0,1)", "-1", "(3/5)=-(5/3)=-(2/3)=-( -1)= -1? Direct: residues mod5 1,4, so 3 non-residue."},
-		{"Does (p/q)=1 imply q is quadratic residue mod p? (yes/no)", "yes", "Definition of Legendre symbol."},
-		{"Is law of quadratic reciprocity used to compute (a/p) quickly? (yes/no)", "yes", "It swaps numerator/denominator to reduce."},
-	}
-	if rand.Intn(3) == 0 {
-		// typed production: Legendre values via reciprocity (unique answers).
-		prod := []entry{
-			{"What is (1/5)? (enter -1,0,1)", "1", "1 = 1^2 mod 5, so it is a quadratic residue."},
-			{"What is (2/5)? (enter -1,0,1)", "-1", "Squares mod 5 are 1 and 4; 2 is a non-residue."},
-			{"What is (4/5)? (enter -1,0,1)", "1", "4 = 2^2 mod 5, so it is a quadratic residue."},
-		}
-		v := prod[rand.Intn(len(prod))]
-		return generator.Problem{Question: v.q, Answer: v.a, Explanation: v.e}
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return quadraticReciprocityProblem()
 }
 
 type primitiveRootGen struct{}
 
 func (g *primitiveRootGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type entry struct {
-		q string
-		a string
-		e string
-	}
-	easy := []entry{
-		{"Is 2 a primitive root mod 5? (yes/no)", "yes", "Powers of 2 mod5: 2,4,3,1 cover all non-zero residues."},
-		{"Is 2 a primitive root mod 7? (yes/no)", "no", "Order of 2 mod7 is 3, not 6=φ(7), so not primitive."},
-		{"Does primitive root mod p have order p-1? (yes/no)", "yes", "By definition order is φ(p)=p-1."},
-	}
-	hard := []entry{
-		{"How many primitive roots mod 7 are there? (enter a number)", "2", "Count = φ(φ(7))=φ(6)=2 (3 and 5)."},
-		{"Does every prime have a primitive root? (yes/no)", "yes", "Primitive root theorem for primes."},
-		{"Is 3 a primitive root mod 7? (yes/no)", "yes", "Powers of 3: 3,2,6,4,5,1 cover all residues."},
-	}
-	if rand.Intn(3) == 0 {
-		// typed production: orders and smallest roots (unique answers).
-		prod := []entry{
-			{"How many primitive roots mod 7 are there? (enter a number)", "2", "Count = φ(φ(7))=φ(6)=2 (3 and 5)."},
-			{"What is the order of a primitive root mod 5? (enter a number)", "4", "A primitive root mod 5 has order φ(5)=4."},
-			{"What is the smallest primitive root mod 5? (enter a number)", "2", "Powers of 2 mod5: 2,4,3,1 cover all non-zero residues."},
-		}
-		v := prod[rand.Intn(len(prod))]
-		return generator.Problem{Question: v.q, Answer: v.a, Explanation: v.e}
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return primitiveRootProblem()
 }
 
 type pntGen struct{}
 
 func (g *pntGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type entry struct {
-		q string
-		a string
-		e string
-	}
-	easy := []entry{
-		{"Does prime number theorem state π(x) ~ x/log x? (yes/no)", "yes", "π(x) ~ x/log x as x→∞."},
-		{"Does π(x) denote number of primes ≤ x? (yes/no)", "yes", "Prime counting function."},
-		{"Is density of primes near x about 1/log x? (yes/no)", "yes", "PNT gives density."},
-		{"Is the density of primes near x about 1/x? (yes/no)", "no", "PNT gives density about 1/log x, much larger than 1/x."},
-	}
-	hard := []entry{
-		{"Does PNT imply n-th prime p_n ~ n log n? (yes/no)", "yes", "Equivalent form of PNT."},
-		{"Is error in PNT related to Riemann hypothesis (O(√x log x))? (yes/no)", "yes", "RH gives sharp error."},
-		{"Does π(10)=4? (yes/no)", "yes", "Primes ≤10: 2,3,5,7."},
-	}
-	if rand.Intn(3) == 0 {
-		// typed production: exact prime counts (unique answers).
-		prod := []entry{
-			{"How many primes are there ≤ 10? (enter a number)", "4", "Primes ≤10: 2,3,5,7."},
-			{"How many primes are there ≤ 20? (enter a number)", "8", "Primes ≤20: 2,3,5,7,11,13,17,19."},
-			{"How many primes are there ≤ 30? (enter a number)", "10", "Primes ≤30: 2,3,5,7,11,13,17,19,23,29."},
-		}
-		v := prod[rand.Intn(len(prod))]
-		return generator.Problem{Question: v.q, Answer: v.a, Explanation: v.e}
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return primeNumberTheoremProblem()
 }
 
 type sieveGen struct{}
 
 func (g *sieveGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type entry struct {
-		q string
-		a string
-		e string
-	}
-	easy := []entry{
-		{"Does sieve of Eratosthenes mark multiples of p starting at p^2? (yes/no)", "yes", "Smaller multiples already marked by smaller primes."},
-		{"Is sieve time O(n log log n)? (yes/no)", "yes", "Eratosthenes complexity."},
-		{"Does Brun's sieve give upper bound for twin primes? (yes/no)", "yes", "Brun: sum of reciprocals of twin primes converges."},
-		{"Does the sieve test every number against all smaller numbers? (yes/no)", "no", "It only marks multiples of primes up to sqrt(n)."},
-	}
-	hard := []entry{
-		{"Does sieve principle use inclusion-exclusion with Möbius? (yes/no)", "yes", "Count via μ."},
-		{"Is Brun's theorem that twin primes are finite? (no)", "no", "Brun shows sum converges, not finiteness."},
-		{"Does segmented sieve handle large n with limited memory? (yes/no)", "yes", "Process intervals."},
-	}
-	if rand.Intn(3) == 0 {
-		// typed production: sieve yields (unique answers).
-		prod := []entry{
-			{"How many primes does the sieve find below 10? (enter a number)", "4", "Survivors below 10: 2,3,5,7."},
-			{"How many primes does the sieve find below 20? (enter a number)", "8", "Survivors below 20: 2,3,5,7,11,13,17,19."},
-			{"What is the first prime the sieve uses to mark composites? (enter a number)", "2", "Marking starts with multiples of 2."},
-		}
-		v := prod[rand.Intn(len(prod))]
-		return generator.Problem{Question: v.q, Answer: v.a, Explanation: v.e}
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return sieveProblem()
 }
 
 type zetaGen struct{}
 
 func (g *zetaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type entry struct {
-		q string
-		a string
-		e string
-	}
-	easy := []entry{
-		{"Does ζ(s)=∑_{n≥1}1/n^s converge for Re(s)>1? (yes/no)", "yes", "Zeta converges for Re(s)>1."},
-		{"Is ζ(2)=π^2/6? (yes/no)", "yes", "Basel problem."},
-		{"Does Euler product ζ(s)=∏_p(1-p^{-s})^{-1} hold? (yes/no)", "yes", "Euler product over primes."},
-		{"Is ζ(3) known in closed form like ζ(2)? (yes/no)", "no", "ζ(3) is Apéry's constant; no pi-power closed form is known."},
-	}
-	hard := []entry{
-		{"Are nontrivial zeros of ζ conjectured to lie on Re(s)=1/2? (yes/no)", "yes", "Riemann hypothesis."},
-		{"Does ζ(s) have pole at s=1? (yes/no)", "yes", "Simple pole with residue 1."},
-		{"Is ζ(-1)=-1/12 via analytic continuation? (yes/no)", "yes", "Regularized sum."},
-	}
-	if rand.Intn(3) == 0 {
-		// typed production: zeta values and residue (unique answers).
-		prod := []entry{
-			{"What is zeta(2)? (type like pi^2/6)", "pi^2/6", "Basel problem: zeta(2) = pi^2/6."},
-			{"What is the residue of zeta at its pole s=1? (enter a number)", "1", "Zeta has a simple pole at s=1 with residue 1."},
-			{"What is zeta(4)? (type like pi^4/90)", "pi^4/90", "zeta(4) = pi^4/90."},
-		}
-		v := prod[rand.Intn(len(prod))]
-		return generator.Problem{Question: v.q, Answer: v.a, Explanation: v.e}
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return zetaProblem()
 }
 
 type classNumberGen struct{}
 
 func (g *classNumberGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type entry struct {
-		q string
-		a string
-		e string
-	}
-	easy := []entry{
-		{"Is class number h(D) count of ideal classes in quadratic order? (yes/no)", "yes", "Class group size."},
-		{"Does h(-3)=1 mean Z[ω] is UFD? (yes/no)", "yes", "Class number 1 ⇔ PID ⇔ UFD for rings of integers."},
-		{"Is Gauss class number problem about h(D)=1? (yes/no)", "yes", "Heegner completed."},
-		{"Does h(-5)=1 hold? (yes/no)", "no", "h(-5) = 2: Z[√-5] is the classic non-UFD."},
-	}
-	hard := []entry{
-		{"Does class number formula relate h(D) to L(1,χ_D)? (yes/no)", "yes", "Dirichlet class number formula."},
-		{"Is h(-163)=1 the largest Heegner number? (yes/no)", "yes", "Heegner numbers -1,-2,-3,-7,-11,-19,-43,-67,-163."},
-		{"Does Stark-Heegner show h(-163)=1? (yes/no)", "yes", "Stark-Heegner theorem."},
-	}
-	if rand.Intn(3) == 0 {
-		// typed production: small class numbers (unique answers).
-		prod := []entry{
-			{"What is the class number h(-7)? (enter a number)", "1", "Q(√-7) has class number 1: its integers form a UFD."},
-			{"What is the class number h(-15)? (enter a number)", "2", "Q(√-15) has class number 2."},
-			{"What is the class number h(-23)? (enter a number)", "3", "Q(√-23) has class number 3."},
-		}
-		v := prod[rand.Intn(len(prod))]
-		return generator.Problem{Question: v.q, Answer: v.a, Explanation: v.e}
-	}
-	pool := easy
-	if scale > 3 {
-		pool = append(easy, hard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.q, Answer: e.a, Explanation: e.e}
+	return classNumberProblem()
 }

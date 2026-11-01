@@ -328,72 +328,19 @@ func mcProblem(q string, correct string, distractors []string) generator.Problem
 type funcTransformationsGen struct{}
 
 func (g *funcTransformationsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	h := 1 + rand.Intn(2+int(ctx.Difficulty*5))
-	k := 1 + rand.Intn(2+int(ctx.Difficulty*5))
-	a := 2 + rand.Intn(3)
-	all := []struct {
-		form, label string
-	}{
-		{fmt.Sprintf("f(x-%d)", h), fmt.Sprintf("shift right by %d", h)},
-		{fmt.Sprintf("f(x+%d)", h), fmt.Sprintf("shift left by %d", h)},
-		{fmt.Sprintf("f(x)+%d", k), fmt.Sprintf("shift up by %d", k)},
-		{fmt.Sprintf("f(x)-%d", k), fmt.Sprintf("shift down by %d", k)},
-		{"-f(x)", "reflect across the x-axis"},
-		{"f(-x)", "reflect across the y-axis"},
-		{fmt.Sprintf("%df(x)", a), fmt.Sprintf("vertical stretch by a factor of %d", a)},
-	}
-	idx := rand.Intn(len(all))
-	distractorIdx := make([]int, 0, len(all)-1)
-	for i := range all {
-		if i != idx {
-			distractorIdx = append(distractorIdx, i)
-		}
-	}
-	rand.Shuffle(len(distractorIdx), func(i, j int) { distractorIdx[i], distractorIdx[j] = distractorIdx[j], distractorIdx[i] })
-	ds := []string{all[distractorIdx[0]].label, all[distractorIdx[1]].label, all[distractorIdx[2]].label}
-	return mcProblem(
-		fmt.Sprintf("Let \\(f\\) be any function. The graph of \\(g(x) = %s\\) is obtained from the graph of \\(f\\) by which single transformation?", all[idx].form),
-		all[idx].label, ds)
+	return transformationPointProblem(ctx)
 }
 
 type polarGraphGen struct{}
 
 func (g *polarGraphGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	a := 1 + rand.Intn(2+int(ctx.Difficulty*4))
-	deg := []string{"30^{\\circ}", "60^{\\circ}", "90^{\\circ}", "120^{\\circ}", "150^{\\circ}"}[rand.Intn(5)]
-	circleAxis := fmt.Sprintf("a circle of diameter \\(|a|=%d\\) passing through the pole, centered on the polar axis", 2*a)
-	circlePerp := fmt.Sprintf("a circle of diameter \\(|a|=%d\\) passing through the pole, centered on the line \\(\\theta=90^{\\circ}\\)", 2*a)
-	line := fmt.Sprintf("a straight line through the pole making an angle \\(%s\\) with the polar axis", deg)
-	centerCircle := fmt.Sprintf("a circle centered at the pole with radius %d", a)
-	type variant struct{ form, correct, wrong1, wrong2, wrong3 string }
-	v := []variant{
-		{fmt.Sprintf("r = %d", a), centerCircle, line, circleAxis, circlePerp},
-		{fmt.Sprintf("\\theta = %s", deg), line, centerCircle, circleAxis, circlePerp},
-		{fmt.Sprintf("r = %d\\cos\\theta", a), circleAxis, circlePerp, centerCircle, line},
-		{fmt.Sprintf("r = %d\\sin\\theta", a), circlePerp, circleAxis, centerCircle, line},
-	}[rand.Intn(4)]
-	return mcProblem(fmt.Sprintf("In polar coordinates \\((r,\\theta)\\), what shape does \\(%s\\) describe?", v.form),
-		v.correct, []string{v.wrong1, v.wrong2, v.wrong3})
+	return polarCircleProblem()
 }
 
 type parametricGraphGen struct{}
 
 func (g *parametricGraphGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	h := 1 + rand.Intn(3)
-	k := 1 + rand.Intn(3)
-	type variant struct{ form, correct, d1, d2, d3 string }
-	v := []variant{
-		{fmt.Sprintf("x = t,\\ y = t^2"), "a parabola opening upward",
-			"a straight line", "a parabola opening rightward", "a parabola opening downward"},
-		{fmt.Sprintf("x = t^2,\\ y = t"), "a parabola opening rightward",
-			"a straight line", "a parabola opening upward", "a parabola opening downward"},
-		{fmt.Sprintf("x = t + %d,\\ y = t^2 + %d", h, k), "a parabola opening upward",
-			"a parabola opening rightward", "a straight line", "a circle"},
-		{fmt.Sprintf("x = t^2 - %d,\\ y = t + %d", k, h), "a parabola opening rightward",
-			"a parabola opening upward", "a straight line", "a hyperbola"},
-	}[rand.Intn(4)]
-	return mcProblem(fmt.Sprintf("The curve given by \\(%s\\) (with \\(t\\) ranging over the reals) is best described as:", v.form),
-		v.correct, []string{v.d1, v.d2, v.d3})
+	return parametricParabolaProblem()
 }
 
 type piecewiseGen struct{}

@@ -77,9 +77,11 @@ func (g *decCompareGen) Generate(ctx generator.GeneratorContext) generator.Probl
 	scale := int(1 + ctx.Difficulty*5)
 	a := float64(rand.Intn(scale*2000)) / 100
 	b := float64(rand.Intn(scale*2000)) / 100
-	ans := ">"
-	if b > a {
+	ans := "="
+	if a < b {
 		ans = "<"
+	} else if a > b {
+		ans = ">"
 	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Compare: %.2f __ %.2f  (enter >, <, or =)", a, b),
@@ -980,7 +982,7 @@ func (g *sciNotationOpsGen) Generate(ctx generator.GeneratorContext) generator.P
 	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("\\((%g \\times 10^{%d}) \\times (%g \\times 10^{%d}) =\\) ? (in scientific notation)", a, ea, b, eb),
-		Answer:      fmt.Sprintf("%g x 10^%d", coeff, totalExp),
+		Answer:      fmt.Sprintf("%g × 10^%d", coeff, totalExp),
 		Explanation: fmt.Sprintf("\\((%g \\times %g) \\times 10^{%d+%d} = %g \\times 10^{%d}\\)", a, b, ea, eb, coeff, totalExp),
 		Facts:       map[string]string{"a": fmt.Sprintf("%g", a), "b": fmt.Sprintf("%g", b), "ea": strconv.Itoa(ea), "eb": strconv.Itoa(eb), "coeff": fmt.Sprintf("%g", coeff), "total_exp": strconv.Itoa(totalExp)},
 	}
@@ -1247,77 +1249,13 @@ var realConceptOptions = map[string][]string{
 type realConceptGen struct{}
 
 func (g *realConceptGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		question string
-		answer   string
-		exp      string
-	}
-	entries := []entry{
-		{"What is the defining property of a rational number?", "can be expressed as a ratio of two integers", "A rational number can be written as \\(a/b\\) where \\(a\\) and \\(b\\) are integers, \\(b \\neq 0\\)."},
-		{"Is \\(\\pi\\) a rational number? (yes/no)", "no", "\\(\\pi\\) cannot be expressed as a ratio of two integers."},
-		{"Is \\(\\sqrt{2}\\) a rational number? (yes/no)", "no", "\\(\\sqrt{2}\\) cannot be expressed as a ratio of two integers."},
-		{"Is \\(0.333\\ldots\\) a rational number? (yes/no)", "yes", "\\(0.333\\ldots = 1/3\\), so it is rational."},
-		{"The set of real numbers contains which two main subsets?", "rational and irrational", "Real numbers are the union of rational and irrational numbers."},
-		{"Every integer is also a rational number. (true/false)", "true", "Any integer \\(n\\) can be written as \\(n/1\\)."},
-		{"Is \\(\\sqrt{4}\\) a rational number? (yes/no)", "yes", "\\(\\sqrt{4} = 2 = 2/1\\), so it is rational."},
-		{"What is the name for a non-repeating, non-terminating decimal?", "irrational", "Irrational numbers have decimal representations that neither terminate nor repeat."},
-	}
-	e := entries[rand.Intn(len(entries))]
-	// Half of these answers are words, and the math field strips the spaces out
-	// of words. Offer them, and drop the "(yes/no)" hint that no longer applies.
-	if options, ok := realConceptOptions[e.answer]; ok {
-		question := strings.NewReplacer(" (yes/no)", "", " (true/false)", "").Replace(e.question)
-		p := generator.MultipleChoice(question, e.answer, options...)
-		p.Explanation = e.exp
-		return p
-	}
-	return generator.Problem{
-		Question:    e.question,
-		Answer:      e.answer,
-		Explanation: e.exp,
-	}
+	return rationalCountProblem()
 }
 
 type realPropertiesGen struct{}
 
 func (g *realPropertiesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		question string
-		answer   string
-		exp      string
-	}
-	entries := []entry{
-		{"Which property says a + b = b + a?", "commutative", "The commutative property states that order does not matter for addition: a + b = b + a."},
-		{"Which property says (a + b) + c = a + (b + c)?", "associative", "The associative property states that grouping does not matter for addition."},
-		{"Which property says a(b + c) = ab + ac?", "distributive", "The distributive property distributes multiplication over addition."},
-		{"What is the additive identity element?", "0", "Adding 0 to any number gives the same number."},
-		{"What is the multiplicative identity element?", "1", "Multiplying any number by 1 gives the same number."},
-		{"What is the additive inverse of 5?", "-5", "The additive inverse of a number is what you add to it to get 0."},
-		{"What is the multiplicative inverse of 3?", "1/3", "The multiplicative inverse of a number is what you multiply it by to get 1."},
-		{"Which property says (a × b) × c = a × (b × c)?", "associative", "The associative property for multiplication states that grouping does not matter."},
-		{"Which property says a × b = b × a?", "commutative", "The commutative property for multiplication states that order does not matter."},
-		{"The identity property of multiplication states a × 1 = ?", "a", "Multiplying by 1 gives the original number."},
-	}
-	e := entries[rand.Intn(len(entries))]
-	// The property names are words, so they need options: a math field eats
-	// the spaces and turns "commutative" into something no grader can match.
-	switch e.answer {
-	case "commutative", "associative", "distributive":
-		others := make([]string, 0, 2)
-		for _, w := range []string{"commutative", "associative", "distributive"} {
-			if w != e.answer {
-				others = append(others, w)
-			}
-		}
-		p := generator.MultipleChoice(e.question, e.answer, others...)
-		p.Explanation = e.exp
-		return p
-	}
-	return generator.Problem{
-		Question:    e.question,
-		Answer:      e.answer,
-		Explanation: e.exp,
-	}
+	return propertyValueProblem(ctx)
 }
 
 type typesGen struct{}
@@ -1329,13 +1267,13 @@ func (g *typesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		exp      string
 	}
 	entries := []entry{
-		{"What type of number is 5? (natural, integer, rational, irrational, real)", "natural", "5 is a natural number (counting number)."},
-		{"What type of number is -3? (natural, integer, rational, irrational, real)", "integer", "-3 is an integer (not a natural number because it is negative)."},
-		{"What type of number is 0? (natural, integer, rational, irrational, real)", "integer", "0 is an integer but not a natural number."},
-		{"What type of number is 2/3? (natural, integer, rational, irrational, real)", "rational", "2/3 is a rational number because it can be expressed as a fraction."},
-		{"What type of number is 0.5? (natural, integer, rational, irrational, real)", "rational", "0.5 = 1/2, so it is rational."},
-		{"What type of number is \\(\\sqrt{2}\\)? (natural, integer, rational, irrational, real)", "irrational", "\\(\\sqrt{2}\\) cannot be expressed as a fraction of integers."},
-		{"What type of number is \\(\\pi\\)? (natural, integer, rational, irrational, real)", "irrational", "\\(\\pi\\) is irrational (cannot be expressed as a fraction)."},
+		{"What is the most specific type of number 5? (natural, integer, rational, irrational, real)", "natural", "5 is a natural number (counting number)."},
+		{"What is the most specific type of number -3? (natural, integer, rational, irrational, real)", "integer", "-3 is an integer (not a natural number because it is negative)."},
+		{"What is the most specific type of number 0? (natural, integer, rational, irrational, real)", "integer", "0 is an integer but not a natural number."},
+		{"What is the most specific type of number 2/3? (natural, integer, rational, irrational, real)", "rational", "2/3 is a rational number because it can be expressed as a fraction."},
+		{"What is the most specific type of number 0.5? (natural, integer, rational, irrational, real)", "rational", "0.5 = 1/2, so it is rational."},
+		{"What is the most specific type of number \\(\\sqrt{2}\\)? (natural, integer, rational, irrational, real)", "irrational", "\\(\\sqrt{2}\\) cannot be expressed as a fraction of integers."},
+		{"What is the most specific type of number \\(\\pi\\)? (natural, integer, rational, irrational, real)", "irrational", "\\(\\pi\\) is irrational (cannot be expressed as a fraction)."},
 		{"All integers are also which larger set of numbers?", "rational", "Every integer n can be written as n/1."},
 		{"Which set contains all others: natural, integer, rational, real?", "real", "Real numbers contain all rational and irrational numbers."},
 		{"Is 0 a natural number? (yes/no)", "no", "Natural numbers are positive counting numbers: 1, 2, 3, ..."},

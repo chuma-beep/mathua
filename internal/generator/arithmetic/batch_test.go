@@ -182,7 +182,7 @@ func TestArithBatchMultipleChoiceRejectsEveryDistractor(t *testing.T) {
 		}
 	}
 	if checked == 0 {
-		t.Fatal("no multiple_choice concepts were checked")
+		t.Skip("the arithmetic batch now serves computed answers")
 	}
 }
 
@@ -342,7 +342,7 @@ func TestArithCompareWholeOrdersTheSameNumbers(t *testing.T) {
 	for i := 0; i < 200; i++ {
 		p := arithSample(t, reg, "arith.compare.whole", i)
 		orderedText := strings.Split(p.Answer, ",")
-		shownText := strings.Split(p.Facts["numbers"], "; ")
+		shownText := strings.Split(p.Facts["numbers"], ", ")
 		if len(orderedText) != 3 || len(shownText) != 3 {
 			t.Fatalf("%s: malformed tuple %q or numbers %q", p.Question, p.Answer, p.Facts["numbers"])
 		}
@@ -671,55 +671,26 @@ func TestArithIntegerWordProblemsAddTheSignedChange(t *testing.T) {
 	}
 }
 
-func TestArithDivisionByZeroOffersFullSentences(t *testing.T) {
+func TestArithDivisionByZeroCountsTrueStatements(t *testing.T) {
 	reg := arithRegistry(t)
-	for i := 0; i < 60; i++ {
+	seen := map[string]bool{}
+	for i := 0; i < 120; i++ {
 		p := arithSample(t, reg, "arith.div.zero", i)
-		opts := arithOptionsOf(p.Question)
-		if len(opts) != 4 {
-			t.Fatalf("%s: got %d options, want 4", p.Question, len(opts))
-		}
-		for _, o := range opts {
-			if len(strings.Fields(o)) < 4 {
-				t.Fatalf("%s: option %q is too short; it may trigger the letter branch", p.Question, o)
+		for _, letter := range "abcdefgh" {
+			if !strings.Contains(p.Question, "("+string(letter)+") ") {
+				t.Fatalf("%s: missing item %c", p.Question, letter)
 			}
 		}
+		n, err := strconv.Atoi(p.Answer)
+		if err != nil || n < 0 || n > 8 {
+			t.Fatalf("%s: answer %q is not a count from 0 to 8", p.Question, p.Answer)
+		}
+		if p.Facts["count"] != p.Answer {
+			t.Fatalf("%s: fact count %q does not match answer %q", p.Question, p.Facts["count"], p.Answer)
+		}
+		seen[p.Question] = true
 	}
-}
-
-func TestArithDivisionByZeroVariesConcretePrompts(t *testing.T) {
-	reg := arithRegistry(t)
-	for _, kp := range []int{1, 2} {
-		seen := map[string]bool{}
-		for i := 0; i < 40; i++ {
-			p, err := reg.GenerateContext("arith.div.zero", generator.GeneratorContext{
-				KPOrdinal: kp,
-				Seed:      int64(7200 + i),
-			})
-			if err != nil {
-				t.Fatalf("KP %d: generate: %v", kp, err)
-			}
-			if !strings.Contains(p.Question, "÷") {
-				t.Fatalf("KP %d: prompt has no concrete expression: %s", kp, p.Question)
-			}
-			opts := arithOptionsOf(p.Question)
-			if len(opts) != 4 {
-				t.Fatalf("KP %d: got %d options, want 4: %s", kp, len(opts), p.Question)
-			}
-			found := false
-			for _, o := range opts {
-				if o == p.Answer {
-					found = true
-					break
-				}
-			}
-			if !found {
-				t.Fatalf("KP %d: correct answer %q is missing from %s", kp, p.Answer, p.Question)
-			}
-			seen[p.Question] = true
-		}
-		if len(seen) < 20 {
-			t.Fatalf("KP %d produced only %d distinct prompts in 40 samples", kp, len(seen))
-		}
+	if len(seen) < 20 {
+		t.Fatalf("division by zero produced only %d distinct prompts in 120 samples", len(seen))
 	}
 }

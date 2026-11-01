@@ -1,788 +1,788 @@
 [
- {
-  "id": "stat.data.read_table",
-  "label": "Read data from tables and charts",
-  "domain": "statistics",
-  "subdomain": "statistics.data_representation",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "arith.add.single"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 10.0
-  }
- },
- {
-  "id": "stat.data.bar_graph",
-  "label": "Read and create bar graphs",
-  "domain": "statistics",
-  "subdomain": "statistics.data_representation",
-  "grading_type": "multiple_choice",
-  "prerequisites": [
-   "stat.data.read_table"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 12.0
-  }
- },
- {
-  "id": "stat.data.line_plot",
-  "label": "Read and create line plots",
-  "domain": "statistics",
-  "subdomain": "statistics.data_representation",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.data.bar_graph"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 12.0
-  }
- },
- {
-  "id": "stat.data.mean",
-  "label": "Calculate the mean",
-  "domain": "statistics",
-  "subdomain": "statistics.central_tendency",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "arith.add.triple",
-   "arith.div.basic"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 12.0
-  }
- },
- {
-  "id": "stat.data.median",
-  "label": "Find the median",
-  "domain": "statistics",
-  "subdomain": "statistics.central_tendency",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.data.mean"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 12.0
-  }
- },
- {
-  "id": "stat.data.mode",
-  "label": "Find the mode",
-  "domain": "statistics",
-  "subdomain": "statistics.central_tendency",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.data.mean"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 10.0
-  }
- },
- {
-  "id": "stat.data.range",
-  "label": "Find the range of a data set",
-  "domain": "statistics",
-  "subdomain": "statistics.central_tendency",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.data.mean"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 8.0
-  }
- },
- {
-  "id": "stat.prob.sample_space",
-  "label": "Sample space: list all possible outcomes",
-  "domain": "statistics",
-  "subdomain": "statistics.probability",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.data.range"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 12.0
-  }
- },
- {
-  "id": "stat.prob.basic",
-  "label": "Basic probability: P(event) = favourable / total",
-  "domain": "statistics",
-  "subdomain": "statistics.probability",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "frac.basics.concept",
-   "stat.data.mean"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 15.0
-  }
- },
- {
-  "id": "stat.prob.complement",
-  "label": "Complement of an event",
-  "domain": "statistics",
-  "subdomain": "statistics.probability",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.prob.basic"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 12.0
-  }
- },
- {
-  "id": "stat.prob.compound",
-  "label": "Compound events: and / or",
-  "domain": "statistics",
-  "subdomain": "statistics.probability",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.prob.complement"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 18.0
-  }
- },
- {
-  "id": "stat.prob.counting",
-  "label": "Fundamental counting principle",
-  "domain": "statistics",
-  "subdomain": "statistics.probability",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.prob.compound"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 15.0
-  }
- },
- {
-  "id": "stat.adv.geometric_mean",
-  "label": "Geometric mean",
-  "domain": "statistics",
-  "subdomain": "statistics.advanced",
-  "grading_type": "symbolic",
-  "prerequisites": [
-   "stat.data.mean"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "stat.adv.harmonic_mean",
-  "label": "Harmonic mean",
-  "domain": "statistics",
-  "subdomain": "statistics.advanced",
-  "grading_type": "symbolic",
-  "prerequisites": [
-   "stat.data.mean"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "stat.adv.rms",
-  "label": "Root mean square",
-  "domain": "statistics",
-  "subdomain": "statistics.advanced",
-  "grading_type": "symbolic",
-  "prerequisites": [
-   "stat.data.mean"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "stat.adv.variance",
-  "label": "Variance",
-  "domain": "statistics",
-  "subdomain": "statistics.advanced",
-  "grading_type": "symbolic",
-  "prerequisites": [
-   "stat.data.mean"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "stat.adv.covariance",
-  "label": "Variance and covariance of random variables",
-  "domain": "statistics",
-  "subdomain": "statistics.advanced",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.adv.variance"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "stat.prob.discrete_rv",
-  "label": "Discrete random variables",
-  "domain": "statistics",
-  "subdomain": "statistics.probability",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.prob.basic"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "stat.prob.continuous_rv",
-  "label": "Continuous random variables",
-  "domain": "statistics",
-  "subdomain": "statistics.probability",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.prob.basic"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "stat.prob.expected_value",
-  "label": "Expected value of a random variable",
-  "domain": "statistics",
-  "subdomain": "statistics.probability",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.prob.discrete_rv"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "stat.prob.bayes",
-  "label": "Bayes' theorem",
-  "domain": "statistics",
-  "subdomain": "statistics.probability",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.prob.basic"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "stat.dist.bernoulli",
-  "label": "Bernoulli distribution",
-  "domain": "statistics",
-  "subdomain": "statistics.distributions",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.prob.discrete_rv"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "stat.dist.binomial",
-  "label": "Binomial distribution",
-  "domain": "statistics",
-  "subdomain": "statistics.distributions",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.dist.bernoulli"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "stat.dist.geometric",
-  "label": "Geometric distribution",
-  "domain": "statistics",
-  "subdomain": "statistics.distributions",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.dist.bernoulli"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "stat.dist.hypergeometric",
-  "label": "Hypergeometric distribution",
-  "domain": "statistics",
-  "subdomain": "statistics.distributions",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.dist.binomial"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "stat.dist.poisson",
-  "label": "Poisson distribution",
-  "domain": "statistics",
-  "subdomain": "statistics.distributions",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.dist.binomial"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "stat.dist.uniform",
-  "label": "Uniform distribution",
-  "domain": "statistics",
-  "subdomain": "statistics.distributions",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.prob.continuous_rv"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "stat.dist.normal",
-  "label": "Normal (Gaussian) distribution",
-  "domain": "statistics",
-  "subdomain": "statistics.distributions",
-  "grading_type": "symbolic",
-  "prerequisites": [
-   "stat.prob.continuous_rv"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "stat.dist.z_table",
-  "label": "Standard normal distribution and Z-table",
-  "domain": "statistics",
-  "subdomain": "statistics.distributions",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.dist.normal"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "stat.dist.exponential",
-  "label": "Exponential distribution",
-  "domain": "statistics",
-  "subdomain": "statistics.distributions",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.prob.continuous_rv"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "stat.dist.gamma",
-  "label": "Gamma distribution",
-  "domain": "statistics",
-  "subdomain": "statistics.distributions",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.dist.exponential"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "stat.dist.beta",
-  "label": "Beta distribution",
-  "domain": "statistics",
-  "subdomain": "statistics.distributions",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.dist.gamma"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "stat.dist.chi_square",
-  "label": "Chi-square distribution",
-  "domain": "statistics",
-  "subdomain": "statistics.distributions",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.dist.normal"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "stat.dist.student_t",
-  "label": "Student's t-distribution",
-  "domain": "statistics",
-  "subdomain": "statistics.distributions",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.dist.normal"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "stat.infer.sampling",
-  "label": "Sampling distributions",
-  "domain": "statistics",
-  "subdomain": "statistics.inference",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.dist.normal"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "stat.infer.confidence",
-  "label": "Confidence intervals",
-  "domain": "statistics",
-  "subdomain": "statistics.inference",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "stat.infer.sampling"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
   {
-   "id": "stat.func.gaussian",
-   "label": "Gaussian function: moments, FWHM, convolution",
-   "domain": "statistics",
-   "subdomain": "statistics.distributions",
-   "grading_type": "numeric",
-   "prerequisites": [
-    "stat.dist.normal",
-    "alg.exp.concept"
-   ],
-   "mastery_threshold": {
-    "streak": 3,
-    "avg_time_seconds": 120
-   }
-    },
-  {
-   "id": "stat.spread.mad",
-   "label": "The mean absolute deviation",
-   "domain": "statistics",
-   "subdomain": "statistics.advanced",
-   "grading_type": "numeric",
-   "prerequisites": [
-   "stat.data.mean"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 24.0
-   }
+    "id": "stat.data.read_table",
+    "label": "Read data from tables and charts",
+    "domain": "statistics",
+    "subdomain": "statistics.data_representation",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.single"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 10.0
+    }
   },
   {
-   "id": "stat.spread.iqr",
-   "label": "The interquartile range",
-   "domain": "statistics",
-   "subdomain": "statistics.central_tendency",
-   "grading_type": "numeric",
-   "prerequisites": [
-   "stat.data.median"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 24.0
-   }
+    "id": "stat.data.bar_graph",
+    "label": "Read and create bar graphs",
+    "domain": "statistics",
+    "subdomain": "statistics.data_representation",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.read_table"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
+    }
   },
   {
-   "id": "stat.quartile.value",
-   "label": "Quartiles",
-   "domain": "statistics",
-   "subdomain": "statistics.central_tendency",
-   "grading_type": "numeric",
-   "prerequisites": [
-   "stat.data.median"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 24.0
-   }
+    "id": "stat.data.line_plot",
+    "label": "Read and create line plots",
+    "domain": "statistics",
+    "subdomain": "statistics.data_representation",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.bar_graph"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
+    }
   },
   {
-   "id": "stat.zscore.value",
-   "label": "The z-score",
-   "domain": "statistics",
-   "subdomain": "statistics.advanced",
-   "grading_type": "numeric",
-   "prerequisites": [
-   "stat.data.mean"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 24.0
-   }
+    "id": "stat.data.mean",
+    "label": "Calculate the mean",
+    "domain": "statistics",
+    "subdomain": "statistics.central_tendency",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.triple",
+      "arith.div.basic"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
+    }
   },
   {
-   "id": "stat.sampling.se",
-   "label": "The standard error",
-   "domain": "statistics",
-   "subdomain": "statistics.inference",
-   "grading_type": "numeric",
-   "prerequisites": [
-   "stat.infer.sampling",
-   "stat.data.mean"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 24.0
-   }
+    "id": "stat.data.median",
+    "label": "Find the median",
+    "domain": "statistics",
+    "subdomain": "statistics.central_tendency",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.mean"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
+    }
   },
   {
-   "id": "stat.infer.margin",
-   "label": "The margin of error",
-   "domain": "statistics",
-   "subdomain": "statistics.inference",
-   "grading_type": "numeric",
-   "prerequisites": [
-   "stat.infer.confidence"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 24.0
-   }
+    "id": "stat.data.mode",
+    "label": "Find the mode",
+    "domain": "statistics",
+    "subdomain": "statistics.central_tendency",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.mean"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 10.0
+    }
   },
   {
-   "id": "stat.prob.conditional",
-   "label": "Conditional probability",
-   "domain": "statistics",
-   "subdomain": "statistics.probability",
-   "grading_type": "numeric",
-   "prerequisites": [
-   "stat.prob.basic",
-   "stat.prob.compound"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 24.0
-   }
+    "id": "stat.data.range",
+    "label": "Find the range of a data set",
+    "domain": "statistics",
+    "subdomain": "statistics.central_tendency",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.mean"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 8.0
+    }
   },
   {
-   "id": "stat.infer.hypothesis",
-   "label": "Null and alternative hypotheses",
-   "domain": "statistics",
-   "subdomain": "statistics.inference",
-   "grading_type": "multiple_choice",
-   "prerequisites": [
-   "stat.infer.sampling",
-   "stat.infer.confidence"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 24.0
-   }
+    "id": "stat.prob.sample_space",
+    "label": "Sample space: list all possible outcomes",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.range"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
+    }
   },
   {
-   "id": "stat.infer.ztest",
-   "label": "The one-sample z statistic",
-   "domain": "statistics",
-   "subdomain": "statistics.inference",
-   "grading_type": "numeric",
-   "prerequisites": [
-   "stat.infer.hypothesis",
-   "stat.sampling.se"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 24.0
-   }
+    "id": "stat.prob.basic",
+    "label": "Basic probability: P(event) = favourable / total",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.basics.concept",
+      "stat.data.mean"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
   },
   {
-   "id": "stat.infer.ttest",
-   "label": "The one-sample t statistic",
-   "domain": "statistics",
-   "subdomain": "statistics.inference",
-   "grading_type": "numeric",
-   "prerequisites": [
-   "stat.infer.ztest",
-   "stat.dist.student_t"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 24.0
-   }
+    "id": "stat.prob.complement",
+    "label": "Complement of an event",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.basic"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
+    }
   },
   {
-   "id": "stat.infer.pvalue",
-   "label": "p-values and significance",
-   "domain": "statistics",
-   "subdomain": "statistics.inference",
-   "grading_type": "multiple_choice",
-   "prerequisites": [
-   "stat.infer.ztest",
-   "stat.dist.z_table"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 24.0
-   }
+    "id": "stat.prob.compound",
+    "label": "Compound events: and / or",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.complement"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
   },
   {
-   "id": "stat.infer.type_error",
-   "label": "Type I and II errors and power",
-   "domain": "statistics",
-   "subdomain": "statistics.inference",
-   "grading_type": "multiple_choice",
-   "prerequisites": [
-   "stat.infer.hypothesis",
-   "stat.infer.pvalue"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 26.0
-   }
+    "id": "stat.prob.counting",
+    "label": "Fundamental counting principle",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.compound"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
   },
   {
-   "id": "stat.infer.proportion",
-   "label": "Standard error of a proportion",
-   "domain": "statistics",
-   "subdomain": "statistics.inference",
-   "grading_type": "numeric",
-   "prerequisites": [
-   "stat.infer.confidence",
-   "stat.sampling.se"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 22.0
-   }
+    "id": "stat.adv.geometric_mean",
+    "label": "Geometric mean",
+    "domain": "statistics",
+    "subdomain": "statistics.advanced",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "stat.data.mean"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
   },
   {
-   "id": "stat.test.chi_square",
-   "label": "The chi-square goodness-of-fit test",
-   "domain": "statistics",
-   "subdomain": "statistics.inference",
-   "grading_type": "numeric",
-   "prerequisites": [
-   "stat.dist.chi_square",
-   "stat.infer.hypothesis"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 26.0
-   }
+    "id": "stat.adv.harmonic_mean",
+    "label": "Harmonic mean",
+    "domain": "statistics",
+    "subdomain": "statistics.advanced",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "stat.data.mean"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
   },
   {
-   "id": "stat.test.anova",
-   "label": "One-way ANOVA",
-   "domain": "statistics",
-   "subdomain": "statistics.inference",
-   "grading_type": "numeric",
-   "prerequisites": [
-   "stat.adv.variance",
-   "stat.infer.hypothesis"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 28.0
-   }
+    "id": "stat.adv.rms",
+    "label": "Root mean square",
+    "domain": "statistics",
+    "subdomain": "statistics.advanced",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "stat.data.mean"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
   },
   {
-   "id": "stat.reg.r2",
-   "label": "The coefficient of determination",
-   "domain": "statistics",
-   "subdomain": "statistics.advanced",
-   "grading_type": "numeric",
-   "prerequisites": [
-   "stat.adv.covariance",
-   "stat.adv.variance"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 24.0
-   }
+    "id": "stat.adv.variance",
+    "label": "Variance",
+    "domain": "statistics",
+    "subdomain": "statistics.advanced",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "stat.data.mean"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
   },
   {
-   "id": "stat.data.histogram",
-   "label": "Histograms",
-   "domain": "statistics",
-   "subdomain": "statistics.data_representation",
-   "grading_type": "numeric",
-   "prerequisites": [
-   "stat.data.bar_graph",
-   "stat.data.range"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 20.0
-   }
+    "id": "stat.adv.covariance",
+    "label": "Variance and covariance of random variables",
+    "domain": "statistics",
+    "subdomain": "statistics.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.adv.variance"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
   },
   {
-   "id": "stat.infer.nonparametric",
-   "label": "Nonparametric tests",
-   "domain": "statistics",
-   "subdomain": "statistics.inference",
-   "grading_type": "multiple_choice",
-   "prerequisites": [
-   "stat.infer.hypothesis",
-   "stat.dist.binomial"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 26.0
-   }
+    "id": "stat.prob.discrete_rv",
+    "label": "Discrete random variables",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.basic"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "stat.prob.continuous_rv",
+    "label": "Continuous random variables",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.basic"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "stat.prob.expected_value",
+    "label": "Expected value of a random variable",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.discrete_rv"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "stat.prob.bayes",
+    "label": "Bayes' theorem",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.basic"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "stat.dist.bernoulli",
+    "label": "Bernoulli distribution",
+    "domain": "statistics",
+    "subdomain": "statistics.distributions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.discrete_rv"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "stat.dist.binomial",
+    "label": "Binomial distribution",
+    "domain": "statistics",
+    "subdomain": "statistics.distributions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.dist.bernoulli"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "stat.dist.geometric",
+    "label": "Geometric distribution",
+    "domain": "statistics",
+    "subdomain": "statistics.distributions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.dist.bernoulli"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "stat.dist.hypergeometric",
+    "label": "Hypergeometric distribution",
+    "domain": "statistics",
+    "subdomain": "statistics.distributions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.dist.binomial"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "stat.dist.poisson",
+    "label": "Poisson distribution",
+    "domain": "statistics",
+    "subdomain": "statistics.distributions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.dist.binomial"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "stat.dist.uniform",
+    "label": "Uniform distribution",
+    "domain": "statistics",
+    "subdomain": "statistics.distributions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.continuous_rv"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "stat.dist.normal",
+    "label": "Normal (Gaussian) distribution",
+    "domain": "statistics",
+    "subdomain": "statistics.distributions",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "stat.prob.continuous_rv"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "stat.dist.z_table",
+    "label": "Standard normal distribution and Z-table",
+    "domain": "statistics",
+    "subdomain": "statistics.distributions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.dist.normal"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "stat.dist.exponential",
+    "label": "Exponential distribution",
+    "domain": "statistics",
+    "subdomain": "statistics.distributions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.continuous_rv"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "stat.dist.gamma",
+    "label": "Gamma distribution",
+    "domain": "statistics",
+    "subdomain": "statistics.distributions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.dist.exponential"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "stat.dist.beta",
+    "label": "Beta distribution",
+    "domain": "statistics",
+    "subdomain": "statistics.distributions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.dist.gamma"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "stat.dist.chi_square",
+    "label": "Chi-square distribution",
+    "domain": "statistics",
+    "subdomain": "statistics.distributions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.dist.normal"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "stat.dist.student_t",
+    "label": "Student's t-distribution",
+    "domain": "statistics",
+    "subdomain": "statistics.distributions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.dist.normal"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "stat.infer.sampling",
+    "label": "Sampling distributions",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.dist.normal"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "stat.infer.confidence",
+    "label": "Confidence intervals",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.sampling"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "stat.func.gaussian",
+    "label": "Gaussian function: moments, FWHM, convolution",
+    "domain": "statistics",
+    "subdomain": "statistics.distributions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.dist.normal",
+      "alg.exp.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "stat.spread.mad",
+    "label": "The mean absolute deviation",
+    "domain": "statistics",
+    "subdomain": "statistics.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.mean"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "stat.spread.iqr",
+    "label": "The interquartile range",
+    "domain": "statistics",
+    "subdomain": "statistics.central_tendency",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.median"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "stat.quartile.value",
+    "label": "Quartiles",
+    "domain": "statistics",
+    "subdomain": "statistics.central_tendency",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.median"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "stat.zscore.value",
+    "label": "The z-score",
+    "domain": "statistics",
+    "subdomain": "statistics.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.mean"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "stat.sampling.se",
+    "label": "The standard error",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.sampling",
+      "stat.data.mean"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "stat.infer.margin",
+    "label": "The margin of error",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.confidence"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "stat.prob.conditional",
+    "label": "Conditional probability",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.basic",
+      "stat.prob.compound"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "stat.infer.hypothesis",
+    "label": "Null and alternative hypotheses",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.sampling",
+      "stat.infer.confidence"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "stat.infer.ztest",
+    "label": "The one-sample z statistic",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.hypothesis",
+      "stat.sampling.se"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "stat.infer.ttest",
+    "label": "The one-sample t statistic",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.ztest",
+      "stat.dist.student_t"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "stat.infer.pvalue",
+    "label": "p-values and significance",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.ztest",
+      "stat.dist.z_table"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "stat.infer.type_error",
+    "label": "Type I and II errors and power",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.hypothesis",
+      "stat.infer.pvalue"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "stat.infer.proportion",
+    "label": "Standard error of a proportion",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.confidence",
+      "stat.sampling.se"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "stat.test.chi_square",
+    "label": "The chi-square goodness-of-fit test",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.dist.chi_square",
+      "stat.infer.hypothesis"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "stat.test.anova",
+    "label": "One-way ANOVA",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.adv.variance",
+      "stat.infer.hypothesis"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "stat.reg.r2",
+    "label": "The coefficient of determination",
+    "domain": "statistics",
+    "subdomain": "statistics.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.adv.covariance",
+      "stat.adv.variance"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "stat.data.histogram",
+    "label": "Histograms",
+    "domain": "statistics",
+    "subdomain": "statistics.data_representation",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.bar_graph",
+      "stat.data.range"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "stat.infer.nonparametric",
+    "label": "Nonparametric tests",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.hypothesis",
+      "stat.dist.binomial"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
   }
 ]

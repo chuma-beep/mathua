@@ -35,15 +35,15 @@ import (
 
 func registerRaise(reg *generator.Registry) {
 	reg.Register("calc.limit.intermediate_value", &ivtValueGen{})
-	reg.Register("calc.limit.limsup", &limsupGen{})
-	reg.Register("calc.limit.oscillation", &oscillationGen{})
+	reg.Register("calc.limit.limsup", &calcCountGen{build: limsupStatementsProblem})
+	reg.Register("calc.limit.oscillation", &calcCountGen{build: oscillationStatementsProblem})
 
-	reg.Register("calc.deriv.inverse_hyperbolic", &inverseHyperbolicGen{})
+	reg.Register("calc.deriv.inverse_hyperbolic", &calcCountGen{build: inverseHyperbolicStatementsProblem})
 	reg.Register("calc.deriv.mvt_applications", &mvtApplicationsGen{})
 	reg.Register("calc.deriv.newton_convergence", &newtonConvergenceGen{})
-	reg.Register("calc.deriv.convex_jensen", &convexJensenGen{})
+	reg.Register("calc.deriv.convex_jensen", &calcCountGen{build: convexJensenStatementsProblem})
 	reg.Register("calc.deriv.marginal_analysis", &marginalAnalysisGen{})
-	reg.Register("calc.deriv.epsilon_delta_deriv", &epsilonDeltaDerivGen{})
+	reg.Register("calc.deriv.epsilon_delta_deriv", &calcCountGen{build: epsilonDeltaStatementsProblem})
 
 	reg.Register("calc.series.operations", &seriesOperationsGen{})
 	reg.Register("calc.series.binomial", &binomialSeriesGen{})
@@ -59,7 +59,7 @@ func registerRaise(reg *generator.Registry) {
 	reg.Register("calc.integral.consumer_surplus", &consumerSurplusGen{})
 	reg.Register("calc.integral.fourier_coefficients", &fourierCoefficientsGen{})
 
-	reg.Register("calc.multi.lagrange_two", &varietyWrap{id: "calc.multi.lagrange_two", inner: &lagrangeTwoGen{}})
+	reg.Register("calc.multi.lagrange_two", &calcCountGen{build: lagrangeStatementsProblem})
 	reg.Register("calc.multi.implicit_function", &implicitFunctionGen{})
 	reg.Register("calc.multi.inverse_function", &inverseFunctionGen{})
 	reg.Register("calc.multi.iterated_limits", &iteratedLimitsGen{})
@@ -379,27 +379,7 @@ func (g *epsilonDeltaDerivGen) Generate(ctx generator.GeneratorContext) generato
 type seriesOperationsGen struct{}
 
 func (g *seriesOperationsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	claims := []calcMCClaim{
-		{
-			q:           "The sum of two convergent series is...",
-			correct:     "a convergent series whose sum is the sum of the two sums",
-			distractors: []string{"always divergent", "convergent only if both are absolutely convergent", "a series whose sum is the product of the two sums"},
-			reason:      "The partial sums add term by term, so the limit of the sums is the sum of the limits.",
-		},
-		{
-			q:           "Multiplying every term of a convergent series by a constant...",
-			correct:     "leaves it convergent, with the sum multiplied by the same constant",
-			distractors: []string{"may make it diverge", "leaves the sum unchanged", "converges only when the constant is below one"},
-			reason:      "Each partial sum scales by the constant, and scaling commutes with the limit.",
-		},
-		{
-			q:           "Inserting parentheses into a convergent series...",
-			correct:     "does not change its sum",
-			distractors: []string{"always changes the sum", "may make it diverge", "requires absolute convergence to preserve the sum"},
-			reason:      "Grouping picks out a subsequence of the partial sums, and a subsequence of a convergent sequence has the same limit.",
-		},
-	}
-	return calcPickMC(append(claims, computedThinClaims("calc.series.operations")...))
+	return seriesOperationsProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -471,89 +451,7 @@ func (g *cauchyProductGen) Generate(ctx generator.GeneratorContext) generator.Pr
 type pSeriesGen struct{}
 
 func (g *pSeriesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	mode := rand.Intn(4)
-	switch mode {
-	case 0:
-		// Convergence threshold question
-		return calcPickMC([]calcMCClaim{
-			{
-				q:           "The p-series with terms \\(1/n^{p}\\) converges exactly when...",
-				correct:     "p > 1",
-				distractors: []string{"p ≥ 1", "p < 1", "p > 0"},
-				reason:      "The integral test compares it with the integral of \\(x^{-p}\\), which converges only for \\(p > 1\\).",
-			},
-			{
-				q:           "Which condition on the exponent p guarantees that \\(\\sum_{n=1}^\\infty \\frac{1}{n^p}\\) diverges?",
-				correct:     "p ≤ 1",
-				distractors: []string{"p > 1", "p ≥ 2", "p > 0"},
-				reason:      "A p-series diverges whenever the exponent p is less than or equal to 1, including the harmonic series at p = 1.",
-			},
-		})
-	case 1:
-		// Specific radical series convergence/divergence
-		type radCase struct {
-			term, pStr, exp string
-			converges       bool
-		}
-		cases := []radCase{
-			{"\\frac{1}{\\sqrt{n}}", "1/2", "below 1", false},
-			{"\\frac{1}{\\sqrt[3]{n}}", "1/3", "below 1", false},
-			{"\\frac{1}{\\sqrt[4]{n}}", "1/4", "below 1", false},
-			{"\\frac{1}{\\sqrt[3]{n^2}}", "2/3", "below 1", false},
-			{"\\frac{1}{\\sqrt[4]{n^3}}", "3/4", "below 1", false},
-			{"\\frac{1}{n\\sqrt{n}}", "3/2", "strictly greater than 1", true},
-			{"\\frac{1}{n^2\\sqrt{n}}", "5/2", "strictly greater than 1", true},
-			{"\\frac{1}{n\\sqrt[3]{n}}", "4/3", "strictly greater than 1", true},
-			{"\\frac{1}{\\sqrt[4]{n^5}}", "5/4", "strictly greater than 1", true},
-			{"\\frac{1}{n\\sqrt[4]{n^3}}", "7/4", "strictly greater than 1", true},
-		}
-		c := cases[rand.Intn(len(cases))]
-		q := fmt.Sprintf("The series \\(\\sum_{n=1}^\\infty %s\\) ...", c.term)
-		if c.converges {
-			pProb := generator.MultipleChoice(q,
-				fmt.Sprintf("converges, because its exponent p = %s is strictly greater than 1", c.pStr),
-				fmt.Sprintf("diverges, because its exponent p = %s is at most 1", c.pStr),
-				"diverges, because its terms tend to infinity",
-				"converges to 0")
-			pProb.Explanation = fmt.Sprintf("The exponent is %s > 1, so the p-series converges.", c.pStr)
-			return pProb
-		}
-		pProb := generator.MultipleChoice(q,
-			fmt.Sprintf("diverges, because its exponent p = %s is at most 1", c.pStr),
-			fmt.Sprintf("converges, because its exponent p = %s is strictly greater than 1", c.pStr),
-			"converges, because its terms tend to 0",
-			"converges to 1")
-		pProb.Explanation = fmt.Sprintf("The exponent is %s <= 1, so the p-series diverges.", c.pStr)
-		return pProb
-	case 2:
-		// Integer exponent p-series
-		p := 2 + rand.Intn(7) // 2 to 8
-		q := fmt.Sprintf("Does the p-series \\(\\sum_{n=1}^\\infty \\frac{1}{n^{%d}}\\) converge or diverge?", p)
-		ex := fmt.Sprintf("The exponent is p = %d > 1, so by the p-series test the series converges.", p)
-		pProb := generator.MultipleChoice(q,
-			"converges, because p > 1",
-			"diverges, because p ≤ 1",
-			"diverges, because the terms tend to zero too slowly",
-			"diverges, because it oscillates")
-		pProb.Explanation = ex
-		return pProb
-	default:
-		// Which of these series converges / diverges
-		divergentTerms := []string{"\\sum \\frac{1}{n}", "\\sum \\frac{1}{\\sqrt{n}}", "\\sum \\frac{1}{\\sqrt[3]{n}}", "\\sum \\frac{1}{n^{0.8}}"}
-		convergentTerms := []string{"\\sum \\frac{1}{n^2}", "\\sum \\frac{1}{n^3}", "\\sum \\frac{1}{n^{1.5}}", "\\sum \\frac{1}{n^{2.5}}"}
-		if rand.Intn(2) == 0 {
-			div := divergentTerms[rand.Intn(len(divergentTerms))]
-			q := "Which of these p-series diverges?"
-			pProb := generator.MultipleChoice(q, div, convergentTerms[0], convergentTerms[1], convergentTerms[2])
-			pProb.Explanation = fmt.Sprintf("The series %s has exponent p <= 1, so it diverges by the p-series test.", div)
-			return pProb
-		}
-		conv := convergentTerms[rand.Intn(len(convergentTerms))]
-		q := "Which of these p-series converges?"
-		pProb := generator.MultipleChoice(q, conv, divergentTerms[0], divergentTerms[1], divergentTerms[2])
-		pProb.Explanation = fmt.Sprintf("The series %s has exponent p > 1, so it converges by the p-series test.", conv)
-		return pProb
-	}
+	return pSeriesProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -563,46 +461,7 @@ func (g *pSeriesGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 type dirichletTestGen struct{}
 
 func (g *dirichletTestGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	mode := rand.Intn(3)
-	switch mode {
-	case 0:
-		return calcPickMC([]calcMCClaim{
-			{
-				q:           "Dirichlet's test says that \\(\\sum a_n b_n\\) converges when...",
-				correct:     "the partial sums of a(n) are bounded and b(n) decreases to zero",
-				distractors: []string{"a(n) decreases to zero and b(n) is bounded", "both sequences are absolutely summable", "the product a(n)b(n) decreases to zero"},
-				reason:      "Bounded partial sums supply the cancellation and a monotone sequence shrinking to zero supplies the size, which is enough for convergence.",
-			},
-			{
-				q:           "Abel's test is the version of Dirichlet's test in which...",
-				correct:     "the monotone factor decreases to a positive limit rather than to zero",
-				distractors: []string{"the cancelling factor is absolutely summable", "the two factors are interchanged", "the series has positive terms"},
-				reason:      "Abel's test handles a factor converging to a nonzero limit by subtracting that limit and applying Dirichlet to the remainder.",
-			},
-		})
-	case 1:
-		k := 1 + rand.Intn(5)
-		q := fmt.Sprintf("Applied to \\(\\sum_{n=1}^\\infty \\frac{\\sin(%dn)}{n}\\), Dirichlet's test shows that...", k)
-		correct := fmt.Sprintf("the series converges, because the partial sums of sin(%dn) are bounded and 1/n decreases to zero", k)
-		d1 := fmt.Sprintf("the series diverges, because sin(%dn) does not tend to zero", k)
-		d2 := "the series converges absolutely"
-		d3 := "the test cannot be applied"
-		ex := fmt.Sprintf("The partial sums of sin(%dn) remain bounded by 1/sin(%d/2) and 1/n decreases monotonically to 0, satisfying Dirichlet's test.", k, k)
-		p := generator.MultipleChoice(q, correct, d1, d2, d3)
-		p.Explanation = ex
-		return p
-	default:
-		k := 1 + rand.Intn(5)
-		q := fmt.Sprintf("Applied to \\(\\sum_{n=1}^\\infty \\frac{\\cos(%dn)}{\\sqrt{n}}\\), Dirichlet's test shows that...", k)
-		correct := fmt.Sprintf("the series converges, because the partial sums of cos(%dn) are bounded and 1/sqrt(n) decreases to zero", k)
-		d1 := fmt.Sprintf("the series diverges, because cos(%dn) oscillates indefinitely", k)
-		d2 := "the series converges absolutely"
-		d3 := "the test is inconclusive"
-		ex := fmt.Sprintf("The partial sums of cos(%dn) are bounded and 1/sqrt(n) decreases monotonically to 0, so the series converges by Dirichlet's test.", k)
-		p := generator.MultipleChoice(q, correct, d1, d2, d3)
-		p.Explanation = ex
-		return p
-	}
+	return dirichletTestProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -902,27 +761,7 @@ func (g *inverseFunctionGen) Generate(ctx generator.GeneratorContext) generator.
 type iteratedLimitsGen struct{}
 
 func (g *iteratedLimitsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	claims := []calcMCClaim{
-		{
-			q:           "For a function of two variables, the two iterated limits...",
-			correct:     "can be different, so the order in which they are taken matters",
-			distractors: []string{"are always equal", "always equal the double limit", "exist only when the function is continuous"},
-			reason:      "Each iterated limit holds one variable fixed while the other moves, and the two orders need not agree.",
-		},
-		{
-			q:           "If the double limit of f at a point exists and one iterated limit also exists, then...",
-			correct:     "the iterated limit equals the double limit",
-			distractors: []string{"the other iterated limit need not exist", "the function is continuous there", "the iterated limits are different"},
-			reason:      "The double limit controls every path to the point, and an iterated limit is the limit along one special family of paths.",
-		},
-		{
-			q:           "The function \\(f(x,y) = xy/(x^{2}+y^{2})\\) away from the origin shows that...",
-			correct:     "both iterated limits can exist and be equal while the double limit does not exist",
-			distractors: []string{"the double limit exists whenever the iterated limits agree", "the function is continuous at the origin", "the iterated limits are unequal"},
-			reason:      "Along either axis the quotient is 0, so both iterated limits are 0, but along \\(y = x\\) it is \\(1/2\\), so the double limit does not exist.",
-		},
-	}
-	return calcPickMC(append(claims, computedMultiClaims("calc.multi.iterated_limits")...))
+	return iteratedLimitsProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -1022,25 +861,5 @@ func (g *fluxGeneralGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type vectorIdentitiesGen struct{}
 
 func (g *vectorIdentitiesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	claims := []calcMCClaim{
-		{
-			q:           "For any smooth vector field, the divergence of the curl is...",
-			correct:     "zero",
-			distractors: []string{"the Laplacian of the field", "equal to the curl of the divergence", "zero only for conservative fields"},
-			reason:      "The divergence of the curl expands into mixed second partials that cancel pairwise.",
-		},
-		{
-			q:           "The curl of a gradient is...",
-			correct:     "zero, so every gradient field is irrotational",
-			distractors: []string{"the divergence of the field", "zero only when the field is linear", "equal to the Laplacian"},
-			reason:      "Mixed partial derivatives commute, so the antisymmetric combination in the curl of a gradient vanishes.",
-		},
-		{
-			q:           "The two identities, divergence of a curl is zero and curl of a gradient is zero, together mean...",
-			correct:     "the two composite operators annihilate every smooth field because mixed partials cancel",
-			distractors: []string{"every vector field is a gradient", "every vector field is a curl", "divergence and curl are inverses"},
-			reason:      "Both identities come from the equality of mixed partial derivatives, so they hold for every smooth field of the right kind.",
-		},
-	}
-	return calcPickMC(append(claims, computedMultiClaims("calc.vec.identities")...))
+	return vectorIdentitiesProblem()
 }

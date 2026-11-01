@@ -17,8 +17,11 @@ func TestVarianceAnswerIsExact(t *testing.T) {
 	g := &varianceGen{}
 	for i := 0; i < 200; i++ {
 		p := g.Generate(generator.GeneratorContext{Difficulty: rand.Float64(), Seed: rand.Int63()})
-		raw := strings.TrimPrefix(p.Question, "Find the population variance of: ")
-		parts := strings.Split(raw, ", ")
+		rawParts := strings.SplitN(p.Question, "of: ", 2)
+		if len(rawParts) != 2 {
+			t.Fatalf("question has no value list: %q", p.Question)
+		}
+		parts := strings.Split(rawParts[1], ", ")
 		if len(parts) != 5 {
 			t.Fatalf("question has %d values: %q", len(parts), p.Question)
 		}

@@ -206,53 +206,7 @@ func (g *pctProportionGen) Generate(ctx generator.GeneratorContext) generator.Pr
 type betterBuyGen struct{}
 
 func (g *betterBuyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	sizes := []int{8, 12, 16, 20, 24, 32}
-	unitPrices := []int{10, 15, 20, 25, 30, 40}
-	i := rand.Intn(len(sizes))
-	j := rand.Intn(len(sizes))
-	for j == i {
-		j = rand.Intn(len(sizes))
-	}
-	k := rand.Intn(len(unitPrices))
-	l := rand.Intn(len(unitPrices))
-	for l == k {
-		l = rand.Intn(len(unitPrices))
-	}
-	size1, size2 := sizes[i], sizes[j]
-	unit1, unit2 := unitPrices[k], unitPrices[l]
-	price1 := moneyCents(size1 * unit1)
-	price2 := moneyCents(size2 * unit2)
-	unitText1 := moneyCents(unit1)
-	unitText2 := moneyCents(unit2)
-	correct := fmt.Sprintf("Package 1 (%d oz for %s dollars) is the better buy.", size1, price1)
-	if unit2 < unit1 {
-		correct = fmt.Sprintf("Package 2 (%d oz for %s dollars) is the better buy.", size2, price2)
-	}
-	distractors := []string{
-		fmt.Sprintf("Package 1 (%d oz for %s dollars) is the better buy.", size1, price1),
-		fmt.Sprintf("Package 2 (%d oz for %s dollars) is the better buy.", size2, price2),
-		"Both packages have the same unit price.",
-		"The better buy cannot be found from these prices.",
-	}
-	var others []string
-	for _, d := range distractors {
-		if d != correct {
-			others = append(others, d)
-		}
-	}
-	p := generator.MultipleChoice(
-		fmt.Sprintf("Package 1: %d oz for %s dollars. Package 2: %d oz for %s dollars. Which package is the better buy?",
-			size1, price1, size2, price2),
-		correct, others...)
-	p.Explanation = fmt.Sprintf("Package 1 costs $%s per ounce and Package 2 costs $%s per ounce. The lower unit price is the better buy.",
-		unitText1, unitText2)
-	p.Facts = map[string]string{
-		"size_1": strconv.Itoa(size1), "price_1": price1, "unit_1": unitText1,
-		"size_2": strconv.Itoa(size2), "price_2": price2, "unit_2": unitText2,
-		"answer": correct,
-		"reason": fmt.Sprintf("Package 1 costs $%s per ounce and Package 2 costs $%s per ounce.", unitText1, unitText2),
-	}
-	return p
+	return betterBuyProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -421,51 +375,7 @@ func (g *ineqWordGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type ineqGraphGen struct{}
 
 func (g *ineqGraphGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	bound := rand.Intn(11) - 5 // -5..5
-	type shape struct {
-		symbol string
-		latex  string
-	}
-	shapes := []shape{
-		{">", ">"}, {">=", "\\ge"}, {"<", "<"}, {"<=", "\\le"},
-	}
-	s := shapes[rand.Intn(len(shapes))]
-	strict := s.symbol == ">" || s.symbol == "<"
-	circle := "closed"
-	circleWord := "Closed"
-	if strict {
-		circle = "open"
-		circleWord = "Open"
-	}
-	direction := "right"
-	if s.symbol == "<" || s.symbol == "<=" {
-		direction = "left"
-	}
-	correct := fmt.Sprintf("%s circle at %d, shaded to the %s.", circleWord, bound, direction)
-	all := []string{
-		fmt.Sprintf("Open circle at %d, shaded to the right.", bound),
-		fmt.Sprintf("Open circle at %d, shaded to the left.", bound),
-		fmt.Sprintf("Closed circle at %d, shaded to the right.", bound),
-		fmt.Sprintf("Closed circle at %d, shaded to the left.", bound),
-	}
-	var others []string
-	for _, option := range all {
-		if option != correct {
-			others = append(others, option)
-		}
-	}
-	reason := fmt.Sprintf("The inequality %s %d is %s, so the circle is %s and the shading goes to the %s.",
-		s.symbol, bound, map[bool]string{true: "strict", false: "non-strict"}[strict], circle, direction)
-	p := generator.MultipleChoice(
-		fmt.Sprintf("Which description matches the graph of \\(x %s %d\\)?", s.latex, bound),
-		correct, others...)
-	p.Explanation = reason
-	p.Facts = map[string]string{
-		"bound": strconv.Itoa(bound), "symbol": s.symbol, "symbol_latex": s.latex,
-		"circle": circle, "circle_word": circleWord, "direction": direction,
-		"answer": correct, "reason": reason,
-	}
-	return p
+	return inequalityIntegerProblem()
 }
 
 // ---------------------------------------------------------------------------
