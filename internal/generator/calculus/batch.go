@@ -178,8 +178,9 @@ func (g *parametricSecondGen) Generate(ctx generator.GeneratorContext) generator
 		},
 	}
 	c := claims[rand.Intn(len(claims))]
+	question := strings.ReplaceAll(c.question, "d^2y/dx^2 = (x'y'' - y'x'')/(x')^3", "\\(\\frac{d^2y}{dx^2} = \\frac{x'y'' - y'x''}{(x')^3}\\)")
 	return generator.Problem{
-		Question:    c.question,
+		Question:    question,
 		Answer:      c.answer,
 		Explanation: c.reason,
 		Facts: map[string]string{

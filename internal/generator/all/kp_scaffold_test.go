@@ -11,37 +11,18 @@ func TestGenerators_DeterministicKPOrdinalVariants(t *testing.T) {
 	reg := generator.NewRegistry()
 	Register(reg)
 
-	t.Run("arithmetic div zero claims", func(t *testing.T) {
-		p1, err := reg.GenerateContext("arith.div.zero", generator.GeneratorContext{KPOrdinal: 1, Seed: 42})
-		if err != nil {
-			t.Fatalf("unexpected error: %v", err)
-		}
-		if p1.Answer != "Division by zero is undefined." {
-			t.Errorf("expected KP 1 answer to be undefined statement, got %q", p1.Answer)
-		}
-
-		p2, err := reg.GenerateContext("arith.div.zero", generator.GeneratorContext{KPOrdinal: 2, Seed: 42})
-		if err != nil {
-			t.Fatalf("unexpected error: %v", err)
-		}
-		if p2.Answer != "Zero divided by any nonzero number equals zero." {
-			t.Errorf("expected KP 2 answer to be zero numerator statement, got %q", p2.Answer)
-		}
-
-		p3, err := reg.GenerateContext("arith.div.zero", generator.GeneratorContext{KPOrdinal: 3, Seed: 42})
-		if err != nil {
-			t.Fatalf("unexpected error: %v", err)
-		}
-		// The third knowledge point is the concrete expression claim. Its
-		// dividend is drawn, so the guarantee is the claim's shape and its
-		// published dividend rather than the number 5 that this test used to
-		// pin when the generator could only produce three questions in total.
-		want := "The expression " + p3.Facts["dividend"] + " ÷ 0 has no value."
-		if p3.Facts["claim"] != "concrete" || p3.Answer != want {
-			t.Errorf("expected KP 3 answer to be a concrete expression statement, got %q with claim %q", p3.Answer, p3.Facts["claim"])
-		}
-		if p3.Facts["dividend"] == "" {
-			t.Errorf("expected KP 3 to publish the dividend it asks about")
+	t.Run("arithmetic div zero count", func(t *testing.T) {
+		for _, kp := range []int{0, 1, 2, 3} {
+			p, err := reg.GenerateContext("arith.div.zero", generator.GeneratorContext{KPOrdinal: kp, Seed: 42})
+			if err != nil {
+				t.Fatalf("KP %d: unexpected error: %v", kp, err)
+			}
+			if p.Answer < "0" || p.Answer > "8" || len(p.Answer) != 1 {
+				t.Errorf("KP %d: expected a single-digit count, got %q", kp, p.Answer)
+			}
+			if p.Facts["count"] != p.Answer {
+				t.Errorf("KP %d: count fact %q does not match answer %q", kp, p.Facts["count"], p.Answer)
+			}
 		}
 	})
 

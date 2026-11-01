@@ -90,7 +90,7 @@
     "label": "Benchmark fractions: closer to 0, 1/2, or 1",
     "domain": "fractions",
     "subdomain": "fractions.equivalence",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "frac.ops.compare"
     ],
@@ -367,7 +367,7 @@
     "label": "Fraction comparison word problems",
     "domain": "fractions",
     "subdomain": "frac.compare",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "frac.ops.compare",
       "frac.ops.benchmark"
@@ -376,7 +376,7 @@
       "streak": 7,
       "avg_time_seconds": 16.0
     }
-    },
+  },
   {
     "id": "frac.reciprocal",
     "label": "Reciprocals",
@@ -461,7 +461,7 @@
       "streak": 7,
       "avg_time_seconds": 16.0
     }
-    },
+  },
   {
     "id": "frac.add.three",
     "label": "Adding three fractions",
@@ -547,7 +547,7 @@
       "streak": 7,
       "avg_time_seconds": 16.0
     }
-    },
+  },
   {
     "id": "frac.sub.whole",
     "label": "Subtracting a fraction from a whole number",

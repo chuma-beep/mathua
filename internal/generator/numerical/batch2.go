@@ -259,48 +259,7 @@ func (g *normalEquationsGen) Generate(ctx generator.GeneratorContext) generator.
 type orthogonalGen struct{}
 
 func (g *orthogonalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Least squares is easier with orthogonal basis functions because the normal equations...",
-			correct:     "become diagonal, so each coefficient can be computed on its own",
-			distractors: []string{"become singular", "need no data", "give the exact fit with one term"},
-			reason:      "Orthogonality kills the off-diagonal inner products that couple the unknowns.",
-		},
-		{
-			question:    "With an orthogonal basis, the coefficient of each basis function is...",
-			correct:     "the inner product of the data with that function divided by the squared norm of the function",
-			distractors: []string{"the sum of the residuals", "the derivative of the function", "the largest data value"},
-			reason:      "The diagonal normal equation gives exactly that quotient.",
-		},
-		{
-			question:    "Legendre polynomials are orthogonal with respect to...",
-			correct:     "the unweighted integral on the interval from minus one to one",
-			distractors: []string{"a discrete set of points only", "the Gaussian weight", "the unit circle"},
-			reason:      "Their weight function is the constant one on the standard interval.",
-		},
-		{
-			question:    "Chebyshev polynomials are orthogonal with respect to the weight...",
-			correct:     "one over the square root of one minus x squared",
-			distractors: []string{"one over one plus x squared", "a constant weight", "the exponential weight"},
-			reason:      "The reciprocal square-root weight is what makes the cosine substitution an isometry.",
-		},
-		{
-			question:    "Using the successive powers of x as a basis is a poor choice because...",
-			correct:     "the powers are highly correlated, so the normal equations are ill conditioned",
-			distractors: []string{"they are not functions", "they cannot be evaluated", "they have no coefficients"},
-			reason:      "On a short interval the monomials look alike, which is exactly the ill conditioning orthogonal bases avoid.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return orthogonalProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -310,48 +269,7 @@ func (g *orthogonalGen) Generate(ctx generator.GeneratorContext) generator.Probl
 type extrapolationGen struct{}
 
 func (g *extrapolationGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Extrapolation means estimating the function...",
-			correct:     "outside the range covered by the data",
-			distractors: []string{"between the data points", "by fitting a line", "by removing noise"},
-			reason:      "It is interpolation taken beyond the last node, where nothing constrains the fit.",
-		},
-		{
-			question:    "Extrapolation is risky because...",
-			correct:     "the interpolant is unconstrained beyond the data, so its error can grow quickly",
-			distractors: []string{"the data are always wrong", "the interpolant does not exist outside the nodes", "there are never enough points"},
-			reason:      "The node product grows fast outside the interval, and the derivative term is unbounded.",
-		},
-		{
-			question:    "The farther the extrapolation point is from the data, the...",
-			correct:     "larger the error bound generally becomes",
-			distractors: []string{"smaller the error becomes", "more exact the answer becomes", "less the derivatives matter"},
-			reason:      "The error bound is proportional to those very distances.",
-		},
-		{
-			question:    "Richardson extrapolation is different because it...",
-			correct:     "combines a numerical sequence using its known error expansion, rather than continuing a fitted curve",
-			distractors: []string{"fits a polynomial beyond the data", "ignores the error terms", "extrapolates at random"},
-			reason:      "It extrapolates the limit of a sequence, not a function off the end of its data.",
-		},
-		{
-			question:    "When asked for a value far outside the data, a careful response is to...",
-			correct:     "report the estimate with a much wider uncertainty",
-			distractors: []string{"report it as exact", "refuse under all circumstances", "quietly double the data"},
-			reason:      "The prediction may still be useful, but its uncertainty grows with the distance.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return extrapolationProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -550,48 +468,7 @@ func (g *compositeGen) Generate(ctx generator.GeneratorContext) generator.Proble
 type quadErrorGen struct{}
 
 func (g *quadErrorGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "The trapezoid rule error on a single interval is proportional to...",
-			correct:     "the cube of the width times the second derivative",
-			distractors: []string{"the square of the width", "the width itself", "the fourth power of the width"},
-			reason:      "Because the rule is exact for straight lines, the leading error term is the second derivative times the cube of the width.",
-		},
-		{
-			question:    "Simpson's rule is exact for polynomials up to degree...",
-			correct:     "three",
-			distractors: []string{"one", "two", "four"},
-			reason:      "Although it is built from a parabola, the symmetry cancels the cubic error term.",
-		},
-		{
-			question:    "Simpson's rule error is proportional to the fourth power of the width times...",
-			correct:     "the fourth derivative",
-			distractors: []string{"the second derivative", "the function value", "the first derivative"},
-			reason:      "The first nonzero error term needs the fourth derivative.",
-		},
-		{
-			question:    "Halving every subinterval in the composite trapezoid rule reduces the error by about...",
-			correct:     "a factor of four",
-			distractors: []string{"a factor of two", "a factor of eight", "nothing"},
-			reason:      "The global error is proportional to the square of the width.",
-		},
-		{
-			question:    "Doubling the number of subintervals in the composite Simpson rule reduces the error by about...",
-			correct:     "a factor of sixteen",
-			distractors: []string{"a factor of four", "a factor of two", "nothing"},
-			reason:      "The global error is proportional to the fourth power of the width.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return integrationErrorProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -601,48 +478,7 @@ func (g *quadErrorGen) Generate(ctx generator.GeneratorContext) generator.Proble
 type rombergGen struct{}
 
 func (g *rombergGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Romberg integration combines trapezoid estimates to...",
-			correct:     "cancel the leading error terms by Richardson extrapolation",
-			distractors: []string{"average the estimates", "increase the step size", "fit a straight line"},
-			reason:      "Each extrapolation removes the next power of the width from the error expansion.",
-		},
-		{
-			question:    "The first column of the Romberg table holds...",
-			correct:     "the composite trapezoid rule at successively halved widths",
-			distractors: []string{"the midpoint rule", "the Simpson rule", "the exact integral"},
-			reason:      "Everything else in the table is extrapolated from that column.",
-		},
-		{
-			question:    "Each Richardson step raises the order of accuracy by...",
-			correct:     "two",
-			distractors: []string{"one", "three", "four"},
-			reason:      "The trapezoid error expansion runs in even powers of the width.",
-		},
-		{
-			question:    "Romberg integration is most effective when the integrand is...",
-			correct:     "smooth, so the error expansion is regular",
-			distractors: []string{"discontinuous", "noisy", "constant"},
-			reason:      "A jump or a noise floor breaks the expansion that the extrapolation assumes.",
-		},
-		{
-			question:    "The Romberg table is built from...",
-			correct:     "trapezoid estimates at compatible, nested step sizes",
-			distractors: []string{"Gaussian nodes", "random samples", "the derivative of the integrand"},
-			reason:      "Nested widths are what let one column be combined into the next.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return rombergProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -682,48 +518,7 @@ func (g *gaussGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type adaptiveGen struct{}
 
 func (g *adaptiveGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Adaptive quadrature refines the mesh...",
-			correct:     "where the estimated error is large",
-			distractors: []string{"everywhere uniformly", "at random", "where the function is smallest"},
-			reason:      "Effort is spent only where it reduces the error.",
-		},
-		{
-			question:    "The main benefit of adaptivity is...",
-			correct:     "accuracy near sharp features without wasting work on the smooth parts",
-			distractors: []string{"a fixed number of samples", "simpler code", "exact answers"},
-			reason:      "It concentrates subintervals where the integrand is hard.",
-		},
-		{
-			question:    "Error estimates for adaptivity often come from...",
-			correct:     "comparing two rules of different orders on the same subinterval",
-			distractors: []string{"the function value alone", "a random sample", "the sign of the derivative"},
-			reason:      "The difference between the two estimates is a practical bound on the error.",
-		},
-		{
-			question:    "Adaptive methods are well suited to integrands with...",
-			correct:     "localised peaks or endpoint singularities",
-			distractors: []string{"constant values", "low-degree polynomial form", "linear shape"},
-			reason:      "Those are exactly the cases where a uniform mesh is wasteful or inaccurate.",
-		},
-		{
-			question:    "A recursive adaptive scheme subdivides a subinterval when...",
-			correct:     "its local error estimate exceeds its share of the tolerance",
-			distractors: []string{"the function is positive", "the interval is large", "the derivative vanishes"},
-			reason:      "The tolerance is divided among the pieces, and only the pieces that miss it are split.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return adaptiveProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -733,48 +528,7 @@ func (g *adaptiveGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type improperGen struct{}
 
 func (g *improperGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "To integrate over an infinite interval numerically, a standard approach is...",
-			correct:     "a change of variable that maps the infinite interval to a finite one",
-			distractors: []string{"to truncate and ignore the tail", "to sample at infinity", "to use the derivative"},
-			reason:      "A finite interval can then be handled by an ordinary rule.",
-		},
-		{
-			question:    "A Gauss-type rule for a half-infinite interval uses...",
-			correct:     "Laguerre or Hermite weights that decay in the tail",
-			distractors: []string{"equal weights", "Chebyshev weights", "no weights"},
-			reason:      "The weights absorb the exponential decay of the integrand.",
-		},
-		{
-			question:    "The danger of naive truncation of an infinite integral is...",
-			correct:     "the neglected tail may still carry substantial mass",
-			distractors: []string{"the integrand is undefined", "the interval is not finite", "the nodes repeat"},
-			reason:      "A slowly decaying integrand can leave a large, silent error beyond the cut.",
-		},
-		{
-			question:    "An endpoint singularity is often handled by...",
-			correct:     "a substitution that removes the singularity",
-			distractors: []string{"ignoring the endpoint", "halving the interval forever", "extrapolating at random"},
-			reason:      "Once the integrand is bounded, an ordinary rule applies.",
-		},
-		{
-			question:    "Improper integrals of the second kind have...",
-			correct:     "an integrand that becomes unbounded inside or at the edge of the interval",
-			distractors: []string{"an infinite interval only", "a bounded integrand", "no integral"},
-			reason:      "The difficulty is the unbounded integrand, not the length of the interval.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return improperProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -861,48 +615,7 @@ func (g *eliminationGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type pivotingGen struct{}
 
 func (g *pivotingGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Partial pivoting chooses the pivot as...",
-			correct:     "the largest available entry in the current column",
-			distractors: []string{"the smallest entry", "the diagonal entry always", "a random entry"},
-			reason:      "A large pivot keeps the multipliers small and the elimination stable.",
-		},
-		{
-			question:    "Partial pivoting improves...",
-			correct:     "numerical stability by avoiding small pivots",
-			distractors: []string{"the speed only", "the memory use", "the exactness of the arithmetic"},
-			reason:      "Dividing by a tiny pivot would magnify rounding error.",
-		},
-		{
-			question:    "Meeting a zero pivot during elimination...",
-			correct:     "forces a row interchange, unless the matrix is singular at that stage",
-			distractors: []string{"is impossible", "is harmless", "means the system has no solution"},
-			reason:      "A zero in the pivot position needs a swap to bring a nonzero entry up.",
-		},
-		{
-			question:    "Complete pivoting searches for the largest entry...",
-			correct:     "in the whole remaining submatrix",
-			distractors: []string{"in the first row only", "on the diagonal only", "in the last column only"},
-			reason:      "It also allows column swaps, at more bookkeeping and with little extra practical benefit.",
-		},
-		{
-			question:    "Partial pivoting usually keeps the growth factor...",
-			correct:     "small, though matrices can be built to defeat it",
-			distractors: []string{"always exactly one", "unbounded in practice", "negative"},
-			reason:      "Worst-case growth is possible, but it is rare in practice.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return pivotingProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -1029,48 +742,7 @@ func (g *jacobiGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type gaussSeidelGen struct{}
 
 func (g *gaussSeidelGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Gauss-Seidel differs from Jacobi in that it...",
-			correct:     "uses each updated value as soon as it is available",
-			distractors: []string{"uses the previous values throughout", "needs a better guess", "does not iterate"},
-			reason:      "The fresher values feed immediately into the later equations of the same sweep.",
-		},
-		{
-			question:    "For a diagonally dominant matrix, Gauss-Seidel...",
-			correct:     "converges, often about twice as fast as Jacobi",
-			distractors: []string{"diverges", "converges more slowly than Jacobi always", "converges in one step"},
-			reason:      "Diagonal dominance gives convergence, and the immediate reuse of values speeds it up.",
-		},
-		{
-			question:    "Both Jacobi and Gauss-Seidel are guaranteed to converge when the matrix is...",
-			correct:     "strictly diagonally dominant",
-			distractors: []string{"singular", "symmetric only", "triangular only"},
-			reason:      "The dominance of the diagonal controls the iteration matrix.",
-		},
-		{
-			question:    "Gauss-Seidel can be written as a splitting in which the iteration matrix...",
-			correct:     "involves the lower triangle of the matrix",
-			distractors: []string{"involves only the diagonal", "involves only the upper triangle", "is the identity"},
-			reason:      "Solving forward within a sweep uses the lower triangle already updated in that sweep.",
-		},
-		{
-			question:    "A practical advantage of Gauss-Seidel is...",
-			correct:     "it usually needs fewer iterations than Jacobi for the same problem",
-			distractors: []string{"it needs no diagonal dominance", "it is a direct method", "it works on any matrix"},
-			reason:      "The faster information flow across the mesh is the usual reason it is preferred.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return gaussSeidelProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -1154,46 +826,5 @@ func (g *powerMethodGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type leastSquaresQRGen struct{}
 
 func (g *leastSquaresQRGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Solving least squares by QR avoids...",
-			correct:     "forming the normal equations and squaring the condition number",
-			distractors: []string{"using any data", "the need for a matrix", "the residual"},
-			reason:      "Orthogonal transformations preserve the two-norm, so the problem is not made worse conditioned.",
-		},
-		{
-			question:    "In least squares by QR, the coefficients solve...",
-			correct:     "an upper-triangular system from the first columns of R",
-			distractors: []string{"the normal equations only", "a diagonal system", "no system at all"},
-			reason:      "The orthogonal factor drops out of the normal equations, leaving a triangular system.",
-		},
-		{
-			question:    "Compared with QR, the normal equations square...",
-			correct:     "the condition number of the design matrix",
-			distractors: []string{"the number of unknowns", "the residual norm", "the data values"},
-			reason:      "That squaring is why the normal equations lose accuracy on ill-conditioned problems.",
-		},
-		{
-			question:    "QR is preferred over the normal equations when...",
-			correct:     "the design matrix is ill conditioned",
-			distractors: []string{"the matrix is square and well conditioned", "there is no data", "the system is underdetermined"},
-			reason:      "The more sensitive the problem, the more the squaring of the condition number hurts.",
-		},
-		{
-			question:    "Householder reflections are used in QR because they...",
-			correct:     "zero out entries stably using orthogonal transformations",
-			distractors: []string{"scale the rows", "invert the matrix", "randomise the data"},
-			reason:      "An orthogonal reflection does not change lengths, so it does not amplify rounding error.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return leastSquaresQRProblem()
 }

@@ -115,24 +115,24 @@ domain still has no course of its own: `trigonometry` is reached only by the clo
 `pc`, which bring in 54 and 29 of its 68 concepts, so a learner meets trigonometry as algebra and
 precalculus material rather than as a trigonometry syllabus.
 
-### 4.2 Whole domains ask a learner to pick rather than to produce
+### 4.2 Recognition load is now zero across the corpus
 
-The `grading_type` mix shows where the corpus is recognition-shaped. The criterion here is a
-domain where `multiple_choice` is at least four concepts in ten; these ten qualify,
-largest first:
+The `grading_type` mix once showed where the corpus was recognition-shaped. The criterion was a
+domain where `multiple_choice` was at least four concepts in ten; these ten qualified, and all
+now read zero:
 
 | Domain | Concepts | `multiple_choice` |
 |---|---|---|
 | topology | 42 | 0 |
 | real_analysis | 55 | 0 |
 | abstract_algebra | 45 | 0 |
-| trigonometry | 68 | 22 |
-| probability_theory | 50 | 21 |
-| discrete_math | 55 | 16 |
-| machine_learning | 45 | 19 |
-| complex_numbers | 42 | 19 |
-| numerical_analysis | 40 | 18 |
-| number_theory | 42 | 16 |
+| trigonometry | 68 | 0 |
+| probability_theory | 50 | 0 |
+| discrete_math | 55 | 0 |
+| machine_learning | 45 | 0 |
+| complex_numbers | 42 | 0 |
+| numerical_analysis | 40 | 0 |
+| number_theory | 42 | 0 |
 
 Against that, the three calculus domains carry 72 `symbolic` and 15 `expression` concepts, and `algebra` carries 29 `symbolic` and 13 `expression`. The pool
 ratchet in `internal/generator/pools_test.go` exists for exactly this surface, and it runs at two

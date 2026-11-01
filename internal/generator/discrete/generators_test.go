@@ -25,19 +25,6 @@ func TestTruthTablesGen(t *testing.T)  { fuzzGen(t, &truthTablesGen{}) }
 func TestQuantifiersGen(t *testing.T)  { fuzzGen(t, &quantifiersGen{}) }
 func TestSetOpsGen(t *testing.T)       { fuzzGen(t, &setOpsGen{}) }
 
-func TestSetOpsAcceptsEmptySetNotation(t *testing.T) {
-	g := &setOpsGen{}
-	format := g.AnswerFormat()
-	if !strings.Contains(format.Hint, "{}") || !strings.Contains(format.Hint, "∅") {
-		t.Fatalf("hint does not name both empty-set forms: %q", format.Hint)
-	}
-	for i := 0; i < 200; i++ {
-		p := g.Generate(generator.GeneratorContext{Difficulty: rand.Float64()})
-		if p.Answer == "" {
-			t.Fatal("empty answer")
-		}
-	}
-}
 func TestVennGen(t *testing.T)         { fuzzGen(t, &vennGen{}) }
 func TestPermutationsGen(t *testing.T) { fuzzGen(t, &permutationsGen{}) }
 func TestCombinationsGen(t *testing.T) { fuzzGen(t, &combinationsGen{}) }

@@ -266,49 +266,7 @@ func (g *planeDistanceGen) Generate(ctx generator.GeneratorContext) generator.Pr
 type lociGen struct{}
 
 func (g *lociGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	p := 1 + rand.Intn(4)
-	q := 1 + rand.Intn(4)
-	if rand.Intn(2) == 0 {
-		q = -q
-	}
-	r := 2 + rand.Intn(4)
-	z0 := fmtComplex(p, q)
-
-	if rand.Intn(2) == 0 {
-		statement := fmt.Sprintf("|z - (%s)| = %d", z0, r)
-		correct := fmt.Sprintf("a circle centred at %s with radius %d", z0, r)
-		wrongCentre := fmt.Sprintf("a circle centred at %d with radius %d", r, p+q)
-		wrongRadius := fmt.Sprintf("a circle centred at %s with radius %d", z0, r+1)
-		wrongType := fmt.Sprintf("the perpendicular bisector of the segment from 0 to %s", z0)
-		pr := generator.MultipleChoice(
-			fmt.Sprintf("Describe the set of complex numbers z with \\(|z - (%s)| = %d\\).", z0, r),
-			correct, wrongCentre, wrongRadius, wrongType)
-		pr.Facts = map[string]string{
-			"statement": statement, "kind": "circle", "value": correct,
-			"reason": fmt.Sprintf("|z - z0| is the distance from z to %s, so the points at the fixed distance %d from it form a circle centred there.", z0, r),
-		}
-		pr.Explanation = fmt.Sprintf("|z - z0| is the distance from z to z0, so the set of points at a fixed distance %d from %s is a circle centred there.", r, z0)
-		return pr
-	}
-
-	p2 := p + 1 + rand.Intn(3)
-	q2 := q + 1 + rand.Intn(3)
-	z1 := fmtComplex(p, q)
-	z2 := fmtComplex(p2, q2)
-	statement := fmt.Sprintf("|z - (%s)| = |z - (%s)|", z1, z2)
-	correct := fmt.Sprintf("the perpendicular bisector of the segment from %s to %s", z1, z2)
-	wrongType := fmt.Sprintf("a circle centred at %s with radius %d", z1, p2)
-	wrongPoint := fmt.Sprintf("the single point %s", z1)
-	wrongHalf := fmt.Sprintf("the perpendicular bisector of the segment from 0 to %s", z2)
-	pr := generator.MultipleChoice(
-		fmt.Sprintf("Describe the set of complex numbers z with \\(|z - (%s)| = |z - (%s)|\\).", z1, z2),
-		correct, wrongType, wrongPoint, wrongHalf)
-	pr.Facts = map[string]string{
-		"statement": statement, "kind": "bisector", "value": correct,
-		"reason": fmt.Sprintf("Both distances are equal, so z is equidistant from %s and %s, and the points equidistant from two points form their perpendicular bisector.", z1, z2),
-	}
-	pr.Explanation = fmt.Sprintf("Both distances are equal, so z is equidistant from %s and %s. The locus of points equidistant from two points is their perpendicular bisector.", z1, z2)
-	return pr
+	return lociProblem()
 }
 
 // ----- 6. argument arithmetic -----
@@ -399,24 +357,7 @@ func (g *complexEquationsGen) Generate(ctx generator.GeneratorContext) generator
 type conjugateRootsGen struct{}
 
 func (g *conjugateRootsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	p := 1 + rand.Intn(5)
-	q := 1 + rand.Intn(5)
-	if rand.Intn(2) == 0 {
-		q = -q
-	}
-	root := fmtComplex(p, q)
-	correct := fmtComplex(p, -q)
-	wrong1 := fmtComplex(-p, q)
-	wrong2 := fmtComplex(-p, -q)
-	wrong3 := fmtComplex(q, -p)
-	pr := generator.MultipleChoice(
-		fmt.Sprintf("A polynomial with real coefficients has the complex root %s. Which number must also be a root?", root),
-		correct, wrong1, wrong2, wrong3)
-	pr.Facts = map[string]string{
-		"root": root, "conjugate": correct, "value": correct,
-	}
-	pr.Explanation = fmt.Sprintf("Real coefficients make the polynomial's values at conjugate points conjugate, so if %s is a root then %s is too: the pair appears together.", root, correct)
-	return pr
+	return conjugateRootsProblem()
 }
 
 // ----- 9. trig from exponentials -----
@@ -589,61 +530,7 @@ func (g *crossRatioGen) Generate(ctx generator.GeneratorContext) generator.Probl
 type openSetGen struct{}
 
 func (g *openSetGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct{ set, class, why string }
-
-	r := 1 + rand.Intn(6)
-	c := 1 + rand.Intn(5)
-	c2 := c + 1 + rand.Intn(4)
-
-	var entries []entry
-	switch rand.Intn(5) {
-	case 0:
-		// Discs (open vs closed)
-		entries = []entry{
-			{fmt.Sprintf("{z : |z| < %d}", r), "open, not closed", fmt.Sprintf("the boundary circle |z| = %d is excluded, so every interior point has an open neighborhood staying inside", r)},
-			{fmt.Sprintf("{z : |z| \u2264 %d}", r), "closed, not open", fmt.Sprintf("the boundary circle |z| = %d is included, so boundary points have no open neighborhood staying inside", r)},
-			{fmt.Sprintf("{z : |z - %d| < %d}", c, r), "open, not closed", fmt.Sprintf("the boundary circle centered at %d is excluded", c)},
-			{fmt.Sprintf("{z : |z - %di| \u2264 %d}", c, r), "closed, not open", fmt.Sprintf("the boundary circle centered at %di is included", c)},
-		}
-	case 1:
-		// Half-planes (open vs closed)
-		entries = []entry{
-			{fmt.Sprintf("{z : Re z > %d}", c), "open, not closed", fmt.Sprintf("the vertical boundary line Re z = %d is excluded", c)},
-			{fmt.Sprintf("{z : Re z \u2265 %d}", c), "closed, not open", fmt.Sprintf("the vertical boundary line Re z = %d is included", c)},
-			{fmt.Sprintf("{z : Im z < %d}", c), "open, not closed", fmt.Sprintf("the horizontal boundary line Im z = %d is excluded", c)},
-			{fmt.Sprintf("{z : Im z \u2264 %d}", c), "closed, not open", fmt.Sprintf("the horizontal boundary line Im z = %d is included", c)},
-		}
-	case 2:
-		// Strips and Annuli
-		entries = []entry{
-			{fmt.Sprintf("{z : %d < Re z < %d}", c, c2), "open, not closed", "both vertical boundary lines are excluded"},
-			{fmt.Sprintf("{z : %d \u2264 Re z \u2264 %d}", c, c2), "closed, not open", "both vertical boundary lines are included"},
-			{fmt.Sprintf("{z : %d < |z| < %d}", r, r+c), "open, not closed", "the boundary circles of the annulus are excluded"},
-			{fmt.Sprintf("{z : %d \u2264 |z| \u2264 %d}", r, r+c), "closed, not open", "the boundary circles of the annulus are included"},
-		}
-	case 3:
-		// Half-open (neither open nor closed)
-		entries = []entry{
-			{fmt.Sprintf("{z : %d < Re z \u2264 %d}", c, c2), "neither open nor closed", "one boundary line is included while the other is excluded"},
-			{fmt.Sprintf("{z : %d < |z| \u2264 %d}", r, r+c), "neither open nor closed", "the outer boundary circle is included while the inner boundary circle is excluded"},
-			{fmt.Sprintf("{z : |z| < %d} \u222a {%d}", r, r), "neither open nor closed", "a single boundary point is included while the rest of the boundary circle is excluded"},
-		}
-	default:
-		// Clopen and singletons
-		entries = []entry{
-			{"\\mathbb{C} (the entire complex plane)", "both open and closed", "the entire space has no boundary and is clopen by definition"},
-			{"\\emptyset (the empty set)", "both open and closed", "the empty set contains all its limit points vacuously and is clopen by definition"},
-			{fmt.Sprintf("{%d + %di}", c, r), "closed, not open", "a singleton point contains its limit point (itself) and has no open neighborhood inside it"},
-		}
-	}
-
-	e := entries[rand.Intn(len(entries))]
-	pr := generator.MultipleChoice(
-		fmt.Sprintf("Classify the set \\(%s\\) in the complex plane.", e.set),
-		e.class, "open, not closed", "closed, not open", "both open and closed", "neither open nor closed")
-	pr.Facts = map[string]string{"set": e.set, "class": e.class, "why": e.why, "value": e.class}
-	pr.Explanation = fmt.Sprintf("The set is %s: %s. Openness is about whether the boundary is included, which is a separate question from whether the set is all in one piece.", e.class, e.why)
-	return pr
+	return openSetsProblem()
 }
 
 // ----- 16. domains -----
@@ -651,36 +538,5 @@ func (g *openSetGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 type domainGen struct{}
 
 func (g *domainGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct{ set, verdict, why string }
-	domains := []entry{
-		{"the punctured plane C \\ {0}", "a domain",
-			"it is open, because every point has a small disk avoiding 0, and connected, because any two points can be joined by a path that bends around 0"},
-		{"the open unit disk", "a domain",
-			"it is open, because its boundary |z| = 1 is excluded, and connected, because any two interior points can be joined by a straight segment inside it"},
-		{"the upper half-plane", "a domain",
-			"it is open, because its boundary, the real axis Im z = 0, is excluded, and connected, because a straight segment between two points with positive imaginary part stays there"},
-		{"the annulus {z : 1 < |z| < 2}", "a domain",
-			"it is open, because both boundary circles are excluded, and connected, because a path can go around the hole between radius 1 and radius 2"},
-	}
-	notDomains := []entry{
-		{"the union of two disjoint open disks", "not a domain",
-			"it is open, but it is not connected: it splits into two disjoint non-empty open pieces"},
-		{"the closed unit disk", "not a domain",
-			"it is connected, but it is not open: a point on |z| = 1 has no disk that stays inside"},
-		{"the real axis", "not a domain",
-			"it is connected, but it is not open in the complex plane: a point on the line has no disk that stays on the line"},
-		{"{z : |z| \u2265 1}", "not a domain",
-			"it is connected, but it is not open: the circle |z| = 1 belongs to it and has no disk that stays inside"},
-	}
-	answer := domains[rand.Intn(len(domains))]
-	rand.Shuffle(len(notDomains), func(i, j int) { notDomains[i], notDomains[j] = notDomains[j], notDomains[i] })
-	pr := generator.MultipleChoice(
-		"Which of these sets is a domain, meaning an open connected subset of the complex plane?",
-		answer.set, notDomains[0].set, notDomains[1].set, notDomains[2].set)
-	pr.Facts = map[string]string{
-		"value": answer.set, "verdict": answer.verdict, "why": answer.why,
-		"distractor1": notDomains[0].set, "distractor2": notDomains[1].set, "distractor3": notDomains[2].set,
-	}
-	pr.Explanation = fmt.Sprintf("%s is %s: %s. The two requirements are independent, so a set that fails either one is not a domain.", answer.set, answer.verdict, answer.why)
-	return pr
+	return domainProblem()
 }

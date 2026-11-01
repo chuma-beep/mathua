@@ -28,6 +28,21 @@ var learnerDomains = map[string]bool{
 // with a reason, instead of passing because nobody looked. A concept that
 // *does* compute from parameters belongs in data/lessons/solutions, not here.
 var generatorExplained = map[string]string{
+	"arith.div.zero":           "numeric count question: per-statement explanation from a generated pool",
+	"arith.factor.composite":   "numeric count question: per-statement explanation from a generated pool",
+	"arith.factor.prime":       "numeric count question: per-statement explanation from a generated pool",
+	"frac.compare.word":        "numeric count question: per-statement explanation from a generated pool",
+	"frac.ops.benchmark":       "numeric count question: per-statement explanation from a generated pool",
+	"prealg.ineq.graph":        "numeric conversion: explanation is computed from the drawn inequality",
+	"alg.conic.classify":       "numeric count question: per-statement explanation from a generated pool",
+	"alg.ineq.two_var":         "numeric conversion: explanation is computed from the drawn inequality",
+	"alg.linear.standard_form": "numeric conversion: explanation is computed from the substituted point",
+	"alg.poly.end_behavior":    "numeric conversion: explanation is computed from degree and leading coefficient",
+	"geo.basic.angles":         "numeric count question: per-statement explanation from a generated pool",
+	"geo.basic.points_lines":   "numeric count question: per-statement explanation from a generated pool",
+	"geo.circle.parts":         "numeric count question: per-statement explanation from a generated pool",
+	"geo.quad.types":           "numeric count question: per-statement explanation from a generated pool",
+	"geo.triangle.types":       "numeric count question: per-statement explanation from a generated pool",
 	// trigonometry, table-driven, complete-sentence explanations
 	"trig.adv.arctan":                 "table-driven: fixed question, fixed answer",
 	"trig.adv.inverse":                "table-driven: fixed question, fixed answer",
@@ -53,7 +68,12 @@ var generatorExplained = map[string]string{
 	"trig.ident.pythagorean_variants": "table-driven: fixed question, fixed answer",
 	"trig.ident.sum_to_product":       "table-driven: fixed question, fixed answer",
 	"trig.ineq.advanced":              "table-driven: fixed question, fixed answer",
-	"trig.ineq.basic":                 "table-driven: fixed question, fixed answer",
+	// complex analysis, count questions explained per statement
+	"trig.basics.radians":         "count question: per-statement explanation from a generated pool",
+	"trig.basics.reference_angle": "count question: per-statement explanation from a generated pool",
+	"trig.basics.special_angles":  "count question: per-statement explanation from a generated pool",
+	"trig.basics.unit_circle":     "count question: per-statement explanation from a generated pool",
+	"trig.ineq.basic":             "table-driven: fixed question, fixed answer",
 	// prealgebra, table-driven
 	"prealg.real.concept":    "table-driven: fixed question, fixed answer",
 	"prealg.real.properties": "table-driven: fixed question, fixed answer",

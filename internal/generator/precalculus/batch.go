@@ -48,48 +48,7 @@ func registerBatch(reg *generator.Registry) {
 type continuousCompoundingGen struct{}
 
 func (g *continuousCompoundingGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "The amount after t years for principal P at annual rate r compounded continuously is...",
-			correct:     "A = P e^(rt)",
-			distractors: []string{"A = P(1+r)^t", "A = P(1+r/n)^(nt)", "A = P + rt"},
-			reason:      "Continuous compounding is the limit of P(1+r/n)^(nt) as n tends to infinity, which is P e^(rt).",
-		},
-		{
-			question:    "As the number of compounding periods per year increases without bound, the amount approaches...",
-			correct:     "P e^(rt)",
-			distractors: []string{"P(1+rt)", "the principal alone", "the simple-interest amount"},
-			reason:      "The limit of (1+r/n)^(nt) is e^(rt), so continuous compounding is the limiting case.",
-		},
-		{
-			question:    "Continuous compounding is the limit of...",
-			correct:     "compound interest as the compounding frequency tends to infinity",
-			distractors: []string{"simple interest as t grows", "the doubling time", "linear growth"},
-			reason:      "More frequent compounding converges to the exponential formula rather than growing without bound.",
-		},
-		{
-			question:    "If 1000 is invested at 5% compounded continuously, the amount after t years is...",
-			correct:     "1000 e^(0.05t)",
-			distractors: []string{"1000(1.05)^t", "1000(1+0.05t)", "1000 e^(5t)"},
-			reason:      "Substitute P = 1000 and r = 0.05 into A = P e^(rt).",
-		},
-		{
-			question:    "For the same positive nominal rate, which grows faster: annual compounding or continuous compounding?",
-			correct:     "continuous compounding",
-			distractors: []string{"annual compounding", "they are equal", "it depends on the principal"},
-			reason:      "e^r exceeds 1+r for positive r, so continuous compounding is the upper limit of more frequent compounding.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return continuousCompoundingProblem(ctx)
 }
 
 // ---------------------------------------------------------------------------
@@ -99,48 +58,7 @@ func (g *continuousCompoundingGen) Generate(ctx generator.GeneratorContext) gene
 type coolingGen struct{}
 
 func (g *coolingGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Newton's law of cooling says the rate of cooling is proportional to...",
-			correct:     "the difference between the object and ambient temperatures",
-			distractors: []string{"the object temperature alone", "the ambient temperature alone", "the time elapsed"},
-			reason:      "The rate is k times the temperature excess, which is why the excess decays exponentially.",
-		},
-		{
-			question:    "The solution of Newton's law of cooling has the form...",
-			correct:     "T(t) = T_env + (T0 - T_env)e^(-kt)",
-			distractors: []string{"T(t) = T0 e^(kt)", "T(t) = T_env + kt", "T(t) = T0 + T_env t"},
-			reason:      "The excess T - T_env decays exponentially, so the temperature approaches the ambient value.",
-		},
-		{
-			question:    "As t grows, the object's temperature approaches...",
-			correct:     "the ambient temperature",
-			distractors: []string{"zero", "the initial temperature", "infinity"},
-			reason:      "The exponential term vanishes, leaving T = T_env.",
-		},
-		{
-			question:    "A body at 90 C in a 20 C room is modeled by T(t) = 20 + 70e^(-0.1t). What is the ambient temperature?",
-			correct:     "20",
-			distractors: []string{"70", "90", "0"},
-			reason:      "The ambient temperature is the constant term in the model, 20.",
-		},
-		{
-			question:    "The cooling constant k is positive because...",
-			correct:     "the temperature difference decays",
-			distractors: []string{"the temperature grows", "the ambient temperature changes", "the object heats up"},
-			reason:      "A positive k makes e^(-kt) decrease, so the excess shrinks toward zero.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return coolingTemperatureProblem(ctx)
 }
 
 // ---------------------------------------------------------------------------

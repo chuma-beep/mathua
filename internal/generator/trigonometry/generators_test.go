@@ -131,16 +131,12 @@ func TestDifficultyScaling(t *testing.T) {
 func TestFuncGensDiscriminate(t *testing.T) {
 	rand.Seed(31)
 	gens := map[string]generator.Generator{
-		"trig.func.sine":         &sineFuncGen{},
-		"trig.func.cosine":       &cosineFuncGen{},
-		"trig.func.tangent":      &tangentFuncGen{},
-		"trig.func.cotangent":    &cotangentFuncGen{},
-		"trig.func.secant":       &secantFuncGen{},
-		"trig.func.cosecant":     &cosecantFuncGen{},
-		"trig.func.arcsine":      &arcsineFuncGen{},
-		"trig.func.arccosine":    &arccosineFuncGen{},
-		"trig.func.arctangent":   &arctangentFuncGen{},
-		"trig.func.arccotangent": &arccotangentFuncGen{},
+		"trig.func.sine":      &sineFuncGen{},
+		"trig.func.cosine":    &cosineFuncGen{},
+		"trig.func.tangent":   &tangentFuncGen{},
+		"trig.func.cotangent": &cotangentFuncGen{},
+		"trig.func.secant":    &secantFuncGen{},
+		"trig.func.cosecant":  &cosecantFuncGen{},
 	}
 	const n = 150
 	for id, gen := range gens {
@@ -171,29 +167,21 @@ func TestFuncGensDiscriminate(t *testing.T) {
 func TestFuncGensHardGating(t *testing.T) {
 	rand.Seed(77)
 	gens := map[string]generator.Generator{
-		"trig.func.sine":         &sineFuncGen{},
-		"trig.func.cosine":       &cosineFuncGen{},
-		"trig.func.tangent":      &tangentFuncGen{},
-		"trig.func.cotangent":    &cotangentFuncGen{},
-		"trig.func.secant":       &secantFuncGen{},
-		"trig.func.cosecant":     &cosecantFuncGen{},
-		"trig.func.arcsine":      &arcsineFuncGen{},
-		"trig.func.arccosine":    &arccosineFuncGen{},
-		"trig.func.arctangent":   &arctangentFuncGen{},
-		"trig.func.arccotangent": &arccotangentFuncGen{},
+		"trig.func.sine":      &sineFuncGen{},
+		"trig.func.cosine":    &cosineFuncGen{},
+		"trig.func.tangent":   &tangentFuncGen{},
+		"trig.func.cotangent": &cotangentFuncGen{},
+		"trig.func.secant":    &secantFuncGen{},
+		"trig.func.cosecant":  &cosecantFuncGen{},
 	}
 	// One hard-only answer form per generator (absent from its easy table).
 	hardOnly := map[string]string{
-		"trig.func.sine":         "-sin(x)",
-		"trig.func.cosine":       "-cos(x)",
-		"trig.func.tangent":      "+infinity",
-		"trig.func.cotangent":    "decreasing",
-		"trig.func.secant":       "ln|sec(x)+tan(x)|",
-		"trig.func.cosecant":     "-ln|csc(x)+cot(x)|",
-		"trig.func.arcsine":      "-pi/2",
-		"trig.func.arccosine":    "pi",
-		"trig.func.arctangent":   "-pi/4",
-		"trig.func.arccotangent": "3pi/4",
+		"trig.func.sine":      "-sin(x)",
+		"trig.func.cosine":    "-cos(x)",
+		"trig.func.tangent":   "+infinity",
+		"trig.func.cotangent": "decreasing",
+		"trig.func.secant":    "ln|sec(x)+tan(x)|",
+		"trig.func.cosecant":  "-ln|csc(x)+cot(x)|",
 	}
 	for id, gen := range gens {
 		for i := 0; i < 150; i++ {

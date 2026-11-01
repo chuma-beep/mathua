@@ -106,106 +106,7 @@ func maxMatching(leftCount int, adj [][]bool) int {
 type inferenceGen struct{}
 
 func (g *inferenceGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type form struct {
-		name, premises, conclusion string
-		valid                      bool
-	}
-
-	var forms []form
-
-	// Choose randomized variable pairs to prevent static text caching
-	varSets := [][3]string{
-		{"p", "q", "r"},
-		{"A", "B", "C"},
-		{"P", "Q", "R"},
-		{"u", "v", "w"},
-		{"x", "y", "z"},
-	}
-	vs := varSets[rand.Intn(len(varSets))]
-	pVar, qVar, rVar := vs[0], vs[1], vs[2]
-
-	forms = append(forms,
-		form{"modus ponens", fmt.Sprintf("%s \u2192 %s and %s", pVar, qVar, pVar), qVar, true},
-		form{"modus tollens", fmt.Sprintf("%s \u2192 %s and \u00ac%s", pVar, qVar, qVar), fmt.Sprintf("\u00ac%s", pVar), true},
-		form{"affirming the consequent", fmt.Sprintf("%s \u2192 %s and %s", pVar, qVar, qVar), pVar, false},
-		form{"denying the antecedent", fmt.Sprintf("%s \u2192 %s and \u00ac%s", pVar, qVar, pVar), fmt.Sprintf("\u00ac%s", qVar), false},
-		form{"hypothetical syllogism", fmt.Sprintf("%s \u2192 %s and %s \u2192 %s", pVar, qVar, qVar, rVar), fmt.Sprintf("%s \u2192 %s", pVar, rVar), true},
-		form{"disjunctive syllogism", fmt.Sprintf("%s \u2228 %s and \u00ac%s", pVar, qVar, pVar), qVar, true},
-		form{"affirming a disjunct", fmt.Sprintf("%s \u2228 %s and %s", pVar, qVar, pVar), fmt.Sprintf("\u00ac%s", qVar), false},
-		form{"resolution", fmt.Sprintf("%s \u2228 %s and \u00ac%s \u2228 %s", pVar, qVar, pVar, rVar), fmt.Sprintf("%s \u2228 %s", qVar, rVar), true},
-	)
-
-	// Contextual real-world / mathematical implications
-	switch rand.Intn(4) {
-	case 0:
-		k := 2 * (rand.Intn(4) + 2)
-		forms = append(forms, form{
-			"modus ponens",
-			fmt.Sprintf("If n is divisible by %d then n is even, and n is divisible by %d", k, k),
-			"n is even",
-			true,
-		})
-	case 1:
-		c := rand.Intn(5) + 3
-		forms = append(forms, form{
-			"modus tollens",
-			fmt.Sprintf("If x > %d then x > 0, and x \u2264 0", c),
-			fmt.Sprintf("x \u2264 %d", c),
-			true,
-		})
-	case 2:
-		forms = append(forms, form{
-			"affirming the consequent",
-			"If a quadrilateral is a square then it is a rectangle, and the quadrilateral is a rectangle",
-			"it is a square",
-			false,
-		})
-	case 3:
-		forms = append(forms, form{
-			"denying the antecedent",
-			"If f is differentiable at c then f is continuous at c, and f is not differentiable at c",
-			"f is not continuous at c",
-			false,
-		})
-	}
-
-	f := forms[rand.Intn(len(forms))]
-	q := fmt.Sprintf("Consider the argument: premises %s; conclusion %s. Which argument form is it?", f.premises, f.conclusion)
-
-	allFormNames := []string{
-		"modus ponens",
-		"modus tollens",
-		"affirming the consequent",
-		"denying the antecedent",
-		"hypothetical syllogism",
-		"disjunctive syllogism",
-		"affirming a disjunct",
-		"resolution",
-	}
-	var others []string
-	perm := rand.Perm(len(allFormNames))
-	for _, idx := range perm {
-		name := allFormNames[idx]
-		if name != f.name {
-			others = append(others, name)
-			if len(others) == 3 {
-				break
-			}
-		}
-	}
-
-	p := generator.MultipleChoice(q, f.name, others...)
-	valid := "yes"
-	if !f.valid {
-		valid = "no"
-	}
-	p.Facts = map[string]string{
-		"form": f.name, "valid": valid, "premises": f.premises, "conclusion": f.conclusion, "answer": f.name,
-	}
-	p.Explanation = fmt.Sprintf("%s is %s: from %s the conclusion %s does%s follow.",
-		f.name, map[bool]string{true: "valid", false: "invalid"}[f.valid], f.premises, f.conclusion,
-		map[bool]string{true: "", false: " not"}[f.valid])
-	return p
+	return inferenceProblem()
 }
 
 // ----- 2. predicates -----
@@ -213,122 +114,7 @@ func (g *inferenceGen) Generate(ctx generator.GeneratorContext) generator.Proble
 type predicatesGen struct{}
 
 func (g *predicatesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		original, negation, swapped, unchanged, wrongQuantifier, note string
-	}
-
-	k := rand.Intn(9) + 1
-	k2 := rand.Intn(5) + 2
-
-	var entries []entry
-	switch rand.Intn(5) {
-	case 0:
-		entries = []entry{
-			{
-				fmt.Sprintf("\u2200x \u2203y (x + y = %d)", k),
-				fmt.Sprintf("\u2203x \u2200y (x + y \u2260 %d)", k),
-				fmt.Sprintf("\u2203y \u2200x (x + y = %d)", k),
-				fmt.Sprintf("\u2200x \u2203y (x + y \u2260 %d)", k),
-				fmt.Sprintf("\u2203x \u2203y (x + y \u2260 %d)", k),
-				"Negating swaps each quantifier and negates the inner equation.",
-			},
-			{
-				fmt.Sprintf("\u2203x \u2200y (%dx + y = 0)", k2),
-				fmt.Sprintf("\u2200x \u2203y (%dx + y \u2260 0)", k2),
-				fmt.Sprintf("\u2200y \u2203x (%dx + y = 0)", k2),
-				fmt.Sprintf("\u2203x \u2200y (%dx + y \u2260 0)", k2),
-				fmt.Sprintf("\u2200x \u2200y (%dx + y \u2260 0)", k2),
-				"An existential becomes universal and the inner equation becomes its negation.",
-			},
-		}
-	case 1:
-		entries = []entry{
-			{
-				fmt.Sprintf("\u2200x \u2203y (x < y + %d)", k),
-				fmt.Sprintf("\u2203x \u2200y (x \u2265 y + %d)", k),
-				fmt.Sprintf("\u2203y \u2200x (x < y + %d)", k),
-				fmt.Sprintf("\u2200x \u2203y (x \u2265 y + %d)", k),
-				fmt.Sprintf("\u2203x \u2203y (x \u2265 y + %d)", k),
-				"Negating swaps each quantifier and reverses the strict inequality to greater-or-equal.",
-			},
-			{
-				fmt.Sprintf("\u2203x \u2200y (x\u00b2 + y\u00b2 \u2264 %d)", k*k),
-				fmt.Sprintf("\u2200x \u2203y (x\u00b2 + y\u00b2 > %d)", k*k),
-				fmt.Sprintf("\u2200y \u2203x (x\u00b2 + y\u00b2 \u2264 %d)", k*k),
-				fmt.Sprintf("\u2203x \u2200y (x\u00b2 + y\u00b2 > %d)", k*k),
-				fmt.Sprintf("\u2200x \u2200y (x\u00b2 + y\u00b2 > %d)", k*k),
-				"Existential becomes universal, and non-strict inequality flips to strict.",
-			},
-		}
-	case 2:
-		entries = []entry{
-			{
-				fmt.Sprintf("\u2200x (x\u00b2 \u2265 %d)", k),
-				fmt.Sprintf("\u2203x (x\u00b2 < %d)", k),
-				fmt.Sprintf("\u2200x (x\u00b2 < %d)", k),
-				// The old distractor was ¬∀x (x² ≥ k), which is logically
-				// equivalent to ∃x (x² < k), so a learner could correctly
-				// choose D (report 250). Leave the universal original
-				// unchanged; it is not a negation.
-				fmt.Sprintf("\u2200x (x\u00b2 \u2265 %d)", k),
-				fmt.Sprintf("\u2200x (x\u00b2 > %d)", k),
-				"One counterexample refutes a universal claim, and it must satisfy the strict negation.",
-			},
-			{
-				fmt.Sprintf("\u2203x (x + %d = 0)", k),
-				fmt.Sprintf("\u2200x (x + %d \u2260 0)", k),
-				fmt.Sprintf("\u2203x (x + %d \u2260 0)", k),
-				fmt.Sprintf("\u2200x (x - %d = 0)", k),
-				fmt.Sprintf("\u2200x (x + %d = 0)", k),
-				"Negating an existential yields a universal with negated predicate.",
-			},
-		}
-	case 3:
-		entries = []entry{
-			{
-				"\u2200x (P(x) \u2192 Q(x))",
-				"\u2203x (P(x) \u2227 \u00acQ(x))",
-				"\u2200x (\u00acP(x) \u2192 \u00acQ(x))",
-				"\u2203x (\u00acP(x) \u2228 Q(x))",
-				"\u2200x (P(x) \u2227 \u00acQ(x))",
-				"The negation of an implication P -> Q is P and not Q; universal becomes existential.",
-			},
-			{
-				"\u2203x (P(x) \u2227 Q(x))",
-				"\u2200x (\u00acP(x) \u2228 \u00acQ(x))",
-				"\u2200x (\u00acP(x) \u2227 \u00acQ(x))",
-				"\u2203x (\u00acP(x) \u2228 \u00acQ(x))",
-				"\u2200x (P(x) \u2228 Q(x))",
-				"By De Morgan's laws for quantifiers and conjunction, existential becomes universal and conjunction becomes disjunction of negations.",
-			},
-		}
-	default:
-		entries = []entry{
-			{
-				fmt.Sprintf("\u2200n \u2208 \u2124 (n > %d \u2192 n\u00b2 > %d)", k, k*k),
-				fmt.Sprintf("\u2203n \u2208 \u2124 (n > %d \u2227 n\u00b2 \u2264 %d)", k, k*k),
-				fmt.Sprintf("\u2200n \u2208 \u2124 (n \u2264 %d \u2192 n\u00b2 \u2264 %d)", k, k*k),
-				fmt.Sprintf("\u2203n \u2208 \u2124 (n > %d \u2192 n\u00b2 \u2264 %d)", k, k*k),
-				fmt.Sprintf("\u2203n \u2208 \u2124 (n \u2264 %d \u2227 n\u00b2 > %d)", k, k*k),
-				"Negating a universal implication produces an existential with the antecedent asserting and consequent negated.",
-			},
-			{
-				fmt.Sprintf("\u2203x \u2208 \u211d (x\u00b2 + %d = 0)", k),
-				fmt.Sprintf("\u2200x \u2208 \u211d (x\u00b2 + %d \u2260 0)", k),
-				fmt.Sprintf("\u2200x \u2208 \u211d (x\u00b2 + %d = 0)", k),
-				fmt.Sprintf("\u2203x \u2208 \u211d (x\u00b2 + %d \u2260 0)", k),
-				fmt.Sprintf("\u2200x \u2208 \u211d (x\u00b2 - %d \u2260 0)", k),
-				"The negation of an existence claim states that the condition fails for all real numbers.",
-			},
-		}
-	}
-
-	e := entries[rand.Intn(len(entries))]
-	q := fmt.Sprintf("Which statement is the negation of %s?", e.original)
-	p := generator.MultipleChoice(q, e.negation, e.swapped, e.unchanged, e.wrongQuantifier)
-	p.Facts = map[string]string{"original": e.original, "negation": e.negation, "why": e.note, "answer": e.negation}
-	p.Explanation = e.note
-	return p
+	return predicatesProblem()
 }
 
 // ----- 3. satisfiability -----
@@ -336,20 +122,7 @@ func (g *predicatesGen) Generate(ctx generator.GeneratorContext) generator.Probl
 type satisfiabilityGen struct{}
 
 func (g *satisfiabilityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct{ formula, class, rows, note string }
-	entries := []entry{
-		{"(p \u2227 q) \u2192 p", "tautology", "4", "The consequent p is true in every row where the antecedent is true, so the implication never fails."},
-		{"p \u2227 \u00acp", "contradiction", "0", "No assignment makes p and its negation true together, so no row satisfies it."},
-		{"p \u2192 q", "contingent", "3", "It is false only when p is true and q is false, so 3 of the 4 rows satisfy it."},
-		{"p \u2194 q", "contingent", "2", "It is true exactly when p and q agree, which is 2 of the 4 rows."},
-		{"(p \u2192 q) \u2228 (q \u2192 p)", "tautology", "4", "At least one direction always holds, so every row satisfies the disjunction."},
-	}
-	e := entries[rand.Intn(len(entries))]
-	q := fmt.Sprintf("Classify the formula %s.", e.formula)
-	p := generator.MultipleChoice(q, e.class, "tautology", "contradiction", "contingent")
-	p.Facts = map[string]string{"formula": e.formula, "class": e.class, "rows": e.rows, "why": e.note}
-	p.Explanation = e.note
-	return p
+	return satisfiabilityProblem()
 }
 
 // ----- 4. contrapositive -----
@@ -357,55 +130,7 @@ func (g *satisfiabilityGen) Generate(ctx generator.GeneratorContext) generator.P
 type contrapositiveGen struct{}
 
 func (g *contrapositiveGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type pair struct{ p, q, notP, notQ string }
-
-	k := rand.Intn(8) + 2
-	// c must be prime: "if c divides mn then c divides m or n" fails for a
-	// composite c, because 4 divides 2*2 while 4 divides neither factor.
-	c := []int{2, 3, 5, 7}[rand.Intn(4)]
-
-	var pairs []pair
-	switch rand.Intn(5) {
-	case 0:
-		pairs = []pair{
-			{fmt.Sprintf("x > %d", k), fmt.Sprintf("x\u00b2 > %d", k*k), fmt.Sprintf("x \u2264 %d", k), fmt.Sprintf("x\u00b2 \u2264 %d", k*k)},
-			{fmt.Sprintf("x < -%d", k), fmt.Sprintf("x\u00b2 > %d", k*k), fmt.Sprintf("x \u2265 -%d", k), fmt.Sprintf("x\u00b2 \u2264 %d", k*k)},
-		}
-	case 1:
-		pairs = []pair{
-			{fmt.Sprintf("n is divisible by %d", 2*c), "n is even", fmt.Sprintf("n is not divisible by %d", 2*c), "n is odd"},
-			{fmt.Sprintf("a divides %d", c*2), fmt.Sprintf("a divides %d", c*4), fmt.Sprintf("a does not divide %d", c*2), fmt.Sprintf("a does not divide %d", c*4)},
-		}
-	case 2:
-		pairs = []pair{
-			{fmt.Sprintf("3n + %d is odd", 2*c-1), "n is even", fmt.Sprintf("3n + %d is even", 2*c-1), "n is odd"},
-			{fmt.Sprintf("n\u00b2 - %d is odd", 2*c-1), "n is even", fmt.Sprintf("n\u00b2 - %d is even", 2*c-1), "n is odd"},
-		}
-	case 3:
-		pairs = []pair{
-			{"f is differentiable at x = c", "f is continuous at x = c", "f is not differentiable at x = c", "f is not continuous at x = c"},
-			{"a series \u2211 a_n converges", "the sequence a_n converges to 0", "a series \u2211 a_n diverges", "the sequence a_n does not converge to 0"},
-		}
-	default:
-		pairs = []pair{
-			{fmt.Sprintf("a + b > %d", 2*k), fmt.Sprintf("a > %d or b > %d", k, k), fmt.Sprintf("a + b \u2264 %d", 2*k), fmt.Sprintf("a \u2264 %d and b \u2264 %d", k, k)},
-			{fmt.Sprintf("m \u00b7 n is divisible by %d", c), fmt.Sprintf("m is divisible by %d or n is divisible by %d", c, c), fmt.Sprintf("m \u00b7 n is not divisible by %d", c), fmt.Sprintf("m is not divisible by %d and n is not divisible by %d", c, c)},
-		}
-	}
-
-	s := pairs[rand.Intn(len(pairs))]
-	correct := fmt.Sprintf("If %s then %s", s.notQ, s.notP)
-	converse := fmt.Sprintf("If %s then %s", s.q, s.p)
-	inverse := fmt.Sprintf("If %s then %s", s.notP, s.notQ)
-	negation := fmt.Sprintf("It is not true that if %s then %s", s.p, s.q)
-	q := fmt.Sprintf("The statement is: if %s then %s. Which is its contrapositive?", s.p, s.q)
-	p := generator.MultipleChoice(q, correct, converse, inverse, negation)
-	p.Facts = map[string]string{
-		"p": s.p, "q": s.q, "contrapositive": correct, "converse": converse, "inverse": inverse, "answer": correct,
-	}
-	p.Explanation = fmt.Sprintf("%s is logically equivalent to its contrapositive: proving \u201cif %s then %s\u201d proves the original.",
-		fmt.Sprintf("If %s then %s", s.p, s.q), s.notQ, s.notP)
-	return p
+	return contrapositiveProblem()
 }
 
 // ----- 5. counterexample -----
@@ -471,31 +196,7 @@ func runLength(c int) int {
 type structuralGen struct{}
 
 func (g *structuralGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct{ object, principle, cases string }
-	entries := []entry{
-		{"every binary tree built from a leaf and from a node with two subtrees",
-			"structural induction",
-			"the definition is recursive, so there is one case per rule: a leaf, and a node whose two subtrees satisfy the property by hypothesis"},
-		{"every string generated by S \u2192 a | aS",
-			"structural induction",
-			"the grammar defines the strings recursively, so the cases are the base string and the step that adds an a"},
-		{"every expression built from a number and from two expressions joined by +",
-			"structural induction",
-			"the definition is recursive, so the cases are a number and a sum of two smaller expressions"},
-		{"every integer n \u2265 2 can be written as a product of primes",
-			"strong induction on n",
-			"the factorisation of n uses a factor that can be any smaller number, not just n-1, so the hypothesis must cover all smaller integers"},
-		{"1 + 2 + ... + n = n(n+1)/2 for every n \u2265 1",
-			"ordinary induction on n",
-			"the step needs only the previous case, because the sum for n adds one term to the sum for n-1"},
-	}
-	e := entries[rand.Intn(len(entries))]
-	q := fmt.Sprintf("To prove that %s, which induction principle fits?", e.object)
-	p := generator.MultipleChoice(q, e.principle,
-		"ordinary induction on n", "strong induction on n", "structural induction", "proof by contradiction")
-	p.Facts = map[string]string{"object": e.object, "cases": e.cases, "principle": e.principle}
-	p.Explanation = fmt.Sprintf("%s: %s.", e.principle, e.cases)
-	return p
+	return structuralProblem()
 }
 
 // ----- 7. power set -----
@@ -560,31 +261,7 @@ func (g *partialOrderGen) Generate(ctx generator.GeneratorContext) generator.Pro
 type countableGen struct{}
 
 func (g *countableGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	uncountable := []string{"the real numbers", "the power set of the integers", "the set of all functions from \u2115 to {0, 1}"}
-	countable := []string{"the integers", "the rational numbers", "the algebraic numbers", "the set of finite binary strings"}
-	askUncountable := rand.Intn(2) == 0
-	var correct string
-	var distractorPool []string
-	var q string
-	if askUncountable {
-		correct = uncountable[rand.Intn(len(uncountable))]
-		distractorPool = countable
-		q = "Which of these sets is uncountable?"
-	} else {
-		correct = countable[rand.Intn(len(countable))]
-		distractorPool = uncountable
-		q = "Which of these sets is countable?"
-	}
-	rand.Shuffle(len(distractorPool), func(i, j int) { distractorPool[i], distractorPool[j] = distractorPool[j], distractorPool[i] })
-	p := generator.MultipleChoice(q, correct, distractorPool[0], distractorPool[1], distractorPool[2])
-	property := "countable"
-	if askUncountable {
-		property = "uncountable"
-	}
-	p.Facts = map[string]string{"answer": correct, "property": property}
-	p.Explanation = fmt.Sprintf("%s is %s. A countable set can be listed by an enumeration (or a bijection with \u2115); the reals cannot, which is Cantor's diagonal argument.",
-		correct, property)
-	return p
+	return countableProblem()
 }
 
 // ----- 10. counting by complement -----
@@ -820,54 +497,5 @@ func powerTerm(coef, base int) string {
 type growthRatesGen struct{}
 
 func (g *growthRatesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct{ funcs []string }
-	entries := []entry{
-		{[]string{"n!", "2^n", "n^3"}},
-		{[]string{"log n", "sqrt(n)", "n^2"}},
-		{[]string{"n log n", "n^2", "2^n"}},
-		{[]string{"log n", "sqrt(n)", "n log n"}},
-		{[]string{"n^2", "2^n", "n^3"}},
-	}
-	// rank[i] gives the true order of funcs[i] in the entry, slowest first.
-	ranks := [][3]int{
-		{2, 1, 0}, // n^3 < 2^n < n!
-		{0, 1, 2}, // log n < sqrt(n) < n^2
-		{0, 1, 2}, // n log n < n^2 < 2^n
-		{0, 1, 2}, // log n < sqrt(n) < n log n
-		{0, 1, 2}, // n^2 < n^3 < 2^n
-	}
-	i := rand.Intn(len(entries))
-	e := entries[i]
-	rank := ranks[i]
-	askFastest := rand.Intn(2) == 0
-	var want int
-	if askFastest {
-		want = 2
-	} else {
-		want = 0
-	}
-	correct := ""
-	for j, r := range rank {
-		if r == want {
-			correct = e.funcs[j]
-		}
-	}
-	word := "fastest"
-	if !askFastest {
-		word = "slowest"
-	}
-	q := fmt.Sprintf("As n grows without bound, which of these grows %s?", word)
-	var distractors []string
-	for _, f := range e.funcs {
-		if f != correct {
-			distractors = append(distractors, f)
-		}
-	}
-	p := generator.MultipleChoice(q, correct, distractors...)
-	p.Facts = map[string]string{
-		"functions": strings.Join(e.funcs, ", "), "target": word, "answer": correct,
-	}
-	p.Explanation = fmt.Sprintf("Comparing the growth of %s as n \u2192 \u221e: the %s is %s.",
-		strings.Join(e.funcs, ", "), word, correct)
-	return p
+	return growthRatesProblem()
 }

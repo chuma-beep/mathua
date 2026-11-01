@@ -65,23 +65,6 @@ func TestIneqOneStepGen(t *testing.T)     { fuzzGen(t, &ineqOneStepGen{}) }
 func TestIneqTwoStepGen(t *testing.T)     { fuzzGen(t, &ineqTwoStepGen{}) }
 func TestRealConceptGen(t *testing.T)     { fuzzGen(t, &realConceptGen{}) }
 
-func TestRealConceptRationalOptionsArePlainText(t *testing.T) {
-	g := &realConceptGen{}
-	for i := 0; i < 500; i++ {
-		p := g.Generate(generator.GeneratorContext{Difficulty: rand.Float64()})
-		if !strings.Contains(p.Question, "defining property of a rational number") {
-			continue
-		}
-		if strings.Contains(p.Question, `\(`) {
-			t.Fatalf("rational options still contain inline math: %q", p.Question)
-		}
-		if !strings.Contains(p.Answer, "ratio of two integers") {
-			t.Fatalf("rational answer is not explicit: %q", p.Answer)
-		}
-		return
-	}
-	t.Fatal("rational-number question was never drawn")
-}
 func TestRealPropertiesGen(t *testing.T) { fuzzGen(t, &realPropertiesGen{}) }
 func TestTypesGen(t *testing.T)          { fuzzGen(t, &typesGen{}) }
 

@@ -1,8 +1,6 @@
 package complex
 
 import (
-	"fmt"
-	"math/rand"
 	"strconv"
 
 	"github.com/chuma-beep/mathua/internal/generator"
@@ -20,121 +18,19 @@ func complexChoice(question, correct, explanation string, distractors ...string)
 type analyticGen struct{}
 
 func (g *analyticGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	n := 2 + rand.Intn(4)
-	a := 1 + rand.Intn(5)
-	b := 1 + rand.Intn(5)
-	switch rand.Intn(4) {
-	case 0:
-		return complexChoice(
-			fmt.Sprintf("Is \\(f(z)=z^{%d}+%sz\\) analytic at \\(z=%d\\)?", n, unitCoef(b), a),
-			"yes",
-			"Polynomials are entire: they have a complex derivative at every point, so the answer is yes everywhere.",
-			"no",
-		)
-	case 1:
-		return complexChoice(
-			"Is \\(f(z)=\\bar{z}\\) analytic anywhere?",
-			"no",
-			"Conjugating reverses orientation, and the Cauchy-Riemann equations fail at every point, so it is nowhere analytic.",
-			"yes",
-		)
-	case 2:
-		return complexChoice(
-			fmt.Sprintf("Is \\(f(z)=\\frac{1}{z-%d}\\) analytic at \\(z=%d\\)?", a, a),
-			"no",
-			fmt.Sprintf("The function is undefined at \\(z=%d\\), so it cannot be differentiable there. It is analytic at every other point.", a),
-			"yes",
-		)
-	default:
-		return complexChoice(
-			fmt.Sprintf("Is \\(f(z)=\\frac{1}{z-%d}\\) analytic at \\(z=%d\\)?", a, b),
-			"yes",
-			fmt.Sprintf("The only singular point is \\(z=%d\\), and %d is not that point, so the quotient rule applies there.", a, b),
-			"no",
-		)
-	}
+	return analyticProblem()
 }
 
 type cauchyRiemannGen struct{}
 
 func (g *cauchyRiemannGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	k := 1 + rand.Intn(5)
-	x := 1 + rand.Intn(4)
-	switch rand.Intn(3) {
-	case 0:
-		return complexChoice(
-			fmt.Sprintf("For \\(f(z)=z^{2}\\) written as \\(u+iv\\) with \\(u=x^{2}-y^{2}\\), what is \\(u_x\\) at \\((%d,%d)\\)?", x, k),
-			strconv.Itoa(2*x),
-			fmt.Sprintf("\\(u_x=2x\\), and at \\(x=%d\\) that is %d. Its partner \\(v_y=2x\\) matches, which is why the function is analytic.", x, 2*x),
-			strconv.Itoa(2*k), strconv.Itoa(x), strconv.Itoa(x*x),
-		)
-	case 1:
-		return complexChoice(
-			"For \\(f=u+iv\\) with \\(u=x^{2}+y^{2}\\), do the Cauchy-Riemann equations hold anywhere?",
-			"no",
-			"\\(u_x=2x\\) and \\(v_y=-2x\\) would have to agree, forcing \\(x=0\\); \\(u_y=2y\\) and \\(v_x=2y\\) would then force \\(y=0\\), and at the origin the derivatives do not exist in the complex sense.",
-			"yes",
-		)
-	default:
-		return complexChoice(
-			"Which pair of equations is the Cauchy-Riemann system for \\(f=u+iv\\)?",
-			"u_x = v_y and u_y = -v_x",
-			"Differentiability in the complex sense forces the two partials along the real and imaginary directions to agree, which is exactly this pair.",
-			"u_x = v_x and u_y = v_y",
-			"u_x = -v_y and u_y = v_x",
-		)
-	}
+	return cauchyRiemannProblem()
 }
 
 type conformalGen struct{}
 
 func (g *conformalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	a := 2 + rand.Intn(5)
-	n := 2 + rand.Intn(3)
-	switch rand.Intn(6) {
-	case 0:
-		return complexChoice(
-			fmt.Sprintf("Is \\(w=z^{%d}\\) conformal at \\(z=%d\\)?", n, a),
-			"yes",
-			fmt.Sprintf("\\(f'(z)=%dz^{%d}\\), which is %d at \\(z=%d\\). A non-zero derivative preserves angles, so the map is conformal.", n, n-1, n*intPowLocal(a, n-1), a),
-			"no",
-		)
-	case 1:
-		return complexChoice(
-			fmt.Sprintf("Is \\(w=z^{%d}\\) conformal at \\(z=0\\)?", n),
-			"no",
-			fmt.Sprintf("\\(f'(0)=0\\) for \\(n=%d\\), so angles are multiplied by %d rather than preserved. Conformality needs a non-zero derivative.", n, n),
-			"yes",
-		)
-	case 2:
-		return complexChoice(
-			"Is \\(w=e^{z}\\) conformal everywhere?",
-			"yes",
-			"\\(f'(z)=e^{z}\\) never vanishes, so the map preserves angles at every point.",
-			"no",
-		)
-	case 3:
-		return complexChoice(
-			fmt.Sprintf("Is \\(w=z^{2}+%dz\\) conformal at \\(z=%d\\)?", a, a),
-			"yes",
-			fmt.Sprintf("\\(f'(z)=2z+%d\\), which is %d at \\(z=%d\\), so the derivative is non-zero and the map is conformal there.", a, 3*a, a),
-			"no",
-		)
-	case 4:
-		return complexChoice(
-			fmt.Sprintf("Is \\(w=1/z\\) conformal at \\(z=%d\\)?", a),
-			"yes",
-			fmt.Sprintf("\\(f'(z)=-1/z^{2}\\), which is not zero at \\(z=%d\\), so angles are preserved there.", a),
-			"no",
-		)
-	default:
-		return complexChoice(
-			fmt.Sprintf("Is \\(w=\\bar{z}\\) conformal at \\(z=%d\\)?", a),
-			"no",
-			"Conjugation reverses orientation, so it cannot preserve angles at any point, whatever the value of \\(z\\).",
-			"yes",
-		)
-	}
+	return conformalProblem()
 }
 
 // intPowLocal is a small integer power used to print derivative values.
@@ -149,135 +45,7 @@ func intPowLocal(base, exp int) int {
 type eulerIdentityGen struct{}
 
 func (g *eulerIdentityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type eulerSpec struct {
-		angle   string
-		correct string
-		dist    []string
-		exp     string
-	}
-
-	specs := []eulerSpec{
-		{
-			angle:   "\\pi/2",
-			correct: "i",
-			dist:    []string{"-1", "-i", "1"},
-			exp:     "e^(i pi / 2) = cos(pi/2) + i sin(pi/2) = 0 + i(1) = i.",
-		},
-		{
-			angle:   "\\pi",
-			correct: "-1",
-			dist:    []string{"1", "i", "-i"},
-			exp:     "e^(i pi) = cos(pi) + i sin(pi) = -1 + 0 = -1 (Euler's identity: e^(i pi) + 1 = 0).",
-		},
-		{
-			angle:   "3\\pi/2",
-			correct: "-i",
-			dist:    []string{"i", "-1", "1"},
-			exp:     "e^(i 3pi / 2) = cos(3pi/2) + i sin(3pi/2) = 0 - i = -i.",
-		},
-		{
-			angle:   "2\\pi",
-			correct: "1",
-			dist:    []string{"-1", "i", "-i"},
-			exp:     "e^(i 2pi) = cos(2pi) + i sin(2pi) = 1 + 0 = 1.",
-		},
-		{
-			angle:   "-\\pi/2",
-			correct: "-i",
-			dist:    []string{"i", "1", "-1"},
-			exp:     "e^(-i pi / 2) = cos(-pi/2) + i sin(-pi/2) = 0 - i = -i.",
-		},
-		{
-			angle:   "\\pi/4",
-			correct: "\\frac{\\sqrt{2}}{2} + \\frac{\\sqrt{2}}{2} i",
-			dist:    []string{"\\frac{\\sqrt{2}}{2} - \\frac{\\sqrt{2}}{2} i", "-\\frac{\\sqrt{2}}{2} + \\frac{\\sqrt{2}}{2} i", "\\frac{1}{2} + \\frac{\\sqrt{3}}{2} i"},
-			exp:     "e^(i pi/4) = cos(pi/4) + i sin(pi/4) = sqrt(2)/2 + i sqrt(2)/2.",
-		},
-		{
-			angle:   "3\\pi/4",
-			correct: "-\\frac{\\sqrt{2}}{2} + \\frac{\\sqrt{2}}{2} i",
-			dist:    []string{"\\frac{\\sqrt{2}}{2} + \\frac{\\sqrt{2}}{2} i", "-\\frac{\\sqrt{2}}{2} - \\frac{\\sqrt{2}}{2} i", "-\\frac{1}{2} + \\frac{\\sqrt{3}}{2} i"},
-			exp:     "e^(i 3pi/4) = cos(3pi/4) + i sin(3pi/4) = -sqrt(2)/2 + i sqrt(2)/2.",
-		},
-		{
-			angle:   "5\\pi/4",
-			correct: "-\\frac{\\sqrt{2}}{2} - \\frac{\\sqrt{2}}{2} i",
-			dist:    []string{"\\frac{\\sqrt{2}}{2} - \\frac{\\sqrt{2}}{2} i", "-\\frac{\\sqrt{2}}{2} + \\frac{\\sqrt{2}}{2} i", "-\\frac{1}{2} - \\frac{\\sqrt{3}}{2} i"},
-			exp:     "e^(i 5pi/4) = cos(5pi/4) + i sin(5pi/4) = -sqrt(2)/2 - i sqrt(2)/2.",
-		},
-		{
-			angle:   "7\\pi/4",
-			correct: "\\frac{\\sqrt{2}}{2} - \\frac{\\sqrt{2}}{2} i",
-			dist:    []string{"\\frac{\\sqrt{2}}{2} + \\frac{\\sqrt{2}}{2} i", "-\\frac{\\sqrt{2}}{2} - \\frac{\\sqrt{2}}{2} i", "\\frac{1}{2} - \\frac{\\sqrt{3}}{2} i"},
-			exp:     "e^(i 7pi/4) = cos(7pi/4) + i sin(7pi/4) = sqrt(2)/2 - i sqrt(2)/2.",
-		},
-		{
-			angle:   "\\pi/3",
-			correct: "\\frac{1}{2} + \\frac{\\sqrt{3}}{2} i",
-			dist:    []string{"\\frac{\\sqrt{3}}{2} + \\frac{1}{2} i", "\\frac{1}{2} - \\frac{\\sqrt{3}}{2} i", "-\\frac{1}{2} + \\frac{\\sqrt{3}}{2} i"},
-			exp:     "e^(i pi/3) = cos(pi/3) + i sin(pi/3) = 1/2 + i sqrt(3)/2.",
-		},
-		{
-			angle:   "2\\pi/3",
-			correct: "-\\frac{1}{2} + \\frac{\\sqrt{3}}{2} i",
-			dist:    []string{"\\frac{1}{2} + \\frac{\\sqrt{3}}{2} i", "-\\frac{1}{2} - \\frac{\\sqrt{3}}{2} i", "-\\frac{\\sqrt{3}}{2} + \\frac{1}{2} i"},
-			exp:     "e^(i 2pi/3) = cos(2pi/3) + i sin(2pi/3) = -1/2 + i sqrt(3)/2.",
-		},
-		{
-			angle:   "\\pi/6",
-			correct: "\\frac{\\sqrt{3}}{2} + \\frac{1}{2} i",
-			dist:    []string{"\\frac{1}{2} + \\frac{\\sqrt{3}}{2} i", "\\frac{\\sqrt{3}}{2} - \\frac{1}{2} i", "-\\frac{\\sqrt{3}}{2} + \\frac{1}{2} i"},
-			exp:     "e^(i pi/6) = cos(pi/6) + i sin(pi/6) = sqrt(3)/2 + i/2.",
-		},
-		{
-			angle:   "5\\pi/6",
-			correct: "-\\frac{\\sqrt{3}}{2} + \\frac{1}{2} i",
-			dist:    []string{"\\frac{\\sqrt{3}}{2} + \\frac{1}{2} i", "-\\frac{\\sqrt{3}}{2} - \\frac{1}{2} i", "-\\frac{1}{2} + \\frac{\\sqrt{3}}{2} i"},
-			exp:     "e^(i 5pi/6) = cos(5pi/6) + i sin(5pi/6) = -sqrt(3)/2 + i/2.",
-		},
-	}
-
-	if rand.Intn(4) == 0 {
-		// Scaled modulus: r e^{i \pi} = -r, r e^{i \pi/2} = r i, r e^{i 3\pi/2} = -r i
-		r := 2 + rand.Intn(6)
-		switch rand.Intn(3) {
-		case 0:
-			return complexChoice(
-				fmt.Sprintf("Evaluate the polar form \\(%d e^{i\\pi}\\).", r),
-				fmt.Sprintf("-%d", r),
-				fmt.Sprintf("%d e^(i pi) = %d(cos pi + i sin pi) = %d(-1) = -%d.", r, r, r, r),
-				fmt.Sprintf("%d", r),
-				fmt.Sprintf("%di", r),
-				fmt.Sprintf("-%di", r),
-			)
-		case 1:
-			return complexChoice(
-				fmt.Sprintf("Evaluate the polar form \\(%d e^{i\\pi/2}\\).", r),
-				fmt.Sprintf("%di", r),
-				fmt.Sprintf("%d e^(i pi/2) = %d(0 + i) = %di.", r, r, r),
-				fmt.Sprintf("-%di", r),
-				fmt.Sprintf("%d", r),
-				fmt.Sprintf("-%d", r),
-			)
-		default:
-			return complexChoice(
-				fmt.Sprintf("Evaluate the polar form \\(%d e^{i 3\\pi/2}\\).", r),
-				fmt.Sprintf("-%di", r),
-				fmt.Sprintf("%d e^(i 3pi/2) = %d(0 - i) = -%di.", r, r, r),
-				fmt.Sprintf("%di", r),
-				fmt.Sprintf("-%d", r),
-				fmt.Sprintf("%d", r),
-			)
-		}
-	}
-
-	s := specs[rand.Intn(len(specs))]
-	return complexChoice(
-		fmt.Sprintf("Use Euler's formula to evaluate \\(e^{i %s}\\).", s.angle),
-		s.correct,
-		s.exp,
-		s.dist...,
-	)
+	return eulerIdentityProblem()
 }
 
 // unitCoef renders a coefficient for a term x, dropping a leading one.
@@ -291,85 +59,17 @@ func unitCoef(c int) string {
 type harmonicGen struct{}
 
 func (g *harmonicGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	a := 1 + rand.Intn(4)
-	switch rand.Intn(4) {
-	case 0:
-		return complexChoice(
-			fmt.Sprintf("Is \\(u=x^{2}-y^{2}\\) harmonic at \\((%d,%d)\\)?", a, a),
-			"yes",
-			"\\(u_{xx}=2\\) and \\(u_{yy}=-2\\), so the Laplacian is zero everywhere. It is the real part of \\(z^{2}\\).",
-			"no",
-		)
-	case 1:
-		return complexChoice(
-			"Is \\(u=x^{2}+y^{2}\\) harmonic?",
-			"no",
-			"\\(u_{xx}+u_{yy}=2+2=4\\), which is not zero, so it satisfies no harmonic equation.",
-			"yes",
-		)
-	case 2:
-		return complexChoice(
-			"Is \\(u=x^{3}-3xy^{2}\\) harmonic?",
-			"yes",
-			"It is the real part of \\(z^{3}\\), and real parts of analytic functions are harmonic. Checking directly: \\(6x-6x=0\\).",
-			"no",
-		)
-	default:
-		return complexChoice(
-			fmt.Sprintf("What is the Laplacian of \\(u=x^{2}+y^{2}\\) at \\((%d,%d)\\)?", a, a),
-			"4",
-			"\\(u_{xx}=2\\) and \\(u_{yy}=2\\), so the Laplacian is 4 at every point, not just this one.",
-			"0", "2", "8",
-		)
-	}
+	return harmonicProblem()
 }
 
 type mobiusTransformGen struct{}
 
 func (g *mobiusTransformGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	a := 1 + rand.Intn(3)
-	b := 1 + rand.Intn(6)
-	c := 1 + rand.Intn(3)
-	d := 1 + rand.Intn(6)
-	det := a*d - b*c
-	for det == 0 {
-		d = 1 + rand.Intn(6)
-		det = a*d - b*c
-	}
-	return complexChoice(
-		fmt.Sprintf("For the Möbius map \\(f(z)=\\frac{%sz+%d}{%sz+%d}\\), what is \\(f(0)\\)?", unitCoef(a), b, unitCoef(c), d),
-		fmt.Sprintf("%d/%d", b, d),
-		fmt.Sprintf("Substituting \\(z=0\\) leaves the constant term %d over the constant term %d. The determinant %d is non-zero, so the map is invertible.", b, d, det),
-		fmt.Sprintf("%d/%d", a, c), strconv.Itoa(b+d), fmt.Sprintf("-%d/%d", b, d),
-	)
+	return mobiusProblem()
 }
 
 type residueGen struct{}
 
 func (g *residueGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	a := 1 + rand.Intn(4)
-	k := 1 + rand.Intn(5)
-	switch rand.Intn(3) {
-	case 0:
-		return complexChoice(
-			fmt.Sprintf("What is the residue of \\(f(z)=\\frac{%d}{z-%d}\\) at \\(z=%d\\)?", k, a, a),
-			strconv.Itoa(k),
-			"The residue of \\(c/(z-a)\\) is the numerator c, so the answer is the coefficient itself.",
-			"0", strconv.Itoa(a), strconv.Itoa(k*a),
-		)
-	case 1:
-		return complexChoice(
-			fmt.Sprintf("What is the residue of \\(f(z)=\\frac{1}{(z-%d)^{2}}\\) at \\(z=%d\\)?", a, a),
-			"0",
-			"A pole of order two contributes nothing to the \\(1/(z-a)\\) coefficient, so the residue is zero.",
-			"1", strconv.Itoa(a), strconv.Itoa(2*a),
-		)
-	default:
-		return complexChoice(
-			fmt.Sprintf("What is the residue of \\(f(z)=\\frac{z}{z-%d}\\) at \\(z=%d\\)?", a, a),
-			strconv.Itoa(a),
-			fmt.Sprintf("Rewrite \\(z=(z-%d)+%d\\), so the function is \\(1+%d/(z-%d)\\) and the residue is %d.", a, a, a, a, a),
-			"1", "0", strconv.Itoa(-a),
-		)
-	}
+	return residueProblem()
 }

@@ -4,7 +4,7 @@
     "label": "Graph isomorphism",
     "domain": "graph_theory",
     "subdomain": "graph_theory.basics",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.graphs.basics"
     ],
@@ -32,7 +32,7 @@
     "label": "Subgraphs and induced subgraphs",
     "domain": "graph_theory",
     "subdomain": "graph_theory.basics",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.graphs.basics"
     ],
@@ -46,7 +46,7 @@
     "label": "Graph homomorphisms",
     "domain": "graph_theory",
     "subdomain": "graph_theory.basics",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "graph.isomorphism"
     ],
@@ -130,7 +130,7 @@
     "label": "Menger's theorem",
     "domain": "graph_theory",
     "subdomain": "graph_theory.connectivity",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "graph.connectivity"
     ],
@@ -158,7 +158,7 @@
     "label": "Perfect matchings",
     "domain": "graph_theory",
     "subdomain": "graph_theory.matching",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "graph.matching"
     ],
@@ -172,7 +172,7 @@
     "label": "Tutte's theorem",
     "domain": "graph_theory",
     "subdomain": "graph_theory.matching",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "graph.perfect_matching"
     ],
@@ -228,7 +228,7 @@
     "label": "Brooks' theorem",
     "domain": "graph_theory",
     "subdomain": "graph_theory.coloring",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.graphs.coloring"
     ],
@@ -256,7 +256,7 @@
     "label": "Perfect graphs",
     "domain": "graph_theory",
     "subdomain": "graph_theory.coloring",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "graph.chromatic_polynomial"
     ],
@@ -284,7 +284,7 @@
     "label": "Kuratowski's theorem",
     "domain": "graph_theory",
     "subdomain": "graph_theory.planarity",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "discrete.graphs.planar"
     ],
@@ -298,7 +298,7 @@
     "label": "Graph minors",
     "domain": "graph_theory",
     "subdomain": "graph_theory.planarity",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "graph.kuratowski"
     ],
@@ -469,7 +469,7 @@
     "label": "Random graph thresholds",
     "domain": "graph_theory",
     "subdomain": "graph_theory.extremal",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "graph.connectivity"
     ],
@@ -525,7 +525,7 @@
     "label": "Strong connectivity",
     "domain": "graph_theory",
     "subdomain": "graph_theory.flows",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "graph.connectivity"
     ],
@@ -539,7 +539,7 @@
     "label": "Topological sort",
     "domain": "graph_theory",
     "subdomain": "graph_theory.flows",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "graph.strong_connectivity"
     ],

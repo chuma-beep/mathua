@@ -138,20 +138,57 @@ func (g *barGraphGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		labels[i] = label
 		values[i] = rand.Intn(max(1, scale*6)) + 5
 	}
-	maxIdx := 0
+	maxIdx, minIdx := 0, 0
 	for i := 1; i < n; i++ {
 		if values[i] > values[maxIdx] {
 			maxIdx = i
+		}
+		if values[i] < values[minIdx] {
+			minIdx = i
 		}
 	}
 	dataParts := make([]string, n)
 	for i := 0; i < n; i++ {
 		dataParts[i] = fmt.Sprintf("%s: %d", labels[i], values[i])
 	}
+	data := strings.Join(dataParts, ", ")
+
+	kind := rand.Intn(3)
+	var question, answer, explanation, answerKind string
+	switch kind {
+	case 0:
+		value := values[maxIdx] - values[minIdx]
+		question = fmt.Sprintf("In a bar graph showing pet popularity (%s), what is the difference between the highest and lowest value? (enter a number)", data)
+		answer = strconv.Itoa(value)
+		explanation = fmt.Sprintf("The highest value is %d for %s and the lowest is %d for %s, so the difference is %d.", values[maxIdx], labels[maxIdx], values[minIdx], labels[minIdx], value)
+		answerKind = "range"
+	case 1:
+		total := 0
+		for _, v := range values {
+			total += v
+		}
+		question = fmt.Sprintf("In a bar graph showing pet popularity (%s), what is the total of all the values? (enter a number)", data)
+		answer = strconv.Itoa(total)
+		explanation = fmt.Sprintf("Adding the %d values gives %d.", n, total)
+		answerKind = "total"
+	default:
+		threshold := values[minIdx] + rand.Intn(values[maxIdx]-values[minIdx]+1)
+		count := 0
+		for _, v := range values {
+			if v >= threshold {
+				count++
+			}
+		}
+		question = fmt.Sprintf("In a bar graph showing pet popularity (%s), how many pets have a value of at least %d? (enter a number)", data, threshold)
+		answer = strconv.Itoa(count)
+		explanation = fmt.Sprintf("Exactly %d of the %d pets have a value of at least %d.", count, n, threshold)
+		answerKind = "count"
+	}
 	return generator.Problem{
-		Question:    fmt.Sprintf("In a bar graph showing pet popularity (%s), which pet has the highest value?", strings.Join(dataParts, ", ")),
-		Answer:      labels[maxIdx],
-		Explanation: fmt.Sprintf("%s has the highest value of %d.", labels[maxIdx], values[maxIdx]),
+		Question:    question,
+		Answer:      answer,
+		Explanation: explanation,
+		Facts:       map[string]string{"kind": answerKind, "answer": answer},
 	}
 }
 
@@ -215,15 +252,20 @@ func (g *meanGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		vals[i] = rand.Intn(max(1, scale*8)) + 1
 		sum += vals[i]
 	}
-	mean := float64(sum) / float64(n)
 	valStrs := make([]string, n)
 	for i, v := range vals {
 		valStrs[i] = strconv.Itoa(v)
 	}
+	gcd := mathutil.GCD(sum, n)
+	answer := fmt.Sprintf("%d/%d", sum/gcd, n/gcd)
+	if sum%n == 0 {
+		answer = strconv.Itoa(sum / n)
+	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Find the mean of: %s", strings.Join(valStrs, ", ")),
-		Answer:      fmt.Sprintf("%.1f", mean),
-		Explanation: fmt.Sprintf("Mean = (%s) / %d = %d / %d = %.1f", strings.Join(valStrs, " + "), n, sum, n, mean),
+		Answer:      answer,
+		Explanation: fmt.Sprintf("Mean = (%s) / %d = %d / %d = %s (about %.1f)", strings.Join(valStrs, " + "), n, sum, n, answer, float64(sum)/float64(n)),
+		Facts:       map[string]string{"sum": strconv.Itoa(sum), "n": strconv.Itoa(n), "answer": answer},
 	}
 }
 
@@ -730,7 +772,7 @@ func (g *varianceGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		valStrs[i] = strconv.Itoa(v)
 	}
 	return generator.Problem{
-		Question: fmt.Sprintf("Find the population variance of: %s", strings.Join(valStrs, ", ")),
+		Question: fmt.Sprintf("Find the population variance (enter an exact fraction) of: %s", strings.Join(valStrs, ", ")),
 		Answer:   answer,
 		Explanation: fmt.Sprintf("\\(\\text{Mean} = \\frac{%d}{%d} = %.2f\\). \\(\\text{Variance} = \\frac{\\Sigma(x_i - \\bar{x})^{2}}{n} = \\frac{%d}{%d} = %s \\approx %.2f\\)",
 			sum, n, float64(sum)/float64(n), num, den, answer, float64(num)/float64(den)),

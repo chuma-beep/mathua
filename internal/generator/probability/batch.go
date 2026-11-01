@@ -48,48 +48,7 @@ func decimal6(v float64) string {
 type axiomsGen struct{}
 
 func (g *axiomsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Kolmogorov's axioms require that a probability P(A) is...",
-			correct:     "a nonnegative number with P(Ω) = 1 and countable additivity",
-			distractors: []string{"a positive integer", "always less than 1 and never 0", "defined only for equally likely outcomes"},
-			reason:      "A probability is a measure: it is nonnegative, the whole space has measure one, and disjoint countable unions add.",
-		},
-		{
-			question:    "For disjoint events A and B, countable additivity gives...",
-			correct:     "P(A ∪ B) = P(A) + P(B)",
-			distractors: []string{"P(A ∪ B) = P(A)P(B)", "P(A ∪ B) = P(A) + P(B) − P(A ∩ B)", "P(A ∪ B) = 1"},
-			reason:      "The events do not overlap, so the intersection term vanishes and the measures add.",
-		},
-		{
-			question:    "The complement rule states that the probability of \"not A\" is...",
-			correct:     "1 − P(A)",
-			distractors: []string{"P(A)", "1 divided by P(A)", "0"},
-			reason:      "A and its complement partition the sample space, so their probabilities sum to one.",
-		},
-		{
-			question:    "The empty event has probability...",
-			correct:     "0",
-			distractors: []string{"1", "undefined", "1/2"},
-			reason:      "Ω ∪ ∅ is Ω as a disjoint union, so P(∅) must be zero.",
-		},
-		{
-			question:    "A probability is a function whose domain is...",
-			correct:     "the events of a sample space",
-			distractors: []string{"the outcomes only", "the real numbers", "the random variables"},
-			reason:      "It is defined on the sigma-algebra of events, not on individual outcomes or on numbers.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return probabilityAxiomsProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -99,48 +58,7 @@ func (g *axiomsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type sigmaAlgebraGen struct{}
 
 func (g *sigmaAlgebraGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "A sigma-algebra of events is closed under...",
-			correct:     "complementation and countable unions",
-			distractors: []string{"addition and multiplication", "intersection only", "taking limits of numbers"},
-			reason:      "Those two operations generate countable intersections and differences as well.",
-		},
-		{
-			question:    "The smallest sigma-algebra on a sample space Ω is...",
-			correct:     "{∅, Ω}",
-			distractors: []string{"the power set of Ω", "{Ω}", "the empty family"},
-			reason:      "It must contain Ω, hence its complement ∅, and those two already form a sigma-algebra.",
-		},
-		{
-			question:    "The power set of a countable sample space is a sigma-algebra because...",
-			correct:     "it contains every subset, so it is closed under every set operation",
-			distractors: []string{"it is finite", "it has one element", "it is closed under addition"},
-			reason:      "Closure is automatic when every possible subset is already a member.",
-		},
-		{
-			question:    "A measurable event is...",
-			correct:     "a member of the sigma-algebra",
-			distractors: []string{"any subset of Ω", "a single outcome", "a random variable"},
-			reason:      "Membership in the sigma-algebra is exactly what makes a probability assignable to a set.",
-		},
-		{
-			question:    "If A and B are events, then A ∩ B is an event because...",
-			correct:     "a sigma-algebra is closed under countable intersections too",
-			distractors: []string{"intersections are the same as unions", "B is the complement of A", "events are numbers"},
-			reason:      "De Morgan's law writes an intersection as the complement of a union, so closure transfers.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return sigmaAlgebraProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -206,48 +124,7 @@ func (g *inclusionExclusionGen) Generate(ctx generator.GeneratorContext) generat
 type continuityGen struct{}
 
 func (g *continuityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Continuity from below states that if events A_n increase to A, then...",
-			correct:     "P(A_n) tends to P(A)",
-			distractors: []string{"P(A_n) tends to 1", "P(A_n) tends to 0", "P(A_n) is eventually constant"},
-			reason:      "The probabilities of an increasing sequence converge to the probability of the union.",
-		},
-		{
-			question:    "Continuity from above requires a decreasing sequence of events together with...",
-			correct:     "the first event having finite probability",
-			distractors: []string{"the events being disjoint", "the events being independent", "the events being equally likely"},
-			reason:      "Without a finite starting measure the subtraction of limits can fail.",
-		},
-		{
-			question:    "Continuity of probability follows from...",
-			correct:     "countable additivity",
-			distractors: []string{"finite additivity alone", "independence of the events", "the multiplication rule"},
-			reason:      "Writing an increasing union as disjoint differences and summing is exactly countable additivity.",
-		},
-		{
-			question:    "For increasing events A_n with union A, the value P(A) equals...",
-			correct:     "the limit of P(A_n)",
-			distractors: []string{"the sum of the P(A_n)", "the maximum of the P(A_n)", "P(A_1)"},
-			reason:      "That is continuity from below, the monotone convergence of the probability measure.",
-		},
-		{
-			question:    "Continuity from below computes the probability of an infinite union as...",
-			correct:     "the limit of the probabilities of the finite partial unions",
-			distractors: []string{"a product of probabilities", "an average of probabilities", "a derivative of probabilities"},
-			reason:      "Partial unions increase to the full union, so their probabilities have the union's probability as limit.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return continuityProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -337,48 +214,7 @@ func (g *bayesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type independenceGen struct{}
 
 func (g *independenceGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Two events A and B are independent exactly when...",
-			correct:     "P(A ∩ B) = P(A)P(B)",
-			distractors: []string{"P(A ∪ B) = P(A) + P(B)", "A and B are disjoint", "P(A) = P(B)"},
-			reason:      "The product rule is the definition; disjointness and equal probabilities are unrelated conditions.",
-		},
-		{
-			question:    "Three events A, B and C are mutually independent when...",
-			correct:     "every subcollection satisfies the product rule",
-			distractors: []string{"each pair is independent", "they are pairwise disjoint", "P(A ∩ B ∩ C) = P(A)P(B)P(C) alone"},
-			reason:      "Mutual independence needs all four equations: the three pair products and the triple product.",
-		},
-		{
-			question:    "Pairwise independence of three events...",
-			correct:     "does not imply mutual independence",
-			distractors: []string{"implies mutual independence", "requires the events to be disjoint", "requires equal probabilities"},
-			reason:      "The classic two-dice example is pairwise but not mutually independent, because the triple product fails.",
-		},
-		{
-			question:    "If P(A) is positive and A and B are independent, then P(B | A) equals...",
-			correct:     "P(B)",
-			distractors: []string{"P(A)", "P(A)P(B)", "0"},
-			reason:      "Dividing the product rule by P(A) shows conditioning on A does not change B's probability.",
-		},
-		{
-			question:    "Two disjoint events with positive probability are...",
-			correct:     "dependent",
-			distractors: []string{"independent", "complementary", "equally likely"},
-			reason:      "Knowing one occurred rules out the other, so the conditional probability collapses to zero.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return pairwiseIndependenceProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -388,48 +224,7 @@ func (g *independenceGen) Generate(ctx generator.GeneratorContext) generator.Pro
 type rvDefinitionGen struct{}
 
 func (g *rvDefinitionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "A random variable is...",
-			correct:     "a measurable function from the sample space to the real numbers",
-			distractors: []string{"a number chosen at random", "an outcome of an experiment", "a probability between 0 and 1"},
-			reason:      "It is a function: it maps each outcome to a real value, and measurability makes its sets assignable probabilities.",
-		},
-		{
-			question:    "The distribution of a random variable is...",
-			correct:     "the probability it assigns to its values",
-			distractors: []string{"its set of possible values", "its mean", "the sample space it is defined on"},
-			reason:      "The distribution is the push-forward of the underlying probability, not the value set or a summary number.",
-		},
-		{
-			question:    "A discrete random variable takes...",
-			correct:     "countably many values",
-			distractors: []string{"finitely many values only", "any real values", "only values in [0, 1]"},
-			reason:      "Countable includes the infinite case, such as a Poisson variable on the nonnegative integers.",
-		},
-		{
-			question:    "A continuous random variable is typically described by...",
-			correct:     "a probability density",
-			distractors: []string{"a probability mass function", "a finite list of outcomes", "a single number"},
-			reason:      "Individual points have probability zero, so probabilities come from integrating a density.",
-		},
-		{
-			question:    "Two random variables are identically distributed when...",
-			correct:     "they have the same distribution, though they may be defined on different spaces",
-			distractors: []string{"they are equal at every outcome", "they have the same mean only", "they are independent"},
-			reason:      "Distribution is a property of the law, not of a shared domain, equality, mean or independence.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return randomVariableProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -439,48 +234,7 @@ func (g *rvDefinitionGen) Generate(ctx generator.GeneratorContext) generator.Pro
 type cdfGen struct{}
 
 func (g *cdfGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "The distribution function F(x) of a random variable X is defined as...",
-			correct:     "P(X ≤ x)",
-			distractors: []string{"P(X = x)", "P(X ≥ x)", "the density of X at x"},
-			reason:      "The CDF accumulates probability up to and including x, from the left.",
-		},
-		{
-			question:    "A distribution function is...",
-			correct:     "non-decreasing and right-continuous, with limits 0 and 1 at the ends",
-			distractors: []string{"strictly increasing and continuous", "always differentiable", "bounded away from zero"},
-			reason:      "It may jump and may be flat; only monotonicity, right-continuity and the two limits are forced.",
-		},
-		{
-			question:    "In terms of F, the probability P(a < X ≤ b) equals...",
-			correct:     "F(b) − F(a)",
-			distractors: []string{"F(a) − F(b)", "F(b) + F(a)", "F(b)F(a)"},
-			reason:      "Subtracting the accumulated probability below a leaves the probability of the interval ending at b.",
-		},
-		{
-			question:    "The CDF of a continuous random variable is...",
-			correct:     "continuous",
-			distractors: []string{"a step function", "always constant", "undefined at its jumps"},
-			reason:      "No point has positive probability, so the CDF has no jumps.",
-		},
-		{
-			question:    "The CDF of a discrete random variable...",
-			correct:     "is a step function that jumps by the mass function at each value",
-			distractors: []string{"is continuous", "is constant between all values", "has no jumps"},
-			reason:      "The probability of a single value becomes a jump of exactly that size.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return cdfProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -724,48 +478,7 @@ func pow(x float64, n int) float64 {
 type memorylessGen struct{}
 
 func (g *memorylessGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "The memoryless property says that for s, t positive...",
-			correct:     "P(X > s + t | X > s) = P(X > t)",
-			distractors: []string{"P(X > s + t) = P(X > s)P(X > t)", "the past predicts the future", "s and t are independent"},
-			reason:      "Conditioning on survival past s leaves the remaining lifetime distributed as it was at the start.",
-		},
-		{
-			question:    "Which discrete distribution is memoryless?",
-			correct:     "the geometric",
-			distractors: []string{"the binomial", "the Poisson", "the hypergeometric"},
-			reason:      "Repeated independent trials with a fixed success probability restart at every step.",
-		},
-		{
-			question:    "Which continuous distribution is memoryless?",
-			correct:     "the exponential",
-			distractors: []string{"the uniform", "the normal", "the beta"},
-			reason:      "It is the unique continuous distribution whose survival function satisfies S(s+t) = S(s)S(t).",
-		},
-		{
-			question:    "For a memoryless lifetime, having already survived s units...",
-			correct:     "does not change the distribution of the remaining lifetime",
-			distractors: []string{"makes failure more likely", "makes failure less likely", "makes failure certain"},
-			reason:      "The conditional law of the residual life equals the original law, so age carries no information.",
-		},
-		{
-			question:    "The memoryless property is equivalent to the survival equation...",
-			correct:     "P(X > s + t) = P(X > s)P(X > t)",
-			distractors: []string{"P(X > s + t) = P(X > s) + P(X > t)", "P(X > s + t) = P(X > t) − P(X > s)", "P(X > s + t) = P(X > s) / P(X > t)"},
-			reason:      "Dividing the conditional definition through by the ordinary survival probabilities gives the multiplicative form.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return memorylessProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -1079,48 +792,7 @@ func factF(n int) float64 {
 type exponentialFamilyGen struct{}
 
 func (g *exponentialFamilyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "A distribution is a member of the exponential family when its mass or density can be written as...",
-			correct:     "h(x) exp(η(θ)T(x) − A(θ))",
-			distractors: []string{"h(x) + η(θ)T(x)", "η(θ)T(x) divided by A(θ)", "h(x) exp(η(θ) + T(x))"},
-			reason:      "The density splits into an x-only part and an exponential whose argument is linear in a statistic and a parameter.",
-		},
-		{
-			question:    "In the exponential-family form, the quantity T(x) is called...",
-			correct:     "the sufficient statistic",
-			distractors: []string{"the natural parameter", "the normalising constant", "the support"},
-			reason:      "It is the data summary that the natural parameter multiplies.",
-		},
-		{
-			question:    "Which of these distributions is a member of the exponential family?",
-			correct:     "the Poisson",
-			distractors: []string{"the Cauchy", "the uniform on the interval from 0 to θ", "a two-component Gaussian mixture"},
-			reason:      "The Poisson density separates; the Cauchy has a logarithmic term that does not, and the other two have a parameter-dependent support or a mixture structure.",
-		},
-		{
-			question:    "The natural parameter η(θ) is...",
-			correct:     "the parameter that multiplies the sufficient statistic",
-			distractors: []string{"always equal to the mean", "the normalising constant", "the support of the distribution"},
-			reason:      "It is the coefficient of T(x) in the exponent.",
-		},
-		{
-			question:    "The log-partition function A(θ)...",
-			correct:     "normalises the density so it integrates to one",
-			distractors: []string{"is the sufficient statistic", "is the mean of the distribution", "is the support"},
-			reason:      "It is whatever constant makes the integral over the support equal to one.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return exponentialFamilyProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -1130,46 +802,5 @@ func (g *exponentialFamilyGen) Generate(ctx generator.GeneratorContext) generato
 type weakLawGen struct{}
 
 func (g *weakLawGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "The weak law of large numbers says that the sample mean...",
-			correct:     "converges in probability to the population mean",
-			distractors: []string{"converges almost surely to the population mean", "is exactly the population mean", "converges in distribution to the standard normal"},
-			reason:      "Convergence in probability is the weak mode; almost-sure convergence is the strong law, and a normal limit is the central limit theorem.",
-		},
-		{
-			question:    "Convergence in probability to a constant means that for every positive ε...",
-			correct:     "the probability that the difference exceeds ε tends to zero",
-			distractors: []string{"the variable eventually equals the constant", "the densities converge pointwise", "the means form a convergent sequence"},
-			reason:      "The defining requirement is that the probability of a departure larger than ε vanishes.",
-		},
-		{
-			question:    "The standard proof of the weak law applies Chebyshev's inequality, so it needs the observations to have finite...",
-			correct:     "variance",
-			distractors: []string{"support", "median", "mode"},
-			reason:      "Chebyshev bounds the tail by σ²/(n ε²), which needs a finite variance.",
-		},
-		{
-			question:    "Chebyshev's inequality bounds the probability that the sample mean departs from μ by at least ε by...",
-			correct:     "σ² divided by n ε²",
-			distractors: []string{"σ² divided by ε²", "one divided by n", "σ divided by n ε"},
-			reason:      "The sample mean has variance σ²/n, and Chebyshev divides that by ε².",
-		},
-		{
-			question:    "Which of the two laws is the weaker claim?",
-			correct:     "the weak law of large numbers",
-			distractors: []string{"the strong law of large numbers", "they are equivalent", "neither follows from the other"},
-			reason:      "Almost-sure convergence implies convergence in probability, so the strong law is the stronger claim.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return weakLawProblem()
 }

@@ -24,43 +24,7 @@ import (
 type kuratowskiGen struct{}
 
 func (g *kuratowskiGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	claims := []graphClaim{
-		{
-			question:    "Kuratowski's theorem says a finite graph is planar exactly when it contains no subdivision of...",
-			correct:     "K_5 or K_{3,3}",
-			distractors: []string{"K_4 or C_5", "K_6 or K_{3,4}", "P_5 or C_6"},
-			reason:      "Those two are the complete graph and the complete bipartite graph with too many edges to embed in the plane, and every nonplanar graph reduces to one of them.",
-		},
-		{
-			question:    "Subdividing an edge of a graph replaces...",
-			correct:     "the edge by a path of length at least one",
-			distractors: []string{"the edge by a triangle", "a vertex by an edge", "two edges by one edge"},
-			reason:      "A subdivision inserts a new vertex of degree two in the middle of an edge, so the edge becomes a path.",
-		},
-		{
-			question:    "A graph obtained from K_{3,3} by subdividing every edge is...",
-			correct:     "nonplanar",
-			distractors: []string{"planar", "a tree", "bipartite and planar"},
-			reason:      "Subdivision preserves planarity in both directions, and K_{3,3} is not planar, so no subdivision of it is either.",
-		},
-		{
-			question:    "Wagner's theorem characterizes planarity by forbidden...",
-			correct:     "minors K_5 and K_{3,3}",
-			distractors: []string{"subgraphs K_4 and C_5", "induced subgraphs P_5 and C_6", "topological subgraphs K_3 and C_4"},
-			reason:      "Wagner's version uses minors, which allow edge contraction, and the two forbidden minors are again K_5 and K_{3,3}.",
-		},
-		{
-			question:    "Which of these graphs is nonplanar?",
-			correct:     "K_{3,3}",
-			distractors: []string{"C_5", "P_5", "a tree on five vertices"},
-			reason:      "Cycles, paths and trees all embed in the plane; K_{3,3} does not, by Kuratowski's theorem.",
-		},
-	}
-	claims = append(claims, computedGraphClaims("graph.kuratowski")...)
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return kuratowskiProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -69,45 +33,7 @@ func (g *kuratowskiGen) Generate(ctx generator.GeneratorContext) generator.Probl
 
 type minorGen struct{}
 
-func (g *minorGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	claims := []graphClaim{
-		{
-			question:    "A graph H is a minor of G when H can be obtained from G by...",
-			correct:     "deleting vertices, deleting edges and contracting edges",
-			distractors: []string{"subdividing edges only", "adding edges only", "relabelling the vertices"},
-			reason:      "Those three operations define the minor relation; subdivision is the opposite of contraction and is not part of it.",
-		},
-		{
-			question:    "Which operation is NOT part of forming a minor?",
-			correct:     "subdividing an edge",
-			distractors: []string{"deleting a vertex", "deleting an edge", "contracting an edge"},
-			reason:      "A minor only shrinks the graph. Subdivision grows it and is not one of the three minor operations.",
-		},
-		{
-			question:    "Planarity is closed under...",
-			correct:     "taking minors",
-			distractors: []string{"taking subdivisions", "adding vertices", "taking complements"},
-			reason:      "Deleting and contracting edges inside a planar drawing leaves a planar drawing, so every minor of a planar graph is planar.",
-		},
-		{
-			question:    "The Hadwiger conjecture states that a graph with chromatic number k has...",
-			correct:     "a K_k minor",
-			distractors: []string{"a K_k subgraph", "an independent set of size k", "a Hamiltonian cycle"},
-			reason:      "It strengthens the observation that a k-chromatic graph needs enough structure to force a large clique minor.",
-		},
-		{
-			question:    "A graph with a K_5 minor is...",
-			correct:     "nonplanar",
-			distractors: []string{"planar", "bipartite", "a forest"},
-			reason:      "K_5 is not planar and planarity is minor-closed, so a graph that contains K_5 as a minor cannot be planar.",
-		},
-	}
-	claims = append(claims, computedGraphClaims("graph.minor")...)
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
-}
+func (g *minorGen) Generate(ctx generator.GeneratorContext) generator.Problem { return minorProblem() }
 
 // ---------------------------------------------------------------------------
 // Treewidth (numeric)
@@ -554,43 +480,7 @@ func (g *ramseyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type randomThresholdGen struct{}
 
 func (g *randomThresholdGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	claims := []graphClaim{
-		{
-			question:    "In the Erdős–Rényi model G(n,p), each possible edge is present...",
-			correct:     "independently with probability p",
-			distractors: []string{"with probability 1/n", "exactly np times", "only when p is greater than 1/2"},
-			reason:      "G(n,p) draws each of the C(n,2) edges independently, and the resulting edge count is a binomial random variable.",
-		},
-		{
-			question:    "The threshold for G(n,p) to be connected is...",
-			correct:     "p = (log n)/n",
-			distractors: []string{"p = 1/n", "p = 1/sqrt(n)", "p = 1/2"},
-			reason:      "Below (log n)/n isolated vertices survive with high probability; above it the graph is connected whp.",
-		},
-		{
-			question:    "The threshold for a giant component in G(n,p) is...",
-			correct:     "p = 1/n",
-			distractors: []string{"p = (log n)/n", "p = 1/sqrt(n)", "p = 1/2"},
-			reason:      "At p = c/n with c greater than 1 a linear-size component appears; this is the Erdős–Rényi phase transition.",
-		},
-		{
-			question:    "At p = c/n with c greater than 1, the largest component of G(n,p) has...",
-			correct:     "size linear in n",
-			distractors: []string{"size logarithmic in n", "size n", "constant size"},
-			reason:      "A unique giant component of size proportional to n appears above the 1/n threshold.",
-		},
-		{
-			question:    "Just below the connectivity threshold, G(n,p) has...",
-			correct:     "isolated vertices with high probability",
-			distractors: []string{"no isolated vertices", "a Hamiltonian cycle", "constant maximum degree"},
-			reason:      "An isolated vertex is the last obstruction to connectivity, and it survives below (log n)/n.",
-		},
-	}
-	claims = append(claims, computedGraphClaims("graph.random_threshold")...)
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return randomThresholdProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -705,43 +595,7 @@ func (g *tournamentGen) Generate(ctx generator.GeneratorContext) generator.Probl
 type strongConnectivityGen struct{}
 
 func (g *strongConnectivityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	claims := []graphClaim{
-		{
-			question:    "A digraph is strongly connected when...",
-			correct:     "every vertex reaches every other vertex by a directed path",
-			distractors: []string{"it is connected when directions are ignored", "it has no directed cycles", "every vertex has an outgoing edge"},
-			reason:      "Strong connectivity is reachability in both directions for every ordered pair of vertices.",
-		},
-		{
-			question:    "Contracting each strongly connected component of a digraph yields...",
-			correct:     "a DAG",
-			distractors: []string{"a tree", "a complete graph", "a single cycle"},
-			reason:      "Any cycle left between components would have merged them, so the condensation is acyclic.",
-		},
-		{
-			question:    "The condensation of a digraph is...",
-			correct:     "the DAG of its strongly connected components",
-			distractors: []string{"its underlying undirected graph", "its adjacency matrix", "a spanning tree of it"},
-			reason:      "The condensation replaces each strongly connected component by a single vertex and keeps the edges between components.",
-		},
-		{
-			question:    "Strong connectivity is preserved under...",
-			correct:     "reversing every edge",
-			distractors: []string{"deleting any one vertex", "deleting any one edge", "taking the underlying undirected graph"},
-			reason:      "Reversing all edges turns every directed path into a directed path, so reachability is unchanged in both directions.",
-		},
-		{
-			question:    "A digraph has more than one strongly connected component exactly when...",
-			correct:     "its condensation has more than one vertex",
-			distractors: []string{"it has a source", "its underlying graph is disconnected", "it has no directed cycle"},
-			reason:      "The components are the vertices of the condensation, so it is a single vertex precisely when the digraph is strongly connected.",
-		},
-	}
-	claims = append(claims, computedGraphClaims("graph.strong_connectivity")...)
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return strongConnectivityProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -751,43 +605,7 @@ func (g *strongConnectivityGen) Generate(ctx generator.GeneratorContext) generat
 type topologicalSortGen struct{}
 
 func (g *topologicalSortGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	claims := []graphClaim{
-		{
-			question:    "A topological order of a digraph exists exactly when the digraph is...",
-			correct:     "a DAG",
-			distractors: []string{"connected", "strongly connected", "a tree"},
-			reason:      "A directed cycle cannot be ordered, and every acyclic digraph admits at least one topological order.",
-		},
-		{
-			question:    "A topological order lists the vertices so that...",
-			correct:     "every edge goes from an earlier vertex to a later one",
-			distractors: []string{"every edge goes from a later vertex to an earlier one", "adjacent vertices are consecutive", "in-degrees increase along the order"},
-			reason:      "The defining property is that each edge points forward in the order.",
-		},
-		{
-			question:    "Kahn's algorithm repeatedly removes...",
-			correct:     "a vertex of in-degree zero",
-			distractors: []string{"a vertex of maximum degree", "a bridge", "a leaf of the underlying tree"},
-			reason:      "A vertex with no remaining incoming edge can come next; removing it may expose more such vertices.",
-		},
-		{
-			question:    "A digraph has a topological order exactly when it has...",
-			correct:     "no directed cycle",
-			distractors: []string{"no undirected cycle", "no source", "no sink"},
-			reason:      "Acyclicity is necessary and sufficient; the two conditions are the same statement.",
-		},
-		{
-			question:    "When several vertices have in-degree zero, choosing among them...",
-			correct:     "may produce a different topological order",
-			distractors: []string{"is impossible", "breaks the ordering", "must follow the vertex labels"},
-			reason:      "The order is not unique in general, and any of the eligible vertices may be taken next.",
-		},
-	}
-	claims = append(claims, computedGraphClaims("graph.topological_sort")...)
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return topologicalSortProblem()
 }
 
 // ---------------------------------------------------------------------------

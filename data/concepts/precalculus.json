@@ -1,722 +1,722 @@
 [
- {
-  "id": "precalc.func.transformations",
-  "label": "Function transformations: shifts, reflections, stretches",
-  "domain": "precalculus",
-  "subdomain": "precalculus.functions",
-  "grading_type": "multiple_choice",
-  "prerequisites": [
-   "alg.func.concept",
-   "alg.func.notation"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 18.0
-  }
- },
- {
-  "id": "precalc.func.piecewise",
-  "label": "Piecewise-defined functions",
-  "domain": "precalculus",
-  "subdomain": "precalculus.functions",
-  "grading_type": "symbolic",
-  "prerequisites": [
-   "alg.func.concept",
-   "alg.func.evaluate",
-   "alg.ineq.interval"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "precalc.func.arith_combine",
-  "label": "Arithmetic combinations of functions",
-  "domain": "precalculus",
-  "subdomain": "precalculus.functions",
-  "grading_type": "expression",
-  "prerequisites": [
-   "alg.func.notation",
-   "alg.func.evaluate"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 15.0
-  }
- },
- {
-  "id": "precalc.polar.coordinates",
-  "label": "Polar coordinates: conversion between polar and rectangular",
-  "domain": "precalculus",
-  "subdomain": "precalculus.polar",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "trig.basics.radians",
-   "trig.basics.sin_cos_def",
-   "geo.coord.plot"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
- },
- {
-  "id": "precalc.polar.graph",
-  "label": "Graphing polar equations",
-  "domain": "precalculus",
-  "subdomain": "precalculus.polar",
-  "grading_type": "multiple_choice",
-  "prerequisites": [
-   "precalc.polar.coordinates"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 22.0
-  }
- },
- {
-  "id": "precalc.parametric.equations",
-  "label": "Parametric equations: converting between parametric and rectangular",
-  "domain": "precalculus",
-  "subdomain": "precalculus.parametric",
-  "grading_type": "expression",
-  "prerequisites": [
-   "alg.func.evaluate",
-   "alg.func.linear",
-   "trig.basics.sin_cos_def"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
- },
- {
-  "id": "precalc.parametric.graph",
-  "label": "Graphing parametric equations",
-  "domain": "precalculus",
-  "subdomain": "precalculus.parametric",
-  "grading_type": "multiple_choice",
-  "prerequisites": [
-   "precalc.parametric.equations"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
- },
- {
-  "id": "precalc.vector.basics",
-  "label": "Vectors: magnitude and direction",
-  "domain": "precalculus",
-  "subdomain": "precalculus.vectors",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "geo.coord.plot",
-   "trig.basics.sin_cos_def"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 18.0
-  }
- },
- {
-  "id": "precalc.vector.ops",
-  "label": "Vector operations: addition, subtraction, scalar multiplication",
-  "domain": "precalculus",
-  "subdomain": "precalculus.vectors",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "precalc.vector.basics"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 18.0
-  }
- },
- {
-  "id": "precalc.vector.dot",
-  "label": "Dot product and angle between vectors",
-  "domain": "precalculus",
-  "subdomain": "precalculus.vectors",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "precalc.vector.ops",
-   "trig.basics.sin_cos_def"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
- },
- {
-  "id": "precalc.binomial_theorem",
-  "label": "Binomial theorem and Pascal's triangle",
-  "domain": "precalculus",
-  "subdomain": "precalculus.discrete",
-  "grading_type": "expression",
-  "prerequisites": [
-   "alg.poly.mult_mono",
-   "alg.poly.foil"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 20.0
-  }
- },
- {
-  "id": "precalc.induction",
-  "label": "Mathematical induction",
-  "domain": "precalculus",
-  "subdomain": "precalculus.discrete",
-  "grading_type": "symbolic",
-  "prerequisites": [
-   "alg.seq.arithmetic",
-   "alg.seq.geometric"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "precalc.systems.nonlinear",
-  "label": "Nonlinear systems of equations",
-  "domain": "precalculus",
-  "subdomain": "precalculus.systems",
-  "grading_type": "tuple",
-  "prerequisites": [
-   "alg.systems.substitution",
-   "alg.quad.formula"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 25.0
-  }
- },
- {
-  "id": "precalc.partial_fractions",
-  "label": "Partial fraction decomposition",
-  "domain": "precalculus",
-  "subdomain": "precalculus.analytic",
-  "grading_type": "expression",
-  "prerequisites": [
-   "alg.factor.trinomial",
-   "alg.poly.division"
-  ],
-  "mastery_threshold": {
-   "streak": 3,
-   "avg_time_seconds": 120
-  }
- },
- {
-  "id": "precalc.conic.parabola",
-  "label": "Parabolas as conic sections: focus and directrix",
-  "domain": "precalculus",
-  "subdomain": "precalculus.conics",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "alg.func.quad",
-   "alg.quad.complete_square"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 12.0
-  }
- },
- {
-  "id": "precalc.conic.ellipse",
-  "label": "Ellipses: standard form, vertices, and foci",
-  "domain": "precalculus",
-  "subdomain": "precalculus.conics",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "precalc.conic.parabola",
-   "geo.coord.distance"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 12.0
-  }
- },
- {
-  "id": "precalc.conic.hyperbola",
-  "label": "Hyperbolas: standard form and foci",
-  "domain": "precalculus",
-  "subdomain": "precalculus.conics",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "precalc.conic.parabola",
-   "geo.coord.distance"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 12.0
-  }
- },
- {
-  "id": "precalc.seq.arithmetic",
-  "label": "Arithmetic sequences: common difference and nth term",
-  "domain": "precalculus",
-  "subdomain": "precalculus.sequences",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "alg.func.linear"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 12.0
-  }
- },
- {
-  "id": "precalc.seq.geometric",
-  "label": "Geometric sequences: common ratio and nth term",
-  "domain": "precalculus",
-  "subdomain": "precalculus.sequences",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "precalc.seq.arithmetic",
-   "alg.exp.evaluate"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 12.0
-  }
- },
- {
-  "id": "precalc.seq.summation",
-  "label": "Summation notation: evaluating sigma expressions",
-  "domain": "precalculus",
-  "subdomain": "precalculus.sequences",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "precalc.seq.arithmetic"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 12.0
-  }
- },
- {
-  "id": "precalc.series.arithmetic",
-  "label": "Finite arithmetic series and the sum formula",
-  "domain": "precalculus",
-  "subdomain": "precalculus.sequences",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "precalc.seq.summation"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 12.0
-  }
- },
- {
-  "id": "precalc.series.geometric",
-  "label": "Finite geometric series sum",
-  "domain": "precalculus",
-  "subdomain": "precalculus.sequences",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "precalc.seq.geometric"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 12.0
-  }
- },
- {
-  "id": "precalc.series.geom_infinite",
-  "label": "Infinite geometric series convergence and sum",
-  "domain": "precalculus",
-  "subdomain": "precalculus.sequences",
-  "grading_type": "numeric",
-  "prerequisites": [
-   "precalc.series.geometric"
-  ],
-  "mastery_threshold": {
-   "streak": 10,
-   "avg_time_seconds": 12.0
-  }
- },
   {
-   "id": "precalc.func.floor_ceiling",
-   "label": "Floor and ceiling functions",
-   "domain": "precalculus",
-   "subdomain": "precalculus.functions",
-   "grading_type": "symbolic",
-   "prerequisites": [
-    "alg.func.concept",
-    "alg.func.evaluate"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 18.0
-   }
+    "id": "precalc.func.transformations",
+    "label": "Function transformations: shifts, reflections, stretches",
+    "domain": "precalculus",
+    "subdomain": "precalculus.functions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.func.concept",
+      "alg.func.notation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
   },
   {
-   "id": "precalc.func.heaviside",
-   "label": "Heaviside step function",
-   "domain": "precalculus",
-   "subdomain": "precalculus.functions",
-   "grading_type": "symbolic",
-   "prerequisites": [
-    "precalc.func.piecewise",
-    "alg.func.evaluate"
-   ],
-   "mastery_threshold": {
-    "streak": 3,
-    "avg_time_seconds": 120
-   }
-    },
-  {
-   "id": "precalc.poly.remainder_theorem",
-   "label": "The remainder and factor theorems",
-   "domain": "precalculus",
-   "subdomain": "precalculus.polynomials",
-   "grading_type": "numeric",
-   "prerequisites": [
-    "alg.poly.special"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 22.0
-   }
+    "id": "precalc.func.piecewise",
+    "label": "Piecewise-defined functions",
+    "domain": "precalculus",
+    "subdomain": "precalculus.functions",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.func.concept",
+      "alg.func.evaluate",
+      "alg.ineq.interval"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
   },
   {
-   "id": "precalc.poly.rational_roots",
-   "label": "The rational-root theorem",
-   "domain": "precalculus",
-   "subdomain": "precalculus.polynomials",
-   "grading_type": "numeric",
-   "prerequisites": [
-    "precalc.poly.remainder_theorem"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 22.0
-   }
+    "id": "precalc.func.arith_combine",
+    "label": "Arithmetic combinations of functions",
+    "domain": "precalculus",
+    "subdomain": "precalculus.functions",
+    "grading_type": "expression",
+    "prerequisites": [
+      "alg.func.notation",
+      "alg.func.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
   },
   {
-   "id": "precalc.rational.asymptote",
-   "label": "Asymptotes of a rational function",
-   "domain": "precalculus",
-   "subdomain": "precalculus.rational",
-   "grading_type": "numeric",
-   "prerequisites": [
-    "precalc.poly.rational_roots"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 22.0
-   }
+    "id": "precalc.polar.coordinates",
+    "label": "Polar coordinates: conversion between polar and rectangular",
+    "domain": "precalculus",
+    "subdomain": "precalculus.polar",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.basics.radians",
+      "trig.basics.sin_cos_def",
+      "geo.coord.plot"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
   },
   {
-   "id": "precalc.exp.equation",
-   "label": "Solving exponential equations",
-   "domain": "precalculus",
-   "subdomain": "precalculus.exponential",
-   "grading_type": "numeric",
-   "prerequisites": [
-    "alg.exp.concept"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 22.0
-   }
+    "id": "precalc.polar.graph",
+    "label": "Graphing polar equations",
+    "domain": "precalculus",
+    "subdomain": "precalculus.polar",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.polar.coordinates"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
   },
   {
-   "id": "precalc.log.evaluate",
-   "label": "Evaluating logarithms",
-   "domain": "precalculus",
-   "subdomain": "precalculus.exponential",
-   "grading_type": "numeric",
-   "prerequisites": [
-    "alg.log.concept"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 22.0
-   }
+    "id": "precalc.parametric.equations",
+    "label": "Parametric equations: converting between parametric and rectangular",
+    "domain": "precalculus",
+    "subdomain": "precalculus.parametric",
+    "grading_type": "expression",
+    "prerequisites": [
+      "alg.func.evaluate",
+      "alg.func.linear",
+      "trig.basics.sin_cos_def"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
   },
   {
-   "id": "precalc.exp.growth_model",
-   "label": "Exponential growth and decay models",
-   "domain": "precalculus",
-   "subdomain": "precalculus.exponential",
-   "grading_type": "numeric",
-   "prerequisites": [
-    "precalc.exp.equation"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 22.0
-   }
+    "id": "precalc.parametric.graph",
+    "label": "Graphing parametric equations",
+    "domain": "precalculus",
+    "subdomain": "precalculus.parametric",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.parametric.equations"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
   },
   {
-   "id": "precalc.func.inverse_value",
-   "label": "Inverse functions",
-   "domain": "precalculus",
-   "subdomain": "precalculus.functions",
-   "grading_type": "numeric",
-   "prerequisites": [
-    "precalc.func.transformations"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 22.0
-   }
+    "id": "precalc.vector.basics",
+    "label": "Vectors: magnitude and direction",
+    "domain": "precalculus",
+    "subdomain": "precalculus.vectors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.coord.plot",
+      "trig.basics.sin_cos_def"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
   },
   {
-   "id": "precalc.conic.circle_radius",
-   "label": "The circle in general form",
-   "domain": "precalculus",
-   "subdomain": "precalculus.conics",
-   "grading_type": "numeric",
-   "prerequisites": [
-    "alg.poly.special"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 22.0
-   }
-    },
-  {
-   "id": "precalc.poly.zeros_multiplicity",
-   "label": "The multiplicity of a zero",
-   "domain": "precalculus",
-   "subdomain": "precalculus.polynomials",
-   "grading_type": "numeric",
-   "prerequisites": [
-    "precalc.poly.remainder_theorem"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 22.0
-   }
+    "id": "precalc.vector.ops",
+    "label": "Vector operations: addition, subtraction, scalar multiplication",
+    "domain": "precalculus",
+    "subdomain": "precalculus.vectors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.vector.basics"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
   },
   {
-   "id": "precalc.poly.descartes",
-   "label": "Descartes' rule of signs",
-   "domain": "precalculus",
-   "subdomain": "precalculus.polynomials",
-   "grading_type": "numeric",
-   "prerequisites": [
-    "precalc.poly.rational_roots"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 22.0
-   }
+    "id": "precalc.vector.dot",
+    "label": "Dot product and angle between vectors",
+    "domain": "precalculus",
+    "subdomain": "precalculus.vectors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.vector.ops",
+      "trig.basics.sin_cos_def"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
   },
   {
-   "id": "precalc.poly.complex_conjugate",
-   "label": "The conjugate-root theorem",
-   "domain": "precalculus",
-   "subdomain": "precalculus.polynomials",
-   "grading_type": "numeric",
-   "prerequisites": [
-    "precalc.poly.remainder_theorem"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 22.0
-   }
+    "id": "precalc.binomial_theorem",
+    "label": "Binomial theorem and Pascal's triangle",
+    "domain": "precalculus",
+    "subdomain": "precalculus.discrete",
+    "grading_type": "expression",
+    "prerequisites": [
+      "alg.poly.mult_mono",
+      "alg.poly.foil"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
   },
   {
-   "id": "precalc.rational.oblique_asymptote",
-   "label": "Oblique asymptotes",
-   "domain": "precalculus",
-   "subdomain": "precalculus.rational",
-   "grading_type": "numeric",
-   "prerequisites": [
-    "precalc.rational.asymptote"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 22.0
-   }
+    "id": "precalc.induction",
+    "label": "Mathematical induction",
+    "domain": "precalculus",
+    "subdomain": "precalculus.discrete",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.seq.arithmetic",
+      "alg.seq.geometric"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
   },
   {
-   "id": "precalc.log.equation",
-   "label": "Solving logarithmic equations",
-   "domain": "precalculus",
-   "subdomain": "precalculus.exponential",
-   "grading_type": "numeric",
-   "prerequisites": [
-    "precalc.log.evaluate"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 22.0
-   }
+    "id": "precalc.systems.nonlinear",
+    "label": "Nonlinear systems of equations",
+    "domain": "precalculus",
+    "subdomain": "precalculus.systems",
+    "grading_type": "tuple",
+    "prerequisites": [
+      "alg.systems.substitution",
+      "alg.quad.formula"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25.0
+    }
   },
   {
-   "id": "precalc.exp.compound_interest",
-   "label": "Compound interest",
-   "domain": "precalculus",
-   "subdomain": "precalculus.exponential",
-   "grading_type": "numeric",
-   "prerequisites": [
-    "precalc.exp.growth_model"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 22.0
-   }
+    "id": "precalc.partial_fractions",
+    "label": "Partial fraction decomposition",
+    "domain": "precalculus",
+    "subdomain": "precalculus.analytic",
+    "grading_type": "expression",
+    "prerequisites": [
+      "alg.factor.trinomial",
+      "alg.poly.division"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
   },
   {
-   "id": "precalc.func.composition_value",
-   "label": "Composition of functions",
-   "domain": "precalculus",
-   "subdomain": "precalculus.functions",
-   "grading_type": "numeric",
-   "prerequisites": [
-    "precalc.func.inverse_value"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 22.0
-   }
+    "id": "precalc.conic.parabola",
+    "label": "Parabolas as conic sections: focus and directrix",
+    "domain": "precalculus",
+    "subdomain": "precalculus.conics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.func.quad",
+      "alg.quad.complete_square"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
+    }
   },
   {
-   "id": "precalc.analytic.distance",
-   "label": "The distance formula",
-   "domain": "precalculus",
-   "subdomain": "precalculus.analytic",
-   "grading_type": "numeric",
-   "prerequisites": [
-    "arith.sqrt.perfect"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 22.0
-   }
+    "id": "precalc.conic.ellipse",
+    "label": "Ellipses: standard form, vertices, and foci",
+    "domain": "precalculus",
+    "subdomain": "precalculus.conics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.conic.parabola",
+      "geo.coord.distance"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
+    }
   },
   {
-   "id": "precalc.exp.continuous",
-   "label": "Continuous compounding",
-   "domain": "precalculus",
-   "subdomain": "precalculus.exponential",
-   "grading_type": "multiple_choice",
-   "prerequisites": [
-    "precalc.exp.compound_interest"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 22.0
-   }
+    "id": "precalc.conic.hyperbola",
+    "label": "Hyperbolas: standard form and foci",
+    "domain": "precalculus",
+    "subdomain": "precalculus.conics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.conic.parabola",
+      "geo.coord.distance"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
+    }
   },
   {
-   "id": "precalc.exp.cooling",
-   "label": "Newton's law of cooling",
-   "domain": "precalculus",
-   "subdomain": "precalculus.exponential",
-   "grading_type": "multiple_choice",
-   "prerequisites": [
-    "precalc.exp.growth_model"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 22.0
-   }
+    "id": "precalc.seq.arithmetic",
+    "label": "Arithmetic sequences: common difference and nth term",
+    "domain": "precalculus",
+    "subdomain": "precalculus.sequences",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.func.linear"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
+    }
   },
   {
-   "id": "precalc.log.scale",
-   "label": "Logarithmic scales",
-   "domain": "precalculus",
-   "subdomain": "precalculus.exponential",
-   "grading_type": "numeric",
-   "prerequisites": [
-    "precalc.log.evaluate"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 22.0
-   }
+    "id": "precalc.seq.geometric",
+    "label": "Geometric sequences: common ratio and nth term",
+    "domain": "precalculus",
+    "subdomain": "precalculus.sequences",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.seq.arithmetic",
+      "alg.exp.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
+    }
   },
   {
-   "id": "precalc.poly.inequality",
-   "label": "Polynomial and rational inequalities",
-   "domain": "precalculus",
-   "subdomain": "precalculus.polynomials",
-   "grading_type": "numeric",
-   "prerequisites": [
-    "precalc.poly.zeros_multiplicity"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 24.0
-   }
+    "id": "precalc.seq.summation",
+    "label": "Summation notation: evaluating sigma expressions",
+    "domain": "precalculus",
+    "subdomain": "precalculus.sequences",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.seq.arithmetic"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
+    }
   },
   {
-   "id": "precalc.rational.holes",
-   "label": "Holes in rational graphs",
-   "domain": "precalculus",
-   "subdomain": "precalculus.rational",
-   "grading_type": "numeric",
-   "prerequisites": [
-    "precalc.rational.asymptote"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 24.0
-   }
+    "id": "precalc.series.arithmetic",
+    "label": "Finite arithmetic series and the sum formula",
+    "domain": "precalculus",
+    "subdomain": "precalculus.sequences",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.seq.summation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
+    }
   },
   {
-   "id": "precalc.conic.general",
-   "label": "Classifying a general conic",
-   "domain": "precalculus",
-   "subdomain": "precalculus.conics",
-   "grading_type": "numeric",
-   "prerequisites": [
-    "precalc.conic.parabola"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 24.0
-   }
+    "id": "precalc.series.geometric",
+    "label": "Finite geometric series sum",
+    "domain": "precalculus",
+    "subdomain": "precalculus.sequences",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.seq.geometric"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
+    }
   },
   {
-   "id": "precalc.parametric.projectile",
-   "label": "Projectile motion",
-   "domain": "precalculus",
-   "subdomain": "precalculus.parametric",
-   "grading_type": "numeric",
-   "prerequisites": [
-    "precalc.parametric.equations"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 24.0
-   }
+    "id": "precalc.series.geom_infinite",
+    "label": "Infinite geometric series convergence and sum",
+    "domain": "precalculus",
+    "subdomain": "precalculus.sequences",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.series.geometric"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
+    }
   },
   {
-   "id": "precalc.vector.resultant",
-   "label": "Resultant vectors",
-   "domain": "precalculus",
-   "subdomain": "precalculus.vectors",
-   "grading_type": "numeric",
-   "prerequisites": [
-    "precalc.vector.ops"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 22.0
-   }
+    "id": "precalc.func.floor_ceiling",
+    "label": "Floor and ceiling functions",
+    "domain": "precalculus",
+    "subdomain": "precalculus.functions",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "alg.func.concept",
+      "alg.func.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
   },
   {
-   "id": "precalc.func.decomposition",
-   "label": "Decomposing a function",
-   "domain": "precalculus",
-   "subdomain": "precalculus.functions",
-   "grading_type": "expression",
-   "prerequisites": [
-    "precalc.func.composition_value"
-   ],
-   "mastery_threshold": {
-    "streak": 10,
-    "avg_time_seconds": 22.0
-   }
+    "id": "precalc.func.heaviside",
+    "label": "Heaviside step function",
+    "domain": "precalculus",
+    "subdomain": "precalculus.functions",
+    "grading_type": "symbolic",
+    "prerequisites": [
+      "precalc.func.piecewise",
+      "alg.func.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 3,
+      "avg_time_seconds": 120
+    }
+  },
+  {
+    "id": "precalc.poly.remainder_theorem",
+    "label": "The remainder and factor theorems",
+    "domain": "precalculus",
+    "subdomain": "precalculus.polynomials",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.poly.special"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "precalc.poly.rational_roots",
+    "label": "The rational-root theorem",
+    "domain": "precalculus",
+    "subdomain": "precalculus.polynomials",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.poly.remainder_theorem"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "precalc.rational.asymptote",
+    "label": "Asymptotes of a rational function",
+    "domain": "precalculus",
+    "subdomain": "precalculus.rational",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.poly.rational_roots"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "precalc.exp.equation",
+    "label": "Solving exponential equations",
+    "domain": "precalculus",
+    "subdomain": "precalculus.exponential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.exp.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "precalc.log.evaluate",
+    "label": "Evaluating logarithms",
+    "domain": "precalculus",
+    "subdomain": "precalculus.exponential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.log.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "precalc.exp.growth_model",
+    "label": "Exponential growth and decay models",
+    "domain": "precalculus",
+    "subdomain": "precalculus.exponential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.exp.equation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "precalc.func.inverse_value",
+    "label": "Inverse functions",
+    "domain": "precalculus",
+    "subdomain": "precalculus.functions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.func.transformations"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "precalc.conic.circle_radius",
+    "label": "The circle in general form",
+    "domain": "precalculus",
+    "subdomain": "precalculus.conics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.poly.special"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "precalc.poly.zeros_multiplicity",
+    "label": "The multiplicity of a zero",
+    "domain": "precalculus",
+    "subdomain": "precalculus.polynomials",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.poly.remainder_theorem"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "precalc.poly.descartes",
+    "label": "Descartes' rule of signs",
+    "domain": "precalculus",
+    "subdomain": "precalculus.polynomials",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.poly.rational_roots"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "precalc.poly.complex_conjugate",
+    "label": "The conjugate-root theorem",
+    "domain": "precalculus",
+    "subdomain": "precalculus.polynomials",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.poly.remainder_theorem"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "precalc.rational.oblique_asymptote",
+    "label": "Oblique asymptotes",
+    "domain": "precalculus",
+    "subdomain": "precalculus.rational",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.rational.asymptote"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "precalc.log.equation",
+    "label": "Solving logarithmic equations",
+    "domain": "precalculus",
+    "subdomain": "precalculus.exponential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.log.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "precalc.exp.compound_interest",
+    "label": "Compound interest",
+    "domain": "precalculus",
+    "subdomain": "precalculus.exponential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.exp.growth_model"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "precalc.func.composition_value",
+    "label": "Composition of functions",
+    "domain": "precalculus",
+    "subdomain": "precalculus.functions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.func.inverse_value"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "precalc.analytic.distance",
+    "label": "The distance formula",
+    "domain": "precalculus",
+    "subdomain": "precalculus.analytic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.sqrt.perfect"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "precalc.exp.continuous",
+    "label": "Continuous compounding",
+    "domain": "precalculus",
+    "subdomain": "precalculus.exponential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.exp.compound_interest"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "precalc.exp.cooling",
+    "label": "Newton's law of cooling",
+    "domain": "precalculus",
+    "subdomain": "precalculus.exponential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.exp.growth_model"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "precalc.log.scale",
+    "label": "Logarithmic scales",
+    "domain": "precalculus",
+    "subdomain": "precalculus.exponential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.log.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "precalc.poly.inequality",
+    "label": "Polynomial and rational inequalities",
+    "domain": "precalculus",
+    "subdomain": "precalculus.polynomials",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.poly.zeros_multiplicity"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "precalc.rational.holes",
+    "label": "Holes in rational graphs",
+    "domain": "precalculus",
+    "subdomain": "precalculus.rational",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.rational.asymptote"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "precalc.conic.general",
+    "label": "Classifying a general conic",
+    "domain": "precalculus",
+    "subdomain": "precalculus.conics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.conic.parabola"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "precalc.parametric.projectile",
+    "label": "Projectile motion",
+    "domain": "precalculus",
+    "subdomain": "precalculus.parametric",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.parametric.equations"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "precalc.vector.resultant",
+    "label": "Resultant vectors",
+    "domain": "precalculus",
+    "subdomain": "precalculus.vectors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.vector.ops"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "precalc.func.decomposition",
+    "label": "Decomposing a function",
+    "domain": "precalculus",
+    "subdomain": "precalculus.functions",
+    "grading_type": "expression",
+    "prerequisites": [
+      "precalc.func.composition_value"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
   }
 ]

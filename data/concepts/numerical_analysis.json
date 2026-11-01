@@ -16,7 +16,7 @@
     "label": "Floating-point roundoff and machine epsilon",
     "domain": "numerical_analysis",
     "subdomain": "numerical_analysis.errors",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "numa.errors.absolute"
     ],
@@ -58,7 +58,7 @@
     "label": "Stability of an algorithm",
     "domain": "numerical_analysis",
     "subdomain": "numerical_analysis.errors",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "numa.errors.conditioning"
     ],
@@ -72,7 +72,7 @@
     "label": "Taylor truncation error",
     "domain": "numerical_analysis",
     "subdomain": "numerical_analysis.errors",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "numa.errors.absolute"
     ],
@@ -143,7 +143,7 @@
     "label": "The method of false position",
     "domain": "numerical_analysis",
     "subdomain": "numerical_analysis.roots",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "numa.roots.bisection"
     ],
@@ -171,7 +171,7 @@
     "label": "Multiple roots and modified Newton",
     "domain": "numerical_analysis",
     "subdomain": "numerical_analysis.roots",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "numa.roots.newton"
     ],
@@ -185,7 +185,7 @@
     "label": "Bracketing versus open methods",
     "domain": "numerical_analysis",
     "subdomain": "numerical_analysis.roots",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "numa.roots.bisection",
       "numa.roots.secant"
@@ -245,7 +245,7 @@
     "label": "The interpolation error",
     "domain": "numerical_analysis",
     "subdomain": "numerical_analysis.interp",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "numa.interp.lagrange"
     ],
@@ -259,7 +259,7 @@
     "label": "Chebyshev nodes",
     "domain": "numerical_analysis",
     "subdomain": "numerical_analysis.interp",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "numa.interp.error"
     ],
@@ -273,7 +273,7 @@
     "label": "Cubic splines",
     "domain": "numerical_analysis",
     "subdomain": "numerical_analysis.interp",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "numa.interp.divided_differences"
     ],
@@ -315,7 +315,7 @@
     "label": "Orthogonal polynomials",
     "domain": "numerical_analysis",
     "subdomain": "numerical_analysis.interp",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "numa.interp.least_squares"
     ],
@@ -329,7 +329,7 @@
     "label": "Extrapolation and its dangers",
     "domain": "numerical_analysis",
     "subdomain": "numerical_analysis.interp",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "numa.interp.error"
     ],
@@ -399,7 +399,7 @@
     "label": "Error bounds for quadrature",
     "domain": "numerical_analysis",
     "subdomain": "numerical_analysis.integration",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "numa.integration.simpson"
     ],
@@ -413,7 +413,7 @@
     "label": "Romberg integration",
     "domain": "numerical_analysis",
     "subdomain": "numerical_analysis.integration",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "numa.integration.composite"
     ],
@@ -441,7 +441,7 @@
     "label": "Adaptive quadrature",
     "domain": "numerical_analysis",
     "subdomain": "numerical_analysis.integration",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "numa.integration.error"
     ],
@@ -455,7 +455,7 @@
     "label": "Integrating to infinity",
     "domain": "numerical_analysis",
     "subdomain": "numerical_analysis.integration",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "numa.integration.composite"
     ],
@@ -483,7 +483,7 @@
     "label": "Partial pivoting",
     "domain": "numerical_analysis",
     "subdomain": "numerical_analysis.linear",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "numa.linear.elimination"
     ],
@@ -525,7 +525,7 @@
     "label": "The Gauss-Seidel method",
     "domain": "numerical_analysis",
     "subdomain": "numerical_analysis.linear",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "numa.linear.jacobi"
     ],
@@ -553,7 +553,7 @@
     "label": "Least squares by QR",
     "domain": "numerical_analysis",
     "subdomain": "numerical_analysis.linear",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "numa.interp.normal_equations",
       "linalg.decomp.qr"

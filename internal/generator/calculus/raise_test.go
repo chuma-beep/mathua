@@ -27,14 +27,9 @@ import (
 
 var calcRaiseIDs = []string{
 	"calc.limit.intermediate_value",
-	"calc.limit.limsup",
-	"calc.limit.oscillation",
-	"calc.deriv.inverse_hyperbolic",
 	"calc.deriv.mvt_applications",
 	"calc.deriv.newton_convergence",
-	"calc.deriv.convex_jensen",
 	"calc.deriv.marginal_analysis",
-	"calc.deriv.epsilon_delta_deriv",
 	"calc.series.operations",
 	"calc.series.binomial",
 	"calc.series.cauchy_product",
@@ -58,19 +53,7 @@ var calcRaiseIDs = []string{
 	"calc.vec.identities",
 }
 
-var calcRaiseMCIDs = []string{
-	"calc.limit.limsup",
-	"calc.limit.oscillation",
-	"calc.deriv.inverse_hyperbolic",
-	"calc.deriv.convex_jensen",
-	"calc.deriv.epsilon_delta_deriv",
-	"calc.series.operations",
-	"calc.series.p_series",
-	"calc.series.dirichlet_test",
-	"calc.multi.lagrange_two",
-	"calc.multi.iterated_limits",
-	"calc.vec.identities",
-}
+var calcRaiseMCIDs = []string{}
 
 var calcRaiseNumericIDs = []string{
 	"calc.limit.intermediate_value",
@@ -143,6 +126,9 @@ func TestRaiseMultipleChoiceRejectsEveryDistractor(t *testing.T) {
 	router := grader.NewRouter()
 	defer router.Close()
 
+	if len(calcRaiseMCIDs) == 0 {
+		t.Skip("the raise pool now serves computed count problems")
+	}
 	for _, id := range calcRaiseMCIDs {
 		if types[id] != "multiple_choice" {
 			t.Fatalf("%s: expected multiple_choice, corpus says %q", id, types[id])

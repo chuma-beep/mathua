@@ -47,7 +47,7 @@
     "label": "Standard form of a linear equation Ax + By = C",
     "domain": "algebra",
     "subdomain": "algebra.linear",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "alg.linear.slope_intercept"
     ],
@@ -175,7 +175,7 @@
     "label": "Graph linear inequalities in two variables",
     "domain": "algebra",
     "subdomain": "algebra.inequalities",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "alg.ineq.compound",
       "alg.linear.graph"
@@ -315,7 +315,7 @@
   },
   {
     "id": "alg.factor.trinomial",
-    "label": "Factor trinomials of the form x\u00b2 + bx + c",
+    "label": "Factor trinomials of the form x² + bx + c",
     "domain": "algebra",
     "subdomain": "algebra.factoring",
     "grading_type": "expression",
@@ -345,7 +345,7 @@
   },
   {
     "id": "alg.factor.ac_method",
-    "label": "Factor trinomials ax\u00b2 + bx + c using AC method",
+    "label": "Factor trinomials ax² + bx + c using AC method",
     "domain": "algebra",
     "subdomain": "algebra.factoring",
     "grading_type": "expression",
@@ -406,7 +406,7 @@
     "label": "Discriminant: number of real solutions",
     "domain": "algebra",
     "subdomain": "algebra.quadratics",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "alg.quad.formula"
     ],
@@ -491,7 +491,7 @@
     "label": "Linear functions and their graphs",
     "domain": "algebra",
     "subdomain": "algebra.functions",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "alg.func.evaluate",
       "alg.linear.graph"
@@ -550,7 +550,7 @@
     "label": "What is a logarithm",
     "domain": "algebra",
     "subdomain": "algebra.logarithms",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "alg.exp.evaluate"
     ],
@@ -649,7 +649,7 @@
     "label": "What is a monomial",
     "domain": "algebra",
     "subdomain": "algebra.polynomials",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "prealg.expr.like_terms"
     ],
@@ -663,7 +663,7 @@
     "label": "Interval notation",
     "domain": "algebra",
     "subdomain": "algebra.inequalities",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "alg.ineq.multi_step"
     ],
@@ -1364,7 +1364,7 @@
     "label": "End behavior of a polynomial",
     "domain": "algebra",
     "subdomain": "algebra.polynomials",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "alg.poly.concept"
     ],
@@ -1480,7 +1480,7 @@
     "label": "Classifying a conic from its equation",
     "domain": "algebra",
     "subdomain": "algebra.conics",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "alg.conic.circle",
       "alg.conic.ellipse",
@@ -1511,7 +1511,7 @@
     "label": "Transformations of graphs",
     "domain": "algebra",
     "subdomain": "algebra.functions",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "alg.func.graph_analysis"
     ],
@@ -1525,7 +1525,7 @@
     "label": "Domain and range of an inverse function",
     "domain": "algebra",
     "subdomain": "algebra.functions",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "alg.func.inverse"
     ],
@@ -1567,7 +1567,7 @@
     "label": "Graphs of logarithmic functions",
     "domain": "algebra",
     "subdomain": "algebra.logarithms",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "alg.log.evaluate"
     ],
@@ -1693,7 +1693,7 @@
     "label": "Solving systems with matrices",
     "domain": "algebra",
     "subdomain": "algebra.systems",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "alg.systems.gaussian"
     ],
@@ -1735,7 +1735,7 @@
     "label": "Proof by induction",
     "domain": "algebra",
     "subdomain": "algebra.sequences",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "alg.seq.sum_geo"
     ],

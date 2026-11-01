@@ -4,7 +4,7 @@
     "label": "Radians and degrees conversion",
     "domain": "trigonometry",
     "subdomain": "trigonometry.basics",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "geo.basic.angle_measure",
       "frac.basics.concept"
@@ -20,7 +20,7 @@
     "label": "Unit circle: sine and cosine of standard angles",
     "domain": "trigonometry",
     "subdomain": "trigonometry.basics",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "trig.basics.radians",
       "geo.coord.plot"
@@ -79,7 +79,7 @@
   },
   {
     "id": "trig.ident.pythagorean",
-    "label": "Pythagorean identity sin\u00b2\u03b8 + cos\u00b2\u03b8 = 1",
+    "label": "Pythagorean identity sin²θ + cos²θ = 1",
     "domain": "trigonometry",
     "subdomain": "trigonometry.identities",
     "grading_type": "numeric",
@@ -94,10 +94,10 @@
   },
   {
     "id": "trig.basics.special_angles",
-    "label": "Exact values for 30\u00b0, 45\u00b0, 60\u00b0",
+    "label": "Exact values for 30°, 45°, 60°",
     "domain": "trigonometry",
     "subdomain": "trigonometry.basics",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "trig.basics.unit_circle"
     ],
@@ -111,7 +111,7 @@
     "label": "Reference angles and quadrants",
     "domain": "trigonometry",
     "subdomain": "trigonometry.basics",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "trig.basics.special_angles"
     ],
@@ -125,7 +125,7 @@
     "label": "Graph of sine function",
     "domain": "trigonometry",
     "subdomain": "trigonometry.graphs",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "trig.basics.reference_angle",
       "alg.func.concept"
@@ -140,7 +140,7 @@
     "label": "Graph of cosine function",
     "domain": "trigonometry",
     "subdomain": "trigonometry.graphs",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "trig.graph.sin"
     ],
@@ -168,7 +168,7 @@
     "label": "Inverse trig functions",
     "domain": "trigonometry",
     "subdomain": "trigonometry.advanced",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "trig.graph.sin",
       "alg.func.notation"
@@ -413,7 +413,7 @@
     "label": "Arcsine function: inverse properties and calculus",
     "domain": "trigonometry",
     "subdomain": "trigonometry.functions",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "trig.adv.inverse",
       "trig.func.sine"
@@ -428,7 +428,7 @@
     "label": "Arccosine function: inverse properties and calculus",
     "domain": "trigonometry",
     "subdomain": "trigonometry.functions",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "trig.func.arcsine"
     ],
@@ -442,7 +442,7 @@
     "label": "Arctangent function: asymptotes and calculus",
     "domain": "trigonometry",
     "subdomain": "trigonometry.functions",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "trig.adv.arctan",
       "trig.func.tangent"
@@ -457,7 +457,7 @@
     "label": "Arccotangent function: asymptotes and calculus",
     "domain": "trigonometry",
     "subdomain": "trigonometry.functions",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "trig.func.arctangent"
     ],
@@ -740,7 +740,7 @@
     "label": "Product-to-sum formulas",
     "domain": "trigonometry",
     "subdomain": "trigonometry.identities",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "trig.ident.sum_diff",
       "trig.ident.identities"
@@ -755,7 +755,7 @@
     "label": "Sum-to-product formulas",
     "domain": "trigonometry",
     "subdomain": "trigonometry.identities",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "trig.ident.sum_diff",
       "trig.ident.identities"
@@ -800,7 +800,7 @@
     "label": "Variants of the Pythagorean identity",
     "domain": "trigonometry",
     "subdomain": "trigonometry.identities",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "trig.ident.pythagorean",
       "trig.func.secant"
@@ -815,7 +815,7 @@
     "label": "General solutions of trigonometric equations",
     "domain": "trigonometry",
     "subdomain": "trigonometry.identities",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "trig.eq.basic",
       "trig.graph.period"
@@ -845,7 +845,7 @@
     "label": "Trigonometric inequalities on an interval",
     "domain": "trigonometry",
     "subdomain": "trigonometry.identities",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "trig.ineq.basic",
       "trig.graph.sin"
@@ -860,7 +860,7 @@
     "label": "Graph of the tangent function",
     "domain": "trigonometry",
     "subdomain": "trigonometry.graphs",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "trig.func.tangent",
       "trig.graph.period"
@@ -875,7 +875,7 @@
     "label": "Transformations of sinusoidal graphs",
     "domain": "trigonometry",
     "subdomain": "trigonometry.graphs",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "trig.graph.period",
       "trig.graph.amplitude"
@@ -890,7 +890,7 @@
     "label": "Graphs of inverse trigonometric functions",
     "domain": "trigonometry",
     "subdomain": "trigonometry.graphs",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "trig.adv.inverse",
       "trig.func.arcsine"
@@ -905,7 +905,7 @@
     "label": "Graphs of the reciprocal trigonometric functions",
     "domain": "trigonometry",
     "subdomain": "trigonometry.graphs",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "trig.func.secant",
       "trig.func.cosecant"
@@ -920,7 +920,7 @@
     "label": "Hyperbolic identities",
     "domain": "trigonometry",
     "subdomain": "trigonometry.hyperbolic",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "trig.hyperbolic.sinh_cosh",
       "trig.ident.pythagorean"
@@ -950,7 +950,7 @@
     "label": "Derivatives of hyperbolic functions",
     "domain": "trigonometry",
     "subdomain": "trigonometry.hyperbolic",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "trig.hyperbolic.sinh_cosh",
       "trig.hyperbolic.tanh_coth"

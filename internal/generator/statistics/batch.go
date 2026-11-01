@@ -53,48 +53,7 @@ func registerBatch(reg *generator.Registry) {
 type hypothesisGen struct{}
 
 func (g *hypothesisGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "The null hypothesis is...",
-			correct:     "the default claim the test looks for evidence against",
-			distractors: []string{"the claim the researcher hopes to prove", "always identical to the alternative", "the observed effect size"},
-			reason:      "The null is the baseline; a small p-value is evidence against it, not proof that the alternative is true.",
-		},
-		{
-			question:    "The alternative hypothesis is...",
-			correct:     "the claim accepted when the null is rejected",
-			distractors: []string{"the default claim", "always two-sided", "the significance level"},
-			reason:      "The alternative states the departure the test has power to detect, and it is chosen before seeing the data.",
-		},
-		{
-			question:    "A one-sided test is appropriate when...",
-			correct:     "only departures in one direction matter",
-			distractors: []string{"both directions matter equally", "the sample is small", "the population is normal"},
-			reason:      "Putting all the rejection region in one tail buys power there, at the cost of ignoring the other direction.",
-		},
-		{
-			question:    "The significance level alpha is...",
-			correct:     "the maximum Type I error rate the test allows",
-			distractors: []string{"the probability the null is true", "the power of the test", "the observed p-value"},
-			reason:      "Alpha is fixed before the data arrive and caps the chance of rejecting a true null hypothesis.",
-		},
-		{
-			question:    "The test statistic measures...",
-			correct:     "how far the estimate lies from the null value in standard-error units",
-			distractors: []string{"the probability the null is true", "the sample mean only", "the size of the population"},
-			reason:      "A z or t statistic standardises the gap between the estimate and the null value, so it can be compared with a reference distribution.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return hypothesisProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -245,48 +204,7 @@ func (g *tTestGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type pValueGen struct{}
 
 func (g *pValueGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "A p-value is...",
-			correct:     "the probability, under the null, of data at least as extreme as observed",
-			distractors: []string{"the probability the null is true", "the probability the alternative is true", "the size of the effect"},
-			reason:      "The p-value is computed assuming the null is true; it measures compatibility with the null, not the chance that the null is true.",
-		},
-		{
-			question:    "A result with p = 0.03 tested at alpha = 0.05 is...",
-			correct:     "statistically significant",
-			distractors: []string{"not significant", "proof that the null is true", "a Type II error"},
-			reason:      "A p-value below alpha falls in the rejection region, so the null is rejected at that level.",
-		},
-		{
-			question:    "A small p-value means...",
-			correct:     "the observed data are unlikely under the null",
-			distractors: []string{"the null is certainly false", "the effect is necessarily large", "the sample is biased"},
-			reason:      "Smallness is evidence against the null, but a tiny effect in a large sample can also produce a small p-value.",
-		},
-		{
-			question:    "A two-sided p-value counts...",
-			correct:     "both tails of the null distribution",
-			distractors: []string{"only the upper tail", "only the lower tail", "the whole distribution"},
-			reason:      "A two-sided alternative treats departures in either direction as evidence, so both tails contribute.",
-		},
-		{
-			question:    "A result with p = 0.20 tested at alpha = 0.05 means...",
-			correct:     "fail to reject the null",
-			distractors: []string{"reject the null", "the alternative is proven", "the test is invalid"},
-			reason:      "A p-value above alpha leaves the null in place; failing to reject is not the same as proving the null.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return pValueProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -296,48 +214,7 @@ func (g *pValueGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type typeErrorGen struct{}
 
 func (g *typeErrorGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "A Type I error is...",
-			correct:     "rejecting a true null hypothesis",
-			distractors: []string{"failing to reject a false null", "accepting a true null", "rejecting a false null"},
-			reason:      "The Type I error is the false alarm: the null is true but the test rejects it, at rate alpha.",
-		},
-		{
-			question:    "A Type II error is...",
-			correct:     "failing to reject a false null hypothesis",
-			distractors: []string{"rejecting a true null", "accepting a true null", "rejecting a false null"},
-			reason:      "The Type II error is the missed detection: the null is false but the test does not reject it.",
-		},
-		{
-			question:    "The power of a test is...",
-			correct:     "the probability of rejecting a false null",
-			distractors: []string{"the probability of a Type I error", "the significance level", "the probability the null is true"},
-			reason:      "Power is one minus the Type II error rate, so it measures the chance of detecting a real effect.",
-		},
-		{
-			question:    "Lowering alpha while holding the sample size fixed...",
-			correct:     "reduces Type I errors and raises Type II errors",
-			distractors: []string{"reduces both kinds of error", "raises both kinds of error", "has no effect on either"},
-			reason:      "A stricter threshold makes false alarms rarer but missed detections more common, unless the sample grows.",
-		},
-		{
-			question:    "Power increases when...",
-			correct:     "the sample size increases",
-			distractors: []string{"alpha decreases", "the effect size decreases", "the variance increases"},
-			reason:      "More data shrink the standard error, so a real effect is easier to distinguish from noise.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return typeErrorProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -455,8 +332,9 @@ func (g *anovaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		}
 		parts[i] = strings.Join(cells, ",")
 	}
+	question := fmt.Sprintf("A one-way ANOVA compares the groups %s (each semicolon separates a group). What is the F statistic? (enter a number or decimal)", strings.Join(parts, "; "))
 	return generator.Problem{
-		Question:    c.question,
+		Question:    question,
 		Answer:      c.answer,
 		Explanation: c.reason,
 		Facts: map[string]string{
@@ -590,46 +468,5 @@ func (g *histogramGen) Generate(ctx generator.GeneratorContext) generator.Proble
 type nonparametricGen struct{}
 
 func (g *nonparametricGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "The sign test uses which distribution under the null hypothesis?",
-			correct:     "the binomial distribution with p = 1/2",
-			distractors: []string{"the normal distribution with mean zero", "the chi-square distribution with n - 1 degrees of freedom", "the Poisson distribution with mean n"},
-			reason:      "Under the null, each pair is equally likely to favour either side, so the number of positive signs is binomial with p = 1/2.",
-		},
-		{
-			question:    "The sign test ignores...",
-			correct:     "the magnitudes of the differences, using only their signs",
-			distractors: []string{"the signs of the differences", "the number of pairs", "whether the observations are paired"},
-			reason:      "Discarding magnitudes makes the test robust to outliers but less powerful when the magnitudes carry information.",
-		},
-		{
-			question:    "A rank-based test is preferred when...",
-			correct:     "the data are ordinal or clearly non-normal",
-			distractors: []string{"the data are exactly normal", "the sample is enormous", "the variances are known"},
-			reason:      "Rank tests do not assume a normal population, so they are the safer choice when that assumption is doubtful.",
-		},
-		{
-			question:    "The Wilcoxon signed-rank test differs from the sign test by...",
-			correct:     "using the ranks of the absolute differences",
-			distractors: []string{"using only the signs", "ignoring the pairing", "requiring a normal population"},
-			reason:      "Ranks keep some information about magnitude while remaining robust, which usually gives more power than signs alone.",
-		},
-		{
-			question:    "A nonparametric test typically has...",
-			correct:     "less power when its parametric assumptions hold",
-			distractors: []string{"more power in every case", "no null hypothesis", "no test statistic"},
-			reason:      "The trade for fewer assumptions is a loss of efficiency when the parametric model is actually correct.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return nonparametricProblem()
 }

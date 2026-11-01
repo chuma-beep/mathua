@@ -705,7 +705,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "alg.linear.standard_form",
     "label": "Standard form of a linear equation Ax + By = C",
     "lesson_credit": "orcca",
@@ -837,7 +837,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "alg.ineq.two_var",
     "label": "Graph linear inequalities in two variables",
     "lesson_credit": "orcca",
@@ -1073,7 +1073,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "alg.quad.discriminant",
     "label": "Discriminant: number of real solutions",
     "lesson_credit": "orcca",
@@ -1161,7 +1161,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "alg.func.linear",
     "label": "Linear functions and their graphs",
     "lesson_credit": "orcca",
@@ -1222,7 +1222,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "alg.log.concept",
     "label": "What is a logarithm",
     "mastery_threshold": {
@@ -1322,7 +1322,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "alg.poly.monomial",
     "label": "What is a monomial",
     "mastery_threshold": {
@@ -1336,7 +1336,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "alg.ineq.interval",
     "label": "Interval notation",
     "mastery_threshold": {
@@ -2037,7 +2037,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "alg.poly.end_behavior",
     "label": "End behavior of a polynomial",
     "mastery_threshold": {
@@ -2153,7 +2153,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "alg.conic.classify",
     "label": "Classifying a conic from its equation",
     "mastery_threshold": {
@@ -2184,7 +2184,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "alg.func.transformations",
     "label": "Transformations of graphs",
     "mastery_threshold": {
@@ -2198,7 +2198,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "alg.func.inverse_domain",
     "label": "Domain and range of an inverse function",
     "mastery_threshold": {
@@ -2240,7 +2240,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "alg.log.graph",
     "label": "Graphs of logarithmic functions",
     "mastery_threshold": {
@@ -2366,7 +2366,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "alg.systems.matrices",
     "label": "Solving systems with matrices",
     "mastery_threshold": {
@@ -2408,7 +2408,7 @@
   },
   {
     "domain": "algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "alg.seq.induction",
     "label": "Proof by induction",
     "mastery_threshold": {
@@ -2830,7 +2830,7 @@
   },
   {
     "domain": "arithmetic",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "arith.factor.prime",
     "label": "Identify prime numbers",
     "mastery_threshold": {
@@ -2887,7 +2887,7 @@
   },
   {
     "domain": "arithmetic",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "arith.factor.composite",
     "label": "Identify composite numbers",
     "mastery_threshold": {
@@ -3214,7 +3214,7 @@
   },
   {
     "domain": "arithmetic",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "arith.div.zero",
     "label": "Division by zero",
     "mastery_threshold": {
@@ -3391,7 +3391,7 @@
   },
   {
     "domain": "calc1",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "calc.limit.continuity",
     "label": "Continuity and types of discontinuity",
     "mastery_threshold": {
@@ -3698,7 +3698,7 @@
   },
   {
     "domain": "calc1",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "calc.limit.little_o",
     "label": "Little-o notation",
     "mastery_threshold": {
@@ -3755,7 +3755,7 @@
   },
   {
     "domain": "calc1",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "calc.limit.discontinuity",
     "label": "Types of discontinuities",
     "mastery_threshold": {
@@ -3896,7 +3896,7 @@
   },
   {
     "domain": "calc1",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "calc.seq.convergence",
     "label": "Convergent and divergent sequences",
     "mastery_threshold": {
@@ -4310,7 +4310,7 @@
   },
   {
     "domain": "calc1",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "calc.limit.limsup",
     "label": "Limit superior and inferior",
     "mastery_threshold": {
@@ -4324,7 +4324,7 @@
   },
   {
     "domain": "calc1",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "calc.limit.oscillation",
     "label": "Oscillation of a function",
     "mastery_threshold": {
@@ -4338,7 +4338,7 @@
   },
   {
     "domain": "calc1",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "calc.deriv.inverse_hyperbolic",
     "label": "Derivatives of inverse hyperbolic functions",
     "mastery_threshold": {
@@ -4380,7 +4380,7 @@
   },
   {
     "domain": "calc1",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "calc.deriv.convex_jensen",
     "label": "Convexity and Jensen's inequality",
     "mastery_threshold": {
@@ -4408,7 +4408,7 @@
   },
   {
     "domain": "calc1",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "calc.deriv.epsilon_delta_deriv",
     "label": "Epsilon-delta definition of the derivative",
     "mastery_threshold": {
@@ -5099,7 +5099,7 @@
   },
   {
     "domain": "calc2",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "calc.integral.strategy",
     "label": "Integration strategies (method selection)",
     "mastery_threshold": {
@@ -5172,7 +5172,7 @@
   },
   {
     "domain": "calc2",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "calc.series.operations",
     "label": "Operations on series",
     "mastery_threshold": {
@@ -5214,7 +5214,7 @@
   },
   {
     "domain": "calc2",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "calc.series.p_series",
     "label": "The p-series",
     "mastery_threshold": {
@@ -5228,7 +5228,7 @@
   },
   {
     "domain": "calc2",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "calc.series.dirichlet_test",
     "label": "Dirichlet's test",
     "mastery_threshold": {
@@ -6059,7 +6059,7 @@
   },
   {
     "domain": "calc3",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "calc.multi.lagrange_two",
     "label": "Lagrange multipliers with two constraints",
     "mastery_threshold": {
@@ -6101,7 +6101,7 @@
   },
   {
     "domain": "calc3",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "calc.multi.iterated_limits",
     "label": "Iterated limits",
     "mastery_threshold": {
@@ -6171,7 +6171,7 @@
   },
   {
     "domain": "calc3",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "calc.vec.identities",
     "label": "Vector identities",
     "mastery_threshold": {
@@ -6371,7 +6371,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "complex.adv.euler_identity",
     "label": "Euler's identity",
     "mastery_threshold": {
@@ -6385,7 +6385,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "complex.adv.cauchy_riemann",
     "label": "Cauchy-Riemann equations",
     "mastery_threshold": {
@@ -6400,7 +6400,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "complex.adv.residue",
     "label": "Residues and the residue theorem",
     "mastery_threshold": {
@@ -6414,7 +6414,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "complex.adv.analytic",
     "label": "Analytic functions",
     "mastery_threshold": {
@@ -6428,7 +6428,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "complex.series.laurent",
     "label": "Laurent series",
     "mastery_threshold": {
@@ -6442,7 +6442,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "complex.integral.contour",
     "label": "Contour integration",
     "mastery_threshold": {
@@ -6457,7 +6457,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "complex.adv.harmonic",
     "label": "Harmonic functions and mean value",
     "mastery_threshold": {
@@ -6471,7 +6471,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "complex.topology.riemann_sphere",
     "label": "Riemann sphere and stereographic projection",
     "mastery_threshold": {
@@ -6486,7 +6486,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "complex.adv.conformal",
     "label": "Conformal mappings",
     "mastery_threshold": {
@@ -6500,7 +6500,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "complex.integral.cauchy_goursat",
     "label": "Cauchy-Goursat theorem",
     "mastery_threshold": {
@@ -6514,7 +6514,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "complex.series.power",
     "label": "Power series and radius of convergence",
     "mastery_threshold": {
@@ -6529,7 +6529,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "complex.adv.mobius",
     "label": "Möbius transformations",
     "mastery_threshold": {
@@ -6543,7 +6543,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "complex.adv.schwarz_lemma",
     "label": "Schwarz lemma",
     "mastery_threshold": {
@@ -6613,7 +6613,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "complex.basics.loci",
     "label": "Loci in the complex plane",
     "mastery_threshold": {
@@ -6658,7 +6658,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "complex.adv.conjugate_roots",
     "label": "Conjugate roots of real polynomials",
     "mastery_threshold": {
@@ -6673,7 +6673,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "complex.adv.trig_exponential",
     "label": "Trigonometric functions from exponentials",
     "mastery_threshold": {
@@ -6688,7 +6688,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "complex.adv.hyperbolic",
     "label": "Hyperbolic functions on imaginary arguments",
     "mastery_threshold": {
@@ -6760,7 +6760,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "complex.topology.open_sets",
     "label": "Open and closed sets in the plane",
     "mastery_threshold": {
@@ -6775,7 +6775,7 @@
   },
   {
     "domain": "complex_numbers",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "complex.topology.domain",
     "label": "Domains in the complex plane",
     "mastery_threshold": {
@@ -7247,7 +7247,7 @@
   },
   {
     "domain": "differential_equations",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ode.first_order.bernoulli",
     "label": "Bernoulli equations",
     "mastery_threshold": {
@@ -7275,7 +7275,7 @@
   },
   {
     "domain": "differential_equations",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ode.second_order.reduction",
     "label": "Reduction of order",
     "mastery_threshold": {
@@ -7305,7 +7305,7 @@
   },
   {
     "domain": "differential_equations",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ode.systems.matrix_exp",
     "label": "The matrix exponential",
     "mastery_threshold": {
@@ -7320,7 +7320,7 @@
   },
   {
     "domain": "differential_equations",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ode.transforms.step",
     "label": "Heaviside steps and impulses",
     "mastery_threshold": {
@@ -7446,7 +7446,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "discrete.sets.operations",
     "label": "Set operations: union, intersection, complement",
     "mastery_threshold": {
@@ -7575,7 +7575,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "discrete.proof.induction",
     "label": "Mathematical induction",
     "mastery_threshold": {
@@ -7604,7 +7604,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "discrete.logic.equivalence",
     "label": "Logical equivalence, De Morgan and normal forms",
     "mastery_threshold": {
@@ -7619,7 +7619,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "discrete.sets.relations",
     "label": "Relations, functions and partitions",
     "mastery_threshold": {
@@ -7648,7 +7648,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "discrete.graphs.eulerian",
     "label": "Eulerian trails, Hamiltonian and coloring",
     "mastery_threshold": {
@@ -7663,7 +7663,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "discrete.proof.strong_induction",
     "label": "Strong induction and well-ordering",
     "mastery_threshold": {
@@ -7692,7 +7692,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "discrete.graphs.coloring",
     "label": "Graph coloring and chromatic number",
     "mastery_threshold": {
@@ -7706,7 +7706,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "discrete.proof.contradiction",
     "label": "Proof by contradiction",
     "mastery_threshold": {
@@ -7734,7 +7734,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "discrete.sequences.generating_functions",
     "label": "Generating functions",
     "mastery_threshold": {
@@ -7951,7 +7951,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "discrete.logic.inference",
     "label": "Valid argument forms and fallacies",
     "mastery_threshold": {
@@ -7965,7 +7965,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "discrete.logic.predicates",
     "label": "Nested quantifiers and their negations",
     "mastery_threshold": {
@@ -7980,7 +7980,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "discrete.logic.satisfiability",
     "label": "Tautologies, contradictions and contingencies",
     "mastery_threshold": {
@@ -7995,7 +7995,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "discrete.proof.contrapositive",
     "label": "Proof by contrapositive",
     "mastery_threshold": {
@@ -8024,7 +8024,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "discrete.proof.structural",
     "label": "Structural induction",
     "mastery_threshold": {
@@ -8068,7 +8068,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "discrete.sets.countable",
     "label": "Countable and uncountable sets",
     "mastery_threshold": {
@@ -8171,7 +8171,7 @@
   },
   {
     "domain": "discrete_math",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "discrete.sequences.growth_rates",
     "label": "Comparing growth rates",
     "mastery_threshold": {
@@ -8272,7 +8272,7 @@
   },
   {
     "domain": "fractions",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "frac.ops.benchmark",
     "label": "Benchmark fractions: closer to 0, 1/2, or 1",
     "mastery_threshold": {
@@ -8549,7 +8549,7 @@
   },
   {
     "domain": "fractions",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "frac.compare.word",
     "label": "Fraction comparison word problems",
     "mastery_threshold": {
@@ -8833,7 +8833,7 @@
   },
   {
     "domain": "geometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "geo.basic.points_lines",
     "label": "Points, lines, and planes",
     "mastery_threshold": {
@@ -8845,7 +8845,7 @@
   },
   {
     "domain": "geometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "geo.basic.angles",
     "label": "Types of angles: acute, right, obtuse",
     "mastery_threshold": {
@@ -8859,7 +8859,7 @@
   },
   {
     "domain": "geometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "geo.basic.angle_measure",
     "label": "Measuring angles in degrees",
     "mastery_threshold": {
@@ -8901,7 +8901,7 @@
   },
   {
     "domain": "geometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "geo.triangle.types",
     "label": "Types of triangles",
     "mastery_threshold": {
@@ -8975,7 +8975,7 @@
   },
   {
     "domain": "geometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "geo.quad.types",
     "label": "Types of quadrilaterals",
     "mastery_threshold": {
@@ -9019,7 +9019,7 @@
   },
   {
     "domain": "geometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "geo.circle.parts",
     "label": "Parts of a circle: radius, diameter, chord",
     "mastery_threshold": {
@@ -9063,7 +9063,7 @@
   },
   {
     "domain": "geometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "geo.coord.plot",
     "label": "Plot points on the coordinate plane",
     "lesson_credit": "orcca",
@@ -9479,7 +9479,7 @@
   },
   {
     "domain": "graph_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "graph.isomorphism",
     "label": "Graph isomorphism",
     "mastery_threshold": {
@@ -9507,7 +9507,7 @@
   },
   {
     "domain": "graph_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "graph.subgraph",
     "label": "Subgraphs and induced subgraphs",
     "mastery_threshold": {
@@ -9521,7 +9521,7 @@
   },
   {
     "domain": "graph_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "graph.homomorphism",
     "label": "Graph homomorphisms",
     "mastery_threshold": {
@@ -9605,7 +9605,7 @@
   },
   {
     "domain": "graph_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "graph.menger",
     "label": "Menger's theorem",
     "mastery_threshold": {
@@ -9633,7 +9633,7 @@
   },
   {
     "domain": "graph_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "graph.perfect_matching",
     "label": "Perfect matchings",
     "mastery_threshold": {
@@ -9647,7 +9647,7 @@
   },
   {
     "domain": "graph_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "graph.tutte",
     "label": "Tutte's theorem",
     "mastery_threshold": {
@@ -9703,7 +9703,7 @@
   },
   {
     "domain": "graph_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "graph.brooks",
     "label": "Brooks' theorem",
     "mastery_threshold": {
@@ -9731,7 +9731,7 @@
   },
   {
     "domain": "graph_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "graph.perfect_graph",
     "label": "Perfect graphs",
     "mastery_threshold": {
@@ -9759,7 +9759,7 @@
   },
   {
     "domain": "graph_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "graph.kuratowski",
     "label": "Kuratowski's theorem",
     "mastery_threshold": {
@@ -9773,7 +9773,7 @@
   },
   {
     "domain": "graph_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "graph.minor",
     "label": "Graph minors",
     "mastery_threshold": {
@@ -9944,7 +9944,7 @@
   },
   {
     "domain": "graph_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "graph.random_threshold",
     "label": "Random graph thresholds",
     "mastery_threshold": {
@@ -10000,7 +10000,7 @@
   },
   {
     "domain": "graph_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "graph.strong_connectivity",
     "label": "Strong connectivity",
     "mastery_threshold": {
@@ -10014,7 +10014,7 @@
   },
   {
     "domain": "graph_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "graph.topological_sort",
     "label": "Topological sort",
     "mastery_threshold": {
@@ -10535,7 +10535,7 @@
   },
   {
     "domain": "linear_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "linalg.space.axioms",
     "label": "Vector spaces and their axioms",
     "mastery_threshold": {
@@ -10564,7 +10564,7 @@
   },
   {
     "domain": "linear_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "linalg.transform.invertible",
     "label": "Injective, surjective and invertible maps",
     "mastery_threshold": {
@@ -10624,7 +10624,7 @@
   },
   {
     "domain": "linear_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "linalg.symmetric.spectral",
     "label": "The spectral theorem for symmetric matrices",
     "mastery_threshold": {
@@ -10639,7 +10639,7 @@
   },
   {
     "domain": "linear_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "linalg.quadratic.definite",
     "label": "Quadratic forms and definiteness",
     "mastery_threshold": {
@@ -10683,7 +10683,7 @@
   },
   {
     "domain": "linear_algebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "linalg.eigen.cayley_hamilton",
     "label": "The Cayley-Hamilton theorem",
     "mastery_threshold": {
@@ -10775,7 +10775,7 @@
   },
   {
     "domain": "machine_learning",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ml.loss.cross_entropy",
     "label": "Cross-entropy loss",
     "mastery_threshold": {
@@ -10804,7 +10804,7 @@
   },
   {
     "domain": "machine_learning",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ml.overfitting",
     "label": "Overfitting and generalization",
     "mastery_threshold": {
@@ -10847,7 +10847,7 @@
   },
   {
     "domain": "machine_learning",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ml.regularization.dropout",
     "label": "Dropout regularization",
     "mastery_threshold": {
@@ -10875,7 +10875,7 @@
   },
   {
     "domain": "machine_learning",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ml.arch.rnn",
     "label": "Recurrent neural networks",
     "mastery_threshold": {
@@ -10889,7 +10889,7 @@
   },
   {
     "domain": "machine_learning",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ml.optim.batchnorm",
     "label": "Batch normalization",
     "mastery_threshold": {
@@ -10903,7 +10903,7 @@
   },
   {
     "domain": "machine_learning",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ml.eval.roc",
     "label": "ROC curves and evaluation metrics",
     "mastery_threshold": {
@@ -10917,7 +10917,7 @@
   },
   {
     "domain": "machine_learning",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ml.arch.transformer",
     "label": "Transformers and attention",
     "mastery_threshold": {
@@ -10931,7 +10931,7 @@
   },
   {
     "domain": "machine_learning",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ml.arch.gan",
     "label": "Generative adversarial networks",
     "mastery_threshold": {
@@ -10945,7 +10945,7 @@
   },
   {
     "domain": "machine_learning",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ml.optim.adam",
     "label": "Adam optimizer details",
     "mastery_threshold": {
@@ -10973,7 +10973,7 @@
   },
   {
     "domain": "machine_learning",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ml.data.augmentation",
     "label": "Data augmentation",
     "mastery_threshold": {
@@ -10987,7 +10987,7 @@
   },
   {
     "domain": "machine_learning",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ml.nlp.transformer",
     "label": "Transformers for NLP",
     "mastery_threshold": {
@@ -11001,7 +11001,7 @@
   },
   {
     "domain": "machine_learning",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ml.reinforcement.qlearning",
     "label": "Q-learning",
     "mastery_threshold": {
@@ -11015,7 +11015,7 @@
   },
   {
     "domain": "machine_learning",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ml.reinforcement.policy_gradient",
     "label": "Policy gradients",
     "mastery_threshold": {
@@ -11029,7 +11029,7 @@
   },
   {
     "domain": "machine_learning",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ml.nlp.bert",
     "label": "BERT and pretraining",
     "mastery_threshold": {
@@ -11043,7 +11043,7 @@
   },
   {
     "domain": "machine_learning",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ml.reinforcement.actor_critic",
     "label": "Actor-critic methods",
     "mastery_threshold": {
@@ -11184,7 +11184,7 @@
   },
   {
     "domain": "machine_learning",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ml.logistic.regression",
     "label": "Logistic regression",
     "mastery_threshold": {
@@ -11199,7 +11199,7 @@
   },
   {
     "domain": "machine_learning",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ml.grad.vanishing",
     "label": "Vanishing and exploding gradients",
     "mastery_threshold": {
@@ -11304,7 +11304,7 @@
   },
   {
     "domain": "machine_learning",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ml.data.imbalance",
     "label": "Class imbalance",
     "mastery_threshold": {
@@ -11334,7 +11334,7 @@
   },
   {
     "domain": "machine_learning",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ml.tree.ensemble",
     "label": "Bagging and random forests",
     "mastery_threshold": {
@@ -11349,7 +11349,7 @@
   },
   {
     "domain": "number_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "nt.basics.divisibility",
     "label": "Divisibility rules",
     "mastery_threshold": {
@@ -11393,7 +11393,7 @@
   },
   {
     "domain": "number_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "nt.basics.congruence",
     "label": "Congruence relations",
     "mastery_threshold": {
@@ -11437,7 +11437,7 @@
   },
   {
     "domain": "number_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "nt.adv.diophantine",
     "label": "Linear Diophantine equations",
     "mastery_threshold": {
@@ -11509,7 +11509,7 @@
   },
   {
     "domain": "number_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "nt.basics.prime_inf",
     "label": "Infinitude of primes",
     "mastery_threshold": {
@@ -11537,7 +11537,7 @@
   },
   {
     "domain": "number_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "nt.adv.quadratic_reciprocity",
     "label": "Quadratic reciprocity",
     "mastery_threshold": {
@@ -11565,7 +11565,7 @@
   },
   {
     "domain": "number_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "nt.adv.primitive_root",
     "label": "Primitive roots",
     "mastery_threshold": {
@@ -11594,7 +11594,7 @@
   },
   {
     "domain": "number_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "nt.analytic.prime_number_theorem",
     "label": "Prime number theorem",
     "mastery_threshold": {
@@ -11609,7 +11609,7 @@
   },
   {
     "domain": "number_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "nt.adv.dirichlet",
     "label": "Dirichlet's theorem on arithmetic progressions",
     "mastery_threshold": {
@@ -11624,7 +11624,7 @@
   },
   {
     "domain": "number_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "nt.adv.sieve",
     "label": "Sieve of Eratosthenes and Brun's sieve",
     "mastery_threshold": {
@@ -11638,7 +11638,7 @@
   },
   {
     "domain": "number_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "nt.analytic.zeta",
     "label": "Riemann zeta function",
     "mastery_threshold": {
@@ -11652,7 +11652,7 @@
   },
   {
     "domain": "number_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "nt.adv.chebyshev",
     "label": "Chebyshev functions",
     "mastery_threshold": {
@@ -11666,7 +11666,7 @@
   },
   {
     "domain": "number_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "nt.adv.elliptic_curve",
     "label": "Elliptic curves and BSD",
     "mastery_threshold": {
@@ -11680,7 +11680,7 @@
   },
   {
     "domain": "number_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "nt.adv.continued_fractions",
     "label": "Continued fractions",
     "mastery_threshold": {
@@ -11694,7 +11694,7 @@
   },
   {
     "domain": "number_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "nt.adv.class_number",
     "label": "Class numbers",
     "mastery_threshold": {
@@ -11904,7 +11904,7 @@
   },
   {
     "domain": "number_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "nt.adv.miller_rabin",
     "label": "The Miller-Rabin test",
     "mastery_threshold": {
@@ -11932,7 +11932,7 @@
   },
   {
     "domain": "number_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "nt.adv.bertrand",
     "label": "Bertrand's postulate",
     "mastery_threshold": {
@@ -11958,7 +11958,7 @@
   },
   {
     "domain": "numerical_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "numa.errors.roundoff",
     "label": "Floating-point roundoff and machine epsilon",
     "mastery_threshold": {
@@ -12000,7 +12000,7 @@
   },
   {
     "domain": "numerical_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "numa.errors.stability",
     "label": "Stability of an algorithm",
     "mastery_threshold": {
@@ -12014,7 +12014,7 @@
   },
   {
     "domain": "numerical_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "numa.errors.taylor",
     "label": "Taylor truncation error",
     "mastery_threshold": {
@@ -12085,7 +12085,7 @@
   },
   {
     "domain": "numerical_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "numa.roots.false_position",
     "label": "The method of false position",
     "mastery_threshold": {
@@ -12113,7 +12113,7 @@
   },
   {
     "domain": "numerical_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "numa.roots.multiple",
     "label": "Multiple roots and modified Newton",
     "mastery_threshold": {
@@ -12127,7 +12127,7 @@
   },
   {
     "domain": "numerical_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "numa.roots.bracketing",
     "label": "Bracketing versus open methods",
     "mastery_threshold": {
@@ -12187,7 +12187,7 @@
   },
   {
     "domain": "numerical_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "numa.interp.error",
     "label": "The interpolation error",
     "mastery_threshold": {
@@ -12201,7 +12201,7 @@
   },
   {
     "domain": "numerical_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "numa.interp.chebyshev",
     "label": "Chebyshev nodes",
     "mastery_threshold": {
@@ -12215,7 +12215,7 @@
   },
   {
     "domain": "numerical_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "numa.interp.splines",
     "label": "Cubic splines",
     "mastery_threshold": {
@@ -12257,7 +12257,7 @@
   },
   {
     "domain": "numerical_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "numa.interp.orthogonal",
     "label": "Orthogonal polynomials",
     "mastery_threshold": {
@@ -12271,7 +12271,7 @@
   },
   {
     "domain": "numerical_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "numa.interp.extrapolation",
     "label": "Extrapolation and its dangers",
     "mastery_threshold": {
@@ -12341,7 +12341,7 @@
   },
   {
     "domain": "numerical_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "numa.integration.error",
     "label": "Error bounds for quadrature",
     "mastery_threshold": {
@@ -12355,7 +12355,7 @@
   },
   {
     "domain": "numerical_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "numa.integration.romberg",
     "label": "Romberg integration",
     "mastery_threshold": {
@@ -12383,7 +12383,7 @@
   },
   {
     "domain": "numerical_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "numa.integration.adaptive",
     "label": "Adaptive quadrature",
     "mastery_threshold": {
@@ -12397,7 +12397,7 @@
   },
   {
     "domain": "numerical_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "numa.integration.improper",
     "label": "Integrating to infinity",
     "mastery_threshold": {
@@ -12425,7 +12425,7 @@
   },
   {
     "domain": "numerical_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "numa.linear.pivoting",
     "label": "Partial pivoting",
     "mastery_threshold": {
@@ -12467,7 +12467,7 @@
   },
   {
     "domain": "numerical_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "numa.linear.gauss_seidel",
     "label": "The Gauss-Seidel method",
     "mastery_threshold": {
@@ -12495,7 +12495,7 @@
   },
   {
     "domain": "numerical_analysis",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "numa.linear.least_squares_qr",
     "label": "Least squares by QR",
     "mastery_threshold": {
@@ -13140,7 +13140,7 @@
   },
   {
     "domain": "prealgebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "prealg.real.properties",
     "label": "Properties of real numbers",
     "mastery_threshold": {
@@ -13154,7 +13154,7 @@
   },
   {
     "domain": "prealgebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "prealg.real.concept",
     "label": "Real numbers and the number line",
     "mastery_threshold": {
@@ -13274,7 +13274,7 @@
   },
   {
     "domain": "prealgebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "ratio.ops.better_buy",
     "label": "Compare unit prices to find the better buy",
     "mastery_threshold": {
@@ -13334,7 +13334,7 @@
   },
   {
     "domain": "prealgebra",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "prealg.ineq.graph",
     "label": "Graph an inequality on a number line",
     "mastery_threshold": {
@@ -13395,7 +13395,7 @@
   },
   {
     "domain": "precalculus",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "precalc.func.transformations",
     "label": "Function transformations: shifts, reflections, stretches",
     "mastery_threshold": {
@@ -13457,7 +13457,7 @@
   },
   {
     "domain": "precalculus",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "precalc.polar.graph",
     "label": "Graphing polar equations",
     "mastery_threshold": {
@@ -13487,7 +13487,7 @@
   },
   {
     "domain": "precalculus",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "precalc.parametric.graph",
     "label": "Graphing parametric equations",
     "mastery_threshold": {
@@ -13989,7 +13989,7 @@
   },
   {
     "domain": "precalculus",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "precalc.exp.continuous",
     "label": "Continuous compounding",
     "mastery_threshold": {
@@ -14003,7 +14003,7 @@
   },
   {
     "domain": "precalculus",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "precalc.exp.cooling",
     "label": "Newton's law of cooling",
     "mastery_threshold": {
@@ -14115,7 +14115,7 @@
   },
   {
     "domain": "probability_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "prob.space.axioms",
     "label": "Probability axioms",
     "mastery_threshold": {
@@ -14129,7 +14129,7 @@
   },
   {
     "domain": "probability_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "prob.space.sigma_algebra",
     "label": "Sigma-algebras and events",
     "mastery_threshold": {
@@ -14157,7 +14157,7 @@
   },
   {
     "domain": "probability_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "prob.space.continuity",
     "label": "Continuity of probability",
     "mastery_threshold": {
@@ -14214,7 +14214,7 @@
   },
   {
     "domain": "probability_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "prob.independence.pairwise",
     "label": "Pairwise and mutual independence",
     "mastery_threshold": {
@@ -14228,7 +14228,7 @@
   },
   {
     "domain": "probability_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "prob.rv.definition",
     "label": "Random variables",
     "mastery_threshold": {
@@ -14242,7 +14242,7 @@
   },
   {
     "domain": "probability_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "prob.rv.cdf",
     "label": "The distribution function",
     "mastery_threshold": {
@@ -14368,7 +14368,7 @@
   },
   {
     "domain": "probability_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "prob.dist.memoryless",
     "label": "The memoryless property",
     "mastery_threshold": {
@@ -14396,7 +14396,7 @@
   },
   {
     "domain": "probability_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "prob.dist.exponential_family",
     "label": "The exponential family",
     "mastery_threshold": {
@@ -14438,7 +14438,7 @@
   },
   {
     "domain": "probability_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "prob.limit.weak_law",
     "label": "The weak law of large numbers",
     "mastery_threshold": {
@@ -14494,7 +14494,7 @@
   },
   {
     "domain": "probability_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "prob.joint.rv_independence",
     "label": "Independent random variables",
     "mastery_threshold": {
@@ -14579,7 +14579,7 @@
   },
   {
     "domain": "probability_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "prob.conv.in_probability",
     "label": "Convergence in probability",
     "mastery_threshold": {
@@ -14593,7 +14593,7 @@
   },
   {
     "domain": "probability_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "prob.conv.in_distribution",
     "label": "Convergence in distribution",
     "mastery_threshold": {
@@ -14607,7 +14607,7 @@
   },
   {
     "domain": "probability_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "prob.conv.almost_sure",
     "label": "Almost-sure convergence",
     "mastery_threshold": {
@@ -14621,7 +14621,7 @@
   },
   {
     "domain": "probability_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "prob.conv.strong_law",
     "label": "The strong law of large numbers",
     "mastery_threshold": {
@@ -14635,7 +14635,7 @@
   },
   {
     "domain": "probability_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "prob.conv.borel_cantelli",
     "label": "The Borel-Cantelli lemmas",
     "mastery_threshold": {
@@ -14649,7 +14649,7 @@
   },
   {
     "domain": "probability_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "prob.conv.slutsky",
     "label": "Slutsky's theorem",
     "mastery_threshold": {
@@ -14677,7 +14677,7 @@
   },
   {
     "domain": "probability_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "prob.chf.definition",
     "label": "Characteristic functions",
     "mastery_threshold": {
@@ -14705,7 +14705,7 @@
   },
   {
     "domain": "probability_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "prob.chf.independence",
     "label": "Characteristic functions of sums",
     "mastery_threshold": {
@@ -14719,7 +14719,7 @@
   },
   {
     "domain": "probability_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "prob.chf.continuity",
     "label": "The continuity theorem",
     "mastery_threshold": {
@@ -14733,7 +14733,7 @@
   },
   {
     "domain": "probability_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "prob.chf.clt",
     "label": "The central limit theorem by characteristic functions",
     "mastery_threshold": {
@@ -14804,7 +14804,7 @@
   },
   {
     "domain": "probability_theory",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "prob.process.martingale",
     "label": "Martingales",
     "mastery_threshold": {
@@ -15609,7 +15609,7 @@
   },
   {
     "domain": "statistics",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "stat.data.bar_graph",
     "label": "Read and create bar graphs",
     "lesson_credit": "orcca",
@@ -16220,7 +16220,7 @@
   },
   {
     "domain": "statistics",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "stat.infer.hypothesis",
     "label": "Null and alternative hypotheses",
     "mastery_threshold": {
@@ -16265,7 +16265,7 @@
   },
   {
     "domain": "statistics",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "stat.infer.pvalue",
     "label": "p-values and significance",
     "mastery_threshold": {
@@ -16280,7 +16280,7 @@
   },
   {
     "domain": "statistics",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "stat.infer.type_error",
     "label": "Type I and II errors and power",
     "mastery_threshold": {
@@ -16370,7 +16370,7 @@
   },
   {
     "domain": "statistics",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "stat.infer.nonparametric",
     "label": "Nonparametric tests",
     "mastery_threshold": {
@@ -16990,7 +16990,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "trig.basics.radians",
     "interference_group": "trig.basic",
     "label": "Radians and degrees conversion",
@@ -17006,7 +17006,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "trig.basics.unit_circle",
     "interference_group": "trig.basic",
     "label": "Unit circle: sine and cosine of standard angles",
@@ -17083,7 +17083,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "trig.basics.special_angles",
     "label": "Exact values for 30°, 45°, 60°",
     "mastery_threshold": {
@@ -17097,7 +17097,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "trig.basics.reference_angle",
     "label": "Reference angles and quadrants",
     "mastery_threshold": {
@@ -17111,7 +17111,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "trig.graph.sin",
     "label": "Graph of sine function",
     "mastery_threshold": {
@@ -17126,7 +17126,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "trig.graph.cos",
     "label": "Graph of cosine function",
     "mastery_threshold": {
@@ -17154,7 +17154,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "trig.adv.inverse",
     "label": "Inverse trig functions",
     "mastery_threshold": {
@@ -17399,7 +17399,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "trig.func.arcsine",
     "label": "Arcsine function: inverse properties and calculus",
     "mastery_threshold": {
@@ -17414,7 +17414,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "trig.func.arccosine",
     "label": "Arccosine function: inverse properties and calculus",
     "mastery_threshold": {
@@ -17428,7 +17428,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "trig.func.arctangent",
     "label": "Arctangent function: asymptotes and calculus",
     "mastery_threshold": {
@@ -17443,7 +17443,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "trig.func.arccotangent",
     "label": "Arccotangent function: asymptotes and calculus",
     "mastery_threshold": {
@@ -17726,7 +17726,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "trig.ident.product_to_sum",
     "label": "Product-to-sum formulas",
     "mastery_threshold": {
@@ -17741,7 +17741,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "trig.ident.sum_to_product",
     "label": "Sum-to-product formulas",
     "mastery_threshold": {
@@ -17786,7 +17786,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "trig.ident.pythagorean_variants",
     "label": "Variants of the Pythagorean identity",
     "mastery_threshold": {
@@ -17801,7 +17801,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "trig.eq.general_solution",
     "label": "General solutions of trigonometric equations",
     "mastery_threshold": {
@@ -17831,7 +17831,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "trig.ineq.advanced",
     "label": "Trigonometric inequalities on an interval",
     "mastery_threshold": {
@@ -17846,7 +17846,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "trig.graph.tan",
     "label": "Graph of the tangent function",
     "mastery_threshold": {
@@ -17861,7 +17861,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "trig.graph.transformations",
     "label": "Transformations of sinusoidal graphs",
     "mastery_threshold": {
@@ -17876,7 +17876,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "trig.graph.inverse",
     "label": "Graphs of inverse trigonometric functions",
     "mastery_threshold": {
@@ -17891,7 +17891,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "trig.graph.reciprocal",
     "label": "Graphs of the reciprocal trigonometric functions",
     "mastery_threshold": {
@@ -17906,7 +17906,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "trig.hyperbolic.identities",
     "label": "Hyperbolic identities",
     "mastery_threshold": {
@@ -17936,7 +17936,7 @@
   },
   {
     "domain": "trigonometry",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "id": "trig.hyperbolic.derivative",
     "label": "Derivatives of hyperbolic functions",
     "mastery_threshold": {

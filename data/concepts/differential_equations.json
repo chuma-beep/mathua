@@ -357,7 +357,7 @@
       "streak": 10,
       "avg_time_seconds": 26.0
     }
-    },
+  },
   {
     "id": "ode.ivp.evaluate",
     "label": "Solving an initial value problem",
@@ -461,7 +461,7 @@
     "label": "Bernoulli equations",
     "domain": "differential_equations",
     "subdomain": "differential_equations.first_order",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ode.first_order.linear"
     ],
@@ -489,7 +489,7 @@
     "label": "Reduction of order",
     "domain": "differential_equations",
     "subdomain": "differential_equations.second_order",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ode.second_order.homogeneous",
       "calc.integral.substitution"
@@ -519,7 +519,7 @@
     "label": "The matrix exponential",
     "domain": "differential_equations",
     "subdomain": "differential_equations.systems",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ode.adv.systems",
       "linalg.eigen.diagonalization"
@@ -534,7 +534,7 @@
     "label": "Heaviside steps and impulses",
     "domain": "differential_equations",
     "subdomain": "differential_equations.transforms",
-    "grading_type": "multiple_choice",
+    "grading_type": "numeric",
     "prerequisites": [
       "ode.transforms.laplace"
     ],

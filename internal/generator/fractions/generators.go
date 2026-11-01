@@ -195,39 +195,7 @@ func (g *fracCompareGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type fracBenchmarkGen struct{}
 
 func (g *fracBenchmarkGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	// Report 270 saw the same benchmark comparison repeatedly. The old range
-	// was denominators 2..scale*2+1, which at low difficulty offered only 1/2,
-	// 1/3 and 2/3. Start at 3 and widen with difficulty so a short session has
-	// enough distinct pairs to avoid a visible repeat.
-	denMax := 6
-	if ctx.Difficulty >= 0.45 {
-		denMax = 9
-	}
-	if ctx.Difficulty >= 0.7 {
-		denMax = 12
-	}
-	den := rand.Intn(denMax-2) + 3
-	num := rand.Intn(den-1) + 1
-	val := float64(num) / float64(den)
-	ans := "less"
-	comp := "<"
-	if val > 0.5 {
-		ans = "greater"
-		comp = ">"
-	} else if val == 0.5 {
-		ans = "equal"
-		comp = "="
-	}
-	others := make([]string, 0, 2)
-	for _, w := range []string{"less", "greater", "equal"} {
-		if w != ans {
-			others = append(others, w)
-		}
-	}
-	p := generator.MultipleChoice(fmt.Sprintf("Is \\(\\frac{%d}{%d}\\) greater than, less than, or equal to \\(\\frac{1}{2}\\)?", num, den), ans, others...)
-	p.Explanation = fmt.Sprintf("1/2 = %d/%d, and %d/%d %s 1/2", den/2, den, num, den, comp)
-	p.Facts = map[string]string{"num": strconv.Itoa(num), "den": strconv.Itoa(den), "dec": fmt.Sprintf("%.2f", val), "word": ans, "comp": comp}
-	return p
+	return benchmarkProblem()
 }
 
 type fracToDecimalGen struct{}
@@ -562,7 +530,7 @@ func (g *fracDivWordGen) Generate(ctx generator.GeneratorContext) generator.Prob
 	bDen := rand.Intn(max(3, scale*2)) + 2
 	rn, rd := reduce(aNum*bDen, aDen*bNum)
 	return generator.Problem{
-		Question:    fmt.Sprintf("You have \\(\\frac{%d}{%d}\\) liters of juice. Each glass holds \\(\\frac{%d}{%d}\\) liters. How many glasses can you fill?", aNum, aDen, bNum, bDen),
+		Question:    fmt.Sprintf("You have \\(\\frac{%d}{%d}\\) liters of juice. Each glass holds \\(\\frac{%d}{%d}\\) liters. How many glasses' worth of juice is that? (enter an exact fraction such as 5/2)", aNum, aDen, bNum, bDen),
 		Answer:      fmt.Sprintf("%d/%d", rn, rd),
 		Explanation: fmt.Sprintf("%d/%d ÷ %d/%d = %d/%d", aNum, aDen, bNum, bDen, rn, rd),
 		Facts:       map[string]string{"a_num": strconv.Itoa(aNum), "a_den": strconv.Itoa(aDen), "b_num": strconv.Itoa(bNum), "b_den": strconv.Itoa(bDen), "flipped_num": strconv.Itoa(bDen), "flipped_den": strconv.Itoa(bNum), "raw_num": strconv.Itoa(aNum * bDen), "raw_den": strconv.Itoa(aDen * bNum), "out_num": strconv.Itoa(rn), "out_den": strconv.Itoa(rd)},
@@ -601,27 +569,5 @@ func (g *fracMixedWordGen) Generate(ctx generator.GeneratorContext) generator.Pr
 type fracCompareWordGen struct{}
 
 func (g *fracCompareWordGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*5)
-	aNum := rand.Intn(max(1, scale*2)) + 1
-	aDen := rand.Intn(max(1, scale*2)) + 2
-	bNum := rand.Intn(max(1, scale*2)) + 1
-	bDen := rand.Intn(max(1, scale*2)) + 2
-	for aNum*bDen == bNum*aDen {
-		bNum = rand.Intn(max(1, scale*2)) + 1
-	}
-	// Word comparison: who has more?
-	av2 := float64(aNum) / float64(aDen)
-	bv2 := float64(bNum) / float64(bDen)
-	ans := "first"
-	if bv2 > av2 {
-		ans = "second"
-	}
-	other := "second"
-	if ans == "second" {
-		other = "first"
-	}
-	p := generator.MultipleChoice(fmt.Sprintf("Alice ate \\(\\frac{%d}{%d}\\) of a pizza, Bob ate \\(\\frac{%d}{%d}\\). Who ate more?", aNum, aDen, bNum, bDen), ans, other)
-	p.Explanation = fmt.Sprintf("%d/%d = %.3f, %d/%d = %.3f, so %s ate more", aNum, aDen, av2, bNum, bDen, bv2, ans)
-	p.Facts = map[string]string{"a_num": strconv.Itoa(aNum), "a_den": strconv.Itoa(aDen), "a_val": fmt.Sprintf("%.3f", av2), "b_num": strconv.Itoa(bNum), "b_den": strconv.Itoa(bDen), "b_val": fmt.Sprintf("%.3f", bv2), "who": ans}
-	return p
+	return compareWordProblem()
 }

@@ -15,7 +15,7 @@ func Register(reg *generator.Registry) {
 	reg.Register("calc.limit.numeric", &varietyWrap{id: "calc.limit.numeric", inner: &limitNumericGen{}})
 	reg.Register("calc.limit.properties", &limitPropertiesGen{})
 	reg.Register("calc.limit.infinity", &limitInfinityGen{})
-	reg.Register("calc.limit.continuity", &varietyWrap{id: "calc.limit.continuity", inner: &limitContinuityGen{}})
+	reg.Register("calc.limit.continuity", &calcCountGen{build: continuityStatementsProblem})
 
 	reg.Register("calc.deriv.concept", &derivConceptGen{})
 	reg.Register("calc.deriv.power_rule", &derivPowerRuleGen{})
@@ -61,17 +61,17 @@ func Register(reg *generator.Registry) {
 	reg.Register("calc.limit.algebra", &limitAlgebraGen{})
 	reg.Register("calc.limit.asymptotes", &asymptotesGen{})
 	reg.Register("calc.limit.big_o", &varietyWrap{id: "calc.limit.big_o", inner: &bigOGen{}})
-	reg.Register("calc.limit.discontinuity", &discontinuityGen{})
+	reg.Register("calc.limit.discontinuity", &calcCountGen{build: discontinuityCountProblem})
 	reg.Register("calc.limit.indeterminate", &varietyWrap{id: "calc.limit.indeterminate", inner: &indeterminateGen{}})
 	reg.Register("calc.limit.lhopital", &lhopitalGen{})
-	reg.Register("calc.limit.little_o", &littleOGen{})
+	reg.Register("calc.limit.little_o", &calcCountGen{build: littleOStatementsProblem})
 	reg.Register("calc.limit.squeeze", &squeezeGen{})
 	reg.Register("calc.limit.supremum", &supremumGen{})
 	reg.Register("calc.limit.uniform_continuity", &varietyWrap{id: "calc.limit.uniform_continuity", inner: &uniformContinuityGen{}})
 	reg.Register("calc.limit.weierstrass", &weierstrassLimitGen{})
 	reg.Register("calc.seq.cauchy", &cauchySeqGen{})
 	reg.Register("calc.seq.concept", &seqConceptGen{})
-	reg.Register("calc.seq.convergence", &varietyWrap{id: "calc.seq.convergence", inner: &seqConvergenceGen{}})
+	reg.Register("calc.seq.convergence", &calcCountGen{build: seqConvergenceStatementsProblem})
 	reg.Register("calc.seq.euler", &eulerSeqGen{})
 	reg.Register("calc.seq.function_sequences", &varietyWrap{id: "calc.seq.function_sequences", inner: &functionSequencesGen{}})
 	reg.Register("calc.seq.monotone", &varietyWrap{id: "calc.seq.monotone", inner: &monotoneSeqGen{}})
@@ -141,7 +141,7 @@ func Register(reg *generator.Registry) {
 	reg.Register("calc.seq.bounded", &boundedSeqGen{})
 	reg.Register("calc.integral.convergence", &varietyWrap{id: "calc.integral.convergence", inner: &convergenceGen{}})
 	reg.Register("calc.integral.irrational", &varietyWrap{id: "calc.integral.irrational", inner: &irrationalIntegralGen{}})
-	reg.Register("calc.integral.strategy", &varietyWrap{id: "calc.integral.strategy", inner: &strategyGen{}})
+	reg.Register("calc.integral.strategy", &calcCountGen{build: integralStrategyProblem})
 	reg.Register("calc.integral.reduction", &varietyWrap{id: "calc.integral.reduction", inner: &reductionGen{}})
 	registerMultivariable(reg)
 	registerVector(reg)
@@ -594,21 +594,16 @@ type integralDefiniteGen struct{}
 
 func (g *integralDefiniteGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	a := rand.Intn(max(1, scale*2)) + 1
 	n := rand.Intn(max(1, scale)) + 1
-	lower := rand.Intn(2)
+	k := rand.Intn(max(1, scale*2)) + 1
+	a := k * (n + 1)
 	upper := rand.Intn(max(1, scale*2)) + 1
-	for upper <= lower {
-		upper = rand.Intn(max(1, scale*2)) + 1
-	}
-	f := func(x int) int {
-		return mathutil.IntPow(x, n+1) * a / (n + 1)
-	}
-	ans := f(upper) - f(lower)
+	ans := k * mathutil.IntPow(upper, n+1)
 	return generator.Problem{
 		Question:    fmt.Sprintf("Find \\(\\int_{0}^{%d} %d x^{%d} \\, dx\\).", upper, a, n),
 		Answer:      fmt.Sprintf("%d", ans),
-		Explanation: fmt.Sprintf("∫%dx^%d dx = %d/(%d)·x^(%d). From 0 to %d: %d·%d^(%d)/%d - 0 = %d.", a, n, a, n+1, n+1, upper, a, upper, n+1, n+1, ans),
+		Explanation: fmt.Sprintf("∫%dx^%d dx = %d/(%d)·x^(%d). From 0 to %d: %d·%d^(%d)/%d = %d.", a, n, a, n+1, n+1, upper, a, upper, n+1, n+1, ans),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "n": strconv.Itoa(n), "upper": strconv.Itoa(upper), "answer": strconv.Itoa(ans)},
 	}
 }
 

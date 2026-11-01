@@ -51,48 +51,7 @@ func registerBatch(reg *generator.Registry) {
 type bernoulliGen struct{}
 
 func (g *bernoulliGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Which substitution linearizes the Bernoulli equation y' + P(x)y = Q(x)y^n?",
-			correct:     "v = y^(1-n)",
-			distractors: []string{"v = y^n", "v = e^y", "v = ln y"},
-			reason:      "Dividing by y^n and setting v = y^(1-n) turns the nonlinear term into a linear one.",
-		},
-		{
-			question:    "For y' + y = y^2, the substitution v = 1/y turns the equation into...",
-			correct:     "v' - v = -1",
-			distractors: []string{"v' + v = 1", "v' = v^2", "v'' - v = 0"},
-			reason:      "With v = 1/y, v' = -y'/y^2 = v - 1, so v' - v = -1.",
-		},
-		{
-			question:    "The Bernoulli equation y' + y = y^2 has exponent n equal to...",
-			correct:     "2",
-			distractors: []string{"1", "0", "-1"},
-			reason:      "The nonlinear factor is y^2, so n = 2.",
-		},
-		{
-			question:    "Which equation is a Bernoulli equation?",
-			correct:     "y' + xy = x y^3",
-			distractors: []string{"y' + xy = x", "y' = xy", "y'' + y = 0"},
-			reason:      "Bernoulli form has y^n on the right with n not 0 or 1; y^3 qualifies.",
-		},
-		{
-			question:    "After the Bernoulli substitution, the equation becomes...",
-			correct:     "a first-order linear equation",
-			distractors: []string{"a separable equation only", "a second-order equation", "an exact equation always"},
-			reason:      "The substitution is chosen exactly to remove the nonlinear power and leave a linear first-order equation.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return bernoulliProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -134,48 +93,7 @@ func (g *cauchyEulerGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type reductionGen struct{}
 
 func (g *reductionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "Given one nonzero solution y1 of a second-order linear homogeneous ODE, reduction of order finds...",
-			correct:     "a second independent solution by setting y = y1 v",
-			distractors: []string{"the particular solution of the nonhomogeneous equation", "the characteristic roots", "the Wronskian only"},
-			reason:      "Substituting y = y1 v removes the y term and leaves a first-order equation for v'.",
-		},
-		{
-			question:    "For y'' - y = 0 with y1 = e^x, reduction of order gives y2 proportional to...",
-			correct:     "e^{-x}",
-			distractors: []string{"e^x", "x e^x", "cos x"},
-			reason:      "The two independent solutions of y'' - y = 0 are e^x and e^{-x}.",
-		},
-		{
-			question:    "The substitution y = y1 v in reduction of order produces...",
-			correct:     "a first-order equation for v'",
-			distractors: []string{"a quadratic in v", "an algebraic equation for v", "a second-order equation for v"},
-			reason:      "The y1 v term cancels because y1 solves the homogeneous equation, leaving an equation in v' only.",
-		},
-		{
-			question:    "Reduction of order requires...",
-			correct:     "one known nonzero solution",
-			distractors: []string{"two known solutions", "constant coefficients", "a forcing term"},
-			reason:      "The method trades one known solution for a procedure that produces the second.",
-		},
-		{
-			question:    "Why must y1 be nonzero on the interval?",
-			correct:     "to divide by y1 and keep the substitution defined",
-			distractors: []string{"to make the equation exact", "to find the characteristic roots", "to compute the Wronskian sign"},
-			reason:      "The reduced equation contains y1 in denominators, so y1 cannot vanish on the interval.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return reductionProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -243,48 +161,7 @@ func (g *powerSeriesGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type matrixExpGen struct{}
 
 func (g *matrixExpGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "The matrix exponential e^(At) is defined by...",
-			correct:     "the power series sum (At)^n/n!",
-			distractors: []string{"the inverse of A", "the determinant of A", "A transpose times A"},
-			reason:      "The definition copies the scalar exponential series with the matrix At in place of the number.",
-		},
-		{
-			question:    "If A is diagonal with entries 2 and 3, e^A is...",
-			correct:     "diagonal with entries e^2 and e^3",
-			distractors: []string{"diagonal with entries 2 and 3", "the identity", "singular"},
-			reason:      "The exponential of a diagonal matrix exponentiates each diagonal entry.",
-		},
-		{
-			question:    "The derivative of e^(At) with respect to t is...",
-			correct:     "A e^(At)",
-			distractors: []string{"e^(At) A^(-1)", "A^(-1) e^(At)", "e^(At)"},
-			reason:      "Differentiating the series term by term produces A times the series, and A commutes with e^(At).",
-		},
-		{
-			question:    "For A = [[0, 1], [0, 0]], e^A equals...",
-			correct:     "the identity plus A",
-			distractors: []string{"the identity matrix alone", "A alone", "e times the identity"},
-			reason:      "A is nilpotent with A^2 = 0, so the series stops after the linear term.",
-		},
-		{
-			question:    "e^(At) solves the system...",
-			correct:     "x' = Ax with x(0) = I",
-			distractors: []string{"x' = A^(-1)x", "Ax = 0", "x'' = Ax"},
-			reason:      "The derivative of e^(At) is A e^(At), and at t = 0 the exponential is the identity.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return matrixExpProblem()
 }
 
 // ---------------------------------------------------------------------------
@@ -294,48 +171,7 @@ func (g *matrixExpGen) Generate(ctx generator.GeneratorContext) generator.Proble
 type stepGen struct{}
 
 func (g *stepGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question    string
-		correct     string
-		distractors []string
-		reason      string
-	}
-	claims := []claim{
-		{
-			question:    "The Laplace transform of the unit step H(t-a) is...",
-			correct:     "e^(-a s)/s",
-			distractors: []string{"e^(-a s)", "1/s", "s e^(-a s)"},
-			reason:      "The shifted unit step transforms to e^(-as)/s by the time-shift rule.",
-		},
-		{
-			question:    "The Laplace transform of the Dirac delta at a is...",
-			correct:     "e^(-a s)",
-			distractors: []string{"e^(-a s)/s", "1/s", "1"},
-			reason:      "The delta samples the exponential kernel at t = a, leaving e^(-as).",
-		},
-		{
-			question:    "A step function models...",
-			correct:     "a switch turned on at time a",
-			distractors: []string{"a smooth sinusoid", "a constant coefficient", "an equilibrium"},
-			reason:      "The step is zero before a and one after, which is exactly a switch.",
-		},
-		{
-			question:    "The derivative of the unit step is...",
-			correct:     "the Dirac delta",
-			distractors: []string{"zero everywhere", "the ramp", "the exponential"},
-			reason:      "The step jumps at a, and the delta is the distributional derivative of that jump.",
-		},
-		{
-			question:    "The impulse response of a linear system is...",
-			correct:     "the solution when the input is a delta",
-			distractors: []string{"the solution when the input is zero", "the homogeneous solution only", "the characteristic polynomial"},
-			reason:      "The impulse response is the system output to a unit impulse, and its transform is the transfer function.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	p := generator.MultipleChoice(c.question, c.correct, c.distractors...)
-	p.Explanation = c.reason
-	return p
+	return stepProblem()
 }
 
 // ---------------------------------------------------------------------------
