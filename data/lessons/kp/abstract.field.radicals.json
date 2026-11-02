@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Radical Expressions",
+    "section": "Radical Expressions",
+    "subgoals": [
+      "A polynomial is solvable by radicals when its roots can be built from the coefficients using field operations and root extraction.",
+      "Galois theory turns this into a property of the Galois group."
+    ]
+  },
+  {
+    "label": "The Quintic",
+    "section": "The Quintic",
+    "subgoals": [
+      "The general polynomial of degree n has Galois group the symmetric group on n symbols.",
+      "The symmetric group is solvable up to degree four and not solvable from degree five."
+    ]
+  },
+  {
+    "label": "Degree Is Not the Whole Story",
+    "section": "Degree Is Not the Whole Story",
+    "subgoals": [
+      "Special polynomials of high degree can still be solvable.",
+      "The criterion depends on the particular Galois group."
+    ]
+  }
+]

@@ -659,6 +659,156 @@
     "subdomain": "abstract_algebra.structures"
   },
   {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.rings.pid",
+    "label": "Principal ideal domains",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rings.euclidean",
+      "abstract.rings.ideal"
+    ],
+    "subdomain": "abstract_algebra.rings"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.group.cayley",
+    "label": "Cayley's theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.action",
+      "abstract.group.symmetric"
+    ],
+    "subdomain": "abstract_algebra.groups"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.group.direct_product",
+    "label": "Direct products of groups",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.cyclic",
+      "abstract.group.quotient_group"
+    ],
+    "subdomain": "abstract_algebra.groups"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.rings.irreducibility",
+    "label": "Irreducible polynomials",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rings.polynomial",
+      "abstract.field.finite"
+    ],
+    "subdomain": "abstract_algebra.rings"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.group.abelian_classification",
+    "label": "Classification of finite abelian groups",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.direct_product",
+      "abstract.group.cyclic"
+    ],
+    "subdomain": "abstract_algebra.groups"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.field.cyclotomic",
+    "label": "Cyclotomic polynomials",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.field.extension",
+      "abstract.field.algebraic"
+    ],
+    "subdomain": "abstract_algebra.fields"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.field.algebraic_closure",
+    "label": "Algebraic closure",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.field.algebraic",
+      "abstract.field.extension"
+    ],
+    "subdomain": "abstract_algebra.fields"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.structures.fg_module",
+    "label": "Finitely generated modules",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.structures.module_hom",
+      "abstract.structures.submodule"
+    ],
+    "subdomain": "abstract_algebra.structures"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.field.radicals",
+    "label": "Solvability by radicals",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.solvable",
+      "abstract.field.galois_group"
+    ],
+    "subdomain": "abstract_algebra.fields"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.field.separable",
+    "label": "Separable extensions",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.field.extension",
+      "abstract.rings.polynomial"
+    ],
+    "subdomain": "abstract_algebra.fields"
+  },
+  {
     "domain": "algebra",
     "grading_type": "numeric",
     "id": "alg.linear.slope",

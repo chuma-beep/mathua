@@ -1002,7 +1002,17 @@
       "abstract.group.commutator",
       "abstract.field.galois_group",
       "abstract.rings.noetherian",
-      "abstract.structures.exact_sequence"
+      "abstract.structures.exact_sequence",
+      "abstract.rings.pid",
+      "abstract.group.cayley",
+      "abstract.group.direct_product",
+      "abstract.rings.irreducibility",
+      "abstract.group.abelian_classification",
+      "abstract.field.cyclotomic",
+      "abstract.field.algebraic_closure",
+      "abstract.structures.fg_module",
+      "abstract.field.radicals",
+      "abstract.field.separable"
     ]
   },
   {

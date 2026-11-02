@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1437,
+  "concept_count": 1447,
   "unit_count": 135,
   "units": [
     {
@@ -71,20 +71,23 @@
         "abstract.field.characteristic",
         "abstract.field.extension",
         "abstract.group.action",
+        "abstract.group.direct_product",
         "abstract.group.quotient_group",
         "abstract.group.simple",
         "abstract.rings.euclidean",
         "abstract.rings.integral_domain",
         "abstract.rings.localization",
+        "abstract.rings.pid",
         "abstract.rings.polynomial",
         "abstract.rings.prime_ideal",
         "abstract.rings.quotient",
         "abstract.rings.ufd",
+        "abstract.structures.fg_module",
         "abstract.structures.module",
         "abstract.structures.module_hom",
         "abstract.structures.submodule"
       ],
-      "concept_count": 15
+      "concept_count": 18
     },
     {
       "id": "abstract_algebra.b9",
@@ -101,19 +104,25 @@
       ],
       "concept_ids": [
         "abstract.field.algebraic",
+        "abstract.field.algebraic_closure",
+        "abstract.field.cyclotomic",
         "abstract.field.finite",
         "abstract.field.galois_group",
+        "abstract.field.separable",
+        "abstract.group.abelian_classification",
+        "abstract.group.cayley",
         "abstract.group.composition_series",
         "abstract.group.nilpotent",
         "abstract.group.p_group",
         "abstract.group.solvable",
         "abstract.group.sylow",
+        "abstract.rings.irreducibility",
         "abstract.rings.noetherian",
         "abstract.structures.exact_sequence",
         "abstract.structures.galois",
         "abstract.structures.tensor"
       ],
-      "concept_count": 12
+      "concept_count": 18
     },
     {
       "id": "abstract_algebra.b10",
@@ -123,13 +132,15 @@
       "depth_min": 30,
       "depth_max": 31,
       "subdomains": [
+        "abstract_algebra.fields",
         "abstract_algebra.groups"
       ],
       "concept_ids": [
+        "abstract.field.radicals",
         "abstract.group.commutator",
         "abstract.group.free"
       ],
-      "concept_count": 2
+      "concept_count": 3
     },
     {
       "id": "algebra.b3",

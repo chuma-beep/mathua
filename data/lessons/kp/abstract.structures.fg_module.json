@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Finite Generation",
+    "section": "Finite Generation",
+    "subgoals": [
+      "A module is finitely generated when finitely many elements produce every element by linear combinations.",
+      "Over a principal ideal domain the structure theorem separates a free part from a torsion part."
+    ]
+  },
+  {
+    "label": "Free Rank and Torsion",
+    "section": "Free Rank and Torsion",
+    "subgoals": [
+      "The rank of the free part is the number of independent generators.",
+      "The torsion submodule contains the elements annihilated by a nonzero scalar."
+    ]
+  },
+  {
+    "label": "Fields versus the Integers",
+    "section": "Fields versus the Integers",
+    "subgoals": [
+      "Over a field every finitely generated module is a finite-dimensional vector space, so the torsion part vanishes.",
+      "Over the integers the torsion part can be nontrivial."
+    ]
+  }
+]

@@ -135,7 +135,7 @@ come from the corpus.
 same figure was wrong on the landing page until it was fixed separately. Nothing was broken and no
 test failed, because a string in Markdown cannot break anything, which is exactly why it needs a
 check. The same class of bug put "1-3 knowledge points" in CONTRIBUTING against "3 KPs per concept"
-in README, with all 1437 shards holding exactly 3 and nothing enforcing either.
+in README, with all 1447 shards holding exactly 3 and nothing enforcing either.
 
 **How:** `scripts/check_docs.py` reads each fact from its owner, the Go constant, the corpus, the
 shards and fails on any doc that disagrees. **It must never hardcode a fact it can read**, because

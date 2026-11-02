@@ -40,6 +40,9 @@ func Register(reg *generator.Registry) {
 	reg.Register("abstract.field.galois_group", &galoisGroupGen{})
 	reg.Register("abstract.structures.exact_sequence", &exactSequenceGen{})
 	reg.Register("abstract.group.commutator", &commutatorGen{})
+	for id, kind := range abstractBridgeKinds {
+		reg.Register(id, &abstractBridgeGen{kind: kind})
+	}
 	registerBatch(reg)
 	registerConversions(reg)
 }

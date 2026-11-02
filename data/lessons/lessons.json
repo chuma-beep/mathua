@@ -5746,5 +5746,45 @@
   {
     "concept_id": "graph.mst",
     "source": "teaching/graph.mst.md"
+  },
+  {
+    "concept_id": "abstract.rings.pid",
+    "source": "teaching/abstract.rings.pid.md"
+  },
+  {
+    "concept_id": "abstract.group.cayley",
+    "source": "teaching/abstract.group.cayley.md"
+  },
+  {
+    "concept_id": "abstract.group.direct_product",
+    "source": "teaching/abstract.group.direct_product.md"
+  },
+  {
+    "concept_id": "abstract.rings.irreducibility",
+    "source": "teaching/abstract.rings.irreducibility.md"
+  },
+  {
+    "concept_id": "abstract.group.abelian_classification",
+    "source": "teaching/abstract.group.abelian_classification.md"
+  },
+  {
+    "concept_id": "abstract.field.cyclotomic",
+    "source": "teaching/abstract.field.cyclotomic.md"
+  },
+  {
+    "concept_id": "abstract.field.algebraic_closure",
+    "source": "teaching/abstract.field.algebraic_closure.md"
+  },
+  {
+    "concept_id": "abstract.structures.fg_module",
+    "source": "teaching/abstract.structures.fg_module.md"
+  },
+  {
+    "concept_id": "abstract.field.radicals",
+    "source": "teaching/abstract.field.radicals.md"
+  },
+  {
+    "concept_id": "abstract.field.separable",
+    "source": "teaching/abstract.field.separable.md"
   }
 ]

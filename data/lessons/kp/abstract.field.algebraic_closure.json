@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Roots of Every Polynomial",
+    "section": "Roots of Every Polynomial",
+    "subgoals": [
+      "An algebraic closure contains a root of every nonconstant polynomial over the base field.",
+      "It is algebraically closed and contains no proper algebraically closed subfield over the base."
+    ]
+  },
+  {
+    "label": "Existence and Uniqueness",
+    "section": "Existence and Uniqueness",
+    "subgoals": [
+      "Every field has an algebraic closure, and any two are isomorphic over the base field.",
+      "The proof uses Zorn's lemma to assemble a maximal algebraic extension."
+    ]
+  },
+  {
+    "label": "Finite Subfields",
+    "section": "Finite Subfields",
+    "subgoals": [
+      "The algebraic closure of a finite field is infinite.",
+      "Its finite subfields correspond to degrees that divide one another."
+    ]
+  }
+]

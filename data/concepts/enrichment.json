@@ -18868,5 +18868,155 @@
       "discrete.graphs.trees",
       "graph.shortest_path"
     ]
+  },
+  {
+    "id": "abstract.rings.pid",
+    "key_prerequisites": [
+      "abstract.rings.euclidean",
+      "abstract.rings.ideal"
+    ],
+    "encompasses": [
+      "abstract.rings.euclidean",
+      "abstract.rings.ideal"
+    ],
+    "prerequisites": [
+      "abstract.rings.euclidean",
+      "abstract.rings.ideal"
+    ]
+  },
+  {
+    "id": "abstract.group.cayley",
+    "key_prerequisites": [
+      "abstract.group.action",
+      "abstract.group.symmetric"
+    ],
+    "encompasses": [
+      "abstract.group.action",
+      "abstract.group.symmetric"
+    ],
+    "prerequisites": [
+      "abstract.group.action",
+      "abstract.group.symmetric"
+    ]
+  },
+  {
+    "id": "abstract.group.direct_product",
+    "key_prerequisites": [
+      "abstract.group.cyclic",
+      "abstract.group.quotient_group"
+    ],
+    "encompasses": [
+      "abstract.group.cyclic",
+      "abstract.group.quotient_group"
+    ],
+    "prerequisites": [
+      "abstract.group.cyclic",
+      "abstract.group.quotient_group"
+    ]
+  },
+  {
+    "id": "abstract.rings.irreducibility",
+    "key_prerequisites": [
+      "abstract.rings.polynomial",
+      "abstract.field.finite"
+    ],
+    "encompasses": [
+      "abstract.rings.polynomial",
+      "abstract.field.finite"
+    ],
+    "prerequisites": [
+      "abstract.rings.polynomial",
+      "abstract.field.finite"
+    ]
+  },
+  {
+    "id": "abstract.group.abelian_classification",
+    "key_prerequisites": [
+      "abstract.group.direct_product",
+      "abstract.group.cyclic"
+    ],
+    "encompasses": [
+      "abstract.group.direct_product",
+      "abstract.group.cyclic"
+    ],
+    "prerequisites": [
+      "abstract.group.direct_product",
+      "abstract.group.cyclic"
+    ]
+  },
+  {
+    "id": "abstract.field.cyclotomic",
+    "key_prerequisites": [
+      "abstract.field.extension",
+      "abstract.field.algebraic"
+    ],
+    "encompasses": [
+      "abstract.field.extension",
+      "abstract.field.algebraic"
+    ],
+    "prerequisites": [
+      "abstract.field.extension",
+      "abstract.field.algebraic"
+    ]
+  },
+  {
+    "id": "abstract.field.algebraic_closure",
+    "key_prerequisites": [
+      "abstract.field.algebraic",
+      "abstract.field.extension"
+    ],
+    "encompasses": [
+      "abstract.field.algebraic",
+      "abstract.field.extension"
+    ],
+    "prerequisites": [
+      "abstract.field.algebraic",
+      "abstract.field.extension"
+    ]
+  },
+  {
+    "id": "abstract.structures.fg_module",
+    "key_prerequisites": [
+      "abstract.structures.module_hom",
+      "abstract.structures.submodule"
+    ],
+    "encompasses": [
+      "abstract.structures.module_hom",
+      "abstract.structures.submodule"
+    ],
+    "prerequisites": [
+      "abstract.structures.module_hom",
+      "abstract.structures.submodule"
+    ]
+  },
+  {
+    "id": "abstract.field.radicals",
+    "key_prerequisites": [
+      "abstract.group.solvable",
+      "abstract.field.galois_group"
+    ],
+    "encompasses": [
+      "abstract.group.solvable",
+      "abstract.field.galois_group"
+    ],
+    "prerequisites": [
+      "abstract.group.solvable",
+      "abstract.field.galois_group"
+    ]
+  },
+  {
+    "id": "abstract.field.separable",
+    "key_prerequisites": [
+      "abstract.field.extension",
+      "abstract.rings.polynomial"
+    ],
+    "encompasses": [
+      "abstract.field.extension",
+      "abstract.rings.polynomial"
+    ],
+    "prerequisites": [
+      "abstract.field.extension",
+      "abstract.rings.polynomial"
+    ]
   }
 ]
