@@ -207,9 +207,10 @@ export default function NotePage() {
             >
               tip the project on Myhappr
             </a>
-            . That support helps keep Mathua free, pays for hosting and diagrams, and funds ongoing
-            improvements to the curriculum and platform, including future app work such as a mobile
-            app. There is no paywall, and nothing here changes if you cannot contribute.
+            . That support helps keep Mathua free. It pays for hosting and diagrams, funds the time
+            that goes into the curriculum and platform, and supports ongoing improvements and future
+            app work such as a mobile app. There is no paywall, and nothing here changes if you
+            cannot contribute.
           </p>
         </section>
 
