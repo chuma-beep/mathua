@@ -44,7 +44,7 @@ func countFracVerdicts(lead string, pool []fracVerdict) generator.Problem {
 		for i, v := range chosen {
 			parts[i] = fmt.Sprintf("(%c) %s", 'a'+i, v.label)
 		}
-		question = fmt.Sprintf("%s %s (enter a number)", lead, strings.Join(parts, " "))
+		question = fmt.Sprintf("%s\n%s\n(enter a number)", lead, strings.Join(parts, "\n"))
 		if !strings.Contains(question, fmt.Sprint(count)) {
 			break
 		}
@@ -60,7 +60,7 @@ func countFracVerdicts(lead string, pool []fracVerdict) generator.Problem {
 	return generator.Problem{
 		Question:    question,
 		Answer:      fmt.Sprint(count),
-		Explanation: fmt.Sprintf("Exactly %d of the %d comparisons are correct. %s", count, fracDraw, strings.Join(notes, " ")),
+		Explanation: fmt.Sprintf("Exactly %d of the %d comparisons are correct.\n%s", count, fracDraw, strings.Join(notes, "\n")),
 		Facts:       map[string]string{"count": fmt.Sprint(count)},
 	}
 }
@@ -142,14 +142,14 @@ func compareWordProblem() generator.Problem {
 	pool := make([]fracVerdict, 0, 16)
 	for _, p := range truePairs {
 		pool = append(pool, fracVerdict{
-			label: fmt.Sprintf("Alice %d/%d, Bob %d/%d: Alice ate more.", p[0], p[1], p[2], p[3]),
+			label: fmt.Sprintf("Alice %d/%d, Bob %d/%d", p[0], p[1], p[2], p[3]),
 			yes:   true,
 			note:  fmt.Sprintf("%d/%d is greater than %d/%d.", p[0], p[1], p[2], p[3]),
 		})
 	}
 	for _, p := range falsePairs {
 		pool = append(pool, fracVerdict{
-			label: fmt.Sprintf("Alice %d/%d, Bob %d/%d: Alice ate more.", p[0], p[1], p[2], p[3]),
+			label: fmt.Sprintf("Alice %d/%d, Bob %d/%d", p[0], p[1], p[2], p[3]),
 			yes:   false,
 			note:  fmt.Sprintf("%d/%d is less than %d/%d, so Bob ate more.", p[0], p[1], p[2], p[3]),
 		})

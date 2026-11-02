@@ -456,12 +456,12 @@ func (g *independentSetGen) Generate(ctx generator.GeneratorContext) generator.P
 		reason   string
 	}
 	claims := []claim{
-		{question: "What is the maximum independent set size of the path P_4? (enter a number)", answer: "2", kind: "path", a: 4, reason: "The two endpoints and the two internal vertices split into two independent pairs."},
-		{question: "What is the maximum independent set size of the cycle C_6? (enter a number)", answer: "3", kind: "cycle", a: 6, reason: "Alternate vertices are independent and there are three."},
-		{question: "What is the maximum independent set size of the star K_{1,5}? (enter a number)", answer: "5", kind: "star", a: 5, reason: "All five leaves are pairwise non-adjacent."},
-		{question: "What is the maximum independent set size of K_{2,3}? (enter a number)", answer: "3", kind: "bipartite", a: 2, b: 3, reason: "The larger side of a complete bipartite graph is independent."},
-		{question: "What is the maximum independent set size of the path P_5? (enter a number)", answer: "3", kind: "path", a: 5, reason: "Vertices 1, 3 and 5 are pairwise non-adjacent."},
-		{question: "What is the maximum independent set size of the cycle C_5? (enter a number)", answer: "2", kind: "cycle", a: 5, reason: "Two non-adjacent vertices is the maximum in an odd cycle."},
+		{question: "An independent set has no two adjacent vertices. What is the maximum independent set size of the path P_4, a line of 4 vertices? (enter a number)", answer: "2", kind: "path", a: 4, reason: "The two endpoints and the two internal vertices split into two independent pairs."},
+		{question: "An independent set has no two adjacent vertices. What is the maximum independent set size of the cycle C_6, a ring of 6 vertices? (enter a number)", answer: "3", kind: "cycle", a: 6, reason: "Alternate vertices are independent and there are three."},
+		{question: "An independent set has no two adjacent vertices. What is the maximum independent set size of the star K_{1,5}, one centre joined to 5 leaves? (enter a number)", answer: "5", kind: "star", a: 5, reason: "All five leaves are pairwise non-adjacent."},
+		{question: "An independent set has no two adjacent vertices. What is the maximum independent set size of the complete bipartite graph K_{2,3}, with sides of 2 and 3 vertices? (enter a number)", answer: "3", kind: "bipartite", a: 2, b: 3, reason: "The larger side of a complete bipartite graph is independent."},
+		{question: "An independent set has no two adjacent vertices. What is the maximum independent set size of the path P_5, a line of 5 vertices? (enter a number)", answer: "3", kind: "path", a: 5, reason: "Vertices 1, 3 and 5 are pairwise non-adjacent."},
+		{question: "An independent set has no two adjacent vertices. What is the maximum independent set size of the cycle C_5, a ring of 5 vertices? (enter a number)", answer: "2", kind: "cycle", a: 5, reason: "Two non-adjacent vertices is the maximum in an odd cycle."},
 	}
 	c := claims[rand.Intn(len(claims))]
 	facts := map[string]string{"kind": c.kind, "answer": c.answer}

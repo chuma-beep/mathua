@@ -96,22 +96,22 @@ func primeProblem() generator.Problem {
 
 func compositeProblem() generator.Problem {
 	pool := []arithVerdict{
-		{label: "23", yes: true, note: "23 = 2 x 6 + 1 and has no divisor up to 4, so it is prime."},
-		{label: "29", yes: true, note: "29 has no divisor up to 5, so it is prime."},
-		{label: "31", yes: true, note: "31 has no divisor up to 5, so it is prime."},
-		{label: "37", yes: true, note: "37 has no divisor up to 6, so it is prime."},
-		{label: "41", yes: true, note: "41 has no divisor up to 6, so it is prime."},
-		{label: "43", yes: true, note: "43 has no divisor up to 6, so it is prime."},
-		{label: "47", yes: true, note: "47 has no divisor up to 6, so it is prime."},
-		{label: "53", yes: true, note: "53 has no divisor up to 7, so it is prime."},
-		{label: "16", yes: false, note: "16 = 2 x 8, so it is composite."},
-		{label: "18", yes: false, note: "18 = 2 x 9, so it is composite."},
-		{label: "20", yes: false, note: "20 = 4 x 5, so it is composite."},
-		{label: "21", yes: false, note: "21 = 3 x 7, so it is composite."},
-		{label: "22", yes: false, note: "22 = 2 x 11, so it is composite."},
-		{label: "24", yes: false, note: "24 = 4 x 6, so it is composite."},
-		{label: "25", yes: false, note: "25 = 5 x 5, so it is composite."},
-		{label: "26", yes: false, note: "26 = 2 x 13, so it is composite."},
+		{label: "23", yes: false, note: "23 = 2 x 6 + 1 and has no divisor up to 4, so it is prime."},
+		{label: "29", yes: false, note: "29 has no divisor up to 5, so it is prime."},
+		{label: "31", yes: false, note: "31 has no divisor up to 5, so it is prime."},
+		{label: "37", yes: false, note: "37 has no divisor up to 6, so it is prime."},
+		{label: "41", yes: false, note: "41 has no divisor up to 6, so it is prime."},
+		{label: "43", yes: false, note: "43 has no divisor up to 6, so it is prime."},
+		{label: "47", yes: false, note: "47 has no divisor up to 6, so it is prime."},
+		{label: "53", yes: false, note: "53 has no divisor up to 7, so it is prime."},
+		{label: "16", yes: true, note: "16 = 2 x 8, so it is composite."},
+		{label: "18", yes: true, note: "18 = 2 x 9, so it is composite."},
+		{label: "20", yes: true, note: "20 = 4 x 5, so it is composite."},
+		{label: "21", yes: true, note: "21 = 3 x 7, so it is composite."},
+		{label: "22", yes: true, note: "22 = 2 x 11, so it is composite."},
+		{label: "24", yes: true, note: "24 = 4 x 6, so it is composite."},
+		{label: "25", yes: true, note: "25 = 5 x 5, so it is composite."},
+		{label: "26", yes: true, note: "26 = 2 x 13, so it is composite."},
 	}
 	return countArithVerdicts("How many of these numbers are composite?", pool)
 }
