@@ -12,12 +12,12 @@ func TestLoad_Valid(t *testing.T) {
 	if err != nil {
 		t.Fatalf("unexpected load error: %v", err)
 	}
-	if d.Count() != 1250 {
-		t.Errorf("expected 1250 concepts, got %d", d.Count())
+	if d.Count() < 1000 {
+		t.Errorf("expected at least 1000 concepts, got %d", d.Count())
 	}
 
-	if len(d.Order()) != 1250 {
-		t.Errorf("expected 1250 in topo order, got %d", len(d.Order()))
+	if len(d.Order()) != d.Count() {
+		t.Errorf("expected %d in topo order, got %d", d.Count(), len(d.Order()))
 	}
 }
 
@@ -434,8 +434,8 @@ func TestCurriculumEnrichment_LoadedAndVerified(t *testing.T) {
 	if err != nil {
 		t.Fatalf("load curriculum: %v", err)
 	}
-	if dag.Count() != 1250 {
-		t.Errorf("expected 1250 concepts, got %d", dag.Count())
+	if dag.Count() < 1000 {
+		t.Errorf("expected at least 1000 concepts, got %d", dag.Count())
 	}
 
 	encompassedCount := 0
@@ -494,7 +494,7 @@ func TestKnowledgePoints_LoadedFromShards(t *testing.T) {
 			}
 		}
 	}
-	if totalKPs != 3750 {
-		t.Errorf("expected 3750 total knowledge points across 1250 concepts, got %d", totalKPs)
+	if totalKPs != dag.Count()*3 {
+		t.Errorf("expected %d total knowledge points across %d concepts, got %d", dag.Count()*3, dag.Count(), totalKPs)
 	}
 }

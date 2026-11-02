@@ -13,5 +13,15 @@ func main() {
 		fmt.Fprintf(os.Stderr, "FAIL: %v\n", err)
 		os.Exit(1)
 	}
-	fmt.Printf("OK: %d concepts across %d domains\n", dag.Count(), len(dag.Domains()))
+	allow := concepts.ReviewedDuplicateLabels()
+	if err := concepts.CheckReviewedDuplicateLabelsExist(dag, allow); err != nil {
+		fmt.Fprintf(os.Stderr, "FAIL: %v\n", err)
+		os.Exit(1)
+	}
+	if err := concepts.CheckDuplicateLabels(dag, allow); err != nil {
+		fmt.Fprintf(os.Stderr, "FAIL: %v\n", err)
+		os.Exit(1)
+	}
+	fmt.Printf("OK: %d concepts across %d domains, %d reviewed label collisions\n",
+		dag.Count(), len(dag.Domains()), len(allow))
 }
