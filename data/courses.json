@@ -1089,7 +1089,17 @@
       "ml.data.onehot",
       "ml.data.imbalance",
       "ml.tree.ensemble",
-      "ml.grad.vanishing"
+      "ml.grad.vanishing",
+      "ml.svm.margin",
+      "ml.svm.kernel",
+      "ml.naive_bayes",
+      "ml.bias_variance",
+      "ml.mdp.bellman",
+      "ml.cluster.em",
+      "ml.feature.selection",
+      "ml.multiclass",
+      "ml.nlp.embedding",
+      "ml.optim.early_stopping"
     ]
   },
   {

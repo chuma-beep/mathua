@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Distributed representations",
+    "section": "Distributed representations",
+    "subgoals": [
+      "Explain the main idea of distributed representations",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Context windows",
+    "section": "Context windows",
+    "subgoals": [
+      "Explain the main idea of context windows",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Using embeddings",
+    "section": "Using embeddings",
+    "subgoals": [
+      "Explain the main idea of using embeddings",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  }
+]

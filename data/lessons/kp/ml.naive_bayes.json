@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Conditional independence",
+    "section": "Conditional independence",
+    "subgoals": [
+      "Explain the main idea of conditional independence",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Estimation and smoothing",
+    "section": "Estimation and smoothing",
+    "subgoals": [
+      "Explain the main idea of estimation and smoothing",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Parameter counts",
+    "section": "Parameter counts",
+    "subgoals": [
+      "Explain the main idea of parameter counts",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  }
+]

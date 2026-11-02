@@ -19588,5 +19588,155 @@
       "numa.interp.normal_equations",
       "numa.roots.newton"
     ]
+  },
+  {
+    "id": "ml.svm.margin",
+    "key_prerequisites": [
+      "ml.logistic.regression",
+      "linalg.vector.dot"
+    ],
+    "encompasses": [
+      "ml.logistic.regression",
+      "linalg.vector.dot"
+    ],
+    "prerequisites": [
+      "ml.logistic.regression",
+      "linalg.vector.dot"
+    ]
+  },
+  {
+    "id": "ml.svm.kernel",
+    "key_prerequisites": [
+      "ml.svm.margin",
+      "linalg.inner_product"
+    ],
+    "encompasses": [
+      "ml.svm.margin",
+      "linalg.inner_product"
+    ],
+    "prerequisites": [
+      "ml.svm.margin",
+      "linalg.inner_product"
+    ]
+  },
+  {
+    "id": "ml.naive_bayes",
+    "key_prerequisites": [
+      "prob.cond.definition",
+      "ml.logistic.regression"
+    ],
+    "encompasses": [
+      "prob.cond.definition",
+      "ml.logistic.regression"
+    ],
+    "prerequisites": [
+      "prob.cond.definition",
+      "ml.logistic.regression"
+    ]
+  },
+  {
+    "id": "ml.bias_variance",
+    "key_prerequisites": [
+      "ml.overfitting",
+      "ml.validation"
+    ],
+    "encompasses": [
+      "ml.overfitting",
+      "ml.validation"
+    ],
+    "prerequisites": [
+      "ml.overfitting",
+      "ml.validation"
+    ]
+  },
+  {
+    "id": "ml.mdp.bellman",
+    "key_prerequisites": [
+      "ml.reinforcement.qlearning",
+      "prob.expect.conditional"
+    ],
+    "encompasses": [
+      "ml.reinforcement.qlearning",
+      "prob.expect.conditional"
+    ],
+    "prerequisites": [
+      "ml.reinforcement.qlearning",
+      "prob.expect.conditional"
+    ]
+  },
+  {
+    "id": "ml.cluster.em",
+    "key_prerequisites": [
+      "ml.cluster.kmeans",
+      "stat.dist.normal"
+    ],
+    "encompasses": [
+      "ml.cluster.kmeans",
+      "stat.dist.normal"
+    ],
+    "prerequisites": [
+      "ml.cluster.kmeans",
+      "stat.dist.normal"
+    ]
+  },
+  {
+    "id": "ml.feature.selection",
+    "key_prerequisites": [
+      "ml.data.scaling",
+      "ml.validation"
+    ],
+    "encompasses": [
+      "ml.data.scaling",
+      "ml.validation"
+    ],
+    "prerequisites": [
+      "ml.data.scaling",
+      "ml.validation"
+    ]
+  },
+  {
+    "id": "ml.multiclass",
+    "key_prerequisites": [
+      "ml.logistic.regression",
+      "ml.eval.confusion"
+    ],
+    "encompasses": [
+      "ml.logistic.regression",
+      "ml.eval.confusion"
+    ],
+    "prerequisites": [
+      "ml.logistic.regression",
+      "ml.eval.confusion"
+    ]
+  },
+  {
+    "id": "ml.nlp.embedding",
+    "key_prerequisites": [
+      "ml.nlp.bert",
+      "linalg.vector.dot"
+    ],
+    "encompasses": [
+      "ml.nlp.bert",
+      "linalg.vector.dot"
+    ],
+    "prerequisites": [
+      "ml.nlp.bert",
+      "linalg.vector.dot"
+    ]
+  },
+  {
+    "id": "ml.optim.early_stopping",
+    "key_prerequisites": [
+      "ml.validation",
+      "ml.overfitting"
+    ],
+    "encompasses": [
+      "ml.validation",
+      "ml.overfitting"
+    ],
+    "prerequisites": [
+      "ml.validation",
+      "ml.overfitting"
+    ]
   }
 ]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Decomposing the error",
+    "section": "Decomposing the error",
+    "subgoals": [
+      "Explain the main idea of decomposing the error",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Model complexity",
+    "section": "Model complexity",
+    "subgoals": [
+      "Explain the main idea of model complexity",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Averaging reduces variance",
+    "section": "Averaging reduces variance",
+    "subgoals": [
+      "Explain the main idea of averaging reduces variance",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  }
+]

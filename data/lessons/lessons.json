@@ -5938,5 +5938,45 @@
   {
     "concept_id": "numa.least_squares.gauss_newton",
     "source": "teaching/numa.least_squares.gauss_newton.md"
+  },
+  {
+    "concept_id": "ml.svm.margin",
+    "source": "teaching/ml.svm.margin.md"
+  },
+  {
+    "concept_id": "ml.svm.kernel",
+    "source": "teaching/ml.svm.kernel.md"
+  },
+  {
+    "concept_id": "ml.naive_bayes",
+    "source": "teaching/ml.naive_bayes.md"
+  },
+  {
+    "concept_id": "ml.bias_variance",
+    "source": "teaching/ml.bias_variance.md"
+  },
+  {
+    "concept_id": "ml.mdp.bellman",
+    "source": "teaching/ml.mdp.bellman.md"
+  },
+  {
+    "concept_id": "ml.cluster.em",
+    "source": "teaching/ml.cluster.em.md"
+  },
+  {
+    "concept_id": "ml.feature.selection",
+    "source": "teaching/ml.feature.selection.md"
+  },
+  {
+    "concept_id": "ml.multiclass",
+    "source": "teaching/ml.multiclass.md"
+  },
+  {
+    "concept_id": "ml.nlp.embedding",
+    "source": "teaching/ml.nlp.embedding.md"
+  },
+  {
+    "concept_id": "ml.optim.early_stopping",
+    "source": "teaching/ml.optim.early_stopping.md"
   }
 ]

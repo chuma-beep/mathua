@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1485,
+  "concept_count": 1495,
   "unit_count": 137,
   "units": [
     {
@@ -2204,13 +2204,14 @@
         "ml.arch.gan",
         "ml.arch.rnn",
         "ml.arch.transformer",
+        "ml.cluster.em",
         "ml.cluster.kmeans",
         "ml.logistic.regression",
         "ml.nlp.transformer",
         "ml.pca.variance_percent",
         "ml.reinforcement.qlearning"
       ],
-      "concept_count": 9
+      "concept_count": 10
     },
     {
       "id": "machine_learning.b9",
@@ -2220,15 +2221,21 @@
       "depth_min": 27,
       "depth_max": 28,
       "subdomains": [
+        "machine_learning.classification",
         "machine_learning.nlp",
         "machine_learning.reinforcement"
       ],
       "concept_ids": [
+        "ml.mdp.bellman",
+        "ml.naive_bayes",
         "ml.nlp.bert",
+        "ml.nlp.embedding",
         "ml.reinforcement.actor_critic",
-        "ml.reinforcement.policy_gradient"
+        "ml.reinforcement.policy_gradient",
+        "ml.svm.kernel",
+        "ml.svm.margin"
       ],
-      "concept_count": 3
+      "concept_count": 8
     },
     {
       "id": "machine_learning.b10",
@@ -2254,6 +2261,7 @@
       "depth_min": 33,
       "depth_max": 35,
       "subdomains": [
+        "machine_learning.data",
         "machine_learning.evaluation",
         "machine_learning.neural_networks",
         "machine_learning.regression",
@@ -2261,16 +2269,19 @@
       ],
       "concept_ids": [
         "ml.backpropagation",
+        "ml.bias_variance",
         "ml.data.augmentation",
         "ml.eval.accuracy",
         "ml.eval.roc",
+        "ml.feature.selection",
+        "ml.optim.early_stopping",
         "ml.overfitting",
         "ml.reg.ridge_penalty",
         "ml.regularization.dropout",
         "ml.tree.gini",
         "ml.validation"
       ],
-      "concept_count": 9
+      "concept_count": 12
     },
     {
       "id": "machine_learning.b12",
@@ -2280,6 +2291,7 @@
       "depth_min": 36,
       "depth_max": 37,
       "subdomains": [
+        "machine_learning.classification",
         "machine_learning.data",
         "machine_learning.evaluation",
         "machine_learning.neural_networks",
@@ -2293,12 +2305,13 @@
         "ml.eval.precision",
         "ml.eval.recall",
         "ml.grad.vanishing",
+        "ml.multiclass",
         "ml.optim.adam",
         "ml.optim.batchnorm",
         "ml.optim.momentum",
         "ml.tree.ensemble"
       ],
-      "concept_count": 11
+      "concept_count": 12
     },
     {
       "id": "number_theory.b2",

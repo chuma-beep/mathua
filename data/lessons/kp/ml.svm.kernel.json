@@ -1,0 +1,29 @@
+[
+  {
+    "label": "From inner products to kernels",
+    "section": "From inner products to kernels",
+    "subgoals": [
+      "Explain the main idea of from inner products to kernels",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Common kernels",
+    "section": "Common kernels",
+    "subgoals": [
+      "Explain the main idea of common kernels",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Kernel matrices",
+    "section": "Kernel matrices",
+    "subgoals": [
+      "Explain the main idea of kernel matrices",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  }
+]

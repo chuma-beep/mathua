@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Latent assignments",
+    "section": "Latent assignments",
+    "subgoals": [
+      "Explain the main idea of latent assignments",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "The maximization step",
+    "section": "The maximization step",
+    "subgoals": [
+      "Explain the main idea of the maximization step",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Counting parameters",
+    "section": "Counting parameters",
+    "subgoals": [
+      "Explain the main idea of counting parameters",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  }
+]
