@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Estimating the Quotient",
+    "section": "Estimating the Quotient",
+    "subgoals": [
+      "Explain estimating the quotient",
+      "Apply estimating the quotient to a worked example",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Recording the Steps",
+    "section": "Recording the Steps",
+    "subgoals": [
+      "Explain recording the steps",
+      "Apply recording the steps to a worked example",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Checking With Multiplication",
+    "section": "Checking With Multiplication",
+    "subgoals": [
+      "Explain checking with multiplication",
+      "Apply checking with multiplication to a worked example",
+      "Check the result"
+    ]
+  }
+]

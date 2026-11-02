@@ -5366,5 +5366,81 @@
   {
     "concept_id": "alg.linear.horizontal_vertical",
     "source": "teaching/alg.linear.horizontal_vertical.md"
+  },
+  {
+    "concept_id": "arith.mult.two_by_two",
+    "source": "teaching/arith.mult.two_by_two.md"
+  },
+  {
+    "concept_id": "arith.div.two_digit_divisor",
+    "source": "teaching/arith.div.two_digit_divisor.md"
+  },
+  {
+    "concept_id": "arith.factor.divisibility",
+    "source": "teaching/arith.factor.divisibility.md"
+  },
+  {
+    "concept_id": "arith.sub.zeros",
+    "source": "teaching/arith.sub.zeros.md"
+  },
+  {
+    "concept_id": "arith.ops.fact_families",
+    "source": "teaching/arith.ops.fact_families.md"
+  },
+  {
+    "concept_id": "arith.place.millions",
+    "source": "teaching/arith.place.millions.md"
+  },
+  {
+    "concept_id": "arith.add.missing_addend",
+    "source": "teaching/arith.add.missing_addend.md"
+  },
+  {
+    "concept_id": "arith.estimate.quotient",
+    "source": "teaching/arith.estimate.quotient.md"
+  },
+  {
+    "concept_id": "arith.factor.multiple",
+    "source": "teaching/arith.factor.multiple.md"
+  },
+  {
+    "concept_id": "arith.neg.compare",
+    "source": "teaching/arith.neg.compare.md"
+  },
+  {
+    "concept_id": "arith.factor.even_odd",
+    "source": "teaching/arith.factor.even_odd.md"
+  },
+  {
+    "concept_id": "arith.exp.standard_form",
+    "source": "teaching/arith.exp.standard_form.md"
+  },
+  {
+    "concept_id": "frac.ops.negative",
+    "source": "teaching/frac.ops.negative.md"
+  },
+  {
+    "concept_id": "frac.ops.repeating_decimal",
+    "source": "teaching/frac.ops.repeating_decimal.md"
+  },
+  {
+    "concept_id": "frac.mixed.borrow",
+    "source": "teaching/frac.mixed.borrow.md"
+  },
+  {
+    "concept_id": "frac.ops.estimate",
+    "source": "teaching/frac.ops.estimate.md"
+  },
+  {
+    "concept_id": "frac.word.multi_step",
+    "source": "teaching/frac.word.multi_step.md"
+  },
+  {
+    "concept_id": "frac.div.by_whole",
+    "source": "teaching/frac.div.by_whole.md"
+  },
+  {
+    "concept_id": "frac.compare.forms",
+    "source": "teaching/frac.compare.forms.md"
   }
 ]

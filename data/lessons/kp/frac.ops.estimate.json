@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Benchmark Values",
+    "section": "Benchmark Values",
+    "subgoals": [
+      "Explain benchmark values",
+      "Work an example of benchmark values",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Estimating a Sum",
+    "section": "Estimating a Sum",
+    "subgoals": [
+      "Explain estimating a sum",
+      "Work an example of estimating a sum",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Using the Estimate",
+    "section": "Using the Estimate",
+    "subgoals": [
+      "Explain using the estimate",
+      "Work an example of using the estimate",
+      "Check the result"
+    ]
+  }
+]

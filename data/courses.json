@@ -18,7 +18,15 @@
       "arith.round.thousands",
       "frac.basics.number_line",
       "geo.basic.complementary",
-      "geo.basic.vertical"
+      "geo.basic.vertical",
+      "arith.mult.two_by_two",
+      "arith.factor.divisibility",
+      "arith.sub.zeros",
+      "arith.ops.fact_families",
+      "arith.place.millions",
+      "arith.add.missing_addend",
+      "arith.factor.multiple",
+      "arith.factor.even_odd"
     ]
   },
   {
@@ -40,7 +48,12 @@
       "dec.ops.sub.word",
       "dec.ops.div.word",
       "dec.ops.round",
-      "frac.ops.to_decimal"
+      "frac.ops.to_decimal",
+      "arith.div.two_digit_divisor",
+      "arith.estimate.quotient",
+      "frac.mixed.borrow",
+      "frac.ops.estimate",
+      "frac.div.by_whole"
     ]
   },
   {
@@ -63,7 +76,10 @@
       "pct.ops.markup",
       "ratio.ops.percent_proportion",
       "prealg.expr.translate",
-      "prealg.measure.metric"
+      "prealg.measure.metric",
+      "arith.neg.compare",
+      "frac.word.multi_step",
+      "frac.compare.forms"
     ]
   },
   {
@@ -86,7 +102,9 @@
       "arith.exp.zero",
       "ratio.ops.better_buy",
       "prealg.ineq.graph",
-      "prealg.measure.convert"
+      "prealg.measure.convert",
+      "frac.ops.negative",
+      "frac.ops.repeating_decimal"
     ]
   },
   {
@@ -110,7 +128,8 @@
       "pct.ops.simple_interest",
       "prealg.expr.formula",
       "prealg.ineq.word",
-      "prealg.measure.temperature"
+      "prealg.measure.temperature",
+      "arith.exp.standard_form"
     ]
   },
   {

@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1342,
+  "concept_count": 1361,
   "unit_count": 134,
   "units": [
     {
@@ -436,6 +436,7 @@
         "arithmetic.subtraction"
       ],
       "concept_ids": [
+        "arith.add.missing_addend",
         "arith.add.triple",
         "arith.compare.whole",
         "arith.div.concept",
@@ -451,9 +452,10 @@
         "arith.round.tens",
         "arith.round.thousands",
         "arith.sub.borrow",
-        "arith.sub.word"
+        "arith.sub.word",
+        "arith.sub.zeros"
       ],
-      "concept_count": 16
+      "concept_count": 18
     },
     {
       "id": "arithmetic.b2",
@@ -481,17 +483,24 @@
         "arith.estimate.product",
         "arith.exp.concept",
         "arith.exp.evaluate",
+        "arith.factor.divisibility",
+        "arith.factor.even_odd",
         "arith.factor.find",
+        "arith.factor.multiple",
         "arith.factor.prime",
         "arith.mult.double",
         "arith.mult.tables",
         "arith.mult.triple",
+        "arith.mult.two_by_two",
         "arith.mult.word",
+        "arith.neg.compare",
         "arith.neg.mult_div",
+        "arith.ops.fact_families",
         "arith.order_ops.basic",
+        "arith.place.millions",
         "arith.place.powers_ten"
       ],
-      "concept_count": 16
+      "concept_count": 23
     },
     {
       "id": "arithmetic.b3",
@@ -502,6 +511,7 @@
       "depth_max": 11,
       "subdomains": [
         "arithmetic.division",
+        "arithmetic.estimation",
         "arithmetic.exponents",
         "arithmetic.factors",
         "arithmetic.order_of_operations",
@@ -510,13 +520,16 @@
       "concept_ids": [
         "arith.div.interpret_remainder",
         "arith.div.long",
+        "arith.div.two_digit_divisor",
         "arith.div.word",
+        "arith.estimate.quotient",
         "arith.exp.negative_base",
         "arith.exp.power_product",
         "arith.exp.power_quotient",
         "arith.exp.power_rule",
         "arith.exp.product_rule",
         "arith.exp.quotient_rule",
+        "arith.exp.standard_form",
         "arith.factor.composite",
         "arith.factor.gcf",
         "arith.factor.lcm",
@@ -529,7 +542,7 @@
         "arith.sqrt.simplify",
         "arith.word.multi_step"
       ],
-      "concept_count": 20
+      "concept_count": 23
     },
     {
       "id": "calc1.b8",
@@ -1434,8 +1447,10 @@
       ],
       "concept_ids": [
         "frac.compare.cross",
+        "frac.compare.forms",
         "frac.compare.word",
         "frac.complex",
+        "frac.div.by_whole",
         "frac.div.whole",
         "frac.div.word",
         "frac.equivalent.scale",
@@ -1452,12 +1467,13 @@
         "frac.ops.benchmark",
         "frac.ops.compare",
         "frac.ops.div",
+        "frac.ops.estimate",
         "frac.ops.simplify",
         "frac.order.half",
         "frac.recipe.scale",
         "frac.sub.same"
       ],
-      "concept_count": 23
+      "concept_count": 26
     },
     {
       "id": "fractions.b4",
@@ -1481,15 +1497,18 @@
         "frac.lcd",
         "frac.mixed.add",
         "frac.mixed.sub",
+        "frac.ops.negative",
+        "frac.ops.repeating_decimal",
         "frac.order_ops",
         "frac.reciprocal",
         "frac.remaining",
         "frac.sub.diff",
         "frac.sub.whole",
         "frac.sub.word",
-        "frac.unit_decompose"
+        "frac.unit_decompose",
+        "frac.word.multi_step"
       ],
-      "concept_count": 13
+      "concept_count": 16
     },
     {
       "id": "fractions.b5",
@@ -1499,12 +1518,14 @@
       "depth_min": 15,
       "depth_max": 15,
       "subdomains": [
-        "frac.mixed"
+        "frac.mixed",
+        "fractions.mixed"
       ],
       "concept_ids": [
+        "frac.mixed.borrow",
         "frac.mixed.word"
       ],
-      "concept_count": 1
+      "concept_count": 2
     },
     {
       "id": "geometry.b0",

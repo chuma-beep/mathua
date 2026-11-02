@@ -855,5 +855,185 @@
       "streak": 10,
       "avg_time_seconds": 15.0
     }
+  },
+  {
+    "id": "arith.mult.two_by_two",
+    "label": "Multiply two two-digit numbers",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.multiplication",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.mult.double",
+      "arith.add.carry"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "arith.div.two_digit_divisor",
+    "label": "Divide by a two-digit divisor",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.division",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.div.long",
+      "arith.mult.two_by_two"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "arith.factor.divisibility",
+    "label": "Divisibility rules for whole numbers",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.factors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.factor.find",
+      "arith.place.tens"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "arith.sub.zeros",
+    "label": "Subtraction across zeros",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.subtraction",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.sub.borrow",
+      "arith.place.hundreds"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "arith.ops.fact_families",
+    "label": "Fact families",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.multiplication",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.mult.tables",
+      "arith.div.basic"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "arith.place.millions",
+    "label": "Place value to millions",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.place_value",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.place.thousands",
+      "arith.place.expanded"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "arith.add.missing_addend",
+    "label": "Missing addends",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.addition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.double",
+      "arith.sub.double"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "arith.estimate.quotient",
+    "label": "Estimate quotients",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.estimation",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.round.tens",
+      "arith.div.two_digit_divisor"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "arith.factor.multiple",
+    "label": "Multiples of a number",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.factors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.mult.tables",
+      "arith.factor.find"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "arith.neg.compare",
+    "label": "Comparing negative numbers",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.negatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.neg.number_line",
+      "arith.compare.whole"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "arith.factor.even_odd",
+    "label": "Even and odd numbers",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.factors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.factor.find",
+      "arith.place.tens"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 16.0
+    }
+  },
+  {
+    "id": "arith.exp.standard_form",
+    "label": "Numbers in standard form",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.exponents",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.exp.evaluate",
+      "arith.place.millions"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
   }
 ]

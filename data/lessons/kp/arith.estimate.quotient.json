@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Rounding Before Dividing",
+    "section": "Rounding Before Dividing",
+    "subgoals": [
+      "Explain rounding before dividing",
+      "Apply rounding before dividing to a worked example",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Choosing Useful Numbers",
+    "section": "Choosing Useful Numbers",
+    "subgoals": [
+      "Explain choosing useful numbers",
+      "Apply choosing useful numbers to a worked example",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Using the Estimate",
+    "section": "Using the Estimate",
+    "subgoals": [
+      "Explain using the estimate",
+      "Apply using the estimate to a worked example",
+      "Check the result"
+    ]
+  }
+]

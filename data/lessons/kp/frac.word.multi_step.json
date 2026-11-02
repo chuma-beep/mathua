@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Reading the Steps",
+    "section": "Reading the Steps",
+    "subgoals": [
+      "Explain reading the steps",
+      "Work an example of reading the steps",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Working With the Remainder",
+    "section": "Working With the Remainder",
+    "subgoals": [
+      "Explain working with the remainder",
+      "Work an example of working with the remainder",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Checking the Story",
+    "section": "Checking the Story",
+    "subgoals": [
+      "Explain checking the story",
+      "Work an example of checking the story",
+      "Check the result"
+    ]
+  }
+]

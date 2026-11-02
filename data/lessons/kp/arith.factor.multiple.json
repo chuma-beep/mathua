@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What a Multiple Is",
+    "section": "What a Multiple Is",
+    "subgoals": [
+      "Explain what a multiple is",
+      "Apply what a multiple is to a worked example",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Finding Multiples in a Range",
+    "section": "Finding Multiples in a Range",
+    "subgoals": [
+      "Explain finding multiples in a range",
+      "Apply finding multiples in a range to a worked example",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Common Multiples",
+    "section": "Common Multiples",
+    "subgoals": [
+      "Explain common multiples",
+      "Apply common multiples to a worked example",
+      "Check the result"
+    ]
+  }
+]

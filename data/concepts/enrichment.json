@@ -17679,5 +17679,216 @@
     "encompasses": [
       "alg.linear.slope_intercept"
     ]
+  },
+  {
+    "id": "arith.mult.two_by_two",
+    "key_prerequisites": [
+      "arith.mult.double",
+      "arith.add.carry"
+    ],
+    "encompasses": [
+      "arith.mult.double",
+      "arith.add.carry"
+    ]
+  },
+  {
+    "id": "arith.div.two_digit_divisor",
+    "key_prerequisites": [
+      "arith.div.long",
+      "arith.mult.two_by_two"
+    ],
+    "encompasses": [
+      "arith.div.long",
+      "arith.mult.two_by_two"
+    ]
+  },
+  {
+    "id": "arith.factor.divisibility",
+    "key_prerequisites": [
+      "arith.factor.find",
+      "arith.place.tens"
+    ],
+    "encompasses": [
+      "arith.factor.find",
+      "arith.place.tens"
+    ]
+  },
+  {
+    "id": "arith.sub.zeros",
+    "key_prerequisites": [
+      "arith.sub.borrow",
+      "arith.place.hundreds"
+    ],
+    "encompasses": [
+      "arith.sub.borrow",
+      "arith.place.hundreds"
+    ]
+  },
+  {
+    "id": "arith.ops.fact_families",
+    "key_prerequisites": [
+      "arith.mult.tables",
+      "arith.div.basic"
+    ],
+    "encompasses": [
+      "arith.mult.tables",
+      "arith.div.basic"
+    ]
+  },
+  {
+    "id": "arith.place.millions",
+    "key_prerequisites": [
+      "arith.place.thousands",
+      "arith.place.expanded"
+    ],
+    "encompasses": [
+      "arith.place.thousands",
+      "arith.place.expanded"
+    ]
+  },
+  {
+    "id": "arith.add.missing_addend",
+    "key_prerequisites": [
+      "arith.add.double",
+      "arith.sub.double"
+    ],
+    "encompasses": [
+      "arith.add.double",
+      "arith.sub.double"
+    ]
+  },
+  {
+    "id": "arith.estimate.quotient",
+    "key_prerequisites": [
+      "arith.round.tens",
+      "arith.div.two_digit_divisor"
+    ],
+    "encompasses": [
+      "arith.round.tens",
+      "arith.div.two_digit_divisor"
+    ]
+  },
+  {
+    "id": "arith.factor.multiple",
+    "key_prerequisites": [
+      "arith.mult.tables",
+      "arith.factor.find"
+    ],
+    "encompasses": [
+      "arith.mult.tables",
+      "arith.factor.find"
+    ]
+  },
+  {
+    "id": "arith.neg.compare",
+    "key_prerequisites": [
+      "arith.neg.number_line",
+      "arith.compare.whole"
+    ],
+    "encompasses": [
+      "arith.neg.number_line",
+      "arith.compare.whole"
+    ]
+  },
+  {
+    "id": "arith.factor.even_odd",
+    "key_prerequisites": [
+      "arith.factor.find",
+      "arith.place.tens"
+    ],
+    "encompasses": [
+      "arith.factor.find",
+      "arith.place.tens"
+    ]
+  },
+  {
+    "id": "arith.exp.standard_form",
+    "key_prerequisites": [
+      "arith.exp.evaluate",
+      "arith.place.millions"
+    ],
+    "encompasses": [
+      "arith.exp.evaluate",
+      "arith.place.millions"
+    ]
+  },
+  {
+    "id": "frac.ops.negative",
+    "key_prerequisites": [
+      "frac.add.diff",
+      "arith.neg.mult_div"
+    ],
+    "encompasses": [
+      "frac.add.diff",
+      "arith.neg.mult_div"
+    ]
+  },
+  {
+    "id": "frac.ops.repeating_decimal",
+    "key_prerequisites": [
+      "frac.ops.to_decimal",
+      "frac.ops.simplify"
+    ],
+    "encompasses": [
+      "frac.ops.to_decimal",
+      "frac.ops.simplify"
+    ]
+  },
+  {
+    "id": "frac.mixed.borrow",
+    "key_prerequisites": [
+      "frac.mixed.sub",
+      "frac.sub.whole"
+    ],
+    "encompasses": [
+      "frac.mixed.sub",
+      "frac.sub.whole"
+    ]
+  },
+  {
+    "id": "frac.ops.estimate",
+    "key_prerequisites": [
+      "frac.ops.benchmark",
+      "arith.estimate.sum"
+    ],
+    "encompasses": [
+      "frac.ops.benchmark",
+      "arith.estimate.sum"
+    ]
+  },
+  {
+    "id": "frac.word.multi_step",
+    "key_prerequisites": [
+      "frac.add.word",
+      "frac.sub.word",
+      "frac.of_number"
+    ],
+    "encompasses": [
+      "frac.add.word",
+      "frac.sub.word",
+      "frac.of_number"
+    ]
+  },
+  {
+    "id": "frac.div.by_whole",
+    "key_prerequisites": [
+      "frac.ops.div",
+      "frac.ops.mult"
+    ],
+    "encompasses": [
+      "frac.ops.div",
+      "frac.ops.mult"
+    ]
+  },
+  {
+    "id": "frac.compare.forms",
+    "key_prerequisites": [
+      "frac.ops.to_decimal",
+      "frac.ops.compare"
+    ],
+    "encompasses": [
+      "frac.ops.to_decimal",
+      "frac.ops.compare"
+    ]
   }
 ]

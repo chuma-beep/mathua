@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Rules for Small Divisors",
+    "section": "Rules for Small Divisors",
+    "subgoals": [
+      "Explain rules for small divisors",
+      "Apply rules for small divisors to a worked example",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Rules Built From Others",
+    "section": "Rules Built From Others",
+    "subgoals": [
+      "Explain rules built from others",
+      "Apply rules built from others to a worked example",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Using Rules to Find Factors",
+    "section": "Using Rules to Find Factors",
+    "subgoals": [
+      "Explain using rules to find factors",
+      "Apply using rules to find factors to a worked example",
+      "Check the result"
+    ]
+  }
+]

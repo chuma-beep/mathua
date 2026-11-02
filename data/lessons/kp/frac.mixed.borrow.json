@@ -1,0 +1,29 @@
+[
+  {
+    "label": "When the Fraction Is Too Small",
+    "section": "When the Fraction Is Too Small",
+    "subgoals": [
+      "Explain when the fraction is too small",
+      "Work an example of when the fraction is too small",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Borrowing Across a Whole Number",
+    "section": "Borrowing Across a Whole Number",
+    "subgoals": [
+      "Explain borrowing across a whole number",
+      "Work an example of borrowing across a whole number",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Borrowing From an Integer",
+    "section": "Borrowing From an Integer",
+    "subgoals": [
+      "Explain borrowing from an integer",
+      "Work an example of borrowing from an integer",
+      "Check the result"
+    ]
+  }
+]

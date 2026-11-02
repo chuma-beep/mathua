@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Order on the Number Line",
+    "section": "Order on the Number Line",
+    "subgoals": [
+      "Explain order on the number line",
+      "Apply order on the number line to a worked example",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Absolute Value and Order",
+    "section": "Absolute Value and Order",
+    "subgoals": [
+      "Explain absolute value and order",
+      "Apply absolute value and order to a worked example",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Comparing Several Values",
+    "section": "Comparing Several Values",
+    "subgoals": [
+      "Explain comparing several values",
+      "Apply comparing several values to a worked example",
+      "Check the result"
+    ]
+  }
+]

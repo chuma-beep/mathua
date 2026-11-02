@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Where the Sign Lives",
+    "section": "Where the Sign Lives",
+    "subgoals": [
+      "Explain where the sign lives",
+      "Work an example of where the sign lives",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Adding and Subtracting",
+    "section": "Adding and Subtracting",
+    "subgoals": [
+      "Explain adding and subtracting",
+      "Work an example of adding and subtracting",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Multiplying and Dividing",
+    "section": "Multiplying and Dividing",
+    "subgoals": [
+      "Explain multiplying and dividing",
+      "Work an example of multiplying and dividing",
+      "Check the result"
+    ]
+  }
+]

@@ -645,5 +645,111 @@
       "streak": 7,
       "avg_time_seconds": 16.0
     }
+  },
+  {
+    "id": "frac.ops.negative",
+    "label": "Arithmetic with negative fractions",
+    "domain": "fractions",
+    "subdomain": "fractions.concept",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.add.diff",
+      "arith.neg.mult_div"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "frac.ops.repeating_decimal",
+    "label": "Repeating decimals from fractions",
+    "domain": "fractions",
+    "subdomain": "fractions.concept",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.ops.to_decimal",
+      "frac.ops.simplify"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "frac.mixed.borrow",
+    "label": "Borrowing with mixed numbers",
+    "domain": "fractions",
+    "subdomain": "fractions.mixed",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.mixed.sub",
+      "frac.sub.whole"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "frac.ops.estimate",
+    "label": "Estimating with fractions",
+    "domain": "fractions",
+    "subdomain": "fractions.equivalence",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.ops.benchmark",
+      "arith.estimate.sum"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "frac.word.multi_step",
+    "label": "Multi-step fraction word problems",
+    "domain": "fractions",
+    "subdomain": "fractions.concept",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.add.word",
+      "frac.sub.word",
+      "frac.of_number"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "frac.div.by_whole",
+    "label": "Dividing a fraction by a whole number",
+    "domain": "fractions",
+    "subdomain": "fractions.division",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.ops.div",
+      "frac.ops.mult"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "frac.compare.forms",
+    "label": "Comparing fractions decimals and percents",
+    "domain": "fractions",
+    "subdomain": "fractions.equivalence",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.ops.to_decimal",
+      "frac.ops.compare"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
   }
 ]

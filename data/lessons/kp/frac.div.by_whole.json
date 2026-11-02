@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Sharing a Fraction",
+    "section": "Sharing a Fraction",
+    "subgoals": [
+      "Explain sharing a fraction",
+      "Work an example of sharing a fraction",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Using the Reciprocal",
+    "section": "Using the Reciprocal",
+    "subgoals": [
+      "Explain using the reciprocal",
+      "Work an example of using the reciprocal",
+      "Check the result"
+    ]
+  },
+  {
+    "label": "Checking the Size",
+    "section": "Checking the Size",
+    "subgoals": [
+      "Explain checking the size",
+      "Work an example of checking the size",
+      "Check the result"
+    ]
+  }
+]
