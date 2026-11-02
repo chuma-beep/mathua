@@ -305,7 +305,8 @@
       "geo.circle.arc_measure",
       "geo.solid.cross_section",
       "geo.transform.symmetry",
-      "geo.solid.euler"
+      "geo.solid.euler",
+      "geo.solid.frustum"
     ]
   },
   {
@@ -855,7 +856,8 @@
       "stat.dist.normal_approx",
       "stat.dist.empirical_rule",
       "stat.data.skew",
-      "stat.infer.regression_slope"
+      "stat.infer.regression_slope",
+      "stat.reg.logistic"
     ]
   },
   {
@@ -953,7 +955,8 @@
       "ode.second_order.nonhomogeneous",
       "ode.adv.systems",
       "ode.systems.linear_phase",
-      "ode.stability"
+      "ode.stability",
+      "ode.second_order.forced"
     ]
   },
   {
@@ -1012,7 +1015,8 @@
       "abstract.field.algebraic_closure",
       "abstract.structures.fg_module",
       "abstract.field.radicals",
-      "abstract.field.separable"
+      "abstract.field.separable",
+      "abstract.group.cauchy"
     ]
   },
   {
@@ -1286,7 +1290,8 @@
       "prob.process.recurrence",
       "prob.martingale.stopping",
       "prob.rv.multivariate_transform",
-      "prob.rv.integral_transform"
+      "prob.rv.integral_transform",
+      "prob.dist.geometric"
     ]
   },
   {

@@ -881,5 +881,23 @@
       "streak": 10,
       "avg_time_seconds": 26.0
     }
+  },
+  {
+    "id": "prob.dist.geometric",
+    "label": "The geometric distribution",
+    "domain": "probability_theory",
+    "subdomain": "probability_theory.distributions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.rv.pmf",
+      "prob.dist.memoryless"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
   }
 ]

@@ -66,4 +66,5 @@ func Register(reg *generator.Registry) {
 	reg.Register("prob.martingale.stopping", &stoppingGen{})
 	reg.Register("prob.rv.multivariate_transform", &multivariateTransformGen{})
 	reg.Register("prob.rv.integral_transform", &integralTransformGen{})
+	reg.Register("prob.dist.geometric", &geometricDistributionGen{})
 }

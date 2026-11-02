@@ -64,6 +64,7 @@ func Register(reg *generator.Registry) {
 	reg.Register("stat.dist.empirical_rule", &empiricalRuleGen{})
 	reg.Register("stat.data.skew", &skewGen{})
 	reg.Register("stat.infer.regression_slope", &regressionSlopeGen{})
+	reg.Register("stat.reg.logistic", &logisticRegressionGen{})
 	reg.Register("stat.prob.bayes", &bayesGen{})
 	reg.Register("stat.prob.continuous_rv", &continuousRVGen{})
 	reg.Register("stat.prob.discrete_rv", &discreteRVGen{})

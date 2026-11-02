@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Geometric Model",
+    "section": "The Geometric Model",
+    "subgoals": [
+      "Explain the geometric model",
+      "Apply the geometric model in a worked example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Mean and Variance",
+    "section": "Mean and Variance",
+    "subgoals": [
+      "Explain mean and variance",
+      "Apply mean and variance in a worked example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "The Memoryless Property",
+    "section": "The Memoryless Property",
+    "subgoals": [
+      "Explain the memoryless property",
+      "Apply the memoryless property in a worked example",
+      "Check the result against the definition"
+    ]
+  }
+]

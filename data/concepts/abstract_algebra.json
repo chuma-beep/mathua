@@ -807,5 +807,23 @@
       "streak": 10,
       "avg_time_seconds": 28.0
     }
+  },
+  {
+    "id": "abstract.group.cauchy",
+    "label": "Cauchy's theorem for groups",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.group.lagrange",
+      "abstract.group.cyclic"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28
+    }
   }
 ]

@@ -644,5 +644,23 @@
       "streak": 10,
       "avg_time_seconds": 30.0
     }
+  },
+  {
+    "id": "ode.second_order.forced",
+    "label": "Forced oscillations",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.second_order",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.second_order.spring",
+      "ode.second_order.nonhomogeneous"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30
+    }
   }
 ]

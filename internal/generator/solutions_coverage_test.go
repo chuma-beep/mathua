@@ -75,6 +75,7 @@ var generatorExplained = map[string]string{
 	"geo.solid.curved_surface_area":       "numeric bridge question: the explanation is built with the problem",
 	"geo.solid.cylinder":                  "numeric bridge question: the explanation is built with the problem",
 	"geo.solid.euler":                     "numeric bridge question: the explanation is built with the problem",
+	"geo.solid.frustum":                   "numeric top-up question: the explanation is built with the problem",
 	"geo.solid.sphere":                    "numeric bridge question: the explanation is built with the problem",
 	"geo.transform.reflection":            "numeric bridge question: the explanation is built with the problem",
 	"geo.transform.rotation":              "numeric bridge question: the explanation is built with the problem",

@@ -5978,5 +5978,25 @@
   {
     "concept_id": "ml.optim.early_stopping",
     "source": "teaching/ml.optim.early_stopping.md"
+  },
+  {
+    "concept_id": "prob.dist.geometric",
+    "source": "teaching/prob.dist.geometric.md"
+  },
+  {
+    "concept_id": "stat.reg.logistic",
+    "source": "teaching/stat.reg.logistic.md"
+  },
+  {
+    "concept_id": "geo.solid.frustum",
+    "source": "teaching/geo.solid.frustum.md"
+  },
+  {
+    "concept_id": "ode.second_order.forced",
+    "source": "teaching/ode.second_order.forced.md"
+  },
+  {
+    "concept_id": "abstract.group.cauchy",
+    "source": "teaching/abstract.group.cauchy.md"
   }
 ]

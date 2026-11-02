@@ -19738,5 +19738,80 @@
       "ml.validation",
       "ml.overfitting"
     ]
+  },
+  {
+    "id": "prob.dist.geometric",
+    "key_prerequisites": [
+      "prob.rv.pmf",
+      "prob.dist.memoryless"
+    ],
+    "encompasses": [
+      "prob.rv.pmf",
+      "prob.dist.memoryless"
+    ],
+    "prerequisites": [
+      "prob.rv.pmf",
+      "prob.dist.memoryless"
+    ]
+  },
+  {
+    "id": "stat.reg.logistic",
+    "key_prerequisites": [
+      "stat.reg.least_squares",
+      "alg.func.sigmoid"
+    ],
+    "encompasses": [
+      "stat.reg.least_squares",
+      "alg.func.sigmoid"
+    ],
+    "prerequisites": [
+      "stat.reg.least_squares",
+      "alg.func.sigmoid"
+    ]
+  },
+  {
+    "id": "geo.solid.frustum",
+    "key_prerequisites": [
+      "geo.solid.cone",
+      "geo.solid.cylinder"
+    ],
+    "encompasses": [
+      "geo.solid.cone",
+      "geo.solid.cylinder"
+    ],
+    "prerequisites": [
+      "geo.solid.cone",
+      "geo.solid.cylinder"
+    ]
+  },
+  {
+    "id": "ode.second_order.forced",
+    "key_prerequisites": [
+      "ode.second_order.spring",
+      "ode.second_order.nonhomogeneous"
+    ],
+    "encompasses": [
+      "ode.second_order.spring",
+      "ode.second_order.nonhomogeneous"
+    ],
+    "prerequisites": [
+      "ode.second_order.spring",
+      "ode.second_order.nonhomogeneous"
+    ]
+  },
+  {
+    "id": "abstract.group.cauchy",
+    "key_prerequisites": [
+      "abstract.group.lagrange",
+      "abstract.group.cyclic"
+    ],
+    "encompasses": [
+      "abstract.group.lagrange",
+      "abstract.group.cyclic"
+    ],
+    "prerequisites": [
+      "abstract.group.lagrange",
+      "abstract.group.cyclic"
+    ]
   }
 ]

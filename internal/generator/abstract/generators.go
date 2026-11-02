@@ -43,6 +43,7 @@ func Register(reg *generator.Registry) {
 	for id, kind := range abstractBridgeKinds {
 		reg.Register(id, &abstractBridgeGen{kind: kind})
 	}
+	reg.Register("abstract.group.cauchy", &cauchyGroupGen{})
 	registerBatch(reg)
 	registerConversions(reg)
 }

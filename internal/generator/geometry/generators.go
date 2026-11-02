@@ -34,6 +34,7 @@ func Register(reg *generator.Registry) {
 	reg.Register("geo.solid.cross_section", &geoBridgeGen{kind: "cross"})
 	reg.Register("geo.transform.symmetry", &geoBridgeGen{kind: "symmetry"})
 	reg.Register("geo.solid.euler", &geoBridgeGen{kind: "euler"})
+	reg.Register("geo.solid.frustum", &frustumGen{})
 	reg.Register("geo.basic.points_lines", &pointsLinesGen{})
 	reg.Register("geo.basic.angles", &angleTypesGen{})
 	reg.Register("geo.basic.angle_measure", &angleMeasureGen{})

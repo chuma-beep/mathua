@@ -809,6 +809,24 @@
     "subdomain": "abstract_algebra.fields"
   },
   {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.group.cauchy",
+    "key_prerequisites": [],
+    "label": "Cauchy's theorem for groups",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.lagrange",
+      "abstract.group.cyclic"
+    ],
+    "subdomain": "abstract_algebra.groups",
+    "variants": []
+  },
+  {
     "domain": "algebra",
     "grading_type": "numeric",
     "id": "alg.linear.slope",
@@ -8596,6 +8614,24 @@
     "subdomain": "differential_equations.basics"
   },
   {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.second_order.forced",
+    "key_prerequisites": [],
+    "label": "Forced oscillations",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.second_order.spring",
+      "ode.second_order.nonhomogeneous"
+    ],
+    "subdomain": "differential_equations.second_order",
+    "variants": []
+  },
+  {
     "domain": "discrete_math",
     "grading_type": "numeric",
     "id": "discrete.logic.propositions",
@@ -11355,6 +11391,24 @@
       "geo.solid.pyramid_volume"
     ],
     "subdomain": "geometry.solid"
+  },
+  {
+    "domain": "geometry",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "geo.solid.frustum",
+    "key_prerequisites": [],
+    "label": "Frustums",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.solid.cone",
+      "geo.solid.cylinder"
+    ],
+    "subdomain": "geometry.solid",
+    "variants": []
   },
   {
     "domain": "graph_theory",
@@ -18042,6 +18096,24 @@
     "subdomain": "probability_theory.random_variables"
   },
   {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.dist.geometric",
+    "key_prerequisites": [],
+    "label": "The geometric distribution",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.pmf",
+      "prob.dist.memoryless"
+    ],
+    "subdomain": "probability_theory.distributions",
+    "variants": []
+  },
+  {
     "domain": "real_analysis",
     "grading_type": "numeric",
     "id": "ra.order.supremum",
@@ -20011,6 +20083,24 @@
       "stat.reg.correlation"
     ],
     "subdomain": "statistics.inference"
+  },
+  {
+    "domain": "statistics",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "stat.reg.logistic",
+    "key_prerequisites": [],
+    "label": "Logistic regression for binary outcomes",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.reg.least_squares",
+      "alg.func.sigmoid"
+    ],
+    "subdomain": "statistics.regression",
+    "variants": []
   },
   {
     "domain": "topology",

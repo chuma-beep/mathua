@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Slicing a Cone",
+    "section": "Slicing a Cone",
+    "subgoals": [
+      "Explain slicing a cone",
+      "Apply slicing a cone in a worked example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Volume of a Frustum",
+    "section": "Volume of a Frustum",
+    "subgoals": [
+      "Explain volume of a frustum",
+      "Apply volume of a frustum in a worked example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Surface Area",
+    "section": "Surface Area",
+    "subgoals": [
+      "Explain surface area",
+      "Apply surface area in a worked example",
+      "Check the result against the definition"
+    ]
+  }
+]

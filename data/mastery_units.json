@@ -5,8 +5,8 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1495,
-  "unit_count": 137,
+  "concept_count": 1500,
+  "unit_count": 138,
   "units": [
     {
       "id": "abstract_algebra.b6",
@@ -42,6 +42,7 @@
       ],
       "concept_ids": [
         "abstract.group.automorphism",
+        "abstract.group.cauchy",
         "abstract.group.center",
         "abstract.group.dihedral",
         "abstract.group.homomorphism",
@@ -52,7 +53,7 @@
         "abstract.rings.zero_divisor",
         "abstract.structures.field"
       ],
-      "concept_count": 10
+      "concept_count": 11
     },
     {
       "id": "abstract_algebra.b8",
@@ -1226,6 +1227,7 @@
         "ode.characteristic.sum",
         "ode.laplace.value",
         "ode.second_order.cauchy_euler",
+        "ode.second_order.forced",
         "ode.second_order.nonhomogeneous",
         "ode.second_order.power_series",
         "ode.second_order.reduction",
@@ -1240,7 +1242,7 @@
         "ode.transforms.step",
         "ode.wronskian"
       ],
-      "concept_count": 17
+      "concept_count": 18
     },
     {
       "id": "differential_equations.b14",
@@ -1750,6 +1752,21 @@
         "geo.triangle.special_right_45"
       ],
       "concept_count": 16
+    },
+    {
+      "id": "geometry.b5",
+      "title": "Geometry · Stage 6",
+      "domain": "geometry",
+      "band": 5,
+      "depth_min": 15,
+      "depth_max": 15,
+      "subdomains": [
+        "geometry.solid"
+      ],
+      "concept_ids": [
+        "geo.solid.frustum"
+      ],
+      "concept_count": 1
     },
     {
       "id": "geometry.b6",
@@ -3031,6 +3048,7 @@
       "subdomains": [
         "probability_theory.characteristic",
         "probability_theory.convergence",
+        "probability_theory.distributions",
         "probability_theory.foundations",
         "probability_theory.joint",
         "probability_theory.joint_distributions",
@@ -3046,6 +3064,7 @@
         "prob.conv.almost_sure",
         "prob.conv.in_distribution",
         "prob.conv.slutsky",
+        "prob.dist.geometric",
         "prob.expect.conditional",
         "prob.expect.total",
         "prob.joint.conditional_density",
@@ -3058,7 +3077,7 @@
         "prob.rv.convolution",
         "prob.rv.multivariate_transform"
       ],
-      "concept_count": 19
+      "concept_count": 20
     },
     {
       "id": "probability_theory.b6",
@@ -3428,14 +3447,16 @@
       "domain": "statistics",
       "band": 8,
       "depth_min": 24,
-      "depth_max": 24,
+      "depth_max": 25,
       "subdomains": [
-        "statistics.distributions"
+        "statistics.distributions",
+        "statistics.regression"
       ],
       "concept_ids": [
-        "stat.func.gaussian"
+        "stat.func.gaussian",
+        "stat.reg.logistic"
       ],
-      "concept_count": 1
+      "concept_count": 2
     },
     {
       "id": "topology.b10",

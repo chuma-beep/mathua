@@ -1,0 +1,29 @@
+[
+  {
+    "label": "From Probability to Log-Odds",
+    "section": "From Probability to Log-Odds",
+    "subgoals": [
+      "Explain from probability to log-odds",
+      "Apply from probability to log-odds in a worked example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Fitting the Model",
+    "section": "Fitting the Model",
+    "subgoals": [
+      "Explain fitting the model",
+      "Apply fitting the model in a worked example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Interpreting Coefficients",
+    "section": "Interpreting Coefficients",
+    "subgoals": [
+      "Explain interpreting coefficients",
+      "Apply interpreting coefficients in a worked example",
+      "Check the result against the definition"
+    ]
+  }
+]

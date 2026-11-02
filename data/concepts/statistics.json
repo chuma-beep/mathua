@@ -1037,5 +1037,23 @@
       "streak": 10,
       "avg_time_seconds": 28
     }
+  },
+  {
+    "id": "stat.reg.logistic",
+    "label": "Logistic regression for binary outcomes",
+    "domain": "statistics",
+    "subdomain": "statistics.regression",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.reg.least_squares",
+      "alg.func.sigmoid"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30
+    }
   }
 ]

@@ -1000,5 +1000,23 @@
       "streak": 10,
       "avg_time_seconds": 24
     }
+  },
+  {
+    "id": "geo.solid.frustum",
+    "label": "Frustums",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.solid.cone",
+      "geo.solid.cylinder"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25
+    }
   }
 ]
