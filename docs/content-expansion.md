@@ -69,11 +69,11 @@ means a new thin concept cannot be added quietly.
 
 ## 4. Where the corpus is thin
 
-### 4.1 The course catalog reaches 1389 of the 1389 concepts
+### 4.1 The course catalog reaches 1396 of the 1396 concepts
 
 Courses carry target sets, and a target expands to its transitive prerequisite closure in
 `internal/planning/planner.go:64` (`collectChain`). Across the 28 courses those closures reach
-1389 of the 1389 concepts: 0 of them have a node, a generator, a lesson and three KP shards and
+1396 of the 1396 concepts: 0 of them have a node, a generator, a lesson and three KP shards and
 still sit outside every named course path. The wiring batch of 2026-10-19 moved the 149 that used
 to sit there into the courses that teach their subject, and the table stays as the measurement on
 the number, because a concept that no course targets is unreachable whatever the diagnostic
@@ -83,7 +83,7 @@ The count of unreachable concepts by domain:
 
 | Domain | Concepts | Unreachable |
 |---|---|---|
-| calc1 | 77 | 0 |
+| calc1 | 84 | 0 |
 | calc2 | 65 | 0 |
 | calc3 | 64 | 0 |
 | algebra | 139 | 0 |
@@ -108,7 +108,7 @@ The count of unreachable concepts by domain:
 | real_analysis | 55 | 0 |
 
 Two structural facts sit behind that table. First, a course is a *sampled* path, not a domain
-cover: `calc1` targets 50 of the 76 in its domain, `calc2` targets 46 of the 63 in its domain and
+cover: `calc1` targets 57 of the 84 in its domain, `calc2` targets 46 of the 63 in its domain and
 `calc3` targets 54 of the 61 in its domain, so the three courses are stages rather than a partition.
 Second, one whole
 domain still has no course of its own: `trigonometry` is reached only by the closures of `a2` and
@@ -354,7 +354,7 @@ also the gate on a new domain (section 5.4), because a domain with no course tar
 unreachable were added, subject by subject, to the courses that teach them, so the catalog now
 reaches all 1250 and the table in section 4.1 reads zero on every row. That is the curriculum work
 the paragraph above says the fix has to be, done deliberately rather than by a closure rule, and it
-does not make the courses domain covers: `calc1` reaches all 76 concepts in its own domain and
+does not make the courses domain covers: `calc1` reaches all 84 concepts in its own domain and
 shares the rest of the calculus corpus with `calc2` and `calc3`, and trigonometry still has no
 course of its own.
 
@@ -405,7 +405,7 @@ because the change this section prepares for is the one that would have tripped 
 
 ### 5.5 The concept target, and where it goes
 
-The catalog holds 1389 concepts. The remaining per-domain targets add up to 0, and this is the table
+The catalog holds 1396 concepts. The remaining per-domain targets add up to 0, and this is the table
 that says where: the thousand-concept milestone is complete, and graph theory has opened the 1,250
 tranche. `Now` is read from the corpus; `Target` is the decision. The rows keep the order step 6 of
 section 6 used, largest deficit first.
@@ -430,7 +430,7 @@ section 6 used, largest deficit first.
 | differential_equations | university | 45 | 45 | +0 |
 | precalculus | bridge | 58 | 58 | +0 |
 | real_analysis | university | 55 | 55 | +0 |
-| calc1 | bridge | 77 | 77 | +0 |
+| calc1 | bridge | 84 | 84 | +0 |
 | calc2 | bridge | 65 | 65 | +0 |
 | calc3 | bridge | 64 | 64 | +0 |
 | algebra | school | 139 | 139 | +0 |

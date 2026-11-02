@@ -19,6 +19,17 @@ func registerBridge(reg *generator.Registry) {
 	reg.Register("calc.multi.functions_several", &functionsSeveralGen{})
 	reg.Register("calc.multi.level_curves", &levelCurvesGen{})
 	reg.Register("calc.vec.vector_function", &vectorFunctionGen{})
+	for id, kind := range map[string]string{
+		"calc.integral.properties":    "integral_properties",
+		"calc.deriv.definition":       "deriv_definition",
+		"calc.integral.initial_value": "initial_value",
+		"calc.deriv.rate":             "deriv_rate",
+		"calc.deriv.graph_reading":    "graph_reading",
+		"calc.integral.symmetry":      "integral_symmetry",
+		"calc.limit.trig":             "limit_trig",
+	} {
+		reg.Register(id, &calc1BridgeGen{kind: kind})
+	}
 }
 
 func calcBridgeOrdinal(ctx generator.GeneratorContext) int {

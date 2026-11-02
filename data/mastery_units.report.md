@@ -12,7 +12,7 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 1389 |
+| Total concepts | 1396 |
 | Total units | 134 |
 | Minimum unit size | 1 |
 | Median unit size | 7 |
@@ -21,7 +21,7 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 | Units with <= 3 concepts | 37 |
 | Units with > 25 concepts | 11 |
 | Units with > 50 concepts | 0 |
-| Cross-unit prerequisite edges (derived) | 444 |
+| Cross-unit prerequisite edges (derived) | 445 |
 | Backward band edges | 0 |
 
 If the learner is assessed once per unit, then 134 assessments cover the corpus, and the
@@ -49,10 +49,10 @@ exists to make concrete.
 | `arithmetic.b2` | arithmetic | 2 | 23 | 9 | 6–8 |
 | `arithmetic.b3` | arithmetic | 3 | 23 | 6 | 9–11 |
 | `calc1.b8` | calc1 | 8 | 1 | 1 | 26–26 |
-| `calc1.b9` | calc1 | 9 | 18 | 3 | 27–29 |
-| `calc1.b10` | calc1 | 10 | 26 | 3 | 30–32 |
-| `calc1.b11` | calc1 | 11 | 21 | 4 | 33–35 |
-| `calc1.b12` | calc1 | 12 | 11 | 3 | 36–37 |
+| `calc1.b9` | calc1 | 9 | 19 | 3 | 27–29 |
+| `calc1.b10` | calc1 | 10 | 28 | 3 | 30–32 |
+| `calc1.b11` | calc1 | 11 | 22 | 4 | 33–35 |
+| `calc1.b12` | calc1 | 12 | 14 | 3 | 36–37 |
 | `calc2.b9` | calc2 | 9 | 3 | 2 | 29–29 |
 | `calc2.b10` | calc2 | 10 | 25 | 1 | 30–32 |
 | `calc2.b11` | calc2 | 11 | 4 | 1 | 33–35 |
@@ -429,7 +429,7 @@ Unresolvable subdomains:
 `trigonometry.hyperbolic`
 `trigonometry.identities`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1389
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1396
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings

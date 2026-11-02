@@ -18198,5 +18198,82 @@
       "precalc.vector.basics",
       "precalc.vector.ops"
     ]
+  },
+  {
+    "id": "calc.integral.properties",
+    "key_prerequisites": [
+      "calc.integral.definite",
+      "calc.integral.power_rule"
+    ],
+    "encompasses": [
+      "calc.integral.definite",
+      "calc.integral.power_rule"
+    ]
+  },
+  {
+    "id": "calc.deriv.definition",
+    "key_prerequisites": [
+      "calc.deriv.difference_quotient",
+      "calc.limit.concept"
+    ],
+    "encompasses": [
+      "calc.deriv.difference_quotient",
+      "calc.limit.concept"
+    ]
+  },
+  {
+    "id": "calc.integral.initial_value",
+    "key_prerequisites": [
+      "calc.integral.indefinite",
+      "calc.integral.definite"
+    ],
+    "encompasses": [
+      "calc.integral.indefinite",
+      "calc.integral.definite"
+    ]
+  },
+  {
+    "id": "calc.deriv.rate",
+    "key_prerequisites": [
+      "calc.deriv.concept",
+      "precalc.func.average_rate"
+    ],
+    "encompasses": [
+      "calc.deriv.concept",
+      "precalc.func.average_rate"
+    ]
+  },
+  {
+    "id": "calc.deriv.graph_reading",
+    "key_prerequisites": [
+      "calc.deriv.concept",
+      "calc.deriv.critical_points"
+    ],
+    "encompasses": [
+      "calc.deriv.concept",
+      "calc.deriv.critical_points"
+    ]
+  },
+  {
+    "id": "calc.integral.symmetry",
+    "key_prerequisites": [
+      "calc.integral.definite",
+      "calc.integral.properties"
+    ],
+    "encompasses": [
+      "calc.integral.definite",
+      "calc.integral.properties"
+    ]
+  },
+  {
+    "id": "calc.limit.trig",
+    "key_prerequisites": [
+      "calc.limit.sine_limit",
+      "calc.limit.algebra"
+    ],
+    "encompasses": [
+      "calc.limit.sine_limit",
+      "calc.limit.algebra"
+    ]
   }
 ]

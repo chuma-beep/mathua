@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Average rate over an interval",
+    "section": "Average rate over an interval",
+    "subgoals": [
+      "Explain average rate over an interval",
+      "Apply average rate over an interval to an example"
+    ]
+  },
+  {
+    "label": "Instantaneous rate at a point",
+    "section": "Instantaneous rate at a point",
+    "subgoals": [
+      "Explain instantaneous rate at a point",
+      "Apply instantaneous rate at a point to an example"
+    ]
+  },
+  {
+    "label": "Comparing the two rates",
+    "section": "Comparing the two rates",
+    "subgoals": [
+      "Explain comparing the two rates",
+      "Apply comparing the two rates to an example"
+    ]
+  }
+]

@@ -539,7 +539,14 @@
       "calc.limit.indeterminate",
       "calc.limit.epsilon_delta",
       "calc.deriv.implicit",
-      "calc.integral.riemann_sums"
+      "calc.integral.riemann_sums",
+      "calc.integral.properties",
+      "calc.deriv.definition",
+      "calc.integral.initial_value",
+      "calc.deriv.rate",
+      "calc.deriv.graph_reading",
+      "calc.integral.symmetry",
+      "calc.limit.trig"
     ]
   },
   {

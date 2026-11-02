@@ -5554,5 +5554,33 @@
   {
     "concept_id": "precalc.vector.three_d",
     "source": "teaching/precalc.vector.three_d.md"
+  },
+  {
+    "concept_id": "calc.integral.properties",
+    "source": "teaching/calc.integral.properties.md"
+  },
+  {
+    "concept_id": "calc.deriv.definition",
+    "source": "teaching/calc.deriv.definition.md"
+  },
+  {
+    "concept_id": "calc.integral.initial_value",
+    "source": "teaching/calc.integral.initial_value.md"
+  },
+  {
+    "concept_id": "calc.deriv.rate",
+    "source": "teaching/calc.deriv.rate.md"
+  },
+  {
+    "concept_id": "calc.deriv.graph_reading",
+    "source": "teaching/calc.deriv.graph_reading.md"
+  },
+  {
+    "concept_id": "calc.integral.symmetry",
+    "source": "teaching/calc.integral.symmetry.md"
+  },
+  {
+    "concept_id": "calc.limit.trig",
+    "source": "teaching/calc.limit.trig.md"
   }
 ]

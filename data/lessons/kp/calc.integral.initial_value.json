@@ -1,0 +1,26 @@
+[
+  {
+    "label": "From a rate to a family of functions",
+    "section": "From a rate to a family of functions",
+    "subgoals": [
+      "Explain from a rate to a family of functions",
+      "Apply from a rate to a family of functions to an example"
+    ]
+  },
+  {
+    "label": "Using an initial condition",
+    "section": "Using an initial condition",
+    "subgoals": [
+      "Explain using an initial condition",
+      "Apply using an initial condition to an example"
+    ]
+  },
+  {
+    "label": "Second-order initial value problems",
+    "section": "Second-order initial value problems",
+    "subgoals": [
+      "Explain second-order initial value problems",
+      "Apply second-order initial value problems to an example"
+    ]
+  }
+]

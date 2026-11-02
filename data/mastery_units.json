@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1389,
+  "concept_count": 1396,
   "unit_count": 134,
   "units": [
     {
@@ -572,6 +572,7 @@
         "calculus.sequences"
       ],
       "concept_ids": [
+        "calc.deriv.definition",
         "calc.deriv.difference_quotient",
         "calc.deriv.epsilon_delta_deriv",
         "calc.limit.algebra",
@@ -591,7 +592,7 @@
         "calc.seq.concept",
         "calc.seq.convergence"
       ],
-      "concept_count": 18
+      "concept_count": 19
     },
     {
       "id": "calc1.b10",
@@ -621,6 +622,7 @@
         "calc.deriv.mvt",
         "calc.deriv.non_differentiability",
         "calc.deriv.power_rule",
+        "calc.deriv.rate",
         "calc.deriv.rolle",
         "calc.deriv.sum_rule",
         "calc.deriv.tangent_line",
@@ -631,9 +633,10 @@
         "calc.limit.intermediate_value",
         "calc.limit.lhopital",
         "calc.limit.oscillation",
+        "calc.limit.trig",
         "calc.limit.weierstrass"
       ],
-      "concept_count": 26
+      "concept_count": 28
     },
     {
       "id": "calc1.b11",
@@ -654,6 +657,7 @@
         "calc.deriv.curve_sketch",
         "calc.deriv.exp_log",
         "calc.deriv.global_extrema",
+        "calc.deriv.graph_reading",
         "calc.deriv.higher_order",
         "calc.deriv.implicit",
         "calc.deriv.inverse_func",
@@ -671,7 +675,7 @@
         "calc.integral.riemann_sums",
         "calc.vec.parametric_derivative"
       ],
-      "concept_count": 21
+      "concept_count": 22
     },
     {
       "id": "calc1.b12",
@@ -696,9 +700,12 @@
         "calc.deriv.parametric_second",
         "calc.deriv.related_rates",
         "calc.deriv.trig_other",
-        "calc.integral.ftc"
+        "calc.integral.ftc",
+        "calc.integral.initial_value",
+        "calc.integral.properties",
+        "calc.integral.symmetry"
       ],
-      "concept_count": 11
+      "concept_count": 14
     },
     {
       "id": "calc2.b9",

@@ -1,0 +1,26 @@
+[
+  {
+    "label": "The limit of a difference quotient",
+    "section": "The limit of a difference quotient",
+    "subgoals": [
+      "Explain the limit of a difference quotient",
+      "Apply the limit of a difference quotient to an example"
+    ]
+  },
+  {
+    "label": "Evaluating the limit algebraically",
+    "section": "Evaluating the limit algebraically",
+    "subgoals": [
+      "Explain evaluating the limit algebraically",
+      "Apply evaluating the limit algebraically to an example"
+    ]
+  },
+  {
+    "label": "Interpreting the derivative",
+    "section": "Interpreting the derivative",
+    "subgoals": [
+      "Explain interpreting the derivative",
+      "Apply interpreting the derivative to an example"
+    ]
+  }
+]

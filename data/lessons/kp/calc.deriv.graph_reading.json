@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Slope and sign from a graph",
+    "section": "Slope and sign from a graph",
+    "subgoals": [
+      "Explain slope and sign from a graph",
+      "Apply slope and sign from a graph to an example"
+    ]
+  },
+  {
+    "label": "Turning points and extrema",
+    "section": "Turning points and extrema",
+    "subgoals": [
+      "Explain turning points and extrema",
+      "Apply turning points and extrema to an example"
+    ]
+  },
+  {
+    "label": "Relating the graphs of f and f prime",
+    "section": "Relating the graphs of f and f prime",
+    "subgoals": [
+      "Explain relating the graphs of f and f prime",
+      "Apply relating the graphs of f and f prime to an example"
+    ]
+  }
+]

@@ -1120,5 +1120,110 @@
       "streak": 10,
       "avg_time_seconds": 25
     }
+  },
+  {
+    "id": "calc.integral.properties",
+    "label": "Properties of definite integrals",
+    "domain": "calc1",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.definite",
+      "calc.integral.power_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
+  },
+  {
+    "id": "calc.deriv.definition",
+    "label": "The derivative as a limit",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.difference_quotient",
+      "calc.limit.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25
+    }
+  },
+  {
+    "id": "calc.integral.initial_value",
+    "label": "Initial value problems for antiderivatives",
+    "domain": "calc1",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.indefinite",
+      "calc.integral.definite"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "calc.deriv.rate",
+    "label": "Average and instantaneous rates of change",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.concept",
+      "precalc.func.average_rate"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22
+    }
+  },
+  {
+    "id": "calc.deriv.graph_reading",
+    "label": "Reading derivatives from a graph",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.concept",
+      "calc.deriv.critical_points"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
+  },
+  {
+    "id": "calc.integral.symmetry",
+    "label": "Symmetry and definite integrals",
+    "domain": "calc1",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.definite",
+      "calc.integral.properties"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 23
+    }
+  },
+  {
+    "id": "calc.limit.trig",
+    "label": "Trigonometric limits",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.limit.sine_limit",
+      "calc.limit.algebra"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
   }
 ]
