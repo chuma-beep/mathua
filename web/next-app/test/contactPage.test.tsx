@@ -46,6 +46,28 @@ describe('the contact page', () => {
     expect(issues).toHaveAttribute('href', 'https://github.com/chuma-beep/mathua/issues')
   })
 
+  it('publishes the support page and the owner profiles', () => {
+    render(<ContactPage />)
+
+    const support = screen.getByRole('link', { name: 'tip Mathua on Myhappr' })
+    expect(support).toHaveAttribute('href', 'https://myhappr.com/wisddom')
+    expect(support).toHaveAttribute('target', '_blank')
+    expect(support).toHaveAttribute('rel', 'noreferrer')
+
+    expect(screen.getByRole('link', { name: 'wisdomac.com' })).toHaveAttribute(
+      'href',
+      'https://wisdomac.com',
+    )
+    expect(screen.getByRole('link', { name: 'LinkedIn' })).toHaveAttribute(
+      'href',
+      'https://linkedin.com/in/wisdom-anwaegbu',
+    )
+    expect(screen.getByRole('link', { name: 'GitHub' })).toHaveAttribute(
+      'href',
+      'https://github.com/chuma-beep/mathua',
+    )
+  })
+
   it('never asks for a password and publishes no address to harvest', () => {
     const { container } = render(<ContactPage />)
 

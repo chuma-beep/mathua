@@ -1,0 +1,7 @@
+# The Sponsor button on the repository.
+#
+# GitHub Sponsors and Myhappr are separate programmes. `github` points at the
+# owner's Sponsors profile; `custom` surfaces the project's Myhappr page, which
+# is where a one-off or recurring tip is actually processed.
+github: [chuma-beep]
+custom: ["https://myhappr.com/wisddom"]

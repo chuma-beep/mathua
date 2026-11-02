@@ -52,6 +52,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
+    site: '@wisdomsglow',
+    creator: '@wisdomsglow',
     title: 'Mathua',
     description: 'Master prerequisites before you advance. Open-source, 1500 concepts, spaced repetition.',
     images: ['/og.png'],
