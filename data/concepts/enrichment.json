@@ -17890,5 +17890,236 @@
       "frac.ops.to_decimal",
       "frac.ops.compare"
     ]
+  },
+  {
+    "id": "prealg.ineq.negative",
+    "key_prerequisites": [
+      "prealg.ineq.one_step",
+      "arith.neg.mult_div"
+    ],
+    "encompasses": [
+      "prealg.ineq.one_step",
+      "arith.neg.mult_div"
+    ]
+  },
+  {
+    "id": "prealg.eq.fractions",
+    "key_prerequisites": [
+      "prealg.eq.two_step",
+      "frac.ops.negative"
+    ],
+    "encompasses": [
+      "prealg.eq.two_step",
+      "frac.ops.negative"
+    ]
+  },
+  {
+    "id": "ratio.ops.proportional_graph",
+    "key_prerequisites": [
+      "ratio.ops.proportion",
+      "prealg.real.concept"
+    ],
+    "encompasses": [
+      "ratio.ops.proportion",
+      "prealg.real.concept"
+    ]
+  },
+  {
+    "id": "prealg.func.table",
+    "key_prerequisites": [
+      "prealg.var.concept",
+      "prealg.expr.evaluate"
+    ],
+    "encompasses": [
+      "prealg.var.concept",
+      "prealg.expr.evaluate"
+    ]
+  },
+  {
+    "id": "prealg.graph.interpret",
+    "key_prerequisites": [
+      "prealg.real.concept",
+      "geo.coord.plot"
+    ],
+    "encompasses": [
+      "prealg.real.concept",
+      "geo.coord.plot"
+    ]
+  },
+  {
+    "id": "prealg.real.order_rational",
+    "key_prerequisites": [
+      "prealg.real.concept",
+      "dec.basics.compare"
+    ],
+    "encompasses": [
+      "prealg.real.concept",
+      "dec.basics.compare"
+    ]
+  },
+  {
+    "id": "dec.basics.place_value",
+    "key_prerequisites": [
+      "arith.dec.intro",
+      "arith.place.powers_ten"
+    ],
+    "encompasses": [
+      "arith.dec.intro",
+      "arith.place.powers_ten"
+    ]
+  },
+  {
+    "id": "dec.ops.powers_ten",
+    "key_prerequisites": [
+      "dec.ops.mult",
+      "arith.exp.evaluate"
+    ],
+    "encompasses": [
+      "dec.ops.mult",
+      "arith.exp.evaluate"
+    ]
+  },
+  {
+    "id": "prealg.measure.dimensional",
+    "key_prerequisites": [
+      "prealg.measure.convert",
+      "prealg.measure.metric"
+    ],
+    "encompasses": [
+      "prealg.measure.convert",
+      "prealg.measure.metric"
+    ]
+  },
+  {
+    "id": "ratio.ops.table",
+    "key_prerequisites": [
+      "ratio.ops.proportion",
+      "prealg.func.table"
+    ],
+    "encompasses": [
+      "ratio.ops.proportion",
+      "prealg.func.table"
+    ]
+  },
+  {
+    "id": "prealg.expr.simplify",
+    "key_prerequisites": [
+      "prealg.expr.like_terms",
+      "prealg.expr.distribute"
+    ],
+    "encompasses": [
+      "prealg.expr.like_terms",
+      "prealg.expr.distribute"
+    ]
+  },
+  {
+    "id": "trig.eq.multiple_angle",
+    "key_prerequisites": [
+      "trig.ident.double_angle",
+      "trig.eq.general_solution"
+    ],
+    "encompasses": [
+      "trig.ident.double_angle",
+      "trig.eq.general_solution"
+    ]
+  },
+  {
+    "id": "trig.basics.elevation_depression",
+    "key_prerequisites": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ],
+    "encompasses": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ]
+  },
+  {
+    "id": "trig.graph.sinusoidal_model",
+    "key_prerequisites": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ],
+    "encompasses": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ]
+  },
+  {
+    "id": "trig.adv.inverse_composition",
+    "key_prerequisites": [
+      "trig.adv.inverse",
+      "trig.func.arcsine"
+    ],
+    "encompasses": [
+      "trig.adv.inverse",
+      "trig.func.arcsine"
+    ]
+  },
+  {
+    "id": "trig.adv.vector_components",
+    "key_prerequisites": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ],
+    "encompasses": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ]
+  },
+  {
+    "id": "trig.ident.even_odd",
+    "key_prerequisites": [
+      "trig.ident.pythagorean",
+      "trig.graph.cos"
+    ],
+    "encompasses": [
+      "trig.ident.pythagorean",
+      "trig.graph.cos"
+    ]
+  },
+  {
+    "id": "trig.graph.frequency",
+    "key_prerequisites": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ],
+    "encompasses": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ]
+  },
+  {
+    "id": "trig.eq.using_identities",
+    "key_prerequisites": [
+      "trig.ident.pythagorean",
+      "trig.ident.sum_diff"
+    ],
+    "encompasses": [
+      "trig.ident.pythagorean",
+      "trig.ident.sum_diff"
+    ]
+  },
+  {
+    "id": "trig.graph.harmonic_motion",
+    "key_prerequisites": [
+      "trig.graph.sinusoidal_model",
+      "trig.basics.radians"
+    ],
+    "encompasses": [
+      "trig.graph.sinusoidal_model",
+      "trig.basics.radians"
+    ]
+  },
+  {
+    "id": "trig.basics.segment_area",
+    "key_prerequisites": [
+      "trig.basics.sector_area",
+      "trig.basics.right_triangle"
+    ],
+    "encompasses": [
+      "trig.basics.sector_area",
+      "trig.basics.right_triangle"
+    ]
   }
 ]

@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1361,
+  "concept_count": 1382,
   "unit_count": 134,
   "units": [
     {
@@ -2541,6 +2541,7 @@
         "arith.exp.zero",
         "arith.neg.order_ops",
         "dec.basics.compare",
+        "dec.basics.place_value",
         "dec.convert.from_frac",
         "dec.ops.add",
         "dec.ops.add.word",
@@ -2551,11 +2552,13 @@
         "pct.convert.from_dec",
         "pct.convert.to_dec",
         "pct.ops.of_number",
+        "prealg.graph.interpret",
         "prealg.real.concept",
+        "prealg.real.order_rational",
         "prealg.types",
         "ratio.ops.simplify"
       ],
-      "concept_count": 17
+      "concept_count": 20
     },
     {
       "id": "prealgebra.b4",
@@ -2579,6 +2582,7 @@
         "dec.ops.div",
         "dec.ops.div.word",
         "dec.ops.mult.word",
+        "dec.ops.powers_ten",
         "dec.ops.sub.word",
         "pct.ops.change",
         "pct.ops.commission",
@@ -2597,11 +2601,12 @@
         "ratio.ops.percent_proportion",
         "ratio.ops.proportion",
         "ratio.ops.proportion.word",
+        "ratio.ops.proportional_graph",
         "ratio.ops.rate",
         "ratio.ops.rate.word",
         "ratio.ops.scale"
       ],
-      "concept_count": 27
+      "concept_count": 29
     },
     {
       "id": "prealgebra.b5",
@@ -2615,6 +2620,7 @@
         "prealgebra.inequalities",
         "prealgebra.measurement",
         "prealgebra.percentages",
+        "prealgebra.ratios",
         "prealgebra.variables"
       ],
       "concept_ids": [
@@ -2625,11 +2631,15 @@
         "prealg.expr.distribute",
         "prealg.expr.formula",
         "prealg.expr.like_terms",
+        "prealg.expr.simplify",
         "prealg.expr.translate",
+        "prealg.func.table",
         "prealg.ineq.one_step",
-        "prealg.measure.temperature"
+        "prealg.measure.dimensional",
+        "prealg.measure.temperature",
+        "ratio.ops.table"
       ],
-      "concept_count": 10
+      "concept_count": 14
     },
     {
       "id": "prealgebra.b6",
@@ -2643,12 +2653,14 @@
         "prealgebra.inequalities"
       ],
       "concept_ids": [
+        "prealg.eq.fractions",
         "prealg.eq.word",
         "prealg.ineq.graph",
+        "prealg.ineq.negative",
         "prealg.ineq.two_step",
         "prealg.ineq.word"
       ],
-      "concept_count": 4
+      "concept_count": 6
     },
     {
       "id": "precalculus.b3",
@@ -3422,11 +3434,14 @@
         "trig.adv.area_sas",
         "trig.adv.law_sines",
         "trig.adv.polar",
+        "trig.adv.vector_components",
         "trig.adv.vector_dot",
         "trig.adv.vector_magnitude",
         "trig.basics.bearings",
+        "trig.basics.elevation_depression",
         "trig.basics.reciprocal",
         "trig.basics.right_triangle",
+        "trig.basics.segment_area",
         "trig.basics.tan_def",
         "trig.eq.basic",
         "trig.eq.homogeneous",
@@ -3438,7 +3453,7 @@
         "trig.hyperbolic.tanh_coth",
         "trig.ineq.basic"
       ],
-      "concept_count": 19
+      "concept_count": 22
     },
     {
       "id": "trigonometry.b5",
@@ -3485,6 +3500,7 @@
         "trig.graph.sin",
         "trig.hyperbolic.identities",
         "trig.ident.double_angle",
+        "trig.ident.even_odd",
         "trig.ident.half_angle",
         "trig.ident.identities",
         "trig.ident.power_reduction",
@@ -3493,7 +3509,7 @@
         "trig.ident.triple_angle",
         "trig.ineq.advanced"
       ],
-      "concept_count": 22
+      "concept_count": 23
     },
     {
       "id": "trigonometry.b8",
@@ -3501,32 +3517,39 @@
       "domain": "trigonometry",
       "band": 8,
       "depth_min": 24,
-      "depth_max": 25,
+      "depth_max": 26,
       "subdomains": [
         "trigonometry.advanced",
         "trigonometry.basics",
+        "trigonometry.equations",
         "trigonometry.functions",
         "trigonometry.graphs",
         "trigonometry.identities"
       ],
       "concept_ids": [
         "trig.adv.heron_area",
+        "trig.adv.inverse_composition",
         "trig.adv.law_cosines",
         "trig.basics.periodicity",
         "trig.eq.general_solution",
+        "trig.eq.multiple_angle",
+        "trig.eq.using_identities",
         "trig.func.arccosine",
         "trig.func.arccotangent",
         "trig.func.arctangent",
+        "trig.graph.frequency",
+        "trig.graph.harmonic_motion",
         "trig.graph.inverse",
         "trig.graph.phase_shift",
         "trig.graph.reciprocal",
+        "trig.graph.sinusoidal_model",
         "trig.graph.tan",
         "trig.graph.transformations",
         "trig.ident.product_to_sum",
         "trig.ident.pythagorean_variants",
         "trig.ident.sum_to_product"
       ],
-      "concept_count": 15
+      "concept_count": 21
     }
   ]
 }

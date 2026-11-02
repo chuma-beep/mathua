@@ -5442,5 +5442,89 @@
   {
     "concept_id": "frac.compare.forms",
     "source": "teaching/frac.compare.forms.md"
+  },
+  {
+    "concept_id": "prealg.ineq.negative",
+    "source": "teaching/prealg.ineq.negative.md"
+  },
+  {
+    "concept_id": "prealg.eq.fractions",
+    "source": "teaching/prealg.eq.fractions.md"
+  },
+  {
+    "concept_id": "ratio.ops.proportional_graph",
+    "source": "teaching/ratio.ops.proportional_graph.md"
+  },
+  {
+    "concept_id": "prealg.func.table",
+    "source": "teaching/prealg.func.table.md"
+  },
+  {
+    "concept_id": "prealg.graph.interpret",
+    "source": "teaching/prealg.graph.interpret.md"
+  },
+  {
+    "concept_id": "prealg.real.order_rational",
+    "source": "teaching/prealg.real.order_rational.md"
+  },
+  {
+    "concept_id": "dec.basics.place_value",
+    "source": "teaching/dec.basics.place_value.md"
+  },
+  {
+    "concept_id": "dec.ops.powers_ten",
+    "source": "teaching/dec.ops.powers_ten.md"
+  },
+  {
+    "concept_id": "prealg.measure.dimensional",
+    "source": "teaching/prealg.measure.dimensional.md"
+  },
+  {
+    "concept_id": "ratio.ops.table",
+    "source": "teaching/ratio.ops.table.md"
+  },
+  {
+    "concept_id": "prealg.expr.simplify",
+    "source": "teaching/prealg.expr.simplify.md"
+  },
+  {
+    "concept_id": "trig.eq.multiple_angle",
+    "source": "teaching/trig.eq.multiple_angle.md"
+  },
+  {
+    "concept_id": "trig.basics.elevation_depression",
+    "source": "teaching/trig.basics.elevation_depression.md"
+  },
+  {
+    "concept_id": "trig.graph.sinusoidal_model",
+    "source": "teaching/trig.graph.sinusoidal_model.md"
+  },
+  {
+    "concept_id": "trig.adv.inverse_composition",
+    "source": "teaching/trig.adv.inverse_composition.md"
+  },
+  {
+    "concept_id": "trig.adv.vector_components",
+    "source": "teaching/trig.adv.vector_components.md"
+  },
+  {
+    "concept_id": "trig.ident.even_odd",
+    "source": "teaching/trig.ident.even_odd.md"
+  },
+  {
+    "concept_id": "trig.graph.frequency",
+    "source": "teaching/trig.graph.frequency.md"
+  },
+  {
+    "concept_id": "trig.eq.using_identities",
+    "source": "teaching/trig.eq.using_identities.md"
+  },
+  {
+    "concept_id": "trig.graph.harmonic_motion",
+    "source": "teaching/trig.graph.harmonic_motion.md"
+  },
+  {
+    "concept_id": "trig.basics.segment_area",
+    "source": "teaching/trig.basics.segment_area.md"
   }
 ]

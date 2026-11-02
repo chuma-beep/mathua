@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Like Terms",
+    "section": "Like Terms",
+    "subgoals": [
+      "Like terms have the same variable part.",
+      "3x and 5x combine to 8x.",
+      "Constants are like terms with no variable, so they combine with each other."
+    ]
+  },
+  {
+    "label": "The Distributive Property",
+    "section": "The Distributive Property",
+    "subgoals": [
+      "A factor outside parentheses multiplies every term inside.",
+      "2(3x + 4) becomes 6x + 8.",
+      "When the factor is negative, watch the signs of every term inside the parentheses."
+    ]
+  },
+  {
+    "label": "A Simplified Expression",
+    "section": "A Simplified Expression",
+    "subgoals": [
+      "An expression is simplified when no parentheses remain and no like terms can be combined.",
+      "Simplification does not change the value of the expression for any input.",
+      "Write the result with the variable terms first and the constant last, following the usual convention."
+    ]
+  }
+]

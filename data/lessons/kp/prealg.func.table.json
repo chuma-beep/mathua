@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Inputs and Outputs",
+    "section": "Inputs and Outputs",
+    "subgoals": [
+      "A function table lists inputs beside their outputs.",
+      "To fill a missing output, substitute the input into the rule and compute.",
+      "The same rule can be written as an equation, a table or a graph."
+    ]
+  },
+  {
+    "label": "Finding the Rule",
+    "section": "Finding the Rule",
+    "subgoals": [
+      "Look for a constant difference or a constant multiplier between consecutive outputs.",
+      "A linear rule has equal steps in the output for equal steps in the input.",
+      "Test a candidate rule on at least two rows before trusting it."
+    ]
+  },
+  {
+    "label": "Using a Table",
+    "section": "Using a Table",
+    "subgoals": [
+      "Tables are useful when the rule is unknown or when only selected values are needed.",
+      "Extrapolation continues the pattern beyond the table, but it is only reliable when the rule is known to continue.",
+      "Always state the units of the output and check that the table is consistent at both ends."
+    ]
+  }
+]

@@ -12,7 +12,7 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 1361 |
+| Total concepts | 1382 |
 | Total units | 134 |
 | Minimum unit size | 1 |
 | Median unit size | 7 |
@@ -21,7 +21,7 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 | Units with <= 3 concepts | 37 |
 | Units with > 25 concepts | 11 |
 | Units with > 50 concepts | 0 |
-| Cross-unit prerequisite edges (derived) | 440 |
+| Cross-unit prerequisite edges (derived) | 443 |
 | Backward band edges | 0 |
 
 If the learner is assessed once per unit, then 134 assessments cover the corpus, and the
@@ -130,10 +130,10 @@ exists to make concrete.
 | `numerical_analysis.b13` | numerical_analysis | 13 | 3 | 1 | 39–39 |
 | `prealgebra.b0` | prealgebra | 0 | 1 | 1 | 1–1 |
 | `prealgebra.b2` | prealgebra | 2 | 1 | 1 | 8–8 |
-| `prealgebra.b3` | prealgebra | 3 | 17 | 6 | 9–11 |
-| `prealgebra.b4` | prealgebra | 4 | 27 | 6 | 12–14 |
-| `prealgebra.b5` | prealgebra | 5 | 10 | 5 | 15–17 |
-| `prealgebra.b6` | prealgebra | 6 | 4 | 2 | 18–19 |
+| `prealgebra.b3` | prealgebra | 3 | 20 | 6 | 9–11 |
+| `prealgebra.b4` | prealgebra | 4 | 29 | 6 | 12–14 |
+| `prealgebra.b5` | prealgebra | 5 | 14 | 6 | 15–17 |
+| `prealgebra.b6` | prealgebra | 6 | 6 | 2 | 18–19 |
 | `precalculus.b3` | precalculus | 3 | 1 | 1 | 10–10 |
 | `precalculus.b4` | precalculus | 4 | 6 | 2 | 12–14 |
 | `precalculus.b6` | precalculus | 6 | 1 | 1 | 20–20 |
@@ -162,10 +162,10 @@ exists to make concrete.
 | `topology.b12` | topology | 12 | 13 | 7 | 36–38 |
 | `trigonometry.b2` | trigonometry | 2 | 4 | 1 | 7–8 |
 | `trigonometry.b3` | trigonometry | 3 | 7 | 2 | 9–11 |
-| `trigonometry.b4` | trigonometry | 4 | 19 | 4 | 12–14 |
+| `trigonometry.b4` | trigonometry | 4 | 22 | 4 | 12–14 |
 | `trigonometry.b5` | trigonometry | 5 | 1 | 1 | 15–15 |
-| `trigonometry.b7` | trigonometry | 7 | 22 | 5 | 21–23 |
-| `trigonometry.b8` | trigonometry | 8 | 15 | 5 | 24–25 |
+| `trigonometry.b7` | trigonometry | 7 | 23 | 5 | 21–23 |
+| `trigonometry.b8` | trigonometry | 8 | 21 | 6 | 24–26 |
 
 ## Backward band edges
 
@@ -180,16 +180,16 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 176 | 6 | 43 | 26 | 52 | 5 | 0 |
+| 2 | 177 | 6 | 43 | 27 | 53 | 5 | 0 |
 | 3 | 134 | 7 | 45 | 22 | 37 | 11 | 0 |
 | 4 | 105 | 10 | 69 | 9 | 23 | 13 | 0 |
-| 5 | 89 | 11 | 89 | 5 | 14 | 14 | 0 |
+| 5 | 89 | 11 | 89 | 5 | 13 | 15 | 0 |
 | 6 | 86 | 11 | 83 | 7 | 14 | 20 | 0 |
-| 8 | 66 | 15 | 88 | 4 | 8 | 24 | 0 |
-| 10 | 56 | 18 | 114 | 2 | 8 | 21 | 0 |
-| 12 | 58 | 19 | 90 | 2 | 5 | 23 | 0 |
+| 8 | 66 | 16 | 88 | 4 | 8 | 24 | 0 |
+| 10 | 56 | 18 | 114 | 2 | 8 | 22 | 0 |
+| 12 | 58 | 20 | 90 | 2 | 5 | 23 | 0 |
 | 15 | 46 | 23 | 133 | 0 | 5 | 22 | 0 |
-| 20 | 37 | 37 | 114 | 1 | 3 | 25 | 0 |
+| 20 | 37 | 38 | 114 | 1 | 3 | 25 | 0 |
 | 45 | 23 | 55 | 139 | 0 | 0 | 23 | 0 |
 
 **No width is clean.** Small widths fragment, at 3 there are 22 singleton units, which is a
@@ -207,7 +207,7 @@ The subdomain condensation of the concept DAG **contains cycles**: grouping conc
 subdomain discards the per-concept ordering, so a concept in subdomain A can be a
 prerequisite of one in subdomain B whose other members depend on A.
 
-**169 of 125 subdomains cannot be levelled**, they sit inside a cycle, or downstream
+**170 of 125 subdomains cannot be levelled**, they sit inside a cycle, or downstream
 of one, so no depth function exists for them at all. (Tarjan puts 26 inside cycles and
 the remaining 34 behind them; Kahn cannot order either group, because ordering a node
 requires its predecessors to be ordered first.) An implementation that ignores this
@@ -422,13 +422,14 @@ Unresolvable subdomains:
 `topology.separation`
 
 `trigonometry.advanced`
+`trigonometry.equations`
 `trigonometry.functions`
 `trigonometry.graphs`
-`trigonometry.hyperbolic`
 
+`trigonometry.hyperbolic`
 `trigonometry.identities`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1361
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1382
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings

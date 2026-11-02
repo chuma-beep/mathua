@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Motion Model",
+    "section": "The Motion Model",
+    "subgoals": [
+      "Simple harmonic motion is described by a sinusoidal displacement such as d = A cos(omega t).",
+      "The angular frequency omega controls how quickly the motion repeats, and the period is 2 pi divided by omega.",
+      "The equilibrium position is the midline of the motion, not necessarily zero."
+    ]
+  },
+  {
+    "label": "Amplitude and Period",
+    "section": "Amplitude and Period",
+    "subgoals": [
+      "The maximum displacement from equilibrium equals the amplitude.",
+      "If the displacement ranges from -4 to 4, the amplitude is 4 and the midline is 0.",
+      "Frequency is the number of cycles per second, the reciprocal of the period in seconds."
+    ]
+  },
+  {
+    "label": "Reading a Motion Graph",
+    "section": "Reading a Motion Graph",
+    "subgoals": [
+      "A maximum occurs when the cosine term equals one, and a minimum when it equals minus one.",
+      "The velocity is zero at the extremes and greatest at equilibrium, which is why a pendulum pauses at each end.",
+      "Check the units of time in the model; the period is measured in the same unit as the input."
+    ]
+  }
+]

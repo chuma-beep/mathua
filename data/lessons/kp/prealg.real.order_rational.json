@@ -1,0 +1,29 @@
+[
+  {
+    "label": "A Common Form",
+    "section": "A Common Form",
+    "subgoals": [
+      "Rational numbers can be written as fractions, decimals or integers.",
+      "Decimals compare place by place.",
+      "Negative numbers are ordered in reverse: -5 is less than -2 even though 5 is greater than 2."
+    ]
+  },
+  {
+    "label": "Comparing Pairs",
+    "section": "Comparing Pairs",
+    "subgoals": [
+      "On a number line, the number farther left is smaller.",
+      "For -3/4 and -0.",
+      "A quick benchmark such as zero, one half or one can often settle a comparison without exact conversion."
+    ]
+  },
+  {
+    "label": "Ordering Lists",
+    "section": "Ordering Lists",
+    "subgoals": [
+      "Sort a list by repeatedly comparing neighbours, or place every number on a sketch of the number line.",
+      "Check the final order by reading from left to right.",
+      "Ordering is the first step in finding a median, a range or a solution interval."
+    ]
+  }
+]

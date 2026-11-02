@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Places to the Right",
+    "section": "Places to the Right",
+    "subgoals": [
+      "Each place to the right of the decimal point is one tenth of the place before it.",
+      "In 4.",
+      "A zero in a place still matters for the value of the digits around it, even though it adds nothing to the digit sum."
+    ]
+  },
+  {
+    "label": "Value of a Digit",
+    "section": "Value of a Digit",
+    "subgoals": [
+      "The value of a digit is the digit multiplied by the value of its place.",
+      "The same digit has different values in different positions.",
+      "Expanded form writes a number as the sum of these place values."
+    ]
+  },
+  {
+    "label": "Reading and Writing",
+    "section": "Reading and Writing",
+    "subgoals": [
+      "Read the whole part, then the decimal part as a single number named by its last place.",
+      "When writing from words, count the places named by the final word and fill any gaps with zeros.",
+      "Aligning decimal points makes addition, subtraction and comparison reliable."
+    ]
+  }
+]

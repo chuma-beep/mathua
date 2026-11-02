@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Axes and Units",
+    "section": "Axes and Units",
+    "subgoals": [
+      "The horizontal axis usually holds the input and the vertical axis the output.",
+      "A point is read as an ordered pair.",
+      "Graphs can show distance against time, cost against quantity, or any other pair of related quantities."
+    ]
+  },
+  {
+    "label": "Slope and Intercept",
+    "section": "Slope and Intercept",
+    "subgoals": [
+      "The slope describes how fast the output changes per unit of input.",
+      "A horizontal segment means the output is not changing.",
+      "On a distance-time graph, a steeper line means a faster speed and a flat line means the object is stationary."
+    ]
+  },
+  {
+    "label": "Interpreting Features",
+    "section": "Interpreting Features",
+    "subgoals": [
+      "Turning points, plateaus and intercepts each have a meaning in context.",
+      "The x-intercept is where the output is zero; the y-intercept is the output when the input is zero.",
+      "Interpretations must stay within the domain of the graph."
+    ]
+  }
+]

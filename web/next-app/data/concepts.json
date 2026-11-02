@@ -14612,6 +14612,270 @@
     "subdomain": "prealgebra.measurement"
   },
   {
+    "domain": "prealgebra",
+    "encompasses": [
+      "prealg.ineq.one_step",
+      "arith.neg.mult_div"
+    ],
+    "grading_type": "numeric",
+    "id": "prealg.ineq.negative",
+    "key_prerequisites": [
+      "prealg.ineq.one_step",
+      "arith.neg.mult_div"
+    ],
+    "label": "Solving inequalities with negative coefficients",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.ineq.one_step",
+      "arith.neg.mult_div"
+    ],
+    "subdomain": "prealgebra.inequalities",
+    "variants": []
+  },
+  {
+    "domain": "prealgebra",
+    "encompasses": [
+      "prealg.eq.two_step",
+      "frac.ops.negative"
+    ],
+    "grading_type": "numeric",
+    "id": "prealg.eq.fractions",
+    "key_prerequisites": [
+      "prealg.eq.two_step",
+      "frac.ops.negative"
+    ],
+    "label": "Equations with fractional coefficients",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.eq.two_step",
+      "frac.ops.negative"
+    ],
+    "subdomain": "prealgebra.equations",
+    "variants": []
+  },
+  {
+    "domain": "prealgebra",
+    "encompasses": [
+      "ratio.ops.proportion",
+      "prealg.real.concept"
+    ],
+    "grading_type": "numeric",
+    "id": "ratio.ops.proportional_graph",
+    "key_prerequisites": [
+      "ratio.ops.proportion",
+      "prealg.real.concept"
+    ],
+    "label": "Graphs of proportional relationships",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ratio.ops.proportion",
+      "prealg.real.concept"
+    ],
+    "subdomain": "prealgebra.ratios",
+    "variants": []
+  },
+  {
+    "domain": "prealgebra",
+    "encompasses": [
+      "prealg.var.concept",
+      "prealg.expr.evaluate"
+    ],
+    "grading_type": "numeric",
+    "id": "prealg.func.table",
+    "key_prerequisites": [
+      "prealg.var.concept",
+      "prealg.expr.evaluate"
+    ],
+    "label": "Function tables",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.var.concept",
+      "prealg.expr.evaluate"
+    ],
+    "subdomain": "prealgebra.variables",
+    "variants": []
+  },
+  {
+    "domain": "prealgebra",
+    "encompasses": [
+      "prealg.real.concept",
+      "geo.coord.plot"
+    ],
+    "grading_type": "numeric",
+    "id": "prealg.graph.interpret",
+    "key_prerequisites": [
+      "prealg.real.concept",
+      "geo.coord.plot"
+    ],
+    "label": "Reading graphs of relationships",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.real.concept",
+      "geo.coord.plot"
+    ],
+    "subdomain": "prealgebra.variables",
+    "variants": []
+  },
+  {
+    "domain": "prealgebra",
+    "encompasses": [
+      "prealg.real.concept",
+      "dec.basics.compare"
+    ],
+    "grading_type": "numeric",
+    "id": "prealg.real.order_rational",
+    "key_prerequisites": [
+      "prealg.real.concept",
+      "dec.basics.compare"
+    ],
+    "label": "Ordering rational numbers",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.real.concept",
+      "dec.basics.compare"
+    ],
+    "subdomain": "prealgebra.variables",
+    "variants": []
+  },
+  {
+    "domain": "prealgebra",
+    "encompasses": [
+      "arith.dec.intro",
+      "arith.place.powers_ten"
+    ],
+    "grading_type": "numeric",
+    "id": "dec.basics.place_value",
+    "key_prerequisites": [
+      "arith.dec.intro",
+      "arith.place.powers_ten"
+    ],
+    "label": "Decimal place value",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.dec.intro",
+      "arith.place.powers_ten"
+    ],
+    "subdomain": "prealgebra.decimals",
+    "variants": []
+  },
+  {
+    "domain": "prealgebra",
+    "encompasses": [
+      "dec.ops.mult",
+      "arith.exp.evaluate"
+    ],
+    "grading_type": "numeric",
+    "id": "dec.ops.powers_ten",
+    "key_prerequisites": [
+      "dec.ops.mult",
+      "arith.exp.evaluate"
+    ],
+    "label": "Multiplying and dividing decimals by powers of ten",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "dec.ops.mult",
+      "arith.exp.evaluate"
+    ],
+    "subdomain": "prealgebra.decimals",
+    "variants": []
+  },
+  {
+    "domain": "prealgebra",
+    "encompasses": [
+      "prealg.measure.convert",
+      "prealg.measure.metric"
+    ],
+    "grading_type": "numeric",
+    "id": "prealg.measure.dimensional",
+    "key_prerequisites": [
+      "prealg.measure.convert",
+      "prealg.measure.metric"
+    ],
+    "label": "Dimensional analysis",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.measure.convert",
+      "prealg.measure.metric"
+    ],
+    "subdomain": "prealgebra.measurement",
+    "variants": []
+  },
+  {
+    "domain": "prealgebra",
+    "encompasses": [
+      "ratio.ops.proportion",
+      "prealg.func.table"
+    ],
+    "grading_type": "numeric",
+    "id": "ratio.ops.table",
+    "key_prerequisites": [
+      "ratio.ops.proportion",
+      "prealg.func.table"
+    ],
+    "label": "Ratio tables",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ratio.ops.proportion",
+      "prealg.func.table"
+    ],
+    "subdomain": "prealgebra.ratios",
+    "variants": []
+  },
+  {
+    "domain": "prealgebra",
+    "encompasses": [
+      "prealg.expr.like_terms",
+      "prealg.expr.distribute"
+    ],
+    "grading_type": "numeric",
+    "id": "prealg.expr.simplify",
+    "key_prerequisites": [
+      "prealg.expr.like_terms",
+      "prealg.expr.distribute"
+    ],
+    "label": "Simplifying algebraic expressions",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.expr.like_terms",
+      "prealg.expr.distribute"
+    ],
+    "subdomain": "prealgebra.variables",
+    "variants": []
+  },
+  {
     "domain": "precalculus",
     "grading_type": "numeric",
     "id": "precalc.func.transformations",
@@ -19644,5 +19908,245 @@
       "trig.adv.vector_magnitude"
     ],
     "subdomain": "trigonometry.advanced"
+  },
+  {
+    "domain": "trigonometry",
+    "encompasses": [
+      "trig.ident.double_angle",
+      "trig.eq.general_solution"
+    ],
+    "grading_type": "numeric",
+    "id": "trig.eq.multiple_angle",
+    "key_prerequisites": [
+      "trig.ident.double_angle",
+      "trig.eq.general_solution"
+    ],
+    "label": "Solving multiple-angle equations",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.ident.double_angle",
+      "trig.eq.general_solution"
+    ],
+    "subdomain": "trigonometry.equations",
+    "variants": []
+  },
+  {
+    "domain": "trigonometry",
+    "encompasses": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ],
+    "grading_type": "numeric",
+    "id": "trig.basics.elevation_depression",
+    "key_prerequisites": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ],
+    "label": "Angles of elevation and depression",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ],
+    "subdomain": "trigonometry.basics",
+    "variants": []
+  },
+  {
+    "domain": "trigonometry",
+    "encompasses": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ],
+    "grading_type": "numeric",
+    "id": "trig.graph.sinusoidal_model",
+    "key_prerequisites": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ],
+    "label": "Sinusoidal models",
+    "mastery_threshold": {
+      "avg_time_seconds": 27,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ],
+    "subdomain": "trigonometry.graphs",
+    "variants": []
+  },
+  {
+    "domain": "trigonometry",
+    "encompasses": [
+      "trig.adv.inverse",
+      "trig.func.arcsine"
+    ],
+    "grading_type": "numeric",
+    "id": "trig.adv.inverse_composition",
+    "key_prerequisites": [
+      "trig.adv.inverse",
+      "trig.func.arcsine"
+    ],
+    "label": "Compositions with inverse trigonometric functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.adv.inverse",
+      "trig.func.arcsine"
+    ],
+    "subdomain": "trigonometry.advanced",
+    "variants": []
+  },
+  {
+    "domain": "trigonometry",
+    "encompasses": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ],
+    "grading_type": "numeric",
+    "id": "trig.adv.vector_components",
+    "key_prerequisites": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ],
+    "label": "Vector components from magnitude and direction",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ],
+    "subdomain": "trigonometry.advanced",
+    "variants": []
+  },
+  {
+    "domain": "trigonometry",
+    "encompasses": [
+      "trig.ident.pythagorean",
+      "trig.graph.cos"
+    ],
+    "grading_type": "numeric",
+    "id": "trig.ident.even_odd",
+    "key_prerequisites": [
+      "trig.ident.pythagorean",
+      "trig.graph.cos"
+    ],
+    "label": "Even and odd trigonometric identities",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.ident.pythagorean",
+      "trig.graph.cos"
+    ],
+    "subdomain": "trigonometry.identities",
+    "variants": []
+  },
+  {
+    "domain": "trigonometry",
+    "encompasses": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ],
+    "grading_type": "numeric",
+    "id": "trig.graph.frequency",
+    "key_prerequisites": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ],
+    "label": "Frequency and period of trigonometric graphs",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ],
+    "subdomain": "trigonometry.graphs",
+    "variants": []
+  },
+  {
+    "domain": "trigonometry",
+    "encompasses": [
+      "trig.ident.pythagorean",
+      "trig.ident.sum_diff"
+    ],
+    "grading_type": "numeric",
+    "id": "trig.eq.using_identities",
+    "key_prerequisites": [
+      "trig.ident.pythagorean",
+      "trig.ident.sum_diff"
+    ],
+    "label": "Solving equations with identities",
+    "mastery_threshold": {
+      "avg_time_seconds": 27,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.ident.pythagorean",
+      "trig.ident.sum_diff"
+    ],
+    "subdomain": "trigonometry.equations",
+    "variants": []
+  },
+  {
+    "domain": "trigonometry",
+    "encompasses": [
+      "trig.graph.sinusoidal_model",
+      "trig.basics.radians"
+    ],
+    "grading_type": "numeric",
+    "id": "trig.graph.harmonic_motion",
+    "key_prerequisites": [
+      "trig.graph.sinusoidal_model",
+      "trig.basics.radians"
+    ],
+    "label": "Simple harmonic motion",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.graph.sinusoidal_model",
+      "trig.basics.radians"
+    ],
+    "subdomain": "trigonometry.graphs",
+    "variants": []
+  },
+  {
+    "domain": "trigonometry",
+    "encompasses": [
+      "trig.basics.sector_area",
+      "trig.basics.right_triangle"
+    ],
+    "grading_type": "numeric",
+    "id": "trig.basics.segment_area",
+    "key_prerequisites": [
+      "trig.basics.sector_area",
+      "trig.basics.right_triangle"
+    ],
+    "label": "Areas of circular segments",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.basics.sector_area",
+      "trig.basics.right_triangle"
+    ],
+    "subdomain": "trigonometry.basics",
+    "variants": []
   }
 ]

@@ -69,11 +69,11 @@ means a new thin concept cannot be added quietly.
 
 ## 4. Where the corpus is thin
 
-### 4.1 The course catalog reaches 1361 of the 1361 concepts
+### 4.1 The course catalog reaches 1382 of the 1382 concepts
 
 Courses carry target sets, and a target expands to its transitive prerequisite closure in
 `internal/planning/planner.go:64` (`collectChain`). Across the 28 courses those closures reach
-1361 of the 1361 concepts: 0 of them have a node, a generator, a lesson and three KP shards and
+1382 of the 1382 concepts: 0 of them have a node, a generator, a lesson and three KP shards and
 still sit outside every named course path. The wiring batch of 2026-10-19 moved the 149 that used
 to sit there into the courses that teach their subject, and the table stays as the measurement on
 the number, because a concept that no course targets is unreachable whatever the diagnostic
@@ -95,8 +95,8 @@ The count of unreachable concepts by domain:
 | complex_numbers | 42 | 0 |
 | number_theory | 42 | 0 |
 | differential_equations | 45 | 0 |
-| prealgebra | 60 | 0 |
-| trigonometry | 68 | 0 |
+| prealgebra | 71 | 0 |
+| trigonometry | 78 | 0 |
 | arithmetic | 72 | 0 |
 | linear_algebra | 59 | 0 |
 | abstract_algebra | 45 | 0 |
@@ -126,7 +126,7 @@ now read zero:
 | topology | 42 | 0 |
 | real_analysis | 55 | 0 |
 | abstract_algebra | 45 | 0 |
-| trigonometry | 68 | 0 |
+| trigonometry | 78 | 0 |
 | probability_theory | 62 | 0 |
 | discrete_math | 55 | 0 |
 | machine_learning | 45 | 0 |
@@ -405,7 +405,7 @@ because the change this section prepares for is the one that would have tripped 
 
 ### 5.5 The concept target, and where it goes
 
-The catalog holds 1361 concepts. The remaining per-domain targets add up to 0, and this is the table
+The catalog holds 1382 concepts. The remaining per-domain targets add up to 0, and this is the table
 that says where: the thousand-concept milestone is complete, and graph theory has opened the 1,250
 tranche. `Now` is read from the corpus; `Target` is the decision. The rows keep the order step 6 of
 section 6 used, largest deficit first.
@@ -420,7 +420,7 @@ section 6 used, largest deficit first.
 | fractions | school | 52 | 52 | +0 |
 | discrete_math | university | 55 | 55 | +0 |
 | complex_numbers | university | 42 | 42 | +0 |
-| prealgebra | school | 60 | 60 | +0 |
+| prealgebra | school | 71 | 71 | +0 |
 | abstract_algebra | university | 45 | 45 | +0 |
 | machine_learning | university | 45 | 45 | +0 |
 | topology | university | 42 | 42 | +0 |
@@ -434,7 +434,7 @@ section 6 used, largest deficit first.
 | calc2 | bridge | 65 | 65 | +0 |
 | calc3 | bridge | 64 | 64 | +0 |
 | algebra | school | 139 | 139 | +0 |
-| trigonometry | school | 68 | 68 | +0 |
+| trigonometry | school | 78 | 78 | +0 |
 
 **The `Now` column had drifted, and this is the correction.** The table was drawn when the corpus held
 703 concepts, and the batches since have grown it to 819. `scripts/sweep_counts.py` keeps the sentence

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Fractional Coefficient",
+    "section": "The Fractional Coefficient",
+    "subgoals": [
+      "A coefficient such as one third means the variable is divided by three.",
+      "The reciprocal of a fraction is its flip.",
+      "Keep the equation balanced: whatever operation clears the fraction on one side must be applied to the other side."
+    ]
+  },
+  {
+    "label": "Clearing Denominators",
+    "section": "Clearing Denominators",
+    "subgoals": [
+      "When several fractions appear, multiply every term by the least common denominator.",
+      "For x/2 + x/3 = 5, multiply by 6 to get 3x + 2x = 30, so x = 6.",
+      "Clearing denominators is a convenience, not a requirement."
+    ]
+  },
+  {
+    "label": "Checking the Solution",
+    "section": "Checking the Solution",
+    "subgoals": [
+      "Substitute the answer into the original equation and simplify both sides independently.",
+      "A fractional answer is acceptable.",
+      "If the check fails, look for a sign error or a term that was not multiplied by the common denominator."
+    ]
+  }
+]

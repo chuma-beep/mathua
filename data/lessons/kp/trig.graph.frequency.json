@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Period from the Coefficient",
+    "section": "Period from the Coefficient",
+    "subgoals": [
+      "For y = sin(bx), the period is 360/b degrees, or 2 pi/b radians.",
+      "For y = cos(bx), the same rule applies.",
+      "The period is always positive, so use the absolute value of b."
+    ]
+  },
+  {
+    "label": "Frequency",
+    "section": "Frequency",
+    "subgoals": [
+      "Frequency is the number of cycles in one unit of the horizontal variable.",
+      "A period of 180 degrees corresponds to two cycles in 360 degrees, so the frequency is two per full turn.",
+      "In applications, frequency is often measured in hertz, which counts cycles per second."
+    ]
+  },
+  {
+    "label": "Comparing Graphs",
+    "section": "Comparing Graphs",
+    "subgoals": [
+      "Two sine graphs with different b values have different periods but the same shape and amplitude.",
+      "The graph with the larger coefficient completes more cycles in the same window.",
+      "A phase shift changes where a cycle starts but not how long it lasts."
+    ]
+  }
+]

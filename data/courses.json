@@ -179,7 +179,18 @@
       "frac.mixed.word",
       "frac.mult.whole",
       "frac.mult.word",
-      "frac.sub.word"
+      "frac.sub.word",
+      "prealg.ineq.negative",
+      "prealg.eq.fractions",
+      "ratio.ops.proportional_graph",
+      "prealg.func.table",
+      "prealg.graph.interpret",
+      "prealg.real.order_rational",
+      "dec.basics.place_value",
+      "dec.ops.powers_ten",
+      "prealg.measure.dimensional",
+      "ratio.ops.table",
+      "prealg.expr.simplify"
     ]
   },
   {
@@ -393,7 +404,17 @@
       "alg.eq.rational.word",
       "alg.func.composite_domain",
       "alg.eq.linear.word",
-      "alg.linear.horizontal_vertical"
+      "alg.linear.horizontal_vertical",
+      "trig.eq.multiple_angle",
+      "trig.basics.elevation_depression",
+      "trig.graph.sinusoidal_model",
+      "trig.adv.inverse_composition",
+      "trig.adv.vector_components",
+      "trig.ident.even_odd",
+      "trig.graph.frequency",
+      "trig.eq.using_identities",
+      "trig.graph.harmonic_motion",
+      "trig.basics.segment_area"
     ]
   },
   {

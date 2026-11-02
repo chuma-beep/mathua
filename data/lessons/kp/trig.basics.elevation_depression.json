@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Looking Up and Looking Down",
+    "section": "Looking Up and Looking Down",
+    "subgoals": [
+      "An angle of elevation is measured upward from the horizontal.",
+      "Both angles are measured from a horizontal line at the observer, not from the vertical.",
+      "The angle of elevation from A to B equals the angle of depression from B to A when both are measured from horizontal lines."
+    ]
+  },
+  {
+    "label": "Choosing a Ratio",
+    "section": "Choosing a Ratio",
+    "subgoals": [
+      "Sketch the right triangle and label the side opposite the angle, the side adjacent to it and the hypotenuse.",
+      "If the opposite side and hypotenuse are involved, use sine.",
+      "The unknown is often a height or a horizontal distance, so choose the ratio that contains that side."
+    ]
+  },
+  {
+    "label": "Solving a Height or Distance",
+    "section": "Solving a Height or Distance",
+    "subgoals": [
+      "Write the ratio with the known values and solve for the unknown.",
+      "For a 45 degree elevation, the height equals the horizontal distance because tangent of 45 degrees is one.",
+      "For a 60 degree elevation, the height is the distance times the square root of three, so check whether an exact or decimal answer is requested."
+    ]
+  }
+]
