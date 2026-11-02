@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What Similarity Requires",
+    "section": "What Similarity Requires",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "AA, SSS and SAS",
+    "section": "AA, SSS and SAS",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "Using Similarity",
+    "section": "Using Similarity",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  }
+]

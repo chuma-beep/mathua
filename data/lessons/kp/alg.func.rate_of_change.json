@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Secants and Average Rate",
+    "section": "Secants and Average Rate",
+    "subgoals": [
+      "Identify the two points a secant line joins",
+      "Compute a change in output over a change in input"
+    ]
+  },
+  {
+    "label": "Computing from a Table",
+    "section": "Computing from a Table",
+    "subgoals": [
+      "Read input and output values from a table",
+      "Divide the output difference by the input difference"
+    ]
+  },
+  {
+    "label": "Units and Interpretation",
+    "section": "Units and Interpretation",
+    "subgoals": [
+      "Attach units to an average rate",
+      "Interpret the sign of an average rate"
+    ]
+  }
+]

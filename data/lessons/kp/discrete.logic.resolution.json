@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Clauses and Resolvents",
+    "section": "Clauses and Resolvents",
+    "subgoals": [
+      "Explain clauses and resolvents.",
+      "Apply clauses and resolvents to a worked example."
+    ]
+  },
+  {
+    "label": "Deriving the Empty Clause",
+    "section": "Deriving the Empty Clause",
+    "subgoals": [
+      "Explain deriving the empty clause.",
+      "Apply deriving the empty clause to a worked example."
+    ]
+  },
+  {
+    "label": "Reading a Refutation",
+    "section": "Reading a Refutation",
+    "subgoals": [
+      "Explain reading a refutation.",
+      "Apply reading a refutation to a worked example."
+    ]
+  }
+]

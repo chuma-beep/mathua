@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Lifting Paths",
+    "section": "Lifting Paths",
+    "subgoals": [
+      "Explain lifting paths.",
+      "Use universal covering spaces in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  },
+  {
+    "label": "The Universal Cover",
+    "section": "The Universal Cover",
+    "subgoals": [
+      "Explain the universal cover.",
+      "Use universal covering spaces in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  },
+  {
+    "label": "Deck Transformations",
+    "section": "Deck Transformations",
+    "subgoals": [
+      "Explain deck transformations.",
+      "Use universal covering spaces in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  }
+]

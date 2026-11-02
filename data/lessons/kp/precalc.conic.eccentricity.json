@@ -1,0 +1,29 @@
+[
+  {
+    "label": "A measure of shape",
+    "section": "A measure of shape",
+    "subgoals": [
+      "Eccentricity describes how far a conic departs from a circle.",
+      "A circle has eccentricity zero.",
+      "The value is the same for every point on the curve."
+    ]
+  },
+  {
+    "label": "Ellipses and hyperbolas",
+    "section": "Ellipses and hyperbolas",
+    "subgoals": [
+      "For an ellipse e = c / a with c^2 = a^2 - b^2.",
+      "For a hyperbola e = c / a with c^2 = a^2 + b^2.",
+      "An ellipse has e between zero and one, and a hyperbola has e above one."
+    ]
+  },
+  {
+    "label": "The parabola case",
+    "section": "The parabola case",
+    "subgoals": [
+      "A parabola has eccentricity exactly one.",
+      "Every point on a parabola is equally far from the focus and the directrix.",
+      "The eccentricity therefore distinguishes all three conic types."
+    ]
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "label": "The Normal Vector",
+    "section": "The Normal Vector",
+    "subgoals": [
+      "Explain the normal vector",
+      "Apply the normal vector in a worked problem"
+    ]
+  },
+  {
+    "label": "The Tangent Plane",
+    "section": "The Tangent Plane",
+    "subgoals": [
+      "Explain the tangent plane",
+      "Apply the tangent plane in a worked problem"
+    ]
+  },
+  {
+    "label": "Parameterized Surfaces",
+    "section": "Parameterized Surfaces",
+    "subgoals": [
+      "Explain parameterized surfaces",
+      "Apply parameterized surfaces in a worked problem"
+    ]
+  }
+]

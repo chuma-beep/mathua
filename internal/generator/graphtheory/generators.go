@@ -44,4 +44,7 @@ func Register(reg *generator.Registry) {
 	reg.Register("graph.strong_connectivity", &strongConnectivityGen{})
 	reg.Register("graph.topological_sort", &topologicalSortGen{})
 	reg.Register("graph.dag_paths", &dagPathsGen{})
+	for id, kind := range graphBridgeKinds {
+		reg.Register(id, &graphBridgeGen{kind: kind})
+	}
 }

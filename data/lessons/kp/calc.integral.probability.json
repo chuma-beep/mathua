@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Density curves",
+    "section": "Density curves",
+    "subgoals": [
+      "A density curve is nonnegative and encloses total area one.",
+      "Probability corresponds to area under the curve."
+    ]
+  },
+  {
+    "label": "Probability as area",
+    "section": "Probability as area",
+    "subgoals": [
+      "An interval probability is a definite integral over that interval.",
+      "Tail probabilities are improper integrals."
+    ]
+  },
+  {
+    "label": "The normal density",
+    "section": "The normal density",
+    "subgoals": [
+      "The normal density is a bell-shaped curve centred at its mean.",
+      "The area within one standard deviation is about 68 percent."
+    ]
+  }
+]

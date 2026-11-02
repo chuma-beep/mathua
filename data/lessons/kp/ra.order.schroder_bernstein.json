@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Injections and surjections",
+    "section": "Injections and surjections",
+    "subgoals": [
+      "Explain the main idea of injections and surjections.",
+      "Apply the result in injections and surjections to a concrete example.",
+      "Recognise a common mistake involving injections and surjections."
+    ]
+  },
+  {
+    "label": "The Cantor-Bernstein argument",
+    "section": "The Cantor-Bernstein argument",
+    "subgoals": [
+      "Explain the main idea of the cantor-bernstein argument.",
+      "Apply the result in the cantor-bernstein argument to a concrete example.",
+      "Recognise a common mistake involving the cantor-bernstein argument."
+    ]
+  },
+  {
+    "label": "Consequences",
+    "section": "Consequences",
+    "subgoals": [
+      "Explain the main idea of consequences.",
+      "Apply the result in consequences to a concrete example.",
+      "Recognise a common mistake involving consequences."
+    ]
+  }
+]

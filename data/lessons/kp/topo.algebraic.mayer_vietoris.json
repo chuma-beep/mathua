@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Exact Sequence",
+    "section": "The Exact Sequence",
+    "subgoals": [
+      "Explain the exact sequence.",
+      "Use the mayer-vietoris sequence in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  },
+  {
+    "label": "Connecting Homomorphisms",
+    "section": "Connecting Homomorphisms",
+    "subgoals": [
+      "Explain connecting homomorphisms.",
+      "Use the mayer-vietoris sequence in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  },
+  {
+    "label": "Computing Homology",
+    "section": "Computing Homology",
+    "subgoals": [
+      "Explain computing homology.",
+      "Use the mayer-vietoris sequence in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  }
+]

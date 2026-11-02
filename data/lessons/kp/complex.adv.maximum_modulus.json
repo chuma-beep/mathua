@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The maximum principle",
+    "section": "The maximum principle",
+    "subgoals": [
+      "The maximum modulus principle says that a nonconstant analytic function on a domain cannot attain a maximum mo",
+      "The principle follows from the open mapping property or from Cauchy's integral formula. If the modulus were ma",
+      "For a continuous function on a closed bounded domain that is analytic inside, the maximum modulus is attained "
+    ]
+  },
+  {
+    "label": "The minimum principle",
+    "section": "The minimum principle",
+    "subgoals": [
+      "If an analytic function is nonzero on a domain, then its reciprocal is analytic, so the maximum principle appl",
+      "Zeros are the exception. The modulus is zero at a zero, which is certainly a minimum, but the function is not ",
+      "These two principles are useful for bounding solutions of equations. If a function is known on the boundary of"
+    ]
+  },
+  {
+    "label": "Applications",
+    "section": "Applications",
+    "subgoals": [
+      "The maximum modulus principle proves that a nonconstant polynomial must have a root. If a polynomial had no ro",
+      "The principle also gives uniqueness for boundary value problems. If two analytic functions have the same bound",
+      "Numerically, the principle warns against searching for a maximum modulus in the interior. Evaluate on the boun"
+    ]
+  }
+]

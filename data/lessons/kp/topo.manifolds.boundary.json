@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Charts with Half-Space",
+    "section": "Charts with Half-Space",
+    "subgoals": [
+      "Explain charts with half-space.",
+      "Use manifolds with boundary in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  },
+  {
+    "label": "The Boundary",
+    "section": "The Boundary",
+    "subgoals": [
+      "Explain the boundary.",
+      "Use manifolds with boundary in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  },
+  {
+    "label": "Products and Examples",
+    "section": "Products and Examples",
+    "subgoals": [
+      "Explain products and examples.",
+      "Use manifolds with boundary in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Left Multiplication",
+    "section": "Left Multiplication",
+    "subgoals": [
+      "Let a group act on itself by left multiplication.",
+      "The action is faithful because only the identity fixes every element."
+    ]
+  },
+  {
+    "label": "The Symmetric Group",
+    "section": "The Symmetric Group",
+    "subgoals": [
+      "If the group has n elements, the permutations act on n symbols.",
+      "The image is therefore a subgroup of the symmetric group on n symbols."
+    ]
+  },
+  {
+    "label": "What the Theorem Says",
+    "section": "What the Theorem Says",
+    "subgoals": [
+      "Cayley's theorem gives an embedding, not a classification.",
+      "It shows that permutation groups are universal examples of groups."
+    ]
+  }
+]

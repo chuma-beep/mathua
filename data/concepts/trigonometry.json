@@ -989,5 +989,245 @@
       "streak": 10,
       "avg_time_seconds": 25.0
     }
+  },
+  {
+    "id": "trig.eq.multiple_angle",
+    "label": "Solving multiple-angle equations",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.equations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.ident.double_angle",
+      "trig.eq.general_solution"
+    ],
+    "encompasses": [
+      "trig.ident.double_angle",
+      "trig.eq.general_solution"
+    ],
+    "key_prerequisites": [
+      "trig.ident.double_angle",
+      "trig.eq.general_solution"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28
+    }
+  },
+  {
+    "id": "trig.basics.elevation_depression",
+    "label": "Angles of elevation and depression",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ],
+    "encompasses": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ],
+    "key_prerequisites": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
+  },
+  {
+    "id": "trig.graph.sinusoidal_model",
+    "label": "Sinusoidal models",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.graphs",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ],
+    "encompasses": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ],
+    "key_prerequisites": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 27
+    }
+  },
+  {
+    "id": "trig.adv.inverse_composition",
+    "label": "Compositions with inverse trigonometric functions",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.adv.inverse",
+      "trig.func.arcsine"
+    ],
+    "encompasses": [
+      "trig.adv.inverse",
+      "trig.func.arcsine"
+    ],
+    "key_prerequisites": [
+      "trig.adv.inverse",
+      "trig.func.arcsine"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "trig.adv.vector_components",
+    "label": "Vector components from magnitude and direction",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ],
+    "encompasses": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ],
+    "key_prerequisites": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "trig.ident.even_odd",
+    "label": "Even and odd trigonometric identities",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.identities",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.ident.pythagorean",
+      "trig.graph.cos"
+    ],
+    "encompasses": [
+      "trig.ident.pythagorean",
+      "trig.graph.cos"
+    ],
+    "key_prerequisites": [
+      "trig.ident.pythagorean",
+      "trig.graph.cos"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22
+    }
+  },
+  {
+    "id": "trig.graph.frequency",
+    "label": "Frequency and period of trigonometric graphs",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.graphs",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ],
+    "encompasses": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ],
+    "key_prerequisites": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
+  },
+  {
+    "id": "trig.eq.using_identities",
+    "label": "Solving equations with identities",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.equations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.ident.pythagorean",
+      "trig.ident.sum_diff"
+    ],
+    "encompasses": [
+      "trig.ident.pythagorean",
+      "trig.ident.sum_diff"
+    ],
+    "key_prerequisites": [
+      "trig.ident.pythagorean",
+      "trig.ident.sum_diff"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 27
+    }
+  },
+  {
+    "id": "trig.graph.harmonic_motion",
+    "label": "Simple harmonic motion",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.graphs",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.graph.sinusoidal_model",
+      "trig.basics.radians"
+    ],
+    "encompasses": [
+      "trig.graph.sinusoidal_model",
+      "trig.basics.radians"
+    ],
+    "key_prerequisites": [
+      "trig.graph.sinusoidal_model",
+      "trig.basics.radians"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25
+    }
+  },
+  {
+    "id": "trig.basics.segment_area",
+    "label": "Areas of circular segments",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.basics.sector_area",
+      "trig.basics.right_triangle"
+    ],
+    "encompasses": [
+      "trig.basics.sector_area",
+      "trig.basics.right_triangle"
+    ],
+    "key_prerequisites": [
+      "trig.basics.sector_area",
+      "trig.basics.right_triangle"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
   }
 ]

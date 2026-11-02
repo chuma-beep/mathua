@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Why Zeros Need Care",
+    "section": "Why Zeros Need Care",
+    "subgoals": [
+      "Explain why zeros need care",
+      "Apply why zeros need care to a worked example",
+      "Add the difference to the subtrahend to recover the minuend"
+    ]
+  },
+  {
+    "label": "Working the Chain",
+    "section": "Working the Chain",
+    "subgoals": [
+      "Explain working the chain",
+      "Apply working the chain to a worked example",
+      "Add the difference to the subtrahend to recover the minuend"
+    ]
+  },
+  {
+    "label": "Checking the Difference",
+    "section": "Checking the Difference",
+    "subgoals": [
+      "Explain checking the difference",
+      "Apply checking the difference to a worked example",
+      "Add the difference to the subtrahend to recover the minuend"
+    ]
+  }
+]

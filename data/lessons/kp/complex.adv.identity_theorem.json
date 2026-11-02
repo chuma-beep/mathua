@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Zeros of analytic functions",
+    "section": "Zeros of analytic functions",
+    "subgoals": [
+      "Zeros of a nonzero analytic function on a domain are isolated. If the function vanishes at a point and is not ",
+      "This isolation is a strong rigidity property. A nonzero analytic function cannot vanish on an open set, on a c",
+      "The order of a zero is the first index with a nonzero Taylor coefficient. It measures how flat the function is"
+    ]
+  },
+  {
+    "label": "Agreement on a set",
+    "section": "Agreement on a set",
+    "subgoals": [
+      "If two analytic functions on a domain agree on a set with an accumulation point inside the domain, then they a",
+      "The accumulation point must lie inside the domain, not merely on the boundary. Agreement on a boundary arc doe",
+      "The theorem justifies analytic continuation. If a function is defined by a power series on one disc and by ano"
+    ]
+  },
+  {
+    "label": "Analytic continuation",
+    "section": "Analytic continuation",
+    "subgoals": [
+      "Analytic continuation extends a function along paths by repeatedly expanding in power series. The identity the",
+      "The logarithm illustrates the phenomenon. Continuing the principal logarithm around the origin once returns a ",
+      "Uniqueness also underlies the standard method of proving identities. To show two analytic expressions are equa"
+    ]
+  }
+]

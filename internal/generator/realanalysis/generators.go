@@ -59,4 +59,7 @@ func Register(reg *generator.Registry) {
 	reg.Register("ra.metric.baire", &baireGen{})
 	reg.Register("ra.metric.equivalent", &equivalentGen{})
 	registerConversions(reg)
+	for id, kind := range raBridgeKinds {
+		reg.Register(id, &raBridgeGen{kind: kind})
+	}
 }

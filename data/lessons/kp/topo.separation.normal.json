@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Separating Closed Sets",
+    "section": "Separating Closed Sets",
+    "subgoals": [
+      "Explain separating closed sets.",
+      "Use normal spaces in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  },
+  {
+    "label": "Normality and Other Separation Axioms",
+    "section": "Normality and Other Separation Axioms",
+    "subgoals": [
+      "Explain normality and other separation axioms.",
+      "Use normal spaces in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  },
+  {
+    "label": "Examples and Counterexamples",
+    "section": "Examples and Counterexamples",
+    "subgoals": [
+      "Explain examples and counterexamples.",
+      "Use normal spaces in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  }
+]

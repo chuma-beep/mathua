@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The converse of Cauchy",
+    "section": "The converse of Cauchy",
+    "subgoals": [
+      "Morera's theorem is the converse of Cauchy's theorem. If a function is continuous on a domain and its integral",
+      "The triangle hypothesis is convenient because triangles are convex and the proof can use a primitive. Define a",
+      "Once a primitive exists, the original function is the derivative of an analytic function, hence analytic. This"
+    ]
+  },
+  {
+    "label": "Triangles and analyticity",
+    "section": "Triangles and analyticity",
+    "subgoals": [
+      "The theorem only needs the triangle condition, not the integral over every closed curve. On a convex domain, e",
+      "Continuity is essential. A function that is not continuous can have zero triangle integrals and still fail to ",
+      "Morera is often used to prove that a limit of analytic functions is analytic. If a sequence converges uniforml"
+    ]
+  },
+  {
+    "label": "Using Morera",
+    "section": "Using Morera",
+    "subgoals": [
+      "To apply Morera, verify continuity first, then show that the integral over every triangle vanishes. In practic",
+      "Morera also proves that a continuous function with continuous partial derivatives satisfying the Cauchy-Rieman",
+      "A typical exam question gives a piecewise definition and asks whether the function is analytic at a junction. "
+    ]
+  }
+]

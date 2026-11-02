@@ -26,6 +26,9 @@ func Register(reg *generator.Registry) {
 	registerNumeric(reg)
 	registerBatch(reg)
 	registerConversions(reg)
+	for id, kind := range mlBridgeKinds {
+		reg.Register(id, &mlBridgeGen{kind: kind})
+	}
 }
 
 type backpropGen struct{}

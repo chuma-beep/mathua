@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Reducing to binary problems",
+    "section": "Reducing to binary problems",
+    "subgoals": [
+      "Explain the main idea of reducing to binary problems",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Direct multiclass models",
+    "section": "Direct multiclass models",
+    "subgoals": [
+      "Explain the main idea of direct multiclass models",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Evaluation",
+    "section": "Evaluation",
+    "subgoals": [
+      "Explain the main idea of evaluation",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  }
+]

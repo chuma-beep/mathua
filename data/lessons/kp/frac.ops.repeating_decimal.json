@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Terminating and Repeating",
+    "section": "Terminating and Repeating",
+    "subgoals": [
+      "Explain terminating and repeating",
+      "Work an example of terminating and repeating",
+      "Multiply the repeating decimal by its period and subtract"
+    ]
+  },
+  {
+    "label": "The Length of the Block",
+    "section": "The Length of the Block",
+    "subgoals": [
+      "Explain the length of the block",
+      "Work an example of the length of the block",
+      "Multiply the repeating decimal by its period and subtract"
+    ]
+  },
+  {
+    "label": "Writing the Decimal",
+    "section": "Writing the Decimal",
+    "subgoals": [
+      "Explain writing the decimal",
+      "Work an example of writing the decimal",
+      "Multiply the repeating decimal by its period and subtract"
+    ]
+  }
+]

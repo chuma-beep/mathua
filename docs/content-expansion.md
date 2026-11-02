@@ -69,11 +69,11 @@ means a new thin concept cannot be added quietly.
 
 ## 4. Where the corpus is thin
 
-### 4.1 The course catalog reaches 1250 of the 1250 concepts
+### 4.1 The course catalog reaches 1500 of the 1500 concepts
 
 Courses carry target sets, and a target expands to its transitive prerequisite closure in
 `internal/planning/planner.go:64` (`collectChain`). Across the 28 courses those closures reach
-1250 of the 1250 concepts: 0 of them have a node, a generator, a lesson and three KP shards and
+1500 of the 1500 concepts: 0 of them have a node, a generator, a lesson and three KP shards and
 still sit outside every named course path. The wiring batch of 2026-10-19 moved the 149 that used
 to sit there into the courses that teach their subject, and the table stays as the measurement on
 the number, because a concept that no course targets is unreachable whatever the diagnostic
@@ -83,33 +83,33 @@ The count of unreachable concepts by domain:
 
 | Domain | Concepts | Unreachable |
 |---|---|---|
-| calc1 | 76 | 0 |
-| calc2 | 63 | 0 |
-| calc3 | 61 | 0 |
-| algebra | 124 | 0 |
-| topology | 42 | 0 |
-| statistics | 55 | 0 |
-| precalculus | 50 | 0 |
-| fractions | 45 | 0 |
-| machine_learning | 45 | 0 |
-| complex_numbers | 42 | 0 |
-| number_theory | 42 | 0 |
-| differential_equations | 42 | 0 |
-| prealgebra | 60 | 0 |
-| trigonometry | 68 | 0 |
-| arithmetic | 60 | 0 |
-| linear_algebra | 45 | 0 |
-| abstract_algebra | 45 | 0 |
-| discrete_math | 55 | 0 |
-| geometry | 45 | 0 |
-| graph_theory | 40 | 0 |
-| probability_theory | 50 | 0 |
-| numerical_analysis | 40 | 0 |
-| real_analysis | 55 | 0 |
+| calc1 | 84 | 0 |
+| calc2 | 71 | 0 |
+| calc3 | 71 | 0 |
+| algebra | 139 | 0 |
+| topology | 52 | 0 |
+| statistics | 73 | 0 |
+| precalculus | 58 | 0 |
+| fractions | 52 | 0 |
+| machine_learning | 55 | 0 |
+| complex_numbers | 51 | 0 |
+| number_theory | 51 | 0 |
+| differential_equations | 46 | 0 |
+| prealgebra | 71 | 0 |
+| trigonometry | 78 | 0 |
+| arithmetic | 72 | 0 |
+| linear_algebra | 59 | 0 |
+| abstract_algebra | 56 | 0 |
+| discrete_math | 64 | 0 |
+| geometry | 70 | 0 |
+| graph_theory | 50 | 0 |
+| probability_theory | 63 | 0 |
+| numerical_analysis | 49 | 0 |
+| real_analysis | 65 | 0 |
 
 Two structural facts sit behind that table. First, a course is a *sampled* path, not a domain
-cover: `calc1` targets 50 of the 76 in its domain, `calc2` targets 46 of the 63 in its domain and
-`calc3` targets 54 of the 61 in its domain, so the three courses are stages rather than a partition.
+cover: `calc1` targets 57 of the 84 in its domain, `calc2` targets 54 of the 71 in its domain and
+`calc3` targets 64 of the 71 in its domain, so the three courses are stages rather than a partition.
 Second, one whole
 domain still has no course of its own: `trigonometry` is reached only by the closures of `a2` and
 `pc`, which bring in 54 and 29 of its 68 concepts, so a learner meets trigonometry as algebra and
@@ -123,16 +123,16 @@ now read zero:
 
 | Domain | Concepts | `multiple_choice` |
 |---|---|---|
-| topology | 42 | 0 |
-| real_analysis | 55 | 0 |
-| abstract_algebra | 45 | 0 |
-| trigonometry | 68 | 0 |
-| probability_theory | 50 | 0 |
-| discrete_math | 55 | 0 |
-| machine_learning | 45 | 0 |
-| complex_numbers | 42 | 0 |
-| numerical_analysis | 40 | 0 |
-| number_theory | 42 | 0 |
+| topology | 52 | 0 |
+| real_analysis | 65 | 0 |
+| abstract_algebra | 56 | 0 |
+| trigonometry | 78 | 0 |
+| probability_theory | 63 | 0 |
+| discrete_math | 64 | 0 |
+| machine_learning | 55 | 0 |
+| complex_numbers | 51 | 0 |
+| numerical_analysis | 49 | 0 |
+| number_theory | 51 | 0 |
 
 Against that, the three calculus domains carry 72 `symbolic` and 15 `expression` concepts, and `algebra` carries 29 `symbolic` and 13 `expression`. The pool
 ratchet in `internal/generator/pools_test.go` exists for exactly this surface, and it runs at two
@@ -354,7 +354,7 @@ also the gate on a new domain (section 5.4), because a domain with no course tar
 unreachable were added, subject by subject, to the courses that teach them, so the catalog now
 reaches all 1250 and the table in section 4.1 reads zero on every row. That is the curriculum work
 the paragraph above says the fix has to be, done deliberately rather than by a closure rule, and it
-does not make the courses domain covers: `calc1` reaches all 76 concepts in its own domain and
+does not make the courses domain covers: `calc1` reaches all 84 concepts in its own domain and
 shares the rest of the calculus corpus with `calc2` and `calc3`, and trigonometry still has no
 course of its own.
 
@@ -405,36 +405,36 @@ because the change this section prepares for is the one that would have tripped 
 
 ### 5.5 The concept target, and where it goes
 
-The catalog holds 1250 concepts. The remaining per-domain targets add up to 0, and this is the table
+The catalog holds 1500 concepts. The remaining per-domain targets add up to 0, and this is the table
 that says where: the thousand-concept milestone is complete, and graph theory has opened the 1,250
 tranche. `Now` is read from the corpus; `Target` is the decision. The rows keep the order step 6 of
 section 6 used, largest deficit first.
 
 | Domain | Tier | Now | Target | Add |
 |---|---|---:|---:|---:|
-| numerical_analysis | university | 40 | 40 | +0 |
-| probability_theory | university | 50 | 50 | +0 |
-| graph_theory | university | 40 | 40 | +0 |
-| arithmetic | school | 60 | 60 | +0 |
-| geometry | school | 45 | 45 | +0 |
-| fractions | school | 45 | 45 | +0 |
-| discrete_math | university | 55 | 55 | +0 |
-| complex_numbers | university | 42 | 42 | +0 |
-| prealgebra | school | 60 | 60 | +0 |
-| abstract_algebra | university | 45 | 45 | +0 |
-| machine_learning | university | 45 | 45 | +0 |
-| topology | university | 42 | 42 | +0 |
-| linear_algebra | university | 45 | 45 | +0 |
-| statistics | bridge | 55 | 55 | +0 |
-| number_theory | university | 42 | 42 | +0 |
-| differential_equations | university | 42 | 42 | +0 |
-| precalculus | bridge | 50 | 50 | +0 |
-| real_analysis | university | 55 | 55 | +0 |
-| calc1 | bridge | 76 | 76 | +0 |
-| calc2 | bridge | 63 | 63 | +0 |
-| calc3 | bridge | 61 | 61 | +0 |
-| algebra | school | 124 | 124 | +0 |
-| trigonometry | school | 68 | 68 | +0 |
+| numerical_analysis | university | 49 | 49 | +0 |
+| probability_theory | university | 63 | 63 | +0 |
+| graph_theory | university | 50 | 50 | +0 |
+| arithmetic | school | 72 | 72 | +0 |
+| geometry | school | 70 | 70 | +0 |
+| fractions | school | 52 | 52 | +0 |
+| discrete_math | university | 64 | 64 | +0 |
+| complex_numbers | university | 51 | 51 | +0 |
+| prealgebra | school | 71 | 71 | +0 |
+| abstract_algebra | university | 56 | 56 | +0 |
+| machine_learning | university | 55 | 55 | +0 |
+| topology | university | 52 | 52 | +0 |
+| linear_algebra | university | 59 | 59 | +0 |
+| statistics | bridge | 73 | 73 | +0 |
+| number_theory | university | 51 | 51 | +0 |
+| differential_equations | university | 46 | 46 | +0 |
+| precalculus | bridge | 58 | 58 | +0 |
+| real_analysis | university | 65 | 65 | +0 |
+| calc1 | bridge | 84 | 84 | +0 |
+| calc2 | bridge | 71 | 71 | +0 |
+| calc3 | bridge | 71 | 71 | +0 |
+| algebra | school | 139 | 139 | +0 |
+| trigonometry | school | 78 | 78 | +0 |
 
 **The `Now` column had drifted, and this is the correction.** The table was drawn when the corpus held
 703 concepts, and the batches since have grown it to 819. `scripts/sweep_counts.py` keeps the sentence

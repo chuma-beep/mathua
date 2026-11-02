@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Equivalent conditions",
+    "section": "Equivalent conditions",
+    "subgoals": [
+      "List conditions equivalent to invertibility",
+      "Translate between rank and nullity statements",
+      "Recognise the unique-solution condition"
+    ]
+  },
+  {
+    "label": "Rank and pivots",
+    "section": "Rank and pivots",
+    "subgoals": [
+      "Count pivots for an invertible matrix",
+      "Relate free variables to failure of invertibility",
+      "Use row reduction to decide invertibility"
+    ]
+  },
+  {
+    "label": "Determinants and invertibility",
+    "section": "Determinants and invertibility",
+    "subgoals": [
+      "Connect a nonzero determinant to invertibility",
+      "Read the determinant of a singular matrix",
+      "Choose the fastest test for a small matrix"
+    ]
+  }
+]

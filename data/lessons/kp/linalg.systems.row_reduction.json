@@ -1,0 +1,28 @@
+[
+  {
+    "label": "Elementary row operations",
+    "section": "Elementary Row Operations",
+    "subgoals": [
+      "Swap rows, scale a row by a nonzero constant and add a multiple of one row to another.",
+      "Explain why each operation preserves the solution set."
+    ]
+  },
+  {
+    "label": "Row echelon form",
+    "section": "Row Echelon Form",
+    "subgoals": [
+      "Identify pivots and zero rows.",
+      "Count the pivots to find the rank.",
+      "Distinguish echelon form from reduced echelon form."
+    ]
+  },
+  {
+    "label": "Reading solutions from a reduced matrix",
+    "section": "Reading Solutions from a Reduced Matrix",
+    "subgoals": [
+      "Separate basic variables from free variables.",
+      "Recognise an inconsistent row.",
+      "Describe unique, infinite and empty solution sets."
+    ]
+  }
+]

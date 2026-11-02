@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Standard deviation as a distance",
+    "section": "Standard deviation as a distance",
+    "subgoals": [
+      "Read the mean from the data",
+      "Square each distance from the mean",
+      "Take the square root of the average squared distance"
+    ]
+  },
+  {
+    "label": "Computing population and sample spread",
+    "section": "Computing population and sample spread",
+    "subgoals": [
+      "Divide by N for a population",
+      "Divide by n-1 for a sample",
+      "Keep the answer in the data's units"
+    ]
+  },
+  {
+    "label": "Comparing distributions",
+    "section": "Comparing distributions",
+    "subgoals": [
+      "Compare centres before spread",
+      "Compare spread only in comparable units",
+      "Use standard deviation to describe typical distance"
+    ]
+  }
+]

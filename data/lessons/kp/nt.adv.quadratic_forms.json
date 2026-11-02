@@ -1,0 +1,26 @@
+[
+  {
+    "label": "The Discriminant",
+    "section": "The Discriminant",
+    "subgoals": [
+      "Compute the discriminant of a form",
+      "Apply the discriminant to a concrete example"
+    ]
+  },
+  {
+    "label": "Definite and Indefinite Forms",
+    "section": "Definite and Indefinite Forms",
+    "subgoals": [
+      "Classify a form as definite or indefinite",
+      "Apply definite and indefinite forms to a concrete example"
+    ]
+  },
+  {
+    "label": "Evaluating a Form",
+    "section": "Evaluating a Form",
+    "subgoals": [
+      "Evaluate a form at an integer pair",
+      "Apply evaluating a form to a concrete example"
+    ]
+  }
+]

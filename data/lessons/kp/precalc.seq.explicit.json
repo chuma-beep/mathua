@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Terms from a formula",
+    "section": "Terms from a formula",
+    "subgoals": [
+      "An explicit formula gives a term directly from its index.",
+      "Substitute n into the formula to get the nth term.",
+      "No earlier term is needed."
+    ]
+  },
+  {
+    "label": "Arithmetic and geometric cases",
+    "section": "Arithmetic and geometric cases",
+    "subgoals": [
+      "An arithmetic sequence has a constant difference d.",
+      "A geometric sequence has a constant ratio r.",
+      "Both can be written as explicit formulas in n."
+    ]
+  },
+  {
+    "label": "Comparing with recursion",
+    "section": "Comparing with recursion",
+    "subgoals": [
+      "A recursive rule needs one or more starting terms.",
+      "An explicit rule jumps straight to any term.",
+      "The two descriptions can define the same sequence."
+    ]
+  }
+]

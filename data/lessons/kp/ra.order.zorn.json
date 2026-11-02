@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Partial orders",
+    "section": "Partial orders",
+    "subgoals": [
+      "Explain the main idea of partial orders.",
+      "Apply the result in partial orders to a concrete example.",
+      "Recognise a common mistake involving partial orders."
+    ]
+  },
+  {
+    "label": "Maximal elements",
+    "section": "Maximal elements",
+    "subgoals": [
+      "Explain the main idea of maximal elements.",
+      "Apply the result in maximal elements to a concrete example.",
+      "Recognise a common mistake involving maximal elements."
+    ]
+  },
+  {
+    "label": "An application",
+    "section": "An application",
+    "subgoals": [
+      "Explain the main idea of an application.",
+      "Apply the result in an application to a concrete example.",
+      "Recognise a common mistake involving an application."
+    ]
+  }
+]

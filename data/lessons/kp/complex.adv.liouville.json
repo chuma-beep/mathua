@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Bounded entire functions",
+    "section": "Bounded entire functions",
+    "subgoals": [
+      "Liouville's theorem states that a bounded entire function is constant. An entire function is analytic on the w",
+      "The proof uses Cauchy's estimate for the first derivative. On a circle of radius r around any point, the deriv",
+      "An equivalent statement is that a nonconstant entire function is unbounded. This form is often easier to apply"
+    ]
+  },
+  {
+    "label": "The proof",
+    "section": "The proof",
+    "subgoals": [
+      "The estimate is the heart of the proof. Analyticity gives a power series at each point, and Cauchy's integral ",
+      "Letting the radius tend to infinity is legitimate because the function is entire, so the circle can be chosen ",
+      "The theorem has a converse in spirit: constants are exactly the bounded entire functions. That classification "
+    ]
+  },
+  {
+    "label": "Polynomial growth",
+    "section": "Polynomial growth",
+    "subgoals": [
+      "A useful generalization says that if an entire function grows at most like a constant times the n-th power of ",
+      "This polynomial-growth version explains why entire functions with slow growth are so rigid. A bounded entire f",
+      "When solving problems, identify the growth exponent first. If the hypothesis gives a bound of the form C times"
+    ]
+  }
+]

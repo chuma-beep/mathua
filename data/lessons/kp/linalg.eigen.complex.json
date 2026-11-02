@@ -1,0 +1,29 @@
+[
+  {
+    "label": "A rotation has no real eigenvector",
+    "section": "A rotation has no real eigenvector",
+    "subgoals": [
+      "Write the matrix of a quarter turn",
+      "Solve the characteristic equation",
+      "Interpret the missing real solution"
+    ]
+  },
+  {
+    "label": "Complex conjugate pairs",
+    "section": "Complex conjugate pairs",
+    "subgoals": [
+      "Recognise conjugate eigenvalues of a real matrix",
+      "Add and multiply a conjugate pair",
+      "Read the trace and determinant from the pair"
+    ]
+  },
+  {
+    "label": "Trace and determinant",
+    "section": "Trace and determinant",
+    "subgoals": [
+      "Use trace as the sum of eigenvalues",
+      "Use determinant as the product of eigenvalues",
+      "Recover a complex pair from trace and determinant"
+    ]
+  }
+]

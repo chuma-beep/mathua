@@ -1,0 +1,26 @@
+[
+  {
+    "label": "States and Transitions",
+    "section": "States and Transitions",
+    "subgoals": [
+      "Explain states and transitions.",
+      "Apply states and transitions to a worked example."
+    ]
+  },
+  {
+    "label": "Running a Machine",
+    "section": "Running a Machine",
+    "subgoals": [
+      "Explain running a machine.",
+      "Apply running a machine to a worked example."
+    ]
+  },
+  {
+    "label": "Counting States and Strings",
+    "section": "Counting States and Strings",
+    "subgoals": [
+      "Explain counting states and strings.",
+      "Apply counting states and strings to a worked example."
+    ]
+  }
+]

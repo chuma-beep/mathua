@@ -1,0 +1,26 @@
+[
+  {
+    "label": "The fundamental sine limit",
+    "section": "The fundamental sine limit",
+    "subgoals": [
+      "Explain the fundamental sine limit",
+      "Apply the fundamental sine limit to an example"
+    ]
+  },
+  {
+    "label": "Scaling the argument",
+    "section": "Scaling the argument",
+    "subgoals": [
+      "Explain scaling the argument",
+      "Apply scaling the argument to an example"
+    ]
+  },
+  {
+    "label": "Related trigonometric limits",
+    "section": "Related trigonometric limits",
+    "subgoals": [
+      "Explain related trigonometric limits",
+      "Apply related trigonometric limits to an example"
+    ]
+  }
+]

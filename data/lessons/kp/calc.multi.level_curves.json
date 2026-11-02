@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Level curves of a function",
+    "section": "Level curves of a function",
+    "subgoals": [
+      "Write the equation of a level curve",
+      "Recognise when a level curve is empty"
+    ]
+  },
+  {
+    "label": "Circles, lines and hyperbolas",
+    "section": "Circles, lines and hyperbolas",
+    "subgoals": [
+      "Classify level curves by their equations",
+      "Solve for a coordinate on a level curve"
+    ]
+  },
+  {
+    "label": "Reading a contour diagram",
+    "section": "Reading a contour diagram",
+    "subgoals": [
+      "Interpret contour spacing",
+      "Relate contours to steepness and extrema"
+    ]
+  }
+]

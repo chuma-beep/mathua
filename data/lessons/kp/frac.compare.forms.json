@@ -1,0 +1,29 @@
+[
+  {
+    "label": "One Value, Three Forms",
+    "section": "One Value, Three Forms",
+    "subgoals": [
+      "Explain one value, three forms",
+      "Work an example of one value, three forms",
+      "Convert both forms to a common representation"
+    ]
+  },
+  {
+    "label": "Converting Between Forms",
+    "section": "Converting Between Forms",
+    "subgoals": [
+      "Explain converting between forms",
+      "Work an example of converting between forms",
+      "Convert both forms to a common representation"
+    ]
+  },
+  {
+    "label": "Comparing Mixed Lists",
+    "section": "Comparing Mixed Lists",
+    "subgoals": [
+      "Explain comparing mixed lists",
+      "Work an example of comparing mixed lists",
+      "Convert both forms to a common representation"
+    ]
+  }
+]

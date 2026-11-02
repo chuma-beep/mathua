@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Equivalent Ratios",
+    "section": "Equivalent Ratios",
+    "subgoals": [
+      "A ratio table lists pairs that describe the same relationship.",
+      "If 3 tickets cost 12, then 6 tickets cost 24 and 1 ticket costs 4.",
+      "The table can be extended in either direction, but the multiplier must be applied to both rows."
+    ]
+  },
+  {
+    "label": "Finding a Missing Entry",
+    "section": "Finding a Missing Entry",
+    "subgoals": [
+      "Use the unit rate, or find the multiplier between a known column and the missing one.",
+      "If the input column is multiplied by 5, the output column must also be multiplied by 5.",
+      "Cross multiplication is another way to solve the proportion that the table represents."
+    ]
+  },
+  {
+    "label": "Using Ratio Tables",
+    "section": "Using Ratio Tables",
+    "subgoals": [
+      "Tables make scaling and comparison visible.",
+      "A table with a constant difference rather than a constant multiplier describes a linear relationship, not a proportional one.",
+      "Check the unit rate in two different columns before concluding that the table is proportional."
+    ]
+  }
+]

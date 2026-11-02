@@ -251,7 +251,7 @@ func writeReport(path string, dag *concepts.DAG, mu *concepts.MasteryUnits, find
 			if i > 0 && i%4 == 0 {
 				w("")
 			}
-			w("`%s` ", s)
+			w("`%s`", s)
 		}
 		w("")
 	} else {

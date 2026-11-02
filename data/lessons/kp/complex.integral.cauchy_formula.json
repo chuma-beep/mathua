@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The formula",
+    "section": "The formula",
+    "subgoals": [
+      "The Cauchy integral formula recovers the value of an analytic function inside a simple closed contour from its",
+      "The formula is local as well as global. Shrinking the circle around a keeps the value f(a) unchanged, because ",
+      "To use the formula, identify the point a, confirm that the contour winds once around it, and verify that the r"
+    ]
+  },
+  {
+    "label": "A circle integral",
+    "section": "A circle integral",
+    "subgoals": [
+      "For a monomial z to the n, the value at a is a to the n, so the formula converts a contour integral into a pow",
+      "Worked examples usually choose a contour large enough to contain a and small enough to avoid other singulariti",
+      "A common error is to apply the formula when the contour is not positively oriented. Reversing the orientation "
+    ]
+  },
+  {
+    "label": "Derivatives from the formula",
+    "section": "Derivatives from the formula",
+    "subgoals": [
+      "Differentiating under the integral sign gives the general derivative formula: the k-th derivative at a is a co",
+      "The derivative formula also yields Cauchy's estimates. If f is bounded by M on a circle of radius r around a, ",
+      "For computation, the most useful cases are the first and second derivatives. They appear when an integrand has"
+    ]
+  }
+]

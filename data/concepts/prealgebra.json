@@ -869,5 +869,269 @@
       "streak": 10,
       "avg_time_seconds": 20.0
     }
+  },
+  {
+    "id": "prealg.ineq.negative",
+    "label": "Solving inequalities with negative coefficients",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.inequalities",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.ineq.one_step",
+      "arith.neg.mult_div"
+    ],
+    "encompasses": [
+      "prealg.ineq.one_step",
+      "arith.neg.mult_div"
+    ],
+    "key_prerequisites": [
+      "prealg.ineq.one_step",
+      "arith.neg.mult_div"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "prealg.eq.fractions",
+    "label": "Equations with fractional coefficients",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.equations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.eq.two_step",
+      "frac.ops.negative"
+    ],
+    "encompasses": [
+      "prealg.eq.two_step",
+      "frac.ops.negative"
+    ],
+    "key_prerequisites": [
+      "prealg.eq.two_step",
+      "frac.ops.negative"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "ratio.ops.proportional_graph",
+    "label": "Graphs of proportional relationships",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.ratios",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ratio.ops.proportion",
+      "prealg.real.concept"
+    ],
+    "encompasses": [
+      "ratio.ops.proportion",
+      "prealg.real.concept"
+    ],
+    "key_prerequisites": [
+      "ratio.ops.proportion",
+      "prealg.real.concept"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
+  },
+  {
+    "id": "prealg.func.table",
+    "label": "Function tables",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.variables",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.var.concept",
+      "prealg.expr.evaluate"
+    ],
+    "encompasses": [
+      "prealg.var.concept",
+      "prealg.expr.evaluate"
+    ],
+    "key_prerequisites": [
+      "prealg.var.concept",
+      "prealg.expr.evaluate"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22
+    }
+  },
+  {
+    "id": "prealg.graph.interpret",
+    "label": "Reading graphs of relationships",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.variables",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.real.concept",
+      "geo.coord.plot"
+    ],
+    "encompasses": [
+      "prealg.real.concept",
+      "geo.coord.plot"
+    ],
+    "key_prerequisites": [
+      "prealg.real.concept",
+      "geo.coord.plot"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25
+    }
+  },
+  {
+    "id": "prealg.real.order_rational",
+    "label": "Ordering rational numbers",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.variables",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.real.concept",
+      "dec.basics.compare"
+    ],
+    "encompasses": [
+      "prealg.real.concept",
+      "dec.basics.compare"
+    ],
+    "key_prerequisites": [
+      "prealg.real.concept",
+      "dec.basics.compare"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22
+    }
+  },
+  {
+    "id": "dec.basics.place_value",
+    "label": "Decimal place value",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.decimals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.dec.intro",
+      "arith.place.powers_ten"
+    ],
+    "encompasses": [
+      "arith.dec.intro",
+      "arith.place.powers_ten"
+    ],
+    "key_prerequisites": [
+      "arith.dec.intro",
+      "arith.place.powers_ten"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22
+    }
+  },
+  {
+    "id": "dec.ops.powers_ten",
+    "label": "Multiplying and dividing decimals by powers of ten",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.decimals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "dec.ops.mult",
+      "arith.exp.evaluate"
+    ],
+    "encompasses": [
+      "dec.ops.mult",
+      "arith.exp.evaluate"
+    ],
+    "key_prerequisites": [
+      "dec.ops.mult",
+      "arith.exp.evaluate"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22
+    }
+  },
+  {
+    "id": "prealg.measure.dimensional",
+    "label": "Dimensional analysis",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.measurement",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.measure.convert",
+      "prealg.measure.metric"
+    ],
+    "encompasses": [
+      "prealg.measure.convert",
+      "prealg.measure.metric"
+    ],
+    "key_prerequisites": [
+      "prealg.measure.convert",
+      "prealg.measure.metric"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28
+    }
+  },
+  {
+    "id": "ratio.ops.table",
+    "label": "Ratio tables",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.ratios",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ratio.ops.proportion",
+      "prealg.func.table"
+    ],
+    "encompasses": [
+      "ratio.ops.proportion",
+      "prealg.func.table"
+    ],
+    "key_prerequisites": [
+      "ratio.ops.proportion",
+      "prealg.func.table"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
+  },
+  {
+    "id": "prealg.expr.simplify",
+    "label": "Simplifying algebraic expressions",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.variables",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.expr.like_terms",
+      "prealg.expr.distribute"
+    ],
+    "encompasses": [
+      "prealg.expr.like_terms",
+      "prealg.expr.distribute"
+    ],
+    "key_prerequisites": [
+      "prealg.expr.like_terms",
+      "prealg.expr.distribute"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
   }
 ]

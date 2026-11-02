@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The existence and uniqueness theorem",
+    "section": "The existence and uniqueness theorem",
+    "subgoals": [
+      "State the hypotheses on f and its y-partial",
+      "Explain the role of a rectangle around the initial point",
+      "State what the theorem guarantees"
+    ]
+  },
+  {
+    "label": "Checking continuity",
+    "section": "Checking continuity",
+    "subgoals": [
+      "Test continuity of the right-hand side",
+      "Test continuity of the partial derivative",
+      "Locate points where either test fails"
+    ]
+  },
+  {
+    "label": "When the theorem does not apply",
+    "section": "When the theorem does not apply",
+    "subgoals": [
+      "Distinguish failure of hypotheses from failure of existence",
+      "Recognise a square-root right-hand side",
+      "Explain why a solution may still exist"
+    ]
+  }
+]

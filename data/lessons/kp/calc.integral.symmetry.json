@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Even functions",
+    "section": "Even functions",
+    "subgoals": [
+      "Explain even functions",
+      "Apply even functions to an example"
+    ]
+  },
+  {
+    "label": "Odd functions",
+    "section": "Odd functions",
+    "subgoals": [
+      "Explain odd functions",
+      "Apply odd functions to an example"
+    ]
+  },
+  {
+    "label": "Combining even and odd parts",
+    "section": "Combining even and odd parts",
+    "subgoals": [
+      "Explain combining even and odd parts",
+      "Apply combining even and odd parts to an example"
+    ]
+  }
+]

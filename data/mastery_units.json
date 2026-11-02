@@ -5,8 +5,8 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1250,
-  "unit_count": 131,
+  "concept_count": 1500,
+  "unit_count": 138,
   "units": [
     {
       "id": "abstract_algebra.b6",
@@ -42,6 +42,7 @@
       ],
       "concept_ids": [
         "abstract.group.automorphism",
+        "abstract.group.cauchy",
         "abstract.group.center",
         "abstract.group.dihedral",
         "abstract.group.homomorphism",
@@ -52,7 +53,7 @@
         "abstract.rings.zero_divisor",
         "abstract.structures.field"
       ],
-      "concept_count": 10
+      "concept_count": 11
     },
     {
       "id": "abstract_algebra.b8",
@@ -71,20 +72,23 @@
         "abstract.field.characteristic",
         "abstract.field.extension",
         "abstract.group.action",
+        "abstract.group.direct_product",
         "abstract.group.quotient_group",
         "abstract.group.simple",
         "abstract.rings.euclidean",
         "abstract.rings.integral_domain",
         "abstract.rings.localization",
+        "abstract.rings.pid",
         "abstract.rings.polynomial",
         "abstract.rings.prime_ideal",
         "abstract.rings.quotient",
         "abstract.rings.ufd",
+        "abstract.structures.fg_module",
         "abstract.structures.module",
         "abstract.structures.module_hom",
         "abstract.structures.submodule"
       ],
-      "concept_count": 15
+      "concept_count": 18
     },
     {
       "id": "abstract_algebra.b9",
@@ -101,19 +105,25 @@
       ],
       "concept_ids": [
         "abstract.field.algebraic",
+        "abstract.field.algebraic_closure",
+        "abstract.field.cyclotomic",
         "abstract.field.finite",
         "abstract.field.galois_group",
+        "abstract.field.separable",
+        "abstract.group.abelian_classification",
+        "abstract.group.cayley",
         "abstract.group.composition_series",
         "abstract.group.nilpotent",
         "abstract.group.p_group",
         "abstract.group.solvable",
         "abstract.group.sylow",
+        "abstract.rings.irreducibility",
         "abstract.rings.noetherian",
         "abstract.structures.exact_sequence",
         "abstract.structures.galois",
         "abstract.structures.tensor"
       ],
-      "concept_count": 12
+      "concept_count": 18
     },
     {
       "id": "abstract_algebra.b10",
@@ -123,13 +133,15 @@
       "depth_min": 30,
       "depth_max": 31,
       "subdomains": [
+        "abstract_algebra.fields",
         "abstract_algebra.groups"
       ],
       "concept_ids": [
+        "abstract.field.radicals",
         "abstract.group.commutator",
         "abstract.group.free"
       ],
-      "concept_count": 2
+      "concept_count": 3
     },
     {
       "id": "algebra.b3",
@@ -160,9 +172,10 @@
         "algebra.radicals"
       ],
       "concept_ids": [
-        "alg.radical.conjugate"
+        "alg.radical.conjugate",
+        "alg.radical.nth_root"
       ],
-      "concept_count": 1
+      "concept_count": 2
     },
     {
       "id": "algebra.b5",
@@ -204,6 +217,7 @@
         "alg.eq.binomial",
         "alg.eq.extraneous_roots",
         "alg.eq.irrational",
+        "alg.eq.linear.word",
         "alg.eq.literal",
         "alg.eq.multi_step",
         "alg.eq.rational",
@@ -223,7 +237,9 @@
         "alg.ineq.sign_analysis",
         "alg.ineq.systems",
         "alg.linear.graph",
+        "alg.linear.horizontal_vertical",
         "alg.linear.parallel_perp",
+        "alg.linear.point_slope",
         "alg.linear.slope",
         "alg.linear.slope_intercept",
         "alg.linear.standard_form",
@@ -236,7 +252,7 @@
         "alg.systems.gaussian",
         "alg.systems.substitution"
       ],
-      "concept_count": 35
+      "concept_count": 38
     },
     {
       "id": "algebra.b7",
@@ -264,6 +280,7 @@
         "alg.factor.diff_squares",
         "alg.func.absolute_value",
         "alg.func.composite",
+        "alg.func.composite_domain",
         "alg.func.dirichlet",
         "alg.func.domain",
         "alg.func.evaluate",
@@ -278,10 +295,12 @@
         "alg.func.notation",
         "alg.func.piecewise",
         "alg.func.power",
+        "alg.func.rate_of_change",
         "alg.func.rational",
         "alg.func.sign",
         "alg.func.transformations",
         "alg.func.variation",
+        "alg.ineq.linear_programming",
         "alg.ineq.two_var",
         "alg.linear.intercepts",
         "alg.quad.complete_square",
@@ -300,7 +319,7 @@
         "alg.systems.three_var",
         "alg.systems.word"
       ],
-      "concept_count": 42
+      "concept_count": 45
     },
     {
       "id": "algebra.b8",
@@ -328,16 +347,23 @@
         "alg.conic.parabola",
         "alg.eq.exponential",
         "alg.eq.polynomial",
+        "alg.eq.quadratic_form",
+        "alg.eq.rational.word",
+        "alg.eq.rational_exponent",
         "alg.eq.trinomial",
         "alg.exp.compound",
         "alg.exp.evaluate",
         "alg.exp.graph",
+        "alg.exp.half_life",
+        "alg.exp.natural_base",
         "alg.func.quad",
         "alg.func.sigmoid",
         "alg.ineq.quadratic",
         "alg.log.concept",
         "alg.log.evaluate",
         "alg.poly.factor_theorem",
+        "alg.poly.fundamental_theorem",
+        "alg.poly.graph_zeros",
         "alg.poly.rational_root",
         "alg.poly.roots",
         "alg.poly.vieta",
@@ -349,11 +375,12 @@
         "alg.rational.complex_fraction",
         "alg.seq.arithmetic",
         "alg.seq.geometric",
+        "alg.seq.recursive",
         "alg.seq.sigma",
         "alg.seq.sum_arith",
         "alg.seq.sum_geo"
       ],
-      "concept_count": 30
+      "concept_count": 38
     },
     {
       "id": "algebra.b9",
@@ -421,6 +448,7 @@
         "arithmetic.subtraction"
       ],
       "concept_ids": [
+        "arith.add.missing_addend",
         "arith.add.triple",
         "arith.compare.whole",
         "arith.div.concept",
@@ -436,9 +464,10 @@
         "arith.round.tens",
         "arith.round.thousands",
         "arith.sub.borrow",
-        "arith.sub.word"
+        "arith.sub.word",
+        "arith.sub.zeros"
       ],
-      "concept_count": 16
+      "concept_count": 18
     },
     {
       "id": "arithmetic.b2",
@@ -466,17 +495,24 @@
         "arith.estimate.product",
         "arith.exp.concept",
         "arith.exp.evaluate",
+        "arith.factor.divisibility",
+        "arith.factor.even_odd",
         "arith.factor.find",
+        "arith.factor.multiple",
         "arith.factor.prime",
         "arith.mult.double",
         "arith.mult.tables",
         "arith.mult.triple",
+        "arith.mult.two_by_two",
         "arith.mult.word",
+        "arith.neg.compare",
         "arith.neg.mult_div",
+        "arith.ops.fact_families",
         "arith.order_ops.basic",
+        "arith.place.millions",
         "arith.place.powers_ten"
       ],
-      "concept_count": 16
+      "concept_count": 23
     },
     {
       "id": "arithmetic.b3",
@@ -487,6 +523,7 @@
       "depth_max": 11,
       "subdomains": [
         "arithmetic.division",
+        "arithmetic.estimation",
         "arithmetic.exponents",
         "arithmetic.factors",
         "arithmetic.order_of_operations",
@@ -495,13 +532,16 @@
       "concept_ids": [
         "arith.div.interpret_remainder",
         "arith.div.long",
+        "arith.div.two_digit_divisor",
         "arith.div.word",
+        "arith.estimate.quotient",
         "arith.exp.negative_base",
         "arith.exp.power_product",
         "arith.exp.power_quotient",
         "arith.exp.power_rule",
         "arith.exp.product_rule",
         "arith.exp.quotient_rule",
+        "arith.exp.standard_form",
         "arith.factor.composite",
         "arith.factor.gcf",
         "arith.factor.lcm",
@@ -514,7 +554,7 @@
         "arith.sqrt.simplify",
         "arith.word.multi_step"
       ],
-      "concept_count": 20
+      "concept_count": 23
     },
     {
       "id": "calc1.b8",
@@ -544,6 +584,7 @@
         "calculus.sequences"
       ],
       "concept_ids": [
+        "calc.deriv.definition",
         "calc.deriv.difference_quotient",
         "calc.deriv.epsilon_delta_deriv",
         "calc.limit.algebra",
@@ -563,7 +604,7 @@
         "calc.seq.concept",
         "calc.seq.convergence"
       ],
-      "concept_count": 18
+      "concept_count": 19
     },
     {
       "id": "calc1.b10",
@@ -593,6 +634,7 @@
         "calc.deriv.mvt",
         "calc.deriv.non_differentiability",
         "calc.deriv.power_rule",
+        "calc.deriv.rate",
         "calc.deriv.rolle",
         "calc.deriv.sum_rule",
         "calc.deriv.tangent_line",
@@ -603,9 +645,10 @@
         "calc.limit.intermediate_value",
         "calc.limit.lhopital",
         "calc.limit.oscillation",
+        "calc.limit.trig",
         "calc.limit.weierstrass"
       ],
-      "concept_count": 26
+      "concept_count": 28
     },
     {
       "id": "calc1.b11",
@@ -626,6 +669,7 @@
         "calc.deriv.curve_sketch",
         "calc.deriv.exp_log",
         "calc.deriv.global_extrema",
+        "calc.deriv.graph_reading",
         "calc.deriv.higher_order",
         "calc.deriv.implicit",
         "calc.deriv.inverse_func",
@@ -639,11 +683,11 @@
         "calc.deriv.second_test",
         "calc.deriv.trig",
         "calc.integral.definite",
-        "calc.integral.ftc",
         "calc.integral.power_rule",
+        "calc.integral.riemann_sums",
         "calc.vec.parametric_derivative"
       ],
-      "concept_count": 21
+      "concept_count": 22
     },
     {
       "id": "calc1.b12",
@@ -654,7 +698,8 @@
       "depth_max": 37,
       "subdomains": [
         "calculus.advanced",
-        "calculus.derivatives"
+        "calculus.derivatives",
+        "calculus.integrals"
       ],
       "concept_ids": [
         "calc.deriv.chain_power",
@@ -666,9 +711,13 @@
         "calc.deriv.log_diff",
         "calc.deriv.parametric_second",
         "calc.deriv.related_rates",
-        "calc.deriv.trig_other"
+        "calc.deriv.trig_other",
+        "calc.integral.ftc",
+        "calc.integral.initial_value",
+        "calc.integral.properties",
+        "calc.integral.symmetry"
       ],
-      "concept_count": 10
+      "concept_count": 14
     },
     {
       "id": "calc2.b9",
@@ -711,6 +760,7 @@
         "calc.series.harmonic",
         "calc.series.integral_test",
         "calc.series.limit_compare",
+        "calc.series.maclaurin",
         "calc.series.nth_term",
         "calc.series.operations",
         "calc.series.p_series",
@@ -721,9 +771,11 @@
         "calc.series.remainder",
         "calc.series.root_test",
         "calc.series.taylor",
-        "calc.series.telescoping"
+        "calc.series.taylor_error",
+        "calc.series.telescoping",
+        "calc.series.termwise"
       ],
-      "concept_count": 23
+      "concept_count": 26
     },
     {
       "id": "calc2.b11",
@@ -733,25 +785,17 @@
       "depth_min": 33,
       "depth_max": 35,
       "subdomains": [
-        "calculus.integrals"
+        "calculus.integrals",
+        "calculus.series"
       ],
       "concept_ids": [
-        "calc.integral.arc_length",
-        "calc.integral.area_between",
-        "calc.integral.center_mass",
-        "calc.integral.disc",
         "calc.integral.exp_integral",
         "calc.integral.fourier_coefficients",
-        "calc.integral.improper",
-        "calc.integral.mvt",
-        "calc.integral.numerical",
-        "calc.integral.shell",
         "calc.integral.substitution",
         "calc.integral.trig_integrals",
-        "calc.integral.washer",
-        "calc.integral.work"
+        "calc.series.estimate"
       ],
-      "concept_count": 14
+      "concept_count": 5
     },
     {
       "id": "calc2.b12",
@@ -759,27 +803,39 @@
       "domain": "calc2",
       "band": 12,
       "depth_min": 36,
-      "depth_max": 37,
+      "depth_max": 38,
       "subdomains": [
         "calculus.advanced",
         "calculus.integrals",
         "calculus.series"
       ],
       "concept_ids": [
+        "calc.integral.arc_length",
+        "calc.integral.area_between",
         "calc.integral.beta",
+        "calc.integral.center_mass",
         "calc.integral.consumer_surplus",
         "calc.integral.convergence",
+        "calc.integral.disc",
         "calc.integral.hydrostatic",
+        "calc.integral.improper",
         "calc.integral.improper_compare",
+        "calc.integral.inverse_trig",
         "calc.integral.irrational",
+        "calc.integral.log",
         "calc.integral.moment_inertia",
+        "calc.integral.mvt",
         "calc.integral.net_change",
+        "calc.integral.numerical",
         "calc.integral.numerical_error",
         "calc.integral.p_test",
         "calc.integral.pappus",
         "calc.integral.partial_fractions",
         "calc.integral.parts",
+        "calc.integral.probability",
+        "calc.integral.rationalizing",
         "calc.integral.reduction",
+        "calc.integral.shell",
         "calc.integral.simpson",
         "calc.integral.strategy",
         "calc.integral.surface_area",
@@ -787,10 +843,12 @@
         "calc.integral.trig_substitution",
         "calc.integral.variable_limits",
         "calc.integral.volume",
+        "calc.integral.washer",
         "calc.integral.weierstrass_sub",
+        "calc.integral.work",
         "calc.series.gamma"
       ],
-      "concept_count": 23
+      "concept_count": 37
     },
     {
       "id": "calc3.b9",
@@ -831,9 +889,10 @@
         "calc.deriv.partial_higher",
         "calc.deriv.total_diff",
         "calc.multi.euler_homogeneous",
+        "calc.multi.functions_several",
         "calc.vec.curl"
       ],
-      "concept_count": 8
+      "concept_count": 9
     },
     {
       "id": "calc3.b11",
@@ -844,34 +903,30 @@
       "depth_max": 35,
       "subdomains": [
         "calculus.advanced",
-        "calculus.integrals",
         "calculus.multivariable",
-        "calculus.polar",
         "calculus.vector"
       ],
       "concept_ids": [
         "calc.deriv.clairaut",
         "calc.deriv.directional",
-        "calc.integral.average_value",
-        "calc.integral.cross_section_volume",
-        "calc.integral.mass_density",
         "calc.multi.closed_extrema",
+        "calc.multi.continuity",
         "calc.multi.coordinates_jacobian",
-        "calc.multi.double_integral_rect",
         "calc.multi.inverse_function",
         "calc.multi.lagrange",
         "calc.multi.lagrange_two",
+        "calc.multi.level_curves",
+        "calc.multi.quadric_surfaces",
         "calc.multi.saddle_test",
         "calc.multi.tangent_plane",
         "calc.multi.taylor2",
         "calc.multi.transform_jacobian",
-        "calc.polar.area",
         "calc.vec.curl_3d",
         "calc.vec.divergence",
         "calc.vec.identities",
         "calc.vec.jacobian_value"
       ],
-      "concept_count": 20
+      "concept_count": 18
     },
     {
       "id": "calc3.b12",
@@ -889,35 +944,61 @@
       ],
       "concept_ids": [
         "calc.deriv.higher_order_value",
+        "calc.integral.average_value",
+        "calc.integral.cross_section_volume",
         "calc.integral.double_polar",
+        "calc.integral.mass_density",
         "calc.integral.substitution_value",
         "calc.integral.surface_scalar",
         "calc.multi.change_order",
+        "calc.multi.double_integral_rect",
         "calc.multi.double_integral_region",
         "calc.multi.implicit_function",
         "calc.multi.iterated_limits",
         "calc.multi.mass_lamina",
         "calc.multi.triple_integral_box",
+        "calc.multi.triple_integral_region",
         "calc.polar.arc_length",
+        "calc.polar.area",
         "calc.polar.slope",
         "calc.vec.arc_length",
         "calc.vec.conservative_test",
         "calc.vec.curvature",
         "calc.vec.divergence_theorem",
-        "calc.vec.flux_general",
         "calc.vec.flux_uniform",
         "calc.vec.frenet",
         "calc.vec.greens_theorem",
         "calc.vec.line_integral",
         "calc.vec.line_scalar",
-        "calc.vec.parametric_surface",
+        "calc.vec.normal_line",
         "calc.vec.potential_value",
         "calc.vec.stokes",
         "calc.vec.surface_area",
         "calc.vec.torsion",
+        "calc.vec.vector_field",
+        "calc.vec.vector_function",
         "calc.vec.work"
       ],
-      "concept_count": 28
+      "concept_count": 35
+    },
+    {
+      "id": "calc3.b13",
+      "title": "Calc3 · Stage 14",
+      "domain": "calc3",
+      "band": 13,
+      "depth_min": 39,
+      "depth_max": 40,
+      "subdomains": [
+        "calculus.multivariable",
+        "calculus.vector"
+      ],
+      "concept_ids": [
+        "calc.multi.moments_3d",
+        "calc.vec.flux_general",
+        "calc.vec.parametric_surface",
+        "calc.vec.surface_tangent"
+      ],
+      "concept_count": 4
     },
     {
       "id": "complex_numbers.b3",
@@ -1029,22 +1110,27 @@
       "depth_max": 35,
       "subdomains": [
         "complex_numbers.advanced",
+        "complex_numbers.integral",
         "complex_numbers.topology"
       ],
       "concept_ids": [
         "complex.adv.analytic",
+        "complex.adv.argument_principle",
         "complex.adv.conformal",
         "complex.adv.harmonic",
+        "complex.adv.identity_theorem",
+        "complex.adv.morera",
         "complex.adv.residue",
         "complex.adv.residue_simple",
+        "complex.adv.riemann_mapping",
         "complex.adv.schwarz_lemma",
+        "complex.integral.cauchy_formula",
         "complex.integral.cauchy_goursat",
-        "complex.integral.contour",
         "complex.series.laurent",
         "complex.series.power",
         "complex.topology.domain"
       ],
-      "concept_count": 11
+      "concept_count": 15
     },
     {
       "id": "complex_numbers.b12",
@@ -1055,15 +1141,21 @@
       "depth_max": 38,
       "subdomains": [
         "complex_numbers.advanced",
+        "complex_numbers.integral",
         "complex_numbers.topology"
       ],
       "concept_ids": [
         "complex.adv.cross_ratio",
+        "complex.adv.liouville",
+        "complex.adv.maximum_modulus",
         "complex.adv.mobius",
         "complex.adv.mobius_fixed",
+        "complex.adv.winding",
+        "complex.integral.contour",
+        "complex.integral.real_integrals",
         "complex.topology.riemann_sphere"
       ],
-      "concept_count": 4
+      "concept_count": 9
     },
     {
       "id": "differential_equations.b11",
@@ -1078,10 +1170,12 @@
       ],
       "concept_ids": [
         "ode.basics.concept",
+        "ode.basics.existence_uniqueness",
+        "ode.basics.slope_field",
         "ode.pde.characteristics",
         "ode.pde.wave"
       ],
-      "concept_count": 3
+      "concept_count": 5
     },
     {
       "id": "differential_equations.b12",
@@ -1100,6 +1194,7 @@
         "ode.first_order.bernoulli",
         "ode.first_order.exact",
         "ode.first_order.linear",
+        "ode.first_order.logistic",
         "ode.first_order.mixing",
         "ode.first_order.separable",
         "ode.ivp.evaluate",
@@ -1112,7 +1207,7 @@
         "ode.pde.laplace_eq",
         "ode.second_order.homogeneous"
       ],
-      "concept_count": 14
+      "concept_count": 15
     },
     {
       "id": "differential_equations.b13",
@@ -1132,6 +1227,7 @@
         "ode.characteristic.sum",
         "ode.laplace.value",
         "ode.second_order.cauchy_euler",
+        "ode.second_order.forced",
         "ode.second_order.nonhomogeneous",
         "ode.second_order.power_series",
         "ode.second_order.reduction",
@@ -1146,7 +1242,7 @@
         "ode.transforms.step",
         "ode.wronskian"
       ],
-      "concept_count": 17
+      "concept_count": 18
     },
     {
       "id": "differential_equations.b14",
@@ -1249,6 +1345,7 @@
         "discrete.graphs.basics",
         "discrete.graphs.degree_sequence",
         "discrete.graphs.paths",
+        "discrete.logic.boolean_functions",
         "discrete.logic.connectives",
         "discrete.logic.quantifiers",
         "discrete.logic.truth_tables",
@@ -1256,7 +1353,7 @@
         "discrete.sets.powerset",
         "discrete.sets.venn"
       ],
-      "concept_count": 17
+      "concept_count": 18
     },
     {
       "id": "discrete_math.b6",
@@ -1266,6 +1363,8 @@
       "depth_min": 18,
       "depth_max": 20,
       "subdomains": [
+        "discrete_math.automata",
+        "discrete_math.coding",
         "discrete_math.combinatorics",
         "discrete_math.graph_theory",
         "discrete_math.logic",
@@ -1273,6 +1372,9 @@
         "discrete_math.sets"
       ],
       "concept_ids": [
+        "discrete.automata.fsm",
+        "discrete.coding.hamming",
+        "discrete.combinatorics.burnside",
         "discrete.combinatorics.derangement",
         "discrete.combinatorics.integer_partitions",
         "discrete.combinatorics.surjections",
@@ -1284,16 +1386,19 @@
         "discrete.logic.equivalence",
         "discrete.logic.inference",
         "discrete.logic.predicates",
+        "discrete.logic.resolution",
         "discrete.logic.satisfiability",
+        "discrete.proof.cases",
         "discrete.proof.contradiction",
         "discrete.proof.contrapositive",
         "discrete.proof.counterexample",
         "discrete.sets.countable",
         "discrete.sets.inclusion_exclusion",
         "discrete.sets.partial_order",
+        "discrete.sets.relation_closure",
         "discrete.sets.relations"
       ],
-      "concept_count": 19
+      "concept_count": 25
     },
     {
       "id": "discrete_math.b7",
@@ -1346,11 +1451,27 @@
         "discrete.proof.induction",
         "discrete.proof.strong_induction",
         "discrete.proof.structural",
+        "discrete.recurrence.master_theorem",
         "discrete.sequences.generating_functions",
         "discrete.sequences.growth_rates",
         "discrete.sequences.linear_recurrence"
       ],
-      "concept_count": 7
+      "concept_count": 8
+    },
+    {
+      "id": "discrete_math.b10",
+      "title": "Discrete Math · Stage 11",
+      "domain": "discrete_math",
+      "band": 10,
+      "depth_min": 30,
+      "depth_max": 30,
+      "subdomains": [
+        "discrete_math.combinatorics"
+      ],
+      "concept_ids": [
+        "discrete.combinatorics.egf"
+      ],
+      "concept_count": 1
     },
     {
       "id": "fractions.b2",
@@ -1397,8 +1518,10 @@
       ],
       "concept_ids": [
         "frac.compare.cross",
+        "frac.compare.forms",
         "frac.compare.word",
         "frac.complex",
+        "frac.div.by_whole",
         "frac.div.whole",
         "frac.div.word",
         "frac.equivalent.scale",
@@ -1415,12 +1538,13 @@
         "frac.ops.benchmark",
         "frac.ops.compare",
         "frac.ops.div",
+        "frac.ops.estimate",
         "frac.ops.simplify",
         "frac.order.half",
         "frac.recipe.scale",
         "frac.sub.same"
       ],
-      "concept_count": 23
+      "concept_count": 26
     },
     {
       "id": "fractions.b4",
@@ -1444,15 +1568,18 @@
         "frac.lcd",
         "frac.mixed.add",
         "frac.mixed.sub",
+        "frac.ops.negative",
+        "frac.ops.repeating_decimal",
         "frac.order_ops",
         "frac.reciprocal",
         "frac.remaining",
         "frac.sub.diff",
         "frac.sub.whole",
         "frac.sub.word",
-        "frac.unit_decompose"
+        "frac.unit_decompose",
+        "frac.word.multi_step"
       ],
-      "concept_count": 13
+      "concept_count": 16
     },
     {
       "id": "fractions.b5",
@@ -1462,12 +1589,14 @@
       "depth_min": 15,
       "depth_max": 15,
       "subdomains": [
-        "frac.mixed"
+        "frac.mixed",
+        "fractions.mixed"
       ],
       "concept_ids": [
+        "frac.mixed.borrow",
         "frac.mixed.word"
       ],
-      "concept_count": 1
+      "concept_count": 2
     },
     {
       "id": "geometry.b0",
@@ -1501,7 +1630,7 @@
       "domain": "geometry",
       "band": 1,
       "depth_min": 3,
-      "depth_max": 4,
+      "depth_max": 5,
       "subdomains": [
         "geometry.basics",
         "geometry.circles",
@@ -1513,22 +1642,29 @@
       ],
       "concept_ids": [
         "geo.basic.complementary",
+        "geo.basic.transversal",
         "geo.basic.vertical",
         "geo.circle.cyclic_quad",
         "geo.polygon.exterior_angle",
         "geo.polygon.interior_angles",
         "geo.quad.perimeter",
         "geo.similar.area_ratio",
+        "geo.similar.criteria",
         "geo.similar.missing_side",
         "geo.similar.ratio",
         "geo.transform.dilation",
+        "geo.transform.rotation",
+        "geo.transform.symmetry",
+        "geo.transform.translation",
+        "geo.triangle.angle_bisector",
         "geo.triangle.angles",
+        "geo.triangle.congruence",
         "geo.triangle.exterior_angle",
         "geo.triangle.inequality",
         "geo.triangle.isosceles",
         "geo.triangle.midsegment"
       ],
-      "concept_count": 15
+      "concept_count": 22
     },
     {
       "id": "geometry.b2",
@@ -1557,15 +1693,21 @@
       "subdomains": [
         "geometry.circles",
         "geometry.coordinate",
+        "geometry.polygons",
         "geometry.shapes",
         "geometry.solid",
         "geometry.triangles"
       ],
       "concept_ids": [
+        "geo.area.composite",
         "geo.circle.chord",
         "geo.coord.distance",
         "geo.coord.midpoint",
+        "geo.polygon.area_regular",
+        "geo.quad.properties",
         "geo.quad.trapezoid_area",
+        "geo.solid.cross_section",
+        "geo.solid.euler",
         "geo.solid.prism_volume",
         "geo.solid.pyramid_volume",
         "geo.solid.similar_volume",
@@ -1573,9 +1715,10 @@
         "geo.solid.volume_rect",
         "geo.triangle.pythagorean",
         "geo.triangle.pythagorean.word",
+        "geo.triangle.pythagorean_converse",
         "geo.triangle.special_right"
       ],
-      "concept_count": 12
+      "concept_count": 18
     },
     {
       "id": "geometry.b4",
@@ -1583,20 +1726,47 @@
       "domain": "geometry",
       "band": 4,
       "depth_min": 12,
-      "depth_max": 13,
+      "depth_max": 14,
       "subdomains": [
         "geometry.circles",
-        "geometry.coordinate"
+        "geometry.coordinate",
+        "geometry.solid",
+        "geometry.triangles"
       ],
       "concept_ids": [
+        "geo.circle.arc_measure",
         "geo.circle.area",
+        "geo.circle.chord_segments",
         "geo.circle.circumference",
+        "geo.circle.secant",
         "geo.circle.tangent_chord",
         "geo.circle.tangent_length",
         "geo.coord.distance_3d",
-        "geo.coord.polar"
+        "geo.coord.polar",
+        "geo.solid.cone",
+        "geo.solid.curved_surface_area",
+        "geo.solid.cylinder",
+        "geo.solid.sphere",
+        "geo.triangle.median_centroid",
+        "geo.triangle.perpendicular_bisector",
+        "geo.triangle.special_right_45"
       ],
-      "concept_count": 6
+      "concept_count": 16
+    },
+    {
+      "id": "geometry.b5",
+      "title": "Geometry · Stage 6",
+      "domain": "geometry",
+      "band": 5,
+      "depth_min": 15,
+      "depth_max": 15,
+      "subdomains": [
+        "geometry.solid"
+      ],
+      "concept_ids": [
+        "geo.solid.frustum"
+      ],
+      "concept_count": 1
     },
     {
       "id": "geometry.b6",
@@ -1621,12 +1791,14 @@
       "depth_min": 21,
       "depth_max": 21,
       "subdomains": [
-        "geometry.coordinate"
+        "geometry.coordinate",
+        "geometry.transform"
       ],
       "concept_ids": [
-        "geo.coord.slope"
+        "geo.coord.slope",
+        "geo.transform.reflection"
       ],
-      "concept_count": 1
+      "concept_count": 2
     },
     {
       "id": "graph_theory.b1",
@@ -1705,20 +1877,26 @@
         "graph_theory.planarity"
       ],
       "concept_ids": [
+        "graph.automorphism",
         "graph.bridge",
         "graph.complement",
         "graph.connectivity",
         "graph.cut_vertex",
+        "graph.degeneracy",
         "graph.distance",
+        "graph.girth",
+        "graph.hamiltonian",
         "graph.homomorphism",
         "graph.kuratowski",
         "graph.moore_bound",
+        "graph.mst",
         "graph.product",
+        "graph.shortest_path",
         "graph.subgraph",
         "graph.tournament",
         "graph.turan"
       ],
-      "concept_count": 12
+      "concept_count": 18
     },
     {
       "id": "graph_theory.b7",
@@ -1736,19 +1914,23 @@
         "graph_theory.planarity"
       ],
       "concept_ids": [
+        "graph.blocks",
         "graph.brooks",
         "graph.chromatic_polynomial",
         "graph.dag_paths",
         "graph.edge_coloring",
+        "graph.four_color",
         "graph.genus",
         "graph.list_coloring",
         "graph.matching",
+        "graph.matroid",
         "graph.max_flow",
         "graph.menger",
         "graph.minor",
         "graph.outerplanar",
         "graph.perfect_graph",
         "graph.perfect_matching",
+        "graph.planar_dual",
         "graph.ramsey",
         "graph.random_threshold",
         "graph.strong_connectivity",
@@ -1756,7 +1938,7 @@
         "graph.treewidth",
         "graph.vertex_cover"
       ],
-      "concept_count": 19
+      "concept_count": 23
     },
     {
       "id": "graph_theory.b8",
@@ -1806,11 +1988,12 @@
       "concept_ids": [
         "linalg.matrix.add",
         "linalg.matrix.concept",
+        "linalg.matrix.transpose",
         "linalg.space.axioms",
         "linalg.vector.add",
         "linalg.vector.parametric"
       ],
-      "concept_count": 5
+      "concept_count": 6
     },
     {
       "id": "linear_algebra.b2",
@@ -1852,9 +2035,10 @@
         "linalg.vec.norm_squared",
         "linalg.vec.span",
         "linalg.vector.cosine_similarity",
-        "linalg.vector.cross"
+        "linalg.vector.cross",
+        "linalg.vector.plane"
       ],
-      "concept_count": 11
+      "concept_count": 12
     },
     {
       "id": "linear_algebra.b4",
@@ -1865,19 +2049,19 @@
       "depth_max": 14,
       "subdomains": [
         "linear_algebra.decompositions",
+        "linear_algebra.determinants",
         "linear_algebra.inner_product",
-        "linear_algebra.matrices",
         "linear_algebra.vectors"
       ],
       "concept_ids": [
         "linalg.basis.change",
         "linalg.decomp.qr",
+        "linalg.det.properties",
         "linalg.independence.count",
         "linalg.inner_product",
-        "linalg.matrix.rank",
         "linalg.orth.complement",
+        "linalg.orth.gram_schmidt",
         "linalg.orth.projection_matrix",
-        "linalg.rank.nullity",
         "linalg.subspace",
         "linalg.vec.basis"
       ],
@@ -1898,9 +2082,9 @@
         "linalg.lintrans.concept",
         "linalg.sys.cramer",
         "linalg.systems.matrix",
+        "linalg.systems.row_reduction",
         "linalg.transform.det_scale",
-        "linalg.transform.invertible",
-        "linalg.transform.kernel"
+        "linalg.transform.matrix"
       ],
       "concept_count": 6
     },
@@ -1912,16 +2096,28 @@
       "depth_min": 24,
       "depth_max": 26,
       "subdomains": [
-        "linear_algebra.eigenvalues"
+        "linear_algebra.eigenvalues",
+        "linear_algebra.inner_product",
+        "linear_algebra.matrices",
+        "linear_algebra.systems",
+        "linear_algebra.transformations"
       ],
       "concept_ids": [
+        "linalg.eigen.complex",
         "linalg.eigen.compute",
         "linalg.eigen.concept",
         "linalg.eigen.det_product",
         "linalg.eigen.diagonalization",
-        "linalg.eigen.trace"
+        "linalg.eigen.trace",
+        "linalg.invertible.theorem",
+        "linalg.matrix.fundamental_subspaces",
+        "linalg.matrix.rank",
+        "linalg.orth.least_squares",
+        "linalg.rank.nullity",
+        "linalg.systems.homogeneous",
+        "linalg.transform.kernel"
       ],
-      "concept_count": 5
+      "concept_count": 13
     },
     {
       "id": "linear_algebra.b9",
@@ -1932,17 +2128,23 @@
       "depth_max": 28,
       "subdomains": [
         "linear_algebra.decompositions",
-        "linear_algebra.eigenvalues"
+        "linear_algebra.eigenvalues",
+        "linear_algebra.systems",
+        "linear_algebra.transformations"
       ],
       "concept_ids": [
+        "linalg.apps.leontief",
         "linalg.decomp.jordan",
         "linalg.decomp.svd",
         "linalg.eigen.cayley_hamilton",
+        "linalg.eigen.eigenspace",
+        "linalg.eigen.similar",
         "linalg.matrix.condition",
         "linalg.quadratic.definite",
-        "linalg.symmetric.spectral"
+        "linalg.symmetric.spectral",
+        "linalg.transform.invertible"
       ],
-      "concept_count": 6
+      "concept_count": 10
     },
     {
       "id": "machine_learning.b3",
@@ -2019,13 +2221,14 @@
         "ml.arch.gan",
         "ml.arch.rnn",
         "ml.arch.transformer",
+        "ml.cluster.em",
         "ml.cluster.kmeans",
         "ml.logistic.regression",
         "ml.nlp.transformer",
         "ml.pca.variance_percent",
         "ml.reinforcement.qlearning"
       ],
-      "concept_count": 9
+      "concept_count": 10
     },
     {
       "id": "machine_learning.b9",
@@ -2035,15 +2238,21 @@
       "depth_min": 27,
       "depth_max": 28,
       "subdomains": [
+        "machine_learning.classification",
         "machine_learning.nlp",
         "machine_learning.reinforcement"
       ],
       "concept_ids": [
+        "ml.mdp.bellman",
+        "ml.naive_bayes",
         "ml.nlp.bert",
+        "ml.nlp.embedding",
         "ml.reinforcement.actor_critic",
-        "ml.reinforcement.policy_gradient"
+        "ml.reinforcement.policy_gradient",
+        "ml.svm.kernel",
+        "ml.svm.margin"
       ],
-      "concept_count": 3
+      "concept_count": 8
     },
     {
       "id": "machine_learning.b10",
@@ -2069,6 +2278,7 @@
       "depth_min": 33,
       "depth_max": 35,
       "subdomains": [
+        "machine_learning.data",
         "machine_learning.evaluation",
         "machine_learning.neural_networks",
         "machine_learning.regression",
@@ -2076,16 +2286,19 @@
       ],
       "concept_ids": [
         "ml.backpropagation",
+        "ml.bias_variance",
         "ml.data.augmentation",
         "ml.eval.accuracy",
         "ml.eval.roc",
+        "ml.feature.selection",
+        "ml.optim.early_stopping",
         "ml.overfitting",
         "ml.reg.ridge_penalty",
         "ml.regularization.dropout",
         "ml.tree.gini",
         "ml.validation"
       ],
-      "concept_count": 9
+      "concept_count": 12
     },
     {
       "id": "machine_learning.b12",
@@ -2095,6 +2308,7 @@
       "depth_min": 36,
       "depth_max": 37,
       "subdomains": [
+        "machine_learning.classification",
         "machine_learning.data",
         "machine_learning.evaluation",
         "machine_learning.neural_networks",
@@ -2108,12 +2322,13 @@
         "ml.eval.precision",
         "ml.eval.recall",
         "ml.grad.vanishing",
+        "ml.multiclass",
         "ml.optim.adam",
         "ml.optim.batchnorm",
         "ml.optim.momentum",
         "ml.tree.ensemble"
       ],
-      "concept_count": 11
+      "concept_count": 12
     },
     {
       "id": "number_theory.b2",
@@ -2146,6 +2361,7 @@
         "nt.adv.fermat_little",
         "nt.adv.pisano",
         "nt.adv.prime_gap",
+        "nt.adv.valuation",
         "nt.base.convert",
         "nt.basics.congruence",
         "nt.basics.gcd_euclidean",
@@ -2156,7 +2372,7 @@
         "nt.divisor.sum",
         "nt.prime.exponent"
       ],
-      "concept_count": 13
+      "concept_count": 14
     },
     {
       "id": "number_theory.b4",
@@ -2172,6 +2388,7 @@
         "number_theory.basics"
       ],
       "concept_ids": [
+        "nt.adv.arithmetic_functions",
         "nt.adv.carmichael_function",
         "nt.adv.euler_phi",
         "nt.adv.jacobi",
@@ -2184,11 +2401,12 @@
         "nt.app.crypto",
         "nt.basics.bezout",
         "nt.basics.crt",
+        "nt.basics.fta",
         "nt.basics.order_mod",
         "nt.pythagorean.hypotenuse",
         "nt.residue.count"
       ],
-      "concept_count": 15
+      "concept_count": 17
     },
     {
       "id": "number_theory.b5",
@@ -2199,7 +2417,8 @@
       "depth_max": 17,
       "subdomains": [
         "number_theory.advanced",
-        "number_theory.analytic"
+        "number_theory.analytic",
+        "number_theory.applications"
       ],
       "concept_ids": [
         "nt.adv.chebyshev",
@@ -2208,14 +2427,20 @@
         "nt.adv.dirichlet",
         "nt.adv.discrete_log",
         "nt.adv.elliptic_curve",
+        "nt.adv.farey",
+        "nt.adv.four_squares",
+        "nt.adv.gaussian_integers",
+        "nt.adv.hensel",
         "nt.adv.modular_sqrt",
         "nt.adv.pell",
         "nt.adv.primitive_root",
+        "nt.adv.quadratic_forms",
         "nt.adv.sieve",
         "nt.adv.two_squares",
-        "nt.analytic.zeta"
+        "nt.analytic.zeta",
+        "nt.app.key_exchange"
       ],
-      "concept_count": 12
+      "concept_count": 18
     },
     {
       "id": "number_theory.b6",
@@ -2299,17 +2524,38 @@
       "depth_min": 24,
       "depth_max": 26,
       "subdomains": [
+        "numerical_analysis.fourier",
         "numerical_analysis.linear"
       ],
       "concept_ids": [
+        "numa.fourier.fft",
+        "numa.linear.cg",
         "numa.linear.elimination",
         "numa.linear.gauss_seidel",
         "numa.linear.jacobi",
         "numa.linear.lu",
         "numa.linear.pivoting",
-        "numa.linear.power"
+        "numa.linear.power",
+        "numa.linear.qr_algorithm"
       ],
-      "concept_count": 6
+      "concept_count": 9
+    },
+    {
+      "id": "numerical_analysis.b9",
+      "title": "Numerical Analysis · Stage 10",
+      "domain": "numerical_analysis",
+      "band": 9,
+      "depth_min": 27,
+      "depth_max": 28,
+      "subdomains": [
+        "numerical_analysis.linear"
+      ],
+      "concept_ids": [
+        "numa.linear.cholesky",
+        "numa.linear.iter_convergence",
+        "numa.linear.sor"
+      ],
+      "concept_count": 3
     },
     {
       "id": "numerical_analysis.b10",
@@ -2319,15 +2565,17 @@
       "depth_min": 30,
       "depth_max": 32,
       "subdomains": [
+        "numerical_analysis.interp",
         "numerical_analysis.roots"
       ],
       "concept_ids": [
+        "numa.interp.hermite",
         "numa.roots.bisection",
         "numa.roots.false_position",
         "numa.roots.fixed_point",
         "numa.roots.newton"
       ],
-      "concept_count": 4
+      "concept_count": 5
     },
     {
       "id": "numerical_analysis.b11",
@@ -2335,13 +2583,13 @@
       "domain": "numerical_analysis",
       "band": 11,
       "depth_min": 33,
-      "depth_max": 35,
+      "depth_max": 34,
       "subdomains": [
-        "numerical_analysis.integration",
+        "numerical_analysis.linear",
         "numerical_analysis.roots"
       ],
       "concept_ids": [
-        "numa.integration.trapezoid",
+        "numa.least_squares.gauss_newton",
         "numa.roots.bracketing",
         "numa.roots.horner",
         "numa.roots.multiple",
@@ -2361,16 +2609,32 @@
         "numerical_analysis.integration"
       ],
       "concept_ids": [
-        "numa.integration.adaptive",
         "numa.integration.composite",
         "numa.integration.error",
         "numa.integration.gauss",
-        "numa.integration.improper",
         "numa.integration.midpoint",
-        "numa.integration.romberg",
-        "numa.integration.simpson"
+        "numa.integration.simpson",
+        "numa.integration.trapezoid"
       ],
-      "concept_count": 8
+      "concept_count": 6
+    },
+    {
+      "id": "numerical_analysis.b13",
+      "title": "Numerical Analysis · Stage 14",
+      "domain": "numerical_analysis",
+      "band": 13,
+      "depth_min": 39,
+      "depth_max": 39,
+      "subdomains": [
+        "numerical_analysis.integration"
+      ],
+      "concept_ids": [
+        "numa.integration.adaptive",
+        "numa.integration.improper",
+        "numa.integration.monte_carlo",
+        "numa.integration.romberg"
+      ],
+      "concept_count": 4
     },
     {
       "id": "prealgebra.b0",
@@ -2422,6 +2686,7 @@
         "arith.exp.zero",
         "arith.neg.order_ops",
         "dec.basics.compare",
+        "dec.basics.place_value",
         "dec.convert.from_frac",
         "dec.ops.add",
         "dec.ops.add.word",
@@ -2432,11 +2697,13 @@
         "pct.convert.from_dec",
         "pct.convert.to_dec",
         "pct.ops.of_number",
+        "prealg.graph.interpret",
         "prealg.real.concept",
+        "prealg.real.order_rational",
         "prealg.types",
         "ratio.ops.simplify"
       ],
-      "concept_count": 17
+      "concept_count": 20
     },
     {
       "id": "prealgebra.b4",
@@ -2460,6 +2727,7 @@
         "dec.ops.div",
         "dec.ops.div.word",
         "dec.ops.mult.word",
+        "dec.ops.powers_ten",
         "dec.ops.sub.word",
         "pct.ops.change",
         "pct.ops.commission",
@@ -2478,11 +2746,12 @@
         "ratio.ops.percent_proportion",
         "ratio.ops.proportion",
         "ratio.ops.proportion.word",
+        "ratio.ops.proportional_graph",
         "ratio.ops.rate",
         "ratio.ops.rate.word",
         "ratio.ops.scale"
       ],
-      "concept_count": 27
+      "concept_count": 29
     },
     {
       "id": "prealgebra.b5",
@@ -2496,6 +2765,7 @@
         "prealgebra.inequalities",
         "prealgebra.measurement",
         "prealgebra.percentages",
+        "prealgebra.ratios",
         "prealgebra.variables"
       ],
       "concept_ids": [
@@ -2506,11 +2776,15 @@
         "prealg.expr.distribute",
         "prealg.expr.formula",
         "prealg.expr.like_terms",
+        "prealg.expr.simplify",
         "prealg.expr.translate",
+        "prealg.func.table",
         "prealg.ineq.one_step",
-        "prealg.measure.temperature"
+        "prealg.measure.dimensional",
+        "prealg.measure.temperature",
+        "ratio.ops.table"
       ],
-      "concept_count": 10
+      "concept_count": 14
     },
     {
       "id": "prealgebra.b6",
@@ -2524,12 +2798,14 @@
         "prealgebra.inequalities"
       ],
       "concept_ids": [
+        "prealg.eq.fractions",
         "prealg.eq.word",
         "prealg.ineq.graph",
+        "prealg.ineq.negative",
         "prealg.ineq.two_step",
         "prealg.ineq.word"
       ],
-      "concept_count": 4
+      "concept_count": 6
     },
     {
       "id": "precalculus.b3",
@@ -2563,9 +2839,11 @@
         "precalc.vector.basics",
         "precalc.vector.dot",
         "precalc.vector.ops",
-        "precalc.vector.resultant"
+        "precalc.vector.resultant",
+        "precalc.vector.three_d",
+        "precalc.vector.unit"
       ],
-      "concept_count": 6
+      "concept_count": 8
     },
     {
       "id": "precalculus.b6",
@@ -2598,17 +2876,19 @@
       ],
       "concept_ids": [
         "precalc.conic.circle_radius",
+        "precalc.func.average_rate",
         "precalc.func.transformations",
         "precalc.partial_fractions",
         "precalc.poly.complex_conjugate",
         "precalc.poly.descartes",
+        "precalc.poly.graph",
         "precalc.poly.inequality",
         "precalc.poly.rational_roots",
         "precalc.poly.remainder_theorem",
         "precalc.poly.zeros_multiplicity",
         "precalc.rational.asymptote"
       ],
-      "concept_count": 10
+      "concept_count": 12
     },
     {
       "id": "precalculus.b8",
@@ -2636,6 +2916,7 @@
         "precalc.exp.cooling",
         "precalc.exp.equation",
         "precalc.exp.growth_model",
+        "precalc.exp.logistic",
         "precalc.func.arith_combine",
         "precalc.func.composition_value",
         "precalc.func.decomposition",
@@ -2651,13 +2932,14 @@
         "precalc.rational.holes",
         "precalc.rational.oblique_asymptote",
         "precalc.seq.arithmetic",
+        "precalc.seq.explicit",
         "precalc.seq.geometric",
         "precalc.seq.summation",
         "precalc.series.arithmetic",
         "precalc.series.geometric",
         "precalc.systems.nonlinear"
       ],
-      "concept_count": 28
+      "concept_count": 30
     },
     {
       "id": "precalculus.b9",
@@ -2667,16 +2949,19 @@
       "depth_min": 27,
       "depth_max": 27,
       "subdomains": [
+        "precalculus.conics",
         "precalculus.exponential",
         "precalculus.sequences"
       ],
       "concept_ids": [
+        "precalc.conic.eccentricity",
+        "precalc.conic.rotated",
         "precalc.exp.continuous",
         "precalc.log.equation",
         "precalc.log.scale",
         "precalc.series.geom_infinite"
       ],
-      "concept_count": 4
+      "concept_count": 6
     },
     {
       "id": "probability_theory.b3",
@@ -2709,11 +2994,12 @@
         "probability_theory.foundations",
         "probability_theory.joint",
         "probability_theory.limits",
+        "probability_theory.moments",
         "probability_theory.random_variables"
       ],
       "concept_ids": [
-        "prob.bayes.prior",
         "prob.chf.definition",
+        "prob.cond.definition",
         "prob.cond.multiplication",
         "prob.cond.total_probability",
         "prob.conv.borel_cantelli",
@@ -2722,9 +3008,12 @@
         "prob.conv.strong_law",
         "prob.cov.correlation",
         "prob.cov.covariance",
+        "prob.dist.binomial",
         "prob.dist.exponential_family",
         "prob.dist.memoryless",
+        "prob.dist.normal",
         "prob.dist.order_stats",
+        "prob.dist.poisson",
         "prob.dist.poisson_process",
         "prob.independence.pairwise",
         "prob.joint.continuous",
@@ -2732,19 +3021,22 @@
         "prob.limit.clt",
         "prob.limit.markov",
         "prob.limit.weak_law",
+        "prob.moments.skew_kurtosis",
         "prob.rv.cdf",
         "prob.rv.definition",
         "prob.rv.expectation",
+        "prob.rv.integral_transform",
         "prob.rv.joint",
         "prob.rv.mgf",
         "prob.rv.pdf",
+        "prob.rv.pgf",
         "prob.rv.pmf",
         "prob.rv.transform",
         "prob.space.continuity",
         "prob.space.inclusion_exclusion",
         "prob.space.sigma_algebra"
       ],
-      "concept_count": 31
+      "concept_count": 37
     },
     {
       "id": "probability_theory.b5",
@@ -2756,10 +3048,15 @@
       "subdomains": [
         "probability_theory.characteristic",
         "probability_theory.convergence",
+        "probability_theory.distributions",
+        "probability_theory.foundations",
         "probability_theory.joint",
-        "probability_theory.processes"
+        "probability_theory.joint_distributions",
+        "probability_theory.processes",
+        "probability_theory.random_variables"
       ],
       "concept_ids": [
+        "prob.bayes.prior",
         "prob.chf.clt",
         "prob.chf.continuity",
         "prob.chf.independence",
@@ -2767,16 +3064,20 @@
         "prob.conv.almost_sure",
         "prob.conv.in_distribution",
         "prob.conv.slutsky",
+        "prob.dist.geometric",
         "prob.expect.conditional",
         "prob.expect.total",
+        "prob.joint.conditional_density",
         "prob.joint.marginal",
         "prob.joint.rv_independence",
         "prob.process.markov_chain",
         "prob.process.martingale",
         "prob.process.random_walk",
-        "prob.process.transition_matrix"
+        "prob.process.transition_matrix",
+        "prob.rv.convolution",
+        "prob.rv.multivariate_transform"
       ],
-      "concept_count": 15
+      "concept_count": 20
     },
     {
       "id": "probability_theory.b6",
@@ -2784,16 +3085,18 @@
       "domain": "probability_theory",
       "band": 6,
       "depth_min": 18,
-      "depth_max": 18,
+      "depth_max": 19,
       "subdomains": [
         "probability_theory.joint",
         "probability_theory.processes"
       ],
       "concept_ids": [
         "prob.expect.total_variance",
+        "prob.martingale.stopping",
+        "prob.process.recurrence",
         "prob.process.stationary"
       ],
-      "concept_count": 2
+      "concept_count": 4
     },
     {
       "id": "real_analysis.b9",
@@ -2853,6 +3156,7 @@
         "ra.order.countable",
         "ra.order.density",
         "ra.order.nested_intervals",
+        "ra.order.zorn",
         "ra.seq.absolute",
         "ra.seq.bolzano_weierstrass",
         "ra.seq.cauchy",
@@ -2862,7 +3166,7 @@
         "ra.seq.subsequence",
         "ra.seq.tests"
       ],
-      "concept_count": 28
+      "concept_count": 29
     },
     {
       "id": "real_analysis.b11",
@@ -2873,18 +3177,22 @@
       "depth_max": 35,
       "subdomains": [
         "real_analysis.deriv",
+        "real_analysis.measure",
         "real_analysis.metric",
         "real_analysis.order",
         "real_analysis.seq"
       ],
       "concept_ids": [
-        "calc.integral.riemann_criteria",
+        "ra.deriv.arzela_ascoli",
         "ra.deriv.chain",
         "ra.deriv.darboux",
         "ra.deriv.interchange",
         "ra.deriv.mvt",
         "ra.deriv.taylor",
         "ra.deriv.uniform_conv",
+        "ra.deriv.weierstrass_approx",
+        "ra.measure.cantor_set",
+        "ra.measure.null",
         "ra.metric.baire",
         "ra.metric.closure",
         "ra.metric.compact",
@@ -2892,10 +3200,13 @@
         "ra.metric.convergence",
         "ra.metric.equivalent",
         "ra.metric.open_closed",
+        "ra.metric.total_bounded",
+        "ra.order.schroder_bernstein",
         "ra.order.uncountable",
-        "ra.seq.rearrangement"
+        "ra.seq.rearrangement",
+        "ra.seq.weierstrass_m"
       ],
-      "concept_count": 16
+      "concept_count": 22
     },
     {
       "id": "real_analysis.b12",
@@ -2903,17 +3214,34 @@
       "domain": "real_analysis",
       "band": 12,
       "depth_min": 36,
-      "depth_max": 37,
+      "depth_max": 38,
       "subdomains": [
         "real_analysis.deriv"
       ],
       "concept_ids": [
+        "calc.integral.riemann_criteria",
+        "ra.deriv.bounded_variation",
         "ra.deriv.ftc",
         "ra.deriv.improper",
         "ra.deriv.parts",
         "ra.deriv.riemann"
       ],
-      "concept_count": 4
+      "concept_count": 6
+    },
+    {
+      "id": "real_analysis.b13",
+      "title": "Real Analysis · Stage 14",
+      "domain": "real_analysis",
+      "band": 13,
+      "depth_min": 39,
+      "depth_max": 39,
+      "subdomains": [
+        "real_analysis.deriv"
+      ],
+      "concept_ids": [
+        "ra.deriv.riemann_stieltjes"
+      ],
+      "concept_count": 1
     },
     {
       "id": "statistics.b0",
@@ -2923,13 +3251,16 @@
       "depth_min": 1,
       "depth_max": 2,
       "subdomains": [
+        "statistics.data_collection",
         "statistics.data_representation"
       ],
       "concept_ids": [
         "stat.data.bar_graph",
-        "stat.data.read_table"
+        "stat.data.measurement_levels",
+        "stat.data.read_table",
+        "stat.data.study_design"
       ],
-      "concept_count": 2
+      "concept_count": 4
     },
     {
       "id": "statistics.b1",
@@ -2973,7 +3304,8 @@
         "statistics.central_tendency",
         "statistics.data_representation",
         "statistics.distributions",
-        "statistics.probability"
+        "statistics.probability",
+        "statistics.spread"
       ],
       "concept_ids": [
         "stat.adv.covariance",
@@ -2981,6 +3313,7 @@
         "stat.adv.harmonic_mean",
         "stat.adv.rms",
         "stat.adv.variance",
+        "stat.data.box_plot",
         "stat.data.histogram",
         "stat.data.median",
         "stat.data.mode",
@@ -2997,9 +3330,10 @@
         "stat.quartile.value",
         "stat.spread.iqr",
         "stat.spread.mad",
+        "stat.spread.std_dev",
         "stat.zscore.value"
       ],
-      "concept_count": 22
+      "concept_count": 24
     },
     {
       "id": "statistics.b4",
@@ -3010,19 +3344,26 @@
       "depth_max": 14,
       "subdomains": [
         "statistics.advanced",
+        "statistics.data_collection",
+        "statistics.data_representation",
         "statistics.distributions",
         "statistics.inference",
-        "statistics.probability"
+        "statistics.probability",
+        "statistics.regression",
+        "statistics.spread"
       ],
       "concept_ids": [
+        "stat.data.skew",
         "stat.dist.beta",
         "stat.dist.binomial",
         "stat.dist.chi_square",
+        "stat.dist.empirical_rule",
         "stat.dist.exponential",
         "stat.dist.gamma",
         "stat.dist.geometric",
         "stat.dist.hypergeometric",
         "stat.dist.normal",
+        "stat.dist.normal_approx",
         "stat.dist.poisson",
         "stat.dist.student_t",
         "stat.dist.uniform",
@@ -3031,10 +3372,13 @@
         "stat.infer.sampling",
         "stat.prob.conditional",
         "stat.prob.counting",
+        "stat.reg.correlation",
         "stat.reg.r2",
-        "stat.sampling.se"
+        "stat.sampling.methods",
+        "stat.sampling.se",
+        "stat.spread.outlier"
       ],
-      "concept_count": 18
+      "concept_count": 24
     },
     {
       "id": "statistics.b5",
@@ -3051,13 +3395,15 @@
         "stat.infer.margin",
         "stat.infer.nonparametric",
         "stat.infer.proportion",
+        "stat.infer.proportion_test",
         "stat.infer.pvalue",
         "stat.infer.ttest",
         "stat.infer.ztest",
         "stat.test.anova",
-        "stat.test.chi_square"
+        "stat.test.chi_square",
+        "stat.test.chi_square_independence"
       ],
-      "concept_count": 9
+      "concept_count": 11
     },
     {
       "id": "statistics.b6",
@@ -3065,14 +3411,35 @@
       "domain": "statistics",
       "band": 6,
       "depth_min": 18,
-      "depth_max": 18,
+      "depth_max": 20,
       "subdomains": [
-        "statistics.inference"
+        "statistics.inference",
+        "statistics.regression"
       ],
       "concept_ids": [
-        "stat.infer.type_error"
+        "stat.infer.paired",
+        "stat.infer.ttest_two",
+        "stat.infer.type_error",
+        "stat.reg.least_squares"
       ],
-      "concept_count": 1
+      "concept_count": 4
+    },
+    {
+      "id": "statistics.b7",
+      "title": "Statistics · Stage 8",
+      "domain": "statistics",
+      "band": 7,
+      "depth_min": 21,
+      "depth_max": 21,
+      "subdomains": [
+        "statistics.inference",
+        "statistics.regression"
+      ],
+      "concept_ids": [
+        "stat.infer.regression_slope",
+        "stat.reg.residual"
+      ],
+      "concept_count": 2
     },
     {
       "id": "statistics.b8",
@@ -3080,14 +3447,16 @@
       "domain": "statistics",
       "band": 8,
       "depth_min": 24,
-      "depth_max": 24,
+      "depth_max": 25,
       "subdomains": [
-        "statistics.distributions"
+        "statistics.distributions",
+        "statistics.regression"
       ],
       "concept_ids": [
-        "stat.func.gaussian"
+        "stat.func.gaussian",
+        "stat.reg.logistic"
       ],
-      "concept_count": 1
+      "concept_count": 2
     },
     {
       "id": "topology.b10",
@@ -3105,6 +3474,7 @@
         "topo.basics.continuous",
         "topo.basics.metric",
         "topo.basics.open_closed",
+        "topo.basics.spaces",
         "topo.connected",
         "topo.metric.ball",
         "topo.metric.complete",
@@ -3113,7 +3483,7 @@
         "topo.metric.limit_point",
         "topo.product"
       ],
-      "concept_count": 10
+      "concept_count": 11
     },
     {
       "id": "topology.b11",
@@ -3137,6 +3507,8 @@
         "topo.compact",
         "topo.compact.local",
         "topo.compact.one_point",
+        "topo.compact.tychonoff",
+        "topo.connected.components",
         "topo.connected.local_path",
         "topo.connected.path",
         "topo.covering",
@@ -3151,10 +3523,11 @@
         "topo.metric.subspace",
         "topo.metrization",
         "topo.quotient",
+        "topo.separation.normal",
         "topo.separation.tietze",
         "topo.urysohn"
       ],
-      "concept_count": 19
+      "concept_count": 22
     },
     {
       "id": "topology.b12",
@@ -3166,6 +3539,7 @@
       "subdomains": [
         "topology.algebraic",
         "topology.compact",
+        "topology.covering",
         "topology.dimension",
         "topology.invariants",
         "topology.knot",
@@ -3173,9 +3547,13 @@
         "topology.separation"
       ],
       "concept_ids": [
+        "topo.algebraic.degree",
+        "topo.algebraic.homotopy_equivalence",
+        "topo.algebraic.mayer_vietoris",
         "topo.cohomology",
         "topo.cohomology.de_rham",
         "topo.compactification.stone_cech",
+        "topo.covering.universal",
         "topo.dimension",
         "topo.embedding",
         "topo.fiber_bundle",
@@ -3183,11 +3561,13 @@
         "topo.homology.cellular",
         "topo.invariant.betti",
         "topo.invariant.genus",
+        "topo.invariant.surface_classification",
         "topo.knot",
         "topo.manifold.orientability",
+        "topo.manifolds.boundary",
         "topo.separation.completely_regular"
       ],
-      "concept_count": 13
+      "concept_count": 19
     },
     {
       "id": "trigonometry.b2",
@@ -3247,11 +3627,14 @@
         "trig.adv.area_sas",
         "trig.adv.law_sines",
         "trig.adv.polar",
+        "trig.adv.vector_components",
         "trig.adv.vector_dot",
         "trig.adv.vector_magnitude",
         "trig.basics.bearings",
+        "trig.basics.elevation_depression",
         "trig.basics.reciprocal",
         "trig.basics.right_triangle",
+        "trig.basics.segment_area",
         "trig.basics.tan_def",
         "trig.eq.basic",
         "trig.eq.homogeneous",
@@ -3263,7 +3646,7 @@
         "trig.hyperbolic.tanh_coth",
         "trig.ineq.basic"
       ],
-      "concept_count": 19
+      "concept_count": 22
     },
     {
       "id": "trigonometry.b5",
@@ -3310,6 +3693,7 @@
         "trig.graph.sin",
         "trig.hyperbolic.identities",
         "trig.ident.double_angle",
+        "trig.ident.even_odd",
         "trig.ident.half_angle",
         "trig.ident.identities",
         "trig.ident.power_reduction",
@@ -3318,7 +3702,7 @@
         "trig.ident.triple_angle",
         "trig.ineq.advanced"
       ],
-      "concept_count": 22
+      "concept_count": 23
     },
     {
       "id": "trigonometry.b8",
@@ -3326,32 +3710,39 @@
       "domain": "trigonometry",
       "band": 8,
       "depth_min": 24,
-      "depth_max": 25,
+      "depth_max": 26,
       "subdomains": [
         "trigonometry.advanced",
         "trigonometry.basics",
+        "trigonometry.equations",
         "trigonometry.functions",
         "trigonometry.graphs",
         "trigonometry.identities"
       ],
       "concept_ids": [
         "trig.adv.heron_area",
+        "trig.adv.inverse_composition",
         "trig.adv.law_cosines",
         "trig.basics.periodicity",
         "trig.eq.general_solution",
+        "trig.eq.multiple_angle",
+        "trig.eq.using_identities",
         "trig.func.arccosine",
         "trig.func.arccotangent",
         "trig.func.arctangent",
+        "trig.graph.frequency",
+        "trig.graph.harmonic_motion",
         "trig.graph.inverse",
         "trig.graph.phase_shift",
         "trig.graph.reciprocal",
+        "trig.graph.sinusoidal_model",
         "trig.graph.tan",
         "trig.graph.transformations",
         "trig.ident.product_to_sum",
         "trig.ident.pythagorean_variants",
         "trig.ident.sum_to_product"
       ],
-      "concept_count": 15
+      "concept_count": 21
     }
   ]
 }

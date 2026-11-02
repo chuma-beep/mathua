@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Decomposing a Figure",
+    "section": "Decomposing a Figure",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "Adding Regions",
+    "section": "Adding Regions",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "Subtracting Regions",
+    "section": "Subtracting Regions",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Arbitrary Products",
+    "section": "Arbitrary Products",
+    "subgoals": [
+      "Explain arbitrary products.",
+      "Use tychonoff's theorem in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  },
+  {
+    "label": "The Finite Intersection Property",
+    "section": "The Finite Intersection Property",
+    "subgoals": [
+      "Explain the finite intersection property.",
+      "Use tychonoff's theorem in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  },
+  {
+    "label": "Consequences",
+    "section": "Consequences",
+    "subgoals": [
+      "Explain consequences.",
+      "Use tychonoff's theorem in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  }
+]

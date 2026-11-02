@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Colouring a Map",
+    "section": "Colouring a Map",
+    "subgoals": [
+      "Explain colouring a map",
+      "Apply colouring a map to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  },
+  {
+    "label": "The Four Color Bound",
+    "section": "The Four Color Bound",
+    "subgoals": [
+      "Explain the four color bound",
+      "Apply the four color bound to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  },
+  {
+    "label": "Sharpness and Examples",
+    "section": "Sharpness and Examples",
+    "subgoals": [
+      "Explain sharpness and examples",
+      "Apply sharpness and examples to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  }
+]

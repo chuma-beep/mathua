@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Conditioning on a continuous value",
+    "section": "Conditioning on a continuous value",
+    "subgoals": [
+      "Explain conditioning on a continuous value",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  },
+  {
+    "label": "A conditional mean",
+    "section": "A conditional mean",
+    "subgoals": [
+      "Explain a conditional mean",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  },
+  {
+    "label": "Independence through densities",
+    "section": "Independence through densities",
+    "subgoals": [
+      "Explain independence through densities",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  }
+]

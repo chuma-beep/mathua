@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Paired observations",
+    "section": "Paired observations",
+    "subgoals": [
+      "Match each unit with itself",
+      "Recognise before-and-after data",
+      "Keep the pairs intact"
+    ]
+  },
+  {
+    "label": "Difference scores",
+    "section": "Difference scores",
+    "subgoals": [
+      "Subtract within each pair",
+      "Average the differences",
+      "Read the sign of the mean difference"
+    ]
+  },
+  {
+    "label": "The paired t statistic",
+    "section": "The paired t statistic",
+    "subgoals": [
+      "Divide the mean difference by its standard error",
+      "Use n minus one degrees of freedom",
+      "Compare with the one-sample t form"
+    ]
+  }
+]

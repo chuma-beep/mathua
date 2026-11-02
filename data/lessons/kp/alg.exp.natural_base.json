@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Where e Comes From",
+    "section": "Where e Comes From",
+    "subgoals": [
+      "Describe e as a growth limit",
+      "Approximate e numerically"
+    ]
+  },
+  {
+    "label": "The Exponential Function",
+    "section": "The Exponential Function",
+    "subgoals": [
+      "Evaluate e to a power",
+      "Recognise the graph of e^x"
+    ]
+  },
+  {
+    "label": "Natural Logarithms",
+    "section": "Natural Logarithms",
+    "subgoals": [
+      "Convert between e^x and ln x",
+      "Use ln to solve an exponential equation"
+    ]
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Public and Private Values",
+    "section": "Public and Private Values",
+    "subgoals": [
+      "Choose a private exponent and publish its power",
+      "Apply public and private values to a concrete example"
+    ]
+  },
+  {
+    "label": "The Shared Secret",
+    "section": "The Shared Secret",
+    "subgoals": [
+      "Derive the shared secret from the other public value",
+      "Apply the shared secret to a concrete example"
+    ]
+  },
+  {
+    "label": "Choosing Parameters",
+    "section": "Choosing Parameters",
+    "subgoals": [
+      "Check that the parameters give a large subgroup",
+      "Apply choosing parameters to a concrete example"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Multiplying",
+    "section": "Multiplying",
+    "subgoals": [
+      "Multiplying by ten moves the decimal point one place to the right.",
+      "The digits keep their order; only the position of the decimal point changes.",
+      "Multiplying by a power of ten makes a number larger, so the point must move right."
+    ]
+  },
+  {
+    "label": "Dividing",
+    "section": "Dividing",
+    "subgoals": [
+      "Dividing by ten moves the decimal point one place to the left.",
+      "Division by a power of ten makes a number smaller, so the point moves left.",
+      "The exponent of ten counts the places moved."
+    ]
+  },
+  {
+    "label": "Checking the Direction",
+    "section": "Checking the Direction",
+    "subgoals": [
+      "Estimate first: 4.",
+      "The number of places moved equals the exponent when multiplying.",
+      "Powers of ten are the reason metric conversions are simple: each prefix step is a factor of ten."
+    ]
+  }
+]

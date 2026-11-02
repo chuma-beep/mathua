@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Length of a vector",
+    "section": "Length of a vector",
+    "subgoals": [
+      "The length of (a, b) is the square root of a^2 + b^2.",
+      "Length is always zero or positive.",
+      "A vector of length 1 is called a unit vector."
+    ]
+  },
+  {
+    "label": "Dividing by the length",
+    "section": "Dividing by the length",
+    "subgoals": [
+      "Divide each component by the length to get a unit vector.",
+      "The result points in the same direction as the original vector.",
+      "Check the result by squaring its components and adding them."
+    ]
+  },
+  {
+    "label": "Direction angles",
+    "section": "Direction angles",
+    "subgoals": [
+      "A unit vector at angle theta is (cos theta, sin theta).",
+      "The components are the cosine and sine of the direction angle.",
+      "This form links vectors to polar coordinates."
+    ]
+  }
+]

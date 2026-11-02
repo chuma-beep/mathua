@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Conditioning on an event",
+    "section": "Conditioning on an event",
+    "subgoals": [
+      "Define the conditional probability",
+      "Restrict the sample space to the conditioning event",
+      "Explain why the denominator is P(B)"
+    ]
+  },
+  {
+    "label": "The conditional probability formula",
+    "section": "The conditional probability formula",
+    "subgoals": [
+      "Identify the joint event",
+      "Divide by the conditioning probability",
+      "Check that the result lies between zero and one"
+    ]
+  },
+  {
+    "label": "Updating a sample space",
+    "section": "Updating a sample space",
+    "subgoals": [
+      "Read a two-way table",
+      "Use the row or column total as the denominator",
+      "Compare P(A | B) with P(B | A)"
+    ]
+  }
+]

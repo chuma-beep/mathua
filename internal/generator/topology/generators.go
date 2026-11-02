@@ -42,6 +42,9 @@ func Register(reg *generator.Registry) {
 	reg.Register("topo.homology.cellular", &cellularHomologyGen{})
 	reg.Register("topo.cohomology.de_rham", &deRhamGen{})
 	registerBatch(reg)
+	for id, kind := range topoBridgeKinds {
+		reg.Register(id, &topoBridgeGen{kind: kind})
+	}
 }
 
 // ----- 1. metric -----

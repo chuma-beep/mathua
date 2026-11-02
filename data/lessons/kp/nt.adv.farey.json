@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Farey Fractions",
+    "section": "Farey Fractions",
+    "subgoals": [
+      "List the fractions of a Farey sequence in order",
+      "Apply farey fractions to a concrete example"
+    ]
+  },
+  {
+    "label": "The Length Formula",
+    "section": "The Length Formula",
+    "subgoals": [
+      "Count terms with the length formula",
+      "Apply the length formula to a concrete example"
+    ]
+  },
+  {
+    "label": "Mediants and Neighbours",
+    "section": "Mediants and Neighbours",
+    "subgoals": [
+      "Find the mediant of neighbouring fractions",
+      "Apply mediants and neighbours to a concrete example"
+    ]
+  }
+]

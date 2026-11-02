@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Splitting Both Factors",
+    "section": "Splitting Both Factors",
+    "subgoals": [
+      "Explain splitting both factors",
+      "Apply splitting both factors to a worked example",
+      "Recompute with the partial products in reverse order"
+    ]
+  },
+  {
+    "label": "The Standard Algorithm",
+    "section": "The Standard Algorithm",
+    "subgoals": [
+      "Explain the standard algorithm",
+      "Apply the standard algorithm to a worked example",
+      "Recompute with the partial products in reverse order"
+    ]
+  },
+  {
+    "label": "Checking the Result",
+    "section": "Checking the Result",
+    "subgoals": [
+      "Explain checking the result",
+      "Apply checking the result to a worked example",
+      "Recompute with the partial products in reverse order"
+    ]
+  }
+]

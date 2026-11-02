@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Linearity of the integral",
+    "section": "Linearity of the integral",
+    "subgoals": [
+      "Explain linearity of the integral",
+      "Apply linearity of the integral to an example"
+    ]
+  },
+  {
+    "label": "Splitting an interval",
+    "section": "Splitting an interval",
+    "subgoals": [
+      "Explain splitting an interval",
+      "Apply splitting an interval to an example"
+    ]
+  },
+  {
+    "label": "Symmetry shortcuts",
+    "section": "Symmetry shortcuts",
+    "subgoals": [
+      "Explain symmetry shortcuts",
+      "Apply symmetry shortcuts to an example"
+    ]
+  }
+]

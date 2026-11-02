@@ -13,6 +13,18 @@ import (
 )
 
 func Register(reg *generator.Registry) {
+	// Concepts added by the 2026 content expansion.
+	reg.Register("prealg.ineq.negative", &prealgBridgeGen{kind: "ineq_negative"})
+	reg.Register("prealg.eq.fractions", &prealgBridgeGen{kind: "eq_fractions"})
+	reg.Register("ratio.ops.proportional_graph", &prealgBridgeGen{kind: "prop_graph"})
+	reg.Register("prealg.func.table", &prealgBridgeGen{kind: "func_table"})
+	reg.Register("prealg.graph.interpret", &prealgBridgeGen{kind: "graph_interpret"})
+	reg.Register("prealg.real.order_rational", &prealgBridgeGen{kind: "order_rational"})
+	reg.Register("dec.basics.place_value", &prealgBridgeGen{kind: "place_value"})
+	reg.Register("dec.ops.powers_ten", &prealgBridgeGen{kind: "powers_ten"})
+	reg.Register("prealg.measure.dimensional", &prealgBridgeGen{kind: "dimensional"})
+	reg.Register("ratio.ops.table", &prealgBridgeGen{kind: "ratio_table"})
+	reg.Register("prealg.expr.simplify", &prealgBridgeGen{kind: "simplify_expr"})
 	reg.Register("dec.basics.compare", &decCompareGen{})
 	reg.Register("dec.ops.add", &decAddSubGen{op: "+"})
 	reg.Register("dec.ops.sub", &decAddSubGen{op: "-"})

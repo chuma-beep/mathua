@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The slope as an estimate",
+    "section": "The slope as an estimate",
+    "subgoals": [
+      "Read the sample slope",
+      "State the null slope",
+      "Separate slope from correlation"
+    ]
+  },
+  {
+    "label": "Standard error of the slope",
+    "section": "Standard error of the slope",
+    "subgoals": [
+      "Use the residual spread",
+      "Divide by the spread in x",
+      "Shrink with more data"
+    ]
+  },
+  {
+    "label": "Testing the slope",
+    "section": "Testing the slope",
+    "subgoals": [
+      "Form the t statistic",
+      "Use n minus two degrees of freedom",
+      "Connect the test to correlation"
+    ]
+  }
+]

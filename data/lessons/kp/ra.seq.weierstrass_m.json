@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Majorants for function series",
+    "section": "Majorants for function series",
+    "subgoals": [
+      "Explain the main idea of majorants for function series.",
+      "Apply the result in majorants for function series to a concrete example.",
+      "Recognise a common mistake involving majorants for function series."
+    ]
+  },
+  {
+    "label": "The M-test",
+    "section": "The M-test",
+    "subgoals": [
+      "Explain the main idea of the m-test.",
+      "Apply the result in the m-test to a concrete example.",
+      "Recognise a common mistake involving the m-test."
+    ]
+  },
+  {
+    "label": "Uniform convergence consequences",
+    "section": "Uniform convergence consequences",
+    "subgoals": [
+      "Explain the main idea of uniform convergence consequences.",
+      "Apply the result in uniform convergence consequences to a concrete example.",
+      "Recognise a common mistake involving uniform convergence consequences."
+    ]
+  }
+]

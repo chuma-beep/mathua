@@ -1,0 +1,26 @@
+[
+  {
+    "label": "A Vector at Every Point",
+    "section": "A Vector at Every Point",
+    "subgoals": [
+      "Explain a vector at every point",
+      "Apply a vector at every point in a worked problem"
+    ]
+  },
+  {
+    "label": "Divergence and Curl",
+    "section": "Divergence and Curl",
+    "subgoals": [
+      "Explain divergence and curl",
+      "Apply divergence and curl in a worked problem"
+    ]
+  },
+  {
+    "label": "Evaluating a Field",
+    "section": "Evaluating a Field",
+    "subgoals": [
+      "Explain evaluating a field",
+      "Apply evaluating a field in a worked problem"
+    ]
+  }
+]

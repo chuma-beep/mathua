@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Driven Oscillators",
+    "section": "Driven Oscillators",
+    "subgoals": [
+      "Explain driven oscillators",
+      "Apply driven oscillators in a worked example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Resonance",
+    "section": "Resonance",
+    "subgoals": [
+      "Explain resonance",
+      "Apply resonance in a worked example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "The Particular Solution",
+    "section": "The Particular Solution",
+    "subgoals": [
+      "Explain the particular solution",
+      "Apply the particular solution in a worked example",
+      "Check the result against the definition"
+    ]
+  }
+]

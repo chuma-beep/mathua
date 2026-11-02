@@ -641,5 +641,382 @@
       "streak": 10,
       "avg_time_seconds": 20.0
     }
+  },
+  {
+    "id": "geo.basic.transversal",
+    "label": "Transversals and angle pairs",
+    "domain": "geometry",
+    "subdomain": "geometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.basic.vertical",
+      "geo.basic.angles"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
+  },
+  {
+    "id": "geo.triangle.congruence",
+    "label": "Triangle congruence criteria",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.types",
+      "geo.triangle.angles"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "geo.triangle.pythagorean_converse",
+    "label": "The converse of the Pythagorean theorem",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.pythagorean"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
+  },
+  {
+    "id": "geo.triangle.special_right_45",
+    "label": "45-45-90 triangles",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.special_right",
+      "geo.triangle.pythagorean"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
+  },
+  {
+    "id": "geo.triangle.median_centroid",
+    "label": "Medians and the centroid",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.area",
+      "geo.coord.midpoint"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "geo.transform.translation",
+    "label": "Translations",
+    "domain": "geometry",
+    "subdomain": "geometry.transform",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.coord.plot",
+      "geo.transform.dilation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22
+    }
+  },
+  {
+    "id": "geo.transform.reflection",
+    "label": "Reflections",
+    "domain": "geometry",
+    "subdomain": "geometry.transform",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.coord.plot",
+      "geo.coord.lines"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
+  },
+  {
+    "id": "geo.transform.rotation",
+    "label": "Rotations",
+    "domain": "geometry",
+    "subdomain": "geometry.transform",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.transform.dilation",
+      "geo.coord.plot"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
+  },
+  {
+    "id": "geo.solid.cylinder",
+    "label": "Cylinders",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.circle.area",
+      "geo.solid.prism_volume"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "geo.solid.cone",
+    "label": "Cones",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.solid.pyramid_volume",
+      "geo.circle.area"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "geo.solid.sphere",
+    "label": "Spheres",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.circle.area",
+      "geo.solid.volume_rect"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28
+    }
+  },
+  {
+    "id": "geo.solid.curved_surface_area",
+    "label": "Curved surface areas",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.solid.surface_area",
+      "geo.circle.circumference"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "geo.polygon.area_regular",
+    "label": "Areas of regular polygons",
+    "domain": "geometry",
+    "subdomain": "geometry.polygons",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.polygon.interior_angles",
+      "geo.triangle.area"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "geo.circle.chord_segments",
+    "label": "Segments in intersecting chords",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.circle.chord",
+      "geo.circle.inscribed_angle"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "geo.circle.secant",
+    "label": "Secants and tangent-secant segments",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.circle.tangent_length",
+      "geo.circle.chord"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28
+    }
+  },
+  {
+    "id": "geo.similar.criteria",
+    "label": "Similarity criteria",
+    "domain": "geometry",
+    "subdomain": "geometry.similar",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.similar.ratio",
+      "geo.triangle.angles"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "geo.area.composite",
+    "label": "Areas of composite figures",
+    "domain": "geometry",
+    "subdomain": "geometry.shapes",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.quad.area",
+      "geo.triangle.area"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
+  },
+  {
+    "id": "geo.triangle.angle_bisector",
+    "label": "The angle bisector theorem",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.angles",
+      "geo.triangle.isosceles"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "geo.triangle.perpendicular_bisector",
+    "label": "Perpendicular bisectors",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.coord.midpoint",
+      "geo.triangle.isosceles"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
+  },
+  {
+    "id": "geo.quad.properties",
+    "label": "Properties of special quadrilaterals",
+    "domain": "geometry",
+    "subdomain": "geometry.shapes",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.quad.types",
+      "geo.quad.area"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
+  },
+  {
+    "id": "geo.circle.arc_measure",
+    "label": "Arc measure and arc length",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.circle.inscribed_angle",
+      "geo.circle.circumference"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "geo.solid.cross_section",
+    "label": "Cross sections of solids",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.solid.volume_rect",
+      "geo.solid.prism_volume"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
+  },
+  {
+    "id": "geo.transform.symmetry",
+    "label": "Symmetry of plane figures",
+    "domain": "geometry",
+    "subdomain": "geometry.transform",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.transform.dilation",
+      "geo.polygon.interior_angles"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
+  },
+  {
+    "id": "geo.solid.euler",
+    "label": "Euler formula for polyhedra",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.solid.prism_volume",
+      "geo.solid.pyramid_volume"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
+  },
+  {
+    "id": "geo.solid.frustum",
+    "label": "Frustums",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.solid.cone",
+      "geo.solid.cylinder"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25
+    }
   }
 ]

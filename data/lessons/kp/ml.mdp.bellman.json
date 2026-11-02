@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Value of a state",
+    "section": "Value of a state",
+    "subgoals": [
+      "Explain the main idea of value of a state",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Optimality",
+    "section": "Optimality",
+    "subgoals": [
+      "Explain the main idea of optimality",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "State-action values",
+    "section": "State-action values",
+    "subgoals": [
+      "Explain the main idea of state-action values",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  }
+]

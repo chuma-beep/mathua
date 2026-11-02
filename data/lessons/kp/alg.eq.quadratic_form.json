@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Standard Form",
+    "section": "Standard Form",
+    "subgoals": [
+      "Write a quadratic in standard form",
+      "Identify a, b and c correctly"
+    ]
+  },
+  {
+    "label": "Applying the Formula",
+    "section": "Applying the Formula",
+    "subgoals": [
+      "Substitute into the quadratic formula",
+      "Simplify the discriminant first"
+    ]
+  },
+  {
+    "label": "Reading the Solutions",
+    "section": "Reading the Solutions",
+    "subgoals": [
+      "Interpret a negative discriminant",
+      "Recognise a double root"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Association and sign",
+    "section": "Association and sign",
+    "subgoals": [
+      "Read direction from the scatterplot",
+      "Read strength from the closeness to a line",
+      "Connect the sign to r"
+    ]
+  },
+  {
+    "label": "The correlation coefficient",
+    "section": "The correlation coefficient",
+    "subgoals": [
+      "Standardise x and y",
+      "Average the products of standardised pairs",
+      "Recognise r = 1 and r = -1"
+    ]
+  },
+  {
+    "label": "Correlation is not causation",
+    "section": "Correlation is not causation",
+    "subgoals": [
+      "Look for a lurking variable",
+      "Plot the data before trusting r",
+      "Distinguish association from causation"
+    ]
+  }
+]

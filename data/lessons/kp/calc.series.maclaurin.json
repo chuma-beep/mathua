@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Taylor series centred at zero",
+    "section": "Taylor series centred at zero",
+    "subgoals": [
+      "A Maclaurin series is a Taylor series with centre zero.",
+      "Write the coefficients as derivatives at zero divided by factorials."
+    ]
+  },
+  {
+    "label": "Standard Maclaurin series",
+    "section": "Standard Maclaurin series",
+    "subgoals": [
+      "The exponential function expands with reciprocal factorial coefficients.",
+      "Sine and cosine alternate signs and use odd or even powers."
+    ]
+  },
+  {
+    "label": "Building new series",
+    "section": "Building new series",
+    "subgoals": [
+      "Substitute a multiple of x into a known series.",
+      "Integrate or differentiate a series term by term inside its radius."
+    ]
+  }
+]

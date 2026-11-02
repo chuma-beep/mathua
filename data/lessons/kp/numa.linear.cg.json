@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Quadratic Forms",
+    "section": "Quadratic Forms",
+    "subgoals": [
+      "Explain the idea behind quadratic forms.",
+      "Apply the method to a worked numerical example.",
+      "Check the result for consistency and accuracy."
+    ]
+  },
+  {
+    "label": "Conjugate Directions",
+    "section": "Conjugate Directions",
+    "subgoals": [
+      "Explain the idea behind conjugate directions.",
+      "Apply the method to a worked numerical example.",
+      "Check the result for consistency and accuracy."
+    ]
+  },
+  {
+    "label": "The Algorithm",
+    "section": "The Algorithm",
+    "subgoals": [
+      "Explain the idea behind the algorithm.",
+      "Apply the method to a worked numerical example.",
+      "Check the result for consistency and accuracy."
+    ]
+  }
+]

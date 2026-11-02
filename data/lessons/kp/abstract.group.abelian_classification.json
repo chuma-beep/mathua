@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Prime Power Pieces",
+    "section": "Prime Power Pieces",
+    "subgoals": [
+      "Every finite abelian group decomposes into cyclic groups of prime power order.",
+      "The decomposition is unique up to reordering of the factors."
+    ]
+  },
+  {
+    "label": "Counting the Types",
+    "section": "Counting the Types",
+    "subgoals": [
+      "The number of abelian groups of order p to the n equals the number of partitions of n.",
+      "For a general order, multiply the counts attached to the prime exponents."
+    ]
+  },
+  {
+    "label": "Invariant Factors",
+    "section": "Invariant Factors",
+    "subgoals": [
+      "The invariant factor form orders the cyclic factors so that each order divides the next.",
+      "The elementary divisor form keeps the prime powers separate."
+    ]
+  }
+]

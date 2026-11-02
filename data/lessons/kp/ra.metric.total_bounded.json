@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Balls of radius epsilon",
+    "section": "Balls of radius epsilon",
+    "subgoals": [
+      "Explain the main idea of balls of radius epsilon.",
+      "Apply the result in balls of radius epsilon to a concrete example.",
+      "Recognise a common mistake involving balls of radius epsilon."
+    ]
+  },
+  {
+    "label": "Total boundedness and compactness",
+    "section": "Total boundedness and compactness",
+    "subgoals": [
+      "Explain the main idea of total boundedness and compactness.",
+      "Apply the result in total boundedness and compactness to a concrete example.",
+      "Recognise a common mistake involving total boundedness and compactness."
+    ]
+  },
+  {
+    "label": "Finite nets",
+    "section": "Finite nets",
+    "subgoals": [
+      "Explain the main idea of finite nets.",
+      "Apply the result in finite nets to a concrete example.",
+      "Recognise a common mistake involving finite nets."
+    ]
+  }
+]

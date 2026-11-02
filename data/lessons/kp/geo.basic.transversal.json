@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Transversal Lines",
+    "section": "Transversal Lines",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "Corresponding and Alternate Angles",
+    "section": "Corresponding and Alternate Angles",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "Consecutive Interior Angles",
+    "section": "Consecutive Interior Angles",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  }
+]

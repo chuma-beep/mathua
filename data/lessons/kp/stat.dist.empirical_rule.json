@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The 68-95-99.7 rule",
+    "section": "The 68-95-99.7 rule",
+    "subgoals": [
+      "Measure distance in standard deviations",
+      "Recall the three percentages",
+      "Apply the rule to a normal curve"
+    ]
+  },
+  {
+    "label": "Intervals from the mean",
+    "section": "Intervals from the mean",
+    "subgoals": [
+      "Add and subtract one standard deviation",
+      "Build a two-standard-deviation interval",
+      "Interpret the interval"
+    ]
+  },
+  {
+    "label": "Applying the rule",
+    "section": "Applying the rule",
+    "subgoals": [
+      "Estimate a count in a large sample",
+      "Recognise a non-normal shape",
+      "Use the rule only as an approximation"
+    ]
+  }
+]

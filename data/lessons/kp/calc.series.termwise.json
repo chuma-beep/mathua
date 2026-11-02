@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Differentiating a power series",
+    "section": "Differentiating a power series",
+    "subgoals": [
+      "Differentiate a power series term by term",
+      "Read a coefficient from the derivative"
+    ]
+  },
+  {
+    "label": "Integrating a power series",
+    "section": "Integrating a power series",
+    "subgoals": [
+      "Integrate a power series term by term",
+      "Use an initial condition to fix the constant"
+    ]
+  },
+  {
+    "label": "When termwise operations are valid",
+    "section": "When termwise operations are valid",
+    "subgoals": [
+      "State the validity condition",
+      "Check endpoints separately"
+    ]
+  }
+]

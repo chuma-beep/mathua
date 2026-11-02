@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Jacobian",
+    "section": "The Jacobian",
+    "subgoals": [
+      "Explain the jacobian",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  },
+  {
+    "label": "Linear changes of variable",
+    "section": "Linear changes of variable",
+    "subgoals": [
+      "Explain linear changes of variable",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  },
+  {
+    "label": "Sums and differences",
+    "section": "Sums and differences",
+    "subgoals": [
+      "Explain sums and differences",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  }
+]

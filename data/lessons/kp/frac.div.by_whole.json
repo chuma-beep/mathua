@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Sharing a Fraction",
+    "section": "Sharing a Fraction",
+    "subgoals": [
+      "Explain sharing a fraction",
+      "Work an example of sharing a fraction",
+      "Multiply the quotient by the whole number"
+    ]
+  },
+  {
+    "label": "Using the Reciprocal",
+    "section": "Using the Reciprocal",
+    "subgoals": [
+      "Explain using the reciprocal",
+      "Work an example of using the reciprocal",
+      "Multiply the quotient by the whole number"
+    ]
+  },
+  {
+    "label": "Checking the Size",
+    "section": "Checking the Size",
+    "subgoals": [
+      "Explain checking the size",
+      "Work an example of checking the size",
+      "Multiply the quotient by the whole number"
+    ]
+  }
+]

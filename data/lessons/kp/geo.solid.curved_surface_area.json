@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Lateral Surfaces",
+    "section": "Lateral Surfaces",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "Cylinder and Cone",
+    "section": "Cylinder and Cone",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "Sphere",
+    "section": "Sphere",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  }
+]

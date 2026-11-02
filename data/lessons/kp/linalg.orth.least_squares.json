@@ -1,0 +1,29 @@
+[
+  {
+    "label": "When a system has no solution",
+    "section": "When a system has no solution",
+    "subgoals": [
+      "Recognise an inconsistent overdetermined system",
+      "Describe the least-squares goal",
+      "Distinguish exact and approximate solutions"
+    ]
+  },
+  {
+    "label": "The normal equations",
+    "section": "The normal equations",
+    "subgoals": [
+      "Write the normal equations",
+      "Solve a small normal system",
+      "Interpret the projection onto the column space"
+    ]
+  },
+  {
+    "label": "Residuals and fit",
+    "section": "Residuals and fit",
+    "subgoals": [
+      "Compute a residual",
+      "Sum squared residuals",
+      "Compare candidate lines by residual size"
+    ]
+  }
+]

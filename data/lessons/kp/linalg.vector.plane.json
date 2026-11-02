@@ -1,0 +1,29 @@
+[
+  {
+    "label": "A normal vector",
+    "section": "A normal vector",
+    "subgoals": [
+      "Identify a normal from a plane equation",
+      "Check that a direction lies in the plane",
+      "Use the dot product test"
+    ]
+  },
+  {
+    "label": "Point-normal form",
+    "section": "Point-normal form",
+    "subgoals": [
+      "Build the equation from a point and normal",
+      "Evaluate the constant term",
+      "Test whether a point satisfies the equation"
+    ]
+  },
+  {
+    "label": "Distance from a point",
+    "section": "Distance from a point",
+    "subgoals": [
+      "Write the distance formula",
+      "Compute a distance from the origin",
+      "Interpret the constant term geometrically"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The maximum-margin idea",
+    "section": "The maximum-margin idea",
+    "subgoals": [
+      "Explain the main idea of the maximum-margin idea",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Computing the margin",
+    "section": "Computing the margin",
+    "subgoals": [
+      "Explain the main idea of computing the margin",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Support vectors and slack",
+    "section": "Support vectors and slack",
+    "subgoals": [
+      "Explain the main idea of support vectors and slack",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  }
+]

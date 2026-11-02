@@ -36,6 +36,10 @@ func Register(reg *generator.Registry) {
 	reg.Register("ode.nonlinear.lyapunov", &lyapunovGen{})
 	reg.Register("ode.pde.laplace_eq", &laplaceEqGen{})
 	reg.Register("ode.integral.volterra", &volterraGen{})
+	reg.Register("ode.basics.slope_field", &slopeFieldGen{})
+	reg.Register("ode.first_order.logistic", &logisticGen{})
+	reg.Register("ode.basics.existence_uniqueness", &existenceUniquenessGen{})
+	reg.Register("ode.second_order.forced", &forcedOscillationGen{})
 	registerNumeric(reg)
 	registerBatch(reg)
 }

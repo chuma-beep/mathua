@@ -10,6 +10,20 @@ import (
 )
 
 func Register(reg *generator.Registry) {
+	// Concepts added by the 2026 content expansion.
+	for id, kind := range map[string]string{
+		"discrete.recurrence.master_theorem": "master_theorem",
+		"discrete.logic.boolean_functions":   "boolean_functions",
+		"discrete.combinatorics.burnside":    "burnside",
+		"discrete.combinatorics.egf":         "egf",
+		"discrete.logic.resolution":          "resolution",
+		"discrete.sets.relation_closure":     "relation_closure",
+		"discrete.automata.fsm":              "fsm",
+		"discrete.proof.cases":               "proof_cases",
+		"discrete.coding.hamming":            "hamming",
+	} {
+		reg.Register(id, &discBridgeGen{kind: kind})
+	}
 	reg.Register("discrete.logic.propositions", &propositionsGen{})
 	reg.Register("discrete.logic.connectives", &connectivesGen{})
 	reg.Register("discrete.logic.truth_tables", &truthTablesGen{})

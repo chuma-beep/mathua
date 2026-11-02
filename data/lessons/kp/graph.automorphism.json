@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Symmetries of a Graph",
+    "section": "Symmetries of a Graph",
+    "subgoals": [
+      "Explain symmetries of a graph",
+      "Apply symmetries of a graph to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  },
+  {
+    "label": "Counting Automorphisms",
+    "section": "Counting Automorphisms",
+    "subgoals": [
+      "Explain counting automorphisms",
+      "Apply counting automorphisms to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  },
+  {
+    "label": "Automorphism Groups",
+    "section": "Automorphism Groups",
+    "subgoals": [
+      "Explain automorphism groups",
+      "Apply automorphism groups to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Orthogonalising two vectors",
+    "section": "Orthogonalising Two Vectors",
+    "subgoals": [
+      "Compute the projection of one vector onto another.",
+      "Subtract the projection to obtain an orthogonal vector.",
+      "Verify that the new pair spans the same plane."
+    ]
+  },
+  {
+    "label": "The Gram-Schmidt formula",
+    "section": "The Gram-Schmidt Formula",
+    "subgoals": [
+      "Apply the subtraction step to each new vector.",
+      "Explain why the denominators are nonzero.",
+      "Recognise that the span is preserved at every stage."
+    ]
+  },
+  {
+    "label": "From orthogonal to orthonormal bases",
+    "section": "From Orthogonal to Orthonormal Bases",
+    "subgoals": [
+      "Normalise each orthogonal vector.",
+      "Verify mutual orthogonality and unit length.",
+      "Connect the result to the QR decomposition."
+    ]
+  }
+]

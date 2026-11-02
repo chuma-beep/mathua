@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Stopping times",
+    "section": "Stopping times",
+    "subgoals": [
+      "Explain stopping times",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  },
+  {
+    "label": "The gambler's ruin calculation",
+    "section": "The gambler's ruin calculation",
+    "subgoals": [
+      "Explain the gambler's ruin calculation",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  },
+  {
+    "label": "When the identity fails",
+    "section": "When the identity fails",
+    "subgoals": [
+      "Explain when the identity fails",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  }
+]

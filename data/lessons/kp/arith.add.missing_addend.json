@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Addition Relationship",
+    "section": "The Addition Relationship",
+    "subgoals": [
+      "Explain the addition relationship",
+      "Apply the addition relationship to a worked example",
+      "Substitute the missing addend and confirm the total"
+    ]
+  },
+  {
+    "label": "Larger Numbers",
+    "section": "Larger Numbers",
+    "subgoals": [
+      "Explain larger numbers",
+      "Apply larger numbers to a worked example",
+      "Substitute the missing addend and confirm the total"
+    ]
+  },
+  {
+    "label": "Words That Hide an Addend",
+    "section": "Words That Hide an Addend",
+    "subgoals": [
+      "Explain words that hide an addend",
+      "Apply words that hide an addend to a worked example",
+      "Substitute the missing addend and confirm the total"
+    ]
+  }
+]

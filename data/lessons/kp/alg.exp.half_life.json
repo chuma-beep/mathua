@@ -1,0 +1,26 @@
+[
+  {
+    "label": "The Half-Life Model",
+    "section": "The Half-Life Model",
+    "subgoals": [
+      "Write an exponential decay model",
+      "Interpret the half-life"
+    ]
+  },
+  {
+    "label": "Computing Remaining Amount",
+    "section": "Computing Remaining Amount",
+    "subgoals": [
+      "Apply repeated halving",
+      "Use the model at a given time"
+    ]
+  },
+  {
+    "label": "Solving for Time",
+    "section": "Solving for Time",
+    "subgoals": [
+      "Find the time for a target amount",
+      "Compare two decay processes"
+    ]
+  }
+]

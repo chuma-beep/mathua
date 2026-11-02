@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Matching Values and Slopes",
+    "section": "Matching Values and Slopes",
+    "subgoals": [
+      "Explain the idea behind matching values and slopes.",
+      "Apply the method to a worked numerical example.",
+      "Check the result for consistency and accuracy."
+    ]
+  },
+  {
+    "label": "Divided Differences with Repetition",
+    "section": "Divided Differences with Repetition",
+    "subgoals": [
+      "Explain the idea behind divided differences with repetition.",
+      "Apply the method to a worked numerical example.",
+      "Check the result for consistency and accuracy."
+    ]
+  },
+  {
+    "label": "Error and Examples",
+    "section": "Error and Examples",
+    "subgoals": [
+      "Explain the idea behind error and examples.",
+      "Apply the method to a worked numerical example.",
+      "Check the result for consistency and accuracy."
+    ]
+  }
+]

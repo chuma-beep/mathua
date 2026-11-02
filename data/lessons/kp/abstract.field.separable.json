@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Repeated Roots",
+    "section": "Repeated Roots",
+    "subgoals": [
+      "A polynomial is separable when it has no repeated root in an algebraic closure.",
+      "Equivalently, it is coprime with its formal derivative."
+    ]
+  },
+  {
+    "label": "Characteristic Zero and Characteristic p",
+    "section": "Characteristic Zero and Characteristic p",
+    "subgoals": [
+      "Over a field of characteristic zero every irreducible polynomial is separable.",
+      "In characteristic p the derivative of x to the p minus a is zero."
+    ]
+  },
+  {
+    "label": "Finite Fields",
+    "section": "Finite Fields",
+    "subgoals": [
+      "Every finite extension of a finite field is separable because the Frobenius map is bijective.",
+      "The derivative test remains the quickest computational check."
+    ]
+  }
+]

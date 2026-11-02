@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Congruence Idea",
+    "section": "The Congruence Idea",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "SSS, SAS and ASA",
+    "section": "SSS, SAS and ASA",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "Using Congruence",
+    "section": "Using Congruence",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  }
+]

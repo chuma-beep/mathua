@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Rational Powers",
+    "section": "Rational Powers",
+    "subgoals": [
+      "Rewrite a rational exponent as a radical",
+      "Identify the index and the power"
+    ]
+  },
+  {
+    "label": "Solving by Raising",
+    "section": "Solving by Raising",
+    "subgoals": [
+      "Raise both sides to the reciprocal power",
+      "Keep the domain in mind"
+    ]
+  },
+  {
+    "label": "Checking Solutions",
+    "section": "Checking Solutions",
+    "subgoals": [
+      "Test for extraneous roots",
+      "State the final solution set"
+    ]
+  }
+]

@@ -598,5 +598,69 @@
       "streak": 10,
       "avg_time_seconds": 24.0
     }
+  },
+  {
+    "id": "ode.basics.slope_field",
+    "label": "Slope fields and solution curves",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.basics.concept",
+      "calc.deriv.concept",
+      "geo.coord.plot"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "ode.first_order.logistic",
+    "label": "The logistic equation",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.first_order",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.first_order.separable",
+      "calc.deriv.exp_log"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "ode.basics.existence_uniqueness",
+    "label": "Existence and uniqueness of solutions",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.basics.concept",
+      "calc.deriv.partial"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ode.second_order.forced",
+    "label": "Forced oscillations",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.second_order",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.second_order.spring",
+      "ode.second_order.nonhomogeneous"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30
+    }
   }
 ]

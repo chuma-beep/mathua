@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Dividing by a Negative",
+    "section": "Dividing by a Negative",
+    "subgoals": [
+      "When you divide both sides of an inequality by a negative number, the direction of the inequality reverses.",
+      "Check the reversal with a test value.",
+      "A common error is to reverse only one side."
+    ]
+  },
+  {
+    "label": "Solving Step by Step",
+    "section": "Solving Step by Step",
+    "subgoals": [
+      "Move constants first so the variable term stands alone.",
+      "For -2x + 5 > 11, subtract 5 to get -2x > 6, then divide by -2 to get x < -3.",
+      "Write the solution as an inequality and test one number on each side of the boundary."
+    ]
+  },
+  {
+    "label": "Integer Solutions",
+    "section": "Integer Solutions",
+    "subgoals": [
+      "Word problems often ask for the greatest or least integer that satisfies the inequality.",
+      "If x < -3, the greatest integer solution is -4, because -3 itself is excluded.",
+      "Sketch the solution on a number line and mark whether the endpoint is filled or open before naming an integer."
+    ]
+  }
+]

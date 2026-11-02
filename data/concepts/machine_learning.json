@@ -649,5 +649,155 @@
       "streak": 10,
       "avg_time_seconds": 26.0
     }
+  },
+  {
+    "id": "ml.svm.margin",
+    "label": "Support vector machines and margins",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.classification",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.logistic.regression",
+      "linalg.vector.dot"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30
+    }
+  },
+  {
+    "id": "ml.svm.kernel",
+    "label": "The kernel trick",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.classification",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.svm.margin",
+      "linalg.inner_product"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30
+    }
+  },
+  {
+    "id": "ml.naive_bayes",
+    "label": "Naive Bayes classifiers",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.classification",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.cond.definition",
+      "ml.logistic.regression"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "ml.bias_variance",
+    "label": "The bias-variance tradeoff",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.evaluation",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.overfitting",
+      "ml.validation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "ml.mdp.bellman",
+    "label": "The Bellman equation",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.reinforcement",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.reinforcement.qlearning",
+      "prob.expect.conditional"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30
+    }
+  },
+  {
+    "id": "ml.cluster.em",
+    "label": "Expectation-maximization",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.unsupervised",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.cluster.kmeans",
+      "stat.dist.normal"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30
+    }
+  },
+  {
+    "id": "ml.feature.selection",
+    "label": "Feature selection",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.data",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.data.scaling",
+      "ml.validation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "ml.multiclass",
+    "label": "Multiclass classification",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.classification",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.logistic.regression",
+      "ml.eval.confusion"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "ml.nlp.embedding",
+    "label": "Word embeddings",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.nlp",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.nlp.bert",
+      "linalg.vector.dot"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28
+    }
+  },
+  {
+    "id": "ml.optim.early_stopping",
+    "label": "Early stopping",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.neural_networks",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.validation",
+      "ml.overfitting"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
   }
 ]

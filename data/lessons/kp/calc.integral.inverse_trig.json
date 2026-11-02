@@ -1,0 +1,26 @@
+[
+  {
+    "label": "The arctangent form",
+    "section": "The arctangent form",
+    "subgoals": [
+      "An integrand of the form one over a squared plus x squared produces an arctangent.",
+      "The coefficient is one over a."
+    ]
+  },
+  {
+    "label": "Completing the square",
+    "section": "Completing the square",
+    "subgoals": [
+      "Rewrite the quadratic as a shift squared plus a constant.",
+      "Substitute to reach the standard arctangent form."
+    ]
+  },
+  {
+    "label": "Choosing the substitution",
+    "section": "Choosing the substitution",
+    "subgoals": [
+      "Match the integrand to the arcsine or arctangent pattern.",
+      "A square root of a squared minus x squared points to arcsine."
+    ]
+  }
+]

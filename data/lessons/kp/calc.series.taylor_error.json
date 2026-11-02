@@ -1,0 +1,26 @@
+[
+  {
+    "label": "The remainder term",
+    "section": "The remainder term",
+    "subgoals": [
+      "Define the Taylor remainder",
+      "Distinguish the remainder from the next term"
+    ]
+  },
+  {
+    "label": "Bounding the remainder",
+    "section": "Bounding the remainder",
+    "subgoals": [
+      "State the Lagrange remainder",
+      "Compute an error bound from a derivative bound"
+    ]
+  },
+  {
+    "label": "Choosing enough terms",
+    "section": "Choosing enough terms",
+    "subgoals": [
+      "Solve a tolerance inequality",
+      "Compare Taylor and alternating-series bounds"
+    ]
+  }
+]

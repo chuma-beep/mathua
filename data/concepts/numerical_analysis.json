@@ -562,5 +562,139 @@
       "streak": 10,
       "avg_time_seconds": 30.0
     }
+  },
+  {
+    "id": "numa.linear.cholesky",
+    "label": "Cholesky factorization",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.linear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.linear.lu",
+      "linalg.symmetric.spectral"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30
+    }
+  },
+  {
+    "id": "numa.interp.hermite",
+    "label": "Hermite interpolation",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.interp",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.interp.divided_differences",
+      "calc.deriv.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30
+    }
+  },
+  {
+    "id": "numa.linear.sor",
+    "label": "Successive over-relaxation",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.linear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.linear.gauss_seidel"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28
+    }
+  },
+  {
+    "id": "numa.linear.iter_convergence",
+    "label": "Convergence of iterative methods",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.linear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.linear.jacobi",
+      "numa.linear.gauss_seidel"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30
+    }
+  },
+  {
+    "id": "numa.linear.qr_algorithm",
+    "label": "The QR algorithm",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.linear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.decomp.qr",
+      "linalg.eigen.compute"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32
+    }
+  },
+  {
+    "id": "numa.linear.cg",
+    "label": "The conjugate gradient method",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.linear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.inner_product",
+      "numa.linear.least_squares_qr"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32
+    }
+  },
+  {
+    "id": "numa.fourier.fft",
+    "label": "The fast Fourier transform",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.fourier",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.euler_identity",
+      "trig.ident.even_odd"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30
+    }
+  },
+  {
+    "id": "numa.integration.monte_carlo",
+    "label": "Monte Carlo integration",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.integration",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.rv.expectation",
+      "numa.integration.composite"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28
+    }
+  },
+  {
+    "id": "numa.least_squares.gauss_newton",
+    "label": "The Gauss-Newton method",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.linear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.interp.normal_equations",
+      "numa.roots.newton"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32
+    }
   }
 ]

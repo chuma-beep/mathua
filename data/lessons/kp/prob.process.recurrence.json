@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Returning to a state",
+    "section": "Returning to a state",
+    "subgoals": [
+      "Explain returning to a state",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  },
+  {
+    "label": "Stationary probabilities and return times",
+    "section": "Stationary probabilities and return times",
+    "subgoals": [
+      "Explain stationary probabilities and return times",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  },
+  {
+    "label": "Recurrence in practice",
+    "section": "Recurrence in practice",
+    "subgoals": [
+      "Explain recurrence in practice",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  }
+]

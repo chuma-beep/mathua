@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Images of basis vectors",
+    "section": "Images of Basis Vectors",
+    "subgoals": [
+      "Express a vector in the standard basis.",
+      "Use linearity to write the image as a combination.",
+      "Explain why the images of a basis determine the map."
+    ]
+  },
+  {
+    "label": "Building the standard matrix",
+    "section": "Building the Standard Matrix",
+    "subgoals": [
+      "Place each basis image in the corresponding column.",
+      "Recover the matrix of a rotation or reflection.",
+      "Apply the same rule in an arbitrary basis."
+    ]
+  },
+  {
+    "label": "Matrices under a change of basis",
+    "section": "Matrices under a Change of Basis",
+    "subgoals": [
+      "Define the change-of-basis matrix.",
+      "Compute the similar matrix.",
+      "Identify invariants such as trace and determinant."
+    ]
+  }
+]

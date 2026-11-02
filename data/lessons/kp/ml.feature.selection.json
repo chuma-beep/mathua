@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Why select features",
+    "section": "Why select features",
+    "subgoals": [
+      "Explain the main idea of why select features",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Searching subsets",
+    "section": "Searching subsets",
+    "subgoals": [
+      "Explain the main idea of searching subsets",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Collinearity",
+    "section": "Collinearity",
+    "subgoals": [
+      "Explain the main idea of collinearity",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  }
+]

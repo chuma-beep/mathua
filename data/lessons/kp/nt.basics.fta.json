@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Prime Factorisation",
+    "section": "Prime Factorisation",
+    "subgoals": [
+      "Factor a number into primes",
+      "Apply prime factorisation to a concrete example"
+    ]
+  },
+  {
+    "label": "Uniqueness",
+    "section": "Uniqueness",
+    "subgoals": [
+      "Argue uniqueness from the prime factorisation",
+      "Apply uniqueness to a concrete example"
+    ]
+  },
+  {
+    "label": "Counting Factors",
+    "section": "Counting Factors",
+    "subgoals": [
+      "Count divisors from the exponents",
+      "Apply counting factors to a concrete example"
+    ]
+  }
+]

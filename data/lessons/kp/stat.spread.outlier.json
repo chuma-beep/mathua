@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What an outlier is",
+    "section": "What an outlier is",
+    "subgoals": [
+      "Compare a value with the bulk",
+      "Separate unusual from impossible",
+      "Check the data before removing"
+    ]
+  },
+  {
+    "label": "The interquartile range fence",
+    "section": "The interquartile range fence",
+    "subgoals": [
+      "Find the quartiles",
+      "Compute the interquartile range",
+      "Place fences at 1.5 IQR"
+    ]
+  },
+  {
+    "label": "Deciding what to do",
+    "section": "Deciding what to do",
+    "subgoals": [
+      "Keep a genuine extreme value",
+      "Investigate a suspected error",
+      "Report the choice"
+    ]
+  }
+]

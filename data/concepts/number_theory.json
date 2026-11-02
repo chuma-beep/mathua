@@ -595,5 +595,140 @@
       "streak": 10,
       "avg_time_seconds": 24.0
     }
+  },
+  {
+    "id": "nt.basics.fta",
+    "label": "Fundamental theorem of arithmetic",
+    "domain": "number_theory",
+    "subdomain": "number_theory.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.basics.divisibility",
+      "nt.basics.gcd_euclidean"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "nt.adv.arithmetic_functions",
+    "label": "Arithmetic functions and Dirichlet convolution",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.divisor.sum",
+      "nt.adv.mobius"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "nt.adv.gaussian_integers",
+    "label": "Gaussian integers",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.two_squares",
+      "nt.basics.modular"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "nt.adv.four_squares",
+    "label": "Lagrange's four-square theorem",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.two_squares",
+      "nt.residue.count"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "nt.adv.hensel",
+    "label": "Hensel's lemma",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.modular_sqrt",
+      "nt.congruence.linear"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "nt.adv.farey",
+    "label": "Farey sequences",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.euler_phi",
+      "nt.adv.continued_fractions"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "nt.app.key_exchange",
+    "label": "Diffie-Hellman key exchange",
+    "domain": "number_theory",
+    "subdomain": "number_theory.applications",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.discrete_log",
+      "nt.app.crypto"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "nt.adv.quadratic_forms",
+    "label": "Binary quadratic forms",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.legendre",
+      "nt.adv.two_squares"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "nt.adv.valuation",
+    "label": "p-adic valuations",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.prime.exponent",
+      "nt.basics.divisibility"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
   }
 ]

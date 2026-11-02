@@ -1,0 +1,26 @@
+[
+  {
+    "label": "The Divide-and-Conquer Recurrence",
+    "section": "The Divide-and-Conquer Recurrence",
+    "subgoals": [
+      "Explain the divide-and-conquer recurrence.",
+      "Apply the divide-and-conquer recurrence to a worked example."
+    ]
+  },
+  {
+    "label": "Which Case Applies",
+    "section": "Which Case Applies",
+    "subgoals": [
+      "Explain which case applies.",
+      "Apply which case applies to a worked example."
+    ]
+  },
+  {
+    "label": "Reading the Exponent",
+    "section": "Reading the Exponent",
+    "subgoals": [
+      "Explain reading the exponent.",
+      "Apply reading the exponent to a worked example."
+    ]
+  }
+]

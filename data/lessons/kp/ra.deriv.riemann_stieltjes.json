@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Riemann-Stieltjes sums",
+    "section": "Riemann-Stieltjes sums",
+    "subgoals": [
+      "Explain the main idea of riemann-stieltjes sums.",
+      "Apply the result in riemann-stieltjes sums to a concrete example.",
+      "Recognise a common mistake involving riemann-stieltjes sums."
+    ]
+  },
+  {
+    "label": "Integration by parts",
+    "section": "Integration by parts",
+    "subgoals": [
+      "Explain the main idea of integration by parts.",
+      "Apply the result in integration by parts to a concrete example.",
+      "Recognise a common mistake involving integration by parts."
+    ]
+  },
+  {
+    "label": "When the integral exists",
+    "section": "When the integral exists",
+    "subgoals": [
+      "Explain the main idea of when the integral exists.",
+      "Apply the result in when the integral exists to a concrete example.",
+      "Recognise a common mistake involving when the integral exists."
+    ]
+  }
+]

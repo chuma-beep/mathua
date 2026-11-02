@@ -41,6 +41,17 @@ func Register(reg *generator.Registry) {
 	reg.Register("trig.func.arctangent", &arctangentFuncGen{})
 	reg.Register("trig.func.arccotangent", &arccotangentFuncGen{})
 
+	// Concepts added by the 2026 content expansion.
+	reg.Register("trig.eq.multiple_angle", &trigBridgeGen{kind: "multiple_angle"})
+	reg.Register("trig.basics.elevation_depression", &trigBridgeGen{kind: "elevation"})
+	reg.Register("trig.graph.sinusoidal_model", &trigBridgeGen{kind: "sinusoidal_model"})
+	reg.Register("trig.adv.inverse_composition", &trigBridgeGen{kind: "inverse_composition"})
+	reg.Register("trig.adv.vector_components", &trigBridgeGen{kind: "vector_components"})
+	reg.Register("trig.ident.even_odd", &trigBridgeGen{kind: "even_odd"})
+	reg.Register("trig.graph.frequency", &trigBridgeGen{kind: "frequency"})
+	reg.Register("trig.eq.using_identities", &trigBridgeGen{kind: "using_identities"})
+	reg.Register("trig.graph.harmonic_motion", &trigBridgeGen{kind: "harmonic_motion"})
+	reg.Register("trig.basics.segment_area", &trigBridgeGen{kind: "segment_area"})
 	registerComputed(reg)
 	registerRaise(reg)
 	registerFuncRatios(reg)

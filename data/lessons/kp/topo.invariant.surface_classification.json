@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Orientable Surfaces",
+    "section": "Orientable Surfaces",
+    "subgoals": [
+      "Explain orientable surfaces.",
+      "Use classification of surfaces in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  },
+  {
+    "label": "Nonorientable Surfaces",
+    "section": "Nonorientable Surfaces",
+    "subgoals": [
+      "Explain nonorientable surfaces.",
+      "Use classification of surfaces in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  },
+  {
+    "label": "The Classification Theorem",
+    "section": "The Classification Theorem",
+    "subgoals": [
+      "Explain the classification theorem.",
+      "Use classification of surfaces in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Theorem",
+    "section": "The Theorem",
+    "subgoals": [
+      "Explain the theorem",
+      "Apply the theorem in a worked example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Prime Divisors",
+    "section": "Prime Divisors",
+    "subgoals": [
+      "Explain prime divisors",
+      "Apply prime divisors in a worked example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Prime Power Groups",
+    "section": "Prime Power Groups",
+    "subgoals": [
+      "Explain prime power groups",
+      "Apply prime power groups in a worked example",
+      "Check the result against the definition"
+    ]
+  }
+]

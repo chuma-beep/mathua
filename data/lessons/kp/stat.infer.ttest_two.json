@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Two independent samples",
+    "section": "Two independent samples",
+    "subgoals": [
+      "Identify the two groups",
+      "State the difference in means",
+      "Keep the samples independent"
+    ]
+  },
+  {
+    "label": "The standard error of the difference",
+    "section": "The standard error of the difference",
+    "subgoals": [
+      "Combine the two variances",
+      "Divide each variance by its sample size",
+      "Take the square root"
+    ]
+  },
+  {
+    "label": "The two-sample t statistic",
+    "section": "The two-sample t statistic",
+    "subgoals": [
+      "Subtract the means",
+      "Divide by the standard error",
+      "Use the pooled degrees of freedom"
+    ]
+  }
+]

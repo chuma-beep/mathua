@@ -4998,5 +4998,1005 @@
   {
     "concept_id": "trig.adv.vector_projection",
     "source": "teaching/trig.adv.vector_projection.md"
+  },
+  {
+    "concept_id": "stat.spread.std_dev",
+    "source": "teaching/stat.spread.std_dev.md"
+  },
+  {
+    "concept_id": "stat.data.box_plot",
+    "source": "teaching/stat.data.box_plot.md"
+  },
+  {
+    "concept_id": "stat.reg.correlation",
+    "source": "teaching/stat.reg.correlation.md"
+  },
+  {
+    "concept_id": "stat.reg.least_squares",
+    "source": "teaching/stat.reg.least_squares.md"
+  },
+  {
+    "concept_id": "stat.test.chi_square_independence",
+    "source": "teaching/stat.test.chi_square_independence.md"
+  },
+  {
+    "concept_id": "stat.data.study_design",
+    "source": "teaching/stat.data.study_design.md"
+  },
+  {
+    "concept_id": "stat.sampling.methods",
+    "source": "teaching/stat.sampling.methods.md"
+  },
+  {
+    "concept_id": "prob.cond.definition",
+    "source": "teaching/prob.cond.definition.md"
+  },
+  {
+    "concept_id": "prob.rv.convolution",
+    "source": "teaching/prob.rv.convolution.md"
+  },
+  {
+    "concept_id": "prob.dist.binomial",
+    "source": "teaching/prob.dist.binomial.md"
+  },
+  {
+    "concept_id": "linalg.systems.row_reduction",
+    "source": "teaching/linalg.systems.row_reduction.md"
+  },
+  {
+    "concept_id": "linalg.matrix.fundamental_subspaces",
+    "source": "teaching/linalg.matrix.fundamental_subspaces.md"
+  },
+  {
+    "concept_id": "linalg.orth.gram_schmidt",
+    "source": "teaching/linalg.orth.gram_schmidt.md"
+  },
+  {
+    "concept_id": "linalg.transform.matrix",
+    "source": "teaching/linalg.transform.matrix.md"
+  },
+  {
+    "concept_id": "linalg.eigen.eigenspace",
+    "source": "teaching/linalg.eigen.eigenspace.md"
+  },
+  {
+    "concept_id": "ode.basics.slope_field",
+    "source": "teaching/ode.basics.slope_field.md"
+  },
+  {
+    "concept_id": "ode.first_order.logistic",
+    "source": "teaching/ode.first_order.logistic.md"
+  },
+  {
+    "concept_id": "ode.basics.existence_uniqueness",
+    "source": "teaching/ode.basics.existence_uniqueness.md"
+  },
+  {
+    "concept_id": "calc.integral.riemann_sums",
+    "source": "teaching/calc.integral.riemann_sums.md"
+  },
+  {
+    "concept_id": "calc.series.taylor_error",
+    "source": "teaching/calc.series.taylor_error.md"
+  },
+  {
+    "concept_id": "calc.series.termwise",
+    "source": "teaching/calc.series.termwise.md"
+  },
+  {
+    "concept_id": "calc.multi.functions_several",
+    "source": "teaching/calc.multi.functions_several.md"
+  },
+  {
+    "concept_id": "calc.multi.level_curves",
+    "source": "teaching/calc.multi.level_curves.md"
+  },
+  {
+    "concept_id": "calc.vec.vector_function",
+    "source": "teaching/calc.vec.vector_function.md"
+  },
+  {
+    "concept_id": "precalc.func.average_rate",
+    "source": "teaching/precalc.func.average_rate.md"
+  },
+  {
+    "concept_id": "linalg.systems.homogeneous",
+    "source": "teaching/linalg.systems.homogeneous.md"
+  },
+  {
+    "concept_id": "linalg.apps.leontief",
+    "source": "teaching/linalg.apps.leontief.md"
+  },
+  {
+    "concept_id": "stat.data.measurement_levels",
+    "source": "teaching/stat.data.measurement_levels.md"
+  },
+  {
+    "concept_id": "stat.infer.ttest_two",
+    "source": "teaching/stat.infer.ttest_two.md"
+  },
+  {
+    "concept_id": "stat.infer.paired",
+    "source": "teaching/stat.infer.paired.md"
+  },
+  {
+    "concept_id": "stat.infer.proportion_test",
+    "source": "teaching/stat.infer.proportion_test.md"
+  },
+  {
+    "concept_id": "stat.reg.residual",
+    "source": "teaching/stat.reg.residual.md"
+  },
+  {
+    "concept_id": "stat.spread.outlier",
+    "source": "teaching/stat.spread.outlier.md"
+  },
+  {
+    "concept_id": "stat.dist.normal_approx",
+    "source": "teaching/stat.dist.normal_approx.md"
+  },
+  {
+    "concept_id": "stat.dist.empirical_rule",
+    "source": "teaching/stat.dist.empirical_rule.md"
+  },
+  {
+    "concept_id": "stat.data.skew",
+    "source": "teaching/stat.data.skew.md"
+  },
+  {
+    "concept_id": "stat.infer.regression_slope",
+    "source": "teaching/stat.infer.regression_slope.md"
+  },
+  {
+    "concept_id": "prob.dist.poisson",
+    "source": "teaching/prob.dist.poisson.md"
+  },
+  {
+    "concept_id": "prob.dist.normal",
+    "source": "teaching/prob.dist.normal.md"
+  },
+  {
+    "concept_id": "prob.moments.skew_kurtosis",
+    "source": "teaching/prob.moments.skew_kurtosis.md"
+  },
+  {
+    "concept_id": "prob.joint.conditional_density",
+    "source": "teaching/prob.joint.conditional_density.md"
+  },
+  {
+    "concept_id": "prob.rv.pgf",
+    "source": "teaching/prob.rv.pgf.md"
+  },
+  {
+    "concept_id": "prob.process.recurrence",
+    "source": "teaching/prob.process.recurrence.md"
+  },
+  {
+    "concept_id": "prob.martingale.stopping",
+    "source": "teaching/prob.martingale.stopping.md"
+  },
+  {
+    "concept_id": "prob.rv.multivariate_transform",
+    "source": "teaching/prob.rv.multivariate_transform.md"
+  },
+  {
+    "concept_id": "prob.rv.integral_transform",
+    "source": "teaching/prob.rv.integral_transform.md"
+  },
+  {
+    "concept_id": "linalg.matrix.transpose",
+    "source": "teaching/linalg.matrix.transpose.md"
+  },
+  {
+    "concept_id": "linalg.det.properties",
+    "source": "teaching/linalg.det.properties.md"
+  },
+  {
+    "concept_id": "linalg.invertible.theorem",
+    "source": "teaching/linalg.invertible.theorem.md"
+  },
+  {
+    "concept_id": "linalg.eigen.similar",
+    "source": "teaching/linalg.eigen.similar.md"
+  },
+  {
+    "concept_id": "linalg.eigen.complex",
+    "source": "teaching/linalg.eigen.complex.md"
+  },
+  {
+    "concept_id": "linalg.vector.plane",
+    "source": "teaching/linalg.vector.plane.md"
+  },
+  {
+    "concept_id": "linalg.orth.least_squares",
+    "source": "teaching/linalg.orth.least_squares.md"
+  },
+  {
+    "concept_id": "geo.basic.transversal",
+    "source": "teaching/geo.basic.transversal.md"
+  },
+  {
+    "concept_id": "geo.triangle.congruence",
+    "source": "teaching/geo.triangle.congruence.md"
+  },
+  {
+    "concept_id": "geo.triangle.pythagorean_converse",
+    "source": "teaching/geo.triangle.pythagorean_converse.md"
+  },
+  {
+    "concept_id": "geo.triangle.special_right_45",
+    "source": "teaching/geo.triangle.special_right_45.md"
+  },
+  {
+    "concept_id": "geo.triangle.median_centroid",
+    "source": "teaching/geo.triangle.median_centroid.md"
+  },
+  {
+    "concept_id": "geo.transform.translation",
+    "source": "teaching/geo.transform.translation.md"
+  },
+  {
+    "concept_id": "geo.transform.reflection",
+    "source": "teaching/geo.transform.reflection.md"
+  },
+  {
+    "concept_id": "geo.transform.rotation",
+    "source": "teaching/geo.transform.rotation.md"
+  },
+  {
+    "concept_id": "geo.solid.cylinder",
+    "source": "teaching/geo.solid.cylinder.md"
+  },
+  {
+    "concept_id": "geo.solid.cone",
+    "source": "teaching/geo.solid.cone.md"
+  },
+  {
+    "concept_id": "geo.solid.sphere",
+    "source": "teaching/geo.solid.sphere.md"
+  },
+  {
+    "concept_id": "geo.solid.curved_surface_area",
+    "source": "teaching/geo.solid.curved_surface_area.md"
+  },
+  {
+    "concept_id": "geo.polygon.area_regular",
+    "source": "teaching/geo.polygon.area_regular.md"
+  },
+  {
+    "concept_id": "geo.circle.chord_segments",
+    "source": "teaching/geo.circle.chord_segments.md"
+  },
+  {
+    "concept_id": "geo.circle.secant",
+    "source": "teaching/geo.circle.secant.md"
+  },
+  {
+    "concept_id": "geo.similar.criteria",
+    "source": "teaching/geo.similar.criteria.md"
+  },
+  {
+    "concept_id": "geo.area.composite",
+    "source": "teaching/geo.area.composite.md"
+  },
+  {
+    "concept_id": "geo.triangle.angle_bisector",
+    "source": "teaching/geo.triangle.angle_bisector.md"
+  },
+  {
+    "concept_id": "geo.triangle.perpendicular_bisector",
+    "source": "teaching/geo.triangle.perpendicular_bisector.md"
+  },
+  {
+    "concept_id": "geo.quad.properties",
+    "source": "teaching/geo.quad.properties.md"
+  },
+  {
+    "concept_id": "geo.circle.arc_measure",
+    "source": "teaching/geo.circle.arc_measure.md"
+  },
+  {
+    "concept_id": "geo.solid.cross_section",
+    "source": "teaching/geo.solid.cross_section.md"
+  },
+  {
+    "concept_id": "geo.transform.symmetry",
+    "source": "teaching/geo.transform.symmetry.md"
+  },
+  {
+    "concept_id": "geo.solid.euler",
+    "source": "teaching/geo.solid.euler.md"
+  },
+  {
+    "concept_id": "alg.func.rate_of_change",
+    "source": "teaching/alg.func.rate_of_change.md"
+  },
+  {
+    "concept_id": "alg.poly.graph_zeros",
+    "source": "teaching/alg.poly.graph_zeros.md"
+  },
+  {
+    "concept_id": "alg.eq.quadratic_form",
+    "source": "teaching/alg.eq.quadratic_form.md"
+  },
+  {
+    "concept_id": "alg.ineq.linear_programming",
+    "source": "teaching/alg.ineq.linear_programming.md"
+  },
+  {
+    "concept_id": "alg.exp.natural_base",
+    "source": "teaching/alg.exp.natural_base.md"
+  },
+  {
+    "concept_id": "alg.linear.point_slope",
+    "source": "teaching/alg.linear.point_slope.md"
+  },
+  {
+    "concept_id": "alg.seq.recursive",
+    "source": "teaching/alg.seq.recursive.md"
+  },
+  {
+    "concept_id": "alg.radical.nth_root",
+    "source": "teaching/alg.radical.nth_root.md"
+  },
+  {
+    "concept_id": "alg.poly.fundamental_theorem",
+    "source": "teaching/alg.poly.fundamental_theorem.md"
+  },
+  {
+    "concept_id": "alg.exp.half_life",
+    "source": "teaching/alg.exp.half_life.md"
+  },
+  {
+    "concept_id": "alg.eq.rational_exponent",
+    "source": "teaching/alg.eq.rational_exponent.md"
+  },
+  {
+    "concept_id": "alg.eq.rational.word",
+    "source": "teaching/alg.eq.rational.word.md"
+  },
+  {
+    "concept_id": "alg.func.composite_domain",
+    "source": "teaching/alg.func.composite_domain.md"
+  },
+  {
+    "concept_id": "alg.eq.linear.word",
+    "source": "teaching/alg.eq.linear.word.md"
+  },
+  {
+    "concept_id": "alg.linear.horizontal_vertical",
+    "source": "teaching/alg.linear.horizontal_vertical.md"
+  },
+  {
+    "concept_id": "arith.mult.two_by_two",
+    "source": "teaching/arith.mult.two_by_two.md"
+  },
+  {
+    "concept_id": "arith.div.two_digit_divisor",
+    "source": "teaching/arith.div.two_digit_divisor.md"
+  },
+  {
+    "concept_id": "arith.factor.divisibility",
+    "source": "teaching/arith.factor.divisibility.md"
+  },
+  {
+    "concept_id": "arith.sub.zeros",
+    "source": "teaching/arith.sub.zeros.md"
+  },
+  {
+    "concept_id": "arith.ops.fact_families",
+    "source": "teaching/arith.ops.fact_families.md"
+  },
+  {
+    "concept_id": "arith.place.millions",
+    "source": "teaching/arith.place.millions.md"
+  },
+  {
+    "concept_id": "arith.add.missing_addend",
+    "source": "teaching/arith.add.missing_addend.md"
+  },
+  {
+    "concept_id": "arith.estimate.quotient",
+    "source": "teaching/arith.estimate.quotient.md"
+  },
+  {
+    "concept_id": "arith.factor.multiple",
+    "source": "teaching/arith.factor.multiple.md"
+  },
+  {
+    "concept_id": "arith.neg.compare",
+    "source": "teaching/arith.neg.compare.md"
+  },
+  {
+    "concept_id": "arith.factor.even_odd",
+    "source": "teaching/arith.factor.even_odd.md"
+  },
+  {
+    "concept_id": "arith.exp.standard_form",
+    "source": "teaching/arith.exp.standard_form.md"
+  },
+  {
+    "concept_id": "frac.ops.negative",
+    "source": "teaching/frac.ops.negative.md"
+  },
+  {
+    "concept_id": "frac.ops.repeating_decimal",
+    "source": "teaching/frac.ops.repeating_decimal.md"
+  },
+  {
+    "concept_id": "frac.mixed.borrow",
+    "source": "teaching/frac.mixed.borrow.md"
+  },
+  {
+    "concept_id": "frac.ops.estimate",
+    "source": "teaching/frac.ops.estimate.md"
+  },
+  {
+    "concept_id": "frac.word.multi_step",
+    "source": "teaching/frac.word.multi_step.md"
+  },
+  {
+    "concept_id": "frac.div.by_whole",
+    "source": "teaching/frac.div.by_whole.md"
+  },
+  {
+    "concept_id": "frac.compare.forms",
+    "source": "teaching/frac.compare.forms.md"
+  },
+  {
+    "concept_id": "prealg.ineq.negative",
+    "source": "teaching/prealg.ineq.negative.md"
+  },
+  {
+    "concept_id": "prealg.eq.fractions",
+    "source": "teaching/prealg.eq.fractions.md"
+  },
+  {
+    "concept_id": "ratio.ops.proportional_graph",
+    "source": "teaching/ratio.ops.proportional_graph.md"
+  },
+  {
+    "concept_id": "prealg.func.table",
+    "source": "teaching/prealg.func.table.md"
+  },
+  {
+    "concept_id": "prealg.graph.interpret",
+    "source": "teaching/prealg.graph.interpret.md"
+  },
+  {
+    "concept_id": "prealg.real.order_rational",
+    "source": "teaching/prealg.real.order_rational.md"
+  },
+  {
+    "concept_id": "dec.basics.place_value",
+    "source": "teaching/dec.basics.place_value.md"
+  },
+  {
+    "concept_id": "dec.ops.powers_ten",
+    "source": "teaching/dec.ops.powers_ten.md"
+  },
+  {
+    "concept_id": "prealg.measure.dimensional",
+    "source": "teaching/prealg.measure.dimensional.md"
+  },
+  {
+    "concept_id": "ratio.ops.table",
+    "source": "teaching/ratio.ops.table.md"
+  },
+  {
+    "concept_id": "prealg.expr.simplify",
+    "source": "teaching/prealg.expr.simplify.md"
+  },
+  {
+    "concept_id": "trig.eq.multiple_angle",
+    "source": "teaching/trig.eq.multiple_angle.md"
+  },
+  {
+    "concept_id": "trig.basics.elevation_depression",
+    "source": "teaching/trig.basics.elevation_depression.md"
+  },
+  {
+    "concept_id": "trig.graph.sinusoidal_model",
+    "source": "teaching/trig.graph.sinusoidal_model.md"
+  },
+  {
+    "concept_id": "trig.adv.inverse_composition",
+    "source": "teaching/trig.adv.inverse_composition.md"
+  },
+  {
+    "concept_id": "trig.adv.vector_components",
+    "source": "teaching/trig.adv.vector_components.md"
+  },
+  {
+    "concept_id": "trig.ident.even_odd",
+    "source": "teaching/trig.ident.even_odd.md"
+  },
+  {
+    "concept_id": "trig.graph.frequency",
+    "source": "teaching/trig.graph.frequency.md"
+  },
+  {
+    "concept_id": "trig.eq.using_identities",
+    "source": "teaching/trig.eq.using_identities.md"
+  },
+  {
+    "concept_id": "trig.graph.harmonic_motion",
+    "source": "teaching/trig.graph.harmonic_motion.md"
+  },
+  {
+    "concept_id": "trig.basics.segment_area",
+    "source": "teaching/trig.basics.segment_area.md"
+  },
+  {
+    "concept_id": "precalc.poly.graph",
+    "source": "teaching/precalc.poly.graph.md"
+  },
+  {
+    "concept_id": "precalc.exp.logistic",
+    "source": "teaching/precalc.exp.logistic.md"
+  },
+  {
+    "concept_id": "precalc.vector.unit",
+    "source": "teaching/precalc.vector.unit.md"
+  },
+  {
+    "concept_id": "precalc.conic.eccentricity",
+    "source": "teaching/precalc.conic.eccentricity.md"
+  },
+  {
+    "concept_id": "precalc.seq.explicit",
+    "source": "teaching/precalc.seq.explicit.md"
+  },
+  {
+    "concept_id": "precalc.conic.rotated",
+    "source": "teaching/precalc.conic.rotated.md"
+  },
+  {
+    "concept_id": "precalc.vector.three_d",
+    "source": "teaching/precalc.vector.three_d.md"
+  },
+  {
+    "concept_id": "calc.integral.properties",
+    "source": "teaching/calc.integral.properties.md"
+  },
+  {
+    "concept_id": "calc.deriv.definition",
+    "source": "teaching/calc.deriv.definition.md"
+  },
+  {
+    "concept_id": "calc.integral.initial_value",
+    "source": "teaching/calc.integral.initial_value.md"
+  },
+  {
+    "concept_id": "calc.deriv.rate",
+    "source": "teaching/calc.deriv.rate.md"
+  },
+  {
+    "concept_id": "calc.deriv.graph_reading",
+    "source": "teaching/calc.deriv.graph_reading.md"
+  },
+  {
+    "concept_id": "calc.integral.symmetry",
+    "source": "teaching/calc.integral.symmetry.md"
+  },
+  {
+    "concept_id": "calc.limit.trig",
+    "source": "teaching/calc.limit.trig.md"
+  },
+  {
+    "concept_id": "calc.series.maclaurin",
+    "source": "teaching/calc.series.maclaurin.md"
+  },
+  {
+    "concept_id": "calc.integral.inverse_trig",
+    "source": "teaching/calc.integral.inverse_trig.md"
+  },
+  {
+    "concept_id": "calc.integral.probability",
+    "source": "teaching/calc.integral.probability.md"
+  },
+  {
+    "concept_id": "calc.series.estimate",
+    "source": "teaching/calc.series.estimate.md"
+  },
+  {
+    "concept_id": "calc.integral.log",
+    "source": "teaching/calc.integral.log.md"
+  },
+  {
+    "concept_id": "calc.integral.rationalizing",
+    "source": "teaching/calc.integral.rationalizing.md"
+  },
+  {
+    "concept_id": "calc.multi.quadric_surfaces",
+    "source": "teaching/calc.multi.quadric_surfaces.md"
+  },
+  {
+    "concept_id": "calc.multi.triple_integral_region",
+    "source": "teaching/calc.multi.triple_integral_region.md"
+  },
+  {
+    "concept_id": "calc.vec.vector_field",
+    "source": "teaching/calc.vec.vector_field.md"
+  },
+  {
+    "concept_id": "calc.vec.surface_tangent",
+    "source": "teaching/calc.vec.surface_tangent.md"
+  },
+  {
+    "concept_id": "calc.multi.continuity",
+    "source": "teaching/calc.multi.continuity.md"
+  },
+  {
+    "concept_id": "calc.multi.moments_3d",
+    "source": "teaching/calc.multi.moments_3d.md"
+  },
+  {
+    "concept_id": "calc.vec.normal_line",
+    "source": "teaching/calc.vec.normal_line.md"
+  },
+  {
+    "concept_id": "discrete.recurrence.master_theorem",
+    "source": "teaching/discrete.recurrence.master_theorem.md"
+  },
+  {
+    "concept_id": "discrete.logic.boolean_functions",
+    "source": "teaching/discrete.logic.boolean_functions.md"
+  },
+  {
+    "concept_id": "discrete.combinatorics.burnside",
+    "source": "teaching/discrete.combinatorics.burnside.md"
+  },
+  {
+    "concept_id": "discrete.combinatorics.egf",
+    "source": "teaching/discrete.combinatorics.egf.md"
+  },
+  {
+    "concept_id": "discrete.logic.resolution",
+    "source": "teaching/discrete.logic.resolution.md"
+  },
+  {
+    "concept_id": "discrete.sets.relation_closure",
+    "source": "teaching/discrete.sets.relation_closure.md"
+  },
+  {
+    "concept_id": "discrete.automata.fsm",
+    "source": "teaching/discrete.automata.fsm.md"
+  },
+  {
+    "concept_id": "discrete.proof.cases",
+    "source": "teaching/discrete.proof.cases.md"
+  },
+  {
+    "concept_id": "discrete.coding.hamming",
+    "source": "teaching/discrete.coding.hamming.md"
+  },
+  {
+    "concept_id": "nt.basics.fta",
+    "source": "teaching/nt.basics.fta.md"
+  },
+  {
+    "concept_id": "nt.adv.arithmetic_functions",
+    "source": "teaching/nt.adv.arithmetic_functions.md"
+  },
+  {
+    "concept_id": "nt.adv.gaussian_integers",
+    "source": "teaching/nt.adv.gaussian_integers.md"
+  },
+  {
+    "concept_id": "nt.adv.four_squares",
+    "source": "teaching/nt.adv.four_squares.md"
+  },
+  {
+    "concept_id": "nt.adv.hensel",
+    "source": "teaching/nt.adv.hensel.md"
+  },
+  {
+    "concept_id": "nt.adv.farey",
+    "source": "teaching/nt.adv.farey.md"
+  },
+  {
+    "concept_id": "nt.app.key_exchange",
+    "source": "teaching/nt.app.key_exchange.md"
+  },
+  {
+    "concept_id": "nt.adv.quadratic_forms",
+    "source": "teaching/nt.adv.quadratic_forms.md"
+  },
+  {
+    "concept_id": "nt.adv.valuation",
+    "source": "teaching/nt.adv.valuation.md"
+  },
+  {
+    "concept_id": "graph.hamiltonian",
+    "source": "teaching/graph.hamiltonian.md"
+  },
+  {
+    "concept_id": "graph.blocks",
+    "source": "teaching/graph.blocks.md"
+  },
+  {
+    "concept_id": "graph.planar_dual",
+    "source": "teaching/graph.planar_dual.md"
+  },
+  {
+    "concept_id": "graph.automorphism",
+    "source": "teaching/graph.automorphism.md"
+  },
+  {
+    "concept_id": "graph.girth",
+    "source": "teaching/graph.girth.md"
+  },
+  {
+    "concept_id": "graph.four_color",
+    "source": "teaching/graph.four_color.md"
+  },
+  {
+    "concept_id": "graph.matroid",
+    "source": "teaching/graph.matroid.md"
+  },
+  {
+    "concept_id": "graph.shortest_path",
+    "source": "teaching/graph.shortest_path.md"
+  },
+  {
+    "concept_id": "graph.degeneracy",
+    "source": "teaching/graph.degeneracy.md"
+  },
+  {
+    "concept_id": "graph.mst",
+    "source": "teaching/graph.mst.md"
+  },
+  {
+    "concept_id": "abstract.rings.pid",
+    "source": "teaching/abstract.rings.pid.md"
+  },
+  {
+    "concept_id": "abstract.group.cayley",
+    "source": "teaching/abstract.group.cayley.md"
+  },
+  {
+    "concept_id": "abstract.group.direct_product",
+    "source": "teaching/abstract.group.direct_product.md"
+  },
+  {
+    "concept_id": "abstract.rings.irreducibility",
+    "source": "teaching/abstract.rings.irreducibility.md"
+  },
+  {
+    "concept_id": "abstract.group.abelian_classification",
+    "source": "teaching/abstract.group.abelian_classification.md"
+  },
+  {
+    "concept_id": "abstract.field.cyclotomic",
+    "source": "teaching/abstract.field.cyclotomic.md"
+  },
+  {
+    "concept_id": "abstract.field.algebraic_closure",
+    "source": "teaching/abstract.field.algebraic_closure.md"
+  },
+  {
+    "concept_id": "abstract.structures.fg_module",
+    "source": "teaching/abstract.structures.fg_module.md"
+  },
+  {
+    "concept_id": "abstract.field.radicals",
+    "source": "teaching/abstract.field.radicals.md"
+  },
+  {
+    "concept_id": "abstract.field.separable",
+    "source": "teaching/abstract.field.separable.md"
+  },
+  {
+    "concept_id": "ra.order.zorn",
+    "source": "teaching/ra.order.zorn.md"
+  },
+  {
+    "concept_id": "ra.order.schroder_bernstein",
+    "source": "teaching/ra.order.schroder_bernstein.md"
+  },
+  {
+    "concept_id": "ra.measure.null",
+    "source": "teaching/ra.measure.null.md"
+  },
+  {
+    "concept_id": "ra.measure.cantor_set",
+    "source": "teaching/ra.measure.cantor_set.md"
+  },
+  {
+    "concept_id": "ra.metric.total_bounded",
+    "source": "teaching/ra.metric.total_bounded.md"
+  },
+  {
+    "concept_id": "ra.seq.weierstrass_m",
+    "source": "teaching/ra.seq.weierstrass_m.md"
+  },
+  {
+    "concept_id": "ra.deriv.bounded_variation",
+    "source": "teaching/ra.deriv.bounded_variation.md"
+  },
+  {
+    "concept_id": "ra.deriv.riemann_stieltjes",
+    "source": "teaching/ra.deriv.riemann_stieltjes.md"
+  },
+  {
+    "concept_id": "ra.deriv.arzela_ascoli",
+    "source": "teaching/ra.deriv.arzela_ascoli.md"
+  },
+  {
+    "concept_id": "ra.deriv.weierstrass_approx",
+    "source": "teaching/ra.deriv.weierstrass_approx.md"
+  },
+  {
+    "concept_id": "topo.basics.spaces",
+    "source": "teaching/topo.basics.spaces.md"
+  },
+  {
+    "concept_id": "topo.connected.components",
+    "source": "teaching/topo.connected.components.md"
+  },
+  {
+    "concept_id": "topo.separation.normal",
+    "source": "teaching/topo.separation.normal.md"
+  },
+  {
+    "concept_id": "topo.algebraic.homotopy_equivalence",
+    "source": "teaching/topo.algebraic.homotopy_equivalence.md"
+  },
+  {
+    "concept_id": "topo.covering.universal",
+    "source": "teaching/topo.covering.universal.md"
+  },
+  {
+    "concept_id": "topo.manifolds.boundary",
+    "source": "teaching/topo.manifolds.boundary.md"
+  },
+  {
+    "concept_id": "topo.invariant.surface_classification",
+    "source": "teaching/topo.invariant.surface_classification.md"
+  },
+  {
+    "concept_id": "topo.compact.tychonoff",
+    "source": "teaching/topo.compact.tychonoff.md"
+  },
+  {
+    "concept_id": "topo.algebraic.degree",
+    "source": "teaching/topo.algebraic.degree.md"
+  },
+  {
+    "concept_id": "topo.algebraic.mayer_vietoris",
+    "source": "teaching/topo.algebraic.mayer_vietoris.md"
+  },
+  {
+    "concept_id": "complex.integral.cauchy_formula",
+    "source": "teaching/complex.integral.cauchy_formula.md"
+  },
+  {
+    "concept_id": "complex.adv.liouville",
+    "source": "teaching/complex.adv.liouville.md"
+  },
+  {
+    "concept_id": "complex.adv.maximum_modulus",
+    "source": "teaching/complex.adv.maximum_modulus.md"
+  },
+  {
+    "concept_id": "complex.integral.real_integrals",
+    "source": "teaching/complex.integral.real_integrals.md"
+  },
+  {
+    "concept_id": "complex.adv.argument_principle",
+    "source": "teaching/complex.adv.argument_principle.md"
+  },
+  {
+    "concept_id": "complex.adv.winding",
+    "source": "teaching/complex.adv.winding.md"
+  },
+  {
+    "concept_id": "complex.adv.riemann_mapping",
+    "source": "teaching/complex.adv.riemann_mapping.md"
+  },
+  {
+    "concept_id": "complex.adv.identity_theorem",
+    "source": "teaching/complex.adv.identity_theorem.md"
+  },
+  {
+    "concept_id": "complex.adv.morera",
+    "source": "teaching/complex.adv.morera.md"
+  },
+  {
+    "concept_id": "numa.linear.cholesky",
+    "source": "teaching/numa.linear.cholesky.md"
+  },
+  {
+    "concept_id": "numa.interp.hermite",
+    "source": "teaching/numa.interp.hermite.md"
+  },
+  {
+    "concept_id": "numa.linear.sor",
+    "source": "teaching/numa.linear.sor.md"
+  },
+  {
+    "concept_id": "numa.linear.iter_convergence",
+    "source": "teaching/numa.linear.iter_convergence.md"
+  },
+  {
+    "concept_id": "numa.linear.qr_algorithm",
+    "source": "teaching/numa.linear.qr_algorithm.md"
+  },
+  {
+    "concept_id": "numa.linear.cg",
+    "source": "teaching/numa.linear.cg.md"
+  },
+  {
+    "concept_id": "numa.fourier.fft",
+    "source": "teaching/numa.fourier.fft.md"
+  },
+  {
+    "concept_id": "numa.integration.monte_carlo",
+    "source": "teaching/numa.integration.monte_carlo.md"
+  },
+  {
+    "concept_id": "numa.least_squares.gauss_newton",
+    "source": "teaching/numa.least_squares.gauss_newton.md"
+  },
+  {
+    "concept_id": "ml.svm.margin",
+    "source": "teaching/ml.svm.margin.md"
+  },
+  {
+    "concept_id": "ml.svm.kernel",
+    "source": "teaching/ml.svm.kernel.md"
+  },
+  {
+    "concept_id": "ml.naive_bayes",
+    "source": "teaching/ml.naive_bayes.md"
+  },
+  {
+    "concept_id": "ml.bias_variance",
+    "source": "teaching/ml.bias_variance.md"
+  },
+  {
+    "concept_id": "ml.mdp.bellman",
+    "source": "teaching/ml.mdp.bellman.md"
+  },
+  {
+    "concept_id": "ml.cluster.em",
+    "source": "teaching/ml.cluster.em.md"
+  },
+  {
+    "concept_id": "ml.feature.selection",
+    "source": "teaching/ml.feature.selection.md"
+  },
+  {
+    "concept_id": "ml.multiclass",
+    "source": "teaching/ml.multiclass.md"
+  },
+  {
+    "concept_id": "ml.nlp.embedding",
+    "source": "teaching/ml.nlp.embedding.md"
+  },
+  {
+    "concept_id": "ml.optim.early_stopping",
+    "source": "teaching/ml.optim.early_stopping.md"
+  },
+  {
+    "concept_id": "prob.dist.geometric",
+    "source": "teaching/prob.dist.geometric.md"
+  },
+  {
+    "concept_id": "stat.reg.logistic",
+    "source": "teaching/stat.reg.logistic.md"
+  },
+  {
+    "concept_id": "geo.solid.frustum",
+    "source": "teaching/geo.solid.frustum.md"
+  },
+  {
+    "concept_id": "ode.second_order.forced",
+    "source": "teaching/ode.second_order.forced.md"
+  },
+  {
+    "concept_id": "abstract.group.cauchy",
+    "source": "teaching/abstract.group.cauchy.md"
   }
 ]

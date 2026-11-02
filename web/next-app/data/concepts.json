@@ -659,6 +659,174 @@
     "subdomain": "abstract_algebra.structures"
   },
   {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.rings.pid",
+    "label": "Principal ideal domains",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rings.euclidean",
+      "abstract.rings.ideal"
+    ],
+    "subdomain": "abstract_algebra.rings"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.group.cayley",
+    "label": "Cayley's theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.action",
+      "abstract.group.symmetric"
+    ],
+    "subdomain": "abstract_algebra.groups"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.group.direct_product",
+    "label": "Direct products of groups",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.cyclic",
+      "abstract.group.quotient_group"
+    ],
+    "subdomain": "abstract_algebra.groups"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.rings.irreducibility",
+    "label": "Irreducible polynomials",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rings.polynomial",
+      "abstract.field.finite"
+    ],
+    "subdomain": "abstract_algebra.rings"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.group.abelian_classification",
+    "label": "Classification of finite abelian groups",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.direct_product",
+      "abstract.group.cyclic"
+    ],
+    "subdomain": "abstract_algebra.groups"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.field.cyclotomic",
+    "label": "Cyclotomic polynomials",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.field.extension",
+      "abstract.field.algebraic"
+    ],
+    "subdomain": "abstract_algebra.fields"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.field.algebraic_closure",
+    "label": "Algebraic closure",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.field.algebraic",
+      "abstract.field.extension"
+    ],
+    "subdomain": "abstract_algebra.fields"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.structures.fg_module",
+    "label": "Finitely generated modules",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.structures.module_hom",
+      "abstract.structures.submodule"
+    ],
+    "subdomain": "abstract_algebra.structures"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.field.radicals",
+    "label": "Solvability by radicals",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.solvable",
+      "abstract.field.galois_group"
+    ],
+    "subdomain": "abstract_algebra.fields"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.field.separable",
+    "label": "Separable extensions",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.field.extension",
+      "abstract.rings.polynomial"
+    ],
+    "subdomain": "abstract_algebra.fields"
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.group.cauchy",
+    "key_prerequisites": [],
+    "label": "Cauchy's theorem for groups",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.lagrange",
+      "abstract.group.cyclic"
+    ],
+    "subdomain": "abstract_algebra.groups",
+    "variants": []
+  },
+  {
     "domain": "algebra",
     "grading_type": "numeric",
     "id": "alg.linear.slope",
@@ -2449,6 +2617,230 @@
     "subdomain": "algebra.polynomials"
   },
   {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.func.rate_of_change",
+    "label": "Average rate of change on an interval",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.func.concept",
+      "alg.linear.slope"
+    ],
+    "subdomain": "algebra.functions"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.poly.graph_zeros",
+    "label": "Zeros and the graph of a polynomial",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.poly.concept",
+      "alg.poly.roots"
+    ],
+    "subdomain": "algebra.polynomials"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.eq.quadratic_form",
+    "label": "The quadratic formula in standard form",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.quad.complete_square",
+      "alg.quad.formula"
+    ],
+    "subdomain": "algebra.quadratics"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.ineq.linear_programming",
+    "label": "Linear programming in two variables",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.ineq.systems",
+      "alg.systems.elimination"
+    ],
+    "subdomain": "algebra.inequalities"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.exp.natural_base",
+    "label": "The natural base e",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.exp.concept",
+      "alg.log.concept"
+    ],
+    "subdomain": "algebra.exponential"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.linear.point_slope",
+    "label": "Point-slope form of a line",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.linear.slope",
+      "alg.linear.slope_intercept"
+    ],
+    "subdomain": "algebra.linear"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.seq.recursive",
+    "label": "Recursively defined sequences",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.seq.arithmetic",
+      "alg.seq.geometric"
+    ],
+    "subdomain": "algebra.sequences"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.radical.nth_root",
+    "label": "nth roots and radical notation",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.radical.simplify",
+      "arith.exp.evaluate"
+    ],
+    "subdomain": "algebra.radicals"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.poly.fundamental_theorem",
+    "label": "The fundamental theorem of algebra",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.poly.roots",
+      "alg.quad.complex"
+    ],
+    "subdomain": "algebra.polynomials"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.exp.half_life",
+    "label": "Half-life and exponential decay",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.exp.concept",
+      "alg.eq.exponential"
+    ],
+    "subdomain": "algebra.exponential"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.eq.rational_exponent",
+    "label": "Equations with rational exponents",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.radical.rational_exponents",
+      "alg.eq.exponential"
+    ],
+    "subdomain": "algebra.equations"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.eq.rational.word",
+    "label": "Rational equation word problems",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.eq.rational",
+      "alg.rational.proportions"
+    ],
+    "subdomain": "algebra.equations"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.func.composite_domain",
+    "label": "Domain of a composite function",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.func.composite",
+      "alg.func.domain"
+    ],
+    "subdomain": "algebra.functions"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.eq.linear.word",
+    "label": "Linear equation word problems",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.eq.multi_step",
+      "alg.linear.slope_intercept"
+    ],
+    "subdomain": "algebra.equations"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.linear.horizontal_vertical",
+    "label": "Horizontal and vertical lines",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.linear.slope_intercept"
+    ],
+    "subdomain": "algebra.linear"
+  },
+  {
     "domain": "arithmetic",
     "grading_type": "numeric",
     "id": "arith.add.single",
@@ -3314,6 +3706,186 @@
     "subdomain": "arithmetic.exponents"
   },
   {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.mult.two_by_two",
+    "label": "Multiply two two-digit numbers",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.mult.double",
+      "arith.add.carry"
+    ],
+    "subdomain": "arithmetic.multiplication"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.div.two_digit_divisor",
+    "label": "Divide by a two-digit divisor",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.div.long",
+      "arith.mult.two_by_two"
+    ],
+    "subdomain": "arithmetic.division"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.factor.divisibility",
+    "label": "Divisibility rules for whole numbers",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.factor.find",
+      "arith.place.tens"
+    ],
+    "subdomain": "arithmetic.factors"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.sub.zeros",
+    "label": "Subtraction across zeros",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.sub.borrow",
+      "arith.place.hundreds"
+    ],
+    "subdomain": "arithmetic.subtraction"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.ops.fact_families",
+    "label": "Fact families",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.mult.tables",
+      "arith.div.basic"
+    ],
+    "subdomain": "arithmetic.multiplication"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.place.millions",
+    "label": "Place value to millions",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.place.thousands",
+      "arith.place.expanded"
+    ],
+    "subdomain": "arithmetic.place_value"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.add.missing_addend",
+    "label": "Missing addends",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.add.double",
+      "arith.sub.double"
+    ],
+    "subdomain": "arithmetic.addition"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.estimate.quotient",
+    "label": "Estimate quotients",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.round.tens",
+      "arith.div.two_digit_divisor"
+    ],
+    "subdomain": "arithmetic.estimation"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.factor.multiple",
+    "label": "Multiples of a number",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.mult.tables",
+      "arith.factor.find"
+    ],
+    "subdomain": "arithmetic.factors"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.neg.compare",
+    "label": "Comparing negative numbers",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.neg.number_line",
+      "arith.compare.whole"
+    ],
+    "subdomain": "arithmetic.negatives"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.factor.even_odd",
+    "label": "Even and odd numbers",
+    "mastery_threshold": {
+      "avg_time_seconds": 16,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.factor.find",
+      "arith.place.tens"
+    ],
+    "subdomain": "arithmetic.factors"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.exp.standard_form",
+    "label": "Numbers in standard form",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.exp.evaluate",
+      "arith.place.millions"
+    ],
+    "subdomain": "arithmetic.exponents"
+  },
+  {
     "domain": "calc1",
     "encompasses": [
       "alg.func.concept"
@@ -3591,7 +4163,7 @@
       "streak": 10
     },
     "prerequisites": [
-      "calc.integral.power_rule"
+      "calc.integral.riemann_sums"
     ],
     "subdomain": "calculus.integrals"
   },
@@ -4419,6 +4991,126 @@
       "calc.deriv.difference_quotient"
     ],
     "subdomain": "calculus.derivatives"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.integral.riemann_sums",
+    "label": "Riemann sums",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.power_rule",
+      "calc.limit.concept"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.integral.properties",
+    "label": "Properties of definite integrals",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.definite",
+      "calc.integral.power_rule"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.deriv.definition",
+    "label": "The derivative as a limit",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.deriv.difference_quotient",
+      "calc.limit.concept"
+    ],
+    "subdomain": "calculus.derivatives"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.integral.initial_value",
+    "label": "Initial value problems for antiderivatives",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.indefinite",
+      "calc.integral.definite"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.deriv.rate",
+    "label": "Average and instantaneous rates of change",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.deriv.concept",
+      "precalc.func.average_rate"
+    ],
+    "subdomain": "calculus.derivatives"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.deriv.graph_reading",
+    "label": "Reading derivatives from a graph",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.deriv.concept",
+      "calc.deriv.critical_points"
+    ],
+    "subdomain": "calculus.derivatives"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.integral.symmetry",
+    "label": "Symmetry and definite integrals",
+    "mastery_threshold": {
+      "avg_time_seconds": 23,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.definite",
+      "calc.integral.properties"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.limit.trig",
+    "label": "Trigonometric limits",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.limit.sine_limit",
+      "calc.limit.algebra"
+    ],
+    "subdomain": "calculus.limits"
   },
   {
     "domain": "calc2",
@@ -5311,6 +6003,127 @@
     "subdomain": "calculus.integrals"
   },
   {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.taylor_error",
+    "label": "Taylor remainder and error bounds",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.taylor",
+      "calc.series.remainder"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.termwise",
+    "label": "Termwise differentiation and integration",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.power",
+      "calc.series.function_series"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.maclaurin",
+    "label": "Maclaurin series",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.taylor",
+      "calc.series.radius"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.inverse_trig",
+    "label": "Integrals yielding inverse trigonometric functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.trig_substitution",
+      "calc.integral.power_rule"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.probability",
+    "label": "Probability from a density curve",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.improper",
+      "calc.integral.area_between"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.estimate",
+    "label": "Estimating the sum of a series",
+    "mastery_threshold": {
+      "avg_time_seconds": 27,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.alternating",
+      "calc.series.remainder",
+      "calc.series.taylor_error"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.log",
+    "label": "Integrals involving logarithms",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.parts",
+      "calc.integral.substitution"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.rationalizing",
+    "label": "Rationalizing substitutions",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.substitution",
+      "calc.integral.irrational"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
     "domain": "calc3",
     "grading_type": "symbolic",
     "id": "calc.deriv.partial",
@@ -6184,6 +6997,156 @@
     "subdomain": "calculus.vector"
   },
   {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.multi.functions_several",
+    "label": "Functions of several variables",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.deriv.partial",
+      "calc.limit.concept"
+    ],
+    "subdomain": "calculus.multivariable"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.multi.level_curves",
+    "label": "Level curves and contour diagrams",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.multi.functions_several",
+      "geo.coord.plot"
+    ],
+    "subdomain": "calculus.multivariable"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.vec.vector_function",
+    "label": "Vector-valued functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.vec.parametric_derivative",
+      "calc.deriv.partial"
+    ],
+    "subdomain": "calculus.vector"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.multi.quadric_surfaces",
+    "label": "Quadric surfaces",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.multi.functions_several",
+      "calc.multi.level_curves"
+    ],
+    "subdomain": "calculus.multivariable"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.multi.triple_integral_region",
+    "label": "Triple integrals over general regions",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.multi.triple_integral_box",
+      "calc.multi.double_integral_region"
+    ],
+    "subdomain": "calculus.multivariable"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.vec.vector_field",
+    "label": "Vector fields",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.vec.vector_function",
+      "calc.deriv.partial"
+    ],
+    "subdomain": "calculus.vector"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.vec.surface_tangent",
+    "label": "Tangent planes to parameterized surfaces",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.multi.tangent_plane",
+      "calc.vec.parametric_surface"
+    ],
+    "subdomain": "calculus.vector"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.multi.continuity",
+    "label": "Continuity of functions of several variables",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.multi.functions_several",
+      "calc.limit.continuity"
+    ],
+    "subdomain": "calculus.multivariable"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.multi.moments_3d",
+    "label": "Moments and centers of mass in three dimensions",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.multi.triple_integral_region",
+      "calc.multi.mass_lamina"
+    ],
+    "subdomain": "calculus.multivariable"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.vec.normal_line",
+    "label": "Normal lines to surfaces",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.multi.tangent_plane",
+      "calc.vec.vector_function"
+    ],
+    "subdomain": "calculus.vector"
+  },
+  {
     "domain": "complex_numbers",
     "grading_type": "complex",
     "id": "complex.basics.concept",
@@ -6789,6 +7752,222 @@
     "subdomain": "complex_numbers.topology"
   },
   {
+    "domain": "complex_numbers",
+    "encompasses": [
+      "complex.integral.cauchy_goursat",
+      "complex.adv.analytic"
+    ],
+    "grading_type": "numeric",
+    "id": "complex.integral.cauchy_formula",
+    "key_prerequisites": [
+      "complex.integral.cauchy_goursat",
+      "complex.adv.analytic"
+    ],
+    "label": "Cauchy integral formula",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.integral.cauchy_goursat",
+      "complex.adv.analytic"
+    ],
+    "subdomain": "complex_numbers.integral",
+    "variants": []
+  },
+  {
+    "domain": "complex_numbers",
+    "encompasses": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.analytic"
+    ],
+    "grading_type": "numeric",
+    "id": "complex.adv.liouville",
+    "key_prerequisites": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.analytic"
+    ],
+    "label": "Liouville's theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.analytic"
+    ],
+    "subdomain": "complex_numbers.advanced",
+    "variants": []
+  },
+  {
+    "domain": "complex_numbers",
+    "encompasses": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.harmonic"
+    ],
+    "grading_type": "numeric",
+    "id": "complex.adv.maximum_modulus",
+    "key_prerequisites": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.harmonic"
+    ],
+    "label": "The maximum modulus principle",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.harmonic"
+    ],
+    "subdomain": "complex_numbers.advanced",
+    "variants": []
+  },
+  {
+    "domain": "complex_numbers",
+    "encompasses": [
+      "complex.adv.residue",
+      "complex.integral.contour"
+    ],
+    "grading_type": "numeric",
+    "id": "complex.integral.real_integrals",
+    "key_prerequisites": [
+      "complex.adv.residue",
+      "complex.integral.contour"
+    ],
+    "label": "Real integrals by residues",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.residue",
+      "complex.integral.contour"
+    ],
+    "subdomain": "complex_numbers.integral",
+    "variants": []
+  },
+  {
+    "domain": "complex_numbers",
+    "encompasses": [
+      "complex.adv.residue",
+      "complex.adv.logarithm"
+    ],
+    "grading_type": "numeric",
+    "id": "complex.adv.argument_principle",
+    "key_prerequisites": [
+      "complex.adv.residue",
+      "complex.adv.logarithm"
+    ],
+    "label": "The argument principle",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.residue",
+      "complex.adv.logarithm"
+    ],
+    "subdomain": "complex_numbers.integral",
+    "variants": []
+  },
+  {
+    "domain": "complex_numbers",
+    "encompasses": [
+      "complex.integral.contour",
+      "complex.ops.argument"
+    ],
+    "grading_type": "numeric",
+    "id": "complex.adv.winding",
+    "key_prerequisites": [
+      "complex.integral.contour",
+      "complex.ops.argument"
+    ],
+    "label": "The winding number",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.integral.contour",
+      "complex.ops.argument"
+    ],
+    "subdomain": "complex_numbers.topology",
+    "variants": []
+  },
+  {
+    "domain": "complex_numbers",
+    "encompasses": [
+      "complex.adv.conformal",
+      "complex.topology.domain"
+    ],
+    "grading_type": "numeric",
+    "id": "complex.adv.riemann_mapping",
+    "key_prerequisites": [
+      "complex.adv.conformal",
+      "complex.topology.domain"
+    ],
+    "label": "The Riemann mapping theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 34,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.conformal",
+      "complex.topology.domain"
+    ],
+    "subdomain": "complex_numbers.topology",
+    "variants": []
+  },
+  {
+    "domain": "complex_numbers",
+    "encompasses": [
+      "complex.adv.analytic",
+      "complex.series.power"
+    ],
+    "grading_type": "numeric",
+    "id": "complex.adv.identity_theorem",
+    "key_prerequisites": [
+      "complex.adv.analytic",
+      "complex.series.power"
+    ],
+    "label": "The identity theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.analytic",
+      "complex.series.power"
+    ],
+    "subdomain": "complex_numbers.advanced",
+    "variants": []
+  },
+  {
+    "domain": "complex_numbers",
+    "encompasses": [
+      "complex.integral.cauchy_goursat",
+      "complex.adv.analytic"
+    ],
+    "grading_type": "numeric",
+    "id": "complex.adv.morera",
+    "key_prerequisites": [
+      "complex.integral.cauchy_goursat",
+      "complex.adv.analytic"
+    ],
+    "label": "Morera's theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.integral.cauchy_goursat",
+      "complex.adv.analytic"
+    ],
+    "subdomain": "complex_numbers.advanced",
+    "variants": []
+  },
+  {
     "domain": "differential_equations",
     "grading_type": "numeric",
     "id": "ode.basics.concept",
@@ -7387,6 +8566,70 @@
       "ode.numerical.euler"
     ],
     "subdomain": "differential_equations.numerical"
+  },
+  {
+    "domain": "differential_equations",
+    "grading_type": "numeric",
+    "id": "ode.basics.slope_field",
+    "label": "Slope fields and solution curves",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.basics.concept",
+      "calc.deriv.concept",
+      "geo.coord.plot"
+    ],
+    "subdomain": "differential_equations.basics"
+  },
+  {
+    "domain": "differential_equations",
+    "grading_type": "numeric",
+    "id": "ode.first_order.logistic",
+    "label": "The logistic equation",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.first_order.separable",
+      "calc.deriv.exp_log"
+    ],
+    "subdomain": "differential_equations.first_order"
+  },
+  {
+    "domain": "differential_equations",
+    "grading_type": "numeric",
+    "id": "ode.basics.existence_uniqueness",
+    "label": "Existence and uniqueness of solutions",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.basics.concept",
+      "calc.deriv.partial"
+    ],
+    "subdomain": "differential_equations.basics"
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.second_order.forced",
+    "key_prerequisites": [],
+    "label": "Forced oscillations",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.second_order.spring",
+      "ode.second_order.nonhomogeneous"
+    ],
+    "subdomain": "differential_equations.second_order",
+    "variants": []
   },
   {
     "domain": "discrete_math",
@@ -8185,6 +9428,213 @@
     "subdomain": "discrete_math.recurrence"
   },
   {
+    "domain": "discrete_math",
+    "encompasses": [
+      "discrete.sequences.recurrence",
+      "discrete.sequences.growth_rates"
+    ],
+    "grading_type": "numeric",
+    "id": "discrete.recurrence.master_theorem",
+    "key_prerequisites": [
+      "discrete.sequences.recurrence",
+      "discrete.sequences.growth_rates"
+    ],
+    "label": "The master theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.sequences.recurrence",
+      "discrete.sequences.growth_rates"
+    ],
+    "subdomain": "discrete_math.recurrence"
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [
+      "discrete.logic.truth_tables",
+      "discrete.logic.connectives"
+    ],
+    "grading_type": "numeric",
+    "id": "discrete.logic.boolean_functions",
+    "key_prerequisites": [
+      "discrete.logic.truth_tables",
+      "discrete.logic.connectives"
+    ],
+    "label": "Boolean functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.logic.truth_tables",
+      "discrete.logic.connectives"
+    ],
+    "subdomain": "discrete_math.logic"
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [
+      "discrete.combinatorics.permutations",
+      "discrete.sets.relations"
+    ],
+    "grading_type": "numeric",
+    "id": "discrete.combinatorics.burnside",
+    "key_prerequisites": [
+      "discrete.combinatorics.permutations",
+      "discrete.sets.relations"
+    ],
+    "label": "Burnside's lemma",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.combinatorics.permutations",
+      "discrete.sets.relations"
+    ],
+    "subdomain": "discrete_math.combinatorics"
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [
+      "discrete.sequences.generating_functions",
+      "discrete.combinatorics.factorial"
+    ],
+    "grading_type": "numeric",
+    "id": "discrete.combinatorics.egf",
+    "key_prerequisites": [
+      "discrete.sequences.generating_functions",
+      "discrete.combinatorics.factorial"
+    ],
+    "label": "Exponential generating functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.sequences.generating_functions",
+      "discrete.combinatorics.factorial"
+    ],
+    "subdomain": "discrete_math.combinatorics"
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [
+      "discrete.logic.equivalence",
+      "discrete.logic.inference"
+    ],
+    "grading_type": "numeric",
+    "id": "discrete.logic.resolution",
+    "key_prerequisites": [
+      "discrete.logic.equivalence",
+      "discrete.logic.inference"
+    ],
+    "label": "Resolution",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.logic.equivalence",
+      "discrete.logic.inference"
+    ],
+    "subdomain": "discrete_math.logic"
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [
+      "discrete.sets.relations",
+      "discrete.sets.partial_order"
+    ],
+    "grading_type": "numeric",
+    "id": "discrete.sets.relation_closure",
+    "key_prerequisites": [
+      "discrete.sets.relations",
+      "discrete.sets.partial_order"
+    ],
+    "label": "Closures of relations",
+    "mastery_threshold": {
+      "avg_time_seconds": 27,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.sets.relations",
+      "discrete.sets.partial_order"
+    ],
+    "subdomain": "discrete_math.sets"
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [
+      "discrete.graphs.paths",
+      "discrete.logic.truth_tables"
+    ],
+    "grading_type": "numeric",
+    "id": "discrete.automata.fsm",
+    "key_prerequisites": [
+      "discrete.graphs.paths",
+      "discrete.logic.truth_tables"
+    ],
+    "label": "Finite state machines",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.graphs.paths",
+      "discrete.logic.truth_tables"
+    ],
+    "subdomain": "discrete_math.automata"
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [
+      "discrete.proof.contradiction",
+      "discrete.proof.counterexample"
+    ],
+    "grading_type": "numeric",
+    "id": "discrete.proof.cases",
+    "key_prerequisites": [
+      "discrete.proof.contradiction",
+      "discrete.proof.counterexample"
+    ],
+    "label": "Proof by cases",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.proof.contradiction",
+      "discrete.proof.counterexample"
+    ],
+    "subdomain": "discrete_math.proof"
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [
+      "discrete.sets.powerset",
+      "discrete.logic.boolean_functions"
+    ],
+    "grading_type": "numeric",
+    "id": "discrete.coding.hamming",
+    "key_prerequisites": [
+      "discrete.sets.powerset",
+      "discrete.logic.boolean_functions"
+    ],
+    "label": "Hamming codes",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.sets.powerset",
+      "discrete.logic.boolean_functions"
+    ],
+    "subdomain": "discrete_math.coding"
+  },
+  {
     "domain": "fractions",
     "grading_type": "numeric",
     "id": "frac.basics.concept",
@@ -8828,6 +10278,112 @@
     },
     "prerequisites": [
       "frac.basics.equivalent"
+    ],
+    "subdomain": "fractions.equivalence"
+  },
+  {
+    "domain": "fractions",
+    "grading_type": "numeric",
+    "id": "frac.ops.negative",
+    "label": "Arithmetic with negative fractions",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "frac.add.diff",
+      "arith.neg.mult_div"
+    ],
+    "subdomain": "fractions.concept"
+  },
+  {
+    "domain": "fractions",
+    "grading_type": "numeric",
+    "id": "frac.ops.repeating_decimal",
+    "label": "Repeating decimals from fractions",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "frac.ops.to_decimal",
+      "frac.ops.simplify"
+    ],
+    "subdomain": "fractions.concept"
+  },
+  {
+    "domain": "fractions",
+    "grading_type": "numeric",
+    "id": "frac.mixed.borrow",
+    "label": "Borrowing with mixed numbers",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "frac.mixed.sub",
+      "frac.sub.whole"
+    ],
+    "subdomain": "fractions.mixed"
+  },
+  {
+    "domain": "fractions",
+    "grading_type": "numeric",
+    "id": "frac.ops.estimate",
+    "label": "Estimating with fractions",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "frac.ops.benchmark",
+      "arith.estimate.sum"
+    ],
+    "subdomain": "fractions.equivalence"
+  },
+  {
+    "domain": "fractions",
+    "grading_type": "numeric",
+    "id": "frac.word.multi_step",
+    "label": "Multi-step fraction word problems",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "frac.add.word",
+      "frac.sub.word",
+      "frac.of_number"
+    ],
+    "subdomain": "fractions.concept"
+  },
+  {
+    "domain": "fractions",
+    "grading_type": "numeric",
+    "id": "frac.div.by_whole",
+    "label": "Dividing a fraction by a whole number",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "frac.ops.div",
+      "frac.ops.mult"
+    ],
+    "subdomain": "fractions.division"
+  },
+  {
+    "domain": "fractions",
+    "grading_type": "numeric",
+    "id": "frac.compare.forms",
+    "label": "Comparing fractions decimals and percents",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "frac.ops.to_decimal",
+      "frac.ops.compare"
     ],
     "subdomain": "fractions.equivalence"
   },
@@ -9478,6 +11034,383 @@
     "subdomain": "geometry.circles"
   },
   {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.basic.transversal",
+    "label": "Transversals and angle pairs",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.basic.vertical",
+      "geo.basic.angles"
+    ],
+    "subdomain": "geometry.basics"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.triangle.congruence",
+    "label": "Triangle congruence criteria",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.triangle.types",
+      "geo.triangle.angles"
+    ],
+    "subdomain": "geometry.triangles"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.triangle.pythagorean_converse",
+    "label": "The converse of the Pythagorean theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.triangle.pythagorean"
+    ],
+    "subdomain": "geometry.triangles"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.triangle.special_right_45",
+    "label": "45-45-90 triangles",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.triangle.special_right",
+      "geo.triangle.pythagorean"
+    ],
+    "subdomain": "geometry.triangles"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.triangle.median_centroid",
+    "label": "Medians and the centroid",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.triangle.area",
+      "geo.coord.midpoint"
+    ],
+    "subdomain": "geometry.triangles"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.transform.translation",
+    "label": "Translations",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.coord.plot",
+      "geo.transform.dilation"
+    ],
+    "subdomain": "geometry.transform"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.transform.reflection",
+    "label": "Reflections",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.coord.plot",
+      "geo.coord.lines"
+    ],
+    "subdomain": "geometry.transform"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.transform.rotation",
+    "label": "Rotations",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.transform.dilation",
+      "geo.coord.plot"
+    ],
+    "subdomain": "geometry.transform"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.solid.cylinder",
+    "label": "Cylinders",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.circle.area",
+      "geo.solid.prism_volume"
+    ],
+    "subdomain": "geometry.solid"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.solid.cone",
+    "label": "Cones",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.solid.pyramid_volume",
+      "geo.circle.area"
+    ],
+    "subdomain": "geometry.solid"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.solid.sphere",
+    "label": "Spheres",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.circle.area",
+      "geo.solid.volume_rect"
+    ],
+    "subdomain": "geometry.solid"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.solid.curved_surface_area",
+    "label": "Curved surface areas",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.solid.surface_area",
+      "geo.circle.circumference"
+    ],
+    "subdomain": "geometry.solid"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.polygon.area_regular",
+    "label": "Areas of regular polygons",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.polygon.interior_angles",
+      "geo.triangle.area"
+    ],
+    "subdomain": "geometry.polygons"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.circle.chord_segments",
+    "label": "Segments in intersecting chords",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.circle.chord",
+      "geo.circle.inscribed_angle"
+    ],
+    "subdomain": "geometry.circles"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.circle.secant",
+    "label": "Secants and tangent-secant segments",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.circle.tangent_length",
+      "geo.circle.chord"
+    ],
+    "subdomain": "geometry.circles"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.similar.criteria",
+    "label": "Similarity criteria",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.similar.ratio",
+      "geo.triangle.angles"
+    ],
+    "subdomain": "geometry.similar"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.area.composite",
+    "label": "Areas of composite figures",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.quad.area",
+      "geo.triangle.area"
+    ],
+    "subdomain": "geometry.shapes"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.triangle.angle_bisector",
+    "label": "The angle bisector theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.triangle.angles",
+      "geo.triangle.isosceles"
+    ],
+    "subdomain": "geometry.triangles"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.triangle.perpendicular_bisector",
+    "label": "Perpendicular bisectors",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.coord.midpoint",
+      "geo.triangle.isosceles"
+    ],
+    "subdomain": "geometry.triangles"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.quad.properties",
+    "label": "Properties of special quadrilaterals",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.quad.types",
+      "geo.quad.area"
+    ],
+    "subdomain": "geometry.shapes"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.circle.arc_measure",
+    "label": "Arc measure and arc length",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.circle.inscribed_angle",
+      "geo.circle.circumference"
+    ],
+    "subdomain": "geometry.circles"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.solid.cross_section",
+    "label": "Cross sections of solids",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.solid.volume_rect",
+      "geo.solid.prism_volume"
+    ],
+    "subdomain": "geometry.solid"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.transform.symmetry",
+    "label": "Symmetry of plane figures",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.transform.dilation",
+      "geo.polygon.interior_angles"
+    ],
+    "subdomain": "geometry.transform"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.solid.euler",
+    "label": "Euler formula for polyhedra",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.solid.prism_volume",
+      "geo.solid.pyramid_volume"
+    ],
+    "subdomain": "geometry.solid"
+  },
+  {
+    "domain": "geometry",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "geo.solid.frustum",
+    "key_prerequisites": [],
+    "label": "Frustums",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.solid.cone",
+      "geo.solid.cylinder"
+    ],
+    "subdomain": "geometry.solid",
+    "variants": []
+  },
+  {
     "domain": "graph_theory",
     "grading_type": "numeric",
     "id": "graph.isomorphism",
@@ -10041,6 +11974,156 @@
     "subdomain": "graph_theory.flows"
   },
   {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.hamiltonian",
+    "label": "Hamiltonian cycles",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.graphs.eulerian",
+      "graph.distance"
+    ],
+    "subdomain": "graph_theory.basics"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.blocks",
+    "label": "Blocks and biconnected components",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.cut_vertex",
+      "graph.bridge"
+    ],
+    "subdomain": "graph_theory.connectivity"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.planar_dual",
+    "label": "Planar dual graphs",
+    "mastery_threshold": {
+      "avg_time_seconds": 27,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.graphs.planar",
+      "graph.kuratowski"
+    ],
+    "subdomain": "graph_theory.planarity"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.automorphism",
+    "label": "Graph automorphisms",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.isomorphism",
+      "graph.complement"
+    ],
+    "subdomain": "graph_theory.basics"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.girth",
+    "label": "Girth of a graph",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.distance",
+      "graph.subgraph"
+    ],
+    "subdomain": "graph_theory.connectivity"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.four_color",
+    "label": "The four color theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.kuratowski",
+      "discrete.graphs.coloring"
+    ],
+    "subdomain": "graph_theory.coloring"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.matroid",
+    "label": "Matroids",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.matching",
+      "graph.treewidth"
+    ],
+    "subdomain": "graph_theory.matching"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.shortest_path",
+    "label": "Shortest path algorithms",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.graphs.paths",
+      "graph.distance"
+    ],
+    "subdomain": "graph_theory.flows"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.degeneracy",
+    "label": "Graph degeneracy",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.subgraph",
+      "graph.distance"
+    ],
+    "subdomain": "graph_theory.extremal"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.mst",
+    "label": "Minimum spanning trees",
+    "mastery_threshold": {
+      "avg_time_seconds": 23,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.graphs.trees",
+      "graph.shortest_path"
+    ],
+    "subdomain": "graph_theory.flows"
+  },
+  {
     "domain": "linear_algebra",
     "grading_type": "numeric",
     "id": "linalg.vector.concept",
@@ -10297,8 +12380,7 @@
       "streak": 3
     },
     "prerequisites": [
-      "linalg.det.2x2",
-      "linalg.det.3x3"
+      "linalg.systems.row_reduction"
     ],
     "subdomain": "linear_algebra.matrices"
   },
@@ -10385,7 +12467,8 @@
     },
     "prerequisites": [
       "linalg.decomp.lu",
-      "linalg.inner_product"
+      "linalg.inner_product",
+      "linalg.orth.gram_schmidt"
     ],
     "subdomain": "linear_algebra.decompositions"
   },
@@ -10695,6 +12778,219 @@
       "linalg.matrix.mult"
     ],
     "subdomain": "linear_algebra.eigenvalues"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.systems.row_reduction",
+    "label": "Row reduction and echelon forms",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.systems.matrix",
+      "alg.systems.elimination"
+    ],
+    "subdomain": "linear_algebra.systems"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.matrix.fundamental_subspaces",
+    "label": "The four fundamental subspaces",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.matrix.rank",
+      "linalg.vec.basis",
+      "linalg.orth.complement"
+    ],
+    "subdomain": "linear_algebra.matrices"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.orth.gram_schmidt",
+    "label": "The Gram-Schmidt process",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.inner_product",
+      "linalg.vec.basis",
+      "linalg.orth.projection_coeff"
+    ],
+    "subdomain": "linear_algebra.inner_product"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.transform.matrix",
+    "label": "The matrix of a linear transformation",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.lintrans.concept",
+      "linalg.basis.change",
+      "linalg.matrix.mult"
+    ],
+    "subdomain": "linear_algebra.transformations"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.eigen.eigenspace",
+    "label": "Eigenspaces and algebraic multiplicity",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.eigen.compute",
+      "linalg.rank.nullity",
+      "linalg.transform.kernel"
+    ],
+    "subdomain": "linear_algebra.eigenvalues"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.systems.homogeneous",
+    "label": "Homogeneous linear systems",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.systems.row_reduction",
+      "linalg.rank.nullity"
+    ],
+    "subdomain": "linear_algebra.systems"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.apps.leontief",
+    "label": "Leontief input-output models",
+    "mastery_threshold": {
+      "avg_time_seconds": 35,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.systems.homogeneous",
+      "linalg.matrix.inverse_2x2"
+    ],
+    "subdomain": "linear_algebra.systems"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.matrix.transpose",
+    "label": "The transpose of a matrix",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.matrix.concept"
+    ],
+    "subdomain": "linear_algebra.matrices"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.det.properties",
+    "label": "Properties of determinants",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.det.3x3",
+      "linalg.matrix.mult"
+    ],
+    "subdomain": "linear_algebra.determinants"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.invertible.theorem",
+    "label": "The invertible matrix theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.matrix.inverse_2x2",
+      "linalg.matrix.rank"
+    ],
+    "subdomain": "linear_algebra.matrices"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.eigen.similar",
+    "label": "Similar matrices",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.eigen.diagonalization",
+      "linalg.basis.change"
+    ],
+    "subdomain": "linear_algebra.eigenvalues"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.eigen.complex",
+    "label": "Complex eigenvalues",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.eigen.compute",
+      "alg.quad.complex"
+    ],
+    "subdomain": "linear_algebra.eigenvalues"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.vector.plane",
+    "label": "Equations of a plane",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.vector.dot",
+      "linalg.vector.parametric"
+    ],
+    "subdomain": "linear_algebra.vectors"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.orth.least_squares",
+    "label": "Least-squares solutions",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.orth.projection_matrix",
+      "linalg.systems.row_reduction"
+    ],
+    "subdomain": "linear_algebra.inner_product"
   },
   {
     "domain": "machine_learning",
@@ -11348,6 +13644,156 @@
     "subdomain": "machine_learning.trees"
   },
   {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.svm.margin",
+    "label": "Support vector machines and margins",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.logistic.regression",
+      "linalg.vector.dot"
+    ],
+    "subdomain": "machine_learning.classification"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.svm.kernel",
+    "label": "The kernel trick",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.svm.margin",
+      "linalg.inner_product"
+    ],
+    "subdomain": "machine_learning.classification"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.naive_bayes",
+    "label": "Naive Bayes classifiers",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.cond.definition",
+      "ml.logistic.regression"
+    ],
+    "subdomain": "machine_learning.classification"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.bias_variance",
+    "label": "The bias-variance tradeoff",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.overfitting",
+      "ml.validation"
+    ],
+    "subdomain": "machine_learning.evaluation"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.mdp.bellman",
+    "label": "The Bellman equation",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.reinforcement.qlearning",
+      "prob.expect.conditional"
+    ],
+    "subdomain": "machine_learning.reinforcement"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.cluster.em",
+    "label": "Expectation-maximization",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.cluster.kmeans",
+      "stat.dist.normal"
+    ],
+    "subdomain": "machine_learning.unsupervised"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.feature.selection",
+    "label": "Feature selection",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.data.scaling",
+      "ml.validation"
+    ],
+    "subdomain": "machine_learning.data"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.multiclass",
+    "label": "Multiclass classification",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.logistic.regression",
+      "ml.eval.confusion"
+    ],
+    "subdomain": "machine_learning.classification"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.nlp.embedding",
+    "label": "Word embeddings",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.nlp.bert",
+      "linalg.vector.dot"
+    ],
+    "subdomain": "machine_learning.nlp"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.optim.early_stopping",
+    "label": "Early stopping",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.validation",
+      "ml.overfitting"
+    ],
+    "subdomain": "machine_learning.neural_networks"
+  },
+  {
     "domain": "number_theory",
     "grading_type": "numeric",
     "id": "nt.basics.divisibility",
@@ -11945,6 +14391,141 @@
     "subdomain": "number_theory.advanced"
   },
   {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.basics.fta",
+    "label": "Fundamental theorem of arithmetic",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.basics.divisibility",
+      "nt.basics.gcd_euclidean"
+    ],
+    "subdomain": "number_theory.basics"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.adv.arithmetic_functions",
+    "label": "Arithmetic functions and Dirichlet convolution",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.divisor.sum",
+      "nt.adv.mobius"
+    ],
+    "subdomain": "number_theory.advanced"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.adv.gaussian_integers",
+    "label": "Gaussian integers",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.adv.two_squares",
+      "nt.basics.modular"
+    ],
+    "subdomain": "number_theory.advanced"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.adv.four_squares",
+    "label": "Lagrange's four-square theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.adv.two_squares",
+      "nt.residue.count"
+    ],
+    "subdomain": "number_theory.advanced"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.adv.hensel",
+    "label": "Hensel's lemma",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.adv.modular_sqrt",
+      "nt.congruence.linear"
+    ],
+    "subdomain": "number_theory.advanced"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.adv.farey",
+    "label": "Farey sequences",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.adv.euler_phi",
+      "nt.adv.continued_fractions"
+    ],
+    "subdomain": "number_theory.advanced"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.app.key_exchange",
+    "label": "Diffie-Hellman key exchange",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.adv.discrete_log",
+      "nt.app.crypto"
+    ],
+    "subdomain": "number_theory.applications"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.adv.quadratic_forms",
+    "label": "Binary quadratic forms",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.adv.legendre",
+      "nt.adv.two_squares"
+    ],
+    "subdomain": "number_theory.advanced"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.adv.valuation",
+    "label": "p-adic valuations",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.prime.exponent",
+      "nt.basics.divisibility"
+    ],
+    "subdomain": "number_theory.advanced"
+  },
+  {
     "domain": "numerical_analysis",
     "grading_type": "numeric",
     "id": "numa.errors.absolute",
@@ -12505,6 +15086,140 @@
     "prerequisites": [
       "numa.interp.normal_equations",
       "linalg.decomp.qr"
+    ],
+    "subdomain": "numerical_analysis.linear"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.linear.cholesky",
+    "label": "Cholesky factorization",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.linear.lu",
+      "linalg.symmetric.spectral"
+    ],
+    "subdomain": "numerical_analysis.linear"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.interp.hermite",
+    "label": "Hermite interpolation",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.interp.divided_differences",
+      "calc.deriv.concept"
+    ],
+    "subdomain": "numerical_analysis.interp"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.linear.sor",
+    "label": "Successive over-relaxation",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.linear.gauss_seidel"
+    ],
+    "subdomain": "numerical_analysis.linear"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.linear.iter_convergence",
+    "label": "Convergence of iterative methods",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.linear.jacobi",
+      "numa.linear.gauss_seidel"
+    ],
+    "subdomain": "numerical_analysis.linear"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.linear.qr_algorithm",
+    "label": "The QR algorithm",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.decomp.qr",
+      "linalg.eigen.compute"
+    ],
+    "subdomain": "numerical_analysis.linear"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.linear.cg",
+    "label": "The conjugate gradient method",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.inner_product",
+      "numa.linear.least_squares_qr"
+    ],
+    "subdomain": "numerical_analysis.linear"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.fourier.fft",
+    "label": "The fast Fourier transform",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.euler_identity",
+      "trig.ident.even_odd"
+    ],
+    "subdomain": "numerical_analysis.fourier"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.integration.monte_carlo",
+    "label": "Monte Carlo integration",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.expectation",
+      "numa.integration.composite"
+    ],
+    "subdomain": "numerical_analysis.integration"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.least_squares.gauss_newton",
+    "label": "The Gauss-Newton method",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.interp.normal_equations",
+      "numa.roots.newton"
     ],
     "subdomain": "numerical_analysis.linear"
   },
@@ -13394,6 +16109,270 @@
     "subdomain": "prealgebra.measurement"
   },
   {
+    "domain": "prealgebra",
+    "encompasses": [
+      "prealg.ineq.one_step",
+      "arith.neg.mult_div"
+    ],
+    "grading_type": "numeric",
+    "id": "prealg.ineq.negative",
+    "key_prerequisites": [
+      "prealg.ineq.one_step",
+      "arith.neg.mult_div"
+    ],
+    "label": "Solving inequalities with negative coefficients",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.ineq.one_step",
+      "arith.neg.mult_div"
+    ],
+    "subdomain": "prealgebra.inequalities",
+    "variants": []
+  },
+  {
+    "domain": "prealgebra",
+    "encompasses": [
+      "prealg.eq.two_step",
+      "frac.ops.negative"
+    ],
+    "grading_type": "numeric",
+    "id": "prealg.eq.fractions",
+    "key_prerequisites": [
+      "prealg.eq.two_step",
+      "frac.ops.negative"
+    ],
+    "label": "Equations with fractional coefficients",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.eq.two_step",
+      "frac.ops.negative"
+    ],
+    "subdomain": "prealgebra.equations",
+    "variants": []
+  },
+  {
+    "domain": "prealgebra",
+    "encompasses": [
+      "ratio.ops.proportion",
+      "prealg.real.concept"
+    ],
+    "grading_type": "numeric",
+    "id": "ratio.ops.proportional_graph",
+    "key_prerequisites": [
+      "ratio.ops.proportion",
+      "prealg.real.concept"
+    ],
+    "label": "Graphs of proportional relationships",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ratio.ops.proportion",
+      "prealg.real.concept"
+    ],
+    "subdomain": "prealgebra.ratios",
+    "variants": []
+  },
+  {
+    "domain": "prealgebra",
+    "encompasses": [
+      "prealg.var.concept",
+      "prealg.expr.evaluate"
+    ],
+    "grading_type": "numeric",
+    "id": "prealg.func.table",
+    "key_prerequisites": [
+      "prealg.var.concept",
+      "prealg.expr.evaluate"
+    ],
+    "label": "Function tables",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.var.concept",
+      "prealg.expr.evaluate"
+    ],
+    "subdomain": "prealgebra.variables",
+    "variants": []
+  },
+  {
+    "domain": "prealgebra",
+    "encompasses": [
+      "prealg.real.concept",
+      "geo.coord.plot"
+    ],
+    "grading_type": "numeric",
+    "id": "prealg.graph.interpret",
+    "key_prerequisites": [
+      "prealg.real.concept",
+      "geo.coord.plot"
+    ],
+    "label": "Reading graphs of relationships",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.real.concept",
+      "geo.coord.plot"
+    ],
+    "subdomain": "prealgebra.variables",
+    "variants": []
+  },
+  {
+    "domain": "prealgebra",
+    "encompasses": [
+      "prealg.real.concept",
+      "dec.basics.compare"
+    ],
+    "grading_type": "numeric",
+    "id": "prealg.real.order_rational",
+    "key_prerequisites": [
+      "prealg.real.concept",
+      "dec.basics.compare"
+    ],
+    "label": "Ordering rational numbers",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.real.concept",
+      "dec.basics.compare"
+    ],
+    "subdomain": "prealgebra.variables",
+    "variants": []
+  },
+  {
+    "domain": "prealgebra",
+    "encompasses": [
+      "arith.dec.intro",
+      "arith.place.powers_ten"
+    ],
+    "grading_type": "numeric",
+    "id": "dec.basics.place_value",
+    "key_prerequisites": [
+      "arith.dec.intro",
+      "arith.place.powers_ten"
+    ],
+    "label": "Decimal place value",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.dec.intro",
+      "arith.place.powers_ten"
+    ],
+    "subdomain": "prealgebra.decimals",
+    "variants": []
+  },
+  {
+    "domain": "prealgebra",
+    "encompasses": [
+      "dec.ops.mult",
+      "arith.exp.evaluate"
+    ],
+    "grading_type": "numeric",
+    "id": "dec.ops.powers_ten",
+    "key_prerequisites": [
+      "dec.ops.mult",
+      "arith.exp.evaluate"
+    ],
+    "label": "Multiplying and dividing decimals by powers of ten",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "dec.ops.mult",
+      "arith.exp.evaluate"
+    ],
+    "subdomain": "prealgebra.decimals",
+    "variants": []
+  },
+  {
+    "domain": "prealgebra",
+    "encompasses": [
+      "prealg.measure.convert",
+      "prealg.measure.metric"
+    ],
+    "grading_type": "numeric",
+    "id": "prealg.measure.dimensional",
+    "key_prerequisites": [
+      "prealg.measure.convert",
+      "prealg.measure.metric"
+    ],
+    "label": "Dimensional analysis",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.measure.convert",
+      "prealg.measure.metric"
+    ],
+    "subdomain": "prealgebra.measurement",
+    "variants": []
+  },
+  {
+    "domain": "prealgebra",
+    "encompasses": [
+      "ratio.ops.proportion",
+      "prealg.func.table"
+    ],
+    "grading_type": "numeric",
+    "id": "ratio.ops.table",
+    "key_prerequisites": [
+      "ratio.ops.proportion",
+      "prealg.func.table"
+    ],
+    "label": "Ratio tables",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ratio.ops.proportion",
+      "prealg.func.table"
+    ],
+    "subdomain": "prealgebra.ratios",
+    "variants": []
+  },
+  {
+    "domain": "prealgebra",
+    "encompasses": [
+      "prealg.expr.like_terms",
+      "prealg.expr.distribute"
+    ],
+    "grading_type": "numeric",
+    "id": "prealg.expr.simplify",
+    "key_prerequisites": [
+      "prealg.expr.like_terms",
+      "prealg.expr.distribute"
+    ],
+    "label": "Simplifying algebraic expressions",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.expr.like_terms",
+      "prealg.expr.distribute"
+    ],
+    "subdomain": "prealgebra.variables",
+    "variants": []
+  },
+  {
     "domain": "precalculus",
     "grading_type": "numeric",
     "id": "precalc.func.transformations",
@@ -14114,88 +17093,124 @@
     "subdomain": "precalculus.functions"
   },
   {
-    "domain": "probability_theory",
+    "domain": "precalculus",
     "grading_type": "numeric",
-    "id": "prob.space.axioms",
-    "label": "Probability axioms",
+    "id": "precalc.func.average_rate",
+    "label": "Average rate of change",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.func.concept",
+      "alg.linear.slope"
+    ],
+    "subdomain": "precalculus.functions"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.poly.graph",
+    "label": "Sketching polynomial graphs",
     "mastery_threshold": {
       "avg_time_seconds": 26,
       "streak": 10
     },
     "prerequisites": [
-      "stat.prob.sample_space"
+      "alg.poly.end_behavior",
+      "precalc.poly.zeros_multiplicity"
     ],
-    "subdomain": "probability_theory.foundations"
+    "subdomain": "precalculus.polynomials"
   },
   {
-    "domain": "probability_theory",
+    "domain": "precalculus",
     "grading_type": "numeric",
-    "id": "prob.space.sigma_algebra",
-    "label": "Sigma-algebras and events",
+    "id": "precalc.exp.logistic",
+    "label": "Logistic growth models",
     "mastery_threshold": {
-      "avg_time_seconds": 28,
+      "avg_time_seconds": 27,
       "streak": 10
     },
     "prerequisites": [
-      "prob.space.axioms"
+      "precalc.exp.growth_model",
+      "precalc.rational.asymptote"
     ],
-    "subdomain": "probability_theory.foundations"
+    "subdomain": "precalculus.exponential"
   },
   {
-    "domain": "probability_theory",
+    "domain": "precalculus",
     "grading_type": "numeric",
-    "id": "prob.space.inclusion_exclusion",
-    "label": "Inclusion-exclusion",
+    "id": "precalc.vector.unit",
+    "label": "Unit vectors",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.vector.basics",
+      "precalc.vector.ops"
+    ],
+    "subdomain": "precalculus.vectors"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.conic.eccentricity",
+    "label": "Eccentricity of a conic",
     "mastery_threshold": {
       "avg_time_seconds": 26,
       "streak": 10
     },
     "prerequisites": [
-      "stat.prob.compound"
+      "precalc.conic.ellipse",
+      "precalc.conic.hyperbola"
     ],
-    "subdomain": "probability_theory.foundations"
+    "subdomain": "precalculus.conics"
   },
   {
-    "domain": "probability_theory",
+    "domain": "precalculus",
     "grading_type": "numeric",
-    "id": "prob.space.continuity",
-    "label": "Continuity of probability",
-    "mastery_threshold": {
-      "avg_time_seconds": 28,
-      "streak": 10
-    },
-    "prerequisites": [
-      "prob.space.axioms"
-    ],
-    "subdomain": "probability_theory.foundations"
-  },
-  {
-    "domain": "probability_theory",
-    "grading_type": "numeric",
-    "id": "prob.cond.multiplication",
-    "label": "The multiplication rule",
+    "id": "precalc.seq.explicit",
+    "label": "Explicit formulas for sequences",
     "mastery_threshold": {
       "avg_time_seconds": 24,
       "streak": 10
     },
     "prerequisites": [
-      "stat.prob.conditional"
+      "precalc.seq.arithmetic",
+      "precalc.seq.geometric"
     ],
-    "subdomain": "probability_theory.foundations"
+    "subdomain": "precalculus.sequences"
   },
   {
-    "domain": "probability_theory",
+    "domain": "precalculus",
     "grading_type": "numeric",
-    "id": "prob.cond.total_probability",
-    "label": "The law of total probability",
+    "id": "precalc.conic.rotated",
+    "label": "Rotated conic sections",
     "mastery_threshold": {
-      "avg_time_seconds": 26,
+      "avg_time_seconds": 30,
       "streak": 10
     },
     "prerequisites": [
-      "stat.prob.conditional"
+      "precalc.conic.general",
+      "trig.ident.double_angle"
     ],
-    "subdomain": "probability_theory.foundations"
+    "subdomain": "precalculus.conics"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.vector.three_d",
+    "label": "Vectors in three dimensions",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.vector.basics",
+      "precalc.vector.ops"
+    ],
+    "subdomain": "precalculus.vectors"
   },
   {
     "domain": "probability_theory",
@@ -14215,182 +17230,254 @@
   {
     "domain": "probability_theory",
     "grading_type": "numeric",
-    "id": "prob.independence.pairwise",
-    "label": "Pairwise and mutual independence",
+    "id": "prob.chf.clt",
+    "label": "The central limit theorem by characteristic functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.chf.continuity",
+      "prob.limit.clt"
+    ],
+    "subdomain": "probability_theory.characteristic"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.chf.continuity",
+    "label": "The continuity theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.chf.definition"
+    ],
+    "subdomain": "probability_theory.characteristic"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.chf.definition",
+    "label": "Characteristic functions",
     "mastery_threshold": {
       "avg_time_seconds": 28,
       "streak": 10
     },
     "prerequisites": [
-      "stat.prob.compound"
+      "prob.rv.mgf"
+    ],
+    "subdomain": "probability_theory.characteristic"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.chf.independence",
+    "label": "Characteristic functions of sums",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.chf.definition"
+    ],
+    "subdomain": "probability_theory.characteristic"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.chf.moments",
+    "label": "Moments from the characteristic function",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.chf.definition"
+    ],
+    "subdomain": "probability_theory.characteristic"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.cond.definition",
+    "label": "Conditional probability of an event",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.prob.conditional"
     ],
     "subdomain": "probability_theory.foundations"
   },
   {
     "domain": "probability_theory",
     "grading_type": "numeric",
-    "id": "prob.rv.definition",
-    "label": "Random variables",
-    "mastery_threshold": {
-      "avg_time_seconds": 26,
-      "streak": 10
-    },
-    "prerequisites": [
-      "stat.prob.discrete_rv"
-    ],
-    "subdomain": "probability_theory.random_variables"
-  },
-  {
-    "domain": "probability_theory",
-    "grading_type": "numeric",
-    "id": "prob.rv.cdf",
-    "label": "The distribution function",
-    "mastery_threshold": {
-      "avg_time_seconds": 28,
-      "streak": 10
-    },
-    "prerequisites": [
-      "stat.prob.continuous_rv"
-    ],
-    "subdomain": "probability_theory.random_variables"
-  },
-  {
-    "domain": "probability_theory",
-    "grading_type": "numeric",
-    "id": "prob.rv.pmf",
-    "label": "The probability mass function",
+    "id": "prob.cond.multiplication",
+    "label": "The multiplication rule",
     "mastery_threshold": {
       "avg_time_seconds": 24,
       "streak": 10
     },
     "prerequisites": [
-      "prob.rv.definition"
+      "prob.cond.definition"
     ],
-    "subdomain": "probability_theory.random_variables"
+    "subdomain": "probability_theory.foundations"
   },
   {
     "domain": "probability_theory",
     "grading_type": "numeric",
-    "id": "prob.rv.pdf",
-    "label": "The probability density function",
+    "id": "prob.cond.total_probability",
+    "label": "The law of total probability",
     "mastery_threshold": {
       "avg_time_seconds": 26,
       "streak": 10
     },
     "prerequisites": [
-      "prob.rv.cdf"
+      "prob.cond.definition"
     ],
-    "subdomain": "probability_theory.random_variables"
+    "subdomain": "probability_theory.foundations"
   },
   {
     "domain": "probability_theory",
     "grading_type": "numeric",
-    "id": "prob.rv.joint",
-    "label": "Joint probability mass functions",
+    "id": "prob.conv.almost_sure",
+    "label": "Almost-sure convergence",
     "mastery_threshold": {
       "avg_time_seconds": 28,
       "streak": 10
     },
     "prerequisites": [
-      "prob.rv.pmf"
+      "prob.conv.in_probability"
     ],
-    "subdomain": "probability_theory.random_variables"
+    "subdomain": "probability_theory.convergence"
   },
   {
     "domain": "probability_theory",
     "grading_type": "numeric",
-    "id": "prob.rv.expectation",
-    "label": "Expectation of a function of a random variable",
+    "id": "prob.conv.borel_cantelli",
+    "label": "The Borel-Cantelli lemmas",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.space.continuity"
+    ],
+    "subdomain": "probability_theory.convergence"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.conv.delta",
+    "label": "The delta method",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.limit.clt"
+    ],
+    "subdomain": "probability_theory.convergence"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.conv.in_distribution",
+    "label": "Convergence in distribution",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.conv.in_probability"
+    ],
+    "subdomain": "probability_theory.convergence"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.conv.in_probability",
+    "label": "Convergence in probability",
     "mastery_threshold": {
       "avg_time_seconds": 26,
       "streak": 10
     },
     "prerequisites": [
-      "stat.prob.expected_value"
+      "prob.limit.weak_law"
     ],
-    "subdomain": "probability_theory.random_variables"
+    "subdomain": "probability_theory.convergence"
   },
   {
     "domain": "probability_theory",
     "grading_type": "numeric",
-    "id": "prob.rv.variance",
-    "label": "Variance by the second moment",
+    "id": "prob.conv.slutsky",
+    "label": "Slutsky's theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.conv.in_distribution"
+    ],
+    "subdomain": "probability_theory.convergence"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.conv.strong_law",
+    "label": "The strong law of large numbers",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.limit.weak_law"
+    ],
+    "subdomain": "probability_theory.convergence"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.cov.correlation",
+    "label": "Correlation",
     "mastery_threshold": {
       "avg_time_seconds": 26,
       "streak": 10
     },
     "prerequisites": [
-      "stat.adv.variance"
+      "prob.cov.covariance"
     ],
-    "subdomain": "probability_theory.random_variables"
+    "subdomain": "probability_theory.joint"
   },
   {
     "domain": "probability_theory",
     "grading_type": "numeric",
-    "id": "prob.rv.mgf",
-    "label": "Moment generating functions",
-    "mastery_threshold": {
-      "avg_time_seconds": 28,
-      "streak": 10
-    },
-    "prerequisites": [
-      "prob.rv.expectation"
-    ],
-    "subdomain": "probability_theory.random_variables"
-  },
-  {
-    "domain": "probability_theory",
-    "grading_type": "numeric",
-    "id": "prob.rv.transform",
-    "label": "Transformations of random variables",
-    "mastery_threshold": {
-      "avg_time_seconds": 28,
-      "streak": 10
-    },
-    "prerequisites": [
-      "prob.rv.cdf"
-    ],
-    "subdomain": "probability_theory.random_variables"
-  },
-  {
-    "domain": "probability_theory",
-    "grading_type": "numeric",
-    "id": "prob.dist.order_stats",
-    "label": "Order statistics",
-    "mastery_threshold": {
-      "avg_time_seconds": 28,
-      "streak": 10
-    },
-    "prerequisites": [
-      "prob.rv.cdf"
-    ],
-    "subdomain": "probability_theory.distributions"
-  },
-  {
-    "domain": "probability_theory",
-    "grading_type": "numeric",
-    "id": "prob.dist.memoryless",
-    "label": "The memoryless property",
+    "id": "prob.cov.covariance",
+    "label": "Covariance",
     "mastery_threshold": {
       "avg_time_seconds": 26,
       "streak": 10
     },
     "prerequisites": [
-      "stat.dist.geometric"
+      "prob.rv.variance"
     ],
-    "subdomain": "probability_theory.distributions"
+    "subdomain": "probability_theory.joint"
   },
   {
     "domain": "probability_theory",
     "grading_type": "numeric",
-    "id": "prob.dist.poisson_process",
-    "label": "The Poisson process",
+    "id": "prob.dist.binomial",
+    "label": "The binomial distribution",
     "mastery_threshold": {
-      "avg_time_seconds": 28,
+      "avg_time_seconds": 25,
       "streak": 10
     },
     "prerequisites": [
-      "stat.dist.poisson"
+      "prob.rv.pmf",
+      "stat.dist.binomial"
     ],
     "subdomain": "probability_theory.distributions"
   },
@@ -14411,100 +17498,44 @@
   {
     "domain": "probability_theory",
     "grading_type": "numeric",
-    "id": "prob.limit.markov",
-    "label": "Markov's inequality",
+    "id": "prob.dist.memoryless",
+    "label": "The memoryless property",
     "mastery_threshold": {
       "avg_time_seconds": 26,
       "streak": 10
     },
     "prerequisites": [
-      "prob.rv.expectation"
+      "stat.dist.geometric"
     ],
-    "subdomain": "probability_theory.limits"
+    "subdomain": "probability_theory.distributions"
   },
   {
     "domain": "probability_theory",
     "grading_type": "numeric",
-    "id": "prob.limit.chebyshev",
-    "label": "Chebyshev's inequality",
-    "mastery_threshold": {
-      "avg_time_seconds": 26,
-      "streak": 10
-    },
-    "prerequisites": [
-      "prob.rv.variance"
-    ],
-    "subdomain": "probability_theory.limits"
-  },
-  {
-    "domain": "probability_theory",
-    "grading_type": "numeric",
-    "id": "prob.limit.weak_law",
-    "label": "The weak law of large numbers",
+    "id": "prob.dist.order_stats",
+    "label": "Order statistics",
     "mastery_threshold": {
       "avg_time_seconds": 28,
       "streak": 10
     },
     "prerequisites": [
-      "prob.limit.chebyshev"
+      "prob.rv.cdf"
     ],
-    "subdomain": "probability_theory.limits"
+    "subdomain": "probability_theory.distributions"
   },
   {
     "domain": "probability_theory",
     "grading_type": "numeric",
-    "id": "prob.limit.clt",
-    "label": "The central limit theorem",
-    "mastery_threshold": {
-      "avg_time_seconds": 30,
-      "streak": 10
-    },
-    "prerequisites": [
-      "prob.limit.chebyshev"
-    ],
-    "subdomain": "probability_theory.limits"
-  },
-  {
-    "domain": "probability_theory",
-    "grading_type": "numeric",
-    "id": "prob.joint.marginal",
-    "label": "Marginal distributions",
-    "mastery_threshold": {
-      "avg_time_seconds": 26,
-      "streak": 10
-    },
-    "prerequisites": [
-      "prob.rv.joint"
-    ],
-    "subdomain": "probability_theory.joint"
-  },
-  {
-    "domain": "probability_theory",
-    "grading_type": "numeric",
-    "id": "prob.joint.continuous",
-    "label": "Joint densities",
+    "id": "prob.dist.poisson_process",
+    "label": "The Poisson process",
     "mastery_threshold": {
       "avg_time_seconds": 28,
       "streak": 10
     },
     "prerequisites": [
-      "prob.rv.pdf"
+      "stat.dist.poisson"
     ],
-    "subdomain": "probability_theory.joint"
-  },
-  {
-    "domain": "probability_theory",
-    "grading_type": "numeric",
-    "id": "prob.joint.rv_independence",
-    "label": "Independent random variables",
-    "mastery_threshold": {
-      "avg_time_seconds": 28,
-      "streak": 10
-    },
-    "prerequisites": [
-      "prob.joint.marginal"
-    ],
-    "subdomain": "probability_theory.joint"
+    "subdomain": "probability_theory.distributions"
   },
   {
     "domain": "probability_theory",
@@ -14552,8 +17583,64 @@
   {
     "domain": "probability_theory",
     "grading_type": "numeric",
-    "id": "prob.cov.covariance",
-    "label": "Covariance",
+    "id": "prob.independence.pairwise",
+    "label": "Pairwise and mutual independence",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.prob.compound"
+    ],
+    "subdomain": "probability_theory.foundations"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.joint.continuous",
+    "label": "Joint densities",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.pdf"
+    ],
+    "subdomain": "probability_theory.joint"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.joint.marginal",
+    "label": "Marginal distributions",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.joint"
+    ],
+    "subdomain": "probability_theory.joint"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.joint.rv_independence",
+    "label": "Independent random variables",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.joint.marginal"
+    ],
+    "subdomain": "probability_theory.joint"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.limit.chebyshev",
+    "label": "Chebyshev's inequality",
     "mastery_threshold": {
       "avg_time_seconds": 26,
       "streak": 10
@@ -14561,190 +17648,49 @@
     "prerequisites": [
       "prob.rv.variance"
     ],
-    "subdomain": "probability_theory.joint"
+    "subdomain": "probability_theory.limits"
   },
   {
     "domain": "probability_theory",
     "grading_type": "numeric",
-    "id": "prob.cov.correlation",
-    "label": "Correlation",
+    "id": "prob.limit.clt",
+    "label": "The central limit theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.limit.chebyshev"
+    ],
+    "subdomain": "probability_theory.limits"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.limit.markov",
+    "label": "Markov's inequality",
     "mastery_threshold": {
       "avg_time_seconds": 26,
       "streak": 10
     },
     "prerequisites": [
-      "prob.cov.covariance"
+      "prob.rv.expectation"
     ],
-    "subdomain": "probability_theory.joint"
+    "subdomain": "probability_theory.limits"
   },
   {
     "domain": "probability_theory",
     "grading_type": "numeric",
-    "id": "prob.conv.in_probability",
-    "label": "Convergence in probability",
-    "mastery_threshold": {
-      "avg_time_seconds": 26,
-      "streak": 10
-    },
-    "prerequisites": [
-      "prob.limit.weak_law"
-    ],
-    "subdomain": "probability_theory.convergence"
-  },
-  {
-    "domain": "probability_theory",
-    "grading_type": "numeric",
-    "id": "prob.conv.in_distribution",
-    "label": "Convergence in distribution",
+    "id": "prob.limit.weak_law",
+    "label": "The weak law of large numbers",
     "mastery_threshold": {
       "avg_time_seconds": 28,
       "streak": 10
     },
     "prerequisites": [
-      "prob.conv.in_probability"
+      "prob.limit.chebyshev"
     ],
-    "subdomain": "probability_theory.convergence"
-  },
-  {
-    "domain": "probability_theory",
-    "grading_type": "numeric",
-    "id": "prob.conv.almost_sure",
-    "label": "Almost-sure convergence",
-    "mastery_threshold": {
-      "avg_time_seconds": 28,
-      "streak": 10
-    },
-    "prerequisites": [
-      "prob.conv.in_probability"
-    ],
-    "subdomain": "probability_theory.convergence"
-  },
-  {
-    "domain": "probability_theory",
-    "grading_type": "numeric",
-    "id": "prob.conv.strong_law",
-    "label": "The strong law of large numbers",
-    "mastery_threshold": {
-      "avg_time_seconds": 28,
-      "streak": 10
-    },
-    "prerequisites": [
-      "prob.limit.weak_law"
-    ],
-    "subdomain": "probability_theory.convergence"
-  },
-  {
-    "domain": "probability_theory",
-    "grading_type": "numeric",
-    "id": "prob.conv.borel_cantelli",
-    "label": "The Borel-Cantelli lemmas",
-    "mastery_threshold": {
-      "avg_time_seconds": 30,
-      "streak": 10
-    },
-    "prerequisites": [
-      "prob.space.continuity"
-    ],
-    "subdomain": "probability_theory.convergence"
-  },
-  {
-    "domain": "probability_theory",
-    "grading_type": "numeric",
-    "id": "prob.conv.slutsky",
-    "label": "Slutsky's theorem",
-    "mastery_threshold": {
-      "avg_time_seconds": 28,
-      "streak": 10
-    },
-    "prerequisites": [
-      "prob.conv.in_distribution"
-    ],
-    "subdomain": "probability_theory.convergence"
-  },
-  {
-    "domain": "probability_theory",
-    "grading_type": "numeric",
-    "id": "prob.conv.delta",
-    "label": "The delta method",
-    "mastery_threshold": {
-      "avg_time_seconds": 30,
-      "streak": 10
-    },
-    "prerequisites": [
-      "prob.limit.clt"
-    ],
-    "subdomain": "probability_theory.convergence"
-  },
-  {
-    "domain": "probability_theory",
-    "grading_type": "numeric",
-    "id": "prob.chf.definition",
-    "label": "Characteristic functions",
-    "mastery_threshold": {
-      "avg_time_seconds": 28,
-      "streak": 10
-    },
-    "prerequisites": [
-      "prob.rv.mgf"
-    ],
-    "subdomain": "probability_theory.characteristic"
-  },
-  {
-    "domain": "probability_theory",
-    "grading_type": "numeric",
-    "id": "prob.chf.moments",
-    "label": "Moments from the characteristic function",
-    "mastery_threshold": {
-      "avg_time_seconds": 28,
-      "streak": 10
-    },
-    "prerequisites": [
-      "prob.chf.definition"
-    ],
-    "subdomain": "probability_theory.characteristic"
-  },
-  {
-    "domain": "probability_theory",
-    "grading_type": "numeric",
-    "id": "prob.chf.independence",
-    "label": "Characteristic functions of sums",
-    "mastery_threshold": {
-      "avg_time_seconds": 26,
-      "streak": 10
-    },
-    "prerequisites": [
-      "prob.chf.definition"
-    ],
-    "subdomain": "probability_theory.characteristic"
-  },
-  {
-    "domain": "probability_theory",
-    "grading_type": "numeric",
-    "id": "prob.chf.continuity",
-    "label": "The continuity theorem",
-    "mastery_threshold": {
-      "avg_time_seconds": 30,
-      "streak": 10
-    },
-    "prerequisites": [
-      "prob.chf.definition"
-    ],
-    "subdomain": "probability_theory.characteristic"
-  },
-  {
-    "domain": "probability_theory",
-    "grading_type": "numeric",
-    "id": "prob.chf.clt",
-    "label": "The central limit theorem by characteristic functions",
-    "mastery_threshold": {
-      "avg_time_seconds": 30,
-      "streak": 10
-    },
-    "prerequisites": [
-      "prob.chf.continuity",
-      "prob.limit.clt"
-    ],
-    "subdomain": "probability_theory.characteristic"
+    "subdomain": "probability_theory.limits"
   },
   {
     "domain": "probability_theory",
@@ -14763,8 +17709,22 @@
   {
     "domain": "probability_theory",
     "grading_type": "numeric",
-    "id": "prob.process.transition_matrix",
-    "label": "Transition matrices",
+    "id": "prob.process.martingale",
+    "label": "Martingales",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.expect.conditional"
+    ],
+    "subdomain": "probability_theory.processes"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.process.random_walk",
+    "label": "Random walks",
     "mastery_threshold": {
       "avg_time_seconds": 26,
       "streak": 10
@@ -14791,8 +17751,8 @@
   {
     "domain": "probability_theory",
     "grading_type": "numeric",
-    "id": "prob.process.random_walk",
-    "label": "Random walks",
+    "id": "prob.process.transition_matrix",
+    "label": "Transition matrices",
     "mastery_threshold": {
       "avg_time_seconds": 26,
       "streak": 10
@@ -14805,16 +17765,353 @@
   {
     "domain": "probability_theory",
     "grading_type": "numeric",
-    "id": "prob.process.martingale",
-    "label": "Martingales",
+    "id": "prob.rv.cdf",
+    "label": "The distribution function",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.prob.continuous_rv"
+    ],
+    "subdomain": "probability_theory.random_variables"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.rv.convolution",
+    "label": "Convolution of random variables",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.transform",
+      "prob.joint.rv_independence",
+      "prob.rv.pdf"
+    ],
+    "subdomain": "probability_theory.random_variables"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.rv.definition",
+    "label": "Random variables",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.prob.discrete_rv"
+    ],
+    "subdomain": "probability_theory.random_variables"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.rv.expectation",
+    "label": "Expectation of a function of a random variable",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.prob.expected_value"
+    ],
+    "subdomain": "probability_theory.random_variables"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.rv.joint",
+    "label": "Joint probability mass functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.pmf"
+    ],
+    "subdomain": "probability_theory.random_variables"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.rv.mgf",
+    "label": "Moment generating functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.expectation"
+    ],
+    "subdomain": "probability_theory.random_variables"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.rv.pdf",
+    "label": "The probability density function",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.cdf"
+    ],
+    "subdomain": "probability_theory.random_variables"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.rv.pmf",
+    "label": "The probability mass function",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.definition"
+    ],
+    "subdomain": "probability_theory.random_variables"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.rv.transform",
+    "label": "Transformations of random variables",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.cdf"
+    ],
+    "subdomain": "probability_theory.random_variables"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.rv.variance",
+    "label": "Variance by the second moment",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.adv.variance"
+    ],
+    "subdomain": "probability_theory.random_variables"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.space.axioms",
+    "label": "Probability axioms",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.prob.sample_space"
+    ],
+    "subdomain": "probability_theory.foundations"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.space.continuity",
+    "label": "Continuity of probability",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.space.axioms"
+    ],
+    "subdomain": "probability_theory.foundations"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.space.inclusion_exclusion",
+    "label": "Inclusion-exclusion",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.prob.compound"
+    ],
+    "subdomain": "probability_theory.foundations"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.space.sigma_algebra",
+    "label": "Sigma-algebras and events",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.space.axioms"
+    ],
+    "subdomain": "probability_theory.foundations"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.dist.poisson",
+    "label": "The Poisson distribution",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.pmf",
+      "stat.dist.poisson"
+    ],
+    "subdomain": "probability_theory.distributions"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.dist.normal",
+    "label": "The normal distribution",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.pdf",
+      "stat.dist.normal"
+    ],
+    "subdomain": "probability_theory.distributions"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.moments.skew_kurtosis",
+    "label": "Skewness and kurtosis",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.variance",
+      "prob.rv.expectation"
+    ],
+    "subdomain": "probability_theory.moments"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.joint.conditional_density",
+    "label": "Conditional densities",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.joint.continuous",
+      "prob.expect.conditional"
+    ],
+    "subdomain": "probability_theory.joint_distributions"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.rv.pgf",
+    "label": "Probability generating functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 27,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.mgf",
+      "prob.rv.pmf"
+    ],
+    "subdomain": "probability_theory.random_variables"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.process.recurrence",
+    "label": "Recurrence and return times",
+    "mastery_threshold": {
+      "avg_time_seconds": 29,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.process.markov_chain",
+      "prob.process.stationary"
+    ],
+    "subdomain": "probability_theory.processes"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.martingale.stopping",
+    "label": "Optional stopping",
     "mastery_threshold": {
       "avg_time_seconds": 30,
       "streak": 10
     },
     "prerequisites": [
+      "prob.process.martingale",
       "prob.expect.conditional"
     ],
     "subdomain": "probability_theory.processes"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.rv.multivariate_transform",
+    "label": "Transformations of random vectors",
+    "mastery_threshold": {
+      "avg_time_seconds": 29,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.transform",
+      "prob.joint.continuous"
+    ],
+    "subdomain": "probability_theory.random_variables"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.rv.integral_transform",
+    "label": "The probability integral transform",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.transform",
+      "prob.rv.cdf"
+    ],
+    "subdomain": "probability_theory.random_variables"
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.dist.geometric",
+    "key_prerequisites": [],
+    "label": "The geometric distribution",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.pmf",
+      "prob.dist.memoryless"
+    ],
+    "subdomain": "probability_theory.distributions",
+    "variants": []
   },
   {
     "domain": "real_analysis",
@@ -15591,6 +18888,157 @@
       "calc.series.concept"
     ],
     "subdomain": "real_analysis.seq"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.order.zorn",
+    "label": "Zorn's lemma",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.order.completeness",
+      "ra.order.extended"
+    ],
+    "subdomain": "real_analysis.order"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.order.schroder_bernstein",
+    "label": "The Schroder-Bernstein theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.order.countable",
+      "ra.order.uncountable"
+    ],
+    "subdomain": "real_analysis.order"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.measure.null",
+    "label": "Sets of measure zero",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.order.completeness",
+      "ra.metric.open_closed"
+    ],
+    "subdomain": "real_analysis.measure"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.measure.cantor_set",
+    "label": "The Cantor set",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.measure.null",
+      "ra.order.uncountable"
+    ],
+    "subdomain": "real_analysis.measure"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.metric.total_bounded",
+    "label": "Total boundedness",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.metric.compact",
+      "ra.metric.complete"
+    ],
+    "subdomain": "real_analysis.metric"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.seq.weierstrass_m",
+    "label": "The Weierstrass M-test",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.seq.bolzano_weierstrass",
+      "ra.deriv.uniform_conv"
+    ],
+    "subdomain": "real_analysis.seq"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.deriv.bounded_variation",
+    "label": "Functions of bounded variation",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.deriv.riemann",
+      "ra.deriv.mvt"
+    ],
+    "subdomain": "real_analysis.deriv"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.deriv.riemann_stieltjes",
+    "label": "The Riemann-Stieltjes integral",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.deriv.riemann",
+      "ra.deriv.bounded_variation"
+    ],
+    "subdomain": "real_analysis.deriv"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.deriv.arzela_ascoli",
+    "label": "The Arzela-Ascoli theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.deriv.uniform_conv",
+      "ra.metric.compact",
+      "ra.metric.complete"
+    ],
+    "subdomain": "real_analysis.deriv"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.deriv.weierstrass_approx",
+    "label": "The Weierstrass approximation theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.deriv.uniform_conv",
+      "ra.limit.evt"
+    ],
+    "subdomain": "real_analysis.deriv"
   },
   {
     "domain": "statistics",
@@ -16384,6 +19832,277 @@
     "subdomain": "statistics.inference"
   },
   {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.spread.std_dev",
+    "label": "Standard deviation",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.adv.variance",
+      "stat.data.mean"
+    ],
+    "subdomain": "statistics.spread"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.data.box_plot",
+    "label": "Box plots and the five-number summary",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.quartile.value",
+      "stat.spread.iqr"
+    ],
+    "subdomain": "statistics.data_representation"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.reg.correlation",
+    "label": "Correlation coefficient",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.adv.covariance",
+      "stat.spread.std_dev"
+    ],
+    "subdomain": "statistics.regression"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.reg.least_squares",
+    "label": "The least-squares regression line",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.reg.correlation",
+      "alg.linear.slope_intercept"
+    ],
+    "subdomain": "statistics.regression"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.test.chi_square_independence",
+    "label": "The chi-square test of independence",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.test.chi_square",
+      "stat.data.read_table"
+    ],
+    "subdomain": "statistics.inference"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.data.study_design",
+    "label": "Study design",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.data.read_table"
+    ],
+    "subdomain": "statistics.data_collection"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.sampling.methods",
+    "label": "Sampling methods",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.infer.sampling"
+    ],
+    "subdomain": "statistics.data_collection"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.data.measurement_levels",
+    "label": "Levels of measurement",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.data.read_table"
+    ],
+    "subdomain": "statistics.data_collection"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.infer.ttest_two",
+    "label": "The two-sample t test",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.infer.ttest",
+      "stat.infer.hypothesis"
+    ],
+    "subdomain": "statistics.inference"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.infer.paired",
+    "label": "The paired t test",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.infer.ttest",
+      "stat.data.study_design"
+    ],
+    "subdomain": "statistics.inference"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.infer.proportion_test",
+    "label": "The one-proportion z test",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.infer.proportion",
+      "stat.infer.ztest"
+    ],
+    "subdomain": "statistics.inference"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.reg.residual",
+    "label": "Residuals and prediction error",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.reg.least_squares"
+    ],
+    "subdomain": "statistics.regression"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.spread.outlier",
+    "label": "Detecting outliers",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.data.box_plot",
+      "stat.spread.iqr"
+    ],
+    "subdomain": "statistics.spread"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.dist.normal_approx",
+    "label": "Normal approximation to the binomial",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.dist.binomial",
+      "stat.dist.normal"
+    ],
+    "subdomain": "statistics.distributions"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.dist.empirical_rule",
+    "label": "The empirical rule",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.dist.normal",
+      "stat.spread.std_dev"
+    ],
+    "subdomain": "statistics.distributions"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.data.skew",
+    "label": "Skewness and distribution shape",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.data.mean",
+      "stat.data.median",
+      "stat.spread.std_dev"
+    ],
+    "subdomain": "statistics.data_representation"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.infer.regression_slope",
+    "label": "Inference for the regression slope",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.reg.least_squares",
+      "stat.infer.ttest",
+      "stat.reg.correlation"
+    ],
+    "subdomain": "statistics.inference"
+  },
+  {
+    "domain": "statistics",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "stat.reg.logistic",
+    "key_prerequisites": [],
+    "label": "Logistic regression for binary outcomes",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.reg.least_squares",
+      "alg.func.sigmoid"
+    ],
+    "subdomain": "statistics.regression",
+    "variants": []
+  },
+  {
     "domain": "topology",
     "grading_type": "numeric",
     "id": "topo.basics.metric",
@@ -16987,6 +20706,156 @@
       "topo.homology.cellular"
     ],
     "subdomain": "topology.invariants"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.basics.spaces",
+    "label": "Topological spaces",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.basics.metric",
+      "topo.basics.open_closed"
+    ],
+    "subdomain": "topology.basics"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.connected.components",
+    "label": "Connected components",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.connected",
+      "topo.metric.subspace"
+    ],
+    "subdomain": "topology.connected"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.separation.normal",
+    "label": "Normal spaces",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.hausdorff",
+      "topo.urysohn"
+    ],
+    "subdomain": "topology.separation"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.algebraic.homotopy_equivalence",
+    "label": "Homotopy equivalence",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.homotopy",
+      "topo.homotopy.fundamental"
+    ],
+    "subdomain": "topology.algebraic"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.covering.universal",
+    "label": "Universal covering spaces",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.covering",
+      "topo.homotopy.fundamental"
+    ],
+    "subdomain": "topology.covering"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.manifolds.boundary",
+    "label": "Manifolds with boundary",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.manifold",
+      "topo.metric.subspace"
+    ],
+    "subdomain": "topology.manifolds"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.invariant.surface_classification",
+    "label": "Classification of surfaces",
+    "mastery_threshold": {
+      "avg_time_seconds": 34,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.invariant.genus",
+      "topo.manifold.orientability"
+    ],
+    "subdomain": "topology.invariants"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.compact.tychonoff",
+    "label": "Tychonoff's theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.product",
+      "topo.compact"
+    ],
+    "subdomain": "topology.compact"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.algebraic.degree",
+    "label": "Degree of a map",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.homotopy.fundamental",
+      "topo.covering"
+    ],
+    "subdomain": "topology.algebraic"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.algebraic.mayer_vietoris",
+    "label": "The Mayer-Vietoris sequence",
+    "mastery_threshold": {
+      "avg_time_seconds": 34,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.homology.cellular",
+      "topo.cohomology"
+    ],
+    "subdomain": "topology.algebraic"
   },
   {
     "domain": "trigonometry",
@@ -17978,5 +21847,245 @@
       "trig.adv.vector_magnitude"
     ],
     "subdomain": "trigonometry.advanced"
+  },
+  {
+    "domain": "trigonometry",
+    "encompasses": [
+      "trig.ident.double_angle",
+      "trig.eq.general_solution"
+    ],
+    "grading_type": "numeric",
+    "id": "trig.eq.multiple_angle",
+    "key_prerequisites": [
+      "trig.ident.double_angle",
+      "trig.eq.general_solution"
+    ],
+    "label": "Solving multiple-angle equations",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.ident.double_angle",
+      "trig.eq.general_solution"
+    ],
+    "subdomain": "trigonometry.equations",
+    "variants": []
+  },
+  {
+    "domain": "trigonometry",
+    "encompasses": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ],
+    "grading_type": "numeric",
+    "id": "trig.basics.elevation_depression",
+    "key_prerequisites": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ],
+    "label": "Angles of elevation and depression",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ],
+    "subdomain": "trigonometry.basics",
+    "variants": []
+  },
+  {
+    "domain": "trigonometry",
+    "encompasses": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ],
+    "grading_type": "numeric",
+    "id": "trig.graph.sinusoidal_model",
+    "key_prerequisites": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ],
+    "label": "Sinusoidal models",
+    "mastery_threshold": {
+      "avg_time_seconds": 27,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ],
+    "subdomain": "trigonometry.graphs",
+    "variants": []
+  },
+  {
+    "domain": "trigonometry",
+    "encompasses": [
+      "trig.adv.inverse",
+      "trig.func.arcsine"
+    ],
+    "grading_type": "numeric",
+    "id": "trig.adv.inverse_composition",
+    "key_prerequisites": [
+      "trig.adv.inverse",
+      "trig.func.arcsine"
+    ],
+    "label": "Compositions with inverse trigonometric functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.adv.inverse",
+      "trig.func.arcsine"
+    ],
+    "subdomain": "trigonometry.advanced",
+    "variants": []
+  },
+  {
+    "domain": "trigonometry",
+    "encompasses": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ],
+    "grading_type": "numeric",
+    "id": "trig.adv.vector_components",
+    "key_prerequisites": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ],
+    "label": "Vector components from magnitude and direction",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ],
+    "subdomain": "trigonometry.advanced",
+    "variants": []
+  },
+  {
+    "domain": "trigonometry",
+    "encompasses": [
+      "trig.ident.pythagorean",
+      "trig.graph.cos"
+    ],
+    "grading_type": "numeric",
+    "id": "trig.ident.even_odd",
+    "key_prerequisites": [
+      "trig.ident.pythagorean",
+      "trig.graph.cos"
+    ],
+    "label": "Even and odd trigonometric identities",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.ident.pythagorean",
+      "trig.graph.cos"
+    ],
+    "subdomain": "trigonometry.identities",
+    "variants": []
+  },
+  {
+    "domain": "trigonometry",
+    "encompasses": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ],
+    "grading_type": "numeric",
+    "id": "trig.graph.frequency",
+    "key_prerequisites": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ],
+    "label": "Frequency and period of trigonometric graphs",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ],
+    "subdomain": "trigonometry.graphs",
+    "variants": []
+  },
+  {
+    "domain": "trigonometry",
+    "encompasses": [
+      "trig.ident.pythagorean",
+      "trig.ident.sum_diff"
+    ],
+    "grading_type": "numeric",
+    "id": "trig.eq.using_identities",
+    "key_prerequisites": [
+      "trig.ident.pythagorean",
+      "trig.ident.sum_diff"
+    ],
+    "label": "Solving equations with identities",
+    "mastery_threshold": {
+      "avg_time_seconds": 27,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.ident.pythagorean",
+      "trig.ident.sum_diff"
+    ],
+    "subdomain": "trigonometry.equations",
+    "variants": []
+  },
+  {
+    "domain": "trigonometry",
+    "encompasses": [
+      "trig.graph.sinusoidal_model",
+      "trig.basics.radians"
+    ],
+    "grading_type": "numeric",
+    "id": "trig.graph.harmonic_motion",
+    "key_prerequisites": [
+      "trig.graph.sinusoidal_model",
+      "trig.basics.radians"
+    ],
+    "label": "Simple harmonic motion",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.graph.sinusoidal_model",
+      "trig.basics.radians"
+    ],
+    "subdomain": "trigonometry.graphs",
+    "variants": []
+  },
+  {
+    "domain": "trigonometry",
+    "encompasses": [
+      "trig.basics.sector_area",
+      "trig.basics.right_triangle"
+    ],
+    "grading_type": "numeric",
+    "id": "trig.basics.segment_area",
+    "key_prerequisites": [
+      "trig.basics.sector_area",
+      "trig.basics.right_triangle"
+    ],
+    "label": "Areas of circular segments",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "trig.basics.sector_area",
+      "trig.basics.right_triangle"
+    ],
+    "subdomain": "trigonometry.basics",
+    "variants": []
   }
 ]

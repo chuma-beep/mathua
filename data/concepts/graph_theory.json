@@ -561,5 +561,155 @@
       "streak": 10,
       "avg_time_seconds": 28.0
     }
+  },
+  {
+    "id": "graph.hamiltonian",
+    "label": "Hamiltonian cycles",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.graphs.eulerian",
+      "graph.distance"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
+  },
+  {
+    "id": "graph.blocks",
+    "label": "Blocks and biconnected components",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.connectivity",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.cut_vertex",
+      "graph.bridge"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "graph.planar_dual",
+    "label": "Planar dual graphs",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.planarity",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.graphs.planar",
+      "graph.kuratowski"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 27
+    }
+  },
+  {
+    "id": "graph.automorphism",
+    "label": "Graph automorphisms",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.isomorphism",
+      "graph.complement"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25
+    }
+  },
+  {
+    "id": "graph.girth",
+    "label": "Girth of a graph",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.connectivity",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.distance",
+      "graph.subgraph"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22
+    }
+  },
+  {
+    "id": "graph.four_color",
+    "label": "The four color theorem",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.coloring",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.kuratowski",
+      "discrete.graphs.coloring"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "graph.matroid",
+    "label": "Matroids",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.matching",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.matching",
+      "graph.treewidth"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30
+    }
+  },
+  {
+    "id": "graph.shortest_path",
+    "label": "Shortest path algorithms",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.flows",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.graphs.paths",
+      "graph.distance"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
+  },
+  {
+    "id": "graph.degeneracy",
+    "label": "Graph degeneracy",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.extremal",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.subgraph",
+      "graph.distance"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
+  },
+  {
+    "id": "graph.mst",
+    "label": "Minimum spanning trees",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.flows",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.graphs.trees",
+      "graph.shortest_path"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 23
+    }
   }
 ]

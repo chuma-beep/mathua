@@ -40,6 +40,13 @@ func Register(reg *generator.Registry) {
 	registerFoundations(reg)
 	registerSkills(reg)
 	registerApplications(reg)
+	reg.Register("frac.ops.negative", &fracBridgeGen{kind: "negative"})
+	reg.Register("frac.ops.repeating_decimal", &fracBridgeGen{kind: "repeating"})
+	reg.Register("frac.mixed.borrow", &fracBridgeGen{kind: "mixed_borrow"})
+	reg.Register("frac.ops.estimate", &fracBridgeGen{kind: "estimate"})
+	reg.Register("frac.word.multi_step", &fracBridgeGen{kind: "word_multi_step"})
+	reg.Register("frac.div.by_whole", &fracBridgeGen{kind: "div_by_whole"})
+	reg.Register("frac.compare.forms", &fracBridgeGen{kind: "compare_forms"})
 }
 
 func fracStr(num, den int) string { return fmt.Sprintf("%d/%d", num, den) }

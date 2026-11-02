@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Definition",
+    "section": "The Definition",
+    "subgoals": [
+      "Explain the definition",
+      "Apply the definition to a worked example",
+      "Check parity after the operation on a small example"
+    ]
+  },
+  {
+    "label": "Parity of Sums and Differences",
+    "section": "Parity of Sums and Differences",
+    "subgoals": [
+      "Explain parity of sums and differences",
+      "Apply parity of sums and differences to a worked example",
+      "Check parity after the operation on a small example"
+    ]
+  },
+  {
+    "label": "Parity of Products",
+    "section": "Parity of Products",
+    "subgoals": [
+      "Explain parity of products",
+      "Apply parity of products to a worked example",
+      "Check parity after the operation on a small example"
+    ]
+  }
+]

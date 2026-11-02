@@ -1,0 +1,26 @@
+[
+  {
+    "label": "The Meaning of a Root",
+    "section": "The Meaning of a Root",
+    "subgoals": [
+      "Read the index and radicand",
+      "Evaluate a perfect nth root"
+    ]
+  },
+  {
+    "label": "Roots and Exponents",
+    "section": "Roots and Exponents",
+    "subgoals": [
+      "Convert a radical to a rational exponent",
+      "Convert a rational exponent to a radical"
+    ]
+  },
+  {
+    "label": "Domain and Sign",
+    "section": "Domain and Sign",
+    "subgoals": [
+      "State when an even root is defined",
+      "Handle an odd root of a negative number"
+    ]
+  }
+]

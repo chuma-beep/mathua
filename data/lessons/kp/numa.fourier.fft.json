@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Roots of Unity",
+    "section": "Roots of Unity",
+    "subgoals": [
+      "Explain the idea behind roots of unity.",
+      "Apply the method to a worked numerical example.",
+      "Check the result for consistency and accuracy."
+    ]
+  },
+  {
+    "label": "Divide and Conquer",
+    "section": "Divide and Conquer",
+    "subgoals": [
+      "Explain the idea behind divide and conquer.",
+      "Apply the method to a worked numerical example.",
+      "Check the result for consistency and accuracy."
+    ]
+  },
+  {
+    "label": "Counting Operations",
+    "section": "Counting Operations",
+    "subgoals": [
+      "Explain the idea behind counting operations.",
+      "Apply the method to a worked numerical example.",
+      "Check the result for consistency and accuracy."
+    ]
+  }
+]

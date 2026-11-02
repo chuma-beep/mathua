@@ -1,0 +1,26 @@
+[
+  {
+    "label": "The Point-Slope Form",
+    "section": "The Point-Slope Form",
+    "subgoals": [
+      "Write y - y1 = m(x - x1)",
+      "Identify the point and the slope"
+    ]
+  },
+  {
+    "label": "Building an Equation",
+    "section": "Building an Equation",
+    "subgoals": [
+      "Find the slope from two points",
+      "Substitute a known point"
+    ]
+  },
+  {
+    "label": "Converting Forms",
+    "section": "Converting Forms",
+    "subgoals": [
+      "Rewrite point-slope as slope-intercept",
+      "Rewrite as standard form"
+    ]
+  }
+]

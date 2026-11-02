@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Divisor Functions",
+    "section": "Divisor Functions",
+    "subgoals": [
+      "Evaluate a divisor function from a prime factorisation",
+      "Apply divisor functions to a concrete example"
+    ]
+  },
+  {
+    "label": "Dirichlet Convolution",
+    "section": "Dirichlet Convolution",
+    "subgoals": [
+      "Compute a Dirichlet convolution term",
+      "Apply dirichlet convolution to a concrete example"
+    ]
+  },
+  {
+    "label": "Multiplicative Functions",
+    "section": "Multiplicative Functions",
+    "subgoals": [
+      "Test multiplicativity on coprime inputs",
+      "Apply multiplicative functions to a concrete example"
+    ]
+  }
+]

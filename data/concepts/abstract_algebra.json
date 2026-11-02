@@ -657,5 +657,173 @@
       "streak": 10,
       "avg_time_seconds": 28.0
     }
+  },
+  {
+    "id": "abstract.rings.pid",
+    "label": "Principal ideal domains",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.rings",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.rings.euclidean",
+      "abstract.rings.ideal"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "abstract.group.cayley",
+    "label": "Cayley's theorem",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.group.action",
+      "abstract.group.symmetric"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "abstract.group.direct_product",
+    "label": "Direct products of groups",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.group.cyclic",
+      "abstract.group.quotient_group"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "abstract.rings.irreducibility",
+    "label": "Irreducible polynomials",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.rings",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.rings.polynomial",
+      "abstract.field.finite"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "abstract.group.abelian_classification",
+    "label": "Classification of finite abelian groups",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.group.direct_product",
+      "abstract.group.cyclic"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "abstract.field.cyclotomic",
+    "label": "Cyclotomic polynomials",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.fields",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.field.extension",
+      "abstract.field.algebraic"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "abstract.field.algebraic_closure",
+    "label": "Algebraic closure",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.fields",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.field.algebraic",
+      "abstract.field.extension"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "abstract.structures.fg_module",
+    "label": "Finitely generated modules",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.structures",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.structures.module_hom",
+      "abstract.structures.submodule"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "abstract.field.radicals",
+    "label": "Solvability by radicals",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.fields",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.group.solvable",
+      "abstract.field.galois_group"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "abstract.field.separable",
+    "label": "Separable extensions",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.fields",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.field.extension",
+      "abstract.rings.polynomial"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "abstract.group.cauchy",
+    "label": "Cauchy's theorem for groups",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.group.lagrange",
+      "abstract.group.cyclic"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28
+    }
   }
 ]

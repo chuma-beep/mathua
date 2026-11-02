@@ -43,6 +43,18 @@ func registerBatch(reg *generator.Registry) {
 	reg.Register("arith.exp.power_quotient", &powerQuotientGen{})
 	reg.Register("arith.sqrt.cube", &cubeRootGen{})
 	reg.Register("arith.sqrt.estimate", &squareRootBoundsGen{})
+	reg.Register("arith.mult.two_by_two", &arithBridgeGen{kind: "mult_two_by_two"})
+	reg.Register("arith.div.two_digit_divisor", &arithBridgeGen{kind: "div_two_digit"})
+	reg.Register("arith.factor.divisibility", &arithBridgeGen{kind: "divisibility"})
+	reg.Register("arith.sub.zeros", &arithBridgeGen{kind: "sub_zeros"})
+	reg.Register("arith.ops.fact_families", &arithBridgeGen{kind: "fact_families"})
+	reg.Register("arith.place.millions", &arithBridgeGen{kind: "place_millions"})
+	reg.Register("arith.add.missing_addend", &arithBridgeGen{kind: "missing_addend"})
+	reg.Register("arith.estimate.quotient", &arithBridgeGen{kind: "estimate_quotient"})
+	reg.Register("arith.factor.multiple", &arithBridgeGen{kind: "factor_multiple"})
+	reg.Register("arith.neg.compare", &arithBridgeGen{kind: "neg_compare"})
+	reg.Register("arith.factor.even_odd", &arithBridgeGen{kind: "even_odd"})
+	reg.Register("arith.exp.standard_form", &arithBridgeGen{kind: "standard_form"})
 }
 
 // ---------------------------------------------------------------------------

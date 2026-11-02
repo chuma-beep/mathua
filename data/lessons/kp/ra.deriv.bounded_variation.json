@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Partitions and variation",
+    "section": "Partitions and variation",
+    "subgoals": [
+      "Explain the main idea of partitions and variation.",
+      "Apply the result in partitions and variation to a concrete example.",
+      "Recognise a common mistake involving partitions and variation."
+    ]
+  },
+  {
+    "label": "Monotone functions",
+    "section": "Monotone functions",
+    "subgoals": [
+      "Explain the main idea of monotone functions.",
+      "Apply the result in monotone functions to a concrete example.",
+      "Recognise a common mistake involving monotone functions."
+    ]
+  },
+  {
+    "label": "Algebra of variation",
+    "section": "Algebra of variation",
+    "subgoals": [
+      "Explain the main idea of algebra of variation.",
+      "Apply the result in algebra of variation to a concrete example.",
+      "Recognise a common mistake involving algebra of variation."
+    ]
+  }
+]

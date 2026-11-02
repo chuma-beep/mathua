@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Periods of a Large Number",
+    "section": "The Periods of a Large Number",
+    "subgoals": [
+      "Explain the periods of a large number",
+      "Apply the periods of a large number to a worked example",
+      "Regroup the digits and read the number aloud"
+    ]
+  },
+  {
+    "label": "The Value of a Digit",
+    "section": "The Value of a Digit",
+    "subgoals": [
+      "Explain the value of a digit",
+      "Apply the value of a digit to a worked example",
+      "Regroup the digits and read the number aloud"
+    ]
+  },
+  {
+    "label": "Writing and Comparing",
+    "section": "Writing and Comparing",
+    "subgoals": [
+      "Explain writing and comparing",
+      "Apply writing and comparing to a worked example",
+      "Regroup the digits and read the number aloud"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Validation monitoring",
+    "section": "Validation monitoring",
+    "subgoals": [
+      "Explain the main idea of validation monitoring",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Why it works",
+    "section": "Why it works",
+    "subgoals": [
+      "Explain the main idea of why it works",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  },
+  {
+    "label": "Bookkeeping",
+    "section": "Bookkeeping",
+    "subgoals": [
+      "Explain the main idea of bookkeeping",
+      "Apply it to a concrete numerical example",
+      "Check the result against the definition"
+    ]
+  }
+]

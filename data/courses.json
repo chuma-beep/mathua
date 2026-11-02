@@ -18,7 +18,15 @@
       "arith.round.thousands",
       "frac.basics.number_line",
       "geo.basic.complementary",
-      "geo.basic.vertical"
+      "geo.basic.vertical",
+      "arith.mult.two_by_two",
+      "arith.factor.divisibility",
+      "arith.sub.zeros",
+      "arith.ops.fact_families",
+      "arith.place.millions",
+      "arith.add.missing_addend",
+      "arith.factor.multiple",
+      "arith.factor.even_odd"
     ]
   },
   {
@@ -40,7 +48,12 @@
       "dec.ops.sub.word",
       "dec.ops.div.word",
       "dec.ops.round",
-      "frac.ops.to_decimal"
+      "frac.ops.to_decimal",
+      "arith.div.two_digit_divisor",
+      "arith.estimate.quotient",
+      "frac.mixed.borrow",
+      "frac.ops.estimate",
+      "frac.div.by_whole"
     ]
   },
   {
@@ -63,7 +76,10 @@
       "pct.ops.markup",
       "ratio.ops.percent_proportion",
       "prealg.expr.translate",
-      "prealg.measure.metric"
+      "prealg.measure.metric",
+      "arith.neg.compare",
+      "frac.word.multi_step",
+      "frac.compare.forms"
     ]
   },
   {
@@ -86,7 +102,9 @@
       "arith.exp.zero",
       "ratio.ops.better_buy",
       "prealg.ineq.graph",
-      "prealg.measure.convert"
+      "prealg.measure.convert",
+      "frac.ops.negative",
+      "frac.ops.repeating_decimal"
     ]
   },
   {
@@ -110,7 +128,8 @@
       "pct.ops.simple_interest",
       "prealg.expr.formula",
       "prealg.ineq.word",
-      "prealg.measure.temperature"
+      "prealg.measure.temperature",
+      "arith.exp.standard_form"
     ]
   },
   {
@@ -160,7 +179,18 @@
       "frac.mixed.word",
       "frac.mult.whole",
       "frac.mult.word",
-      "frac.sub.word"
+      "frac.sub.word",
+      "prealg.ineq.negative",
+      "prealg.eq.fractions",
+      "ratio.ops.proportional_graph",
+      "prealg.func.table",
+      "prealg.graph.interpret",
+      "prealg.real.order_rational",
+      "dec.basics.place_value",
+      "dec.ops.powers_ten",
+      "prealg.measure.dimensional",
+      "ratio.ops.table",
+      "prealg.expr.simplify"
     ]
   },
   {
@@ -200,7 +230,22 @@
       "alg.quad.incomplete",
       "alg.quad.parametric",
       "alg.quad.quadratic",
-      "alg.systems.word"
+      "alg.systems.word",
+      "alg.func.rate_of_change",
+      "alg.poly.graph_zeros",
+      "alg.eq.quadratic_form",
+      "alg.ineq.linear_programming",
+      "alg.exp.natural_base",
+      "alg.linear.point_slope",
+      "alg.seq.recursive",
+      "alg.radical.nth_root",
+      "alg.poly.fundamental_theorem",
+      "alg.exp.half_life",
+      "alg.eq.rational_exponent",
+      "alg.eq.rational.word",
+      "alg.func.composite_domain",
+      "alg.eq.linear.word",
+      "alg.linear.horizontal_vertical"
     ]
   },
   {
@@ -236,7 +281,32 @@
       "geo.coord.midpoint",
       "geo.coord.polar",
       "geo.quad.perimeter",
-      "geo.triangle.pythagorean.word"
+      "geo.triangle.pythagorean.word",
+      "geo.basic.transversal",
+      "geo.triangle.congruence",
+      "geo.triangle.pythagorean_converse",
+      "geo.triangle.special_right_45",
+      "geo.triangle.median_centroid",
+      "geo.transform.translation",
+      "geo.transform.reflection",
+      "geo.transform.rotation",
+      "geo.solid.cylinder",
+      "geo.solid.cone",
+      "geo.solid.sphere",
+      "geo.solid.curved_surface_area",
+      "geo.polygon.area_regular",
+      "geo.circle.chord_segments",
+      "geo.circle.secant",
+      "geo.similar.criteria",
+      "geo.area.composite",
+      "geo.triangle.angle_bisector",
+      "geo.triangle.perpendicular_bisector",
+      "geo.quad.properties",
+      "geo.circle.arc_measure",
+      "geo.solid.cross_section",
+      "geo.transform.symmetry",
+      "geo.solid.euler",
+      "geo.solid.frustum"
     ]
   },
   {
@@ -320,7 +390,32 @@
       "trig.func.cotangent",
       "trig.graph.phase_shift",
       "trig.ident.cofunction",
-      "trig.ident.half_angle"
+      "trig.ident.half_angle",
+      "alg.func.rate_of_change",
+      "alg.poly.graph_zeros",
+      "alg.eq.quadratic_form",
+      "alg.ineq.linear_programming",
+      "alg.exp.natural_base",
+      "alg.linear.point_slope",
+      "alg.seq.recursive",
+      "alg.radical.nth_root",
+      "alg.poly.fundamental_theorem",
+      "alg.exp.half_life",
+      "alg.eq.rational_exponent",
+      "alg.eq.rational.word",
+      "alg.func.composite_domain",
+      "alg.eq.linear.word",
+      "alg.linear.horizontal_vertical",
+      "trig.eq.multiple_angle",
+      "trig.basics.elevation_depression",
+      "trig.graph.sinusoidal_model",
+      "trig.adv.inverse_composition",
+      "trig.adv.vector_components",
+      "trig.ident.even_odd",
+      "trig.graph.frequency",
+      "trig.eq.using_identities",
+      "trig.graph.harmonic_motion",
+      "trig.basics.segment_area"
     ]
   },
   {
@@ -378,7 +473,15 @@
       "trig.adv.vector_projection",
       "trig.adv.ambiguous_case",
       "trig.adv.area_sas",
-      "trig.adv.heron_area"
+      "trig.adv.heron_area",
+      "precalc.func.average_rate",
+      "precalc.poly.graph",
+      "precalc.exp.logistic",
+      "precalc.vector.unit",
+      "precalc.conic.eccentricity",
+      "precalc.seq.explicit",
+      "precalc.conic.rotated",
+      "precalc.vector.three_d"
     ]
   },
   {
@@ -436,7 +539,15 @@
       "calc.limit.lhopital",
       "calc.limit.indeterminate",
       "calc.limit.epsilon_delta",
-      "calc.deriv.implicit"
+      "calc.deriv.implicit",
+      "calc.integral.riemann_sums",
+      "calc.integral.properties",
+      "calc.deriv.definition",
+      "calc.integral.initial_value",
+      "calc.deriv.rate",
+      "calc.deriv.graph_reading",
+      "calc.integral.symmetry",
+      "calc.limit.trig"
     ]
   },
   {
@@ -490,7 +601,15 @@
       "calc.series.geometric",
       "calc.series.ratio_test",
       "calc.seq.bounded",
-      "calc.seq.monotone"
+      "calc.seq.monotone",
+      "calc.series.taylor_error",
+      "calc.series.termwise",
+      "calc.series.maclaurin",
+      "calc.integral.inverse_trig",
+      "calc.integral.probability",
+      "calc.series.estimate",
+      "calc.integral.log",
+      "calc.integral.rationalizing"
     ]
   },
   {
@@ -552,7 +671,17 @@
       "calc.deriv.directional",
       "calc.deriv.chain_multi",
       "calc.deriv.clairaut",
-      "calc.deriv.total_diff"
+      "calc.deriv.total_diff",
+      "calc.multi.functions_several",
+      "calc.multi.level_curves",
+      "calc.vec.vector_function",
+      "calc.multi.quadric_surfaces",
+      "calc.multi.triple_integral_region",
+      "calc.vec.vector_field",
+      "calc.vec.surface_tangent",
+      "calc.multi.continuity",
+      "calc.multi.moments_3d",
+      "calc.vec.normal_line"
     ]
   },
   {
@@ -588,7 +717,21 @@
       "linalg.quadratic.definite",
       "linalg.vector.cross",
       "linalg.matrix.condition",
-      "linalg.eigen.cayley_hamilton"
+      "linalg.eigen.cayley_hamilton",
+      "linalg.systems.row_reduction",
+      "linalg.matrix.fundamental_subspaces",
+      "linalg.orth.gram_schmidt",
+      "linalg.transform.matrix",
+      "linalg.eigen.eigenspace",
+      "linalg.systems.homogeneous",
+      "linalg.apps.leontief",
+      "linalg.matrix.transpose",
+      "linalg.det.properties",
+      "linalg.invertible.theorem",
+      "linalg.eigen.similar",
+      "linalg.eigen.complex",
+      "linalg.vector.plane",
+      "linalg.orth.least_squares"
     ]
   },
   {
@@ -625,7 +768,16 @@
       "discrete.sequences.growth_rates",
       "discrete.combinatorics.binomial_theorem",
       "discrete.combinatorics.pascal",
-      "discrete.sequences.generating_functions"
+      "discrete.sequences.generating_functions",
+      "discrete.recurrence.master_theorem",
+      "discrete.logic.boolean_functions",
+      "discrete.combinatorics.burnside",
+      "discrete.combinatorics.egf",
+      "discrete.logic.resolution",
+      "discrete.sets.relation_closure",
+      "discrete.automata.fsm",
+      "discrete.proof.cases",
+      "discrete.coding.hamming"
     ]
   },
   {
@@ -687,7 +839,25 @@
       "stat.test.anova",
       "stat.reg.r2",
       "stat.data.histogram",
-      "stat.infer.nonparametric"
+      "stat.infer.nonparametric",
+      "stat.spread.std_dev",
+      "stat.data.box_plot",
+      "stat.reg.correlation",
+      "stat.reg.least_squares",
+      "stat.test.chi_square_independence",
+      "stat.data.study_design",
+      "stat.sampling.methods",
+      "stat.data.measurement_levels",
+      "stat.infer.ttest_two",
+      "stat.infer.paired",
+      "stat.infer.proportion_test",
+      "stat.reg.residual",
+      "stat.spread.outlier",
+      "stat.dist.normal_approx",
+      "stat.dist.empirical_rule",
+      "stat.data.skew",
+      "stat.infer.regression_slope",
+      "stat.reg.logistic"
     ]
   },
   {
@@ -727,14 +897,23 @@
       "nt.adv.quadratic_reciprocity",
       "nt.adv.sieve",
       "nt.analytic.prime_number_theorem",
-      "nt.analytic.zeta"
+      "nt.analytic.zeta",
+      "nt.basics.fta",
+      "nt.adv.arithmetic_functions",
+      "nt.adv.gaussian_integers",
+      "nt.adv.four_squares",
+      "nt.adv.hensel",
+      "nt.adv.farey",
+      "nt.app.key_exchange",
+      "nt.adv.quadratic_forms",
+      "nt.adv.valuation"
     ]
   },
   {
     "id": "diffeq",
     "name": "Differential Equations",
     "grade": "college",
-    "description": "First and second order ODEs, series and numerical methods, systems, applications, and the Laplace transform.",
+    "description": "First and second order ODEs, series and numerical methods, systems, applications, an introduction to partial differential equations, and the Laplace transform.",
     "targets": [
       "ode.first_order.separable",
       "ode.first_order.linear",
@@ -768,7 +947,16 @@
       "ode.pde.laplace_eq",
       "ode.sturm_liouville",
       "ode.transforms.convolution",
-      "ode.transforms.fourier"
+      "ode.transforms.fourier",
+      "ode.basics.slope_field",
+      "ode.first_order.logistic",
+      "ode.basics.existence_uniqueness",
+      "ode.basics.concept",
+      "ode.second_order.nonhomogeneous",
+      "ode.adv.systems",
+      "ode.systems.linear_phase",
+      "ode.stability",
+      "ode.second_order.forced"
     ]
   },
   {
@@ -817,7 +1005,18 @@
       "abstract.group.commutator",
       "abstract.field.galois_group",
       "abstract.rings.noetherian",
-      "abstract.structures.exact_sequence"
+      "abstract.structures.exact_sequence",
+      "abstract.rings.pid",
+      "abstract.group.cayley",
+      "abstract.group.direct_product",
+      "abstract.rings.irreducibility",
+      "abstract.group.abelian_classification",
+      "abstract.field.cyclotomic",
+      "abstract.field.algebraic_closure",
+      "abstract.structures.fg_module",
+      "abstract.field.radicals",
+      "abstract.field.separable",
+      "abstract.group.cauchy"
     ]
   },
   {
@@ -847,7 +1046,17 @@
       "topo.metric.dense",
       "topo.invariant.homeomorphism",
       "topo.invariant.genus",
-      "topo.invariant.betti"
+      "topo.invariant.betti",
+      "topo.basics.spaces",
+      "topo.connected.components",
+      "topo.separation.normal",
+      "topo.algebraic.homotopy_equivalence",
+      "topo.covering.universal",
+      "topo.manifolds.boundary",
+      "topo.invariant.surface_classification",
+      "topo.compact.tychonoff",
+      "topo.algebraic.degree",
+      "topo.algebraic.mayer_vietoris"
     ]
   },
   {
@@ -884,7 +1093,17 @@
       "ml.data.onehot",
       "ml.data.imbalance",
       "ml.tree.ensemble",
-      "ml.grad.vanishing"
+      "ml.grad.vanishing",
+      "ml.svm.margin",
+      "ml.svm.kernel",
+      "ml.naive_bayes",
+      "ml.bias_variance",
+      "ml.mdp.bellman",
+      "ml.cluster.em",
+      "ml.feature.selection",
+      "ml.multiclass",
+      "ml.nlp.embedding",
+      "ml.optim.early_stopping"
     ]
   },
   {
@@ -934,7 +1153,16 @@
       "complex.adv.residue_simple",
       "complex.adv.cross_ratio",
       "complex.topology.open_sets",
-      "complex.topology.domain"
+      "complex.topology.domain",
+      "complex.integral.cauchy_formula",
+      "complex.adv.liouville",
+      "complex.adv.maximum_modulus",
+      "complex.integral.real_integrals",
+      "complex.adv.argument_principle",
+      "complex.adv.winding",
+      "complex.adv.riemann_mapping",
+      "complex.adv.identity_theorem",
+      "complex.adv.morera"
     ]
   },
   {
@@ -982,7 +1210,17 @@
       "graph.tournament",
       "graph.strong_connectivity",
       "graph.topological_sort",
-      "graph.dag_paths"
+      "graph.dag_paths",
+      "graph.hamiltonian",
+      "graph.blocks",
+      "graph.planar_dual",
+      "graph.automorphism",
+      "graph.girth",
+      "graph.four_color",
+      "graph.matroid",
+      "graph.shortest_path",
+      "graph.degeneracy",
+      "graph.mst"
     ]
   },
   {
@@ -1040,7 +1278,20 @@
       "prob.process.transition_matrix",
       "prob.process.stationary",
       "prob.process.random_walk",
-      "prob.process.martingale"
+      "prob.process.martingale",
+      "prob.cond.definition",
+      "prob.rv.convolution",
+      "prob.dist.binomial",
+      "prob.dist.poisson",
+      "prob.dist.normal",
+      "prob.moments.skew_kurtosis",
+      "prob.joint.conditional_density",
+      "prob.rv.pgf",
+      "prob.process.recurrence",
+      "prob.martingale.stopping",
+      "prob.rv.multivariate_transform",
+      "prob.rv.integral_transform",
+      "prob.dist.geometric"
     ]
   },
   {
@@ -1088,7 +1339,16 @@
       "numa.linear.jacobi",
       "numa.linear.gauss_seidel",
       "numa.linear.power",
-      "numa.linear.least_squares_qr"
+      "numa.linear.least_squares_qr",
+      "numa.linear.cholesky",
+      "numa.interp.hermite",
+      "numa.linear.sor",
+      "numa.linear.iter_convergence",
+      "numa.linear.qr_algorithm",
+      "numa.linear.cg",
+      "numa.fourier.fft",
+      "numa.integration.monte_carlo",
+      "numa.least_squares.gauss_newton"
     ]
   },
   {
@@ -1146,7 +1406,17 @@
       "ra.metric.continuity",
       "ra.metric.contraction",
       "ra.metric.baire",
-      "ra.metric.equivalent"
+      "ra.metric.equivalent",
+      "ra.order.zorn",
+      "ra.order.schroder_bernstein",
+      "ra.measure.null",
+      "ra.measure.cantor_set",
+      "ra.metric.total_bounded",
+      "ra.seq.weierstrass_m",
+      "ra.deriv.bounded_variation",
+      "ra.deriv.riemann_stieltjes",
+      "ra.deriv.arzela_ascoli",
+      "ra.deriv.weierstrass_approx"
     ]
   }
 ]

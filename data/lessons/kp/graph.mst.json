@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Spanning Trees and Weight",
+    "section": "Spanning Trees and Weight",
+    "subgoals": [
+      "Explain spanning trees and weight",
+      "Apply spanning trees and weight to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  },
+  {
+    "label": "Kruskal's Algorithm",
+    "section": "Kruskal's Algorithm",
+    "subgoals": [
+      "Explain kruskal's algorithm",
+      "Apply kruskal's algorithm to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  },
+  {
+    "label": "Minimum Weight Examples",
+    "section": "Minimum Weight Examples",
+    "subgoals": [
+      "Explain minimum weight examples",
+      "Apply minimum weight examples to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  }
+]

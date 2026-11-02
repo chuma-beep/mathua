@@ -1,0 +1,29 @@
+[
+  {
+    "label": "A single population proportion",
+    "section": "A single population proportion",
+    "subgoals": [
+      "State the null proportion",
+      "Count the successes",
+      "Form the sample proportion"
+    ]
+  },
+  {
+    "label": "Standard error under the null",
+    "section": "Standard error under the null",
+    "subgoals": [
+      "Use the null proportion",
+      "Divide by the sample size",
+      "Take the square root"
+    ]
+  },
+  {
+    "label": "The one-proportion z statistic",
+    "section": "The one-proportion z statistic",
+    "subgoals": [
+      "Subtract the null proportion",
+      "Divide by the standard error",
+      "Check the large-sample condition"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Powers of Ten",
+    "section": "Powers of Ten",
+    "subgoals": [
+      "Explain powers of ten",
+      "Apply powers of ten to a worked example",
+      "Expand the power of ten and compare place values"
+    ]
+  },
+  {
+    "label": "Moving the Decimal Point",
+    "section": "Moving the Decimal Point",
+    "subgoals": [
+      "Explain moving the decimal point",
+      "Apply moving the decimal point to a worked example",
+      "Expand the power of ten and compare place values"
+    ]
+  },
+  {
+    "label": "Converting Back",
+    "section": "Converting Back",
+    "subgoals": [
+      "Explain converting back",
+      "Apply converting back to a worked example",
+      "Expand the power of ten and compare place values"
+    ]
+  }
+]

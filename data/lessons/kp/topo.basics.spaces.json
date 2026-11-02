@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What a Topology Is",
+    "section": "What a Topology Is",
+    "subgoals": [
+      "Explain what a topology is.",
+      "Use topological spaces in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  },
+  {
+    "label": "Comparing Topologies",
+    "section": "Comparing Topologies",
+    "subgoals": [
+      "Explain comparing topologies.",
+      "Use topological spaces in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  },
+  {
+    "label": "Open Sets in Practice",
+    "section": "Open Sets in Practice",
+    "subgoals": [
+      "Explain open sets in practice.",
+      "Use topological spaces in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  }
+]

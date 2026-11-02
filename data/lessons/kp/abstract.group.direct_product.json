@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Ordered Pairs",
+    "section": "Ordered Pairs",
+    "subgoals": [
+      "The direct product consists of pairs with coordinatewise multiplication.",
+      "The identity is the pair of identities, and inverses are taken coordinate by coordinate."
+    ]
+  },
+  {
+    "label": "Element Orders",
+    "section": "Element Orders",
+    "subgoals": [
+      "The order of a pair is the least common multiple of the coordinate orders.",
+      "The exponent of the product is the least common multiple of the factor exponents."
+    ]
+  },
+  {
+    "label": "When the Product Is Cyclic",
+    "section": "When the Product Is Cyclic",
+    "subgoals": [
+      "A product of two cyclic groups is cyclic exactly when the orders are coprime.",
+      "The Chinese remainder theorem is the classical number-theoretic case."
+    ]
+  }
+]

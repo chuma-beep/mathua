@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Centre and Apothem",
+    "section": "Centre and Apothem",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "The Area Formula",
+    "section": "The Area Formula",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "Recovering a Length",
+    "section": "Recovering a Length",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  }
+]

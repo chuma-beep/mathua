@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Constructing the Cantor set",
+    "section": "Constructing the Cantor set",
+    "subgoals": [
+      "Explain the main idea of constructing the cantor set.",
+      "Apply the result in constructing the cantor set to a concrete example.",
+      "Recognise a common mistake involving constructing the cantor set."
+    ]
+  },
+  {
+    "label": "What is removed",
+    "section": "What is removed",
+    "subgoals": [
+      "Explain the main idea of what is removed.",
+      "Apply the result in what is removed to a concrete example.",
+      "Recognise a common mistake involving what is removed."
+    ]
+  },
+  {
+    "label": "Properties of the remainder",
+    "section": "Properties of the remainder",
+    "subgoals": [
+      "Explain the main idea of properties of the remainder.",
+      "Apply the result in properties of the remainder to a concrete example.",
+      "Recognise a common mistake involving properties of the remainder."
+    ]
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Continuity at a Point",
+    "section": "Continuity at a Point",
+    "subgoals": [
+      "Explain continuity at a point",
+      "Apply continuity at a point in a worked problem"
+    ]
+  },
+  {
+    "label": "Paths and Limits",
+    "section": "Paths and Limits",
+    "subgoals": [
+      "Explain paths and limits",
+      "Apply paths and limits in a worked problem"
+    ]
+  },
+  {
+    "label": "Continuous Functions",
+    "section": "Continuous Functions",
+    "subgoals": [
+      "Explain continuous functions",
+      "Apply continuous functions in a worked problem"
+    ]
+  }
+]

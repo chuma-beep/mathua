@@ -32,6 +32,19 @@ func Register(reg *generator.Registry) {
 	reg.Register("nt.adv.elliptic_curve", &ellipticCurveGen{})
 	reg.Register("nt.adv.continued_fractions", &continuedFractionsGen{})
 	reg.Register("nt.adv.class_number", &classNumberGen{})
+	for id, kind := range map[string]string{
+		"nt.basics.fta":               "fta",
+		"nt.adv.arithmetic_functions": "arithmetic_functions",
+		"nt.adv.gaussian_integers":    "gaussian_integers",
+		"nt.adv.four_squares":         "four_squares",
+		"nt.adv.hensel":               "hensel",
+		"nt.adv.farey":                "farey",
+		"nt.app.key_exchange":         "key_exchange",
+		"nt.adv.quadratic_forms":      "quadratic_forms",
+		"nt.adv.valuation":            "valuation",
+	} {
+		reg.Register(id, &ntBridgeGen{kind: kind})
+	}
 	registerNumeric(reg)
 	registerBatch(reg)
 	registerConversions(reg)

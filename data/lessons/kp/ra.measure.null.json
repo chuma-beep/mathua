@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What measure zero means",
+    "section": "What measure zero means",
+    "subgoals": [
+      "Explain the main idea of what measure zero means.",
+      "Apply the result in what measure zero means to a concrete example.",
+      "Recognise a common mistake involving what measure zero means."
+    ]
+  },
+  {
+    "label": "Covering by intervals",
+    "section": "Covering by intervals",
+    "subgoals": [
+      "Explain the main idea of covering by intervals.",
+      "Apply the result in covering by intervals to a concrete example.",
+      "Recognise a common mistake involving covering by intervals."
+    ]
+  },
+  {
+    "label": "Countable unions",
+    "section": "Countable unions",
+    "subgoals": [
+      "Explain the main idea of countable unions.",
+      "Apply the result in countable unions to a concrete example.",
+      "Recognise a common mistake involving countable unions."
+    ]
+  }
+]

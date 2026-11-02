@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Observed and predicted values",
+    "section": "Observed and predicted values",
+    "subgoals": [
+      "Read the observed value",
+      "Substitute into the fitted line",
+      "Subtract prediction from observation"
+    ]
+  },
+  {
+    "label": "The residual sum of squares",
+    "section": "The residual sum of squares",
+    "subgoals": [
+      "Square each residual",
+      "Add the squares",
+      "Compare competing fits"
+    ]
+  },
+  {
+    "label": "Reading a residual plot",
+    "section": "Reading a residual plot",
+    "subgoals": [
+      "Look for a pattern",
+      "Check constant spread",
+      "Spot influential points"
+    ]
+  }
+]

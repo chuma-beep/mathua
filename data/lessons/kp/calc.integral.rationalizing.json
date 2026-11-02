@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Roots in the integrand",
+    "section": "Roots in the integrand",
+    "subgoals": [
+      "A single square root can be removed by substitution.",
+      "Set the root equal to a new variable and solve for x."
+    ]
+  },
+  {
+    "label": "The rationalizing substitution",
+    "section": "The rationalizing substitution",
+    "subgoals": [
+      "Higher roots require the corresponding power substitution.",
+      "The integrand becomes rational in the new variable."
+    ]
+  },
+  {
+    "label": "Back-substituting",
+    "section": "Back-substituting",
+    "subgoals": [
+      "Express the antiderivative in the new variable first.",
+      "Replace the new variable with the original root."
+    ]
+  }
+]

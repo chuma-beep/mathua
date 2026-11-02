@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Parametrised curves",
+    "section": "Parametrised curves",
+    "subgoals": [
+      "Read the components of a vector function",
+      "Describe the curve traced by a vector function"
+    ]
+  },
+  {
+    "label": "Derivatives and velocity",
+    "section": "Derivatives and velocity",
+    "subgoals": [
+      "Differentiate componentwise",
+      "Interpret the derivative as velocity"
+    ]
+  },
+  {
+    "label": "Speed and arc length",
+    "section": "Speed and arc length",
+    "subgoals": [
+      "Compute speed from a velocity vector",
+      "Integrate speed to get arc length"
+    ]
+  }
+]

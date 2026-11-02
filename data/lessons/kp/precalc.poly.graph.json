@@ -1,0 +1,29 @@
+[
+  {
+    "label": "End behavior",
+    "section": "End behavior",
+    "subgoals": [
+      "The degree controls what happens far to the left and far to the right.",
+      "An even degree sends both ends the same way.",
+      "An odd degree sends the two ends in opposite directions."
+    ]
+  },
+  {
+    "label": "Zeros and multiplicity",
+    "section": "Zeros and multiplicity",
+    "subgoals": [
+      "A zero of odd multiplicity crosses the axis.",
+      "A zero of even multiplicity touches the axis and turns back.",
+      "The multiplicity also controls how flat the graph looks at that zero."
+    ]
+  },
+  {
+    "label": "Turning points",
+    "section": "Turning points",
+    "subgoals": [
+      "A polynomial of degree n has at most n - 1 turning points.",
+      "The graph can have fewer turning points than the maximum.",
+      "Combine end behavior, zeros and turning points into one sketch."
+    ]
+  }
+]

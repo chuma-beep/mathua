@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Sums of independent variables",
+    "section": "Sums of independent variables",
+    "subgoals": [
+      "Add means",
+      "Add variances under independence",
+      "Recognise families closed under sums"
+    ]
+  },
+  {
+    "label": "The convolution formula",
+    "section": "The convolution formula",
+    "subgoals": [
+      "Write the discrete convolution sum",
+      "Write the continuous convolution integral",
+      "Use independence to factor the joint law"
+    ]
+  },
+  {
+    "label": "Discrete and continuous examples",
+    "section": "Discrete and continuous examples",
+    "subgoals": [
+      "Convolve two Bernoulli variables",
+      "Describe the triangular sum of two uniforms",
+      "Identify a gamma sum of exponentials"
+    ]
+  }
+]

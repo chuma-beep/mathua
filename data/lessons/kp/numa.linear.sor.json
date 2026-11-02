@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Relaxation",
+    "section": "Relaxation",
+    "subgoals": [
+      "Explain the idea behind relaxation.",
+      "Apply the method to a worked numerical example.",
+      "Check the result for consistency and accuracy."
+    ]
+  },
+  {
+    "label": "Choosing Omega",
+    "section": "Choosing Omega",
+    "subgoals": [
+      "Explain the idea behind choosing omega.",
+      "Apply the method to a worked numerical example.",
+      "Check the result for consistency and accuracy."
+    ]
+  },
+  {
+    "label": "Convergence",
+    "section": "Convergence",
+    "subgoals": [
+      "Explain the idea behind convergence.",
+      "Apply the method to a worked numerical example.",
+      "Check the result for consistency and accuracy."
+    ]
+  }
+]

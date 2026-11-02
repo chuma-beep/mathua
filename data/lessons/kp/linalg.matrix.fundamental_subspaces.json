@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Column space and null space",
+    "section": "Column Space and Null Space",
+    "subgoals": [
+      "Define the column space as the span of the columns.",
+      "Define the null space as the kernel of the matrix.",
+      "Relate their dimensions to the rank and nullity."
+    ]
+  },
+  {
+    "label": "Row space and left null space",
+    "section": "Row Space and Left Null Space",
+    "subgoals": [
+      "Describe the row space and its basis from an echelon form.",
+      "Define the left null space through the transpose.",
+      "Relate the left null space to dependencies among rows."
+    ]
+  },
+  {
+    "label": "Dimensions of the four subspaces",
+    "section": "Dimensions of the Four Subspaces",
+    "subgoals": [
+      "State the four dimensions in terms of rank.",
+      "Check that paired dimensions add to the ambient dimension.",
+      "Use the dimensions to describe existence and uniqueness."
+    ]
+  }
+]

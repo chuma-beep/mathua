@@ -1,0 +1,29 @@
+[
+  {
+    "label": "When axes are tilted",
+    "section": "When axes are tilted",
+    "subgoals": [
+      "A rotated conic contains an xy term.",
+      "The shape is the same as an unrotated conic.",
+      "The coordinate axes no longer line up with the conic axes."
+    ]
+  },
+  {
+    "label": "The discriminant",
+    "section": "The discriminant",
+    "subgoals": [
+      "For Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0 compute B^2 - 4AC.",
+      "A negative value means an ellipse.",
+      "Zero means a parabola and a positive value means a hyperbola."
+    ]
+  },
+  {
+    "label": "Finding the angle",
+    "section": "Finding the angle",
+    "subgoals": [
+      "The rotation angle satisfies tan(2 theta) = B / (A - C).",
+      "Rotating by that angle removes the xy term.",
+      "After rotation the conic can be read in standard form."
+    ]
+  }
+]

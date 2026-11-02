@@ -12,20 +12,20 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 1250 |
-| Total units | 131 |
+| Total concepts | 1500 |
+| Total units | 138 |
 | Minimum unit size | 1 |
-| Median unit size | 7 |
-| Maximum unit size | 42 |
-| Singleton units | 26 |
+| Median unit size | 8 |
+| Maximum unit size | 45 |
+| Singleton units | 24 |
 | Units with <= 3 concepts | 38 |
-| Units with > 25 concepts | 9 |
+| Units with > 25 concepts | 12 |
 | Units with > 50 concepts | 0 |
-| Cross-unit prerequisite edges (derived) | 414 |
+| Cross-unit prerequisite edges (derived) | 469 |
 | Backward band edges | 0 |
 
-If the learner is assessed once per unit, then 131 assessments cover the corpus, and the
-median is one assessment per 7 concepts. That is the frequency question this report
+If the learner is assessed once per unit, then 138 assessments cover the corpus, and the
+median is one assessment per 8 concepts. That is the frequency question this report
 exists to make concrete.
 
 ## Proposed units
@@ -33,136 +33,143 @@ exists to make concrete.
 | Unit | Domain | Band | Concepts | Subdomains | Depth |
 |---|---|---|---|---|---|
 | `abstract_algebra.b6` | abstract_algebra | 6 | 6 | 1 | 18–20 |
-| `abstract_algebra.b7` | abstract_algebra | 7 | 10 | 3 | 21–23 |
-| `abstract_algebra.b8` | abstract_algebra | 8 | 15 | 4 | 24–26 |
-| `abstract_algebra.b9` | abstract_algebra | 9 | 12 | 4 | 27–29 |
-| `abstract_algebra.b10` | abstract_algebra | 10 | 2 | 1 | 30–31 |
+| `abstract_algebra.b7` | abstract_algebra | 7 | 11 | 3 | 21–23 |
+| `abstract_algebra.b8` | abstract_algebra | 8 | 18 | 4 | 24–26 |
+| `abstract_algebra.b9` | abstract_algebra | 9 | 18 | 4 | 27–29 |
+| `abstract_algebra.b10` | abstract_algebra | 10 | 3 | 2 | 30–31 |
 | `algebra.b3` | algebra | 3 | 4 | 1 | 10–11 |
-| `algebra.b4` | algebra | 4 | 1 | 1 | 12–12 |
+| `algebra.b4` | algebra | 4 | 2 | 1 | 12–12 |
 | `algebra.b5` | algebra | 5 | 5 | 1 | 16–17 |
-| `algebra.b6` | algebra | 6 | 35 | 7 | 18–20 |
-| `algebra.b7` | algebra | 7 | 42 | 9 | 21–23 |
-| `algebra.b8` | algebra | 8 | 30 | 10 | 24–26 |
+| `algebra.b6` | algebra | 6 | 38 | 7 | 18–20 |
+| `algebra.b7` | algebra | 7 | 45 | 9 | 21–23 |
+| `algebra.b8` | algebra | 8 | 38 | 10 | 24–26 |
 | `algebra.b9` | algebra | 9 | 7 | 4 | 27–28 |
 | `arithmetic.b0` | arithmetic | 0 | 8 | 4 | 0–2 |
-| `arithmetic.b1` | arithmetic | 1 | 16 | 7 | 3–5 |
-| `arithmetic.b2` | arithmetic | 2 | 16 | 9 | 6–8 |
-| `arithmetic.b3` | arithmetic | 3 | 20 | 5 | 9–11 |
+| `arithmetic.b1` | arithmetic | 1 | 18 | 7 | 3–5 |
+| `arithmetic.b2` | arithmetic | 2 | 23 | 9 | 6–8 |
+| `arithmetic.b3` | arithmetic | 3 | 23 | 6 | 9–11 |
 | `calc1.b8` | calc1 | 8 | 1 | 1 | 26–26 |
-| `calc1.b9` | calc1 | 9 | 18 | 3 | 27–29 |
-| `calc1.b10` | calc1 | 10 | 26 | 3 | 30–32 |
-| `calc1.b11` | calc1 | 11 | 21 | 4 | 33–35 |
-| `calc1.b12` | calc1 | 12 | 10 | 2 | 36–37 |
+| `calc1.b9` | calc1 | 9 | 19 | 3 | 27–29 |
+| `calc1.b10` | calc1 | 10 | 28 | 3 | 30–32 |
+| `calc1.b11` | calc1 | 11 | 22 | 4 | 33–35 |
+| `calc1.b12` | calc1 | 12 | 14 | 3 | 36–37 |
 | `calc2.b9` | calc2 | 9 | 3 | 2 | 29–29 |
-| `calc2.b10` | calc2 | 10 | 23 | 1 | 30–32 |
-| `calc2.b11` | calc2 | 11 | 14 | 1 | 33–35 |
-| `calc2.b12` | calc2 | 12 | 23 | 3 | 36–37 |
+| `calc2.b10` | calc2 | 10 | 26 | 1 | 30–32 |
+| `calc2.b11` | calc2 | 11 | 5 | 2 | 33–35 |
+| `calc2.b12` | calc2 | 12 | 37 | 3 | 36–38 |
 | `calc3.b9` | calc3 | 9 | 5 | 1 | 28–29 |
-| `calc3.b10` | calc3 | 10 | 8 | 3 | 31–32 |
-| `calc3.b11` | calc3 | 11 | 20 | 5 | 33–35 |
-| `calc3.b12` | calc3 | 12 | 28 | 5 | 36–38 |
+| `calc3.b10` | calc3 | 10 | 9 | 3 | 31–32 |
+| `calc3.b11` | calc3 | 11 | 18 | 3 | 33–35 |
+| `calc3.b12` | calc3 | 12 | 35 | 5 | 36–38 |
+| `calc3.b13` | calc3 | 13 | 4 | 2 | 39–40 |
 | `complex_numbers.b3` | complex_numbers | 3 | 4 | 2 | 10–11 |
 | `complex_numbers.b6` | complex_numbers | 6 | 1 | 1 | 20–20 |
 | `complex_numbers.b7` | complex_numbers | 7 | 10 | 2 | 21–23 |
 | `complex_numbers.b8` | complex_numbers | 8 | 10 | 2 | 24–26 |
 | `complex_numbers.b10` | complex_numbers | 10 | 2 | 2 | 32–32 |
-| `complex_numbers.b11` | complex_numbers | 11 | 11 | 2 | 33–35 |
-| `complex_numbers.b12` | complex_numbers | 12 | 4 | 2 | 36–38 |
-| `differential_equations.b11` | differential_equations | 11 | 3 | 2 | 33–35 |
-| `differential_equations.b12` | differential_equations | 12 | 14 | 4 | 36–38 |
-| `differential_equations.b13` | differential_equations | 13 | 17 | 4 | 39–41 |
+| `complex_numbers.b11` | complex_numbers | 11 | 15 | 3 | 33–35 |
+| `complex_numbers.b12` | complex_numbers | 12 | 9 | 3 | 36–38 |
+| `differential_equations.b11` | differential_equations | 11 | 5 | 2 | 33–35 |
+| `differential_equations.b12` | differential_equations | 12 | 15 | 4 | 36–38 |
+| `differential_equations.b13` | differential_equations | 13 | 18 | 4 | 39–41 |
 | `differential_equations.b14` | differential_equations | 14 | 8 | 5 | 42–44 |
 | `discrete_math.b1` | discrete_math | 1 | 1 | 1 | 5–5 |
 | `discrete_math.b2` | discrete_math | 2 | 2 | 1 | 7–8 |
 | `discrete_math.b4` | discrete_math | 4 | 4 | 2 | 13–14 |
-| `discrete_math.b5` | discrete_math | 5 | 17 | 4 | 15–17 |
-| `discrete_math.b6` | discrete_math | 6 | 19 | 5 | 18–20 |
+| `discrete_math.b5` | discrete_math | 5 | 18 | 4 | 15–17 |
+| `discrete_math.b6` | discrete_math | 6 | 25 | 7 | 18–20 |
 | `discrete_math.b7` | discrete_math | 7 | 4 | 2 | 21–22 |
 | `discrete_math.b8` | discrete_math | 8 | 1 | 1 | 26–26 |
-| `discrete_math.b9` | discrete_math | 9 | 7 | 3 | 27–29 |
+| `discrete_math.b9` | discrete_math | 9 | 8 | 3 | 27–29 |
+| `discrete_math.b10` | discrete_math | 10 | 1 | 1 | 30–30 |
 | `fractions.b2` | fractions | 2 | 8 | 4 | 6–8 |
-| `fractions.b3` | fractions | 3 | 23 | 9 | 9–11 |
-| `fractions.b4` | fractions | 4 | 13 | 6 | 12–14 |
-| `fractions.b5` | fractions | 5 | 1 | 1 | 15–15 |
+| `fractions.b3` | fractions | 3 | 26 | 9 | 9–11 |
+| `fractions.b4` | fractions | 4 | 16 | 6 | 12–14 |
+| `fractions.b5` | fractions | 5 | 2 | 2 | 15–15 |
 | `geometry.b0` | geometry | 0 | 8 | 5 | 0–2 |
-| `geometry.b1` | geometry | 1 | 15 | 7 | 3–4 |
+| `geometry.b1` | geometry | 1 | 22 | 7 | 3–5 |
 | `geometry.b2` | geometry | 2 | 2 | 2 | 8–8 |
-| `geometry.b3` | geometry | 3 | 12 | 5 | 9–11 |
-| `geometry.b4` | geometry | 4 | 6 | 2 | 12–13 |
+| `geometry.b3` | geometry | 3 | 18 | 6 | 9–11 |
+| `geometry.b4` | geometry | 4 | 16 | 4 | 12–14 |
+| `geometry.b5` | geometry | 5 | 1 | 1 | 15–15 |
 | `geometry.b6` | geometry | 6 | 1 | 1 | 20–20 |
-| `geometry.b7` | geometry | 7 | 1 | 1 | 21–21 |
+| `geometry.b7` | geometry | 7 | 2 | 2 | 21–21 |
 | `graph_theory.b1` | graph_theory | 1 | 1 | 1 | 5–5 |
 | `graph_theory.b2` | graph_theory | 2 | 1 | 1 | 6–6 |
 | `graph_theory.b3` | graph_theory | 3 | 1 | 1 | 11–11 |
 | `graph_theory.b5` | graph_theory | 5 | 2 | 2 | 17–17 |
-| `graph_theory.b6` | graph_theory | 6 | 12 | 5 | 18–20 |
-| `graph_theory.b7` | graph_theory | 7 | 19 | 6 | 21–23 |
+| `graph_theory.b6` | graph_theory | 6 | 18 | 5 | 18–20 |
+| `graph_theory.b7` | graph_theory | 7 | 23 | 6 | 21–23 |
 | `graph_theory.b8` | graph_theory | 8 | 4 | 2 | 24–25 |
 | `linear_algebra.b0` | linear_algebra | 0 | 1 | 1 | 2–2 |
-| `linear_algebra.b1` | linear_algebra | 1 | 5 | 2 | 3–5 |
+| `linear_algebra.b1` | linear_algebra | 1 | 6 | 2 | 3–5 |
 | `linear_algebra.b2` | linear_algebra | 2 | 1 | 1 | 8–8 |
-| `linear_algebra.b3` | linear_algebra | 3 | 11 | 5 | 9–11 |
+| `linear_algebra.b3` | linear_algebra | 3 | 12 | 5 | 9–11 |
 | `linear_algebra.b4` | linear_algebra | 4 | 10 | 4 | 12–14 |
 | `linear_algebra.b7` | linear_algebra | 7 | 6 | 2 | 21–23 |
-| `linear_algebra.b8` | linear_algebra | 8 | 5 | 1 | 24–26 |
-| `linear_algebra.b9` | linear_algebra | 9 | 6 | 2 | 27–28 |
+| `linear_algebra.b8` | linear_algebra | 8 | 13 | 5 | 24–26 |
+| `linear_algebra.b9` | linear_algebra | 9 | 10 | 4 | 27–28 |
 | `machine_learning.b3` | machine_learning | 3 | 5 | 2 | 9–11 |
 | `machine_learning.b4` | machine_learning | 4 | 1 | 1 | 14–14 |
 | `machine_learning.b7` | machine_learning | 7 | 5 | 3 | 21–23 |
-| `machine_learning.b8` | machine_learning | 8 | 9 | 5 | 24–26 |
-| `machine_learning.b9` | machine_learning | 9 | 3 | 2 | 27–28 |
+| `machine_learning.b8` | machine_learning | 8 | 10 | 5 | 24–26 |
+| `machine_learning.b9` | machine_learning | 9 | 8 | 3 | 27–28 |
 | `machine_learning.b10` | machine_learning | 10 | 2 | 1 | 31–32 |
-| `machine_learning.b11` | machine_learning | 11 | 9 | 4 | 33–35 |
-| `machine_learning.b12` | machine_learning | 12 | 11 | 4 | 36–37 |
+| `machine_learning.b11` | machine_learning | 11 | 12 | 5 | 33–35 |
+| `machine_learning.b12` | machine_learning | 12 | 12 | 5 | 36–37 |
 | `number_theory.b2` | number_theory | 2 | 1 | 1 | 8–8 |
-| `number_theory.b3` | number_theory | 3 | 13 | 2 | 9–11 |
-| `number_theory.b4` | number_theory | 4 | 15 | 4 | 12–14 |
-| `number_theory.b5` | number_theory | 5 | 12 | 2 | 15–17 |
+| `number_theory.b3` | number_theory | 3 | 14 | 2 | 9–11 |
+| `number_theory.b4` | number_theory | 4 | 17 | 4 | 12–14 |
+| `number_theory.b5` | number_theory | 5 | 18 | 3 | 15–17 |
 | `number_theory.b6` | number_theory | 6 | 1 | 1 | 20–20 |
 | `numerical_analysis.b0` | numerical_analysis | 0 | 6 | 1 | 0–2 |
 | `numerical_analysis.b6` | numerical_analysis | 6 | 1 | 1 | 20–20 |
 | `numerical_analysis.b7` | numerical_analysis | 7 | 9 | 2 | 21–23 |
-| `numerical_analysis.b8` | numerical_analysis | 8 | 6 | 1 | 24–26 |
-| `numerical_analysis.b10` | numerical_analysis | 10 | 4 | 1 | 30–32 |
-| `numerical_analysis.b11` | numerical_analysis | 11 | 6 | 2 | 33–35 |
-| `numerical_analysis.b12` | numerical_analysis | 12 | 8 | 1 | 36–38 |
+| `numerical_analysis.b8` | numerical_analysis | 8 | 9 | 2 | 24–26 |
+| `numerical_analysis.b9` | numerical_analysis | 9 | 3 | 1 | 27–28 |
+| `numerical_analysis.b10` | numerical_analysis | 10 | 5 | 2 | 30–32 |
+| `numerical_analysis.b11` | numerical_analysis | 11 | 6 | 2 | 33–34 |
+| `numerical_analysis.b12` | numerical_analysis | 12 | 6 | 1 | 36–38 |
+| `numerical_analysis.b13` | numerical_analysis | 13 | 4 | 1 | 39–39 |
 | `prealgebra.b0` | prealgebra | 0 | 1 | 1 | 1–1 |
 | `prealgebra.b2` | prealgebra | 2 | 1 | 1 | 8–8 |
-| `prealgebra.b3` | prealgebra | 3 | 17 | 6 | 9–11 |
-| `prealgebra.b4` | prealgebra | 4 | 27 | 6 | 12–14 |
-| `prealgebra.b5` | prealgebra | 5 | 10 | 5 | 15–17 |
-| `prealgebra.b6` | prealgebra | 6 | 4 | 2 | 18–19 |
+| `prealgebra.b3` | prealgebra | 3 | 20 | 6 | 9–11 |
+| `prealgebra.b4` | prealgebra | 4 | 29 | 6 | 12–14 |
+| `prealgebra.b5` | prealgebra | 5 | 14 | 6 | 15–17 |
+| `prealgebra.b6` | prealgebra | 6 | 6 | 2 | 18–19 |
 | `precalculus.b3` | precalculus | 3 | 1 | 1 | 10–10 |
-| `precalculus.b4` | precalculus | 4 | 6 | 2 | 12–14 |
+| `precalculus.b4` | precalculus | 4 | 8 | 2 | 12–14 |
 | `precalculus.b6` | precalculus | 6 | 1 | 1 | 20–20 |
-| `precalculus.b7` | precalculus | 7 | 10 | 5 | 21–23 |
-| `precalculus.b8` | precalculus | 8 | 28 | 8 | 24–26 |
-| `precalculus.b9` | precalculus | 9 | 4 | 2 | 27–27 |
+| `precalculus.b7` | precalculus | 7 | 12 | 5 | 21–23 |
+| `precalculus.b8` | precalculus | 8 | 30 | 8 | 24–26 |
+| `precalculus.b9` | precalculus | 9 | 6 | 3 | 27–27 |
 | `probability_theory.b3` | probability_theory | 3 | 2 | 2 | 11–11 |
-| `probability_theory.b4` | probability_theory | 4 | 31 | 7 | 12–14 |
-| `probability_theory.b5` | probability_theory | 5 | 15 | 4 | 15–17 |
-| `probability_theory.b6` | probability_theory | 6 | 2 | 2 | 18–18 |
+| `probability_theory.b4` | probability_theory | 4 | 37 | 8 | 12–14 |
+| `probability_theory.b5` | probability_theory | 5 | 20 | 8 | 15–17 |
+| `probability_theory.b6` | probability_theory | 6 | 4 | 2 | 18–19 |
 | `real_analysis.b9` | real_analysis | 9 | 7 | 3 | 27–29 |
-| `real_analysis.b10` | real_analysis | 10 | 28 | 5 | 30–32 |
-| `real_analysis.b11` | real_analysis | 11 | 16 | 4 | 33–35 |
-| `real_analysis.b12` | real_analysis | 12 | 4 | 1 | 36–37 |
-| `statistics.b0` | statistics | 0 | 2 | 1 | 1–2 |
+| `real_analysis.b10` | real_analysis | 10 | 29 | 5 | 30–32 |
+| `real_analysis.b11` | real_analysis | 11 | 22 | 5 | 33–35 |
+| `real_analysis.b12` | real_analysis | 12 | 6 | 1 | 36–38 |
+| `real_analysis.b13` | real_analysis | 13 | 1 | 1 | 39–39 |
+| `statistics.b0` | statistics | 0 | 4 | 2 | 1–2 |
 | `statistics.b1` | statistics | 1 | 1 | 1 | 3–3 |
 | `statistics.b2` | statistics | 2 | 1 | 1 | 8–8 |
-| `statistics.b3` | statistics | 3 | 22 | 5 | 9–11 |
-| `statistics.b4` | statistics | 4 | 18 | 4 | 12–14 |
-| `statistics.b5` | statistics | 5 | 9 | 1 | 15–17 |
-| `statistics.b6` | statistics | 6 | 1 | 1 | 18–18 |
-| `statistics.b8` | statistics | 8 | 1 | 1 | 24–24 |
-| `topology.b10` | topology | 10 | 10 | 3 | 30–32 |
-| `topology.b11` | topology | 11 | 19 | 9 | 33–35 |
-| `topology.b12` | topology | 12 | 13 | 7 | 36–38 |
+| `statistics.b3` | statistics | 3 | 24 | 6 | 9–11 |
+| `statistics.b4` | statistics | 4 | 24 | 8 | 12–14 |
+| `statistics.b5` | statistics | 5 | 11 | 1 | 15–17 |
+| `statistics.b6` | statistics | 6 | 4 | 2 | 18–20 |
+| `statistics.b7` | statistics | 7 | 2 | 2 | 21–21 |
+| `statistics.b8` | statistics | 8 | 2 | 2 | 24–25 |
+| `topology.b10` | topology | 10 | 11 | 3 | 30–32 |
+| `topology.b11` | topology | 11 | 22 | 9 | 33–35 |
+| `topology.b12` | topology | 12 | 19 | 8 | 36–38 |
 | `trigonometry.b2` | trigonometry | 2 | 4 | 1 | 7–8 |
 | `trigonometry.b3` | trigonometry | 3 | 7 | 2 | 9–11 |
-| `trigonometry.b4` | trigonometry | 4 | 19 | 4 | 12–14 |
+| `trigonometry.b4` | trigonometry | 4 | 22 | 4 | 12–14 |
 | `trigonometry.b5` | trigonometry | 5 | 1 | 1 | 15–15 |
-| `trigonometry.b7` | trigonometry | 7 | 22 | 5 | 21–23 |
-| `trigonometry.b8` | trigonometry | 8 | 15 | 5 | 24–25 |
+| `trigonometry.b7` | trigonometry | 7 | 23 | 5 | 21–23 |
+| `trigonometry.b8` | trigonometry | 8 | 21 | 6 | 24–26 |
 
 ## Backward band edges
 
@@ -177,19 +184,19 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 173 | 5 | 39 | 27 | 55 | 2 | 0 |
-| 3 | 131 | 7 | 42 | 26 | 38 | 9 | 0 |
-| 4 | 104 | 10 | 63 | 10 | 25 | 12 | 0 |
-| 5 | 89 | 10 | 81 | 7 | 17 | 13 | 0 |
-| 6 | 86 | 11 | 77 | 8 | 18 | 18 | 0 |
-| 8 | 66 | 15 | 82 | 4 | 9 | 21 | 0 |
-| 10 | 56 | 17 | 100 | 3 | 9 | 18 | 0 |
-| 12 | 58 | 16 | 83 | 2 | 6 | 22 | 0 |
-| 15 | 46 | 21 | 119 | 1 | 5 | 21 | 0 |
-| 20 | 37 | 37 | 100 | 2 | 4 | 23 | 0 |
-| 45 | 23 | 50 | 124 | 0 | 0 | 23 | 0 |
+| 2 | 181 | 6 | 43 | 28 | 51 | 5 | 0 |
+| 3 | 138 | 8 | 45 | 24 | 38 | 12 | 0 |
+| 4 | 106 | 12 | 69 | 9 | 21 | 19 | 0 |
+| 5 | 93 | 12 | 89 | 9 | 17 | 21 | 0 |
+| 6 | 87 | 12 | 83 | 7 | 15 | 22 | 0 |
+| 8 | 67 | 17 | 88 | 4 | 9 | 25 | 0 |
+| 10 | 58 | 21 | 114 | 4 | 10 | 24 | 0 |
+| 12 | 58 | 21 | 90 | 1 | 5 | 25 | 0 |
+| 15 | 47 | 26 | 133 | 1 | 5 | 24 | 0 |
+| 20 | 38 | 43 | 114 | 2 | 4 | 25 | 0 |
+| 45 | 23 | 63 | 139 | 0 | 0 | 23 | 0 |
 
-**No width is clean.** Small widths fragment, at 3 there are 26 singleton units, which is a
+**No width is clean.** Small widths fragment, at 3 there are 24 singleton units, which is a
 quiz per concept and is exactly what §12 rules out. Large widths stop fragmenting but produce
 units too large to assess: at 45 the partition is just the 17 domains themselves, whose
 largest is 128 concepts. The usable widths trade fragmentation against size rather than
@@ -204,7 +211,7 @@ The subdomain condensation of the concept DAG **contains cycles**: grouping conc
 subdomain discards the per-concept ordering, so a concept in subdomain A can be a
 prerequisite of one in subdomain B whose other members depend on A.
 
-**108 of 125 subdomains cannot be levelled**, they sit inside a cycle, or downstream
+**176 of 125 subdomains cannot be levelled**, they sit inside a cycle, or downstream
 of one, so no depth function exists for them at all. (Tarjan puts 26 inside cycles and
 the remaining 34 behind them; Kahn cannot order either group, because ordering a node
 requires its predecessors to be ordered first.) An implementation that ignores this
@@ -213,147 +220,232 @@ one, which is what the first Go version of this generator did.
 
 Unresolvable subdomains:
 
-`abstract_algebra.fields` 
-`abstract_algebra.rings` 
-`abstract_algebra.structures` 
-`algebra.conics` 
+`abstract_algebra.fields`
+`abstract_algebra.groups`
+`abstract_algebra.rings`
+`abstract_algebra.structures`
 
-`algebra.equations` 
-`algebra.inequalities` 
-`algebra.linear` 
-`algebra.logarithms` 
+`algebra.conics`
+`algebra.equations`
+`algebra.exponential`
+`algebra.factoring`
 
-`algebra.rational` 
-`algebra.sequences` 
-`algebra.systems` 
-`arithmetic.addition` 
+`algebra.functions`
+`algebra.inequalities`
+`algebra.linear`
+`algebra.logarithms`
 
-`calculus.advanced` 
-`calculus.derivatives` 
-`calculus.integrals` 
-`calculus.limits` 
+`algebra.polynomials`
+`algebra.quadratics`
+`algebra.radicals`
+`algebra.rational`
 
-`calculus.multivariable` 
-`calculus.polar` 
-`calculus.sequences` 
-`calculus.series` 
+`algebra.sequences`
+`algebra.systems`
+`arithmetic.addition`
+`arithmetic.decimals_intro`
 
-`calculus.vector` 
-`complex_numbers.topology` 
-`differential_equations.basics` 
-`differential_equations.boundary` 
+`arithmetic.division`
+`arithmetic.estimation`
+`arithmetic.exponents`
+`arithmetic.factors`
 
-`differential_equations.first_order` 
-`differential_equations.integral` 
-`differential_equations.nonlinear` 
-`differential_equations.numerical` 
+`arithmetic.multiplication`
+`arithmetic.negatives`
+`arithmetic.order_of_operations`
+`arithmetic.place_value`
 
-`differential_equations.pde` 
-`differential_equations.second_order` 
-`differential_equations.stability` 
-`differential_equations.systems` 
+`arithmetic.subtraction`
+`arithmetic.word_problems`
+`calculus.advanced`
+`calculus.derivatives`
 
-`differential_equations.transforms` 
-`discrete_math.graph_theory` 
-`discrete_math.logic` 
-`discrete_math.proof` 
+`calculus.integrals`
+`calculus.limits`
+`calculus.multivariable`
+`calculus.polar`
 
-`discrete_math.recurrence` 
-`discrete_math.sets` 
-`frac.compare` 
-`frac.div` 
+`calculus.sequences`
+`calculus.series`
+`calculus.vector`
+`complex_numbers.advanced`
 
-`frac.mixed` 
-`frac.mult` 
-`frac.sub` 
-`fractions.division` 
+`complex_numbers.basics`
+`complex_numbers.integral`
+`complex_numbers.topology`
+`differential_equations.basics`
 
-`geometry.basics` 
-`geometry.transform` 
-`graph_theory.basics` 
-`graph_theory.coloring` 
+`differential_equations.boundary`
+`differential_equations.first_order`
+`differential_equations.integral`
+`differential_equations.nonlinear`
 
-`graph_theory.connectivity` 
-`graph_theory.extremal` 
-`graph_theory.flows` 
-`graph_theory.matching` 
+`differential_equations.numerical`
+`differential_equations.pde`
+`differential_equations.second_order`
+`differential_equations.stability`
 
-`graph_theory.planarity` 
-`graph_theory.spectral` 
-`linear_algebra.decompositions` 
-`linear_algebra.eigenvalues` 
+`differential_equations.systems`
+`differential_equations.transforms`
+`discrete_math.automata`
+`discrete_math.coding`
 
-`linear_algebra.inner_product` 
-`linear_algebra.matrices` 
-`linear_algebra.systems` 
-`linear_algebra.transformations` 
+`discrete_math.combinatorics`
+`discrete_math.graph_theory`
+`discrete_math.logic`
+`discrete_math.proof`
 
-`machine_learning.nlp` 
-`machine_learning.reinforcement` 
-`machine_learning.trees` 
-`number_theory.applications` 
+`discrete_math.recurrence`
+`discrete_math.sets`
+`frac.compare`
+`frac.div`
 
-`numerical_analysis.errors` 
-`numerical_analysis.integration` 
-`numerical_analysis.linear` 
-`numerical_analysis.roots` 
+`frac.mixed`
+`frac.mult`
+`frac.sub`
+`fractions.addition`
 
-`prealgebra.equations` 
-`prealgebra.inequalities` 
-`precalculus.conics` 
-`precalculus.discrete` 
+`fractions.concept`
+`fractions.division`
+`fractions.equivalence`
+`fractions.mixed`
 
-`precalculus.exponential` 
-`precalculus.functions` 
-`precalculus.parametric` 
-`precalculus.polar` 
+`fractions.multiplication`
+`fractions.subtraction`
+`geometry.basics`
+`geometry.coordinate`
 
-`precalculus.polynomials` 
-`precalculus.rational` 
-`precalculus.sequences` 
-`precalculus.systems` 
+`geometry.solid`
+`geometry.transform`
+`graph_theory.basics`
+`graph_theory.coloring`
 
-`precalculus.vectors` 
-`probability_theory.characteristic` 
-`probability_theory.convergence` 
-`probability_theory.distributions` 
+`graph_theory.connectivity`
+`graph_theory.extremal`
+`graph_theory.flows`
+`graph_theory.matching`
 
-`probability_theory.processes` 
-`real_analysis.deriv` 
-`real_analysis.limit` 
-`real_analysis.metric` 
+`graph_theory.planarity`
+`graph_theory.spectral`
+`linear_algebra.decompositions`
+`linear_algebra.determinants`
 
-`real_analysis.order` 
-`real_analysis.seq` 
-`statistics.distributions` 
-`topology.algebraic` 
+`linear_algebra.eigenvalues`
+`linear_algebra.inner_product`
+`linear_algebra.matrices`
+`linear_algebra.systems`
 
-`topology.basics` 
-`topology.compact` 
-`topology.connected` 
-`topology.constructions` 
+`linear_algebra.transformations`
+`linear_algebra.vectors`
+`machine_learning.classification`
+`machine_learning.data`
 
-`topology.covering` 
-`topology.dimension` 
-`topology.invariants` 
-`topology.knot` 
+`machine_learning.evaluation`
+`machine_learning.neural_networks`
+`machine_learning.nlp`
+`machine_learning.regression`
 
-`topology.manifolds` 
-`topology.metrization` 
-`topology.separation` 
-`trigonometry.advanced` 
+`machine_learning.reinforcement`
+`machine_learning.trees`
+`machine_learning.unsupervised`
+`number_theory.advanced`
 
-`trigonometry.functions` 
-`trigonometry.graphs` 
-`trigonometry.hyperbolic` 
-`trigonometry.identities` 
+`number_theory.analytic`
+`number_theory.applications`
+`number_theory.basics`
+`numerical_analysis.errors`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1250
+`numerical_analysis.fourier`
+`numerical_analysis.integration`
+`numerical_analysis.linear`
+`numerical_analysis.roots`
+
+`prealgebra.decimals`
+`prealgebra.equations`
+`prealgebra.exponents`
+`prealgebra.inequalities`
+
+`prealgebra.measurement`
+`prealgebra.negatives`
+`prealgebra.percentages`
+`prealgebra.ratios`
+
+`prealgebra.variables`
+`precalculus.analytic`
+`precalculus.conics`
+`precalculus.discrete`
+
+`precalculus.exponential`
+`precalculus.functions`
+`precalculus.parametric`
+`precalculus.polar`
+
+`precalculus.polynomials`
+`precalculus.rational`
+`precalculus.sequences`
+`precalculus.systems`
+
+`precalculus.vectors`
+`probability_theory.characteristic`
+`probability_theory.convergence`
+`probability_theory.distributions`
+
+`probability_theory.foundations`
+`probability_theory.joint`
+`probability_theory.joint_distributions`
+`probability_theory.limits`
+
+`probability_theory.moments`
+`probability_theory.processes`
+`probability_theory.random_variables`
+`real_analysis.deriv`
+
+`real_analysis.limit`
+`real_analysis.measure`
+`real_analysis.metric`
+`real_analysis.order`
+
+`real_analysis.seq`
+`statistics.advanced`
+`statistics.central_tendency`
+`statistics.data_collection`
+
+`statistics.data_representation`
+`statistics.distributions`
+`statistics.inference`
+`statistics.probability`
+
+`statistics.regression`
+`statistics.spread`
+`topology.algebraic`
+`topology.basics`
+
+`topology.compact`
+`topology.connected`
+`topology.constructions`
+`topology.covering`
+
+`topology.dimension`
+`topology.invariants`
+`topology.knot`
+`topology.manifolds`
+
+`topology.metrization`
+`topology.separation`
+`trigonometry.advanced`
+`trigonometry.equations`
+
+`trigonometry.functions`
+`trigonometry.graphs`
+`trigonometry.hyperbolic`
+`trigonometry.identities`
+
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1500
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings
 
-- **anomaly** `singleton_units`: 26 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
+- **anomaly** `singleton_units`: 24 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
 
 ## Not decided here
 

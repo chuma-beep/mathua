@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Zeros and poles",
+    "section": "Zeros and poles",
+    "subgoals": [
+      "The argument principle relates the change in the argument of an analytic function along a closed contour to th",
+      "The statement is a bookkeeping device for the winding number. As the contour is traversed, the image curve win",
+      "To apply it, factor the function near each zero or pole. A zero of order m contributes m, and a pole of order "
+    ]
+  },
+  {
+    "label": "The winding contribution",
+    "section": "The winding contribution",
+    "subgoals": [
+      "The change in argument is a real number, but it is only defined modulo two pi until we choose a continuous bra",
+      "For a rational function, the argument principle gives the difference between the number of zeros and the numbe",
+      "Computing the change directly is often harder than counting zeros and poles. The principle is most useful in t"
+    ]
+  },
+  {
+    "label": "Rouche as a consequence",
+    "section": "Rouche as a consequence",
+    "subgoals": [
+      "Rouche's theorem compares two analytic functions on a contour. If one function is strictly larger than the oth",
+      "The usual application counts zeros of a complicated polynomial by comparing it with its dominant term on a lar",
+      "Rouche is also useful for locating zeros in a region. Choose a comparison function whose zeros are known and v"
+    ]
+  }
+]

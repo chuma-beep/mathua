@@ -1,6 +1,6 @@
 [
   {
-    "heuristic": "trig siblings interfere \u2014 non-trivial group 5 members",
+    "heuristic": "trig siblings interfere — non-trivial group 5 members",
     "interference_group": "trig.basic",
     "members": [
       "trig.basics.radians",
@@ -21,7 +21,7 @@
     ]
   },
   {
-    "heuristic": "abstract group siblings interfere \u2014 normal/lagrange/quotient/action/sylow",
+    "heuristic": "abstract group siblings interfere — normal/lagrange/quotient/action/sylow",
     "interference_group": "abstract.group",
     "members": [
       "abstract.group.normal",
@@ -43,7 +43,7 @@
     ]
   },
   {
-    "heuristic": "ml arch siblings interfere \u2014 cnn/rnn/transformer/gan",
+    "heuristic": "ml arch siblings interfere — cnn/rnn/transformer/gan",
     "interference_group": "ml.arch",
     "members": [
       "ml.arch.cnn",
@@ -63,8 +63,8 @@
     ]
   },
   {
-    "heuristic": "new subdomains for ML beyond 20 \u2014 ml.reinforcement / ml.nlp",
-    "note": "Future ML 20\u219230 will split single subdomain machine_learning.neural_networks into ml.reinforcement and ml.nlp to restore scheduler dissimilarity (scheduler.go:80 NextSmart distinct subdomain filter) \u2014 reserve note, no interference yet"
+    "heuristic": "new subdomains for ML beyond 20 — ml.reinforcement / ml.nlp",
+    "note": "Future ML 20→30 will split single subdomain machine_learning.neural_networks into ml.reinforcement and ml.nlp to restore scheduler dissimilarity (scheduler.go:80 NextSmart distinct subdomain filter) — reserve note, no interference yet"
   },
   {
     "heuristic": "linalg determinant and inverse siblings interfere",
@@ -3284,7 +3284,7 @@
       "alg.func.concept"
     ],
     "heuristic": "calc.encompasses.alg",
-    "note": "calc.* encompasses alg.* \u2014 higher integration encompasses function concept for layering",
+    "note": "calc.* encompasses alg.* — higher integration encompasses function concept for layering",
     "variants": [
       {
         "difficulty": 0.3,
@@ -3540,14 +3540,16 @@
   {
     "id": "calc.integral.definite",
     "key_prerequisites": [
-      "calc.integral.power_rule"
+      "calc.integral.riemann_sums"
     ],
     "encompasses": [
+      "calc.integral.riemann_sums",
       "calc.integral.indefinite",
       "frac.add.diff"
     ],
-    "heuristic": "definite integrals encompass antiderivatives and fraction arithmetic",
+    "heuristic": "definite integrals encompass Riemann sums, antiderivatives and fraction arithmetic",
     "prerequisites": [
+      "calc.integral.riemann_sums",
       "calc.integral.indefinite",
       "frac.add.diff"
     ]
@@ -9822,8 +9824,7 @@
   {
     "id": "linalg.matrix.rank",
     "key_prerequisites": [
-      "linalg.det.2x2",
-      "linalg.det.3x3"
+      "linalg.systems.row_reduction"
     ],
     "encompasses": [
       "linalg.det.2x2",
@@ -9902,11 +9903,12 @@
     "id": "linalg.decomp.qr",
     "key_prerequisites": [
       "linalg.decomp.lu",
-      "linalg.inner_product"
+      "linalg.orth.gram_schmidt"
     ],
     "encompasses": [
       "linalg.decomp.lu",
-      "linalg.inner_product"
+      "linalg.inner_product",
+      "linalg.orth.gram_schmidt"
     ]
   },
   {
@@ -10337,7 +10339,7 @@
       "ml.regularization",
       "ml.loss.cross_entropy"
     ],
-    "heuristic": "ml dropout variants \u2014 easy/hard",
+    "heuristic": "ml dropout variants — easy/hard",
     "variants": [
       {
         "difficulty": 0.3,
@@ -13421,7 +13423,8 @@
     ],
     "prerequisites": [
       "stat.prob.basic",
-      "prob.space.axioms"
+      "prob.space.axioms",
+      "stat.prob.conditional"
     ]
   },
   {
@@ -13435,7 +13438,8 @@
     ],
     "prerequisites": [
       "stat.prob.basic",
-      "prob.space.axioms"
+      "prob.space.axioms",
+      "stat.prob.conditional"
     ]
   },
   {
@@ -16887,6 +16891,2927 @@
     ],
     "prerequisites": [
       "trig.adv.law_sines"
+    ]
+  },
+  {
+    "id": "linalg.systems.row_reduction",
+    "key_prerequisites": [
+      "linalg.systems.matrix"
+    ],
+    "encompasses": [
+      "alg.systems.elimination"
+    ],
+    "heuristic": "row reduction encompasses elimination on an augmented matrix"
+  },
+  {
+    "id": "linalg.matrix.fundamental_subspaces",
+    "key_prerequisites": [
+      "linalg.matrix.rank",
+      "linalg.vec.basis"
+    ],
+    "encompasses": [
+      "linalg.rank.nullity"
+    ],
+    "heuristic": "fundamental subspaces encompass rank and basis"
+  },
+  {
+    "id": "linalg.orth.gram_schmidt",
+    "key_prerequisites": [
+      "linalg.inner_product",
+      "linalg.vec.basis"
+    ],
+    "encompasses": [
+      "linalg.orth.projection_coeff"
+    ],
+    "heuristic": "Gram-Schmidt encompasses inner products and projection"
+  },
+  {
+    "id": "linalg.transform.matrix",
+    "key_prerequisites": [
+      "linalg.lintrans.concept",
+      "linalg.basis.change"
+    ],
+    "encompasses": [
+      "linalg.matrix.mult"
+    ],
+    "heuristic": "a transformation matrix encompasses basis change and matrix multiplication"
+  },
+  {
+    "id": "linalg.eigen.eigenspace",
+    "key_prerequisites": [
+      "linalg.eigen.compute",
+      "linalg.rank.nullity"
+    ],
+    "encompasses": [
+      "linalg.transform.kernel"
+    ],
+    "heuristic": "eigenspaces encompass eigenvalue computation and nullity"
+  },
+  {
+    "id": "ode.basics.slope_field",
+    "key_prerequisites": [
+      "ode.basics.concept",
+      "calc.deriv.concept",
+      "geo.coord.plot"
+    ],
+    "encompasses": [
+      "ode.basics.concept",
+      "calc.deriv.concept",
+      "geo.coord.plot"
+    ]
+  },
+  {
+    "id": "ode.first_order.logistic",
+    "key_prerequisites": [
+      "ode.first_order.separable",
+      "calc.deriv.exp_log"
+    ],
+    "encompasses": [
+      "ode.first_order.separable",
+      "calc.deriv.exp_log"
+    ]
+  },
+  {
+    "id": "ode.basics.existence_uniqueness",
+    "key_prerequisites": [
+      "ode.basics.concept",
+      "calc.deriv.partial"
+    ],
+    "encompasses": [
+      "ode.basics.concept",
+      "calc.deriv.partial"
+    ]
+  },
+  {
+    "id": "calc.integral.riemann_sums",
+    "key_prerequisites": [
+      "calc.integral.power_rule",
+      "calc.limit.concept"
+    ],
+    "encompasses": [
+      "calc.integral.power_rule",
+      "calc.limit.concept"
+    ]
+  },
+  {
+    "id": "calc.series.taylor_error",
+    "key_prerequisites": [
+      "calc.series.taylor",
+      "calc.series.remainder"
+    ],
+    "encompasses": [
+      "calc.series.taylor",
+      "calc.series.remainder"
+    ]
+  },
+  {
+    "id": "calc.series.termwise",
+    "key_prerequisites": [
+      "calc.series.power",
+      "calc.series.function_series"
+    ],
+    "encompasses": [
+      "calc.series.power",
+      "calc.series.function_series"
+    ]
+  },
+  {
+    "id": "calc.multi.functions_several",
+    "key_prerequisites": [
+      "calc.deriv.partial",
+      "calc.limit.concept"
+    ],
+    "encompasses": [
+      "calc.deriv.partial",
+      "calc.limit.concept"
+    ]
+  },
+  {
+    "id": "calc.multi.level_curves",
+    "key_prerequisites": [
+      "calc.multi.functions_several",
+      "geo.coord.plot"
+    ],
+    "encompasses": [
+      "calc.multi.functions_several",
+      "geo.coord.plot"
+    ]
+  },
+  {
+    "id": "calc.vec.vector_function",
+    "key_prerequisites": [
+      "calc.vec.parametric_derivative",
+      "calc.deriv.partial"
+    ],
+    "encompasses": [
+      "calc.vec.parametric_derivative",
+      "calc.deriv.partial"
+    ]
+  },
+  {
+    "id": "precalc.func.average_rate",
+    "key_prerequisites": [
+      "alg.func.concept",
+      "alg.linear.slope"
+    ],
+    "encompasses": [
+      "alg.func.concept",
+      "alg.linear.slope"
+    ]
+  },
+  {
+    "id": "linalg.systems.homogeneous",
+    "key_prerequisites": [
+      "linalg.systems.row_reduction",
+      "linalg.rank.nullity"
+    ],
+    "encompasses": [
+      "linalg.systems.row_reduction",
+      "linalg.rank.nullity"
+    ]
+  },
+  {
+    "id": "linalg.apps.leontief",
+    "key_prerequisites": [
+      "linalg.systems.homogeneous",
+      "linalg.matrix.inverse_2x2"
+    ],
+    "encompasses": [
+      "linalg.systems.homogeneous",
+      "linalg.matrix.inverse_2x2"
+    ]
+  },
+  {
+    "id": "prob.dist.poisson",
+    "key_prerequisites": [
+      "prob.rv.pmf",
+      "stat.dist.poisson"
+    ],
+    "encompasses": [
+      "prob.rv.pmf",
+      "stat.dist.poisson"
+    ]
+  },
+  {
+    "id": "prob.dist.normal",
+    "key_prerequisites": [
+      "prob.rv.pdf",
+      "stat.dist.normal"
+    ],
+    "encompasses": [
+      "prob.rv.pdf",
+      "stat.dist.normal"
+    ]
+  },
+  {
+    "id": "prob.moments.skew_kurtosis",
+    "key_prerequisites": [
+      "prob.rv.variance",
+      "prob.rv.expectation"
+    ],
+    "encompasses": [
+      "prob.rv.variance",
+      "prob.rv.expectation"
+    ]
+  },
+  {
+    "id": "prob.joint.conditional_density",
+    "key_prerequisites": [
+      "prob.joint.continuous",
+      "prob.expect.conditional"
+    ],
+    "encompasses": [
+      "prob.joint.continuous",
+      "prob.expect.conditional"
+    ]
+  },
+  {
+    "id": "prob.rv.pgf",
+    "key_prerequisites": [
+      "prob.rv.mgf",
+      "prob.rv.pmf"
+    ],
+    "encompasses": [
+      "prob.rv.mgf",
+      "prob.rv.pmf"
+    ]
+  },
+  {
+    "id": "prob.process.recurrence",
+    "key_prerequisites": [
+      "prob.process.markov_chain",
+      "prob.process.stationary"
+    ],
+    "encompasses": [
+      "prob.process.markov_chain",
+      "prob.process.stationary"
+    ]
+  },
+  {
+    "id": "prob.martingale.stopping",
+    "key_prerequisites": [
+      "prob.process.martingale",
+      "prob.expect.conditional"
+    ],
+    "encompasses": [
+      "prob.process.martingale",
+      "prob.expect.conditional"
+    ]
+  },
+  {
+    "id": "prob.rv.multivariate_transform",
+    "key_prerequisites": [
+      "prob.rv.transform",
+      "prob.joint.continuous"
+    ],
+    "encompasses": [
+      "prob.rv.transform",
+      "prob.joint.continuous"
+    ]
+  },
+  {
+    "id": "prob.rv.integral_transform",
+    "key_prerequisites": [
+      "prob.rv.transform",
+      "prob.rv.cdf"
+    ],
+    "encompasses": [
+      "prob.rv.transform",
+      "prob.rv.cdf"
+    ]
+  },
+  {
+    "id": "linalg.matrix.transpose",
+    "key_prerequisites": [
+      "linalg.matrix.concept"
+    ],
+    "encompasses": [
+      "linalg.matrix.concept"
+    ]
+  },
+  {
+    "id": "linalg.det.properties",
+    "key_prerequisites": [
+      "linalg.det.3x3",
+      "linalg.matrix.mult"
+    ],
+    "encompasses": [
+      "linalg.det.3x3",
+      "linalg.matrix.mult"
+    ]
+  },
+  {
+    "id": "linalg.invertible.theorem",
+    "key_prerequisites": [
+      "linalg.matrix.inverse_2x2",
+      "linalg.matrix.rank"
+    ],
+    "encompasses": [
+      "linalg.matrix.inverse_2x2",
+      "linalg.matrix.rank"
+    ]
+  },
+  {
+    "id": "linalg.eigen.similar",
+    "key_prerequisites": [
+      "linalg.eigen.diagonalization",
+      "linalg.basis.change"
+    ],
+    "encompasses": [
+      "linalg.eigen.diagonalization",
+      "linalg.basis.change"
+    ]
+  },
+  {
+    "id": "linalg.eigen.complex",
+    "key_prerequisites": [
+      "linalg.eigen.compute",
+      "alg.quad.complex"
+    ],
+    "encompasses": [
+      "linalg.eigen.compute",
+      "alg.quad.complex"
+    ]
+  },
+  {
+    "id": "linalg.vector.plane",
+    "key_prerequisites": [
+      "linalg.vector.dot",
+      "linalg.vector.parametric"
+    ],
+    "encompasses": [
+      "linalg.vector.dot",
+      "linalg.vector.parametric"
+    ]
+  },
+  {
+    "id": "linalg.orth.least_squares",
+    "key_prerequisites": [
+      "linalg.orth.projection_matrix",
+      "linalg.systems.row_reduction"
+    ],
+    "encompasses": [
+      "linalg.orth.projection_matrix",
+      "linalg.systems.row_reduction"
+    ]
+  },
+  {
+    "id": "geo.basic.transversal",
+    "key_prerequisites": [
+      "geo.basic.vertical",
+      "geo.basic.angles"
+    ],
+    "encompasses": [
+      "geo.basic.vertical",
+      "geo.basic.angles"
+    ]
+  },
+  {
+    "id": "geo.triangle.congruence",
+    "key_prerequisites": [
+      "geo.triangle.types",
+      "geo.triangle.angles"
+    ],
+    "encompasses": [
+      "geo.triangle.types",
+      "geo.triangle.angles"
+    ]
+  },
+  {
+    "id": "geo.triangle.pythagorean_converse",
+    "key_prerequisites": [
+      "geo.triangle.pythagorean"
+    ],
+    "encompasses": [
+      "geo.triangle.pythagorean"
+    ]
+  },
+  {
+    "id": "geo.triangle.special_right_45",
+    "key_prerequisites": [
+      "geo.triangle.special_right",
+      "geo.triangle.pythagorean"
+    ],
+    "encompasses": [
+      "geo.triangle.special_right",
+      "geo.triangle.pythagorean"
+    ]
+  },
+  {
+    "id": "geo.triangle.median_centroid",
+    "key_prerequisites": [
+      "geo.triangle.area",
+      "geo.coord.midpoint"
+    ],
+    "encompasses": [
+      "geo.triangle.area",
+      "geo.coord.midpoint"
+    ]
+  },
+  {
+    "id": "geo.transform.translation",
+    "key_prerequisites": [
+      "geo.coord.plot",
+      "geo.transform.dilation"
+    ],
+    "encompasses": [
+      "geo.coord.plot",
+      "geo.transform.dilation"
+    ]
+  },
+  {
+    "id": "geo.transform.reflection",
+    "key_prerequisites": [
+      "geo.coord.plot",
+      "geo.coord.lines"
+    ],
+    "encompasses": [
+      "geo.coord.plot",
+      "geo.coord.lines"
+    ]
+  },
+  {
+    "id": "geo.transform.rotation",
+    "key_prerequisites": [
+      "geo.transform.dilation",
+      "geo.coord.plot"
+    ],
+    "encompasses": [
+      "geo.transform.dilation",
+      "geo.coord.plot"
+    ]
+  },
+  {
+    "id": "geo.solid.cylinder",
+    "key_prerequisites": [
+      "geo.circle.area",
+      "geo.solid.prism_volume"
+    ],
+    "encompasses": [
+      "geo.circle.area",
+      "geo.solid.prism_volume"
+    ]
+  },
+  {
+    "id": "geo.solid.cone",
+    "key_prerequisites": [
+      "geo.solid.pyramid_volume",
+      "geo.circle.area"
+    ],
+    "encompasses": [
+      "geo.solid.pyramid_volume",
+      "geo.circle.area"
+    ]
+  },
+  {
+    "id": "geo.solid.sphere",
+    "key_prerequisites": [
+      "geo.circle.area",
+      "geo.solid.volume_rect"
+    ],
+    "encompasses": [
+      "geo.circle.area",
+      "geo.solid.volume_rect"
+    ]
+  },
+  {
+    "id": "geo.solid.curved_surface_area",
+    "key_prerequisites": [
+      "geo.solid.surface_area",
+      "geo.circle.circumference"
+    ],
+    "encompasses": [
+      "geo.solid.surface_area",
+      "geo.circle.circumference"
+    ]
+  },
+  {
+    "id": "geo.polygon.area_regular",
+    "key_prerequisites": [
+      "geo.polygon.interior_angles",
+      "geo.triangle.area"
+    ],
+    "encompasses": [
+      "geo.polygon.interior_angles",
+      "geo.triangle.area"
+    ]
+  },
+  {
+    "id": "geo.circle.chord_segments",
+    "key_prerequisites": [
+      "geo.circle.chord",
+      "geo.circle.inscribed_angle"
+    ],
+    "encompasses": [
+      "geo.circle.chord",
+      "geo.circle.inscribed_angle"
+    ]
+  },
+  {
+    "id": "geo.circle.secant",
+    "key_prerequisites": [
+      "geo.circle.tangent_length",
+      "geo.circle.chord"
+    ],
+    "encompasses": [
+      "geo.circle.tangent_length",
+      "geo.circle.chord"
+    ]
+  },
+  {
+    "id": "geo.similar.criteria",
+    "key_prerequisites": [
+      "geo.similar.ratio",
+      "geo.triangle.angles"
+    ],
+    "encompasses": [
+      "geo.similar.ratio",
+      "geo.triangle.angles"
+    ]
+  },
+  {
+    "id": "geo.area.composite",
+    "key_prerequisites": [
+      "geo.quad.area",
+      "geo.triangle.area"
+    ],
+    "encompasses": [
+      "geo.quad.area",
+      "geo.triangle.area"
+    ]
+  },
+  {
+    "id": "geo.triangle.angle_bisector",
+    "key_prerequisites": [
+      "geo.triangle.angles",
+      "geo.triangle.isosceles"
+    ],
+    "encompasses": [
+      "geo.triangle.angles",
+      "geo.triangle.isosceles"
+    ]
+  },
+  {
+    "id": "geo.triangle.perpendicular_bisector",
+    "key_prerequisites": [
+      "geo.coord.midpoint",
+      "geo.triangle.isosceles"
+    ],
+    "encompasses": [
+      "geo.coord.midpoint",
+      "geo.triangle.isosceles"
+    ]
+  },
+  {
+    "id": "geo.quad.properties",
+    "key_prerequisites": [
+      "geo.quad.types",
+      "geo.quad.area"
+    ],
+    "encompasses": [
+      "geo.quad.types",
+      "geo.quad.area"
+    ]
+  },
+  {
+    "id": "geo.circle.arc_measure",
+    "key_prerequisites": [
+      "geo.circle.inscribed_angle",
+      "geo.circle.circumference"
+    ],
+    "encompasses": [
+      "geo.circle.inscribed_angle",
+      "geo.circle.circumference"
+    ]
+  },
+  {
+    "id": "geo.solid.cross_section",
+    "key_prerequisites": [
+      "geo.solid.volume_rect",
+      "geo.solid.prism_volume"
+    ],
+    "encompasses": [
+      "geo.solid.volume_rect",
+      "geo.solid.prism_volume"
+    ]
+  },
+  {
+    "id": "geo.transform.symmetry",
+    "key_prerequisites": [
+      "geo.transform.dilation",
+      "geo.polygon.interior_angles"
+    ],
+    "encompasses": [
+      "geo.transform.dilation",
+      "geo.polygon.interior_angles"
+    ]
+  },
+  {
+    "id": "geo.solid.euler",
+    "key_prerequisites": [
+      "geo.solid.prism_volume",
+      "geo.solid.pyramid_volume"
+    ],
+    "encompasses": [
+      "geo.solid.prism_volume",
+      "geo.solid.pyramid_volume"
+    ]
+  },
+  {
+    "id": "alg.func.rate_of_change",
+    "key_prerequisites": [
+      "alg.func.concept",
+      "alg.linear.slope"
+    ],
+    "encompasses": [
+      "alg.func.concept",
+      "alg.linear.slope"
+    ]
+  },
+  {
+    "id": "alg.poly.graph_zeros",
+    "key_prerequisites": [
+      "alg.poly.concept",
+      "alg.poly.roots"
+    ],
+    "encompasses": [
+      "alg.poly.concept",
+      "alg.poly.roots"
+    ]
+  },
+  {
+    "id": "alg.eq.quadratic_form",
+    "key_prerequisites": [
+      "alg.quad.complete_square",
+      "alg.quad.formula"
+    ],
+    "encompasses": [
+      "alg.quad.complete_square",
+      "alg.quad.formula"
+    ]
+  },
+  {
+    "id": "alg.ineq.linear_programming",
+    "key_prerequisites": [
+      "alg.ineq.systems",
+      "alg.systems.elimination"
+    ],
+    "encompasses": [
+      "alg.ineq.systems",
+      "alg.systems.elimination"
+    ]
+  },
+  {
+    "id": "alg.exp.natural_base",
+    "key_prerequisites": [
+      "alg.exp.concept",
+      "alg.log.concept"
+    ],
+    "encompasses": [
+      "alg.exp.concept",
+      "alg.log.concept"
+    ]
+  },
+  {
+    "id": "alg.linear.point_slope",
+    "key_prerequisites": [
+      "alg.linear.slope",
+      "alg.linear.slope_intercept"
+    ],
+    "encompasses": [
+      "alg.linear.slope",
+      "alg.linear.slope_intercept"
+    ]
+  },
+  {
+    "id": "alg.seq.recursive",
+    "key_prerequisites": [
+      "alg.seq.arithmetic",
+      "alg.seq.geometric"
+    ],
+    "encompasses": [
+      "alg.seq.arithmetic",
+      "alg.seq.geometric"
+    ]
+  },
+  {
+    "id": "alg.radical.nth_root",
+    "key_prerequisites": [
+      "alg.radical.simplify",
+      "arith.exp.evaluate"
+    ],
+    "encompasses": [
+      "alg.radical.simplify",
+      "arith.exp.evaluate"
+    ]
+  },
+  {
+    "id": "alg.poly.fundamental_theorem",
+    "key_prerequisites": [
+      "alg.poly.roots",
+      "alg.quad.complex"
+    ],
+    "encompasses": [
+      "alg.poly.roots",
+      "alg.quad.complex"
+    ]
+  },
+  {
+    "id": "alg.exp.half_life",
+    "key_prerequisites": [
+      "alg.exp.concept",
+      "alg.eq.exponential"
+    ],
+    "encompasses": [
+      "alg.exp.concept",
+      "alg.eq.exponential"
+    ]
+  },
+  {
+    "id": "alg.eq.rational_exponent",
+    "key_prerequisites": [
+      "alg.radical.rational_exponents",
+      "alg.eq.exponential"
+    ],
+    "encompasses": [
+      "alg.radical.rational_exponents",
+      "alg.eq.exponential"
+    ]
+  },
+  {
+    "id": "alg.eq.rational.word",
+    "key_prerequisites": [
+      "alg.eq.rational",
+      "alg.rational.proportions"
+    ],
+    "encompasses": [
+      "alg.eq.rational",
+      "alg.rational.proportions"
+    ]
+  },
+  {
+    "id": "alg.func.composite_domain",
+    "key_prerequisites": [
+      "alg.func.composite",
+      "alg.func.domain"
+    ],
+    "encompasses": [
+      "alg.func.composite",
+      "alg.func.domain"
+    ]
+  },
+  {
+    "id": "alg.eq.linear.word",
+    "key_prerequisites": [
+      "alg.eq.multi_step",
+      "alg.linear.slope_intercept"
+    ],
+    "encompasses": [
+      "alg.eq.multi_step",
+      "alg.linear.slope_intercept"
+    ]
+  },
+  {
+    "id": "alg.linear.horizontal_vertical",
+    "key_prerequisites": [
+      "alg.linear.slope_intercept"
+    ],
+    "encompasses": [
+      "alg.linear.slope_intercept"
+    ]
+  },
+  {
+    "id": "arith.mult.two_by_two",
+    "key_prerequisites": [
+      "arith.mult.double",
+      "arith.add.carry"
+    ],
+    "encompasses": [
+      "arith.mult.double",
+      "arith.add.carry"
+    ]
+  },
+  {
+    "id": "arith.div.two_digit_divisor",
+    "key_prerequisites": [
+      "arith.div.long",
+      "arith.mult.two_by_two"
+    ],
+    "encompasses": [
+      "arith.div.long",
+      "arith.mult.two_by_two"
+    ]
+  },
+  {
+    "id": "arith.factor.divisibility",
+    "key_prerequisites": [
+      "arith.factor.find",
+      "arith.place.tens"
+    ],
+    "encompasses": [
+      "arith.factor.find",
+      "arith.place.tens"
+    ]
+  },
+  {
+    "id": "arith.sub.zeros",
+    "key_prerequisites": [
+      "arith.sub.borrow",
+      "arith.place.hundreds"
+    ],
+    "encompasses": [
+      "arith.sub.borrow",
+      "arith.place.hundreds"
+    ]
+  },
+  {
+    "id": "arith.ops.fact_families",
+    "key_prerequisites": [
+      "arith.mult.tables",
+      "arith.div.basic"
+    ],
+    "encompasses": [
+      "arith.mult.tables",
+      "arith.div.basic"
+    ]
+  },
+  {
+    "id": "arith.place.millions",
+    "key_prerequisites": [
+      "arith.place.thousands",
+      "arith.place.expanded"
+    ],
+    "encompasses": [
+      "arith.place.thousands",
+      "arith.place.expanded"
+    ]
+  },
+  {
+    "id": "arith.add.missing_addend",
+    "key_prerequisites": [
+      "arith.add.double",
+      "arith.sub.double"
+    ],
+    "encompasses": [
+      "arith.add.double",
+      "arith.sub.double"
+    ]
+  },
+  {
+    "id": "arith.estimate.quotient",
+    "key_prerequisites": [
+      "arith.round.tens",
+      "arith.div.two_digit_divisor"
+    ],
+    "encompasses": [
+      "arith.round.tens",
+      "arith.div.two_digit_divisor"
+    ]
+  },
+  {
+    "id": "arith.factor.multiple",
+    "key_prerequisites": [
+      "arith.mult.tables",
+      "arith.factor.find"
+    ],
+    "encompasses": [
+      "arith.mult.tables",
+      "arith.factor.find"
+    ]
+  },
+  {
+    "id": "arith.neg.compare",
+    "key_prerequisites": [
+      "arith.neg.number_line",
+      "arith.compare.whole"
+    ],
+    "encompasses": [
+      "arith.neg.number_line",
+      "arith.compare.whole"
+    ]
+  },
+  {
+    "id": "arith.factor.even_odd",
+    "key_prerequisites": [
+      "arith.factor.find",
+      "arith.place.tens"
+    ],
+    "encompasses": [
+      "arith.factor.find",
+      "arith.place.tens"
+    ]
+  },
+  {
+    "id": "arith.exp.standard_form",
+    "key_prerequisites": [
+      "arith.exp.evaluate",
+      "arith.place.millions"
+    ],
+    "encompasses": [
+      "arith.exp.evaluate",
+      "arith.place.millions"
+    ]
+  },
+  {
+    "id": "frac.ops.negative",
+    "key_prerequisites": [
+      "frac.add.diff",
+      "arith.neg.mult_div"
+    ],
+    "encompasses": [
+      "frac.add.diff",
+      "arith.neg.mult_div"
+    ]
+  },
+  {
+    "id": "frac.ops.repeating_decimal",
+    "key_prerequisites": [
+      "frac.ops.to_decimal",
+      "frac.ops.simplify"
+    ],
+    "encompasses": [
+      "frac.ops.to_decimal",
+      "frac.ops.simplify"
+    ]
+  },
+  {
+    "id": "frac.mixed.borrow",
+    "key_prerequisites": [
+      "frac.mixed.sub",
+      "frac.sub.whole"
+    ],
+    "encompasses": [
+      "frac.mixed.sub",
+      "frac.sub.whole"
+    ]
+  },
+  {
+    "id": "frac.ops.estimate",
+    "key_prerequisites": [
+      "frac.ops.benchmark",
+      "arith.estimate.sum"
+    ],
+    "encompasses": [
+      "frac.ops.benchmark",
+      "arith.estimate.sum"
+    ]
+  },
+  {
+    "id": "frac.word.multi_step",
+    "key_prerequisites": [
+      "frac.add.word",
+      "frac.sub.word",
+      "frac.of_number"
+    ],
+    "encompasses": [
+      "frac.add.word",
+      "frac.sub.word",
+      "frac.of_number"
+    ]
+  },
+  {
+    "id": "frac.div.by_whole",
+    "key_prerequisites": [
+      "frac.ops.div",
+      "frac.ops.mult"
+    ],
+    "encompasses": [
+      "frac.ops.div",
+      "frac.ops.mult"
+    ]
+  },
+  {
+    "id": "frac.compare.forms",
+    "key_prerequisites": [
+      "frac.ops.to_decimal",
+      "frac.ops.compare"
+    ],
+    "encompasses": [
+      "frac.ops.to_decimal",
+      "frac.ops.compare"
+    ]
+  },
+  {
+    "id": "prealg.ineq.negative",
+    "key_prerequisites": [
+      "prealg.ineq.one_step",
+      "arith.neg.mult_div"
+    ],
+    "encompasses": [
+      "prealg.ineq.one_step",
+      "arith.neg.mult_div"
+    ]
+  },
+  {
+    "id": "prealg.eq.fractions",
+    "key_prerequisites": [
+      "prealg.eq.two_step",
+      "frac.ops.negative"
+    ],
+    "encompasses": [
+      "prealg.eq.two_step",
+      "frac.ops.negative"
+    ]
+  },
+  {
+    "id": "ratio.ops.proportional_graph",
+    "key_prerequisites": [
+      "ratio.ops.proportion",
+      "prealg.real.concept"
+    ],
+    "encompasses": [
+      "ratio.ops.proportion",
+      "prealg.real.concept"
+    ]
+  },
+  {
+    "id": "prealg.func.table",
+    "key_prerequisites": [
+      "prealg.var.concept",
+      "prealg.expr.evaluate"
+    ],
+    "encompasses": [
+      "prealg.var.concept",
+      "prealg.expr.evaluate"
+    ]
+  },
+  {
+    "id": "prealg.graph.interpret",
+    "key_prerequisites": [
+      "prealg.real.concept",
+      "geo.coord.plot"
+    ],
+    "encompasses": [
+      "prealg.real.concept",
+      "geo.coord.plot"
+    ]
+  },
+  {
+    "id": "prealg.real.order_rational",
+    "key_prerequisites": [
+      "prealg.real.concept",
+      "dec.basics.compare"
+    ],
+    "encompasses": [
+      "prealg.real.concept",
+      "dec.basics.compare"
+    ]
+  },
+  {
+    "id": "dec.basics.place_value",
+    "key_prerequisites": [
+      "arith.dec.intro",
+      "arith.place.powers_ten"
+    ],
+    "encompasses": [
+      "arith.dec.intro",
+      "arith.place.powers_ten"
+    ]
+  },
+  {
+    "id": "dec.ops.powers_ten",
+    "key_prerequisites": [
+      "dec.ops.mult",
+      "arith.exp.evaluate"
+    ],
+    "encompasses": [
+      "dec.ops.mult",
+      "arith.exp.evaluate"
+    ]
+  },
+  {
+    "id": "prealg.measure.dimensional",
+    "key_prerequisites": [
+      "prealg.measure.convert",
+      "prealg.measure.metric"
+    ],
+    "encompasses": [
+      "prealg.measure.convert",
+      "prealg.measure.metric"
+    ]
+  },
+  {
+    "id": "ratio.ops.table",
+    "key_prerequisites": [
+      "ratio.ops.proportion",
+      "prealg.func.table"
+    ],
+    "encompasses": [
+      "ratio.ops.proportion",
+      "prealg.func.table"
+    ]
+  },
+  {
+    "id": "prealg.expr.simplify",
+    "key_prerequisites": [
+      "prealg.expr.like_terms",
+      "prealg.expr.distribute"
+    ],
+    "encompasses": [
+      "prealg.expr.like_terms",
+      "prealg.expr.distribute"
+    ]
+  },
+  {
+    "id": "trig.eq.multiple_angle",
+    "key_prerequisites": [
+      "trig.ident.double_angle",
+      "trig.eq.general_solution"
+    ],
+    "encompasses": [
+      "trig.ident.double_angle",
+      "trig.eq.general_solution"
+    ]
+  },
+  {
+    "id": "trig.basics.elevation_depression",
+    "key_prerequisites": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ],
+    "encompasses": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ]
+  },
+  {
+    "id": "trig.graph.sinusoidal_model",
+    "key_prerequisites": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ],
+    "encompasses": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ]
+  },
+  {
+    "id": "trig.adv.inverse_composition",
+    "key_prerequisites": [
+      "trig.adv.inverse",
+      "trig.func.arcsine"
+    ],
+    "encompasses": [
+      "trig.adv.inverse",
+      "trig.func.arcsine"
+    ]
+  },
+  {
+    "id": "trig.adv.vector_components",
+    "key_prerequisites": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ],
+    "encompasses": [
+      "trig.basics.right_triangle",
+      "trig.basics.radians"
+    ]
+  },
+  {
+    "id": "trig.ident.even_odd",
+    "key_prerequisites": [
+      "trig.ident.pythagorean",
+      "trig.graph.cos"
+    ],
+    "encompasses": [
+      "trig.ident.pythagorean",
+      "trig.graph.cos"
+    ]
+  },
+  {
+    "id": "trig.graph.frequency",
+    "key_prerequisites": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ],
+    "encompasses": [
+      "trig.graph.sin",
+      "trig.graph.transformations"
+    ]
+  },
+  {
+    "id": "trig.eq.using_identities",
+    "key_prerequisites": [
+      "trig.ident.pythagorean",
+      "trig.ident.sum_diff"
+    ],
+    "encompasses": [
+      "trig.ident.pythagorean",
+      "trig.ident.sum_diff"
+    ]
+  },
+  {
+    "id": "trig.graph.harmonic_motion",
+    "key_prerequisites": [
+      "trig.graph.sinusoidal_model",
+      "trig.basics.radians"
+    ],
+    "encompasses": [
+      "trig.graph.sinusoidal_model",
+      "trig.basics.radians"
+    ]
+  },
+  {
+    "id": "trig.basics.segment_area",
+    "key_prerequisites": [
+      "trig.basics.sector_area",
+      "trig.basics.right_triangle"
+    ],
+    "encompasses": [
+      "trig.basics.sector_area",
+      "trig.basics.right_triangle"
+    ]
+  },
+  {
+    "id": "precalc.poly.graph",
+    "key_prerequisites": [
+      "alg.poly.end_behavior",
+      "precalc.poly.zeros_multiplicity"
+    ],
+    "encompasses": [
+      "alg.poly.end_behavior",
+      "precalc.poly.zeros_multiplicity"
+    ]
+  },
+  {
+    "id": "precalc.exp.logistic",
+    "key_prerequisites": [
+      "precalc.exp.growth_model",
+      "precalc.rational.asymptote"
+    ],
+    "encompasses": [
+      "precalc.exp.growth_model",
+      "precalc.rational.asymptote"
+    ]
+  },
+  {
+    "id": "precalc.vector.unit",
+    "key_prerequisites": [
+      "precalc.vector.basics",
+      "precalc.vector.ops"
+    ],
+    "encompasses": [
+      "precalc.vector.basics",
+      "precalc.vector.ops"
+    ]
+  },
+  {
+    "id": "precalc.conic.eccentricity",
+    "key_prerequisites": [
+      "precalc.conic.ellipse",
+      "precalc.conic.hyperbola"
+    ],
+    "encompasses": [
+      "precalc.conic.ellipse",
+      "precalc.conic.hyperbola"
+    ]
+  },
+  {
+    "id": "precalc.seq.explicit",
+    "key_prerequisites": [
+      "precalc.seq.arithmetic",
+      "precalc.seq.geometric"
+    ],
+    "encompasses": [
+      "precalc.seq.arithmetic",
+      "precalc.seq.geometric"
+    ]
+  },
+  {
+    "id": "precalc.conic.rotated",
+    "key_prerequisites": [
+      "precalc.conic.general",
+      "trig.ident.double_angle"
+    ],
+    "encompasses": [
+      "precalc.conic.general",
+      "trig.ident.double_angle"
+    ]
+  },
+  {
+    "id": "precalc.vector.three_d",
+    "key_prerequisites": [
+      "precalc.vector.basics",
+      "precalc.vector.ops"
+    ],
+    "encompasses": [
+      "precalc.vector.basics",
+      "precalc.vector.ops"
+    ]
+  },
+  {
+    "id": "calc.integral.properties",
+    "key_prerequisites": [
+      "calc.integral.definite",
+      "calc.integral.power_rule"
+    ],
+    "encompasses": [
+      "calc.integral.definite",
+      "calc.integral.power_rule"
+    ]
+  },
+  {
+    "id": "calc.deriv.definition",
+    "key_prerequisites": [
+      "calc.deriv.difference_quotient",
+      "calc.limit.concept"
+    ],
+    "encompasses": [
+      "calc.deriv.difference_quotient",
+      "calc.limit.concept"
+    ]
+  },
+  {
+    "id": "calc.integral.initial_value",
+    "key_prerequisites": [
+      "calc.integral.indefinite",
+      "calc.integral.definite"
+    ],
+    "encompasses": [
+      "calc.integral.indefinite",
+      "calc.integral.definite"
+    ]
+  },
+  {
+    "id": "calc.deriv.rate",
+    "key_prerequisites": [
+      "calc.deriv.concept",
+      "precalc.func.average_rate"
+    ],
+    "encompasses": [
+      "calc.deriv.concept",
+      "precalc.func.average_rate"
+    ]
+  },
+  {
+    "id": "calc.deriv.graph_reading",
+    "key_prerequisites": [
+      "calc.deriv.concept",
+      "calc.deriv.critical_points"
+    ],
+    "encompasses": [
+      "calc.deriv.concept",
+      "calc.deriv.critical_points"
+    ]
+  },
+  {
+    "id": "calc.integral.symmetry",
+    "key_prerequisites": [
+      "calc.integral.definite",
+      "calc.integral.properties"
+    ],
+    "encompasses": [
+      "calc.integral.definite",
+      "calc.integral.properties"
+    ]
+  },
+  {
+    "id": "calc.limit.trig",
+    "key_prerequisites": [
+      "calc.limit.sine_limit",
+      "calc.limit.algebra"
+    ],
+    "encompasses": [
+      "calc.limit.sine_limit",
+      "calc.limit.algebra"
+    ]
+  },
+  {
+    "id": "calc.series.maclaurin",
+    "key_prerequisites": [
+      "calc.series.taylor",
+      "calc.series.radius"
+    ],
+    "encompasses": [
+      "calc.series.taylor",
+      "calc.series.radius"
+    ]
+  },
+  {
+    "id": "calc.integral.inverse_trig",
+    "key_prerequisites": [
+      "calc.integral.trig_substitution",
+      "calc.integral.power_rule"
+    ],
+    "encompasses": [
+      "calc.integral.trig_substitution",
+      "calc.integral.power_rule"
+    ]
+  },
+  {
+    "id": "calc.integral.probability",
+    "key_prerequisites": [
+      "calc.integral.improper",
+      "calc.integral.area_between"
+    ],
+    "encompasses": [
+      "calc.integral.improper",
+      "calc.integral.area_between"
+    ]
+  },
+  {
+    "id": "calc.series.estimate",
+    "key_prerequisites": [
+      "calc.series.alternating",
+      "calc.series.remainder",
+      "calc.series.taylor_error"
+    ],
+    "encompasses": [
+      "calc.series.alternating",
+      "calc.series.remainder",
+      "calc.series.taylor_error"
+    ]
+  },
+  {
+    "id": "calc.integral.log",
+    "key_prerequisites": [
+      "calc.integral.parts",
+      "calc.integral.substitution"
+    ],
+    "encompasses": [
+      "calc.integral.parts",
+      "calc.integral.substitution"
+    ]
+  },
+  {
+    "id": "calc.integral.rationalizing",
+    "key_prerequisites": [
+      "calc.integral.substitution",
+      "calc.integral.irrational"
+    ],
+    "encompasses": [
+      "calc.integral.substitution",
+      "calc.integral.irrational"
+    ]
+  },
+  {
+    "id": "calc.multi.quadric_surfaces",
+    "key_prerequisites": [
+      "calc.multi.functions_several",
+      "calc.multi.level_curves"
+    ],
+    "encompasses": [
+      "calc.multi.functions_several",
+      "calc.multi.level_curves"
+    ],
+    "prerequisites": [
+      "calc.multi.functions_several",
+      "calc.multi.level_curves"
+    ]
+  },
+  {
+    "id": "calc.multi.triple_integral_region",
+    "key_prerequisites": [
+      "calc.multi.triple_integral_box",
+      "calc.multi.double_integral_region"
+    ],
+    "encompasses": [
+      "calc.multi.triple_integral_box",
+      "calc.multi.double_integral_region"
+    ],
+    "prerequisites": [
+      "calc.multi.triple_integral_box",
+      "calc.multi.double_integral_region"
+    ]
+  },
+  {
+    "id": "calc.vec.vector_field",
+    "key_prerequisites": [
+      "calc.vec.vector_function",
+      "calc.deriv.partial"
+    ],
+    "encompasses": [
+      "calc.vec.vector_function",
+      "calc.deriv.partial"
+    ],
+    "prerequisites": [
+      "calc.vec.vector_function",
+      "calc.deriv.partial"
+    ]
+  },
+  {
+    "id": "calc.vec.surface_tangent",
+    "key_prerequisites": [
+      "calc.multi.tangent_plane",
+      "calc.vec.parametric_surface"
+    ],
+    "encompasses": [
+      "calc.multi.tangent_plane",
+      "calc.vec.parametric_surface"
+    ],
+    "prerequisites": [
+      "calc.multi.tangent_plane",
+      "calc.vec.parametric_surface"
+    ]
+  },
+  {
+    "id": "calc.multi.continuity",
+    "key_prerequisites": [
+      "calc.multi.functions_several",
+      "calc.limit.continuity"
+    ],
+    "encompasses": [
+      "calc.multi.functions_several",
+      "calc.limit.continuity"
+    ],
+    "prerequisites": [
+      "calc.multi.functions_several",
+      "calc.limit.continuity"
+    ]
+  },
+  {
+    "id": "calc.multi.moments_3d",
+    "key_prerequisites": [
+      "calc.multi.triple_integral_region",
+      "calc.multi.mass_lamina"
+    ],
+    "encompasses": [
+      "calc.multi.triple_integral_region",
+      "calc.multi.mass_lamina"
+    ],
+    "prerequisites": [
+      "calc.multi.triple_integral_region",
+      "calc.multi.mass_lamina"
+    ]
+  },
+  {
+    "id": "calc.vec.normal_line",
+    "key_prerequisites": [
+      "calc.multi.tangent_plane",
+      "calc.vec.vector_function"
+    ],
+    "encompasses": [
+      "calc.multi.tangent_plane",
+      "calc.vec.vector_function"
+    ],
+    "prerequisites": [
+      "calc.multi.tangent_plane",
+      "calc.vec.vector_function"
+    ]
+  },
+  {
+    "id": "discrete.recurrence.master_theorem",
+    "key_prerequisites": [
+      "discrete.sequences.recurrence",
+      "discrete.sequences.growth_rates"
+    ],
+    "encompasses": [
+      "discrete.sequences.recurrence",
+      "discrete.sequences.growth_rates"
+    ],
+    "prerequisites": [
+      "discrete.sequences.recurrence",
+      "discrete.sequences.growth_rates"
+    ]
+  },
+  {
+    "id": "discrete.logic.boolean_functions",
+    "key_prerequisites": [
+      "discrete.logic.truth_tables",
+      "discrete.logic.connectives"
+    ],
+    "encompasses": [
+      "discrete.logic.truth_tables",
+      "discrete.logic.connectives"
+    ],
+    "prerequisites": [
+      "discrete.logic.truth_tables",
+      "discrete.logic.connectives"
+    ]
+  },
+  {
+    "id": "discrete.combinatorics.burnside",
+    "key_prerequisites": [
+      "discrete.combinatorics.permutations",
+      "discrete.sets.relations"
+    ],
+    "encompasses": [
+      "discrete.combinatorics.permutations",
+      "discrete.sets.relations"
+    ],
+    "prerequisites": [
+      "discrete.combinatorics.permutations",
+      "discrete.sets.relations"
+    ]
+  },
+  {
+    "id": "discrete.combinatorics.egf",
+    "key_prerequisites": [
+      "discrete.sequences.generating_functions",
+      "discrete.combinatorics.factorial"
+    ],
+    "encompasses": [
+      "discrete.sequences.generating_functions",
+      "discrete.combinatorics.factorial"
+    ],
+    "prerequisites": [
+      "discrete.sequences.generating_functions",
+      "discrete.combinatorics.factorial"
+    ]
+  },
+  {
+    "id": "discrete.logic.resolution",
+    "key_prerequisites": [
+      "discrete.logic.equivalence",
+      "discrete.logic.inference"
+    ],
+    "encompasses": [
+      "discrete.logic.equivalence",
+      "discrete.logic.inference"
+    ],
+    "prerequisites": [
+      "discrete.logic.equivalence",
+      "discrete.logic.inference"
+    ]
+  },
+  {
+    "id": "discrete.sets.relation_closure",
+    "key_prerequisites": [
+      "discrete.sets.relations",
+      "discrete.sets.partial_order"
+    ],
+    "encompasses": [
+      "discrete.sets.relations",
+      "discrete.sets.partial_order"
+    ],
+    "prerequisites": [
+      "discrete.sets.relations",
+      "discrete.sets.partial_order"
+    ]
+  },
+  {
+    "id": "discrete.automata.fsm",
+    "key_prerequisites": [
+      "discrete.graphs.paths",
+      "discrete.logic.truth_tables"
+    ],
+    "encompasses": [
+      "discrete.graphs.paths",
+      "discrete.logic.truth_tables"
+    ],
+    "prerequisites": [
+      "discrete.graphs.paths",
+      "discrete.logic.truth_tables"
+    ]
+  },
+  {
+    "id": "discrete.proof.cases",
+    "key_prerequisites": [
+      "discrete.proof.contradiction",
+      "discrete.proof.counterexample"
+    ],
+    "encompasses": [
+      "discrete.proof.contradiction",
+      "discrete.proof.counterexample"
+    ],
+    "prerequisites": [
+      "discrete.proof.contradiction",
+      "discrete.proof.counterexample"
+    ]
+  },
+  {
+    "id": "discrete.coding.hamming",
+    "key_prerequisites": [
+      "discrete.sets.powerset",
+      "discrete.logic.boolean_functions"
+    ],
+    "encompasses": [
+      "discrete.sets.powerset",
+      "discrete.logic.boolean_functions"
+    ],
+    "prerequisites": [
+      "discrete.sets.powerset",
+      "discrete.logic.boolean_functions"
+    ]
+  },
+  {
+    "id": "nt.basics.fta",
+    "key_prerequisites": [
+      "nt.basics.divisibility",
+      "nt.basics.gcd_euclidean"
+    ],
+    "encompasses": [
+      "nt.basics.divisibility",
+      "nt.basics.gcd_euclidean"
+    ],
+    "prerequisites": [
+      "nt.basics.divisibility",
+      "nt.basics.gcd_euclidean"
+    ]
+  },
+  {
+    "id": "nt.adv.arithmetic_functions",
+    "key_prerequisites": [
+      "nt.divisor.sum",
+      "nt.adv.mobius"
+    ],
+    "encompasses": [
+      "nt.divisor.sum",
+      "nt.adv.mobius"
+    ],
+    "prerequisites": [
+      "nt.divisor.sum",
+      "nt.adv.mobius"
+    ]
+  },
+  {
+    "id": "nt.adv.gaussian_integers",
+    "key_prerequisites": [
+      "nt.adv.two_squares",
+      "nt.basics.modular"
+    ],
+    "encompasses": [
+      "nt.adv.two_squares",
+      "nt.basics.modular"
+    ],
+    "prerequisites": [
+      "nt.adv.two_squares",
+      "nt.basics.modular"
+    ]
+  },
+  {
+    "id": "nt.adv.four_squares",
+    "key_prerequisites": [
+      "nt.adv.two_squares",
+      "nt.residue.count"
+    ],
+    "encompasses": [
+      "nt.adv.two_squares",
+      "nt.residue.count"
+    ],
+    "prerequisites": [
+      "nt.adv.two_squares",
+      "nt.residue.count"
+    ]
+  },
+  {
+    "id": "nt.adv.hensel",
+    "key_prerequisites": [
+      "nt.adv.modular_sqrt",
+      "nt.congruence.linear"
+    ],
+    "encompasses": [
+      "nt.adv.modular_sqrt",
+      "nt.congruence.linear"
+    ],
+    "prerequisites": [
+      "nt.adv.modular_sqrt",
+      "nt.congruence.linear"
+    ]
+  },
+  {
+    "id": "nt.adv.farey",
+    "key_prerequisites": [
+      "nt.adv.euler_phi",
+      "nt.adv.continued_fractions"
+    ],
+    "encompasses": [
+      "nt.adv.euler_phi",
+      "nt.adv.continued_fractions"
+    ],
+    "prerequisites": [
+      "nt.adv.euler_phi",
+      "nt.adv.continued_fractions"
+    ]
+  },
+  {
+    "id": "nt.app.key_exchange",
+    "key_prerequisites": [
+      "nt.adv.discrete_log",
+      "nt.app.crypto"
+    ],
+    "encompasses": [
+      "nt.adv.discrete_log",
+      "nt.app.crypto"
+    ],
+    "prerequisites": [
+      "nt.adv.discrete_log",
+      "nt.app.crypto"
+    ]
+  },
+  {
+    "id": "nt.adv.quadratic_forms",
+    "key_prerequisites": [
+      "nt.adv.legendre",
+      "nt.adv.two_squares"
+    ],
+    "encompasses": [
+      "nt.adv.legendre",
+      "nt.adv.two_squares"
+    ],
+    "prerequisites": [
+      "nt.adv.legendre",
+      "nt.adv.two_squares"
+    ]
+  },
+  {
+    "id": "nt.adv.valuation",
+    "key_prerequisites": [
+      "nt.prime.exponent",
+      "nt.basics.divisibility"
+    ],
+    "encompasses": [
+      "nt.prime.exponent",
+      "nt.basics.divisibility"
+    ],
+    "prerequisites": [
+      "nt.prime.exponent",
+      "nt.basics.divisibility"
+    ]
+  },
+  {
+    "id": "graph.hamiltonian",
+    "key_prerequisites": [
+      "discrete.graphs.eulerian",
+      "graph.distance"
+    ],
+    "encompasses": [
+      "discrete.graphs.eulerian",
+      "graph.distance"
+    ],
+    "prerequisites": [
+      "discrete.graphs.eulerian",
+      "graph.distance"
+    ]
+  },
+  {
+    "id": "graph.blocks",
+    "key_prerequisites": [
+      "graph.cut_vertex",
+      "graph.bridge"
+    ],
+    "encompasses": [
+      "graph.cut_vertex",
+      "graph.bridge"
+    ],
+    "prerequisites": [
+      "graph.cut_vertex",
+      "graph.bridge"
+    ]
+  },
+  {
+    "id": "graph.planar_dual",
+    "key_prerequisites": [
+      "discrete.graphs.planar",
+      "graph.kuratowski"
+    ],
+    "encompasses": [
+      "discrete.graphs.planar",
+      "graph.kuratowski"
+    ],
+    "prerequisites": [
+      "discrete.graphs.planar",
+      "graph.kuratowski"
+    ]
+  },
+  {
+    "id": "graph.automorphism",
+    "key_prerequisites": [
+      "graph.isomorphism",
+      "graph.complement"
+    ],
+    "encompasses": [
+      "graph.isomorphism",
+      "graph.complement"
+    ],
+    "prerequisites": [
+      "graph.isomorphism",
+      "graph.complement"
+    ]
+  },
+  {
+    "id": "graph.girth",
+    "key_prerequisites": [
+      "graph.distance",
+      "graph.subgraph"
+    ],
+    "encompasses": [
+      "graph.distance",
+      "graph.subgraph"
+    ],
+    "prerequisites": [
+      "graph.distance",
+      "graph.subgraph"
+    ]
+  },
+  {
+    "id": "graph.four_color",
+    "key_prerequisites": [
+      "graph.kuratowski",
+      "discrete.graphs.coloring"
+    ],
+    "encompasses": [
+      "graph.kuratowski",
+      "discrete.graphs.coloring"
+    ],
+    "prerequisites": [
+      "graph.kuratowski",
+      "discrete.graphs.coloring"
+    ]
+  },
+  {
+    "id": "graph.matroid",
+    "key_prerequisites": [
+      "graph.matching",
+      "graph.treewidth"
+    ],
+    "encompasses": [
+      "graph.matching",
+      "graph.treewidth"
+    ],
+    "prerequisites": [
+      "graph.matching",
+      "graph.treewidth"
+    ]
+  },
+  {
+    "id": "graph.shortest_path",
+    "key_prerequisites": [
+      "discrete.graphs.paths",
+      "graph.distance"
+    ],
+    "encompasses": [
+      "discrete.graphs.paths",
+      "graph.distance"
+    ],
+    "prerequisites": [
+      "discrete.graphs.paths",
+      "graph.distance"
+    ]
+  },
+  {
+    "id": "graph.degeneracy",
+    "key_prerequisites": [
+      "graph.subgraph",
+      "graph.distance"
+    ],
+    "encompasses": [
+      "graph.subgraph",
+      "graph.distance"
+    ],
+    "prerequisites": [
+      "graph.subgraph",
+      "graph.distance"
+    ]
+  },
+  {
+    "id": "graph.mst",
+    "key_prerequisites": [
+      "discrete.graphs.trees",
+      "graph.shortest_path"
+    ],
+    "encompasses": [
+      "discrete.graphs.trees",
+      "graph.shortest_path"
+    ],
+    "prerequisites": [
+      "discrete.graphs.trees",
+      "graph.shortest_path"
+    ]
+  },
+  {
+    "id": "abstract.rings.pid",
+    "key_prerequisites": [
+      "abstract.rings.euclidean",
+      "abstract.rings.ideal"
+    ],
+    "encompasses": [
+      "abstract.rings.euclidean",
+      "abstract.rings.ideal"
+    ],
+    "prerequisites": [
+      "abstract.rings.euclidean",
+      "abstract.rings.ideal"
+    ]
+  },
+  {
+    "id": "abstract.group.cayley",
+    "key_prerequisites": [
+      "abstract.group.action",
+      "abstract.group.symmetric"
+    ],
+    "encompasses": [
+      "abstract.group.action",
+      "abstract.group.symmetric"
+    ],
+    "prerequisites": [
+      "abstract.group.action",
+      "abstract.group.symmetric"
+    ]
+  },
+  {
+    "id": "abstract.group.direct_product",
+    "key_prerequisites": [
+      "abstract.group.cyclic",
+      "abstract.group.quotient_group"
+    ],
+    "encompasses": [
+      "abstract.group.cyclic",
+      "abstract.group.quotient_group"
+    ],
+    "prerequisites": [
+      "abstract.group.cyclic",
+      "abstract.group.quotient_group"
+    ]
+  },
+  {
+    "id": "abstract.rings.irreducibility",
+    "key_prerequisites": [
+      "abstract.rings.polynomial",
+      "abstract.field.finite"
+    ],
+    "encompasses": [
+      "abstract.rings.polynomial",
+      "abstract.field.finite"
+    ],
+    "prerequisites": [
+      "abstract.rings.polynomial",
+      "abstract.field.finite"
+    ]
+  },
+  {
+    "id": "abstract.group.abelian_classification",
+    "key_prerequisites": [
+      "abstract.group.direct_product",
+      "abstract.group.cyclic"
+    ],
+    "encompasses": [
+      "abstract.group.direct_product",
+      "abstract.group.cyclic"
+    ],
+    "prerequisites": [
+      "abstract.group.direct_product",
+      "abstract.group.cyclic"
+    ]
+  },
+  {
+    "id": "abstract.field.cyclotomic",
+    "key_prerequisites": [
+      "abstract.field.extension",
+      "abstract.field.algebraic"
+    ],
+    "encompasses": [
+      "abstract.field.extension",
+      "abstract.field.algebraic"
+    ],
+    "prerequisites": [
+      "abstract.field.extension",
+      "abstract.field.algebraic"
+    ]
+  },
+  {
+    "id": "abstract.field.algebraic_closure",
+    "key_prerequisites": [
+      "abstract.field.algebraic",
+      "abstract.field.extension"
+    ],
+    "encompasses": [
+      "abstract.field.algebraic",
+      "abstract.field.extension"
+    ],
+    "prerequisites": [
+      "abstract.field.algebraic",
+      "abstract.field.extension"
+    ]
+  },
+  {
+    "id": "abstract.structures.fg_module",
+    "key_prerequisites": [
+      "abstract.structures.module_hom",
+      "abstract.structures.submodule"
+    ],
+    "encompasses": [
+      "abstract.structures.module_hom",
+      "abstract.structures.submodule"
+    ],
+    "prerequisites": [
+      "abstract.structures.module_hom",
+      "abstract.structures.submodule"
+    ]
+  },
+  {
+    "id": "abstract.field.radicals",
+    "key_prerequisites": [
+      "abstract.group.solvable",
+      "abstract.field.galois_group"
+    ],
+    "encompasses": [
+      "abstract.group.solvable",
+      "abstract.field.galois_group"
+    ],
+    "prerequisites": [
+      "abstract.group.solvable",
+      "abstract.field.galois_group"
+    ]
+  },
+  {
+    "id": "abstract.field.separable",
+    "key_prerequisites": [
+      "abstract.field.extension",
+      "abstract.rings.polynomial"
+    ],
+    "encompasses": [
+      "abstract.field.extension",
+      "abstract.rings.polynomial"
+    ],
+    "prerequisites": [
+      "abstract.field.extension",
+      "abstract.rings.polynomial"
+    ]
+  },
+  {
+    "id": "ra.order.zorn",
+    "key_prerequisites": [
+      "ra.order.completeness",
+      "ra.order.extended"
+    ],
+    "encompasses": [
+      "ra.order.completeness",
+      "ra.order.extended"
+    ],
+    "prerequisites": [
+      "ra.order.completeness",
+      "ra.order.extended"
+    ]
+  },
+  {
+    "id": "ra.order.schroder_bernstein",
+    "key_prerequisites": [
+      "ra.order.countable",
+      "ra.order.uncountable"
+    ],
+    "encompasses": [
+      "ra.order.countable",
+      "ra.order.uncountable"
+    ],
+    "prerequisites": [
+      "ra.order.countable",
+      "ra.order.uncountable"
+    ]
+  },
+  {
+    "id": "ra.measure.null",
+    "key_prerequisites": [
+      "ra.order.completeness",
+      "ra.metric.open_closed"
+    ],
+    "encompasses": [
+      "ra.order.completeness",
+      "ra.metric.open_closed"
+    ],
+    "prerequisites": [
+      "ra.order.completeness",
+      "ra.metric.open_closed"
+    ]
+  },
+  {
+    "id": "ra.measure.cantor_set",
+    "key_prerequisites": [
+      "ra.measure.null",
+      "ra.order.uncountable"
+    ],
+    "encompasses": [
+      "ra.measure.null",
+      "ra.order.uncountable"
+    ],
+    "prerequisites": [
+      "ra.measure.null",
+      "ra.order.uncountable"
+    ]
+  },
+  {
+    "id": "ra.metric.total_bounded",
+    "key_prerequisites": [
+      "ra.metric.compact",
+      "ra.metric.complete"
+    ],
+    "encompasses": [
+      "ra.metric.compact",
+      "ra.metric.complete"
+    ],
+    "prerequisites": [
+      "ra.metric.compact",
+      "ra.metric.complete"
+    ]
+  },
+  {
+    "id": "ra.seq.weierstrass_m",
+    "key_prerequisites": [
+      "ra.seq.bolzano_weierstrass",
+      "ra.deriv.uniform_conv"
+    ],
+    "encompasses": [
+      "ra.seq.bolzano_weierstrass",
+      "ra.deriv.uniform_conv"
+    ],
+    "prerequisites": [
+      "ra.seq.bolzano_weierstrass",
+      "ra.deriv.uniform_conv"
+    ]
+  },
+  {
+    "id": "ra.deriv.bounded_variation",
+    "key_prerequisites": [
+      "ra.deriv.riemann",
+      "ra.deriv.mvt"
+    ],
+    "encompasses": [
+      "ra.deriv.riemann",
+      "ra.deriv.mvt"
+    ],
+    "prerequisites": [
+      "ra.deriv.riemann",
+      "ra.deriv.mvt"
+    ]
+  },
+  {
+    "id": "ra.deriv.riemann_stieltjes",
+    "key_prerequisites": [
+      "ra.deriv.riemann",
+      "ra.deriv.bounded_variation"
+    ],
+    "encompasses": [
+      "ra.deriv.riemann",
+      "ra.deriv.bounded_variation"
+    ],
+    "prerequisites": [
+      "ra.deriv.riemann",
+      "ra.deriv.bounded_variation"
+    ]
+  },
+  {
+    "id": "ra.deriv.arzela_ascoli",
+    "key_prerequisites": [
+      "ra.deriv.uniform_conv",
+      "ra.metric.compact",
+      "ra.metric.complete"
+    ],
+    "encompasses": [
+      "ra.deriv.uniform_conv",
+      "ra.metric.compact",
+      "ra.metric.complete"
+    ],
+    "prerequisites": [
+      "ra.deriv.uniform_conv",
+      "ra.metric.compact",
+      "ra.metric.complete"
+    ]
+  },
+  {
+    "id": "ra.deriv.weierstrass_approx",
+    "key_prerequisites": [
+      "ra.deriv.uniform_conv",
+      "ra.limit.evt"
+    ],
+    "encompasses": [
+      "ra.deriv.uniform_conv",
+      "ra.limit.evt"
+    ],
+    "prerequisites": [
+      "ra.deriv.uniform_conv",
+      "ra.limit.evt"
+    ]
+  },
+  {
+    "id": "topo.basics.spaces",
+    "key_prerequisites": [
+      "topo.basics.metric",
+      "topo.basics.open_closed"
+    ],
+    "encompasses": [
+      "topo.basics.metric",
+      "topo.basics.open_closed"
+    ],
+    "prerequisites": [
+      "topo.basics.metric",
+      "topo.basics.open_closed"
+    ]
+  },
+  {
+    "id": "topo.connected.components",
+    "key_prerequisites": [
+      "topo.connected",
+      "topo.metric.subspace"
+    ],
+    "encompasses": [
+      "topo.connected",
+      "topo.metric.subspace"
+    ],
+    "prerequisites": [
+      "topo.connected",
+      "topo.metric.subspace"
+    ]
+  },
+  {
+    "id": "topo.separation.normal",
+    "key_prerequisites": [
+      "topo.hausdorff",
+      "topo.urysohn"
+    ],
+    "encompasses": [
+      "topo.hausdorff",
+      "topo.urysohn"
+    ],
+    "prerequisites": [
+      "topo.hausdorff",
+      "topo.urysohn"
+    ]
+  },
+  {
+    "id": "topo.algebraic.homotopy_equivalence",
+    "key_prerequisites": [
+      "topo.homotopy",
+      "topo.homotopy.fundamental"
+    ],
+    "encompasses": [
+      "topo.homotopy",
+      "topo.homotopy.fundamental"
+    ],
+    "prerequisites": [
+      "topo.homotopy",
+      "topo.homotopy.fundamental"
+    ]
+  },
+  {
+    "id": "topo.covering.universal",
+    "key_prerequisites": [
+      "topo.covering",
+      "topo.homotopy.fundamental"
+    ],
+    "encompasses": [
+      "topo.covering",
+      "topo.homotopy.fundamental"
+    ],
+    "prerequisites": [
+      "topo.covering",
+      "topo.homotopy.fundamental"
+    ]
+  },
+  {
+    "id": "topo.manifolds.boundary",
+    "key_prerequisites": [
+      "topo.manifold",
+      "topo.metric.subspace"
+    ],
+    "encompasses": [
+      "topo.manifold",
+      "topo.metric.subspace"
+    ],
+    "prerequisites": [
+      "topo.manifold",
+      "topo.metric.subspace"
+    ]
+  },
+  {
+    "id": "topo.invariant.surface_classification",
+    "key_prerequisites": [
+      "topo.invariant.genus",
+      "topo.manifold.orientability"
+    ],
+    "encompasses": [
+      "topo.invariant.genus",
+      "topo.manifold.orientability"
+    ],
+    "prerequisites": [
+      "topo.invariant.genus",
+      "topo.manifold.orientability"
+    ]
+  },
+  {
+    "id": "topo.compact.tychonoff",
+    "key_prerequisites": [
+      "topo.product",
+      "topo.compact"
+    ],
+    "encompasses": [
+      "topo.product",
+      "topo.compact"
+    ],
+    "prerequisites": [
+      "topo.product",
+      "topo.compact"
+    ]
+  },
+  {
+    "id": "topo.algebraic.degree",
+    "key_prerequisites": [
+      "topo.homotopy.fundamental",
+      "topo.covering"
+    ],
+    "encompasses": [
+      "topo.homotopy.fundamental",
+      "topo.covering"
+    ],
+    "prerequisites": [
+      "topo.homotopy.fundamental",
+      "topo.covering"
+    ]
+  },
+  {
+    "id": "topo.algebraic.mayer_vietoris",
+    "key_prerequisites": [
+      "topo.homology.cellular",
+      "topo.cohomology"
+    ],
+    "encompasses": [
+      "topo.homology.cellular",
+      "topo.cohomology"
+    ],
+    "prerequisites": [
+      "topo.homology.cellular",
+      "topo.cohomology"
+    ]
+  },
+  {
+    "id": "complex.integral.cauchy_formula",
+    "key_prerequisites": [
+      "complex.integral.cauchy_goursat",
+      "complex.adv.analytic"
+    ],
+    "encompasses": [
+      "complex.integral.cauchy_goursat",
+      "complex.adv.analytic"
+    ],
+    "prerequisites": [
+      "complex.integral.cauchy_goursat",
+      "complex.adv.analytic"
+    ]
+  },
+  {
+    "id": "complex.adv.liouville",
+    "key_prerequisites": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.analytic"
+    ],
+    "encompasses": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.analytic"
+    ],
+    "prerequisites": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.analytic"
+    ]
+  },
+  {
+    "id": "complex.adv.maximum_modulus",
+    "key_prerequisites": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.harmonic"
+    ],
+    "encompasses": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.harmonic"
+    ],
+    "prerequisites": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.harmonic"
+    ]
+  },
+  {
+    "id": "complex.integral.real_integrals",
+    "key_prerequisites": [
+      "complex.adv.residue",
+      "complex.integral.contour"
+    ],
+    "encompasses": [
+      "complex.adv.residue",
+      "complex.integral.contour"
+    ],
+    "prerequisites": [
+      "complex.adv.residue",
+      "complex.integral.contour"
+    ]
+  },
+  {
+    "id": "complex.adv.argument_principle",
+    "key_prerequisites": [
+      "complex.adv.residue",
+      "complex.adv.logarithm"
+    ],
+    "encompasses": [
+      "complex.adv.residue",
+      "complex.adv.logarithm"
+    ],
+    "prerequisites": [
+      "complex.adv.residue",
+      "complex.adv.logarithm"
+    ]
+  },
+  {
+    "id": "complex.adv.winding",
+    "key_prerequisites": [
+      "complex.integral.contour",
+      "complex.ops.argument"
+    ],
+    "encompasses": [
+      "complex.integral.contour",
+      "complex.ops.argument"
+    ],
+    "prerequisites": [
+      "complex.integral.contour",
+      "complex.ops.argument"
+    ]
+  },
+  {
+    "id": "complex.adv.riemann_mapping",
+    "key_prerequisites": [
+      "complex.adv.conformal",
+      "complex.topology.domain"
+    ],
+    "encompasses": [
+      "complex.adv.conformal",
+      "complex.topology.domain"
+    ],
+    "prerequisites": [
+      "complex.adv.conformal",
+      "complex.topology.domain"
+    ]
+  },
+  {
+    "id": "complex.adv.identity_theorem",
+    "key_prerequisites": [
+      "complex.adv.analytic",
+      "complex.series.power"
+    ],
+    "encompasses": [
+      "complex.adv.analytic",
+      "complex.series.power"
+    ],
+    "prerequisites": [
+      "complex.adv.analytic",
+      "complex.series.power"
+    ]
+  },
+  {
+    "id": "complex.adv.morera",
+    "key_prerequisites": [
+      "complex.integral.cauchy_goursat",
+      "complex.adv.analytic"
+    ],
+    "encompasses": [
+      "complex.integral.cauchy_goursat",
+      "complex.adv.analytic"
+    ],
+    "prerequisites": [
+      "complex.integral.cauchy_goursat",
+      "complex.adv.analytic"
+    ]
+  },
+  {
+    "id": "numa.linear.cholesky",
+    "key_prerequisites": [
+      "numa.linear.lu",
+      "linalg.symmetric.spectral"
+    ],
+    "encompasses": [
+      "numa.linear.lu",
+      "linalg.symmetric.spectral"
+    ],
+    "prerequisites": [
+      "numa.linear.lu",
+      "linalg.symmetric.spectral"
+    ]
+  },
+  {
+    "id": "numa.interp.hermite",
+    "key_prerequisites": [
+      "numa.interp.divided_differences",
+      "calc.deriv.concept"
+    ],
+    "encompasses": [
+      "numa.interp.divided_differences",
+      "calc.deriv.concept"
+    ],
+    "prerequisites": [
+      "numa.interp.divided_differences",
+      "calc.deriv.concept"
+    ]
+  },
+  {
+    "id": "numa.linear.sor",
+    "key_prerequisites": [
+      "numa.linear.gauss_seidel"
+    ],
+    "encompasses": [
+      "numa.linear.gauss_seidel"
+    ],
+    "prerequisites": [
+      "numa.linear.gauss_seidel"
+    ]
+  },
+  {
+    "id": "numa.linear.iter_convergence",
+    "key_prerequisites": [
+      "numa.linear.jacobi",
+      "numa.linear.gauss_seidel"
+    ],
+    "encompasses": [
+      "numa.linear.jacobi",
+      "numa.linear.gauss_seidel"
+    ],
+    "prerequisites": [
+      "numa.linear.jacobi",
+      "numa.linear.gauss_seidel"
+    ]
+  },
+  {
+    "id": "numa.linear.qr_algorithm",
+    "key_prerequisites": [
+      "linalg.decomp.qr",
+      "linalg.eigen.compute"
+    ],
+    "encompasses": [
+      "linalg.decomp.qr",
+      "linalg.eigen.compute"
+    ],
+    "prerequisites": [
+      "linalg.decomp.qr",
+      "linalg.eigen.compute"
+    ]
+  },
+  {
+    "id": "numa.linear.cg",
+    "key_prerequisites": [
+      "linalg.inner_product",
+      "numa.linear.least_squares_qr"
+    ],
+    "encompasses": [
+      "linalg.inner_product",
+      "numa.linear.least_squares_qr"
+    ],
+    "prerequisites": [
+      "linalg.inner_product",
+      "numa.linear.least_squares_qr"
+    ]
+  },
+  {
+    "id": "numa.fourier.fft",
+    "key_prerequisites": [
+      "complex.adv.euler_identity",
+      "trig.ident.even_odd"
+    ],
+    "encompasses": [
+      "complex.adv.euler_identity",
+      "trig.ident.even_odd"
+    ],
+    "prerequisites": [
+      "complex.adv.euler_identity",
+      "trig.ident.even_odd"
+    ]
+  },
+  {
+    "id": "numa.integration.monte_carlo",
+    "key_prerequisites": [
+      "prob.rv.expectation",
+      "numa.integration.composite"
+    ],
+    "encompasses": [
+      "prob.rv.expectation",
+      "numa.integration.composite"
+    ],
+    "prerequisites": [
+      "prob.rv.expectation",
+      "numa.integration.composite"
+    ]
+  },
+  {
+    "id": "numa.least_squares.gauss_newton",
+    "key_prerequisites": [
+      "numa.interp.normal_equations",
+      "numa.roots.newton"
+    ],
+    "encompasses": [
+      "numa.interp.normal_equations",
+      "numa.roots.newton"
+    ],
+    "prerequisites": [
+      "numa.interp.normal_equations",
+      "numa.roots.newton"
+    ]
+  },
+  {
+    "id": "ml.svm.margin",
+    "key_prerequisites": [
+      "ml.logistic.regression",
+      "linalg.vector.dot"
+    ],
+    "encompasses": [
+      "ml.logistic.regression",
+      "linalg.vector.dot"
+    ],
+    "prerequisites": [
+      "ml.logistic.regression",
+      "linalg.vector.dot"
+    ]
+  },
+  {
+    "id": "ml.svm.kernel",
+    "key_prerequisites": [
+      "ml.svm.margin",
+      "linalg.inner_product"
+    ],
+    "encompasses": [
+      "ml.svm.margin",
+      "linalg.inner_product"
+    ],
+    "prerequisites": [
+      "ml.svm.margin",
+      "linalg.inner_product"
+    ]
+  },
+  {
+    "id": "ml.naive_bayes",
+    "key_prerequisites": [
+      "prob.cond.definition",
+      "ml.logistic.regression"
+    ],
+    "encompasses": [
+      "prob.cond.definition",
+      "ml.logistic.regression"
+    ],
+    "prerequisites": [
+      "prob.cond.definition",
+      "ml.logistic.regression"
+    ]
+  },
+  {
+    "id": "ml.bias_variance",
+    "key_prerequisites": [
+      "ml.overfitting",
+      "ml.validation"
+    ],
+    "encompasses": [
+      "ml.overfitting",
+      "ml.validation"
+    ],
+    "prerequisites": [
+      "ml.overfitting",
+      "ml.validation"
+    ]
+  },
+  {
+    "id": "ml.mdp.bellman",
+    "key_prerequisites": [
+      "ml.reinforcement.qlearning",
+      "prob.expect.conditional"
+    ],
+    "encompasses": [
+      "ml.reinforcement.qlearning",
+      "prob.expect.conditional"
+    ],
+    "prerequisites": [
+      "ml.reinforcement.qlearning",
+      "prob.expect.conditional"
+    ]
+  },
+  {
+    "id": "ml.cluster.em",
+    "key_prerequisites": [
+      "ml.cluster.kmeans",
+      "stat.dist.normal"
+    ],
+    "encompasses": [
+      "ml.cluster.kmeans",
+      "stat.dist.normal"
+    ],
+    "prerequisites": [
+      "ml.cluster.kmeans",
+      "stat.dist.normal"
+    ]
+  },
+  {
+    "id": "ml.feature.selection",
+    "key_prerequisites": [
+      "ml.data.scaling",
+      "ml.validation"
+    ],
+    "encompasses": [
+      "ml.data.scaling",
+      "ml.validation"
+    ],
+    "prerequisites": [
+      "ml.data.scaling",
+      "ml.validation"
+    ]
+  },
+  {
+    "id": "ml.multiclass",
+    "key_prerequisites": [
+      "ml.logistic.regression",
+      "ml.eval.confusion"
+    ],
+    "encompasses": [
+      "ml.logistic.regression",
+      "ml.eval.confusion"
+    ],
+    "prerequisites": [
+      "ml.logistic.regression",
+      "ml.eval.confusion"
+    ]
+  },
+  {
+    "id": "ml.nlp.embedding",
+    "key_prerequisites": [
+      "ml.nlp.bert",
+      "linalg.vector.dot"
+    ],
+    "encompasses": [
+      "ml.nlp.bert",
+      "linalg.vector.dot"
+    ],
+    "prerequisites": [
+      "ml.nlp.bert",
+      "linalg.vector.dot"
+    ]
+  },
+  {
+    "id": "ml.optim.early_stopping",
+    "key_prerequisites": [
+      "ml.validation",
+      "ml.overfitting"
+    ],
+    "encompasses": [
+      "ml.validation",
+      "ml.overfitting"
+    ],
+    "prerequisites": [
+      "ml.validation",
+      "ml.overfitting"
+    ]
+  },
+  {
+    "id": "prob.dist.geometric",
+    "key_prerequisites": [
+      "prob.rv.pmf",
+      "prob.dist.memoryless"
+    ],
+    "encompasses": [
+      "prob.rv.pmf",
+      "prob.dist.memoryless"
+    ],
+    "prerequisites": [
+      "prob.rv.pmf",
+      "prob.dist.memoryless"
+    ]
+  },
+  {
+    "id": "stat.reg.logistic",
+    "key_prerequisites": [
+      "stat.reg.least_squares",
+      "alg.func.sigmoid"
+    ],
+    "encompasses": [
+      "stat.reg.least_squares",
+      "alg.func.sigmoid"
+    ],
+    "prerequisites": [
+      "stat.reg.least_squares",
+      "alg.func.sigmoid"
+    ]
+  },
+  {
+    "id": "geo.solid.frustum",
+    "key_prerequisites": [
+      "geo.solid.cone",
+      "geo.solid.cylinder"
+    ],
+    "encompasses": [
+      "geo.solid.cone",
+      "geo.solid.cylinder"
+    ],
+    "prerequisites": [
+      "geo.solid.cone",
+      "geo.solid.cylinder"
+    ]
+  },
+  {
+    "id": "ode.second_order.forced",
+    "key_prerequisites": [
+      "ode.second_order.spring",
+      "ode.second_order.nonhomogeneous"
+    ],
+    "encompasses": [
+      "ode.second_order.spring",
+      "ode.second_order.nonhomogeneous"
+    ],
+    "prerequisites": [
+      "ode.second_order.spring",
+      "ode.second_order.nonhomogeneous"
+    ]
+  },
+  {
+    "id": "abstract.group.cauchy",
+    "key_prerequisites": [
+      "abstract.group.lagrange",
+      "abstract.group.cyclic"
+    ],
+    "encompasses": [
+      "abstract.group.lagrange",
+      "abstract.group.cyclic"
+    ],
+    "prerequisites": [
+      "abstract.group.lagrange",
+      "abstract.group.cyclic"
     ]
   }
 ]
