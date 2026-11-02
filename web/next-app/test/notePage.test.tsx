@@ -19,6 +19,8 @@ describe("the Creator's Note", () => {
     expect(support).toHaveAttribute('href', 'https://myhappr.com/wisddom')
     expect(support).toHaveAttribute('target', '_blank')
     expect(support).toHaveAttribute('rel', 'noreferrer')
+    expect(screen.getByText(/keep Mathua free/)).toBeInTheDocument()
+    expect(screen.getByText(/future app work such as a mobile app/)).toBeInTheDocument()
     expect(screen.getByText(/There is no paywall/)).toBeInTheDocument()
   })
 })

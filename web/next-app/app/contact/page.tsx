@@ -130,7 +130,8 @@ export default function ContactPage() {
           <a href={SUPPORT_URL} target="_blank" rel="noreferrer" style={linkStyle}>
             tip Mathua on Myhappr
           </a>
-          . Support goes toward keeping the site running and the curriculum growing.
+          . Support helps keep Mathua free, funds ongoing improvements to the curriculum and
+          platform, and contributes to future app work such as a mobile app.
         </p>
 
         <h2 style={h2Style}>A question is wrong</h2>
