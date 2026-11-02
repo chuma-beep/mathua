@@ -421,9 +421,9 @@ func (g *pctFromDecGen) Generate(ctx generator.GeneratorContext) generator.Probl
 	scale := int(1 + ctx.Difficulty*5)
 	d := float64(rand.Intn(scale*20)) / 100
 	return generator.Problem{
-		Question:    fmt.Sprintf("Convert %g to a percent.", d),
+		Question:    fmt.Sprintf("Convert %g to a percent. Enter the percentage value.", d),
 		Answer:      fmt.Sprintf("%g", d*100),
-		Explanation: fmt.Sprintf("%g x 100 = %g%%", d, d*100),
+		Explanation: fmt.Sprintf("%g × 100 = %g, so %g = %g%%.", d, d*100, d, d*100),
 		Facts:       map[string]string{"dec": fmt.Sprintf("%g", d), "pct": fmt.Sprintf("%g", d*100)},
 	}
 }
