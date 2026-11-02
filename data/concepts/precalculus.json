@@ -718,5 +718,20 @@
       "streak": 10,
       "avg_time_seconds": 22.0
     }
+  },
+  {
+    "id": "precalc.func.average_rate",
+    "label": "Average rate of change",
+    "domain": "precalculus",
+    "subdomain": "precalculus.functions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.func.concept",
+      "alg.linear.slope"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
   }
 ]

@@ -1,6 +1,6 @@
 [
   {
-    "heuristic": "trig siblings interfere \u2014 non-trivial group 5 members",
+    "heuristic": "trig siblings interfere — non-trivial group 5 members",
     "interference_group": "trig.basic",
     "members": [
       "trig.basics.radians",
@@ -21,7 +21,7 @@
     ]
   },
   {
-    "heuristic": "abstract group siblings interfere \u2014 normal/lagrange/quotient/action/sylow",
+    "heuristic": "abstract group siblings interfere — normal/lagrange/quotient/action/sylow",
     "interference_group": "abstract.group",
     "members": [
       "abstract.group.normal",
@@ -43,7 +43,7 @@
     ]
   },
   {
-    "heuristic": "ml arch siblings interfere \u2014 cnn/rnn/transformer/gan",
+    "heuristic": "ml arch siblings interfere — cnn/rnn/transformer/gan",
     "interference_group": "ml.arch",
     "members": [
       "ml.arch.cnn",
@@ -63,8 +63,8 @@
     ]
   },
   {
-    "heuristic": "new subdomains for ML beyond 20 \u2014 ml.reinforcement / ml.nlp",
-    "note": "Future ML 20\u219230 will split single subdomain machine_learning.neural_networks into ml.reinforcement and ml.nlp to restore scheduler dissimilarity (scheduler.go:80 NextSmart distinct subdomain filter) \u2014 reserve note, no interference yet"
+    "heuristic": "new subdomains for ML beyond 20 — ml.reinforcement / ml.nlp",
+    "note": "Future ML 20→30 will split single subdomain machine_learning.neural_networks into ml.reinforcement and ml.nlp to restore scheduler dissimilarity (scheduler.go:80 NextSmart distinct subdomain filter) — reserve note, no interference yet"
   },
   {
     "heuristic": "linalg determinant and inverse siblings interfere",
@@ -3284,7 +3284,7 @@
       "alg.func.concept"
     ],
     "heuristic": "calc.encompasses.alg",
-    "note": "calc.* encompasses alg.* \u2014 higher integration encompasses function concept for layering",
+    "note": "calc.* encompasses alg.* — higher integration encompasses function concept for layering",
     "variants": [
       {
         "difficulty": 0.3,
@@ -3540,14 +3540,16 @@
   {
     "id": "calc.integral.definite",
     "key_prerequisites": [
-      "calc.integral.power_rule"
+      "calc.integral.riemann_sums"
     ],
     "encompasses": [
+      "calc.integral.riemann_sums",
       "calc.integral.indefinite",
       "frac.add.diff"
     ],
-    "heuristic": "definite integrals encompass antiderivatives and fraction arithmetic",
+    "heuristic": "definite integrals encompass Riemann sums, antiderivatives and fraction arithmetic",
     "prerequisites": [
+      "calc.integral.riemann_sums",
       "calc.integral.indefinite",
       "frac.add.diff"
     ]
@@ -9822,8 +9824,7 @@
   {
     "id": "linalg.matrix.rank",
     "key_prerequisites": [
-      "linalg.det.2x2",
-      "linalg.det.3x3"
+      "linalg.systems.row_reduction"
     ],
     "encompasses": [
       "linalg.det.2x2",
@@ -9902,11 +9903,12 @@
     "id": "linalg.decomp.qr",
     "key_prerequisites": [
       "linalg.decomp.lu",
-      "linalg.inner_product"
+      "linalg.orth.gram_schmidt"
     ],
     "encompasses": [
       "linalg.decomp.lu",
-      "linalg.inner_product"
+      "linalg.inner_product",
+      "linalg.orth.gram_schmidt"
     ]
   },
   {
@@ -10337,7 +10339,7 @@
       "ml.regularization",
       "ml.loss.cross_entropy"
     ],
-    "heuristic": "ml dropout variants \u2014 easy/hard",
+    "heuristic": "ml dropout variants — easy/hard",
     "variants": [
       {
         "difficulty": 0.3,
@@ -13421,7 +13423,8 @@
     ],
     "prerequisites": [
       "stat.prob.basic",
-      "prob.space.axioms"
+      "prob.space.axioms",
+      "stat.prob.conditional"
     ]
   },
   {
@@ -13435,7 +13438,8 @@
     ],
     "prerequisites": [
       "stat.prob.basic",
-      "prob.space.axioms"
+      "prob.space.axioms",
+      "stat.prob.conditional"
     ]
   },
   {
@@ -16887,6 +16891,172 @@
     ],
     "prerequisites": [
       "trig.adv.law_sines"
+    ]
+  },
+  {
+    "id": "linalg.systems.row_reduction",
+    "key_prerequisites": [
+      "linalg.systems.matrix"
+    ],
+    "encompasses": [
+      "alg.systems.elimination"
+    ],
+    "heuristic": "row reduction encompasses elimination on an augmented matrix"
+  },
+  {
+    "id": "linalg.matrix.fundamental_subspaces",
+    "key_prerequisites": [
+      "linalg.matrix.rank",
+      "linalg.vec.basis"
+    ],
+    "encompasses": [
+      "linalg.rank.nullity"
+    ],
+    "heuristic": "fundamental subspaces encompass rank and basis"
+  },
+  {
+    "id": "linalg.orth.gram_schmidt",
+    "key_prerequisites": [
+      "linalg.inner_product",
+      "linalg.vec.basis"
+    ],
+    "encompasses": [
+      "linalg.orth.projection_coeff"
+    ],
+    "heuristic": "Gram-Schmidt encompasses inner products and projection"
+  },
+  {
+    "id": "linalg.transform.matrix",
+    "key_prerequisites": [
+      "linalg.lintrans.concept",
+      "linalg.basis.change"
+    ],
+    "encompasses": [
+      "linalg.matrix.mult"
+    ],
+    "heuristic": "a transformation matrix encompasses basis change and matrix multiplication"
+  },
+  {
+    "id": "linalg.eigen.eigenspace",
+    "key_prerequisites": [
+      "linalg.eigen.compute",
+      "linalg.rank.nullity"
+    ],
+    "encompasses": [
+      "linalg.transform.kernel"
+    ],
+    "heuristic": "eigenspaces encompass eigenvalue computation and nullity"
+  },
+  {
+    "id": "ode.basics.slope_field",
+    "key_prerequisites": [
+      "ode.basics.concept",
+      "calc.deriv.concept",
+      "geo.coord.plot"
+    ],
+    "encompasses": [
+      "ode.basics.concept",
+      "calc.deriv.concept",
+      "geo.coord.plot"
+    ]
+  },
+  {
+    "id": "ode.first_order.logistic",
+    "key_prerequisites": [
+      "ode.first_order.separable",
+      "calc.deriv.exp_log"
+    ],
+    "encompasses": [
+      "ode.first_order.separable",
+      "calc.deriv.exp_log"
+    ]
+  },
+  {
+    "id": "ode.basics.existence_uniqueness",
+    "key_prerequisites": [
+      "ode.basics.concept",
+      "calc.deriv.partial"
+    ],
+    "encompasses": [
+      "ode.basics.concept",
+      "calc.deriv.partial"
+    ]
+  },
+  {
+    "id": "calc.integral.riemann_sums",
+    "key_prerequisites": [
+      "calc.integral.power_rule",
+      "calc.limit.concept"
+    ],
+    "encompasses": [
+      "calc.integral.power_rule",
+      "calc.limit.concept"
+    ]
+  },
+  {
+    "id": "calc.series.taylor_error",
+    "key_prerequisites": [
+      "calc.series.taylor",
+      "calc.series.remainder"
+    ],
+    "encompasses": [
+      "calc.series.taylor",
+      "calc.series.remainder"
+    ]
+  },
+  {
+    "id": "calc.series.termwise",
+    "key_prerequisites": [
+      "calc.series.power",
+      "calc.series.function_series"
+    ],
+    "encompasses": [
+      "calc.series.power",
+      "calc.series.function_series"
+    ]
+  },
+  {
+    "id": "calc.multi.functions_several",
+    "key_prerequisites": [
+      "calc.deriv.partial",
+      "calc.limit.concept"
+    ],
+    "encompasses": [
+      "calc.deriv.partial",
+      "calc.limit.concept"
+    ]
+  },
+  {
+    "id": "calc.multi.level_curves",
+    "key_prerequisites": [
+      "calc.multi.functions_several",
+      "geo.coord.plot"
+    ],
+    "encompasses": [
+      "calc.multi.functions_several",
+      "geo.coord.plot"
+    ]
+  },
+  {
+    "id": "calc.vec.vector_function",
+    "key_prerequisites": [
+      "calc.vec.parametric_derivative",
+      "calc.deriv.partial"
+    ],
+    "encompasses": [
+      "calc.vec.parametric_derivative",
+      "calc.deriv.partial"
+    ]
+  },
+  {
+    "id": "precalc.func.average_rate",
+    "key_prerequisites": [
+      "alg.func.concept",
+      "alg.linear.slope"
+    ],
+    "encompasses": [
+      "alg.func.concept",
+      "alg.linear.slope"
     ]
   }
 ]

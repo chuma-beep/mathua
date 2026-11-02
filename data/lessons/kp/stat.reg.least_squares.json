@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The least-squares line",
+    "section": "The least-squares line",
+    "subgoals": [
+      "Write y-hat = b0 + b1 x",
+      "Use the slope formula with r and the standard deviations",
+      "Use the means to find the intercept"
+    ]
+  },
+  {
+    "label": "Slope and intercept from data",
+    "section": "Slope and intercept from data",
+    "subgoals": [
+      "Compute rise over run",
+      "Substitute one point to find b0",
+      "Write the fitted equation"
+    ]
+  },
+  {
+    "label": "Prediction and residuals",
+    "section": "Prediction and residuals",
+    "subgoals": [
+      "Substitute an x value into the fitted line",
+      "Subtract the prediction from the observation",
+      "Stay inside the observed x range"
+    ]
+  }
+]

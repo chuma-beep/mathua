@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Two categorical variables",
+    "section": "Two categorical variables",
+    "subgoals": [
+      "Build a contingency table",
+      "State the independence hypotheses",
+      "Identify rows and columns"
+    ]
+  },
+  {
+    "label": "Expected counts and degrees of freedom",
+    "section": "Expected counts and degrees of freedom",
+    "subgoals": [
+      "Multiply row total by column total",
+      "Divide by the grand total",
+      "Compute (r-1)(c-1)"
+    ]
+  },
+  {
+    "label": "Cell contributions",
+    "section": "Cell contributions",
+    "subgoals": [
+      "Subtract E from O",
+      "Square the difference",
+      "Divide by E and sum over cells"
+    ]
+  }
+]

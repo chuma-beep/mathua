@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Partitioning an interval",
+    "section": "Partitioning an interval",
+    "subgoals": [
+      "Describe a partition and its width",
+      "Choose left, right or midpoint sample points"
+    ]
+  },
+  {
+    "label": "Building a Riemann sum",
+    "section": "Building a Riemann sum",
+    "subgoals": [
+      "Write a sum for a given partition",
+      "Compute a left or right Riemann sum"
+    ]
+  },
+  {
+    "label": "The definite integral as a limit",
+    "section": "The definite integral as a limit",
+    "subgoals": [
+      "Explain the limiting process",
+      "Connect a Riemann sum to a definite integral"
+    ]
+  }
+]

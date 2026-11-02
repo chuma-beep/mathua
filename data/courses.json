@@ -378,7 +378,8 @@
       "trig.adv.vector_projection",
       "trig.adv.ambiguous_case",
       "trig.adv.area_sas",
-      "trig.adv.heron_area"
+      "trig.adv.heron_area",
+      "precalc.func.average_rate"
     ]
   },
   {
@@ -436,7 +437,8 @@
       "calc.limit.lhopital",
       "calc.limit.indeterminate",
       "calc.limit.epsilon_delta",
-      "calc.deriv.implicit"
+      "calc.deriv.implicit",
+      "calc.integral.riemann_sums"
     ]
   },
   {
@@ -490,7 +492,9 @@
       "calc.series.geometric",
       "calc.series.ratio_test",
       "calc.seq.bounded",
-      "calc.seq.monotone"
+      "calc.seq.monotone",
+      "calc.series.taylor_error",
+      "calc.series.termwise"
     ]
   },
   {
@@ -552,7 +556,10 @@
       "calc.deriv.directional",
       "calc.deriv.chain_multi",
       "calc.deriv.clairaut",
-      "calc.deriv.total_diff"
+      "calc.deriv.total_diff",
+      "calc.multi.functions_several",
+      "calc.multi.level_curves",
+      "calc.vec.vector_function"
     ]
   },
   {
@@ -588,7 +595,12 @@
       "linalg.quadratic.definite",
       "linalg.vector.cross",
       "linalg.matrix.condition",
-      "linalg.eigen.cayley_hamilton"
+      "linalg.eigen.cayley_hamilton",
+      "linalg.systems.row_reduction",
+      "linalg.matrix.fundamental_subspaces",
+      "linalg.orth.gram_schmidt",
+      "linalg.transform.matrix",
+      "linalg.eigen.eigenspace"
     ]
   },
   {
@@ -687,7 +699,14 @@
       "stat.test.anova",
       "stat.reg.r2",
       "stat.data.histogram",
-      "stat.infer.nonparametric"
+      "stat.infer.nonparametric",
+      "stat.spread.std_dev",
+      "stat.data.box_plot",
+      "stat.reg.correlation",
+      "stat.reg.least_squares",
+      "stat.test.chi_square_independence",
+      "stat.data.study_design",
+      "stat.sampling.methods"
     ]
   },
   {
@@ -734,7 +753,7 @@
     "id": "diffeq",
     "name": "Differential Equations",
     "grade": "college",
-    "description": "First and second order ODEs, series and numerical methods, systems, applications, and the Laplace transform.",
+    "description": "First and second order ODEs, series and numerical methods, systems, applications, an introduction to partial differential equations, and the Laplace transform.",
     "targets": [
       "ode.first_order.separable",
       "ode.first_order.linear",
@@ -768,7 +787,15 @@
       "ode.pde.laplace_eq",
       "ode.sturm_liouville",
       "ode.transforms.convolution",
-      "ode.transforms.fourier"
+      "ode.transforms.fourier",
+      "ode.basics.slope_field",
+      "ode.first_order.logistic",
+      "ode.basics.existence_uniqueness",
+      "ode.basics.concept",
+      "ode.second_order.nonhomogeneous",
+      "ode.adv.systems",
+      "ode.systems.linear_phase",
+      "ode.stability"
     ]
   },
   {
@@ -1040,7 +1067,10 @@
       "prob.process.transition_matrix",
       "prob.process.stationary",
       "prob.process.random_walk",
-      "prob.process.martingale"
+      "prob.process.martingale",
+      "prob.cond.definition",
+      "prob.rv.convolution",
+      "prob.dist.binomial"
     ]
   },
   {

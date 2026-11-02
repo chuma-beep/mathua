@@ -274,7 +274,7 @@
     "subdomain": "calculus.integrals",
     "grading_type": "numeric",
     "prerequisites": [
-      "calc.integral.power_rule"
+      "calc.integral.riemann_sums"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -1104,6 +1104,21 @@
     "mastery_threshold": {
       "streak": 10,
       "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "calc.integral.riemann_sums",
+    "label": "Riemann sums",
+    "domain": "calc1",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.power_rule",
+      "calc.limit.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25
     }
   }
 ]

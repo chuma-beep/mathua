@@ -888,5 +888,35 @@
       "streak": 10,
       "avg_time_seconds": 24.0
     }
+  },
+  {
+    "id": "calc.series.taylor_error",
+    "label": "Taylor remainder and error bounds",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.taylor",
+      "calc.series.remainder"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28
+    }
+  },
+  {
+    "id": "calc.series.termwise",
+    "label": "Termwise differentiation and integration",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.power",
+      "calc.series.function_series"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
   }
 ]

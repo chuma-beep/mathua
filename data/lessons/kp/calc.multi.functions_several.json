@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Inputs and outputs",
+    "section": "Inputs and outputs",
+    "subgoals": [
+      "Evaluate a function at a point",
+      "Identify the domain and range"
+    ]
+  },
+  {
+    "label": "Domain and range",
+    "section": "Domain and range",
+    "subgoals": [
+      "Apply domain restrictions",
+      "Describe a range from a formula"
+    ]
+  },
+  {
+    "label": "Graphs and level sets",
+    "section": "Graphs and level sets",
+    "subgoals": [
+      "Describe a graph as a surface",
+      "Connect level sets to output values"
+    ]
+  }
+]

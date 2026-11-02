@@ -253,8 +253,7 @@
     "subdomain": "linear_algebra.matrices",
     "grading_type": "numeric",
     "prerequisites": [
-      "linalg.det.2x2",
-      "linalg.det.3x3"
+      "linalg.systems.row_reduction"
     ],
     "mastery_threshold": {
       "streak": 3,
@@ -341,7 +340,8 @@
     "grading_type": "numeric",
     "prerequisites": [
       "linalg.decomp.lu",
-      "linalg.inner_product"
+      "linalg.inner_product",
+      "linalg.orth.gram_schmidt"
     ],
     "mastery_threshold": {
       "streak": 10,
@@ -653,6 +653,85 @@
     "mastery_threshold": {
       "streak": 10,
       "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "linalg.systems.row_reduction",
+    "label": "Row reduction and echelon forms",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.systems",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.systems.matrix",
+      "alg.systems.elimination"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "linalg.matrix.fundamental_subspaces",
+    "label": "The four fundamental subspaces",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.matrices",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.matrix.rank",
+      "linalg.vec.basis",
+      "linalg.orth.complement"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.orth.gram_schmidt",
+    "label": "The Gram-Schmidt process",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.inner_product",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.inner_product",
+      "linalg.vec.basis",
+      "linalg.orth.projection_coeff"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.transform.matrix",
+    "label": "The matrix of a linear transformation",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.transformations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.lintrans.concept",
+      "linalg.basis.change",
+      "linalg.matrix.mult"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "linalg.eigen.eigenspace",
+    "label": "Eigenspaces and algebraic multiplicity",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.eigenvalues",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.eigen.compute",
+      "linalg.rank.nullity",
+      "linalg.transform.kernel"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
     }
   }
 ]

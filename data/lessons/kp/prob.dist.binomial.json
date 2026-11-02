@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Bernoulli trials",
+    "section": "Bernoulli trials",
+    "subgoals": [
+      "Define a Bernoulli trial",
+      "State the independence and constant-p assumptions",
+      "Count the possible values of X"
+    ]
+  },
+  {
+    "label": "The binomial probability formula",
+    "section": "The binomial probability formula",
+    "subgoals": [
+      "Count sequences with k successes",
+      "Multiply by the probability of one sequence",
+      "Evaluate a small binomial probability"
+    ]
+  },
+  {
+    "label": "Mean and variance",
+    "section": "Mean and variance",
+    "subgoals": [
+      "Compute the mean np",
+      "Compute the variance np(1-p)",
+      "Interpret how the variance depends on p"
+    ]
+  }
+]

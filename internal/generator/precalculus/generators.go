@@ -45,6 +45,7 @@ var all = []struct {
 	{"precalc.vector.dot", &vectorDotGen{}},
 	{"precalc.polar.coordinates", &polarCoordsGen{}},
 	{"precalc.func.transformations", &funcTransformationsGen{}},
+	{"precalc.func.average_rate", &averageRateGen{}},
 	{"precalc.polar.graph", &polarGraphGen{}},
 	{"precalc.parametric.graph", &parametricGraphGen{}},
 	{"precalc.func.piecewise", &piecewiseGen{}},

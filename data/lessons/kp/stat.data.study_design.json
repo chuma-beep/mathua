@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Experimental units and groups",
+    "section": "Experimental units and groups",
+    "subgoals": [
+      "Identify the units",
+      "Count the treatment groups",
+      "Explain why random assignment matters"
+    ]
+  },
+  {
+    "label": "Randomized blocks",
+    "section": "Randomized blocks",
+    "subgoals": [
+      "Divide units into similar blocks",
+      "Give every treatment within each block",
+      "Count treatment-block cells"
+    ]
+  },
+  {
+    "label": "Proportional allocation",
+    "section": "Proportional allocation",
+    "subgoals": [
+      "Find each stratum's population share",
+      "Apply that share to the sample size",
+      "Report the design with the sample size"
+    ]
+  }
+]

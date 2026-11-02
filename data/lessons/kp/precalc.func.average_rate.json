@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Secant Lines and Average Rate",
+    "section": "Secant Lines and Average Rate",
+    "subgoals": [
+      "Identify the two points that define a secant line",
+      "Write the average rate of change as a difference quotient",
+      "Interpret the sign of the result"
+    ]
+  },
+  {
+    "label": "Computing an Average Rate",
+    "section": "Computing an Average Rate",
+    "subgoals": [
+      "Evaluate the function at both endpoints",
+      "Subtract and divide by the interval length",
+      "Use the result in an applied context"
+    ]
+  },
+  {
+    "label": "Average Rate as a Bridge to the Derivative",
+    "section": "Average Rate as a Bridge to the Derivative",
+    "subgoals": [
+      "Explain how a secant line becomes a tangent line",
+      "Connect average rate to instantaneous rate",
+      "Recognise average rate in velocity and cost problems"
+    ]
+  }
+]

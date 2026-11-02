@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The eigenspace of an eigenvalue",
+    "section": "The Eigenspace of an Eigenvalue",
+    "subgoals": [
+      "Write the eigenspace as a null space.",
+      "Find a basis by solving a homogeneous system.",
+      "Explain why the eigenspace is a subspace."
+    ]
+  },
+  {
+    "label": "Geometric multiplicity",
+    "section": "Geometric Multiplicity",
+    "subgoals": [
+      "Compute the dimension of an eigenspace.",
+      "Relate it to the rank of the shifted matrix.",
+      "Show that it is at least one for a true eigenvalue."
+    ]
+  },
+  {
+    "label": "Algebraic versus geometric multiplicity",
+    "section": "Algebraic versus Geometric Multiplicity",
+    "subgoals": [
+      "Read algebraic multiplicity from the characteristic polynomial.",
+      "Compare it with geometric multiplicity.",
+      "State the diagonalisability criterion."
+    ]
+  }
+]

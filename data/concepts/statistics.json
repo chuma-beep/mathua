@@ -784,5 +784,108 @@
       "streak": 10,
       "avg_time_seconds": 26.0
     }
+  },
+  {
+    "id": "stat.spread.std_dev",
+    "label": "Standard deviation",
+    "domain": "statistics",
+    "subdomain": "statistics.spread",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.adv.variance",
+      "stat.data.mean"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "stat.data.box_plot",
+    "label": "Box plots and the five-number summary",
+    "domain": "statistics",
+    "subdomain": "statistics.data_representation",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.quartile.value",
+      "stat.spread.iqr"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "stat.reg.correlation",
+    "label": "Correlation coefficient",
+    "domain": "statistics",
+    "subdomain": "statistics.regression",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.adv.covariance",
+      "stat.spread.std_dev"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "stat.reg.least_squares",
+    "label": "The least-squares regression line",
+    "domain": "statistics",
+    "subdomain": "statistics.regression",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.reg.correlation",
+      "alg.linear.slope_intercept"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "stat.test.chi_square_independence",
+    "label": "The chi-square test of independence",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.test.chi_square",
+      "stat.data.read_table"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25.0
+    }
+  },
+  {
+    "id": "stat.data.study_design",
+    "label": "Study design",
+    "domain": "statistics",
+    "subdomain": "statistics.data_collection",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.read_table"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "stat.sampling.methods",
+    "label": "Sampling methods",
+    "domain": "statistics",
+    "subdomain": "statistics.data_collection",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.sampling"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
   }
 ]

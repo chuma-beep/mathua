@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The five-number summary",
+    "section": "The five-number summary",
+    "subgoals": [
+      "Order the values",
+      "Find the median",
+      "Identify the minimum and maximum"
+    ]
+  },
+  {
+    "label": "Quartiles and the interquartile range",
+    "section": "Quartiles and the interquartile range",
+    "subgoals": [
+      "Find Q1 from the lower half",
+      "Find Q3 from the upper half",
+      "Subtract Q1 from Q3"
+    ]
+  },
+  {
+    "label": "Outlier fences",
+    "section": "Outlier fences",
+    "subgoals": [
+      "Compute 1.5 times the IQR",
+      "Build the lower and upper fences",
+      "Count values outside the fences"
+    ]
+  }
+]

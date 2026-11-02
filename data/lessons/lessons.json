@@ -4998,5 +4998,105 @@
   {
     "concept_id": "trig.adv.vector_projection",
     "source": "teaching/trig.adv.vector_projection.md"
+  },
+  {
+    "concept_id": "stat.spread.std_dev",
+    "source": "teaching/stat.spread.std_dev.md"
+  },
+  {
+    "concept_id": "stat.data.box_plot",
+    "source": "teaching/stat.data.box_plot.md"
+  },
+  {
+    "concept_id": "stat.reg.correlation",
+    "source": "teaching/stat.reg.correlation.md"
+  },
+  {
+    "concept_id": "stat.reg.least_squares",
+    "source": "teaching/stat.reg.least_squares.md"
+  },
+  {
+    "concept_id": "stat.test.chi_square_independence",
+    "source": "teaching/stat.test.chi_square_independence.md"
+  },
+  {
+    "concept_id": "stat.data.study_design",
+    "source": "teaching/stat.data.study_design.md"
+  },
+  {
+    "concept_id": "stat.sampling.methods",
+    "source": "teaching/stat.sampling.methods.md"
+  },
+  {
+    "concept_id": "prob.cond.definition",
+    "source": "teaching/prob.cond.definition.md"
+  },
+  {
+    "concept_id": "prob.rv.convolution",
+    "source": "teaching/prob.rv.convolution.md"
+  },
+  {
+    "concept_id": "prob.dist.binomial",
+    "source": "teaching/prob.dist.binomial.md"
+  },
+  {
+    "concept_id": "linalg.systems.row_reduction",
+    "source": "teaching/linalg.systems.row_reduction.md"
+  },
+  {
+    "concept_id": "linalg.matrix.fundamental_subspaces",
+    "source": "teaching/linalg.matrix.fundamental_subspaces.md"
+  },
+  {
+    "concept_id": "linalg.orth.gram_schmidt",
+    "source": "teaching/linalg.orth.gram_schmidt.md"
+  },
+  {
+    "concept_id": "linalg.transform.matrix",
+    "source": "teaching/linalg.transform.matrix.md"
+  },
+  {
+    "concept_id": "linalg.eigen.eigenspace",
+    "source": "teaching/linalg.eigen.eigenspace.md"
+  },
+  {
+    "concept_id": "ode.basics.slope_field",
+    "source": "teaching/ode.basics.slope_field.md"
+  },
+  {
+    "concept_id": "ode.first_order.logistic",
+    "source": "teaching/ode.first_order.logistic.md"
+  },
+  {
+    "concept_id": "ode.basics.existence_uniqueness",
+    "source": "teaching/ode.basics.existence_uniqueness.md"
+  },
+  {
+    "concept_id": "calc.integral.riemann_sums",
+    "source": "teaching/calc.integral.riemann_sums.md"
+  },
+  {
+    "concept_id": "calc.series.taylor_error",
+    "source": "teaching/calc.series.taylor_error.md"
+  },
+  {
+    "concept_id": "calc.series.termwise",
+    "source": "teaching/calc.series.termwise.md"
+  },
+  {
+    "concept_id": "calc.multi.functions_several",
+    "source": "teaching/calc.multi.functions_several.md"
+  },
+  {
+    "concept_id": "calc.multi.level_curves",
+    "source": "teaching/calc.multi.level_curves.md"
+  },
+  {
+    "concept_id": "calc.vec.vector_function",
+    "source": "teaching/calc.vec.vector_function.md"
+  },
+  {
+    "concept_id": "precalc.func.average_rate",
+    "source": "teaching/precalc.func.average_rate.md"
   }
 ]

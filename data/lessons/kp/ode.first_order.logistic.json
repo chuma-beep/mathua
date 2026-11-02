@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The logistic model",
+    "section": "The logistic model",
+    "subgoals": [
+      "State the logistic differential equation",
+      "Interpret the growth rate and carrying capacity",
+      "Compare logistic and exponential growth"
+    ]
+  },
+  {
+    "label": "Carrying capacity and equilibria",
+    "section": "Carrying capacity and equilibria",
+    "subgoals": [
+      "Solve for the constant solutions",
+      "Identify the stable equilibrium",
+      "Describe the long-run population"
+    ]
+  },
+  {
+    "label": "Maximum growth and long-run behavior",
+    "section": "Maximum growth and long-run behavior",
+    "subgoals": [
+      "Locate the inflection population",
+      "Evaluate the maximum growth rate",
+      "Predict the limit of a solution"
+    ]
+  }
+]

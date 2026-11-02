@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Simple and systematic samples",
+    "section": "Simple and systematic samples",
+    "subgoals": [
+      "Distinguish random selection from a fixed interval",
+      "Compute N/k for a systematic sample",
+      "Watch for periodic lists"
+    ]
+  },
+  {
+    "label": "Cluster samples",
+    "section": "Cluster samples",
+    "subgoals": [
+      "Select whole clusters",
+      "Multiply cluster size by the number selected",
+      "Recognise the design effect"
+    ]
+  },
+  {
+    "label": "Stratified samples",
+    "section": "Stratified samples",
+    "subgoals": [
+      "Sample every stratum",
+      "Allocate the sample proportionally",
+      "Contrast strata with clusters"
+    ]
+  }
+]

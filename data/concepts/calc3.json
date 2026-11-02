@@ -871,5 +871,50 @@
       "streak": 10,
       "avg_time_seconds": 25.0
     }
+  },
+  {
+    "id": "calc.multi.functions_several",
+    "label": "Functions of several variables",
+    "domain": "calc3",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.partial",
+      "calc.limit.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
+  },
+  {
+    "id": "calc.multi.level_curves",
+    "label": "Level curves and contour diagrams",
+    "domain": "calc3",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.functions_several",
+      "geo.coord.plot"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25
+    }
+  },
+  {
+    "id": "calc.vec.vector_function",
+    "label": "Vector-valued functions",
+    "domain": "calc3",
+    "subdomain": "calculus.vector",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.vec.parametric_derivative",
+      "calc.deriv.partial"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25
+    }
   }
 ]

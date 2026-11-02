@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Reading a slope field",
+    "section": "Reading a slope field",
+    "subgoals": [
+      "Evaluate the right-hand side at a grid point",
+      "Read a segment as a local slope",
+      "Sketch a solution curve through a point"
+    ]
+  },
+  {
+    "label": "Equilibrium solutions",
+    "section": "Equilibrium solutions",
+    "subgoals": [
+      "Set the right-hand side equal to zero",
+      "Identify constant solutions",
+      "Classify a constant solution by nearby slopes"
+    ]
+  },
+  {
+    "label": "Concavity from the differential equation",
+    "section": "Concavity from the differential equation",
+    "subgoals": [
+      "Differentiate both sides with respect to x",
+      "Use the chain rule for the y dependence",
+      "Decide whether a solution curve bends upward or downward"
+    ]
+  }
+]
