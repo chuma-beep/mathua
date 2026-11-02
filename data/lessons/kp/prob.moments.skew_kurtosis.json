@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Third and fourth moments",
+    "section": "Third and fourth moments",
+    "subgoals": [
+      "Explain third and fourth moments",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  },
+  {
+    "label": "Reading skewness",
+    "section": "Reading skewness",
+    "subgoals": [
+      "Explain reading skewness",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  },
+  {
+    "label": "Excess kurtosis",
+    "section": "Excess kurtosis",
+    "subgoals": [
+      "Explain excess kurtosis",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  }
+]

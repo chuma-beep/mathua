@@ -12,13 +12,13 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 1287 |
+| Total concepts | 1296 |
 | Total units | 134 |
 | Minimum unit size | 1 |
 | Median unit size | 7 |
 | Maximum unit size | 42 |
 | Singleton units | 25 |
-| Units with <= 3 concepts | 38 |
+| Units with <= 3 concepts | 37 |
 | Units with > 25 concepts | 10 |
 | Units with > 50 concepts | 0 |
 | Cross-unit prerequisite edges (derived) | 433 |
@@ -141,9 +141,9 @@ exists to make concrete.
 | `precalculus.b8` | precalculus | 8 | 28 | 8 | 24–26 |
 | `precalculus.b9` | precalculus | 9 | 4 | 2 | 27–27 |
 | `probability_theory.b3` | probability_theory | 3 | 2 | 2 | 11–11 |
-| `probability_theory.b4` | probability_theory | 4 | 32 | 7 | 12–14 |
-| `probability_theory.b5` | probability_theory | 5 | 17 | 6 | 15–17 |
-| `probability_theory.b6` | probability_theory | 6 | 2 | 2 | 18–18 |
+| `probability_theory.b4` | probability_theory | 4 | 37 | 8 | 12–14 |
+| `probability_theory.b5` | probability_theory | 5 | 19 | 7 | 15–17 |
+| `probability_theory.b6` | probability_theory | 6 | 4 | 2 | 18–19 |
 | `real_analysis.b9` | real_analysis | 9 | 7 | 3 | 27–29 |
 | `real_analysis.b10` | real_analysis | 10 | 28 | 5 | 30–32 |
 | `real_analysis.b11` | real_analysis | 11 | 15 | 4 | 33–35 |
@@ -180,15 +180,15 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 175 | 5 | 39 | 27 | 54 | 3 | 0 |
-| 3 | 134 | 7 | 42 | 25 | 38 | 10 | 0 |
+| 2 | 175 | 5 | 39 | 27 | 53 | 3 | 0 |
+| 3 | 134 | 7 | 42 | 25 | 37 | 10 | 0 |
 | 4 | 105 | 10 | 63 | 10 | 24 | 13 | 0 |
 | 5 | 89 | 10 | 81 | 6 | 14 | 13 | 0 |
-| 6 | 86 | 11 | 77 | 7 | 15 | 18 | 0 |
+| 6 | 86 | 11 | 77 | 7 | 14 | 18 | 0 |
 | 8 | 66 | 15 | 82 | 4 | 8 | 22 | 0 |
 | 10 | 56 | 18 | 100 | 2 | 8 | 19 | 0 |
 | 12 | 58 | 18 | 83 | 2 | 5 | 23 | 0 |
-| 15 | 46 | 22 | 119 | 1 | 5 | 21 | 0 |
+| 15 | 46 | 23 | 119 | 1 | 5 | 21 | 0 |
 | 20 | 37 | 37 | 100 | 1 | 3 | 24 | 0 |
 | 45 | 23 | 52 | 124 | 0 | 0 | 23 | 0 |
 
@@ -207,7 +207,7 @@ The subdomain condensation of the concept DAG **contains cycles**: grouping conc
 subdomain discards the per-concept ordering, so a concept in subdomain A can be a
 prerequisite of one in subdomain B whose other members depend on A.
 
-**110 of 125 subdomains cannot be levelled**, they sit inside a cycle, or downstream
+**112 of 125 subdomains cannot be levelled**, they sit inside a cycle, or downstream
 of one, so no depth function exists for them at all. (Tarjan puts 26 inside cycles and
 the remaining 34 behind them; Kahn cannot order either group, because ordering a node
 requires its predecessors to be ordered first.) An implementation that ignores this
@@ -322,39 +322,41 @@ Unresolvable subdomains:
 `probability_theory.convergence`
 
 `probability_theory.distributions`
+`probability_theory.joint_distributions`
+`probability_theory.moments`
 `probability_theory.processes`
+
 `real_analysis.deriv`
 `real_analysis.limit`
-
 `real_analysis.metric`
 `real_analysis.order`
+
 `real_analysis.seq`
 `statistics.data_collection`
-
 `statistics.distributions`
 `topology.algebraic`
+
 `topology.basics`
 `topology.compact`
-
 `topology.connected`
 `topology.constructions`
+
 `topology.covering`
 `topology.dimension`
-
 `topology.invariants`
 `topology.knot`
+
 `topology.manifolds`
 `topology.metrization`
-
 `topology.separation`
 `trigonometry.advanced`
+
 `trigonometry.functions`
 `trigonometry.graphs`
-
 `trigonometry.hyperbolic`
 `trigonometry.identities`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1287
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1296
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings

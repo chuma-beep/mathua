@@ -17080,5 +17080,104 @@
       "linalg.systems.homogeneous",
       "linalg.matrix.inverse_2x2"
     ]
+  },
+  {
+    "id": "prob.dist.poisson",
+    "key_prerequisites": [
+      "prob.rv.pmf",
+      "stat.dist.poisson"
+    ],
+    "encompasses": [
+      "prob.rv.pmf",
+      "stat.dist.poisson"
+    ]
+  },
+  {
+    "id": "prob.dist.normal",
+    "key_prerequisites": [
+      "prob.rv.pdf",
+      "stat.dist.normal"
+    ],
+    "encompasses": [
+      "prob.rv.pdf",
+      "stat.dist.normal"
+    ]
+  },
+  {
+    "id": "prob.moments.skew_kurtosis",
+    "key_prerequisites": [
+      "prob.rv.variance",
+      "prob.rv.expectation"
+    ],
+    "encompasses": [
+      "prob.rv.variance",
+      "prob.rv.expectation"
+    ]
+  },
+  {
+    "id": "prob.joint.conditional_density",
+    "key_prerequisites": [
+      "prob.joint.continuous",
+      "prob.expect.conditional"
+    ],
+    "encompasses": [
+      "prob.joint.continuous",
+      "prob.expect.conditional"
+    ]
+  },
+  {
+    "id": "prob.rv.pgf",
+    "key_prerequisites": [
+      "prob.rv.mgf",
+      "prob.rv.pmf"
+    ],
+    "encompasses": [
+      "prob.rv.mgf",
+      "prob.rv.pmf"
+    ]
+  },
+  {
+    "id": "prob.process.recurrence",
+    "key_prerequisites": [
+      "prob.process.markov_chain",
+      "prob.process.stationary"
+    ],
+    "encompasses": [
+      "prob.process.markov_chain",
+      "prob.process.stationary"
+    ]
+  },
+  {
+    "id": "prob.martingale.stopping",
+    "key_prerequisites": [
+      "prob.process.martingale",
+      "prob.expect.conditional"
+    ],
+    "encompasses": [
+      "prob.process.martingale",
+      "prob.expect.conditional"
+    ]
+  },
+  {
+    "id": "prob.rv.multivariate_transform",
+    "key_prerequisites": [
+      "prob.rv.transform",
+      "prob.joint.continuous"
+    ],
+    "encompasses": [
+      "prob.rv.transform",
+      "prob.joint.continuous"
+    ]
+  },
+  {
+    "id": "prob.rv.integral_transform",
+    "key_prerequisites": [
+      "prob.rv.transform",
+      "prob.rv.cdf"
+    ],
+    "encompasses": [
+      "prob.rv.transform",
+      "prob.rv.cdf"
+    ]
   }
 ]

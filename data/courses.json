@@ -1082,7 +1082,16 @@
       "prob.process.martingale",
       "prob.cond.definition",
       "prob.rv.convolution",
-      "prob.dist.binomial"
+      "prob.dist.binomial",
+      "prob.dist.poisson",
+      "prob.dist.normal",
+      "prob.moments.skew_kurtosis",
+      "prob.joint.conditional_density",
+      "prob.rv.pgf",
+      "prob.process.recurrence",
+      "prob.martingale.stopping",
+      "prob.rv.multivariate_transform",
+      "prob.rv.integral_transform"
     ]
   },
   {

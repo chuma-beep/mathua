@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Counting rare events",
+    "section": "Counting rare events",
+    "subgoals": [
+      "Explain counting rare events",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  },
+  {
+    "label": "The Poisson formula",
+    "section": "The Poisson formula",
+    "subgoals": [
+      "Explain the poisson formula",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  },
+  {
+    "label": "Working with the formula",
+    "section": "Working with the formula",
+    "subgoals": [
+      "Explain working with the formula",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  }
+]

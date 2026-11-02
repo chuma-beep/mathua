@@ -15122,6 +15122,141 @@
     "subdomain": "probability_theory.foundations"
   },
   {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.dist.poisson",
+    "label": "The Poisson distribution",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.pmf",
+      "stat.dist.poisson"
+    ],
+    "subdomain": "probability_theory.distributions"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.dist.normal",
+    "label": "The normal distribution",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.pdf",
+      "stat.dist.normal"
+    ],
+    "subdomain": "probability_theory.distributions"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.moments.skew_kurtosis",
+    "label": "Skewness and kurtosis",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.variance",
+      "prob.rv.expectation"
+    ],
+    "subdomain": "probability_theory.moments"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.joint.conditional_density",
+    "label": "Conditional densities",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.joint.continuous",
+      "prob.expect.conditional"
+    ],
+    "subdomain": "probability_theory.joint_distributions"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.rv.pgf",
+    "label": "Probability generating functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 27,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.mgf",
+      "prob.rv.pmf"
+    ],
+    "subdomain": "probability_theory.random_variables"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.process.recurrence",
+    "label": "Recurrence and return times",
+    "mastery_threshold": {
+      "avg_time_seconds": 29,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.process.markov_chain",
+      "prob.process.stationary"
+    ],
+    "subdomain": "probability_theory.processes"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.martingale.stopping",
+    "label": "Optional stopping",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.process.martingale",
+      "prob.expect.conditional"
+    ],
+    "subdomain": "probability_theory.processes"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.rv.multivariate_transform",
+    "label": "Transformations of random vectors",
+    "mastery_threshold": {
+      "avg_time_seconds": 29,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.transform",
+      "prob.joint.continuous"
+    ],
+    "subdomain": "probability_theory.random_variables"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.rv.integral_transform",
+    "label": "The probability integral transform",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.transform",
+      "prob.rv.cdf"
+    ],
+    "subdomain": "probability_theory.random_variables"
+  },
+  {
     "domain": "real_analysis",
     "grading_type": "numeric",
     "id": "ra.order.supremum",

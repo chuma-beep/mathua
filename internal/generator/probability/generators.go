@@ -57,4 +57,13 @@ func Register(reg *generator.Registry) {
 	reg.Register("prob.process.stationary", &stationaryGen{})
 	reg.Register("prob.process.random_walk", &randomWalkGen{})
 	reg.Register("prob.process.martingale", &martingaleGen{})
+	reg.Register("prob.dist.poisson", &poissonDistributionGen{})
+	reg.Register("prob.dist.normal", &normalDistributionGen{})
+	reg.Register("prob.moments.skew_kurtosis", &skewKurtosisGen{})
+	reg.Register("prob.joint.conditional_density", &conditionalDensityGen{})
+	reg.Register("prob.rv.pgf", &pgfGen{})
+	reg.Register("prob.process.recurrence", &recurrenceGen{})
+	reg.Register("prob.martingale.stopping", &stoppingGen{})
+	reg.Register("prob.rv.multivariate_transform", &multivariateTransformGen{})
+	reg.Register("prob.rv.integral_transform", &integralTransformGen{})
 }

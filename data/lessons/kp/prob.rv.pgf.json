@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Encoding a count distribution",
+    "section": "Encoding a count distribution",
+    "subgoals": [
+      "Explain encoding a count distribution",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  },
+  {
+    "label": "Derivatives and moments",
+    "section": "Derivatives and moments",
+    "subgoals": [
+      "Explain derivatives and moments",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  },
+  {
+    "label": "Sums of independent counts",
+    "section": "Sums of independent counts",
+    "subgoals": [
+      "Explain sums of independent counts",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  }
+]

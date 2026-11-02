@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The bell curve",
+    "section": "The bell curve",
+    "subgoals": [
+      "Explain the bell curve",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  },
+  {
+    "label": "Standardising",
+    "section": "Standardising",
+    "subgoals": [
+      "Explain standardising",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  },
+  {
+    "label": "The empirical rule",
+    "section": "The empirical rule",
+    "subgoals": [
+      "Explain the empirical rule",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  }
+]

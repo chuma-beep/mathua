@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Uniform from any continuous CDF",
+    "section": "Uniform from any continuous CDF",
+    "subgoals": [
+      "Explain uniform from any continuous cdf",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  },
+  {
+    "label": "Simulating from a distribution",
+    "section": "Simulating from a distribution",
+    "subgoals": [
+      "Explain simulating from a distribution",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  },
+  {
+    "label": "Checking a model",
+    "section": "Checking a model",
+    "subgoals": [
+      "Explain checking a model",
+      "Apply the definition to a worked case",
+      "Recognise a common mistake"
+    ]
+  }
+]

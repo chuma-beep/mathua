@@ -5146,5 +5146,41 @@
   {
     "concept_id": "stat.infer.regression_slope",
     "source": "teaching/stat.infer.regression_slope.md"
+  },
+  {
+    "concept_id": "prob.dist.poisson",
+    "source": "teaching/prob.dist.poisson.md"
+  },
+  {
+    "concept_id": "prob.dist.normal",
+    "source": "teaching/prob.dist.normal.md"
+  },
+  {
+    "concept_id": "prob.moments.skew_kurtosis",
+    "source": "teaching/prob.moments.skew_kurtosis.md"
+  },
+  {
+    "concept_id": "prob.joint.conditional_density",
+    "source": "teaching/prob.joint.conditional_density.md"
+  },
+  {
+    "concept_id": "prob.rv.pgf",
+    "source": "teaching/prob.rv.pgf.md"
+  },
+  {
+    "concept_id": "prob.process.recurrence",
+    "source": "teaching/prob.process.recurrence.md"
+  },
+  {
+    "concept_id": "prob.martingale.stopping",
+    "source": "teaching/prob.martingale.stopping.md"
+  },
+  {
+    "concept_id": "prob.rv.multivariate_transform",
+    "source": "teaching/prob.rv.multivariate_transform.md"
+  },
+  {
+    "concept_id": "prob.rv.integral_transform",
+    "source": "teaching/prob.rv.integral_transform.md"
   }
 ]

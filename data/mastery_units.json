@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1287,
+  "concept_count": 1296,
   "unit_count": 134,
   "units": [
     {
@@ -2756,6 +2756,7 @@
         "probability_theory.foundations",
         "probability_theory.joint",
         "probability_theory.limits",
+        "probability_theory.moments",
         "probability_theory.random_variables"
       ],
       "concept_ids": [
@@ -2772,7 +2773,9 @@
         "prob.dist.binomial",
         "prob.dist.exponential_family",
         "prob.dist.memoryless",
+        "prob.dist.normal",
         "prob.dist.order_stats",
+        "prob.dist.poisson",
         "prob.dist.poisson_process",
         "prob.independence.pairwise",
         "prob.joint.continuous",
@@ -2780,19 +2783,22 @@
         "prob.limit.clt",
         "prob.limit.markov",
         "prob.limit.weak_law",
+        "prob.moments.skew_kurtosis",
         "prob.rv.cdf",
         "prob.rv.definition",
         "prob.rv.expectation",
+        "prob.rv.integral_transform",
         "prob.rv.joint",
         "prob.rv.mgf",
         "prob.rv.pdf",
+        "prob.rv.pgf",
         "prob.rv.pmf",
         "prob.rv.transform",
         "prob.space.continuity",
         "prob.space.inclusion_exclusion",
         "prob.space.sigma_algebra"
       ],
-      "concept_count": 32
+      "concept_count": 37
     },
     {
       "id": "probability_theory.b5",
@@ -2806,6 +2812,7 @@
         "probability_theory.convergence",
         "probability_theory.foundations",
         "probability_theory.joint",
+        "probability_theory.joint_distributions",
         "probability_theory.processes",
         "probability_theory.random_variables"
       ],
@@ -2820,15 +2827,17 @@
         "prob.conv.slutsky",
         "prob.expect.conditional",
         "prob.expect.total",
+        "prob.joint.conditional_density",
         "prob.joint.marginal",
         "prob.joint.rv_independence",
         "prob.process.markov_chain",
         "prob.process.martingale",
         "prob.process.random_walk",
         "prob.process.transition_matrix",
-        "prob.rv.convolution"
+        "prob.rv.convolution",
+        "prob.rv.multivariate_transform"
       ],
-      "concept_count": 17
+      "concept_count": 19
     },
     {
       "id": "probability_theory.b6",
@@ -2836,16 +2845,18 @@
       "domain": "probability_theory",
       "band": 6,
       "depth_min": 18,
-      "depth_max": 18,
+      "depth_max": 19,
       "subdomains": [
         "probability_theory.joint",
         "probability_theory.processes"
       ],
       "concept_ids": [
         "prob.expect.total_variance",
+        "prob.martingale.stopping",
+        "prob.process.recurrence",
         "prob.process.stationary"
       ],
-      "concept_count": 2
+      "concept_count": 4
     },
     {
       "id": "real_analysis.b9",
