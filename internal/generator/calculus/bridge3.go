@@ -60,7 +60,7 @@ func (g *calc2BridgeGen) Generate(ctx generator.GeneratorContext) generator.Prob
 			return calcBridgeProblem(o,
 				fmt.Sprintf("Using \\(x=a\\sin\\theta\\), at what angle \\(\\theta\\) in degrees is \\(x/a=%s\\)? (enter a number)", p[0]),
 				p[1],
-				fmt.Sprintf("The sine of the angle equals %s, so theta is %s degrees.", p[0], p[1]),
+				fmt.Sprintf("The angle satisfies \\(x/a=%s\\), so \\(\\theta\\) is %s degrees.", p[0], p[1]),
 				map[string]string{"kind": "angle", "angle": p[1]})
 		default:
 			as := []int{1, 2, 4, 5, 10}

@@ -328,7 +328,7 @@ func (g *vectorFunctionGen) Generate(ctx generator.GeneratorContext) generator.P
 		return calcBridgeProblem(o,
 			fmt.Sprintf("For \\(\\mathbf r(t)=\\langle %d\\cos t,%d\\sin t,4t\\rangle\\), what is the %s-component at \\(t=%s\\)? (enter a number)", a, a, name, tName),
 			strconv.Itoa(ans),
-			fmt.Sprintf("At t=%s, the %s-component is %d.", tName, name, ans),
+			fmt.Sprintf("At \\(t=%s\\), the %s-component is %d.", tName, name, ans),
 			map[string]string{"kind": "evaluate"})
 	case 2:
 		a := 2 + rand.Intn(4)
@@ -348,7 +348,7 @@ func (g *vectorFunctionGen) Generate(ctx generator.GeneratorContext) generator.P
 		return calcBridgeProblem(o,
 			fmt.Sprintf("For \\(\\mathbf r(t)=\\langle %d\\cos t,%d\\sin t,4t\\rangle\\), what is \\(%s(t)\\) at \\(t=%s\\)? (enter a number)", a, a, name, tName),
 			strconv.Itoa(ans),
-			fmt.Sprintf("Differentiating gives the stated component, and at t=%s its value is %d.", tName, ans),
+			fmt.Sprintf("Differentiating gives the stated component, and at \\(t=%s\\) its value is %d.", tName, ans),
 			map[string]string{"kind": "derivative"})
 	default:
 		triples := [][2]int{{3, 4}, {6, 8}, {5, 12}, {8, 15}, {9, 12}, {7, 24}, {20, 21}, {9, 40}}
