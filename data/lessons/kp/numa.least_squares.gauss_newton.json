@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Nonlinear Least Squares",
+    "section": "Nonlinear Least Squares",
+    "subgoals": [
+      "Explain the idea behind nonlinear least squares.",
+      "Apply the method to a worked numerical example.",
+      "Check the result for consistency and accuracy."
+    ]
+  },
+  {
+    "label": "The Normal Equations",
+    "section": "The Normal Equations",
+    "subgoals": [
+      "Explain the idea behind the normal equations.",
+      "Apply the method to a worked numerical example.",
+      "Check the result for consistency and accuracy."
+    ]
+  },
+  {
+    "label": "Convergence",
+    "section": "Convergence",
+    "subgoals": [
+      "Explain the idea behind convergence.",
+      "Apply the method to a worked numerical example.",
+      "Check the result for consistency and accuracy."
+    ]
+  }
+]

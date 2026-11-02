@@ -5,8 +5,8 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1476,
-  "unit_count": 136,
+  "concept_count": 1485,
+  "unit_count": 137,
   "units": [
     {
       "id": "abstract_algebra.b6",
@@ -2494,17 +2494,38 @@
       "depth_min": 24,
       "depth_max": 26,
       "subdomains": [
+        "numerical_analysis.fourier",
         "numerical_analysis.linear"
       ],
       "concept_ids": [
+        "numa.fourier.fft",
+        "numa.linear.cg",
         "numa.linear.elimination",
         "numa.linear.gauss_seidel",
         "numa.linear.jacobi",
         "numa.linear.lu",
         "numa.linear.pivoting",
-        "numa.linear.power"
+        "numa.linear.power",
+        "numa.linear.qr_algorithm"
       ],
-      "concept_count": 6
+      "concept_count": 9
+    },
+    {
+      "id": "numerical_analysis.b9",
+      "title": "Numerical Analysis · Stage 10",
+      "domain": "numerical_analysis",
+      "band": 9,
+      "depth_min": 27,
+      "depth_max": 28,
+      "subdomains": [
+        "numerical_analysis.linear"
+      ],
+      "concept_ids": [
+        "numa.linear.cholesky",
+        "numa.linear.iter_convergence",
+        "numa.linear.sor"
+      ],
+      "concept_count": 3
     },
     {
       "id": "numerical_analysis.b10",
@@ -2514,15 +2535,17 @@
       "depth_min": 30,
       "depth_max": 32,
       "subdomains": [
+        "numerical_analysis.interp",
         "numerical_analysis.roots"
       ],
       "concept_ids": [
+        "numa.interp.hermite",
         "numa.roots.bisection",
         "numa.roots.false_position",
         "numa.roots.fixed_point",
         "numa.roots.newton"
       ],
-      "concept_count": 4
+      "concept_count": 5
     },
     {
       "id": "numerical_analysis.b11",
@@ -2532,16 +2555,18 @@
       "depth_min": 33,
       "depth_max": 34,
       "subdomains": [
+        "numerical_analysis.linear",
         "numerical_analysis.roots"
       ],
       "concept_ids": [
+        "numa.least_squares.gauss_newton",
         "numa.roots.bracketing",
         "numa.roots.horner",
         "numa.roots.multiple",
         "numa.roots.order",
         "numa.roots.secant"
       ],
-      "concept_count": 5
+      "concept_count": 6
     },
     {
       "id": "numerical_analysis.b12",
@@ -2576,9 +2601,10 @@
       "concept_ids": [
         "numa.integration.adaptive",
         "numa.integration.improper",
+        "numa.integration.monte_carlo",
         "numa.integration.romberg"
       ],
-      "concept_count": 3
+      "concept_count": 4
     },
     {
       "id": "prealgebra.b0",

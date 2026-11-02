@@ -44,4 +44,7 @@ func Register(reg *generator.Registry) {
 	reg.Register("numa.linear.gauss_seidel", &gaussSeidelGen{})
 	reg.Register("numa.linear.power", &powerMethodGen{})
 	reg.Register("numa.linear.least_squares_qr", &leastSquaresQRGen{})
+	for id, kind := range numaBridgeKinds {
+		reg.Register(id, &numaBridgeGen{kind: kind})
+	}
 }

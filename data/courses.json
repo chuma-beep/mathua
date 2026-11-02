@@ -1324,7 +1324,16 @@
       "numa.linear.jacobi",
       "numa.linear.gauss_seidel",
       "numa.linear.power",
-      "numa.linear.least_squares_qr"
+      "numa.linear.least_squares_qr",
+      "numa.linear.cholesky",
+      "numa.interp.hermite",
+      "numa.linear.sor",
+      "numa.linear.iter_convergence",
+      "numa.linear.qr_algorithm",
+      "numa.linear.cg",
+      "numa.fourier.fft",
+      "numa.integration.monte_carlo",
+      "numa.least_squares.gauss_newton"
     ]
   },
   {

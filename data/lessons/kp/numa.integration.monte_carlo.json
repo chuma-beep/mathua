@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Random Samples",
+    "section": "Random Samples",
+    "subgoals": [
+      "Explain the idea behind random samples.",
+      "Apply the method to a worked numerical example.",
+      "Check the result for consistency and accuracy."
+    ]
+  },
+  {
+    "label": "Variance and Error",
+    "section": "Variance and Error",
+    "subgoals": [
+      "Explain the idea behind variance and error.",
+      "Apply the method to a worked numerical example.",
+      "Check the result for consistency and accuracy."
+    ]
+  },
+  {
+    "label": "Variance Reduction",
+    "section": "Variance Reduction",
+    "subgoals": [
+      "Explain the idea behind variance reduction.",
+      "Apply the method to a worked numerical example.",
+      "Check the result for consistency and accuracy."
+    ]
+  }
+]

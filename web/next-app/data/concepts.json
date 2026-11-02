@@ -14886,6 +14886,140 @@
     "subdomain": "numerical_analysis.linear"
   },
   {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.linear.cholesky",
+    "label": "Cholesky factorization",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.linear.lu",
+      "linalg.symmetric.spectral"
+    ],
+    "subdomain": "numerical_analysis.linear"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.interp.hermite",
+    "label": "Hermite interpolation",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.interp.divided_differences",
+      "calc.deriv.concept"
+    ],
+    "subdomain": "numerical_analysis.interp"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.linear.sor",
+    "label": "Successive over-relaxation",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.linear.gauss_seidel"
+    ],
+    "subdomain": "numerical_analysis.linear"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.linear.iter_convergence",
+    "label": "Convergence of iterative methods",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.linear.jacobi",
+      "numa.linear.gauss_seidel"
+    ],
+    "subdomain": "numerical_analysis.linear"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.linear.qr_algorithm",
+    "label": "The QR algorithm",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.decomp.qr",
+      "linalg.eigen.compute"
+    ],
+    "subdomain": "numerical_analysis.linear"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.linear.cg",
+    "label": "The conjugate gradient method",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.inner_product",
+      "numa.linear.least_squares_qr"
+    ],
+    "subdomain": "numerical_analysis.linear"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.fourier.fft",
+    "label": "The fast Fourier transform",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.euler_identity",
+      "trig.ident.even_odd"
+    ],
+    "subdomain": "numerical_analysis.fourier"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.integration.monte_carlo",
+    "label": "Monte Carlo integration",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.expectation",
+      "numa.integration.composite"
+    ],
+    "subdomain": "numerical_analysis.integration"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.least_squares.gauss_newton",
+    "label": "The Gauss-Newton method",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.interp.normal_equations",
+      "numa.roots.newton"
+    ],
+    "subdomain": "numerical_analysis.linear"
+  },
+  {
     "domain": "prealgebra",
     "grading_type": "comparison",
     "id": "dec.basics.compare",

@@ -5902,5 +5902,41 @@
   {
     "concept_id": "complex.adv.morera",
     "source": "teaching/complex.adv.morera.md"
+  },
+  {
+    "concept_id": "numa.linear.cholesky",
+    "source": "teaching/numa.linear.cholesky.md"
+  },
+  {
+    "concept_id": "numa.interp.hermite",
+    "source": "teaching/numa.interp.hermite.md"
+  },
+  {
+    "concept_id": "numa.linear.sor",
+    "source": "teaching/numa.linear.sor.md"
+  },
+  {
+    "concept_id": "numa.linear.iter_convergence",
+    "source": "teaching/numa.linear.iter_convergence.md"
+  },
+  {
+    "concept_id": "numa.linear.qr_algorithm",
+    "source": "teaching/numa.linear.qr_algorithm.md"
+  },
+  {
+    "concept_id": "numa.linear.cg",
+    "source": "teaching/numa.linear.cg.md"
+  },
+  {
+    "concept_id": "numa.fourier.fft",
+    "source": "teaching/numa.fourier.fft.md"
+  },
+  {
+    "concept_id": "numa.integration.monte_carlo",
+    "source": "teaching/numa.integration.monte_carlo.md"
+  },
+  {
+    "concept_id": "numa.least_squares.gauss_newton",
+    "source": "teaching/numa.least_squares.gauss_newton.md"
   }
 ]

@@ -19456,5 +19456,137 @@
       "complex.integral.cauchy_goursat",
       "complex.adv.analytic"
     ]
+  },
+  {
+    "id": "numa.linear.cholesky",
+    "key_prerequisites": [
+      "numa.linear.lu",
+      "linalg.symmetric.spectral"
+    ],
+    "encompasses": [
+      "numa.linear.lu",
+      "linalg.symmetric.spectral"
+    ],
+    "prerequisites": [
+      "numa.linear.lu",
+      "linalg.symmetric.spectral"
+    ]
+  },
+  {
+    "id": "numa.interp.hermite",
+    "key_prerequisites": [
+      "numa.interp.divided_differences",
+      "calc.deriv.concept"
+    ],
+    "encompasses": [
+      "numa.interp.divided_differences",
+      "calc.deriv.concept"
+    ],
+    "prerequisites": [
+      "numa.interp.divided_differences",
+      "calc.deriv.concept"
+    ]
+  },
+  {
+    "id": "numa.linear.sor",
+    "key_prerequisites": [
+      "numa.linear.gauss_seidel"
+    ],
+    "encompasses": [
+      "numa.linear.gauss_seidel"
+    ],
+    "prerequisites": [
+      "numa.linear.gauss_seidel"
+    ]
+  },
+  {
+    "id": "numa.linear.iter_convergence",
+    "key_prerequisites": [
+      "numa.linear.jacobi",
+      "numa.linear.gauss_seidel"
+    ],
+    "encompasses": [
+      "numa.linear.jacobi",
+      "numa.linear.gauss_seidel"
+    ],
+    "prerequisites": [
+      "numa.linear.jacobi",
+      "numa.linear.gauss_seidel"
+    ]
+  },
+  {
+    "id": "numa.linear.qr_algorithm",
+    "key_prerequisites": [
+      "linalg.decomp.qr",
+      "linalg.eigen.compute"
+    ],
+    "encompasses": [
+      "linalg.decomp.qr",
+      "linalg.eigen.compute"
+    ],
+    "prerequisites": [
+      "linalg.decomp.qr",
+      "linalg.eigen.compute"
+    ]
+  },
+  {
+    "id": "numa.linear.cg",
+    "key_prerequisites": [
+      "linalg.inner_product",
+      "numa.linear.least_squares_qr"
+    ],
+    "encompasses": [
+      "linalg.inner_product",
+      "numa.linear.least_squares_qr"
+    ],
+    "prerequisites": [
+      "linalg.inner_product",
+      "numa.linear.least_squares_qr"
+    ]
+  },
+  {
+    "id": "numa.fourier.fft",
+    "key_prerequisites": [
+      "complex.adv.euler_identity",
+      "trig.ident.even_odd"
+    ],
+    "encompasses": [
+      "complex.adv.euler_identity",
+      "trig.ident.even_odd"
+    ],
+    "prerequisites": [
+      "complex.adv.euler_identity",
+      "trig.ident.even_odd"
+    ]
+  },
+  {
+    "id": "numa.integration.monte_carlo",
+    "key_prerequisites": [
+      "prob.rv.expectation",
+      "numa.integration.composite"
+    ],
+    "encompasses": [
+      "prob.rv.expectation",
+      "numa.integration.composite"
+    ],
+    "prerequisites": [
+      "prob.rv.expectation",
+      "numa.integration.composite"
+    ]
+  },
+  {
+    "id": "numa.least_squares.gauss_newton",
+    "key_prerequisites": [
+      "numa.interp.normal_equations",
+      "numa.roots.newton"
+    ],
+    "encompasses": [
+      "numa.interp.normal_equations",
+      "numa.roots.newton"
+    ],
+    "prerequisites": [
+      "numa.interp.normal_equations",
+      "numa.roots.newton"
+    ]
   }
 ]

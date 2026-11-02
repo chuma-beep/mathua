@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Symmetric Positive Definite Matrices",
+    "section": "Symmetric Positive Definite Matrices",
+    "subgoals": [
+      "Explain the idea behind symmetric positive definite matrices.",
+      "Apply the method to a worked numerical example.",
+      "Check the result for consistency and accuracy."
+    ]
+  },
+  {
+    "label": "The Cholesky Factor",
+    "section": "The Cholesky Factor",
+    "subgoals": [
+      "Explain the idea behind the cholesky factor.",
+      "Apply the method to a worked numerical example.",
+      "Check the result for consistency and accuracy."
+    ]
+  },
+  {
+    "label": "Solving with the Factor",
+    "section": "Solving with the Factor",
+    "subgoals": [
+      "Explain the idea behind solving with the factor.",
+      "Apply the method to a worked numerical example.",
+      "Check the result for consistency and accuracy."
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Iteration Matrices",
+    "section": "Iteration Matrices",
+    "subgoals": [
+      "Explain the idea behind iteration matrices.",
+      "Apply the method to a worked numerical example.",
+      "Check the result for consistency and accuracy."
+    ]
+  },
+  {
+    "label": "Spectral Radius",
+    "section": "Spectral Radius",
+    "subgoals": [
+      "Explain the idea behind spectral radius.",
+      "Apply the method to a worked numerical example.",
+      "Check the result for consistency and accuracy."
+    ]
+  },
+  {
+    "label": "Practical Tests",
+    "section": "Practical Tests",
+    "subgoals": [
+      "Explain the idea behind practical tests.",
+      "Apply the method to a worked numerical example.",
+      "Check the result for consistency and accuracy."
+    ]
+  }
+]
