@@ -18718,5 +18718,155 @@
       "nt.prime.exponent",
       "nt.basics.divisibility"
     ]
+  },
+  {
+    "id": "graph.hamiltonian",
+    "key_prerequisites": [
+      "discrete.graphs.eulerian",
+      "graph.distance"
+    ],
+    "encompasses": [
+      "discrete.graphs.eulerian",
+      "graph.distance"
+    ],
+    "prerequisites": [
+      "discrete.graphs.eulerian",
+      "graph.distance"
+    ]
+  },
+  {
+    "id": "graph.blocks",
+    "key_prerequisites": [
+      "graph.cut_vertex",
+      "graph.bridge"
+    ],
+    "encompasses": [
+      "graph.cut_vertex",
+      "graph.bridge"
+    ],
+    "prerequisites": [
+      "graph.cut_vertex",
+      "graph.bridge"
+    ]
+  },
+  {
+    "id": "graph.planar_dual",
+    "key_prerequisites": [
+      "discrete.graphs.planar",
+      "graph.kuratowski"
+    ],
+    "encompasses": [
+      "discrete.graphs.planar",
+      "graph.kuratowski"
+    ],
+    "prerequisites": [
+      "discrete.graphs.planar",
+      "graph.kuratowski"
+    ]
+  },
+  {
+    "id": "graph.automorphism",
+    "key_prerequisites": [
+      "graph.isomorphism",
+      "graph.complement"
+    ],
+    "encompasses": [
+      "graph.isomorphism",
+      "graph.complement"
+    ],
+    "prerequisites": [
+      "graph.isomorphism",
+      "graph.complement"
+    ]
+  },
+  {
+    "id": "graph.girth",
+    "key_prerequisites": [
+      "graph.distance",
+      "graph.subgraph"
+    ],
+    "encompasses": [
+      "graph.distance",
+      "graph.subgraph"
+    ],
+    "prerequisites": [
+      "graph.distance",
+      "graph.subgraph"
+    ]
+  },
+  {
+    "id": "graph.four_color",
+    "key_prerequisites": [
+      "graph.kuratowski",
+      "discrete.graphs.coloring"
+    ],
+    "encompasses": [
+      "graph.kuratowski",
+      "discrete.graphs.coloring"
+    ],
+    "prerequisites": [
+      "graph.kuratowski",
+      "discrete.graphs.coloring"
+    ]
+  },
+  {
+    "id": "graph.matroid",
+    "key_prerequisites": [
+      "graph.matching",
+      "graph.treewidth"
+    ],
+    "encompasses": [
+      "graph.matching",
+      "graph.treewidth"
+    ],
+    "prerequisites": [
+      "graph.matching",
+      "graph.treewidth"
+    ]
+  },
+  {
+    "id": "graph.shortest_path",
+    "key_prerequisites": [
+      "discrete.graphs.paths",
+      "graph.distance"
+    ],
+    "encompasses": [
+      "discrete.graphs.paths",
+      "graph.distance"
+    ],
+    "prerequisites": [
+      "discrete.graphs.paths",
+      "graph.distance"
+    ]
+  },
+  {
+    "id": "graph.degeneracy",
+    "key_prerequisites": [
+      "graph.subgraph",
+      "graph.distance"
+    ],
+    "encompasses": [
+      "graph.subgraph",
+      "graph.distance"
+    ],
+    "prerequisites": [
+      "graph.subgraph",
+      "graph.distance"
+    ]
+  },
+  {
+    "id": "graph.mst",
+    "key_prerequisites": [
+      "discrete.graphs.trees",
+      "graph.shortest_path"
+    ],
+    "encompasses": [
+      "discrete.graphs.trees",
+      "graph.shortest_path"
+    ],
+    "prerequisites": [
+      "discrete.graphs.trees",
+      "graph.shortest_path"
+    ]
   }
 ]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Faces and Euler's Formula",
+    "section": "Faces and Euler's Formula",
+    "subgoals": [
+      "Explain faces and euler's formula",
+      "Apply faces and euler's formula to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  },
+  {
+    "label": "Constructing the Dual",
+    "section": "Constructing the Dual",
+    "subgoals": [
+      "Explain constructing the dual",
+      "Apply constructing the dual to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  },
+  {
+    "label": "Dual Edge Counts",
+    "section": "Dual Edge Counts",
+    "subgoals": [
+      "Explain dual edge counts",
+      "Apply dual edge counts to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  }
+]

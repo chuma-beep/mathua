@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Shortest Cycle",
+    "section": "The Shortest Cycle",
+    "subgoals": [
+      "Explain the shortest cycle",
+      "Apply the shortest cycle to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  },
+  {
+    "label": "Girth of Common Families",
+    "section": "Girth of Common Families",
+    "subgoals": [
+      "Explain girth of common families",
+      "Apply girth of common families to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  },
+  {
+    "label": "Bipartite Graphs",
+    "section": "Bipartite Graphs",
+    "subgoals": [
+      "Explain bipartite graphs",
+      "Apply bipartite graphs to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  }
+]

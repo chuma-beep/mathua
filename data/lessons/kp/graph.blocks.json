@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Cut Vertices and Blocks",
+    "section": "Cut Vertices and Blocks",
+    "subgoals": [
+      "Explain cut vertices and blocks",
+      "Apply cut vertices and blocks to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  },
+  {
+    "label": "Block Structure of a Tree",
+    "section": "Block Structure of a Tree",
+    "subgoals": [
+      "Explain block structure of a tree",
+      "Apply block structure of a tree to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  },
+  {
+    "label": "Biconnected Components",
+    "section": "Biconnected Components",
+    "subgoals": [
+      "Explain biconnected components",
+      "Apply biconnected components to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  }
+]

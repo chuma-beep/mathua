@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Degeneracy Number",
+    "section": "The Degeneracy Number",
+    "subgoals": [
+      "Explain the degeneracy number",
+      "Apply the degeneracy number to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  },
+  {
+    "label": "Small Families",
+    "section": "Small Families",
+    "subgoals": [
+      "Explain small families",
+      "Apply small families to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  },
+  {
+    "label": "Colouring by Degeneracy",
+    "section": "Colouring by Degeneracy",
+    "subgoals": [
+      "Explain colouring by degeneracy",
+      "Apply colouring by degeneracy to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  }
+]

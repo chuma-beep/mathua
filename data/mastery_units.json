@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1427,
+  "concept_count": 1437,
   "unit_count": 135,
   "units": [
     {
@@ -1838,20 +1838,26 @@
         "graph_theory.planarity"
       ],
       "concept_ids": [
+        "graph.automorphism",
         "graph.bridge",
         "graph.complement",
         "graph.connectivity",
         "graph.cut_vertex",
+        "graph.degeneracy",
         "graph.distance",
+        "graph.girth",
+        "graph.hamiltonian",
         "graph.homomorphism",
         "graph.kuratowski",
         "graph.moore_bound",
+        "graph.mst",
         "graph.product",
+        "graph.shortest_path",
         "graph.subgraph",
         "graph.tournament",
         "graph.turan"
       ],
-      "concept_count": 12
+      "concept_count": 18
     },
     {
       "id": "graph_theory.b7",
@@ -1869,19 +1875,23 @@
         "graph_theory.planarity"
       ],
       "concept_ids": [
+        "graph.blocks",
         "graph.brooks",
         "graph.chromatic_polynomial",
         "graph.dag_paths",
         "graph.edge_coloring",
+        "graph.four_color",
         "graph.genus",
         "graph.list_coloring",
         "graph.matching",
+        "graph.matroid",
         "graph.max_flow",
         "graph.menger",
         "graph.minor",
         "graph.outerplanar",
         "graph.perfect_graph",
         "graph.perfect_matching",
+        "graph.planar_dual",
         "graph.ramsey",
         "graph.random_threshold",
         "graph.strong_connectivity",
@@ -1889,7 +1899,7 @@
         "graph.treewidth",
         "graph.vertex_cover"
       ],
-      "concept_count": 19
+      "concept_count": 23
     },
     {
       "id": "graph_theory.b8",

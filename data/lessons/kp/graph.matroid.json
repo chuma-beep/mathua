@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Independence and Rank",
+    "section": "Independence and Rank",
+    "subgoals": [
+      "Explain independence and rank",
+      "Apply independence and rank to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  },
+  {
+    "label": "Bases and Circuits",
+    "section": "Bases and Circuits",
+    "subgoals": [
+      "Explain bases and circuits",
+      "Apply bases and circuits to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  },
+  {
+    "label": "The Graphic Matroid",
+    "section": "The Graphic Matroid",
+    "subgoals": [
+      "Explain the graphic matroid",
+      "Apply the graphic matroid to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  }
+]

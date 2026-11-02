@@ -12,7 +12,7 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 1427 |
+| Total concepts | 1437 |
 | Total units | 135 |
 | Minimum unit size | 1 |
 | Median unit size | 7 |
@@ -97,8 +97,8 @@ exists to make concrete.
 | `graph_theory.b2` | graph_theory | 2 | 1 | 1 | 6–6 |
 | `graph_theory.b3` | graph_theory | 3 | 1 | 1 | 11–11 |
 | `graph_theory.b5` | graph_theory | 5 | 2 | 2 | 17–17 |
-| `graph_theory.b6` | graph_theory | 6 | 12 | 5 | 18–20 |
-| `graph_theory.b7` | graph_theory | 7 | 19 | 6 | 21–23 |
+| `graph_theory.b6` | graph_theory | 6 | 18 | 5 | 18–20 |
+| `graph_theory.b7` | graph_theory | 7 | 23 | 6 | 21–23 |
 | `graph_theory.b8` | graph_theory | 8 | 4 | 2 | 24–25 |
 | `linear_algebra.b0` | linear_algebra | 0 | 1 | 1 | 2–2 |
 | `linear_algebra.b1` | linear_algebra | 1 | 6 | 2 | 3–5 |
@@ -183,8 +183,8 @@ at every width.
 |---|---|---|---|---|---|---|---|
 | 2 | 179 | 6 | 43 | 29 | 53 | 5 | 0 |
 | 3 | 135 | 7 | 45 | 23 | 37 | 12 | 0 |
-| 4 | 106 | 11 | 69 | 10 | 23 | 15 | 0 |
-| 5 | 91 | 11 | 89 | 7 | 15 | 17 | 0 |
+| 4 | 106 | 11 | 69 | 10 | 23 | 16 | 0 |
+| 5 | 91 | 11 | 89 | 7 | 15 | 18 | 0 |
 | 6 | 87 | 11 | 83 | 8 | 15 | 22 | 0 |
 | 8 | 67 | 15 | 88 | 5 | 9 | 24 | 0 |
 | 10 | 58 | 18 | 114 | 4 | 10 | 22 | 0 |
@@ -432,7 +432,7 @@ Unresolvable subdomains:
 `trigonometry.hyperbolic`
 `trigonometry.identities`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1427
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1437
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings

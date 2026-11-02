@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Visiting Every Vertex Once",
+    "section": "Visiting Every Vertex Once",
+    "subgoals": [
+      "Explain visiting every vertex once",
+      "Apply visiting every vertex once to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  },
+  {
+    "label": "Dirac's Sufficient Condition",
+    "section": "Dirac's Sufficient Condition",
+    "subgoals": [
+      "Explain dirac's sufficient condition",
+      "Apply dirac's sufficient condition to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  },
+  {
+    "label": "Counting Cycles",
+    "section": "Counting Cycles",
+    "subgoals": [
+      "Explain counting cycles",
+      "Apply counting cycles to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  }
+]

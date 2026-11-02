@@ -1167,7 +1167,17 @@
       "graph.tournament",
       "graph.strong_connectivity",
       "graph.topological_sort",
-      "graph.dag_paths"
+      "graph.dag_paths",
+      "graph.hamiltonian",
+      "graph.blocks",
+      "graph.planar_dual",
+      "graph.automorphism",
+      "graph.girth",
+      "graph.four_color",
+      "graph.matroid",
+      "graph.shortest_path",
+      "graph.degeneracy",
+      "graph.mst"
     ]
   },
   {

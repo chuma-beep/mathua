@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Weighted Paths",
+    "section": "Weighted Paths",
+    "subgoals": [
+      "Explain weighted paths",
+      "Apply weighted paths to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  },
+  {
+    "label": "Dijkstra's Algorithm",
+    "section": "Dijkstra's Algorithm",
+    "subgoals": [
+      "Explain dijkstra's algorithm",
+      "Apply dijkstra's algorithm to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  },
+  {
+    "label": "Counting Shortest Routes",
+    "section": "Counting Shortest Routes",
+    "subgoals": [
+      "Explain counting shortest routes",
+      "Apply counting shortest routes to a concrete graph",
+      "Check the result against the definitions"
+    ]
+  }
+]

@@ -5706,5 +5706,45 @@
   {
     "concept_id": "nt.adv.valuation",
     "source": "teaching/nt.adv.valuation.md"
+  },
+  {
+    "concept_id": "graph.hamiltonian",
+    "source": "teaching/graph.hamiltonian.md"
+  },
+  {
+    "concept_id": "graph.blocks",
+    "source": "teaching/graph.blocks.md"
+  },
+  {
+    "concept_id": "graph.planar_dual",
+    "source": "teaching/graph.planar_dual.md"
+  },
+  {
+    "concept_id": "graph.automorphism",
+    "source": "teaching/graph.automorphism.md"
+  },
+  {
+    "concept_id": "graph.girth",
+    "source": "teaching/graph.girth.md"
+  },
+  {
+    "concept_id": "graph.four_color",
+    "source": "teaching/graph.four_color.md"
+  },
+  {
+    "concept_id": "graph.matroid",
+    "source": "teaching/graph.matroid.md"
+  },
+  {
+    "concept_id": "graph.shortest_path",
+    "source": "teaching/graph.shortest_path.md"
+  },
+  {
+    "concept_id": "graph.degeneracy",
+    "source": "teaching/graph.degeneracy.md"
+  },
+  {
+    "concept_id": "graph.mst",
+    "source": "teaching/graph.mst.md"
   }
 ]
