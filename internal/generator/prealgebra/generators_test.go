@@ -254,4 +254,10 @@ func TestPctFromDecAcceptsPercentSign(t *testing.T) {
 	if hint := g.AnswerFormat().Hint; !strings.Contains(hint, "%") {
 		t.Fatalf("percent answer hint does not mention the percent form: %q", hint)
 	}
+	if !strings.Contains(p.Question, "Enter the percentage value") {
+		t.Fatalf("percent question does not say what to enter: %q", p.Question)
+	}
+	if !strings.Contains(p.Explanation, "%") {
+		t.Fatalf("percent explanation does not state the percent result: %q", p.Explanation)
+	}
 }

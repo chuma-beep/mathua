@@ -4,6 +4,7 @@ import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import BottomTabs from '../../components/BottomTabs'
 import ContactBox from '../../components/ContactBox'
+import { SUPPORT_URL } from '../../lib/creatorLinks'
 
 export const metadata: Metadata = {
   title: 'Contact, Mathua',
@@ -97,6 +98,40 @@ export default function ContactPage() {
           say what you are working on, or explain a problem that is easier to talk through than
           to type into a form. Keep anything private, an account problem, a password, a message
           meant for one person, to the box above, not the public server.
+        </p>
+
+        <h2 style={h2Style}>Find me elsewhere</h2>
+        <p style={textStyle}>
+          The project lives on{' '}
+          <a href="https://github.com/chuma-beep/mathua" target="_blank" rel="noreferrer" style={linkStyle}>
+            GitHub
+          </a>
+          . My personal site is{' '}
+          <a href="https://wisdomac.com" target="_blank" rel="noreferrer" style={linkStyle}>
+            wisdomac.com
+          </a>
+          , and I am on{' '}
+          <a href="https://x.com/wisdomsglow" target="_blank" rel="noreferrer" style={linkStyle}>
+            X
+          </a>{' '}
+          and{' '}
+          <a
+            href="https://linkedin.com/in/wisdom-anwaegbu"
+            target="_blank"
+            rel="noreferrer"
+            style={linkStyle}
+          >
+            LinkedIn
+          </a>
+          .
+        </p>
+        <p style={textStyle}>
+          If you would like to support the project, you can{' '}
+          <a href={SUPPORT_URL} target="_blank" rel="noreferrer" style={linkStyle}>
+            tip Mathua on Myhappr
+          </a>
+          . Support helps keep Mathua free, funds ongoing improvements to the curriculum and
+          platform, and contributes to future app work such as a mobile app.
         </p>
 
         <h2 style={h2Style}>A question is wrong</h2>

@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useLayoutEffect, useState } from 'react'
 import { DICEBEAR_VERSION } from '../lib/dicebear'
+import { CREATOR_LINKS, SUPPORT_URL } from '../lib/creatorLinks'
 
 interface FooterProps {
   className?: string
@@ -209,9 +210,17 @@ export default function Footer({ className = '' }: FooterProps) {
             <p className="mt-3 text-sm leading-relaxed text-[var(--footer-ink-muted)]">
               Open-source adaptive math learning engine.
             </p>
+            <a
+              href={SUPPORT_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-4 inline-block border border-current px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.12em] transition-colors hover:bg-white/10"
+            >
+              Support Mathua
+            </a>
           </div>
 
-          <div className="grid grid-cols-2 gap-x-10 gap-y-8 sm:gap-x-16">
+          <div className="grid grid-cols-2 gap-x-10 gap-y-8 sm:grid-cols-3 sm:gap-x-12">
             <nav aria-labelledby="footer-learn">
               <h2 id="footer-learn" className={headingClass}>Learn</h2>
               <ul className="mt-3 space-y-2 font-mono text-xs">
@@ -249,6 +258,24 @@ export default function Footer({ className = '' }: FooterProps) {
                     GitHub
                   </a>
                 </li>
+              </ul>
+            </nav>
+
+            <nav aria-labelledby="footer-elsewhere">
+              <h2 id="footer-elsewhere" className={headingClass}>Elsewhere</h2>
+              <ul className="mt-3 space-y-2 font-mono text-xs">
+                {CREATOR_LINKS.map(link => (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className={linkClass}
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </nav>
           </div>

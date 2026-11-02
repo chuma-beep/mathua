@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import BottomTabs from '../../components/BottomTabs'
+import { SUPPORT_URL } from '../../lib/creatorLinks'
 
 export const metadata: Metadata = {
   title: "Creator's Note, Mathua",
@@ -192,6 +193,26 @@ export default function NotePage() {
             })}
           </section>
         ))}
+
+        <section>
+          <h2 style={h2Style}>If you want to help</h2>
+          <p style={textStyle}>
+            Mathua is free and open source. If it has been useful and you want to support the work,
+            you can{' '}
+            <a
+              href={SUPPORT_URL}
+              target="_blank"
+              rel="noreferrer"
+              style={{ color: 'var(--text-primary)', textDecoration: 'underline' }}
+            >
+              tip the project on Myhappr
+            </a>
+            . That support helps keep Mathua free. It pays for hosting and diagrams, funds the time
+            that goes into the curriculum and platform, and supports ongoing improvements and future
+            app work such as a mobile app. There is no paywall, and nothing here changes if you
+            cannot contribute.
+          </p>
+        </section>
 
         <div className="flex gap-3 justify-center mt-10 max-sm:flex-col max-sm:items-center">
           <Link href="/onboard" style={{ fontFamily: monoFont, fontSize: '13px', color: 'var(--bg)', background: 'var(--accent-blue)', padding: '10px 22px', textDecoration: 'none' }}>
