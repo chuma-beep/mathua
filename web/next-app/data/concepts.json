@@ -5865,6 +5865,97 @@
     "subdomain": "calculus.series"
   },
   {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.maclaurin",
+    "label": "Maclaurin series",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.taylor",
+      "calc.series.radius"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.inverse_trig",
+    "label": "Integrals yielding inverse trigonometric functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.trig_substitution",
+      "calc.integral.power_rule"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.probability",
+    "label": "Probability from a density curve",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.improper",
+      "calc.integral.area_between"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.estimate",
+    "label": "Estimating the sum of a series",
+    "mastery_threshold": {
+      "avg_time_seconds": 27,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.alternating",
+      "calc.series.remainder",
+      "calc.series.taylor_error"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.log",
+    "label": "Integrals involving logarithms",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.parts",
+      "calc.integral.substitution"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.rationalizing",
+    "label": "Rationalizing substitutions",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.substitution",
+      "calc.integral.irrational"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
     "domain": "calc3",
     "grading_type": "symbolic",
     "id": "calc.deriv.partial",

@@ -1,0 +1,26 @@
+[
+  {
+    "label": "The alternating remainder",
+    "section": "The alternating remainder",
+    "subgoals": [
+      "For an alternating series the remainder is bounded by the next term.",
+      "The bound is tight enough for numerical estimates."
+    ]
+  },
+  {
+    "label": "The integral remainder",
+    "section": "The integral remainder",
+    "subgoals": [
+      "The integral test gives upper and lower bounds for a sum.",
+      "The remainder lies between two adjacent integrals."
+    ]
+  },
+  {
+    "label": "Choosing enough terms",
+    "section": "Choosing enough terms",
+    "subgoals": [
+      "Decide the accuracy first.",
+      "Use the remainder bound to solve for the number of terms."
+    ]
+  }
+]

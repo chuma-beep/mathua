@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1396,
+  "concept_count": 1402,
   "unit_count": 134,
   "units": [
     {
@@ -748,6 +748,7 @@
         "calc.series.harmonic",
         "calc.series.integral_test",
         "calc.series.limit_compare",
+        "calc.series.maclaurin",
         "calc.series.nth_term",
         "calc.series.operations",
         "calc.series.p_series",
@@ -762,7 +763,7 @@
         "calc.series.telescoping",
         "calc.series.termwise"
       ],
-      "concept_count": 25
+      "concept_count": 26
     },
     {
       "id": "calc2.b11",
@@ -772,15 +773,17 @@
       "depth_min": 33,
       "depth_max": 35,
       "subdomains": [
-        "calculus.integrals"
+        "calculus.integrals",
+        "calculus.series"
       ],
       "concept_ids": [
         "calc.integral.exp_integral",
         "calc.integral.fourier_coefficients",
         "calc.integral.substitution",
-        "calc.integral.trig_integrals"
+        "calc.integral.trig_integrals",
+        "calc.series.estimate"
       ],
-      "concept_count": 4
+      "concept_count": 5
     },
     {
       "id": "calc2.b12",
@@ -805,7 +808,9 @@
         "calc.integral.hydrostatic",
         "calc.integral.improper",
         "calc.integral.improper_compare",
+        "calc.integral.inverse_trig",
         "calc.integral.irrational",
+        "calc.integral.log",
         "calc.integral.moment_inertia",
         "calc.integral.mvt",
         "calc.integral.net_change",
@@ -815,6 +820,8 @@
         "calc.integral.pappus",
         "calc.integral.partial_fractions",
         "calc.integral.parts",
+        "calc.integral.probability",
+        "calc.integral.rationalizing",
         "calc.integral.reduction",
         "calc.integral.shell",
         "calc.integral.simpson",
@@ -829,7 +836,7 @@
         "calc.integral.work",
         "calc.series.gamma"
       ],
-      "concept_count": 33
+      "concept_count": 37
     },
     {
       "id": "calc3.b9",

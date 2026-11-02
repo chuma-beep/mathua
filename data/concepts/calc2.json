@@ -918,5 +918,96 @@
       "streak": 10,
       "avg_time_seconds": 26
     }
+  },
+  {
+    "id": "calc.series.maclaurin",
+    "label": "Maclaurin series",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.taylor",
+      "calc.series.radius"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25
+    }
+  },
+  {
+    "id": "calc.integral.inverse_trig",
+    "label": "Integrals yielding inverse trigonometric functions",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.trig_substitution",
+      "calc.integral.power_rule"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "calc.integral.probability",
+    "label": "Probability from a density curve",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.improper",
+      "calc.integral.area_between"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "calc.series.estimate",
+    "label": "Estimating the sum of a series",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.alternating",
+      "calc.series.remainder",
+      "calc.series.taylor_error"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 27
+    }
+  },
+  {
+    "id": "calc.integral.log",
+    "label": "Integrals involving logarithms",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.parts",
+      "calc.integral.substitution"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25
+    }
+  },
+  {
+    "id": "calc.integral.rationalizing",
+    "label": "Rationalizing substitutions",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.substitution",
+      "calc.integral.irrational"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
   }
 ]

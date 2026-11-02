@@ -18275,5 +18275,73 @@
       "calc.limit.sine_limit",
       "calc.limit.algebra"
     ]
+  },
+  {
+    "id": "calc.series.maclaurin",
+    "key_prerequisites": [
+      "calc.series.taylor",
+      "calc.series.radius"
+    ],
+    "encompasses": [
+      "calc.series.taylor",
+      "calc.series.radius"
+    ]
+  },
+  {
+    "id": "calc.integral.inverse_trig",
+    "key_prerequisites": [
+      "calc.integral.trig_substitution",
+      "calc.integral.power_rule"
+    ],
+    "encompasses": [
+      "calc.integral.trig_substitution",
+      "calc.integral.power_rule"
+    ]
+  },
+  {
+    "id": "calc.integral.probability",
+    "key_prerequisites": [
+      "calc.integral.improper",
+      "calc.integral.area_between"
+    ],
+    "encompasses": [
+      "calc.integral.improper",
+      "calc.integral.area_between"
+    ]
+  },
+  {
+    "id": "calc.series.estimate",
+    "key_prerequisites": [
+      "calc.series.alternating",
+      "calc.series.remainder",
+      "calc.series.taylor_error"
+    ],
+    "encompasses": [
+      "calc.series.alternating",
+      "calc.series.remainder",
+      "calc.series.taylor_error"
+    ]
+  },
+  {
+    "id": "calc.integral.log",
+    "key_prerequisites": [
+      "calc.integral.parts",
+      "calc.integral.substitution"
+    ],
+    "encompasses": [
+      "calc.integral.parts",
+      "calc.integral.substitution"
+    ]
+  },
+  {
+    "id": "calc.integral.rationalizing",
+    "key_prerequisites": [
+      "calc.integral.substitution",
+      "calc.integral.irrational"
+    ],
+    "encompasses": [
+      "calc.integral.substitution",
+      "calc.integral.irrational"
+    ]
   }
 ]

@@ -5582,5 +5582,29 @@
   {
     "concept_id": "calc.limit.trig",
     "source": "teaching/calc.limit.trig.md"
+  },
+  {
+    "concept_id": "calc.series.maclaurin",
+    "source": "teaching/calc.series.maclaurin.md"
+  },
+  {
+    "concept_id": "calc.integral.inverse_trig",
+    "source": "teaching/calc.integral.inverse_trig.md"
+  },
+  {
+    "concept_id": "calc.integral.probability",
+    "source": "teaching/calc.integral.probability.md"
+  },
+  {
+    "concept_id": "calc.series.estimate",
+    "source": "teaching/calc.series.estimate.md"
+  },
+  {
+    "concept_id": "calc.integral.log",
+    "source": "teaching/calc.integral.log.md"
+  },
+  {
+    "concept_id": "calc.integral.rationalizing",
+    "source": "teaching/calc.integral.rationalizing.md"
   }
 ]

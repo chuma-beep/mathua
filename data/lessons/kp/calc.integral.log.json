@@ -1,0 +1,26 @@
+[
+  {
+    "label": "The logarithm as an antiderivative",
+    "section": "The logarithm as an antiderivative",
+    "subgoals": [
+      "The integral of one over x is the natural logarithm of the absolute value.",
+      "A linear inner function contributes a reciprocal factor."
+    ]
+  },
+  {
+    "label": "Integration by parts with logarithms",
+    "section": "Integration by parts with logarithms",
+    "subgoals": [
+      "Take the logarithm as the differentiated factor.",
+      "The remaining factor is often a power."
+    ]
+  },
+  {
+    "label": "Logarithmic substitution",
+    "section": "Logarithmic substitution",
+    "subgoals": [
+      "A logarithm in the integrand suggests substituting for the logarithm.",
+      "The derivative of the logarithm supplies the remaining factor."
+    ]
+  }
+]

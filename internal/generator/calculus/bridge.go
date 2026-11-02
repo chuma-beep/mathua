@@ -30,6 +30,16 @@ func registerBridge(reg *generator.Registry) {
 	} {
 		reg.Register(id, &calc1BridgeGen{kind: kind})
 	}
+	for id, kind := range map[string]string{
+		"calc.series.maclaurin":       "maclaurin",
+		"calc.integral.inverse_trig":  "inverse_trig",
+		"calc.integral.probability":   "probability_density",
+		"calc.series.estimate":        "series_estimate",
+		"calc.integral.log":           "integral_log",
+		"calc.integral.rationalizing": "rationalizing",
+	} {
+		reg.Register(id, &calc2BridgeGen{kind: kind})
+	}
 }
 
 func calcBridgeOrdinal(ctx generator.GeneratorContext) int {

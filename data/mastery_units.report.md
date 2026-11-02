@@ -12,14 +12,14 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 1396 |
+| Total concepts | 1402 |
 | Total units | 134 |
 | Minimum unit size | 1 |
 | Median unit size | 7 |
 | Maximum unit size | 45 |
 | Singleton units | 22 |
 | Units with <= 3 concepts | 37 |
-| Units with > 25 concepts | 11 |
+| Units with > 25 concepts | 12 |
 | Units with > 50 concepts | 0 |
 | Cross-unit prerequisite edges (derived) | 445 |
 | Backward band edges | 0 |
@@ -54,9 +54,9 @@ exists to make concrete.
 | `calc1.b11` | calc1 | 11 | 22 | 4 | 33–35 |
 | `calc1.b12` | calc1 | 12 | 14 | 3 | 36–37 |
 | `calc2.b9` | calc2 | 9 | 3 | 2 | 29–29 |
-| `calc2.b10` | calc2 | 10 | 25 | 1 | 30–32 |
-| `calc2.b11` | calc2 | 11 | 4 | 1 | 33–35 |
-| `calc2.b12` | calc2 | 12 | 33 | 3 | 36–38 |
+| `calc2.b10` | calc2 | 10 | 26 | 1 | 30–32 |
+| `calc2.b11` | calc2 | 11 | 5 | 2 | 33–35 |
+| `calc2.b12` | calc2 | 12 | 37 | 3 | 36–38 |
 | `calc3.b9` | calc3 | 9 | 5 | 1 | 28–29 |
 | `calc3.b10` | calc3 | 10 | 9 | 3 | 31–32 |
 | `calc3.b11` | calc3 | 11 | 16 | 3 | 33–35 |
@@ -181,8 +181,8 @@ at every width.
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
 | 2 | 177 | 6 | 43 | 27 | 52 | 5 | 0 |
-| 3 | 134 | 7 | 45 | 22 | 37 | 11 | 0 |
-| 4 | 105 | 10 | 69 | 9 | 23 | 13 | 0 |
+| 3 | 134 | 7 | 45 | 22 | 37 | 12 | 0 |
+| 4 | 105 | 11 | 69 | 9 | 23 | 13 | 0 |
 | 5 | 89 | 11 | 89 | 5 | 13 | 16 | 0 |
 | 6 | 86 | 11 | 83 | 7 | 14 | 20 | 0 |
 | 8 | 66 | 16 | 88 | 4 | 8 | 24 | 0 |
@@ -429,7 +429,7 @@ Unresolvable subdomains:
 `trigonometry.hyperbolic`
 `trigonometry.identities`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1396
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1402
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings

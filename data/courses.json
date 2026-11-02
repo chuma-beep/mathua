@@ -602,7 +602,13 @@
       "calc.seq.bounded",
       "calc.seq.monotone",
       "calc.series.taylor_error",
-      "calc.series.termwise"
+      "calc.series.termwise",
+      "calc.series.maclaurin",
+      "calc.integral.inverse_trig",
+      "calc.integral.probability",
+      "calc.series.estimate",
+      "calc.integral.log",
+      "calc.integral.rationalizing"
     ]
   },
   {
