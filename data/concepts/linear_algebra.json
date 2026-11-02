@@ -763,5 +763,109 @@
       "streak": 10,
       "avg_time_seconds": 35.0
     }
+  },
+  {
+    "id": "linalg.matrix.transpose",
+    "label": "The transpose of a matrix",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.matrices",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.matrix.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20
+    }
+  },
+  {
+    "id": "linalg.det.properties",
+    "label": "Properties of determinants",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.determinants",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.det.3x3",
+      "linalg.matrix.mult"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "linalg.invertible.theorem",
+    "label": "The invertible matrix theorem",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.matrices",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.matrix.inverse_2x2",
+      "linalg.matrix.rank"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28
+    }
+  },
+  {
+    "id": "linalg.eigen.similar",
+    "label": "Similar matrices",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.eigenvalues",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.eigen.diagonalization",
+      "linalg.basis.change"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28
+    }
+  },
+  {
+    "id": "linalg.eigen.complex",
+    "label": "Complex eigenvalues",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.eigenvalues",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.eigen.compute",
+      "alg.quad.complex"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28
+    }
+  },
+  {
+    "id": "linalg.vector.plane",
+    "label": "Equations of a plane",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.vectors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.vector.dot",
+      "linalg.vector.parametric"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
+  },
+  {
+    "id": "linalg.orth.least_squares",
+    "label": "Least-squares solutions",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.inner_product",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.orth.projection_matrix",
+      "linalg.systems.row_reduction"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30
+    }
   }
 ]

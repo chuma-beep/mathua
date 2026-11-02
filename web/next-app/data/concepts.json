@@ -10942,6 +10942,110 @@
     "subdomain": "linear_algebra.systems"
   },
   {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.matrix.transpose",
+    "label": "The transpose of a matrix",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.matrix.concept"
+    ],
+    "subdomain": "linear_algebra.matrices"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.det.properties",
+    "label": "Properties of determinants",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.det.3x3",
+      "linalg.matrix.mult"
+    ],
+    "subdomain": "linear_algebra.determinants"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.invertible.theorem",
+    "label": "The invertible matrix theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.matrix.inverse_2x2",
+      "linalg.matrix.rank"
+    ],
+    "subdomain": "linear_algebra.matrices"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.eigen.similar",
+    "label": "Similar matrices",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.eigen.diagonalization",
+      "linalg.basis.change"
+    ],
+    "subdomain": "linear_algebra.eigenvalues"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.eigen.complex",
+    "label": "Complex eigenvalues",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.eigen.compute",
+      "alg.quad.complex"
+    ],
+    "subdomain": "linear_algebra.eigenvalues"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.vector.plane",
+    "label": "Equations of a plane",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.vector.dot",
+      "linalg.vector.parametric"
+    ],
+    "subdomain": "linear_algebra.vectors"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.orth.least_squares",
+    "label": "Least-squares solutions",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.orth.projection_matrix",
+      "linalg.systems.row_reduction"
+    ],
+    "subdomain": "linear_algebra.inner_product"
+  },
+  {
     "domain": "machine_learning",
     "grading_type": "numeric",
     "id": "ml.perceptron",

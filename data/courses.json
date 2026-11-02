@@ -602,7 +602,14 @@
       "linalg.transform.matrix",
       "linalg.eigen.eigenspace",
       "linalg.systems.homogeneous",
-      "linalg.apps.leontief"
+      "linalg.apps.leontief",
+      "linalg.matrix.transpose",
+      "linalg.det.properties",
+      "linalg.invertible.theorem",
+      "linalg.eigen.similar",
+      "linalg.eigen.complex",
+      "linalg.vector.plane",
+      "linalg.orth.least_squares"
     ]
   },
   {

@@ -17179,5 +17179,80 @@
       "prob.rv.transform",
       "prob.rv.cdf"
     ]
+  },
+  {
+    "id": "linalg.matrix.transpose",
+    "key_prerequisites": [
+      "linalg.matrix.concept"
+    ],
+    "encompasses": [
+      "linalg.matrix.concept"
+    ]
+  },
+  {
+    "id": "linalg.det.properties",
+    "key_prerequisites": [
+      "linalg.det.3x3",
+      "linalg.matrix.mult"
+    ],
+    "encompasses": [
+      "linalg.det.3x3",
+      "linalg.matrix.mult"
+    ]
+  },
+  {
+    "id": "linalg.invertible.theorem",
+    "key_prerequisites": [
+      "linalg.matrix.inverse_2x2",
+      "linalg.matrix.rank"
+    ],
+    "encompasses": [
+      "linalg.matrix.inverse_2x2",
+      "linalg.matrix.rank"
+    ]
+  },
+  {
+    "id": "linalg.eigen.similar",
+    "key_prerequisites": [
+      "linalg.eigen.diagonalization",
+      "linalg.basis.change"
+    ],
+    "encompasses": [
+      "linalg.eigen.diagonalization",
+      "linalg.basis.change"
+    ]
+  },
+  {
+    "id": "linalg.eigen.complex",
+    "key_prerequisites": [
+      "linalg.eigen.compute",
+      "alg.quad.complex"
+    ],
+    "encompasses": [
+      "linalg.eigen.compute",
+      "alg.quad.complex"
+    ]
+  },
+  {
+    "id": "linalg.vector.plane",
+    "key_prerequisites": [
+      "linalg.vector.dot",
+      "linalg.vector.parametric"
+    ],
+    "encompasses": [
+      "linalg.vector.dot",
+      "linalg.vector.parametric"
+    ]
+  },
+  {
+    "id": "linalg.orth.least_squares",
+    "key_prerequisites": [
+      "linalg.orth.projection_matrix",
+      "linalg.systems.row_reduction"
+    ],
+    "encompasses": [
+      "linalg.orth.projection_matrix",
+      "linalg.systems.row_reduction"
+    ]
   }
 ]

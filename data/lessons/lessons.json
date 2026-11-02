@@ -5182,5 +5182,33 @@
   {
     "concept_id": "prob.rv.integral_transform",
     "source": "teaching/prob.rv.integral_transform.md"
+  },
+  {
+    "concept_id": "linalg.matrix.transpose",
+    "source": "teaching/linalg.matrix.transpose.md"
+  },
+  {
+    "concept_id": "linalg.det.properties",
+    "source": "teaching/linalg.det.properties.md"
+  },
+  {
+    "concept_id": "linalg.invertible.theorem",
+    "source": "teaching/linalg.invertible.theorem.md"
+  },
+  {
+    "concept_id": "linalg.eigen.similar",
+    "source": "teaching/linalg.eigen.similar.md"
+  },
+  {
+    "concept_id": "linalg.eigen.complex",
+    "source": "teaching/linalg.eigen.complex.md"
+  },
+  {
+    "concept_id": "linalg.vector.plane",
+    "source": "teaching/linalg.vector.plane.md"
+  },
+  {
+    "concept_id": "linalg.orth.least_squares",
+    "source": "teaching/linalg.orth.least_squares.md"
   }
 ]

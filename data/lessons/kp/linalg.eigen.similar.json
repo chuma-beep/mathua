@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The similarity relation",
+    "section": "The similarity relation",
+    "subgoals": [
+      "Write the similarity equation",
+      "Check that similarity uses an invertible change of basis",
+      "Recognise similarity as an equivalence relation"
+    ]
+  },
+  {
+    "label": "Invariants under similarity",
+    "section": "Invariants under similarity",
+    "subgoals": [
+      "Compare traces of similar matrices",
+      "Compare determinants of similar matrices",
+      "Compare characteristic polynomials"
+    ]
+  },
+  {
+    "label": "Diagonalisation as similarity",
+    "section": "Diagonalisation as similarity",
+    "subgoals": [
+      "Express diagonalisation as similarity",
+      "Identify the diagonal entries as eigenvalues",
+      "Decide when a matrix is similar to a diagonal matrix"
+    ]
+  }
+]

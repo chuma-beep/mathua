@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Scaling and products",
+    "section": "Scaling and products",
+    "subgoals": [
+      "Track the effect of scaling one row",
+      "Use the product rule for determinants",
+      "Count the dimension exponent when a whole matrix is scaled"
+    ]
+  },
+  {
+    "label": "Determinants of inverses",
+    "section": "Determinants of inverses",
+    "subgoals": [
+      "Relate the determinant of an inverse to the original determinant",
+      "Recognise a nonzero determinant as invertibility",
+      "Compute a determinant from known factors"
+    ]
+  },
+  {
+    "label": "Singular matrices",
+    "section": "Singular matrices",
+    "subgoals": [
+      "Detect a zero determinant",
+      "Connect a repeated row to singularity",
+      "Use singularity in a solving argument"
+    ]
+  }
+]

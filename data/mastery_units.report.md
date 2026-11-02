@@ -12,7 +12,7 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 1296 |
+| Total concepts | 1303 |
 | Total units | 134 |
 | Minimum unit size | 1 |
 | Median unit size | 7 |
@@ -21,7 +21,7 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 | Units with <= 3 concepts | 37 |
 | Units with > 25 concepts | 10 |
 | Units with > 50 concepts | 0 |
-| Cross-unit prerequisite edges (derived) | 433 |
+| Cross-unit prerequisite edges (derived) | 434 |
 | Backward band edges | 0 |
 
 If the learner is assessed once per unit, then 134 assessments cover the corpus, and the
@@ -100,13 +100,13 @@ exists to make concrete.
 | `graph_theory.b7` | graph_theory | 7 | 19 | 6 | 21–23 |
 | `graph_theory.b8` | graph_theory | 8 | 4 | 2 | 24–25 |
 | `linear_algebra.b0` | linear_algebra | 0 | 1 | 1 | 2–2 |
-| `linear_algebra.b1` | linear_algebra | 1 | 5 | 2 | 3–5 |
+| `linear_algebra.b1` | linear_algebra | 1 | 6 | 2 | 3–5 |
 | `linear_algebra.b2` | linear_algebra | 2 | 1 | 1 | 8–8 |
-| `linear_algebra.b3` | linear_algebra | 3 | 11 | 5 | 9–11 |
-| `linear_algebra.b4` | linear_algebra | 4 | 9 | 3 | 12–14 |
+| `linear_algebra.b3` | linear_algebra | 3 | 12 | 5 | 9–11 |
+| `linear_algebra.b4` | linear_algebra | 4 | 10 | 4 | 12–14 |
 | `linear_algebra.b7` | linear_algebra | 7 | 6 | 2 | 21–23 |
-| `linear_algebra.b8` | linear_algebra | 8 | 10 | 4 | 24–26 |
-| `linear_algebra.b9` | linear_algebra | 9 | 9 | 4 | 27–28 |
+| `linear_algebra.b8` | linear_algebra | 8 | 13 | 5 | 24–26 |
+| `linear_algebra.b9` | linear_algebra | 9 | 10 | 4 | 27–28 |
 | `machine_learning.b3` | machine_learning | 3 | 5 | 2 | 9–11 |
 | `machine_learning.b4` | machine_learning | 4 | 1 | 1 | 14–14 |
 | `machine_learning.b7` | machine_learning | 7 | 5 | 3 | 21–23 |
@@ -180,17 +180,17 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 175 | 5 | 39 | 27 | 53 | 3 | 0 |
+| 2 | 175 | 5 | 39 | 27 | 52 | 3 | 0 |
 | 3 | 134 | 7 | 42 | 25 | 37 | 10 | 0 |
-| 4 | 105 | 10 | 63 | 10 | 24 | 13 | 0 |
+| 4 | 105 | 10 | 63 | 10 | 23 | 13 | 0 |
 | 5 | 89 | 10 | 81 | 6 | 14 | 13 | 0 |
 | 6 | 86 | 11 | 77 | 7 | 14 | 18 | 0 |
 | 8 | 66 | 15 | 82 | 4 | 8 | 22 | 0 |
-| 10 | 56 | 18 | 100 | 2 | 8 | 19 | 0 |
+| 10 | 56 | 18 | 100 | 2 | 8 | 20 | 0 |
 | 12 | 58 | 18 | 83 | 2 | 5 | 23 | 0 |
-| 15 | 46 | 23 | 119 | 1 | 5 | 21 | 0 |
-| 20 | 37 | 37 | 100 | 1 | 3 | 24 | 0 |
-| 45 | 23 | 52 | 124 | 0 | 0 | 23 | 0 |
+| 15 | 46 | 23 | 119 | 1 | 5 | 22 | 0 |
+| 20 | 37 | 37 | 100 | 1 | 3 | 25 | 0 |
+| 45 | 23 | 55 | 124 | 0 | 0 | 23 | 0 |
 
 **No width is clean.** Small widths fragment, at 3 there are 25 singleton units, which is a
 quiz per concept and is exactly what §12 rules out. Large widths stop fragmenting but produce
@@ -356,7 +356,7 @@ Unresolvable subdomains:
 `trigonometry.hyperbolic`
 `trigonometry.identities`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1296
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1303
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings

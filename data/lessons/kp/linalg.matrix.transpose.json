@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Reading a transpose",
+    "section": "Reading a transpose",
+    "subgoals": [
+      "Identify rows of the original matrix as columns of the transpose",
+      "Write the entry in a named position after transposing",
+      "Recognise that the shape swaps"
+    ]
+  },
+  {
+    "label": "Transpose rules",
+    "section": "Transpose rules",
+    "subgoals": [
+      "Apply the transpose to a sum",
+      "Apply the transpose to a product in the correct order",
+      "Use the double transpose identity"
+    ]
+  },
+  {
+    "label": "Symmetric matrices",
+    "section": "Symmetric matrices",
+    "subgoals": [
+      "State the condition for symmetry",
+      "Test a small matrix for symmetry",
+      "Connect symmetry to the transpose"
+    ]
+  }
+]

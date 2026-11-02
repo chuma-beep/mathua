@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1296,
+  "concept_count": 1303,
   "unit_count": 134,
   "units": [
     {
@@ -1828,11 +1828,12 @@
       "concept_ids": [
         "linalg.matrix.add",
         "linalg.matrix.concept",
+        "linalg.matrix.transpose",
         "linalg.space.axioms",
         "linalg.vector.add",
         "linalg.vector.parametric"
       ],
-      "concept_count": 5
+      "concept_count": 6
     },
     {
       "id": "linear_algebra.b2",
@@ -1874,9 +1875,10 @@
         "linalg.vec.norm_squared",
         "linalg.vec.span",
         "linalg.vector.cosine_similarity",
-        "linalg.vector.cross"
+        "linalg.vector.cross",
+        "linalg.vector.plane"
       ],
-      "concept_count": 11
+      "concept_count": 12
     },
     {
       "id": "linear_algebra.b4",
@@ -1887,12 +1889,14 @@
       "depth_max": 14,
       "subdomains": [
         "linear_algebra.decompositions",
+        "linear_algebra.determinants",
         "linear_algebra.inner_product",
         "linear_algebra.vectors"
       ],
       "concept_ids": [
         "linalg.basis.change",
         "linalg.decomp.qr",
+        "linalg.det.properties",
         "linalg.independence.count",
         "linalg.inner_product",
         "linalg.orth.complement",
@@ -1901,7 +1905,7 @@
         "linalg.subspace",
         "linalg.vec.basis"
       ],
-      "concept_count": 9
+      "concept_count": 10
     },
     {
       "id": "linear_algebra.b7",
@@ -1933,23 +1937,27 @@
       "depth_max": 26,
       "subdomains": [
         "linear_algebra.eigenvalues",
+        "linear_algebra.inner_product",
         "linear_algebra.matrices",
         "linear_algebra.systems",
         "linear_algebra.transformations"
       ],
       "concept_ids": [
+        "linalg.eigen.complex",
         "linalg.eigen.compute",
         "linalg.eigen.concept",
         "linalg.eigen.det_product",
         "linalg.eigen.diagonalization",
         "linalg.eigen.trace",
+        "linalg.invertible.theorem",
         "linalg.matrix.fundamental_subspaces",
         "linalg.matrix.rank",
+        "linalg.orth.least_squares",
         "linalg.rank.nullity",
         "linalg.systems.homogeneous",
         "linalg.transform.kernel"
       ],
-      "concept_count": 10
+      "concept_count": 13
     },
     {
       "id": "linear_algebra.b9",
@@ -1970,12 +1978,13 @@
         "linalg.decomp.svd",
         "linalg.eigen.cayley_hamilton",
         "linalg.eigen.eigenspace",
+        "linalg.eigen.similar",
         "linalg.matrix.condition",
         "linalg.quadratic.definite",
         "linalg.symmetric.spectral",
         "linalg.transform.invertible"
       ],
-      "concept_count": 9
+      "concept_count": 10
     },
     {
       "id": "machine_learning.b3",

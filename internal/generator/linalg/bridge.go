@@ -363,3 +363,294 @@ func (g *leontiefGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		)
 	}
 }
+
+type transposeGen struct{}
+
+func (g *transposeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	o := linalgBridgeOrdinal(ctx)
+	a := 1 + rand.Intn(8)
+	b := 1 + rand.Intn(8)
+	c := 1 + rand.Intn(8)
+	d := 1 + rand.Intn(8)
+	switch o {
+	case 1:
+		if rand.Intn(2) == 0 {
+			return linalgBridgeProblem(o,
+				fmt.Sprintf("For A = [[%d, %d], [%d, %d]], what is the entry in row 1, column 2 of A transpose? (enter a number)", a, b, c, d),
+				strconv.Itoa(c),
+				fmt.Sprintf("Row 1, column 2 of the transpose is row 2, column 1 of A, which is %d.", c),
+				map[string]string{"kind": "transpose_entry", "answer": strconv.Itoa(c)},
+			)
+		}
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("For A = [[%d, %d], [%d, %d]], what is the entry in row 2, column 1 of A transpose? (enter a number)", a, b, c, d),
+			strconv.Itoa(b),
+			fmt.Sprintf("Row 2, column 1 of the transpose is row 1, column 2 of A, which is %d.", b),
+			map[string]string{"kind": "transpose_entry", "answer": strconv.Itoa(b)},
+		)
+	case 2:
+		ans := a*a + b*b + c*c + d*d
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("For A = [[%d, %d], [%d, %d]], what is the trace of A transpose times A? (enter a number)", a, b, c, d),
+			strconv.Itoa(ans),
+			fmt.Sprintf("The diagonal entries of A transpose A sum the squares of all entries: %d + %d + %d + %d = %d.", a*a, b*b, c*c, d*d, ans),
+			map[string]string{"kind": "gram_trace", "answer": strconv.Itoa(ans)},
+		)
+	default:
+		det := a*d - b*c
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("For A = [[%d, %d], [%d, %d]], what is det(A transpose)? (enter a number)", a, b, c, d),
+			strconv.Itoa(det),
+			fmt.Sprintf("Transposing swaps the off-diagonal entries, so the determinant is unchanged: %d x %d - %d x %d = %d.", a, d, b, c, det),
+			map[string]string{"kind": "transpose_determinant", "answer": strconv.Itoa(det)},
+		)
+	}
+}
+
+type determinantPropertiesGen struct{}
+
+func (g *determinantPropertiesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	o := linalgBridgeOrdinal(ctx)
+	switch o {
+	case 1:
+		n := 2 + rand.Intn(2)
+		k := 2 + rand.Intn(3)
+		base := 1 + rand.Intn(4)
+		ans := 1
+		for i := 0; i < n; i++ {
+			ans *= k
+		}
+		ans *= base
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("A %d by %d matrix A has det A = %d. What is det(%dA)? (enter a number)", n, n, base, k),
+			strconv.Itoa(ans),
+			fmt.Sprintf("Scaling an %d by %d matrix multiplies the determinant by %d^%d = %d, so the answer is %d x %d = %d.", n, n, k, n, ans/base, base, ans/base, ans),
+			map[string]string{"kind": "scaled_determinant", "answer": strconv.Itoa(ans)},
+		)
+	case 2:
+		a := 1 + rand.Intn(5)
+		d := 1 + rand.Intn(5)
+		e := 1 + rand.Intn(5)
+		f := 1 + rand.Intn(5)
+		p := a * d
+		q := e * f
+		ans := p * q
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("A and B are diagonal, with det A = %d x %d and det B = %d x %d. What is det(AB)? (enter a number)", a, d, e, f),
+			strconv.Itoa(ans),
+			fmt.Sprintf("The product rule gives det(AB) = det A det B = %d x %d = %d.", p, q, ans),
+			map[string]string{"kind": "product_determinant", "answer": strconv.Itoa(ans)},
+		)
+	default:
+		base := 2 + 2*rand.Intn(3)
+		if rand.Intn(2) == 0 {
+			ans := strconv.FormatFloat(1/float64(base), 'f', 2, 64)
+			return linalgBridgeProblem(o,
+				fmt.Sprintf("A matrix A has det A = %d. What is det(A inverse)? (enter a decimal)", base),
+				ans,
+				fmt.Sprintf("The determinant of an inverse is the reciprocal: 1/%d = %s.", base, ans),
+				map[string]string{"kind": "inverse_determinant", "answer": ans},
+			)
+		}
+		ans := base * base
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("A matrix A has det A = %d. What is det(A squared)? (enter a number)", base),
+			strconv.Itoa(ans),
+			fmt.Sprintf("det(A squared) = (det A)^2 = %d^2 = %d.", base, ans),
+			map[string]string{"kind": "squared_determinant", "answer": strconv.Itoa(ans)},
+		)
+	}
+}
+
+type invertibleTheoremGen struct{}
+
+func (g *invertibleTheoremGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	o := linalgBridgeOrdinal(ctx)
+	switch o {
+	case 1:
+		n := 2 + rand.Intn(4)
+		rank := 1 + rand.Intn(n)
+		ans := n - rank
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("An %d by %d matrix has rank %d. How many free variables does its homogeneous system have? (enter a number)", n, n, rank),
+			strconv.Itoa(ans),
+			fmt.Sprintf("Nullity is n - rank = %d - %d = %d. A nonzero nullity means the matrix is not invertible.", n, rank, ans),
+			map[string]string{"kind": "nullity", "answer": strconv.Itoa(ans)},
+		)
+	case 2:
+		n := 3 + rand.Intn(6)
+		pivots := n
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("How many pivots must an %d by %d matrix have to be invertible? (enter a number)", n, n),
+			strconv.Itoa(pivots),
+			fmt.Sprintf("An invertible %d by %d matrix has a pivot in every row and column, so it needs %d pivots.", n, n, pivots),
+			map[string]string{"kind": "pivot_count", "answer": strconv.Itoa(pivots)},
+		)
+	default:
+		det := 0
+		if rand.Intn(2) == 0 {
+			det = 1 + rand.Intn(9)
+		}
+		ans := 0
+		if det != 0 {
+			ans = 1
+		}
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("A square matrix has determinant %d. Is it invertible? (enter 1 for yes and 0 for no)", det),
+			strconv.Itoa(ans),
+			fmt.Sprintf("A square matrix is invertible exactly when its determinant is nonzero, so the answer is %d.", ans),
+			map[string]string{"kind": "invertible_flag", "answer": strconv.Itoa(ans)},
+		)
+	}
+}
+
+type similarMatricesGen struct{}
+
+func (g *similarMatricesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	o := linalgBridgeOrdinal(ctx)
+	a := 1 + rand.Intn(6)
+	b := 2 + rand.Intn(6)
+	switch o {
+	case 1:
+		ans := a + b
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("A matrix A is similar to B. A has trace %d and B has diagonal entries %d and %d. What is the trace of A? (enter a number)", ans, a, b),
+			strconv.Itoa(ans),
+			fmt.Sprintf("Similar matrices have equal trace, so the trace is %d + %d = %d.", a, b, ans),
+			map[string]string{"kind": "trace", "answer": strconv.Itoa(ans)},
+		)
+	case 2:
+		det := a * b
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("A matrix A is similar to B, and B has eigenvalues %d and %d. What is det A? (enter a number)", a, b),
+			strconv.Itoa(det),
+			fmt.Sprintf("Similar matrices have equal determinants, and the determinant is the product of eigenvalues: %d x %d = %d.", a, b, det),
+			map[string]string{"kind": "determinant", "answer": strconv.Itoa(det)},
+		)
+	default:
+		p := 2 + rand.Intn(5)
+		q := 1 + rand.Intn(4)
+		ans := p + q
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("A matrix A is similar to a diagonal matrix with entries %d and %d. What is the sum of the eigenvalues of A? (enter a number)", p, q),
+			strconv.Itoa(ans),
+			fmt.Sprintf("Similar matrices share eigenvalues, so the sum is %d + %d = %d.", p, q, ans),
+			map[string]string{"kind": "eigenvalue_sum", "answer": strconv.Itoa(ans)},
+		)
+	}
+}
+
+type complexEigenGen struct{}
+
+func (g *complexEigenGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	o := linalgBridgeOrdinal(ctx)
+	a := 1 + rand.Intn(8)
+	p := rand.Intn(5) - 2
+	q := 1 + rand.Intn(4)
+	switch o {
+	case 1:
+		ans := -4 * a * a
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("The rotation matrix [[0, -%d], [%d, 0]] has characteristic polynomial lambda^2 + %d. What is the discriminant of lambda^2 + %d? (enter a number)", a, a, a*a, a*a),
+			strconv.Itoa(ans),
+			fmt.Sprintf("For lambda^2 + %d, the discriminant is 0^2 - 4 x 1 x %d = %d, so the eigenvalues are not real.", a*a, a*a, ans),
+			map[string]string{"kind": "discriminant", "answer": strconv.Itoa(ans)},
+		)
+	case 2:
+		ans := 2 * p
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("A real 2 by 2 matrix has eigenvalues %d + %di and %d - %di. What is its trace? (enter a number)", p, q, p, q),
+			strconv.Itoa(ans),
+			fmt.Sprintf("The trace is the sum of the eigenvalues: (%d + %di) + (%d - %di) = %d.", p, q, p, q, ans),
+			map[string]string{"kind": "trace", "answer": strconv.Itoa(ans)},
+		)
+	default:
+		ans := p*p + q*q
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("A real 2 by 2 matrix has eigenvalues %d + %di and %d - %di. What is its determinant? (enter a number)", p, q, p, q),
+			strconv.Itoa(ans),
+			fmt.Sprintf("The determinant is the product of the conjugate pair: (%d + %di)(%d - %di) = %d + %d = %d.", p, q, p, q, p*p, q*q, ans),
+			map[string]string{"kind": "determinant", "answer": strconv.Itoa(ans)},
+		)
+	}
+}
+
+type planeEquationGen struct{}
+
+func (g *planeEquationGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	o := linalgBridgeOrdinal(ctx)
+	a := 1 + rand.Intn(5)
+	b := 1 + rand.Intn(5)
+	c := 1 + rand.Intn(5)
+	x0 := rand.Intn(5) - 2
+	y0 := rand.Intn(5) - 2
+	z0 := rand.Intn(5) - 2
+	switch o {
+	case 1:
+		ans := a*x0 + b*y0 + c*z0
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("A plane has normal (%d, %d, %d) and passes through (%d, %d, %d). What is the constant d in %dx + %dy + %dz = d? (enter a number)", a, b, c, x0, y0, z0, a, b, c),
+			strconv.Itoa(ans),
+			fmt.Sprintf("Substitute the point: %d(%d) + %d(%d) + %d(%d) = %d.", a, x0, b, y0, c, z0, ans),
+			map[string]string{"kind": "plane_constant", "answer": strconv.Itoa(ans)},
+		)
+	case 2:
+		ans := a*x0 + b*y0 + c*z0
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("For the plane %dx + %dy + %dz = %d, what is the left-hand side evaluated at (%d, %d, %d)? (enter a number)", a, b, c, ans, x0, y0, z0),
+			strconv.Itoa(ans),
+			fmt.Sprintf("The point lies on the plane because %d(%d) + %d(%d) + %d(%d) = %d.", a, x0, b, y0, c, z0, ans),
+			map[string]string{"kind": "plane_evaluation", "answer": strconv.Itoa(ans)},
+		)
+	default:
+		d := c * (1 + rand.Intn(5))
+		ans := d / c
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("The plane %dx + %dy + %dz = %d meets the z-axis at z = ? (enter a number)", a, b, c, d),
+			strconv.Itoa(ans),
+			fmt.Sprintf("Set x = 0 and y = 0: %dz = %d, so z = %d.", c, d, ans),
+			map[string]string{"kind": "z_intercept", "answer": strconv.Itoa(ans)},
+		)
+	}
+}
+
+type leastSquaresGen struct{}
+
+func (g *leastSquaresGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	o := linalgBridgeOrdinal(ctx)
+	switch o {
+	case 1:
+		y1 := 1 + rand.Intn(6)
+		y2 := 1 + rand.Intn(6)
+		y3 := 1 + rand.Intn(6)
+		ans := y1 + 2*y2 + 3*y3
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("The points (1, %d), (2, %d) and (3, %d) are fitted by a line. For the normal equations, what is the sum of x times y? (enter a number)", y1, y2, y3),
+			strconv.Itoa(ans),
+			fmt.Sprintf("The sum is 1 x %d + 2 x %d + 3 x %d = %d.", y1, y2, y3, ans),
+			map[string]string{"kind": "sum_xy", "answer": strconv.Itoa(ans)},
+		)
+	case 2:
+		m := 1 + rand.Intn(8)
+		ans := m
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("A line through the origin is fitted to the points (1, %d) and (2, %d). What is its least-squares slope? (enter a number)", m, 2*m),
+			strconv.Itoa(ans),
+			fmt.Sprintf("The normal equation gives slope (1 x %d + 2 x %d)/(1^2 + 2^2) = %d/5 = %d.", m, 2*m, 5*m, ans),
+			map[string]string{"kind": "slope", "answer": strconv.Itoa(ans)},
+		)
+	default:
+		m := 1 + rand.Intn(4)
+		c := rand.Intn(5) - 2
+		x := 2 + rand.Intn(3)
+		obs := m*x + c + 1 + rand.Intn(4)
+		pred := m*x + c
+		ans := obs - pred
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("A fitted line gives y = %d at x = %d, but the observed y is %d. What is the residual? (enter a number)", pred, x, obs),
+			strconv.Itoa(ans),
+			fmt.Sprintf("The residual is observed minus predicted: %d - %d = %d.", obs, pred, ans),
+			map[string]string{"kind": "residual", "answer": strconv.Itoa(ans)},
+		)
+	}
+}
