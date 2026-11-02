@@ -708,7 +708,17 @@
       "stat.reg.least_squares",
       "stat.test.chi_square_independence",
       "stat.data.study_design",
-      "stat.sampling.methods"
+      "stat.sampling.methods",
+      "stat.data.measurement_levels",
+      "stat.infer.ttest_two",
+      "stat.infer.paired",
+      "stat.infer.proportion_test",
+      "stat.reg.residual",
+      "stat.spread.outlier",
+      "stat.dist.normal_approx",
+      "stat.dist.empirical_rule",
+      "stat.data.skew",
+      "stat.infer.regression_slope"
     ]
   },
   {

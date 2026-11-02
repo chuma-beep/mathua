@@ -12,19 +12,19 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 1277 |
-| Total units | 133 |
+| Total concepts | 1287 |
+| Total units | 134 |
 | Minimum unit size | 1 |
 | Median unit size | 7 |
 | Maximum unit size | 42 |
 | Singleton units | 25 |
-| Units with <= 3 concepts | 39 |
+| Units with <= 3 concepts | 38 |
 | Units with > 25 concepts | 10 |
 | Units with > 50 concepts | 0 |
-| Cross-unit prerequisite edges (derived) | 429 |
+| Cross-unit prerequisite edges (derived) | 433 |
 | Backward band edges | 0 |
 
-If the learner is assessed once per unit, then 133 assessments cover the corpus, and the
+If the learner is assessed once per unit, then 134 assessments cover the corpus, and the
 median is one assessment per 7 concepts. That is the frequency question this report
 exists to make concrete.
 
@@ -148,13 +148,14 @@ exists to make concrete.
 | `real_analysis.b10` | real_analysis | 10 | 28 | 5 | 30–32 |
 | `real_analysis.b11` | real_analysis | 11 | 15 | 4 | 33–35 |
 | `real_analysis.b12` | real_analysis | 12 | 5 | 1 | 36–37 |
-| `statistics.b0` | statistics | 0 | 3 | 2 | 1–2 |
+| `statistics.b0` | statistics | 0 | 4 | 2 | 1–2 |
 | `statistics.b1` | statistics | 1 | 1 | 1 | 3–3 |
 | `statistics.b2` | statistics | 2 | 1 | 1 | 8–8 |
 | `statistics.b3` | statistics | 3 | 24 | 6 | 9–11 |
-| `statistics.b4` | statistics | 4 | 20 | 6 | 12–14 |
-| `statistics.b5` | statistics | 5 | 10 | 1 | 15–17 |
-| `statistics.b6` | statistics | 6 | 2 | 2 | 18–20 |
+| `statistics.b4` | statistics | 4 | 24 | 8 | 12–14 |
+| `statistics.b5` | statistics | 5 | 11 | 1 | 15–17 |
+| `statistics.b6` | statistics | 6 | 4 | 2 | 18–20 |
+| `statistics.b7` | statistics | 7 | 2 | 2 | 21–21 |
 | `statistics.b8` | statistics | 8 | 1 | 1 | 24–24 |
 | `topology.b10` | topology | 10 | 10 | 3 | 30–32 |
 | `topology.b11` | topology | 11 | 19 | 9 | 33–35 |
@@ -179,16 +180,16 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 175 | 5 | 39 | 29 | 55 | 3 | 0 |
-| 3 | 133 | 7 | 42 | 25 | 39 | 10 | 0 |
-| 4 | 105 | 9 | 63 | 11 | 24 | 12 | 0 |
-| 5 | 89 | 10 | 81 | 6 | 15 | 13 | 0 |
-| 6 | 86 | 11 | 77 | 7 | 16 | 18 | 0 |
+| 2 | 175 | 5 | 39 | 27 | 54 | 3 | 0 |
+| 3 | 134 | 7 | 42 | 25 | 38 | 10 | 0 |
+| 4 | 105 | 10 | 63 | 10 | 24 | 13 | 0 |
+| 5 | 89 | 10 | 81 | 6 | 14 | 13 | 0 |
+| 6 | 86 | 11 | 77 | 7 | 15 | 18 | 0 |
 | 8 | 66 | 15 | 82 | 4 | 8 | 22 | 0 |
-| 10 | 56 | 18 | 100 | 2 | 9 | 19 | 0 |
+| 10 | 56 | 18 | 100 | 2 | 8 | 19 | 0 |
 | 12 | 58 | 18 | 83 | 2 | 5 | 23 | 0 |
 | 15 | 46 | 22 | 119 | 1 | 5 | 21 | 0 |
-| 20 | 37 | 37 | 100 | 1 | 4 | 24 | 0 |
+| 20 | 37 | 37 | 100 | 1 | 3 | 24 | 0 |
 | 45 | 23 | 52 | 124 | 0 | 0 | 23 | 0 |
 
 **No width is clean.** Small widths fragment, at 3 there are 25 singleton units, which is a
@@ -206,7 +207,7 @@ The subdomain condensation of the concept DAG **contains cycles**: grouping conc
 subdomain discards the per-concept ordering, so a concept in subdomain A can be a
 prerequisite of one in subdomain B whose other members depend on A.
 
-**108 of 125 subdomains cannot be levelled**, they sit inside a cycle, or downstream
+**110 of 125 subdomains cannot be levelled**, they sit inside a cycle, or downstream
 of one, so no depth function exists for them at all. (Tarjan puts 26 inside cycles and
 the remaining 34 behind them; Kahn cannot order either group, because ordering a node
 requires its predecessors to be ordered first.) An implementation that ignores this
@@ -215,142 +216,145 @@ one, which is what the first Go version of this generator did.
 
 Unresolvable subdomains:
 
-`abstract_algebra.fields` 
-`abstract_algebra.rings` 
-`abstract_algebra.structures` 
-`algebra.conics` 
+`abstract_algebra.fields`
+`abstract_algebra.rings`
+`abstract_algebra.structures`
+`algebra.conics`
 
-`algebra.equations` 
-`algebra.inequalities` 
-`algebra.linear` 
-`algebra.logarithms` 
+`algebra.equations`
+`algebra.inequalities`
+`algebra.linear`
+`algebra.logarithms`
 
-`algebra.rational` 
-`algebra.sequences` 
-`algebra.systems` 
-`arithmetic.addition` 
+`algebra.rational`
+`algebra.sequences`
+`algebra.systems`
+`arithmetic.addition`
 
-`calculus.advanced` 
-`calculus.derivatives` 
-`calculus.integrals` 
-`calculus.limits` 
+`calculus.advanced`
+`calculus.derivatives`
+`calculus.integrals`
+`calculus.limits`
 
-`calculus.multivariable` 
-`calculus.polar` 
-`calculus.sequences` 
-`calculus.series` 
+`calculus.multivariable`
+`calculus.polar`
+`calculus.sequences`
+`calculus.series`
 
-`calculus.vector` 
-`complex_numbers.topology` 
-`differential_equations.basics` 
-`differential_equations.boundary` 
+`calculus.vector`
+`complex_numbers.topology`
+`differential_equations.basics`
+`differential_equations.boundary`
 
-`differential_equations.first_order` 
-`differential_equations.integral` 
-`differential_equations.nonlinear` 
-`differential_equations.numerical` 
+`differential_equations.first_order`
+`differential_equations.integral`
+`differential_equations.nonlinear`
+`differential_equations.numerical`
 
-`differential_equations.pde` 
-`differential_equations.second_order` 
-`differential_equations.stability` 
-`differential_equations.systems` 
+`differential_equations.pde`
+`differential_equations.second_order`
+`differential_equations.stability`
+`differential_equations.systems`
 
-`differential_equations.transforms` 
-`discrete_math.graph_theory` 
-`discrete_math.logic` 
-`discrete_math.proof` 
+`differential_equations.transforms`
+`discrete_math.graph_theory`
+`discrete_math.logic`
+`discrete_math.proof`
 
-`discrete_math.recurrence` 
-`discrete_math.sets` 
-`frac.compare` 
-`frac.div` 
+`discrete_math.recurrence`
+`discrete_math.sets`
+`frac.compare`
+`frac.div`
 
-`frac.mixed` 
-`frac.mult` 
-`frac.sub` 
-`fractions.division` 
+`frac.mixed`
+`frac.mult`
+`frac.sub`
+`fractions.division`
 
-`geometry.basics` 
-`geometry.transform` 
-`graph_theory.basics` 
-`graph_theory.coloring` 
+`geometry.basics`
+`geometry.transform`
+`graph_theory.basics`
+`graph_theory.coloring`
 
-`graph_theory.connectivity` 
-`graph_theory.extremal` 
-`graph_theory.flows` 
-`graph_theory.matching` 
+`graph_theory.connectivity`
+`graph_theory.extremal`
+`graph_theory.flows`
+`graph_theory.matching`
 
-`graph_theory.planarity` 
-`graph_theory.spectral` 
-`linear_algebra.decompositions` 
-`linear_algebra.eigenvalues` 
+`graph_theory.planarity`
+`graph_theory.spectral`
+`linear_algebra.decompositions`
+`linear_algebra.eigenvalues`
 
-`linear_algebra.inner_product` 
-`linear_algebra.matrices` 
-`linear_algebra.systems` 
-`linear_algebra.transformations` 
+`linear_algebra.inner_product`
+`linear_algebra.matrices`
+`linear_algebra.systems`
+`linear_algebra.transformations`
 
-`machine_learning.nlp` 
-`machine_learning.reinforcement` 
-`machine_learning.trees` 
-`number_theory.applications` 
+`machine_learning.evaluation`
+`machine_learning.nlp`
+`machine_learning.reinforcement`
+`machine_learning.trees`
 
-`numerical_analysis.errors` 
-`numerical_analysis.integration` 
-`numerical_analysis.linear` 
-`numerical_analysis.roots` 
+`number_theory.applications`
+`numerical_analysis.errors`
+`numerical_analysis.integration`
+`numerical_analysis.linear`
 
-`prealgebra.equations` 
-`prealgebra.inequalities` 
-`precalculus.conics` 
-`precalculus.discrete` 
+`numerical_analysis.roots`
+`prealgebra.equations`
+`prealgebra.inequalities`
+`precalculus.conics`
 
-`precalculus.exponential` 
-`precalculus.functions` 
-`precalculus.parametric` 
-`precalculus.polar` 
+`precalculus.discrete`
+`precalculus.exponential`
+`precalculus.functions`
+`precalculus.parametric`
 
-`precalculus.polynomials` 
-`precalculus.rational` 
-`precalculus.sequences` 
-`precalculus.systems` 
+`precalculus.polar`
+`precalculus.polynomials`
+`precalculus.rational`
+`precalculus.sequences`
 
-`precalculus.vectors` 
-`probability_theory.characteristic` 
-`probability_theory.convergence` 
-`probability_theory.distributions` 
+`precalculus.systems`
+`precalculus.vectors`
+`probability_theory.characteristic`
+`probability_theory.convergence`
 
-`probability_theory.processes` 
-`real_analysis.deriv` 
-`real_analysis.limit` 
-`real_analysis.metric` 
+`probability_theory.distributions`
+`probability_theory.processes`
+`real_analysis.deriv`
+`real_analysis.limit`
 
-`real_analysis.order` 
-`real_analysis.seq` 
-`statistics.distributions` 
-`topology.algebraic` 
+`real_analysis.metric`
+`real_analysis.order`
+`real_analysis.seq`
+`statistics.data_collection`
 
-`topology.basics` 
-`topology.compact` 
-`topology.connected` 
-`topology.constructions` 
+`statistics.distributions`
+`topology.algebraic`
+`topology.basics`
+`topology.compact`
 
-`topology.covering` 
-`topology.dimension` 
-`topology.invariants` 
-`topology.knot` 
+`topology.connected`
+`topology.constructions`
+`topology.covering`
+`topology.dimension`
 
-`topology.manifolds` 
-`topology.metrization` 
-`topology.separation` 
-`trigonometry.advanced` 
+`topology.invariants`
+`topology.knot`
+`topology.manifolds`
+`topology.metrization`
 
-`trigonometry.functions` 
-`trigonometry.graphs` 
-`trigonometry.hyperbolic` 
-`trigonometry.identities` 
+`topology.separation`
+`trigonometry.advanced`
+`trigonometry.functions`
+`trigonometry.graphs`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1277
+`trigonometry.hyperbolic`
+`trigonometry.identities`
+
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1287
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings

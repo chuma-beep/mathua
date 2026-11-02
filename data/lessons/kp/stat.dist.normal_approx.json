@@ -1,0 +1,29 @@
+[
+  {
+    "label": "When a binomial looks normal",
+    "section": "When a binomial looks normal",
+    "subgoals": [
+      "Check the success count",
+      "Check the failure count",
+      "Match the mean and variance"
+    ]
+  },
+  {
+    "label": "The continuity correction",
+    "section": "The continuity correction",
+    "subgoals": [
+      "Shift the boundary by half a unit",
+      "Standardise the shifted value",
+      "Read the normal probability"
+    ]
+  },
+  {
+    "label": "Accuracy of the approximation",
+    "section": "Accuracy of the approximation",
+    "subgoals": [
+      "Compare with the exact binomial",
+      "Grow the sample size",
+      "Watch rare outcomes"
+    ]
+  }
+]

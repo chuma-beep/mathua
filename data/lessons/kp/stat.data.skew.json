@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Symmetry and tails",
+    "section": "Symmetry and tails",
+    "subgoals": [
+      "Compare the two tails",
+      "Locate the longer tail",
+      "Name the direction of skew"
+    ]
+  },
+  {
+    "label": "Mean and median under skew",
+    "section": "Mean and median under skew",
+    "subgoals": [
+      "Compare their positions",
+      "Predict the direction from the comparison",
+      "Explain the pull of extreme values"
+    ]
+  },
+  {
+    "label": "Reading shape from a graph",
+    "section": "Reading shape from a graph",
+    "subgoals": [
+      "Inspect a histogram",
+      "Look for more than one peak",
+      "Avoid judging shape from a single number"
+    ]
+  }
+]

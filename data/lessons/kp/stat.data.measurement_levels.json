@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Nominal and ordinal variables",
+    "section": "Nominal and ordinal variables",
+    "subgoals": [
+      "Name a nominal variable",
+      "Recognise ordered categories",
+      "Separate labels from ranks"
+    ]
+  },
+  {
+    "label": "Interval and ratio variables",
+    "section": "Interval and ratio variables",
+    "subgoals": [
+      "Tell interval from ratio",
+      "Recognise a true zero",
+      "Compare differences and ratios"
+    ]
+  },
+  {
+    "label": "Choosing an appropriate summary",
+    "section": "Choosing an appropriate summary",
+    "subgoals": [
+      "Match a level to a summary",
+      "Avoid ratios on interval data",
+      "Use counts for nominal data"
+    ]
+  }
+]

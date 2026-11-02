@@ -5106,5 +5106,45 @@
   {
     "concept_id": "linalg.apps.leontief",
     "source": "teaching/linalg.apps.leontief.md"
+  },
+  {
+    "concept_id": "stat.data.measurement_levels",
+    "source": "teaching/stat.data.measurement_levels.md"
+  },
+  {
+    "concept_id": "stat.infer.ttest_two",
+    "source": "teaching/stat.infer.ttest_two.md"
+  },
+  {
+    "concept_id": "stat.infer.paired",
+    "source": "teaching/stat.infer.paired.md"
+  },
+  {
+    "concept_id": "stat.infer.proportion_test",
+    "source": "teaching/stat.infer.proportion_test.md"
+  },
+  {
+    "concept_id": "stat.reg.residual",
+    "source": "teaching/stat.reg.residual.md"
+  },
+  {
+    "concept_id": "stat.spread.outlier",
+    "source": "teaching/stat.spread.outlier.md"
+  },
+  {
+    "concept_id": "stat.dist.normal_approx",
+    "source": "teaching/stat.dist.normal_approx.md"
+  },
+  {
+    "concept_id": "stat.dist.empirical_rule",
+    "source": "teaching/stat.dist.empirical_rule.md"
+  },
+  {
+    "concept_id": "stat.data.skew",
+    "source": "teaching/stat.data.skew.md"
+  },
+  {
+    "concept_id": "stat.infer.regression_slope",
+    "source": "teaching/stat.infer.regression_slope.md"
   }
 ]

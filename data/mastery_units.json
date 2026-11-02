@@ -5,8 +5,8 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1277,
-  "unit_count": 133,
+  "concept_count": 1287,
+  "unit_count": 134,
   "units": [
     {
       "id": "abstract_algebra.b6",
@@ -2980,10 +2980,11 @@
       ],
       "concept_ids": [
         "stat.data.bar_graph",
+        "stat.data.measurement_levels",
         "stat.data.read_table",
         "stat.data.study_design"
       ],
-      "concept_count": 3
+      "concept_count": 4
     },
     {
       "id": "statistics.b1",
@@ -3068,20 +3069,25 @@
       "subdomains": [
         "statistics.advanced",
         "statistics.data_collection",
+        "statistics.data_representation",
         "statistics.distributions",
         "statistics.inference",
         "statistics.probability",
-        "statistics.regression"
+        "statistics.regression",
+        "statistics.spread"
       ],
       "concept_ids": [
+        "stat.data.skew",
         "stat.dist.beta",
         "stat.dist.binomial",
         "stat.dist.chi_square",
+        "stat.dist.empirical_rule",
         "stat.dist.exponential",
         "stat.dist.gamma",
         "stat.dist.geometric",
         "stat.dist.hypergeometric",
         "stat.dist.normal",
+        "stat.dist.normal_approx",
         "stat.dist.poisson",
         "stat.dist.student_t",
         "stat.dist.uniform",
@@ -3093,9 +3099,10 @@
         "stat.reg.correlation",
         "stat.reg.r2",
         "stat.sampling.methods",
-        "stat.sampling.se"
+        "stat.sampling.se",
+        "stat.spread.outlier"
       ],
-      "concept_count": 20
+      "concept_count": 24
     },
     {
       "id": "statistics.b5",
@@ -3112,6 +3119,7 @@
         "stat.infer.margin",
         "stat.infer.nonparametric",
         "stat.infer.proportion",
+        "stat.infer.proportion_test",
         "stat.infer.pvalue",
         "stat.infer.ttest",
         "stat.infer.ztest",
@@ -3119,7 +3127,7 @@
         "stat.test.chi_square",
         "stat.test.chi_square_independence"
       ],
-      "concept_count": 10
+      "concept_count": 11
     },
     {
       "id": "statistics.b6",
@@ -3133,8 +3141,27 @@
         "statistics.regression"
       ],
       "concept_ids": [
+        "stat.infer.paired",
+        "stat.infer.ttest_two",
         "stat.infer.type_error",
         "stat.reg.least_squares"
+      ],
+      "concept_count": 4
+    },
+    {
+      "id": "statistics.b7",
+      "title": "Statistics · Stage 8",
+      "domain": "statistics",
+      "band": 7,
+      "depth_min": 21,
+      "depth_max": 21,
+      "subdomains": [
+        "statistics.inference",
+        "statistics.regression"
+      ],
+      "concept_ids": [
+        "stat.infer.regression_slope",
+        "stat.reg.residual"
       ],
       "concept_count": 2
     },

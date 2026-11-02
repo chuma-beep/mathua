@@ -887,5 +887,155 @@
       "streak": 10,
       "avg_time_seconds": 20.0
     }
+  },
+  {
+    "id": "stat.data.measurement_levels",
+    "label": "Levels of measurement",
+    "domain": "statistics",
+    "subdomain": "statistics.data_collection",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.read_table"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22
+    }
+  },
+  {
+    "id": "stat.infer.ttest_two",
+    "label": "The two-sample t test",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.ttest",
+      "stat.infer.hypothesis"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28
+    }
+  },
+  {
+    "id": "stat.infer.paired",
+    "label": "The paired t test",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.ttest",
+      "stat.data.study_design"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "stat.infer.proportion_test",
+    "label": "The one-proportion z test",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.proportion",
+      "stat.infer.ztest"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25
+    }
+  },
+  {
+    "id": "stat.reg.residual",
+    "label": "Residuals and prediction error",
+    "domain": "statistics",
+    "subdomain": "statistics.regression",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.reg.least_squares"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
+  },
+  {
+    "id": "stat.spread.outlier",
+    "label": "Detecting outliers",
+    "domain": "statistics",
+    "subdomain": "statistics.spread",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.box_plot",
+      "stat.spread.iqr"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22
+    }
+  },
+  {
+    "id": "stat.dist.normal_approx",
+    "label": "Normal approximation to the binomial",
+    "domain": "statistics",
+    "subdomain": "statistics.distributions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.dist.binomial",
+      "stat.dist.normal"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "stat.dist.empirical_rule",
+    "label": "The empirical rule",
+    "domain": "statistics",
+    "subdomain": "statistics.distributions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.dist.normal",
+      "stat.spread.std_dev"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22
+    }
+  },
+  {
+    "id": "stat.data.skew",
+    "label": "Skewness and distribution shape",
+    "domain": "statistics",
+    "subdomain": "statistics.data_representation",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.mean",
+      "stat.data.median",
+      "stat.spread.std_dev"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
+  },
+  {
+    "id": "stat.infer.regression_slope",
+    "label": "Inference for the regression slope",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.reg.least_squares",
+      "stat.infer.ttest",
+      "stat.reg.correlation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28
+    }
   }
 ]
