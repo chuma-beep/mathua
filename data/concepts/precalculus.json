@@ -733,5 +733,110 @@
       "streak": 10,
       "avg_time_seconds": 22.0
     }
+  },
+  {
+    "id": "precalc.poly.graph",
+    "label": "Sketching polynomial graphs",
+    "domain": "precalculus",
+    "subdomain": "precalculus.polynomials",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.poly.end_behavior",
+      "precalc.poly.zeros_multiplicity"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "precalc.exp.logistic",
+    "label": "Logistic growth models",
+    "domain": "precalculus",
+    "subdomain": "precalculus.exponential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.exp.growth_model",
+      "precalc.rational.asymptote"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 27.0
+    }
+  },
+  {
+    "id": "precalc.vector.unit",
+    "label": "Unit vectors",
+    "domain": "precalculus",
+    "subdomain": "precalculus.vectors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.vector.basics",
+      "precalc.vector.ops"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "precalc.conic.eccentricity",
+    "label": "Eccentricity of a conic",
+    "domain": "precalculus",
+    "subdomain": "precalculus.conics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.conic.ellipse",
+      "precalc.conic.hyperbola"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "precalc.seq.explicit",
+    "label": "Explicit formulas for sequences",
+    "domain": "precalculus",
+    "subdomain": "precalculus.sequences",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.seq.arithmetic",
+      "precalc.seq.geometric"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "precalc.conic.rotated",
+    "label": "Rotated conic sections",
+    "domain": "precalculus",
+    "subdomain": "precalculus.conics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.conic.general",
+      "trig.ident.double_angle"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.vector.three_d",
+    "label": "Vectors in three dimensions",
+    "domain": "precalculus",
+    "subdomain": "precalculus.vectors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.vector.basics",
+      "precalc.vector.ops"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 25.0
+    }
   }
 ]

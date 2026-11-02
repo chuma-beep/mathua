@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1382,
+  "concept_count": 1389,
   "unit_count": 134,
   "units": [
     {
@@ -2694,9 +2694,11 @@
         "precalc.vector.basics",
         "precalc.vector.dot",
         "precalc.vector.ops",
-        "precalc.vector.resultant"
+        "precalc.vector.resultant",
+        "precalc.vector.three_d",
+        "precalc.vector.unit"
       ],
-      "concept_count": 6
+      "concept_count": 8
     },
     {
       "id": "precalculus.b6",
@@ -2734,13 +2736,14 @@
         "precalc.partial_fractions",
         "precalc.poly.complex_conjugate",
         "precalc.poly.descartes",
+        "precalc.poly.graph",
         "precalc.poly.inequality",
         "precalc.poly.rational_roots",
         "precalc.poly.remainder_theorem",
         "precalc.poly.zeros_multiplicity",
         "precalc.rational.asymptote"
       ],
-      "concept_count": 11
+      "concept_count": 12
     },
     {
       "id": "precalculus.b8",
@@ -2768,6 +2771,7 @@
         "precalc.exp.cooling",
         "precalc.exp.equation",
         "precalc.exp.growth_model",
+        "precalc.exp.logistic",
         "precalc.func.arith_combine",
         "precalc.func.composition_value",
         "precalc.func.decomposition",
@@ -2783,13 +2787,14 @@
         "precalc.rational.holes",
         "precalc.rational.oblique_asymptote",
         "precalc.seq.arithmetic",
+        "precalc.seq.explicit",
         "precalc.seq.geometric",
         "precalc.seq.summation",
         "precalc.series.arithmetic",
         "precalc.series.geometric",
         "precalc.systems.nonlinear"
       ],
-      "concept_count": 28
+      "concept_count": 30
     },
     {
       "id": "precalculus.b9",
@@ -2799,16 +2804,19 @@
       "depth_min": 27,
       "depth_max": 27,
       "subdomains": [
+        "precalculus.conics",
         "precalculus.exponential",
         "precalculus.sequences"
       ],
       "concept_ids": [
+        "precalc.conic.eccentricity",
+        "precalc.conic.rotated",
         "precalc.exp.continuous",
         "precalc.log.equation",
         "precalc.log.scale",
         "precalc.series.geom_infinite"
       ],
-      "concept_count": 4
+      "concept_count": 6
     },
     {
       "id": "probability_theory.b3",

@@ -5526,5 +5526,33 @@
   {
     "concept_id": "trig.basics.segment_area",
     "source": "teaching/trig.basics.segment_area.md"
+  },
+  {
+    "concept_id": "precalc.poly.graph",
+    "source": "teaching/precalc.poly.graph.md"
+  },
+  {
+    "concept_id": "precalc.exp.logistic",
+    "source": "teaching/precalc.exp.logistic.md"
+  },
+  {
+    "concept_id": "precalc.vector.unit",
+    "source": "teaching/precalc.vector.unit.md"
+  },
+  {
+    "concept_id": "precalc.conic.eccentricity",
+    "source": "teaching/precalc.conic.eccentricity.md"
+  },
+  {
+    "concept_id": "precalc.seq.explicit",
+    "source": "teaching/precalc.seq.explicit.md"
+  },
+  {
+    "concept_id": "precalc.conic.rotated",
+    "source": "teaching/precalc.conic.rotated.md"
+  },
+  {
+    "concept_id": "precalc.vector.three_d",
+    "source": "teaching/precalc.vector.three_d.md"
   }
 ]

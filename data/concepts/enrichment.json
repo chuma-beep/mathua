@@ -18121,5 +18121,82 @@
       "trig.basics.sector_area",
       "trig.basics.right_triangle"
     ]
+  },
+  {
+    "id": "precalc.poly.graph",
+    "key_prerequisites": [
+      "alg.poly.end_behavior",
+      "precalc.poly.zeros_multiplicity"
+    ],
+    "encompasses": [
+      "alg.poly.end_behavior",
+      "precalc.poly.zeros_multiplicity"
+    ]
+  },
+  {
+    "id": "precalc.exp.logistic",
+    "key_prerequisites": [
+      "precalc.exp.growth_model",
+      "precalc.rational.asymptote"
+    ],
+    "encompasses": [
+      "precalc.exp.growth_model",
+      "precalc.rational.asymptote"
+    ]
+  },
+  {
+    "id": "precalc.vector.unit",
+    "key_prerequisites": [
+      "precalc.vector.basics",
+      "precalc.vector.ops"
+    ],
+    "encompasses": [
+      "precalc.vector.basics",
+      "precalc.vector.ops"
+    ]
+  },
+  {
+    "id": "precalc.conic.eccentricity",
+    "key_prerequisites": [
+      "precalc.conic.ellipse",
+      "precalc.conic.hyperbola"
+    ],
+    "encompasses": [
+      "precalc.conic.ellipse",
+      "precalc.conic.hyperbola"
+    ]
+  },
+  {
+    "id": "precalc.seq.explicit",
+    "key_prerequisites": [
+      "precalc.seq.arithmetic",
+      "precalc.seq.geometric"
+    ],
+    "encompasses": [
+      "precalc.seq.arithmetic",
+      "precalc.seq.geometric"
+    ]
+  },
+  {
+    "id": "precalc.conic.rotated",
+    "key_prerequisites": [
+      "precalc.conic.general",
+      "trig.ident.double_angle"
+    ],
+    "encompasses": [
+      "precalc.conic.general",
+      "trig.ident.double_angle"
+    ]
+  },
+  {
+    "id": "precalc.vector.three_d",
+    "key_prerequisites": [
+      "precalc.vector.basics",
+      "precalc.vector.ops"
+    ],
+    "encompasses": [
+      "precalc.vector.basics",
+      "precalc.vector.ops"
+    ]
   }
 ]

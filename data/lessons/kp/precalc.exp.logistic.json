@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The logistic formula",
+    "section": "The logistic formula",
+    "subgoals": [
+      "The model is P(t) = L / (1 + A e^(-kt)).",
+      "L is the carrying capacity of the environment.",
+      "A and k set the starting point and the speed of growth."
+    ]
+  },
+  {
+    "label": "Reading the parameters",
+    "section": "Reading the parameters",
+    "subgoals": [
+      "The initial population is L / (1 + A).",
+      "As t grows the exponential term vanishes and P approaches L.",
+      "A large k makes the population approach the capacity sooner."
+    ]
+  },
+  {
+    "label": "Where growth is fastest",
+    "section": "Where growth is fastest",
+    "subgoals": [
+      "The steepest point of the curve is at half the carrying capacity.",
+      "Below L/2 the population grows faster each period.",
+      "Above L/2 the growth slows as the environment fills."
+    ]
+  }
+]

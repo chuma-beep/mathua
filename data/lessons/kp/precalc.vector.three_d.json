@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Components and length",
+    "section": "Components and length",
+    "subgoals": [
+      "A three-dimensional vector has three components.",
+      "Its length uses the sum of three squares.",
+      "The length formula extends the two-dimensional distance formula."
+    ]
+  },
+  {
+    "label": "Operations",
+    "section": "Operations",
+    "subgoals": [
+      "Addition and scalar multiplication work component by component.",
+      "The dot product multiplies matching components and adds the results.",
+      "A zero dot product means the vectors are perpendicular."
+    ]
+  },
+  {
+    "label": "Geometry in space",
+    "section": "Geometry in space",
+    "subgoals": [
+      "A vector gives a direction and a length in space.",
+      "The difference of two position vectors gives a displacement.",
+      "Lengths and angles follow the same rules as in the plane."
+    ]
+  }
+]

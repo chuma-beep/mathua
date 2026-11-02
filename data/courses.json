@@ -473,7 +473,14 @@
       "trig.adv.ambiguous_case",
       "trig.adv.area_sas",
       "trig.adv.heron_area",
-      "precalc.func.average_rate"
+      "precalc.func.average_rate",
+      "precalc.poly.graph",
+      "precalc.exp.logistic",
+      "precalc.vector.unit",
+      "precalc.conic.eccentricity",
+      "precalc.seq.explicit",
+      "precalc.conic.rotated",
+      "precalc.vector.three_d"
     ]
   },
   {

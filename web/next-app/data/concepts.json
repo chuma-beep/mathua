@@ -15611,6 +15611,111 @@
     "subdomain": "precalculus.functions"
   },
   {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.poly.graph",
+    "label": "Sketching polynomial graphs",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.poly.end_behavior",
+      "precalc.poly.zeros_multiplicity"
+    ],
+    "subdomain": "precalculus.polynomials"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.exp.logistic",
+    "label": "Logistic growth models",
+    "mastery_threshold": {
+      "avg_time_seconds": 27,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.exp.growth_model",
+      "precalc.rational.asymptote"
+    ],
+    "subdomain": "precalculus.exponential"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.vector.unit",
+    "label": "Unit vectors",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.vector.basics",
+      "precalc.vector.ops"
+    ],
+    "subdomain": "precalculus.vectors"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.conic.eccentricity",
+    "label": "Eccentricity of a conic",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.conic.ellipse",
+      "precalc.conic.hyperbola"
+    ],
+    "subdomain": "precalculus.conics"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.seq.explicit",
+    "label": "Explicit formulas for sequences",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.seq.arithmetic",
+      "precalc.seq.geometric"
+    ],
+    "subdomain": "precalculus.sequences"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.conic.rotated",
+    "label": "Rotated conic sections",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.conic.general",
+      "trig.ident.double_angle"
+    ],
+    "subdomain": "precalculus.conics"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.vector.three_d",
+    "label": "Vectors in three dimensions",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.vector.basics",
+      "precalc.vector.ops"
+    ],
+    "subdomain": "precalculus.vectors"
+  },
+  {
     "domain": "probability_theory",
     "grading_type": "numeric",
     "id": "prob.bayes.prior",

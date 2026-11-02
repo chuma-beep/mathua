@@ -12,7 +12,7 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 1382 |
+| Total concepts | 1389 |
 | Total units | 134 |
 | Minimum unit size | 1 |
 | Median unit size | 7 |
@@ -21,7 +21,7 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 | Units with <= 3 concepts | 37 |
 | Units with > 25 concepts | 11 |
 | Units with > 50 concepts | 0 |
-| Cross-unit prerequisite edges (derived) | 443 |
+| Cross-unit prerequisite edges (derived) | 444 |
 | Backward band edges | 0 |
 
 If the learner is assessed once per unit, then 134 assessments cover the corpus, and the
@@ -135,11 +135,11 @@ exists to make concrete.
 | `prealgebra.b5` | prealgebra | 5 | 14 | 6 | 15–17 |
 | `prealgebra.b6` | prealgebra | 6 | 6 | 2 | 18–19 |
 | `precalculus.b3` | precalculus | 3 | 1 | 1 | 10–10 |
-| `precalculus.b4` | precalculus | 4 | 6 | 2 | 12–14 |
+| `precalculus.b4` | precalculus | 4 | 8 | 2 | 12–14 |
 | `precalculus.b6` | precalculus | 6 | 1 | 1 | 20–20 |
-| `precalculus.b7` | precalculus | 7 | 11 | 5 | 21–23 |
-| `precalculus.b8` | precalculus | 8 | 28 | 8 | 24–26 |
-| `precalculus.b9` | precalculus | 9 | 4 | 2 | 27–27 |
+| `precalculus.b7` | precalculus | 7 | 12 | 5 | 21–23 |
+| `precalculus.b8` | precalculus | 8 | 30 | 8 | 24–26 |
+| `precalculus.b9` | precalculus | 9 | 6 | 3 | 27–27 |
 | `probability_theory.b3` | probability_theory | 3 | 2 | 2 | 11–11 |
 | `probability_theory.b4` | probability_theory | 4 | 37 | 8 | 12–14 |
 | `probability_theory.b5` | probability_theory | 5 | 19 | 7 | 15–17 |
@@ -180,17 +180,17 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 177 | 6 | 43 | 27 | 53 | 5 | 0 |
+| 2 | 177 | 6 | 43 | 27 | 52 | 5 | 0 |
 | 3 | 134 | 7 | 45 | 22 | 37 | 11 | 0 |
 | 4 | 105 | 10 | 69 | 9 | 23 | 13 | 0 |
-| 5 | 89 | 11 | 89 | 5 | 13 | 15 | 0 |
+| 5 | 89 | 11 | 89 | 5 | 13 | 16 | 0 |
 | 6 | 86 | 11 | 83 | 7 | 14 | 20 | 0 |
 | 8 | 66 | 16 | 88 | 4 | 8 | 24 | 0 |
 | 10 | 56 | 18 | 114 | 2 | 8 | 22 | 0 |
-| 12 | 58 | 20 | 90 | 2 | 5 | 23 | 0 |
+| 12 | 58 | 21 | 90 | 2 | 5 | 23 | 0 |
 | 15 | 46 | 23 | 133 | 0 | 5 | 22 | 0 |
 | 20 | 37 | 38 | 114 | 1 | 3 | 25 | 0 |
-| 45 | 23 | 55 | 139 | 0 | 0 | 23 | 0 |
+| 45 | 23 | 58 | 139 | 0 | 0 | 23 | 0 |
 
 **No width is clean.** Small widths fragment, at 3 there are 22 singleton units, which is a
 quiz per concept and is exactly what §12 rules out. Large widths stop fragmenting but produce
@@ -429,7 +429,7 @@ Unresolvable subdomains:
 `trigonometry.hyperbolic`
 `trigonometry.identities`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1382
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1389
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings
