@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Splitting into Cases",
+    "section": "Splitting into Cases",
+    "subgoals": [
+      "Explain splitting into cases.",
+      "Apply splitting into cases to a worked example."
+    ]
+  },
+  {
+    "label": "Choosing the Cases",
+    "section": "Choosing the Cases",
+    "subgoals": [
+      "Explain choosing the cases.",
+      "Apply choosing the cases to a worked example."
+    ]
+  },
+  {
+    "label": "Writing the Proof",
+    "section": "Writing the Proof",
+    "subgoals": [
+      "Explain writing the proof.",
+      "Apply writing the proof to a worked example."
+    ]
+  }
+]

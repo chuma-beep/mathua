@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Parity and Redundancy",
+    "section": "Parity and Redundancy",
+    "subgoals": [
+      "Explain parity and redundancy.",
+      "Apply parity and redundancy to a worked example."
+    ]
+  },
+  {
+    "label": "Choosing the Number of Parity Bits",
+    "section": "Choosing the Number of Parity Bits",
+    "subgoals": [
+      "Explain choosing the number of parity bits.",
+      "Apply choosing the number of parity bits to a worked example."
+    ]
+  },
+  {
+    "label": "Codewords and Correction",
+    "section": "Codewords and Correction",
+    "subgoals": [
+      "Explain codewords and correction.",
+      "Apply codewords and correction to a worked example."
+    ]
+  }
+]

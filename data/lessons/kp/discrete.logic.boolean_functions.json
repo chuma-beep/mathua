@@ -1,0 +1,26 @@
+[
+  {
+    "label": "From Truth Tables to Functions",
+    "section": "From Truth Tables to Functions",
+    "subgoals": [
+      "Explain from truth tables to functions.",
+      "Apply from truth tables to functions to a worked example."
+    ]
+  },
+  {
+    "label": "Minterms and Normal Forms",
+    "section": "Minterms and Normal Forms",
+    "subgoals": [
+      "Explain minterms and normal forms.",
+      "Apply minterms and normal forms to a worked example."
+    ]
+  },
+  {
+    "label": "Counting and Evaluating",
+    "section": "Counting and Evaluating",
+    "subgoals": [
+      "Explain counting and evaluating.",
+      "Apply counting and evaluating to a worked example."
+    ]
+  }
+]

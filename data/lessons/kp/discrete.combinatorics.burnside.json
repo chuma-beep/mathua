@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Symmetry and Orbits",
+    "section": "Symmetry and Orbits",
+    "subgoals": [
+      "Explain symmetry and orbits.",
+      "Apply symmetry and orbits to a worked example."
+    ]
+  },
+  {
+    "label": "Fixed Configurations",
+    "section": "Fixed Configurations",
+    "subgoals": [
+      "Explain fixed configurations.",
+      "Apply fixed configurations to a worked example."
+    ]
+  },
+  {
+    "label": "Counting the Orbits",
+    "section": "Counting the Orbits",
+    "subgoals": [
+      "Explain counting the orbits.",
+      "Apply counting the orbits to a worked example."
+    ]
+  }
+]

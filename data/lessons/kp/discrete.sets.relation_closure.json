@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Reflexive and Symmetric Closure",
+    "section": "Reflexive and Symmetric Closure",
+    "subgoals": [
+      "Explain reflexive and symmetric closure.",
+      "Apply reflexive and symmetric closure to a worked example."
+    ]
+  },
+  {
+    "label": "Transitive Closure",
+    "section": "Transitive Closure",
+    "subgoals": [
+      "Explain transitive closure.",
+      "Apply transitive closure to a worked example."
+    ]
+  },
+  {
+    "label": "Counting the Additions",
+    "section": "Counting the Additions",
+    "subgoals": [
+      "Explain counting the additions.",
+      "Apply counting the additions to a worked example."
+    ]
+  }
+]

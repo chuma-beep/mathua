@@ -9026,6 +9026,213 @@
     "subdomain": "discrete_math.recurrence"
   },
   {
+    "domain": "discrete_math",
+    "encompasses": [
+      "discrete.sequences.recurrence",
+      "discrete.sequences.growth_rates"
+    ],
+    "grading_type": "numeric",
+    "id": "discrete.recurrence.master_theorem",
+    "key_prerequisites": [
+      "discrete.sequences.recurrence",
+      "discrete.sequences.growth_rates"
+    ],
+    "label": "The master theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.sequences.recurrence",
+      "discrete.sequences.growth_rates"
+    ],
+    "subdomain": "discrete_math.recurrence"
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [
+      "discrete.logic.truth_tables",
+      "discrete.logic.connectives"
+    ],
+    "grading_type": "numeric",
+    "id": "discrete.logic.boolean_functions",
+    "key_prerequisites": [
+      "discrete.logic.truth_tables",
+      "discrete.logic.connectives"
+    ],
+    "label": "Boolean functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.logic.truth_tables",
+      "discrete.logic.connectives"
+    ],
+    "subdomain": "discrete_math.logic"
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [
+      "discrete.combinatorics.permutations",
+      "discrete.sets.relations"
+    ],
+    "grading_type": "numeric",
+    "id": "discrete.combinatorics.burnside",
+    "key_prerequisites": [
+      "discrete.combinatorics.permutations",
+      "discrete.sets.relations"
+    ],
+    "label": "Burnside's lemma",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.combinatorics.permutations",
+      "discrete.sets.relations"
+    ],
+    "subdomain": "discrete_math.combinatorics"
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [
+      "discrete.sequences.generating_functions",
+      "discrete.combinatorics.factorial"
+    ],
+    "grading_type": "numeric",
+    "id": "discrete.combinatorics.egf",
+    "key_prerequisites": [
+      "discrete.sequences.generating_functions",
+      "discrete.combinatorics.factorial"
+    ],
+    "label": "Exponential generating functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.sequences.generating_functions",
+      "discrete.combinatorics.factorial"
+    ],
+    "subdomain": "discrete_math.combinatorics"
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [
+      "discrete.logic.equivalence",
+      "discrete.logic.inference"
+    ],
+    "grading_type": "numeric",
+    "id": "discrete.logic.resolution",
+    "key_prerequisites": [
+      "discrete.logic.equivalence",
+      "discrete.logic.inference"
+    ],
+    "label": "Resolution",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.logic.equivalence",
+      "discrete.logic.inference"
+    ],
+    "subdomain": "discrete_math.logic"
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [
+      "discrete.sets.relations",
+      "discrete.sets.partial_order"
+    ],
+    "grading_type": "numeric",
+    "id": "discrete.sets.relation_closure",
+    "key_prerequisites": [
+      "discrete.sets.relations",
+      "discrete.sets.partial_order"
+    ],
+    "label": "Closures of relations",
+    "mastery_threshold": {
+      "avg_time_seconds": 27,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.sets.relations",
+      "discrete.sets.partial_order"
+    ],
+    "subdomain": "discrete_math.sets"
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [
+      "discrete.graphs.paths",
+      "discrete.logic.truth_tables"
+    ],
+    "grading_type": "numeric",
+    "id": "discrete.automata.fsm",
+    "key_prerequisites": [
+      "discrete.graphs.paths",
+      "discrete.logic.truth_tables"
+    ],
+    "label": "Finite state machines",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.graphs.paths",
+      "discrete.logic.truth_tables"
+    ],
+    "subdomain": "discrete_math.automata"
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [
+      "discrete.proof.contradiction",
+      "discrete.proof.counterexample"
+    ],
+    "grading_type": "numeric",
+    "id": "discrete.proof.cases",
+    "key_prerequisites": [
+      "discrete.proof.contradiction",
+      "discrete.proof.counterexample"
+    ],
+    "label": "Proof by cases",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.proof.contradiction",
+      "discrete.proof.counterexample"
+    ],
+    "subdomain": "discrete_math.proof"
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [
+      "discrete.sets.powerset",
+      "discrete.logic.boolean_functions"
+    ],
+    "grading_type": "numeric",
+    "id": "discrete.coding.hamming",
+    "key_prerequisites": [
+      "discrete.sets.powerset",
+      "discrete.logic.boolean_functions"
+    ],
+    "label": "Hamming codes",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.sets.powerset",
+      "discrete.logic.boolean_functions"
+    ],
+    "subdomain": "discrete_math.coding"
+  },
+  {
     "domain": "fractions",
     "grading_type": "numeric",
     "id": "frac.basics.concept",

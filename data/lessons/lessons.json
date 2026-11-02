@@ -5634,5 +5634,41 @@
   {
     "concept_id": "calc.vec.normal_line",
     "source": "teaching/calc.vec.normal_line.md"
+  },
+  {
+    "concept_id": "discrete.recurrence.master_theorem",
+    "source": "teaching/discrete.recurrence.master_theorem.md"
+  },
+  {
+    "concept_id": "discrete.logic.boolean_functions",
+    "source": "teaching/discrete.logic.boolean_functions.md"
+  },
+  {
+    "concept_id": "discrete.combinatorics.burnside",
+    "source": "teaching/discrete.combinatorics.burnside.md"
+  },
+  {
+    "concept_id": "discrete.combinatorics.egf",
+    "source": "teaching/discrete.combinatorics.egf.md"
+  },
+  {
+    "concept_id": "discrete.logic.resolution",
+    "source": "teaching/discrete.logic.resolution.md"
+  },
+  {
+    "concept_id": "discrete.sets.relation_closure",
+    "source": "teaching/discrete.sets.relation_closure.md"
+  },
+  {
+    "concept_id": "discrete.automata.fsm",
+    "source": "teaching/discrete.automata.fsm.md"
+  },
+  {
+    "concept_id": "discrete.proof.cases",
+    "source": "teaching/discrete.proof.cases.md"
+  },
+  {
+    "concept_id": "discrete.coding.hamming",
+    "source": "teaching/discrete.coding.hamming.md"
   }
 ]

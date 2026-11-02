@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Labelled Structures",
+    "section": "Labelled Structures",
+    "subgoals": [
+      "Explain labelled structures.",
+      "Apply labelled structures to a worked example."
+    ]
+  },
+  {
+    "label": "Standard Series",
+    "section": "Standard Series",
+    "subgoals": [
+      "Explain standard series.",
+      "Apply standard series to a worked example."
+    ]
+  },
+  {
+    "label": "Products and Selections",
+    "section": "Products and Selections",
+    "subgoals": [
+      "Explain products and selections.",
+      "Apply products and selections to a worked example."
+    ]
+  }
+]

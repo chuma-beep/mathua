@@ -18448,5 +18448,140 @@
       "calc.multi.tangent_plane",
       "calc.vec.vector_function"
     ]
+  },
+  {
+    "id": "discrete.recurrence.master_theorem",
+    "key_prerequisites": [
+      "discrete.sequences.recurrence",
+      "discrete.sequences.growth_rates"
+    ],
+    "encompasses": [
+      "discrete.sequences.recurrence",
+      "discrete.sequences.growth_rates"
+    ],
+    "prerequisites": [
+      "discrete.sequences.recurrence",
+      "discrete.sequences.growth_rates"
+    ]
+  },
+  {
+    "id": "discrete.logic.boolean_functions",
+    "key_prerequisites": [
+      "discrete.logic.truth_tables",
+      "discrete.logic.connectives"
+    ],
+    "encompasses": [
+      "discrete.logic.truth_tables",
+      "discrete.logic.connectives"
+    ],
+    "prerequisites": [
+      "discrete.logic.truth_tables",
+      "discrete.logic.connectives"
+    ]
+  },
+  {
+    "id": "discrete.combinatorics.burnside",
+    "key_prerequisites": [
+      "discrete.combinatorics.permutations",
+      "discrete.sets.relations"
+    ],
+    "encompasses": [
+      "discrete.combinatorics.permutations",
+      "discrete.sets.relations"
+    ],
+    "prerequisites": [
+      "discrete.combinatorics.permutations",
+      "discrete.sets.relations"
+    ]
+  },
+  {
+    "id": "discrete.combinatorics.egf",
+    "key_prerequisites": [
+      "discrete.sequences.generating_functions",
+      "discrete.combinatorics.factorial"
+    ],
+    "encompasses": [
+      "discrete.sequences.generating_functions",
+      "discrete.combinatorics.factorial"
+    ],
+    "prerequisites": [
+      "discrete.sequences.generating_functions",
+      "discrete.combinatorics.factorial"
+    ]
+  },
+  {
+    "id": "discrete.logic.resolution",
+    "key_prerequisites": [
+      "discrete.logic.equivalence",
+      "discrete.logic.inference"
+    ],
+    "encompasses": [
+      "discrete.logic.equivalence",
+      "discrete.logic.inference"
+    ],
+    "prerequisites": [
+      "discrete.logic.equivalence",
+      "discrete.logic.inference"
+    ]
+  },
+  {
+    "id": "discrete.sets.relation_closure",
+    "key_prerequisites": [
+      "discrete.sets.relations",
+      "discrete.sets.partial_order"
+    ],
+    "encompasses": [
+      "discrete.sets.relations",
+      "discrete.sets.partial_order"
+    ],
+    "prerequisites": [
+      "discrete.sets.relations",
+      "discrete.sets.partial_order"
+    ]
+  },
+  {
+    "id": "discrete.automata.fsm",
+    "key_prerequisites": [
+      "discrete.graphs.paths",
+      "discrete.logic.truth_tables"
+    ],
+    "encompasses": [
+      "discrete.graphs.paths",
+      "discrete.logic.truth_tables"
+    ],
+    "prerequisites": [
+      "discrete.graphs.paths",
+      "discrete.logic.truth_tables"
+    ]
+  },
+  {
+    "id": "discrete.proof.cases",
+    "key_prerequisites": [
+      "discrete.proof.contradiction",
+      "discrete.proof.counterexample"
+    ],
+    "encompasses": [
+      "discrete.proof.contradiction",
+      "discrete.proof.counterexample"
+    ],
+    "prerequisites": [
+      "discrete.proof.contradiction",
+      "discrete.proof.counterexample"
+    ]
+  },
+  {
+    "id": "discrete.coding.hamming",
+    "key_prerequisites": [
+      "discrete.sets.powerset",
+      "discrete.logic.boolean_functions"
+    ],
+    "encompasses": [
+      "discrete.sets.powerset",
+      "discrete.logic.boolean_functions"
+    ],
+    "prerequisites": [
+      "discrete.sets.powerset",
+      "discrete.logic.boolean_functions"
+    ]
   }
 ]

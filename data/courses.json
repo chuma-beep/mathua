@@ -767,7 +767,16 @@
       "discrete.sequences.growth_rates",
       "discrete.combinatorics.binomial_theorem",
       "discrete.combinatorics.pascal",
-      "discrete.sequences.generating_functions"
+      "discrete.sequences.generating_functions",
+      "discrete.recurrence.master_theorem",
+      "discrete.logic.boolean_functions",
+      "discrete.combinatorics.burnside",
+      "discrete.combinatorics.egf",
+      "discrete.logic.resolution",
+      "discrete.sets.relation_closure",
+      "discrete.automata.fsm",
+      "discrete.proof.cases",
+      "discrete.coding.hamming"
     ]
   },
   {
