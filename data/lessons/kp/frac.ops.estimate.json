@@ -5,7 +5,7 @@
     "subgoals": [
       "Explain benchmark values",
       "Work an example of benchmark values",
-      "Check the result"
+      "Compare the estimate with the exact fraction"
     ]
   },
   {
@@ -14,7 +14,7 @@
     "subgoals": [
       "Explain estimating a sum",
       "Work an example of estimating a sum",
-      "Check the result"
+      "Compare the estimate with the exact fraction"
     ]
   },
   {
@@ -23,7 +23,7 @@
     "subgoals": [
       "Explain using the estimate",
       "Work an example of using the estimate",
-      "Check the result"
+      "Compare the estimate with the exact fraction"
     ]
   }
 ]

@@ -3,7 +3,7 @@
     "label": "The Gaussian Integers",
     "section": "The Gaussian Integers",
     "subgoals": [
-      "Understand the gaussian integers",
+      "Add and multiply Gaussian integers",
       "Apply the gaussian integers to a concrete example"
     ]
   },
@@ -11,7 +11,7 @@
     "label": "Norm and Units",
     "section": "Norm and Units",
     "subgoals": [
-      "Understand norm and units",
+      "Compute a Gaussian norm and identify units",
       "Apply norm and units to a concrete example"
     ]
   },
@@ -19,7 +19,7 @@
     "label": "Arithmetic in the Plane",
     "section": "Arithmetic in the Plane",
     "subgoals": [
-      "Understand arithmetic in the plane",
+      "Interpret multiplication as a planar transformation",
       "Apply arithmetic in the plane to a concrete example"
     ]
   }

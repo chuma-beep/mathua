@@ -5,7 +5,7 @@
     "subgoals": [
       "Explain the addition relationship",
       "Apply the addition relationship to a worked example",
-      "Check the result"
+      "Substitute the missing addend and confirm the total"
     ]
   },
   {
@@ -14,7 +14,7 @@
     "subgoals": [
       "Explain larger numbers",
       "Apply larger numbers to a worked example",
-      "Check the result"
+      "Substitute the missing addend and confirm the total"
     ]
   },
   {
@@ -23,7 +23,7 @@
     "subgoals": [
       "Explain words that hide an addend",
       "Apply words that hide an addend to a worked example",
-      "Check the result"
+      "Substitute the missing addend and confirm the total"
     ]
   }
 ]

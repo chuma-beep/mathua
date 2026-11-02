@@ -5,7 +5,7 @@
     "subgoals": [
       "Explain rounding before dividing",
       "Apply rounding before dividing to a worked example",
-      "Check the result"
+      "Compare the estimate with the exact quotient"
     ]
   },
   {
@@ -14,7 +14,7 @@
     "subgoals": [
       "Explain choosing useful numbers",
       "Apply choosing useful numbers to a worked example",
-      "Check the result"
+      "Compare the estimate with the exact quotient"
     ]
   },
   {
@@ -23,7 +23,7 @@
     "subgoals": [
       "Explain using the estimate",
       "Apply using the estimate to a worked example",
-      "Check the result"
+      "Compare the estimate with the exact quotient"
     ]
   }
 ]

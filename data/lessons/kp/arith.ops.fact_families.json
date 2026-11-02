@@ -5,7 +5,7 @@
     "subgoals": [
       "Explain one set of numbers",
       "Apply one set of numbers to a worked example",
-      "Check the result"
+      "Write the matching division fact for the product"
     ]
   },
   {
@@ -14,7 +14,7 @@
     "subgoals": [
       "Explain using a family to divide",
       "Apply using a family to divide to a worked example",
-      "Check the result"
+      "Write the matching division fact for the product"
     ]
   },
   {
@@ -23,7 +23,7 @@
     "subgoals": [
       "Explain missing numbers",
       "Apply missing numbers to a worked example",
-      "Check the result"
+      "Write the matching division fact for the product"
     ]
   }
 ]

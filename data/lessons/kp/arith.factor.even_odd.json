@@ -5,7 +5,7 @@
     "subgoals": [
       "Explain the definition",
       "Apply the definition to a worked example",
-      "Check the result"
+      "Check parity after the operation on a small example"
     ]
   },
   {
@@ -14,7 +14,7 @@
     "subgoals": [
       "Explain parity of sums and differences",
       "Apply parity of sums and differences to a worked example",
-      "Check the result"
+      "Check parity after the operation on a small example"
     ]
   },
   {
@@ -23,7 +23,7 @@
     "subgoals": [
       "Explain parity of products",
       "Apply parity of products to a worked example",
-      "Check the result"
+      "Check parity after the operation on a small example"
     ]
   }
 ]

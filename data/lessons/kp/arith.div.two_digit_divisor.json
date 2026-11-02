@@ -5,7 +5,7 @@
     "subgoals": [
       "Explain estimating the quotient",
       "Apply estimating the quotient to a worked example",
-      "Check the result"
+      "Multiply the quotient by the divisor and add the remainder"
     ]
   },
   {
@@ -14,7 +14,7 @@
     "subgoals": [
       "Explain recording the steps",
       "Apply recording the steps to a worked example",
-      "Check the result"
+      "Multiply the quotient by the divisor and add the remainder"
     ]
   },
   {
@@ -23,7 +23,7 @@
     "subgoals": [
       "Explain checking with multiplication",
       "Apply checking with multiplication to a worked example",
-      "Check the result"
+      "Multiply the quotient by the divisor and add the remainder"
     ]
   }
 ]

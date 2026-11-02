@@ -5,7 +5,7 @@
     "subgoals": [
       "Explain rules for small divisors",
       "Apply rules for small divisors to a worked example",
-      "Check the result"
+      "Test the rule on a nearby multiple and non-multiple"
     ]
   },
   {
@@ -14,7 +14,7 @@
     "subgoals": [
       "Explain rules built from others",
       "Apply rules built from others to a worked example",
-      "Check the result"
+      "Test the rule on a nearby multiple and non-multiple"
     ]
   },
   {
@@ -23,7 +23,7 @@
     "subgoals": [
       "Explain using rules to find factors",
       "Apply using rules to find factors to a worked example",
-      "Check the result"
+      "Test the rule on a nearby multiple and non-multiple"
     ]
   }
 ]

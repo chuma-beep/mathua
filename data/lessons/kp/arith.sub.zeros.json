@@ -5,7 +5,7 @@
     "subgoals": [
       "Explain why zeros need care",
       "Apply why zeros need care to a worked example",
-      "Check the result"
+      "Add the difference to the subtrahend to recover the minuend"
     ]
   },
   {
@@ -14,7 +14,7 @@
     "subgoals": [
       "Explain working the chain",
       "Apply working the chain to a worked example",
-      "Check the result"
+      "Add the difference to the subtrahend to recover the minuend"
     ]
   },
   {
@@ -23,7 +23,7 @@
     "subgoals": [
       "Explain checking the difference",
       "Apply checking the difference to a worked example",
-      "Check the result"
+      "Add the difference to the subtrahend to recover the minuend"
     ]
   }
 ]

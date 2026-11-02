@@ -5,7 +5,7 @@
     "subgoals": [
       "Explain terminating and repeating",
       "Work an example of terminating and repeating",
-      "Check the result"
+      "Multiply the repeating decimal by its period and subtract"
     ]
   },
   {
@@ -14,7 +14,7 @@
     "subgoals": [
       "Explain the length of the block",
       "Work an example of the length of the block",
-      "Check the result"
+      "Multiply the repeating decimal by its period and subtract"
     ]
   },
   {
@@ -23,7 +23,7 @@
     "subgoals": [
       "Explain writing the decimal",
       "Work an example of writing the decimal",
-      "Check the result"
+      "Multiply the repeating decimal by its period and subtract"
     ]
   }
 ]

@@ -3,7 +3,7 @@
     "label": "The p-adic Valuation",
     "section": "The p-adic Valuation",
     "subgoals": [
-      "Understand the p-adic valuation",
+      "Compute a p-adic valuation",
       "Apply the p-adic valuation to a concrete example"
     ]
   },
@@ -11,7 +11,7 @@
     "label": "Valuations of Factorials",
     "section": "Valuations of Factorials",
     "subgoals": [
-      "Understand valuations of factorials",
+      "Apply Legendre's formula to a factorial",
       "Apply valuations of factorials to a concrete example"
     ]
   },
@@ -19,7 +19,7 @@
     "label": "Valuations in Products",
     "section": "Valuations in Products",
     "subgoals": [
-      "Understand valuations in products",
+      "Add valuations across a product",
       "Apply valuations in products to a concrete example"
     ]
   }

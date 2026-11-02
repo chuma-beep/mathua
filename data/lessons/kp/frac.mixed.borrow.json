@@ -5,7 +5,7 @@
     "subgoals": [
       "Explain when the fraction is too small",
       "Work an example of when the fraction is too small",
-      "Check the result"
+      "Convert back to a mixed number and compare the whole parts"
     ]
   },
   {
@@ -14,7 +14,7 @@
     "subgoals": [
       "Explain borrowing across a whole number",
       "Work an example of borrowing across a whole number",
-      "Check the result"
+      "Convert back to a mixed number and compare the whole parts"
     ]
   },
   {
@@ -23,7 +23,7 @@
     "subgoals": [
       "Explain borrowing from an integer",
       "Work an example of borrowing from an integer",
-      "Check the result"
+      "Convert back to a mixed number and compare the whole parts"
     ]
   }
 ]

@@ -5,7 +5,7 @@
     "subgoals": [
       "Explain what a multiple is",
       "Apply what a multiple is to a worked example",
-      "Check the result"
+      "Divide the candidate by the base and confirm no remainder"
     ]
   },
   {
@@ -14,7 +14,7 @@
     "subgoals": [
       "Explain finding multiples in a range",
       "Apply finding multiples in a range to a worked example",
-      "Check the result"
+      "Divide the candidate by the base and confirm no remainder"
     ]
   },
   {
@@ -23,7 +23,7 @@
     "subgoals": [
       "Explain common multiples",
       "Apply common multiples to a worked example",
-      "Check the result"
+      "Divide the candidate by the base and confirm no remainder"
     ]
   }
 ]

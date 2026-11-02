@@ -5,7 +5,7 @@
     "subgoals": [
       "Explain where the sign lives",
       "Work an example of where the sign lives",
-      "Check the result"
+      "Check the sign against the number of negative factors"
     ]
   },
   {
@@ -14,7 +14,7 @@
     "subgoals": [
       "Explain adding and subtracting",
       "Work an example of adding and subtracting",
-      "Check the result"
+      "Check the sign against the number of negative factors"
     ]
   },
   {
@@ -23,7 +23,7 @@
     "subgoals": [
       "Explain multiplying and dividing",
       "Work an example of multiplying and dividing",
-      "Check the result"
+      "Check the sign against the number of negative factors"
     ]
   }
 ]

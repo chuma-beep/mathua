@@ -3,7 +3,7 @@
     "label": "Prime Factorisation",
     "section": "Prime Factorisation",
     "subgoals": [
-      "Understand prime factorisation",
+      "Factor a number into primes",
       "Apply prime factorisation to a concrete example"
     ]
   },
@@ -11,7 +11,7 @@
     "label": "Uniqueness",
     "section": "Uniqueness",
     "subgoals": [
-      "Understand uniqueness",
+      "Argue uniqueness from the prime factorisation",
       "Apply uniqueness to a concrete example"
     ]
   },
@@ -19,7 +19,7 @@
     "label": "Counting Factors",
     "section": "Counting Factors",
     "subgoals": [
-      "Understand counting factors",
+      "Count divisors from the exponents",
       "Apply counting factors to a concrete example"
     ]
   }

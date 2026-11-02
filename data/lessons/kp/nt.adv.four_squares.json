@@ -3,7 +3,7 @@
     "label": "Lagrange's Theorem",
     "section": "Lagrange's Theorem",
     "subgoals": [
-      "Understand lagrange's theorem",
+      "Write a number as a sum of four squares",
       "Apply lagrange's theorem to a concrete example"
     ]
   },
@@ -11,7 +11,7 @@
     "label": "Two and Three Squares",
     "section": "Two and Three Squares",
     "subgoals": [
-      "Understand two and three squares",
+      "Test two- and three-square representations",
       "Apply two and three squares to a concrete example"
     ]
   },
@@ -19,7 +19,7 @@
     "label": "Counting Representations",
     "section": "Counting Representations",
     "subgoals": [
-      "Understand counting representations",
+      "Count representations with the r4 formula",
       "Apply counting representations to a concrete example"
     ]
   }

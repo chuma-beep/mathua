@@ -5,7 +5,7 @@
     "subgoals": [
       "Explain powers of ten",
       "Apply powers of ten to a worked example",
-      "Check the result"
+      "Expand the power of ten and compare place values"
     ]
   },
   {
@@ -14,7 +14,7 @@
     "subgoals": [
       "Explain moving the decimal point",
       "Apply moving the decimal point to a worked example",
-      "Check the result"
+      "Expand the power of ten and compare place values"
     ]
   },
   {
@@ -23,7 +23,7 @@
     "subgoals": [
       "Explain converting back",
       "Apply converting back to a worked example",
-      "Check the result"
+      "Expand the power of ten and compare place values"
     ]
   }
 ]

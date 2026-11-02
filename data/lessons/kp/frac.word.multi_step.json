@@ -5,7 +5,7 @@
     "subgoals": [
       "Explain reading the steps",
       "Work an example of reading the steps",
-      "Check the result"
+      "Substitute the result back into each step of the story"
     ]
   },
   {
@@ -14,7 +14,7 @@
     "subgoals": [
       "Explain working with the remainder",
       "Work an example of working with the remainder",
-      "Check the result"
+      "Substitute the result back into each step of the story"
     ]
   },
   {
@@ -23,7 +23,7 @@
     "subgoals": [
       "Explain checking the story",
       "Work an example of checking the story",
-      "Check the result"
+      "Substitute the result back into each step of the story"
     ]
   }
 ]

@@ -5,7 +5,7 @@
     "subgoals": [
       "Explain splitting both factors",
       "Apply splitting both factors to a worked example",
-      "Check the result"
+      "Recompute with the partial products in reverse order"
     ]
   },
   {
@@ -14,7 +14,7 @@
     "subgoals": [
       "Explain the standard algorithm",
       "Apply the standard algorithm to a worked example",
-      "Check the result"
+      "Recompute with the partial products in reverse order"
     ]
   },
   {
@@ -23,7 +23,7 @@
     "subgoals": [
       "Explain checking the result",
       "Apply checking the result to a worked example",
-      "Check the result"
+      "Recompute with the partial products in reverse order"
     ]
   }
 ]
