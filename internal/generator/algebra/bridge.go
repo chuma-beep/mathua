@@ -276,7 +276,7 @@ func (g *algBridgeGen) Generate(ctx generator.GeneratorContext) generator.Proble
 			for i := 0; i < m; i++ {
 				k *= x
 			}
-			return algProb(o, fmt.Sprintf("Solve x^(%d/%d) = %d for x. (enter a number)", m, n, k), strconv.Itoa(x), fmt.Sprintf("Raise both sides to the %d/%d power: x = %d.", n, m, x))
+			return algProb(o, fmt.Sprintf("Solve the equation x^(%d/%d) = %d for x. (enter a number)", m, n, k), strconv.Itoa(x), fmt.Sprintf("Raise both sides to the %d/%d power: x = %d.", n, m, x))
 		default:
 			n := 2 + rand.Intn(2)
 			k := 2 + rand.Intn(5)
