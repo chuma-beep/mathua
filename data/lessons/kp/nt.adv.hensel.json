@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Lifting a Root",
+    "section": "Lifting a Root",
+    "subgoals": [
+      "Understand lifting a root",
+      "Apply lifting a root to a concrete example"
+    ]
+  },
+  {
+    "label": "The Correction Step",
+    "section": "The Correction Step",
+    "subgoals": [
+      "Understand the correction step",
+      "Apply the correction step to a concrete example"
+    ]
+  },
+  {
+    "label": "When Lifting Fails",
+    "section": "When Lifting Fails",
+    "subgoals": [
+      "Understand when lifting fails",
+      "Apply when lifting fails to a concrete example"
+    ]
+  }
+]

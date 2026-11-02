@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Public and Private Values",
+    "section": "Public and Private Values",
+    "subgoals": [
+      "Understand public and private values",
+      "Apply public and private values to a concrete example"
+    ]
+  },
+  {
+    "label": "The Shared Secret",
+    "section": "The Shared Secret",
+    "subgoals": [
+      "Understand the shared secret",
+      "Apply the shared secret to a concrete example"
+    ]
+  },
+  {
+    "label": "Choosing Parameters",
+    "section": "Choosing Parameters",
+    "subgoals": [
+      "Understand choosing parameters",
+      "Apply choosing parameters to a concrete example"
+    ]
+  }
+]

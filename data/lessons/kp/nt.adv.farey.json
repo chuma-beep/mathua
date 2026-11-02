@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Farey Fractions",
+    "section": "Farey Fractions",
+    "subgoals": [
+      "Understand farey fractions",
+      "Apply farey fractions to a concrete example"
+    ]
+  },
+  {
+    "label": "The Length Formula",
+    "section": "The Length Formula",
+    "subgoals": [
+      "Understand the length formula",
+      "Apply the length formula to a concrete example"
+    ]
+  },
+  {
+    "label": "Mediants and Neighbours",
+    "section": "Mediants and Neighbours",
+    "subgoals": [
+      "Understand mediants and neighbours",
+      "Apply mediants and neighbours to a concrete example"
+    ]
+  }
+]

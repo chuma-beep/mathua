@@ -895,7 +895,16 @@
       "nt.adv.quadratic_reciprocity",
       "nt.adv.sieve",
       "nt.analytic.prime_number_theorem",
-      "nt.analytic.zeta"
+      "nt.analytic.zeta",
+      "nt.basics.fta",
+      "nt.adv.arithmetic_functions",
+      "nt.adv.gaussian_integers",
+      "nt.adv.four_squares",
+      "nt.adv.hensel",
+      "nt.adv.farey",
+      "nt.app.key_exchange",
+      "nt.adv.quadratic_forms",
+      "nt.adv.valuation"
     ]
   },
   {

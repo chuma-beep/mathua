@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1418,
+  "concept_count": 1427,
   "unit_count": 135,
   "units": [
     {
@@ -2299,6 +2299,7 @@
         "nt.adv.fermat_little",
         "nt.adv.pisano",
         "nt.adv.prime_gap",
+        "nt.adv.valuation",
         "nt.base.convert",
         "nt.basics.congruence",
         "nt.basics.gcd_euclidean",
@@ -2309,7 +2310,7 @@
         "nt.divisor.sum",
         "nt.prime.exponent"
       ],
-      "concept_count": 13
+      "concept_count": 14
     },
     {
       "id": "number_theory.b4",
@@ -2325,6 +2326,7 @@
         "number_theory.basics"
       ],
       "concept_ids": [
+        "nt.adv.arithmetic_functions",
         "nt.adv.carmichael_function",
         "nt.adv.euler_phi",
         "nt.adv.jacobi",
@@ -2337,11 +2339,12 @@
         "nt.app.crypto",
         "nt.basics.bezout",
         "nt.basics.crt",
+        "nt.basics.fta",
         "nt.basics.order_mod",
         "nt.pythagorean.hypotenuse",
         "nt.residue.count"
       ],
-      "concept_count": 15
+      "concept_count": 17
     },
     {
       "id": "number_theory.b5",
@@ -2352,7 +2355,8 @@
       "depth_max": 17,
       "subdomains": [
         "number_theory.advanced",
-        "number_theory.analytic"
+        "number_theory.analytic",
+        "number_theory.applications"
       ],
       "concept_ids": [
         "nt.adv.chebyshev",
@@ -2361,14 +2365,20 @@
         "nt.adv.dirichlet",
         "nt.adv.discrete_log",
         "nt.adv.elliptic_curve",
+        "nt.adv.farey",
+        "nt.adv.four_squares",
+        "nt.adv.gaussian_integers",
+        "nt.adv.hensel",
         "nt.adv.modular_sqrt",
         "nt.adv.pell",
         "nt.adv.primitive_root",
+        "nt.adv.quadratic_forms",
         "nt.adv.sieve",
         "nt.adv.two_squares",
-        "nt.analytic.zeta"
+        "nt.analytic.zeta",
+        "nt.app.key_exchange"
       ],
-      "concept_count": 12
+      "concept_count": 18
     },
     {
       "id": "number_theory.b6",

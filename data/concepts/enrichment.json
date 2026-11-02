@@ -18583,5 +18583,140 @@
       "discrete.sets.powerset",
       "discrete.logic.boolean_functions"
     ]
+  },
+  {
+    "id": "nt.basics.fta",
+    "key_prerequisites": [
+      "nt.basics.divisibility",
+      "nt.basics.gcd_euclidean"
+    ],
+    "encompasses": [
+      "nt.basics.divisibility",
+      "nt.basics.gcd_euclidean"
+    ],
+    "prerequisites": [
+      "nt.basics.divisibility",
+      "nt.basics.gcd_euclidean"
+    ]
+  },
+  {
+    "id": "nt.adv.arithmetic_functions",
+    "key_prerequisites": [
+      "nt.divisor.sum",
+      "nt.adv.mobius"
+    ],
+    "encompasses": [
+      "nt.divisor.sum",
+      "nt.adv.mobius"
+    ],
+    "prerequisites": [
+      "nt.divisor.sum",
+      "nt.adv.mobius"
+    ]
+  },
+  {
+    "id": "nt.adv.gaussian_integers",
+    "key_prerequisites": [
+      "nt.adv.two_squares",
+      "nt.basics.modular"
+    ],
+    "encompasses": [
+      "nt.adv.two_squares",
+      "nt.basics.modular"
+    ],
+    "prerequisites": [
+      "nt.adv.two_squares",
+      "nt.basics.modular"
+    ]
+  },
+  {
+    "id": "nt.adv.four_squares",
+    "key_prerequisites": [
+      "nt.adv.two_squares",
+      "nt.residue.count"
+    ],
+    "encompasses": [
+      "nt.adv.two_squares",
+      "nt.residue.count"
+    ],
+    "prerequisites": [
+      "nt.adv.two_squares",
+      "nt.residue.count"
+    ]
+  },
+  {
+    "id": "nt.adv.hensel",
+    "key_prerequisites": [
+      "nt.adv.modular_sqrt",
+      "nt.congruence.linear"
+    ],
+    "encompasses": [
+      "nt.adv.modular_sqrt",
+      "nt.congruence.linear"
+    ],
+    "prerequisites": [
+      "nt.adv.modular_sqrt",
+      "nt.congruence.linear"
+    ]
+  },
+  {
+    "id": "nt.adv.farey",
+    "key_prerequisites": [
+      "nt.adv.euler_phi",
+      "nt.adv.continued_fractions"
+    ],
+    "encompasses": [
+      "nt.adv.euler_phi",
+      "nt.adv.continued_fractions"
+    ],
+    "prerequisites": [
+      "nt.adv.euler_phi",
+      "nt.adv.continued_fractions"
+    ]
+  },
+  {
+    "id": "nt.app.key_exchange",
+    "key_prerequisites": [
+      "nt.adv.discrete_log",
+      "nt.app.crypto"
+    ],
+    "encompasses": [
+      "nt.adv.discrete_log",
+      "nt.app.crypto"
+    ],
+    "prerequisites": [
+      "nt.adv.discrete_log",
+      "nt.app.crypto"
+    ]
+  },
+  {
+    "id": "nt.adv.quadratic_forms",
+    "key_prerequisites": [
+      "nt.adv.legendre",
+      "nt.adv.two_squares"
+    ],
+    "encompasses": [
+      "nt.adv.legendre",
+      "nt.adv.two_squares"
+    ],
+    "prerequisites": [
+      "nt.adv.legendre",
+      "nt.adv.two_squares"
+    ]
+  },
+  {
+    "id": "nt.adv.valuation",
+    "key_prerequisites": [
+      "nt.prime.exponent",
+      "nt.basics.divisibility"
+    ],
+    "encompasses": [
+      "nt.prime.exponent",
+      "nt.basics.divisibility"
+    ],
+    "prerequisites": [
+      "nt.prime.exponent",
+      "nt.basics.divisibility"
+    ]
   }
 ]

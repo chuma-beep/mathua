@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Prime Factorisation",
+    "section": "Prime Factorisation",
+    "subgoals": [
+      "Understand prime factorisation",
+      "Apply prime factorisation to a concrete example"
+    ]
+  },
+  {
+    "label": "Uniqueness",
+    "section": "Uniqueness",
+    "subgoals": [
+      "Understand uniqueness",
+      "Apply uniqueness to a concrete example"
+    ]
+  },
+  {
+    "label": "Counting Factors",
+    "section": "Counting Factors",
+    "subgoals": [
+      "Understand counting factors",
+      "Apply counting factors to a concrete example"
+    ]
+  }
+]

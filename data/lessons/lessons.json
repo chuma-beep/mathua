@@ -5670,5 +5670,41 @@
   {
     "concept_id": "discrete.coding.hamming",
     "source": "teaching/discrete.coding.hamming.md"
+  },
+  {
+    "concept_id": "nt.basics.fta",
+    "source": "teaching/nt.basics.fta.md"
+  },
+  {
+    "concept_id": "nt.adv.arithmetic_functions",
+    "source": "teaching/nt.adv.arithmetic_functions.md"
+  },
+  {
+    "concept_id": "nt.adv.gaussian_integers",
+    "source": "teaching/nt.adv.gaussian_integers.md"
+  },
+  {
+    "concept_id": "nt.adv.four_squares",
+    "source": "teaching/nt.adv.four_squares.md"
+  },
+  {
+    "concept_id": "nt.adv.hensel",
+    "source": "teaching/nt.adv.hensel.md"
+  },
+  {
+    "concept_id": "nt.adv.farey",
+    "source": "teaching/nt.adv.farey.md"
+  },
+  {
+    "concept_id": "nt.app.key_exchange",
+    "source": "teaching/nt.app.key_exchange.md"
+  },
+  {
+    "concept_id": "nt.adv.quadratic_forms",
+    "source": "teaching/nt.adv.quadratic_forms.md"
+  },
+  {
+    "concept_id": "nt.adv.valuation",
+    "source": "teaching/nt.adv.valuation.md"
   }
 ]

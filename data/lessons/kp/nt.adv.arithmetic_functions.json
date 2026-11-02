@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Divisor Functions",
+    "section": "Divisor Functions",
+    "subgoals": [
+      "Understand divisor functions",
+      "Apply divisor functions to a concrete example"
+    ]
+  },
+  {
+    "label": "Dirichlet Convolution",
+    "section": "Dirichlet Convolution",
+    "subgoals": [
+      "Understand dirichlet convolution",
+      "Apply dirichlet convolution to a concrete example"
+    ]
+  },
+  {
+    "label": "Multiplicative Functions",
+    "section": "Multiplicative Functions",
+    "subgoals": [
+      "Understand multiplicative functions",
+      "Apply multiplicative functions to a concrete example"
+    ]
+  }
+]

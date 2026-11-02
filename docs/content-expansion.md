@@ -69,11 +69,11 @@ means a new thin concept cannot be added quietly.
 
 ## 4. Where the corpus is thin
 
-### 4.1 The course catalog reaches 1418 of the 1418 concepts
+### 4.1 The course catalog reaches 1427 of the 1427 concepts
 
 Courses carry target sets, and a target expands to its transitive prerequisite closure in
 `internal/planning/planner.go:64` (`collectChain`). Across the 28 courses those closures reach
-1418 of the 1418 concepts: 0 of them have a node, a generator, a lesson and three KP shards and
+1427 of the 1427 concepts: 0 of them have a node, a generator, a lesson and three KP shards and
 still sit outside every named course path. The wiring batch of 2026-10-19 moved the 149 that used
 to sit there into the courses that teach their subject, and the table stays as the measurement on
 the number, because a concept that no course targets is unreachable whatever the diagnostic
@@ -93,7 +93,7 @@ The count of unreachable concepts by domain:
 | fractions | 52 | 0 |
 | machine_learning | 45 | 0 |
 | complex_numbers | 42 | 0 |
-| number_theory | 42 | 0 |
+| number_theory | 51 | 0 |
 | differential_equations | 45 | 0 |
 | prealgebra | 71 | 0 |
 | trigonometry | 78 | 0 |
@@ -132,7 +132,7 @@ now read zero:
 | machine_learning | 45 | 0 |
 | complex_numbers | 42 | 0 |
 | numerical_analysis | 40 | 0 |
-| number_theory | 42 | 0 |
+| number_theory | 51 | 0 |
 
 Against that, the three calculus domains carry 72 `symbolic` and 15 `expression` concepts, and `algebra` carries 29 `symbolic` and 13 `expression`. The pool
 ratchet in `internal/generator/pools_test.go` exists for exactly this surface, and it runs at two
@@ -405,7 +405,7 @@ because the change this section prepares for is the one that would have tripped 
 
 ### 5.5 The concept target, and where it goes
 
-The catalog holds 1418 concepts. The remaining per-domain targets add up to 0, and this is the table
+The catalog holds 1427 concepts. The remaining per-domain targets add up to 0, and this is the table
 that says where: the thousand-concept milestone is complete, and graph theory has opened the 1,250
 tranche. `Now` is read from the corpus; `Target` is the decision. The rows keep the order step 6 of
 section 6 used, largest deficit first.
@@ -426,7 +426,7 @@ section 6 used, largest deficit first.
 | topology | university | 42 | 42 | +0 |
 | linear_algebra | university | 59 | 59 | +0 |
 | statistics | bridge | 72 | 72 | +0 |
-| number_theory | university | 42 | 42 | +0 |
+| number_theory | university | 51 | 51 | +0 |
 | differential_equations | university | 45 | 45 | +0 |
 | precalculus | bridge | 58 | 58 | +0 |
 | real_analysis | university | 55 | 55 | +0 |
