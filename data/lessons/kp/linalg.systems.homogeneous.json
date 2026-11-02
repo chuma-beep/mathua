@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Trivial and Nontrivial Solutions",
+    "section": "Trivial and Nontrivial Solutions",
+    "subgoals": [
+      "Identify the trivial solution of a homogeneous system",
+      "Use the determinant to test for nontrivial solutions",
+      "Relate linear dependence to nonzero solutions"
+    ]
+  },
+  {
+    "label": "Free Variables and the Null Space",
+    "section": "Free Variables and the Null Space",
+    "subgoals": [
+      "Define the null space of a matrix",
+      "Compute nullity as the number of columns minus rank",
+      "Describe a solution set using parameters"
+    ]
+  },
+  {
+    "label": "Solving with Row Reduction",
+    "section": "Solving with Row Reduction",
+    "subgoals": [
+      "Reduce a coefficient matrix to echelon form",
+      "Identify pivot and nonpivot columns",
+      "Write the general solution as a linear combination"
+    ]
+  }
+]

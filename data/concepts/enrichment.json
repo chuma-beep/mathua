@@ -17058,5 +17058,27 @@
       "alg.func.concept",
       "alg.linear.slope"
     ]
+  },
+  {
+    "id": "linalg.systems.homogeneous",
+    "key_prerequisites": [
+      "linalg.systems.row_reduction",
+      "linalg.rank.nullity"
+    ],
+    "encompasses": [
+      "linalg.systems.row_reduction",
+      "linalg.rank.nullity"
+    ]
+  },
+  {
+    "id": "linalg.apps.leontief",
+    "key_prerequisites": [
+      "linalg.systems.homogeneous",
+      "linalg.matrix.inverse_2x2"
+    ],
+    "encompasses": [
+      "linalg.systems.homogeneous",
+      "linalg.matrix.inverse_2x2"
+    ]
   }
 ]

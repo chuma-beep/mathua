@@ -600,7 +600,9 @@
       "linalg.matrix.fundamental_subspaces",
       "linalg.orth.gram_schmidt",
       "linalg.transform.matrix",
-      "linalg.eigen.eigenspace"
+      "linalg.eigen.eigenspace",
+      "linalg.systems.homogeneous",
+      "linalg.apps.leontief"
     ]
   },
   {

@@ -267,3 +267,99 @@ func plural(n int) string {
 	}
 	return "s"
 }
+
+type homogeneousSystemsGen struct{}
+
+func (g *homogeneousSystemsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	o := linalgBridgeOrdinal(ctx)
+	switch o {
+	case 1:
+		a := 1 + rand.Intn(5)
+		b := 1 + rand.Intn(5)
+		c := 1 + rand.Intn(5)
+		d := 1 + rand.Intn(5)
+		det := a*d - b*c
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("For A = [[%d, %d], [%d, %d]], the system A x = 0 has a nontrivial solution exactly when det A = 0. What is det A? (enter a number)", a, b, c, d),
+			strconv.Itoa(det),
+			fmt.Sprintf("det A = (%d)(%d) - (%d)(%d) = %d.", a, d, b, c, det),
+			map[string]string{"kind": "determinant", "answer": strconv.Itoa(det)},
+		)
+	case 2:
+		n := 2 + rand.Intn(4)
+		rank := 1 + rand.Intn(n)
+		nullity := n - rank
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("A homogeneous system has %d variables and coefficient matrix of rank %d. What is the dimension of its solution space? (enter a number)", n, rank),
+			strconv.Itoa(nullity),
+			fmt.Sprintf("The nullity is n - rank = %d - %d = %d.", n, rank, nullity),
+			map[string]string{"kind": "nullity", "answer": strconv.Itoa(nullity)},
+		)
+	default:
+		k := 1 + rand.Intn(5)
+		t := 2 + rand.Intn(4)
+		ans := -k * t
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("The homogeneous system x + %d y = 0 has free variable y. If y = %d, what is x? (enter a number)", k, t),
+			strconv.Itoa(ans),
+			fmt.Sprintf("Substitute y = %d: x + %d(%d) = 0, so x = %d.", t, k, t, ans),
+			map[string]string{"kind": "free_variable", "answer": strconv.Itoa(ans)},
+		)
+	}
+}
+
+type leontiefGen struct{}
+
+func linalgDecimal4(numer int) string {
+	s := fmt.Sprintf("%d.%04d", numer/10000, numer%10000)
+	for len(s) > 0 && s[len(s)-1] == '0' {
+		s = s[:len(s)-1]
+	}
+	if len(s) > 0 && s[len(s)-1] == '.' {
+		s = s[:len(s)-1]
+	}
+	return s
+}
+
+func (g *leontiefGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	o := linalgBridgeOrdinal(ctx)
+	switch o {
+	case 1:
+		a := 10 + rand.Intn(31)
+		b := 10 + rand.Intn(31)
+		ans := a + b
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("A two-sector technology matrix has first row [%d%%, %d%%]. What percentage of sector 1 output is consumed internally per unit of total production? (enter a number)", a, b),
+			strconv.Itoa(ans),
+			fmt.Sprintf("Add the first-row coefficients: %d + %d = %d percent.", a, b, ans),
+			map[string]string{"kind": "row_sum", "answer": strconv.Itoa(ans)},
+		)
+	case 2:
+		a := 10 + 10*rand.Intn(5)
+		d := 20 + 20*rand.Intn(5)
+		val := float64(100*d) / float64(100-a)
+		ans := strconv.FormatFloat(val, 'f', 2, 64)
+		if len(ans) > 3 && ans[len(ans)-3:] == ".00" {
+			ans = ans[:len(ans)-3]
+		}
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("A one-sector economy consumes %d%% of its own output and must meet final demand %d. What total output is required? (enter a number)", a, d),
+			ans,
+			fmt.Sprintf("Output is d/(1-a) = %d/(1-%d/100) = %s.", d, a, ans),
+			map[string]string{"kind": "one_sector_output", "answer": ans},
+		)
+	default:
+		a := 10 + rand.Intn(31)
+		b := 10 + rand.Intn(31)
+		c := 10 + rand.Intn(31)
+		d := 10 + rand.Intn(31)
+		numer := (100-a)*(100-d) - b*c
+		ans := linalgDecimal4(numer)
+		return linalgBridgeProblem(o,
+			fmt.Sprintf("A two-sector technology matrix is A = [[%d%%, %d%%], [%d%%, %d%%]]. What is det(I - A)? (enter a decimal)", a, b, c, d),
+			ans,
+			fmt.Sprintf("det(I - A) = (1 - %d/100)(1 - %d/100) - (%d/100)(%d/100) = %s.", a, d, b, c, ans),
+			map[string]string{"kind": "determinant_i_minus_a", "answer": ans},
+		)
+	}
+}

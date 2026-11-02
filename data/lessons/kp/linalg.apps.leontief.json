@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Consumption and Technology Matrices",
+    "section": "Consumption and Technology Matrices",
+    "subgoals": [
+      "Read a technology matrix by columns",
+      "Interpret row sums as internal consumption",
+      "Distinguish intermediate demand from final demand"
+    ]
+  },
+  {
+    "label": "Solving (I - A)x = d",
+    "section": "Solving (I - A)x = d",
+    "subgoals": [
+      "Derive the balance equation x = Ax + d",
+      "Form the matrix I - A",
+      "Solve for total production from final demand"
+    ]
+  },
+  {
+    "label": "Productive Economies and the Inverse",
+    "section": "Productive Economies and the Inverse",
+    "subgoals": [
+      "Compute the determinant of I - A",
+      "Interpret the total requirements matrix",
+      "Recognize when production stays nonnegative"
+    ]
+  }
+]

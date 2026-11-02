@@ -27,6 +27,8 @@ func Register(reg *generator.Registry) {
 	reg.Register("linalg.det.3x3", &det3x3Gen{})
 	reg.Register("linalg.systems.matrix", &systemsMatrixGen{})
 	reg.Register("linalg.systems.row_reduction", &rowReductionGen{})
+	reg.Register("linalg.systems.homogeneous", &homogeneousSystemsGen{})
+	reg.Register("linalg.apps.leontief", &leontiefGen{})
 	reg.Register("linalg.sys.cramer", &cramerGen{})
 	reg.Register("linalg.eigen.concept", &eigenConceptGen{})
 	reg.Register("linalg.eigen.compute", &eigenComputeGen{})

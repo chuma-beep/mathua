@@ -10912,6 +10912,36 @@
     "subdomain": "linear_algebra.eigenvalues"
   },
   {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.systems.homogeneous",
+    "label": "Homogeneous linear systems",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.systems.row_reduction",
+      "linalg.rank.nullity"
+    ],
+    "subdomain": "linear_algebra.systems"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.apps.leontief",
+    "label": "Leontief input-output models",
+    "mastery_threshold": {
+      "avg_time_seconds": 35,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.systems.homogeneous",
+      "linalg.matrix.inverse_2x2"
+    ],
+    "subdomain": "linear_algebra.systems"
+  },
+  {
     "domain": "machine_learning",
     "grading_type": "numeric",
     "id": "ml.perceptron",

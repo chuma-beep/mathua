@@ -733,5 +733,35 @@
       "streak": 10,
       "avg_time_seconds": 30.0
     }
+  },
+  {
+    "id": "linalg.systems.homogeneous",
+    "label": "Homogeneous linear systems",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.systems",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.systems.row_reduction",
+      "linalg.rank.nullity"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.apps.leontief",
+    "label": "Leontief input-output models",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.systems",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.systems.homogeneous",
+      "linalg.matrix.inverse_2x2"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 35.0
+    }
   }
 ]

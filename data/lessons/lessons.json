@@ -5098,5 +5098,13 @@
   {
     "concept_id": "precalc.func.average_rate",
     "source": "teaching/precalc.func.average_rate.md"
+  },
+  {
+    "concept_id": "linalg.systems.homogeneous",
+    "source": "teaching/linalg.systems.homogeneous.md"
+  },
+  {
+    "concept_id": "linalg.apps.leontief",
+    "source": "teaching/linalg.apps.leontief.md"
   }
 ]
