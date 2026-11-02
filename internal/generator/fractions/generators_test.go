@@ -181,3 +181,53 @@ func TestFracSubWordNamesTheWholeCake(t *testing.T) {
 		}
 	}
 }
+
+func TestEquivalentScaleAsksForTheNumerator(t *testing.T) {
+	gen := &equivalentScaleGen{}
+	denPattern := regexp.MustCompile(`denominator (\d+)`)
+	for i := 0; i < 200; i++ {
+		p := gen.Generate(generator.GeneratorContext{Difficulty: 0.5})
+		if strings.Contains(p.Answer, "/") {
+			t.Fatalf("answer should be a numerator, got %q", p.Answer)
+		}
+		m := denPattern.FindStringSubmatch(p.Question)
+		if m == nil {
+			t.Fatalf("question does not state the denominator: %q", p.Question)
+		}
+		if p.Facts["out_den"] != m[1] {
+			t.Fatalf("out_den %q does not match the requested denominator %q", p.Facts["out_den"], m[1])
+		}
+		if p.Facts["out_num"] != p.Answer || p.Facts["numerator"] != p.Answer {
+			t.Fatalf("answer %q disagrees with facts %+v", p.Answer, p.Facts)
+		}
+	}
+}
+
+func TestCompareWordQuestionIsNotRunOn(t *testing.T) {
+	gen := &fracCompareWordGen{}
+	for i := 0; i < 100; i++ {
+		p := gen.Generate(generator.GeneratorContext{Difficulty: 0.5})
+		if !strings.Contains(p.Question, "\n(a) ") || !strings.Contains(p.Question, "\n(h) ") {
+			t.Fatalf("question items should each start on a new line: %q", p.Question)
+		}
+		if strings.Contains(p.Question, ".:") || strings.Contains(p.Explanation, ".:") {
+			t.Fatalf("double punctuation remains: question %q explanation %q", p.Question, p.Explanation)
+		}
+	}
+}
+
+func TestMixedMultiplicationShowsReducedPartsAndFormat(t *testing.T) {
+	gen := &fracMixedMultGen{}
+	for i := 0; i < 200; i++ {
+		p := gen.Generate(generator.GeneratorContext{Difficulty: 0.5})
+		den, _ := strconv.Atoi(p.Facts["den"])
+		n1, _ := strconv.Atoi(p.Facts["n1"])
+		n2, _ := strconv.Atoi(p.Facts["n2"])
+		if gcdInt(n1, den) != 1 || gcdInt(n2, den) != 1 {
+			t.Fatalf("fractional parts are not reduced: %s of %s in %q", p.Facts["n1"], p.Facts["den"], p.Question)
+		}
+		if !strings.Contains(p.Question, "enter an improper fraction such as") {
+			t.Fatalf("question does not state the answer format: %q", p.Question)
+		}
+	}
+}

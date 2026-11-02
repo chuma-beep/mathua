@@ -179,10 +179,10 @@ func (g *equivalentScaleGen) Generate(ctx generator.GeneratorContext) generator.
 	n := a * k
 	return generator.Problem{
 		Question: fmt.Sprintf("Write \\(\\frac{%d}{%d}\\) as a fraction with denominator %d. What is its numerator?", a, b, d),
-		Answer:   fmt.Sprintf("%d/%d", n, 1),
+		Answer:   strconv.Itoa(n),
 		Explanation: fmt.Sprintf("The denominator was multiplied by %d, so the numerator must be multiplied by the same number to keep the value: %d * %d = %d. Multiplying top and bottom by the same factor is what makes an equivalent fraction.",
 			k, a, k, n),
 		Facts: map[string]string{"numerator": strconv.Itoa(n), "out_num": strconv.Itoa(n),
-			"out_den": "1", "factor": strconv.Itoa(k)},
+			"out_den": strconv.Itoa(d), "factor": strconv.Itoa(k)},
 	}
 }

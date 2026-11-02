@@ -25,8 +25,8 @@ and the artifact it describes are one fact (AGENTS.md section 7).
 | Courses | `data/courses.json` | named target sets |
 | Destinations | `data/destinations.json` | named bundles of courses |
 
-Two numbers are useful to hold together. There are 1250 concepts, and there are 1250 KP shard files
-holding 3750 knowledge points, three per concept.
+Two numbers are useful to hold together. There are 1500 concepts, and there are 1500 KP shard files
+holding 4500 knowledge points, three per concept.
 
 ## 2. The pipeline
 
@@ -50,15 +50,15 @@ leaves the learner a placeholder instead of a worked example, and the audit refu
 
 ## 3. What complete means today
 
-All four content guards pass on the current corpus:
+Three content guards pass on the current corpus. The documentation guard still reports eight pre-existing inconsistencies:
 
 ```
-OK: 687 concepts across 17 domains                    scripts/validate_graph.go
-OK: 687 concepts mapped, 687 entries, 586 sources,
-    687 kp files, 2061 KPs, kp shards resolved,
+OK: 1500 concepts across 23 domains                   scripts/validate_graph.go
+OK: 1500 concepts mapped, 1500 entries, 1399 sources,
+    1500 kp files, 4500 KPs, kp shards resolved,
     0 issues                                          scripts/audit_lessons.py
-counts ok: 687 concepts, 687 KP files, 23 courses     scripts/counts.py --check
-OK: docs agree with the code and the corpus           scripts/check_docs.py
+counts ok: 1500 concepts, 1500 KP files, 28 courses   scripts/counts.py --check
+FAIL: 8 documentation inconsistency/inconsistencies   scripts/check_docs.py
 ```
 
 `scripts/audit_baseline.json` is empty on every key it holds, including `stub_lessons`,
@@ -351,8 +351,8 @@ the boundary that number has to be drawn against. Section 6's first step is that
 also the gate on a new domain (section 5.4), because a domain with no course target is unreachable.
 
 **The wiring batch of 2026-10-19 chose the targets.** The 149 concepts that section 4.1 measured as
-unreachable were added, subject by subject, to the courses that teach them, so the catalog now
-reaches all 1250 and the table in section 4.1 reads zero on every row. That is the curriculum work
+unreachable were added, subject by subject, to the courses that teach them, so the catalog then
+reached all 1250 and the table in section 4.1 reads zero on every row. That is the curriculum work
 the paragraph above says the fix has to be, done deliberately rather than by a closure rule, and it
 does not make the courses domain covers: `calc1` reaches all 84 concepts in its own domain and
 shares the rest of the calculus corpus with `calc2` and `calc3`, and trigonometry still has no
@@ -393,12 +393,11 @@ is the size of its concept file: the 30 above, or whatever the new domain's is.
 **Which of the three counts a domain moves is not the same question as which concepts move.**
 `domains` and `courses` are read from the data, `len(by_domain)` over the concepts' own `domain`
 field and `len(data/courses.json)`, so a domain added *inside* an existing domain's namespace leaves
-the domain count at 17 and only the concept count moves. A genuinely new domain takes it to 18, and a
-course for `complex_numbers` (section 5.1) takes the course count to 23 without touching the domain
-count, because that domain exists already.
+the domain count unchanged and only the concept count moves. A genuinely new domain increments the
+domain count, while a course for an existing domain leaves it alone.
 
-**Nothing checked that a domain was labeled until now.** `DOMAIN_LABELS` holds 17 entries and the
-data holds 17 domains, but the two were kept in step by hand, and the failure was silent: the
+**Nothing checked that a domain was labeled until now.** `DOMAIN_LABELS` holds 23 entries and the
+data holds 23 domains, but the two were kept in step by hand, and the failure was silent: the
 README's domain table iterates the label list, so an unlabeled domain is absent from the table while
 `counts.py` still counts it. `counts.py --check` fails on that mismatch now, in both directions,
 because the change this section prepares for is the one that would have tripped it.
@@ -406,8 +405,7 @@ because the change this section prepares for is the one that would have tripped 
 ### 5.5 The concept target, and where it goes
 
 The catalog holds 1500 concepts. The remaining per-domain targets add up to 0, and this is the table
-that says where: the thousand-concept milestone is complete, and graph theory has opened the 1,250
-tranche. `Now` is read from the corpus; `Target` is the decision. The rows keep the order step 6 of
+that says where: the 1,500-concept milestone is complete. `Now` is read from the corpus; `Target` is the decision. The rows keep the order step 6 of
 section 6 used, largest deficit first.
 
 | Domain | Tier | Now | Target | Add |
@@ -672,8 +670,8 @@ them. All 50 precalculus concepts are reachable, so the corpus reaches 794 of 10
 outside the named course paths, the enrichment section 4.1 measures, not a gap in a target. Every
 domain on the table was at its target at that milestone.
 
-**The thousand-concept milestone is complete, and the next tranche is 1,250.** The target table is
-no longer the whole story: the corpus now exceeds a thousand, and the next phase adds four domains, 
+**The thousand-concept milestone was complete, and the next tranche became 1,250.** The target table is
+no longer the whole story: the corpus by then exceeded a thousand, and the next phase added four domains,
 real analysis, graph theory, numerical analysis and probability theory and raises the targets of
 calculus, trigonometry and algebra by 70. Graph theory went first and is complete: its 40 concepts
 arrived in two batches. The first covered isomorphism, complements and subgraphs, homomorphisms and
@@ -736,7 +734,7 @@ cosine, the polar abscissa and the scalar projection. Trigonometry is a school d
 computed concepts carry authored solution schemas and the eleven fixed-question concepts are named
 in the exemption list, which the gate checks in both directions. There is no trigonometry course;
 the domain is reached through the algebra and precalculus courses, so fifteen concepts join `a2`
-and five join `pc`, and the corpus reaches 1101 of 1250, leaving 149 outside the named course
+and five join `pc`, and the corpus then reached 1101 of its 1250 target, leaving 149 outside the named course
 paths. Every concept has an authored lesson, three knowledge-point sections and a lesson
 registration. Counts, the mastery partition and the web graph are regenerated; the target table is
 re-sorted and this paragraph records the change.

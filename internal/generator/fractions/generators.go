@@ -466,7 +466,13 @@ func (g *fracMixedMultGen) Generate(ctx generator.GeneratorContext) generator.Pr
 	w2 := rand.Intn(max(2, scale*2)) + 1
 	den := rand.Intn(max(3, scale*2)) + 2
 	n1 := rand.Intn(den-1) + 1
+	for gcdInt(n1, den) != 1 {
+		n1 = rand.Intn(den-1) + 1
+	}
 	n2 := rand.Intn(den-1) + 1
+	for gcdInt(n2, den) != 1 {
+		n2 = rand.Intn(den-1) + 1
+	}
 	aImp := w1*den + n1
 	bImp := w2*den + n2
 	num := aImp * bImp
@@ -474,7 +480,7 @@ func (g *fracMixedMultGen) Generate(ctx generator.GeneratorContext) generator.Pr
 	rn, rd := reduce(num, denSq)
 	w, r, d := toMixed(rn, rd)
 	return generator.Problem{
-		Question:    fmt.Sprintf("\\(%d \\frac{%d}{%d} \\times %d \\frac{%d}{%d} = ?\\)", w1, n1, den, w2, n2, den),
+		Question:    fmt.Sprintf("\\(%d \\frac{%d}{%d} \\times %d \\frac{%d}{%d} = ?\\) (enter an improper fraction such as 17/7)", w1, n1, den, w2, n2, den),
 		Answer:      fmt.Sprintf("%d/%d", rn, rd),
 		Explanation: fmt.Sprintf("(%d/%d) x (%d/%d) = %d/%d = %s", aImp, den, bImp, den, rn, rd, mixStr(w, r, d)),
 		Facts:       map[string]string{"w1": strconv.Itoa(w1), "n1": strconv.Itoa(n1), "w2": strconv.Itoa(w2), "n2": strconv.Itoa(n2), "den": strconv.Itoa(den), "a_improper": strconv.Itoa(aImp), "b_improper": strconv.Itoa(bImp), "raw_num": strconv.Itoa(num), "raw_den": strconv.Itoa(denSq), "out_num": strconv.Itoa(rn), "out_den": strconv.Itoa(rd)},

@@ -218,3 +218,61 @@ func TestSqrtSimplifyReadsTheRadicalMathliveWrites(t *testing.T) {
 		}
 	}
 }
+
+func TestAddDoubleSumsAreCorrect(t *testing.T) {
+	for _, ensureCarry := range []bool{false, true} {
+		gen := &addGen{minA: 10, maxA: 99, minB: 10, maxB: 99, ensureCarry: ensureCarry}
+		pattern := regexp.MustCompile(`\\\((\d+) \+ (\d+) = \?\\\)`)
+		for i := 0; i < 500; i++ {
+			p := gen.Generate(generator.GeneratorContext{Difficulty: 0.5})
+			m := pattern.FindStringSubmatch(p.Question)
+			if m == nil {
+				t.Fatalf("question does not match the addition form: %q", p.Question)
+			}
+			a, _ := strconv.Atoi(m[1])
+			b, _ := strconv.Atoi(m[2])
+			if want := strconv.Itoa(a + b); p.Answer != want {
+				t.Fatalf("%d + %d answered %q, want %q", a, b, p.Answer, want)
+			}
+			if p.Facts["sum"] != p.Answer || p.Facts["a"] != m[1] || p.Facts["b"] != m[2] {
+				t.Fatalf("facts disagree with the printed sum: %+v for %q", p.Facts, p.Question)
+			}
+		}
+	}
+}
+
+func testIsPrime(n int) bool {
+	if n < 2 {
+		return false
+	}
+	for d := 2; d*d <= n; d++ {
+		if n%d == 0 {
+			return false
+		}
+	}
+	return true
+}
+
+func TestCompositeProblemCountsComposites(t *testing.T) {
+	pattern := regexp.MustCompile(`\((\w)\) (\d+)`)
+	for i := 0; i < 200; i++ {
+		p := compositeProblem()
+		matches := pattern.FindAllStringSubmatch(p.Question, -1)
+		if len(matches) != 8 {
+			t.Fatalf("expected eight candidates, got %d in %q", len(matches), p.Question)
+		}
+		composites := 0
+		for _, m := range matches {
+			n, _ := strconv.Atoi(m[2])
+			if !testIsPrime(n) {
+				composites++
+			}
+		}
+		if want := strconv.Itoa(composites); p.Answer != want {
+			t.Fatalf("question %q answered %q, but %d listed numbers are composite", p.Question, p.Answer, composites)
+		}
+		if p.Facts["count"] != p.Answer {
+			t.Fatalf("count fact %q disagrees with answer %q", p.Facts["count"], p.Answer)
+		}
+	}
+}
