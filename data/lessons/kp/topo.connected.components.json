@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Components as Equivalence Classes",
+    "section": "Components as Equivalence Classes",
+    "subgoals": [
+      "Explain components as equivalence classes.",
+      "Use connected components in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  },
+  {
+    "label": "Counting Components",
+    "section": "Counting Components",
+    "subgoals": [
+      "Explain counting components.",
+      "Use connected components in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  },
+  {
+    "label": "Components and Continuity",
+    "section": "Components and Continuity",
+    "subgoals": [
+      "Explain components and continuity.",
+      "Use connected components in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  }
+]

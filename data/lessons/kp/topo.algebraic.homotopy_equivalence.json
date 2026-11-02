@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Homotopy and Deformation",
+    "section": "Homotopy and Deformation",
+    "subgoals": [
+      "Explain homotopy and deformation.",
+      "Use homotopy equivalence in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  },
+  {
+    "label": "The Homotopy Category",
+    "section": "The Homotopy Category",
+    "subgoals": [
+      "Explain the homotopy category.",
+      "Use homotopy equivalence in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  },
+  {
+    "label": "Invariants That Survive",
+    "section": "Invariants That Survive",
+    "subgoals": [
+      "Explain invariants that survive.",
+      "Use homotopy equivalence in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  }
+]

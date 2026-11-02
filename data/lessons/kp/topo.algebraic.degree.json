@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Winding and Degree",
+    "section": "Winding and Degree",
+    "subgoals": [
+      "Explain winding and degree.",
+      "Use degree of a map in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  },
+  {
+    "label": "Properties of Degree",
+    "section": "Properties of Degree",
+    "subgoals": [
+      "Explain properties of degree.",
+      "Use degree of a map in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  },
+  {
+    "label": "Computing Examples",
+    "section": "Computing Examples",
+    "subgoals": [
+      "Explain computing examples.",
+      "Use degree of a map in a concrete example.",
+      "Check the conclusion against the definitions."
+    ]
+  }
+]

@@ -69,11 +69,11 @@ means a new thin concept cannot be added quietly.
 
 ## 4. Where the corpus is thin
 
-### 4.1 The course catalog reaches 1457 of the 1457 concepts
+### 4.1 The course catalog reaches 1467 of the 1467 concepts
 
 Courses carry target sets, and a target expands to its transitive prerequisite closure in
 `internal/planning/planner.go:64` (`collectChain`). Across the 28 courses those closures reach
-1457 of the 1457 concepts: 0 of them have a node, a generator, a lesson and three KP shards and
+1467 of the 1467 concepts: 0 of them have a node, a generator, a lesson and three KP shards and
 still sit outside every named course path. The wiring batch of 2026-10-19 moved the 149 that used
 to sit there into the courses that teach their subject, and the table stays as the measurement on
 the number, because a concept that no course targets is unreachable whatever the diagnostic
@@ -87,7 +87,7 @@ The count of unreachable concepts by domain:
 | calc2 | 71 | 0 |
 | calc3 | 71 | 0 |
 | algebra | 139 | 0 |
-| topology | 42 | 0 |
+| topology | 52 | 0 |
 | statistics | 72 | 0 |
 | precalculus | 58 | 0 |
 | fractions | 52 | 0 |
@@ -123,7 +123,7 @@ now read zero:
 
 | Domain | Concepts | `multiple_choice` |
 |---|---|---|
-| topology | 42 | 0 |
+| topology | 52 | 0 |
 | real_analysis | 65 | 0 |
 | abstract_algebra | 55 | 0 |
 | trigonometry | 78 | 0 |
@@ -405,7 +405,7 @@ because the change this section prepares for is the one that would have tripped 
 
 ### 5.5 The concept target, and where it goes
 
-The catalog holds 1457 concepts. The remaining per-domain targets add up to 0, and this is the table
+The catalog holds 1467 concepts. The remaining per-domain targets add up to 0, and this is the table
 that says where: the thousand-concept milestone is complete, and graph theory has opened the 1,250
 tranche. `Now` is read from the corpus; `Target` is the decision. The rows keep the order step 6 of
 section 6 used, largest deficit first.
@@ -423,7 +423,7 @@ section 6 used, largest deficit first.
 | prealgebra | school | 71 | 71 | +0 |
 | abstract_algebra | university | 55 | 55 | +0 |
 | machine_learning | university | 45 | 45 | +0 |
-| topology | university | 42 | 42 | +0 |
+| topology | university | 52 | 52 | +0 |
 | linear_algebra | university | 59 | 59 | +0 |
 | statistics | bridge | 72 | 72 | +0 |
 | number_theory | university | 51 | 51 | +0 |

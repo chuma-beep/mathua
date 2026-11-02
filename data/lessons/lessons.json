@@ -5826,5 +5826,45 @@
   {
     "concept_id": "ra.deriv.weierstrass_approx",
     "source": "teaching/ra.deriv.weierstrass_approx.md"
+  },
+  {
+    "concept_id": "topo.basics.spaces",
+    "source": "teaching/topo.basics.spaces.md"
+  },
+  {
+    "concept_id": "topo.connected.components",
+    "source": "teaching/topo.connected.components.md"
+  },
+  {
+    "concept_id": "topo.separation.normal",
+    "source": "teaching/topo.separation.normal.md"
+  },
+  {
+    "concept_id": "topo.algebraic.homotopy_equivalence",
+    "source": "teaching/topo.algebraic.homotopy_equivalence.md"
+  },
+  {
+    "concept_id": "topo.covering.universal",
+    "source": "teaching/topo.covering.universal.md"
+  },
+  {
+    "concept_id": "topo.manifolds.boundary",
+    "source": "teaching/topo.manifolds.boundary.md"
+  },
+  {
+    "concept_id": "topo.invariant.surface_classification",
+    "source": "teaching/topo.invariant.surface_classification.md"
+  },
+  {
+    "concept_id": "topo.compact.tychonoff",
+    "source": "teaching/topo.compact.tychonoff.md"
+  },
+  {
+    "concept_id": "topo.algebraic.degree",
+    "source": "teaching/topo.algebraic.degree.md"
+  },
+  {
+    "concept_id": "topo.algebraic.mayer_vietoris",
+    "source": "teaching/topo.algebraic.mayer_vietoris.md"
   }
 ]

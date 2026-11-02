@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1457,
+  "concept_count": 1467,
   "unit_count": 136,
   "units": [
     {
@@ -3403,6 +3403,7 @@
         "topo.basics.continuous",
         "topo.basics.metric",
         "topo.basics.open_closed",
+        "topo.basics.spaces",
         "topo.connected",
         "topo.metric.ball",
         "topo.metric.complete",
@@ -3411,7 +3412,7 @@
         "topo.metric.limit_point",
         "topo.product"
       ],
-      "concept_count": 10
+      "concept_count": 11
     },
     {
       "id": "topology.b11",
@@ -3435,6 +3436,8 @@
         "topo.compact",
         "topo.compact.local",
         "topo.compact.one_point",
+        "topo.compact.tychonoff",
+        "topo.connected.components",
         "topo.connected.local_path",
         "topo.connected.path",
         "topo.covering",
@@ -3449,10 +3452,11 @@
         "topo.metric.subspace",
         "topo.metrization",
         "topo.quotient",
+        "topo.separation.normal",
         "topo.separation.tietze",
         "topo.urysohn"
       ],
-      "concept_count": 19
+      "concept_count": 22
     },
     {
       "id": "topology.b12",
@@ -3464,6 +3468,7 @@
       "subdomains": [
         "topology.algebraic",
         "topology.compact",
+        "topology.covering",
         "topology.dimension",
         "topology.invariants",
         "topology.knot",
@@ -3471,9 +3476,13 @@
         "topology.separation"
       ],
       "concept_ids": [
+        "topo.algebraic.degree",
+        "topo.algebraic.homotopy_equivalence",
+        "topo.algebraic.mayer_vietoris",
         "topo.cohomology",
         "topo.cohomology.de_rham",
         "topo.compactification.stone_cech",
+        "topo.covering.universal",
         "topo.dimension",
         "topo.embedding",
         "topo.fiber_bundle",
@@ -3481,11 +3490,13 @@
         "topo.homology.cellular",
         "topo.invariant.betti",
         "topo.invariant.genus",
+        "topo.invariant.surface_classification",
         "topo.knot",
         "topo.manifold.orientability",
+        "topo.manifolds.boundary",
         "topo.separation.completely_regular"
       ],
-      "concept_count": 13
+      "concept_count": 19
     },
     {
       "id": "trigonometry.b2",

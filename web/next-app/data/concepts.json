@@ -20118,6 +20118,156 @@
     "subdomain": "topology.invariants"
   },
   {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.basics.spaces",
+    "label": "Topological spaces",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.basics.metric",
+      "topo.basics.open_closed"
+    ],
+    "subdomain": "topology.basics"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.connected.components",
+    "label": "Connected components",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.connected",
+      "topo.metric.subspace"
+    ],
+    "subdomain": "topology.connected"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.separation.normal",
+    "label": "Normal spaces",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.hausdorff",
+      "topo.urysohn"
+    ],
+    "subdomain": "topology.separation"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.algebraic.homotopy_equivalence",
+    "label": "Homotopy equivalence",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.homotopy",
+      "topo.homotopy.fundamental"
+    ],
+    "subdomain": "topology.algebraic"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.covering.universal",
+    "label": "Universal covering spaces",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.covering",
+      "topo.homotopy.fundamental"
+    ],
+    "subdomain": "topology.covering"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.manifolds.boundary",
+    "label": "Manifolds with boundary",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.manifold",
+      "topo.metric.subspace"
+    ],
+    "subdomain": "topology.manifolds"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.invariant.surface_classification",
+    "label": "Classification of surfaces",
+    "mastery_threshold": {
+      "avg_time_seconds": 34,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.invariant.genus",
+      "topo.manifold.orientability"
+    ],
+    "subdomain": "topology.invariants"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.compact.tychonoff",
+    "label": "Tychonoff's theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.product",
+      "topo.compact"
+    ],
+    "subdomain": "topology.compact"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.algebraic.degree",
+    "label": "Degree of a map",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.homotopy.fundamental",
+      "topo.covering"
+    ],
+    "subdomain": "topology.algebraic"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.algebraic.mayer_vietoris",
+    "label": "The Mayer-Vietoris sequence",
+    "mastery_threshold": {
+      "avg_time_seconds": 34,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.homology.cellular",
+      "topo.cohomology"
+    ],
+    "subdomain": "topology.algebraic"
+  },
+  {
     "domain": "trigonometry",
     "grading_type": "numeric",
     "id": "trig.basics.radians",

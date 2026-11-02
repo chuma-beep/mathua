@@ -19171,5 +19171,155 @@
       "ra.deriv.uniform_conv",
       "ra.limit.evt"
     ]
+  },
+  {
+    "id": "topo.basics.spaces",
+    "key_prerequisites": [
+      "topo.basics.metric",
+      "topo.basics.open_closed"
+    ],
+    "encompasses": [
+      "topo.basics.metric",
+      "topo.basics.open_closed"
+    ],
+    "prerequisites": [
+      "topo.basics.metric",
+      "topo.basics.open_closed"
+    ]
+  },
+  {
+    "id": "topo.connected.components",
+    "key_prerequisites": [
+      "topo.connected",
+      "topo.metric.subspace"
+    ],
+    "encompasses": [
+      "topo.connected",
+      "topo.metric.subspace"
+    ],
+    "prerequisites": [
+      "topo.connected",
+      "topo.metric.subspace"
+    ]
+  },
+  {
+    "id": "topo.separation.normal",
+    "key_prerequisites": [
+      "topo.hausdorff",
+      "topo.urysohn"
+    ],
+    "encompasses": [
+      "topo.hausdorff",
+      "topo.urysohn"
+    ],
+    "prerequisites": [
+      "topo.hausdorff",
+      "topo.urysohn"
+    ]
+  },
+  {
+    "id": "topo.algebraic.homotopy_equivalence",
+    "key_prerequisites": [
+      "topo.homotopy",
+      "topo.homotopy.fundamental"
+    ],
+    "encompasses": [
+      "topo.homotopy",
+      "topo.homotopy.fundamental"
+    ],
+    "prerequisites": [
+      "topo.homotopy",
+      "topo.homotopy.fundamental"
+    ]
+  },
+  {
+    "id": "topo.covering.universal",
+    "key_prerequisites": [
+      "topo.covering",
+      "topo.homotopy.fundamental"
+    ],
+    "encompasses": [
+      "topo.covering",
+      "topo.homotopy.fundamental"
+    ],
+    "prerequisites": [
+      "topo.covering",
+      "topo.homotopy.fundamental"
+    ]
+  },
+  {
+    "id": "topo.manifolds.boundary",
+    "key_prerequisites": [
+      "topo.manifold",
+      "topo.metric.subspace"
+    ],
+    "encompasses": [
+      "topo.manifold",
+      "topo.metric.subspace"
+    ],
+    "prerequisites": [
+      "topo.manifold",
+      "topo.metric.subspace"
+    ]
+  },
+  {
+    "id": "topo.invariant.surface_classification",
+    "key_prerequisites": [
+      "topo.invariant.genus",
+      "topo.manifold.orientability"
+    ],
+    "encompasses": [
+      "topo.invariant.genus",
+      "topo.manifold.orientability"
+    ],
+    "prerequisites": [
+      "topo.invariant.genus",
+      "topo.manifold.orientability"
+    ]
+  },
+  {
+    "id": "topo.compact.tychonoff",
+    "key_prerequisites": [
+      "topo.product",
+      "topo.compact"
+    ],
+    "encompasses": [
+      "topo.product",
+      "topo.compact"
+    ],
+    "prerequisites": [
+      "topo.product",
+      "topo.compact"
+    ]
+  },
+  {
+    "id": "topo.algebraic.degree",
+    "key_prerequisites": [
+      "topo.homotopy.fundamental",
+      "topo.covering"
+    ],
+    "encompasses": [
+      "topo.homotopy.fundamental",
+      "topo.covering"
+    ],
+    "prerequisites": [
+      "topo.homotopy.fundamental",
+      "topo.covering"
+    ]
+  },
+  {
+    "id": "topo.algebraic.mayer_vietoris",
+    "key_prerequisites": [
+      "topo.homology.cellular",
+      "topo.cohomology"
+    ],
+    "encompasses": [
+      "topo.homology.cellular",
+      "topo.cohomology"
+    ],
+    "prerequisites": [
+      "topo.homology.cellular",
+      "topo.cohomology"
+    ]
   }
 ]
