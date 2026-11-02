@@ -12,19 +12,19 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 1250 |
-| Total units | 131 |
+| Total concepts | 1275 |
+| Total units | 133 |
 | Minimum unit size | 1 |
 | Median unit size | 7 |
 | Maximum unit size | 42 |
-| Singleton units | 26 |
-| Units with <= 3 concepts | 38 |
-| Units with > 25 concepts | 9 |
+| Singleton units | 25 |
+| Units with <= 3 concepts | 39 |
+| Units with > 25 concepts | 10 |
 | Units with > 50 concepts | 0 |
-| Cross-unit prerequisite edges (derived) | 414 |
+| Cross-unit prerequisite edges (derived) | 429 |
 | Backward band edges | 0 |
 
-If the learner is assessed once per unit, then 131 assessments cover the corpus, and the
+If the learner is assessed once per unit, then 133 assessments cover the corpus, and the
 median is one assessment per 7 concepts. That is the frequency question this report
 exists to make concrete.
 
@@ -52,24 +52,25 @@ exists to make concrete.
 | `calc1.b9` | calc1 | 9 | 18 | 3 | 27–29 |
 | `calc1.b10` | calc1 | 10 | 26 | 3 | 30–32 |
 | `calc1.b11` | calc1 | 11 | 21 | 4 | 33–35 |
-| `calc1.b12` | calc1 | 12 | 10 | 2 | 36–37 |
+| `calc1.b12` | calc1 | 12 | 11 | 3 | 36–37 |
 | `calc2.b9` | calc2 | 9 | 3 | 2 | 29–29 |
-| `calc2.b10` | calc2 | 10 | 23 | 1 | 30–32 |
-| `calc2.b11` | calc2 | 11 | 14 | 1 | 33–35 |
-| `calc2.b12` | calc2 | 12 | 23 | 3 | 36–37 |
+| `calc2.b10` | calc2 | 10 | 25 | 1 | 30–32 |
+| `calc2.b11` | calc2 | 11 | 4 | 1 | 33–35 |
+| `calc2.b12` | calc2 | 12 | 33 | 3 | 36–38 |
 | `calc3.b9` | calc3 | 9 | 5 | 1 | 28–29 |
-| `calc3.b10` | calc3 | 10 | 8 | 3 | 31–32 |
-| `calc3.b11` | calc3 | 11 | 20 | 5 | 33–35 |
-| `calc3.b12` | calc3 | 12 | 28 | 5 | 36–38 |
+| `calc3.b10` | calc3 | 10 | 9 | 3 | 31–32 |
+| `calc3.b11` | calc3 | 11 | 16 | 3 | 33–35 |
+| `calc3.b12` | calc3 | 12 | 32 | 5 | 36–38 |
+| `calc3.b13` | calc3 | 13 | 2 | 1 | 39–39 |
 | `complex_numbers.b3` | complex_numbers | 3 | 4 | 2 | 10–11 |
 | `complex_numbers.b6` | complex_numbers | 6 | 1 | 1 | 20–20 |
 | `complex_numbers.b7` | complex_numbers | 7 | 10 | 2 | 21–23 |
 | `complex_numbers.b8` | complex_numbers | 8 | 10 | 2 | 24–26 |
 | `complex_numbers.b10` | complex_numbers | 10 | 2 | 2 | 32–32 |
-| `complex_numbers.b11` | complex_numbers | 11 | 11 | 2 | 33–35 |
-| `complex_numbers.b12` | complex_numbers | 12 | 4 | 2 | 36–38 |
-| `differential_equations.b11` | differential_equations | 11 | 3 | 2 | 33–35 |
-| `differential_equations.b12` | differential_equations | 12 | 14 | 4 | 36–38 |
+| `complex_numbers.b11` | complex_numbers | 11 | 10 | 2 | 33–35 |
+| `complex_numbers.b12` | complex_numbers | 12 | 5 | 2 | 36–38 |
+| `differential_equations.b11` | differential_equations | 11 | 5 | 2 | 33–35 |
+| `differential_equations.b12` | differential_equations | 12 | 15 | 4 | 36–38 |
 | `differential_equations.b13` | differential_equations | 13 | 17 | 4 | 39–41 |
 | `differential_equations.b14` | differential_equations | 14 | 8 | 5 | 42–44 |
 | `discrete_math.b1` | discrete_math | 1 | 1 | 1 | 5–5 |
@@ -102,10 +103,10 @@ exists to make concrete.
 | `linear_algebra.b1` | linear_algebra | 1 | 5 | 2 | 3–5 |
 | `linear_algebra.b2` | linear_algebra | 2 | 1 | 1 | 8–8 |
 | `linear_algebra.b3` | linear_algebra | 3 | 11 | 5 | 9–11 |
-| `linear_algebra.b4` | linear_algebra | 4 | 10 | 4 | 12–14 |
+| `linear_algebra.b4` | linear_algebra | 4 | 9 | 3 | 12–14 |
 | `linear_algebra.b7` | linear_algebra | 7 | 6 | 2 | 21–23 |
-| `linear_algebra.b8` | linear_algebra | 8 | 5 | 1 | 24–26 |
-| `linear_algebra.b9` | linear_algebra | 9 | 6 | 2 | 27–28 |
+| `linear_algebra.b8` | linear_algebra | 8 | 9 | 3 | 24–26 |
+| `linear_algebra.b9` | linear_algebra | 9 | 8 | 3 | 27–28 |
 | `machine_learning.b3` | machine_learning | 3 | 5 | 2 | 9–11 |
 | `machine_learning.b4` | machine_learning | 4 | 1 | 1 | 14–14 |
 | `machine_learning.b7` | machine_learning | 7 | 5 | 3 | 21–23 |
@@ -124,8 +125,9 @@ exists to make concrete.
 | `numerical_analysis.b7` | numerical_analysis | 7 | 9 | 2 | 21–23 |
 | `numerical_analysis.b8` | numerical_analysis | 8 | 6 | 1 | 24–26 |
 | `numerical_analysis.b10` | numerical_analysis | 10 | 4 | 1 | 30–32 |
-| `numerical_analysis.b11` | numerical_analysis | 11 | 6 | 2 | 33–35 |
-| `numerical_analysis.b12` | numerical_analysis | 12 | 8 | 1 | 36–38 |
+| `numerical_analysis.b11` | numerical_analysis | 11 | 5 | 1 | 33–34 |
+| `numerical_analysis.b12` | numerical_analysis | 12 | 6 | 1 | 36–38 |
+| `numerical_analysis.b13` | numerical_analysis | 13 | 3 | 1 | 39–39 |
 | `prealgebra.b0` | prealgebra | 0 | 1 | 1 | 1–1 |
 | `prealgebra.b2` | prealgebra | 2 | 1 | 1 | 8–8 |
 | `prealgebra.b3` | prealgebra | 3 | 17 | 6 | 9–11 |
@@ -135,24 +137,24 @@ exists to make concrete.
 | `precalculus.b3` | precalculus | 3 | 1 | 1 | 10–10 |
 | `precalculus.b4` | precalculus | 4 | 6 | 2 | 12–14 |
 | `precalculus.b6` | precalculus | 6 | 1 | 1 | 20–20 |
-| `precalculus.b7` | precalculus | 7 | 10 | 5 | 21–23 |
+| `precalculus.b7` | precalculus | 7 | 11 | 5 | 21–23 |
 | `precalculus.b8` | precalculus | 8 | 28 | 8 | 24–26 |
 | `precalculus.b9` | precalculus | 9 | 4 | 2 | 27–27 |
 | `probability_theory.b3` | probability_theory | 3 | 2 | 2 | 11–11 |
-| `probability_theory.b4` | probability_theory | 4 | 31 | 7 | 12–14 |
-| `probability_theory.b5` | probability_theory | 5 | 15 | 4 | 15–17 |
+| `probability_theory.b4` | probability_theory | 4 | 32 | 7 | 12–14 |
+| `probability_theory.b5` | probability_theory | 5 | 17 | 6 | 15–17 |
 | `probability_theory.b6` | probability_theory | 6 | 2 | 2 | 18–18 |
 | `real_analysis.b9` | real_analysis | 9 | 7 | 3 | 27–29 |
 | `real_analysis.b10` | real_analysis | 10 | 28 | 5 | 30–32 |
-| `real_analysis.b11` | real_analysis | 11 | 16 | 4 | 33–35 |
-| `real_analysis.b12` | real_analysis | 12 | 4 | 1 | 36–37 |
-| `statistics.b0` | statistics | 0 | 2 | 1 | 1–2 |
+| `real_analysis.b11` | real_analysis | 11 | 15 | 4 | 33–35 |
+| `real_analysis.b12` | real_analysis | 12 | 5 | 1 | 36–37 |
+| `statistics.b0` | statistics | 0 | 3 | 2 | 1–2 |
 | `statistics.b1` | statistics | 1 | 1 | 1 | 3–3 |
 | `statistics.b2` | statistics | 2 | 1 | 1 | 8–8 |
-| `statistics.b3` | statistics | 3 | 22 | 5 | 9–11 |
-| `statistics.b4` | statistics | 4 | 18 | 4 | 12–14 |
-| `statistics.b5` | statistics | 5 | 9 | 1 | 15–17 |
-| `statistics.b6` | statistics | 6 | 1 | 1 | 18–18 |
+| `statistics.b3` | statistics | 3 | 24 | 6 | 9–11 |
+| `statistics.b4` | statistics | 4 | 20 | 6 | 12–14 |
+| `statistics.b5` | statistics | 5 | 10 | 1 | 15–17 |
+| `statistics.b6` | statistics | 6 | 2 | 2 | 18–20 |
 | `statistics.b8` | statistics | 8 | 1 | 1 | 24–24 |
 | `topology.b10` | topology | 10 | 10 | 3 | 30–32 |
 | `topology.b11` | topology | 11 | 19 | 9 | 33–35 |
@@ -177,19 +179,19 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 173 | 5 | 39 | 27 | 55 | 2 | 0 |
-| 3 | 131 | 7 | 42 | 26 | 38 | 9 | 0 |
-| 4 | 104 | 10 | 63 | 10 | 25 | 12 | 0 |
-| 5 | 89 | 10 | 81 | 7 | 17 | 13 | 0 |
-| 6 | 86 | 11 | 77 | 8 | 18 | 18 | 0 |
-| 8 | 66 | 15 | 82 | 4 | 9 | 21 | 0 |
-| 10 | 56 | 17 | 100 | 3 | 9 | 18 | 0 |
-| 12 | 58 | 16 | 83 | 2 | 6 | 22 | 0 |
-| 15 | 46 | 21 | 119 | 1 | 5 | 21 | 0 |
-| 20 | 37 | 37 | 100 | 2 | 4 | 23 | 0 |
-| 45 | 23 | 50 | 124 | 0 | 0 | 23 | 0 |
+| 2 | 175 | 5 | 39 | 29 | 55 | 3 | 0 |
+| 3 | 133 | 7 | 42 | 25 | 39 | 10 | 0 |
+| 4 | 105 | 9 | 63 | 11 | 24 | 12 | 0 |
+| 5 | 89 | 10 | 81 | 6 | 15 | 13 | 0 |
+| 6 | 86 | 11 | 77 | 7 | 16 | 18 | 0 |
+| 8 | 66 | 15 | 82 | 4 | 8 | 22 | 0 |
+| 10 | 56 | 18 | 100 | 2 | 9 | 19 | 0 |
+| 12 | 58 | 17 | 83 | 2 | 5 | 23 | 0 |
+| 15 | 46 | 22 | 119 | 1 | 5 | 21 | 0 |
+| 20 | 37 | 37 | 100 | 1 | 4 | 24 | 0 |
+| 45 | 23 | 51 | 124 | 0 | 0 | 23 | 0 |
 
-**No width is clean.** Small widths fragment, at 3 there are 26 singleton units, which is a
+**No width is clean.** Small widths fragment, at 3 there are 25 singleton units, which is a
 quiz per concept and is exactly what §12 rules out. Large widths stop fragmenting but produce
 units too large to assess: at 45 the partition is just the 17 domains themselves, whose
 largest is 128 concepts. The usable widths trade fragmentation against size rather than
@@ -348,12 +350,12 @@ Unresolvable subdomains:
 `trigonometry.hyperbolic` 
 `trigonometry.identities` 
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1250
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1275
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings
 
-- **anomaly** `singleton_units`: 26 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
+- **anomaly** `singleton_units`: 25 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
 
 ## Not decided here
 

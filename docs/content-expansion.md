@@ -69,11 +69,11 @@ means a new thin concept cannot be added quietly.
 
 ## 4. Where the corpus is thin
 
-### 4.1 The course catalog reaches 1250 of the 1250 concepts
+### 4.1 The course catalog reaches 1275 of the 1275 concepts
 
 Courses carry target sets, and a target expands to its transitive prerequisite closure in
 `internal/planning/planner.go:64` (`collectChain`). Across the 28 courses those closures reach
-1250 of the 1250 concepts: 0 of them have a node, a generator, a lesson and three KP shards and
+1275 of the 1275 concepts: 0 of them have a node, a generator, a lesson and three KP shards and
 still sit outside every named course path. The wiring batch of 2026-10-19 moved the 149 that used
 to sit there into the courses that teach their subject, and the table stays as the measurement on
 the number, because a concept that no course targets is unreachable whatever the diagnostic
@@ -83,27 +83,27 @@ The count of unreachable concepts by domain:
 
 | Domain | Concepts | Unreachable |
 |---|---|---|
-| calc1 | 76 | 0 |
-| calc2 | 63 | 0 |
-| calc3 | 61 | 0 |
+| calc1 | 77 | 0 |
+| calc2 | 65 | 0 |
+| calc3 | 64 | 0 |
 | algebra | 124 | 0 |
 | topology | 42 | 0 |
-| statistics | 55 | 0 |
-| precalculus | 50 | 0 |
+| statistics | 62 | 0 |
+| precalculus | 51 | 0 |
 | fractions | 45 | 0 |
 | machine_learning | 45 | 0 |
 | complex_numbers | 42 | 0 |
 | number_theory | 42 | 0 |
-| differential_equations | 42 | 0 |
+| differential_equations | 45 | 0 |
 | prealgebra | 60 | 0 |
 | trigonometry | 68 | 0 |
 | arithmetic | 60 | 0 |
-| linear_algebra | 45 | 0 |
+| linear_algebra | 50 | 0 |
 | abstract_algebra | 45 | 0 |
 | discrete_math | 55 | 0 |
 | geometry | 45 | 0 |
 | graph_theory | 40 | 0 |
-| probability_theory | 50 | 0 |
+| probability_theory | 53 | 0 |
 | numerical_analysis | 40 | 0 |
 | real_analysis | 55 | 0 |
 
@@ -127,7 +127,7 @@ now read zero:
 | real_analysis | 55 | 0 |
 | abstract_algebra | 45 | 0 |
 | trigonometry | 68 | 0 |
-| probability_theory | 50 | 0 |
+| probability_theory | 53 | 0 |
 | discrete_math | 55 | 0 |
 | machine_learning | 45 | 0 |
 | complex_numbers | 42 | 0 |
@@ -405,7 +405,7 @@ because the change this section prepares for is the one that would have tripped 
 
 ### 5.5 The concept target, and where it goes
 
-The catalog holds 1250 concepts. The remaining per-domain targets add up to 0, and this is the table
+The catalog holds 1275 concepts. The remaining per-domain targets add up to 0, and this is the table
 that says where: the thousand-concept milestone is complete, and graph theory has opened the 1,250
 tranche. `Now` is read from the corpus; `Target` is the decision. The rows keep the order step 6 of
 section 6 used, largest deficit first.
@@ -413,7 +413,7 @@ section 6 used, largest deficit first.
 | Domain | Tier | Now | Target | Add |
 |---|---|---:|---:|---:|
 | numerical_analysis | university | 40 | 40 | +0 |
-| probability_theory | university | 50 | 50 | +0 |
+| probability_theory | university | 53 | 53 | +0 |
 | graph_theory | university | 40 | 40 | +0 |
 | arithmetic | school | 60 | 60 | +0 |
 | geometry | school | 45 | 45 | +0 |
@@ -424,15 +424,15 @@ section 6 used, largest deficit first.
 | abstract_algebra | university | 45 | 45 | +0 |
 | machine_learning | university | 45 | 45 | +0 |
 | topology | university | 42 | 42 | +0 |
-| linear_algebra | university | 45 | 45 | +0 |
-| statistics | bridge | 55 | 55 | +0 |
+| linear_algebra | university | 50 | 50 | +0 |
+| statistics | bridge | 62 | 62 | +0 |
 | number_theory | university | 42 | 42 | +0 |
-| differential_equations | university | 42 | 42 | +0 |
-| precalculus | bridge | 50 | 50 | +0 |
+| differential_equations | university | 45 | 45 | +0 |
+| precalculus | bridge | 51 | 51 | +0 |
 | real_analysis | university | 55 | 55 | +0 |
-| calc1 | bridge | 76 | 76 | +0 |
-| calc2 | bridge | 63 | 63 | +0 |
-| calc3 | bridge | 61 | 61 | +0 |
+| calc1 | bridge | 77 | 77 | +0 |
+| calc2 | bridge | 65 | 65 | +0 |
+| calc3 | bridge | 64 | 64 | +0 |
 | algebra | school | 124 | 124 | +0 |
 | trigonometry | school | 68 | 68 | +0 |
 
