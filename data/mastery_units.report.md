@@ -12,16 +12,16 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 1402 |
+| Total concepts | 1409 |
 | Total units | 134 |
 | Minimum unit size | 1 |
 | Median unit size | 7 |
 | Maximum unit size | 45 |
 | Singleton units | 22 |
-| Units with <= 3 concepts | 37 |
+| Units with <= 3 concepts | 36 |
 | Units with > 25 concepts | 12 |
 | Units with > 50 concepts | 0 |
-| Cross-unit prerequisite edges (derived) | 445 |
+| Cross-unit prerequisite edges (derived) | 447 |
 | Backward band edges | 0 |
 
 If the learner is assessed once per unit, then 134 assessments cover the corpus, and the
@@ -59,9 +59,9 @@ exists to make concrete.
 | `calc2.b12` | calc2 | 12 | 37 | 3 | 36–38 |
 | `calc3.b9` | calc3 | 9 | 5 | 1 | 28–29 |
 | `calc3.b10` | calc3 | 10 | 9 | 3 | 31–32 |
-| `calc3.b11` | calc3 | 11 | 16 | 3 | 33–35 |
-| `calc3.b12` | calc3 | 12 | 32 | 5 | 36–38 |
-| `calc3.b13` | calc3 | 13 | 2 | 1 | 39–39 |
+| `calc3.b11` | calc3 | 11 | 18 | 3 | 33–35 |
+| `calc3.b12` | calc3 | 12 | 35 | 5 | 36–38 |
+| `calc3.b13` | calc3 | 13 | 4 | 2 | 39–40 |
 | `complex_numbers.b3` | complex_numbers | 3 | 4 | 2 | 10–11 |
 | `complex_numbers.b6` | complex_numbers | 6 | 1 | 1 | 20–20 |
 | `complex_numbers.b7` | complex_numbers | 7 | 10 | 2 | 21–23 |
@@ -180,16 +180,16 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 177 | 6 | 43 | 27 | 52 | 5 | 0 |
-| 3 | 134 | 7 | 45 | 22 | 37 | 12 | 0 |
-| 4 | 105 | 11 | 69 | 9 | 23 | 13 | 0 |
-| 5 | 89 | 11 | 89 | 5 | 13 | 16 | 0 |
-| 6 | 86 | 11 | 83 | 7 | 14 | 20 | 0 |
-| 8 | 66 | 16 | 88 | 4 | 8 | 24 | 0 |
-| 10 | 56 | 18 | 114 | 2 | 8 | 22 | 0 |
+| 2 | 178 | 6 | 43 | 28 | 53 | 5 | 0 |
+| 3 | 134 | 7 | 45 | 22 | 36 | 12 | 0 |
+| 4 | 106 | 11 | 69 | 10 | 24 | 14 | 0 |
+| 5 | 90 | 11 | 89 | 6 | 14 | 16 | 0 |
+| 6 | 86 | 11 | 83 | 7 | 14 | 21 | 0 |
+| 8 | 67 | 15 | 88 | 5 | 9 | 24 | 0 |
+| 10 | 57 | 18 | 114 | 3 | 9 | 22 | 0 |
 | 12 | 58 | 21 | 90 | 2 | 5 | 23 | 0 |
 | 15 | 46 | 23 | 133 | 0 | 5 | 22 | 0 |
-| 20 | 37 | 38 | 114 | 1 | 3 | 25 | 0 |
+| 20 | 38 | 38 | 114 | 2 | 4 | 25 | 0 |
 | 45 | 23 | 58 | 139 | 0 | 0 | 23 | 0 |
 
 **No width is clean.** Small widths fragment, at 3 there are 22 singleton units, which is a
@@ -429,7 +429,7 @@ Unresolvable subdomains:
 `trigonometry.hyperbolic`
 `trigonometry.identities`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1402
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1409
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings

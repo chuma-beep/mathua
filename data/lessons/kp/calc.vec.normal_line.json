@@ -1,0 +1,26 @@
+[
+  {
+    "label": "The Direction of the Normal",
+    "section": "The Direction of the Normal",
+    "subgoals": [
+      "Explain the direction of the normal",
+      "Apply the direction of the normal in a worked problem"
+    ]
+  },
+  {
+    "label": "Parametric Equations",
+    "section": "Parametric Equations",
+    "subgoals": [
+      "Explain parametric equations",
+      "Apply parametric equations in a worked problem"
+    ]
+  },
+  {
+    "label": "Points Along the Line",
+    "section": "Points Along the Line",
+    "subgoals": [
+      "Explain points along the line",
+      "Apply points along the line in a worked problem"
+    ]
+  }
+]

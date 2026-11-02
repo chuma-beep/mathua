@@ -916,5 +916,110 @@
       "streak": 10,
       "avg_time_seconds": 25
     }
+  },
+  {
+    "id": "calc.multi.quadric_surfaces",
+    "label": "Quadric surfaces",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.functions_several",
+      "calc.multi.level_curves"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28
+    },
+    "domain": "calc3"
+  },
+  {
+    "id": "calc.multi.triple_integral_region",
+    "label": "Triple integrals over general regions",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.triple_integral_box",
+      "calc.multi.double_integral_region"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30
+    },
+    "domain": "calc3"
+  },
+  {
+    "id": "calc.vec.vector_field",
+    "label": "Vector fields",
+    "subdomain": "calculus.vector",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.vec.vector_function",
+      "calc.deriv.partial"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    },
+    "domain": "calc3"
+  },
+  {
+    "id": "calc.vec.surface_tangent",
+    "label": "Tangent planes to parameterized surfaces",
+    "subdomain": "calculus.vector",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.tangent_plane",
+      "calc.vec.parametric_surface"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30
+    },
+    "domain": "calc3"
+  },
+  {
+    "id": "calc.multi.continuity",
+    "label": "Continuity of functions of several variables",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.functions_several",
+      "calc.limit.continuity"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    },
+    "domain": "calc3"
+  },
+  {
+    "id": "calc.multi.moments_3d",
+    "label": "Moments and centers of mass in three dimensions",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.triple_integral_region",
+      "calc.multi.mass_lamina"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32
+    },
+    "domain": "calc3"
+  },
+  {
+    "id": "calc.vec.normal_line",
+    "label": "Normal lines to surfaces",
+    "subdomain": "calculus.vector",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.tangent_plane",
+      "calc.vec.vector_function"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    },
+    "domain": "calc3"
   }
 ]

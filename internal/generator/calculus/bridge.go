@@ -40,6 +40,17 @@ func registerBridge(reg *generator.Registry) {
 	} {
 		reg.Register(id, &calc2BridgeGen{kind: kind})
 	}
+	for id, kind := range map[string]string{
+		"calc.multi.quadric_surfaces":       "quadric_surfaces",
+		"calc.multi.triple_integral_region": "triple_integral_region",
+		"calc.vec.vector_field":             "vector_field",
+		"calc.vec.surface_tangent":          "surface_tangent",
+		"calc.multi.continuity":             "multi_continuity",
+		"calc.multi.moments_3d":             "moments_3d",
+		"calc.vec.normal_line":              "normal_line",
+	} {
+		reg.Register(id, &calc3BridgeGen{kind: kind})
+	}
 }
 
 func calcBridgeOrdinal(ctx generator.GeneratorContext) int {

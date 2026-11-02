@@ -673,7 +673,14 @@
       "calc.deriv.total_diff",
       "calc.multi.functions_several",
       "calc.multi.level_curves",
-      "calc.vec.vector_function"
+      "calc.vec.vector_function",
+      "calc.multi.quadric_surfaces",
+      "calc.multi.triple_integral_region",
+      "calc.vec.vector_field",
+      "calc.vec.surface_tangent",
+      "calc.multi.continuity",
+      "calc.multi.moments_3d",
+      "calc.vec.normal_line"
     ]
   },
   {

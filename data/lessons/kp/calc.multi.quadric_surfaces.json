@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Ellipsoids and Spheres",
+    "section": "Ellipsoids and Spheres",
+    "subgoals": [
+      "Explain ellipsoids and spheres",
+      "Apply ellipsoids and spheres in a worked problem"
+    ]
+  },
+  {
+    "label": "Hyperboloids and Cones",
+    "section": "Hyperboloids and Cones",
+    "subgoals": [
+      "Explain hyperboloids and cones",
+      "Apply hyperboloids and cones in a worked problem"
+    ]
+  },
+  {
+    "label": "Paraboloids and Saddles",
+    "section": "Paraboloids and Saddles",
+    "subgoals": [
+      "Explain paraboloids and saddles",
+      "Apply paraboloids and saddles in a worked problem"
+    ]
+  }
+]

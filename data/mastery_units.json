@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1402,
+  "concept_count": 1409,
   "unit_count": 134,
   "units": [
     {
@@ -898,11 +898,13 @@
         "calc.deriv.clairaut",
         "calc.deriv.directional",
         "calc.multi.closed_extrema",
+        "calc.multi.continuity",
         "calc.multi.coordinates_jacobian",
         "calc.multi.inverse_function",
         "calc.multi.lagrange",
         "calc.multi.lagrange_two",
         "calc.multi.level_curves",
+        "calc.multi.quadric_surfaces",
         "calc.multi.saddle_test",
         "calc.multi.tangent_plane",
         "calc.multi.taylor2",
@@ -912,7 +914,7 @@
         "calc.vec.identities",
         "calc.vec.jacobian_value"
       ],
-      "concept_count": 16
+      "concept_count": 18
     },
     {
       "id": "calc3.b12",
@@ -943,6 +945,7 @@
         "calc.multi.iterated_limits",
         "calc.multi.mass_lamina",
         "calc.multi.triple_integral_box",
+        "calc.multi.triple_integral_region",
         "calc.polar.arc_length",
         "calc.polar.area",
         "calc.polar.slope",
@@ -955,14 +958,16 @@
         "calc.vec.greens_theorem",
         "calc.vec.line_integral",
         "calc.vec.line_scalar",
+        "calc.vec.normal_line",
         "calc.vec.potential_value",
         "calc.vec.stokes",
         "calc.vec.surface_area",
         "calc.vec.torsion",
+        "calc.vec.vector_field",
         "calc.vec.vector_function",
         "calc.vec.work"
       ],
-      "concept_count": 32
+      "concept_count": 35
     },
     {
       "id": "calc3.b13",
@@ -970,15 +975,18 @@
       "domain": "calc3",
       "band": 13,
       "depth_min": 39,
-      "depth_max": 39,
+      "depth_max": 40,
       "subdomains": [
+        "calculus.multivariable",
         "calculus.vector"
       ],
       "concept_ids": [
+        "calc.multi.moments_3d",
         "calc.vec.flux_general",
-        "calc.vec.parametric_surface"
+        "calc.vec.parametric_surface",
+        "calc.vec.surface_tangent"
       ],
-      "concept_count": 2
+      "concept_count": 4
     },
     {
       "id": "complex_numbers.b3",

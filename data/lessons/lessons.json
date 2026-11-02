@@ -5606,5 +5606,33 @@
   {
     "concept_id": "calc.integral.rationalizing",
     "source": "teaching/calc.integral.rationalizing.md"
+  },
+  {
+    "concept_id": "calc.multi.quadric_surfaces",
+    "source": "teaching/calc.multi.quadric_surfaces.md"
+  },
+  {
+    "concept_id": "calc.multi.triple_integral_region",
+    "source": "teaching/calc.multi.triple_integral_region.md"
+  },
+  {
+    "concept_id": "calc.vec.vector_field",
+    "source": "teaching/calc.vec.vector_field.md"
+  },
+  {
+    "concept_id": "calc.vec.surface_tangent",
+    "source": "teaching/calc.vec.surface_tangent.md"
+  },
+  {
+    "concept_id": "calc.multi.continuity",
+    "source": "teaching/calc.multi.continuity.md"
+  },
+  {
+    "concept_id": "calc.multi.moments_3d",
+    "source": "teaching/calc.multi.moments_3d.md"
+  },
+  {
+    "concept_id": "calc.vec.normal_line",
+    "source": "teaching/calc.vec.normal_line.md"
   }
 ]

@@ -69,11 +69,11 @@ means a new thin concept cannot be added quietly.
 
 ## 4. Where the corpus is thin
 
-### 4.1 The course catalog reaches 1402 of the 1402 concepts
+### 4.1 The course catalog reaches 1409 of the 1409 concepts
 
 Courses carry target sets, and a target expands to its transitive prerequisite closure in
 `internal/planning/planner.go:64` (`collectChain`). Across the 28 courses those closures reach
-1402 of the 1402 concepts: 0 of them have a node, a generator, a lesson and three KP shards and
+1409 of the 1409 concepts: 0 of them have a node, a generator, a lesson and three KP shards and
 still sit outside every named course path. The wiring batch of 2026-10-19 moved the 149 that used
 to sit there into the courses that teach their subject, and the table stays as the measurement on
 the number, because a concept that no course targets is unreachable whatever the diagnostic
@@ -85,7 +85,7 @@ The count of unreachable concepts by domain:
 |---|---|---|
 | calc1 | 84 | 0 |
 | calc2 | 71 | 0 |
-| calc3 | 64 | 0 |
+| calc3 | 71 | 0 |
 | algebra | 139 | 0 |
 | topology | 42 | 0 |
 | statistics | 72 | 0 |
@@ -109,7 +109,7 @@ The count of unreachable concepts by domain:
 
 Two structural facts sit behind that table. First, a course is a *sampled* path, not a domain
 cover: `calc1` targets 57 of the 84 in its domain, `calc2` targets 54 of the 71 in its domain and
-`calc3` targets 54 of the 61 in its domain, so the three courses are stages rather than a partition.
+`calc3` targets 64 of the 71 in its domain, so the three courses are stages rather than a partition.
 Second, one whole
 domain still has no course of its own: `trigonometry` is reached only by the closures of `a2` and
 `pc`, which bring in 54 and 29 of its 68 concepts, so a learner meets trigonometry as algebra and
@@ -405,7 +405,7 @@ because the change this section prepares for is the one that would have tripped 
 
 ### 5.5 The concept target, and where it goes
 
-The catalog holds 1402 concepts. The remaining per-domain targets add up to 0, and this is the table
+The catalog holds 1409 concepts. The remaining per-domain targets add up to 0, and this is the table
 that says where: the thousand-concept milestone is complete, and graph theory has opened the 1,250
 tranche. `Now` is read from the corpus; `Target` is the decision. The rows keep the order step 6 of
 section 6 used, largest deficit first.
@@ -432,7 +432,7 @@ section 6 used, largest deficit first.
 | real_analysis | university | 55 | 55 | +0 |
 | calc1 | bridge | 84 | 84 | +0 |
 | calc2 | bridge | 71 | 71 | +0 |
-| calc3 | bridge | 64 | 64 | +0 |
+| calc3 | bridge | 71 | 71 | +0 |
 | algebra | school | 139 | 139 | +0 |
 | trigonometry | school | 78 | 78 | +0 |
 

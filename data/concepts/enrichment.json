@@ -18343,5 +18343,110 @@
       "calc.integral.substitution",
       "calc.integral.irrational"
     ]
+  },
+  {
+    "id": "calc.multi.quadric_surfaces",
+    "key_prerequisites": [
+      "calc.multi.functions_several",
+      "calc.multi.level_curves"
+    ],
+    "encompasses": [
+      "calc.multi.functions_several",
+      "calc.multi.level_curves"
+    ],
+    "prerequisites": [
+      "calc.multi.functions_several",
+      "calc.multi.level_curves"
+    ]
+  },
+  {
+    "id": "calc.multi.triple_integral_region",
+    "key_prerequisites": [
+      "calc.multi.triple_integral_box",
+      "calc.multi.double_integral_region"
+    ],
+    "encompasses": [
+      "calc.multi.triple_integral_box",
+      "calc.multi.double_integral_region"
+    ],
+    "prerequisites": [
+      "calc.multi.triple_integral_box",
+      "calc.multi.double_integral_region"
+    ]
+  },
+  {
+    "id": "calc.vec.vector_field",
+    "key_prerequisites": [
+      "calc.vec.vector_function",
+      "calc.deriv.partial"
+    ],
+    "encompasses": [
+      "calc.vec.vector_function",
+      "calc.deriv.partial"
+    ],
+    "prerequisites": [
+      "calc.vec.vector_function",
+      "calc.deriv.partial"
+    ]
+  },
+  {
+    "id": "calc.vec.surface_tangent",
+    "key_prerequisites": [
+      "calc.multi.tangent_plane",
+      "calc.vec.parametric_surface"
+    ],
+    "encompasses": [
+      "calc.multi.tangent_plane",
+      "calc.vec.parametric_surface"
+    ],
+    "prerequisites": [
+      "calc.multi.tangent_plane",
+      "calc.vec.parametric_surface"
+    ]
+  },
+  {
+    "id": "calc.multi.continuity",
+    "key_prerequisites": [
+      "calc.multi.functions_several",
+      "calc.limit.continuity"
+    ],
+    "encompasses": [
+      "calc.multi.functions_several",
+      "calc.limit.continuity"
+    ],
+    "prerequisites": [
+      "calc.multi.functions_several",
+      "calc.limit.continuity"
+    ]
+  },
+  {
+    "id": "calc.multi.moments_3d",
+    "key_prerequisites": [
+      "calc.multi.triple_integral_region",
+      "calc.multi.mass_lamina"
+    ],
+    "encompasses": [
+      "calc.multi.triple_integral_region",
+      "calc.multi.mass_lamina"
+    ],
+    "prerequisites": [
+      "calc.multi.triple_integral_region",
+      "calc.multi.mass_lamina"
+    ]
+  },
+  {
+    "id": "calc.vec.normal_line",
+    "key_prerequisites": [
+      "calc.multi.tangent_plane",
+      "calc.vec.vector_function"
+    ],
+    "encompasses": [
+      "calc.multi.tangent_plane",
+      "calc.vec.vector_function"
+    ],
+    "prerequisites": [
+      "calc.multi.tangent_plane",
+      "calc.vec.vector_function"
+    ]
   }
 ]

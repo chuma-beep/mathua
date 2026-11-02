@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Density and Mass",
+    "section": "Density and Mass",
+    "subgoals": [
+      "Explain density and mass",
+      "Apply density and mass in a worked problem"
+    ]
+  },
+  {
+    "label": "First Moments",
+    "section": "First Moments",
+    "subgoals": [
+      "Explain first moments",
+      "Apply first moments in a worked problem"
+    ]
+  },
+  {
+    "label": "Moments of Inertia",
+    "section": "Moments of Inertia",
+    "subgoals": [
+      "Explain moments of inertia",
+      "Apply moments of inertia in a worked problem"
+    ]
+  }
+]

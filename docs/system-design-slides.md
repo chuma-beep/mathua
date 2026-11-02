@@ -136,7 +136,7 @@ Middleware: CORS, logging, JWT auth, rate limiting (5/min on auth).
 
 ![width:1000](diagrams/system-design-cat-diagnostic-dark.svg)
 
-Info-gain CAT over a compressed covering set. 25-45 questions against all 1402 concepts.
+Info-gain CAT over a compressed covering set. 25-45 questions against all 1409 concepts.
 
 ---
 

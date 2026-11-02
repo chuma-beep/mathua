@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Describing a General Region",
+    "section": "Describing a General Region",
+    "subgoals": [
+      "Explain describing a general region",
+      "Apply describing a general region in a worked problem"
+    ]
+  },
+  {
+    "label": "Setting Up the Integral",
+    "section": "Setting Up the Integral",
+    "subgoals": [
+      "Explain setting up the integral",
+      "Apply setting up the integral in a worked problem"
+    ]
+  },
+  {
+    "label": "Evaluating and Checking",
+    "section": "Evaluating and Checking",
+    "subgoals": [
+      "Explain evaluating and checking",
+      "Apply evaluating and checking in a worked problem"
+    ]
+  }
+]

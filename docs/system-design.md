@@ -508,7 +508,7 @@ Total latency target: under 100ms for numeric grading, under 500ms for SymPy-bas
 
 ## 10. Computerized Adaptive Testing (CAT)
 
-Mathua implements a compressed-covering + info-gain CAT to locate a student's knowledge frontier quickly. Instead of testing all 1402 concepts, the diagnostic asks two probes per concept in the covering set, bounded above by `maxTotalQuestions=45`. A wide scope reaches `minTotalQuestions=25`; a narrow one runs out of cover first and ends below it.
+Mathua implements a compressed-covering + info-gain CAT to locate a student's knowledge frontier quickly. Instead of testing all 1409 concepts, the diagnostic asks two probes per concept in the covering set, bounded above by `maxTotalQuestions=45`. A wide scope reaches `minTotalQuestions=25`; a narrow one runs out of cover first and ends below it.
 
 ![CAT Diagnostic](diagrams/system-design-cat-diagnostic-dark.svg)
 
