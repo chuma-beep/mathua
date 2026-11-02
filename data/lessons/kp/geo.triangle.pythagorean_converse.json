@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Converse Statement",
+    "section": "The Converse Statement",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "Classifying a Triangle",
+    "section": "Classifying a Triangle",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "Applications",
+    "section": "Applications",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  }
+]

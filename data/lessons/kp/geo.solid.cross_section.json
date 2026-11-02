@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Slicing a Solid",
+    "section": "Slicing a Solid",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "Areas of Slices",
+    "section": "Areas of Slices",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "Counting Faces and Sections",
+    "section": "Counting Faces and Sections",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Faces, Edges and Vertices",
+    "section": "Faces, Edges and Vertices",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "The Formula",
+    "section": "The Formula",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "Recovering a Count",
+    "section": "Recovering a Count",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  }
+]

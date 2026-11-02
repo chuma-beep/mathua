@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Parallelograms",
+    "section": "Parallelograms",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "Rectangles, Rhombi and Squares",
+    "section": "Rectangles, Rhombi and Squares",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "Angles and Diagonals",
+    "section": "Angles and Diagonals",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  }
+]

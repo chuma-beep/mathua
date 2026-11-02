@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Intersecting Chords",
+    "section": "Intersecting Chords",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "Solving for a Segment",
+    "section": "Solving for a Segment",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "Special Cases",
+    "section": "Special Cases",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Lines of Symmetry",
+    "section": "Lines of Symmetry",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "Rotational Symmetry",
+    "section": "Rotational Symmetry",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "Counting Symmetries",
+    "section": "Counting Symmetries",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  }
+]

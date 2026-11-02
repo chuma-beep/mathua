@@ -17254,5 +17254,267 @@
       "linalg.orth.projection_matrix",
       "linalg.systems.row_reduction"
     ]
+  },
+  {
+    "id": "geo.basic.transversal",
+    "key_prerequisites": [
+      "geo.basic.vertical",
+      "geo.basic.angles"
+    ],
+    "encompasses": [
+      "geo.basic.vertical",
+      "geo.basic.angles"
+    ]
+  },
+  {
+    "id": "geo.triangle.congruence",
+    "key_prerequisites": [
+      "geo.triangle.types",
+      "geo.triangle.angles"
+    ],
+    "encompasses": [
+      "geo.triangle.types",
+      "geo.triangle.angles"
+    ]
+  },
+  {
+    "id": "geo.triangle.pythagorean_converse",
+    "key_prerequisites": [
+      "geo.triangle.pythagorean"
+    ],
+    "encompasses": [
+      "geo.triangle.pythagorean"
+    ]
+  },
+  {
+    "id": "geo.triangle.special_right_45",
+    "key_prerequisites": [
+      "geo.triangle.special_right",
+      "geo.triangle.pythagorean"
+    ],
+    "encompasses": [
+      "geo.triangle.special_right",
+      "geo.triangle.pythagorean"
+    ]
+  },
+  {
+    "id": "geo.triangle.median_centroid",
+    "key_prerequisites": [
+      "geo.triangle.area",
+      "geo.coord.midpoint"
+    ],
+    "encompasses": [
+      "geo.triangle.area",
+      "geo.coord.midpoint"
+    ]
+  },
+  {
+    "id": "geo.transform.translation",
+    "key_prerequisites": [
+      "geo.coord.plot",
+      "geo.transform.dilation"
+    ],
+    "encompasses": [
+      "geo.coord.plot",
+      "geo.transform.dilation"
+    ]
+  },
+  {
+    "id": "geo.transform.reflection",
+    "key_prerequisites": [
+      "geo.coord.plot",
+      "geo.coord.lines"
+    ],
+    "encompasses": [
+      "geo.coord.plot",
+      "geo.coord.lines"
+    ]
+  },
+  {
+    "id": "geo.transform.rotation",
+    "key_prerequisites": [
+      "geo.transform.dilation",
+      "geo.coord.plot"
+    ],
+    "encompasses": [
+      "geo.transform.dilation",
+      "geo.coord.plot"
+    ]
+  },
+  {
+    "id": "geo.solid.cylinder",
+    "key_prerequisites": [
+      "geo.circle.area",
+      "geo.solid.prism_volume"
+    ],
+    "encompasses": [
+      "geo.circle.area",
+      "geo.solid.prism_volume"
+    ]
+  },
+  {
+    "id": "geo.solid.cone",
+    "key_prerequisites": [
+      "geo.solid.pyramid_volume",
+      "geo.circle.area"
+    ],
+    "encompasses": [
+      "geo.solid.pyramid_volume",
+      "geo.circle.area"
+    ]
+  },
+  {
+    "id": "geo.solid.sphere",
+    "key_prerequisites": [
+      "geo.circle.area",
+      "geo.solid.volume_rect"
+    ],
+    "encompasses": [
+      "geo.circle.area",
+      "geo.solid.volume_rect"
+    ]
+  },
+  {
+    "id": "geo.solid.curved_surface_area",
+    "key_prerequisites": [
+      "geo.solid.surface_area",
+      "geo.circle.circumference"
+    ],
+    "encompasses": [
+      "geo.solid.surface_area",
+      "geo.circle.circumference"
+    ]
+  },
+  {
+    "id": "geo.polygon.area_regular",
+    "key_prerequisites": [
+      "geo.polygon.interior_angles",
+      "geo.triangle.area"
+    ],
+    "encompasses": [
+      "geo.polygon.interior_angles",
+      "geo.triangle.area"
+    ]
+  },
+  {
+    "id": "geo.circle.chord_segments",
+    "key_prerequisites": [
+      "geo.circle.chord",
+      "geo.circle.inscribed_angle"
+    ],
+    "encompasses": [
+      "geo.circle.chord",
+      "geo.circle.inscribed_angle"
+    ]
+  },
+  {
+    "id": "geo.circle.secant",
+    "key_prerequisites": [
+      "geo.circle.tangent_length",
+      "geo.circle.chord"
+    ],
+    "encompasses": [
+      "geo.circle.tangent_length",
+      "geo.circle.chord"
+    ]
+  },
+  {
+    "id": "geo.similar.criteria",
+    "key_prerequisites": [
+      "geo.similar.ratio",
+      "geo.triangle.angles"
+    ],
+    "encompasses": [
+      "geo.similar.ratio",
+      "geo.triangle.angles"
+    ]
+  },
+  {
+    "id": "geo.area.composite",
+    "key_prerequisites": [
+      "geo.quad.area",
+      "geo.triangle.area"
+    ],
+    "encompasses": [
+      "geo.quad.area",
+      "geo.triangle.area"
+    ]
+  },
+  {
+    "id": "geo.triangle.angle_bisector",
+    "key_prerequisites": [
+      "geo.triangle.angles",
+      "geo.triangle.isosceles"
+    ],
+    "encompasses": [
+      "geo.triangle.angles",
+      "geo.triangle.isosceles"
+    ]
+  },
+  {
+    "id": "geo.triangle.perpendicular_bisector",
+    "key_prerequisites": [
+      "geo.coord.midpoint",
+      "geo.triangle.isosceles"
+    ],
+    "encompasses": [
+      "geo.coord.midpoint",
+      "geo.triangle.isosceles"
+    ]
+  },
+  {
+    "id": "geo.quad.properties",
+    "key_prerequisites": [
+      "geo.quad.types",
+      "geo.quad.area"
+    ],
+    "encompasses": [
+      "geo.quad.types",
+      "geo.quad.area"
+    ]
+  },
+  {
+    "id": "geo.circle.arc_measure",
+    "key_prerequisites": [
+      "geo.circle.inscribed_angle",
+      "geo.circle.circumference"
+    ],
+    "encompasses": [
+      "geo.circle.inscribed_angle",
+      "geo.circle.circumference"
+    ]
+  },
+  {
+    "id": "geo.solid.cross_section",
+    "key_prerequisites": [
+      "geo.solid.volume_rect",
+      "geo.solid.prism_volume"
+    ],
+    "encompasses": [
+      "geo.solid.volume_rect",
+      "geo.solid.prism_volume"
+    ]
+  },
+  {
+    "id": "geo.transform.symmetry",
+    "key_prerequisites": [
+      "geo.transform.dilation",
+      "geo.polygon.interior_angles"
+    ],
+    "encompasses": [
+      "geo.transform.dilation",
+      "geo.polygon.interior_angles"
+    ]
+  },
+  {
+    "id": "geo.solid.euler",
+    "key_prerequisites": [
+      "geo.solid.prism_volume",
+      "geo.solid.pyramid_volume"
+    ],
+    "encompasses": [
+      "geo.solid.prism_volume",
+      "geo.solid.pyramid_volume"
+    ]
   }
 ]

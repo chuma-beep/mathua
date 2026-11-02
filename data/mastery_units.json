@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1303,
+  "concept_count": 1327,
   "unit_count": 134,
   "units": [
     {
@@ -1523,7 +1523,7 @@
       "domain": "geometry",
       "band": 1,
       "depth_min": 3,
-      "depth_max": 4,
+      "depth_max": 5,
       "subdomains": [
         "geometry.basics",
         "geometry.circles",
@@ -1535,22 +1535,29 @@
       ],
       "concept_ids": [
         "geo.basic.complementary",
+        "geo.basic.transversal",
         "geo.basic.vertical",
         "geo.circle.cyclic_quad",
         "geo.polygon.exterior_angle",
         "geo.polygon.interior_angles",
         "geo.quad.perimeter",
         "geo.similar.area_ratio",
+        "geo.similar.criteria",
         "geo.similar.missing_side",
         "geo.similar.ratio",
         "geo.transform.dilation",
+        "geo.transform.rotation",
+        "geo.transform.symmetry",
+        "geo.transform.translation",
+        "geo.triangle.angle_bisector",
         "geo.triangle.angles",
+        "geo.triangle.congruence",
         "geo.triangle.exterior_angle",
         "geo.triangle.inequality",
         "geo.triangle.isosceles",
         "geo.triangle.midsegment"
       ],
-      "concept_count": 15
+      "concept_count": 22
     },
     {
       "id": "geometry.b2",
@@ -1579,15 +1586,21 @@
       "subdomains": [
         "geometry.circles",
         "geometry.coordinate",
+        "geometry.polygons",
         "geometry.shapes",
         "geometry.solid",
         "geometry.triangles"
       ],
       "concept_ids": [
+        "geo.area.composite",
         "geo.circle.chord",
         "geo.coord.distance",
         "geo.coord.midpoint",
+        "geo.polygon.area_regular",
+        "geo.quad.properties",
         "geo.quad.trapezoid_area",
+        "geo.solid.cross_section",
+        "geo.solid.euler",
         "geo.solid.prism_volume",
         "geo.solid.pyramid_volume",
         "geo.solid.similar_volume",
@@ -1595,9 +1608,10 @@
         "geo.solid.volume_rect",
         "geo.triangle.pythagorean",
         "geo.triangle.pythagorean.word",
+        "geo.triangle.pythagorean_converse",
         "geo.triangle.special_right"
       ],
-      "concept_count": 12
+      "concept_count": 18
     },
     {
       "id": "geometry.b4",
@@ -1605,20 +1619,32 @@
       "domain": "geometry",
       "band": 4,
       "depth_min": 12,
-      "depth_max": 13,
+      "depth_max": 14,
       "subdomains": [
         "geometry.circles",
-        "geometry.coordinate"
+        "geometry.coordinate",
+        "geometry.solid",
+        "geometry.triangles"
       ],
       "concept_ids": [
+        "geo.circle.arc_measure",
         "geo.circle.area",
+        "geo.circle.chord_segments",
         "geo.circle.circumference",
+        "geo.circle.secant",
         "geo.circle.tangent_chord",
         "geo.circle.tangent_length",
         "geo.coord.distance_3d",
-        "geo.coord.polar"
+        "geo.coord.polar",
+        "geo.solid.cone",
+        "geo.solid.curved_surface_area",
+        "geo.solid.cylinder",
+        "geo.solid.sphere",
+        "geo.triangle.median_centroid",
+        "geo.triangle.perpendicular_bisector",
+        "geo.triangle.special_right_45"
       ],
-      "concept_count": 6
+      "concept_count": 16
     },
     {
       "id": "geometry.b6",
@@ -1643,12 +1669,14 @@
       "depth_min": 21,
       "depth_max": 21,
       "subdomains": [
-        "geometry.coordinate"
+        "geometry.coordinate",
+        "geometry.transform"
       ],
       "concept_ids": [
-        "geo.coord.slope"
+        "geo.coord.slope",
+        "geo.transform.reflection"
       ],
-      "concept_count": 1
+      "concept_count": 2
     },
     {
       "id": "graph_theory.b1",

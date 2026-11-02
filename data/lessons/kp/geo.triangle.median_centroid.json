@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Medians",
+    "section": "Medians",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "The Centroid Ratio",
+    "section": "The Centroid Ratio",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "Coordinates of the Centroid",
+    "section": "Coordinates of the Centroid",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  }
+]

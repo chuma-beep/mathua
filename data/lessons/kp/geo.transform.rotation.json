@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Turning About a Centre",
+    "section": "Turning About a Centre",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "Quarter and Half Turns",
+    "section": "Quarter and Half Turns",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  },
+  {
+    "label": "Invariants",
+    "section": "Invariants",
+    "subgoals": [
+      "Identify the objects and labels.",
+      "Apply the relationship to an example.",
+      "Check the result against the figure."
+    ]
+  }
+]

@@ -5210,5 +5210,101 @@
   {
     "concept_id": "linalg.orth.least_squares",
     "source": "teaching/linalg.orth.least_squares.md"
+  },
+  {
+    "concept_id": "geo.basic.transversal",
+    "source": "teaching/geo.basic.transversal.md"
+  },
+  {
+    "concept_id": "geo.triangle.congruence",
+    "source": "teaching/geo.triangle.congruence.md"
+  },
+  {
+    "concept_id": "geo.triangle.pythagorean_converse",
+    "source": "teaching/geo.triangle.pythagorean_converse.md"
+  },
+  {
+    "concept_id": "geo.triangle.special_right_45",
+    "source": "teaching/geo.triangle.special_right_45.md"
+  },
+  {
+    "concept_id": "geo.triangle.median_centroid",
+    "source": "teaching/geo.triangle.median_centroid.md"
+  },
+  {
+    "concept_id": "geo.transform.translation",
+    "source": "teaching/geo.transform.translation.md"
+  },
+  {
+    "concept_id": "geo.transform.reflection",
+    "source": "teaching/geo.transform.reflection.md"
+  },
+  {
+    "concept_id": "geo.transform.rotation",
+    "source": "teaching/geo.transform.rotation.md"
+  },
+  {
+    "concept_id": "geo.solid.cylinder",
+    "source": "teaching/geo.solid.cylinder.md"
+  },
+  {
+    "concept_id": "geo.solid.cone",
+    "source": "teaching/geo.solid.cone.md"
+  },
+  {
+    "concept_id": "geo.solid.sphere",
+    "source": "teaching/geo.solid.sphere.md"
+  },
+  {
+    "concept_id": "geo.solid.curved_surface_area",
+    "source": "teaching/geo.solid.curved_surface_area.md"
+  },
+  {
+    "concept_id": "geo.polygon.area_regular",
+    "source": "teaching/geo.polygon.area_regular.md"
+  },
+  {
+    "concept_id": "geo.circle.chord_segments",
+    "source": "teaching/geo.circle.chord_segments.md"
+  },
+  {
+    "concept_id": "geo.circle.secant",
+    "source": "teaching/geo.circle.secant.md"
+  },
+  {
+    "concept_id": "geo.similar.criteria",
+    "source": "teaching/geo.similar.criteria.md"
+  },
+  {
+    "concept_id": "geo.area.composite",
+    "source": "teaching/geo.area.composite.md"
+  },
+  {
+    "concept_id": "geo.triangle.angle_bisector",
+    "source": "teaching/geo.triangle.angle_bisector.md"
+  },
+  {
+    "concept_id": "geo.triangle.perpendicular_bisector",
+    "source": "teaching/geo.triangle.perpendicular_bisector.md"
+  },
+  {
+    "concept_id": "geo.quad.properties",
+    "source": "teaching/geo.quad.properties.md"
+  },
+  {
+    "concept_id": "geo.circle.arc_measure",
+    "source": "teaching/geo.circle.arc_measure.md"
+  },
+  {
+    "concept_id": "geo.solid.cross_section",
+    "source": "teaching/geo.solid.cross_section.md"
+  },
+  {
+    "concept_id": "geo.transform.symmetry",
+    "source": "teaching/geo.transform.symmetry.md"
+  },
+  {
+    "concept_id": "geo.solid.euler",
+    "source": "teaching/geo.solid.euler.md"
   }
 ]
