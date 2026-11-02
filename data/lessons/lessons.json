@@ -5786,5 +5786,45 @@
   {
     "concept_id": "abstract.field.separable",
     "source": "teaching/abstract.field.separable.md"
+  },
+  {
+    "concept_id": "ra.order.zorn",
+    "source": "teaching/ra.order.zorn.md"
+  },
+  {
+    "concept_id": "ra.order.schroder_bernstein",
+    "source": "teaching/ra.order.schroder_bernstein.md"
+  },
+  {
+    "concept_id": "ra.measure.null",
+    "source": "teaching/ra.measure.null.md"
+  },
+  {
+    "concept_id": "ra.measure.cantor_set",
+    "source": "teaching/ra.measure.cantor_set.md"
+  },
+  {
+    "concept_id": "ra.metric.total_bounded",
+    "source": "teaching/ra.metric.total_bounded.md"
+  },
+  {
+    "concept_id": "ra.seq.weierstrass_m",
+    "source": "teaching/ra.seq.weierstrass_m.md"
+  },
+  {
+    "concept_id": "ra.deriv.bounded_variation",
+    "source": "teaching/ra.deriv.bounded_variation.md"
+  },
+  {
+    "concept_id": "ra.deriv.riemann_stieltjes",
+    "source": "teaching/ra.deriv.riemann_stieltjes.md"
+  },
+  {
+    "concept_id": "ra.deriv.arzela_ascoli",
+    "source": "teaching/ra.deriv.arzela_ascoli.md"
+  },
+  {
+    "concept_id": "ra.deriv.weierstrass_approx",
+    "source": "teaching/ra.deriv.weierstrass_approx.md"
   }
 ]

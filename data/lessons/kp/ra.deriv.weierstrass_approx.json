@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Polynomial approximation",
+    "section": "Polynomial approximation",
+    "subgoals": [
+      "Explain the main idea of polynomial approximation.",
+      "Apply the result in polynomial approximation to a concrete example.",
+      "Recognise a common mistake involving polynomial approximation."
+    ]
+  },
+  {
+    "label": "Bernstein polynomials",
+    "section": "Bernstein polynomials",
+    "subgoals": [
+      "Explain the main idea of bernstein polynomials.",
+      "Apply the result in bernstein polynomials to a concrete example.",
+      "Recognise a common mistake involving bernstein polynomials."
+    ]
+  },
+  {
+    "label": "Density of polynomials",
+    "section": "Density of polynomials",
+    "subgoals": [
+      "Explain the main idea of density of polynomials.",
+      "Apply the result in density of polynomials to a concrete example.",
+      "Recognise a common mistake involving density of polynomials."
+    ]
+  }
+]

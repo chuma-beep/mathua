@@ -774,5 +774,156 @@
       "streak": 3,
       "avg_time_seconds": 120
     }
+  },
+  {
+    "id": "ra.order.zorn",
+    "label": "Zorn's lemma",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.order",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.order.completeness",
+      "ra.order.extended"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32
+    }
+  },
+  {
+    "id": "ra.order.schroder_bernstein",
+    "label": "The Schroder-Bernstein theorem",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.order",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.order.countable",
+      "ra.order.uncountable"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30
+    }
+  },
+  {
+    "id": "ra.measure.null",
+    "label": "Sets of measure zero",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.measure",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.order.completeness",
+      "ra.metric.open_closed"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28
+    }
+  },
+  {
+    "id": "ra.measure.cantor_set",
+    "label": "The Cantor set",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.measure",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.measure.null",
+      "ra.order.uncountable"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30
+    }
+  },
+  {
+    "id": "ra.metric.total_bounded",
+    "label": "Total boundedness",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.metric",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.metric.compact",
+      "ra.metric.complete"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28
+    }
+  },
+  {
+    "id": "ra.seq.weierstrass_m",
+    "label": "The Weierstrass M-test",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.seq",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.seq.bolzano_weierstrass",
+      "ra.deriv.uniform_conv"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30
+    }
+  },
+  {
+    "id": "ra.deriv.bounded_variation",
+    "label": "Functions of bounded variation",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.deriv",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.deriv.riemann",
+      "ra.deriv.mvt"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30
+    }
+  },
+  {
+    "id": "ra.deriv.riemann_stieltjes",
+    "label": "The Riemann-Stieltjes integral",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.deriv",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.deriv.riemann",
+      "ra.deriv.bounded_variation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32
+    }
+  },
+  {
+    "id": "ra.deriv.arzela_ascoli",
+    "label": "The Arzela-Ascoli theorem",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.deriv",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.deriv.uniform_conv",
+      "ra.metric.compact",
+      "ra.metric.complete"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32
+    }
+  },
+  {
+    "id": "ra.deriv.weierstrass_approx",
+    "label": "The Weierstrass approximation theorem",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.deriv",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.deriv.uniform_conv",
+      "ra.limit.evt"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30
+    }
   }
 ]

@@ -1363,7 +1363,17 @@
       "ra.metric.continuity",
       "ra.metric.contraction",
       "ra.metric.baire",
-      "ra.metric.equivalent"
+      "ra.metric.equivalent",
+      "ra.order.zorn",
+      "ra.order.schroder_bernstein",
+      "ra.measure.null",
+      "ra.measure.cantor_set",
+      "ra.metric.total_bounded",
+      "ra.seq.weierstrass_m",
+      "ra.deriv.bounded_variation",
+      "ra.deriv.riemann_stieltjes",
+      "ra.deriv.arzela_ascoli",
+      "ra.deriv.weierstrass_approx"
     ]
   }
 ]

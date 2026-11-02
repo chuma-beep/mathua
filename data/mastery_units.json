@@ -5,8 +5,8 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1447,
-  "unit_count": 135,
+  "concept_count": 1457,
+  "unit_count": 136,
   "units": [
     {
       "id": "abstract_algebra.b6",
@@ -3087,6 +3087,7 @@
         "ra.order.countable",
         "ra.order.density",
         "ra.order.nested_intervals",
+        "ra.order.zorn",
         "ra.seq.absolute",
         "ra.seq.bolzano_weierstrass",
         "ra.seq.cauchy",
@@ -3096,7 +3097,7 @@
         "ra.seq.subsequence",
         "ra.seq.tests"
       ],
-      "concept_count": 28
+      "concept_count": 29
     },
     {
       "id": "real_analysis.b11",
@@ -3107,17 +3108,22 @@
       "depth_max": 35,
       "subdomains": [
         "real_analysis.deriv",
+        "real_analysis.measure",
         "real_analysis.metric",
         "real_analysis.order",
         "real_analysis.seq"
       ],
       "concept_ids": [
+        "ra.deriv.arzela_ascoli",
         "ra.deriv.chain",
         "ra.deriv.darboux",
         "ra.deriv.interchange",
         "ra.deriv.mvt",
         "ra.deriv.taylor",
         "ra.deriv.uniform_conv",
+        "ra.deriv.weierstrass_approx",
+        "ra.measure.cantor_set",
+        "ra.measure.null",
         "ra.metric.baire",
         "ra.metric.closure",
         "ra.metric.compact",
@@ -3125,10 +3131,13 @@
         "ra.metric.convergence",
         "ra.metric.equivalent",
         "ra.metric.open_closed",
+        "ra.metric.total_bounded",
+        "ra.order.schroder_bernstein",
         "ra.order.uncountable",
-        "ra.seq.rearrangement"
+        "ra.seq.rearrangement",
+        "ra.seq.weierstrass_m"
       ],
-      "concept_count": 15
+      "concept_count": 22
     },
     {
       "id": "real_analysis.b12",
@@ -3136,18 +3145,34 @@
       "domain": "real_analysis",
       "band": 12,
       "depth_min": 36,
-      "depth_max": 37,
+      "depth_max": 38,
       "subdomains": [
         "real_analysis.deriv"
       ],
       "concept_ids": [
         "calc.integral.riemann_criteria",
+        "ra.deriv.bounded_variation",
         "ra.deriv.ftc",
         "ra.deriv.improper",
         "ra.deriv.parts",
         "ra.deriv.riemann"
       ],
-      "concept_count": 5
+      "concept_count": 6
+    },
+    {
+      "id": "real_analysis.b13",
+      "title": "Real Analysis · Stage 14",
+      "domain": "real_analysis",
+      "band": 13,
+      "depth_min": 39,
+      "depth_max": 39,
+      "subdomains": [
+        "real_analysis.deriv"
+      ],
+      "concept_ids": [
+        "ra.deriv.riemann_stieltjes"
+      ],
+      "concept_count": 1
     },
     {
       "id": "statistics.b0",

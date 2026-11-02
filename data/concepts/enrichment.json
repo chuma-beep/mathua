@@ -19018,5 +19018,158 @@
       "abstract.field.extension",
       "abstract.rings.polynomial"
     ]
+  },
+  {
+    "id": "ra.order.zorn",
+    "key_prerequisites": [
+      "ra.order.completeness",
+      "ra.order.extended"
+    ],
+    "encompasses": [
+      "ra.order.completeness",
+      "ra.order.extended"
+    ],
+    "prerequisites": [
+      "ra.order.completeness",
+      "ra.order.extended"
+    ]
+  },
+  {
+    "id": "ra.order.schroder_bernstein",
+    "key_prerequisites": [
+      "ra.order.countable",
+      "ra.order.uncountable"
+    ],
+    "encompasses": [
+      "ra.order.countable",
+      "ra.order.uncountable"
+    ],
+    "prerequisites": [
+      "ra.order.countable",
+      "ra.order.uncountable"
+    ]
+  },
+  {
+    "id": "ra.measure.null",
+    "key_prerequisites": [
+      "ra.order.completeness",
+      "ra.metric.open_closed"
+    ],
+    "encompasses": [
+      "ra.order.completeness",
+      "ra.metric.open_closed"
+    ],
+    "prerequisites": [
+      "ra.order.completeness",
+      "ra.metric.open_closed"
+    ]
+  },
+  {
+    "id": "ra.measure.cantor_set",
+    "key_prerequisites": [
+      "ra.measure.null",
+      "ra.order.uncountable"
+    ],
+    "encompasses": [
+      "ra.measure.null",
+      "ra.order.uncountable"
+    ],
+    "prerequisites": [
+      "ra.measure.null",
+      "ra.order.uncountable"
+    ]
+  },
+  {
+    "id": "ra.metric.total_bounded",
+    "key_prerequisites": [
+      "ra.metric.compact",
+      "ra.metric.complete"
+    ],
+    "encompasses": [
+      "ra.metric.compact",
+      "ra.metric.complete"
+    ],
+    "prerequisites": [
+      "ra.metric.compact",
+      "ra.metric.complete"
+    ]
+  },
+  {
+    "id": "ra.seq.weierstrass_m",
+    "key_prerequisites": [
+      "ra.seq.bolzano_weierstrass",
+      "ra.deriv.uniform_conv"
+    ],
+    "encompasses": [
+      "ra.seq.bolzano_weierstrass",
+      "ra.deriv.uniform_conv"
+    ],
+    "prerequisites": [
+      "ra.seq.bolzano_weierstrass",
+      "ra.deriv.uniform_conv"
+    ]
+  },
+  {
+    "id": "ra.deriv.bounded_variation",
+    "key_prerequisites": [
+      "ra.deriv.riemann",
+      "ra.deriv.mvt"
+    ],
+    "encompasses": [
+      "ra.deriv.riemann",
+      "ra.deriv.mvt"
+    ],
+    "prerequisites": [
+      "ra.deriv.riemann",
+      "ra.deriv.mvt"
+    ]
+  },
+  {
+    "id": "ra.deriv.riemann_stieltjes",
+    "key_prerequisites": [
+      "ra.deriv.riemann",
+      "ra.deriv.bounded_variation"
+    ],
+    "encompasses": [
+      "ra.deriv.riemann",
+      "ra.deriv.bounded_variation"
+    ],
+    "prerequisites": [
+      "ra.deriv.riemann",
+      "ra.deriv.bounded_variation"
+    ]
+  },
+  {
+    "id": "ra.deriv.arzela_ascoli",
+    "key_prerequisites": [
+      "ra.deriv.uniform_conv",
+      "ra.metric.compact",
+      "ra.metric.complete"
+    ],
+    "encompasses": [
+      "ra.deriv.uniform_conv",
+      "ra.metric.compact",
+      "ra.metric.complete"
+    ],
+    "prerequisites": [
+      "ra.deriv.uniform_conv",
+      "ra.metric.compact",
+      "ra.metric.complete"
+    ]
+  },
+  {
+    "id": "ra.deriv.weierstrass_approx",
+    "key_prerequisites": [
+      "ra.deriv.uniform_conv",
+      "ra.limit.evt"
+    ],
+    "encompasses": [
+      "ra.deriv.uniform_conv",
+      "ra.limit.evt"
+    ],
+    "prerequisites": [
+      "ra.deriv.uniform_conv",
+      "ra.limit.evt"
+    ]
   }
 ]

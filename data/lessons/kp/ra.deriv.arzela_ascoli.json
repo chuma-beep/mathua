@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Equicontinuity",
+    "section": "Equicontinuity",
+    "subgoals": [
+      "Explain the main idea of equicontinuity.",
+      "Apply the result in equicontinuity to a concrete example.",
+      "Recognise a common mistake involving equicontinuity."
+    ]
+  },
+  {
+    "label": "Uniform boundedness",
+    "section": "Uniform boundedness",
+    "subgoals": [
+      "Explain the main idea of uniform boundedness.",
+      "Apply the result in uniform boundedness to a concrete example.",
+      "Recognise a common mistake involving uniform boundedness."
+    ]
+  },
+  {
+    "label": "The compactness conclusion",
+    "section": "The compactness conclusion",
+    "subgoals": [
+      "Explain the main idea of the compactness conclusion.",
+      "Apply the result in the compactness conclusion to a concrete example.",
+      "Recognise a common mistake involving the compactness conclusion."
+    ]
+  }
+]
