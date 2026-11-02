@@ -62,7 +62,16 @@ func (g *prealgBridgeGen) Generate(ctx generator.GeneratorContext) generator.Pro
 			return prealgProb(o, fmt.Sprintf("Solve for x: x/%d = %d. (enter a number)", a, k), strconv.Itoa(a*k), fmt.Sprintf("Multiply both sides by %d: x = %d x %d = %d.", a, a, k, a*k))
 		default:
 			m := 1 + rand.Intn(6)
-			return prealgProb(o, fmt.Sprintf("Solve for x: (%d/%d) x = %d. (enter a number)", a, b, m*b), strconv.Itoa(a*m), fmt.Sprintf("Multiply by %d/%d: x = (%d/%d) x %d = %d.", b, a, b, a, m*b, a*m))
+			num := m * b * b
+			den := a
+			g := ratioGCD(num, den)
+			num /= g
+			den /= g
+			ans := strconv.Itoa(num)
+			if den != 1 {
+				ans = fmt.Sprintf("%d/%d", num, den)
+			}
+			return prealgProb(o, fmt.Sprintf("Solve for x: (%d/%d) x = %d. (enter a number)", a, b, m*b), ans, fmt.Sprintf("Multiply both sides by %d/%d: x = (%d/%d) x %d = %s.", b, a, b, a, m*b, ans))
 		}
 	case "prop_graph":
 		k := 2 + rand.Intn(7)
