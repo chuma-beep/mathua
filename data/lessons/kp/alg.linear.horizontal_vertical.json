@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Horizontal Lines",
+    "section": "Horizontal Lines",
+    "subgoals": [
+      "Write the equation of a horizontal line",
+      "Recognise a slope of zero"
+    ]
+  },
+  {
+    "label": "Vertical Lines",
+    "section": "Vertical Lines",
+    "subgoals": [
+      "Write the equation of a vertical line",
+      "Recognise an undefined slope"
+    ]
+  },
+  {
+    "label": "Graphing and Testing",
+    "section": "Graphing and Testing",
+    "subgoals": [
+      "Graph both types of line",
+      "Decide which form applies to a pair of points"
+    ]
+  }
+]

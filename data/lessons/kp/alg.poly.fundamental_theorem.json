@@ -1,0 +1,26 @@
+[
+  {
+    "label": "The Statement",
+    "section": "The Statement",
+    "subgoals": [
+      "State the theorem for degree n",
+      "Count roots with multiplicity"
+    ]
+  },
+  {
+    "label": "Real and Complex Roots",
+    "section": "Real and Complex Roots",
+    "subgoals": [
+      "Recognise conjugate pairs",
+      "Factor over the complex numbers"
+    ]
+  },
+  {
+    "label": "Consequences",
+    "section": "Consequences",
+    "subgoals": [
+      "Relate degree to the number of linear factors",
+      "Explain why an odd-degree polynomial has a real root"
+    ]
+  }
+]

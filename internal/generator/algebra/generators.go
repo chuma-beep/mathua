@@ -58,6 +58,23 @@ func Register(reg *generator.Registry) {
 	reg.Register("alg.log.properties", &logPropertiesGen{})
 
 	reg.Register("alg.seq.arithmetic", &seqArithGen{})
+	// Concepts added by the 2026 content expansion.
+	reg.Register("alg.func.rate_of_change", &algBridgeGen{kind: "rate_of_change"})
+	reg.Register("alg.poly.graph_zeros", &algBridgeGen{kind: "poly_graph_zeros"})
+	reg.Register("alg.eq.quadratic_form", &algBridgeGen{kind: "quadratic_form"})
+	reg.Register("alg.ineq.linear_programming", &algBridgeGen{kind: "linear_programming"})
+	reg.Register("alg.exp.natural_base", &algBridgeGen{kind: "natural_base"})
+	reg.Register("alg.linear.point_slope", &algBridgeGen{kind: "point_slope"})
+	reg.Register("alg.seq.recursive", &algBridgeGen{kind: "seq_recursive"})
+	reg.Register("alg.radical.nth_root", &algBridgeGen{kind: "nth_root"})
+	reg.Register("alg.poly.fundamental_theorem", &algBridgeGen{kind: "fundamental_theorem"})
+	reg.Register("alg.exp.half_life", &algBridgeGen{kind: "half_life"})
+	reg.Register("alg.eq.rational_exponent", &algBridgeGen{kind: "rational_exponent"})
+	reg.Register("alg.eq.rational.word", &algBridgeGen{kind: "rational_word"})
+	reg.Register("alg.func.composite_domain", &algBridgeGen{kind: "composite_domain"})
+	reg.Register("alg.eq.linear.word", &algBridgeGen{kind: "linear_word"})
+	reg.Register("alg.linear.horizontal_vertical", &algBridgeGen{kind: "horizontal_vertical"})
+
 	reg.Register("alg.seq.geometric", &seqGeomGen{})
 	reg.Register("alg.seq.sum_arith", &seqSumArithGen{})
 	reg.Register("alg.seq.sum_geo", &seqSumGeoGen{})

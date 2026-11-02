@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Setting Up the Equation",
+    "section": "Setting Up the Equation",
+    "subgoals": [
+      "Translate a rate or work problem into a rational equation",
+      "Name the unknown clearly"
+    ]
+  },
+  {
+    "label": "Solving the Equation",
+    "section": "Solving the Equation",
+    "subgoals": [
+      "Clear the denominators",
+      "Solve the resulting polynomial equation"
+    ]
+  },
+  {
+    "label": "Checking the Answer",
+    "section": "Checking the Answer",
+    "subgoals": [
+      "Reject values that make a denominator zero",
+      "Interpret the result in context"
+    ]
+  }
+]

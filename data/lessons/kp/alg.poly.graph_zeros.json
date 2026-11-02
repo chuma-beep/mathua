@@ -1,0 +1,26 @@
+[
+  {
+    "label": "What a Zero Is",
+    "section": "What a Zero Is",
+    "subgoals": [
+      "Define a zero of a polynomial",
+      "Connect zeros to x-intercepts"
+    ]
+  },
+  {
+    "label": "Multiplicity and Crossing",
+    "section": "Multiplicity and Crossing",
+    "subgoals": [
+      "Distinguish crossing from touching",
+      "Read multiplicity from a factored form"
+    ]
+  },
+  {
+    "label": "Sketching from Factors",
+    "section": "Sketching from Factors",
+    "subgoals": [
+      "Find all zeros of a factored polynomial",
+      "Determine end behaviour from the leading term"
+    ]
+  }
+]

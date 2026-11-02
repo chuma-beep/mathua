@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Recursive Rules",
+    "section": "Recursive Rules",
+    "subgoals": [
+      "Read a recurrence and an initial term",
+      "Generate the first terms of a sequence"
+    ]
+  },
+  {
+    "label": "Arithmetic and Geometric Recursion",
+    "section": "Arithmetic and Geometric Recursion",
+    "subgoals": [
+      "Recognise additive recursion",
+      "Recognise multiplicative recursion"
+    ]
+  },
+  {
+    "label": "Closed Forms",
+    "section": "Closed Forms",
+    "subgoals": [
+      "Find a closed form for a simple recurrence",
+      "Use a closed form to jump to a later term"
+    ]
+  }
+]

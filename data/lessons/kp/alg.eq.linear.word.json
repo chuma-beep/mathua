@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Translating Words",
+    "section": "Translating Words",
+    "subgoals": [
+      "Assign a variable to the unknown",
+      "Turn each phrase into an expression"
+    ]
+  },
+  {
+    "label": "Building the Equation",
+    "section": "Building the Equation",
+    "subgoals": [
+      "Use the relationship stated in the problem",
+      "Check that both sides describe the same quantity"
+    ]
+  },
+  {
+    "label": "Solving and Checking",
+    "section": "Solving and Checking",
+    "subgoals": [
+      "Solve the linear equation",
+      "Interpret the answer with units"
+    ]
+  }
+]

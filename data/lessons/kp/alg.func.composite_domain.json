@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Composition Order",
+    "section": "Composition Order",
+    "subgoals": [
+      "Evaluate f(g(x))",
+      "Distinguish f of g from g of f"
+    ]
+  },
+  {
+    "label": "Inner Domain",
+    "section": "Inner Domain",
+    "subgoals": [
+      "Find the domain of the inner function",
+      "Exclude values that make the inner expression undefined"
+    ]
+  },
+  {
+    "label": "Outer Restrictions",
+    "section": "Outer Restrictions",
+    "subgoals": [
+      "Apply the outer function's domain to the inner output",
+      "Combine the two restrictions"
+    ]
+  }
+]

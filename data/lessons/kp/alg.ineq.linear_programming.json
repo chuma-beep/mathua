@@ -1,0 +1,26 @@
+[
+  {
+    "label": "Feasible Regions",
+    "section": "Feasible Regions",
+    "subgoals": [
+      "Graph a system of linear inequalities",
+      "Identify the feasible region"
+    ]
+  },
+  {
+    "label": "Corner Points",
+    "section": "Corner Points",
+    "subgoals": [
+      "Find intersection points of boundary lines",
+      "Evaluate an objective at each corner"
+    ]
+  },
+  {
+    "label": "Optimising",
+    "section": "Optimising",
+    "subgoals": [
+      "State the maximum or minimum value",
+      "Explain why a corner gives the optimum"
+    ]
+  }
+]

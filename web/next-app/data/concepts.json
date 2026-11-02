@@ -2449,6 +2449,230 @@
     "subdomain": "algebra.polynomials"
   },
   {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.func.rate_of_change",
+    "label": "Average rate of change on an interval",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.func.concept",
+      "alg.linear.slope"
+    ],
+    "subdomain": "algebra.functions"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.poly.graph_zeros",
+    "label": "Zeros and the graph of a polynomial",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.poly.concept",
+      "alg.poly.roots"
+    ],
+    "subdomain": "algebra.polynomials"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.eq.quadratic_form",
+    "label": "The quadratic formula in standard form",
+    "mastery_threshold": {
+      "avg_time_seconds": 25,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.quad.complete_square",
+      "alg.quad.formula"
+    ],
+    "subdomain": "algebra.quadratics"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.ineq.linear_programming",
+    "label": "Linear programming in two variables",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.ineq.systems",
+      "alg.systems.elimination"
+    ],
+    "subdomain": "algebra.inequalities"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.exp.natural_base",
+    "label": "The natural base e",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.exp.concept",
+      "alg.log.concept"
+    ],
+    "subdomain": "algebra.exponential"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.linear.point_slope",
+    "label": "Point-slope form of a line",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.linear.slope",
+      "alg.linear.slope_intercept"
+    ],
+    "subdomain": "algebra.linear"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.seq.recursive",
+    "label": "Recursively defined sequences",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.seq.arithmetic",
+      "alg.seq.geometric"
+    ],
+    "subdomain": "algebra.sequences"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.radical.nth_root",
+    "label": "nth roots and radical notation",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.radical.simplify",
+      "arith.exp.evaluate"
+    ],
+    "subdomain": "algebra.radicals"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.poly.fundamental_theorem",
+    "label": "The fundamental theorem of algebra",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.poly.roots",
+      "alg.quad.complex"
+    ],
+    "subdomain": "algebra.polynomials"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.exp.half_life",
+    "label": "Half-life and exponential decay",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.exp.concept",
+      "alg.eq.exponential"
+    ],
+    "subdomain": "algebra.exponential"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.eq.rational_exponent",
+    "label": "Equations with rational exponents",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.radical.rational_exponents",
+      "alg.eq.exponential"
+    ],
+    "subdomain": "algebra.equations"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.eq.rational.word",
+    "label": "Rational equation word problems",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.eq.rational",
+      "alg.rational.proportions"
+    ],
+    "subdomain": "algebra.equations"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.func.composite_domain",
+    "label": "Domain of a composite function",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.func.composite",
+      "alg.func.domain"
+    ],
+    "subdomain": "algebra.functions"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.eq.linear.word",
+    "label": "Linear equation word problems",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.eq.multi_step",
+      "alg.linear.slope_intercept"
+    ],
+    "subdomain": "algebra.equations"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.linear.horizontal_vertical",
+    "label": "Horizontal and vertical lines",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.linear.slope_intercept"
+    ],
+    "subdomain": "algebra.linear"
+  },
+  {
     "domain": "arithmetic",
     "grading_type": "numeric",
     "id": "arith.add.single",

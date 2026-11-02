@@ -17516,5 +17516,168 @@
       "geo.solid.prism_volume",
       "geo.solid.pyramid_volume"
     ]
+  },
+  {
+    "id": "alg.func.rate_of_change",
+    "key_prerequisites": [
+      "alg.func.concept",
+      "alg.linear.slope"
+    ],
+    "encompasses": [
+      "alg.func.concept",
+      "alg.linear.slope"
+    ]
+  },
+  {
+    "id": "alg.poly.graph_zeros",
+    "key_prerequisites": [
+      "alg.poly.concept",
+      "alg.poly.roots"
+    ],
+    "encompasses": [
+      "alg.poly.concept",
+      "alg.poly.roots"
+    ]
+  },
+  {
+    "id": "alg.eq.quadratic_form",
+    "key_prerequisites": [
+      "alg.quad.complete_square",
+      "alg.quad.formula"
+    ],
+    "encompasses": [
+      "alg.quad.complete_square",
+      "alg.quad.formula"
+    ]
+  },
+  {
+    "id": "alg.ineq.linear_programming",
+    "key_prerequisites": [
+      "alg.ineq.systems",
+      "alg.systems.elimination"
+    ],
+    "encompasses": [
+      "alg.ineq.systems",
+      "alg.systems.elimination"
+    ]
+  },
+  {
+    "id": "alg.exp.natural_base",
+    "key_prerequisites": [
+      "alg.exp.concept",
+      "alg.log.concept"
+    ],
+    "encompasses": [
+      "alg.exp.concept",
+      "alg.log.concept"
+    ]
+  },
+  {
+    "id": "alg.linear.point_slope",
+    "key_prerequisites": [
+      "alg.linear.slope",
+      "alg.linear.slope_intercept"
+    ],
+    "encompasses": [
+      "alg.linear.slope",
+      "alg.linear.slope_intercept"
+    ]
+  },
+  {
+    "id": "alg.seq.recursive",
+    "key_prerequisites": [
+      "alg.seq.arithmetic",
+      "alg.seq.geometric"
+    ],
+    "encompasses": [
+      "alg.seq.arithmetic",
+      "alg.seq.geometric"
+    ]
+  },
+  {
+    "id": "alg.radical.nth_root",
+    "key_prerequisites": [
+      "alg.radical.simplify",
+      "arith.exp.evaluate"
+    ],
+    "encompasses": [
+      "alg.radical.simplify",
+      "arith.exp.evaluate"
+    ]
+  },
+  {
+    "id": "alg.poly.fundamental_theorem",
+    "key_prerequisites": [
+      "alg.poly.roots",
+      "alg.quad.complex"
+    ],
+    "encompasses": [
+      "alg.poly.roots",
+      "alg.quad.complex"
+    ]
+  },
+  {
+    "id": "alg.exp.half_life",
+    "key_prerequisites": [
+      "alg.exp.concept",
+      "alg.eq.exponential"
+    ],
+    "encompasses": [
+      "alg.exp.concept",
+      "alg.eq.exponential"
+    ]
+  },
+  {
+    "id": "alg.eq.rational_exponent",
+    "key_prerequisites": [
+      "alg.radical.rational_exponents",
+      "alg.eq.exponential"
+    ],
+    "encompasses": [
+      "alg.radical.rational_exponents",
+      "alg.eq.exponential"
+    ]
+  },
+  {
+    "id": "alg.eq.rational.word",
+    "key_prerequisites": [
+      "alg.eq.rational",
+      "alg.rational.proportions"
+    ],
+    "encompasses": [
+      "alg.eq.rational",
+      "alg.rational.proportions"
+    ]
+  },
+  {
+    "id": "alg.func.composite_domain",
+    "key_prerequisites": [
+      "alg.func.composite",
+      "alg.func.domain"
+    ],
+    "encompasses": [
+      "alg.func.composite",
+      "alg.func.domain"
+    ]
+  },
+  {
+    "id": "alg.eq.linear.word",
+    "key_prerequisites": [
+      "alg.eq.multi_step",
+      "alg.linear.slope_intercept"
+    ],
+    "encompasses": [
+      "alg.eq.multi_step",
+      "alg.linear.slope_intercept"
+    ]
+  },
+  {
+    "id": "alg.linear.horizontal_vertical",
+    "key_prerequisites": [
+      "alg.linear.slope_intercept"
+    ],
+    "encompasses": [
+      "alg.linear.slope_intercept"
+    ]
   }
 ]

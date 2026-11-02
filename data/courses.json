@@ -200,7 +200,22 @@
       "alg.quad.incomplete",
       "alg.quad.parametric",
       "alg.quad.quadratic",
-      "alg.systems.word"
+      "alg.systems.word",
+      "alg.func.rate_of_change",
+      "alg.poly.graph_zeros",
+      "alg.eq.quadratic_form",
+      "alg.ineq.linear_programming",
+      "alg.exp.natural_base",
+      "alg.linear.point_slope",
+      "alg.seq.recursive",
+      "alg.radical.nth_root",
+      "alg.poly.fundamental_theorem",
+      "alg.exp.half_life",
+      "alg.eq.rational_exponent",
+      "alg.eq.rational.word",
+      "alg.func.composite_domain",
+      "alg.eq.linear.word",
+      "alg.linear.horizontal_vertical"
     ]
   },
   {
@@ -344,7 +359,22 @@
       "trig.func.cotangent",
       "trig.graph.phase_shift",
       "trig.ident.cofunction",
-      "trig.ident.half_angle"
+      "trig.ident.half_angle",
+      "alg.func.rate_of_change",
+      "alg.poly.graph_zeros",
+      "alg.eq.quadratic_form",
+      "alg.ineq.linear_programming",
+      "alg.exp.natural_base",
+      "alg.linear.point_slope",
+      "alg.seq.recursive",
+      "alg.radical.nth_root",
+      "alg.poly.fundamental_theorem",
+      "alg.exp.half_life",
+      "alg.eq.rational_exponent",
+      "alg.eq.rational.word",
+      "alg.func.composite_domain",
+      "alg.eq.linear.word",
+      "alg.linear.horizontal_vertical"
     ]
   },
   {

@@ -5306,5 +5306,65 @@
   {
     "concept_id": "geo.solid.euler",
     "source": "teaching/geo.solid.euler.md"
+  },
+  {
+    "concept_id": "alg.func.rate_of_change",
+    "source": "teaching/alg.func.rate_of_change.md"
+  },
+  {
+    "concept_id": "alg.poly.graph_zeros",
+    "source": "teaching/alg.poly.graph_zeros.md"
+  },
+  {
+    "concept_id": "alg.eq.quadratic_form",
+    "source": "teaching/alg.eq.quadratic_form.md"
+  },
+  {
+    "concept_id": "alg.ineq.linear_programming",
+    "source": "teaching/alg.ineq.linear_programming.md"
+  },
+  {
+    "concept_id": "alg.exp.natural_base",
+    "source": "teaching/alg.exp.natural_base.md"
+  },
+  {
+    "concept_id": "alg.linear.point_slope",
+    "source": "teaching/alg.linear.point_slope.md"
+  },
+  {
+    "concept_id": "alg.seq.recursive",
+    "source": "teaching/alg.seq.recursive.md"
+  },
+  {
+    "concept_id": "alg.radical.nth_root",
+    "source": "teaching/alg.radical.nth_root.md"
+  },
+  {
+    "concept_id": "alg.poly.fundamental_theorem",
+    "source": "teaching/alg.poly.fundamental_theorem.md"
+  },
+  {
+    "concept_id": "alg.exp.half_life",
+    "source": "teaching/alg.exp.half_life.md"
+  },
+  {
+    "concept_id": "alg.eq.rational_exponent",
+    "source": "teaching/alg.eq.rational_exponent.md"
+  },
+  {
+    "concept_id": "alg.eq.rational.word",
+    "source": "teaching/alg.eq.rational.word.md"
+  },
+  {
+    "concept_id": "alg.func.composite_domain",
+    "source": "teaching/alg.func.composite_domain.md"
+  },
+  {
+    "concept_id": "alg.eq.linear.word",
+    "source": "teaching/alg.eq.linear.word.md"
+  },
+  {
+    "concept_id": "alg.linear.horizontal_vertical",
+    "source": "teaching/alg.linear.horizontal_vertical.md"
   }
 ]
