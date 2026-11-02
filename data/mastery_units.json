@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1275,
+  "concept_count": 1277,
   "unit_count": 133,
   "units": [
     {
@@ -1934,6 +1934,7 @@
       "subdomains": [
         "linear_algebra.eigenvalues",
         "linear_algebra.matrices",
+        "linear_algebra.systems",
         "linear_algebra.transformations"
       ],
       "concept_ids": [
@@ -1945,9 +1946,10 @@
         "linalg.matrix.fundamental_subspaces",
         "linalg.matrix.rank",
         "linalg.rank.nullity",
+        "linalg.systems.homogeneous",
         "linalg.transform.kernel"
       ],
-      "concept_count": 9
+      "concept_count": 10
     },
     {
       "id": "linear_algebra.b9",
@@ -1959,9 +1961,11 @@
       "subdomains": [
         "linear_algebra.decompositions",
         "linear_algebra.eigenvalues",
+        "linear_algebra.systems",
         "linear_algebra.transformations"
       ],
       "concept_ids": [
+        "linalg.apps.leontief",
         "linalg.decomp.jordan",
         "linalg.decomp.svd",
         "linalg.eigen.cayley_hamilton",
@@ -1971,7 +1975,7 @@
         "linalg.symmetric.spectral",
         "linalg.transform.invertible"
       ],
-      "concept_count": 8
+      "concept_count": 9
     },
     {
       "id": "machine_learning.b3",
