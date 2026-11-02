@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Contour and residues",
+    "section": "Contour and residues",
+    "subgoals": [
+      "Residues evaluate many definite integrals of real functions by closing the integration path with a complex con",
+      "The standard rational case integrates a function of x over the whole real line. Close the contour with a large",
+      "Trigonometric integrals over a full period use the unit circle instead. Substitute z on the unit circle, write"
+    ]
+  },
+  {
+    "label": "Rational integrands",
+    "section": "Rational integrands",
+    "subgoals": [
+      "For an integrand with real coefficients, the poles occur in conjugate pairs. Only the upper half-plane poles c",
+      "A pole on the real axis is not enclosed by either semicircle in the usual limit. Such an integral is interpret",
+      "Before computing residues, check that the denominator has no real zeros and that the decay condition holds. If"
+    ]
+  },
+  {
+    "label": "Choosing the contour",
+    "section": "Choosing the contour",
+    "subgoals": [
+      "The contour should enclose the singularities you want and avoid the singularities you do not want. A semicircl",
+      "Exponential factors require Jordan's lemma. If the integrand contains e to the i a z with a positive, the uppe",
+      "After closing the contour, write the real integral as the contour integral minus the other pieces. Estimate ea"
+    ]
+  }
+]

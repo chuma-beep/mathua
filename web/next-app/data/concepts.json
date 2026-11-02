@@ -7734,6 +7734,222 @@
     "subdomain": "complex_numbers.topology"
   },
   {
+    "domain": "complex_numbers",
+    "encompasses": [
+      "complex.integral.cauchy_goursat",
+      "complex.adv.analytic"
+    ],
+    "grading_type": "numeric",
+    "id": "complex.integral.cauchy_formula",
+    "key_prerequisites": [
+      "complex.integral.cauchy_goursat",
+      "complex.adv.analytic"
+    ],
+    "label": "Cauchy integral formula",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.integral.cauchy_goursat",
+      "complex.adv.analytic"
+    ],
+    "subdomain": "complex_numbers.integral",
+    "variants": []
+  },
+  {
+    "domain": "complex_numbers",
+    "encompasses": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.analytic"
+    ],
+    "grading_type": "numeric",
+    "id": "complex.adv.liouville",
+    "key_prerequisites": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.analytic"
+    ],
+    "label": "Liouville's theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.analytic"
+    ],
+    "subdomain": "complex_numbers.advanced",
+    "variants": []
+  },
+  {
+    "domain": "complex_numbers",
+    "encompasses": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.harmonic"
+    ],
+    "grading_type": "numeric",
+    "id": "complex.adv.maximum_modulus",
+    "key_prerequisites": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.harmonic"
+    ],
+    "label": "The maximum modulus principle",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.harmonic"
+    ],
+    "subdomain": "complex_numbers.advanced",
+    "variants": []
+  },
+  {
+    "domain": "complex_numbers",
+    "encompasses": [
+      "complex.adv.residue",
+      "complex.integral.contour"
+    ],
+    "grading_type": "numeric",
+    "id": "complex.integral.real_integrals",
+    "key_prerequisites": [
+      "complex.adv.residue",
+      "complex.integral.contour"
+    ],
+    "label": "Real integrals by residues",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.residue",
+      "complex.integral.contour"
+    ],
+    "subdomain": "complex_numbers.integral",
+    "variants": []
+  },
+  {
+    "domain": "complex_numbers",
+    "encompasses": [
+      "complex.adv.residue",
+      "complex.adv.logarithm"
+    ],
+    "grading_type": "numeric",
+    "id": "complex.adv.argument_principle",
+    "key_prerequisites": [
+      "complex.adv.residue",
+      "complex.adv.logarithm"
+    ],
+    "label": "The argument principle",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.residue",
+      "complex.adv.logarithm"
+    ],
+    "subdomain": "complex_numbers.integral",
+    "variants": []
+  },
+  {
+    "domain": "complex_numbers",
+    "encompasses": [
+      "complex.integral.contour",
+      "complex.ops.argument"
+    ],
+    "grading_type": "numeric",
+    "id": "complex.adv.winding",
+    "key_prerequisites": [
+      "complex.integral.contour",
+      "complex.ops.argument"
+    ],
+    "label": "The winding number",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.integral.contour",
+      "complex.ops.argument"
+    ],
+    "subdomain": "complex_numbers.topology",
+    "variants": []
+  },
+  {
+    "domain": "complex_numbers",
+    "encompasses": [
+      "complex.adv.conformal",
+      "complex.topology.domain"
+    ],
+    "grading_type": "numeric",
+    "id": "complex.adv.riemann_mapping",
+    "key_prerequisites": [
+      "complex.adv.conformal",
+      "complex.topology.domain"
+    ],
+    "label": "The Riemann mapping theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 34,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.conformal",
+      "complex.topology.domain"
+    ],
+    "subdomain": "complex_numbers.topology",
+    "variants": []
+  },
+  {
+    "domain": "complex_numbers",
+    "encompasses": [
+      "complex.adv.analytic",
+      "complex.series.power"
+    ],
+    "grading_type": "numeric",
+    "id": "complex.adv.identity_theorem",
+    "key_prerequisites": [
+      "complex.adv.analytic",
+      "complex.series.power"
+    ],
+    "label": "The identity theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.analytic",
+      "complex.series.power"
+    ],
+    "subdomain": "complex_numbers.advanced",
+    "variants": []
+  },
+  {
+    "domain": "complex_numbers",
+    "encompasses": [
+      "complex.integral.cauchy_goursat",
+      "complex.adv.analytic"
+    ],
+    "grading_type": "numeric",
+    "id": "complex.adv.morera",
+    "key_prerequisites": [
+      "complex.integral.cauchy_goursat",
+      "complex.adv.analytic"
+    ],
+    "label": "Morera's theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.integral.cauchy_goursat",
+      "complex.adv.analytic"
+    ],
+    "subdomain": "complex_numbers.advanced",
+    "variants": []
+  },
+  {
     "domain": "differential_equations",
     "grading_type": "numeric",
     "id": "ode.basics.concept",

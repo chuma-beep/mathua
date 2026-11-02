@@ -19321,5 +19321,140 @@
       "topo.homology.cellular",
       "topo.cohomology"
     ]
+  },
+  {
+    "id": "complex.integral.cauchy_formula",
+    "key_prerequisites": [
+      "complex.integral.cauchy_goursat",
+      "complex.adv.analytic"
+    ],
+    "encompasses": [
+      "complex.integral.cauchy_goursat",
+      "complex.adv.analytic"
+    ],
+    "prerequisites": [
+      "complex.integral.cauchy_goursat",
+      "complex.adv.analytic"
+    ]
+  },
+  {
+    "id": "complex.adv.liouville",
+    "key_prerequisites": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.analytic"
+    ],
+    "encompasses": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.analytic"
+    ],
+    "prerequisites": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.analytic"
+    ]
+  },
+  {
+    "id": "complex.adv.maximum_modulus",
+    "key_prerequisites": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.harmonic"
+    ],
+    "encompasses": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.harmonic"
+    ],
+    "prerequisites": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.harmonic"
+    ]
+  },
+  {
+    "id": "complex.integral.real_integrals",
+    "key_prerequisites": [
+      "complex.adv.residue",
+      "complex.integral.contour"
+    ],
+    "encompasses": [
+      "complex.adv.residue",
+      "complex.integral.contour"
+    ],
+    "prerequisites": [
+      "complex.adv.residue",
+      "complex.integral.contour"
+    ]
+  },
+  {
+    "id": "complex.adv.argument_principle",
+    "key_prerequisites": [
+      "complex.adv.residue",
+      "complex.adv.logarithm"
+    ],
+    "encompasses": [
+      "complex.adv.residue",
+      "complex.adv.logarithm"
+    ],
+    "prerequisites": [
+      "complex.adv.residue",
+      "complex.adv.logarithm"
+    ]
+  },
+  {
+    "id": "complex.adv.winding",
+    "key_prerequisites": [
+      "complex.integral.contour",
+      "complex.ops.argument"
+    ],
+    "encompasses": [
+      "complex.integral.contour",
+      "complex.ops.argument"
+    ],
+    "prerequisites": [
+      "complex.integral.contour",
+      "complex.ops.argument"
+    ]
+  },
+  {
+    "id": "complex.adv.riemann_mapping",
+    "key_prerequisites": [
+      "complex.adv.conformal",
+      "complex.topology.domain"
+    ],
+    "encompasses": [
+      "complex.adv.conformal",
+      "complex.topology.domain"
+    ],
+    "prerequisites": [
+      "complex.adv.conformal",
+      "complex.topology.domain"
+    ]
+  },
+  {
+    "id": "complex.adv.identity_theorem",
+    "key_prerequisites": [
+      "complex.adv.analytic",
+      "complex.series.power"
+    ],
+    "encompasses": [
+      "complex.adv.analytic",
+      "complex.series.power"
+    ],
+    "prerequisites": [
+      "complex.adv.analytic",
+      "complex.series.power"
+    ]
+  },
+  {
+    "id": "complex.adv.morera",
+    "key_prerequisites": [
+      "complex.integral.cauchy_goursat",
+      "complex.adv.analytic"
+    ],
+    "encompasses": [
+      "complex.integral.cauchy_goursat",
+      "complex.adv.analytic"
+    ],
+    "prerequisites": [
+      "complex.integral.cauchy_goursat",
+      "complex.adv.analytic"
+    ]
   }
 ]

@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1467,
+  "concept_count": 1476,
   "unit_count": 136,
   "units": [
     {
@@ -1109,21 +1109,27 @@
       "depth_max": 35,
       "subdomains": [
         "complex_numbers.advanced",
+        "complex_numbers.integral",
         "complex_numbers.topology"
       ],
       "concept_ids": [
         "complex.adv.analytic",
+        "complex.adv.argument_principle",
         "complex.adv.conformal",
         "complex.adv.harmonic",
+        "complex.adv.identity_theorem",
+        "complex.adv.morera",
         "complex.adv.residue",
         "complex.adv.residue_simple",
+        "complex.adv.riemann_mapping",
         "complex.adv.schwarz_lemma",
+        "complex.integral.cauchy_formula",
         "complex.integral.cauchy_goursat",
         "complex.series.laurent",
         "complex.series.power",
         "complex.topology.domain"
       ],
-      "concept_count": 10
+      "concept_count": 15
     },
     {
       "id": "complex_numbers.b12",
@@ -1134,16 +1140,21 @@
       "depth_max": 38,
       "subdomains": [
         "complex_numbers.advanced",
+        "complex_numbers.integral",
         "complex_numbers.topology"
       ],
       "concept_ids": [
         "complex.adv.cross_ratio",
+        "complex.adv.liouville",
+        "complex.adv.maximum_modulus",
         "complex.adv.mobius",
         "complex.adv.mobius_fixed",
+        "complex.adv.winding",
         "complex.integral.contour",
+        "complex.integral.real_integrals",
         "complex.topology.riemann_sphere"
       ],
-      "concept_count": 5
+      "concept_count": 9
     },
     {
       "id": "differential_equations.b11",

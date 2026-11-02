@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Winding around a point",
+    "section": "Winding around a point",
+    "subgoals": [
+      "The winding number of a closed curve around a point counts how many times the curve travels counterclockwise a",
+      "For a curve parametrized by z of t, the winding number around a is the change in the argument of z of t minus ",
+      "Winding numbers are the reason contour integrals detect holes. The integral of one over z minus a around a clo"
+    ]
+  },
+  {
+    "label": "Computing the winding number",
+    "section": "Computing the winding number",
+    "subgoals": [
+      "For a circle traversed once counterclockwise, the winding number around its centre is one. Around a point outs",
+      "For a curve that winds several times, the winding number is the net number of turns. A figure-eight curve can ",
+      "To compute it from a parametrization, track the argument continuously and count crossings of the negative real"
+    ]
+  },
+  {
+    "label": "Winding and argument change",
+    "section": "Winding and argument change",
+    "subgoals": [
+      "The argument principle is the statement that the winding number of the image curve equals the zero count minus",
+      "The winding number also classifies maps from the circle to the punctured plane up to homotopy. Two such maps a",
+      "In applications, winding numbers detect whether a curve encloses a point and how many times. They are used in "
+    ]
+  }
+]

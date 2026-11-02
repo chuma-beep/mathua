@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Conformal equivalence",
+    "section": "Conformal equivalence",
+    "subgoals": [
+      "Two domains are conformally equivalent when a one-to-one analytic map sends one onto the other with an analyti",
+      "The Riemann mapping theorem states that every simply connected proper domain in the complex plane is conformal",
+      "The theorem is an existence result. It does not usually give a formula for the map, and explicit maps are know"
+    ]
+  },
+  {
+    "label": "The mapping theorem",
+    "section": "The mapping theorem",
+    "subgoals": [
+      "The proof has two parts: a normal family argument shows that a suitable extremal map exists, and a boundary ar",
+      "Uniqueness follows from the Schwarz lemma. If two maps have the same normalization, their composition with the",
+      "The theorem fails without simple connectivity. An annulus is not conformally equivalent to the disc, because i"
+    ]
+  },
+  {
+    "label": "Boundary behaviour",
+    "section": "Boundary behaviour",
+    "subgoals": [
+      "The interior map does not automatically extend nicely to the boundary. For domains bounded by Jordan curves, C",
+      "Boundary behaviour matters for applications because boundary values determine harmonic functions. If the map e",
+      "The theorem is also a warning about invariants. Angles, harmonicity and analytic structure are preserved, but "
+    ]
+  }
+]

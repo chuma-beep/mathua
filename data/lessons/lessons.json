@@ -5866,5 +5866,41 @@
   {
     "concept_id": "topo.algebraic.mayer_vietoris",
     "source": "teaching/topo.algebraic.mayer_vietoris.md"
+  },
+  {
+    "concept_id": "complex.integral.cauchy_formula",
+    "source": "teaching/complex.integral.cauchy_formula.md"
+  },
+  {
+    "concept_id": "complex.adv.liouville",
+    "source": "teaching/complex.adv.liouville.md"
+  },
+  {
+    "concept_id": "complex.adv.maximum_modulus",
+    "source": "teaching/complex.adv.maximum_modulus.md"
+  },
+  {
+    "concept_id": "complex.integral.real_integrals",
+    "source": "teaching/complex.integral.real_integrals.md"
+  },
+  {
+    "concept_id": "complex.adv.argument_principle",
+    "source": "teaching/complex.adv.argument_principle.md"
+  },
+  {
+    "concept_id": "complex.adv.winding",
+    "source": "teaching/complex.adv.winding.md"
+  },
+  {
+    "concept_id": "complex.adv.riemann_mapping",
+    "source": "teaching/complex.adv.riemann_mapping.md"
+  },
+  {
+    "concept_id": "complex.adv.identity_theorem",
+    "source": "teaching/complex.adv.identity_theorem.md"
+  },
+  {
+    "concept_id": "complex.adv.morera",
+    "source": "teaching/complex.adv.morera.md"
   }
 ]

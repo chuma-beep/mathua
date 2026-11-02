@@ -1139,7 +1139,16 @@
       "complex.adv.residue_simple",
       "complex.adv.cross_ratio",
       "complex.topology.open_sets",
-      "complex.topology.domain"
+      "complex.topology.domain",
+      "complex.integral.cauchy_formula",
+      "complex.adv.liouville",
+      "complex.adv.maximum_modulus",
+      "complex.integral.real_integrals",
+      "complex.adv.argument_principle",
+      "complex.adv.winding",
+      "complex.adv.riemann_mapping",
+      "complex.adv.identity_theorem",
+      "complex.adv.morera"
     ]
   },
   {

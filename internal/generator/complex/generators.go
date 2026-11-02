@@ -40,6 +40,10 @@ func Register(reg *generator.Registry) {
 	reg.Register("complex.adv.logarithm", &logarithmGen{})
 
 	registerBatch(reg)
+	// Concepts added by the 2026 content expansion.
+	for id, kind := range complexBridgeKinds {
+		reg.Register(id, &complexBridgeGen{kind: kind})
+	}
 }
 
 func fmtComplex(r, i int) string {
