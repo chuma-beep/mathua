@@ -334,3 +334,21 @@ func TestRaiseNumericRecompute(t *testing.T) {
 		}
 	}
 }
+
+func TestVectorComponentsMagnitude(t *testing.T) {
+	gen := &trigBridgeGen{kind: "vector_components"}
+	pattern := regexp.MustCompile(`A vector has components (-?\d+) and (-?\d+)\. What is its magnitude`)
+	for i := 0; i < 200; i++ {
+		p := gen.Generate(generator.GeneratorContext{KPOrdinal: 3})
+		m := pattern.FindStringSubmatch(p.Question)
+		if m == nil {
+			t.Fatalf("question does not show components: %q", p.Question)
+		}
+		a, _ := strconv.Atoi(m[1])
+		b, _ := strconv.Atoi(m[2])
+		want := strconv.Itoa(int(math.Sqrt(float64(a*a + b*b))))
+		if p.Answer != want {
+			t.Fatalf("components (%d,%d) answered %s, want %s", a, b, p.Answer, want)
+		}
+	}
+}

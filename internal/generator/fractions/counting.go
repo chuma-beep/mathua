@@ -154,5 +154,5 @@ func compareWordProblem() generator.Problem {
 			note:  fmt.Sprintf("%d/%d is less than %d/%d, so Bob ate more.", p[0], p[1], p[2], p[3]),
 		})
 	}
-	return countFracVerdicts("How many of these comparisons are correct?", pool)
+	return countFracVerdicts("How many of these statements say Alice ate more than Bob?", pool)
 }
