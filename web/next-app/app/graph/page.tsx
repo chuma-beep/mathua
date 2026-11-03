@@ -94,6 +94,7 @@ function GraphContent() {
   const [graphError, setGraphError] = useState(false)
   const [goalId, setGoalId] = useState<string | null>(goalParam)
   const [focusId, setFocusId] = useState<string | null>(focusParam)
+  const [goalPathOnly, setGoalPathOnly] = useState(false)
   const [goalPickerOpen, setGoalPickerOpen] = useState(false)
   const [pendingLocalGoal, setPendingLocalGoal] = useState<string | null>(null)
   // Seeded from ?domain= so a deep link lands already filtered. The reset effect below
@@ -247,6 +248,7 @@ function GraphContent() {
   const handleSetGoal = useCallback(async (id: string) => {
     setGoalId(id)
     setFocusId(null)
+    setGoalPathOnly(false)
     setActiveDomain(null)
     setPendingLocalGoal(null)
     writeLocalGoal(id)
@@ -266,6 +268,7 @@ function GraphContent() {
 
   const handleClearGoal = useCallback(async () => {
     setGoalId(null)
+    setGoalPathOnly(false)
     writeLocalGoal(null)
     replaceGraphQuery(q => q.delete('goal'))
     if (loggedIn) {
@@ -289,6 +292,7 @@ function GraphContent() {
   const handleFocus = useCallback((id: string) => {
     setFocusId(id)
     setGoalId(null)
+    setGoalPathOnly(false)
     setActiveDomain(null)
     replaceGraphQuery(q => {
       q.set('focus', id)
@@ -477,6 +481,33 @@ function GraphContent() {
             <p className="mt-2 font-mono text-[10px] uppercase tracking-wider text-mathua-muted">
               {goalSummary.learned} of {goalSummary.total} concepts learned
             </p>
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              <span className="font-mono text-[10px] uppercase tracking-wider text-mathua-muted">View</span>
+              <button
+                type="button"
+                aria-pressed={!goalPathOnly}
+                onClick={() => setGoalPathOnly(false)}
+                className={`font-mono text-[10px] uppercase tracking-wider px-2.5 min-h-[32px] border transition-colors ${
+                  !goalPathOnly
+                    ? 'bg-mathua-blue text-white border-mathua-blue'
+                    : 'border-mathua-border text-mathua-muted hover:text-mathua-blue'
+                }`}
+              >
+                Full graph
+              </button>
+              <button
+                type="button"
+                aria-pressed={goalPathOnly}
+                onClick={() => setGoalPathOnly(true)}
+                className={`font-mono text-[10px] uppercase tracking-wider px-2.5 min-h-[32px] border transition-colors ${
+                  goalPathOnly
+                    ? 'bg-mathua-blue text-white border-mathua-blue'
+                    : 'border-mathua-border text-mathua-muted hover:text-mathua-blue'
+                }`}
+              >
+                Goal path
+              </button>
+            </div>
             {nextStepConcept ? (
               <Link href={`/learn?concept=${encodeURIComponent(nextStepConcept.id)}`} className="mt-3 inline-flex max-w-full items-start gap-1 break-words text-left font-mono text-xs uppercase tracking-wider text-mathua-blue leading-snug hover:text-mathua-blue-hover">
                 Next step: {nextStepConcept.label} &#8594;
@@ -522,6 +553,7 @@ function GraphContent() {
           onSelectionChange={handleSelectionChange}
           focusDomain={activeDomain}
           goalId={goalId}
+          trimToGoal={goalPathOnly}
           focusId={focusId}
           onSetGoal={handleSetGoal}
           onClearGoal={handleClearGoal}
