@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useEffect, useLayoutEffect, useState } from 'react'
 import { DICEBEAR_VERSION } from '../lib/dicebear'
 import { CREATOR_LINKS, SUPPORT_URL } from '../lib/creatorLinks'
+import { SITE_URL } from '../lib/site'
 
 interface FooterProps {
   className?: string
@@ -142,6 +143,35 @@ function useFooterArt(): FooterArt {
 
 export default function Footer({ className = '' }: FooterProps) {
   const art = useFooterArt()
+  const [shareStatus, setShareStatus] = useState<'idle' | 'copied' | 'error'>('idle')
+
+  useEffect(() => {
+    if (shareStatus === 'idle') return
+    const timer = window.setTimeout(() => setShareStatus('idle'), 2200)
+    return () => window.clearTimeout(timer)
+  }, [shareStatus])
+
+  async function shareMathua() {
+    if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
+      try {
+        await navigator.share({
+          title: 'Mathua',
+          text: 'Learn math with Mathua.',
+          url: SITE_URL,
+        })
+        return
+      } catch (error) {
+        if (error instanceof DOMException && error.name === 'AbortError') return
+      }
+    }
+
+    try {
+      await navigator.clipboard.writeText(SITE_URL)
+      setShareStatus('copied')
+    } catch {
+      setShareStatus('error')
+    }
+  }
 
   return (
     <footer
@@ -218,6 +248,29 @@ export default function Footer({ className = '' }: FooterProps) {
             >
               Support Mathua
             </a>
+            <div className="mt-4 max-w-[250px]">
+              <p className="text-sm leading-relaxed text-[var(--footer-ink-muted)]">
+                Know someone who wants to learn? Share Mathua with them.
+              </p>
+              <button
+                type="button"
+                onClick={shareMathua}
+                className="mt-2 inline-flex min-h-[36px] w-full items-center justify-center bg-mathua-blue px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.12em] text-white transition-colors hover:bg-mathua-blue-hover"
+              >
+                {shareStatus === 'copied'
+                  ? 'Link copied'
+                  : shareStatus === 'error'
+                    ? 'Copy failed'
+                    : 'Share Mathua'}
+              </button>
+              <span className="sr-only" aria-live="polite">
+                {shareStatus === 'copied'
+                  ? 'Link copied'
+                  : shareStatus === 'error'
+                    ? 'Copy failed'
+                    : ''}
+              </span>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-x-10 gap-y-8 sm:grid-cols-3 sm:gap-x-12">
