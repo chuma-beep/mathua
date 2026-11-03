@@ -95,6 +95,7 @@ function GraphContent() {
   const [goalId, setGoalId] = useState<string | null>(goalParam)
   const [focusId, setFocusId] = useState<string | null>(focusParam)
   const [goalPathOnly, setGoalPathOnly] = useState(false)
+  const [mobilePanel, setMobilePanel] = useState<'browse' | 'goal'>('browse')
   const [goalPickerOpen, setGoalPickerOpen] = useState(false)
   const [pendingLocalGoal, setPendingLocalGoal] = useState<string | null>(null)
   // Seeded from ?domain= so a deep link lands already filtered. The reset effect below
@@ -388,6 +389,10 @@ function GraphContent() {
     )
   }
 
+  const goalPanelClass = !focusId && mobilePanel !== 'goal' ? 'hidden sm:flex' : 'flex'
+  const browsePanelClass = !focusId && mobilePanel !== 'browse' ? 'hidden sm:flex' : 'flex'
+  const goalBannerClass = !focusId && mobilePanel !== 'goal' ? 'hidden sm:block' : ''
+
   return (
     <AppShell>
       <div className="w-full max-w-none px-4 sm:px-6 pb-[calc(80px+env(safe-area-inset-bottom))] lg:pb-0 overflow-x-hidden min-w-0">
@@ -414,7 +419,40 @@ function GraphContent() {
         )}
       </section>
 
-      <div className="flex flex-col items-center gap-2 mb-6">
+      {!focusId && (
+        <div
+          role="group"
+          aria-label="Graph controls"
+          className="sm:hidden grid grid-cols-2 gap-2 mb-4"
+        >
+          <button
+            type="button"
+            aria-pressed={mobilePanel === 'browse'}
+            onClick={() => setMobilePanel('browse')}
+            className={`w-full font-mono text-[10px] uppercase tracking-wider px-2.5 min-h-[40px] border transition-colors ${
+              mobilePanel === 'browse'
+                ? 'bg-mathua-blue text-white border-mathua-blue'
+                : 'border-mathua-border text-mathua-muted hover:text-mathua-blue'
+            }`}
+          >
+            All concepts
+          </button>
+          <button
+            type="button"
+            aria-pressed={mobilePanel === 'goal'}
+            onClick={() => setMobilePanel('goal')}
+            className={`w-full font-mono text-[10px] uppercase tracking-wider px-2.5 min-h-[40px] border transition-colors ${
+              mobilePanel === 'goal'
+                ? 'bg-mathua-blue text-white border-mathua-blue'
+                : 'border-mathua-border text-mathua-muted hover:text-mathua-blue'
+            }`}
+          >
+            Goal
+          </button>
+        </div>
+      )}
+
+      <div className={`${goalPanelClass} flex-col items-center gap-2 mb-6`}>
         <button
           type="button"
           onClick={() => setGoalPickerOpen(true)}
@@ -430,7 +468,7 @@ function GraphContent() {
       </div>
 
       {!focusId && domains.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center mb-6 min-w-0">
+        <div className={`${browsePanelClass} flex-wrap gap-1.5 sm:gap-2 justify-center mb-6 min-w-0`}>
           <button
             type="button"
             onClick={() => setDomainFilter(null)}
@@ -473,7 +511,8 @@ function GraphContent() {
         )}
 
         {goalId && goalConcept && goalSummary && (
-          <div className="mb-6 border border-mathua-blue bg-mathua-surface px-4 py-3">
+          <div className={goalBannerClass}>
+            <div className="mb-6 border border-mathua-blue bg-mathua-surface px-4 py-3">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
               <div className="min-w-0">
                 <p className="font-mono text-[10px] uppercase tracking-wider text-mathua-muted">Goal</p>
@@ -528,6 +567,7 @@ function GraphContent() {
             ) : (
               <p className="mt-3 text-sm text-mathua-secondary">No ready step yet. Review a prerequisite to unlock the next one.</p>
             )}
+            </div>
           </div>
         )}
 
