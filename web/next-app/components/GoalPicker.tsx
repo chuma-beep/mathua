@@ -48,7 +48,7 @@ export default function GoalPicker({ concepts, currentGoalId, onSelect, onClose 
             concept.domain.toLowerCase().includes(q),
         )
       : concepts
-    return matching.slice(0, 12)
+    return matching
   }, [concepts, query])
 
   return (
@@ -68,7 +68,7 @@ export default function GoalPicker({ concepts, currentGoalId, onSelect, onClose 
           <div className="min-w-0">
             <h2 className="text-sm text-mathua-primary">Choose a goal</h2>
             <p className="mt-1 text-[11px] text-mathua-secondary">
-              The graph will keep only this concept and the path that leads to it.
+              Choose a goal to highlight its path. The full graph stays visible.
             </p>
           </div>
           <button
