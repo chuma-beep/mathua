@@ -9,6 +9,7 @@ import dynamic from 'next/dynamic'
 import SectionHeader from '../../components/SectionHeader'
 import ProgressSummary from '../../components/ProgressSummary'
 import Footer from '../../components/Footer'
+import GoalPicker from '../../components/GoalPicker'
 import { concepts as conceptsData } from '../../lib/conceptData'
 import { getScores, getGraph, getProgress, getWeaknesses, getGoal as fetchGoal, setGoal as saveGoal, clearGoal as deleteGoal, healthCheck, type ConceptProgress, type GraphRes, type Scores } from '../../lib/api'
 import { getUserInfo } from '../../lib/auth'
@@ -93,6 +94,7 @@ function GraphContent() {
   const [graphError, setGraphError] = useState(false)
   const [goalId, setGoalId] = useState<string | null>(goalParam)
   const [focusId, setFocusId] = useState<string | null>(focusParam)
+  const [goalPickerOpen, setGoalPickerOpen] = useState(false)
   const [pendingLocalGoal, setPendingLocalGoal] = useState<string | null>(null)
   // Seeded from ?domain= so a deep link lands already filtered. The reset effect below
   // still runs: if the URL names a domain that does not exist, the graph shows nothing
@@ -402,6 +404,21 @@ function GraphContent() {
         )}
       </section>
 
+      <div className="flex flex-col items-center gap-2 mb-6">
+        <button
+          type="button"
+          onClick={() => setGoalPickerOpen(true)}
+          className="font-mono text-[10px] uppercase tracking-wider px-4 min-h-[40px] border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white transition-colors"
+        >
+          {goalId ? 'Change goal' : 'Set a goal'}
+        </button>
+        {!goalId && (
+          <p className="max-w-[420px] text-center text-[11px] text-mathua-secondary">
+            Pick any concept and the map trims to the path that leads there.
+          </p>
+        )}
+      </div>
+
       {!goalId && !focusId && domains.length > 0 && (
         <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center mb-6 min-w-0">
           <button
@@ -516,6 +533,17 @@ function GraphContent() {
     </div>
 
     <Footer />
+    {goalPickerOpen && (
+      <GoalPicker
+        concepts={goalSource}
+        currentGoalId={goalId}
+        onSelect={id => {
+          setGoalPickerOpen(false)
+          void handleSetGoal(id)
+        }}
+        onClose={() => setGoalPickerOpen(false)}
+      />
+    )}
     </AppShell>
   )
 }
