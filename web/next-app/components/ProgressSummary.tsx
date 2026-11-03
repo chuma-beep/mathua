@@ -22,14 +22,14 @@ export default function ProgressSummary({ scores, weakByDomain }: ProgressSummar
 
   return (
     <>
-      <div className="flex flex-wrap gap-4 justify-center mb-6">
+      <div className="mb-4 grid grid-cols-2 gap-2 justify-center sm:mb-6 sm:flex sm:flex-wrap sm:gap-4">
         {stats.map((s) => (
           <div
             key={s.label}
-            className="bg-mathua-surface border border-mathua-border p-5 flex-1 min-w-[140px] max-w-[200px] text-center"
+            className="bg-mathua-surface border border-mathua-border p-3 flex-1 min-w-0 max-w-none text-center sm:p-5 sm:min-w-[140px] sm:max-w-[200px]"
           >
             <div
-              className="font-mono text-2xl font-light mt-1"
+              className="font-mono text-xl font-light mt-1 sm:text-2xl"
               style={{ color: s.color }}
             >
               {s.value}
@@ -41,13 +41,13 @@ export default function ProgressSummary({ scores, weakByDomain }: ProgressSummar
         ))}
       </div>
       {weakDomains.length > 0 && (
-        <div className="flex flex-wrap gap-3 justify-center mb-6">
+        <div className="mb-4 grid grid-cols-2 gap-2 justify-center sm:mb-6 sm:flex sm:flex-wrap sm:gap-3">
           {weakDomains.map(([domain, concepts]) => {
             const label = domainLabel(domain)
             return (
-              <div key={domain} className="bg-mathua-surface border border-mathua-border px-4 py-2 text-center min-w-[120px]">
+              <div key={domain} className="bg-mathua-surface border border-mathua-border px-3 py-2 text-center min-w-0 sm:min-w-[120px] sm:px-4">
                 <div className="font-mono text-[10px] uppercase tracking-[0.1em] text-mathua-muted">{label}</div>
-                <div className="font-mono text-sm text-mathua-red mt-0.5">{concepts.length} need review</div>
+                <div className="font-mono text-[11px] text-mathua-red mt-0.5 sm:text-sm">{concepts.length} need review</div>
               </div>
             )
           })}
