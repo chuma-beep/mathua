@@ -16,7 +16,7 @@ import { getUserInfo } from '../../lib/auth'
 import { useAuthState } from '../../hooks/useAuthState'
 import { deriveStatuses } from '../../lib/graphStatus'
 import { DOMAIN_ORDER, domainLabel } from '../../lib/graphDomains'
-import { goalProgress as computeGoalProgress, nextGoalStep } from '../../lib/goalScope'
+import { goalProgress as computeGoalProgress, goalScope, nextGoalStep } from '../../lib/goalScope'
 import { createInflightCache, createSessionCache } from '../../lib/requestCache'
 import Loading from '../../components/Loading'
 
@@ -238,12 +238,15 @@ function GraphContent() {
   }, [rawProgress, conceptStatuses])
 
   const handleSelectionChange = useCallback((id: string | null) => {
+    if (id && goalPathOnly && goalId && !goalScope(goalId, concepts).includes(id)) {
+      setGoalPathOnly(false)
+    }
     setSelectedId(id)
     replaceGraphQuery(q => {
       if (id) q.set('concept', id)
       else q.delete('concept')
     })
-  }, [replaceGraphQuery])
+  }, [concepts, goalId, goalPathOnly, replaceGraphQuery])
 
   const handleSetGoal = useCallback(async (id: string) => {
     setGoalId(id)
