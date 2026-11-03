@@ -8,6 +8,7 @@ import AppShell from '../../components/app-shell'
 import LearnStepper from '../../components/LearnStepper'
 import LessonCredits from '../../components/LessonCredits'
 import NextUpCard from '../../components/NextUpCard'
+import GoalContinueCard from '../../components/GoalContinueCard'
 import type { Shelf } from '../../lib/nextUp'
 import { fetchShelf } from '../../lib/recommendations'
 import { parseReturnStack } from '../../lib/learnReturn'
@@ -96,6 +97,7 @@ function LearnEntry() {
             </div>
           </div>
         )}
+        <GoalContinueCard />
         <NextUpCard shelf={shelf} />
         <Link href="/profile" className="mt-4 inline-block font-mono text-xs text-mathua-secondary hover:text-mathua-blue">← Profile</Link>
       </div>
