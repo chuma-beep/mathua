@@ -323,8 +323,14 @@ describe('ConceptGraphFlow goal and focus', () => {
     )
   }
 
-  it('mounts only the goal and its prerequisite cone', () => {
+  it('keeps the full graph mounted by default when a goal is set', () => {
     const { container } = render(<ConceptGraphFlow concepts={many} goalId="b2" />)
+    const labels = renderedLabels(container)
+    expect(labels).toHaveLength(5)
+  })
+
+  it('mounts only the goal and its prerequisite cone when Goal path is selected', () => {
+    const { container } = render(<ConceptGraphFlow concepts={many} goalId="b2" trimToGoal />)
     const labels = renderedLabels(container)
     expect(labels.some(l => l.startsWith('Beta Two'))).toBe(true)
     expect(labels.some(l => l.startsWith('Beta One'))).toBe(true)

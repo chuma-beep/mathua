@@ -49,6 +49,8 @@ interface ConceptGraphFlowProps {
   focusDomain?: string | null
   /** When set, mount only this concept and its prerequisite closure. */
   goalId?: string | null
+  /** When true, goal mode filters the graph to the goal path. */
+  trimToGoal?: boolean
   /** When set, mount this concept, its prerequisite path and direct unlocks. */
   focusId?: string | null
   onSetGoal?: (id: string) => void
@@ -687,6 +689,7 @@ function GraphInner({
   onSelectionChange,
   focusDomain = null,
   goalId = null,
+  trimToGoal = false,
   focusId = null,
   onSetGoal,
   onClearGoal,
@@ -879,10 +882,10 @@ function GraphInner({
   }, [focusId, concepts, dependentsMap])
 
   const layoutConcepts = useMemo(() => {
-    if (goalIds) return concepts.filter(c => goalIds.has(c.id))
+    if (goalIds && trimToGoal) return concepts.filter(c => goalIds.has(c.id))
     if (focusIds) return concepts.filter(c => focusIds.has(c.id))
     return concepts
-  }, [concepts, goalIds, focusIds])
+  }, [concepts, goalIds, focusIds, trimToGoal])
 
   const layout = useMemo(
     () => precomputedLayout(layoutConcepts.map(c => c.id)) ?? layoutWithDagre(layoutConcepts),
@@ -893,7 +896,7 @@ function GraphInner({
   // its prerequisite cone plus its direct unlocks, and a domain focus mounts that
   // domain plus its one-hop neighbourhood. null means "everything".
   const mountedIds = useMemo(() => {
-    if (goalIds) return goalIds
+    if (goalIds && trimToGoal) return goalIds
     if (focusIds) return focusIds
     if (!focusDomain) return null
     // Freeze the member set first: neighbours are computed from members only,
@@ -927,9 +930,14 @@ function GraphInner({
       }
     }
     return ids
-  }, [goalIds, focusIds, focusDomain, concepts, conceptById, dependentsMap, effectiveSelected])
+  }, [goalIds, focusIds, focusDomain, concepts, conceptById, dependentsMap, effectiveSelected, trimToGoal])
 
-  const onPathSet = useMemo(() => (onPathNodes ? new Set(onPathNodes) : null), [onPathNodes])
+  const onPathSet = useMemo(() => {
+    if (!onPathNodes && !goalIds) return null
+    const ids = new Set(onPathNodes ?? [])
+    if (goalIds) for (const id of goalIds) ids.add(id)
+    return ids
+  }, [onPathNodes, goalIds])
 
   // Reuse previous node/edge objects when their rendered fields are unchanged,
   // so selecting a concept only re-renders the nodes/edges that actually
@@ -1052,7 +1060,7 @@ function GraphInner({
     }
     const raf = requestAnimationFrame(() => fitView({ ...FIT_VIEW_OPTIONS, duration: 300 }))
     return () => cancelAnimationFrame(raf)
-  }, [focusDomain, goalId, focusId, fitView])
+  }, [focusDomain, goalId, focusId, trimToGoal, concepts.length, fitView])
 
   const toggleAmbient = useCallback(() => {
     setAmbientOn(prev => {
