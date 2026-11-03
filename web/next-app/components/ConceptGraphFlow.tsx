@@ -3,6 +3,7 @@
 import { useMemo, useState, useEffect, useCallback, useRef, memo, type MouseEvent as ReactMouseEvent } from 'react'
 import { PlayIcon } from '@animateicons/react/lucide'
 import { countsAsMastered } from '../lib/progress'
+import { goalScope } from '../lib/goalScope'
 import {
   ReactFlow,
   ReactFlowProvider,
@@ -46,6 +47,14 @@ interface ConceptGraphFlowProps {
   onSelectionChange?: (id: string | null) => void
   /** When set, mount only this domain plus its one-hop neighbourhood. */
   focusDomain?: string | null
+  /** When set, mount only this concept and its prerequisite closure. */
+  goalId?: string | null
+  /** When set, mount this concept, its prerequisite path and direct unlocks. */
+  focusId?: string | null
+  onSetGoal?: (id: string) => void
+  onClearGoal?: () => void
+  onFocus?: (id: string) => void
+  onClearFocus?: () => void
 }
 
 const STATUS_COLORS: Record<GraphStatus, string> = {
@@ -90,6 +99,8 @@ type ConceptNodeData = {
   onPath: boolean
   dimmed: boolean
   selected: boolean
+  isGoal: boolean
+  isFocus: boolean
   onSelect?: (id: string) => void
 }
 
@@ -105,7 +116,7 @@ const ConceptNode = memo(function ConceptNode({ id, data }: NodeProps<ConceptFlo
         : ''
   const progressPct =
     typeof data.progress === 'number' ? Math.round(data.progress * 100) : null
-  const ariaLabel = `${data.label}, ${data.domain.replace(/_/g, ' ')} domain, ${STATUS_LABELS[data.status] ?? data.status}${progressPct !== null ? `, ${progressPct}% toward mastery` : ''}`
+  const ariaLabel = `${data.label}, ${data.domain.replace(/_/g, ' ')} domain, ${STATUS_LABELS[data.status] ?? data.status}${data.isGoal ? ', your goal' : ''}${progressPct !== null ? `, ${progressPct}% toward mastery` : ''}`
   return (
     <div
       className={`concept-node${pulseClass}`}
@@ -142,18 +153,37 @@ const ConceptNode = memo(function ConceptNode({ id, data }: NodeProps<ConceptFlo
           gap: 8,
           padding: '0 10px',
           background: 'var(--surface-elevated)',
-          border: data.selected
-            ? `1.5px solid ${statusColor}`
-            : data.onPath
-              ? '1px solid var(--accent-teal)'
-              : '1px solid var(--border)',
+          border: data.isGoal
+            ? `1.5px solid var(--accent-blue)`
+            : data.selected
+              ? `1.5px solid ${statusColor}`
+              : data.onPath
+                ? '1px solid var(--accent-teal)'
+                : '1px solid var(--border)',
+          boxShadow: data.isFocus ? `0 0 0 1px ${statusColor}` : undefined,
           overflow: 'hidden',
         }}
       >
         <Handle type="target" position={Position.Left} style={{ opacity: 0, pointerEvents: 'none' }} />
         <span style={{ width: 3, height: 22, flexShrink: 0, background: domainColor(data.domain) }} />
         <span style={{ width: 8, height: 8, borderRadius: '50%', flexShrink: 0, background: statusColor }} />
-        <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{data.label}</span>
+        <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', flex: 1, minWidth: 0 }}>{data.label}</span>
+        {data.isGoal && (
+          <span
+            style={{
+              flexShrink: 0,
+              fontSize: 8,
+              lineHeight: '12px',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              color: 'var(--accent-blue)',
+              border: '0.5px solid var(--accent-blue)',
+              padding: '0 3px',
+            }}
+          >
+            Goal
+          </span>
+        )}
         <Handle type="source" position={Position.Right} style={{ opacity: 0, pointerEvents: 'none' }} />
         <div
           data-progress={progressPct ?? 0}
@@ -656,6 +686,12 @@ function GraphInner({
   selectedId,
   onSelectionChange,
   focusDomain = null,
+  goalId = null,
+  focusId = null,
+  onSetGoal,
+  onClearGoal,
+  onFocus,
+  onClearFocus,
 }: ConceptGraphFlowProps) {
   const [isMobile, setIsMobile] = useState(false)
   const [internalSelected, setInternalSelected] = useState<string | null>(selectedId ?? null)
@@ -830,14 +866,35 @@ function GraphInner({
     return { upstream, downstream }
   }, [effectiveSelected, conceptById, dependentsMap])
 
-  const layout = useMemo(
-    () => precomputedLayout(concepts.map(c => c.id)) ?? layoutWithDagre(concepts),
-    [concepts]
+  const goalIds = useMemo(
+    () => (goalId ? new Set(goalScope(goalId, concepts)) : null),
+    [goalId, concepts]
   )
 
-  // Mounted set: when a domain is focused, render that domain plus its one-hop
-  // prerequisite/dependent neighbourhood. null means "everything".
+  const focusIds = useMemo(() => {
+    if (!focusId) return null
+    const ids = new Set(goalScope(focusId, concepts))
+    for (const d of dependentsMap.get(focusId) ?? []) ids.add(d)
+    return ids
+  }, [focusId, concepts, dependentsMap])
+
+  const layoutConcepts = useMemo(() => {
+    if (goalIds) return concepts.filter(c => goalIds.has(c.id))
+    if (focusIds) return concepts.filter(c => focusIds.has(c.id))
+    return concepts
+  }, [concepts, goalIds, focusIds])
+
+  const layout = useMemo(
+    () => precomputedLayout(layoutConcepts.map(c => c.id)) ?? layoutWithDagre(layoutConcepts),
+    [layoutConcepts]
+  )
+
+  // Mounted set: a goal mounts only its prerequisite cone, a concept focus mounts
+  // its prerequisite cone plus its direct unlocks, and a domain focus mounts that
+  // domain plus its one-hop neighbourhood. null means "everything".
   const mountedIds = useMemo(() => {
+    if (goalIds) return goalIds
+    if (focusIds) return focusIds
     if (!focusDomain) return null
     // Freeze the member set first: neighbours are computed from members only,
     // so the one-hop boundary never chains into two hops.
@@ -870,7 +927,7 @@ function GraphInner({
       }
     }
     return ids
-  }, [focusDomain, concepts, conceptById, dependentsMap, effectiveSelected])
+  }, [goalIds, focusIds, focusDomain, concepts, conceptById, dependentsMap, effectiveSelected])
 
   const onPathSet = useMemo(() => (onPathNodes ? new Set(onPathNodes) : null), [onPathNodes])
 
@@ -899,9 +956,11 @@ function GraphInner({
         onPath: onPathSet?.has(c.id) ?? false,
         dimmed: !inNeighborhood,
         selected: c.id === effectiveSelected,
+        isGoal: c.id === goalId,
+        isFocus: c.id === focusId,
         onSelect: select,
       }
-      const key = `${position.x},${position.y}|${data.status}|${data.progress ?? ''}|${data.onPath ? 1 : 0}|${data.dimmed ? 1 : 0}|${data.selected ? 1 : 0}`
+      const key = `${position.x},${position.y}|${data.status}|${data.progress ?? ''}|${data.onPath ? 1 : 0}|${data.dimmed ? 1 : 0}|${data.selected ? 1 : 0}|${data.isGoal ? 1 : 0}|${data.isFocus ? 1 : 0}`
       const prev = cache.get(c.id)
       const node: ConceptFlowNode =
         prev && prev.key === key
@@ -912,7 +971,7 @@ function GraphInner({
     }
     prevNodesRef.current = next
     return out
-  }, [concepts, conceptStatuses, conceptProgress, mountedIds, onPathSet, neighborhood, effectiveSelected, layout, select])
+  }, [concepts, conceptStatuses, conceptProgress, mountedIds, onPathSet, neighborhood, effectiveSelected, layout, select, goalId, focusId])
 
   const knownIds = useMemo(() => new Set(concepts.map(c => c.id)), [concepts])
 
@@ -993,7 +1052,7 @@ function GraphInner({
     }
     const raf = requestAnimationFrame(() => fitView({ ...FIT_VIEW_OPTIONS, duration: 300 }))
     return () => cancelAnimationFrame(raf)
-  }, [focusDomain, fitView])
+  }, [focusDomain, goalId, focusId, fitView])
 
   const toggleAmbient = useCallback(() => {
     setAmbientOn(prev => {
@@ -1105,11 +1164,11 @@ function GraphInner({
             nodeColor={minimapNodeColor}
           />
         </ReactFlow>
-        <SearchOverlay concepts={concepts} onSelect={select} />
+        <SearchOverlay concepts={layoutConcepts} onSelect={select} />
         <ListToggleButton open={listOpen} onToggle={() => setListOpen(o => !o)} />
         {listOpen && (
           <ListView
-            concepts={concepts}
+            concepts={layoutConcepts}
             conceptStatuses={conceptStatuses}
             selectedId={effectiveSelected}
             onSelect={select}
@@ -1155,6 +1214,48 @@ function GraphInner({
               {selectedLearned ? 'Check this →' : 'Learn this →'}
             </a>
           </div>
+          {(onSetGoal || onFocus) && (
+            <div className="flex flex-wrap gap-2 mt-2.5">
+              {onSetGoal && (
+                goalId === selected.id ? (
+                  <button
+                    type="button"
+                    onClick={onClearGoal}
+                    className="text-[11px] font-mono text-mathua-muted bg-transparent border-[0.5px] border-mathua-border rounded-none px-2.5 py-1.5 min-h-[36px] hover:text-mathua-red hover:border-mathua-red transition-colors"
+                  >
+                    Goal set · Clear goal
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => onSetGoal(selected.id)}
+                    className="text-[11px] font-mono text-mathua-blue bg-transparent border-[0.5px] border-mathua-blue rounded-none px-2.5 py-1.5 min-h-[36px] hover:bg-mathua-blue-faint transition-colors"
+                  >
+                    Set as goal
+                  </button>
+                )
+              )}
+              {onFocus && (
+                focusId === selected.id ? (
+                  <button
+                    type="button"
+                    onClick={onClearFocus}
+                    className="text-[11px] font-mono text-mathua-muted bg-transparent border-[0.5px] border-mathua-border rounded-none px-2.5 py-1.5 min-h-[36px] hover:text-mathua-primary transition-colors"
+                  >
+                    Exit focus
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => onFocus(selected.id)}
+                    className="text-[11px] font-mono text-mathua-secondary bg-transparent border-[0.5px] border-mathua-border rounded-none px-2.5 py-1.5 min-h-[36px] hover:text-mathua-blue hover:border-mathua-blue transition-colors"
+                  >
+                    Focus on this concept
+                  </button>
+                )
+              )}
+            </div>
+          )}
           {(prereqList.length > 0 || unlocksList.length > 0) && (
             <div className="flex gap-4 sm:gap-6 mt-2.5 flex-wrap min-w-0">
               {prereqList.length > 0 && (

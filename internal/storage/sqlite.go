@@ -106,6 +106,7 @@ func authMigrate(db *sql.DB) error {
 		"ALTER TABLE students ADD COLUMN diagnostic_completed_at TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE students ADD COLUMN daily_xp_goal INTEGER NOT NULL DEFAULT 30",
 		"ALTER TABLE students ADD COLUMN settings TEXT NOT NULL DEFAULT '{}'",
+		"ALTER TABLE students ADD COLUMN goal_concept_id TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE students ADD COLUMN league TEXT NOT NULL DEFAULT 'bronze'",
 		"ALTER TABLE students ADD COLUMN league_week TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE students ADD COLUMN league_moved INTEGER NOT NULL DEFAULT 0",
@@ -970,6 +971,30 @@ func (s *SQLiteStore) UpdateSettings(studentID string, settings string) error {
 		return fmt.Errorf("update settings: %w", err)
 	}
 	return nil
+}
+
+func (s *SQLiteStore) GetGoalConceptID(studentID string) (string, error) {
+	row := s.db.QueryRow("SELECT goal_concept_id FROM students WHERE id = ?", studentID)
+	var goal string
+	if err := row.Scan(&goal); err != nil {
+		if err == sql.ErrNoRows {
+			return "", nil
+		}
+		return "", fmt.Errorf("get goal concept: %w", err)
+	}
+	return goal, nil
+}
+
+func (s *SQLiteStore) SetGoalConceptID(studentID, conceptID string) error {
+	_, err := s.db.Exec("UPDATE students SET goal_concept_id = ? WHERE id = ?", conceptID, studentID)
+	if err != nil {
+		return fmt.Errorf("set goal concept: %w", err)
+	}
+	return nil
+}
+
+func (s *SQLiteStore) ClearGoalConceptID(studentID string) error {
+	return s.SetGoalConceptID(studentID, "")
 }
 
 func (s *SQLiteStore) SetAvatarImage(studentID string, contentType string, data []byte) error {

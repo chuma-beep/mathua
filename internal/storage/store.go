@@ -1004,6 +1004,9 @@ type Repository interface {
 	SetDailyXPGoal(studentID string, goal int) error
 	GetSettings(studentID string) (string, error)
 	UpdateSettings(studentID string, settings string) error
+	GetGoalConceptID(studentID string) (string, error)
+	SetGoalConceptID(studentID string, conceptID string) error
+	ClearGoalConceptID(studentID string) error
 	SetAvatarImage(studentID, contentType string, data []byte) error
 	GetAvatarImage(studentID string) (contentType string, data []byte, found bool, err error)
 	ClearAvatarImage(studentID string) error
