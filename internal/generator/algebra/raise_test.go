@@ -242,6 +242,10 @@ func TestRaiseNumericRecompute(t *testing.T) {
 		p := sample(t, reg, "alg.rational.asymptotes", 100+i)
 		m := intFact(t, p, "m")
 		n := intFact(t, p, "n")
+		a := intFact(t, p, "a")
+		if a == -m || a == -n {
+			t.Fatalf("asymptotes: a=%d cancels a denominator root m=%d n=%d", a, m, n)
+		}
 		larger := m
 		if n > m {
 			larger = n

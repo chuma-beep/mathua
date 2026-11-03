@@ -276,3 +276,21 @@ func TestCompositeProblemCountsComposites(t *testing.T) {
 		}
 	}
 }
+
+func TestDivisibilityHidesTheMissingDigit(t *testing.T) {
+	gen := &arithBridgeGen{kind: "divisibility"}
+	pattern := regexp.MustCompile(`The three-digit number (\d)_(\d) is divisible by 9`)
+	for i := 0; i < 200; i++ {
+		p := gen.Generate(generator.GeneratorContext{KPOrdinal: 2})
+		m := pattern.FindStringSubmatch(p.Question)
+		if m == nil {
+			t.Fatalf("question does not show one missing digit: %q", p.Question)
+		}
+		a, _ := strconv.Atoi(m[1])
+		c, _ := strconv.Atoi(m[2])
+		d, _ := strconv.Atoi(p.Answer)
+		if (a+d+c)%9 != 0 {
+			t.Fatalf("a=%d d=%d c=%d is not divisible by 9", a, d, c)
+		}
+	}
+}

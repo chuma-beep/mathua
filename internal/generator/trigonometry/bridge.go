@@ -2,6 +2,7 @@ package trigonometry
 
 import (
 	"fmt"
+	"math"
 	"math/rand"
 	"strconv"
 	"strings"
@@ -147,7 +148,7 @@ func (g *trigBridgeGen) Generate(ctx generator.GeneratorContext) generator.Probl
 			return trigProb(o, fmt.Sprintf("A vector of magnitude %d points at %d degrees from the positive x-axis. What is its y-component? (enter a number)", r, angle), strconv.Itoa(y), fmt.Sprintf("The y-component is r sin(theta) = %d sin %d = %d.", r, angle, y))
 		default:
 			t := triples[rand.Intn(len(triples))]
-			return trigProb(o, fmt.Sprintf("A vector has components %d and %d. What is its magnitude? (enter a number)", t[0], t[1]), strconv.Itoa(t[0]*t[0]+t[1]*t[1]), "The magnitude squared is the sum of the squares; here it is a Pythagorean triple.")
+			return trigProb(o, fmt.Sprintf("A vector has components %d and %d. What is its magnitude? (enter a number)", t[0], t[1]), strconv.Itoa(int(math.Sqrt(float64(t[0]*t[0]+t[1]*t[1])))), "The magnitude is the square root of the sum of the squares; this is a Pythagorean triple.")
 		}
 	case "even_odd":
 		switch o {

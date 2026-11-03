@@ -81,7 +81,7 @@ func (g *arithBridgeGen) Generate(ctx generator.GeneratorContext) generator.Prob
 			a := 1 + rand.Intn(8)
 			c := rand.Intn(10)
 			d := (9 - (100*a+c)%9) % 9
-			return arithProb(o, fmt.Sprintf("The three-digit number %d%d%d is divisible by 9. What is the missing digit? (enter a number)", a, d, c), strconv.Itoa(d), fmt.Sprintf("The digit sum must be a multiple of 9. With digit %d the sum is %d.", d, a+d+c))
+			return arithProb(o, fmt.Sprintf("The three-digit number %d_%d is divisible by 9. What is the missing digit? (enter a number)", a, c), strconv.Itoa(d), fmt.Sprintf("The digit sum must be a multiple of 9. With digit %d the sum is %d.", d, a+d+c))
 		default:
 			nums := make([]int, 4)
 			count := 0

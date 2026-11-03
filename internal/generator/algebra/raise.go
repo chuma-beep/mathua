@@ -631,7 +631,7 @@ func (g *asymptotesGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		c.n = rand.Intn(17) - 8
 		// Both asymptotes must exist and be distinct, and neither may sit at
 		// zero: a zero root would print the constant term as "+ 0".
-		if c.m != 0 && c.n != 0 && c.m != c.n && c.m+c.n != 0 {
+		if c.m != 0 && c.n != 0 && c.m != c.n && c.m+c.n != 0 && c.a != -c.m && c.a != -c.n {
 			break
 		}
 	}

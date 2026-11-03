@@ -210,6 +210,9 @@ func TestCompareWordQuestionIsNotRunOn(t *testing.T) {
 		if !strings.Contains(p.Question, "\n(a) ") || !strings.Contains(p.Question, "\n(h) ") {
 			t.Fatalf("question items should each start on a new line: %q", p.Question)
 		}
+		if !strings.Contains(p.Question, "Alice ate more than Bob") {
+			t.Fatalf("question does not state the comparison: %q", p.Question)
+		}
 		if strings.Contains(p.Question, ".:") || strings.Contains(p.Explanation, ".:") {
 			t.Fatalf("double punctuation remains: question %q explanation %q", p.Question, p.Explanation)
 		}
