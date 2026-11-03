@@ -255,7 +255,7 @@ export default function Footer({ className = '' }: FooterProps) {
               <button
                 type="button"
                 onClick={shareMathua}
-                className="mt-2 inline-flex min-h-[36px] w-full items-center justify-center bg-mathua-blue px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.12em] text-white transition-colors hover:bg-mathua-blue-hover"
+                className="mt-2 inline-flex min-h-[32px] items-center justify-center bg-mathua-blue px-2.5 py-1 font-mono text-[11px] uppercase tracking-[0.12em] text-white transition-colors hover:bg-mathua-blue-hover"
               >
                 {shareStatus === 'copied'
                   ? 'Link copied'
