@@ -73,6 +73,12 @@ export const test = base.extend({
     await context.route('**/api/plans/current**', (route) => route.fulfill({ json: { plan: null } }))
     await context.route('**/api/lessons**', (route) => route.fulfill({ json: { lessons: {} } }))
     await context.route('**/api/graph**', (route) => route.fulfill({ json: { nodes: [] } }))
+    // The graph page asks for the account learning goal on load. No goal is the
+    // default empty account; a spec that sets one registers its own route later
+    // and wins.
+    await context.route('**/api/learning-goal**', (route) =>
+      route.fulfill({ json: { concept_id: null } }),
+    )
     await context.route('**/api/next**', (route) =>
       route.fulfill({ json: { done: true, next: null, total: 0, message: 'Nothing to review' } }),
     )
