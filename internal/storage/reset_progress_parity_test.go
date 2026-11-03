@@ -55,6 +55,9 @@ func TestResetProgress_RoundTrip_Parity(t *testing.T) {
 		run("seed remedial", store.EnqueueRemedial(st.ID, "a", "b"))
 
 		run("reset", store.ResetProgress(st.ID))
+		if events := seedInt(t, store, `SELECT COUNT(*) FROM xp_events WHERE student_id = ?`, st.ID); events != 0 {
+			t.Errorf("[%s] xp_events survive reset: %d rows", tag, events)
+		}
 
 		if rem, _ := store.GetRemedialQueue(st.ID); len(rem) != 0 {
 			t.Errorf("[%s] remedial queue survives: %d rows", tag, len(rem))
