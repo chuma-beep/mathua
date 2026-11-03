@@ -106,6 +106,9 @@ function GraphContent() {
   // replace(), not push(): filtering is not navigation, and pushing would make Back walk through
   // every domain the learner glanced at.
   const setDomainFilter = (next: string | null) => {
+    // A domain chip is a request to browse that part of the catalogue, so it
+    // takes precedence over a goal-path trim.
+    setGoalPathOnly(false)
     setActiveDomain(next)
     const q = new URLSearchParams(searchParams.toString())
     if (next) q.set('domain', next)
@@ -421,12 +424,12 @@ function GraphContent() {
         </button>
         {!goalId && (
           <p className="max-w-[420px] px-2 text-center text-[11px] text-mathua-secondary">
-            Pick any concept and the map trims to the path that leads there.
+            Pick any concept to set a goal. The full graph stays visible.
           </p>
         )}
       </div>
 
-      {!goalId && !focusId && domains.length > 0 && (
+      {!focusId && domains.length > 0 && (
         <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center mb-6 min-w-0">
           <button
             type="button"

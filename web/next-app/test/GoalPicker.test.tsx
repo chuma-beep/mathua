@@ -27,6 +27,18 @@ describe('GoalPicker', () => {
     expect(onSelect).toHaveBeenCalledWith('b')
   })
 
+  it('lists every concept without truncating the selection list', () => {
+    const many = Array.from({ length: 20 }, (_, i) => ({
+      id: `concept-${i}`,
+      label: `Concept ${i}`,
+      domain: 'arithmetic',
+    }))
+    render(<GoalPicker concepts={many} onSelect={vi.fn()} onClose={vi.fn()} />)
+
+    expect(screen.getByText('Concept 0')).toBeInTheDocument()
+    expect(screen.getByText('Concept 19')).toBeInTheDocument()
+  })
+
   it('closes on Escape and marks the current goal', () => {
     const onClose = vi.fn()
     render(
