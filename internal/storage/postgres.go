@@ -1951,6 +1951,7 @@ func (s *PostgresStore) ResetProgress(studentID string) error {
 		{"DELETE FROM review_events WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM student_remedial_queue WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM server_sessions WHERE kind IN ('study_expected','study_plan') AND (key = $1 OR key LIKE $1 || '|%')", []interface{}{studentID}},
+		{"DELETE FROM xp_events WHERE student_id = $1", []interface{}{studentID}},
 		{`UPDATE students SET xp_total = 0, xp_today = 0, diagnostic_completed = 0, diagnostic_completed_at = '',
 			league = 'bronze', league_week = '', league_moved = 0 WHERE id = $1`, []interface{}{studentID}},
 	}

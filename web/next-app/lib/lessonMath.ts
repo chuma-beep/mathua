@@ -21,7 +21,9 @@ const ESC_DOLLAR = '\u0000MU-ESC-DOLLAR\u0000'
 // command or punctuation follows; leave `\\` at a line end or before `[`
 // alone, because those are real row breaks with optional spacing.
 function fixDoubledCommands(s: string): string {
-  return s.replace(/\\\\(?=[a-zA-Z,;:!])/g, '\\')
+  // A single letter after `\\` is row content, not a command. Collapsing it
+  // would turn a cases row break before a variable into an unknown command.
+  return s.replace(/\\\\(?=[a-zA-Z]{2,}|[,;:!])/g, '\\')
 }
 
 function escapeHtmlMath(s: string): string {
