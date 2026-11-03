@@ -408,12 +408,12 @@ function GraphContent() {
         <button
           type="button"
           onClick={() => setGoalPickerOpen(true)}
-          className="font-mono text-[10px] uppercase tracking-wider px-4 min-h-[40px] border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white transition-colors"
+          className="w-full max-w-[320px] sm:w-auto font-mono text-[10px] uppercase tracking-wider px-4 min-h-[40px] border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white transition-colors"
         >
           {goalId ? 'Change goal' : 'Set a goal'}
         </button>
         {!goalId && (
-          <p className="max-w-[420px] text-center text-[11px] text-mathua-secondary">
+          <p className="max-w-[420px] px-2 text-center text-[11px] text-mathua-secondary">
             Pick any concept and the map trims to the path that leads there.
           </p>
         )}
@@ -455,21 +455,21 @@ function GraphContent() {
             <p className="text-sm text-mathua-primary">
               This device has a saved goal: {conceptById.get(pendingLocalGoal)?.label ?? pendingLocalGoal}.
             </p>
-            <div className="mt-3 flex flex-wrap gap-2">
-              <button type="button" onClick={handleUseLocalGoal} className="font-mono text-[10px] uppercase tracking-wider px-3 min-h-[36px] border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white transition-colors">Use this goal</button>
-              <button type="button" onClick={handleDismissLocalGoal} className="font-mono text-[10px] uppercase tracking-wider px-3 min-h-[36px] border border-mathua-border text-mathua-muted hover:text-mathua-primary transition-colors">Not now</button>
+            <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+              <button type="button" onClick={handleUseLocalGoal} className="w-full sm:w-auto font-mono text-[10px] uppercase tracking-wider px-3 min-h-[36px] border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white transition-colors">Use this goal</button>
+              <button type="button" onClick={handleDismissLocalGoal} className="w-full sm:w-auto font-mono text-[10px] uppercase tracking-wider px-3 min-h-[36px] border border-mathua-border text-mathua-muted hover:text-mathua-primary transition-colors">Not now</button>
             </div>
           </div>
         )}
 
         {goalId && goalConcept && goalSummary && (
           <div className="mb-6 border border-mathua-blue bg-mathua-surface px-4 py-3">
-            <div className="flex flex-wrap items-start justify-between gap-3">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
               <div className="min-w-0">
                 <p className="font-mono text-[10px] uppercase tracking-wider text-mathua-muted">Goal</p>
-                <p className="text-sm text-mathua-primary truncate">{goalConcept.label}</p>
+                <p className="text-sm text-mathua-primary break-words">{goalConcept.label}</p>
               </div>
-              <button type="button" onClick={handleClearGoal} className="font-mono text-[10px] uppercase tracking-wider text-mathua-muted hover:text-mathua-red transition-colors">Clear goal</button>
+              <button type="button" onClick={handleClearGoal} className="self-start shrink-0 font-mono text-[10px] uppercase tracking-wider text-mathua-muted hover:text-mathua-red transition-colors sm:self-auto">Clear goal</button>
             </div>
             <div className="mt-3 h-1.5 w-full bg-mathua-border" aria-hidden="true">
               <div className="h-full bg-mathua-blue" style={{ width: `${goalSummary.pct}%` }} />
@@ -478,7 +478,7 @@ function GraphContent() {
               {goalSummary.learned} of {goalSummary.total} concepts learned
             </p>
             {nextStepConcept ? (
-              <Link href={`/learn?concept=${encodeURIComponent(nextStepConcept.id)}`} className="mt-3 inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-mathua-blue hover:text-mathua-blue-hover">
+              <Link href={`/learn?concept=${encodeURIComponent(nextStepConcept.id)}`} className="mt-3 inline-flex max-w-full items-start gap-1 break-words text-left font-mono text-xs uppercase tracking-wider text-mathua-blue leading-snug hover:text-mathua-blue-hover">
                 Next step: {nextStepConcept.label} &#8594;
               </Link>
             ) : (
@@ -489,12 +489,12 @@ function GraphContent() {
 
         {focusId && focusConcept && (
           <div className="mb-6 border border-mathua-border bg-mathua-surface px-4 py-3">
-            <div className="flex flex-wrap items-start justify-between gap-3">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-3">
               <div className="min-w-0">
                 <p className="font-mono text-[10px] uppercase tracking-wider text-mathua-muted">Focus</p>
-                <p className="text-sm text-mathua-primary truncate">{focusConcept.label}</p>
+                <p className="text-sm text-mathua-primary break-words">{focusConcept.label}</p>
               </div>
-              <button type="button" onClick={handleClearFocus} className="font-mono text-[10px] uppercase tracking-wider text-mathua-muted hover:text-mathua-primary transition-colors">Exit focus</button>
+              <button type="button" onClick={handleClearFocus} className="self-start shrink-0 font-mono text-[10px] uppercase tracking-wider text-mathua-muted hover:text-mathua-primary transition-colors sm:self-auto">Exit focus</button>
             </div>
             <p className="mt-2 text-sm text-mathua-secondary">Showing this concept, its prerequisite path and its direct unlocks.</p>
           </div>
