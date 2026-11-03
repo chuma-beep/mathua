@@ -643,6 +643,7 @@ func pgAuthMigrate(db *sql.DB) error {
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS diagnostic_completed_at TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS daily_xp_goal INTEGER NOT NULL DEFAULT 30",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS settings TEXT NOT NULL DEFAULT '{}'",
+		"ALTER TABLE students ADD COLUMN IF NOT EXISTS goal_concept_id TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS league TEXT NOT NULL DEFAULT 'bronze'",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS league_week TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS league_moved INTEGER NOT NULL DEFAULT 0",
@@ -1370,6 +1371,30 @@ func (s *PostgresStore) UpdateSettings(studentID string, settings string) error 
 		return fmt.Errorf("update settings: %w", err)
 	}
 	return nil
+}
+
+func (s *PostgresStore) GetGoalConceptID(studentID string) (string, error) {
+	row := s.db.QueryRow("SELECT goal_concept_id FROM students WHERE id = $1", studentID)
+	var goal string
+	if err := row.Scan(&goal); err != nil {
+		if err == sql.ErrNoRows {
+			return "", nil
+		}
+		return "", fmt.Errorf("get goal concept: %w", err)
+	}
+	return goal, nil
+}
+
+func (s *PostgresStore) SetGoalConceptID(studentID, conceptID string) error {
+	_, err := s.db.Exec("UPDATE students SET goal_concept_id = $1 WHERE id = $2", conceptID, studentID)
+	if err != nil {
+		return fmt.Errorf("set goal concept: %w", err)
+	}
+	return nil
+}
+
+func (s *PostgresStore) ClearGoalConceptID(studentID string) error {
+	return s.SetGoalConceptID(studentID, "")
 }
 
 func (s *PostgresStore) SetAvatarImage(studentID string, contentType string, data []byte) error {

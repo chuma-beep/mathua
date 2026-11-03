@@ -521,6 +521,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/account/reset", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleAccountReset)))))
 	mux.HandleFunc("/api/account", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleAccountDelete)))))
 	mux.HandleFunc("/api/settings", logRequest(cors(s.authMiddleware(s.handleSettings))))
+	mux.HandleFunc("/api/learning-goal", logRequest(cors(s.authMiddleware(s.handleLearningGoal))))
 	mux.HandleFunc("/api/avatar", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleAvatar)))))
 	mux.HandleFunc("/api/avatar/me", logRequest(cors(s.authMiddleware(s.handleAvatarMe))))
 	// Public per-student photo for leaderboard avatars (custom uploads are
@@ -2218,6 +2219,57 @@ func (s *Server) handleSettings(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		writeJSON(w, req)
+	default:
+		http.Error(w, `{"error":"method not allowed"}`, 405)
+	}
+}
+
+// GET|PUT|DELETE /api/learning-goal
+func (s *Server) handleLearningGoal(w http.ResponseWriter, r *http.Request) {
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID == "" {
+		writeError(w, "not authenticated", 401)
+		return
+	}
+	switch r.Method {
+	case http.MethodGet:
+		goal, err := s.repo.GetGoalConceptID(studentID)
+		if err != nil {
+			writeError(w, "failed to get learning goal", 500)
+			return
+		}
+		if goal == "" {
+			writeJSON(w, map[string]interface{}{"concept_id": nil})
+			return
+		}
+		writeJSON(w, map[string]string{"concept_id": goal})
+	case http.MethodPut:
+		var req struct {
+			ConceptID string `json:"concept_id"`
+		}
+		if err := decodeJSON(w, r, &req); err != nil {
+			writeError(w, "invalid request", 400)
+			return
+		}
+		if req.ConceptID == "" {
+			writeError(w, "concept_id is required", 400)
+			return
+		}
+		if s.eng.GetDAG().Concept(req.ConceptID) == nil {
+			writeError(w, "unknown concept", 400)
+			return
+		}
+		if err := s.repo.SetGoalConceptID(studentID, req.ConceptID); err != nil {
+			writeError(w, "failed to set learning goal", 500)
+			return
+		}
+		writeJSON(w, map[string]string{"concept_id": req.ConceptID})
+	case http.MethodDelete:
+		if err := s.repo.ClearGoalConceptID(studentID); err != nil {
+			writeError(w, "failed to clear learning goal", 500)
+			return
+		}
+		writeJSON(w, map[string]interface{}{"concept_id": nil})
 	default:
 		http.Error(w, `{"error":"method not allowed"}`, 405)
 	}

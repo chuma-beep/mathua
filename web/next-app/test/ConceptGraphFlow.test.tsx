@@ -307,3 +307,74 @@ describe('ConceptGraphFlow keyboard controls', () => {
     expect(onSelectionChange).not.toHaveBeenCalledWith(null)
   })
 })
+
+describe('ConceptGraphFlow goal and focus', () => {
+  const many = [
+    { id: 'a1', label: 'Alpha One', domain: 'domA', prerequisites: [] },
+    { id: 'a2', label: 'Alpha Two', domain: 'domA', prerequisites: ['a1'] },
+    { id: 'b1', label: 'Beta One', domain: 'domB', prerequisites: ['a1'] },
+    { id: 'b2', label: 'Beta Two', domain: 'domB', prerequisites: ['b1'] },
+    { id: 'c1', label: 'Gamma One', domain: 'domC', prerequisites: [] },
+  ]
+
+  function renderedLabels(container: HTMLElement): string[] {
+    return Array.from(container.querySelectorAll('.concept-node')).map(n =>
+      n.getAttribute('aria-label') ?? ''
+    )
+  }
+
+  it('mounts only the goal and its prerequisite cone', () => {
+    const { container } = render(<ConceptGraphFlow concepts={many} goalId="b2" />)
+    const labels = renderedLabels(container)
+    expect(labels.some(l => l.startsWith('Beta Two'))).toBe(true)
+    expect(labels.some(l => l.startsWith('Beta One'))).toBe(true)
+    expect(labels.some(l => l.startsWith('Alpha One'))).toBe(true)
+    expect(labels.some(l => l.startsWith('Alpha Two'))).toBe(false)
+    expect(labels.some(l => l.startsWith('Gamma One'))).toBe(false)
+  })
+
+  it('marks the goal node', () => {
+    render(<ConceptGraphFlow concepts={many} goalId="b2" />)
+    expect(screen.getByLabelText(/Beta Two, domB domain.*your goal/)).toBeInTheDocument()
+    expect(screen.getAllByText('Goal').length).toBeGreaterThan(0)
+  })
+
+  it('offers set, clear and focus actions in the detail panel', () => {
+    const onSetGoal = vi.fn()
+    const onClearGoal = vi.fn()
+    const onFocus = vi.fn()
+    const onClearFocus = vi.fn()
+    const { rerender } = render(
+      <ConceptGraphFlow
+        concepts={many}
+        selectedId="b1"
+        onSetGoal={onSetGoal}
+        onClearGoal={onClearGoal}
+        onFocus={onFocus}
+        onClearFocus={onClearFocus}
+      />
+    )
+
+    fireEvent.click(screen.getByRole('button', { name: 'Set as goal' }))
+    expect(onSetGoal).toHaveBeenCalledWith('b1')
+    fireEvent.click(screen.getByRole('button', { name: 'Focus on this concept' }))
+    expect(onFocus).toHaveBeenCalledWith('b1')
+
+    rerender(
+      <ConceptGraphFlow
+        concepts={many}
+        selectedId="b1"
+        goalId="b1"
+        focusId="b1"
+        onSetGoal={onSetGoal}
+        onClearGoal={onClearGoal}
+        onFocus={onFocus}
+        onClearFocus={onClearFocus}
+      />
+    )
+    fireEvent.click(screen.getByRole('button', { name: 'Goal set · Clear goal' }))
+    expect(onClearGoal).toHaveBeenCalled()
+    fireEvent.click(screen.getByRole('button', { name: 'Exit focus' }))
+    expect(onClearFocus).toHaveBeenCalled()
+  })
+})

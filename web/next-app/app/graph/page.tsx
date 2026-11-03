@@ -10,11 +10,12 @@ import SectionHeader from '../../components/SectionHeader'
 import ProgressSummary from '../../components/ProgressSummary'
 import Footer from '../../components/Footer'
 import { concepts as conceptsData } from '../../lib/conceptData'
-import { getScores, getGraph, getProgress, getWeaknesses, healthCheck, type GraphRes, type Scores } from '../../lib/api'
+import { getScores, getGraph, getProgress, getWeaknesses, getGoal as fetchGoal, setGoal as saveGoal, clearGoal as deleteGoal, healthCheck, type ConceptProgress, type GraphRes, type Scores } from '../../lib/api'
 import { getUserInfo } from '../../lib/auth'
 import { useAuthState } from '../../hooks/useAuthState'
 import { deriveStatuses } from '../../lib/graphStatus'
 import { DOMAIN_ORDER, domainLabel } from '../../lib/graphDomains'
+import { goalProgress as computeGoalProgress, nextGoalStep } from '../../lib/goalScope'
 import { createInflightCache, createSessionCache } from '../../lib/requestCache'
 import Loading from '../../components/Loading'
 
@@ -54,6 +55,27 @@ const fallbackConcepts = conceptsData.map((c) => ({
 const oncePerSession = createSessionCache()
 const dedupeInFlight = createInflightCache()
 
+const GOAL_STORAGE_KEY = 'mathua_graph_goal'
+
+function readLocalGoal(): string | null {
+  if (typeof window === 'undefined') return null
+  try {
+    return window.localStorage.getItem(GOAL_STORAGE_KEY)
+  } catch {
+    return null
+  }
+}
+
+function writeLocalGoal(id: string | null): void {
+  if (typeof window === 'undefined') return
+  try {
+    if (id) window.localStorage.setItem(GOAL_STORAGE_KEY, id)
+    else window.localStorage.removeItem(GOAL_STORAGE_KEY)
+  } catch {
+    // Storage can be unavailable in private modes. The account remains authoritative.
+  }
+}
+
 function GraphContent() {
   const { theme, mounted } = useTheme()
   const { replace } = useRouter()
@@ -61,12 +83,17 @@ function GraphContent() {
   const conceptParam = searchParams.get('concept')
   // ?domain= makes the filter linkable, so /domains can deep-link into one subject.
   const domainParam = searchParams.get('domain')
+  const goalParam = searchParams.get('goal')
+  const focusParam = searchParams.get('focus')
   const [graphData, setGraphData] = useState<GraphRes | null>(null)
-  const [rawProgress, setRawProgress] = useState<Record<string, { status?: string; streak?: number; mastery_pct?: number }>>({})
+  const [rawProgress, setRawProgress] = useState<Record<string, ConceptProgress>>({})
   const [weakByDomain, setWeakByDomain] = useState<Record<string, { id: string; label: string }[]> | undefined>(undefined)
   const [connected, setConnected] = useState(false)
   const [scores, setScores] = useState<Scores | null>(null)
   const [graphError, setGraphError] = useState(false)
+  const [goalId, setGoalId] = useState<string | null>(goalParam)
+  const [focusId, setFocusId] = useState<string | null>(focusParam)
+  const [pendingLocalGoal, setPendingLocalGoal] = useState<string | null>(null)
   // Seeded from ?domain= so a deep link lands already filtered. The reset effect below
   // still runs: if the URL names a domain that does not exist, the graph shows nothing
   // filtered rather than silently ignoring the parameter.
@@ -83,6 +110,13 @@ function GraphContent() {
     const qs = q.toString()
     replace(qs ? `/graph?${qs}` : '/graph', { scroll: false })
   }
+
+  const replaceGraphQuery = useCallback((mutate: (q: URLSearchParams) => void) => {
+    const q = new URLSearchParams(searchParams.toString())
+    mutate(q)
+    const qs = q.toString()
+    replace(qs ? `/graph?${qs}` : '/graph', { scroll: false })
+  }, [replace, searchParams])
   const [selectedId, setSelectedId] = useState<string | null>(conceptParam)
   const { loggedIn } = useAuthState()
 
@@ -95,6 +129,48 @@ function GraphContent() {
   useEffect(() => {
     loadGraph()
   }, [loadGraph])
+
+  useEffect(() => {
+    if (!mounted) return
+    const local = readLocalGoal()
+    if (focusParam) {
+      setFocusId(focusParam)
+      setGoalId(null)
+      return
+    }
+    if (goalParam) {
+      setGoalId(goalParam)
+      setFocusId(null)
+      return
+    }
+    if (!loggedIn) {
+      setGoalId(local)
+      return
+    }
+    let cancelled = false
+    fetchGoal()
+      .then(account => {
+        if (cancelled) return
+        if (account) {
+          setGoalId(account)
+          setPendingLocalGoal(null)
+          return
+        }
+        if (local) {
+          setGoalId(null)
+          setPendingLocalGoal(local)
+          return
+        }
+        setGoalId(null)
+        setPendingLocalGoal(null)
+      })
+      .catch(() => {
+        if (!cancelled) setGoalId(local)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [mounted, loggedIn, goalParam, focusParam])
 
   useEffect(() => {
     if (!loggedIn) return
@@ -160,12 +236,69 @@ function GraphContent() {
 
   const handleSelectionChange = useCallback((id: string | null) => {
     setSelectedId(id)
-    if (id) {
-      replace(`/graph?concept=${encodeURIComponent(id)}`, { scroll: false })
-    } else {
-      replace('/graph', { scroll: false })
+    replaceGraphQuery(q => {
+      if (id) q.set('concept', id)
+      else q.delete('concept')
+    })
+  }, [replaceGraphQuery])
+
+  const handleSetGoal = useCallback(async (id: string) => {
+    setGoalId(id)
+    setFocusId(null)
+    setActiveDomain(null)
+    setPendingLocalGoal(null)
+    writeLocalGoal(id)
+    replaceGraphQuery(q => {
+      q.set('goal', id)
+      q.delete('focus')
+      q.delete('domain')
+    })
+    if (loggedIn) {
+      try {
+        await saveGoal(id)
+      } catch (error) {
+        console.error('saveGoal failed', error)
+      }
     }
-  }, [replace])
+  }, [loggedIn, replaceGraphQuery])
+
+  const handleClearGoal = useCallback(async () => {
+    setGoalId(null)
+    writeLocalGoal(null)
+    replaceGraphQuery(q => q.delete('goal'))
+    if (loggedIn) {
+      try {
+        await deleteGoal()
+      } catch (error) {
+        console.error('deleteGoal failed', error)
+      }
+    }
+  }, [loggedIn, replaceGraphQuery])
+
+  const handleUseLocalGoal = useCallback(async () => {
+    if (!pendingLocalGoal) return
+    await handleSetGoal(pendingLocalGoal)
+  }, [handleSetGoal, pendingLocalGoal])
+
+  const handleDismissLocalGoal = useCallback(() => {
+    setPendingLocalGoal(null)
+  }, [])
+
+  const handleFocus = useCallback((id: string) => {
+    setFocusId(id)
+    setGoalId(null)
+    setActiveDomain(null)
+    replaceGraphQuery(q => {
+      q.set('focus', id)
+      q.delete('goal')
+      q.delete('domain')
+    })
+  }, [replaceGraphQuery])
+
+  const handleClearFocus = useCallback(() => {
+    setFocusId(null)
+    replaceGraphQuery(q => q.delete('focus'))
+  }, [replaceGraphQuery])
 
   const domains = useMemo(() => {
     const set = new Set<string>()
@@ -208,6 +341,32 @@ function GraphContent() {
     if (c && c.domain !== activeDomain) setActiveDomain(null)
   }, [conceptParam, domainParam, activeDomain, conceptById, concepts.length])
 
+  const goalSource = concepts.length > 0 ? concepts : fallbackConcepts
+  const goalConcept = goalId ? conceptById.get(goalId) ?? null : null
+  const focusConcept = focusId ? conceptById.get(focusId) ?? null : null
+  const goalSummary = useMemo(
+    () => (goalId && goalConcept ? computeGoalProgress(goalId, goalSource, rawProgress) : null),
+    [goalId, goalConcept, goalSource, rawProgress],
+  )
+  const nextStepId = useMemo(
+    () => (goalId && goalConcept ? nextGoalStep(goalId, goalSource, rawProgress) : null),
+    [goalId, goalConcept, goalSource, rawProgress],
+  )
+  const nextStepConcept = nextStepId ? conceptById.get(nextStepId) ?? null : null
+
+  useEffect(() => {
+    if (concepts.length === 0) return
+    if (goalId && !goalConcept) {
+      setGoalId(null)
+      writeLocalGoal(null)
+      replaceGraphQuery(q => q.delete('goal'))
+    }
+    if (focusId && !focusConcept) {
+      setFocusId(null)
+      replaceGraphQuery(q => q.delete('focus'))
+    }
+  }, [concepts.length, goalId, goalConcept, focusId, focusConcept, replaceGraphQuery])
+
   if (!mounted) {
     return (
       <AppShell>
@@ -243,7 +402,7 @@ function GraphContent() {
         )}
       </section>
 
-      {domains.length > 0 && (
+      {!goalId && !focusId && domains.length > 0 && (
         <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center mb-6 min-w-0">
           <button
             type="button"
@@ -274,6 +433,56 @@ function GraphContent() {
       )}
 
       <div className="my-6 sm:my-8 w-full max-w-full min-w-0 overflow-hidden">
+        {pendingLocalGoal && !goalId && (
+          <div className="mb-6 border border-mathua-border bg-mathua-surface px-4 py-3">
+            <p className="text-sm text-mathua-primary">
+              This device has a saved goal: {conceptById.get(pendingLocalGoal)?.label ?? pendingLocalGoal}.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <button type="button" onClick={handleUseLocalGoal} className="font-mono text-[10px] uppercase tracking-wider px-3 min-h-[36px] border border-mathua-blue text-mathua-blue hover:bg-mathua-blue hover:text-white transition-colors">Use this goal</button>
+              <button type="button" onClick={handleDismissLocalGoal} className="font-mono text-[10px] uppercase tracking-wider px-3 min-h-[36px] border border-mathua-border text-mathua-muted hover:text-mathua-primary transition-colors">Not now</button>
+            </div>
+          </div>
+        )}
+
+        {goalId && goalConcept && goalSummary && (
+          <div className="mb-6 border border-mathua-blue bg-mathua-surface px-4 py-3">
+            <div className="flex flex-wrap items-start justify-between gap-3">
+              <div className="min-w-0">
+                <p className="font-mono text-[10px] uppercase tracking-wider text-mathua-muted">Goal</p>
+                <p className="text-sm text-mathua-primary truncate">{goalConcept.label}</p>
+              </div>
+              <button type="button" onClick={handleClearGoal} className="font-mono text-[10px] uppercase tracking-wider text-mathua-muted hover:text-mathua-red transition-colors">Clear goal</button>
+            </div>
+            <div className="mt-3 h-1.5 w-full bg-mathua-border" aria-hidden="true">
+              <div className="h-full bg-mathua-blue" style={{ width: `${goalSummary.pct}%` }} />
+            </div>
+            <p className="mt-2 font-mono text-[10px] uppercase tracking-wider text-mathua-muted">
+              {goalSummary.learned} of {goalSummary.total} concepts learned
+            </p>
+            {nextStepConcept ? (
+              <Link href={`/learn?concept=${encodeURIComponent(nextStepConcept.id)}`} className="mt-3 inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-mathua-blue hover:text-mathua-blue-hover">
+                Next step: {nextStepConcept.label} &#8594;
+              </Link>
+            ) : (
+              <p className="mt-3 text-sm text-mathua-secondary">No ready step yet. Review a prerequisite to unlock the next one.</p>
+            )}
+          </div>
+        )}
+
+        {focusId && focusConcept && (
+          <div className="mb-6 border border-mathua-border bg-mathua-surface px-4 py-3">
+            <div className="flex flex-wrap items-start justify-between gap-3">
+              <div className="min-w-0">
+                <p className="font-mono text-[10px] uppercase tracking-wider text-mathua-muted">Focus</p>
+                <p className="text-sm text-mathua-primary truncate">{focusConcept.label}</p>
+              </div>
+              <button type="button" onClick={handleClearFocus} className="font-mono text-[10px] uppercase tracking-wider text-mathua-muted hover:text-mathua-primary transition-colors">Exit focus</button>
+            </div>
+            <p className="mt-2 text-sm text-mathua-secondary">Showing this concept, its prerequisite path and its direct unlocks.</p>
+          </div>
+        )}
+
         {graphError && (
           <div role="alert" className="mb-4 flex flex-wrap items-center gap-3 border border-mathua-red bg-mathua-surface px-4 py-3">
             <span className="font-mono text-xs text-mathua-red">Couldn&apos;t load the live graph: showing the bundled fallback.</span>
@@ -295,6 +504,12 @@ function GraphContent() {
           selectedId={selectedId}
           onSelectionChange={handleSelectionChange}
           focusDomain={activeDomain}
+          goalId={goalId}
+          focusId={focusId}
+          onSetGoal={handleSetGoal}
+          onClearGoal={handleClearGoal}
+          onFocus={handleFocus}
+          onClearFocus={handleClearFocus}
         />
       </div>
 

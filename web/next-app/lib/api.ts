@@ -239,6 +239,7 @@ export interface ConceptProgress {
   best_streak?: number
   avg_response_time?: number
   attempts?: number
+  mastery_pct?: number
   // Set by the lesson-completion endpoint (PR1, server-owned). Optional so
   // pre-PR1 payloads keep validating; unlock rules treat absent as false.
   completed?: boolean
@@ -969,6 +970,39 @@ export async function updateSettings(settings: UserSettings): Promise<void> {
 		body: JSON.stringify(settings),
 	})
 	if (!res.ok) throw new Error(`Update settings failed: ${res.status}`)
+}
+
+export interface LearningGoalRes {
+	concept_id: string | null
+}
+
+export async function getGoal(): Promise<string | null> {
+	const res = await authedFetch(`${API_BASE}/api/learning-goal`, {
+		headers: { ...getAuthHeaders() },
+	})
+	if (!res.ok) return null
+	const data = (await res.json()) as LearningGoalRes
+	return data.concept_id ?? null
+}
+
+export async function setGoal(conceptID: string): Promise<string> {
+	const res = await authedFetch(`${API_BASE}/api/learning-goal`, {
+		method: 'PUT',
+		headers: { 'Content-Type': 'application/json', ...getAuthHeaders() },
+		body: JSON.stringify({ concept_id: conceptID }),
+	})
+	if (!res.ok) throw new Error(`Set learning goal failed: ${res.status}`)
+	const data = (await res.json()) as LearningGoalRes
+	if (!data.concept_id) throw new Error('Set learning goal returned no concept')
+	return data.concept_id
+}
+
+export async function clearGoal(): Promise<void> {
+	const res = await authedFetch(`${API_BASE}/api/learning-goal`, {
+		method: 'DELETE',
+		headers: { ...getAuthHeaders() },
+	})
+	if (!res.ok) throw new Error(`Clear learning goal failed: ${res.status}`)
 }
 
 export interface ProfileUpdateRes {

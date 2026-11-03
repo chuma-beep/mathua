@@ -395,6 +395,116 @@ func TestSettingsRoutes(t *testing.T) {
 	}
 }
 
+func TestLearningGoalRoutes(t *testing.T) {
+	_, mux, _, token, _ := setupTestServerWithPlanner(t)
+
+	// Unauthenticated GET
+	rec := httptest.NewRecorder()
+	mux.ServeHTTP(rec, httptest.NewRequest("GET", "/api/learning-goal", nil))
+	if rec.Code != 401 {
+		t.Errorf("expected 401 for unauth learning goal, got %d", rec.Code)
+	}
+
+	// Authenticated GET with no goal
+	req := httptest.NewRequest("GET", "/api/learning-goal", nil)
+	req.Header.Set("Authorization", "Bearer "+token)
+	rec = httptest.NewRecorder()
+	mux.ServeHTTP(rec, req)
+	if rec.Code != 200 {
+		t.Fatalf("expected 200, got %d: %s", rec.Code, rec.Body.String())
+	}
+	var goal struct {
+		ConceptID *string `json:"concept_id"`
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &goal); err != nil {
+		t.Fatalf("decode learning goal: %v", err)
+	}
+	if goal.ConceptID != nil {
+		t.Errorf("expected no goal, got %q", *goal.ConceptID)
+	}
+
+	// Invalid JSON
+	req = httptest.NewRequest("PUT", "/api/learning-goal", strings.NewReader("not-json"))
+	req.Header.Set("Authorization", "Bearer "+token)
+	rec = httptest.NewRecorder()
+	mux.ServeHTTP(rec, req)
+	if rec.Code != 400 {
+		t.Errorf("expected 400 for invalid PUT, got %d", rec.Code)
+	}
+
+	// Missing concept
+	req = httptest.NewRequest("PUT", "/api/learning-goal", strings.NewReader(`{}`))
+	req.Header.Set("Authorization", "Bearer "+token)
+	rec = httptest.NewRecorder()
+	mux.ServeHTTP(rec, req)
+	if rec.Code != 400 {
+		t.Errorf("expected 400 for missing concept, got %d", rec.Code)
+	}
+
+	// Unknown concept
+	req = httptest.NewRequest("PUT", "/api/learning-goal", strings.NewReader(`{"concept_id":"does.not.exist"}`))
+	req.Header.Set("Authorization", "Bearer "+token)
+	rec = httptest.NewRecorder()
+	mux.ServeHTTP(rec, req)
+	if rec.Code != 400 {
+		t.Errorf("expected 400 for unknown concept, got %d", rec.Code)
+	}
+
+	// Valid concept
+	req = httptest.NewRequest("PUT", "/api/learning-goal", strings.NewReader(`{"concept_id":"b"}`))
+	req.Header.Set("Authorization", "Bearer "+token)
+	rec = httptest.NewRecorder()
+	mux.ServeHTTP(rec, req)
+	if rec.Code != 200 {
+		t.Fatalf("expected 200 for valid PUT, got %d: %s", rec.Code, rec.Body.String())
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &goal); err != nil {
+		t.Fatalf("decode set learning goal: %v", err)
+	}
+	if goal.ConceptID == nil || *goal.ConceptID != "b" {
+		t.Errorf("expected b, got %v", goal.ConceptID)
+	}
+
+	// Verify GET persists the goal
+	req = httptest.NewRequest("GET", "/api/learning-goal", nil)
+	req.Header.Set("Authorization", "Bearer "+token)
+	rec = httptest.NewRecorder()
+	mux.ServeHTTP(rec, req)
+	if rec.Code != 200 {
+		t.Fatalf("expected 200, got %d", rec.Code)
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &goal); err != nil {
+		t.Fatalf("decode persisted learning goal: %v", err)
+	}
+	if goal.ConceptID == nil || *goal.ConceptID != "b" {
+		t.Errorf("expected persisted b, got %v", goal.ConceptID)
+	}
+
+	// Clear the goal
+	req = httptest.NewRequest("DELETE", "/api/learning-goal", nil)
+	req.Header.Set("Authorization", "Bearer "+token)
+	rec = httptest.NewRecorder()
+	mux.ServeHTTP(rec, req)
+	if rec.Code != 200 {
+		t.Fatalf("expected 200 for DELETE, got %d: %s", rec.Code, rec.Body.String())
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &goal); err != nil {
+		t.Fatalf("decode cleared learning goal: %v", err)
+	}
+	if goal.ConceptID != nil {
+		t.Errorf("expected cleared goal, got %q", *goal.ConceptID)
+	}
+
+	// Method not allowed
+	req = httptest.NewRequest("PATCH", "/api/learning-goal", nil)
+	req.Header.Set("Authorization", "Bearer "+token)
+	rec = httptest.NewRecorder()
+	mux.ServeHTTP(rec, req)
+	if rec.Code != 405 {
+		t.Errorf("expected 405, got %d", rec.Code)
+	}
+}
+
 func TestSetDailyXPGoal(t *testing.T) {
 	_, mux, _, token, _ := setupTestServerWithPlanner(t)
 
