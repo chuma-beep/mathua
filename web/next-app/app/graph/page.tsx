@@ -481,32 +481,39 @@ function GraphContent() {
             <p className="mt-2 font-mono text-[10px] uppercase tracking-wider text-mathua-muted">
               {goalSummary.learned} of {goalSummary.total} concepts learned
             </p>
-            <div className="mt-3 flex flex-wrap items-center gap-2">
-              <span className="font-mono text-[10px] uppercase tracking-wider text-mathua-muted">View</span>
-              <button
-                type="button"
-                aria-pressed={!goalPathOnly}
-                onClick={() => setGoalPathOnly(false)}
-                className={`font-mono text-[10px] uppercase tracking-wider px-2.5 min-h-[32px] border transition-colors ${
-                  !goalPathOnly
-                    ? 'bg-mathua-blue text-white border-mathua-blue'
-                    : 'border-mathua-border text-mathua-muted hover:text-mathua-blue'
-                }`}
-              >
-                Full graph
-              </button>
-              <button
-                type="button"
-                aria-pressed={goalPathOnly}
-                onClick={() => setGoalPathOnly(true)}
-                className={`font-mono text-[10px] uppercase tracking-wider px-2.5 min-h-[32px] border transition-colors ${
-                  goalPathOnly
-                    ? 'bg-mathua-blue text-white border-mathua-blue'
-                    : 'border-mathua-border text-mathua-muted hover:text-mathua-blue'
-                }`}
-              >
-                Goal path
-              </button>
+            <div className="mt-3">
+              <p className="font-mono text-[10px] uppercase tracking-wider text-mathua-muted">View</p>
+              <div className="mt-1 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
+                <button
+                  type="button"
+                  aria-pressed={!goalPathOnly}
+                  onClick={() => setGoalPathOnly(false)}
+                  className={`w-full sm:w-auto font-mono text-[10px] uppercase tracking-wider px-2.5 min-h-[36px] border transition-colors ${
+                    !goalPathOnly
+                      ? 'bg-mathua-blue text-white border-mathua-blue'
+                      : 'border-mathua-border text-mathua-muted hover:text-mathua-blue'
+                  }`}
+                >
+                  Full graph
+                </button>
+                <button
+                  type="button"
+                  aria-pressed={goalPathOnly}
+                  onClick={() => setGoalPathOnly(true)}
+                  className={`w-full sm:w-auto font-mono text-[10px] uppercase tracking-wider px-2.5 min-h-[36px] border transition-colors ${
+                    goalPathOnly
+                      ? 'bg-mathua-blue text-white border-mathua-blue'
+                      : 'border-mathua-border text-mathua-muted hover:text-mathua-blue'
+                  }`}
+                >
+                  Goal path
+                </button>
+              </div>
+              <p className="mt-2 text-[11px] leading-snug text-mathua-secondary">
+                {goalPathOnly
+                  ? 'Showing the goal and its prerequisites.'
+                  : 'Showing all concepts. Pinch to zoom, or choose Goal path to read the route.'}
+              </p>
             </div>
             {nextStepConcept ? (
               <Link href={`/learn?concept=${encodeURIComponent(nextStepConcept.id)}`} className="mt-3 inline-flex max-w-full items-start gap-1 break-words text-left font-mono text-xs uppercase tracking-wider text-mathua-blue leading-snug hover:text-mathua-blue-hover">
