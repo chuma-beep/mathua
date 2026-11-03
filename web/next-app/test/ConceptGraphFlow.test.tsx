@@ -339,6 +339,22 @@ describe('ConceptGraphFlow goal and focus', () => {
     expect(labels.some(l => l.startsWith('Gamma One'))).toBe(false)
   })
 
+  it('keeps every concept in the concept list when Goal path trims the graph', () => {
+    render(<ConceptGraphFlow concepts={many} goalId="b2" trimToGoal />)
+    fireEvent.click(screen.getByRole('button', { name: 'Open concept list' }))
+    const dialog = screen.getByRole('dialog', { name: 'Concept list' })
+    expect(within(dialog).getByText('Alpha Two')).toBeInTheDocument()
+    expect(within(dialog).getByText('Gamma One')).toBeInTheDocument()
+  })
+
+  it('searches every concept when Goal path trims the graph', async () => {
+    render(<ConceptGraphFlow concepts={many} goalId="b2" trimToGoal />)
+    fireEvent.change(screen.getByPlaceholderText('Search concepts…'), {
+      target: { value: 'Gamma' },
+    })
+    expect(await screen.findByText('Gamma One')).toBeInTheDocument()
+  })
+
   it('marks the goal node', () => {
     render(<ConceptGraphFlow concepts={many} goalId="b2" />)
     expect(screen.getByLabelText(/Beta Two, domB domain.*your goal/)).toBeInTheDocument()

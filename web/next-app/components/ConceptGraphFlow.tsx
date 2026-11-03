@@ -887,6 +887,11 @@ function GraphInner({
     return concepts
   }, [concepts, goalIds, focusIds, trimToGoal])
 
+  // The graph may be trimmed to the goal path, but browsing every concept must
+  // stay possible. A concept chosen outside the path switches the graph back to
+  // the full view in the page's selection handler.
+  const browseConcepts = trimToGoal ? concepts : layoutConcepts
+
   const layout = useMemo(
     () => precomputedLayout(layoutConcepts.map(c => c.id)) ?? layoutWithDagre(layoutConcepts),
     [layoutConcepts]
@@ -1172,11 +1177,11 @@ function GraphInner({
             nodeColor={minimapNodeColor}
           />
         </ReactFlow>
-        <SearchOverlay concepts={layoutConcepts} onSelect={select} />
+        <SearchOverlay concepts={browseConcepts} onSelect={select} />
         <ListToggleButton open={listOpen} onToggle={() => setListOpen(o => !o)} />
         {listOpen && (
           <ListView
-            concepts={layoutConcepts}
+            concepts={browseConcepts}
             conceptStatuses={conceptStatuses}
             selectedId={effectiveSelected}
             onSelect={select}
