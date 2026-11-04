@@ -2,7 +2,6 @@
 
 import { useRouter } from 'next/navigation'
 import { useTheme } from '../hooks/useTheme'
-import { ensureGuestId, ensureGuestToken } from '../lib/auth'
 import { useHomeRedirect } from '../hooks/useHomeRedirect'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 import Header from '../components/Header'
@@ -30,18 +29,7 @@ export default function HomePage() {
   }
 
   function handleGetStarted() {
-    // Navigate first, mint in the background.
-    //
-    // The token is only needed for the API calls the next page makes, and
-    // chaining the push onto it made this button look dead for the request's
-    // full ten-second timeout whenever that request stalled, a filtered or
-    // blocked API origin does exactly that. Ten seconds of nothing is
-    // indistinguishable from "the page won't load", which is how this was
-    // reported. The token still arrives before the first answer in every
-    // ordinary case, and if it never does the learn page is anonymously usable.
-    ensureGuestId()
-    push('/learn')
-    void ensureGuestToken()
+    push('/login')
   }
 
   return (

@@ -5,6 +5,7 @@ import (
 	"math/rand"
 	"strconv"
 	"strings"
+	"sync"
 
 	"github.com/chuma-beep/mathua/internal/generator"
 	"github.com/chuma-beep/mathua/internal/mathutil"
@@ -735,13 +736,22 @@ func (g *quadSolveFactorGen) Generate(ctx generator.GeneratorContext) generator.
 	}
 }
 
-type quadCompleteSquareGen struct{}
+type quadCompleteSquareGen struct {
+	mu   sync.Mutex
+	last int
+}
 
 func (g *quadCompleteSquareGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	r := rand.Intn(6) + 1
+	g.mu.Lock()
+	r := rand.Intn(9) + 1
+	if r == g.last {
+		r = r%9 + 1
+	}
+	g.last = r
+	g.mu.Unlock()
 	b := -2 * r
 	return generator.Problem{
-		Question:    fmt.Sprintf("Complete the square: \\(x^{2} + %dx + \\_\\_)\\) to make a perfect square.", b),
+		Question:    fmt.Sprintf("Complete the square: \\(x^{2} %+dx + \\_\\_\\) to make a perfect square.", b),
 		Answer:      fmt.Sprintf("%d", r*r),
 		Explanation: fmt.Sprintf("\\(\\left(\\frac{b}{2}\\right)^{2} = \\left(\\frac{%d}{2}\\right)^{2} = %d\\)", b, r*r),
 		Facts:       map[string]string{"b": strconv.Itoa(b), "r": strconv.Itoa(r), "r2": strconv.Itoa(r * r)},
@@ -1317,7 +1327,7 @@ func (g *eqAbsValGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type eqBinomialGen struct{}
 
 func (g *eqBinomialGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	r := rand.Intn(6) + 1
+	r := rand.Intn(9) + 1
 	k := rand.Intn(4) + 2
 	rhs := mathutil.IntPow(k, r)
 	return generator.Problem{
@@ -1941,7 +1951,7 @@ func (g *ineqSystemsGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type polyDivisionGen struct{}
 
 func (g *polyDivisionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	r := rand.Intn(6) + 1
+	r := rand.Intn(9) + 1
 	a := rand.Intn(4) + 1
 	// (ax^2 + r*x) / x = ax + r
 	return generator.Problem{

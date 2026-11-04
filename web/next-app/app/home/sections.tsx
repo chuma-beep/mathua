@@ -100,7 +100,7 @@ export function HeroSection({ onGetStarted }: { onGetStarted: () => void }) {
             <span className="relative group-hover:text-white">View on GitHub</span>
           </a>
         </div>
-        <p className="reveal mt-4 font-mono text-[11px] text-white/60 lg:text-mathua-muted" style={{ animationDelay: '320ms' }}>
+        <p className="reveal mt-4 font-mono text-[11px] text-mathua-blue" style={{ animationDelay: '320ms' }}>
           No account needed to start.
         </p>
       </div>

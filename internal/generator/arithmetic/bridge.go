@@ -162,7 +162,7 @@ func (g *arithBridgeGen) Generate(ctx generator.GeneratorContext) generator.Prob
 			q := 4 + rand.Intn(20)
 			a := b*q + rand.Intn(b)
 			b0 := 10 * ((b + 5) / 10)
-			a0 := 100 * ((a + 50) / 100)
+			a0 := 10 * ((a + 5) / 10)
 			if b0 == 0 {
 				b0 = 10
 			}
@@ -175,8 +175,8 @@ func (g *arithBridgeGen) Generate(ctx generator.GeneratorContext) generator.Prob
 			if b0 == 0 {
 				b0 = 10
 			}
-			a0 := 100 * ((a + 50) / 100)
-			return arithProb(o, fmt.Sprintf("Estimate %d divided by %d using compatible numbers, then give the estimated quotient. (enter a number)", a, b), strconv.Itoa(a0/b0), fmt.Sprintf("Use the friendly pair %d and %d, whose quotient is %d.", a0, b0, a0/b0))
+			a0 := 10 * ((a + 5) / 10)
+			return arithProb(o, fmt.Sprintf("Estimate %d divided by %d by rounding both numbers to the nearest ten. What is the estimated quotient? (enter a number)", a, b), strconv.Itoa(a0/b0), fmt.Sprintf("Rounding gives %d and %d. Their quotient is about %d.", a0, b0, a0/b0))
 		default:
 			b := 12 + rand.Intn(20)
 			q := 5 + rand.Intn(20)
