@@ -260,90 +260,6 @@
       "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
     },
     {
-      "lesson": "teaching/arith.neg.add_sub.md",
-      "line": 13,
-      "text": "Number line with interesting Celsius temperatures",
-      "confidence": "likely",
-      "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
-    },
-    {
-      "lesson": "teaching/arith.neg.add_sub.md",
-      "line": 193,
-      "text": "Viewing $3\\cdot(-7)$ as repeated addition",
-      "confidence": "likely",
-      "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
-    },
-    {
-      "lesson": "teaching/arith.neg.add_sub.md",
-      "line": 199,
-      "text": "Viewing $-3\\cdot(-7)$ as repeated subtraction",
-      "confidence": "likely",
-      "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
-    },
-    {
-      "lesson": "teaching/arith.neg.mult_div.md",
-      "line": 13,
-      "text": "Number line with interesting Celsius temperatures",
-      "confidence": "likely",
-      "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
-    },
-    {
-      "lesson": "teaching/arith.neg.mult_div.md",
-      "line": 193,
-      "text": "Viewing $3\\cdot(-7)$ as repeated addition",
-      "confidence": "likely",
-      "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
-    },
-    {
-      "lesson": "teaching/arith.neg.mult_div.md",
-      "line": 199,
-      "text": "Viewing $-3\\cdot(-7)$ as repeated subtraction",
-      "confidence": "likely",
-      "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
-    },
-    {
-      "lesson": "teaching/arith.neg.number_line.md",
-      "line": 13,
-      "text": "Number line with interesting Celsius temperatures",
-      "confidence": "likely",
-      "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
-    },
-    {
-      "lesson": "teaching/arith.neg.number_line.md",
-      "line": 193,
-      "text": "Viewing $3\\cdot(-7)$ as repeated addition",
-      "confidence": "likely",
-      "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
-    },
-    {
-      "lesson": "teaching/arith.neg.number_line.md",
-      "line": 199,
-      "text": "Viewing $-3\\cdot(-7)$ as repeated subtraction",
-      "confidence": "likely",
-      "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
-    },
-    {
-      "lesson": "teaching/arith.neg.order_ops.md",
-      "line": 13,
-      "text": "Number line with interesting Celsius temperatures",
-      "confidence": "likely",
-      "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
-    },
-    {
-      "lesson": "teaching/arith.neg.order_ops.md",
-      "line": 193,
-      "text": "Viewing $3\\cdot(-7)$ as repeated addition",
-      "confidence": "likely",
-      "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
-    },
-    {
-      "lesson": "teaching/arith.neg.order_ops.md",
-      "line": 199,
-      "text": "Viewing $-3\\cdot(-7)$ as repeated subtraction",
-      "confidence": "likely",
-      "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
-    },
-    {
       "lesson": "teaching/arith.sci_notation.ops.md",
       "line": 26,
       "text": "Whole Number Powers of 10",
@@ -681,20 +597,6 @@
     },
     {
       "lesson": "teaching/stat.data.line_plot.md",
-      "line": 119,
-      "text": "Share of all income held by the top 1%, United States, 20002021",
-      "confidence": "likely",
-      "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
-    },
-    {
-      "lesson": "teaching/stat.data.mode.md",
-      "line": 13,
-      "text": "Share of all income held by the top 1% of wage earners",
-      "confidence": "likely",
-      "reason": "teaching corpus: standalone emphasis is the dropped-figure shape"
-    },
-    {
-      "lesson": "teaching/stat.data.mode.md",
       "line": 119,
       "text": "Share of all income held by the top 1%, United States, 20002021",
       "confidence": "likely",
@@ -1185,13 +1087,13 @@
       "lesson": "teaching/ode.bifurcation.md",
       "line": 3,
       "phrase": "The picture above",
-      "context": "**Bifurcation:** a qualitative change in the phase portrait as a parameter $\\mu$ crosses a critical value \u2014 the number or stability of equilibria changes. The picture above the threshold is not a cont"
+      "context": "**Bifurcation:** a qualitative change in the phase portrait as a parameter $\\mu$ crosses a critical value, the number or stability of equilibria changes. The picture above the threshold is not a conti"
     },
     {
       "lesson": "teaching/ode.bifurcation.md",
       "line": 3,
       "phrase": "the picture below",
-      "context": "**Bifurcation:** a qualitative change in the phase portrait as a parameter $\\mu$ crosses a critical value \u2014 the number or stability of equilibria changes. The picture above the threshold is not a cont"
+      "context": "**Bifurcation:** a qualitative change in the phase portrait as a parameter $\\mu$ crosses a critical value, the number or stability of equilibria changes. The picture above the threshold is not a conti"
     },
     {
       "lesson": "teaching/pct.ops.discount.md",
@@ -1267,9 +1169,9 @@
     }
   ],
   "unreferenced_diagrams": {
-    "referenced": 386,
-    "shipped": 692,
-    "unreferenced_content": 286,
+    "referenced": 404,
+    "shipped": 724,
+    "unreferenced_content": 300,
     "candidates": [
       {
         "lesson": "algebrica/complex-numbers/complex-logarithm.md",
@@ -2077,6 +1979,99 @@
         ]
       },
       {
+        "lesson": "authored/alg.factor.cubes.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/factor-composite.svg",
+          "/diagrams/arithmetic/factor-find.svg",
+          "/diagrams/arithmetic/factor-gcf.svg",
+          "/diagrams/arithmetic/factor-lcm.svg",
+          "/diagrams/arithmetic/factor-prime-fact.svg",
+          "/diagrams/arithmetic/factor-prime.svg"
+        ]
+      },
+      {
+        "lesson": "authored/alg.factor.grouping.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/factor-composite.svg",
+          "/diagrams/arithmetic/factor-find.svg",
+          "/diagrams/arithmetic/factor-gcf.svg",
+          "/diagrams/arithmetic/factor-lcm.svg",
+          "/diagrams/arithmetic/factor-prime-fact.svg",
+          "/diagrams/arithmetic/factor-prime.svg"
+        ]
+      },
+      {
+        "lesson": "authored/alg.linear.intercepts.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/linear-equations-1.svg",
+          "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
+        ]
+      },
+      {
+        "lesson": "authored/alg.linear.two_points.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/linear-equations-1.svg",
+          "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
+        ]
+      },
+      {
+        "lesson": "authored/arith.place.expanded.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/place-hundreds.svg",
+          "/diagrams/arithmetic/place-tens.svg",
+          "/diagrams/arithmetic/place-thousands.svg"
+        ]
+      },
+      {
+        "lesson": "authored/arith.place.powers_ten.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/place-hundreds.svg",
+          "/diagrams/arithmetic/place-tens.svg",
+          "/diagrams/arithmetic/place-thousands.svg"
+        ]
+      },
+      {
+        "lesson": "authored/arith.sqrt.cube.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/sqrt-perfect.svg",
+          "/diagrams/arithmetic/sqrt-simplify.svg"
+        ]
+      },
+      {
+        "lesson": "authored/arith.sqrt.estimate.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/sqrt-perfect.svg",
+          "/diagrams/arithmetic/sqrt-simplify.svg"
+        ]
+      },
+      {
+        "lesson": "authored/arith.word.multi_step.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/add-word.svg",
+          "/diagrams/arithmetic/div-word.svg",
+          "/diagrams/arithmetic/mult-word.svg",
+          "/diagrams/arithmetic/sub-word.svg"
+        ]
+      },
+      {
         "lesson": "authored/calc.integral.applied.md",
         "figures_referenced": false,
         "exact_stem_match": [],
@@ -2459,9 +2454,9 @@
         "topic_word_match": [
           "/diagrams/algebrica/right-triangle-trigonometry-1.svg",
           "/diagrams/algebrica/right-triangle-trigonometry-2.svg",
-          "/diagrams/algebrica/right-triangle-trigonometry\u20133.svg",
-          "/diagrams/algebrica/right-triangle-trigonometry\u20134.svg",
-          "/diagrams/algebrica/right-triangle-trigonometry\u20135.svg"
+          "/diagrams/algebrica/right-triangle-trigonometry-3.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-4.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-5.svg"
         ]
       },
       {
@@ -2471,9 +2466,9 @@
         "topic_word_match": [
           "/diagrams/algebrica/right-triangle-trigonometry-1.svg",
           "/diagrams/algebrica/right-triangle-trigonometry-2.svg",
-          "/diagrams/algebrica/right-triangle-trigonometry\u20133.svg",
-          "/diagrams/algebrica/right-triangle-trigonometry\u20134.svg",
-          "/diagrams/algebrica/right-triangle-trigonometry\u20135.svg"
+          "/diagrams/algebrica/right-triangle-trigonometry-3.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-4.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-5.svg"
         ]
       },
       {
@@ -2483,9 +2478,9 @@
         "topic_word_match": [
           "/diagrams/algebrica/right-triangle-trigonometry-1.svg",
           "/diagrams/algebrica/right-triangle-trigonometry-2.svg",
-          "/diagrams/algebrica/right-triangle-trigonometry\u20133.svg",
-          "/diagrams/algebrica/right-triangle-trigonometry\u20134.svg",
-          "/diagrams/algebrica/right-triangle-trigonometry\u20135.svg"
+          "/diagrams/algebrica/right-triangle-trigonometry-3.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-4.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-5.svg"
         ]
       },
       {
@@ -2495,9 +2490,9 @@
         "topic_word_match": [
           "/diagrams/algebrica/right-triangle-trigonometry-1.svg",
           "/diagrams/algebrica/right-triangle-trigonometry-2.svg",
-          "/diagrams/algebrica/right-triangle-trigonometry\u20133.svg",
-          "/diagrams/algebrica/right-triangle-trigonometry\u20134.svg",
-          "/diagrams/algebrica/right-triangle-trigonometry\u20135.svg"
+          "/diagrams/algebrica/right-triangle-trigonometry-3.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-4.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-5.svg"
         ]
       },
       {
@@ -2507,9 +2502,9 @@
         "topic_word_match": [
           "/diagrams/algebrica/right-triangle-trigonometry-1.svg",
           "/diagrams/algebrica/right-triangle-trigonometry-2.svg",
-          "/diagrams/algebrica/right-triangle-trigonometry\u20133.svg",
-          "/diagrams/algebrica/right-triangle-trigonometry\u20134.svg",
-          "/diagrams/algebrica/right-triangle-trigonometry\u20135.svg"
+          "/diagrams/algebrica/right-triangle-trigonometry-3.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-4.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-5.svg"
         ]
       },
       {
@@ -2529,6 +2524,42 @@
           "/diagrams/algebrica/pythagorean-theorem-1.svg",
           "/diagrams/algebrica/pythagorean-theorem-2.svg",
           "/diagrams/algebrica/pythagorean-theorem-3.svg"
+        ]
+      },
+      {
+        "lesson": "authored/prealg.measure.convert.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/angles-and-angular-measure-1.svg",
+          "/diagrams/algebrica/angles-and-angular-measure-2.svg"
+        ]
+      },
+      {
+        "lesson": "authored/prealg.measure.metric.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/angles-and-angular-measure-1.svg",
+          "/diagrams/algebrica/angles-and-angular-measure-2.svg"
+        ]
+      },
+      {
+        "lesson": "authored/prealg.measure.temperature.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/angles-and-angular-measure-1.svg",
+          "/diagrams/algebrica/angles-and-angular-measure-2.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/alg.eq.linear.word.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/linear-equations-1.svg",
+          "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
         ]
       },
       {
@@ -2567,7 +2598,25 @@
         ]
       },
       {
+        "lesson": "teaching/alg.linear.horizontal_vertical.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/linear-equations-1.svg",
+          "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
+        ]
+      },
+      {
         "lesson": "teaching/alg.linear.parallel_perp.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/linear-equations-1.svg",
+          "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/alg.linear.point_slope.md",
         "figures_referenced": false,
         "exact_stem_match": [],
         "topic_word_match": [
@@ -2594,7 +2643,31 @@
         ]
       },
       {
+        "lesson": "teaching/alg.systems.matrices.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/alg.systems.nonlinear.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
+        ]
+      },
+      {
         "lesson": "teaching/alg.systems.substitution.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/alg.systems.three_var.md",
         "figures_referenced": false,
         "exact_stem_match": [],
         "topic_word_match": [
@@ -2607,6 +2680,32 @@
         "exact_stem_match": [],
         "topic_word_match": [
           "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/arith.factor.divisibility.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/factor-composite.svg",
+          "/diagrams/arithmetic/factor-find.svg",
+          "/diagrams/arithmetic/factor-gcf.svg",
+          "/diagrams/arithmetic/factor-lcm.svg",
+          "/diagrams/arithmetic/factor-prime-fact.svg",
+          "/diagrams/arithmetic/factor-prime.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/arith.factor.even_odd.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/factor-composite.svg",
+          "/diagrams/arithmetic/factor-find.svg",
+          "/diagrams/arithmetic/factor-gcf.svg",
+          "/diagrams/arithmetic/factor-lcm.svg",
+          "/diagrams/arithmetic/factor-prime-fact.svg",
+          "/diagrams/arithmetic/factor-prime.svg"
         ]
       },
       {
@@ -2633,6 +2732,33 @@
           "/diagrams/arithmetic/factor-lcm.svg",
           "/diagrams/arithmetic/factor-prime-fact.svg",
           "/diagrams/arithmetic/factor-prime.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/arith.factor.multiple.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/factor-composite.svg",
+          "/diagrams/arithmetic/factor-find.svg",
+          "/diagrams/arithmetic/factor-gcf.svg",
+          "/diagrams/arithmetic/factor-lcm.svg",
+          "/diagrams/arithmetic/factor-prime-fact.svg",
+          "/diagrams/arithmetic/factor-prime.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/arith.mult.two_by_two.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/mult-2-5-10.svg",
+          "/diagrams/arithmetic/mult-concept.svg",
+          "/diagrams/arithmetic/mult-double.svg",
+          "/diagrams/arithmetic/mult-tables.svg",
+          "/diagrams/arithmetic/mult-triple.svg",
+          "/diagrams/arithmetic/mult-word.svg",
+          "/diagrams/arithmetic/neg-mult-div.svg"
         ]
       },
       {
@@ -2666,6 +2792,16 @@
         ]
       },
       {
+        "lesson": "teaching/arith.place.millions.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/place-hundreds.svg",
+          "/diagrams/arithmetic/place-tens.svg",
+          "/diagrams/arithmetic/place-thousands.svg"
+        ]
+      },
+      {
         "lesson": "teaching/arith.sci_notation.ops.md",
         "figures_referenced": false,
         "exact_stem_match": [],
@@ -2680,6 +2816,332 @@
         "topic_word_match": [
           "/diagrams/arithmetic/sqrt-perfect.svg",
           "/diagrams/arithmetic/sqrt-simplify.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.integral.beta.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.integral.consumer_surplus.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.integral.double_polar.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.integral.fourier_coefficients.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.integral.hydrostatic.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.integral.initial_value.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.integral.inverse_trig.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.integral.log.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.integral.moment_inertia.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.integral.numerical_error.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.integral.pappus.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.integral.probability.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.integral.properties.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.integral.rationalizing.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.integral.riemann_sums.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.integral.surface_scalar.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.integral.symmetry.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.polar.arc_length.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/polar-coordinates-1.svg",
+          "/diagrams/algebrica/polar-coordinates-2.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.series.binomial.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/harmonic-series-1.svg",
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.series.cauchy_product.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/harmonic-series-1.svg",
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.series.dirichlet_test.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/harmonic-series-1.svg",
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.series.estimate.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/harmonic-series-1.svg",
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.series.gamma.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/harmonic-series-1.svg",
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.series.maclaurin.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/harmonic-series-1.svg",
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.series.operations.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/harmonic-series-1.svg",
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.series.p_series.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/harmonic-series-1.svg",
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.series.taylor_error.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/harmonic-series-1.svg",
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/calc.series.termwise.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/harmonic-series-1.svg",
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/complex.adv.argument_principle.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/complex-number-operations-1.svg",
+          "/diagrams/algebrica/complex-numbers-1.svg",
+          "/diagrams/algebrica/complex-numbers-2.svg",
+          "/diagrams/algebrica/complex-numbers-3.svg",
+          "/diagrams/algebrica/complex-numbers-exponential-form-1.svg",
+          "/diagrams/algebrica/complex-numbers-trigonometric-form-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/complex.adv.identity_theorem.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/complex-number-operations-1.svg",
+          "/diagrams/algebrica/complex-numbers-1.svg",
+          "/diagrams/algebrica/complex-numbers-2.svg",
+          "/diagrams/algebrica/complex-numbers-3.svg",
+          "/diagrams/algebrica/complex-numbers-exponential-form-1.svg",
+          "/diagrams/algebrica/complex-numbers-trigonometric-form-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/complex.adv.liouville.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/complex-number-operations-1.svg",
+          "/diagrams/algebrica/complex-numbers-1.svg",
+          "/diagrams/algebrica/complex-numbers-2.svg",
+          "/diagrams/algebrica/complex-numbers-3.svg",
+          "/diagrams/algebrica/complex-numbers-exponential-form-1.svg",
+          "/diagrams/algebrica/complex-numbers-trigonometric-form-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/complex.adv.maximum_modulus.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/complex-number-operations-1.svg",
+          "/diagrams/algebrica/complex-numbers-1.svg",
+          "/diagrams/algebrica/complex-numbers-2.svg",
+          "/diagrams/algebrica/complex-numbers-3.svg",
+          "/diagrams/algebrica/complex-numbers-exponential-form-1.svg",
+          "/diagrams/algebrica/complex-numbers-trigonometric-form-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/complex.adv.morera.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/complex-number-operations-1.svg",
+          "/diagrams/algebrica/complex-numbers-1.svg",
+          "/diagrams/algebrica/complex-numbers-2.svg",
+          "/diagrams/algebrica/complex-numbers-3.svg",
+          "/diagrams/algebrica/complex-numbers-exponential-form-1.svg",
+          "/diagrams/algebrica/complex-numbers-trigonometric-form-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/complex.adv.riemann_mapping.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/complex-number-operations-1.svg",
+          "/diagrams/algebrica/complex-numbers-1.svg",
+          "/diagrams/algebrica/complex-numbers-2.svg",
+          "/diagrams/algebrica/complex-numbers-3.svg",
+          "/diagrams/algebrica/complex-numbers-exponential-form-1.svg",
+          "/diagrams/algebrica/complex-numbers-trigonometric-form-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/complex.adv.winding.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/complex-number-operations-1.svg",
+          "/diagrams/algebrica/complex-numbers-1.svg",
+          "/diagrams/algebrica/complex-numbers-2.svg",
+          "/diagrams/algebrica/complex-numbers-3.svg",
+          "/diagrams/algebrica/complex-numbers-exponential-form-1.svg",
+          "/diagrams/algebrica/complex-numbers-trigonometric-form-1.svg"
         ]
       },
       {
@@ -2787,6 +3249,34 @@
         ]
       },
       {
+        "lesson": "teaching/complex.integral.cauchy_formula.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/complex-number-operations-1.svg",
+          "/diagrams/algebrica/complex-numbers-1.svg",
+          "/diagrams/algebrica/complex-numbers-2.svg",
+          "/diagrams/algebrica/complex-numbers-3.svg",
+          "/diagrams/algebrica/complex-numbers-exponential-form-1.svg",
+          "/diagrams/algebrica/complex-numbers-trigonometric-form-1.svg",
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/complex.integral.real_integrals.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/complex-number-operations-1.svg",
+          "/diagrams/algebrica/complex-numbers-1.svg",
+          "/diagrams/algebrica/complex-numbers-2.svg",
+          "/diagrams/algebrica/complex-numbers-3.svg",
+          "/diagrams/algebrica/complex-numbers-exponential-form-1.svg",
+          "/diagrams/algebrica/complex-numbers-trigonometric-form-1.svg",
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
         "lesson": "teaching/complex.laurent.md",
         "figures_referenced": false,
         "exact_stem_match": [],
@@ -2889,6 +3379,17 @@
         ]
       },
       {
+        "lesson": "teaching/frac.word.multi_step.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/add-word.svg",
+          "/diagrams/arithmetic/div-word.svg",
+          "/diagrams/arithmetic/mult-word.svg",
+          "/diagrams/arithmetic/sub-word.svg"
+        ]
+      },
+      {
         "lesson": "teaching/fractions/comparison-word.md",
         "figures_referenced": false,
         "exact_stem_match": [],
@@ -2980,6 +3481,15 @@
         ]
       },
       {
+        "lesson": "teaching/geo.basic.transversal.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/div-basic.svg",
+          "/diagrams/arithmetic/order-basic.svg"
+        ]
+      },
+      {
         "lesson": "teaching/geo.basic.vertical.md",
         "figures_referenced": false,
         "exact_stem_match": [],
@@ -2989,7 +3499,29 @@
         ]
       },
       {
+        "lesson": "teaching/geo.circle.arc_measure.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/unit-circle-1.svg",
+          "/diagrams/algebrica/unit-circle-2.svg",
+          "/diagrams/algebrica/unit-circle-3.svg",
+          "/diagrams/algebrica/unit-circle-4.svg"
+        ]
+      },
+      {
         "lesson": "teaching/geo.circle.area.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/unit-circle-1.svg",
+          "/diagrams/algebrica/unit-circle-2.svg",
+          "/diagrams/algebrica/unit-circle-3.svg",
+          "/diagrams/algebrica/unit-circle-4.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/geo.circle.chord_segments.md",
         "figures_referenced": false,
         "exact_stem_match": [],
         "topic_word_match": [
@@ -3022,15 +3554,38 @@
         ]
       },
       {
+        "lesson": "teaching/geo.circle.secant.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/unit-circle-1.svg",
+          "/diagrams/algebrica/unit-circle-2.svg",
+          "/diagrams/algebrica/unit-circle-3.svg",
+          "/diagrams/algebrica/unit-circle-4.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/geo.triangle.angle_bisector.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/right-triangle-trigonometry-1.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-2.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-3.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-4.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-5.svg"
+        ]
+      },
+      {
         "lesson": "teaching/geo.triangle.angles.md",
         "figures_referenced": false,
         "exact_stem_match": [],
         "topic_word_match": [
           "/diagrams/algebrica/right-triangle-trigonometry-1.svg",
           "/diagrams/algebrica/right-triangle-trigonometry-2.svg",
-          "/diagrams/algebrica/right-triangle-trigonometry\u20133.svg",
-          "/diagrams/algebrica/right-triangle-trigonometry\u20134.svg",
-          "/diagrams/algebrica/right-triangle-trigonometry\u20135.svg"
+          "/diagrams/algebrica/right-triangle-trigonometry-3.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-4.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-5.svg"
         ]
       },
       {
@@ -3040,9 +3595,69 @@
         "topic_word_match": [
           "/diagrams/algebrica/right-triangle-trigonometry-1.svg",
           "/diagrams/algebrica/right-triangle-trigonometry-2.svg",
-          "/diagrams/algebrica/right-triangle-trigonometry\u20133.svg",
-          "/diagrams/algebrica/right-triangle-trigonometry\u20134.svg",
-          "/diagrams/algebrica/right-triangle-trigonometry\u20135.svg"
+          "/diagrams/algebrica/right-triangle-trigonometry-3.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-4.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-5.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/geo.triangle.congruence.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/right-triangle-trigonometry-1.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-2.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-3.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-4.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-5.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/geo.triangle.median_centroid.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/right-triangle-trigonometry-1.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-2.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-3.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-4.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-5.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/geo.triangle.perpendicular_bisector.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/right-triangle-trigonometry-1.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-2.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-3.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-4.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-5.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/geo.triangle.pythagorean_converse.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/right-triangle-trigonometry-1.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-2.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-3.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-4.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-5.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/geo.triangle.special_right_45.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/right-triangle-trigonometry-1.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-2.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-3.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-4.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-5.svg"
         ]
       },
       {
@@ -3052,9 +3667,32 @@
         "topic_word_match": [
           "/diagrams/algebrica/right-triangle-trigonometry-1.svg",
           "/diagrams/algebrica/right-triangle-trigonometry-2.svg",
-          "/diagrams/algebrica/right-triangle-trigonometry\u20133.svg",
-          "/diagrams/algebrica/right-triangle-trigonometry\u20134.svg",
-          "/diagrams/algebrica/right-triangle-trigonometry\u20135.svg"
+          "/diagrams/algebrica/right-triangle-trigonometry-3.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-4.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-5.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/linalg.quadratic.definite.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/geometric-interpretation-quadratic-equations-1.svg",
+          "/diagrams/algebrica/geometric-interpretation-quadratic-equations-2.svg",
+          "/diagrams/algebrica/geometric-interpretation-quadratic-equations-3.svg",
+          "/diagrams/algebrica/geometric-interpretation-quadratic-inequalities-1.svg",
+          "/diagrams/algebrica/geometric-interpretation-quadratic-inequalities-2.svg",
+          "/diagrams/algebrica/quadratic-inequalities-1.svg",
+          "/diagrams/algebrica/quadratic-inequalities-2.svg",
+          "/diagrams/algebrica/quadratic-inequalities-4.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/linalg.systems.homogeneous.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
         ]
       },
       {
@@ -3063,6 +3701,523 @@
         "exact_stem_match": [],
         "topic_word_match": [
           "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/linalg.systems.row_reduction.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/linalg.vector.cross.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/vector-and-parametric-equations-of-a-line-1.svg",
+          "/diagrams/algebrica/vector-spaces-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/linalg.vector.plane.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/vector-and-parametric-equations-of-a-line-1.svg",
+          "/diagrams/algebrica/vector-spaces-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/numa.linear.cg.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/linear-equations-1.svg",
+          "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/numa.linear.cholesky.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/linear-equations-1.svg",
+          "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/numa.linear.elimination.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/linear-equations-1.svg",
+          "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/numa.linear.gauss_seidel.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/linear-equations-1.svg",
+          "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/numa.linear.iter_convergence.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/linear-equations-1.svg",
+          "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/numa.linear.jacobi.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/linear-equations-1.svg",
+          "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/numa.linear.least_squares_qr.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/linear-equations-1.svg",
+          "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/numa.linear.lu.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/linear-equations-1.svg",
+          "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/numa.linear.pivoting.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/linear-equations-1.svg",
+          "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/numa.linear.power.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/linear-equations-1.svg",
+          "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/numa.linear.qr_algorithm.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/linear-equations-1.svg",
+          "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/numa.linear.sor.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/linear-equations-1.svg",
+          "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/numa.roots.bisection.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/roots-of-a-polynomial-1.svg",
+          "/diagrams/algebrica/roots-of-a-polynomial-2.svg",
+          "/diagrams/algebrica/roots-of-a-polynomial-3.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/numa.roots.bracketing.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/roots-of-a-polynomial-1.svg",
+          "/diagrams/algebrica/roots-of-a-polynomial-2.svg",
+          "/diagrams/algebrica/roots-of-a-polynomial-3.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/numa.roots.false_position.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/roots-of-a-polynomial-1.svg",
+          "/diagrams/algebrica/roots-of-a-polynomial-2.svg",
+          "/diagrams/algebrica/roots-of-a-polynomial-3.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/numa.roots.fixed_point.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/roots-of-a-polynomial-1.svg",
+          "/diagrams/algebrica/roots-of-a-polynomial-2.svg",
+          "/diagrams/algebrica/roots-of-a-polynomial-3.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/numa.roots.horner.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/roots-of-a-polynomial-1.svg",
+          "/diagrams/algebrica/roots-of-a-polynomial-2.svg",
+          "/diagrams/algebrica/roots-of-a-polynomial-3.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/numa.roots.multiple.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/roots-of-a-polynomial-1.svg",
+          "/diagrams/algebrica/roots-of-a-polynomial-2.svg",
+          "/diagrams/algebrica/roots-of-a-polynomial-3.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/numa.roots.newton.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/roots-of-a-polynomial-1.svg",
+          "/diagrams/algebrica/roots-of-a-polynomial-2.svg",
+          "/diagrams/algebrica/roots-of-a-polynomial-3.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/numa.roots.order.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/roots-of-a-polynomial-1.svg",
+          "/diagrams/algebrica/roots-of-a-polynomial-2.svg",
+          "/diagrams/algebrica/roots-of-a-polynomial-3.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/numa.roots.secant.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/roots-of-a-polynomial-1.svg",
+          "/diagrams/algebrica/roots-of-a-polynomial-2.svg",
+          "/diagrams/algebrica/roots-of-a-polynomial-3.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/ode.first_order.bernoulli.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/order-basic.svg",
+          "/diagrams/arithmetic/order-full.svg",
+          "/diagrams/arithmetic/order-nested.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/ode.first_order.logistic.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/order-basic.svg",
+          "/diagrams/arithmetic/order-full.svg",
+          "/diagrams/arithmetic/order-nested.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/ode.first_order.mixing.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/order-basic.svg",
+          "/diagrams/arithmetic/order-full.svg",
+          "/diagrams/arithmetic/order-nested.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/ode.second_order.cauchy_euler.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/order-basic.svg",
+          "/diagrams/arithmetic/order-full.svg",
+          "/diagrams/arithmetic/order-nested.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/ode.second_order.forced.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/order-basic.svg",
+          "/diagrams/arithmetic/order-full.svg",
+          "/diagrams/arithmetic/order-nested.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/ode.second_order.power_series.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/order-basic.svg",
+          "/diagrams/arithmetic/order-full.svg",
+          "/diagrams/arithmetic/order-nested.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/ode.second_order.reduction.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/order-basic.svg",
+          "/diagrams/arithmetic/order-full.svg",
+          "/diagrams/arithmetic/order-nested.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/ode.second_order.spring.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/order-basic.svg",
+          "/diagrams/arithmetic/order-full.svg",
+          "/diagrams/arithmetic/order-nested.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/ode.systems.matrix_exp.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/ode.systems.predator_prey.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/systems-of-linear-equations-in-two-variables-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/prealg.measure.dimensional.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/angles-and-angular-measure-1.svg",
+          "/diagrams/algebrica/angles-and-angular-measure-2.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/prealg.real.order_rational.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/discontinuities-of-real-functions-1.svg",
+          "/diagrams/algebrica/discontinuities-of-real-functions-2.svg",
+          "/diagrams/algebrica/discontinuities-of-real-functions-3.svg",
+          "/diagrams/algebrica/real-numbers-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/precalc.parametric.projectile.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/vector-and-parametric-equations-of-a-line-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/precalc.vector.resultant.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/vector-and-parametric-equations-of-a-line-1.svg",
+          "/diagrams/algebrica/vector-spaces-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/precalc.vector.three_d.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/vector-and-parametric-equations-of-a-line-1.svg",
+          "/diagrams/algebrica/vector-spaces-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/precalc.vector.unit.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/vector-and-parametric-equations-of-a-line-1.svg",
+          "/diagrams/algebrica/vector-spaces-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/ra.measure.cantor_set.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/angles-and-angular-measure-1.svg",
+          "/diagrams/algebrica/angles-and-angular-measure-2.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/ra.measure.null.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/angles-and-angular-measure-1.svg",
+          "/diagrams/algebrica/angles-and-angular-measure-2.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/ra.order.archimedean.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/order-basic.svg",
+          "/diagrams/arithmetic/order-full.svg",
+          "/diagrams/arithmetic/order-nested.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/ra.order.completeness.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/order-basic.svg",
+          "/diagrams/arithmetic/order-full.svg",
+          "/diagrams/arithmetic/order-nested.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/ra.order.countable.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/order-basic.svg",
+          "/diagrams/arithmetic/order-full.svg",
+          "/diagrams/arithmetic/order-nested.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/ra.order.density.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/order-basic.svg",
+          "/diagrams/arithmetic/order-full.svg",
+          "/diagrams/arithmetic/order-nested.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/ra.order.extended.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/order-basic.svg",
+          "/diagrams/arithmetic/order-full.svg",
+          "/diagrams/arithmetic/order-nested.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/ra.order.nested_intervals.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/order-basic.svg",
+          "/diagrams/arithmetic/order-full.svg",
+          "/diagrams/arithmetic/order-nested.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/ra.order.schroder_bernstein.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/order-basic.svg",
+          "/diagrams/arithmetic/order-full.svg",
+          "/diagrams/arithmetic/order-nested.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/ra.order.supremum.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/order-basic.svg",
+          "/diagrams/arithmetic/order-full.svg",
+          "/diagrams/arithmetic/order-nested.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/ra.order.uncountable.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/order-basic.svg",
+          "/diagrams/arithmetic/order-full.svg",
+          "/diagrams/arithmetic/order-nested.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/ra.order.zorn.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/arithmetic/order-basic.svg",
+          "/diagrams/arithmetic/order-full.svg",
+          "/diagrams/arithmetic/order-nested.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/stat.test.anova.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/stat.test.chi_square.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/stat.test.chi_square_independence.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/integral-test-for-series-convergence-1.svg"
         ]
       },
       {
@@ -3075,6 +4230,51 @@
           "/diagrams/algebrica/inner-product-spaces-3.svg",
           "/diagrams/algebrica/inner-product-spaces-4.svg",
           "/diagrams/algebrica/vector-spaces-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/trig.hyperbolic.derivative.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/hyperbolic-cosine-function-1.svg",
+          "/diagrams/algebrica/hyperbolic-cotangent-function-1.svg",
+          "/diagrams/algebrica/hyperbolic-sine-and-cosine-1.svg",
+          "/diagrams/algebrica/hyperbolic-sine-and-cosine-2.svg",
+          "/diagrams/algebrica/hyperbolic-sine-and-cosine-3.svg",
+          "/diagrams/algebrica/hyperbolic-sine-and-cosine-4.svg",
+          "/diagrams/algebrica/hyperbolic-sine-and-cosine-5.svg",
+          "/diagrams/algebrica/hyperbolic-sine-function-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/trig.hyperbolic.identities.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/hyperbolic-cosine-function-1.svg",
+          "/diagrams/algebrica/hyperbolic-cotangent-function-1.svg",
+          "/diagrams/algebrica/hyperbolic-sine-and-cosine-1.svg",
+          "/diagrams/algebrica/hyperbolic-sine-and-cosine-2.svg",
+          "/diagrams/algebrica/hyperbolic-sine-and-cosine-3.svg",
+          "/diagrams/algebrica/hyperbolic-sine-and-cosine-4.svg",
+          "/diagrams/algebrica/hyperbolic-sine-and-cosine-5.svg",
+          "/diagrams/algebrica/hyperbolic-sine-function-1.svg"
+        ]
+      },
+      {
+        "lesson": "teaching/trig.hyperbolic.inverse.md",
+        "figures_referenced": false,
+        "exact_stem_match": [],
+        "topic_word_match": [
+          "/diagrams/algebrica/hyperbolic-cosine-function-1.svg",
+          "/diagrams/algebrica/hyperbolic-cotangent-function-1.svg",
+          "/diagrams/algebrica/hyperbolic-sine-and-cosine-1.svg",
+          "/diagrams/algebrica/hyperbolic-sine-and-cosine-2.svg",
+          "/diagrams/algebrica/hyperbolic-sine-and-cosine-3.svg",
+          "/diagrams/algebrica/hyperbolic-sine-and-cosine-4.svg",
+          "/diagrams/algebrica/hyperbolic-sine-and-cosine-5.svg",
+          "/diagrams/algebrica/hyperbolic-sine-function-1.svg"
         ]
       },
       {
@@ -3720,7 +4920,10 @@
         "figures_referenced": true,
         "exact_stem_match": [
           "/diagrams/algebrica/right-triangle-trigonometry-1.svg",
-          "/diagrams/algebrica/right-triangle-trigonometry-2.svg"
+          "/diagrams/algebrica/right-triangle-trigonometry-2.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-3.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-4.svg",
+          "/diagrams/algebrica/right-triangle-trigonometry-5.svg"
         ],
         "topic_word_match": []
       },
@@ -4693,9 +5896,9 @@
       "/diagrams/algebrica/reduction-formulas-and-reference-angles-7.svg",
       "/diagrams/algebrica/right-triangle-trigonometry-1.svg",
       "/diagrams/algebrica/right-triangle-trigonometry-2.svg",
-      "/diagrams/algebrica/right-triangle-trigonometry\u20133.svg",
-      "/diagrams/algebrica/right-triangle-trigonometry\u20134.svg",
-      "/diagrams/algebrica/right-triangle-trigonometry\u20135.svg",
+      "/diagrams/algebrica/right-triangle-trigonometry-3.svg",
+      "/diagrams/algebrica/right-triangle-trigonometry-4.svg",
+      "/diagrams/algebrica/right-triangle-trigonometry-5.svg",
       "/diagrams/algebrica/rolle-theorem-1.svg",
       "/diagrams/algebrica/roots-of-a-polynomial-1.svg",
       "/diagrams/algebrica/roots-of-a-polynomial-2.svg",
@@ -4801,7 +6004,21 @@
       "/diagrams/arithmetic/sub-borrow.svg",
       "/diagrams/arithmetic/sub-double.svg",
       "/diagrams/arithmetic/sub-single.svg",
-      "/diagrams/arithmetic/sub-word.svg"
+      "/diagrams/arithmetic/sub-word.svg",
+      "/diagrams/graphs/sec_gt-intro-11-1.svg",
+      "/diagrams/graphs/sec_gt-intro-17-2-2-1.svg",
+      "/diagrams/graphs/sec_gt-intro-2-2-1.svg",
+      "/diagrams/graphs/sec_gt-intro-2-2-2.svg",
+      "/diagrams/graphs/sec_gt-intro-2-2-3.svg",
+      "/diagrams/graphs/sec_gt-intro-2-2-4.svg",
+      "/diagrams/graphs/sec_gt-intro-2-4-1.svg",
+      "/diagrams/graphs/sec_gt-intro-2-4-2.svg",
+      "/diagrams/graphs/sec_gt-intro-2-4-3.svg",
+      "/diagrams/graphs/sec_gt-intro-21-3-4-1.svg",
+      "/diagrams/graphs/sec_gt-intro-24-1.svg",
+      "/diagrams/graphs/sec_gt-intro-31-1-2-1.svg",
+      "/diagrams/graphs/sec_gt-intro-31-1-2-2.svg",
+      "/diagrams/graphs/sec_gt-intro-31-1-2-3.svg"
     ]
   }
 }

@@ -1,29 +1,26 @@
 [
   {
-    "label": "Modeling data with two variables",
-    "section": "Modeling data with two variables",
+    "label": "One mode, several modes or no mode",
+    "section": "One mode, several modes or no mode",
     "subgoals": [
-      "Plot yearly top-1% shares from the table",
-      "Count repeats of each share value",
-      "Name the most frequent share the mode"
+      "Count how often each value appears",
+      "Identify data with one mode, several modes or no mode"
     ]
   },
   {
-    "label": "Patterns in Tables",
-    "section": "Patterns in Tables",
+    "label": "The mode, mean and median",
+    "section": "The mode, mean and median",
     "subgoals": [
-      "Pair each left entry with its right assignment",
-      "Tally repeats across the table rows",
-      "Name the most-assigned value the mode"
+      "Distinguish the mode from the mean and median",
+      "Use the mode with categorical data"
     ]
   },
   {
-    "label": "Rate of Change",
-    "section": "Rate of Change",
+    "label": "Finding the mode",
+    "section": "Finding the mode",
     "subgoals": [
-      "Compute each between-row rate of change",
-      "Tally which rate recurs most often",
-      "Name the most frequent rate the modal rate"
+      "Find the mode of a list by counting frequencies",
+      "Report the mode, or state that there is no mode"
     ]
   }
 ]
