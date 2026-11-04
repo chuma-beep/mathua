@@ -158,7 +158,7 @@ export default function AdminAnnouncementsPage() {
               <div className="mt-4 border border-mathua-border bg-mathua-bg p-4" aria-label="Announcement preview">
                 <p className="font-mono text-[10px] uppercase tracking-wider text-mathua-muted">Preview</p>
                 <h3 className="mt-2 font-mono text-sm text-mathua-primary">{title || 'Untitled'}</h3>
-                <KatexContent className="mt-2 text-sm text-mathua-secondary">{body}</KatexContent>
+                <KatexContent allowLinks className="mt-2 text-sm text-mathua-secondary">{body}</KatexContent>
               </div>
             )}
             <div className="mt-4 flex flex-wrap gap-2">
@@ -233,7 +233,7 @@ export default function AdminAnnouncementsPage() {
                   )}
                 </div>
                 <div className="mt-3 border-t border-mathua-border pt-3">
-                  <KatexContent className="text-sm text-mathua-secondary">{announcement.body}</KatexContent>
+                  <KatexContent allowLinks className="text-sm text-mathua-secondary">{announcement.body}</KatexContent>
                 </div>
               </li>
             ))}

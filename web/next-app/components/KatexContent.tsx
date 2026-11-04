@@ -155,7 +155,15 @@ function rehypeKatexFallback() {
   }
 }
 
-export default function KatexContent({ children, className = '' }: { children: string; className?: string }) {
+export default function KatexContent({
+  children,
+  className = '',
+  allowLinks = false,
+}: {
+  children: string
+  className?: string
+  allowLinks?: boolean
+}) {
   const content = prepareLessonMath(children)
   // In production KaTeX errors are still non-throwing (labeled fallback via
   // rehypeKatexFallback below) but we emit a console warning for telemetry, 
@@ -191,7 +199,19 @@ export default function KatexContent({ children, className = '' }: { children: s
           // react-markdown passes its hast `node` as a prop to every component
           // override: spreading it would render node="[object Object]" on each
           // heading, so it is destructured out and dropped here.
-          a: ({ children }) => <>{children}</>,
+          a: ({ href, children }) =>
+            allowLinks && href ? (
+              <a
+                href={href}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="text-mathua-blue hover:underline"
+              >
+                {children}
+              </a>
+            ) : (
+              <>{children}</>
+            ),
           code: ({ children }) => (
             <code className="bg-mathua-code px-1 rounded-none text-mathua-secondary">
               {children}

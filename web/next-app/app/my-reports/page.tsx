@@ -232,7 +232,7 @@ export default function MyReportsPage() {
                       {fmtDate(announcement.published_at || announcement.created_at)}
                     </span>
                   </div>
-                  <KatexContent className="mt-3 text-sm text-mathua-secondary">{announcement.body}</KatexContent>
+                  <KatexContent allowLinks className="mt-3 text-sm text-mathua-secondary">{announcement.body}</KatexContent>
                 </li>
               ))}
             </ul>
