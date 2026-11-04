@@ -39,8 +39,8 @@ describe('Get started', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'Get started' }))
 
-    expect(push).toHaveBeenCalledWith('/learn')
-    expect(ensureGuestId).toHaveBeenCalled()
-    expect(ensureGuestToken).toHaveBeenCalled()
+    expect(push).toHaveBeenCalledWith('/login')
+    expect(ensureGuestId).not.toHaveBeenCalled()
+    expect(ensureGuestToken).not.toHaveBeenCalled()
   })
 })

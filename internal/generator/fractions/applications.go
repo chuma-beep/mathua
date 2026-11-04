@@ -93,7 +93,7 @@ func (g *orderHalfGen) Generate(ctx generator.GeneratorContext) generator.Proble
 	return generator.Problem{
 		Question: fmt.Sprintf("How many of \\(\\frac{%d}{%d}\\), \\(\\frac{%d}{%d}\\) and \\(\\frac{%d}{%d}\\) are greater than one half?",
 			fs[0].n, fs[0].d, fs[1].n, fs[1].d, fs[2].n, fs[2].d),
-		Answer: fmt.Sprintf("%d/%d", count, 1),
+		Answer: strconv.Itoa(count),
 		Explanation: fmt.Sprintf("Comparing to one half needs no common denominator: a fraction is greater than a half exactly when twice its numerator beats its denominator. Counting those gives %d of the three.",
 			count),
 		Facts: map[string]string{"count": strconv.Itoa(count), "out_num": strconv.Itoa(count), "out_den": "1"},

@@ -34,23 +34,23 @@ describe('landing hero', () => {
     vi.mocked(ensureGuestId).mockClear()
   })
 
-  it('sends "Get started" to Learn, not to an empty Profile', async () => {
+  it('sends "Get started" to Login', async () => {
     render(<HomePage />)
     const cta = await screen.findByRole('button', { name: 'Get started' })
     cta.click()
-    await waitFor(() => expect(pushMock).toHaveBeenCalledWith('/learn'))
+    await waitFor(() => expect(pushMock).toHaveBeenCalledWith('/login'))
     expect(pushMock).not.toHaveBeenCalledWith('/profile')
   })
 
-  it('establishes a guest identity before leaving, so the first answer is gradeable', async () => {
+  it('does not mint a guest identity when opening Login', async () => {
     render(<HomePage />)
     ;(await screen.findByRole('button', { name: 'Get started' })).click()
-    await waitFor(() => expect(pushMock).toHaveBeenCalledWith('/learn'))
+    await waitFor(() => expect(pushMock).toHaveBeenCalledWith('/login'))
     // The anchor that grades the first answer is keyed by student, and the
     // practice endpoint only resolves one from a bearer token, so the guest
     // id and token have to exist before /learn fetches anything.
-    expect(ensureGuestId).toHaveBeenCalled()
-    expect(ensureGuestToken).toHaveBeenCalled()
+    expect(ensureGuestId).not.toHaveBeenCalled()
+    expect(ensureGuestToken).not.toHaveBeenCalled()
   })
 
   it('still leaves a signed-in visitor on the landing page', async () => {
