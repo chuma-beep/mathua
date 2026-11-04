@@ -9,5 +9,11 @@
       "main": true
     }
   },
-  "ignoreCommand": "bash scripts/vercel-ignore-build.sh"
+  "ignoreCommand": "bash scripts/vercel-ignore-build.sh",
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://mathua.fly.dev/api/:path*"
+    }
+  ]
 }
