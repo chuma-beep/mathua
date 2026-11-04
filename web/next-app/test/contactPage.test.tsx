@@ -50,7 +50,7 @@ describe('the contact page', () => {
     render(<ContactPage />)
 
     const support = screen.getByRole('link', { name: 'tip Mathua on Myhappr' })
-    expect(support).toHaveAttribute('href', 'https://myhappr.com/wisddom')
+    expect(support).toHaveAttribute('href', 'https://selar.com/showlove/wisddom')
     expect(support).toHaveAttribute('target', '_blank')
     expect(support).toHaveAttribute('rel', 'noreferrer')
     expect(screen.getByText(/keep Mathua free/)).toBeInTheDocument()

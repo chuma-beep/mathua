@@ -3,7 +3,7 @@
 // The footer, the contact page and the Creator's Note all point at the same set
 // of places. Keeping the URLs here means a handle change is one edit rather than
 // three, and a test can assert that every surface publishes the same addresses.
-export const SUPPORT_URL = 'https://myhappr.com/wisddom'
+export const SUPPORT_URL = 'https://selar.com/showlove/wisddom'
 
 export interface CreatorLink {
   label: string
