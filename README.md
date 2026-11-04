@@ -25,16 +25,16 @@
 
 ---
 
-Mathua is a local-first adaptive math learning engine inspired by the mastery-gating philosophy of Math Academy. It guides a learner from arithmetic through university math through a dependency graph of 1500 atomic concepts and 28 courses, never advancing until speed and accuracy thresholds are both met. Knowledge is scaffolded into 4500 worked examples (1500 KP shard files × 3 subgoals each) with subgoal labels and 183 dual-coded diagrams. It runs as a single Go binary with a web server delivery mode and React + Next.js for leagues, parent/teacher share links and graph visualisation. Transcripts export as CSV via the API.
+Mathua is a local-first adaptive math learning engine inspired by the mastery-gating philosophy of Math Academy. It guides a learner from arithmetic through university math through a checked prerequisite DAG of 1500 atomic concepts and 28 courses, never advancing until speed and accuracy thresholds are both met. Knowledge is scaffolded into 4500 worked examples (1500 KP shard files × 3 subgoals each) with subgoal labels and 183 dual-coded diagrams. It runs as a Go backend serving a React + Next.js frontend, covering leagues, parent/teacher share links and graph visualisation. Transcripts export as CSV via the API.
 
 ---
 
 ## What makes it different
 
-- **You cannot advance until you have mastered the prerequisite.** The concept graph enforces this, if you cannot reliably add fractions with different denominators, the system will not show you mixed number addition.
+- **You cannot advance until you have mastered the prerequisite.** The checked DAG enforces this, if you cannot reliably add fractions with different denominators, the system will not show you mixed number addition.
 - **Speed matters, not just accuracy.** A correct answer that took 45 seconds on a concept with a 12-second threshold counts as weak mastery. You need to be both right and fast.
-- **Nothing is forgotten.** Concepts resurface automatically through per-topic spaced repetition (SM-2 scaled by your learning speed). A concept mastered three weeks ago will reappear before it decays.
-- **Problems are generated, not stored.** Every problem is produced on demand by a parameterised generator. The same concept gives you a different problem every time. There is nothing to memorise.
+- **Nothing is forgotten.** Concepts resurface automatically through FSRS-6 spaced repetition, with FIRe supplying implicit repetition credit. A concept mastered three weeks ago will reappear before it decays.
+- **Problems are generated on demand.** Every problem is produced by a parameterised Go generator, with a stored fallback and a replay layer so a session never stalls. The same concept gives you a different problem every time, so there is nothing to memorise.
 - **Weekly leagues and shareable progress.** Bronze → Diamond leagues promote the top 2 each Monday, and any student can generate a read-only share link (Settings → Share) for a parent or teacher. Pauses, accommodated timing and a 50 XP mastery-check quiz are built in.
 
 ---
@@ -90,7 +90,7 @@ One administrator can demote nobody, including themselves. Promote a second admi
 
 All math knowledge in Mathua is a directed acyclic graph. Each node is an atomic concept, something small enough to fail independently. Each edge is a prerequisite relationship.
 
-The graph contains **1500 concepts** across **23 domains** (1500 KP shard files × 3 = 4500 KPs). The scheduler reads your progress and the graph structure to decide what to show next, it will never surface a concept whose prerequisites you have not mastered.
+The graph contains **1500 concepts** across **23 domains** (1500 KP shard files × 3 = 4500 KPs). It is checked at build time for cycles and orphans (`scripts/validate_graph.go`), so the prerequisite relation is a DAG by construction, not by convention. The scheduler reads your progress and the graph structure to decide what to show next, it will never surface a concept whose prerequisites you have not mastered.
 
 ### Mastery gating
 
@@ -119,7 +119,11 @@ Three hard rules apply: never surface a concept whose prerequisites are not mast
 
 ### Spaced repetition
 
-When a concept reaches MASTERED, Mathua schedules its next review using SM-2 scaled by your per-topic learning speed (0.5 slow → 2.0 fast). The interval grows with each successful review (1 day → 6 days → previous × easiness factor × your speed) and resets on failure. Reviews are woven into normal sessions; every 50 XP a mastery-check quiz surfaces at 80% difficulty. Diagnostic reports include a frontier placement, gaps by domain and completion estimates for accreditation.
+When a concept reaches MASTERED, Mathua schedules its next review with **FSRS-6**, the 21-parameter long-term memory model, pinned to the reference implementation's defaults (`fsrs==6.3.2`) and a 0.90 retention target. Each review updates the concept's stability and difficulty rather than a single ease factor, and a lapse brings the concept straight back. SM-2 survives only as the migration seed for concepts whose history predates FSRS.
+
+**FIRe** supplies the repetition side: work on an encompassing concept can bank implicit repetition credit for a dependent concept, and that credit can advance its review schedule without a dedicated card. The ledger is reconstructable exactly and is separate from mastery evidence, XP and diagnostics.
+
+Reviews are woven into normal sessions; every 50 XP a mastery-check quiz surfaces at 80% difficulty. Diagnostic reports include a frontier placement, gaps by domain and completion estimates for accreditation.
 
 ---
 
@@ -156,7 +160,7 @@ When a concept reaches MASTERED, Mathua schedules its next review using SM-2 sca
 
 ## Architecture
 
-Mathua is a single Go binary with one delivery method. The engine core is identical, only the UI delivery layer differs.
+Mathua is a Go backend with one delivery method: it serves the React + Next.js frontend as a static export and exposes a single REST API to the engine.
 
 ```
 Web (React + Next.js) ═══ REST API ═══ Core Engine ── Grading ── Storage
