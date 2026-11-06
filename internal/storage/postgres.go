@@ -71,6 +71,30 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx_xp_events_event ON xp_events(student_id, e
 CREATE INDEX IF NOT EXISTS idx_xp_events_week ON xp_events(created_at);
 CREATE INDEX IF NOT EXISTS idx_xp_events_student_week ON xp_events(student_id, created_at);
 
+-- Effort-integrity observations; see the SQLite schema for the full rationale.
+CREATE TABLE IF NOT EXISTS effort_signals (
+    id               BIGSERIAL PRIMARY KEY,
+    student_id       TEXT    NOT NULL,
+    task_kind        TEXT    NOT NULL,
+    task_id          TEXT    NOT NULL,
+    concept_id       TEXT    NOT NULL DEFAULT '',
+    attempt_key      TEXT    NOT NULL,
+    correct          INTEGER NOT NULL DEFAULT 0,
+    dont_know        INTEGER NOT NULL DEFAULT 0,
+    mastered         INTEGER NOT NULL DEFAULT 0,
+    legacy_penalty   INTEGER NOT NULL DEFAULT 0,
+    elapsed_seconds  DOUBLE PRECISION NOT NULL DEFAULT 0,
+    difficulty       DOUBLE PRECISION NOT NULL DEFAULT 0,
+    answer_signature TEXT    NOT NULL DEFAULT '',
+    xp_earned        BIGINT  NOT NULL DEFAULT 0,
+    created_at       BIGINT  NOT NULL
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_effort_signals_attempt
+    ON effort_signals(student_id, task_kind, task_id, attempt_key);
+CREATE INDEX IF NOT EXISTS idx_effort_signals_student_time
+    ON effort_signals(student_id, created_at);
+
 -- Weekly league membership. See the SQLite schema for why the week marker and
 -- the seats are written in one transaction.
 CREATE TABLE IF NOT EXISTS league_members (
@@ -691,6 +715,10 @@ func pgAuthMigrate(db *sql.DB) error {
 		"ALTER TABLE question_reports ADD COLUMN IF NOT EXISTS answer_input_mode TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE question_reports ADD COLUMN IF NOT EXISTS origin_report_id TEXT NOT NULL DEFAULT ''",
 		"CREATE UNIQUE INDEX IF NOT EXISTS idx_reports_origin ON question_reports(origin_report_id) WHERE origin_report_id != ''",
+		"ALTER TABLE timed_quiz_items ADD COLUMN IF NOT EXISTS xp_adjustment INTEGER NOT NULL DEFAULT 0",
+		"ALTER TABLE timed_quiz_items ADD COLUMN IF NOT EXISTS xp_note TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE timed_quiz_items ADD COLUMN IF NOT EXISTS xp_reason_code TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE timed_quiz_items ADD COLUMN IF NOT EXISTS xp_source TEXT NOT NULL DEFAULT ''",
 		`CREATE TABLE IF NOT EXISTS avatar_images (
 			student_id TEXT PRIMARY KEY REFERENCES students(id) ON DELETE CASCADE,
 			content_type TEXT NOT NULL,
@@ -1952,6 +1980,7 @@ func (s *PostgresStore) ResetProgress(studentID string) error {
 		{"DELETE FROM student_remedial_queue WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM server_sessions WHERE kind IN ('study_expected','study_plan') AND (key = $1 OR key LIKE $1 || '|%')", []interface{}{studentID}},
 		{"DELETE FROM xp_events WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM effort_signals WHERE student_id = $1", []interface{}{studentID}},
 		{`UPDATE students SET xp_total = 0, xp_today = 0, diagnostic_completed = 0, diagnostic_completed_at = '',
 			league = 'bronze', league_week = '', league_moved = 0 WHERE id = $1`, []interface{}{studentID}},
 	}
@@ -1993,6 +2022,7 @@ func (s *PostgresStore) DeleteAccount(studentID string) error {
 		{"DELETE FROM identities WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM avatar_images WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM attempts WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM effort_signals WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM answer_submissions WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM study_answer_effects WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM active_sessions WHERE student_id = $1", []interface{}{studentID}},
@@ -2064,7 +2094,7 @@ func insertAttemptPostgresTx(tx *sql.Tx, entry AttemptEntry) (int64, error) {
 }
 
 func (s *PostgresStore) CommitStudySubmission(c StudySubmissionCommit) (StudySubmissionOutcome, error) {
-	return commitStudySubmissionTx(s.db, rebindDollars, insertAttemptPostgresTx, c)
+	return commitStudySubmissionTx(s.db, rebindDollars, " FOR UPDATE", insertAttemptPostgresTx, c)
 }
 
 func (s *PostgresStore) CommitReviewSubmission(c ReviewSubmissionCommit) (ReviewSubmissionOutcome, error) {

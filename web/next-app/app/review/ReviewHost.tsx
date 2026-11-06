@@ -13,6 +13,7 @@ import { formatForGradingType, type AnswerFormat } from '../../lib/answerFormat'
 import ChoiceOptions from '../../components/ChoiceOptions'
 import { stemWithoutChoices } from '../../lib/choices'
 import SubmitErrorBlock, { toSubmitError, type SubmitError } from '../../components/SubmitErrorBlock'
+import XPAdjustmentNote from '../../components/XPAdjustmentNote'
 import { MathAnswerInput, type MathFocusHandle } from '@/components/math/MathInput'
 import { focusClearOfTabs } from '../../lib/focusClearOfTabs'
 
@@ -36,7 +37,7 @@ export default function ReviewHost() {
   const [reviewConceptName, setReviewConceptName] = useState('')
   const [reviewCount, setReviewCount] = useState(0)
   const [reviewAnswerInput, setReviewAnswerInput] = useState('')
-  const [reviewLastResult, setReviewLastResult] = useState<{ correct: boolean; feedback: string; explanation?: string; diagnosis?: string; xp?: number } | null>(null)
+  const [reviewLastResult, setReviewLastResult] = useState<{ correct: boolean; feedback: string; explanation?: string; diagnosis?: string; xp?: number; xpAdjustment?: number; xpNote?: string; xpSource?: string } | null>(null)
   const [reviewAccuracy, setReviewAccuracy] = useState({ correct: 0, total: 0 })
   const [reviewXp, setReviewXp] = useState(0)
   const [submitError, setSubmitError] = useState<SubmitError | null>(null)
@@ -112,9 +113,10 @@ export default function ReviewHost() {
       const correct = data.result?.correct || false
       const feedback = data.result?.feedback || (correct ? 'Correct!' : 'Not quite.')
       const xp = data.result?.xp ?? 0
+      const xpAdjustment = data.result?.xp_adjustment ?? 0
       setReviewAccuracy(prev => ({ correct: prev.correct + (correct ? 1 : 0), total: prev.total + 1 }))
-      setReviewXp(prev => prev + xp)
-      setReviewLastResult({ correct, feedback, explanation: data.result?.explanation, diagnosis: data.result?.diagnosis, xp })
+      setReviewXp(prev => prev + xp + xpAdjustment)
+      setReviewLastResult({ correct, feedback, explanation: data.result?.explanation, diagnosis: data.result?.diagnosis, xp, xpAdjustment, xpNote: data.result?.xp_note, xpSource: data.result?.xp_source })
       if (data.done || !data.next_question) {
         setFinished(true)
         setTimeout(() => {
@@ -214,7 +216,7 @@ export default function ReviewHost() {
         ) : (
           <>
             <SectionHeader label="Review complete" title={`${reviewAccuracy.correct}/${reviewAccuracy.total} correct`} />
-            <p className="font-mono text-sm text-mathua-secondary mt-4">Reviews record progress like practice{reviewXp > 0 ? ` · +${reviewXp} XP this run` : ''}.</p>
+            <p className="font-mono text-sm text-mathua-secondary mt-4">Reviews record progress like practice{reviewXp !== 0 ? ` · ${reviewXp > 0 ? '+' : ''}${reviewXp} XP this run` : ''}.</p>
             <div className="mt-6 flex gap-3 justify-center">
               <button type="button" onClick={restartReview} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-12 px-8 text-sm">Review again →</button>
               <Link href="/profile" className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none h-12 px-8 text-sm inline-flex items-center">Back to Profile →</Link>
@@ -234,7 +236,7 @@ export default function ReviewHost() {
       <div className="max-w-2xl mx-auto min-w-0 overflow-hidden px-2 sm:px-0">
         <div className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-mono text-mathua-muted justify-center">
           <span className={reviewAccuracy.correct / Math.max(reviewAccuracy.total, 1) >= 0.7 ? 'text-mathua-green' : ''}>{reviewAccuracy.correct}/{reviewAccuracy.total} correct</span>
-          {reviewXp > 0 ? <span className="text-yellow-400">+{reviewXp} XP</span> : null}
+          {reviewXp !== 0 ? <span className={reviewXp > 0 ? 'text-yellow-400' : 'text-mathua-red'}>{reviewXp > 0 ? '+' : ''}{reviewXp} XP</span> : null}
         </div>
         <div className={`bg-mathua-surface border rounded-none p-4 sm:p-6 mb-6 transition-colors w-full max-w-full min-w-0 overflow-hidden ${reviewLastResult ? (reviewLastResult.correct ? 'border-mathua-green-faint' : 'border-mathua-red-faint') : 'border-mathua-border'}`}>
           <div className="bg-mathua-code border border-mathua-border rounded-none p-4 sm:p-6 text-center mb-4">
@@ -295,6 +297,12 @@ export default function ReviewHost() {
               {reviewLastResult.diagnosis && (
                 <p className="mt-2 text-center font-mono text-[11px] text-mathua-muted">{reviewLastResult.diagnosis}</p>
               )}
+              <XPAdjustmentNote
+                adjustment={reviewLastResult.xpAdjustment}
+                note={reviewLastResult.xpNote}
+                source={reviewLastResult.xpSource}
+                className="mt-3 text-center"
+              />
             </div>
           )}
         </div>

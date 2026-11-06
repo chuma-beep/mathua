@@ -4,6 +4,8 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import KatexContent from '../../components/KatexContent'
 import SectionHeader from '../../components/SectionHeader'
+import XPAdjustmentNote from '../../components/XPAdjustmentNote'
+import XPTaskSummary from '../../components/XPTaskSummary'
 import { stemWithoutChoices } from '../../lib/choices'
 import {
   finalizeTimedQuiz,
@@ -212,6 +214,8 @@ export default function TimedQuizHost() {
   }
 
   if (phase === 'done' && result) {
+    const resultAdjustment = result.items.reduce((sum, item) => sum + (item.xp_adjustment ?? 0), 0)
+    const lastAdjustmentItem = result.items.slice().reverse().find(item => (item.xp_adjustment ?? 0) !== 0 || item.xp_note)
     return (
       <div className="max-w-2xl mx-auto min-w-0">
         <SectionHeader label="Timed quiz result" title={`${result.score_percent}% correct`} />
@@ -223,6 +227,14 @@ export default function TimedQuizHost() {
             <Stat label="Score" value={`${result.score_percent}%`} />
           </div>
         </div>
+
+        <XPTaskSummary
+          answerXP={result.xp_earned}
+          adjustment={resultAdjustment}
+          note={lastAdjustmentItem?.xp_note}
+          source={lastAdjustmentItem?.xp_source}
+          className="mb-6 text-left"
+        />
 
         <div className="space-y-3">
           {result.items.map((item) => (
@@ -312,6 +324,12 @@ export default function TimedQuizHost() {
               {feedback.explanation && (
                 <KatexContent className="text-mathua-secondary text-sm whitespace-pre-wrap">{feedback.explanation}</KatexContent>
               )}
+              <XPAdjustmentNote
+                adjustment={feedback.xp_adjustment}
+                note={feedback.xp_note}
+                source={feedback.xp_source}
+                className="mt-3"
+              />
               <button type="button" onClick={advance} className="mt-4 border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-10 px-5 text-sm">
                 {isLast ? 'Finish' : 'Next question'}
               </button>

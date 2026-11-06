@@ -44,6 +44,75 @@ func timedQuizGet(t *testing.T, mux *http.ServeMux, token, path string) *httptes
 	return rec
 }
 
+func TestTimedQuizReplayReturnsStoredAdjustment(t *testing.T) {
+	s := timedQuizServer(t)
+	mux := http.NewServeMux()
+	s.Register(mux)
+	token, studentID := quizGuest(t, mux)
+	store, ok := s.repo.(storage.TimedQuizStore)
+	if !ok {
+		t.Fatal("timed quiz store unavailable")
+	}
+	now := time.Now().UTC()
+	run := storage.TimedQuizRun{
+		ID:         fmt.Sprintf("tq-replay-%d", now.UnixNano()),
+		StudentID:  studentID,
+		StartedAt:  now,
+		DeadlineAt: now.Add(10 * time.Minute),
+		Status:     timedquiz.StatusActive,
+		CreatedAt:  now,
+	}
+	items := []storage.TimedQuizItem{
+		{ID: run.ID + ":0", RunID: run.ID, ConceptID: "a", Position: 0, Question: "1+1", ExpectedAnswer: "2", ServedAt: now, Status: timedquiz.ItemServed},
+		{ID: run.ID + ":1", RunID: run.ID, ConceptID: "b", Position: 1, Question: "2+2", ExpectedAnswer: "4", ServedAt: now, Status: timedquiz.ItemServed},
+	}
+	if err := store.CreateTimedQuizRun(run, items); err != nil {
+		t.Fatalf("create run: %v", err)
+	}
+	if claimed, err := store.ClaimTimedQuizItem(items[0].ID, run.ID, "replay-1"); err != nil || !claimed {
+		t.Fatalf("claim first = %v, %v", claimed, err)
+	}
+	if updated, err := store.UpdateTimedQuizItemWithAdjustment(items[0].ID, run.ID, "2", "replay-1", true, 5, 3, timedquiz.ItemAnswered, -2, "-2 XP: Task performance was extremely poor.", "extremely_poor_performance", "performance"); err != nil || !updated {
+		t.Fatalf("update first = %v, %v", updated, err)
+	}
+	if claimed, err := store.ClaimTimedQuizItem(items[1].ID, run.ID, "replay-2"); err != nil || !claimed {
+		t.Fatalf("claim second = %v, %v", claimed, err)
+	}
+	if updated, err := store.UpdateTimedQuizItemWithAdjustment(items[1].ID, run.ID, "4", "replay-2", false, 5, 0, timedquiz.ItemAnswered, 0, "0 XP: Task performance was poor.", "poor_performance", "performance"); err != nil || !updated {
+		t.Fatalf("update second = %v, %v", updated, err)
+	}
+
+	body := fmt.Sprintf(`{"run_id":%q,"item_id":%q,"answer":"2","elapsed":5,"submission_id":"replay-1"}`, run.ID, items[0].ID)
+	for i := 0; i < 2; i++ {
+		replay := quizSchedulingPost(t, mux, "/api/timed-quiz/answer", token, body)
+		if replay.Code != http.StatusOK {
+			t.Fatalf("replay %d: %d %s", i, replay.Code, replay.Body.String())
+		}
+		result := quizSchedulingDecode(t, replay)
+		if result["xp_adjustment"] != float64(-2) || result["xp_note"] == "" || result["xp_source"] != "performance" {
+			t.Fatalf("replay %d lost adjustment fields: %v", i, result)
+		}
+	}
+
+	zeroBody := fmt.Sprintf(`{"run_id":%q,"item_id":%q,"answer":"4","elapsed":5,"submission_id":"replay-2"}`, run.ID, items[1].ID)
+	zero := quizSchedulingPost(t, mux, "/api/timed-quiz/answer", token, zeroBody)
+	if zero.Code != http.StatusOK {
+		t.Fatalf("zero replay: %d %s", zero.Code, zero.Body.String())
+	}
+	zeroResult := quizSchedulingDecode(t, zero)
+	if zeroResult["xp_adjustment"] != float64(0) || zeroResult["xp_note"] == "" || zeroResult["xp_reason_code"] != "poor_performance" {
+		t.Fatalf("zero replay lost fields: %v", zeroResult)
+	}
+
+	total, _, err := s.repo.GetXP(studentID)
+	if err != nil {
+		t.Fatalf("get xp: %v", err)
+	}
+	if total != 0 {
+		t.Fatalf("replay wrote XP: balance = %d", total)
+	}
+}
+
 func TestTimedQuizLifecycleIsDurableAndIdempotent(t *testing.T) {
 	s := timedQuizServer(t)
 	mux := http.NewServeMux()

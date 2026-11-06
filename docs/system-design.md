@@ -309,6 +309,9 @@ Because the base is clamped to 1-5 and the award truncates, `int(base × 1.1) ==
 base in range: on the integer award the tier is absorbed by rounding. It is still real in the
 model, and `ExpectedXP` returns it as a float for the workload estimator to read.
 
+The accountability rules, task-completion requirements and the calculated-versus-actual ledger
+distinction are documented in [xp-accountability.md](architecture/xp-accountability.md).
+
 ### Levels
 
 | Concepts Mastered | Title |

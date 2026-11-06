@@ -599,6 +599,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	// FIRe status and dry-run are inspection. Activation changes scheduling for
 	// real learners, so the handlers additionally require the owner role.
 	mux.HandleFunc("/api/admin/fire", logRequest(cors(s.requirePermission(admin.ContentRead, s.handleAdminFire))))
+	mux.HandleFunc("/api/admin/accountability", logRequest(cors(s.requirePermission(admin.ContentRead, s.handleAdminAccountability))))
 	mux.HandleFunc("/api/admin/fire/report", logRequest(cors(s.requirePermission(admin.ContentRead, s.handleAdminFireReport))))
 	mux.HandleFunc("/api/admin/fire/activate", logRequest(cors(s.requirePermission(admin.ContentManage, s.handleAdminFireActivate))))
 	mux.HandleFunc("/api/admin/fire/deactivate", logRequest(cors(s.requirePermission(admin.ContentManage, s.handleAdminFireDeactivate))))
@@ -3208,6 +3209,10 @@ func (s *Server) handleStudyAnswer(w http.ResponseWriter, r *http.Request) {
 		"streak":          res.Streak,
 		"required_streak": res.RequiredStreak,
 		"xp":              res.XP,
+		"xp_adjustment":   res.XPAdjustment,
+		"xp_note":         res.XPNote,
+		"xp_reason_code":  res.XPReasonCode,
+		"xp_source":       res.XPSource,
 		"expected_answer": res.ExpectedAnswer,
 		"halted":          res.Halted,
 		"scaffold_active": res.ScaffoldActive,
@@ -3572,6 +3577,10 @@ func (s *Server) timedQuizResultPayload(run *storage.TimedQuizRun, items []stora
 			"status":          item.Status,
 			"explanation":     item.Explanation,
 			"xp_earned":       item.XPEarned,
+			"xp_adjustment":   item.XPAdjustment,
+			"xp_note":         item.XPNote,
+			"xp_reason_code":  item.XPReasonCode,
+			"xp_source":       item.XPSource,
 			"elapsed_seconds": item.ElapsedSeconds,
 		}
 		rows = append(rows, row)
@@ -3762,15 +3771,19 @@ func (s *Server) handleTimedQuizAnswer(w http.ResponseWriter, r *http.Request) {
 	// still being written is allowed through to finish its own claim.
 	if item.SubmissionID == req.SubmissionID && (item.Status == timedquiz.ItemAnswered || item.Status == timedquiz.ItemSkipped) {
 		writeJSON(w, map[string]interface{}{
-			"run_id":       run.ID,
-			"item_id":      item.ID,
-			"concept_id":   item.ConceptID,
-			"concept_name": s.timedQuizConceptName(item.ConceptID),
-			"correct":      item.Correct,
-			"feedback":     timedQuizFeedback(item.Correct),
-			"explanation":  item.Explanation,
-			"xp":           item.XPEarned,
-			"completed":    run.Status == timedquiz.StatusCompleted,
+			"run_id":         run.ID,
+			"item_id":        item.ID,
+			"concept_id":     item.ConceptID,
+			"concept_name":   s.timedQuizConceptName(item.ConceptID),
+			"correct":        item.Correct,
+			"feedback":       timedQuizFeedback(item.Correct),
+			"explanation":    item.Explanation,
+			"xp":             item.XPEarned,
+			"xp_adjustment":  item.XPAdjustment,
+			"xp_note":        item.XPNote,
+			"xp_reason_code": item.XPReasonCode,
+			"xp_source":      item.XPSource,
+			"completed":      run.Status == timedquiz.StatusCompleted,
 		})
 		return
 	}
@@ -3824,11 +3837,20 @@ func (s *Server) handleTimedQuizAnswer(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "answer submitted too quickly", http.StatusBadRequest)
 		return
 	}
+	// Every other item must already be answered or skipped for this answer to
+	// complete the run. The current item is still claimed, so it is excluded.
+	timedQuizComplete := true
+	for _, other := range items {
+		if other.ID != item.ID && other.Status != timedquiz.ItemAnswered && other.Status != timedquiz.ItemSkipped {
+			timedQuizComplete = false
+			break
+		}
+	}
 	var res *engine.AnswerResult
 	if req.DontKnow {
-		res, err = s.eng.SubmitTimedQuizDontKnow(studentID, item.ConceptID, item.ExpectedAnswer, elapsed, item.Question, item.Difficulty, req.SubmissionID)
+		res, err = s.eng.SubmitTimedQuizDontKnowWithCompletion(studentID, item.ConceptID, item.ExpectedAnswer, elapsed, item.Question, item.Difficulty, req.SubmissionID, run.ID, timedQuizComplete)
 	} else {
-		res, err = s.eng.SubmitTimedQuizAnswer(studentID, item.ConceptID, req.Answer, item.ExpectedAnswer, elapsed, item.Question, item.Difficulty, req.SubmissionID)
+		res, err = s.eng.SubmitTimedQuizAnswerWithCompletion(studentID, item.ConceptID, req.Answer, item.ExpectedAnswer, elapsed, item.Question, item.Difficulty, req.SubmissionID, run.ID, timedQuizComplete)
 	}
 	if err != nil {
 		log.Printf("handleTimedQuizAnswer: submit: %v", err)
@@ -3847,11 +3869,15 @@ func (s *Server) handleTimedQuizAnswer(w http.ResponseWriter, r *http.Request) {
 	// response use the original verdict, not zero values.
 	if res.ResponseJSON != "" {
 		var stored struct {
-			Correct     bool   `json:"correct"`
-			Feedback    string `json:"feedback"`
-			Explanation string `json:"explanation"`
-			NewStatus   string `json:"new_status"`
-			XP          int    `json:"xp"`
+			Correct      bool   `json:"correct"`
+			Feedback     string `json:"feedback"`
+			Explanation  string `json:"explanation"`
+			NewStatus    string `json:"new_status"`
+			XP           int    `json:"xp"`
+			XPAdjustment int    `json:"xp_adjustment"`
+			XPNote       string `json:"xp_note"`
+			XPReasonCode string `json:"xp_reason_code"`
+			XPSource     string `json:"xp_source"`
 		}
 		if err := json.Unmarshal([]byte(res.ResponseJSON), &stored); err != nil {
 			writeError(w, "failed to read stored timed quiz answer", http.StatusInternalServerError)
@@ -3862,8 +3888,12 @@ func (s *Server) handleTimedQuizAnswer(w http.ResponseWriter, r *http.Request) {
 		res.Explanation = stored.Explanation
 		res.NewStatus = mastery.Status(stored.NewStatus)
 		res.XP = stored.XP
+		res.XPAdjustment = stored.XPAdjustment
+		res.XPNote = stored.XPNote
+		res.XPReasonCode = stored.XPReasonCode
+		res.XPSource = stored.XPSource
 	}
-	updated, err := store.UpdateTimedQuizItem(item.ID, run.ID, req.Answer, req.SubmissionID, res.Correct, elapsed, res.XP, timedquiz.ItemAnswered)
+	updated, err := store.UpdateTimedQuizItemWithAdjustment(item.ID, run.ID, req.Answer, req.SubmissionID, res.Correct, elapsed, res.XP, timedquiz.ItemAnswered, res.XPAdjustment, res.XPNote, res.XPReasonCode, res.XPSource)
 	if err != nil {
 		writeError(w, "failed to save timed quiz answer", http.StatusInternalServerError)
 		return
@@ -3874,7 +3904,7 @@ func (s *Server) handleTimedQuizAnswer(w http.ResponseWriter, r *http.Request) {
 		fresh, _ := store.GetTimedQuizItems(run.ID)
 		for i := range fresh {
 			if fresh[i].ID == item.ID && fresh[i].SubmissionID == req.SubmissionID {
-				writeJSON(w, map[string]interface{}{"run_id": run.ID, "item_id": item.ID, "concept_id": item.ConceptID, "concept_name": s.timedQuizConceptName(item.ConceptID), "correct": fresh[i].Correct, "feedback": timedQuizFeedback(fresh[i].Correct), "explanation": fresh[i].Explanation, "xp": fresh[i].XPEarned, "completed": run.Status == timedquiz.StatusCompleted})
+				writeJSON(w, map[string]interface{}{"run_id": run.ID, "item_id": item.ID, "concept_id": item.ConceptID, "concept_name": s.timedQuizConceptName(item.ConceptID), "correct": fresh[i].Correct, "feedback": timedQuizFeedback(fresh[i].Correct), "explanation": fresh[i].Explanation, "xp": fresh[i].XPEarned, "xp_adjustment": fresh[i].XPAdjustment, "xp_note": fresh[i].XPNote, "xp_reason_code": fresh[i].XPReasonCode, "xp_source": fresh[i].XPSource, "completed": run.Status == timedquiz.StatusCompleted})
 				return
 			}
 		}
@@ -3883,15 +3913,19 @@ func (s *Server) handleTimedQuizAnswer(w http.ResponseWriter, r *http.Request) {
 	}
 	items, _ = store.GetTimedQuizItems(run.ID)
 	out := map[string]interface{}{
-		"run_id":       run.ID,
-		"item_id":      item.ID,
-		"concept_id":   item.ConceptID,
-		"concept_name": s.timedQuizConceptName(item.ConceptID),
-		"correct":      res.Correct,
-		"feedback":     res.Feedback,
-		"explanation":  res.Explanation,
-		"xp":           res.XP,
-		"new_status":   res.NewStatus,
+		"run_id":         run.ID,
+		"item_id":        item.ID,
+		"concept_id":     item.ConceptID,
+		"concept_name":   s.timedQuizConceptName(item.ConceptID),
+		"correct":        res.Correct,
+		"feedback":       res.Feedback,
+		"explanation":    res.Explanation,
+		"xp":             res.XP,
+		"xp_adjustment":  res.XPAdjustment,
+		"xp_note":        res.XPNote,
+		"xp_reason_code": res.XPReasonCode,
+		"xp_source":      res.XPSource,
+		"new_status":     res.NewStatus,
 	}
 	if timedQuizAllDone(items) {
 		finalized, ferr := store.FinalizeTimedQuizRun(run.ID, studentID, time.Now().UTC())
@@ -4356,11 +4390,17 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 	// Record via quiz engine (advance index)
 	qEng := quiz.NewEngine(s.eng.GetDAG(), s.eng.GetGeneratorRegistry())
 	qEng.RecordAnswer(sess, req.ConceptID, gr.Correct)
+	// RecordAnswer advances the session, so completion is reliable here. The
+	// quiz session is the performance task, not a concept-day, and the final
+	// answer is the only one allowed to produce a performance verdict.
+	quizComplete := qEng.IsComplete(sess)
 	// Single-path quiz grading: the engine owns TaskQuiz XP atomically,
 	// one progress update, one AddXP, DB and response agree by construction.
 	xp := 0
 	var newStatus string
 	var remedial []string
+	var xpAdjustment int
+	var xpNote, xpReasonCode, xpSource string
 	if studentID != "" {
 		var res *engine.AnswerResult
 		var err error
@@ -4370,9 +4410,9 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 		// the equivalent study attempt.
 		servedDifficulty := sess.LastProblem.Difficulty
 		if req.DontKnow {
-			res, err = s.eng.SubmitQuizDontKnow(studentID, req.ConceptID, expected, elapsed, sess.LastProblem.Question, servedDifficulty)
+			res, err = s.eng.SubmitQuizDontKnowWithCompletion(studentID, req.ConceptID, expected, elapsed, sess.LastProblem.Question, servedDifficulty, req.SessionID, quizComplete)
 		} else {
-			res, err = s.eng.SubmitQuizAnswer(studentID, req.ConceptID, req.Answer, expected, elapsed, sess.LastProblem.Question, servedDifficulty)
+			res, err = s.eng.SubmitQuizAnswerWithCompletion(studentID, req.ConceptID, req.Answer, expected, elapsed, sess.LastProblem.Question, servedDifficulty, req.SessionID, quizComplete)
 		}
 		if err != nil {
 			if errors.Is(err, engine.ErrUnknownConcept) {
@@ -4385,6 +4425,10 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 			xp = 0
 		} else if res != nil {
 			xp = res.XP
+			xpAdjustment = res.XPAdjustment
+			xpNote = res.XPNote
+			xpReasonCode = res.XPReasonCode
+			xpSource = res.XPSource
 			newStatus = string(res.NewStatus)
 			// Immediate remedial on a quiz miss.
 			remedial = res.Remedial
@@ -4410,7 +4454,7 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 		// The `diagnosis` and `explanation` keys are still passed so the helper is the single
 		// place that decides they do not cross, rather than the call site remembering to omit
 		// them. A verdict built anywhere else leaks by default; through the helper it does not.
-		writeAssessmentVerdict(w, map[string]interface{}{"done": true, "correct": gr.Correct, "feedback": feedback, "diagnosis": gr.Diagnosis, "explanation": explanation, "xp": xp, "new_status": newStatus, "remedial": remedial, "retake_available": retakeAvailable})
+		writeAssessmentVerdict(w, map[string]interface{}{"done": true, "correct": gr.Correct, "feedback": feedback, "diagnosis": gr.Diagnosis, "explanation": explanation, "xp": xp, "xp_adjustment": xpAdjustment, "xp_note": xpNote, "xp_reason_code": xpReasonCode, "xp_source": xpSource, "new_status": newStatus, "remedial": remedial, "retake_available": retakeAvailable})
 		return
 	}
 	prob, cid, err := qEng.NextQuestion(sess)
@@ -4430,6 +4474,10 @@ func (s *Server) handleQuizAnswer(w http.ResponseWriter, r *http.Request) {
 		"diagnosis":          gr.Diagnosis,
 		"explanation":        explanation,
 		"xp":                 xp,
+		"xp_adjustment":      xpAdjustment,
+		"xp_note":            xpNote,
+		"xp_reason_code":     xpReasonCode,
+		"xp_source":          xpSource,
 		"new_status":         newStatus,
 		"remedial":           remedial,
 		"concept_id":         cid,

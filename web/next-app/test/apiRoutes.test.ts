@@ -84,6 +84,7 @@ describe('every API route has a caller', () => {
       ['/api/admin/fire/report', 'operator dry-run endpoint; see docs/fire-activation.md'],
       ['/api/admin/fire/activate', 'owner-only activation endpoint; see docs/fire-activation.md'],
       ['/api/admin/fire/deactivate', 'owner-only deactivation endpoint; see docs/fire-activation.md'],
+      ['/api/admin/accountability', 'operator policy and metrics endpoint; no learner page calls it'],
     ])
 
     const orphans = routes.filter(r => {

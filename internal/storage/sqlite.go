@@ -165,6 +165,12 @@ func authMigrate(db *sql.DB) error {
 		// blanks must be allowed to repeat.
 		"ALTER TABLE question_reports ADD COLUMN origin_report_id TEXT NOT NULL DEFAULT ''",
 		"CREATE UNIQUE INDEX IF NOT EXISTS idx_reports_origin ON question_reports(origin_report_id) WHERE origin_report_id != ''",
+		// Timed-quiz replay persists the accountability explanation with the
+		// item. Existing rows default to no adjustment.
+		"ALTER TABLE timed_quiz_items ADD COLUMN xp_adjustment INTEGER NOT NULL DEFAULT 0",
+		"ALTER TABLE timed_quiz_items ADD COLUMN xp_note TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE timed_quiz_items ADD COLUMN xp_reason_code TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE timed_quiz_items ADD COLUMN xp_source TEXT NOT NULL DEFAULT ''",
 	}
 	for _, m := range migrations {
 		if _, err := db.Exec(m); err != nil {
@@ -1466,6 +1472,7 @@ func (s *SQLiteStore) ResetProgress(studentID string) error {
 		{"DELETE FROM student_remedial_queue WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM server_sessions WHERE kind IN ('study_expected','study_plan') AND (key = ? OR key LIKE ? || '|%')", []interface{}{studentID, studentID}},
 		{"DELETE FROM xp_events WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM effort_signals WHERE student_id = ?", []interface{}{studentID}},
 		{`UPDATE students SET xp_total = 0, xp_today = 0, diagnostic_completed = 0, diagnostic_completed_at = '',
 			league = 'bronze', league_week = '', league_moved = 0 WHERE id = ?`, []interface{}{studentID}},
 	}
@@ -1505,6 +1512,7 @@ func (s *SQLiteStore) DeleteAccount(studentID string) error {
 		{"DELETE FROM identities WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM avatar_images WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM attempts WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM effort_signals WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM answer_submissions WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM study_answer_effects WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM active_sessions WHERE student_id = ?", []interface{}{studentID}},
@@ -1578,7 +1586,7 @@ func insertAttemptSQLiteTx(tx *sql.Tx, entry AttemptEntry) (int64, error) {
 }
 
 func (s *SQLiteStore) CommitStudySubmission(c StudySubmissionCommit) (StudySubmissionOutcome, error) {
-	return commitStudySubmissionTx(s.db, rebindQuestion, insertAttemptSQLiteTx, c)
+	return commitStudySubmissionTx(s.db, rebindQuestion, "", insertAttemptSQLiteTx, c)
 }
 
 func (s *SQLiteStore) CommitReviewSubmission(c ReviewSubmissionCommit) (ReviewSubmissionOutcome, error) {

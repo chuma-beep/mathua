@@ -207,6 +207,18 @@ type AnswerResult struct {
 	// EvidenceBand is EvidenceScore in plain language, from mastery.EvidenceBand.
 	// Presentational only, and the words deliberately claim nothing about retention.
 	EvidenceBand string `json:"evidence_band"`
+	// XPAdjustment is the signed accountability adjustment for this task, in XP.
+	// It is separate from XP so an award and a deduction stay legible: XP is
+	// what the answer earned, XPAdjustment is what the task pattern changed.
+	XPAdjustment int `json:"xp_adjustment,omitempty"`
+	// XPNote is a short, non-accusatory explanation of XPAdjustment. Empty when
+	// nothing was adjusted.
+	XPNote string `json:"xp_note,omitempty"`
+	// XPReasonCode is the stable code behind XPNote.
+	XPReasonCode string `json:"xp_reason_code,omitempty"`
+	// XPSource is the accountability dimension that produced the adjustment:
+	// "performance", "effort" or "legacy".
+	XPSource string `json:"xp_source,omitempty"`
 }
 
 type Engine struct {
@@ -227,6 +239,8 @@ type Engine struct {
 	fireMode   fire.Mode
 	// fireStats holds process-local FIRe counters for the operator report.
 	fireStats FIReMetrics
+	// accountabilityStats holds process-local XP accountability counters.
+	accountabilityStats accountabilityMetrics
 
 	mu         sync.Mutex
 	sessions   map[string]*activeSession
@@ -253,6 +267,9 @@ type Engine struct {
 	resetGen map[string]uint64
 	// kpStates tracks Knowledge Point progress per student and concept.
 	kpStates map[string]*mastery.KPStateMachine
+	// effortConfig holds the XP accountability thresholds. It is resolved once
+	// at construction, so every answer sees the same ladder.
+	effortConfig xppolicy.Config
 	// submissionLocks serializes study submissions for the same learner in
 	// this process. The durable submission key is the cross-process guard;
 	// this lock only keeps in-memory miss counters and KP state consistent.
@@ -295,6 +312,14 @@ func WithFIReConfig(cfg fire.Config) Option {
 	}
 }
 
+// WithEffortPolicy overrides the XP accountability thresholds. Tests and
+// deployments that want the layer off pass xppolicy.DisabledConfig().
+func WithEffortPolicy(cfg xppolicy.Config) Option {
+	return func(e *Engine) {
+		e.effortConfig = xppolicy.NormalizeConfig(cfg)
+	}
+}
+
 func New(repo storage.Repository, dag *concepts.DAG, reg *generator.Registry, ll *lessons.Loader, planner *planning.Planner, opts ...Option) *Engine {
 	e := &Engine{
 		dag:           dag,
@@ -319,6 +344,7 @@ func New(repo storage.Repository, dag *concepts.DAG, reg *generator.Registry, ll
 		quizRemedial:  make(map[string][]string),
 		resetGen:      make(map[string]uint64),
 		kpStates:      make(map[string]*mastery.KPStateMachine),
+		effortConfig:  xppolicy.DefaultConfig(),
 	}
 	for _, opt := range opts {
 		if opt != nil {
@@ -1477,6 +1503,9 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 		review:         sessionFields.isReview,
 		source:         sourceForTask(sessionFields.isReview),
 	}
+	// Capture mastery before the transition mutates the row, so the effort
+	// layer knows whether this task was practice or revision of mastered work.
+	effortWasMastered := effortMastered(progress)
 	// Review answers commit the progress transition, the attempt, the review
 	// event and XP in one transaction. Computing the transition here leaves the
 	// repository untouched until that transaction, so a failed commit cannot
@@ -1695,6 +1724,42 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 		e.allocateImplicitCredit(ga)
 	}
 
+	// Effort accountability runs after the existing award and only writes the
+	// ledger. It never touches progress, mastery, FSRS or the schedule.
+	effortKind := xppolicy.TaskPractice
+	if sessionFields.isReview {
+		effortKind = xppolicy.TaskReview
+	}
+	// Practice completes when the concept's knowledge points are complete.
+	// Review has no reliable whole-run completion signal in the engine, so it
+	// deliberately stays effort-only rather than guessing from a single answer.
+	taskComplete := false
+	if !sessionFields.isReview && !effortWasMastered {
+		if sm := e.GetKPState(studentID, sessionFields.conceptID); sm != nil && sm.Completed {
+			taskComplete = true
+		}
+	}
+	effortNow := nowUTC()
+	effortAssess := e.assessEffort(effortObservation{
+		StudentID:     studentID,
+		TaskKind:      effortKind,
+		TaskID:        taskIDForEffort(effortKind, sessionID, sessionFields.conceptID, effortNow),
+		ConceptID:     sessionFields.conceptID,
+		AttemptKey:    attemptID,
+		Answer:        answer,
+		Correct:       gr.Correct,
+		Mastered:      effortWasMastered,
+		LegacyPenalty: xp == xppolicy.RushPenalty,
+		Elapsed:       elapsedSeconds,
+		Difficulty:    sessionFields.questionDifficulty,
+		XPEarned:      xp,
+		TaskComplete:  taskComplete,
+		At:            effortNow,
+	}, 0)
+	effortApplied := effortAssess.apply(e)
+	xpAdjustment, xpNote, xpReasonCode := noteForApplied(effortAssess.decision, effortApplied)
+	xpSource := string(effortAssess.decision.Source)
+
 	e.mu.Lock()
 	// Re-acquire to update session counters and clear the answered question.
 	// as is still the same pointer we marked answered=true above.
@@ -1806,6 +1871,10 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 		ScaffoldActive: resScaffoldActive,
 		ScaffoldStep:   resScaffoldStep,
 		ScaffoldTotal:  resScaffoldTotal,
+		XPAdjustment:   xpAdjustment,
+		XPNote:         xpNote,
+		XPReasonCode:   xpReasonCode,
+		XPSource:       xpSource,
 	}, nil
 }
 
@@ -1852,7 +1921,7 @@ func (e *Engine) submitStudyAnswer(studentID, conceptID, answer string, elapsedS
 	if strings.HasSuffix(conceptID, ".word") {
 		taskType = TaskMultistep
 	}
-	return e.submitAnswerWithTask(studentID, conceptID, answer, "", elapsedSeconds, taskType, true, false, questionText, submissionID, "study", nil)
+	return e.submitAnswerWithTask(studentID, conceptID, answer, "", elapsedSeconds, taskType, true, false, questionText, submissionID, "study", nil, "", false)
 }
 
 // SubmitQuizAnswer is the single-path quiz grader: TaskQuiz base XP (20),
@@ -1866,14 +1935,26 @@ func (e *Engine) submitStudyAnswer(studentID, conceptID, answer string, elapsedS
 // attempt with a difficulty nobody actually served and because the whole point of this
 // argument is that the quiz path produces the same evidence as the study path.
 func (e *Engine) SubmitQuizAnswer(studentID, conceptID, answer, expected string, elapsedSeconds float64, questionText string, difficulty *float64) (*AnswerResult, error) {
-	return e.submitAnswerWithTask(studentID, conceptID, answer, expected, elapsedSeconds, TaskQuiz, false, false, questionText, "", "", difficulty)
+	return e.SubmitQuizAnswerWithCompletion(studentID, conceptID, answer, expected, elapsedSeconds, questionText, difficulty, "", false)
+}
+
+// SubmitQuizAnswerWithCompletion is the quiz path with the caller's reliable
+// completion signal. taskID is the quiz session, not the concept-day, so final
+// performance is judged over the whole quiz. Existing callers keep the old
+// behaviour through SubmitQuizAnswer.
+func (e *Engine) SubmitQuizAnswerWithCompletion(studentID, conceptID, answer, expected string, elapsedSeconds float64, questionText string, difficulty *float64, taskID string, complete bool) (*AnswerResult, error) {
+	return e.submitAnswerWithTask(studentID, conceptID, answer, expected, elapsedSeconds, TaskQuiz, false, false, questionText, "", "", difficulty, taskID, complete)
 }
 
 // SubmitQuizDontKnow records an admitted unknown ("I don't know" button) as
 // a quiz miss: weakness up, streak reset, remedial queued, but no XP and no
 // rushing penalty (an instant admit is honesty, not rushing).
 func (e *Engine) SubmitQuizDontKnow(studentID, conceptID, expected string, elapsedSeconds float64, questionText string, difficulty *float64) (*AnswerResult, error) {
-	return e.submitAnswerWithTask(studentID, conceptID, "", expected, elapsedSeconds, TaskQuiz, false, true, questionText, "", "", difficulty)
+	return e.SubmitQuizDontKnowWithCompletion(studentID, conceptID, expected, elapsedSeconds, questionText, difficulty, "", false)
+}
+
+func (e *Engine) SubmitQuizDontKnowWithCompletion(studentID, conceptID, expected string, elapsedSeconds float64, questionText string, difficulty *float64, taskID string, complete bool) (*AnswerResult, error) {
+	return e.submitAnswerWithTask(studentID, conceptID, "", expected, elapsedSeconds, TaskQuiz, false, true, questionText, "", "", difficulty, taskID, complete)
 }
 
 // SubmitTimedQuizAnswer grades one answer in a durable timed run. It uses the
@@ -1881,14 +1962,22 @@ func (e *Engine) SubmitQuizDontKnow(studentID, conceptID, expected string, elaps
 // timed_quiz submission namespace and never moves FSRS: only spaced review does
 // that. submissionID makes a retried request replay its stored result.
 func (e *Engine) SubmitTimedQuizAnswer(studentID, conceptID, answer, expected string, elapsedSeconds float64, questionText string, difficulty *float64, submissionID string) (*AnswerResult, error) {
-	return e.submitAnswerWithTask(studentID, conceptID, answer, expected, elapsedSeconds, TaskQuiz, false, false, questionText, submissionID, "timed_quiz", difficulty)
+	return e.SubmitTimedQuizAnswerWithCompletion(studentID, conceptID, answer, expected, elapsedSeconds, questionText, difficulty, submissionID, "", false)
+}
+
+func (e *Engine) SubmitTimedQuizAnswerWithCompletion(studentID, conceptID, answer, expected string, elapsedSeconds float64, questionText string, difficulty *float64, submissionID, taskID string, complete bool) (*AnswerResult, error) {
+	return e.submitAnswerWithTask(studentID, conceptID, answer, expected, elapsedSeconds, TaskQuiz, false, false, questionText, submissionID, "timed_quiz", difficulty, taskID, complete)
 }
 
 // SubmitTimedQuizDontKnow records an admitted unknown in a timed run. It is a
 // miss for mastery evidence and no XP is awarded, but it creates no review
 // event and does not reschedule the concept.
 func (e *Engine) SubmitTimedQuizDontKnow(studentID, conceptID, expected string, elapsedSeconds float64, questionText string, difficulty *float64, submissionID string) (*AnswerResult, error) {
-	return e.submitAnswerWithTask(studentID, conceptID, "", expected, elapsedSeconds, TaskQuiz, false, true, questionText, submissionID, "timed_quiz", difficulty)
+	return e.SubmitTimedQuizDontKnowWithCompletion(studentID, conceptID, expected, elapsedSeconds, questionText, difficulty, submissionID, "", false)
+}
+
+func (e *Engine) SubmitTimedQuizDontKnowWithCompletion(studentID, conceptID, expected string, elapsedSeconds float64, questionText string, difficulty *float64, submissionID, taskID string, complete bool) (*AnswerResult, error) {
+	return e.submitAnswerWithTask(studentID, conceptID, "", expected, elapsedSeconds, TaskQuiz, false, true, questionText, submissionID, "timed_quiz", difficulty, taskID, complete)
 }
 
 // difficulty is the difficulty the question that produced this attempt was served at, or
@@ -1896,7 +1985,7 @@ func (e *Engine) SubmitTimedQuizDontKnow(studentID, conceptID, expected string, 
 // passed by the caller from the served problem. It is never derived from the learner's
 // current weakness, because that is a different number: it is the difficulty a *future*
 // question would get, not the one the learner just answered.
-func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected string, elapsedSeconds float64, taskType string, useAnchor bool, dontKnow bool, questionText, submissionID, operation string, difficulty *float64) (*AnswerResult, error) {
+func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected string, elapsedSeconds float64, taskType string, useAnchor bool, dontKnow bool, questionText, submissionID, operation string, difficulty *float64, taskID string, taskComplete bool) (*AnswerResult, error) {
 	if e.dag.Concept(conceptID) == nil {
 		return nil, fmt.Errorf("%w: %q", ErrUnknownConcept, conceptID)
 	}
@@ -2000,6 +2089,7 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 	var evidence mastery.Evidence
 	var topicSpeed *storage.TopicSpeed
 	var kpUpdate *kpStateUpdate
+	effortWasMastered := effortMastered(progress)
 	if submissionID != "" {
 		newStatus, evidence, topicSpeed, kpUpdate, err = e.computeGradedAttempt(progress, ga)
 	} else {
@@ -2042,7 +2132,7 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 	xp := computeXPForTask(gr.Correct, elapsedSeconds, timeThreshold, progress.Streak, taskType)
 
 	if submissionID != "" {
-		return e.commitStudyAnswer(studentID, conceptID, submissionID, answer, elapsedSeconds, questionText, gr, progress, ga, attemptEntry, topicSpeed, kpUpdate, newStatus, evidence, explanation, xp, dontKnow)
+		return e.commitStudyAnswer(studentID, conceptID, submissionID, answer, elapsedSeconds, questionText, gr, progress, ga, attemptEntry, topicSpeed, kpUpdate, newStatus, evidence, explanation, xp, dontKnow, effortWasMastered, taskID, taskComplete || (operationOrDefault(operation) == "study" && !effortWasMastered && newStatus == mastery.StatusMastered))
 	}
 
 	xpAttemptID, err := e.repo.RecordAttempt(attemptEntry)
@@ -2106,6 +2196,44 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 			log.Printf("warning: failed to add XP for student %s: %v", studentID, err)
 		}
 	}
+	// Accountability is a second, ledger-only decision. It runs after the
+	// award and cannot change progress, mastery or FSRS.
+	effortKind := xppolicy.TaskStudy
+	if taskType == TaskQuiz {
+		effortKind = xppolicy.TaskQuiz
+		if ga.operation == "timed_quiz" {
+			effortKind = xppolicy.TaskTimedQuiz
+		}
+	}
+	completion := taskComplete
+	if effortKind == xppolicy.TaskStudy && !effortWasMastered && newStatus == mastery.StatusMastered {
+		completion = true
+	}
+	effortNow := nowUTC()
+	effortTaskID := taskIDForEffort(effortKind, "", conceptID, effortNow)
+	if taskID != "" {
+		effortTaskID = taskID
+	}
+	effortAssess := e.assessEffort(effortObservation{
+		StudentID:     studentID,
+		TaskKind:      effortKind,
+		TaskID:        effortTaskID,
+		ConceptID:     conceptID,
+		AttemptKey:    ga.attemptID,
+		Answer:        answer,
+		Correct:       gr.Correct,
+		DontKnow:      dontKnow,
+		Mastered:      effortWasMastered,
+		LegacyPenalty: xp == xppolicy.RushPenalty,
+		Elapsed:       elapsedSeconds,
+		Difficulty:    effortDifficulty(difficulty),
+		XPEarned:      xp,
+		TaskComplete:  completion,
+		At:            effortNow,
+	}, 0)
+	effortApplied := effortAssess.apply(e)
+	xpAdjustment, xpNote, xpReasonCode := noteForApplied(effortAssess.decision, effortApplied)
+	xpSource := string(effortAssess.decision.Source)
 	var resKPOrdinal int
 	var resKPAdvanced bool
 	if sm := e.GetKPState(studentID, conceptID); sm != nil {
@@ -2131,6 +2259,10 @@ func (e *Engine) submitAnswerWithTask(studentID, conceptID, answer, expected str
 		Remedial:       remedial,
 		KPOrdinal:      resKPOrdinal,
 		KPAdvanced:     resKPAdvanced,
+		XPAdjustment:   xpAdjustment,
+		XPNote:         xpNote,
+		XPReasonCode:   xpReasonCode,
+		XPSource:       xpSource,
 	}, nil
 }
 
@@ -2169,6 +2301,10 @@ func studyAnswerResponseJSON(res *AnswerResult) string {
 		"scaffold_active": res.ScaffoldActive,
 		"scaffold_step":   res.ScaffoldStep,
 		"scaffold_total":  res.ScaffoldTotal,
+		"xp_adjustment":   res.XPAdjustment,
+		"xp_note":         res.XPNote,
+		"xp_reason_code":  res.XPReasonCode,
+		"xp_source":       res.XPSource,
 	})
 	if err != nil {
 		return ""
@@ -2180,7 +2316,7 @@ func studyAnswerResponseJSON(res *AnswerResult) string {
 // computation are already finished; this function computes the response,
 // commits the attempt, progress, topic speed and XP in one transaction, then
 // runs the best-effort effects that are not part of the answer record.
-func (e *Engine) commitStudyAnswer(studentID, conceptID, submissionID, answer string, elapsed float64, questionText string, gr grader.Result, progress *storage.ConceptProgress, ga gradedAttempt, attemptEntry storage.AttemptEntry, topicSpeed *storage.TopicSpeed, kpUpdate *kpStateUpdate, newStatus mastery.Status, evidence mastery.Evidence, explanation string, xp int, dontKnow bool) (*AnswerResult, error) {
+func (e *Engine) commitStudyAnswer(studentID, conceptID, submissionID, answer string, elapsed float64, questionText string, gr grader.Result, progress *storage.ConceptProgress, ga gradedAttempt, attemptEntry storage.AttemptEntry, topicSpeed *storage.TopicSpeed, kpUpdate *kpStateUpdate, newStatus mastery.Status, evidence mastery.Evidence, explanation string, xp int, dontKnow bool, effortWasMastered bool, taskID string, taskComplete bool) (*AnswerResult, error) {
 	store, ok := e.repo.(storage.StudySubmissionStore)
 	if !ok {
 		return nil, fmt.Errorf("idempotent study storage is not available")
@@ -2211,6 +2347,51 @@ func (e *Engine) commitStudyAnswer(studentID, conceptID, submissionID, answer st
 		}
 	}
 
+	// Decide before the response is stored, so a replayed retry returns the
+	// same explanation. The observation is written only after the answer
+	// transaction commits, and the ledger row is idempotent on the task.
+	effortKind := xppolicy.TaskStudy
+	if ga.source == "quiz" {
+		effortKind = xppolicy.TaskQuiz
+		if ga.operation == "timed_quiz" {
+			effortKind = xppolicy.TaskTimedQuiz
+		}
+	}
+	effortNow := nowUTC()
+	effortTaskID := taskIDForEffort(effortKind, "", conceptID, effortNow)
+	if taskID != "" {
+		effortTaskID = taskID
+	}
+	effortAssess := e.assessEffort(effortObservation{
+		StudentID:     studentID,
+		TaskKind:      effortKind,
+		TaskID:        effortTaskID,
+		ConceptID:     conceptID,
+		AttemptKey:    submissionID,
+		Answer:        answer,
+		Correct:       gr.Correct,
+		DontKnow:      dontKnow,
+		Mastered:      effortWasMastered,
+		LegacyPenalty: xp == xppolicy.RushPenalty,
+		Elapsed:       elapsed,
+		Difficulty:    effortDifficulty(ga.difficulty),
+		XPEarned:      xp,
+		TaskComplete:  taskComplete,
+		At:            effortNow,
+	}, max(xp, 0))
+	var effortSignal *storage.EffortSignal
+	adjustmentAmount := 0
+	adjustmentReason := ""
+	adjustmentEventKey := ""
+	if effortAssess.enabled {
+		effortSignal = &effortAssess.signal
+		adjustmentAmount = effortAssess.decision.Amount
+		adjustmentReason = effortAssess.decision.LedgerReason()
+		adjustmentEventKey = "accountability:" + effortAssess.signal.TaskKind + ":" + effortAssess.signal.TaskID
+	}
+	xpAdjustment, xpNote, xpReasonCode := noteForApplied(effortAssess.decision, effortAssess.decision.Amount)
+	xpSource := string(effortAssess.decision.Source)
+
 	res := &AnswerResult{
 		Correct:        gr.Correct,
 		Feedback:       gr.Feedback,
@@ -2225,21 +2406,41 @@ func (e *Engine) commitStudyAnswer(studentID, conceptID, submissionID, answer st
 		ExpectedAnswer: attemptEntry.Expected,
 		Halted:         halted,
 		Remedial:       remedial,
+		XPAdjustment:   xpAdjustment,
+		XPNote:         xpNote,
+		XPReasonCode:   xpReasonCode,
+		XPSource:       xpSource,
 	}
 	responseJSON := studyAnswerResponseJSON(res)
+	var responseJSONForAdjustment func(applied int) string
+	if effortAssess.enabled {
+		responseJSONForAdjustment = func(applied int) string {
+			xpAdjustment, xpNote, xpReasonCode := noteForApplied(effortAssess.decision, applied)
+			res.XPAdjustment = xpAdjustment
+			res.XPNote = xpNote
+			res.XPReasonCode = xpReasonCode
+			res.XPSource = string(effortAssess.decision.Source)
+			return studyAnswerResponseJSON(res)
+		}
+	}
 
 	outcome, err := store.CommitStudySubmission(storage.StudySubmissionCommit{
-		StudentID:    studentID,
-		SubmissionID: submissionID,
-		Operation:    operationOrDefault(ga.operation),
-		RequestHash:  studySubmissionHash(studentID, conceptID, answer, elapsed, questionText),
-		ResponseJSON: responseJSON,
-		Attempt:      attemptEntry,
-		Progress:     progress,
-		TopicSpeed:   topicSpeed,
-		XPAmount:     xp,
-		XPReason:     xpReasonForOperation(ga.operation),
-		Effects:      e.studyEffectsFor(ga.source, conceptID, ga.attemptID, gr.Correct, halted, remedial),
+		StudentID:                 studentID,
+		SubmissionID:              submissionID,
+		Operation:                 operationOrDefault(ga.operation),
+		RequestHash:               studySubmissionHash(studentID, conceptID, answer, elapsed, questionText),
+		ResponseJSON:              responseJSON,
+		ResponseJSONForAdjustment: responseJSONForAdjustment,
+		EffortSignal:              effortSignal,
+		AdjustmentAmount:          adjustmentAmount,
+		AdjustmentReason:          adjustmentReason,
+		AdjustmentEventKey:        adjustmentEventKey,
+		Attempt:                   attemptEntry,
+		Progress:                  progress,
+		TopicSpeed:                topicSpeed,
+		XPAmount:                  xp,
+		XPReason:                  xpReasonForOperation(ga.operation),
+		Effects:                   e.studyEffectsFor(ga.source, conceptID, ga.attemptID, gr.Correct, halted, remedial),
 	})
 	if err != nil {
 		return nil, err
@@ -2251,6 +2452,16 @@ func (e *Engine) commitStudyAnswer(studentID, conceptID, submissionID, answer st
 	// the stored winner already published it, so a stale retry must not overwrite
 	// newer scaffold progress.
 	e.publishKPState(kpUpdate)
+	if effortAssess.enabled {
+		applied := outcome.AppliedAdjustment
+		res.XPAdjustment, res.XPNote, res.XPReasonCode = noteForApplied(effortAssess.decision, applied)
+		res.XPSource = string(effortAssess.decision.Source)
+		if outcome.Replayed {
+			e.accountabilityStats.recordReplayPrevented()
+		} else {
+			e.accountabilityStats.recordApplied(effortAssess.decision, applied)
+		}
+	}
 
 	e.mu.Lock()
 	if !gr.Correct {
@@ -2345,12 +2556,35 @@ func (e *Engine) QuizXPSince(studentID string) (int, error) {
 	if err != nil {
 		return 0, err
 	}
+	deductions, _ := e.repo.(storage.EffortStore)
 	if last == nil {
+		if deductions != nil {
+			removed, derr := deductions.SumXPDeductionsSince(studentID, time.Time{})
+			if derr == nil {
+				return total + removed, nil
+			}
+		}
 		return total, nil
 	}
 	since := total - last.XPTotal
 	if since < 0 {
 		since = 0
+	}
+	// XP deductions are accountability, not evidence that the learner stopped
+	// earning. Add them back for the quiz gate so a poor task cannot delay a
+	// mastery check that the learner has already earned.
+	if deductions != nil && last.CompletedAt != "" {
+		for _, layout := range []string{time.RFC3339Nano, time.RFC3339, "2006-01-02 15:04:05"} {
+			completedAt, perr := time.Parse(layout, last.CompletedAt)
+			if perr != nil {
+				continue
+			}
+			removed, derr := deductions.SumXPDeductionsSince(studentID, completedAt)
+			if derr == nil {
+				since += removed
+			}
+			break
+		}
 	}
 	return since, nil
 }

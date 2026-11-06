@@ -45,6 +45,34 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx_xp_events_event ON xp_events(student_id, e
 CREATE INDEX IF NOT EXISTS idx_xp_events_week ON xp_events(created_at);
 CREATE INDEX IF NOT EXISTS idx_xp_events_student_week ON xp_events(student_id, created_at);
 
+-- Effort-integrity observations for XP accountability. One row per graded
+-- answer, keyed by the answer that produced it, so a retry cannot double count.
+-- This is evidence for detection and an audit trail, not an XP system: the
+-- ledger above remains the only place a balance moves. answer_signature is a
+-- one-way digest, never the answer text.
+CREATE TABLE IF NOT EXISTS effort_signals (
+    id               INTEGER PRIMARY KEY AUTOINCREMENT,
+    student_id       TEXT    NOT NULL,
+    task_kind        TEXT    NOT NULL,
+    task_id          TEXT    NOT NULL,
+    concept_id       TEXT    NOT NULL DEFAULT '',
+    attempt_key      TEXT    NOT NULL,
+    correct          INTEGER NOT NULL DEFAULT 0,
+    dont_know        INTEGER NOT NULL DEFAULT 0,
+    mastered         INTEGER NOT NULL DEFAULT 0,
+    legacy_penalty   INTEGER NOT NULL DEFAULT 0,
+    elapsed_seconds  REAL    NOT NULL DEFAULT 0,
+    difficulty       REAL    NOT NULL DEFAULT 0,
+    answer_signature TEXT    NOT NULL DEFAULT '',
+    xp_earned        INTEGER NOT NULL DEFAULT 0,
+    created_at       INTEGER NOT NULL
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_effort_signals_attempt
+    ON effort_signals(student_id, task_kind, task_id, attempt_key);
+CREATE INDEX IF NOT EXISTS idx_effort_signals_student_time
+    ON effort_signals(student_id, created_at);
+
 -- Weekly league membership. A row is a learner's seat in one league for one
 -- week, written by the transition and never rewritten while the week is open:
 -- the seat is what makes "my league" stable even as XP moves the standings.
