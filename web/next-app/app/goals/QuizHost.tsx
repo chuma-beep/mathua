@@ -20,6 +20,8 @@ import SubmitErrorBlock, {
 import { concepts as conceptsData } from '../../lib/conceptData'
 import { MathAnswerInput, type MathFocusHandle } from '@/components/math/MathInput'
 import { focusClearOfTabs } from '../../lib/focusClearOfTabs'
+import XPAdjustmentNote from '../../components/XPAdjustmentNote'
+import XPTaskSummary from '../../components/XPTaskSummary'
 
 // 'failed' exists because 'done' used to carry two meanings. Any thrown request
 // set phase to 'done', and the done screen reads "No questions available" while
@@ -78,7 +80,11 @@ export default function QuizHost() {
   //
   // `dontKnow` is what the learner did, not what they scored: an admitted unknown still counts as
   // a miss, but the verdict must not read as "you were close and wrong".
-  const [quizLastResult, setQuizLastResult] = useState<{ correct: boolean; feedback: string; conceptId: string; xp?: number; dontKnow?: boolean } | null>(null)
+  const [quizLastResult, setQuizLastResult] = useState<{ correct: boolean; feedback: string; conceptId: string; xp?: number; xpAdjustment?: number; xpNote?: string; xpSource?: string; dontKnow?: boolean } | null>(null)
+  const [quizAnswerXP, setQuizAnswerXP] = useState(0)
+  const [quizAdjustment, setQuizAdjustment] = useState(0)
+  const [quizAdjustmentNote, setQuizAdjustmentNote] = useState<string | undefined>()
+  const [quizAdjustmentSource, setQuizAdjustmentSource] = useState<string | undefined>()
   const [quizAccuracy, setQuizAccuracy] = useState({ correct: 0, total: 0 })
   const [quizClosedBook, setQuizClosedBook] = useState(false)
   const [quizQuestionsTotal, setQuizQuestionsTotal] = useState(0)
@@ -123,6 +129,10 @@ export default function QuizHost() {
     quizGradingType.current = res.grading_type
       setQuizCount(1)
       setQuizAccuracy({ correct: 0, total: 0 })
+      setQuizAnswerXP(0)
+      setQuizAdjustment(0)
+      setQuizAdjustmentNote(undefined)
+      setQuizAdjustmentSource(undefined)
       setQuizLastResult(null)
       setQuizAnswerInput('')
       setQuizClosedBook(!!res.closed_book)
@@ -176,7 +186,11 @@ export default function QuizHost() {
       // An admitted unknown is not a wrong answer, so it does not get the wrong answer's words.
       const feedback = dontKnow ? '' : data.feedback || (correct ? 'Correct!' : 'Not quite.')
       setQuizAccuracy(prev => ({ correct: prev.correct + (correct ? 1 : 0), total: prev.total + 1 }))
-      setQuizLastResult({ correct, feedback, conceptId: quizConceptId.current, xp: data.xp, dontKnow })
+      setQuizAnswerXP(prev => prev + (data.xp ?? 0))
+      setQuizAdjustment(prev => prev + (data.xp_adjustment ?? 0))
+      if (data.xp_note) setQuizAdjustmentNote(data.xp_note)
+      if (data.xp_source) setQuizAdjustmentSource(data.xp_source)
+      setQuizLastResult({ correct, feedback, conceptId: quizConceptId.current, xp: data.xp, xpAdjustment: data.xp_adjustment, xpNote: data.xp_note, xpSource: data.xp_source, dontKnow })
       if (data.remedial?.length) {
         setQuizRemedial(prev => Array.from(new Set([...prev, ...(data.remedial ?? [])])))
       }
@@ -340,6 +354,13 @@ export default function QuizHost() {
                 ? 'XP awarded for each correct answer. A retake is available now.'
                 : 'XP awarded for each correct answer. Keep learning to earn your next mastery check.'}
             </p>
+            <XPTaskSummary
+              answerXP={quizAnswerXP}
+              adjustment={quizAdjustment}
+              note={quizAdjustmentNote}
+              source={quizAdjustmentSource}
+              className="mt-6 text-left"
+            />
             {quizRemedial.length > 0 && (
               <div className="mt-6 border border-mathua-border bg-mathua-surface p-4 text-left">
                 <p className="font-mono text-xs uppercase tracking-wider text-mathua-muted mb-2">Focus next in Learn</p>
@@ -380,7 +401,12 @@ export default function QuizHost() {
       <div className="max-w-2xl mx-auto min-w-0 overflow-hidden px-2 sm:px-0">
         <div className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-mono text-mathua-muted justify-center">
           <span className={quizAccuracy.correct / Math.max(quizAccuracy.total, 1) >= 0.7 ? 'text-mathua-green' : ''}>{quizAccuracy.correct}/{quizAccuracy.total} correct</span>
-          {quizLastResult?.xp ? <span className="text-yellow-400">+{quizLastResult.xp} XP (TaskQuiz 20)</span> : null}
+          {quizLastResult && ((quizLastResult.xp ?? 0) + (quizLastResult.xpAdjustment ?? 0)) !== 0 ? (
+            <span className={((quizLastResult.xp ?? 0) + (quizLastResult.xpAdjustment ?? 0)) > 0 ? 'text-yellow-400' : 'text-mathua-red'}>
+              {((quizLastResult.xp ?? 0) + (quizLastResult.xpAdjustment ?? 0)) > 0 ? '+' : ''}
+              {(quizLastResult.xp ?? 0) + (quizLastResult.xpAdjustment ?? 0)} XP
+            </span>
+          ) : null}
           {quizClosedBook ? <span className="text-mathua-muted">Closed book</span> : null}
         </div>
         <div className={`bg-mathua-surface border rounded-none p-4 sm:p-6 mb-6 transition-colors w-full max-w-full min-w-0 overflow-hidden ${quizLastResult ? (quizLastResult.correct ? 'border-mathua-green-faint' : 'border-mathua-red-faint') : 'border-mathua-border'}`}>
@@ -453,6 +479,12 @@ export default function QuizHost() {
                   Learn this concept →
                 </Link>
               )}
+              <XPAdjustmentNote
+                adjustment={quizLastResult.xpAdjustment}
+                note={quizLastResult.xpNote}
+                source={quizLastResult.xpSource}
+                className="mt-3"
+              />
             </div>
           )}
         </div>

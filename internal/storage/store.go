@@ -189,14 +189,28 @@ type StudySubmissionCommit struct {
 	XPAmount     int
 	XPReason     string
 	Effects      []StudyEffectInput
+
+	// ResponseJSONForAdjustment, when set, builds the stored response after
+	// the accountability adjustment has been applied. It receives the amount
+	// that actually reached the ledger, so a replay cannot report a deduction
+	// that the balance cap or idempotency key suppressed.
+	ResponseJSONForAdjustment func(applied int) string
+	// AdjustmentAmount is the signed accountability adjustment applied in the
+	// same transaction as the answer. Zero stores the signal without moving XP.
+	AdjustmentAmount   int
+	AdjustmentReason   string
+	AdjustmentEventKey string
+	// EffortSignal is recorded atomically with the submission when non-nil.
+	EffortSignal *EffortSignal
 }
 
 // StudySubmissionOutcome reports whether the commit wrote a new answer or
 // replayed the response stored by an earlier identical submission.
 type StudySubmissionOutcome struct {
-	Replayed     bool
-	ResponseJSON string
-	AttemptID    int64
+	Replayed          bool
+	ResponseJSON      string
+	AttemptID         int64
+	AppliedAdjustment int
 }
 
 var (
@@ -424,6 +438,10 @@ type TimedQuizItem struct {
 	Status         string
 	SubmissionID   string
 	XPEarned       int
+	XPAdjustment   int
+	XPNote         string
+	XPReasonCode   string
+	XPSource       string
 }
 
 // ReviewEvent is the durable record of one spaced-review attempt and the FSRS
@@ -458,6 +476,10 @@ type TimedQuizStore interface {
 	GetTimedQuizItems(runID string) ([]TimedQuizItem, error)
 	ClaimTimedQuizItem(itemID, runID, submissionID string) (bool, error)
 	UpdateTimedQuizItem(itemID, runID, answer, submissionID string, correct bool, elapsed float64, xp int, status string) (bool, error)
+	// UpdateTimedQuizItemWithAdjustment also persists the accountability
+	// explanation, so a duplicate replay can return the original amount and
+	// source without recomputing a deduction.
+	UpdateTimedQuizItemWithAdjustment(itemID, runID, answer, submissionID string, correct bool, elapsed float64, xp int, status string, xpAdjustment int, xpNote, xpReasonCode, xpSource string) (bool, error)
 	FinalizeTimedQuizRun(runID, studentID string, now time.Time) (*TimedQuizRun, error)
 	RecordReviewEvent(event ReviewEvent) error
 }

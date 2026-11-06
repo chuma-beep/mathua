@@ -27,6 +27,7 @@ import (
 	"github.com/chuma-beep/mathua/internal/server"
 	"github.com/chuma-beep/mathua/internal/solutions"
 	"github.com/chuma-beep/mathua/internal/storage"
+	xppolicy "github.com/chuma-beep/mathua/internal/xp"
 )
 
 // dataPath resolves a file inside the data directory.
@@ -145,6 +146,22 @@ func adminCommand(args []string) error {
 	default:
 		return fmt.Errorf("unknown admin command %q. Available: promote <email>", args[0])
 	}
+}
+
+// resolveAccountabilityConfig is the production kill switch. The thresholds
+// themselves are code so there is no second configuration language to drift,
+// but an operator can turn either dimension off without a rebuild.
+func resolveAccountabilityConfig() xppolicy.Config {
+	cfg := xppolicy.DefaultConfig()
+	switch strings.ToLower(strings.TrimSpace(os.Getenv("MATHUA_XP_ACCOUNTABILITY"))) {
+	case "off", "disabled", "false", "0":
+		cfg.Disabled = true
+	}
+	switch strings.ToLower(strings.TrimSpace(os.Getenv("MATHUA_XP_PERFORMANCE"))) {
+	case "off", "disabled", "false", "0":
+		cfg.Performance.Disabled = true
+	}
+	return xppolicy.NormalizeConfig(cfg)
 }
 
 func main() {
@@ -269,7 +286,12 @@ func main() {
 	}
 	fireConfig := resolveFIReConfig(repo)
 	log.Printf("FIRe mode: %s (MATHUA_FIRE_MODE=shadow|active|off)", fireConfig.Describe())
-	eng := engine.New(repo, dag, reg, ll, planner, engine.WithFIReConfig(fireConfig))
+	accountabilityConfig := resolveAccountabilityConfig()
+	log.Printf("XP accountability: disabled=%t performance_disabled=%t min_attempts=%d good_ratio=%.2f negative_ratio=%.2f negative_penalty=%d (MATHUA_XP_ACCOUNTABILITY=on|off, MATHUA_XP_PERFORMANCE=on|off)",
+		accountabilityConfig.Disabled, accountabilityConfig.Performance.Disabled,
+		accountabilityConfig.Performance.MinAttempts, accountabilityConfig.Performance.GoodRatio,
+		accountabilityConfig.Performance.NegativeRatio, accountabilityConfig.Performance.NegativePenalty)
+	eng := engine.New(repo, dag, reg, ll, planner, engine.WithFIReConfig(fireConfig), engine.WithEffortPolicy(accountabilityConfig))
 	// The ledger began mid-week; replay the week so the first board does not
 	// erase effort earned before it existed. Idempotent by attempt key.
 	if replayed, err := eng.BackfillWeeklyXP(time.Now().UTC()); err != nil {

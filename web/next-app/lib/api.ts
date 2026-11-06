@@ -148,6 +148,10 @@ export interface AnswerResult {
   streak: number
   required_streak: number
   xp: number
+  xp_adjustment?: number
+  xp_note?: string
+  xp_reason_code?: string
+  xp_source?: 'performance' | 'effort' | 'legacy'
   expected_answer: string
   ungraded?: boolean
   scaffold_active?: boolean
@@ -1420,6 +1424,10 @@ export interface StudyAnswerRes {
 	streak?: number
 	required_streak?: number
 	xp: number
+	xp_adjustment?: number
+	xp_note?: string
+	xp_reason_code?: string
+	xp_source?: 'performance' | 'effort' | 'legacy'
 	expected_answer?: string
 	ungraded?: boolean
 	scaffold_active?: boolean
@@ -1576,6 +1584,10 @@ export interface QuizAnswerRes {
   // explanation and no answer-revealing diagnosis. Instruction is reached through /learn.
   feedback?: string
   xp?: number
+  xp_adjustment?: number
+  xp_note?: string
+  xp_reason_code?: string
+  xp_source?: 'performance' | 'effort' | 'legacy'
   new_status?: string
   /**
    * Authoritative mastery evidence score, 0..1.
@@ -1728,6 +1740,10 @@ export interface TimedQuizResultItem {
 	status: string
 	explanation: string
 	xp_earned: number
+	xp_adjustment?: number
+	xp_note?: string
+	xp_reason_code?: string
+	xp_source?: 'performance' | 'effort' | 'legacy'
 	elapsed_seconds: number
 }
 
@@ -1752,6 +1768,10 @@ export interface TimedQuizAnswerRes {
 	feedback?: string
 	explanation?: string
 	xp?: number
+	xp_adjustment?: number
+	xp_note?: string
+	xp_reason_code?: string
+	xp_source?: 'performance' | 'effort' | 'legacy'
 	new_status?: string
 	completed?: boolean
 	result?: TimedQuizResultRes

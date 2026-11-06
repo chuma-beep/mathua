@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import KatexContent from './KatexContent'
+import XPAdjustmentNote from './XPAdjustmentNote'
+import XPTaskSummary from './XPTaskSummary'
 import LessonDiagram from './LessonDiagram'
 import LessonAssets from './LessonAssets'
 import ChoiceOptions from './ChoiceOptions'
@@ -35,7 +37,7 @@ interface QEntry {
   error?: string
   blockedPrerequisiteIds?: string[]
   servedAt: number
-  feedback: { correct: boolean; text: string; expected: string; diagnosis?: string; xp: number } | null
+  feedback: { correct: boolean; text: string; expected: string; diagnosis?: string; xp: number; xpAdjustment?: number; xpNote?: string; xpSource?: string } | null
 }
 
 type Entry =
@@ -441,6 +443,9 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
             expected: res.expected_answer ?? '',
             diagnosis: res.diagnosis,
             xp: res.xp ?? 0,
+            xpAdjustment: res.xp_adjustment ?? 0,
+            xpNote: res.xp_note,
+            xpSource: res.xp_source,
           },
         })
         // 2-in-a-row, and nothing else. This used to read
@@ -472,6 +477,9 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
             expected: res.expected_answer ?? '',
             diagnosis: res.diagnosis,
             xp: 0,
+            xpAdjustment: res.xp_adjustment ?? 0,
+            xpNote: res.xp_note,
+            xpSource: res.xp_source,
           },
         })
         appendAfter(350, async () => {
@@ -617,14 +625,20 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
   })()
   const totalAnswered = answeredCount
   const totalCorrect = correctCount
-  const totalXP = entries.reduce((s, e) => s + (e.kind === 'q' && e.feedback?.correct ? e.feedback.xp : 0), 0)
+  const totalAnswerXP = entries.reduce((s, e) => s + (e.kind === 'q' && e.feedback ? e.feedback.xp : 0), 0)
+  const totalAdjustment = entries.reduce((s, e) => s + (e.kind === 'q' && e.feedback ? (e.feedback.xpAdjustment ?? 0) : 0), 0)
+  const totalXP = totalAnswerXP + totalAdjustment
+  const lastTaskAdjustment = entries.reduce<QEntry['feedback']>((found, e) => {
+    if (e.kind === 'q' && e.feedback && ((e.feedback.xpAdjustment ?? 0) !== 0 || e.feedback.xpNote)) return e.feedback
+    return found
+  }, null)
 
   return (
     <div className="max-w-2xl mx-auto">
       <div className="sticky top-0 z-10 bg-mathua-bg backdrop-blur py-2 mb-4 flex items-center gap-2 font-mono text-[11px] text-mathua-muted border-b border-mathua-border">
         <span>Section {Math.min(kpIndex + 1, Math.max(kps.length, 1))} of {Math.max(kps.length, 1)}</span>
         {totalAnswered > 0 && <span>· {totalCorrect}/{totalAnswered} correct</span>}
-        {totalXP > 0 && <span className="text-yellow-400">· +{totalXP} XP</span>}
+        {totalXP !== 0 && <span className={totalXP > 0 ? 'text-yellow-400' : 'text-mathua-red'}>· {totalXP > 0 ? '+' : ''}{totalXP} XP</span>}
         {band && (
           <span title="How you're doing on this concept, from your recent answers. Progress only, mastery is decided separately.">
             · {band}
@@ -782,7 +796,14 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
             const upcoming: LockedSuccessor[] = upcomingLocked(catalogEntries(), shelfProgress, conceptId)
             return (
               <div key={e.key} className="border border-mathua-green-faint bg-mathua-surface p-6">
-                <p className="font-mono text-xs text-green-400">✓ Complete, {totalCorrect}/{totalAnswered} correct · +{totalXP} XP · {band}</p>
+                <p className="font-mono text-xs text-green-400">✓ Complete, {totalCorrect}/{totalAnswered} correct · {band}</p>
+                <XPTaskSummary
+                  answerXP={totalAnswerXP}
+                  adjustment={totalAdjustment}
+                  note={lastTaskAdjustment?.xpNote}
+                  source={lastTaskAdjustment?.xpSource}
+                  className="mt-4"
+                />
                 {e.note && <p role="status" className="mt-2 font-mono text-[11px] text-mathua-secondary">{e.note}</p>}
                 <p className="mt-2 font-mono text-[11px] text-mathua-secondary">Scroll up to review anything. Reviews are scheduled automatically.</p>
                 <div className="mt-4 flex flex-wrap gap-2">
@@ -902,6 +923,12 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
                     {qe.feedback.correct ? `✓ ${qe.feedback.xp ? `+${qe.feedback.xp} XP` : 'Correct'}` : '✗ Not quite.'}{' '}
                     <span className="text-mathua-muted">you answered “{qe.answer}”</span>
                   </p>
+                  <XPAdjustmentNote
+                    adjustment={qe.feedback.xpAdjustment}
+                    note={qe.feedback.xpNote}
+                    source={qe.feedback.xpSource}
+                    className="mt-2"
+                  />
                   <p className="mt-1.5 font-mono text-xs text-mathua-primary">
                     Answer: <KatexContent>{qe.feedback.expected}</KatexContent>
                   </p>

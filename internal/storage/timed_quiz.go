@@ -77,10 +77,16 @@ func (s *PostgresStore) ClaimTimedQuizItem(itemID, runID, submissionID string) (
 	return s.timedQuiz().claimItem(itemID, runID, submissionID)
 }
 func (s *SQLiteStore) UpdateTimedQuizItem(itemID, runID, answer, submissionID string, correct bool, elapsed float64, xp int, status string) (bool, error) {
-	return s.timedQuiz().updateItem(itemID, runID, answer, submissionID, correct, elapsed, xp, status)
+	return s.timedQuiz().updateItem(itemID, runID, answer, submissionID, correct, elapsed, xp, status, 0, "", "", "")
 }
 func (s *PostgresStore) UpdateTimedQuizItem(itemID, runID, answer, submissionID string, correct bool, elapsed float64, xp int, status string) (bool, error) {
-	return s.timedQuiz().updateItem(itemID, runID, answer, submissionID, correct, elapsed, xp, status)
+	return s.timedQuiz().updateItem(itemID, runID, answer, submissionID, correct, elapsed, xp, status, 0, "", "", "")
+}
+func (s *SQLiteStore) UpdateTimedQuizItemWithAdjustment(itemID, runID, answer, submissionID string, correct bool, elapsed float64, xp int, status string, xpAdjustment int, xpNote, xpReasonCode, xpSource string) (bool, error) {
+	return s.timedQuiz().updateItem(itemID, runID, answer, submissionID, correct, elapsed, xp, status, xpAdjustment, xpNote, xpReasonCode, xpSource)
+}
+func (s *PostgresStore) UpdateTimedQuizItemWithAdjustment(itemID, runID, answer, submissionID string, correct bool, elapsed float64, xp int, status string, xpAdjustment int, xpNote, xpReasonCode, xpSource string) (bool, error) {
+	return s.timedQuiz().updateItem(itemID, runID, answer, submissionID, correct, elapsed, xp, status, xpAdjustment, xpNote, xpReasonCode, xpSource)
 }
 func (s *SQLiteStore) FinalizeTimedQuizRun(runID, studentID string, now time.Time) (*TimedQuizRun, error) {
 	return s.timedQuiz().finalize(runID, studentID, now)
@@ -220,7 +226,8 @@ func (a *timedQuizAccess) queryRun(query string, args ...any) (*TimedQuizRun, er
 func (a *timedQuizAccess) items(runID string) ([]TimedQuizItem, error) {
 	rows, err := a.db.Query(a.rebind(`SELECT id, run_id, concept_id, position, question,
 		expected_answer, explanation, grading_type, difficulty, served_at, answered_at,
-		elapsed_seconds, answer, correct, status, submission_id, xp_earned
+		elapsed_seconds, answer, correct, status, submission_id, xp_earned,
+		xp_adjustment, xp_note, xp_reason_code, xp_source
 		FROM timed_quiz_items WHERE run_id = ? ORDER BY position`), runID)
 	if err != nil {
 		return nil, fmt.Errorf("list timed quiz items: %w", err)
@@ -234,7 +241,8 @@ func (a *timedQuizAccess) items(runID string) ([]TimedQuizItem, error) {
 		var correct int
 		if err := rows.Scan(&it.ID, &it.RunID, &it.ConceptID, &it.Position, &it.Question,
 			&it.ExpectedAnswer, &it.Explanation, &it.GradingType, &diff, &served, &answered,
-			&it.ElapsedSeconds, &it.Answer, &correct, &it.Status, &it.SubmissionID, &it.XPEarned); err != nil {
+			&it.ElapsedSeconds, &it.Answer, &correct, &it.Status, &it.SubmissionID, &it.XPEarned,
+			&it.XPAdjustment, &it.XPNote, &it.XPReasonCode, &it.XPSource); err != nil {
 			return nil, fmt.Errorf("scan timed quiz item: %w", err)
 		}
 		it.ServedAt = time.Unix(0, served).UTC()
@@ -269,16 +277,18 @@ func (a *timedQuizAccess) claimItem(itemID, runID, submissionID string) (bool, e
 	return n == 1, nil
 }
 
-func (a *timedQuizAccess) updateItem(itemID, runID, answer, submissionID string, correct bool, elapsed float64, xp int, status string) (bool, error) {
+func (a *timedQuizAccess) updateItem(itemID, runID, answer, submissionID string, correct bool, elapsed float64, xp int, status string, xpAdjustment int, xpNote, xpReasonCode, xpSource string) (bool, error) {
 	correctInt := 0
 	if correct {
 		correctInt = 1
 	}
 	res, err := a.db.Exec(a.rebind(`UPDATE timed_quiz_items
 		SET answer = ?, submission_id = ?, correct = ?, elapsed_seconds = ?, xp_earned = ?,
+			xp_adjustment = ?, xp_note = ?, xp_reason_code = ?, xp_source = ?,
 			status = ?, answered_at = ?
 		WHERE id = ? AND run_id = ? AND submission_id = ? AND status IN ('served', 'submitting')`),
-		answer, submissionID, correctInt, elapsed, xp, status, time.Now().UTC().UnixNano(), itemID, runID, submissionID)
+		answer, submissionID, correctInt, elapsed, xp, xpAdjustment, xpNote, xpReasonCode, xpSource,
+		status, time.Now().UTC().UnixNano(), itemID, runID, submissionID)
 	if err != nil {
 		return false, fmt.Errorf("update timed quiz item: %w", err)
 	}

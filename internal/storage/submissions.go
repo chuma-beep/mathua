@@ -56,7 +56,7 @@ type attemptInserter func(tx *sql.Tx, entry AttemptEntry) (int64, error)
 // commitStudySubmissionTx is shared by both SQL stores. rebind turns the
 // SQLite `?` spelling into the store's placeholders. Grading happens before
 // this function is called, so the transaction contains only durable writes.
-func commitStudySubmissionTx(db *sql.DB, rebind func(string) string, insertAttempt attemptInserter, c StudySubmissionCommit) (StudySubmissionOutcome, error) {
+func commitStudySubmissionTx(db *sql.DB, rebind func(string) string, forUpdate string, insertAttempt attemptInserter, c StudySubmissionCommit) (StudySubmissionOutcome, error) {
 	if c.StudentID == "" || c.SubmissionID == "" || c.Operation == "" {
 		return StudySubmissionOutcome{}, fmt.Errorf("study submission: missing scope")
 	}
@@ -167,10 +167,37 @@ func commitStudySubmissionTx(db *sql.DB, rebind func(string) string, insertAttem
 			}
 		}
 	}
+	appliedAdjustment := 0
+	if c.EffortSignal != nil {
+		if err := recordEffortSignalExec(tx, rebind, *c.EffortSignal); err != nil {
+			return StudySubmissionOutcome{}, err
+		}
+	}
+	if c.AdjustmentAmount != 0 {
+		applied, err := applyXPAdjustmentInTx(tx, rebind, forUpdate, c.StudentID, c.AdjustmentAmount, c.AdjustmentReason, c.AdjustmentEventKey)
+		if err != nil {
+			return StudySubmissionOutcome{}, err
+		}
+		appliedAdjustment = applied
+	}
+	responseJSON := c.ResponseJSON
+	if c.ResponseJSONForAdjustment != nil {
+		responseJSON = c.ResponseJSONForAdjustment(appliedAdjustment)
+		if _, err := tx.Exec(rebind(`
+			UPDATE answer_submissions SET response_json = ?
+			WHERE student_id = ? AND operation = ? AND submission_id = ?
+		`), responseJSON, c.StudentID, c.Operation, c.SubmissionID); err != nil {
+			return StudySubmissionOutcome{}, fmt.Errorf("study submission: update response: %w", err)
+		}
+	}
 	if err := tx.Commit(); err != nil {
 		return StudySubmissionOutcome{}, fmt.Errorf("study submission: commit: %w", err)
 	}
-	return StudySubmissionOutcome{ResponseJSON: c.ResponseJSON, AttemptID: attemptID}, nil
+	return StudySubmissionOutcome{
+		ResponseJSON:      responseJSON,
+		AttemptID:         attemptID,
+		AppliedAdjustment: appliedAdjustment,
+	}, nil
 }
 
 // insertStudyEffectsTx writes every post-commit effect in one statement. The

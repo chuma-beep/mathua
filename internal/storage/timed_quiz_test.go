@@ -46,6 +46,67 @@ func TestTimedQuizBaselineCountsOnlyPositiveXPAfterIt(t *testing.T) {
 	}
 }
 
+func TestTimedQuizItemPersistsAdjustmentForReplay(t *testing.T) {
+	store := newTestStore(t)
+	st := seedStudent(t, store)
+	tq := timedQuizStore(t, store)
+	now := time.Now().UTC()
+	run := TimedQuizRun{
+		ID:         fmt.Sprintf("tq-adjust-%d", now.UnixNano()),
+		StudentID:  st.ID,
+		StartedAt:  now,
+		DeadlineAt: now.Add(10 * time.Minute),
+		Status:     "active",
+		CreatedAt:  now,
+	}
+	items := []TimedQuizItem{
+		{ID: run.ID + ":0", RunID: run.ID, ConceptID: "a", Position: 0, Question: "1+1", ExpectedAnswer: "2", ServedAt: now, Status: "served"},
+		{ID: run.ID + ":1", RunID: run.ID, ConceptID: "b", Position: 1, Question: "2+2", ExpectedAnswer: "4", ServedAt: now, Status: "served"},
+	}
+	if err := tq.CreateTimedQuizRun(run, items); err != nil {
+		t.Fatalf("create run: %v", err)
+	}
+	if claimed, err := tq.ClaimTimedQuizItem(items[0].ID, run.ID, "sub-1"); err != nil || !claimed {
+		t.Fatalf("claim first = %v, %v", claimed, err)
+	}
+	if updated, err := tq.UpdateTimedQuizItemWithAdjustment(items[0].ID, run.ID, "2", "sub-1", true, 4, 3, "answered", -2, "-2 XP: poor task performance", "extremely_poor_performance", "performance"); err != nil || !updated {
+		t.Fatalf("update first = %v, %v", updated, err)
+	}
+	if claimed, err := tq.ClaimTimedQuizItem(items[1].ID, run.ID, "sub-2"); err != nil || !claimed {
+		t.Fatalf("claim second = %v, %v", claimed, err)
+	}
+	if updated, err := tq.UpdateTimedQuizItemWithAdjustment(items[1].ID, run.ID, "4", "sub-2", true, 4, 3, "answered", 0, "0 XP: poor task performance", "poor_performance", "performance"); err != nil || !updated {
+		t.Fatalf("update second = %v, %v", updated, err)
+	}
+
+	fresh, err := tq.GetTimedQuizItems(run.ID)
+	if err != nil {
+		t.Fatalf("get items: %v", err)
+	}
+	if len(fresh) != 2 {
+		t.Fatalf("items = %d, want 2", len(fresh))
+	}
+	if fresh[0].XPAdjustment != -2 || fresh[0].XPNote == "" || fresh[0].XPReasonCode != "extremely_poor_performance" || fresh[0].XPSource != "performance" {
+		t.Fatalf("first item adjustment = %+v", fresh[0])
+	}
+	if fresh[1].XPAdjustment != 0 || fresh[1].XPNote == "" || fresh[1].XPReasonCode != "poor_performance" {
+		t.Fatalf("zero-adjustment item = %+v", fresh[1])
+	}
+
+	// A duplicate update must not rewrite or double-charge the durable replay
+	// fields; the item is already answered.
+	if updated, err := tq.UpdateTimedQuizItemWithAdjustment(items[0].ID, run.ID, "2", "sub-1", true, 4, 3, "answered", -9, "changed", "changed", "changed"); err != nil || updated {
+		t.Fatalf("duplicate update = %v, %v; want false, nil", updated, err)
+	}
+	again, err := tq.GetTimedQuizItems(run.ID)
+	if err != nil {
+		t.Fatalf("get items again: %v", err)
+	}
+	if again[0].XPAdjustment != -2 || again[0].XPNote == "" {
+		t.Fatalf("duplicate update rewrote replay fields: %+v", again[0])
+	}
+}
+
 func TestTimedQuizRunLifecycleIsIdempotent(t *testing.T) {
 	store := newTestStore(t)
 	st := seedStudent(t, store)
