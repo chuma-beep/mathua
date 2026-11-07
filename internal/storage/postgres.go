@@ -77,6 +77,7 @@ CREATE TABLE IF NOT EXISTS effort_signals (
     student_id       TEXT    NOT NULL,
     task_kind        TEXT    NOT NULL,
     task_id          TEXT    NOT NULL,
+    review_run_id    TEXT    NOT NULL DEFAULT '',
     concept_id       TEXT    NOT NULL DEFAULT '',
     attempt_key      TEXT    NOT NULL,
     correct          INTEGER NOT NULL DEFAULT 0,
@@ -94,6 +95,22 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx_effort_signals_attempt
     ON effort_signals(student_id, task_kind, task_id, attempt_key);
 CREATE INDEX IF NOT EXISTS idx_effort_signals_student_time
     ON effort_signals(student_id, created_at);
+
+-- One durable review run per review session; see the SQLite schema for why.
+CREATE TABLE IF NOT EXISTS review_runs (
+    id               TEXT PRIMARY KEY,
+    student_id       TEXT    NOT NULL,
+    started_at       BIGINT  NOT NULL,
+    completed_at     BIGINT  NOT NULL DEFAULT 0,
+    finalized_at     BIGINT  NOT NULL DEFAULT 0,
+    status           TEXT    NOT NULL DEFAULT 'active',
+    xp_adjustment    BIGINT  NOT NULL DEFAULT 0,
+    xp_note          TEXT    NOT NULL DEFAULT '',
+    xp_reason_code   TEXT    NOT NULL DEFAULT '',
+    xp_source        TEXT    NOT NULL DEFAULT ''
+);
+CREATE INDEX IF NOT EXISTS idx_review_runs_student_status
+    ON review_runs(student_id, status);
 
 -- Weekly league membership. See the SQLite schema for why the week marker and
 -- the seats are written in one transaction.
@@ -719,6 +736,7 @@ func pgAuthMigrate(db *sql.DB) error {
 		"ALTER TABLE timed_quiz_items ADD COLUMN IF NOT EXISTS xp_note TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE timed_quiz_items ADD COLUMN IF NOT EXISTS xp_reason_code TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE timed_quiz_items ADD COLUMN IF NOT EXISTS xp_source TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE effort_signals ADD COLUMN IF NOT EXISTS review_run_id TEXT NOT NULL DEFAULT ''",
 		`CREATE TABLE IF NOT EXISTS avatar_images (
 			student_id TEXT PRIMARY KEY REFERENCES students(id) ON DELETE CASCADE,
 			content_type TEXT NOT NULL,
@@ -1981,6 +1999,7 @@ func (s *PostgresStore) ResetProgress(studentID string) error {
 		{"DELETE FROM server_sessions WHERE kind IN ('study_expected','study_plan') AND (key = $1 OR key LIKE $1 || '|%')", []interface{}{studentID}},
 		{"DELETE FROM xp_events WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM effort_signals WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM review_runs WHERE student_id = $1", []interface{}{studentID}},
 		{`UPDATE students SET xp_total = 0, xp_today = 0, diagnostic_completed = 0, diagnostic_completed_at = '',
 			league = 'bronze', league_week = '', league_moved = 0 WHERE id = $1`, []interface{}{studentID}},
 	}
@@ -2023,6 +2042,7 @@ func (s *PostgresStore) DeleteAccount(studentID string) error {
 		{"DELETE FROM avatar_images WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM attempts WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM effort_signals WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM review_runs WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM answer_submissions WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM study_answer_effects WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM active_sessions WHERE student_id = $1", []interface{}{studentID}},

@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS effort_signals (
     student_id       TEXT    NOT NULL,
     task_kind        TEXT    NOT NULL,
     task_id          TEXT    NOT NULL,
+    review_run_id    TEXT    NOT NULL DEFAULT '',
     concept_id       TEXT    NOT NULL DEFAULT '',
     attempt_key      TEXT    NOT NULL,
     correct          INTEGER NOT NULL DEFAULT 0,
@@ -72,6 +73,24 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx_effort_signals_attempt
     ON effort_signals(student_id, task_kind, task_id, attempt_key);
 CREATE INDEX IF NOT EXISTS idx_effort_signals_student_time
     ON effort_signals(student_id, created_at);
+
+-- One durable review run per review session. A run is completed and finalized
+-- only when the scheduler reports no more due concepts; abandoned and partial
+-- runs stay active and never receive a performance verdict.
+CREATE TABLE IF NOT EXISTS review_runs (
+    id               TEXT PRIMARY KEY,
+    student_id       TEXT    NOT NULL,
+    started_at       INTEGER NOT NULL,
+    completed_at     INTEGER NOT NULL DEFAULT 0,
+    finalized_at     INTEGER NOT NULL DEFAULT 0,
+    status           TEXT    NOT NULL DEFAULT 'active',
+    xp_adjustment    INTEGER NOT NULL DEFAULT 0,
+    xp_note          TEXT    NOT NULL DEFAULT '',
+    xp_reason_code   TEXT    NOT NULL DEFAULT '',
+    xp_source        TEXT    NOT NULL DEFAULT ''
+);
+CREATE INDEX IF NOT EXISTS idx_review_runs_student_status
+    ON review_runs(student_id, status);
 
 -- Weekly league membership. A row is a learner's seat in one league for one
 -- week, written by the transition and never rewritten while the week is open:
@@ -250,7 +269,8 @@ CREATE TABLE IF NOT EXISTS student_topic_speed (
 CREATE INDEX IF NOT EXISTS idx_topic_speed_student ON student_topic_speed(student_id);
 
 -- Batch 1 (Quiz 150 XP gate): one row per completed mastery-check quiz.
--- xp_total snapshots lifetime XP so xp_since_quiz = current - last.
+-- xp_total is the lifetime snapshot at completion; earned XP since then is
+-- summed from positive xp_events so negative balances do not change the gate.
 CREATE TABLE IF NOT EXISTS quiz_completions (
     id           INTEGER PRIMARY KEY AUTOINCREMENT,
     student_id   TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,

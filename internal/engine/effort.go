@@ -20,6 +20,7 @@ type effortObservation struct {
 	StudentID     string
 	TaskKind      string
 	TaskID        string
+	ReviewRunID   string
 	ConceptID     string
 	AttemptKey    string
 	Answer        string
@@ -106,6 +107,7 @@ func (e *Engine) assessEffort(o effortObservation, pendingAward int) effortAsses
 		StudentID:       o.StudentID,
 		TaskKind:        o.TaskKind,
 		TaskID:          o.TaskID,
+		ReviewRunID:     o.ReviewRunID,
 		ConceptID:       o.ConceptID,
 		AttemptKey:      o.AttemptKey,
 		Correct:         o.Correct,

@@ -14,6 +14,7 @@ import ChoiceOptions from '../../components/ChoiceOptions'
 import { stemWithoutChoices } from '../../lib/choices'
 import SubmitErrorBlock, { toSubmitError, type SubmitError } from '../../components/SubmitErrorBlock'
 import XPAdjustmentNote from '../../components/XPAdjustmentNote'
+import XPTaskSummary from '../../components/XPTaskSummary'
 import { MathAnswerInput, type MathFocusHandle } from '@/components/math/MathInput'
 import { focusClearOfTabs } from '../../lib/focusClearOfTabs'
 
@@ -40,6 +41,10 @@ export default function ReviewHost() {
   const [reviewLastResult, setReviewLastResult] = useState<{ correct: boolean; feedback: string; explanation?: string; diagnosis?: string; xp?: number; xpAdjustment?: number; xpNote?: string; xpSource?: string } | null>(null)
   const [reviewAccuracy, setReviewAccuracy] = useState({ correct: 0, total: 0 })
   const [reviewXp, setReviewXp] = useState(0)
+  const [reviewAnswerXp, setReviewAnswerXp] = useState(0)
+  const [reviewAdjustment, setReviewAdjustment] = useState(0)
+  const [reviewAdjustmentNote, setReviewAdjustmentNote] = useState('')
+  const [reviewAdjustmentSource, setReviewAdjustmentSource] = useState('')
   const [submitError, setSubmitError] = useState<SubmitError | null>(null)
   const [finished, setFinished] = useState(false)
   const [empty, setEmpty] = useState(false)
@@ -75,6 +80,10 @@ export default function ReviewHost() {
       setReviewCount(1)
       setReviewAccuracy({ correct: 0, total: 0 })
       setReviewXp(0)
+      setReviewAnswerXp(0)
+      setReviewAdjustment(0)
+      setReviewAdjustmentNote('')
+      setReviewAdjustmentSource('')
       setReviewLastResult(null)
       setReviewAnswerInput('')
       setEmpty(false)
@@ -116,8 +125,12 @@ export default function ReviewHost() {
       const xpAdjustment = data.result?.xp_adjustment ?? 0
       setReviewAccuracy(prev => ({ correct: prev.correct + (correct ? 1 : 0), total: prev.total + 1 }))
       setReviewXp(prev => prev + xp + xpAdjustment)
+      setReviewAnswerXp(prev => prev + xp)
+      setReviewAdjustment(prev => prev + xpAdjustment)
+      if (data.result?.xp_note) setReviewAdjustmentNote(data.result.xp_note)
+      if (data.result?.xp_source) setReviewAdjustmentSource(data.result.xp_source)
       setReviewLastResult({ correct, feedback, explanation: data.result?.explanation, diagnosis: data.result?.diagnosis, xp, xpAdjustment, xpNote: data.result?.xp_note, xpSource: data.result?.xp_source })
-      if (data.done || !data.next_question) {
+      if (data.done) {
         setFinished(true)
         setTimeout(() => {
           setPhase('done')
@@ -217,6 +230,13 @@ export default function ReviewHost() {
           <>
             <SectionHeader label="Review complete" title={`${reviewAccuracy.correct}/${reviewAccuracy.total} correct`} />
             <p className="font-mono text-sm text-mathua-secondary mt-4">Reviews record progress like practice{reviewXp !== 0 ? ` · ${reviewXp > 0 ? '+' : ''}${reviewXp} XP this run` : ''}.</p>
+            <XPTaskSummary
+              answerXP={reviewAnswerXp}
+              adjustment={reviewAdjustment}
+              note={reviewAdjustmentNote}
+              source={reviewAdjustmentSource}
+              className="mt-4 text-left"
+            />
             <div className="mt-6 flex gap-3 justify-center">
               <button type="button" onClick={restartReview} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-12 px-8 text-sm">Review again →</button>
               <Link href="/profile" className="border border-mathua-border text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue rounded-none h-12 px-8 text-sm inline-flex items-center">Back to Profile →</Link>

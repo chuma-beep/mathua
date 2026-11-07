@@ -1739,11 +1739,16 @@ func (e *Engine) SubmitAnswer(sessionID, studentID, attemptID, answer string, el
 			taskComplete = true
 		}
 	}
+	reviewRunID := ""
+	if sessionFields.isReview {
+		reviewRunID = sessionID
+	}
 	effortNow := nowUTC()
 	effortAssess := e.assessEffort(effortObservation{
 		StudentID:     studentID,
 		TaskKind:      effortKind,
 		TaskID:        taskIDForEffort(effortKind, sessionID, sessionFields.conceptID, effortNow),
+		ReviewRunID:   reviewRunID,
 		ConceptID:     sessionFields.conceptID,
 		AttemptKey:    attemptID,
 		Answer:        answer,

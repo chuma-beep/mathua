@@ -16,6 +16,7 @@ type EffortSignal struct {
 	StudentID       string
 	TaskKind        string
 	TaskID          string
+	ReviewRunID     string
 	ConceptID       string
 	AttemptKey      string
 	Correct         bool
@@ -59,7 +60,7 @@ type EffortStore interface {
 
 // effortSignalColumns is shared by both stores so a new field cannot be added to
 // one SELECT and forgotten in the other.
-const effortSignalColumns = `student_id, task_kind, task_id, concept_id, attempt_key,
+const effortSignalColumns = `student_id, task_kind, task_id, review_run_id, concept_id, attempt_key,
 	correct, dont_know, mastered, legacy_penalty, elapsed_seconds, difficulty,
 	xp_earned, answer_signature, created_at`
 
@@ -81,12 +82,12 @@ func recordEffortSignalExec(db effortExecer, rebind func(string) string, sig Eff
 	}
 	_, err := db.Exec(rebind(`
 		INSERT INTO effort_signals
-			(student_id, task_kind, task_id, concept_id, attempt_key, correct,
+			(student_id, task_kind, task_id, review_run_id, concept_id, attempt_key, correct,
 			 dont_know, mastered, legacy_penalty, elapsed_seconds, difficulty,
 			 xp_earned, answer_signature, created_at)
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 		ON CONFLICT(student_id, task_kind, task_id, attempt_key) DO NOTHING
-	`), sig.StudentID, sig.TaskKind, sig.TaskID, sig.ConceptID, sig.AttemptKey,
+	`), sig.StudentID, sig.TaskKind, sig.TaskID, sig.ReviewRunID, sig.ConceptID, sig.AttemptKey,
 		boolToInt(sig.Correct), boolToInt(sig.DontKnow), boolToInt(sig.Mastered),
 		boolToInt(sig.LegacyPenalty), sig.ElapsedSeconds, sig.Difficulty,
 		sig.XPEarned, sig.AnswerSignature, signalTime(sig.CreatedAt))
@@ -119,7 +120,7 @@ func effortSignalsSince(db *sql.DB, rebind func(string) string, studentID string
 	for rows.Next() {
 		var sig EffortSignal
 		var correct, dontKnow, mastered, legacy, created int
-		if err := rows.Scan(&sig.StudentID, &sig.TaskKind, &sig.TaskID, &sig.ConceptID, &sig.AttemptKey,
+		if err := rows.Scan(&sig.StudentID, &sig.TaskKind, &sig.TaskID, &sig.ReviewRunID, &sig.ConceptID, &sig.AttemptKey,
 			&correct, &dontKnow, &mastered, &legacy, &sig.ElapsedSeconds, &sig.Difficulty,
 			&sig.XPEarned, &sig.AnswerSignature, &created); err != nil {
 			return nil, fmt.Errorf("scan effort signal: %w", err)

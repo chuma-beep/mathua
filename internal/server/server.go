@@ -2622,6 +2622,11 @@ func (s *Server) handleReviewsSession(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "failed to create session", 500)
 		return
 	}
+	if err := s.eng.EnsureReviewRun(studentID, sess.ID); err != nil {
+		log.Printf("handleReviewsSession: ensure review run %s: %v", sess.ID, err)
+		writeError(w, "failed to create review run", 500)
+		return
+	}
 	q, err := s.eng.NextReviewQuestion(sess.ID, studentID)
 	if err != nil {
 		writeError(w, "failed to get review question", 500)
@@ -2666,9 +2671,28 @@ func (s *Server) handleReviewsAnswer(w http.ResponseWriter, r *http.Request) {
 	}
 	next, err := s.eng.NextReviewQuestion(req.SessionID, studentID)
 	if err != nil {
+		// A failed next-question lookup is not a completed review. Do not
+		// finalize and do not tell the client it is done.
 		log.Printf("handleReviewsAnswer: NextReviewQuestion failed for session %s: %v (returning result without next question)", req.SessionID, err)
-		writeJSON(w, answerRes{Result: result, NextQuestion: nil, Done: true})
+		writeJSON(w, answerRes{Result: result, NextQuestion: nil, Done: false})
 		return
+	}
+	if next == nil {
+		final, ferr := s.eng.FinalizeReviewPerformance(studentID, req.SessionID)
+		if ferr != nil {
+			log.Printf("handleReviewsAnswer: finalize review run %s: %v", req.SessionID, ferr)
+		} else if final.XPAdjustment != 0 || final.XPNote != "" {
+			// A per-answer effort note already explains the task; the finalizer
+			// suppresses performance when effort fired. Never overwrite it.
+			if result.XPAdjustment == 0 && result.XPNote == "" {
+				result.XPAdjustment = final.XPAdjustment
+				result.XPNote = final.XPNote
+				result.XPReasonCode = final.XPReasonCode
+				result.XPSource = final.XPSource
+			} else {
+				log.Printf("handleReviewsAnswer: review %s produced both per-answer and finalizer adjustments", req.SessionID)
+			}
+		}
 	}
 	writeJSON(w, answerRes{Result: result, NextQuestion: next, Done: next == nil})
 }

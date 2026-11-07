@@ -171,6 +171,7 @@ func authMigrate(db *sql.DB) error {
 		"ALTER TABLE timed_quiz_items ADD COLUMN xp_note TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE timed_quiz_items ADD COLUMN xp_reason_code TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE timed_quiz_items ADD COLUMN xp_source TEXT NOT NULL DEFAULT ''",
+		"ALTER TABLE effort_signals ADD COLUMN review_run_id TEXT NOT NULL DEFAULT ''",
 	}
 	for _, m := range migrations {
 		if _, err := db.Exec(m); err != nil {
@@ -1473,6 +1474,7 @@ func (s *SQLiteStore) ResetProgress(studentID string) error {
 		{"DELETE FROM server_sessions WHERE kind IN ('study_expected','study_plan') AND (key = ? OR key LIKE ? || '|%')", []interface{}{studentID, studentID}},
 		{"DELETE FROM xp_events WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM effort_signals WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM review_runs WHERE student_id = ?", []interface{}{studentID}},
 		{`UPDATE students SET xp_total = 0, xp_today = 0, diagnostic_completed = 0, diagnostic_completed_at = '',
 			league = 'bronze', league_week = '', league_moved = 0 WHERE id = ?`, []interface{}{studentID}},
 	}
@@ -1513,6 +1515,7 @@ func (s *SQLiteStore) DeleteAccount(studentID string) error {
 		{"DELETE FROM avatar_images WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM attempts WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM effort_signals WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM review_runs WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM answer_submissions WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM study_answer_effects WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM active_sessions WHERE student_id = ?", []interface{}{studentID}},
