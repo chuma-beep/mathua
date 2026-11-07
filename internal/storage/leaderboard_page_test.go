@@ -178,6 +178,7 @@ func TestLeaderboardPage_ExcludesGuestsAndZeroXP(t *testing.T) {
 		t.Fatalf("award guest xp: %v", err)
 	}
 	seedBoardStudent(t, store, "Idle", "idle", 0)
+	seedBoardStudent(t, store, "Negative", "negative", -5)
 	seedBoardStudent(t, store, "Active", "active", 7)
 
 	week := time.Now().UTC().Add(-24 * time.Hour)

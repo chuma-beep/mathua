@@ -85,7 +85,7 @@ func TestExtremelyPoorPerformanceCanGoNegative(t *testing.T) {
 	}
 }
 
-func TestNegativePerformanceIsCappedByBalance(t *testing.T) {
+func TestNegativePerformanceIsNotCappedByBalance(t *testing.T) {
 	var attempts []AttemptSignal
 	for i := 0; i < 6; i++ {
 		attempts = append(attempts, attempt(false, 0.3, 10, 0, string(rune('a'+i))))
@@ -93,8 +93,8 @@ func TestNegativePerformanceIsCappedByBalance(t *testing.T) {
 	in := performanceInput(attempts)
 	in.AvailableXP = 1
 	d := EvaluatePerformance(in)
-	if d.Amount != -1 {
-		t.Fatalf("capped negative = %+v, want -1", d)
+	if d.Amount != -2 || d.CalculatedAmount != -2 {
+		t.Fatalf("negative performance = %+v, want full -2", d)
 	}
 }
 

@@ -2549,49 +2549,11 @@ func (e *Engine) TimeLimitFor(studentID, conceptID string) float64 {
 	return e.accommodatedThreshold(studentID, base)
 }
 
-// QuizXPSince returns lifetime XP earned since the last completed quiz
-// (or all XP when no quiz completed yet). Floor 0: XP never decreases
-// except rushing penalties, which must not manufacture quiz eligibility.
+// QuizXPSince delegates to the storage gate calculation so the engine and
+// scoring dashboard cannot disagree about earned XP when the balance is
+// negative.
 func (e *Engine) QuizXPSince(studentID string) (int, error) {
-	total, _, err := e.repo.GetXP(studentID)
-	if err != nil {
-		return 0, err
-	}
-	last, err := e.repo.LastQuizCompletion(studentID)
-	if err != nil {
-		return 0, err
-	}
-	deductions, _ := e.repo.(storage.EffortStore)
-	if last == nil {
-		if deductions != nil {
-			removed, derr := deductions.SumXPDeductionsSince(studentID, time.Time{})
-			if derr == nil {
-				return total + removed, nil
-			}
-		}
-		return total, nil
-	}
-	since := total - last.XPTotal
-	if since < 0 {
-		since = 0
-	}
-	// XP deductions are accountability, not evidence that the learner stopped
-	// earning. Add them back for the quiz gate so a poor task cannot delay a
-	// mastery check that the learner has already earned.
-	if deductions != nil && last.CompletedAt != "" {
-		for _, layout := range []string{time.RFC3339Nano, time.RFC3339, "2006-01-02 15:04:05"} {
-			completedAt, perr := time.Parse(layout, last.CompletedAt)
-			if perr != nil {
-				continue
-			}
-			removed, derr := deductions.SumXPDeductionsSince(studentID, completedAt)
-			if derr == nil {
-				since += removed
-			}
-			break
-		}
-	}
-	return since, nil
+	return storage.XPSinceLastQuiz(e.repo, studentID)
 }
 
 // QuizDue reports whether the mastery-check gate is reached.

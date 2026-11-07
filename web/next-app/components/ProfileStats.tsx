@@ -75,7 +75,7 @@ export default function ProfileStats({ name, scores, avatarSeed, avatarUrl, avat
           <div className="min-w-0">
             <div className="font-mono text-[11px] text-mathua-muted">TOTAL XP</div>
             <div className="font-mono text-[16px] text-mathua-primary">
-              {scores.lifetime_points.toLocaleString()}
+              {scores.xp_total.toLocaleString()}
             </div>
           </div>
 

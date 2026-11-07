@@ -540,7 +540,7 @@ export default function ReportsPage() {
                           </div>
                           <div className="text-right text-xs text-mathua-secondary shrink-0">
                             <div>{fmtDateTime(event.at)}</div>
-                            {typeof event.xp === 'number' && event.xp > 0 && <div>+{event.xp} XP</div>}
+                            {typeof event.xp === 'number' && event.xp !== 0 && <div>{event.xp > 0 ? '+' : ''}{event.xp} XP</div>}
                           </div>
                         </li>
                       ))}

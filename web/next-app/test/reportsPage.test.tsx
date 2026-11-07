@@ -55,8 +55,11 @@ const baseReport: LearnerReport = {
     },
   ],
   activity: [{ date: '2026-10-20', questions: 5, correct: 4, concepts: ['alg.linear'] }],
-  history: [{ id: 'answer:1', kind: 'answer', at: '2026-10-20T10:00:00Z', title: 'Linear equations', detail: 'Correct answer', correct: true, href: '/study?concept=alg.linear' }],
-  history_total: 2,
+  history: [
+    { id: 'answer:1', kind: 'answer', at: '2026-10-20T10:00:00Z', title: 'Linear equations', detail: 'Correct answer', correct: true, href: '/study?concept=alg.linear' },
+    { id: 'adjustment:1', kind: 'adjustment', at: '2026-10-20T10:01:00Z', title: 'Performance adjustment', detail: 'Task adjustment', xp: -5 },
+  ],
+  history_total: 3,
   limitations: ['Reports show current state, not a full transition audit trail.'],
 }
 
@@ -116,7 +119,15 @@ describe('Reports page', () => {
     fireEvent.click(await screen.findByRole('button', { name: /Load more/ }))
     expect((await screen.findAllByText('Mastery check')).length).toBeGreaterThan(0)
     expect(screen.getAllByText('Linear equations').length).toBeGreaterThan(0)
-    expect(getLearnerReportHistory).toHaveBeenCalledWith({ offset: 1, limit: 25 })
+    expect(getLearnerReportHistory).toHaveBeenCalledWith({ offset: 2, limit: 25 })
+  })
+
+  it('shows negative XP ledger events in learning history', async () => {
+    vi.mocked(getLearnerReport).mockResolvedValue(baseReport)
+    render(<ReportsPage />)
+    await screen.findByRole('heading', { name: 'Reports' })
+    fireEvent.click(screen.getByRole('tab', { name: 'Learning history' }))
+    expect(await screen.findByText('-5 XP')).toBeDefined()
   })
 
   it('describes an empty record instead of inventing one', async () => {

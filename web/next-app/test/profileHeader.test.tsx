@@ -35,6 +35,18 @@ describe('ProfileHeader', () => {
     expect(position.textContent).toMatch(/Mastered 1 · Unlocked 3 · In progress 0/)
   })
 
+  it('shows a negative lifetime XP balance without clamping it', () => {
+    render(
+      <ProfileHeader
+        name="Tester"
+        scores={{ ...scores, xp_total: -40 }}
+        catalogue={catalogue}
+        progress={progress}
+      />,
+    )
+    expect(screen.getByText(/-40 XP all-time/)).toBeTruthy()
+  })
+
   it('names mastery once, not as a separate tile', () => {
     render(
       <ProfileHeader name="Tester" scores={scores} catalogue={catalogue} progress={progress} />,

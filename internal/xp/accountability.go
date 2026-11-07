@@ -43,7 +43,7 @@ const (
 	// performance decision can carry a negative amount here when the intended
 	// result is that the task's earned XP becomes zero.
 	OutcomeZero Outcome = "zero"
-	// OutcomeNegative deducts XP from the ledger, never below zero balance.
+	// OutcomeNegative deducts XP from the ledger and may take lifetime XP below zero.
 	OutcomeNegative Outcome = "negative"
 )
 
@@ -59,7 +59,6 @@ const (
 	ReasonGenuineDifficulty        ReasonCode = "genuine_difficulty"
 	ReasonLegacyPenalty            ReasonCode = "legacy_penalty"
 	ReasonDiagnosticExempt         ReasonCode = "diagnostic_exempt"
-	ReasonNoBalance                ReasonCode = "no_balance"
 	ReasonSustainedEffort          ReasonCode = "sustained_effort"
 	ReasonAcceptablePerformance    ReasonCode = "acceptable_performance"
 	ReasonPoorPerformance          ReasonCode = "poor_performance"
@@ -341,8 +340,8 @@ type Input struct {
 	// PriorAdjustments is the number of confirmed deductions in the escalation
 	// window before this task.
 	PriorAdjustments int
-	// AvailableXP is the learner's current balance. A deduction is capped by it
-	// so the balance can never go below zero.
+	// AvailableXP is retained for callers that still provide the current
+	// balance. It no longer caps a deduction; lifetime XP may be negative.
 	AvailableXP int
 	// TaskComplete is true only when the engine has a reliable signal that the
 	// task is finished. Performance never judges an unfinished task; effort
@@ -358,8 +357,8 @@ type Decision struct {
 	Outcome Outcome
 	// Amount is the adjustment after the policy's available-balance cap.
 	Amount int
-	// CalculatedAmount is the uncapped amount before that cap. It exists so
-	// observability can distinguish "calculated -2" from "applied -1".
+	// CalculatedAmount is the policy amount. It is retained for observability
+	// and audit; there is no longer an available-balance cap.
 	CalculatedAmount int
 	Reason           ReasonCode
 	Explanation      string
@@ -571,7 +570,7 @@ func EvaluatePerformance(in Input) Decision {
 			return Decision{Outcome: OutcomeFull, Reason: ReasonGenuineDifficulty, Source: SourcePerformance}
 		}
 		return performanceAdjustment(OutcomeZero, -task.xpEarned, ReasonGenuineDifficulty,
-			"The task was difficult. XP earned on it was removed, but no negative penalty was applied.", in.AvailableXP)
+			"The task was difficult. XP earned on it was removed, but no negative penalty was applied.")
 	}
 
 	if task.attempts >= p.NegativeMinAttempts && expected >= p.NegativeMinExpectedCorrect && ratio < p.NegativeRatio {
@@ -586,7 +585,7 @@ func EvaluatePerformance(in Input) Decision {
 			}
 		}
 		return performanceAdjustment(OutcomeNegative, amount, ReasonExtremelyPoorPerformance,
-			"Task performance was extremely poor across this task.", in.AvailableXP)
+			"Task performance was extremely poor across this task.")
 	}
 
 	if expected >= p.MinExpectedCorrect && ratio < p.AcceptableRatio {
@@ -600,7 +599,7 @@ func EvaluatePerformance(in Input) Decision {
 			}
 		}
 		return performanceAdjustment(OutcomeZero, -task.xpEarned, ReasonPoorPerformance,
-			"Task performance was poor, so the XP earned on this task was removed.", in.AvailableXP)
+			"Task performance was poor, so the XP earned on this task was removed.")
 	}
 
 	if expected >= p.MinExpectedCorrect && ratio < p.GoodRatio {
@@ -618,7 +617,7 @@ func EvaluatePerformance(in Input) Decision {
 			return Decision{Outcome: OutcomeFull}
 		}
 		return performanceAdjustment(OutcomePartial, -deduction, ReasonAcceptablePerformance,
-			"Task performance was acceptable, so part of the XP earned was removed.", in.AvailableXP)
+			"Task performance was acceptable, so part of the XP earned was removed.")
 	}
 
 	if cfg.EnableBonus && cfg.BonusAmount > 0 && task.attempts >= p.BonusMinAttempts &&
@@ -688,29 +687,14 @@ func difficultyCorrectPrior(difficulty float64) float64 {
 	}
 }
 
-func performanceAdjustment(outcome Outcome, amount int, reason ReasonCode, explanation string, available int) Decision {
-	calculated := amount
-	if available < 0 {
-		available = 0
-	}
-	if amount < -available {
-		amount = -available
-	}
+func performanceAdjustment(outcome Outcome, amount int, reason ReasonCode, explanation string) Decision {
 	if amount == 0 {
-		return Decision{
-			Outcome:          OutcomeZero,
-			Amount:           0,
-			CalculatedAmount: calculated,
-			Reason:           ReasonNoBalance,
-			Explanation:      explanation,
-			Note:             "No XP deducted. The XP balance is already zero.",
-			Source:           SourcePerformance,
-		}
+		return Decision{Outcome: OutcomeFull}
 	}
 	return Decision{
 		Outcome:          outcome,
 		Amount:           amount,
-		CalculatedAmount: calculated,
+		CalculatedAmount: amount,
 		Reason:           reason,
 		Explanation:      explanation,
 		Note:             fmt.Sprintf("%d XP: %s", amount, explanation),
@@ -779,26 +763,10 @@ func penalize(in Input, cfg Config, reason ReasonCode, task taskStats) Decision 
 		// the task earned rather than an extra charge on top of nothing.
 		outcome = OutcomePartial
 	}
-	available := in.AvailableXP
-	if available < 0 {
-		available = 0
-	}
 	calculated := -penalty
 	amount := calculated
-	if amount < -available {
-		amount = -available
-	}
 	if amount == 0 {
-		return Decision{
-			Outcome:          OutcomeZero,
-			Amount:           0,
-			CalculatedAmount: calculated,
-			Reason:           ReasonNoBalance,
-			Explanation:      "A low-effort pattern was detected, but the XP balance is already zero, so no deduction was made.",
-			Note:             "No XP deducted. Review the explanation and try again.",
-			Level:            level,
-			Source:           SourceEffort,
-		}
+		return Decision{Outcome: OutcomeFull}
 	}
 	return Decision{
 		Outcome:          outcome,

@@ -115,18 +115,21 @@ func TestLearningEventsPageSubstantiatesAndPaginates(t *testing.T) {
 	if err := repo.SetDiagnosticCompleted(st.ID); err != nil {
 		t.Fatal(err)
 	}
+	if err := repo.AwardXP(st.ID, -5, "accountability:test", "adjustment:1"); err != nil {
+		t.Fatal(err)
+	}
 
-	first, total, err := repo.LearningEventsPage(st.ID, 2, 0)
+	first, total, err := repo.LearningEventsPage(st.ID, 3, 0)
 	if err != nil {
 		t.Fatal(err)
 	}
-	if total != 4 {
-		t.Fatalf("want 4 substantiated events, got %d", total)
+	if total != 5 {
+		t.Fatalf("want 5 substantiated events including the XP adjustment, got %d", total)
 	}
-	if len(first) != 2 {
-		t.Fatalf("want a page of 2, got %d", len(first))
+	if len(first) != 3 {
+		t.Fatalf("want a page of 3, got %d", len(first))
 	}
-	second, total2, err := repo.LearningEventsPage(st.ID, 2, 2)
+	second, total2, err := repo.LearningEventsPage(st.ID, 3, 3)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -143,13 +146,43 @@ func TestLearningEventsPageSubstantiatesAndPaginates(t *testing.T) {
 		seen[key] = true
 		byKind[e.Kind]++
 	}
-	for _, kind := range []string{"answer", "mastery", "quiz", "diagnostic"} {
+	for _, kind := range []string{"answer", "mastery", "quiz", "diagnostic", "xp"} {
 		if byKind[kind] != 1 {
 			t.Fatalf("want exactly one %s event, got %d", kind, byKind[kind])
 		}
 	}
-	if len(seen) != 4 {
-		t.Fatalf("want 4 distinct events, got %d", len(seen))
+	for _, e := range append(first, second...) {
+		if e.Kind == "xp" {
+			if e.XP != -5 || e.Reason != "accountability:test" {
+				t.Fatalf("xp event = %+v, want -5 accountability:test", e)
+			}
+		}
+	}
+	if len(seen) != 5 {
+		t.Fatalf("want 5 distinct events, got %d", len(seen))
+	}
+}
+
+func TestCompletionCutoffParsesEveryWrittenFormat(t *testing.T) {
+	base := time.Date(2026, 11, 7, 3, 5, 44, 0, time.UTC)
+	cases := []struct {
+		raw  string
+		want time.Time
+	}{
+		{base.Format(time.RFC3339Nano), base},
+		{base.Format(time.RFC3339), base},
+		{"2026-11-07 03:05:44.123456+00", time.Date(2026, 11, 7, 3, 5, 44, 123456000, time.UTC)},
+		{"2026-11-07 03:05:44+00", base},
+		{"2026-11-07 03:05:44", base.Add(time.Second)},
+	}
+	for _, tc := range cases {
+		got, ok := completionCutoff(tc.raw)
+		if !ok || !got.Equal(tc.want) {
+			t.Errorf("completionCutoff(%q) = %v, %v; want %v, true", tc.raw, got, ok, tc.want)
+		}
+	}
+	if _, ok := completionCutoff("not a timestamp"); ok {
+		t.Fatal("invalid timestamp was accepted")
 	}
 }
 

@@ -47,14 +47,17 @@ type EffortStore interface {
 	CountXPDeductions(studentID string, since time.Time) (int, error)
 	// SumXPDeductionsSince returns the positive magnitude of every negative
 	// ledger event at or after since, including legacy rush penalties and
-	// accountability adjustments. Progression gates add it back so a deduction
-	// cannot delay a quiz or mastery check.
+	// accountability adjustments. It is an audit helper; progression gates
+	// use SumXPEarnedSince instead.
 	SumXPDeductionsSince(studentID string, since time.Time) (int, error)
+	// SumXPEarnedSince returns the positive XP ledger total at or after since.
+	// It is the earned-XP basis for progression gates, independent of the
+	// current signed balance.
+	SumXPEarnedSince(studentID string, since time.Time) (int, error)
 	// ApplyXPAdjustment writes a signed ledger row and moves the counters in one
-	// transaction. Negative amounts are capped by the learner's balance, so the
-	// balance cannot go below zero. It returns the amount actually applied
-	// (zero when the balance is empty or the event already exists), so a caller
-	// can explain the real outcome.
+	// transaction. Negative amounts are applied in full, so lifetime XP may
+	// become negative. It returns the amount actually applied (zero when the
+	// event already exists), so a caller can explain the real outcome.
 	ApplyXPAdjustment(studentID string, amount int, reason, eventKey string) (int, error)
 }
 
@@ -166,10 +169,25 @@ func sumAccountabilityDeductionsSince(db *sql.DB, rebind func(string) string, st
 	return total, nil
 }
 
+func sumXPEarnedSince(db *sql.DB, rebind func(string) string, studentID string, since time.Time) (int, error) {
+	var total int
+	sinceN := int64(0)
+	if !since.IsZero() {
+		sinceN = signalTime(since)
+	}
+	if err := db.QueryRow(rebind(`
+		SELECT COALESCE(SUM(amount), 0) FROM xp_events
+		WHERE student_id = ? AND amount > 0
+		  AND created_at >= ?
+	`), studentID, sinceN).Scan(&total); err != nil {
+		return 0, fmt.Errorf("sum xp earned: %w", err)
+	}
+	return total, nil
+}
+
 // applyXPAdjustmentTx moves a signed amount through the ledger and the counters
-// in one transaction. Negative amounts are capped at the current balance, so
-// the ledger and students.xp_total cannot disagree and neither can go below
-// zero.
+// in one transaction. Negative amounts are applied in full; lifetime XP may
+// become negative. Daily XP remains capped at zero.
 func applyXPAdjustmentTx(db *sql.DB, rebind func(string) string, forUpdate string, studentID string, amount int, reason, eventKey string) (int, error) {
 	if studentID == "" || eventKey == "" {
 		return 0, fmt.Errorf("xp adjustment: missing scope")
@@ -202,24 +220,15 @@ func applyXPAdjustmentInTx(tx *sql.Tx, rebind func(string) string, forUpdate str
 	if amount == 0 {
 		return 0, nil
 	}
-	var total, today int
-	var xpDate sql.NullString
-	if err := tx.QueryRow(rebind(`SELECT xp_total, xp_today, xp_date FROM students WHERE id = ?`+forUpdate), studentID).
-		Scan(&total, &today, &xpDate); err != nil {
+	var exists int
+	if err := tx.QueryRow(rebind(`SELECT 1 FROM students WHERE id = ?`+forUpdate), studentID).
+		Scan(&exists); err != nil {
 		if err == sql.ErrNoRows {
 			return 0, nil
 		}
-		return 0, fmt.Errorf("xp adjustment: read balance: %w", err)
+		return 0, fmt.Errorf("xp adjustment: lock balance row: %w", err)
 	}
 	applied := amount
-	if applied < 0 {
-		if total <= 0 {
-			return 0, nil
-		}
-		if applied < -total {
-			applied = -total
-		}
-	}
 	now := time.Now().UTC().UnixNano()
 	res, err := tx.Exec(rebind(`
 		INSERT INTO xp_events (student_id, amount, reason, event_key, created_at)
@@ -235,14 +244,14 @@ func applyXPAdjustmentInTx(tx *sql.Tx, rebind func(string) string, forUpdate str
 	todayStr := time.Now().UTC().Format("2006-01-02")
 	if _, err := tx.Exec(rebind(`
 		UPDATE students
-		SET xp_total = CASE WHEN xp_total + ? < 0 THEN 0 ELSE xp_total + ? END,
+		SET xp_total = xp_total + ?,
 		    xp_today = CASE
 		        WHEN xp_date = ? THEN (CASE WHEN xp_today + ? < 0 THEN 0 ELSE xp_today + ? END)
 		        ELSE (CASE WHEN ? < 0 THEN 0 ELSE ? END)
 		    END,
 		    xp_date = ?
 		WHERE id = ?
-	`), applied, applied, todayStr, applied, applied, applied, applied, todayStr, studentID); err != nil {
+	`), applied, todayStr, applied, applied, applied, applied, todayStr, studentID); err != nil {
 		return 0, fmt.Errorf("xp adjustment: update counters: %w", err)
 	}
 	return applied, nil

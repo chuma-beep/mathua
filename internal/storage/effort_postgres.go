@@ -24,6 +24,11 @@ func (s *PostgresStore) SumXPDeductionsSince(studentID string, since time.Time) 
 	return sumAccountabilityDeductionsSince(s.db, rebindDollars, studentID, since)
 }
 
+// SumXPEarnedSince returns the positive XP earned since a point in time.
+func (s *PostgresStore) SumXPEarnedSince(studentID string, since time.Time) (int, error) {
+	return sumXPEarnedSince(s.db, rebindDollars, studentID, since)
+}
+
 // ApplyXPAdjustment writes a capped signed ledger row atomically.
 func (s *PostgresStore) ApplyXPAdjustment(studentID string, amount int, reason, eventKey string) (int, error) {
 	return applyXPAdjustmentTx(s.db, rebindDollars, " FOR UPDATE", studentID, amount, reason, eventKey)

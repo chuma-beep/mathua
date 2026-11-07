@@ -262,6 +262,31 @@ func TestLearnerReportHistoryPaginatesWithoutOverlap(t *testing.T) {
 	}
 }
 
+func TestLearnerReportHistoryIncludesNegativeXPAdjustment(t *testing.T) {
+	s, mux, store := reportsTestMux(t)
+	token, student := signupReportLearner(t, s, "Ada", "ada_negative")
+	if err := store.AwardXP(student.ID, -5, "accountability:test", "adjustment:1"); err != nil {
+		t.Fatalf("award negative: %v", err)
+	}
+	rr := getReport(t, mux, token, "/api/learner/reports/history?limit=10&offset=0")
+	if rr.Code != http.StatusOK {
+		t.Fatalf("history status %d: %s", rr.Code, rr.Body.String())
+	}
+	var page learnerHistoryResponse
+	if err := json.Unmarshal(rr.Body.Bytes(), &page); err != nil {
+		t.Fatalf("decode history: %v", err)
+	}
+	for _, ev := range page.Events {
+		if ev.Kind == "xp" {
+			if ev.XP == nil || *ev.XP != -5 || ev.Title != "XP adjustment" || ev.Source != "accountability:test" {
+				t.Fatalf("negative xp event = %+v", ev)
+			}
+			return
+		}
+	}
+	t.Fatalf("negative XP adjustment missing from history: %+v", page.Events)
+}
+
 func TestLearnerReportEmptyLearner(t *testing.T) {
 	s, mux, _ := reportsTestMux(t)
 	token, _ := signupReportLearner(t, s, "New", "newlearner")

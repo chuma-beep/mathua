@@ -14,7 +14,7 @@ func TestPostgresConcurrentXPAdjustments(t *testing.T) {
 	pg := newPostgresStore(t)
 	es := EffortStore(pg)
 
-	t.Run("deductions share one balance and never go below zero", func(t *testing.T) {
+	t.Run("deductions share one balance and may go below zero", func(t *testing.T) {
 		st := seedStudent(t, pg)
 		if err := pg.AwardXP(st.ID, 10, "seed", "pg-floor-seed-"+st.ID); err != nil {
 			t.Fatalf("seed: %v", err)
@@ -40,11 +40,11 @@ func TestPostgresConcurrentXPAdjustments(t *testing.T) {
 		if err != nil {
 			t.Fatalf("get xp: %v", err)
 		}
-		if total != 0 {
-			t.Fatalf("balance = %d, want 0 after deductions exceeding the balance", total)
+		if total != -14 {
+			t.Fatalf("balance = %d, want -14 after all deductions", total)
 		}
-		if applied != -10 {
-			t.Fatalf("applied = %d, want -10 (the actual sum of capped deductions)", applied)
+		if applied != -24 {
+			t.Fatalf("applied = %d, want -24 (the full calculated deductions)", applied)
 		}
 		if ledger := pgLedgerSum(t, pg, st.ID); ledger != total {
 			t.Fatalf("ledger sum = %d, balance = %d; they must agree", ledger, total)
@@ -117,11 +117,34 @@ func TestPostgresConcurrentXPAdjustments(t *testing.T) {
 		if err != nil {
 			t.Fatalf("get xp: %v", err)
 		}
-		if total < 0 {
-			t.Fatalf("balance = %d, want non-negative", total)
+		if total != 10 {
+			t.Fatalf("balance = %d, want 10 after 10 awards of 5 and 10 deductions of 4", total)
 		}
 		if ledger := pgLedgerSum(t, pg, st.ID); ledger != total {
 			t.Fatalf("ledger sum = %d, balance = %d; concurrent writes diverged", ledger, total)
+		}
+	})
+
+	t.Run("positive XP recovers a negative balance", func(t *testing.T) {
+		st := seedStudent(t, pg)
+		if err := pg.AwardXP(st.ID, 10, "seed", "pg-recovery-seed-"+st.ID); err != nil {
+			t.Fatalf("seed: %v", err)
+		}
+		if _, err := es.ApplyXPAdjustment(st.ID, -15, "accountability:extremely_poor_performance", "pg-recovery-down-"+st.ID); err != nil {
+			t.Fatalf("deduction: %v", err)
+		}
+		if err := pg.AwardXP(st.ID, 12, "study", "pg-recovery-up-"+st.ID); err != nil {
+			t.Fatalf("recovery award: %v", err)
+		}
+		total, _, err := pg.GetXP(st.ID)
+		if err != nil {
+			t.Fatalf("get xp: %v", err)
+		}
+		if total != 7 {
+			t.Fatalf("balance = %d, want 7 after recovering from -5", total)
+		}
+		if ledger := pgLedgerSum(t, pg, st.ID); ledger != total {
+			t.Fatalf("ledger sum = %d, balance = %d", ledger, total)
 		}
 	})
 }

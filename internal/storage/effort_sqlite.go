@@ -24,6 +24,11 @@ func (s *SQLiteStore) SumXPDeductionsSince(studentID string, since time.Time) (i
 	return sumAccountabilityDeductionsSince(s.db, func(q string) string { return q }, studentID, since)
 }
 
+// SumXPEarnedSince returns the positive XP earned since a point in time.
+func (s *SQLiteStore) SumXPEarnedSince(studentID string, since time.Time) (int, error) {
+	return sumXPEarnedSince(s.db, func(q string) string { return q }, studentID, since)
+}
+
 // ApplyXPAdjustment writes a capped signed ledger row atomically.
 func (s *SQLiteStore) ApplyXPAdjustment(studentID string, amount int, reason, eventKey string) (int, error) {
 	return applyXPAdjustmentTx(s.db, func(q string) string { return q }, "", studentID, amount, reason, eventKey)

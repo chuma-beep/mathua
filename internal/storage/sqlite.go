@@ -79,6 +79,13 @@ func NewSQLiteStore(path string) (*SQLiteStore, error) {
 	// says so. Fixing it properly would mean opening ":memory:" as "file::memory:?cache=shared"
 	// with _txlock, which changes behaviour for every existing in-memory test to buy nothing.
 	db.SetMaxOpenConns(8)
+	if path == ":memory:" {
+		// Each :memory: connection is a separate database. A pool makes
+		// sequential tests pass until one path issues two statements, then a
+		// second connection sees an empty schema. Production uses a file and
+		// concurrency tests use a file; pin in-memory stores to one connection.
+		db.SetMaxOpenConns(1)
+	}
 	store := &SQLiteStore{db: db}
 	if err := store.Migrate(); err != nil {
 		db.Close()
@@ -773,7 +780,7 @@ func (s *SQLiteStore) AwardXP(studentID string, amount int, reason, eventKey str
 	today := time.Now().UTC().Format("2006-01-02")
 	if _, err := tx.Exec(`
 		UPDATE students
-		SET xp_total = MAX(0, xp_total + ?),
+		SET xp_total = xp_total + ?,
 		    xp_today = CASE WHEN xp_date = ? THEN MAX(0, xp_today + ?) ELSE MAX(0, ?) END,
 		    xp_date  = ?
 		WHERE id = ?
@@ -1970,7 +1977,8 @@ func (s *SQLiteStore) UpsertTopicSpeed(ts *TopicSpeed) error {
 // Batch 1: Quiz 150 XP gate completions.
 
 func (s *SQLiteStore) RecordQuizCompletion(studentID string, xpTotal int) error {
-	if _, err := s.db.Exec(`INSERT INTO quiz_completions (student_id, completed_at, xp_total) VALUES (?, datetime('now'), ?)`, studentID, xpTotal); err != nil {
+	completedAt := time.Now().UTC().Format(time.RFC3339Nano)
+	if _, err := s.db.Exec(`INSERT INTO quiz_completions (student_id, completed_at, xp_total) VALUES (?, ?, ?)`, studentID, completedAt, xpTotal); err != nil {
 		return fmt.Errorf("record quiz completion: %w", err)
 	}
 	return nil
@@ -2861,27 +2869,32 @@ const sqliteLearningEvents = `
 	WITH events AS (
 		SELECT 'answer' AS kind, CAST(id AS TEXT) AS ref,
 		       CAST(strftime('%s', timestamp) AS INTEGER) AS at,
-		       concept_id, source, correct AS value, 0 AS xp
+		       concept_id, source, correct AS value, 0 AS xp, '' AS reason
 		FROM attempts
 		WHERE student_id = ? AND timestamp IS NOT NULL AND timestamp <> ''
 		UNION ALL
 		SELECT 'mastery', concept_id, CAST(strftime('%s', mastered_at) AS INTEGER),
-		       concept_id, '', 0, 0
+		       concept_id, '', 0, 0, ''
 		FROM concept_progress
 		WHERE student_id = ? AND status = 'MASTERED'
 		  AND mastered_at IS NOT NULL AND mastered_at <> ''
 		UNION ALL
 		SELECT 'quiz', CAST(id AS TEXT), CAST(strftime('%s', completed_at) AS INTEGER),
-		       '', 'quiz', 0, COALESCE(xp_total, 0)
+		       '', 'quiz', 0, COALESCE(xp_total, 0), ''
 		FROM quiz_completions
 		WHERE student_id = ?
 		UNION ALL
 		SELECT 'diagnostic', 'diagnostic', CAST(strftime('%s', diagnostic_completed_at) AS INTEGER),
-		       '', 'diagnostic', 0, 0
+		       '', 'diagnostic', 0, 0, ''
 		FROM students
 		WHERE id = ? AND diagnostic_completed_at IS NOT NULL AND diagnostic_completed_at <> ''
+		UNION ALL
+		SELECT 'xp', event_key, CAST(created_at / 1000000000 AS INTEGER),
+		       '', reason, 0, amount, reason
+		FROM xp_events
+		WHERE student_id = ? AND amount < 0
 	)
-	SELECT kind, ref, at, concept_id, source, value, xp
+	SELECT kind, ref, at, concept_id, source, value, xp, reason
 	FROM events
 	WHERE at IS NOT NULL
 	ORDER BY at DESC, kind ASC, ref DESC
@@ -2907,14 +2920,17 @@ func (s *SQLiteStore) LearningEventsPage(studentID string, limit, offset int) ([
 			UNION ALL
 			SELECT CAST(strftime('%s', diagnostic_completed_at) AS INTEGER) FROM students
 			WHERE id = ? AND diagnostic_completed_at IS NOT NULL AND diagnostic_completed_at <> ''
+			UNION ALL
+			SELECT CAST(created_at / 1000000000 AS INTEGER) FROM xp_events
+			WHERE student_id = ? AND amount < 0
 		)
 		SELECT COUNT(*) FROM events WHERE at IS NOT NULL`,
-		studentID, studentID, studentID, studentID).Scan(&total)
+		studentID, studentID, studentID, studentID, studentID).Scan(&total)
 	if err != nil {
 		return nil, 0, fmt.Errorf("count learning events: %w", err)
 	}
 
-	rows, err := s.db.Query(sqliteLearningEvents, studentID, studentID, studentID, studentID, limit, offset)
+	rows, err := s.db.Query(sqliteLearningEvents, studentID, studentID, studentID, studentID, studentID, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("learning events: %w", err)
 	}
@@ -2925,7 +2941,7 @@ func (s *SQLiteStore) LearningEventsPage(studentID string, limit, offset int) ([
 		var e LearningEvent
 		var at int64
 		var correct int
-		if err := rows.Scan(&e.Kind, &e.Ref, &at, &e.ConceptID, &e.Source, &correct, &e.XP); err != nil {
+		if err := rows.Scan(&e.Kind, &e.Ref, &at, &e.ConceptID, &e.Source, &correct, &e.XP, &e.Reason); err != nil {
 			return nil, 0, fmt.Errorf("scan learning event: %w", err)
 		}
 		e.At = time.Unix(at, 0).UTC()

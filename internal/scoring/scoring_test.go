@@ -287,7 +287,9 @@ func TestCompute_TopicSpeedsAndQuizGate(t *testing.T) {
 	defer store.Close()
 	st, _ := store.CreateStudent("quiz-tester")
 	_ = store.SetDailyXPGoal(st.ID, 40)
-	_ = store.AwardXP(st.ID, 120, "practice", "seed-xp")
+	_ = store.AwardXP(st.ID, 50, "practice", "seed-xp-1")
+	_ = store.RecordQuizCompletion(st.ID, 50)
+	_ = store.AwardXP(st.ID, 70, "practice", "seed-xp-2")
 
 	// Topic speed 1: high repetitions/speed causing darkness clamping to 1.0
 	_ = store.UpsertTopicSpeed(&storage.TopicSpeed{
@@ -304,10 +306,8 @@ func TestCompute_TopicSpeedsAndQuizGate(t *testing.T) {
 		Repetitions:   2,
 	})
 
-	// Record a previous quiz completion at XP total 50. Current is 120.
-	// XPSinceQuiz = 120 - 50 = 70 >= xp.QuizGateXP (50) -> QuizDue is true.
-	_ = store.RecordQuizCompletion(st.ID, 50)
-
+	// Completion happened at 50 XP, then 70 XP was earned. Current is 120.
+	// XPSinceQuiz = 70 >= xp.QuizGateXP (50) -> QuizDue is true.
 	u := NewUpdater(nil, store)
 	scores, err := u.Compute(st.ID)
 	if err != nil {

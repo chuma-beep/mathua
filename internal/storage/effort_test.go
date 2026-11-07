@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func TestApplyXPAdjustmentCapsCalculatedMinusTwoAtBalanceOne(t *testing.T) {
+func TestApplyXPAdjustmentAppliesFullAmountBelowZero(t *testing.T) {
 	store := newTestStore(t)
 	es, ok := store.(EffortStore)
 	if !ok {
@@ -16,19 +16,19 @@ func TestApplyXPAdjustmentCapsCalculatedMinusTwoAtBalanceOne(t *testing.T) {
 		t.Fatalf("seed: %v", err)
 	}
 	applied, err := es.ApplyXPAdjustment(st.ID, -2, "accountability:extremely_poor_performance", "accountability:practice:one")
-	if err != nil || applied != -1 {
-		t.Fatalf("applied = %d, %v; want -1, nil", applied, err)
+	if err != nil || applied != -2 {
+		t.Fatalf("applied = %d, %v; want -2, nil", applied, err)
 	}
-	total, _, err := store.GetXP(st.ID)
+	total, today, err := store.GetXP(st.ID)
 	if err != nil {
 		t.Fatalf("get xp: %v", err)
 	}
-	if total != 0 {
-		t.Fatalf("balance = %d, want 0", total)
+	if total != -1 || today != 0 {
+		t.Fatalf("balance = %d today = %d, want -1 and 0", total, today)
 	}
 }
 
-func TestApplyXPAdjustmentIsIdempotentAndNeverNegative(t *testing.T) {
+func TestApplyXPAdjustmentIsIdempotentAndAllowsNegativeBalance(t *testing.T) {
 	store := newTestStore(t)
 	es, ok := store.(EffortStore)
 	if !ok {
@@ -48,20 +48,20 @@ func TestApplyXPAdjustmentIsIdempotentAndNeverNegative(t *testing.T) {
 		t.Fatalf("duplicate adjustment = %d, %v; want 0, nil", applied, err)
 	}
 	applied, err = es.ApplyXPAdjustment(st.ID, -10, "accountability:extremely_poor_performance", "accountability:practice:t2")
-	if err != nil || applied != -2 {
-		t.Fatalf("capped adjustment = %d, %v; want -2, nil", applied, err)
+	if err != nil || applied != -10 {
+		t.Fatalf("full adjustment = %d, %v; want -10, nil", applied, err)
 	}
 	applied, err = es.ApplyXPAdjustment(st.ID, -1, "accountability:extremely_poor_performance", "accountability:practice:t3")
-	if err != nil || applied != 0 {
-		t.Fatalf("zero-floor adjustment = %d, %v; want 0, nil", applied, err)
+	if err != nil || applied != -1 {
+		t.Fatalf("second negative adjustment = %d, %v; want -1, nil", applied, err)
 	}
 
 	total, _, err := store.GetXP(st.ID)
 	if err != nil {
 		t.Fatalf("get xp: %v", err)
 	}
-	if total != 0 {
-		t.Fatalf("xp_total = %d, want 0", total)
+	if total != -9 {
+		t.Fatalf("xp_total = %d, want -9", total)
 	}
 
 	applied, err = es.ApplyXPAdjustment(st.ID, 2, "accountability:exceptional_performance", "accountability:practice:t4")
@@ -77,7 +77,7 @@ func TestApplyXPAdjustmentIsIdempotentAndNeverNegative(t *testing.T) {
 	if err != nil {
 		t.Fatalf("sum deductions: %v", err)
 	}
-	if removed != 5 {
-		t.Fatalf("deduction magnitude = %d, want 5", removed)
+	if removed != 14 {
+		t.Fatalf("deduction magnitude = %d, want 14", removed)
 	}
 }

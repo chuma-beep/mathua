@@ -78,7 +78,7 @@ Eighteen tables. The five that carry the learning loop are `students`, `concept_
 | `username` | TEXT | Unique login identifier |
 | `password_hash` | TEXT | bcrypt hash |
 | `course_id` | TEXT | Active course filter |
-| `xp_total` | INTEGER | Lifetime XP (`MAX(0, xp_total+?)` floor in `AwardXP`) |
+| `xp_total` | INTEGER | Lifetime XP, signed; negative balances are valid |
 | `xp_today` | INTEGER | Resets via `xp_date` check (`MAX(0, …)`) |
 | `xp_date` | TEXT | Date of `xp_today` bucket (`YYYY-MM-DD`) |
 | `daily_xp_goal` | INTEGER | Daily goal (default 30, `xp.DefaultDailyGoal`; migrated from legacy 150 via versioned backfill `sqlite.go`) |
@@ -169,7 +169,7 @@ Migrations are embedded directly in the application binary  --  no external migr
 The `Repository` interface abstracts the storage layer (`store.go:127`):
 
 - **SQLiteStore**  --  Fully implemented (`sqlite.go:1`, `WAL` `migrate.go:23`), used for local dev and `DATABASE_URL=sqlite:mathua.db` / `:memory:` tests
-- **PostgresStore**  --  Fully implemented via `pgx/v5/stdlib` (`postgres.go:21` `pgSchema`, `$1` placeholders, `GREATEST` for XP floor, `STRING_AGG` for activity, `RANDOM()` for questions), used when `DATABASE_URL=postgres://` `main.go:69`
+- **PostgresStore**  --  Fully implemented via `pgx/v5/stdlib` (`postgres.go:21` `pgSchema`, `$1` placeholders, `GREATEST` for the daily XP floor, `STRING_AGG` for activity, `RANDOM()` for questions), used when `DATABASE_URL=postgres://` `main.go:69`
 
 The codebase checks `DATABASE_URL` at startup and opens `pgx` for `postgres://` else `SQLite` (`mathua.db`).
 
@@ -580,7 +580,7 @@ Trade-off: generation latency. Complex polynomial questions require a SymPy subp
 
 ### Why No ORM?
 
-The schema has 42 tables with straightforward relationships. Raw SQL with `database/sql` gives:
+The schema has 46 tables with straightforward relationships. Raw SQL with `database/sql` gives:
 - Full control over query optimization (especially the SM-2 upsert and leaderboard queries)
 - No query generation overhead
 - Transparent SQL for debugging

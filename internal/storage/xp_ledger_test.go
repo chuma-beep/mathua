@@ -69,6 +69,42 @@ func TestAwardXP_ConcurrentDuplicatesCannotPayTwice(t *testing.T) {
 	}
 }
 
+func TestAwardXP_AllowsNegativeLifetimeButKeepsTodayNonNegative(t *testing.T) {
+	store := newTestStore(t)
+	st := seedStudent(t, store)
+
+	if err := store.AwardXP(st.ID, -5, "study", "negative:1"); err != nil {
+		t.Fatalf("negative award: %v", err)
+	}
+	total, today, err := store.GetXP(st.ID)
+	if err != nil {
+		t.Fatalf("get xp after negative: %v", err)
+	}
+	if total != -5 || today != 0 {
+		t.Fatalf("after -5: total=%d today=%d, want -5 and 0", total, today)
+	}
+	if err := store.AwardXP(st.ID, 4, "study", "negative:2"); err != nil {
+		t.Fatalf("recovery award: %v", err)
+	}
+	total, today, err = store.GetXP(st.ID)
+	if err != nil {
+		t.Fatalf("get xp after recovery: %v", err)
+	}
+	if total != -1 || today != 4 {
+		t.Fatalf("after +4: total=%d today=%d, want -1 and 4", total, today)
+	}
+	if err := store.AwardXP(st.ID, 10, "study", "negative:3"); err != nil {
+		t.Fatalf("positive award: %v", err)
+	}
+	total, today, err = store.GetXP(st.ID)
+	if err != nil {
+		t.Fatalf("get xp after positive: %v", err)
+	}
+	if total != 9 || today != 14 {
+		t.Fatalf("after +10: total=%d today=%d, want 9 and 14", total, today)
+	}
+}
+
 func TestAwardXP_DifferentEventsAccumulateAndNegativeAmountsAreRecorded(t *testing.T) {
 	store := newTestStore(t)
 	st := seedStudent(t, store)

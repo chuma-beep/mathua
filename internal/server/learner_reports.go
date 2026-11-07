@@ -664,6 +664,14 @@ func (s *Server) learnerHistory(sid string, dag *concepts.DAG, limit, offset int
 			ev.Title = "Placement diagnostic completed"
 			ev.Detail = "Completion recorded"
 			ev.Href = "/diagnose"
+		case "xp":
+			ev.Title = "XP adjustment"
+			ev.Detail = "XP ledger entry"
+			if e.Reason != "" {
+				ev.Source = e.Reason
+			}
+			v := e.XP
+			ev.XP = &v
 		default:
 			ev.Title = e.Kind
 		}

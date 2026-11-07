@@ -375,6 +375,7 @@ type LearningEvent struct {
 	Source    string    `json:"source,omitempty"`
 	Correct   bool      `json:"correct,omitempty"`
 	XP        int       `json:"xp,omitempty"`
+	Reason    string    `json:"reason,omitempty"`
 }
 
 type TopicSpeed struct {
@@ -388,9 +389,13 @@ type TopicSpeed struct {
 
 // QuizCompletion records one finished mastery-check quiz (Batch 1 gate).
 type QuizCompletion struct {
-	StudentID   string `json:"student_id"`
+	StudentID string `json:"student_id"`
+	// CompletedAt is a high-resolution timestamp for new rows. Legacy rows may
+	// have second precision; the earned-XP gate handles that conservatively.
 	CompletedAt string `json:"completed_at"`
-	XPTotal     int    `json:"xp_total"`
+	// XPTotal is the lifetime snapshot at completion, kept for audit. The gate
+	// itself uses positive xp_events since CompletedAt.
+	XPTotal int `json:"xp_total"`
 }
 
 // TimedQuizBaseline is the XP floor from which a learner's timed-quiz gate is

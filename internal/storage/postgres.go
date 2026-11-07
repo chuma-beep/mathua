@@ -1302,7 +1302,7 @@ func (s *PostgresStore) AwardXP(studentID string, amount int, reason, eventKey s
 	today := time.Now().UTC().Format("2006-01-02")
 	if _, err := tx.Exec(`
 		UPDATE students
-		SET xp_total = GREATEST(0, xp_total + $1),
+		SET xp_total = xp_total + $1,
 		    xp_today = CASE WHEN xp_date = $2 THEN GREATEST(0, xp_today + $3) ELSE GREATEST(0, $4) END,
 		    xp_date  = $5
 		WHERE id = $6
@@ -2525,7 +2525,8 @@ func (s *PostgresStore) UpsertTopicSpeed(ts *TopicSpeed) error {
 // Batch 1: Quiz 150 XP gate completions.
 
 func (s *PostgresStore) RecordQuizCompletion(studentID string, xpTotal int) error {
-	if _, err := s.db.Exec(`INSERT INTO quiz_completions (student_id, completed_at, xp_total) VALUES ($1, now()::text, $2)`, studentID, xpTotal); err != nil {
+	completedAt := time.Now().UTC().Format(time.RFC3339Nano)
+	if _, err := s.db.Exec(`INSERT INTO quiz_completions (student_id, completed_at, xp_total) VALUES ($1, $2, $3)`, studentID, completedAt, xpTotal); err != nil {
 		return fmt.Errorf("record quiz completion: %w", err)
 	}
 	return nil
@@ -3252,31 +3253,36 @@ const postgresLearningEvents = `
 	WITH events AS (
 		SELECT 'answer' AS kind, CAST(id AS TEXT) AS ref,
 		       EXTRACT(EPOCH FROM timestamp::timestamptz)::bigint AS at,
-		       concept_id, source, correct AS value, 0 AS xp
+		       concept_id, source, correct AS value, 0 AS xp, '' AS reason
 		FROM attempts
 		WHERE student_id = $1 AND timestamp IS NOT NULL AND timestamp <> ''
 		UNION ALL
 		SELECT 'mastery', concept_id, EXTRACT(EPOCH FROM mastered_at::timestamptz)::bigint,
-		       concept_id, '', 0, 0
+		       concept_id, '', 0, 0, ''
 		FROM concept_progress
 		WHERE student_id = $2 AND status = 'MASTERED'
 		  AND mastered_at IS NOT NULL AND mastered_at <> ''
 		UNION ALL
 		SELECT 'quiz', CAST(id AS TEXT), EXTRACT(EPOCH FROM completed_at::timestamptz)::bigint,
-		       '', 'quiz', 0, COALESCE(xp_total, 0)
+		       '', 'quiz', 0, COALESCE(xp_total, 0), ''
 		FROM quiz_completions
 		WHERE student_id = $3
 		UNION ALL
 		SELECT 'diagnostic', 'diagnostic', EXTRACT(EPOCH FROM diagnostic_completed_at::timestamptz)::bigint,
-		       '', 'diagnostic', 0, 0
+		       '', 'diagnostic', 0, 0, ''
 		FROM students
 		WHERE id = $4 AND diagnostic_completed_at IS NOT NULL AND diagnostic_completed_at <> ''
+		UNION ALL
+		SELECT 'xp', event_key, created_at / 1000000000,
+		       '', reason, 0, amount, reason
+		FROM xp_events
+		WHERE student_id = $5 AND amount < 0
 	)
-	SELECT kind, ref, at, concept_id, source, value, xp
+	SELECT kind, ref, at, concept_id, source, value, xp, reason
 	FROM events
 	WHERE at IS NOT NULL
 	ORDER BY at DESC, kind ASC, ref DESC
-	LIMIT $5 OFFSET $6`
+	LIMIT $6 OFFSET $7`
 
 // LearningEventsPage unions the tables that carry dated events. A concept row
 // without mastered_at is a current state, not a dated transition, so it is not
@@ -3297,14 +3303,17 @@ func (s *PostgresStore) LearningEventsPage(studentID string, limit, offset int) 
 			UNION ALL
 			SELECT EXTRACT(EPOCH FROM diagnostic_completed_at::timestamptz)::bigint FROM students
 			WHERE id = $4 AND diagnostic_completed_at IS NOT NULL AND diagnostic_completed_at <> ''
+			UNION ALL
+			SELECT created_at / 1000000000 FROM xp_events
+			WHERE student_id = $5 AND amount < 0
 		)
 		SELECT COUNT(*) FROM events WHERE at IS NOT NULL`,
-		studentID, studentID, studentID, studentID).Scan(&total)
+		studentID, studentID, studentID, studentID, studentID).Scan(&total)
 	if err != nil {
 		return nil, 0, fmt.Errorf("count learning events: %w", err)
 	}
 
-	rows, err := s.db.Query(postgresLearningEvents, studentID, studentID, studentID, studentID, limit, offset)
+	rows, err := s.db.Query(postgresLearningEvents, studentID, studentID, studentID, studentID, studentID, limit, offset)
 	if err != nil {
 		return nil, 0, fmt.Errorf("learning events: %w", err)
 	}
@@ -3315,7 +3324,7 @@ func (s *PostgresStore) LearningEventsPage(studentID string, limit, offset int) 
 		var e LearningEvent
 		var at int64
 		var correct int
-		if err := rows.Scan(&e.Kind, &e.Ref, &at, &e.ConceptID, &e.Source, &correct, &e.XP); err != nil {
+		if err := rows.Scan(&e.Kind, &e.Ref, &at, &e.ConceptID, &e.Source, &correct, &e.XP, &e.Reason); err != nil {
 			return nil, 0, fmt.Errorf("scan learning event: %w", err)
 		}
 		e.At = time.Unix(at, 0).UTC()

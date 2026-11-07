@@ -96,10 +96,12 @@ func (u *Updater) Compute(studentID string) (*Scores, error) {
 		avgSpeed = speedSum / float64(speedCount)
 	}
 
-	// XP earned since last completed quiz drives the quiz gate.
-	xpSinceQuiz := xpTotal
-	if last, err := u.repo.LastQuizCompletion(studentID); err == nil && last != nil {
-		xpSinceQuiz = xpTotal - last.XPTotal
+	// XP earned since last completed quiz drives the quiz gate. Use the same
+	// storage helper as the engine so a negative lifetime balance cannot make
+	// the dashboard and the actual quiz start disagree.
+	xpSinceQuiz, err := storage.XPSinceLastQuiz(u.repo, studentID)
+	if err != nil {
+		xpSinceQuiz = xpTotal
 		if xpSinceQuiz < 0 {
 			xpSinceQuiz = 0
 		}

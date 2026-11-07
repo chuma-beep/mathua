@@ -79,7 +79,7 @@ func TestTimedQuizPerformanceAdjustmentIsAtomicAndReplayable(t *testing.T) {
 	}
 }
 
-func TestTimedQuizAdjustmentUsesActualAppliedAmount(t *testing.T) {
+func TestTimedQuizAdjustmentAppliesFullCalculatedAmount(t *testing.T) {
 	e := testEngine(t)
 	st, err := e.CreateStudent("capped")
 	if err != nil {
@@ -96,18 +96,18 @@ func TestTimedQuizAdjustmentUsesActualAppliedAmount(t *testing.T) {
 			t.Fatalf("answer %d: %v", i, err)
 		}
 	}
-	if last == nil || last.XPAdjustment != -1 {
-		t.Fatalf("last = %+v, want actual -1", last)
+	if last == nil || last.XPAdjustment != -2 {
+		t.Fatalf("last = %+v, want actual -2", last)
 	}
-	if !strings.Contains(last.XPNote, "-1 XP") || last.XPSource != "performance" {
-		t.Fatalf("note/source = %q/%q, want actual -1 from performance", last.XPNote, last.XPSource)
+	if !strings.Contains(last.XPNote, "-2 XP") || last.XPSource != "performance" {
+		t.Fatalf("note/source = %q/%q, want actual -2 from performance", last.XPNote, last.XPSource)
 	}
 	total, _, err := store.GetXP(st.ID)
 	if err != nil {
 		t.Fatalf("get xp: %v", err)
 	}
-	if total != 0 {
-		t.Fatalf("balance = %d, want 0", total)
+	if total != -1 {
+		t.Fatalf("balance = %d, want -1", total)
 	}
 }
 

@@ -105,14 +105,14 @@ func commitReviewSubmissionTx(db *sql.DB, rebind func(string) string, insertAtte
 			today := time.Now().UTC().Format("2006-01-02")
 			if _, err := tx.Exec(rebind(`
 				UPDATE students
-				SET xp_total = CASE WHEN xp_total + ? < 0 THEN 0 ELSE xp_total + ? END,
+				SET xp_total = xp_total + ?,
 				    xp_today = CASE
 				        WHEN xp_date = ? THEN CASE WHEN xp_today + ? < 0 THEN 0 ELSE xp_today + ? END
 				        ELSE CASE WHEN ? < 0 THEN 0 ELSE ? END
 				    END,
 				    xp_date  = ?
 				WHERE id = ?
-			`), c.XPAmount, c.XPAmount, today, c.XPAmount, c.XPAmount, c.XPAmount, c.XPAmount, today, c.StudentID); err != nil {
+			`), c.XPAmount, today, c.XPAmount, c.XPAmount, c.XPAmount, c.XPAmount, today, c.StudentID); err != nil {
 				return ReviewSubmissionOutcome{}, fmt.Errorf("review submission: xp counters: %w", err)
 			}
 		}
