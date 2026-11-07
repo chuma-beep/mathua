@@ -72,7 +72,7 @@ func rationalCountProblem() generator.Problem {
 	}
 	var b strings.Builder
 	b.WriteString("How many of these numbers are rational? ")
-	b.WriteString(strings.Join(parts, " "))
+	b.WriteString(strings.Join(parts, "\n"))
 	b.WriteString(" (enter a number)")
 	return generator.Problem{
 		Question:    b.String(),

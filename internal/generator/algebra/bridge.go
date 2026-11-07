@@ -20,6 +20,22 @@ func algOrdinal(ctx generator.GeneratorContext) int {
 	return 1 + rand.Intn(3)
 }
 
+func ordinal(n int) string {
+	if n%100 >= 11 && n%100 <= 13 {
+		return fmt.Sprintf("%dth", n)
+	}
+	switch n % 10 {
+	case 1:
+		return fmt.Sprintf("%dst", n)
+	case 2:
+		return fmt.Sprintf("%dnd", n)
+	case 3:
+		return fmt.Sprintf("%drd", n)
+	default:
+		return fmt.Sprintf("%dth", n)
+	}
+}
+
 func algProb(o int, q, a, e string) generator.Problem {
 	return generator.Problem{
 		Question:    q,
@@ -201,7 +217,7 @@ func (g *algBridgeGen) Generate(ctx generator.GeneratorContext) generator.Proble
 			for i := 0; i < n; i++ {
 				v *= k
 			}
-			return algProb(o, fmt.Sprintf("What is the %dth root of %d? (enter a number)", n, v), strconv.Itoa(k), fmt.Sprintf("%d^%d = %d, so the root is %d.", k, n, v, k))
+			return algProb(o, fmt.Sprintf("What is the %s root of %d? (enter a number)", ordinal(n), v), strconv.Itoa(k), fmt.Sprintf("%d^%d = %d, so the root is %d.", k, n, v, k))
 		case 2:
 			n := 3 + rand.Intn(3)
 			k := 2 + rand.Intn(3)
@@ -214,7 +230,7 @@ func (g *algBridgeGen) Generate(ctx generator.GeneratorContext) generator.Proble
 			for i := 0; i < m; i++ {
 				pow *= k
 			}
-			return algProb(o, fmt.Sprintf("Rewrite the expression %d^(%d/%d) as a whole number. (enter a number)", v, m, n), strconv.Itoa(pow), fmt.Sprintf("The denominator is the root and the numerator is the power: the %dth root of %d is %d, and %d^%d = %d.", n, v, k, k, m, pow))
+			return algProb(o, fmt.Sprintf("Rewrite the expression %d^(%d/%d) as a whole number. (enter a number)", v, m, n), strconv.Itoa(pow), fmt.Sprintf("The denominator is the root and the numerator is the power: the %s root of %d is %d, and %d^%d = %d.", ordinal(n), v, k, k, m, pow))
 		default:
 			n := 3 + 2*rand.Intn(2)
 			k := 1 + rand.Intn(4)
@@ -222,7 +238,7 @@ func (g *algBridgeGen) Generate(ctx generator.GeneratorContext) generator.Proble
 			for i := 0; i < n; i++ {
 				v *= k
 			}
-			return algProb(o, fmt.Sprintf("What is the %dth root of -%d? (enter a number)", n, v), strconv.Itoa(-k), fmt.Sprintf("An odd root of a negative number is negative, and %d^%d = %d, so the root is -%d.", k, n, v, k))
+			return algProb(o, fmt.Sprintf("What is the %s root of -%d? (enter a number)", ordinal(n), v), strconv.Itoa(-k), fmt.Sprintf("An odd root of a negative number is negative, and %d^%d = %d, so the root is -%d.", k, n, v, k))
 		}
 	case "fundamental_theorem":
 		switch o {

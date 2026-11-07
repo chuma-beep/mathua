@@ -52,7 +52,7 @@ func countGeoVerdicts(lead string, pool []geoVerdict) generator.Problem {
 			}
 			notes[i] = fmt.Sprintf("%s: %s, %s", v.label, verdict, v.note)
 		}
-		question = fmt.Sprintf("%s %s (enter a number)", lead, strings.Join(parts, " "))
+		question = fmt.Sprintf("%s %s (enter a number)", lead, strings.Join(parts, "\n"))
 		if !strings.Contains(question, fmt.Sprintf("%d", count)) {
 			break
 		}

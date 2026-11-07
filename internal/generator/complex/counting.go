@@ -55,7 +55,7 @@ func countComplexVerdicts(lead string, pool []complexVerdict) generator.Problem 
 			}
 			notes[i] = fmt.Sprintf("%s: %s, %s", v.label, verdict, v.note)
 		}
-		q := fmt.Sprintf("%s %s (enter a number)", lead, strings.Join(parts, " "))
+		q := fmt.Sprintf("%s %s (enter a number)", lead, strings.Join(parts, "\n"))
 		if strings.Contains(q, strconv.Itoa(count)) {
 			continue
 		}

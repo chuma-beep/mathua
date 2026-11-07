@@ -160,9 +160,11 @@ func (g *arithBridgeGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		case 1:
 			b := 12 + rand.Intn(18)
 			q := 4 + rand.Intn(20)
-			a := b*q + rand.Intn(b)
+			// Keep the dividend above 100 so "nearest hundred" is meaningful
+			// and the estimate is not rounded down to zero.
+			a := 100 + b*q + rand.Intn(b)
 			b0 := 10 * ((b + 5) / 10)
-			a0 := 10 * ((a + 5) / 10)
+			a0 := 100 * ((a + 50) / 100)
 			if b0 == 0 {
 				b0 = 10
 			}

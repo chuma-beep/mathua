@@ -49,7 +49,7 @@ func countMLVerdicts(lead string, pool []mlVerdict) generator.Problem {
 		for i, v := range chosen {
 			parts = append(parts, fmt.Sprintf("(%c) %s", 'a'+i, v.label))
 		}
-		question = fmt.Sprintf("%s %s (enter a number)", lead, strings.Join(parts, " "))
+		question = fmt.Sprintf("%s %s (enter a number)", lead, strings.Join(parts, "\n"))
 		if !strings.Contains(question, answer) {
 			break
 		}

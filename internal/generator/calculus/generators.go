@@ -2088,6 +2088,20 @@ func (g *weierstrassLimitGen) Generate(ctx generator.GeneratorContext) generator
 
 type seqConceptGen struct{}
 
+func reducedFraction(numerator, denominator int) string {
+	a, b := numerator, denominator
+	for b != 0 {
+		a, b = b, a%b
+	}
+	if a < 0 {
+		a = -a
+	}
+	if a == 0 {
+		return "0"
+	}
+	return fmt.Sprintf("%d/%d", numerator/a, denominator/a)
+}
+
 func (g *seqConceptGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*4)
 	switch rand.Intn(3) {
@@ -2096,11 +2110,11 @@ func (g *seqConceptGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		k := randRange(ctx.Difficulty, 1, 2+scale)
 		terms := make([]string, 3)
 		for i := 1; i <= 3; i++ {
-			terms[i-1] = fmt.Sprintf("%d/%d", i, i+k)
+			terms[i-1] = reducedFraction(i, i+k)
 		}
 		answer := strings.Join(terms, ", ")
 		return generator.Problem{
-			Question:    fmt.Sprintf("For \\(a_{n} = n/(n+%d)\\), write the first 3 terms. (separate with commas)", k),
+			Question:    fmt.Sprintf("For \\(a_{n} = n/(n+%d)\\), write the first 3 terms starting at \\(n=1\\). (separate with commas)", k),
 			Answer:      answer,
 			Explanation: fmt.Sprintf("Substituting \\(n=1,2,3\\) gives \\(%s\\). The terms increase toward 1 as \\(n\\to\\infty\\).", answer),
 		}
