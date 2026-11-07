@@ -25,7 +25,7 @@ import {
   toSubmitError,
   type SubmitError,
 } from '../../components/SubmitErrorBlock'
-import { setUserInfo, getUserInfo } from '../../lib/auth'
+import { ensureGuestId, setUserInfo, getUserInfo } from '../../lib/auth'
 import { concepts as conceptsData } from '../../lib/conceptData'
 import { scopeSize } from '../../lib/diagnosticScope'
 import type { MathFocusHandle } from '@/components/math/MathInput'
@@ -129,10 +129,9 @@ function isStoredDemo(): boolean {
   }
 }
 
-// A guest run is a demo: the server opens a session against a student row
-// created from a typed name, and nothing can sign back into that row. Session
-// storage keeps the fact, so a refresh mid-test still ends on a result that
-// says it will not be here tomorrow.
+// A guest run is saved under the browser's persistent guest id. Signup adopts
+// that same row, so the diagnostic and its attempts survive account creation.
+// The demo flag still means "not yet an account", not "will be discarded".
 const DEMO_KEY = 'mathua_onboard_demo'
 
 export default function OnboardPage() {
@@ -315,7 +314,7 @@ export default function OnboardPage() {
     if (ids.length === 0 || name === '') return
     setLoading(true)
     try {
-      const res = await startGoalDiagnosticName(name, ids)
+      const res = await startGoalDiagnosticName(name, ids, ensureGuestId() ?? undefined)
       if (res.done) {
         toast.error('No diagnostic questions are available for the selected areas. Try selecting more domains.')
         return

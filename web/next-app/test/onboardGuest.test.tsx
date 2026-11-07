@@ -82,7 +82,7 @@ describe('a guest starting the diagnostic', () => {
     await screen.findByText('What should we call you?')
     expect(screen.queryByText(/Something went wrong/)).toBeNull()
     // The copy must not imply the run is saved; that is the whole point of a demo.
-    expect(screen.getByText(/not attached to an account/)).toBeTruthy()
+    expect(screen.getByText(/saved to this browser as a guest/)).toBeTruthy()
   })
 
   it('runs the demo under the name it was given, trimmed', async () => {
@@ -94,7 +94,7 @@ describe('a guest starting the diagnostic', () => {
     fireEvent.click(screen.getByRole('button', { name: /Begin diagnostic/ }))
     await screen.findByText('What should we call you?')
 
-    const run = screen.getByRole('button', { name: /Run the demo/ }) as HTMLButtonElement
+    const run = screen.getByRole('button', { name: /Continue as guest/ }) as HTMLButtonElement
     expect(run.disabled).toBe(true)
 
     fireEvent.change(screen.getByLabelText('Your name'), { target: { value: '  Ada  ' } })
@@ -102,8 +102,9 @@ describe('a guest starting the diagnostic', () => {
     fireEvent.click(run)
 
     await waitFor(() => expect(api.startGoalDiagnosticName).toHaveBeenCalledTimes(1))
-    const [name, ids] = vi.mocked(api.startGoalDiagnosticName).mock.calls[0]
+    const [name, ids, guestID] = vi.mocked(api.startGoalDiagnosticName).mock.calls[0]
     expect(name).toBe('Ada')
+    expect(guestID).toMatch(/^guest_/)
     expect(ids.sort()).toEqual(idsForDomain('arithmetic').sort())
     expect(ids).toHaveLength(scopeSize(idsForDomain('arithmetic')))
   })
@@ -123,13 +124,13 @@ describe('a guest starting the diagnostic', () => {
 describe('a demo result', () => {
   it('says the plan will not survive the session, and offers a real account', () => {
     render(<ResultsStep plan={{} as never} onStartPractice={() => {}} demo />)
-    expect(screen.getByText(/This was a demo run/)).toBeTruthy()
-    const link = screen.getByText(/Sign in to keep a plan/).closest('a')
+    expect(screen.getByText(/This was a guest run/)).toBeTruthy()
+    const link = screen.getByText(/Create an account to keep this plan/).closest('a')
     expect(link?.getAttribute('href')).toBe('/login')
   })
 
   it('says nothing about demos on a signed-in result', () => {
     render(<ResultsStep plan={{} as never} onStartPractice={() => {}} />)
-    expect(screen.queryByText(/This was a demo run/)).toBeNull()
+    expect(screen.queryByText(/This was a guest run/)).toBeNull()
   })
 })

@@ -111,9 +111,8 @@ export function WelcomeStep({
             What should we call you?
           </h1>
           <p className="text-mathua-secondary text-sm mt-3 px-2">
-            You are not signed in, so this run is a demo. Mathua tests you against a temporary
-            profile with this name. Nothing here can be signed into later, and the result is not
-            attached to an account.
+            You are not signed in, so this run is saved to this browser as a guest. Mathua
+            will keep the diagnostic and its answers when you create an account.
           </p>
         </div>
         <div className="border border-mathua-border bg-mathua-surface p-4 sm:p-6">
@@ -131,7 +130,7 @@ export function WelcomeStep({
             className="w-full h-11 px-3 bg-mathua-bg border border-mathua-border text-mathua-primary text-sm rounded-none focus:outline-none focus:border-mathua-blue"
           />
           <p className="text-mathua-muted text-xs mt-2">
-            It only labels the demo. You can sign in later and take the diagnostic on a real account.
+            It labels your guest run. Create an account after the test to keep it across devices.
           </p>
         </div>
         <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center px-2">
@@ -141,7 +140,7 @@ export function WelcomeStep({
             disabled={loading || demoName.trim() === ''}
             className="border border-mathua-blue bg-mathua-blue text-white hover:opacity-90 rounded-none h-12 min-h-[44px] px-6 sm:px-10 font-medium text-sm disabled:opacity-50"
           >
-            {loading ? (<><Loading inline size={13} /> Loading…</>) : 'Run the demo →'}
+            {loading ? (<><Loading inline size={13} /> Loading…</>) : 'Continue as guest →'}
           </button>
           <button
             type="button"
@@ -472,12 +471,12 @@ export function ResultsStep({ plan, onStartPractice, demo }: { plan: GoalPlanRes
       {demo && (
         <div className="mt-4 border border-mathua-border bg-mathua-surface px-4 py-3">
           <p className="text-mathua-secondary text-sm">
-            This was a demo run. The plan below is real, but it is not attached to an account, so
-            it will not be here when this browser session ends.
+            This was a guest run. The plan is saved to this browser, but it is not attached to an
+            account yet. Create an account to keep it across devices.
           </p>
           <p className="mt-2">
             <Link href="/login" className="font-mono text-xs text-mathua-blue hover:underline">
-              Sign in to keep a plan →
+              Create an account to keep this plan →
             </Link>
           </p>
         </div>

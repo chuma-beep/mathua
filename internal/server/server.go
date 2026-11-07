@@ -988,6 +988,10 @@ func (s *Server) handleGoalDiagnosticStart(w http.ResponseWriter, r *http.Reques
 	var req struct {
 		ConceptIDs []string `json:"concept_ids"`
 		Name       string   `json:"name"`
+		// StudentID is the browser's persistent guest identity. It lets a
+		// diagnostic run attach to the same row that signup will adopt instead
+		// of creating an orphan row the client can never claim.
+		StudentID string `json:"student_id"`
 	}
 	if err := decodeJSON(w, r, &req); err != nil {
 		writeError(w, "invalid request", 400)
@@ -997,13 +1001,41 @@ func (s *Server) handleGoalDiagnosticStart(w http.ResponseWriter, r *http.Reques
 		writeError(w, "concept_ids required", 400)
 		return
 	}
-	if studentID == "" && req.Name != "" {
-		trimmed := strings.TrimSpace(req.Name)
-		if trimmed == "" {
-			writeError(w, "name is required for guest diagnostic", 400)
-			return
+	name := strings.TrimSpace(req.Name)
+	if studentID == "" {
+		if guestID := strings.TrimSpace(req.StudentID); guestID != "" {
+			st, err := s.repo.GetStudent(guestID)
+			if err != nil {
+				writeError(w, "failed to look up guest", 500)
+				return
+			}
+			if st == nil {
+				if !strings.HasPrefix(guestID, "guest_") {
+					writeError(w, "unknown guest, sign up for a new account", 403)
+					return
+				}
+				if _, err := s.repo.ClaimGuestStudent(guestID, name); err != nil {
+					writeError(w, "failed to claim guest", 500)
+					return
+				}
+			} else {
+				if st.PasswordHash != "" || strings.TrimSpace(st.Email) != "" {
+					writeError(w, "account already registered, log in instead", 403)
+					return
+				}
+				if ids, err := s.repo.ListIdentities(guestID); err != nil {
+					writeError(w, "failed to look up guest", 500)
+					return
+				} else if len(ids) > 0 {
+					writeError(w, "account already registered, log in instead", 403)
+					return
+				}
+			}
+			studentID = guestID
 		}
-		st, err := s.eng.CreateStudent(trimmed)
+	}
+	if studentID == "" && name != "" {
+		st, err := s.eng.CreateStudent(name)
 		if err != nil {
 			writeError(w, "failed to create student", 500)
 			return
@@ -1011,7 +1043,7 @@ func (s *Server) handleGoalDiagnosticStart(w http.ResponseWriter, r *http.Reques
 		studentID = st.ID
 	}
 	if studentID == "" {
-		writeError(w, "not authenticated: provide Authorization Bearer token or name", 401)
+		writeError(w, "not authenticated: provide Authorization Bearer token, guest id or name", 401)
 		return
 	}
 	session, question, err := s.eng.StartGoalDiagnostic(studentID, req.ConceptIDs)

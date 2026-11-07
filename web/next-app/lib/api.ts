@@ -703,11 +703,11 @@ export async function startGoalDiagnostic(conceptIds: string[]): Promise<GoalDia
 	return res.json()
 }
 
-export async function startGoalDiagnosticName(name: string, conceptIds: string[]): Promise<GoalDiagStartRes> {
+export async function startGoalDiagnosticName(name: string, conceptIds: string[], studentId?: string): Promise<GoalDiagStartRes> {
 	const res = await authedFetch(`${API_BASE}/api/goal/diagnostic`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ name, concept_ids: conceptIds }),
+		body: JSON.stringify({ name, concept_ids: conceptIds, student_id: studentId ?? '' }),
 	})
 	if (!res.ok) await throwWithResponse(res, `Goal diagnostic start failed: ${res.status}`)
 	return res.json()
