@@ -781,7 +781,7 @@ func (s *SQLiteStore) AwardXP(studentID string, amount int, reason, eventKey str
 	if _, err := tx.Exec(`
 		UPDATE students
 		SET xp_total = xp_total + ?,
-		    xp_today = CASE WHEN xp_date = ? THEN MAX(0, xp_today + ?) ELSE MAX(0, ?) END,
+		    xp_today = CASE WHEN xp_date = ? THEN xp_today + ? ELSE ? END,
 		    xp_date  = ?
 		WHERE id = ?
 	`, amount, today, amount, amount, today, studentID); err != nil {

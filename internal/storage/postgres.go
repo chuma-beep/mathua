@@ -1303,7 +1303,7 @@ func (s *PostgresStore) AwardXP(studentID string, amount int, reason, eventKey s
 	if _, err := tx.Exec(`
 		UPDATE students
 		SET xp_total = xp_total + $1,
-		    xp_today = CASE WHEN xp_date = $2 THEN GREATEST(0, xp_today + $3) ELSE GREATEST(0, $4) END,
+		    xp_today = CASE WHEN xp_date = $2 THEN xp_today + $3 ELSE $4 END,
 		    xp_date  = $5
 		WHERE id = $6
 	`, amount, today, amount, amount, today, studentID); err != nil {

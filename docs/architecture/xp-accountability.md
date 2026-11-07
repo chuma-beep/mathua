@@ -124,7 +124,7 @@ Never present a calculated deduction as an actual XP loss.
 2. Effort accountability does not require task completion.
 3. Performance and effort are independent decisions.
 4. The ledger is the authoritative source of actual XP movements.
-5. Lifetime XP may be negative; daily XP remains non-negative.
+5. Lifetime XP and daily net XP may both be negative.
 6. Replaying a submission cannot apply another adjustment.
 7. Learner-facing explanations must match actual ledger movements.
 

@@ -5,6 +5,43 @@ import (
 	"time"
 )
 
+func TestDailyNetIsSigned(t *testing.T) {
+	store := newTestStore(t)
+	es, ok := store.(EffortStore)
+	if !ok {
+		t.Fatal("test store does not implement EffortStore")
+	}
+	st := seedStudent(t, store)
+	if err := store.AwardXP(st.ID, 12, "seed", "seed:twelve"); err != nil {
+		t.Fatalf("seed: %v", err)
+	}
+	if _, err := es.ApplyXPAdjustment(st.ID, -5, "accountability:poor_performance", "accountability:practice:net"); err != nil {
+		t.Fatalf("adjustment: %v", err)
+	}
+	total, today, err := store.GetXP(st.ID)
+	if err != nil {
+		t.Fatalf("get xp: %v", err)
+	}
+	if total != 7 || today != 7 {
+		t.Fatalf("12 - 5 = total %d, today %d; want 7 and 7", total, today)
+	}
+
+	second := seedStudent(t, store)
+	if err := store.AwardXP(second.ID, 2, "seed", "seed:two"); err != nil {
+		t.Fatalf("second seed: %v", err)
+	}
+	if _, err := es.ApplyXPAdjustment(second.ID, -5, "accountability:extremely_poor_performance", "accountability:practice:negative"); err != nil {
+		t.Fatalf("negative adjustment: %v", err)
+	}
+	total, today, err = store.GetXP(second.ID)
+	if err != nil {
+		t.Fatalf("get second xp: %v", err)
+	}
+	if total != -3 || today != -3 {
+		t.Fatalf("2 - 5 = total %d, today %d; want -3 and -3", total, today)
+	}
+}
+
 func TestApplyXPAdjustmentAppliesFullAmountBelowZero(t *testing.T) {
 	store := newTestStore(t)
 	es, ok := store.(EffortStore)
@@ -23,8 +60,8 @@ func TestApplyXPAdjustmentAppliesFullAmountBelowZero(t *testing.T) {
 	if err != nil {
 		t.Fatalf("get xp: %v", err)
 	}
-	if total != -1 || today != 0 {
-		t.Fatalf("balance = %d today = %d, want -1 and 0", total, today)
+	if total != -1 || today != -1 {
+		t.Fatalf("balance = %d today = %d, want -1 and -1", total, today)
 	}
 }
 

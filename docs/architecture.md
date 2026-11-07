@@ -42,7 +42,7 @@ The image build verifies the installation, so grading is available in production
 
 ### Storage, SQLite and Postgres
 
-SQLite for local development (`mathua.db`, `WAL` `storage/sqlite.go:26`). PostgreSQL for production web access via `DATABASE_URL=postgres://` (`internal/storage/postgres.go:21` `PostgresStore` via `pgx/v5/stdlib`, `pgSchema` `postgres.go:21`, `GREATEST` for the daily XP floor, `STRING_AGG` for activity). `cmd/mathua` checks `DATABASE_URL` and opens `pgx` when `postgres://` is set, otherwise SQLite. The data schema is identical across both databases, abstracted behind a `Repository` interface (`internal/storage/store.go`).
+SQLite for local development (`mathua.db`, `WAL` `storage/sqlite.go:26`). PostgreSQL for production web access via `DATABASE_URL=postgres://` (`internal/storage/postgres.go:21` `PostgresStore` via `pgx/v5/stdlib`, `pgSchema` `postgres.go:21`, `STRING_AGG` for activity). `cmd/mathua` checks `DATABASE_URL` and opens `pgx` when `postgres://` is set, otherwise SQLite. The data schema is identical across both databases, abstracted behind a `Repository` interface (`internal/storage/store.go`).
 
 ## Administration
 

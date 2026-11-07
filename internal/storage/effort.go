@@ -245,13 +245,10 @@ func applyXPAdjustmentInTx(tx *sql.Tx, rebind func(string) string, forUpdate str
 	if _, err := tx.Exec(rebind(`
 		UPDATE students
 		SET xp_total = xp_total + ?,
-		    xp_today = CASE
-		        WHEN xp_date = ? THEN (CASE WHEN xp_today + ? < 0 THEN 0 ELSE xp_today + ? END)
-		        ELSE (CASE WHEN ? < 0 THEN 0 ELSE ? END)
-		    END,
+		    xp_today = CASE WHEN xp_date = ? THEN xp_today + ? ELSE ? END,
 		    xp_date = ?
 		WHERE id = ?
-	`), applied, todayStr, applied, applied, applied, applied, todayStr, studentID); err != nil {
+	`), applied, todayStr, applied, applied, todayStr, studentID); err != nil {
 		return 0, fmt.Errorf("xp adjustment: update counters: %w", err)
 	}
 	return applied, nil

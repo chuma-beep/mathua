@@ -79,7 +79,7 @@ Eighteen tables. The five that carry the learning loop are `students`, `concept_
 | `password_hash` | TEXT | bcrypt hash |
 | `course_id` | TEXT | Active course filter |
 | `xp_total` | INTEGER | Lifetime XP, signed; negative balances are valid |
-| `xp_today` | INTEGER | Resets via `xp_date` check (`MAX(0, …)`) |
+| `xp_today` | INTEGER | Signed daily net XP; resets via `xp_date` check |
 | `xp_date` | TEXT | Date of `xp_today` bucket (`YYYY-MM-DD`) |
 | `daily_xp_goal` | INTEGER | Daily goal (default 30, `xp.DefaultDailyGoal`; migrated from legacy 150 via versioned backfill `sqlite.go`) |
 | `settings` | TEXT (JSON) | Arbitrary key-value settings (`pause_until`, `accommodations.extra_time`) |
@@ -169,7 +169,7 @@ Migrations are embedded directly in the application binary  --  no external migr
 The `Repository` interface abstracts the storage layer (`store.go:127`):
 
 - **SQLiteStore**  --  Fully implemented (`sqlite.go:1`, `WAL` `migrate.go:23`), used for local dev and `DATABASE_URL=sqlite:mathua.db` / `:memory:` tests
-- **PostgresStore**  --  Fully implemented via `pgx/v5/stdlib` (`postgres.go:21` `pgSchema`, `$1` placeholders, `GREATEST` for the daily XP floor, `STRING_AGG` for activity, `RANDOM()` for questions), used when `DATABASE_URL=postgres://` `main.go:69`
+- **PostgresStore**  --  Fully implemented via `pgx/v5/stdlib` (`postgres.go:21` `pgSchema`, `$1` placeholders, `STRING_AGG` for activity, `RANDOM()` for questions), used when `DATABASE_URL=postgres://` `main.go:69`
 
 The codebase checks `DATABASE_URL` at startup and opens `pgx` for `postgres://` else `SQLite` (`mathua.db`).
 

@@ -66,7 +66,7 @@ export default function ProfileHeader({
             {name} · LV {levelNum} {scores.level}
           </p>
           <p className="mt-1.5 font-mono text-[11px] text-mathua-secondary break-words [overflow-wrap:anywhere]">
-            {counts.mastered} of {counts.unlocked} you can reach · {scores.xp_total.toLocaleString()} XP all-time · {scores.xp_today}/{scores.daily_xp_goal} XP today · {scores.current_streak} day{scores.current_streak !== 1 ? 's' : ''} streak
+            {counts.mastered} of {counts.unlocked} you can reach · {scores.xp_total.toLocaleString()} XP all-time · {scores.xp_today}/{scores.daily_xp_goal} XP today (net) · {scores.current_streak} day{scores.current_streak !== 1 ? 's' : ''} streak
           </p>
           <p className="mt-1.5 font-mono text-[11px] text-mathua-muted break-words [overflow-wrap:anywhere]">
             Mastered {counts.mastered} · Unlocked {counts.unlocked} · In progress {counts.learning + counts.completed}

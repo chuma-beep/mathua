@@ -29,7 +29,7 @@ export const LEVEL_NAMES = {
 
 export default function ProfileStats({ name, scores, avatarSeed, avatarUrl, avatarPreset, bare, hideMastered }: Props) {
   const xpPct = scores.daily_xp_goal > 0
-    ? Math.min(100, Math.round((scores.xp_today / scores.daily_xp_goal) * 100))
+    ? Math.max(0, Math.min(100, Math.round((scores.xp_today / scores.daily_xp_goal) * 100)))
     : 0
   const levelNum = LEVEL_NAMES[scores.level] ?? '·'
 
@@ -59,7 +59,7 @@ export default function ProfileStats({ name, scores, avatarSeed, avatarUrl, avat
 
         <div className="flex flex-wrap gap-x-6 gap-y-3 mt-2.5">
           <div className="min-w-0">
-            <div className="font-mono text-[11px] text-mathua-muted">XP TODAY</div>
+            <div className="font-mono text-[11px] text-mathua-muted">XP TODAY (NET)</div>
             <div className="font-mono text-[16px] text-mathua-primary">
               {scores.xp_today}
               <span className="font-mono text-[11px] text-mathua-muted"> / {scores.daily_xp_goal}</span>

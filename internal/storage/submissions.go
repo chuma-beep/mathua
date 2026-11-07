@@ -156,13 +156,10 @@ func commitStudySubmissionTx(db *sql.DB, rebind func(string) string, forUpdate s
 			if _, err := tx.Exec(rebind(`
 				UPDATE students
 				SET xp_total = xp_total + ?,
-				    xp_today = CASE
-				        WHEN xp_date = ? THEN CASE WHEN xp_today + ? < 0 THEN 0 ELSE xp_today + ? END
-				        ELSE CASE WHEN ? < 0 THEN 0 ELSE ? END
-				    END,
+				    xp_today = CASE WHEN xp_date = ? THEN xp_today + ? ELSE ? END,
 				    xp_date  = ?
 				WHERE id = ?
-			`), c.XPAmount, today, c.XPAmount, c.XPAmount, c.XPAmount, c.XPAmount, today, c.StudentID); err != nil {
+			`), c.XPAmount, today, c.XPAmount, c.XPAmount, today, c.StudentID); err != nil {
 				return StudySubmissionOutcome{}, fmt.Errorf("study submission: xp counters: %w", err)
 			}
 		}
