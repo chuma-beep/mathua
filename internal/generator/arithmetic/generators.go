@@ -95,12 +95,14 @@ func (g *addGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a := rand.Intn(min(diffA, scale*10)) + g.minA
 	b := rand.Intn(min(diffB, scale*10)) + g.minB
 	if g.ensureCarry {
-		a = rand.Intn(90) + 10
+		// A carry needs a non-zero ones digit in both addends. The old draw
+		// allowed onesA to be zero and only kept onesB when it happened to be
+		// a digit, so about half the "carry" problems had no carry at all:
+		// 63 + 30 was reported from this branch.
+		a = (rand.Intn(9)+1)*10 + rand.Intn(9) + 1
 		onesA := a % 10
-		onesB := 10 - onesA + rand.Intn(9)
-		if onesB <= 9 {
-			b = (b/10)*10 + onesB
-		}
+		onesB := 10 - onesA + rand.Intn(onesA)
+		b = (rand.Intn(9)+1)*10 + onesB
 	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("\\(%d + %d = ?\\)", a, b),
@@ -536,8 +538,21 @@ type gcfGen struct{}
 
 func (g *gcfGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	a := rand.Intn(max(10, scale*10)) + 10
-	b := rand.Intn(max(10, scale*10)) + 10
+	upper := max(20, scale*10)
+	a := rand.Intn(upper-9) + 10
+	b := rand.Intn(upper-9) + 10
+	// Reported 434 and 435: uniform draws landed on pairs of primes (25 and 19,
+	// 22 and 17) twice in a row, so the answer was 1 and the learner was not
+	// finding a factor at all. Retry until the pair shares one and is not the
+	// same number twice.
+	for tries := 0; tries < 100 && (a == b || mathutil.GCD(a, b) == 1); tries++ {
+		a = rand.Intn(upper-9) + 10
+		b = rand.Intn(upper-9) + 10
+	}
+	if a == b || mathutil.GCD(a, b) == 1 {
+		// Unreachable with the retry above; keep the invariant anyway.
+		b = 2 * a
+	}
 	result := mathutil.GCD(a, b)
 	return generator.Problem{
 		Question:    fmt.Sprintf("Find the GCF of %d and %d.", a, b),
@@ -829,7 +844,9 @@ func (g *orderOpsGen) Generate(ctx generator.GeneratorContext) generator.Problem
 	}
 	a := rand.Intn(scale*2) + 1
 	b := rand.Intn(scale*2) + 1
-	c := rand.Intn(max(1, scale)) + 1
+	// A multiplier of 1 makes the multiplication disappear: "2 + (1)^3 x 1"
+	// and "(1 + 1) x 1" were both reported. Start at 2.
+	c := rand.Intn(max(2, scale+1)) + 2
 	var q string
 	var result int
 	// e and shape are hoisted so one authored schema can cover all three
@@ -842,11 +859,19 @@ func (g *orderOpsGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		result = a + b*c
 	} else if g.parens && !g.exponents {
 		shape = "brackets"
+		// (1 + 1) x 1 was reported as a primitive question repeated for a
+		// whole mastery set; keep both addends above 1 so the parentheses do
+		// real work.
+		a = rand.Intn(scale*2) + 2
+		b = rand.Intn(scale*2) + 2
 		q = fmt.Sprintf("(%d + %d) \\times %d", a, b, c)
 		result = (a + b) * c
 	} else {
 		shape = "nested"
 		e = rand.Intn(3) + 2
+		// Both the base and the multiplier were allowed to be 1, so the
+		// exponent and the multiplication both did nothing: 2 + (1)^3 x 1.
+		b = rand.Intn(max(1, scale)) + 2
 		q = fmt.Sprintf("%d + (%d)^%d \\times %d", a, b, e, c)
 		result = a + mathutil.IntPow(b, e)*c
 	}

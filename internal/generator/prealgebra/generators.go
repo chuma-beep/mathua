@@ -524,10 +524,13 @@ type negOrderOpsGen struct{}
 
 func (g *negOrderOpsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	scale := int(1 + ctx.Difficulty*5)
-	a := rand.Intn(scale*2) - 4
+	// The leading term was drawn from a range that included zero, and a run of
+	// "0 + (-3) x 3" questions was reported. A signed-arithmetic problem should
+	// start with a signed number, so keep the first addend negative.
+	a := -(rand.Intn(scale*2) + 1)
 	b := rand.Intn(scale*2) - 4
 	if b == 0 {
-		b = 1
+		b = -1
 	}
 	c := rand.Intn(5) + 2
 	result := a + b*c
@@ -624,21 +627,17 @@ func ratioGCD(a, b int) int {
 type ratioSimplifyGen struct{}
 
 func (g *ratioSimplifyGen) AnswerFormat() generator.AnswerFormat {
-	return generator.AnswerFormat{Hint: "Ratio as a:b, e.g. 4:7", InputMode: "text"}
+	return generator.AnswerFormat{Hint: "Ratio as a:b or a/b, e.g. 4:7", InputMode: "text"}
 }
 
 func (g *ratioSimplifyGen) Grade(expected, userAnswer string) grader.Result {
-	eParts := strings.SplitN(expected, ":", 2)
-	aParts := strings.SplitN(userAnswer, ":", 2)
-	if len(eParts) != 2 || len(aParts) != 2 {
-		return grader.Result{Correct: false, Score: 0, Feedback: "Invalid ratio format (use a:b)"}
-	}
-	e1, err1 := strconv.Atoi(strings.TrimSpace(eParts[0]))
-	e2, err2 := strconv.Atoi(strings.TrimSpace(eParts[1]))
-	a1, err3 := strconv.Atoi(strings.TrimSpace(aParts[0]))
-	a2, err4 := strconv.Atoi(strings.TrimSpace(aParts[1]))
-	if err1 != nil || err2 != nil || err3 != nil || err4 != nil {
-		return grader.Result{Correct: false, Score: 0, Feedback: "Invalid ratio format"}
+	// Report 439 answered 2/7 for 2:7 and was told the format was invalid. The
+	// concept generator already accepts the three forms a learner writes, and
+	// this one has to as well.
+	e1, e2, eOK := normaliseRatio(expected)
+	a1, a2, aOK := normaliseRatio(userAnswer)
+	if !eOK || !aOK {
+		return grader.Result{Correct: false, Score: 0, Feedback: "Enter the ratio as a:b or a/b"}
 	}
 	if e1 == a1 && e2 == a2 {
 		return grader.Result{Correct: true, Score: 1}
