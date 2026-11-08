@@ -54,6 +54,7 @@ validate:
 	python3 scripts/audit_lessons.py
 	python3 scripts/audit_solutions.py
 	python3 scripts/counts.py --check
+	python3 scripts/check_additive.py
 	python3 scripts/check_docs.py
 	python3 scripts/check_ste.py
 	node web/next-app/scripts/build-docs.mjs --check

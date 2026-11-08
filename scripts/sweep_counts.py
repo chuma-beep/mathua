@@ -71,12 +71,9 @@ os.chdir(ROOT)
 
 # Files another writer has uncommitted edits in. They are staged as blobs built from HEAD so their
 # working trees stay untouched; drop a path from this list once the tree is clean again.
-BLOB_ONLY = (
-    "README.md",
-    "docs/architecture.md",
-    "docs/system-design.md",
-    "docs/system-design-slides.md",
-)
+# The list is empty: the four files once named here are clean, and a stale entry makes the docs
+# bundle read HEAD while the working tree holds the newer text.
+BLOB_ONLY = ()
 
 # Files that counts.py already renders in full (badge, prose, domain table, command comments).
 # They are rewritten by calling that renderer rather than by patterns: a pattern that patched only
@@ -171,6 +168,66 @@ def facts() -> dict:
     }
 
 
+def update_target_table(text: str, f: dict) -> str:
+    """Rewrite section 5.5's Now and Add columns from the corpus, keeping Target.
+
+    Target is the document's decision, so this function never invents one. Now is read from
+    `f["by_domain"]`, Add is Target - Now, and the sentence above the table is the sum of Add.
+    A row whose target has fallen below the corpus is an error: the table has no negative Add
+    shape, and silently clamping it would hide a target that is already overshot.
+    """
+    lines = text.split("\n")
+    header = "| Domain | Tier | Now | Target | Add |"
+    start = next((i for i, line in enumerate(lines) if line.strip() == header), -1)
+    if start < 0:
+        raise SystemExit("docs/content-expansion.md: the section 5.5 target table is gone")
+
+    row_re = re.compile(
+        r"^\|\s*(\w+)\s*\|\s*(\w+)\s*\|\s*(\d+)\s*\|\s*(\d+)\s*\|\s*\+(\d+)\s*\|\s*$"
+    )
+    seen: set[str] = set()
+    remaining = 0
+    i = start + 2
+    while i < len(lines):
+        m = row_re.match(lines[i])
+        if not m:
+            break
+        domain, tier, _now, target = m.group(1), m.group(2), int(m.group(3)), int(m.group(4))
+        if domain in seen:
+            raise SystemExit(f"docs/content-expansion.md: duplicate target row for {domain}")
+        if domain not in f["by_domain"]:
+            raise SystemExit(
+                f"docs/content-expansion.md: target row {domain} is not a corpus domain"
+            )
+        now = f["by_domain"][domain][0]
+        add = target - now
+        if add < 0:
+            raise SystemExit(
+                f"docs/content-expansion.md: {domain} target {target} is below the corpus {now}"
+            )
+        lines[i] = f"| {domain} | {tier} | {now} | {target} | +{add} |"
+        seen.add(domain)
+        remaining += add
+        i += 1
+
+    missing = sorted(set(f["by_domain"]) - seen)
+    if missing:
+        raise SystemExit(
+            "docs/content-expansion.md: no target row for " + ", ".join(missing)
+        )
+    if not seen:
+        raise SystemExit("docs/content-expansion.md: the target table has no rows")
+
+    out = "\n".join(lines)
+    claim = re.compile(r"The remaining per-domain targets add up to (\d[\d,]*)")
+    out, n = claim.subn(f"The remaining per-domain targets add up to {remaining},", out, count=1)
+    if n != 1:
+        raise SystemExit(
+            "docs/content-expansion.md: the sentence above the target table no longer states the remainder"
+        )
+    return out
+
+
 def rules(f: dict) -> list:
     """(path, pattern, replacement, minimum matches[, region]), a pattern that matches nothing is an
     error rather than a silent no-op, and a region restricts the rule to one part of a file.
@@ -239,36 +296,29 @@ def rules(f: dict) -> list:
         # the domains that are mostly recognition.
         *[("docs/content-expansion.md", rf"\| {d} \| \d+ \| \d+ \|",
            f"| {d} | {f['by_domain'][d][0]} | {f['by_domain'][d][2]} |", 1, ("### 4.2", "## 5."))
-          for d in ("abstract_algebra", "topology", "differential_equations", "machine_learning",
-                    "discrete_math", "number_theory", "complex_numbers")],
-        # The two Go tests that pin a size rather than reading it. The patterns name each site,
-        # because a bare \d{3,4} also matches the `064` in this file's temp-file mode.
-        ("internal/concepts/concepts_test.go", r"if d\.Count\(\) != \d{3,4} \{",
-         f"if d.Count() != {f['concepts']} {{", 1),
-        ("internal/concepts/concepts_test.go", r't\.Errorf\("expected \d{3,4} concepts, got %d", d\.Count\(\)\)',
-         f't.Errorf("expected {f["concepts"]} concepts, got %d", d.Count())', 1),
-        ("internal/concepts/concepts_test.go", r"if len\(d\.Order\(\)\) != \d{3,4} \{",
-         f"if len(d.Order()) != {f['concepts']} {{", 1),
-        ("internal/concepts/concepts_test.go",
-         r't\.Errorf\("expected \d{3,4} in topo order, got %d", len\(d\.Order\(\)\)\)',
-         f't.Errorf("expected {f["concepts"]} in topo order, got %d", len(d.Order()))', 1),
+          for d in ("abstract_algebra", "topology", "real_analysis", "trigonometry",
+                    "probability_theory")],
+        # `internal/concepts/concepts_test.go` used to pin exact counts. It now asserts a floor
+        # (`Count() < 1000`) and self-consistency (`len(Order()) == Count()`), so there is no
+        # literal left to rewrite. A rule that matches nothing is an error, and the test's own
+        # comment records why an exact literal must not come back.
         # `internal/planning/planner_test.go` used to pin the course count with a literal. It now
         # reads `data/courses.json` and compares against the number it finds there, so there is no
         # site left to rewrite in this batch; a rule that matches nothing is an error, and the
         # test's own comment records why the literal must not come back.
         # The app copy a learner reads, and the test that guards it.
-        ("web/next-app/app/how-it-works/sections.tsx", r"contains \d{3,4} concepts",
-         f"contains {f['concepts']} concepts", 1),
-        ("web/next-app/app/how-it-works/sections.tsx", r"assessment of \d{3,4} concepts would require up to \d{3,4} questions",
-         f"assessment of {f['concepts']} concepts would require up to {f['concepts']} questions", 1),
+        # `web/next-app/app/how-it-works/sections.tsx` used to state the count as a literal. It now
+        # renders `{CONCEPT_COUNT}`, which is read from the corpus at build time, so there is no
+        # literal to rewrite; a rule that matches nothing is an error, so none is kept.
         ("web/next-app/app/layout.tsx", r"Mastery-gated, \d{3,4} concepts",
          f"Mastery-gated, {f['concepts']} concepts", 1),
-        ("web/next-app/app/layout.tsx", r"Open-source, \d{3,4} concepts, spaced repetition, 50 XP mastery checks",
-         f"Open-source, {f['concepts']} concepts, spaced repetition, 50 XP mastery checks", 1),
+        ("web/next-app/app/layout.tsx", r"Open-source, \d{3,4} concepts, spaced repetition, mastery checks",
+         f"Open-source, {f['concepts']} concepts, spaced repetition, mastery checks", 1),
         ("web/next-app/app/layout.tsx", r"Open-source, \d{3,4} concepts, spaced repetition\.",
          f"Open-source, {f['concepts']} concepts, spaced repetition.", 1),
-        ("web/next-app/test/copyTruth.test.ts", r"the graph holds \d{3,4}",
-         f"the graph holds {f['concepts']}", 1),
+        # `web/next-app/test/copyTruth.test.ts` intentionally holds a superseded count as a
+        # fixture ("a superseded concept count; the graph holds 1250"). Rewriting it would
+        # destroy the test's subject, so the rule is gone; the test owns no current claim.
     ]
 
 
@@ -363,6 +413,8 @@ def main() -> int:
             text, n = replace(text, pattern, repl, at_least, region)
             if n < at_least:
                 raise SystemExit(f"{path}: /{pattern}/ matched {n} times, expected at least {at_least}")
+        if path == "docs/content-expansion.md":
+            text = update_target_table(text, f)
         if path in RENDERED:
             text = counts_render(text)
         here = sum(1 for a, b in zip(original.split("\n"), text.split("\n")) if a != b)
@@ -397,6 +449,7 @@ def main() -> int:
     print("\nverifying:")
     failures = []
     for cmd in (["python3", "scripts/check_docs.py"], ["python3", "scripts/counts.py", "--check"],
+                ["python3", "scripts/check_additive.py"],
                 ["python3", "scripts/audit_lessons.py"], ["go", "run", "scripts/validate_graph.go"],
                 ["go", "run", "./cmd/validate-mastery-units"]):
         r = subprocess.run(cmd, capture_output=True, text=True)

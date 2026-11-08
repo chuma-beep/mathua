@@ -22,7 +22,7 @@ _Avoid_: dashboard alone, account page, a separate progress page (there isn't on
 **History**, Every question the learner has answered (`web/next-app/app/history/page.tsx:1`), rendered by `AttemptList` (shared with the public token-based share report at `/share`). Defaults to the `Missed` filter; filterable by source; paginated. Was `/progress-card`, and the sidebar entry was called `Progress` while resolving here, a label pointing at a mistake log. Both are fixed: the rail reads `History` and the report lives on `/profile`.  
 _Avoid_: progress, progress card, transcript (fine in prose, not in a route)
 
-**Diagnostic (frontier)**, Adaptive CAT finding knowledge frontier (`internal/diagnostic/cat.go:1`, `improve.md:27` 30–45 min, covering set + info-gain). Entry: `/onboard` welcome (`onboard/page.tsx:56`), CTA on `Profile` (`profile:209`) labeled `Recommended` vs `Retake` (`profile:209`).  
+**Diagnostic (frontier)**, Adaptive CAT finding knowledge frontier (`internal/diagnostic/cat.go:1`, `improve.md:27` 30–45 min, covering set + info-gain). Entry: `/onboard` welcome (`web/next-app/app/onboard/page.tsx:605`), CTA on `Profile` (`profile:209`) labeled `Recommended` vs `Retake` (`profile:209`).
 _Avoid_: test, assessment, quiz (reserved)
 
 **Seam**, Public boundary to test at (the `tdd` skill's term: the narrowest interface that makes the behavior observable). Pre-agreed seams for next bite: `Learn → SubmitStudyAnswer` (`POST /api/study/answer` `server.go:484` → `submitAnswerWithTask` `engine.go:1733`).

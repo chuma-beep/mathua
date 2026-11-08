@@ -227,8 +227,8 @@ lesson which has outgrown the threshold, the drift this document has now recorde
 
 ### 4.4 Ingestion dropped figures and kept their captions
 
-`docs/lesson-media.md` is the owner of this measurement, and it reports 141 paragraphs across
-42 lessons that read as a caption whose image was dropped: 49 `certain`, 33 `strong` and 59 likely.
+`docs/lesson-media.md` is the owner of this measurement, and it reports 139 paragraphs across
+42 lessons that read as a caption whose image was dropped: 49 `certain`, 33 `strong` and 57 likely.
 The `certain` tier, captions that open with an auto-numbered `Figure 3.2` label, which the ingestion
 pipeline emits for a figure and which survives when the image does not, had been emptied by
 reclaiming every case, and the Precalculus 2e trigonometry re-ingest of 2026-10-17 restored 49 of
@@ -404,35 +404,52 @@ because the change this section prepares for is the one that would have tripped 
 
 ### 5.5 The concept target, and where it goes
 
-The catalog holds 1500 concepts. The remaining per-domain targets add up to 0, and this is the table
-that says where: the 1,500-concept milestone is complete. `Now` is read from the corpus; `Target` is the decision. The rows keep the order step 6 of
-section 6 used, largest deficit first.
+The catalog holds 1500 concepts. The remaining per-domain targets add up to 500, and this is the
+table that says where: the 2,000-concept target agreed on 2026-11-08. `Now` is read from the corpus;
+`Target` is the decision. The rows keep the order step 6 of section 6 used, largest deficit first.
 
 | Domain | Tier | Now | Target | Add |
 |---|---|---:|---:|---:|
-| numerical_analysis | university | 49 | 49 | +0 |
-| probability_theory | university | 63 | 63 | +0 |
-| graph_theory | university | 50 | 50 | +0 |
-| arithmetic | school | 72 | 72 | +0 |
-| geometry | school | 70 | 70 | +0 |
-| fractions | school | 52 | 52 | +0 |
-| discrete_math | university | 64 | 64 | +0 |
-| complex_numbers | university | 51 | 51 | +0 |
-| prealgebra | school | 71 | 71 | +0 |
-| abstract_algebra | university | 56 | 56 | +0 |
-| machine_learning | university | 55 | 55 | +0 |
-| topology | university | 52 | 52 | +0 |
-| linear_algebra | university | 59 | 59 | +0 |
-| statistics | bridge | 73 | 73 | +0 |
-| number_theory | university | 51 | 51 | +0 |
-| differential_equations | university | 46 | 46 | +0 |
-| precalculus | bridge | 58 | 58 | +0 |
-| real_analysis | university | 65 | 65 | +0 |
-| calc1 | bridge | 84 | 84 | +0 |
-| calc2 | bridge | 71 | 71 | +0 |
-| calc3 | bridge | 71 | 71 | +0 |
-| algebra | school | 139 | 139 | +0 |
-| trigonometry | school | 78 | 78 | +0 |
+| algebra | school | 139 | 171 | +32 |
+| calc1 | bridge | 84 | 114 | +30 |
+| calc2 | bridge | 71 | 97 | +26 |
+| calc3 | bridge | 71 | 97 | +26 |
+| statistics | bridge | 73 | 98 | +25 |
+| real_analysis | university | 65 | 89 | +24 |
+| discrete_math | university | 64 | 87 | +23 |
+| precalculus | bridge | 58 | 81 | +23 |
+| probability_theory | university | 63 | 85 | +22 |
+| linear_algebra | university | 59 | 80 | +21 |
+| abstract_algebra | university | 56 | 76 | +20 |
+| machine_learning | university | 55 | 75 | +20 |
+| number_theory | university | 51 | 71 | +20 |
+| topology | university | 52 | 72 | +20 |
+| complex_numbers | university | 51 | 71 | +20 |
+| graph_theory | university | 50 | 70 | +20 |
+| numerical_analysis | university | 49 | 69 | +20 |
+| differential_equations | university | 46 | 66 | +20 |
+| trigonometry | school | 78 | 98 | +20 |
+| arithmetic | school | 72 | 90 | +18 |
+| prealgebra | school | 71 | 89 | +18 |
+| geometry | school | 70 | 87 | +17 |
+| fractions | school | 52 | 67 | +15 |
+
+**The 2,000-concept target.** The 500 new concepts split by tier as school 482 to 602 (+120,
+24.9%), bridge 357 to 487 (+130, 36.4%) and university 661 to 911 (+250, 37.8%). University
+mathematics receives the largest share; school mathematics grows most conservatively.
+
+Wave 1 is a mandatory 50-concept pilot: algebra +14, numerical_analysis +20 and calc1 +16. The first
+ten concepts are reviewed before the remaining forty. The candidates and the review order live in
+`docs/expansion-waves/wave-1-candidates.md`; `scripts/scaffold-wave.py` validates a wave manifest
+before authoring. Waves 2-10 add 50 each and are not authorized until the pilot has been measured
+against the gates in section 6.
+
+**The expansion is additive.** Existing generators, lesson mappings and prerequisite edges must keep
+passing unchanged. No question-diversity floor may fall, no section-alignment requirement may be
+weakened, and no concept may be added to `section_alignment_baseline.json` or `audit_baseline.json`.
+A baseline is never widened to hide a new failure. `scripts/check_additive.py` freezes the
+1,500-concept corpus in `data/expansion-baseline.json` and fails on any removal, remap or relaxed
+floor, so these are acceptance conditions for every wave, not aspirations.
 
 **The `Now` column had drifted, and this is the correction.** The table was drawn when the corpus held
 703 concepts, and the batches since have grown it to 819. `scripts/sweep_counts.py` keeps the sentence
