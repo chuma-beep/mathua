@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Numbers a machine can hold",
+    "section": "Numbers a machine can hold",
+    "subgoals": [
+      "Describe sign, significand and exponent",
+      "Explain why 0.1 is not exact in binary",
+      "Define machine epsilon"
+    ]
+  },
+  {
+    "label": "Absolute and relative error",
+    "section": "Absolute and relative error",
+    "subgoals": [
+      "Compute absolute error",
+      "Compute relative error",
+      "Choose the measure that matches the scale"
+    ]
+  },
+  {
+    "label": "Significant digits",
+    "section": "Significant digits",
+    "subgoals": [
+      "Count digits from the first nonzero",
+      "Round to a stated number of figures",
+      "Match reported digits to the error"
+    ]
+  }
+]

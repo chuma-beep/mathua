@@ -415,7 +415,12 @@
       "trig.graph.frequency",
       "trig.eq.using_identities",
       "trig.graph.harmonic_motion",
-      "trig.basics.segment_area"
+      "trig.basics.segment_area",
+      "alg.poly.turning_points",
+      "alg.func.piecewise_graph",
+      "alg.systems.graphing",
+      "alg.systems.cramer",
+      "alg.poly.remainder"
     ]
   },
   {
@@ -547,7 +552,9 @@
       "calc.deriv.rate",
       "calc.deriv.graph_reading",
       "calc.integral.symmetry",
-      "calc.limit.trig"
+      "calc.limit.trig",
+      "calc.limit.piecewise",
+      "calc.limit.continuity_interval"
     ]
   },
   {
@@ -1348,7 +1355,10 @@
       "numa.linear.cg",
       "numa.fourier.fft",
       "numa.integration.monte_carlo",
-      "numa.least_squares.gauss_newton"
+      "numa.least_squares.gauss_newton",
+      "numa.errors.backward",
+      "numa.errors.floating",
+      "numa.roots.brent"
     ]
   },
   {

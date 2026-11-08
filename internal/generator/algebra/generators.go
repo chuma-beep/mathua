@@ -28,6 +28,8 @@ func Register(reg *generator.Registry) {
 
 	reg.Register("alg.systems.substitution", &sysSubstitutionGen{})
 	reg.Register("alg.systems.elimination", &sysEliminationGen{})
+	reg.Register("alg.systems.graphing", &systemsGraphingGen{})
+	reg.Register("alg.systems.cramer", &cramerGen{})
 	reg.Register("alg.systems.word", &sysWordGen{})
 
 	reg.Register("alg.poly.concept", &polyConceptGen{})
@@ -35,6 +37,8 @@ func Register(reg *generator.Registry) {
 	reg.Register("alg.poly.mult_mono", &polyMultMonoGen{})
 	reg.Register("alg.poly.foil", &polyFoilGen{})
 	reg.Register("alg.poly.special", &polySpecialGen{})
+	reg.Register("alg.poly.turning_points", &turningPointsGen{})
+	reg.Register("alg.poly.remainder", &polyRemainderGen{})
 
 	reg.Register("alg.factor.gcf", &factorGCFGen{})
 	reg.Register("alg.factor.trinomial", &factorTrinomialGen{})
@@ -50,6 +54,7 @@ func Register(reg *generator.Registry) {
 	reg.Register("alg.func.notation", &funcNotationGen{})
 	reg.Register("alg.func.evaluate", &funcEvaluateGen{})
 	reg.Register("alg.func.linear", &funcLinearGen{})
+	reg.Register("alg.func.piecewise_graph", &piecewiseGraphGen{})
 	reg.Register("alg.func.quad", &funcQuadGen{})
 
 	reg.Register("alg.exp.concept", &algExpConceptGen{})

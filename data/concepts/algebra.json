@@ -1995,5 +1995,75 @@
       "streak": 10,
       "avg_time_seconds": 18.0
     }
+  },
+  {
+    "id": "alg.poly.turning_points",
+    "label": "Turning points of a polynomial",
+    "domain": "algebra",
+    "subdomain": "algebra.poly",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.poly.end_behavior"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.func.piecewise_graph",
+    "label": "Piecewise function graphs",
+    "domain": "algebra",
+    "subdomain": "algebra.func",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.func.notation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.systems.graphing",
+    "label": "Solving systems by graphing",
+    "domain": "algebra",
+    "subdomain": "algebra.systems",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.systems.elimination"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.systems.cramer",
+    "label": "Cramer's rule for two equations",
+    "domain": "algebra",
+    "subdomain": "algebra.systems",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.systems.elimination"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.poly.remainder",
+    "label": "The remainder theorem",
+    "domain": "algebra",
+    "subdomain": "algebra.poly",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.poly.special"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
   }
 ]

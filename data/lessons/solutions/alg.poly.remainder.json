@@ -1,0 +1,15 @@
+{
+  "concept": "alg.poly.remainder",
+  "setup": "Divide \\(f(x) = [[poly]]\\) by \\(x - [[a]]\\).",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The divisor is zero when \\(x = [[a]]\\)."
+    },
+    {
+      "fact": "remainder",
+      "say": "The remainder theorem gives \\(f([[a]]) = [[remainder]]\\)."
+    }
+  ],
+  "answer": "So the remainder is \\([[remainder]]\\)."
+}

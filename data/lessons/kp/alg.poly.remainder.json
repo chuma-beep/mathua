@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Evaluate instead of divide",
+    "section": "Evaluate instead of divide",
+    "subgoals": [
+      "Find the number that zeroes the divisor",
+      "Substitute that number into f",
+      "Treat the result as the remainder"
+    ]
+  },
+  {
+    "label": "Why the theorem works",
+    "section": "Why the theorem works",
+    "subgoals": [
+      "Write f as quotient times divisor plus remainder",
+      "Set x equal to a",
+      "See the quotient term vanish"
+    ]
+  },
+  {
+    "label": "Remainders and roots",
+    "section": "Remainders and roots",
+    "subgoals": [
+      "Connect a zero remainder to a factor",
+      "Connect a zero remainder to a root",
+      "Test a suspected factor by evaluation"
+    ]
+  }
+]

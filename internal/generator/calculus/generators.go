@@ -16,6 +16,8 @@ func Register(reg *generator.Registry) {
 	reg.Register("calc.limit.properties", &limitPropertiesGen{})
 	reg.Register("calc.limit.infinity", &limitInfinityGen{})
 	reg.Register("calc.limit.continuity", &calcCountGen{build: continuityStatementsProblem})
+	reg.Register("calc.limit.piecewise", &limitPiecewiseGen{})
+	reg.Register("calc.limit.continuity_interval", &continuityIntervalGen{})
 
 	reg.Register("calc.deriv.concept", &derivConceptGen{})
 	reg.Register("calc.deriv.power_rule", &derivPowerRuleGen{})

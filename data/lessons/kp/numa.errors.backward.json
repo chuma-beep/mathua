@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Two ways to be wrong",
+    "section": "Two ways to be wrong",
+    "subgoals": [
+      "Define forward error as distance to the true answer",
+      "Define backward error as perturbation of the data",
+      "Separate approximation error from input error"
+    ]
+  },
+  {
+    "label": "Residuals and backward error",
+    "section": "Residuals and backward error",
+    "subgoals": [
+      "Compute a residual at the computed point",
+      "Interpret a small residual as a nearby exact problem",
+      "See why residual differs from forward error"
+    ]
+  },
+  {
+    "label": "Turning backward into forward",
+    "section": "Turning backward into forward",
+    "subgoals": [
+      "Divide the residual by the derivative",
+      "Recognise an ill-conditioned root",
+      "Report both measures"
+    ]
+  }
+]

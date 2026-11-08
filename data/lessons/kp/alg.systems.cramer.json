@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Determinants as denominators",
+    "section": "Determinants as denominators",
+    "subgoals": [
+      "Compute D as ad minus bc",
+      "Check the sign of D",
+      "State that D nonzero gives a unique solution"
+    ]
+  },
+  {
+    "label": "Building the two numerators",
+    "section": "Building the two numerators",
+    "subgoals": [
+      "Replace the x column for Dx",
+      "Replace the y column for Dy",
+      "Divide each numerator by D"
+    ]
+  },
+  {
+    "label": "Singular systems",
+    "section": "Singular systems",
+    "subgoals": [
+      "Read D equals zero as no unique solution",
+      "Substitute to detect a contradiction",
+      "Substitute to detect an identity"
+    ]
+  }
+]

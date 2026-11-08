@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Approach from each side",
+    "section": "Approach from each side",
+    "subgoals": [
+      "Evaluate the left branch below the boundary",
+      "Evaluate the right branch above the boundary",
+      "Compare the two one-sided limits"
+    ]
+  },
+  {
+    "label": "The boundary itself",
+    "section": "The boundary itself",
+    "subgoals": [
+      "Separate the limit from the value",
+      "State the three continuity conditions",
+      "Distinguish a removable gap from a jump"
+    ]
+  },
+  {
+    "label": "Choosing a constant",
+    "section": "Choosing a constant",
+    "subgoals": [
+      "Set the one-sided limits equal",
+      "Solve for the unknown constant",
+      "Substitute back to check the join"
+    ]
+  }
+]

@@ -696,5 +696,47 @@
       "streak": 10,
       "avg_time_seconds": 32
     }
+  },
+  {
+    "id": "numa.errors.backward",
+    "label": "Backward and forward error",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.errors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.errors.absolute"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "numa.errors.floating",
+    "label": "Floating-point representation error",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.errors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.errors.roundoff"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26
+    }
+  },
+  {
+    "id": "numa.roots.brent",
+    "label": "Brent's method",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.roots",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.roots.false_position"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28
+    }
   }
 ]

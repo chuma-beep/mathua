@@ -2841,6 +2841,76 @@
     "subdomain": "algebra.linear"
   },
   {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.poly.turning_points",
+    "label": "Turning points of a polynomial",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.poly.end_behavior"
+    ],
+    "subdomain": "algebra.poly"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.func.piecewise_graph",
+    "label": "Piecewise function graphs",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.func.notation"
+    ],
+    "subdomain": "algebra.func"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.systems.graphing",
+    "label": "Solving systems by graphing",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.systems.elimination"
+    ],
+    "subdomain": "algebra.systems"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.systems.cramer",
+    "label": "Cramer's rule",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.systems.elimination"
+    ],
+    "subdomain": "algebra.systems"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.poly.remainder",
+    "label": "The remainder theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.poly.special"
+    ],
+    "subdomain": "algebra.poly"
+  },
+  {
     "domain": "arithmetic",
     "grading_type": "numeric",
     "id": "arith.add.single",
@@ -5109,6 +5179,34 @@
     "prerequisites": [
       "calc.limit.sine_limit",
       "calc.limit.algebra"
+    ],
+    "subdomain": "calculus.limits"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.limit.piecewise",
+    "label": "Limits of piecewise functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.limit.continuity"
+    ],
+    "subdomain": "calculus.limits"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.limit.continuity_interval",
+    "label": "Intervals of continuity",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.limit.continuity"
     ],
     "subdomain": "calculus.limits"
   },
@@ -15222,6 +15320,48 @@
       "numa.roots.newton"
     ],
     "subdomain": "numerical_analysis.linear"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.errors.backward",
+    "label": "Backward and forward error",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.errors.absolute"
+    ],
+    "subdomain": "numerical_analysis.errors"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.errors.floating",
+    "label": "Floating-point representation error",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.errors.roundoff"
+    ],
+    "subdomain": "numerical_analysis.errors"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.roots.brent",
+    "label": "Brent's method",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.roots.false_position"
+    ],
+    "subdomain": "numerical_analysis.roots"
   },
   {
     "domain": "prealgebra",

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Denominators exclude points",
+    "section": "Denominators exclude points",
+    "subgoals": [
+      "Set the denominator equal to zero",
+      "Remove each solution from the domain",
+      "Write the intervals between gaps"
+    ]
+  },
+  {
+    "label": "Domains with endpoints",
+    "section": "Domains with endpoints",
+    "subgoals": [
+      "Solve a nonnegative-radicand inequality",
+      "Decide whether an endpoint is included",
+      "Write an open or closed interval"
+    ]
+  },
+  {
+    "label": "Several gaps at once",
+    "section": "Several gaps at once",
+    "subgoals": [
+      "Remove every distinct zero of the denominator",
+      "Split the domain into separate intervals",
+      "Treat a repeated factor as one gap"
+    ]
+  }
+]

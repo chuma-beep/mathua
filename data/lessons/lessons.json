@@ -5998,5 +5998,45 @@
   {
     "concept_id": "abstract.group.cauchy",
     "source": "teaching/abstract.group.cauchy.md"
+  },
+  {
+    "concept_id": "alg.poly.turning_points",
+    "source": "authored/alg.poly.turning_points.md"
+  },
+  {
+    "concept_id": "alg.func.piecewise_graph",
+    "source": "authored/alg.func.piecewise_graph.md"
+  },
+  {
+    "concept_id": "alg.systems.graphing",
+    "source": "authored/alg.systems.graphing.md"
+  },
+  {
+    "concept_id": "alg.systems.cramer",
+    "source": "authored/alg.systems.cramer.md"
+  },
+  {
+    "concept_id": "alg.poly.remainder",
+    "source": "authored/alg.poly.remainder.md"
+  },
+  {
+    "concept_id": "numa.errors.backward",
+    "source": "authored/numa.errors.backward.md"
+  },
+  {
+    "concept_id": "numa.errors.floating",
+    "source": "authored/numa.errors.floating.md"
+  },
+  {
+    "concept_id": "numa.roots.brent",
+    "source": "authored/numa.roots.brent.md"
+  },
+  {
+    "concept_id": "calc.limit.piecewise",
+    "source": "authored/calc.limit.piecewise.md"
+  },
+  {
+    "concept_id": "calc.limit.continuity_interval",
+    "source": "authored/calc.limit.continuity_interval.md"
   }
 ]

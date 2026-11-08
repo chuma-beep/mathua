@@ -1,0 +1,29 @@
+[
+  {
+    "label": "One rule at a time",
+    "section": "One rule at a time",
+    "subgoals": [
+      "Test the input against each condition",
+      "Use only the branch that owns the input",
+      "Ignore the more familiar formula"
+    ]
+  },
+  {
+    "label": "Reading the boundary",
+    "section": "Reading the boundary",
+    "subgoals": [
+      "Distinguish open and solid dots",
+      "Decide which branch owns the boundary",
+      "Identify a jump at the join"
+    ]
+  },
+  {
+    "label": "The graph tells the story",
+    "section": "The graph tells the story",
+    "subgoals": [
+      "Read an output from the correct piece",
+      "Collect every input with a given output",
+      "Connect the graph to a real rate change"
+    ]
+  }
+]

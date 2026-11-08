@@ -1,0 +1,19 @@
+{
+  "concept": "alg.systems.cramer",
+  "setup": "The system is \\([[a]]x + [[b]]y = [[e]]\\) and \\([[c]]x + [[d]]y = [[f]]\\).",
+  "steps": [
+    {
+      "fact": "det",
+      "say": "The coefficient determinant is \\(([[a]])([[d]]) - ([[b]])([[c]]) = [[det]]\\)."
+    },
+    {
+      "fact": "x",
+      "say": "Replacing the \\(x\\)-column with the constants gives \\(x = [[x]]\\)."
+    },
+    {
+      "fact": "y",
+      "say": "Replacing the \\(y\\)-column with the constants gives \\(y = [[y]]\\)."
+    }
+  ],
+  "answer": "So \\(x = [[x]]\\) and \\(y = [[y]]\\)."
+}

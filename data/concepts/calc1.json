@@ -1225,5 +1225,33 @@
       "streak": 10,
       "avg_time_seconds": 24
     }
+  },
+  {
+    "id": "calc.limit.piecewise",
+    "label": "Limits of piecewise functions",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.limit.continuity"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
+  },
+  {
+    "id": "calc.limit.continuity_interval",
+    "label": "Intervals of continuity",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.limit.continuity"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24
+    }
   }
 ]

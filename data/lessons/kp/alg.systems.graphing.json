@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Where two lines meet",
+    "section": "Where two lines meet",
+    "subgoals": [
+      "Locate the crossing point",
+      "Read x before y",
+      "Confirm the point in both equations"
+    ]
+  },
+  {
+    "label": "Reading a graph accurately",
+    "section": "Reading a graph accurately",
+    "subgoals": [
+      "Draw each line from two points",
+      "Estimate coordinates between grid lines",
+      "Replace guessing with algebra"
+    ]
+  },
+  {
+    "label": "When the picture disagrees",
+    "section": "When the picture disagrees",
+    "subgoals": [
+      "Recognise parallel lines",
+      "Recognise one line drawn twice",
+      "Use substitution to settle the case"
+    ]
+  }
+]

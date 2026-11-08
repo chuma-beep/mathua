@@ -1,0 +1,15 @@
+{
+  "concept": "alg.systems.graphing",
+  "setup": "The lines are \\(y = [[m1]]x + [[b1]]\\) and \\(y = [[m2]]x + [[b2]]\\).",
+  "steps": [
+    {
+      "fact": "x",
+      "say": "Setting the expressions equal gives \\(x = [[x]]\\)."
+    },
+    {
+      "fact": "y",
+      "say": "Substituting back gives \\(y = [[y]]\\)."
+    }
+  ],
+  "answer": "The lines intersect at \\(([[x]], [[y]])\\)."
+}

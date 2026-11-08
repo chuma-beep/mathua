@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1500,
+  "concept_count": 1510,
   "unit_count": 138,
   "units": [
     {
@@ -209,6 +209,7 @@
         "algebra.functions",
         "algebra.inequalities",
         "algebra.linear",
+        "algebra.poly",
         "algebra.polynomials",
         "algebra.systems"
       ],
@@ -248,11 +249,12 @@
         "alg.poly.mult_mono",
         "alg.poly.special",
         "alg.poly.synthetic_division",
+        "alg.poly.turning_points",
         "alg.systems.concept",
         "alg.systems.gaussian",
         "alg.systems.substitution"
       ],
-      "concept_count": 38
+      "concept_count": 39
     },
     {
       "id": "algebra.b7",
@@ -265,9 +267,11 @@
         "algebra.conics",
         "algebra.exponential",
         "algebra.factoring",
+        "algebra.func",
         "algebra.functions",
         "algebra.inequalities",
         "algebra.linear",
+        "algebra.poly",
         "algebra.quadratics",
         "algebra.rational",
         "algebra.systems"
@@ -294,6 +298,7 @@
         "alg.func.monotonicity",
         "alg.func.notation",
         "alg.func.piecewise",
+        "alg.func.piecewise_graph",
         "alg.func.power",
         "alg.func.rate_of_change",
         "alg.func.rational",
@@ -303,6 +308,7 @@
         "alg.ineq.linear_programming",
         "alg.ineq.two_var",
         "alg.linear.intercepts",
+        "alg.poly.remainder",
         "alg.quad.complete_square",
         "alg.quad.formula",
         "alg.quad.incomplete",
@@ -313,13 +319,15 @@
         "alg.rational.mult_div",
         "alg.rational.proportions",
         "alg.rational.simplify",
+        "alg.systems.cramer",
         "alg.systems.elimination",
+        "alg.systems.graphing",
         "alg.systems.matrices",
         "alg.systems.nonlinear",
         "alg.systems.three_var",
         "alg.systems.word"
       ],
-      "concept_count": 45
+      "concept_count": 49
     },
     {
       "id": "algebra.b8",
@@ -640,15 +648,17 @@
         "calc.deriv.tangent_line",
         "calc.integral.indefinite",
         "calc.limit.asymptotes",
+        "calc.limit.continuity_interval",
         "calc.limit.discontinuity",
         "calc.limit.infinite",
         "calc.limit.intermediate_value",
         "calc.limit.lhopital",
         "calc.limit.oscillation",
+        "calc.limit.piecewise",
         "calc.limit.trig",
         "calc.limit.weierstrass"
       ],
-      "concept_count": 28
+      "concept_count": 30
     },
     {
       "id": "calc1.b11",
@@ -2469,13 +2479,15 @@
       ],
       "concept_ids": [
         "numa.errors.absolute",
+        "numa.errors.backward",
         "numa.errors.cancellation",
         "numa.errors.conditioning",
+        "numa.errors.floating",
         "numa.errors.roundoff",
         "numa.errors.stability",
         "numa.errors.taylor"
       ],
-      "concept_count": 6
+      "concept_count": 8
     },
     {
       "id": "numerical_analysis.b6",
@@ -2571,11 +2583,12 @@
       "concept_ids": [
         "numa.interp.hermite",
         "numa.roots.bisection",
+        "numa.roots.brent",
         "numa.roots.false_position",
         "numa.roots.fixed_point",
         "numa.roots.newton"
       ],
-      "concept_count": 5
+      "concept_count": 6
     },
     {
       "id": "numerical_analysis.b11",

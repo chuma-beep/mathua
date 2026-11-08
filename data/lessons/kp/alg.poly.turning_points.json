@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Degree sets the ceiling",
+    "section": "Degree sets the ceiling",
+    "subgoals": [
+      "State that a degree n polynomial has at most n-1 turns",
+      "Read the degree from the leading term",
+      "Separate the maximum from the actual count"
+    ]
+  },
+  {
+    "label": "The derivative counts turns",
+    "section": "The derivative counts turns",
+    "subgoals": [
+      "Set the derivative equal to zero",
+      "Recognise that a flat spot may not be a turn",
+      "Reach the ceiling when every derivative zero is simple"
+    ]
+  },
+  {
+    "label": "From turns back to degree",
+    "section": "From turns back to degree",
+    "subgoals": [
+      "Add one to the number of turns",
+      "Explain why the degree must be at least t+1",
+      "Ignore shifts such as the y-intercept"
+    ]
+  }
+]

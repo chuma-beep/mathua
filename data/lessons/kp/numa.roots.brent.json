@@ -1,0 +1,29 @@
+[
+  {
+    "label": "A bracket is a promise",
+    "section": "A bracket is a promise",
+    "subgoals": [
+      "State the intermediate value theorem condition",
+      "Halve a bracket by bisection",
+      "Keep the sign change at every step"
+    ]
+  },
+  {
+    "label": "Interpolation when it is safe",
+    "section": "Interpolation when it is safe",
+    "subgoals": [
+      "Fit a line through two points",
+      "Fit a quadratic through three points",
+      "Reject an unsafe extrapolation"
+    ]
+  },
+  {
+    "label": "The bisection fallback",
+    "section": "The bisection fallback",
+    "subgoals": [
+      "Fall back when interpolation breaks the bracket",
+      "State the linear worst case",
+      "Explain why the root is never lost"
+    ]
+  }
+]

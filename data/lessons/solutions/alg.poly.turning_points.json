@@ -1,0 +1,15 @@
+{
+  "concept": "alg.poly.turning_points",
+  "setup": "A polynomial \\(f(x)\\) has degree \\([[degree]]\\).",
+  "steps": [
+    {
+      "fact": "derivative_degree",
+      "say": "Differentiating lowers the degree by one, so \\(f'(x)\\) has degree \\([[derivative_degree]]\\)."
+    },
+    {
+      "fact": "turning_points",
+      "say": "A degree \\([[derivative_degree]]\\) derivative has at most \\([[turning_points]]\\) real zeros, and each simple zero is a turning point."
+    }
+  ],
+  "answer": "So the polynomial has at most \\([[turning_points]]\\) turning points."
+}

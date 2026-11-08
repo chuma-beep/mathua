@@ -1,0 +1,15 @@
+{
+  "concept": "alg.func.piecewise_graph",
+  "setup": "The function \\(f\\) is defined piecewise, and we need \\(f([[x]])\\).",
+  "steps": [
+    {
+      "fact": "branch",
+      "say": "The input \\([[x]]\\) satisfies the condition for the [[branch]] branch."
+    },
+    {
+      "fact": "value",
+      "say": "Substituting into that branch gives \\(f([[x]]) = [[value]]\\)."
+    }
+  ],
+  "answer": "So \\(f([[x]]) = [[value]]\\)."
+}
