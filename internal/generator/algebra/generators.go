@@ -1420,9 +1420,15 @@ func (g *eqPolyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type eqRationalGen struct{}
 
 func (g *eqRationalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	x := rand.Intn(8) + 2
 	a := rand.Intn(5) + 1
 	b := rand.Intn(5) + 1
+	// x must be a multiple of b/gcd(a,b), or a*x/b truncates and the printed
+	// right side no longer solves the printed equation.
+	step := b / mathutil.GCD(a, b)
+	x := step * (rand.Intn(4) + 1)
+	if x < 2 {
+		x += step
+	}
 	rhs := a * x / b
 	return generator.Problem{
 		Question:    fmt.Sprintf("Solve: \\(%dx/%d = %d\\)", a, b, rhs),

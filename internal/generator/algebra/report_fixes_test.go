@@ -1,6 +1,12 @@
 package algebra
 
-import "testing"
+import (
+	"regexp"
+	"strconv"
+	"testing"
+
+	"github.com/chuma-beep/mathua/internal/generator"
+)
 
 func TestOrdinalSuffixes(t *testing.T) {
 	cases := map[int]string{
@@ -11,6 +17,34 @@ func TestOrdinalSuffixes(t *testing.T) {
 	for n, want := range cases {
 		if got := ordinal(n); got != want {
 			t.Errorf("ordinal(%d) = %q, want %q", n, got, want)
+		}
+	}
+}
+
+// The printed equation and the stored answer must agree. An integer division
+// of a*x by b used to truncate, so the answer solved a different equation from
+// the one the learner could see.
+func TestEqRationalPrintedEquationMatchesAnswer(t *testing.T) {
+	g := &eqRationalGen{}
+	re := regexp.MustCompile(`^Solve: \\\((\d+)x/(\d+) = (\d+)\\\)$`)
+	for i := 0; i < 500; i++ {
+		p := g.Generate(generator.GeneratorContext{})
+		m := re.FindStringSubmatch(p.Question)
+		if m == nil {
+			t.Fatalf("unexpected question shape: %q", p.Question)
+		}
+		a, _ := strconv.Atoi(m[1])
+		b, _ := strconv.Atoi(m[2])
+		rhs, _ := strconv.Atoi(m[3])
+		x, err := strconv.Atoi(p.Answer)
+		if err != nil {
+			t.Fatalf("answer is not an integer: %q", p.Answer)
+		}
+		if a*x != rhs*b {
+			t.Fatalf("answer %d does not solve %q", x, p.Question)
+		}
+		if x < 2 {
+			t.Fatalf("answer %d is below the intended range for %q", x, p.Question)
 		}
 	}
 }

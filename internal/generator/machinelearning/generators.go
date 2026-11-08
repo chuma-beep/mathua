@@ -86,9 +86,9 @@ func (g *backpropGen) Generate(ctx generator.GeneratorContext) generator.Problem
 			"ReLU (Rectified Linear Unit) has derivative 1 for positive inputs, helping gradients flow through deep networks.",
 		},
 		{
-			"The chain rule means each layer's gradient depends on the gradient from the layer above it. Which layer: above or below? (type one word)",
-			"above",
-			"The chain rule means each layer's gradient depends on the gradient from the layer above it.",
+			"In backpropagation, each layer's gradient is computed from the gradient of the layer that comes ____ it in the forward pass. (type one word)",
+			"after",
+			"Each layer's gradient is computed from the gradient of the layer that comes after it in the forward pass, so error information flows backward from the output.",
 		},
 	}
 	e := entries[rand.Intn(len(entries))]

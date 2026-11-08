@@ -72,6 +72,11 @@ func countArithVerdicts(lead string, pool []arithVerdict) generator.Problem {
 	}
 }
 
+// primeAndCompositeDefinition opens both count explanations. The question asks
+// for a count, so without the definition a learner has to infer the terms from
+// the per-number notes alone.
+const primeAndCompositeDefinition = "A prime number has exactly two divisors, 1 and itself. A composite number has more than two divisors, so it can be written as a product of two integers greater than 1. "
+
 func primeProblem() generator.Problem {
 	pool := []arithVerdict{
 		{label: "2", yes: true, note: "2 has no divisors other than 1 and itself."},
@@ -91,7 +96,9 @@ func primeProblem() generator.Problem {
 		{label: "14", yes: false, note: "14 = 2 x 7, so it is composite."},
 		{label: "15", yes: false, note: "15 = 3 x 5, so it is composite."},
 	}
-	return countArithVerdicts("How many of these numbers are prime?", pool)
+	p := countArithVerdicts("How many of these numbers are prime?", pool)
+	p.Explanation = primeAndCompositeDefinition + p.Explanation
+	return p
 }
 
 func compositeProblem() generator.Problem {
@@ -113,7 +120,9 @@ func compositeProblem() generator.Problem {
 		{label: "25", yes: true, note: "25 = 5 x 5, so it is composite."},
 		{label: "26", yes: true, note: "26 = 2 x 13, so it is composite."},
 	}
-	return countArithVerdicts("How many of these numbers are composite?", pool)
+	p := countArithVerdicts("How many of these numbers are composite?", pool)
+	p.Explanation = primeAndCompositeDefinition + p.Explanation
+	return p
 }
 
 func divisionByZeroProblem() generator.Problem {

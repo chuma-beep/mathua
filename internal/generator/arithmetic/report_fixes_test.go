@@ -97,3 +97,17 @@ func TestOrderOpsGenUsesRealOperands(t *testing.T) {
 		}
 	}
 }
+
+// Report 445: the count question listed primes and composites but never said
+// what either word means, so the per-number notes were the only clue.
+func TestCompositeExplanationDefinesComposite(t *testing.T) {
+	for i := 0; i < 100; i++ {
+		p := compositeProblem()
+		if !strings.Contains(p.Explanation, "more than two divisors") {
+			t.Fatalf("composite explanation does not define the term: %q", p.Explanation)
+		}
+		if !strings.Contains(p.Explanation, "exactly two divisors") {
+			t.Fatalf("composite explanation does not define prime: %q", p.Explanation)
+		}
+	}
+}
