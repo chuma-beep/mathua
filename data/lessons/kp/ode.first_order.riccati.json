@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Identify a particular solution",
+    "section": "Identify a particular solution",
+    "subgoals": [
+      "State the governing relation for riccati equations",
+      "Identify the quantities in the identify a particular solution step",
+      "Carry out the identify a particular solution computation"
+    ]
+  },
+  {
+    "label": "Apply the Riccati substitution",
+    "section": "Apply the Riccati substitution",
+    "subgoals": [
+      "State the governing relation for riccati equations",
+      "Identify the quantities in the apply the riccati substitution step",
+      "Carry out the apply the riccati substitution computation"
+    ]
+  },
+  {
+    "label": "Solve the resulting linear equation",
+    "section": "Solve the resulting linear equation",
+    "subgoals": [
+      "State the governing relation for riccati equations",
+      "Identify the quantities in the solve the resulting linear equation step",
+      "Carry out the solve the resulting linear equation computation"
+    ]
+  }
+]

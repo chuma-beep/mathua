@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Identify the substitution",
+    "section": "Identify the substitution",
+    "subgoals": [
+      "State the governing relation for homogeneous substitutions for first-order odes",
+      "Identify the quantities in the identify the substitution step",
+      "Carry out the identify the substitution computation"
+    ]
+  },
+  {
+    "label": "Transform the equation",
+    "section": "Transform the equation",
+    "subgoals": [
+      "State the governing relation for homogeneous substitutions for first-order odes",
+      "Identify the quantities in the transform the equation step",
+      "Carry out the transform the equation computation"
+    ]
+  },
+  {
+    "label": "Solve the separated equation",
+    "section": "Solve the separated equation",
+    "subgoals": [
+      "State the governing relation for homogeneous substitutions for first-order odes",
+      "Identify the quantities in the solve the separated equation step",
+      "Carry out the solve the separated equation computation"
+    ]
+  }
+]

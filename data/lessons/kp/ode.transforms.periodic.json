@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Compute a periodic transform",
+    "section": "Compute a periodic transform",
+    "subgoals": [
+      "State the governing relation for laplace transforms of periodic functions",
+      "Identify the quantities in the compute a periodic transform step",
+      "Carry out the compute a periodic transform computation"
+    ]
+  },
+  {
+    "label": "Identify the period",
+    "section": "Identify the period",
+    "subgoals": [
+      "State the governing relation for laplace transforms of periodic functions",
+      "Identify the quantities in the identify the period step",
+      "Carry out the identify the period computation"
+    ]
+  },
+  {
+    "label": "Invert the periodic response",
+    "section": "Invert the periodic response",
+    "subgoals": [
+      "State the governing relation for laplace transforms of periodic functions",
+      "Identify the quantities in the invert the periodic response step",
+      "Carry out the invert the periodic response computation"
+    ]
+  }
+]

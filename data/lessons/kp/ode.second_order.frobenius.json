@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Find the indicial roots",
+    "section": "Find the indicial roots",
+    "subgoals": [
+      "State the governing relation for the frobenius method",
+      "Identify the quantities in the find the indicial roots step",
+      "Carry out the find the indicial roots computation"
+    ]
+  },
+  {
+    "label": "Build the recurrence",
+    "section": "Build the recurrence",
+    "subgoals": [
+      "State the governing relation for the frobenius method",
+      "Identify the quantities in the build the recurrence step",
+      "Carry out the build the recurrence computation"
+    ]
+  },
+  {
+    "label": "State the solution near the singularity",
+    "section": "State the solution near the singularity",
+    "subgoals": [
+      "State the governing relation for the frobenius method",
+      "Identify the quantities in the state the solution near the singularity step",
+      "Carry out the state the solution near the singularity computation"
+    ]
+  }
+]

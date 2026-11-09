@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Identify the missingness mechanism",
+    "section": "Identify the missingness mechanism",
+    "subgoals": [
+      "State the governing relation for missing-data mechanisms and imputation",
+      "Identify the quantities in the identify the missingness mechanism step",
+      "Carry out the identify the missingness mechanism computation"
+    ]
+  },
+  {
+    "label": "Impute a value",
+    "section": "Impute a value",
+    "subgoals": [
+      "State the governing relation for missing-data mechanisms and imputation",
+      "Identify the quantities in the impute a value step",
+      "Carry out the impute a value computation"
+    ]
+  },
+  {
+    "label": "Measure the bias",
+    "section": "Measure the bias",
+    "subgoals": [
+      "State the governing relation for missing-data mechanisms and imputation",
+      "Identify the quantities in the measure the bias step",
+      "Carry out the measure the bias computation"
+    ]
+  }
+]

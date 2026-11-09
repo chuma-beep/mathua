@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Evaluate a power",
+    "section": "Evaluate a power",
+    "subgoals": [
+      "State the governing relation for complex exponentiation",
+      "Identify the quantities in the evaluate a power step",
+      "Carry out the evaluate a power computation"
+    ]
+  },
+  {
+    "label": "Apply the principal branch",
+    "section": "Apply the principal branch",
+    "subgoals": [
+      "State the governing relation for complex exponentiation",
+      "Identify the quantities in the apply the principal branch step",
+      "Carry out the apply the principal branch computation"
+    ]
+  },
+  {
+    "label": "Use the exponential identity",
+    "section": "Use the exponential identity",
+    "subgoals": [
+      "State the governing relation for complex exponentiation",
+      "Identify the quantities in the use the exponential identity step",
+      "Carry out the use the exponential identity computation"
+    ]
+  }
+]

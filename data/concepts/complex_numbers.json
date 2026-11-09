@@ -819,5 +819,301 @@
       "streak": 10,
       "avg_time_seconds": 30
     }
+  },
+  {
+    "id": "complex.adv.roots_unity",
+    "label": "Roots of unity",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.roots"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "complex.adv.branches",
+    "label": "Principal values and branch cuts",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.logarithm"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "complex.adv.complex_powers",
+    "label": "Complex exponentiation",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.exponential",
+      "complex.adv.logarithm"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "complex.adv.trig_zeros",
+    "label": "Zeros of complex trigonometric functions",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.trig_exponential"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "complex.adv.harmonic_conjugate",
+    "label": "Harmonic conjugates",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.harmonic",
+      "complex.adv.cauchy_riemann"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "complex.adv.poisson_kernel",
+    "label": "The Poisson kernel",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.harmonic",
+      "complex.integral.cauchy_formula"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "complex.adv.rouche",
+    "label": "Rouché's theorem",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.argument_principle",
+      "complex.adv.residue"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "complex.adv.open_mapping",
+    "label": "The open mapping theorem",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.analytic",
+      "complex.adv.maximum_modulus"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "complex.adv.casorati",
+    "label": "The Casorati-Weierstrass theorem",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.series.laurent",
+      "complex.adv.residue"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "complex.adv.picard",
+    "label": "Picard's theorem",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.liouville",
+      "complex.adv.maximum_modulus"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "complex.adv.analytic_continuation",
+    "label": "Analytic continuation",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.analytic",
+      "complex.series.power"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "complex.adv.monodromy",
+    "label": "Monodromy",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.analytic_continuation",
+      "complex.adv.winding"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "complex.adv.riemann_surface",
+    "label": "Riemann surfaces",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.topology",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.analytic_continuation",
+      "complex.topology.riemann_sphere"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "complex.adv.elliptic",
+    "label": "Elliptic functions",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.series.laurent",
+      "complex.adv.liouville"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "complex.adv.modular_forms",
+    "label": "Modular forms",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.elliptic"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "complex.adv.gamma",
+    "label": "The complex gamma function",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.analytic"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "complex.adv.weierstrass_factorization",
+    "label": "The Weierstrass factorization theorem",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.analytic",
+      "complex.series.power"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "complex.adv.mittag_leffler",
+    "label": "The Mittag-Leffler theorem",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.residue",
+      "complex.series.laurent"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "complex.adv.schwarz_christoffel",
+    "label": "The Schwarz-Christoffel mapping",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.conformal",
+      "complex.adv.mobius"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "complex.adv.jensen",
+    "label": "Jensen's formula",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.harmonic",
+      "complex.adv.maximum_modulus"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
   }
 ]

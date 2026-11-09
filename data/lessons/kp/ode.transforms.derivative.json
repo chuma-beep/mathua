@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Transform a derivative",
+    "section": "Transform a derivative",
+    "subgoals": [
+      "State the governing relation for laplace transform of derivatives",
+      "Identify the quantities in the transform a derivative step",
+      "Carry out the transform a derivative computation"
+    ]
+  },
+  {
+    "label": "Insert the initial condition",
+    "section": "Insert the initial condition",
+    "subgoals": [
+      "State the governing relation for laplace transform of derivatives",
+      "Identify the quantities in the insert the initial condition step",
+      "Carry out the insert the initial condition computation"
+    ]
+  },
+  {
+    "label": "Solve the transformed equation",
+    "section": "Solve the transformed equation",
+    "subgoals": [
+      "State the governing relation for laplace transform of derivatives",
+      "Identify the quantities in the solve the transformed equation step",
+      "Carry out the solve the transformed equation computation"
+    ]
+  }
+]

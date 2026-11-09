@@ -1,6 +1,6 @@
 # Wave 4 candidate ledger
 
-Status: candidate ledger for review. Not approved for authoring. No concept has been generated.
+Status: approved for authoring. Authored and closed at 1,700 concepts.
 
 Date: 2026-11-09. Current corpus: 1,650 concepts. Wave 4 target: 1,700 concepts.
 
@@ -20,7 +20,7 @@ is approved.
 |---|---:|---:|---:|---|
 | differential_equations | 46 | 66 | +20 | `diffeq` |
 | complex_numbers | 51 | 71 | +20 | `cx` |
-| statistics | 87 | 98 | +10 | `probstat` |
+| statistics | 87 | 97 | +10 | `probstat` |
 | **Total** | | | **50** | |
 
 The wave fills differential equations and complex numbers exactly. Statistics moves to 97 and

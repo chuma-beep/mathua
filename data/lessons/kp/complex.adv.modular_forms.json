@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Identify the weight",
+    "section": "Identify the weight",
+    "subgoals": [
+      "State the governing relation for modular forms",
+      "Identify the quantities in the identify the weight step",
+      "Carry out the identify the weight computation"
+    ]
+  },
+  {
+    "label": "Apply the transformation",
+    "section": "Apply the transformation",
+    "subgoals": [
+      "State the governing relation for modular forms",
+      "Identify the quantities in the apply the transformation step",
+      "Carry out the apply the transformation computation"
+    ]
+  },
+  {
+    "label": "Read the q-expansion",
+    "section": "Read the q-expansion",
+    "subgoals": [
+      "State the governing relation for modular forms",
+      "Identify the quantities in the read the q-expansion step",
+      "Carry out the read the q-expansion computation"
+    ]
+  }
+]

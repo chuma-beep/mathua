@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Apply the multistep formula",
+    "section": "Apply the multistep formula",
+    "subgoals": [
+      "State the governing relation for multistep methods",
+      "Identify the quantities in the apply the multistep formula step",
+      "Carry out the apply the multistep formula computation"
+    ]
+  },
+  {
+    "label": "Determine the order",
+    "section": "Determine the order",
+    "subgoals": [
+      "State the governing relation for multistep methods",
+      "Identify the quantities in the determine the order step",
+      "Carry out the determine the order computation"
+    ]
+  },
+  {
+    "label": "Check zero stability",
+    "section": "Check zero stability",
+    "subgoals": [
+      "State the governing relation for multistep methods",
+      "Identify the quantities in the check zero stability step",
+      "Carry out the check zero stability computation"
+    ]
+  }
+]

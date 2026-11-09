@@ -1,0 +1,29 @@
+[
+  {
+    "label": "List the roots",
+    "section": "List the roots",
+    "subgoals": [
+      "State the governing relation for roots of unity",
+      "Identify the quantities in the list the roots step",
+      "Carry out the list the roots computation"
+    ]
+  },
+  {
+    "label": "Sum the roots",
+    "section": "Sum the roots",
+    "subgoals": [
+      "State the governing relation for roots of unity",
+      "Identify the quantities in the sum the roots step",
+      "Carry out the sum the roots computation"
+    ]
+  },
+  {
+    "label": "Identify primitive roots",
+    "section": "Identify primitive roots",
+    "subgoals": [
+      "State the governing relation for roots of unity",
+      "Identify the quantities in the identify primitive roots step",
+      "Carry out the identify primitive roots computation"
+    ]
+  }
+]

@@ -662,5 +662,287 @@
       "streak": 10,
       "avg_time_seconds": 30
     }
+  },
+  {
+    "id": "ode.first_order.homogeneous_substitution",
+    "label": "Homogeneous substitutions for first-order ODEs",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.first_order",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.first_order.separable"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ode.first_order.clairaut",
+    "label": "Clairaut equations",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.first_order",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.first_order.linear"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ode.first_order.riccati",
+    "label": "Riccati equations",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.first_order",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.first_order.bernoulli"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ode.transforms.inverse_laplace",
+    "label": "Inverse Laplace transforms",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.transforms",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.transforms.laplace"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ode.transforms.derivative",
+    "label": "Laplace transform of derivatives",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.transforms",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.transforms.laplace"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ode.transforms.periodic",
+    "label": "Laplace transforms of periodic functions",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.transforms",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.transforms.laplace",
+      "ode.transforms.step"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ode.transforms.initial_final",
+    "label": "Initial and final value theorems",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.transforms",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.transforms.laplace"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ode.second_order.frobenius",
+    "label": "The Frobenius method",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.second_order",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.second_order.power_series"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ode.second_order.bessel",
+    "label": "Bessel functions",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.second_order",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.second_order.power_series"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ode.second_order.legendre",
+    "label": "Legendre polynomials",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.second_order",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.second_order.power_series"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ode.numerical.multistep",
+    "label": "Multistep methods",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.numerical",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.numerical.euler"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ode.numerical.rkf",
+    "label": "Runge-Kutta-Fehlberg methods",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.numerical",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.numerical.rk4"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ode.numerical.implicit",
+    "label": "Implicit Euler and stiff equations",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.numerical",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.numerical.euler"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ode.boundary.shooting",
+    "label": "The shooting method",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.boundary",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.boundary_value"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ode.boundary.finite_difference",
+    "label": "Finite-difference methods for boundary-value problems",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.boundary",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.boundary_value"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ode.integral.fredholm",
+    "label": "Fredholm integral equations",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.integral",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.integral.volterra"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ode.basics.delay",
+    "label": "Delay differential equations",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.basics.existence_uniqueness"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ode.nonlinear.perturbation",
+    "label": "Perturbation methods",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.nonlinear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.nonlinear.bifurcation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ode.pde.duhamel",
+    "label": "Duhamel's principle",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.pde",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.pde.heat",
+      "ode.transforms.step"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ode.pde.images",
+    "label": "The method of images",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.pde",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.pde.laplace_eq"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
   }
 ]

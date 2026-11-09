@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Evaluate the history function",
+    "section": "Evaluate the history function",
+    "subgoals": [
+      "State the governing relation for delay differential equations",
+      "Identify the quantities in the evaluate the history function step",
+      "Carry out the evaluate the history function computation"
+    ]
+  },
+  {
+    "label": "Advance one delay step",
+    "section": "Advance one delay step",
+    "subgoals": [
+      "State the governing relation for delay differential equations",
+      "Identify the quantities in the advance one delay step step",
+      "Carry out the advance one delay step computation"
+    ]
+  },
+  {
+    "label": "Find the characteristic roots",
+    "section": "Find the characteristic roots",
+    "subgoals": [
+      "State the governing relation for delay differential equations",
+      "Identify the quantities in the find the characteristic roots step",
+      "Carry out the find the characteristic roots computation"
+    ]
+  }
+]

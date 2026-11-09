@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Identify the impulse response",
+    "section": "Identify the impulse response",
+    "subgoals": [
+      "State the governing relation for duhamel's principle",
+      "Identify the quantities in the identify the impulse response step",
+      "Carry out the identify the impulse response computation"
+    ]
+  },
+  {
+    "label": "Write the convolution",
+    "section": "Write the convolution",
+    "subgoals": [
+      "State the governing relation for duhamel's principle",
+      "Identify the quantities in the write the convolution step",
+      "Carry out the write the convolution computation"
+    ]
+  },
+  {
+    "label": "Evaluate the response",
+    "section": "Evaluate the response",
+    "subgoals": [
+      "State the governing relation for duhamel's principle",
+      "Identify the quantities in the evaluate the response step",
+      "Carry out the evaluate the response computation"
+    ]
+  }
+]

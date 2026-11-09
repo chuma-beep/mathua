@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Compare two functions on a contour",
+    "section": "Compare two functions on a contour",
+    "subgoals": [
+      "State the governing relation for rouch\u00e9's theorem",
+      "Identify the quantities in the compare two functions on a contour step",
+      "Carry out the compare two functions on a contour computation"
+    ]
+  },
+  {
+    "label": "Count zeros",
+    "section": "Count zeros",
+    "subgoals": [
+      "State the governing relation for rouch\u00e9's theorem",
+      "Identify the quantities in the count zeros step",
+      "Carry out the count zeros computation"
+    ]
+  },
+  {
+    "label": "Apply the conclusion",
+    "section": "Apply the conclusion",
+    "subgoals": [
+      "State the governing relation for rouch\u00e9's theorem",
+      "Identify the quantities in the apply the conclusion step",
+      "Carry out the apply the conclusion computation"
+    ]
+  }
+]

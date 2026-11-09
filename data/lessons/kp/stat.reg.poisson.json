@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Apply the log link",
+    "section": "Apply the log link",
+    "subgoals": [
+      "State the governing relation for poisson regression",
+      "Identify the quantities in the apply the log link step",
+      "Carry out the apply the log link computation"
+    ]
+  },
+  {
+    "label": "Compute a rate",
+    "section": "Compute a rate",
+    "subgoals": [
+      "State the governing relation for poisson regression",
+      "Identify the quantities in the compute a rate step",
+      "Carry out the compute a rate computation"
+    ]
+  },
+  {
+    "label": "Interpret a coefficient",
+    "section": "Interpret a coefficient",
+    "subgoals": [
+      "State the governing relation for poisson regression",
+      "Identify the quantities in the interpret a coefficient step",
+      "Carry out the interpret a coefficient computation"
+    ]
+  }
+]

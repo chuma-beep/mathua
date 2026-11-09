@@ -1,7 +1,7 @@
 {
   "quizGateXP": 50,
-  "conceptCount": 1650,
-  "connectionCount": 2319,
+  "conceptCount": 1700,
+  "connectionCount": 2397,
   "domainCount": 23,
   "domainCounts": {
     "abstract_algebra": 56,
@@ -10,8 +10,8 @@
     "calc1": 100,
     "calc2": 89,
     "calc3": 71,
-    "complex_numbers": 51,
-    "differential_equations": 46,
+    "complex_numbers": 71,
+    "differential_equations": 66,
     "discrete_math": 64,
     "fractions": 52,
     "geometry": 70,
@@ -24,7 +24,7 @@
     "precalculus": 58,
     "probability_theory": 63,
     "real_analysis": 65,
-    "statistics": 87,
+    "statistics": 97,
     "topology": 52,
     "trigonometry": 78
   },

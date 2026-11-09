@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Evaluate the integral",
+    "section": "Evaluate the integral",
+    "subgoals": [
+      "State the governing relation for jensen's formula",
+      "Identify the quantities in the evaluate the integral step",
+      "Carry out the evaluate the integral computation"
+    ]
+  },
+  {
+    "label": "Count zeros inside",
+    "section": "Count zeros inside",
+    "subgoals": [
+      "State the governing relation for jensen's formula",
+      "Identify the quantities in the count zeros inside step",
+      "Carry out the count zeros inside computation"
+    ]
+  },
+  {
+    "label": "Apply Jensen's formula",
+    "section": "Apply Jensen's formula",
+    "subgoals": [
+      "State the governing relation for jensen's formula",
+      "Identify the quantities in the apply jensen's formula step",
+      "Carry out the apply jensen's formula computation"
+    ]
+  }
+]

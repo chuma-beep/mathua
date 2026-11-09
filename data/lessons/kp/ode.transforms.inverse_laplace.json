@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Match a transform pair",
+    "section": "Match a transform pair",
+    "subgoals": [
+      "State the governing relation for inverse laplace transforms",
+      "Identify the quantities in the match a transform pair step",
+      "Carry out the match a transform pair computation"
+    ]
+  },
+  {
+    "label": "Invert a linear combination",
+    "section": "Invert a linear combination",
+    "subgoals": [
+      "State the governing relation for inverse laplace transforms",
+      "Identify the quantities in the invert a linear combination step",
+      "Carry out the invert a linear combination computation"
+    ]
+  },
+  {
+    "label": "Invert a shifted transform",
+    "section": "Invert a shifted transform",
+    "subgoals": [
+      "State the governing relation for inverse laplace transforms",
+      "Identify the quantities in the invert a shifted transform step",
+      "Carry out the invert a shifted transform computation"
+    ]
+  }
+]

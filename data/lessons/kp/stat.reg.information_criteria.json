@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Compute AIC",
+    "section": "Compute AIC",
+    "subgoals": [
+      "State the governing relation for information criteria for model selection",
+      "Identify the quantities in the compute aic step",
+      "Carry out the compute aic computation"
+    ]
+  },
+  {
+    "label": "Compute BIC",
+    "section": "Compute BIC",
+    "subgoals": [
+      "State the governing relation for information criteria for model selection",
+      "Identify the quantities in the compute bic step",
+      "Carry out the compute bic computation"
+    ]
+  },
+  {
+    "label": "Compare two models",
+    "section": "Compare two models",
+    "subgoals": [
+      "State the governing relation for information criteria for model selection",
+      "Identify the quantities in the compare two models step",
+      "Carry out the compare two models computation"
+    ]
+  }
+]

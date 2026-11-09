@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Place the image source",
+    "section": "Place the image source",
+    "subgoals": [
+      "State the governing relation for the method of images",
+      "Identify the quantities in the place the image source step",
+      "Carry out the place the image source computation"
+    ]
+  },
+  {
+    "label": "Enforce the boundary condition",
+    "section": "Enforce the boundary condition",
+    "subgoals": [
+      "State the governing relation for the method of images",
+      "Identify the quantities in the enforce the boundary condition step",
+      "Carry out the enforce the boundary condition computation"
+    ]
+  },
+  {
+    "label": "Evaluate the potential",
+    "section": "Evaluate the potential",
+    "subgoals": [
+      "State the governing relation for the method of images",
+      "Identify the quantities in the evaluate the potential step",
+      "Carry out the evaluate the potential computation"
+    ]
+  }
+]

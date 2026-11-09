@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Identify the sheets",
+    "section": "Identify the sheets",
+    "subgoals": [
+      "State the governing relation for riemann surfaces",
+      "Identify the quantities in the identify the sheets step",
+      "Carry out the identify the sheets computation"
+    ]
+  },
+  {
+    "label": "Locate a branch point",
+    "section": "Locate a branch point",
+    "subgoals": [
+      "State the governing relation for riemann surfaces",
+      "Identify the quantities in the locate a branch point step",
+      "Carry out the locate a branch point computation"
+    ]
+  },
+  {
+    "label": "Compute the local model",
+    "section": "Compute the local model",
+    "subgoals": [
+      "State the governing relation for riemann surfaces",
+      "Identify the quantities in the compute the local model step",
+      "Carry out the compute the local model computation"
+    ]
+  }
+]

@@ -6598,5 +6598,205 @@
   {
     "concept_id": "graph.dominating_set",
     "source": "authored/graph.dominating_set.md"
+  },
+  {
+    "concept_id": "ode.first_order.homogeneous_substitution",
+    "source": "authored/ode.first_order.homogeneous_substitution.md"
+  },
+  {
+    "concept_id": "ode.first_order.clairaut",
+    "source": "authored/ode.first_order.clairaut.md"
+  },
+  {
+    "concept_id": "ode.first_order.riccati",
+    "source": "authored/ode.first_order.riccati.md"
+  },
+  {
+    "concept_id": "ode.transforms.inverse_laplace",
+    "source": "authored/ode.transforms.inverse_laplace.md"
+  },
+  {
+    "concept_id": "ode.transforms.derivative",
+    "source": "authored/ode.transforms.derivative.md"
+  },
+  {
+    "concept_id": "ode.transforms.periodic",
+    "source": "authored/ode.transforms.periodic.md"
+  },
+  {
+    "concept_id": "ode.transforms.initial_final",
+    "source": "authored/ode.transforms.initial_final.md"
+  },
+  {
+    "concept_id": "ode.second_order.frobenius",
+    "source": "authored/ode.second_order.frobenius.md"
+  },
+  {
+    "concept_id": "ode.second_order.bessel",
+    "source": "authored/ode.second_order.bessel.md"
+  },
+  {
+    "concept_id": "ode.second_order.legendre",
+    "source": "authored/ode.second_order.legendre.md"
+  },
+  {
+    "concept_id": "ode.numerical.multistep",
+    "source": "authored/ode.numerical.multistep.md"
+  },
+  {
+    "concept_id": "ode.numerical.rkf",
+    "source": "authored/ode.numerical.rkf.md"
+  },
+  {
+    "concept_id": "ode.numerical.implicit",
+    "source": "authored/ode.numerical.implicit.md"
+  },
+  {
+    "concept_id": "ode.boundary.shooting",
+    "source": "authored/ode.boundary.shooting.md"
+  },
+  {
+    "concept_id": "ode.boundary.finite_difference",
+    "source": "authored/ode.boundary.finite_difference.md"
+  },
+  {
+    "concept_id": "ode.integral.fredholm",
+    "source": "authored/ode.integral.fredholm.md"
+  },
+  {
+    "concept_id": "ode.basics.delay",
+    "source": "authored/ode.basics.delay.md"
+  },
+  {
+    "concept_id": "ode.nonlinear.perturbation",
+    "source": "authored/ode.nonlinear.perturbation.md"
+  },
+  {
+    "concept_id": "ode.pde.duhamel",
+    "source": "authored/ode.pde.duhamel.md"
+  },
+  {
+    "concept_id": "ode.pde.images",
+    "source": "authored/ode.pde.images.md"
+  },
+  {
+    "concept_id": "complex.adv.roots_unity",
+    "source": "authored/complex.adv.roots_unity.md"
+  },
+  {
+    "concept_id": "complex.adv.branches",
+    "source": "authored/complex.adv.branches.md"
+  },
+  {
+    "concept_id": "complex.adv.complex_powers",
+    "source": "authored/complex.adv.complex_powers.md"
+  },
+  {
+    "concept_id": "complex.adv.trig_zeros",
+    "source": "authored/complex.adv.trig_zeros.md"
+  },
+  {
+    "concept_id": "complex.adv.harmonic_conjugate",
+    "source": "authored/complex.adv.harmonic_conjugate.md"
+  },
+  {
+    "concept_id": "complex.adv.poisson_kernel",
+    "source": "authored/complex.adv.poisson_kernel.md"
+  },
+  {
+    "concept_id": "complex.adv.rouche",
+    "source": "authored/complex.adv.rouche.md"
+  },
+  {
+    "concept_id": "complex.adv.open_mapping",
+    "source": "authored/complex.adv.open_mapping.md"
+  },
+  {
+    "concept_id": "complex.adv.casorati",
+    "source": "authored/complex.adv.casorati.md"
+  },
+  {
+    "concept_id": "complex.adv.picard",
+    "source": "authored/complex.adv.picard.md"
+  },
+  {
+    "concept_id": "complex.adv.analytic_continuation",
+    "source": "authored/complex.adv.analytic_continuation.md"
+  },
+  {
+    "concept_id": "complex.adv.monodromy",
+    "source": "authored/complex.adv.monodromy.md"
+  },
+  {
+    "concept_id": "complex.adv.riemann_surface",
+    "source": "authored/complex.adv.riemann_surface.md"
+  },
+  {
+    "concept_id": "complex.adv.elliptic",
+    "source": "authored/complex.adv.elliptic.md"
+  },
+  {
+    "concept_id": "complex.adv.modular_forms",
+    "source": "authored/complex.adv.modular_forms.md"
+  },
+  {
+    "concept_id": "complex.adv.gamma",
+    "source": "authored/complex.adv.gamma.md"
+  },
+  {
+    "concept_id": "complex.adv.weierstrass_factorization",
+    "source": "authored/complex.adv.weierstrass_factorization.md"
+  },
+  {
+    "concept_id": "complex.adv.mittag_leffler",
+    "source": "authored/complex.adv.mittag_leffler.md"
+  },
+  {
+    "concept_id": "complex.adv.schwarz_christoffel",
+    "source": "authored/complex.adv.schwarz_christoffel.md"
+  },
+  {
+    "concept_id": "complex.adv.jensen",
+    "source": "authored/complex.adv.jensen.md"
+  },
+  {
+    "concept_id": "stat.infer.bootstrap",
+    "source": "authored/stat.infer.bootstrap.md"
+  },
+  {
+    "concept_id": "stat.test.permutation",
+    "source": "authored/stat.test.permutation.md"
+  },
+  {
+    "concept_id": "stat.test.wilcoxon",
+    "source": "authored/stat.test.wilcoxon.md"
+  },
+  {
+    "concept_id": "stat.test.mann_whitney",
+    "source": "authored/stat.test.mann_whitney.md"
+  },
+  {
+    "concept_id": "stat.infer.kaplan_meier",
+    "source": "authored/stat.infer.kaplan_meier.md"
+  },
+  {
+    "concept_id": "stat.infer.credible_interval",
+    "source": "authored/stat.infer.credible_interval.md"
+  },
+  {
+    "concept_id": "stat.reg.information_criteria",
+    "source": "authored/stat.reg.information_criteria.md"
+  },
+  {
+    "concept_id": "stat.reg.quantile",
+    "source": "authored/stat.reg.quantile.md"
+  },
+  {
+    "concept_id": "stat.reg.poisson",
+    "source": "authored/stat.reg.poisson.md"
+  },
+  {
+    "concept_id": "stat.data.missing",
+    "source": "authored/stat.data.missing.md"
   }
 ]

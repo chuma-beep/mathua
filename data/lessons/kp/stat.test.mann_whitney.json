@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Rank the pooled sample",
+    "section": "Rank the pooled sample",
+    "subgoals": [
+      "State the governing relation for the mann-whitney u test",
+      "Identify the quantities in the rank the pooled sample step",
+      "Carry out the rank the pooled sample computation"
+    ]
+  },
+  {
+    "label": "Compute U",
+    "section": "Compute U",
+    "subgoals": [
+      "State the governing relation for the mann-whitney u test",
+      "Identify the quantities in the compute u step",
+      "Carry out the compute u computation"
+    ]
+  },
+  {
+    "label": "Read the test conclusion",
+    "section": "Read the test conclusion",
+    "subgoals": [
+      "State the governing relation for the mann-whitney u test",
+      "Identify the quantities in the read the test conclusion step",
+      "Carry out the read the test conclusion computation"
+    ]
+  }
+]

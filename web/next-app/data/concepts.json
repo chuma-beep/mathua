@@ -8895,6 +8895,302 @@
     "variants": []
   },
   {
+    "domain": "complex_numbers",
+    "grading_type": "numeric",
+    "id": "complex.adv.roots_unity",
+    "label": "Roots of unity",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.roots"
+    ],
+    "subdomain": "complex_numbers.advanced"
+  },
+  {
+    "domain": "complex_numbers",
+    "grading_type": "numeric",
+    "id": "complex.adv.branches",
+    "label": "Principal values and branch cuts",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.logarithm"
+    ],
+    "subdomain": "complex_numbers.advanced"
+  },
+  {
+    "domain": "complex_numbers",
+    "grading_type": "numeric",
+    "id": "complex.adv.complex_powers",
+    "label": "Complex exponentiation",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.exponential",
+      "complex.adv.logarithm"
+    ],
+    "subdomain": "complex_numbers.advanced"
+  },
+  {
+    "domain": "complex_numbers",
+    "grading_type": "numeric",
+    "id": "complex.adv.trig_zeros",
+    "label": "Zeros of complex trigonometric functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.trig_exponential"
+    ],
+    "subdomain": "complex_numbers.advanced"
+  },
+  {
+    "domain": "complex_numbers",
+    "grading_type": "numeric",
+    "id": "complex.adv.harmonic_conjugate",
+    "label": "Harmonic conjugates",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.harmonic",
+      "complex.adv.cauchy_riemann"
+    ],
+    "subdomain": "complex_numbers.advanced"
+  },
+  {
+    "domain": "complex_numbers",
+    "grading_type": "numeric",
+    "id": "complex.adv.poisson_kernel",
+    "label": "The Poisson kernel",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.harmonic",
+      "complex.integral.cauchy_formula"
+    ],
+    "subdomain": "complex_numbers.advanced"
+  },
+  {
+    "domain": "complex_numbers",
+    "grading_type": "numeric",
+    "id": "complex.adv.rouche",
+    "label": "Rouché's theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.argument_principle",
+      "complex.adv.residue"
+    ],
+    "subdomain": "complex_numbers.advanced"
+  },
+  {
+    "domain": "complex_numbers",
+    "grading_type": "numeric",
+    "id": "complex.adv.open_mapping",
+    "label": "The open mapping theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.analytic",
+      "complex.adv.maximum_modulus"
+    ],
+    "subdomain": "complex_numbers.advanced"
+  },
+  {
+    "domain": "complex_numbers",
+    "grading_type": "numeric",
+    "id": "complex.adv.casorati",
+    "label": "The Casorati-Weierstrass theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.series.laurent",
+      "complex.adv.residue"
+    ],
+    "subdomain": "complex_numbers.advanced"
+  },
+  {
+    "domain": "complex_numbers",
+    "grading_type": "numeric",
+    "id": "complex.adv.picard",
+    "label": "Picard's theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.liouville",
+      "complex.adv.maximum_modulus"
+    ],
+    "subdomain": "complex_numbers.advanced"
+  },
+  {
+    "domain": "complex_numbers",
+    "grading_type": "numeric",
+    "id": "complex.adv.analytic_continuation",
+    "label": "Analytic continuation",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.analytic",
+      "complex.series.power"
+    ],
+    "subdomain": "complex_numbers.advanced"
+  },
+  {
+    "domain": "complex_numbers",
+    "grading_type": "numeric",
+    "id": "complex.adv.monodromy",
+    "label": "Monodromy",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.analytic_continuation",
+      "complex.adv.winding"
+    ],
+    "subdomain": "complex_numbers.advanced"
+  },
+  {
+    "domain": "complex_numbers",
+    "grading_type": "numeric",
+    "id": "complex.adv.riemann_surface",
+    "label": "Riemann surfaces",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.analytic_continuation",
+      "complex.topology.riemann_sphere"
+    ],
+    "subdomain": "complex_numbers.topology"
+  },
+  {
+    "domain": "complex_numbers",
+    "grading_type": "numeric",
+    "id": "complex.adv.elliptic",
+    "label": "Elliptic functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.series.laurent",
+      "complex.adv.liouville"
+    ],
+    "subdomain": "complex_numbers.advanced"
+  },
+  {
+    "domain": "complex_numbers",
+    "grading_type": "numeric",
+    "id": "complex.adv.modular_forms",
+    "label": "Modular forms",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.elliptic"
+    ],
+    "subdomain": "complex_numbers.advanced"
+  },
+  {
+    "domain": "complex_numbers",
+    "grading_type": "numeric",
+    "id": "complex.adv.gamma",
+    "label": "The complex gamma function",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.integral.cauchy_formula",
+      "complex.adv.analytic"
+    ],
+    "subdomain": "complex_numbers.advanced"
+  },
+  {
+    "domain": "complex_numbers",
+    "grading_type": "numeric",
+    "id": "complex.adv.weierstrass_factorization",
+    "label": "The Weierstrass factorization theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.analytic",
+      "complex.series.power"
+    ],
+    "subdomain": "complex_numbers.advanced"
+  },
+  {
+    "domain": "complex_numbers",
+    "grading_type": "numeric",
+    "id": "complex.adv.mittag_leffler",
+    "label": "The Mittag-Leffler theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.residue",
+      "complex.series.laurent"
+    ],
+    "subdomain": "complex_numbers.advanced"
+  },
+  {
+    "domain": "complex_numbers",
+    "grading_type": "numeric",
+    "id": "complex.adv.schwarz_christoffel",
+    "label": "The Schwarz-Christoffel mapping",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.conformal",
+      "complex.adv.mobius"
+    ],
+    "subdomain": "complex_numbers.advanced"
+  },
+  {
+    "domain": "complex_numbers",
+    "grading_type": "numeric",
+    "id": "complex.adv.jensen",
+    "label": "Jensen's formula",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "complex.adv.harmonic",
+      "complex.adv.maximum_modulus"
+    ],
+    "subdomain": "complex_numbers.advanced"
+  },
+  {
     "domain": "differential_equations",
     "grading_type": "numeric",
     "id": "ode.basics.concept",
@@ -9557,6 +9853,288 @@
     ],
     "subdomain": "differential_equations.second_order",
     "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "grading_type": "numeric",
+    "id": "ode.first_order.homogeneous_substitution",
+    "label": "Homogeneous substitutions for first-order ODEs",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.first_order.separable"
+    ],
+    "subdomain": "differential_equations.first_order"
+  },
+  {
+    "domain": "differential_equations",
+    "grading_type": "numeric",
+    "id": "ode.first_order.clairaut",
+    "label": "Clairaut equations",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.first_order.linear"
+    ],
+    "subdomain": "differential_equations.first_order"
+  },
+  {
+    "domain": "differential_equations",
+    "grading_type": "numeric",
+    "id": "ode.first_order.riccati",
+    "label": "Riccati equations",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.first_order.bernoulli"
+    ],
+    "subdomain": "differential_equations.first_order"
+  },
+  {
+    "domain": "differential_equations",
+    "grading_type": "numeric",
+    "id": "ode.transforms.inverse_laplace",
+    "label": "Inverse Laplace transforms",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.transforms.laplace"
+    ],
+    "subdomain": "differential_equations.transforms"
+  },
+  {
+    "domain": "differential_equations",
+    "grading_type": "numeric",
+    "id": "ode.transforms.derivative",
+    "label": "Laplace transform of derivatives",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.transforms.laplace"
+    ],
+    "subdomain": "differential_equations.transforms"
+  },
+  {
+    "domain": "differential_equations",
+    "grading_type": "numeric",
+    "id": "ode.transforms.periodic",
+    "label": "Laplace transforms of periodic functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.transforms.laplace",
+      "ode.transforms.step"
+    ],
+    "subdomain": "differential_equations.transforms"
+  },
+  {
+    "domain": "differential_equations",
+    "grading_type": "numeric",
+    "id": "ode.transforms.initial_final",
+    "label": "Initial and final value theorems",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.transforms.laplace"
+    ],
+    "subdomain": "differential_equations.transforms"
+  },
+  {
+    "domain": "differential_equations",
+    "grading_type": "numeric",
+    "id": "ode.second_order.frobenius",
+    "label": "The Frobenius method",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.second_order.power_series"
+    ],
+    "subdomain": "differential_equations.second_order"
+  },
+  {
+    "domain": "differential_equations",
+    "grading_type": "numeric",
+    "id": "ode.second_order.bessel",
+    "label": "Bessel functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.second_order.power_series"
+    ],
+    "subdomain": "differential_equations.second_order"
+  },
+  {
+    "domain": "differential_equations",
+    "grading_type": "numeric",
+    "id": "ode.second_order.legendre",
+    "label": "Legendre polynomials",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.second_order.power_series"
+    ],
+    "subdomain": "differential_equations.second_order"
+  },
+  {
+    "domain": "differential_equations",
+    "grading_type": "numeric",
+    "id": "ode.numerical.multistep",
+    "label": "Multistep methods",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.numerical.euler"
+    ],
+    "subdomain": "differential_equations.numerical"
+  },
+  {
+    "domain": "differential_equations",
+    "grading_type": "numeric",
+    "id": "ode.numerical.rkf",
+    "label": "Runge-Kutta-Fehlberg methods",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.numerical.rk4"
+    ],
+    "subdomain": "differential_equations.numerical"
+  },
+  {
+    "domain": "differential_equations",
+    "grading_type": "numeric",
+    "id": "ode.numerical.implicit",
+    "label": "Implicit Euler and stiff equations",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.numerical.euler"
+    ],
+    "subdomain": "differential_equations.numerical"
+  },
+  {
+    "domain": "differential_equations",
+    "grading_type": "numeric",
+    "id": "ode.boundary.shooting",
+    "label": "The shooting method",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.boundary_value"
+    ],
+    "subdomain": "differential_equations.boundary"
+  },
+  {
+    "domain": "differential_equations",
+    "grading_type": "numeric",
+    "id": "ode.boundary.finite_difference",
+    "label": "Finite-difference methods for boundary-value problems",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.boundary_value"
+    ],
+    "subdomain": "differential_equations.boundary"
+  },
+  {
+    "domain": "differential_equations",
+    "grading_type": "numeric",
+    "id": "ode.integral.fredholm",
+    "label": "Fredholm integral equations",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.integral.volterra"
+    ],
+    "subdomain": "differential_equations.integral"
+  },
+  {
+    "domain": "differential_equations",
+    "grading_type": "numeric",
+    "id": "ode.basics.delay",
+    "label": "Delay differential equations",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.basics.existence_uniqueness"
+    ],
+    "subdomain": "differential_equations.basics"
+  },
+  {
+    "domain": "differential_equations",
+    "grading_type": "numeric",
+    "id": "ode.nonlinear.perturbation",
+    "label": "Perturbation methods",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.nonlinear.bifurcation"
+    ],
+    "subdomain": "differential_equations.nonlinear"
+  },
+  {
+    "domain": "differential_equations",
+    "grading_type": "numeric",
+    "id": "ode.pde.duhamel",
+    "label": "Duhamel's principle",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.pde.heat",
+      "ode.transforms.step"
+    ],
+    "subdomain": "differential_equations.pde"
+  },
+  {
+    "domain": "differential_equations",
+    "grading_type": "numeric",
+    "id": "ode.pde.images",
+    "label": "The method of images",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.pde.laplace_eq"
+    ],
+    "subdomain": "differential_equations.pde"
   },
   {
     "domain": "discrete_math",
@@ -22209,6 +22787,156 @@
       "stat.infer.nonparametric"
     ],
     "subdomain": "statistics.inference"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.infer.bootstrap",
+    "label": "Bootstrap confidence intervals",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.infer.confidence",
+      "stat.sampling.se"
+    ],
+    "subdomain": "statistics.inference"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.test.permutation",
+    "label": "Permutation tests",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.infer.hypothesis",
+      "stat.infer.pvalue"
+    ],
+    "subdomain": "statistics.inference"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.test.wilcoxon",
+    "label": "The Wilcoxon signed-rank test",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.infer.nonparametric",
+      "stat.infer.paired"
+    ],
+    "subdomain": "statistics.inference"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.test.mann_whitney",
+    "label": "The Mann-Whitney U test",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.infer.nonparametric",
+      "stat.infer.ttest_two"
+    ],
+    "subdomain": "statistics.inference"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.infer.kaplan_meier",
+    "label": "The Kaplan-Meier estimator",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.infer.confidence",
+      "stat.dist.exponential"
+    ],
+    "subdomain": "statistics.inference"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.infer.credible_interval",
+    "label": "Bayesian credible intervals",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.prob.bayes",
+      "stat.infer.confidence"
+    ],
+    "subdomain": "statistics.inference"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.reg.information_criteria",
+    "label": "Information criteria for model selection",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.reg.multiple",
+      "stat.reg.r2"
+    ],
+    "subdomain": "statistics.regression"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.reg.quantile",
+    "label": "Quantile regression",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.reg.least_squares",
+      "stat.reg.multiple"
+    ],
+    "subdomain": "statistics.regression"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.reg.poisson",
+    "label": "Poisson regression",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.reg.logistic",
+      "stat.dist.poisson"
+    ],
+    "subdomain": "statistics.regression"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.data.missing",
+    "label": "Missing-data mechanisms and imputation",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.data.study_design",
+      "stat.reg.multiple"
+    ],
+    "subdomain": "statistics.data_collection"
   },
   {
     "domain": "topology",

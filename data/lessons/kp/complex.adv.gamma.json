@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Evaluate the gamma function",
+    "section": "Evaluate the gamma function",
+    "subgoals": [
+      "State the governing relation for the complex gamma function",
+      "Identify the quantities in the evaluate the gamma function step",
+      "Carry out the evaluate the gamma function computation"
+    ]
+  },
+  {
+    "label": "Use the reflection formula",
+    "section": "Use the reflection formula",
+    "subgoals": [
+      "State the governing relation for the complex gamma function",
+      "Identify the quantities in the use the reflection formula step",
+      "Carry out the use the reflection formula computation"
+    ]
+  },
+  {
+    "label": "Locate the poles",
+    "section": "Locate the poles",
+    "subgoals": [
+      "State the governing relation for the complex gamma function",
+      "Identify the quantities in the locate the poles step",
+      "Carry out the locate the poles computation"
+    ]
+  }
+]

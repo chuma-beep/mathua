@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Identify the Bessel order",
+    "section": "Identify the Bessel order",
+    "subgoals": [
+      "State the governing relation for bessel functions",
+      "Identify the quantities in the identify the bessel order step",
+      "Carry out the identify the bessel order computation"
+    ]
+  },
+  {
+    "label": "Use the recurrence",
+    "section": "Use the recurrence",
+    "subgoals": [
+      "State the governing relation for bessel functions",
+      "Identify the quantities in the use the recurrence step",
+      "Carry out the use the recurrence computation"
+    ]
+  },
+  {
+    "label": "Evaluate a Bessel value",
+    "section": "Evaluate a Bessel value",
+    "subgoals": [
+      "State the governing relation for bessel functions",
+      "Identify the quantities in the evaluate a bessel value step",
+      "Carry out the evaluate a bessel value computation"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Find the periods",
+    "section": "Find the periods",
+    "subgoals": [
+      "State the governing relation for elliptic functions",
+      "Identify the quantities in the find the periods step",
+      "Carry out the find the periods computation"
+    ]
+  },
+  {
+    "label": "Locate the poles",
+    "section": "Locate the poles",
+    "subgoals": [
+      "State the governing relation for elliptic functions",
+      "Identify the quantities in the locate the poles step",
+      "Carry out the locate the poles computation"
+    ]
+  },
+  {
+    "label": "Use the addition relation",
+    "section": "Use the addition relation",
+    "subgoals": [
+      "State the governing relation for elliptic functions",
+      "Identify the quantities in the use the addition relation step",
+      "Carry out the use the addition relation computation"
+    ]
+  }
+]

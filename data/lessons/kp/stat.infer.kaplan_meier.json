@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Compute a survival step",
+    "section": "Compute a survival step",
+    "subgoals": [
+      "State the governing relation for the kaplan-meier estimator",
+      "Identify the quantities in the compute a survival step step",
+      "Carry out the compute a survival step computation"
+    ]
+  },
+  {
+    "label": "Account for censoring",
+    "section": "Account for censoring",
+    "subgoals": [
+      "State the governing relation for the kaplan-meier estimator",
+      "Identify the quantities in the account for censoring step",
+      "Carry out the account for censoring computation"
+    ]
+  },
+  {
+    "label": "Find the median survival",
+    "section": "Find the median survival",
+    "subgoals": [
+      "State the governing relation for the kaplan-meier estimator",
+      "Identify the quantities in the find the median survival step",
+      "Carry out the find the median survival computation"
+    ]
+  }
+]

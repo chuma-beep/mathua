@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Solve a trigonometric zero",
+    "section": "Solve a trigonometric zero",
+    "subgoals": [
+      "State the governing relation for zeros of complex trigonometric functions",
+      "Identify the quantities in the solve a trigonometric zero step",
+      "Carry out the solve a trigonometric zero computation"
+    ]
+  },
+  {
+    "label": "State the period",
+    "section": "State the period",
+    "subgoals": [
+      "State the governing relation for zeros of complex trigonometric functions",
+      "Identify the quantities in the state the period step",
+      "Carry out the state the period computation"
+    ]
+  },
+  {
+    "label": "Count zeros in a range",
+    "section": "Count zeros in a range",
+    "subgoals": [
+      "State the governing relation for zeros of complex trigonometric functions",
+      "Identify the quantities in the count zeros in a range step",
+      "Carry out the count zeros in a range computation"
+    ]
+  }
+]

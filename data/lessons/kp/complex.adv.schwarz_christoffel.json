@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Identify the vertices",
+    "section": "Identify the vertices",
+    "subgoals": [
+      "State the governing relation for the schwarz-christoffel mapping",
+      "Identify the quantities in the identify the vertices step",
+      "Carry out the identify the vertices computation"
+    ]
+  },
+  {
+    "label": "Apply the exponent formula",
+    "section": "Apply the exponent formula",
+    "subgoals": [
+      "State the governing relation for the schwarz-christoffel mapping",
+      "Identify the quantities in the apply the exponent formula step",
+      "Carry out the apply the exponent formula computation"
+    ]
+  },
+  {
+    "label": "Check the mapping",
+    "section": "Check the mapping",
+    "subgoals": [
+      "State the governing relation for the schwarz-christoffel mapping",
+      "Identify the quantities in the check the mapping step",
+      "Carry out the check the mapping computation"
+    ]
+  }
+]

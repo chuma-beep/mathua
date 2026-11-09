@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Find the conjugate",
+    "section": "Find the conjugate",
+    "subgoals": [
+      "State the governing relation for harmonic conjugates",
+      "Identify the quantities in the find the conjugate step",
+      "Carry out the find the conjugate computation"
+    ]
+  },
+  {
+    "label": "Verify the Cauchy-Riemann equations",
+    "section": "Verify the Cauchy-Riemann equations",
+    "subgoals": [
+      "State the governing relation for harmonic conjugates",
+      "Identify the quantities in the verify the cauchy-riemann equations step",
+      "Carry out the verify the cauchy-riemann equations computation"
+    ]
+  },
+  {
+    "label": "Check harmonicity",
+    "section": "Check harmonicity",
+    "subgoals": [
+      "State the governing relation for harmonic conjugates",
+      "Identify the quantities in the check harmonicity step",
+      "Carry out the check harmonicity computation"
+    ]
+  }
+]

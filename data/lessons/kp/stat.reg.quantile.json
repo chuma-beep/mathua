@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Evaluate the quantile loss",
+    "section": "Evaluate the quantile loss",
+    "subgoals": [
+      "State the governing relation for quantile regression",
+      "Identify the quantities in the evaluate the quantile loss step",
+      "Carry out the evaluate the quantile loss computation"
+    ]
+  },
+  {
+    "label": "Estimate a coefficient",
+    "section": "Estimate a coefficient",
+    "subgoals": [
+      "State the governing relation for quantile regression",
+      "Identify the quantities in the estimate a coefficient step",
+      "Carry out the estimate a coefficient computation"
+    ]
+  },
+  {
+    "label": "Predict a quantile",
+    "section": "Predict a quantile",
+    "subgoals": [
+      "State the governing relation for quantile regression",
+      "Identify the quantities in the predict a quantile step",
+      "Carry out the predict a quantile computation"
+    ]
+  }
+]

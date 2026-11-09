@@ -958,7 +958,17 @@
       "stat.infer.effect_size",
       "stat.reg.multiple",
       "stat.reg.prediction_interval",
-      "stat.test.kruskal_wallis"
+      "stat.test.kruskal_wallis",
+      "stat.infer.bootstrap",
+      "stat.test.permutation",
+      "stat.test.wilcoxon",
+      "stat.test.mann_whitney",
+      "stat.infer.kaplan_meier",
+      "stat.infer.credible_interval",
+      "stat.reg.information_criteria",
+      "stat.reg.quantile",
+      "stat.reg.poisson",
+      "stat.data.missing"
     ]
   },
   {
@@ -1077,7 +1087,27 @@
       "ode.adv.systems",
       "ode.systems.linear_phase",
       "ode.stability",
-      "ode.second_order.forced"
+      "ode.second_order.forced",
+      "ode.first_order.homogeneous_substitution",
+      "ode.first_order.clairaut",
+      "ode.first_order.riccati",
+      "ode.transforms.inverse_laplace",
+      "ode.transforms.derivative",
+      "ode.transforms.periodic",
+      "ode.transforms.initial_final",
+      "ode.second_order.frobenius",
+      "ode.second_order.bessel",
+      "ode.second_order.legendre",
+      "ode.numerical.multistep",
+      "ode.numerical.rkf",
+      "ode.numerical.implicit",
+      "ode.boundary.shooting",
+      "ode.boundary.finite_difference",
+      "ode.integral.fredholm",
+      "ode.basics.delay",
+      "ode.nonlinear.perturbation",
+      "ode.pde.duhamel",
+      "ode.pde.images"
     ]
   },
   {
@@ -1283,7 +1313,27 @@
       "complex.adv.winding",
       "complex.adv.riemann_mapping",
       "complex.adv.identity_theorem",
-      "complex.adv.morera"
+      "complex.adv.morera",
+      "complex.adv.roots_unity",
+      "complex.adv.branches",
+      "complex.adv.complex_powers",
+      "complex.adv.trig_zeros",
+      "complex.adv.harmonic_conjugate",
+      "complex.adv.poisson_kernel",
+      "complex.adv.rouche",
+      "complex.adv.open_mapping",
+      "complex.adv.casorati",
+      "complex.adv.picard",
+      "complex.adv.analytic_continuation",
+      "complex.adv.monodromy",
+      "complex.adv.riemann_surface",
+      "complex.adv.elliptic",
+      "complex.adv.modular_forms",
+      "complex.adv.gamma",
+      "complex.adv.weierstrass_factorization",
+      "complex.adv.mittag_leffler",
+      "complex.adv.schwarz_christoffel",
+      "complex.adv.jensen"
     ]
   },
   {

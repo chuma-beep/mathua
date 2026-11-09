@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Read the initial value",
+    "section": "Read the initial value",
+    "subgoals": [
+      "State the governing relation for initial and final value theorems",
+      "Identify the quantities in the read the initial value step",
+      "Carry out the read the initial value computation"
+    ]
+  },
+  {
+    "label": "Read the final value",
+    "section": "Read the final value",
+    "subgoals": [
+      "State the governing relation for initial and final value theorems",
+      "Identify the quantities in the read the final value step",
+      "Carry out the read the final value computation"
+    ]
+  },
+  {
+    "label": "Check the limit conditions",
+    "section": "Check the limit conditions",
+    "subgoals": [
+      "State the governing relation for initial and final value theorems",
+      "Identify the quantities in the check the limit conditions step",
+      "Carry out the check the limit conditions computation"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Evaluate a Legendre polynomial",
+    "section": "Evaluate a Legendre polynomial",
+    "subgoals": [
+      "State the governing relation for legendre polynomials",
+      "Identify the quantities in the evaluate a legendre polynomial step",
+      "Carry out the evaluate a legendre polynomial computation"
+    ]
+  },
+  {
+    "label": "Use orthogonality",
+    "section": "Use orthogonality",
+    "subgoals": [
+      "State the governing relation for legendre polynomials",
+      "Identify the quantities in the use orthogonality step",
+      "Carry out the use orthogonality computation"
+    ]
+  },
+  {
+    "label": "Apply the recurrence",
+    "section": "Apply the recurrence",
+    "subgoals": [
+      "State the governing relation for legendre polynomials",
+      "Identify the quantities in the apply the recurrence step",
+      "Carry out the apply the recurrence computation"
+    ]
+  }
+]

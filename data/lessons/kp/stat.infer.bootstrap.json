@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Resample a statistic",
+    "section": "Resample a statistic",
+    "subgoals": [
+      "State the governing relation for bootstrap confidence intervals",
+      "Identify the quantities in the resample a statistic step",
+      "Carry out the resample a statistic computation"
+    ]
+  },
+  {
+    "label": "Build a percentile interval",
+    "section": "Build a percentile interval",
+    "subgoals": [
+      "State the governing relation for bootstrap confidence intervals",
+      "Identify the quantities in the build a percentile interval step",
+      "Carry out the build a percentile interval computation"
+    ]
+  },
+  {
+    "label": "Estimate the standard error",
+    "section": "Estimate the standard error",
+    "subgoals": [
+      "State the governing relation for bootstrap confidence intervals",
+      "Identify the quantities in the estimate the standard error step",
+      "Carry out the estimate the standard error computation"
+    ]
+  }
+]

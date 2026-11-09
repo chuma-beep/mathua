@@ -1252,5 +1252,155 @@
       "streak": 10,
       "avg_time_seconds": 26.0
     }
+  },
+  {
+    "id": "stat.infer.bootstrap",
+    "label": "Bootstrap confidence intervals",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.confidence",
+      "stat.sampling.se"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "stat.test.permutation",
+    "label": "Permutation tests",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.hypothesis",
+      "stat.infer.pvalue"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "stat.test.wilcoxon",
+    "label": "The Wilcoxon signed-rank test",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.nonparametric",
+      "stat.infer.paired"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "stat.test.mann_whitney",
+    "label": "The Mann-Whitney U test",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.nonparametric",
+      "stat.infer.ttest_two"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "stat.infer.kaplan_meier",
+    "label": "The Kaplan-Meier estimator",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.confidence",
+      "stat.dist.exponential"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "stat.infer.credible_interval",
+    "label": "Bayesian credible intervals",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.bayes",
+      "stat.infer.confidence"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "stat.reg.information_criteria",
+    "label": "Information criteria for model selection",
+    "domain": "statistics",
+    "subdomain": "statistics.regression",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.reg.multiple",
+      "stat.reg.r2"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "stat.reg.quantile",
+    "label": "Quantile regression",
+    "domain": "statistics",
+    "subdomain": "statistics.regression",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.reg.least_squares",
+      "stat.reg.multiple"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "stat.reg.poisson",
+    "label": "Poisson regression",
+    "domain": "statistics",
+    "subdomain": "statistics.regression",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.reg.logistic",
+      "stat.dist.poisson"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "stat.data.missing",
+    "label": "Missing-data mechanisms and imputation",
+    "domain": "statistics",
+    "subdomain": "statistics.data_collection",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.study_design",
+      "stat.reg.multiple"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
   }
 ]

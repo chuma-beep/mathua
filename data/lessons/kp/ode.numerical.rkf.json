@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Compute the embedded pair",
+    "section": "Compute the embedded pair",
+    "subgoals": [
+      "State the governing relation for runge-kutta-fehlberg methods",
+      "Identify the quantities in the compute the embedded pair step",
+      "Carry out the compute the embedded pair computation"
+    ]
+  },
+  {
+    "label": "Estimate the local error",
+    "section": "Estimate the local error",
+    "subgoals": [
+      "State the governing relation for runge-kutta-fehlberg methods",
+      "Identify the quantities in the estimate the local error step",
+      "Carry out the estimate the local error computation"
+    ]
+  },
+  {
+    "label": "Choose the next step",
+    "section": "Choose the next step",
+    "subgoals": [
+      "State the governing relation for runge-kutta-fehlberg methods",
+      "Identify the quantities in the choose the next step step",
+      "Carry out the choose the next step computation"
+    ]
+  }
+]

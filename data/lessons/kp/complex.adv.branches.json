@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Choose the principal value",
+    "section": "Choose the principal value",
+    "subgoals": [
+      "State the governing relation for principal values and branch cuts",
+      "Identify the quantities in the choose the principal value step",
+      "Carry out the choose the principal value computation"
+    ]
+  },
+  {
+    "label": "Locate the branch cut",
+    "section": "Locate the branch cut",
+    "subgoals": [
+      "State the governing relation for principal values and branch cuts",
+      "Identify the quantities in the locate the branch cut step",
+      "Carry out the locate the branch cut computation"
+    ]
+  },
+  {
+    "label": "Test continuity across the cut",
+    "section": "Test continuity across the cut",
+    "subgoals": [
+      "State the governing relation for principal values and branch cuts",
+      "Identify the quantities in the test continuity across the cut step",
+      "Carry out the test continuity across the cut computation"
+    ]
+  }
+]

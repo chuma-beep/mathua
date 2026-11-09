@@ -5,8 +5,8 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1650,
-  "unit_count": 140,
+  "concept_count": 1700,
+  "unit_count": 141,
   "units": [
     {
       "id": "abstract_algebra.b6",
@@ -1157,6 +1157,8 @@
         "complex_numbers.basics"
       ],
       "concept_ids": [
+        "complex.adv.branches",
+        "complex.adv.complex_powers",
         "complex.adv.conjugate_roots",
         "complex.adv.de_moivre",
         "complex.adv.euler_identity",
@@ -1165,10 +1167,12 @@
         "complex.adv.hyperbolic",
         "complex.adv.logarithm",
         "complex.adv.roots",
+        "complex.adv.roots_unity",
         "complex.adv.trig_exponential",
+        "complex.adv.trig_zeros",
         "complex.basics.arg_arithmetic"
       ],
-      "concept_count": 10
+      "concept_count": 14
     },
     {
       "id": "complex_numbers.b10",
@@ -1201,22 +1205,28 @@
       ],
       "concept_ids": [
         "complex.adv.analytic",
+        "complex.adv.analytic_continuation",
         "complex.adv.argument_principle",
+        "complex.adv.casorati",
         "complex.adv.conformal",
         "complex.adv.harmonic",
+        "complex.adv.harmonic_conjugate",
         "complex.adv.identity_theorem",
+        "complex.adv.mittag_leffler",
         "complex.adv.morera",
         "complex.adv.residue",
         "complex.adv.residue_simple",
         "complex.adv.riemann_mapping",
+        "complex.adv.rouche",
         "complex.adv.schwarz_lemma",
+        "complex.adv.weierstrass_factorization",
         "complex.integral.cauchy_formula",
         "complex.integral.cauchy_goursat",
         "complex.series.laurent",
         "complex.series.power",
         "complex.topology.domain"
       ],
-      "concept_count": 15
+      "concept_count": 21
     },
     {
       "id": "complex_numbers.b12",
@@ -1232,16 +1242,26 @@
       ],
       "concept_ids": [
         "complex.adv.cross_ratio",
+        "complex.adv.elliptic",
+        "complex.adv.gamma",
+        "complex.adv.jensen",
         "complex.adv.liouville",
         "complex.adv.maximum_modulus",
         "complex.adv.mobius",
         "complex.adv.mobius_fixed",
+        "complex.adv.modular_forms",
+        "complex.adv.monodromy",
+        "complex.adv.open_mapping",
+        "complex.adv.picard",
+        "complex.adv.poisson_kernel",
+        "complex.adv.riemann_surface",
+        "complex.adv.schwarz_christoffel",
         "complex.adv.winding",
         "complex.integral.contour",
         "complex.integral.real_integrals",
         "complex.topology.riemann_sphere"
       ],
-      "concept_count": 9
+      "concept_count": 19
     },
     {
       "id": "differential_equations.b11",
@@ -1256,12 +1276,13 @@
       ],
       "concept_ids": [
         "ode.basics.concept",
+        "ode.basics.delay",
         "ode.basics.existence_uniqueness",
         "ode.basics.slope_field",
         "ode.pde.characteristics",
         "ode.pde.wave"
       ],
-      "concept_count": 5
+      "concept_count": 6
     },
     {
       "id": "differential_equations.b12",
@@ -1278,7 +1299,9 @@
       ],
       "concept_ids": [
         "ode.first_order.bernoulli",
+        "ode.first_order.clairaut",
         "ode.first_order.exact",
+        "ode.first_order.homogeneous_substitution",
         "ode.first_order.linear",
         "ode.first_order.logistic",
         "ode.first_order.mixing",
@@ -1286,14 +1309,17 @@
         "ode.ivp.evaluate",
         "ode.numerical.euler",
         "ode.numerical.heun",
+        "ode.numerical.implicit",
+        "ode.numerical.multistep",
         "ode.numerical.rk4",
         "ode.numerical.steps",
         "ode.pde.discriminant",
         "ode.pde.heat",
+        "ode.pde.images",
         "ode.pde.laplace_eq",
         "ode.second_order.homogeneous"
       ],
-      "concept_count": 15
+      "concept_count": 20
     },
     {
       "id": "differential_equations.b13",
@@ -1303,6 +1329,8 @@
       "depth_min": 39,
       "depth_max": 41,
       "subdomains": [
+        "differential_equations.first_order",
+        "differential_equations.numerical",
         "differential_equations.second_order",
         "differential_equations.stability",
         "differential_equations.systems",
@@ -1311,9 +1339,14 @@
       "concept_ids": [
         "ode.adv.systems",
         "ode.characteristic.sum",
+        "ode.first_order.riccati",
         "ode.laplace.value",
+        "ode.numerical.rkf",
+        "ode.second_order.bessel",
         "ode.second_order.cauchy_euler",
         "ode.second_order.forced",
+        "ode.second_order.frobenius",
+        "ode.second_order.legendre",
         "ode.second_order.nonhomogeneous",
         "ode.second_order.power_series",
         "ode.second_order.reduction",
@@ -1324,11 +1357,14 @@
         "ode.systems.matrix_exp",
         "ode.systems.predator_prey",
         "ode.transforms.convolution",
+        "ode.transforms.derivative",
+        "ode.transforms.initial_final",
+        "ode.transforms.inverse_laplace",
         "ode.transforms.laplace",
         "ode.transforms.step",
         "ode.wronskian"
       ],
-      "concept_count": 18
+      "concept_count": 26
     },
     {
       "id": "differential_equations.b14",
@@ -1341,20 +1377,41 @@
         "differential_equations.boundary",
         "differential_equations.integral",
         "differential_equations.nonlinear",
+        "differential_equations.pde",
         "differential_equations.stability",
         "differential_equations.transforms"
       ],
       "concept_ids": [
+        "ode.boundary.finite_difference",
+        "ode.boundary.shooting",
         "ode.boundary_value",
         "ode.equilibrium.nonzero",
         "ode.green.function",
         "ode.integral.volterra",
         "ode.nonlinear.bifurcation",
         "ode.nonlinear.lyapunov",
+        "ode.nonlinear.perturbation",
+        "ode.pde.duhamel",
         "ode.stability",
-        "ode.transforms.fourier"
+        "ode.transforms.fourier",
+        "ode.transforms.periodic"
       ],
-      "concept_count": 8
+      "concept_count": 13
+    },
+    {
+      "id": "differential_equations.b15",
+      "title": "Differential Equations · Stage 16",
+      "domain": "differential_equations",
+      "band": 15,
+      "depth_min": 45,
+      "depth_max": 45,
+      "subdomains": [
+        "differential_equations.integral"
+      ],
+      "concept_ids": [
+        "ode.integral.fredholm"
+      ],
+      "concept_count": 1
     },
     {
       "id": "discrete_math.b1",
@@ -3578,9 +3635,12 @@
         "statistics.inference"
       ],
       "concept_ids": [
+        "stat.infer.bootstrap",
         "stat.infer.ci_mean_t",
         "stat.infer.ci_proportion",
+        "stat.infer.credible_interval",
         "stat.infer.hypothesis",
+        "stat.infer.kaplan_meier",
         "stat.infer.margin",
         "stat.infer.nonparametric",
         "stat.infer.proportion",
@@ -3593,7 +3653,7 @@
         "stat.test.chi_square_independence",
         "stat.test.kruskal_wallis"
       ],
-      "concept_count": 14
+      "concept_count": 17
     },
     {
       "id": "statistics.b6",
@@ -3612,9 +3672,12 @@
         "stat.infer.power",
         "stat.infer.ttest_two",
         "stat.infer.type_error",
-        "stat.reg.least_squares"
+        "stat.reg.least_squares",
+        "stat.test.mann_whitney",
+        "stat.test.permutation",
+        "stat.test.wilcoxon"
       ],
-      "concept_count": 6
+      "concept_count": 9
     },
     {
       "id": "statistics.b7",
@@ -3622,18 +3685,22 @@
       "domain": "statistics",
       "band": 7,
       "depth_min": 21,
-      "depth_max": 21,
+      "depth_max": 22,
       "subdomains": [
+        "statistics.data_collection",
         "statistics.inference",
         "statistics.regression"
       ],
       "concept_ids": [
+        "stat.data.missing",
         "stat.infer.regression_slope",
+        "stat.reg.information_criteria",
         "stat.reg.multiple",
         "stat.reg.prediction_interval",
+        "stat.reg.quantile",
         "stat.reg.residual"
       ],
-      "concept_count": 4
+      "concept_count": 7
     },
     {
       "id": "statistics.b8",
@@ -3641,16 +3708,17 @@
       "domain": "statistics",
       "band": 8,
       "depth_min": 24,
-      "depth_max": 25,
+      "depth_max": 26,
       "subdomains": [
         "statistics.distributions",
         "statistics.regression"
       ],
       "concept_ids": [
         "stat.func.gaussian",
-        "stat.reg.logistic"
+        "stat.reg.logistic",
+        "stat.reg.poisson"
       ],
-      "concept_count": 2
+      "concept_count": 3
     },
     {
       "id": "topology.b10",

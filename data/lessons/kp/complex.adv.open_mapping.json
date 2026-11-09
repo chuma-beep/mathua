@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Identify an open image",
+    "section": "Identify an open image",
+    "subgoals": [
+      "State the governing relation for the open mapping theorem",
+      "Identify the quantities in the identify an open image step",
+      "Carry out the identify an open image computation"
+    ]
+  },
+  {
+    "label": "Test the hypothesis",
+    "section": "Test the hypothesis",
+    "subgoals": [
+      "State the governing relation for the open mapping theorem",
+      "Identify the quantities in the test the hypothesis step",
+      "Carry out the test the hypothesis computation"
+    ]
+  },
+  {
+    "label": "Apply the theorem",
+    "section": "Apply the theorem",
+    "subgoals": [
+      "State the governing relation for the open mapping theorem",
+      "Identify the quantities in the apply the theorem step",
+      "Carry out the apply the theorem computation"
+    ]
+  }
+]

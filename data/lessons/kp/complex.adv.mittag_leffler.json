@@ -1,0 +1,29 @@
+[
+  {
+    "label": "List the poles",
+    "section": "List the poles",
+    "subgoals": [
+      "State the governing relation for the mittag-leffler theorem",
+      "Identify the quantities in the list the poles step",
+      "Carry out the list the poles computation"
+    ]
+  },
+  {
+    "label": "Find the principal parts",
+    "section": "Find the principal parts",
+    "subgoals": [
+      "State the governing relation for the mittag-leffler theorem",
+      "Identify the quantities in the find the principal parts step",
+      "Carry out the find the principal parts computation"
+    ]
+  },
+  {
+    "label": "Build the series",
+    "section": "Build the series",
+    "subgoals": [
+      "State the governing relation for the mittag-leffler theorem",
+      "Identify the quantities in the build the series step",
+      "Carry out the build the series computation"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Rank the absolute differences",
+    "section": "Rank the absolute differences",
+    "subgoals": [
+      "State the governing relation for the wilcoxon signed-rank test",
+      "Identify the quantities in the rank the absolute differences step",
+      "Carry out the rank the absolute differences computation"
+    ]
+  },
+  {
+    "label": "Sum the signed ranks",
+    "section": "Sum the signed ranks",
+    "subgoals": [
+      "State the governing relation for the wilcoxon signed-rank test",
+      "Identify the quantities in the sum the signed ranks step",
+      "Carry out the sum the signed ranks computation"
+    ]
+  },
+  {
+    "label": "Read the test conclusion",
+    "section": "Read the test conclusion",
+    "subgoals": [
+      "State the governing relation for the wilcoxon signed-rank test",
+      "Identify the quantities in the read the test conclusion step",
+      "Carry out the read the test conclusion computation"
+    ]
+  }
+]

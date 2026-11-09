@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Build the grid equations",
+    "section": "Build the grid equations",
+    "subgoals": [
+      "State the governing relation for finite-difference methods for boundary-value problems",
+      "Identify the quantities in the build the grid equations step",
+      "Carry out the build the grid equations computation"
+    ]
+  },
+  {
+    "label": "Insert the boundary values",
+    "section": "Insert the boundary values",
+    "subgoals": [
+      "State the governing relation for finite-difference methods for boundary-value problems",
+      "Identify the quantities in the insert the boundary values step",
+      "Carry out the insert the boundary values computation"
+    ]
+  },
+  {
+    "label": "Solve the linear system",
+    "section": "Solve the linear system",
+    "subgoals": [
+      "State the governing relation for finite-difference methods for boundary-value problems",
+      "Identify the quantities in the solve the linear system step",
+      "Carry out the solve the linear system computation"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Identify the kernel",
+    "section": "Identify the kernel",
+    "subgoals": [
+      "State the governing relation for fredholm integral equations",
+      "Identify the quantities in the identify the kernel step",
+      "Carry out the identify the kernel computation"
+    ]
+  },
+  {
+    "label": "Reduce a separable kernel",
+    "section": "Reduce a separable kernel",
+    "subgoals": [
+      "State the governing relation for fredholm integral equations",
+      "Identify the quantities in the reduce a separable kernel step",
+      "Carry out the reduce a separable kernel computation"
+    ]
+  },
+  {
+    "label": "Evaluate the resolvent",
+    "section": "Evaluate the resolvent",
+    "subgoals": [
+      "State the governing relation for fredholm integral equations",
+      "Identify the quantities in the evaluate the resolvent step",
+      "Carry out the evaluate the resolvent computation"
+    ]
+  }
+]

@@ -72,6 +72,7 @@ func Register(reg *generator.Registry) {
 	registerNumeric(reg)
 	registerBatch(reg)
 	registerWave2(reg)
+	registerWave4(reg)
 }
 
 type readTableGen struct{}

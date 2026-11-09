@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Apply the implicit step",
+    "section": "Apply the implicit step",
+    "subgoals": [
+      "State the governing relation for implicit euler and stiff equations",
+      "Identify the quantities in the apply the implicit step step",
+      "Carry out the apply the implicit step computation"
+    ]
+  },
+  {
+    "label": "Solve the implicit equation",
+    "section": "Solve the implicit equation",
+    "subgoals": [
+      "State the governing relation for implicit euler and stiff equations",
+      "Identify the quantities in the solve the implicit equation step",
+      "Carry out the solve the implicit equation computation"
+    ]
+  },
+  {
+    "label": "Test stiffness",
+    "section": "Test stiffness",
+    "subgoals": [
+      "State the governing relation for implicit euler and stiff equations",
+      "Identify the quantities in the test stiffness step",
+      "Carry out the test stiffness computation"
+    ]
+  }
+]

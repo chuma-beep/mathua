@@ -42,6 +42,7 @@ func Register(reg *generator.Registry) {
 	reg.Register("ode.second_order.forced", &forcedOscillationGen{})
 	registerNumeric(reg)
 	registerBatch(reg)
+	registerWave4(reg)
 }
 
 type conceptGen struct{}

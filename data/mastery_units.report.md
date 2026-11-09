@@ -12,19 +12,19 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 1650 |
-| Total units | 140 |
+| Total concepts | 1700 |
+| Total units | 141 |
 | Minimum unit size | 1 |
 | Median unit size | 8 |
 | Maximum unit size | 58 |
-| Singleton units | 23 |
-| Units with <= 3 concepts | 38 |
-| Units with > 25 concepts | 15 |
+| Singleton units | 24 |
+| Units with <= 3 concepts | 39 |
+| Units with > 25 concepts | 16 |
 | Units with > 50 concepts | 1 |
-| Cross-unit prerequisite edges (derived) | 474 |
+| Cross-unit prerequisite edges (derived) | 477 |
 | Backward band edges | 0 |
 
-If the learner is assessed once per unit, then 140 assessments cover the corpus, and the
+If the learner is assessed once per unit, then 141 assessments cover the corpus, and the
 median is one assessment per 8 concepts. That is the frequency question this report
 exists to make concrete.
 
@@ -66,14 +66,15 @@ exists to make concrete.
 | `complex_numbers.b3` | complex_numbers | 3 | 4 | 2 | 10–11 |
 | `complex_numbers.b6` | complex_numbers | 6 | 1 | 1 | 20–20 |
 | `complex_numbers.b7` | complex_numbers | 7 | 10 | 2 | 21–23 |
-| `complex_numbers.b8` | complex_numbers | 8 | 10 | 2 | 24–26 |
+| `complex_numbers.b8` | complex_numbers | 8 | 14 | 2 | 24–26 |
 | `complex_numbers.b10` | complex_numbers | 10 | 2 | 2 | 32–32 |
-| `complex_numbers.b11` | complex_numbers | 11 | 15 | 3 | 33–35 |
-| `complex_numbers.b12` | complex_numbers | 12 | 9 | 3 | 36–38 |
-| `differential_equations.b11` | differential_equations | 11 | 5 | 2 | 33–35 |
-| `differential_equations.b12` | differential_equations | 12 | 15 | 4 | 36–38 |
-| `differential_equations.b13` | differential_equations | 13 | 18 | 4 | 39–41 |
-| `differential_equations.b14` | differential_equations | 14 | 8 | 5 | 42–44 |
+| `complex_numbers.b11` | complex_numbers | 11 | 21 | 3 | 33–35 |
+| `complex_numbers.b12` | complex_numbers | 12 | 19 | 3 | 36–38 |
+| `differential_equations.b11` | differential_equations | 11 | 6 | 2 | 33–35 |
+| `differential_equations.b12` | differential_equations | 12 | 20 | 4 | 36–38 |
+| `differential_equations.b13` | differential_equations | 13 | 26 | 6 | 39–41 |
+| `differential_equations.b14` | differential_equations | 14 | 13 | 6 | 42–44 |
+| `differential_equations.b15` | differential_equations | 15 | 1 | 1 | 45–45 |
 | `discrete_math.b1` | discrete_math | 1 | 1 | 1 | 5–5 |
 | `discrete_math.b2` | discrete_math | 2 | 2 | 1 | 7–8 |
 | `discrete_math.b4` | discrete_math | 4 | 4 | 2 | 13–14 |
@@ -159,10 +160,10 @@ exists to make concrete.
 | `statistics.b2` | statistics | 2 | 1 | 1 | 8–8 |
 | `statistics.b3` | statistics | 3 | 25 | 6 | 9–11 |
 | `statistics.b4` | statistics | 4 | 30 | 8 | 12–14 |
-| `statistics.b5` | statistics | 5 | 14 | 1 | 15–17 |
-| `statistics.b6` | statistics | 6 | 6 | 2 | 18–20 |
-| `statistics.b7` | statistics | 7 | 4 | 2 | 21–21 |
-| `statistics.b8` | statistics | 8 | 2 | 2 | 24–25 |
+| `statistics.b5` | statistics | 5 | 17 | 1 | 15–17 |
+| `statistics.b6` | statistics | 6 | 9 | 2 | 18–20 |
+| `statistics.b7` | statistics | 7 | 7 | 3 | 21–22 |
+| `statistics.b8` | statistics | 8 | 3 | 2 | 24–26 |
 | `topology.b10` | topology | 10 | 11 | 3 | 30–32 |
 | `topology.b11` | topology | 11 | 22 | 9 | 33–35 |
 | `topology.b12` | topology | 12 | 19 | 8 | 36–38 |
@@ -186,19 +187,19 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 184 | 6 | 50 | 28 | 50 | 7 | 0 |
-| 3 | 140 | 8 | 58 | 23 | 38 | 15 | 0 |
-| 4 | 108 | 13 | 83 | 11 | 20 | 23 | 0 |
-| 5 | 95 | 12 | 104 | 10 | 18 | 25 | 0 |
+| 2 | 186 | 7 | 50 | 28 | 49 | 7 | 0 |
+| 3 | 141 | 8 | 58 | 24 | 39 | 16 | 0 |
+| 4 | 108 | 13 | 83 | 11 | 19 | 25 | 0 |
+| 5 | 96 | 12 | 104 | 10 | 19 | 28 | 0 |
 | 6 | 87 | 14 | 98 | 7 | 14 | 25 | 0 |
-| 8 | 68 | 20 | 103 | 5 | 9 | 28 | 0 |
-| 10 | 59 | 21 | 145 | 5 | 10 | 28 | 0 |
-| 12 | 58 | 27 | 105 | 1 | 4 | 29 | 0 |
-| 15 | 47 | 27 | 165 | 1 | 4 | 27 | 0 |
-| 20 | 39 | 43 | 145 | 3 | 5 | 26 | 0 |
-| 45 | 23 | 69 | 171 | 0 | 0 | 23 | 0 |
+| 8 | 68 | 21 | 103 | 5 | 9 | 30 | 0 |
+| 10 | 59 | 25 | 145 | 5 | 10 | 29 | 0 |
+| 12 | 58 | 28 | 105 | 1 | 4 | 29 | 0 |
+| 15 | 48 | 33 | 165 | 2 | 5 | 27 | 0 |
+| 20 | 39 | 43 | 145 | 3 | 5 | 27 | 0 |
+| 45 | 24 | 70 | 171 | 1 | 1 | 23 | 0 |
 
-**No width is clean.** Small widths fragment, at 3 there are 23 singleton units, which is a
+**No width is clean.** Small widths fragment, at 3 there are 24 singleton units, which is a
 quiz per concept and is exactly what §12 rules out. Large widths stop fragmenting but produce
 units too large to assess: at 45 the partition is just the 17 domains themselves, whose
 largest is 128 concepts. The usable widths trade fragmentation against size rather than
@@ -444,12 +445,12 @@ Unresolvable subdomains:
 
 `trigonometry.identities`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1650
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1700
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings
 
-- **anomaly** `singleton_units`: 23 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
+- **anomaly** `singleton_units`: 24 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
 
 ## Not decided here
 

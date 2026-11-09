@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Identify the exceptional value",
+    "section": "Identify the exceptional value",
+    "subgoals": [
+      "State the governing relation for picard's theorem",
+      "Identify the quantities in the identify the exceptional value step",
+      "Carry out the identify the exceptional value computation"
+    ]
+  },
+  {
+    "label": "Count omitted values",
+    "section": "Count omitted values",
+    "subgoals": [
+      "State the governing relation for picard's theorem",
+      "Identify the quantities in the count omitted values step",
+      "Carry out the count omitted values computation"
+    ]
+  },
+  {
+    "label": "Apply Picard's theorem",
+    "section": "Apply Picard's theorem",
+    "subgoals": [
+      "State the governing relation for picard's theorem",
+      "Identify the quantities in the apply picard's theorem step",
+      "Carry out the apply picard's theorem computation"
+    ]
+  }
+]

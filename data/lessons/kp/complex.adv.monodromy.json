@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Follow a loop",
+    "section": "Follow a loop",
+    "subgoals": [
+      "State the governing relation for monodromy",
+      "Identify the quantities in the follow a loop step",
+      "Carry out the follow a loop computation"
+    ]
+  },
+  {
+    "label": "Compute the change of branch",
+    "section": "Compute the change of branch",
+    "subgoals": [
+      "State the governing relation for monodromy",
+      "Identify the quantities in the compute the change of branch step",
+      "Carry out the compute the change of branch computation"
+    ]
+  },
+  {
+    "label": "Describe the monodromy",
+    "section": "Describe the monodromy",
+    "subgoals": [
+      "State the governing relation for monodromy",
+      "Identify the quantities in the describe the monodromy step",
+      "Carry out the describe the monodromy computation"
+    ]
+  }
+]

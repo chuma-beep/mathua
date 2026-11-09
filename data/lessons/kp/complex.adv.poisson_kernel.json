@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Evaluate the kernel",
+    "section": "Evaluate the kernel",
+    "subgoals": [
+      "State the governing relation for the poisson kernel",
+      "Identify the quantities in the evaluate the kernel step",
+      "Carry out the evaluate the kernel computation"
+    ]
+  },
+  {
+    "label": "Integrate against a boundary value",
+    "section": "Integrate against a boundary value",
+    "subgoals": [
+      "State the governing relation for the poisson kernel",
+      "Identify the quantities in the integrate against a boundary value step",
+      "Carry out the integrate against a boundary value computation"
+    ]
+  },
+  {
+    "label": "Recover the boundary limit",
+    "section": "Recover the boundary limit",
+    "subgoals": [
+      "State the governing relation for the poisson kernel",
+      "Identify the quantities in the recover the boundary limit step",
+      "Carry out the recover the boundary limit computation"
+    ]
+  }
+]

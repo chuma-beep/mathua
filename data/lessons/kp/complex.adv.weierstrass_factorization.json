@@ -1,0 +1,29 @@
+[
+  {
+    "label": "List the zeros",
+    "section": "List the zeros",
+    "subgoals": [
+      "State the governing relation for the weierstrass factorization theorem",
+      "Identify the quantities in the list the zeros step",
+      "Carry out the list the zeros computation"
+    ]
+  },
+  {
+    "label": "Determine the order",
+    "section": "Determine the order",
+    "subgoals": [
+      "State the governing relation for the weierstrass factorization theorem",
+      "Identify the quantities in the determine the order step",
+      "Carry out the determine the order computation"
+    ]
+  },
+  {
+    "label": "Build the product",
+    "section": "Build the product",
+    "subgoals": [
+      "State the governing relation for the weierstrass factorization theorem",
+      "Identify the quantities in the build the product step",
+      "Carry out the build the product computation"
+    ]
+  }
+]

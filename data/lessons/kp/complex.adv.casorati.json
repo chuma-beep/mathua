@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Identify an essential singularity",
+    "section": "Identify an essential singularity",
+    "subgoals": [
+      "State the governing relation for the casorati-weierstrass theorem",
+      "Identify the quantities in the identify an essential singularity step",
+      "Carry out the identify an essential singularity computation"
+    ]
+  },
+  {
+    "label": "Describe the local image",
+    "section": "Describe the local image",
+    "subgoals": [
+      "State the governing relation for the casorati-weierstrass theorem",
+      "Identify the quantities in the describe the local image step",
+      "Carry out the describe the local image computation"
+    ]
+  },
+  {
+    "label": "Apply Casorati-Weierstrass",
+    "section": "Apply Casorati-Weierstrass",
+    "subgoals": [
+      "State the governing relation for the casorati-weierstrass theorem",
+      "Identify the quantities in the apply casorati-weierstrass step",
+      "Carry out the apply casorati-weierstrass computation"
+    ]
+  }
+]

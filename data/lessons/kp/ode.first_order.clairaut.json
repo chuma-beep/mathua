@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Differentiate the Clairaut form",
+    "section": "Differentiate the Clairaut form",
+    "subgoals": [
+      "State the governing relation for clairaut equations",
+      "Identify the quantities in the differentiate the clairaut form step",
+      "Carry out the differentiate the clairaut form computation"
+    ]
+  },
+  {
+    "label": "Find the general solution",
+    "section": "Find the general solution",
+    "subgoals": [
+      "State the governing relation for clairaut equations",
+      "Identify the quantities in the find the general solution step",
+      "Carry out the find the general solution computation"
+    ]
+  },
+  {
+    "label": "Verify the singular solution",
+    "section": "Verify the singular solution",
+    "subgoals": [
+      "State the governing relation for clairaut equations",
+      "Identify the quantities in the verify the singular solution step",
+      "Carry out the verify the singular solution computation"
+    ]
+  }
+]

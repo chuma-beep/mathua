@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Choose an initial slope",
+    "section": "Choose an initial slope",
+    "subgoals": [
+      "State the governing relation for the shooting method",
+      "Identify the quantities in the choose an initial slope step",
+      "Carry out the choose an initial slope computation"
+    ]
+  },
+  {
+    "label": "Integrate to the boundary",
+    "section": "Integrate to the boundary",
+    "subgoals": [
+      "State the governing relation for the shooting method",
+      "Identify the quantities in the integrate to the boundary step",
+      "Carry out the integrate to the boundary computation"
+    ]
+  },
+  {
+    "label": "Update the slope",
+    "section": "Update the slope",
+    "subgoals": [
+      "State the governing relation for the shooting method",
+      "Identify the quantities in the update the slope step",
+      "Carry out the update the slope computation"
+    ]
+  }
+]

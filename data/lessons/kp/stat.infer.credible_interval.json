@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Form the posterior",
+    "section": "Form the posterior",
+    "subgoals": [
+      "State the governing relation for bayesian credible intervals",
+      "Identify the quantities in the form the posterior step",
+      "Carry out the form the posterior computation"
+    ]
+  },
+  {
+    "label": "Find the interval",
+    "section": "Find the interval",
+    "subgoals": [
+      "State the governing relation for bayesian credible intervals",
+      "Identify the quantities in the find the interval step",
+      "Carry out the find the interval computation"
+    ]
+  },
+  {
+    "label": "Interpret the prior effect",
+    "section": "Interpret the prior effect",
+    "subgoals": [
+      "State the governing relation for bayesian credible intervals",
+      "Identify the quantities in the interpret the prior effect step",
+      "Carry out the interpret the prior effect computation"
+    ]
+  }
+]

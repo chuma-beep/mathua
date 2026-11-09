@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Find the leading term",
+    "section": "Find the leading term",
+    "subgoals": [
+      "State the governing relation for perturbation methods",
+      "Identify the quantities in the find the leading term step",
+      "Carry out the find the leading term computation"
+    ]
+  },
+  {
+    "label": "Compute the first correction",
+    "section": "Compute the first correction",
+    "subgoals": [
+      "State the governing relation for perturbation methods",
+      "Identify the quantities in the compute the first correction step",
+      "Carry out the compute the first correction computation"
+    ]
+  },
+  {
+    "label": "Check the validity range",
+    "section": "Check the validity range",
+    "subgoals": [
+      "State the governing relation for perturbation methods",
+      "Identify the quantities in the check the validity range step",
+      "Carry out the check the validity range computation"
+    ]
+  }
+]

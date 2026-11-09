@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Continue a power series",
+    "section": "Continue a power series",
+    "subgoals": [
+      "State the governing relation for analytic continuation",
+      "Identify the quantities in the continue a power series step",
+      "Carry out the continue a power series computation"
+    ]
+  },
+  {
+    "label": "Find the new radius",
+    "section": "Find the new radius",
+    "subgoals": [
+      "State the governing relation for analytic continuation",
+      "Identify the quantities in the find the new radius step",
+      "Carry out the find the new radius computation"
+    ]
+  },
+  {
+    "label": "Identify the obstruction",
+    "section": "Identify the obstruction",
+    "subgoals": [
+      "State the governing relation for analytic continuation",
+      "Identify the quantities in the identify the obstruction step",
+      "Carry out the identify the obstruction computation"
+    ]
+  }
+]

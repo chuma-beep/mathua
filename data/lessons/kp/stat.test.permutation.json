@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Compute the observed statistic",
+    "section": "Compute the observed statistic",
+    "subgoals": [
+      "State the governing relation for permutation tests",
+      "Identify the quantities in the compute the observed statistic step",
+      "Carry out the compute the observed statistic computation"
+    ]
+  },
+  {
+    "label": "Permute the labels",
+    "section": "Permute the labels",
+    "subgoals": [
+      "State the governing relation for permutation tests",
+      "Identify the quantities in the permute the labels step",
+      "Carry out the permute the labels computation"
+    ]
+  },
+  {
+    "label": "Read the permutation p-value",
+    "section": "Read the permutation p-value",
+    "subgoals": [
+      "State the governing relation for permutation tests",
+      "Identify the quantities in the read the permutation p-value step",
+      "Carry out the read the permutation p-value computation"
+    ]
+  }
+]
