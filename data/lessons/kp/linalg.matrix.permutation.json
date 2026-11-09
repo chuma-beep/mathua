@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The permutation-matrix shape",
+    "section": "The permutation-matrix shape",
+    "subgoals": [
+      "State the governing relation for permutation matrices",
+      "Identify the quantities in the permutation matrices step",
+      "Carry out the permutation matrices computation"
+    ]
+  },
+  {
+    "label": "Sign and inversions",
+    "section": "Sign and inversions",
+    "subgoals": [
+      "State the governing relation for permutation matrices",
+      "Identify the quantities in the sign and inversions step",
+      "Carry out the sign and inversions computation"
+    ]
+  },
+  {
+    "label": "Acting on a vector",
+    "section": "Acting on a vector",
+    "subgoals": [
+      "State the governing relation for permutation matrices",
+      "Identify the quantities in the acting on a vector step",
+      "Carry out the acting on a vector computation"
+    ]
+  }
+]

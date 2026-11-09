@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Proposals",
+    "section": "Proposals",
+    "subgoals": [
+      "State the governing relation for stable matching",
+      "Identify the quantities in the proposals step",
+      "Carry out the proposals computation"
+    ]
+  },
+  {
+    "label": "The stable matching",
+    "section": "The stable matching",
+    "subgoals": [
+      "State the governing relation for stable matching",
+      "Identify the quantities in the the stable matching step",
+      "Carry out the the stable matching computation"
+    ]
+  },
+  {
+    "label": "Counting proposals",
+    "section": "Counting proposals",
+    "subgoals": [
+      "State the governing relation for stable matching",
+      "Identify the quantities in the counting proposals step",
+      "Carry out the counting proposals computation"
+    ]
+  }
+]

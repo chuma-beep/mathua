@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The polygonal formula",
+    "section": "The polygonal formula",
+    "subgoals": [
+      "State the governing relation for polygonal numbers",
+      "Identify the quantities in the the polygonal formula step",
+      "Carry out the the polygonal formula computation"
+    ]
+  },
+  {
+    "label": "Recovering the index",
+    "section": "Recovering the index",
+    "subgoals": [
+      "State the governing relation for polygonal numbers",
+      "Identify the quantities in the recovering the index step",
+      "Carry out the recovering the index computation"
+    ]
+  },
+  {
+    "label": "Consecutive differences",
+    "section": "Consecutive differences",
+    "subgoals": [
+      "State the governing relation for polygonal numbers",
+      "Identify the quantities in the consecutive differences step",
+      "Carry out the consecutive differences computation"
+    ]
+  }
+]

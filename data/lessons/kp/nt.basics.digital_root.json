@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Digit sums",
+    "section": "Digit sums",
+    "subgoals": [
+      "State the governing relation for digital roots and casting out nines",
+      "Identify the quantities in the digit sums step",
+      "Carry out the digit sums computation"
+    ]
+  },
+  {
+    "label": "Casting out nines",
+    "section": "Casting out nines",
+    "subgoals": [
+      "State the governing relation for digital roots and casting out nines",
+      "Identify the quantities in the casting out nines step",
+      "Carry out the casting out nines computation"
+    ]
+  },
+  {
+    "label": "Sums and products",
+    "section": "Sums and products",
+    "subgoals": [
+      "State the governing relation for digital roots and casting out nines",
+      "Identify the quantities in the sums and products step",
+      "Carry out the sums and products computation"
+    ]
+  }
+]

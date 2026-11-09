@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The greedy algorithm",
+    "section": "The greedy algorithm",
+    "subgoals": [
+      "State the governing relation for egyptian fractions",
+      "Identify the quantities in the the greedy algorithm step",
+      "Carry out the the greedy algorithm computation"
+    ]
+  },
+  {
+    "label": "The next denominator",
+    "section": "The next denominator",
+    "subgoals": [
+      "State the governing relation for egyptian fractions",
+      "Identify the quantities in the the next denominator step",
+      "Carry out the the next denominator computation"
+    ]
+  },
+  {
+    "label": "The unit-fraction identity",
+    "section": "The unit-fraction identity",
+    "subgoals": [
+      "State the governing relation for egyptian fractions",
+      "Identify the quantities in the the unit-fraction identity step",
+      "Carry out the the unit-fraction identity computation"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Rotation matrix",
+    "section": "Rotation matrix",
+    "subgoals": [
+      "State the governing relation for givens rotations",
+      "Identify the quantities in the rotation matrix step",
+      "Carry out the rotation matrix computation"
+    ]
+  },
+  {
+    "label": "Scaling the matrix",
+    "section": "Scaling the matrix",
+    "subgoals": [
+      "State the governing relation for givens rotations",
+      "Identify the quantities in the scaling the matrix step",
+      "Carry out the scaling the matrix computation"
+    ]
+  },
+  {
+    "label": "Rotating a vector",
+    "section": "Rotating a vector",
+    "subgoals": [
+      "State the governing relation for givens rotations",
+      "Identify the quantities in the rotating a vector step",
+      "Carry out the rotating a vector computation"
+    ]
+  }
+]

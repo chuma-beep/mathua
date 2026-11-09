@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Cholesky factor",
+    "section": "The Cholesky factor",
+    "subgoals": [
+      "State the governing relation for cholesky decomposition",
+      "Identify the quantities in the the cholesky factor step",
+      "Carry out the the cholesky factor computation"
+    ]
+  },
+  {
+    "label": "Reading the factor",
+    "section": "Reading the factor",
+    "subgoals": [
+      "State the governing relation for cholesky decomposition",
+      "Identify the quantities in the reading the factor step",
+      "Carry out the reading the factor computation"
+    ]
+  },
+  {
+    "label": "Determinant",
+    "section": "Determinant",
+    "subgoals": [
+      "State the governing relation for cholesky decomposition",
+      "Identify the quantities in the determinant step",
+      "Carry out the determinant computation"
+    ]
+  }
+]

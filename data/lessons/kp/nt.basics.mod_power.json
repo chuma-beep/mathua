@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Repeated squaring",
+    "section": "Repeated squaring",
+    "subgoals": [
+      "State the governing relation for modular exponentiation",
+      "Identify the quantities in the repeated squaring step",
+      "Carry out the repeated squaring computation"
+    ]
+  },
+  {
+    "label": "Reducing the exponent",
+    "section": "Reducing the exponent",
+    "subgoals": [
+      "State the governing relation for modular exponentiation",
+      "Identify the quantities in the reducing the exponent step",
+      "Carry out the reducing the exponent computation"
+    ]
+  },
+  {
+    "label": "Multiplying residues",
+    "section": "Multiplying residues",
+    "subgoals": [
+      "State the governing relation for modular exponentiation",
+      "Identify the quantities in the multiplying residues step",
+      "Carry out the multiplying residues computation"
+    ]
+  }
+]

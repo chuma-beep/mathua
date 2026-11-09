@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Reflection formula",
+    "section": "Reflection formula",
+    "subgoals": [
+      "State the governing relation for householder reflections",
+      "Identify the quantities in the reflection formula step",
+      "Carry out the reflection formula computation"
+    ]
+  },
+  {
+    "label": "Determinant",
+    "section": "Determinant",
+    "subgoals": [
+      "State the governing relation for householder reflections",
+      "Identify the quantities in the determinant step",
+      "Carry out the determinant computation"
+    ]
+  },
+  {
+    "label": "Symmetry",
+    "section": "Symmetry",
+    "subgoals": [
+      "State the governing relation for householder reflections",
+      "Identify the quantities in the symmetry step",
+      "Carry out the symmetry computation"
+    ]
+  }
+]

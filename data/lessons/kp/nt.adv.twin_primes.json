@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Twin pairs",
+    "section": "Twin pairs",
+    "subgoals": [
+      "State the governing relation for twin primes",
+      "Identify the quantities in the twin pairs step",
+      "Carry out the twin pairs computation"
+    ]
+  },
+  {
+    "label": "Searching upward",
+    "section": "Searching upward",
+    "subgoals": [
+      "State the governing relation for twin primes",
+      "Identify the quantities in the searching upward step",
+      "Carry out the searching upward computation"
+    ]
+  },
+  {
+    "label": "Testing a candidate",
+    "section": "Testing a candidate",
+    "subgoals": [
+      "State the governing relation for twin primes",
+      "Identify the quantities in the testing a candidate step",
+      "Carry out the testing a candidate computation"
+    ]
+  }
+]

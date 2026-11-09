@@ -47,4 +47,5 @@ func Register(reg *generator.Registry) {
 	for id, kind := range graphBridgeKinds {
 		reg.Register(id, &graphBridgeGen{kind: kind})
 	}
+	registerWave3(reg)
 }

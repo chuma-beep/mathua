@@ -13051,6 +13051,132 @@
     "subdomain": "graph_theory.flows"
   },
   {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.dfs",
+    "label": "Depth-first search",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.adjacency"
+    ],
+    "subdomain": "graph_theory.connectivity"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.bfs",
+    "label": "Breadth-first search",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.adjacency"
+    ],
+    "subdomain": "graph_theory.connectivity"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.bellman_ford",
+    "label": "Bellman-Ford shortest paths",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.shortest_path"
+    ],
+    "subdomain": "graph_theory.flows"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.floyd_warshall",
+    "label": "All-pairs shortest paths",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.shortest_path"
+    ],
+    "subdomain": "graph_theory.flows"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.union_find",
+    "label": "Disjoint-set union",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.connectivity"
+    ],
+    "subdomain": "graph_theory.connectivity"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.assignment",
+    "label": "The assignment problem",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.matching"
+    ],
+    "subdomain": "graph_theory.matching"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.stable_matching",
+    "label": "Stable matching",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.matching"
+    ],
+    "subdomain": "graph_theory.matching"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.clique",
+    "label": "Clique number",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.independent_set"
+    ],
+    "subdomain": "graph_theory.matching"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.dominating_set",
+    "label": "Domination number",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.vertex_cover"
+    ],
+    "subdomain": "graph_theory.matching"
+  },
+  {
     "domain": "linear_algebra",
     "grading_type": "numeric",
     "id": "linalg.vector.concept",
@@ -13918,6 +14044,301 @@
       "linalg.systems.row_reduction"
     ],
     "subdomain": "linear_algebra.inner_product"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.matrix.powers",
+    "label": "Matrix powers",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.matrix.mult"
+    ],
+    "subdomain": "linear_algebra.matrices"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.matrix.nilpotent",
+    "label": "Nilpotent matrices",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.matrix.powers"
+    ],
+    "subdomain": "linear_algebra.matrices"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.matrix.idempotent",
+    "label": "Idempotent matrices",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.matrix.powers"
+    ],
+    "subdomain": "linear_algebra.matrices"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.matrix.elementary",
+    "label": "Elementary matrices",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.systems.row_reduction"
+    ],
+    "subdomain": "linear_algebra.matrices"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.matrix.block",
+    "label": "Block matrices",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.matrix.mult"
+    ],
+    "subdomain": "linear_algebra.matrices"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.matrix.permutation",
+    "label": "Permutation matrices",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.det.properties",
+      "linalg.matrix.identity"
+    ],
+    "subdomain": "linear_algebra.matrices"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.matrix.norm",
+    "label": "Matrix norms",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.vec.norm_squared"
+    ],
+    "subdomain": "linear_algebra.matrices"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.decomp.pseudoinverse",
+    "label": "Moore-Penrose pseudoinverse",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.decomp.svd"
+    ],
+    "subdomain": "linear_algebra.decompositions"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.decomp.cholesky",
+    "label": "Cholesky decomposition",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.quadratic.definite"
+    ],
+    "subdomain": "linear_algebra.decompositions"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.matrix.schur_complement",
+    "label": "Schur complements",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.matrix.block"
+    ],
+    "subdomain": "linear_algebra.matrices"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.matrix.trace_identities",
+    "label": "Trace identities",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.eigen.trace"
+    ],
+    "subdomain": "linear_algebra.matrices"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.matrix.rank_factorization",
+    "label": "Rank factorization",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.matrix.rank"
+    ],
+    "subdomain": "linear_algebra.matrices"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.matrix.outer_product",
+    "label": "Outer products",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.matrix.mult"
+    ],
+    "subdomain": "linear_algebra.matrices"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.matrix.hadamard",
+    "label": "Hadamard products",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.matrix.add"
+    ],
+    "subdomain": "linear_algebra.matrices"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.matrix.kronecker",
+    "label": "Kronecker products",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.matrix.mult"
+    ],
+    "subdomain": "linear_algebra.matrices"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.matrix.vandermonde",
+    "label": "Vandermonde matrices",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.det.3x3"
+    ],
+    "subdomain": "linear_algebra.matrices"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.matrix.companion",
+    "label": "Companion matrices",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.eigen.cayley_hamilton"
+    ],
+    "subdomain": "linear_algebra.matrices"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.matrix.circulant",
+    "label": "Circulant matrices",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.eigen.compute"
+    ],
+    "subdomain": "linear_algebra.matrices"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.transform.householder",
+    "label": "Householder reflections",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.orth.projection_matrix"
+    ],
+    "subdomain": "linear_algebra.transformations"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.transform.givens",
+    "label": "Givens rotations",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.transform.det_scale"
+    ],
+    "subdomain": "linear_algebra.transformations"
+  },
+  {
+    "domain": "linear_algebra",
+    "grading_type": "numeric",
+    "id": "linalg.matrix.determinant_lemma",
+    "label": "The matrix determinant lemma",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "linalg.det.properties"
+    ],
+    "subdomain": "linear_algebra.matrices"
   },
   {
     "domain": "machine_learning",
@@ -15448,6 +15869,288 @@
     },
     "prerequisites": [
       "nt.prime.exponent",
+      "nt.basics.divisibility"
+    ],
+    "subdomain": "number_theory.advanced"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.basics.mod_power",
+    "label": "Modular exponentiation",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.basics.modular"
+    ],
+    "subdomain": "number_theory.basics"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.basics.mod_inverse",
+    "label": "Modular inverses",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.basics.bezout"
+    ],
+    "subdomain": "number_theory.basics"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.basics.euler_theorem",
+    "label": "Euler's theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.adv.euler_phi",
+      "nt.basics.mod_power"
+    ],
+    "subdomain": "number_theory.basics"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.basics.decimal_period",
+    "label": "Repeating decimal periods",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.basics.mod_inverse"
+    ],
+    "subdomain": "number_theory.basics"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.basics.digital_root",
+    "label": "Digital roots and casting out nines",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.basics.divisibility"
+    ],
+    "subdomain": "number_theory.basics"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.adv.aliquot",
+    "label": "Aliquot sums",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.divisor.sum"
+    ],
+    "subdomain": "number_theory.advanced"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.adv.perfect_numbers",
+    "label": "Perfect, abundant and deficient numbers",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.adv.aliquot"
+    ],
+    "subdomain": "number_theory.advanced"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.adv.mersenne",
+    "label": "Mersenne numbers and primes",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.basics.prime_inf"
+    ],
+    "subdomain": "number_theory.advanced"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.adv.fermat_numbers",
+    "label": "Fermat numbers",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.basics.mod_power"
+    ],
+    "subdomain": "number_theory.advanced"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.adv.repunit",
+    "label": "Repunits",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.basics.modular"
+    ],
+    "subdomain": "number_theory.advanced"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.adv.prime_counting",
+    "label": "The prime-counting function",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.adv.sieve",
+      "nt.analytic.prime_number_theorem"
+    ],
+    "subdomain": "number_theory.advanced"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.adv.twin_primes",
+    "label": "Twin primes",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.adv.prime_gap"
+    ],
+    "subdomain": "number_theory.advanced"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.adv.goldbach",
+    "label": "Goldbach partitions",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.basics.prime_inf"
+    ],
+    "subdomain": "number_theory.advanced"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.adv.polygonal",
+    "label": "Polygonal numbers",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.basics.divisibility"
+    ],
+    "subdomain": "number_theory.advanced"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.adv.pentagonal",
+    "label": "Pentagonal numbers",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.adv.polygonal"
+    ],
+    "subdomain": "number_theory.advanced"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.adv.egyptian",
+    "label": "Egyptian fractions",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.basics.gcd_euclidean"
+    ],
+    "subdomain": "number_theory.advanced"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.adv.highly_composite",
+    "label": "Highly composite numbers",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.divisor.count"
+    ],
+    "subdomain": "number_theory.advanced"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.adv.amicable",
+    "label": "Amicable numbers",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.adv.aliquot"
+    ],
+    "subdomain": "number_theory.advanced"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.adv.happy",
+    "label": "Happy numbers",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "nt.basics.digital_root"
+    ],
+    "subdomain": "number_theory.advanced"
+  },
+  {
+    "domain": "number_theory",
+    "grading_type": "numeric",
+    "id": "nt.adv.consecutive_sums",
+    "label": "Sums of consecutive integers",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
       "nt.basics.divisibility"
     ],
     "subdomain": "number_theory.advanced"

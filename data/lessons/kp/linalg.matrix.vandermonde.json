@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Determinant",
+    "section": "Determinant",
+    "subgoals": [
+      "State the governing relation for vandermonde matrices",
+      "Identify the quantities in the determinant step",
+      "Carry out the determinant computation"
+    ]
+  },
+  {
+    "label": "Entries",
+    "section": "Entries",
+    "subgoals": [
+      "State the governing relation for vandermonde matrices",
+      "Identify the quantities in the entries step",
+      "Carry out the entries computation"
+    ]
+  },
+  {
+    "label": "Rank",
+    "section": "Rank",
+    "subgoals": [
+      "State the governing relation for vandermonde matrices",
+      "Identify the quantities in the rank step",
+      "Carry out the rank computation"
+    ]
+  }
+]

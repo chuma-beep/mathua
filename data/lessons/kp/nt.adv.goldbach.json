@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The partition definition",
+    "section": "The partition definition",
+    "subgoals": [
+      "State the governing relation for goldbach partitions",
+      "Identify the quantities in the goldbach partitions step",
+      "Carry out the goldbach partitions computation"
+    ]
+  },
+  {
+    "label": "Smallest and largest",
+    "section": "Smallest and largest",
+    "subgoals": [
+      "State the governing relation for goldbach partitions",
+      "Identify the quantities in the smallest and largest step",
+      "Carry out the smallest and largest computation"
+    ]
+  },
+  {
+    "label": "Counting unordered pairs",
+    "section": "Counting unordered pairs",
+    "subgoals": [
+      "State the governing relation for goldbach partitions",
+      "Identify the quantities in the counting unordered pairs step",
+      "Carry out the counting unordered pairs computation"
+    ]
+  }
+]

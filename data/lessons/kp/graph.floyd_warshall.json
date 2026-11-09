@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The distance matrix",
+    "section": "The distance matrix",
+    "subgoals": [
+      "State the governing relation for all-pairs shortest paths",
+      "Identify the quantities in the the distance matrix step",
+      "Carry out the the distance matrix computation"
+    ]
+  },
+  {
+    "label": "Diameter",
+    "section": "Diameter",
+    "subgoals": [
+      "State the governing relation for all-pairs shortest paths",
+      "Identify the quantities in the diameter step",
+      "Carry out the diameter computation"
+    ]
+  },
+  {
+    "label": "Finite pairs",
+    "section": "Finite pairs",
+    "subgoals": [
+      "State the governing relation for all-pairs shortest paths",
+      "Identify the quantities in the finite pairs step",
+      "Carry out the finite pairs computation"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Aliquot sums",
+    "section": "Aliquot sums",
+    "subgoals": [
+      "State the governing relation for amicable numbers",
+      "Identify the quantities in the aliquot sums step",
+      "Carry out the aliquot sums computation"
+    ]
+  },
+  {
+    "label": "Amicable pairs",
+    "section": "Amicable pairs",
+    "subgoals": [
+      "State the governing relation for amicable numbers",
+      "Identify the quantities in the amicable pairs step",
+      "Carry out the amicable pairs computation"
+    ]
+  },
+  {
+    "label": "Finding the partner",
+    "section": "Finding the partner",
+    "subgoals": [
+      "State the governing relation for amicable numbers",
+      "Identify the quantities in the finding the partner step",
+      "Carry out the finding the partner computation"
+    ]
+  }
+]

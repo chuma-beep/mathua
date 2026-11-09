@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Multiplying a matrix by itself",
+    "section": "Multiplying a matrix by itself",
+    "subgoals": [
+      "State the governing relation for matrix powers",
+      "Identify the quantities in the multiplying a matrix by itself step",
+      "Carry out the multiplying a matrix by itself computation"
+    ]
+  },
+  {
+    "label": "The trace of a power",
+    "section": "The trace of a power",
+    "subgoals": [
+      "State the governing relation for matrix powers",
+      "Identify the quantities in the the trace of a power step",
+      "Carry out the the trace of a power computation"
+    ]
+  },
+  {
+    "label": "Higher powers",
+    "section": "Higher powers",
+    "subgoals": [
+      "State the governing relation for matrix powers",
+      "Identify the quantities in the higher powers step",
+      "Carry out the higher powers computation"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Fermat sequence",
+    "section": "The Fermat sequence",
+    "subgoals": [
+      "State the governing relation for fermat numbers",
+      "Identify the quantities in the fermat numbers step",
+      "Carry out the fermat numbers computation"
+    ]
+  },
+  {
+    "label": "Primality",
+    "section": "Primality",
+    "subgoals": [
+      "State the governing relation for fermat numbers",
+      "Identify the quantities in the primality step",
+      "Carry out the primality computation"
+    ]
+  },
+  {
+    "label": "Modular residues",
+    "section": "Modular residues",
+    "subgoals": [
+      "State the governing relation for fermat numbers",
+      "Identify the quantities in the modular residues step",
+      "Carry out the modular residues computation"
+    ]
+  }
+]

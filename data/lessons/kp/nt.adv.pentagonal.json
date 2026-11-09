@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The pentagonal sequence",
+    "section": "The pentagonal sequence",
+    "subgoals": [
+      "State the governing relation for pentagonal numbers",
+      "Identify the quantities in the pentagonal numbers step",
+      "Carry out the pentagonal numbers computation"
+    ]
+  },
+  {
+    "label": "The inverse index",
+    "section": "The inverse index",
+    "subgoals": [
+      "State the governing relation for pentagonal numbers",
+      "Identify the quantities in the the inverse index step",
+      "Carry out the the inverse index computation"
+    ]
+  },
+  {
+    "label": "Counting pentagonal numbers",
+    "section": "Counting pentagonal numbers",
+    "subgoals": [
+      "State the governing relation for pentagonal numbers",
+      "Identify the quantities in the counting pentagonal numbers step",
+      "Carry out the counting pentagonal numbers computation"
+    ]
+  }
+]

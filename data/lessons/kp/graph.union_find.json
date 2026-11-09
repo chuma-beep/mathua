@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Union by size",
+    "section": "Union by size",
+    "subgoals": [
+      "State the governing relation for disjoint-set union",
+      "Identify the quantities in the union by size step",
+      "Carry out the union by size computation"
+    ]
+  },
+  {
+    "label": "Roots",
+    "section": "Roots",
+    "subgoals": [
+      "State the governing relation for disjoint-set union",
+      "Identify the quantities in the roots step",
+      "Carry out the roots computation"
+    ]
+  },
+  {
+    "label": "Component size",
+    "section": "Component size",
+    "subgoals": [
+      "State the governing relation for disjoint-set union",
+      "Identify the quantities in the component size step",
+      "Carry out the component size computation"
+    ]
+  }
+]

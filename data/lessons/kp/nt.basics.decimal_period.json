@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The period as an order",
+    "section": "The period as an order",
+    "subgoals": [
+      "State the governing relation for repeating decimal periods",
+      "Identify the quantities in the the period as an order step",
+      "Carry out the the period as an order computation"
+    ]
+  },
+  {
+    "label": "Reducing the fraction",
+    "section": "Reducing the fraction",
+    "subgoals": [
+      "State the governing relation for repeating decimal periods",
+      "Identify the quantities in the reducing the fraction step",
+      "Carry out the reducing the fraction computation"
+    ]
+  },
+  {
+    "label": "Removing terminating factors",
+    "section": "Removing terminating factors",
+    "subgoals": [
+      "State the governing relation for repeating decimal periods",
+      "Identify the quantities in the removing terminating factors step",
+      "Carry out the removing terminating factors computation"
+    ]
+  }
+]

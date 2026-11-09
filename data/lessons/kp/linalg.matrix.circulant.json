@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Circulant determinant",
+    "section": "Circulant determinant",
+    "subgoals": [
+      "State the governing relation for circulant matrices",
+      "Identify the quantities in the circulant determinant step",
+      "Carry out the circulant determinant computation"
+    ]
+  },
+  {
+    "label": "Trace",
+    "section": "Trace",
+    "subgoals": [
+      "State the governing relation for circulant matrices",
+      "Identify the quantities in the trace step",
+      "Carry out the trace computation"
+    ]
+  },
+  {
+    "label": "Entries",
+    "section": "Entries",
+    "subgoals": [
+      "State the governing relation for circulant matrices",
+      "Identify the quantities in the entries step",
+      "Carry out the entries computation"
+    ]
+  }
+]

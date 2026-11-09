@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Odd divisors",
+    "section": "Odd divisors",
+    "subgoals": [
+      "State the governing relation for sums of consecutive integers",
+      "Identify the quantities in the odd divisors step",
+      "Carry out the odd divisors computation"
+    ]
+  },
+  {
+    "label": "The shortest block",
+    "section": "The shortest block",
+    "subgoals": [
+      "State the governing relation for sums of consecutive integers",
+      "Identify the quantities in the the shortest block step",
+      "Carry out the the shortest block computation"
+    ]
+  },
+  {
+    "label": "Powers of two",
+    "section": "Powers of two",
+    "subgoals": [
+      "State the governing relation for sums of consecutive integers",
+      "Identify the quantities in the powers of two step",
+      "Carry out the powers of two computation"
+    ]
+  }
+]

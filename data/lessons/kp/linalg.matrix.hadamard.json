@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Entrywise product",
+    "section": "Entrywise product",
+    "subgoals": [
+      "State the governing relation for hadamard products",
+      "Identify the quantities in the entrywise product step",
+      "Carry out the entrywise product computation"
+    ]
+  },
+  {
+    "label": "Trace",
+    "section": "Trace",
+    "subgoals": [
+      "State the governing relation for hadamard products",
+      "Identify the quantities in the trace step",
+      "Carry out the trace computation"
+    ]
+  },
+  {
+    "label": "Sum of entries",
+    "section": "Sum of entries",
+    "subgoals": [
+      "State the governing relation for hadamard products",
+      "Identify the quantities in the sum of entries step",
+      "Carry out the sum of entries computation"
+    ]
+  }
+]

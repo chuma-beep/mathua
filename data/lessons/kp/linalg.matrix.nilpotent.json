@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The square",
+    "section": "The square",
+    "subgoals": [
+      "State the governing relation for nilpotent matrices",
+      "Identify the quantities in the the square step",
+      "Carry out the the square computation"
+    ]
+  },
+  {
+    "label": "Nilpotency index",
+    "section": "Nilpotency index",
+    "subgoals": [
+      "State the governing relation for nilpotent matrices",
+      "Identify the quantities in the nilpotency index step",
+      "Carry out the nilpotency index computation"
+    ]
+  },
+  {
+    "label": "Recognising nilpotence",
+    "section": "Recognising nilpotence",
+    "subgoals": [
+      "State the governing relation for nilpotent matrices",
+      "Identify the quantities in the recognising nilpotence step",
+      "Carry out the recognising nilpotence computation"
+    ]
+  }
+]

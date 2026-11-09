@@ -730,5 +730,287 @@
       "streak": 10,
       "avg_time_seconds": 24.0
     }
+  },
+  {
+    "id": "nt.basics.mod_power",
+    "label": "Modular exponentiation",
+    "domain": "number_theory",
+    "subdomain": "number_theory.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.basics.modular"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "nt.basics.mod_inverse",
+    "label": "Modular inverses",
+    "domain": "number_theory",
+    "subdomain": "number_theory.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.basics.bezout"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "nt.basics.euler_theorem",
+    "label": "Euler's theorem",
+    "domain": "number_theory",
+    "subdomain": "number_theory.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.euler_phi",
+      "nt.basics.mod_power"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "nt.basics.decimal_period",
+    "label": "Repeating decimal periods",
+    "domain": "number_theory",
+    "subdomain": "number_theory.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.basics.mod_inverse"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "nt.basics.digital_root",
+    "label": "Digital roots and casting out nines",
+    "domain": "number_theory",
+    "subdomain": "number_theory.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.basics.divisibility"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "nt.adv.aliquot",
+    "label": "Aliquot sums",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.divisor.sum"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "nt.adv.perfect_numbers",
+    "label": "Perfect, abundant and deficient numbers",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.aliquot"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "nt.adv.mersenne",
+    "label": "Mersenne numbers and primes",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.basics.prime_inf"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "nt.adv.fermat_numbers",
+    "label": "Fermat numbers",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.basics.mod_power"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "nt.adv.repunit",
+    "label": "Repunits",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.basics.modular"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "nt.adv.prime_counting",
+    "label": "The prime-counting function",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.sieve",
+      "nt.analytic.prime_number_theorem"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "nt.adv.twin_primes",
+    "label": "Twin primes",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.prime_gap"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "nt.adv.goldbach",
+    "label": "Goldbach partitions",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.basics.prime_inf"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "nt.adv.polygonal",
+    "label": "Polygonal numbers",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.basics.divisibility"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "nt.adv.pentagonal",
+    "label": "Pentagonal numbers",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.polygonal"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "nt.adv.egyptian",
+    "label": "Egyptian fractions",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.basics.gcd_euclidean"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "nt.adv.highly_composite",
+    "label": "Highly composite numbers",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.divisor.count"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "nt.adv.amicable",
+    "label": "Amicable numbers",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.aliquot"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "nt.adv.happy",
+    "label": "Happy numbers",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.basics.digital_root"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "nt.adv.consecutive_sums",
+    "label": "Sums of consecutive integers",
+    "domain": "number_theory",
+    "subdomain": "number_theory.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.basics.divisibility"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
   }
 ]

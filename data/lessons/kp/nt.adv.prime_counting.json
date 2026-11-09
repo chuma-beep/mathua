@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The counting function",
+    "section": "The counting function",
+    "subgoals": [
+      "State the governing relation for the prime-counting function",
+      "Identify the quantities in the the counting function step",
+      "Carry out the the counting function computation"
+    ]
+  },
+  {
+    "label": "The nth prime",
+    "section": "The nth prime",
+    "subgoals": [
+      "State the governing relation for the prime-counting function",
+      "Identify the quantities in the the nth prime step",
+      "Carry out the the nth prime computation"
+    ]
+  },
+  {
+    "label": "Intervals",
+    "section": "Intervals",
+    "subgoals": [
+      "State the governing relation for the prime-counting function",
+      "Identify the quantities in the intervals step",
+      "Carry out the intervals computation"
+    ]
+  }
+]

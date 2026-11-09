@@ -797,7 +797,28 @@
       "linalg.eigen.similar",
       "linalg.eigen.complex",
       "linalg.vector.plane",
-      "linalg.orth.least_squares"
+      "linalg.orth.least_squares",
+      "linalg.matrix.powers",
+      "linalg.matrix.nilpotent",
+      "linalg.matrix.idempotent",
+      "linalg.matrix.elementary",
+      "linalg.matrix.block",
+      "linalg.matrix.permutation",
+      "linalg.matrix.norm",
+      "linalg.decomp.pseudoinverse",
+      "linalg.decomp.cholesky",
+      "linalg.matrix.schur_complement",
+      "linalg.matrix.trace_identities",
+      "linalg.matrix.rank_factorization",
+      "linalg.matrix.outer_product",
+      "linalg.matrix.hadamard",
+      "linalg.matrix.kronecker",
+      "linalg.matrix.vandermonde",
+      "linalg.matrix.companion",
+      "linalg.matrix.circulant",
+      "linalg.transform.householder",
+      "linalg.transform.givens",
+      "linalg.matrix.determinant_lemma"
     ]
   },
   {
@@ -986,7 +1007,27 @@
       "nt.adv.farey",
       "nt.app.key_exchange",
       "nt.adv.quadratic_forms",
-      "nt.adv.valuation"
+      "nt.adv.valuation",
+      "nt.basics.mod_power",
+      "nt.basics.mod_inverse",
+      "nt.basics.euler_theorem",
+      "nt.basics.decimal_period",
+      "nt.basics.digital_root",
+      "nt.adv.aliquot",
+      "nt.adv.perfect_numbers",
+      "nt.adv.mersenne",
+      "nt.adv.fermat_numbers",
+      "nt.adv.repunit",
+      "nt.adv.prime_counting",
+      "nt.adv.twin_primes",
+      "nt.adv.goldbach",
+      "nt.adv.polygonal",
+      "nt.adv.pentagonal",
+      "nt.adv.egyptian",
+      "nt.adv.highly_composite",
+      "nt.adv.amicable",
+      "nt.adv.happy",
+      "nt.adv.consecutive_sums"
     ]
   },
   {
@@ -1300,7 +1341,16 @@
       "graph.matroid",
       "graph.shortest_path",
       "graph.degeneracy",
-      "graph.mst"
+      "graph.mst",
+      "graph.dfs",
+      "graph.bfs",
+      "graph.bellman_ford",
+      "graph.floyd_warshall",
+      "graph.union_find",
+      "graph.assignment",
+      "graph.stable_matching",
+      "graph.clique",
+      "graph.dominating_set"
     ]
   },
   {

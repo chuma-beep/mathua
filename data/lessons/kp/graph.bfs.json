@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Layers",
+    "section": "Layers",
+    "subgoals": [
+      "State the governing relation for breadth-first search",
+      "Identify the quantities in the layers step",
+      "Carry out the layers computation"
+    ]
+  },
+  {
+    "label": "The queue order",
+    "section": "The queue order",
+    "subgoals": [
+      "State the governing relation for breadth-first search",
+      "Identify the quantities in the the queue order step",
+      "Carry out the the queue order computation"
+    ]
+  },
+  {
+    "label": "Counting a layer",
+    "section": "Counting a layer",
+    "subgoals": [
+      "State the governing relation for breadth-first search",
+      "Identify the quantities in the counting a layer step",
+      "Carry out the counting a layer computation"
+    ]
+  }
+]

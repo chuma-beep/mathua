@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Schur complement",
+    "section": "The Schur complement",
+    "subgoals": [
+      "State the governing relation for schur complements",
+      "Identify the quantities in the the schur complement step",
+      "Carry out the the schur complement computation"
+    ]
+  },
+  {
+    "label": "Determinant",
+    "section": "Determinant",
+    "subgoals": [
+      "State the governing relation for schur complements",
+      "Identify the quantities in the determinant step",
+      "Carry out the determinant computation"
+    ]
+  },
+  {
+    "label": "Invertibility",
+    "section": "Invertibility",
+    "subgoals": [
+      "State the governing relation for schur complements",
+      "Identify the quantities in the invertibility step",
+      "Carry out the invertibility computation"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Cliques",
+    "section": "Cliques",
+    "subgoals": [
+      "State the governing relation for clique number",
+      "Identify the quantities in the cliques step",
+      "Carry out the cliques computation"
+    ]
+  },
+  {
+    "label": "The clique number",
+    "section": "The clique number",
+    "subgoals": [
+      "State the governing relation for clique number",
+      "Identify the quantities in the the clique number step",
+      "Carry out the the clique number computation"
+    ]
+  },
+  {
+    "label": "Maximum cliques",
+    "section": "Maximum cliques",
+    "subgoals": [
+      "State the governing relation for clique number",
+      "Identify the quantities in the maximum cliques step",
+      "Carry out the maximum cliques computation"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Repunits as geometric sums",
+    "section": "Repunits as geometric sums",
+    "subgoals": [
+      "State the governing relation for repunits",
+      "Identify the quantities in the repunits as geometric sums step",
+      "Carry out the repunits as geometric sums computation"
+    ]
+  },
+  {
+    "label": "Residues",
+    "section": "Residues",
+    "subgoals": [
+      "State the governing relation for repunits",
+      "Identify the quantities in the residues step",
+      "Carry out the residues computation"
+    ]
+  },
+  {
+    "label": "Digit sums",
+    "section": "Digit sums",
+    "subgoals": [
+      "State the governing relation for repunits",
+      "Identify the quantities in the digit sums step",
+      "Carry out the digit sums computation"
+    ]
+  }
+]

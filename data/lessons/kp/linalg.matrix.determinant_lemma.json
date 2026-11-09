@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The lemma",
+    "section": "The lemma",
+    "subgoals": [
+      "State the governing relation for the matrix determinant lemma",
+      "Identify the quantities in the the lemma step",
+      "Carry out the the lemma computation"
+    ]
+  },
+  {
+    "label": "Determinant update",
+    "section": "Determinant update",
+    "subgoals": [
+      "State the governing relation for the matrix determinant lemma",
+      "Identify the quantities in the determinant update step",
+      "Carry out the determinant update computation"
+    ]
+  },
+  {
+    "label": "Change in determinant",
+    "section": "Change in determinant",
+    "subgoals": [
+      "State the governing relation for the matrix determinant lemma",
+      "Identify the quantities in the change in determinant step",
+      "Carry out the change in determinant computation"
+    ]
+  }
+]

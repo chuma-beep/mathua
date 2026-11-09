@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Proper divisors",
+    "section": "Proper divisors",
+    "subgoals": [
+      "State the governing relation for aliquot sums",
+      "Identify the quantities in the proper divisors step",
+      "Carry out the proper divisors computation"
+    ]
+  },
+  {
+    "label": "Perfect, abundant and deficient",
+    "section": "Perfect, abundant and deficient",
+    "subgoals": [
+      "State the governing relation for aliquot sums",
+      "Identify the quantities in the perfect, abundant and deficient step",
+      "Carry out the perfect, abundant and deficient computation"
+    ]
+  },
+  {
+    "label": "The full divisor sum",
+    "section": "The full divisor sum",
+    "subgoals": [
+      "State the governing relation for aliquot sums",
+      "Identify the quantities in the the full divisor sum step",
+      "Carry out the the full divisor sum computation"
+    ]
+  }
+]

@@ -867,5 +867,300 @@
       "streak": 10,
       "avg_time_seconds": 30
     }
+  },
+  {
+    "id": "linalg.matrix.powers",
+    "label": "Matrix powers",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.matrices",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.matrix.mult"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "linalg.matrix.nilpotent",
+    "label": "Nilpotent matrices",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.matrices",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.matrix.powers"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "linalg.matrix.idempotent",
+    "label": "Idempotent matrices",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.matrices",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.matrix.powers"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "linalg.matrix.elementary",
+    "label": "Elementary matrices",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.matrices",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.systems.row_reduction"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "linalg.matrix.block",
+    "label": "Block matrices",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.matrices",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.matrix.mult"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "linalg.matrix.permutation",
+    "label": "Permutation matrices",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.matrices",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.det.properties",
+      "linalg.matrix.identity"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "linalg.matrix.norm",
+    "label": "Matrix norms",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.matrices",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.vec.norm_squared"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "linalg.decomp.pseudoinverse",
+    "label": "Moore-Penrose pseudoinverse",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.decompositions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.decomp.svd"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "linalg.decomp.cholesky",
+    "label": "Cholesky decomposition",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.decompositions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.quadratic.definite"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "linalg.matrix.schur_complement",
+    "label": "Schur complements",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.matrices",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.matrix.block"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "linalg.matrix.trace_identities",
+    "label": "Trace identities",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.matrices",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.eigen.trace"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "linalg.matrix.rank_factorization",
+    "label": "Rank factorization",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.matrices",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.matrix.rank"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "linalg.matrix.outer_product",
+    "label": "Outer products",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.matrices",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.matrix.mult"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "linalg.matrix.hadamard",
+    "label": "Hadamard products",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.matrices",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.matrix.add"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "linalg.matrix.kronecker",
+    "label": "Kronecker products",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.matrices",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.matrix.mult"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "linalg.matrix.vandermonde",
+    "label": "Vandermonde matrices",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.matrices",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.det.3x3"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "linalg.matrix.companion",
+    "label": "Companion matrices",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.matrices",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.eigen.cayley_hamilton"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "linalg.matrix.circulant",
+    "label": "Circulant matrices",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.matrices",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.eigen.compute"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "linalg.transform.householder",
+    "label": "Householder reflections",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.transformations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.orth.projection_matrix"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "linalg.transform.givens",
+    "label": "Givens rotations",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.transformations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.transform.det_scale"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "linalg.matrix.determinant_lemma",
+    "label": "The matrix determinant lemma",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.matrices",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.det.properties"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
   }
 ]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Relaxation",
+    "section": "Relaxation",
+    "subgoals": [
+      "State the governing relation for bellman-ford shortest paths",
+      "Identify the quantities in the relaxation step",
+      "Carry out the relaxation computation"
+    ]
+  },
+  {
+    "label": "Negative cycles",
+    "section": "Negative cycles",
+    "subgoals": [
+      "State the governing relation for bellman-ford shortest paths",
+      "Identify the quantities in the negative cycles step",
+      "Carry out the negative cycles computation"
+    ]
+  },
+  {
+    "label": "Path length",
+    "section": "Path length",
+    "subgoals": [
+      "State the governing relation for bellman-ford shortest paths",
+      "Identify the quantities in the path length step",
+      "Carry out the path length computation"
+    ]
+  }
+]

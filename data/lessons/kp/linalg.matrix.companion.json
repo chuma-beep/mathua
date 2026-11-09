@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Companion matrix",
+    "section": "Companion matrix",
+    "subgoals": [
+      "State the governing relation for companion matrices",
+      "Identify the quantities in the companion matrix step",
+      "Carry out the companion matrix computation"
+    ]
+  },
+  {
+    "label": "Trace",
+    "section": "Trace",
+    "subgoals": [
+      "State the governing relation for companion matrices",
+      "Identify the quantities in the trace step",
+      "Carry out the trace computation"
+    ]
+  },
+  {
+    "label": "Characteristic polynomial",
+    "section": "Characteristic polynomial",
+    "subgoals": [
+      "State the governing relation for companion matrices",
+      "Identify the quantities in the characteristic polynomial step",
+      "Carry out the characteristic polynomial computation"
+    ]
+  }
+]

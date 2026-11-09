@@ -6398,5 +6398,205 @@
   {
     "concept_id": "stat.test.kruskal_wallis",
     "source": "authored/stat.test.kruskal_wallis.md"
+  },
+  {
+    "concept_id": "nt.basics.mod_power",
+    "source": "authored/nt.basics.mod_power.md"
+  },
+  {
+    "concept_id": "nt.basics.mod_inverse",
+    "source": "authored/nt.basics.mod_inverse.md"
+  },
+  {
+    "concept_id": "nt.basics.euler_theorem",
+    "source": "authored/nt.basics.euler_theorem.md"
+  },
+  {
+    "concept_id": "nt.basics.decimal_period",
+    "source": "authored/nt.basics.decimal_period.md"
+  },
+  {
+    "concept_id": "nt.basics.digital_root",
+    "source": "authored/nt.basics.digital_root.md"
+  },
+  {
+    "concept_id": "nt.adv.aliquot",
+    "source": "authored/nt.adv.aliquot.md"
+  },
+  {
+    "concept_id": "nt.adv.perfect_numbers",
+    "source": "authored/nt.adv.perfect_numbers.md"
+  },
+  {
+    "concept_id": "nt.adv.mersenne",
+    "source": "authored/nt.adv.mersenne.md"
+  },
+  {
+    "concept_id": "nt.adv.fermat_numbers",
+    "source": "authored/nt.adv.fermat_numbers.md"
+  },
+  {
+    "concept_id": "nt.adv.repunit",
+    "source": "authored/nt.adv.repunit.md"
+  },
+  {
+    "concept_id": "nt.adv.prime_counting",
+    "source": "authored/nt.adv.prime_counting.md"
+  },
+  {
+    "concept_id": "nt.adv.twin_primes",
+    "source": "authored/nt.adv.twin_primes.md"
+  },
+  {
+    "concept_id": "nt.adv.goldbach",
+    "source": "authored/nt.adv.goldbach.md"
+  },
+  {
+    "concept_id": "nt.adv.polygonal",
+    "source": "authored/nt.adv.polygonal.md"
+  },
+  {
+    "concept_id": "nt.adv.pentagonal",
+    "source": "authored/nt.adv.pentagonal.md"
+  },
+  {
+    "concept_id": "nt.adv.egyptian",
+    "source": "authored/nt.adv.egyptian.md"
+  },
+  {
+    "concept_id": "nt.adv.highly_composite",
+    "source": "authored/nt.adv.highly_composite.md"
+  },
+  {
+    "concept_id": "nt.adv.amicable",
+    "source": "authored/nt.adv.amicable.md"
+  },
+  {
+    "concept_id": "nt.adv.happy",
+    "source": "authored/nt.adv.happy.md"
+  },
+  {
+    "concept_id": "nt.adv.consecutive_sums",
+    "source": "authored/nt.adv.consecutive_sums.md"
+  },
+  {
+    "concept_id": "linalg.matrix.powers",
+    "source": "authored/linalg.matrix.powers.md"
+  },
+  {
+    "concept_id": "linalg.matrix.nilpotent",
+    "source": "authored/linalg.matrix.nilpotent.md"
+  },
+  {
+    "concept_id": "linalg.matrix.idempotent",
+    "source": "authored/linalg.matrix.idempotent.md"
+  },
+  {
+    "concept_id": "linalg.matrix.elementary",
+    "source": "authored/linalg.matrix.elementary.md"
+  },
+  {
+    "concept_id": "linalg.matrix.block",
+    "source": "authored/linalg.matrix.block.md"
+  },
+  {
+    "concept_id": "linalg.matrix.permutation",
+    "source": "authored/linalg.matrix.permutation.md"
+  },
+  {
+    "concept_id": "linalg.matrix.norm",
+    "source": "authored/linalg.matrix.norm.md"
+  },
+  {
+    "concept_id": "linalg.decomp.pseudoinverse",
+    "source": "authored/linalg.decomp.pseudoinverse.md"
+  },
+  {
+    "concept_id": "linalg.decomp.cholesky",
+    "source": "authored/linalg.decomp.cholesky.md"
+  },
+  {
+    "concept_id": "linalg.matrix.schur_complement",
+    "source": "authored/linalg.matrix.schur_complement.md"
+  },
+  {
+    "concept_id": "linalg.matrix.trace_identities",
+    "source": "authored/linalg.matrix.trace_identities.md"
+  },
+  {
+    "concept_id": "linalg.matrix.rank_factorization",
+    "source": "authored/linalg.matrix.rank_factorization.md"
+  },
+  {
+    "concept_id": "linalg.matrix.outer_product",
+    "source": "authored/linalg.matrix.outer_product.md"
+  },
+  {
+    "concept_id": "linalg.matrix.hadamard",
+    "source": "authored/linalg.matrix.hadamard.md"
+  },
+  {
+    "concept_id": "linalg.matrix.kronecker",
+    "source": "authored/linalg.matrix.kronecker.md"
+  },
+  {
+    "concept_id": "linalg.matrix.vandermonde",
+    "source": "authored/linalg.matrix.vandermonde.md"
+  },
+  {
+    "concept_id": "linalg.matrix.companion",
+    "source": "authored/linalg.matrix.companion.md"
+  },
+  {
+    "concept_id": "linalg.matrix.circulant",
+    "source": "authored/linalg.matrix.circulant.md"
+  },
+  {
+    "concept_id": "linalg.transform.householder",
+    "source": "authored/linalg.transform.householder.md"
+  },
+  {
+    "concept_id": "linalg.transform.givens",
+    "source": "authored/linalg.transform.givens.md"
+  },
+  {
+    "concept_id": "linalg.matrix.determinant_lemma",
+    "source": "authored/linalg.matrix.determinant_lemma.md"
+  },
+  {
+    "concept_id": "graph.dfs",
+    "source": "authored/graph.dfs.md"
+  },
+  {
+    "concept_id": "graph.bfs",
+    "source": "authored/graph.bfs.md"
+  },
+  {
+    "concept_id": "graph.bellman_ford",
+    "source": "authored/graph.bellman_ford.md"
+  },
+  {
+    "concept_id": "graph.floyd_warshall",
+    "source": "authored/graph.floyd_warshall.md"
+  },
+  {
+    "concept_id": "graph.union_find",
+    "source": "authored/graph.union_find.md"
+  },
+  {
+    "concept_id": "graph.assignment",
+    "source": "authored/graph.assignment.md"
+  },
+  {
+    "concept_id": "graph.stable_matching",
+    "source": "authored/graph.stable_matching.md"
+  },
+  {
+    "concept_id": "graph.clique",
+    "source": "authored/graph.clique.md"
+  },
+  {
+    "concept_id": "graph.dominating_set",
+    "source": "authored/graph.dominating_set.md"
   }
 ]

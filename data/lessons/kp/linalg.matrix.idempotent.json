@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Projection matrices",
+    "section": "Projection matrices",
+    "subgoals": [
+      "State the governing relation for idempotent matrices",
+      "Identify the quantities in the projection matrices step",
+      "Carry out the projection matrices computation"
+    ]
+  },
+  {
+    "label": "Trace and rank",
+    "section": "Trace and rank",
+    "subgoals": [
+      "State the governing relation for idempotent matrices",
+      "Identify the quantities in the trace and rank step",
+      "Carry out the trace and rank computation"
+    ]
+  },
+  {
+    "label": "The idempotent test",
+    "section": "The idempotent test",
+    "subgoals": [
+      "State the governing relation for idempotent matrices",
+      "Identify the quantities in the the idempotent test step",
+      "Carry out the the idempotent test computation"
+    ]
+  }
+]

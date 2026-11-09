@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Euler's totient",
+    "section": "Euler's totient",
+    "subgoals": [
+      "State the governing relation for euler's theorem",
+      "Identify the quantities in the euler's totient step",
+      "Carry out the euler's totient computation"
+    ]
+  },
+  {
+    "label": "Reducing an exponent",
+    "section": "Reducing an exponent",
+    "subgoals": [
+      "State the governing relation for euler's theorem",
+      "Identify the quantities in the reducing an exponent step",
+      "Carry out the reducing an exponent computation"
+    ]
+  },
+  {
+    "label": "Multiples of phi",
+    "section": "Multiples of phi",
+    "subgoals": [
+      "State the governing relation for euler's theorem",
+      "Identify the quantities in the multiples of phi step",
+      "Carry out the multiples of phi computation"
+    ]
+  }
+]

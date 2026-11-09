@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Closed neighbourhoods",
+    "section": "Closed neighbourhoods",
+    "subgoals": [
+      "State the governing relation for domination number",
+      "Identify the quantities in the closed neighbourhoods step",
+      "Carry out the closed neighbourhoods computation"
+    ]
+  },
+  {
+    "label": "The domination number",
+    "section": "The domination number",
+    "subgoals": [
+      "State the governing relation for domination number",
+      "Identify the quantities in the the domination number step",
+      "Carry out the the domination number computation"
+    ]
+  },
+  {
+    "label": "Constrained domination",
+    "section": "Constrained domination",
+    "subgoals": [
+      "State the governing relation for domination number",
+      "Identify the quantities in the constrained domination step",
+      "Carry out the constrained domination computation"
+    ]
+  }
+]

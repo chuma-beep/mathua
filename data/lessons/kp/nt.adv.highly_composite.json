@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Divisor counts",
+    "section": "Divisor counts",
+    "subgoals": [
+      "State the governing relation for highly composite numbers",
+      "Identify the quantities in the divisor counts step",
+      "Carry out the divisor counts computation"
+    ]
+  },
+  {
+    "label": "The highly composite test",
+    "section": "The highly composite test",
+    "subgoals": [
+      "State the governing relation for highly composite numbers",
+      "Identify the quantities in the the highly composite test step",
+      "Carry out the the highly composite test computation"
+    ]
+  },
+  {
+    "label": "Finding the next record",
+    "section": "Finding the next record",
+    "subgoals": [
+      "State the governing relation for highly composite numbers",
+      "Identify the quantities in the finding the next record step",
+      "Carry out the finding the next record computation"
+    ]
+  }
+]

@@ -711,5 +711,131 @@
       "streak": 10,
       "avg_time_seconds": 23
     }
+  },
+  {
+    "id": "graph.dfs",
+    "label": "Depth-first search",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.connectivity",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.adjacency"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "graph.bfs",
+    "label": "Breadth-first search",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.connectivity",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.adjacency"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "graph.bellman_ford",
+    "label": "Bellman-Ford shortest paths",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.flows",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.shortest_path"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "graph.floyd_warshall",
+    "label": "All-pairs shortest paths",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.flows",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.shortest_path"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "graph.union_find",
+    "label": "Disjoint-set union",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.connectivity",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.connectivity"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "graph.assignment",
+    "label": "The assignment problem",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.matching",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.matching"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "graph.stable_matching",
+    "label": "Stable matching",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.matching",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.matching"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "graph.clique",
+    "label": "Clique number",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.matching",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.independent_set"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "graph.dominating_set",
+    "label": "Domination number",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.matching",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.vertex_cover"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
   }
 ]

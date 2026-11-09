@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Row operations as matrices",
+    "section": "Row operations as matrices",
+    "subgoals": [
+      "State the governing relation for elementary matrices",
+      "Identify the quantities in the row operations as matrices step",
+      "Carry out the row operations as matrices computation"
+    ]
+  },
+  {
+    "label": "Determinants",
+    "section": "Determinants",
+    "subgoals": [
+      "State the governing relation for elementary matrices",
+      "Identify the quantities in the determinants step",
+      "Carry out the determinants computation"
+    ]
+  },
+  {
+    "label": "Inverses and entries",
+    "section": "Inverses and entries",
+    "subgoals": [
+      "State the governing relation for elementary matrices",
+      "Identify the quantities in the inverses and entries step",
+      "Carry out the inverses and entries computation"
+    ]
+  }
+]

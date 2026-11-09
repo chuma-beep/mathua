@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The inverse congruence",
+    "section": "The inverse congruence",
+    "subgoals": [
+      "State the governing relation for modular inverses",
+      "Identify the quantities in the the inverse congruence step",
+      "Carry out the the inverse congruence computation"
+    ]
+  },
+  {
+    "label": "Solving a linear congruence",
+    "section": "Solving a linear congruence",
+    "subgoals": [
+      "State the governing relation for modular inverses",
+      "Identify the quantities in the solving a linear congruence step",
+      "Carry out the solving a linear congruence computation"
+    ]
+  },
+  {
+    "label": "Why coprimality matters",
+    "section": "Why coprimality matters",
+    "subgoals": [
+      "State the governing relation for modular inverses",
+      "Identify the quantities in the why coprimality matters step",
+      "Carry out the why coprimality matters computation"
+    ]
+  }
+]

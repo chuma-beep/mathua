@@ -25,8 +25,8 @@ and the artifact it describes are one fact (AGENTS.md section 7).
 | Courses | `data/courses.json` | named target sets |
 | Destinations | `data/destinations.json` | named bundles of courses |
 
-Two numbers are useful to hold together. There are 1600 concepts, and there are 1600 KP shard files
-holding 4800 knowledge points, three per concept.
+Two numbers are useful to hold together. There are 1650 concepts, and there are 1650 KP shard files
+holding 4950 knowledge points, three per concept.
 
 ## 2. The pipeline
 
@@ -50,15 +50,15 @@ leaves the learner a placeholder instead of a worked example, and the audit refu
 
 ## 3. What complete means today
 
-Three content guards pass on the current corpus. The documentation guard still reports eight pre-existing inconsistencies:
+All four content and documentation guards pass on the current corpus:
 
 ```
-OK: 1500 concepts across 23 domains                   scripts/validate_graph.go
-OK: 1500 concepts mapped, 1500 entries, 1399 sources,
-    1500 kp files, 4500 KPs, kp shards resolved,
+OK: 1650 concepts across 23 domains                   scripts/validate_graph.go
+OK: 1650 concepts mapped, 1650 entries, 1549 sources,
+    1650 kp files, 4950 KPs, kp shards resolved,
     0 issues                                          scripts/audit_lessons.py
-counts ok: 1500 concepts, 1500 KP files, 28 courses   scripts/counts.py --check
-FAIL: 8 documentation inconsistency/inconsistencies   scripts/check_docs.py
+counts ok: 1650 concepts, 1650 KP files, 28 courses   scripts/counts.py --check
+OK: docs agree with the code and the corpus           scripts/check_docs.py
 ```
 
 `scripts/audit_baseline.json` is empty on every key it holds, including `stub_lessons`,
@@ -69,11 +69,11 @@ means a new thin concept cannot be added quietly.
 
 ## 4. Where the corpus is thin
 
-### 4.1 The course catalog reaches 1600 of the 1600 concepts
+### 4.1 The course catalog reaches 1650 of the 1650 concepts
 
 Courses carry target sets, and a target expands to its transitive prerequisite closure in
 `internal/planning/planner.go:64` (`collectChain`). Across the 28 courses those closures reach
-1600 of the 1600 concepts: 0 of them have a node, a generator, a lesson and three KP shards and
+1650 of the 1650 concepts: 0 of them have a node, a generator, a lesson and three KP shards and
 still sit outside every named course path. The wiring batch of 2026-10-19 moved the 149 that used
 to sit there into the courses that teach their subject, and the table stays as the measurement on
 the number, because a concept that no course targets is unreachable whatever the diagnostic
@@ -93,16 +93,16 @@ The count of unreachable concepts by domain:
 | fractions | 52 | 0 |
 | machine_learning | 55 | 0 |
 | complex_numbers | 51 | 0 |
-| number_theory | 51 | 0 |
+| number_theory | 71 | 0 |
 | differential_equations | 46 | 0 |
 | prealgebra | 71 | 0 |
 | trigonometry | 78 | 0 |
 | arithmetic | 72 | 0 |
-| linear_algebra | 59 | 0 |
+| linear_algebra | 80 | 0 |
 | abstract_algebra | 56 | 0 |
 | discrete_math | 64 | 0 |
 | geometry | 70 | 0 |
-| graph_theory | 50 | 0 |
+| graph_theory | 59 | 0 |
 | probability_theory | 63 | 0 |
 | numerical_analysis | 69 | 0 |
 | real_analysis | 65 | 0 |
@@ -404,7 +404,7 @@ because the change this section prepares for is the one that would have tripped 
 
 ### 5.5 The concept target, and where it goes
 
-The catalog holds 1600 concepts. The remaining per-domain targets add up to 400, and this is the
+The catalog holds 1650 concepts. The remaining per-domain targets add up to 350, and this is the
 table that says where: the 2,000-concept target agreed on 2026-11-08. `Now` is read from the corpus;
 `Target` is the decision. The rows keep the order step 6 of section 6 used, largest deficit first.
 
@@ -419,13 +419,13 @@ table that says where: the 2,000-concept target agreed on 2026-11-08. `Now` is r
 | discrete_math | university | 64 | 87 | +23 |
 | precalculus | bridge | 58 | 81 | +23 |
 | probability_theory | university | 63 | 85 | +22 |
-| linear_algebra | university | 59 | 80 | +21 |
+| linear_algebra | university | 80 | 80 | +0 |
 | abstract_algebra | university | 56 | 76 | +20 |
 | machine_learning | university | 55 | 75 | +20 |
-| number_theory | university | 51 | 71 | +20 |
+| number_theory | university | 71 | 71 | +0 |
 | topology | university | 52 | 72 | +20 |
 | complex_numbers | university | 51 | 71 | +20 |
-| graph_theory | university | 50 | 70 | +20 |
+| graph_theory | university | 59 | 70 | +11 |
 | numerical_analysis | university | 69 | 69 | +0 |
 | differential_equations | university | 46 | 66 | +20 |
 | trigonometry | school | 78 | 98 | +20 |

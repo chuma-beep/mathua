@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The digit-square map",
+    "section": "The digit-square map",
+    "subgoals": [
+      "State the governing relation for happy numbers",
+      "Identify the quantities in the the digit-square map step",
+      "Carry out the the digit-square map computation"
+    ]
+  },
+  {
+    "label": "The happiness test",
+    "section": "The happiness test",
+    "subgoals": [
+      "State the governing relation for happy numbers",
+      "Identify the quantities in the happy numbers step",
+      "Carry out the happy numbers computation"
+    ]
+  },
+  {
+    "label": "Searching forward",
+    "section": "Searching forward",
+    "subgoals": [
+      "State the governing relation for happy numbers",
+      "Identify the quantities in the searching forward step",
+      "Carry out the searching forward computation"
+    ]
+  }
+]

@@ -59,6 +59,7 @@ func Register(reg *generator.Registry) {
 	reg.Register("linalg.subspace", &subspaceGen{})
 	registerFoundations(reg)
 	registerBatch(reg)
+	registerWave3(reg)
 }
 
 func containsWord(q, word string) bool {

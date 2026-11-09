@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Block-diagonal determinant",
+    "section": "Block-diagonal determinant",
+    "subgoals": [
+      "State the governing relation for block matrices",
+      "Identify the quantities in the block-diagonal determinant step",
+      "Carry out the block-diagonal determinant computation"
+    ]
+  },
+  {
+    "label": "Trace",
+    "section": "Trace",
+    "subgoals": [
+      "State the governing relation for block matrices",
+      "Identify the quantities in the trace step",
+      "Carry out the trace computation"
+    ]
+  },
+  {
+    "label": "Block multiplication",
+    "section": "Block multiplication",
+    "subgoals": [
+      "State the governing relation for block matrices",
+      "Identify the quantities in the block multiplication step",
+      "Carry out the block multiplication computation"
+    ]
+  }
+]

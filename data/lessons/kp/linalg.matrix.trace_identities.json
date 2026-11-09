@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Trace of a product",
+    "section": "Trace of a product",
+    "subgoals": [
+      "State the governing relation for trace identities",
+      "Identify the quantities in the trace of a product step",
+      "Carry out the trace of a product computation"
+    ]
+  },
+  {
+    "label": "Trace of a square",
+    "section": "Trace of a square",
+    "subgoals": [
+      "State the governing relation for trace identities",
+      "Identify the quantities in the trace of a square step",
+      "Carry out the trace of a square computation"
+    ]
+  },
+  {
+    "label": "Linearity",
+    "section": "Linearity",
+    "subgoals": [
+      "State the governing relation for trace identities",
+      "Identify the quantities in the linearity step",
+      "Carry out the linearity computation"
+    ]
+  }
+]

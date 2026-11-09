@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The 1-norm",
+    "section": "The 1-norm",
+    "subgoals": [
+      "State the governing relation for matrix norms",
+      "Identify the quantities in the the 1-norm step",
+      "Carry out the the 1-norm computation"
+    ]
+  },
+  {
+    "label": "The infinity norm",
+    "section": "The infinity norm",
+    "subgoals": [
+      "State the governing relation for matrix norms",
+      "Identify the quantities in the the infinity norm step",
+      "Carry out the the infinity norm computation"
+    ]
+  },
+  {
+    "label": "The Frobenius norm",
+    "section": "The Frobenius norm",
+    "subgoals": [
+      "State the governing relation for matrix norms",
+      "Identify the quantities in the the frobenius norm step",
+      "Carry out the the frobenius norm computation"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Discovery and finish times",
+    "section": "Discovery and finish times",
+    "subgoals": [
+      "State the governing relation for depth-first search",
+      "Identify the quantities in the discovery and finish times step",
+      "Carry out the discovery and finish times computation"
+    ]
+  },
+  {
+    "label": "The DFS tree",
+    "section": "The DFS tree",
+    "subgoals": [
+      "State the governing relation for depth-first search",
+      "Identify the quantities in the the dfs tree step",
+      "Carry out the the dfs tree computation"
+    ]
+  },
+  {
+    "label": "Why order matters",
+    "section": "Why order matters",
+    "subgoals": [
+      "State the governing relation for depth-first search",
+      "Identify the quantities in the why order matters step",
+      "Carry out the why order matters computation"
+    ]
+  }
+]

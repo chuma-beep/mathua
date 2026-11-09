@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Mersenne numbers",
+    "section": "Mersenne numbers",
+    "subgoals": [
+      "State the governing relation for mersenne numbers and primes",
+      "Identify the quantities in the mersenne numbers step",
+      "Carry out the mersenne numbers computation"
+    ]
+  },
+  {
+    "label": "Primality of Mersenne numbers",
+    "section": "Primality of Mersenne numbers",
+    "subgoals": [
+      "State the governing relation for mersenne numbers and primes",
+      "Identify the quantities in the primality of mersenne numbers step",
+      "Carry out the primality of mersenne numbers computation"
+    ]
+  },
+  {
+    "label": "Residues of Mersenne numbers",
+    "section": "Residues of Mersenne numbers",
+    "subgoals": [
+      "State the governing relation for mersenne numbers and primes",
+      "Identify the quantities in the residues of mersenne numbers step",
+      "Carry out the residues of mersenne numbers computation"
+    ]
+  }
+]

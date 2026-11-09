@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Dimensions",
+    "section": "Dimensions",
+    "subgoals": [
+      "State the governing relation for kronecker products",
+      "Identify the quantities in the dimensions step",
+      "Carry out the dimensions computation"
+    ]
+  },
+  {
+    "label": "Entries",
+    "section": "Entries",
+    "subgoals": [
+      "State the governing relation for kronecker products",
+      "Identify the quantities in the entries step",
+      "Carry out the entries computation"
+    ]
+  },
+  {
+    "label": "Trace",
+    "section": "Trace",
+    "subgoals": [
+      "State the governing relation for kronecker products",
+      "Identify the quantities in the trace step",
+      "Carry out the trace computation"
+    ]
+  }
+]

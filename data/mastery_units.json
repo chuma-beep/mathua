@@ -5,8 +5,8 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1600,
-  "unit_count": 139,
+  "concept_count": 1650,
+  "unit_count": 140,
   "units": [
     {
       "id": "abstract_algebra.b6",
@@ -1909,12 +1909,15 @@
       "depth_min": 6,
       "depth_max": 6,
       "subdomains": [
+        "graph_theory.connectivity",
         "graph_theory.spectral"
       ],
       "concept_ids": [
+        "graph.bfs",
+        "graph.dfs",
         "graph.laplacian"
       ],
-      "concept_count": 1
+      "concept_count": 3
     },
     {
       "id": "graph_theory.b3",
@@ -1964,12 +1967,14 @@
       ],
       "concept_ids": [
         "graph.automorphism",
+        "graph.bellman_ford",
         "graph.bridge",
         "graph.complement",
         "graph.connectivity",
         "graph.cut_vertex",
         "graph.degeneracy",
         "graph.distance",
+        "graph.floyd_warshall",
         "graph.girth",
         "graph.hamiltonian",
         "graph.homomorphism",
@@ -1982,7 +1987,7 @@
         "graph.tournament",
         "graph.turan"
       ],
-      "concept_count": 18
+      "concept_count": 20
     },
     {
       "id": "graph_theory.b7",
@@ -2000,6 +2005,7 @@
         "graph_theory.planarity"
       ],
       "concept_ids": [
+        "graph.assignment",
         "graph.blocks",
         "graph.brooks",
         "graph.chromatic_polynomial",
@@ -2019,12 +2025,14 @@
         "graph.planar_dual",
         "graph.ramsey",
         "graph.random_threshold",
+        "graph.stable_matching",
         "graph.strong_connectivity",
         "graph.topological_sort",
         "graph.treewidth",
+        "graph.union_find",
         "graph.vertex_cover"
       ],
-      "concept_count": 23
+      "concept_count": 26
     },
     {
       "id": "graph_theory.b8",
@@ -2038,12 +2046,14 @@
         "graph_theory.spectral"
       ],
       "concept_ids": [
+        "graph.clique",
+        "graph.dominating_set",
         "graph.independent_set",
         "graph.spectral_gap",
         "graph.spectral_radius",
         "graph.tutte"
       ],
-      "concept_count": 4
+      "concept_count": 6
     },
     {
       "id": "linear_algebra.b0",
@@ -2086,15 +2096,17 @@
       "title": "Linear Algebra · Stage 3",
       "domain": "linear_algebra",
       "band": 2,
-      "depth_min": 8,
+      "depth_min": 6,
       "depth_max": 8,
       "subdomains": [
+        "linear_algebra.matrices",
         "linear_algebra.vectors"
       ],
       "concept_ids": [
+        "linalg.matrix.hadamard",
         "linalg.vector.dot"
       ],
-      "concept_count": 1
+      "concept_count": 2
     },
     {
       "id": "linear_algebra.b3",
@@ -2114,9 +2126,17 @@
         "linalg.decomp.lu",
         "linalg.det.2x2",
         "linalg.det.3x3",
+        "linalg.matrix.block",
+        "linalg.matrix.idempotent",
         "linalg.matrix.identity",
         "linalg.matrix.inverse_2x2",
+        "linalg.matrix.kronecker",
         "linalg.matrix.mult",
+        "linalg.matrix.nilpotent",
+        "linalg.matrix.norm",
+        "linalg.matrix.outer_product",
+        "linalg.matrix.powers",
+        "linalg.matrix.schur_complement",
         "linalg.orth.projection_coeff",
         "linalg.vec.norm_squared",
         "linalg.vec.span",
@@ -2124,7 +2144,7 @@
         "linalg.vector.cross",
         "linalg.vector.plane"
       ],
-      "concept_count": 12
+      "concept_count": 20
     },
     {
       "id": "linear_algebra.b4",
@@ -2137,6 +2157,7 @@
         "linear_algebra.decompositions",
         "linear_algebra.determinants",
         "linear_algebra.inner_product",
+        "linear_algebra.matrices",
         "linear_algebra.vectors"
       ],
       "concept_ids": [
@@ -2145,13 +2166,31 @@
         "linalg.det.properties",
         "linalg.independence.count",
         "linalg.inner_product",
+        "linalg.matrix.determinant_lemma",
+        "linalg.matrix.permutation",
+        "linalg.matrix.vandermonde",
         "linalg.orth.complement",
         "linalg.orth.gram_schmidt",
         "linalg.orth.projection_matrix",
         "linalg.subspace",
         "linalg.vec.basis"
       ],
-      "concept_count": 10
+      "concept_count": 13
+    },
+    {
+      "id": "linear_algebra.b5",
+      "title": "Linear Algebra · Stage 6",
+      "domain": "linear_algebra",
+      "band": 5,
+      "depth_min": 15,
+      "depth_max": 15,
+      "subdomains": [
+        "linear_algebra.transformations"
+      ],
+      "concept_ids": [
+        "linalg.transform.householder"
+      ],
+      "concept_count": 1
     },
     {
       "id": "linear_algebra.b7",
@@ -2170,9 +2209,10 @@
         "linalg.systems.matrix",
         "linalg.systems.row_reduction",
         "linalg.transform.det_scale",
+        "linalg.transform.givens",
         "linalg.transform.matrix"
       ],
-      "concept_count": 6
+      "concept_count": 7
     },
     {
       "id": "linear_algebra.b8",
@@ -2196,14 +2236,17 @@
         "linalg.eigen.diagonalization",
         "linalg.eigen.trace",
         "linalg.invertible.theorem",
+        "linalg.matrix.circulant",
+        "linalg.matrix.elementary",
         "linalg.matrix.fundamental_subspaces",
         "linalg.matrix.rank",
+        "linalg.matrix.rank_factorization",
         "linalg.orth.least_squares",
         "linalg.rank.nullity",
         "linalg.systems.homogeneous",
         "linalg.transform.kernel"
       ],
-      "concept_count": 13
+      "concept_count": 16
     },
     {
       "id": "linear_algebra.b9",
@@ -2211,26 +2254,31 @@
       "domain": "linear_algebra",
       "band": 9,
       "depth_min": 27,
-      "depth_max": 28,
+      "depth_max": 29,
       "subdomains": [
         "linear_algebra.decompositions",
         "linear_algebra.eigenvalues",
+        "linear_algebra.matrices",
         "linear_algebra.systems",
         "linear_algebra.transformations"
       ],
       "concept_ids": [
         "linalg.apps.leontief",
+        "linalg.decomp.cholesky",
         "linalg.decomp.jordan",
+        "linalg.decomp.pseudoinverse",
         "linalg.decomp.svd",
         "linalg.eigen.cayley_hamilton",
         "linalg.eigen.eigenspace",
         "linalg.eigen.similar",
+        "linalg.matrix.companion",
         "linalg.matrix.condition",
+        "linalg.matrix.trace_identities",
         "linalg.quadratic.definite",
         "linalg.symmetric.spectral",
         "linalg.transform.invertible"
       ],
-      "concept_count": 10
+      "concept_count": 14
     },
     {
       "id": "machine_learning.b3",
@@ -2443,14 +2491,27 @@
         "number_theory.basics"
       ],
       "concept_ids": [
+        "nt.adv.aliquot",
         "nt.adv.bertrand",
+        "nt.adv.consecutive_sums",
         "nt.adv.fermat_little",
+        "nt.adv.fermat_numbers",
+        "nt.adv.goldbach",
+        "nt.adv.happy",
+        "nt.adv.highly_composite",
+        "nt.adv.mersenne",
+        "nt.adv.pentagonal",
         "nt.adv.pisano",
+        "nt.adv.polygonal",
         "nt.adv.prime_gap",
+        "nt.adv.repunit",
+        "nt.adv.twin_primes",
         "nt.adv.valuation",
         "nt.base.convert",
         "nt.basics.congruence",
+        "nt.basics.digital_root",
         "nt.basics.gcd_euclidean",
+        "nt.basics.mod_power",
         "nt.basics.modular",
         "nt.basics.prime_inf",
         "nt.congruence.linear",
@@ -2458,7 +2519,7 @@
         "nt.divisor.sum",
         "nt.prime.exponent"
       ],
-      "concept_count": 14
+      "concept_count": 27
     },
     {
       "id": "number_theory.b4",
@@ -2474,25 +2535,31 @@
         "number_theory.basics"
       ],
       "concept_ids": [
+        "nt.adv.amicable",
         "nt.adv.arithmetic_functions",
         "nt.adv.carmichael_function",
+        "nt.adv.egyptian",
         "nt.adv.euler_phi",
         "nt.adv.jacobi",
         "nt.adv.legendre",
         "nt.adv.miller_rabin",
         "nt.adv.mobius",
+        "nt.adv.perfect_numbers",
         "nt.adv.quadratic_reciprocity",
         "nt.adv.wilson",
         "nt.analytic.prime_number_theorem",
         "nt.app.crypto",
         "nt.basics.bezout",
         "nt.basics.crt",
+        "nt.basics.decimal_period",
+        "nt.basics.euler_theorem",
         "nt.basics.fta",
+        "nt.basics.mod_inverse",
         "nt.basics.order_mod",
         "nt.pythagorean.hypotenuse",
         "nt.residue.count"
       ],
-      "concept_count": 17
+      "concept_count": 23
     },
     {
       "id": "number_theory.b5",
@@ -2519,6 +2586,7 @@
         "nt.adv.hensel",
         "nt.adv.modular_sqrt",
         "nt.adv.pell",
+        "nt.adv.prime_counting",
         "nt.adv.primitive_root",
         "nt.adv.quadratic_forms",
         "nt.adv.sieve",
@@ -2526,7 +2594,7 @@
         "nt.analytic.zeta",
         "nt.app.key_exchange"
       ],
-      "concept_count": 18
+      "concept_count": 19
     },
     {
       "id": "number_theory.b6",

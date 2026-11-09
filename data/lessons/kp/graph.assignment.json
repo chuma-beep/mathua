@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Permutations",
+    "section": "Permutations",
+    "subgoals": [
+      "State the governing relation for the assignment problem",
+      "Identify the quantities in the permutations step",
+      "Carry out the permutations computation"
+    ]
+  },
+  {
+    "label": "The optimum",
+    "section": "The optimum",
+    "subgoals": [
+      "State the governing relation for the assignment problem",
+      "Identify the quantities in the the optimum step",
+      "Carry out the the optimum computation"
+    ]
+  },
+  {
+    "label": "Checking a candidate",
+    "section": "Checking a candidate",
+    "subgoals": [
+      "State the governing relation for the assignment problem",
+      "Identify the quantities in the checking a candidate step",
+      "Carry out the checking a candidate computation"
+    ]
+  }
+]

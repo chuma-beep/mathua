@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The classification",
+    "section": "The classification",
+    "subgoals": [
+      "State the governing relation for perfect, abundant and deficient numbers",
+      "Identify the quantities in the the classification step",
+      "Carry out the the classification computation"
+    ]
+  },
+  {
+    "label": "Counting examples",
+    "section": "Counting examples",
+    "subgoals": [
+      "State the governing relation for perfect, abundant and deficient numbers",
+      "Identify the quantities in the counting examples step",
+      "Carry out the counting examples computation"
+    ]
+  },
+  {
+    "label": "The next perfect number",
+    "section": "The next perfect number",
+    "subgoals": [
+      "State the governing relation for perfect, abundant and deficient numbers",
+      "Identify the quantities in the the next perfect number step",
+      "Carry out the the next perfect number computation"
+    ]
+  }
+]

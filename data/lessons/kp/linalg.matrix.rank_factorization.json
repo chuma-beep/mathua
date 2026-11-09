@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Rank-one factorisation",
+    "section": "Rank-one factorisation",
+    "subgoals": [
+      "State the governing relation for rank factorization",
+      "Identify the quantities in the rank-one factorisation step",
+      "Carry out the rank-one factorisation computation"
+    ]
+  },
+  {
+    "label": "Trace",
+    "section": "Trace",
+    "subgoals": [
+      "State the governing relation for rank factorization",
+      "Identify the quantities in the trace step",
+      "Carry out the trace computation"
+    ]
+  },
+  {
+    "label": "Sum of entries",
+    "section": "Sum of entries",
+    "subgoals": [
+      "State the governing relation for rank factorization",
+      "Identify the quantities in the sum of entries step",
+      "Carry out the sum of entries computation"
+    ]
+  }
+]
