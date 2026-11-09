@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Leakage",
+    "section": "Leakage",
+    "subgoals": [
+      "State the relation behind data leakage",
+      "Identify the data in leakage",
+      "Carry out the leakage step"
+    ]
+  },
+  {
+    "label": "Contaminated features",
+    "section": "Contaminated features",
+    "subgoals": [
+      "State the relation behind data leakage",
+      "Identify the data in contaminated features",
+      "Carry out the contaminated features step"
+    ]
+  },
+  {
+    "label": "Train-test separation",
+    "section": "Train-test separation",
+    "subgoals": [
+      "State the relation behind data leakage",
+      "Identify the data in train-test separation",
+      "Carry out the train-test separation step"
+    ]
+  }
+]

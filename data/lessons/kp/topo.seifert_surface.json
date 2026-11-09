@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Genus",
+    "section": "Genus",
+    "subgoals": [
+      "State the relation behind seifert surfaces",
+      "Identify the data in genus",
+      "Carry out the genus step"
+    ]
+  },
+  {
+    "label": "Euler characteristic",
+    "section": "Euler characteristic",
+    "subgoals": [
+      "State the relation behind seifert surfaces",
+      "Identify the data in euler characteristic",
+      "Carry out the euler characteristic step"
+    ]
+  },
+  {
+    "label": "Boundary",
+    "section": "Boundary",
+    "subgoals": [
+      "State the relation behind seifert surfaces",
+      "Identify the data in boundary",
+      "Carry out the boundary step"
+    ]
+  }
+]

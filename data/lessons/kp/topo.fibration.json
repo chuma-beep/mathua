@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Fiber dimension",
+    "section": "Fiber dimension",
+    "subgoals": [
+      "State the relation behind fibrations",
+      "Identify the data in fiber dimension",
+      "Carry out the fiber dimension step"
+    ]
+  },
+  {
+    "label": "Total dimension",
+    "section": "Total dimension",
+    "subgoals": [
+      "State the relation behind fibrations",
+      "Identify the data in total dimension",
+      "Carry out the total dimension step"
+    ]
+  },
+  {
+    "label": "The base",
+    "section": "The base",
+    "subgoals": [
+      "State the relation behind fibrations",
+      "Identify the data in the base",
+      "Carry out the the base step"
+    ]
+  }
+]

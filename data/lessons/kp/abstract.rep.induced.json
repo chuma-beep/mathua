@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Degree of an induced representation",
+    "section": "Degree of an induced representation",
+    "subgoals": [
+      "State the relation behind induced representations",
+      "Identify the data in degree of an induced representation",
+      "Carry out the degree of an induced representation step"
+    ]
+  },
+  {
+    "label": "Character at the identity",
+    "section": "Character at the identity",
+    "subgoals": [
+      "State the relation behind induced representations",
+      "Identify the data in character at the identity",
+      "Carry out the character at the identity step"
+    ]
+  },
+  {
+    "label": "Frobenius reciprocity",
+    "section": "Frobenius reciprocity",
+    "subgoals": [
+      "State the relation behind induced representations",
+      "Identify the data in frobenius reciprocity",
+      "Carry out the frobenius reciprocity step"
+    ]
+  }
+]

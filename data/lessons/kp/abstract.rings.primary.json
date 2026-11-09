@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The radical",
+    "section": "The radical",
+    "subgoals": [
+      "State the relation behind primary decomposition",
+      "Identify the data in the radical",
+      "Carry out the the radical step"
+    ]
+  },
+  {
+    "label": "The primary test",
+    "section": "The primary test",
+    "subgoals": [
+      "State the relation behind primary decomposition",
+      "Identify the data in the primary test",
+      "Carry out the the primary test step"
+    ]
+  },
+  {
+    "label": "Minimal primes",
+    "section": "Minimal primes",
+    "subgoals": [
+      "State the relation behind primary decomposition",
+      "Identify the data in minimal primes",
+      "Carry out the minimal primes step"
+    ]
+  }
+]

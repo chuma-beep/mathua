@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Slack",
+    "section": "Slack",
+    "subgoals": [
+      "State the relation behind soft-margin support vector machines",
+      "Identify the data in slack",
+      "Carry out the slack step"
+    ]
+  },
+  {
+    "label": "The margin",
+    "section": "The margin",
+    "subgoals": [
+      "State the relation behind soft-margin support vector machines",
+      "Identify the data in the margin",
+      "Carry out the the margin step"
+    ]
+  },
+  {
+    "label": "The effect of C",
+    "section": "The effect of C",
+    "subgoals": [
+      "State the relation behind soft-margin support vector machines",
+      "Identify the data in the effect of c",
+      "Carry out the the effect of c step"
+    ]
+  }
+]

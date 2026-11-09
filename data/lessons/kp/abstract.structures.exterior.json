@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Wedge dimension",
+    "section": "Wedge dimension",
+    "subgoals": [
+      "State the relation behind exterior algebra",
+      "Identify the data in wedge dimension",
+      "Carry out the wedge dimension step"
+    ]
+  },
+  {
+    "label": "Square-zero",
+    "section": "Square-zero",
+    "subgoals": [
+      "State the relation behind exterior algebra",
+      "Identify the data in square-zero",
+      "Carry out the square-zero step"
+    ]
+  },
+  {
+    "label": "Total dimension",
+    "section": "Total dimension",
+    "subgoals": [
+      "State the relation behind exterior algebra",
+      "Identify the data in total dimension",
+      "Carry out the total dimension step"
+    ]
+  }
+]

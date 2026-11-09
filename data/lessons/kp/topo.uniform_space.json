@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Entourages",
+    "section": "Entourages",
+    "subgoals": [
+      "State the relation behind uniform spaces",
+      "Identify the data in entourages",
+      "Carry out the entourages step"
+    ]
+  },
+  {
+    "label": "Uniform continuity",
+    "section": "Uniform continuity",
+    "subgoals": [
+      "State the relation behind uniform spaces",
+      "Identify the data in uniform continuity",
+      "Carry out the uniform continuity step"
+    ]
+  },
+  {
+    "label": "Completion",
+    "section": "Completion",
+    "subgoals": [
+      "State the relation behind uniform spaces",
+      "Identify the data in completion",
+      "Carry out the completion step"
+    ]
+  }
+]

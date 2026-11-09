@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Endomorphisms",
+    "section": "Endomorphisms",
+    "subgoals": [
+      "State the relation behind schur's lemma",
+      "Identify the data in endomorphisms",
+      "Carry out the endomorphisms step"
+    ]
+  },
+  {
+    "label": "Division algebras",
+    "section": "Division algebras",
+    "subgoals": [
+      "State the relation behind schur's lemma",
+      "Identify the data in division algebras",
+      "Carry out the division algebras step"
+    ]
+  },
+  {
+    "label": "Intertwiners",
+    "section": "Intertwiners",
+    "subgoals": [
+      "State the relation behind schur's lemma",
+      "Identify the data in intertwiners",
+      "Carry out the intertwiners step"
+    ]
+  }
+]

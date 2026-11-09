@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The mapping cylinder",
+    "section": "The mapping cylinder",
+    "subgoals": [
+      "State the relation behind cofibrations",
+      "Identify the data in the mapping cylinder",
+      "Carry out the the mapping cylinder step"
+    ]
+  },
+  {
+    "label": "Homotopy extension",
+    "section": "Homotopy extension",
+    "subgoals": [
+      "State the relation behind cofibrations",
+      "Identify the data in homotopy extension",
+      "Carry out the homotopy extension step"
+    ]
+  },
+  {
+    "label": "Pushouts",
+    "section": "Pushouts",
+    "subgoals": [
+      "State the relation behind cofibrations",
+      "Identify the data in pushouts",
+      "Carry out the pushouts step"
+    ]
+  }
+]

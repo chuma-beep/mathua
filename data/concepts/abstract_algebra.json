@@ -825,5 +825,292 @@
       "streak": 10,
       "avg_time_seconds": 28
     }
+  },
+  {
+    "id": "abstract.group.semidirect",
+    "label": "Semidirect products",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.group.direct_product",
+      "abstract.group.automorphism"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "abstract.rep.representation",
+    "label": "Group representations",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.representations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.group.homomorphism",
+      "abstract.structures.module"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "abstract.poly.symmetric",
+    "label": "Symmetric polynomials",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.rings",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.rings.polynomial"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "abstract.structures.ext",
+    "label": "Ext and Tor",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.structures",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.structures.exact_sequence",
+      "abstract.structures.module_hom"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "abstract.group.wreath",
+    "label": "Wreath products",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.group.semidirect"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "abstract.group.free_product",
+    "label": "Free products",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.group.free"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "abstract.group.extension",
+    "label": "Group extensions",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.groups",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.group.quotient_group",
+      "abstract.group.semidirect"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "abstract.rep.character",
+    "label": "Characters of group representations",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.representations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.rep.representation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "abstract.rep.maschke",
+    "label": "Maschke's theorem",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.representations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.rep.representation",
+      "abstract.field.characteristic"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "abstract.rep.schur",
+    "label": "Schur's lemma",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.representations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.rep.representation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "abstract.rep.induced",
+    "label": "Induced representations",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.representations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.rep.character"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "abstract.poly.resultant",
+    "label": "Resultants",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.rings",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.rings.polynomial"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "abstract.poly.discriminant",
+    "label": "Discriminants of polynomials",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.rings",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.poly.resultant"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "abstract.poly.eisenstein",
+    "label": "Eisenstein's criterion",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.rings",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.rings.irreducibility"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "abstract.rings.fractional_ideal",
+    "label": "Fractional ideals",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.rings",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.rings.ideal"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "abstract.rings.dedekind",
+    "label": "Dedekind domains",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.rings",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.rings.fractional_ideal",
+      "abstract.rings.noetherian"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "abstract.rings.valuation",
+    "label": "Valuation rings",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.rings",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.rings.integral_domain"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "abstract.rings.primary",
+    "label": "Primary decomposition",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.rings",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.rings.ideal",
+      "abstract.rings.prime_ideal"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "abstract.structures.nakayama",
+    "label": "Nakayama's lemma",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.structures",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.structures.fg_module"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "abstract.structures.exterior",
+    "label": "Exterior algebra",
+    "domain": "abstract_algebra",
+    "subdomain": "abstract_algebra.structures",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "abstract.structures.tensor"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
   }
 ]

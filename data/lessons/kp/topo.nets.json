@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Directed sets",
+    "section": "Directed sets",
+    "subgoals": [
+      "State the relation for nets and convergence",
+      "Identify the quantities in the directed sets step",
+      "Carry out the directed sets computation"
+    ]
+  },
+  {
+    "label": "Convergence",
+    "section": "Convergence",
+    "subgoals": [
+      "State the relation for nets and convergence",
+      "Identify the quantities in the convergence step",
+      "Carry out the convergence computation"
+    ]
+  },
+  {
+    "label": "Cluster points",
+    "section": "Cluster points",
+    "subgoals": [
+      "State the relation for nets and convergence",
+      "Identify the quantities in the cluster points step",
+      "Carry out the cluster points computation"
+    ]
+  }
+]

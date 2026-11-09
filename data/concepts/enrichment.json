@@ -19813,5 +19813,316 @@
       "abstract.group.lagrange",
       "abstract.group.cyclic"
     ]
+  },
+  {
+    "id": "abstract.group.extension",
+    "key_prerequisites": [
+      "abstract.group.quotient_group",
+      "abstract.group.semidirect"
+    ]
+  },
+  {
+    "id": "abstract.group.free_product",
+    "key_prerequisites": [
+      "abstract.group.free"
+    ]
+  },
+  {
+    "id": "abstract.group.semidirect",
+    "key_prerequisites": [
+      "abstract.group.direct_product",
+      "abstract.group.automorphism"
+    ]
+  },
+  {
+    "id": "abstract.group.wreath",
+    "key_prerequisites": [
+      "abstract.group.semidirect"
+    ]
+  },
+  {
+    "id": "abstract.poly.discriminant",
+    "key_prerequisites": [
+      "abstract.poly.resultant"
+    ]
+  },
+  {
+    "id": "abstract.poly.eisenstein",
+    "key_prerequisites": [
+      "abstract.rings.irreducibility"
+    ]
+  },
+  {
+    "id": "abstract.poly.resultant",
+    "key_prerequisites": [
+      "abstract.rings.polynomial"
+    ]
+  },
+  {
+    "id": "abstract.poly.symmetric",
+    "key_prerequisites": [
+      "abstract.rings.polynomial"
+    ]
+  },
+  {
+    "id": "abstract.rep.character",
+    "key_prerequisites": [
+      "abstract.rep.representation"
+    ]
+  },
+  {
+    "id": "abstract.rep.induced",
+    "key_prerequisites": [
+      "abstract.rep.character"
+    ]
+  },
+  {
+    "id": "abstract.rep.maschke",
+    "key_prerequisites": [
+      "abstract.rep.representation",
+      "abstract.field.characteristic"
+    ]
+  },
+  {
+    "id": "abstract.rep.representation",
+    "key_prerequisites": [
+      "abstract.group.homomorphism",
+      "abstract.structures.module"
+    ]
+  },
+  {
+    "id": "abstract.rep.schur",
+    "key_prerequisites": [
+      "abstract.rep.representation"
+    ]
+  },
+  {
+    "id": "abstract.rings.dedekind",
+    "key_prerequisites": [
+      "abstract.rings.fractional_ideal",
+      "abstract.rings.noetherian"
+    ]
+  },
+  {
+    "id": "abstract.rings.fractional_ideal",
+    "key_prerequisites": [
+      "abstract.rings.ideal"
+    ]
+  },
+  {
+    "id": "abstract.rings.primary",
+    "key_prerequisites": [
+      "abstract.rings.ideal",
+      "abstract.rings.prime_ideal"
+    ]
+  },
+  {
+    "id": "abstract.rings.valuation",
+    "key_prerequisites": [
+      "abstract.rings.integral_domain"
+    ]
+  },
+  {
+    "id": "abstract.structures.ext",
+    "key_prerequisites": [
+      "abstract.structures.exact_sequence",
+      "abstract.structures.module_hom"
+    ]
+  },
+  {
+    "id": "abstract.structures.exterior",
+    "key_prerequisites": [
+      "abstract.structures.tensor"
+    ]
+  },
+  {
+    "id": "abstract.structures.nakayama",
+    "key_prerequisites": [
+      "abstract.structures.fg_module"
+    ]
+  },
+  {
+    "id": "ml.cluster.dbscan",
+    "key_prerequisites": [
+      "ml.cluster.kmeans"
+    ]
+  },
+  {
+    "id": "ml.cluster.hierarchical",
+    "key_prerequisites": [
+      "ml.cluster.kmeans"
+    ]
+  },
+  {
+    "id": "ml.data.leakage",
+    "key_prerequisites": [
+      "ml.validation",
+      "ml.data.scaling"
+    ]
+  },
+  {
+    "id": "ml.optim.sgd",
+    "key_prerequisites": [
+      "ml.gradient_descent"
+    ]
+  },
+  {
+    "id": "ml.reg.elastic_net",
+    "key_prerequisites": [
+      "ml.reg.lasso",
+      "ml.reg.ridge_penalty"
+    ]
+  },
+  {
+    "id": "ml.reg.lasso",
+    "key_prerequisites": [
+      "ml.linreg.least_squares",
+      "ml.reg.ridge_penalty"
+    ]
+  },
+  {
+    "id": "ml.reg.polynomial",
+    "key_prerequisites": [
+      "ml.linreg.least_squares"
+    ]
+  },
+  {
+    "id": "ml.svm.soft_margin",
+    "key_prerequisites": [
+      "ml.svm.margin"
+    ]
+  },
+  {
+    "id": "ml.tree.gradient_boosting",
+    "key_prerequisites": [
+      "ml.tree.ensemble"
+    ]
+  },
+  {
+    "id": "ml.unsupervised.autoencoder",
+    "key_prerequisites": [
+      "ml.backpropagation"
+    ]
+  },
+  {
+    "id": "topo.brouwer",
+    "key_prerequisites": [
+      "topo.homotopy"
+    ]
+  },
+  {
+    "id": "topo.cofibration",
+    "key_prerequisites": [
+      "topo.homotopy"
+    ]
+  },
+  {
+    "id": "topo.continuum",
+    "key_prerequisites": [
+      "topo.connected"
+    ]
+  },
+  {
+    "id": "topo.cup_product",
+    "key_prerequisites": [
+      "topo.cohomology"
+    ]
+  },
+  {
+    "id": "topo.deck",
+    "key_prerequisites": [
+      "topo.covering"
+    ]
+  },
+  {
+    "id": "topo.fibration",
+    "key_prerequisites": [
+      "topo.homotopy"
+    ]
+  },
+  {
+    "id": "topo.filters",
+    "key_prerequisites": [
+      "topo.nets"
+    ]
+  },
+  {
+    "id": "topo.function_space",
+    "key_prerequisites": [
+      "topo.basics.continuous"
+    ]
+  },
+  {
+    "id": "topo.homotopy_group",
+    "key_prerequisites": [
+      "topo.homotopy"
+    ]
+  },
+  {
+    "id": "topo.jones_polynomial",
+    "key_prerequisites": [
+      "topo.knot"
+    ]
+  },
+  {
+    "id": "topo.limit_point_compact",
+    "key_prerequisites": [
+      "topo.compact"
+    ]
+  },
+  {
+    "id": "topo.nets",
+    "key_prerequisites": [
+      "topo.basics.spaces"
+    ]
+  },
+  {
+    "id": "topo.paracompact",
+    "key_prerequisites": [
+      "topo.separation.normal"
+    ]
+  },
+  {
+    "id": "topo.partition_unity",
+    "key_prerequisites": [
+      "topo.paracompact"
+    ]
+  },
+  {
+    "id": "topo.poincare_duality",
+    "key_prerequisites": [
+      "topo.cohomology",
+      "topo.manifold.orientability"
+    ]
+  },
+  {
+    "id": "topo.seifert_surface",
+    "key_prerequisites": [
+      "topo.knot"
+    ]
+  },
+  {
+    "id": "topo.sequential_compact",
+    "key_prerequisites": [
+      "topo.compact"
+    ]
+  },
+  {
+    "id": "topo.simplicial_homology",
+    "key_prerequisites": [
+      "topo.homology.cellular"
+    ]
+  },
+  {
+    "id": "topo.singular_homology",
+    "key_prerequisites": [
+      "topo.simplicial_homology"
+    ]
+  },
+  {
+    "id": "topo.uniform_space",
+    "key_prerequisites": [
+      "topo.basics.metric"
+    ]
   }
 ]

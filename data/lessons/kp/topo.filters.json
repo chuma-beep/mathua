@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Principal filters",
+    "section": "Principal filters",
+    "subgoals": [
+      "State the relation behind filters and ultrafilters",
+      "Identify the data in principal filters",
+      "Carry out the principal filters step"
+    ]
+  },
+  {
+    "label": "Ultrafilters",
+    "section": "Ultrafilters",
+    "subgoals": [
+      "State the relation behind filters and ultrafilters",
+      "Identify the data in ultrafilters",
+      "Carry out the ultrafilters step"
+    ]
+  },
+  {
+    "label": "Convergence",
+    "section": "Convergence",
+    "subgoals": [
+      "State the relation behind filters and ultrafilters",
+      "Identify the data in convergence",
+      "Carry out the convergence step"
+    ]
+  }
+]

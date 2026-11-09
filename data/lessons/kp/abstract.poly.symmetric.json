@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Elementary symmetric polynomials",
+    "section": "Elementary symmetric polynomials",
+    "subgoals": [
+      "State the relation for symmetric polynomials",
+      "Identify the quantities in the elementary symmetric polynomials step",
+      "Carry out the elementary symmetric polynomials computation"
+    ]
+  },
+  {
+    "label": "Power sums",
+    "section": "Power sums",
+    "subgoals": [
+      "State the relation for symmetric polynomials",
+      "Identify the quantities in the power sums step",
+      "Carry out the power sums computation"
+    ]
+  },
+  {
+    "label": "The fundamental theorem",
+    "section": "The fundamental theorem",
+    "subgoals": [
+      "State the relation for symmetric polynomials",
+      "Identify the quantities in the the fundamental theorem step",
+      "Carry out the the fundamental theorem computation"
+    ]
+  }
+]

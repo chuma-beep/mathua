@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The valuation of a power",
+    "section": "The valuation of a power",
+    "subgoals": [
+      "State the relation behind valuation rings",
+      "Identify the data in the valuation of a power",
+      "Carry out the the valuation of a power step"
+    ]
+  },
+  {
+    "label": "Additivity",
+    "section": "Additivity",
+    "subgoals": [
+      "State the relation behind valuation rings",
+      "Identify the data in additivity",
+      "Carry out the additivity step"
+    ]
+  },
+  {
+    "label": "The valuation ring",
+    "section": "The valuation ring",
+    "subgoals": [
+      "State the relation behind valuation rings",
+      "Identify the data in the valuation ring",
+      "Carry out the the valuation ring step"
+    ]
+  }
+]

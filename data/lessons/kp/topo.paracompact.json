@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Refinements",
+    "section": "Refinements",
+    "subgoals": [
+      "State the relation behind paracompact spaces",
+      "Identify the data in refinements",
+      "Carry out the refinements step"
+    ]
+  },
+  {
+    "label": "Local finiteness",
+    "section": "Local finiteness",
+    "subgoals": [
+      "State the relation behind paracompact spaces",
+      "Identify the data in local finiteness",
+      "Carry out the local finiteness step"
+    ]
+  },
+  {
+    "label": "Partitions of unity",
+    "section": "Partitions of unity",
+    "subgoals": [
+      "State the relation behind paracompact spaces",
+      "Identify the data in partitions of unity",
+      "Carry out the partitions of unity step"
+    ]
+  }
+]

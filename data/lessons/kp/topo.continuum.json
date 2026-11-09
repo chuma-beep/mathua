@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Connected unions",
+    "section": "Connected unions",
+    "subgoals": [
+      "State the relation behind continua",
+      "Identify the data in connected unions",
+      "Carry out the connected unions step"
+    ]
+  },
+  {
+    "label": "The continuum test",
+    "section": "The continuum test",
+    "subgoals": [
+      "State the relation behind continua",
+      "Identify the data in the continuum test",
+      "Carry out the the continuum test step"
+    ]
+  },
+  {
+    "label": "Cut points",
+    "section": "Cut points",
+    "subgoals": [
+      "State the relation behind continua",
+      "Identify the data in cut points",
+      "Carry out the cut points step"
+    ]
+  }
+]

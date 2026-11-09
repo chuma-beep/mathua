@@ -827,6 +827,293 @@
     "variants": []
   },
   {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.group.semidirect",
+    "label": "Semidirect products",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.direct_product",
+      "abstract.group.automorphism"
+    ],
+    "subdomain": "abstract_algebra.groups"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.rep.representation",
+    "label": "Group representations",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.homomorphism",
+      "abstract.structures.module"
+    ],
+    "subdomain": "abstract_algebra.representations"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.poly.symmetric",
+    "label": "Symmetric polynomials",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rings.polynomial"
+    ],
+    "subdomain": "abstract_algebra.rings"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.structures.ext",
+    "label": "Ext and Tor",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.structures.exact_sequence",
+      "abstract.structures.module_hom"
+    ],
+    "subdomain": "abstract_algebra.structures"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.group.wreath",
+    "label": "Wreath products",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.semidirect"
+    ],
+    "subdomain": "abstract_algebra.groups"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.group.free_product",
+    "label": "Free products",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.free"
+    ],
+    "subdomain": "abstract_algebra.groups"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.group.extension",
+    "label": "Group extensions",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.quotient_group",
+      "abstract.group.semidirect"
+    ],
+    "subdomain": "abstract_algebra.groups"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.rep.character",
+    "label": "Characters of group representations",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rep.representation"
+    ],
+    "subdomain": "abstract_algebra.representations"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.rep.maschke",
+    "label": "Maschke's theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rep.representation",
+      "abstract.field.characteristic"
+    ],
+    "subdomain": "abstract_algebra.representations"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.rep.schur",
+    "label": "Schur's lemma",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rep.representation"
+    ],
+    "subdomain": "abstract_algebra.representations"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.rep.induced",
+    "label": "Induced representations",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rep.character"
+    ],
+    "subdomain": "abstract_algebra.representations"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.poly.resultant",
+    "label": "Resultants",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rings.polynomial"
+    ],
+    "subdomain": "abstract_algebra.rings"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.poly.discriminant",
+    "label": "Discriminants of polynomials",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.poly.resultant"
+    ],
+    "subdomain": "abstract_algebra.rings"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.poly.eisenstein",
+    "label": "Eisenstein's criterion",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rings.irreducibility"
+    ],
+    "subdomain": "abstract_algebra.rings"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.rings.fractional_ideal",
+    "label": "Fractional ideals",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rings.ideal"
+    ],
+    "subdomain": "abstract_algebra.rings"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.rings.dedekind",
+    "label": "Dedekind domains",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rings.fractional_ideal",
+      "abstract.rings.noetherian"
+    ],
+    "subdomain": "abstract_algebra.rings"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.rings.valuation",
+    "label": "Valuation rings",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rings.integral_domain"
+    ],
+    "subdomain": "abstract_algebra.rings"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.rings.primary",
+    "label": "Primary decomposition",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rings.ideal",
+      "abstract.rings.prime_ideal"
+    ],
+    "subdomain": "abstract_algebra.rings"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.structures.nakayama",
+    "label": "Nakayama's lemma",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.structures.fg_module"
+    ],
+    "subdomain": "abstract_algebra.structures"
+  },
+  {
+    "domain": "abstract_algebra",
+    "grading_type": "numeric",
+    "id": "abstract.structures.exterior",
+    "label": "Exterior algebra",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.structures.tensor"
+    ],
+    "subdomain": "abstract_algebra.structures"
+  },
+  {
     "domain": "algebra",
     "grading_type": "numeric",
     "id": "alg.linear.slope",
@@ -16472,6 +16759,149 @@
     "subdomain": "machine_learning.neural_networks"
   },
   {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.reg.lasso",
+    "label": "Lasso regression",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.linreg.least_squares",
+      "ml.reg.ridge_penalty"
+    ],
+    "subdomain": "machine_learning.regression"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.tree.gradient_boosting",
+    "label": "Gradient boosting",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.tree.ensemble"
+    ],
+    "subdomain": "machine_learning.trees"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.reg.elastic_net",
+    "label": "Elastic net",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.reg.lasso",
+      "ml.reg.ridge_penalty"
+    ],
+    "subdomain": "machine_learning.regression"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.reg.polynomial",
+    "label": "Polynomial regression",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.linreg.least_squares"
+    ],
+    "subdomain": "machine_learning.regression"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.svm.soft_margin",
+    "label": "Soft-margin support vector machines",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.svm.margin"
+    ],
+    "subdomain": "machine_learning.classification"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.cluster.dbscan",
+    "label": "DBSCAN",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.cluster.kmeans"
+    ],
+    "subdomain": "machine_learning.unsupervised"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.cluster.hierarchical",
+    "label": "Hierarchical clustering",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.cluster.kmeans"
+    ],
+    "subdomain": "machine_learning.unsupervised"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.unsupervised.autoencoder",
+    "label": "Autoencoders",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.backpropagation"
+    ],
+    "subdomain": "machine_learning.neural_networks"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.optim.sgd",
+    "label": "Stochastic gradient descent",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.gradient_descent"
+    ],
+    "subdomain": "machine_learning.neural_networks"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.data.leakage",
+    "label": "Data leakage",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.validation",
+      "ml.data.scaling"
+    ],
+    "subdomain": "machine_learning.data"
+  },
+  {
     "domain": "number_theory",
     "grading_type": "numeric",
     "id": "nt.basics.divisibility",
@@ -25106,6 +25536,287 @@
     "prerequisites": [
       "topo.homology.cellular",
       "topo.cohomology"
+    ],
+    "subdomain": "topology.algebraic"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.nets",
+    "label": "Nets and convergence",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.basics.spaces"
+    ],
+    "subdomain": "topology.basics"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.sequential_compact",
+    "label": "Sequential compactness",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.compact"
+    ],
+    "subdomain": "topology.compact"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.deck",
+    "label": "Deck transformations",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.covering"
+    ],
+    "subdomain": "topology.covering"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.cup_product",
+    "label": "The cup product",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.cohomology"
+    ],
+    "subdomain": "topology.algebraic"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.filters",
+    "label": "Filters and ultrafilters",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.nets"
+    ],
+    "subdomain": "topology.basics"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.paracompact",
+    "label": "Paracompact spaces",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.separation.normal"
+    ],
+    "subdomain": "topology.separation"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.partition_unity",
+    "label": "Partitions of unity",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.paracompact"
+    ],
+    "subdomain": "topology.separation"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.function_space",
+    "label": "The compact-open topology",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.basics.continuous"
+    ],
+    "subdomain": "topology.constructions"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.uniform_space",
+    "label": "Uniform spaces",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.basics.metric"
+    ],
+    "subdomain": "topology.basics"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.limit_point_compact",
+    "label": "Limit point compactness",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.compact"
+    ],
+    "subdomain": "topology.compact"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.continuum",
+    "label": "Continua",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.connected"
+    ],
+    "subdomain": "topology.connected"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.homotopy_group",
+    "label": "Higher homotopy groups",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.homotopy"
+    ],
+    "subdomain": "topology.algebraic"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.fibration",
+    "label": "Fibrations",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.homotopy"
+    ],
+    "subdomain": "topology.algebraic"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.cofibration",
+    "label": "Cofibrations",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.homotopy"
+    ],
+    "subdomain": "topology.algebraic"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.simplicial_homology",
+    "label": "Simplicial homology",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.homology.cellular"
+    ],
+    "subdomain": "topology.algebraic"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.singular_homology",
+    "label": "Singular homology",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.simplicial_homology"
+    ],
+    "subdomain": "topology.algebraic"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.poincare_duality",
+    "label": "Poincare duality",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.cohomology",
+      "topo.manifold.orientability"
+    ],
+    "subdomain": "topology.manifolds"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.jones_polynomial",
+    "label": "The Jones polynomial",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.knot"
+    ],
+    "subdomain": "topology.knot"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.seifert_surface",
+    "label": "Seifert surfaces",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.knot"
+    ],
+    "subdomain": "topology.knot"
+  },
+  {
+    "domain": "topology",
+    "grading_type": "numeric",
+    "id": "topo.brouwer",
+    "label": "The Brouwer fixed point theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "topo.homotopy"
     ],
     "subdomain": "topology.algebraic"
   },

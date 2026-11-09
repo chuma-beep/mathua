@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Prime divisibility",
+    "section": "Prime divisibility",
+    "subgoals": [
+      "State the relation behind eisenstein's criterion",
+      "Identify the data in prime divisibility",
+      "Carry out the prime divisibility step"
+    ]
+  },
+  {
+    "label": "Irreducibility",
+    "section": "Irreducibility",
+    "subgoals": [
+      "State the relation behind eisenstein's criterion",
+      "Identify the data in irreducibility",
+      "Carry out the irreducibility step"
+    ]
+  },
+  {
+    "label": "The constant term",
+    "section": "The constant term",
+    "subgoals": [
+      "State the relation behind eisenstein's criterion",
+      "Identify the data in the constant term",
+      "Carry out the the constant term step"
+    ]
+  }
+]

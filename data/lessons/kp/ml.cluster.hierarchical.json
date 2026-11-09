@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Merge distances",
+    "section": "Merge distances",
+    "subgoals": [
+      "State the relation behind hierarchical clustering",
+      "Identify the data in merge distances",
+      "Carry out the merge distances step"
+    ]
+  },
+  {
+    "label": "Dendrogram height",
+    "section": "Dendrogram height",
+    "subgoals": [
+      "State the relation behind hierarchical clustering",
+      "Identify the data in dendrogram height",
+      "Carry out the dendrogram height step"
+    ]
+  },
+  {
+    "label": "Cutting the tree",
+    "section": "Cutting the tree",
+    "subgoals": [
+      "State the relation behind hierarchical clustering",
+      "Identify the data in cutting the tree",
+      "Carry out the cutting the tree step"
+    ]
+  }
+]

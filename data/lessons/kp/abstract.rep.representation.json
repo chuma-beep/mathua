@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Representations",
+    "section": "Representations",
+    "subgoals": [
+      "State the relation for group representations",
+      "Identify the quantities in the representations step",
+      "Carry out the representations computation"
+    ]
+  },
+  {
+    "label": "Characters",
+    "section": "Characters",
+    "subgoals": [
+      "State the relation for group representations",
+      "Identify the quantities in the characters step",
+      "Carry out the characters computation"
+    ]
+  },
+  {
+    "label": "Permutation representations",
+    "section": "Permutation representations",
+    "subgoals": [
+      "State the relation for group representations",
+      "Identify the quantities in the permutation representations step",
+      "Carry out the permutation representations computation"
+    ]
+  }
+]

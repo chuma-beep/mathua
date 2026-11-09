@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The characteristic condition",
+    "section": "The characteristic condition",
+    "subgoals": [
+      "State the relation behind maschke's theorem",
+      "Identify the data in the characteristic condition",
+      "Carry out the the characteristic condition step"
+    ]
+  },
+  {
+    "label": "Averaging",
+    "section": "Averaging",
+    "subgoals": [
+      "State the relation behind maschke's theorem",
+      "Identify the data in averaging",
+      "Carry out the averaging step"
+    ]
+  },
+  {
+    "label": "Semisimple decomposition",
+    "section": "Semisimple decomposition",
+    "subgoals": [
+      "State the relation behind maschke's theorem",
+      "Identify the data in semisimple decomposition",
+      "Carry out the semisimple decomposition step"
+    ]
+  }
+]

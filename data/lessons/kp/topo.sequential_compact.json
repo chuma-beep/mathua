@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Subsequences",
+    "section": "Subsequences",
+    "subgoals": [
+      "State the relation for sequential compactness",
+      "Identify the quantities in the subsequences step",
+      "Carry out the subsequences computation"
+    ]
+  },
+  {
+    "label": "Metric spaces",
+    "section": "Metric spaces",
+    "subgoals": [
+      "State the relation for sequential compactness",
+      "Identify the quantities in the metric spaces step",
+      "Carry out the metric spaces computation"
+    ]
+  },
+  {
+    "label": "Counterexamples",
+    "section": "Counterexamples",
+    "subgoals": [
+      "State the relation for sequential compactness",
+      "Identify the quantities in the counterexamples step",
+      "Carry out the counterexamples computation"
+    ]
+  }
+]

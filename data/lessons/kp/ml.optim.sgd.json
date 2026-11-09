@@ -1,0 +1,29 @@
+[
+  {
+    "label": "One update",
+    "section": "One update",
+    "subgoals": [
+      "State the relation behind stochastic gradient descent",
+      "Identify the data in one update",
+      "Carry out the one update step"
+    ]
+  },
+  {
+    "label": "Minibatch gradient",
+    "section": "Minibatch gradient",
+    "subgoals": [
+      "State the relation behind stochastic gradient descent",
+      "Identify the data in minibatch gradient",
+      "Carry out the minibatch gradient step"
+    ]
+  },
+  {
+    "label": "The learning rate",
+    "section": "The learning rate",
+    "subgoals": [
+      "State the relation behind stochastic gradient descent",
+      "Identify the data in the learning rate",
+      "Carry out the the learning rate step"
+    ]
+  }
+]

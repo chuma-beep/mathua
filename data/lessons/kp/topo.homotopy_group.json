@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Spheres",
+    "section": "Spheres",
+    "subgoals": [
+      "State the relation behind higher homotopy groups",
+      "Identify the data in spheres",
+      "Carry out the spheres step"
+    ]
+  },
+  {
+    "label": "Vanishing range",
+    "section": "Vanishing range",
+    "subgoals": [
+      "State the relation behind higher homotopy groups",
+      "Identify the data in vanishing range",
+      "Carry out the vanishing range step"
+    ]
+  },
+  {
+    "label": "Commutativity",
+    "section": "Commutativity",
+    "subgoals": [
+      "State the relation behind higher homotopy groups",
+      "Identify the data in commutativity",
+      "Carry out the commutativity step"
+    ]
+  }
+]

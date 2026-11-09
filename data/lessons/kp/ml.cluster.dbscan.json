@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Core points",
+    "section": "Core points",
+    "subgoals": [
+      "State the relation behind dbscan",
+      "Identify the data in core points",
+      "Carry out the core points step"
+    ]
+  },
+  {
+    "label": "Clusters",
+    "section": "Clusters",
+    "subgoals": [
+      "State the relation behind dbscan",
+      "Identify the data in clusters",
+      "Carry out the clusters step"
+    ]
+  },
+  {
+    "label": "Noise",
+    "section": "Noise",
+    "subgoals": [
+      "State the relation behind dbscan",
+      "Identify the data in noise",
+      "Carry out the noise step"
+    ]
+  }
+]

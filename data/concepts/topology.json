@@ -753,5 +753,286 @@
       "streak": 10,
       "avg_time_seconds": 34
     }
+  },
+  {
+    "id": "topo.nets",
+    "label": "Nets and convergence",
+    "domain": "topology",
+    "subdomain": "topology.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.basics.spaces"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "topo.sequential_compact",
+    "label": "Sequential compactness",
+    "domain": "topology",
+    "subdomain": "topology.compact",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.compact"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "topo.deck",
+    "label": "Deck transformations",
+    "domain": "topology",
+    "subdomain": "topology.covering",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.covering"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "topo.cup_product",
+    "label": "The cup product",
+    "domain": "topology",
+    "subdomain": "topology.algebraic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.cohomology"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "topo.filters",
+    "label": "Filters and ultrafilters",
+    "domain": "topology",
+    "subdomain": "topology.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.nets"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "topo.paracompact",
+    "label": "Paracompact spaces",
+    "domain": "topology",
+    "subdomain": "topology.separation",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.separation.normal"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "topo.partition_unity",
+    "label": "Partitions of unity",
+    "domain": "topology",
+    "subdomain": "topology.separation",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.paracompact"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "topo.function_space",
+    "label": "The compact-open topology",
+    "domain": "topology",
+    "subdomain": "topology.constructions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.basics.continuous"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "topo.uniform_space",
+    "label": "Uniform spaces",
+    "domain": "topology",
+    "subdomain": "topology.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.basics.metric"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "topo.limit_point_compact",
+    "label": "Limit point compactness",
+    "domain": "topology",
+    "subdomain": "topology.compact",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.compact"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "topo.continuum",
+    "label": "Continua",
+    "domain": "topology",
+    "subdomain": "topology.connected",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.connected"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "topo.homotopy_group",
+    "label": "Higher homotopy groups",
+    "domain": "topology",
+    "subdomain": "topology.algebraic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.homotopy"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "topo.fibration",
+    "label": "Fibrations",
+    "domain": "topology",
+    "subdomain": "topology.algebraic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.homotopy"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "topo.cofibration",
+    "label": "Cofibrations",
+    "domain": "topology",
+    "subdomain": "topology.algebraic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.homotopy"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "topo.simplicial_homology",
+    "label": "Simplicial homology",
+    "domain": "topology",
+    "subdomain": "topology.algebraic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.homology.cellular"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "topo.singular_homology",
+    "label": "Singular homology",
+    "domain": "topology",
+    "subdomain": "topology.algebraic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.simplicial_homology"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "topo.poincare_duality",
+    "label": "Poincare duality",
+    "domain": "topology",
+    "subdomain": "topology.manifolds",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.cohomology",
+      "topo.manifold.orientability"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "topo.jones_polynomial",
+    "label": "The Jones polynomial",
+    "domain": "topology",
+    "subdomain": "topology.knot",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.knot"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "topo.seifert_surface",
+    "label": "Seifert surfaces",
+    "domain": "topology",
+    "subdomain": "topology.knot",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.knot"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "topo.brouwer",
+    "label": "The Brouwer fixed point theorem",
+    "domain": "topology",
+    "subdomain": "topology.algebraic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.homotopy"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
   }
 ]

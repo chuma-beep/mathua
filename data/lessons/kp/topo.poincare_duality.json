@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Betti numbers",
+    "section": "Betti numbers",
+    "subgoals": [
+      "State the relation behind poincare duality",
+      "Identify the data in betti numbers",
+      "Carry out the betti numbers step"
+    ]
+  },
+  {
+    "label": "Euler parity",
+    "section": "Euler parity",
+    "subgoals": [
+      "State the relation behind poincare duality",
+      "Identify the data in euler parity",
+      "Carry out the euler parity step"
+    ]
+  },
+  {
+    "label": "Dimension",
+    "section": "Dimension",
+    "subgoals": [
+      "State the relation behind poincare duality",
+      "Identify the data in dimension",
+      "Carry out the dimension step"
+    ]
+  }
+]

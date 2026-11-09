@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Character at the identity",
+    "section": "Character at the identity",
+    "subgoals": [
+      "State the relation behind characters of group representations",
+      "Identify the data in character at the identity",
+      "Carry out the character at the identity step"
+    ]
+  },
+  {
+    "label": "Direct sums",
+    "section": "Direct sums",
+    "subgoals": [
+      "State the relation behind characters of group representations",
+      "Identify the data in direct sums",
+      "Carry out the direct sums step"
+    ]
+  },
+  {
+    "label": "Orthogonality",
+    "section": "Orthogonality",
+    "subgoals": [
+      "State the relation behind characters of group representations",
+      "Identify the data in orthogonality",
+      "Carry out the orthogonality step"
+    ]
+  }
+]

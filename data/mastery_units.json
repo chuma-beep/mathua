@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1800,
+  "concept_count": 1850,
   "unit_count": 141,
   "units": [
     {
@@ -65,6 +65,7 @@
       "subdomains": [
         "abstract_algebra.fields",
         "abstract_algebra.groups",
+        "abstract_algebra.representations",
         "abstract_algebra.rings",
         "abstract_algebra.structures"
       ],
@@ -75,20 +76,30 @@
         "abstract.group.direct_product",
         "abstract.group.quotient_group",
         "abstract.group.simple",
+        "abstract.poly.discriminant",
+        "abstract.poly.resultant",
+        "abstract.poly.symmetric",
+        "abstract.rep.character",
+        "abstract.rep.maschke",
+        "abstract.rep.representation",
+        "abstract.rep.schur",
         "abstract.rings.euclidean",
+        "abstract.rings.fractional_ideal",
         "abstract.rings.integral_domain",
         "abstract.rings.localization",
         "abstract.rings.pid",
         "abstract.rings.polynomial",
+        "abstract.rings.primary",
         "abstract.rings.prime_ideal",
         "abstract.rings.quotient",
         "abstract.rings.ufd",
+        "abstract.rings.valuation",
         "abstract.structures.fg_module",
         "abstract.structures.module",
         "abstract.structures.module_hom",
         "abstract.structures.submodule"
       ],
-      "concept_count": 18
+      "concept_count": 28
     },
     {
       "id": "abstract_algebra.b9",
@@ -100,6 +111,7 @@
       "subdomains": [
         "abstract_algebra.fields",
         "abstract_algebra.groups",
+        "abstract_algebra.representations",
         "abstract_algebra.rings",
         "abstract_algebra.structures"
       ],
@@ -113,17 +125,26 @@
         "abstract.group.abelian_classification",
         "abstract.group.cayley",
         "abstract.group.composition_series",
+        "abstract.group.extension",
         "abstract.group.nilpotent",
         "abstract.group.p_group",
+        "abstract.group.semidirect",
         "abstract.group.solvable",
         "abstract.group.sylow",
+        "abstract.group.wreath",
+        "abstract.poly.eisenstein",
+        "abstract.rep.induced",
+        "abstract.rings.dedekind",
         "abstract.rings.irreducibility",
         "abstract.rings.noetherian",
         "abstract.structures.exact_sequence",
+        "abstract.structures.ext",
+        "abstract.structures.exterior",
         "abstract.structures.galois",
+        "abstract.structures.nakayama",
         "abstract.structures.tensor"
       ],
-      "concept_count": 18
+      "concept_count": 27
     },
     {
       "id": "abstract_algebra.b10",
@@ -139,9 +160,10 @@
       "concept_ids": [
         "abstract.field.radicals",
         "abstract.group.commutator",
-        "abstract.group.free"
+        "abstract.group.free",
+        "abstract.group.free_product"
       ],
-      "concept_count": 3
+      "concept_count": 4
     },
     {
       "id": "algebra.b3",
@@ -2416,9 +2438,10 @@
         "ml.linreg.predict",
         "ml.loss.cross_entropy",
         "ml.loss.mae",
-        "ml.loss.mse"
+        "ml.loss.mse",
+        "ml.reg.polynomial"
       ],
-      "concept_count": 5
+      "concept_count": 6
     },
     {
       "id": "machine_learning.b4",
@@ -2475,14 +2498,16 @@
         "ml.arch.gan",
         "ml.arch.rnn",
         "ml.arch.transformer",
+        "ml.cluster.dbscan",
         "ml.cluster.em",
+        "ml.cluster.hierarchical",
         "ml.cluster.kmeans",
         "ml.logistic.regression",
         "ml.nlp.transformer",
         "ml.pca.variance_percent",
         "ml.reinforcement.qlearning"
       ],
-      "concept_count": 10
+      "concept_count": 12
     },
     {
       "id": "machine_learning.b9",
@@ -2504,9 +2529,10 @@
         "ml.reinforcement.actor_critic",
         "ml.reinforcement.policy_gradient",
         "ml.svm.kernel",
-        "ml.svm.margin"
+        "ml.svm.margin",
+        "ml.svm.soft_margin"
       ],
-      "concept_count": 8
+      "concept_count": 9
     },
     {
       "id": "machine_learning.b10",
@@ -2520,9 +2546,10 @@
       ],
       "concept_ids": [
         "ml.gradient_descent",
+        "ml.optim.sgd",
         "ml.regularization"
       ],
-      "concept_count": 2
+      "concept_count": 3
     },
     {
       "id": "machine_learning.b11",
@@ -2542,17 +2569,20 @@
         "ml.backpropagation",
         "ml.bias_variance",
         "ml.data.augmentation",
+        "ml.data.leakage",
         "ml.eval.accuracy",
         "ml.eval.roc",
         "ml.feature.selection",
         "ml.optim.early_stopping",
         "ml.overfitting",
+        "ml.reg.elastic_net",
+        "ml.reg.lasso",
         "ml.reg.ridge_penalty",
         "ml.regularization.dropout",
         "ml.tree.gini",
         "ml.validation"
       ],
-      "concept_count": 12
+      "concept_count": 15
     },
     {
       "id": "machine_learning.b12",
@@ -2580,9 +2610,11 @@
         "ml.optim.adam",
         "ml.optim.batchnorm",
         "ml.optim.momentum",
-        "ml.tree.ensemble"
+        "ml.tree.ensemble",
+        "ml.tree.gradient_boosting",
+        "ml.unsupervised.autoencoder"
       ],
-      "concept_count": 12
+      "concept_count": 14
     },
     {
       "id": "number_theory.b2",
@@ -3861,9 +3893,10 @@
         "topo.metric.convergence",
         "topo.metric.interior",
         "topo.metric.limit_point",
-        "topo.product"
+        "topo.product",
+        "topo.uniform_space"
       ],
-      "concept_count": 11
+      "concept_count": 12
     },
     {
       "id": "topology.b11",
@@ -3874,6 +3907,7 @@
       "depth_max": 35,
       "subdomains": [
         "topology.algebraic",
+        "topology.basics",
         "topology.compact",
         "topology.connected",
         "topology.constructions",
@@ -3884,6 +3918,8 @@
         "topology.separation"
       ],
       "concept_ids": [
+        "topo.brouwer",
+        "topo.cofibration",
         "topo.compact",
         "topo.compact.local",
         "topo.compact.one_point",
@@ -3891,23 +3927,31 @@
         "topo.connected.components",
         "topo.connected.local_path",
         "topo.connected.path",
+        "topo.continuum",
         "topo.covering",
+        "topo.fibration",
+        "topo.filters",
+        "topo.function_space",
         "topo.hausdorff",
         "topo.homotopy",
         "topo.homotopy.fundamental",
+        "topo.homotopy_group",
         "topo.invariant.euler",
         "topo.invariant.homeomorphism",
+        "topo.limit_point_compact",
         "topo.manifold",
         "topo.metric.basis",
         "topo.metric.dense",
         "topo.metric.subspace",
         "topo.metrization",
+        "topo.nets",
         "topo.quotient",
         "topo.separation.normal",
         "topo.separation.tietze",
+        "topo.sequential_compact",
         "topo.urysohn"
       ],
-      "concept_count": 22
+      "concept_count": 32
     },
     {
       "id": "topology.b12",
@@ -3934,6 +3978,8 @@
         "topo.cohomology.de_rham",
         "topo.compactification.stone_cech",
         "topo.covering.universal",
+        "topo.cup_product",
+        "topo.deck",
         "topo.dimension",
         "topo.embedding",
         "topo.fiber_bundle",
@@ -3942,12 +3988,19 @@
         "topo.invariant.betti",
         "topo.invariant.genus",
         "topo.invariant.surface_classification",
+        "topo.jones_polynomial",
         "topo.knot",
         "topo.manifold.orientability",
         "topo.manifolds.boundary",
-        "topo.separation.completely_regular"
+        "topo.paracompact",
+        "topo.partition_unity",
+        "topo.poincare_duality",
+        "topo.seifert_surface",
+        "topo.separation.completely_regular",
+        "topo.simplicial_homology",
+        "topo.singular_homology"
       ],
-      "concept_count": 19
+      "concept_count": 28
     },
     {
       "id": "trigonometry.b2",

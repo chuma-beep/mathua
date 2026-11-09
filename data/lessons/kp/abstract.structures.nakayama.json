@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The hypothesis",
+    "section": "The hypothesis",
+    "subgoals": [
+      "State the relation behind nakayama's lemma",
+      "Identify the data in the hypothesis",
+      "Carry out the the hypothesis step"
+    ]
+  },
+  {
+    "label": "Minimal generators",
+    "section": "Minimal generators",
+    "subgoals": [
+      "State the relation behind nakayama's lemma",
+      "Identify the data in minimal generators",
+      "Carry out the minimal generators step"
+    ]
+  },
+  {
+    "label": "The quotient",
+    "section": "The quotient",
+    "subgoals": [
+      "State the relation behind nakayama's lemma",
+      "Identify the data in the quotient",
+      "Carry out the the quotient step"
+    ]
+  }
+]

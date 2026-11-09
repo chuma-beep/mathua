@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The bottleneck",
+    "section": "The bottleneck",
+    "subgoals": [
+      "State the relation behind autoencoders",
+      "Identify the data in the bottleneck",
+      "Carry out the the bottleneck step"
+    ]
+  },
+  {
+    "label": "Parameters",
+    "section": "Parameters",
+    "subgoals": [
+      "State the relation behind autoencoders",
+      "Identify the data in parameters",
+      "Carry out the parameters step"
+    ]
+  },
+  {
+    "label": "Reconstruction loss",
+    "section": "Reconstruction loss",
+    "subgoals": [
+      "State the relation behind autoencoders",
+      "Identify the data in reconstruction loss",
+      "Carry out the reconstruction loss step"
+    ]
+  }
+]

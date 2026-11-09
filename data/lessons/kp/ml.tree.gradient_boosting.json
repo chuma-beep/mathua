@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Residuals",
+    "section": "Residuals",
+    "subgoals": [
+      "State the relation for gradient boosting",
+      "Identify the quantities in the residuals step",
+      "Carry out the residuals computation"
+    ]
+  },
+  {
+    "label": "Learning rate",
+    "section": "Learning rate",
+    "subgoals": [
+      "State the relation for gradient boosting",
+      "Identify the quantities in the learning rate step",
+      "Carry out the learning rate computation"
+    ]
+  },
+  {
+    "label": "The additive model",
+    "section": "The additive model",
+    "subgoals": [
+      "State the relation for gradient boosting",
+      "Identify the quantities in the the additive model step",
+      "Carry out the the additive model computation"
+    ]
+  }
+]

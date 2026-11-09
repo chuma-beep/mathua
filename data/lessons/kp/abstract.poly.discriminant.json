@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The quadratic discriminant",
+    "section": "The quadratic discriminant",
+    "subgoals": [
+      "State the relation behind discriminants of polynomials",
+      "Identify the data in the quadratic discriminant",
+      "Carry out the the quadratic discriminant step"
+    ]
+  },
+  {
+    "label": "Repeated roots",
+    "section": "Repeated roots",
+    "subgoals": [
+      "State the relation behind discriminants of polynomials",
+      "Identify the data in repeated roots",
+      "Carry out the repeated roots step"
+    ]
+  },
+  {
+    "label": "The sign",
+    "section": "The sign",
+    "subgoals": [
+      "State the relation behind discriminants of polynomials",
+      "Identify the data in the sign",
+      "Carry out the the sign step"
+    ]
+  }
+]

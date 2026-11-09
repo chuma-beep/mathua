@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The product set",
+    "section": "The product set",
+    "subgoals": [
+      "State the relation for semidirect products",
+      "Identify the quantities in the the product set step",
+      "Carry out the the product set computation"
+    ]
+  },
+  {
+    "label": "The action",
+    "section": "The action",
+    "subgoals": [
+      "State the relation for semidirect products",
+      "Identify the quantities in the the action step",
+      "Carry out the the action computation"
+    ]
+  },
+  {
+    "label": "Multiplication",
+    "section": "Multiplication",
+    "subgoals": [
+      "State the relation for semidirect products",
+      "Identify the quantities in the multiplication step",
+      "Carry out the multiplication computation"
+    ]
+  }
+]

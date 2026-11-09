@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Value at one",
+    "section": "Value at one",
+    "subgoals": [
+      "State the relation behind the jones polynomial",
+      "Identify the data in value at one",
+      "Carry out the value at one step"
+    ]
+  },
+  {
+    "label": "Skein exponent",
+    "section": "Skein exponent",
+    "subgoals": [
+      "State the relation behind the jones polynomial",
+      "Identify the data in skein exponent",
+      "Carry out the skein exponent step"
+    ]
+  },
+  {
+    "label": "Crossing change",
+    "section": "Crossing change",
+    "subgoals": [
+      "State the relation behind the jones polynomial",
+      "Identify the data in crossing change",
+      "Carry out the crossing change step"
+    ]
+  }
+]

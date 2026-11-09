@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The inverse ideal",
+    "section": "The inverse ideal",
+    "subgoals": [
+      "State the relation behind fractional ideals",
+      "Identify the data in the inverse ideal",
+      "Carry out the the inverse ideal step"
+    ]
+  },
+  {
+    "label": "Products of fractional ideals",
+    "section": "Products of fractional ideals",
+    "subgoals": [
+      "State the relation behind fractional ideals",
+      "Identify the data in products of fractional ideals",
+      "Carry out the products of fractional ideals step"
+    ]
+  },
+  {
+    "label": "Integrality",
+    "section": "Integrality",
+    "subgoals": [
+      "State the relation behind fractional ideals",
+      "Identify the data in integrality",
+      "Carry out the integrality step"
+    ]
+  }
+]

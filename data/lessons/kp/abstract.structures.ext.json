@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Ext",
+    "section": "Ext",
+    "subgoals": [
+      "State the relation for ext and tor",
+      "Identify the quantities in the ext step",
+      "Carry out the ext computation"
+    ]
+  },
+  {
+    "label": "Tor",
+    "section": "Tor",
+    "subgoals": [
+      "State the relation for ext and tor",
+      "Identify the quantities in the tor step",
+      "Carry out the tor computation"
+    ]
+  },
+  {
+    "label": "Exact sequences",
+    "section": "Exact sequences",
+    "subgoals": [
+      "State the relation for ext and tor",
+      "Identify the quantities in the exact sequences step",
+      "Carry out the exact sequences computation"
+    ]
+  }
+]

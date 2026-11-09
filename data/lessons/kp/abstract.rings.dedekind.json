@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Factorisation exponents",
+    "section": "Factorisation exponents",
+    "subgoals": [
+      "State the relation behind dedekind domains",
+      "Identify the data in factorisation exponents",
+      "Carry out the factorisation exponents step"
+    ]
+  },
+  {
+    "label": "Unique factorisation",
+    "section": "Unique factorisation",
+    "subgoals": [
+      "State the relation behind dedekind domains",
+      "Identify the data in unique factorisation",
+      "Carry out the unique factorisation step"
+    ]
+  },
+  {
+    "label": "Squaring the ideal",
+    "section": "Squaring the ideal",
+    "subgoals": [
+      "State the relation behind dedekind domains",
+      "Identify the data in squaring the ideal",
+      "Carry out the squaring the ideal step"
+    ]
+  }
+]

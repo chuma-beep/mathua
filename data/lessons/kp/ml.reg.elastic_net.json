@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The mixing denominator",
+    "section": "The mixing denominator",
+    "subgoals": [
+      "State the relation behind elastic net",
+      "Identify the data in the mixing denominator",
+      "Carry out the the mixing denominator step"
+    ]
+  },
+  {
+    "label": "The soft threshold",
+    "section": "The soft threshold",
+    "subgoals": [
+      "State the relation behind elastic net",
+      "Identify the data in the soft threshold",
+      "Carry out the the soft threshold step"
+    ]
+  },
+  {
+    "label": "The combined penalty",
+    "section": "The combined penalty",
+    "subgoals": [
+      "State the relation behind elastic net",
+      "Identify the data in the combined penalty",
+      "Carry out the the combined penalty step"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The sum",
+    "section": "The sum",
+    "subgoals": [
+      "State the relation behind partitions of unity",
+      "Identify the data in the sum",
+      "Carry out the the sum step"
+    ]
+  },
+  {
+    "label": "Functions subordinate to a cover",
+    "section": "Functions subordinate to a cover",
+    "subgoals": [
+      "State the relation behind partitions of unity",
+      "Identify the data in functions subordinate to a cover",
+      "Carry out the functions subordinate to a cover step"
+    ]
+  },
+  {
+    "label": "Support",
+    "section": "Support",
+    "subgoals": [
+      "State the relation behind partitions of unity",
+      "Identify the data in support",
+      "Carry out the support step"
+    ]
+  }
+]

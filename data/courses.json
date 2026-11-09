@@ -1217,7 +1217,27 @@
       "abstract.structures.fg_module",
       "abstract.field.radicals",
       "abstract.field.separable",
-      "abstract.group.cauchy"
+      "abstract.group.cauchy",
+      "abstract.group.semidirect",
+      "abstract.rep.representation",
+      "abstract.poly.symmetric",
+      "abstract.structures.ext",
+      "abstract.group.wreath",
+      "abstract.group.free_product",
+      "abstract.group.extension",
+      "abstract.rep.character",
+      "abstract.rep.maschke",
+      "abstract.rep.schur",
+      "abstract.rep.induced",
+      "abstract.poly.resultant",
+      "abstract.poly.discriminant",
+      "abstract.poly.eisenstein",
+      "abstract.rings.fractional_ideal",
+      "abstract.rings.dedekind",
+      "abstract.rings.valuation",
+      "abstract.rings.primary",
+      "abstract.structures.nakayama",
+      "abstract.structures.exterior"
     ]
   },
   {
@@ -1257,7 +1277,27 @@
       "topo.invariant.surface_classification",
       "topo.compact.tychonoff",
       "topo.algebraic.degree",
-      "topo.algebraic.mayer_vietoris"
+      "topo.algebraic.mayer_vietoris",
+      "topo.nets",
+      "topo.sequential_compact",
+      "topo.deck",
+      "topo.cup_product",
+      "topo.filters",
+      "topo.paracompact",
+      "topo.partition_unity",
+      "topo.function_space",
+      "topo.uniform_space",
+      "topo.limit_point_compact",
+      "topo.continuum",
+      "topo.homotopy_group",
+      "topo.fibration",
+      "topo.cofibration",
+      "topo.simplicial_homology",
+      "topo.singular_homology",
+      "topo.poincare_duality",
+      "topo.jones_polynomial",
+      "topo.seifert_surface",
+      "topo.brouwer"
     ]
   },
   {
@@ -1304,7 +1344,17 @@
       "ml.feature.selection",
       "ml.multiclass",
       "ml.nlp.embedding",
-      "ml.optim.early_stopping"
+      "ml.optim.early_stopping",
+      "ml.reg.lasso",
+      "ml.tree.gradient_boosting",
+      "ml.reg.elastic_net",
+      "ml.reg.polynomial",
+      "ml.svm.soft_margin",
+      "ml.cluster.dbscan",
+      "ml.cluster.hierarchical",
+      "ml.unsupervised.autoencoder",
+      "ml.optim.sgd",
+      "ml.data.leakage"
     ]
   },
   {

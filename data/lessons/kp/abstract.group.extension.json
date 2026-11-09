@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Order of an extension",
+    "section": "Order of an extension",
+    "subgoals": [
+      "State the relation behind group extensions",
+      "Identify the data in order of an extension",
+      "Carry out the order of an extension step"
+    ]
+  },
+  {
+    "label": "The quotient",
+    "section": "The quotient",
+    "subgoals": [
+      "State the relation behind group extensions",
+      "Identify the data in the quotient",
+      "Carry out the the quotient step"
+    ]
+  },
+  {
+    "label": "The splitting condition",
+    "section": "The splitting condition",
+    "subgoals": [
+      "State the relation behind group extensions",
+      "Identify the data in the splitting condition",
+      "Carry out the the splitting condition step"
+    ]
+  }
+]

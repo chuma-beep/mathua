@@ -25,8 +25,8 @@ and the artifact it describes are one fact (AGENTS.md section 7).
 | Courses | `data/courses.json` | named target sets |
 | Destinations | `data/destinations.json` | named bundles of courses |
 
-Two numbers are useful to hold together. There are 1800 concepts, and there are 1800 KP shard files
-holding 5400 knowledge points, three per concept.
+Two numbers are useful to hold together. There are 1850 concepts, and there are 1850 KP shard files
+holding 5550 knowledge points, three per concept.
 
 ## 2. The pipeline
 
@@ -69,11 +69,11 @@ means a new thin concept cannot be added quietly.
 
 ## 4. Where the corpus is thin
 
-### 4.1 The course catalog reaches 1800 of the 1800 concepts
+### 4.1 The course catalog reaches 1850 of the 1850 concepts
 
 Courses carry target sets, and a target expands to its transitive prerequisite closure in
 `internal/planning/planner.go:64` (`collectChain`). Across the 28 courses those closures reach
-1800 of the 1800 concepts: 0 of them have a node, a generator, a lesson and three KP shards and
+1850 of the 1850 concepts: 0 of them have a node, a generator, a lesson and three KP shards and
 still sit outside every named course path. The wiring batch of 2026-10-19 moved the 149 that used
 to sit there into the courses that teach their subject, and the table stays as the measurement on
 the number, because a concept that no course targets is unreachable whatever the diagnostic
@@ -87,11 +87,11 @@ The count of unreachable concepts by domain:
 | calc2 | 89 | 0 |
 | calc3 | 97 | 0 |
 | algebra | 171 | 0 |
-| topology | 52 | 0 |
+| topology | 72 | 0 |
 | statistics | 98 | 0 |
 | precalculus | 58 | 0 |
 | fractions | 52 | 0 |
-| machine_learning | 55 | 0 |
+| machine_learning | 65 | 0 |
 | complex_numbers | 71 | 0 |
 | number_theory | 71 | 0 |
 | differential_equations | 66 | 0 |
@@ -99,7 +99,7 @@ The count of unreachable concepts by domain:
 | trigonometry | 78 | 0 |
 | arithmetic | 72 | 0 |
 | linear_algebra | 80 | 0 |
-| abstract_algebra | 56 | 0 |
+| abstract_algebra | 76 | 0 |
 | discrete_math | 87 | 0 |
 | geometry | 70 | 0 |
 | graph_theory | 63 | 0 |
@@ -123,9 +123,9 @@ now read zero:
 
 | Domain | Concepts | `multiple_choice` |
 |---|---|---|
-| topology | 52 | 0 |
+| topology | 72 | 0 |
 | real_analysis | 89 | 0 |
-| abstract_algebra | 56 | 0 |
+| abstract_algebra | 76 | 0 |
 | trigonometry | 78 | 0 |
 | probability_theory | 85 | 0 |
 | discrete_math | 64 | 0 |
@@ -404,7 +404,7 @@ because the change this section prepares for is the one that would have tripped 
 
 ### 5.5 The concept target, and where it goes
 
-The catalog holds 1800 concepts. The remaining per-domain targets add up to 200, and this is the
+The catalog holds 1850 concepts. The remaining per-domain targets add up to 150, and this is the
 table that says where: the 2,000-concept target agreed on 2026-11-08. `Now` is read from the corpus;
 `Target` is the decision. The rows keep the order step 6 of section 6 used, largest deficit first.
 
@@ -420,10 +420,10 @@ table that says where: the 2,000-concept target agreed on 2026-11-08. `Now` is r
 | precalculus | bridge | 58 | 81 | +23 |
 | probability_theory | university | 85 | 85 | +0 |
 | linear_algebra | university | 80 | 80 | +0 |
-| abstract_algebra | university | 56 | 76 | +20 |
-| machine_learning | university | 55 | 75 | +20 |
+| abstract_algebra | university | 76 | 76 | +0 |
+| machine_learning | university | 65 | 75 | +10 |
 | number_theory | university | 71 | 71 | +0 |
-| topology | university | 52 | 72 | +20 |
+| topology | university | 72 | 72 | +0 |
 | complex_numbers | university | 71 | 71 | +0 |
 | graph_theory | university | 63 | 70 | +7 |
 | numerical_analysis | university | 69 | 69 | +0 |

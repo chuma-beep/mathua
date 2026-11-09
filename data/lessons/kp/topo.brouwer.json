@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Fixed points",
+    "section": "Fixed points",
+    "subgoals": [
+      "State the relation behind the brouwer fixed point theorem",
+      "Identify the data in fixed points",
+      "Carry out the fixed points step"
+    ]
+  },
+  {
+    "label": "Dimension",
+    "section": "Dimension",
+    "subgoals": [
+      "State the relation behind the brouwer fixed point theorem",
+      "Identify the data in dimension",
+      "Carry out the dimension step"
+    ]
+  },
+  {
+    "label": "The open disk",
+    "section": "The open disk",
+    "subgoals": [
+      "State the relation behind the brouwer fixed point theorem",
+      "Identify the data in the open disk",
+      "Carry out the the open disk step"
+    ]
+  }
+]

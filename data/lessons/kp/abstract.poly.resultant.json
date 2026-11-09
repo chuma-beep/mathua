@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The resultant of two linear polynomials",
+    "section": "The resultant of two linear polynomials",
+    "subgoals": [
+      "State the relation behind resultants",
+      "Identify the data in the resultant of two linear polynomials",
+      "Carry out the the resultant of two linear polynomials step"
+    ]
+  },
+  {
+    "label": "Common roots",
+    "section": "Common roots",
+    "subgoals": [
+      "State the relation behind resultants",
+      "Identify the data in common roots",
+      "Carry out the common roots step"
+    ]
+  },
+  {
+    "label": "The product formula",
+    "section": "The product formula",
+    "subgoals": [
+      "State the relation behind resultants",
+      "Identify the data in the product formula",
+      "Carry out the the product formula step"
+    ]
+  }
+]

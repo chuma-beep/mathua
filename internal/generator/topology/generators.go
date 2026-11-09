@@ -45,6 +45,8 @@ func Register(reg *generator.Registry) {
 	for id, kind := range topoBridgeKinds {
 		reg.Register(id, &topoBridgeGen{kind: kind})
 	}
+	registerWave7(reg)
+	registerWave7Remaining(reg)
 }
 
 // ----- 1. metric -----

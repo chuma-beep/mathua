@@ -46,6 +46,8 @@ func Register(reg *generator.Registry) {
 	reg.Register("abstract.group.cauchy", &cauchyGroupGen{})
 	registerBatch(reg)
 	registerConversions(reg)
+	registerWave7(reg)
+	registerWave7Remaining(reg)
 }
 
 // ----- 1. group.def -----

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The design entry",
+    "section": "The design entry",
+    "subgoals": [
+      "State the relation behind polynomial regression",
+      "Identify the data in the design entry",
+      "Carry out the the design entry step"
+    ]
+  },
+  {
+    "label": "The degree",
+    "section": "The degree",
+    "subgoals": [
+      "State the relation behind polynomial regression",
+      "Identify the data in the degree",
+      "Carry out the the degree step"
+    ]
+  },
+  {
+    "label": "The prediction",
+    "section": "The prediction",
+    "subgoals": [
+      "State the relation behind polynomial regression",
+      "Identify the data in the prediction",
+      "Carry out the the prediction step"
+    ]
+  }
+]

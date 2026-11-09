@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Reduced words and rank",
+    "section": "Reduced words and rank",
+    "subgoals": [
+      "State the relation behind free products",
+      "Identify the data in reduced words and rank",
+      "Carry out the reduced words and rank step"
+    ]
+  },
+  {
+    "label": "Abelianisation rank",
+    "section": "Abelianisation rank",
+    "subgoals": [
+      "State the relation behind free products",
+      "Identify the data in abelianisation rank",
+      "Carry out the abelianisation rank step"
+    ]
+  },
+  {
+    "label": "Normal forms",
+    "section": "Normal forms",
+    "subgoals": [
+      "State the relation behind free products",
+      "Identify the data in normal forms",
+      "Carry out the normal forms step"
+    ]
+  }
+]

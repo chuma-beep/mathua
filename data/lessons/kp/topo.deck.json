@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The deck transformation group",
+    "section": "The deck transformation group",
+    "subgoals": [
+      "State the relation for deck transformations",
+      "Identify the quantities in the deck transformations step",
+      "Carry out the deck transformations computation"
+    ]
+  },
+  {
+    "label": "The deck group",
+    "section": "The deck group",
+    "subgoals": [
+      "State the relation for deck transformations",
+      "Identify the quantities in the the deck group step",
+      "Carry out the the deck group computation"
+    ]
+  },
+  {
+    "label": "Regular coverings",
+    "section": "Regular coverings",
+    "subgoals": [
+      "State the relation for deck transformations",
+      "Identify the quantities in the regular coverings step",
+      "Carry out the regular coverings computation"
+    ]
+  }
+]

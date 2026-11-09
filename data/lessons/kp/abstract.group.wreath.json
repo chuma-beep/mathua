@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Order of a wreath product",
+    "section": "Order of a wreath product",
+    "subgoals": [
+      "State the relation behind wreath products",
+      "Identify the data in order of a wreath product",
+      "Carry out the order of a wreath product step"
+    ]
+  },
+  {
+    "label": "Size of the base group",
+    "section": "Size of the base group",
+    "subgoals": [
+      "State the relation behind wreath products",
+      "Identify the data in size of the base group",
+      "Carry out the size of the base group step"
+    ]
+  },
+  {
+    "label": "Permutation action on coordinates",
+    "section": "Permutation action on coordinates",
+    "subgoals": [
+      "State the relation behind wreath products",
+      "Identify the data in permutation action on coordinates",
+      "Carry out the permutation action on coordinates step"
+    ]
+  }
+]

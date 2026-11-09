@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Counting simplices",
+    "section": "Counting simplices",
+    "subgoals": [
+      "State the relation behind simplicial homology",
+      "Identify the data in counting simplices",
+      "Carry out the counting simplices step"
+    ]
+  },
+  {
+    "label": "Euler characteristic",
+    "section": "Euler characteristic",
+    "subgoals": [
+      "State the relation behind simplicial homology",
+      "Identify the data in euler characteristic",
+      "Carry out the euler characteristic step"
+    ]
+  },
+  {
+    "label": "Vertices",
+    "section": "Vertices",
+    "subgoals": [
+      "State the relation behind simplicial homology",
+      "Identify the data in vertices",
+      "Carry out the vertices step"
+    ]
+  }
+]

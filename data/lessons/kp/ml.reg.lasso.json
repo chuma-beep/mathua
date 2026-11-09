@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The L1 penalty",
+    "section": "The L1 penalty",
+    "subgoals": [
+      "State the relation for lasso regression",
+      "Identify the quantities in the the l1 penalty step",
+      "Carry out the the l1 penalty computation"
+    ]
+  },
+  {
+    "label": "Soft thresholding",
+    "section": "Soft thresholding",
+    "subgoals": [
+      "State the relation for lasso regression",
+      "Identify the quantities in the soft thresholding step",
+      "Carry out the soft thresholding computation"
+    ]
+  },
+  {
+    "label": "The objective",
+    "section": "The objective",
+    "subgoals": [
+      "State the relation for lasso regression",
+      "Identify the quantities in the the objective step",
+      "Carry out the the objective computation"
+    ]
+  }
+]

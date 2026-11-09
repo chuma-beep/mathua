@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Finite sets",
+    "section": "Finite sets",
+    "subgoals": [
+      "State the relation behind limit point compactness",
+      "Identify the data in finite sets",
+      "Carry out the finite sets step"
+    ]
+  },
+  {
+    "label": "Interval compactness",
+    "section": "Interval compactness",
+    "subgoals": [
+      "State the relation behind limit point compactness",
+      "Identify the data in interval compactness",
+      "Carry out the interval compactness step"
+    ]
+  },
+  {
+    "label": "Equivalence in metric spaces",
+    "section": "Equivalence in metric spaces",
+    "subgoals": [
+      "State the relation behind limit point compactness",
+      "Identify the data in equivalence in metric spaces",
+      "Carry out the equivalence in metric spaces step"
+    ]
+  }
+]

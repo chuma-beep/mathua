@@ -799,5 +799,148 @@
       "streak": 10,
       "avg_time_seconds": 24
     }
+  },
+  {
+    "id": "ml.reg.lasso",
+    "label": "Lasso regression",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.regression",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.linreg.least_squares",
+      "ml.reg.ridge_penalty"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "ml.tree.gradient_boosting",
+    "label": "Gradient boosting",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.trees",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.tree.ensemble"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "ml.reg.elastic_net",
+    "label": "Elastic net",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.regression",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.reg.lasso",
+      "ml.reg.ridge_penalty"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ml.reg.polynomial",
+    "label": "Polynomial regression",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.regression",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.linreg.least_squares"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ml.svm.soft_margin",
+    "label": "Soft-margin support vector machines",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.classification",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.svm.margin"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ml.cluster.dbscan",
+    "label": "DBSCAN",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.unsupervised",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.cluster.kmeans"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ml.cluster.hierarchical",
+    "label": "Hierarchical clustering",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.unsupervised",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.cluster.kmeans"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ml.unsupervised.autoencoder",
+    "label": "Autoencoders",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.neural_networks",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.backpropagation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ml.optim.sgd",
+    "label": "Stochastic gradient descent",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.neural_networks",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.gradient_descent"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "ml.data.leakage",
+    "label": "Data leakage",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.data",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.validation",
+      "ml.data.scaling"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
   }
 ]

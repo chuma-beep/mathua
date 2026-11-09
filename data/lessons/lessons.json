@@ -7198,5 +7198,205 @@
   {
     "concept_id": "graph.split",
     "source": "authored/graph.split.md"
+  },
+  {
+    "concept_id": "abstract.group.semidirect",
+    "source": "authored/abstract.group.semidirect.md"
+  },
+  {
+    "concept_id": "abstract.rep.representation",
+    "source": "authored/abstract.rep.representation.md"
+  },
+  {
+    "concept_id": "abstract.poly.symmetric",
+    "source": "authored/abstract.poly.symmetric.md"
+  },
+  {
+    "concept_id": "abstract.structures.ext",
+    "source": "authored/abstract.structures.ext.md"
+  },
+  {
+    "concept_id": "topo.nets",
+    "source": "authored/topo.nets.md"
+  },
+  {
+    "concept_id": "topo.sequential_compact",
+    "source": "authored/topo.sequential_compact.md"
+  },
+  {
+    "concept_id": "topo.deck",
+    "source": "authored/topo.deck.md"
+  },
+  {
+    "concept_id": "topo.cup_product",
+    "source": "authored/topo.cup_product.md"
+  },
+  {
+    "concept_id": "ml.reg.lasso",
+    "source": "authored/ml.reg.lasso.md"
+  },
+  {
+    "concept_id": "ml.tree.gradient_boosting",
+    "source": "authored/ml.tree.gradient_boosting.md"
+  }
+,  {
+    "concept_id": "abstract.group.wreath",
+    "source": "authored/abstract.group.wreath.md"
+  }
+,  {
+    "concept_id": "abstract.group.free_product",
+    "source": "authored/abstract.group.free_product.md"
+  }
+,  {
+    "concept_id": "abstract.group.extension",
+    "source": "authored/abstract.group.extension.md"
+  }
+,  {
+    "concept_id": "abstract.rep.character",
+    "source": "authored/abstract.rep.character.md"
+  }
+,  {
+    "concept_id": "abstract.rep.maschke",
+    "source": "authored/abstract.rep.maschke.md"
+  }
+,  {
+    "concept_id": "abstract.rep.schur",
+    "source": "authored/abstract.rep.schur.md"
+  }
+,  {
+    "concept_id": "abstract.rep.induced",
+    "source": "authored/abstract.rep.induced.md"
+  }
+,  {
+    "concept_id": "abstract.poly.resultant",
+    "source": "authored/abstract.poly.resultant.md"
+  }
+,  {
+    "concept_id": "abstract.poly.discriminant",
+    "source": "authored/abstract.poly.discriminant.md"
+  }
+,  {
+    "concept_id": "abstract.poly.eisenstein",
+    "source": "authored/abstract.poly.eisenstein.md"
+  }
+,  {
+    "concept_id": "abstract.rings.fractional_ideal",
+    "source": "authored/abstract.rings.fractional_ideal.md"
+  }
+,  {
+    "concept_id": "abstract.rings.dedekind",
+    "source": "authored/abstract.rings.dedekind.md"
+  }
+,  {
+    "concept_id": "abstract.rings.valuation",
+    "source": "authored/abstract.rings.valuation.md"
+  }
+,  {
+    "concept_id": "abstract.rings.primary",
+    "source": "authored/abstract.rings.primary.md"
+  }
+,  {
+    "concept_id": "abstract.structures.nakayama",
+    "source": "authored/abstract.structures.nakayama.md"
+  }
+,  {
+    "concept_id": "abstract.structures.exterior",
+    "source": "authored/abstract.structures.exterior.md"
+  }
+,  {
+    "concept_id": "topo.filters",
+    "source": "authored/topo.filters.md"
+  }
+,  {
+    "concept_id": "topo.paracompact",
+    "source": "authored/topo.paracompact.md"
+  }
+,  {
+    "concept_id": "topo.partition_unity",
+    "source": "authored/topo.partition_unity.md"
+  }
+,  {
+    "concept_id": "topo.function_space",
+    "source": "authored/topo.function_space.md"
+  }
+,  {
+    "concept_id": "topo.uniform_space",
+    "source": "authored/topo.uniform_space.md"
+  }
+,  {
+    "concept_id": "topo.limit_point_compact",
+    "source": "authored/topo.limit_point_compact.md"
+  }
+,  {
+    "concept_id": "topo.continuum",
+    "source": "authored/topo.continuum.md"
+  }
+,  {
+    "concept_id": "topo.homotopy_group",
+    "source": "authored/topo.homotopy_group.md"
+  }
+,  {
+    "concept_id": "topo.fibration",
+    "source": "authored/topo.fibration.md"
+  }
+,  {
+    "concept_id": "topo.cofibration",
+    "source": "authored/topo.cofibration.md"
+  }
+,  {
+    "concept_id": "topo.simplicial_homology",
+    "source": "authored/topo.simplicial_homology.md"
+  }
+,  {
+    "concept_id": "topo.singular_homology",
+    "source": "authored/topo.singular_homology.md"
+  }
+,  {
+    "concept_id": "topo.poincare_duality",
+    "source": "authored/topo.poincare_duality.md"
+  }
+,  {
+    "concept_id": "topo.jones_polynomial",
+    "source": "authored/topo.jones_polynomial.md"
+  }
+,  {
+    "concept_id": "topo.seifert_surface",
+    "source": "authored/topo.seifert_surface.md"
+  }
+,  {
+    "concept_id": "topo.brouwer",
+    "source": "authored/topo.brouwer.md"
+  }
+,  {
+    "concept_id": "ml.reg.elastic_net",
+    "source": "authored/ml.reg.elastic_net.md"
+  }
+,  {
+    "concept_id": "ml.reg.polynomial",
+    "source": "authored/ml.reg.polynomial.md"
+  }
+,  {
+    "concept_id": "ml.svm.soft_margin",
+    "source": "authored/ml.svm.soft_margin.md"
+  }
+,  {
+    "concept_id": "ml.cluster.dbscan",
+    "source": "authored/ml.cluster.dbscan.md"
+  }
+,  {
+    "concept_id": "ml.cluster.hierarchical",
+    "source": "authored/ml.cluster.hierarchical.md"
+  }
+,  {
+    "concept_id": "ml.unsupervised.autoencoder",
+    "source": "authored/ml.unsupervised.autoencoder.md"
+  }
+,  {
+    "concept_id": "ml.optim.sgd",
+    "source": "authored/ml.optim.sgd.md"
+  }
+,  {
+    "concept_id": "ml.data.leakage",
+    "source": "authored/ml.data.leakage.md"
   }
 ]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Degree",
+    "section": "Degree",
+    "subgoals": [
+      "State the relation for the cup product",
+      "Identify the quantities in the degree step",
+      "Carry out the degree computation"
+    ]
+  },
+  {
+    "label": "Graded commutativity",
+    "section": "Graded commutativity",
+    "subgoals": [
+      "State the relation for the cup product",
+      "Identify the quantities in the graded commutativity step",
+      "Carry out the graded commutativity computation"
+    ]
+  },
+  {
+    "label": "Cohomology rings",
+    "section": "Cohomology rings",
+    "subgoals": [
+      "State the relation for the cup product",
+      "Identify the quantities in the cohomology rings step",
+      "Carry out the cohomology rings computation"
+    ]
+  }
+]

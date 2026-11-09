@@ -468,7 +468,7 @@ func w4MittagLeffler(kp int) generator.Problem {
 		return w4C(kp, fmt.Sprintf("What is the residue of csc z at z=%d pi? (enter a number)", k), strconv.Itoa(res),
 			fmt.Sprintf("The residue of csc z at an integer multiple k pi is (-1)^k. Here k=%d, so the residue is %d.", k, res), f)
 	default:
-		return w4C(kp, fmt.Sprintf("How many poles does csc z have in [-%d pi, %d pi]? (enter a number)", 2*k, 2*k), strconv.Itoa(4*k+1),
+		return w4C(kp, fmt.Sprintf("For the doubled interval [-%d pi, %d pi], how many poles does csc z have? (enter a number)", 2*k, 2*k), strconv.Itoa(4*k+1),
 			fmt.Sprintf("The integer multiples of pi in the interval give %d poles.", 4*k+1), f)
 	}
 }

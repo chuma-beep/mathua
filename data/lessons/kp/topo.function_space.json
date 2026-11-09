@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Counting functions",
+    "section": "Counting functions",
+    "subgoals": [
+      "State the relation behind the compact-open topology",
+      "Identify the data in counting functions",
+      "Carry out the counting functions step"
+    ]
+  },
+  {
+    "label": "Evaluation",
+    "section": "Evaluation",
+    "subgoals": [
+      "State the relation behind the compact-open topology",
+      "Identify the data in evaluation",
+      "Carry out the evaluation step"
+    ]
+  },
+  {
+    "label": "Pointwise convergence",
+    "section": "Pointwise convergence",
+    "subgoals": [
+      "State the relation behind the compact-open topology",
+      "Identify the data in pointwise convergence",
+      "Carry out the pointwise convergence step"
+    ]
+  }
+]
