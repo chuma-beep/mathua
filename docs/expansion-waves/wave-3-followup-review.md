@@ -1,7 +1,7 @@
 # Wave 3 follow-up review
 
-Date: 2026-11-09. Scope: the pre-Wave-4 review requested after the Wave 3 closeout. No concept was
-added. The corpus remains at 1,650.
+Date: 2026-11-09. Status: complete. Scope: the pre-Wave-4 review requested after the Wave 3
+closeout. No concept was added. The corpus remains at 1,650.
 
 The review covered four questions: the readability impact of the 19 presentation defects, the
 residual variety of the six repaired generator families, the isolation of
@@ -80,6 +80,20 @@ prime number theorem. The direct theorem edge does not change the depth: the eff
 prime number theorem at depth 14, sieve at depth 15 and prime counting at depth 16. It is a
 redundant edge, not a reversed progression in the DAG. If elementary prime counting is to move
 earlier, Wave 4 needs a separate elementary counting concept rather than a rewiring of this one.
+
+## Decision and status
+
+The direct prerequisite edge from `nt.adv.prime_counting` to
+`nt.analytic.prime_number_theorem` is retained. It is transitively redundant through
+`nt.adv.sieve`, but it is intentional, explicit and does not affect the depth or band assignment
+of `nt.adv.prime_counting` or any other concept.
+
+The existing concept is not rewired to introduce elementary prime counting. That work is deferred
+as a separate potential concept for Wave 4, where it can be proposed with its own id, lesson,
+generator and prerequisite edge. It is not part of this follow-up.
+
+The follow-up review is closed. The live partition is 140 units and 23 singleton units, with the
+Householder singleton resolved by the QR prerequisite edge.
 
 ## Verification
 
