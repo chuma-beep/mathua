@@ -1,6 +1,7 @@
 # Wave 4 proposal
 
-Status: proposal only. Not approved. No concept has been generated.
+Status: domains and allocation approved on 2026-11-09. Candidate ledger pending review. No concept
+has been generated.
 
 Date: 2026-11-09. Current corpus: 1,650 concepts. Frozen additive baseline: 1,500 concepts. Wave 4
 target: 1,700 concepts.
