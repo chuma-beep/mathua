@@ -1,0 +1,15 @@
+{
+  "concept": "alg.log.domain",
+  "setup": "The logarithm has base [[base]], and its argument must be positive beyond the level [[threshold]].",
+  "steps": [
+    {
+      "fact": "threshold",
+      "say": "Solving the argument inequality gives the boundary [[threshold]]."
+    },
+    {
+      "fact": "endpoint",
+      "say": "The requested integer endpoint of the domain is [[endpoint]]."
+    }
+  ],
+  "answer": "The domain condition places the requested integer endpoint at [[endpoint]]."
+}

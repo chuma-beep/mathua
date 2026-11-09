@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Swapping the coordinates",
+    "section": "Swapping the coordinates",
+    "subgoals": [
+      "Turn a point on f into a point on its inverse",
+      "Read f-inverse of an output as the original input",
+      "Recognise points that lie on the diagonal"
+    ]
+  },
+  {
+    "label": "Reading the inverse backwards",
+    "section": "Reading the inverse backwards",
+    "subgoals": [
+      "Reverse the coordinate pair when starting from the inverse",
+      "Exchange the domain and range",
+      "Recover an original function value from an inverse value"
+    ]
+  },
+  {
+    "label": "The inverse of a line",
+    "section": "The inverse of a line",
+    "subgoals": [
+      "Write a slope-one line as x plus a shift",
+      "Invert the shift by subtracting it",
+      "Locate the y-intercept of the reflected line"
+    ]
+  }
+]

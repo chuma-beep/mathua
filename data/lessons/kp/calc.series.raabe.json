@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Raabe limit",
+    "section": "The Raabe limit",
+    "subgoals": [
+      "Write the Raabe expression",
+      "Take the limit of the ratio",
+      "Apply the convergence threshold"
+    ]
+  },
+  {
+    "label": "Power-law terms",
+    "section": "Power-law terms",
+    "subgoals": [
+      "Expand the ratio of powers",
+      "Read the coefficient of 1/n",
+      "Report the limit for 1/n^p"
+    ]
+  },
+  {
+    "label": "Shifted power terms",
+    "section": "Shifted power terms",
+    "subgoals": [
+      "Account for a numerator shift",
+      "Account for a denominator shift",
+      "Combine the two contributions"
+    ]
+  }
+]

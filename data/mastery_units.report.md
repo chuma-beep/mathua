@@ -12,19 +12,19 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 1550 |
-| Total units | 138 |
+| Total concepts | 1600 |
+| Total units | 139 |
 | Minimum unit size | 1 |
 | Median unit size | 8 |
-| Maximum unit size | 51 |
-| Singleton units | 24 |
+| Maximum unit size | 58 |
+| Singleton units | 25 |
 | Units with <= 3 concepts | 37 |
-| Units with > 25 concepts | 12 |
+| Units with > 25 concepts | 13 |
 | Units with > 50 concepts | 1 |
-| Cross-unit prerequisite edges (derived) | 469 |
+| Cross-unit prerequisite edges (derived) | 470 |
 | Backward band edges | 0 |
 
-If the learner is assessed once per unit, then 138 assessments cover the corpus, and the
+If the learner is assessed once per unit, then 139 assessments cover the corpus, and the
 median is one assessment per 8 concepts. That is the frequency question this report
 exists to make concrete.
 
@@ -41,9 +41,9 @@ exists to make concrete.
 | `algebra.b4` | algebra | 4 | 2 | 1 | 12–12 |
 | `algebra.b5` | algebra | 5 | 5 | 1 | 16–17 |
 | `algebra.b6` | algebra | 6 | 40 | 8 | 18–20 |
-| `algebra.b7` | algebra | 7 | 51 | 11 | 21–23 |
-| `algebra.b8` | algebra | 8 | 42 | 11 | 24–26 |
-| `algebra.b9` | algebra | 9 | 9 | 4 | 27–28 |
+| `algebra.b7` | algebra | 7 | 58 | 11 | 21–23 |
+| `algebra.b8` | algebra | 8 | 49 | 11 | 24–26 |
+| `algebra.b9` | algebra | 9 | 13 | 6 | 27–29 |
 | `arithmetic.b0` | arithmetic | 0 | 8 | 4 | 0–2 |
 | `arithmetic.b1` | arithmetic | 1 | 18 | 7 | 3–5 |
 | `arithmetic.b2` | arithmetic | 2 | 23 | 9 | 6–8 |
@@ -54,9 +54,10 @@ exists to make concrete.
 | `calc1.b11` | calc1 | 11 | 25 | 4 | 33–35 |
 | `calc1.b12` | calc1 | 12 | 21 | 3 | 36–37 |
 | `calc2.b9` | calc2 | 9 | 3 | 2 | 29–29 |
-| `calc2.b10` | calc2 | 10 | 26 | 1 | 30–32 |
-| `calc2.b11` | calc2 | 11 | 5 | 2 | 33–35 |
-| `calc2.b12` | calc2 | 12 | 37 | 3 | 36–38 |
+| `calc2.b10` | calc2 | 10 | 35 | 1 | 30–32 |
+| `calc2.b11` | calc2 | 11 | 8 | 2 | 33–35 |
+| `calc2.b12` | calc2 | 12 | 42 | 3 | 36–38 |
+| `calc2.b13` | calc2 | 13 | 1 | 1 | 39–39 |
 | `calc3.b9` | calc3 | 9 | 5 | 1 | 28–29 |
 | `calc3.b10` | calc3 | 10 | 9 | 3 | 31–32 |
 | `calc3.b11` | calc3 | 11 | 18 | 3 | 33–35 |
@@ -155,11 +156,11 @@ exists to make concrete.
 | `statistics.b0` | statistics | 0 | 4 | 2 | 1–2 |
 | `statistics.b1` | statistics | 1 | 1 | 1 | 3–3 |
 | `statistics.b2` | statistics | 2 | 1 | 1 | 8–8 |
-| `statistics.b3` | statistics | 3 | 24 | 6 | 9–11 |
-| `statistics.b4` | statistics | 4 | 24 | 8 | 12–14 |
-| `statistics.b5` | statistics | 5 | 11 | 1 | 15–17 |
-| `statistics.b6` | statistics | 6 | 4 | 2 | 18–20 |
-| `statistics.b7` | statistics | 7 | 2 | 2 | 21–21 |
+| `statistics.b3` | statistics | 3 | 25 | 6 | 9–11 |
+| `statistics.b4` | statistics | 4 | 30 | 8 | 12–14 |
+| `statistics.b5` | statistics | 5 | 14 | 1 | 15–17 |
+| `statistics.b6` | statistics | 6 | 6 | 2 | 18–20 |
+| `statistics.b7` | statistics | 7 | 4 | 2 | 21–21 |
 | `statistics.b8` | statistics | 8 | 2 | 2 | 24–25 |
 | `topology.b10` | topology | 10 | 11 | 3 | 30–32 |
 | `topology.b11` | topology | 11 | 22 | 9 | 33–35 |
@@ -184,19 +185,19 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 182 | 6 | 47 | 28 | 51 | 5 | 0 |
-| 3 | 138 | 8 | 51 | 24 | 37 | 12 | 0 |
-| 4 | 107 | 12 | 76 | 10 | 22 | 19 | 0 |
-| 5 | 94 | 14 | 96 | 10 | 18 | 23 | 0 |
-| 6 | 87 | 13 | 91 | 7 | 15 | 22 | 0 |
-| 8 | 68 | 19 | 96 | 5 | 10 | 25 | 0 |
-| 10 | 59 | 21 | 127 | 5 | 11 | 27 | 0 |
-| 12 | 58 | 21 | 98 | 1 | 5 | 26 | 0 |
-| 15 | 47 | 27 | 147 | 1 | 5 | 26 | 0 |
-| 20 | 39 | 42 | 127 | 3 | 5 | 26 | 0 |
-| 45 | 23 | 64 | 153 | 0 | 0 | 23 | 0 |
+| 2 | 182 | 6 | 50 | 27 | 49 | 7 | 0 |
+| 3 | 139 | 8 | 58 | 25 | 37 | 13 | 0 |
+| 4 | 107 | 12 | 83 | 10 | 21 | 21 | 0 |
+| 5 | 94 | 14 | 104 | 10 | 18 | 23 | 0 |
+| 6 | 87 | 13 | 98 | 7 | 15 | 23 | 0 |
+| 8 | 68 | 20 | 103 | 5 | 10 | 26 | 0 |
+| 10 | 59 | 21 | 145 | 5 | 11 | 27 | 0 |
+| 12 | 58 | 21 | 105 | 1 | 5 | 26 | 0 |
+| 15 | 47 | 27 | 165 | 1 | 5 | 27 | 0 |
+| 20 | 39 | 42 | 145 | 3 | 5 | 26 | 0 |
+| 45 | 23 | 64 | 171 | 0 | 0 | 23 | 0 |
 
-**No width is clean.** Small widths fragment, at 3 there are 24 singleton units, which is a
+**No width is clean.** Small widths fragment, at 3 there are 25 singleton units, which is a
 quiz per concept and is exactly what §12 rules out. Large widths stop fragmenting but produce
 units too large to assess: at 45 the partition is just the 17 domains themselves, whose
 largest is 128 concepts. The usable widths trade fragmentation against size rather than
@@ -442,12 +443,12 @@ Unresolvable subdomains:
 
 `trigonometry.identities`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1550
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1600
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings
 
-- **anomaly** `singleton_units`: 24 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
+- **anomaly** `singleton_units`: 25 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
 
 ## Not decided here
 

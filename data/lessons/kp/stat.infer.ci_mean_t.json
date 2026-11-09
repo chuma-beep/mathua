@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Why t replaces z",
+    "section": "Why t replaces z",
+    "subgoals": [
+      "Estimate the standard error with s",
+      "Count n minus one degrees of freedom",
+      "Explain the heavier tails"
+    ]
+  },
+  {
+    "label": "The margin of error",
+    "section": "The margin of error",
+    "subgoals": [
+      "Multiply the t critical value by the standard error",
+      "Match the critical value to the degrees of freedom",
+      "Distinguish a half-width from a full width"
+    ]
+  },
+  {
+    "label": "Endpoints of the interval",
+    "section": "Endpoints of the interval",
+    "subgoals": [
+      "Subtract the margin from the mean",
+      "Add the margin to the mean",
+      "State the repeated-sampling interpretation"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Gauss expansion",
+    "section": "The Gauss expansion",
+    "subgoals": [
+      "Write the ratio expansion",
+      "Identify the coefficient of 1/n",
+      "Apply the Gauss threshold"
+    ]
+  },
+  {
+    "label": "Gamma ratios",
+    "section": "Gamma ratios",
+    "subgoals": [
+      "Form the gamma ratio",
+      "Simplify the shift factors",
+      "Read the difference of the shifts"
+    ]
+  },
+  {
+    "label": "Rational terms",
+    "section": "Rational terms",
+    "subgoals": [
+      "Compare the degrees",
+      "Expand the logarithmic ratio",
+      "Read the degree difference"
+    ]
+  }
+]

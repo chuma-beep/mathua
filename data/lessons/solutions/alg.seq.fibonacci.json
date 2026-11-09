@@ -1,0 +1,19 @@
+{
+  "concept": "alg.seq.fibonacci",
+  "setup": "The Fibonacci sequence starts \\(F_1 = F_2 = 1\\) and follows \\(F_k = F_{k-1} + F_{k-2}\\).",
+  "steps": [
+    {
+      "fact": "f_n",
+      "say": "At index [[n]] the recurrence gives \\(F_{[[n]]} = [[f_n]]\\)."
+    },
+    {
+      "fact": "f_next",
+      "say": "The next term is \\(F_{[[n]]+1} = [[f_next]]\\)."
+    },
+    {
+      "fact": "sum",
+      "say": "The first [[n]] terms add to [[sum]]."
+    }
+  ],
+  "answer": "At index [[n]] the term is [[f_n]], the next term is [[f_next]] and the prefix sum is [[sum]]."
+}

@@ -1,0 +1,19 @@
+{
+  "concept": "alg.poly.reciprocal",
+  "setup": "The polynomial is \\(P(x) = [[poly]]\\), with constant term [[a0]] and leading coefficient [[a4]].",
+  "steps": [
+    {
+      "fact": "a4",
+      "say": "The reciprocal polynomial reverses the coefficients, so the constant term of \\(Q\\) is the leading coefficient [[a4]]."
+    },
+    {
+      "fact": "sum_reciprocals",
+      "say": "By Vieta, the sum of the reciprocals of the roots is \\(-a_1/a_0 = [[sum_reciprocals]]\\)."
+    },
+    {
+      "fact": "product_reciprocals",
+      "say": "Because the degree is even, the product of the reciprocals is \\(a_4/a_0 = [[product_reciprocals]]\\)."
+    }
+  ],
+  "answer": "The requested quantity is [[answer]]."
+}

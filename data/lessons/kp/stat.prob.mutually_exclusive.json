@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Disjoint events",
+    "section": "Disjoint events",
+    "subgoals": [
+      "Define an empty intersection",
+      "Set the joint probability to zero",
+      "Distinguish disjointness from dependence"
+    ]
+  },
+  {
+    "label": "The addition rule",
+    "section": "The addition rule",
+    "subgoals": [
+      "Write the general addition rule",
+      "Drop the intersection term for disjoint events",
+      "Compare the union with the marginal sum"
+    ]
+  },
+  {
+    "label": "When disjointness is possible",
+    "section": "When disjointness is possible",
+    "subgoals": [
+      "Add the two marginals",
+      "Compare the sum with one",
+      "Decide whether the events can be separated"
+    ]
+  }
+]

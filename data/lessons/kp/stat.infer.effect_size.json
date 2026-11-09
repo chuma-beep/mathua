@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Standardized mean difference",
+    "section": "Standardized mean difference",
+    "subgoals": [
+      "Write Cohen's d",
+      "Divide the mean difference by the standard deviation",
+      "Read the sign and the magnitude"
+    ]
+  },
+  {
+    "label": "Recovering the mean difference",
+    "section": "Recovering the mean difference",
+    "subgoals": [
+      "Multiply d by the standard deviation",
+      "Convert back to the original units",
+      "Compare standardized and raw effects"
+    ]
+  },
+  {
+    "label": "Two-sample effect size",
+    "section": "Two-sample effect size",
+    "subgoals": [
+      "Compute the pooled standard deviation",
+      "Subtract the group means",
+      "Divide by the pooled value"
+    ]
+  }
+]

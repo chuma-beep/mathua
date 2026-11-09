@@ -2191,5 +2191,260 @@
       "streak": 10,
       "avg_time_seconds": 18.0
     }
+  },
+  {
+    "id": "alg.poly.reciprocal",
+    "label": "Reciprocal polynomials",
+    "domain": "algebra",
+    "subdomain": "algebra.polynomials",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.poly.vieta"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.poly.bounds",
+    "label": "Upper and lower bounds for roots",
+    "domain": "algebra",
+    "subdomain": "algebra.polynomials",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.poly.roots"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.func.operations",
+    "label": "Combining functions",
+    "domain": "algebra",
+    "subdomain": "algebra.func",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.func.notation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.func.inverse_graph",
+    "label": "Graphs of inverse functions",
+    "domain": "algebra",
+    "subdomain": "algebra.func",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.func.inverse"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.func.composition_graph",
+    "label": "Composition from graphs",
+    "domain": "algebra",
+    "subdomain": "algebra.func",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.func.composite",
+      "alg.func.graph_analysis"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.exp.regression",
+    "label": "Exponential regression",
+    "domain": "algebra",
+    "subdomain": "algebra.linear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.regression.linear",
+      "alg.exp.from_points"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.log.domain",
+    "label": "Domain of logarithmic functions",
+    "domain": "algebra",
+    "subdomain": "algebra.logarithms",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.log.concept",
+      "alg.func.domain"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.log.base_equation",
+    "label": "Solving for a logarithm's base",
+    "domain": "algebra",
+    "subdomain": "algebra.logarithms",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.eq.logarithmic"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.seq.arithmetic_mean",
+    "label": "Arithmetic means between terms",
+    "domain": "algebra",
+    "subdomain": "algebra.sequences",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.seq.arithmetic"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.seq.geometric_mean",
+    "label": "Geometric means between terms",
+    "domain": "algebra",
+    "subdomain": "algebra.sequences",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.seq.geometric"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.seq.fibonacci",
+    "label": "Fibonacci and Binet's formula",
+    "domain": "algebra",
+    "subdomain": "algebra.sequences",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.seq.recursive"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.conic.intersection",
+    "label": "Line and conic intersections",
+    "domain": "algebra",
+    "subdomain": "algebra.conics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.conic.parabola"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.conic.translation",
+    "label": "Translated conic equations",
+    "domain": "algebra",
+    "subdomain": "algebra.conics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.conic.circle"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.conic.tangent",
+    "label": "Tangent lines to conics",
+    "domain": "algebra",
+    "subdomain": "algebra.conics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.conic.classify"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.systems.matrix_inverse",
+    "label": "Solving systems with inverse matrices",
+    "domain": "algebra",
+    "subdomain": "algebra.systems",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.systems.matrices"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.regression.quadratic",
+    "label": "Quadratic regression",
+    "domain": "algebra",
+    "subdomain": "algebra.linear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.regression.linear"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.regression.power",
+    "label": "Power regression",
+    "domain": "algebra",
+    "subdomain": "algebra.linear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.regression.linear"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.regression.logarithmic",
+    "label": "Logarithmic regression",
+    "domain": "algebra",
+    "subdomain": "algebra.linear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.regression.linear"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
   }
 ]

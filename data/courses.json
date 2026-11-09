@@ -429,7 +429,25 @@
       "alg.conic.parabola_focus",
       "alg.conic.ellipse_foci",
       "alg.ineq.absolute_graph",
-      "alg.poly.zeros_multiplicity"
+      "alg.poly.zeros_multiplicity",
+      "alg.poly.reciprocal",
+      "alg.poly.bounds",
+      "alg.func.operations",
+      "alg.func.inverse_graph",
+      "alg.func.composition_graph",
+      "alg.exp.regression",
+      "alg.log.domain",
+      "alg.log.base_equation",
+      "alg.seq.arithmetic_mean",
+      "alg.seq.geometric_mean",
+      "alg.seq.fibonacci",
+      "alg.conic.intersection",
+      "alg.conic.translation",
+      "alg.conic.tangent",
+      "alg.systems.matrix_inverse",
+      "alg.regression.quadratic",
+      "alg.regression.power",
+      "alg.regression.logarithmic"
     ]
   },
   {
@@ -639,7 +657,25 @@
       "calc.integral.probability",
       "calc.series.estimate",
       "calc.integral.log",
-      "calc.integral.rationalizing"
+      "calc.integral.rationalizing",
+      "calc.series.cauchy_condensation",
+      "calc.series.raabe",
+      "calc.series.bertrand",
+      "calc.series.kummer",
+      "calc.series.gauss",
+      "calc.series.abel",
+      "calc.series.uniform_convergence",
+      "calc.series.euler_transform",
+      "calc.series.power_integration",
+      "calc.series.power_differentiation",
+      "calc.series.lagrange_inversion",
+      "calc.integral.romberg",
+      "calc.integral.monte_carlo",
+      "calc.integral.gauss_legendre",
+      "calc.integral.fresnel",
+      "calc.integral.elliptic",
+      "calc.integral.wallis",
+      "calc.integral.centroid_curve"
     ]
   },
   {
@@ -887,7 +923,21 @@
       "stat.dist.empirical_rule",
       "stat.data.skew",
       "stat.infer.regression_slope",
-      "stat.reg.logistic"
+      "stat.reg.logistic",
+      "stat.data.weighted_mean",
+      "stat.adv.coefficient_variation",
+      "stat.prob.independence",
+      "stat.prob.mutually_exclusive",
+      "stat.dist.negative_binomial",
+      "stat.dist.multinomial",
+      "stat.dist.lognormal",
+      "stat.infer.ci_mean_t",
+      "stat.infer.ci_proportion",
+      "stat.infer.power",
+      "stat.infer.effect_size",
+      "stat.reg.multiple",
+      "stat.reg.prediction_interval",
+      "stat.test.kruskal_wallis"
     ]
   },
   {

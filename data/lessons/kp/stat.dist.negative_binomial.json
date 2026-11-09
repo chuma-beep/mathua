@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Trials until r successes",
+    "section": "Trials until r successes",
+    "subgoals": [
+      "State the negative-binomial probability",
+      "Count arrangements of the earlier successes",
+      "Restrict the support to k at least r"
+    ]
+  },
+  {
+    "label": "The probability of a given trial count",
+    "section": "The probability of a given trial count",
+    "subgoals": [
+      "Identify the final trial as a success",
+      "Evaluate the binomial coefficient",
+      "Keep the probability as an exact fraction"
+    ]
+  },
+  {
+    "label": "Mean and failures",
+    "section": "Mean and failures",
+    "subgoals": [
+      "Compute E[X] = r/p",
+      "Subtract the required successes",
+      "Interpret the expected failure count"
+    ]
+  }
+]

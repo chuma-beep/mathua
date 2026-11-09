@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Kummer's comparison",
+    "section": "Kummer's comparison",
+    "subgoals": [
+      "Choose a comparison sequence",
+      "Form the Kummer expression",
+      "Read the sign of the limit"
+    ]
+  },
+  {
+    "label": "Linear comparison sequences",
+    "section": "Linear comparison sequences",
+    "subgoals": [
+      "Expand the ratio of powers",
+      "Cancel the linear growth",
+      "Compute the limit for a linear comparison"
+    ]
+  },
+  {
+    "label": "Rational-term comparison",
+    "section": "Rational-term comparison",
+    "subgoals": [
+      "Identify the effective exponent",
+      "Expand the shifted denominator",
+      "Compute the limit for a rational term"
+    ]
+  }
+]

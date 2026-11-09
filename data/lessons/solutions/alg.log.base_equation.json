@@ -1,0 +1,15 @@
+{
+  "concept": "alg.log.base_equation",
+  "setup": "The equation is \\(\\log_b([[argument]]) = [[exponent]]\\).",
+  "steps": [
+    {
+      "fact": "argument",
+      "say": "Rewrite the logarithm as a power, so \\(b^{[[exponent]]} = [[argument]]\\)."
+    },
+    {
+      "fact": "base",
+      "say": "Solving that power equation gives \\(b = [[base]]\\)."
+    }
+  ],
+  "answer": "The base is [[base]]."
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The inversion formula",
+    "section": "The inversion formula",
+    "subgoals": [
+      "Identify the function phi",
+      "Expand phi to the n-th power",
+      "Divide by n"
+    ]
+  },
+  {
+    "label": "The exponential case",
+    "section": "The exponential case",
+    "subgoals": [
+      "Set phi to the exponential",
+      "Read the exponential coefficient",
+      "Write the tree function coefficient"
+    ]
+  },
+  {
+    "label": "Catalan coefficients",
+    "section": "Catalan coefficients",
+    "subgoals": [
+      "Identify the Catalan generating function",
+      "Apply the binomial formula",
+      "Evaluate small Catalan numbers"
+    ]
+  }
+]

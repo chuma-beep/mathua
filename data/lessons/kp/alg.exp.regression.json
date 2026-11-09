@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The growth factor",
+    "section": "The growth factor",
+    "subgoals": [
+      "Divide consecutive output values",
+      "Recognise a constant ratio as exponential growth",
+      "Take logarithms to turn the fit into a line"
+    ]
+  },
+  {
+    "label": "The initial value",
+    "section": "The initial value",
+    "subgoals": [
+      "Read the value at x equals zero",
+      "Divide by the growth factor when the table starts later",
+      "Distinguish the initial value from the first table entry"
+    ]
+  },
+  {
+    "label": "Predicting with the fitted model",
+    "section": "Predicting with the fitted model",
+    "subgoals": [
+      "Substitute the new input into the power",
+      "Multiply by the initial value",
+      "Separate extrapolation from interpolation"
+    ]
+  }
+]

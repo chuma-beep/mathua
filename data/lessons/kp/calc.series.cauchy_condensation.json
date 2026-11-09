@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Condensing the series",
+    "section": "Condensing the series",
+    "subgoals": [
+      "State the condensation criterion",
+      "Substitute 2^n into the term",
+      "Compare the blocked sums"
+    ]
+  },
+  {
+    "label": "The condensed geometric series",
+    "section": "The condensed geometric series",
+    "subgoals": [
+      "Write the condensed term",
+      "Read the geometric ratio",
+      "Decide convergence from the ratio"
+    ]
+  },
+  {
+    "label": "Summing the condensed series",
+    "section": "Summing the condensed series",
+    "subgoals": [
+      "Identify the first term",
+      "Apply the geometric sum formula",
+      "Express the sum as a reduced fraction"
+    ]
+  }
+]

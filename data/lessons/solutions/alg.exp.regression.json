@@ -1,0 +1,19 @@
+{
+  "concept": "alg.exp.regression",
+  "setup": "The regression has the form \\(y = a b^{x}\\).",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The value at \\(x = 0\\) is [[y0]], so \\(a = [[a]]\\)."
+    },
+    {
+      "fact": "b",
+      "say": "Consecutive values have the constant ratio \\(b = [[b]]\\)."
+    },
+    {
+      "fact": "y4",
+      "say": "At \\(x = 4\\) the model predicts [[y4]]."
+    }
+  ],
+  "answer": "The fitted model is \\(y = [[a]] \\cdot [[b]]^{x}\\), which predicts [[y4]] at \\(x = 4\\)."
+}

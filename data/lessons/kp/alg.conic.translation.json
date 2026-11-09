@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Reading the center",
+    "section": "Reading the center",
+    "subgoals": [
+      "Match each squared term to x minus h",
+      "Handle a plus sign inside the square",
+      "Read the center coordinates"
+    ]
+  },
+  {
+    "label": "The standard form",
+    "section": "The standard form",
+    "subgoals": [
+      "Recognize the translated equation",
+      "Identify the semi-axes",
+      "Distinguish translation from scaling"
+    ]
+  },
+  {
+    "label": "Center coordinates and sums",
+    "section": "Center coordinates and sums",
+    "subgoals": [
+      "Add the center coordinates",
+      "Locate the midpoint",
+      "Keep the shape unchanged"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Divisors of the constant term",
+    "section": "Divisors of the constant term",
+    "subgoals": [
+      "Name the constant term of a monic polynomial",
+      "List its positive divisors",
+      "Test a divisor as an integer root"
+    ]
+  },
+  {
+    "label": "Cauchy's bound",
+    "section": "Cauchy's bound",
+    "subgoals": [
+      "Find the largest lower coefficient in absolute value",
+      "Divide that magnitude by the leading coefficient",
+      "Add one to form the root bound"
+    ]
+  },
+  {
+    "label": "Candidates from the rational root theorem",
+    "section": "Candidates from the rational root theorem",
+    "subgoals": [
+      "Count divisors of the constant term",
+      "Count divisors of the leading coefficient",
+      "Multiply by two for the signed candidates"
+    ]
+  }
+]

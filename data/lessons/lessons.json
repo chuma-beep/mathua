@@ -6198,5 +6198,205 @@
   {
     "concept_id": "calc.integral.motion",
     "source": "authored/calc.integral.motion.md"
+  },
+  {
+    "concept_id": "alg.poly.reciprocal",
+    "source": "authored/alg.poly.reciprocal.md"
+  },
+  {
+    "concept_id": "alg.poly.bounds",
+    "source": "authored/alg.poly.bounds.md"
+  },
+  {
+    "concept_id": "alg.func.operations",
+    "source": "authored/alg.func.operations.md"
+  },
+  {
+    "concept_id": "alg.func.inverse_graph",
+    "source": "authored/alg.func.inverse_graph.md"
+  },
+  {
+    "concept_id": "alg.func.composition_graph",
+    "source": "authored/alg.func.composition_graph.md"
+  },
+  {
+    "concept_id": "alg.exp.regression",
+    "source": "authored/alg.exp.regression.md"
+  },
+  {
+    "concept_id": "alg.log.domain",
+    "source": "authored/alg.log.domain.md"
+  },
+  {
+    "concept_id": "alg.log.base_equation",
+    "source": "authored/alg.log.base_equation.md"
+  },
+  {
+    "concept_id": "alg.seq.arithmetic_mean",
+    "source": "authored/alg.seq.arithmetic_mean.md"
+  },
+  {
+    "concept_id": "alg.seq.geometric_mean",
+    "source": "authored/alg.seq.geometric_mean.md"
+  },
+  {
+    "concept_id": "alg.seq.fibonacci",
+    "source": "authored/alg.seq.fibonacci.md"
+  },
+  {
+    "concept_id": "alg.conic.intersection",
+    "source": "authored/alg.conic.intersection.md"
+  },
+  {
+    "concept_id": "alg.conic.translation",
+    "source": "authored/alg.conic.translation.md"
+  },
+  {
+    "concept_id": "alg.conic.tangent",
+    "source": "authored/alg.conic.tangent.md"
+  },
+  {
+    "concept_id": "alg.systems.matrix_inverse",
+    "source": "authored/alg.systems.matrix_inverse.md"
+  },
+  {
+    "concept_id": "alg.regression.quadratic",
+    "source": "authored/alg.regression.quadratic.md"
+  },
+  {
+    "concept_id": "alg.regression.power",
+    "source": "authored/alg.regression.power.md"
+  },
+  {
+    "concept_id": "alg.regression.logarithmic",
+    "source": "authored/alg.regression.logarithmic.md"
+  },
+  {
+    "concept_id": "calc.series.cauchy_condensation",
+    "source": "authored/calc.series.cauchy_condensation.md"
+  },
+  {
+    "concept_id": "calc.series.raabe",
+    "source": "authored/calc.series.raabe.md"
+  },
+  {
+    "concept_id": "calc.series.bertrand",
+    "source": "authored/calc.series.bertrand.md"
+  },
+  {
+    "concept_id": "calc.series.kummer",
+    "source": "authored/calc.series.kummer.md"
+  },
+  {
+    "concept_id": "calc.series.gauss",
+    "source": "authored/calc.series.gauss.md"
+  },
+  {
+    "concept_id": "calc.series.abel",
+    "source": "authored/calc.series.abel.md"
+  },
+  {
+    "concept_id": "calc.series.uniform_convergence",
+    "source": "authored/calc.series.uniform_convergence.md"
+  },
+  {
+    "concept_id": "calc.series.euler_transform",
+    "source": "authored/calc.series.euler_transform.md"
+  },
+  {
+    "concept_id": "calc.series.power_integration",
+    "source": "authored/calc.series.power_integration.md"
+  },
+  {
+    "concept_id": "calc.series.power_differentiation",
+    "source": "authored/calc.series.power_differentiation.md"
+  },
+  {
+    "concept_id": "calc.series.lagrange_inversion",
+    "source": "authored/calc.series.lagrange_inversion.md"
+  },
+  {
+    "concept_id": "calc.integral.romberg",
+    "source": "authored/calc.integral.romberg.md"
+  },
+  {
+    "concept_id": "calc.integral.monte_carlo",
+    "source": "authored/calc.integral.monte_carlo.md"
+  },
+  {
+    "concept_id": "calc.integral.gauss_legendre",
+    "source": "authored/calc.integral.gauss_legendre.md"
+  },
+  {
+    "concept_id": "calc.integral.fresnel",
+    "source": "authored/calc.integral.fresnel.md"
+  },
+  {
+    "concept_id": "calc.integral.elliptic",
+    "source": "authored/calc.integral.elliptic.md"
+  },
+  {
+    "concept_id": "calc.integral.wallis",
+    "source": "authored/calc.integral.wallis.md"
+  },
+  {
+    "concept_id": "calc.integral.centroid_curve",
+    "source": "authored/calc.integral.centroid_curve.md"
+  },
+  {
+    "concept_id": "stat.data.weighted_mean",
+    "source": "authored/stat.data.weighted_mean.md"
+  },
+  {
+    "concept_id": "stat.adv.coefficient_variation",
+    "source": "authored/stat.adv.coefficient_variation.md"
+  },
+  {
+    "concept_id": "stat.prob.independence",
+    "source": "authored/stat.prob.independence.md"
+  },
+  {
+    "concept_id": "stat.prob.mutually_exclusive",
+    "source": "authored/stat.prob.mutually_exclusive.md"
+  },
+  {
+    "concept_id": "stat.dist.negative_binomial",
+    "source": "authored/stat.dist.negative_binomial.md"
+  },
+  {
+    "concept_id": "stat.dist.multinomial",
+    "source": "authored/stat.dist.multinomial.md"
+  },
+  {
+    "concept_id": "stat.dist.lognormal",
+    "source": "authored/stat.dist.lognormal.md"
+  },
+  {
+    "concept_id": "stat.infer.ci_mean_t",
+    "source": "authored/stat.infer.ci_mean_t.md"
+  },
+  {
+    "concept_id": "stat.infer.ci_proportion",
+    "source": "authored/stat.infer.ci_proportion.md"
+  },
+  {
+    "concept_id": "stat.infer.power",
+    "source": "authored/stat.infer.power.md"
+  },
+  {
+    "concept_id": "stat.infer.effect_size",
+    "source": "authored/stat.infer.effect_size.md"
+  },
+  {
+    "concept_id": "stat.reg.multiple",
+    "source": "authored/stat.reg.multiple.md"
+  },
+  {
+    "concept_id": "stat.reg.prediction_interval",
+    "source": "authored/stat.reg.prediction_interval.md"
+  },
+  {
+    "concept_id": "stat.test.kruskal_wallis",
+    "source": "authored/stat.test.kruskal_wallis.md"
   }
 ]

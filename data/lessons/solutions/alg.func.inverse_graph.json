@@ -1,0 +1,19 @@
+{
+  "concept": "alg.func.inverse_graph",
+  "setup": "The graph of \\(f\\) contains the point \\(([[point_x]], [[point_y]])\\), so the graph of \\(f^{-1}\\) contains \\(([[point_y]], [[point_x]])\\).",
+  "steps": [
+    {
+      "fact": "inverse_value",
+      "say": "Swapping the coordinates gives \\(f^{-1}([[point_y]]) = [[inverse_value]]\\)."
+    },
+    {
+      "fact": "original_value",
+      "say": "Reading the pair back gives \\(f([[point_x]]) = [[original_value]]\\)."
+    },
+    {
+      "fact": "inverse_intercept",
+      "say": "For the line of slope one through the point, the reflected line has y-intercept [[inverse_intercept]]."
+    }
+  ],
+  "answer": "The inverse swaps the coordinates, so the asked value is one of [[inverse_value]], [[original_value]] and [[inverse_intercept]]."
+}

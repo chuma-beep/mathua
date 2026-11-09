@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Richardson extrapolation",
+    "section": "Richardson extrapolation",
+    "subgoals": [
+      "Form the first extrapolation",
+      "Use the denominator 3",
+      "Interpret the cancellation"
+    ]
+  },
+  {
+    "label": "The second column",
+    "section": "The second column",
+    "subgoals": [
+      "Combine two first-column entries",
+      "Use the denominator 15",
+      "Keep the grid levels matched"
+    ]
+  },
+  {
+    "label": "The full table",
+    "section": "The full table",
+    "subgoals": [
+      "Build the rows in order",
+      "Fill columns from left to right",
+      "Read the diagonal entry"
+    ]
+  }
+]

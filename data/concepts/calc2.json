@@ -1009,5 +1009,257 @@
       "streak": 10,
       "avg_time_seconds": 26
     }
+  },
+  {
+    "id": "calc.series.cauchy_condensation",
+    "label": "Cauchy condensation test",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.positive_terms"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.series.raabe",
+    "label": "Raabe's test",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.ratio_test"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.series.bertrand",
+    "label": "Bertrand's test",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.p_series"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.series.kummer",
+    "label": "Kummer's test",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.positive_terms"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.series.gauss",
+    "label": "Gauss's test",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.raabe"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.series.abel",
+    "label": "Abel's test",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "calc.series.alternating"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.series.uniform_convergence",
+    "label": "Uniform convergence on a set",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "calc.series.function_series"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.series.euler_transform",
+    "label": "Euler's transformation of series",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.alternating"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.series.power_integration",
+    "label": "Integrating power series",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.power"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.series.power_differentiation",
+    "label": "Differentiating power series",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.power"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.series.lagrange_inversion",
+    "label": "Lagrange inversion",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.taylor"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.integral.romberg",
+    "label": "Romberg extrapolation",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.trapezoid"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.integral.monte_carlo",
+    "label": "Monte Carlo quadrature",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.definite"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.integral.gauss_legendre",
+    "label": "Gauss-Legendre quadrature",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.simpson"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.integral.fresnel",
+    "label": "Fresnel integrals",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.improper"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.integral.elliptic",
+    "label": "Elliptic integrals",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.trig_substitution"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.integral.wallis",
+    "label": "Wallis integrals",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.trig_integrals"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.integral.centroid_curve",
+    "label": "Centroid of a curve",
+    "domain": "calc2",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.center_mass"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
   }
 ]

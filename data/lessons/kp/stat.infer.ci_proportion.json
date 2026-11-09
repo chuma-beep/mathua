@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The standard error of a proportion",
+    "section": "The standard error of a proportion",
+    "subgoals": [
+      "Write the Bernoulli variance",
+      "Divide by the sample size",
+      "Take the square root"
+    ]
+  },
+  {
+    "label": "The margin of error",
+    "section": "The margin of error",
+    "subgoals": [
+      "Multiply by the critical value",
+      "Use the normal critical value for the confidence level",
+      "Explain the effect of sample size"
+    ]
+  },
+  {
+    "label": "Reading the interval",
+    "section": "Reading the interval",
+    "subgoals": [
+      "Add and subtract the margin",
+      "State the repeated-sampling interpretation",
+      "Compare the interval with 0.5"
+    ]
+  }
+]

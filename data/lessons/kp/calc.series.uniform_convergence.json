@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Sequences of functions",
+    "section": "Sequences of functions",
+    "subgoals": [
+      "Write the supremum criterion",
+      "Find the pointwise limit",
+      "Compute the supremum of the error"
+    ]
+  },
+  {
+    "label": "Series of functions",
+    "section": "Series of functions",
+    "subgoals": [
+      "Form the partial sums",
+      "Apply the Weierstrass M-test",
+      "Decide uniformity from the bound"
+    ]
+  },
+  {
+    "label": "The supremum test",
+    "section": "The supremum test",
+    "subgoals": [
+      "Bound the remainder",
+      "Remove the dependence on x",
+      "Compare the bound with zero"
+    ]
+  }
+]

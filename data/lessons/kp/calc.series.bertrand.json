@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Bertrand limit",
+    "section": "The Bertrand limit",
+    "subgoals": [
+      "Write the logarithmic correction",
+      "Subtract the Raabe limit of 1",
+      "Apply the convergence threshold"
+    ]
+  },
+  {
+    "label": "Logarithmic corrections",
+    "section": "Logarithmic corrections",
+    "subgoals": [
+      "Expand the ratio for a log term",
+      "Multiply by the logarithmic factor",
+      "Read the exponent as the limit"
+    ]
+  },
+  {
+    "label": "A constant factor",
+    "section": "A constant factor",
+    "subgoals": [
+      "Cancel the constant in the ratio",
+      "Compare the numerator case",
+      "Interpret a negative limit"
+    ]
+  }
+]

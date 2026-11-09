@@ -1,0 +1,29 @@
+[
+  {
+    "label": "One mean between two terms",
+    "section": "One mean between two terms",
+    "subgoals": [
+      "Split the endpoint gap into two equal parts",
+      "Add half the difference to the first term",
+      "Check the mean as the average of the endpoints"
+    ]
+  },
+  {
+    "label": "The common difference",
+    "section": "The common difference",
+    "subgoals": [
+      "Count one more gap than the number of means",
+      "Divide the endpoint gap by the gap count",
+      "Step from the first term to the last"
+    ]
+  },
+  {
+    "label": "The later means",
+    "section": "The later means",
+    "subgoals": [
+      "Index each mean from the first term",
+      "Multiply the position by the common difference",
+      "Check symmetry about the midpoint"
+    ]
+  }
+]

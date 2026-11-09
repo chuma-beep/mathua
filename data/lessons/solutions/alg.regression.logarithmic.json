@@ -1,0 +1,15 @@
+{
+  "concept": "alg.regression.logarithmic",
+  "setup": "The fitted logarithmic model is \\(y = a + b \\ln x\\).",
+  "steps": [
+    {
+      "fact": "b",
+      "say": "The coefficient of \\(\\ln x\\) is \\(b = [[b]]\\)."
+    },
+    {
+      "fact": "a",
+      "say": "The intercept is \\(a = [[a]]\\)."
+    }
+  ],
+  "answer": "The model is \\(y = [[a]] + [[b]] \\ln x\\), which predicts [[prediction]] at \\(x = e^{3}\\)."
+}

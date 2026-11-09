@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The x-coordinate",
+    "section": "The x-coordinate",
+    "subgoals": [
+      "Average the endpoint x-values",
+      "Use the arc length weight",
+      "Report the coordinate"
+    ]
+  },
+  {
+    "label": "The y-coordinate",
+    "section": "The y-coordinate",
+    "subgoals": [
+      "Average the endpoint y-values",
+      "Use the arc length weight",
+      "Report the coordinate"
+    ]
+  },
+  {
+    "label": "Arc length",
+    "section": "Arc length",
+    "subgoals": [
+      "Compute the displacement",
+      "Apply the distance formula",
+      "Use the length in the centroid formula"
+    ]
+  }
+]

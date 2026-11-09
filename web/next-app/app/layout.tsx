@@ -41,11 +41,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: 'Mathua',
   applicationName: 'Mathua',
-  description: 'An open-source adaptive math learning platform. Mastery-gated, 1550 concepts, generated problems, mastery checks.',
+  description: 'An open-source adaptive math learning platform. Mastery-gated, 1600 concepts, generated problems, mastery checks.',
   manifest: '/manifest.webmanifest',
   openGraph: {
     title: 'Mathua',
-    description: 'Master prerequisites before you advance. Open-source, 1550 concepts, spaced repetition, mastery checks.',
+    description: 'Master prerequisites before you advance. Open-source, 1600 concepts, spaced repetition, mastery checks.',
     type: 'website',
     siteName: 'Mathua',
     images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Mathua: an adaptive math learning platform' }],
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     site: '@wisdomsglow',
     creator: '@wisdomsglow',
     title: 'Mathua',
-    description: 'Master prerequisites before you advance. Open-source, 1550 concepts, spaced repetition.',
+    description: 'Master prerequisites before you advance. Open-source, 1600 concepts, spaced repetition.',
     images: ['/og.png'],
   },
   icons: {

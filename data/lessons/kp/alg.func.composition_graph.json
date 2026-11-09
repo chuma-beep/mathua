@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Reading the inner function first",
+    "section": "Reading the inner function first",
+    "subgoals": [
+      "Identify the inner function in a composition",
+      "Evaluate the inner function at the given input",
+      "Feed that output into the outer function"
+    ]
+  },
+  {
+    "label": "Composing in the other order",
+    "section": "Composing in the other order",
+    "subgoals": [
+      "Swap the inner and outer roles",
+      "Compare the two compositions at one input",
+      "Explain why composition is not commutative"
+    ]
+  },
+  {
+    "label": "Composing a function with itself",
+    "section": "Composing a function with itself",
+    "subgoals": [
+      "Evaluate the function once",
+      "Substitute that output back into the function",
+      "Check the repeated step against the formula"
+    ]
+  }
+]

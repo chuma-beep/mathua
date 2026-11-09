@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Forming the reciprocal polynomial",
+    "section": "Forming the reciprocal polynomial",
+    "subgoals": [
+      "Reverse the coefficient order",
+      "Identify the new leading coefficient",
+      "Keep every sign unchanged"
+    ]
+  },
+  {
+    "label": "Roots and reciprocals",
+    "section": "Roots and reciprocals",
+    "subgoals": [
+      "Map a root to its reciprocal",
+      "Check that no root is zero",
+      "Connect the two root sets"
+    ]
+  },
+  {
+    "label": "Coefficients and Vieta",
+    "section": "Coefficients and Vieta",
+    "subgoals": [
+      "Compute the reciprocal sum",
+      "Compute the reciprocal product",
+      "Use the even degree for the sign"
+    ]
+  }
+]

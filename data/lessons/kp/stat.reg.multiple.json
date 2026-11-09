@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The fitted value",
+    "section": "The fitted value",
+    "subgoals": [
+      "Write the multiple regression equation",
+      "Substitute each predictor",
+      "Read a coefficient as a partial effect"
+    ]
+  },
+  {
+    "label": "Residuals",
+    "section": "Residuals",
+    "subgoals": [
+      "Subtract the fitted value from the observation",
+      "Plot residuals against fitted values",
+      "Recognize a patterned residual plot"
+    ]
+  },
+  {
+    "label": "Adjusted R-squared",
+    "section": "Adjusted R-squared",
+    "subgoals": [
+      "Write the adjustment factor",
+      "Penalize each added predictor",
+      "Compare models with different predictor counts"
+    ]
+  }
+]

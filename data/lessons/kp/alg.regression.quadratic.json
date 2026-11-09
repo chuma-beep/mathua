@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The leading coefficient",
+    "section": "The leading coefficient",
+    "subgoals": [
+      "Set up the normal equations for a parabola",
+      "Solve for the squared term coefficient",
+      "Read the direction of opening from its sign"
+    ]
+  },
+  {
+    "label": "The constant term",
+    "section": "The constant term",
+    "subgoals": [
+      "Read the fitted value at x equals zero",
+      "Use a data point on the y-axis when present",
+      "Separate the intercept from the vertex"
+    ]
+  },
+  {
+    "label": "A predicted value",
+    "section": "A predicted value",
+    "subgoals": [
+      "Substitute the input into the fitted parabola",
+      "Square before multiplying by the leading coefficient",
+      "Keep extrapolation distinct from interpolation"
+    ]
+  }
+]

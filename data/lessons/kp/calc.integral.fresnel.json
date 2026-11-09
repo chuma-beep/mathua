@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The cosine integral",
+    "section": "The cosine integral",
+    "subgoals": [
+      "Write the oscillatory integrand",
+      "Sum the Maclaurin series",
+      "Round the numerical value"
+    ]
+  },
+  {
+    "label": "The sine integral",
+    "section": "The sine integral",
+    "subgoals": [
+      "Write the sine integrand",
+      "Sum the Maclaurin series",
+      "Round the numerical value"
+    ]
+  },
+  {
+    "label": "Maclaurin coefficients",
+    "section": "Maclaurin coefficients",
+    "subgoals": [
+      "Identify the coefficient index",
+      "Substitute the index into the formula",
+      "Round the coefficient"
+    ]
+  }
+]

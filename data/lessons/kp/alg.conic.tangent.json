@@ -1,0 +1,29 @@
+[
+  {
+    "label": "A tangent to a circle",
+    "section": "A tangent to a circle",
+    "subgoals": [
+      "Write the tangent as x0 x plus y0 y equals r squared",
+      "Form the slope as negative x0 over y0",
+      "Use the radius as a perpendicular check"
+    ]
+  },
+  {
+    "label": "A tangent to a parabola",
+    "section": "A tangent to a parabola",
+    "subgoals": [
+      "Differentiate y equals x squared",
+      "Evaluate the derivative at the contact point",
+      "Write the tangent with its constant term"
+    ]
+  },
+  {
+    "label": "The intercept of a tangent",
+    "section": "The intercept of a tangent",
+    "subgoals": [
+      "Parametrise the point on y squared equals four p x",
+      "Write the tangent as t y equals x plus p t squared",
+      "Read the x-intercept from the tangent equation"
+    ]
+  }
+]

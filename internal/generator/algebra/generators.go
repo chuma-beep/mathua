@@ -17,6 +17,10 @@ func Register(reg *generator.Registry) {
 	reg.Register("alg.exp.from_points", &expFromPointsGen{})
 	reg.Register("alg.log.scale", &logScaleGen{})
 	reg.Register("alg.regression.linear", &linearRegressionGen{})
+	reg.Register("alg.regression.quadratic", &w3QuadraticRegressionGen{})
+	reg.Register("alg.regression.power", &w3PowerRegressionGen{})
+	reg.Register("alg.regression.logarithmic", &w3LogarithmicRegressionGen{})
+	reg.Register("alg.exp.regression", &w3ExpRegressionGen{})
 	reg.Register("alg.conic.parabola_focus", &parabolaFocusGen{})
 	reg.Register("alg.conic.ellipse_foci", &ellipseFociGen{})
 	reg.Register("alg.ineq.absolute_graph", &absoluteInequalityGraphGen{})
@@ -39,6 +43,7 @@ func Register(reg *generator.Registry) {
 	reg.Register("alg.systems.elimination", &sysEliminationGen{})
 	reg.Register("alg.systems.graphing", &systemsGraphingGen{})
 	reg.Register("alg.systems.cramer", &cramerGen{})
+	reg.Register("alg.systems.matrix_inverse", &w3MatrixInverseGen{})
 	reg.Register("alg.systems.word", &sysWordGen{})
 
 	reg.Register("alg.poly.concept", &polyConceptGen{})
@@ -48,6 +53,8 @@ func Register(reg *generator.Registry) {
 	reg.Register("alg.poly.special", &polySpecialGen{})
 	reg.Register("alg.poly.turning_points", &turningPointsGen{})
 	reg.Register("alg.poly.remainder", &polyRemainderGen{})
+	reg.Register("alg.poly.reciprocal", &w3ReciprocalGen{})
+	reg.Register("alg.poly.bounds", &w3PolyBoundsGen{})
 
 	reg.Register("alg.factor.gcf", &factorGCFGen{})
 	reg.Register("alg.factor.trinomial", &factorTrinomialGen{})
@@ -65,14 +72,20 @@ func Register(reg *generator.Registry) {
 	reg.Register("alg.func.linear", &funcLinearGen{})
 	reg.Register("alg.func.piecewise_graph", &piecewiseGraphGen{})
 	reg.Register("alg.func.quad", &funcQuadGen{})
+	reg.Register("alg.func.operations", &w3FuncOperationsGen{})
+	reg.Register("alg.func.inverse_graph", &w3InverseGraphGen{})
+	reg.Register("alg.func.composition_graph", &w3CompositionGraphGen{})
 
 	reg.Register("alg.exp.concept", &algExpConceptGen{})
 	reg.Register("alg.exp.evaluate", &algExpEvaluateGen{})
 	reg.Register("alg.log.concept", &logConceptGen{})
 	reg.Register("alg.log.evaluate", &logEvaluateGen{})
 	reg.Register("alg.log.properties", &logPropertiesGen{})
+	reg.Register("alg.log.domain", &w3LogDomainGen{})
+	reg.Register("alg.log.base_equation", &w3LogBaseEquationGen{})
 
 	reg.Register("alg.seq.arithmetic", &seqArithGen{})
+	reg.Register("alg.seq.arithmetic_mean", &w3ArithmeticMeanGen{})
 	// Concepts added by the 2026 content expansion.
 	reg.Register("alg.func.rate_of_change", &algBridgeGen{kind: "rate_of_change"})
 	reg.Register("alg.poly.graph_zeros", &algBridgeGen{kind: "poly_graph_zeros"})
@@ -81,6 +94,7 @@ func Register(reg *generator.Registry) {
 	reg.Register("alg.exp.natural_base", &algBridgeGen{kind: "natural_base"})
 	reg.Register("alg.linear.point_slope", &algBridgeGen{kind: "point_slope"})
 	reg.Register("alg.seq.recursive", &algBridgeGen{kind: "seq_recursive"})
+	reg.Register("alg.seq.fibonacci", &w3FibonacciGen{})
 	reg.Register("alg.radical.nth_root", &algBridgeGen{kind: "nth_root"})
 	reg.Register("alg.poly.fundamental_theorem", &algBridgeGen{kind: "fundamental_theorem"})
 	reg.Register("alg.exp.half_life", &algBridgeGen{kind: "half_life"})
@@ -91,6 +105,7 @@ func Register(reg *generator.Registry) {
 	reg.Register("alg.linear.horizontal_vertical", &algBridgeGen{kind: "horizontal_vertical"})
 
 	reg.Register("alg.seq.geometric", &seqGeomGen{})
+	reg.Register("alg.seq.geometric_mean", &w3GeometricMeanGen{})
 	reg.Register("alg.seq.sum_arith", &seqSumArithGen{})
 	reg.Register("alg.seq.sum_geo", &seqSumGeoGen{})
 
@@ -100,6 +115,9 @@ func Register(reg *generator.Registry) {
 
 	reg.Register("alg.conic.parabola", &conicParabolaGen{})
 	reg.Register("alg.conic.hyperbola", &conicHyperbolaGen{})
+	reg.Register("alg.conic.intersection", &w3ConicIntersectionGen{})
+	reg.Register("alg.conic.translation", &w3ConicTranslationGen{})
+	reg.Register("alg.conic.tangent", &w3ConicTangentGen{})
 	reg.Register("alg.eq.absolute_value", &eqAbsValGen{})
 	reg.Register("alg.eq.binomial", &eqBinomialGen{})
 	reg.Register("alg.eq.exponential", &eqExpGen{})

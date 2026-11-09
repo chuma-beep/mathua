@@ -1,0 +1,19 @@
+{
+  "concept": "alg.func.composition_graph",
+  "setup": "The functions are \\(f(x) = [[f]]\\) and \\(g(x) = [[g]]\\), evaluated at \\(x = [[x]]\\).",
+  "steps": [
+    {
+      "fact": "f_value",
+      "say": "The value of the first function is \\(f([[x]]) = [[f_value]]\\)."
+    },
+    {
+      "fact": "g_value",
+      "say": "The value of the second function is \\(g([[x]]) = [[g_value]]\\)."
+    },
+    {
+      "fact": "f_of_g",
+      "say": "Composing gives \\((f \\circ g)([[x]]) = [[f_of_g]]\\), \\((g \\circ f)([[x]]) = [[g_of_f]]\\) and \\((f \\circ f)([[x]]) = [[f_of_f]]\\)."
+    }
+  ],
+  "answer": "The three compositions at \\(x = [[x]]\\) are [[f_of_g]], [[g_of_f]] and [[f_of_f]]."
+}

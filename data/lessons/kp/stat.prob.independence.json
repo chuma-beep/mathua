@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The product rule",
+    "section": "The product rule",
+    "subgoals": [
+      "State P(A and B) = P(A)P(B)",
+      "Multiply the two marginals",
+      "Compare the product with the joint probability"
+    ]
+  },
+  {
+    "label": "Conditioning does not change the probability",
+    "section": "Conditioning does not change the probability",
+    "subgoals": [
+      "Write the conditional-probability formula",
+      "Compare P(A | B) with P(A)",
+      "Conclude independence from equality"
+    ]
+  },
+  {
+    "label": "Recovering an intersection",
+    "section": "Recovering an intersection",
+    "subgoals": [
+      "Apply the addition rule",
+      "Subtract the union from the marginal sum",
+      "Test the recovered intersection with the product rule"
+    ]
+  }
+]

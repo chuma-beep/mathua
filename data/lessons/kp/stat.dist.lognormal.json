@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The logarithm is normal",
+    "section": "The logarithm is normal",
+    "subgoals": [
+      "Write ln X as normal",
+      "Exponentiate the log-scale mean",
+      "Locate the median at e to the mu"
+    ]
+  },
+  {
+    "label": "Median and mean",
+    "section": "Median and mean",
+    "subgoals": [
+      "State the mean formula",
+      "Add sigma squared over two to the exponent",
+      "Explain the right skew"
+    ]
+  },
+  {
+    "label": "The mean-to-median ratio",
+    "section": "The mean-to-median ratio",
+    "subgoals": [
+      "Divide the mean by the median",
+      "Cancel the common exponential factor",
+      "Interpret the remaining factor"
+    ]
+  }
+]

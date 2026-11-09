@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The sum of two functions",
+    "section": "The sum of two functions",
+    "subgoals": [
+      "Evaluate each function at the same input",
+      "Add the two output values",
+      "State the domain shared by both functions"
+    ]
+  },
+  {
+    "label": "The difference of two functions",
+    "section": "The difference of two functions",
+    "subgoals": [
+      "Subtract in the order the notation names",
+      "Keep the sign of the second value",
+      "Compare the result with the reversed difference"
+    ]
+  },
+  {
+    "label": "The product of two functions",
+    "section": "The product of two functions",
+    "subgoals": [
+      "Multiply the two output values",
+      "Expand a product when a general rule is needed",
+      "Check a product at a chosen input"
+    ]
+  }
+]

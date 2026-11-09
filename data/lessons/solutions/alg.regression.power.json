@@ -1,0 +1,15 @@
+{
+  "concept": "alg.regression.power",
+  "setup": "The fitted power model is \\(y = a x^{b}\\).",
+  "steps": [
+    {
+      "fact": "b",
+      "say": "The exponent is \\(b = [[b]]\\)."
+    },
+    {
+      "fact": "a",
+      "say": "The leading coefficient is \\(a = [[a]]\\)."
+    }
+  ],
+  "answer": "The model is \\(y = [[a]]x^{[[b]]}\\), which predicts [[prediction]] at \\(x = 4\\)."
+}

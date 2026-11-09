@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Substitution",
+    "section": "Substitution",
+    "subgoals": [
+      "Replace y with the line",
+      "Collect the quadratic terms",
+      "Write the equation in standard form"
+    ]
+  },
+  {
+    "label": "The discriminant",
+    "section": "The discriminant",
+    "subgoals": [
+      "Identify A, B and C",
+      "Compute B squared minus 4AC",
+      "Read the number of intersections"
+    ]
+  },
+  {
+    "label": "Sums of intersection coordinates",
+    "section": "Sums of intersection coordinates",
+    "subgoals": [
+      "Apply Vieta to the quadratic",
+      "Find the sum of the x-coordinates",
+      "Relate the sum to the line slope"
+    ]
+  }
+]

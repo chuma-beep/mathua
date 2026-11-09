@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Base from a power",
+    "section": "Base from a power",
+    "subgoals": [
+      "Rewrite the logarithm as a power equation",
+      "Take the matching root of the argument",
+      "Reject a nonpositive base candidate"
+    ]
+  },
+  {
+    "label": "Base from a negative exponent",
+    "section": "Base from a negative exponent",
+    "subgoals": [
+      "Translate a negative logarithm into a reciprocal",
+      "Take reciprocals of both sides",
+      "Solve the resulting positive power"
+    ]
+  },
+  {
+    "label": "Base from a fractional exponent",
+    "section": "Base from a fractional exponent",
+    "subgoals": [
+      "Translate a half logarithm into a square root",
+      "Square both sides to isolate the base",
+      "Substitute the base back into the original equation"
+    ]
+  }
+]

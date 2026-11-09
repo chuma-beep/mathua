@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Forward differences",
+    "section": "Forward differences",
+    "subgoals": [
+      "Compute the first difference",
+      "Iterate the difference",
+      "Divide by the correct power of two"
+    ]
+  },
+  {
+    "label": "Geometric terms",
+    "section": "Geometric terms",
+    "subgoals": [
+      "Compute the differences of r^n",
+      "Form the transformed ratio",
+      "Sum the transformed series"
+    ]
+  },
+  {
+    "label": "The harmonic series",
+    "section": "The harmonic series",
+    "subgoals": [
+      "Compute the differences of 1/(n+1)",
+      "Write the transformed coefficient",
+      "Identify the resulting sum"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The coefficient of the logarithm",
+    "section": "The coefficient of the logarithm",
+    "subgoals": [
+      "Read the change in y per unit of ln x",
+      "Use the identity ln e equals one",
+      "Compare two points one e-step apart"
+    ]
+  },
+  {
+    "label": "The intercept",
+    "section": "The intercept",
+    "subgoals": [
+      "Evaluate the model at x equals one",
+      "Distinguish the intercept from the value at zero",
+      "Shift the whole fitted line by the intercept"
+    ]
+  },
+  {
+    "label": "A predicted value",
+    "section": "A predicted value",
+    "subgoals": [
+      "Rewrite the input as a power of e",
+      "Read the logarithm from the exponent",
+      "Apply the linear rule to the logarithm"
+    ]
+  }
+]

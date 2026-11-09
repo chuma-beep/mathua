@@ -1,0 +1,19 @@
+{
+  "concept": "alg.systems.matrix_inverse",
+  "setup": "The coefficient matrix is \\(\\begin{pmatrix}[[a]] & [[b]]\\\\ [[c]] & [[d]]\\end{pmatrix}\\).",
+  "steps": [
+    {
+      "fact": "det",
+      "say": "The determinant is \\(( [[a]] )( [[d]] ) - ( [[b]] )( [[c]] ) = [[det]]\\)."
+    },
+    {
+      "fact": "x",
+      "say": "The inverse gives \\(x = [[x]]\\)."
+    },
+    {
+      "fact": "y",
+      "say": "The inverse gives \\(y = [[y]]\\)."
+    }
+  ],
+  "answer": "The determinant is [[det]], and the solution is \\(x = [[x]]\\), \\(y = [[y]]\\)."
+}

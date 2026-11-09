@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Ranks instead of values",
+    "section": "Ranks instead of values",
+    "subgoals": [
+      "Pool and sort the observations",
+      "Assign ranks from one to N",
+      "Average tied ranks"
+    ]
+  },
+  {
+    "label": "The H statistic",
+    "section": "The H statistic",
+    "subgoals": [
+      "Write the Kruskal-Wallis formula",
+      "Square each group rank sum",
+      "Divide by the group size"
+    ]
+  },
+  {
+    "label": "Degrees of freedom and interpretation",
+    "section": "Degrees of freedom and interpretation",
+    "subgoals": [
+      "Count k minus one degrees of freedom",
+      "Compare H with a chi-square critical value",
+      "Describe a significant result as at least one difference"
+    ]
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "concept": "alg.conic.intersection",
+  "setup": "The parabola is \\(y = x^2\\) and the line is \\(y = [[m]]x + [[b]]\\).",
+  "steps": [
+    {
+      "fact": "discriminant",
+      "say": "Substitution gives \\(x^2 - [[m]]x - [[b]] = 0\\). Its discriminant is \\(m^2 + 4b = [[discriminant]]\\)."
+    },
+    {
+      "fact": "count",
+      "say": "The sign of the discriminant gives [[count]] real intersection points."
+    },
+    {
+      "fact": "sum_x",
+      "say": "When the roots are real, their sum is \\(m = [[sum_x]]\\)."
+    }
+  ],
+  "answer": "The requested value is [[answer]]."
+}

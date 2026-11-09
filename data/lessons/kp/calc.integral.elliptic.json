@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The first kind",
+    "section": "The first kind",
+    "subgoals": [
+      "Write the defining integral",
+      "Sum the coefficient series",
+      "Round the numerical value"
+    ]
+  },
+  {
+    "label": "The second kind",
+    "section": "The second kind",
+    "subgoals": [
+      "Write the defining integral",
+      "Sum the signed coefficient series",
+      "Round the numerical value"
+    ]
+  },
+  {
+    "label": "The arithmetic-geometric mean",
+    "section": "The arithmetic-geometric mean",
+    "subgoals": [
+      "Iterate the mean",
+      "Identify the common limit",
+      "Apply the AGM formula for K"
+    ]
+  }
+]

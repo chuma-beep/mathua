@@ -1,0 +1,19 @@
+{
+  "concept": "alg.regression.quadratic",
+  "setup": "The fitted parabola is \\(y = ax^2 + bx + c\\).",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The leading coefficient is \\(a = [[a]]\\)."
+    },
+    {
+      "fact": "b",
+      "say": "The linear coefficient is \\(b = [[b]]\\)."
+    },
+    {
+      "fact": "c",
+      "say": "The constant term is \\(c = [[c]]\\)."
+    }
+  ],
+  "answer": "The coefficients are [[a]], [[b]] and [[c]], and the prediction at \\(x = 3\\) is [[prediction]]."
+}

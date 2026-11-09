@@ -1,0 +1,29 @@
+[
+  {
+    "label": "A new observation is harder to predict",
+    "section": "A new observation is harder to predict",
+    "subgoals": [
+      "Separate observation noise from mean uncertainty",
+      "Add the two variance components",
+      "Explain why the interval has a floor"
+    ]
+  },
+  {
+    "label": "The half-width",
+    "section": "The half-width",
+    "subgoals": [
+      "Multiply the critical value by the standard error of prediction",
+      "Round the half-width",
+      "Form the two endpoints"
+    ]
+  },
+  {
+    "label": "Combining the two standard errors",
+    "section": "Combining the two standard errors",
+    "subgoals": [
+      "Square the residual standard error",
+      "Square the standard error of the mean",
+      "Add and take the square root"
+    ]
+  }
+]

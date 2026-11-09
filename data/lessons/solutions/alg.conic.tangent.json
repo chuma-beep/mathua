@@ -1,0 +1,15 @@
+{
+  "concept": "alg.conic.tangent",
+  "setup": "The tangent touches the [[curve]] at \\(([[point_x]], [[point_y]])\\).",
+  "steps": [
+    {
+      "fact": "slope",
+      "say": "The tangent slope at that point is [[slope]]."
+    },
+    {
+      "fact": "intercept",
+      "say": "The tangent meets the axis at [[intercept]]."
+    }
+  ],
+  "answer": "At \\(([[point_x]], [[point_y]])\\) the tangent has slope [[slope]] and intercept [[intercept]]."
+}

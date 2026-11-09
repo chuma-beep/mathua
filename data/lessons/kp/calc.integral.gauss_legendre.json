@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The two-point rule",
+    "section": "The two-point rule",
+    "subgoals": [
+      "Apply the symmetric nodes",
+      "Use unit weights",
+      "Scale to the interval"
+    ]
+  },
+  {
+    "label": "The three-point rule",
+    "section": "The three-point rule",
+    "subgoals": [
+      "Use the outer weights 5/9",
+      "Include the centre weight 8/9",
+      "Evaluate the polynomial"
+    ]
+  },
+  {
+    "label": "Changing the interval",
+    "section": "Changing the interval",
+    "subgoals": [
+      "Find the midpoint",
+      "Find the half-length",
+      "Scale the nodes and weights"
+    ]
+  }
+]

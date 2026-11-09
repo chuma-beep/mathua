@@ -1,0 +1,15 @@
+{
+  "concept": "alg.seq.arithmetic_mean",
+  "setup": "An arithmetic sequence runs from [[first]] to [[last]] with [[count]] means inserted between the endpoints.",
+  "steps": [
+    {
+      "fact": "difference",
+      "say": "The terms are equally spaced, so the common difference is [[difference]]."
+    },
+    {
+      "fact": "mean_value",
+      "say": "Stepping by the common difference gives the mean [[mean_value]]."
+    }
+  ],
+  "answer": "The common difference is [[difference]], and the mean value is [[mean_value]]."
+}

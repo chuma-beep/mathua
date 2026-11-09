@@ -1,0 +1,19 @@
+{
+  "concept": "alg.conic.translation",
+  "setup": "The translated ellipse is \\([[equation]]\\), with center \\((h, k) = ([[h]], [[k]])\\).",
+  "steps": [
+    {
+      "fact": "h",
+      "say": "The squared term in \\(x\\) vanishes at \\(x = [[h]]\\), so the center's \\(x\\)-coordinate is [[h]]."
+    },
+    {
+      "fact": "k",
+      "say": "The squared term in \\(y\\) vanishes at \\(y = [[k]]\\), so the center's \\(y\\)-coordinate is [[k]]."
+    },
+    {
+      "fact": "a",
+      "say": "The semi-axes have lengths \\(a = [[a]]\\) and \\(b = [[b]]\\), which translation does not change."
+    }
+  ],
+  "answer": "The requested value is [[answer]]."
+}

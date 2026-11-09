@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Odd powers",
+    "section": "Odd powers",
+    "subgoals": [
+      "Write the odd product",
+      "Multiply the even factors",
+      "Divide by the odd factors"
+    ]
+  },
+  {
+    "label": "Even powers",
+    "section": "Even powers",
+    "subgoals": [
+      "Write the even product",
+      "Form the rational coefficient",
+      "Include the factor pi"
+    ]
+  },
+  {
+    "label": "The recurrence",
+    "section": "The recurrence",
+    "subgoals": [
+      "Integrate by parts",
+      "Write the two-term recurrence",
+      "Read the multiplying factor"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The exponent",
+    "section": "The exponent",
+    "subgoals": [
+      "Take logarithms of both sides",
+      "Read the exponent as the slope in log space",
+      "Match ratios at two different inputs"
+    ]
+  },
+  {
+    "label": "The leading coefficient",
+    "section": "The leading coefficient",
+    "subgoals": [
+      "Read the value at x equals one",
+      "Divide a data value by its power of x",
+      "Separate the scale from the exponent"
+    ]
+  },
+  {
+    "label": "A predicted value",
+    "section": "A predicted value",
+    "subgoals": [
+      "Raise the input to the fitted exponent",
+      "Multiply by the leading coefficient",
+      "Check the prediction against a data point"
+    ]
+  }
+]

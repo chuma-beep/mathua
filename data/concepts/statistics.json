@@ -1055,5 +1055,202 @@
       "streak": 10,
       "avg_time_seconds": 30
     }
+  },
+  {
+    "id": "stat.data.weighted_mean",
+    "label": "Weighted mean",
+    "domain": "statistics",
+    "subdomain": "statistics.central_tendency",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.mean"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "stat.adv.coefficient_variation",
+    "label": "Coefficient of variation",
+    "domain": "statistics",
+    "subdomain": "statistics.spread",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.spread.std_dev"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "stat.prob.independence",
+    "label": "Independent events",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "stat.prob.conditional"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "stat.prob.mutually_exclusive",
+    "label": "Mutually exclusive events",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "multiple_choice",
+    "prerequisites": [
+      "stat.prob.compound"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "stat.dist.negative_binomial",
+    "label": "Negative binomial distribution",
+    "domain": "statistics",
+    "subdomain": "statistics.distributions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.dist.binomial"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "stat.dist.multinomial",
+    "label": "Multinomial distribution",
+    "domain": "statistics",
+    "subdomain": "statistics.distributions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.dist.binomial"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "stat.dist.lognormal",
+    "label": "Lognormal distribution",
+    "domain": "statistics",
+    "subdomain": "statistics.distributions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.dist.normal"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "stat.infer.ci_mean_t",
+    "label": "Confidence interval for a mean with t",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.dist.student_t",
+      "stat.infer.confidence"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "stat.infer.ci_proportion",
+    "label": "Confidence interval for a proportion",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.proportion"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "stat.infer.power",
+    "label": "Power of a hypothesis test",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.type_error"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "stat.infer.effect_size",
+    "label": "Effect size",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.ttest"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "stat.reg.multiple",
+    "label": "Multiple regression",
+    "domain": "statistics",
+    "subdomain": "statistics.regression",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.reg.least_squares"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "stat.reg.prediction_interval",
+    "label": "Prediction intervals",
+    "domain": "statistics",
+    "subdomain": "statistics.regression",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.reg.least_squares"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "stat.test.kruskal_wallis",
+    "label": "Kruskal-Wallis test",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.nonparametric"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
   }
 ]

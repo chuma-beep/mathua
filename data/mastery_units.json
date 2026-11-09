@@ -5,8 +5,8 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1550,
-  "unit_count": 138,
+  "concept_count": 1600,
+  "unit_count": 139,
   "units": [
     {
       "id": "abstract_algebra.b6",
@@ -286,6 +286,7 @@
         "alg.func.absolute_value",
         "alg.func.composite",
         "alg.func.composite_domain",
+        "alg.func.composition_graph",
         "alg.func.dirichlet",
         "alg.func.domain",
         "alg.func.evaluate",
@@ -294,10 +295,12 @@
         "alg.func.injectivity",
         "alg.func.inverse",
         "alg.func.inverse_domain",
+        "alg.func.inverse_graph",
         "alg.func.irrational",
         "alg.func.linear",
         "alg.func.monotonicity",
         "alg.func.notation",
+        "alg.func.operations",
         "alg.func.piecewise",
         "alg.func.piecewise_graph",
         "alg.func.power",
@@ -322,15 +325,19 @@
         "alg.rational.mult_div",
         "alg.rational.proportions",
         "alg.rational.simplify",
+        "alg.regression.logarithmic",
+        "alg.regression.power",
+        "alg.regression.quadratic",
         "alg.systems.cramer",
         "alg.systems.elimination",
         "alg.systems.graphing",
         "alg.systems.matrices",
+        "alg.systems.matrix_inverse",
         "alg.systems.nonlinear",
         "alg.systems.three_var",
         "alg.systems.word"
       ],
-      "concept_count": 51
+      "concept_count": 58
     },
     {
       "id": "algebra.b8",
@@ -357,8 +364,10 @@
         "alg.conic.ellipse",
         "alg.conic.ellipse_foci",
         "alg.conic.hyperbola",
+        "alg.conic.intersection",
         "alg.conic.parabola",
         "alg.conic.parabola_focus",
+        "alg.conic.translation",
         "alg.eq.exponential",
         "alg.eq.polynomial",
         "alg.eq.quadratic_form",
@@ -375,11 +384,14 @@
         "alg.func.sigmoid",
         "alg.ineq.quadratic",
         "alg.log.concept",
+        "alg.log.domain",
         "alg.log.evaluate",
+        "alg.poly.bounds",
         "alg.poly.factor_theorem",
         "alg.poly.fundamental_theorem",
         "alg.poly.graph_zeros",
         "alg.poly.rational_root",
+        "alg.poly.reciprocal",
         "alg.poly.roots",
         "alg.poly.vieta",
         "alg.poly.zeros_multiplicity",
@@ -390,13 +402,15 @@
         "alg.quad.word_problem",
         "alg.rational.complex_fraction",
         "alg.seq.arithmetic",
+        "alg.seq.arithmetic_mean",
         "alg.seq.geometric",
+        "alg.seq.geometric_mean",
         "alg.seq.recursive",
         "alg.seq.sigma",
         "alg.seq.sum_arith",
         "alg.seq.sum_geo"
       ],
-      "concept_count": 42
+      "concept_count": 49
     },
     {
       "id": "algebra.b9",
@@ -404,25 +418,31 @@
       "domain": "algebra",
       "band": 9,
       "depth_min": 27,
-      "depth_max": 28,
+      "depth_max": 29,
       "subdomains": [
+        "algebra.conics",
         "algebra.equations",
         "algebra.inequalities",
+        "algebra.linear",
         "algebra.logarithms",
         "algebra.sequences"
       ],
       "concept_ids": [
+        "alg.conic.tangent",
         "alg.eq.logarithmic",
+        "alg.exp.regression",
         "alg.ineq.logarithmic",
+        "alg.log.base_equation",
         "alg.log.change_base",
         "alg.log.graph",
         "alg.log.model",
         "alg.log.properties",
         "alg.log.scale",
+        "alg.seq.fibonacci",
         "alg.seq.geometric_infinite",
         "alg.seq.induction"
       ],
-      "concept_count": 9
+      "concept_count": 13
     },
     {
       "id": "arithmetic.b0",
@@ -782,17 +802,22 @@
         "calculus.series"
       ],
       "concept_ids": [
+        "calc.series.abel",
         "calc.series.absolute",
         "calc.series.alternating",
         "calc.series.binomial",
+        "calc.series.cauchy_condensation",
         "calc.series.cauchy_product",
         "calc.series.direct_compare",
         "calc.series.dirichlet_test",
+        "calc.series.euler_transform",
         "calc.series.fourier",
         "calc.series.function_series",
         "calc.series.geometric",
         "calc.series.harmonic",
         "calc.series.integral_test",
+        "calc.series.kummer",
+        "calc.series.lagrange_inversion",
         "calc.series.limit_compare",
         "calc.series.maclaurin",
         "calc.series.nth_term",
@@ -800,6 +825,9 @@
         "calc.series.p_series",
         "calc.series.positive_terms",
         "calc.series.power",
+        "calc.series.power_differentiation",
+        "calc.series.power_integration",
+        "calc.series.raabe",
         "calc.series.radius",
         "calc.series.ratio_test",
         "calc.series.remainder",
@@ -807,9 +835,10 @@
         "calc.series.taylor",
         "calc.series.taylor_error",
         "calc.series.telescoping",
-        "calc.series.termwise"
+        "calc.series.termwise",
+        "calc.series.uniform_convergence"
       ],
-      "concept_count": 26
+      "concept_count": 35
     },
     {
       "id": "calc2.b11",
@@ -827,9 +856,12 @@
         "calc.integral.fourier_coefficients",
         "calc.integral.substitution",
         "calc.integral.trig_integrals",
-        "calc.series.estimate"
+        "calc.integral.wallis",
+        "calc.series.bertrand",
+        "calc.series.estimate",
+        "calc.series.gauss"
       ],
-      "concept_count": 5
+      "concept_count": 8
     },
     {
       "id": "calc2.b12",
@@ -848,9 +880,12 @@
         "calc.integral.area_between",
         "calc.integral.beta",
         "calc.integral.center_mass",
+        "calc.integral.centroid_curve",
         "calc.integral.consumer_surplus",
         "calc.integral.convergence",
         "calc.integral.disc",
+        "calc.integral.elliptic",
+        "calc.integral.fresnel",
         "calc.integral.hydrostatic",
         "calc.integral.improper",
         "calc.integral.improper_compare",
@@ -858,6 +893,7 @@
         "calc.integral.irrational",
         "calc.integral.log",
         "calc.integral.moment_inertia",
+        "calc.integral.monte_carlo",
         "calc.integral.mvt",
         "calc.integral.net_change",
         "calc.integral.numerical",
@@ -869,6 +905,7 @@
         "calc.integral.probability",
         "calc.integral.rationalizing",
         "calc.integral.reduction",
+        "calc.integral.romberg",
         "calc.integral.shell",
         "calc.integral.simpson",
         "calc.integral.strategy",
@@ -882,7 +919,22 @@
         "calc.integral.work",
         "calc.series.gamma"
       ],
-      "concept_count": 37
+      "concept_count": 42
+    },
+    {
+      "id": "calc2.b13",
+      "title": "Calc2 · Stage 14",
+      "domain": "calc2",
+      "band": 13,
+      "depth_min": 39,
+      "depth_max": 39,
+      "subdomains": [
+        "calculus.integrals"
+      ],
+      "concept_ids": [
+        "calc.integral.gauss_legendre"
+      ],
+      "concept_count": 1
     },
     {
       "id": "calc3.b9",
@@ -3378,6 +3430,7 @@
         "stat.data.median",
         "stat.data.mode",
         "stat.data.range",
+        "stat.data.weighted_mean",
         "stat.dist.bernoulli",
         "stat.prob.basic",
         "stat.prob.bayes",
@@ -3393,7 +3446,7 @@
         "stat.spread.std_dev",
         "stat.zscore.value"
       ],
-      "concept_count": 24
+      "concept_count": 25
     },
     {
       "id": "statistics.b4",
@@ -3413,6 +3466,7 @@
         "statistics.spread"
       ],
       "concept_ids": [
+        "stat.adv.coefficient_variation",
         "stat.data.skew",
         "stat.dist.beta",
         "stat.dist.binomial",
@@ -3422,6 +3476,9 @@
         "stat.dist.gamma",
         "stat.dist.geometric",
         "stat.dist.hypergeometric",
+        "stat.dist.lognormal",
+        "stat.dist.multinomial",
+        "stat.dist.negative_binomial",
         "stat.dist.normal",
         "stat.dist.normal_approx",
         "stat.dist.poisson",
@@ -3432,13 +3489,15 @@
         "stat.infer.sampling",
         "stat.prob.conditional",
         "stat.prob.counting",
+        "stat.prob.independence",
+        "stat.prob.mutually_exclusive",
         "stat.reg.correlation",
         "stat.reg.r2",
         "stat.sampling.methods",
         "stat.sampling.se",
         "stat.spread.outlier"
       ],
-      "concept_count": 24
+      "concept_count": 30
     },
     {
       "id": "statistics.b5",
@@ -3451,6 +3510,8 @@
         "statistics.inference"
       ],
       "concept_ids": [
+        "stat.infer.ci_mean_t",
+        "stat.infer.ci_proportion",
         "stat.infer.hypothesis",
         "stat.infer.margin",
         "stat.infer.nonparametric",
@@ -3461,9 +3522,10 @@
         "stat.infer.ztest",
         "stat.test.anova",
         "stat.test.chi_square",
-        "stat.test.chi_square_independence"
+        "stat.test.chi_square_independence",
+        "stat.test.kruskal_wallis"
       ],
-      "concept_count": 11
+      "concept_count": 14
     },
     {
       "id": "statistics.b6",
@@ -3477,12 +3539,14 @@
         "statistics.regression"
       ],
       "concept_ids": [
+        "stat.infer.effect_size",
         "stat.infer.paired",
+        "stat.infer.power",
         "stat.infer.ttest_two",
         "stat.infer.type_error",
         "stat.reg.least_squares"
       ],
-      "concept_count": 4
+      "concept_count": 6
     },
     {
       "id": "statistics.b7",
@@ -3497,9 +3561,11 @@
       ],
       "concept_ids": [
         "stat.infer.regression_slope",
+        "stat.reg.multiple",
+        "stat.reg.prediction_interval",
         "stat.reg.residual"
       ],
-      "concept_count": 2
+      "concept_count": 4
     },
     {
       "id": "statistics.b8",

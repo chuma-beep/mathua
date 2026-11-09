@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Power and the two errors",
+    "section": "Power and the two errors",
+    "subgoals": [
+      "Define a Type II error",
+      "Write power as one minus beta",
+      "Explain the trade with alpha"
+    ]
+  },
+  {
+    "label": "Recovering beta",
+    "section": "Recovering beta",
+    "subgoals": [
+      "Subtract power from one",
+      "Interpret the miss probability",
+      "Name the alternative that the power refers to"
+    ]
+  },
+  {
+    "label": "Power from a critical region",
+    "section": "Power from a critical region",
+    "subgoals": [
+      "Standardize the critical value under the alternative",
+      "Read the upper-tail probability",
+      "Interpret a negative standardized distance"
+    ]
+  }
+]

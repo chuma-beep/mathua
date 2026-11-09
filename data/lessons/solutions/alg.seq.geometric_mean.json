@@ -1,0 +1,15 @@
+{
+  "concept": "alg.seq.geometric_mean",
+  "setup": "A geometric sequence runs from [[first]] to [[last]] with [[count]] means inserted between the endpoints.",
+  "steps": [
+    {
+      "fact": "ratio",
+      "say": "The terms have the constant ratio [[ratio]]."
+    },
+    {
+      "fact": "mean_value",
+      "say": "Multiplying by the ratio gives the mean [[mean_value]]."
+    }
+  ],
+  "answer": "The common ratio is [[ratio]], and the mean value is [[mean_value]]."
+}

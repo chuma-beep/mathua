@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Term-by-term differentiation",
+    "section": "Term-by-term differentiation",
+    "subgoals": [
+      "Differentiate one term",
+      "Multiply by the exponent",
+      "Read the requested coefficient"
+    ]
+  },
+  {
+    "label": "The geometric series",
+    "section": "The geometric series",
+    "subgoals": [
+      "Differentiate the geometric series",
+      "Identify the squared denominator",
+      "Read the linear coefficient"
+    ]
+  },
+  {
+    "label": "The even series",
+    "section": "The even series",
+    "subgoals": [
+      "Differentiate the even series",
+      "Keep only odd powers",
+      "Read the even coefficient"
+    ]
+  }
+]

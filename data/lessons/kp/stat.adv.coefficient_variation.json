@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Spread relative to the mean",
+    "section": "Spread relative to the mean",
+    "subgoals": [
+      "Define the coefficient of variation",
+      "Divide the standard deviation by the mean",
+      "Convert the ratio to a percentage"
+    ]
+  },
+  {
+    "label": "Recovering the standard deviation",
+    "section": "Recovering the standard deviation",
+    "subgoals": [
+      "Rearrange the percentage formula",
+      "Multiply the mean by the coefficient",
+      "Divide by 100"
+    ]
+  },
+  {
+    "label": "Comparing two samples",
+    "section": "Comparing two samples",
+    "subgoals": [
+      "Compute each coefficient",
+      "Form the ratio",
+      "Interpret a ratio above or below one"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "One mean between two terms",
+    "section": "One mean between two terms",
+    "subgoals": [
+      "Multiply the two positive endpoints",
+      "Take the square root of the product",
+      "Confirm equal ratios on both sides"
+    ]
+  },
+  {
+    "label": "The common ratio",
+    "section": "The common ratio",
+    "subgoals": [
+      "Divide the last term by the first",
+      "Take the root one higher than the mean count",
+      "Check that the ratio reaches the final term"
+    ]
+  },
+  {
+    "label": "The later means",
+    "section": "The later means",
+    "subgoals": [
+      "Multiply the first term by a power of the ratio",
+      "Count multiplicative steps rather than means",
+      "Verify the last mean leads to the endpoint"
+    ]
+  }
+]

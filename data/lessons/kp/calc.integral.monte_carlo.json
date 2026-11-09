@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The sample-mean estimator",
+    "section": "The sample-mean estimator",
+    "subgoals": [
+      "Average the sample values",
+      "Multiply by the interval length",
+      "Report the estimate"
+    ]
+  },
+  {
+    "label": "Estimating pi",
+    "section": "Estimating pi",
+    "subgoals": [
+      "Count the points inside the quarter circle",
+      "Form the ratio 4m/N",
+      "Round to the requested precision"
+    ]
+  },
+  {
+    "label": "Standard error",
+    "section": "Standard error",
+    "subgoals": [
+      "Identify the sample deviation",
+      "Divide by the square root of N",
+      "Round to the requested precision"
+    ]
+  }
+]

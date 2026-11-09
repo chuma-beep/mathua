@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The determinant",
+    "section": "The determinant",
+    "subgoals": [
+      "Compute a d minus b c",
+      "Reject a singular coefficient matrix",
+      "Read the determinant before inverting"
+    ]
+  },
+  {
+    "label": "The x-coordinate",
+    "section": "The x-coordinate",
+    "subgoals": [
+      "Write the inverse of a two by two matrix",
+      "Multiply the inverse by the constant vector",
+      "Divide the first numerator by the determinant"
+    ]
+  },
+  {
+    "label": "The y-coordinate",
+    "section": "The y-coordinate",
+    "subgoals": [
+      "Use the second row of the inverse",
+      "Subtract the second cross product",
+      "Check both coordinates in the original system"
+    ]
+  }
+]

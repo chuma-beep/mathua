@@ -1,0 +1,19 @@
+{
+  "concept": "alg.func.operations",
+  "setup": "The functions are \\(f(x) = [[f]]\\) and \\(g(x) = [[g]]\\), evaluated at \\(x = [[x]]\\).",
+  "steps": [
+    {
+      "fact": "f_value",
+      "say": "Substituting the input gives \\(f([[x]]) = [[f_value]]\\)."
+    },
+    {
+      "fact": "g_value",
+      "say": "The second function gives \\(g([[x]]) = [[g_value]]\\)."
+    },
+    {
+      "fact": "sum",
+      "say": "Combining the two values gives a sum of [[sum]], a difference of [[difference]] and a product of [[product]]."
+    }
+  ],
+  "answer": "At \\(x = [[x]]\\), the sum is [[sum]], the difference is [[difference]] and the product is [[product]]."
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Counting sequences",
+    "section": "Counting sequences",
+    "subgoals": [
+      "Write the multinomial coefficient",
+      "Divide by each category factorial",
+      "Evaluate a three-category count"
+    ]
+  },
+  {
+    "label": "Expected counts",
+    "section": "Expected counts",
+    "subgoals": [
+      "Multiply n by the category probability",
+      "State the variance of a count",
+      "Connect the mean to a goodness-of-fit test"
+    ]
+  },
+  {
+    "label": "The multinomial probability",
+    "section": "The multinomial probability",
+    "subgoals": [
+      "Multiply the coefficient by one sequence probability",
+      "Raise each category probability to its count",
+      "Reduce the resulting fraction"
+    ]
+  }
+]

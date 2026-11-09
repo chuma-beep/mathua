@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Abel test",
+    "section": "The Abel test",
+    "subgoals": [
+      "State the two hypotheses",
+      "Multiply by the factor",
+      "Conclude convergence"
+    ]
+  },
+  {
+    "label": "Bounded monotone factors",
+    "section": "Bounded monotone factors",
+    "subgoals": [
+      "Check boundedness",
+      "Check monotonicity",
+      "Decide whether the test applies"
+    ]
+  },
+  {
+    "label": "Checking the hypothesis",
+    "section": "Checking the hypothesis",
+    "subgoals": [
+      "Separate the two conditions",
+      "Reject an unbounded factor",
+      "Reject an oscillating factor"
+    ]
+  }
+]

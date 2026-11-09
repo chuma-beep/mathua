@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Term-by-term integration",
+    "section": "Term-by-term integration",
+    "subgoals": [
+      "Integrate one term",
+      "Divide by the new exponent",
+      "Read the requested coefficient"
+    ]
+  },
+  {
+    "label": "The logarithmic series",
+    "section": "The logarithmic series",
+    "subgoals": [
+      "Integrate the geometric series",
+      "Identify the logarithm",
+      "Read the coefficient of x^m"
+    ]
+  },
+  {
+    "label": "The inverse hyperbolic series",
+    "section": "The inverse hyperbolic series",
+    "subgoals": [
+      "Integrate the even geometric series",
+      "Recognise the inverse hyperbolic function",
+      "Read the odd coefficient"
+    ]
+  }
+]

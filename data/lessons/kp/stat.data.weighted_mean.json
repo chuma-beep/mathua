@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The weighted average",
+    "section": "The weighted average",
+    "subgoals": [
+      "State the weighted-mean formula",
+      "Multiply each value by its weight",
+      "Divide by the total weight"
+    ]
+  },
+  {
+    "label": "Solving for a missing weight or value",
+    "section": "Solving for a missing weight or value",
+    "subgoals": [
+      "Rearrange the weighted-mean equation",
+      "Subtract the known weighted total",
+      "Divide by the missing component weight"
+    ]
+  },
+  {
+    "label": "Weighted and unweighted means compared",
+    "section": "Weighted and unweighted means compared",
+    "subgoals": [
+      "Compute both means",
+      "Subtract the unweighted mean",
+      "Read the sign as which values the weights favour"
+    ]
+  }
+]

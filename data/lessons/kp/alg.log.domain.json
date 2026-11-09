@@ -1,0 +1,29 @@
+[
+  {
+    "label": "A shifted argument",
+    "section": "A shifted argument",
+    "subgoals": [
+      "Set the argument greater than zero",
+      "Solve the resulting linear inequality",
+      "Find the smallest integer in the domain"
+    ]
+  },
+  {
+    "label": "A reversed argument",
+    "section": "A reversed argument",
+    "subgoals": [
+      "Write the reversed argument inequality",
+      "Reverse the inequality when dividing by a negative",
+      "Find the largest integer in the domain"
+    ]
+  },
+  {
+    "label": "A quadratic argument",
+    "section": "A quadratic argument",
+    "subgoals": [
+      "Solve a quadratic greater than a constant",
+      "Exclude the interval between the roots",
+      "Round the square root up to the next integer"
+    ]
+  }
+]

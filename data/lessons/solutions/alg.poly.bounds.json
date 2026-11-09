@@ -1,0 +1,19 @@
+{
+  "concept": "alg.poly.bounds",
+  "setup": "The polynomial is \\(P(x) = [[poly]]\\), with leading coefficient [[leading]] and constant term [[constant]].",
+  "steps": [
+    {
+      "fact": "positive_divisors",
+      "say": "Every integer root divides the constant term [[constant]], which has [[positive_divisors]] positive divisors."
+    },
+    {
+      "fact": "cauchy_bound",
+      "say": "Cauchy's bound is [[cauchy_bound]], so every real root has absolute value below that number."
+    },
+    {
+      "fact": "candidate_total",
+      "say": "The rational root theorem produces [[candidate_total]] signed candidates to test."
+    }
+  ],
+  "answer": "The candidate count is [[candidate_total]] and the root bound is [[cauchy_bound]]."
+}

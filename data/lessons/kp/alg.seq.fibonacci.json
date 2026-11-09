@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The recurrence",
+    "section": "The recurrence",
+    "subgoals": [
+      "Start from the two initial ones",
+      "Add the previous two terms for each step",
+      "Reach a requested index by repeated addition"
+    ]
+  },
+  {
+    "label": "Neighbouring terms",
+    "section": "Neighbouring terms",
+    "subgoals": [
+      "Add two consecutive terms to get the next",
+      "Subtract to recover the previous term",
+      "Extend a table in either direction"
+    ]
+  },
+  {
+    "label": "The sum of the first n terms",
+    "section": "The sum of the first n terms",
+    "subgoals": [
+      "Apply the identity F(n+2) minus one",
+      "Check a small prefix by direct addition",
+      "Relate the identity to the recurrence"
+    ]
+  }
+]

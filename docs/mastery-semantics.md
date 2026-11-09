@@ -43,7 +43,7 @@ identical repetitions of the same test.
 
 ### Answers required
 
-Measured over `web/next-app/data/concepts.json` (1550 concepts, all with a threshold):
+Measured over `web/next-app/data/concepts.json` (1600 concepts, all with a threshold):
 
 | Answers for MASTERED | Concepts | Share |
 |---|---|---|

@@ -3037,6 +3037,261 @@
     "subdomain": "algebra.poly"
   },
   {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.poly.reciprocal",
+    "label": "Reciprocal polynomials",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.poly.vieta"
+    ],
+    "subdomain": "algebra.polynomials"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.poly.bounds",
+    "label": "Upper and lower bounds for roots",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.poly.roots"
+    ],
+    "subdomain": "algebra.polynomials"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.func.operations",
+    "label": "Combining functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.func.notation"
+    ],
+    "subdomain": "algebra.func"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.func.inverse_graph",
+    "label": "Graphs of inverse functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.func.inverse"
+    ],
+    "subdomain": "algebra.func"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.func.composition_graph",
+    "label": "Composition from graphs",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.func.composite",
+      "alg.func.graph_analysis"
+    ],
+    "subdomain": "algebra.func"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.exp.regression",
+    "label": "Exponential regression",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.regression.linear",
+      "alg.exp.from_points"
+    ],
+    "subdomain": "algebra.linear"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.log.domain",
+    "label": "Domain of logarithmic functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.log.concept",
+      "alg.func.domain"
+    ],
+    "subdomain": "algebra.logarithms"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.log.base_equation",
+    "label": "Solving for a logarithm's base",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.eq.logarithmic"
+    ],
+    "subdomain": "algebra.logarithms"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.seq.arithmetic_mean",
+    "label": "Arithmetic means between terms",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.seq.arithmetic"
+    ],
+    "subdomain": "algebra.sequences"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.seq.geometric_mean",
+    "label": "Geometric means between terms",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.seq.geometric"
+    ],
+    "subdomain": "algebra.sequences"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.seq.fibonacci",
+    "label": "Fibonacci and Binet's formula",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.seq.recursive"
+    ],
+    "subdomain": "algebra.sequences"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.conic.intersection",
+    "label": "Line and conic intersections",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.conic.parabola"
+    ],
+    "subdomain": "algebra.conics"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.conic.translation",
+    "label": "Translated conic equations",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.conic.circle"
+    ],
+    "subdomain": "algebra.conics"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.conic.tangent",
+    "label": "Tangent lines to conics",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.conic.classify"
+    ],
+    "subdomain": "algebra.conics"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.systems.matrix_inverse",
+    "label": "Solving systems with inverse matrices",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.systems.matrices"
+    ],
+    "subdomain": "algebra.systems"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.regression.quadratic",
+    "label": "Quadratic regression",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.regression.linear"
+    ],
+    "subdomain": "algebra.linear"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.regression.power",
+    "label": "Power regression",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.regression.linear"
+    ],
+    "subdomain": "algebra.linear"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.regression.logarithmic",
+    "label": "Logarithmic regression",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.regression.linear"
+    ],
+    "subdomain": "algebra.linear"
+  },
+  {
     "domain": "arithmetic",
     "grading_type": "numeric",
     "id": "arith.add.single",
@@ -6540,6 +6795,258 @@
     "prerequisites": [
       "calc.integral.substitution",
       "calc.integral.irrational"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.cauchy_condensation",
+    "label": "Cauchy condensation test",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.positive_terms"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.raabe",
+    "label": "Raabe's test",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.ratio_test"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.bertrand",
+    "label": "Bertrand's test",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.p_series"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.kummer",
+    "label": "Kummer's test",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.positive_terms"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.gauss",
+    "label": "Gauss's test",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.raabe"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "multiple_choice",
+    "id": "calc.series.abel",
+    "label": "Abel's test",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.alternating"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "multiple_choice",
+    "id": "calc.series.uniform_convergence",
+    "label": "Uniform convergence on a set",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.function_series"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.euler_transform",
+    "label": "Euler's transformation of series",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.alternating"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.power_integration",
+    "label": "Integrating power series",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.power"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.power_differentiation",
+    "label": "Differentiating power series",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.power"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.lagrange_inversion",
+    "label": "Lagrange inversion",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.taylor"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.romberg",
+    "label": "Romberg extrapolation",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.trapezoid"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.monte_carlo",
+    "label": "Monte Carlo quadrature",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.definite"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.gauss_legendre",
+    "label": "Gauss-Legendre quadrature",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.simpson"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.fresnel",
+    "label": "Fresnel integrals",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.improper"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.elliptic",
+    "label": "Elliptic integrals",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.trig_substitution"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.wallis",
+    "label": "Wallis integrals",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.trig_integrals"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.centroid_curve",
+    "label": "Centroid of a curve",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.center_mass"
     ],
     "subdomain": "calculus.integrals"
   },
@@ -20801,6 +21308,203 @@
     ],
     "subdomain": "statistics.regression",
     "variants": []
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.data.weighted_mean",
+    "label": "Weighted mean",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.data.mean"
+    ],
+    "subdomain": "statistics.central_tendency"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.adv.coefficient_variation",
+    "label": "Coefficient of variation",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.spread.std_dev"
+    ],
+    "subdomain": "statistics.spread"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "multiple_choice",
+    "id": "stat.prob.independence",
+    "label": "Independent events",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.prob.conditional"
+    ],
+    "subdomain": "statistics.probability"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "multiple_choice",
+    "id": "stat.prob.mutually_exclusive",
+    "label": "Mutually exclusive events",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.prob.compound"
+    ],
+    "subdomain": "statistics.probability"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.dist.negative_binomial",
+    "label": "Negative binomial distribution",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.dist.binomial"
+    ],
+    "subdomain": "statistics.distributions"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.dist.multinomial",
+    "label": "Multinomial distribution",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.dist.binomial"
+    ],
+    "subdomain": "statistics.distributions"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.dist.lognormal",
+    "label": "Lognormal distribution",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.dist.normal"
+    ],
+    "subdomain": "statistics.distributions"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.infer.ci_mean_t",
+    "label": "Confidence interval for a mean with t",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.dist.student_t",
+      "stat.infer.confidence"
+    ],
+    "subdomain": "statistics.inference"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.infer.ci_proportion",
+    "label": "Confidence interval for a proportion",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.infer.proportion"
+    ],
+    "subdomain": "statistics.inference"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.infer.power",
+    "label": "Power of a hypothesis test",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.infer.type_error"
+    ],
+    "subdomain": "statistics.inference"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.infer.effect_size",
+    "label": "Effect size",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.infer.ttest"
+    ],
+    "subdomain": "statistics.inference"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.reg.multiple",
+    "label": "Multiple regression",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.reg.least_squares"
+    ],
+    "subdomain": "statistics.regression"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.reg.prediction_interval",
+    "label": "Prediction intervals",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.reg.least_squares"
+    ],
+    "subdomain": "statistics.regression"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.test.kruskal_wallis",
+    "label": "Kruskal-Wallis test",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.infer.nonparametric"
+    ],
+    "subdomain": "statistics.inference"
   },
   {
     "domain": "topology",
