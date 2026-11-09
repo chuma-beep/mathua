@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The shift",
+    "section": "The shift",
+    "subgoals": [
+      "Explain the role of the shift",
+      "Target the smallest eigenvalue",
+      "Choose a shift near an eigenvalue"
+    ]
+  },
+  {
+    "label": "Convergence",
+    "section": "Convergence",
+    "subgoals": [
+      "Relate convergence to distance",
+      "Explain a tie",
+      "Choose a separating shift"
+    ]
+  },
+  {
+    "label": "The power method connection",
+    "section": "The power method connection",
+    "subgoals": [
+      "Compare power and inverse power",
+      "Explain the ordering reversal",
+      "State the starting-vector condition"
+    ]
+  }
+]

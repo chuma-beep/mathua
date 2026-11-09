@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The defining sum",
+    "section": "The defining sum",
+    "subgoals": [
+      "State the constant sum",
+      "Identify the major axis",
+      "Use the definition of an ellipse"
+    ]
+  },
+  {
+    "label": "Finding c",
+    "section": "Finding c",
+    "subgoals": [
+      "Apply c squared equals a squared minus b squared",
+      "Locate the foci",
+      "Choose the correct axis"
+    ]
+  },
+  {
+    "label": "Checking the numbers",
+    "section": "Checking the numbers",
+    "subgoals": [
+      "Use a Pythagorean triple",
+      "Check that c is less than a",
+      "Interpret the focus coordinates"
+    ]
+  }
+]

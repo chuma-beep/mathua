@@ -1,0 +1,15 @@
+{
+  "concept": "alg.conic.ellipse_foci",
+  "setup": "The ellipse has \\(a = [[a]]\\) and \\(b = [[b]]\\).",
+  "steps": [
+    {
+      "fact": "c",
+      "say": "The focal distance satisfies \\(c^2 = a^2 - b^2 = [[a]]^2 - [[b]]^2\\), so \\(c = [[c]]\\)."
+    },
+    {
+      "fact": "sum",
+      "say": "The sum of the distances from any point to the two foci is \\(2a = [[sum]]\\)."
+    }
+  ],
+  "answer": "The foci are \\(([[c]], 0)\\) and \\((-[[c]], 0)\\), and the constant distance sum is [[sum]]."
+}

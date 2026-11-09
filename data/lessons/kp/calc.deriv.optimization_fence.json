@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Writing the constraint",
+    "section": "Writing the constraint",
+    "subgoals": [
+      "Translate the fence constraint",
+      "Choose a variable",
+      "Write the remaining side"
+    ]
+  },
+  {
+    "label": "The area function",
+    "section": "The area function",
+    "subgoals": [
+      "Write area as a function of one variable",
+      "Recognize a downward parabola",
+      "Find the vertex"
+    ]
+  },
+  {
+    "label": "The optimal dimensions",
+    "section": "The optimal dimensions",
+    "subgoals": [
+      "Solve the derivative equation",
+      "Compute the other side",
+      "State the maximum area"
+    ]
+  }
+]

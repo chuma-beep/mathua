@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The standard form",
+    "section": "The standard form",
+    "subgoals": [
+      "Identify p from the equation",
+      "Relate p to the focus",
+      "Recognize the direction of opening"
+    ]
+  },
+  {
+    "label": "Focus and directrix",
+    "section": "Focus and directrix",
+    "subgoals": [
+      "Write the focus",
+      "Write the directrix",
+      "Use the equidistance definition"
+    ]
+  },
+  {
+    "label": "The latus rectum",
+    "section": "The latus rectum",
+    "subgoals": [
+      "Compute the latus rectum length",
+      "Locate the chord",
+      "Connect p to the chord length"
+    ]
+  }
+]

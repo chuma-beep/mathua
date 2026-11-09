@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The augmented matrix",
+    "section": "The augmented matrix",
+    "subgoals": [
+      "Build an augmented matrix",
+      "Apply row operations",
+      "Recognize reduced row echelon form"
+    ]
+  },
+  {
+    "label": "Elimination and back substitution",
+    "section": "Elimination and back substitution",
+    "subgoals": [
+      "Eliminate above and below a pivot",
+      "Read the solution",
+      "Track the determinant"
+    ]
+  },
+  {
+    "label": "Singular systems",
+    "section": "Singular systems",
+    "subgoals": [
+      "Detect an inconsistent system",
+      "Detect infinitely many solutions",
+      "Relate singularity to the determinant"
+    ]
+  }
+]

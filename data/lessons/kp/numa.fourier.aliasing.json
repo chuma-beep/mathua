@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Nyquist limit",
+    "section": "The Nyquist limit",
+    "subgoals": [
+      "Define the Nyquist frequency",
+      "State the sampling condition",
+      "Explain ambiguity above Nyquist"
+    ]
+  },
+  {
+    "label": "Folding frequencies",
+    "section": "Folding frequencies",
+    "subgoals": [
+      "Compute an alias frequency",
+      "Explain folding",
+      "Distinguish alias from true frequency"
+    ]
+  },
+  {
+    "label": "Preventing aliasing",
+    "section": "Preventing aliasing",
+    "subgoals": [
+      "Use an anti-aliasing filter",
+      "Raise the sampling rate",
+      "Explain why post-processing cannot undo aliasing"
+    ]
+  }
+]

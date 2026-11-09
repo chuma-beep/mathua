@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Sign and direction",
+    "section": "Sign and direction",
+    "subgoals": [
+      "Distinguish velocity from speed",
+      "Find a turning point",
+      "Interpret the sign"
+    ]
+  },
+  {
+    "label": "Splitting the integral",
+    "section": "Splitting the integral",
+    "subgoals": [
+      "Split at the zero",
+      "Integrate each piece",
+      "Compare distance with displacement"
+    ]
+  },
+  {
+    "label": "Computing the total",
+    "section": "Computing the total",
+    "subgoals": [
+      "Compute each area",
+      "Add the pieces",
+      "Check the sign of the result"
+    ]
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "concept": "alg.regression.linear",
+  "setup": "The four points are \\(([[x1]], [[y1]])\\), \\(([[x2]], [[y2]])\\), \\(([[x3]], [[y3]])\\) and \\(([[x4]], [[y4]])\\).",
+  "steps": [
+    {
+      "fact": "slope",
+      "say": "The least-squares slope is \\(m = [[slope]]\\)."
+    },
+    {
+      "fact": "intercept",
+      "say": "The line passes through the mean point, so its intercept is \\(b = [[intercept]]\\)."
+    },
+    {
+      "fact": "prediction",
+      "say": "At \\(x = 3\\), the fitted line predicts \\([[prediction]]\\)."
+    }
+  ],
+  "answer": "The fitted line is \\(\\hat y = [[slope]]x + [[intercept]]\\), with prediction \\([[prediction]]\\) at \\(x = 3\\)."
+}

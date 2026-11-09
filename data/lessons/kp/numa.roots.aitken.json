@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The delta-squared correction",
+    "section": "The delta-squared correction",
+    "subgoals": [
+      "Compute first differences",
+      "Compute the second difference",
+      "Apply the acceleration formula"
+    ]
+  },
+  {
+    "label": "Why it works for geometric error",
+    "section": "Why it works for geometric error",
+    "subgoals": [
+      "Recognize geometric error",
+      "Relate the ratio to convergence speed",
+      "Explain the exact limit case"
+    ]
+  },
+  {
+    "label": "When it helps",
+    "section": "When it helps",
+    "subgoals": [
+      "Choose a suitable sequence",
+      "Apply acceleration repeatedly",
+      "Recognize unstable differences"
+    ]
+  }
+]

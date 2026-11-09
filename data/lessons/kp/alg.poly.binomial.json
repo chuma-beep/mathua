@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Counting the terms",
+    "section": "Counting the terms",
+    "subgoals": [
+      "Identify the binomial coefficient for a term",
+      "Use symmetry of the coefficients",
+      "Count the terms in an expansion"
+    ]
+  },
+  {
+    "label": "The constant term and the sum",
+    "section": "The constant term and the sum",
+    "subgoals": [
+      "Compute the constant term",
+      "Compute the sum of all coefficients",
+      "Explain why setting x = 1 gives the sum"
+    ]
+  },
+  {
+    "label": "Reading one coefficient",
+    "section": "Reading one coefficient",
+    "subgoals": [
+      "Apply the coefficient formula",
+      "Keep exponents adding to n",
+      "Check a coefficient against a small expansion"
+    ]
+  }
+]

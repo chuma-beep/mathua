@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The transform",
+    "section": "The transform",
+    "subgoals": [
+      "Define the DFT",
+      "Interpret X zero",
+      "Read the DC level"
+    ]
+  },
+  {
+    "label": "Special coefficients",
+    "section": "Special coefficients",
+    "subgoals": [
+      "Compute the Nyquist coefficient",
+      "Use the alternating sum",
+      "Explain conjugate symmetry"
+    ]
+  },
+  {
+    "label": "Computational cost",
+    "section": "Computational cost",
+    "subgoals": [
+      "Count direct multiplications",
+      "State the FFT saving",
+      "Distinguish transform from algorithm"
+    ]
+  }
+]

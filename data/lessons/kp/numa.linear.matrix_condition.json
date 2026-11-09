@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Singular values",
+    "section": "Singular values",
+    "subgoals": [
+      "Define the condition number",
+      "Explain the lower bound",
+      "Recognize a singular matrix"
+    ]
+  },
+  {
+    "label": "The diagonal case",
+    "section": "The diagonal case",
+    "subgoals": [
+      "Compute the condition number of a diagonal matrix",
+      "Use magnitudes, not signs",
+      "Compare entries"
+    ]
+  },
+  {
+    "label": "Digits of accuracy",
+    "section": "Digits of accuracy",
+    "subgoals": [
+      "Relate the condition number to lost digits",
+      "Distinguish problem from algorithm",
+      "State the rule as approximate"
+    ]
+  }
+]

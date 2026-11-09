@@ -1,0 +1,29 @@
+[
+  {
+    "label": "When the sum exists",
+    "section": "When the sum exists",
+    "subgoals": [
+      "State the convergence condition",
+      "Use the sum formula",
+      "Recognize a divergent series"
+    ]
+  },
+  {
+    "label": "Finding the ratio",
+    "section": "Finding the ratio",
+    "subgoals": [
+      "Solve for the common ratio",
+      "Check the convergence condition",
+      "Interpret an impossible ratio"
+    ]
+  },
+  {
+    "label": "Finding the first term",
+    "section": "Finding the first term",
+    "subgoals": [
+      "Solve for the first term",
+      "Use the ratio to find a",
+      "Check the result by summing"
+    ]
+  }
+]

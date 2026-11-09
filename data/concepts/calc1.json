@@ -1253,5 +1253,201 @@
       "streak": 10,
       "avg_time_seconds": 24
     }
+  },
+  {
+    "id": "calc.limit.conjugate",
+    "label": "Limits by conjugates",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.limit.algebra"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "calc.limit.complex_fraction",
+    "label": "Limits of complex fractions",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.limit.algebra"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "calc.limit.absolute_value",
+    "label": "Limits with absolute values",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.limit.one_sided"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "calc.deriv.normal_line",
+    "label": "Slopes of normal lines",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.tangent_line"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "calc.deriv.piecewise",
+    "label": "Derivatives of piecewise functions",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.diff_continuity"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "calc.deriv.optimization_fence",
+    "label": "Optimization: fencing",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.optimization"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "calc.deriv.optimization_revenue",
+    "label": "Optimization: revenue",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.optimization"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "calc.deriv.related_rates_ladder",
+    "label": "Related rates: sliding ladder",
+    "domain": "calc1",
+    "subdomain": "calculus.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.related_rates"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "calc.deriv.related_rates_cone",
+    "label": "Related rates: conical tank",
+    "domain": "calc1",
+    "subdomain": "calculus.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.related_rates"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "calc.integral.total_distance",
+    "label": "Total distance from velocity",
+    "domain": "calc1",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.definite"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "calc.integral.piecewise",
+    "label": "Integrals of piecewise functions",
+    "domain": "calc1",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.definite"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "calc.integral.absolute_value",
+    "label": "Integrals of absolute values",
+    "domain": "calc1",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.definite"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "calc.integral.accumulation",
+    "label": "Accumulation functions",
+    "domain": "calc1",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.ftc"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "calc.integral.motion",
+    "label": "Motion problems with integrals",
+    "domain": "calc1",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.definite"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
   }
 ]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Multiplicity from factors",
+    "section": "Multiplicity from factors",
+    "subgoals": [
+      "Read multiplicity from an exponent",
+      "Distinguish even and odd multiplicity",
+      "Predict crossing or touching"
+    ]
+  },
+  {
+    "label": "Degree from multiplicity",
+    "section": "Degree from multiplicity",
+    "subgoals": [
+      "Add multiplicities",
+      "Compute the degree of a product",
+      "Ignore constant factors"
+    ]
+  },
+  {
+    "label": "Distinct zeros",
+    "section": "Distinct zeros",
+    "subgoals": [
+      "List distinct zeros",
+      "Separate distinct zeros from multiplicity",
+      "Count the locations on the axis"
+    ]
+  }
+]

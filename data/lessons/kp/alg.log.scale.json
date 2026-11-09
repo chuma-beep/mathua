@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Orders of magnitude",
+    "section": "Orders of magnitude",
+    "subgoals": [
+      "Count orders of magnitude",
+      "Use base 10",
+      "Distinguish ratios from differences"
+    ]
+  },
+  {
+    "label": "Decades and factors",
+    "section": "Decades and factors",
+    "subgoals": [
+      "Convert decades to a factor",
+      "Convert a factor to decades",
+      "Read a scale change as multiplication"
+    ]
+  },
+  {
+    "label": "Reading a logarithm",
+    "section": "Reading a logarithm",
+    "subgoals": [
+      "Evaluate a base-10 logarithm",
+      "Relate logarithms to exponents",
+      "Place a value between powers of ten"
+    ]
+  }
+]

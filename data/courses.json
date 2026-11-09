@@ -420,7 +420,16 @@
       "alg.func.piecewise_graph",
       "alg.systems.graphing",
       "alg.systems.cramer",
-      "alg.poly.remainder"
+      "alg.poly.remainder",
+      "alg.poly.binomial",
+      "alg.seq.geometric_infinite",
+      "alg.exp.from_points",
+      "alg.log.scale",
+      "alg.regression.linear",
+      "alg.conic.parabola_focus",
+      "alg.conic.ellipse_foci",
+      "alg.ineq.absolute_graph",
+      "alg.poly.zeros_multiplicity"
     ]
   },
   {
@@ -554,7 +563,21 @@
       "calc.integral.symmetry",
       "calc.limit.trig",
       "calc.limit.piecewise",
-      "calc.limit.continuity_interval"
+      "calc.limit.continuity_interval",
+      "calc.limit.conjugate",
+      "calc.limit.complex_fraction",
+      "calc.limit.absolute_value",
+      "calc.deriv.normal_line",
+      "calc.deriv.piecewise",
+      "calc.deriv.optimization_fence",
+      "calc.deriv.optimization_revenue",
+      "calc.deriv.related_rates_ladder",
+      "calc.deriv.related_rates_cone",
+      "calc.integral.total_distance",
+      "calc.integral.piecewise",
+      "calc.integral.absolute_value",
+      "calc.integral.accumulation",
+      "calc.integral.motion"
     ]
   },
   {
@@ -1358,7 +1381,24 @@
       "numa.least_squares.gauss_newton",
       "numa.errors.backward",
       "numa.errors.floating",
-      "numa.roots.brent"
+      "numa.roots.brent",
+      "numa.roots.aitken",
+      "numa.roots.muller",
+      "numa.interp.barycentric",
+      "numa.interp.runge",
+      "numa.interp.piecewise_linear",
+      "numa.integration.boole",
+      "numa.integration.gauss_kronrod",
+      "numa.linear.gauss_jordan",
+      "numa.linear.thomas",
+      "numa.linear.matrix_condition",
+      "numa.linear.inverse_power",
+      "numa.fourier.dft",
+      "numa.fourier.aliasing",
+      "numa.approx.pade",
+      "numa.diff.finite",
+      "numa.diff.richardson",
+      "numa.optimization.line_search"
     ]
   },
   {

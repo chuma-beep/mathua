@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Between two nodes",
+    "section": "Between two nodes",
+    "subgoals": [
+      "Interpolate at a point",
+      "Use the midpoint average",
+      "Write the segment equation"
+    ]
+  },
+  {
+    "label": "Slope on a segment",
+    "section": "Slope on a segment",
+    "subgoals": [
+      "Compute a segment slope",
+      "Interpret a slope change",
+      "Explain the corner at a node"
+    ]
+  },
+  {
+    "label": "Finding the interval",
+    "section": "Finding the interval",
+    "subgoals": [
+      "Locate the containing interval",
+      "Evaluate the correct segment",
+      "Explain locality"
+    ]
+  }
+]

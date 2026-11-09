@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Multiplying by the conjugate",
+    "section": "Multiplying by the conjugate",
+    "subgoals": [
+      "Form the conjugate",
+      "Multiply numerator and denominator",
+      "Simplify the difference of squares"
+    ]
+  },
+  {
+    "label": "Cancelling the zero factor",
+    "section": "Cancelling the zero factor",
+    "subgoals": [
+      "Cancel the common factor",
+      "Evaluate the simplified limit",
+      "Explain the removable discontinuity"
+    ]
+  },
+  {
+    "label": "The one-sided form",
+    "section": "The one-sided form",
+    "subgoals": [
+      "Handle a restricted domain",
+      "Compute a one-sided limit",
+      "Recognize the conjugate pattern"
+    ]
+  }
+]

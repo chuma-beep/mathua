@@ -738,5 +738,243 @@
       "streak": 10,
       "avg_time_seconds": 28
     }
+  },
+  {
+    "id": "numa.roots.aitken",
+    "label": "Aitken's Δ² acceleration",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.roots",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.roots.secant"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "numa.roots.muller",
+    "label": "Muller's method",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.roots",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.roots.secant"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "numa.interp.barycentric",
+    "label": "Barycentric interpolation",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.interp",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.interp.lagrange"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "numa.interp.runge",
+    "label": "The Runge phenomenon",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.interp",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.interp.chebyshev"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "numa.interp.piecewise_linear",
+    "label": "Piecewise linear interpolation",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.interp",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.interp.lagrange"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "numa.integration.boole",
+    "label": "Boole's rule",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.integration",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.integration.simpson"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "numa.integration.gauss_kronrod",
+    "label": "Gauss-Kronrod quadrature",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.integration",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.integration.gauss"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "numa.linear.gauss_jordan",
+    "label": "Gauss-Jordan elimination",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.linear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.linear.elimination"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "numa.linear.thomas",
+    "label": "The Thomas algorithm",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.linear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.linear.lu"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "numa.linear.matrix_condition",
+    "label": "The condition number of a matrix",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.linear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.errors.conditioning"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "numa.linear.inverse_power",
+    "label": "Inverse power iteration",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.linear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.linear.power"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "numa.fourier.dft",
+    "label": "The discrete Fourier transform",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.fourier",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.fourier.fft"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "numa.fourier.aliasing",
+    "label": "Aliasing",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.fourier",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.fourier.fft"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "numa.approx.pade",
+    "label": "Padé approximants",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.approx",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.errors.taylor"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "numa.diff.finite",
+    "label": "Finite differences for numerical derivatives",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.diff",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.errors.taylor"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "numa.diff.richardson",
+    "label": "Richardson extrapolation",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.diff",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.integration.romberg"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
+  },
+  {
+    "id": "numa.optimization.line_search",
+    "label": "Line search",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.optimization",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.errors.conditioning"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 26.0
+    }
   }
 ]

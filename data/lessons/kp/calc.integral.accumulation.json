@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Read an accumulation function",
+      "Use a dummy variable",
+      "Explain the effect of the starting point"
+    ]
+  },
+  {
+    "label": "The derivative",
+    "section": "The derivative",
+    "subgoals": [
+      "Apply the Fundamental Theorem",
+      "Differentiate an accumulation function",
+      "Evaluate at a point"
+    ]
+  },
+  {
+    "label": "Solving for an endpoint",
+    "section": "Solving for an endpoint",
+    "subgoals": [
+      "Compute the antiderivative",
+      "Solve for the endpoint",
+      "Check the domain"
+    ]
+  }
+]

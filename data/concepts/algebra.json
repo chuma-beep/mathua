@@ -2065,5 +2065,131 @@
       "streak": 10,
       "avg_time_seconds": 18.0
     }
+  },
+  {
+    "id": "alg.poly.binomial",
+    "label": "The binomial theorem",
+    "domain": "algebra",
+    "subdomain": "algebra.poly",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.poly.special"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.seq.geometric_infinite",
+    "label": "Infinite geometric series",
+    "domain": "algebra",
+    "subdomain": "algebra.sequences",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.seq.sum_geo"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.exp.from_points",
+    "label": "Exponential functions from two points",
+    "domain": "algebra",
+    "subdomain": "algebra.exponential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.exp.graph"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.log.scale",
+    "label": "Logarithmic scales and orders of magnitude",
+    "domain": "algebra",
+    "subdomain": "algebra.logarithms",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.log.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.regression.linear",
+    "label": "Least-squares regression line",
+    "domain": "algebra",
+    "subdomain": "algebra.linear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.linear.slope_intercept"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.conic.parabola_focus",
+    "label": "Focus and directrix of a parabola",
+    "domain": "algebra",
+    "subdomain": "algebra.conics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.conic.parabola"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.conic.ellipse_foci",
+    "label": "Foci of an ellipse",
+    "domain": "algebra",
+    "subdomain": "algebra.conics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.conic.ellipse"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.ineq.absolute_graph",
+    "label": "Absolute-value inequalities on a number line",
+    "domain": "algebra",
+    "subdomain": "algebra.inequalities",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.ineq.absolute_value"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "alg.poly.zeros_multiplicity",
+    "label": "Zeros and multiplicity",
+    "domain": "algebra",
+    "subdomain": "algebra.poly",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "alg.poly.graph_zeros"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
   }
 ]

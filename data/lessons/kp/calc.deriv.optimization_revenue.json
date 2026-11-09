@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Demand and revenue",
+    "section": "Demand and revenue",
+    "subgoals": [
+      "Write demand as a function of price",
+      "Multiply price by quantity",
+      "Recognize the quadratic"
+    ]
+  },
+  {
+    "label": "The revenue-maximizing price",
+    "section": "The revenue-maximizing price",
+    "subgoals": [
+      "Differentiate revenue",
+      "Solve for the price",
+      "Distinguish revenue from profit"
+    ]
+  },
+  {
+    "label": "Quantity and maximum revenue",
+    "section": "Quantity and maximum revenue",
+    "subgoals": [
+      "Find the optimal quantity",
+      "Compute maximum revenue",
+      "Interpret the trade-off"
+    ]
+  }
+]

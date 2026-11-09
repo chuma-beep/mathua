@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Velocity and position",
+    "section": "Velocity and position",
+    "subgoals": [
+      "Differentiate position",
+      "Interpret velocity",
+      "Recover position from velocity"
+    ]
+  },
+  {
+    "label": "Displacement",
+    "section": "Displacement",
+    "subgoals": [
+      "Compute displacement",
+      "Connect displacement to the integral",
+      "Explain a zero displacement"
+    ]
+  },
+  {
+    "label": "Average velocity",
+    "section": "Average velocity",
+    "subgoals": [
+      "Compute average velocity",
+      "Distinguish it from instantaneous velocity",
+      "Check with a linear example"
+    ]
+  }
+]

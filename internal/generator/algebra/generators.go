@@ -12,6 +12,15 @@ import (
 )
 
 func Register(reg *generator.Registry) {
+	reg.Register("alg.poly.binomial", &binomialGen{})
+	reg.Register("alg.seq.geometric_infinite", &infiniteGeometricGen{})
+	reg.Register("alg.exp.from_points", &expFromPointsGen{})
+	reg.Register("alg.log.scale", &logScaleGen{})
+	reg.Register("alg.regression.linear", &linearRegressionGen{})
+	reg.Register("alg.conic.parabola_focus", &parabolaFocusGen{})
+	reg.Register("alg.conic.ellipse_foci", &ellipseFociGen{})
+	reg.Register("alg.ineq.absolute_graph", &absoluteInequalityGraphGen{})
+	reg.Register("alg.poly.zeros_multiplicity", &zerosMultiplicityGen{})
 	reg.Register("alg.linear.slope", &slopeGen{})
 	reg.Register("alg.linear.slope_intercept", &slopeInterceptGen{})
 	reg.Register("alg.linear.graph", &linearGraphGen{})

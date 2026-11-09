@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The geometric relation",
+    "section": "The geometric relation",
+    "subgoals": [
+      "Write the Pythagorean relation",
+      "Differentiate with respect to time",
+      "Use the constant length"
+    ]
+  },
+  {
+    "label": "Solving for a rate",
+    "section": "Solving for a rate",
+    "subgoals": [
+      "Substitute known values",
+      "Solve for the unknown rate",
+      "Interpret the sign"
+    ]
+  },
+  {
+    "label": "Direction and speed",
+    "section": "Direction and speed",
+    "subgoals": [
+      "Assign signs to the rates",
+      "Relate the speeds",
+      "Check the physical direction"
+    ]
+  }
+]

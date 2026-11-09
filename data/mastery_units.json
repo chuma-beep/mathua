@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1510,
+  "concept_count": 1550,
   "unit_count": 138,
   "units": [
     {
@@ -250,11 +250,12 @@
         "alg.poly.special",
         "alg.poly.synthetic_division",
         "alg.poly.turning_points",
+        "alg.regression.linear",
         "alg.systems.concept",
         "alg.systems.gaussian",
         "alg.systems.substitution"
       ],
-      "concept_count": 39
+      "concept_count": 40
     },
     {
       "id": "algebra.b7",
@@ -305,9 +306,11 @@
         "alg.func.sign",
         "alg.func.transformations",
         "alg.func.variation",
+        "alg.ineq.absolute_graph",
         "alg.ineq.linear_programming",
         "alg.ineq.two_var",
         "alg.linear.intercepts",
+        "alg.poly.binomial",
         "alg.poly.remainder",
         "alg.quad.complete_square",
         "alg.quad.formula",
@@ -327,7 +330,7 @@
         "alg.systems.three_var",
         "alg.systems.word"
       ],
-      "concept_count": 49
+      "concept_count": 51
     },
     {
       "id": "algebra.b8",
@@ -343,6 +346,7 @@
         "algebra.functions",
         "algebra.inequalities",
         "algebra.logarithms",
+        "algebra.poly",
         "algebra.polynomials",
         "algebra.quadratics",
         "algebra.rational",
@@ -351,8 +355,10 @@
       "concept_ids": [
         "alg.conic.classify",
         "alg.conic.ellipse",
+        "alg.conic.ellipse_foci",
         "alg.conic.hyperbola",
         "alg.conic.parabola",
+        "alg.conic.parabola_focus",
         "alg.eq.exponential",
         "alg.eq.polynomial",
         "alg.eq.quadratic_form",
@@ -361,6 +367,7 @@
         "alg.eq.trinomial",
         "alg.exp.compound",
         "alg.exp.evaluate",
+        "alg.exp.from_points",
         "alg.exp.graph",
         "alg.exp.half_life",
         "alg.exp.natural_base",
@@ -375,6 +382,7 @@
         "alg.poly.rational_root",
         "alg.poly.roots",
         "alg.poly.vieta",
+        "alg.poly.zeros_multiplicity",
         "alg.quad.complex",
         "alg.quad.discriminant",
         "alg.quad.parametric",
@@ -388,7 +396,7 @@
         "alg.seq.sum_arith",
         "alg.seq.sum_geo"
       ],
-      "concept_count": 38
+      "concept_count": 42
     },
     {
       "id": "algebra.b9",
@@ -410,9 +418,11 @@
         "alg.log.graph",
         "alg.log.model",
         "alg.log.properties",
+        "alg.log.scale",
+        "alg.seq.geometric_infinite",
         "alg.seq.induction"
       ],
-      "concept_count": 7
+      "concept_count": 9
     },
     {
       "id": "arithmetic.b0",
@@ -595,6 +605,7 @@
         "calc.deriv.definition",
         "calc.deriv.difference_quotient",
         "calc.deriv.epsilon_delta_deriv",
+        "calc.limit.absolute_value",
         "calc.limit.algebra",
         "calc.limit.big_o",
         "calc.limit.continuity",
@@ -612,7 +623,7 @@
         "calc.seq.concept",
         "calc.seq.convergence"
       ],
-      "concept_count": 19
+      "concept_count": 20
     },
     {
       "id": "calc1.b10",
@@ -641,6 +652,7 @@
         "calc.deriv.linear_approx",
         "calc.deriv.mvt",
         "calc.deriv.non_differentiability",
+        "calc.deriv.normal_line",
         "calc.deriv.power_rule",
         "calc.deriv.rate",
         "calc.deriv.rolle",
@@ -648,6 +660,8 @@
         "calc.deriv.tangent_line",
         "calc.integral.indefinite",
         "calc.limit.asymptotes",
+        "calc.limit.complex_fraction",
+        "calc.limit.conjugate",
         "calc.limit.continuity_interval",
         "calc.limit.discontinuity",
         "calc.limit.infinite",
@@ -658,7 +672,7 @@
         "calc.limit.trig",
         "calc.limit.weierstrass"
       ],
-      "concept_count": 30
+      "concept_count": 33
     },
     {
       "id": "calc1.b11",
@@ -688,6 +702,9 @@
         "calc.deriv.newton",
         "calc.deriv.newton_convergence",
         "calc.deriv.optimization",
+        "calc.deriv.optimization_fence",
+        "calc.deriv.optimization_revenue",
+        "calc.deriv.piecewise",
         "calc.deriv.product_rule",
         "calc.deriv.quotient_rule",
         "calc.deriv.second_test",
@@ -697,7 +714,7 @@
         "calc.integral.riemann_sums",
         "calc.vec.parametric_derivative"
       ],
-      "concept_count": 22
+      "concept_count": 25
     },
     {
       "id": "calc1.b12",
@@ -721,13 +738,20 @@
         "calc.deriv.log_diff",
         "calc.deriv.parametric_second",
         "calc.deriv.related_rates",
+        "calc.deriv.related_rates_cone",
+        "calc.deriv.related_rates_ladder",
         "calc.deriv.trig_other",
+        "calc.integral.absolute_value",
+        "calc.integral.accumulation",
         "calc.integral.ftc",
         "calc.integral.initial_value",
+        "calc.integral.motion",
+        "calc.integral.piecewise",
         "calc.integral.properties",
-        "calc.integral.symmetry"
+        "calc.integral.symmetry",
+        "calc.integral.total_distance"
       ],
-      "concept_count": 14
+      "concept_count": 21
     },
     {
       "id": "calc2.b9",
@@ -2475,9 +2499,15 @@
       "depth_min": 0,
       "depth_max": 2,
       "subdomains": [
-        "numerical_analysis.errors"
+        "numerical_analysis.approx",
+        "numerical_analysis.diff",
+        "numerical_analysis.errors",
+        "numerical_analysis.linear",
+        "numerical_analysis.optimization"
       ],
       "concept_ids": [
+        "numa.approx.pade",
+        "numa.diff.finite",
         "numa.errors.absolute",
         "numa.errors.backward",
         "numa.errors.cancellation",
@@ -2485,9 +2515,11 @@
         "numa.errors.floating",
         "numa.errors.roundoff",
         "numa.errors.stability",
-        "numa.errors.taylor"
+        "numa.errors.taylor",
+        "numa.linear.matrix_condition",
+        "numa.optimization.line_search"
       ],
-      "concept_count": 8
+      "concept_count": 12
     },
     {
       "id": "numerical_analysis.b6",
@@ -2516,6 +2548,7 @@
         "numerical_analysis.linear"
       ],
       "concept_ids": [
+        "numa.interp.barycentric",
         "numa.interp.chebyshev",
         "numa.interp.divided_differences",
         "numa.interp.error",
@@ -2523,10 +2556,12 @@
         "numa.interp.least_squares",
         "numa.interp.normal_equations",
         "numa.interp.orthogonal",
+        "numa.interp.piecewise_linear",
+        "numa.interp.runge",
         "numa.interp.splines",
         "numa.linear.least_squares_qr"
       ],
-      "concept_count": 9
+      "concept_count": 12
     },
     {
       "id": "numerical_analysis.b8",
@@ -2543,14 +2578,16 @@
         "numa.fourier.fft",
         "numa.linear.cg",
         "numa.linear.elimination",
+        "numa.linear.gauss_jordan",
         "numa.linear.gauss_seidel",
         "numa.linear.jacobi",
         "numa.linear.lu",
         "numa.linear.pivoting",
         "numa.linear.power",
-        "numa.linear.qr_algorithm"
+        "numa.linear.qr_algorithm",
+        "numa.linear.thomas"
       ],
-      "concept_count": 9
+      "concept_count": 11
     },
     {
       "id": "numerical_analysis.b9",
@@ -2560,14 +2597,18 @@
       "depth_min": 27,
       "depth_max": 28,
       "subdomains": [
+        "numerical_analysis.fourier",
         "numerical_analysis.linear"
       ],
       "concept_ids": [
+        "numa.fourier.aliasing",
+        "numa.fourier.dft",
         "numa.linear.cholesky",
+        "numa.linear.inverse_power",
         "numa.linear.iter_convergence",
         "numa.linear.sor"
       ],
-      "concept_count": 3
+      "concept_count": 6
     },
     {
       "id": "numerical_analysis.b10",
@@ -2603,13 +2644,15 @@
       ],
       "concept_ids": [
         "numa.least_squares.gauss_newton",
+        "numa.roots.aitken",
         "numa.roots.bracketing",
         "numa.roots.horner",
+        "numa.roots.muller",
         "numa.roots.multiple",
         "numa.roots.order",
         "numa.roots.secant"
       ],
-      "concept_count": 6
+      "concept_count": 8
     },
     {
       "id": "numerical_analysis.b12",
@@ -2622,6 +2665,7 @@
         "numerical_analysis.integration"
       ],
       "concept_ids": [
+        "numa.integration.boole",
         "numa.integration.composite",
         "numa.integration.error",
         "numa.integration.gauss",
@@ -2629,7 +2673,7 @@
         "numa.integration.simpson",
         "numa.integration.trapezoid"
       ],
-      "concept_count": 6
+      "concept_count": 7
     },
     {
       "id": "numerical_analysis.b13",
@@ -2637,17 +2681,20 @@
       "domain": "numerical_analysis",
       "band": 13,
       "depth_min": 39,
-      "depth_max": 39,
+      "depth_max": 40,
       "subdomains": [
+        "numerical_analysis.diff",
         "numerical_analysis.integration"
       ],
       "concept_ids": [
+        "numa.diff.richardson",
         "numa.integration.adaptive",
+        "numa.integration.gauss_kronrod",
         "numa.integration.improper",
         "numa.integration.monte_carlo",
         "numa.integration.romberg"
       ],
-      "concept_count": 4
+      "concept_count": 6
     },
     {
       "id": "prealgebra.b0",

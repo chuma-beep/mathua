@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Distance on a number line",
+    "section": "Distance on a number line",
+    "subgoals": [
+      "Read an absolute value as distance",
+      "Translate a less-than inequality",
+      "Distinguish strict from non-strict"
+    ]
+  },
+  {
+    "label": "The interval",
+    "section": "The interval",
+    "subgoals": [
+      "Write the interval",
+      "Identify the center",
+      "Identify the radius"
+    ]
+  },
+  {
+    "label": "Counting integers",
+    "section": "Counting integers",
+    "subgoals": [
+      "Count integers in an interval",
+      "Include both endpoints",
+      "Check with a small example"
+    ]
+  }
+]

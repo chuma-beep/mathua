@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Tridiagonal structure",
+    "section": "Tridiagonal structure",
+    "subgoals": [
+      "Recognize a tridiagonal matrix",
+      "Identify the three diagonals",
+      "Explain the storage saving"
+    ]
+  },
+  {
+    "label": "Forward elimination",
+    "section": "Forward elimination",
+    "subgoals": [
+      "Perform the forward sweep",
+      "Update the right-hand side",
+      "Recognize a zero pivot"
+    ]
+  },
+  {
+    "label": "Back substitution",
+    "section": "Back substitution",
+    "subgoals": [
+      "Solve from the bottom up",
+      "Recover all unknowns",
+      "Compare the cost with general elimination"
+    ]
+  }
+]

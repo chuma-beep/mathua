@@ -1,0 +1,19 @@
+{
+  "concept": "alg.poly.zeros_multiplicity",
+  "setup": "The polynomial is factored into zeros whose multiplicities are \\([[multiplicities]]\\).",
+  "steps": [
+    {
+      "fact": "degree",
+      "say": "The degree is the sum of the multiplicities: \\([[degree]]\\)."
+    },
+    {
+      "fact": "distinct",
+      "say": "The distinct zeros are the roots \\([[roots]]\\), so there are \\([[distinct]]\\) of them."
+    },
+    {
+      "fact": "multiplicities",
+      "say": "The multiplicity of each zero is given by the exponent in its factor."
+    }
+  ],
+  "answer": "The degree is [[degree]], there are [[distinct]] distinct zeros, and their multiplicities are [[multiplicities]]."
+}

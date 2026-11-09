@@ -1,0 +1,19 @@
+{
+  "concept": "alg.poly.binomial",
+  "setup": "The expansion is \\((x + [[a]])^{[[n]]}\\).",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "The binomial theorem gives \\([[n]]+1\\) terms, one for each power of \\(x\\) from 0 to \\([[n]]\\)."
+    },
+    {
+      "fact": "constant",
+      "say": "The constant term is \\([[a]]^{[[n]]} = [[constant]]\\)."
+    },
+    {
+      "fact": "sum",
+      "say": "Setting \\(x = 1\\) sums the coefficients: \\((1 + [[a]])^{[[n]]} = [[sum]]\\)."
+    }
+  ],
+  "answer": "The requested coefficient is \\(\\binom{[[n]]}{k}[[a]]^{[[n]]-k}\\), and the constant term and coefficient sum are [[constant]] and [[sum]]."
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The growth factor",
+    "section": "The growth factor",
+    "subgoals": [
+      "Find b by division",
+      "Distinguish growth from decay",
+      "Use consecutive inputs"
+    ]
+  },
+  {
+    "label": "The initial value",
+    "section": "The initial value",
+    "subgoals": [
+      "Find a from b and a point",
+      "Use the y-intercept as a shortcut",
+      "Avoid subtracting instead of dividing"
+    ]
+  },
+  {
+    "label": "Predicting a later value",
+    "section": "Predicting a later value",
+    "subgoals": [
+      "Evaluate an exponential model",
+      "Use repeated multiplication",
+      "Compare exponential and linear growth"
+    ]
+  }
+]

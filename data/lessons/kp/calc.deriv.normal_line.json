@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The tangent slope",
+    "section": "The tangent slope",
+    "subgoals": [
+      "Differentiate to get the tangent slope",
+      "Evaluate at the point",
+      "Use the power rule"
+    ]
+  },
+  {
+    "label": "The negative reciprocal",
+    "section": "The negative reciprocal",
+    "subgoals": [
+      "Apply the negative reciprocal",
+      "Handle horizontal and vertical cases",
+      "Check the product of slopes"
+    ]
+  },
+  {
+    "label": "Writing the normal line",
+    "section": "Writing the normal line",
+    "subgoals": [
+      "Write a point-slope equation",
+      "Use the correct point",
+      "Distinguish normal from tangent"
+    ]
+  }
+]

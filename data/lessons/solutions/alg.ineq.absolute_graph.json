@@ -1,0 +1,19 @@
+{
+  "concept": "alg.ineq.absolute_graph",
+  "setup": "The inequality is \\(|x - [[center]]| \\le [[radius]]\\).",
+  "steps": [
+    {
+      "fact": "center",
+      "say": "The center of the solution interval is \\([[center]]\\)."
+    },
+    {
+      "fact": "radius",
+      "say": "The radius is \\([[radius]]\\), so the interval is \\([[center]] \\pm [[radius]]\\)."
+    },
+    {
+      "fact": "count",
+      "say": "The interval contains \\(2([[radius]]) + 1 = [[count]]\\) integers."
+    }
+  ],
+  "answer": "The solution interval is centered at [[center]] with radius [[radius]], and it contains [[count]] integers."
+}

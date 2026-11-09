@@ -1,0 +1,15 @@
+{
+  "concept": "alg.seq.geometric_infinite",
+  "setup": "The series has first term \\([[first]]\\) and ratio \\(1/[[denominator]]\\).",
+  "steps": [
+    {
+      "fact": "denominator",
+      "say": "The ratio is \\(1/[[denominator]]\\), whose absolute value is less than 1, so the series converges."
+    },
+    {
+      "fact": "sum",
+      "say": "The sum formula gives \\(S = a/(1-r) = [[first]]/(1 - 1/[[denominator]]) = [[sum]]\\)."
+    }
+  ],
+  "answer": "The infinite sum is \\([[sum]]\\)."
+}

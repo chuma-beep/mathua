@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Where the sign changes",
+    "section": "Where the sign changes",
+    "subgoals": [
+      "Find the zero",
+      "Split the integral",
+      "Replace the absolute value on each side"
+    ]
+  },
+  {
+    "label": "Symmetry",
+    "section": "Symmetry",
+    "subgoals": [
+      "Recognize an even integrand",
+      "Use symmetry",
+      "Compute the half-area"
+    ]
+  },
+  {
+    "label": "Checking the area",
+    "section": "Checking the area",
+    "subgoals": [
+      "Interpret the result as area",
+      "Check the sign",
+      "Verify with a sketch"
+    ]
+  }
+]

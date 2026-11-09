@@ -1,0 +1,23 @@
+{
+  "concept": "alg.conic.parabola_focus",
+  "setup": "The parabola is \\(y = x^2/(4p)\\) with \\(p = [[p]]\\).",
+  "steps": [
+    {
+      "fact": "p",
+      "say": "The focal distance is \\(p = [[p]]\\)."
+    },
+    {
+      "fact": "focus",
+      "say": "The focus is \\((0, [[focus]])\\)."
+    },
+    {
+      "fact": "directrix",
+      "say": "The directrix is \\(y = [[directrix]]\\)."
+    },
+    {
+      "fact": "latus",
+      "say": "The latus rectum has length \\(4p = [[latus]]\\)."
+    }
+  ],
+  "answer": "The focus is \\((0, [[focus]])\\), the directrix is \\(y = [[directrix]]\\) and the latus rectum is [[latus]] long."
+}

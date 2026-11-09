@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The five-point weights",
+    "section": "The five-point weights",
+    "subgoals": [
+      "Apply the Boole weights",
+      "Compute a weighted sum",
+      "Use the symmetry of the weights"
+    ]
+  },
+  {
+    "label": "The integral estimate",
+    "section": "The integral estimate",
+    "subgoals": [
+      "Apply the 2h over 45 factor",
+      "Evaluate with a convenient h",
+      "State the exactness degree"
+    ]
+  },
+  {
+    "label": "Composite Boole",
+    "section": "Composite Boole",
+    "subgoals": [
+      "Count evaluations for m panels",
+      "Apply the rule to each panel",
+      "Avoid double-counting shared nodes"
+    ]
+  }
+]

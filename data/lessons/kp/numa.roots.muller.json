@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Quadratic interpolation",
+    "section": "Quadratic interpolation",
+    "subgoals": [
+      "Fit a quadratic through three points",
+      "Compute the leading coefficient",
+      "Evaluate the interpolating quadratic"
+    ]
+  },
+  {
+    "label": "Three starting points",
+    "section": "Three starting points",
+    "subgoals": [
+      "State the number of initial points",
+      "Compare with the secant method",
+      "Choose the nearer root"
+    ]
+  },
+  {
+    "label": "Complex roots",
+    "section": "Complex roots",
+    "subgoals": [
+      "Interpret the discriminant",
+      "Explain the complex-root advantage",
+      "Keep the iteration stable"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The error expansion",
+    "section": "The error expansion",
+    "subgoals": [
+      "Describe the error scaling",
+      "Explain the factor of four",
+      "Identify the shared limit"
+    ]
+  },
+  {
+    "label": "The extrapolation formula",
+    "section": "The extrapolation formula",
+    "subgoals": [
+      "Apply the Richardson formula",
+      "Explain the weights",
+      "State the improved order"
+    ]
+  },
+  {
+    "label": "Higher order and cautions",
+    "section": "Higher order and cautions",
+    "subgoals": [
+      "Use the factor 2 to the p",
+      "Extrapolate more than once",
+      "Recognize when the assumption fails"
+    ]
+  }
+]

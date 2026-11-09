@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Equally spaced nodes",
+    "section": "Equally spaced nodes",
+    "subgoals": [
+      "Count nodes and intervals",
+      "Describe the node distribution",
+      "Connect spacing to error"
+    ]
+  },
+  {
+    "label": "Endpoint oscillations",
+    "section": "Endpoint oscillations",
+    "subgoals": [
+      "Identify where the error is largest",
+      "Explain why more nodes can hurt",
+      "Describe the Runge function"
+    ]
+  },
+  {
+    "label": "Choosing better nodes",
+    "section": "Choosing better nodes",
+    "subgoals": [
+      "Use Chebyshev nodes",
+      "Compare with piecewise interpolation",
+      "Explain the stability improvement"
+    ]
+  }
+]

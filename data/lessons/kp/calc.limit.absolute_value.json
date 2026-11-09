@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Left and right formulas",
+    "section": "Left and right formulas",
+    "subgoals": [
+      "Remove the absolute value on the left",
+      "Remove it on the right",
+      "Compute each one-sided limit"
+    ]
+  },
+  {
+    "label": "When the two-sided limit fails",
+    "section": "When the two-sided limit fails",
+    "subgoals": [
+      "Compare one-sided limits",
+      "Recognize a jump discontinuity",
+      "Explain why the two-sided limit fails"
+    ]
+  },
+  {
+    "label": "Sign and direction",
+    "section": "Sign and direction",
+    "subgoals": [
+      "Read the sign from the direction",
+      "Avoid reversing the denominator",
+      "Interpret the quotient geometrically"
+    ]
+  }
+]

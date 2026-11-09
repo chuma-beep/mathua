@@ -2886,7 +2886,7 @@
     "domain": "algebra",
     "grading_type": "numeric",
     "id": "alg.systems.cramer",
-    "label": "Cramer's rule",
+    "label": "Cramer's rule for two equations",
     "mastery_threshold": {
       "avg_time_seconds": 18,
       "streak": 10
@@ -2907,6 +2907,132 @@
     },
     "prerequisites": [
       "alg.poly.special"
+    ],
+    "subdomain": "algebra.poly"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.poly.binomial",
+    "label": "The binomial theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.poly.special"
+    ],
+    "subdomain": "algebra.poly"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.seq.geometric_infinite",
+    "label": "Infinite geometric series",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.seq.sum_geo"
+    ],
+    "subdomain": "algebra.sequences"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.exp.from_points",
+    "label": "Exponential functions from two points",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.exp.graph"
+    ],
+    "subdomain": "algebra.exponential"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.log.scale",
+    "label": "Logarithmic scales and orders of magnitude",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.log.evaluate"
+    ],
+    "subdomain": "algebra.logarithms"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.regression.linear",
+    "label": "Least-squares regression line",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.linear.slope_intercept"
+    ],
+    "subdomain": "algebra.linear"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.conic.parabola_focus",
+    "label": "Focus and directrix of a parabola",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.conic.parabola"
+    ],
+    "subdomain": "algebra.conics"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.conic.ellipse_foci",
+    "label": "Foci of an ellipse",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.conic.ellipse"
+    ],
+    "subdomain": "algebra.conics"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.ineq.absolute_graph",
+    "label": "Absolute-value inequalities on a number line",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.ineq.absolute_value"
+    ],
+    "subdomain": "algebra.inequalities"
+  },
+  {
+    "domain": "algebra",
+    "grading_type": "numeric",
+    "id": "alg.poly.zeros_multiplicity",
+    "label": "Zeros and multiplicity",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.poly.graph_zeros"
     ],
     "subdomain": "algebra.poly"
   },
@@ -5209,6 +5335,202 @@
       "calc.limit.continuity"
     ],
     "subdomain": "calculus.limits"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.limit.conjugate",
+    "label": "Limits by conjugates",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.limit.algebra"
+    ],
+    "subdomain": "calculus.limits"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.limit.complex_fraction",
+    "label": "Limits of complex fractions",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.limit.algebra"
+    ],
+    "subdomain": "calculus.limits"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.limit.absolute_value",
+    "label": "Limits with absolute values",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.limit.one_sided"
+    ],
+    "subdomain": "calculus.limits"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.deriv.normal_line",
+    "label": "Slopes of normal lines",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.deriv.tangent_line"
+    ],
+    "subdomain": "calculus.derivatives"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.deriv.piecewise",
+    "label": "Derivatives of piecewise functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.deriv.diff_continuity"
+    ],
+    "subdomain": "calculus.derivatives"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.deriv.optimization_fence",
+    "label": "Optimization: fencing",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.deriv.optimization"
+    ],
+    "subdomain": "calculus.derivatives"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.deriv.optimization_revenue",
+    "label": "Optimization: revenue",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.deriv.optimization"
+    ],
+    "subdomain": "calculus.derivatives"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.deriv.related_rates_ladder",
+    "label": "Related rates: sliding ladder",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.deriv.related_rates"
+    ],
+    "subdomain": "calculus.advanced"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.deriv.related_rates_cone",
+    "label": "Related rates: conical tank",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.deriv.related_rates"
+    ],
+    "subdomain": "calculus.advanced"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.integral.total_distance",
+    "label": "Total distance from velocity",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.definite"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.integral.piecewise",
+    "label": "Integrals of piecewise functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.definite"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.integral.absolute_value",
+    "label": "Integrals of absolute values",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.definite"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.integral.accumulation",
+    "label": "Accumulation functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.ftc"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.integral.motion",
+    "label": "Motion problems with integrals",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.definite"
+    ],
+    "subdomain": "calculus.integrals"
   },
   {
     "domain": "calc2",
@@ -15362,6 +15684,244 @@
       "numa.roots.false_position"
     ],
     "subdomain": "numerical_analysis.roots"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.roots.aitken",
+    "label": "Aitken's Δ² acceleration",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.roots.secant"
+    ],
+    "subdomain": "numerical_analysis.roots"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.roots.muller",
+    "label": "Muller's method",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.roots.secant"
+    ],
+    "subdomain": "numerical_analysis.roots"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.interp.barycentric",
+    "label": "Barycentric interpolation",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.interp.lagrange"
+    ],
+    "subdomain": "numerical_analysis.interp"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.interp.runge",
+    "label": "The Runge phenomenon",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.interp.chebyshev"
+    ],
+    "subdomain": "numerical_analysis.interp"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.interp.piecewise_linear",
+    "label": "Piecewise linear interpolation",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.interp.lagrange"
+    ],
+    "subdomain": "numerical_analysis.interp"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.integration.boole",
+    "label": "Boole's rule",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.integration.simpson"
+    ],
+    "subdomain": "numerical_analysis.integration"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.integration.gauss_kronrod",
+    "label": "Gauss-Kronrod quadrature",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.integration.gauss"
+    ],
+    "subdomain": "numerical_analysis.integration"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.linear.gauss_jordan",
+    "label": "Gauss-Jordan elimination",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.linear.elimination"
+    ],
+    "subdomain": "numerical_analysis.linear"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.linear.thomas",
+    "label": "The Thomas algorithm",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.linear.lu"
+    ],
+    "subdomain": "numerical_analysis.linear"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.linear.matrix_condition",
+    "label": "The condition number of a matrix",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.errors.conditioning"
+    ],
+    "subdomain": "numerical_analysis.linear"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.linear.inverse_power",
+    "label": "Inverse power iteration",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.linear.power"
+    ],
+    "subdomain": "numerical_analysis.linear"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.fourier.dft",
+    "label": "The discrete Fourier transform",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.fourier.fft"
+    ],
+    "subdomain": "numerical_analysis.fourier"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.fourier.aliasing",
+    "label": "Aliasing",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.fourier.fft"
+    ],
+    "subdomain": "numerical_analysis.fourier"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.approx.pade",
+    "label": "Padé approximants",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.errors.taylor"
+    ],
+    "subdomain": "numerical_analysis.approx"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.diff.finite",
+    "label": "Finite differences for numerical derivatives",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.errors.taylor"
+    ],
+    "subdomain": "numerical_analysis.diff"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.diff.richardson",
+    "label": "Richardson extrapolation",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.integration.romberg"
+    ],
+    "subdomain": "numerical_analysis.diff"
+  },
+  {
+    "domain": "numerical_analysis",
+    "grading_type": "numeric",
+    "id": "numa.optimization.line_search",
+    "label": "Line search",
+    "mastery_threshold": {
+      "avg_time_seconds": 26,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.errors.conditioning"
+    ],
+    "subdomain": "numerical_analysis.optimization"
   },
   {
     "domain": "prealgebra",

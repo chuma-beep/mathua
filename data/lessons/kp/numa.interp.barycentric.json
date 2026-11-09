@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Barycentric weights",
+    "section": "Barycentric weights",
+    "subgoals": [
+      "Compute a weight denominator",
+      "Explain why weights depend on nodes",
+      "Use factorial form for equally spaced nodes"
+    ]
+  },
+  {
+    "label": "Evaluating at a node",
+    "section": "Evaluating at a node",
+    "subgoals": [
+      "Evaluate at a node",
+      "Describe the weighted average",
+      "Handle a node exactly"
+    ]
+  },
+  {
+    "label": "Degree and node count",
+    "section": "Degree and node count",
+    "subgoals": [
+      "Relate degree to node count",
+      "Explain uniqueness",
+      "Recognize the oscillation risk"
+    ]
+  }
+]

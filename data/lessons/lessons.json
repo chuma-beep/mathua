@@ -6038,5 +6038,165 @@
   {
     "concept_id": "calc.limit.continuity_interval",
     "source": "authored/calc.limit.continuity_interval.md"
+  },
+  {
+    "concept_id": "alg.poly.binomial",
+    "source": "authored/alg.poly.binomial.md"
+  },
+  {
+    "concept_id": "alg.seq.geometric_infinite",
+    "source": "authored/alg.seq.geometric_infinite.md"
+  },
+  {
+    "concept_id": "alg.exp.from_points",
+    "source": "authored/alg.exp.from_points.md"
+  },
+  {
+    "concept_id": "alg.log.scale",
+    "source": "authored/alg.log.scale.md"
+  },
+  {
+    "concept_id": "alg.regression.linear",
+    "source": "authored/alg.regression.linear.md"
+  },
+  {
+    "concept_id": "alg.conic.parabola_focus",
+    "source": "authored/alg.conic.parabola_focus.md"
+  },
+  {
+    "concept_id": "alg.conic.ellipse_foci",
+    "source": "authored/alg.conic.ellipse_foci.md"
+  },
+  {
+    "concept_id": "alg.ineq.absolute_graph",
+    "source": "authored/alg.ineq.absolute_graph.md"
+  },
+  {
+    "concept_id": "alg.poly.zeros_multiplicity",
+    "source": "authored/alg.poly.zeros_multiplicity.md"
+  },
+  {
+    "concept_id": "numa.roots.aitken",
+    "source": "authored/numa.roots.aitken.md"
+  },
+  {
+    "concept_id": "numa.roots.muller",
+    "source": "authored/numa.roots.muller.md"
+  },
+  {
+    "concept_id": "numa.interp.barycentric",
+    "source": "authored/numa.interp.barycentric.md"
+  },
+  {
+    "concept_id": "numa.interp.runge",
+    "source": "authored/numa.interp.runge.md"
+  },
+  {
+    "concept_id": "numa.interp.piecewise_linear",
+    "source": "authored/numa.interp.piecewise_linear.md"
+  },
+  {
+    "concept_id": "numa.integration.boole",
+    "source": "authored/numa.integration.boole.md"
+  },
+  {
+    "concept_id": "numa.integration.gauss_kronrod",
+    "source": "authored/numa.integration.gauss_kronrod.md"
+  },
+  {
+    "concept_id": "numa.linear.gauss_jordan",
+    "source": "authored/numa.linear.gauss_jordan.md"
+  },
+  {
+    "concept_id": "numa.linear.thomas",
+    "source": "authored/numa.linear.thomas.md"
+  },
+  {
+    "concept_id": "numa.linear.matrix_condition",
+    "source": "authored/numa.linear.matrix_condition.md"
+  },
+  {
+    "concept_id": "numa.linear.inverse_power",
+    "source": "authored/numa.linear.inverse_power.md"
+  },
+  {
+    "concept_id": "numa.fourier.dft",
+    "source": "authored/numa.fourier.dft.md"
+  },
+  {
+    "concept_id": "numa.fourier.aliasing",
+    "source": "authored/numa.fourier.aliasing.md"
+  },
+  {
+    "concept_id": "numa.approx.pade",
+    "source": "authored/numa.approx.pade.md"
+  },
+  {
+    "concept_id": "numa.diff.finite",
+    "source": "authored/numa.diff.finite.md"
+  },
+  {
+    "concept_id": "numa.diff.richardson",
+    "source": "authored/numa.diff.richardson.md"
+  },
+  {
+    "concept_id": "numa.optimization.line_search",
+    "source": "authored/numa.optimization.line_search.md"
+  },
+  {
+    "concept_id": "calc.limit.conjugate",
+    "source": "authored/calc.limit.conjugate.md"
+  },
+  {
+    "concept_id": "calc.limit.complex_fraction",
+    "source": "authored/calc.limit.complex_fraction.md"
+  },
+  {
+    "concept_id": "calc.limit.absolute_value",
+    "source": "authored/calc.limit.absolute_value.md"
+  },
+  {
+    "concept_id": "calc.deriv.normal_line",
+    "source": "authored/calc.deriv.normal_line.md"
+  },
+  {
+    "concept_id": "calc.deriv.piecewise",
+    "source": "authored/calc.deriv.piecewise.md"
+  },
+  {
+    "concept_id": "calc.deriv.optimization_fence",
+    "source": "authored/calc.deriv.optimization_fence.md"
+  },
+  {
+    "concept_id": "calc.deriv.optimization_revenue",
+    "source": "authored/calc.deriv.optimization_revenue.md"
+  },
+  {
+    "concept_id": "calc.deriv.related_rates_ladder",
+    "source": "authored/calc.deriv.related_rates_ladder.md"
+  },
+  {
+    "concept_id": "calc.deriv.related_rates_cone",
+    "source": "authored/calc.deriv.related_rates_cone.md"
+  },
+  {
+    "concept_id": "calc.integral.total_distance",
+    "source": "authored/calc.integral.total_distance.md"
+  },
+  {
+    "concept_id": "calc.integral.piecewise",
+    "source": "authored/calc.integral.piecewise.md"
+  },
+  {
+    "concept_id": "calc.integral.absolute_value",
+    "source": "authored/calc.integral.absolute_value.md"
+  },
+  {
+    "concept_id": "calc.integral.accumulation",
+    "source": "authored/calc.integral.accumulation.md"
+  },
+  {
+    "concept_id": "calc.integral.motion",
+    "source": "authored/calc.integral.motion.md"
   }
 ]

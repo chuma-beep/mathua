@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The embedded pair",
+    "section": "The embedded pair",
+    "subgoals": [
+      "Count the nodes",
+      "Identify the embedded rule",
+      "Compare the two estimates"
+    ]
+  },
+  {
+    "label": "The error estimate",
+    "section": "The error estimate",
+    "subgoals": [
+      "Form the error estimate",
+      "Interpret a large difference",
+      "Explain the shared evaluations"
+    ]
+  },
+  {
+    "label": "Composite cost",
+    "section": "Composite cost",
+    "subgoals": [
+      "Compute composite cost",
+      "Describe adaptive refinement",
+      "Connect cost to accuracy"
+    ]
+  }
+]

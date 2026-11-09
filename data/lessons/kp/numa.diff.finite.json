@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Forward difference",
+    "section": "Forward difference",
+    "subgoals": [
+      "Apply a forward difference",
+      "Identify the truncation term",
+      "Balance truncation and roundoff"
+    ]
+  },
+  {
+    "label": "Central difference",
+    "section": "Central difference",
+    "subgoals": [
+      "Apply a central difference",
+      "Explain the cancellation",
+      "Compare with the forward difference"
+    ]
+  },
+  {
+    "label": "Second differences",
+    "section": "Second differences",
+    "subgoals": [
+      "Compute a second difference",
+      "Approximate a second derivative",
+      "Scale by h squared"
+    ]
+  }
+]

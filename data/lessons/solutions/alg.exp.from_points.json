@@ -1,0 +1,19 @@
+{
+  "concept": "alg.exp.from_points",
+  "setup": "The model is \\(y = a b^x\\) with \\(a = [[a]]\\) and \\(b = [[b]]\\).",
+  "steps": [
+    {
+      "fact": "b",
+      "say": "Divide values at consecutive inputs to get the growth factor \\(b = [[b]]\\)."
+    },
+    {
+      "fact": "a",
+      "say": "Substitute one point and solve for the initial value \\(a = [[a]]\\)."
+    },
+    {
+      "fact": "y3",
+      "say": "At \\(x = 3\\), the model gives \\(y = [[a]]·[[b]]^3 = [[y3]]\\)."
+    }
+  ],
+  "answer": "The exponential model is \\(y = [[a]]·[[b]]^x\\), so \\(y(3) = [[y3]]\\)."
+}

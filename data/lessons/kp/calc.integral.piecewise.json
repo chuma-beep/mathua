@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Splitting at the break",
+    "section": "Splitting at the break",
+    "subgoals": [
+      "Locate the break",
+      "Split the interval",
+      "Choose the active branch"
+    ]
+  },
+  {
+    "label": "Constant pieces",
+    "section": "Constant pieces",
+    "subgoals": [
+      "Integrate a constant",
+      "Use interval length",
+      "Compute each contribution"
+    ]
+  },
+  {
+    "label": "Adding the contributions",
+    "section": "Adding the contributions",
+    "subgoals": [
+      "Add the pieces",
+      "Verify the intervals",
+      "Check for gaps and overlaps"
+    ]
+  }
+]

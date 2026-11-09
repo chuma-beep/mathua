@@ -4,6 +4,23 @@ import "github.com/chuma-beep/mathua/internal/generator"
 
 // Register adds the numerical-analysis generators to reg.
 func Register(reg *generator.Registry) {
+	reg.Register("numa.roots.aitken", &aitkenGen{})
+	reg.Register("numa.roots.muller", &mullerGen{})
+	reg.Register("numa.interp.barycentric", &barycentricGen{})
+	reg.Register("numa.interp.runge", &rungeGen{})
+	reg.Register("numa.interp.piecewise_linear", &piecewiseLinearGen{})
+	reg.Register("numa.integration.boole", &booleGen{})
+	reg.Register("numa.integration.gauss_kronrod", &gaussKronrodGen{})
+	reg.Register("numa.linear.gauss_jordan", &gaussJordanGen{})
+	reg.Register("numa.linear.thomas", &thomasGen{})
+	reg.Register("numa.linear.matrix_condition", &matrixConditionGen{})
+	reg.Register("numa.linear.inverse_power", &inversePowerGen{})
+	reg.Register("numa.fourier.dft", &dftGen{})
+	reg.Register("numa.fourier.aliasing", &aliasingGen{})
+	reg.Register("numa.approx.pade", &padeGen{})
+	reg.Register("numa.diff.finite", &numDiffGen{})
+	reg.Register("numa.diff.richardson", &richardsonGen{})
+	reg.Register("numa.optimization.line_search", &lineSearchGen{})
 	reg.Register("numa.errors.absolute", &absRelErrorGen{})
 	reg.Register("numa.errors.roundoff", &roundoffGen{})
 	reg.Register("numa.errors.cancellation", &cancellationGen{})

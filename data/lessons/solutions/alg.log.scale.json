@@ -1,0 +1,15 @@
+{
+  "concept": "alg.log.scale",
+  "setup": "The scale is base 10, so a factor of \\(10^k\\) is \\(k\\) orders of magnitude.",
+  "steps": [
+    {
+      "fact": "exponent",
+      "say": "The exponent is \\([[exponent]]\\), which counts the powers of ten."
+    },
+    {
+      "fact": "value",
+      "say": "The corresponding value is \\(10^{[[exponent]]} = [[value]]\\)."
+    }
+  ],
+  "answer": "The scale change corresponds to \\([[exponent]]\\) powers of ten, with value \\([[value]]\\)."
+}

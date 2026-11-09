@@ -1,0 +1,29 @@
+[
+  {
+    "label": "One-sided derivatives",
+    "section": "One-sided derivatives",
+    "subgoals": [
+      "Differentiate each branch",
+      "Compute one-sided derivatives",
+      "Recognize a corner"
+    ]
+  },
+  {
+    "label": "Differentiability at the join",
+    "section": "Differentiability at the join",
+    "subgoals": [
+      "Check continuity",
+      "Match the one-sided derivatives",
+      "State both requirements"
+    ]
+  },
+  {
+    "label": "Choosing a parameter",
+    "section": "Choosing a parameter",
+    "subgoals": [
+      "Solve for a matching slope",
+      "Verify continuity",
+      "Check the final function"
+    ]
+  }
+]

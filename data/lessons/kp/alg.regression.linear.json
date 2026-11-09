@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The least-squares line",
+    "section": "The least-squares line",
+    "subgoals": [
+      "Interpret the slope",
+      "Describe a residual",
+      "Distinguish the fitted line from a point-to-point line"
+    ]
+  },
+  {
+    "label": "The intercept and the mean point",
+    "section": "The intercept and the mean point",
+    "subgoals": [
+      "Use the mean point",
+      "Find the intercept from the slope",
+      "Explain why the line passes through the means"
+    ]
+  },
+  {
+    "label": "Using the line",
+    "section": "Using the line",
+    "subgoals": [
+      "Predict a value from the line",
+      "Distinguish interpolation from extrapolation",
+      "State a limitation of a prediction"
+    ]
+  }
+]

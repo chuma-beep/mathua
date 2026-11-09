@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The shape ratio",
+    "section": "The shape ratio",
+    "subgoals": [
+      "Use similar triangles",
+      "Write the shape ratio",
+      "Reduce to one variable"
+    ]
+  },
+  {
+    "label": "The volume relation",
+    "section": "The volume relation",
+    "subgoals": [
+      "Substitute the radius",
+      "Differentiate volume",
+      "Relate inflow to depth rate"
+    ]
+  },
+  {
+    "label": "Solving the rate",
+    "section": "Solving the rate",
+    "subgoals": [
+      "Substitute known values",
+      "Solve for the depth rate",
+      "Check the units"
+    ]
+  }
+]

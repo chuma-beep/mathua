@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Combining the fractions",
+    "section": "Combining the fractions",
+    "subgoals": [
+      "Find a common denominator",
+      "Combine into one quotient",
+      "Multiply by the reciprocal"
+    ]
+  },
+  {
+    "label": "Cancelling the zero",
+    "section": "Cancelling the zero",
+    "subgoals": [
+      "Identify the cancelling factor",
+      "Simplify before substituting",
+      "Explain the original indeterminacy"
+    ]
+  },
+  {
+    "label": "The limiting value",
+    "section": "The limiting value",
+    "subgoals": [
+      "Compute the limit",
+      "Check the sign",
+      "Interpret the magnitude"
+    ]
+  }
+]

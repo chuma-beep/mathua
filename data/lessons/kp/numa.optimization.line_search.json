@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The exact step for a quadratic",
+    "section": "The exact step for a quadratic",
+    "subgoals": [
+      "Derive the exact step",
+      "Reach the quadratic minimum",
+      "Interpret the direction sign"
+    ]
+  },
+  {
+    "label": "Inexact line searches",
+    "section": "Inexact line searches",
+    "subgoals": [
+      "State the Armijo condition",
+      "Explain the curvature condition",
+      "Recognize a step that is too short"
+    ]
+  },
+  {
+    "label": "Strong Wolfe and cost",
+    "section": "Strong Wolfe and cost",
+    "subgoals": [
+      "Count the strong Wolfe conditions",
+      "Compare cost and step quality",
+      "Choose a practical stopping rule"
+    ]
+  }
+]

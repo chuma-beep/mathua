@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Matching the Taylor series",
+    "section": "Matching the Taylor series",
+    "subgoals": [
+      "State the matching degree",
+      "Count free coefficients",
+      "Identify numerator and denominator degrees"
+    ]
+  },
+  {
+    "label": "The 1/1 approximant of the exponential",
+    "section": "The 1/1 approximant of the exponential",
+    "subgoals": [
+      "Write the 1/1 exponential approximant",
+      "State its matching order",
+      "Compare with a Taylor polynomial"
+    ]
+  },
+  {
+    "label": "Evaluating the approximant",
+    "section": "Evaluating the approximant",
+    "subgoals": [
+      "Evaluate a Padé approximant",
+      "Watch for a zero denominator",
+      "Interpret the useful range"
+    ]
+  }
+]
