@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Coefficient decay",
+    "section": "Coefficient decay",
+    "subgoals": [
+      "Write the governing relation for convergence of fourier series",
+      "Substitute the given values in the coefficient decay step",
+      "Simplify and state the coefficient decay result"
+    ]
+  },
+  {
+    "label": "The Dirichlet kernel",
+    "section": "The Dirichlet kernel",
+    "subgoals": [
+      "Write the governing relation for convergence of fourier series",
+      "Substitute the given values in the the dirichlet kernel step",
+      "Simplify and state the the dirichlet kernel result"
+    ]
+  },
+  {
+    "label": "Pointwise values",
+    "section": "Pointwise values",
+    "subgoals": [
+      "Write the governing relation for convergence of fourier series",
+      "Substitute the given values in the pointwise values step",
+      "Simplify and state the pointwise values result"
+    ]
+  }
+]

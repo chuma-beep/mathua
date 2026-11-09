@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The power law",
+    "section": "The power law",
+    "subgoals": [
+      "Write the governing relation for the fundamental solution",
+      "Substitute the given values in the the power law step",
+      "Simplify and state the the power law result"
+    ]
+  },
+  {
+    "label": "Normalisation",
+    "section": "Normalisation",
+    "subgoals": [
+      "Write the governing relation for the fundamental solution",
+      "Substitute the given values in the normalisation step",
+      "Simplify and state the normalisation result"
+    ]
+  },
+  {
+    "label": "Source flux",
+    "section": "Source flux",
+    "subgoals": [
+      "Write the governing relation for the fundamental solution",
+      "Substitute the given values in the source flux step",
+      "Simplify and state the source flux result"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Normal derivative",
+    "section": "Normal derivative",
+    "subgoals": [
+      "Write the governing relation for the neumann problem",
+      "Substitute the given values in the normal derivative step",
+      "Simplify and state the normal derivative result"
+    ]
+  },
+  {
+    "label": "Compatibility integral",
+    "section": "Compatibility integral",
+    "subgoals": [
+      "Write the governing relation for the neumann problem",
+      "Substitute the given values in the compatibility integral step",
+      "Simplify and state the compatibility integral result"
+    ]
+  },
+  {
+    "label": "Constant shift",
+    "section": "Constant shift",
+    "subgoals": [
+      "Write the governing relation for the neumann problem",
+      "Substitute the given values in the constant shift step",
+      "Simplify and state the constant shift result"
+    ]
+  }
+]

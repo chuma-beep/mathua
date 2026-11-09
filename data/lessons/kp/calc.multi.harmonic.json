@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Laplacian test",
+    "section": "The Laplacian test",
+    "subgoals": [
+      "Write the governing relation for harmonic functions",
+      "Substitute the given values in the the laplacian test step",
+      "Simplify and state the the laplacian test result"
+    ]
+  },
+  {
+    "label": "Choosing a coefficient",
+    "section": "Choosing a coefficient",
+    "subgoals": [
+      "Write the governing relation for harmonic functions",
+      "Substitute the given values in the choosing a coefficient step",
+      "Simplify and state the choosing a coefficient result"
+    ]
+  },
+  {
+    "label": "Sums of harmonic functions",
+    "section": "Sums of harmonic functions",
+    "subgoals": [
+      "Write the governing relation for harmonic functions",
+      "Substitute the given values in the sums of harmonic functions step",
+      "Simplify and state the sums of harmonic functions result"
+    ]
+  }
+]

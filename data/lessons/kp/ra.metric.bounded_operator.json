@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Operator norm",
+    "section": "Operator norm",
+    "subgoals": [
+      "Write the governing relation for bounded linear operators",
+      "Substitute the given values in the operator norm step",
+      "Simplify and state the operator norm result"
+    ]
+  },
+  {
+    "label": "Boundedness test",
+    "section": "Boundedness test",
+    "subgoals": [
+      "Write the governing relation for bounded linear operators",
+      "Substitute the given values in the boundedness test step",
+      "Simplify and state the boundedness test result"
+    ]
+  },
+  {
+    "label": "Matrix example",
+    "section": "Matrix example",
+    "subgoals": [
+      "Write the governing relation for bounded linear operators",
+      "Substitute the given values in the matrix example step",
+      "Simplify and state the matrix example result"
+    ]
+  }
+]

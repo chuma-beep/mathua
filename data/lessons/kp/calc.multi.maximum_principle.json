@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Boundary maximum",
+    "section": "Boundary maximum",
+    "subgoals": [
+      "Write the governing relation for the maximum principle",
+      "Substitute the given values in the boundary maximum step",
+      "Simplify and state the boundary maximum result"
+    ]
+  },
+  {
+    "label": "Interior maximum test",
+    "section": "Interior maximum test",
+    "subgoals": [
+      "Write the governing relation for the maximum principle",
+      "Substitute the given values in the interior maximum test step",
+      "Simplify and state the interior maximum test result"
+    ]
+  },
+  {
+    "label": "The constant case",
+    "section": "The constant case",
+    "subgoals": [
+      "Write the governing relation for the maximum principle",
+      "Substitute the given values in the the constant case step",
+      "Simplify and state the the constant case result"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "One-forms and their action",
+    "section": "One-forms and their action",
+    "subgoals": [
+      "Write the governing relation for differential forms",
+      "Substitute the given values in the one-forms and their action step",
+      "Simplify and state the one-forms and their action result"
+    ]
+  },
+  {
+    "label": "Two-forms on pairs of vectors",
+    "section": "Two-forms on pairs of vectors",
+    "subgoals": [
+      "Write the governing relation for differential forms",
+      "Substitute the given values in the two-forms on pairs of vectors step",
+      "Simplify and state the two-forms on pairs of vectors result"
+    ]
+  },
+  {
+    "label": "The dimension of k-forms",
+    "section": "The dimension of k-forms",
+    "subgoals": [
+      "Write the governing relation for differential forms",
+      "Substitute the given values in the the dimension of k-forms step",
+      "Simplify and state the the dimension of k-forms result"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Shortest path in the plane",
+    "section": "Shortest path in the plane",
+    "subgoals": [
+      "Write the governing relation for geodesics",
+      "Substitute the given values in the shortest path in the plane step",
+      "Simplify and state the shortest path in the plane result"
+    ]
+  },
+  {
+    "label": "A scaled metric",
+    "section": "A scaled metric",
+    "subgoals": [
+      "Write the governing relation for geodesics",
+      "Substitute the given values in the a scaled metric step",
+      "Simplify and state the a scaled metric result"
+    ]
+  },
+  {
+    "label": "The geodesic equation",
+    "section": "The geodesic equation",
+    "subgoals": [
+      "Write the governing relation for geodesics",
+      "Substitute the given values in the the geodesic equation step",
+      "Simplify and state the the geodesic equation result"
+    ]
+  }
+]

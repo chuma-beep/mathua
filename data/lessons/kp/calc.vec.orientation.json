@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Parametrised surfaces and their normals",
+    "section": "Parametrised surfaces and their normals",
+    "subgoals": [
+      "Write the governing relation for orientation of surfaces",
+      "Substitute the given values in the parametrised surfaces and their normals step",
+      "Simplify and state the parametrised surfaces and their normals result"
+    ]
+  },
+  {
+    "label": "Choosing the upward normal",
+    "section": "Choosing the upward normal",
+    "subgoals": [
+      "Write the governing relation for orientation of surfaces",
+      "Substitute the given values in the choosing the upward normal step",
+      "Simplify and state the choosing the upward normal result"
+    ]
+  },
+  {
+    "label": "Orientation as a sign",
+    "section": "Orientation as a sign",
+    "subgoals": [
+      "Write the governing relation for orientation of surfaces",
+      "Substitute the given values in the orientation as a sign step",
+      "Simplify and state the orientation as a sign result"
+    ]
+  }
+]

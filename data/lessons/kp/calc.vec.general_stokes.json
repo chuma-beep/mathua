@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Boundary orientation",
+    "section": "Boundary orientation",
+    "subgoals": [
+      "Write the governing relation for generalized stokes' theorem",
+      "Substitute the given values in the boundary orientation step",
+      "Simplify and state the boundary orientation result"
+    ]
+  },
+  {
+    "label": "Evaluating on a square",
+    "section": "Evaluating on a square",
+    "subgoals": [
+      "Write the governing relation for generalized stokes' theorem",
+      "Substitute the given values in the evaluating on a square step",
+      "Simplify and state the evaluating on a square result"
+    ]
+  },
+  {
+    "label": "Why it generalizes",
+    "section": "Why it generalizes",
+    "subgoals": [
+      "Write the governing relation for generalized stokes' theorem",
+      "Substitute the given values in the why it generalizes step",
+      "Simplify and state the why it generalizes result"
+    ]
+  }
+]

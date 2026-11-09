@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Inner product",
+    "section": "Inner product",
+    "subgoals": [
+      "Write the governing relation for hilbert spaces",
+      "Substitute the given values in the inner product step",
+      "Simplify and state the inner product result"
+    ]
+  },
+  {
+    "label": "Orthogonality",
+    "section": "Orthogonality",
+    "subgoals": [
+      "Write the governing relation for hilbert spaces",
+      "Substitute the given values in the orthogonality step",
+      "Simplify and state the orthogonality result"
+    ]
+  },
+  {
+    "label": "Finite Parseval",
+    "section": "Finite Parseval",
+    "subgoals": [
+      "Write the governing relation for hilbert spaces",
+      "Substitute the given values in the finite parseval step",
+      "Simplify and state the finite parseval result"
+    ]
+  }
+]

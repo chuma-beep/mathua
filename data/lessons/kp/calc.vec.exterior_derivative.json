@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The differential of a function",
+    "section": "The differential of a function",
+    "subgoals": [
+      "Write the governing relation for the exterior derivative",
+      "Substitute the given values in the the differential of a function step",
+      "Simplify and state the the differential of a function result"
+    ]
+  },
+  {
+    "label": "The derivative of a one-form",
+    "section": "The derivative of a one-form",
+    "subgoals": [
+      "Write the governing relation for the exterior derivative",
+      "Substitute the given values in the the derivative of a one-form step",
+      "Simplify and state the the derivative of a one-form result"
+    ]
+  },
+  {
+    "label": "The three-dimensional exterior derivative",
+    "section": "The three-dimensional exterior derivative",
+    "subgoals": [
+      "Write the governing relation for the exterior derivative",
+      "Substitute the given values in the the three-dimensional exterior derivative step",
+      "Simplify and state the the three-dimensional exterior derivative result"
+    ]
+  }
+]

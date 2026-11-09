@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Finding a potential",
+    "section": "Finding a potential",
+    "subgoals": [
+      "Write the governing relation for vector potentials",
+      "Substitute the given values in the finding a potential step",
+      "Simplify and state the finding a potential result"
+    ]
+  },
+  {
+    "label": "Verifying the curl",
+    "section": "Verifying the curl",
+    "subgoals": [
+      "Write the governing relation for vector potentials",
+      "Substitute the given values in the verifying the curl step",
+      "Simplify and state the verifying the curl result"
+    ]
+  },
+  {
+    "label": "Gauge freedom",
+    "section": "Gauge freedom",
+    "subgoals": [
+      "Write the governing relation for vector potentials",
+      "Substitute the given values in the gauge freedom step",
+      "Simplify and state the gauge freedom result"
+    ]
+  }
+]

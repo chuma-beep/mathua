@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Variation of a functional",
+    "section": "Variation of a functional",
+    "subgoals": [
+      "Write the governing relation for the first variation",
+      "Substitute the given values in the variation of a functional step",
+      "Simplify and state the variation of a functional result"
+    ]
+  },
+  {
+    "label": "Stationary path",
+    "section": "Stationary path",
+    "subgoals": [
+      "Write the governing relation for the first variation",
+      "Substitute the given values in the stationary path step",
+      "Simplify and state the stationary path result"
+    ]
+  },
+  {
+    "label": "Boundary term",
+    "section": "Boundary term",
+    "subgoals": [
+      "Write the governing relation for the first variation",
+      "Substitute the given values in the boundary term step",
+      "Simplify and state the boundary term result"
+    ]
+  }
+]

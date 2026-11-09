@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Simple functions",
+    "section": "Simple functions",
+    "subgoals": [
+      "Write the governing relation for the integral of a simple function",
+      "Substitute the given values in the simple functions step",
+      "Simplify and state the simple functions result"
+    ]
+  },
+  {
+    "label": "Integrating over disjoint intervals",
+    "section": "Integrating over disjoint intervals",
+    "subgoals": [
+      "Write the governing relation for the integral of a simple function",
+      "Substitute the given values in the integrating over disjoint intervals step",
+      "Simplify and state the integrating over disjoint intervals result"
+    ]
+  },
+  {
+    "label": "Counting measure",
+    "section": "Counting measure",
+    "subgoals": [
+      "Write the governing relation for the integral of a simple function",
+      "Substitute the given values in the counting measure step",
+      "Simplify and state the counting measure result"
+    ]
+  }
+]

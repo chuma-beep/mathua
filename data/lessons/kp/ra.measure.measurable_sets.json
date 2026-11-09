@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Sigma-algebra closure",
+    "section": "Sigma-algebra closure",
+    "subgoals": [
+      "Write the governing relation for measurable sets",
+      "Substitute the given values in the sigma-algebra closure step",
+      "Simplify and state the sigma-algebra closure result"
+    ]
+  },
+  {
+    "label": "Preimages",
+    "section": "Preimages",
+    "subgoals": [
+      "Write the governing relation for measurable sets",
+      "Substitute the given values in the preimages step",
+      "Simplify and state the preimages result"
+    ]
+  },
+  {
+    "label": "Countable unions",
+    "section": "Countable unions",
+    "subgoals": [
+      "Write the governing relation for measurable sets",
+      "Substitute the given values in the countable unions step",
+      "Simplify and state the countable unions result"
+    ]
+  }
+]

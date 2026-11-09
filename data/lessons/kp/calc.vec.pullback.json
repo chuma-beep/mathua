@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Pullback of one-forms",
+    "section": "Pullback of one-forms",
+    "subgoals": [
+      "Write the governing relation for pullback of a differential form",
+      "Substitute the given values in the pullback of one-forms step",
+      "Simplify and state the pullback of one-forms result"
+    ]
+  },
+  {
+    "label": "Pullback of two-forms",
+    "section": "Pullback of two-forms",
+    "subgoals": [
+      "Write the governing relation for pullback of a differential form",
+      "Substitute the given values in the pullback of two-forms step",
+      "Simplify and state the pullback of two-forms result"
+    ]
+  },
+  {
+    "label": "The Jacobian factor",
+    "section": "The Jacobian factor",
+    "subgoals": [
+      "Write the governing relation for pullback of a differential form",
+      "Substitute the given values in the the jacobian factor step",
+      "Simplify and state the the jacobian factor result"
+    ]
+  }
+]

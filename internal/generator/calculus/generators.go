@@ -184,6 +184,8 @@ func Register(reg *generator.Registry) {
 	registerRemaining(reg)
 	registerNumeric(reg)
 	registerBatch(reg)
+	registerWave5(reg)
+	registerWave5Remaining(reg)
 	registerRaise(reg)
 	registerBridge(reg)
 }

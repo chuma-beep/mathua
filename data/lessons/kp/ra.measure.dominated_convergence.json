@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Limit of integrals",
+    "section": "Limit of integrals",
+    "subgoals": [
+      "Write the governing relation for the dominated convergence theorem",
+      "Substitute the given values in the limit of integrals step",
+      "Simplify and state the limit of integrals result"
+    ]
+  },
+  {
+    "label": "The dominating function",
+    "section": "The dominating function",
+    "subgoals": [
+      "Write the governing relation for the dominated convergence theorem",
+      "Substitute the given values in the the dominating function step",
+      "Simplify and state the the dominating function result"
+    ]
+  },
+  {
+    "label": "Indicator sequence",
+    "section": "Indicator sequence",
+    "subgoals": [
+      "Write the governing relation for the dominated convergence theorem",
+      "Substitute the given values in the indicator sequence step",
+      "Simplify and state the indicator sequence result"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The flux integral",
+    "section": "The flux integral",
+    "subgoals": [
+      "Write the governing relation for oriented surface flux",
+      "Substitute the given values in the the flux integral step",
+      "Simplify and state the the flux integral result"
+    ]
+  },
+  {
+    "label": "Upward and downward graphs",
+    "section": "Upward and downward graphs",
+    "subgoals": [
+      "Write the governing relation for oriented surface flux",
+      "Substitute the given values in the upward and downward graphs step",
+      "Simplify and state the upward and downward graphs result"
+    ]
+  },
+  {
+    "label": "A vertical square",
+    "section": "A vertical square",
+    "subgoals": [
+      "Write the governing relation for oriented surface flux",
+      "Substitute the given values in the a vertical square step",
+      "Simplify and state the a vertical square result"
+    ]
+  }
+]

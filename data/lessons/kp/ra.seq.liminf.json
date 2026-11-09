@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Subsequential limits",
+    "section": "Subsequential limits",
+    "subgoals": [
+      "Write the governing relation for the limit inferior of a sequence",
+      "Substitute the given values in the subsequential limits step",
+      "Simplify and state the subsequential limits result"
+    ]
+  },
+  {
+    "label": "The smallest cluster point",
+    "section": "The smallest cluster point",
+    "subgoals": [
+      "Write the governing relation for the limit inferior of a sequence",
+      "Substitute the given values in the the smallest cluster point step",
+      "Simplify and state the the smallest cluster point result"
+    ]
+  },
+  {
+    "label": "Convergent sequences and shifts",
+    "section": "Convergent sequences and shifts",
+    "subgoals": [
+      "Write the governing relation for the limit inferior of a sequence",
+      "Substitute the given values in the convergent sequences and shifts step",
+      "Simplify and state the convergent sequences and shifts result"
+    ]
+  }
+]

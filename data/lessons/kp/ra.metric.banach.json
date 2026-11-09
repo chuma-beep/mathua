@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Completeness test",
+    "section": "Completeness test",
+    "subgoals": [
+      "Write the governing relation for banach spaces",
+      "Substitute the given values in the completeness test step",
+      "Simplify and state the completeness test result"
+    ]
+  },
+  {
+    "label": "Cauchy sequences",
+    "section": "Cauchy sequences",
+    "subgoals": [
+      "Write the governing relation for banach spaces",
+      "Substitute the given values in the cauchy sequences step",
+      "Simplify and state the cauchy sequences result"
+    ]
+  },
+  {
+    "label": "Finite-dimensional example",
+    "section": "Finite-dimensional example",
+    "subgoals": [
+      "Write the governing relation for banach spaces",
+      "Substitute the given values in the finite-dimensional example step",
+      "Simplify and state the finite-dimensional example result"
+    ]
+  }
+]

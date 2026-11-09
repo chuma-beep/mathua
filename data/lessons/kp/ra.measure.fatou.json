@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The lower bound",
+    "section": "The lower bound",
+    "subgoals": [
+      "Write the governing relation for fatou's lemma",
+      "Substitute the given values in the the lower bound step",
+      "Simplify and state the the lower bound result"
+    ]
+  },
+  {
+    "label": "A strict example",
+    "section": "A strict example",
+    "subgoals": [
+      "Write the governing relation for fatou's lemma",
+      "Substitute the given values in the a strict example step",
+      "Simplify and state the a strict example result"
+    ]
+  },
+  {
+    "label": "Nonnegative sequences",
+    "section": "Nonnegative sequences",
+    "subgoals": [
+      "Write the governing relation for fatou's lemma",
+      "Substitute the given values in the nonnegative sequences step",
+      "Simplify and state the nonnegative sequences result"
+    ]
+  }
+]

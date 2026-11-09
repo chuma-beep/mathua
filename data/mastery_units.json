@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1700,
+  "concept_count": 1750,
   "unit_count": 141,
   "units": [
     {
@@ -960,7 +960,7 @@
       "title": "Calc3 · Stage 11",
       "domain": "calc3",
       "band": 10,
-      "depth_min": 31,
+      "depth_min": 30,
       "depth_max": 32,
       "subdomains": [
         "calculus.advanced",
@@ -974,11 +974,13 @@
         "calc.deriv.partial",
         "calc.deriv.partial_higher",
         "calc.deriv.total_diff",
+        "calc.multi.convolution",
         "calc.multi.euler_homogeneous",
+        "calc.multi.fourier",
         "calc.multi.functions_several",
         "calc.vec.curl"
       ],
-      "concept_count": 9
+      "concept_count": 11
     },
     {
       "id": "calc3.b11",
@@ -998,21 +1000,29 @@
         "calc.multi.closed_extrema",
         "calc.multi.continuity",
         "calc.multi.coordinates_jacobian",
+        "calc.multi.dirichlet",
+        "calc.multi.fundamental_solution",
+        "calc.multi.harmonic",
         "calc.multi.inverse_function",
         "calc.multi.lagrange",
         "calc.multi.lagrange_two",
         "calc.multi.level_curves",
+        "calc.multi.maximum_principle",
+        "calc.multi.mean_value",
+        "calc.multi.neumann",
+        "calc.multi.poisson",
         "calc.multi.quadric_surfaces",
         "calc.multi.saddle_test",
         "calc.multi.tangent_plane",
         "calc.multi.taylor2",
         "calc.multi.transform_jacobian",
         "calc.vec.curl_3d",
+        "calc.vec.differential_form",
         "calc.vec.divergence",
         "calc.vec.identities",
         "calc.vec.jacobian_value"
       ],
-      "concept_count": 18
+      "concept_count": 26
     },
     {
       "id": "calc3.b12",
@@ -1022,6 +1032,7 @@
       "depth_min": 36,
       "depth_max": 38,
       "subdomains": [
+        "calculus.advanced",
         "calculus.derivatives",
         "calculus.integrals",
         "calculus.multivariable",
@@ -1048,9 +1059,12 @@
         "calc.polar.area",
         "calc.polar.slope",
         "calc.vec.arc_length",
+        "calc.vec.closed_exact",
         "calc.vec.conservative_test",
         "calc.vec.curvature",
         "calc.vec.divergence_theorem",
+        "calc.vec.euler_lagrange",
+        "calc.vec.exterior_derivative",
         "calc.vec.flux_uniform",
         "calc.vec.frenet",
         "calc.vec.greens_theorem",
@@ -1058,14 +1072,17 @@
         "calc.vec.line_scalar",
         "calc.vec.normal_line",
         "calc.vec.potential_value",
+        "calc.vec.pullback",
         "calc.vec.stokes",
         "calc.vec.surface_area",
         "calc.vec.torsion",
         "calc.vec.vector_field",
         "calc.vec.vector_function",
+        "calc.vec.vector_potential",
+        "calc.vec.wedge_product",
         "calc.vec.work"
       ],
-      "concept_count": 35
+      "concept_count": 41
     },
     {
       "id": "calc3.b13",
@@ -1073,18 +1090,29 @@
       "domain": "calc3",
       "band": 13,
       "depth_min": 39,
-      "depth_max": 40,
+      "depth_max": 41,
       "subdomains": [
+        "calculus.advanced",
         "calculus.multivariable",
         "calculus.vector"
       ],
       "concept_ids": [
         "calc.multi.moments_3d",
+        "calc.multi.surface_measure",
+        "calc.vec.first_variation",
         "calc.vec.flux_general",
+        "calc.vec.gauge",
+        "calc.vec.general_stokes",
+        "calc.vec.geodesic",
+        "calc.vec.greens_identity",
+        "calc.vec.helmholtz",
+        "calc.vec.minimal_surface",
+        "calc.vec.orientation",
+        "calc.vec.oriented_flux",
         "calc.vec.parametric_surface",
         "calc.vec.surface_tangent"
       ],
-      "concept_count": 4
+      "concept_count": 14
     },
     {
       "id": "complex_numbers.b3",
@@ -3398,12 +3426,16 @@
         "ra.seq.bolzano_weierstrass",
         "ra.seq.cauchy",
         "ra.seq.cauchy_criterion",
+        "ra.seq.cluster",
+        "ra.seq.double_series",
+        "ra.seq.liminf",
+        "ra.seq.limsup",
         "ra.seq.monotone",
         "ra.seq.series",
         "ra.seq.subsequence",
         "ra.seq.tests"
       ],
-      "concept_count": 29
+      "concept_count": 33
     },
     {
       "id": "real_analysis.b11",
@@ -3429,6 +3461,7 @@
         "ra.deriv.uniform_conv",
         "ra.deriv.weierstrass_approx",
         "ra.measure.cantor_set",
+        "ra.measure.lebesgue",
         "ra.measure.null",
         "ra.metric.baire",
         "ra.metric.closure",
@@ -3440,10 +3473,11 @@
         "ra.metric.total_bounded",
         "ra.order.schroder_bernstein",
         "ra.order.uncountable",
+        "ra.seq.fourier_convergence",
         "ra.seq.rearrangement",
         "ra.seq.weierstrass_m"
       ],
-      "concept_count": 22
+      "concept_count": 24
     },
     {
       "id": "real_analysis.b12",
@@ -3453,17 +3487,29 @@
       "depth_min": 36,
       "depth_max": 38,
       "subdomains": [
-        "real_analysis.deriv"
+        "real_analysis.deriv",
+        "real_analysis.measure",
+        "real_analysis.metric"
       ],
       "concept_ids": [
         "calc.integral.riemann_criteria",
         "ra.deriv.bounded_variation",
         "ra.deriv.ftc",
         "ra.deriv.improper",
+        "ra.deriv.lebesgue_differentiation",
         "ra.deriv.parts",
-        "ra.deriv.riemann"
+        "ra.deriv.riemann",
+        "ra.measure.dominated_convergence",
+        "ra.measure.fubini_tonelli",
+        "ra.measure.lebesgue_integral",
+        "ra.measure.measurable_functions",
+        "ra.measure.measurable_sets",
+        "ra.measure.monotone_convergence",
+        "ra.measure.product",
+        "ra.measure.simple_integral",
+        "ra.metric.lp_space"
       ],
-      "concept_count": 6
+      "concept_count": 16
     },
     {
       "id": "real_analysis.b13",
@@ -3471,14 +3517,24 @@
       "domain": "real_analysis",
       "band": 13,
       "depth_min": 39,
-      "depth_max": 39,
+      "depth_max": 41,
       "subdomains": [
-        "real_analysis.deriv"
+        "real_analysis.deriv",
+        "real_analysis.measure",
+        "real_analysis.metric"
       ],
       "concept_ids": [
-        "ra.deriv.riemann_stieltjes"
+        "ra.deriv.absolute_continuity",
+        "ra.deriv.riemann_stieltjes",
+        "ra.measure.fatou",
+        "ra.metric.banach",
+        "ra.metric.bounded_operator",
+        "ra.metric.hilbert",
+        "ra.metric.holder",
+        "ra.metric.minkowski",
+        "ra.metric.riesz_representation"
       ],
-      "concept_count": 1
+      "concept_count": 9
     },
     {
       "id": "statistics.b0",

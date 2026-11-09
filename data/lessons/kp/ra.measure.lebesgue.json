@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Measure of an interval",
+    "section": "Measure of an interval",
+    "subgoals": [
+      "Write the governing relation for lebesgue measure",
+      "Substitute the given values in the measure of an interval step",
+      "Simplify and state the measure of an interval result"
+    ]
+  },
+  {
+    "label": "Disjoint unions",
+    "section": "Disjoint unions",
+    "subgoals": [
+      "Write the governing relation for lebesgue measure",
+      "Substitute the given values in the disjoint unions step",
+      "Simplify and state the disjoint unions result"
+    ]
+  },
+  {
+    "label": "Overlapping intervals",
+    "section": "Overlapping intervals",
+    "subgoals": [
+      "Write the governing relation for lebesgue measure",
+      "Substitute the given values in the overlapping intervals step",
+      "Simplify and state the overlapping intervals result"
+    ]
+  }
+]

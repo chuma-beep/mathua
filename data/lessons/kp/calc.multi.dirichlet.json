@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Boundary data",
+    "section": "Boundary data",
+    "subgoals": [
+      "Write the governing relation for the dirichlet problem",
+      "Substitute the given values in the boundary data step",
+      "Simplify and state the boundary data result"
+    ]
+  },
+  {
+    "label": "An interior point",
+    "section": "An interior point",
+    "subgoals": [
+      "Write the governing relation for the dirichlet problem",
+      "Substitute the given values in the an interior point step",
+      "Simplify and state the an interior point result"
+    ]
+  },
+  {
+    "label": "Uniqueness",
+    "section": "Uniqueness",
+    "subgoals": [
+      "Write the governing relation for the dirichlet problem",
+      "Substitute the given values in the uniqueness step",
+      "Simplify and state the uniqueness result"
+    ]
+  }
+]

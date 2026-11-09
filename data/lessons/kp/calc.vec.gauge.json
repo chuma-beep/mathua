@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Adding a gradient",
+    "section": "Adding a gradient",
+    "subgoals": [
+      "Write the governing relation for gauge transformations",
+      "Substitute the given values in the adding a gradient step",
+      "Simplify and state the adding a gradient result"
+    ]
+  },
+  {
+    "label": "The field is unchanged",
+    "section": "The field is unchanged",
+    "subgoals": [
+      "Write the governing relation for gauge transformations",
+      "Substitute the given values in the the field is unchanged step",
+      "Simplify and state the the field is unchanged result"
+    ]
+  },
+  {
+    "label": "The gauge function",
+    "section": "The gauge function",
+    "subgoals": [
+      "Write the governing relation for gauge transformations",
+      "Substitute the given values in the the gauge function step",
+      "Simplify and state the the gauge function result"
+    ]
+  }
+]

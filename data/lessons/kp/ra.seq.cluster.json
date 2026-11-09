@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Cluster points",
+    "section": "Cluster points",
+    "subgoals": [
+      "Write the governing relation for cluster points and subsequential limits",
+      "Substitute the given values in the cluster points step",
+      "Simplify and state the cluster points result"
+    ]
+  },
+  {
+    "label": "Two subsequences",
+    "section": "Two subsequences",
+    "subgoals": [
+      "Write the governing relation for cluster points and subsequential limits",
+      "Substitute the given values in the two subsequences step",
+      "Simplify and state the two subsequences result"
+    ]
+  },
+  {
+    "label": "Alternating sequences",
+    "section": "Alternating sequences",
+    "subgoals": [
+      "Write the governing relation for cluster points and subsequential limits",
+      "Substitute the given values in the alternating sequences step",
+      "Simplify and state the alternating sequences result"
+    ]
+  }
+]

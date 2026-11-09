@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Average on a circle",
+    "section": "Average on a circle",
+    "subgoals": [
+      "Write the governing relation for the mean value property",
+      "Substitute the given values in the average on a circle step",
+      "Simplify and state the average on a circle result"
+    ]
+  },
+  {
+    "label": "Value at the centre",
+    "section": "Value at the centre",
+    "subgoals": [
+      "Write the governing relation for the mean value property",
+      "Substitute the given values in the value at the centre step",
+      "Simplify and state the value at the centre result"
+    ]
+  },
+  {
+    "label": "Four cardinal points",
+    "section": "Four cardinal points",
+    "subgoals": [
+      "Write the governing relation for the mean value property",
+      "Substitute the given values in the four cardinal points step",
+      "Simplify and state the four cardinal points result"
+    ]
+  }
+]

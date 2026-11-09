@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The wedge of two one-forms",
+    "section": "The wedge of two one-forms",
+    "subgoals": [
+      "Write the governing relation for the wedge product",
+      "Substitute the given values in the the wedge of two one-forms step",
+      "Simplify and state the the wedge of two one-forms result"
+    ]
+  },
+  {
+    "label": "Order reversal",
+    "section": "Order reversal",
+    "subgoals": [
+      "Write the governing relation for the wedge product",
+      "Substitute the given values in the order reversal step",
+      "Simplify and state the order reversal result"
+    ]
+  },
+  {
+    "label": "Wedge products in three dimensions",
+    "section": "Wedge products in three dimensions",
+    "subgoals": [
+      "Write the governing relation for the wedge product",
+      "Substitute the given values in the wedge products in three dimensions step",
+      "Simplify and state the wedge products in three dimensions result"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The first identity",
+    "section": "The first identity",
+    "subgoals": [
+      "Write the governing relation for green's identities",
+      "Substitute the given values in the the first identity step",
+      "Simplify and state the the first identity result"
+    ]
+  },
+  {
+    "label": "Boundary term",
+    "section": "Boundary term",
+    "subgoals": [
+      "Write the governing relation for green's identities",
+      "Substitute the given values in the boundary term step",
+      "Simplify and state the boundary term result"
+    ]
+  },
+  {
+    "label": "Symmetry",
+    "section": "Symmetry",
+    "subgoals": [
+      "Write the governing relation for green's identities",
+      "Substitute the given values in the symmetry step",
+      "Simplify and state the symmetry result"
+    ]
+  }
+]

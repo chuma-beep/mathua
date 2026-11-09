@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Functional derivative",
+    "section": "Functional derivative",
+    "subgoals": [
+      "Write the governing relation for the euler-lagrange equation",
+      "Substitute the given values in the functional derivative step",
+      "Simplify and state the functional derivative result"
+    ]
+  },
+  {
+    "label": "Solving the equation",
+    "section": "Solving the equation",
+    "subgoals": [
+      "Write the governing relation for the euler-lagrange equation",
+      "Substitute the given values in the solving the equation step",
+      "Simplify and state the solving the equation result"
+    ]
+  },
+  {
+    "label": "Straight-line check",
+    "section": "Straight-line check",
+    "subgoals": [
+      "Write the governing relation for the euler-lagrange equation",
+      "Substitute the given values in the straight-line check step",
+      "Simplify and state the straight-line check result"
+    ]
+  }
+]

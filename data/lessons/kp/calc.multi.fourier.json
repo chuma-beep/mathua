@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Zero frequency",
+    "section": "Zero frequency",
+    "subgoals": [
+      "Write the governing relation for multivariable fourier transform",
+      "Substitute the given values in the zero frequency step",
+      "Simplify and state the zero frequency result"
+    ]
+  },
+  {
+    "label": "An alternating coefficient",
+    "section": "An alternating coefficient",
+    "subgoals": [
+      "Write the governing relation for multivariable fourier transform",
+      "Substitute the given values in the an alternating coefficient step",
+      "Simplify and state the an alternating coefficient result"
+    ]
+  },
+  {
+    "label": "The inverse transform",
+    "section": "The inverse transform",
+    "subgoals": [
+      "Write the governing relation for multivariable fourier transform",
+      "Substitute the given values in the the inverse transform step",
+      "Simplify and state the the inverse transform result"
+    ]
+  }
+]

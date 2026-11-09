@@ -12,16 +12,16 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 1700 |
+| Total concepts | 1750 |
 | Total units | 141 |
 | Minimum unit size | 1 |
 | Median unit size | 8 |
 | Maximum unit size | 58 |
-| Singleton units | 24 |
-| Units with <= 3 concepts | 39 |
-| Units with > 25 concepts | 16 |
+| Singleton units | 23 |
+| Units with <= 3 concepts | 38 |
+| Units with > 25 concepts | 17 |
 | Units with > 50 concepts | 1 |
-| Cross-unit prerequisite edges (derived) | 477 |
+| Cross-unit prerequisite edges (derived) | 478 |
 | Backward band edges | 0 |
 
 If the learner is assessed once per unit, then 141 assessments cover the corpus, and the
@@ -59,10 +59,10 @@ exists to make concrete.
 | `calc2.b12` | calc2 | 12 | 42 | 3 | 36–38 |
 | `calc2.b13` | calc2 | 13 | 1 | 1 | 39–39 |
 | `calc3.b9` | calc3 | 9 | 5 | 1 | 28–29 |
-| `calc3.b10` | calc3 | 10 | 9 | 3 | 31–32 |
-| `calc3.b11` | calc3 | 11 | 18 | 3 | 33–35 |
-| `calc3.b12` | calc3 | 12 | 35 | 5 | 36–38 |
-| `calc3.b13` | calc3 | 13 | 4 | 2 | 39–40 |
+| `calc3.b10` | calc3 | 10 | 11 | 3 | 30–32 |
+| `calc3.b11` | calc3 | 11 | 26 | 3 | 33–35 |
+| `calc3.b12` | calc3 | 12 | 41 | 6 | 36–38 |
+| `calc3.b13` | calc3 | 13 | 14 | 3 | 39–41 |
 | `complex_numbers.b3` | complex_numbers | 3 | 4 | 2 | 10–11 |
 | `complex_numbers.b6` | complex_numbers | 6 | 1 | 1 | 20–20 |
 | `complex_numbers.b7` | complex_numbers | 7 | 10 | 2 | 21–23 |
@@ -151,10 +151,10 @@ exists to make concrete.
 | `probability_theory.b5` | probability_theory | 5 | 20 | 8 | 15–17 |
 | `probability_theory.b6` | probability_theory | 6 | 4 | 2 | 18–19 |
 | `real_analysis.b9` | real_analysis | 9 | 7 | 3 | 27–29 |
-| `real_analysis.b10` | real_analysis | 10 | 29 | 5 | 30–32 |
-| `real_analysis.b11` | real_analysis | 11 | 22 | 5 | 33–35 |
-| `real_analysis.b12` | real_analysis | 12 | 6 | 1 | 36–38 |
-| `real_analysis.b13` | real_analysis | 13 | 1 | 1 | 39–39 |
+| `real_analysis.b10` | real_analysis | 10 | 33 | 5 | 30–32 |
+| `real_analysis.b11` | real_analysis | 11 | 24 | 5 | 33–35 |
+| `real_analysis.b12` | real_analysis | 12 | 16 | 3 | 36–38 |
+| `real_analysis.b13` | real_analysis | 13 | 9 | 3 | 39–41 |
 | `statistics.b0` | statistics | 0 | 4 | 2 | 1–2 |
 | `statistics.b1` | statistics | 1 | 1 | 1 | 3–3 |
 | `statistics.b2` | statistics | 2 | 1 | 1 | 8–8 |
@@ -187,19 +187,19 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 186 | 7 | 50 | 28 | 49 | 7 | 0 |
-| 3 | 141 | 8 | 58 | 24 | 39 | 16 | 0 |
-| 4 | 108 | 13 | 83 | 11 | 19 | 25 | 0 |
-| 5 | 96 | 12 | 104 | 10 | 19 | 28 | 0 |
-| 6 | 87 | 14 | 98 | 7 | 14 | 25 | 0 |
-| 8 | 68 | 21 | 103 | 5 | 9 | 30 | 0 |
-| 10 | 59 | 25 | 145 | 5 | 10 | 29 | 0 |
+| 2 | 187 | 7 | 50 | 26 | 48 | 8 | 0 |
+| 3 | 141 | 8 | 58 | 23 | 38 | 17 | 0 |
+| 4 | 109 | 13 | 83 | 10 | 19 | 25 | 0 |
+| 5 | 97 | 12 | 104 | 9 | 19 | 29 | 0 |
+| 6 | 87 | 16 | 98 | 7 | 14 | 25 | 0 |
+| 8 | 69 | 21 | 103 | 4 | 9 | 30 | 0 |
+| 10 | 60 | 25 | 145 | 4 | 10 | 29 | 0 |
 | 12 | 58 | 28 | 105 | 1 | 4 | 29 | 0 |
 | 15 | 48 | 33 | 165 | 2 | 5 | 27 | 0 |
-| 20 | 39 | 43 | 145 | 3 | 5 | 27 | 0 |
-| 45 | 24 | 70 | 171 | 1 | 1 | 23 | 0 |
+| 20 | 40 | 43 | 145 | 2 | 5 | 27 | 0 |
+| 45 | 24 | 71 | 171 | 1 | 1 | 23 | 0 |
 
-**No width is clean.** Small widths fragment, at 3 there are 24 singleton units, which is a
+**No width is clean.** Small widths fragment, at 3 there are 23 singleton units, which is a
 quiz per concept and is exactly what §12 rules out. Large widths stop fragmenting but produce
 units too large to assess: at 45 the partition is just the 17 domains themselves, whose
 largest is 128 concepts. The usable widths trade fragmentation against size rather than
@@ -445,12 +445,12 @@ Unresolvable subdomains:
 
 `trigonometry.identities`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1700
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1750
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings
 
-- **anomaly** `singleton_units`: 24 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
+- **anomaly** `singleton_units`: 23 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
 
 ## Not decided here
 

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Rectangle measure",
+    "section": "Rectangle measure",
+    "subgoals": [
+      "Write the governing relation for product measures",
+      "Substitute the given values in the rectangle measure step",
+      "Simplify and state the rectangle measure result"
+    ]
+  },
+  {
+    "label": "Product sigma-algebra",
+    "section": "Product sigma-algebra",
+    "subgoals": [
+      "Write the governing relation for product measures",
+      "Substitute the given values in the product sigma-algebra step",
+      "Simplify and state the product sigma-algebra result"
+    ]
+  },
+  {
+    "label": "Area of a product set",
+    "section": "Area of a product set",
+    "subgoals": [
+      "Write the governing relation for product measures",
+      "Substitute the given values in the area of a product set step",
+      "Simplify and state the area of a product set result"
+    ]
+  }
+]

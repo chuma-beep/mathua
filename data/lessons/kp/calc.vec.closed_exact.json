@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The closed test",
+    "section": "The closed test",
+    "subgoals": [
+      "Write the governing relation for closed and exact forms",
+      "Substitute the given values in the the closed test step",
+      "Simplify and state the the closed test result"
+    ]
+  },
+  {
+    "label": "Finding a potential",
+    "section": "Finding a potential",
+    "subgoals": [
+      "Write the governing relation for closed and exact forms",
+      "Substitute the given values in the finding a potential step",
+      "Simplify and state the finding a potential result"
+    ]
+  },
+  {
+    "label": "The punctured plane",
+    "section": "The punctured plane",
+    "subgoals": [
+      "Write the governing relation for closed and exact forms",
+      "Substitute the given values in the the punctured plane step",
+      "Simplify and state the the punctured plane result"
+    ]
+  }
+]

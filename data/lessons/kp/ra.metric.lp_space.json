@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Lp norm",
+    "section": "The Lp norm",
+    "subgoals": [
+      "Write the governing relation for lp spaces",
+      "Substitute the given values in the the lp norm step",
+      "Simplify and state the the lp norm result"
+    ]
+  },
+  {
+    "label": "The p equals 2 case",
+    "section": "The p equals 2 case",
+    "subgoals": [
+      "Write the governing relation for lp spaces",
+      "Substitute the given values in the the p equals 2 case step",
+      "Simplify and state the the p equals 2 case result"
+    ]
+  },
+  {
+    "label": "Finite sequence spaces",
+    "section": "Finite sequence spaces",
+    "subgoals": [
+      "Write the governing relation for lp spaces",
+      "Substitute the given values in the finite sequence spaces step",
+      "Simplify and state the finite sequence spaces result"
+    ]
+  }
+]

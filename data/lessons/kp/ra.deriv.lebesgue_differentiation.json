@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Averages over intervals",
+    "section": "Averages over intervals",
+    "subgoals": [
+      "Write the governing relation for the lebesgue differentiation theorem",
+      "Substitute the given values in the averages over intervals step",
+      "Simplify and state the averages over intervals result"
+    ]
+  },
+  {
+    "label": "Derivative of an integral",
+    "section": "Derivative of an integral",
+    "subgoals": [
+      "Write the governing relation for the lebesgue differentiation theorem",
+      "Substitute the given values in the derivative of an integral step",
+      "Simplify and state the derivative of an integral result"
+    ]
+  },
+  {
+    "label": "Lebesgue points",
+    "section": "Lebesgue points",
+    "subgoals": [
+      "Write the governing relation for the lebesgue differentiation theorem",
+      "Substitute the given values in the lebesgue points step",
+      "Simplify and state the lebesgue points result"
+    ]
+  }
+]

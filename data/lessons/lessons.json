@@ -6798,5 +6798,205 @@
   {
     "concept_id": "stat.data.missing",
     "source": "authored/stat.data.missing.md"
+  },
+  {
+    "concept_id": "calc.vec.orientation",
+    "source": "authored/calc.vec.orientation.md"
+  },
+  {
+    "concept_id": "calc.vec.oriented_flux",
+    "source": "authored/calc.vec.oriented_flux.md"
+  },
+  {
+    "concept_id": "calc.vec.differential_form",
+    "source": "authored/calc.vec.differential_form.md"
+  },
+  {
+    "concept_id": "calc.vec.wedge_product",
+    "source": "authored/calc.vec.wedge_product.md"
+  },
+  {
+    "concept_id": "calc.vec.exterior_derivative",
+    "source": "authored/calc.vec.exterior_derivative.md"
+  },
+  {
+    "concept_id": "ra.seq.limsup",
+    "source": "authored/ra.seq.limsup.md"
+  },
+  {
+    "concept_id": "ra.seq.liminf",
+    "source": "authored/ra.seq.liminf.md"
+  },
+  {
+    "concept_id": "ra.seq.cluster",
+    "source": "authored/ra.seq.cluster.md"
+  },
+  {
+    "concept_id": "ra.measure.lebesgue",
+    "source": "authored/ra.measure.lebesgue.md"
+  },
+  {
+    "concept_id": "ra.measure.simple_integral",
+    "source": "authored/ra.measure.simple_integral.md"
+  },
+  {
+    "concept_id": "calc.vec.general_stokes",
+    "source": "authored/calc.vec.general_stokes.md"
+  },
+  {
+    "concept_id": "calc.vec.pullback",
+    "source": "authored/calc.vec.pullback.md"
+  },
+  {
+    "concept_id": "calc.vec.closed_exact",
+    "source": "authored/calc.vec.closed_exact.md"
+  },
+  {
+    "concept_id": "calc.vec.vector_potential",
+    "source": "authored/calc.vec.vector_potential.md"
+  },
+  {
+    "concept_id": "calc.vec.helmholtz",
+    "source": "authored/calc.vec.helmholtz.md"
+  },
+  {
+    "concept_id": "calc.vec.gauge",
+    "source": "authored/calc.vec.gauge.md"
+  },
+  {
+    "concept_id": "calc.multi.harmonic",
+    "source": "authored/calc.multi.harmonic.md"
+  },
+  {
+    "concept_id": "calc.multi.mean_value",
+    "source": "authored/calc.multi.mean_value.md"
+  },
+  {
+    "concept_id": "calc.multi.maximum_principle",
+    "source": "authored/calc.multi.maximum_principle.md"
+  },
+  {
+    "concept_id": "calc.multi.poisson",
+    "source": "authored/calc.multi.poisson.md"
+  },
+  {
+    "concept_id": "calc.multi.dirichlet",
+    "source": "authored/calc.multi.dirichlet.md"
+  },
+  {
+    "concept_id": "calc.multi.neumann",
+    "source": "authored/calc.multi.neumann.md"
+  },
+  {
+    "concept_id": "calc.vec.greens_identity",
+    "source": "authored/calc.vec.greens_identity.md"
+  },
+  {
+    "concept_id": "calc.multi.fundamental_solution",
+    "source": "authored/calc.multi.fundamental_solution.md"
+  },
+  {
+    "concept_id": "calc.vec.euler_lagrange",
+    "source": "authored/calc.vec.euler_lagrange.md"
+  },
+  {
+    "concept_id": "calc.vec.first_variation",
+    "source": "authored/calc.vec.first_variation.md"
+  },
+  {
+    "concept_id": "calc.vec.geodesic",
+    "source": "authored/calc.vec.geodesic.md"
+  },
+  {
+    "concept_id": "calc.vec.minimal_surface",
+    "source": "authored/calc.vec.minimal_surface.md"
+  },
+  {
+    "concept_id": "calc.multi.surface_measure",
+    "source": "authored/calc.multi.surface_measure.md"
+  },
+  {
+    "concept_id": "calc.multi.fourier",
+    "source": "authored/calc.multi.fourier.md"
+  },
+  {
+    "concept_id": "calc.multi.convolution",
+    "source": "authored/calc.multi.convolution.md"
+  },
+  {
+    "concept_id": "ra.seq.double_series",
+    "source": "authored/ra.seq.double_series.md"
+  },
+  {
+    "concept_id": "ra.seq.fourier_convergence",
+    "source": "authored/ra.seq.fourier_convergence.md"
+  },
+  {
+    "concept_id": "ra.measure.measurable_sets",
+    "source": "authored/ra.measure.measurable_sets.md"
+  },
+  {
+    "concept_id": "ra.measure.measurable_functions",
+    "source": "authored/ra.measure.measurable_functions.md"
+  },
+  {
+    "concept_id": "ra.measure.lebesgue_integral",
+    "source": "authored/ra.measure.lebesgue_integral.md"
+  },
+  {
+    "concept_id": "ra.measure.monotone_convergence",
+    "source": "authored/ra.measure.monotone_convergence.md"
+  },
+  {
+    "concept_id": "ra.measure.fatou",
+    "source": "authored/ra.measure.fatou.md"
+  },
+  {
+    "concept_id": "ra.measure.dominated_convergence",
+    "source": "authored/ra.measure.dominated_convergence.md"
+  },
+  {
+    "concept_id": "ra.measure.product",
+    "source": "authored/ra.measure.product.md"
+  },
+  {
+    "concept_id": "ra.measure.fubini_tonelli",
+    "source": "authored/ra.measure.fubini_tonelli.md"
+  },
+  {
+    "concept_id": "ra.metric.lp_space",
+    "source": "authored/ra.metric.lp_space.md"
+  },
+  {
+    "concept_id": "ra.metric.holder",
+    "source": "authored/ra.metric.holder.md"
+  },
+  {
+    "concept_id": "ra.metric.minkowski",
+    "source": "authored/ra.metric.minkowski.md"
+  },
+  {
+    "concept_id": "ra.metric.banach",
+    "source": "authored/ra.metric.banach.md"
+  },
+  {
+    "concept_id": "ra.metric.hilbert",
+    "source": "authored/ra.metric.hilbert.md"
+  },
+  {
+    "concept_id": "ra.metric.bounded_operator",
+    "source": "authored/ra.metric.bounded_operator.md"
+  },
+  {
+    "concept_id": "ra.metric.riesz_representation",
+    "source": "authored/ra.metric.riesz_representation.md"
+  },
+  {
+    "concept_id": "ra.deriv.absolute_continuity",
+    "source": "authored/ra.deriv.absolute_continuity.md"
+  },
+  {
+    "concept_id": "ra.deriv.lebesgue_differentiation",
+    "source": "authored/ra.deriv.lebesgue_differentiation.md"
   }
 ]

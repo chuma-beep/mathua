@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Indicator functions",
+    "section": "Indicator functions",
+    "subgoals": [
+      "Write the governing relation for measurable functions",
+      "Substitute the given values in the indicator functions step",
+      "Simplify and state the indicator functions result"
+    ]
+  },
+  {
+    "label": "Continuous composition",
+    "section": "Continuous composition",
+    "subgoals": [
+      "Write the governing relation for measurable functions",
+      "Substitute the given values in the continuous composition step",
+      "Simplify and state the continuous composition result"
+    ]
+  },
+  {
+    "label": "Suprema",
+    "section": "Suprema",
+    "subgoals": [
+      "Write the governing relation for measurable functions",
+      "Substitute the given values in the suprema step",
+      "Simplify and state the suprema result"
+    ]
+  }
+]

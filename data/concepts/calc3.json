@@ -1021,5 +1021,375 @@
       "avg_time_seconds": 26
     },
     "domain": "calc3"
+  },
+  {
+    "id": "calc.vec.orientation",
+    "label": "Orientation of surfaces",
+    "domain": "calc3",
+    "subdomain": "calculus.vector",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.vec.parametric_surface"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "calc.vec.oriented_flux",
+    "label": "Oriented surface flux",
+    "domain": "calc3",
+    "subdomain": "calculus.vector",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.vec.flux_general",
+      "calc.vec.orientation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "calc.vec.differential_form",
+    "label": "Differential forms",
+    "domain": "calc3",
+    "subdomain": "calculus.vector",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.vec.identities"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "calc.vec.wedge_product",
+    "label": "The wedge product",
+    "domain": "calc3",
+    "subdomain": "calculus.vector",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.vec.differential_form"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "calc.vec.exterior_derivative",
+    "label": "The exterior derivative",
+    "domain": "calc3",
+    "subdomain": "calculus.vector",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.vec.differential_form"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "calc.vec.general_stokes",
+    "label": "Generalized Stokes' theorem",
+    "domain": "calc3",
+    "subdomain": "calculus.vector",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.vec.stokes",
+      "calc.vec.exterior_derivative"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.vec.pullback",
+    "label": "Pullback of a differential form",
+    "domain": "calc3",
+    "subdomain": "calculus.vector",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.vec.differential_form"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.vec.closed_exact",
+    "label": "Closed and exact forms",
+    "domain": "calc3",
+    "subdomain": "calculus.vector",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.vec.exterior_derivative"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.vec.vector_potential",
+    "label": "Vector potentials",
+    "domain": "calc3",
+    "subdomain": "calculus.vector",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.vec.conservative_test"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.vec.helmholtz",
+    "label": "Helmholtz decomposition",
+    "domain": "calc3",
+    "subdomain": "calculus.vector",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.vec.vector_potential",
+      "calc.vec.divergence"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.vec.gauge",
+    "label": "Gauge transformations",
+    "domain": "calc3",
+    "subdomain": "calculus.vector",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.vec.vector_potential"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.multi.harmonic",
+    "label": "Harmonic functions",
+    "domain": "calc3",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.partial_higher"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.multi.mean_value",
+    "label": "The mean value property",
+    "domain": "calc3",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.harmonic"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.multi.maximum_principle",
+    "label": "The maximum principle",
+    "domain": "calc3",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.harmonic"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.multi.poisson",
+    "label": "The Poisson equation",
+    "domain": "calc3",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.harmonic"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.multi.dirichlet",
+    "label": "The Dirichlet problem",
+    "domain": "calc3",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.poisson"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.multi.neumann",
+    "label": "The Neumann problem",
+    "domain": "calc3",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.poisson"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.vec.greens_identity",
+    "label": "Green's identities",
+    "domain": "calc3",
+    "subdomain": "calculus.vector",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.vec.greens_theorem",
+      "calc.vec.divergence_theorem"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.multi.fundamental_solution",
+    "label": "The fundamental solution",
+    "domain": "calc3",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.poisson"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.vec.euler_lagrange",
+    "label": "The Euler-Lagrange equation",
+    "domain": "calc3",
+    "subdomain": "calculus.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.lagrange",
+      "calc.vec.arc_length"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.vec.first_variation",
+    "label": "The first variation",
+    "domain": "calc3",
+    "subdomain": "calculus.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.vec.euler_lagrange"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.vec.geodesic",
+    "label": "Geodesics",
+    "domain": "calc3",
+    "subdomain": "calculus.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.vec.first_variation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.vec.minimal_surface",
+    "label": "Minimal surfaces",
+    "domain": "calc3",
+    "subdomain": "calculus.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.vec.first_variation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.multi.surface_measure",
+    "label": "Surface measure",
+    "domain": "calc3",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.transform_jacobian",
+      "calc.vec.parametric_surface"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.multi.fourier",
+    "label": "Multivariable Fourier transform",
+    "domain": "calc3",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.seq.function_sequences"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.multi.convolution",
+    "label": "Multivariable convolution",
+    "domain": "calc3",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.fourier"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
   }
 ]

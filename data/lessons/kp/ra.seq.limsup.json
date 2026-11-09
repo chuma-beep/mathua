@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Subsequential limits",
+    "section": "Subsequential limits",
+    "subgoals": [
+      "Write the governing relation for the limit superior of a sequence",
+      "Substitute the given values in the subsequential limits step",
+      "Simplify and state the subsequential limits result"
+    ]
+  },
+  {
+    "label": "The largest cluster point",
+    "section": "The largest cluster point",
+    "subgoals": [
+      "Write the governing relation for the limit superior of a sequence",
+      "Substitute the given values in the the largest cluster point step",
+      "Simplify and state the the largest cluster point result"
+    ]
+  },
+  {
+    "label": "Convergent sequences and shifts",
+    "section": "Convergent sequences and shifts",
+    "subgoals": [
+      "Write the governing relation for the limit superior of a sequence",
+      "Substitute the given values in the convergent sequences and shifts step",
+      "Simplify and state the convergent sequences and shifts result"
+    ]
+  }
+]

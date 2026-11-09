@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Representing a functional",
+    "section": "Representing a functional",
+    "subgoals": [
+      "Write the governing relation for the riesz representation theorem",
+      "Substitute the given values in the representing a functional step",
+      "Simplify and state the representing a functional result"
+    ]
+  },
+  {
+    "label": "The inner-product form",
+    "section": "The inner-product form",
+    "subgoals": [
+      "Write the governing relation for the riesz representation theorem",
+      "Substitute the given values in the the inner-product form step",
+      "Simplify and state the the inner-product form result"
+    ]
+  },
+  {
+    "label": "Norm of the representative",
+    "section": "Norm of the representative",
+    "subgoals": [
+      "Write the governing relation for the riesz representation theorem",
+      "Substitute the given values in the norm of the representative step",
+      "Simplify and state the norm of the representative result"
+    ]
+  }
+]

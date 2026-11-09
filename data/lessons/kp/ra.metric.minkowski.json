@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The triangle inequality",
+    "section": "The triangle inequality",
+    "subgoals": [
+      "Write the governing relation for minkowski's inequality",
+      "Substitute the given values in the the triangle inequality step",
+      "Simplify and state the the triangle inequality result"
+    ]
+  },
+  {
+    "label": "Norm of a sum",
+    "section": "Norm of a sum",
+    "subgoals": [
+      "Write the governing relation for minkowski's inequality",
+      "Substitute the given values in the norm of a sum step",
+      "Simplify and state the norm of a sum result"
+    ]
+  },
+  {
+    "label": "Equality case",
+    "section": "Equality case",
+    "subgoals": [
+      "Write the governing relation for minkowski's inequality",
+      "Substitute the given values in the equality case step",
+      "Simplify and state the equality case result"
+    ]
+  }
+]

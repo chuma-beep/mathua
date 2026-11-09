@@ -925,5 +925,343 @@
       "streak": 10,
       "avg_time_seconds": 30
     }
+  },
+  {
+    "id": "ra.seq.limsup",
+    "label": "The limit superior of a sequence",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.seq",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.seq.subsequence"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ra.seq.liminf",
+    "label": "The limit inferior of a sequence",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.seq",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.seq.subsequence"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ra.seq.cluster",
+    "label": "Cluster points and subsequential limits",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.seq",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.seq.bolzano_weierstrass"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ra.measure.lebesgue",
+    "label": "Lebesgue measure",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.measure",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.measure.null"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ra.measure.simple_integral",
+    "label": "The integral of a simple function",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.measure",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.measure.lebesgue"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ra.seq.double_series",
+    "label": "Double series",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.seq",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.seq.series"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "ra.seq.fourier_convergence",
+    "label": "Convergence of Fourier series",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.seq",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.fourier",
+      "ra.deriv.uniform_conv"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "ra.measure.measurable_sets",
+    "label": "Measurable sets",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.measure",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.measure.lebesgue"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "ra.measure.measurable_functions",
+    "label": "Measurable functions",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.measure",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.measure.measurable_sets"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "ra.measure.lebesgue_integral",
+    "label": "The Lebesgue integral",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.measure",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.measure.simple_integral"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "ra.measure.monotone_convergence",
+    "label": "The monotone convergence theorem",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.measure",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.measure.lebesgue_integral"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "ra.measure.fatou",
+    "label": "Fatou's lemma",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.measure",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.measure.monotone_convergence"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "ra.measure.dominated_convergence",
+    "label": "The dominated convergence theorem",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.measure",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.measure.lebesgue_integral"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "ra.measure.product",
+    "label": "Product measures",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.measure",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.measure.lebesgue"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "ra.measure.fubini_tonelli",
+    "label": "The Fubini-Tonelli theorem",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.measure",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.measure.product"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "ra.metric.lp_space",
+    "label": "Lp spaces",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.metric",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.measure.lebesgue_integral",
+      "ra.metric.complete"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "ra.metric.holder",
+    "label": "Holder's inequality",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.metric",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.metric.lp_space"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "ra.metric.minkowski",
+    "label": "Minkowski's inequality",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.metric",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.metric.lp_space"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "ra.metric.banach",
+    "label": "Banach spaces",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.metric",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.metric.lp_space"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "ra.metric.hilbert",
+    "label": "Hilbert spaces",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.metric",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.metric.banach"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "ra.metric.bounded_operator",
+    "label": "Bounded linear operators",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.metric",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.metric.banach"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "ra.metric.riesz_representation",
+    "label": "The Riesz representation theorem",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.metric",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.metric.hilbert"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "ra.deriv.absolute_continuity",
+    "label": "Absolutely continuous functions",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.deriv",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.deriv.bounded_variation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "ra.deriv.lebesgue_differentiation",
+    "label": "The Lebesgue differentiation theorem",
+    "domain": "real_analysis",
+    "subdomain": "real_analysis.deriv",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ra.measure.lebesgue_integral"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
   }
 ]

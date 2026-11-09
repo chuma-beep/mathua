@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Write the governing relation for multivariable convolution",
+      "Substitute the given values in the definition step",
+      "Simplify and state the definition result"
+    ]
+  },
+  {
+    "label": "Fourier product",
+    "section": "Fourier product",
+    "subgoals": [
+      "Write the governing relation for multivariable convolution",
+      "Substitute the given values in the fourier product step",
+      "Simplify and state the fourier product result"
+    ]
+  },
+  {
+    "label": "A point value",
+    "section": "A point value",
+    "subgoals": [
+      "Write the governing relation for multivariable convolution",
+      "Substitute the given values in the a point value step",
+      "Simplify and state the a point value result"
+    ]
+  }
+]

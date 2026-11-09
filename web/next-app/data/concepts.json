@@ -8074,6 +8074,376 @@
     "subdomain": "calculus.vector"
   },
   {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.vec.orientation",
+    "label": "Orientation of surfaces",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.vec.parametric_surface"
+    ],
+    "subdomain": "calculus.vector"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.vec.oriented_flux",
+    "label": "Oriented surface flux",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.vec.flux_general",
+      "calc.vec.orientation"
+    ],
+    "subdomain": "calculus.vector"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.vec.differential_form",
+    "label": "Differential forms",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.vec.identities"
+    ],
+    "subdomain": "calculus.vector"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.vec.wedge_product",
+    "label": "The wedge product",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.vec.differential_form"
+    ],
+    "subdomain": "calculus.vector"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.vec.exterior_derivative",
+    "label": "The exterior derivative",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.vec.differential_form"
+    ],
+    "subdomain": "calculus.vector"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.vec.general_stokes",
+    "label": "Generalized Stokes' theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.vec.stokes",
+      "calc.vec.exterior_derivative"
+    ],
+    "subdomain": "calculus.vector"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.vec.pullback",
+    "label": "Pullback of a differential form",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.vec.differential_form"
+    ],
+    "subdomain": "calculus.vector"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.vec.closed_exact",
+    "label": "Closed and exact forms",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.vec.exterior_derivative"
+    ],
+    "subdomain": "calculus.vector"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.vec.vector_potential",
+    "label": "Vector potentials",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.vec.conservative_test"
+    ],
+    "subdomain": "calculus.vector"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.vec.helmholtz",
+    "label": "Helmholtz decomposition",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.vec.vector_potential",
+      "calc.vec.divergence"
+    ],
+    "subdomain": "calculus.vector"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.vec.gauge",
+    "label": "Gauge transformations",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.vec.vector_potential"
+    ],
+    "subdomain": "calculus.vector"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.multi.harmonic",
+    "label": "Harmonic functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.deriv.partial_higher"
+    ],
+    "subdomain": "calculus.multivariable"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.multi.mean_value",
+    "label": "The mean value property",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.multi.harmonic"
+    ],
+    "subdomain": "calculus.multivariable"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.multi.maximum_principle",
+    "label": "The maximum principle",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.multi.harmonic"
+    ],
+    "subdomain": "calculus.multivariable"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.multi.poisson",
+    "label": "The Poisson equation",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.multi.harmonic"
+    ],
+    "subdomain": "calculus.multivariable"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.multi.dirichlet",
+    "label": "The Dirichlet problem",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.multi.poisson"
+    ],
+    "subdomain": "calculus.multivariable"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.multi.neumann",
+    "label": "The Neumann problem",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.multi.poisson"
+    ],
+    "subdomain": "calculus.multivariable"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.vec.greens_identity",
+    "label": "Green's identities",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.vec.greens_theorem",
+      "calc.vec.divergence_theorem"
+    ],
+    "subdomain": "calculus.vector"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.multi.fundamental_solution",
+    "label": "The fundamental solution",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.multi.poisson"
+    ],
+    "subdomain": "calculus.multivariable"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.vec.euler_lagrange",
+    "label": "The Euler-Lagrange equation",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.multi.lagrange",
+      "calc.vec.arc_length"
+    ],
+    "subdomain": "calculus.advanced"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.vec.first_variation",
+    "label": "The first variation",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.vec.euler_lagrange"
+    ],
+    "subdomain": "calculus.advanced"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.vec.geodesic",
+    "label": "Geodesics",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.vec.first_variation"
+    ],
+    "subdomain": "calculus.advanced"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.vec.minimal_surface",
+    "label": "Minimal surfaces",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.vec.first_variation"
+    ],
+    "subdomain": "calculus.advanced"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.multi.surface_measure",
+    "label": "Surface measure",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.multi.transform_jacobian",
+      "calc.vec.parametric_surface"
+    ],
+    "subdomain": "calculus.multivariable"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.multi.fourier",
+    "label": "Multivariable Fourier transform",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.seq.function_sequences"
+    ],
+    "subdomain": "calculus.multivariable"
+  },
+  {
+    "domain": "calc3",
+    "grading_type": "numeric",
+    "id": "calc.multi.convolution",
+    "label": "Multivariable convolution",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.multi.fourier"
+    ],
+    "subdomain": "calculus.multivariable"
+  },
+  {
     "domain": "complex_numbers",
     "grading_type": "complex",
     "id": "complex.basics.concept",
@@ -21526,6 +21896,344 @@
     "prerequisites": [
       "ra.deriv.uniform_conv",
       "ra.limit.evt"
+    ],
+    "subdomain": "real_analysis.deriv"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.seq.limsup",
+    "label": "The limit superior of a sequence",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.seq.subsequence"
+    ],
+    "subdomain": "real_analysis.seq"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.seq.liminf",
+    "label": "The limit inferior of a sequence",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.seq.subsequence"
+    ],
+    "subdomain": "real_analysis.seq"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.seq.cluster",
+    "label": "Cluster points and subsequential limits",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.seq.bolzano_weierstrass"
+    ],
+    "subdomain": "real_analysis.seq"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.measure.lebesgue",
+    "label": "Lebesgue measure",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.measure.null"
+    ],
+    "subdomain": "real_analysis.measure"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.measure.simple_integral",
+    "label": "The integral of a simple function",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.measure.lebesgue"
+    ],
+    "subdomain": "real_analysis.measure"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.seq.double_series",
+    "label": "Double series",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.seq.series"
+    ],
+    "subdomain": "real_analysis.seq"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.seq.fourier_convergence",
+    "label": "Convergence of Fourier series",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.fourier",
+      "ra.deriv.uniform_conv"
+    ],
+    "subdomain": "real_analysis.seq"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.measure.measurable_sets",
+    "label": "Measurable sets",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.measure.lebesgue"
+    ],
+    "subdomain": "real_analysis.measure"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.measure.measurable_functions",
+    "label": "Measurable functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.measure.measurable_sets"
+    ],
+    "subdomain": "real_analysis.measure"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.measure.lebesgue_integral",
+    "label": "The Lebesgue integral",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.measure.simple_integral"
+    ],
+    "subdomain": "real_analysis.measure"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.measure.monotone_convergence",
+    "label": "The monotone convergence theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.measure.lebesgue_integral"
+    ],
+    "subdomain": "real_analysis.measure"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.measure.fatou",
+    "label": "Fatou's lemma",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.measure.monotone_convergence"
+    ],
+    "subdomain": "real_analysis.measure"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.measure.dominated_convergence",
+    "label": "The dominated convergence theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.measure.lebesgue_integral"
+    ],
+    "subdomain": "real_analysis.measure"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.measure.product",
+    "label": "Product measures",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.measure.lebesgue"
+    ],
+    "subdomain": "real_analysis.measure"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.measure.fubini_tonelli",
+    "label": "The Fubini-Tonelli theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.measure.product"
+    ],
+    "subdomain": "real_analysis.measure"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.metric.lp_space",
+    "label": "Lp spaces",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.measure.lebesgue_integral",
+      "ra.metric.complete"
+    ],
+    "subdomain": "real_analysis.metric"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.metric.holder",
+    "label": "Holder's inequality",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.metric.lp_space"
+    ],
+    "subdomain": "real_analysis.metric"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.metric.minkowski",
+    "label": "Minkowski's inequality",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.metric.lp_space"
+    ],
+    "subdomain": "real_analysis.metric"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.metric.banach",
+    "label": "Banach spaces",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.metric.lp_space"
+    ],
+    "subdomain": "real_analysis.metric"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.metric.hilbert",
+    "label": "Hilbert spaces",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.metric.banach"
+    ],
+    "subdomain": "real_analysis.metric"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.metric.bounded_operator",
+    "label": "Bounded linear operators",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.metric.banach"
+    ],
+    "subdomain": "real_analysis.metric"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.metric.riesz_representation",
+    "label": "The Riesz representation theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.metric.hilbert"
+    ],
+    "subdomain": "real_analysis.metric"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.deriv.absolute_continuity",
+    "label": "Absolutely continuous functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.deriv.bounded_variation"
+    ],
+    "subdomain": "real_analysis.deriv"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.deriv.lebesgue_differentiation",
+    "label": "The Lebesgue differentiation theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.measure.lebesgue_integral"
     ],
     "subdomain": "real_analysis.deriv"
   },

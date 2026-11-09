@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Finite rectangular sum",
+    "section": "Finite rectangular sum",
+    "subgoals": [
+      "Write the governing relation for double series",
+      "Substitute the given values in the finite rectangular sum step",
+      "Simplify and state the finite rectangular sum result"
+    ]
+  },
+  {
+    "label": "Convergence by rows",
+    "section": "Convergence by rows",
+    "subgoals": [
+      "Write the governing relation for double series",
+      "Substitute the given values in the convergence by rows step",
+      "Simplify and state the convergence by rows result"
+    ]
+  },
+  {
+    "label": "Absolute convergence",
+    "section": "Absolute convergence",
+    "subgoals": [
+      "Write the governing relation for double series",
+      "Substitute the given values in the absolute convergence step",
+      "Simplify and state the absolute convergence result"
+    ]
+  }
+]

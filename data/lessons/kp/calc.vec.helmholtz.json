@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Divergence-free part",
+    "section": "Divergence-free part",
+    "subgoals": [
+      "Write the governing relation for helmholtz decomposition",
+      "Substitute the given values in the divergence-free part step",
+      "Simplify and state the divergence-free part result"
+    ]
+  },
+  {
+    "label": "Curl-free part",
+    "section": "Curl-free part",
+    "subgoals": [
+      "Write the governing relation for helmholtz decomposition",
+      "Substitute the given values in the curl-free part step",
+      "Simplify and state the curl-free part result"
+    ]
+  },
+  {
+    "label": "Component count",
+    "section": "Component count",
+    "subgoals": [
+      "Write the governing relation for helmholtz decomposition",
+      "Substitute the given values in the component count step",
+      "Simplify and state the component count result"
+    ]
+  }
+]

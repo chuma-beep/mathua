@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Iterated integrals",
+    "section": "Iterated integrals",
+    "subgoals": [
+      "Write the governing relation for the fubini-tonelli theorem",
+      "Substitute the given values in the iterated integrals step",
+      "Simplify and state the iterated integrals result"
+    ]
+  },
+  {
+    "label": "Swapping the order",
+    "section": "Swapping the order",
+    "subgoals": [
+      "Write the governing relation for the fubini-tonelli theorem",
+      "Substitute the given values in the swapping the order step",
+      "Simplify and state the swapping the order result"
+    ]
+  },
+  {
+    "label": "Finite grid check",
+    "section": "Finite grid check",
+    "subgoals": [
+      "Write the governing relation for the fubini-tonelli theorem",
+      "Substitute the given values in the finite grid check step",
+      "Simplify and state the finite grid check result"
+    ]
+  }
+]

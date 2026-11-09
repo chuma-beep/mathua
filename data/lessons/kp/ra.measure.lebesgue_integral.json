@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Step functions",
+    "section": "Step functions",
+    "subgoals": [
+      "Write the governing relation for the lebesgue integral",
+      "Substitute the given values in the step functions step",
+      "Simplify and state the step functions result"
+    ]
+  },
+  {
+    "label": "Comparison with Riemann",
+    "section": "Comparison with Riemann",
+    "subgoals": [
+      "Write the governing relation for the lebesgue integral",
+      "Substitute the given values in the comparison with riemann step",
+      "Simplify and state the comparison with riemann result"
+    ]
+  },
+  {
+    "label": "Counting measure",
+    "section": "Counting measure",
+    "subgoals": [
+      "Write the governing relation for the lebesgue integral",
+      "Substitute the given values in the counting measure step",
+      "Simplify and state the counting measure result"
+    ]
+  }
+]

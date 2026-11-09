@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The area element",
+    "section": "The area element",
+    "subgoals": [
+      "Write the governing relation for surface measure",
+      "Substitute the given values in the the area element step",
+      "Simplify and state the the area element result"
+    ]
+  },
+  {
+    "label": "Area of a graph",
+    "section": "Area of a graph",
+    "subgoals": [
+      "Write the governing relation for surface measure",
+      "Substitute the given values in the area of a graph step",
+      "Simplify and state the area of a graph result"
+    ]
+  },
+  {
+    "label": "Scaling",
+    "section": "Scaling",
+    "subgoals": [
+      "Write the governing relation for surface measure",
+      "Substitute the given values in the scaling step",
+      "Simplify and state the scaling result"
+    ]
+  }
+]

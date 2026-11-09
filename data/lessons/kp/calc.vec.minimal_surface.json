@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Area functional",
+    "section": "Area functional",
+    "subgoals": [
+      "Write the governing relation for minimal surfaces",
+      "Substitute the given values in the area functional step",
+      "Simplify and state the area functional result"
+    ]
+  },
+  {
+    "label": "The minimal-surface equation",
+    "section": "The minimal-surface equation",
+    "subgoals": [
+      "Write the governing relation for minimal surfaces",
+      "Substitute the given values in the the minimal-surface equation step",
+      "Simplify and state the the minimal-surface equation result"
+    ]
+  },
+  {
+    "label": "The catenoid check",
+    "section": "The catenoid check",
+    "subgoals": [
+      "Write the governing relation for minimal surfaces",
+      "Substitute the given values in the the catenoid check step",
+      "Simplify and state the the catenoid check result"
+    ]
+  }
+]

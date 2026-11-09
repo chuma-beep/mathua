@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Increasing integrals",
+    "section": "Increasing integrals",
+    "subgoals": [
+      "Write the governing relation for the monotone convergence theorem",
+      "Substitute the given values in the increasing integrals step",
+      "Simplify and state the increasing integrals result"
+    ]
+  },
+  {
+    "label": "Indicator sequence",
+    "section": "Indicator sequence",
+    "subgoals": [
+      "Write the governing relation for the monotone convergence theorem",
+      "Substitute the given values in the indicator sequence step",
+      "Simplify and state the indicator sequence result"
+    ]
+  },
+  {
+    "label": "Finite measure",
+    "section": "Finite measure",
+    "subgoals": [
+      "Write the governing relation for the monotone convergence theorem",
+      "Substitute the given values in the finite measure step",
+      "Simplify and state the finite measure result"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The inequality",
+    "section": "The inequality",
+    "subgoals": [
+      "Write the governing relation for holder's inequality",
+      "Substitute the given values in the the inequality step",
+      "Simplify and state the the inequality result"
+    ]
+  },
+  {
+    "label": "The equality case",
+    "section": "The equality case",
+    "subgoals": [
+      "Write the governing relation for holder's inequality",
+      "Substitute the given values in the the equality case step",
+      "Simplify and state the the equality case result"
+    ]
+  },
+  {
+    "label": "Conjugate exponents",
+    "section": "Conjugate exponents",
+    "subgoals": [
+      "Write the governing relation for holder's inequality",
+      "Substitute the given values in the conjugate exponents step",
+      "Simplify and state the conjugate exponents result"
+    ]
+  }
+]

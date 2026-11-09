@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The fundamental theorem",
+    "section": "The fundamental theorem",
+    "subgoals": [
+      "Write the governing relation for absolutely continuous functions",
+      "Substitute the given values in the the fundamental theorem step",
+      "Simplify and state the the fundamental theorem result"
+    ]
+  },
+  {
+    "label": "The Cantor function",
+    "section": "The Cantor function",
+    "subgoals": [
+      "Write the governing relation for absolutely continuous functions",
+      "Substitute the given values in the the cantor function step",
+      "Simplify and state the the cantor function result"
+    ]
+  },
+  {
+    "label": "Epsilon-delta estimate",
+    "section": "Epsilon-delta estimate",
+    "subgoals": [
+      "Write the governing relation for absolutely continuous functions",
+      "Substitute the given values in the epsilon-delta estimate step",
+      "Simplify and state the epsilon-delta estimate result"
+    ]
+  }
+]

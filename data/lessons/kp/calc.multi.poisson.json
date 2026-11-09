@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Laplacian",
+    "section": "The Laplacian",
+    "subgoals": [
+      "Write the governing relation for the poisson equation",
+      "Substitute the given values in the the laplacian step",
+      "Simplify and state the the laplacian result"
+    ]
+  },
+  {
+    "label": "A particular solution",
+    "section": "A particular solution",
+    "subgoals": [
+      "Write the governing relation for the poisson equation",
+      "Substitute the given values in the a particular solution step",
+      "Simplify and state the a particular solution result"
+    ]
+  },
+  {
+    "label": "Compatibility",
+    "section": "Compatibility",
+    "subgoals": [
+      "Write the governing relation for the poisson equation",
+      "Substitute the given values in the compatibility step",
+      "Simplify and state the compatibility result"
+    ]
+  }
+]
