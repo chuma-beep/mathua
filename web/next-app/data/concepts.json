@@ -13521,7 +13521,8 @@
     "prerequisites": [
       "linalg.decomp.lu",
       "linalg.inner_product",
-      "linalg.orth.gram_schmidt"
+      "linalg.orth.gram_schmidt",
+      "linalg.transform.householder"
     ],
     "subdomain": "linear_algebra.decompositions"
   },

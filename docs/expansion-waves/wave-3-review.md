@@ -113,6 +113,11 @@ at width 3. The net change is caused by the added concepts and their prerequisit
 existing depths, not by a change to the algorithm. `data/mastery_units.report.md` owns the live
 figures, and `data/mastery_units.json` is regenerated with `go run ./cmd/masteryunits -band 3`.
 
+The follow-up review after closeout made QR depend on Householder, which gives that concept a
+follow-on and removes the new singleton. The live count is therefore 23; the pre-fix closeout
+figure above is retained as the Wave 3 measurement. See
+`docs/expansion-waves/wave-3-followup-review.md`.
+
 ## Validation
 
 Wave 3 closed with `make validate`, `go test ./...`, `git diff --check` and the documentation

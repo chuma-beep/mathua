@@ -2154,7 +2154,6 @@
       "depth_min": 12,
       "depth_max": 14,
       "subdomains": [
-        "linear_algebra.decompositions",
         "linear_algebra.determinants",
         "linear_algebra.inner_product",
         "linear_algebra.matrices",
@@ -2162,7 +2161,6 @@
       ],
       "concept_ids": [
         "linalg.basis.change",
-        "linalg.decomp.qr",
         "linalg.det.properties",
         "linalg.independence.count",
         "linalg.inner_product",
@@ -2175,7 +2173,7 @@
         "linalg.subspace",
         "linalg.vec.basis"
       ],
-      "concept_count": 13
+      "concept_count": 12
     },
     {
       "id": "linear_algebra.b5",
@@ -2183,14 +2181,16 @@
       "domain": "linear_algebra",
       "band": 5,
       "depth_min": 15,
-      "depth_max": 15,
+      "depth_max": 16,
       "subdomains": [
+        "linear_algebra.decompositions",
         "linear_algebra.transformations"
       ],
       "concept_ids": [
+        "linalg.decomp.qr",
         "linalg.transform.householder"
       ],
-      "concept_count": 1
+      "concept_count": 2
     },
     {
       "id": "linear_algebra.b7",

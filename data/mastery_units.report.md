@@ -17,11 +17,11 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 | Minimum unit size | 1 |
 | Median unit size | 8 |
 | Maximum unit size | 58 |
-| Singleton units | 24 |
+| Singleton units | 23 |
 | Units with <= 3 concepts | 38 |
 | Units with > 25 concepts | 15 |
 | Units with > 50 concepts | 1 |
-| Cross-unit prerequisite edges (derived) | 471 |
+| Cross-unit prerequisite edges (derived) | 474 |
 | Backward band edges | 0 |
 
 If the learner is assessed once per unit, then 140 assessments cover the corpus, and the
@@ -106,8 +106,8 @@ exists to make concrete.
 | `linear_algebra.b1` | linear_algebra | 1 | 6 | 2 | 3–5 |
 | `linear_algebra.b2` | linear_algebra | 2 | 2 | 2 | 6–8 |
 | `linear_algebra.b3` | linear_algebra | 3 | 20 | 5 | 9–11 |
-| `linear_algebra.b4` | linear_algebra | 4 | 13 | 5 | 12–14 |
-| `linear_algebra.b5` | linear_algebra | 5 | 1 | 1 | 15–15 |
+| `linear_algebra.b4` | linear_algebra | 4 | 12 | 4 | 12–14 |
+| `linear_algebra.b5` | linear_algebra | 5 | 2 | 2 | 15–16 |
 | `linear_algebra.b7` | linear_algebra | 7 | 7 | 2 | 21–23 |
 | `linear_algebra.b8` | linear_algebra | 8 | 16 | 5 | 24–26 |
 | `linear_algebra.b9` | linear_algebra | 9 | 14 | 5 | 27–29 |
@@ -186,10 +186,10 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 183 | 6 | 50 | 27 | 49 | 7 | 0 |
-| 3 | 140 | 8 | 58 | 24 | 38 | 15 | 0 |
-| 4 | 107 | 13 | 83 | 10 | 19 | 23 | 0 |
-| 5 | 95 | 12 | 104 | 11 | 18 | 25 | 0 |
+| 2 | 184 | 6 | 50 | 28 | 50 | 7 | 0 |
+| 3 | 140 | 8 | 58 | 23 | 38 | 15 | 0 |
+| 4 | 108 | 13 | 83 | 11 | 20 | 23 | 0 |
+| 5 | 95 | 12 | 104 | 10 | 18 | 25 | 0 |
 | 6 | 87 | 14 | 98 | 7 | 14 | 25 | 0 |
 | 8 | 68 | 20 | 103 | 5 | 9 | 28 | 0 |
 | 10 | 59 | 21 | 145 | 5 | 10 | 28 | 0 |
@@ -198,7 +198,7 @@ at every width.
 | 20 | 39 | 43 | 145 | 3 | 5 | 26 | 0 |
 | 45 | 23 | 69 | 171 | 0 | 0 | 23 | 0 |
 
-**No width is clean.** Small widths fragment, at 3 there are 24 singleton units, which is a
+**No width is clean.** Small widths fragment, at 3 there are 23 singleton units, which is a
 quiz per concept and is exactly what §12 rules out. Large widths stop fragmenting but produce
 units too large to assess: at 45 the partition is just the 17 domains themselves, whose
 largest is 128 concepts. The usable widths trade fragmentation against size rather than
@@ -449,7 +449,7 @@ concepts and yields zero backward band edges by construction.
 
 ## Validation findings
 
-- **anomaly** `singleton_units`: 24 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
+- **anomaly** `singleton_units`: 23 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
 
 ## Not decided here
 

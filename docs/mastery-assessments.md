@@ -13,7 +13,7 @@ one changes the schema if guessed at.
 
 Read this before writing any migration. Two of these (D1, D2) determine the table shape.
 
-**Measurement note, 2026-11-09.** The counts in this document were taken at the 666 concepts then held by the corpus. It now holds 1,550, and the generated partition and its report own the current values: width 3 gives 138 units and 24 singleton units. The tables below are kept as the record of the analysis that produced the finding, not as current state.
+**Measurement note, 2026-11-09.** The counts in this document were taken at the 666 concepts then held by the corpus. It now holds 1,650, and the generated partition and its report own the current values: width 3 gives 140 units and 23 singleton units. The tables below are kept as the record of the analysis that produced the finding, not as current state.
 
 ---
 
@@ -142,9 +142,8 @@ The usable widths trade fragmentation against size rather than resolving either.
 does not produce assessment-grade boundaries**, so D3's answer is a derived draft *plus* hand
 merging, not a derivation.
 
-At 1,550 concepts the same sweep is in `data/mastery_units.report.md`: width 3 reads 138 units,
-median 8 and 24 singletons, and width 45 reads 23 domains with algebra, not calculus, the largest
-at 153 concepts.
+At 1,650 concepts the same sweep is in `data/mastery_units.report.md`: width 3 reads 140 units,
+median 8 and 23 singletons. The width-45 comparison remains the historical 1,550-concept measurement.
 
 What the measurement did establish, and what survives: **the corpus has no partition at
 subdomain or domain granularity that admits a topological unit order at all.** Whatever the units
@@ -167,7 +166,7 @@ fragmentation; only someone who knows the learning model can say whether the fra
 problem with the rule or a fact about the corpus.
 
 Open sub-question: **a unit of one concept.** Permitted by the rules, reported as an anomaly
-rather than an error. With 18 singletons when this was written and 24 at the current corpus,
+rather than an error. With 18 singletons when this was written and 23 at the current corpus,
 this is no longer hypothetical, and whether they are an error or a judgement is content, not
 schema.
 

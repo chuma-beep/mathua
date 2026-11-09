@@ -341,7 +341,8 @@
     "prerequisites": [
       "linalg.decomp.lu",
       "linalg.inner_product",
-      "linalg.orth.gram_schmidt"
+      "linalg.orth.gram_schmidt",
+      "linalg.transform.householder"
     ],
     "mastery_threshold": {
       "streak": 10,

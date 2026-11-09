@@ -655,7 +655,14 @@ func w3Householder(kp int) generator.Problem {
 	if kp == 2 || kp == 3 {
 		// The determinant and symmetry do not need the integer matrix. Draw a
 		// wider set of direction vectors so both families have enough variety.
-		vv := [][2]int{{1, 1}, {1, -1}, {1, 0}, {0, 1}, {2, 1}, {1, 2}, {2, -1}, {1, -2}, {-1, 2}, {3, 1}}
+		vv := [][2]int{
+			{1, 0}, {0, 1}, {1, 1}, {1, -1},
+			{2, 1}, {2, -1}, {1, 2}, {1, -2},
+			{3, 1}, {3, -1}, {1, 3}, {1, -3},
+			{3, 2}, {3, -2}, {2, 3}, {2, -3},
+			{4, 1}, {4, -1}, {1, 4}, {1, -4},
+			{4, 3}, {4, -3}, {3, 4}, {3, -4},
+		}
 		v := vv[rand.Intn(len(vv))]
 		f := map[string]string{}
 		w3LI(f, "v1", v[0])
@@ -702,7 +709,15 @@ func w3Householder(kp int) generator.Problem {
 }
 
 func w3Givens(kp int) generator.Problem {
-	pairs := [][3]int{{3, 4, 5}, {4, 3, 5}, {5, 12, 13}, {12, 5, 13}, {8, 15, 17}, {15, 8, 17}}
+	pairs := [][3]int{
+		{3, 4, 5}, {4, 3, 5},
+		{5, 12, 13}, {12, 5, 13},
+		{8, 15, 17}, {15, 8, 17},
+		{7, 24, 25}, {24, 7, 25},
+		{20, 21, 29}, {21, 20, 29},
+		{9, 40, 41}, {40, 9, 41},
+		{28, 45, 53}, {45, 28, 53},
+	}
 	pair := pairs[rand.Intn(len(pairs))]
 	c, s, k := pair[0], pair[1], pair[2]
 	if rand.Intn(2) == 0 {
