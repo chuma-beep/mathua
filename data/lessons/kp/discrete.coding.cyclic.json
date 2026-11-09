@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Shift",
+    "section": "Shift",
+    "subgoals": [
+      "Identify the data for shift",
+      "Apply the cyclic codes relation",
+      "State the resulting integer for shift"
+    ]
+  },
+  {
+    "label": "Polynomial representation",
+    "section": "Polynomial representation",
+    "subgoals": [
+      "Identify the data for polynomial representation",
+      "Apply the cyclic codes relation",
+      "State the resulting integer for polynomial representation"
+    ]
+  },
+  {
+    "label": "Generator polynomial degree",
+    "section": "Generator polynomial degree",
+    "subgoals": [
+      "Identify the data for generator polynomial degree",
+      "Apply the cyclic codes relation",
+      "State the resulting integer for generator polynomial degree"
+    ]
+  }
+]

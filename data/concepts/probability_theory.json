@@ -899,5 +899,317 @@
       "streak": 10,
       "avg_time_seconds": 26
     }
+  },
+  {
+    "id": "prob.process.branching",
+    "label": "Branching processes",
+    "domain": "probability_theory",
+    "subdomain": "probability_theory.processes",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.process.markov_chain"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "prob.process.brownian",
+    "label": "Brownian motion",
+    "domain": "probability_theory",
+    "subdomain": "probability_theory.processes",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.limit.clt",
+      "prob.process.random_walk"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "prob.conc.chernoff",
+    "label": "Chernoff bounds",
+    "domain": "probability_theory",
+    "subdomain": "probability_theory.concentration",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.rv.mgf"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "prob.process.renewal",
+    "label": "Renewal theory",
+    "domain": "probability_theory",
+    "subdomain": "probability_theory.processes",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.dist.poisson_process"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "prob.process.queue",
+    "label": "Queueing processes",
+    "domain": "probability_theory",
+    "subdomain": "probability_theory.processes",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.dist.poisson_process",
+      "prob.process.markov_chain"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "prob.process.ito",
+    "label": "Ito integrals",
+    "domain": "probability_theory",
+    "subdomain": "probability_theory.processes",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.process.brownian"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "prob.process.sde",
+    "label": "Stochastic differential equations",
+    "domain": "probability_theory",
+    "subdomain": "probability_theory.processes",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.process.ito"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "prob.process.gaussian",
+    "label": "Gaussian processes",
+    "domain": "probability_theory",
+    "subdomain": "probability_theory.processes",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.rv.multivariate_transform"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "prob.process.hidden_markov",
+    "label": "Hidden Markov models",
+    "domain": "probability_theory",
+    "subdomain": "probability_theory.processes",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.process.markov_chain"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "prob.process.kalman",
+    "label": "The Kalman filter",
+    "domain": "probability_theory",
+    "subdomain": "probability_theory.processes",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.process.hidden_markov",
+      "prob.process.gaussian"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "prob.conc.hoeffding",
+    "label": "Hoeffding's inequality",
+    "domain": "probability_theory",
+    "subdomain": "probability_theory.concentration",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.conc.chernoff"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "prob.conc.bernstein",
+    "label": "Bernstein's inequality",
+    "domain": "probability_theory",
+    "subdomain": "probability_theory.concentration",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.conc.hoeffding",
+      "prob.rv.variance"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "prob.conc.mcdiarmid",
+    "label": "McDiarmid's inequality",
+    "domain": "probability_theory",
+    "subdomain": "probability_theory.concentration",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.conc.hoeffding"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "prob.limit.lindeberg",
+    "label": "The Lindeberg condition",
+    "domain": "probability_theory",
+    "subdomain": "probability_theory.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.limit.clt"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "prob.limit.berry_esseen",
+    "label": "The Berry-Esseen theorem",
+    "domain": "probability_theory",
+    "subdomain": "probability_theory.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.limit.clt"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "prob.limit.local_clt",
+    "label": "The local central limit theorem",
+    "domain": "probability_theory",
+    "subdomain": "probability_theory.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.limit.clt"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "prob.bayes.conjugate",
+    "label": "Conjugate priors",
+    "domain": "probability_theory",
+    "subdomain": "probability_theory.foundations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.bayes.prior"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "prob.bayes.predictive",
+    "label": "Posterior predictive distributions",
+    "domain": "probability_theory",
+    "subdomain": "probability_theory.foundations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.bayes.conjugate"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "prob.decision.bayes_risk",
+    "label": "Bayes risk",
+    "domain": "probability_theory",
+    "subdomain": "probability_theory.foundations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.expect.conditional"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "prob.decision.minimax",
+    "label": "Minimax decision rules",
+    "domain": "probability_theory",
+    "subdomain": "probability_theory.foundations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.decision.bayes_risk"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "prob.info.entropy",
+    "label": "Entropy of a random variable",
+    "domain": "probability_theory",
+    "subdomain": "probability_theory.information",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.rv.expectation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "prob.info.kl",
+    "label": "Relative entropy and mutual information",
+    "domain": "probability_theory",
+    "subdomain": "probability_theory.information",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.info.entropy"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
   }
 ]

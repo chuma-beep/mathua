@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Bounded difference",
+    "section": "Bounded difference",
+    "subgoals": [
+      "Identify the data for bounded difference",
+      "Apply the mcdiarmid's inequality relation",
+      "State the resulting integer for bounded difference"
+    ]
+  },
+  {
+    "label": "Bound",
+    "section": "Bound",
+    "subgoals": [
+      "Identify the data for bound",
+      "Apply the mcdiarmid's inequality relation",
+      "State the resulting integer for bound"
+    ]
+  },
+  {
+    "label": "Function of independent variables",
+    "section": "Function of independent variables",
+    "subgoals": [
+      "Identify the data for function of independent variables",
+      "Apply the mcdiarmid's inequality relation",
+      "State the resulting integer for function of independent variables"
+    ]
+  }
+]

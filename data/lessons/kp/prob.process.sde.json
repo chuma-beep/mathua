@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Drift and diffusion",
+    "section": "Drift and diffusion",
+    "subgoals": [
+      "Identify the data for drift and diffusion",
+      "Apply the stochastic differential equations relation",
+      "State the resulting integer for drift and diffusion"
+    ]
+  },
+  {
+    "label": "Euler step",
+    "section": "Euler step",
+    "subgoals": [
+      "Identify the data for Euler step",
+      "Apply the stochastic differential equations relation",
+      "State the resulting integer for Euler step"
+    ]
+  },
+  {
+    "label": "Solution mean",
+    "section": "Solution mean",
+    "subgoals": [
+      "Identify the data for solution mean",
+      "Apply the stochastic differential equations relation",
+      "State the resulting integer for solution mean"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Classify language",
+    "section": "Classify language",
+    "subgoals": [
+      "Identify the data for classify language",
+      "Apply the decidable and undecidable languages relation",
+      "State the resulting integer for classify language"
+    ]
+  },
+  {
+    "label": "Reduction direction",
+    "section": "Reduction direction",
+    "subgoals": [
+      "Identify the data for reduction direction",
+      "Apply the decidable and undecidable languages relation",
+      "State the resulting integer for reduction direction"
+    ]
+  },
+  {
+    "label": "Closure property",
+    "section": "Closure property",
+    "subgoals": [
+      "Identify the data for closure property",
+      "Apply the decidable and undecidable languages relation",
+      "State the resulting integer for closure property"
+    ]
+  }
+]

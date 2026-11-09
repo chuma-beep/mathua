@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Posterior predictive",
+    "section": "Posterior predictive",
+    "subgoals": [
+      "Identify the data for posterior predictive",
+      "Apply the posterior predictive distributions relation",
+      "State the resulting integer for posterior predictive"
+    ]
+  },
+  {
+    "label": "Mean",
+    "section": "Mean",
+    "subgoals": [
+      "Identify the data for mean",
+      "Apply the posterior predictive distributions relation",
+      "State the resulting integer for mean"
+    ]
+  },
+  {
+    "label": "Probability",
+    "section": "Probability",
+    "subgoals": [
+      "Identify the data for probability",
+      "Apply the posterior predictive distributions relation",
+      "State the resulting integer for probability"
+    ]
+  }
+]

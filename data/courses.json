@@ -890,7 +890,30 @@
       "discrete.sets.relation_closure",
       "discrete.automata.fsm",
       "discrete.proof.cases",
-      "discrete.coding.hamming"
+      "discrete.coding.hamming",
+      "discrete.automata.nfa",
+      "discrete.automata.regex",
+      "discrete.coding.linear",
+      "discrete.algorithms.dynamic_programming",
+      "discrete.automata.pumping_lemma",
+      "discrete.automata.cfg",
+      "discrete.automata.pda",
+      "discrete.automata.turing",
+      "discrete.automata.decidability",
+      "discrete.automata.halting",
+      "discrete.complexity.reduction",
+      "discrete.complexity.sat",
+      "discrete.complexity.np_complete",
+      "discrete.complexity.cook_levin",
+      "discrete.coding.generator",
+      "discrete.coding.cyclic",
+      "discrete.coding.reed_solomon",
+      "discrete.combinatorics.rook",
+      "discrete.combinatorics.young_tableaux",
+      "discrete.combinatorics.q_binomial",
+      "discrete.combinatorics.permutation_statistics",
+      "discrete.combinatorics.schur",
+      "discrete.algorithms.greedy"
     ]
   },
   {
@@ -994,7 +1017,8 @@
       "stat.reg.information_criteria",
       "stat.reg.quantile",
       "stat.reg.poisson",
-      "stat.data.missing"
+      "stat.data.missing",
+      "stat.infer.multiple_comparisons"
     ]
   },
   {
@@ -1426,7 +1450,11 @@
       "graph.assignment",
       "graph.stable_matching",
       "graph.clique",
-      "graph.dominating_set"
+      "graph.dominating_set",
+      "graph.chordal",
+      "graph.cograph",
+      "graph.interval",
+      "graph.split"
     ]
   },
   {
@@ -1497,7 +1525,29 @@
       "prob.martingale.stopping",
       "prob.rv.multivariate_transform",
       "prob.rv.integral_transform",
-      "prob.dist.geometric"
+      "prob.dist.geometric",
+      "prob.process.branching",
+      "prob.process.brownian",
+      "prob.conc.chernoff",
+      "prob.process.renewal",
+      "prob.process.queue",
+      "prob.process.ito",
+      "prob.process.sde",
+      "prob.process.gaussian",
+      "prob.process.hidden_markov",
+      "prob.process.kalman",
+      "prob.conc.hoeffding",
+      "prob.conc.bernstein",
+      "prob.conc.mcdiarmid",
+      "prob.limit.lindeberg",
+      "prob.limit.berry_esseen",
+      "prob.limit.local_clt",
+      "prob.bayes.conjugate",
+      "prob.bayes.predictive",
+      "prob.decision.bayes_risk",
+      "prob.decision.minimax",
+      "prob.info.entropy",
+      "prob.info.kl"
     ]
   },
   {

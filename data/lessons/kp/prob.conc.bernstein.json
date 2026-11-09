@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Variance term",
+    "section": "Variance term",
+    "subgoals": [
+      "Identify the data for variance term",
+      "Apply the bernstein's inequality relation",
+      "State the resulting integer for variance term"
+    ]
+  },
+  {
+    "label": "Bound",
+    "section": "Bound",
+    "subgoals": [
+      "Identify the data for bound",
+      "Apply the bernstein's inequality relation",
+      "State the resulting integer for bound"
+    ]
+  },
+  {
+    "label": "Compare Hoeffding",
+    "section": "Compare Hoeffding",
+    "subgoals": [
+      "Identify the data for compare Hoeffding",
+      "Apply the bernstein's inequality relation",
+      "State the resulting integer for compare Hoeffding"
+    ]
+  }
+]

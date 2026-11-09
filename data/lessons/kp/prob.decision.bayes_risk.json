@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Risk of estimator",
+    "section": "Risk of estimator",
+    "subgoals": [
+      "Identify the data for risk of estimator",
+      "Apply the bayes risk relation",
+      "State the resulting integer for risk of estimator"
+    ]
+  },
+  {
+    "label": "Bayes estimator",
+    "section": "Bayes estimator",
+    "subgoals": [
+      "Identify the data for Bayes estimator",
+      "Apply the bayes risk relation",
+      "State the resulting integer for Bayes estimator"
+    ]
+  },
+  {
+    "label": "Compare",
+    "section": "Compare",
+    "subgoals": [
+      "Identify the data for compare",
+      "Apply the bayes risk relation",
+      "State the resulting integer for compare"
+    ]
+  }
+]

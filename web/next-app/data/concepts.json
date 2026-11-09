@@ -11510,6 +11510,330 @@
     "subdomain": "discrete_math.coding"
   },
   {
+    "domain": "discrete_math",
+    "grading_type": "numeric",
+    "id": "discrete.automata.nfa",
+    "label": "Nondeterministic finite automata",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.automata.fsm"
+    ],
+    "subdomain": "discrete_math.automata"
+  },
+  {
+    "domain": "discrete_math",
+    "grading_type": "numeric",
+    "id": "discrete.automata.regex",
+    "label": "Regular expressions and finite automata",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.automata.fsm"
+    ],
+    "subdomain": "discrete_math.automata"
+  },
+  {
+    "domain": "discrete_math",
+    "grading_type": "numeric",
+    "id": "discrete.coding.linear",
+    "label": "Linear codes",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.coding.hamming"
+    ],
+    "subdomain": "discrete_math.coding"
+  },
+  {
+    "domain": "discrete_math",
+    "grading_type": "numeric",
+    "id": "discrete.algorithms.dynamic_programming",
+    "label": "Dynamic programming",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.sequences.recurrence"
+    ],
+    "subdomain": "discrete_math.algorithms"
+  },
+  {
+    "domain": "discrete_math",
+    "grading_type": "numeric",
+    "id": "discrete.automata.pumping_lemma",
+    "label": "The pumping lemma for regular languages",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.automata.nfa"
+    ],
+    "subdomain": "discrete_math.automata"
+  },
+  {
+    "domain": "discrete_math",
+    "grading_type": "numeric",
+    "id": "discrete.automata.cfg",
+    "label": "Context-free grammars",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.automata.nfa"
+    ],
+    "subdomain": "discrete_math.automata"
+  },
+  {
+    "domain": "discrete_math",
+    "grading_type": "numeric",
+    "id": "discrete.automata.pda",
+    "label": "Pushdown automata",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.automata.cfg"
+    ],
+    "subdomain": "discrete_math.automata"
+  },
+  {
+    "domain": "discrete_math",
+    "grading_type": "numeric",
+    "id": "discrete.automata.turing",
+    "label": "Turing machines",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.automata.pda"
+    ],
+    "subdomain": "discrete_math.automata"
+  },
+  {
+    "domain": "discrete_math",
+    "grading_type": "numeric",
+    "id": "discrete.automata.decidability",
+    "label": "Decidable and undecidable languages",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.automata.turing"
+    ],
+    "subdomain": "discrete_math.automata"
+  },
+  {
+    "domain": "discrete_math",
+    "grading_type": "numeric",
+    "id": "discrete.automata.halting",
+    "label": "The halting problem",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.automata.turing"
+    ],
+    "subdomain": "discrete_math.automata"
+  },
+  {
+    "domain": "discrete_math",
+    "grading_type": "numeric",
+    "id": "discrete.complexity.reduction",
+    "label": "Polynomial-time reductions",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.automata.turing"
+    ],
+    "subdomain": "discrete_math.complexity"
+  },
+  {
+    "domain": "discrete_math",
+    "grading_type": "numeric",
+    "id": "discrete.complexity.sat",
+    "label": "Boolean satisfiability",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.logic.boolean_functions"
+    ],
+    "subdomain": "discrete_math.complexity"
+  },
+  {
+    "domain": "discrete_math",
+    "grading_type": "numeric",
+    "id": "discrete.complexity.np_complete",
+    "label": "NP-complete problems",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.complexity.reduction",
+      "discrete.complexity.sat"
+    ],
+    "subdomain": "discrete_math.complexity"
+  },
+  {
+    "domain": "discrete_math",
+    "grading_type": "numeric",
+    "id": "discrete.complexity.cook_levin",
+    "label": "The Cook-Levin theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.complexity.np_complete"
+    ],
+    "subdomain": "discrete_math.complexity"
+  },
+  {
+    "domain": "discrete_math",
+    "grading_type": "numeric",
+    "id": "discrete.coding.generator",
+    "label": "Generator and parity-check matrices",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.coding.linear"
+    ],
+    "subdomain": "discrete_math.coding"
+  },
+  {
+    "domain": "discrete_math",
+    "grading_type": "numeric",
+    "id": "discrete.coding.cyclic",
+    "label": "Cyclic codes",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.coding.linear"
+    ],
+    "subdomain": "discrete_math.coding"
+  },
+  {
+    "domain": "discrete_math",
+    "grading_type": "numeric",
+    "id": "discrete.coding.reed_solomon",
+    "label": "Reed-Solomon codes",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.coding.linear"
+    ],
+    "subdomain": "discrete_math.coding"
+  },
+  {
+    "domain": "discrete_math",
+    "grading_type": "numeric",
+    "id": "discrete.combinatorics.rook",
+    "label": "Rook polynomials",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.sets.inclusion_exclusion"
+    ],
+    "subdomain": "discrete_math.combinatorics"
+  },
+  {
+    "domain": "discrete_math",
+    "grading_type": "numeric",
+    "id": "discrete.combinatorics.young_tableaux",
+    "label": "Standard Young tableaux",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.combinatorics.integer_partitions"
+    ],
+    "subdomain": "discrete_math.combinatorics"
+  },
+  {
+    "domain": "discrete_math",
+    "grading_type": "numeric",
+    "id": "discrete.combinatorics.q_binomial",
+    "label": "Gaussian binomial coefficients",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.combinatorics.integer_partitions",
+      "discrete.combinatorics.combinations"
+    ],
+    "subdomain": "discrete_math.combinatorics"
+  },
+  {
+    "domain": "discrete_math",
+    "grading_type": "numeric",
+    "id": "discrete.combinatorics.permutation_statistics",
+    "label": "Inversions and major index",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.combinatorics.permutations"
+    ],
+    "subdomain": "discrete_math.combinatorics"
+  },
+  {
+    "domain": "discrete_math",
+    "grading_type": "numeric",
+    "id": "discrete.combinatorics.schur",
+    "label": "Schur numbers",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.combinatorics.pigeonhole"
+    ],
+    "subdomain": "discrete_math.combinatorics"
+  },
+  {
+    "domain": "discrete_math",
+    "grading_type": "numeric",
+    "id": "discrete.algorithms.greedy",
+    "label": "Greedy algorithms and exchange arguments",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.proof.cases"
+    ],
+    "subdomain": "discrete_math.algorithms"
+  },
+  {
     "domain": "fractions",
     "grading_type": "numeric",
     "id": "frac.basics.concept",
@@ -14123,6 +14447,63 @@
       "graph.vertex_cover"
     ],
     "subdomain": "graph_theory.matching"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.chordal",
+    "label": "Chordal graphs",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.perfect_graph"
+    ],
+    "subdomain": "graph_theory.basics"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.cograph",
+    "label": "Cographs",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.complement"
+    ],
+    "subdomain": "graph_theory.basics"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.interval",
+    "label": "Interval graphs",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.chordal"
+    ],
+    "subdomain": "graph_theory.basics"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.split",
+    "label": "Split graphs",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.chordal",
+      "graph.complement"
+    ],
+    "subdomain": "graph_theory.basics"
   },
   {
     "domain": "linear_algebra",
@@ -20973,6 +21354,318 @@
     "variants": []
   },
   {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.process.branching",
+    "label": "Branching processes",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.process.markov_chain"
+    ],
+    "subdomain": "probability_theory.processes"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.process.brownian",
+    "label": "Brownian motion",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.limit.clt",
+      "prob.process.random_walk"
+    ],
+    "subdomain": "probability_theory.processes"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.conc.chernoff",
+    "label": "Chernoff bounds",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.mgf"
+    ],
+    "subdomain": "probability_theory.concentration"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.process.renewal",
+    "label": "Renewal theory",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.dist.poisson_process"
+    ],
+    "subdomain": "probability_theory.processes"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.process.queue",
+    "label": "Queueing processes",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.dist.poisson_process",
+      "prob.process.markov_chain"
+    ],
+    "subdomain": "probability_theory.processes"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.process.ito",
+    "label": "Ito integrals",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.process.brownian"
+    ],
+    "subdomain": "probability_theory.processes"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.process.sde",
+    "label": "Stochastic differential equations",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.process.ito"
+    ],
+    "subdomain": "probability_theory.processes"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.process.gaussian",
+    "label": "Gaussian processes",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.multivariate_transform"
+    ],
+    "subdomain": "probability_theory.processes"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.process.hidden_markov",
+    "label": "Hidden Markov models",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.process.markov_chain"
+    ],
+    "subdomain": "probability_theory.processes"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.process.kalman",
+    "label": "The Kalman filter",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.process.hidden_markov",
+      "prob.process.gaussian"
+    ],
+    "subdomain": "probability_theory.processes"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.conc.hoeffding",
+    "label": "Hoeffding's inequality",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.conc.chernoff"
+    ],
+    "subdomain": "probability_theory.concentration"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.conc.bernstein",
+    "label": "Bernstein's inequality",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.conc.hoeffding",
+      "prob.rv.variance"
+    ],
+    "subdomain": "probability_theory.concentration"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.conc.mcdiarmid",
+    "label": "McDiarmid's inequality",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.conc.hoeffding"
+    ],
+    "subdomain": "probability_theory.concentration"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.limit.lindeberg",
+    "label": "The Lindeberg condition",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.limit.clt"
+    ],
+    "subdomain": "probability_theory.limits"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.limit.berry_esseen",
+    "label": "The Berry-Esseen theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.limit.clt"
+    ],
+    "subdomain": "probability_theory.limits"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.limit.local_clt",
+    "label": "The local central limit theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.limit.clt"
+    ],
+    "subdomain": "probability_theory.limits"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.bayes.conjugate",
+    "label": "Conjugate priors",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.bayes.prior"
+    ],
+    "subdomain": "probability_theory.foundations"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.bayes.predictive",
+    "label": "Posterior predictive distributions",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.bayes.conjugate"
+    ],
+    "subdomain": "probability_theory.foundations"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.decision.bayes_risk",
+    "label": "Bayes risk",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.expect.conditional"
+    ],
+    "subdomain": "probability_theory.foundations"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.decision.minimax",
+    "label": "Minimax decision rules",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.decision.bayes_risk"
+    ],
+    "subdomain": "probability_theory.foundations"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.info.entropy",
+    "label": "Entropy of a random variable",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.expectation"
+    ],
+    "subdomain": "probability_theory.information"
+  },
+  {
+    "domain": "probability_theory",
+    "grading_type": "numeric",
+    "id": "prob.info.kl",
+    "label": "Relative entropy and mutual information",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.info.entropy"
+    ],
+    "subdomain": "probability_theory.information"
+  },
+  {
     "domain": "real_analysis",
     "grading_type": "numeric",
     "id": "ra.order.supremum",
@@ -23645,6 +24338,21 @@
       "stat.reg.multiple"
     ],
     "subdomain": "statistics.data_collection"
+  },
+  {
+    "domain": "statistics",
+    "grading_type": "numeric",
+    "id": "stat.infer.multiple_comparisons",
+    "label": "Multiple comparisons and false discovery rate",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "stat.infer.pvalue",
+      "stat.infer.hypothesis"
+    ],
+    "subdomain": "statistics.inference"
   },
   {
     "domain": "topology",

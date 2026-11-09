@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Map instance",
+    "section": "Map instance",
+    "subgoals": [
+      "Identify the data for map instance",
+      "Apply the polynomial-time reductions relation",
+      "State the resulting integer for map instance"
+    ]
+  },
+  {
+    "label": "Preserve yes or no",
+    "section": "Preserve yes or no",
+    "subgoals": [
+      "Identify the data for preserve yes or no",
+      "Apply the polynomial-time reductions relation",
+      "State the resulting integer for preserve yes or no"
+    ]
+  },
+  {
+    "label": "Compose reductions",
+    "section": "Compose reductions",
+    "subgoals": [
+      "Identify the data for compose reductions",
+      "Apply the polynomial-time reductions relation",
+      "State the resulting integer for compose reductions"
+    ]
+  }
+]

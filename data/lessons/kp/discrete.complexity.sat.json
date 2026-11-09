@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Truth assignment",
+    "section": "Truth assignment",
+    "subgoals": [
+      "Identify the data for truth assignment",
+      "Apply the boolean satisfiability relation",
+      "State the resulting integer for truth assignment"
+    ]
+  },
+  {
+    "label": "Clause satisfaction count",
+    "section": "Clause satisfaction count",
+    "subgoals": [
+      "Identify the data for clause satisfaction count",
+      "Apply the boolean satisfiability relation",
+      "State the resulting integer for clause satisfaction count"
+    ]
+  },
+  {
+    "label": "3-SAT instance",
+    "section": "3-SAT instance",
+    "subgoals": [
+      "Identify the data for 3-SAT instance",
+      "Apply the boolean satisfiability relation",
+      "State the resulting integer for 3-SAT instance"
+    ]
+  }
+]

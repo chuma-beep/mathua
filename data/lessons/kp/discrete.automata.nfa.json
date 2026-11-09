@@ -1,0 +1,29 @@
+[
+  {
+    "label": "States and transitions",
+    "section": "States and transitions",
+    "subgoals": [
+      "State the governing relation for nondeterministic finite automata",
+      "Identify the quantities in the states and transitions step",
+      "Carry out the states and transitions computation"
+    ]
+  },
+  {
+    "label": "Subset construction",
+    "section": "Subset construction",
+    "subgoals": [
+      "State the governing relation for nondeterministic finite automata",
+      "Identify the quantities in the subset construction step",
+      "Carry out the subset construction computation"
+    ]
+  },
+  {
+    "label": "Membership and epsilon closures",
+    "section": "Membership and epsilon closures",
+    "subgoals": [
+      "State the governing relation for nondeterministic finite automata",
+      "Identify the quantities in the membership and epsilon closures step",
+      "Carry out the membership and epsilon closures computation"
+    ]
+  }
+]

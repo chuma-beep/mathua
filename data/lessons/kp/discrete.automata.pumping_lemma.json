@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Pumping length",
+    "section": "Pumping length",
+    "subgoals": [
+      "Identify the data for pumping length",
+      "Apply the the pumping lemma for regular languages relation",
+      "State the resulting integer for pumping length"
+    ]
+  },
+  {
+    "label": "Decomposition",
+    "section": "Decomposition",
+    "subgoals": [
+      "Identify the data for decomposition",
+      "Apply the the pumping lemma for regular languages relation",
+      "State the resulting integer for decomposition"
+    ]
+  },
+  {
+    "label": "Prove nonregular",
+    "section": "Prove nonregular",
+    "subgoals": [
+      "Identify the data for prove nonregular",
+      "Apply the the pumping lemma for regular languages relation",
+      "State the resulting integer for prove nonregular"
+    ]
+  }
+]

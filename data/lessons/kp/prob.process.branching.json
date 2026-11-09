@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Offspring distribution",
+    "section": "Offspring distribution",
+    "subgoals": [
+      "State the governing relation for branching processes",
+      "Identify the quantities in the offspring distribution step",
+      "Carry out the offspring distribution computation"
+    ]
+  },
+  {
+    "label": "Extinction probability",
+    "section": "Extinction probability",
+    "subgoals": [
+      "State the governing relation for branching processes",
+      "Identify the quantities in the extinction probability step",
+      "Carry out the extinction probability computation"
+    ]
+  },
+  {
+    "label": "Generation by generation",
+    "section": "Generation by generation",
+    "subgoals": [
+      "State the governing relation for branching processes",
+      "Identify the quantities in the generation by generation step",
+      "Carry out the generation by generation computation"
+    ]
+  }
+]

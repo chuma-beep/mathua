@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Posterior parameters",
+    "section": "Posterior parameters",
+    "subgoals": [
+      "Identify the data for posterior parameters",
+      "Apply the conjugate priors relation",
+      "State the resulting integer for posterior parameters"
+    ]
+  },
+  {
+    "label": "Posterior mean",
+    "section": "Posterior mean",
+    "subgoals": [
+      "Identify the data for posterior mean",
+      "Apply the conjugate priors relation",
+      "State the resulting integer for posterior mean"
+    ]
+  },
+  {
+    "label": "Predictive",
+    "section": "Predictive",
+    "subgoals": [
+      "Identify the data for predictive",
+      "Apply the conjugate priors relation",
+      "State the resulting integer for predictive"
+    ]
+  }
+]

@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1750,
+  "concept_count": 1800,
   "unit_count": 141,
   "units": [
     {
@@ -1486,10 +1486,11 @@
       "concept_ids": [
         "discrete.combinatorics.combinations",
         "discrete.combinatorics.multinomial",
+        "discrete.combinatorics.permutation_statistics",
         "discrete.combinatorics.permutations",
         "discrete.logic.propositions"
       ],
-      "concept_count": 4
+      "concept_count": 5
     },
     {
       "id": "discrete_math.b5",
@@ -1511,6 +1512,7 @@
         "discrete.combinatorics.double_counting",
         "discrete.combinatorics.lattice_paths",
         "discrete.combinatorics.pigeonhole",
+        "discrete.combinatorics.schur",
         "discrete.combinatorics.stars_bars",
         "discrete.combinatorics.vandermonde",
         "discrete.graphs.basics",
@@ -1524,7 +1526,7 @@
         "discrete.sets.powerset",
         "discrete.sets.venn"
       ],
-      "concept_count": 18
+      "concept_count": 19
     },
     {
       "id": "discrete_math.b6",
@@ -1537,18 +1539,31 @@
         "discrete_math.automata",
         "discrete_math.coding",
         "discrete_math.combinatorics",
+        "discrete_math.complexity",
         "discrete_math.graph_theory",
         "discrete_math.logic",
         "discrete_math.proof",
         "discrete_math.sets"
       ],
       "concept_ids": [
+        "discrete.automata.cfg",
         "discrete.automata.fsm",
+        "discrete.automata.nfa",
+        "discrete.automata.pumping_lemma",
+        "discrete.automata.regex",
+        "discrete.coding.cyclic",
+        "discrete.coding.generator",
         "discrete.coding.hamming",
+        "discrete.coding.linear",
+        "discrete.coding.reed_solomon",
         "discrete.combinatorics.burnside",
         "discrete.combinatorics.derangement",
         "discrete.combinatorics.integer_partitions",
+        "discrete.combinatorics.q_binomial",
+        "discrete.combinatorics.rook",
         "discrete.combinatorics.surjections",
+        "discrete.combinatorics.young_tableaux",
+        "discrete.complexity.sat",
         "discrete.graphs.cayley",
         "discrete.graphs.coloring",
         "discrete.graphs.eulerian",
@@ -1569,7 +1584,7 @@
         "discrete.sets.relation_closure",
         "discrete.sets.relations"
       ],
-      "concept_count": 25
+      "concept_count": 37
     },
     {
       "id": "discrete_math.b7",
@@ -1577,33 +1592,45 @@
       "domain": "discrete_math",
       "band": 7,
       "depth_min": 21,
-      "depth_max": 22,
+      "depth_max": 23,
       "subdomains": [
+        "discrete_math.algorithms",
+        "discrete_math.automata",
         "discrete_math.combinatorics",
+        "discrete_math.complexity",
         "discrete_math.graph_theory"
       ],
       "concept_ids": [
+        "discrete.algorithms.greedy",
+        "discrete.automata.decidability",
+        "discrete.automata.halting",
+        "discrete.automata.pda",
+        "discrete.automata.turing",
         "discrete.combinatorics.bell",
         "discrete.combinatorics.pascal",
         "discrete.combinatorics.stirling_second",
+        "discrete.complexity.reduction",
         "discrete.graphs.bipartite"
       ],
-      "concept_count": 4
+      "concept_count": 10
     },
     {
       "id": "discrete_math.b8",
       "title": "Discrete Math · Stage 9",
       "domain": "discrete_math",
       "band": 8,
-      "depth_min": 26,
+      "depth_min": 24,
       "depth_max": 26,
       "subdomains": [
+        "discrete_math.complexity",
         "discrete_math.recurrence"
       ],
       "concept_ids": [
+        "discrete.complexity.cook_levin",
+        "discrete.complexity.np_complete",
         "discrete.sequences.recurrence"
       ],
-      "concept_count": 1
+      "concept_count": 3
     },
     {
       "id": "discrete_math.b9",
@@ -1613,11 +1640,13 @@
       "depth_min": 27,
       "depth_max": 29,
       "subdomains": [
+        "discrete_math.algorithms",
         "discrete_math.combinatorics",
         "discrete_math.proof",
         "discrete_math.recurrence"
       ],
       "concept_ids": [
+        "discrete.algorithms.dynamic_programming",
         "discrete.combinatorics.catalan",
         "discrete.proof.induction",
         "discrete.proof.strong_induction",
@@ -1627,7 +1656,7 @@
         "discrete.sequences.growth_rates",
         "discrete.sequences.linear_recurrence"
       ],
-      "concept_count": 8
+      "concept_count": 9
     },
     {
       "id": "discrete_math.b10",
@@ -2054,6 +2083,7 @@
         "graph.automorphism",
         "graph.bellman_ford",
         "graph.bridge",
+        "graph.cograph",
         "graph.complement",
         "graph.connectivity",
         "graph.cut_vertex",
@@ -2072,7 +2102,7 @@
         "graph.tournament",
         "graph.turan"
       ],
-      "concept_count": 20
+      "concept_count": 21
     },
     {
       "id": "graph_theory.b7",
@@ -2082,6 +2112,7 @@
       "depth_min": 21,
       "depth_max": 23,
       "subdomains": [
+        "graph_theory.basics",
         "graph_theory.coloring",
         "graph_theory.connectivity",
         "graph_theory.extremal",
@@ -2093,6 +2124,7 @@
         "graph.assignment",
         "graph.blocks",
         "graph.brooks",
+        "graph.chordal",
         "graph.chromatic_polynomial",
         "graph.dag_paths",
         "graph.edge_coloring",
@@ -2117,7 +2149,7 @@
         "graph.union_find",
         "graph.vertex_cover"
       ],
-      "concept_count": 26
+      "concept_count": 27
     },
     {
       "id": "graph_theory.b8",
@@ -2127,6 +2159,7 @@
       "depth_min": 24,
       "depth_max": 25,
       "subdomains": [
+        "graph_theory.basics",
         "graph_theory.matching",
         "graph_theory.spectral"
       ],
@@ -2134,11 +2167,13 @@
         "graph.clique",
         "graph.dominating_set",
         "graph.independent_set",
+        "graph.interval",
         "graph.spectral_gap",
         "graph.spectral_radius",
+        "graph.split",
         "graph.tutte"
       ],
-      "concept_count": 6
+      "concept_count": 8
     },
     {
       "id": "linear_algebra.b0",
@@ -3254,9 +3289,11 @@
       "depth_max": 14,
       "subdomains": [
         "probability_theory.characteristic",
+        "probability_theory.concentration",
         "probability_theory.convergence",
         "probability_theory.distributions",
         "probability_theory.foundations",
+        "probability_theory.information",
         "probability_theory.joint",
         "probability_theory.limits",
         "probability_theory.moments",
@@ -3264,6 +3301,7 @@
       ],
       "concept_ids": [
         "prob.chf.definition",
+        "prob.conc.chernoff",
         "prob.cond.definition",
         "prob.cond.multiplication",
         "prob.cond.total_probability",
@@ -3281,9 +3319,14 @@
         "prob.dist.poisson",
         "prob.dist.poisson_process",
         "prob.independence.pairwise",
+        "prob.info.entropy",
+        "prob.info.kl",
         "prob.joint.continuous",
+        "prob.limit.berry_esseen",
         "prob.limit.chebyshev",
         "prob.limit.clt",
+        "prob.limit.lindeberg",
+        "prob.limit.local_clt",
         "prob.limit.markov",
         "prob.limit.weak_law",
         "prob.moments.skew_kurtosis",
@@ -3301,7 +3344,7 @@
         "prob.space.inclusion_exclusion",
         "prob.space.sigma_algebra"
       ],
-      "concept_count": 37
+      "concept_count": 43
     },
     {
       "id": "probability_theory.b5",
@@ -3312,6 +3355,7 @@
       "depth_max": 17,
       "subdomains": [
         "probability_theory.characteristic",
+        "probability_theory.concentration",
         "probability_theory.convergence",
         "probability_theory.distributions",
         "probability_theory.foundations",
@@ -3321,28 +3365,39 @@
         "probability_theory.random_variables"
       ],
       "concept_ids": [
+        "prob.bayes.conjugate",
+        "prob.bayes.predictive",
         "prob.bayes.prior",
         "prob.chf.clt",
         "prob.chf.continuity",
         "prob.chf.independence",
         "prob.chf.moments",
+        "prob.conc.bernstein",
+        "prob.conc.hoeffding",
+        "prob.conc.mcdiarmid",
         "prob.conv.almost_sure",
         "prob.conv.in_distribution",
         "prob.conv.slutsky",
+        "prob.decision.bayes_risk",
         "prob.dist.geometric",
         "prob.expect.conditional",
         "prob.expect.total",
         "prob.joint.conditional_density",
         "prob.joint.marginal",
         "prob.joint.rv_independence",
+        "prob.process.branching",
+        "prob.process.gaussian",
+        "prob.process.hidden_markov",
         "prob.process.markov_chain",
         "prob.process.martingale",
+        "prob.process.queue",
         "prob.process.random_walk",
+        "prob.process.renewal",
         "prob.process.transition_matrix",
         "prob.rv.convolution",
         "prob.rv.multivariate_transform"
       ],
-      "concept_count": 20
+      "concept_count": 31
     },
     {
       "id": "probability_theory.b6",
@@ -3350,18 +3405,24 @@
       "domain": "probability_theory",
       "band": 6,
       "depth_min": 18,
-      "depth_max": 19,
+      "depth_max": 20,
       "subdomains": [
+        "probability_theory.foundations",
         "probability_theory.joint",
         "probability_theory.processes"
       ],
       "concept_ids": [
+        "prob.decision.minimax",
         "prob.expect.total_variance",
         "prob.martingale.stopping",
+        "prob.process.brownian",
+        "prob.process.ito",
+        "prob.process.kalman",
         "prob.process.recurrence",
+        "prob.process.sde",
         "prob.process.stationary"
       ],
-      "concept_count": 4
+      "concept_count": 9
     },
     {
       "id": "real_analysis.b9",
@@ -3724,6 +3785,7 @@
       ],
       "concept_ids": [
         "stat.infer.effect_size",
+        "stat.infer.multiple_comparisons",
         "stat.infer.paired",
         "stat.infer.power",
         "stat.infer.ttest_two",
@@ -3733,7 +3795,7 @@
         "stat.test.permutation",
         "stat.test.wilcoxon"
       ],
-      "concept_count": 9
+      "concept_count": 10
     },
     {
       "id": "statistics.b7",

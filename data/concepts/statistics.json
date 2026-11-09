@@ -1402,5 +1402,20 @@
       "streak": 10,
       "avg_time_seconds": 26.0
     }
+  },
+  {
+    "id": "stat.infer.multiple_comparisons",
+    "label": "Multiple comparisons and false discovery rate",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.pvalue",
+      "stat.infer.hypothesis"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
   }
 ]

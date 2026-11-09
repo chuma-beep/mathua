@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Range bound",
+    "section": "Range bound",
+    "subgoals": [
+      "Identify the data for range bound",
+      "Apply the hoeffding's inequality relation",
+      "State the resulting integer for range bound"
+    ]
+  },
+  {
+    "label": "Sample-mean deviation",
+    "section": "Sample-mean deviation",
+    "subgoals": [
+      "Identify the data for sample-mean deviation",
+      "Apply the hoeffding's inequality relation",
+      "State the resulting integer for sample-mean deviation"
+    ]
+  },
+  {
+    "label": "Confidence",
+    "section": "Confidence",
+    "subgoals": [
+      "Identify the data for confidence",
+      "Apply the hoeffding's inequality relation",
+      "State the resulting integer for confidence"
+    ]
+  }
+]

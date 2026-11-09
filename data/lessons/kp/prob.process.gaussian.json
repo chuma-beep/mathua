@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Covariance kernel",
+    "section": "Covariance kernel",
+    "subgoals": [
+      "Identify the data for covariance kernel",
+      "Apply the gaussian processes relation",
+      "State the resulting integer for covariance kernel"
+    ]
+  },
+  {
+    "label": "Finite-dimensional distribution",
+    "section": "Finite-dimensional distribution",
+    "subgoals": [
+      "Identify the data for finite-dimensional distribution",
+      "Apply the gaussian processes relation",
+      "State the resulting integer for finite-dimensional distribution"
+    ]
+  },
+  {
+    "label": "Conditional mean",
+    "section": "Conditional mean",
+    "subgoals": [
+      "Identify the data for conditional mean",
+      "Apply the gaussian processes relation",
+      "State the resulting integer for conditional mean"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Evaluation codeword",
+    "section": "Evaluation codeword",
+    "subgoals": [
+      "Identify the data for evaluation codeword",
+      "Apply the reed-solomon codes relation",
+      "State the resulting integer for evaluation codeword"
+    ]
+  },
+  {
+    "label": "Distance",
+    "section": "Distance",
+    "subgoals": [
+      "Identify the data for distance",
+      "Apply the reed-solomon codes relation",
+      "State the resulting integer for distance"
+    ]
+  },
+  {
+    "label": "Correct errors",
+    "section": "Correct errors",
+    "subgoals": [
+      "Identify the data for correct errors",
+      "Apply the reed-solomon codes relation",
+      "State the resulting integer for correct errors"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Condition check",
+    "section": "Condition check",
+    "subgoals": [
+      "Identify the data for condition check",
+      "Apply the the lindeberg condition relation",
+      "State the resulting integer for condition check"
+    ]
+  },
+  {
+    "label": "Triangular array",
+    "section": "Triangular array",
+    "subgoals": [
+      "Identify the data for triangular array",
+      "Apply the the lindeberg condition relation",
+      "State the resulting integer for triangular array"
+    ]
+  },
+  {
+    "label": "CLT conclusion",
+    "section": "CLT conclusion",
+    "subgoals": [
+      "Identify the data for CLT conclusion",
+      "Apply the the lindeberg condition relation",
+      "State the resulting integer for CLT conclusion"
+    ]
+  }
+]

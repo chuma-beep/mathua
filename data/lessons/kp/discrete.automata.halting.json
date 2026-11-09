@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Diagonal argument",
+    "section": "Diagonal argument",
+    "subgoals": [
+      "Identify the data for diagonal argument",
+      "Apply the the halting problem relation",
+      "State the resulting integer for diagonal argument"
+    ]
+  },
+  {
+    "label": "Reduction",
+    "section": "Reduction",
+    "subgoals": [
+      "Identify the data for reduction",
+      "Apply the the halting problem relation",
+      "State the resulting integer for reduction"
+    ]
+  },
+  {
+    "label": "Restricted decidable case",
+    "section": "Restricted decidable case",
+    "subgoals": [
+      "Identify the data for restricted decidable case",
+      "Apply the the halting problem relation",
+      "State the resulting integer for restricted decidable case"
+    ]
+  }
+]

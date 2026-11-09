@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Transition",
+    "section": "Transition",
+    "subgoals": [
+      "Identify the data for transition",
+      "Apply the turing machines relation",
+      "State the resulting integer for transition"
+    ]
+  },
+  {
+    "label": "Tape after steps",
+    "section": "Tape after steps",
+    "subgoals": [
+      "Identify the data for tape after steps",
+      "Apply the turing machines relation",
+      "State the resulting integer for tape after steps"
+    ]
+  },
+  {
+    "label": "Accept or reject",
+    "section": "Accept or reject",
+    "subgoals": [
+      "Identify the data for accept or reject",
+      "Apply the turing machines relation",
+      "State the resulting integer for accept or reject"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Third moment",
+    "section": "Third moment",
+    "subgoals": [
+      "Identify the data for third moment",
+      "Apply the the berry-esseen theorem relation",
+      "State the resulting integer for third moment"
+    ]
+  },
+  {
+    "label": "Rate",
+    "section": "Rate",
+    "subgoals": [
+      "Identify the data for rate",
+      "Apply the the berry-esseen theorem relation",
+      "State the resulting integer for rate"
+    ]
+  },
+  {
+    "label": "Sample size",
+    "section": "Sample size",
+    "subgoals": [
+      "Identify the data for sample size",
+      "Apply the the berry-esseen theorem relation",
+      "State the resulting integer for sample size"
+    ]
+  }
+]

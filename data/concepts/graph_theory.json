@@ -837,5 +837,62 @@
       "streak": 10,
       "avg_time_seconds": 22.0
     }
+  },
+  {
+    "id": "graph.chordal",
+    "label": "Chordal graphs",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.perfect_graph"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "graph.cograph",
+    "label": "Cographs",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.complement"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "graph.interval",
+    "label": "Interval graphs",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.chordal"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "graph.split",
+    "label": "Split graphs",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.chordal",
+      "graph.complement"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
   }
 ]

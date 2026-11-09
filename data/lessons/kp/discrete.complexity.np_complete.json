@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Certificate check",
+    "section": "Certificate check",
+    "subgoals": [
+      "Identify the data for certificate check",
+      "Apply the np-complete problems relation",
+      "State the resulting integer for certificate check"
+    ]
+  },
+  {
+    "label": "Reduction direction",
+    "section": "Reduction direction",
+    "subgoals": [
+      "Identify the data for reduction direction",
+      "Apply the np-complete problems relation",
+      "State the resulting integer for reduction direction"
+    ]
+  },
+  {
+    "label": "Class membership",
+    "section": "Class membership",
+    "subgoals": [
+      "Identify the data for class membership",
+      "Apply the np-complete problems relation",
+      "State the resulting integer for class membership"
+    ]
+  }
+]

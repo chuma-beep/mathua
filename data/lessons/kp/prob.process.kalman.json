@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Predict step",
+    "section": "Predict step",
+    "subgoals": [
+      "Identify the data for predict step",
+      "Apply the the kalman filter relation",
+      "State the resulting integer for predict step"
+    ]
+  },
+  {
+    "label": "Update gain",
+    "section": "Update gain",
+    "subgoals": [
+      "Identify the data for update gain",
+      "Apply the the kalman filter relation",
+      "State the resulting integer for update gain"
+    ]
+  },
+  {
+    "label": "Posterior mean",
+    "section": "Posterior mean",
+    "subgoals": [
+      "Identify the data for posterior mean",
+      "Apply the the kalman filter relation",
+      "State the resulting integer for posterior mean"
+    ]
+  }
+]

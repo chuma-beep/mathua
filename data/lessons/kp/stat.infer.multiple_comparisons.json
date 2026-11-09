@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Bonferroni correction",
+    "section": "Bonferroni correction",
+    "subgoals": [
+      "State the governing relation for multiple comparisons and false discovery rate",
+      "Identify the quantities in the bonferroni correction step",
+      "Carry out the bonferroni correction computation"
+    ]
+  },
+  {
+    "label": "Family-wise error",
+    "section": "Family-wise error",
+    "subgoals": [
+      "State the governing relation for multiple comparisons and false discovery rate",
+      "Identify the quantities in the family-wise error step",
+      "Carry out the family-wise error computation"
+    ]
+  },
+  {
+    "label": "Benjamini-Hochberg",
+    "section": "Benjamini-Hochberg",
+    "subgoals": [
+      "State the governing relation for multiple comparisons and false discovery rate",
+      "Identify the quantities in the benjamini-hochberg step",
+      "Carry out the benjamini-hochberg computation"
+    ]
+  }
+]

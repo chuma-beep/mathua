@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Partition",
+    "section": "Partition",
+    "subgoals": [
+      "Identify the data for partition",
+      "Apply the split graphs relation",
+      "State the resulting integer for partition"
+    ]
+  },
+  {
+    "label": "Degree sequence",
+    "section": "Degree sequence",
+    "subgoals": [
+      "Identify the data for degree sequence",
+      "Apply the split graphs relation",
+      "State the resulting integer for degree sequence"
+    ]
+  },
+  {
+    "label": "Forbidden induced subgraph",
+    "section": "Forbidden induced subgraph",
+    "subgoals": [
+      "Identify the data for forbidden induced subgraph",
+      "Apply the split graphs relation",
+      "State the resulting integer for forbidden induced subgraph"
+    ]
+  }
+]

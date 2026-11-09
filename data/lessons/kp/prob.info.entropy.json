@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Entropy",
+    "section": "Entropy",
+    "subgoals": [
+      "Identify the data for entropy",
+      "Apply the entropy of a random variable relation",
+      "State the resulting integer for entropy"
+    ]
+  },
+  {
+    "label": "Joint entropy",
+    "section": "Joint entropy",
+    "subgoals": [
+      "Identify the data for joint entropy",
+      "Apply the entropy of a random variable relation",
+      "State the resulting integer for joint entropy"
+    ]
+  },
+  {
+    "label": "Maximum entropy",
+    "section": "Maximum entropy",
+    "subgoals": [
+      "Identify the data for maximum entropy",
+      "Apply the entropy of a random variable relation",
+      "State the resulting integer for maximum entropy"
+    ]
+  }
+]

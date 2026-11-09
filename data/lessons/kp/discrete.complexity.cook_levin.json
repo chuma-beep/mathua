@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Tableau size",
+    "section": "Tableau size",
+    "subgoals": [
+      "Identify the data for tableau size",
+      "Apply the the cook-levin theorem relation",
+      "State the resulting integer for tableau size"
+    ]
+  },
+  {
+    "label": "Clause count",
+    "section": "Clause count",
+    "subgoals": [
+      "Identify the data for clause count",
+      "Apply the the cook-levin theorem relation",
+      "State the resulting integer for clause count"
+    ]
+  },
+  {
+    "label": "Reduction gadget",
+    "section": "Reduction gadget",
+    "subgoals": [
+      "Identify the data for reduction gadget",
+      "Apply the the cook-levin theorem relation",
+      "State the resulting integer for reduction gadget"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Exchange argument",
+    "section": "Exchange argument",
+    "subgoals": [
+      "Identify the data for exchange argument",
+      "Apply the greedy algorithms and exchange arguments relation",
+      "State the resulting integer for exchange argument"
+    ]
+  },
+  {
+    "label": "Greedy choice",
+    "section": "Greedy choice",
+    "subgoals": [
+      "Identify the data for greedy choice",
+      "Apply the greedy algorithms and exchange arguments relation",
+      "State the resulting integer for greedy choice"
+    ]
+  },
+  {
+    "label": "Counterexample",
+    "section": "Counterexample",
+    "subgoals": [
+      "Identify the data for counterexample",
+      "Apply the greedy algorithms and exchange arguments relation",
+      "State the resulting integer for counterexample"
+    ]
+  }
+]

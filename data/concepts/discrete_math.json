@@ -1001,5 +1001,329 @@
       "streak": 10,
       "avg_time_seconds": 28
     }
+  },
+  {
+    "id": "discrete.automata.nfa",
+    "label": "Nondeterministic finite automata",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.automata",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.automata.fsm"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "discrete.automata.regex",
+    "label": "Regular expressions and finite automata",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.automata",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.automata.fsm"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "discrete.coding.linear",
+    "label": "Linear codes",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.coding",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.coding.hamming"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "discrete.algorithms.dynamic_programming",
+    "label": "Dynamic programming",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.algorithms",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.sequences.recurrence"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "discrete.automata.pumping_lemma",
+    "label": "The pumping lemma for regular languages",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.automata",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.automata.nfa"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "discrete.automata.cfg",
+    "label": "Context-free grammars",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.automata",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.automata.nfa"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "discrete.automata.pda",
+    "label": "Pushdown automata",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.automata",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.automata.cfg"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "discrete.automata.turing",
+    "label": "Turing machines",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.automata",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.automata.pda"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "discrete.automata.decidability",
+    "label": "Decidable and undecidable languages",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.automata",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.automata.turing"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "discrete.automata.halting",
+    "label": "The halting problem",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.automata",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.automata.turing"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "discrete.complexity.reduction",
+    "label": "Polynomial-time reductions",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.complexity",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.automata.turing"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "discrete.complexity.sat",
+    "label": "Boolean satisfiability",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.complexity",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.logic.boolean_functions"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "discrete.complexity.np_complete",
+    "label": "NP-complete problems",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.complexity",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.complexity.reduction",
+      "discrete.complexity.sat"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "discrete.complexity.cook_levin",
+    "label": "The Cook-Levin theorem",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.complexity",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.complexity.np_complete"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "discrete.coding.generator",
+    "label": "Generator and parity-check matrices",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.coding",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.coding.linear"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "discrete.coding.cyclic",
+    "label": "Cyclic codes",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.coding",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.coding.linear"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "discrete.coding.reed_solomon",
+    "label": "Reed-Solomon codes",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.coding",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.coding.linear"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "discrete.combinatorics.rook",
+    "label": "Rook polynomials",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.combinatorics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.sets.inclusion_exclusion"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "discrete.combinatorics.young_tableaux",
+    "label": "Standard Young tableaux",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.combinatorics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.combinatorics.integer_partitions"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "discrete.combinatorics.q_binomial",
+    "label": "Gaussian binomial coefficients",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.combinatorics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.combinatorics.integer_partitions",
+      "discrete.combinatorics.combinations"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "discrete.combinatorics.permutation_statistics",
+    "label": "Inversions and major index",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.combinatorics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.combinatorics.permutations"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "discrete.combinatorics.schur",
+    "label": "Schur numbers",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.combinatorics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.combinatorics.pigeonhole"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
+  },
+  {
+    "id": "discrete.algorithms.greedy",
+    "label": "Greedy algorithms and exchange arguments",
+    "domain": "discrete_math",
+    "subdomain": "discrete_math.algorithms",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "discrete.proof.cases"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 28.0
+    }
   }
 ]

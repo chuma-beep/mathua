@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Derive string",
+    "section": "Derive string",
+    "subgoals": [
+      "Identify the data for derive string",
+      "Apply the context-free grammars relation",
+      "State the resulting integer for derive string"
+    ]
+  },
+  {
+    "label": "Parse-tree count",
+    "section": "Parse-tree count",
+    "subgoals": [
+      "Identify the data for parse-tree count",
+      "Apply the context-free grammars relation",
+      "State the resulting integer for parse-tree count"
+    ]
+  },
+  {
+    "label": "Language membership",
+    "section": "Language membership",
+    "subgoals": [
+      "Identify the data for language membership",
+      "Apply the context-free grammars relation",
+      "State the resulting integer for language membership"
+    ]
+  }
+]

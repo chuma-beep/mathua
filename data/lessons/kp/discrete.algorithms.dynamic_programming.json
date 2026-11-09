@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Optimal substructure",
+    "section": "Optimal substructure",
+    "subgoals": [
+      "State the governing relation for dynamic programming",
+      "Identify the quantities in the optimal substructure step",
+      "Carry out the optimal substructure computation"
+    ]
+  },
+  {
+    "label": "The table recurrence",
+    "section": "The table recurrence",
+    "subgoals": [
+      "State the governing relation for dynamic programming",
+      "Identify the quantities in the the table recurrence step",
+      "Carry out the the table recurrence computation"
+    ]
+  },
+  {
+    "label": "Counting and reconstruction",
+    "section": "Counting and reconstruction",
+    "subgoals": [
+      "State the governing relation for dynamic programming",
+      "Identify the quantities in the counting and reconstruction step",
+      "Carry out the counting and reconstruction computation"
+    ]
+  }
+]

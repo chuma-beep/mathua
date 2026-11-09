@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Stack operation",
+    "section": "Stack operation",
+    "subgoals": [
+      "Identify the data for stack operation",
+      "Apply the pushdown automata relation",
+      "State the resulting integer for stack operation"
+    ]
+  },
+  {
+    "label": "Acceptance",
+    "section": "Acceptance",
+    "subgoals": [
+      "Identify the data for acceptance",
+      "Apply the pushdown automata relation",
+      "State the resulting integer for acceptance"
+    ]
+  },
+  {
+    "label": "State-stack trace",
+    "section": "State-stack trace",
+    "subgoals": [
+      "Identify the data for state-stack trace",
+      "Apply the pushdown automata relation",
+      "State the resulting integer for state-stack trace"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Cotrees",
+    "section": "Cotrees",
+    "subgoals": [
+      "State the governing relation for cographs",
+      "Identify the quantities in the cotrees step",
+      "Carry out the cotrees computation"
+    ]
+  },
+  {
+    "label": "Complement and joins",
+    "section": "Complement and joins",
+    "subgoals": [
+      "State the governing relation for cographs",
+      "Identify the quantities in the complement and joins step",
+      "Carry out the complement and joins computation"
+    ]
+  },
+  {
+    "label": "P4-free graphs",
+    "section": "P4-free graphs",
+    "subgoals": [
+      "State the governing relation for cographs",
+      "Identify the quantities in the p4-free graphs step",
+      "Carry out the p4-free graphs computation"
+    ]
+  }
+]

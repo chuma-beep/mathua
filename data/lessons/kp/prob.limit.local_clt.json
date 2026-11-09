@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Lattice correction",
+    "section": "Lattice correction",
+    "subgoals": [
+      "Identify the data for lattice correction",
+      "Apply the the local central limit theorem relation",
+      "State the resulting integer for lattice correction"
+    ]
+  },
+  {
+    "label": "Point probability",
+    "section": "Point probability",
+    "subgoals": [
+      "Identify the data for point probability",
+      "Apply the the local central limit theorem relation",
+      "State the resulting integer for point probability"
+    ]
+  },
+  {
+    "label": "Approximation",
+    "section": "Approximation",
+    "subgoals": [
+      "Identify the data for approximation",
+      "Apply the the local central limit theorem relation",
+      "State the resulting integer for approximation"
+    ]
+  }
+]

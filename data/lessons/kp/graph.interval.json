@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Interval representation",
+    "section": "Interval representation",
+    "subgoals": [
+      "Identify the data for interval representation",
+      "Apply the interval graphs relation",
+      "State the resulting integer for interval representation"
+    ]
+  },
+  {
+    "label": "Clique number",
+    "section": "Clique number",
+    "subgoals": [
+      "Identify the data for clique number",
+      "Apply the interval graphs relation",
+      "State the resulting integer for clique number"
+    ]
+  },
+  {
+    "label": "Recognition",
+    "section": "Recognition",
+    "subgoals": [
+      "Identify the data for recognition",
+      "Apply the interval graphs relation",
+      "State the resulting integer for recognition"
+    ]
+  }
+]

@@ -6998,5 +6998,205 @@
   {
     "concept_id": "ra.deriv.lebesgue_differentiation",
     "source": "authored/ra.deriv.lebesgue_differentiation.md"
+  },
+  {
+    "concept_id": "discrete.automata.nfa",
+    "source": "authored/discrete.automata.nfa.md"
+  },
+  {
+    "concept_id": "discrete.automata.regex",
+    "source": "authored/discrete.automata.regex.md"
+  },
+  {
+    "concept_id": "discrete.coding.linear",
+    "source": "authored/discrete.coding.linear.md"
+  },
+  {
+    "concept_id": "discrete.algorithms.dynamic_programming",
+    "source": "authored/discrete.algorithms.dynamic_programming.md"
+  },
+  {
+    "concept_id": "prob.process.branching",
+    "source": "authored/prob.process.branching.md"
+  },
+  {
+    "concept_id": "prob.process.brownian",
+    "source": "authored/prob.process.brownian.md"
+  },
+  {
+    "concept_id": "prob.conc.chernoff",
+    "source": "authored/prob.conc.chernoff.md"
+  },
+  {
+    "concept_id": "stat.infer.multiple_comparisons",
+    "source": "authored/stat.infer.multiple_comparisons.md"
+  },
+  {
+    "concept_id": "graph.chordal",
+    "source": "authored/graph.chordal.md"
+  },
+  {
+    "concept_id": "graph.cograph",
+    "source": "authored/graph.cograph.md"
+  },
+  {
+    "concept_id": "discrete.automata.pumping_lemma",
+    "source": "authored/discrete.automata.pumping_lemma.md"
+  },
+  {
+    "concept_id": "discrete.automata.cfg",
+    "source": "authored/discrete.automata.cfg.md"
+  },
+  {
+    "concept_id": "discrete.automata.pda",
+    "source": "authored/discrete.automata.pda.md"
+  },
+  {
+    "concept_id": "discrete.automata.turing",
+    "source": "authored/discrete.automata.turing.md"
+  },
+  {
+    "concept_id": "discrete.automata.decidability",
+    "source": "authored/discrete.automata.decidability.md"
+  },
+  {
+    "concept_id": "discrete.automata.halting",
+    "source": "authored/discrete.automata.halting.md"
+  },
+  {
+    "concept_id": "discrete.complexity.reduction",
+    "source": "authored/discrete.complexity.reduction.md"
+  },
+  {
+    "concept_id": "discrete.complexity.sat",
+    "source": "authored/discrete.complexity.sat.md"
+  },
+  {
+    "concept_id": "discrete.complexity.np_complete",
+    "source": "authored/discrete.complexity.np_complete.md"
+  },
+  {
+    "concept_id": "discrete.complexity.cook_levin",
+    "source": "authored/discrete.complexity.cook_levin.md"
+  },
+  {
+    "concept_id": "discrete.coding.generator",
+    "source": "authored/discrete.coding.generator.md"
+  },
+  {
+    "concept_id": "discrete.coding.cyclic",
+    "source": "authored/discrete.coding.cyclic.md"
+  },
+  {
+    "concept_id": "discrete.coding.reed_solomon",
+    "source": "authored/discrete.coding.reed_solomon.md"
+  },
+  {
+    "concept_id": "discrete.combinatorics.rook",
+    "source": "authored/discrete.combinatorics.rook.md"
+  },
+  {
+    "concept_id": "discrete.combinatorics.young_tableaux",
+    "source": "authored/discrete.combinatorics.young_tableaux.md"
+  },
+  {
+    "concept_id": "discrete.combinatorics.q_binomial",
+    "source": "authored/discrete.combinatorics.q_binomial.md"
+  },
+  {
+    "concept_id": "discrete.combinatorics.permutation_statistics",
+    "source": "authored/discrete.combinatorics.permutation_statistics.md"
+  },
+  {
+    "concept_id": "discrete.combinatorics.schur",
+    "source": "authored/discrete.combinatorics.schur.md"
+  },
+  {
+    "concept_id": "discrete.algorithms.greedy",
+    "source": "authored/discrete.algorithms.greedy.md"
+  },
+  {
+    "concept_id": "prob.process.renewal",
+    "source": "authored/prob.process.renewal.md"
+  },
+  {
+    "concept_id": "prob.process.queue",
+    "source": "authored/prob.process.queue.md"
+  },
+  {
+    "concept_id": "prob.process.ito",
+    "source": "authored/prob.process.ito.md"
+  },
+  {
+    "concept_id": "prob.process.sde",
+    "source": "authored/prob.process.sde.md"
+  },
+  {
+    "concept_id": "prob.process.gaussian",
+    "source": "authored/prob.process.gaussian.md"
+  },
+  {
+    "concept_id": "prob.process.hidden_markov",
+    "source": "authored/prob.process.hidden_markov.md"
+  },
+  {
+    "concept_id": "prob.process.kalman",
+    "source": "authored/prob.process.kalman.md"
+  },
+  {
+    "concept_id": "prob.conc.hoeffding",
+    "source": "authored/prob.conc.hoeffding.md"
+  },
+  {
+    "concept_id": "prob.conc.bernstein",
+    "source": "authored/prob.conc.bernstein.md"
+  },
+  {
+    "concept_id": "prob.conc.mcdiarmid",
+    "source": "authored/prob.conc.mcdiarmid.md"
+  },
+  {
+    "concept_id": "prob.limit.lindeberg",
+    "source": "authored/prob.limit.lindeberg.md"
+  },
+  {
+    "concept_id": "prob.limit.berry_esseen",
+    "source": "authored/prob.limit.berry_esseen.md"
+  },
+  {
+    "concept_id": "prob.limit.local_clt",
+    "source": "authored/prob.limit.local_clt.md"
+  },
+  {
+    "concept_id": "prob.bayes.conjugate",
+    "source": "authored/prob.bayes.conjugate.md"
+  },
+  {
+    "concept_id": "prob.bayes.predictive",
+    "source": "authored/prob.bayes.predictive.md"
+  },
+  {
+    "concept_id": "prob.decision.bayes_risk",
+    "source": "authored/prob.decision.bayes_risk.md"
+  },
+  {
+    "concept_id": "prob.decision.minimax",
+    "source": "authored/prob.decision.minimax.md"
+  },
+  {
+    "concept_id": "prob.info.entropy",
+    "source": "authored/prob.info.entropy.md"
+  },
+  {
+    "concept_id": "prob.info.kl",
+    "source": "authored/prob.info.kl.md"
+  },
+  {
+    "concept_id": "graph.interval",
+    "source": "authored/graph.interval.md"
+  },
+  {
+    "concept_id": "graph.split",
+    "source": "authored/graph.split.md"
   }
 ]

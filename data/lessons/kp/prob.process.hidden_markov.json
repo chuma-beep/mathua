@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Transition and emission",
+    "section": "Transition and emission",
+    "subgoals": [
+      "Identify the data for transition and emission",
+      "Apply the hidden markov models relation",
+      "State the resulting integer for transition and emission"
+    ]
+  },
+  {
+    "label": "Forward probability",
+    "section": "Forward probability",
+    "subgoals": [
+      "Identify the data for forward probability",
+      "Apply the hidden markov models relation",
+      "State the resulting integer for forward probability"
+    ]
+  },
+  {
+    "label": "Viterbi path",
+    "section": "Viterbi path",
+    "subgoals": [
+      "Identify the data for Viterbi path",
+      "Apply the hidden markov models relation",
+      "State the resulting integer for Viterbi path"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Gaussian increments",
+    "section": "Gaussian increments",
+    "subgoals": [
+      "State the governing relation for brownian motion",
+      "Identify the quantities in the gaussian increments step",
+      "Carry out the gaussian increments computation"
+    ]
+  },
+  {
+    "label": "Covariance",
+    "section": "Covariance",
+    "subgoals": [
+      "State the governing relation for brownian motion",
+      "Identify the quantities in the covariance step",
+      "Carry out the covariance computation"
+    ]
+  },
+  {
+    "label": "Hitting probabilities",
+    "section": "Hitting probabilities",
+    "subgoals": [
+      "State the governing relation for brownian motion",
+      "Identify the quantities in the hitting probabilities step",
+      "Carry out the hitting probabilities computation"
+    ]
+  }
+]

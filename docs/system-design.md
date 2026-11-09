@@ -191,7 +191,7 @@ The engine is the central orchestrator. It holds references to every subsystem a
 | **Weakness Propagation** | `Engine.PropagateWeakness` in `internal/engine/engine.go` | If a concept's weakness > 0.3, propagates `w × 0.3` to dependents |
 | **Diagnostic** | `internal/diagnostic/` (`cat.go:1`, `report.go:11`) | Compressed covering set + info-gain CAT with `±0.3` evidence propagation, per-concept `KnowledgeConfidence 0–1`, frontier at max belief drop, supplemental when `<0.7` |
 | **Planner** | `internal/planning/` | Course paths loaded from `data/courses.json` (28 courses) |
-| **Lessons** | `internal/lessons/` | Markdown lesson content from `data/lessons/` + 1750 KP shards `data/lessons/kp/*.json` ×3 `audit_lessons.py:191` |
+| **Lessons** | `internal/lessons/` | Markdown lesson content from `data/lessons/` + 1800 KP shards `data/lessons/kp/*.json` ×3 `audit_lessons.py:191` |
 
 ### DAG (Concept Graph)
 
@@ -259,7 +259,7 @@ longer gate the ladder.
 This replaced a streak-based ladder, and the cost of the old one is worth recording because it
 was invisible for months. All three tiers were gated on the single condition
 `streak >= required AND avg time <= threshold`, so the ladder was one test repeated until the
-streak was long enough: for the 1750 concepts whose `required_streak` is 10, `MASTERED` cost 30
+streak was long enough: for the 1800 concepts whose `required_streak` is 10, `MASTERED` cost 30
 consecutive correct answers, all-or-nothing, because one miss zeroed the streak. See
 `docs/mastery-semantics.md` for the measurements and ADR-038 for the decision.
 
@@ -511,7 +511,7 @@ Total latency target: under 100ms for numeric grading, under 500ms for SymPy-bas
 
 ## 10. Computerized Adaptive Testing (CAT)
 
-Mathua implements a compressed-covering + info-gain CAT to locate a student's knowledge frontier quickly. Instead of testing all 1750 concepts, the diagnostic asks two probes per concept in the covering set, bounded above by `maxTotalQuestions=45`. A wide scope reaches `minTotalQuestions=25`; a narrow one runs out of cover first and ends below it.
+Mathua implements a compressed-covering + info-gain CAT to locate a student's knowledge frontier quickly. Instead of testing all 1800 concepts, the diagnostic asks two probes per concept in the covering set, bounded above by `maxTotalQuestions=45`. A wide scope reaches `minTotalQuestions=25`; a narrow one runs out of cover first and ends below it.
 
 ![CAT Diagnostic](diagrams/system-design-cat-diagnostic-dark.svg)
 
@@ -608,5 +608,5 @@ The Go binary serves the Next.js static export directly. This means:
 
 ## Summary
 
-Mathua is an intentionally simple system. One language (Go), two databases (SQLite + PostgreSQL via `pgx/v5` `storage/postgres.go:21` / `storage/sqlite.go:1`, same `Repository` `internal/storage/store.go`), one engine core with a single delivery method through the REST API. The complexity is in the algorithms  --  SM-2 spaced repetition scaled by `learningSpeed`, CAT compressed-cover + info-gain diagnostics, 22 domain registries (1750 concepts), 9 grading types via `Router`  --  not in the infrastructure. Every component can be understood by reading its source file start to finish.
+Mathua is an intentionally simple system. One language (Go), two databases (SQLite + PostgreSQL via `pgx/v5` `storage/postgres.go:21` / `storage/sqlite.go:1`, same `Repository` `internal/storage/store.go`), one engine core with a single delivery method through the REST API. The complexity is in the algorithms  --  SM-2 spaced repetition scaled by `learningSpeed`, CAT compressed-cover + info-gain diagnostics, 22 domain registries (1800 concepts), 9 grading types via `Router`  --  not in the infrastructure. Every component can be understood by reading its source file start to finish.
 

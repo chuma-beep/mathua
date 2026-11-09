@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Codeword from matrix",
+    "section": "Codeword from matrix",
+    "subgoals": [
+      "Identify the data for codeword from matrix",
+      "Apply the generator and parity-check matrices relation",
+      "State the resulting integer for codeword from matrix"
+    ]
+  },
+  {
+    "label": "Nullspace or parity check",
+    "section": "Nullspace or parity check",
+    "subgoals": [
+      "Identify the data for nullspace or parity check",
+      "Apply the generator and parity-check matrices relation",
+      "State the resulting integer for nullspace or parity check"
+    ]
+  },
+  {
+    "label": "Rank and dimension",
+    "section": "Rank and dimension",
+    "subgoals": [
+      "Identify the data for rank and dimension",
+      "Apply the generator and parity-check matrices relation",
+      "State the resulting integer for rank and dimension"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Traffic intensity",
+    "section": "Traffic intensity",
+    "subgoals": [
+      "Identify the data for traffic intensity",
+      "Apply the queueing processes relation",
+      "State the resulting integer for traffic intensity"
+    ]
+  },
+  {
+    "label": "Stationary distribution",
+    "section": "Stationary distribution",
+    "subgoals": [
+      "Identify the data for stationary distribution",
+      "Apply the queueing processes relation",
+      "State the resulting integer for stationary distribution"
+    ]
+  },
+  {
+    "label": "Expected queue length",
+    "section": "Expected queue length",
+    "subgoals": [
+      "Identify the data for expected queue length",
+      "Apply the queueing processes relation",
+      "State the resulting integer for expected queue length"
+    ]
+  }
+]

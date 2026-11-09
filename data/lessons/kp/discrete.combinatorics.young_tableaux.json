@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Shape or standard tableau",
+    "section": "Shape or standard tableau",
+    "subgoals": [
+      "Identify the data for shape or standard tableau",
+      "Apply the standard young tableaux relation",
+      "State the resulting integer for shape or standard tableau"
+    ]
+  },
+  {
+    "label": "Hook length",
+    "section": "Hook length",
+    "subgoals": [
+      "Identify the data for hook length",
+      "Apply the standard young tableaux relation",
+      "State the resulting integer for hook length"
+    ]
+  },
+  {
+    "label": "Count tableaux",
+    "section": "Count tableaux",
+    "subgoals": [
+      "Identify the data for count tableaux",
+      "Apply the standard young tableaux relation",
+      "State the resulting integer for count tableaux"
+    ]
+  }
+]

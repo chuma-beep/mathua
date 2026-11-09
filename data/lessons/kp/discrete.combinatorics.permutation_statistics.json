@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Inversion count",
+    "section": "Inversion count",
+    "subgoals": [
+      "Identify the data for inversion count",
+      "Apply the inversions and major index relation",
+      "State the resulting integer for inversion count"
+    ]
+  },
+  {
+    "label": "Major index",
+    "section": "Major index",
+    "subgoals": [
+      "Identify the data for major index",
+      "Apply the inversions and major index relation",
+      "State the resulting integer for major index"
+    ]
+  },
+  {
+    "label": "Distribution over S_n",
+    "section": "Distribution over S_n",
+    "subgoals": [
+      "Identify the data for distribution over S_n",
+      "Apply the inversions and major index relation",
+      "State the resulting integer for distribution over S_n"
+    ]
+  }
+]

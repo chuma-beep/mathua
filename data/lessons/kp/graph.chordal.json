@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Perfect elimination orderings",
+    "section": "Perfect elimination orderings",
+    "subgoals": [
+      "State the governing relation for chordal graphs",
+      "Identify the quantities in the perfect elimination orderings step",
+      "Carry out the perfect elimination orderings computation"
+    ]
+  },
+  {
+    "label": "Chordless cycles",
+    "section": "Chordless cycles",
+    "subgoals": [
+      "State the governing relation for chordal graphs",
+      "Identify the quantities in the chordless cycles step",
+      "Carry out the chordless cycles computation"
+    ]
+  },
+  {
+    "label": "Clique trees",
+    "section": "Clique trees",
+    "subgoals": [
+      "State the governing relation for chordal graphs",
+      "Identify the quantities in the clique trees step",
+      "Carry out the clique trees computation"
+    ]
+  }
+]

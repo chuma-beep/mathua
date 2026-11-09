@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Hamming code",
+    "section": "The Hamming code",
+    "subgoals": [
+      "State the governing relation for linear codes",
+      "Identify the quantities in the the hamming code step",
+      "Carry out the the hamming code computation"
+    ]
+  },
+  {
+    "label": "Distance and error correction",
+    "section": "Distance and error correction",
+    "subgoals": [
+      "State the governing relation for linear codes",
+      "Identify the quantities in the distance and error correction step",
+      "Carry out the distance and error correction computation"
+    ]
+  },
+  {
+    "label": "Encoding messages",
+    "section": "Encoding messages",
+    "subgoals": [
+      "State the governing relation for linear codes",
+      "Identify the quantities in the encoding messages step",
+      "Carry out the encoding messages computation"
+    ]
+  }
+]

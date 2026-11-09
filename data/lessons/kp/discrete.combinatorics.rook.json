@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Rook polynomial of a small board",
+    "section": "Rook polynomial of a small board",
+    "subgoals": [
+      "Identify the data for rook polynomial of a small board",
+      "Apply the rook polynomials relation",
+      "State the resulting integer for rook polynomial of a small board"
+    ]
+  },
+  {
+    "label": "Forbidden positions",
+    "section": "Forbidden positions",
+    "subgoals": [
+      "Identify the data for forbidden positions",
+      "Apply the rook polynomials relation",
+      "State the resulting integer for forbidden positions"
+    ]
+  },
+  {
+    "label": "Inclusion-exclusion count",
+    "section": "Inclusion-exclusion count",
+    "subgoals": [
+      "Identify the data for inclusion-exclusion count",
+      "Apply the rook polynomials relation",
+      "State the resulting integer for inclusion-exclusion count"
+    ]
+  }
+]

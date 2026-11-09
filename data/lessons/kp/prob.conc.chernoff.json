@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The moment generating function",
+    "section": "The moment generating function",
+    "subgoals": [
+      "State the governing relation for chernoff bounds",
+      "Identify the quantities in the the moment generating function step",
+      "Carry out the the moment generating function computation"
+    ]
+  },
+  {
+    "label": "Optimising the exponent",
+    "section": "Optimising the exponent",
+    "subgoals": [
+      "State the governing relation for chernoff bounds",
+      "Identify the quantities in the optimising the exponent step",
+      "Carry out the optimising the exponent computation"
+    ]
+  },
+  {
+    "label": "The tail bound",
+    "section": "The tail bound",
+    "subgoals": [
+      "State the governing relation for chernoff bounds",
+      "Identify the quantities in the the tail bound step",
+      "Carry out the the tail bound computation"
+    ]
+  }
+]

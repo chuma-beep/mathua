@@ -1,0 +1,29 @@
+[
+  {
+    "label": "KL divergence",
+    "section": "KL divergence",
+    "subgoals": [
+      "Identify the data for KL divergence",
+      "Apply the relative entropy and mutual information relation",
+      "State the resulting integer for KL divergence"
+    ]
+  },
+  {
+    "label": "Mutual information",
+    "section": "Mutual information",
+    "subgoals": [
+      "Identify the data for mutual information",
+      "Apply the relative entropy and mutual information relation",
+      "State the resulting integer for mutual information"
+    ]
+  },
+  {
+    "label": "Chain rule",
+    "section": "Chain rule",
+    "subgoals": [
+      "Identify the data for chain rule",
+      "Apply the relative entropy and mutual information relation",
+      "State the resulting integer for chain rule"
+    ]
+  }
+]

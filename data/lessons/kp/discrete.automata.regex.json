@@ -1,0 +1,29 @@
+[
+  {
+    "label": "DFAs and regular languages",
+    "section": "DFAs and regular languages",
+    "subgoals": [
+      "State the governing relation for regular expressions and finite automata",
+      "Identify the quantities in the dfas and regular languages step",
+      "Carry out the dfas and regular languages computation"
+    ]
+  },
+  {
+    "label": "Counting words by length",
+    "section": "Counting words by length",
+    "subgoals": [
+      "State the governing relation for regular expressions and finite automata",
+      "Identify the quantities in the counting words by length step",
+      "Carry out the counting words by length computation"
+    ]
+  },
+  {
+    "label": "Membership tests",
+    "section": "Membership tests",
+    "subgoals": [
+      "State the governing relation for regular expressions and finite automata",
+      "Identify the quantities in the membership tests step",
+      "Carry out the membership tests computation"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Integral mean",
+    "section": "Integral mean",
+    "subgoals": [
+      "Identify the data for integral mean",
+      "Apply the ito integrals relation",
+      "State the resulting integer for integral mean"
+    ]
+  },
+  {
+    "label": "Quadratic variation",
+    "section": "Quadratic variation",
+    "subgoals": [
+      "Identify the data for quadratic variation",
+      "Apply the ito integrals relation",
+      "State the resulting integer for quadratic variation"
+    ]
+  },
+  {
+    "label": "Ito formula",
+    "section": "Ito formula",
+    "subgoals": [
+      "Identify the data for Ito formula",
+      "Apply the ito integrals relation",
+      "State the resulting integer for Ito formula"
+    ]
+  }
+]

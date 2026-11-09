@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Schur number bound",
+    "section": "Schur number bound",
+    "subgoals": [
+      "Identify the data for Schur number bound",
+      "Apply the schur numbers relation",
+      "State the resulting integer for Schur number bound"
+    ]
+  },
+  {
+    "label": "Coloring",
+    "section": "Coloring",
+    "subgoals": [
+      "Identify the data for coloring",
+      "Apply the schur numbers relation",
+      "State the resulting integer for coloring"
+    ]
+  },
+  {
+    "label": "Small case",
+    "section": "Small case",
+    "subgoals": [
+      "Identify the data for small case",
+      "Apply the schur numbers relation",
+      "State the resulting integer for small case"
+    ]
+  }
+]

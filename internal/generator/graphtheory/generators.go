@@ -48,4 +48,6 @@ func Register(reg *generator.Registry) {
 		reg.Register(id, &graphBridgeGen{kind: kind})
 	}
 	registerWave3(reg)
+	registerWave6(reg)
+	registerWave6Remaining(reg)
 }

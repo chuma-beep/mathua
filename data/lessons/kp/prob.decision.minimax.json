@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Minimax value",
+    "section": "Minimax value",
+    "subgoals": [
+      "Identify the data for minimax value",
+      "Apply the minimax decision rules relation",
+      "State the resulting integer for minimax value"
+    ]
+  },
+  {
+    "label": "Least favorable prior",
+    "section": "Least favorable prior",
+    "subgoals": [
+      "Identify the data for least favorable prior",
+      "Apply the minimax decision rules relation",
+      "State the resulting integer for least favorable prior"
+    ]
+  },
+  {
+    "label": "Compare Bayes risk",
+    "section": "Compare Bayes risk",
+    "subgoals": [
+      "Identify the data for compare Bayes risk",
+      "Apply the minimax decision rules relation",
+      "State the resulting integer for compare Bayes risk"
+    ]
+  }
+]

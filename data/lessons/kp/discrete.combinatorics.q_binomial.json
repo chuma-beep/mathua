@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Evaluate at q",
+    "section": "Evaluate at q",
+    "subgoals": [
+      "Identify the data for evaluate at q",
+      "Apply the gaussian binomial coefficients relation",
+      "State the resulting integer for evaluate at q"
+    ]
+  },
+  {
+    "label": "Lattice-path interpretation",
+    "section": "Lattice-path interpretation",
+    "subgoals": [
+      "Identify the data for lattice-path interpretation",
+      "Apply the gaussian binomial coefficients relation",
+      "State the resulting integer for lattice-path interpretation"
+    ]
+  },
+  {
+    "label": "Recurrence",
+    "section": "Recurrence",
+    "subgoals": [
+      "Identify the data for recurrence",
+      "Apply the gaussian binomial coefficients relation",
+      "State the resulting integer for recurrence"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Renewal function",
+    "section": "Renewal function",
+    "subgoals": [
+      "Identify the data for renewal function",
+      "Apply the renewal theory relation",
+      "State the resulting integer for renewal function"
+    ]
+  },
+  {
+    "label": "Interarrival mean",
+    "section": "Interarrival mean",
+    "subgoals": [
+      "Identify the data for interarrival mean",
+      "Apply the renewal theory relation",
+      "State the resulting integer for interarrival mean"
+    ]
+  },
+  {
+    "label": "Asymptotic rate",
+    "section": "Asymptotic rate",
+    "subgoals": [
+      "Identify the data for asymptotic rate",
+      "Apply the renewal theory relation",
+      "State the resulting integer for asymptotic rate"
+    ]
+  }
+]
