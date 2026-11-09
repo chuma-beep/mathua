@@ -13,6 +13,8 @@ one changes the schema if guessed at.
 
 Read this before writing any migration. Two of these (D1, D2) determine the table shape.
 
+**Measurement note, 2026-11-09.** The counts in this document were taken at the 666 concepts then held by the corpus. It now holds 1,550, and the generated partition and its report own the current values: width 3 gives 138 units and 24 singleton units. The tables below are kept as the record of the analysis that produced the finding, not as current state.
+
 ---
 
 ## Why this is a map and not a spec
@@ -23,7 +25,8 @@ The expensive part is not the code. It is:
   `data/concepts/*.json` carries only `id`, `label`, `domain`, `subdomain`, `prerequisites`,
   `grading_type`, `mastery_threshold`; `data/courses.json` has 22 entries of 4 loose `targets`
   each; `data/concepts/enrichment.json` is 10 heuristic overrides of which 2 carry
-  `encompasses`. **A draft now exists** (`data/mastery_units.json`, width 3, 91 units) and it is
+  `encompasses`. **A draft now exists** (`data/mastery_units.json`, width 3; 91 units at the
+  666 concepts then held, 138 at 1,550) and it is
   reported in full below, including the finding that no band width produces an
   assessment-grade partition, which is the result D3 was asked to produce and which makes the
   authoring decision *larger* rather than smaller.
@@ -115,7 +118,7 @@ answer rather than a missing one**, which is the failure mode this ADR exists to
 | **Subdomain condensation depth** | **does not exist for 60 of 125** | 26 subdomains sit inside 9 cycles (`abstract_algebra.{fields,groups,rings,structures}`, `calculus.{advanced,derivatives,integrals,limits}`, `algebra.{factoring,polynomials,quadratics}` ↔ `complex_numbers.basics`, `topology.{algebraic,covering,manifolds}`, `linear_algebra.{determinants,matrices,vectors}`, and three more) and 34 more sit downstream, which Kahn cannot order either because ordering requires predecessors first. |
 | Domain condensation depth | **does not exist for 14 of 17** | Only 3 domains level. Grouping loses the DAG's acyclicity. |
 | Concept depth | resolves **666 of 666**, max 44 | The only well-defined depth function. |
-| `(domain, floor(conceptDepth/3))` | **91 units**, median 5, 18 singletons | Violates §12: 18 singletons is a quiz per concept. |
+| `(domain, floor(conceptDepth/3))` | **91 units**, median 5, 18 singletons (666 concepts) | Violates §12: 18 singletons is a quiz per concept. |
 
 **The 22 backward edges were never a property of the corpus.** They were the same Kahn bug. Under
 concept depth there are **zero backward edges at every band width from 1 to 45**, by
@@ -139,6 +142,10 @@ The usable widths trade fragmentation against size rather than resolving either.
 does not produce assessment-grade boundaries**, so D3's answer is a derived draft *plus* hand
 merging, not a derivation.
 
+At 1,550 concepts the same sweep is in `data/mastery_units.report.md`: width 3 reads 138 units,
+median 8 and 24 singletons, and width 45 reads 23 domains with algebra, not calculus, the largest
+at 153 concepts.
+
 What the measurement did establish, and what survives: **the corpus has no partition at
 subdomain or domain granularity that admits a topological unit order at all.** Whatever the units
 are, they cannot be "one per domain" or "one per subdomain" and still inherit the DAG's ordering.
@@ -160,8 +167,9 @@ fragmentation; only someone who knows the learning model can say whether the fra
 problem with the rule or a fact about the corpus.
 
 Open sub-question: **a unit of one concept.** Permitted by the rules, reported as an anomaly
-rather than an error. With 18 singletons at width 3 this is no longer hypothetical, and whether
-they are an error or a judgement is content, not schema.
+rather than an error. With 18 singletons when this was written and 24 at the current corpus,
+this is no longer hypothetical, and whether they are an error or a judgement is content, not
+schema.
 
 ### D4, What is the pass threshold?
 
