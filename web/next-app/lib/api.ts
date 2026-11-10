@@ -944,6 +944,10 @@ export async function getWeaknesses(): Promise<WeaknessRes> {
 
 export interface UserSettings {
 	show_timer?: boolean
+	// Timed quizzes ask for the numeric keypad only when this is on. The default
+	// is the device's full keyboard, because a numeric-only keypad cannot enter
+	// +, -, times or divide, and several timed-quiz answers need one of them.
+	timed_quiz_number_pad?: boolean
 	pause_until?: string | null
 	avatar_preset?: number | null
 	avatar_dicebear?: { style: string; seed: string } | null

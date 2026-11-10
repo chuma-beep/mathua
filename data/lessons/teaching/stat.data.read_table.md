@@ -8,8 +8,25 @@ This section is about making observations about data and the patterns that you m
 
 Math helps us understand data from the world around us. We can use what we discover to understand the world better and make better decisions. Here's an example with economic data from the US, plotted in a Cartesian plane.
 
-For the years from 2000 to 2021, consider what percent of American wealth was held by the wealthiest 1% of Americans. The table in  the figure  gives the numbers (source: ), but any pattern there might not be apparent when looking at the data organized this way. Plotting the data in a Cartesian coordinates system can make an overall pattern or trend become visible.
+For the years from 2000 to 2021, consider what percent of American wealth was held by the wealthiest 1% of Americans. The table below gives the numbers (source: [FEE.org](https://fee.org/articles/the-top-1-hold-a-record-amount-of-wealth-in-the-us-here-s-how-much-and-why/)), but any pattern there might not be apparent when looking at the data organized this way. Plotting the data in a Cartesian coordinates system can make an overall pattern or trend become visible.
 
+| year | % | year | % |
+|---:|---:|---:|---:|
+| 2000 | 28.5 | 2011 | 29.4 |
+| 2001 | 27.0 | 2012 | 29.5 |
+| 2002 | 26.0 | 2013 | 30.2 |
+| 2003 | 25.0 | 2014 | 30.5 |
+| 2004 | 27.3 | 2015 | 31.1 |
+| 2005 | 27.7 | 2016 | 31.2 |
+| 2006 | 28.7 | 2017 | 31.0 |
+| 2007 | 29.0 | 2018 | 31.0 |
+| 2008 | 29.1 | 2019 | 30.9 |
+| 2009 | 27.0 | 2020 | 30.2 |
+| 2010 | 28.4 | 2021 | 32.1 |
+
+*Table: Share of all income held by the top 1% of wage earners, 2000 to 2021*
+
+![A scatter plot of the percentage of United States wealth held by the wealthiest 1% for each year from 2000 to 2021.](/diagrams/statistics/top-one-percent-wealth-scatter.svg)
 *Share of all income held by the top 1% of wage earners*
 
 What observations do you see now that you couldn't easily see from the numbers in the table? Do you see evidence of the COVID pandemic? Evidence of the Great Recession of 2008?
@@ -116,7 +133,8 @@ Let's return to the data that we opened the section with, in  the figure . Is th
 
 However if we step back, there does seem to be an overall upward trend that is captured by the line overlaying the data in  the figure . Points on the overlaid line *do* have a linear pattern. Let's estimate the rate of change between some pair of points on this line. We are free to use any pair of points to do this, so let's make this calculation easier by choosing points we can clearly identify on the graph: $(2005,27.7)$ and $(2018,31)$.
 
-*Share of all income held by the top 1%, United States, 20002021*
+![A scatter plot of the percentage of United States wealth held by the wealthiest 1% from 2000 to 2021, with a straight trend line overlaid and the points (2005, 27.7) and (2018, 31) labelled.](/diagrams/statistics/top-one-percent-wealth-trend.svg)
+*Share of all income held by the top 1%, United States, 2000–2021*
 
 The rate of change between those two points is
 

@@ -9,6 +9,7 @@ import XPTaskSummary from '../../components/XPTaskSummary'
 import { stemWithoutChoices } from '../../lib/choices'
 import {
   finalizeTimedQuiz,
+  getSettings,
   getTimedQuiz,
   getTimedQuizResult,
   skipTimedQuizItem,
@@ -47,6 +48,10 @@ export default function TimedQuizHost() {
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
   const [remaining, setRemaining] = useState(0)
+  // Default false, which means the full device keyboard. A learner has to opt in
+  // to the numeric pad, because that pad cannot type the operations some answers
+  // need. See the Settings control for the same decision.
+  const [numberPad, setNumberPad] = useState(false)
   const offsetRef = useRef(0)
   const submissionIds = useRef<Record<string, string>>({})
   const questionShownAt = useRef(0)
@@ -66,6 +71,19 @@ export default function TimedQuizHost() {
   useEffect(() => {
     void loadSummary()
   }, [loadSummary])
+
+  // A settings read failure must not block the quiz. Falling back to false keeps
+  // the full keyboard, which is the safer of the two on a phone: every answer
+  // can still be typed, while a numeric pad can be missing an operation key.
+  useEffect(() => {
+    let live = true
+    getSettings()
+      .then((settings) => {
+        if (live) setNumberPad(settings.timed_quiz_number_pad === true)
+      })
+      .catch(() => {})
+    return () => { live = false }
+  }, [])
 
   const finish = useCallback((data: TimedQuizResultRes) => {
     setResult(data)
@@ -306,7 +324,7 @@ export default function TimedQuizHost() {
                 id="timed-quiz-answer"
                 value={answer}
                 onChange={(event) => setAnswer(event.target.value)}
-                inputMode={item.answer_input_mode === 'numeric' ? 'decimal' : 'text'}
+                inputMode={numberPad && item.answer_input_mode === 'numeric' ? 'decimal' : 'text'}
                 autoComplete="off"
                 placeholder={item.answer_hint || 'Your answer...'}
                 className="flex-1 border border-mathua-border rounded-none bg-mathua-bg px-3 py-2 font-mono text-sm text-mathua-primary focus:border-mathua-blue focus:outline-none"

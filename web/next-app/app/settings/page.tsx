@@ -119,6 +119,28 @@ export default function SettingsPage() {
     }
   }
 
+  // The timed quiz used to request a numeric keypad for every numeric answer.
+  // On a phone that keypad has no plus, minus, times or divide key, so a question
+  // whose answer needs one could not be entered. The default is now the full
+  // device keyboard; the number pad stays available for learners who prefer it.
+  const handleTimedQuizNumberPad = async (checked: boolean) => {
+    const previous = settings.timed_quiz_number_pad === true
+    if (previous === checked) return
+    const next: UserSettings = { ...settings, timed_quiz_number_pad: checked }
+    setSettings(next)
+    setSaved(false)
+    try {
+      await updateSettings(next)
+      setSaved(true)
+      setTimeout(() => setSaved(false), 2000)
+    } catch {
+      console.error('updateSettings failed')
+      setSettings(current => ({ ...current, timed_quiz_number_pad: previous }))
+      setSaveError('Couldn\u2019t save, check your connection and try again.')
+      setTimeout(() => setSaveError(''), 3000)
+    }
+  }
+
   const handlePause = async (days: number | null) => {
     const next: UserSettings = { ...settings }
     if (days === null) {
@@ -461,6 +483,20 @@ export default function SettingsPage() {
                   checked={!!settings.show_timer}
                   onCheckedChange={handleCheckedChange}
                   aria-label="Toggle answer timer"
+                />
+              </div>
+
+              <div className="flex items-center justify-between gap-4 min-w-0">
+                <div className="min-w-0 flex-1">
+                  <span className="font-mono text-sm text-mathua-primary">Use number pad in timed quizzes</span>
+                  <p className="text-mathua-muted text-xs mt-1">
+                    Off uses your device&apos;s full keyboard, so +, −, × and ÷ are available. On uses the numeric keypad for numeric answers.
+                  </p>
+                </div>
+                <Switch
+                  checked={settings.timed_quiz_number_pad === true}
+                  onCheckedChange={handleTimedQuizNumberPad}
+                  aria-label="Toggle number pad in timed quizzes"
                 />
               </div>
 

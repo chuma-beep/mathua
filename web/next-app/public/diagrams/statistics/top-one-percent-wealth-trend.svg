@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" viewBox="0 0 720 420">
+  <title>Share of all wealth held by the top 1%, United States, 2000 to 2021</title>
+  <desc>A scatter plot of the percentage of United States wealth held by the wealthiest 1% for each year from 2000 to 2021, with a straight trend line overlaid. The two labelled points on the line are (2005, 27.7) and (2018, 31).</desc>
+
+  <line x1="70" y1="360" x2="690" y2="360" stroke="#9aa0a6" stroke-width="2"/>
+  <line x1="70" y1="30" x2="70" y2="360" stroke="#9aa0a6" stroke-width="2"/>
+  <line x1="70.0" y1="360" x2="70.0" y2="366" stroke="#9aa0a6" stroke-width="1.5"/>
+  <text x="70.0" y="384" font-family="ui-monospace, monospace" font-size="12" fill="#6b7280" text-anchor="middle">2000</text>
+  <line x1="194.0" y1="360" x2="194.0" y2="366" stroke="#9aa0a6" stroke-width="1.5"/>
+  <text x="194.0" y="384" font-family="ui-monospace, monospace" font-size="12" fill="#6b7280" text-anchor="middle">2005</text>
+  <line x1="318.0" y1="360" x2="318.0" y2="366" stroke="#9aa0a6" stroke-width="1.5"/>
+  <text x="318.0" y="384" font-family="ui-monospace, monospace" font-size="12" fill="#6b7280" text-anchor="middle">2010</text>
+  <line x1="442.0" y1="360" x2="442.0" y2="366" stroke="#9aa0a6" stroke-width="1.5"/>
+  <text x="442.0" y="384" font-family="ui-monospace, monospace" font-size="12" fill="#6b7280" text-anchor="middle">2015</text>
+  <line x1="566.0" y1="360" x2="566.0" y2="366" stroke="#9aa0a6" stroke-width="1.5"/>
+  <text x="566.0" y="384" font-family="ui-monospace, monospace" font-size="12" fill="#6b7280" text-anchor="middle">2020</text>
+  <line x1="690.0" y1="360" x2="690.0" y2="366" stroke="#9aa0a6" stroke-width="1.5"/>
+  <text x="690.0" y="384" font-family="ui-monospace, monospace" font-size="12" fill="#6b7280" text-anchor="middle">2025</text>
+  <line x1="64" y1="360.0" x2="70" y2="360.0" stroke="#9aa0a6" stroke-width="1.5"/>
+  <line x1="70" y1="360.0" x2="690" y2="360.0" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="58" y="364.0" font-family="ui-monospace, monospace" font-size="12" fill="#6b7280" text-anchor="end">0</text>
+  <line x1="64" y1="318.8" x2="70" y2="318.8" stroke="#9aa0a6" stroke-width="1.5"/>
+  <line x1="70" y1="318.8" x2="690" y2="318.8" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="58" y="322.8" font-family="ui-monospace, monospace" font-size="12" fill="#6b7280" text-anchor="end">5</text>
+  <line x1="64" y1="277.5" x2="70" y2="277.5" stroke="#9aa0a6" stroke-width="1.5"/>
+  <line x1="70" y1="277.5" x2="690" y2="277.5" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="58" y="281.5" font-family="ui-monospace, monospace" font-size="12" fill="#6b7280" text-anchor="end">10</text>
+  <line x1="64" y1="236.2" x2="70" y2="236.2" stroke="#9aa0a6" stroke-width="1.5"/>
+  <line x1="70" y1="236.2" x2="690" y2="236.2" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="58" y="240.2" font-family="ui-monospace, monospace" font-size="12" fill="#6b7280" text-anchor="end">15</text>
+  <line x1="64" y1="195.0" x2="70" y2="195.0" stroke="#9aa0a6" stroke-width="1.5"/>
+  <line x1="70" y1="195.0" x2="690" y2="195.0" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="58" y="199.0" font-family="ui-monospace, monospace" font-size="12" fill="#6b7280" text-anchor="end">20</text>
+  <line x1="64" y1="153.8" x2="70" y2="153.8" stroke="#9aa0a6" stroke-width="1.5"/>
+  <line x1="70" y1="153.8" x2="690" y2="153.8" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="58" y="157.8" font-family="ui-monospace, monospace" font-size="12" fill="#6b7280" text-anchor="end">25</text>
+  <line x1="64" y1="112.5" x2="70" y2="112.5" stroke="#9aa0a6" stroke-width="1.5"/>
+  <line x1="70" y1="112.5" x2="690" y2="112.5" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="58" y="116.5" font-family="ui-monospace, monospace" font-size="12" fill="#6b7280" text-anchor="end">30</text>
+  <line x1="64" y1="71.2" x2="70" y2="71.2" stroke="#9aa0a6" stroke-width="1.5"/>
+  <line x1="70" y1="71.2" x2="690" y2="71.2" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="58" y="75.2" font-family="ui-monospace, monospace" font-size="12" fill="#6b7280" text-anchor="end">35</text>
+  <line x1="64" y1="30.0" x2="70" y2="30.0" stroke="#9aa0a6" stroke-width="1.5"/>
+  <line x1="70" y1="30.0" x2="690" y2="30.0" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="58" y="34.0" font-family="ui-monospace, monospace" font-size="12" fill="#6b7280" text-anchor="end">40</text>
+  <text x="380.0" y="408" font-family="ui-monospace, monospace" font-size="13" fill="#6b7280" text-anchor="middle">year</text>
+  <text x="22" y="195.0" font-family="ui-monospace, monospace" font-size="13" fill="#6b7280" text-anchor="middle" transform="rotate(-90 22 195.0)">percent of wealth</text>
+  <line x1="70.0" y1="141.3" x2="590.8" y2="98.1" stroke="#dc2626" stroke-width="2.5"/>
+  <circle cx="70.0" cy="124.9" r="4.2" fill="#2563eb"/>
+  <circle cx="94.8" cy="137.2" r="4.2" fill="#2563eb"/>
+  <circle cx="119.6" cy="145.5" r="4.2" fill="#2563eb"/>
+  <circle cx="144.4" cy="153.8" r="4.2" fill="#2563eb"/>
+  <circle cx="169.2" cy="134.8" r="4.2" fill="#2563eb"/>
+  <circle cx="194.0" cy="131.5" r="4.2" fill="#2563eb"/>
+  <circle cx="218.8" cy="123.2" r="4.2" fill="#2563eb"/>
+  <circle cx="243.6" cy="120.8" r="4.2" fill="#2563eb"/>
+  <circle cx="268.4" cy="119.9" r="4.2" fill="#2563eb"/>
+  <circle cx="293.2" cy="137.2" r="4.2" fill="#2563eb"/>
+  <circle cx="318.0" cy="125.7" r="4.2" fill="#2563eb"/>
+  <circle cx="342.8" cy="117.4" r="4.2" fill="#2563eb"/>
+  <circle cx="367.6" cy="116.6" r="4.2" fill="#2563eb"/>
+  <circle cx="392.4" cy="110.8" r="4.2" fill="#2563eb"/>
+  <circle cx="417.2" cy="108.4" r="4.2" fill="#2563eb"/>
+  <circle cx="442.0" cy="103.4" r="4.2" fill="#2563eb"/>
+  <circle cx="466.8" cy="102.6" r="4.2" fill="#2563eb"/>
+  <circle cx="491.6" cy="104.2" r="4.2" fill="#2563eb"/>
+  <circle cx="516.4" cy="104.2" r="4.2" fill="#2563eb"/>
+  <circle cx="541.2" cy="105.1" r="4.2" fill="#2563eb"/>
+  <circle cx="566.0" cy="110.8" r="4.2" fill="#2563eb"/>
+  <circle cx="590.8" cy="95.2" r="4.2" fill="#2563eb"/>
+  <circle cx="194.0" cy="131.5" r="6" fill="#dc2626"/>
+  <text x="204.0" y="123.5" font-family="ui-monospace, monospace" font-size="12" fill="#dc2626">(2005, 27.7)</text>
+  <circle cx="516.4" cy="104.2" r="6" fill="#dc2626"/>
+  <text x="506.4" y="94.2" font-family="ui-monospace, monospace" font-size="12" fill="#dc2626" text-anchor="end">(2018, 31)</text>
+</svg>

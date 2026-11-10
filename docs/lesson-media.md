@@ -5,8 +5,8 @@ a report, because the remaining decisions are per instance.
 
 ## A. Orphan caption candidates
 
-139 paragraphs across 41 lessons look like a figure caption whose image
-was dropped while its text was kept: **49 certain**, **33 strong**, **57 likely**.
+133 paragraphs across 38 lessons look like a figure caption whose image
+was dropped while its text was kept: **49 certain**, **33 strong**, **51 likely**.
 
 `certain` opens with an auto-numbered `Figure 3.2` / `Table 1.4` label, which PreTeXt
 generates for a figure or table and which survives ingestion, no judgement needed.
@@ -105,12 +105,6 @@ so the tiers below do not treat it as evidence either way.
 | `teaching/prealg.eq.word.md` | 45 | likely | *Amount in Savings Account* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/prealg.expr.distribute.md` | 69 | likely | *Horizontal and Vertical Rectangles* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/prealg.ineq.one_step.md` | 57 | likely | *When two numbers are multiplied by a negative number, their relationship changes* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/stat.data.line_plot.md` | 13 | likely | *Share of all income held by the top 1% of wage earners* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/stat.data.line_plot.md` | 119 | likely | *Share of all income held by the top 1%, United States, 20002021* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/stat.data.range.md` | 13 | likely | *Share of all income held by the top 1% of wage earners* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/stat.data.range.md` | 119 | likely | *Share of all income held by the top 1%, United States, 20002021* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/stat.data.read_table.md` | 13 | likely | *Share of all income held by the top 1% of wage earners* | teaching corpus: standalone emphasis is the dropped-figure shape |
-| `teaching/stat.data.read_table.md` | 119 | likely | *Share of all income held by the top 1%, United States, 20002021* | teaching corpus: standalone emphasis is the dropped-figure shape |
 | `teaching/trig.period.md` | 12 | certain | *Figure 1 Light can be separated into colors because of its wavelike properties. (credit: "won...* | auto-numbered figure/table label |
 | `teaching/trig.period.md` | 31 | certain | *Figure 2 The sine function* | auto-numbered figure/table label |
 | `teaching/trig.period.md` | 35 | certain | *Figure 3 Plotting values of the sine function* | auto-numbered figure/table label |
@@ -202,7 +196,7 @@ so the tiers below do not treat it as evidence either way.
 
 ## C. Shipped but unreferenced
 
-724 diagrams ship, 404 URLs are referenced by lesson bodies, and
+726 diagrams ship, 406 URLs are referenced by lesson bodies, and
 **300 content diagrams are referenced by nothing** (site chrome
 with dark/light variants is excluded, components reference those).
 
@@ -284,26 +278,92 @@ figure already on disk could be dropped in without authoring anything.
 | `authored/alg.factor.grouping.md` | no | ,  | `factor-composite.svg`, `factor-find.svg`, `factor-gcf.svg`, `factor-lcm.svg`, `factor-prime-fact.svg`, `factor-prime.svg` |
 | `authored/alg.linear.intercepts.md` | no | ,  | `linear-equations-1.svg`, `systems-of-linear-equations-in-two-variables-1.svg` |
 | `authored/alg.linear.two_points.md` | no | ,  | `linear-equations-1.svg`, `systems-of-linear-equations-in-two-variables-1.svg` |
+| `authored/alg.systems.cramer.md` | no | ,  | `systems-of-linear-equations-in-two-variables-1.svg` |
+| `authored/alg.systems.graphing.md` | no | ,  | `systems-of-linear-equations-in-two-variables-1.svg` |
+| `authored/alg.systems.matrix_inverse.md` | no | ,  | `systems-of-linear-equations-in-two-variables-1.svg` |
+| `authored/arith.factor.gcf_lcm_word.md` | no | ,  | `factor-composite.svg`, `factor-find.svg`, `factor-gcf.svg`, `factor-lcm.svg`, `factor-prime-fact.svg`, `factor-prime.svg` |
+| `authored/arith.factor.square_numbers.md` | no | ,  | `factor-composite.svg`, `factor-find.svg`, `factor-gcf.svg`, `factor-lcm.svg`, `factor-prime-fact.svg`, `factor-prime.svg` |
+| `authored/arith.factor.triangular_numbers.md` | no | ,  | `factor-composite.svg`, `factor-find.svg`, `factor-gcf.svg`, `factor-lcm.svg`, `factor-prime-fact.svg`, `factor-prime.svg` |
+| `authored/arith.mult.area_model.md` | no | ,  | `mult-2-5-10.svg`, `mult-concept.svg`, `mult-double.svg`, `mult-tables.svg`, `mult-triple.svg`, `mult-word.svg`, `neg-mult-div.svg` |
+| `authored/arith.mult.lattice.md` | no | ,  | `mult-2-5-10.svg`, `mult-concept.svg`, `mult-double.svg`, `mult-tables.svg`, `mult-triple.svg`, `mult-word.svg`, `neg-mult-div.svg` |
+| `authored/arith.mult.partial_products.md` | no | ,  | `mult-2-5-10.svg`, `mult-concept.svg`, `mult-double.svg`, `mult-tables.svg`, `mult-triple.svg`, `mult-word.svg`, `neg-mult-div.svg` |
+| `authored/arith.place.base_five.md` | no | ,  | `place-hundreds.svg`, `place-tens.svg`, `place-thousands.svg` |
+| `authored/arith.place.binary.md` | no | ,  | `place-hundreds.svg`, `place-tens.svg`, `place-thousands.svg` |
 | `authored/arith.place.expanded.md` | no | ,  | `place-hundreds.svg`, `place-tens.svg`, `place-thousands.svg` |
 | `authored/arith.place.powers_ten.md` | no | ,  | `place-hundreds.svg`, `place-tens.svg`, `place-thousands.svg` |
+| `authored/arith.place.roman.md` | no | ,  | `place-hundreds.svg`, `place-tens.svg`, `place-thousands.svg` |
+| `authored/arith.place.tally.md` | no | ,  | `place-hundreds.svg`, `place-tens.svg`, `place-thousands.svg` |
 | `authored/arith.sqrt.cube.md` | no | ,  | `sqrt-perfect.svg`, `sqrt-simplify.svg` |
 | `authored/arith.sqrt.estimate.md` | no | ,  | `sqrt-perfect.svg`, `sqrt-simplify.svg` |
 | `authored/arith.word.multi_step.md` | no | ,  | `add-word.svg`, `div-word.svg`, `mult-word.svg`, `sub-word.svg` |
+| `authored/calc.integral.absolute_value.md` | no | ,  | `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.integral.accumulation.md` | no | ,  | `integral-test-for-series-convergence-1.svg` |
 | `authored/calc.integral.applied.md` | no | ,  | `integral-test-for-series-convergence-1.svg` |
 | `authored/calc.integral.average_value.md` | no | ,  | `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.integral.centroid_curve.md` | no | ,  | `integral-test-for-series-convergence-1.svg` |
 | `authored/calc.integral.cross_section_volume.md` | no | ,  | `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.integral.elliptic.md` | no | ,  | `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.integral.floor.md` | no | ,  | `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.integral.fresnel.md` | no | ,  | `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.integral.gauss_legendre.md` | no | ,  | `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.integral.leibniz.md` | no | ,  | `integral-test-for-series-convergence-1.svg` |
 | `authored/calc.integral.mass_density.md` | no | ,  | `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.integral.monte_carlo.md` | no | ,  | `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.integral.motion.md` | no | ,  | `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.integral.piecewise.md` | no | ,  | `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.integral.romberg.md` | no | ,  | `integral-test-for-series-convergence-1.svg` |
 | `authored/calc.integral.substitution_value.md` | no | ,  | `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.integral.total_distance.md` | no | ,  | `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.integral.wallis.md` | no | ,  | `integral-test-for-series-convergence-1.svg` |
 | `authored/calc.polar.area.md` | no | ,  | `polar-coordinates-1.svg`, `polar-coordinates-2.svg` |
 | `authored/calc.polar.slope.md` | no | ,  | `polar-coordinates-1.svg`, `polar-coordinates-2.svg` |
+| `authored/calc.series.abel.md` | no | ,  | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.series.abel_theorem.md` | no | ,  | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.series.asymptotic.md` | no | ,  | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.series.bertrand.md` | no | ,  | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.series.borel.md` | no | ,  | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.series.cauchy_condensation.md` | no | ,  | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.series.cesaro.md` | no | ,  | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.series.dirichlet_series.md` | no | ,  | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.series.euler_maclaurin.md` | no | ,  | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.series.euler_transform.md` | no | ,  | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.series.gauss.md` | no | ,  | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.series.kummer.md` | no | ,  | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.series.lagrange_inversion.md` | no | ,  | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.series.lambert.md` | no | ,  | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.series.power_differentiation.md` | no | ,  | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.series.power_integration.md` | no | ,  | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.series.raabe.md` | no | ,  | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
 | `authored/calc.series.ratio.md` | no | ,  | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.series.taubian.md` | no | ,  | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
+| `authored/calc.series.uniform_convergence.md` | no | ,  | `harmonic-series-1.svg`, `integral-test-for-series-convergence-1.svg` |
+| `authored/complex.adv.analytic_continuation.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
+| `authored/complex.adv.branches.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
+| `authored/complex.adv.casorati.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
+| `authored/complex.adv.complex_powers.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
 | `authored/complex.adv.conjugate_roots.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
 | `authored/complex.adv.cross_ratio.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
+| `authored/complex.adv.elliptic.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
+| `authored/complex.adv.gamma.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
 | `authored/complex.adv.geometric_series.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
+| `authored/complex.adv.harmonic_conjugate.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
 | `authored/complex.adv.hyperbolic.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
+| `authored/complex.adv.jensen.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
+| `authored/complex.adv.mittag_leffler.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
 | `authored/complex.adv.mobius_fixed.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
+| `authored/complex.adv.modular_forms.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
+| `authored/complex.adv.monodromy.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
+| `authored/complex.adv.open_mapping.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
+| `authored/complex.adv.picard.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
+| `authored/complex.adv.poisson_kernel.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
 | `authored/complex.adv.residue_simple.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
+| `authored/complex.adv.riemann_surface.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
+| `authored/complex.adv.roots_unity.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
+| `authored/complex.adv.rouche.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
+| `authored/complex.adv.schwarz_christoffel.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
 | `authored/complex.adv.trig_exponential.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
+| `authored/complex.adv.trig_zeros.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
+| `authored/complex.adv.weierstrass_factorization.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
 | `authored/complex.basics.arg_arithmetic.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
 | `authored/complex.basics.equations.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
 | `authored/complex.basics.geometry.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
@@ -315,23 +375,72 @@ figure already on disk could be dropped in without authoring anything.
 | `authored/complex.topology.open_sets.md` | no | ,  | `complex-number-operations-1.svg`, `complex-numbers-1.svg`, `complex-numbers-2.svg`, `complex-numbers-3.svg`, `complex-numbers-exponential-form-1.svg`, `complex-numbers-trigonometric-form-1.svg` |
 | `authored/discrete.sequences.growth_rates.md` | no | ,  | `convergent-and-divergent-sequences-1.svg`, `convergent-and-divergent-sequences-2.svg`, `convergent-and-divergent-sequences-3.svg`, `sequences-of-functions-1.svg` |
 | `authored/discrete.sequences.linear_recurrence.md` | no | ,  | `convergent-and-divergent-sequences-1.svg`, `convergent-and-divergent-sequences-2.svg`, `convergent-and-divergent-sequences-3.svg`, `sequences-of-functions-1.svg` |
+| `authored/frac.mult.area_model.md` | no | ,  | `mult-2-5-10.svg`, `mult-concept.svg`, `mult-double.svg`, `mult-tables.svg`, `mult-triple.svg`, `mult-word.svg`, `neg-mult-div.svg` |
 | `authored/frac.mult.cancel.md` | no | ,  | `mult-2-5-10.svg`, `mult-concept.svg`, `mult-double.svg`, `mult-tables.svg`, `mult-triple.svg`, `mult-word.svg`, `neg-mult-div.svg` |
 | `authored/frac.order.half.md` | no | ,  | `order-basic.svg`, `order-full.svg`, `order-nested.svg` |
+| `authored/frac.order.three.md` | no | ,  | `order-basic.svg`, `order-full.svg`, `order-nested.svg` |
+| `authored/frac.word.remaining_two_step.md` | no | ,  | `add-word.svg`, `div-word.svg`, `mult-word.svg`, `sub-word.svg` |
 | `authored/geo.circle.chord.md` | no | ,  | `unit-circle-1.svg`, `unit-circle-2.svg`, `unit-circle-3.svg`, `unit-circle-4.svg` |
 | `authored/geo.circle.cyclic_quad.md` | no | ,  | `unit-circle-1.svg`, `unit-circle-2.svg`, `unit-circle-3.svg`, `unit-circle-4.svg` |
 | `authored/geo.circle.inscribed_angle.md` | no | ,  | `unit-circle-1.svg`, `unit-circle-2.svg`, `unit-circle-3.svg`, `unit-circle-4.svg` |
+| `authored/geo.circle.power_point.md` | no | ,  | `unit-circle-1.svg`, `unit-circle-2.svg`, `unit-circle-3.svg`, `unit-circle-4.svg` |
+| `authored/geo.circle.radical_axis.md` | no | ,  | `unit-circle-1.svg`, `unit-circle-2.svg`, `unit-circle-3.svg`, `unit-circle-4.svg` |
+| `authored/geo.circle.sagitta.md` | no | ,  | `unit-circle-1.svg`, `unit-circle-2.svg`, `unit-circle-3.svg`, `unit-circle-4.svg` |
 | `authored/geo.circle.tangent_chord.md` | no | ,  | `unit-circle-1.svg`, `unit-circle-2.svg`, `unit-circle-3.svg`, `unit-circle-4.svg` |
 | `authored/geo.circle.tangent_length.md` | no | ,  | `unit-circle-1.svg`, `unit-circle-2.svg`, `unit-circle-3.svg`, `unit-circle-4.svg` |
+| `authored/geo.triangle.altitude.md` | no | ,  | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry-3.svg`, `right-triangle-trigonometry-4.svg`, `right-triangle-trigonometry-5.svg` |
+| `authored/geo.triangle.apollonius.md` | no | ,  | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry-3.svg`, `right-triangle-trigonometry-4.svg`, `right-triangle-trigonometry-5.svg` |
+| `authored/geo.triangle.cevian.md` | no | ,  | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry-3.svg`, `right-triangle-trigonometry-4.svg`, `right-triangle-trigonometry-5.svg` |
+| `authored/geo.triangle.circumcenter.md` | no | ,  | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry-3.svg`, `right-triangle-trigonometry-4.svg`, `right-triangle-trigonometry-5.svg` |
 | `authored/geo.triangle.exterior_angle.md` | no | ,  | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry-3.svg`, `right-triangle-trigonometry-4.svg`, `right-triangle-trigonometry-5.svg` |
+| `authored/geo.triangle.incenter.md` | no | ,  | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry-3.svg`, `right-triangle-trigonometry-4.svg`, `right-triangle-trigonometry-5.svg` |
 | `authored/geo.triangle.inequality.md` | no | ,  | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry-3.svg`, `right-triangle-trigonometry-4.svg`, `right-triangle-trigonometry-5.svg` |
 | `authored/geo.triangle.isosceles.md` | no | ,  | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry-3.svg`, `right-triangle-trigonometry-4.svg`, `right-triangle-trigonometry-5.svg` |
 | `authored/geo.triangle.midsegment.md` | no | ,  | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry-3.svg`, `right-triangle-trigonometry-4.svg`, `right-triangle-trigonometry-5.svg` |
+| `authored/geo.triangle.orthocenter.md` | no | ,  | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry-3.svg`, `right-triangle-trigonometry-4.svg`, `right-triangle-trigonometry-5.svg` |
 | `authored/geo.triangle.special_right.md` | no | ,  | `right-triangle-trigonometry-1.svg`, `right-triangle-trigonometry-2.svg`, `right-triangle-trigonometry-3.svg`, `right-triangle-trigonometry-4.svg`, `right-triangle-trigonometry-5.svg` |
 | `authored/nt.prime.exponent.md` | no | ,  | `factor-prime-fact.svg`, `factor-prime.svg` |
 | `authored/nt.pythagorean.hypotenuse.md` | no | ,  | `pythagorean-theorem-1.svg`, `pythagorean-theorem-2.svg`, `pythagorean-theorem-3.svg` |
+| `authored/numa.linear.gauss_jordan.md` | no | ,  | `linear-equations-1.svg`, `systems-of-linear-equations-in-two-variables-1.svg` |
+| `authored/numa.linear.inverse_power.md` | no | ,  | `linear-equations-1.svg`, `systems-of-linear-equations-in-two-variables-1.svg` |
+| `authored/numa.linear.matrix_condition.md` | no | ,  | `linear-equations-1.svg`, `systems-of-linear-equations-in-two-variables-1.svg` |
+| `authored/numa.linear.thomas.md` | no | ,  | `linear-equations-1.svg`, `systems-of-linear-equations-in-two-variables-1.svg` |
+| `authored/numa.roots.aitken.md` | no | ,  | `roots-of-a-polynomial-1.svg`, `roots-of-a-polynomial-2.svg`, `roots-of-a-polynomial-3.svg` |
+| `authored/numa.roots.brent.md` | no | ,  | `roots-of-a-polynomial-1.svg`, `roots-of-a-polynomial-2.svg`, `roots-of-a-polynomial-3.svg` |
+| `authored/numa.roots.muller.md` | no | ,  | `roots-of-a-polynomial-1.svg`, `roots-of-a-polynomial-2.svg`, `roots-of-a-polynomial-3.svg` |
+| `authored/ode.first_order.clairaut.md` | no | ,  | `order-basic.svg`, `order-full.svg`, `order-nested.svg` |
+| `authored/ode.first_order.homogeneous_substitution.md` | no | ,  | `order-basic.svg`, `order-full.svg`, `order-nested.svg` |
+| `authored/ode.first_order.riccati.md` | no | ,  | `order-basic.svg`, `order-full.svg`, `order-nested.svg` |
+| `authored/ode.integral.fredholm.md` | no | ,  | `integral-test-for-series-convergence-1.svg` |
+| `authored/ode.second_order.bessel.md` | no | ,  | `order-basic.svg`, `order-full.svg`, `order-nested.svg` |
+| `authored/ode.second_order.frobenius.md` | no | ,  | `order-basic.svg`, `order-full.svg`, `order-nested.svg` |
+| `authored/ode.second_order.legendre.md` | no | ,  | `order-basic.svg`, `order-full.svg`, `order-nested.svg` |
 | `authored/prealg.measure.convert.md` | no | ,  | `angles-and-angular-measure-1.svg`, `angles-and-angular-measure-2.svg` |
 | `authored/prealg.measure.metric.md` | no | ,  | `angles-and-angular-measure-1.svg`, `angles-and-angular-measure-2.svg` |
+| `authored/prealg.measure.precision.md` | no | ,  | `angles-and-angular-measure-1.svg`, `angles-and-angular-measure-2.svg` |
 | `authored/prealg.measure.temperature.md` | no | ,  | `angles-and-angular-measure-1.svg`, `angles-and-angular-measure-2.svg` |
+| `authored/prealg.measure.time.md` | no | ,  | `angles-and-angular-measure-1.svg`, `angles-and-angular-measure-2.svg` |
+| `authored/precalc.parametric.cycloid.md` | no | ,  | `vector-and-parametric-equations-of-a-line-1.svg` |
+| `authored/precalc.polar.intersection.md` | no | ,  | `polar-coordinates-1.svg`, `polar-coordinates-2.svg` |
+| `authored/precalc.polar.symmetry.md` | no | ,  | `polar-coordinates-1.svg`, `polar-coordinates-2.svg` |
+| `authored/precalc.systems.nonlinear_inequality.md` | no | ,  | `systems-of-linear-equations-in-two-variables-1.svg` |
+| `authored/precalc.vector.direction_cosines.md` | no | ,  | `vector-and-parametric-equations-of-a-line-1.svg`, `vector-spaces-1.svg` |
+| `authored/precalc.vector.orthogonal_decomposition.md` | no | ,  | `vector-and-parametric-equations-of-a-line-1.svg`, `vector-spaces-1.svg` |
+| `authored/precalc.vector.work.md` | no | ,  | `vector-and-parametric-equations-of-a-line-1.svg`, `vector-spaces-1.svg` |
+| `authored/ra.measure.dominated_convergence.md` | no | ,  | `angles-and-angular-measure-1.svg`, `angles-and-angular-measure-2.svg` |
+| `authored/ra.measure.fatou.md` | no | ,  | `angles-and-angular-measure-1.svg`, `angles-and-angular-measure-2.svg` |
+| `authored/ra.measure.fubini_tonelli.md` | no | ,  | `angles-and-angular-measure-1.svg`, `angles-and-angular-measure-2.svg` |
+| `authored/ra.measure.lebesgue.md` | no | ,  | `angles-and-angular-measure-1.svg`, `angles-and-angular-measure-2.svg` |
+| `authored/ra.measure.lebesgue_integral.md` | no | ,  | `angles-and-angular-measure-1.svg`, `angles-and-angular-measure-2.svg` |
+| `authored/ra.measure.measurable_functions.md` | no | ,  | `angles-and-angular-measure-1.svg`, `angles-and-angular-measure-2.svg` |
+| `authored/ra.measure.measurable_sets.md` | no | ,  | `angles-and-angular-measure-1.svg`, `angles-and-angular-measure-2.svg` |
+| `authored/ra.measure.monotone_convergence.md` | no | ,  | `angles-and-angular-measure-1.svg`, `angles-and-angular-measure-2.svg` |
+| `authored/ra.measure.product.md` | no | ,  | `angles-and-angular-measure-1.svg`, `angles-and-angular-measure-2.svg` |
+| `authored/ra.measure.simple_integral.md` | no | ,  | `angles-and-angular-measure-1.svg`, `angles-and-angular-measure-2.svg` |
+| `authored/stat.test.kruskal_wallis.md` | no | ,  | `integral-test-for-series-convergence-1.svg` |
+| `authored/stat.test.mann_whitney.md` | no | ,  | `integral-test-for-series-convergence-1.svg` |
+| `authored/stat.test.permutation.md` | no | ,  | `integral-test-for-series-convergence-1.svg` |
+| `authored/stat.test.wilcoxon.md` | no | ,  | `integral-test-for-series-convergence-1.svg` |
 | `teaching/alg.eq.linear.word.md` | no | ,  | `linear-equations-1.svg`, `systems-of-linear-equations-in-two-variables-1.svg` |
 | `teaching/alg.factor.diff_squares.md` | no | ,  | `factor-composite.svg`, `factor-find.svg`, `factor-gcf.svg`, `factor-lcm.svg`, `factor-prime-fact.svg`, `factor-prime.svg` |
 | `teaching/alg.factor.gcf.md` | no | ,  | `factor-composite.svg`, `factor-find.svg`, `factor-gcf.svg`, `factor-lcm.svg`, `factor-prime-fact.svg`, `factor-prime.svg` |

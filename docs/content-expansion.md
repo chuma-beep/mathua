@@ -227,8 +227,8 @@ lesson which has outgrown the threshold, the drift this document has now recorde
 
 ### 4.4 Ingestion dropped figures and kept their captions
 
-`docs/lesson-media.md` is the owner of this measurement, and it reports 139 paragraphs across
-42 lessons that read as a caption whose image was dropped: 49 `certain`, 33 `strong` and 57 likely.
+`docs/lesson-media.md` is the owner of this measurement, and it reports 133 paragraphs across
+38 lessons that read as a caption whose image was dropped: 49 `certain`, 33 `strong` and 51 likely.
 The `certain` tier, captions that open with an auto-numbered `Figure 3.2` label, which the ingestion
 pipeline emits for a figure and which survives when the image does not, had been emptied by
 reclaiming every case, and the Precalculus 2e trigonometry re-ingest of 2026-10-17 restored 49 of
