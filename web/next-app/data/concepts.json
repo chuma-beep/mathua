@@ -14691,6 +14691,245 @@
     "variants": []
   },
   {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.triangle.altitude",
+    "label": "Altitudes of a triangle",
+    "mastery_threshold": {
+      "avg_time_seconds": 15,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.triangle.area"
+    ],
+    "subdomain": "geometry.triangles"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.circle.power_point",
+    "label": "Power of a point",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.circle.chord_segments"
+    ],
+    "subdomain": "geometry.circles"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "tuple",
+    "id": "geo.coord.section",
+    "label": "The section formula",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.coord.midpoint"
+    ],
+    "subdomain": "geometry.coordinate"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.triangle.orthocenter",
+    "label": "The orthocenter",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.triangle.altitude"
+    ],
+    "subdomain": "geometry.triangles"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.triangle.circumcenter",
+    "label": "The circumcenter",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.triangle.perpendicular_bisector"
+    ],
+    "subdomain": "geometry.triangles"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.triangle.incenter",
+    "label": "The incenter",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.triangle.angle_bisector"
+    ],
+    "subdomain": "geometry.triangles"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.triangle.cevian",
+    "label": "Ceva's theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.triangle.median_centroid"
+    ],
+    "subdomain": "geometry.triangles"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.triangle.apollonius",
+    "label": "Apollonius's theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.triangle.median_centroid"
+    ],
+    "subdomain": "geometry.triangles"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.circle.sagitta",
+    "label": "Sagitta and chord height",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.circle.chord"
+    ],
+    "subdomain": "geometry.circles"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.circle.radical_axis",
+    "label": "The radical axis",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.circle.power_point"
+    ],
+    "subdomain": "geometry.circles"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.polygon.diagonal_count",
+    "label": "Counting polygon diagonals",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.polygon.interior_angles"
+    ],
+    "subdomain": "geometry.polygons"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.polygon.tessellation",
+    "label": "Tessellations and angle sums",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.polygon.interior_angles"
+    ],
+    "subdomain": "geometry.polygons"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.coord.sphere_equation",
+    "label": "Equations of spheres",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.coord.distance_3d"
+    ],
+    "subdomain": "geometry.coordinate"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.transform.composition",
+    "label": "Composition of transformations",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.transform.translation",
+      "geo.transform.rotation"
+    ],
+    "subdomain": "geometry.transform"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.transform.isometry",
+    "label": "Isometries and their invariants",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.transform.reflection"
+    ],
+    "subdomain": "geometry.transform"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.solid.hemisphere",
+    "label": "Hemispheres",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.solid.sphere"
+    ],
+    "subdomain": "geometry.solid"
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "id": "geo.solid.density",
+    "label": "Density and volume",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "geo.solid.volume_rect"
+    ],
+    "subdomain": "geometry.solid"
+  },
+  {
     "domain": "graph_theory",
     "grading_type": "numeric",
     "id": "graph.isomorphism",
@@ -15585,6 +15824,104 @@
       "graph.complement"
     ],
     "subdomain": "graph_theory.basics"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.feedback_vertex_set",
+    "label": "Minimum feedback vertex sets",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.cut_vertex"
+    ],
+    "subdomain": "graph_theory.connectivity"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.edge_cover",
+    "label": "Edge covers",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.vertex_cover"
+    ],
+    "subdomain": "graph_theory.matching"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.feedback_arc_set",
+    "label": "Minimum feedback arc sets",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.strong_connectivity"
+    ],
+    "subdomain": "graph_theory.connectivity"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.arboricity",
+    "label": "Arboricity",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.degeneracy"
+    ],
+    "subdomain": "graph_theory.planarity"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.thickness",
+    "label": "Graph thickness",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.kuratowski"
+    ],
+    "subdomain": "graph_theory.planarity"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.crossing_number",
+    "label": "Crossing number",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.genus"
+    ],
+    "subdomain": "graph_theory.planarity"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.clique_cover",
+    "label": "Clique covers",
+    "mastery_threshold": {
+      "avg_time_seconds": 22,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.clique"
+    ],
+    "subdomain": "graph_theory.matching"
   },
   {
     "domain": "linear_algebra",
@@ -17724,6 +18061,119 @@
       "ml.knn.nearest_distance"
     ],
     "subdomain": "machine_learning.data"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.optim.adagrad",
+    "label": "AdaGrad optimization",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.optim.sgd"
+    ],
+    "subdomain": "machine_learning.neural_networks"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.optim.rmsprop",
+    "label": "RMSProp optimization",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.optim.adagrad"
+    ],
+    "subdomain": "machine_learning.neural_networks"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.optim.adamw",
+    "label": "AdamW optimization",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.optim.adam"
+    ],
+    "subdomain": "machine_learning.neural_networks"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.ensemble.stacking",
+    "label": "Stacking ensembles",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.tree.ensemble"
+    ],
+    "subdomain": "machine_learning.trees"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.ensemble.voting",
+    "label": "Voting classifiers",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.tree.ensemble"
+    ],
+    "subdomain": "machine_learning.trees"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.unsupervised.spectral",
+    "label": "Spectral clustering",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.cluster.kmeans"
+    ],
+    "subdomain": "machine_learning.unsupervised"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.loss.hinge",
+    "label": "Hinge loss",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.svm.margin"
+    ],
+    "subdomain": "machine_learning.neural_networks"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.loss.huber",
+    "label": "Huber loss",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.loss.mae",
+      "ml.loss.mse"
+    ],
+    "subdomain": "machine_learning.neural_networks"
   },
   {
     "domain": "number_theory",
@@ -20865,6 +21315,259 @@
     ],
     "subdomain": "prealgebra.variables",
     "variants": []
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.ratio.three_term",
+    "label": "Three-term ratios",
+    "mastery_threshold": {
+      "avg_time_seconds": 15,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ratio.basics.concept"
+    ],
+    "subdomain": "prealgebra.ratios"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.ratio.part_whole",
+    "label": "Part-to-whole ratios",
+    "mastery_threshold": {
+      "avg_time_seconds": 15,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ratio.basics.concept"
+    ],
+    "subdomain": "prealgebra.ratios"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "pct.ops.original",
+    "label": "Finding the original amount",
+    "mastery_threshold": {
+      "avg_time_seconds": 18,
+      "streak": 10
+    },
+    "prerequisites": [
+      "pct.ops.change"
+    ],
+    "subdomain": "prealgebra.percentages"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.eq.literal",
+    "label": "Solving a formula for a variable",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.eq.two_step",
+      "prealg.expr.formula"
+    ],
+    "subdomain": "prealgebra.equations"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.ratio.tape",
+    "label": "Tape diagrams for ratios",
+    "mastery_threshold": {
+      "avg_time_seconds": 15,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ratio.basics.concept"
+    ],
+    "subdomain": "prealgebra.ratios"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.ratio.constant",
+    "label": "The constant of proportionality",
+    "mastery_threshold": {
+      "avg_time_seconds": 15,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ratio.ops.proportion"
+    ],
+    "subdomain": "prealgebra.ratios"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "pct.ops.percent_points",
+    "label": "Percentage points",
+    "mastery_threshold": {
+      "avg_time_seconds": 15,
+      "streak": 10
+    },
+    "prerequisites": [
+      "pct.basics.concept"
+    ],
+    "subdomain": "prealgebra.percentages"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "pct.ops.successive",
+    "label": "Successive percentage changes",
+    "mastery_threshold": {
+      "avg_time_seconds": 15,
+      "streak": 10
+    },
+    "prerequisites": [
+      "pct.ops.change"
+    ],
+    "subdomain": "prealgebra.percentages"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "pct.ops.reverse",
+    "label": "Reverse percentages",
+    "mastery_threshold": {
+      "avg_time_seconds": 15,
+      "streak": 10
+    },
+    "prerequisites": [
+      "pct.ops.of_number"
+    ],
+    "subdomain": "prealgebra.percentages"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "dec.ops.div_decimal",
+    "label": "Dividing by a decimal",
+    "mastery_threshold": {
+      "avg_time_seconds": 15,
+      "streak": 10
+    },
+    "prerequisites": [
+      "dec.ops.div"
+    ],
+    "subdomain": "prealgebra.decimals"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "dec.ops.estimate",
+    "label": "Estimating with decimals",
+    "mastery_threshold": {
+      "avg_time_seconds": 15,
+      "streak": 10
+    },
+    "prerequisites": [
+      "dec.basics.compare"
+    ],
+    "subdomain": "prealgebra.decimals"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "dec.basics.expanded",
+    "label": "Expanded form of decimals",
+    "mastery_threshold": {
+      "avg_time_seconds": 15,
+      "streak": 10
+    },
+    "prerequisites": [
+      "dec.basics.place_value"
+    ],
+    "subdomain": "prealgebra.decimals"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.expr.two_variables",
+    "label": "Evaluating expressions with two variables",
+    "mastery_threshold": {
+      "avg_time_seconds": 15,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.expr.evaluate"
+    ],
+    "subdomain": "prealgebra.variables"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.expr.coefficient",
+    "label": "Coefficients and constant terms",
+    "mastery_threshold": {
+      "avg_time_seconds": 15,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.expr.like_terms"
+    ],
+    "subdomain": "prealgebra.variables"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.expr.distribute_simplify",
+    "label": "Distributing and simplifying",
+    "mastery_threshold": {
+      "avg_time_seconds": 15,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.expr.distribute"
+    ],
+    "subdomain": "prealgebra.variables"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.eq.check",
+    "label": "Checking a solution",
+    "mastery_threshold": {
+      "avg_time_seconds": 15,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.eq.one_step_add"
+    ],
+    "subdomain": "prealgebra.equations"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.measure.time",
+    "label": "Converting units of time",
+    "mastery_threshold": {
+      "avg_time_seconds": 15,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.measure.convert"
+    ],
+    "subdomain": "prealgebra.measurement"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.measure.precision",
+    "label": "Precision and significant digits",
+    "mastery_threshold": {
+      "avg_time_seconds": 15,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.measure.metric"
+    ],
+    "subdomain": "prealgebra.measurement"
   },
   {
     "domain": "precalculus",
