@@ -1,13 +1,13 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import TimedQuizHost from '../app/timed-quiz/TimedQuizHost'
-import { getSettings, getTimedQuiz, startTimedQuizSession, submitTimedQuizAnswer } from '../lib/api'
+import { getTimedQuiz, startTimedQuizSession, submitTimedQuizAnswer } from '../lib/api'
+import { findAnswerField, typeAnswer } from './helpers/answerInput'
 
 vi.mock('../lib/api', async (importOriginal) => {
   const mod = await importOriginal<typeof import('../lib/api')>()
   return {
     ...mod,
-    getSettings: vi.fn(),
     getTimedQuiz: vi.fn(),
     startTimedQuizSession: vi.fn(),
     submitTimedQuizAnswer: vi.fn(),
@@ -92,7 +92,6 @@ const result = {
 
 describe('TimedQuizHost', () => {
   beforeEach(() => {
-    vi.mocked(getSettings).mockResolvedValue({})
     vi.mocked(getTimedQuiz).mockResolvedValue(summary)
     vi.mocked(startTimedQuizSession).mockResolvedValue(session)
     vi.mocked(submitTimedQuizAnswer).mockResolvedValue({
@@ -112,8 +111,7 @@ describe('TimedQuizHost', () => {
     const start = await screen.findByRole('button', { name: 'Start timed quiz' })
     fireEvent.click(start)
 
-    const input = await screen.findByLabelText('Your answer')
-    fireEvent.change(input, { target: { value: '4' } })
+    typeAnswer(await findAnswerField(), '4')
     fireEvent.click(screen.getByRole('button', { name: 'Check answer' }))
 
     await waitFor(() => expect(screen.getByText('100% correct')).toBeDefined())
@@ -128,19 +126,11 @@ describe('TimedQuizHost', () => {
     expect(screen.getByText('Two plus two is four.')).toBeDefined()
   })
 
-  it('opens the full device keyboard by default, not the numeric pad', async () => {
+  it('uses the math editor, whose keypad carries the symbol keys', async () => {
     render(<TimedQuizHost />)
     fireEvent.click(await screen.findByRole('button', { name: 'Start timed quiz' }))
-    const input = await screen.findByLabelText('Your answer')
-    expect(input).toHaveAttribute('inputmode', 'text')
-  })
-
-  it('uses the numeric pad only when the learner opts in', async () => {
-    vi.mocked(getSettings).mockResolvedValue({ timed_quiz_number_pad: true })
-    render(<TimedQuizHost />)
-    fireEvent.click(await screen.findByRole('button', { name: 'Start timed quiz' }))
-    const input = await screen.findByLabelText('Your answer')
-    await waitFor(() => expect(input).toHaveAttribute('inputmode', 'decimal'))
+    const field = await findAnswerField('math')
+    expect(field.tagName.toLowerCase()).toBe('math-field')
   })
 
   it('does not offer a start button when the gate is not due', async () => {

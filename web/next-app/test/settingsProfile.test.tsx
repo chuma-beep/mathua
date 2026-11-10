@@ -256,32 +256,6 @@ describe('Settings Profile section', () => {
     expect(await screen.findByText(/check your inbox/)).toBeInTheDocument()
   })
 
-  // The timed quiz used to ask for a decimal keypad, which on a phone has no
-  // operation keys. The setting has to default to the full keyboard and save the
-  // opt-in without dropping any other preference.
-  it('uses the full keyboard in timed quizzes by default and can opt into the number pad', async () => {
-    getSettingsMock.mockResolvedValue({ show_timer: true })
-    render(<SettingsPage />)
-    const toggle = await screen.findByRole('switch', { name: 'Toggle number pad in timed quizzes' })
-    expect(toggle).not.toBeChecked()
-    fireEvent.click(toggle)
-    await waitFor(() =>
-      expect(updateSettingsMock).toHaveBeenCalledWith({ show_timer: true, timed_quiz_number_pad: true }),
-    )
-    expect(screen.getByRole('switch', { name: 'Toggle number pad in timed quizzes' })).toBeChecked()
-  })
-
-  it('reverts the number-pad choice when the save fails', async () => {
-    updateSettingsMock.mockRejectedValue(new Error('offline'))
-    render(<SettingsPage />)
-    const toggle = await screen.findByRole('switch', { name: 'Toggle number pad in timed quizzes' })
-    fireEvent.click(toggle)
-    expect(await screen.findByText(/check your connection/)).toBeInTheDocument()
-    await waitFor(() =>
-      expect(screen.getByRole('switch', { name: 'Toggle number pad in timed quizzes' })).not.toBeChecked(),
-    )
-  })
-
   // Leaderboard privacy is a three-way choice, not a switch: the middle option
   // exists so a learner can compete without being named. The default must be the
   // behaviour that predates the setting, and the value has to reach the same

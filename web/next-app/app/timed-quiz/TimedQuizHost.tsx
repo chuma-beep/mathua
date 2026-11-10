@@ -6,10 +6,11 @@ import KatexContent from '../../components/KatexContent'
 import SectionHeader from '../../components/SectionHeader'
 import XPAdjustmentNote from '../../components/XPAdjustmentNote'
 import XPTaskSummary from '../../components/XPTaskSummary'
+import { MathAnswerInput } from '../../components/math/MathInput'
+import { formatForQuestion } from '../../lib/answerFormat'
 import { stemWithoutChoices } from '../../lib/choices'
 import {
   finalizeTimedQuiz,
-  getSettings,
   getTimedQuiz,
   getTimedQuizResult,
   skipTimedQuizItem,
@@ -48,10 +49,6 @@ export default function TimedQuizHost() {
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
   const [remaining, setRemaining] = useState(0)
-  // Default false, which means the full device keyboard. A learner has to opt in
-  // to the numeric pad, because that pad cannot type the operations some answers
-  // need. See the Settings control for the same decision.
-  const [numberPad, setNumberPad] = useState(false)
   const offsetRef = useRef(0)
   const submissionIds = useRef<Record<string, string>>({})
   const questionShownAt = useRef(0)
@@ -71,19 +68,6 @@ export default function TimedQuizHost() {
   useEffect(() => {
     void loadSummary()
   }, [loadSummary])
-
-  // A settings read failure must not block the quiz. Falling back to false keeps
-  // the full keyboard, which is the safer of the two on a phone: every answer
-  // can still be typed, while a numeric pad can be missing an operation key.
-  useEffect(() => {
-    let live = true
-    getSettings()
-      .then((settings) => {
-        if (live) setNumberPad(settings.timed_quiz_number_pad === true)
-      })
-      .catch(() => {})
-    return () => { live = false }
-  }, [])
 
   const finish = useCallback((data: TimedQuizResultRes) => {
     setResult(data)
@@ -305,6 +289,7 @@ export default function TimedQuizHost() {
     const item = session.items[index]
     if (!item) return null
     const isLast = index >= session.items.length - 1
+    const answerFormat = formatForQuestion(item)
     return (
       <div className="max-w-2xl mx-auto min-w-0">
         <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
@@ -320,15 +305,17 @@ export default function TimedQuizHost() {
           {!feedback ? (
             <form onSubmit={(event) => { event.preventDefault(); void submit(false) }} className="flex flex-col sm:flex-row gap-3">
               <label htmlFor="timed-quiz-answer" className="sr-only">Your answer</label>
-              <input
+              <MathAnswerInput
                 id="timed-quiz-answer"
                 value={answer}
-                onChange={(event) => setAnswer(event.target.value)}
-                inputMode={numberPad && item.answer_input_mode === 'numeric' ? 'decimal' : 'text'}
-                autoComplete="off"
-                placeholder={item.answer_hint || 'Your answer...'}
-                className="flex-1 border border-mathua-border rounded-none bg-mathua-bg px-3 py-2 font-mono text-sm text-mathua-primary focus:border-mathua-blue focus:outline-none"
+                onChange={setAnswer}
+                onSubmit={() => void submit(false)}
+                gradingType={item.grading_type}
+                conceptId={item.concept_id}
                 disabled={busy}
+                placeholder="Your answer..."
+                inputMode={answerFormat.inputMode}
+                className="flex-1 min-w-0"
               />
               <button type="submit" disabled={!answer.trim() || busy} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-11 px-6 text-sm disabled:opacity-50">
                 Check answer
@@ -355,7 +342,7 @@ export default function TimedQuizHost() {
           )}
           {!feedback && (
             <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
-              <p className="font-mono text-[11px] text-mathua-muted">{item.answer_hint || 'Answer in the field above.'}</p>
+              <p className="font-mono text-[11px] text-mathua-muted">{answerFormat.hint}</p>
               <div className="flex gap-3">
                 <button type="button" onClick={() => void submit(true)} disabled={busy} className="font-mono text-[11px] text-mathua-muted hover:text-mathua-red underline underline-offset-2">
                   I don&apos;t know
