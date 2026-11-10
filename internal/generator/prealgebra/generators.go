@@ -79,6 +79,7 @@ func Register(reg *generator.Registry) {
 	reg.Register("prealg.types", &typesGen{})
 
 	registerBatch(reg)
+	registerWave10(reg)
 }
 
 // Decimals

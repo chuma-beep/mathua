@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Intersecting chords",
+    "section": "Intersecting chords",
+    "subgoals": [
+      "State that the products of the chord segments are equal.",
+      "Set up the equation from the two chords.",
+      "Solve for the missing segment."
+    ]
+  },
+  {
+    "label": "Tangent and secant",
+    "section": "Tangent and secant",
+    "subgoals": [
+      "State t^2 = eL for a tangent and a secant.",
+      "Multiply the external part by the total secant length.",
+      "Take the positive square root for the tangent length."
+    ]
+  },
+  {
+    "label": "Two secants",
+    "section": "Two secants",
+    "subgoals": [
+      "Equate the powers of the two secants.",
+      "Solve for the missing total length.",
+      "Subtract the external part to find the internal part."
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Finding the constant",
+    "section": "Finding the constant",
+    "subgoals": [
+      "Identify the given information for finding the constant.",
+      "Apply the relationship in finding the constant.",
+      "Check the result against the original constant of proportionality problem."
+    ]
+  },
+  {
+    "label": "Using the constant",
+    "section": "Using the constant",
+    "subgoals": [
+      "Identify the given information for using the constant.",
+      "Apply the relationship in using the constant.",
+      "Check the result against the original constant of proportionality problem."
+    ]
+  },
+  {
+    "label": "Checking proportionality",
+    "section": "Checking proportionality",
+    "subgoals": [
+      "Identify the given information for checking proportionality.",
+      "Apply the relationship in checking proportionality.",
+      "Check the result against the original constant of proportionality problem."
+    ]
+  }
+]

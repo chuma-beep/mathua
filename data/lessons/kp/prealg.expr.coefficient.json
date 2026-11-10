@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Coefficients",
+    "section": "Coefficients",
+    "subgoals": [
+      "Identify the given information for coefficients.",
+      "Apply the relationship in coefficients.",
+      "Check the result against the original coefficient and constant problem."
+    ]
+  },
+  {
+    "label": "Constant terms",
+    "section": "Constant terms",
+    "subgoals": [
+      "Identify the given information for constant terms.",
+      "Apply the relationship in constant terms.",
+      "Check the result against the original coefficient and constant problem."
+    ]
+  },
+  {
+    "label": "Counting terms",
+    "section": "Counting terms",
+    "subgoals": [
+      "Identify the given information for counting terms.",
+      "Apply the relationship in counting terms.",
+      "Check the result against the original coefficient and constant problem."
+    ]
+  }
+]

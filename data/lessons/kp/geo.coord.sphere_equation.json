@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Centre and radius",
+    "section": "Centre and radius",
+    "subgoals": [
+      "Identify the given information for centre and radius.",
+      "Apply the relationship in centre and radius.",
+      "Check the result against the original sphere equation problem."
+    ]
+  },
+  {
+    "label": "Building the equation",
+    "section": "Building the equation",
+    "subgoals": [
+      "Identify the given information for building the equation.",
+      "Apply the relationship in building the equation.",
+      "Check the result against the original sphere equation problem."
+    ]
+  },
+  {
+    "label": "Testing a point",
+    "section": "Testing a point",
+    "subgoals": [
+      "Identify the given information for testing a point.",
+      "Apply the relationship in testing a point.",
+      "Check the result against the original sphere equation problem."
+    ]
+  }
+]

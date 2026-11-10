@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Density from mass and volume",
+    "section": "Density from mass and volume",
+    "subgoals": [
+      "Identify the given information for density from mass and volume.",
+      "Apply the relationship in density from mass and volume.",
+      "Check the result against the original density problem."
+    ]
+  },
+  {
+    "label": "Mass from density",
+    "section": "Mass from density",
+    "subgoals": [
+      "Identify the given information for mass from density.",
+      "Apply the relationship in mass from density.",
+      "Check the result against the original density problem."
+    ]
+  },
+  {
+    "label": "Volume from density",
+    "section": "Volume from density",
+    "subgoals": [
+      "Identify the given information for volume from density.",
+      "Apply the relationship in volume from density.",
+      "Check the result against the original density problem."
+    ]
+  }
+]

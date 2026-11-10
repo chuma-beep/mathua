@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Distance preservation",
+    "section": "Distance preservation",
+    "subgoals": [
+      "Identify the given information for distance preservation.",
+      "Apply the relationship in distance preservation.",
+      "Check the result against the original isometry problem."
+    ]
+  },
+  {
+    "label": "Orientation",
+    "section": "Orientation",
+    "subgoals": [
+      "Identify the given information for orientation.",
+      "Apply the relationship in orientation.",
+      "Check the result against the original isometry problem."
+    ]
+  },
+  {
+    "label": "Classifying an isometry",
+    "section": "Classifying an isometry",
+    "subgoals": [
+      "Identify the given information for classifying an isometry.",
+      "Apply the relationship in classifying an isometry.",
+      "Check the result against the original isometry problem."
+    ]
+  }
+]

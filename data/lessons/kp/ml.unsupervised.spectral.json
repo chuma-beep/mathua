@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Fiedler vector",
+    "section": "The Fiedler vector",
+    "subgoals": [
+      "Identify the given information for the fiedler vector.",
+      "Apply the relationship in the fiedler vector.",
+      "Check the result against the original spectral clustering problem."
+    ]
+  },
+  {
+    "label": "Signs and clusters",
+    "section": "Signs and clusters",
+    "subgoals": [
+      "Identify the given information for signs and clusters.",
+      "Apply the relationship in signs and clusters.",
+      "Check the result against the original spectral clustering problem."
+    ]
+  },
+  {
+    "label": "Normalized cuts",
+    "section": "Normalized cuts",
+    "subgoals": [
+      "Identify the given information for normalized cuts.",
+      "Apply the relationship in normalized cuts.",
+      "Check the result against the original spectral clustering problem."
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Covering every vertex",
+    "section": "Covering every vertex",
+    "subgoals": [
+      "Identify every vertex that must be covered.",
+      "Choose edges that touch all vertices.",
+      "Minimize the number of chosen edges."
+    ]
+  },
+  {
+    "label": "Testing a proposed cover",
+    "section": "Testing a proposed cover",
+    "subgoals": [
+      "Mark the endpoints of every proposed edge.",
+      "Count the vertices that remain unmarked.",
+      "Decide whether the proposed set is an edge cover."
+    ]
+  },
+  {
+    "label": "Edge covers and matchings",
+    "section": "Edge covers and matchings",
+    "subgoals": [
+      "Find a maximum matching.",
+      "Subtract its size from the number of vertices.",
+      "Check that no vertex is isolated."
+    ]
+  }
+]

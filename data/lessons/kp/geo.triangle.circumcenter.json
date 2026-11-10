@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Perpendicular bisectors",
+    "section": "Perpendicular bisectors",
+    "subgoals": [
+      "Identify the given information for perpendicular bisectors.",
+      "Apply the relationship in perpendicular bisectors.",
+      "Check the result against the original circumcenter problem."
+    ]
+  },
+  {
+    "label": "The right-triangle shortcut",
+    "section": "The right-triangle shortcut",
+    "subgoals": [
+      "Identify the given information for the right-triangle shortcut.",
+      "Apply the relationship in the right-triangle shortcut.",
+      "Check the result against the original circumcenter problem."
+    ]
+  },
+  {
+    "label": "Circumradius",
+    "section": "Circumradius",
+    "subgoals": [
+      "Identify the given information for circumradius.",
+      "Apply the relationship in circumradius.",
+      "Check the result against the original circumcenter problem."
+    ]
+  }
+]

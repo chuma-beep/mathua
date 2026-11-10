@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Distributing",
+    "section": "Distributing",
+    "subgoals": [
+      "Identify the given information for distributing.",
+      "Apply the relationship in distributing.",
+      "Check the result against the original distribute and simplify problem."
+    ]
+  },
+  {
+    "label": "Combining terms",
+    "section": "Combining terms",
+    "subgoals": [
+      "Identify the given information for combining terms.",
+      "Apply the relationship in combining terms.",
+      "Check the result against the original distribute and simplify problem."
+    ]
+  },
+  {
+    "label": "Evaluating the result",
+    "section": "Evaluating the result",
+    "subgoals": [
+      "Identify the given information for evaluating the result.",
+      "Apply the relationship in evaluating the result.",
+      "Check the result against the original distribute and simplify problem."
+    ]
+  }
+]

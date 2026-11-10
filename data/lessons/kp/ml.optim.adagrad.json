@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Accumulating squared gradients",
+    "section": "Accumulating squared gradients",
+    "subgoals": [
+      "Square each gradient before adding it.",
+      "Keep a running sum of the squares.",
+      "Use the square root of the sum in the denominator."
+    ]
+  },
+  {
+    "label": "The first update",
+    "section": "The first update",
+    "subgoals": [
+      "Compute G_1 from the first gradient.",
+      "Divide the gradient by sqrt(G_1).",
+      "Multiply by the learning rate and subtract from the parameter."
+    ]
+  },
+  {
+    "label": "Later updates and diminishing steps",
+    "section": "Later updates and diminishing steps",
+    "subgoals": [
+      "Update the accumulator with the new squared gradient.",
+      "Use the new square root in the denominator.",
+      "Compare the second step with the first."
+    ]
+  }
+]

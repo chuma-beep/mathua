@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Votes",
+    "section": "Votes",
+    "subgoals": [
+      "Identify the given information for votes.",
+      "Apply the relationship in votes.",
+      "Check the result against the original voting classifier problem."
+    ]
+  },
+  {
+    "label": "Majority",
+    "section": "Majority",
+    "subgoals": [
+      "Identify the given information for majority.",
+      "Apply the relationship in majority.",
+      "Check the result against the original voting classifier problem."
+    ]
+  },
+  {
+    "label": "Ties",
+    "section": "Ties",
+    "subgoals": [
+      "Identify the given information for ties.",
+      "Apply the relationship in ties.",
+      "Check the result against the original voting classifier problem."
+    ]
+  }
+]

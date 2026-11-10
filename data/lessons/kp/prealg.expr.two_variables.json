@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Substituting two values",
+    "section": "Substituting two values",
+    "subgoals": [
+      "Identify the given information for substituting two values.",
+      "Apply the relationship in substituting two values.",
+      "Check the result against the original two-variable expression problem."
+    ]
+  },
+  {
+    "label": "Simplifying the result",
+    "section": "Simplifying the result",
+    "subgoals": [
+      "Identify the given information for simplifying the result.",
+      "Apply the relationship in simplifying the result.",
+      "Check the result against the original two-variable expression problem."
+    ]
+  },
+  {
+    "label": "Recovering a variable",
+    "section": "Recovering a variable",
+    "subgoals": [
+      "Identify the given information for recovering a variable.",
+      "Apply the relationship in recovering a variable.",
+      "Check the result against the original two-variable expression problem."
+    ]
+  }
+]

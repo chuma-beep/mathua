@@ -1,0 +1,19 @@
+{
+  "concept": "prealg.measure.precision",
+  "setup": "This is a measurement precision problem with given values [[a]] and [[b]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The first given value is [[a]]."
+    },
+    {
+      "fact": "b",
+      "say": "The second given value is [[b]]."
+    },
+    {
+      "fact": "c",
+      "say": "The third given value is [[c]]."
+    }
+  ],
+  "answer": "The requested result is [[answer]]."
+}

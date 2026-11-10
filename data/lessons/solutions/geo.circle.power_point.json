@@ -1,0 +1,15 @@
+{
+  "concept": "geo.circle.power_point",
+  "setup": "This is a [[kind]] power-of-a-point configuration.",
+  "steps": [
+    {
+      "fact": "product",
+      "say": "The equal product, or power, is [[product]]."
+    },
+    {
+      "fact": "kind",
+      "say": "Use the chord, tangent or secant relation that matches a [[kind]] configuration."
+    }
+  ],
+  "answer": "The missing length is [[answer]]."
+}

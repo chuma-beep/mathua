@@ -1,0 +1,19 @@
+{
+  "concept": "geo.coord.section",
+  "setup": "The segment runs from A = ([[ax]], [[ay]]) to B = ([[bx]], [[by]]) and the ratio is [[m]]:[[n]].",
+  "steps": [
+    {
+      "fact": "m",
+      "say": "The first part of the ratio is [[m]]."
+    },
+    {
+      "fact": "n",
+      "say": "The second part of the ratio is [[n]]."
+    },
+    {
+      "fact": "px",
+      "say": "The section point has coordinates ([[px]], [[py]])."
+    }
+  ],
+  "answer": "The requested point is [[answer]]."
+}

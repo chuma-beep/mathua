@@ -1,0 +1,19 @@
+{
+  "concept": "prealg.eq.literal",
+  "setup": "The formula is [[formula]] and the target variable is [[target]].",
+  "steps": [
+    {
+      "fact": "value1",
+      "say": "One known value is [[value1]]."
+    },
+    {
+      "fact": "value2",
+      "say": "Another known value is [[value2]]."
+    },
+    {
+      "fact": "value3",
+      "say": "The remaining known value is [[value3]]."
+    }
+  ],
+  "answer": "The value of [[target]] is [[answer]]."
+}

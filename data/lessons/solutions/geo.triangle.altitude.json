@@ -1,0 +1,19 @@
+{
+  "concept": "geo.triangle.altitude",
+  "setup": "The triangle has base [[base]] and altitude [[height]].",
+  "steps": [
+    {
+      "fact": "area",
+      "say": "Using A = bh/2, the area is [[area]]."
+    },
+    {
+      "fact": "offset",
+      "say": "The foot offset from the base is [[offset]]."
+    },
+    {
+      "fact": "distance",
+      "say": "The distance from the foot to the far endpoint is [[distance]]."
+    }
+  ],
+  "answer": "The requested length is [[answer]]."
+}

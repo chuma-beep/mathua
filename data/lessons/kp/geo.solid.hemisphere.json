@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Volume",
+    "section": "Volume",
+    "subgoals": [
+      "Identify the given information for volume.",
+      "Apply the relationship in volume.",
+      "Check the result against the original hemisphere problem."
+    ]
+  },
+  {
+    "label": "Curved surface",
+    "section": "Curved surface",
+    "subgoals": [
+      "Identify the given information for curved surface.",
+      "Apply the relationship in curved surface.",
+      "Check the result against the original hemisphere problem."
+    ]
+  },
+  {
+    "label": "Total surface",
+    "section": "Total surface",
+    "subgoals": [
+      "Identify the given information for total surface.",
+      "Apply the relationship in total surface.",
+      "Check the result against the original hemisphere problem."
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Drawings and crossings",
+    "section": "Drawings and crossings",
+    "subgoals": [
+      "Identify the given information for drawings and crossings.",
+      "Apply the relationship in drawings and crossings.",
+      "Check the result against the original crossing number problem."
+    ]
+  },
+  {
+    "label": "Small complete graphs",
+    "section": "Small complete graphs",
+    "subgoals": [
+      "Identify the given information for small complete graphs.",
+      "Apply the relationship in small complete graphs.",
+      "Check the result against the original crossing number problem."
+    ]
+  },
+  {
+    "label": "Claimed drawings",
+    "section": "Claimed drawings",
+    "subgoals": [
+      "Identify the given information for claimed drawings.",
+      "Apply the relationship in claimed drawings.",
+      "Check the result against the original crossing number problem."
+    ]
+  }
+]

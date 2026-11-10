@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Below the threshold",
+    "section": "Below the threshold",
+    "subgoals": [
+      "Identify the given information for below the threshold.",
+      "Apply the relationship in below the threshold.",
+      "Check the result against the original Huber loss problem."
+    ]
+  },
+  {
+    "label": "Above the threshold",
+    "section": "Above the threshold",
+    "subgoals": [
+      "Identify the given information for above the threshold.",
+      "Apply the relationship in above the threshold.",
+      "Check the result against the original Huber loss problem."
+    ]
+  },
+  {
+    "label": "Comparing losses",
+    "section": "Comparing losses",
+    "subgoals": [
+      "Identify the given information for comparing losses.",
+      "Apply the relationship in comparing losses.",
+      "Check the result against the original Huber loss problem."
+    ]
+  }
+]

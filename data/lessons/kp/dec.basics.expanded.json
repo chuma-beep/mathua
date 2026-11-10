@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Place values",
+    "section": "Place values",
+    "subgoals": [
+      "Identify the given information for place values.",
+      "Apply the relationship in place values.",
+      "Check the result against the original expanded decimal problem."
+    ]
+  },
+  {
+    "label": "Expanded sums",
+    "section": "Expanded sums",
+    "subgoals": [
+      "Identify the given information for expanded sums.",
+      "Apply the relationship in expanded sums.",
+      "Check the result against the original expanded decimal problem."
+    ]
+  },
+  {
+    "label": "Returning to standard form",
+    "section": "Returning to standard form",
+    "subgoals": [
+      "Identify the given information for returning to standard form.",
+      "Apply the relationship in returning to standard form.",
+      "Check the result against the original expanded decimal problem."
+    ]
+  }
+]

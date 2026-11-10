@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Breaking every cycle",
+    "section": "Breaking every cycle",
+    "subgoals": [
+      "Identify every cycle in the graph.",
+      "Choose at least one vertex from each cycle.",
+      "Verify that the remaining graph is a forest."
+    ]
+  },
+  {
+    "label": "Testing a proposed set",
+    "section": "Testing a proposed set",
+    "subgoals": [
+      "Remove the proposed vertices from the graph.",
+      "Inspect each cycle for a removed vertex.",
+      "Count the cycles that remain intact."
+    ]
+  },
+  {
+    "label": "Counting the remaining forest",
+    "section": "Counting the remaining forest",
+    "subgoals": [
+      "Use the fact that a cycle of length L leaves L - 2 edges.",
+      "Sum L - 2 over all cycles.",
+      "Check that the result is at most n - 1."
+    ]
+  }
+]

@@ -20424,5 +20424,308 @@
     "key_prerequisites": [
       "ml.data.imbalance"
     ]
+  },
+  {
+    "id": "prealg.ratio.tape",
+    "key_prerequisites": [
+      "ratio.basics.concept"
+    ]
+  },
+  {
+    "id": "prealg.ratio.constant",
+    "key_prerequisites": [
+      "ratio.ops.proportion"
+    ]
+  },
+  {
+    "id": "pct.ops.percent_points",
+    "key_prerequisites": [
+      "pct.basics.concept"
+    ]
+  },
+  {
+    "id": "pct.ops.successive",
+    "key_prerequisites": [
+      "pct.ops.change"
+    ]
+  },
+  {
+    "id": "pct.ops.reverse",
+    "key_prerequisites": [
+      "pct.ops.of_number"
+    ]
+  },
+  {
+    "id": "dec.ops.div_decimal",
+    "key_prerequisites": [
+      "dec.ops.div"
+    ]
+  },
+  {
+    "id": "dec.ops.estimate",
+    "key_prerequisites": [
+      "dec.basics.compare"
+    ]
+  },
+  {
+    "id": "dec.basics.expanded",
+    "key_prerequisites": [
+      "dec.basics.place_value"
+    ]
+  },
+  {
+    "id": "prealg.expr.two_variables",
+    "key_prerequisites": [
+      "prealg.expr.evaluate"
+    ]
+  },
+  {
+    "id": "prealg.expr.coefficient",
+    "key_prerequisites": [
+      "prealg.expr.like_terms"
+    ]
+  },
+  {
+    "id": "prealg.expr.distribute_simplify",
+    "key_prerequisites": [
+      "prealg.expr.distribute"
+    ]
+  },
+  {
+    "id": "prealg.eq.check",
+    "key_prerequisites": [
+      "prealg.eq.one_step_add"
+    ]
+  },
+  {
+    "id": "prealg.measure.time",
+    "key_prerequisites": [
+      "prealg.measure.convert"
+    ]
+  },
+  {
+    "id": "prealg.measure.precision",
+    "key_prerequisites": [
+      "prealg.measure.metric"
+    ]
+  },
+  {
+    "id": "geo.triangle.orthocenter",
+    "key_prerequisites": [
+      "geo.triangle.altitude"
+    ]
+  },
+  {
+    "id": "geo.triangle.circumcenter",
+    "key_prerequisites": [
+      "geo.triangle.perpendicular_bisector"
+    ]
+  },
+  {
+    "id": "geo.triangle.incenter",
+    "key_prerequisites": [
+      "geo.triangle.angle_bisector"
+    ]
+  },
+  {
+    "id": "geo.triangle.cevian",
+    "key_prerequisites": [
+      "geo.triangle.median_centroid"
+    ]
+  },
+  {
+    "id": "geo.triangle.apollonius",
+    "key_prerequisites": [
+      "geo.triangle.median_centroid"
+    ]
+  },
+  {
+    "id": "geo.circle.sagitta",
+    "key_prerequisites": [
+      "geo.circle.chord"
+    ]
+  },
+  {
+    "id": "geo.circle.radical_axis",
+    "key_prerequisites": [
+      "geo.circle.power_point"
+    ]
+  },
+  {
+    "id": "geo.polygon.diagonal_count",
+    "key_prerequisites": [
+      "geo.polygon.interior_angles"
+    ]
+  },
+  {
+    "id": "geo.polygon.tessellation",
+    "key_prerequisites": [
+      "geo.polygon.interior_angles"
+    ]
+  },
+  {
+    "id": "geo.coord.sphere_equation",
+    "key_prerequisites": [
+      "geo.coord.distance_3d"
+    ]
+  },
+  {
+    "id": "geo.transform.composition",
+    "key_prerequisites": [
+      "geo.transform.translation",
+      "geo.transform.rotation"
+    ]
+  },
+  {
+    "id": "geo.transform.isometry",
+    "key_prerequisites": [
+      "geo.transform.reflection"
+    ]
+  },
+  {
+    "id": "geo.solid.hemisphere",
+    "key_prerequisites": [
+      "geo.solid.sphere"
+    ]
+  },
+  {
+    "id": "geo.solid.density",
+    "key_prerequisites": [
+      "geo.solid.volume_rect"
+    ]
+  },
+  {
+    "id": "graph.feedback_arc_set",
+    "key_prerequisites": [
+      "graph.strong_connectivity"
+    ]
+  },
+  {
+    "id": "graph.arboricity",
+    "key_prerequisites": [
+      "graph.degeneracy"
+    ]
+  },
+  {
+    "id": "graph.thickness",
+    "key_prerequisites": [
+      "graph.kuratowski"
+    ]
+  },
+  {
+    "id": "graph.crossing_number",
+    "key_prerequisites": [
+      "graph.genus"
+    ]
+  },
+  {
+    "id": "graph.clique_cover",
+    "key_prerequisites": [
+      "graph.clique"
+    ]
+  },
+  {
+    "id": "ml.optim.rmsprop",
+    "key_prerequisites": [
+      "ml.optim.adagrad"
+    ]
+  },
+  {
+    "id": "ml.optim.adamw",
+    "key_prerequisites": [
+      "ml.optim.adam"
+    ]
+  },
+  {
+    "id": "ml.ensemble.stacking",
+    "key_prerequisites": [
+      "ml.tree.ensemble"
+    ]
+  },
+  {
+    "id": "ml.ensemble.voting",
+    "key_prerequisites": [
+      "ml.tree.ensemble"
+    ]
+  },
+  {
+    "id": "ml.unsupervised.spectral",
+    "key_prerequisites": [
+      "ml.cluster.kmeans"
+    ]
+  },
+  {
+    "id": "ml.loss.hinge",
+    "key_prerequisites": [
+      "ml.svm.margin"
+    ]
+  },
+  {
+    "id": "ml.loss.huber",
+    "key_prerequisites": [
+      "ml.loss.mae",
+      "ml.loss.mse"
+    ]
+  },
+  {
+    "id": "prealg.ratio.three_term",
+    "key_prerequisites": [
+      "ratio.basics.concept"
+    ]
+  },
+  {
+    "id": "prealg.ratio.part_whole",
+    "key_prerequisites": [
+      "ratio.basics.concept"
+    ]
+  },
+  {
+    "id": "pct.ops.original",
+    "key_prerequisites": [
+      "pct.ops.change"
+    ]
+  },
+  {
+    "id": "prealg.eq.literal",
+    "key_prerequisites": [
+      "prealg.eq.two_step",
+      "prealg.expr.formula"
+    ]
+  },
+  {
+    "id": "geo.triangle.altitude",
+    "key_prerequisites": [
+      "geo.triangle.area"
+    ]
+  },
+  {
+    "id": "geo.circle.power_point",
+    "key_prerequisites": [
+      "geo.circle.chord_segments"
+    ]
+  },
+  {
+    "id": "geo.coord.section",
+    "key_prerequisites": [
+      "geo.coord.midpoint"
+    ]
+  },
+  {
+    "id": "graph.feedback_vertex_set",
+    "key_prerequisites": [
+      "graph.cut_vertex"
+    ]
+  },
+  {
+    "id": "graph.edge_cover",
+    "key_prerequisites": [
+      "graph.vertex_cover"
+    ]
+  },
+  {
+    "id": "ml.optim.adagrad",
+    "key_prerequisites": [
+      "ml.optim.sgd"
+    ]
   }
 ]

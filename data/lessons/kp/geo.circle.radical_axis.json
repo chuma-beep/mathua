@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Equal powers",
+    "section": "Equal powers",
+    "subgoals": [
+      "Identify the given information for equal powers.",
+      "Apply the relationship in equal powers.",
+      "Check the result against the original radical axis problem."
+    ]
+  },
+  {
+    "label": "The radical axis line",
+    "section": "The radical axis line",
+    "subgoals": [
+      "Identify the given information for the radical axis line.",
+      "Apply the relationship in the radical axis line.",
+      "Check the result against the original radical axis problem."
+    ]
+  },
+  {
+    "label": "Intersections",
+    "section": "Intersections",
+    "subgoals": [
+      "Identify the given information for intersections.",
+      "Apply the relationship in intersections.",
+      "Check the result against the original radical axis problem."
+    ]
+  }
+]

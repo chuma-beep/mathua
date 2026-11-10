@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Two increases",
+    "section": "Two increases",
+    "subgoals": [
+      "Identify the given information for two increases.",
+      "Apply the relationship in two increases.",
+      "Check the result against the original successive percentage change problem."
+    ]
+  },
+  {
+    "label": "Increase then decrease",
+    "section": "Increase then decrease",
+    "subgoals": [
+      "Identify the given information for increase then decrease.",
+      "Apply the relationship in increase then decrease.",
+      "Check the result against the original successive percentage change problem."
+    ]
+  },
+  {
+    "label": "The net multiplier",
+    "section": "The net multiplier",
+    "subgoals": [
+      "Identify the given information for the net multiplier.",
+      "Apply the relationship in the net multiplier.",
+      "Check the result against the original successive percentage change problem."
+    ]
+  }
+]

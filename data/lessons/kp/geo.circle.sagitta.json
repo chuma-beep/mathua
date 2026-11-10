@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Chord and sagitta",
+    "section": "Chord and sagitta",
+    "subgoals": [
+      "Identify the given information for chord and sagitta.",
+      "Apply the relationship in chord and sagitta.",
+      "Check the result against the original sagitta problem."
+    ]
+  },
+  {
+    "label": "Radius from chord and sagitta",
+    "section": "Radius from chord and sagitta",
+    "subgoals": [
+      "Identify the given information for radius from chord and sagitta.",
+      "Apply the relationship in radius from chord and sagitta.",
+      "Check the result against the original sagitta problem."
+    ]
+  },
+  {
+    "label": "The central angle",
+    "section": "The central angle",
+    "subgoals": [
+      "Identify the given information for the central angle.",
+      "Apply the relationship in the central angle.",
+      "Check the result against the original sagitta problem."
+    ]
+  }
+]

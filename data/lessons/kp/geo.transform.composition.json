@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Applying transformations in order",
+    "section": "Applying transformations in order",
+    "subgoals": [
+      "Identify the given information for applying transformations in order.",
+      "Apply the relationship in applying transformations in order.",
+      "Check the result against the original transformation composition problem."
+    ]
+  },
+  {
+    "label": "Inverse compositions",
+    "section": "Inverse compositions",
+    "subgoals": [
+      "Identify the given information for inverse compositions.",
+      "Apply the relationship in inverse compositions.",
+      "Check the result against the original transformation composition problem."
+    ]
+  },
+  {
+    "label": "Coordinates and fixed points",
+    "section": "Coordinates and fixed points",
+    "subgoals": [
+      "Identify the given information for coordinates and fixed points.",
+      "Apply the relationship in coordinates and fixed points.",
+      "Check the result against the original transformation composition problem."
+    ]
+  }
+]

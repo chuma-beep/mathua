@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Recovering after an increase",
+    "section": "Recovering after an increase",
+    "subgoals": [
+      "Write an increase of p percent as the multiplier 1 + p/100.",
+      "Divide the new amount by the multiplier.",
+      "Check that the recovered amount is smaller than the new amount."
+    ]
+  },
+  {
+    "label": "Recovering after a decrease",
+    "section": "Recovering after a decrease",
+    "subgoals": [
+      "Write a decrease of p percent as the multiplier 1 - p/100.",
+      "Divide the new amount by the multiplier.",
+      "Check that the recovered amount is larger than the new amount."
+    ]
+  },
+  {
+    "label": "Checking the result",
+    "section": "Checking the result",
+    "subgoals": [
+      "Apply the original percent change to the recovered amount.",
+      "Compare the result with the stated new amount.",
+      "Identify the error when the percentage was applied to the new amount."
+    ]
+  }
+]

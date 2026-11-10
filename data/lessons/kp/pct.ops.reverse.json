@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Finding the whole",
+    "section": "Finding the whole",
+    "subgoals": [
+      "Identify the given information for finding the whole.",
+      "Apply the relationship in finding the whole.",
+      "Check the result against the original reverse percentage problem."
+    ]
+  },
+  {
+    "label": "Finding the part",
+    "section": "Finding the part",
+    "subgoals": [
+      "Identify the given information for finding the part.",
+      "Apply the relationship in finding the part.",
+      "Check the result against the original reverse percentage problem."
+    ]
+  },
+  {
+    "label": "Finding the percent",
+    "section": "Finding the percent",
+    "subgoals": [
+      "Identify the given information for finding the percent.",
+      "Apply the relationship in finding the percent.",
+      "Check the result against the original reverse percentage problem."
+    ]
+  }
+]

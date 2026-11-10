@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Rounding decimals",
+    "section": "Rounding decimals",
+    "subgoals": [
+      "Identify the given information for rounding decimals.",
+      "Apply the relationship in rounding decimals.",
+      "Check the result against the original decimal estimate problem."
+    ]
+  },
+  {
+    "label": "Estimating sums and products",
+    "section": "Estimating sums and products",
+    "subgoals": [
+      "Identify the given information for estimating sums and products.",
+      "Apply the relationship in estimating sums and products.",
+      "Check the result against the original decimal estimate problem."
+    ]
+  },
+  {
+    "label": "Comparing with the exact value",
+    "section": "Comparing with the exact value",
+    "subgoals": [
+      "Identify the given information for comparing with the exact value.",
+      "Apply the relationship in comparing with the exact value.",
+      "Check the result against the original decimal estimate problem."
+    ]
+  }
+]

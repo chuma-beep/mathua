@@ -151,7 +151,7 @@ are, they cannot be "one per domain" or "one per subdomain" and still inherit th
 
 ### What is committed
 
-`data/mastery_units.json` is the width-3 draft: 143 units, all 1950 concepts covered exactly once,
+`data/mastery_units.json` is the width-3 draft: 143 units, all 2000 concepts covered exactly once,
 no authored prerequisite edges, band width recorded in the file rather than in a constant.
 `data/mastery_units.report.md` carries the table above and the unit list.
 `go run ./cmd/masteryunits -band N` regenerates at any width; `make validate` checks coverage,

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Planar layers",
+    "section": "Planar layers",
+    "subgoals": [
+      "Identify the given information for planar layers.",
+      "Apply the relationship in planar layers.",
+      "Check the result against the original graph thickness problem."
+    ]
+  },
+  {
+    "label": "The edge bound",
+    "section": "The edge bound",
+    "subgoals": [
+      "Identify the given information for the edge bound.",
+      "Apply the relationship in the edge bound.",
+      "Check the result against the original graph thickness problem."
+    ]
+  },
+  {
+    "label": "Complete graphs",
+    "section": "Complete graphs",
+    "subgoals": [
+      "Identify the given information for complete graphs.",
+      "Apply the relationship in complete graphs.",
+      "Check the result against the original graph thickness problem."
+    ]
+  }
+]

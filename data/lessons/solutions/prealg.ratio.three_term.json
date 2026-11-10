@@ -1,0 +1,19 @@
+{
+  "concept": "prealg.ratio.three_term",
+  "setup": "The three-term ratio is [[r1]]:[[r2]]:[[r3]], with scale [[scale]] and total [[total]].",
+  "steps": [
+    {
+      "fact": "r1",
+      "say": "The first quantity has [[r1]] parts."
+    },
+    {
+      "fact": "r2",
+      "say": "The second quantity has [[r2]] parts."
+    },
+    {
+      "fact": "scale",
+      "say": "Each part is multiplied by [[scale]]."
+    }
+  ],
+  "answer": "The requested result is [[answer]]."
+}

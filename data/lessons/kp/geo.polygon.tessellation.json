@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Angle sums",
+    "section": "Angle sums",
+    "subgoals": [
+      "Identify the given information for angle sums.",
+      "Apply the relationship in angle sums.",
+      "Check the result against the original tessellation problem."
+    ]
+  },
+  {
+    "label": "Regular angles",
+    "section": "Regular angles",
+    "subgoals": [
+      "Identify the given information for regular angles.",
+      "Apply the relationship in regular angles.",
+      "Check the result against the original tessellation problem."
+    ]
+  },
+  {
+    "label": "Polygons around a vertex",
+    "section": "Polygons around a vertex",
+    "subgoals": [
+      "Identify the given information for polygons around a vertex.",
+      "Apply the relationship in polygons around a vertex.",
+      "Check the result against the original tessellation problem."
+    ]
+  }
+]

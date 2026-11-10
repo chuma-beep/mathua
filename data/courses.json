@@ -77,7 +77,8 @@
       "frac.add.number_line",
       "frac.sub.number_line",
       "frac.mult.area_model",
-      "frac.mixed.add_carry"
+      "frac.mixed.add_carry",
+      "dec.basics.expanded"
     ]
   },
   {
@@ -112,7 +113,14 @@
       "frac.percent.convert",
       "frac.word.remaining_two_step",
       "frac.compare.mixed_order",
-      "frac.percent.of_fraction"
+      "frac.percent.of_fraction",
+      "prealg.ratio.three_term",
+      "prealg.ratio.part_whole",
+      "prealg.ratio.tape",
+      "dec.ops.div_decimal",
+      "dec.ops.estimate",
+      "prealg.expr.two_variables",
+      "prealg.measure.time"
     ]
   },
   {
@@ -137,7 +145,15 @@
       "prealg.ineq.graph",
       "prealg.measure.convert",
       "frac.ops.negative",
-      "frac.ops.repeating_decimal"
+      "frac.ops.repeating_decimal",
+      "pct.ops.original",
+      "prealg.ratio.constant",
+      "pct.ops.percent_points",
+      "pct.ops.successive",
+      "pct.ops.reverse",
+      "prealg.expr.coefficient",
+      "prealg.expr.distribute_simplify",
+      "prealg.measure.precision"
     ]
   },
   {
@@ -162,7 +178,9 @@
       "prealg.expr.formula",
       "prealg.ineq.word",
       "prealg.measure.temperature",
-      "arith.exp.standard_form"
+      "arith.exp.standard_form",
+      "prealg.eq.literal",
+      "prealg.eq.check"
     ]
   },
   {
@@ -256,7 +274,25 @@
       "frac.word.remaining_two_step",
       "frac.mixed.add_carry",
       "frac.compare.mixed_order",
-      "frac.percent.of_fraction"
+      "frac.percent.of_fraction",
+      "prealg.ratio.three_term",
+      "prealg.ratio.part_whole",
+      "pct.ops.original",
+      "prealg.eq.literal",
+      "prealg.ratio.tape",
+      "prealg.ratio.constant",
+      "pct.ops.percent_points",
+      "pct.ops.successive",
+      "pct.ops.reverse",
+      "dec.ops.div_decimal",
+      "dec.ops.estimate",
+      "dec.basics.expanded",
+      "prealg.expr.two_variables",
+      "prealg.expr.coefficient",
+      "prealg.expr.distribute_simplify",
+      "prealg.eq.check",
+      "prealg.measure.time",
+      "prealg.measure.precision"
     ]
   },
   {
@@ -372,7 +408,24 @@
       "geo.solid.cross_section",
       "geo.transform.symmetry",
       "geo.solid.euler",
-      "geo.solid.frustum"
+      "geo.solid.frustum",
+      "geo.triangle.altitude",
+      "geo.circle.power_point",
+      "geo.coord.section",
+      "geo.triangle.orthocenter",
+      "geo.triangle.circumcenter",
+      "geo.triangle.incenter",
+      "geo.triangle.cevian",
+      "geo.triangle.apollonius",
+      "geo.circle.sagitta",
+      "geo.circle.radical_axis",
+      "geo.polygon.diagonal_count",
+      "geo.polygon.tessellation",
+      "geo.coord.sphere_equation",
+      "geo.transform.composition",
+      "geo.transform.isometry",
+      "geo.solid.hemisphere",
+      "geo.solid.density"
     ]
   },
   {
@@ -1507,7 +1560,15 @@
       "ml.optim.sgd",
       "ml.data.leakage",
       "ml.eval.log_loss",
-      "ml.data.smote"
+      "ml.data.smote",
+      "ml.optim.adagrad",
+      "ml.optim.rmsprop",
+      "ml.optim.adamw",
+      "ml.ensemble.stacking",
+      "ml.ensemble.voting",
+      "ml.unsupervised.spectral",
+      "ml.loss.hinge",
+      "ml.loss.huber"
     ]
   },
   {
@@ -1657,7 +1718,14 @@
       "graph.chordal",
       "graph.cograph",
       "graph.interval",
-      "graph.split"
+      "graph.split",
+      "graph.feedback_vertex_set",
+      "graph.edge_cover",
+      "graph.feedback_arc_set",
+      "graph.arboricity",
+      "graph.thickness",
+      "graph.crossing_number",
+      "graph.clique_cover"
     ]
   },
   {

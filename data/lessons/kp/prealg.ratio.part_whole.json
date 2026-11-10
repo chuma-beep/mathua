@@ -1,0 +1,29 @@
+[
+  {
+    "label": "From counts to a ratio",
+    "section": "From counts to a ratio",
+    "subgoals": [
+      "Add the part to the other part to find the whole.",
+      "Write the part first and the whole second.",
+      "Reduce the part-to-whole ratio by its common factor."
+    ]
+  },
+  {
+    "label": "Finding the whole",
+    "section": "Finding the whole",
+    "subgoals": [
+      "Find the scale factor from the known part.",
+      "Multiply the whole ratio term by the scale factor.",
+      "Check that the other part completes the whole."
+    ]
+  },
+  {
+    "label": "Comparing part to part",
+    "section": "Comparing part to part",
+    "subgoals": [
+      "Distinguish a part-to-part ratio from a part-to-whole ratio.",
+      "Add the two parts to form the whole.",
+      "Choose the denominator the question asks for."
+    ]
+  }
+]

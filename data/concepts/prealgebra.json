@@ -1133,5 +1133,258 @@
       "streak": 10,
       "avg_time_seconds": 24
     }
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    },
+    "id": "prealg.ratio.three_term",
+    "label": "Three-term ratios",
+    "subdomain": "prealgebra.ratios",
+    "prerequisites": [
+      "ratio.basics.concept"
+    ]
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    },
+    "id": "prealg.ratio.part_whole",
+    "label": "Part-to-whole ratios",
+    "subdomain": "prealgebra.ratios",
+    "prerequisites": [
+      "ratio.basics.concept"
+    ]
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    },
+    "id": "pct.ops.original",
+    "label": "Finding the original amount",
+    "subdomain": "prealgebra.percentages",
+    "prerequisites": [
+      "pct.ops.change"
+    ]
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    },
+    "id": "prealg.eq.literal",
+    "label": "Solving a formula for a variable",
+    "subdomain": "prealgebra.equations",
+    "prerequisites": [
+      "prealg.eq.two_step",
+      "prealg.expr.formula"
+    ]
+  },
+  {
+    "id": "prealg.ratio.tape",
+    "label": "Tape diagrams for ratios",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.ratios",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ratio.basics.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "prealg.ratio.constant",
+    "label": "The constant of proportionality",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.ratios",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ratio.ops.proportion"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "pct.ops.percent_points",
+    "label": "Percentage points",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.percentages",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "pct.basics.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "pct.ops.successive",
+    "label": "Successive percentage changes",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.percentages",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "pct.ops.change"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "pct.ops.reverse",
+    "label": "Reverse percentages",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.percentages",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "pct.ops.of_number"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "dec.ops.div_decimal",
+    "label": "Dividing by a decimal",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.decimals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "dec.ops.div"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "dec.ops.estimate",
+    "label": "Estimating with decimals",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.decimals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "dec.basics.compare"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "dec.basics.expanded",
+    "label": "Expanded form of decimals",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.decimals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "dec.basics.place_value"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "prealg.expr.two_variables",
+    "label": "Evaluating expressions with two variables",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.variables",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.expr.evaluate"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "prealg.expr.coefficient",
+    "label": "Coefficients and constant terms",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.variables",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.expr.like_terms"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "prealg.expr.distribute_simplify",
+    "label": "Distributing and simplifying",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.variables",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.expr.distribute"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "prealg.eq.check",
+    "label": "Checking a solution",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.equations",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.eq.one_step_add"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "prealg.measure.time",
+    "label": "Converting units of time",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.measurement",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.measure.convert"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
+  },
+  {
+    "id": "prealg.measure.precision",
+    "label": "Precision and significant digits",
+    "domain": "prealgebra",
+    "subdomain": "prealgebra.measurement",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prealg.measure.metric"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    }
   }
 ]

@@ -50,4 +50,5 @@ func Register(reg *generator.Registry) {
 	registerWave3(reg)
 	registerWave6(reg)
 	registerWave6Remaining(reg)
+	registerWave10(reg)
 }

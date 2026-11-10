@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Decoupled decay",
+    "section": "Decoupled decay",
+    "subgoals": [
+      "Identify the given information for decoupled decay.",
+      "Apply the relationship in decoupled decay.",
+      "Check the result against the original AdamW update problem."
+    ]
+  },
+  {
+    "label": "The adaptive step",
+    "section": "The adaptive step",
+    "subgoals": [
+      "Identify the given information for the adaptive step.",
+      "Apply the relationship in the adaptive step.",
+      "Check the result against the original AdamW update problem."
+    ]
+  },
+  {
+    "label": "The combined update",
+    "section": "The combined update",
+    "subgoals": [
+      "Identify the given information for the combined update.",
+      "Apply the relationship in the combined update.",
+      "Check the result against the original AdamW update problem."
+    ]
+  }
+]

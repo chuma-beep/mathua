@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Forests",
+    "section": "Forests",
+    "subgoals": [
+      "Identify the given information for forests.",
+      "Apply the relationship in forests.",
+      "Check the result against the original arboricity problem."
+    ]
+  },
+  {
+    "label": "The edge bound",
+    "section": "The edge bound",
+    "subgoals": [
+      "Identify the given information for the edge bound.",
+      "Apply the relationship in the edge bound.",
+      "Check the result against the original arboricity problem."
+    ]
+  },
+  {
+    "label": "Complete graphs",
+    "section": "Complete graphs",
+    "subgoals": [
+      "Identify the given information for complete graphs.",
+      "Apply the relationship in complete graphs.",
+      "Check the result against the original arboricity problem."
+    ]
+  }
+]

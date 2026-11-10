@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Ceva product",
+    "section": "The Ceva product",
+    "subgoals": [
+      "Identify the given information for the ceva product.",
+      "Apply the relationship in the ceva product.",
+      "Check the result against the original Ceva theorem problem."
+    ]
+  },
+  {
+    "label": "Solving for a ratio",
+    "section": "Solving for a ratio",
+    "subgoals": [
+      "Identify the given information for solving for a ratio.",
+      "Apply the relationship in solving for a ratio.",
+      "Check the result against the original Ceva theorem problem."
+    ]
+  },
+  {
+    "label": "Testing concurrency",
+    "section": "Testing concurrency",
+    "subgoals": [
+      "Identify the given information for testing concurrency.",
+      "Apply the relationship in testing concurrency.",
+      "Check the result against the original Ceva theorem problem."
+    ]
+  }
+]

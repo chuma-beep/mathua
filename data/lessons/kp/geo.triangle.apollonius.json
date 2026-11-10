@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The median relation",
+    "section": "The median relation",
+    "subgoals": [
+      "Identify the given information for the median relation.",
+      "Apply the relationship in the median relation.",
+      "Check the result against the original Apollonius theorem problem."
+    ]
+  },
+  {
+    "label": "Using the theorem",
+    "section": "Using the theorem",
+    "subgoals": [
+      "Identify the given information for using the theorem.",
+      "Apply the relationship in using the theorem.",
+      "Check the result against the original Apollonius theorem problem."
+    ]
+  },
+  {
+    "label": "Checking with Pythagoras",
+    "section": "Checking with Pythagoras",
+    "subgoals": [
+      "Identify the given information for checking with pythagoras.",
+      "Apply the relationship in checking with pythagoras.",
+      "Check the result against the original Apollonius theorem problem."
+    ]
+  }
+]

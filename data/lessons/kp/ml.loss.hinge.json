@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Margin",
+    "section": "Margin",
+    "subgoals": [
+      "Identify the given information for margin.",
+      "Apply the relationship in margin.",
+      "Check the result against the original hinge loss problem."
+    ]
+  },
+  {
+    "label": "Loss",
+    "section": "Loss",
+    "subgoals": [
+      "Identify the given information for loss.",
+      "Apply the relationship in loss.",
+      "Check the result against the original hinge loss problem."
+    ]
+  },
+  {
+    "label": "Subgradient",
+    "section": "Subgradient",
+    "subgoals": [
+      "Identify the given information for subgradient.",
+      "Apply the relationship in subgradient.",
+      "Check the result against the original hinge loss problem."
+    ]
+  }
+]

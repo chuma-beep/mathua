@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Cliques",
+    "section": "Cliques",
+    "subgoals": [
+      "Identify the given information for cliques.",
+      "Apply the relationship in cliques.",
+      "Check the result against the original clique cover problem."
+    ]
+  },
+  {
+    "label": "Covers",
+    "section": "Covers",
+    "subgoals": [
+      "Identify the given information for covers.",
+      "Apply the relationship in covers.",
+      "Check the result against the original clique cover problem."
+    ]
+  },
+  {
+    "label": "Complement colouring",
+    "section": "Complement colouring",
+    "subgoals": [
+      "Identify the given information for complement colouring.",
+      "Apply the relationship in complement colouring.",
+      "Check the result against the original clique cover problem."
+    ]
+  }
+]

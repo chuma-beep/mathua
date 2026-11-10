@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Reading a tape diagram",
+    "section": "Reading a tape diagram",
+    "subgoals": [
+      "Identify the given information for reading a tape diagram.",
+      "Apply the relationship in reading a tape diagram.",
+      "Check the result against the original tape diagram problem."
+    ]
+  },
+  {
+    "label": "Finding the total",
+    "section": "Finding the total",
+    "subgoals": [
+      "Identify the given information for finding the total.",
+      "Apply the relationship in finding the total.",
+      "Check the result against the original tape diagram problem."
+    ]
+  },
+  {
+    "label": "Recovering a missing unit",
+    "section": "Recovering a missing unit",
+    "subgoals": [
+      "Identify the given information for recovering a missing unit.",
+      "Apply the relationship in recovering a missing unit.",
+      "Check the result against the original tape diagram problem."
+    ]
+  }
+]

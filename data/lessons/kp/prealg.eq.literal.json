@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Rearranging by inverse operations",
+    "section": "Rearranging by inverse operations",
+    "subgoals": [
+      "Identify the operations applied to the target variable.",
+      "Undo addition or subtraction before multiplication or division.",
+      "Write the target variable alone on one side."
+    ]
+  },
+  {
+    "label": "Substituting known values",
+    "section": "Substituting known values",
+    "subgoals": [
+      "Substitute each known value into the rearranged formula.",
+      "Compute the numerator and denominator separately.",
+      "Report the result with the correct unit."
+    ]
+  },
+  {
+    "label": "Checking the rearranged formula",
+    "section": "Checking the rearranged formula",
+    "subgoals": [
+      "Substitute the recovered value into the original formula.",
+      "Compare the result with the given value.",
+      "Detect a sign error or a reversed division."
+    ]
+  }
+]

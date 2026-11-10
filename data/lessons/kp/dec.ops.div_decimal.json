@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Scaling the divisor",
+    "section": "Scaling the divisor",
+    "subgoals": [
+      "Identify the given information for scaling the divisor.",
+      "Apply the relationship in scaling the divisor.",
+      "Check the result against the original decimal division problem."
+    ]
+  },
+  {
+    "label": "Performing the division",
+    "section": "Performing the division",
+    "subgoals": [
+      "Identify the given information for performing the division.",
+      "Apply the relationship in performing the division.",
+      "Check the result against the original decimal division problem."
+    ]
+  },
+  {
+    "label": "Checking the quotient",
+    "section": "Checking the quotient",
+    "subgoals": [
+      "Identify the given information for checking the quotient.",
+      "Apply the relationship in checking the quotient.",
+      "Check the result against the original decimal division problem."
+    ]
+  }
+]

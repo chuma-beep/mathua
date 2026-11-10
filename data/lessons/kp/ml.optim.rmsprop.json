@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The decayed average",
+    "section": "The decayed average",
+    "subgoals": [
+      "Identify the given information for the decayed average.",
+      "Apply the relationship in the decayed average.",
+      "Check the result against the original RMSProp update problem."
+    ]
+  },
+  {
+    "label": "The update",
+    "section": "The update",
+    "subgoals": [
+      "Identify the given information for the update.",
+      "Apply the relationship in the update.",
+      "Check the result against the original RMSProp update problem."
+    ]
+  },
+  {
+    "label": "Comparing with AdaGrad",
+    "section": "Comparing with AdaGrad",
+    "subgoals": [
+      "Identify the given information for comparing with adagrad.",
+      "Apply the relationship in comparing with adagrad.",
+      "Check the result against the original RMSProp update problem."
+    ]
+  }
+]

@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1950,
+  "concept_count": 2000,
   "unit_count": 143,
   "units": [
     {
@@ -1940,8 +1940,10 @@
         "geo.basic.transversal",
         "geo.basic.vertical",
         "geo.circle.cyclic_quad",
+        "geo.polygon.diagonal_count",
         "geo.polygon.exterior_angle",
         "geo.polygon.interior_angles",
+        "geo.polygon.tessellation",
         "geo.quad.perimeter",
         "geo.similar.area_ratio",
         "geo.similar.criteria",
@@ -1959,24 +1961,27 @@
         "geo.triangle.isosceles",
         "geo.triangle.midsegment"
       ],
-      "concept_count": 22
+      "concept_count": 24
     },
     {
       "id": "geometry.b2",
       "title": "Geometry · Stage 3",
       "domain": "geometry",
       "band": 2,
-      "depth_min": 8,
+      "depth_min": 6,
       "depth_max": 8,
       "subdomains": [
         "geometry.shapes",
+        "geometry.transform",
         "geometry.triangles"
       ],
       "concept_ids": [
         "geo.quad.area",
-        "geo.triangle.area"
+        "geo.transform.composition",
+        "geo.triangle.area",
+        "geo.triangle.incenter"
       ],
-      "concept_count": 2
+      "concept_count": 4
     },
     {
       "id": "geometry.b3",
@@ -2002,18 +2007,21 @@
         "geo.quad.properties",
         "geo.quad.trapezoid_area",
         "geo.solid.cross_section",
+        "geo.solid.density",
         "geo.solid.euler",
         "geo.solid.prism_volume",
         "geo.solid.pyramid_volume",
         "geo.solid.similar_volume",
         "geo.solid.surface_area",
         "geo.solid.volume_rect",
+        "geo.triangle.altitude",
+        "geo.triangle.orthocenter",
         "geo.triangle.pythagorean",
         "geo.triangle.pythagorean.word",
         "geo.triangle.pythagorean_converse",
         "geo.triangle.special_right"
       ],
-      "concept_count": 18
+      "concept_count": 21
     },
     {
       "id": "geometry.b4",
@@ -2033,20 +2041,28 @@
         "geo.circle.area",
         "geo.circle.chord_segments",
         "geo.circle.circumference",
+        "geo.circle.power_point",
+        "geo.circle.radical_axis",
+        "geo.circle.sagitta",
         "geo.circle.secant",
         "geo.circle.tangent_chord",
         "geo.circle.tangent_length",
         "geo.coord.distance_3d",
         "geo.coord.polar",
+        "geo.coord.section",
+        "geo.coord.sphere_equation",
         "geo.solid.cone",
         "geo.solid.curved_surface_area",
         "geo.solid.cylinder",
         "geo.solid.sphere",
+        "geo.triangle.apollonius",
+        "geo.triangle.cevian",
+        "geo.triangle.circumcenter",
         "geo.triangle.median_centroid",
         "geo.triangle.perpendicular_bisector",
         "geo.triangle.special_right_45"
       ],
-      "concept_count": 16
+      "concept_count": 24
     },
     {
       "id": "geometry.b5",
@@ -2059,9 +2075,10 @@
         "geometry.solid"
       ],
       "concept_ids": [
-        "geo.solid.frustum"
+        "geo.solid.frustum",
+        "geo.solid.hemisphere"
       ],
-      "concept_count": 1
+      "concept_count": 2
     },
     {
       "id": "geometry.b6",
@@ -2084,16 +2101,17 @@
       "domain": "geometry",
       "band": 7,
       "depth_min": 21,
-      "depth_max": 21,
+      "depth_max": 22,
       "subdomains": [
         "geometry.coordinate",
         "geometry.transform"
       ],
       "concept_ids": [
         "geo.coord.slope",
+        "geo.transform.isometry",
         "geo.transform.reflection"
       ],
-      "concept_count": 2
+      "concept_count": 3
     },
     {
       "id": "graph_theory.b1",
@@ -2175,6 +2193,7 @@
         "graph_theory.planarity"
       ],
       "concept_ids": [
+        "graph.arboricity",
         "graph.automorphism",
         "graph.bellman_ford",
         "graph.bridge",
@@ -2184,6 +2203,7 @@
         "graph.cut_vertex",
         "graph.degeneracy",
         "graph.distance",
+        "graph.feedback_vertex_set",
         "graph.floyd_warshall",
         "graph.girth",
         "graph.hamiltonian",
@@ -2197,7 +2217,7 @@
         "graph.tournament",
         "graph.turan"
       ],
-      "concept_count": 21
+      "concept_count": 23
     },
     {
       "id": "graph_theory.b7",
@@ -2221,8 +2241,10 @@
         "graph.brooks",
         "graph.chordal",
         "graph.chromatic_polynomial",
+        "graph.crossing_number",
         "graph.dag_paths",
         "graph.edge_coloring",
+        "graph.feedback_arc_set",
         "graph.four_color",
         "graph.genus",
         "graph.list_coloring",
@@ -2239,12 +2261,13 @@
         "graph.random_threshold",
         "graph.stable_matching",
         "graph.strong_connectivity",
+        "graph.thickness",
         "graph.topological_sort",
         "graph.treewidth",
         "graph.union_find",
         "graph.vertex_cover"
       ],
-      "concept_count": 27
+      "concept_count": 30
     },
     {
       "id": "graph_theory.b8",
@@ -2252,7 +2275,7 @@
       "domain": "graph_theory",
       "band": 8,
       "depth_min": 24,
-      "depth_max": 25,
+      "depth_max": 26,
       "subdomains": [
         "graph_theory.basics",
         "graph_theory.matching",
@@ -2260,7 +2283,9 @@
       ],
       "concept_ids": [
         "graph.clique",
+        "graph.clique_cover",
         "graph.dominating_set",
+        "graph.edge_cover",
         "graph.independent_set",
         "graph.interval",
         "graph.spectral_gap",
@@ -2268,7 +2293,7 @@
         "graph.split",
         "graph.tutte"
       ],
-      "concept_count": 8
+      "concept_count": 10
     },
     {
       "id": "linear_algebra.b0",
@@ -2521,15 +2546,17 @@
       "title": "Machine Learning · Stage 5",
       "domain": "machine_learning",
       "band": 4,
-      "depth_min": 14,
+      "depth_min": 12,
       "depth_max": 14,
       "subdomains": [
-        "machine_learning.data"
+        "machine_learning.data",
+        "machine_learning.neural_networks"
       ],
       "concept_ids": [
-        "ml.data.scaling"
+        "ml.data.scaling",
+        "ml.loss.huber"
       ],
-      "concept_count": 1
+      "concept_count": 2
     },
     {
       "id": "machine_learning.b7",
@@ -2578,9 +2605,10 @@
         "ml.logistic.regression",
         "ml.nlp.transformer",
         "ml.pca.variance_percent",
-        "ml.reinforcement.qlearning"
+        "ml.reinforcement.qlearning",
+        "ml.unsupervised.spectral"
       ],
-      "concept_count": 12
+      "concept_count": 13
     },
     {
       "id": "machine_learning.b9",
@@ -2591,10 +2619,12 @@
       "depth_max": 28,
       "subdomains": [
         "machine_learning.classification",
+        "machine_learning.neural_networks",
         "machine_learning.nlp",
         "machine_learning.reinforcement"
       ],
       "concept_ids": [
+        "ml.loss.hinge",
         "ml.mdp.bellman",
         "ml.naive_bayes",
         "ml.nlp.bert",
@@ -2605,7 +2635,7 @@
         "ml.svm.margin",
         "ml.svm.soft_margin"
       ],
-      "concept_count": 9
+      "concept_count": 10
     },
     {
       "id": "machine_learning.b10",
@@ -2646,7 +2676,9 @@
         "ml.eval.accuracy",
         "ml.eval.roc",
         "ml.feature.selection",
+        "ml.optim.adagrad",
         "ml.optim.early_stopping",
+        "ml.optim.rmsprop",
         "ml.overfitting",
         "ml.reg.elastic_net",
         "ml.reg.lasso",
@@ -2655,7 +2687,7 @@
         "ml.tree.gini",
         "ml.validation"
       ],
-      "concept_count": 15
+      "concept_count": 17
     },
     {
       "id": "machine_learning.b12",
@@ -2663,7 +2695,7 @@
       "domain": "machine_learning",
       "band": 12,
       "depth_min": 36,
-      "depth_max": 37,
+      "depth_max": 38,
       "subdomains": [
         "machine_learning.classification",
         "machine_learning.data",
@@ -2674,6 +2706,8 @@
       "concept_ids": [
         "ml.data.imbalance",
         "ml.data.smote",
+        "ml.ensemble.stacking",
+        "ml.ensemble.voting",
         "ml.eval.calibration",
         "ml.eval.confusion",
         "ml.eval.f1",
@@ -2683,13 +2717,14 @@
         "ml.grad.vanishing",
         "ml.multiclass",
         "ml.optim.adam",
+        "ml.optim.adamw",
         "ml.optim.batchnorm",
         "ml.optim.momentum",
         "ml.tree.ensemble",
         "ml.tree.gradient_boosting",
         "ml.unsupervised.autoencoder"
       ],
-      "concept_count": 16
+      "concept_count": 19
     },
     {
       "id": "number_theory.b2",
@@ -3093,10 +3128,12 @@
         "arith.exp.zero",
         "arith.neg.order_ops",
         "dec.basics.compare",
+        "dec.basics.expanded",
         "dec.basics.place_value",
         "dec.convert.from_frac",
         "dec.ops.add",
         "dec.ops.add.word",
+        "dec.ops.estimate",
         "dec.ops.mult",
         "dec.ops.round",
         "dec.ops.sub",
@@ -3104,13 +3141,17 @@
         "pct.convert.from_dec",
         "pct.convert.to_dec",
         "pct.ops.of_number",
+        "pct.ops.percent_points",
         "prealg.graph.interpret",
+        "prealg.ratio.part_whole",
+        "prealg.ratio.tape",
+        "prealg.ratio.three_term",
         "prealg.real.concept",
         "prealg.real.order_rational",
         "prealg.types",
         "ratio.ops.simplify"
       ],
-      "concept_count": 20
+      "concept_count": 26
     },
     {
       "id": "prealgebra.b4",
@@ -3133,6 +3174,7 @@
         "dec.convert.to_frac",
         "dec.ops.div",
         "dec.ops.div.word",
+        "dec.ops.div_decimal",
         "dec.ops.mult.word",
         "dec.ops.powers_ten",
         "dec.ops.sub.word",
@@ -3143,10 +3185,15 @@
         "pct.ops.find_rate",
         "pct.ops.increase",
         "pct.ops.markup",
+        "pct.ops.original",
+        "pct.ops.reverse",
+        "pct.ops.successive",
         "pct.ops.tax_tip",
         "prealg.expr.evaluate",
         "prealg.measure.convert",
         "prealg.measure.metric",
+        "prealg.measure.precision",
+        "prealg.ratio.constant",
         "prealg.real.properties",
         "prealg.var.concept",
         "ratio.ops.better_buy",
@@ -3158,7 +3205,7 @@
         "ratio.ops.rate.word",
         "ratio.ops.scale"
       ],
-      "concept_count": 29
+      "concept_count": 35
     },
     {
       "id": "prealgebra.b5",
@@ -3177,21 +3224,26 @@
       ],
       "concept_ids": [
         "pct.ops.simple_interest",
+        "prealg.eq.check",
         "prealg.eq.one_step_add",
         "prealg.eq.one_step_mult",
         "prealg.eq.two_step",
+        "prealg.expr.coefficient",
         "prealg.expr.distribute",
+        "prealg.expr.distribute_simplify",
         "prealg.expr.formula",
         "prealg.expr.like_terms",
         "prealg.expr.simplify",
         "prealg.expr.translate",
+        "prealg.expr.two_variables",
         "prealg.func.table",
         "prealg.ineq.one_step",
         "prealg.measure.dimensional",
         "prealg.measure.temperature",
+        "prealg.measure.time",
         "ratio.ops.table"
       ],
-      "concept_count": 14
+      "concept_count": 19
     },
     {
       "id": "prealgebra.b6",
@@ -3206,13 +3258,14 @@
       ],
       "concept_ids": [
         "prealg.eq.fractions",
+        "prealg.eq.literal",
         "prealg.eq.word",
         "prealg.ineq.graph",
         "prealg.ineq.negative",
         "prealg.ineq.two_step",
         "prealg.ineq.word"
       ],
-      "concept_count": 6
+      "concept_count": 7
     },
     {
       "id": "precalculus.b3",

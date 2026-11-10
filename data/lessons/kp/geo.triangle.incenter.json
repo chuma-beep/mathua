@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Angle bisectors",
+    "section": "Angle bisectors",
+    "subgoals": [
+      "Identify the given information for angle bisectors.",
+      "Apply the relationship in angle bisectors.",
+      "Check the result against the original incenter problem."
+    ]
+  },
+  {
+    "label": "Inradius from area",
+    "section": "Inradius from area",
+    "subgoals": [
+      "Identify the given information for inradius from area.",
+      "Apply the relationship in inradius from area.",
+      "Check the result against the original incenter problem."
+    ]
+  },
+  {
+    "label": "Coordinates in a right triangle",
+    "section": "Coordinates in a right triangle",
+    "subgoals": [
+      "Identify the given information for coordinates in a right triangle.",
+      "Apply the relationship in coordinates in a right triangle.",
+      "Check the result against the original incenter problem."
+    ]
+  }
+]

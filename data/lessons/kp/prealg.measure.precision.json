@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Significant digits",
+    "section": "Significant digits",
+    "subgoals": [
+      "Identify the given information for significant digits.",
+      "Apply the relationship in significant digits.",
+      "Check the result against the original measurement precision problem."
+    ]
+  },
+  {
+    "label": "Rounding to a precision",
+    "section": "Rounding to a precision",
+    "subgoals": [
+      "Identify the given information for rounding to a precision.",
+      "Apply the relationship in rounding to a precision.",
+      "Check the result against the original measurement precision problem."
+    ]
+  },
+  {
+    "label": "Comparing measurements",
+    "section": "Comparing measurements",
+    "subgoals": [
+      "Identify the given information for comparing measurements.",
+      "Apply the relationship in comparing measurements.",
+      "Check the result against the original measurement precision problem."
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Hours and minutes",
+    "section": "Hours and minutes",
+    "subgoals": [
+      "Identify the given information for hours and minutes.",
+      "Apply the relationship in hours and minutes.",
+      "Check the result against the original time conversion problem."
+    ]
+  },
+  {
+    "label": "Minutes and seconds",
+    "section": "Minutes and seconds",
+    "subgoals": [
+      "Identify the given information for minutes and seconds.",
+      "Apply the relationship in minutes and seconds.",
+      "Check the result against the original time conversion problem."
+    ]
+  },
+  {
+    "label": "Elapsed time",
+    "section": "Elapsed time",
+    "subgoals": [
+      "Identify the given information for elapsed time.",
+      "Apply the relationship in elapsed time.",
+      "Check the result against the original time conversion problem."
+    ]
+  }
+]

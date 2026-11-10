@@ -972,5 +972,118 @@
       "streak": 10,
       "avg_time_seconds": 24.0
     }
+  },
+  {
+    "id": "ml.optim.adagrad",
+    "label": "AdaGrad optimization",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.neural_networks",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.optim.sgd"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "ml.optim.rmsprop",
+    "label": "RMSProp optimization",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.neural_networks",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.optim.adagrad"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "ml.optim.adamw",
+    "label": "AdamW optimization",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.neural_networks",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.optim.adam"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "ml.ensemble.stacking",
+    "label": "Stacking ensembles",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.trees",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.tree.ensemble"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "ml.ensemble.voting",
+    "label": "Voting classifiers",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.trees",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.tree.ensemble"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "ml.unsupervised.spectral",
+    "label": "Spectral clustering",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.unsupervised",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.cluster.kmeans"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "ml.loss.hinge",
+    "label": "Hinge loss",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.neural_networks",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.svm.margin"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "ml.loss.huber",
+    "label": "Huber loss",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.neural_networks",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.loss.mae",
+      "ml.loss.mse"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
   }
 ]

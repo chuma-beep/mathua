@@ -12,16 +12,16 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 1950 |
+| Total concepts | 2000 |
 | Total units | 143 |
 | Minimum unit size | 1 |
 | Median unit size | 10 |
 | Maximum unit size | 58 |
-| Singleton units | 22 |
-| Units with <= 3 concepts | 39 |
-| Units with > 25 concepts | 27 |
+| Singleton units | 20 |
+| Units with <= 3 concepts | 38 |
+| Units with > 25 concepts | 28 |
 | Units with > 50 concepts | 1 |
-| Cross-unit prerequisite edges (derived) | 493 |
+| Cross-unit prerequisite edges (derived) | 495 |
 | Backward band edges | 0 |
 
 If the learner is assessed once per unit, then 143 assessments cover the corpus, and the
@@ -90,20 +90,20 @@ exists to make concrete.
 | `fractions.b4` | fractions | 4 | 20 | 6 | 12–14 |
 | `fractions.b5` | fractions | 5 | 3 | 3 | 15–15 |
 | `geometry.b0` | geometry | 0 | 8 | 5 | 0–2 |
-| `geometry.b1` | geometry | 1 | 22 | 7 | 3–5 |
-| `geometry.b2` | geometry | 2 | 2 | 2 | 8–8 |
-| `geometry.b3` | geometry | 3 | 18 | 6 | 9–11 |
-| `geometry.b4` | geometry | 4 | 16 | 4 | 12–14 |
-| `geometry.b5` | geometry | 5 | 1 | 1 | 15–15 |
+| `geometry.b1` | geometry | 1 | 24 | 7 | 3–5 |
+| `geometry.b2` | geometry | 2 | 4 | 3 | 6–8 |
+| `geometry.b3` | geometry | 3 | 21 | 6 | 9–11 |
+| `geometry.b4` | geometry | 4 | 24 | 4 | 12–14 |
+| `geometry.b5` | geometry | 5 | 2 | 1 | 15–15 |
 | `geometry.b6` | geometry | 6 | 1 | 1 | 20–20 |
-| `geometry.b7` | geometry | 7 | 2 | 2 | 21–21 |
+| `geometry.b7` | geometry | 7 | 3 | 2 | 21–22 |
 | `graph_theory.b1` | graph_theory | 1 | 1 | 1 | 5–5 |
 | `graph_theory.b2` | graph_theory | 2 | 3 | 2 | 6–6 |
 | `graph_theory.b3` | graph_theory | 3 | 1 | 1 | 11–11 |
 | `graph_theory.b5` | graph_theory | 5 | 2 | 2 | 17–17 |
-| `graph_theory.b6` | graph_theory | 6 | 21 | 5 | 18–20 |
-| `graph_theory.b7` | graph_theory | 7 | 27 | 7 | 21–23 |
-| `graph_theory.b8` | graph_theory | 8 | 8 | 3 | 24–25 |
+| `graph_theory.b6` | graph_theory | 6 | 23 | 5 | 18–20 |
+| `graph_theory.b7` | graph_theory | 7 | 30 | 7 | 21–23 |
+| `graph_theory.b8` | graph_theory | 8 | 10 | 3 | 24–26 |
 | `linear_algebra.b0` | linear_algebra | 0 | 1 | 1 | 2–2 |
 | `linear_algebra.b1` | linear_algebra | 1 | 6 | 2 | 3–5 |
 | `linear_algebra.b2` | linear_algebra | 2 | 2 | 2 | 6–8 |
@@ -114,13 +114,13 @@ exists to make concrete.
 | `linear_algebra.b8` | linear_algebra | 8 | 16 | 5 | 24–26 |
 | `linear_algebra.b9` | linear_algebra | 9 | 14 | 5 | 27–29 |
 | `machine_learning.b3` | machine_learning | 3 | 6 | 2 | 9–11 |
-| `machine_learning.b4` | machine_learning | 4 | 1 | 1 | 14–14 |
+| `machine_learning.b4` | machine_learning | 4 | 2 | 2 | 12–14 |
 | `machine_learning.b7` | machine_learning | 7 | 5 | 3 | 21–23 |
-| `machine_learning.b8` | machine_learning | 8 | 12 | 5 | 24–26 |
-| `machine_learning.b9` | machine_learning | 9 | 9 | 3 | 27–28 |
+| `machine_learning.b8` | machine_learning | 8 | 13 | 5 | 24–26 |
+| `machine_learning.b9` | machine_learning | 9 | 10 | 4 | 27–28 |
 | `machine_learning.b10` | machine_learning | 10 | 3 | 1 | 31–32 |
-| `machine_learning.b11` | machine_learning | 11 | 15 | 5 | 33–35 |
-| `machine_learning.b12` | machine_learning | 12 | 16 | 5 | 36–37 |
+| `machine_learning.b11` | machine_learning | 11 | 17 | 5 | 33–35 |
+| `machine_learning.b12` | machine_learning | 12 | 19 | 5 | 36–38 |
 | `number_theory.b2` | number_theory | 2 | 1 | 1 | 8–8 |
 | `number_theory.b3` | number_theory | 3 | 27 | 2 | 9–11 |
 | `number_theory.b4` | number_theory | 4 | 23 | 4 | 12–14 |
@@ -137,10 +137,10 @@ exists to make concrete.
 | `numerical_analysis.b13` | numerical_analysis | 13 | 6 | 2 | 39–40 |
 | `prealgebra.b0` | prealgebra | 0 | 1 | 1 | 1–1 |
 | `prealgebra.b2` | prealgebra | 2 | 1 | 1 | 8–8 |
-| `prealgebra.b3` | prealgebra | 3 | 20 | 6 | 9–11 |
-| `prealgebra.b4` | prealgebra | 4 | 29 | 6 | 12–14 |
-| `prealgebra.b5` | prealgebra | 5 | 14 | 6 | 15–17 |
-| `prealgebra.b6` | prealgebra | 6 | 6 | 2 | 18–19 |
+| `prealgebra.b3` | prealgebra | 3 | 26 | 6 | 9–11 |
+| `prealgebra.b4` | prealgebra | 4 | 35 | 6 | 12–14 |
+| `prealgebra.b5` | prealgebra | 5 | 19 | 6 | 15–17 |
+| `prealgebra.b6` | prealgebra | 6 | 7 | 2 | 18–19 |
 | `precalculus.b3` | precalculus | 3 | 2 | 1 | 10–11 |
 | `precalculus.b4` | precalculus | 4 | 10 | 2 | 12–14 |
 | `precalculus.b5` | precalculus | 5 | 3 | 1 | 15–15 |
@@ -189,19 +189,19 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 192 | 7 | 50 | 26 | 49 | 11 | 0 |
-| 3 | 143 | 10 | 58 | 22 | 39 | 27 | 0 |
-| 4 | 112 | 14 | 83 | 12 | 22 | 29 | 0 |
-| 5 | 99 | 14 | 104 | 10 | 20 | 33 | 0 |
-| 6 | 88 | 17 | 98 | 7 | 14 | 28 | 0 |
-| 8 | 69 | 22 | 103 | 4 | 9 | 33 | 0 |
-| 10 | 61 | 26 | 145 | 5 | 10 | 31 | 0 |
-| 12 | 59 | 29 | 105 | 1 | 5 | 32 | 0 |
-| 15 | 48 | 37 | 165 | 2 | 4 | 29 | 0 |
-| 20 | 41 | 43 | 145 | 3 | 6 | 28 | 0 |
-| 45 | 24 | 80 | 171 | 1 | 1 | 23 | 0 |
+| 2 | 197 | 7 | 50 | 30 | 54 | 11 | 0 |
+| 3 | 143 | 10 | 58 | 20 | 38 | 28 | 0 |
+| 4 | 112 | 15 | 83 | 11 | 21 | 31 | 0 |
+| 5 | 99 | 14 | 104 | 9 | 18 | 36 | 0 |
+| 6 | 88 | 17 | 98 | 6 | 13 | 30 | 0 |
+| 8 | 69 | 23 | 103 | 4 | 8 | 33 | 0 |
+| 10 | 61 | 26 | 145 | 5 | 9 | 31 | 0 |
+| 12 | 59 | 30 | 105 | 1 | 5 | 34 | 0 |
+| 15 | 48 | 39 | 165 | 2 | 4 | 30 | 0 |
+| 20 | 41 | 49 | 145 | 3 | 5 | 28 | 0 |
+| 45 | 24 | 85 | 171 | 1 | 1 | 23 | 0 |
 
-**No width is clean.** Small widths fragment, at 3 there are 22 singleton units, which is a
+**No width is clean.** Small widths fragment, at 3 there are 20 singleton units, which is a
 quiz per concept and is exactly what §12 rules out. Large widths stop fragmenting but produce
 units too large to assess: at 45 the partition is just the 17 domains themselves, whose
 largest is 128 concepts. The usable widths trade fragmentation against size rather than
@@ -454,12 +454,12 @@ Unresolvable subdomains:
 `trigonometry.identities`
 `trigonometry.spherical`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1950
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2000
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings
 
-- **anomaly** `singleton_units`: 22 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
+- **anomaly** `singleton_units`: 20 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
 
 ## Not decided here
 

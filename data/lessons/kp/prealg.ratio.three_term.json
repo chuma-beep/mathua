@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Writing and reducing",
+    "section": "Writing and reducing",
+    "subgoals": [
+      "Write three quantities in the stated order.",
+      "Divide all three terms by their greatest common factor.",
+      "Recognize when a three-term ratio is fully reduced."
+    ]
+  },
+  {
+    "label": "Scaling to a total",
+    "section": "Scaling to a total",
+    "subgoals": [
+      "Add the ratio parts to find the number of parts.",
+      "Divide the total by the number of parts to find one part.",
+      "Multiply each ratio term by the value of one part."
+    ]
+  },
+  {
+    "label": "Checking the parts",
+    "section": "Checking the parts",
+    "subgoals": [
+      "Add the scaled parts and compare with the total.",
+      "Check that the reduced ratio matches the original.",
+      "Confirm that the largest share matches the largest ratio term."
+    ]
+  }
+]

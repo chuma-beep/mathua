@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Altitudes and the orthocenter",
+    "section": "Altitudes and the orthocenter",
+    "subgoals": [
+      "Identify the given information for altitudes and the orthocenter.",
+      "Apply the relationship in altitudes and the orthocenter.",
+      "Check the result against the original orthocenter problem."
+    ]
+  },
+  {
+    "label": "Coordinates of the orthocenter",
+    "section": "Coordinates of the orthocenter",
+    "subgoals": [
+      "Identify the given information for coordinates of the orthocenter.",
+      "Apply the relationship in coordinates of the orthocenter.",
+      "Check the result against the original orthocenter problem."
+    ]
+  },
+  {
+    "label": "Right and obtuse cases",
+    "section": "Right and obtuse cases",
+    "subgoals": [
+      "Identify the given information for right and obtuse cases.",
+      "Apply the relationship in right and obtuse cases.",
+      "Check the result against the original orthocenter problem."
+    ]
+  }
+]

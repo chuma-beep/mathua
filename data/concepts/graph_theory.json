@@ -894,5 +894,103 @@
       "streak": 10,
       "avg_time_seconds": 28.0
     }
+  },
+  {
+    "id": "graph.feedback_vertex_set",
+    "label": "Minimum feedback vertex sets",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.connectivity",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.cut_vertex"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "graph.edge_cover",
+    "label": "Edge covers",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.matching",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.vertex_cover"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "graph.feedback_arc_set",
+    "label": "Minimum feedback arc sets",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.connectivity",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.strong_connectivity"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "graph.arboricity",
+    "label": "Arboricity",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.planarity",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.degeneracy"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "graph.thickness",
+    "label": "Graph thickness",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.planarity",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.kuratowski"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "graph.crossing_number",
+    "label": "Crossing number",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.planarity",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.genus"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "graph.clique_cover",
+    "label": "Clique covers",
+    "domain": "graph_theory",
+    "subdomain": "graph_theory.matching",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "graph.clique"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
   }
 ]

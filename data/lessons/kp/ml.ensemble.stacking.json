@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Base models",
+    "section": "Base models",
+    "subgoals": [
+      "Identify the given information for base models.",
+      "Apply the relationship in base models.",
+      "Check the result against the original stacking ensemble problem."
+    ]
+  },
+  {
+    "label": "Meta-features",
+    "section": "Meta-features",
+    "subgoals": [
+      "Identify the given information for meta-features.",
+      "Apply the relationship in meta-features.",
+      "Check the result against the original stacking ensemble problem."
+    ]
+  },
+  {
+    "label": "Comparing models",
+    "section": "Comparing models",
+    "subgoals": [
+      "Identify the given information for comparing models.",
+      "Apply the relationship in comparing models.",
+      "Check the result against the original stacking ensemble problem."
+    ]
+  }
+]

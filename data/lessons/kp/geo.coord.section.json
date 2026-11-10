@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Dividing a segment in a ratio",
+    "section": "Dividing a segment in a ratio",
+    "subgoals": [
+      "Identify A, B and the ratio m:n.",
+      "Apply the section formula to each coordinate.",
+      "Keep the ratio direction consistent from A to B."
+    ]
+  },
+  {
+    "label": "The midpoint as a special case",
+    "section": "The midpoint as a special case",
+    "subgoals": [
+      "Recognize the ratio 1:1.",
+      "Average the x-coordinates and the y-coordinates.",
+      "Check that the midpoint lies halfway along the segment."
+    ]
+  },
+  {
+    "label": "Recovering an endpoint",
+    "section": "Recovering an endpoint",
+    "subgoals": [
+      "Use the vector from A to P as m parts of the full vector.",
+      "Scale the vector by (m+n)/m.",
+      "Add the full vector to A to recover B."
+    ]
+  }
+]

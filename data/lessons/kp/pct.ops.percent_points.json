@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Points versus percent",
+    "section": "Points versus percent",
+    "subgoals": [
+      "Identify the given information for points versus percent.",
+      "Apply the relationship in points versus percent.",
+      "Check the result against the original percentage point problem."
+    ]
+  },
+  {
+    "label": "Converting points to percent",
+    "section": "Converting points to percent",
+    "subgoals": [
+      "Identify the given information for converting points to percent.",
+      "Apply the relationship in converting points to percent.",
+      "Check the result against the original percentage point problem."
+    ]
+  },
+  {
+    "label": "Recovering the old rate",
+    "section": "Recovering the old rate",
+    "subgoals": [
+      "Identify the given information for recovering the old rate.",
+      "Apply the relationship in recovering the old rate.",
+      "Check the result against the original percentage point problem."
+    ]
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "concept": "pct.ops.original",
+  "setup": "After a [[percent]]% [[direction]], the amount is [[new]].",
+  "steps": [
+    {
+      "fact": "percent",
+      "say": "The percent change is [[percent]]%."
+    },
+    {
+      "fact": "original",
+      "say": "The original amount is [[original]]."
+    },
+    {
+      "fact": "change",
+      "say": "The amount of change is [[change]]."
+    }
+  ],
+  "answer": "The requested value is [[answer]]."
+}

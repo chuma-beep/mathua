@@ -1018,5 +1018,244 @@
       "streak": 10,
       "avg_time_seconds": 25
     }
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 15.0
+    },
+    "id": "geo.triangle.altitude",
+    "label": "Altitudes of a triangle",
+    "subdomain": "geometry.triangles",
+    "prerequisites": [
+      "geo.triangle.area"
+    ]
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "numeric",
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    },
+    "id": "geo.circle.power_point",
+    "label": "Power of a point",
+    "subdomain": "geometry.circles",
+    "prerequisites": [
+      "geo.circle.chord_segments"
+    ]
+  },
+  {
+    "domain": "geometry",
+    "grading_type": "tuple",
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    },
+    "id": "geo.coord.section",
+    "label": "The section formula",
+    "subdomain": "geometry.coordinate",
+    "prerequisites": [
+      "geo.coord.midpoint"
+    ]
+  },
+  {
+    "id": "geo.triangle.orthocenter",
+    "label": "The orthocenter",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.altitude"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "geo.triangle.circumcenter",
+    "label": "The circumcenter",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.perpendicular_bisector"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "geo.triangle.incenter",
+    "label": "The incenter",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.angle_bisector"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "geo.triangle.cevian",
+    "label": "Ceva's theorem",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.median_centroid"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "geo.triangle.apollonius",
+    "label": "Apollonius's theorem",
+    "domain": "geometry",
+    "subdomain": "geometry.triangles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.median_centroid"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "geo.circle.sagitta",
+    "label": "Sagitta and chord height",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.circle.chord"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "geo.circle.radical_axis",
+    "label": "The radical axis",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.circle.power_point"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "geo.polygon.diagonal_count",
+    "label": "Counting polygon diagonals",
+    "domain": "geometry",
+    "subdomain": "geometry.polygons",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.polygon.interior_angles"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "geo.polygon.tessellation",
+    "label": "Tessellations and angle sums",
+    "domain": "geometry",
+    "subdomain": "geometry.polygons",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.polygon.interior_angles"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "geo.coord.sphere_equation",
+    "label": "Equations of spheres",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.coord.distance_3d"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "geo.transform.composition",
+    "label": "Composition of transformations",
+    "domain": "geometry",
+    "subdomain": "geometry.transform",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.transform.translation",
+      "geo.transform.rotation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "geo.transform.isometry",
+    "label": "Isometries and their invariants",
+    "domain": "geometry",
+    "subdomain": "geometry.transform",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.transform.reflection"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "geo.solid.hemisphere",
+    "label": "Hemispheres",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.solid.sphere"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "geo.solid.density",
+    "label": "Density and volume",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.solid.volume_rect"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
   }
 ]

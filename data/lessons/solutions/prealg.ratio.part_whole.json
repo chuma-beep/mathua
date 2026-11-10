@@ -1,0 +1,19 @@
+{
+  "concept": "prealg.ratio.part_whole",
+  "setup": "The part-to-whole ratio is [[ratio_part]]:[[ratio_whole]], with scale factor [[scale]].",
+  "steps": [
+    {
+      "fact": "ratio_part",
+      "say": "The part is [[ratio_part]] ratio parts."
+    },
+    {
+      "fact": "ratio_whole",
+      "say": "The whole is [[ratio_whole]] ratio parts."
+    },
+    {
+      "fact": "scale",
+      "say": "The scale factor is [[scale]], so the part is [[part]] and the whole is [[whole]]."
+    }
+  ],
+  "answer": "The requested value is [[answer]]."
+}

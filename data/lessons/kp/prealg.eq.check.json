@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Substituting both sides",
+    "section": "Substituting both sides",
+    "subgoals": [
+      "Identify the given information for substituting both sides.",
+      "Apply the relationship in substituting both sides.",
+      "Check the result against the original equation check problem."
+    ]
+  },
+  {
+    "label": "Reading the difference",
+    "section": "Reading the difference",
+    "subgoals": [
+      "Identify the given information for reading the difference.",
+      "Apply the relationship in reading the difference.",
+      "Check the result against the original equation check problem."
+    ]
+  },
+  {
+    "label": "Solving and checking",
+    "section": "Solving and checking",
+    "subgoals": [
+      "Identify the given information for solving and checking.",
+      "Apply the relationship in solving and checking.",
+      "Check the result against the original equation check problem."
+    ]
+  }
+]

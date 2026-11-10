@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Directed cycles",
+    "section": "Directed cycles",
+    "subgoals": [
+      "Identify the given information for directed cycles.",
+      "Apply the relationship in directed cycles.",
+      "Check the result against the original feedback arc set problem."
+    ]
+  },
+  {
+    "label": "Removing arcs",
+    "section": "Removing arcs",
+    "subgoals": [
+      "Identify the given information for removing arcs.",
+      "Apply the relationship in removing arcs.",
+      "Check the result against the original feedback arc set problem."
+    ]
+  },
+  {
+    "label": "Acyclic remainder",
+    "section": "Acyclic remainder",
+    "subgoals": [
+      "Identify the given information for acyclic remainder.",
+      "Apply the relationship in acyclic remainder.",
+      "Check the result against the original feedback arc set problem."
+    ]
+  }
+]

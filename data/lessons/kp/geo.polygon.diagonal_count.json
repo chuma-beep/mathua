@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Counting diagonals",
+    "section": "Counting diagonals",
+    "subgoals": [
+      "Identify the given information for counting diagonals.",
+      "Apply the relationship in counting diagonals.",
+      "Check the result against the original polygon diagonal problem."
+    ]
+  },
+  {
+    "label": "Recovering the side count",
+    "section": "Recovering the side count",
+    "subgoals": [
+      "Identify the given information for recovering the side count.",
+      "Apply the relationship in recovering the side count.",
+      "Check the result against the original polygon diagonal problem."
+    ]
+  },
+  {
+    "label": "All segments",
+    "section": "All segments",
+    "subgoals": [
+      "Identify the given information for all segments.",
+      "Apply the relationship in all segments.",
+      "Check the result against the original polygon diagonal problem."
+    ]
+  }
+]

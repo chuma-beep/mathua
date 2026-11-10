@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Altitude from area",
+    "section": "Altitude from area",
+    "subgoals": [
+      "State the area formula A = bh/2.",
+      "Rearrange it to h = 2A/b.",
+      "Substitute the area and base to find the altitude."
+    ]
+  },
+  {
+    "label": "Area from an altitude",
+    "section": "Area from an altitude",
+    "subgoals": [
+      "Multiply the base by the altitude.",
+      "Divide the product by 2.",
+      "Report the area in square units."
+    ]
+  },
+  {
+    "label": "Altitudes outside the triangle",
+    "section": "Altitudes outside the triangle",
+    "subgoals": [
+      "Identify an obtuse triangle and the altitude that falls outside.",
+      "Add the overhang to the base length.",
+      "Sketch the extension to avoid treating an outside segment as inside."
+    ]
+  }
+]
