@@ -11,6 +11,7 @@ import (
 	"io"
 	"log"
 	"math"
+	"net"
 	"net/http"
 	"net/url"
 	"os"
@@ -5367,6 +5368,43 @@ func (s *Server) handleGoogleOneTap(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, authRes{Token: token, StudentID: st.ID, Name: st.Name, DiagnosticCompleted: st.DiagnosticCompleted})
 }
 
+// canonicalGoogleLoginURL returns a same-login redirect on the host in
+// GOOGLE_REDIRECT_URL when the request arrived on another host. The OAuth
+// state cookie is host-only, so starting on www.mathua.com and finishing on
+// mathua.com otherwise fails the state check.
+func canonicalGoogleLoginURL(r *http.Request, redirectURL string) string {
+	target, err := url.Parse(strings.TrimSpace(redirectURL))
+	if err != nil || target.Host == "" {
+		return ""
+	}
+	// A proxy that already canonicalized the browser must not be redirected
+	// again; this also prevents a loop when the proxy forwards the destination
+	// Host but not X-Forwarded-Host.
+	if r.URL.Query().Get("canonical") == "1" {
+		return ""
+	}
+	host := r.Header.Get("X-Forwarded-Host")
+	if host == "" {
+		host = r.Host
+	}
+	if i := strings.Index(host, ","); i >= 0 {
+		host = host[:i]
+	}
+	host = strings.TrimSpace(host)
+	if h, _, err := net.SplitHostPort(host); err == nil {
+		host = h
+	}
+	if host == "" || strings.EqualFold(host, target.Hostname()) {
+		return ""
+	}
+	q := r.URL.Query()
+	q.Set("canonical", "1")
+	target.Path = "/api/auth/google/login"
+	target.RawQuery = q.Encode()
+	target.Fragment = ""
+	return target.String()
+}
+
 // GET /api/auth/google/login, redirect to Google OAuth consent
 func (s *Server) handleGoogleLogin(w http.ResponseWriter, r *http.Request) {
 	if s.auth == nil {
@@ -5390,6 +5428,15 @@ func (s *Server) handleGoogleLogin(w http.ResponseWriter, r *http.Request) {
 			scheme = "http"
 		}
 		redirectURL = fmt.Sprintf("%s://%s/api/auth/google/callback", scheme, r.Host)
+	}
+	// The OAuth state cookie is host-only. If the login starts on www.mathua.com
+	// or mathua.fly.dev but the registered callback is mathua.com, the callback
+	// arrives on a different host and cannot see the cookie. Move the browser to
+	// the canonical host before setting the cookie. canonical=1 breaks the loop
+	// when a proxy forwards the request with the destination Host.
+	if canonical := canonicalGoogleLoginURL(r, redirectURL); canonical != "" {
+		http.Redirect(w, r, canonical, http.StatusFound)
+		return
 	}
 	// CSRF state
 	state := newUUID()
