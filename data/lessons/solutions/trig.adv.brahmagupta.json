@@ -1,0 +1,19 @@
+{
+  "concept": "trig.adv.brahmagupta",
+  "setup": "This instance for Brahmagupta's formula publishes [[a]], [[b]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Read [[a]] from the generated instance."
+    },
+    {
+      "fact": "b",
+      "say": "Read [[b]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the relation for Brahmagupta's formula. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

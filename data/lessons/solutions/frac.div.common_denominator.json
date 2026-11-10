@@ -1,0 +1,19 @@
+{
+  "concept": "frac.div.common_denominator",
+  "setup": "Divide [[a]]/[[c]] by [[b]]/[[c]]; the common denominator cancels, leaving [[a]]/[[b]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The first numerator is [[a]]."
+    },
+    {
+      "fact": "b",
+      "say": "The second numerator is [[b]]."
+    },
+    {
+      "fact": "gcd",
+      "say": "The greatest common divisor of [[a]] and [[b]] is [[gcd]], so the simplified numerator and denominator are [[a]]/[[gcd]] and [[b]]/[[gcd]]."
+    }
+  ],
+  "answer": "The requested integer is [[answer]]."
+}

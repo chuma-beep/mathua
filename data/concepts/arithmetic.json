@@ -1035,5 +1035,259 @@
       "streak": 10,
       "avg_time_seconds": 22.0
     }
+  },
+  {
+    "id": "arith.place.binary",
+    "label": "Binary place value",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.place_value",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.place.tens"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "arith.ops.making_ten",
+    "label": "Making ten",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.addition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.single"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "arith.mult.partial_products",
+    "label": "Partial products",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.multiplication",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.mult.two_by_two"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "arith.place.base_five",
+    "label": "Base-five place value",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.place_value",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.place.tens"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "arith.place.roman",
+    "label": "Roman numerals",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.place_value",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.place.tens"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "arith.place.tally",
+    "label": "Tally marks and unary counting",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.place_value",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.single"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "arith.ops.doubling_halving",
+    "label": "Doubling and halving",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.multiplication",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.mult.tables"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "arith.ops.compensation",
+    "label": "Compensation in addition and subtraction",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.addition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.double"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "arith.ops.near_doubles",
+    "label": "Near doubles",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.addition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.single"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "arith.div.partial_quotients",
+    "label": "Partial quotients",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.division",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.div.long"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "arith.mult.area_model",
+    "label": "The area model of multiplication",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.multiplication",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.mult.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "arith.mult.lattice",
+    "label": "Lattice multiplication",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.multiplication",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.mult.two_by_two"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "arith.factor.square_numbers",
+    "label": "Square numbers",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.factors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.mult.tables"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "arith.factor.triangular_numbers",
+    "label": "Triangular numbers",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.factors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.add.double"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "arith.ops.factorial_notation",
+    "label": "Factorial notation",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.exponents",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.mult.tables"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "arith.factor.gcf_lcm_word",
+    "label": "GCF and LCM word problems",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.factors",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.factor.gcf",
+      "arith.factor.lcm"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "arith.time.elapsed",
+    "label": "Elapsed time",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.word_problems",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.sub.double"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "arith.money.change",
+    "label": "Making change",
+    "domain": "arithmetic",
+    "subdomain": "arithmetic.word_problems",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "arith.sub.double",
+      "arith.dec.intro"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
   }
 ]

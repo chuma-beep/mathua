@@ -1,0 +1,19 @@
+{
+  "concept": "arith.ops.compensation",
+  "setup": "This instance for Compensation in addition and subtraction publishes [[a]], [[delta]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Read [[a]] from the generated instance."
+    },
+    {
+      "fact": "delta",
+      "say": "Read [[delta]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the relation for Compensation in addition and subtraction. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

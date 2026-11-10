@@ -1,0 +1,19 @@
+{
+  "concept": "arith.place.binary",
+  "setup": "Read the binary numeral [[binary]] by expanding each 1 over its power of two.",
+  "steps": [
+    {
+      "fact": "binary",
+      "say": "The binary numeral is [[binary]]."
+    },
+    {
+      "fact": "n",
+      "say": "Its decimal value is [[n]]."
+    },
+    {
+      "fact": "n",
+      "say": "The same numeral also determines the highest power of two and the number of 1 bits."
+    }
+  ],
+  "answer": "The requested integer is [[answer]]."
+}

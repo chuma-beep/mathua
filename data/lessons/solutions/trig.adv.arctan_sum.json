@@ -1,0 +1,19 @@
+{
+  "concept": "trig.adv.arctan_sum",
+  "setup": "For arctan a + arctan b, the tangent addition formula has numerator a + b and denominator 1 - ab.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The first argument is [[a]]."
+    },
+    {
+      "fact": "b",
+      "say": "The second argument is [[b]]."
+    },
+    {
+      "fact": "b",
+      "say": "The sign of the correction depends on whether ab is less than 1."
+    }
+  ],
+  "answer": "The requested integer is [[answer]]."
+}

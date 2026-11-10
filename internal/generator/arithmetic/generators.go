@@ -73,6 +73,8 @@ func Register(reg *generator.Registry) {
 	reg.Register("arith.dec.intro", &decIntroGen{})
 
 	registerBatch(reg)
+	registerWave8(reg)
+	registerWave8Remaining(reg)
 }
 
 type addGen struct {

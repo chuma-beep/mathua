@@ -1,0 +1,19 @@
+{
+  "concept": "trig.spherical.law_sines",
+  "setup": "This instance for The spherical law of sines publishes [[sin_a_num]], [[sin_a_den]].",
+  "steps": [
+    {
+      "fact": "sin_a_num",
+      "say": "Read [[sin_a_num]] from the generated instance."
+    },
+    {
+      "fact": "sin_a_den",
+      "say": "Read [[sin_a_den]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the relation for The spherical law of sines. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

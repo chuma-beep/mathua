@@ -1,0 +1,19 @@
+{
+  "concept": "arith.mult.area_model",
+  "setup": "This instance for The area model of multiplication publishes [[a]], [[b]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Read [[a]] from the generated instance."
+    },
+    {
+      "fact": "b",
+      "say": "Read [[b]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the relation for The area model of multiplication. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

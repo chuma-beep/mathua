@@ -1,0 +1,19 @@
+{
+  "concept": "arith.ops.making_ten",
+  "setup": "Use a make-ten strategy with addends [[a]] and [[b]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The first addend is [[a]], so the complement to ten is 10 - [[a]]."
+    },
+    {
+      "fact": "b",
+      "say": "The second addend is [[b]]."
+    },
+    {
+      "fact": "a",
+      "say": "Add the complement and the remaining part to finish the calculation."
+    }
+  ],
+  "answer": "The requested integer is [[answer]]."
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The tangent addition formula",
+    "section": "The tangent addition formula",
+    "subgoals": [
+      "State the relation for the arctangent addition formula",
+      "Identify the quantities in the the tangent addition formula step",
+      "Carry out the the tangent addition formula computation"
+    ]
+  },
+  {
+    "label": "The denominator and the quadrant",
+    "section": "The denominator and the quadrant",
+    "subgoals": [
+      "State the relation for the arctangent addition formula",
+      "Identify the quantities in the the denominator and the quadrant step",
+      "Carry out the the denominator and the quadrant computation"
+    ]
+  },
+  {
+    "label": "When the correction is needed",
+    "section": "When the correction is needed",
+    "subgoals": [
+      "State the relation for the arctangent addition formula",
+      "Identify the quantities in the when the correction is needed step",
+      "Carry out the when the correction is needed computation"
+    ]
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "concept": "trig.spherical.haversine",
+  "setup": "This instance for The haversine formula publishes [[angle]], [[four_hav]].",
+  "steps": [
+    {
+      "fact": "angle",
+      "say": "Read [[angle]] from the generated instance."
+    },
+    {
+      "fact": "four_hav",
+      "say": "Read [[four_hav]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the relation for The haversine formula. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

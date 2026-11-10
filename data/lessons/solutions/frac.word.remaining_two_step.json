@@ -1,0 +1,19 @@
+{
+  "concept": "frac.word.remaining_two_step",
+  "setup": "This instance for Two-step fraction remaining problems publishes [[n]], [[num1]].",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "Read [[n]] from the generated instance."
+    },
+    {
+      "fact": "num1",
+      "say": "Read [[num1]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the relation for Two-step fraction remaining problems. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

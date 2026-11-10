@@ -1,0 +1,19 @@
+{
+  "concept": "trig.spherical.law_cosines",
+  "setup": "This instance for The spherical law of cosines publishes [[cos_a_num]], [[cos_a_den]].",
+  "steps": [
+    {
+      "fact": "cos_a_num",
+      "say": "Read [[cos_a_num]] from the generated instance."
+    },
+    {
+      "fact": "cos_a_den",
+      "say": "Read [[cos_a_den]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the relation for The spherical law of cosines. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

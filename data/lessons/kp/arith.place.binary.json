@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Powers of two as places",
+    "section": "Powers of two as places",
+    "subgoals": [
+      "State the relation for binary place value",
+      "Identify the quantities in the powers of two as places step",
+      "Carry out the powers of two as places computation"
+    ]
+  },
+  {
+    "label": "Converting a numeral",
+    "section": "Converting a numeral",
+    "subgoals": [
+      "State the relation for binary place value",
+      "Identify the quantities in the converting a numeral step",
+      "Carry out the converting a numeral computation"
+    ]
+  },
+  {
+    "label": "Counting one bits",
+    "section": "Counting one bits",
+    "subgoals": [
+      "State the relation for binary place value",
+      "Identify the quantities in the counting one bits step",
+      "Carry out the counting one bits computation"
+    ]
+  }
+]

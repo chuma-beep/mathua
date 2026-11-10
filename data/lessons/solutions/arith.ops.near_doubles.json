@@ -1,0 +1,15 @@
+{
+  "concept": "arith.ops.near_doubles",
+  "setup": "This instance for Near doubles publishes [[a]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Read [[a]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the relation for Near doubles. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

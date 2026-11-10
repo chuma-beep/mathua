@@ -1229,5 +1229,299 @@
       "streak": 10,
       "avg_time_seconds": 24
     }
+  },
+  {
+    "id": "trig.basics.versine",
+    "label": "Versine and coversine",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.basics.sin_cos_def"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "trig.adv.chebyshev",
+    "label": "Chebyshev polynomials of the first kind",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.ident.double_angle",
+      "trig.ident.triple_angle"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "trig.adv.harmonic_addition",
+    "label": "Combining sine and cosine into one wave",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.ident.sum_diff",
+      "trig.graph.period"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "trig.adv.arctan_sum",
+    "label": "The arctangent addition formula",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.adv.arctan",
+      "trig.ident.sum_diff"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "trig.ident.law_tangents",
+    "label": "The law of tangents",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.identities",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.adv.law_sines",
+      "trig.adv.law_cosines"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "trig.ident.mollweide",
+    "label": "Mollweide's formulas",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.identities",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.adv.law_sines",
+      "trig.adv.law_cosines"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "trig.adv.half_side",
+    "label": "The half-side formulas",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.adv.law_sines",
+      "trig.adv.law_cosines"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "trig.adv.napier",
+    "label": "Napier's analogies",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.adv.law_sines",
+      "trig.adv.law_cosines"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "trig.spherical.law_sines",
+    "label": "The spherical law of sines",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.spherical",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.adv.law_sines"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "trig.spherical.law_cosines",
+    "label": "The spherical law of cosines",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.spherical",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.adv.law_cosines"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "trig.spherical.excess",
+    "label": "Spherical excess and area",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.spherical",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.spherical.law_cosines"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "trig.spherical.haversine",
+    "label": "The haversine formula",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.spherical",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.spherical.law_cosines",
+      "trig.basics.radians"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "trig.basics.exsecant",
+    "label": "Exsecant and excosecant",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.basics",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.basics.reciprocal"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "trig.adv.gudermannian",
+    "label": "The Gudermannian function",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.hyperbolic.tanh_coth",
+      "trig.adv.arctan"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "trig.adv.weierstrass",
+    "label": "Tangent half-angle substitution",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.ident.half_angle",
+      "trig.ident.sum_diff"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "trig.adv.chebyshev_second",
+    "label": "Chebyshev polynomials of the second kind",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.adv.chebyshev",
+      "trig.ident.sum_to_product"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "trig.adv.ptolemy",
+    "label": "Ptolemy's theorem",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.adv.law_cosines",
+      "trig.ident.sum_diff"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "trig.adv.brahmagupta",
+    "label": "Brahmagupta's formula",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.adv.heron_area",
+      "trig.adv.ptolemy"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "trig.adv.machin",
+    "label": "Machin's formula",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.adv.arctan_sum"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "trig.adv.phasor",
+    "label": "Phasors and phase angle",
+    "domain": "trigonometry",
+    "subdomain": "trigonometry.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "trig.adv.harmonic_addition",
+      "trig.graph.phase_shift"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
   }
 ]

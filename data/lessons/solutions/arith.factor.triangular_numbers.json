@@ -1,0 +1,15 @@
+{
+  "concept": "arith.factor.triangular_numbers",
+  "setup": "This instance for Triangular numbers publishes [[n]].",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "Read [[n]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the relation for Triangular numbers. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

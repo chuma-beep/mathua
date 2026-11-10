@@ -1,0 +1,19 @@
+{
+  "concept": "trig.adv.chebyshev",
+  "setup": "The Chebyshev polynomial T_n is defined by T_0 = 1, T_1 = x and T_{n+1} = 2xT_n - T_{n-1}.",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "The index is [[n]], so apply the recurrence up to that index."
+    },
+    {
+      "fact": "x",
+      "say": "The evaluation point is [[x]]."
+    },
+    {
+      "fact": "n",
+      "say": "Use the recurrence or the closed form to obtain the requested coefficient or value."
+    }
+  ],
+  "answer": "The requested integer is [[answer]]."
+}

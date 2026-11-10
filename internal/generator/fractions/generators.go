@@ -47,6 +47,8 @@ func Register(reg *generator.Registry) {
 	reg.Register("frac.word.multi_step", &fracBridgeGen{kind: "word_multi_step"})
 	reg.Register("frac.div.by_whole", &fracBridgeGen{kind: "div_by_whole"})
 	reg.Register("frac.compare.forms", &fracBridgeGen{kind: "compare_forms"})
+	registerWave8(reg)
+	registerWave8Remaining(reg)
 }
 
 func fracStr(num, den int) string { return fmt.Sprintf("%d/%d", num, den) }

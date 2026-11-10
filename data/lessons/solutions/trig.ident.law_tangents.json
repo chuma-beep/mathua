@@ -1,0 +1,19 @@
+{
+  "concept": "trig.ident.law_tangents",
+  "setup": "This instance for The law of tangents publishes [[a]], [[b]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Read [[a]] from the generated instance."
+    },
+    {
+      "fact": "b",
+      "say": "Read [[b]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the relation for The law of tangents. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

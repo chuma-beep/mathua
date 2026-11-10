@@ -1,0 +1,19 @@
+{
+  "concept": "arith.mult.lattice",
+  "setup": "This instance for Lattice multiplication publishes [[a]], [[b]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Read [[a]] from the generated instance."
+    },
+    {
+      "fact": "b",
+      "say": "Read [[b]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the relation for Lattice multiplication. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The complement to ten",
+    "section": "The complement to ten",
+    "subgoals": [
+      "State the relation for making ten",
+      "Identify the quantities in the the complement to ten step",
+      "Carry out the the complement to ten computation"
+    ]
+  },
+  {
+    "label": "Adding across ten",
+    "section": "Adding across ten",
+    "subgoals": [
+      "State the relation for making ten",
+      "Identify the quantities in the adding across ten step",
+      "Carry out the adding across ten computation"
+    ]
+  },
+  {
+    "label": "The amount above ten",
+    "section": "The amount above ten",
+    "subgoals": [
+      "State the relation for making ten",
+      "Identify the quantities in the the amount above ten step",
+      "Carry out the the amount above ten computation"
+    ]
+  }
+]

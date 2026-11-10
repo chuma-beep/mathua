@@ -1,0 +1,15 @@
+{
+  "concept": "arith.factor.square_numbers",
+  "setup": "This instance for Square numbers publishes [[n]].",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "Read [[n]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the relation for Square numbers. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

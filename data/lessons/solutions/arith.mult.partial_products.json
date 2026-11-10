@@ -1,0 +1,19 @@
+{
+  "concept": "arith.mult.partial_products",
+  "setup": "Split both factors into tens and ones. The first factor is [[a]] = 10[[t]] + [[u]] and the second is [[b]] = 10[[v]] + [[w]].",
+  "steps": [
+    {
+      "fact": "t",
+      "say": "The tens digit of the first factor is [[t]]."
+    },
+    {
+      "fact": "u",
+      "say": "The ones digit of the first factor is [[u]]."
+    },
+    {
+      "fact": "b",
+      "say": "Multiply each part of the first factor by [[b]] and add the partial products."
+    }
+  ],
+  "answer": "The requested integer is [[answer]]."
+}

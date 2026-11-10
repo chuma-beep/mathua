@@ -1,0 +1,19 @@
+{
+  "concept": "arith.place.base_five",
+  "setup": "This instance for Base-five place value publishes [[n]], [[numeral]].",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "Read [[n]] from the generated instance."
+    },
+    {
+      "fact": "numeral",
+      "say": "Read [[numeral]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the relation for Base-five place value. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The same-numerator rule",
+    "section": "The same-numerator rule",
+    "subgoals": [
+      "State the relation for comparing fractions with the same numerator",
+      "Identify the quantities in the the same-numerator rule step",
+      "Carry out the the same-numerator rule computation"
+    ]
+  },
+  {
+    "label": "The larger denominator",
+    "section": "The larger denominator",
+    "subgoals": [
+      "State the relation for comparing fractions with the same numerator",
+      "Identify the quantities in the the larger denominator step",
+      "Carry out the the larger denominator computation"
+    ]
+  },
+  {
+    "label": "Comparing with one",
+    "section": "Comparing with one",
+    "subgoals": [
+      "State the relation for comparing fractions with the same numerator",
+      "Identify the quantities in the comparing with one step",
+      "Carry out the comparing with one computation"
+    ]
+  }
+]

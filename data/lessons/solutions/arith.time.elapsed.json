@@ -1,0 +1,19 @@
+{
+  "concept": "arith.time.elapsed",
+  "setup": "This instance for Elapsed time publishes [[start]], [[duration]].",
+  "steps": [
+    {
+      "fact": "start",
+      "say": "Read [[start]] from the generated instance."
+    },
+    {
+      "fact": "duration",
+      "say": "Read [[duration]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the relation for Elapsed time. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

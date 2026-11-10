@@ -1,0 +1,19 @@
+{
+  "concept": "arith.div.partial_quotients",
+  "setup": "This instance for Partial quotients publishes [[dividend]], [[divisor]].",
+  "steps": [
+    {
+      "fact": "dividend",
+      "say": "Read [[dividend]] from the generated instance."
+    },
+    {
+      "fact": "divisor",
+      "say": "Read [[divisor]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the relation for Partial quotients. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

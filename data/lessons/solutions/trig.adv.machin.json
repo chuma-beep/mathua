@@ -1,0 +1,19 @@
+{
+  "concept": "trig.adv.machin",
+  "setup": "This instance for Machin's formula publishes [[k]], [[a]].",
+  "steps": [
+    {
+      "fact": "k",
+      "say": "Read [[k]] from the generated instance."
+    },
+    {
+      "fact": "a",
+      "say": "Read [[a]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the relation for Machin's formula. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

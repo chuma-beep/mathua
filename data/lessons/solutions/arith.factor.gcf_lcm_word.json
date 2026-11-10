@@ -1,0 +1,19 @@
+{
+  "concept": "arith.factor.gcf_lcm_word",
+  "setup": "This instance for GCF and LCM word problems publishes [[a]], [[b]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Read [[a]] from the generated instance."
+    },
+    {
+      "fact": "b",
+      "say": "Read [[b]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the relation for GCF and LCM word problems. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

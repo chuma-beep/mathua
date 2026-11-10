@@ -1,0 +1,19 @@
+{
+  "concept": "trig.spherical.excess",
+  "setup": "This instance for Spherical excess and area publishes [[A]], [[B]].",
+  "steps": [
+    {
+      "fact": "A",
+      "say": "Read [[A]] from the generated instance."
+    },
+    {
+      "fact": "B",
+      "say": "Read [[B]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the relation for Spherical excess and area. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

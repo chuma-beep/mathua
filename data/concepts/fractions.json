@@ -751,5 +751,176 @@
       "streak": 10,
       "avg_time_seconds": 22.0
     }
+  },
+  {
+    "id": "frac.basics.set",
+    "label": "A fraction of a set",
+    "domain": "fractions",
+    "subdomain": "fractions.concept",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.of_number"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "frac.compare.same_numerator",
+    "label": "Comparing fractions with the same numerator",
+    "domain": "fractions",
+    "subdomain": "fractions.equivalence",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.ops.compare"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "frac.div.common_denominator",
+    "label": "Dividing fractions with a common denominator",
+    "domain": "fractions",
+    "subdomain": "fractions.division",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.ops.div"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "frac.basics.improper_number_line",
+    "label": "Improper fractions on the number line",
+    "domain": "fractions",
+    "subdomain": "fractions.concept",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.basics.number_line",
+      "frac.mixed.convert"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "frac.order.three",
+    "label": "Ordering three fractions",
+    "domain": "fractions",
+    "subdomain": "fractions.equivalence",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.ops.compare"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "frac.add.number_line",
+    "label": "Adding fractions on the number line",
+    "domain": "fractions",
+    "subdomain": "fractions.addition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.add.diff"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "frac.sub.number_line",
+    "label": "Subtracting fractions on the number line",
+    "domain": "fractions",
+    "subdomain": "fractions.subtraction",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.sub.diff"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "frac.mult.area_model",
+    "label": "Multiplying fractions with an area model",
+    "domain": "fractions",
+    "subdomain": "fractions.multiplication",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.ops.mult"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "frac.div.missing_factor",
+    "label": "Division as a missing factor",
+    "domain": "fractions",
+    "subdomain": "fractions.division",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.ops.div"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "frac.mixed.to_decimal",
+    "label": "Mixed numbers as decimals",
+    "domain": "fractions",
+    "subdomain": "fractions.mixed",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.ops.to_decimal",
+      "frac.mixed.convert"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "frac.percent.convert",
+    "label": "Fractions and percentages",
+    "domain": "fractions",
+    "subdomain": "fractions.equivalence",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.ops.to_decimal"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "frac.word.remaining_two_step",
+    "label": "Two-step fraction remaining problems",
+    "domain": "fractions",
+    "subdomain": "fractions.concept",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "frac.remaining",
+      "frac.word.multi_step"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
   }
 ]

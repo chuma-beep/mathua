@@ -1,0 +1,15 @@
+{
+  "concept": "arith.ops.factorial_notation",
+  "setup": "This instance for Factorial notation publishes [[n]].",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "Read [[n]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the relation for Factorial notation. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

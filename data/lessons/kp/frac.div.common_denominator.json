@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The common denominator cancels",
+    "section": "The common denominator cancels",
+    "subgoals": [
+      "State the relation for dividing fractions with a common denominator",
+      "Identify the quantities in the the common denominator cancels step",
+      "Carry out the the common denominator cancels computation"
+    ]
+  },
+  {
+    "label": "Simplifying the quotient",
+    "section": "Simplifying the quotient",
+    "subgoals": [
+      "State the relation for dividing fractions with a common denominator",
+      "Identify the quantities in the simplifying the quotient step",
+      "Carry out the simplifying the quotient computation"
+    ]
+  },
+  {
+    "label": "The missing factor",
+    "section": "The missing factor",
+    "subgoals": [
+      "State the relation for dividing fractions with a common denominator",
+      "Identify the quantities in the the missing factor step",
+      "Carry out the the missing factor computation"
+    ]
+  }
+]

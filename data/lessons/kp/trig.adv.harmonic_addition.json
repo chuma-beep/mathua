@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The amplitude",
+    "section": "The amplitude",
+    "subgoals": [
+      "State the relation for combining sine and cosine into one wave",
+      "Identify the quantities in the the amplitude step",
+      "Carry out the the amplitude computation"
+    ]
+  },
+  {
+    "label": "The phase relation",
+    "section": "The phase relation",
+    "subgoals": [
+      "State the relation for combining sine and cosine into one wave",
+      "Identify the quantities in the the phase relation step",
+      "Carry out the the phase relation computation"
+    ]
+  },
+  {
+    "label": "Evaluating the combined wave",
+    "section": "Evaluating the combined wave",
+    "subgoals": [
+      "State the relation for combining sine and cosine into one wave",
+      "Identify the quantities in the evaluating the combined wave step",
+      "Carry out the evaluating the combined wave computation"
+    ]
+  }
+]

@@ -5,8 +5,8 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 1850,
-  "unit_count": 141,
+  "concept_count": 1900,
+  "unit_count": 142,
   "units": [
     {
       "id": "abstract_algebra.b6",
@@ -475,6 +475,7 @@
       "depth_max": 2,
       "subdomains": [
         "arithmetic.addition",
+        "arithmetic.factors",
         "arithmetic.negatives",
         "arithmetic.place_value",
         "arithmetic.subtraction"
@@ -484,12 +485,17 @@
         "arith.add.double",
         "arith.add.single",
         "arith.add.word",
+        "arith.factor.triangular_numbers",
         "arith.neg.number_line",
+        "arith.ops.compensation",
+        "arith.ops.making_ten",
+        "arith.ops.near_doubles",
+        "arith.place.tally",
         "arith.place.tens",
         "arith.sub.double",
         "arith.sub.single"
       ],
-      "concept_count": 8
+      "concept_count": 13
     },
     {
       "id": "arithmetic.b1",
@@ -505,7 +511,8 @@
         "arithmetic.multiplication",
         "arithmetic.negatives",
         "arithmetic.place_value",
-        "arithmetic.subtraction"
+        "arithmetic.subtraction",
+        "arithmetic.word_problems"
       ],
       "concept_ids": [
         "arith.add.missing_addend",
@@ -514,20 +521,25 @@
         "arith.div.concept",
         "arith.estimate.sum",
         "arith.mult.2_5_10",
+        "arith.mult.area_model",
         "arith.mult.concept",
         "arith.neg.add_sub",
         "arith.neg.word",
+        "arith.place.base_five",
+        "arith.place.binary",
         "arith.place.expanded",
         "arith.place.hundreds",
+        "arith.place.roman",
         "arith.place.thousands",
         "arith.round.hundreds",
         "arith.round.tens",
         "arith.round.thousands",
         "arith.sub.borrow",
         "arith.sub.word",
-        "arith.sub.zeros"
+        "arith.sub.zeros",
+        "arith.time.elapsed"
       ],
-      "concept_count": 18
+      "concept_count": 23
     },
     {
       "id": "arithmetic.b2",
@@ -560,6 +572,7 @@
         "arith.factor.find",
         "arith.factor.multiple",
         "arith.factor.prime",
+        "arith.factor.square_numbers",
         "arith.mult.double",
         "arith.mult.tables",
         "arith.mult.triple",
@@ -567,12 +580,14 @@
         "arith.mult.word",
         "arith.neg.compare",
         "arith.neg.mult_div",
+        "arith.ops.doubling_halving",
         "arith.ops.fact_families",
+        "arith.ops.factorial_notation",
         "arith.order_ops.basic",
         "arith.place.millions",
         "arith.place.powers_ten"
       ],
-      "concept_count": 23
+      "concept_count": 26
     },
     {
       "id": "arithmetic.b3",
@@ -586,12 +601,14 @@
         "arithmetic.estimation",
         "arithmetic.exponents",
         "arithmetic.factors",
+        "arithmetic.multiplication",
         "arithmetic.order_of_operations",
         "arithmetic.word_problems"
       ],
       "concept_ids": [
         "arith.div.interpret_remainder",
         "arith.div.long",
+        "arith.div.partial_quotients",
         "arith.div.two_digit_divisor",
         "arith.div.word",
         "arith.estimate.quotient",
@@ -606,6 +623,9 @@
         "arith.factor.gcf",
         "arith.factor.lcm",
         "arith.factor.prime_fact",
+        "arith.money.change",
+        "arith.mult.lattice",
+        "arith.mult.partial_products",
         "arith.order_ops.full",
         "arith.order_ops.nested",
         "arith.sqrt.cube",
@@ -614,7 +634,22 @@
         "arith.sqrt.simplify",
         "arith.word.multi_step"
       ],
-      "concept_count": 23
+      "concept_count": 27
+    },
+    {
+      "id": "arithmetic.b4",
+      "title": "Arithmetic · Stage 5",
+      "domain": "arithmetic",
+      "band": 4,
+      "depth_min": 12,
+      "depth_max": 12,
+      "subdomains": [
+        "arithmetic.factors"
+      ],
+      "concept_ids": [
+        "arith.factor.gcf_lcm_word"
+      ],
+      "concept_count": 1
     },
     {
       "id": "calc1.b8",
@@ -1739,11 +1774,16 @@
         "fractions.subtraction"
       ],
       "concept_ids": [
+        "frac.basics.improper_number_line",
+        "frac.basics.set",
         "frac.compare.cross",
         "frac.compare.forms",
+        "frac.compare.same_numerator",
         "frac.compare.word",
         "frac.complex",
         "frac.div.by_whole",
+        "frac.div.common_denominator",
+        "frac.div.missing_factor",
         "frac.div.whole",
         "frac.div.word",
         "frac.equivalent.scale",
@@ -1751,6 +1791,8 @@
         "frac.mixed.convert",
         "frac.mixed.div",
         "frac.mixed.mult",
+        "frac.mixed.to_decimal",
+        "frac.mult.area_model",
         "frac.mult.cancel",
         "frac.mult.whole",
         "frac.mult.word",
@@ -1763,10 +1805,12 @@
         "frac.ops.estimate",
         "frac.ops.simplify",
         "frac.order.half",
+        "frac.order.three",
+        "frac.percent.convert",
         "frac.recipe.scale",
         "frac.sub.same"
       ],
-      "concept_count": 26
+      "concept_count": 35
     },
     {
       "id": "fractions.b4",
@@ -1785,6 +1829,7 @@
       ],
       "concept_ids": [
         "frac.add.diff",
+        "frac.add.number_line",
         "frac.add.three",
         "frac.add.word",
         "frac.lcd",
@@ -1796,12 +1841,13 @@
         "frac.reciprocal",
         "frac.remaining",
         "frac.sub.diff",
+        "frac.sub.number_line",
         "frac.sub.whole",
         "frac.sub.word",
         "frac.unit_decompose",
         "frac.word.multi_step"
       ],
-      "concept_count": 16
+      "concept_count": 18
     },
     {
       "id": "fractions.b5",
@@ -1812,13 +1858,15 @@
       "depth_max": 15,
       "subdomains": [
         "frac.mixed",
+        "fractions.concept",
         "fractions.mixed"
       ],
       "concept_ids": [
         "frac.mixed.borrow",
-        "frac.mixed.word"
+        "frac.mixed.word",
+        "frac.word.remaining_two_step"
       ],
-      "concept_count": 2
+      "concept_count": 3
     },
     {
       "id": "geometry.b0",
@@ -4053,7 +4101,8 @@
         "trigonometry.advanced",
         "trigonometry.basics",
         "trigonometry.hyperbolic",
-        "trigonometry.identities"
+        "trigonometry.identities",
+        "trigonometry.spherical"
       ],
       "concept_ids": [
         "trig.adv.ambiguous_case",
@@ -4065,10 +4114,12 @@
         "trig.adv.vector_magnitude",
         "trig.basics.bearings",
         "trig.basics.elevation_depression",
+        "trig.basics.exsecant",
         "trig.basics.reciprocal",
         "trig.basics.right_triangle",
         "trig.basics.segment_area",
         "trig.basics.tan_def",
+        "trig.basics.versine",
         "trig.eq.basic",
         "trig.eq.homogeneous",
         "trig.eq.linear",
@@ -4077,9 +4128,10 @@
         "trig.hyperbolic.inverse",
         "trig.hyperbolic.sinh_cosh",
         "trig.hyperbolic.tanh_coth",
-        "trig.ineq.basic"
+        "trig.ineq.basic",
+        "trig.spherical.law_sines"
       ],
-      "concept_count": 22
+      "concept_count": 25
     },
     {
       "id": "trigonometry.b5",
@@ -4150,12 +4202,25 @@
         "trigonometry.equations",
         "trigonometry.functions",
         "trigonometry.graphs",
-        "trigonometry.identities"
+        "trigonometry.identities",
+        "trigonometry.spherical"
       ],
       "concept_ids": [
+        "trig.adv.arctan_sum",
+        "trig.adv.brahmagupta",
+        "trig.adv.chebyshev",
+        "trig.adv.chebyshev_second",
+        "trig.adv.gudermannian",
+        "trig.adv.half_side",
+        "trig.adv.harmonic_addition",
         "trig.adv.heron_area",
         "trig.adv.inverse_composition",
         "trig.adv.law_cosines",
+        "trig.adv.machin",
+        "trig.adv.napier",
+        "trig.adv.phasor",
+        "trig.adv.ptolemy",
+        "trig.adv.weierstrass",
         "trig.basics.periodicity",
         "trig.eq.general_solution",
         "trig.eq.multiple_angle",
@@ -4171,11 +4236,16 @@
         "trig.graph.sinusoidal_model",
         "trig.graph.tan",
         "trig.graph.transformations",
+        "trig.ident.law_tangents",
+        "trig.ident.mollweide",
         "trig.ident.product_to_sum",
         "trig.ident.pythagorean_variants",
-        "trig.ident.sum_to_product"
+        "trig.ident.sum_to_product",
+        "trig.spherical.excess",
+        "trig.spherical.haversine",
+        "trig.spherical.law_cosines"
       ],
-      "concept_count": 21
+      "concept_count": 38
     }
   ]
 }

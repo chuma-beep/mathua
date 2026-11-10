@@ -7398,5 +7398,205 @@
 ,  {
     "concept_id": "ml.data.leakage",
     "source": "authored/ml.data.leakage.md"
+  },
+  {
+    "concept_id": "trig.basics.versine",
+    "source": "authored/trig.basics.versine.md"
+  },
+  {
+    "concept_id": "trig.adv.chebyshev",
+    "source": "authored/trig.adv.chebyshev.md"
+  },
+  {
+    "concept_id": "trig.adv.harmonic_addition",
+    "source": "authored/trig.adv.harmonic_addition.md"
+  },
+  {
+    "concept_id": "trig.adv.arctan_sum",
+    "source": "authored/trig.adv.arctan_sum.md"
+  },
+  {
+    "concept_id": "arith.place.binary",
+    "source": "authored/arith.place.binary.md"
+  },
+  {
+    "concept_id": "arith.ops.making_ten",
+    "source": "authored/arith.ops.making_ten.md"
+  },
+  {
+    "concept_id": "arith.mult.partial_products",
+    "source": "authored/arith.mult.partial_products.md"
+  },
+  {
+    "concept_id": "frac.basics.set",
+    "source": "authored/frac.basics.set.md"
+  },
+  {
+    "concept_id": "frac.compare.same_numerator",
+    "source": "authored/frac.compare.same_numerator.md"
+  },
+  {
+    "concept_id": "frac.div.common_denominator",
+    "source": "authored/frac.div.common_denominator.md"
+  },
+  {
+    "concept_id": "trig.ident.law_tangents",
+    "source": "authored/trig.ident.law_tangents.md"
+  },
+  {
+    "concept_id": "trig.ident.mollweide",
+    "source": "authored/trig.ident.mollweide.md"
+  },
+  {
+    "concept_id": "trig.adv.half_side",
+    "source": "authored/trig.adv.half_side.md"
+  },
+  {
+    "concept_id": "trig.adv.napier",
+    "source": "authored/trig.adv.napier.md"
+  },
+  {
+    "concept_id": "trig.spherical.law_sines",
+    "source": "authored/trig.spherical.law_sines.md"
+  },
+  {
+    "concept_id": "trig.spherical.law_cosines",
+    "source": "authored/trig.spherical.law_cosines.md"
+  },
+  {
+    "concept_id": "trig.spherical.excess",
+    "source": "authored/trig.spherical.excess.md"
+  },
+  {
+    "concept_id": "trig.spherical.haversine",
+    "source": "authored/trig.spherical.haversine.md"
+  },
+  {
+    "concept_id": "trig.basics.exsecant",
+    "source": "authored/trig.basics.exsecant.md"
+  },
+  {
+    "concept_id": "trig.adv.gudermannian",
+    "source": "authored/trig.adv.gudermannian.md"
+  },
+  {
+    "concept_id": "trig.adv.weierstrass",
+    "source": "authored/trig.adv.weierstrass.md"
+  },
+  {
+    "concept_id": "trig.adv.chebyshev_second",
+    "source": "authored/trig.adv.chebyshev_second.md"
+  },
+  {
+    "concept_id": "trig.adv.ptolemy",
+    "source": "authored/trig.adv.ptolemy.md"
+  },
+  {
+    "concept_id": "trig.adv.brahmagupta",
+    "source": "authored/trig.adv.brahmagupta.md"
+  },
+  {
+    "concept_id": "trig.adv.machin",
+    "source": "authored/trig.adv.machin.md"
+  },
+  {
+    "concept_id": "trig.adv.phasor",
+    "source": "authored/trig.adv.phasor.md"
+  },
+  {
+    "concept_id": "arith.place.base_five",
+    "source": "authored/arith.place.base_five.md"
+  },
+  {
+    "concept_id": "arith.place.roman",
+    "source": "authored/arith.place.roman.md"
+  },
+  {
+    "concept_id": "arith.place.tally",
+    "source": "authored/arith.place.tally.md"
+  },
+  {
+    "concept_id": "arith.ops.doubling_halving",
+    "source": "authored/arith.ops.doubling_halving.md"
+  },
+  {
+    "concept_id": "arith.ops.compensation",
+    "source": "authored/arith.ops.compensation.md"
+  },
+  {
+    "concept_id": "arith.ops.near_doubles",
+    "source": "authored/arith.ops.near_doubles.md"
+  },
+  {
+    "concept_id": "arith.div.partial_quotients",
+    "source": "authored/arith.div.partial_quotients.md"
+  },
+  {
+    "concept_id": "arith.mult.area_model",
+    "source": "authored/arith.mult.area_model.md"
+  },
+  {
+    "concept_id": "arith.mult.lattice",
+    "source": "authored/arith.mult.lattice.md"
+  },
+  {
+    "concept_id": "arith.factor.square_numbers",
+    "source": "authored/arith.factor.square_numbers.md"
+  },
+  {
+    "concept_id": "arith.factor.triangular_numbers",
+    "source": "authored/arith.factor.triangular_numbers.md"
+  },
+  {
+    "concept_id": "arith.ops.factorial_notation",
+    "source": "authored/arith.ops.factorial_notation.md"
+  },
+  {
+    "concept_id": "arith.factor.gcf_lcm_word",
+    "source": "authored/arith.factor.gcf_lcm_word.md"
+  },
+  {
+    "concept_id": "arith.time.elapsed",
+    "source": "authored/arith.time.elapsed.md"
+  },
+  {
+    "concept_id": "arith.money.change",
+    "source": "authored/arith.money.change.md"
+  },
+  {
+    "concept_id": "frac.basics.improper_number_line",
+    "source": "authored/frac.basics.improper_number_line.md"
+  },
+  {
+    "concept_id": "frac.order.three",
+    "source": "authored/frac.order.three.md"
+  },
+  {
+    "concept_id": "frac.add.number_line",
+    "source": "authored/frac.add.number_line.md"
+  },
+  {
+    "concept_id": "frac.sub.number_line",
+    "source": "authored/frac.sub.number_line.md"
+  },
+  {
+    "concept_id": "frac.mult.area_model",
+    "source": "authored/frac.mult.area_model.md"
+  },
+  {
+    "concept_id": "frac.div.missing_factor",
+    "source": "authored/frac.div.missing_factor.md"
+  },
+  {
+    "concept_id": "frac.mixed.to_decimal",
+    "source": "authored/frac.mixed.to_decimal.md"
+  },
+  {
+    "concept_id": "frac.percent.convert",
+    "source": "authored/frac.percent.convert.md"
+  },
+  {
+    "concept_id": "frac.word.remaining_two_step",
+    "source": "authored/frac.word.remaining_two_step.md"
   }
 ]

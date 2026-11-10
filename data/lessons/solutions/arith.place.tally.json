@@ -1,0 +1,19 @@
+{
+  "concept": "arith.place.tally",
+  "setup": "This instance for Tally marks and unary counting publishes [[n]], [[groups]].",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "Read [[n]] from the generated instance."
+    },
+    {
+      "fact": "groups",
+      "say": "Read [[groups]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the relation for Tally marks and unary counting. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

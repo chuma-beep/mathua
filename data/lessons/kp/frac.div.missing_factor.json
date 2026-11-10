@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The idea",
+    "section": "The idea",
+    "subgoals": [
+      "State the relation used in the idea",
+      "Identify the quantities in the the idea step",
+      "Carry out the the idea computation for division as a missing factor"
+    ]
+  },
+  {
+    "label": "The computation",
+    "section": "The computation",
+    "subgoals": [
+      "State the relation used in the computation",
+      "Identify the quantities in the the computation step",
+      "Carry out the the computation computation for division as a missing factor"
+    ]
+  },
+  {
+    "label": "Reading the result",
+    "section": "Reading the result",
+    "subgoals": [
+      "State the relation used in reading the result",
+      "Identify the quantities in the reading the result step",
+      "Carry out the reading the result computation for division as a missing factor"
+    ]
+  }
+]

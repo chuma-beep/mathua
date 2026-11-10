@@ -1,0 +1,19 @@
+{
+  "concept": "trig.basics.versine",
+  "setup": "For an angle with sine [[sin_num]]/[[den]] and cosine [[cos_num]]/[[den]], use the Pythagorean triple values rather than a calculator.",
+  "steps": [
+    {
+      "fact": "cos_num",
+      "say": "The cosine numerator is [[cos_num]], so the versine is 1 - [[cos_num]]/[[den]]."
+    },
+    {
+      "fact": "sin_num",
+      "say": "The sine numerator is [[sin_num]], so the coversine is 1 - [[sin_num]]/[[den]]."
+    },
+    {
+      "fact": "den",
+      "say": "Multiply the required combination by the common denominator [[den]]."
+    }
+  ],
+  "answer": "The requested integer is [[answer]]."
+}

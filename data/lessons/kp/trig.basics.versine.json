@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The versine and coversine definitions",
+    "section": "The versine and coversine definitions",
+    "subgoals": [
+      "State the relation for versine and coversine",
+      "Identify the quantities in the the versine and coversine definitions step",
+      "Carry out the the versine and coversine definitions computation"
+    ]
+  },
+  {
+    "label": "Exact values from a right triangle",
+    "section": "Exact values from a right triangle",
+    "subgoals": [
+      "State the relation for versine and coversine",
+      "Identify the quantities in the exact values from a right triangle step",
+      "Carry out the exact values from a right triangle computation"
+    ]
+  },
+  {
+    "label": "Adding the two functions",
+    "section": "Adding the two functions",
+    "subgoals": [
+      "State the relation for versine and coversine",
+      "Identify the quantities in the adding the two functions step",
+      "Carry out the adding the two functions computation"
+    ]
+  }
+]

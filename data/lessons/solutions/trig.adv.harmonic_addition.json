@@ -1,0 +1,19 @@
+{
+  "concept": "trig.adv.harmonic_addition",
+  "setup": "Write a sine plus a cosine as one sine wave, R sin(x + phi), with R^2 = a^2 + b^2.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The sine coefficient is [[a]]."
+    },
+    {
+      "fact": "b",
+      "say": "The cosine coefficient is [[b]]."
+    },
+    {
+      "fact": "r",
+      "say": "The amplitude is the hypotenuse [[r]] of the right triangle."
+    }
+  ],
+  "answer": "The requested integer is [[answer]]."
+}

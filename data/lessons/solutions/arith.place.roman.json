@@ -1,0 +1,19 @@
+{
+  "concept": "arith.place.roman",
+  "setup": "This instance for Roman numerals publishes [[n]], [[roman]].",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "Read [[n]] from the generated instance."
+    },
+    {
+      "fact": "roman",
+      "say": "Read [[roman]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the relation for Roman numerals. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

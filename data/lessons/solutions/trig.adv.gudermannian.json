@@ -1,0 +1,19 @@
+{
+  "concept": "trig.adv.gudermannian",
+  "setup": "This instance for The Gudermannian function publishes [[k]], [[num]].",
+  "steps": [
+    {
+      "fact": "k",
+      "say": "Read [[k]] from the generated instance."
+    },
+    {
+      "fact": "num",
+      "say": "Read [[num]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the relation for The Gudermannian function. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

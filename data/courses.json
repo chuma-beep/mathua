@@ -26,7 +26,18 @@
       "arith.place.millions",
       "arith.add.missing_addend",
       "arith.factor.multiple",
-      "arith.factor.even_odd"
+      "arith.factor.even_odd",
+      "arith.place.binary",
+      "arith.ops.making_ten",
+      "arith.place.base_five",
+      "arith.place.roman",
+      "arith.place.tally",
+      "arith.ops.doubling_halving",
+      "arith.ops.compensation",
+      "arith.ops.near_doubles",
+      "arith.mult.area_model",
+      "arith.time.elapsed",
+      "arith.money.change"
     ]
   },
   {
@@ -53,7 +64,19 @@
       "arith.estimate.quotient",
       "frac.mixed.borrow",
       "frac.ops.estimate",
-      "frac.div.by_whole"
+      "frac.div.by_whole",
+      "arith.mult.partial_products",
+      "frac.basics.set",
+      "frac.compare.same_numerator",
+      "arith.div.partial_quotients",
+      "arith.mult.lattice",
+      "arith.factor.square_numbers",
+      "arith.factor.triangular_numbers",
+      "frac.basics.improper_number_line",
+      "frac.order.three",
+      "frac.add.number_line",
+      "frac.sub.number_line",
+      "frac.mult.area_model"
     ]
   },
   {
@@ -79,7 +102,14 @@
       "prealg.measure.metric",
       "arith.neg.compare",
       "frac.word.multi_step",
-      "frac.compare.forms"
+      "frac.compare.forms",
+      "frac.div.common_denominator",
+      "arith.ops.factorial_notation",
+      "arith.factor.gcf_lcm_word",
+      "frac.div.missing_factor",
+      "frac.mixed.to_decimal",
+      "frac.percent.convert",
+      "frac.word.remaining_two_step"
     ]
   },
   {
@@ -190,7 +220,37 @@
       "dec.ops.powers_ten",
       "prealg.measure.dimensional",
       "ratio.ops.table",
-      "prealg.expr.simplify"
+      "prealg.expr.simplify",
+      "arith.place.binary",
+      "arith.ops.making_ten",
+      "arith.mult.partial_products",
+      "frac.basics.set",
+      "frac.compare.same_numerator",
+      "frac.div.common_denominator",
+      "arith.place.base_five",
+      "arith.place.roman",
+      "arith.place.tally",
+      "arith.ops.doubling_halving",
+      "arith.ops.compensation",
+      "arith.ops.near_doubles",
+      "arith.div.partial_quotients",
+      "arith.mult.area_model",
+      "arith.mult.lattice",
+      "arith.factor.square_numbers",
+      "arith.factor.triangular_numbers",
+      "arith.ops.factorial_notation",
+      "arith.factor.gcf_lcm_word",
+      "arith.time.elapsed",
+      "arith.money.change",
+      "frac.basics.improper_number_line",
+      "frac.order.three",
+      "frac.add.number_line",
+      "frac.sub.number_line",
+      "frac.mult.area_model",
+      "frac.div.missing_factor",
+      "frac.mixed.to_decimal",
+      "frac.percent.convert",
+      "frac.word.remaining_two_step"
     ]
   },
   {
@@ -447,7 +507,27 @@
       "alg.systems.matrix_inverse",
       "alg.regression.quadratic",
       "alg.regression.power",
-      "alg.regression.logarithmic"
+      "alg.regression.logarithmic",
+      "trig.basics.versine",
+      "trig.adv.chebyshev",
+      "trig.adv.harmonic_addition",
+      "trig.adv.arctan_sum",
+      "trig.ident.law_tangents",
+      "trig.ident.mollweide",
+      "trig.adv.half_side",
+      "trig.adv.napier",
+      "trig.spherical.law_sines",
+      "trig.spherical.law_cosines",
+      "trig.spherical.excess",
+      "trig.spherical.haversine",
+      "trig.basics.exsecant",
+      "trig.adv.gudermannian",
+      "trig.adv.weierstrass",
+      "trig.adv.chebyshev_second",
+      "trig.adv.ptolemy",
+      "trig.adv.brahmagupta",
+      "trig.adv.machin",
+      "trig.adv.phasor"
     ]
   },
   {
@@ -513,7 +593,27 @@
       "precalc.conic.eccentricity",
       "precalc.seq.explicit",
       "precalc.conic.rotated",
-      "precalc.vector.three_d"
+      "precalc.vector.three_d",
+      "trig.basics.versine",
+      "trig.adv.chebyshev",
+      "trig.adv.harmonic_addition",
+      "trig.adv.arctan_sum",
+      "trig.ident.law_tangents",
+      "trig.ident.mollweide",
+      "trig.adv.half_side",
+      "trig.adv.napier",
+      "trig.spherical.law_sines",
+      "trig.spherical.law_cosines",
+      "trig.spherical.excess",
+      "trig.spherical.haversine",
+      "trig.basics.exsecant",
+      "trig.adv.gudermannian",
+      "trig.adv.weierstrass",
+      "trig.adv.chebyshev_second",
+      "trig.adv.ptolemy",
+      "trig.adv.brahmagupta",
+      "trig.adv.machin",
+      "trig.adv.phasor"
     ]
   },
   {

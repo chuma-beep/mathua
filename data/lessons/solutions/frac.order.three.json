@@ -1,0 +1,19 @@
+{
+  "concept": "frac.order.three",
+  "setup": "This instance for Ordering three fractions publishes [[a1]], [[b1]].",
+  "steps": [
+    {
+      "fact": "a1",
+      "say": "Read [[a1]] from the generated instance."
+    },
+    {
+      "fact": "b1",
+      "say": "Read [[b1]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the relation for Ordering three fractions. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

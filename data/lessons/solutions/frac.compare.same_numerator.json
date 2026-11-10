@@ -1,0 +1,19 @@
+{
+  "concept": "frac.compare.same_numerator",
+  "setup": "Compare the fractions [[a]]/[[b]] and [[a]]/[[c]]. They have the same numerator [[a]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The shared numerator is [[a]]."
+    },
+    {
+      "fact": "b",
+      "say": "The first denominator is [[b]]."
+    },
+    {
+      "fact": "c",
+      "say": "The second denominator is [[c]]; with the same numerator, the smaller denominator gives the larger fraction."
+    }
+  ],
+  "answer": "The requested integer is [[answer]]."
+}

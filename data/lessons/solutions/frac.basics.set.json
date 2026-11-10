@@ -1,0 +1,19 @@
+{
+  "concept": "frac.basics.set",
+  "setup": "The whole set has [[n]] objects and the fraction is [[num]]/[[den]].",
+  "steps": [
+    {
+      "fact": "den",
+      "say": "The denominator [[den]] says how many equal groups the set is divided into."
+    },
+    {
+      "fact": "num",
+      "say": "The numerator [[num]] says how many groups are selected."
+    },
+    {
+      "fact": "n",
+      "say": "The number per group is [[n]] divided by [[den]]."
+    }
+  ],
+  "answer": "The requested integer is [[answer]]."
+}

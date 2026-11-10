@@ -1,0 +1,19 @@
+{
+  "concept": "frac.mixed.to_decimal",
+  "setup": "This instance for Mixed numbers as decimals publishes [[whole]], [[numerator]].",
+  "steps": [
+    {
+      "fact": "whole",
+      "say": "Read [[whole]] from the generated instance."
+    },
+    {
+      "fact": "numerator",
+      "say": "Read [[numerator]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the relation for Mixed numbers as decimals. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

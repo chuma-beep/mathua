@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Splitting the first factor",
+    "section": "Splitting the first factor",
+    "subgoals": [
+      "State the relation for partial products",
+      "Identify the quantities in the splitting the first factor step",
+      "Carry out the splitting the first factor computation"
+    ]
+  },
+  {
+    "label": "The two partial products",
+    "section": "The two partial products",
+    "subgoals": [
+      "State the relation for partial products",
+      "Identify the quantities in the the two partial products step",
+      "Carry out the the two partial products computation"
+    ]
+  },
+  {
+    "label": "Adding to the product",
+    "section": "Adding to the product",
+    "subgoals": [
+      "State the relation for partial products",
+      "Identify the quantities in the adding to the product step",
+      "Carry out the adding to the product computation"
+    ]
+  }
+]

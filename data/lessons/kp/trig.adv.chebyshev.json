@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The recurrence",
+    "section": "The recurrence",
+    "subgoals": [
+      "State the relation for chebyshev polynomials of the first kind",
+      "Identify the quantities in the the recurrence step",
+      "Carry out the the recurrence computation"
+    ]
+  },
+  {
+    "label": "Values at special points",
+    "section": "Values at special points",
+    "subgoals": [
+      "State the relation for chebyshev polynomials of the first kind",
+      "Identify the quantities in the values at special points step",
+      "Carry out the values at special points computation"
+    ]
+  },
+  {
+    "label": "The leading coefficient",
+    "section": "The leading coefficient",
+    "subgoals": [
+      "State the relation for chebyshev polynomials of the first kind",
+      "Identify the quantities in the the leading coefficient step",
+      "Carry out the the leading coefficient computation"
+    ]
+  }
+]

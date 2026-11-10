@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Equal groups",
+    "section": "Equal groups",
+    "subgoals": [
+      "State the relation for a fraction of a set",
+      "Identify the quantities in the equal groups step",
+      "Carry out the equal groups computation"
+    ]
+  },
+  {
+    "label": "The selected groups",
+    "section": "The selected groups",
+    "subgoals": [
+      "State the relation for a fraction of a set",
+      "Identify the quantities in the the selected groups step",
+      "Carry out the the selected groups computation"
+    ]
+  },
+  {
+    "label": "The remainder",
+    "section": "The remainder",
+    "subgoals": [
+      "State the relation for a fraction of a set",
+      "Identify the quantities in the the remainder step",
+      "Carry out the the remainder computation"
+    ]
+  }
+]

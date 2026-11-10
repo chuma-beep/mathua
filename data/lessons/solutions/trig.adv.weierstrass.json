@@ -1,0 +1,19 @@
+{
+  "concept": "trig.adv.weierstrass",
+  "setup": "This instance for Tangent half-angle substitution publishes [[t]], [[den]].",
+  "steps": [
+    {
+      "fact": "t",
+      "say": "Read [[t]] from the generated instance."
+    },
+    {
+      "fact": "den",
+      "say": "Read [[den]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the relation for Tangent half-angle substitution. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}
