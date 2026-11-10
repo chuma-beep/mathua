@@ -92,6 +92,7 @@ const result = {
 
 describe('TimedQuizHost', () => {
   beforeEach(() => {
+    window.localStorage.removeItem('mathua_timed_quiz_phone_keypad')
     vi.mocked(getTimedQuiz).mockResolvedValue(summary)
     vi.mocked(startTimedQuizSession).mockResolvedValue(session)
     vi.mocked(submitTimedQuizAnswer).mockResolvedValue({
@@ -131,6 +132,34 @@ describe('TimedQuizHost', () => {
     fireEvent.click(await screen.findByRole('button', { name: 'Start timed quiz' }))
     const field = await findAnswerField('math')
     expect(field.tagName.toLowerCase()).toBe('math-field')
+  })
+
+  it('lets the learner switch to the phone keypad and back', async () => {
+    render(<TimedQuizHost />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Start timed quiz' }))
+    await findAnswerField('math')
+
+    fireEvent.click(screen.getByRole('button', { name: 'Use phone keypad' }))
+    const phoneInput = await screen.findByLabelText('Your answer')
+    expect(phoneInput.tagName.toLowerCase()).toBe('input')
+    expect(phoneInput).toHaveAttribute('inputmode', 'numeric')
+    expect(window.localStorage.getItem('mathua_timed_quiz_phone_keypad')).toBe('1')
+
+    fireEvent.click(screen.getByRole('button', { name: 'Use math keypad' }))
+    const mathField = await findAnswerField('math')
+    expect(mathField.tagName.toLowerCase()).toBe('math-field')
+    expect(window.localStorage.getItem('mathua_timed_quiz_phone_keypad')).toBe('0')
+  })
+
+  it('restores a remembered phone-keypad choice', async () => {
+    window.localStorage.setItem('mathua_timed_quiz_phone_keypad', '1')
+    render(<TimedQuizHost />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Start timed quiz' }))
+    await waitFor(() => {
+      const field = screen.getByLabelText('Your answer')
+      expect(field.tagName.toLowerCase()).toBe('input')
+      expect(field).toHaveAttribute('inputmode', 'numeric')
+    })
   })
 
   it('does not offer a start button when the gate is not due', async () => {

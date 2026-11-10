@@ -6,7 +6,7 @@ import KatexContent from '../../components/KatexContent'
 import SectionHeader from '../../components/SectionHeader'
 import XPAdjustmentNote from '../../components/XPAdjustmentNote'
 import XPTaskSummary from '../../components/XPTaskSummary'
-import { MathAnswerInput } from '../../components/math/MathInput'
+import { MathAnswerInput, type MathFocusHandle } from '../../components/math/MathInput'
 import { formatForQuestion } from '../../lib/answerFormat'
 import { stemWithoutChoices } from '../../lib/choices'
 import {
@@ -24,6 +24,8 @@ import {
 } from '../../lib/api'
 
 type Phase = 'loading' | 'intro' | 'run' | 'done'
+
+const PHONE_KEYPAD_STORAGE_KEY = 'mathua_timed_quiz_phone_keypad'
 
 function newSubmissionId(): string {
   const c = globalThis.crypto
@@ -49,6 +51,13 @@ export default function TimedQuizHost() {
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
   const [remaining, setRemaining] = useState(0)
+  // Mathua's keypad is the default because it carries the symbols a phone
+  // keypad cannot. The learner can hand the answer field back to the device
+  // keypad under the field, and that choice follows them to the next quiz.
+  const [phoneKeypad, setPhoneKeypad] = useState(false)
+  const mathFocusRef = useRef<MathFocusHandle | null>(null)
+  const phoneInputRef = useRef<HTMLInputElement | null>(null)
+  const focusAfterKeypadSwitch = useRef(false)
   const offsetRef = useRef(0)
   const submissionIds = useRef<Record<string, string>>({})
   const questionShownAt = useRef(0)
@@ -68,6 +77,35 @@ export default function TimedQuizHost() {
   useEffect(() => {
     void loadSummary()
   }, [loadSummary])
+
+  useEffect(() => {
+    try {
+      if (window.localStorage.getItem(PHONE_KEYPAD_STORAGE_KEY) === '1') setPhoneKeypad(true)
+    } catch {
+      // A blocked storage read leaves the math keypad as the default.
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!focusAfterKeypadSwitch.current) return
+    focusAfterKeypadSwitch.current = false
+    if (phoneKeypad) phoneInputRef.current?.focus()
+    else mathFocusRef.current?.focus()
+  }, [phoneKeypad])
+
+  const toggleKeypad = useCallback(() => {
+    const next = !phoneKeypad
+    focusAfterKeypadSwitch.current = true
+    // The math keypad is a page-wide singleton, so hiding it explicitly keeps
+    // it from covering the phone-keypad input after the editor unmounts.
+    if (next) window.mathVirtualKeyboard?.hide()
+    try {
+      window.localStorage.setItem(PHONE_KEYPAD_STORAGE_KEY, next ? '1' : '0')
+    } catch {
+      // The choice still applies to this run when storage is unavailable.
+    }
+    setPhoneKeypad(next)
+  }, [phoneKeypad])
 
   const finish = useCallback((data: TimedQuizResultRes) => {
     setResult(data)
@@ -305,18 +343,34 @@ export default function TimedQuizHost() {
           {!feedback ? (
             <form onSubmit={(event) => { event.preventDefault(); void submit(false) }} className="flex flex-col sm:flex-row gap-3">
               <label htmlFor="timed-quiz-answer" className="sr-only">Your answer</label>
-              <MathAnswerInput
-                id="timed-quiz-answer"
-                value={answer}
-                onChange={setAnswer}
-                onSubmit={() => void submit(false)}
-                gradingType={item.grading_type}
-                conceptId={item.concept_id}
-                disabled={busy}
-                placeholder="Your answer..."
-                inputMode={answerFormat.inputMode}
-                className="flex-1 min-w-0"
-              />
+              {phoneKeypad ? (
+                <input
+                  ref={phoneInputRef}
+                  id="timed-quiz-answer"
+                  value={answer}
+                  onChange={(event) => setAnswer(event.target.value)}
+                  inputMode={answerFormat.inputMode}
+                  enterKeyHint="go"
+                  autoComplete="off"
+                  placeholder="Your answer..."
+                  disabled={busy}
+                  className="flex-1 min-w-0 border border-mathua-border rounded-none bg-mathua-bg px-3 py-2 font-mono text-sm text-mathua-primary focus:border-mathua-blue focus:outline-none disabled:opacity-50"
+                />
+              ) : (
+                <MathAnswerInput
+                  id="timed-quiz-answer"
+                  value={answer}
+                  onChange={setAnswer}
+                  onSubmit={() => void submit(false)}
+                  gradingType={item.grading_type}
+                  conceptId={item.concept_id}
+                  disabled={busy}
+                  placeholder="Your answer..."
+                  inputMode={answerFormat.inputMode}
+                  focusRef={mathFocusRef}
+                  className="flex-1 min-w-0"
+                />
+              )}
               <button type="submit" disabled={!answer.trim() || busy} className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-11 px-6 text-sm disabled:opacity-50">
                 Check answer
               </button>
@@ -342,7 +396,16 @@ export default function TimedQuizHost() {
           )}
           {!feedback && (
             <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
-              <p className="font-mono text-[11px] text-mathua-muted">{answerFormat.hint}</p>
+              <div className="flex flex-wrap items-center gap-3 min-w-0">
+                <p className="font-mono text-[11px] text-mathua-muted">{answerFormat.hint}</p>
+                <button
+                  type="button"
+                  onClick={toggleKeypad}
+                  className="border border-mathua-border rounded-none px-2 py-1 font-mono text-[11px] text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue"
+                >
+                  {phoneKeypad ? 'Use math keypad' : 'Use phone keypad'}
+                </button>
+              </div>
               <div className="flex gap-3">
                 <button type="button" onClick={() => void submit(true)} disabled={busy} className="font-mono text-[11px] text-mathua-muted hover:text-mathua-red underline underline-offset-2">
                   I don&apos;t know
