@@ -164,7 +164,7 @@ func w3MatrixPowers(kp int) generator.Problem {
 	w3LSetMatrix(f, "", a, b, c, d)
 	switch kp {
 	case 1:
-		ra, _, _, _ := w3LMatPow2(a, b, c, d, 2)
+		ra, _, _, _ := w3LMatPow2(a, b, c, d, 2) // aislop-ignore-line ai-slop/swallowed-exception -- four matrix entries, not an error
 		return w3L(kp, fmt.Sprintf("For \\(A=%s\\), what is the (1,1) entry of \\(A^2\\)? (enter a number)", w3LMat(a, b, c, d)), strconv.Itoa(ra),
 			fmt.Sprintf("Multiply row 1 of A by column 1 of A: \\((%d)(%d)+(%d)(%d)=%d\\).", a, a, b, c, ra), f)
 	case 2:
@@ -173,7 +173,7 @@ func w3MatrixPowers(kp int) generator.Problem {
 			fmt.Sprintf("Compute \\(A^3\\) and add its diagonal entries. The trace is %d.", ra+rd), f)
 	default:
 		k := w3LR(4, 6)
-		_, rb, _, _ := w3LMatPow2(a, b, c, d, k)
+		_, rb, _, _ := w3LMatPow2(a, b, c, d, k) // aislop-ignore-line ai-slop/swallowed-exception -- four matrix entries, not an error
 		w3LI(f, "power", k)
 		return w3L(kp, fmt.Sprintf("For \\(A=%s\\), what is the (1,2) entry of \\(A^{%d}\\)? (enter a number)", w3LMat(a, b, c, d), k), strconv.Itoa(rb),
 			fmt.Sprintf("Multiply the matrix by itself %d times, or use the recurrence for the entries. The (1,2) entry is %d.", k, rb), f)
@@ -280,7 +280,7 @@ func w3Block(kp int) generator.Problem {
 		return w3L(kp, fmt.Sprintf("For the block-diagonal matrix with \\(A=%s\\) and \\(B=%s\\), what is the trace of the whole matrix? (enter a number)", w3LMat(a, b, c, d), w3LMat(e, f2, g, h)), strconv.Itoa(a+d+e+h),
 			fmt.Sprintf("The trace is the sum of the diagonal entries of both blocks: \\((%d)+(%d)+(%d)+(%d)=%d\\).", a, d, e, h, a+d+e+h), f)
 	default:
-		ra, _, _, _ := w3LMatMul2(a, b, c, d, a, b, c, d)
+		ra, _, _, _ := w3LMatMul2(a, b, c, d, a, b, c, d) // aislop-ignore-line ai-slop/swallowed-exception -- four matrix entries, not an error
 		return w3L(kp, fmt.Sprintf("For the block matrix \\(M=\\begin{pmatrix}A&0\\\\0&B\\end{pmatrix}\\) with \\(A=%s\\) and \\(B=%s\\), what is the (1,1) entry of \\(M^2\\)? (enter a number)", w3LMat(a, b, c, d), w3LMat(e, f2, g, h)), strconv.Itoa(ra),
 			fmt.Sprintf("The (1,1) block of \\(M^2\\) is \\(A^2\\), and its (1,1) entry is %d.", ra), f)
 	}

@@ -463,7 +463,7 @@ func w6LinearCode(kp int) generator.Problem {
 // Dynamic programming: coin change
 // ---------------------------------------------------------------------------
 
-func w6MinCoins(coins []int, t int) (int, int) {
+func w6MinCoins(coins []int, t int) int {
 	const inf = 1 << 20
 	dp := make([]int, t+1)
 	for i := 1; i <= t; i++ {
@@ -477,9 +477,9 @@ func w6MinCoins(coins []int, t int) (int, int) {
 		}
 	}
 	if dp[t] >= inf {
-		return -1, 0
+		return -1
 	}
-	return dp[t], dp[t]
+	return dp[t]
 }
 
 func w6CountWays(coins []int, t int) int {
@@ -508,7 +508,7 @@ func w6DP(kp int) generator.Problem {
 	case 1:
 		t := w6DR(1, target)
 		w6DI(f, "t", t)
-		ans, _ := w6MinCoins(coins, t)
+		ans := w6MinCoins(coins, t)
 		noun := "coins"
 		if ans == 1 {
 			noun = "coin"
@@ -516,7 +516,7 @@ func w6DP(kp int) generator.Problem {
 		return w6D(kp, fmt.Sprintf("With unlimited coins of denominations %s, let dp[t] be the minimum number of coins needed to make t. What is dp[%d]?", w6DJoin(coins), t), strconv.Itoa(ans),
 			fmt.Sprintf("Build dp from 1 to %d. The minimum for %d is %d %s.", t, t, ans, noun), f)
 	case 2:
-		ans, _ := w6MinCoins(coins, target)
+		ans := w6MinCoins(coins, target)
 		return w6D(kp, fmt.Sprintf("With unlimited coins of denominations %s, what is the minimum number of coins needed to make %d?", w6DJoin(coins), target), strconv.Itoa(ans),
 			fmt.Sprintf("The dynamic program for the minimum coin count gives %d coins for %d.", ans, target), f)
 	default:

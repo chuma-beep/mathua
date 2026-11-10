@@ -17,7 +17,6 @@ import {
   startTimedQuizSession,
   submitTimedQuizAnswer,
   type TimedQuizAnswerRes,
-  type TimedQuizQuestion,
   type TimedQuizResultRes,
   type TimedQuizSessionRes,
   type TimedQuizSummaryRes,
