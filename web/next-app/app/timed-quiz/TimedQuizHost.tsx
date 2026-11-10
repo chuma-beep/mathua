@@ -53,7 +53,9 @@ export default function TimedQuizHost() {
   const [remaining, setRemaining] = useState(0)
   // Mathua's keypad is the default because it carries the symbols a phone
   // keypad cannot. The learner can hand the answer field back to the device
-  // keypad under the field, and that choice follows them to the next quiz.
+  // keypad from the control above it, and that choice follows them to the next
+  // quiz. Above, not below: a long answer-format hint below the field can push
+  // the control under the open keypad, where it cannot be tapped.
   const [phoneKeypad, setPhoneKeypad] = useState(false)
   const mathFocusRef = useRef<MathFocusHandle | null>(null)
   const phoneInputRef = useRef<HTMLInputElement | null>(null)
@@ -340,6 +342,17 @@ export default function TimedQuizHost() {
           <div className="bg-mathua-code border border-mathua-border rounded-none p-4 sm:p-6 text-center mb-4">
             <KatexContent className="text-mathua-primary text-lg font-mono font-light whitespace-pre-wrap break-words">{stemWithoutChoices(item.question)}</KatexContent>
           </div>
+          {!feedback && (
+            <div className="mb-2 flex justify-end">
+              <button
+                type="button"
+                onClick={toggleKeypad}
+                className="border border-mathua-border rounded-none px-2 py-1 font-mono text-[11px] text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue"
+              >
+                {phoneKeypad ? 'Use math keypad' : 'Use phone keypad'}
+              </button>
+            </div>
+          )}
           {!feedback ? (
             <form onSubmit={(event) => { event.preventDefault(); void submit(false) }} className="flex flex-col sm:flex-row gap-3">
               <label htmlFor="timed-quiz-answer" className="sr-only">Your answer</label>
@@ -396,16 +409,7 @@ export default function TimedQuizHost() {
           )}
           {!feedback && (
             <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
-              <div className="flex flex-wrap items-center gap-3 min-w-0">
-                <p className="font-mono text-[11px] text-mathua-muted">{answerFormat.hint}</p>
-                <button
-                  type="button"
-                  onClick={toggleKeypad}
-                  className="border border-mathua-border rounded-none px-2 py-1 font-mono text-[11px] text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue"
-                >
-                  {phoneKeypad ? 'Use math keypad' : 'Use phone keypad'}
-                </button>
-              </div>
+              <p className="font-mono text-[11px] text-mathua-muted">{answerFormat.hint}</p>
               <div className="flex gap-3">
                 <button type="button" onClick={() => void submit(true)} disabled={busy} className="font-mono text-[11px] text-mathua-muted hover:text-mathua-red underline underline-offset-2">
                   I don&apos;t know
