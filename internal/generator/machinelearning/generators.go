@@ -31,6 +31,8 @@ func Register(reg *generator.Registry) {
 	}
 	registerWave7(reg)
 	registerWave7Remaining(reg)
+	registerWave9(reg)
+	registerWave9Remaining(reg)
 }
 
 type backpropGen struct{}

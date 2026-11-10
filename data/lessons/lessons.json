@@ -7598,5 +7598,205 @@
   {
     "concept_id": "frac.word.remaining_two_step",
     "source": "authored/frac.word.remaining_two_step.md"
+  },
+  {
+    "concept_id": "precalc.func.one_to_one",
+    "source": "authored/precalc.func.one_to_one.md"
+  },
+  {
+    "concept_id": "precalc.poly.complex_factorization",
+    "source": "authored/precalc.poly.complex_factorization.md"
+  },
+  {
+    "concept_id": "precalc.vector.orthogonal_decomposition",
+    "source": "authored/precalc.vector.orthogonal_decomposition.md"
+  },
+  {
+    "concept_id": "calc.limit.asymptotic_equivalence",
+    "source": "authored/calc.limit.asymptotic_equivalence.md"
+  },
+  {
+    "concept_id": "calc.deriv.elasticity",
+    "source": "authored/calc.deriv.elasticity.md"
+  },
+  {
+    "concept_id": "calc.integral.leibniz",
+    "source": "authored/calc.integral.leibniz.md"
+  },
+  {
+    "concept_id": "calc.series.cesaro",
+    "source": "authored/calc.series.cesaro.md"
+  },
+  {
+    "concept_id": "calc.series.dirichlet_series",
+    "source": "authored/calc.series.dirichlet_series.md"
+  },
+  {
+    "concept_id": "frac.mixed.add_carry",
+    "source": "authored/frac.mixed.add_carry.md"
+  },
+  {
+    "concept_id": "ml.eval.log_loss",
+    "source": "authored/ml.eval.log_loss.md"
+  },
+  {
+    "concept_id": "precalc.func.inverse_composition",
+    "source": "authored/precalc.func.inverse_composition.md"
+  },
+  {
+    "concept_id": "precalc.func.piecewise_operations",
+    "source": "authored/precalc.func.piecewise_operations.md"
+  },
+  {
+    "concept_id": "precalc.analytic.area_polygon",
+    "source": "authored/precalc.analytic.area_polygon.md"
+  },
+  {
+    "concept_id": "precalc.rational.sign_chart",
+    "source": "authored/precalc.rational.sign_chart.md"
+  },
+  {
+    "concept_id": "precalc.rational.asymptote_intersection",
+    "source": "authored/precalc.rational.asymptote_intersection.md"
+  },
+  {
+    "concept_id": "precalc.exp.doubling",
+    "source": "authored/precalc.exp.doubling.md"
+  },
+  {
+    "concept_id": "precalc.exp.logistic_inverse",
+    "source": "authored/precalc.exp.logistic_inverse.md"
+  },
+  {
+    "concept_id": "precalc.seq.summation_properties",
+    "source": "authored/precalc.seq.summation_properties.md"
+  },
+  {
+    "concept_id": "precalc.seq.power_sums",
+    "source": "authored/precalc.seq.power_sums.md"
+  },
+  {
+    "concept_id": "precalc.conic.parametric",
+    "source": "authored/precalc.conic.parametric.md"
+  },
+  {
+    "concept_id": "precalc.conic.polar",
+    "source": "authored/precalc.conic.polar.md"
+  },
+  {
+    "concept_id": "precalc.polar.symmetry",
+    "source": "authored/precalc.polar.symmetry.md"
+  },
+  {
+    "concept_id": "precalc.polar.intersection",
+    "source": "authored/precalc.polar.intersection.md"
+  },
+  {
+    "concept_id": "precalc.parametric.cycloid",
+    "source": "authored/precalc.parametric.cycloid.md"
+  },
+  {
+    "concept_id": "precalc.vector.work",
+    "source": "authored/precalc.vector.work.md"
+  },
+  {
+    "concept_id": "precalc.vector.direction_cosines",
+    "source": "authored/precalc.vector.direction_cosines.md"
+  },
+  {
+    "concept_id": "precalc.systems.nonlinear_inequality",
+    "source": "authored/precalc.systems.nonlinear_inequality.md"
+  },
+  {
+    "concept_id": "precalc.partial_fractions.repeated",
+    "source": "authored/precalc.partial_fractions.repeated.md"
+  },
+  {
+    "concept_id": "precalc.partial_fractions.quadratic",
+    "source": "authored/precalc.partial_fractions.quadratic.md"
+  },
+  {
+    "concept_id": "precalc.binomial.multinomial",
+    "source": "authored/precalc.binomial.multinomial.md"
+  },
+  {
+    "concept_id": "calc.limit.continuity_composition",
+    "source": "authored/calc.limit.continuity_composition.md"
+  },
+  {
+    "concept_id": "calc.limit.continuity_inverse",
+    "source": "authored/calc.limit.continuity_inverse.md"
+  },
+  {
+    "concept_id": "calc.limit.continuity_extension",
+    "source": "authored/calc.limit.continuity_extension.md"
+  },
+  {
+    "concept_id": "calc.deriv.absolute",
+    "source": "authored/calc.deriv.absolute.md"
+  },
+  {
+    "concept_id": "calc.deriv.floor",
+    "source": "authored/calc.deriv.floor.md"
+  },
+  {
+    "concept_id": "calc.deriv.sign",
+    "source": "authored/calc.deriv.sign.md"
+  },
+  {
+    "concept_id": "calc.deriv.related_rates_shadow",
+    "source": "authored/calc.deriv.related_rates_shadow.md"
+  },
+  {
+    "concept_id": "calc.deriv.related_rates_angle",
+    "source": "authored/calc.deriv.related_rates_angle.md"
+  },
+  {
+    "concept_id": "calc.deriv.optimization_distance",
+    "source": "authored/calc.deriv.optimization_distance.md"
+  },
+  {
+    "concept_id": "calc.deriv.optimization_cylinder",
+    "source": "authored/calc.deriv.optimization_cylinder.md"
+  },
+  {
+    "concept_id": "calc.integral.floor",
+    "source": "authored/calc.integral.floor.md"
+  },
+  {
+    "concept_id": "calc.series.abel_theorem",
+    "source": "authored/calc.series.abel_theorem.md"
+  },
+  {
+    "concept_id": "calc.series.asymptotic",
+    "source": "authored/calc.series.asymptotic.md"
+  },
+  {
+    "concept_id": "calc.series.euler_maclaurin",
+    "source": "authored/calc.series.euler_maclaurin.md"
+  },
+  {
+    "concept_id": "calc.series.borel",
+    "source": "authored/calc.series.borel.md"
+  },
+  {
+    "concept_id": "calc.series.taubian",
+    "source": "authored/calc.series.taubian.md"
+  },
+  {
+    "concept_id": "calc.series.lambert",
+    "source": "authored/calc.series.lambert.md"
+  },
+  {
+    "concept_id": "frac.compare.mixed_order",
+    "source": "authored/frac.compare.mixed_order.md"
+  },
+  {
+    "concept_id": "frac.percent.of_fraction",
+    "source": "authored/frac.percent.of_fraction.md"
+  },
+  {
+    "concept_id": "ml.data.smote",
+    "source": "authored/ml.data.smote.md"
   }
 ]

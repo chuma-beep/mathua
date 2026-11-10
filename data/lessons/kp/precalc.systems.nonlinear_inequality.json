@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The boundary",
+    "section": "The boundary",
+    "subgoals": [
+      "State the relation used in the boundary",
+      "Identify the quantities in the the boundary step",
+      "Carry out the the boundary computation"
+    ]
+  },
+  {
+    "label": "Test points",
+    "section": "Test points",
+    "subgoals": [
+      "State the relation used in test points",
+      "Identify the quantities in the test points step",
+      "Carry out the test points computation"
+    ]
+  },
+  {
+    "label": "Solid and dashed boundaries",
+    "section": "Solid and dashed boundaries",
+    "subgoals": [
+      "State the relation used in solid and dashed boundaries",
+      "Identify the quantities in the solid and dashed boundaries step",
+      "Carry out the solid and dashed boundaries computation"
+    ]
+  }
+]

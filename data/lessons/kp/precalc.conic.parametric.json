@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Parametric coordinates",
+    "section": "Parametric coordinates",
+    "subgoals": [
+      "State the relation used in parametric coordinates",
+      "Identify the quantities in the parametric coordinates step",
+      "Carry out the parametric coordinates computation"
+    ]
+  },
+  {
+    "label": "Eliminating the parameter",
+    "section": "Eliminating the parameter",
+    "subgoals": [
+      "State the relation used in eliminating the parameter",
+      "Identify the quantities in the eliminating the parameter step",
+      "Carry out the eliminating the parameter computation"
+    ]
+  },
+  {
+    "label": "Identifying the conic",
+    "section": "Identifying the conic",
+    "subgoals": [
+      "State the relation used in identifying the conic",
+      "Identify the quantities in the identifying the conic step",
+      "Carry out the identifying the conic computation"
+    ]
+  }
+]

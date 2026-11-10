@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Coefficients and exponents",
+    "section": "Coefficients and exponents",
+    "subgoals": [
+      "State the relation used in coefficients and exponents",
+      "Identify the quantities in the coefficients and exponents step",
+      "Carry out the coefficients and exponents computation"
+    ]
+  },
+  {
+    "label": "The abscissa of convergence",
+    "section": "The abscissa of convergence",
+    "subgoals": [
+      "State the relation used in the abscissa of convergence",
+      "Identify the quantities in the the abscissa of convergence step",
+      "Carry out the the abscissa of convergence computation"
+    ]
+  },
+  {
+    "label": "Values at a point",
+    "section": "Values at a point",
+    "subgoals": [
+      "State the relation used in values at a point",
+      "Identify the quantities in the values at a point step",
+      "Carry out the values at a point computation"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The oblique asymptote",
+    "section": "The oblique asymptote",
+    "subgoals": [
+      "State the relation used in the oblique asymptote",
+      "Identify the quantities in the the oblique asymptote step",
+      "Carry out the the oblique asymptote computation"
+    ]
+  },
+  {
+    "label": "Solving the intersection",
+    "section": "Solving the intersection",
+    "subgoals": [
+      "State the relation used in solving the intersection",
+      "Identify the quantities in the solving the intersection step",
+      "Carry out the solving the intersection computation"
+    ]
+  },
+  {
+    "label": "When intersections are absent",
+    "section": "When intersections are absent",
+    "subgoals": [
+      "State the relation used in when intersections are absent",
+      "Identify the quantities in the when intersections are absent step",
+      "Carry out the when intersections are absent computation"
+    ]
+  }
+]

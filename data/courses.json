@@ -76,7 +76,8 @@
       "frac.order.three",
       "frac.add.number_line",
       "frac.sub.number_line",
-      "frac.mult.area_model"
+      "frac.mult.area_model",
+      "frac.mixed.add_carry"
     ]
   },
   {
@@ -109,7 +110,9 @@
       "frac.div.missing_factor",
       "frac.mixed.to_decimal",
       "frac.percent.convert",
-      "frac.word.remaining_two_step"
+      "frac.word.remaining_two_step",
+      "frac.compare.mixed_order",
+      "frac.percent.of_fraction"
     ]
   },
   {
@@ -250,7 +253,10 @@
       "frac.div.missing_factor",
       "frac.mixed.to_decimal",
       "frac.percent.convert",
-      "frac.word.remaining_two_step"
+      "frac.word.remaining_two_step",
+      "frac.mixed.add_carry",
+      "frac.compare.mixed_order",
+      "frac.percent.of_fraction"
     ]
   },
   {
@@ -613,7 +619,30 @@
       "trig.adv.ptolemy",
       "trig.adv.brahmagupta",
       "trig.adv.machin",
-      "trig.adv.phasor"
+      "trig.adv.phasor",
+      "precalc.func.one_to_one",
+      "precalc.poly.complex_factorization",
+      "precalc.vector.orthogonal_decomposition",
+      "precalc.func.inverse_composition",
+      "precalc.func.piecewise_operations",
+      "precalc.analytic.area_polygon",
+      "precalc.rational.sign_chart",
+      "precalc.rational.asymptote_intersection",
+      "precalc.exp.doubling",
+      "precalc.exp.logistic_inverse",
+      "precalc.seq.summation_properties",
+      "precalc.seq.power_sums",
+      "precalc.conic.parametric",
+      "precalc.conic.polar",
+      "precalc.polar.symmetry",
+      "precalc.polar.intersection",
+      "precalc.parametric.cycloid",
+      "precalc.vector.work",
+      "precalc.vector.direction_cosines",
+      "precalc.systems.nonlinear_inequality",
+      "precalc.partial_fractions.repeated",
+      "precalc.partial_fractions.quadratic",
+      "precalc.binomial.multinomial"
     ]
   },
   {
@@ -695,7 +724,21 @@
       "calc.integral.piecewise",
       "calc.integral.absolute_value",
       "calc.integral.accumulation",
-      "calc.integral.motion"
+      "calc.integral.motion",
+      "calc.limit.asymptotic_equivalence",
+      "calc.deriv.elasticity",
+      "calc.integral.leibniz",
+      "calc.limit.continuity_composition",
+      "calc.limit.continuity_inverse",
+      "calc.limit.continuity_extension",
+      "calc.deriv.absolute",
+      "calc.deriv.floor",
+      "calc.deriv.sign",
+      "calc.deriv.related_rates_shadow",
+      "calc.deriv.related_rates_angle",
+      "calc.deriv.optimization_distance",
+      "calc.deriv.optimization_cylinder",
+      "calc.integral.floor"
     ]
   },
   {
@@ -775,7 +818,15 @@
       "calc.integral.fresnel",
       "calc.integral.elliptic",
       "calc.integral.wallis",
-      "calc.integral.centroid_curve"
+      "calc.integral.centroid_curve",
+      "calc.series.cesaro",
+      "calc.series.dirichlet_series",
+      "calc.series.abel_theorem",
+      "calc.series.asymptotic",
+      "calc.series.euler_maclaurin",
+      "calc.series.borel",
+      "calc.series.taubian",
+      "calc.series.lambert"
     ]
   },
   {
@@ -1454,7 +1505,9 @@
       "ml.cluster.hierarchical",
       "ml.unsupervised.autoencoder",
       "ml.optim.sgd",
-      "ml.data.leakage"
+      "ml.data.leakage",
+      "ml.eval.log_loss",
+      "ml.data.smote"
     ]
   },
   {

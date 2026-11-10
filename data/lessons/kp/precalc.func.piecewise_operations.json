@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Combining branches",
+    "section": "Combining branches",
+    "subgoals": [
+      "State the relation used in combining branches",
+      "Identify the quantities in the combining branches step",
+      "Carry out the combining branches computation"
+    ]
+  },
+  {
+    "label": "Common domain",
+    "section": "Common domain",
+    "subgoals": [
+      "State the relation used in common domain",
+      "Identify the quantities in the common domain step",
+      "Carry out the common domain computation"
+    ]
+  },
+  {
+    "label": "Reading the result",
+    "section": "Reading the result",
+    "subgoals": [
+      "State the relation used in reading the result",
+      "Identify the quantities in the reading the result step",
+      "Carry out the reading the result computation"
+    ]
+  }
+]

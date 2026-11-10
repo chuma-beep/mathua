@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The doubling formula",
+    "section": "The doubling formula",
+    "subgoals": [
+      "State the relation used in the doubling formula",
+      "Identify the quantities in the the doubling formula step",
+      "Carry out the the doubling formula computation"
+    ]
+  },
+  {
+    "label": "Time from a rate",
+    "section": "Time from a rate",
+    "subgoals": [
+      "State the relation used in time from a rate",
+      "Identify the quantities in the time from a rate step",
+      "Carry out the time from a rate computation"
+    ]
+  },
+  {
+    "label": "Reading the doubling time",
+    "section": "Reading the doubling time",
+    "subgoals": [
+      "State the relation used in reading the doubling time",
+      "Identify the quantities in the reading the doubling time step",
+      "Carry out the reading the doubling time computation"
+    ]
+  }
+]

@@ -6329,6 +6329,210 @@
     "subdomain": "calculus.integrals"
   },
   {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.limit.asymptotic_equivalence",
+    "label": "Asymptotic equivalence",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.limit.big_o",
+      "calc.limit.little_o"
+    ],
+    "subdomain": "calculus.limits"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.deriv.elasticity",
+    "label": "Elasticity of demand",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.deriv.product_rule",
+      "calc.deriv.marginal_analysis"
+    ],
+    "subdomain": "calculus.derivatives"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.integral.leibniz",
+    "label": "Differentiation under the integral sign",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.ftc",
+      "calc.integral.variable_limits"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.limit.continuity_composition",
+    "label": "Continuity of composite functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.limit.continuity"
+    ],
+    "subdomain": "calculus.limits"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.limit.continuity_inverse",
+    "label": "Continuity of inverse functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.limit.continuity"
+    ],
+    "subdomain": "calculus.limits"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.limit.continuity_extension",
+    "label": "Removable discontinuities and continuous extensions",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.limit.discontinuity",
+      "calc.limit.continuity"
+    ],
+    "subdomain": "calculus.limits"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.deriv.absolute",
+    "label": "Derivatives of absolute value functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.deriv.definition",
+      "calc.limit.absolute_value"
+    ],
+    "subdomain": "calculus.derivatives"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.deriv.floor",
+    "label": "Derivatives of floor and ceiling functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.deriv.piecewise",
+      "precalc.func.floor_ceiling"
+    ],
+    "subdomain": "calculus.derivatives"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.deriv.sign",
+    "label": "Derivatives of sign functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.deriv.piecewise"
+    ],
+    "subdomain": "calculus.derivatives"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.deriv.related_rates_shadow",
+    "label": "Related rates: shadow length",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.deriv.related_rates"
+    ],
+    "subdomain": "calculus.advanced"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.deriv.related_rates_angle",
+    "label": "Related rates: angle of elevation",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.deriv.related_rates",
+      "trig.basics.tan_def"
+    ],
+    "subdomain": "calculus.advanced"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.deriv.optimization_distance",
+    "label": "Optimization: closest point",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.deriv.optimization"
+    ],
+    "subdomain": "calculus.derivatives"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.deriv.optimization_cylinder",
+    "label": "Optimization: cylinder dimensions",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.deriv.optimization"
+    ],
+    "subdomain": "calculus.derivatives"
+  },
+  {
+    "domain": "calc1",
+    "grading_type": "numeric",
+    "id": "calc.integral.floor",
+    "label": "Integrals of floor functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.piecewise",
+      "precalc.func.floor_ceiling"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
     "domain": "calc2",
     "grading_type": "expression",
     "id": "calc.integral.substitution",
@@ -7590,6 +7794,126 @@
       "calc.integral.center_mass"
     ],
     "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.cesaro",
+    "label": "Cesaro summability",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.concept",
+      "calc.series.operations"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.dirichlet_series",
+    "label": "Dirichlet series",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.operations",
+      "calc.series.power"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.abel_theorem",
+    "label": "Abel's theorem for power series",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.power",
+      "calc.series.abel"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.asymptotic",
+    "label": "Asymptotic series",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.taylor",
+      "calc.limit.asymptotic_equivalence"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.euler_maclaurin",
+    "label": "The Euler-Maclaurin formula",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.taylor",
+      "calc.integral.numerical"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.borel",
+    "label": "Borel summability",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.power",
+      "calc.series.operations"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.taubian",
+    "label": "Tauberian theorems",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.cesaro",
+      "calc.series.operations"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.lambert",
+    "label": "Lambert series",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.power",
+      "calc.series.geometric"
+    ],
+    "subdomain": "calculus.series"
   },
   {
     "domain": "calc3",
@@ -13299,6 +13623,51 @@
     "subdomain": "fractions.concept"
   },
   {
+    "domain": "fractions",
+    "grading_type": "numeric",
+    "id": "frac.mixed.add_carry",
+    "label": "Adding mixed numbers with carrying",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "frac.mixed.add",
+      "frac.add.diff"
+    ],
+    "subdomain": "fractions.mixed"
+  },
+  {
+    "domain": "fractions",
+    "grading_type": "numeric",
+    "id": "frac.compare.mixed_order",
+    "label": "Ordering mixed numbers",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "frac.mixed.convert",
+      "frac.ops.compare"
+    ],
+    "subdomain": "fractions.equivalence"
+  },
+  {
+    "domain": "fractions",
+    "grading_type": "numeric",
+    "id": "frac.percent.of_fraction",
+    "label": "A percentage of a fraction",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "frac.of_number",
+      "pct.ops.of_number"
+    ],
+    "subdomain": "fractions.equivalence"
+  },
+  {
     "domain": "geometry",
     "grading_type": "numeric",
     "id": "geo.basic.points_lines",
@@ -17327,6 +17696,36 @@
     "subdomain": "machine_learning.data"
   },
   {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.eval.log_loss",
+    "label": "Log loss and proper scoring rules",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.loss.cross_entropy",
+      "ml.eval.calibration"
+    ],
+    "subdomain": "machine_learning.evaluation"
+  },
+  {
+    "domain": "machine_learning",
+    "grading_type": "numeric",
+    "id": "ml.data.smote",
+    "label": "Synthetic minority oversampling",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ml.data.imbalance",
+      "ml.knn.nearest_distance"
+    ],
+    "subdomain": "machine_learning.data"
+  },
+  {
     "domain": "number_theory",
     "grading_type": "numeric",
     "id": "nt.basics.divisibility",
@@ -21306,6 +21705,337 @@
       "precalc.vector.ops"
     ],
     "subdomain": "precalculus.vectors"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.func.one_to_one",
+    "label": "One-to-one functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.func.transformations"
+    ],
+    "subdomain": "precalculus.functions"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.poly.complex_factorization",
+    "label": "Factoring over the complex numbers",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.poly.complex_conjugate",
+      "precalc.poly.rational_roots"
+    ],
+    "subdomain": "precalculus.polynomials"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.vector.orthogonal_decomposition",
+    "label": "Decomposing a vector into orthogonal components",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.vector.dot",
+      "precalc.vector.unit"
+    ],
+    "subdomain": "precalculus.vectors"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.func.inverse_composition",
+    "label": "Verifying inverse functions by composition",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.func.inverse_value",
+      "precalc.func.composition_value"
+    ],
+    "subdomain": "precalculus.functions"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.func.piecewise_operations",
+    "label": "Operating on piecewise functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.func.piecewise",
+      "precalc.func.arith_combine"
+    ],
+    "subdomain": "precalculus.functions"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.analytic.area_polygon",
+    "label": "Area of a polygon from coordinates",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.analytic.distance"
+    ],
+    "subdomain": "precalculus.analytic"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.rational.sign_chart",
+    "label": "Sign charts for rational functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.rational.asymptote",
+      "precalc.poly.inequality"
+    ],
+    "subdomain": "precalculus.rational"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.rational.asymptote_intersection",
+    "label": "Intersections with an oblique asymptote",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.rational.oblique_asymptote"
+    ],
+    "subdomain": "precalculus.rational"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.exp.doubling",
+    "label": "Doubling time",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.exp.growth_model"
+    ],
+    "subdomain": "precalculus.exponential"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.exp.logistic_inverse",
+    "label": "The inverse logistic function",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.exp.logistic",
+      "precalc.log.equation"
+    ],
+    "subdomain": "precalculus.exponential"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.seq.summation_properties",
+    "label": "Properties of summation notation",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.seq.summation"
+    ],
+    "subdomain": "precalculus.sequences"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.seq.power_sums",
+    "label": "Sums of powers",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.seq.summation"
+    ],
+    "subdomain": "precalculus.sequences"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.conic.parametric",
+    "label": "Parametric equations of conics",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.conic.general",
+      "precalc.parametric.equations"
+    ],
+    "subdomain": "precalculus.conics"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.conic.polar",
+    "label": "Polar equations of conics",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.conic.general",
+      "precalc.polar.coordinates"
+    ],
+    "subdomain": "precalculus.conics"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.polar.symmetry",
+    "label": "Symmetry tests for polar graphs",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.polar.graph"
+    ],
+    "subdomain": "precalculus.polar"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.polar.intersection",
+    "label": "Intersections of polar curves",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.polar.graph"
+    ],
+    "subdomain": "precalculus.polar"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.parametric.cycloid",
+    "label": "The cycloid",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.parametric.equations"
+    ],
+    "subdomain": "precalculus.parametric"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.vector.work",
+    "label": "Work from the dot product",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.vector.dot"
+    ],
+    "subdomain": "precalculus.vectors"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.vector.direction_cosines",
+    "label": "Direction cosines",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.vector.three_d"
+    ],
+    "subdomain": "precalculus.vectors"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.systems.nonlinear_inequality",
+    "label": "Nonlinear inequalities in two variables",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.systems.nonlinear",
+      "precalc.poly.inequality"
+    ],
+    "subdomain": "precalculus.systems"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.partial_fractions.repeated",
+    "label": "Partial fractions with repeated factors",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.partial_fractions"
+    ],
+    "subdomain": "precalculus.analytic"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.partial_fractions.quadratic",
+    "label": "Partial fractions with irreducible quadratic factors",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.partial_fractions"
+    ],
+    "subdomain": "precalculus.analytic"
+  },
+  {
+    "domain": "precalculus",
+    "grading_type": "numeric",
+    "id": "precalc.binomial.multinomial",
+    "label": "The multinomial theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "precalc.binomial_theorem"
+    ],
+    "subdomain": "precalculus.discrete"
   },
   {
     "domain": "probability_theory",

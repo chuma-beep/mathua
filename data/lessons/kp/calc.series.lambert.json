@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Lambert-series form",
+    "section": "The Lambert-series form",
+    "subgoals": [
+      "State the Lambert-series form",
+      "Identify the quantities in the lambert series step",
+      "Carry out the lambert series computation"
+    ]
+  },
+  {
+    "label": "Divisor coefficients",
+    "section": "Divisor coefficients",
+    "subgoals": [
+      "State the relation used in divisor coefficients",
+      "Identify the quantities in the divisor coefficients step",
+      "Carry out the divisor coefficients computation"
+    ]
+  },
+  {
+    "label": "Evaluating at zero",
+    "section": "Evaluating at zero",
+    "subgoals": [
+      "State the relation used in evaluating at zero",
+      "Identify the quantities in the evaluating at zero step",
+      "Carry out the evaluating at zero computation"
+    ]
+  }
+]

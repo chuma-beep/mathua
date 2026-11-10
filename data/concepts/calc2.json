@@ -1261,5 +1261,125 @@
       "streak": 10,
       "avg_time_seconds": 24.0
     }
+  },
+  {
+    "id": "calc.series.cesaro",
+    "label": "Cesaro summability",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.concept",
+      "calc.series.operations"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.series.dirichlet_series",
+    "label": "Dirichlet series",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.operations",
+      "calc.series.power"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.series.abel_theorem",
+    "label": "Abel's theorem for power series",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.power",
+      "calc.series.abel"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.series.asymptotic",
+    "label": "Asymptotic series",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.taylor",
+      "calc.limit.asymptotic_equivalence"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.series.euler_maclaurin",
+    "label": "The Euler-Maclaurin formula",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.taylor",
+      "calc.integral.numerical"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.series.borel",
+    "label": "Borel summability",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.power",
+      "calc.series.operations"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.series.taubian",
+    "label": "Tauberian theorems",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.cesaro",
+      "calc.series.operations"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.series.lambert",
+    "label": "Lambert series",
+    "domain": "calc2",
+    "subdomain": "calculus.series",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.power",
+      "calc.series.geometric"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
   }
 ]

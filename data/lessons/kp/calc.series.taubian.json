@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Tauberian implication",
+    "section": "Tauberian implication",
+    "subgoals": [
+      "State the relation used in tauberian implication",
+      "Identify the quantities in the tauberian implication step",
+      "Carry out the tauberian implication computation"
+    ]
+  },
+  {
+    "label": "The condition",
+    "section": "The condition",
+    "subgoals": [
+      "State the relation used in the condition",
+      "Identify the quantities in the the condition step",
+      "Carry out the the condition computation"
+    ]
+  },
+  {
+    "label": "A counterexample",
+    "section": "A counterexample",
+    "subgoals": [
+      "State the relation used in a counterexample",
+      "Identify the quantities in the a counterexample step",
+      "Carry out the a counterexample computation"
+    ]
+  }
+]

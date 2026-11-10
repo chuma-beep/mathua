@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Cesaro mean",
+    "section": "The Cesaro mean",
+    "subgoals": [
+      "State the relation used in the cesaro mean",
+      "Identify the quantities in the the cesaro mean step",
+      "Carry out the the cesaro mean computation"
+    ]
+  },
+  {
+    "label": "Convergence tests",
+    "section": "Convergence tests",
+    "subgoals": [
+      "State the relation used in convergence tests",
+      "Identify the quantities in the convergence tests step",
+      "Carry out the convergence tests computation"
+    ]
+  },
+  {
+    "label": "The Cesaro sum",
+    "section": "The Cesaro sum",
+    "subgoals": [
+      "State the relation used in the cesaro sum",
+      "Identify the quantities in the the cesaro sum step",
+      "Carry out the the cesaro sum computation"
+    ]
+  }
+]

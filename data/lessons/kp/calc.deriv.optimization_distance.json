@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Distance to a line",
+    "section": "Distance to a line",
+    "subgoals": [
+      "State the relation used in distance to a line",
+      "Identify the quantities in the distance to a line step",
+      "Carry out the distance to a line computation"
+    ]
+  },
+  {
+    "label": "The closest point",
+    "section": "The closest point",
+    "subgoals": [
+      "State the relation used in the closest point",
+      "Identify the quantities in the the closest point step",
+      "Carry out the the closest point computation"
+    ]
+  },
+  {
+    "label": "Squared distance",
+    "section": "Squared distance",
+    "subgoals": [
+      "State the relation used in squared distance",
+      "Identify the quantities in the squared distance step",
+      "Carry out the squared distance computation"
+    ]
+  }
+]

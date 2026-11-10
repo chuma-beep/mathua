@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Asymptotic expansion",
+    "section": "Asymptotic expansion",
+    "subgoals": [
+      "State the relation used in asymptotic expansion",
+      "Identify the quantities in the asymptotic expansion step",
+      "Carry out the asymptotic expansion computation"
+    ]
+  },
+  {
+    "label": "Leading term",
+    "section": "Leading term",
+    "subgoals": [
+      "State the relation used in leading term",
+      "Identify the quantities in the leading term step",
+      "Carry out the leading term computation"
+    ]
+  },
+  {
+    "label": "Error order",
+    "section": "Error order",
+    "subgoals": [
+      "State the relation used in error order",
+      "Identify the quantities in the error order step",
+      "Carry out the error order computation"
+    ]
+  }
+]

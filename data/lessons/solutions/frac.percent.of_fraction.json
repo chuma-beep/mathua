@@ -1,0 +1,23 @@
+{
+  "concept": "frac.percent.of_fraction",
+  "setup": "Find [[p]] percent of [[a]]/[[b]].",
+  "steps": [
+    {
+      "fact": "p",
+      "say": "The percentage rate is [[p]] percent."
+    },
+    {
+      "fact": "a",
+      "say": "The numerator of the fraction is [[a]]."
+    },
+    {
+      "fact": "b",
+      "say": "The denominator of the fraction is [[b]]."
+    },
+    {
+      "fact": "answer",
+      "say": "Multiplying the rate by the fraction gives [[answer]]."
+    }
+  ],
+  "answer": "The requested value is [[answer]]."
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The tangent ratio",
+    "section": "The tangent ratio",
+    "subgoals": [
+      "State the relation used in the tangent ratio",
+      "Identify the quantities in the the tangent ratio step",
+      "Carry out the the tangent ratio computation"
+    ]
+  },
+  {
+    "label": "Differentiating",
+    "section": "Differentiating",
+    "subgoals": [
+      "State the relation used in differentiating",
+      "Identify the quantities in the differentiating step",
+      "Carry out the differentiating computation"
+    ]
+  },
+  {
+    "label": "The angle rate",
+    "section": "The angle rate",
+    "subgoals": [
+      "State the relation used in the angle rate",
+      "Identify the quantities in the the angle rate step",
+      "Carry out the the angle rate computation"
+    ]
+  }
+]

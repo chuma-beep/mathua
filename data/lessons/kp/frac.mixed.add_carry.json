@@ -1,0 +1,29 @@
+[
+  {
+    "label": "When the fractions carry",
+    "section": "When the fractions carry",
+    "subgoals": [
+      "State the relation used in when the fractions carry",
+      "Identify the quantities in the when the fractions carry step",
+      "Carry out the when the fractions carry computation"
+    ]
+  },
+  {
+    "label": "The whole-number sum",
+    "section": "The whole-number sum",
+    "subgoals": [
+      "State the relation used in the whole-number sum",
+      "Identify the quantities in the the whole-number sum step",
+      "Carry out the the whole-number sum computation"
+    ]
+  },
+  {
+    "label": "Regrouping the result",
+    "section": "Regrouping the result",
+    "subgoals": [
+      "State the relation used in regrouping the result",
+      "Identify the quantities in the regrouping the result step",
+      "Carry out the regrouping the result computation"
+    ]
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "concept": "frac.mixed.add_carry",
+  "setup": "Add the mixed numbers [[w1]] [[a]]/[[b]] and [[w2]] [[c]]/[[d]].",
+  "steps": [
+    {
+      "fact": "l",
+      "say": "The common denominator is [[l]]."
+    },
+    {
+      "fact": "frac_num",
+      "say": "The fractional numerators combine to [[frac_num]] over [[l]]."
+    },
+    {
+      "fact": "carry",
+      "say": "The carry is [[carry]] because the fraction sum reaches or passes one whole."
+    },
+    {
+      "fact": "whole",
+      "say": "The whole-number part becomes [[whole]]."
+    },
+    {
+      "fact": "rem",
+      "say": "The remaining numerator is [[rem]]."
+    }
+  ],
+  "answer": "The sum is [[whole]] and [[rem]]/[[l]]."
+}

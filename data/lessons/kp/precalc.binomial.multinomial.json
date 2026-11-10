@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The multinomial coefficient",
+    "section": "The multinomial coefficient",
+    "subgoals": [
+      "State the relation used in the multinomial coefficient",
+      "Identify the quantities in the the multinomial coefficient step",
+      "Carry out the the multinomial coefficient computation"
+    ]
+  },
+  {
+    "label": "Number of terms",
+    "section": "Number of terms",
+    "subgoals": [
+      "State the relation used in number of terms",
+      "Identify the quantities in the number of terms step",
+      "Carry out the number of terms computation"
+    ]
+  },
+  {
+    "label": "Evaluating at one",
+    "section": "Evaluating at one",
+    "subgoals": [
+      "State the relation used in evaluating at one",
+      "Identify the quantities in the evaluating at one step",
+      "Carry out the evaluating at one computation"
+    ]
+  }
+]

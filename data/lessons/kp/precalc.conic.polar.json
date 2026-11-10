@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Polar form of a conic",
+    "section": "Polar form of a conic",
+    "subgoals": [
+      "State the relation used in polar form of a conic",
+      "Identify the quantities in the polar form of a conic step",
+      "Carry out the polar form of a conic computation"
+    ]
+  },
+  {
+    "label": "Eccentricity and directrix",
+    "section": "Eccentricity and directrix",
+    "subgoals": [
+      "State the relation used in eccentricity and directrix",
+      "Identify the quantities in the eccentricity and directrix step",
+      "Carry out the eccentricity and directrix computation"
+    ]
+  },
+  {
+    "label": "Reading the denominator",
+    "section": "Reading the denominator",
+    "subgoals": [
+      "State the relation used in reading the denominator",
+      "Identify the quantities in the reading the denominator step",
+      "Carry out the reading the denominator computation"
+    ]
+  }
+]

@@ -942,5 +942,35 @@
       "streak": 10,
       "avg_time_seconds": 26.0
     }
+  },
+  {
+    "id": "ml.eval.log_loss",
+    "label": "Log loss and proper scoring rules",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.evaluation",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.loss.cross_entropy",
+      "ml.eval.calibration"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "ml.data.smote",
+    "label": "Synthetic minority oversampling",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.data",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.data.imbalance",
+      "ml.knn.nearest_distance"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
   }
 ]

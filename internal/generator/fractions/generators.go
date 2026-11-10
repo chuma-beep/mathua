@@ -49,6 +49,8 @@ func Register(reg *generator.Registry) {
 	reg.Register("frac.compare.forms", &fracBridgeGen{kind: "compare_forms"})
 	registerWave8(reg)
 	registerWave8Remaining(reg)
+	registerWave9(reg)
+	registerWave9Remaining(reg)
 }
 
 func fracStr(num, den int) string { return fmt.Sprintf("%d/%d", num, den) }

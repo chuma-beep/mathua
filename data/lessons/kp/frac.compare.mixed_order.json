@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Whole parts first",
+    "section": "Whole parts first",
+    "subgoals": [
+      "State the relation used in whole parts first",
+      "Identify the quantities in the whole parts first step",
+      "Carry out the whole parts first computation"
+    ]
+  },
+  {
+    "label": "Cross multiplication",
+    "section": "Cross multiplication",
+    "subgoals": [
+      "State the relation used in cross multiplication",
+      "Identify the quantities in the cross multiplication step",
+      "Carry out the cross multiplication computation"
+    ]
+  },
+  {
+    "label": "Benchmark comparison",
+    "section": "Benchmark comparison",
+    "subgoals": [
+      "State the relation used in benchmark comparison",
+      "Identify the quantities in the benchmark comparison step",
+      "Carry out the benchmark comparison computation"
+    ]
+  }
+]

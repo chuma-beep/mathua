@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Similar triangles",
+    "section": "Similar triangles",
+    "subgoals": [
+      "State the relation used in similar triangles",
+      "Identify the quantities in the similar triangles step",
+      "Carry out the similar triangles computation"
+    ]
+  },
+  {
+    "label": "Shadow rate",
+    "section": "Shadow rate",
+    "subgoals": [
+      "State the relation used in shadow rate",
+      "Identify the quantities in the shadow rate step",
+      "Carry out the shadow rate computation"
+    ]
+  },
+  {
+    "label": "The tip distance",
+    "section": "The tip distance",
+    "subgoals": [
+      "State the relation used in the tip distance",
+      "Identify the quantities in the the tip distance step",
+      "Carry out the the tip distance computation"
+    ]
+  }
+]

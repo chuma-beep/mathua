@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Sum of the first n integers",
+    "section": "Sum of the first n integers",
+    "subgoals": [
+      "State the relation used in sum of the first n integers",
+      "Identify the quantities in the sum of the first n integers step",
+      "Carry out the sum of the first n integers computation"
+    ]
+  },
+  {
+    "label": "Squares and cubes",
+    "section": "Squares and cubes",
+    "subgoals": [
+      "State the relation used in squares and cubes",
+      "Identify the quantities in the squares and cubes step",
+      "Carry out the squares and cubes computation"
+    ]
+  },
+  {
+    "label": "Using the formulas",
+    "section": "Using the formulas",
+    "subgoals": [
+      "State the relation used in using the formulas",
+      "Identify the quantities in the using the formulas step",
+      "Carry out the using the formulas computation"
+    ]
+  }
+]

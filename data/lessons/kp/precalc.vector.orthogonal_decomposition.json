@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The parallel component",
+    "section": "The parallel component",
+    "subgoals": [
+      "State the relation used in the parallel component",
+      "Identify the quantities in the the parallel component step",
+      "Carry out the the parallel component computation"
+    ]
+  },
+  {
+    "label": "The perpendicular component",
+    "section": "The perpendicular component",
+    "subgoals": [
+      "State the relation used in the perpendicular component",
+      "Identify the quantities in the the perpendicular component step",
+      "Carry out the the perpendicular component computation"
+    ]
+  },
+  {
+    "label": "Checking the decomposition",
+    "section": "Checking the decomposition",
+    "subgoals": [
+      "State the relation used in checking the decomposition",
+      "Identify the quantities in the checking the decomposition step",
+      "Carry out the checking the decomposition computation"
+    ]
+  }
+]

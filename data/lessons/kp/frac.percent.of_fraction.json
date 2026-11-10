@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Percent as a fraction",
+    "section": "Percent as a fraction",
+    "subgoals": [
+      "State the relation used in percent as a fraction",
+      "Identify the quantities in the percent as a fraction step",
+      "Carry out the percent as a fraction computation"
+    ]
+  },
+  {
+    "label": "Multiplying fractions",
+    "section": "Multiplying fractions",
+    "subgoals": [
+      "State the relation used in multiplying fractions",
+      "Identify the quantities in the multiplying fractions step",
+      "Carry out the multiplying fractions computation"
+    ]
+  },
+  {
+    "label": "Comparing to one half",
+    "section": "Comparing to one half",
+    "subgoals": [
+      "State the relation used in comparing to one half",
+      "Identify the quantities in the comparing to one half step",
+      "Carry out the comparing to one half computation"
+    ]
+  }
+]

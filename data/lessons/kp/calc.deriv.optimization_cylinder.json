@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Cylinder volume",
+    "section": "Cylinder volume",
+    "subgoals": [
+      "State the relation used in cylinder volume",
+      "Identify the quantities in the cylinder volume step",
+      "Carry out the cylinder volume computation"
+    ]
+  },
+  {
+    "label": "The constraint",
+    "section": "The constraint",
+    "subgoals": [
+      "State the relation used in the constraint",
+      "Identify the quantities in the the constraint step",
+      "Carry out the the constraint computation"
+    ]
+  },
+  {
+    "label": "The optimal dimensions",
+    "section": "The optimal dimensions",
+    "subgoals": [
+      "State the relation used in the optimal dimensions",
+      "Identify the quantities in the the optimal dimensions step",
+      "Carry out the the optimal dimensions computation"
+    ]
+  }
+]

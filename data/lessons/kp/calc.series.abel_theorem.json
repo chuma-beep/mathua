@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Power series at the boundary",
+    "section": "Power series at the boundary",
+    "subgoals": [
+      "State the relation used in power series at the boundary",
+      "Identify the quantities in the power series at the boundary step",
+      "Carry out the power series at the boundary computation"
+    ]
+  },
+  {
+    "label": "Abel's theorem",
+    "section": "Abel's theorem",
+    "subgoals": [
+      "State the relation used in abel's theorem",
+      "Identify the quantities in the abel's theorem step",
+      "Carry out the abel's theorem computation"
+    ]
+  },
+  {
+    "label": "An interior check",
+    "section": "An interior check",
+    "subgoals": [
+      "State the relation used in an interior check",
+      "Identify the quantities in the an interior check step",
+      "Carry out the an interior check computation"
+    ]
+  }
+]

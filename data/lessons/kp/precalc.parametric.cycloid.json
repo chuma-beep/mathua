@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The cycloid equations",
+    "section": "The cycloid equations",
+    "subgoals": [
+      "State the relation used in the cycloid equations",
+      "Identify the quantities in the the cycloid equations step",
+      "Carry out the the cycloid equations computation"
+    ]
+  },
+  {
+    "label": "Maximum height",
+    "section": "Maximum height",
+    "subgoals": [
+      "State the relation used in maximum height",
+      "Identify the quantities in the maximum height step",
+      "Carry out the maximum height computation"
+    ]
+  },
+  {
+    "label": "Period",
+    "section": "Period",
+    "subgoals": [
+      "State the relation used in period",
+      "Identify the quantities in the period step",
+      "Carry out the period computation"
+    ]
+  }
+]

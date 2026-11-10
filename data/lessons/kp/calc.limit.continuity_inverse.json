@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Inverse functions",
+    "section": "Inverse functions",
+    "subgoals": [
+      "State the relation used in inverse functions",
+      "Identify the quantities in the inverse functions step",
+      "Carry out the inverse functions computation"
+    ]
+  },
+  {
+    "label": "Continuity",
+    "section": "Continuity",
+    "subgoals": [
+      "State the relation used in continuity",
+      "Identify the quantities in the continuity step",
+      "Carry out the continuity computation"
+    ]
+  },
+  {
+    "label": "Monotonicity",
+    "section": "Monotonicity",
+    "subgoals": [
+      "State the relation used in monotonicity",
+      "Identify the quantities in the monotonicity step",
+      "Carry out the monotonicity computation"
+    ]
+  }
+]

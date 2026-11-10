@@ -18,6 +18,8 @@ func Register(reg *generator.Registry) {
 		reg.Register(e.id, e.gen)
 	}
 	registerBatch(reg)
+	registerWave9(reg)
+	registerWave9Remaining(reg)
 }
 
 var all = []struct {

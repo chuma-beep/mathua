@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The synthetic point",
+    "section": "The synthetic point",
+    "subgoals": [
+      "State the relation used in the synthetic point",
+      "Identify the quantities in the the synthetic point step",
+      "Carry out the the synthetic point computation"
+    ]
+  },
+  {
+    "label": "Neighbour count",
+    "section": "Neighbour count",
+    "subgoals": [
+      "State the relation used in neighbour count",
+      "Identify the quantities in the neighbour count step",
+      "Carry out the neighbour count computation"
+    ]
+  },
+  {
+    "label": "Class balance",
+    "section": "Class balance",
+    "subgoals": [
+      "State the relation used in class balance",
+      "Identify the quantities in the class balance step",
+      "Carry out the class balance computation"
+    ]
+  }
+]

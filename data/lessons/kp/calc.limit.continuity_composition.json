@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Composition of continuous functions",
+    "section": "Composition of continuous functions",
+    "subgoals": [
+      "State the relation used in composition of continuous functions",
+      "Identify the quantities in the composition of continuous functions step",
+      "Carry out the composition of continuous functions computation"
+    ]
+  },
+  {
+    "label": "The limit",
+    "section": "The limit",
+    "subgoals": [
+      "State the relation used in the limit",
+      "Identify the quantities in the the limit step",
+      "Carry out the the limit computation"
+    ]
+  },
+  {
+    "label": "Domain conditions",
+    "section": "Domain conditions",
+    "subgoals": [
+      "State the relation used in domain conditions",
+      "Identify the quantities in the domain conditions step",
+      "Carry out the domain conditions computation"
+    ]
+  }
+]

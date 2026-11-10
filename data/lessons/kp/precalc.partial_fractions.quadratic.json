@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Irreducible quadratic factors",
+    "section": "Irreducible quadratic factors",
+    "subgoals": [
+      "State the relation used in irreducible quadratic factors",
+      "Identify the quantities in the irreducible quadratic factors step",
+      "Carry out the irreducible quadratic factors computation"
+    ]
+  },
+  {
+    "label": "Clearing denominators",
+    "section": "Clearing denominators",
+    "subgoals": [
+      "State the relation used in clearing denominators",
+      "Identify the quantities in the clearing denominators step",
+      "Carry out the clearing denominators computation"
+    ]
+  },
+  {
+    "label": "The discriminant",
+    "section": "The discriminant",
+    "subgoals": [
+      "State the relation used in the discriminant",
+      "Identify the quantities in the the discriminant step",
+      "Carry out the the discriminant computation"
+    ]
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "concept": "frac.compare.mixed_order",
+  "setup": "Compare the mixed numbers [[w1]] [[a]]/[[b]] and [[w2]] [[c]]/[[d]].",
+  "steps": [
+    {
+      "fact": "w1",
+      "say": "The first whole part is [[w1]]."
+    },
+    {
+      "fact": "w2",
+      "say": "The second whole part is [[w2]]."
+    },
+    {
+      "fact": "a",
+      "say": "The first fractional numerator is [[a]]."
+    },
+    {
+      "fact": "c",
+      "say": "The second fractional numerator is [[c]]."
+    },
+    {
+      "fact": "answer",
+      "say": "The cross multiplication and whole-part comparison give [[answer]]."
+    }
+  ],
+  "answer": "The requested comparison value is [[answer]]."
+}

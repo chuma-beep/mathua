@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The direction-cosine formula",
+    "section": "The direction-cosine formula",
+    "subgoals": [
+      "State the direction-cosine formula",
+      "Identify the quantities in the direction cosines step",
+      "Carry out the direction cosines computation"
+    ]
+  },
+  {
+    "label": "The identity",
+    "section": "The identity",
+    "subgoals": [
+      "State the relation used in the identity",
+      "Identify the quantities in the the identity step",
+      "Carry out the the identity computation"
+    ]
+  },
+  {
+    "label": "Recovering a component",
+    "section": "Recovering a component",
+    "subgoals": [
+      "State the relation used in recovering a component",
+      "Identify the quantities in the recovering a component step",
+      "Carry out the recovering a component computation"
+    ]
+  }
+]

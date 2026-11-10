@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The logit",
+    "section": "The logit",
+    "subgoals": [
+      "State the relation used in the logit",
+      "Identify the quantities in the the logit step",
+      "Carry out the the logit computation"
+    ]
+  },
+  {
+    "label": "Inverting the logistic",
+    "section": "Inverting the logistic",
+    "subgoals": [
+      "State the relation used in inverting the logistic",
+      "Identify the quantities in the inverting the logistic step",
+      "Carry out the inverting the logistic computation"
+    ]
+  },
+  {
+    "label": "The restricted range",
+    "section": "The restricted range",
+    "subgoals": [
+      "State the relation used in the restricted range",
+      "Identify the quantities in the the restricted range step",
+      "Carry out the the restricted range computation"
+    ]
+  }
+]

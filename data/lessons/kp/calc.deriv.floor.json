@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The floor function",
+    "section": "The floor function",
+    "subgoals": [
+      "State the relation used in the floor function",
+      "Identify the quantities in the the floor function step",
+      "Carry out the the floor function computation"
+    ]
+  },
+  {
+    "label": "Jumps",
+    "section": "Jumps",
+    "subgoals": [
+      "State the relation used in jumps",
+      "Identify the quantities in the jumps step",
+      "Carry out the jumps computation"
+    ]
+  },
+  {
+    "label": "Derivative on intervals",
+    "section": "Derivative on intervals",
+    "subgoals": [
+      "State the relation used in derivative on intervals",
+      "Identify the quantities in the derivative on intervals step",
+      "Carry out the derivative on intervals computation"
+    ]
+  }
+]

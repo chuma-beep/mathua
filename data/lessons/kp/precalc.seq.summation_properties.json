@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Linearity",
+    "section": "Linearity",
+    "subgoals": [
+      "State the relation used in linearity",
+      "Identify the quantities in the linearity step",
+      "Carry out the linearity computation"
+    ]
+  },
+  {
+    "label": "Splitting a sum",
+    "section": "Splitting a sum",
+    "subgoals": [
+      "State the relation used in splitting a sum",
+      "Identify the quantities in the splitting a sum step",
+      "Carry out the splitting a sum computation"
+    ]
+  },
+  {
+    "label": "Changing the index",
+    "section": "Changing the index",
+    "subgoals": [
+      "State the relation used in changing the index",
+      "Identify the quantities in the changing the index step",
+      "Carry out the changing the index computation"
+    ]
+  }
+]

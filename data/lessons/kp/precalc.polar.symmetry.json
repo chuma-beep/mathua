@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Three symmetry tests",
+    "section": "Three symmetry tests",
+    "subgoals": [
+      "State the relation used in three symmetry tests",
+      "Identify the quantities in the three symmetry tests step",
+      "Carry out the three symmetry tests computation"
+    ]
+  },
+  {
+    "label": "Substitution",
+    "section": "Substitution",
+    "subgoals": [
+      "State the relation used in substitution",
+      "Identify the quantities in the substitution step",
+      "Carry out the substitution computation"
+    ]
+  },
+  {
+    "label": "Graphing consequences",
+    "section": "Graphing consequences",
+    "subgoals": [
+      "State the relation used in graphing consequences",
+      "Identify the quantities in the graphing consequences step",
+      "Carry out the graphing consequences computation"
+    ]
+  }
+]

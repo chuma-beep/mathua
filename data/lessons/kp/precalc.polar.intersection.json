@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Solving polar equations",
+    "section": "Solving polar equations",
+    "subgoals": [
+      "State the relation used in solving polar equations",
+      "Identify the quantities in the solving polar equations step",
+      "Carry out the solving polar equations computation"
+    ]
+  },
+  {
+    "label": "Angles and common points",
+    "section": "Angles and common points",
+    "subgoals": [
+      "State the relation used in angles and common points",
+      "Identify the quantities in the angles and common points step",
+      "Carry out the angles and common points computation"
+    ]
+  },
+  {
+    "label": "Counting intersections",
+    "section": "Counting intersections",
+    "subgoals": [
+      "State the relation used in counting intersections",
+      "Identify the quantities in the counting intersections step",
+      "Carry out the counting intersections computation"
+    ]
+  }
+]

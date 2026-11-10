@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Repeated linear factors",
+    "section": "Repeated linear factors",
+    "subgoals": [
+      "State the relation used in repeated linear factors",
+      "Identify the quantities in the repeated linear factors step",
+      "Carry out the repeated linear factors computation"
+    ]
+  },
+  {
+    "label": "Clearing denominators",
+    "section": "Clearing denominators",
+    "subgoals": [
+      "State the relation used in clearing denominators",
+      "Identify the quantities in the clearing denominators step",
+      "Carry out the clearing denominators computation"
+    ]
+  },
+  {
+    "label": "Evaluating coefficients",
+    "section": "Evaluating coefficients",
+    "subgoals": [
+      "State the relation used in evaluating coefficients",
+      "Identify the quantities in the evaluating coefficients step",
+      "Carry out the evaluating coefficients computation"
+    ]
+  }
+]

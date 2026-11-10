@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Borel transform",
+    "section": "Borel transform",
+    "subgoals": [
+      "State the relation used in borel transform",
+      "Identify the quantities in the borel transform step",
+      "Carry out the borel transform computation"
+    ]
+  },
+  {
+    "label": "Summability",
+    "section": "Summability",
+    "subgoals": [
+      "State the relation used in summability",
+      "Identify the quantities in the summability step",
+      "Carry out the summability computation"
+    ]
+  },
+  {
+    "label": "Coefficients",
+    "section": "Coefficients",
+    "subgoals": [
+      "State the relation used in coefficients",
+      "Identify the quantities in the coefficients step",
+      "Carry out the coefficients computation"
+    ]
+  }
+]

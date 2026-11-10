@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The horizontal-line test",
+    "section": "The horizontal-line test",
+    "subgoals": [
+      "State the relation used in the horizontal-line test",
+      "Identify the quantities in the the horizontal-line test step",
+      "Carry out the the horizontal-line test computation"
+    ]
+  },
+  {
+    "label": "Finite tables",
+    "section": "Finite tables",
+    "subgoals": [
+      "State the relation used in finite tables",
+      "Identify the quantities in the finite tables step",
+      "Carry out the finite tables computation"
+    ]
+  },
+  {
+    "label": "Restricting the domain",
+    "section": "Restricting the domain",
+    "subgoals": [
+      "State the relation used in restricting the domain",
+      "Identify the quantities in the restricting the domain step",
+      "Carry out the restricting the domain computation"
+    ]
+  }
+]

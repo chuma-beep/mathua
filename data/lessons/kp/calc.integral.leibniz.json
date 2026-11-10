@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Differentiating under the integral",
+    "section": "Differentiating under the integral",
+    "subgoals": [
+      "State the relation used in differentiating under the integral",
+      "Identify the quantities in the differentiating under the integral step",
+      "Carry out the differentiating under the integral computation"
+    ]
+  },
+  {
+    "label": "Evaluating at a parameter",
+    "section": "Evaluating at a parameter",
+    "subgoals": [
+      "State the relation used in evaluating at a parameter",
+      "Identify the quantities in the evaluating at a parameter step",
+      "Carry out the evaluating at a parameter computation"
+    ]
+  },
+  {
+    "label": "Integrating after differentiating",
+    "section": "Integrating after differentiating",
+    "subgoals": [
+      "State the relation used in integrating after differentiating",
+      "Identify the quantities in the integrating after differentiating step",
+      "Carry out the integrating after differentiating computation"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Composition in both orders",
+    "section": "Composition in both orders",
+    "subgoals": [
+      "State the relation used in composition in both orders",
+      "Identify the quantities in the composition in both orders step",
+      "Carry out the composition in both orders computation"
+    ]
+  },
+  {
+    "label": "The inverse test",
+    "section": "The inverse test",
+    "subgoals": [
+      "State the relation used in the inverse test",
+      "Identify the quantities in the the inverse test step",
+      "Carry out the the inverse test computation"
+    ]
+  },
+  {
+    "label": "Domain restrictions",
+    "section": "Domain restrictions",
+    "subgoals": [
+      "State the relation used in domain restrictions",
+      "Identify the quantities in the domain restrictions step",
+      "Carry out the domain restrictions computation"
+    ]
+  }
+]

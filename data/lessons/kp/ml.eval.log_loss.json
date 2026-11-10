@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Log loss for one example",
+    "section": "Log loss for one example",
+    "subgoals": [
+      "State the relation used in log loss for one example",
+      "Identify the quantities in the log loss for one example step",
+      "Carry out the log loss for one example computation"
+    ]
+  },
+  {
+    "label": "Proper scoring rules",
+    "section": "Proper scoring rules",
+    "subgoals": [
+      "State the relation used in proper scoring rules",
+      "Identify the quantities in the proper scoring rules step",
+      "Carry out the proper scoring rules computation"
+    ]
+  },
+  {
+    "label": "Log loss and accuracy",
+    "section": "Log loss and accuracy",
+    "subgoals": [
+      "State the relation used in log loss and accuracy",
+      "Identify the quantities in the log loss and accuracy step",
+      "Carry out the log loss and accuracy computation"
+    ]
+  }
+]

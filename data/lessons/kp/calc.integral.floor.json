@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Staircase integrals",
+    "section": "Staircase integrals",
+    "subgoals": [
+      "State the relation used in staircase integrals",
+      "Identify the quantities in the staircase integrals step",
+      "Carry out the staircase integrals computation"
+    ]
+  },
+  {
+    "label": "Counting jumps",
+    "section": "Counting jumps",
+    "subgoals": [
+      "State the relation used in counting jumps",
+      "Identify the quantities in the counting jumps step",
+      "Carry out the counting jumps computation"
+    ]
+  },
+  {
+    "label": "The exact sum",
+    "section": "The exact sum",
+    "subgoals": [
+      "State the relation used in the exact sum",
+      "Identify the quantities in the the exact sum step",
+      "Carry out the the exact sum computation"
+    ]
+  }
+]

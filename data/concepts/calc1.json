@@ -1449,5 +1449,209 @@
       "streak": 10,
       "avg_time_seconds": 20.0
     }
+  },
+  {
+    "id": "calc.limit.asymptotic_equivalence",
+    "label": "Asymptotic equivalence",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.limit.big_o",
+      "calc.limit.little_o"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.deriv.elasticity",
+    "label": "Elasticity of demand",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.product_rule",
+      "calc.deriv.marginal_analysis"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.integral.leibniz",
+    "label": "Differentiation under the integral sign",
+    "domain": "calc1",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.ftc",
+      "calc.integral.variable_limits"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.limit.continuity_composition",
+    "label": "Continuity of composite functions",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.limit.continuity"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.limit.continuity_inverse",
+    "label": "Continuity of inverse functions",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.limit.continuity"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.limit.continuity_extension",
+    "label": "Removable discontinuities and continuous extensions",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.limit.discontinuity",
+      "calc.limit.continuity"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.deriv.absolute",
+    "label": "Derivatives of absolute value functions",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.definition",
+      "calc.limit.absolute_value"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.deriv.floor",
+    "label": "Derivatives of floor and ceiling functions",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.piecewise",
+      "precalc.func.floor_ceiling"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.deriv.sign",
+    "label": "Derivatives of sign functions",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.piecewise"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.deriv.related_rates_shadow",
+    "label": "Related rates: shadow length",
+    "domain": "calc1",
+    "subdomain": "calculus.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.related_rates"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.deriv.related_rates_angle",
+    "label": "Related rates: angle of elevation",
+    "domain": "calc1",
+    "subdomain": "calculus.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.related_rates",
+      "trig.basics.tan_def"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.deriv.optimization_distance",
+    "label": "Optimization: closest point",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.optimization"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.deriv.optimization_cylinder",
+    "label": "Optimization: cylinder dimensions",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.optimization"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
+  },
+  {
+    "id": "calc.integral.floor",
+    "label": "Integrals of floor functions",
+    "domain": "calc1",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.piecewise",
+      "precalc.func.floor_ceiling"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 24.0
+    }
   }
 ]

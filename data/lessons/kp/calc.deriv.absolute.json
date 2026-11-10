@@ -1,0 +1,29 @@
+[
+  {
+    "label": "One-sided derivatives",
+    "section": "One-sided derivatives",
+    "subgoals": [
+      "State the relation used in one-sided derivatives",
+      "Identify the quantities in the one-sided derivatives step",
+      "Carry out the one-sided derivatives computation"
+    ]
+  },
+  {
+    "label": "The corner",
+    "section": "The corner",
+    "subgoals": [
+      "State the relation used in the corner",
+      "Identify the quantities in the the corner step",
+      "Carry out the the corner computation"
+    ]
+  },
+  {
+    "label": "Differentiability",
+    "section": "Differentiability",
+    "subgoals": [
+      "State the relation used in differentiability",
+      "Identify the quantities in the differentiability step",
+      "Carry out the differentiability computation"
+    ]
+  }
+]

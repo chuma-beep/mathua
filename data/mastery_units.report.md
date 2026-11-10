@@ -12,19 +12,19 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 1900 |
-| Total units | 142 |
+| Total concepts | 1950 |
+| Total units | 143 |
 | Minimum unit size | 1 |
 | Median unit size | 10 |
 | Maximum unit size | 58 |
-| Singleton units | 23 |
-| Units with <= 3 concepts | 38 |
-| Units with > 25 concepts | 26 |
+| Singleton units | 22 |
+| Units with <= 3 concepts | 39 |
+| Units with > 25 concepts | 27 |
 | Units with > 50 concepts | 1 |
-| Cross-unit prerequisite edges (derived) | 482 |
+| Cross-unit prerequisite edges (derived) | 493 |
 | Backward band edges | 0 |
 
-If the learner is assessed once per unit, then 142 assessments cover the corpus, and the
+If the learner is assessed once per unit, then 143 assessments cover the corpus, and the
 median is one assessment per 10 concepts. That is the frequency question this report
 exists to make concrete.
 
@@ -50,14 +50,14 @@ exists to make concrete.
 | `arithmetic.b3` | arithmetic | 3 | 27 | 7 | 9–11 |
 | `arithmetic.b4` | arithmetic | 4 | 1 | 1 | 12–12 |
 | `calc1.b8` | calc1 | 8 | 1 | 1 | 26–26 |
-| `calc1.b9` | calc1 | 9 | 20 | 3 | 27–29 |
-| `calc1.b10` | calc1 | 10 | 33 | 3 | 30–32 |
-| `calc1.b11` | calc1 | 11 | 25 | 4 | 33–35 |
-| `calc1.b12` | calc1 | 12 | 21 | 3 | 36–37 |
+| `calc1.b9` | calc1 | 9 | 21 | 3 | 27–29 |
+| `calc1.b10` | calc1 | 10 | 37 | 3 | 30–32 |
+| `calc1.b11` | calc1 | 11 | 30 | 4 | 33–35 |
+| `calc1.b12` | calc1 | 12 | 25 | 3 | 36–38 |
 | `calc2.b9` | calc2 | 9 | 3 | 2 | 29–29 |
-| `calc2.b10` | calc2 | 10 | 35 | 1 | 30–32 |
+| `calc2.b10` | calc2 | 10 | 42 | 1 | 30–32 |
 | `calc2.b11` | calc2 | 11 | 8 | 2 | 33–35 |
-| `calc2.b12` | calc2 | 12 | 42 | 3 | 36–38 |
+| `calc2.b12` | calc2 | 12 | 43 | 3 | 36–38 |
 | `calc2.b13` | calc2 | 13 | 1 | 1 | 39–39 |
 | `calc3.b9` | calc3 | 9 | 5 | 1 | 28–29 |
 | `calc3.b10` | calc3 | 10 | 11 | 3 | 30–32 |
@@ -86,8 +86,8 @@ exists to make concrete.
 | `discrete_math.b9` | discrete_math | 9 | 9 | 4 | 27–29 |
 | `discrete_math.b10` | discrete_math | 10 | 1 | 1 | 30–30 |
 | `fractions.b2` | fractions | 2 | 8 | 4 | 6–8 |
-| `fractions.b3` | fractions | 3 | 35 | 9 | 9–11 |
-| `fractions.b4` | fractions | 4 | 18 | 6 | 12–14 |
+| `fractions.b3` | fractions | 3 | 36 | 9 | 9–11 |
+| `fractions.b4` | fractions | 4 | 20 | 6 | 12–14 |
 | `fractions.b5` | fractions | 5 | 3 | 3 | 15–15 |
 | `geometry.b0` | geometry | 0 | 8 | 5 | 0–2 |
 | `geometry.b1` | geometry | 1 | 22 | 7 | 3–5 |
@@ -120,7 +120,7 @@ exists to make concrete.
 | `machine_learning.b9` | machine_learning | 9 | 9 | 3 | 27–28 |
 | `machine_learning.b10` | machine_learning | 10 | 3 | 1 | 31–32 |
 | `machine_learning.b11` | machine_learning | 11 | 15 | 5 | 33–35 |
-| `machine_learning.b12` | machine_learning | 12 | 14 | 5 | 36–37 |
+| `machine_learning.b12` | machine_learning | 12 | 16 | 5 | 36–37 |
 | `number_theory.b2` | number_theory | 2 | 1 | 1 | 8–8 |
 | `number_theory.b3` | number_theory | 3 | 27 | 2 | 9–11 |
 | `number_theory.b4` | number_theory | 4 | 23 | 4 | 12–14 |
@@ -141,12 +141,13 @@ exists to make concrete.
 | `prealgebra.b4` | prealgebra | 4 | 29 | 6 | 12–14 |
 | `prealgebra.b5` | prealgebra | 5 | 14 | 6 | 15–17 |
 | `prealgebra.b6` | prealgebra | 6 | 6 | 2 | 18–19 |
-| `precalculus.b3` | precalculus | 3 | 1 | 1 | 10–10 |
-| `precalculus.b4` | precalculus | 4 | 8 | 2 | 12–14 |
+| `precalculus.b3` | precalculus | 3 | 2 | 1 | 10–11 |
+| `precalculus.b4` | precalculus | 4 | 10 | 2 | 12–14 |
+| `precalculus.b5` | precalculus | 5 | 3 | 1 | 15–15 |
 | `precalculus.b6` | precalculus | 6 | 1 | 1 | 20–20 |
-| `precalculus.b7` | precalculus | 7 | 12 | 5 | 21–23 |
-| `precalculus.b8` | precalculus | 8 | 30 | 8 | 24–26 |
-| `precalculus.b9` | precalculus | 9 | 6 | 3 | 27–27 |
+| `precalculus.b7` | precalculus | 7 | 16 | 6 | 21–23 |
+| `precalculus.b8` | precalculus | 8 | 40 | 8 | 24–26 |
+| `precalculus.b9` | precalculus | 9 | 9 | 3 | 27–28 |
 | `probability_theory.b3` | probability_theory | 3 | 2 | 2 | 11–11 |
 | `probability_theory.b4` | probability_theory | 4 | 43 | 10 | 12–14 |
 | `probability_theory.b5` | probability_theory | 5 | 31 | 9 | 15–17 |
@@ -188,19 +189,19 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 190 | 7 | 50 | 25 | 47 | 11 | 0 |
-| 3 | 142 | 10 | 58 | 23 | 38 | 26 | 0 |
-| 4 | 111 | 14 | 83 | 12 | 21 | 29 | 0 |
-| 5 | 98 | 14 | 104 | 10 | 19 | 32 | 0 |
-| 6 | 88 | 17 | 98 | 8 | 14 | 28 | 0 |
+| 2 | 192 | 7 | 50 | 26 | 49 | 11 | 0 |
+| 3 | 143 | 10 | 58 | 22 | 39 | 27 | 0 |
+| 4 | 112 | 14 | 83 | 12 | 22 | 29 | 0 |
+| 5 | 99 | 14 | 104 | 10 | 20 | 33 | 0 |
+| 6 | 88 | 17 | 98 | 7 | 14 | 28 | 0 |
 | 8 | 69 | 22 | 103 | 4 | 9 | 33 | 0 |
 | 10 | 61 | 26 | 145 | 5 | 10 | 31 | 0 |
-| 12 | 59 | 28 | 105 | 2 | 5 | 31 | 0 |
+| 12 | 59 | 29 | 105 | 1 | 5 | 32 | 0 |
 | 15 | 48 | 37 | 165 | 2 | 4 | 29 | 0 |
 | 20 | 41 | 43 | 145 | 3 | 6 | 28 | 0 |
-| 45 | 24 | 76 | 171 | 1 | 1 | 23 | 0 |
+| 45 | 24 | 80 | 171 | 1 | 1 | 23 | 0 |
 
-**No width is clean.** Small widths fragment, at 3 there are 23 singleton units, which is a
+**No width is clean.** Small widths fragment, at 3 there are 22 singleton units, which is a
 quiz per concept and is exactly what §12 rules out. Large widths stop fragmenting but produce
 units too large to assess: at 45 the partition is just the 17 domains themselves, whose
 largest is 128 concepts. The usable widths trade fragmentation against size rather than
@@ -453,12 +454,12 @@ Unresolvable subdomains:
 `trigonometry.identities`
 `trigonometry.spherical`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1900
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 1950
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings
 
-- **anomaly** `singleton_units`: 23 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
+- **anomaly** `singleton_units`: 22 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
 
 ## Not decided here
 

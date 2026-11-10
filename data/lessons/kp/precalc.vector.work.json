@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Work as a dot product",
+    "section": "Work as a dot product",
+    "subgoals": [
+      "State the relation used in work as a dot product",
+      "Identify the quantities in the work as a dot product step",
+      "Carry out the work as a dot product computation"
+    ]
+  },
+  {
+    "label": "Projection",
+    "section": "Projection",
+    "subgoals": [
+      "State the relation used in projection",
+      "Identify the quantities in the projection step",
+      "Carry out the projection computation"
+    ]
+  },
+  {
+    "label": "Sign of work",
+    "section": "Sign of work",
+    "subgoals": [
+      "State the relation used in sign of work",
+      "Identify the quantities in the sign of work step",
+      "Carry out the sign of work computation"
+    ]
+  }
+]

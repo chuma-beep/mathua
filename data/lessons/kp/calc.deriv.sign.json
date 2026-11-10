@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The sign function",
+    "section": "The sign function",
+    "subgoals": [
+      "State the relation used in the sign function",
+      "Identify the quantities in the the sign function step",
+      "Carry out the the sign function computation"
+    ]
+  },
+  {
+    "label": "The jump",
+    "section": "The jump",
+    "subgoals": [
+      "State the relation used in the jump",
+      "Identify the quantities in the the jump step",
+      "Carry out the the jump computation"
+    ]
+  },
+  {
+    "label": "Products with sign",
+    "section": "Products with sign",
+    "subgoals": [
+      "State the relation used in products with sign",
+      "Identify the quantities in the products with sign step",
+      "Carry out the products with sign computation"
+    ]
+  }
+]

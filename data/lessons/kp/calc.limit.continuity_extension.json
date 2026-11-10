@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Removable discontinuity",
+    "section": "Removable discontinuity",
+    "subgoals": [
+      "State the relation used in removable discontinuity",
+      "Identify the quantities in the removable discontinuity step",
+      "Carry out the removable discontinuity computation"
+    ]
+  },
+  {
+    "label": "The extension",
+    "section": "The extension",
+    "subgoals": [
+      "State the relation used in the extension",
+      "Identify the quantities in the the extension step",
+      "Carry out the the extension computation"
+    ]
+  },
+  {
+    "label": "Classification",
+    "section": "Classification",
+    "subgoals": [
+      "State the relation used in classification",
+      "Identify the quantities in the classification step",
+      "Carry out the classification computation"
+    ]
+  }
+]

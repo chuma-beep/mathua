@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The formula",
+    "section": "The formula",
+    "subgoals": [
+      "State the relation used in the formula",
+      "Identify the quantities in the the formula step",
+      "Carry out the the formula computation"
+    ]
+  },
+  {
+    "label": "Correction term",
+    "section": "Correction term",
+    "subgoals": [
+      "State the relation used in correction term",
+      "Identify the quantities in the correction term step",
+      "Carry out the correction term computation"
+    ]
+  },
+  {
+    "label": "Sum versus integral",
+    "section": "Sum versus integral",
+    "subgoals": [
+      "State the relation used in sum versus integral",
+      "Identify the quantities in the sum versus integral step",
+      "Carry out the sum versus integral computation"
+    ]
+  }
+]

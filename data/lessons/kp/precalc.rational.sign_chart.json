@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Test intervals",
+    "section": "Test intervals",
+    "subgoals": [
+      "State the relation used in test intervals",
+      "Identify the quantities in the test intervals step",
+      "Carry out the test intervals computation"
+    ]
+  },
+  {
+    "label": "Zeros and poles",
+    "section": "Zeros and poles",
+    "subgoals": [
+      "State the relation used in zeros and poles",
+      "Identify the quantities in the zeros and poles step",
+      "Carry out the zeros and poles computation"
+    ]
+  },
+  {
+    "label": "Reading the sign",
+    "section": "Reading the sign",
+    "subgoals": [
+      "State the relation used in reading the sign",
+      "Identify the quantities in the reading the sign step",
+      "Carry out the reading the sign computation"
+    ]
+  }
+]

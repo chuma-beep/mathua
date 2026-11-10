@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Linear factors over the complex numbers",
+    "section": "Linear factors over the complex numbers",
+    "subgoals": [
+      "State the relation used in linear factors over the complex numbers",
+      "Identify the quantities in the linear factors over the complex numbers step",
+      "Carry out the linear factors over the complex numbers computation"
+    ]
+  },
+  {
+    "label": "Counting the factors",
+    "section": "Counting the factors",
+    "subgoals": [
+      "State the relation used in counting the factors",
+      "Identify the quantities in the counting the factors step",
+      "Carry out the counting the factors computation"
+    ]
+  },
+  {
+    "label": "Reconstructing the polynomial",
+    "section": "Reconstructing the polynomial",
+    "subgoals": [
+      "State the relation used in reconstructing the polynomial",
+      "Identify the quantities in the reconstructing the polynomial step",
+      "Carry out the reconstructing the polynomial computation"
+    ]
+  }
+]

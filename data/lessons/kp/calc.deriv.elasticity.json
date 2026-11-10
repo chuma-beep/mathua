@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The elasticity formula",
+    "section": "The elasticity formula",
+    "subgoals": [
+      "State the relation used in the elasticity formula",
+      "Identify the quantities in the the elasticity formula step",
+      "Carry out the the elasticity formula computation"
+    ]
+  },
+  {
+    "label": "Elastic, inelastic and unit",
+    "section": "Elastic, inelastic and unit",
+    "subgoals": [
+      "State the relation used in elastic, inelastic and unit",
+      "Identify the quantities in the elastic, inelastic and unit step",
+      "Carry out the elastic, inelastic and unit computation"
+    ]
+  },
+  {
+    "label": "Elasticity and revenue",
+    "section": "Elasticity and revenue",
+    "subgoals": [
+      "State the relation used in elasticity and revenue",
+      "Identify the quantities in the elasticity and revenue step",
+      "Carry out the elasticity and revenue computation"
+    ]
+  }
+]

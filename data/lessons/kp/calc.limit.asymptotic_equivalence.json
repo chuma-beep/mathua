@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The ratio limit",
+    "section": "The ratio limit",
+    "subgoals": [
+      "State the relation used in the ratio limit",
+      "Identify the quantities in the the ratio limit step",
+      "Carry out the the ratio limit computation"
+    ]
+  },
+  {
+    "label": "Leading coefficients",
+    "section": "Leading coefficients",
+    "subgoals": [
+      "State the relation used in leading coefficients",
+      "Identify the quantities in the leading coefficients step",
+      "Carry out the leading coefficients computation"
+    ]
+  },
+  {
+    "label": "Comparing growth rates",
+    "section": "Comparing growth rates",
+    "subgoals": [
+      "State the relation used in comparing growth rates",
+      "Identify the quantities in the comparing growth rates step",
+      "Carry out the comparing growth rates computation"
+    ]
+  }
+]

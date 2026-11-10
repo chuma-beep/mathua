@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The shoelace formula",
+    "section": "The shoelace formula",
+    "subgoals": [
+      "State the relation used in the shoelace formula",
+      "Identify the quantities in the the shoelace formula step",
+      "Carry out the the shoelace formula computation"
+    ]
+  },
+  {
+    "label": "Triangles and rectangles",
+    "section": "Triangles and rectangles",
+    "subgoals": [
+      "State the relation used in triangles and rectangles",
+      "Identify the quantities in the triangles and rectangles step",
+      "Carry out the triangles and rectangles computation"
+    ]
+  },
+  {
+    "label": "Missing coordinates",
+    "section": "Missing coordinates",
+    "subgoals": [
+      "State the relation used in missing coordinates",
+      "Identify the quantities in the missing coordinates step",
+      "Carry out the missing coordinates computation"
+    ]
+  }
+]

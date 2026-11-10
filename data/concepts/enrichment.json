@@ -20124,5 +20124,305 @@
     "key_prerequisites": [
       "topo.basics.metric"
     ]
+  },
+  {
+    "id": "precalc.func.one_to_one",
+    "key_prerequisites": [
+      "precalc.func.transformations"
+    ]
+  },
+  {
+    "id": "precalc.poly.complex_factorization",
+    "key_prerequisites": [
+      "precalc.poly.complex_conjugate"
+    ]
+  },
+  {
+    "id": "precalc.vector.orthogonal_decomposition",
+    "key_prerequisites": [
+      "precalc.vector.dot"
+    ]
+  },
+  {
+    "id": "calc.limit.asymptotic_equivalence",
+    "key_prerequisites": [
+      "calc.limit.big_o"
+    ]
+  },
+  {
+    "id": "calc.deriv.elasticity",
+    "key_prerequisites": [
+      "calc.deriv.product_rule"
+    ]
+  },
+  {
+    "id": "calc.integral.leibniz",
+    "key_prerequisites": [
+      "calc.integral.ftc"
+    ]
+  },
+  {
+    "id": "calc.series.cesaro",
+    "key_prerequisites": [
+      "calc.series.concept"
+    ]
+  },
+  {
+    "id": "calc.series.dirichlet_series",
+    "key_prerequisites": [
+      "calc.series.operations"
+    ]
+  },
+  {
+    "id": "frac.mixed.add_carry",
+    "key_prerequisites": [
+      "frac.mixed.add"
+    ]
+  },
+  {
+    "id": "ml.eval.log_loss",
+    "key_prerequisites": [
+      "ml.loss.cross_entropy"
+    ]
+  },
+  {
+    "id": "precalc.func.inverse_composition",
+    "key_prerequisites": [
+      "precalc.func.inverse_value"
+    ]
+  },
+  {
+    "id": "precalc.func.piecewise_operations",
+    "key_prerequisites": [
+      "precalc.func.piecewise"
+    ]
+  },
+  {
+    "id": "precalc.analytic.area_polygon",
+    "key_prerequisites": [
+      "precalc.analytic.distance"
+    ]
+  },
+  {
+    "id": "precalc.rational.sign_chart",
+    "key_prerequisites": [
+      "precalc.rational.asymptote"
+    ]
+  },
+  {
+    "id": "precalc.rational.asymptote_intersection",
+    "key_prerequisites": [
+      "precalc.rational.oblique_asymptote"
+    ]
+  },
+  {
+    "id": "precalc.exp.doubling",
+    "key_prerequisites": [
+      "precalc.exp.growth_model"
+    ]
+  },
+  {
+    "id": "precalc.exp.logistic_inverse",
+    "key_prerequisites": [
+      "precalc.exp.logistic"
+    ]
+  },
+  {
+    "id": "precalc.seq.summation_properties",
+    "key_prerequisites": [
+      "precalc.seq.summation"
+    ]
+  },
+  {
+    "id": "precalc.seq.power_sums",
+    "key_prerequisites": [
+      "precalc.seq.summation"
+    ]
+  },
+  {
+    "id": "precalc.conic.parametric",
+    "key_prerequisites": [
+      "precalc.conic.general"
+    ]
+  },
+  {
+    "id": "precalc.conic.polar",
+    "key_prerequisites": [
+      "precalc.conic.general"
+    ]
+  },
+  {
+    "id": "precalc.polar.symmetry",
+    "key_prerequisites": [
+      "precalc.polar.graph"
+    ]
+  },
+  {
+    "id": "precalc.polar.intersection",
+    "key_prerequisites": [
+      "precalc.polar.graph"
+    ]
+  },
+  {
+    "id": "precalc.parametric.cycloid",
+    "key_prerequisites": [
+      "precalc.parametric.equations"
+    ]
+  },
+  {
+    "id": "precalc.vector.work",
+    "key_prerequisites": [
+      "precalc.vector.dot"
+    ]
+  },
+  {
+    "id": "precalc.vector.direction_cosines",
+    "key_prerequisites": [
+      "precalc.vector.three_d"
+    ]
+  },
+  {
+    "id": "precalc.systems.nonlinear_inequality",
+    "key_prerequisites": [
+      "precalc.systems.nonlinear"
+    ]
+  },
+  {
+    "id": "precalc.partial_fractions.repeated",
+    "key_prerequisites": [
+      "precalc.partial_fractions"
+    ]
+  },
+  {
+    "id": "precalc.partial_fractions.quadratic",
+    "key_prerequisites": [
+      "precalc.partial_fractions"
+    ]
+  },
+  {
+    "id": "precalc.binomial.multinomial",
+    "key_prerequisites": [
+      "precalc.binomial_theorem"
+    ]
+  },
+  {
+    "id": "calc.limit.continuity_composition",
+    "key_prerequisites": [
+      "calc.limit.continuity"
+    ]
+  },
+  {
+    "id": "calc.limit.continuity_inverse",
+    "key_prerequisites": [
+      "calc.limit.continuity"
+    ]
+  },
+  {
+    "id": "calc.limit.continuity_extension",
+    "key_prerequisites": [
+      "calc.limit.discontinuity"
+    ]
+  },
+  {
+    "id": "calc.deriv.absolute",
+    "key_prerequisites": [
+      "calc.deriv.definition"
+    ]
+  },
+  {
+    "id": "calc.deriv.floor",
+    "key_prerequisites": [
+      "calc.deriv.piecewise"
+    ]
+  },
+  {
+    "id": "calc.deriv.sign",
+    "key_prerequisites": [
+      "calc.deriv.piecewise"
+    ]
+  },
+  {
+    "id": "calc.deriv.related_rates_shadow",
+    "key_prerequisites": [
+      "calc.deriv.related_rates"
+    ]
+  },
+  {
+    "id": "calc.deriv.related_rates_angle",
+    "key_prerequisites": [
+      "calc.deriv.related_rates"
+    ]
+  },
+  {
+    "id": "calc.deriv.optimization_distance",
+    "key_prerequisites": [
+      "calc.deriv.optimization"
+    ]
+  },
+  {
+    "id": "calc.deriv.optimization_cylinder",
+    "key_prerequisites": [
+      "calc.deriv.optimization"
+    ]
+  },
+  {
+    "id": "calc.integral.floor",
+    "key_prerequisites": [
+      "calc.integral.piecewise"
+    ]
+  },
+  {
+    "id": "calc.series.abel_theorem",
+    "key_prerequisites": [
+      "calc.series.power"
+    ]
+  },
+  {
+    "id": "calc.series.asymptotic",
+    "key_prerequisites": [
+      "calc.series.taylor"
+    ]
+  },
+  {
+    "id": "calc.series.euler_maclaurin",
+    "key_prerequisites": [
+      "calc.series.taylor"
+    ]
+  },
+  {
+    "id": "calc.series.borel",
+    "key_prerequisites": [
+      "calc.series.power"
+    ]
+  },
+  {
+    "id": "calc.series.taubian",
+    "key_prerequisites": [
+      "calc.series.cesaro"
+    ]
+  },
+  {
+    "id": "calc.series.lambert",
+    "key_prerequisites": [
+      "calc.series.power"
+    ]
+  },
+  {
+    "id": "frac.compare.mixed_order",
+    "key_prerequisites": [
+      "frac.mixed.convert"
+    ]
+  },
+  {
+    "id": "frac.percent.of_fraction",
+    "key_prerequisites": [
+      "frac.of_number"
+    ]
+  },
+  {
+    "id": "ml.data.smote",
+    "key_prerequisites": [
+      "ml.data.imbalance"
+    ]
   }
 ]
