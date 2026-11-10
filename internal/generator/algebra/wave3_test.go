@@ -15,15 +15,16 @@ import (
 // own count.
 func w3TestParsePoly(poly string) []int {
 	s := strings.ReplaceAll(poly, " ", "")
+	runes := []rune(s)
 	terms := make([]string, 0, 8)
 	start := 0
-	for i := 1; i < len(s); i++ {
-		if (s[i] == '+' || s[i] == '-') && i > start {
-			terms = append(terms, s[start:i])
+	for i := 1; i < len(runes); i++ {
+		if (runes[i] == '+' || runes[i] == '-') && i > start {
+			terms = append(terms, string(runes[start:i]))
 			start = i
 		}
 	}
-	terms = append(terms, s[start:])
+	terms = append(terms, string(runes[start:]))
 	byDegree := map[int]int{}
 	maxDegree := 0
 	for _, term := range terms {

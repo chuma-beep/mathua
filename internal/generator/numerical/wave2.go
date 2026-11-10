@@ -5,6 +5,7 @@ import (
 	"math/rand"
 	"sort"
 	"strconv"
+	"strings"
 
 	"github.com/chuma-beep/mathua/internal/generator"
 )
@@ -151,14 +152,14 @@ func factorial(n int) int {
 }
 
 func intList(nums []int) string {
-	out := ""
+	var out strings.Builder
 	for i, n := range nums {
 		if i > 0 {
-			out += ", "
+			out.WriteString(", ")
 		}
-		out += strconv.Itoa(n)
+		out.WriteString(strconv.Itoa(n))
 	}
-	return out
+	return out.String()
 }
 
 // ---------------------------------------------------------------------------

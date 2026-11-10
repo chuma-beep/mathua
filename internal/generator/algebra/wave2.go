@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/rand"
 	"strconv"
+	"strings"
 
 	"github.com/chuma-beep/mathua/internal/generator"
 )
@@ -408,13 +409,14 @@ func (g *zerosMultiplicityGen) Generate(ctx generator.GeneratorContext) generato
 		}
 		parts[i] = factor
 	}
-	poly := ""
+	var polyBuilder strings.Builder
 	for i, part := range parts {
 		if i > 0 {
-			poly += " "
+			polyBuilder.WriteString(" ")
 		}
-		poly += part
+		polyBuilder.WriteString(part)
 	}
+	poly := polyBuilder.String()
 
 	var question, explanation string
 	var answer int
@@ -450,12 +452,12 @@ func (g *zerosMultiplicityGen) Generate(ctx generator.GeneratorContext) generato
 }
 
 func joinInts(nums []int, sep string) string {
-	out := ""
+	var out strings.Builder
 	for i, n := range nums {
 		if i > 0 {
-			out += sep
+			out.WriteString(sep)
 		}
-		out += strconv.Itoa(n)
+		out.WriteString(strconv.Itoa(n))
 	}
-	return out
+	return out.String()
 }

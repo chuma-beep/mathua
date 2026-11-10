@@ -76,6 +76,15 @@ every Wave 10 concept carries the same enrichment metadata.
 The lesson `geo.solid.hemisphere` was 952 bytes after authoring. It was extended to 1,457 bytes so
 the thin-lesson guard remains satisfied without an exemption.
 
+The first pushed CI run found two additional copy drifts that the local documentation checks do not
+cover. `web/next-app/app/layout.tsx` still advertised 1,950 concepts in three metadata descriptions,
+and `web/next-app/lib/curriculumFacts.ts` still had `CONCEPT_COUNT = 1500`. Both now say 2,000.
+The same run also found stale 1,960 counts in `docs/content-expansion.md`, `docs/system-design.md`
+and ADR-050; those now say 2,000. The Go lint job reported string concatenation in loops in the
+algebra, numerical and probability generators and a `panic` in the AdaGrad generator. The loops use
+`strings.Builder` and the panic is removed. `make lint-go`, the full web test suite and the full Go
+test suite pass after those corrections.
+
 ## Pool and parameterisation work
 
 Every new family is tested at 200 draws per ordinal. The tests require at least ten distinct

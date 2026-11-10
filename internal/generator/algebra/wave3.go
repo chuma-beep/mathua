@@ -10,6 +10,7 @@ import (
 	"math"
 	"math/rand"
 	"strconv"
+	"strings"
 
 	"github.com/chuma-beep/mathua/internal/generator"
 )
@@ -965,13 +966,14 @@ func (g *w3QuadraticRegressionGen) Generate(ctx generator.GeneratorContext) gene
 	for i, x := range xs {
 		ys[i] = a*x*x + b*x + c
 	}
-	points := ""
+	var pointsBuilder strings.Builder
 	for i := range xs {
 		if i > 0 {
-			points += ", "
+			pointsBuilder.WriteString(", ")
 		}
-		points += fmt.Sprintf("\\((%d, %d)\\)", xs[i], ys[i])
+		fmt.Fprintf(&pointsBuilder, "\\((%d, %d)\\)", xs[i], ys[i])
 	}
+	points := pointsBuilder.String()
 	prediction := 9*a + 3*b + c
 	fit := formatPoly(polyTerm{a, 2}, polyTerm{b, 1}, polyTerm{c, 0})
 

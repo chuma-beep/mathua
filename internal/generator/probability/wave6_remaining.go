@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"math/rand"
 	"strconv"
+	"strings"
 
 	"github.com/chuma-beep/mathua/internal/generator"
 )
@@ -493,14 +494,14 @@ func log2Int(n int) int {
 }
 
 func joinInts(xs []int) string {
-	s := ""
+	var s strings.Builder
 	for i, x := range xs {
 		if i > 0 {
-			s += ","
+			s.WriteString(",")
 		}
-		s += strconv.Itoa(x)
+		s.WriteString(strconv.Itoa(x))
 	}
-	return s
+	return s.String()
 }
 
 func w6KL(kp int) generator.Problem {

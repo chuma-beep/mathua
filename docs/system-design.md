@@ -191,7 +191,7 @@ The engine is the central orchestrator. It holds references to every subsystem a
 | **Weakness Propagation** | `Engine.PropagateWeakness` in `internal/engine/engine.go` | If a concept's weakness > 0.3, propagates `w × 0.3` to dependents |
 | **Diagnostic** | `internal/diagnostic/` (`cat.go:1`, `report.go:11`) | Compressed covering set + info-gain CAT with `±0.3` evidence propagation, per-concept `KnowledgeConfidence 0–1`, frontier at max belief drop, supplemental when `<0.7` |
 | **Planner** | `internal/planning/` | Course paths loaded from `data/courses.json` (28 courses) |
-| **Lessons** | `internal/lessons/` | Markdown lesson content from `data/lessons/` + 1960 KP shards `data/lessons/kp/*.json` ×3 `audit_lessons.py:191` |
+| **Lessons** | `internal/lessons/` | Markdown lesson content from `data/lessons/` + 2000 KP shards `data/lessons/kp/*.json` ×3 `audit_lessons.py:191` |
 
 ### DAG (Concept Graph)
 

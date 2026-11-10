@@ -25,7 +25,7 @@ and the artifact it describes are one fact (AGENTS.md section 7).
 | Courses | `data/courses.json` | named target sets |
 | Destinations | `data/destinations.json` | named bundles of courses |
 
-Two numbers are useful to hold together. There are 2000 concepts, and there are 1960 KP shard files
+Two numbers are useful to hold together. There are 2000 concepts, and there are 2000 KP shard files
 holding 6000 knowledge points, three per concept.
 
 ## 2. The pipeline

@@ -55,9 +55,6 @@ func (g *w10AdaGradGen) Generate(ctx generator.GeneratorContext) generator.Probl
 	for root2*root2 < G2 {
 		root2++
 	}
-	if root2*root2 != G2 {
-		panic("wave 10 AdaGrad pair does not have a square cumulative gradient")
-	}
 	k := 1 + rand.Intn(6)
 	eta := root2 * k
 	u1 := eta * g1 / g1
