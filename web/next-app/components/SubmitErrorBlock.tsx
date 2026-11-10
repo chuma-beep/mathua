@@ -7,6 +7,8 @@ import { classifyFailure, failureHeadline } from '../lib/failure'
 export interface SubmitError {
   message: string
   status?: number
+  /** A caller-specific headline when the generic failure bucket would mislead. */
+  headline?: string
 }
 
 // oxlint-disable-next-line anti-slop/no-unknown-parameters -- catch value: unknown is the correct error contract
@@ -62,7 +64,7 @@ export default function SubmitErrorBlock({
       <p className="font-mono text-xs text-mathua-red">
         {sessionGone
           ? 'Session expired, the server restarted and forgot this run.'
-          : failureHeadline(failure)}
+          : error.headline ?? failureHeadline(failure)}
       </p>
       <p className="mt-1 font-mono text-[11px] text-mathua-muted break-words [overflow-wrap:anywhere]">
         {error.status != null ? `(${error.status}) ` : ''}{error.message}

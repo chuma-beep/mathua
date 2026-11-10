@@ -2683,8 +2683,17 @@ func (s *Server) handleReviewsAnswer(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "missing student id", 400)
 		return
 	}
-	sesCheck, _ := s.repo.GetSession(req.SessionID)
-	if sesCheck != nil && sesCheck.StudentID != studentID {
+	sesCheck, err := s.repo.GetSession(req.SessionID)
+	if err != nil {
+		log.Printf("handleReviewsAnswer: get session %s: %v", req.SessionID, err)
+		writeError(w, "failed to load review session", 500)
+		return
+	}
+	if sesCheck == nil {
+		writeError(w, "review session is no longer active; restart the review", http.StatusConflict)
+		return
+	}
+	if sesCheck.StudentID != studentID {
 		writeError(w, "session does not belong to student", 403)
 		return
 	}

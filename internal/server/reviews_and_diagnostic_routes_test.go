@@ -8,7 +8,21 @@ import (
 	"os"
 	"strings"
 	"testing"
+
+	"github.com/chuma-beep/mathua/internal/storage"
 )
+
+// missingSessionRepo simulates a database where the active session survived
+// but its parent sessions row did not. That state is possible on Postgres,
+// whose active_sessions table has no foreign key to sessions, and it is the
+// state that used to reach RecordAttempt and fail with a raw 500.
+type missingSessionRepo struct {
+	storage.Repository
+}
+
+func (missingSessionRepo) GetSession(string) (*storage.Session, error) {
+	return nil, nil
+}
 
 func TestReviewsSessionAndAnswerRoutes(t *testing.T) {
 	_, mux, store, token, sid := setupTestServerWithPlanner(t)
@@ -112,6 +126,65 @@ func TestReviewsSessionAndAnswerRoutes(t *testing.T) {
 	mux.ServeHTTP(recNoQ, reqNoQ)
 	if recNoQ.Code != http.StatusConflict {
 		t.Errorf("expected 409 for no active question, got %d", recNoQ.Code)
+	}
+}
+
+// A review answer whose parent sessions row is gone must be refused before the
+// engine grades it. Submitting used to rehydrate the surviving active_sessions
+// row, grade the answer and then fail the attempts.session_id foreign key with
+// a 500. The contract is a 409 and a client restart, with no attempt written.
+func TestReviewsAnswer_MissingSessionIs409Not500(t *testing.T) {
+	srv, _, store, token, sid := setupTestServerWithPlanner(t)
+
+	sess, err := store.CreateSession(sid)
+	if err != nil {
+		t.Fatalf("create session: %v", err)
+	}
+	if err := store.UpsertActiveSession(&storage.ActiveSession{
+		SessionID:      sess.ID,
+		StudentID:      sid,
+		ConceptID:      "a",
+		ConceptName:    "Concept A",
+		ExpectedAnswer: "4",
+		AttemptID:      "att-stale",
+		Question:       "2 + 2 = ?",
+		IsReview:       true,
+	}); err != nil {
+		t.Fatalf("seed active session: %v", err)
+	}
+
+	before, err := store.GetAttemptsForStudent(sid)
+	if err != nil {
+		t.Fatalf("attempts before: %v", err)
+	}
+
+	mux := http.NewServeMux()
+	New(srv.eng, missingSessionRepo{Repository: store}, srv.auth).Register(mux)
+
+	payload, _ := json.Marshal(answerReq{
+		SessionID: sess.ID,
+		AttemptID: "att-stale",
+		Answer:    "4",
+		Elapsed:   3.0,
+	})
+	rec := httptest.NewRecorder()
+	req := httptest.NewRequest("POST", "/api/reviews/answer", bytes.NewReader(payload))
+	req.Header.Set("Authorization", "Bearer "+token)
+	mux.ServeHTTP(rec, req)
+
+	if rec.Code != http.StatusConflict {
+		t.Fatalf("expected 409 for missing session, got %d: %s", rec.Code, rec.Body.String())
+	}
+	if !strings.Contains(rec.Body.String(), "restart the review") {
+		t.Errorf("409 should tell the client to restart: %s", rec.Body.String())
+	}
+
+	after, err := store.GetAttemptsForStudent(sid)
+	if err != nil {
+		t.Fatalf("attempts after: %v", err)
+	}
+	if len(after) != len(before) {
+		t.Errorf("missing-session submit wrote an attempt: before %d, after %d", len(before), len(after))
 	}
 }
 

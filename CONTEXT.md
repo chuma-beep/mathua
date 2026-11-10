@@ -46,13 +46,13 @@ _Avoid_: bundling `concepts.json` into the landing bundle, per-node DOM/event li
 - Profile holds the Next task, the alerts, and the report (position/domains/activity/weakness); History holds attempted Questions; Study holds Lessons; Lesson holds Concepts + Problems
 - Diagnostic compresses DAG → picks Concept via info-gain; Post-diagnostic → Profile; Profile holds the report, Profile → History for the attempts
 - Study Lesson `→` TaskLesson (or TaskMultistep if `.word`) `→` SubmitAnswer `→` XP/Progress `→` Profile; at 50 XP `→` Quiz (TaskQuiz)
+- A stale-session submit returns 409, never 500: a missing sessions row is rejected before grading, and Review offers Restart review
 
 ## Flagged ambiguities
 
 - `Learning Mode` infinite loop removed (`session` now chooser `session/page.tsx:1` Diagnostic vs Study, then `Profile` hub); do not reintroduce as primary
 - `Study` links that were wrong post-login (`login Skip → /study` etc) fixed to `→ /profile`; do not regress
 - `skills/CONTEXT.md` is marketplace language (Issue tracker), not Mathua; Mathua context lives here
-- Stale-session submit after a wipe (follow-up, not an approved change): answering with a pre-wipe session id can fail with HTTP 500, because the referenced `sessions` row was deleted and `RecordAttempt` hits the foreign key. This fails closed, nothing is resurrected, but 500 is not a deliberate contract. Proposed contract, pending a separate decision: return 409 and require the client to re-serve or restart practice. Do not implement it silently inside another phase.
 
 ## Decisions (ADRs)
 

@@ -98,4 +98,19 @@ describe('ReviewHost', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
     expect(await screen.findByText(/The server is restarting/)).toBeTruthy()
   })
+
+  it('tells the learner to restart when the review session is gone', async () => {
+    vi.mocked(submitReviewAnswer).mockRejectedValueOnce(
+      Object.assign(new Error('review session is no longer active; restart the review'), { status: 409 }),
+    )
+    render(<ReviewHost />)
+    fireEvent.click(screen.getByRole('button', { name: /Start review/ }))
+    await screen.findByText('2 + 3 = ?')
+    typeAnswer(await findAnswerField(), '5')
+    fireEvent.click(screen.getByRole('button', { name: 'Check Answer' }))
+
+    expect(await screen.findByText('This review session is no longer active.')).toBeTruthy()
+    expect(screen.getByText(/The server did not record this answer/)).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Restart review' })).toBeTruthy()
+  })
 })

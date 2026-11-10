@@ -8,7 +8,7 @@ import Loading from '../../components/Loading'
 import SectionHeader from '../../components/SectionHeader'
 import BriefingCard, { REVIEW_BRIEFING } from '../../components/BriefingCard'
 import ReportButton from '../../components/ReportButton'
-import { startReviewSession, submitReviewAnswer } from '../../lib/api'
+import { getErrorStatus, startReviewSession, submitReviewAnswer } from '../../lib/api'
 import { formatForGradingType, type AnswerFormat } from '../../lib/answerFormat'
 import ChoiceOptions from '../../components/ChoiceOptions'
 import { stemWithoutChoices } from '../../lib/choices'
@@ -148,6 +148,17 @@ export default function ReviewHost() {
       }
       setLoading(false)
     } catch (e) {
+      // A 409 means the server no longer has this run. A retry cannot help:
+      // the answer was not recorded, and the only way forward is a fresh run.
+      if (getErrorStatus(e) === 409) {
+        setSubmitError({
+          headline: 'This review session is no longer active.',
+          message: 'The server did not record this answer. Restart the review to continue.',
+          status: 409,
+        })
+        setLoading(false)
+        return
+      }
       setSubmitError(toSubmitError(e, 'Failed to submit review answer.'))
       setLoading(false)
     }
