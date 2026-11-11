@@ -773,6 +773,54 @@ func TestNotificationPushSubscriptionHealth(t *testing.T) {
 	}
 }
 
+func TestNotificationListFiltersByKind(t *testing.T) {
+	store := newTestStore(t)
+	ns := notificationStore(t, store)
+	learner := seedStudent(t, store)
+	now := time.Now().UTC().Truncate(time.Second)
+
+	for _, n := range []struct {
+		id        string
+		kind      string
+		createdAt time.Time
+	}{
+		{"n-kind-1", "review", now.Add(-3 * time.Minute)},
+		{"n-kind-2", "study", now.Add(-2 * time.Minute)},
+		{"n-kind-3", "review", now.Add(-time.Minute)},
+	} {
+		if _, err := ns.CreateNotification(&Notification{
+			ID: n.id, StudentID: learner.ID, Kind: n.kind, DedupeKey: "kind:" + n.id,
+			Title: "Title", CreatedAt: n.createdAt,
+		}); err != nil {
+			t.Fatalf("create notification %s: %v", n.id, err)
+		}
+	}
+
+	page, err := ns.ListNotifications(learner.ID, NotificationListOptions{Kind: "review"})
+	if err != nil {
+		t.Fatalf("list reviews: %v", err)
+	}
+	if len(page.Notifications) != 2 {
+		t.Fatalf("review notifications = %d, want 2", len(page.Notifications))
+	}
+	for _, n := range page.Notifications {
+		if n.Kind != "review" {
+			t.Errorf("kind = %q, want review", n.Kind)
+		}
+	}
+	if page.Notifications[0].ID != "n-kind-3" {
+		t.Errorf("newest review = %q, want n-kind-3", page.Notifications[0].ID)
+	}
+
+	all, err := ns.ListNotifications(learner.ID, NotificationListOptions{})
+	if err != nil {
+		t.Fatalf("list all: %v", err)
+	}
+	if len(all.Notifications) != 3 {
+		t.Fatalf("all notifications = %d, want 3", len(all.Notifications))
+	}
+}
+
 func TestNotificationEngagementStatsCountSentOnly(t *testing.T) {
 	store := newTestStore(t)
 	ns := notificationStore(t, store)

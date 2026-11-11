@@ -131,6 +131,14 @@ func (s *Server) handleNotifications(w http.ResponseWriter, r *http.Request) {
 		}
 		unreadOnly = v
 	}
+	kind := strings.TrimSpace(r.URL.Query().Get("kind"))
+	switch kind {
+	case "", notifications.ReviewKind, notifications.StudyKind,
+		notifications.MilestoneKind, notifications.InactivityKind:
+	default:
+		writeError(w, "kind must be review, study, milestone or inactivity", http.StatusBadRequest)
+		return
+	}
 	beforeCreatedAt, beforeID, err := parseNotificationCursor(r.URL.Query().Get("cursor"))
 	if err != nil {
 		writeError(w, err.Error(), http.StatusBadRequest)
@@ -156,6 +164,7 @@ func (s *Server) handleNotifications(w http.ResponseWriter, r *http.Request) {
 		BeforeCreatedAt: beforeCreatedAt,
 		BeforeID:        beforeID,
 		UnreadOnly:      unreadOnly,
+		Kind:            kind,
 	})
 	if err != nil {
 		writeError(w, "failed to load notifications", http.StatusInternalServerError)

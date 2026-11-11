@@ -253,7 +253,11 @@ export default function MyReportsPage() {
                 Your notifications
               </h2>
               <p className="mt-1 text-sm text-mathua-secondary">
-                Reminders and updates from Mathua.
+                Reminders and updates from Mathua.{' '}
+                <Link href="/notifications" className="text-mathua-blue underline underline-offset-2">
+                  See the full history
+                </Link>
+                .
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-2">

@@ -268,6 +268,10 @@ WHERE student_id = ? AND canceled_at = 0`
 	if opts.UnreadOnly {
 		query += ` AND read_at = 0`
 	}
+	if opts.Kind != "" {
+		query += ` AND kind = ?`
+		args = append(args, opts.Kind)
+	}
 	if opts.BeforeCreatedAt > 0 {
 		query += ` AND (created_at < ? OR (created_at = ? AND id < ?))`
 		args = append(args, opts.BeforeCreatedAt, opts.BeforeCreatedAt, opts.BeforeID)

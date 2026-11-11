@@ -2428,11 +2428,12 @@ export interface NotificationPage {
 	next_cursor: string
 }
 
-export async function listNotifications(opts: { limit?: number; cursor?: string; unreadOnly?: boolean } = {}): Promise<NotificationPage> {
+export async function listNotifications(opts: { limit?: number; cursor?: string; unreadOnly?: boolean; kind?: string } = {}): Promise<NotificationPage> {
 	const qs = new URLSearchParams()
 	if (opts.limit) qs.set('limit', String(opts.limit))
 	if (opts.cursor) qs.set('cursor', opts.cursor)
 	if (opts.unreadOnly) qs.set('unread', 'true')
+	if (opts.kind) qs.set('kind', opts.kind)
 	const suffix = qs.toString() ? `?${qs.toString()}` : ''
 	const res = await authedFetch(`${API_BASE}/api/notifications${suffix}`, { cache: 'no-store' })
 	if (!res.ok) await throwWithResponse(res, 'Could not load notifications')

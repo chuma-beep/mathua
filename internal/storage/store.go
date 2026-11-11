@@ -620,6 +620,9 @@ type NotificationListOptions struct {
 	BeforeCreatedAt int64
 	BeforeID        string
 	UnreadOnly      bool
+	// Kind filters the feed to one notification kind. Empty means every kind,
+	// which is what the badge and the unread count always use.
+	Kind string
 }
 
 // NotificationPage is one page plus whether another page exists.
