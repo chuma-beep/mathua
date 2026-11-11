@@ -102,7 +102,14 @@ export function typeAnswer(el: Field, value: string): void {
  * The card is identified by its own surface class instead.
  */
 export function answerCard(el: Field): HTMLElement {
-  const card = el.closest('div[class*="bg-mathua-surface"]')
+  // The math editor's chunk resolves after the first render, and React replaces
+  // the loading input with the editor in place. A caller that typed into the
+  // loading input and then looks for its card is holding a node that is no
+  // longer in the document, and `closest` on a detached node searches only the
+  // dead subtree. Under load that window is wide enough to fail, which is how
+  // this threw "no question card found" in CI while passing locally.
+  const live = document.contains(el) ? el : answerField()
+  const card = live.closest('div[class*="bg-mathua-surface"]')
   if (!card) throw new Error('no question card found for the answer field')
   return card as HTMLElement
 }
