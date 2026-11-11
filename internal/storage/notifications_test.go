@@ -604,3 +604,171 @@ func ExampleNotificationPreferences() {
 	fmt.Println(p.Timezone, p.PreferredTimeMin, p.EmailEnabled, p.InAppEnabled)
 	// Output: UTC 1080 false true
 }
+
+func TestNotificationDigestRoundTrip(t *testing.T) {
+	store := newTestStore(t)
+	ns := notificationStore(t, store)
+	learner := seedStudent(t, store)
+
+	prefs, err := ns.EnsureNotificationPreferences(learner.ID, time.Now().UTC())
+	if err != nil {
+		t.Fatalf("ensure preferences: %v", err)
+	}
+	if prefs.Digest != NotificationDigestImmediate {
+		t.Fatalf("digest default = %q, want %q", prefs.Digest, NotificationDigestImmediate)
+	}
+	prefs.Digest = NotificationDigestWeekly
+	if err := ns.UpsertNotificationPreferences(prefs); err != nil {
+		t.Fatalf("upsert digest: %v", err)
+	}
+	after, err := ns.GetNotificationPreferences(learner.ID)
+	if err != nil {
+		t.Fatalf("get digest: %v", err)
+	}
+	if after.Digest != NotificationDigestWeekly {
+		t.Fatalf("digest = %q, want weekly", after.Digest)
+	}
+	recipients, err := ns.ListNotificationRecipients("", 10)
+	if err != nil {
+		t.Fatalf("list recipients: %v", err)
+	}
+	found := false
+	for _, recipient := range recipients {
+		if recipient.StudentID != learner.ID {
+			continue
+		}
+		found = true
+		if recipient.Preferences.Digest != NotificationDigestWeekly {
+			t.Fatalf("recipient digest = %q, want weekly", recipient.Preferences.Digest)
+		}
+	}
+	if !found {
+		t.Fatal("learner missing from the recipient projection")
+	}
+}
+
+func TestNotificationEngagementReplayAndRetention(t *testing.T) {
+	store := newTestStore(t)
+	ns := notificationStore(t, store)
+	learner := seedStudent(t, store)
+	now := time.Now().UTC().Truncate(time.Second)
+
+	if _, err := ns.CreateNotification(&Notification{
+		ID: "n-engage", StudentID: learner.ID, Kind: "review", DedupeKey: "engage",
+		Title: "Reviews are due", CreatedAt: now,
+	}); err != nil {
+		t.Fatalf("create notification: %v", err)
+	}
+	if _, err := ns.CreateNotificationDelivery(&NotificationDelivery{
+		NotificationID: "n-engage", Channel: NotificationChannelEmail,
+		Status: NotificationDeliveryFailed, Attempts: 3, LastError: "smtp down",
+	}); err != nil {
+		t.Fatalf("create delivery: %v", err)
+	}
+
+	if err := ns.MarkNotificationOpened(learner.ID, "n-engage", now); err != nil {
+		t.Fatalf("mark opened: %v", err)
+	}
+	page, err := ns.ListNotifications(learner.ID, NotificationListOptions{})
+	if err != nil {
+		t.Fatalf("list notifications: %v", err)
+	}
+	if len(page.Notifications) != 1 || page.Notifications[0].ReadAt.IsZero() {
+		t.Fatalf("open did not mark the notification read: %+v", page.Notifications)
+	}
+	deliveries, err := ns.ListNotificationDeliveries("n-engage")
+	if err != nil {
+		t.Fatalf("list deliveries: %v", err)
+	}
+	if len(deliveries) != 1 || deliveries[0].OpenedAt.IsZero() {
+		t.Fatalf("open was not stamped on the delivery: %+v", deliveries)
+	}
+
+	if err := ns.MarkNotificationClicked(learner.ID, "n-engage", now.Add(time.Minute)); err != nil {
+		t.Fatalf("mark clicked: %v", err)
+	}
+	deliveries, _ = ns.ListNotificationDeliveries("n-engage")
+	if deliveries[0].ClickedAt.IsZero() {
+		t.Fatal("click was not stamped on the delivery")
+	}
+
+	if err := ns.ReplayNotificationDelivery("n-engage", NotificationChannelEmail, now); err != nil {
+		t.Fatalf("replay delivery: %v", err)
+	}
+	deliveries, _ = ns.ListNotificationDeliveries("n-engage")
+	if deliveries[0].Status != NotificationDeliveryPending || deliveries[0].Attempts != 0 || deliveries[0].LastError != "" {
+		t.Fatalf("replay did not reset the delivery: %+v", deliveries[0])
+	}
+	if err := ns.ReplayNotificationDelivery("n-engage", NotificationChannelEmail, now); err == nil {
+		t.Fatal("a pending delivery was replayed twice")
+	}
+
+	old := now.AddDate(0, 0, -400)
+	if _, err := ns.CreateNotification(&Notification{
+		ID: "n-old", StudentID: learner.ID, Kind: "review", DedupeKey: "old",
+		Title: "Old", CreatedAt: old,
+	}); err != nil {
+		t.Fatalf("create old notification: %v", err)
+	}
+	if _, err := ns.CreateNotificationDelivery(&NotificationDelivery{
+		NotificationID: "n-old", Channel: NotificationChannelInApp,
+		Status: NotificationDeliverySent, SentAt: old,
+	}); err != nil {
+		t.Fatalf("create old delivery: %v", err)
+	}
+	pruned, err := ns.PruneNotificationHistory(now.AddDate(0, 0, -180))
+	if err != nil {
+		t.Fatalf("prune history: %v", err)
+	}
+	if pruned.Notifications != 1 || pruned.Deliveries != 1 {
+		t.Fatalf("pruned = %+v, want one notification and one delivery", pruned)
+	}
+	remaining, _ := ns.ListNotificationDeliveries("n-old")
+	if len(remaining) != 0 {
+		t.Fatalf("old deliveries survived the prune: %+v", remaining)
+	}
+	if _, err := ns.ListNotificationDeliveries("n-engage"); err != nil {
+		t.Fatalf("prune removed the live notification: %v", err)
+	}
+}
+
+func TestNotificationPushSubscriptionHealth(t *testing.T) {
+	store := newTestStore(t)
+	ns := notificationStore(t, store)
+	learner := seedStudent(t, store)
+	now := time.Now().UTC().Truncate(time.Second)
+
+	sub := &NotificationPushSubscription{
+		StudentID: learner.ID, Endpoint: "https://push.example/abc",
+		P256DH: "key", Auth: "secret", UserAgent: "Firefox",
+	}
+	if err := ns.UpsertNotificationPushSubscription(sub); err != nil {
+		t.Fatalf("upsert subscription: %v", err)
+	}
+	subs, err := ns.ListNotificationPushSubscriptions(learner.ID)
+	if err != nil {
+		t.Fatalf("list subscriptions: %v", err)
+	}
+	if len(subs) != 1 || subs[0].P256DH != "key" {
+		t.Fatalf("subscription did not round-trip: %+v", subs)
+	}
+
+	if err := ns.MarkPushSubscriptionSuccess(sub.Endpoint, now); err != nil {
+		t.Fatalf("mark success: %v", err)
+	}
+	if err := ns.MarkPushSubscriptionFailure(sub.Endpoint, now); err != nil {
+		t.Fatalf("mark failure: %v", err)
+	}
+	subs, _ = ns.ListNotificationPushSubscriptions(learner.ID)
+	if subs[0].Failures != 1 || subs[0].LastSuccess.IsZero() {
+		t.Fatalf("health did not update: %+v", subs[0])
+	}
+
+	if removed, err := ns.PrunePushSubscriptions(now.AddDate(0, 0, 1), 1); err != nil || removed != 1 {
+		t.Fatalf("prune dead endpoints = %d, %v, want one", removed, err)
+	}
+	subs, _ = ns.ListNotificationPushSubscriptions(learner.ID)
+	if len(subs) != 0 {
+		t.Fatalf("dead endpoint survived the prune: %+v", subs)
+	}
+}

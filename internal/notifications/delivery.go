@@ -149,6 +149,12 @@ func (d *Delivery) deliver(job storage.NotificationDeliveryJob, now time.Time, r
 		d.retryOrFail(job, now, err.Error(), result)
 		return
 	}
+	// A digest settles every item it listed, so a batch claim can still hold a
+	// second job from the same learner. That job is no longer sending, and
+	// delivering it again would send the digest twice.
+	if d.deliverySettled(job) {
+		return
+	}
 	if prefs == nil {
 		d.suppress(job, "preferences_missing", now, result)
 		return
@@ -218,6 +224,18 @@ func (d *Delivery) deliverEmail(job storage.NotificationDeliveryJob, prefs *stor
 		d.retryOrFail(job, now, err.Error(), result)
 		return
 	}
+	if jobs := d.digestJobs(job, prefs, now); len(jobs) > 1 {
+		body := DigestEmail(job.StudentName, jobs,
+			d.frontendURL, d.frontendURL+"/settings#notifications",
+			d.frontendURL+"/notifications/unsubscribe?token="+token)
+		subject := fmt.Sprintf("Your Mathua digest: %d notifications", len(jobs))
+		if err := d.sender.Send(mailer.Message{To: job.Email, Subject: subject, Text: body}); err != nil {
+			d.retryOrFail(job, now, err.Error(), result)
+			return
+		}
+		d.completeDigest(jobs, storage.NotificationChannelEmail, "mailer", now, result)
+		return
+	}
 	body := ReminderEmail(job,
 		ReminderActionLabel(job.Kind),
 		d.actionURL(job),
@@ -260,12 +278,21 @@ func (d *Delivery) deliverPush(job storage.NotificationDeliveryJob, prefs *stora
 		d.suppress(job, "push_no_subscription", now, result)
 		return
 	}
-	payload, err := json.Marshal(PushMessage{
+	message := PushMessage{
 		Title:          job.Title,
 		Body:           job.Body,
 		Href:           job.Href,
 		NotificationID: job.NotificationID,
-	})
+	}
+	jobs := d.digestJobs(job, prefs, now)
+	if len(jobs) > 1 {
+		message = PushMessage{
+			Title: "Mathua digest",
+			Body:  fmt.Sprintf("%d notifications are waiting for you.", len(jobs)),
+			Href:  "/notifications",
+		}
+	}
+	payload, err := json.Marshal(message)
 	if err != nil {
 		d.retryOrFail(job, now, err.Error(), result)
 		return
@@ -300,12 +327,59 @@ func (d *Delivery) deliverPush(job storage.NotificationDeliveryJob, prefs *stora
 		d.retryOrFail(job, now, lastErr, result)
 		return
 	}
+	if len(jobs) > 1 {
+		d.completeDigest(jobs, storage.NotificationChannelPush, "webpush", now, result)
+		return
+	}
 	if err := d.store.CompleteNotificationDelivery(job.NotificationID, job.Channel, "webpush", now); err != nil {
 		log.Printf("notifications: complete delivery %s: %v", job.NotificationID, err)
 		result.Failed++
 		return
 	}
 	result.Sent++
+}
+
+// deliverySettled reports whether another pass already finished this row. A
+// claim leaves the row in sending; any other status means the work is done.
+func (d *Delivery) deliverySettled(job storage.NotificationDeliveryJob) bool {
+	rows, err := d.store.ListNotificationDeliveries(job.NotificationID)
+	if err != nil {
+		return false
+	}
+	for _, row := range rows {
+		if row.Channel == job.Channel {
+			return row.Status != storage.NotificationDeliverySending
+		}
+	}
+	return false
+}
+
+// digestJobs returns the waiting items for a learner's digest window. Fewer
+// than two items stay on the single-message path: a digest of one is a worse
+// version of the reminder it replaces.
+func (d *Delivery) digestJobs(job storage.NotificationDeliveryJob, prefs *storage.NotificationPreferences, now time.Time) []storage.NotificationDeliveryJob {
+	if prefs == nil || prefs.Digest == storage.NotificationDigestImmediate {
+		return nil
+	}
+	jobs, err := d.store.ListDueNotificationDeliveries(job.StudentID, job.Channel, now)
+	if err != nil {
+		log.Printf("notifications: list digest items for %s: %v", job.StudentID, err)
+		return nil
+	}
+	return jobs
+}
+
+// completeDigest marks every item the one message covered as sent, so the
+// worker does not re-send the batch on the next tick.
+func (d *Delivery) completeDigest(jobs []storage.NotificationDeliveryJob, channel, providerID string, now time.Time, result *DeliveryResult) {
+	for _, item := range jobs {
+		if err := d.store.CompleteNotificationDelivery(item.NotificationID, channel, providerID, now); err != nil {
+			log.Printf("notifications: complete digest item %s: %v", item.NotificationID, err)
+			result.Failed++
+			continue
+		}
+		result.Sent++
+	}
 }
 
 func (d *Delivery) actionURL(job storage.NotificationDeliveryJob) string {

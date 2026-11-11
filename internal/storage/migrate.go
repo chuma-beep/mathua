@@ -511,6 +511,7 @@ CREATE TABLE IF NOT EXISTS notification_preferences (
     student_id          TEXT PRIMARY KEY REFERENCES students(id) ON DELETE CASCADE,
     email_enabled       INTEGER NOT NULL DEFAULT 0,
     push_enabled        INTEGER NOT NULL DEFAULT 0,
+    digest              TEXT NOT NULL DEFAULT 'immediate',
     in_app_enabled      INTEGER NOT NULL DEFAULT 1,
     reviews_enabled     INTEGER NOT NULL DEFAULT 1,
     study_enabled       INTEGER NOT NULL DEFAULT 0,

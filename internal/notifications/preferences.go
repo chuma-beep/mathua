@@ -62,6 +62,15 @@ func NormalizePreferencesAt(p storage.NotificationPreferences, now time.Time) (s
 		return p, fmt.Errorf("study_days is required when study reminders are enabled")
 	}
 
+	switch strings.ToLower(strings.TrimSpace(p.Digest)) {
+	case "", storage.NotificationDigestImmediate:
+		p.Digest = storage.NotificationDigestImmediate
+	case storage.NotificationDigestDaily, storage.NotificationDigestWeekly:
+		p.Digest = strings.ToLower(strings.TrimSpace(p.Digest))
+	default:
+		return p, fmt.Errorf("invalid digest %q", p.Digest)
+	}
+
 	if p.PausedUntil != nil {
 		paused := p.PausedUntil.UTC()
 		if !paused.After(now.UTC()) {

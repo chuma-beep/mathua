@@ -72,6 +72,60 @@ func ReminderEmail(job storage.NotificationDeliveryJob, actionLabel, actionURL, 
 	return strings.Join(lines, "\r\n\r\n") + "\r\n"
 }
 
+// DigestEmail renders one message that lists every notification the learner
+// has waiting. Each item names its own action so the reader can pick, and the
+// shared settings and unsubscribe links stay at the end.
+func DigestEmail(studentName string, jobs []storage.NotificationDeliveryJob, frontendURL, settingsURL, unsubscribeURL string) string {
+	name := strings.TrimSpace(studentName)
+	greeting := "Hello,"
+	if name != "" {
+		greeting = "Hello " + name + ","
+	}
+	lines := []string{
+		greeting,
+		fmt.Sprintf("You have %d notifications waiting.", len(jobs)),
+	}
+	for _, job := range jobs {
+		title := strings.TrimSpace(job.Title)
+		if title == "" {
+			title = defaultDigestTitle(job.Kind)
+		}
+		lines = append(lines, title, job.Body,
+			ReminderActionLabel(job.Kind)+": "+digestActionURL(job, frontendURL))
+	}
+	lines = append(lines,
+		"Notification settings: "+settingsURL,
+		"Unsubscribe from email notifications: "+unsubscribeURL,
+	)
+	return strings.Join(lines, "\r\n\r\n") + "\r\n"
+}
+
+func digestActionURL(job storage.NotificationDeliveryJob, frontendURL string) string {
+	href := strings.TrimSpace(job.Href)
+	if href == "" {
+		href = "/review"
+	}
+	if frontendURL == "" {
+		return href
+	}
+	return frontendURL + href
+}
+
+func defaultDigestTitle(kind string) string {
+	switch kind {
+	case ReviewKind:
+		return "Reviews are due"
+	case StudyKind:
+		return "A study session is waiting"
+	case MilestoneKind:
+		return "A milestone reached"
+	case InactivityKind:
+		return "Ready for a short session?"
+	default:
+		return "Mathua update"
+	}
+}
+
 // ReminderActionLabel maps a notification kind to the label shown before the
 // action link. An unknown kind falls back to a neutral label rather than to a
 // review label that would be wrong.

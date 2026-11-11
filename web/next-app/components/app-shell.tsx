@@ -116,6 +116,26 @@ export default function AppShell({ children, ...overrides }: AppShellProps) {
   }, [loggedIn])
 
   useEffect(() => {
+    if (!loggedIn) return
+    // A push opens with ?ntf=<id> so the worker does not need to know which
+    // learner is signed in. Report the click once, then drop the parameter so a
+    // refresh or a shared link cannot count the same click twice.
+    let id = ''
+    try {
+      id = new URLSearchParams(window.location.search).get('ntf') ?? ''
+    } catch { /* no window in some test harnesses */ }
+    if (!id) return
+    void import('../lib/api')
+      .then(api => api.reportNotificationClick(id))
+      .catch(() => {})
+    try {
+      const url = new URL(window.location.href)
+      url.searchParams.delete('ntf')
+      window.history.replaceState({}, '', url.toString())
+    } catch { /* history is best effort */ }
+  }, [loggedIn])
+
+  useEffect(() => {
     if (!loggedIn) {
       setNotificationUnread(0)
       return

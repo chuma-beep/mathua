@@ -174,7 +174,13 @@ self.addEventListener('push', event => {
 self.addEventListener('notificationclick', event => {
   event.notification.close()
   const data = event.notification.data || {}
-  const href = data.href || '/'
+  const base = data.href || '/'
+  // The click is reported by the page, not the worker, so the learner's own
+  // session authenticates it. Tagging the URL keeps the report idempotent: the
+  // app strips ?ntf after sending it once.
+  const href = data.notification_id
+    ? base + (base.includes('?') ? '&' : '?') + 'ntf=' + encodeURIComponent(data.notification_id)
+    : base
 
   event.waitUntil((async () => {
     const windows = await self.clients.matchAll({ type: 'window', includeUncontrolled: true })

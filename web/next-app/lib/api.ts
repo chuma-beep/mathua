@@ -2170,17 +2170,63 @@ export interface AdminNotificationProblem {
  * will never move again. Retries are excluded from the problem list because a
  * queue that is still retrying is not a queue that is stuck.
  */
+export interface AdminNotificationRetention {
+	days: number
+	push_failure_days: number
+	push_failure_limit: number
+}
+
 export async function getAdminNotificationHealth(limit = 50): Promise<{
 	stats: AdminNotificationStat[]
 	problems: AdminNotificationProblem[]
+	retention?: AdminNotificationRetention
 }> {
 	const res = await authedFetch(`${API_BASE}/api/admin/notifications?limit=${limit}`, { cache: 'no-store' })
 	if (!res.ok) await throwWithResponse(res, 'Could not load notification delivery health')
 	const data = (await res.json()) as {
 		stats?: AdminNotificationStat[]
 		problems?: AdminNotificationProblem[]
+		retention?: AdminNotificationRetention
 	}
-	return { stats: data.stats ?? [], problems: data.problems ?? [] }
+	return { stats: data.stats ?? [], problems: data.problems ?? [], retention: data.retention }
+}
+
+export interface AdminNotificationDeliveryDetail {
+	notification_id: string
+	channel: string
+	status: string
+	attempts: number
+	provider_id?: string
+	last_error?: string
+	suppressed_reason?: string
+	next_attempt_at?: string
+	sent_at?: string
+	opened_at?: string
+	clicked_at?: string
+}
+
+export async function replayNotificationDelivery(notificationId: string, channel: string): Promise<void> {
+	const res = await authedFetch(`${API_BASE}/api/admin/notifications/replay`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ notification_id: notificationId, channel }),
+	})
+	if (!res.ok) await throwWithResponse(res, 'Could not replay the delivery')
+}
+
+export async function getAdminNotificationHistory(params: {
+	notificationId?: string
+	studentId?: string
+	limit?: number
+}): Promise<AdminNotificationDeliveryDetail[]> {
+	const qs = new URLSearchParams()
+	if (params.notificationId) qs.set('notification_id', params.notificationId)
+	if (params.studentId) qs.set('student_id', params.studentId)
+	if (params.limit) qs.set('limit', String(params.limit))
+	const res = await authedFetch(`${API_BASE}/api/admin/notifications/history?${qs.toString()}`, { cache: 'no-store' })
+	if (!res.ok) await throwWithResponse(res, 'Could not load notification history')
+	const data = (await res.json()) as { deliveries?: AdminNotificationDeliveryDetail[] }
+	return data.deliveries ?? []
 }
 
 export async function searchAdminUsers(q: string): Promise<AdminUsersRes> {
@@ -2407,10 +2453,63 @@ export async function markAllNotificationsRead(): Promise<void> {
 	if (!res.ok) await throwWithResponse(res, 'Could not mark notifications read')
 }
 
+/**
+ * Engagement stamps.
+ *
+ * `open` is the feed opening an item, `click` is the service worker reporting
+ * that a push was followed. A click implies an open, so the server writes both.
+ */
+export async function reportNotificationOpen(id: string): Promise<number> {
+	const res = await authedFetch(`${API_BASE}/api/notifications/open`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ id }),
+	})
+	if (!res.ok) await throwWithResponse(res, 'Could not record the notification open')
+	const data = (await res.json()) as { unread?: number }
+	return data.unread ?? 0
+}
+
+export async function reportNotificationClick(id: string): Promise<number> {
+	const res = await authedFetch(`${API_BASE}/api/notifications/click`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ id }),
+	})
+	if (!res.ok) await throwWithResponse(res, 'Could not record the notification click')
+	const data = (await res.json()) as { unread?: number }
+	return data.unread ?? 0
+}
+
+export interface NotificationDevice {
+	id: string
+	user_agent?: string
+	created_at: string
+	last_success_at?: string
+	failures: number
+}
+
+export async function listPushDevices(): Promise<NotificationDevice[]> {
+	const res = await authedFetch(`${API_BASE}/api/notifications/push/devices`, { cache: 'no-store' })
+	if (!res.ok) await throwWithResponse(res, 'Could not load push devices')
+	const data = (await res.json()) as { devices?: NotificationDevice[] }
+	return data.devices ?? []
+}
+
+export async function revokePushDevice(id: string): Promise<void> {
+	const res = await authedFetch(`${API_BASE}/api/notifications/push/revoke`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ id }),
+	})
+	if (!res.ok) await throwWithResponse(res, 'Could not revoke the push device')
+}
+
 export interface NotificationPreferences {
 	student_id: string
 	email_enabled: boolean
 	push_enabled: boolean
+	digest: string
 	in_app_enabled: boolean
 	reviews_enabled: boolean
 	study_enabled: boolean

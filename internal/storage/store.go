@@ -564,6 +564,16 @@ const (
 	NotificationDefaultTimezone         = "UTC"
 )
 
+// Digest modes control how the email and push channels batch their messages.
+// Immediate sends each notification as it is generated, daily and weekly hold
+// the batch until the learner's preferred time on the next window so one
+// message can list everything waiting.
+const (
+	NotificationDigestImmediate = "immediate"
+	NotificationDigestDaily     = "daily"
+	NotificationDigestWeekly    = "weekly"
+)
+
 // NotificationPreferences is the per-learner notification policy. The
 // delivery and generation phases read it; Phase 1 only stores and validates
 // it. StudyDays is the canonical comma-separated form (mon,tue,...).
@@ -571,6 +581,7 @@ type NotificationPreferences struct {
 	StudentID         string     `json:"student_id"`
 	EmailEnabled      bool       `json:"email_enabled"`
 	PushEnabled       bool       `json:"push_enabled"`
+	Digest            string     `json:"digest"`
 	InAppEnabled      bool       `json:"in_app_enabled"`
 	ReviewsEnabled    bool       `json:"reviews_enabled"`
 	StudyEnabled      bool       `json:"study_enabled"`
@@ -726,6 +737,12 @@ type NotificationDeliveryStat struct {
 	Count   int
 }
 
+// NotificationPruneResult reports how many rows a retention pass removed.
+type NotificationPruneResult struct {
+	Notifications int
+	Deliveries    int
+}
+
 var ErrNotificationNotFound = errors.New("notification not found")
 
 // NotificationStore is the notification persistence surface. It is separate
@@ -756,6 +773,14 @@ type NotificationStore interface {
 	MarkPushSubscriptionFailure(endpoint string, now time.Time) error
 	NotificationDeliveryStats() ([]NotificationDeliveryStat, error)
 	ListNotificationDeliveryProblems(limit int) ([]NotificationDeliveryRecord, error)
+	MarkNotificationOpened(studentID, notificationID string, now time.Time) error
+	MarkNotificationClicked(studentID, notificationID string, now time.Time) error
+	ReplayNotificationDelivery(notificationID, channel string, now time.Time) error
+	ListNotificationDeliveries(notificationID string) ([]NotificationDelivery, error)
+	ListStudentNotificationDeliveries(studentID string, limit int) ([]NotificationDeliveryRecord, error)
+	ListDueNotificationDeliveries(studentID, channel string, now time.Time) ([]NotificationDeliveryJob, error)
+	PruneNotificationHistory(before time.Time) (NotificationPruneResult, error)
+	PrunePushSubscriptions(before time.Time, maxFailures int) (int, error)
 }
 
 // MaxRemedialQueue caps the per-student remedial queue.

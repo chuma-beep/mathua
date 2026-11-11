@@ -221,6 +221,15 @@ func (g *Generator) emit(r storage.NotificationRecipient, ch channels, kind, ded
 	}
 	result.Notifications++
 
+	nextAttempt := now
+	if prefs.Digest != storage.NotificationDigestImmediate {
+		loc := time.UTC
+		if loaded, err := time.LoadLocation(prefs.Timezone); err == nil {
+			loc = loaded
+		}
+		nextAttempt = nextDigestTime(now.In(loc), prefs.Digest, prefs.PreferredTimeMin).UTC()
+	}
+
 	if ch.inApp {
 		if _, err := g.store.CreateNotificationDelivery(&storage.NotificationDelivery{
 			NotificationID: id,
@@ -238,7 +247,7 @@ func (g *Generator) emit(r storage.NotificationRecipient, ch channels, kind, ded
 			NotificationID: id,
 			Channel:        storage.NotificationChannelEmail,
 			Status:         storage.NotificationDeliveryPending,
-			NextAttemptAt:  now,
+			NextAttemptAt:  nextAttempt,
 		}
 		switch {
 		case !g.emailAvailable:
@@ -265,7 +274,7 @@ func (g *Generator) emit(r storage.NotificationRecipient, ch channels, kind, ded
 			NotificationID: id,
 			Channel:        storage.NotificationChannelPush,
 			Status:         storage.NotificationDeliveryPending,
-			NextAttemptAt:  now,
+			NextAttemptAt:  nextAttempt,
 		}
 		if !g.pushAvailable {
 			delivery.Status = storage.NotificationDeliverySuppressed
@@ -454,6 +463,26 @@ func highestReached(thresholds []int, value int) int {
 		}
 	}
 	return highest
+}
+
+// nextDigestTime is the first preferred-time slot the digest may send in. Daily
+// means the next occurrence of the preferred minute, weekly means the next
+// Monday at that minute, so a learner who writes three notes on Tuesday gets
+// one message rather than three.
+func nextDigestTime(local time.Time, digest string, preferredMin int) time.Time {
+	at := time.Date(local.Year(), local.Month(), local.Day(),
+		preferredMin/60, preferredMin%60, 0, 0, local.Location())
+	if digest == storage.NotificationDigestWeekly {
+		at = at.AddDate(0, 0, (8-int(local.Weekday()))%7)
+	}
+	if !at.After(local) {
+		if digest == storage.NotificationDigestWeekly {
+			at = at.AddDate(0, 0, 7)
+		} else {
+			at = at.AddDate(0, 0, 1)
+		}
+	}
+	return at
 }
 
 // studyDayEnabled matches the canonical comma-separated day list against a

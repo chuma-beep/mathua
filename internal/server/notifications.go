@@ -1,7 +1,9 @@
 package server
 
 import (
+	"crypto/sha256"
 	"encoding/base64"
+	"encoding/hex"
 	"errors"
 	"fmt"
 	"net/http"
@@ -518,6 +520,172 @@ func (s *Server) handleNotificationPushUnsubscribe(w http.ResponseWriter, r *htt
 		return
 	}
 	writeJSON(w, map[string]interface{}{"ok": true})
+}
+
+// notificationDeviceID is the public handle for a push endpoint. The raw
+// endpoint is a capability URL, so the API never returns it; the truncated
+// hash is stable enough for a learner to recognise and revoke one device.
+func notificationDeviceID(endpoint string) string {
+	sum := sha256.Sum256([]byte(endpoint))
+	return hex.EncodeToString(sum[:8])
+}
+
+type notificationDeviceJSON struct {
+	ID          string `json:"id"`
+	UserAgent   string `json:"user_agent,omitempty"`
+	CreatedAt   string `json:"created_at"`
+	LastSuccess string `json:"last_success_at,omitempty"`
+	Failures    int    `json:"failures"`
+}
+
+// GET /api/notifications/push/devices lists the learner's registered browsers
+// with a hash instead of the endpoint, so a stolen response cannot be used to
+// send a push to that device.
+func (s *Server) handleNotificationPushDevices(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		writeError(w, "method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID == "" {
+		writeError(w, "authentication required", http.StatusUnauthorized)
+		return
+	}
+	store, ok := notificationStore(w, s.repo)
+	if !ok {
+		return
+	}
+	subs, err := store.ListNotificationPushSubscriptions(studentID)
+	if err != nil {
+		writeError(w, "failed to list push devices", http.StatusInternalServerError)
+		return
+	}
+	devices := make([]notificationDeviceJSON, 0, len(subs))
+	for _, sub := range subs {
+		device := notificationDeviceJSON{
+			ID:        notificationDeviceID(sub.Endpoint),
+			UserAgent: sub.UserAgent,
+			CreatedAt: sub.CreatedAt.UTC().Format(time.RFC3339),
+			Failures:  sub.Failures,
+		}
+		if !sub.LastSuccess.IsZero() {
+			device.LastSuccess = sub.LastSuccess.UTC().Format(time.RFC3339)
+		}
+		devices = append(devices, device)
+	}
+	writeJSON(w, map[string]interface{}{"devices": devices})
+}
+
+// POST /api/notifications/push/revoke removes one device by its public hash.
+// The lookup is scoped to the authenticated learner, so a hash from another
+// account cannot revoke someone else's browser.
+func (s *Server) handleNotificationPushRevoke(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		writeError(w, "method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID == "" {
+		writeError(w, "authentication required", http.StatusUnauthorized)
+		return
+	}
+	var req struct {
+		ID string `json:"id"`
+	}
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeError(w, "invalid request", http.StatusBadRequest)
+		return
+	}
+	id := strings.TrimSpace(req.ID)
+	if id == "" {
+		writeError(w, "device id is required", http.StatusBadRequest)
+		return
+	}
+	store, ok := notificationStore(w, s.repo)
+	if !ok {
+		return
+	}
+	subs, err := store.ListNotificationPushSubscriptions(studentID)
+	if err != nil {
+		writeError(w, "failed to list push devices", http.StatusInternalServerError)
+		return
+	}
+	removed := 0
+	for _, sub := range subs {
+		if notificationDeviceID(sub.Endpoint) != id {
+			continue
+		}
+		if err := store.DeleteNotificationPushSubscription(studentID, sub.Endpoint); err != nil {
+			writeError(w, "failed to revoke push device", http.StatusInternalServerError)
+			return
+		}
+		removed++
+	}
+	if removed == 0 {
+		writeError(w, "push device not found", http.StatusNotFound)
+		return
+	}
+	writeJSON(w, map[string]interface{}{"ok": true, "revoked": removed})
+}
+
+type notificationEngagementRequest struct {
+	ID string `json:"id"`
+}
+
+// POST /api/notifications/open records that a learner opened a notification in
+// the feed. It marks the row read as well, because an opened item the learner
+// has seen should not keep the unread badge.
+func (s *Server) handleNotificationOpen(w http.ResponseWriter, r *http.Request) {
+	s.markNotificationEngagement(w, r, true)
+}
+
+// POST /api/notifications/click records that a learner followed a push or feed
+// link. A click implies an open, so both stamps are written.
+func (s *Server) handleNotificationClick(w http.ResponseWriter, r *http.Request) {
+	s.markNotificationEngagement(w, r, false)
+}
+
+func (s *Server) markNotificationEngagement(w http.ResponseWriter, r *http.Request, opened bool) {
+	if r.Method != http.MethodPost {
+		writeError(w, "method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID == "" {
+		writeError(w, "authentication required", http.StatusUnauthorized)
+		return
+	}
+	var req notificationEngagementRequest
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeError(w, "invalid request", http.StatusBadRequest)
+		return
+	}
+	id := strings.TrimSpace(req.ID)
+	if id == "" {
+		writeError(w, "notification id is required", http.StatusBadRequest)
+		return
+	}
+	store, ok := notificationStore(w, s.repo)
+	if !ok {
+		return
+	}
+	now := time.Now().UTC()
+	var err error
+	if opened {
+		err = store.MarkNotificationOpened(studentID, id, now)
+	} else {
+		err = store.MarkNotificationClicked(studentID, id, now)
+	}
+	if errors.Is(err, storage.ErrNotificationNotFound) {
+		writeError(w, "notification not found", http.StatusNotFound)
+		return
+	}
+	if err != nil {
+		writeError(w, "failed to record notification engagement", http.StatusInternalServerError)
+		return
+	}
+	unread, _ := store.NotificationUnreadCount(studentID)
+	writeJSON(w, map[string]interface{}{"ok": true, "unread": unread})
 }
 
 // truncateUserAgent keeps a stored user agent useful for telling two devices

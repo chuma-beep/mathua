@@ -201,3 +201,56 @@ func TestDeliveryFailsWithoutSender(t *testing.T) {
 		t.Fatal("delivery ran without a sender")
 	}
 }
+
+func TestDeliverySendsOneDigestForABatch(t *testing.T) {
+	ns, firstID, now := deliveryFixture(t, true)
+	recipients, err := ns.ListNotificationRecipients("", 5)
+	if err != nil || len(recipients) == 0 {
+		t.Fatalf("list recipients: %v %v", recipients, err)
+	}
+	studentID := recipients[0].StudentID
+	prefs, err := ns.GetNotificationPreferences(studentID)
+	if err != nil || prefs == nil {
+		t.Fatalf("load preferences: %v", err)
+	}
+	prefs.Digest = storage.NotificationDigestDaily
+	if err := ns.UpsertNotificationPreferences(prefs); err != nil {
+		t.Fatalf("save digest preference: %v", err)
+	}
+	second := &storage.Notification{
+		ID: "n-email-2", StudentID: studentID, Kind: StudyKind, DedupeKey: "study:2026-11-11",
+		Title: "Study session", Body: "Today is a study day.", Href: "/study", CreatedAt: now,
+	}
+	if created, err := ns.CreateNotification(second); err != nil || !created {
+		t.Fatalf("create second notification: %v %v", created, err)
+	}
+	if inserted, err := ns.CreateNotificationDelivery(&storage.NotificationDelivery{
+		NotificationID: second.ID, Channel: storage.NotificationChannelEmail, NextAttemptAt: now,
+	}); err != nil || !inserted {
+		t.Fatalf("create second delivery: %v %v", inserted, err)
+	}
+
+	sender := &fakeSender{}
+	result, err := newTestDelivery(ns, sender, now, 5).RunOnce()
+	if err != nil {
+		t.Fatalf("run: %v", err)
+	}
+	if len(sender.messages) != 1 {
+		t.Fatalf("messages = %d, want one digest", len(sender.messages))
+	}
+	if !strings.Contains(sender.messages[0].Text, "You have 2 notifications waiting.") {
+		t.Fatalf("digest did not list both items:\n%s", sender.messages[0].Text)
+	}
+	if result.Sent != 2 {
+		t.Fatalf("sent = %d, want both items counted", result.Sent)
+	}
+	for _, id := range []string{firstID, second.ID} {
+		deliveries, err := ns.ListNotificationDeliveries(id)
+		if err != nil || len(deliveries) != 1 {
+			t.Fatalf("deliveries for %s: %v %v", id, deliveries, err)
+		}
+		if deliveries[0].Status != storage.NotificationDeliverySent {
+			t.Fatalf("delivery for %s = %s, want sent", id, deliveries[0].Status)
+		}
+	}
+}

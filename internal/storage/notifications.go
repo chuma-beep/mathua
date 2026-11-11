@@ -9,27 +9,28 @@ import (
 )
 
 const notificationPreferenceColumns = `student_id, email_enabled, push_enabled,
-	in_app_enabled, reviews_enabled, study_enabled, milestones_enabled,
+	digest, in_app_enabled, reviews_enabled, study_enabled, milestones_enabled,
 	inactivity_enabled, preferred_time_min, study_days, study_time_min, timezone,
 	quiet_start_min, quiet_end_min, paused_until, created_at, updated_at`
 
 const ensureNotificationPreferencesSQL = `INSERT INTO notification_preferences (
-	student_id, email_enabled, push_enabled, in_app_enabled, reviews_enabled,
+	student_id, email_enabled, push_enabled, digest, in_app_enabled, reviews_enabled,
 	study_enabled, milestones_enabled, inactivity_enabled, preferred_time_min,
 	study_days, study_time_min, timezone, quiet_start_min, quiet_end_min,
 	paused_until, created_at, updated_at
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 ON CONFLICT(student_id) DO NOTHING`
 
 const upsertNotificationPreferencesSQL = `INSERT INTO notification_preferences (
-	student_id, email_enabled, push_enabled, in_app_enabled, reviews_enabled,
+	student_id, email_enabled, push_enabled, digest, in_app_enabled, reviews_enabled,
 	study_enabled, milestones_enabled, inactivity_enabled, preferred_time_min,
 	study_days, study_time_min, timezone, quiet_start_min, quiet_end_min,
 	paused_until, created_at, updated_at
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 ON CONFLICT(student_id) DO UPDATE SET
 	email_enabled = excluded.email_enabled,
 	push_enabled = excluded.push_enabled,
+	digest = excluded.digest,
 	in_app_enabled = excluded.in_app_enabled,
 	reviews_enabled = excluded.reviews_enabled,
 	study_enabled = excluded.study_enabled,
@@ -52,6 +53,7 @@ func DefaultNotificationPreferences(studentID string, now time.Time) Notificatio
 		StudentID:         studentID,
 		EmailEnabled:      false,
 		PushEnabled:       false,
+		Digest:            NotificationDigestImmediate,
 		InAppEnabled:      true,
 		ReviewsEnabled:    true,
 		StudyEnabled:      false,
@@ -75,12 +77,23 @@ func notificationPreferenceArgs(p *NotificationPreferences) []interface{} {
 	}
 	return []interface{}{
 		p.StudentID, boolToInt(p.EmailEnabled), boolToInt(p.PushEnabled),
-		boolToInt(p.InAppEnabled),
+		defaultDigest(p.Digest), boolToInt(p.InAppEnabled),
 		boolToInt(p.ReviewsEnabled), boolToInt(p.StudyEnabled),
 		boolToInt(p.MilestonesEnabled), boolToInt(p.InactivityEnabled),
 		p.PreferredTimeMin, p.StudyDays, p.StudyTimeMin, p.Timezone,
 		p.QuietStartMin, p.QuietEndMin, paused,
 		p.CreatedAt.UTC().Unix(), p.UpdatedAt.UTC().Unix(),
+	}
+}
+
+// defaultDigest keeps a row written before the digest column existed on the
+// immediate path rather than batching it silently.
+func defaultDigest(digest string) string {
+	switch digest {
+	case NotificationDigestDaily, NotificationDigestWeekly:
+		return digest
+	default:
+		return NotificationDigestImmediate
 	}
 }
 
@@ -94,8 +107,9 @@ func scanNotificationPreferences(row notificationRowScanner) (*NotificationPrefe
 	var paused int64
 	var createdAt, updatedAt int64
 	err := row.Scan(
-		&p.StudentID, &email, &push, &inApp, &reviews, &study, &milestones,
-		&inactivity, &p.PreferredTimeMin, &p.StudyDays, &p.StudyTimeMin,
+		&p.StudentID, &email, &push, &p.Digest, &inApp, &reviews, &study,
+		&milestones, &inactivity, &p.PreferredTimeMin, &p.StudyDays,
+		&p.StudyTimeMin,
 		&p.Timezone, &p.QuietStartMin, &p.QuietEndMin, &paused,
 		&createdAt, &updatedAt,
 	)
@@ -107,6 +121,7 @@ func scanNotificationPreferences(row notificationRowScanner) (*NotificationPrefe
 	}
 	p.EmailEnabled = email != 0
 	p.PushEnabled = push != 0
+	p.Digest = defaultDigest(p.Digest)
 	p.InAppEnabled = inApp != 0
 	p.ReviewsEnabled = reviews != 0
 	p.StudyEnabled = study != 0
@@ -375,7 +390,7 @@ func (s *PostgresStore) MarkAllNotificationsRead(studentID string, now time.Time
 // fields delivery needs. The preference join is intentional: a learner with no
 // notification preferences row has not opted into any channel.
 const notificationRecipientColumns = `p.student_id, p.email_enabled, p.push_enabled,
-	p.in_app_enabled, p.reviews_enabled, p.study_enabled, p.milestones_enabled,
+	p.digest, p.in_app_enabled, p.reviews_enabled, p.study_enabled, p.milestones_enabled,
 	p.inactivity_enabled, p.preferred_time_min, p.study_days, p.study_time_min,
 	p.timezone, p.quiet_start_min, p.quiet_end_min, p.paused_until,
 	p.created_at, p.updated_at,
@@ -390,8 +405,9 @@ func scanNotificationRecipient(row notificationRowScanner) (*NotificationRecipie
 	var accountCreated interface{}
 	var xpDate sql.NullString
 	err := row.Scan(
-		&r.Preferences.StudentID, &email, &push, &inApp, &reviews, &study,
-		&milestones, &inactivity, &r.Preferences.PreferredTimeMin,
+		&r.Preferences.StudentID, &email, &push, &r.Preferences.Digest,
+		&inApp, &reviews, &study, &milestones, &inactivity,
+		&r.Preferences.PreferredTimeMin,
 		&r.Preferences.StudyDays, &r.Preferences.StudyTimeMin,
 		&r.Preferences.Timezone, &r.Preferences.QuietStartMin,
 		&r.Preferences.QuietEndMin, &paused, &createdAt, &updatedAt,
@@ -408,6 +424,7 @@ func scanNotificationRecipient(row notificationRowScanner) (*NotificationRecipie
 	r.XPDate = xpDate.String
 	r.Preferences.EmailEnabled = email != 0
 	r.Preferences.PushEnabled = push != 0
+	r.Preferences.Digest = defaultDigest(r.Preferences.Digest)
 	r.Preferences.InAppEnabled = inApp != 0
 	r.Preferences.ReviewsEnabled = reviews != 0
 	r.Preferences.StudyEnabled = study != 0
@@ -1060,4 +1077,283 @@ func (s *SQLiteStore) ListNotificationDeliveryProblems(limit int) ([]Notificatio
 
 func (s *PostgresStore) ListNotificationDeliveryProblems(limit int) ([]NotificationDeliveryRecord, error) {
 	return listNotificationDeliveryProblems(s.db, rebindDollars(queryNotificationDeliveryProblems), limit)
+}
+
+func markNotificationOpened(db *sql.DB, notificationID, studentID string, now time.Time, rebind func(string) string) error {
+	return markNotificationTimestamp(db, notificationID, studentID, now, rebind,
+		`UPDATE notifications SET read_at = ? WHERE id = ? AND student_id = ? AND read_at = 0`,
+		`UPDATE notification_deliveries SET opened_at = ? WHERE notification_id = ? AND opened_at = 0`)
+}
+
+func markNotificationClicked(db *sql.DB, notificationID, studentID string, now time.Time, rebind func(string) string) error {
+	return markNotificationTimestamp(db, notificationID, studentID, now, rebind,
+		`UPDATE notifications SET read_at = CASE WHEN read_at = 0 THEN ? ELSE read_at END
+		 WHERE id = ? AND student_id = ?`,
+		`UPDATE notification_deliveries
+		 SET clicked_at = ?, opened_at = CASE WHEN opened_at = 0 THEN ? ELSE opened_at END
+		 WHERE notification_id = ?`)
+}
+
+// markNotificationTimestamp applies an engagement stamp to the notification and
+// its deliveries. The ownership check runs after the update so a repeat open is
+// idempotent, while an id the learner does not own is still reported missing.
+func markNotificationTimestamp(db *sql.DB, notificationID, studentID string, now time.Time, rebind func(string) string, notificationSQL, deliverySQL string) error {
+	if notificationID == "" || studentID == "" {
+		return ErrNotificationNotFound
+	}
+	at := now.UTC().Unix()
+	if _, err := db.Exec(rebind(notificationSQL), at, notificationID, studentID); err != nil {
+		return fmt.Errorf("mark notification engagement: %w", err)
+	}
+	var owned int
+	if err := db.QueryRow(rebind(`SELECT COUNT(*) FROM notifications WHERE id = ? AND student_id = ?`),
+		notificationID, studentID).Scan(&owned); err != nil {
+		return fmt.Errorf("mark notification engagement: %w", err)
+	}
+	if owned == 0 {
+		return ErrNotificationNotFound
+	}
+	var err error
+	if strings.Contains(deliverySQL, "clicked_at") {
+		_, err = db.Exec(rebind(deliverySQL), at, at, notificationID)
+	} else {
+		_, err = db.Exec(rebind(deliverySQL), at, notificationID)
+	}
+	if err != nil {
+		return fmt.Errorf("mark notification engagement: %w", err)
+	}
+	return nil
+}
+
+func (s *SQLiteStore) MarkNotificationOpened(studentID, notificationID string, now time.Time) error {
+	return markNotificationOpened(s.db, notificationID, studentID, now, func(q string) string { return q })
+}
+
+func (s *PostgresStore) MarkNotificationOpened(studentID, notificationID string, now time.Time) error {
+	return markNotificationOpened(s.db, notificationID, studentID, now, rebindDollars)
+}
+
+func (s *SQLiteStore) MarkNotificationClicked(studentID, notificationID string, now time.Time) error {
+	return markNotificationClicked(s.db, notificationID, studentID, now, func(q string) string { return q })
+}
+
+func (s *PostgresStore) MarkNotificationClicked(studentID, notificationID string, now time.Time) error {
+	return markNotificationClicked(s.db, notificationID, studentID, now, rebindDollars)
+}
+
+const replayNotificationDeliverySQL = `UPDATE notification_deliveries
+SET status = 'pending', attempts = 0, next_attempt_at = ?, claimed_until = 0,
+	last_error = '', suppressed_reason = ''
+WHERE notification_id = ? AND channel = ? AND status IN ('failed', 'suppressed')`
+
+func replayNotificationDelivery(db *sql.DB, query, notificationID, channel string, now time.Time) error {
+	res, err := db.Exec(query, now.UTC().Unix(), notificationID, channel)
+	if err != nil {
+		return fmt.Errorf("replay notification delivery: %w", err)
+	}
+	if n, _ := res.RowsAffected(); n == 0 {
+		return fmt.Errorf("notification delivery is not replayable: %w", ErrNotificationNotFound)
+	}
+	return nil
+}
+
+func (s *SQLiteStore) ReplayNotificationDelivery(notificationID, channel string, now time.Time) error {
+	return replayNotificationDelivery(s.db, replayNotificationDeliverySQL, notificationID, channel, now)
+}
+
+func (s *PostgresStore) ReplayNotificationDelivery(notificationID, channel string, now time.Time) error {
+	return replayNotificationDelivery(s.db, rebindDollars(replayNotificationDeliverySQL), notificationID, channel, now)
+}
+
+const queryListNotificationDeliveries = `SELECT ` + notificationDeliveryColumns + `
+FROM notification_deliveries WHERE notification_id = ? ORDER BY channel`
+
+func listNotificationDeliveries(db *sql.DB, query, notificationID string) ([]NotificationDelivery, error) {
+	rows, err := db.Query(query, notificationID)
+	if err != nil {
+		return nil, fmt.Errorf("list notification deliveries: %w", err)
+	}
+	defer rows.Close()
+	out := make([]NotificationDelivery, 0, 4)
+	for rows.Next() {
+		var d NotificationDelivery
+		var nextAttempt, claimedUntil, sentAt, openedAt, clickedAt int64
+		if err := rows.Scan(&d.NotificationID, &d.Channel, &d.Status, &d.Attempts,
+			&nextAttempt, &claimedUntil, &d.ProviderID, &d.LastError,
+			&d.SuppressedReason, &sentAt, &openedAt, &clickedAt); err != nil {
+			return nil, fmt.Errorf("scan notification delivery: %w", err)
+		}
+		d.NextAttemptAt = unixOrZeroTime(nextAttempt)
+		d.ClaimedUntil = unixOrZeroTime(claimedUntil)
+		d.SentAt = unixOrZeroTime(sentAt)
+		d.OpenedAt = unixOrZeroTime(openedAt)
+		d.ClickedAt = unixOrZeroTime(clickedAt)
+		out = append(out, d)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("notification delivery rows: %w", err)
+	}
+	return out, nil
+}
+
+func unixOrZeroTime(v int64) time.Time {
+	if v <= 0 {
+		return time.Time{}
+	}
+	return time.Unix(v, 0).UTC()
+}
+
+func (s *SQLiteStore) ListNotificationDeliveries(notificationID string) ([]NotificationDelivery, error) {
+	return listNotificationDeliveries(s.db, queryListNotificationDeliveries, notificationID)
+}
+
+func (s *PostgresStore) ListNotificationDeliveries(notificationID string) ([]NotificationDelivery, error) {
+	return listNotificationDeliveries(s.db, rebindDollars(queryListNotificationDeliveries), notificationID)
+}
+
+const queryListStudentNotificationDeliveries = `SELECT d.notification_id, n.student_id,
+	s.name, n.title, d.channel, d.status, d.attempts, d.last_error,
+	d.suppressed_reason, n.created_at
+FROM notification_deliveries d
+JOIN notifications n ON n.id = d.notification_id
+JOIN students s ON s.id = n.student_id
+WHERE n.student_id = ?
+ORDER BY n.created_at DESC, d.notification_id, d.channel
+LIMIT ?`
+
+func listStudentNotificationDeliveries(db *sql.DB, query, studentID string, limit int) ([]NotificationDeliveryRecord, error) {
+	if limit <= 0 {
+		limit = 50
+	}
+	if limit > 200 {
+		limit = 200
+	}
+	rows, err := db.Query(query, studentID, limit)
+	if err != nil {
+		return nil, fmt.Errorf("list student notification deliveries: %w", err)
+	}
+	defer rows.Close()
+	out := make([]NotificationDeliveryRecord, 0, limit)
+	for rows.Next() {
+		var rec NotificationDeliveryRecord
+		var createdAt int64
+		if err := rows.Scan(&rec.NotificationID, &rec.StudentID, &rec.StudentName,
+			&rec.Title, &rec.Channel, &rec.Status, &rec.Attempts, &rec.LastError,
+			&rec.SuppressedReason, &createdAt); err != nil {
+			return nil, fmt.Errorf("scan student notification delivery: %w", err)
+		}
+		rec.CreatedAt = time.Unix(createdAt, 0).UTC()
+		out = append(out, rec)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("student notification delivery rows: %w", err)
+	}
+	return out, nil
+}
+
+func (s *SQLiteStore) ListStudentNotificationDeliveries(studentID string, limit int) ([]NotificationDeliveryRecord, error) {
+	return listStudentNotificationDeliveries(s.db, queryListStudentNotificationDeliveries, studentID, limit)
+}
+
+func (s *PostgresStore) ListStudentNotificationDeliveries(studentID string, limit int) ([]NotificationDeliveryRecord, error) {
+	return listStudentNotificationDeliveries(s.db, rebindDollars(queryListStudentNotificationDeliveries), studentID, limit)
+}
+
+const queryListDueNotificationDeliveries = `SELECT d.notification_id, n.student_id,
+	d.channel, d.attempts, n.kind, n.title, n.body, n.href, s.name, s.email,
+	s.email_verified
+FROM notification_deliveries d
+JOIN notifications n ON n.id = d.notification_id
+JOIN students s ON s.id = n.student_id
+WHERE n.student_id = ? AND d.channel = ? AND d.status IN ('pending', 'retry', 'sending')
+	AND d.next_attempt_at > 0 AND d.next_attempt_at <= ?
+ORDER BY d.next_attempt_at, d.notification_id
+LIMIT 100`
+
+func listDueNotificationDeliveries(db *sql.DB, query, studentID, channel string, now time.Time) ([]NotificationDeliveryJob, error) {
+	rows, err := db.Query(query, studentID, channel, now.UTC().Unix())
+	if err != nil {
+		return nil, fmt.Errorf("list due notification deliveries: %w", err)
+	}
+	defer rows.Close()
+	out := make([]NotificationDeliveryJob, 0, 8)
+	for rows.Next() {
+		var job NotificationDeliveryJob
+		var verified int
+		if err := rows.Scan(&job.NotificationID, &job.StudentID, &job.Channel,
+			&job.Attempts, &job.Kind, &job.Title, &job.Body, &job.Href,
+			&job.StudentName, &job.Email, &verified); err != nil {
+			return nil, fmt.Errorf("scan due notification delivery: %w", err)
+		}
+		job.EmailVerified = verified != 0
+		out = append(out, job)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("due notification delivery rows: %w", err)
+	}
+	return out, nil
+}
+
+func (s *SQLiteStore) ListDueNotificationDeliveries(studentID, channel string, now time.Time) ([]NotificationDeliveryJob, error) {
+	return listDueNotificationDeliveries(s.db, queryListDueNotificationDeliveries, studentID, channel, now)
+}
+
+func (s *PostgresStore) ListDueNotificationDeliveries(studentID, channel string, now time.Time) ([]NotificationDeliveryJob, error) {
+	return listDueNotificationDeliveries(s.db, rebindDollars(queryListDueNotificationDeliveries), studentID, channel, now)
+}
+
+const deletePrunedDeliveriesSQL = `DELETE FROM notification_deliveries
+WHERE notification_id IN (SELECT id FROM notifications WHERE created_at < ?)`
+
+const deletePrunedNotificationsSQL = `DELETE FROM notifications WHERE created_at < ?`
+
+func pruneNotificationHistory(db *sql.DB, before time.Time, rebind func(string) string) (NotificationPruneResult, error) {
+	var result NotificationPruneResult
+	cutoff := before.UTC().Unix()
+	res, err := db.Exec(rebind(deletePrunedDeliveriesSQL), cutoff)
+	if err != nil {
+		return result, fmt.Errorf("prune notification deliveries: %w", err)
+	}
+	if n, _ := res.RowsAffected(); n > 0 {
+		result.Deliveries = int(n)
+	}
+	res, err = db.Exec(rebind(deletePrunedNotificationsSQL), cutoff)
+	if err != nil {
+		return result, fmt.Errorf("prune notifications: %w", err)
+	}
+	if n, _ := res.RowsAffected(); n > 0 {
+		result.Notifications = int(n)
+	}
+	return result, nil
+}
+
+func (s *SQLiteStore) PruneNotificationHistory(before time.Time) (NotificationPruneResult, error) {
+	return pruneNotificationHistory(s.db, before, func(q string) string { return q })
+}
+
+func (s *PostgresStore) PruneNotificationHistory(before time.Time) (NotificationPruneResult, error) {
+	return pruneNotificationHistory(s.db, before, rebindDollars)
+}
+
+const prunePushSubscriptionsSQL = `DELETE FROM notification_push_subscriptions
+WHERE failures >= ? AND updated_at < ?`
+
+func prunePushSubscriptions(db *sql.DB, query string, before time.Time, maxFailures int) (int, error) {
+	if maxFailures <= 0 {
+		maxFailures = 10
+	}
+	res, err := db.Exec(query, maxFailures, before.UTC().Unix())
+	if err != nil {
+		return 0, fmt.Errorf("prune push subscriptions: %w", err)
+	}
+	n, _ := res.RowsAffected()
+	return int(n), nil
+}
+
+func (s *SQLiteStore) PrunePushSubscriptions(before time.Time, maxFailures int) (int, error) {
+	return prunePushSubscriptions(s.db, prunePushSubscriptionsSQL, before, maxFailures)
+}
+
+func (s *PostgresStore) PrunePushSubscriptions(before time.Time, maxFailures int) (int, error) {
+	return prunePushSubscriptions(s.db, rebindDollars(prunePushSubscriptionsSQL), before, maxFailures)
 }

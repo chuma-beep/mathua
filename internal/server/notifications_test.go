@@ -348,3 +348,70 @@ func TestNotificationPreferencesAPI(t *testing.T) {
 		}
 	}
 }
+
+func TestNotificationEngagementAndPushDevices(t *testing.T) {
+	_, mux, store, token, sid := setupTestServerWithPlanner(t)
+	ns := store.(storage.NotificationStore)
+	now := time.Now().UTC().Truncate(time.Second)
+
+	seedNotification(t, store, sid, "n-open", "open", now, false)
+	if _, err := ns.CreateNotificationDelivery(&storage.NotificationDelivery{
+		NotificationID: "n-open", Channel: storage.NotificationChannelEmail,
+		Status: storage.NotificationDeliveryFailed, Attempts: 2,
+	}); err != nil {
+		t.Fatalf("seed delivery: %v", err)
+	}
+
+	rec := notificationRequest(t, mux, http.MethodPost, "/api/notifications/open", token, `{"id":"n-open"}`)
+	if rec.Code != http.StatusOK {
+		t.Fatalf("open = %d: %s", rec.Code, rec.Body.String())
+	}
+	rec = notificationRequest(t, mux, http.MethodPost, "/api/notifications/click", token, `{"id":"n-open"}`)
+	if rec.Code != http.StatusOK {
+		t.Fatalf("click = %d: %s", rec.Code, rec.Body.String())
+	}
+	deliveries, err := ns.ListNotificationDeliveries("n-open")
+	if err != nil || len(deliveries) != 1 {
+		t.Fatalf("deliveries: %v %v", deliveries, err)
+	}
+	if deliveries[0].OpenedAt.IsZero() || deliveries[0].ClickedAt.IsZero() {
+		t.Fatalf("engagement stamps missing: %+v", deliveries[0])
+	}
+	rec = notificationRequest(t, mux, http.MethodPost, "/api/notifications/open", token, `{"id":"n-missing"}`)
+	if rec.Code != http.StatusNotFound {
+		t.Fatalf("open unknown = %d, want 404", rec.Code)
+	}
+
+	endpoint := "https://push.example/device-1"
+	if err := ns.UpsertNotificationPushSubscription(&storage.NotificationPushSubscription{
+		StudentID: sid, Endpoint: endpoint, P256DH: "key", Auth: "secret", UserAgent: "Firefox",
+	}); err != nil {
+		t.Fatalf("seed subscription: %v", err)
+	}
+	rec = notificationRequest(t, mux, http.MethodGet, "/api/notifications/push/devices", token, "")
+	if rec.Code != http.StatusOK {
+		t.Fatalf("devices = %d: %s", rec.Code, rec.Body.String())
+	}
+	var listed struct {
+		Devices []notificationDeviceJSON `json:"devices"`
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &listed); err != nil {
+		t.Fatalf("decode devices: %v", err)
+	}
+	if len(listed.Devices) != 1 || listed.Devices[0].ID != notificationDeviceID(endpoint) {
+		t.Fatalf("devices = %+v, want the hashed endpoint", listed.Devices)
+	}
+	if bytes.Contains(rec.Body.Bytes(), []byte(endpoint)) {
+		t.Fatal("the raw push endpoint was returned to the client")
+	}
+
+	rec = notificationRequest(t, mux, http.MethodPost, "/api/notifications/push/revoke", token,
+		fmt.Sprintf(`{"id":%q}`, listed.Devices[0].ID))
+	if rec.Code != http.StatusOK {
+		t.Fatalf("revoke = %d: %s", rec.Code, rec.Body.String())
+	}
+	subs, err := ns.ListNotificationPushSubscriptions(sid)
+	if err != nil || len(subs) != 0 {
+		t.Fatalf("subscriptions after revoke: %v %v", subs, err)
+	}
+}

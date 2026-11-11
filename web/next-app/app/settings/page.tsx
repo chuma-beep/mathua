@@ -11,7 +11,7 @@ import DailyGoalControl from '../../components/DailyGoalControl'
 import PlanEditor from '../../components/PlanEditor'
 import { Input } from '@/components/ui/input'
 import Footer from '../../components/Footer'
-import { getSettings, getScores, updateSettings, updateProfileName, changePassword, uploadAvatar, deleteAvatar, avatarImageUrl, getIdentities, deleteIdentity, createLinkToken, requestEmailVerification, startOAuthLogin, getConfig, OAUTH_LABELS, type OAuthProvider, enableShare, disableShare, type UserSettings, getNotificationPreferences, updateNotificationPreferences, type NotificationPreferences } from '../../lib/api'
+import { getSettings, getScores, updateSettings, updateProfileName, changePassword, uploadAvatar, deleteAvatar, avatarImageUrl, getIdentities, deleteIdentity, createLinkToken, requestEmailVerification, startOAuthLogin, getConfig, OAUTH_LABELS, type OAuthProvider, enableShare, disableShare, type UserSettings, getNotificationPreferences, updateNotificationPreferences, listPushDevices, revokePushDevice, type NotificationPreferences, type NotificationDevice } from '../../lib/api'
 import { browserPushSupported, subscribeBrowserPush, unsubscribeBrowserPush } from '../../lib/push'
 import { isLoggedIn, getUserInfo, setUserInfo } from '../../lib/auth'
 import { DICEBEAR_STYLES, dicebearUrl, randomDicebear, type DicebearPick } from '../../lib/dicebear'
@@ -104,6 +104,7 @@ export default function SettingsPage() {
   const [notificationPrefsMsg, setNotificationPrefsMsg] = useState('')
   const [notificationTimezoneDraft, setNotificationTimezoneDraft] = useState('')
   const [pushSupported, setPushSupported] = useState<boolean | null>(null)
+  const [pushDevices, setPushDevices] = useState<NotificationDevice[]>([])
 
   useEffect(() => {
     if (!isLoggedIn()) {
@@ -133,6 +134,9 @@ export default function SettingsPage() {
       .then(prefs => {
         setNotificationPrefs(prefs)
         setNotificationTimezoneDraft(prefs.timezone)
+        if (prefs.push_enabled) {
+          listPushDevices().then(setPushDevices).catch(() => {})
+        }
       })
       .catch(() => setNotificationPrefsMsg('Notification preferences could not be loaded.'))
     setPushSupported(browserPushSupported())
@@ -279,7 +283,9 @@ export default function SettingsPage() {
       } else {
         await unsubscribeBrowserPush()
         await saveNotificationPrefs({ ...notificationPrefs, push_enabled: false })
+        setPushDevices([])
       }
+      listPushDevices().then(setPushDevices).catch(() => {})
     } catch (e) {
       setNotificationPrefsMsg(e instanceof Error ? e.message : 'Could not change browser push.')
     } finally {
@@ -750,6 +756,19 @@ export default function SettingsPage() {
                           className="bg-mathua-code border border-mathua-border h-9 px-2 font-mono text-xs text-mathua-primary disabled:opacity-50"
                         />
                       </label>
+                      <label className="flex items-center justify-between gap-4 min-w-0">
+                        <span className="font-mono text-xs text-mathua-secondary">Email and push digest</span>
+                        <select
+                          value={notificationPrefs.digest || 'immediate'}
+                          disabled={notificationPrefsBusy}
+                          onChange={e => patchNotificationPrefs({ digest: e.target.value })}
+                          className="bg-mathua-code border border-mathua-border h-9 px-2 font-mono text-xs text-mathua-primary disabled:opacity-50"
+                        >
+                          <option value="immediate">Send each one</option>
+                          <option value="daily">One daily digest</option>
+                          <option value="weekly">One weekly digest</option>
+                        </select>
+                      </label>
                       <div className="flex flex-wrap items-center justify-between gap-3 min-w-0">
                         <span className="font-mono text-xs text-mathua-secondary">Quiet hours</span>
                         <div className="flex items-center gap-2">
@@ -829,6 +848,37 @@ export default function SettingsPage() {
                           aria-label="Toggle browser push"
                         />
                       </div>
+                      {pushDevices.length > 0 && (
+                        <ul className="mt-3 space-y-2">
+                          {pushDevices.map(device => (
+                            <li key={device.id} className="flex items-center justify-between gap-3 border border-mathua-border bg-mathua-code px-3 py-2">
+                              <div className="min-w-0">
+                                <p className="font-mono text-[11px] text-mathua-primary truncate">
+                                  {device.user_agent || 'Unknown browser'}
+                                </p>
+                                <p className="font-mono text-[10px] text-mathua-muted">
+                                  Added {device.created_at.slice(0, 10)}
+                                  {device.last_success_at ? ` · Last used ${device.last_success_at.slice(0, 10)}` : ''}
+                                  {device.failures > 0 ? ` · ${device.failures} failed sends` : ''}
+                                </p>
+                              </div>
+                              <button
+                                type="button"
+                                disabled={notificationPrefsBusy}
+                                onClick={() => {
+                                  setNotificationPrefsMsg('')
+                                  revokePushDevice(device.id)
+                                    .then(() => listPushDevices().then(setPushDevices))
+                                    .catch(e => setNotificationPrefsMsg(e instanceof Error ? e.message : 'Could not revoke the device.'))
+                                }}
+                                className="shrink-0 border border-mathua-border px-2 h-8 font-mono text-[10px] uppercase tracking-wider text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue disabled:opacity-50"
+                              >
+                                Revoke
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </div>
                   </div>
                 )}

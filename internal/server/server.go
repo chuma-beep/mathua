@@ -585,6 +585,12 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/notifications/push/key", logRequest(cors(s.authMiddleware(s.handleNotificationPushKey))))
 	mux.HandleFunc("/api/notifications/push/subscribe", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleNotificationPushSubscribe)))))
 	mux.HandleFunc("/api/notifications/push/unsubscribe", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleNotificationPushUnsubscribe)))))
+	mux.HandleFunc("/api/notifications/push/devices", logRequest(cors(s.authMiddleware(s.handleNotificationPushDevices))))
+	mux.HandleFunc("/api/notifications/push/revoke", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleNotificationPushRevoke)))))
+	// Engagement stamps. Open comes from the feed, click from the service worker
+	// after a push is followed; both are scoped to the authenticated learner.
+	mux.HandleFunc("/api/notifications/open", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleNotificationOpen)))))
+	mux.HandleFunc("/api/notifications/click", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleNotificationClick)))))
 	// The signed link in a reminder email is the credential here, so the route
 	// is public. It only disables email; it cannot read or change anything else.
 	mux.HandleFunc("/api/notifications/unsubscribe", logRequest(cors(s.writeLimiter.middleware(s.handleNotificationUnsubscribe))))
@@ -614,6 +620,8 @@ func (s *Server) Register(mux *http.ServeMux) {
 	// learner and one message, and an operator who may not look an account up
 	// does not get to enumerate the same people through the delivery queue.
 	mux.HandleFunc("/api/admin/notifications", logRequest(cors(s.requirePermission(admin.UsersRead, s.handleAdminNotifications))))
+	mux.HandleFunc("/api/admin/notifications/replay", logRequest(cors(s.writeLimiter.middleware(s.requirePermission(admin.UsersRead, s.handleAdminNotificationReplay)))))
+	mux.HandleFunc("/api/admin/notifications/history", logRequest(cors(s.requirePermission(admin.UsersRead, s.handleAdminNotificationHistory))))
 	mux.HandleFunc("/api/admin/admins", logRequest(cors(s.requirePermission(admin.AdminsRead, s.handleAdminAdmins))))
 	// Accepting an invitation is the one route here reachable by a non-staff account: it is how
 	// a learner becomes staff. It still requires authentication, and it is bound to the invited

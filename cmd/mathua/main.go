@@ -507,6 +507,34 @@ func main() {
 				}
 			}()
 		}
+		// Retention runs once a day. A notification feed is a reminder surface,
+		// not an archive, and a push endpoint that has failed ten times is gone.
+		notifyWG.Add(1)
+		go func() {
+			defer notifyWG.Done()
+			run := func() {
+				result, err := notifications.RunRetention(notifyStore, time.Now().UTC())
+				if err != nil {
+					log.Printf("notifications: retention: %v", err)
+					return
+				}
+				if result.Notifications > 0 || result.Deliveries > 0 || result.PushSubscriptions > 0 {
+					log.Printf("notifications: pruned %d notifications, %d deliveries, %d push devices",
+						result.Notifications, result.Deliveries, result.PushSubscriptions)
+				}
+			}
+			run()
+			ticker := time.NewTicker(24 * time.Hour)
+			defer ticker.Stop()
+			for {
+				select {
+				case <-notifyCtx.Done():
+					return
+				case <-ticker.C:
+					run()
+				}
+			}
+		}()
 	}
 
 	quit := make(chan os.Signal, 1)

@@ -128,6 +128,7 @@ func authMigrate(db *sql.DB) error {
 		"ALTER TABLE students ADD COLUMN avatar_url TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE students ADD COLUMN email_verified INTEGER NOT NULL DEFAULT 0",
 		"ALTER TABLE notification_preferences ADD COLUMN push_enabled INTEGER NOT NULL DEFAULT 0",
+		"ALTER TABLE notification_preferences ADD COLUMN digest TEXT NOT NULL DEFAULT 'immediate'",
 		`INSERT OR IGNORE INTO identities (provider, provider_id, student_id, email, email_verified)
 			SELECT 'google', google_id, id, email, 1 FROM students
 			WHERE google_id IS NOT NULL AND google_id != ''`,
