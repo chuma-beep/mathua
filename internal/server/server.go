@@ -566,6 +566,9 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/notifications/read", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleNotificationRead)))))
 	mux.HandleFunc("/api/notifications/read-all", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleNotificationsReadAll)))))
 	mux.HandleFunc("/api/notifications/preferences", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleNotificationPreferences)))))
+	// The signed link in a reminder email is the credential here, so the route
+	// is public. It only disables email; it cannot read or change anything else.
+	mux.HandleFunc("/api/notifications/unsubscribe", logRequest(cors(s.writeLimiter.middleware(s.handleNotificationUnsubscribe))))
 	// Friends. Every route is behind MATHUA_FRIENDS; the handlers answer 404
 	// rather than pretending the surface is empty when the flag is off.
 	mux.HandleFunc("/api/friends", logRequest(cors(s.authMiddleware(s.handleFriends))))

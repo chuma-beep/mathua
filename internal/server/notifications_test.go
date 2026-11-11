@@ -9,6 +9,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/chuma-beep/mathua/internal/auth"
 	"github.com/chuma-beep/mathua/internal/storage"
 )
 
@@ -184,6 +185,94 @@ func TestNotificationsOwnershipPaginationAndReadState(t *testing.T) {
 	rec = notificationRequest(t, mux, http.MethodGet, "/api/notifications/unread-count", otherToken, "")
 	if err := json.Unmarshal(rec.Body.Bytes(), &count); err != nil || count.Unread != 1 {
 		t.Fatalf("other unread after mark all = %+v (%v), want 1", count, err)
+	}
+}
+
+func TestNotificationFeedHonoursInAppPreference(t *testing.T) {
+	_, mux, store, token, sid := setupTestServerWithPlanner(t)
+	now := time.Now().UTC().Truncate(time.Second)
+	seedNotification(t, store, sid, "n1", "one", now, false)
+
+	ns := store.(storage.NotificationStore)
+	prefs, err := ns.EnsureNotificationPreferences(sid, now)
+	if err != nil || prefs == nil {
+		t.Fatalf("ensure prefs: %v %+v", err, prefs)
+	}
+	prefs.InAppEnabled = false
+	if err := ns.UpsertNotificationPreferences(prefs); err != nil {
+		t.Fatalf("save prefs: %v", err)
+	}
+
+	rec := notificationRequest(t, mux, http.MethodGet, "/api/notifications", token, "")
+	if rec.Code != http.StatusOK {
+		t.Fatalf("list = %d: %s", rec.Code, rec.Body.String())
+	}
+	var page struct {
+		Notifications []notificationJSON `json:"notifications"`
+		Unread        int                `json:"unread"`
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &page); err != nil {
+		t.Fatalf("decode: %v", err)
+	}
+	if len(page.Notifications) != 0 || page.Unread != 0 {
+		t.Fatalf("feed with in-app off = %+v, want hidden and zero", page)
+	}
+	rec = notificationRequest(t, mux, http.MethodGet, "/api/notifications/unread-count", token, "")
+	var count struct {
+		Unread int `json:"unread"`
+	}
+	if err := json.Unmarshal(rec.Body.Bytes(), &count); err != nil || count.Unread != 0 {
+		t.Fatalf("count with in-app off = %+v (%v), want 0", count, err)
+	}
+
+	prefs.InAppEnabled = true
+	if err := ns.UpsertNotificationPreferences(prefs); err != nil {
+		t.Fatalf("restore prefs: %v", err)
+	}
+	rec = notificationRequest(t, mux, http.MethodGet, "/api/notifications", token, "")
+	if err := json.Unmarshal(rec.Body.Bytes(), &page); err != nil {
+		t.Fatalf("decode restored: %v", err)
+	}
+	if len(page.Notifications) != 1 || page.Unread != 1 {
+		t.Fatalf("feed with in-app on = %+v, want the hidden item back", page)
+	}
+}
+
+func TestNotificationUnsubscribeIsSignedAndOnlyDisablesEmail(t *testing.T) {
+	_, mux, store, _, sid := setupTestServerWithPlanner(t)
+	now := time.Now().UTC()
+	ns := store.(storage.NotificationStore)
+	prefs, err := ns.EnsureNotificationPreferences(sid, now)
+	if err != nil || prefs == nil {
+		t.Fatalf("ensure prefs: %v %+v", err, prefs)
+	}
+	prefs.EmailEnabled = true
+	if err := ns.UpsertNotificationPreferences(prefs); err != nil {
+		t.Fatalf("save prefs: %v", err)
+	}
+
+	token, err := auth.NotificationUnsubscribeToken(sid)
+	if err != nil {
+		t.Fatalf("mint token: %v", err)
+	}
+	rec := notificationRequest(t, mux, http.MethodPost, "/api/notifications/unsubscribe", "", fmt.Sprintf(`{"token":%q}`, token))
+	if rec.Code != http.StatusOK {
+		t.Fatalf("unsubscribe = %d: %s", rec.Code, rec.Body.String())
+	}
+	updated, err := ns.GetNotificationPreferences(sid)
+	if err != nil || updated == nil {
+		t.Fatalf("load prefs: %v %+v", err, updated)
+	}
+	if updated.EmailEnabled {
+		t.Error("unsubscribe left email enabled")
+	}
+	if !updated.InAppEnabled {
+		t.Error("unsubscribe changed the in-app preference")
+	}
+
+	rec = notificationRequest(t, mux, http.MethodPost, "/api/notifications/unsubscribe", "", `{"token":"not-a-token"}`)
+	if rec.Code != http.StatusBadRequest {
+		t.Fatalf("invalid token = %d, want 400", rec.Code)
 	}
 }
 

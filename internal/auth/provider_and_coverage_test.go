@@ -267,32 +267,3 @@ func TestAuth_VerifyEmail_WhitespaceAndTrimming(t *testing.T) {
 		t.Errorf("expected student ID %q, got %q", st.ID, verifiedID)
 	}
 }
-
-func TestAuth_PlainTextToHTML_FormattingAndEscaping(t *testing.T) {
-	cases := []struct {
-		input string
-		want  string
-	}{
-		{"", ""},
-		{"   \n   \n   ", ""},
-		{
-			"Hello world",
-			"<p>Hello world</p>",
-		},
-		{
-			"First paragraph\r\n\r\nSecond paragraph",
-			"<p>First paragraph</p><p>Second paragraph</p>",
-		},
-		{
-			"Special chars: <script>alert('test')</script> & \"quotes\"",
-			"<p>Special chars: &lt;script&gt;alert(&#39;test&#39;)&lt;/script&gt; &amp; &#34;quotes&#34;</p>",
-		},
-	}
-
-	for _, c := range cases {
-		got := plainTextToHTML(c.input)
-		if got != c.want {
-			t.Errorf("plainTextToHTML(%q): got %q, want %q", c.input, got, c.want)
-		}
-	}
-}

@@ -13,6 +13,7 @@ import (
 
 	"golang.org/x/crypto/bcrypt"
 
+	"github.com/chuma-beep/mathua/internal/mailer"
 	"github.com/chuma-beep/mathua/internal/storage"
 )
 
@@ -32,11 +33,11 @@ func newResetToken() (string, error) {
 	return hex.EncodeToString(b), nil
 }
 
-// smtpConfigured reports whether outbound reset mail can be sent. The name is
+// smtpConfigured reports whether outbound mail can be sent. The name is
 // historical: the deployment can use either the SMTP credentials or SendByte's
 // HTTP API, and either one is enough.
 func smtpConfigured() bool {
-	return sendByteConfigured() || strings.TrimSpace(os.Getenv("SMTP_HOST")) != ""
+	return mailer.Configured()
 }
 
 // SMTPConfigured is the exported gate for the reset-request handler.

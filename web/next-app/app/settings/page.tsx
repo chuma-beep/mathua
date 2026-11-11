@@ -579,10 +579,10 @@ export default function SettingsPage() {
                 </div>
               </div>
 
-              <div className="border-t border-mathua-border pt-6 min-w-0">
+              <div id="notifications" className="border-t border-mathua-border pt-6 min-w-0 scroll-mt-24">
                 <span className="font-mono text-sm text-mathua-primary">Notifications</span>
                 <p className="text-mathua-muted text-xs mt-1">
-                  Choose what Mathua may remind you about. In-app items appear in your notifications centre. Email delivery is not enabled yet.
+                  Choose what Mathua may remind you about. In-app items appear in your notifications centre. Email requires a verified address and is off until you turn it on.
                 </p>
                 {!notificationPrefs ? (
                   <p className="mt-3 font-mono text-[11px] text-mathua-muted">
@@ -698,7 +698,7 @@ export default function SettingsPage() {
                       <div className="flex items-center justify-between gap-4 min-w-0">
                         <div className="min-w-0">
                           <span className="font-mono text-xs text-mathua-primary">Email</span>
-                          <p className="text-mathua-muted text-[11px] mt-0.5">Requires a verified email. Delivery will be enabled in a later phase.</p>
+                          <p className="text-mathua-muted text-[11px] mt-0.5">Requires a verified email. Review reminders arrive at the time below.</p>
                         </div>
                         <Switch
                           checked={notificationPrefs.email_enabled}

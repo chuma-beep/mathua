@@ -3,10 +3,10 @@ package auth
 import (
 	"errors"
 	"log"
-	"net/smtp"
-	"os"
 	"strings"
 	"time"
+
+	"github.com/chuma-beep/mathua/internal/mailer"
 )
 
 // EmailVerifyTTL bounds an email-verification link's lifetime.
@@ -16,26 +16,7 @@ const EmailVerifyTTL = 24 * time.Hour
 const LinkTokenTTL = 10 * time.Minute
 
 func sendMail(to, subject, body string) error {
-	if sendByteConfigured() {
-		return sendSendByte(to, subject, body)
-	}
-	host := strings.TrimSpace(os.Getenv("SMTP_HOST"))
-	port := strings.TrimSpace(os.Getenv("SMTP_PORT"))
-	if port == "" {
-		port = "587"
-	}
-	user := os.Getenv("SMTP_USER")
-	pass := os.Getenv("SMTP_PASS")
-	from := os.Getenv("SMTP_FROM")
-	if from == "" {
-		from = user
-	}
-	var auth smtp.Auth
-	if user != "" {
-		auth = smtp.PlainAuth("", user, pass, host)
-	}
-	msg := []byte("From: " + from + "\r\nTo: " + to + "\r\nSubject: " + subject + "\r\n\r\n" + body)
-	return smtp.SendMail(host+":"+port, auth, from, []string{to}, msg)
+	return mailer.New().Send(mailer.Message{To: to, Subject: subject, Text: body})
 }
 
 // RequestEmailVerification mails a verification link for the student's

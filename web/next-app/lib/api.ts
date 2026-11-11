@@ -2403,6 +2403,15 @@ export async function updateNotificationPreferences(prefs: NotificationPreferenc
 	return (await res.json()) as NotificationPreferences
 }
 
+export async function unsubscribeNotifications(token: string): Promise<void> {
+	const res = await fetch(`${API_BASE}/api/notifications/unsubscribe`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ token }),
+	})
+	if (!res.ok) await throwWithResponse(res, 'Could not unsubscribe from email notifications')
+}
+
 export async function clearAnnouncements(): Promise<void> {
 	const res = await authedFetch(`${API_BASE}/api/announcements/clear`, { method: 'POST' })
 	if (!res.ok) await throwWithResponse(res, 'Could not clear announcements')

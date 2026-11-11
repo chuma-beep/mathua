@@ -13,6 +13,7 @@ import (
 	"path/filepath"
 	"runtime/debug"
 	"strings"
+	"sync"
 	"syscall"
 	"time"
 
@@ -22,6 +23,8 @@ import (
 	"github.com/chuma-beep/mathua/internal/engine"
 	"github.com/chuma-beep/mathua/internal/generator/all"
 	"github.com/chuma-beep/mathua/internal/lessons"
+	"github.com/chuma-beep/mathua/internal/mailer"
+	"github.com/chuma-beep/mathua/internal/notifications"
 	"github.com/chuma-beep/mathua/internal/planning"
 	"github.com/chuma-beep/mathua/internal/repair"
 	"github.com/chuma-beep/mathua/internal/server"
@@ -414,6 +417,79 @@ func main() {
 			prune()
 		}
 	}()
+	// Notification generation and email delivery. Generation only calls the
+	// read-only review counter; delivery is a separate loop so a slow mail
+	// provider cannot delay the in-app feed.
+	var notifyCancel context.CancelFunc
+	var notifyWG sync.WaitGroup
+	if notifyStore, ok := repo.(storage.NotificationStore); ok {
+		notifyCtx, cancel := context.WithCancel(context.Background())
+		notifyCancel = cancel
+		mail := mailer.New()
+		generator := notifications.NewGenerator(notifications.GeneratorOptions{
+			Store:          notifyStore,
+			Due:            eng,
+			EmailAvailable: mailer.Configured(),
+		})
+		notifyWG.Add(1)
+		go func() {
+			defer notifyWG.Done()
+			run := func() {
+				result, err := generator.RunOnce()
+				if err != nil {
+					log.Printf("notifications: generate: %v", err)
+					return
+				}
+				if result.Notifications > 0 || result.EmailPending > 0 || result.Failed > 0 {
+					log.Printf("notifications: generated %d, email pending %d, suppressed %d, failed %d",
+						result.Notifications, result.EmailPending, result.EmailSuppressed, result.Failed)
+				}
+			}
+			run()
+			ticker := time.NewTicker(15 * time.Minute)
+			defer ticker.Stop()
+			for {
+				select {
+				case <-notifyCtx.Done():
+					return
+				case <-ticker.C:
+					run()
+				}
+			}
+		}()
+
+		if mailer.Configured() {
+			delivery := notifications.NewDelivery(notifications.DeliveryOptions{
+				Store:            notifyStore,
+				Sender:           mail,
+				FrontendURL:      os.Getenv("FRONTEND_URL"),
+				UnsubscribeToken: auth.NotificationUnsubscribeToken,
+			})
+			notifyWG.Add(1)
+			go func() {
+				defer notifyWG.Done()
+				ticker := time.NewTicker(30 * time.Second)
+				defer ticker.Stop()
+				for {
+					select {
+					case <-notifyCtx.Done():
+						return
+					case <-ticker.C:
+						result, err := delivery.RunOnce()
+						if err != nil {
+							log.Printf("notifications: deliver: %v", err)
+							continue
+						}
+						if result.Sent > 0 || result.Failed > 0 {
+							log.Printf("notifications: delivered %d, retried %d, suppressed %d, failed %d",
+								result.Sent, result.Retried, result.Suppressed, result.Failed)
+						}
+					}
+				}
+			}()
+		}
+	}
+
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
@@ -422,6 +498,10 @@ func main() {
 	defer cancel()
 	if err := httpSrv.Shutdown(ctx); err != nil {
 		log.Fatalf("forced shutdown: %v", err)
+	}
+	if notifyCancel != nil {
+		notifyCancel()
+		notifyWG.Wait()
 	}
 	eng.Close()
 	fmt.Println("server stopped")

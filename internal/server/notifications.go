@@ -9,6 +9,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/chuma-beep/mathua/internal/auth"
 	"github.com/chuma-beep/mathua/internal/notifications"
 	"github.com/chuma-beep/mathua/internal/storage"
 )
@@ -52,6 +53,20 @@ func notificationStore(w http.ResponseWriter, repo storage.Repository) (storage.
 		return nil, false
 	}
 	return store, true
+}
+
+// notificationInAppEnabled is the Phase 3 policy read. A learner with no
+// preference row gets the Phase 1 default, which is in-app on. Turning the
+// preference off hides the feed and zeroes the badge without deleting history.
+func notificationInAppEnabled(store storage.NotificationStore, studentID string) (bool, error) {
+	prefs, err := store.GetNotificationPreferences(studentID)
+	if err != nil {
+		return false, err
+	}
+	if prefs == nil {
+		return true, nil
+	}
+	return prefs.InAppEnabled, nil
 }
 
 func notificationCursor(createdAt int64, id string) string {
@@ -118,6 +133,20 @@ func (s *Server) handleNotifications(w http.ResponseWriter, r *http.Request) {
 		writeError(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	inApp, err := notificationInAppEnabled(store, studentID)
+	if err != nil {
+		writeError(w, "failed to load notifications", http.StatusInternalServerError)
+		return
+	}
+	if !inApp {
+		writeJSON(w, map[string]interface{}{
+			"notifications": []notificationJSON{},
+			"unread":        0,
+			"has_more":      false,
+			"next_cursor":   "",
+		})
+		return
+	}
 
 	page, err := store.ListNotifications(studentID, storage.NotificationListOptions{
 		Limit:           limit,
@@ -167,6 +196,15 @@ func (s *Server) handleNotificationUnreadCount(w http.ResponseWriter, r *http.Re
 	if !ok {
 		return
 	}
+	inApp, err := notificationInAppEnabled(store, studentID)
+	if err != nil {
+		writeError(w, "failed to load notifications", http.StatusInternalServerError)
+		return
+	}
+	if !inApp {
+		writeJSON(w, map[string]interface{}{"unread": 0})
+		return
+	}
 	unread, err := store.NotificationUnreadCount(studentID)
 	if err != nil {
 		writeError(w, "failed to count notifications", http.StatusInternalServerError)
@@ -210,10 +248,13 @@ func (s *Server) handleNotificationRead(w http.ResponseWriter, r *http.Request) 
 		writeError(w, "failed to mark notification read", http.StatusInternalServerError)
 		return
 	}
-	unread, err := store.NotificationUnreadCount(studentID)
-	if err != nil {
-		writeError(w, "failed to count notifications", http.StatusInternalServerError)
-		return
+	unread := 0
+	if inApp, err := notificationInAppEnabled(store, studentID); err == nil && inApp {
+		unread, err = store.NotificationUnreadCount(studentID)
+		if err != nil {
+			writeError(w, "failed to count notifications", http.StatusInternalServerError)
+			return
+		}
 	}
 	writeJSON(w, map[string]interface{}{"ok": true, "unread": unread})
 }
@@ -290,4 +331,50 @@ func (s *Server) handleNotificationPreferences(w http.ResponseWriter, r *http.Re
 		return
 	}
 	writeJSON(w, normalized)
+}
+
+// POST /api/notifications/unsubscribe is public because the signed link in an
+// email is the credential. It only turns email delivery off; in-app items and
+// the account itself are untouched.
+func (s *Server) handleNotificationUnsubscribe(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		writeError(w, "method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+	var req struct {
+		Token string `json:"token"`
+	}
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeError(w, "invalid request", http.StatusBadRequest)
+		return
+	}
+	studentID, err := auth.ParseNotificationUnsubscribeToken(req.Token)
+	if err != nil {
+		writeError(w, "unsubscribe link is invalid or expired", http.StatusBadRequest)
+		return
+	}
+	store, ok := notificationStore(w, s.repo)
+	if !ok {
+		return
+	}
+	now := time.Now().UTC()
+	prefs, err := store.GetNotificationPreferences(studentID)
+	if err != nil {
+		writeError(w, "failed to load notification preferences", http.StatusInternalServerError)
+		return
+	}
+	if prefs == nil {
+		prefs, err = store.EnsureNotificationPreferences(studentID, now)
+		if err != nil {
+			writeError(w, "failed to load notification preferences", http.StatusInternalServerError)
+			return
+		}
+	}
+	prefs.EmailEnabled = false
+	prefs.UpdatedAt = now
+	if err := store.UpsertNotificationPreferences(prefs); err != nil {
+		writeError(w, "failed to save notification preferences", http.StatusInternalServerError)
+		return
+	}
+	writeJSON(w, map[string]interface{}{"ok": true})
 }

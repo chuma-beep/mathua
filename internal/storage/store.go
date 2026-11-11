@@ -616,6 +616,64 @@ type NotificationPage struct {
 	HasMore       bool
 }
 
+// NotificationRecipient is one learner's preference row joined to the account
+// details generation needs. The generator pages through these, so it never
+// runs one student query per preference row.
+type NotificationRecipient struct {
+	StudentID     string
+	Name          string
+	Email         string
+	EmailVerified bool
+	Preferences   NotificationPreferences
+}
+
+// NotificationDelivery is one channel's durable attempt state. The worker
+// claims a row by moving it to sending and setting ClaimedUntil; a stale lease
+// makes it claimable again after a crash.
+type NotificationDelivery struct {
+	NotificationID   string
+	Channel          string
+	Status           string
+	Attempts         int
+	NextAttemptAt    time.Time
+	ClaimedUntil     time.Time
+	ProviderID       string
+	LastError        string
+	SuppressedReason string
+	SentAt           time.Time
+	OpenedAt         time.Time
+	ClickedAt        time.Time
+}
+
+// NotificationDeliveryJob is a claimed delivery plus the content and recipient
+// needed to send it without another per-row join.
+type NotificationDeliveryJob struct {
+	NotificationID string
+	StudentID      string
+	Channel        string
+	Attempts       int
+	Title          string
+	Body           string
+	Href           string
+	StudentName    string
+	Email          string
+	EmailVerified  bool
+}
+
+// Notification delivery channels and states. The schema deliberately keeps
+// these as text so an operator can inspect the table without a lookup.
+const (
+	NotificationChannelEmail = "email"
+	NotificationChannelInApp = "in_app"
+
+	NotificationDeliveryPending    = "pending"
+	NotificationDeliverySending    = "sending"
+	NotificationDeliverySent       = "sent"
+	NotificationDeliveryRetry      = "retry"
+	NotificationDeliveryFailed     = "failed"
+	NotificationDeliverySuppressed = "suppressed"
+)
+
 // ErrNotificationNotFound means the notification does not exist, belongs to
 // another learner, or was cancelled. The three cases are deliberately one
 // error so a caller cannot probe another learner's ids.
@@ -632,6 +690,15 @@ type NotificationStore interface {
 	NotificationUnreadCount(studentID string) (int, error)
 	MarkNotificationRead(studentID, notificationID string, now time.Time) error
 	MarkAllNotificationsRead(studentID string, now time.Time) error
+	ListNotificationRecipients(afterStudentID string, limit int) ([]NotificationRecipient, error)
+	CreateNotificationDelivery(d *NotificationDelivery) (bool, error)
+	ClaimNotificationDeliveries(now time.Time, lease time.Duration, limit int) ([]NotificationDeliveryJob, error)
+	CompleteNotificationDelivery(notificationID, channel, providerID string, now time.Time) error
+	RetryNotificationDelivery(notificationID, channel, lastError string, nextAttempt time.Time) error
+	SuppressNotificationDelivery(notificationID, channel, reason string, now time.Time) error
+	FailNotificationDelivery(notificationID, channel, lastError string, now time.Time) error
+	GetNotificationScanState(studentID, kind string) (int64, error)
+	SetNotificationScanState(studentID, kind string, watermark int64, now time.Time) error
 }
 
 // MaxRemedialQueue caps the per-student remedial queue.

@@ -430,6 +430,175 @@ func TestNotificationFeedStorage(t *testing.T) {
 	}
 }
 
+func TestNotificationRecipientsIncludeStudentDeliveryFields(t *testing.T) {
+	store := newTestStore(t)
+	ns := notificationStore(t, store)
+	now := time.Now().UTC()
+	first := seedStudent(t, store)
+	second := seedStudent(t, store)
+	if err := store.SetEmail(first.ID, "first@example.com"); err != nil {
+		t.Fatalf("set first email: %v", err)
+	}
+	if err := store.SetEmailVerified(first.ID, true); err != nil {
+		t.Fatalf("verify first email: %v", err)
+	}
+	if err := store.SetEmail(second.ID, "second@example.com"); err != nil {
+		t.Fatalf("set second email: %v", err)
+	}
+	for _, id := range []string{first.ID, second.ID} {
+		if _, err := ns.EnsureNotificationPreferences(id, now); err != nil {
+			t.Fatalf("ensure %s: %v", id, err)
+		}
+	}
+
+	seen := map[string]NotificationRecipient{}
+	cursor := ""
+	for {
+		page, err := ns.ListNotificationRecipients(cursor, 1)
+		if err != nil {
+			t.Fatalf("walk recipients: %v", err)
+		}
+		if len(page) == 0 {
+			break
+		}
+		if len(page) > 1 {
+			t.Fatalf("recipient page = %d rows, want at most 1", len(page))
+		}
+		for _, r := range page {
+			seen[r.StudentID] = r
+		}
+		cursor = page[len(page)-1].StudentID
+	}
+	r, ok := seen[first.ID]
+	if !ok {
+		t.Fatalf("first learner missing from recipient walk: %+v", seen)
+	}
+	if r.Name == "" || r.Email != "first@example.com" || !r.EmailVerified {
+		t.Fatalf("first recipient = %+v, want name, email and verified flag", r)
+	}
+	if !r.Preferences.InAppEnabled || r.Preferences.Timezone != NotificationDefaultTimezone {
+		t.Fatalf("first preferences = %+v, want defaults", r.Preferences)
+	}
+	if r2, ok := seen[second.ID]; !ok || r2.EmailVerified {
+		t.Fatalf("second recipient = %+v (found %v), want unverified", r2, ok)
+	}
+}
+
+func TestNotificationDeliveryClaimLifecycle(t *testing.T) {
+	store := newTestStore(t)
+	ns := notificationStore(t, store)
+	learner := seedStudent(t, store)
+	now := time.Now().UTC().Truncate(time.Second)
+	n := &Notification{
+		ID: "n-delivery", StudentID: learner.ID, Kind: "review", DedupeKey: "delivery",
+		Title: "Reviews are waiting", Body: "You have reviews due.", Href: "/review", CreatedAt: now,
+	}
+	if created, err := ns.CreateNotification(n); err != nil || !created {
+		t.Fatalf("create notification: %v %v", created, err)
+	}
+
+	inserted, err := ns.CreateNotificationDelivery(&NotificationDelivery{
+		NotificationID: n.ID,
+		Channel:        NotificationChannelEmail,
+		NextAttemptAt:  now,
+	})
+	if err != nil || !inserted {
+		t.Fatalf("create delivery: %v %v", inserted, err)
+	}
+	if dup, err := ns.CreateNotificationDelivery(&NotificationDelivery{
+		NotificationID: n.ID, Channel: NotificationChannelEmail, NextAttemptAt: now,
+	}); err != nil || dup {
+		t.Fatalf("duplicate delivery = %v (%v), want false", dup, err)
+	}
+
+	jobs, err := ns.ClaimNotificationDeliveries(now, time.Minute, 10)
+	if err != nil {
+		t.Fatalf("claim: %v", err)
+	}
+	if len(jobs) != 1 || jobs[0].NotificationID != n.ID || jobs[0].Attempts != 1 {
+		t.Fatalf("claimed = %+v, want one job at attempt 1", jobs)
+	}
+	if jobs[0].StudentID != learner.ID || jobs[0].Title != n.Title || jobs[0].Body != n.Body {
+		t.Fatalf("job projection = %+v", jobs[0])
+	}
+	// A claimed row is invisible until its lease expires.
+	if again, err := ns.ClaimNotificationDeliveries(now.Add(30*time.Second), time.Minute, 10); err != nil || len(again) != 0 {
+		t.Fatalf("claim during lease = %+v (%v), want none", again, err)
+	}
+	if err := ns.CompleteNotificationDelivery(n.ID, NotificationChannelEmail, "mailer", now); err != nil {
+		t.Fatalf("complete: %v", err)
+	}
+	if again, err := ns.ClaimNotificationDeliveries(now.Add(2*time.Minute), time.Minute, 10); err != nil || len(again) != 0 {
+		t.Fatalf("claim after complete = %+v (%v), want none", again, err)
+	}
+
+	// A retry is claimable only at its next attempt time, and increments the
+	// attempt count.
+	if err := ns.RetryNotificationDelivery(n.ID, NotificationChannelEmail, "temporary", now.Add(5*time.Minute)); err != nil {
+		t.Fatalf("retry: %v", err)
+	}
+	if again, err := ns.ClaimNotificationDeliveries(now.Add(4*time.Minute), time.Minute, 10); err != nil || len(again) != 0 {
+		t.Fatalf("claim before retry = %+v (%v), want none", again, err)
+	}
+	again, err := ns.ClaimNotificationDeliveries(now.Add(5*time.Minute), time.Minute, 10)
+	if err != nil {
+		t.Fatalf("claim retry: %v", err)
+	}
+	if len(again) != 1 || again[0].Attempts != 2 {
+		t.Fatalf("retry claim = %+v, want attempt 2", again)
+	}
+	if err := ns.FailNotificationDelivery(n.ID, NotificationChannelEmail, "permanent", now); err != nil {
+		t.Fatalf("fail: %v", err)
+	}
+	if again, err := ns.ClaimNotificationDeliveries(now.Add(24*time.Hour), time.Minute, 10); err != nil || len(again) != 0 {
+		t.Fatalf("claim after fail = %+v (%v), want none", again, err)
+	}
+}
+
+func TestNotificationDeliverySuppressionAndScanState(t *testing.T) {
+	store := newTestStore(t)
+	ns := notificationStore(t, store)
+	learner := seedStudent(t, store)
+	now := time.Now().UTC().Truncate(time.Second)
+	n := &Notification{
+		ID: "n-suppress", StudentID: learner.ID, Kind: "review", DedupeKey: "suppress",
+		Title: "Reviews are waiting", Body: "Body", CreatedAt: now,
+	}
+	if _, err := ns.CreateNotification(n); err != nil {
+		t.Fatalf("create notification: %v", err)
+	}
+	if _, err := ns.CreateNotificationDelivery(&NotificationDelivery{
+		NotificationID: n.ID, Channel: NotificationChannelEmail, NextAttemptAt: now,
+	}); err != nil {
+		t.Fatalf("create delivery: %v", err)
+	}
+	if jobs, err := ns.ClaimNotificationDeliveries(now, time.Minute, 10); err != nil || len(jobs) != 1 {
+		t.Fatalf("claim = %+v (%v)", jobs, err)
+	}
+	if err := ns.SuppressNotificationDelivery(n.ID, NotificationChannelEmail, "email_unverified", now); err != nil {
+		t.Fatalf("suppress: %v", err)
+	}
+	if jobs, err := ns.ClaimNotificationDeliveries(now.Add(time.Hour), time.Minute, 10); err != nil || len(jobs) != 0 {
+		t.Fatalf("claim after suppress = %+v (%v), want none", jobs, err)
+	}
+
+	if got, err := ns.GetNotificationScanState(learner.ID, "review"); err != nil || got != 0 {
+		t.Fatalf("initial scan state = %d (%v), want 0", got, err)
+	}
+	if err := ns.SetNotificationScanState(learner.ID, "review", 20261111, now); err != nil {
+		t.Fatalf("set scan state: %v", err)
+	}
+	if got, err := ns.GetNotificationScanState(learner.ID, "review"); err != nil || got != 20261111 {
+		t.Fatalf("scan state = %d (%v), want 20261111", got, err)
+	}
+	if err := ns.SetNotificationScanState(learner.ID, "review", 20261112, now.Add(time.Minute)); err != nil {
+		t.Fatalf("update scan state: %v", err)
+	}
+	if got, _ := ns.GetNotificationScanState(learner.ID, "review"); got != 20261112 {
+		t.Fatalf("updated scan state = %d, want 20261112", got)
+	}
+}
+
 func ExampleNotificationPreferences() {
 	p := DefaultNotificationPreferences("s1", time.Unix(0, 0).UTC())
 	fmt.Println(p.Timezone, p.PreferredTimeMin, p.EmailEnabled, p.InAppEnabled)
