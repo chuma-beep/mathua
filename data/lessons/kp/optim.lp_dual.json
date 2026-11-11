@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Write the dual",
+    "section": "Writing the dual",
+    "subgoals": [
+      "transpose the constraint matrix",
+      "swap objective and right-hand side",
+      "match signs to primal variable domains"
+    ]
+  },
+  {
+    "label": "Read a dual variable",
+    "section": "Reading a dual variable",
+    "subgoals": [
+      "associate it with a primal constraint",
+      "interpret it as sensitivity",
+      "state the range where it applies"
+    ]
+  },
+  {
+    "label": "Compare dimensions",
+    "section": "Comparing dimensions",
+    "subgoals": [
+      "count primal constraints and dual variables",
+      "count primal variables and dual constraints",
+      "check the transpose relation"
+    ]
+  }
+]

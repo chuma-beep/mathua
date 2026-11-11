@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Test sufficient decrease",
+    "section": "Testing sufficient decrease",
+    "subgoals": [
+      "compute the predicted decrease",
+      "evaluate the trial point",
+      "compare with the required fraction"
+    ]
+  },
+  {
+    "label": "Backtrack a step",
+    "section": "Choosing a backtracking step",
+    "subgoals": [
+      "shrink by a fixed factor",
+      "re-evaluate until the test passes",
+      "keep the accepted size"
+    ]
+  },
+  {
+    "label": "Compare trial steps",
+    "section": "Comparing two trial steps",
+    "subgoals": [
+      "prefer the largest passing size",
+      "reject sizes that fail",
+      "relate progress to predicted decrease"
+    ]
+  }
+]

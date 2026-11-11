@@ -30,6 +30,7 @@ import (
 	"github.com/chuma-beep/mathua/internal/generator/numerical"
 	"github.com/chuma-beep/mathua/internal/generator/numtheory"
 	"github.com/chuma-beep/mathua/internal/generator/odes"
+	"github.com/chuma-beep/mathua/internal/generator/optimization"
 	"github.com/chuma-beep/mathua/internal/generator/prealgebra"
 	"github.com/chuma-beep/mathua/internal/generator/precalculus"
 	"github.com/chuma-beep/mathua/internal/generator/probability"
@@ -61,6 +62,7 @@ func Register(reg *generator.Registry) {
 	odes.Register(reg)
 	abstract.Register(reg)
 	topology.Register(reg)
+	optimization.Register(reg)
 	graphtheory.Register(reg)
 	combinatorics.Register(reg)
 	probability.Register(reg)

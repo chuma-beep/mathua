@@ -185,7 +185,7 @@ The engine is the central orchestrator. It holds references to every subsystem a
 |--------|------|----------------|
 | **DAG Loader** | `internal/concepts/` (`loader.go:13`, `dag.go`) | Loads `data/concepts/*.json` + `enrichment.json` heuristics (`Encompasses`, `InterferenceGroup`, `Variants`), validates no cycles/orphans/dup IDs, no singletons, encompass cycles, produces topological sort via Kahn's algorithm |
 | **Scheduler** | `internal/scheduler/` (`computePriority`, `NextSmart` in `internal/scheduler/`) | Selects next concept using priority `0.5×days +0.2×(1-mastery)+0.3×weakness +5 if DECAYING +2 layering −3 interference`, interleaving window (no same subdomain in last 2), top-3 dissimilar + 70/30 new/review balance |
-| **Generators** | 22 domain registries (`internal/generator/*`) | Every problem is generated on demand by a parameterized Go function via `Registry.GenerateContext(ctx{Seed,Difficulty})` `generator/registry.go:74`, no static question bank |
+| **Generators** | 23 domain registries (`internal/generator/*`) | Every problem is generated on demand by a parameterized Go function via `Registry.GenerateContext(ctx{Seed,Difficulty})` `generator/registry.go:74`, no static question bank |
 | **Mastery Machine** | `internal/mastery/` (`mastery/machine.go:41`, `sm2.go:34`) | State machine: UNSEEN → LEARNING → PRACTICING → MASTERED (with DECAYING at read time `14d` `mastery/status.go:24`), SM-2 scaled by per-topic `learningSpeed 0.5–2.0` `sm2.go:15` |
 | **Scoring** | `internal/scoring/` | Two scores: lifetime topic score (permanent) and weekly score (resets Monday) + `30` daily XP goal `xp.DefaultDailyGoal` (`xp/policy.go`) |
 | **Weakness Propagation** | `Engine.PropagateWeakness` in `internal/engine/engine.go` | If a concept's weakness > 0.3, propagates `w × 0.3` to dependents |
@@ -511,7 +511,7 @@ Total latency target: under 100ms for numeric grading, under 500ms for SymPy-bas
 
 ## 10. Computerized Adaptive Testing (CAT)
 
-Mathua implements a compressed-covering + info-gain CAT to locate a student's knowledge frontier quickly. Instead of testing all 2000 concepts, the diagnostic asks two probes per concept in the covering set, bounded above by `maxTotalQuestions=45`. A wide scope reaches `minTotalQuestions=25`; a narrow one runs out of cover first and ends below it.
+Mathua implements a compressed-covering + info-gain CAT to locate a student's knowledge frontier quickly. Instead of testing all 2050 concepts, the diagnostic asks two probes per concept in the covering set, bounded above by `maxTotalQuestions=45`. A wide scope reaches `minTotalQuestions=25`; a narrow one runs out of cover first and ends below it.
 
 ![CAT Diagnostic](diagrams/system-design-cat-diagnostic-dark.svg)
 
@@ -608,5 +608,5 @@ The Go binary serves the Next.js static export directly. This means:
 
 ## Summary
 
-Mathua is an intentionally simple system. One language (Go), two databases (SQLite + PostgreSQL via `pgx/v5` `storage/postgres.go:21` / `storage/sqlite.go:1`, same `Repository` `internal/storage/store.go`), one engine core with a single delivery method through the REST API. The complexity is in the algorithms  --  SM-2 spaced repetition scaled by `learningSpeed`, CAT compressed-cover + info-gain diagnostics, 22 domain registries (2000 concepts), 9 grading types via `Router`  --  not in the infrastructure. Every component can be understood by reading its source file start to finish.
+Mathua is an intentionally simple system. One language (Go), two databases (SQLite + PostgreSQL via `pgx/v5` `storage/postgres.go:21` / `storage/sqlite.go:1`, same `Repository` `internal/storage/store.go`), one engine core with a single delivery method through the REST API. The complexity is in the algorithms  --  SM-2 spaced repetition scaled by `learningSpeed`, CAT compressed-cover + info-gain diagnostics, 23 domain registries (2050 concepts), 9 grading types via `Router`  --  not in the infrastructure. Every component can be understood by reading its source file start to finish.
 

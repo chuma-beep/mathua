@@ -26,6 +26,7 @@ const DOMAIN_COLORS = {
   probability_theory:   '#5eead4',
   numerical_analysis:   '#fbbf24',
   real_analysis:        '#a78bfa',
+  optimization:         '#2dd4bf',
 } satisfies Record<string, string>
 
 const DOMAIN_COLORS_LIGHT = {
@@ -52,6 +53,7 @@ const DOMAIN_COLORS_LIGHT = {
   probability_theory:   '#199e8c',
   numerical_analysis:   '#b07d0a',
   real_analysis:        '#6d46c9',
+  optimization:         '#0f766e',
 } satisfies Record<string, string>
 
 export const DOMAIN_ORDER = [
@@ -78,6 +80,7 @@ export const DOMAIN_ORDER = [
   'probability_theory',
   'numerical_analysis',
   'real_analysis',
+  'optimization',
 ] as const
 
 export const DOMAIN_LABELS = {
@@ -104,6 +107,7 @@ export const DOMAIN_LABELS = {
   probability_theory: 'Probability Theory',
   numerical_analysis: 'Numerical Analysis',
   real_analysis: 'Real Analysis',
+  optimization: 'Optimization',
 } satisfies Record<string, string>
 
 const FALLBACK_COLOR = '#5a6577'

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Order candidate values",
+    "section": "Comparing values",
+    "subgoals": [
+      "evaluate each candidate",
+      "rank by objective value",
+      "state that ranking alone is not global"
+    ]
+  },
+  {
+    "label": "Certify a global minimum",
+    "section": "Identifying a global minimum",
+    "subgoals": [
+      "use convexity when it applies",
+      "use an exhaustive bound otherwise",
+      "describe uncertified points as candidates"
+    ]
+  },
+  {
+    "label": "Separate local from global",
+    "section": "Local versus global",
+    "subgoals": [
+      "construct a two-valley example",
+      "explain what local information cannot see",
+      "name a restart or bound as the escape"
+    ]
+  }
+]

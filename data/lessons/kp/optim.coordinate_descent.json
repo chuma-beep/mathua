@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Take a coordinate step",
+    "section": "Taking a coordinate step",
+    "subgoals": [
+      "fix all other variables",
+      "solve the one-dimensional problem",
+      "update only that coordinate"
+    ]
+  },
+  {
+    "label": "Choose the next coordinate",
+    "section": "Choosing the next coordinate",
+    "subgoals": [
+      "compare cyclic and greedy order",
+      "use the largest partial derivative",
+      "explain random order"
+    ]
+  },
+  {
+    "label": "Test coordinate minimality",
+    "section": "Testing a coordinate minimum",
+    "subgoals": [
+      "check every partial derivative",
+      "use subdifferentials when nonsmooth",
+      "relate it to stationarity"
+    ]
+  }
+]

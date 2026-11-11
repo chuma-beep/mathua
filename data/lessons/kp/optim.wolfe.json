@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Test curvature",
+    "section": "Testing the curvature condition",
+    "subgoals": [
+      "evaluate the trial gradient",
+      "compare the new slope with the old",
+      "apply the constant factor"
+    ]
+  },
+  {
+    "label": "Test both conditions",
+    "section": "Testing both conditions",
+    "subgoals": [
+      "combine decrease and curvature",
+      "choose constants with a gap",
+      "reject a step that fails either"
+    ]
+  },
+  {
+    "label": "Choose a valid step",
+    "section": "Choosing a valid step",
+    "subgoals": [
+      "bracket acceptable sizes",
+      "shrink while preserving the bracket",
+      "check the quadratic case"
+    ]
+  }
+]

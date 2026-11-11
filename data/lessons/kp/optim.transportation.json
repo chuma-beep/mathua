@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Balance the table",
+    "section": "Balancing a table",
+    "subgoals": [
+      "sum supplies and demands",
+      "add a dummy row or column",
+      "use zero costs for the dummy"
+    ]
+  },
+  {
+    "label": "Find a basic solution",
+    "section": "Finding a basic solution",
+    "subgoals": [
+      "apply the northwest corner rule",
+      "exhaust a row or column each step",
+      "count positive entries"
+    ]
+  },
+  {
+    "label": "Compute the cost",
+    "section": "Computing a cost",
+    "subgoals": [
+      "multiply quantity by unit cost",
+      "sum over routes",
+      "compare before and after an improvement"
+    ]
+  }
+]

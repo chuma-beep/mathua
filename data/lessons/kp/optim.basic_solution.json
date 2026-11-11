@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Find a basic solution",
+    "section": "Finding a basic solution",
+    "subgoals": [
+      "choose a square column set",
+      "set other variables to zero",
+      "solve the square system"
+    ]
+  },
+  {
+    "label": "Test feasibility",
+    "section": "Testing feasibility",
+    "subgoals": [
+      "check non-negativity",
+      "keep non-basic variables at zero",
+      "separate solving from feasibility"
+    ]
+  },
+  {
+    "label": "Count bases",
+    "section": "Counting possible bases",
+    "subgoals": [
+      "use a binomial coefficient",
+      "identify rows and columns",
+      "explain why enumeration is limited"
+    ]
+  }
+]

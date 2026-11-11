@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Evaluate the barrier",
+    "section": "Evaluating a barrier",
+    "subgoals": [
+      "compute the objective",
+      "add logarithmic slack terms",
+      "keep the point strictly interior"
+    ]
+  },
+  {
+    "label": "Take a barrier step",
+    "section": "Taking a barrier step",
+    "subgoals": [
+      "fix the parameter",
+      "minimize the barrier objective",
+      "reduce the parameter"
+    ]
+  },
+  {
+    "label": "Check the central path",
+    "section": "Testing the central path",
+    "subgoals": [
+      "check the barrier gradient",
+      "use the gap bound",
+      "relate the parameter to accuracy"
+    ]
+  }
+]

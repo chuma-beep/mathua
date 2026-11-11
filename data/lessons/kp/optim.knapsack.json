@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Solve a small instance",
+    "section": "Solving a small instance",
+    "subgoals": [
+      "enumerate fitting subsets",
+      "compare total values",
+      "respect the capacity"
+    ]
+  },
+  {
+    "label": "Read a DP table",
+    "section": "Reading a DP table",
+    "subgoals": [
+      "identify rows and capacity columns",
+      "apply skip-or-take recurrence",
+      "read the final entry"
+    ]
+  },
+  {
+    "label": "Test the fractional bound",
+    "section": "Testing a fractional bound",
+    "subgoals": [
+      "sort by value per weight",
+      "fill greedily with one fraction",
+      "compare with the integer optimum"
+    ]
+  }
+]

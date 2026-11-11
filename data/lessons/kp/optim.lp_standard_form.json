@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Convert to standard form",
+    "section": "Converting a model",
+    "subgoals": [
+      "negate a maximizing objective",
+      "add slack variables for inequalities",
+      "split free variables"
+    ]
+  },
+  {
+    "label": "Read the matrix",
+    "section": "Reading the matrix",
+    "subgoals": [
+      "identify columns and rows",
+      "check the right-hand side signs",
+      "recover the objective row"
+    ]
+  },
+  {
+    "label": "Count basic variables",
+    "section": "Counting basic variables",
+    "subgoals": [
+      "count equality constraints",
+      "count columns",
+      "compute non-basic variables"
+    ]
+  }
+]

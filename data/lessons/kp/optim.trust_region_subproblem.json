@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Test a boundary solution",
+    "section": "Testing a boundary solution",
+    "subgoals": [
+      "check the ball constraint",
+      "test the parallel condition",
+      "use a zero multiplier inside"
+    ]
+  },
+  {
+    "label": "Solve a small subproblem",
+    "section": "Solving a two-variable subproblem",
+    "subgoals": [
+      "start from the unconstrained minimizer",
+      "handle the boundary case",
+      "solve the scalar equation"
+    ]
+  },
+  {
+    "label": "Find the multiplier",
+    "section": "Finding the multiplier",
+    "subgoals": [
+      "require non-negative value",
+      "make the shifted matrix semidefinite",
+      "fit the radius exactly"
+    ]
+  }
+]

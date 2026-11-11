@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Read a price",
+    "section": "Reading a shadow price",
+    "subgoals": [
+      "locate the dual variable",
+      "apply the sign convention",
+      "check whether the constraint binds"
+    ]
+  },
+  {
+    "label": "Estimate a change",
+    "section": "Estimating a constraint change",
+    "subgoals": [
+      "multiply the price by the change",
+      "stay inside the allowable range",
+      "state the approximation"
+    ]
+  },
+  {
+    "label": "Compare prices",
+    "section": "Comparing two prices",
+    "subgoals": [
+      "rank constraints by price",
+      "normalize units",
+      "respect each range"
+    ]
+  }
+]

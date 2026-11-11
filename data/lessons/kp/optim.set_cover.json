@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Test a cover",
+    "section": "Testing a cover",
+    "subgoals": [
+      "check each element",
+      "require at least one chosen set",
+      "report an uncovered element"
+    ]
+  },
+  {
+    "label": "Find a minimum cover",
+    "section": "Finding a minimum cover",
+    "subgoals": [
+      "enumerate by size",
+      "use the LP lower bound",
+      "use the greedy upper bound"
+    ]
+  },
+  {
+    "label": "Relate to vertex cover",
+    "section": "Comparing with a vertex cover",
+    "subgoals": [
+      "map edges to elements",
+      "map vertex stars to sets",
+      "explain the special case"
+    ]
+  }
+]

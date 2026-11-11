@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Test a candidate point",
+    "section": "Testing a point",
+    "subgoals": [
+      "substitute into every constraint",
+      "include bounds as constraints",
+      "report the first violation with values"
+    ]
+  },
+  {
+    "label": "Compute the feasible interval",
+    "section": "Finding the feasible interval",
+    "subgoals": [
+      "solve each inequality for the variable",
+      "intersect the lower bounds and upper bounds",
+      "compare the final bounds"
+    ]
+  },
+  {
+    "label": "Detect an empty set",
+    "section": "Deciding emptiness",
+    "subgoals": [
+      "spot contradictory parallel constraints",
+      "check whether two half-planes intersect",
+      "distinguish emptiness from solver failure"
+    ]
+  }
+]

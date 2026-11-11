@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Test complementarity",
+    "section": "Testing a pair",
+    "subgoals": [
+      "compute each slack",
+      "read each multiplier",
+      "check each product is zero"
+    ]
+  },
+  {
+    "label": "Build a complementary solution",
+    "section": "Finding a complementary solution",
+    "subgoals": [
+      "use the optimal basis",
+      "solve multipliers and slacks",
+      "check feasibility afterwards"
+    ]
+  },
+  {
+    "label": "Read a positive multiplier",
+    "section": "Using a positive multiplier",
+    "subgoals": [
+      "mark the constraint binding",
+      "quote the marginal value",
+      "reject a positive price on slack"
+    ]
+  }
+]

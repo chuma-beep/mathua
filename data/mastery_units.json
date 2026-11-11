@@ -5,8 +5,8 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 2000,
-  "unit_count": 143,
+  "concept_count": 2050,
+  "unit_count": 147,
   "units": [
     {
       "id": "abstract_algebra.b6",
@@ -3077,6 +3077,120 @@
         "numa.integration.romberg"
       ],
       "concept_count": 6
+    },
+    {
+      "id": "optimization.b11",
+      "title": "Optimization · Stage 12",
+      "domain": "optimization",
+      "band": 11,
+      "depth_min": 34,
+      "depth_max": 35,
+      "subdomains": [
+        "optimization.foundations"
+      ],
+      "concept_ids": [
+        "optim.convex_set",
+        "optim.feasible.set",
+        "optim.local_global",
+        "optim.problem.anatomy"
+      ],
+      "concept_count": 4
+    },
+    {
+      "id": "optimization.b12",
+      "title": "Optimization · Stage 13",
+      "domain": "optimization",
+      "band": 12,
+      "depth_min": 36,
+      "depth_max": 38,
+      "subdomains": [
+        "optimization.constrained",
+        "optimization.convex",
+        "optimization.discrete",
+        "optimization.foundations",
+        "optimization.unconstrained"
+      ],
+      "concept_ids": [
+        "optim.basic_solution",
+        "optim.coercivity",
+        "optim.coordinate_descent",
+        "optim.cutting_plane",
+        "optim.dual_function",
+        "optim.epigraph",
+        "optim.equality_lagrange",
+        "optim.first_order",
+        "optim.gradient_step",
+        "optim.hessian",
+        "optim.integer_program",
+        "optim.knapsack",
+        "optim.lp_dual",
+        "optim.lp_relaxation",
+        "optim.lp_standard_form",
+        "optim.projected_gradient",
+        "optim.second_order",
+        "optim.set_cover",
+        "optim.simplex_pivot",
+        "optim.step_size",
+        "optim.strict_convexity",
+        "optim.subgradient"
+      ],
+      "concept_count": 22
+    },
+    {
+      "id": "optimization.b13",
+      "title": "Optimization · Stage 14",
+      "domain": "optimization",
+      "band": 13,
+      "depth_min": 39,
+      "depth_max": 41,
+      "subdomains": [
+        "optimization.constrained",
+        "optimization.convex",
+        "optimization.discrete",
+        "optimization.unconstrained"
+      ],
+      "concept_ids": [
+        "optim.active_constraint",
+        "optim.armijo",
+        "optim.augmented_lagrangian",
+        "optim.barrier",
+        "optim.bfgs",
+        "optim.branch_bound",
+        "optim.complementary_slackness",
+        "optim.conjugate_direction",
+        "optim.integrality_gap",
+        "optim.kkt",
+        "optim.kkt_matrix",
+        "optim.newton_optim",
+        "optim.penalty",
+        "optim.slater",
+        "optim.strong_duality",
+        "optim.transportation",
+        "optim.trust_region_ratio",
+        "optim.trust_region_subproblem",
+        "optim.weak_duality",
+        "optim.wolfe"
+      ],
+      "concept_count": 20
+    },
+    {
+      "id": "optimization.b14",
+      "title": "Optimization · Stage 15",
+      "domain": "optimization",
+      "band": 14,
+      "depth_min": 42,
+      "depth_max": 43,
+      "subdomains": [
+        "optimization.constrained",
+        "optimization.convex"
+      ],
+      "concept_ids": [
+        "optim.active_set",
+        "optim.duality_gap",
+        "optim.lp_sensitivity",
+        "optim.shadow_price"
+      ],
+      "concept_count": 4
     },
     {
       "id": "prealgebra.b0",

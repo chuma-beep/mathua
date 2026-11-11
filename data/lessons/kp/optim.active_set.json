@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Choose the working set",
+    "section": "Choosing the working set",
+    "subgoals": [
+      "start from a feasible point",
+      "select active constraints",
+      "solve the equality subproblem"
+    ]
+  },
+  {
+    "label": "Take an active-set step",
+    "section": "Taking an active-set step",
+    "subgoals": [
+      "compute the direction",
+      "limit the step by feasibility",
+      "add or drop one constraint"
+    ]
+  },
+  {
+    "label": "Test optimality on a face",
+    "section": "Testing optimality on a face",
+    "subgoals": [
+      "check the reduced gradient",
+      "require non-negative multipliers",
+      "use a negative multiplier to leave the face"
+    ]
+  }
+]

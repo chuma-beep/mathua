@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Verify a subgradient",
+    "section": "Testing a subgradient",
+    "subgoals": [
+      "state the supporting inequality",
+      "check it globally, not only locally",
+      "use the absolute value at zero as the model case"
+    ]
+  },
+  {
+    "label": "Compute a subdifferential",
+    "section": "The subdifferential of an absolute value",
+    "subgoals": [
+      "take the sign away from zero",
+      "use the interval at zero",
+      "add intervals for a sum"
+    ]
+  },
+  {
+    "label": "Use a supporting line",
+    "section": "Supporting lines",
+    "subgoals": [
+      "build the line from the slope",
+      "confirm the line stays below the graph",
+      "explain the choice at a corner"
+    ]
+  }
+]

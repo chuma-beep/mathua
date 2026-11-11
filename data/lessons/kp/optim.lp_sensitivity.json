@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Derive a range",
+    "section": "Finding an allowable range",
+    "subgoals": [
+      "hold the basis fixed",
+      "require non-negative basic values",
+      "solve the resulting inequalities"
+    ]
+  },
+  {
+    "label": "Test a change",
+    "section": "Testing a coefficient change",
+    "subgoals": [
+      "substitute the coefficient",
+      "check basis feasibility",
+      "stop when the basis changes"
+    ]
+  },
+  {
+    "label": "Update the objective",
+    "section": "Updating the objective",
+    "subgoals": [
+      "use the price times the change",
+      "use the variable value for a cost change",
+      "avoid a full re-solve inside the range"
+    ]
+  }
+]

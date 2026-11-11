@@ -7998,5 +7998,205 @@
   {
     "concept_id": "trig.spherical.law_sines",
     "source": "authored/trig.spherical.law_sines.md"
+  },
+  {
+    "concept_id": "optim.problem.anatomy",
+    "source": "authored/optim.problem.anatomy.md"
+  },
+  {
+    "concept_id": "optim.feasible.set",
+    "source": "authored/optim.feasible.set.md"
+  },
+  {
+    "concept_id": "optim.local_global",
+    "source": "authored/optim.local_global.md"
+  },
+  {
+    "concept_id": "optim.convex_set",
+    "source": "authored/optim.convex_set.md"
+  },
+  {
+    "concept_id": "optim.strict_convexity",
+    "source": "authored/optim.strict_convexity.md"
+  },
+  {
+    "concept_id": "optim.subgradient",
+    "source": "authored/optim.subgradient.md"
+  },
+  {
+    "concept_id": "optim.epigraph",
+    "source": "authored/optim.epigraph.md"
+  },
+  {
+    "concept_id": "optim.coercivity",
+    "source": "authored/optim.coercivity.md"
+  },
+  {
+    "concept_id": "optim.first_order",
+    "source": "authored/optim.first_order.md"
+  },
+  {
+    "concept_id": "optim.second_order",
+    "source": "authored/optim.second_order.md"
+  },
+  {
+    "concept_id": "optim.hessian",
+    "source": "authored/optim.hessian.md"
+  },
+  {
+    "concept_id": "optim.gradient_step",
+    "source": "authored/optim.gradient_step.md"
+  },
+  {
+    "concept_id": "optim.step_size",
+    "source": "authored/optim.step_size.md"
+  },
+  {
+    "concept_id": "optim.newton_optim",
+    "source": "authored/optim.newton_optim.md"
+  },
+  {
+    "concept_id": "optim.bfgs",
+    "source": "authored/optim.bfgs.md"
+  },
+  {
+    "concept_id": "optim.coordinate_descent",
+    "source": "authored/optim.coordinate_descent.md"
+  },
+  {
+    "concept_id": "optim.conjugate_direction",
+    "source": "authored/optim.conjugate_direction.md"
+  },
+  {
+    "concept_id": "optim.armijo",
+    "source": "authored/optim.armijo.md"
+  },
+  {
+    "concept_id": "optim.wolfe",
+    "source": "authored/optim.wolfe.md"
+  },
+  {
+    "concept_id": "optim.trust_region_ratio",
+    "source": "authored/optim.trust_region_ratio.md"
+  },
+  {
+    "concept_id": "optim.lp_standard_form",
+    "source": "authored/optim.lp_standard_form.md"
+  },
+  {
+    "concept_id": "optim.basic_solution",
+    "source": "authored/optim.basic_solution.md"
+  },
+  {
+    "concept_id": "optim.simplex_pivot",
+    "source": "authored/optim.simplex_pivot.md"
+  },
+  {
+    "concept_id": "optim.lp_dual",
+    "source": "authored/optim.lp_dual.md"
+  },
+  {
+    "concept_id": "optim.dual_function",
+    "source": "authored/optim.dual_function.md"
+  },
+  {
+    "concept_id": "optim.weak_duality",
+    "source": "authored/optim.weak_duality.md"
+  },
+  {
+    "concept_id": "optim.strong_duality",
+    "source": "authored/optim.strong_duality.md"
+  },
+  {
+    "concept_id": "optim.complementary_slackness",
+    "source": "authored/optim.complementary_slackness.md"
+  },
+  {
+    "concept_id": "optim.shadow_price",
+    "source": "authored/optim.shadow_price.md"
+  },
+  {
+    "concept_id": "optim.lp_sensitivity",
+    "source": "authored/optim.lp_sensitivity.md"
+  },
+  {
+    "concept_id": "optim.kkt",
+    "source": "authored/optim.kkt.md"
+  },
+  {
+    "concept_id": "optim.slater",
+    "source": "authored/optim.slater.md"
+  },
+  {
+    "concept_id": "optim.equality_lagrange",
+    "source": "authored/optim.equality_lagrange.md"
+  },
+  {
+    "concept_id": "optim.active_constraint",
+    "source": "authored/optim.active_constraint.md"
+  },
+  {
+    "concept_id": "optim.penalty",
+    "source": "authored/optim.penalty.md"
+  },
+  {
+    "concept_id": "optim.barrier",
+    "source": "authored/optim.barrier.md"
+  },
+  {
+    "concept_id": "optim.augmented_lagrangian",
+    "source": "authored/optim.augmented_lagrangian.md"
+  },
+  {
+    "concept_id": "optim.projected_gradient",
+    "source": "authored/optim.projected_gradient.md"
+  },
+  {
+    "concept_id": "optim.active_set",
+    "source": "authored/optim.active_set.md"
+  },
+  {
+    "concept_id": "optim.trust_region_subproblem",
+    "source": "authored/optim.trust_region_subproblem.md"
+  },
+  {
+    "concept_id": "optim.kkt_matrix",
+    "source": "authored/optim.kkt_matrix.md"
+  },
+  {
+    "concept_id": "optim.duality_gap",
+    "source": "authored/optim.duality_gap.md"
+  },
+  {
+    "concept_id": "optim.integer_program",
+    "source": "authored/optim.integer_program.md"
+  },
+  {
+    "concept_id": "optim.lp_relaxation",
+    "source": "authored/optim.lp_relaxation.md"
+  },
+  {
+    "concept_id": "optim.branch_bound",
+    "source": "authored/optim.branch_bound.md"
+  },
+  {
+    "concept_id": "optim.cutting_plane",
+    "source": "authored/optim.cutting_plane.md"
+  },
+  {
+    "concept_id": "optim.knapsack",
+    "source": "authored/optim.knapsack.md"
+  },
+  {
+    "concept_id": "optim.transportation",
+    "source": "authored/optim.transportation.md"
+  },
+  {
+    "concept_id": "optim.set_cover",
+    "source": "authored/optim.set_cover.md"
+  },
+  {
+    "concept_id": "optim.integrality_gap",
+    "source": "authored/optim.integrality_gap.md"
   }
 ]

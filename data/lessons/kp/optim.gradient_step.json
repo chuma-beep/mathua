@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Compute one step",
+    "section": "Taking one step",
+    "subgoals": [
+      "evaluate the gradient",
+      "scale by the step size",
+      "subtract and check the objective decreased"
+    ]
+  },
+  {
+    "label": "Predict the second iterate",
+    "section": "Predicting the next iterate",
+    "subgoals": [
+      "apply the update again",
+      "use the geometric error factor",
+      "compare the prediction with a direct evaluation"
+    ]
+  },
+  {
+    "label": "Compare directions",
+    "section": "Comparing two directions",
+    "subgoals": [
+      "take the inner product with the gradient",
+      "compare trial objective values",
+      "prefer the steeper decrease"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Compare the two bounds",
+    "section": "Comparing bounds",
+    "subgoals": [
+      "evaluate the primal point",
+      "evaluate the dual function",
+      "subtract to form the gap"
+    ]
+  },
+  {
+    "label": "Check dual feasibility",
+    "section": "Testing a dual-feasible pair",
+    "subgoals": [
+      "match multiplier signs",
+      "compute the dual value",
+      "reject a negative gap as an error"
+    ]
+  },
+  {
+    "label": "Interpret the gap",
+    "section": "Reading the sign of the gap",
+    "subgoals": [
+      "use it as a stopping rule",
+      "certify optimality at zero",
+      "bound the distance to optimality"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Compute a gap",
+    "section": "Computing a gap",
+    "subgoals": [
+      "solve the relaxation",
+      "obtain or bound the integer value",
+      "report difference or ratio"
+    ]
+  },
+  {
+    "label": "Compare formulations",
+    "section": "Comparing two formulations",
+    "subgoals": [
+      "match objective sense",
+      "compare relaxation values",
+      "prefer the tighter one"
+    ]
+  },
+  {
+    "label": "Test a rounding bound",
+    "section": "Testing a rounding bound",
+    "subgoals": [
+      "round a relaxed solution",
+      "bound the objective increase",
+      "state the guarantee per instance"
+    ]
+  }
+]

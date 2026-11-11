@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Test a KKT point",
+    "section": "Testing a KKT point",
+    "subgoals": [
+      "check Lagrangian stationarity",
+      "check primal feasibility",
+      "check multiplier signs and slackness"
+    ]
+  },
+  {
+    "label": "Solve a small system",
+    "section": "Solving a small system",
+    "subgoals": [
+      "guess an active set",
+      "solve stationarity with active constraints",
+      "verify signs and retry"
+    ]
+  },
+  {
+    "label": "Spot the missing condition",
+    "section": "Identifying a missing condition",
+    "subgoals": [
+      "separate stationarity from dual feasibility",
+      "check each complementary product",
+      "state the failing condition"
+    ]
+  }
+]

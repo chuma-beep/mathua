@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Test the curvature",
+    "section": "Testing strict convexity",
+    "subgoals": [
+      "use the second derivative in one variable",
+      "use positive definiteness for a quadratic",
+      "find a pair with equality to disprove"
+    ]
+  },
+  {
+    "label": "Count the minimizers",
+    "section": "Counting minimizers",
+    "subgoals": [
+      "relate strict convexity to uniqueness",
+      "describe a convex minimizer set",
+      "recognise a flat valley"
+    ]
+  },
+  {
+    "label": "Apply the midpoint inequality",
+    "section": "The midpoint inequality",
+    "subgoals": [
+      "evaluate at two points and the midpoint",
+      "compare the midpoint value with the average",
+      "read the gap as local curvature"
+    ]
+  }
+]

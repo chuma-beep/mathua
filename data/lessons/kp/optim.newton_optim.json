@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Take a Newton step",
+    "section": "Taking a Newton step",
+    "subgoals": [
+      "evaluate gradient and Hessian",
+      "solve the linear system",
+      "subtract the solution"
+    ]
+  },
+  {
+    "label": "Test convergence",
+    "section": "Testing convergence",
+    "subgoals": [
+      "expect one step on a quadratic",
+      "watch the gradient norm",
+      "reject a step that increases the objective"
+    ]
+  },
+  {
+    "label": "Compare with gradient descent",
+    "section": "Comparing with gradient descent",
+    "subgoals": [
+      "contrast scalar and matrix scaling",
+      "use conditioning to explain the gap",
+      "state the cost of the Hessian"
+    ]
+  }
+]

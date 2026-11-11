@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Take a branch",
+    "section": "Taking a branch",
+    "subgoals": [
+      "choose a fractional variable",
+      "create floor and ceiling children",
+      "re-solve each relaxation"
+    ]
+  },
+  {
+    "label": "Compute a bound",
+    "section": "Computing a bound",
+    "subgoals": [
+      "read the node relaxation value",
+      "track the best integer incumbent",
+      "compare bound with incumbent"
+    ]
+  },
+  {
+    "label": "Prune a node",
+    "section": "Pruning a node",
+    "subgoals": [
+      "prune on infeasibility",
+      "prune on bound",
+      "prune on an improving integral relaxation"
+    ]
+  }
+]

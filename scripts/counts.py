@@ -31,6 +31,7 @@ DOMAIN_LABELS = [
     ("algebra", "Algebra"),
     ("geometry", "Geometry"),
     ("trigonometry", "Trigonometry"),
+    ("optimization", "Optimization"),
     ("precalculus", "Precalculus"),
     ("calc1", "Calculus I"),
     ("calc2", "Calculus II"),

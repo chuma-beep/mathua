@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Assemble the second partials",
+    "section": "Building the matrix",
+    "subgoals": [
+      "differentiate the gradient",
+      "place entries in row-column order",
+      "use symmetry to halve the work"
+    ]
+  },
+  {
+    "label": "Evaluate at a point",
+    "section": "Evaluating at a point",
+    "subgoals": [
+      "substitute coordinates into each entry",
+      "keep the numeric matrix",
+      "state the point with the result"
+    ]
+  },
+  {
+    "label": "Test definiteness",
+    "section": "Testing positive definiteness",
+    "subgoals": [
+      "use leading minors or eigenvalues",
+      "separate definite from semidefinite",
+      "interpret the result as curvature"
+    ]
+  }
+]

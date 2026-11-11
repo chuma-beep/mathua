@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Evaluate the dual function",
+    "section": "Evaluating the dual function",
+    "subgoals": [
+      "build the Lagrangian",
+      "fix the multipliers",
+      "minimize over the primal variables"
+    ]
+  },
+  {
+    "label": "Handle the inner minimization",
+    "section": "Minimizing over a primal variable",
+    "subgoals": [
+      "find the stationary point",
+      "substitute back",
+      "detect unboundedness"
+    ]
+  },
+  {
+    "label": "Obtain a bound",
+    "section": "Finding a dual bound",
+    "subgoals": [
+      "evaluate several multipliers",
+      "keep the largest value",
+      "compare with the primal optimum"
+    ]
+  }
+]

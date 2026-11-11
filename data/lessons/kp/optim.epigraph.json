@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Test epigraph membership",
+    "section": "Testing an epigraph point",
+    "subgoals": [
+      "compare height with the function value",
+      "use one evaluation",
+      "relate the test to the graph"
+    ]
+  },
+  {
+    "label": "Describe a sublevel set",
+    "section": "Finding a sublevel set",
+    "subgoals": [
+      "solve the defining inequality",
+      "recognise ellipsoids and half-spaces",
+      "read axes from the curvature"
+    ]
+  },
+  {
+    "label": "Link convexity to the epigraph",
+    "section": "Convexity through the epigraph",
+    "subgoals": [
+      "state the equivalence",
+      "use the midpoint test on the set",
+      "see sublevel sets as sections"
+    ]
+  }
+]

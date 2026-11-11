@@ -15,4 +15,4 @@ import { DOMAIN_ORDER } from './graphDomains'
 export const DOMAIN_COUNT = DOMAIN_ORDER.length
 
 /** Sum of `data/concepts/*.json` for the domains in `DOMAIN_ORDER`. */
-export const CONCEPT_COUNT = 2000
+export const CONCEPT_COUNT = 2050

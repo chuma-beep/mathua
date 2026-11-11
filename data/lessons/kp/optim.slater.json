@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Test strict feasibility",
+    "section": "Testing strict feasibility",
+    "subgoals": [
+      "substitute a candidate point",
+      "require strict inequality margins",
+      "check equalities exactly"
+    ]
+  },
+  {
+    "label": "Decide whether it holds",
+    "section": "Deciding whether it holds",
+    "subgoals": [
+      "look for an interior point",
+      "recognise a lower-dimensional feasible set",
+      "use affine constraints as the exception"
+    ]
+  },
+  {
+    "label": "Find an interior point",
+    "section": "Finding an interior point",
+    "subgoals": [
+      "average vertices of a polytope",
+      "use the centre of a ball",
+      "maximize the minimum slack"
+    ]
+  }
+]

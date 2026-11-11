@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Test stationarity",
+    "section": "Testing a stationary point",
+    "subgoals": [
+      "evaluate every partial derivative",
+      "apply the stated tolerance",
+      "treat a nonzero component as a descent direction"
+    ]
+  },
+  {
+    "label": "Solve the gradient system",
+    "section": "Solving the gradient condition",
+    "subgoals": [
+      "write one equation per variable",
+      "recognise the linear quadratic case",
+      "verify by substitution"
+    ]
+  },
+  {
+    "label": "Choose a descent direction",
+    "section": "Using a descent direction",
+    "subgoals": [
+      "take the inner product with the gradient",
+      "require a negative value",
+      "explain why a small step decreases the objective"
+    ]
+  }
+]

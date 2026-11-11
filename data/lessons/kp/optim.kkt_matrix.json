@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Assemble the blocks",
+    "section": "Assembling the matrix",
+    "subgoals": [
+      "place the Lagrangian Hessian",
+      "place the Jacobian and transpose",
+      "match the right-hand side signs"
+    ]
+  },
+  {
+    "label": "Test nonsingularity",
+    "section": "Testing nonsingularity",
+    "subgoals": [
+      "check Jacobian row rank",
+      "check curvature on the null space",
+      "explain multiplier uniqueness"
+    ]
+  },
+  {
+    "label": "Solve the system",
+    "section": "Solving a small system",
+    "subgoals": [
+      "eliminate the step",
+      "form the reduced multiplier system",
+      "back-substitute"
+    ]
+  }
+]

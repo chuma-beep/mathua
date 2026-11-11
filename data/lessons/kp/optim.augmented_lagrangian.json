@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Update the multiplier",
+    "section": "Updating a multiplier",
+    "subgoals": [
+      "take the current constraint value",
+      "multiply by the weight",
+      "add to the multiplier"
+    ]
+  },
+  {
+    "label": "Evaluate the augmented objective",
+    "section": "Evaluating the augmented objective",
+    "subgoals": [
+      "add the multiplier term",
+      "add the quadratic penalty",
+      "minimize over the primal variables"
+    ]
+  },
+  {
+    "label": "Test convergence",
+    "section": "Evaluating the augmented objective",
+    "subgoals": [
+      "check the violation",
+      "check the multiplier change",
+      "decide whether to raise the weight"
+    ]
+  }
+]

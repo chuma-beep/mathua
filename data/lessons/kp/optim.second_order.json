@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Test the Hessian",
+    "section": "Testing a Hessian",
+    "subgoals": [
+      "assemble the second partials",
+      "compute eigenvalues or leading minors",
+      "name definite, semidefinite or indefinite"
+    ]
+  },
+  {
+    "label": "Classify a stationary point",
+    "section": "Classifying a stationary point",
+    "subgoals": [
+      "check the gradient first",
+      "apply definiteness to name the type",
+      "treat a zero eigenvalue as inconclusive"
+    ]
+  },
+  {
+    "label": "Find a saddle direction",
+    "section": "Finding a saddle direction",
+    "subgoals": [
+      "take an eigenvector of a negative eigenvalue",
+      "move along it to lower the value",
+      "contrast with a positive direction"
+    ]
+  }
+]

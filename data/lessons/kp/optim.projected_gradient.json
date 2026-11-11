@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Project onto the set",
+    "section": "Projecting a point",
+    "subgoals": [
+      "clamp each coordinate for a box",
+      "scale back for a ball",
+      "subtract the violation for a half-space"
+    ]
+  },
+  {
+    "label": "Take a projected step",
+    "section": "Taking a projected step",
+    "subgoals": [
+      "compute the gradient step",
+      "project the result",
+      "keep the step size small enough"
+    ]
+  },
+  {
+    "label": "Test bound optimality",
+    "section": "Testing a bound constraint",
+    "subgoals": [
+      "check the derivative sign at each bound",
+      "require zero in the interior",
+      "read the box KKT conditions"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Name the three parts",
+    "section": "Objective, variables and constraints",
+    "subgoals": [
+      "identify the objective in a sentence",
+      "list the decision variables with units",
+      "write each restriction as a constraint"
+    ]
+  },
+  {
+    "label": "Classify the model",
+    "section": "Classifying a model",
+    "subgoals": [
+      "separate linear from nonlinear terms",
+      "detect integer or binary variables",
+      "name the model class from its structure"
+    ]
+  },
+  {
+    "label": "Translate a description",
+    "section": "Writing an objective from a sentence",
+    "subgoals": [
+      "assign a symbol to each decision",
+      "build the objective from per-unit costs",
+      "check units and inequality directions"
+    ]
+  }
+]

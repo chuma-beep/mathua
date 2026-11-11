@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Identify the active set",
+    "section": "Identifying active constraints",
+    "subgoals": [
+      "evaluate each constraint",
+      "compare with its bound",
+      "apply the solver tolerance"
+    ]
+  },
+  {
+    "label": "Test a candidate",
+    "section": "Testing a candidate",
+    "subgoals": [
+      "assume an active set",
+      "solve the stationarity system",
+      "set inactive multipliers to zero"
+    ]
+  },
+  {
+    "label": "Count active constraints",
+    "section": "Counting active inequalities",
+    "subgoals": [
+      "relate the count to dimension",
+      "recognise vertices and edges",
+      "check the geometry"
+    ]
+  }
+]

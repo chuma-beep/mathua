@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Test a convex combination",
+    "section": "Testing a combination",
+    "subgoals": [
+      "pick two points in the set",
+      "form a weighted combination",
+      "use one counterexample to disprove"
+    ]
+  },
+  {
+    "label": "Find a separating line",
+    "section": "Separating lines",
+    "subgoals": [
+      "place the set on one side",
+      "use a violated edge of a polygon",
+      "measure the distance to the set"
+    ]
+  },
+  {
+    "label": "Read convexity from a description",
+    "section": "Convexity from a description",
+    "subgoals": [
+      "recognise half-spaces and boxes",
+      "use closure under intersection",
+      "spot unions and holes"
+    ]
+  }
+]

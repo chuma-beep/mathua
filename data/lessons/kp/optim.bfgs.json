@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Update the approximation",
+    "section": "Updating the inverse Hessian",
+    "subgoals": [
+      "form the step and gradient change",
+      "compute the two denominators",
+      "add the rank-two correction"
+    ]
+  },
+  {
+    "label": "Check the secant condition",
+    "section": "Testing the secant condition",
+    "subgoals": [
+      "multiply the new matrix by y",
+      "compare with s",
+      "treat a mismatch as an arithmetic error"
+    ]
+  },
+  {
+    "label": "Apply the update cheaply",
+    "section": "Applying a rank-two update",
+    "subgoals": [
+      "work with vectors and inner products",
+      "avoid factorizing the matrix",
+      "preserve symmetry and definiteness"
+    ]
+  }
+]

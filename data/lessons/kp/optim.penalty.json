@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Evaluate the penalty",
+    "section": "Evaluating a penalized objective",
+    "subgoals": [
+      "compute the objective",
+      "add weighted squared violations",
+      "measure the infeasibility charge"
+    ]
+  },
+  {
+    "label": "Take a penalty step",
+    "section": "Taking a penalty step",
+    "subgoals": [
+      "fix the weight",
+      "minimize the penalized objective",
+      "increase the weight and repeat"
+    ]
+  },
+  {
+    "label": "Choose the weight",
+    "section": "Choosing a penalty parameter",
+    "subgoals": [
+      "start small",
+      "use a multiplicative schedule",
+      "stop on the violation tolerance"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Solve a two-variable problem",
+    "section": "Solving a two-variable problem",
+    "subgoals": [
+      "write the Lagrangian",
+      "set all derivatives to zero",
+      "substitute into the objective"
+    ]
+  },
+  {
+    "label": "Test a multiplier",
+    "section": "Testing a multiplier",
+    "subgoals": [
+      "check stationarity with the multiplier",
+      "check the constraint",
+      "allow either sign for equalities"
+    ]
+  },
+  {
+    "label": "Classify on the tangent space",
+    "section": "Classifying a constrained point",
+    "subgoals": [
+      "restrict the Hessian",
+      "test definiteness on the tangent space",
+      "ignore infeasible directions"
+    ]
+  }
+]

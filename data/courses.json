@@ -1989,5 +1989,18 @@
       "ra.deriv.absolute_continuity",
       "ra.deriv.lebesgue_differentiation"
     ]
+  },
+  {
+    "id": "optim",
+    "name": "Optimization",
+    "grade": "college",
+    "description": "Formulate an optimization problem, classify its geometry, apply first-order and second-order conditions, and solve constrained and discrete models.",
+    "targets": [
+      "optim.bfgs",
+      "optim.active_set",
+      "optim.lp_sensitivity",
+      "optim.integrality_gap",
+      "optim.trust_region_subproblem"
+    ]
   }
 ]

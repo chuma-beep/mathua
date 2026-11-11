@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Compute the gap",
+    "section": "Computing a gap",
+    "subgoals": [
+      "evaluate the primal point",
+      "evaluate the dual bound",
+      "subtract without an absolute value"
+    ]
+  },
+  {
+    "label": "Apply a stopping rule",
+    "section": "Testing a stopping rule",
+    "subgoals": [
+      "compare with an absolute tolerance",
+      "compare with a relative tolerance",
+      "interpret the bound"
+    ]
+  },
+  {
+    "label": "Compare two pairs",
+    "section": "Comparing two pairs",
+    "subgoals": [
+      "rank by gap",
+      "report both values",
+      "separate certificate quality from solution quality"
+    ]
+  }
+]

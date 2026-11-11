@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Test a proposed size",
+    "section": "Testing a step size",
+    "subgoals": [
+      "compare with the stability bound",
+      "relate the bound to the curvature",
+      "predict oscillation above it"
+    ]
+  },
+  {
+    "label": "Count iterations",
+    "section": "Counting iterations",
+    "subgoals": [
+      "compute the contraction factor",
+      "take logarithms of the tolerance",
+      "relate slow progress to conditioning"
+    ]
+  },
+  {
+    "label": "Choose a stable step",
+    "section": "Choosing a stable step",
+    "subgoals": [
+      "use a curvature bound when known",
+      "backtrack until decrease",
+      "explain what each strategy assumes"
+    ]
+  }
+]

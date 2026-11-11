@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Test a cut",
+    "section": "Testing a cut",
+    "subgoals": [
+      "evaluate at the relaxation point",
+      "check the violation sign",
+      "verify validity on integer points"
+    ]
+  },
+  {
+    "label": "Add a valid inequality",
+    "section": "Adding a valid inequality",
+    "subgoals": [
+      "derive it from the model",
+      "add it to the relaxation",
+      "re-solve the linear program"
+    ]
+  },
+  {
+    "label": "Measure the violation",
+    "section": "Deciding whether a cut is violated",
+    "subgoals": [
+      "subtract the right side",
+      "interpret the sign",
+      "distinguish noise from a useful cut"
+    ]
+  }
+]

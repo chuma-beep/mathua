@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Classify the model",
+    "section": "Classifying a model",
+    "subgoals": [
+      "detect integer variables",
+      "distinguish pure, mixed and binary",
+      "name the method family"
+    ]
+  },
+  {
+    "label": "Test integrality",
+    "section": "Testing integrality",
+    "subgoals": [
+      "check fractional parts with a tolerance",
+      "recheck constraints after rounding",
+      "separate tolerance from a real fraction"
+    ]
+  },
+  {
+    "label": "Write an integer objective",
+    "section": "Writing an integer objective",
+    "subgoals": [
+      "use count or selection variables",
+      "add linking constraints",
+      "avoid products of variables"
+    ]
+  }
+]

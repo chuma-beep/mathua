@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Test for a zero gap",
+    "section": "Testing a zero gap",
+    "subgoals": [
+      "compute both optima",
+      "compare the values",
+      "treat a small gap cautiously"
+    ]
+  },
+  {
+    "label": "Verify a primal-dual pair",
+    "section": "Finding a primal-dual pair",
+    "subgoals": [
+      "check both feasibilities",
+      "check the gap",
+      "use complementary slackness"
+    ]
+  },
+  {
+    "label": "Decide applicability",
+    "section": "Deciding applicability",
+    "subgoals": [
+      "use linear programming as the guaranteed case",
+      "check a constraint qualification",
+      "find a counterexample without one"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Compute the ratio",
+    "section": "Computing the ratio",
+    "subgoals": [
+      "measure the actual decrease",
+      "evaluate the model decrease",
+      "divide the two"
+    ]
+  },
+  {
+    "label": "Decide on the step",
+    "section": "Accepting or rejecting a step",
+    "subgoals": [
+      "accept above a threshold",
+      "reject and keep the point otherwise",
+      "explain why acceptance is not exactness"
+    ]
+  },
+  {
+    "label": "Update the radius",
+    "section": "Updating the radius",
+    "subgoals": [
+      "expand on a high ratio",
+      "contract on a low ratio",
+      "keep it in the middle range"
+    ]
+  }
+]

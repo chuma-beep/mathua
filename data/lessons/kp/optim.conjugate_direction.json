@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Test conjugacy",
+    "section": "Testing conjugacy",
+    "subgoals": [
+      "apply the matrix to one direction",
+      "take the inner product with the other",
+      "check the result is zero"
+    ]
+  },
+  {
+    "label": "Build a conjugate direction",
+    "section": "Building a conjugate direction",
+    "subgoals": [
+      "combine the new gradient with the old direction",
+      "compute the scalar ratio",
+      "repeat for a full set"
+    ]
+  },
+  {
+    "label": "Count exact steps",
+    "section": "Counting exact steps",
+    "subgoals": [
+      "use the dimension of the quadratic",
+      "explain elimination in the conjugate basis",
+      "note rounding effects"
+    ]
+  }
+]

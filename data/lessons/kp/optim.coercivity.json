@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Test coercivity",
+    "section": "Testing coercivity",
+    "subgoals": [
+      "inspect growth in every direction",
+      "use positive definiteness for a quadratic",
+      "find a flat direction to disprove"
+    ]
+  },
+  {
+    "label": "Decide existence",
+    "section": "Deciding existence",
+    "subgoals": [
+      "combine continuity with coercivity",
+      "use compactness on a bounded set",
+      "separate infimum from minimum"
+    ]
+  },
+  {
+    "label": "Bound a minimizing sequence",
+    "section": "Bounding a minimizing sequence",
+    "subgoals": [
+      "compute the level radius",
+      "place the minimizer inside a ball",
+      "turn an infinite search into a bounded one"
+    ]
+  }
+]

@@ -69,11 +69,11 @@ means a new thin concept cannot be added quietly.
 
 ## 4. Where the corpus is thin
 
-### 4.1 The course catalog reaches 2000 of the 2000 concepts
+### 4.1 The course catalog reaches 2050 of the 2050 concepts
 
 Courses carry target sets, and a target expands to its transitive prerequisite closure in
 `internal/planning/planner.go:64` (`collectChain`). Across the 28 courses those closures reach
-2000 of the 2000 concepts: 0 of them have a node, a generator, a lesson and three KP shards and
+2050 of the 2050 concepts: 0 of them have a node, a generator, a lesson and three KP shards and
 still sit outside every named course path. The wiring batch of 2026-10-19 moved the 149 that used
 to sit there into the courses that teach their subject, and the table stays as the measurement on
 the number, because a concept that no course targets is unreachable whatever the diagnostic
@@ -404,12 +404,13 @@ because the change this section prepares for is the one that would have tripped 
 
 ### 5.5 The concept target, and where it goes
 
-The catalog holds 2000 concepts. The remaining per-domain targets add up to 0, and this is the
-table that says where: the 2,000-concept target agreed on 2026-11-08. `Now` is read from the corpus;
+The catalog holds 2050 concepts. The remaining per-domain targets add up to 0, and this is the
+table that says where: the 2,050-concept target agreed on 2026-11-10. `Now` is read from the corpus;
 `Target` is the decision. The rows keep the order step 6 of section 6 used, largest deficit first.
 
 | Domain | Tier | Now | Target | Add |
 |---|---|---:|---:|---:|
+| optimization | university | 50 | 50 | +0 |
 | algebra | school | 171 | 171 | +0 |
 | calc1 | bridge | 114 | 114 | +0 |
 | calc2 | bridge | 97 | 97 | +0 |
@@ -434,15 +435,15 @@ table that says where: the 2,000-concept target agreed on 2026-11-08. `Now` is r
 | geometry | school | 87 | 87 | +0 |
 | fractions | school | 67 | 67 | +0 |
 
-**The 2,000-concept target.** The 500 new concepts split by tier as school 482 to 602 (+120,
-24.9%), bridge 357 to 487 (+130, 36.4%) and university 661 to 911 (+250, 37.8%). University
+**The 2,050-concept target.** The 550 new concepts split by tier as school 482 to 602 (+120,
+24.9%), bridge 357 to 487 (+130, 36.4%) and university 661 to 961 (+300, 45.4%). University
 mathematics receives the largest share; school mathematics grows most conservatively.
 
 Wave 1 is a mandatory 50-concept pilot: algebra +14, numerical_analysis +20 and calc1 +16. The first
 ten concepts are reviewed before the remaining forty. The candidates and the review order live in
 `docs/expansion-waves/wave-1-candidates.md`; `scripts/scaffold-wave.py` validates a wave manifest
-before authoring. Waves 2-10 add 50 each and are not authorized until the pilot has been measured
-against the gates in section 6.
+before authoring. Waves 2-11 add 50 each and are not authorized until the pilot has been measured
+against the gates in section 6. Wave 11 creates the Optimization domain and is the last wave.
 
 **The expansion is additive.** Existing generators, lesson mappings and prerequisite edges must keep
 passing unchanged. No question-diversity floor may fall, no section-alignment requirement may be

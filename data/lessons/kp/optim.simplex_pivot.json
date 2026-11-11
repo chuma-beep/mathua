@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Select an entering column",
+    "section": "Choosing an entering variable",
+    "subgoals": [
+      "inspect the objective row",
+      "pick a negative reduced cost",
+      "stop when none is negative"
+    ]
+  },
+  {
+    "label": "Pivot the tableau",
+    "section": "Performing a pivot",
+    "subgoals": [
+      "apply the minimum ratio test",
+      "normalize the pivot row",
+      "eliminate the entering column elsewhere"
+    ]
+  },
+  {
+    "label": "Test optimality",
+    "section": "Testing optimality",
+    "subgoals": [
+      "check reduced costs",
+      "state the stopping rule",
+      "connect it to duality"
+    ]
+  }
+]

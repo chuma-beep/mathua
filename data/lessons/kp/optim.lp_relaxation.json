@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Solve the relaxation",
+    "section": "Solving a relaxation",
+    "subgoals": [
+      "drop the integer domains",
+      "solve the linear program",
+      "check whether the answer is integral"
+    ]
+  },
+  {
+    "label": "Compare bounds",
+    "section": "Comparing bounds",
+    "subgoals": [
+      "order relaxation and integer values",
+      "form the gap",
+      "compare formulations"
+    ]
+  },
+  {
+    "label": "Test the gap",
+    "section": "Testing an integrality gap",
+    "subgoals": [
+      "subtract the values",
+      "treat zero as a certificate",
+      "avoid concluding optimality from a positive gap"
+    ]
+  }
+]

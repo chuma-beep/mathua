@@ -20168,6 +20168,902 @@
     "subdomain": "numerical_analysis.optimization"
   },
   {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.problem.anatomy",
+    "key_prerequisites": [
+      "calc.deriv.optimization"
+    ],
+    "label": "Anatomy of an optimization problem",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.deriv.optimization"
+    ],
+    "subdomain": "optimization.foundations"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.feasible.set",
+    "key_prerequisites": [
+      "optim.problem.anatomy"
+    ],
+    "label": "Feasible and infeasible sets",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.problem.anatomy"
+    ],
+    "subdomain": "optimization.foundations"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.local_global",
+    "key_prerequisites": [
+      "optim.problem.anatomy"
+    ],
+    "label": "Local and global minima",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.problem.anatomy"
+    ],
+    "subdomain": "optimization.foundations"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.convex_set",
+    "key_prerequisites": [
+      "optim.problem.anatomy"
+    ],
+    "label": "Convex sets",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.problem.anatomy"
+    ],
+    "subdomain": "optimization.foundations"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.strict_convexity",
+    "key_prerequisites": [
+      "optim.convex_set"
+    ],
+    "label": "Strict convexity and uniqueness",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.convex_set",
+      "calc.deriv.convexity"
+    ],
+    "subdomain": "optimization.foundations"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.subgradient",
+    "key_prerequisites": [
+      "optim.convex_set"
+    ],
+    "label": "Subgradients",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.convex_set",
+      "calc.deriv.convexity"
+    ],
+    "subdomain": "optimization.foundations"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.epigraph",
+    "key_prerequisites": [
+      "optim.convex_set"
+    ],
+    "label": "Epigraphs and sublevel sets",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.convex_set",
+      "calc.deriv.convexity"
+    ],
+    "subdomain": "optimization.foundations"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.coercivity",
+    "key_prerequisites": [
+      "optim.local_global"
+    ],
+    "label": "Coercivity and existence",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.local_global",
+      "calc.deriv.optimization"
+    ],
+    "subdomain": "optimization.foundations"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.first_order",
+    "key_prerequisites": [
+      "optim.local_global"
+    ],
+    "label": "First-order optimality",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.local_global",
+      "calc.deriv.gradient"
+    ],
+    "subdomain": "optimization.foundations"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.second_order",
+    "key_prerequisites": [
+      "optim.first_order"
+    ],
+    "label": "Second-order optimality and saddle points",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.first_order",
+      "calc.deriv.higher_order_value"
+    ],
+    "subdomain": "optimization.foundations"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.hessian",
+    "key_prerequisites": [
+      "optim.second_order"
+    ],
+    "label": "The Hessian matrix",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.second_order",
+      "calc.deriv.higher_order_value"
+    ],
+    "subdomain": "optimization.unconstrained"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.gradient_step",
+    "key_prerequisites": [
+      "optim.first_order"
+    ],
+    "label": "A gradient descent step",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.first_order"
+    ],
+    "subdomain": "optimization.unconstrained"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.step_size",
+    "key_prerequisites": [
+      "optim.gradient_step"
+    ],
+    "label": "Step size and convergence",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.gradient_step"
+    ],
+    "subdomain": "optimization.unconstrained"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.newton_optim",
+    "key_prerequisites": [
+      "optim.hessian"
+    ],
+    "label": "Newton's method for minimization",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.hessian",
+      "calc.deriv.newton"
+    ],
+    "subdomain": "optimization.unconstrained"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.bfgs",
+    "key_prerequisites": [
+      "optim.gradient_step"
+    ],
+    "label": "The BFGS update",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.gradient_step",
+      "optim.hessian",
+      "optim.newton_optim",
+      "optim.conjugate_direction",
+      "optim.coordinate_descent",
+      "optim.wolfe"
+    ],
+    "subdomain": "optimization.unconstrained"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.coordinate_descent",
+    "key_prerequisites": [
+      "optim.gradient_step"
+    ],
+    "label": "Coordinate descent",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.gradient_step"
+    ],
+    "subdomain": "optimization.unconstrained"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.conjugate_direction",
+    "key_prerequisites": [
+      "optim.gradient_step"
+    ],
+    "label": "Conjugate directions",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.gradient_step",
+      "optim.hessian"
+    ],
+    "subdomain": "optimization.unconstrained"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.armijo",
+    "key_prerequisites": [
+      "optim.step_size"
+    ],
+    "label": "The Armijo condition",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.step_size"
+    ],
+    "subdomain": "optimization.unconstrained"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.wolfe",
+    "key_prerequisites": [
+      "optim.armijo"
+    ],
+    "label": "The Wolfe conditions",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.armijo"
+    ],
+    "subdomain": "optimization.unconstrained"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.trust_region_ratio",
+    "key_prerequisites": [
+      "optim.second_order"
+    ],
+    "label": "The trust-region ratio",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.second_order",
+      "optim.hessian"
+    ],
+    "subdomain": "optimization.unconstrained"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.lp_standard_form",
+    "key_prerequisites": [
+      "alg.ineq.linear_programming"
+    ],
+    "label": "Linear programming standard form",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "alg.ineq.linear_programming",
+      "optim.feasible.set"
+    ],
+    "subdomain": "optimization.convex"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.basic_solution",
+    "key_prerequisites": [
+      "optim.lp_standard_form"
+    ],
+    "label": "Basic feasible solutions",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.lp_standard_form",
+      "linalg.systems.row_reduction"
+    ],
+    "subdomain": "optimization.convex"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.simplex_pivot",
+    "key_prerequisites": [
+      "optim.basic_solution"
+    ],
+    "label": "The simplex pivot",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.basic_solution"
+    ],
+    "subdomain": "optimization.convex"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.lp_dual",
+    "key_prerequisites": [
+      "optim.lp_standard_form"
+    ],
+    "label": "The dual linear program",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.lp_standard_form"
+    ],
+    "subdomain": "optimization.convex"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.dual_function",
+    "key_prerequisites": [
+      "optim.lp_dual"
+    ],
+    "label": "The Lagrange dual function",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.lp_dual",
+      "calc.multi.lagrange"
+    ],
+    "subdomain": "optimization.convex"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.weak_duality",
+    "key_prerequisites": [
+      "optim.dual_function"
+    ],
+    "label": "Weak duality",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.dual_function"
+    ],
+    "subdomain": "optimization.convex"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.strong_duality",
+    "key_prerequisites": [
+      "optim.weak_duality"
+    ],
+    "label": "Strong duality",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.weak_duality",
+      "optim.slater"
+    ],
+    "subdomain": "optimization.convex"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.complementary_slackness",
+    "key_prerequisites": [
+      "optim.strong_duality"
+    ],
+    "label": "Complementary slackness",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.strong_duality"
+    ],
+    "subdomain": "optimization.convex"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.shadow_price",
+    "key_prerequisites": [
+      "optim.complementary_slackness"
+    ],
+    "label": "Shadow prices",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.complementary_slackness"
+    ],
+    "subdomain": "optimization.convex"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.lp_sensitivity",
+    "key_prerequisites": [
+      "optim.shadow_price"
+    ],
+    "label": "Sensitivity ranges",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.shadow_price"
+    ],
+    "subdomain": "optimization.convex"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.kkt",
+    "key_prerequisites": [
+      "optim.dual_function"
+    ],
+    "label": "Karush-Kuhn-Tucker conditions",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.dual_function",
+      "optim.equality_lagrange"
+    ],
+    "subdomain": "optimization.convex"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.slater",
+    "key_prerequisites": [
+      "optim.convex_set"
+    ],
+    "label": "Slater's condition",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.convex_set",
+      "optim.dual_function",
+      "optim.strict_convexity",
+      "optim.subgradient",
+      "optim.epigraph"
+    ],
+    "subdomain": "optimization.convex"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.equality_lagrange",
+    "key_prerequisites": [
+      "calc.multi.lagrange"
+    ],
+    "label": "Equality-constrained optimization",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.multi.lagrange",
+      "optim.second_order"
+    ],
+    "subdomain": "optimization.constrained"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.active_constraint",
+    "key_prerequisites": [
+      "optim.kkt"
+    ],
+    "label": "Active and inactive constraints",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.kkt"
+    ],
+    "subdomain": "optimization.constrained"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.penalty",
+    "key_prerequisites": [
+      "optim.equality_lagrange"
+    ],
+    "label": "Quadratic penalty method",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.equality_lagrange"
+    ],
+    "subdomain": "optimization.constrained"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.barrier",
+    "key_prerequisites": [
+      "optim.active_constraint"
+    ],
+    "label": "Logarithmic barrier method",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.active_constraint"
+    ],
+    "subdomain": "optimization.constrained"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.augmented_lagrangian",
+    "key_prerequisites": [
+      "optim.penalty"
+    ],
+    "label": "Augmented Lagrangian",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.penalty",
+      "optim.dual_function"
+    ],
+    "subdomain": "optimization.constrained"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.projected_gradient",
+    "key_prerequisites": [
+      "optim.gradient_step"
+    ],
+    "label": "Projected gradient descent",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.gradient_step",
+      "optim.convex_set"
+    ],
+    "subdomain": "optimization.constrained"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.active_set",
+    "key_prerequisites": [
+      "optim.active_constraint"
+    ],
+    "label": "Active-set methods",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.active_constraint",
+      "optim.simplex_pivot",
+      "optim.kkt_matrix",
+      "optim.projected_gradient",
+      "optim.duality_gap",
+      "optim.augmented_lagrangian",
+      "optim.barrier"
+    ],
+    "subdomain": "optimization.constrained"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.trust_region_subproblem",
+    "key_prerequisites": [
+      "optim.trust_region_ratio"
+    ],
+    "label": "The trust-region subproblem",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.trust_region_ratio",
+      "optim.kkt",
+      "optim.coercivity"
+    ],
+    "subdomain": "optimization.constrained"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.kkt_matrix",
+    "key_prerequisites": [
+      "optim.kkt"
+    ],
+    "label": "The KKT matrix",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.kkt",
+      "optim.hessian"
+    ],
+    "subdomain": "optimization.constrained"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.duality_gap",
+    "key_prerequisites": [
+      "optim.strong_duality"
+    ],
+    "label": "The duality gap",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.strong_duality",
+      "optim.complementary_slackness"
+    ],
+    "subdomain": "optimization.constrained"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.integer_program",
+    "key_prerequisites": [
+      "optim.lp_standard_form"
+    ],
+    "label": "Integer programming",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.lp_standard_form"
+    ],
+    "subdomain": "optimization.discrete"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.lp_relaxation",
+    "key_prerequisites": [
+      "optim.integer_program"
+    ],
+    "label": "LP relaxation",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.integer_program"
+    ],
+    "subdomain": "optimization.discrete"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.branch_bound",
+    "key_prerequisites": [
+      "optim.integer_program"
+    ],
+    "label": "Branch and bound",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.integer_program",
+      "optim.lp_relaxation"
+    ],
+    "subdomain": "optimization.discrete"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.cutting_plane",
+    "key_prerequisites": [
+      "optim.integer_program"
+    ],
+    "label": "Cutting planes",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.integer_program"
+    ],
+    "subdomain": "optimization.discrete"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.knapsack",
+    "key_prerequisites": [
+      "optim.integer_program"
+    ],
+    "label": "The knapsack problem",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.integer_program",
+      "discrete.algorithms.dynamic_programming"
+    ],
+    "subdomain": "optimization.discrete"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.transportation",
+    "key_prerequisites": [
+      "optim.lp_standard_form"
+    ],
+    "label": "The transportation problem",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.lp_standard_form",
+      "optim.simplex_pivot"
+    ],
+    "subdomain": "optimization.discrete"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.set_cover",
+    "key_prerequisites": [
+      "optim.integer_program"
+    ],
+    "label": "Set cover",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.integer_program",
+      "graph.vertex_cover"
+    ],
+    "subdomain": "optimization.discrete"
+  },
+  {
+    "domain": "optimization",
+    "grading_type": "numeric",
+    "id": "optim.integrality_gap",
+    "key_prerequisites": [
+      "optim.lp_relaxation"
+    ],
+    "label": "The integrality gap",
+    "mastery_threshold": {
+      "avg_time_seconds": 45,
+      "streak": 10
+    },
+    "prerequisites": [
+      "optim.lp_relaxation",
+      "optim.branch_bound",
+      "optim.cutting_plane",
+      "optim.knapsack",
+      "optim.set_cover",
+      "optim.transportation"
+    ],
+    "subdomain": "optimization.discrete"
+  },
+  {
     "domain": "prealgebra",
     "grading_type": "comparison",
     "id": "dec.basics.compare",
