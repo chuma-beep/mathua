@@ -1539,22 +1539,73 @@ func (s *PostgresStore) PruneNotificationHistory(before time.Time) (Notification
 const prunePushSubscriptionsSQL = `DELETE FROM notification_push_subscriptions
 WHERE failures >= ? AND updated_at < ?`
 
-func prunePushSubscriptions(db *sql.DB, query string, before time.Time, maxFailures int) (int, error) {
+const selectPrunablePushLearnersSQL = `SELECT DISTINCT student_id
+FROM notification_push_subscriptions WHERE failures >= ? AND updated_at < ?`
+
+// clearOrphanedPushPreference turns push off for a learner the prune has just
+// left with no device. Leaving it on would make the generator create a
+// suppressed push row for every later notification, which is exactly the
+// configuration noise the suppression audit exists to surface.
+const clearOrphanedPushPreferenceSQL = `UPDATE notification_preferences
+SET push_enabled = 0, updated_at = ?
+WHERE student_id = ? AND push_enabled != 0
+  AND NOT EXISTS (SELECT 1 FROM notification_push_subscriptions s
+                  WHERE s.student_id = notification_preferences.student_id)`
+
+func prunePushSubscriptions(db *sql.DB, rebind func(string) string, before time.Time, maxFailures int) (int, error) {
 	if maxFailures <= 0 {
 		maxFailures = 10
 	}
-	res, err := db.Exec(query, maxFailures, before.UTC().Unix())
+	cutoff := before.UTC().Unix()
+	tx, err := db.Begin()
 	if err != nil {
-		return 0, fmt.Errorf("prune push subscriptions: %w", err)
+		return 0, fmt.Errorf("prune push subscriptions: begin: %w", err)
 	}
-	n, _ := res.RowsAffected()
-	return int(n), nil
+	defer tx.Rollback()
+
+	rows, err := tx.Query(rebind(selectPrunablePushLearnersSQL), maxFailures, cutoff)
+	if err != nil {
+		return 0, fmt.Errorf("prune push subscriptions: list: %w", err)
+	}
+	learners := make([]string, 0, 8)
+	for rows.Next() {
+		var studentID string
+		if err := rows.Scan(&studentID); err != nil {
+			rows.Close()
+			return 0, fmt.Errorf("prune push subscriptions: scan: %w", err)
+		}
+		learners = append(learners, studentID)
+	}
+	if err := rows.Err(); err != nil {
+		rows.Close()
+		return 0, fmt.Errorf("prune push subscriptions: rows: %w", err)
+	}
+	rows.Close()
+
+	res, err := tx.Exec(rebind(prunePushSubscriptionsSQL), maxFailures, cutoff)
+	if err != nil {
+		return 0, fmt.Errorf("prune push subscriptions: delete: %w", err)
+	}
+	deleted, err := res.RowsAffected()
+	if err != nil {
+		return 0, fmt.Errorf("prune push subscriptions: rows affected: %w", err)
+	}
+	now := time.Now().UTC().Unix()
+	for _, studentID := range learners {
+		if _, err := tx.Exec(rebind(clearOrphanedPushPreferenceSQL), now, studentID); err != nil {
+			return 0, fmt.Errorf("prune push subscriptions: clear preference: %w", err)
+		}
+	}
+	if err := tx.Commit(); err != nil {
+		return 0, fmt.Errorf("prune push subscriptions: commit: %w", err)
+	}
+	return int(deleted), nil
 }
 
 func (s *SQLiteStore) PrunePushSubscriptions(before time.Time, maxFailures int) (int, error) {
-	return prunePushSubscriptions(s.db, prunePushSubscriptionsSQL, before, maxFailures)
+	return prunePushSubscriptions(s.db, func(query string) string { return query }, before, maxFailures)
 }
 
 func (s *PostgresStore) PrunePushSubscriptions(before time.Time, maxFailures int) (int, error) {
-	return prunePushSubscriptions(s.db, rebindDollars(prunePushSubscriptionsSQL), before, maxFailures)
+	return prunePushSubscriptions(s.db, rebindDollars, before, maxFailures)
 }

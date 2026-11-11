@@ -812,6 +812,16 @@ func TestNotificationPushSubscriptionHealth(t *testing.T) {
 	learner := seedStudent(t, store)
 	now := time.Now().UTC().Truncate(time.Second)
 
+	prefs, err := ns.EnsureNotificationPreferences(learner.ID, now)
+	if err != nil {
+		t.Fatalf("ensure preferences: %v", err)
+	}
+	prefs.PushEnabled = true
+	prefs.UpdatedAt = now
+	if err := ns.UpsertNotificationPreferences(prefs); err != nil {
+		t.Fatalf("enable push: %v", err)
+	}
+
 	sub := &NotificationPushSubscription{
 		StudentID: learner.ID, Endpoint: "https://push.example/abc",
 		P256DH: "key", Auth: "secret", UserAgent: "Firefox",
@@ -844,6 +854,13 @@ func TestNotificationPushSubscriptionHealth(t *testing.T) {
 	subs, _ = ns.ListNotificationPushSubscriptions(learner.ID)
 	if len(subs) != 0 {
 		t.Fatalf("dead endpoint survived the prune: %+v", subs)
+	}
+	prefs, err = ns.GetNotificationPreferences(learner.ID)
+	if err != nil || prefs == nil {
+		t.Fatalf("load preferences after prune: %v", err)
+	}
+	if prefs.PushEnabled {
+		t.Fatal("push stayed enabled after the last device was pruned")
 	}
 }
 
@@ -1115,5 +1132,44 @@ func TestRescheduleNotificationDeliveries(t *testing.T) {
 		if len(rows) != 1 || !rows[0].NextAttemptAt.Equal(now) {
 			t.Fatalf("%s moved when it should not have: %+v", id, rows)
 		}
+	}
+}
+
+func TestPruneKeepsPushWhenADeviceRemains(t *testing.T) {
+	store := newTestStore(t)
+	ns := notificationStore(t, store)
+	learner := seedStudent(t, store)
+	now := time.Now().UTC().Truncate(time.Second)
+
+	prefs, err := ns.EnsureNotificationPreferences(learner.ID, now)
+	if err != nil {
+		t.Fatalf("ensure preferences: %v", err)
+	}
+	prefs.PushEnabled = true
+	prefs.UpdatedAt = now
+	if err := ns.UpsertNotificationPreferences(prefs); err != nil {
+		t.Fatalf("enable push: %v", err)
+	}
+	for _, endpoint := range []string{"https://push.example/dead", "https://push.example/live"} {
+		if err := ns.UpsertNotificationPushSubscription(&NotificationPushSubscription{
+			StudentID: learner.ID, Endpoint: endpoint, P256DH: "key", Auth: "secret",
+		}); err != nil {
+			t.Fatalf("upsert %s: %v", endpoint, err)
+		}
+	}
+	if err := ns.MarkPushSubscriptionFailure("https://push.example/dead", now); err != nil {
+		t.Fatalf("mark failure: %v", err)
+	}
+
+	if removed, err := ns.PrunePushSubscriptions(now.AddDate(0, 0, 1), 1); err != nil || removed != 1 {
+		t.Fatalf("prune = %d, %v, want one", removed, err)
+	}
+	subs, _ := ns.ListNotificationPushSubscriptions(learner.ID)
+	if len(subs) != 1 || subs[0].Endpoint != "https://push.example/live" {
+		t.Fatalf("remaining subscriptions = %+v", subs)
+	}
+	prefs, _ = ns.GetNotificationPreferences(learner.ID)
+	if prefs == nil || !prefs.PushEnabled {
+		t.Fatal("push was disabled while a live device remained")
 	}
 }
