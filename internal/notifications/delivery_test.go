@@ -314,3 +314,58 @@ func TestPushDigestCarriesANotificationID(t *testing.T) {
 		t.Fatalf("marshal: %v", err)
 	}
 }
+
+// Two workers over one database must not both send the same digest. The first
+// pass claims and settles the batch; the second finds nothing to claim.
+func TestSecondWorkerDoesNotRepeatASettledDigest(t *testing.T) {
+	ns, firstID, now := deliveryFixture(t, true)
+	recipients, err := ns.ListNotificationRecipients("", 5)
+	if err != nil || len(recipients) == 0 {
+		t.Fatalf("list recipients: %v %v", recipients, err)
+	}
+	studentID := recipients[0].StudentID
+	prefs, err := ns.GetNotificationPreferences(studentID)
+	if err != nil || prefs == nil {
+		t.Fatalf("load preferences: %v", err)
+	}
+	prefs.Digest = storage.NotificationDigestDaily
+	if err := ns.UpsertNotificationPreferences(prefs); err != nil {
+		t.Fatalf("save digest preference: %v", err)
+	}
+	second := &storage.Notification{
+		ID: "n-two-workers", StudentID: studentID, Kind: StudyKind, DedupeKey: "study:two-workers",
+		Title: "Study session", Body: "Today is a study day.", Href: "/study", CreatedAt: now,
+	}
+	if created, err := ns.CreateNotification(second); err != nil || !created {
+		t.Fatalf("create second notification: %v %v", created, err)
+	}
+	if inserted, err := ns.CreateNotificationDelivery(&storage.NotificationDelivery{
+		NotificationID: second.ID, Channel: storage.NotificationChannelEmail, NextAttemptAt: now,
+	}); err != nil || !inserted {
+		t.Fatalf("create second delivery: %v %v", inserted, err)
+	}
+
+	firstSender := &fakeSender{}
+	first, err := newTestDelivery(ns, firstSender, now, 5).RunOnce()
+	if err != nil {
+		t.Fatalf("first worker: %v", err)
+	}
+	if len(firstSender.messages) != 1 || first.Sent != 2 {
+		t.Fatalf("first worker sent %d messages and %d rows", len(firstSender.messages), first.Sent)
+	}
+
+	secondSender := &fakeSender{}
+	secondRun, err := newTestDelivery(ns, secondSender, now, 5).RunOnce()
+	if err != nil {
+		t.Fatalf("second worker: %v", err)
+	}
+	if len(secondSender.messages) != 0 || secondRun.Claimed != 0 || secondRun.Sent != 0 {
+		t.Fatalf("second worker repeated the digest: messages %d, result %+v", len(secondSender.messages), secondRun)
+	}
+	for _, id := range []string{firstID, second.ID} {
+		rows, err := ns.ListNotificationDeliveries(id)
+		if err != nil || len(rows) != 1 || rows[0].Status != storage.NotificationDeliverySent {
+			t.Fatalf("delivery for %s = %+v, err %v", id, rows, err)
+		}
+	}
+}
