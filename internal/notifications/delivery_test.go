@@ -1,6 +1,7 @@
 package notifications
 
 import (
+	"encoding/json"
 	"errors"
 	"strings"
 	"testing"
@@ -252,5 +253,64 @@ func TestDeliverySendsOneDigestForABatch(t *testing.T) {
 		if deliveries[0].Status != storage.NotificationDeliverySent {
 			t.Fatalf("delivery for %s = %s, want sent", id, deliveries[0].Status)
 		}
+	}
+}
+
+func TestPushDigestCarriesANotificationID(t *testing.T) {
+	_, ns, learner := generatorStore(t)
+	now := time.Date(2026, 11, 11, 12, 0, 0, 0, time.UTC)
+	savePrefs(t, ns, learner.ID, func(p *storage.NotificationPreferences) {
+		p.PushEnabled = true
+		p.Digest = storage.NotificationDigestDaily
+		p.PreferredTimeMin = 0
+		p.QuietStartMin = 0
+		p.QuietEndMin = 0
+	})
+	if err := ns.UpsertNotificationPushSubscription(&storage.NotificationPushSubscription{
+		StudentID: learner.ID, Endpoint: "https://push.example/one", P256DH: "key", Auth: "secret",
+	}); err != nil {
+		t.Fatalf("subscribe: %v", err)
+	}
+	for _, id := range []string{"n-push-1", "n-push-2"} {
+		if _, err := ns.CreateNotification(&storage.Notification{
+			ID: id, StudentID: learner.ID, Kind: ReviewKind, DedupeKey: id,
+			Title: "Waiting", Body: "A reminder is waiting.", Href: "/review", CreatedAt: now,
+		}); err != nil {
+			t.Fatalf("create %s: %v", id, err)
+		}
+		if _, err := ns.CreateNotificationDelivery(&storage.NotificationDelivery{
+			NotificationID: id, Channel: storage.NotificationChannelPush,
+			NextAttemptAt: now,
+		}); err != nil {
+			t.Fatalf("create %s delivery: %v", id, err)
+		}
+	}
+
+	push := &fakePush{}
+	delivery := NewDelivery(DeliveryOptions{
+		Store: ns, Push: push, Now: func() time.Time { return now }, MaxAttempts: 5,
+	})
+	result, err := delivery.RunOnce()
+	if err != nil {
+		t.Fatalf("run: %v", err)
+	}
+	if len(push.payloads) != 1 {
+		t.Fatalf("push payloads = %d, want one digest", len(push.payloads))
+	}
+	var message PushMessage
+	if err := json.Unmarshal(push.payloads[0], &message); err != nil {
+		t.Fatalf("decode payload: %v", err)
+	}
+	if message.NotificationID == "" {
+		t.Fatal("digest push carries no notification id, so a click can never be reported")
+	}
+	if message.Href != "/notifications" {
+		t.Fatalf("digest href = %q, want the archive", message.Href)
+	}
+	if result.Sent != 2 {
+		t.Fatalf("sent = %d, want both items settled", result.Sent)
+	}
+	if _, err := json.Marshal(message); err != nil {
+		t.Fatalf("marshal: %v", err)
 	}
 }

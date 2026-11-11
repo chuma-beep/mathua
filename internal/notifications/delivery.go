@@ -290,6 +290,10 @@ func (d *Delivery) deliverPush(job storage.NotificationDeliveryJob, prefs *stora
 			Title: "Mathua digest",
 			Body:  fmt.Sprintf("%d notifications are waiting for you.", len(jobs)),
 			Href:  "/notifications",
+			// A digest click is attributed to the newest item in the batch, so
+			// the service worker appends ntf and the click reaches the rate.
+			// The page it opens is the archive, not that one item.
+			NotificationID: jobs[0].NotificationID,
 		}
 	}
 	payload, err := json.Marshal(message)
