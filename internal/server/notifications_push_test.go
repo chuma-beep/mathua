@@ -167,6 +167,14 @@ func TestAdminNotificationsReportsDeliveryHealth(t *testing.T) {
 	if err := notif.MarkNotificationOpened(e.studentID, sent.ID, now.Add(time.Minute)); err != nil {
 		t.Fatalf("mark opened: %v", err)
 	}
+	if inserted, err := notif.CreateNotificationDelivery(&storage.NotificationDelivery{
+		NotificationID:   sent.ID,
+		Channel:          storage.NotificationChannelPush,
+		Status:           storage.NotificationDeliverySuppressed,
+		SuppressedReason: "push_not_configured",
+	}); err != nil || !inserted {
+		t.Fatalf("seed suppressed delivery: %v %v", inserted, err)
+	}
 
 	rec := e.do(t, http.MethodGet, "/api/admin/notifications", e.adminTok, "")
 	if rec.Code != http.StatusOK {
@@ -185,6 +193,16 @@ func TestAdminNotificationsReportsDeliveryHealth(t *testing.T) {
 			Opened  int    `json:"opened"`
 			Clicked int    `json:"clicked"`
 		} `json:"engagement"`
+		Suppressions []struct {
+			Reason  string `json:"reason"`
+			Channel string `json:"channel"`
+			Count   int    `json:"count"`
+		} `json:"suppressions"`
+		Retention struct {
+			Days             int `json:"days"`
+			PushFailureDays  int `json:"push_failure_days"`
+			PushFailureLimit int `json:"push_failure_limit"`
+		} `json:"retention"`
 		Problems []struct {
 			StudentID string `json:"student_id"`
 			Channel   string `json:"channel"`
@@ -205,9 +223,12 @@ func TestAdminNotificationsReportsDeliveryHealth(t *testing.T) {
 	if !foundFailed {
 		t.Fatalf("stats = %+v, want one failed email row", body.Stats)
 	}
-	if len(body.Problems) != 1 || body.Problems[0].StudentID != e.studentID ||
+	if len(body.Problems) != 2 || body.Problems[0].StudentID != e.studentID ||
 		body.Problems[0].Attempts != 3 || body.Problems[0].LastError != "provider unavailable" {
 		t.Fatalf("problems = %+v", body.Problems)
+	}
+	if body.Problems[1].Channel != "push" || body.Problems[1].Status != "suppressed" {
+		t.Fatalf("suppressed problem = %+v", body.Problems[1])
 	}
 	// Only sent rows count, so the failed email delivery is absent and the
 	// opened in-app one is the single engagement row.
@@ -215,5 +236,14 @@ func TestAdminNotificationsReportsDeliveryHealth(t *testing.T) {
 		body.Engagement[0].Channel != "in_app" || body.Engagement[0].Sent != 1 ||
 		body.Engagement[0].Opened != 1 || body.Engagement[0].Clicked != 0 {
 		t.Fatalf("engagement = %+v", body.Engagement)
+	}
+	// A suppressed channel is not an engagement failure, so it is reported
+	// separately with the reason the operator needs to read.
+	if len(body.Suppressions) != 1 || body.Suppressions[0].Reason != "push_not_configured" ||
+		body.Suppressions[0].Channel != "push" || body.Suppressions[0].Count != 1 {
+		t.Fatalf("suppressions = %+v", body.Suppressions)
+	}
+	if body.Retention.Days <= 0 || body.Retention.PushFailureDays <= 0 || body.Retention.PushFailureLimit <= 0 {
+		t.Fatalf("retention = %+v, want the policy echoed", body.Retention)
 	}
 }

@@ -751,6 +751,15 @@ type NotificationEngagementStat struct {
 	Clicked int
 }
 
+// NotificationSuppressionStat is the suppressed count for one reason on one
+// channel. An operator reads it to tell a deployment problem (no provider, no
+// device) apart from a learner choice (email off).
+type NotificationSuppressionStat struct {
+	Reason  string
+	Channel string
+	Count   int
+}
+
 // NotificationPruneResult reports how many rows a retention pass removed.
 type NotificationPruneResult struct {
 	Notifications int
@@ -787,6 +796,8 @@ type NotificationStore interface {
 	MarkPushSubscriptionFailure(endpoint string, now time.Time) error
 	NotificationDeliveryStats() ([]NotificationDeliveryStat, error)
 	NotificationEngagementStats() ([]NotificationEngagementStat, error)
+	NotificationSuppressionStats() ([]NotificationSuppressionStat, error)
+	NotificationCountSince(studentID string, since time.Time) (int, error)
 	ListNotificationDeliveryProblems(limit int) ([]NotificationDeliveryRecord, error)
 	MarkNotificationOpened(studentID, notificationID string, now time.Time) error
 	MarkNotificationClicked(studentID, notificationID string, now time.Time) error

@@ -821,6 +821,62 @@ func TestNotificationListFiltersByKind(t *testing.T) {
 	}
 }
 
+func TestNotificationCountSinceAndSuppressionStats(t *testing.T) {
+	store := newTestStore(t)
+	ns := notificationStore(t, store)
+	learner := seedStudent(t, store)
+	now := time.Now().UTC().Truncate(time.Second)
+	start := now.Add(-6 * time.Hour)
+
+	for _, n := range []struct {
+		id        string
+		createdAt time.Time
+	}{
+		{"n-count-1", now.Add(-3 * time.Hour)},
+		{"n-count-2", now.Add(-time.Hour)},
+		{"n-count-3", now.Add(-48 * time.Hour)},
+	} {
+		if _, err := ns.CreateNotification(&Notification{
+			ID: n.id, StudentID: learner.ID, Kind: "review", DedupeKey: "count:" + n.id,
+			Title: "Title", CreatedAt: n.createdAt,
+		}); err != nil {
+			t.Fatalf("create notification %s: %v", n.id, err)
+		}
+	}
+
+	count, err := ns.NotificationCountSince(learner.ID, start)
+	if err != nil {
+		t.Fatalf("count since: %v", err)
+	}
+	if count != 2 {
+		t.Fatalf("count since %s = %d, want 2", start, count)
+	}
+
+	for _, d := range []*NotificationDelivery{
+		{NotificationID: "n-count-1", Channel: NotificationChannelEmail, Status: NotificationDeliverySuppressed, SuppressedReason: "email_unverified"},
+		{NotificationID: "n-count-2", Channel: NotificationChannelEmail, Status: NotificationDeliverySuppressed, SuppressedReason: "email_unverified"},
+		{NotificationID: "n-count-3", Channel: NotificationChannelPush, Status: NotificationDeliverySuppressed, SuppressedReason: "push_not_configured"},
+	} {
+		if _, err := ns.CreateNotificationDelivery(d); err != nil {
+			t.Fatalf("create delivery for %s: %v", d.NotificationID, err)
+		}
+	}
+
+	stats, err := ns.NotificationSuppressionStats()
+	if err != nil {
+		t.Fatalf("suppression stats: %v", err)
+	}
+	if len(stats) != 2 {
+		t.Fatalf("suppression stats = %+v, want two reasons", stats)
+	}
+	if stats[0].Reason != "email_unverified" || stats[0].Channel != NotificationChannelEmail || stats[0].Count != 2 {
+		t.Errorf("first stat = %+v, want email_unverified/email count 2", stats[0])
+	}
+	if stats[1].Reason != "push_not_configured" || stats[1].Channel != NotificationChannelPush || stats[1].Count != 1 {
+		t.Errorf("second stat = %+v, want push_not_configured/push count 1", stats[1])
+	}
+}
+
 func TestNotificationEngagementStatsCountSentOnly(t *testing.T) {
 	store := newTestStore(t)
 	ns := notificationStore(t, store)

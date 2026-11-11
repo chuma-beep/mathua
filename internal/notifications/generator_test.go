@@ -2,6 +2,7 @@ package notifications
 
 import (
 	"errors"
+	"fmt"
 	"testing"
 	"time"
 
@@ -301,5 +302,39 @@ func TestGeneratorReportsDueCounterFailure(t *testing.T) {
 	}
 	if got, _ := ns.GetNotificationScanState(learner.ID, "review"); got != 0 {
 		t.Fatalf("watermark = %d, want 0 after a failed count", got)
+	}
+}
+
+func TestGeneratorCapsNotificationsPerLocalDay(t *testing.T) {
+	_, ns, learner := generatorStore(t)
+	savePrefs(t, ns, learner.ID, nil)
+	now := time.Date(2026, 11, 11, 12, 0, 0, 0, time.UTC)
+	for i := 0; i < maxNotificationsPerLearnerPerDay; i++ {
+		if _, err := ns.CreateNotification(&storage.Notification{
+			ID:        fmt.Sprintf("n-cap-%d", i),
+			StudentID: learner.ID,
+			Kind:      "study",
+			DedupeKey: fmt.Sprintf("cap:%d", i),
+			Title:     "Already sent today",
+			CreatedAt: now.Add(-time.Duration(i+1) * time.Minute),
+		}); err != nil {
+			t.Fatalf("seed notification %d: %v", i, err)
+		}
+	}
+
+	due := &fakeDue{count: 3}
+	result, err := generatorAt(ns, due, now, true).RunOnce()
+	if err != nil {
+		t.Fatalf("run: %v", err)
+	}
+	if result.Notifications != 0 || result.Capped != 1 {
+		t.Fatalf("result = %+v, want one capped reminder and no notification", result)
+	}
+	count, err := ns.NotificationCountSince(learner.ID, now.Add(-24*time.Hour))
+	if err != nil {
+		t.Fatalf("count since: %v", err)
+	}
+	if count != maxNotificationsPerLearnerPerDay {
+		t.Fatalf("notifications today = %d, want %d", count, maxNotificationsPerLearnerPerDay)
 	}
 }

@@ -1117,6 +1117,64 @@ func (s *PostgresStore) NotificationEngagementStats() ([]NotificationEngagementS
 	return notificationEngagementStats(s.db, rebindDollars(queryNotificationEngagementStats))
 }
 
+// queryNotificationSuppressionStats groups suppressed rows by reason and
+// channel. A reason such as email_not_configured is a deployment fact, while
+// email_disabled is a learner choice, and an operator needs the split before
+// treating either as a delivery failure.
+const queryNotificationSuppressionStats = `SELECT COALESCE(NULLIF(suppressed_reason, ''), 'unspecified'),
+	channel, COUNT(*)
+FROM notification_deliveries
+WHERE status = 'suppressed'
+GROUP BY 1, channel
+ORDER BY 1, channel`
+
+func notificationSuppressionStats(db *sql.DB, query string) ([]NotificationSuppressionStat, error) {
+	rows, err := db.Query(query)
+	if err != nil {
+		return nil, fmt.Errorf("notification suppression stats: %w", err)
+	}
+	defer rows.Close()
+	out := make([]NotificationSuppressionStat, 0, 8)
+	for rows.Next() {
+		var stat NotificationSuppressionStat
+		if err := rows.Scan(&stat.Reason, &stat.Channel, &stat.Count); err != nil {
+			return nil, fmt.Errorf("scan notification suppression stat: %w", err)
+		}
+		out = append(out, stat)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("notification suppression stat rows: %w", err)
+	}
+	return out, nil
+}
+
+func (s *SQLiteStore) NotificationSuppressionStats() ([]NotificationSuppressionStat, error) {
+	return notificationSuppressionStats(s.db, queryNotificationSuppressionStats)
+}
+
+func (s *PostgresStore) NotificationSuppressionStats() ([]NotificationSuppressionStat, error) {
+	return notificationSuppressionStats(s.db, rebindDollars(queryNotificationSuppressionStats))
+}
+
+const queryNotificationCountSince = `SELECT COUNT(*) FROM notifications
+WHERE student_id = ? AND created_at >= ? AND canceled_at = 0`
+
+func notificationCountSince(db *sql.DB, query, studentID string, since time.Time) (int, error) {
+	var count int
+	if err := db.QueryRow(query, studentID, since.UTC().Unix()).Scan(&count); err != nil {
+		return 0, fmt.Errorf("count notifications since: %w", err)
+	}
+	return count, nil
+}
+
+func (s *SQLiteStore) NotificationCountSince(studentID string, since time.Time) (int, error) {
+	return notificationCountSince(s.db, queryNotificationCountSince, studentID, since)
+}
+
+func (s *PostgresStore) NotificationCountSince(studentID string, since time.Time) (int, error) {
+	return notificationCountSince(s.db, rebindDollars(queryNotificationCountSince), studentID, since)
+}
+
 func (s *SQLiteStore) ListNotificationDeliveryProblems(limit int) ([]NotificationDeliveryRecord, error) {
 	return listNotificationDeliveryProblems(s.db, queryNotificationDeliveryProblems, limit)
 }

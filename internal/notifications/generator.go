@@ -60,6 +60,11 @@ type GeneratorOptions struct {
 	PageSize       int
 }
 
+// maxNotificationsPerLearnerPerDay caps the total, not the per-kind count. Each
+// kind already fires at most once per local day, but a future kind, a milestone
+// pair reached together or a retried scan must not turn into a burst of mail.
+const maxNotificationsPerLearnerPerDay = 4
+
 // Generator creates at most one notification per kind per learner per local
 // day, and only when the learner's preferences say the window is open.
 type Generator struct {
@@ -69,6 +74,10 @@ type Generator struct {
 	pushAvailable  bool
 	now            func() time.Time
 	pageSize       int
+	// todayCount caches the notifications already created for a learner on
+	// their local day, keyed by student id. It is reset per scan and incremented
+	// as this scan emits, so one scan costs one count query per learner.
+	todayCount map[string]int
 }
 
 // NewGenerator builds the notification generator.
@@ -106,6 +115,7 @@ type GenerationResult struct {
 	Milestones       int
 	Inactivity       int
 	NoChannel        int
+	Capped           int
 	Failed           int
 }
 
@@ -117,6 +127,7 @@ func (g *Generator) RunOnce() (GenerationResult, error) {
 	if g.store == nil || g.due == nil {
 		return result, fmt.Errorf("notification generator is not configured")
 	}
+	g.todayCount = make(map[string]int)
 	after := ""
 	for {
 		recipients, err := g.store.ListNotificationRecipients(after, g.pageSize)
@@ -194,6 +205,16 @@ func (g *Generator) generateOne(recipient storage.NotificationRecipient, result 
 // asked for produced nothing, without blocking the channels that worked.
 func (g *Generator) emit(r storage.NotificationRecipient, ch channels, kind, dedupeKey, title, body, href string, now time.Time, result *GenerationResult) bool {
 	prefs := r.Preferences
+	used, err := g.notificationsToday(r, now)
+	if err != nil {
+		log.Printf("notifications: count today for %s: %v", r.StudentID, err)
+		result.Failed++
+		return false
+	}
+	if used >= maxNotificationsPerLearnerPerDay {
+		result.Capped++
+		return false
+	}
 	id, err := newNotificationID()
 	if err != nil {
 		log.Printf("notifications: id for %s: %v", r.StudentID, err)
@@ -220,6 +241,7 @@ func (g *Generator) emit(r storage.NotificationRecipient, ch channels, kind, ded
 		return false
 	}
 	result.Notifications++
+	g.todayCount[r.StudentID] = used + 1
 
 	nextAttempt := now
 	if prefs.Digest != storage.NotificationDigestImmediate {
@@ -422,6 +444,31 @@ func (g *Generator) inactivityNudge(r storage.NotificationRecipient, ch channels
 		result.Inactivity++
 	}
 	g.setScan(r.StudentID, inactivityScanKind, today, now, result)
+}
+
+// notificationsToday returns how many notifications this learner already has
+// for their current local day, loading the count once per scan. The local day
+// is deliberate: the cap should reset when the learner's own date changes, not
+// when UTC does.
+func (g *Generator) notificationsToday(r storage.NotificationRecipient, now time.Time) (int, error) {
+	if count, ok := g.todayCount[r.StudentID]; ok {
+		return count, nil
+	}
+	loc := time.UTC
+	if loaded, err := time.LoadLocation(r.Preferences.Timezone); err == nil {
+		loc = loaded
+	}
+	local := now.In(loc)
+	start := time.Date(local.Year(), local.Month(), local.Day(), 0, 0, 0, 0, loc)
+	count, err := g.store.NotificationCountSince(r.StudentID, start.UTC())
+	if err != nil {
+		return 0, err
+	}
+	if g.todayCount == nil {
+		g.todayCount = make(map[string]int)
+	}
+	g.todayCount[r.StudentID] = count
+	return count, nil
 }
 
 func (g *Generator) setScan(studentID, kind string, watermark int64, now time.Time, result *GenerationResult) {

@@ -448,10 +448,10 @@ func main() {
 					log.Printf("notifications: generate: %v", err)
 					return
 				}
-				if result.Notifications > 0 || result.EmailPending > 0 || result.PushPending > 0 || result.Failed > 0 {
-					log.Printf("notifications: generated %d, email pending %d, push pending %d, suppressed %d, failed %d",
+				if result.Notifications > 0 || result.EmailPending > 0 || result.PushPending > 0 || result.Failed > 0 || result.Capped > 0 {
+					log.Printf("notifications: generated %d, email pending %d, push pending %d, suppressed %d, capped %d, failed %d",
 						result.Notifications, result.EmailPending, result.PushPending,
-						result.EmailSuppressed+result.PushSuppressed, result.Failed)
+						result.EmailSuppressed+result.PushSuppressed, result.Capped, result.Failed)
 				}
 			}
 			run()

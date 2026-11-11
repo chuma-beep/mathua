@@ -16,6 +16,7 @@ import {
   type AdminNotificationProblem,
   type AdminNotificationRetention,
   type AdminNotificationStat,
+  type AdminNotificationSuppression,
 } from '../../../lib/api'
 
 // Notification delivery health.
@@ -40,6 +41,7 @@ export default function AdminNotificationsPage() {
   const [stats, setStats] = useState<AdminNotificationStat[] | null>(null)
   const [problems, setProblems] = useState<AdminNotificationProblem[]>([])
   const [engagement, setEngagement] = useState<AdminNotificationEngagement[]>([])
+  const [suppressions, setSuppressions] = useState<AdminNotificationSuppression[]>([])
   const [retention, setRetention] = useState<AdminNotificationRetention | null>(null)
   const [historyFor, setHistoryFor] = useState('')
   const [history, setHistory] = useState<AdminNotificationDeliveryDetail[]>([])
@@ -52,6 +54,7 @@ export default function AdminNotificationsPage() {
         setStats(r.stats)
         setProblems(r.problems)
         setEngagement(r.engagement)
+        setSuppressions(r.suppressions)
         setRetention(r.retention ?? null)
       })
       .catch((e) => {
@@ -140,6 +143,26 @@ export default function AdminNotificationsPage() {
                     <span className="text-mathua-muted">{row.opened} opened</span>
                     <span className="text-mathua-muted">open {rate(row.opened, row.sent)}</span>
                     <span className="text-mathua-muted">click {rate(row.clicked, row.sent)}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            <h2 className="mb-2 font-mono text-xs text-mathua-primary">Suppressed by reason</h2>
+            {suppressions.length === 0 ? (
+              <p className="mb-8 font-mono text-[11px] text-mathua-muted">
+                No delivery has been suppressed, so every channel a learner asked for was attempted.
+              </p>
+            ) : (
+              <ul className="mb-8 space-y-1">
+                {suppressions.map((row) => (
+                  <li
+                    key={`${row.reason}-${row.channel}`}
+                    className="grid grid-cols-[1fr_auto_auto] items-baseline gap-3 border border-mathua-border bg-mathua-surface px-4 py-2 font-mono text-xs"
+                  >
+                    <span className="text-mathua-secondary">{row.reason} · {row.channel}</span>
+                    <span className="text-mathua-primary">{row.count}</span>
+                    <span className="text-mathua-muted">{row.count === 1 ? 'delivery' : 'deliveries'}</span>
                   </li>
                 ))}
               </ul>

@@ -38,6 +38,12 @@ type adminEngagementStatJSON struct {
 	Clicked int    `json:"clicked"`
 }
 
+type adminSuppressionStatJSON struct {
+	Reason  string `json:"reason"`
+	Channel string `json:"channel"`
+	Count   int    `json:"count"`
+}
+
 // GET /api/admin/notifications reports notification delivery health: one count
 // per channel and status, plus the deliveries that will never move again.
 // Retries are deliberately absent from the problem list because they are still
@@ -72,16 +78,34 @@ func (s *Server) handleAdminNotifications(w http.ResponseWriter, r *http.Request
 		writeError(w, "failed to load engagement statistics", http.StatusInternalServerError)
 		return
 	}
+	suppressions, err := store.NotificationSuppressionStats()
+	if err != nil {
+		writeError(w, "failed to load suppression statistics", http.StatusInternalServerError)
+		return
+	}
 	writeJSON(w, map[string]interface{}{
-		"stats":      adminDeliveryStats(stats),
-		"problems":   adminDeliveryProblems(problems),
-		"engagement": adminEngagementStats(engagement),
+		"stats":        adminDeliveryStats(stats),
+		"problems":     adminDeliveryProblems(problems),
+		"engagement":   adminEngagementStats(engagement),
+		"suppressions": adminSuppressionStats(suppressions),
 		"retention": map[string]interface{}{
 			"days":               notifications.RetentionDays,
 			"push_failure_days":  notifications.PushFailureRetentionDays,
 			"push_failure_limit": notifications.PushFailureLimit,
 		},
 	})
+}
+
+func adminSuppressionStats(stats []storage.NotificationSuppressionStat) []adminSuppressionStatJSON {
+	out := make([]adminSuppressionStatJSON, 0, len(stats))
+	for _, stat := range stats {
+		out = append(out, adminSuppressionStatJSON{
+			Reason:  stat.Reason,
+			Channel: stat.Channel,
+			Count:   stat.Count,
+		})
+	}
+	return out
 }
 
 func adminEngagementStats(stats []storage.NotificationEngagementStat) []adminEngagementStatJSON {
