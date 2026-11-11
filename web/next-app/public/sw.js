@@ -177,10 +177,21 @@ self.addEventListener('notificationclick', event => {
   const base = data.href || '/'
   // The click is reported by the page, not the worker, so the learner's own
   // session authenticates it. Tagging the URL keeps the report idempotent: the
-  // app strips ?ntf after sending it once.
-  const href = data.notification_id
-    ? base + (base.includes('?') ? '&' : '?') + 'ntf=' + encodeURIComponent(data.notification_id)
-    : base
+  // app strips ?ntf after sending it once. Build it through URL so the
+  // parameter lands in the query string even when the href carries a fragment;
+  // appending to the raw string would put it after the # and never report.
+  let href = base
+  if (data.notification_id) {
+    try {
+      const target = new URL(base, self.location.origin)
+      target.searchParams.set('ntf', data.notification_id)
+      href = /^[a-z]+:\/\//i.test(base)
+        ? target.toString()
+        : target.pathname + target.search + target.hash
+    } catch {
+      href = base
+    }
+  }
 
   event.waitUntil((async () => {
     const windows = await self.clients.matchAll({ type: 'window', includeUncontrolled: true })

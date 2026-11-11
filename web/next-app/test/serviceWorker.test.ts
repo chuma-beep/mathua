@@ -9,7 +9,7 @@ const source = readFileSync(resolve(__dirname, '../public/sw.js'), 'utf8')
 interface Harness {
   dispatchFetch: (request: unknown) => Promise<Response>
   dispatchPush: (payload: unknown) => Promise<void>
-  dispatchNotificationClick: (data: { href?: string } | undefined) => Promise<void>
+  dispatchNotificationClick: (data: { href?: string; notification_id?: string } | undefined) => Promise<void>
   puts: Array<{ request: unknown; response: Response }>
   store: Map<string, Response>
   shown: Array<{ title: string; options: Record<string, unknown> }>
@@ -116,7 +116,7 @@ function loadWorker(
       if (!settled) throw new Error('push event was not handled')
       await settled
     },
-    dispatchNotificationClick: async (data: { href?: string } | undefined) => {
+    dispatchNotificationClick: async (data: { href?: string; notification_id?: string } | undefined) => {
       let settled: Promise<unknown> | undefined
       listeners.notificationclick({
         notification: {
@@ -234,6 +234,31 @@ describe('push notifications', () => {
 
     expect(worker.opened).toEqual(['/study'])
     expect(worker.focused).toHaveLength(0)
+  })
+
+
+  it('tags a plain route with the notification id', async () => {
+    const worker = loadWorker(async () => htmlResponse(''), [])
+
+    await worker.dispatchNotificationClick({ href: '/review', notification_id: 'ntf_1' })
+
+    expect(worker.opened).toEqual(['/review?ntf=ntf_1'])
+  })
+
+  it('keeps an existing query and tags the route', async () => {
+    const worker = loadWorker(async () => htmlResponse(''), [])
+
+    await worker.dispatchNotificationClick({ href: '/notifications?filter=all', notification_id: 'ntf_2' })
+
+    expect(worker.opened).toEqual(['/notifications?filter=all&ntf=ntf_2'])
+  })
+
+  it('puts the tag before a fragment rather than after it', async () => {
+    const worker = loadWorker(async () => htmlResponse(''), [])
+
+    await worker.dispatchNotificationClick({ href: '/lesson/x#step-2', notification_id: 'ntf_3' })
+
+    expect(worker.opened).toEqual(['/lesson/x?ntf=ntf_3#step-2'])
   })
 
   it('opens the home page when a notification carries no route', async () => {
