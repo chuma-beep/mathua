@@ -103,6 +103,47 @@ export const test = base.extend({
     await context.route('**/api/reviews/due**', (route) =>
       route.fulfill({ json: { count: 0 } }),
     )
+    // The same shell polls the notification badge on every signed-in product
+    // page, and every page with the app shell mounts it. An account with
+    // nothing unread is the default; a spec that wants a badge registers its
+    // own route later and wins. Without this the request escapes to the
+    // documentation address the export was built against, the fixture's net
+    // records it, and every spec that renders the shell fails on a request
+    // the page did not need.
+    await context.route('**/api/notifications/unread-count**', (route) =>
+      route.fulfill({ json: { unread: 0 } }),
+    )
+    // The settings page loads the notification preferences and saves them back.
+    // An account with the defaults, no email and no push is the empty account;
+    // a spec that wants a state registers its own route later and wins. A save
+    // echoes the submitted body, which is what the real handler returns, so the
+    // page's optimistic update and the response agree.
+    const notificationPrefs = {
+      student_id: 'e2e-student',
+      email_enabled: false,
+      push_enabled: false,
+      digest: 'immediate',
+      in_app_enabled: true,
+      reviews_enabled: true,
+      study_enabled: false,
+      milestones_enabled: true,
+      inactivity_enabled: false,
+      preferred_time_min: 1080,
+      study_days: '',
+      study_time_min: 1080,
+      timezone: 'UTC',
+      quiet_start_min: 1320,
+      quiet_end_min: 420,
+      paused_until: null,
+      created_at: '2026-01-01T00:00:00Z',
+      updated_at: '2026-01-01T00:00:00Z',
+    }
+    await context.route('**/api/notifications/preferences**', (route) => {
+      if (route.request().method() === 'PUT') {
+        return route.fulfill({ json: route.request().postDataJSON() })
+      }
+      return route.fulfill({ json: notificationPrefs })
+    })
     // The sidebar shell and the notifications page ask for product
     // announcements. An account with no announcements is the default; a spec
     // that wants an unread item registers its own route later and wins.
