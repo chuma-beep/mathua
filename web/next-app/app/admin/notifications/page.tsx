@@ -77,16 +77,20 @@ export default function AdminNotificationsPage() {
   }
 
   const showHistory = (problem: AdminNotificationProblem) => {
-    if (historyFor === problem.notification_id) {
+    // The list is one row per delivery, so two rows can share a notification id.
+    // Keying by notification alone made both rows open together and the second
+    // toggle close the panel instead of opening it.
+    const key = `${problem.notification_id}-${problem.channel}`
+    if (historyFor === key) {
       setHistoryFor('')
       setHistory([])
       return
     }
-    setBusy(`${problem.notification_id}-history`)
+    setBusy(`${key}-history`)
     setError('')
     getAdminNotificationHistory({ notificationId: problem.notification_id })
       .then((rows) => {
-        setHistoryFor(problem.notification_id)
+        setHistoryFor(key)
         setHistory(rows)
       })
       .catch((e) => setError(getErrorMessage(e)))
@@ -175,7 +179,7 @@ export default function AdminNotificationsPage() {
               <ul className="space-y-1">
                 {problems.map((problem) => {
                   const key = `${problem.notification_id}-${problem.channel}`
-                  const open = historyFor === problem.notification_id
+                  const open = historyFor === key
                   return (
                     <li key={key} className="border border-mathua-border bg-mathua-surface px-4 py-3">
                       <div className="flex flex-wrap items-baseline justify-between gap-3">
@@ -198,7 +202,7 @@ export default function AdminNotificationsPage() {
                         </button>
                         <button
                           type="button"
-                          disabled={busy === `${problem.notification_id}-history`}
+                          disabled={busy === `${key}-history`}
                           onClick={() => showHistory(problem)}
                           className="border border-mathua-border px-2 h-7 font-mono text-[10px] uppercase tracking-wider text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue disabled:opacity-50"
                         >
