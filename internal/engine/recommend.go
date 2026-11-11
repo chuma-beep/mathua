@@ -236,6 +236,14 @@ func (e *Engine) ReviewsDue(studentID string) (int, error) {
 	if studentID != "" {
 		_ = e.SatisfyImplicitReviews(studentID)
 	}
+	return e.ReviewsDueReadOnly(studentID)
+}
+
+// ReviewsDueReadOnly is ReviewsDue without the implicit-review write path. It
+// loads progress and asks the scheduler, but never mutates progress, due dates
+// or any other learning state. Notification generation uses this method so a
+// reminder scan cannot change what a learner is scheduled to review.
+func (e *Engine) ReviewsDueReadOnly(studentID string) (int, error) {
 	progress, err := e.repo.GetAllProgress(studentID)
 	if err != nil {
 		return 0, fmt.Errorf("load progress: %w", err)

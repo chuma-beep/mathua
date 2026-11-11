@@ -553,6 +553,47 @@ type AnnouncementStore interface {
 	UpdateAnnouncement(id, title, body string, published bool, now time.Time) (*Announcement, error)
 }
 
+// Notification preference defaults. A new learner gets in-app reminders for
+// reviews and milestones, but no email and no study/inactivity nudges until
+// they choose a schedule.
+const (
+	NotificationDefaultPreferredTimeMin = 18 * 60
+	NotificationDefaultStudyTimeMin     = 18 * 60
+	NotificationDefaultQuietStartMin    = 22 * 60
+	NotificationDefaultQuietEndMin      = 7 * 60
+	NotificationDefaultTimezone         = "UTC"
+)
+
+// NotificationPreferences is the per-learner notification policy. The
+// delivery and generation phases read it; Phase 1 only stores and validates
+// it. StudyDays is the canonical comma-separated form (mon,tue,...).
+type NotificationPreferences struct {
+	StudentID         string     `json:"student_id"`
+	EmailEnabled      bool       `json:"email_enabled"`
+	InAppEnabled      bool       `json:"in_app_enabled"`
+	ReviewsEnabled    bool       `json:"reviews_enabled"`
+	StudyEnabled      bool       `json:"study_enabled"`
+	MilestonesEnabled bool       `json:"milestones_enabled"`
+	InactivityEnabled bool       `json:"inactivity_enabled"`
+	PreferredTimeMin  int        `json:"preferred_time_min"`
+	StudyDays         string     `json:"study_days"`
+	StudyTimeMin      int        `json:"study_time_min"`
+	Timezone          string     `json:"timezone"`
+	QuietStartMin     int        `json:"quiet_start_min"`
+	QuietEndMin       int        `json:"quiet_end_min"`
+	PausedUntil       *time.Time `json:"paused_until,omitempty"`
+	CreatedAt         time.Time  `json:"created_at"`
+	UpdatedAt         time.Time  `json:"updated_at"`
+}
+
+// NotificationStore is the Phase 1 notification persistence surface. It is
+// separate from Repository so existing test doubles do not need the methods.
+type NotificationStore interface {
+	GetNotificationPreferences(studentID string) (*NotificationPreferences, error)
+	EnsureNotificationPreferences(studentID string, now time.Time) (*NotificationPreferences, error)
+	UpsertNotificationPreferences(p *NotificationPreferences) error
+}
+
 // MaxRemedialQueue caps the per-student remedial queue.
 const MaxRemedialQueue = 10
 

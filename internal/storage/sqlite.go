@@ -240,6 +240,20 @@ func authMigrate(db *sql.DB) error {
 		// at creation.
 		6: {`INSERT OR IGNORE INTO timed_quiz_baselines (student_id, baseline_xp, baseline_at)
 			SELECT id, xp_total, CAST(strftime('%s','now') AS INTEGER) * 1000000000 FROM students`},
+		// v7 notification preferences: existing learners receive the same
+		// defaults as a newly created account. INSERT OR IGNORE keeps the
+		// backfill idempotent and never overwrites a preference a learner
+		// already set.
+		7: {`INSERT OR IGNORE INTO notification_preferences (
+				student_id, email_enabled, in_app_enabled, reviews_enabled,
+				study_enabled, milestones_enabled, inactivity_enabled,
+				preferred_time_min, study_days, study_time_min, timezone,
+				quiet_start_min, quiet_end_min, paused_until, created_at, updated_at
+			) SELECT id, 0, 1, 1, 0, 1, 0,
+				1080, '', 1080, 'UTC', 1320, 420, 0,
+				CAST(strftime('%s','now') AS INTEGER),
+				CAST(strftime('%s','now') AS INTEGER)
+			FROM students`},
 	}
 	for v := 1; v <= len(dataMigrations); v++ {
 		if err := runOnceSQLite(db, v, dataMigrations[v]); err != nil {
@@ -354,6 +368,9 @@ func (s *SQLiteStore) CreateStudent(name string) (*Student, error) {
 	if err := s.timedQuiz().ensureBaselineAt(id, now); err != nil {
 		return nil, err
 	}
+	if _, err := s.EnsureNotificationPreferences(id, now); err != nil {
+		return nil, err
+	}
 	return &Student{ID: id, Name: name, Settings: "{}", CreatedAt: now}, nil
 }
 
@@ -391,6 +408,9 @@ func (s *SQLiteStore) ClaimGuestStudent(id, name string) (*Student, error) {
 	if err := s.timedQuiz().ensureBaselineAt(st.ID, st.CreatedAt); err != nil {
 		return nil, err
 	}
+	if _, err := s.EnsureNotificationPreferences(st.ID, st.CreatedAt); err != nil {
+		return nil, err
+	}
 	return st, nil
 }
 
@@ -413,6 +433,9 @@ func (s *SQLiteStore) CreateUser(name, username, passwordHash string) (*Student,
 		return nil, fmt.Errorf("create user: %w", err)
 	}
 	if err := s.timedQuiz().ensureBaselineAt(id, now); err != nil {
+		return nil, err
+	}
+	if _, err := s.EnsureNotificationPreferences(id, now); err != nil {
 		return nil, err
 	}
 	return &Student{ID: id, Name: name, Username: username, PasswordHash: passwordHash, Settings: "{}", CreatedAt: now}, nil
@@ -442,6 +465,9 @@ func (s *SQLiteStore) AdoptGuestAsUser(id, name, username, passwordHash string) 
 	}
 	if st != nil {
 		if err := s.timedQuiz().ensureBaselineAt(st.ID, st.CreatedAt); err != nil {
+			return nil, err
+		}
+		if _, err := s.EnsureNotificationPreferences(st.ID, st.CreatedAt); err != nil {
 			return nil, err
 		}
 	}
@@ -554,6 +580,9 @@ func (s *SQLiteStore) CreateGoogleUser(name, email, googleID, avatarURL string) 
 		}
 	}
 	if err := s.timedQuiz().ensureBaselineAt(id, now); err != nil {
+		return nil, err
+	}
+	if _, err := s.EnsureNotificationPreferences(id, now); err != nil {
 		return nil, err
 	}
 	return &Student{ID: id, Name: name, Email: email, EmailVerified: true, GoogleID: googleID, AvatarURL: avatarURL, Settings: "{}", CreatedAt: now}, nil
@@ -725,6 +754,9 @@ func (s *SQLiteStore) CreateOAuthUser(provider, providerID, name, email string, 
 		return nil, err
 	}
 	if err := s.timedQuiz().ensureBaselineAt(id, now); err != nil {
+		return nil, err
+	}
+	if _, err := s.EnsureNotificationPreferences(id, now); err != nil {
 		return nil, err
 	}
 	return &Student{ID: id, Name: name, Email: email, EmailVerified: emailVerified, AvatarURL: avatarURL, Settings: "{}", CreatedAt: now}, nil
@@ -1482,6 +1514,9 @@ func (s *SQLiteStore) ResetProgress(studentID string) error {
 		{"DELETE FROM xp_events WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM effort_signals WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM review_runs WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM notification_deliveries WHERE notification_id IN (SELECT id FROM notifications WHERE student_id = ?)", []interface{}{studentID}},
+		{"DELETE FROM notifications WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM notification_scan_state WHERE student_id = ?", []interface{}{studentID}},
 		{`UPDATE students SET xp_total = 0, xp_today = 0, diagnostic_completed = 0, diagnostic_completed_at = '',
 			league = 'bronze', league_week = '', league_moved = 0 WHERE id = ?`, []interface{}{studentID}},
 	}
@@ -1544,6 +1579,10 @@ func (s *SQLiteStore) DeleteAccount(studentID string) error {
 		{"DELETE FROM question_reports WHERE reporter_id = ?", []interface{}{studentID}},
 		{"DELETE FROM announcement_reads WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM announcement_views WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM notification_deliveries WHERE notification_id IN (SELECT id FROM notifications WHERE student_id = ?)", []interface{}{studentID}},
+		{"DELETE FROM notifications WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM notification_scan_state WHERE student_id = ?", []interface{}{studentID}},
+		{"DELETE FROM notification_preferences WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM ai_usage WHERE usage_key = ?", []interface{}{studentID}},
 		{"DELETE FROM friendships WHERE student_a = ? OR student_b = ?", []interface{}{studentID, studentID}},
 		{"DELETE FROM friend_blocks WHERE blocker_id = ? OR blocked_id = ?", []interface{}{studentID, studentID}},

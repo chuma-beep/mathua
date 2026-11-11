@@ -504,6 +504,76 @@ CREATE TABLE IF NOT EXISTS announcement_views (
     cleared_at INTEGER NOT NULL
 );
 
+-- Notification preferences. Phase 1 stores the policy only; generation and
+-- delivery live in later phases. Existing learners are backfilled by data
+-- migration 7, and every account creation path ensures a row.
+CREATE TABLE IF NOT EXISTS notification_preferences (
+    student_id          TEXT PRIMARY KEY REFERENCES students(id) ON DELETE CASCADE,
+    email_enabled       INTEGER NOT NULL DEFAULT 0,
+    in_app_enabled      INTEGER NOT NULL DEFAULT 1,
+    reviews_enabled     INTEGER NOT NULL DEFAULT 1,
+    study_enabled       INTEGER NOT NULL DEFAULT 0,
+    milestones_enabled  INTEGER NOT NULL DEFAULT 1,
+    inactivity_enabled  INTEGER NOT NULL DEFAULT 0,
+    preferred_time_min  INTEGER NOT NULL DEFAULT 1080,
+    study_days          TEXT NOT NULL DEFAULT '',
+    study_time_min      INTEGER NOT NULL DEFAULT 1080,
+    timezone            TEXT NOT NULL DEFAULT 'UTC',
+    quiet_start_min     INTEGER NOT NULL DEFAULT 1320,
+    quiet_end_min       INTEGER NOT NULL DEFAULT 420,
+    paused_until        INTEGER NOT NULL DEFAULT 0,
+    created_at          INTEGER NOT NULL,
+    updated_at          INTEGER NOT NULL
+);
+
+-- A notification is the durable feed item. dedupe_key makes generation
+-- idempotent, so a retried scan cannot create a second copy of one event.
+CREATE TABLE IF NOT EXISTS notifications (
+    id          TEXT PRIMARY KEY,
+    student_id  TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    kind        TEXT NOT NULL,
+    dedupe_key  TEXT NOT NULL,
+    title       TEXT NOT NULL,
+    body        TEXT NOT NULL,
+    href        TEXT NOT NULL DEFAULT '',
+    created_at  INTEGER NOT NULL,
+    read_at     INTEGER NOT NULL DEFAULT 0,
+    canceled_at INTEGER NOT NULL DEFAULT 0,
+    UNIQUE (student_id, dedupe_key)
+);
+
+CREATE INDEX IF NOT EXISTS idx_notifications_student_created ON notifications(student_id, created_at);
+CREATE INDEX IF NOT EXISTS idx_notifications_student_read ON notifications(student_id, read_at);
+
+-- Per-channel delivery attempts. A row is created only when a channel is
+-- considered, and the claim fields are the future worker's lease.
+CREATE TABLE IF NOT EXISTS notification_deliveries (
+    notification_id  TEXT NOT NULL REFERENCES notifications(id) ON DELETE CASCADE,
+    channel          TEXT NOT NULL,
+    status           TEXT NOT NULL DEFAULT 'pending',
+    attempts         INTEGER NOT NULL DEFAULT 0,
+    next_attempt_at  INTEGER NOT NULL DEFAULT 0,
+    claimed_until    INTEGER NOT NULL DEFAULT 0,
+    provider_id      TEXT NOT NULL DEFAULT '',
+    last_error       TEXT NOT NULL DEFAULT '',
+    suppressed_reason TEXT NOT NULL DEFAULT '',
+    sent_at          INTEGER NOT NULL DEFAULT 0,
+    opened_at        INTEGER NOT NULL DEFAULT 0,
+    clicked_at       INTEGER NOT NULL DEFAULT 0,
+    PRIMARY KEY (notification_id, channel)
+);
+
+CREATE INDEX IF NOT EXISTS idx_notification_deliveries_due ON notification_deliveries(status, next_attempt_at);
+
+-- Per-student scan watermarks for milestone and inactivity detection.
+CREATE TABLE IF NOT EXISTS notification_scan_state (
+    student_id  TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    kind        TEXT NOT NULL,
+    watermark   INTEGER NOT NULL DEFAULT 0,
+    updated_at  INTEGER NOT NULL,
+    PRIMARY KEY (student_id, kind)
+);
+
 -- Administration. The role column itself is added by the migration list below rather than
 -- here: this DDL runs on every boot, and ALTER TABLE ADD COLUMN is not idempotent. The
 -- default is 'student', so every existing row is a learner until an operator promotes it.

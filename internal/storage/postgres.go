@@ -581,6 +581,76 @@ CREATE TABLE IF NOT EXISTS announcement_views (
     cleared_at BIGINT NOT NULL
 );
 
+-- Notification preferences. Phase 1 stores the policy only; generation and
+-- delivery live in later phases. Existing learners are backfilled by data
+-- migration 7, and every account creation path ensures a row.
+CREATE TABLE IF NOT EXISTS notification_preferences (
+    student_id          TEXT PRIMARY KEY REFERENCES students(id) ON DELETE CASCADE,
+    email_enabled       INTEGER NOT NULL DEFAULT 0,
+    in_app_enabled      INTEGER NOT NULL DEFAULT 1,
+    reviews_enabled     INTEGER NOT NULL DEFAULT 1,
+    study_enabled       INTEGER NOT NULL DEFAULT 0,
+    milestones_enabled  INTEGER NOT NULL DEFAULT 1,
+    inactivity_enabled  INTEGER NOT NULL DEFAULT 0,
+    preferred_time_min  INTEGER NOT NULL DEFAULT 1080,
+    study_days          TEXT NOT NULL DEFAULT '',
+    study_time_min      INTEGER NOT NULL DEFAULT 1080,
+    timezone            TEXT NOT NULL DEFAULT 'UTC',
+    quiet_start_min     INTEGER NOT NULL DEFAULT 1320,
+    quiet_end_min       INTEGER NOT NULL DEFAULT 420,
+    paused_until        BIGINT NOT NULL DEFAULT 0,
+    created_at          BIGINT NOT NULL,
+    updated_at          BIGINT NOT NULL
+);
+
+-- A notification is the durable feed item. dedupe_key makes generation
+-- idempotent, so a retried scan cannot create a second copy of one event.
+CREATE TABLE IF NOT EXISTS notifications (
+    id          TEXT PRIMARY KEY,
+    student_id  TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    kind        TEXT NOT NULL,
+    dedupe_key  TEXT NOT NULL,
+    title       TEXT NOT NULL,
+    body        TEXT NOT NULL,
+    href        TEXT NOT NULL DEFAULT '',
+    created_at  BIGINT NOT NULL,
+    read_at     BIGINT NOT NULL DEFAULT 0,
+    canceled_at BIGINT NOT NULL DEFAULT 0,
+    UNIQUE (student_id, dedupe_key)
+);
+
+CREATE INDEX IF NOT EXISTS idx_notifications_student_created ON notifications(student_id, created_at);
+CREATE INDEX IF NOT EXISTS idx_notifications_student_read ON notifications(student_id, read_at);
+
+-- Per-channel delivery attempts. A row is created only when a channel is
+-- considered, and the claim fields are the future worker's lease.
+CREATE TABLE IF NOT EXISTS notification_deliveries (
+    notification_id  TEXT NOT NULL REFERENCES notifications(id) ON DELETE CASCADE,
+    channel          TEXT NOT NULL,
+    status           TEXT NOT NULL DEFAULT 'pending',
+    attempts         INTEGER NOT NULL DEFAULT 0,
+    next_attempt_at  BIGINT NOT NULL DEFAULT 0,
+    claimed_until    BIGINT NOT NULL DEFAULT 0,
+    provider_id      TEXT NOT NULL DEFAULT '',
+    last_error       TEXT NOT NULL DEFAULT '',
+    suppressed_reason TEXT NOT NULL DEFAULT '',
+    sent_at          BIGINT NOT NULL DEFAULT 0,
+    opened_at        BIGINT NOT NULL DEFAULT 0,
+    clicked_at       BIGINT NOT NULL DEFAULT 0,
+    PRIMARY KEY (notification_id, channel)
+);
+
+CREATE INDEX IF NOT EXISTS idx_notification_deliveries_due ON notification_deliveries(status, next_attempt_at);
+
+-- Per-student scan watermarks for milestone and inactivity detection.
+CREATE TABLE IF NOT EXISTS notification_scan_state (
+    student_id  TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    kind        TEXT NOT NULL,
+    watermark   BIGINT NOT NULL DEFAULT 0,
+    updated_at  BIGINT NOT NULL,
+    PRIMARY KEY (student_id, kind)
+);
+
 -- Administration. actor_id is deliberately not a foreign key to students(id): a trail that is
 -- deleted along with the account it records is not a trail. before_json/after_json carry the
 -- non-sensitive AdminUser projection only, so a credential cannot reach them.
@@ -808,6 +878,20 @@ func pgAuthMigrate(db *sql.DB) error {
 		6: {`INSERT INTO timed_quiz_baselines (student_id, baseline_xp, baseline_at)
 			SELECT id, xp_total, (extract(epoch from now()) * 1000000000)::bigint FROM students
 			ON CONFLICT (student_id) DO NOTHING`},
+		// v7 notification preferences: existing learners receive the same
+		// defaults as a newly created account. ON CONFLICT keeps the backfill
+		// idempotent and never overwrites a preference a learner already set.
+		7: {`INSERT INTO notification_preferences (
+				student_id, email_enabled, in_app_enabled, reviews_enabled,
+				study_enabled, milestones_enabled, inactivity_enabled,
+				preferred_time_min, study_days, study_time_min, timezone,
+				quiet_start_min, quiet_end_min, paused_until, created_at, updated_at
+			) SELECT id, 0, 1, 1, 0, 1, 0,
+				1080, '', 1080, 'UTC', 1320, 420, 0,
+				(extract(epoch from now()))::bigint,
+				(extract(epoch from now()))::bigint
+			FROM students
+			ON CONFLICT (student_id) DO NOTHING`},
 	}
 	for v := 1; v <= len(dataMigrations); v++ {
 		if err := runOncePostgres(db, v, dataMigrations[v]); err != nil {
@@ -939,6 +1023,9 @@ func (s *PostgresStore) CreateStudent(name string) (*Student, error) {
 	if err := s.timedQuiz().ensureBaselineAt(id, now); err != nil {
 		return nil, err
 	}
+	if _, err := s.EnsureNotificationPreferences(id, now); err != nil {
+		return nil, err
+	}
 	return &Student{ID: id, Name: name, Settings: "{}", CreatedAt: now}, nil
 }
 
@@ -976,6 +1063,9 @@ func (s *PostgresStore) ClaimGuestStudent(id, name string) (*Student, error) {
 	if err := s.timedQuiz().ensureBaselineAt(st.ID, st.CreatedAt); err != nil {
 		return nil, err
 	}
+	if _, err := s.EnsureNotificationPreferences(st.ID, st.CreatedAt); err != nil {
+		return nil, err
+	}
 	return st, nil
 }
 
@@ -998,6 +1088,9 @@ func (s *PostgresStore) CreateUser(name, username, passwordHash string) (*Studen
 		return nil, fmt.Errorf("create user: %w", err)
 	}
 	if err := s.timedQuiz().ensureBaselineAt(id, now); err != nil {
+		return nil, err
+	}
+	if _, err := s.EnsureNotificationPreferences(id, now); err != nil {
 		return nil, err
 	}
 	return &Student{ID: id, Name: name, Username: username, PasswordHash: passwordHash, Settings: "{}", CreatedAt: now}, nil
@@ -1027,6 +1120,9 @@ func (s *PostgresStore) AdoptGuestAsUser(id, name, username, passwordHash string
 	}
 	if st != nil {
 		if err := s.timedQuiz().ensureBaselineAt(st.ID, st.CreatedAt); err != nil {
+			return nil, err
+		}
+		if _, err := s.EnsureNotificationPreferences(st.ID, st.CreatedAt); err != nil {
 			return nil, err
 		}
 	}
@@ -1085,6 +1181,9 @@ func (s *PostgresStore) CreateGoogleUser(name, email, googleID, avatarURL string
 		}
 	}
 	if err := s.timedQuiz().ensureBaselineAt(id, now); err != nil {
+		return nil, err
+	}
+	if _, err := s.EnsureNotificationPreferences(id, now); err != nil {
 		return nil, err
 	}
 	return &Student{ID: id, Name: name, Email: email, EmailVerified: true, GoogleID: googleID, AvatarURL: avatarURL, Settings: "{}", CreatedAt: now}, nil
@@ -1251,6 +1350,9 @@ func (s *PostgresStore) CreateOAuthUser(provider, providerID, name, email string
 		return nil, err
 	}
 	if err := s.timedQuiz().ensureBaselineAt(id, now); err != nil {
+		return nil, err
+	}
+	if _, err := s.EnsureNotificationPreferences(id, now); err != nil {
 		return nil, err
 	}
 	return &Student{ID: id, Name: name, Email: email, EmailVerified: emailVerified, AvatarURL: avatarURL, Settings: "{}", CreatedAt: now}, nil
@@ -2000,6 +2102,9 @@ func (s *PostgresStore) ResetProgress(studentID string) error {
 		{"DELETE FROM xp_events WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM effort_signals WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM review_runs WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM notification_deliveries WHERE notification_id IN (SELECT id FROM notifications WHERE student_id = $1)", []interface{}{studentID}},
+		{"DELETE FROM notifications WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM notification_scan_state WHERE student_id = $1", []interface{}{studentID}},
 		{`UPDATE students SET xp_total = 0, xp_today = 0, diagnostic_completed = 0, diagnostic_completed_at = '',
 			league = 'bronze', league_week = '', league_moved = 0 WHERE id = $1`, []interface{}{studentID}},
 	}
@@ -2064,6 +2169,10 @@ func (s *PostgresStore) DeleteAccount(studentID string) error {
 		{"DELETE FROM question_reports WHERE reporter_id = $1", []interface{}{studentID}},
 		{"DELETE FROM announcement_reads WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM announcement_views WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM notification_deliveries WHERE notification_id IN (SELECT id FROM notifications WHERE student_id = $1)", []interface{}{studentID}},
+		{"DELETE FROM notifications WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM notification_scan_state WHERE student_id = $1", []interface{}{studentID}},
+		{"DELETE FROM notification_preferences WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM ai_usage WHERE usage_key = $1", []interface{}{studentID}},
 		{"DELETE FROM friendships WHERE student_a = $1 OR student_b = $1", []interface{}{studentID}},
 		{"DELETE FROM friend_blocks WHERE blocker_id = $1 OR blocked_id = $1", []interface{}{studentID}},
