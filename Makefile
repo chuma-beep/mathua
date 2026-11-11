@@ -73,8 +73,11 @@ mastery-units:
 latex-normalize:
 	cd web/next-app && node scripts/normalize-latex.mjs
 
+# The linter is a tool dependency in go.mod, not a `go run module@version`.
+# The versioned form resolves the tool's own requirements at run time, so a
+# checksum database or proxy hiccup fails this target on a commit that is fine.
 lint-go:
-	go run github.com/curtbushko/go-ai-lint/cmd/go-ai-lint@v1.0.1-0.20260620203811-c6ce4ee5624f ./...
+	go tool go-ai-lint ./...
 
 lint-slop:
 	npx --yes aislop@0.16.1 scan
