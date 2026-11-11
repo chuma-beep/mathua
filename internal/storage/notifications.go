@@ -597,7 +597,8 @@ WHERE d.notification_id = due.notification_id
   AND n.id = d.notification_id
   AND s.id = n.student_id
 RETURNING d.notification_id, n.student_id, d.channel, d.attempts,
-	n.kind, n.title, n.body, n.href, s.name, s.email, s.email_verified`), nowUnix, limit, claimUntil)
+	n.kind, n.title, n.body, n.href, s.name, s.email, s.email_verified,
+	d.claimed_until`), nowUnix, limit, claimUntil)
 	if err != nil {
 		return nil, fmt.Errorf("claim notification deliveries: %w", err)
 	}
@@ -606,11 +607,14 @@ RETURNING d.notification_id, n.student_id, d.channel, d.attempts,
 	for rows.Next() {
 		var job NotificationDeliveryJob
 		var emailVerified int
+		var claimedUntil int64
 		if err := rows.Scan(&job.NotificationID, &job.StudentID, &job.Channel, &job.Attempts,
-			&job.Kind, &job.Title, &job.Body, &job.Href, &job.StudentName, &job.Email, &emailVerified); err != nil {
+			&job.Kind, &job.Title, &job.Body, &job.Href, &job.StudentName, &job.Email, &emailVerified,
+			&claimedUntil); err != nil {
 			return nil, fmt.Errorf("scan claimed notification delivery: %w", err)
 		}
 		job.EmailVerified = emailVerified != 0
+		job.ClaimedUntil = time.Unix(claimedUntil, 0).UTC()
 		out = append(out, job)
 	}
 	if err := rows.Err(); err != nil {
@@ -645,7 +649,7 @@ WHERE rowid IN (
 	ORDER BY next_attempt_at, notification_id
 	LIMIT ?
 )
-RETURNING notification_id, channel, attempts`, claimUntil, nowUnix, nowUnix, limit)
+RETURNING notification_id, channel, attempts, claimed_until`, claimUntil, nowUnix, nowUnix, limit)
 	if err != nil {
 		return nil, fmt.Errorf("claim notification deliveries: %w", err)
 	}
@@ -653,11 +657,12 @@ RETURNING notification_id, channel, attempts`, claimUntil, nowUnix, nowUnix, lim
 		notificationID string
 		channel        string
 		attempts       int
+		claimedUntil   int64
 	}
 	var claimedRows []claimed
 	for rows.Next() {
 		var c claimed
-		if err := rows.Scan(&c.notificationID, &c.channel, &c.attempts); err != nil {
+		if err := rows.Scan(&c.notificationID, &c.channel, &c.attempts, &c.claimedUntil); err != nil {
 			rows.Close()
 			return nil, fmt.Errorf("scan claimed notification delivery: %w", err)
 		}
@@ -688,6 +693,7 @@ WHERE n.id = ?`, c.notificationID).Scan(
 		job.NotificationID = c.notificationID
 		job.Channel = c.channel
 		job.Attempts = c.attempts
+		job.ClaimedUntil = time.Unix(c.claimedUntil, 0).UTC()
 		job.EmailVerified = emailVerified != 0
 		out = append(out, job)
 	}
@@ -1186,7 +1192,8 @@ func (s *PostgresStore) ListNotificationDeliveryProblems(limit int) ([]Notificat
 func markNotificationOpened(db *sql.DB, notificationID, studentID string, now time.Time, rebind func(string) string) error {
 	return markNotificationTimestamp(db, notificationID, studentID, now, rebind,
 		`UPDATE notifications SET read_at = ? WHERE id = ? AND student_id = ? AND read_at = 0`,
-		`UPDATE notification_deliveries SET opened_at = ? WHERE notification_id = ? AND opened_at = 0`)
+		`UPDATE notification_deliveries SET opened_at = ?
+		 WHERE notification_id = ? AND channel = 'in_app' AND opened_at = 0`, false)
 }
 
 func markNotificationClicked(db *sql.DB, notificationID, studentID string, now time.Time, rebind func(string) string) error {
@@ -1194,14 +1201,16 @@ func markNotificationClicked(db *sql.DB, notificationID, studentID string, now t
 		`UPDATE notifications SET read_at = CASE WHEN read_at = 0 THEN ? ELSE read_at END
 		 WHERE id = ? AND student_id = ?`,
 		`UPDATE notification_deliveries
-		 SET clicked_at = ?, opened_at = CASE WHEN opened_at = 0 THEN ? ELSE opened_at END
-		 WHERE notification_id = ?`)
+		 SET clicked_at = CASE WHEN clicked_at = 0 THEN ? ELSE clicked_at END,
+		     opened_at = CASE WHEN opened_at = 0 THEN ? ELSE opened_at END
+		 WHERE notification_id = ? AND channel = 'push'`, true)
 }
 
 // markNotificationTimestamp applies an engagement stamp to the notification and
-// its deliveries. The ownership check runs after the update so a repeat open is
-// idempotent, while an id the learner does not own is still reported missing.
-func markNotificationTimestamp(db *sql.DB, notificationID, studentID string, now time.Time, rebind func(string) string, notificationSQL, deliverySQL string) error {
+// the one delivery channel that produced it. The ownership check runs after the
+// update so a repeat open is idempotent, while an id the learner does not own is
+// still reported missing.
+func markNotificationTimestamp(db *sql.DB, notificationID, studentID string, now time.Time, rebind func(string) string, notificationSQL, deliverySQL string, clicked bool) error {
 	if notificationID == "" || studentID == "" {
 		return ErrNotificationNotFound
 	}
@@ -1218,7 +1227,7 @@ func markNotificationTimestamp(db *sql.DB, notificationID, studentID string, now
 		return ErrNotificationNotFound
 	}
 	var err error
-	if strings.Contains(deliverySQL, "clicked_at") {
+	if clicked {
 		_, err = db.Exec(rebind(deliverySQL), at, at, notificationID)
 	} else {
 		_, err = db.Exec(rebind(deliverySQL), at, notificationID)
@@ -1248,14 +1257,19 @@ func (s *PostgresStore) MarkNotificationClicked(studentID, notificationID string
 const replayNotificationDeliverySQL = `UPDATE notification_deliveries
 SET status = 'pending', attempts = 0, next_attempt_at = ?, claimed_until = 0,
 	last_error = '', suppressed_reason = ''
-WHERE notification_id = ? AND channel = ? AND status IN ('failed', 'suppressed')`
+WHERE notification_id = ? AND channel = ? AND status IN ('failed', 'suppressed')
+  AND EXISTS (SELECT 1 FROM notifications n WHERE n.id = notification_id)`
 
 func replayNotificationDelivery(db *sql.DB, query, notificationID, channel string, now time.Time) error {
 	res, err := db.Exec(query, now.UTC().Unix(), notificationID, channel)
 	if err != nil {
 		return fmt.Errorf("replay notification delivery: %w", err)
 	}
-	if n, _ := res.RowsAffected(); n == 0 {
+	n, err := res.RowsAffected()
+	if err != nil {
+		return fmt.Errorf("replay notification delivery rows: %w", err)
+	}
+	if n == 0 {
 		return fmt.Errorf("notification delivery is not replayable: %w", ErrNotificationNotFound)
 	}
 	return nil
@@ -1363,19 +1377,23 @@ func (s *PostgresStore) ListStudentNotificationDeliveries(studentID string, limi
 	return listStudentNotificationDeliveries(s.db, rebindDollars(queryListStudentNotificationDeliveries), studentID, limit)
 }
 
+// queryListDueNotificationDeliveries returns the rows this pass is holding for
+// one learner and channel. The claim lease is the batch identity: a row another
+// worker claimed carries a different claimed_until, and a row still pending has
+// not been claimed at all, so neither can be settled by this message.
 const queryListDueNotificationDeliveries = `SELECT d.notification_id, n.student_id,
 	d.channel, d.attempts, n.kind, n.title, n.body, n.href, s.name, s.email,
-	s.email_verified
+	s.email_verified, d.claimed_until
 FROM notification_deliveries d
 JOIN notifications n ON n.id = d.notification_id
 JOIN students s ON s.id = n.student_id
-WHERE n.student_id = ? AND d.channel = ? AND d.status IN ('pending', 'retry', 'sending')
-	AND d.next_attempt_at > 0 AND d.next_attempt_at <= ?
+WHERE n.student_id = ? AND d.channel = ? AND d.status = 'sending'
+	AND d.claimed_until = ?
 ORDER BY d.next_attempt_at, d.notification_id
 LIMIT 100`
 
-func listDueNotificationDeliveries(db *sql.DB, query, studentID, channel string, now time.Time) ([]NotificationDeliveryJob, error) {
-	rows, err := db.Query(query, studentID, channel, now.UTC().Unix())
+func listDueNotificationDeliveries(db *sql.DB, query, studentID, channel string, claimUntil time.Time) ([]NotificationDeliveryJob, error) {
+	rows, err := db.Query(query, studentID, channel, claimUntil.UTC().Unix())
 	if err != nil {
 		return nil, fmt.Errorf("list due notification deliveries: %w", err)
 	}
@@ -1384,12 +1402,14 @@ func listDueNotificationDeliveries(db *sql.DB, query, studentID, channel string,
 	for rows.Next() {
 		var job NotificationDeliveryJob
 		var verified int
+		var claimedUntil int64
 		if err := rows.Scan(&job.NotificationID, &job.StudentID, &job.Channel,
 			&job.Attempts, &job.Kind, &job.Title, &job.Body, &job.Href,
-			&job.StudentName, &job.Email, &verified); err != nil {
+			&job.StudentName, &job.Email, &verified, &claimedUntil); err != nil {
 			return nil, fmt.Errorf("scan due notification delivery: %w", err)
 		}
 		job.EmailVerified = verified != 0
+		job.ClaimedUntil = time.Unix(claimedUntil, 0).UTC()
 		out = append(out, job)
 	}
 	if err := rows.Err(); err != nil {
@@ -1398,18 +1418,65 @@ func listDueNotificationDeliveries(db *sql.DB, query, studentID, channel string,
 	return out, nil
 }
 
-func (s *SQLiteStore) ListDueNotificationDeliveries(studentID, channel string, now time.Time) ([]NotificationDeliveryJob, error) {
-	return listDueNotificationDeliveries(s.db, queryListDueNotificationDeliveries, studentID, channel, now)
+func (s *SQLiteStore) ListDueNotificationDeliveries(studentID, channel string, claimUntil time.Time) ([]NotificationDeliveryJob, error) {
+	return listDueNotificationDeliveries(s.db, queryListDueNotificationDeliveries, studentID, channel, claimUntil)
 }
 
-func (s *PostgresStore) ListDueNotificationDeliveries(studentID, channel string, now time.Time) ([]NotificationDeliveryJob, error) {
-	return listDueNotificationDeliveries(s.db, rebindDollars(queryListDueNotificationDeliveries), studentID, channel, now)
+func (s *PostgresStore) ListDueNotificationDeliveries(studentID, channel string, claimUntil time.Time) ([]NotificationDeliveryJob, error) {
+	return listDueNotificationDeliveries(s.db, rebindDollars(queryListDueNotificationDeliveries), studentID, channel, claimUntil)
 }
+
+// completeNotificationDeliveries settles a digest batch in one statement. The
+// status and lease predicates are the concurrency guard: a row another worker
+// reclaimed after this lease expired is left to that worker, and the affected
+// count tells the caller how much of the batch it actually owned.
+func completeNotificationDeliveries(db *sql.DB, notificationIDs []string, channel, providerID string, claimUntil, now time.Time, rebind func(string) string) (int, error) {
+	if len(notificationIDs) == 0 {
+		return 0, nil
+	}
+	placeholders := strings.TrimSuffix(strings.Repeat("?,", len(notificationIDs)), ",")
+	query := fmt.Sprintf(`UPDATE notification_deliveries
+SET status = 'sent', provider_id = ?, sent_at = ?, claimed_until = 0,
+	next_attempt_at = 0, last_error = ''
+WHERE channel = ? AND status = 'sending' AND claimed_until = ?
+  AND notification_id IN (%s)`, placeholders)
+	args := make([]interface{}, 0, len(notificationIDs)+4)
+	args = append(args, providerID, now.UTC().Unix(), channel, claimUntil.UTC().Unix())
+	for _, id := range notificationIDs {
+		args = append(args, id)
+	}
+	res, err := db.Exec(rebind(query), args...)
+	if err != nil {
+		return 0, fmt.Errorf("complete notification deliveries: %w", err)
+	}
+	affected, err := res.RowsAffected()
+	if err != nil {
+		return 0, fmt.Errorf("complete notification deliveries rows: %w", err)
+	}
+	return int(affected), nil
+}
+
+func (s *SQLiteStore) CompleteNotificationDeliveries(notificationIDs []string, channel, providerID string, claimUntil, now time.Time) (int, error) {
+	return completeNotificationDeliveries(s.db, notificationIDs, channel, providerID, claimUntil, now,
+		func(query string) string { return query })
+}
+
+func (s *PostgresStore) CompleteNotificationDeliveries(notificationIDs []string, channel, providerID string, claimUntil, now time.Time) (int, error) {
+	return completeNotificationDeliveries(s.db, notificationIDs, channel, providerID, claimUntil, now, rebindDollars)
+}
+
+// Pruning keeps anything the learner has not read: an unread reminder is the
+// only copy they have, and a row the worker still holds must not disappear
+// under it. Only read history with no live delivery is removed.
+const prunableNotificationPredicate = `created_at < ? AND read_at > 0
+	AND NOT EXISTS (SELECT 1 FROM notification_deliveries d
+		WHERE d.notification_id = notifications.id
+		  AND d.status IN ('pending', 'retry', 'sending'))`
 
 const deletePrunedDeliveriesSQL = `DELETE FROM notification_deliveries
-WHERE notification_id IN (SELECT id FROM notifications WHERE created_at < ?)`
+WHERE notification_id IN (SELECT id FROM notifications WHERE ` + prunableNotificationPredicate + `)`
 
-const deletePrunedNotificationsSQL = `DELETE FROM notifications WHERE created_at < ?`
+const deletePrunedNotificationsSQL = `DELETE FROM notifications WHERE ` + prunableNotificationPredicate
 
 func pruneNotificationHistory(db *sql.DB, before time.Time, rebind func(string) string) (NotificationPruneResult, error) {
 	var result NotificationPruneResult

@@ -116,23 +116,47 @@ export default function AppShell({ children, ...overrides }: AppShellProps) {
   }, [loggedIn])
 
   useEffect(() => {
-    if (!loggedIn) return
     // A push opens with ?ntf=<id> so the worker does not need to know which
-    // learner is signed in. Report the click once, then drop the parameter so a
-    // refresh or a shared link cannot count the same click twice.
+    // learner is signed in. A signed-out click is kept in session storage and
+    // reported after sign-in, which is the only way that click is ever counted.
     let id = ''
     try {
       id = new URLSearchParams(window.location.search).get('ntf') ?? ''
     } catch { /* no window in some test harnesses */ }
+    if (!loggedIn) {
+      if (id) {
+        try {
+          sessionStorage.setItem('mathua_pending_ntf', id)
+        } catch { /* storage can be disabled */ }
+      }
+      return
+    }
+    if (!id) {
+      try {
+        id = sessionStorage.getItem('mathua_pending_ntf') ?? ''
+      } catch { /* storage can be disabled */ }
+    }
     if (!id) return
+    try {
+      sessionStorage.removeItem('mathua_pending_ntf')
+    } catch { /* storage can be disabled */ }
     void import('../lib/api')
       .then(api => api.reportNotificationClick(id))
+      .then(() => {
+        // The report returns the remaining unread count. The badge effect reads
+        // it only when something tells it to, so say so.
+        window.dispatchEvent(new Event('notifications-changed'))
+      })
       .catch(() => {})
-    try {
-      const url = new URL(window.location.href)
-      url.searchParams.delete('ntf')
-      window.history.replaceState({}, '', url.toString())
-    } catch { /* history is best effort */ }
+      .finally(() => {
+        // Drop the parameter after the report settles so a refresh cannot count
+        // the same click twice, and so a failure can still be retried by hand.
+        try {
+          const url = new URL(window.location.href)
+          url.searchParams.delete('ntf')
+          window.history.replaceState({}, '', url.toString())
+        } catch { /* history is best effort */ }
+      })
   }, [loggedIn])
 
   useEffect(() => {

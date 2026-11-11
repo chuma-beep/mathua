@@ -440,10 +440,15 @@ func (g *Generator) inactivityNudge(r storage.NotificationRecipient, ch channels
 		return
 	}
 	title, body := InactivityText(int(away))
+	cappedBefore := result.Capped
 	if g.emit(r, ch, InactivityKind, "inactivity:"+local.Format("2006-01-02"), title, body, "/study", now, result) {
 		result.Inactivity++
 	}
-	g.setScan(r.StudentID, inactivityScanKind, today, now, result)
+	// A nudge the daily cap swallowed was never sent, so it must not consume
+	// the seven-day window and silence the next one.
+	if result.Capped == cappedBefore {
+		g.setScan(r.StudentID, inactivityScanKind, today, now, result)
+	}
 }
 
 // notificationsToday returns how many notifications this learner already has
@@ -522,7 +527,9 @@ func nextDigestTime(local time.Time, digest string, preferredMin int) time.Time 
 	if digest == storage.NotificationDigestWeekly {
 		at = at.AddDate(0, 0, (8-int(local.Weekday()))%7)
 	}
-	if !at.After(local) {
+	// at has zero seconds, so a notification created during the preferred minute
+	// must still count as inside the window rather than waiting a whole day.
+	if at.Before(local) {
 		if digest == storage.NotificationDigestWeekly {
 			at = at.AddDate(0, 0, 7)
 		} else {

@@ -634,6 +634,29 @@ func (s *Server) handleNotificationPushRevoke(w http.ResponseWriter, r *http.Req
 		writeError(w, "push device not found", http.StatusNotFound)
 		return
 	}
+	// A learner with no device left cannot receive push, so leaving the
+	// preference on would create a suppressed row for every later
+	// notification and hide the real configuration faults in that audit.
+	remaining, err := store.ListNotificationPushSubscriptions(studentID)
+	if err != nil {
+		writeError(w, "failed to list push devices", http.StatusInternalServerError)
+		return
+	}
+	if len(remaining) == 0 {
+		prefs, err := store.GetNotificationPreferences(studentID)
+		if err != nil {
+			writeError(w, "failed to load notification preferences", http.StatusInternalServerError)
+			return
+		}
+		if prefs != nil && prefs.PushEnabled {
+			prefs.PushEnabled = false
+			prefs.UpdatedAt = time.Now().UTC()
+			if err := store.UpsertNotificationPreferences(prefs); err != nil {
+				writeError(w, "failed to update notification preferences", http.StatusInternalServerError)
+				return
+			}
+		}
+	}
 	writeJSON(w, map[string]interface{}{"ok": true, "revoked": removed})
 }
 

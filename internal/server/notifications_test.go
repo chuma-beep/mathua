@@ -361,6 +361,14 @@ func TestNotificationEngagementAndPushDevices(t *testing.T) {
 	}); err != nil {
 		t.Fatalf("seed delivery: %v", err)
 	}
+	for _, channel := range []string{storage.NotificationChannelInApp, storage.NotificationChannelPush} {
+		if _, err := ns.CreateNotificationDelivery(&storage.NotificationDelivery{
+			NotificationID: "n-open", Channel: channel,
+			Status: storage.NotificationDeliverySent, SentAt: now,
+		}); err != nil {
+			t.Fatalf("seed %s delivery: %v", channel, err)
+		}
+	}
 
 	rec := notificationRequest(t, mux, http.MethodPost, "/api/notifications/open", token, `{"id":"n-open"}`)
 	if rec.Code != http.StatusOK {
@@ -371,11 +379,21 @@ func TestNotificationEngagementAndPushDevices(t *testing.T) {
 		t.Fatalf("click = %d: %s", rec.Code, rec.Body.String())
 	}
 	deliveries, err := ns.ListNotificationDeliveries("n-open")
-	if err != nil || len(deliveries) != 1 {
+	if err != nil || len(deliveries) != 3 {
 		t.Fatalf("deliveries: %v %v", deliveries, err)
 	}
-	if deliveries[0].OpenedAt.IsZero() || deliveries[0].ClickedAt.IsZero() {
-		t.Fatalf("engagement stamps missing: %+v", deliveries[0])
+	stamped := map[string]storage.NotificationDelivery{}
+	for _, row := range deliveries {
+		stamped[row.Channel] = row
+	}
+	if stamped[storage.NotificationChannelInApp].OpenedAt.IsZero() {
+		t.Fatalf("in-app open stamp missing: %+v", stamped[storage.NotificationChannelInApp])
+	}
+	if stamped[storage.NotificationChannelPush].ClickedAt.IsZero() {
+		t.Fatalf("push click stamp missing: %+v", stamped[storage.NotificationChannelPush])
+	}
+	if !stamped[storage.NotificationChannelEmail].OpenedAt.IsZero() {
+		t.Fatalf("a feed open was stamped on the email row: %+v", stamped[storage.NotificationChannelEmail])
 	}
 	rec = notificationRequest(t, mux, http.MethodPost, "/api/notifications/open", token, `{"id":"n-missing"}`)
 	if rec.Code != http.StatusNotFound {

@@ -339,12 +339,15 @@ func (d *Delivery) deliverPush(job storage.NotificationDeliveryJob, prefs *stora
 	result.Sent++
 }
 
-// deliverySettled reports whether another pass already finished this row. A
-// claim leaves the row in sending; any other status means the work is done.
+// deliverySettled reports whether this pass should skip the row. A claim leaves
+// the row in sending; any other status means the work is done. A read failure
+// also skips, because letting the lease expire is cheaper than a duplicate
+// message and the next pass will see the row again.
 func (d *Delivery) deliverySettled(job storage.NotificationDeliveryJob) bool {
 	rows, err := d.store.ListNotificationDeliveries(job.NotificationID)
 	if err != nil {
-		return false
+		log.Printf("notifications: check delivery %s: %v", job.NotificationID, err)
+		return true
 	}
 	for _, row := range rows {
 		if row.Channel == job.Channel {
@@ -361,7 +364,7 @@ func (d *Delivery) digestJobs(job storage.NotificationDeliveryJob, prefs *storag
 	if prefs == nil || prefs.Digest == storage.NotificationDigestImmediate {
 		return nil
 	}
-	jobs, err := d.store.ListDueNotificationDeliveries(job.StudentID, job.Channel, now)
+	jobs, err := d.store.ListDueNotificationDeliveries(job.StudentID, job.Channel, job.ClaimedUntil)
 	if err != nil {
 		log.Printf("notifications: list digest items for %s: %v", job.StudentID, err)
 		return nil
@@ -369,17 +372,24 @@ func (d *Delivery) digestJobs(job storage.NotificationDeliveryJob, prefs *storag
 	return jobs
 }
 
-// completeDigest marks every item the one message covered as sent, so the
-// worker does not re-send the batch on the next tick.
+// completeDigest settles every item the one message covered in a single
+// statement, conditional on the lease this pass claimed them under, so a crash
+// or a reclaim by another worker cannot turn one message into several.
 func (d *Delivery) completeDigest(jobs []storage.NotificationDeliveryJob, channel, providerID string, now time.Time, result *DeliveryResult) {
+	ids := make([]string, 0, len(jobs))
 	for _, item := range jobs {
-		if err := d.store.CompleteNotificationDelivery(item.NotificationID, channel, providerID, now); err != nil {
-			log.Printf("notifications: complete digest item %s: %v", item.NotificationID, err)
-			result.Failed++
-			continue
-		}
-		result.Sent++
+		ids = append(ids, item.NotificationID)
 	}
+	settled, err := d.store.CompleteNotificationDeliveries(ids, channel, providerID, jobs[0].ClaimedUntil, now)
+	if err != nil {
+		log.Printf("notifications: complete digest of %d items: %v", len(ids), err)
+		result.Failed++
+		return
+	}
+	if settled != len(ids) {
+		log.Printf("notifications: digest settled %d of %d items, the rest are held by another pass", settled, len(ids))
+	}
+	result.Sent += settled
 }
 
 func (d *Delivery) actionURL(job storage.NotificationDeliveryJob) string {

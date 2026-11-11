@@ -672,12 +672,16 @@ type NotificationDeliveryJob struct {
 	Kind           string
 	Channel        string
 	Attempts       int
-	Title          string
-	Body           string
-	Href           string
-	StudentName    string
-	Email          string
-	EmailVerified  bool
+	// ClaimedUntil is the lease the claiming pass wrote. Every row claimed in
+	// one pass shares it, so a digest can settle exactly the rows that pass
+	// holds and never a row another worker is sending.
+	ClaimedUntil  time.Time
+	Title         string
+	Body          string
+	Href          string
+	StudentName   string
+	Email         string
+	EmailVerified bool
 }
 
 // Notification delivery channels and states. The schema deliberately keeps
@@ -783,6 +787,9 @@ type NotificationStore interface {
 	CreateNotificationDelivery(d *NotificationDelivery) (bool, error)
 	ClaimNotificationDeliveries(now time.Time, lease time.Duration, limit int) ([]NotificationDeliveryJob, error)
 	CompleteNotificationDelivery(notificationID, channel, providerID string, now time.Time) error
+	// CompleteNotificationDeliveries settles a digest batch in one statement,
+	// conditional on the lease the batch was claimed under.
+	CompleteNotificationDeliveries(notificationIDs []string, channel, providerID string, claimUntil, now time.Time) (int, error)
 	RetryNotificationDelivery(notificationID, channel, lastError string, nextAttempt time.Time) error
 	SuppressNotificationDelivery(notificationID, channel, reason string, now time.Time) error
 	FailNotificationDelivery(notificationID, channel, lastError string, now time.Time) error
@@ -804,7 +811,7 @@ type NotificationStore interface {
 	ReplayNotificationDelivery(notificationID, channel string, now time.Time) error
 	ListNotificationDeliveries(notificationID string) ([]NotificationDelivery, error)
 	ListStudentNotificationDeliveries(studentID string, limit int) ([]NotificationDeliveryRecord, error)
-	ListDueNotificationDeliveries(studentID, channel string, now time.Time) ([]NotificationDeliveryJob, error)
+	ListDueNotificationDeliveries(studentID, channel string, claimUntil time.Time) ([]NotificationDeliveryJob, error)
 	PruneNotificationHistory(before time.Time) (NotificationPruneResult, error)
 	PrunePushSubscriptions(before time.Time, maxFailures int) (int, error)
 }

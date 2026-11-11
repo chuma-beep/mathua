@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import AppShell from '@/components/app-shell'
 import {
@@ -15,7 +15,7 @@ import { useAuthState } from '@/hooks/useAuthState'
 // The badge and the dashboard only care about the newest unread items; this
 // page is where a learner can see what arrived last month and what kind it was.
 const KINDS: Array<{ value: string; label: string }> = [
-  { value: '', label: 'All' },
+  { value: '', label: 'All kinds' },
   { value: 'review', label: 'Reviews' },
   { value: 'study', label: 'Study' },
   { value: 'milestone', label: 'Milestones' },
@@ -50,9 +50,11 @@ export default function NotificationsArchivePage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [marking, setMarking] = useState(false)
+  const requestRef = useRef(0)
 
   const load = useCallback(
     async (opts: { cursor?: string; append: boolean; kind: string; unreadOnly: boolean }) => {
+      const request = ++requestRef.current
       setLoading(true)
       setError('')
       try {
@@ -62,14 +64,16 @@ export default function NotificationsArchivePage() {
           kind: opts.kind,
           unreadOnly: opts.unreadOnly,
         })
+        if (request !== requestRef.current) return
         setNotifications(prev => (opts.append ? [...prev, ...page.notifications] : page.notifications))
         setUnread(page.unread)
         setCursor(page.next_cursor)
         setHasMore(page.has_more)
       } catch (e) {
+        if (request !== requestRef.current) return
         setError(e instanceof Error ? e.message : 'Your notification history could not be loaded.')
       } finally {
-        setLoading(false)
+        if (request === requestRef.current) setLoading(false)
       }
     },
     [],
@@ -82,6 +86,8 @@ export default function NotificationsArchivePage() {
 
   function selectKind(next: string) {
     if (next === kind) return
+    requestRef.current++
+    setNotifications([])
     setCursor('')
     setHasMore(false)
     setKind(next)
@@ -89,6 +95,8 @@ export default function NotificationsArchivePage() {
 
   function selectUnread(next: boolean) {
     if (next === unreadOnly) return
+    requestRef.current++
+    setNotifications([])
     setCursor('')
     setHasMore(false)
     setUnreadOnly(next)
@@ -177,7 +185,7 @@ export default function NotificationsArchivePage() {
             onClick={() => selectUnread(true)}
             className={`border px-3 h-8 font-mono text-[11px] ${unreadOnly ? 'border-mathua-blue text-mathua-blue bg-mathua-blue-faint' : 'border-mathua-border text-mathua-secondary'}`}
           >
-            Unread{unread > 0 ? ` (${unread})` : ''}
+            Unread{kind === '' && unread > 0 ? ` (${unread})` : ''}
           </button>
         </div>
 

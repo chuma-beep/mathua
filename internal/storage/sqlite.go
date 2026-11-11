@@ -33,18 +33,34 @@ type SQLiteStore struct {
 func rebindQuestion(query string) string { return query }
 
 func NewSQLiteStore(path string) (*SQLiteStore, error) {
-	db, err := sql.Open("sqlite3", path)
+	// foreign_keys and busy_timeout are per connection, and a one-shot Exec
+	// applies them to whichever pooled connection it lands on. On a file
+	// database the other connections then run without foreign keys, so the
+	// schema's ON DELETE CASCADE is not the guarantee it appears to be. The DSN
+	// parameters apply to every connection the driver opens. An in-memory store
+	// is pinned to one connection below, so its pragmas are set directly.
+	dsn := path
+	if path != ":memory:" {
+		sep := "?"
+		if strings.Contains(path, "?") {
+			sep = "&"
+		}
+		dsn = path + sep + "_foreign_keys=on&_busy_timeout=5000"
+	}
+	db, err := sql.Open("sqlite3", dsn)
 	if err != nil {
 		return nil, fmt.Errorf("open sqlite: %w", err)
 	}
+	if path == ":memory:" {
+		if _, err := db.Exec("PRAGMA foreign_keys=ON"); err != nil {
+			return nil, fmt.Errorf("enable foreign keys: %w", err)
+		}
+		if _, err := db.Exec("PRAGMA busy_timeout=5000"); err != nil {
+			return nil, fmt.Errorf("set busy timeout: %w", err)
+		}
+	}
 	if _, err := db.Exec("PRAGMA journal_mode=WAL"); err != nil {
 		return nil, fmt.Errorf("enable WAL: %w", err)
-	}
-	if _, err := db.Exec("PRAGMA foreign_keys=ON"); err != nil {
-		return nil, fmt.Errorf("enable foreign keys: %w", err)
-	}
-	if _, err := db.Exec("PRAGMA busy_timeout=5000"); err != nil {
-		return nil, fmt.Errorf("set busy timeout: %w", err)
 	}
 	// 32 MB of page cache, held in the process rather than left to the kernel.
 	// The database is 368 MB (2026-10-23) so most reads miss either way, but an

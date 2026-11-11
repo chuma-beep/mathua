@@ -7,6 +7,17 @@ import (
 	"time"
 )
 
+func deliveryFor(t *testing.T, rows []NotificationDelivery, channel string) NotificationDelivery {
+	t.Helper()
+	for _, row := range rows {
+		if row.Channel == channel {
+			return row
+		}
+	}
+	t.Fatalf("no %s delivery in %+v", channel, rows)
+	return NotificationDelivery{}
+}
+
 func notificationStore(t *testing.T, repo Repository) NotificationStore {
 	t.Helper()
 	store, ok := repo.(NotificationStore)
@@ -665,6 +676,14 @@ func TestNotificationEngagementReplayAndRetention(t *testing.T) {
 	}); err != nil {
 		t.Fatalf("create delivery: %v", err)
 	}
+	for _, channel := range []string{NotificationChannelInApp, NotificationChannelPush} {
+		if _, err := ns.CreateNotificationDelivery(&NotificationDelivery{
+			NotificationID: "n-engage", Channel: channel,
+			Status: NotificationDeliverySent, SentAt: now,
+		}); err != nil {
+			t.Fatalf("create %s delivery: %v", channel, err)
+		}
+	}
 
 	if err := ns.MarkNotificationOpened(learner.ID, "n-engage", now); err != nil {
 		t.Fatalf("mark opened: %v", err)
@@ -680,24 +699,38 @@ func TestNotificationEngagementReplayAndRetention(t *testing.T) {
 	if err != nil {
 		t.Fatalf("list deliveries: %v", err)
 	}
-	if len(deliveries) != 1 || deliveries[0].OpenedAt.IsZero() {
-		t.Fatalf("open was not stamped on the delivery: %+v", deliveries)
+	if len(deliveries) != 3 {
+		t.Fatalf("deliveries = %d, want 3", len(deliveries))
+	}
+	inApp := deliveryFor(t, deliveries, NotificationChannelInApp)
+	if inApp.OpenedAt.IsZero() {
+		t.Fatal("open was not stamped on the in-app delivery")
+	}
+	email := deliveryFor(t, deliveries, NotificationChannelEmail)
+	if !email.OpenedAt.IsZero() {
+		t.Fatal("an in-app open was stamped on the email delivery")
 	}
 
 	if err := ns.MarkNotificationClicked(learner.ID, "n-engage", now.Add(time.Minute)); err != nil {
 		t.Fatalf("mark clicked: %v", err)
 	}
 	deliveries, _ = ns.ListNotificationDeliveries("n-engage")
-	if deliveries[0].ClickedAt.IsZero() {
-		t.Fatal("click was not stamped on the delivery")
+	push := deliveryFor(t, deliveries, NotificationChannelPush)
+	if push.ClickedAt.IsZero() || push.OpenedAt.IsZero() {
+		t.Fatalf("click was not stamped on the push delivery: %+v", push)
+	}
+	email = deliveryFor(t, deliveries, NotificationChannelEmail)
+	if !email.ClickedAt.IsZero() || !email.OpenedAt.IsZero() {
+		t.Fatal("a push click was stamped on the email delivery")
 	}
 
 	if err := ns.ReplayNotificationDelivery("n-engage", NotificationChannelEmail, now); err != nil {
 		t.Fatalf("replay delivery: %v", err)
 	}
 	deliveries, _ = ns.ListNotificationDeliveries("n-engage")
-	if deliveries[0].Status != NotificationDeliveryPending || deliveries[0].Attempts != 0 || deliveries[0].LastError != "" {
-		t.Fatalf("replay did not reset the delivery: %+v", deliveries[0])
+	email = deliveryFor(t, deliveries, NotificationChannelEmail)
+	if email.Status != NotificationDeliveryPending || email.Attempts != 0 || email.LastError != "" {
+		t.Fatalf("replay did not reset the delivery: %+v", email)
 	}
 	if err := ns.ReplayNotificationDelivery("n-engage", NotificationChannelEmail, now); err == nil {
 		t.Fatal("a pending delivery was replayed twice")
@@ -716,6 +749,39 @@ func TestNotificationEngagementReplayAndRetention(t *testing.T) {
 	}); err != nil {
 		t.Fatalf("create old delivery: %v", err)
 	}
+	if err := ns.MarkNotificationRead(learner.ID, "n-old", old); err != nil {
+		t.Fatalf("mark old read: %v", err)
+	}
+
+	// An unread reminder is the learner's only copy, and a row the worker still
+	// holds must not vanish under it, so both survive the prune.
+	for _, fixture := range []struct {
+		id     string
+		read   bool
+		status string
+	}{
+		{id: "n-unread", read: false, status: NotificationDeliverySent},
+		{id: "n-live", read: true, status: NotificationDeliveryPending},
+	} {
+		if _, err := ns.CreateNotification(&Notification{
+			ID: fixture.id, StudentID: learner.ID, Kind: "review", DedupeKey: fixture.id,
+			Title: fixture.id, CreatedAt: old,
+		}); err != nil {
+			t.Fatalf("create %s: %v", fixture.id, err)
+		}
+		if _, err := ns.CreateNotificationDelivery(&NotificationDelivery{
+			NotificationID: fixture.id, Channel: NotificationChannelInApp,
+			Status: fixture.status, SentAt: old, NextAttemptAt: old,
+		}); err != nil {
+			t.Fatalf("create %s delivery: %v", fixture.id, err)
+		}
+		if fixture.read {
+			if err := ns.MarkNotificationRead(learner.ID, fixture.id, old); err != nil {
+				t.Fatalf("mark %s read: %v", fixture.id, err)
+			}
+		}
+	}
+
 	pruned, err := ns.PruneNotificationHistory(now.AddDate(0, 0, -180))
 	if err != nil {
 		t.Fatalf("prune history: %v", err)
@@ -727,8 +793,16 @@ func TestNotificationEngagementReplayAndRetention(t *testing.T) {
 	if len(remaining) != 0 {
 		t.Fatalf("old deliveries survived the prune: %+v", remaining)
 	}
-	if _, err := ns.ListNotificationDeliveries("n-engage"); err != nil {
-		t.Fatalf("prune removed the live notification: %v", err)
+	for _, id := range []string{"n-engage", "n-unread", "n-live"} {
+		if _, err := ns.ListNotificationDeliveries(id); err != nil {
+			t.Fatalf("prune removed %s: %v", id, err)
+		}
+	}
+	for _, id := range []string{"n-unread", "n-live"} {
+		rows, _ := ns.ListNotificationDeliveries(id)
+		if len(rows) != 1 {
+			t.Fatalf("%s deliveries = %d, want 1 after the prune", id, len(rows))
+		}
 	}
 }
 
@@ -915,5 +989,82 @@ func TestNotificationEngagementStatsCountSentOnly(t *testing.T) {
 	got := stats[0]
 	if got.Kind != "review" || got.Channel != NotificationChannelEmail || got.Sent != 2 || got.Opened != 1 || got.Clicked != 1 {
 		t.Fatalf("stat = %+v, want review/email sent 2 opened 1 clicked 1", got)
+	}
+}
+
+// A digest must settle only the rows it claimed. The lease is the batch
+// identity, so a different lease token settles nothing and a live lease blocks
+// a second claim.
+func TestDigestSettlesOnlyItsOwnLease(t *testing.T) {
+	store := newTestStore(t)
+	ns := notificationStore(t, store)
+	learner := seedStudent(t, store)
+	now := time.Now().UTC().Truncate(time.Second)
+
+	if _, err := ns.CreateNotification(&Notification{
+		ID: "n-lease", StudentID: learner.ID, Kind: "review", DedupeKey: "lease",
+		Title: "Reviews are due", CreatedAt: now,
+	}); err != nil {
+		t.Fatalf("create notification: %v", err)
+	}
+	if _, err := ns.CreateNotificationDelivery(&NotificationDelivery{
+		NotificationID: "n-lease", Channel: NotificationChannelEmail,
+		Status: NotificationDeliveryPending, NextAttemptAt: now,
+	}); err != nil {
+		t.Fatalf("create delivery: %v", err)
+	}
+
+	jobs, err := ns.ClaimNotificationDeliveries(now, 5*time.Minute, 10)
+	if err != nil {
+		t.Fatalf("claim: %v", err)
+	}
+	if len(jobs) != 1 {
+		t.Fatalf("claimed %d deliveries, want 1", len(jobs))
+	}
+	lease := jobs[0].ClaimedUntil
+	if lease.IsZero() {
+		t.Fatal("claim did not report its lease")
+	}
+
+	again, err := ns.ClaimNotificationDeliveries(now.Add(time.Second), 5*time.Minute, 10)
+	if err != nil {
+		t.Fatalf("second claim: %v", err)
+	}
+	if len(again) != 0 {
+		t.Fatalf("second claim took %d rows under a live lease", len(again))
+	}
+
+	due, err := ns.ListDueNotificationDeliveries(learner.ID, NotificationChannelEmail, lease)
+	if err != nil {
+		t.Fatalf("list due: %v", err)
+	}
+	if len(due) != 1 || due[0].NotificationID != "n-lease" {
+		t.Fatalf("due rows for the owning lease = %+v", due)
+	}
+
+	settled, err := ns.CompleteNotificationDeliveries([]string{"n-lease"},
+		NotificationChannelEmail, "mailer", lease.Add(time.Second), now)
+	if err != nil {
+		t.Fatalf("complete under a foreign lease: %v", err)
+	}
+	if settled != 0 {
+		t.Fatalf("foreign lease settled %d rows", settled)
+	}
+	rows, _ := ns.ListNotificationDeliveries("n-lease")
+	if len(rows) != 1 || rows[0].Status != NotificationDeliverySending {
+		t.Fatalf("foreign lease changed the row: %+v", rows)
+	}
+
+	settled, err = ns.CompleteNotificationDeliveries([]string{"n-lease"},
+		NotificationChannelEmail, "mailer", lease, now)
+	if err != nil {
+		t.Fatalf("complete under the owning lease: %v", err)
+	}
+	if settled != 1 {
+		t.Fatalf("owning lease settled %d rows, want 1", settled)
+	}
+	rows, _ = ns.ListNotificationDeliveries("n-lease")
+	if len(rows) != 1 || rows[0].Status != NotificationDeliverySent {
+		t.Fatalf("row not settled: %+v", rows)
 	}
 }
