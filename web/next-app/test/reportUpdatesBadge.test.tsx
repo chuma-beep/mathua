@@ -1,17 +1,19 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import ReportUpdatesBadge from '../components/ReportUpdatesBadge'
-import { listAnnouncements, listMyReports } from '../lib/api'
+import { getNotificationUnreadCount, listAnnouncements, listMyReports } from '../lib/api'
 
 vi.mock('../lib/api', async (importOriginal) => ({
   ...(await importOriginal<typeof import('../lib/api')>()),
   listMyReports: vi.fn(),
   listAnnouncements: vi.fn(),
+  getNotificationUnreadCount: vi.fn(),
 }))
 
 beforeEach(() => {
   vi.clearAllMocks()
   vi.mocked(listAnnouncements).mockResolvedValue({ unread: 0, announcements: [] })
+  vi.mocked(getNotificationUnreadCount).mockResolvedValue(0)
 })
 
 describe('the report update badge', () => {
@@ -33,6 +35,14 @@ describe('the report update badge', () => {
     window.dispatchEvent(new Event('report-updates-changed'))
 
     await waitFor(() => expect(screen.queryByRole('link', { name: /notification/ })).toBeNull())
+  })
+
+  it('includes the in-app notification count in the badge', async () => {
+    vi.mocked(listMyReports).mockResolvedValue({ unread: 1, reports: [] })
+    vi.mocked(getNotificationUnreadCount).mockResolvedValue(3)
+    render(<ReportUpdatesBadge enabled />)
+
+    expect(await screen.findByRole('link', { name: '4 unread notifications' })).toBeTruthy()
   })
 
   it('does not fetch for a signed-out visitor', async () => {

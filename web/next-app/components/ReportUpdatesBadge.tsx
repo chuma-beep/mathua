@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { listAnnouncements, listMyReports } from '../lib/api'
+import { getNotificationUnreadCount, listAnnouncements, listMyReports } from '../lib/api'
 
 // A small count beside the avatar. The page that clears it dispatches
 // report-updates-changed, so the badge clears without a reload.
@@ -16,7 +16,11 @@ export default function ReportUpdatesBadge({ enabled }: { enabled: boolean }) {
     }
     let cancelled = false
     const load = async () => {
-      const [reports, announcements] = await Promise.allSettled([listMyReports(), listAnnouncements()])
+      const [reports, announcements, notifications] = await Promise.allSettled([
+        listMyReports(),
+        listAnnouncements(),
+        getNotificationUnreadCount(),
+      ])
       if (cancelled) return
       let total = 0
       let loaded = false
@@ -26,6 +30,10 @@ export default function ReportUpdatesBadge({ enabled }: { enabled: boolean }) {
       }
       if (announcements.status === 'fulfilled') {
         total += announcements.value.unread
+        loaded = true
+      }
+      if (notifications.status === 'fulfilled') {
+        total += notifications.value
         loaded = true
       }
       // A transient failure must not put an error in the header. The page
@@ -38,12 +46,14 @@ export default function ReportUpdatesBadge({ enabled }: { enabled: boolean }) {
     }
     window.addEventListener('report-updates-changed', load)
     window.addEventListener('announcements-changed', load)
+    window.addEventListener('notifications-changed', load)
     window.addEventListener('focus', load)
     document.addEventListener('visibilitychange', onVisible)
     return () => {
       cancelled = true
       window.removeEventListener('report-updates-changed', load)
       window.removeEventListener('announcements-changed', load)
+      window.removeEventListener('notifications-changed', load)
       window.removeEventListener('focus', load)
       document.removeEventListener('visibilitychange', onVisible)
     }

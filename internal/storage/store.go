@@ -586,12 +586,52 @@ type NotificationPreferences struct {
 	UpdatedAt         time.Time  `json:"updated_at"`
 }
 
-// NotificationStore is the Phase 1 notification persistence surface. It is
-// separate from Repository so existing test doubles do not need the methods.
+// Notification is one durable in-app feed item. Cancelled items stay in the
+// table for audit and dedupe, but no learner-facing query returns them.
+type Notification struct {
+	ID         string
+	StudentID  string
+	Kind       string
+	DedupeKey  string
+	Title      string
+	Body       string
+	Href       string
+	CreatedAt  time.Time
+	ReadAt     time.Time
+	CanceledAt time.Time
+}
+
+// NotificationListOptions selects one page of a learner's feed. BeforeCreatedAt
+// and BeforeID are the stable cursor; zero values mean "start at the newest".
+type NotificationListOptions struct {
+	Limit           int
+	BeforeCreatedAt int64
+	BeforeID        string
+	UnreadOnly      bool
+}
+
+// NotificationPage is one page plus whether another page exists.
+type NotificationPage struct {
+	Notifications []Notification
+	HasMore       bool
+}
+
+// ErrNotificationNotFound means the notification does not exist, belongs to
+// another learner, or was cancelled. The three cases are deliberately one
+// error so a caller cannot probe another learner's ids.
+var ErrNotificationNotFound = errors.New("notification not found")
+
+// NotificationStore is the notification persistence surface. It is separate
+// from Repository so existing test doubles do not need the methods.
 type NotificationStore interface {
 	GetNotificationPreferences(studentID string) (*NotificationPreferences, error)
 	EnsureNotificationPreferences(studentID string, now time.Time) (*NotificationPreferences, error)
 	UpsertNotificationPreferences(p *NotificationPreferences) error
+	CreateNotification(n *Notification) (bool, error)
+	ListNotifications(studentID string, opts NotificationListOptions) (NotificationPage, error)
+	NotificationUnreadCount(studentID string) (int, error)
+	MarkNotificationRead(studentID, notificationID string, now time.Time) error
+	MarkAllNotificationsRead(studentID string, now time.Time) error
 }
 
 // MaxRemedialQueue caps the per-student remedial queue.

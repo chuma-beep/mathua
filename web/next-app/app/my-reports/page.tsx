@@ -5,7 +5,7 @@ import Link from 'next/link'
 import AppShell from '@/components/app-shell'
 import Footer from '@/components/Footer'
 import KatexContent from '@/components/KatexContent'
-import { clearAnnouncements, clearMyReports, listAnnouncements, listMyReports, markAnnouncementsRead, markMyReportsRead, type Announcement, type QuestionReport } from '@/lib/api'
+import { clearAnnouncements, clearMyReports, listAnnouncements, listMyReports, listNotifications, markAllNotificationsRead, markAnnouncementsRead, markMyReportsRead, markNotificationRead, type Announcement, type AppNotification, type QuestionReport } from '@/lib/api'
 import { useAuthState } from '@/hooks/useAuthState'
 
 function statusLabel(status: string): string {
@@ -51,13 +51,41 @@ export default function MyReportsPage() {
   const { loggedIn, user } = useAuthState()
   const [reports, setReports] = useState<QuestionReport[]>([])
   const [announcements, setAnnouncements] = useState<Announcement[]>([])
+  const [notifications, setNotifications] = useState<AppNotification[]>([])
   const [unread, setUnread] = useState(0)
   const [announcementUnread, setAnnouncementUnread] = useState(0)
+  const [notificationUnread, setNotificationUnread] = useState(0)
+  const [notificationCursor, setNotificationCursor] = useState('')
+  const [notificationHasMore, setNotificationHasMore] = useState(false)
+  const [notificationUnreadOnly, setNotificationUnreadOnly] = useState(false)
+  const [notificationLoading, setNotificationLoading] = useState(false)
+  const [notificationError, setNotificationError] = useState('')
+  const [notificationMarking, setNotificationMarking] = useState(false)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [confirmClear, setConfirmClear] = useState(false)
   const [clearing, setClearing] = useState(false)
   const [clearError, setClearError] = useState('')
+
+  const loadNotifications = useCallback(async (opts: { cursor?: string; unreadOnly: boolean; append: boolean }) => {
+    setNotificationLoading(true)
+    setNotificationError('')
+    try {
+      const page = await listNotifications({
+        limit: 20,
+        cursor: opts.cursor ?? '',
+        unreadOnly: opts.unreadOnly,
+      })
+      setNotifications(prev => opts.append ? [...prev, ...page.notifications] : page.notifications)
+      setNotificationUnread(page.unread)
+      setNotificationCursor(page.next_cursor)
+      setNotificationHasMore(page.has_more)
+    } catch (e) {
+      setNotificationError(e instanceof Error ? e.message : 'Your notifications could not be loaded.')
+    } finally {
+      setNotificationLoading(false)
+    }
+  }, [])
 
   const load = useCallback(async () => {
     setLoading(true)
@@ -90,12 +118,16 @@ export default function MyReportsPage() {
       } catch {
         // Keep the report list usable.
       }
+
+      // The in-app feed is independent of reports and announcements. It does
+      // not mark itself read on open: the learner decides what to acknowledge.
+      await loadNotifications({ unreadOnly: false, append: false })
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Your reports could not be loaded.')
     } finally {
       setLoading(false)
     }
-  }, [])
+  }, [loadNotifications])
 
   useEffect(() => {
     if (loggedIn) void load()
@@ -132,6 +164,58 @@ export default function MyReportsPage() {
     setClearing(false)
   }
 
+  async function handleNotificationRead(notification: AppNotification) {
+    if (notification.read) return
+    try {
+      const remaining = await markNotificationRead(notification.id)
+      setNotifications(prev => prev.map(n => n.id === notification.id ? { ...n, read: true } : n))
+      setNotificationUnread(remaining)
+      window.dispatchEvent(new Event('notifications-changed'))
+    } catch (e) {
+      setNotificationError(e instanceof Error ? e.message : 'Could not mark the notification read.')
+    }
+  }
+
+  async function handleAllNotificationsRead() {
+    setNotificationMarking(true)
+    setNotificationError('')
+    try {
+      await markAllNotificationsRead()
+      setNotifications(prev => prev.map(n => ({ ...n, read: true })))
+      setNotificationUnread(0)
+      if (notificationUnreadOnly) {
+        setNotificationHasMore(false)
+        setNotificationCursor('')
+      }
+      window.dispatchEvent(new Event('notifications-changed'))
+    } catch (e) {
+      setNotificationError(e instanceof Error ? e.message : 'Could not mark notifications read.')
+    } finally {
+      setNotificationMarking(false)
+    }
+  }
+
+  function handleNotificationFilter(unreadOnly: boolean) {
+    if (notificationUnreadOnly === unreadOnly) return
+    setNotificationUnreadOnly(unreadOnly)
+    setNotificationCursor('')
+    setNotificationHasMore(false)
+    void loadNotifications({ unreadOnly, append: false })
+  }
+
+  function handleNotificationMore() {
+    if (!notificationCursor || notificationLoading) return
+    void loadNotifications({
+      cursor: notificationCursor,
+      unreadOnly: notificationUnreadOnly,
+      append: true,
+    })
+  }
+
+  const visibleNotifications = notificationUnreadOnly
+    ? notifications.filter(n => !n.read)
+    : notifications
+
   return (
     <AppShell>
       <div className="bg-mathua-bg text-mathua-primary">
@@ -150,7 +234,7 @@ export default function MyReportsPage() {
                 onClick={() => { setConfirmClear(true); setClearError('') }}
                 className="font-mono text-[11px] text-mathua-muted underline underline-offset-2 hover:text-mathua-red"
               >
-                Clear notifications
+                Clear reports and announcements
               </button>
             )}
             <Link
@@ -162,10 +246,116 @@ export default function MyReportsPage() {
           </div>
         </div>
 
+        <section className="mt-8" aria-labelledby="notifications-heading">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <h2 id="notifications-heading" className="font-mono text-sm uppercase tracking-wider text-mathua-muted">
+                Your notifications
+              </h2>
+              <p className="mt-1 text-sm text-mathua-secondary">
+                Reminders and updates from Mathua.
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                aria-pressed={!notificationUnreadOnly}
+                onClick={() => handleNotificationFilter(false)}
+                className={`border px-3 h-8 font-mono text-[11px] ${!notificationUnreadOnly ? 'border-mathua-blue text-mathua-blue bg-mathua-blue-faint' : 'border-mathua-border text-mathua-secondary'}`}
+              >
+                All
+              </button>
+              <button
+                type="button"
+                aria-pressed={notificationUnreadOnly}
+                onClick={() => handleNotificationFilter(true)}
+                className={`border px-3 h-8 font-mono text-[11px] ${notificationUnreadOnly ? 'border-mathua-blue text-mathua-blue bg-mathua-blue-faint' : 'border-mathua-border text-mathua-secondary'}`}
+              >
+                Unread{notificationUnread > 0 ? ` (${notificationUnread})` : ''}
+              </button>
+              <button
+                type="button"
+                onClick={() => void handleAllNotificationsRead()}
+                disabled={notificationMarking || notificationUnread === 0}
+                className="font-mono text-[11px] text-mathua-muted underline underline-offset-2 hover:text-mathua-blue disabled:opacity-40"
+              >
+                {notificationMarking ? 'Marking…' : 'Mark all read'}
+              </button>
+            </div>
+          </div>
+
+          {notificationError && (
+            <p className="mt-3 border border-[var(--accent-red)]/40 bg-mathua-surface p-3 font-mono text-[11px] text-mathua-secondary">
+              {notificationError}
+            </p>
+          )}
+
+          {notificationLoading && visibleNotifications.length === 0 && (
+            <p className="mt-3 font-mono text-xs text-mathua-muted">Loading notifications.</p>
+          )}
+
+          {!notificationLoading && visibleNotifications.length === 0 && !notificationError && (
+            <p className="mt-3 border border-mathua-border bg-mathua-surface p-4 text-sm text-mathua-secondary">
+              {notificationUnreadOnly
+                ? 'No unread notifications.'
+                : 'No notifications yet. Reminders and updates will appear here.'}
+            </p>
+          )}
+
+          {visibleNotifications.length > 0 && (
+            <ul className="mt-3 space-y-3">
+              {visibleNotifications.map(notification => (
+                <li key={notification.id} className="border border-mathua-border bg-mathua-surface p-4">
+                  <div className="flex flex-wrap items-baseline justify-between gap-2">
+                    <div className="flex min-w-0 items-baseline gap-2">
+                      {!notification.read && <span className="h-2 w-2 shrink-0 rounded-full bg-mathua-blue" aria-label="Unread notification" />}
+                      {notification.href ? (
+                        <Link
+                          href={notification.href}
+                          onClick={() => void handleNotificationRead(notification)}
+                          className="font-mono text-xs text-mathua-primary underline underline-offset-2 hover:text-mathua-blue"
+                        >
+                          {notification.title}
+                        </Link>
+                      ) : (
+                        <span className="font-mono text-xs text-mathua-primary">{notification.title}</span>
+                      )}
+                    </div>
+                    <span className="font-mono text-[10px] text-mathua-muted">{fmtDate(notification.created_at)}</span>
+                  </div>
+                  {notification.body && (
+                    <p className="mt-2 text-sm text-mathua-secondary">{notification.body}</p>
+                  )}
+                  {!notification.read && !notification.href && (
+                    <button
+                      type="button"
+                      onClick={() => void handleNotificationRead(notification)}
+                      className="mt-2 font-mono text-[11px] text-mathua-muted underline underline-offset-2 hover:text-mathua-blue"
+                    >
+                      Mark read
+                    </button>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {notificationHasMore && (
+            <button
+              type="button"
+              onClick={handleNotificationMore}
+              disabled={notificationLoading}
+              className="mt-3 border border-mathua-border px-4 h-9 font-mono text-xs text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue disabled:opacity-50"
+            >
+              {notificationLoading ? 'Loading…' : 'Load more'}
+            </button>
+          )}
+        </section>
+
         {confirmClear && (
           <div className="mt-6 border border-mathua-border bg-mathua-surface p-4">
             <p className="text-sm text-mathua-secondary">
-              Clear your notifications? Your report history will be cleared and announcements will leave
+              Clear your reports and announcements? Your report history will be cleared and announcements will leave
               your feed. The reports themselves stay with moderation.
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
@@ -175,7 +365,7 @@ export default function MyReportsPage() {
                 disabled={clearing}
                 className="border border-mathua-red px-3 h-9 font-mono text-xs text-mathua-red disabled:opacity-50"
               >
-                {clearing ? 'Clearing…' : 'Yes, clear notifications'}
+                {clearing ? 'Clearing…' : 'Yes, clear reports and announcements'}
               </button>
               <button
                 type="button"

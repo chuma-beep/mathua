@@ -13,6 +13,8 @@ const deleteIdentityMock = vi.fn()
 const createLinkTokenMock = vi.fn()
 const requestEmailVerificationMock = vi.fn()
 const startOAuthLoginMock = vi.fn()
+const getNotificationPreferencesMock = vi.fn()
+const updateNotificationPreferencesMock = vi.fn()
 
 let mockUser: { student_id: string; name: string; username: string } | null = {
   student_id: 's1',
@@ -30,6 +32,8 @@ vi.mock('next/navigation', () => ({
 vi.mock('../lib/api', () => ({
   getSettings: (...a: unknown[]) => getSettingsMock(...a),
   updateSettings: (...a: unknown[]) => updateSettingsMock(...a),
+  getNotificationPreferences: (...a: unknown[]) => getNotificationPreferencesMock(...a),
+  updateNotificationPreferences: (...a: unknown[]) => updateNotificationPreferencesMock(...a),
   updateProfileName: (...a: unknown[]) => updateProfileNameMock(...a),
   changePassword: (...a: unknown[]) => changePasswordMock(...a),
   getIdentities: (...a: unknown[]) => getIdentitiesMock(...a),
@@ -68,6 +72,25 @@ vi.mock('../components/Footer', () => ({ default: () => <div data-testid="footer
 import SettingsPage from '../app/settings/page'
 import { DICEBEAR_STYLES } from '../lib/dicebear'
 
+const defaultNotificationPrefs = {
+  student_id: 's1',
+  email_enabled: false,
+  in_app_enabled: true,
+  reviews_enabled: true,
+  study_enabled: false,
+  milestones_enabled: true,
+  inactivity_enabled: false,
+  preferred_time_min: 1080,
+  study_days: '',
+  study_time_min: 1080,
+  timezone: 'UTC',
+  quiet_start_min: 1320,
+  quiet_end_min: 420,
+  paused_until: null,
+  created_at: '2026-11-01T00:00:00Z',
+  updated_at: '2026-11-01T00:00:00Z',
+}
+
 describe('Settings Profile section', () => {
   beforeEach(() => {
     mockUser = { student_id: 's1', name: 'Ada', username: 'ada' }
@@ -82,6 +105,8 @@ describe('Settings Profile section', () => {
     changePasswordMock.mockReset().mockResolvedValue(undefined)
     uploadAvatarMock.mockReset().mockResolvedValue(undefined)
     deleteAvatarMock.mockReset().mockResolvedValue(undefined)
+    getNotificationPreferencesMock.mockReset().mockResolvedValue(defaultNotificationPrefs)
+    updateNotificationPreferencesMock.mockReset().mockImplementation(async (prefs: typeof defaultNotificationPrefs) => prefs)
     setUserInfoMock.mockClear()
   })
 
@@ -302,6 +327,17 @@ describe('Settings Profile section', () => {
   // this value also removes a navigation destination, so a failed save has to
   // put the previous choice back rather than leave the app claiming a state the
   // server never stored.
+  it('saves the in-app notification preference through the Phase 1 API', async () => {
+    render(<SettingsPage />)
+    const toggle = await screen.findByRole('switch', { name: 'Toggle in-app notifications' })
+    fireEvent.click(toggle)
+    await waitFor(() =>
+      expect(updateNotificationPreferencesMock).toHaveBeenCalledWith(
+        expect.objectContaining({ student_id: 's1', in_app_enabled: false }),
+      ),
+    )
+  })
+
   it('reverts the privacy choice when the save fails', async () => {
     updateSettingsMock.mockRejectedValue(new Error('offline'))
     render(<SettingsPage />)

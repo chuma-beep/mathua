@@ -1,6 +1,7 @@
 package storage
 
 import (
+	"errors"
 	"fmt"
 	"testing"
 	"time"
@@ -325,6 +326,107 @@ func TestNotificationPreferencesEnsureIsIdempotent(t *testing.T) {
 	}
 	if count != 1 {
 		t.Errorf("notification_preferences rows = %d, want 1", count)
+	}
+}
+
+func TestNotificationFeedStorage(t *testing.T) {
+	store := newTestStore(t)
+	ns := notificationStore(t, store)
+	learner := seedStudent(t, store)
+	other := seedStudent(t, store)
+
+	base := time.Now().UTC().Truncate(time.Second)
+	items := []*Notification{
+		{ID: "n-old", StudentID: learner.ID, Kind: "review", DedupeKey: "old", Title: "Old", CreatedAt: base.Add(-3 * time.Hour)},
+		{ID: "n-a", StudentID: learner.ID, Kind: "review", DedupeKey: "a", Title: "A", CreatedAt: base.Add(-time.Hour)},
+		{ID: "n-b", StudentID: learner.ID, Kind: "review", DedupeKey: "b", Title: "B", CreatedAt: base.Add(-time.Hour)},
+		{ID: "n-canceled", StudentID: learner.ID, Kind: "review", DedupeKey: "canceled", Title: "Canceled", CreatedAt: base, CanceledAt: base},
+		{ID: "n-other", StudentID: other.ID, Kind: "review", DedupeKey: "other", Title: "Other", CreatedAt: base},
+	}
+	for _, item := range items {
+		created, err := ns.CreateNotification(item)
+		if err != nil {
+			t.Fatalf("create %s: %v", item.ID, err)
+		}
+		if !created {
+			t.Errorf("create %s reported duplicate", item.ID)
+		}
+	}
+	// The dedupe key is per learner, and a retry must not create a second row.
+	dup, err := ns.CreateNotification(&Notification{
+		ID: "n-duplicate", StudentID: learner.ID, Kind: "review", DedupeKey: "a", Title: "Duplicate",
+		CreatedAt: base,
+	})
+	if err != nil {
+		t.Fatalf("create duplicate: %v", err)
+	}
+	if dup {
+		t.Error("duplicate dedupe key created a row")
+	}
+
+	page, err := ns.ListNotifications(learner.ID, NotificationListOptions{Limit: 2})
+	if err != nil {
+		t.Fatalf("list first page: %v", err)
+	}
+	if len(page.Notifications) != 2 || !page.HasMore {
+		t.Fatalf("first page = %+v, want two items and more", page)
+	}
+	// Same-second rows order by id descending, and canceled/other rows never
+	// appear.
+	if page.Notifications[0].ID != "n-b" || page.Notifications[1].ID != "n-a" {
+		t.Fatalf("first page order = %+v, want n-b, n-a", page.Notifications)
+	}
+	last := page.Notifications[len(page.Notifications)-1]
+	next, err := ns.ListNotifications(learner.ID, NotificationListOptions{
+		Limit:           2,
+		BeforeCreatedAt: last.CreatedAt.Unix(),
+		BeforeID:        last.ID,
+	})
+	if err != nil {
+		t.Fatalf("list next page: %v", err)
+	}
+	if len(next.Notifications) != 1 || next.Notifications[0].ID != "n-old" || next.HasMore {
+		t.Fatalf("next page = %+v, want n-old only", next)
+	}
+	for _, n := range append(page.Notifications, next.Notifications...) {
+		if n.ID == "n-canceled" || n.ID == "n-other" {
+			t.Fatalf("list returned excluded notification %s", n.ID)
+		}
+	}
+
+	unread, err := ns.NotificationUnreadCount(learner.ID)
+	if err != nil || unread != 3 {
+		t.Fatalf("unread = %d (%v), want 3", unread, err)
+	}
+	if err := ns.MarkNotificationRead(learner.ID, "n-b", time.Now().UTC()); err != nil {
+		t.Fatalf("mark read: %v", err)
+	}
+	if unread, _ = ns.NotificationUnreadCount(learner.ID); unread != 2 {
+		t.Fatalf("unread after one read = %d, want 2", unread)
+	}
+	// Already read is idempotent; another learner's id is not found.
+	if err := ns.MarkNotificationRead(learner.ID, "n-b", time.Now().UTC()); err != nil {
+		t.Fatalf("repeat mark read: %v", err)
+	}
+	if err := ns.MarkNotificationRead(other.ID, "n-a", time.Now().UTC()); !errors.Is(err, ErrNotificationNotFound) {
+		t.Fatalf("foreign mark read = %v, want ErrNotificationNotFound", err)
+	}
+	unreadOnly, err := ns.ListNotifications(learner.ID, NotificationListOptions{Limit: 10, UnreadOnly: true})
+	if err != nil {
+		t.Fatalf("list unread: %v", err)
+	}
+	if len(unreadOnly.Notifications) != 2 {
+		t.Fatalf("unread list = %+v, want 2", unreadOnly.Notifications)
+	}
+
+	if err := ns.MarkAllNotificationsRead(learner.ID, time.Now().UTC()); err != nil {
+		t.Fatalf("mark all read: %v", err)
+	}
+	if unread, _ = ns.NotificationUnreadCount(learner.ID); unread != 0 {
+		t.Fatalf("learner unread after mark all = %d, want 0", unread)
+	}
+	if unread, _ = ns.NotificationUnreadCount(other.ID); unread != 1 {
+		t.Fatalf("other unread after mark all = %d, want 1", unread)
 	}
 }
 

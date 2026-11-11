@@ -11,7 +11,7 @@ import DailyGoalControl from '../../components/DailyGoalControl'
 import PlanEditor from '../../components/PlanEditor'
 import { Input } from '@/components/ui/input'
 import Footer from '../../components/Footer'
-import { getSettings, getScores, updateSettings, updateProfileName, changePassword, uploadAvatar, deleteAvatar, avatarImageUrl, getIdentities, deleteIdentity, createLinkToken, requestEmailVerification, startOAuthLogin, getConfig, OAUTH_LABELS, type OAuthProvider, enableShare, disableShare, type UserSettings } from '../../lib/api'
+import { getSettings, getScores, updateSettings, updateProfileName, changePassword, uploadAvatar, deleteAvatar, avatarImageUrl, getIdentities, deleteIdentity, createLinkToken, requestEmailVerification, startOAuthLogin, getConfig, OAUTH_LABELS, type OAuthProvider, enableShare, disableShare, type UserSettings, getNotificationPreferences, updateNotificationPreferences, type NotificationPreferences } from '../../lib/api'
 import { isLoggedIn, getUserInfo, setUserInfo } from '../../lib/auth'
 import { DICEBEAR_STYLES, dicebearUrl, randomDicebear, type DicebearPick } from '../../lib/dicebear'
 import { Switch } from '../../components/ui/switch'
@@ -35,6 +35,35 @@ const LEADERBOARD_PRIVACY_CHOICES: { value: LeaderboardPrivacy; label: string }[
   { value: 'anonymous', label: 'Show as anonymous' },
   { value: 'hidden', label: 'Turn off leaderboards' },
 ]
+
+const STUDY_DAYS = [
+  { value: 'mon', label: 'Mon' },
+  { value: 'tue', label: 'Tue' },
+  { value: 'wed', label: 'Wed' },
+  { value: 'thu', label: 'Thu' },
+  { value: 'fri', label: 'Fri' },
+  { value: 'sat', label: 'Sat' },
+  { value: 'sun', label: 'Sun' },
+]
+
+function minuteToClock(min: number): string {
+  const hour = Math.floor(min / 60)
+  const minute = min % 60
+  return `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`
+}
+
+function clockToMinute(value: string): number {
+  const [hour, minute] = value.split(':').map(Number)
+  if (!Number.isFinite(hour) || !Number.isFinite(minute)) return 0
+  return Math.max(0, Math.min(1439, hour * 60 + minute))
+}
+
+function toggleStudyDay(days: string, day: string): string {
+  const current = new Set(days.split(',').map(d => d.trim()).filter(Boolean))
+  if (current.has(day)) current.delete(day)
+  else current.add(day)
+  return STUDY_DAYS.map(d => d.value).filter(d => current.has(d)).join(',')
+}
 
 export default function SettingsPage() {
   const { push } = useRouter()
@@ -69,6 +98,10 @@ export default function SettingsPage() {
   const [friendsEnabled, setFriendsEnabled] = useState(false)
   const [verifyMsg, setVerifyMsg] = useState('')
   const [verifyBusy, setVerifyBusy] = useState(false)
+  const [notificationPrefs, setNotificationPrefs] = useState<NotificationPreferences | null>(null)
+  const [notificationPrefsBusy, setNotificationPrefsBusy] = useState(false)
+  const [notificationPrefsMsg, setNotificationPrefsMsg] = useState('')
+  const [notificationTimezoneDraft, setNotificationTimezoneDraft] = useState('')
 
   useEffect(() => {
     if (!isLoggedIn()) {
@@ -94,6 +127,12 @@ export default function SettingsPage() {
         setProviders(cfg.providers.filter((p): p is OAuthProvider => p in OAUTH_LABELS))
       }
     }).catch(() => {})
+    getNotificationPreferences()
+      .then(prefs => {
+        setNotificationPrefs(prefs)
+        setNotificationTimezoneDraft(prefs.timezone)
+      })
+      .catch(() => setNotificationPrefsMsg('Notification preferences could not be loaded.'))
     setDisplayName(getUserInfo()?.name ?? '')
     setRecoveryEmail(getUserInfo()?.email ?? '')
     try {
@@ -188,6 +227,32 @@ export default function SettingsPage() {
   }
 
   const friendsVisibility = settings.friends_visibility ?? 'friends'
+
+  const saveNotificationPrefs = async (next: NotificationPreferences) => {
+    const previous = notificationPrefs
+    setNotificationPrefs(next)
+    setNotificationPrefsBusy(true)
+    setNotificationPrefsMsg('')
+    try {
+      const saved = await updateNotificationPreferences(next)
+      setNotificationPrefs(saved)
+      setNotificationTimezoneDraft(saved.timezone)
+      setNotificationPrefsMsg('Saved.')
+      window.dispatchEvent(new Event('notifications-changed'))
+      setTimeout(() => setNotificationPrefsMsg(''), 2000)
+    } catch (e) {
+      setNotificationPrefs(previous)
+      setNotificationPrefsMsg(e instanceof Error ? e.message : 'Could not save notification preferences.')
+      setTimeout(() => setNotificationPrefsMsg(''), 4000)
+    } finally {
+      setNotificationPrefsBusy(false)
+    }
+  }
+
+  const patchNotificationPrefs = (patch: Partial<NotificationPreferences>) => {
+    if (!notificationPrefs || notificationPrefsBusy) return
+    void saveNotificationPrefs({ ...notificationPrefs, ...patch })
+  }
 
   const paused = !!settings.pause_until
   const pausedLabel = (() => {
@@ -512,6 +577,212 @@ export default function SettingsPage() {
                     </button>
                   )}
                 </div>
+              </div>
+
+              <div className="border-t border-mathua-border pt-6 min-w-0">
+                <span className="font-mono text-sm text-mathua-primary">Notifications</span>
+                <p className="text-mathua-muted text-xs mt-1">
+                  Choose what Mathua may remind you about. In-app items appear in your notifications centre. Email delivery is not enabled yet.
+                </p>
+                {!notificationPrefs ? (
+                  <p className="mt-3 font-mono text-[11px] text-mathua-muted">
+                    {notificationPrefsMsg || 'Loading notification preferences.'}
+                  </p>
+                ) : (
+                  <div className="mt-3 space-y-3">
+                    <div className="flex items-center justify-between gap-4 min-w-0">
+                      <div className="min-w-0">
+                        <span className="font-mono text-xs text-mathua-primary">In-app notifications</span>
+                        <p className="text-mathua-muted text-[11px] mt-0.5">Reminders and updates in your notifications centre.</p>
+                      </div>
+                      <Switch
+                        checked={notificationPrefs.in_app_enabled}
+                        disabled={notificationPrefsBusy}
+                        onCheckedChange={checked => patchNotificationPrefs({ in_app_enabled: checked })}
+                        aria-label="Toggle in-app notifications"
+                      />
+                    </div>
+
+                    <div className="flex items-center justify-between gap-4 min-w-0">
+                      <div className="min-w-0">
+                        <span className="font-mono text-xs text-mathua-primary">Reviews due</span>
+                        <p className="text-mathua-muted text-[11px] mt-0.5">A nudge when spaced review is waiting.</p>
+                      </div>
+                      <Switch
+                        checked={notificationPrefs.reviews_enabled}
+                        disabled={notificationPrefsBusy}
+                        onCheckedChange={checked => patchNotificationPrefs({ reviews_enabled: checked })}
+                        aria-label="Toggle review reminders"
+                      />
+                    </div>
+
+                    <div className="flex items-center justify-between gap-4 min-w-0">
+                      <div className="min-w-0">
+                        <span className="font-mono text-xs text-mathua-primary">Milestones</span>
+                        <p className="text-mathua-muted text-[11px] mt-0.5">Mastery thresholds and goal completion.</p>
+                      </div>
+                      <Switch
+                        checked={notificationPrefs.milestones_enabled}
+                        disabled={notificationPrefsBusy}
+                        onCheckedChange={checked => patchNotificationPrefs({ milestones_enabled: checked })}
+                        aria-label="Toggle milestone notifications"
+                      />
+                    </div>
+
+                    <div className="flex items-center justify-between gap-4 min-w-0">
+                      <div className="min-w-0">
+                        <span className="font-mono text-xs text-mathua-primary">Inactivity</span>
+                        <p className="text-mathua-muted text-[11px] mt-0.5">A return reminder after a few quiet days.</p>
+                      </div>
+                      <Switch
+                        checked={notificationPrefs.inactivity_enabled}
+                        disabled={notificationPrefsBusy}
+                        onCheckedChange={checked => patchNotificationPrefs({ inactivity_enabled: checked })}
+                        aria-label="Toggle inactivity notifications"
+                      />
+                    </div>
+
+                    <div className="border-t border-mathua-border pt-3">
+                      <div className="flex items-center justify-between gap-4 min-w-0">
+                        <div className="min-w-0">
+                          <span className="font-mono text-xs text-mathua-primary">Study reminders</span>
+                          <p className="text-mathua-muted text-[11px] mt-0.5">A reminder on the days you choose.</p>
+                        </div>
+                        <Switch
+                          checked={notificationPrefs.study_enabled}
+                          disabled={notificationPrefsBusy}
+                          onCheckedChange={checked => patchNotificationPrefs({
+                            study_enabled: checked,
+                            ...(checked && !notificationPrefs.study_days ? { study_days: 'mon,tue,wed,thu,fri' } : {}),
+                          })}
+                          aria-label="Toggle study reminders"
+                        />
+                      </div>
+                      {notificationPrefs.study_enabled && (
+                        <div className="mt-3 space-y-3">
+                          <div>
+                            <span className="font-mono text-[11px] text-mathua-muted">Days</span>
+                            <div className="mt-1 flex flex-wrap gap-1.5">
+                              {STUDY_DAYS.map(day => {
+                                const selected = notificationPrefs.study_days.split(',').includes(day.value)
+                                return (
+                                  <button
+                                    key={day.value}
+                                    type="button"
+                                    aria-pressed={selected}
+                                    disabled={notificationPrefsBusy}
+                                    onClick={() => patchNotificationPrefs({ study_days: toggleStudyDay(notificationPrefs.study_days, day.value) })}
+                                    className={`border px-2.5 h-8 font-mono text-[11px] disabled:opacity-50 ${selected ? 'border-mathua-blue text-mathua-blue bg-mathua-blue-faint' : 'border-mathua-border text-mathua-secondary'}`}
+                                  >
+                                    {day.label}
+                                  </button>
+                                )
+                              })}
+                            </div>
+                          </div>
+                          <label className="flex items-center justify-between gap-4 min-w-0">
+                            <span className="font-mono text-xs text-mathua-secondary">Study time</span>
+                            <input
+                              type="time"
+                              value={minuteToClock(notificationPrefs.study_time_min)}
+                              disabled={notificationPrefsBusy}
+                              onChange={e => patchNotificationPrefs({ study_time_min: clockToMinute(e.target.value) })}
+                              className="bg-mathua-code border border-mathua-border h-9 px-2 font-mono text-xs text-mathua-primary disabled:opacity-50"
+                            />
+                          </label>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="border-t border-mathua-border pt-3 space-y-3">
+                      <div className="flex items-center justify-between gap-4 min-w-0">
+                        <div className="min-w-0">
+                          <span className="font-mono text-xs text-mathua-primary">Email</span>
+                          <p className="text-mathua-muted text-[11px] mt-0.5">Requires a verified email. Delivery will be enabled in a later phase.</p>
+                        </div>
+                        <Switch
+                          checked={notificationPrefs.email_enabled}
+                          disabled={notificationPrefsBusy}
+                          onCheckedChange={checked => patchNotificationPrefs({ email_enabled: checked })}
+                          aria-label="Toggle email notifications"
+                        />
+                      </div>
+                      <label className="flex items-center justify-between gap-4 min-w-0">
+                        <span className="font-mono text-xs text-mathua-secondary">Review reminder time</span>
+                        <input
+                          type="time"
+                          value={minuteToClock(notificationPrefs.preferred_time_min)}
+                          disabled={notificationPrefsBusy}
+                          onChange={e => patchNotificationPrefs({ preferred_time_min: clockToMinute(e.target.value) })}
+                          className="bg-mathua-code border border-mathua-border h-9 px-2 font-mono text-xs text-mathua-primary disabled:opacity-50"
+                        />
+                      </label>
+                      <div className="flex flex-wrap items-center justify-between gap-3 min-w-0">
+                        <span className="font-mono text-xs text-mathua-secondary">Quiet hours</span>
+                        <div className="flex items-center gap-2">
+                          <input
+                            type="time"
+                            aria-label="Quiet hours start"
+                            value={minuteToClock(notificationPrefs.quiet_start_min)}
+                            disabled={notificationPrefsBusy}
+                            onChange={e => patchNotificationPrefs({ quiet_start_min: clockToMinute(e.target.value) })}
+                            className="bg-mathua-code border border-mathua-border h-9 px-2 font-mono text-xs text-mathua-primary disabled:opacity-50"
+                          />
+                          <span className="font-mono text-[11px] text-mathua-muted">to</span>
+                          <input
+                            type="time"
+                            aria-label="Quiet hours end"
+                            value={minuteToClock(notificationPrefs.quiet_end_min)}
+                            disabled={notificationPrefsBusy}
+                            onChange={e => patchNotificationPrefs({ quiet_end_min: clockToMinute(e.target.value) })}
+                            className="bg-mathua-code border border-mathua-border h-9 px-2 font-mono text-xs text-mathua-primary disabled:opacity-50"
+                          />
+                        </div>
+                      </div>
+                      <label className="block min-w-0">
+                        <span className="font-mono text-xs text-mathua-secondary">Timezone</span>
+                        <input
+                          type="text"
+                          value={notificationTimezoneDraft}
+                          disabled={notificationPrefsBusy}
+                          onChange={e => setNotificationTimezoneDraft(e.target.value)}
+                          onBlur={() => {
+                            if (notificationTimezoneDraft.trim() && notificationTimezoneDraft !== notificationPrefs.timezone) {
+                              patchNotificationPrefs({ timezone: notificationTimezoneDraft.trim() })
+                            }
+                          }}
+                          placeholder="America/New_York"
+                          className="mt-1 w-full bg-mathua-code border border-mathua-border h-9 px-3 font-mono text-xs text-mathua-primary focus:outline-none focus:border-mathua-blue disabled:opacity-50"
+                        />
+                      </label>
+                      <label className="flex items-center justify-between gap-4 min-w-0">
+                        <span className="font-mono text-xs text-mathua-secondary">Pause notifications until</span>
+                        <input
+                          type="date"
+                          value={notificationPrefs.paused_until ? notificationPrefs.paused_until.slice(0, 10) : ''}
+                          disabled={notificationPrefsBusy}
+                          onChange={e => patchNotificationPrefs({
+                            paused_until: e.target.value ? `${e.target.value}T23:59:00Z` : null,
+                          })}
+                          className="bg-mathua-code border border-mathua-border h-9 px-2 font-mono text-xs text-mathua-primary disabled:opacity-50"
+                        />
+                      </label>
+                      {notificationPrefs.paused_until && (
+                        <button
+                          type="button"
+                          disabled={notificationPrefsBusy}
+                          onClick={() => patchNotificationPrefs({ paused_until: null })}
+                          className="font-mono text-[11px] text-mathua-muted underline underline-offset-2 hover:text-mathua-blue disabled:opacity-50"
+                        >
+                          Resume notifications now
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                )}
+                {notificationPrefsMsg && (
+                  <p className="mt-3 font-mono text-[11px] text-mathua-secondary">{notificationPrefsMsg}</p>
+                )}
               </div>
 
               <div className="border-t border-mathua-border pt-6 min-w-0">

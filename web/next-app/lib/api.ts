@@ -2309,6 +2309,100 @@ export async function markAnnouncementsRead(): Promise<void> {
 	if (!res.ok) await throwWithResponse(res, 'Could not mark announcements as read')
 }
 
+const AppNotificationSchema = z.object({
+	id: z.string(),
+	kind: z.string(),
+	title: z.string(),
+	body: z.string(),
+	href: z.string(),
+	created_at: z.string(),
+	read: z.boolean(),
+	read_at: z.string().optional(),
+})
+export type AppNotification = z.infer<typeof AppNotificationSchema>
+
+export interface NotificationPage {
+	notifications: AppNotification[]
+	unread: number
+	has_more: boolean
+	next_cursor: string
+}
+
+export async function listNotifications(opts: { limit?: number; cursor?: string; unreadOnly?: boolean } = {}): Promise<NotificationPage> {
+	const qs = new URLSearchParams()
+	if (opts.limit) qs.set('limit', String(opts.limit))
+	if (opts.cursor) qs.set('cursor', opts.cursor)
+	if (opts.unreadOnly) qs.set('unread', 'true')
+	const suffix = qs.toString() ? `?${qs.toString()}` : ''
+	const res = await authedFetch(`${API_BASE}/api/notifications${suffix}`, { cache: 'no-store' })
+	if (!res.ok) await throwWithResponse(res, 'Could not load notifications')
+	const data = (await res.json()) as { notifications?: unknown; unread?: unknown; has_more?: unknown; next_cursor?: unknown }
+	return {
+		notifications: validateResponse(z.array(AppNotificationSchema), data.notifications ?? [], 'notifications'),
+		unread: typeof data.unread === 'number' ? data.unread : 0,
+		has_more: data.has_more === true,
+		next_cursor: typeof data.next_cursor === 'string' ? data.next_cursor : '',
+	}
+}
+
+export async function getNotificationUnreadCount(): Promise<number> {
+	const res = await authedFetch(`${API_BASE}/api/notifications/unread-count`, { cache: 'no-store' })
+	if (!res.ok) await throwWithResponse(res, 'Could not count notifications')
+	const data = (await res.json()) as { unread?: unknown }
+	return typeof data.unread === 'number' ? data.unread : 0
+}
+
+export async function markNotificationRead(id: string): Promise<number> {
+	const res = await authedFetch(`${API_BASE}/api/notifications/read`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ id }),
+	})
+	if (!res.ok) await throwWithResponse(res, 'Could not mark notification read')
+	const data = (await res.json()) as { unread?: unknown }
+	return typeof data.unread === 'number' ? data.unread : 0
+}
+
+export async function markAllNotificationsRead(): Promise<void> {
+	const res = await authedFetch(`${API_BASE}/api/notifications/read-all`, { method: 'POST' })
+	if (!res.ok) await throwWithResponse(res, 'Could not mark notifications read')
+}
+
+export interface NotificationPreferences {
+	student_id: string
+	email_enabled: boolean
+	in_app_enabled: boolean
+	reviews_enabled: boolean
+	study_enabled: boolean
+	milestones_enabled: boolean
+	inactivity_enabled: boolean
+	preferred_time_min: number
+	study_days: string
+	study_time_min: number
+	timezone: string
+	quiet_start_min: number
+	quiet_end_min: number
+	paused_until?: string | null
+	created_at?: string
+	updated_at?: string
+}
+
+export async function getNotificationPreferences(): Promise<NotificationPreferences> {
+	const res = await authedFetch(`${API_BASE}/api/notifications/preferences`, { cache: 'no-store' })
+	if (!res.ok) await throwWithResponse(res, 'Could not load notification preferences')
+	return (await res.json()) as NotificationPreferences
+}
+
+export async function updateNotificationPreferences(prefs: NotificationPreferences): Promise<NotificationPreferences> {
+	const res = await authedFetch(`${API_BASE}/api/notifications/preferences`, {
+		method: 'PUT',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(prefs),
+	})
+	if (!res.ok) await throwWithResponse(res, 'Could not save notification preferences')
+	return (await res.json()) as NotificationPreferences
+}
+
 export async function clearAnnouncements(): Promise<void> {
 	const res = await authedFetch(`${API_BASE}/api/announcements/clear`, { method: 'POST' })
 	if (!res.ok) await throwWithResponse(res, 'Could not clear announcements')

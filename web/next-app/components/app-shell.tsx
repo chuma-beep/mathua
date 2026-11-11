@@ -8,7 +8,7 @@ import BottomTabs from './BottomTabs'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from './ui/sidebar'
 import { useAuthState } from '../hooks/useAuthState'
 import { isStaffRole } from '../lib/auth'
-import { adminOverview, getConfig, getDueReviews, getSettings, listAnnouncements, listMyReports } from '../lib/api'
+import { adminOverview, getConfig, getDueReviews, getNotificationUnreadCount, getSettings, listAnnouncements, listMyReports } from '../lib/api'
 import { resolveAvatar } from '../lib/dicebear'
 
 type AppShellProps = {
@@ -122,7 +122,11 @@ export default function AppShell({ children, ...overrides }: AppShellProps) {
     }
     let live = true
     const load = async () => {
-      const [reports, announcements] = await Promise.allSettled([listMyReports(), listAnnouncements()])
+      const [reports, announcements, notifications] = await Promise.allSettled([
+        listMyReports(),
+        listAnnouncements(),
+        getNotificationUnreadCount(),
+      ])
       if (!live) return
       let total = 0
       let loaded = false
@@ -134,6 +138,10 @@ export default function AppShell({ children, ...overrides }: AppShellProps) {
         total += announcements.value.unread
         loaded = true
       }
+      if (notifications.status === 'fulfilled') {
+        total += notifications.value
+        loaded = true
+      }
       // A failed count must not take the shell down.
       if (loaded) setNotificationUnread(total)
     }
@@ -143,12 +151,14 @@ export default function AppShell({ children, ...overrides }: AppShellProps) {
     }
     window.addEventListener('report-updates-changed', load)
     window.addEventListener('announcements-changed', load)
+    window.addEventListener('notifications-changed', load)
     window.addEventListener('focus', load)
     document.addEventListener('visibilitychange', onVisible)
     return () => {
       live = false
       window.removeEventListener('report-updates-changed', load)
       window.removeEventListener('announcements-changed', load)
+      window.removeEventListener('notifications-changed', load)
       window.removeEventListener('focus', load)
       document.removeEventListener('visibilitychange', onVisible)
     }

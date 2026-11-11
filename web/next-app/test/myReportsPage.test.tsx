@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, waitFor, fireEvent } from '@testing-library/react'
 import MyReportsPage from '../app/my-reports/page'
-import { clearAnnouncements, clearMyReports, listAnnouncements, listMyReports, markAnnouncementsRead, markMyReportsRead } from '../lib/api'
+import { clearAnnouncements, clearMyReports, listAnnouncements, listMyReports, listNotifications, markAllNotificationsRead, markAnnouncementsRead, markMyReportsRead, markNotificationRead } from '../lib/api'
 import type { QuestionReport } from '../lib/api'
 
 vi.mock('../lib/api', async (importOriginal) => ({
@@ -12,6 +12,9 @@ vi.mock('../lib/api', async (importOriginal) => ({
   listAnnouncements: vi.fn(),
   markAnnouncementsRead: vi.fn(),
   clearAnnouncements: vi.fn(),
+  listNotifications: vi.fn(),
+  markNotificationRead: vi.fn(),
+  markAllNotificationsRead: vi.fn(),
 }))
 
 vi.mock('../hooks/useAuthState', () => ({
@@ -59,6 +62,9 @@ beforeEach(() => {
   vi.mocked(listAnnouncements).mockResolvedValue({ unread: 0, announcements: [] })
   vi.mocked(markAnnouncementsRead).mockResolvedValue(undefined)
   vi.mocked(clearAnnouncements).mockResolvedValue(undefined)
+  vi.mocked(listNotifications).mockResolvedValue({ notifications: [], unread: 0, has_more: false, next_cursor: '' })
+  vi.mocked(markNotificationRead).mockResolvedValue(0)
+  vi.mocked(markAllNotificationsRead).mockResolvedValue(undefined)
 })
 
 describe('the learner report history', () => {
@@ -168,9 +174,9 @@ describe('the learner report history', () => {
     })
     render(<MyReportsPage />)
 
-    fireEvent.click(await screen.findByRole('button', { name: 'Clear notifications' }))
-    expect(screen.getByText(/Clear your notifications/)).toBeTruthy()
-    fireEvent.click(screen.getByRole('button', { name: 'Yes, clear notifications' }))
+    fireEvent.click(await screen.findByRole('button', { name: 'Clear reports and announcements' }))
+    expect(screen.getByText(/Clear your reports and announcements/)).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Yes, clear reports and announcements' }))
 
     await waitFor(() => expect(clearMyReports).toHaveBeenCalledTimes(1))
     expect(clearAnnouncements).toHaveBeenCalledTimes(1)
@@ -196,7 +202,7 @@ describe('the learner report history', () => {
     })
     render(<MyReportsPage />)
 
-    expect(await screen.findByRole('button', { name: 'Clear notifications' })).toBeTruthy()
+    expect(await screen.findByRole('button', { name: 'Clear reports and announcements' })).toBeTruthy()
   })
 
   it('explains the empty state without pretending there is history', async () => {
@@ -205,5 +211,81 @@ describe('the learner report history', () => {
 
     expect(await screen.findByText(/You have not reported a problem yet/)).toBeTruthy()
     expect(markMyReportsRead).not.toHaveBeenCalled()
+  })
+
+  it('renders the notification feed and marks all items read', async () => {
+    vi.mocked(listMyReports).mockResolvedValue({ unread: 0, reports: [] })
+    vi.mocked(listNotifications).mockResolvedValue({
+      unread: 1,
+      next_cursor: '',
+      has_more: false,
+      notifications: [
+        {
+          id: 'n1',
+          kind: 'review',
+          title: 'Reviews are waiting',
+          body: 'You have 4 due reviews.',
+          href: '/review',
+          created_at: '2026-11-10T18:00:00Z',
+          read: false,
+        },
+        {
+          id: 'n2',
+          kind: 'milestone',
+          title: 'First mastery',
+          body: 'You mastered your first concept.',
+          href: '',
+          created_at: '2026-11-09T18:00:00Z',
+          read: true,
+        },
+      ],
+    })
+    render(<MyReportsPage />)
+
+    expect(await screen.findByText('Reviews are waiting')).toBeTruthy()
+    expect(screen.getByLabelText('Unread notification')).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Mark all read' }))
+    await waitFor(() => expect(markAllNotificationsRead).toHaveBeenCalledTimes(1))
+    expect(screen.queryByLabelText('Unread notification')).toBeNull()
+  })
+
+  it('loads the next notification page with the cursor', async () => {
+    vi.mocked(listMyReports).mockResolvedValue({ unread: 0, reports: [] })
+    vi.mocked(listNotifications)
+      .mockResolvedValueOnce({
+        unread: 2,
+        has_more: true,
+        next_cursor: 'cursor-1',
+        notifications: [{
+          id: 'n1', kind: 'review', title: 'First page', body: '', href: '',
+          created_at: '2026-11-10T18:00:00Z', read: false,
+        }],
+      })
+      .mockResolvedValueOnce({
+        unread: 2,
+        has_more: false,
+        next_cursor: '',
+        notifications: [{
+          id: 'n2', kind: 'review', title: 'Second page', body: '', href: '',
+          created_at: '2026-11-09T18:00:00Z', read: false,
+        }],
+      })
+    render(<MyReportsPage />)
+
+    expect(await screen.findByText('First page')).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Load more' }))
+    expect(await screen.findByText('Second page')).toBeTruthy()
+    expect(vi.mocked(listNotifications).mock.calls[1][0]).toMatchObject({ cursor: 'cursor-1', unreadOnly: false })
+  })
+
+  it('requests only unread notifications when the filter is selected', async () => {
+    vi.mocked(listMyReports).mockResolvedValue({ unread: 0, reports: [] })
+    render(<MyReportsPage />)
+
+    await screen.findByText('No notifications yet. Reminders and updates will appear here.')
+    fireEvent.click(screen.getByRole('button', { name: /Unread/ }))
+    await waitFor(() => {
+      expect(vi.mocked(listNotifications).mock.calls.some(call => call[0]?.unreadOnly === true)).toBe(true)
+    })
   })
 })

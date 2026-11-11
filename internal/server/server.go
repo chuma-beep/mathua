@@ -561,6 +561,11 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/announcements", logRequest(cors(s.authMiddleware(s.handleAnnouncements))))
 	mux.HandleFunc("/api/announcements/read", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleAnnouncementsRead)))))
 	mux.HandleFunc("/api/announcements/clear", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleAnnouncementsClear)))))
+	mux.HandleFunc("/api/notifications", logRequest(cors(s.authMiddleware(s.handleNotifications))))
+	mux.HandleFunc("/api/notifications/unread-count", logRequest(cors(s.authMiddleware(s.handleNotificationUnreadCount))))
+	mux.HandleFunc("/api/notifications/read", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleNotificationRead)))))
+	mux.HandleFunc("/api/notifications/read-all", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleNotificationsReadAll)))))
+	mux.HandleFunc("/api/notifications/preferences", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleNotificationPreferences)))))
 	// Friends. Every route is behind MATHUA_FRIENDS; the handlers answer 404
 	// rather than pretending the surface is empty when the flag is off.
 	mux.HandleFunc("/api/friends", logRequest(cors(s.authMiddleware(s.handleFriends))))
