@@ -24,9 +24,9 @@ func (g *lpStandardFormGen) Generate(ctx generator.GeneratorContext) generator.P
 		return at(kp, fmt.Sprintf("The constraint %d x + %d y ≤ %d is rewritten in standard form with a slack variable s. At (x, y) = (%d, %d), enter s.", a, b, c, x, y), c-a*x-b*y,
 			fmt.Sprintf("The slack is c - ax - by = %d - %d - %d = %d.", c, a*x, b*y, c-a*x-b*y))
 	case 2:
-		a, b, c := limit(1, 5), limit(1, 5), limit(1, 5)
-		return at(kp, fmt.Sprintf("A standard-form row reads %d x + %d y + s = %d. Enter the coefficient of x.", a, b, c), a,
-			fmt.Sprintf("In standard form each variable has one explicit coefficient, so the coefficient of x is %d.", a))
+		vars, ineq := limit(2, 6), limit(1, 5)
+		return at(kp, fmt.Sprintf("A linear program has %d decision variables and %d inequality constraints. Converting to standard form adds one slack variable per inequality. Enter the number of variables in the standard form.", vars, ineq), vars+ineq,
+			fmt.Sprintf("%d decision variables plus %d slack variables gives %d variables.", vars, ineq, vars+ineq))
 	default:
 		n, m := limit(6, 20), limit(2, 4)
 		return at(kp, fmt.Sprintf("A standard-form linear program has %d variables and %d equality constraints, with a full-rank constraint matrix. Enter the number of nonbasic variables.", n, m), n-m,
@@ -55,9 +55,9 @@ func (g *basicSolutionGen) Generate(ctx generator.GeneratorContext) generator.Pr
 		return at(kp, fmt.Sprintf("A basic solution has x = %d and y = %d, and the constraint is %d x + %d y ≤ %d. Enter its slack.", x, y, a, b, a*x+b*y+slack), slack,
 			fmt.Sprintf("ax + by = %d·%d + %d·%d = %d, so the slack is %d - %d = %d.", a, x, b, y, a*x+b*y, a*x+b*y+slack, a*x+b*y, slack))
 	default:
-		n, m := limit(5, 16), limit(2, 3)
-		return at(kp, fmt.Sprintf("A standard-form LP has %d variables and %d constraints. Enter the number of basic variables in a basic solution.", n, m), m,
-			fmt.Sprintf("A basic solution fixes one basic variable per constraint, so there are %d.", m))
+		n, m := limit(4, 13), limit(2, 4)
+		return at(kp, fmt.Sprintf("A standard-form LP has %d variables and %d constraints. Enter the number of bases, that is the number of ways to choose %d basic columns.", n, m, m), binomial(n, m),
+			fmt.Sprintf("Choosing %d columns from %d gives %d bases.", m, n, binomial(n, m)))
 	}
 }
 
@@ -148,7 +148,9 @@ func (g *weakDualityGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		return at(kp, fmt.Sprintf("A primal feasible objective is %d and a dual feasible objective is %d. Enter the gap.", p, p-d), d,
 			fmt.Sprintf("%d - %d = %d, and weak duality says the gap cannot be negative.", p, p-d, d))
 	case 2:
-		c, a, y := limit(3, 9), limit(2, 6), limit(1, 4)
+		a := limit(1, 4)
+		c := a*limit(1, 5) + limit(0, 4)
+		y := limit(1, c/a)
 		return at(kp, fmt.Sprintf("A dual-feasible y has Aᵀy ≤ c. For a column with a = %d, y = %d and c = %d, enter the reduced cost c - a y.", a, y, c), c-a*y,
 			fmt.Sprintf("The reduced cost is %d - %d·%d = %d, which dual feasibility keeps nonnegative.", c, a, y, c-a*y))
 	default:
@@ -192,18 +194,18 @@ func (g *complementarySlacknessGen) Generate(ctx generator.GeneratorContext) gen
 	kp := ordinal(ctx)
 	switch kp {
 	case 1:
-		x, slack := limit(1, 6), limit(1, 6)
-		mult := limit(1, 4)
-		return at(kp, fmt.Sprintf("At a candidate optimum x = %d, a constraint has slack %d and multiplier %d. Enter the complementary slackness product x·multiplier + slack·multiplier.", x, slack, mult), (x+slack)*mult,
-			fmt.Sprintf("Both terms share the multiplier: (%d + %d)·%d = %d.", x, slack, mult, (x+slack)*mult))
+		slack, mult := limit(0, 6), limit(1, 5)
+		return at(kp, fmt.Sprintf("At a candidate point a constraint has slack %d and multiplier %d. Enter the product multiplier·slack, which complementary slackness requires to be zero at an optimum.", slack, mult), mult*slack,
+			fmt.Sprintf("The product is %d·%d = %d. At an optimum it must vanish, so a nonzero product rejects the candidate.", mult, slack, mult*slack))
 	case 2:
-		slack := limit(1, 30)
-		return at(kp, fmt.Sprintf("A constraint has positive slack %d and complementary slackness must hold. Enter its multiplier.", slack), 0,
-			fmt.Sprintf("Positive slack forces a zero multiplier, because the product slack·multiplier must be zero."))
+		tight, slack := limit(1, 6), limit(1, 9)
+		return at(kp, fmt.Sprintf("At a candidate optimum one constraint is tight with multiplier %d and another has positive slack %d. Complementary slackness forces the second multiplier to zero. Enter the sum of the two multipliers.", tight, slack), tight,
+			fmt.Sprintf("The tight constraint contributes %d and the slack constraint contributes 0, so the sum is %d.", tight, tight))
 	default:
-		a, y, b, x := limit(1, 4), limit(1, 5), limit(1, 9), limit(1, 6)
-		return at(kp, fmt.Sprintf("A multiplier is y = %d, the constraint is %d x ≤ %d and x = %d. Enter y·(%d - %d x).", y, a, b, x, b, a), y*(b-a*x),
-			fmt.Sprintf("The slack is %d - %d·%d = %d, so the complementary term is %d·%d = %d.", b, a, x, b-a*x, y, b-a*x, y*(b-a*x)))
+		a, y, x, slack := limit(1, 4), limit(1, 5), limit(1, 6), limit(0, 9)
+		b := a*x + slack
+		return at(kp, fmt.Sprintf("A multiplier is y = %d, the constraint is %d x ≤ %d and x = %d. Enter y·(%d - %d x).", y, a, b, x, b, a), y*slack,
+			fmt.Sprintf("The slack is %d - %d·%d = %d, so the complementary term is %d·%d = %d.", b, a, x, slack, y, slack, y*slack))
 	}
 }
 
@@ -247,7 +249,7 @@ func (g *lpSensitivityGen) Generate(ctx generator.GeneratorContext) generator.Pr
 	case 2:
 		c, a, y := limit(2, 8), limit(1, 4), limit(1, 5)
 		newC := c + limit(1, 6)
-		return at(kp, fmt.Sprintf("A reduced cost is c - a y with c = %d, a = %d and y = %d. After c rises to %d, enter the new reduced cost.", newC, a, y, c), newC-a*y,
+		return at(kp, fmt.Sprintf("A reduced cost is c - a y with c = %d, a = %d and y = %d. After c rises to %d, enter the new reduced cost.", c, a, y, newC), newC-a*y,
 			fmt.Sprintf("The new reduced cost is %d - %d·%d = %d. A negative value would make the variable enter the basis.", newC, a, y, newC-a*y))
 	default:
 		opt, price, delta := limit(10, 50), limit(1, 5), limit(1, 4)
@@ -277,7 +279,7 @@ func (g *kktGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	default:
 		mult, slack := limit(1, 5), limit(0, 6)
 		return at(kp, fmt.Sprintf("A KKT candidate has multiplier %d and the matching constraint slack %d. Enter the complementary product.", mult, slack), mult*slack,
-			fmt.Sprintf("The product is %d·%d = %d; one of the two must be zero at an optimum.", mult, slack, mult*slack))
+			fmt.Sprintf("The product is %d·%d = %d. At an optimum complementary slackness forces it to zero, so a positive product tells you this candidate fails the condition.", mult, slack, mult*slack))
 	}
 }
 
@@ -299,10 +301,25 @@ func (g *slaterGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 		return at(kp, fmt.Sprintf("A constraint is %d - x > 0 and the candidate is x = %d. Enter its strict feasibility margin.", a, x), a-x,
 			fmt.Sprintf("The margin is %d - %d = %d; a positive value means the point is strictly feasible.", a, x, a-x))
 	default:
-		left, right := limit(1, 9), limit(10, 20)
-		return at(kp, fmt.Sprintf("A convex feasible set contains the two points %d and %d. Enter an integer interior point strictly between them.", left, right), (left+right)/2,
-			fmt.Sprintf("The midpoint (%d + %d)/2 = %d lies strictly between the endpoints.", left, right, (left+right)/2))
+		left, gap := limit(1, 9), limit(1, 5)
+		right := left + 2*gap
+		mid := left + gap
+		return at(kp, fmt.Sprintf("A convex feasible set contains the two points %d and %d. Enter the integer midpoint of the two endpoints, which is strictly interior.", left, right), mid,
+			fmt.Sprintf("The midpoint is (%d + %d)/2 = %d, which lies strictly between the endpoints.", left, right, mid))
 	}
+}
+
+// binomial counts the ways to choose k of n columns, which is the number of
+// candidate bases in a standard-form linear program.
+func binomial(n, k int) int {
+	if k < 0 || k > n {
+		return 0
+	}
+	result := 1
+	for i := 1; i <= k; i++ {
+		result = result * (n - k + i) / i
+	}
+	return result
 }
 
 func maxInt(a, b int) int {

@@ -24,7 +24,7 @@ Optimization is the strongest new domain after 2,000 because it connects four do
 - numerical analysis supplies line search, conjugate gradients and Gauss-Newton
 - machine learning supplies gradient descent, stochastic methods and regularization
 
-It is also the clearest place where the existing corpus stops short. The current material teaches the derivative test, one constrained example, and a set of optimizer names. It does not teach convexity as an optimization structure, linear programming duality, KKT conditions, penalty and barrier methods, or integer programming.
+It is also the clearest place where the existing corpus stops short. The current material teaches the derivative test, one constrained example and a set of optimizer names. It does not teach convexity as an optimization structure, linear programming duality, KKT conditions, penalty and barrier methods or integer programming.
 
 The domain is not a rename of the existing calculus or machine-learning material. Every candidate below has a distinct optimization objective, and the overlap audit records the boundary.
 

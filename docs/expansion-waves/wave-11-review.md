@@ -50,14 +50,31 @@ samples because the generators draw from the global random source.
 
 ## Independent recomputation
 
-The generator tests parse every answer as an integer, reject a question that names
-a theorem and check that the explanation is present. The answers themselves are
-computed from drawn parameters in the generator, and the tests sample each ordinal
-twenty times, so a solution that ignored its parameters would fail the variety
-gate rather than the recomputation assertion. No answer is a stored constant.
+`TestRepairedFamiliesRecompute` in `internal/generator/optimization/recompute_test.go`
+parses each repaired instance back out of the question text and derives the answer a
+second time, independently of the generator. It covers eighteen family ordinals,
+including every family that was found to be wrong. `TestFactsAndVariety` checks that
+`Facts["answer"]` matches the graded answer and that no ordinal collapses to fewer
+than three distinct answers in sixty draws.
+
+The remaining families are covered by the parser gates, which reject a non-integer
+answer, a question that names a theorem and a missing explanation, and by the
+variety floor. They are not independently recomputed. An earlier version of this
+document claimed that every answer was recomputed; that claim was wrong, because
+the test only parsed the number, and it is retracted here.
 
 ## Defects found and fixed during the wave
 
+- Nine families returned a wrong answer and the suite accepted it because the test
+  only parsed the number. They are corrected: the doubled midpoint coordinate sum,
+  the inverted strict-convexity sign, integer truncation of a stationary point, the
+  inverted Newton-to-gradient ratio, the Wolfe slope that omitted the factor of two,
+  the Wolfe step that ignored the derivative, a trust-region family that assumed the
+  minimizer was outside the ball, the actual reduction computed with the wrong sign
+  of step, and the swapped sensitivity coefficient.
+- Explanations that contradicted the drawn instance were rewritten, and four
+  families that printed their answer in the question or returned a constant were
+  replaced with computed quantities.
 - The draft course targets did not close over the domain. Replacing them with the
   measured capstones restored full reachability.
 - A penalty family looped without bound when its threshold sat below half the

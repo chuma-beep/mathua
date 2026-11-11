@@ -74,9 +74,9 @@ func (g *branchBoundGen) Generate(ctx generator.GeneratorContext) generator.Prob
 		return at(kp, fmt.Sprintf("Branch and bound branches on x = %d.%d. Enter the lower branch bound, the largest integer not above the value.", whole, frac), whole,
 			fmt.Sprintf("The lower child keeps x ≤ %d.%d, so its integer bound is %d.", whole, frac, whole))
 	case 2:
-		relaxed := limit(10, 40)
-		return at(kp, fmt.Sprintf("A node has the integral relaxation value %d. Enter the upper bound it supplies.", relaxed), relaxed,
-			fmt.Sprintf("An integral relaxation value %d is already a valid upper bound and no rounding down is needed.", relaxed))
+		whole, frac := limit(10, 40), limit(1, 9)
+		return at(kp, fmt.Sprintf("A node has the fractional relaxation value %d.%d. Branch and bound rounds the value down for an integer upper bound. Enter that bound.", whole, frac), whole,
+			fmt.Sprintf("Rounding %d.%d down gives %d, which the node passes on as its integer upper bound.", whole, frac, whole))
 	default:
 		incumbent, bound := limit(20, 60), limit(1, 15)
 		return at(kp, fmt.Sprintf("An incumbent is %d and a node bound is %d. Enter the amount by which the incumbent beats the bound.", incumbent, incumbent-bound), bound,

@@ -177,10 +177,10 @@ func (g *activeSetGen) Generate(ctx generator.GeneratorContext) generator.Proble
 	switch kp {
 	case 1:
 		x, y := limit(1, 8), limit(1, 8)
-		b1, b2 := x+limit(0, 5), y+limit(0, 5)
+		b1, b2 := x+limit(-4, 4), y+limit(-4, 4)
 		answer := maxInt(x-b1, y-b2)
-		return at(kp, fmt.Sprintf("At (%d, %d) the working set tests x ≤ %d and y ≤ %d. Enter the largest violation, a positive number when a constraint is exceeded.", x, y, b1, b2), answer,
-			fmt.Sprintf("The candidate exceeds the first bound by %d and the second by %d, so the largest violation is %d.", x-b1, y-b2, answer))
+		return at(kp, fmt.Sprintf("At (%d, %d) the working set tests x ≤ %d and y ≤ %d. Enter the largest of x - %d and y - %d, which is positive when a bound is exceeded.", x, y, b1, b2, b1, b2), answer,
+			fmt.Sprintf("The differences are %d and %d, so the largest is %d.", x-b1, y-b2, answer))
 	case 2:
 		c := 2 * limit(1, 40)
 		return at(kp, fmt.Sprintf("An active-set step solves the equality-constrained subproblem: minimize x^2 + y^2 subject to x + y = %d. Enter x.", c), c/2,
@@ -202,13 +202,11 @@ func (g *trustRegionSubproblemGen) Generate(ctx generator.GeneratorContext) gene
 	kp := ordinal(ctx)
 	switch kp {
 	case 1:
-		a, grad, delta := limit(2, 9), limit(1, 9), limit(1, 6)
-		answer := -delta
-		if grad < 0 {
-			answer = delta
-		}
-		return at(kp, fmt.Sprintf("Minimize (%d/2)x^2 + %d x over |x| ≤ %d. The unconstrained minimizer lies outside the region, so the solution is on the boundary. Enter x.", a, grad, delta), answer,
-			fmt.Sprintf("The unconstrained minimizer is -%d/%d, outside the radius, so the boundary point opposite the gradient is %d.", grad, a, answer))
+		a, k, delta := limit(2, 9), limit(-6, 6), limit(1, 6)
+		free := -k
+		answer := minInt(maxInt(free, -delta), delta)
+		return at(kp, fmt.Sprintf("Minimize (%d/2)x^2 + %d x over |x| ≤ %d. Enter x.", a, a*k, delta), answer,
+			fmt.Sprintf("The unconstrained minimizer is -%d/%d = %d, and the bound |x| ≤ %d keeps %d.", a*k, a, free, delta, answer))
 	case 2:
 		a1, k := limit(1, 6), limit(1, 6)
 		grad := -k * (a1 + 1)

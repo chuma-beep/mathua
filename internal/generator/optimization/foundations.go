@@ -134,10 +134,12 @@ func (g *convexSetGen) Generate(ctx generator.GeneratorContext) generator.Proble
 	kp := ordinal(ctx)
 	switch kp {
 	case 1:
-		x1, y1 := limit(1, 10), limit(1, 10)
-		x2, y2 := limit(1, 10), limit(1, 10)
-		return at(kp, fmt.Sprintf("Take the convex combination of (%d, %d) and (%d, %d) with weight 0.5 on the first point. What is the sum of the two coordinates of the result? (enter a number)", x1, y1, x2, y2), x1+y1+x2+y2,
-			fmt.Sprintf("The midpoint is ((%d+%d)/2, (%d+%d)/2). Its coordinate sum is %d.", x1, x2, y1, y2, x1+y1+x2+y2))
+		mx, my := limit(2, 12), limit(2, 12)
+		dx, dy := limit(1, 6), limit(1, 6)
+		x1, y1 := mx-dx, my-dy
+		x2, y2 := mx+dx, my+dy
+		return at(kp, fmt.Sprintf("Take the convex combination of (%d, %d) and (%d, %d) with weight 0.5 on the first point. What is the sum of the two coordinates of the result? (enter a number)", x1, y1, x2, y2), mx+my,
+			fmt.Sprintf("The midpoint is ((%d+%d)/2, (%d+%d)/2) = (%d, %d). Its coordinate sum is %d.", x1, x2, y1, y2, mx, my, mx+my))
 	case 2:
 		a, b := limit(2, 9), limit(2, 9)
 		x, y := limit(1, 8), limit(1, 8)
@@ -169,10 +171,12 @@ func (g *strictConvexityGen) Generate(ctx generator.GeneratorContext) generator.
 		return at(kp, fmt.Sprintf("For f(x) = 7 (x - %d)^2 + %d, at which x does the unique minimiser occur? (enter a number)", h, k), h,
 			fmt.Sprintf("The squared term is zero only at x = %d, and it is positive everywhere else, so the minimiser is unique.", h))
 	default:
-		a, b := limit(1, 9), limit(1, 9)
-		gap := (b - a) * (b - a) / 4
-		return at(kp, fmt.Sprintf("For f(x) = x^2 on the interval from %d to %d, compute f(midpoint) minus the average of the endpoint values. (enter a number)", a, b), gap,
-			fmt.Sprintf("The midpoint is %d, so f(mid) = %d and the endpoint average is (%d + %d)/2 = %d. The difference is %d.", (a+b)/2, ((a+b)/2)*((a+b)/2), a*a, b*b, (a*a+b*b)/2, gap))
+		a, gap := limit(1, 9), limit(1, 9)
+		b := a + 2*gap
+		mid := a + gap
+		answer := -gap * gap
+		return at(kp, fmt.Sprintf("For f(x) = x^2 on the interval from %d to %d, compute f(midpoint) minus the average of the endpoint values. (enter a number)", a, b), answer,
+			fmt.Sprintf("The midpoint is %d, so f(mid) = %d and the endpoint average is (%d + %d)/2 = %d. The difference is %d.", mid, mid*mid, a*a, b*b, (a*a+b*b)/2, answer))
 	}
 }
 
@@ -283,9 +287,10 @@ func (g *firstOrderGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		return at(kp, fmt.Sprintf("For f(x, y) = %d x^2 + %d y^2, what is the first component of the gradient at (%d, %d)? (enter a number)", a, b, x, y), 2*a*x,
 			fmt.Sprintf("The partial derivative in x is %d x, which at x = %d equals %d.", 2*a, x, 2*a*x))
 	case 2:
-		a, b := limit(1, 8), limit(1, 10)
-		return at(kp, fmt.Sprintf("For f(x) = %d x^2 - %d x, at which x does the gradient vanish? (enter a number)", a, b), b/(2*a),
-			fmt.Sprintf("Setting %d x - %d = 0 gives x = %d.", 2*a, b, b/(2*a)))
+		a, k := limit(1, 8), limit(1, 10)
+		b := 2 * a * k
+		return at(kp, fmt.Sprintf("For f(x) = %d x^2 - %d x, at which x does the gradient vanish? (enter a number)", a, b), k,
+			fmt.Sprintf("Setting %d x - %d = 0 gives x = %d.", 2*a, b, k))
 	default:
 		gx, gy := limit(-6, 6), limit(-6, 6)
 		dx, dy := limit(-4, 4), limit(-4, 4)
@@ -315,8 +320,8 @@ func (g *secondOrderGen) Generate(ctx generator.GeneratorContext) generator.Prob
 	default:
 		a, b, x, y := limit(1, 6), limit(1, 6), limit(1, 5), limit(1, 5)
 		answer := a*x*x - b*y*y
-		return at(kp, fmt.Sprintf("For f(x, y) = %d x^2 - %d y^2, evaluate f(%d, %d) along the saddle direction (1, 1) after scaling by (%d, %d). (enter a number)", a, b, x, y, x, y), answer,
-			fmt.Sprintf("The value is %d·%d² - %d·%d² = %d, which is negative, so the point descends along this direction.", a, x, b, y, answer))
+		return at(kp, fmt.Sprintf("For f(x, y) = %d x^2 - %d y^2, evaluate f at the point (%d, %d). (enter a number)", a, b, x, y), answer,
+			fmt.Sprintf("Substitute both coordinates: %d·%d² - %d·%d² = %d. The Hessian has one positive and one negative eigenvalue, so the origin is a saddle.", a, x, b, y, answer))
 	}
 }
 

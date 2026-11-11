@@ -113,8 +113,8 @@ func (g *newtonOptimGen) Generate(ctx generator.GeneratorContext) generator.Prob
 	default:
 		a, x := limit(2, 9), limit(1, 9)
 		grad := a * x
-		return at(kp, fmt.Sprintf("A quadratic has second derivative %d and gradient %d at x = %d. Compare the Newton step with a gradient step of size 1: enter Newton step magnitude divided by gradient step magnitude.", a, grad, x), a,
-			fmt.Sprintf("Newton moves by %d/%d = %d while the gradient step moves by %d, so the ratio is %d.", grad, a, x, grad, a))
+		return at(kp, fmt.Sprintf("A quadratic has second derivative %d and gradient %d at x = %d. Compare a gradient step of size 1 with one Newton step: enter gradient step magnitude divided by Newton step magnitude.", a, grad, x), a,
+			fmt.Sprintf("Newton moves by %d/%d = %d while the gradient step moves by %d, so the gradient step is %d times longer.", grad, a, x, grad, a))
 	}
 }
 
@@ -186,7 +186,7 @@ func (g *conjugateDirectionGen) Generate(ctx generator.GeneratorContext) generat
 		a, c := limit(2, 9), limit(2, 9)
 		p1, p2, q1, q2 := limit(1, 6), limit(1, 6), limit(1, 6), limit(1, 6)
 		return at(kp, fmt.Sprintf("With A = diag(%d, %d), p = (%d, %d) and q = (%d, %d), enter pᵀAq.", a, c, p1, p2, q1, q2), a*p1*q1+c*p2*q2,
-			fmt.Sprintf("pᵀAq = %d·%d·%d + %d·%d·%d = %d. Conjugate directions make this zero.", a, p1, q1, c, p2, q2, a*p1*q1+c*p2*q2))
+			fmt.Sprintf("pᵀAq = %d·%d·%d + %d·%d·%d = %d. The directions are A-conjugate exactly when this quantity is zero.", a, p1, q1, c, p2, q2, a*p1*q1+c*p2*q2))
 	case 2:
 		a, c, p2 := limit(2, 9), limit(2, 9), limit(1, 6)
 		return at(kp, fmt.Sprintf("With A = diag(%d, %d) and p = (1, %d), a direction q = (-%d·%d, %d) is A-conjugate to p. Enter the first entry of q.", a, c, p2, c, p2, a), -c*p2,
@@ -240,13 +240,13 @@ func (g *wolfeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 			fmt.Sprintf("The new slope is -%d·%d·%d, the old slope is -%d·%d, and the ratio is %d.", a, x-t*a*x, a*x, a*x, a*x, after/slope))
 	case 2:
 		a, x := limit(2, 6), limit(1, 8)
-		return at(kp, fmt.Sprintf("A Wolfe test with c2 = 0.5 requires the new slope to be at least -0.5 times the old slope magnitude. For f(x) = %d x^2 at x = %d with step 1, enter the old slope magnitude.", a, x), a*x,
-			fmt.Sprintf("f'(x) = %d, so the magnitude is %d.", a*x, a*x))
+		return at(kp, fmt.Sprintf("A Wolfe test with c2 = 0.5 requires the new slope to be at least -0.5 times the old slope magnitude. For f(x) = %d x^2 at x = %d, enter the old slope magnitude.", a, x), 2*a*x,
+			fmt.Sprintf("f'(x) = 2·%d·%d = %d, so the magnitude is %d.", a, x, 2*a*x, 2*a*x))
 	default:
-		a, x, t := limit(2, 6), limit(1, 8), limit(1, 3)
-		ratio := (x - t*a*x) * (x - t*a*x) * 100 / (x * x)
-		return at(kp, fmt.Sprintf("For f(x) = x^2 with x = %d and step size %d, enter the squared-distance ratio after the step as a percentage of the original squared distance.", x, t), ratio,
-			fmt.Sprintf("The new point is %d, so the ratio is %d²/%d² = %d percent.", x-t*a*x, x-t*a*x, x, ratio))
+		x, t := limit(1, 8), limit(1, 3)
+		next := x - 2*t*x
+		return at(kp, fmt.Sprintf("For f(x) = x^2 with x = %d and step size %d along p = -f'(x), enter the new point x + t p.", x, t), next,
+			fmt.Sprintf("p = -2x = %d, so the new point is %d + %d·(%d) = %d.", -2*x, x, t, -2*x, next))
 	}
 }
 
@@ -260,10 +260,10 @@ func (g *trustRegionRatioGen) Generate(ctx generator.GeneratorContext) generator
 	kp := ordinal(ctx)
 	switch kp {
 	case 1:
-		a, x, s := limit(1, 5), limit(1, 6), limit(1, 4)
-		actual := a * (x*x - (x-s)*(x-s))
+		a, x, s := limit(1, 5), limit(3, 8), limit(1, 2)
+		actual := a * (x*x - (x+s)*(x+s))
 		return at(kp, fmt.Sprintf("For f(x) = %d x^2 at x = %d, a step of %d changes the function. Enter the actual reduction f(x) - f(x + s).", a, x, s), actual,
-			fmt.Sprintf("f(%d) - f(%d) = %d - %d = %d.", x, x-s, a*x*x, a*(x-s)*(x-s), actual))
+			fmt.Sprintf("f(%d) - f(%d) = %d - %d = %d, which is negative because the step increases the function.", x, x+s, a*x*x, a*(x+s)*(x+s), actual))
 	case 2:
 		grad, step, curv := limit(2, 9), limit(1, 6), limit(2, 8)
 		return at(kp, fmt.Sprintf("A quadratic model has gradient %d and curvature %d. For a step s = %d, enter 2 times the predicted reduction, 2(g s + 0.5 B s²).", grad, curv, step), 2*grad*step+curv*step*step,
