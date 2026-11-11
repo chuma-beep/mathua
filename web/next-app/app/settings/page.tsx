@@ -12,6 +12,7 @@ import PlanEditor from '../../components/PlanEditor'
 import { Input } from '@/components/ui/input'
 import Footer from '../../components/Footer'
 import { getSettings, getScores, updateSettings, updateProfileName, changePassword, uploadAvatar, deleteAvatar, avatarImageUrl, getIdentities, deleteIdentity, createLinkToken, requestEmailVerification, startOAuthLogin, getConfig, OAUTH_LABELS, type OAuthProvider, enableShare, disableShare, type UserSettings, getNotificationPreferences, updateNotificationPreferences, type NotificationPreferences } from '../../lib/api'
+import { browserPushSupported, subscribeBrowserPush, unsubscribeBrowserPush } from '../../lib/push'
 import { isLoggedIn, getUserInfo, setUserInfo } from '../../lib/auth'
 import { DICEBEAR_STYLES, dicebearUrl, randomDicebear, type DicebearPick } from '../../lib/dicebear'
 import { Switch } from '../../components/ui/switch'
@@ -102,6 +103,7 @@ export default function SettingsPage() {
   const [notificationPrefsBusy, setNotificationPrefsBusy] = useState(false)
   const [notificationPrefsMsg, setNotificationPrefsMsg] = useState('')
   const [notificationTimezoneDraft, setNotificationTimezoneDraft] = useState('')
+  const [pushSupported, setPushSupported] = useState<boolean | null>(null)
 
   useEffect(() => {
     if (!isLoggedIn()) {
@@ -133,6 +135,7 @@ export default function SettingsPage() {
         setNotificationTimezoneDraft(prefs.timezone)
       })
       .catch(() => setNotificationPrefsMsg('Notification preferences could not be loaded.'))
+    setPushSupported(browserPushSupported())
     setDisplayName(getUserInfo()?.name ?? '')
     setRecoveryEmail(getUserInfo()?.email ?? '')
     try {
@@ -252,6 +255,36 @@ export default function SettingsPage() {
   const patchNotificationPrefs = (patch: Partial<NotificationPreferences>) => {
     if (!notificationPrefs || notificationPrefsBusy) return
     void saveNotificationPrefs({ ...notificationPrefs, ...patch })
+  }
+
+  // The browser owns the subscription and the server owns the preference. Both
+  // must agree, so this subscribes first and records the preference only after
+  // the endpoint is stored; unsubscribing does the reverse.
+  const toggleBrowserPush = async (checked: boolean) => {
+    if (!notificationPrefs || notificationPrefsBusy) return
+    setNotificationPrefsBusy(true)
+    setNotificationPrefsMsg('')
+    try {
+      if (checked) {
+        const result = await subscribeBrowserPush()
+        if (result === 'subscribed') {
+          await saveNotificationPrefs({ ...notificationPrefs, push_enabled: true })
+        } else if (result === 'unavailable') {
+          setNotificationPrefsMsg('Browser push is not configured on this deployment.')
+        } else if (result === 'denied') {
+          setNotificationPrefsMsg('Notifications are blocked in this browser. Allow them in site settings, then try again.')
+        } else {
+          setNotificationPrefsMsg('This browser cannot receive push messages.')
+        }
+      } else {
+        await unsubscribeBrowserPush()
+        await saveNotificationPrefs({ ...notificationPrefs, push_enabled: false })
+      }
+    } catch (e) {
+      setNotificationPrefsMsg(e instanceof Error ? e.message : 'Could not change browser push.')
+    } finally {
+      setNotificationPrefsBusy(false)
+    }
   }
 
   const paused = !!settings.pause_until
@@ -777,6 +810,25 @@ export default function SettingsPage() {
                           Resume notifications now
                         </button>
                       )}
+                    </div>
+
+                    <div className="border-t border-mathua-border pt-3">
+                      <div className="flex items-center justify-between gap-4 min-w-0">
+                        <div className="min-w-0">
+                          <span className="font-mono text-xs text-mathua-primary">Browser push</span>
+                          <p className="text-mathua-muted text-[11px] mt-0.5">
+                            {pushSupported === false
+                              ? 'This browser cannot receive push messages.'
+                              : 'The same reminders on this device, even when Mathua is closed.'}
+                          </p>
+                        </div>
+                        <Switch
+                          checked={notificationPrefs.push_enabled}
+                          disabled={notificationPrefsBusy || pushSupported === false}
+                          onCheckedChange={checked => void toggleBrowserPush(checked)}
+                          aria-label="Toggle browser push"
+                        />
+                      </div>
                     </div>
                   </div>
                 )}

@@ -191,6 +191,11 @@ type Server struct {
 	// dark, and this flag is what keeps it dark until the public rollout is
 	// explicitly cleared. When false every /api/friends route answers 404.
 	friendsEnabled bool
+	// pushPublicKey is the VAPID application-server key browsers need in order
+	// to subscribe. The private half never leaves the server. An empty value
+	// means push is not configured, and the API says so rather than handing out
+	// a subscription that could never be delivered.
+	pushPublicKey string
 }
 
 // AILimits are the per-request token budgets the AI handlers apply.
@@ -223,6 +228,15 @@ func WithAI(chain *ai.Chain, quota *ai.Quota, limits AILimits) Option {
 func WithFriends(enabled bool) Option {
 	return func(s *Server) {
 		s.friendsEnabled = enabled
+	}
+}
+
+// WithPushPublicKey attaches the VAPID application-server public key. Only the
+// public half reaches a browser; the private half stays in the process that
+// signs deliveries. An empty key leaves push unconfigured and the API says so.
+func WithPushPublicKey(key string) Option {
+	return func(s *Server) {
+		s.pushPublicKey = strings.TrimSpace(key)
 	}
 }
 
@@ -566,6 +580,11 @@ func (s *Server) Register(mux *http.ServeMux) {
 	mux.HandleFunc("/api/notifications/read", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleNotificationRead)))))
 	mux.HandleFunc("/api/notifications/read-all", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleNotificationsReadAll)))))
 	mux.HandleFunc("/api/notifications/preferences", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleNotificationPreferences)))))
+	// Browser push. The key route is read-only and tells the client whether a
+	// subscription is possible at all; the two write routes are per device.
+	mux.HandleFunc("/api/notifications/push/key", logRequest(cors(s.authMiddleware(s.handleNotificationPushKey))))
+	mux.HandleFunc("/api/notifications/push/subscribe", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleNotificationPushSubscribe)))))
+	mux.HandleFunc("/api/notifications/push/unsubscribe", logRequest(cors(s.writeLimiter.middleware(s.authMiddleware(s.handleNotificationPushUnsubscribe)))))
 	// The signed link in a reminder email is the credential here, so the route
 	// is public. It only disables email; it cannot read or change anything else.
 	mux.HandleFunc("/api/notifications/unsubscribe", logRequest(cors(s.writeLimiter.middleware(s.handleNotificationUnsubscribe))))
@@ -591,6 +610,10 @@ func (s *Server) Register(mux *http.ServeMux) {
 	// its week: an administrator who may not look an account up does not get to enumerate the
 	// same people by cohort instead.
 	mux.HandleFunc("/api/admin/leagues", logRequest(cors(s.requirePermission(admin.UsersRead, s.handleAdminLeagues))))
+	// Delivery health is read under the account grant: a delivery row names one
+	// learner and one message, and an operator who may not look an account up
+	// does not get to enumerate the same people through the delivery queue.
+	mux.HandleFunc("/api/admin/notifications", logRequest(cors(s.requirePermission(admin.UsersRead, s.handleAdminNotifications))))
 	mux.HandleFunc("/api/admin/admins", logRequest(cors(s.requirePermission(admin.AdminsRead, s.handleAdminAdmins))))
 	// Accepting an invitation is the one route here reachable by a non-staff account: it is how
 	// a learner becomes staff. It still requires authentication, and it is bound to the invited

@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"net/url"
 	"strconv"
 	"strings"
 	"time"
@@ -377,4 +378,154 @@ func (s *Server) handleNotificationUnsubscribe(w http.ResponseWriter, r *http.Re
 		return
 	}
 	writeJSON(w, map[string]interface{}{"ok": true})
+}
+
+// GET /api/notifications/push/key returns the VAPID application-server key a
+// browser needs before it can subscribe. configured is false when the
+// deployment has no key pair, and the client hides the toggle instead of
+// offering a subscription that could never be delivered.
+func (s *Server) handleNotificationPushKey(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		writeError(w, "method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+	writeJSON(w, map[string]interface{}{
+		"configured": s.pushPublicKey != "",
+		"public_key": s.pushPublicKey,
+	})
+}
+
+type notificationPushKeys struct {
+	P256DH string `json:"p256dh"`
+	Auth   string `json:"auth"`
+}
+
+type notificationPushRequest struct {
+	Endpoint string               `json:"endpoint"`
+	Keys     notificationPushKeys `json:"keys"`
+}
+
+// POST /api/notifications/push/subscribe stores one device endpoint and turns
+// the push channel on for that learner. The endpoint is the identity, so a
+// browser that re-subscribes updates its keys rather than adding a device.
+func (s *Server) handleNotificationPushSubscribe(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		writeError(w, "method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+	if s.pushPublicKey == "" {
+		writeError(w, "browser push is not configured", http.StatusServiceUnavailable)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID == "" {
+		writeError(w, "authentication required", http.StatusUnauthorized)
+		return
+	}
+	var req notificationPushRequest
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeError(w, "invalid request", http.StatusBadRequest)
+		return
+	}
+	endpoint := strings.TrimSpace(req.Endpoint)
+	parsed, err := url.Parse(endpoint)
+	if err != nil || parsed.Scheme != "https" || parsed.Host == "" {
+		writeError(w, "a push endpoint must be an https URL", http.StatusBadRequest)
+		return
+	}
+	p256dh := strings.TrimSpace(req.Keys.P256DH)
+	authSecret := strings.TrimSpace(req.Keys.Auth)
+	if p256dh == "" || authSecret == "" {
+		writeError(w, "push keys are required", http.StatusBadRequest)
+		return
+	}
+	if len(endpoint) > 2048 || len(p256dh) > 256 || len(authSecret) > 128 {
+		writeError(w, "push subscription is too large", http.StatusBadRequest)
+		return
+	}
+	store, ok := notificationStore(w, s.repo)
+	if !ok {
+		return
+	}
+	now := time.Now().UTC()
+	if err := store.UpsertNotificationPushSubscription(&storage.NotificationPushSubscription{
+		StudentID: studentID,
+		Endpoint:  endpoint,
+		P256DH:    p256dh,
+		Auth:      authSecret,
+		UserAgent: truncateUserAgent(r.UserAgent()),
+	}); err != nil {
+		writeError(w, "failed to save push subscription", http.StatusInternalServerError)
+		return
+	}
+	prefs, err := store.EnsureNotificationPreferences(studentID, now)
+	if err != nil {
+		writeError(w, "failed to load notification preferences", http.StatusInternalServerError)
+		return
+	}
+	prefs.PushEnabled = true
+	prefs.UpdatedAt = now
+	if err := store.UpsertNotificationPreferences(prefs); err != nil {
+		writeError(w, "failed to save notification preferences", http.StatusInternalServerError)
+		return
+	}
+	writeJSON(w, map[string]interface{}{"ok": true, "devices": 1})
+}
+
+// POST /api/notifications/push/unsubscribe removes one device endpoint and
+// turns the push channel off. Deleting is scoped to the authenticated learner,
+// so an endpoint guessed from elsewhere cannot be removed by someone else.
+func (s *Server) handleNotificationPushUnsubscribe(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		writeError(w, "method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+	studentID, _ := r.Context().Value(authStudentKey{}).(string)
+	if studentID == "" {
+		writeError(w, "authentication required", http.StatusUnauthorized)
+		return
+	}
+	var req struct {
+		Endpoint string `json:"endpoint"`
+	}
+	if err := decodeJSON(w, r, &req); err != nil {
+		writeError(w, "invalid request", http.StatusBadRequest)
+		return
+	}
+	endpoint := strings.TrimSpace(req.Endpoint)
+	if endpoint == "" {
+		writeError(w, "endpoint is required", http.StatusBadRequest)
+		return
+	}
+	store, ok := notificationStore(w, s.repo)
+	if !ok {
+		return
+	}
+	now := time.Now().UTC()
+	if err := store.DeleteNotificationPushSubscription(studentID, endpoint); err != nil {
+		writeError(w, "failed to remove push subscription", http.StatusInternalServerError)
+		return
+	}
+	prefs, err := store.EnsureNotificationPreferences(studentID, now)
+	if err != nil {
+		writeError(w, "failed to load notification preferences", http.StatusInternalServerError)
+		return
+	}
+	prefs.PushEnabled = false
+	prefs.UpdatedAt = now
+	if err := store.UpsertNotificationPreferences(prefs); err != nil {
+		writeError(w, "failed to save notification preferences", http.StatusInternalServerError)
+		return
+	}
+	writeJSON(w, map[string]interface{}{"ok": true})
+}
+
+// truncateUserAgent keeps a stored user agent useful for telling two devices
+// apart without letting a client write an unbounded string into the row.
+func truncateUserAgent(raw string) string {
+	raw = strings.TrimSpace(raw)
+	if len(raw) > 200 {
+		return raw[:200]
+	}
+	return raw
 }

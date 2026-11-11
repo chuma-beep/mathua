@@ -587,6 +587,7 @@ CREATE TABLE IF NOT EXISTS announcement_views (
 CREATE TABLE IF NOT EXISTS notification_preferences (
     student_id          TEXT PRIMARY KEY REFERENCES students(id) ON DELETE CASCADE,
     email_enabled       INTEGER NOT NULL DEFAULT 0,
+    push_enabled        INTEGER NOT NULL DEFAULT 0,
     in_app_enabled      INTEGER NOT NULL DEFAULT 1,
     reviews_enabled     INTEGER NOT NULL DEFAULT 1,
     study_enabled       INTEGER NOT NULL DEFAULT 0,
@@ -650,6 +651,23 @@ CREATE TABLE IF NOT EXISTS notification_scan_state (
     updated_at  BIGINT NOT NULL,
     PRIMARY KEY (student_id, kind)
 );
+
+-- Browser push endpoints, one row per device. The endpoint is the primary key:
+-- a browser hands the same endpoint to every tab and to a repeat subscribe, and
+-- a device that clears storage simply stops being reachable.
+CREATE TABLE IF NOT EXISTS notification_push_subscriptions (
+    endpoint        TEXT PRIMARY KEY,
+    student_id      TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    p256dh          TEXT NOT NULL,
+    auth            TEXT NOT NULL,
+    user_agent      TEXT NOT NULL DEFAULT '',
+    created_at      BIGINT NOT NULL,
+    updated_at      BIGINT NOT NULL,
+    last_success_at BIGINT NOT NULL DEFAULT 0,
+    failures        INTEGER NOT NULL DEFAULT 0
+);
+
+CREATE INDEX IF NOT EXISTS idx_notification_push_student ON notification_push_subscriptions(student_id);
 
 -- Administration. actor_id is deliberately not a foreign key to students(id): a trail that is
 -- deleted along with the account it records is not a trail. before_json/after_json carry the
@@ -768,6 +786,7 @@ func pgAuthMigrate(db *sql.DB) error {
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS google_id TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS avatar_url TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS email_verified INTEGER NOT NULL DEFAULT 0",
+		"ALTER TABLE notification_preferences ADD COLUMN IF NOT EXISTS push_enabled INTEGER NOT NULL DEFAULT 0",
 		"CREATE INDEX IF NOT EXISTS idx_students_email ON students(email)",
 		"CREATE INDEX IF NOT EXISTS idx_students_google_id ON students(google_id)",
 		"ALTER TABLE concept_progress ADD COLUMN IF NOT EXISTS weakness_score DOUBLE PRECISION NOT NULL DEFAULT 0",
@@ -2103,6 +2122,7 @@ func (s *PostgresStore) ResetProgress(studentID string) error {
 		{"DELETE FROM effort_signals WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM review_runs WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM notification_deliveries WHERE notification_id IN (SELECT id FROM notifications WHERE student_id = $1)", []interface{}{studentID}},
+		{"DELETE FROM notification_push_subscriptions WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM notifications WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM notification_scan_state WHERE student_id = $1", []interface{}{studentID}},
 		{`UPDATE students SET xp_total = 0, xp_today = 0, diagnostic_completed = 0, diagnostic_completed_at = '',
@@ -2170,6 +2190,7 @@ func (s *PostgresStore) DeleteAccount(studentID string) error {
 		{"DELETE FROM announcement_reads WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM announcement_views WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM notification_deliveries WHERE notification_id IN (SELECT id FROM notifications WHERE student_id = $1)", []interface{}{studentID}},
+		{"DELETE FROM notification_push_subscriptions WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM notifications WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM notification_scan_state WHERE student_id = $1", []interface{}{studentID}},
 		{"DELETE FROM notification_preferences WHERE student_id = $1", []interface{}{studentID}},

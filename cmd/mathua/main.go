@@ -366,10 +366,17 @@ func main() {
 	if friendsEnabled {
 		fmt.Println("friends enabled: /api/friends is live")
 	}
+	// Browser push is optional and configured from the same VAPID pair the
+	// delivery worker signs with. Without a key pair the API reports push as
+	// unavailable and the settings toggle stays hidden.
+	pushOpts, pushConfigured := notifications.WebPushFromEnv()
+	if pushConfigured {
+		fmt.Println("browser push enabled: VAPID key pair loaded")
+	}
 	srv := server.New(eng, repo, authSvc, server.WithAI(aiChain, aiQuota, server.AILimits{
 		AssistantMaxTokens: aiSettings.AssistantMaxTokens,
 		GoalMaxTokens:      aiSettings.GoalMaxTokens,
-	}), server.WithFriends(friendsEnabled))
+	}), server.WithFriends(friendsEnabled), server.WithPushPublicKey(pushOpts.PublicKey))
 	mux := http.NewServeMux()
 	srv.Register(mux)
 	if info, err := os.Stat("web/next-app/out"); err == nil && info.IsDir() {
@@ -430,6 +437,7 @@ func main() {
 			Store:          notifyStore,
 			Due:            eng,
 			EmailAvailable: mailer.Configured(),
+			PushAvailable:  pushConfigured,
 		})
 		notifyWG.Add(1)
 		go func() {
@@ -440,9 +448,10 @@ func main() {
 					log.Printf("notifications: generate: %v", err)
 					return
 				}
-				if result.Notifications > 0 || result.EmailPending > 0 || result.Failed > 0 {
-					log.Printf("notifications: generated %d, email pending %d, suppressed %d, failed %d",
-						result.Notifications, result.EmailPending, result.EmailSuppressed, result.Failed)
+				if result.Notifications > 0 || result.EmailPending > 0 || result.PushPending > 0 || result.Failed > 0 {
+					log.Printf("notifications: generated %d, email pending %d, push pending %d, suppressed %d, failed %d",
+						result.Notifications, result.EmailPending, result.PushPending,
+						result.EmailSuppressed+result.PushSuppressed, result.Failed)
 				}
 			}
 			run()
@@ -458,10 +467,20 @@ func main() {
 			}
 		}()
 
-		if mailer.Configured() {
+		var pushSender notifications.PushSender
+		if pushConfigured {
+			built, err := notifications.NewWebPushSender(pushOpts)
+			if err != nil {
+				log.Printf("notifications: browser push disabled: %v", err)
+			} else {
+				pushSender = built
+			}
+		}
+		if mailer.Configured() || pushSender != nil {
 			delivery := notifications.NewDelivery(notifications.DeliveryOptions{
 				Store:            notifyStore,
 				Sender:           mail,
+				Push:             pushSender,
 				FrontendURL:      os.Getenv("FRONTEND_URL"),
 				UnsubscribeToken: auth.NotificationUnsubscribeToken,
 			})

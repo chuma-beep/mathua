@@ -375,9 +375,9 @@ The web server exposes a REST API through Go's standard `net/http` package. No e
 | `cors` | Sets `Access-Control-Allow-Origin` from `CORS_ALLOWED_ORIGINS` allowlist (`server.go:32`), handles OPTIONS (204), `Vary: Origin` |
 | `logRequest` | Logs method and path |
 | `authMiddleware` | Reads `Authorization: Bearer <token>`, validates `HS256` JWT (`auth.go:98`), injects `studentID` into context |
-| `authLimiter` | Token-bucket rate limiter (5 rate, 10 burst, 1 min window) on auth endpoints `server.go:239` |
-| `writeLimiter` | 20 burst, 3s window on write endpoints (`/api/study/answer`, `/api/quiz/*`, `/api/goal/*`, `/api/reviews/*`) `server.go:240` |
-| `shareLimiter` | 10 burst, 6s window on `GET /api/share/*` `server.go:241` |
+| `authLimiter` | Token-bucket rate limiter (5 rate, 10 burst, 1 min window) on auth endpoints `server.go:253` |
+| `writeLimiter` | 20 burst, 3s window on write endpoints (`/api/study/answer`, `/api/quiz/*`, `/api/goal/*`, `/api/reviews/*`) `server.go:254` |
+| `shareLimiter` | 10 burst, 6s window on `GET /api/share/*` `server.go:255` |
 
 ### All Routes
 
@@ -580,7 +580,7 @@ Trade-off: generation latency. Complex polynomial questions require a SymPy subp
 
 ### Why No ORM?
 
-The schema has 50 tables with straightforward relationships. Raw SQL with `database/sql` gives:
+The schema has 51 tables with straightforward relationships. Raw SQL with `database/sql` gives:
 - Full control over query optimization (especially the SM-2 upsert and leaderboard queries)
 - No query generation overhead
 - Transparent SQL for debugging

@@ -510,6 +510,7 @@ CREATE TABLE IF NOT EXISTS announcement_views (
 CREATE TABLE IF NOT EXISTS notification_preferences (
     student_id          TEXT PRIMARY KEY REFERENCES students(id) ON DELETE CASCADE,
     email_enabled       INTEGER NOT NULL DEFAULT 0,
+    push_enabled        INTEGER NOT NULL DEFAULT 0,
     in_app_enabled      INTEGER NOT NULL DEFAULT 1,
     reviews_enabled     INTEGER NOT NULL DEFAULT 1,
     study_enabled       INTEGER NOT NULL DEFAULT 0,
@@ -573,6 +574,23 @@ CREATE TABLE IF NOT EXISTS notification_scan_state (
     updated_at  INTEGER NOT NULL,
     PRIMARY KEY (student_id, kind)
 );
+
+-- Browser push endpoints, one row per device. The endpoint is the primary key:
+-- a browser hands the same endpoint to every tab and to a repeat subscribe, and
+-- a device that clears storage simply stops being reachable.
+CREATE TABLE IF NOT EXISTS notification_push_subscriptions (
+    endpoint        TEXT PRIMARY KEY,
+    student_id      TEXT NOT NULL REFERENCES students(id) ON DELETE CASCADE,
+    p256dh          TEXT NOT NULL,
+    auth            TEXT NOT NULL,
+    user_agent      TEXT NOT NULL DEFAULT '',
+    created_at      INTEGER NOT NULL,
+    updated_at      INTEGER NOT NULL,
+    last_success_at INTEGER NOT NULL DEFAULT 0,
+    failures        INTEGER NOT NULL DEFAULT 0
+);
+
+CREATE INDEX IF NOT EXISTS idx_notification_push_student ON notification_push_subscriptions(student_id);
 
 -- Administration. The role column itself is added by the migration list below rather than
 -- here: this DDL runs on every boot, and ALTER TABLE ADD COLUMN is not idempotent. The

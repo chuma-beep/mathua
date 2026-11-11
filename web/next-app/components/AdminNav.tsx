@@ -20,6 +20,7 @@ const ITEMS: { label: string; href: string; perm: string }[] = [
   { label: 'Reports', href: '/admin/reports', perm: 'reports.read' },
   { label: 'Users', href: '/admin/users', perm: 'users.read' },
   { label: 'Leagues', href: '/admin/leagues', perm: 'users.read' },
+  { label: 'Notifications', href: '/admin/notifications', perm: 'users.read' },
   { label: 'Contributors', href: '/admin/contributors', perm: 'admins.read' },
   { label: 'Content', href: '/admin/content', perm: 'content.read' },
   { label: 'Announcements', href: '/admin/announcements', perm: 'content.read' },

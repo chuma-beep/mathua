@@ -2144,6 +2144,45 @@ export async function getAdminLeagues(
 	return validateResponse(AdminLeaguesSchema, await res.json(), 'adminLeagues')
 }
 
+export interface AdminNotificationStat {
+	channel: string
+	status: string
+	count: number
+}
+
+export interface AdminNotificationProblem {
+	notification_id: string
+	student_id: string
+	student_name: string
+	title: string
+	channel: string
+	status: string
+	attempts: number
+	last_error?: string
+	suppressed_reason?: string
+	created_at: string
+}
+
+/**
+ * Delivery health for the notification pipeline.
+ *
+ * Two reads in one response: counts per channel and status, and the rows that
+ * will never move again. Retries are excluded from the problem list because a
+ * queue that is still retrying is not a queue that is stuck.
+ */
+export async function getAdminNotificationHealth(limit = 50): Promise<{
+	stats: AdminNotificationStat[]
+	problems: AdminNotificationProblem[]
+}> {
+	const res = await authedFetch(`${API_BASE}/api/admin/notifications?limit=${limit}`, { cache: 'no-store' })
+	if (!res.ok) await throwWithResponse(res, 'Could not load notification delivery health')
+	const data = (await res.json()) as {
+		stats?: AdminNotificationStat[]
+		problems?: AdminNotificationProblem[]
+	}
+	return { stats: data.stats ?? [], problems: data.problems ?? [] }
+}
+
 export async function searchAdminUsers(q: string): Promise<AdminUsersRes> {
 	const params = new URLSearchParams()
 	if (q.trim()) params.set('q', q.trim())
@@ -2371,6 +2410,7 @@ export async function markAllNotificationsRead(): Promise<void> {
 export interface NotificationPreferences {
 	student_id: string
 	email_enabled: boolean
+	push_enabled: boolean
 	in_app_enabled: boolean
 	reviews_enabled: boolean
 	study_enabled: boolean
@@ -2401,6 +2441,40 @@ export async function updateNotificationPreferences(prefs: NotificationPreferenc
 	})
 	if (!res.ok) await throwWithResponse(res, 'Could not save notification preferences')
 	return (await res.json()) as NotificationPreferences
+}
+
+export interface PushKeyResponse {
+	configured: boolean
+	public_key: string
+}
+
+export async function getPushKey(): Promise<PushKeyResponse> {
+	const res = await authedFetch(`${API_BASE}/api/notifications/push/key`, { cache: 'no-store' })
+	if (!res.ok) await throwWithResponse(res, 'Could not load the push key')
+	return (await res.json()) as PushKeyResponse
+}
+
+export interface PushSubscriptionPayload {
+	endpoint: string
+	keys: { p256dh: string; auth: string }
+}
+
+export async function subscribePush(payload: PushSubscriptionPayload): Promise<void> {
+	const res = await authedFetch(`${API_BASE}/api/notifications/push/subscribe`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(payload),
+	})
+	if (!res.ok) await throwWithResponse(res, 'Could not save the browser subscription')
+}
+
+export async function unsubscribePush(endpoint: string): Promise<void> {
+	const res = await authedFetch(`${API_BASE}/api/notifications/push/unsubscribe`, {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ endpoint }),
+	})
+	if (!res.ok) await throwWithResponse(res, 'Could not remove the browser subscription')
 }
 
 export async function unsubscribeNotifications(token: string): Promise<void> {

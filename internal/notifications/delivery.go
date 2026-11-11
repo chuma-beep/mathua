@@ -1,6 +1,8 @@
 package notifications
 
 import (
+	"encoding/json"
+	"errors"
 	"fmt"
 	"log"
 	"strings"
@@ -18,12 +20,42 @@ const (
 	deliveryMaxBackoff = 6 * time.Hour
 )
 
+// PushSender delivers one encrypted payload to one browser endpoint. The
+// delivery worker owns subscription selection and health, so a sender only has
+// to make the request and report a permanent rejection as PushGoneError.
+type PushSender interface {
+	Send(sub storage.NotificationPushSubscription, payload []byte) error
+}
+
+// PushGoneError marks an endpoint that will never accept another message, for
+// example a browser profile that was cleared. The subscription is deleted
+// instead of being retried forever.
+type PushGoneError struct {
+	Status   int
+	Endpoint string
+}
+
+func (e *PushGoneError) Error() string {
+	return fmt.Sprintf("push endpoint gone (status %d)", e.Status)
+}
+
+// PushMessage is the JSON payload the service worker receives. It stays small
+// because browsers cap an encrypted payload at 4096 bytes.
+type PushMessage struct {
+	Title          string `json:"title"`
+	Body           string `json:"body"`
+	Href           string `json:"href"`
+	NotificationID string `json:"notification_id,omitempty"`
+}
+
 // DeliveryOptions are the delivery worker dependencies. UnsubscribeToken is
 // injected so this package does not import authentication, and so tests can
-// use a deterministic signer.
+// use a deterministic signer. Push is optional: a deployment with no VAPID key
+// pair still delivers email.
 type DeliveryOptions struct {
 	Store            storage.NotificationStore
 	Sender           mailer.Sender
+	Push             PushSender
 	FrontendURL      string
 	UnsubscribeToken func(studentID string) (string, error)
 	Now              func() time.Time
@@ -32,11 +64,13 @@ type DeliveryOptions struct {
 	MaxAttempts      int
 }
 
-// Delivery sends due email deliveries. In-app items are already visible in the
-// feed and are recorded as sent by the generator, so only email is claimed.
+// Delivery sends due email and push deliveries. In-app items are already
+// visible in the feed and are recorded as sent by the generator, so only the
+// two outbound channels are claimed.
 type Delivery struct {
 	store            storage.NotificationStore
 	sender           mailer.Sender
+	push             PushSender
 	frontendURL      string
 	unsubscribeToken func(string) (string, error)
 	now              func() time.Time
@@ -45,8 +79,8 @@ type Delivery struct {
 	maxAttempts      int
 }
 
-// NewDelivery builds the email worker. The defaults match the Phase 3 plan:
-// a twenty-item batch, a five-minute lease and five attempts.
+// NewDelivery builds the outbound worker. The defaults are a twenty-item
+// batch, a five-minute lease and five attempts.
 func NewDelivery(opts DeliveryOptions) *Delivery {
 	now := opts.Now
 	if now == nil {
@@ -67,6 +101,7 @@ func NewDelivery(opts DeliveryOptions) *Delivery {
 	return &Delivery{
 		store:            opts.Store,
 		sender:           opts.Sender,
+		push:             opts.Push,
 		frontendURL:      strings.TrimSuffix(strings.TrimSpace(opts.FrontendURL), "/"),
 		unsubscribeToken: opts.UnsubscribeToken,
 		now:              now,
@@ -89,8 +124,11 @@ type DeliveryResult struct {
 // stops the batch: its state is recorded and the next job is attempted.
 func (d *Delivery) RunOnce() (DeliveryResult, error) {
 	var result DeliveryResult
-	if d.store == nil || d.sender == nil {
+	if d.store == nil {
 		return result, fmt.Errorf("notification delivery is not configured")
+	}
+	if d.sender == nil && d.push == nil {
+		return result, fmt.Errorf("notification delivery has no sender")
 	}
 	now := d.now().UTC()
 	jobs, err := d.store.ClaimNotificationDeliveries(now, d.lease, d.batchSize)
@@ -111,30 +149,14 @@ func (d *Delivery) deliver(job storage.NotificationDeliveryJob, now time.Time, r
 		d.retryOrFail(job, now, err.Error(), result)
 		return
 	}
-	if prefs == nil || !prefs.EmailEnabled {
-		d.suppress(job, "email_disabled", now, result)
+	if prefs == nil {
+		d.suppress(job, "preferences_missing", now, result)
 		return
 	}
 	if prefs.PausedUntil != nil && prefs.PausedUntil.After(now) {
 		// A reminder queued before a pause must not arrive afterwards. The next
 		// eligible day will create a fresh notification.
 		d.suppress(job, "paused", now, result)
-		return
-	}
-	if strings.TrimSpace(job.Email) == "" {
-		d.suppress(job, "email_missing", now, result)
-		return
-	}
-	if !job.EmailVerified {
-		d.suppress(job, "email_unverified", now, result)
-		return
-	}
-	if d.frontendURL == "" {
-		d.suppress(job, "frontend_not_configured", now, result)
-		return
-	}
-	if d.unsubscribeToken == nil {
-		d.suppress(job, "unsubscribe_not_configured", now, result)
 		return
 	}
 
@@ -155,18 +177,55 @@ func (d *Delivery) deliver(job storage.NotificationDeliveryJob, now time.Time, r
 		return
 	}
 
+	switch job.Channel {
+	case storage.NotificationChannelEmail:
+		d.deliverEmail(job, prefs, now, result)
+	case storage.NotificationChannelPush:
+		d.deliverPush(job, prefs, now, result)
+	default:
+		d.suppress(job, "unknown_channel", now, result)
+	}
+}
+
+func (d *Delivery) deliverEmail(job storage.NotificationDeliveryJob, prefs *storage.NotificationPreferences, now time.Time, result *DeliveryResult) {
+	if !prefs.EmailEnabled {
+		d.suppress(job, "email_disabled", now, result)
+		return
+	}
+	if strings.TrimSpace(job.Email) == "" {
+		d.suppress(job, "email_missing", now, result)
+		return
+	}
+	if !job.EmailVerified {
+		d.suppress(job, "email_unverified", now, result)
+		return
+	}
+	if d.sender == nil {
+		d.suppress(job, "email_not_configured", now, result)
+		return
+	}
+	if d.frontendURL == "" {
+		d.suppress(job, "frontend_not_configured", now, result)
+		return
+	}
+	if d.unsubscribeToken == nil {
+		d.suppress(job, "unsubscribe_not_configured", now, result)
+		return
+	}
+
 	token, err := d.unsubscribeToken(job.StudentID)
 	if err != nil {
 		d.retryOrFail(job, now, err.Error(), result)
 		return
 	}
-	body := ReviewReminderEmail(job,
-		d.frontendURL+"/review",
+	body := ReminderEmail(job,
+		ReminderActionLabel(job.Kind),
+		d.actionURL(job),
 		d.frontendURL+"/settings#notifications",
 		d.frontendURL+"/notifications/unsubscribe?token="+token)
 	subject := strings.TrimSpace(job.Title)
 	if subject == "" {
-		subject = "Mathua review reminder"
+		subject = defaultSubject(job.Kind)
 	}
 	if err := d.sender.Send(mailer.Message{To: job.Email, Subject: subject, Text: body}); err != nil {
 		d.retryOrFail(job, now, err.Error(), result)
@@ -178,6 +237,101 @@ func (d *Delivery) deliver(job storage.NotificationDeliveryJob, now time.Time, r
 		return
 	}
 	result.Sent++
+}
+
+// deliverPush fans one delivery row out to every device the learner has
+// registered. The row is complete when at least one device accepted it; a
+// device that reports the endpoint is gone is removed rather than retried.
+func (d *Delivery) deliverPush(job storage.NotificationDeliveryJob, prefs *storage.NotificationPreferences, now time.Time, result *DeliveryResult) {
+	if !prefs.PushEnabled {
+		d.suppress(job, "push_disabled", now, result)
+		return
+	}
+	if d.push == nil {
+		d.suppress(job, "push_not_configured", now, result)
+		return
+	}
+	subs, err := d.store.ListNotificationPushSubscriptions(job.StudentID)
+	if err != nil {
+		d.retryOrFail(job, now, err.Error(), result)
+		return
+	}
+	if len(subs) == 0 {
+		d.suppress(job, "push_no_subscription", now, result)
+		return
+	}
+	payload, err := json.Marshal(PushMessage{
+		Title:          job.Title,
+		Body:           job.Body,
+		Href:           job.Href,
+		NotificationID: job.NotificationID,
+	})
+	if err != nil {
+		d.retryOrFail(job, now, err.Error(), result)
+		return
+	}
+	delivered := 0
+	lastErr := ""
+	for _, sub := range subs {
+		err := d.push.Send(sub, payload)
+		if err == nil {
+			if markErr := d.store.MarkPushSubscriptionSuccess(sub.Endpoint, now); markErr != nil {
+				log.Printf("notifications: mark push success %s: %v", sub.Endpoint, markErr)
+			}
+			delivered++
+			continue
+		}
+		var gone *PushGoneError
+		if errors.As(err, &gone) {
+			if delErr := d.store.DeletePushSubscriptionByEndpoint(sub.Endpoint); delErr != nil {
+				log.Printf("notifications: delete gone push endpoint: %v", delErr)
+			}
+			continue
+		}
+		if markErr := d.store.MarkPushSubscriptionFailure(sub.Endpoint, now); markErr != nil {
+			log.Printf("notifications: mark push failure %s: %v", sub.Endpoint, markErr)
+		}
+		lastErr = err.Error()
+	}
+	if delivered == 0 {
+		if lastErr == "" {
+			lastErr = "no reachable push device"
+		}
+		d.retryOrFail(job, now, lastErr, result)
+		return
+	}
+	if err := d.store.CompleteNotificationDelivery(job.NotificationID, job.Channel, "webpush", now); err != nil {
+		log.Printf("notifications: complete delivery %s: %v", job.NotificationID, err)
+		result.Failed++
+		return
+	}
+	result.Sent++
+}
+
+func (d *Delivery) actionURL(job storage.NotificationDeliveryJob) string {
+	href := strings.TrimSpace(job.Href)
+	if href == "" {
+		href = "/review"
+	}
+	if d.frontendURL == "" {
+		return href
+	}
+	return d.frontendURL + href
+}
+
+func defaultSubject(kind string) string {
+	switch kind {
+	case ReviewKind:
+		return "Mathua review reminder"
+	case StudyKind:
+		return "Mathua study reminder"
+	case MilestoneKind:
+		return "Mathua milestone"
+	case InactivityKind:
+		return "Mathua is still here"
+	default:
+		return "Mathua notification"
+	}
 }
 
 func (d *Delivery) retryOrFail(job storage.NotificationDeliveryJob, now time.Time, reason string, result *DeliveryResult) {

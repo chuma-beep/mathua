@@ -127,6 +127,7 @@ func authMigrate(db *sql.DB) error {
 		"ALTER TABLE students ADD COLUMN google_id TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE students ADD COLUMN avatar_url TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE students ADD COLUMN email_verified INTEGER NOT NULL DEFAULT 0",
+		"ALTER TABLE notification_preferences ADD COLUMN push_enabled INTEGER NOT NULL DEFAULT 0",
 		`INSERT OR IGNORE INTO identities (provider, provider_id, student_id, email, email_verified)
 			SELECT 'google', google_id, id, email, 1 FROM students
 			WHERE google_id IS NOT NULL AND google_id != ''`,
@@ -1515,6 +1516,7 @@ func (s *SQLiteStore) ResetProgress(studentID string) error {
 		{"DELETE FROM effort_signals WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM review_runs WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM notification_deliveries WHERE notification_id IN (SELECT id FROM notifications WHERE student_id = ?)", []interface{}{studentID}},
+		{"DELETE FROM notification_push_subscriptions WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM notifications WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM notification_scan_state WHERE student_id = ?", []interface{}{studentID}},
 		{`UPDATE students SET xp_total = 0, xp_today = 0, diagnostic_completed = 0, diagnostic_completed_at = '',
@@ -1580,6 +1582,7 @@ func (s *SQLiteStore) DeleteAccount(studentID string) error {
 		{"DELETE FROM announcement_reads WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM announcement_views WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM notification_deliveries WHERE notification_id IN (SELECT id FROM notifications WHERE student_id = ?)", []interface{}{studentID}},
+		{"DELETE FROM notification_push_subscriptions WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM notifications WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM notification_scan_state WHERE student_id = ?", []interface{}{studentID}},
 		{"DELETE FROM notification_preferences WHERE student_id = ?", []interface{}{studentID}},

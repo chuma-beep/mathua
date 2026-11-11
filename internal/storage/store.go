@@ -570,6 +570,7 @@ const (
 type NotificationPreferences struct {
 	StudentID         string     `json:"student_id"`
 	EmailEnabled      bool       `json:"email_enabled"`
+	PushEnabled       bool       `json:"push_enabled"`
 	InAppEnabled      bool       `json:"in_app_enabled"`
 	ReviewsEnabled    bool       `json:"reviews_enabled"`
 	StudyEnabled      bool       `json:"study_enabled"`
@@ -620,11 +621,15 @@ type NotificationPage struct {
 // details generation needs. The generator pages through these, so it never
 // runs one student query per preference row.
 type NotificationRecipient struct {
-	StudentID     string
-	Name          string
-	Email         string
-	EmailVerified bool
-	Preferences   NotificationPreferences
+	StudentID      string
+	Name           string
+	Email          string
+	EmailVerified  bool
+	XPTotal        int
+	XPDate         string
+	AccountCreated time.Time
+	MasteredCount  int
+	Preferences    NotificationPreferences
 }
 
 // NotificationDelivery is one channel's durable attempt state. The worker
@@ -650,6 +655,7 @@ type NotificationDelivery struct {
 type NotificationDeliveryJob struct {
 	NotificationID string
 	StudentID      string
+	Kind           string
 	Channel        string
 	Attempts       int
 	Title          string
@@ -665,6 +671,10 @@ type NotificationDeliveryJob struct {
 const (
 	NotificationChannelEmail = "email"
 	NotificationChannelInApp = "in_app"
+	// NotificationChannelPush is a browser push message delivered through the
+	// service worker. Its destination is a per-device subscription, not a
+	// learner address, so one delivery row fans out to every device.
+	NotificationChannelPush = "push"
 
 	NotificationDeliveryPending    = "pending"
 	NotificationDeliverySending    = "sending"
@@ -677,6 +687,45 @@ const (
 // ErrNotificationNotFound means the notification does not exist, belongs to
 // another learner, or was cancelled. The three cases are deliberately one
 // error so a caller cannot probe another learner's ids.
+// NotificationPushSubscription is one browser or device push endpoint. The
+// endpoint is the primary key because a browser reports the same endpoint to
+// every page that subscribes; P256DH and Auth are the client's public key and
+// auth secret, used to encrypt the payload for that device.
+type NotificationPushSubscription struct {
+	StudentID   string
+	Endpoint    string
+	P256DH      string
+	Auth        string
+	UserAgent   string
+	CreatedAt   time.Time
+	UpdatedAt   time.Time
+	LastSuccess time.Time
+	Failures    int
+}
+
+// NotificationDeliveryRecord is the admin projection of a delivery row. It
+// carries the learner and the notification title so an operator can tell which
+// message failed without a second query per row.
+type NotificationDeliveryRecord struct {
+	NotificationID   string
+	StudentID        string
+	StudentName      string
+	Title            string
+	Channel          string
+	Status           string
+	Attempts         int
+	LastError        string
+	SuppressedReason string
+	CreatedAt        time.Time
+}
+
+// NotificationDeliveryStat is one channel-and-status count for the admin view.
+type NotificationDeliveryStat struct {
+	Channel string
+	Status  string
+	Count   int
+}
+
 var ErrNotificationNotFound = errors.New("notification not found")
 
 // NotificationStore is the notification persistence surface. It is separate
@@ -699,6 +748,14 @@ type NotificationStore interface {
 	FailNotificationDelivery(notificationID, channel, lastError string, now time.Time) error
 	GetNotificationScanState(studentID, kind string) (int64, error)
 	SetNotificationScanState(studentID, kind string, watermark int64, now time.Time) error
+	UpsertNotificationPushSubscription(s *NotificationPushSubscription) error
+	DeleteNotificationPushSubscription(studentID, endpoint string) error
+	DeletePushSubscriptionByEndpoint(endpoint string) error
+	ListNotificationPushSubscriptions(studentID string) ([]NotificationPushSubscription, error)
+	MarkPushSubscriptionSuccess(endpoint string, now time.Time) error
+	MarkPushSubscriptionFailure(endpoint string, now time.Time) error
+	NotificationDeliveryStats() ([]NotificationDeliveryStat, error)
+	ListNotificationDeliveryProblems(limit int) ([]NotificationDeliveryRecord, error)
 }
 
 // MaxRemedialQueue caps the per-student remedial queue.

@@ -134,3 +134,58 @@ self.addEventListener('fetch', event => {
   }
 
 })
+
+/* Push notifications.
+ *
+ * The payload is the JSON the server publishes for one delivery: title, body,
+ * href and notification_id. Nothing here fetches anything, because a push can
+ * arrive when the learner is offline and a fetch that hangs keeps the event
+ * alive until the browser times it out.
+ *
+ * Both handlers look their globals up inside the callback. The worker source is
+ * also executed by the unit test harness, which supplies only self, caches,
+ * fetch, Response and URL; a module-scope self.registration would fail there
+ * before any event is dispatched.
+ */
+self.addEventListener('push', event => {
+  let data = {}
+  try {
+    data = event.data ? event.data.json() : {}
+  } catch (err) {
+    data = {}
+  }
+  const title = data.title || 'Mathua'
+  const options = {
+    body: data.body || '',
+    icon: '/icons/icon-192.png',
+    badge: '/icons/icon-192.png',
+    tag: data.notification_id || undefined,
+    data: {
+      href: data.href || '/',
+      notification_id: data.notification_id || '',
+    },
+  }
+  event.waitUntil(self.registration.showNotification(title, options))
+})
+
+/* A click focuses an existing same-origin window and moves it to the target,
+ * or opens one when none is open. Reusing the window matters on mobile, where
+ * openWindow would stack a second copy of the app behind the first. */
+self.addEventListener('notificationclick', event => {
+  event.notification.close()
+  const data = event.notification.data || {}
+  const href = data.href || '/'
+
+  event.waitUntil((async () => {
+    const windows = await self.clients.matchAll({ type: 'window', includeUncontrolled: true })
+    for (const client of windows) {
+      if (new URL(client.url).origin !== self.location.origin) continue
+      await client.focus()
+      if (typeof client.navigate === 'function') {
+        await client.navigate(href)
+      }
+      return
+    }
+    await self.clients.openWindow(href)
+  })())
+})

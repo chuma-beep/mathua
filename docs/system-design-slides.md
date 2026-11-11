@@ -38,7 +38,7 @@ A single Go binary, a web delivery mode, one engine core.
 
 ![width:1000](diagrams/system-design-data-model-dark.svg)
 
-50 tables. Five carry the learning loop: `students`, `concept_progress`, `sessions`, `attempts`, `questions`.
+51 tables. Five carry the learning loop: `students`, `concept_progress`, `sessions`, `attempts`, `questions`.
 
 ---
 
