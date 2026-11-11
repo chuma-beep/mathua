@@ -25,7 +25,7 @@
 
 ---
 
-Mathua is a local-first adaptive math learning engine inspired by the mastery-gating philosophy of Math Academy. It guides a learner from arithmetic through university math through a checked prerequisite DAG of 1650 atomic concepts and 28 courses, never advancing until speed and accuracy thresholds are both met. Knowledge is scaffolded into 6150 worked examples (2050 KP shard files × 3 subgoals each) with subgoal labels and 183 dual-coded diagrams. It runs as a Go backend serving a React + Next.js frontend, covering leagues, parent/teacher share links and graph visualisation. Transcripts export as CSV via the API.
+Mathua is a local-first adaptive math learning engine inspired by the mastery-gating philosophy of Math Academy. It guides a learner from arithmetic through university math through a checked prerequisite DAG of 2050 atomic concepts and 29 courses, never advancing until speed and accuracy thresholds are both met. Knowledge is scaffolded into 6150 worked examples (2050 KP shard files × 3 subgoals each) with subgoal labels and 183 dual-coded diagrams. It runs as a Go backend serving a React + Next.js frontend, covering leagues, parent/teacher share links and graph visualisation. Transcripts export as CSV via the API.
 
 ---
 

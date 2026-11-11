@@ -190,7 +190,7 @@ The engine is the central orchestrator. It holds references to every subsystem a
 | **Scoring** | `internal/scoring/` | Two scores: lifetime topic score (permanent) and weekly score (resets Monday) + `30` daily XP goal `xp.DefaultDailyGoal` (`xp/policy.go`) |
 | **Weakness Propagation** | `Engine.PropagateWeakness` in `internal/engine/engine.go` | If a concept's weakness > 0.3, propagates `w × 0.3` to dependents |
 | **Diagnostic** | `internal/diagnostic/` (`cat.go:1`, `report.go:11`) | Compressed covering set + info-gain CAT with `±0.3` evidence propagation, per-concept `KnowledgeConfidence 0–1`, frontier at max belief drop, supplemental when `<0.7` |
-| **Planner** | `internal/planning/` | Course paths loaded from `data/courses.json` (28 courses) |
+| **Planner** | `internal/planning/` | Course paths loaded from `data/courses.json` (29 courses) |
 | **Lessons** | `internal/lessons/` | Markdown lesson content from `data/lessons/` + 2000 KP shards `data/lessons/kp/*.json` ×3 `audit_lessons.py:191` |
 
 ### DAG (Concept Graph)
@@ -259,7 +259,7 @@ longer gate the ladder.
 This replaced a streak-based ladder, and the cost of the old one is worth recording because it
 was invisible for months. All three tiers were gated on the single condition
 `streak >= required AND avg time <= threshold`, so the ladder was one test repeated until the
-streak was long enough: for the 2000 concepts whose `required_streak` is 10, `MASTERED` cost 30
+streak was long enough: for the 2050 concepts whose `required_streak` is 10, `MASTERED` cost 30
 consecutive correct answers, all-or-nothing, because one miss zeroed the streak. See
 `docs/mastery-semantics.md` for the measurements and ADR-038 for the decision.
 

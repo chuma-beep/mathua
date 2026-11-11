@@ -25,8 +25,8 @@ and the artifact it describes are one fact (AGENTS.md section 7).
 | Courses | `data/courses.json` | named target sets |
 | Destinations | `data/destinations.json` | named bundles of courses |
 
-Two numbers are useful to hold together. There are 2000 concepts, and there are 2000 KP shard files
-holding 6000 knowledge points, three per concept.
+Two numbers are useful to hold together. There are 2050 concepts, and there are 2050 KP shard files
+holding 6150 knowledge points, three per concept.
 
 ## 2. The pipeline
 
@@ -53,11 +53,11 @@ leaves the learner a placeholder instead of a worked example, and the audit refu
 All four content and documentation guards pass on the current corpus:
 
 ```
-OK: 1650 concepts across 23 domains                   scripts/validate_graph.go
-OK: 1650 concepts mapped, 1650 entries, 1549 sources,
-    1650 kp files, 4950 KPs, kp shards resolved,
+OK: 2050 concepts across 24 domains                   scripts/validate_graph.go
+OK: 2050 concepts mapped, 2050 entries, 1949 sources,
+    2050 kp files, 6150 KPs, kp shards resolved,
     0 issues                                          scripts/audit_lessons.py
-counts ok: 1650 concepts, 1650 KP files, 28 courses   scripts/counts.py --check
+counts ok: 2050 concepts, 2050 KP files, 29 courses   scripts/counts.py --check
 OK: docs agree with the code and the corpus           scripts/check_docs.py
 ```
 
@@ -72,7 +72,7 @@ means a new thin concept cannot be added quietly.
 ### 4.1 The course catalog reaches 2050 of the 2050 concepts
 
 Courses carry target sets, and a target expands to its transitive prerequisite closure in
-`internal/planning/planner.go:64` (`collectChain`). Across the 28 courses those closures reach
+`internal/planning/planner.go:64` (`collectChain`). Across the 29 courses those closures reach
 2050 of the 2050 concepts: 0 of them have a node, a generator, a lesson and three KP shards and
 still sit outside every named course path. The wiring batch of 2026-10-19 moved the 149 that used
 to sit there into the courses that teach their subject, and the table stays as the measurement on
