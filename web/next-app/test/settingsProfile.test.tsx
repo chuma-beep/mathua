@@ -15,6 +15,7 @@ const requestEmailVerificationMock = vi.fn()
 const startOAuthLoginMock = vi.fn()
 const getNotificationPreferencesMock = vi.fn()
 const updateNotificationPreferencesMock = vi.fn()
+const listPushDevicesMock = vi.fn()
 
 let mockUser: { student_id: string; name: string; username: string } | null = {
   student_id: 's1',
@@ -34,6 +35,8 @@ vi.mock('../lib/api', () => ({
   updateSettings: (...a: unknown[]) => updateSettingsMock(...a),
   getNotificationPreferences: (...a: unknown[]) => getNotificationPreferencesMock(...a),
   updateNotificationPreferences: (...a: unknown[]) => updateNotificationPreferencesMock(...a),
+  listPushDevices: (...a: unknown[]) => listPushDevicesMock(...a),
+  revokePushDevice: () => Promise.resolve(),
   updateProfileName: (...a: unknown[]) => updateProfileNameMock(...a),
   changePassword: (...a: unknown[]) => changePasswordMock(...a),
   getIdentities: (...a: unknown[]) => getIdentitiesMock(...a),
@@ -107,6 +110,7 @@ describe('Settings Profile section', () => {
     deleteAvatarMock.mockReset().mockResolvedValue(undefined)
     getNotificationPreferencesMock.mockReset().mockResolvedValue(defaultNotificationPrefs)
     updateNotificationPreferencesMock.mockReset().mockImplementation(async (prefs: typeof defaultNotificationPrefs) => prefs)
+    listPushDevicesMock.mockReset().mockResolvedValue([])
     setUserInfoMock.mockClear()
   })
 
@@ -117,6 +121,17 @@ describe('Settings Profile section', () => {
     if (!form) throw new Error('expected a form ancestor')
     fireEvent.submit(form)
   }
+
+
+  it('says when push is on with no registered device', async () => {
+    getNotificationPreferencesMock.mockResolvedValue({
+      ...defaultNotificationPrefs,
+      push_enabled: true,
+      digest: 'immediate',
+    })
+    render(<SettingsPage />)
+    expect(await screen.findByText(/No device is registered for push/)).toBeTruthy()
+  })
 
   it('prefills the display name and saves it', async () => {
     render(<SettingsPage />)

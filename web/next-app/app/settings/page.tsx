@@ -105,6 +105,7 @@ export default function SettingsPage() {
   const [notificationTimezoneDraft, setNotificationTimezoneDraft] = useState('')
   const [pushSupported, setPushSupported] = useState<boolean | null>(null)
   const [pushDevices, setPushDevices] = useState<NotificationDevice[]>([])
+  const [revokingDevice, setRevokingDevice] = useState('')
 
   useEffect(() => {
     if (!isLoggedIn()) {
@@ -135,7 +136,9 @@ export default function SettingsPage() {
         setNotificationPrefs(prefs)
         setNotificationTimezoneDraft(prefs.timezone)
         if (prefs.push_enabled) {
-          listPushDevices().then(setPushDevices).catch(() => {})
+          listPushDevices()
+            .then(setPushDevices)
+            .catch(() => setNotificationPrefsMsg('Push devices could not be loaded.'))
         }
       })
       .catch(() => setNotificationPrefsMsg('Notification preferences could not be loaded.'))
@@ -285,7 +288,9 @@ export default function SettingsPage() {
         await saveNotificationPrefs({ ...notificationPrefs, push_enabled: false })
         setPushDevices([])
       }
-      listPushDevices().then(setPushDevices).catch(() => {})
+      listPushDevices()
+        .then(setPushDevices)
+        .catch(() => setNotificationPrefsMsg('Push devices could not be loaded.'))
     } catch (e) {
       setNotificationPrefsMsg(e instanceof Error ? e.message : 'Could not change browser push.')
     } finally {
@@ -848,6 +853,11 @@ export default function SettingsPage() {
                           aria-label="Toggle browser push"
                         />
                       </div>
+                      {notificationPrefs.push_enabled && pushDevices.length === 0 && (
+                        <p className="mt-3 font-mono text-[10px] text-mathua-muted">
+                          No device is registered for push on this account.
+                        </p>
+                      )}
                       {pushDevices.length > 0 && (
                         <ul className="mt-3 space-y-2">
                           {pushDevices.map(device => (
@@ -864,12 +874,17 @@ export default function SettingsPage() {
                               </div>
                               <button
                                 type="button"
-                                disabled={notificationPrefsBusy}
+                                disabled={revokingDevice === device.id}
                                 onClick={() => {
                                   setNotificationPrefsMsg('')
+                                  setRevokingDevice(device.id)
                                   revokePushDevice(device.id)
-                                    .then(() => listPushDevices().then(setPushDevices))
+                                    .then(() => {
+                                      setPushDevices(current => current.filter(row => row.id !== device.id))
+                                      setNotificationPrefsMsg('Device revoked.')
+                                    })
                                     .catch(e => setNotificationPrefsMsg(e instanceof Error ? e.message : 'Could not revoke the device.'))
+                                    .finally(() => setRevokingDevice(''))
                                 }}
                                 className="shrink-0 border border-mathua-border px-2 h-8 font-mono text-[10px] uppercase tracking-wider text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue disabled:opacity-50"
                               >
