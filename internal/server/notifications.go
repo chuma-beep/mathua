@@ -328,8 +328,10 @@ func (s *Server) handleNotificationPreferences(w http.ResponseWriter, r *http.Re
 	}
 	body.StudentID = studentID
 	body.CreatedAt = now
+	previousDigest := ""
 	if existing, err := store.GetNotificationPreferences(studentID); err == nil && existing != nil {
 		body.CreatedAt = existing.CreatedAt
+		previousDigest = existing.Digest
 	}
 	normalized, err := notifications.NormalizePreferencesAt(body, now)
 	if err != nil {
@@ -341,6 +343,13 @@ func (s *Server) handleNotificationPreferences(w http.ResponseWriter, r *http.Re
 	if err := store.UpsertNotificationPreferences(&normalized); err != nil {
 		writeError(w, "failed to save notification preferences", http.StatusInternalServerError)
 		return
+	}
+	if previousDigest != normalized.Digest {
+		next := notifications.NextDigestAttempt(normalized, now)
+		if _, err := store.RescheduleNotificationDeliveries(studentID, next); err != nil {
+			writeError(w, "failed to reschedule queued notifications", http.StatusInternalServerError)
+			return
+		}
 	}
 	writeJSON(w, normalized)
 }

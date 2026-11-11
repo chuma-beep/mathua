@@ -812,6 +812,7 @@ type NotificationStore interface {
 	ListNotificationDeliveries(notificationID string) ([]NotificationDelivery, error)
 	ListStudentNotificationDeliveries(studentID string, limit int) ([]NotificationDeliveryRecord, error)
 	ListDueNotificationDeliveries(studentID, channel string, claimUntil time.Time) ([]NotificationDeliveryJob, error)
+	RescheduleNotificationDeliveries(studentID string, nextAttempt time.Time) (int, error)
 	PruneNotificationHistory(before time.Time) (NotificationPruneResult, error)
 	PrunePushSubscriptions(before time.Time, maxFailures int) (int, error)
 }

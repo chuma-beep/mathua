@@ -433,3 +433,30 @@ func TestNotificationEngagementAndPushDevices(t *testing.T) {
 		t.Fatalf("subscriptions after revoke: %v %v", subs, err)
 	}
 }
+
+func TestDigestChangeReschedulesQueuedDeliveries(t *testing.T) {
+	_, mux, store, token, sid := setupTestServerWithPlanner(t)
+	ns := store.(storage.NotificationStore)
+	now := time.Now().UTC().Truncate(time.Second)
+
+	seedNotification(t, store, sid, "n-queued", "queued", now, false)
+	if _, err := ns.CreateNotificationDelivery(&storage.NotificationDelivery{
+		NotificationID: "n-queued", Channel: storage.NotificationChannelEmail,
+		Status: storage.NotificationDeliveryPending, NextAttemptAt: now,
+	}); err != nil {
+		t.Fatalf("seed delivery: %v", err)
+	}
+
+	body := `{"digest":"daily","timezone":"UTC","preferred_time_min":1080,"quiet_start_min":1320,"quiet_end_min":420}`
+	rec := notificationRequest(t, mux, http.MethodPut, "/api/notifications/preferences", token, body)
+	if rec.Code != http.StatusOK {
+		t.Fatalf("save prefs = %d: %s", rec.Code, rec.Body.String())
+	}
+	rows, err := ns.ListNotificationDeliveries("n-queued")
+	if err != nil || len(rows) != 1 {
+		t.Fatalf("deliveries = %+v, err %v", rows, err)
+	}
+	if !rows[0].NextAttemptAt.After(now) {
+		t.Fatalf("queued delivery was not moved to the digest window: %+v", rows[0])
+	}
+}

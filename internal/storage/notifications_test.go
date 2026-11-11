@@ -1068,3 +1068,52 @@ func TestDigestSettlesOnlyItsOwnLease(t *testing.T) {
 		t.Fatalf("row not settled: %+v", rows)
 	}
 }
+
+func TestRescheduleNotificationDeliveries(t *testing.T) {
+	store := newTestStore(t)
+	ns := notificationStore(t, store)
+	learner := seedStudent(t, store)
+	other := seedStudent(t, store)
+	now := time.Now().UTC().Truncate(time.Second)
+	next := now.Add(24 * time.Hour)
+
+	seed := func(studentID, notificationID, channel, status string) {
+		t.Helper()
+		if _, err := ns.CreateNotification(&Notification{
+			ID: notificationID, StudentID: studentID, Kind: "review",
+			DedupeKey: notificationID, Title: "Queued", CreatedAt: now,
+		}); err != nil {
+			t.Fatalf("create %s: %v", notificationID, err)
+		}
+		if _, err := ns.CreateNotificationDelivery(&NotificationDelivery{
+			NotificationID: notificationID, Channel: channel,
+			Status: status, NextAttemptAt: now,
+		}); err != nil {
+			t.Fatalf("create %s delivery: %v", notificationID, err)
+		}
+	}
+	seed(learner.ID, "n-queued-email", NotificationChannelEmail, NotificationDeliveryPending)
+	seed(learner.ID, "n-queued-push", NotificationChannelPush, NotificationDeliveryRetry)
+	seed(learner.ID, "n-sent", NotificationChannelEmail, NotificationDeliverySent)
+	seed(other.ID, "n-other", NotificationChannelEmail, NotificationDeliveryPending)
+
+	moved, err := ns.RescheduleNotificationDeliveries(learner.ID, next)
+	if err != nil {
+		t.Fatalf("reschedule: %v", err)
+	}
+	if moved != 2 {
+		t.Fatalf("rescheduled %d rows, want 2", moved)
+	}
+	for _, id := range []string{"n-queued-email", "n-queued-push"} {
+		rows, _ := ns.ListNotificationDeliveries(id)
+		if len(rows) != 1 || !rows[0].NextAttemptAt.Equal(next) {
+			t.Fatalf("%s = %+v, want next attempt %s", id, rows, next)
+		}
+	}
+	for _, id := range []string{"n-sent", "n-other"} {
+		rows, _ := ns.ListNotificationDeliveries(id)
+		if len(rows) != 1 || !rows[0].NextAttemptAt.Equal(now) {
+			t.Fatalf("%s moved when it should not have: %+v", id, rows)
+		}
+	}
+}

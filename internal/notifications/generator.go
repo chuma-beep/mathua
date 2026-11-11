@@ -539,6 +539,20 @@ func nextDigestTime(local time.Time, digest string, preferredMin int) time.Time 
 	return at
 }
 
+// NextDigestAttempt is the first window a delivery may send in under these
+// preferences. Immediate preferences mean now, which is how a learner who
+// switches back to immediate gets the queued rows on the next worker tick.
+func NextDigestAttempt(p storage.NotificationPreferences, now time.Time) time.Time {
+	if p.Digest == "" || p.Digest == storage.NotificationDigestImmediate {
+		return now.UTC()
+	}
+	loc := time.UTC
+	if loaded, err := time.LoadLocation(p.Timezone); err == nil {
+		loc = loaded
+	}
+	return nextDigestTime(now.In(loc), p.Digest, p.PreferredTimeMin).UTC()
+}
+
 // studyDayEnabled matches the canonical comma-separated day list against a
 // local weekday.
 func studyDayEnabled(days string, weekday time.Weekday) bool {

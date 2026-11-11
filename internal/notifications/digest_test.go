@@ -132,3 +132,26 @@ func TestNormalizePreferencesDigest(t *testing.T) {
 		t.Fatalf("weekly digest = %q, %v", normalized.Digest, err)
 	}
 }
+
+func TestNextDigestAttemptUsesPreferences(t *testing.T) {
+	now := time.Date(2026, 11, 9, 10, 0, 0, 0, time.UTC)
+
+	immediate := storage.NotificationPreferences{Digest: storage.NotificationDigestImmediate}
+	if got := NextDigestAttempt(immediate, now); !got.Equal(now) {
+		t.Fatalf("immediate next attempt = %s, want now", got)
+	}
+
+	daily := storage.NotificationPreferences{
+		Digest: storage.NotificationDigestDaily, Timezone: "UTC", PreferredTimeMin: 18 * 60,
+	}
+	if got := NextDigestAttempt(daily, now); !got.Equal(time.Date(2026, 11, 9, 18, 0, 0, 0, time.UTC)) {
+		t.Fatalf("daily next attempt = %s", got)
+	}
+
+	weekly := storage.NotificationPreferences{
+		Digest: storage.NotificationDigestWeekly, Timezone: "UTC", PreferredTimeMin: 18 * 60,
+	}
+	if got := NextDigestAttempt(weekly, now); !got.Equal(time.Date(2026, 11, 9, 18, 0, 0, 0, time.UTC)) {
+		t.Fatalf("weekly next attempt = %s, want Monday", got)
+	}
+}

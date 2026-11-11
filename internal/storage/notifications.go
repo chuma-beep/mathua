@@ -1426,6 +1426,36 @@ func (s *PostgresStore) ListDueNotificationDeliveries(studentID, channel string,
 	return listDueNotificationDeliveries(s.db, rebindDollars(queryListDueNotificationDeliveries), studentID, channel, claimUntil)
 }
 
+// rescheduleNotificationDeliveries moves the learner's unclaimed email and push
+// rows to the window their new digest preference names. Without it, switching
+// from a weekly digest to immediate leaves a reminder waiting until Monday, and
+// switching the other way sends the queued rows one by one on the next tick.
+const rescheduleNotificationDeliveriesSQL = `UPDATE notification_deliveries
+SET next_attempt_at = ?
+WHERE notification_id IN (SELECT id FROM notifications WHERE student_id = ?)
+  AND channel IN ('email', 'push')
+  AND status IN ('pending', 'retry')`
+
+func rescheduleNotificationDeliveries(db *sql.DB, query, studentID string, nextAttempt time.Time) (int, error) {
+	res, err := db.Exec(query, nextAttempt.UTC().Unix(), studentID)
+	if err != nil {
+		return 0, fmt.Errorf("reschedule notification deliveries: %w", err)
+	}
+	affected, err := res.RowsAffected()
+	if err != nil {
+		return 0, fmt.Errorf("reschedule notification deliveries rows: %w", err)
+	}
+	return int(affected), nil
+}
+
+func (s *SQLiteStore) RescheduleNotificationDeliveries(studentID string, nextAttempt time.Time) (int, error) {
+	return rescheduleNotificationDeliveries(s.db, rescheduleNotificationDeliveriesSQL, studentID, nextAttempt)
+}
+
+func (s *PostgresStore) RescheduleNotificationDeliveries(studentID string, nextAttempt time.Time) (int, error) {
+	return rescheduleNotificationDeliveries(s.db, rebindDollars(rescheduleNotificationDeliveriesSQL), studentID, nextAttempt)
+}
+
 // completeNotificationDeliveries settles a digest batch in one statement. The
 // status and lease predicates are the concurrency guard: a row another worker
 // reclaimed after this lease expired is left to that worker, and the affected
