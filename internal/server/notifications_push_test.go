@@ -149,6 +149,24 @@ func TestAdminNotificationsReportsDeliveryHealth(t *testing.T) {
 	}); err != nil || !inserted {
 		t.Fatalf("seed delivery: %v %v", inserted, err)
 	}
+	sent := &storage.Notification{
+		ID: "n-health-sent", StudentID: e.studentID, Kind: "study", DedupeKey: "study:2026-11-11",
+		Title: "Study today", Body: "A short session is waiting.", Href: "/study", CreatedAt: now,
+	}
+	if created, err := notif.CreateNotification(sent); err != nil || !created {
+		t.Fatalf("seed sent notification: %v %v", created, err)
+	}
+	if inserted, err := notif.CreateNotificationDelivery(&storage.NotificationDelivery{
+		NotificationID: sent.ID,
+		Channel:        storage.NotificationChannelInApp,
+		Status:         storage.NotificationDeliverySent,
+		SentAt:         now,
+	}); err != nil || !inserted {
+		t.Fatalf("seed sent delivery: %v %v", inserted, err)
+	}
+	if err := notif.MarkNotificationOpened(e.studentID, sent.ID, now.Add(time.Minute)); err != nil {
+		t.Fatalf("mark opened: %v", err)
+	}
 
 	rec := e.do(t, http.MethodGet, "/api/admin/notifications", e.adminTok, "")
 	if rec.Code != http.StatusOK {
@@ -160,6 +178,13 @@ func TestAdminNotificationsReportsDeliveryHealth(t *testing.T) {
 			Status  string `json:"status"`
 			Count   int    `json:"count"`
 		} `json:"stats"`
+		Engagement []struct {
+			Kind    string `json:"kind"`
+			Channel string `json:"channel"`
+			Sent    int    `json:"sent"`
+			Opened  int    `json:"opened"`
+			Clicked int    `json:"clicked"`
+		} `json:"engagement"`
 		Problems []struct {
 			StudentID string `json:"student_id"`
 			Channel   string `json:"channel"`
@@ -171,11 +196,24 @@ func TestAdminNotificationsReportsDeliveryHealth(t *testing.T) {
 	if err := json.Unmarshal(rec.Body.Bytes(), &body); err != nil {
 		t.Fatalf("decode: %v", err)
 	}
-	if len(body.Stats) != 1 || body.Stats[0].Channel != "email" || body.Stats[0].Status != "failed" || body.Stats[0].Count != 1 {
-		t.Fatalf("stats = %+v", body.Stats)
+	foundFailed := false
+	for _, stat := range body.Stats {
+		if stat.Channel == "email" && stat.Status == "failed" && stat.Count == 1 {
+			foundFailed = true
+		}
+	}
+	if !foundFailed {
+		t.Fatalf("stats = %+v, want one failed email row", body.Stats)
 	}
 	if len(body.Problems) != 1 || body.Problems[0].StudentID != e.studentID ||
 		body.Problems[0].Attempts != 3 || body.Problems[0].LastError != "provider unavailable" {
 		t.Fatalf("problems = %+v", body.Problems)
+	}
+	// Only sent rows count, so the failed email delivery is absent and the
+	// opened in-app one is the single engagement row.
+	if len(body.Engagement) != 1 || body.Engagement[0].Kind != "study" ||
+		body.Engagement[0].Channel != "in_app" || body.Engagement[0].Sent != 1 ||
+		body.Engagement[0].Opened != 1 || body.Engagement[0].Clicked != 0 {
+		t.Fatalf("engagement = %+v", body.Engagement)
 	}
 }

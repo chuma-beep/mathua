@@ -1071,6 +1071,48 @@ func (s *PostgresStore) NotificationDeliveryStats() ([]NotificationDeliveryStat,
 	return notificationDeliveryStats(s.db, rebindDollars(queryNotificationDeliveryStats))
 }
 
+// queryNotificationEngagementStats answers the question the counts above
+// cannot: of the notifications that reached someone, how many did they open and
+// click? Only sent rows are counted, because a suppressed row never had a
+// reader and would drag every rate toward zero for a configuration mistake
+// rather than for disinterest.
+const queryNotificationEngagementStats = `SELECT n.kind, d.channel, COUNT(*),
+	COALESCE(SUM(CASE WHEN d.opened_at > 0 THEN 1 ELSE 0 END), 0),
+	COALESCE(SUM(CASE WHEN d.clicked_at > 0 THEN 1 ELSE 0 END), 0)
+FROM notification_deliveries d
+JOIN notifications n ON n.id = d.notification_id
+WHERE d.status = 'sent'
+GROUP BY n.kind, d.channel
+ORDER BY n.kind, d.channel`
+
+func notificationEngagementStats(db *sql.DB, query string) ([]NotificationEngagementStat, error) {
+	rows, err := db.Query(query)
+	if err != nil {
+		return nil, fmt.Errorf("notification engagement stats: %w", err)
+	}
+	defer rows.Close()
+	out := make([]NotificationEngagementStat, 0, 8)
+	for rows.Next() {
+		var stat NotificationEngagementStat
+		if err := rows.Scan(&stat.Kind, &stat.Channel, &stat.Sent, &stat.Opened, &stat.Clicked); err != nil {
+			return nil, fmt.Errorf("scan notification engagement stat: %w", err)
+		}
+		out = append(out, stat)
+	}
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("notification engagement stat rows: %w", err)
+	}
+	return out, nil
+}
+
+func (s *SQLiteStore) NotificationEngagementStats() ([]NotificationEngagementStat, error) {
+	return notificationEngagementStats(s.db, queryNotificationEngagementStats)
+}
+
+func (s *PostgresStore) NotificationEngagementStats() ([]NotificationEngagementStat, error) {
+	return notificationEngagementStats(s.db, rebindDollars(queryNotificationEngagementStats))
+}
+
 func (s *SQLiteStore) ListNotificationDeliveryProblems(limit int) ([]NotificationDeliveryRecord, error) {
 	return listNotificationDeliveryProblems(s.db, queryNotificationDeliveryProblems, limit)
 }

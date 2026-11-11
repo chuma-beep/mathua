@@ -737,6 +737,17 @@ type NotificationDeliveryStat struct {
 	Count   int
 }
 
+// NotificationEngagementStat is the sent, opened and clicked count for one
+// notification kind on one channel. Engagement is counted only on rows that
+// were actually sent, because a suppressed row was never seen by anyone.
+type NotificationEngagementStat struct {
+	Kind    string
+	Channel string
+	Sent    int
+	Opened  int
+	Clicked int
+}
+
 // NotificationPruneResult reports how many rows a retention pass removed.
 type NotificationPruneResult struct {
 	Notifications int
@@ -772,6 +783,7 @@ type NotificationStore interface {
 	MarkPushSubscriptionSuccess(endpoint string, now time.Time) error
 	MarkPushSubscriptionFailure(endpoint string, now time.Time) error
 	NotificationDeliveryStats() ([]NotificationDeliveryStat, error)
+	NotificationEngagementStats() ([]NotificationEngagementStat, error)
 	ListNotificationDeliveryProblems(limit int) ([]NotificationDeliveryRecord, error)
 	MarkNotificationOpened(studentID, notificationID string, now time.Time) error
 	MarkNotificationClicked(studentID, notificationID string, now time.Time) error

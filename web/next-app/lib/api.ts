@@ -2163,6 +2163,14 @@ export interface AdminNotificationProblem {
 	created_at: string
 }
 
+export interface AdminNotificationEngagement {
+	kind: string
+	channel: string
+	sent: number
+	opened: number
+	clicked: number
+}
+
 /**
  * Delivery health for the notification pipeline.
  *
@@ -2179,6 +2187,7 @@ export interface AdminNotificationRetention {
 export async function getAdminNotificationHealth(limit = 50): Promise<{
 	stats: AdminNotificationStat[]
 	problems: AdminNotificationProblem[]
+	engagement: AdminNotificationEngagement[]
 	retention?: AdminNotificationRetention
 }> {
 	const res = await authedFetch(`${API_BASE}/api/admin/notifications?limit=${limit}`, { cache: 'no-store' })
@@ -2186,9 +2195,15 @@ export async function getAdminNotificationHealth(limit = 50): Promise<{
 	const data = (await res.json()) as {
 		stats?: AdminNotificationStat[]
 		problems?: AdminNotificationProblem[]
+		engagement?: AdminNotificationEngagement[]
 		retention?: AdminNotificationRetention
 	}
-	return { stats: data.stats ?? [], problems: data.problems ?? [], retention: data.retention }
+	return {
+		stats: data.stats ?? [],
+		problems: data.problems ?? [],
+		engagement: data.engagement ?? [],
+		retention: data.retention,
+	}
 }
 
 export interface AdminNotificationDeliveryDetail {

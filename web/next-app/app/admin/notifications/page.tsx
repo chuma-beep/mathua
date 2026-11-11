@@ -12,6 +12,7 @@ import {
   getErrorMessage,
   replayNotificationDelivery,
   type AdminNotificationDeliveryDetail,
+  type AdminNotificationEngagement,
   type AdminNotificationProblem,
   type AdminNotificationRetention,
   type AdminNotificationStat,
@@ -28,9 +29,17 @@ function statusLabel(status: string): string {
   return status.charAt(0).toUpperCase() + status.slice(1)
 }
 
+// rate renders a share of a sent count, or a dash when nothing was sent. A
+// zero denominator is not zero percent: nothing was measured.
+function rate(part: number, whole: number): string {
+  if (whole <= 0) return '-'
+  return `${Math.round((part / whole) * 100)}%`
+}
+
 export default function AdminNotificationsPage() {
   const [stats, setStats] = useState<AdminNotificationStat[] | null>(null)
   const [problems, setProblems] = useState<AdminNotificationProblem[]>([])
+  const [engagement, setEngagement] = useState<AdminNotificationEngagement[]>([])
   const [retention, setRetention] = useState<AdminNotificationRetention | null>(null)
   const [historyFor, setHistoryFor] = useState('')
   const [history, setHistory] = useState<AdminNotificationDeliveryDetail[]>([])
@@ -42,6 +51,7 @@ export default function AdminNotificationsPage() {
       .then((r) => {
         setStats(r.stats)
         setProblems(r.problems)
+        setEngagement(r.engagement)
         setRetention(r.retention ?? null)
       })
       .catch((e) => {
@@ -108,6 +118,28 @@ export default function AdminNotificationsPage() {
                     <span className="font-mono text-xs text-mathua-secondary">{stat.channel}</span>
                     <span className="font-mono text-xs text-mathua-primary">{statusLabel(stat.status)}</span>
                     <span className="font-mono text-xs text-mathua-primary">{stat.count}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            <h2 className="mb-2 font-mono text-xs text-mathua-primary">Engagement by kind and channel</h2>
+            {engagement.length === 0 ? (
+              <p className="mb-8 font-mono text-[11px] text-mathua-muted">
+                Nothing has been sent yet, so there is no engagement to measure.
+              </p>
+            ) : (
+              <ul className="mb-8 space-y-1">
+                {engagement.map((row) => (
+                  <li
+                    key={`${row.kind}-${row.channel}`}
+                    className="grid grid-cols-[1fr_auto_auto_auto_auto] items-baseline gap-3 border border-mathua-border bg-mathua-surface px-4 py-2 font-mono text-xs"
+                  >
+                    <span className="text-mathua-secondary">{row.kind} · {row.channel}</span>
+                    <span className="text-mathua-primary">{row.sent} sent</span>
+                    <span className="text-mathua-muted">{row.opened} opened</span>
+                    <span className="text-mathua-muted">open {rate(row.opened, row.sent)}</span>
+                    <span className="text-mathua-muted">click {rate(row.clicked, row.sent)}</span>
                   </li>
                 ))}
               </ul>

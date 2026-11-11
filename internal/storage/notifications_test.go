@@ -772,3 +772,44 @@ func TestNotificationPushSubscriptionHealth(t *testing.T) {
 		t.Fatalf("dead endpoint survived the prune: %+v", subs)
 	}
 }
+
+func TestNotificationEngagementStatsCountSentOnly(t *testing.T) {
+	store := newTestStore(t)
+	ns := notificationStore(t, store)
+	learner := seedStudent(t, store)
+	now := time.Now().UTC().Truncate(time.Second)
+
+	for _, n := range []struct{ id, kind, key string }{
+		{"n-eng-1", "review", "eng:1"},
+		{"n-eng-2", "review", "eng:2"},
+		{"n-eng-3", "study", "eng:3"},
+	} {
+		if _, err := ns.CreateNotification(&Notification{
+			ID: n.id, StudentID: learner.ID, Kind: n.kind, DedupeKey: n.key,
+			Title: "Title", CreatedAt: now,
+		}); err != nil {
+			t.Fatalf("create notification %s: %v", n.id, err)
+		}
+	}
+	for _, d := range []*NotificationDelivery{
+		{NotificationID: "n-eng-1", Channel: NotificationChannelEmail, Status: NotificationDeliverySent, SentAt: now, OpenedAt: now, ClickedAt: now},
+		{NotificationID: "n-eng-2", Channel: NotificationChannelEmail, Status: NotificationDeliverySent, SentAt: now},
+		{NotificationID: "n-eng-3", Channel: NotificationChannelPush, Status: NotificationDeliverySuppressed, SuppressedReason: "no device"},
+	} {
+		if _, err := ns.CreateNotificationDelivery(d); err != nil {
+			t.Fatalf("create delivery for %s: %v", d.NotificationID, err)
+		}
+	}
+
+	stats, err := ns.NotificationEngagementStats()
+	if err != nil {
+		t.Fatalf("engagement stats: %v", err)
+	}
+	if len(stats) != 1 {
+		t.Fatalf("stats = %+v, want one sent group", stats)
+	}
+	got := stats[0]
+	if got.Kind != "review" || got.Channel != NotificationChannelEmail || got.Sent != 2 || got.Opened != 1 || got.Clicked != 1 {
+		t.Fatalf("stat = %+v, want review/email sent 2 opened 1 clicked 1", got)
+	}
+}

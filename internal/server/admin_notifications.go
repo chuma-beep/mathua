@@ -30,6 +30,14 @@ type adminDeliveryProblemJSON struct {
 	CreatedAt        string `json:"created_at"`
 }
 
+type adminEngagementStatJSON struct {
+	Kind    string `json:"kind"`
+	Channel string `json:"channel"`
+	Sent    int    `json:"sent"`
+	Opened  int    `json:"opened"`
+	Clicked int    `json:"clicked"`
+}
+
 // GET /api/admin/notifications reports notification delivery health: one count
 // per channel and status, plus the deliveries that will never move again.
 // Retries are deliberately absent from the problem list because they are still
@@ -59,15 +67,35 @@ func (s *Server) handleAdminNotifications(w http.ResponseWriter, r *http.Request
 		writeError(w, "failed to load delivery problems", http.StatusInternalServerError)
 		return
 	}
+	engagement, err := store.NotificationEngagementStats()
+	if err != nil {
+		writeError(w, "failed to load engagement statistics", http.StatusInternalServerError)
+		return
+	}
 	writeJSON(w, map[string]interface{}{
-		"stats":    adminDeliveryStats(stats),
-		"problems": adminDeliveryProblems(problems),
+		"stats":      adminDeliveryStats(stats),
+		"problems":   adminDeliveryProblems(problems),
+		"engagement": adminEngagementStats(engagement),
 		"retention": map[string]interface{}{
 			"days":               notifications.RetentionDays,
 			"push_failure_days":  notifications.PushFailureRetentionDays,
 			"push_failure_limit": notifications.PushFailureLimit,
 		},
 	})
+}
+
+func adminEngagementStats(stats []storage.NotificationEngagementStat) []adminEngagementStatJSON {
+	out := make([]adminEngagementStatJSON, 0, len(stats))
+	for _, stat := range stats {
+		out = append(out, adminEngagementStatJSON{
+			Kind:    stat.Kind,
+			Channel: stat.Channel,
+			Sent:    stat.Sent,
+			Opened:  stat.Opened,
+			Clicked: stat.Clicked,
+		})
+	}
+	return out
 }
 
 func adminDeliveryStats(stats []storage.NotificationDeliveryStat) []adminDeliveryStatJSON {
