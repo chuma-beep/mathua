@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Parameterisation",
+    "section": "The parameterisation",
+    "subgoals": [
+      "Discretise the control",
+      "Integrate forward",
+      "Recover the state trajectory"
+    ]
+  },
+  {
+    "label": "Sensitivity",
+    "section": "The sensitivity",
+    "subgoals": [
+      "Propagate derivatives",
+      "Use an adjoint pass",
+      "Pay once per horizon"
+    ]
+  },
+  {
+    "label": "The weakness",
+    "section": "The weakness",
+    "subgoals": [
+      "Amplify early changes",
+      "Struggle with unstable dynamics",
+      "See long-horizon conditioning"
+    ]
+  }
+]

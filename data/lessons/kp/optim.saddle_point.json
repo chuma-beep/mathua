@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Defining inequalities",
+    "section": "The defining inequalities",
+    "subgoals": [
+      "Compare along the first block",
+      "Compare along the second block",
+      "Keep both directions"
+    ]
+  },
+  {
+    "label": "First-order form",
+    "section": "First-order form",
+    "subgoals": [
+      "Set both block gradients to zero",
+      "Read the indefinite Hessian",
+      "Separate stationarity from extremality"
+    ]
+  },
+  {
+    "label": "Existence",
+    "section": "Existence",
+    "subgoals": [
+      "Require convex-concave structure",
+      "Require compact convex sets",
+      "Equate minimax and maximin"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Implicit function theorem",
+    "section": "The implicit function theorem",
+    "subgoals": [
+      "State the defining equation",
+      "Require a nonsingular derivative",
+      "Solve the implied linear system"
+    ]
+  },
+  {
+    "label": "Adjoint solve",
+    "section": "The adjoint solve",
+    "subgoals": [
+      "Use the transposed Jacobian",
+      "Pay one solve",
+      "Decouple from iteration count"
+    ]
+  },
+  {
+    "label": "Fixed-point case",
+    "section": "The fixed-point case",
+    "subgoals": [
+      "Differentiate the fixed-point equation",
+      "Keep memory constant",
+      "Avoid unrolling"
+    ]
+  }
+]

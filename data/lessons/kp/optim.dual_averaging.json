@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Running average",
+    "section": "The running average",
+    "subgoals": [
+      "Accumulate gradients in the dual",
+      "Map the sum back",
+      "Depend on the whole history"
+    ]
+  },
+  {
+    "label": "Lazy versus greedy",
+    "section": "Lazy versus greedy",
+    "subgoals": [
+      "Contrast with mirror descent",
+      "Smooth the iterates",
+      "Delay the move"
+    ]
+  },
+  {
+    "label": "Regulariser view",
+    "section": "The regulariser view",
+    "subgoals": [
+      "Read the accumulator as a penalty",
+      "Pull toward the dual origin",
+      "Recover proximal forms"
+    ]
+  }
+]

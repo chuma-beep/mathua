@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Degree relaxation",
+    "section": "The degree relaxation",
+    "subgoals": [
+      "Assign two edges per city",
+      "Accept disjoint subtours",
+      "Read a weak bound"
+    ]
+  },
+  {
+    "label": "Subtour elimination",
+    "section": "Subtour elimination",
+    "subgoals": [
+      "Separate a city subset",
+      "Cut the closed cycle",
+      "Use a min-cut routine"
+    ]
+  },
+  {
+    "label": "Strength ladder",
+    "section": "The strength ladder",
+    "subgoals": [
+      "Add subtour cuts",
+      "Add comb inequalities",
+      "Price each level"
+    ]
+  }
+]

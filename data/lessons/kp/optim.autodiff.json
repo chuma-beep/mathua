@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Forward and reverse",
+    "section": "Forward and reverse",
+    "subgoals": [
+      "Carry derivatives forward",
+      "Record for reverse",
+      "Count directions"
+    ]
+  },
+  {
+    "label": "The graph",
+    "section": "The graph",
+    "subgoals": [
+      "Compose local derivatives",
+      "Apply the chain rule",
+      "Stay exact to rounding"
+    ]
+  },
+  {
+    "label": "Memory against time",
+    "section": "Memory against time",
+    "subgoals": [
+      "Store intermediates",
+      "Checkpoint to save memory",
+      "Recompute on the backward pass"
+    ]
+  }
+]

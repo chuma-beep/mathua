@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Two uses",
+    "section": "The two uses",
+    "subgoals": [
+      "Smooth a discriminator",
+      "Enforce a Lipschitz bound",
+      "Avoid a hard projection"
+    ]
+  },
+  {
+    "label": "Discretisation",
+    "section": "The discretisation",
+    "subgoals": [
+      "Sample points",
+      "Interpolate between distributions",
+      "Accept estimate variance"
+    ]
+  },
+  {
+    "label": "The weight",
+    "section": "The weight",
+    "subgoals": [
+      "Trade constraint against objective",
+      "Avoid a violated constraint",
+      "Avoid a flattened model"
+    ]
+  }
+]

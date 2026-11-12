@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Receding horizon",
+    "section": "The receding horizon",
+    "subgoals": [
+      "Solve over a window",
+      "Apply the first move",
+      "Recompute at the next sample"
+    ]
+  },
+  {
+    "label": "Constraints",
+    "section": "Constraints",
+    "subgoals": [
+      "Bound the state",
+      "Bound the input",
+      "Solve a quadratic program"
+    ]
+  },
+  {
+    "label": "Feasibility and stability",
+    "section": "Feasibility and stability",
+    "subgoals": [
+      "Add a terminal constraint",
+      "Add a terminal cost",
+      "Prove repeated feasibility"
+    ]
+  }
+]

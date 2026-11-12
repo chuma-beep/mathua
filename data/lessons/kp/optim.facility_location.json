@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Formulation",
+    "section": "The formulation",
+    "subgoals": [
+      "Open facilities with binaries",
+      "Assign demand continuously",
+      "Link assignment to open status"
+    ]
+  },
+  {
+    "label": "Relaxation strength",
+    "section": "The strength of the relaxation",
+    "subgoals": [
+      "Allow split demand",
+      "Add redundant cover constraints",
+      "Measure the bound gain"
+    ]
+  },
+  {
+    "label": "Uncapacitated case",
+    "section": "The uncapacitated case",
+    "subgoals": [
+      "Keep the problem NP-hard",
+      "Expect a close LP bound",
+      "Benchmark cut strength"
+    ]
+  }
+]

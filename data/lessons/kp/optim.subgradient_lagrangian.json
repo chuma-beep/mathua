@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Dual function",
+    "section": "The dual function",
+    "subgoals": [
+      "Minimise over integers",
+      "Read concavity",
+      "Read the residual subgradient"
+    ]
+  },
+  {
+    "label": "Step rule",
+    "section": "The step rule",
+    "subgoals": [
+      "Move along the residual",
+      "Shrink or normalise the step",
+      "Avoid oscillation"
+    ]
+  },
+  {
+    "label": "Stopping rule",
+    "section": "The stopping rule",
+    "subgoals": [
+      "Track the best dual value",
+      "Stop on a small gain",
+      "Keep the best multipliers"
+    ]
+  }
+]

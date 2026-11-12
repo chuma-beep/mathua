@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The model",
+    "section": "The model",
+    "subgoals": [
+      "Assign by a permutation",
+      "Couple facility pairs",
+      "Read a quadratic objective"
+    ]
+  },
+  {
+    "label": "Linearisation",
+    "section": "Linearisation",
+    "subgoals": [
+      "Create pair variables",
+      "Linearise the products",
+      "Accept quartic growth"
+    ]
+  },
+  {
+    "label": "Why it is hard",
+    "section": "Why it is hard",
+    "subgoals": [
+      "Contain the salesman",
+      "Contain partitioning",
+      "Lean on heuristics"
+    ]
+  }
+]

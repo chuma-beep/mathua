@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Derivation",
+    "section": "The derivation",
+    "subgoals": [
+      "Read a tableau row",
+      "Split integer and fractional parts",
+      "Derive a valid inequality"
+    ]
+  },
+  {
+    "label": "Separation",
+    "section": "The separation",
+    "subgoals": [
+      "Take each fractional basic",
+      "Generate candidate cuts",
+      "Prefer the deepest"
+    ]
+  },
+  {
+    "label": "Numerical care",
+    "section": "Numerical care",
+    "subgoals": [
+      "Limit cut rounds",
+      "Drop stale cuts",
+      "Watch conditioning"
+    ]
+  }
+]

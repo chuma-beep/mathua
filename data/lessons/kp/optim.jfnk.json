@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The product",
+    "section": "The product",
+    "subgoals": [
+      "Difference the residual",
+      "Scale the step",
+      "Avoid forming the matrix"
+    ]
+  },
+  {
+    "label": "The forcing term",
+    "section": "The forcing term",
+    "subgoals": [
+      "Tighten with convergence",
+      "Allow inexact steps",
+      "Avoid oversolving"
+    ]
+  },
+  {
+    "label": "Preconditioning",
+    "section": "Preconditioning",
+    "subgoals": [
+      "Build a cheap inverse",
+      "Accelerate the Krylov solve",
+      "Watch for stalling"
+    ]
+  }
+]

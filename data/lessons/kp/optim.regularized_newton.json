@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The damping",
+    "section": "The damping",
+    "subgoals": [
+      "Shift the Hessian",
+      "Blend Newton and gradient",
+      "Bound the step length"
+    ]
+  },
+  {
+    "label": "The update rule",
+    "section": "The update rule",
+    "subgoals": [
+      "Compare predicted and actual",
+      "Decrease on success",
+      "Increase on failure"
+    ]
+  },
+  {
+    "label": "Levenberg-Marquardt",
+    "section": "The Levenberg-Marquardt reading",
+    "subgoals": [
+      "Start from Gauss-Newton",
+      "Interpolate to gradient",
+      "Read the damping scale"
+    ]
+  }
+]

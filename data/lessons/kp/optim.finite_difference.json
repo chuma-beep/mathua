@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Error balance",
+    "section": "The error balance",
+    "subgoals": [
+      "Name truncation error",
+      "Name rounding error",
+      "Pick a step near the balance"
+    ]
+  },
+  {
+    "label": "Central differences",
+    "section": "Central differences",
+    "subgoals": [
+      "Cancel the first-order term",
+      "Pay two evaluations",
+      "Widen the usable step"
+    ]
+  },
+  {
+    "label": "Many dimensions",
+    "section": "Gradients in many dimensions",
+    "subgoals": [
+      "Count evaluations per coordinate",
+      "Compare with adjoints",
+      "Avoid a full gradient sweep"
+    ]
+  }
+]

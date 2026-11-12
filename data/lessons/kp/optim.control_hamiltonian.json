@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "The definition",
+    "subgoals": [
+      "Add the running cost",
+      "Add the costate inner product",
+      "Keep state, control and costate"
+    ]
+  },
+  {
+    "label": "Pointwise minimisation",
+    "section": "Pointwise minimisation",
+    "subgoals": [
+      "Differentiate in the control",
+      "Respect the control bound",
+      "Check for a boundary solution"
+    ]
+  },
+  {
+    "label": "Costate equation",
+    "section": "The costate equation",
+    "subgoals": [
+      "Integrate backward",
+      "Use the terminal condition",
+      "Form a boundary value problem"
+    ]
+  }
+]

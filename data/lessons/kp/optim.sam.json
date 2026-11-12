@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Inner ascent",
+    "section": "The inner ascent",
+    "subgoals": [
+      "Compute the gradient",
+      "Move to the worst nearby point",
+      "Evaluate there"
+    ]
+  },
+  {
+    "label": "Outer step",
+    "section": "The outer step",
+    "subgoals": [
+      "Use the perturbed gradient",
+      "Discard the perturbed point",
+      "Pay one extra gradient"
+    ]
+  },
+  {
+    "label": "Why sharpness matters",
+    "section": "Why sharpness matters",
+    "subgoals": [
+      "Prefer a flat minimum",
+      "Tolerate distribution shift",
+      "Separate the effect from regularisation"
+    ]
+  }
+]

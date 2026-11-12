@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Economic reading",
+    "section": "The economic reading",
+    "subgoals": [
+      "Read a marginal cost",
+      "Locate expensive states",
+      "Compare across times"
+    ]
+  },
+  {
+    "label": "Backward equation",
+    "section": "The backward equation",
+    "subgoals": [
+      "Differentiate the Hamiltonian",
+      "Start from terminal cost",
+      "Integrate to the start"
+    ]
+  },
+  {
+    "label": "Jump conditions",
+    "section": "The jump conditions",
+    "subgoals": [
+      "Detect an active state constraint",
+      "Add the multiplier jump",
+      "Preserve optimality"
+    ]
+  }
+]

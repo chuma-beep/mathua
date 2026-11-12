@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Two levels",
+    "section": "The two levels",
+    "subgoals": [
+      "Run inner training",
+      "Score on validation",
+      "Differentiate the outcome"
+    ]
+  },
+  {
+    "label": "Backward pass",
+    "section": "The backward pass",
+    "subgoals": [
+      "Unroll or use implicit form",
+      "Trade memory for exactness",
+      "Handle truncation"
+    ]
+  },
+  {
+    "label": "The use",
+    "section": "The use",
+    "subgoals": [
+      "Tune learning rates",
+      "Tune initialisation",
+      "Fight gradient variance"
+    ]
+  }
+]

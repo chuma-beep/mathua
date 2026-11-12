@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Inertia test",
+    "section": "The inertia test",
+    "subgoals": [
+      "Factor the KKT matrix",
+      "Count eigenvalue signs",
+      "Compare with the expectation"
+    ]
+  },
+  {
+    "label": "The shift",
+    "section": "The shift",
+    "subgoals": [
+      "Add a multiple of identity",
+      "Refactorise",
+      "Fall back to a gradient step"
+    ]
+  },
+  {
+    "label": "The trade",
+    "section": "The trade",
+    "subgoals": [
+      "Shorten the step",
+      "Adapt the shift",
+      "Recover Newton progress"
+    ]
+  }
+]

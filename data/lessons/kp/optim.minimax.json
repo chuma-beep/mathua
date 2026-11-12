@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Outer and inner problem",
+    "section": "The outer and inner problem",
+    "subgoals": [
+      "Fix the first block",
+      "Maximise over the second",
+      "Minimise the resulting value"
+    ]
+  },
+  {
+    "label": "Commuting orders",
+    "section": "When the orders commute",
+    "subgoals": [
+      "State the one-sided inequality",
+      "Name the convex-concave condition",
+      "Separate saddle from minimax"
+    ]
+  },
+  {
+    "label": "Why it appears",
+    "section": "Why the formulation appears",
+    "subgoals": [
+      "Model adversarial uncertainty",
+      "Name robust design",
+      "Read the value as a guarantee"
+    ]
+  }
+]

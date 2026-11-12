@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Two evaluations",
+    "section": "The two evaluations",
+    "subgoals": [
+      "Compute the current gradient",
+      "Form the trial point",
+      "Recompute at the trial point"
+    ]
+  },
+  {
+    "label": "Stability argument",
+    "section": "The stability argument",
+    "subgoals": [
+      "Assume a monotone operator",
+      "Remove the rotational overshoot",
+      "Keep a step below the Lipschitz bound"
+    ]
+  },
+  {
+    "label": "The cost",
+    "section": "The cost",
+    "subgoals": [
+      "Pay two evaluations",
+      "Store one trial point",
+      "Compare with optimistic variants"
+    ]
+  }
+]

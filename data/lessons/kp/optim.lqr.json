@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The problem",
+    "section": "The problem",
+    "subgoals": [
+      "Use linear dynamics",
+      "Use a quadratic cost",
+      "Weight state and control"
+    ]
+  },
+  {
+    "label": "Feedback law",
+    "section": "The feedback law",
+    "subgoals": [
+      "Multiply the state by a matrix",
+      "Solve the Riccati equation",
+      "Avoid a precomputed trajectory"
+    ]
+  },
+  {
+    "label": "Weights as design",
+    "section": "The weights as design",
+    "subgoals": [
+      "Trade speed against effort",
+      "Move the closed-loop poles",
+      "Tune in cost terms"
+    ]
+  }
+]

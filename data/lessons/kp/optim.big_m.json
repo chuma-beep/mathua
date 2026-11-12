@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Mechanism",
+    "section": "The mechanism",
+    "subgoals": [
+      "Add a binary switch",
+      "Multiply by M",
+      "Disable the constraint"
+    ]
+  },
+  {
+    "label": "Choice of M",
+    "section": "The choice of M",
+    "subgoals": [
+      "Derive an activity bound",
+      "Avoid an arbitrary constant",
+      "Watch conditioning"
+    ]
+  },
+  {
+    "label": "Tightening",
+    "section": "Tightening",
+    "subgoals": [
+      "Use per-row bounds",
+      "Try indicator constraints",
+      "Compare perspective forms"
+    ]
+  }
+]

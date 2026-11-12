@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Lagrangian saddle",
+    "section": "The Lagrangian as a saddle function",
+    "subgoals": [
+      "Keep convexity in the primal block",
+      "Keep affinity in the multipliers",
+      "Name the convex-concave structure"
+    ]
+  },
+  {
+    "label": "Recovering the optimum",
+    "section": "Recovering the optimum",
+    "subgoals": [
+      "Read the primal coordinate",
+      "Read the dual certificate",
+      "Read complementary slackness"
+    ]
+  },
+  {
+    "label": "Why it helps",
+    "section": "Why the reformulation helps",
+    "subgoals": [
+      "Move the constraint into an update",
+      "Avoid an inner solve",
+      "Accept a two-timescale dynamic"
+    ]
+  }
+]

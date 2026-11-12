@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Uncertainty set",
+    "section": "The uncertainty set",
+    "subgoals": [
+      "Choose box, ball or polytope",
+      "Trade guarantee against average",
+      "State the set explicitly"
+    ]
+  },
+  {
+    "label": "Tractability",
+    "section": "Tractability",
+    "subgoals": [
+      "Keep the inner maximum closed form",
+      "Preserve linear or conic structure",
+      "Reject an intractable loss"
+    ]
+  },
+  {
+    "label": "Conservatism",
+    "section": "Conservatism",
+    "subgoals": [
+      "Locate the worst-case corner",
+      "Temper the set",
+      "Penalise deviation from nominal"
+    ]
+  }
+]

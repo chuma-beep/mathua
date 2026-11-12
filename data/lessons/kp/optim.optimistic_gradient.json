@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The extrapolation",
+    "section": "The extrapolation",
+    "subgoals": [
+      "Double the current gradient",
+      "Subtract the previous gradient",
+      "Approximate the trial gradient"
+    ]
+  },
+  {
+    "label": "Convergence conditions",
+    "section": "Convergence conditions",
+    "subgoals": [
+      "Assume monotonicity",
+      "Bound the step",
+      "Read last-iterate and average guarantees"
+    ]
+  },
+  {
+    "label": "Where it is used",
+    "section": "Where it is used",
+    "subgoals": [
+      "Name adversarial training",
+      "Name primal-dual imaging",
+      "Justify by cheap gradients"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "The definition",
+    "subgoals": [
+      "Maximise over the second block",
+      "Minimise over the first block",
+      "Subtract the two values"
+    ]
+  },
+  {
+    "label": "Certification",
+    "section": "Certification",
+    "subgoals": [
+      "Bound the distance to equilibrium",
+      "Avoid assuming convergence",
+      "Use it as a stopping rule"
+    ]
+  },
+  {
+    "label": "Computing the gap",
+    "section": "Computing the gap",
+    "subgoals": [
+      "Solve two single-block problems",
+      "Exploit bilinear structure",
+      "Price the certificate"
+    ]
+  }
+]

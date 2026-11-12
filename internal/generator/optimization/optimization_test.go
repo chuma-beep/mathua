@@ -70,11 +70,35 @@ var wave13IDs = []string{
 	"optim.nonsmooth_kkt",
 }
 
-// allOptimizationIDs is every concept the package owns, across all three waves.
+var wave14IDs = []string{
+	"optim.minimax", "optim.saddle_point", "optim.zero_sum_game",
+	"optim.robust_minimax", "optim.primal_dual_saddle", "optim.extragradient",
+	"optim.optimistic_gradient", "optim.mirror_descent", "optim.dual_averaging",
+	"optim.saddle_gap",
+	"optim.optimal_control", "optim.control_hamiltonian", "optim.hjb",
+	"optim.lqr", "optim.riccati", "optim.mpc", "optim.shooting",
+	"optim.collocation", "optim.costate", "optim.bang_bang",
+	"optim.implicit_diff", "optim.bilevel", "optim.meta_gradient",
+	"optim.hypergradient", "optim.diff_layers", "optim.influence",
+	"optim.sam", "optim.adversarial_training", "optim.dro",
+	"optim.gradient_penalty",
+	"optim.branch_cut", "optim.lagrangian_relaxation",
+	"optim.subgradient_lagrangian", "optim.gomory_cut",
+	"optim.cutting_stock", "optim.facility_location",
+	"optim.tsp_relaxation", "optim.quadratic_assignment", "optim.big_m",
+	"optim.sos1",
+	"optim.kkt_solver", "optim.inertia_correction", "optim.regularized_newton",
+	"optim.iterative_refinement", "optim.finite_difference",
+	"optim.complex_step", "optim.autodiff", "optim.jfnk", "optim.lbfgs",
+	"optim.line_search_interp",
+}
+
+// allOptimizationIDs is every concept the package owns, across all four waves.
 var allOptimizationIDs = func() []string {
 	ids := append([]string{}, wave11IDs...)
 	ids = append(ids, wave12IDs...)
-	return append(ids, wave13IDs...)
+	ids = append(ids, wave13IDs...)
+	return append(ids, wave14IDs...)
 }()
 
 func wave11Registry(t *testing.T) *generator.Registry {

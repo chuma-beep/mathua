@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Stationarity route",
+    "section": "The stationarity route",
+    "subgoals": [
+      "Differentiate the stationarity identity",
+      "Solve for the weight derivative",
+      "Apply the chain rule"
+    ]
+  },
+  {
+    "label": "The cost",
+    "section": "The cost",
+    "subgoals": [
+      "Form a Hessian-vector product",
+      "Solve with conjugate gradient",
+      "Avoid forming the Hessian"
+    ]
+  },
+  {
+    "label": "Why it beats grid search",
+    "section": "Why it beats grid search",
+    "subgoals": [
+      "Follow the validation surface",
+      "Reduce retraining",
+      "Scale to several hyperparameters"
+    ]
+  }
+]

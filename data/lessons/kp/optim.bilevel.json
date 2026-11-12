@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Nested structure",
+    "section": "The nested structure",
+    "subgoals": [
+      "Solve the inner problem",
+      "Substitute its solution",
+      "Evaluate the outer objective"
+    ]
+  },
+  {
+    "label": "Reformulations",
+    "section": "Reformulations",
+    "subgoals": [
+      "Replace the inner problem by its conditions",
+      "Introduce complementarity",
+      "Accept nonconvexity"
+    ]
+  },
+  {
+    "label": "Why they are hard",
+    "section": "Why they are hard",
+    "subgoals": [
+      "Face a nonsmooth value function",
+      "Lose convexity",
+      "Differentiate the inner solution"
+    ]
+  }
+]

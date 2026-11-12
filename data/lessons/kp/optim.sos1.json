@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The set",
+    "section": "The set",
+    "subgoals": [
+      "Allow one nonzero",
+      "Order the members",
+      "Branch by position"
+    ]
+  },
+  {
+    "label": "Against big-M",
+    "section": "Against big-M",
+    "subgoals": [
+      "Compare bound strength",
+      "Remove the constant",
+      "Read the branching rule"
+    ]
+  },
+  {
+    "label": "Modelling fit",
+    "section": "The modelling fit",
+    "subgoals": [
+      "Write a piecewise function",
+      "Select one segment",
+      "Keep the model convex"
+    ]
+  }
+]

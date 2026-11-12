@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Correction step",
+    "section": "The correction step",
+    "subgoals": [
+      "Compute the residual",
+      "Reuse the factorisation",
+      "Add the correction"
+    ]
+  },
+  {
+    "label": "Mixed precision",
+    "section": "Mixed precision",
+    "subgoals": [
+      "Widen the residual",
+      "Keep the fast factorisation",
+      "Recover accuracy"
+    ]
+  },
+  {
+    "label": "When it fails",
+    "section": "When it fails",
+    "subgoals": [
+      "Compare conditioning to precision",
+      "Stop refining",
+      "Improve the factorisation"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Transcription",
+    "section": "The transcription",
+    "subgoals": [
+      "Split the horizon",
+      "Approximate the state on each interval",
+      "Impose dynamics at nodes"
+    ]
+  },
+  {
+    "label": "Sparsity",
+    "section": "Sparsity",
+    "subgoals": [
+      "Couple neighbouring intervals",
+      "Keep the Jacobian banded",
+      "Use a sparse solver"
+    ]
+  },
+  {
+    "label": "Accuracy against robustness",
+    "section": "Accuracy against robustness",
+    "subgoals": [
+      "Add nodes for accuracy",
+      "Accept a larger problem",
+      "Tolerate unstable dynamics"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Switching function",
+    "section": "The switching function",
+    "subgoals": [
+      "Read the control coefficient",
+      "Choose a bound by its sign",
+      "Locate its zeros"
+    ]
+  },
+  {
+    "label": "Singular arcs",
+    "section": "Singular arcs",
+    "subgoals": [
+      "Detect a vanishing interval",
+      "Differentiate again",
+      "Test optimality separately"
+    ]
+  },
+  {
+    "label": "Why it matters",
+    "section": "Why it matters",
+    "subgoals": [
+      "Solve time-optimal problems",
+      "Respect actuator limits",
+      "Smooth before implementation"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Mirror map",
+    "section": "The mirror map",
+    "subgoals": [
+      "Map to the dual space",
+      "Take a dual gradient step",
+      "Map back to the primal"
+    ]
+  },
+  {
+    "label": "Regret bound",
+    "section": "The regret bound",
+    "subgoals": [
+      "Use entropy on a simplex",
+      "Log dependence on dimension",
+      "Compare with Euclidean regret"
+    ]
+  },
+  {
+    "label": "The trade",
+    "section": "The trade",
+    "subgoals": [
+      "Match divergence to the set",
+      "Avoid an implicit subproblem",
+      "Treat the divergence as a model choice"
+    ]
+  }
+]

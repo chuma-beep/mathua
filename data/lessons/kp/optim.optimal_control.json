@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Three ingredients",
+    "section": "The three ingredients",
+    "subgoals": [
+      "Define the dynamics",
+      "Define the running cost",
+      "Define the terminal cost"
+    ]
+  },
+  {
+    "label": "Decision variable",
+    "section": "The decision variable",
+    "subgoals": [
+      "Choose a control function",
+      "Discretise the horizon",
+      "Accept the discretisation choice"
+    ]
+  },
+  {
+    "label": "Constraints",
+    "section": "Constraints",
+    "subgoals": [
+      "Bound the control",
+      "Bound the state path",
+      "Couple every instant"
+    ]
+  }
+]

@@ -8598,5 +8598,205 @@
   {
     "concept_id": "optim.nonsmooth_kkt",
     "source": "authored/optim.nonsmooth_kkt.md"
+  },
+  {
+    "concept_id": "optim.minimax",
+    "source": "authored/optim.minimax.md"
+  },
+  {
+    "concept_id": "optim.saddle_point",
+    "source": "authored/optim.saddle_point.md"
+  },
+  {
+    "concept_id": "optim.zero_sum_game",
+    "source": "authored/optim.zero_sum_game.md"
+  },
+  {
+    "concept_id": "optim.robust_minimax",
+    "source": "authored/optim.robust_minimax.md"
+  },
+  {
+    "concept_id": "optim.primal_dual_saddle",
+    "source": "authored/optim.primal_dual_saddle.md"
+  },
+  {
+    "concept_id": "optim.extragradient",
+    "source": "authored/optim.extragradient.md"
+  },
+  {
+    "concept_id": "optim.optimistic_gradient",
+    "source": "authored/optim.optimistic_gradient.md"
+  },
+  {
+    "concept_id": "optim.mirror_descent",
+    "source": "authored/optim.mirror_descent.md"
+  },
+  {
+    "concept_id": "optim.dual_averaging",
+    "source": "authored/optim.dual_averaging.md"
+  },
+  {
+    "concept_id": "optim.saddle_gap",
+    "source": "authored/optim.saddle_gap.md"
+  },
+  {
+    "concept_id": "optim.optimal_control",
+    "source": "authored/optim.optimal_control.md"
+  },
+  {
+    "concept_id": "optim.control_hamiltonian",
+    "source": "authored/optim.control_hamiltonian.md"
+  },
+  {
+    "concept_id": "optim.hjb",
+    "source": "authored/optim.hjb.md"
+  },
+  {
+    "concept_id": "optim.lqr",
+    "source": "authored/optim.lqr.md"
+  },
+  {
+    "concept_id": "optim.riccati",
+    "source": "authored/optim.riccati.md"
+  },
+  {
+    "concept_id": "optim.mpc",
+    "source": "authored/optim.mpc.md"
+  },
+  {
+    "concept_id": "optim.shooting",
+    "source": "authored/optim.shooting.md"
+  },
+  {
+    "concept_id": "optim.collocation",
+    "source": "authored/optim.collocation.md"
+  },
+  {
+    "concept_id": "optim.costate",
+    "source": "authored/optim.costate.md"
+  },
+  {
+    "concept_id": "optim.bang_bang",
+    "source": "authored/optim.bang_bang.md"
+  },
+  {
+    "concept_id": "optim.implicit_diff",
+    "source": "authored/optim.implicit_diff.md"
+  },
+  {
+    "concept_id": "optim.bilevel",
+    "source": "authored/optim.bilevel.md"
+  },
+  {
+    "concept_id": "optim.meta_gradient",
+    "source": "authored/optim.meta_gradient.md"
+  },
+  {
+    "concept_id": "optim.hypergradient",
+    "source": "authored/optim.hypergradient.md"
+  },
+  {
+    "concept_id": "optim.diff_layers",
+    "source": "authored/optim.diff_layers.md"
+  },
+  {
+    "concept_id": "optim.influence",
+    "source": "authored/optim.influence.md"
+  },
+  {
+    "concept_id": "optim.sam",
+    "source": "authored/optim.sam.md"
+  },
+  {
+    "concept_id": "optim.adversarial_training",
+    "source": "authored/optim.adversarial_training.md"
+  },
+  {
+    "concept_id": "optim.dro",
+    "source": "authored/optim.dro.md"
+  },
+  {
+    "concept_id": "optim.gradient_penalty",
+    "source": "authored/optim.gradient_penalty.md"
+  },
+  {
+    "concept_id": "optim.branch_cut",
+    "source": "authored/optim.branch_cut.md"
+  },
+  {
+    "concept_id": "optim.lagrangian_relaxation",
+    "source": "authored/optim.lagrangian_relaxation.md"
+  },
+  {
+    "concept_id": "optim.subgradient_lagrangian",
+    "source": "authored/optim.subgradient_lagrangian.md"
+  },
+  {
+    "concept_id": "optim.gomory_cut",
+    "source": "authored/optim.gomory_cut.md"
+  },
+  {
+    "concept_id": "optim.cutting_stock",
+    "source": "authored/optim.cutting_stock.md"
+  },
+  {
+    "concept_id": "optim.facility_location",
+    "source": "authored/optim.facility_location.md"
+  },
+  {
+    "concept_id": "optim.tsp_relaxation",
+    "source": "authored/optim.tsp_relaxation.md"
+  },
+  {
+    "concept_id": "optim.quadratic_assignment",
+    "source": "authored/optim.quadratic_assignment.md"
+  },
+  {
+    "concept_id": "optim.big_m",
+    "source": "authored/optim.big_m.md"
+  },
+  {
+    "concept_id": "optim.sos1",
+    "source": "authored/optim.sos1.md"
+  },
+  {
+    "concept_id": "optim.kkt_solver",
+    "source": "authored/optim.kkt_solver.md"
+  },
+  {
+    "concept_id": "optim.inertia_correction",
+    "source": "authored/optim.inertia_correction.md"
+  },
+  {
+    "concept_id": "optim.regularized_newton",
+    "source": "authored/optim.regularized_newton.md"
+  },
+  {
+    "concept_id": "optim.iterative_refinement",
+    "source": "authored/optim.iterative_refinement.md"
+  },
+  {
+    "concept_id": "optim.finite_difference",
+    "source": "authored/optim.finite_difference.md"
+  },
+  {
+    "concept_id": "optim.complex_step",
+    "source": "authored/optim.complex_step.md"
+  },
+  {
+    "concept_id": "optim.autodiff",
+    "source": "authored/optim.autodiff.md"
+  },
+  {
+    "concept_id": "optim.jfnk",
+    "source": "authored/optim.jfnk.md"
+  },
+  {
+    "concept_id": "optim.lbfgs",
+    "source": "authored/optim.lbfgs.md"
+  },
+  {
+    "concept_id": "optim.line_search_interp",
+    "source": "authored/optim.line_search_interp.md"
   }
 ]

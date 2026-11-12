@@ -1,0 +1,29 @@
+[
+  {
+    "label": "First trial",
+    "section": "The first trial",
+    "subgoals": [
+      "Reuse the previous step",
+      "Fit a quadratic",
+      "Take its minimiser"
+    ]
+  },
+  {
+    "label": "Safeguards",
+    "section": "The safeguards",
+    "subgoals": [
+      "Bracket the step",
+      "Switch to a cubic fit",
+      "Reject wild trials"
+    ]
+  },
+  {
+    "label": "Acceptance test",
+    "section": "The acceptance test",
+    "subgoals": [
+      "Check sufficient decrease",
+      "Check curvature",
+      "Collapse the interval"
+    ]
+  }
+]

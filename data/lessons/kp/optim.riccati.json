@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Differential form",
+    "section": "The differential form",
+    "subgoals": [
+      "Integrate backward",
+      "Start from the terminal weight",
+      "Preserve semidefiniteness"
+    ]
+  },
+  {
+    "label": "Algebraic form",
+    "section": "The algebraic form",
+    "subgoals": [
+      "Set the derivative to zero",
+      "Select the stabilising root",
+      "Rely on detectability"
+    ]
+  },
+  {
+    "label": "Solving it",
+    "section": "Solving it",
+    "subgoals": [
+      "Iterate to convergence",
+      "Use a Hamiltonian Schur form",
+      "Prefer the stable eigensolver"
+    ]
+  }
+]

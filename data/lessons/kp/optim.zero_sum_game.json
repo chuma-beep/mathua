@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Payoff matrix",
+    "section": "The payoff matrix",
+    "subgoals": [
+      "Write the bilinear expectation",
+      "Read a pure strategy as a corner",
+      "Keep the matrix fixed"
+    ]
+  },
+  {
+    "label": "Linear program",
+    "section": "The linear program",
+    "subgoals": [
+      "Maximise the floor value",
+      "Constrain every pure column",
+      "Match the dual value"
+    ]
+  },
+  {
+    "label": "Randomisation",
+    "section": "Randomisation as a guarantee",
+    "subgoals": [
+      "Bound the opponent payoff",
+      "Prevent exploitation",
+      "Use it under repeated play"
+    ]
+  }
+]

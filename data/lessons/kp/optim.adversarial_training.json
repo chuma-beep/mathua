@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Inner attack",
+    "section": "The inner attack",
+    "subgoals": [
+      "Allow a small ball",
+      "Take projected ascent steps",
+      "Strength against time"
+    ]
+  },
+  {
+    "label": "Outer objective",
+    "section": "The outer objective",
+    "subgoals": [
+      "Train at the perturbed input",
+      "Widen the margin",
+      "Rebuild the boundary"
+    ]
+  },
+  {
+    "label": "The trade",
+    "section": "The trade",
+    "subgoals": [
+      "Measure clean accuracy",
+      "Measure robust accuracy",
+      "Choose the budget"
+    ]
+  }
+]

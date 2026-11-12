@@ -2613,5 +2613,904 @@
       "streak": 10,
       "avg_time_seconds": 45.0
     }
+  },
+  {
+    "id": "optim.minimax",
+    "label": "Minimax problems",
+    "domain": "optimization",
+    "subdomain": "optimization.saddle",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.local_global",
+      "optim.dual_function"
+    ],
+    "key_prerequisites": [
+      "optim.local_global"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.saddle_point",
+    "label": "Saddle points",
+    "domain": "optimization",
+    "subdomain": "optimization.saddle",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.minimax",
+      "optim.kkt"
+    ],
+    "key_prerequisites": [
+      "optim.minimax"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.zero_sum_game",
+    "label": "Zero-sum games",
+    "domain": "optimization",
+    "subdomain": "optimization.saddle",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.saddle_point",
+      "optim.lp_dual"
+    ],
+    "key_prerequisites": [
+      "optim.saddle_point"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.robust_minimax",
+    "label": "Robust minimax design",
+    "domain": "optimization",
+    "subdomain": "optimization.saddle",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.minimax",
+      "optim.robust_lp"
+    ],
+    "key_prerequisites": [
+      "optim.minimax"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.primal_dual_saddle",
+    "label": "The primal-dual saddle formulation",
+    "domain": "optimization",
+    "subdomain": "optimization.saddle",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.saddle_point",
+      "optim.equality_lagrange",
+      "optim.strong_duality"
+    ],
+    "key_prerequisites": [
+      "optim.saddle_point"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.extragradient",
+    "label": "The extragradient method",
+    "domain": "optimization",
+    "subdomain": "optimization.saddle",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.primal_dual_saddle",
+      "optim.projected_gradient"
+    ],
+    "key_prerequisites": [
+      "optim.primal_dual_saddle"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.optimistic_gradient",
+    "label": "Optimistic gradient",
+    "domain": "optimization",
+    "subdomain": "optimization.saddle",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.extragradient",
+      "optim.momentum"
+    ],
+    "key_prerequisites": [
+      "optim.extragradient"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.mirror_descent",
+    "label": "Mirror descent",
+    "domain": "optimization",
+    "subdomain": "optimization.saddle",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.projected_gradient"
+    ],
+    "key_prerequisites": [
+      "optim.projected_gradient"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.dual_averaging",
+    "label": "Dual averaging",
+    "domain": "optimization",
+    "subdomain": "optimization.saddle",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.mirror_descent",
+      "optim.online_gradient"
+    ],
+    "key_prerequisites": [
+      "optim.mirror_descent"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.saddle_gap",
+    "label": "The saddle-point gap",
+    "domain": "optimization",
+    "subdomain": "optimization.saddle",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.saddle_point",
+      "optim.duality_gap"
+    ],
+    "key_prerequisites": [
+      "optim.saddle_point"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.optimal_control",
+    "label": "Optimal control problems",
+    "domain": "optimization",
+    "subdomain": "optimization.control",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.problem.anatomy",
+      "optim.equality_lagrange"
+    ],
+    "key_prerequisites": [
+      "optim.problem.anatomy"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.control_hamiltonian",
+    "label": "The control Hamiltonian",
+    "domain": "optimization",
+    "subdomain": "optimization.control",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.optimal_control",
+      "optim.equality_lagrange"
+    ],
+    "key_prerequisites": [
+      "optim.optimal_control"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.hjb",
+    "label": "The Hamilton-Jacobi-Bellman equation",
+    "domain": "optimization",
+    "subdomain": "optimization.control",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.control_hamiltonian",
+      "optim.local_global"
+    ],
+    "key_prerequisites": [
+      "optim.control_hamiltonian"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.lqr",
+    "label": "The linear quadratic regulator",
+    "domain": "optimization",
+    "subdomain": "optimization.control",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.optimal_control",
+      "optim.quadratic_program"
+    ],
+    "key_prerequisites": [
+      "optim.optimal_control"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.riccati",
+    "label": "The Riccati equation",
+    "domain": "optimization",
+    "subdomain": "optimization.control",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.lqr",
+      "optim.newton_system"
+    ],
+    "key_prerequisites": [
+      "optim.lqr"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.mpc",
+    "label": "Model predictive control",
+    "domain": "optimization",
+    "subdomain": "optimization.control",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.lqr",
+      "optim.active_set"
+    ],
+    "key_prerequisites": [
+      "optim.lqr"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.shooting",
+    "label": "Single shooting",
+    "domain": "optimization",
+    "subdomain": "optimization.control",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.optimal_control",
+      "optim.gradient_step"
+    ],
+    "key_prerequisites": [
+      "optim.optimal_control"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.collocation",
+    "label": "Direct collocation",
+    "domain": "optimization",
+    "subdomain": "optimization.control",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.shooting",
+      "optim.kkt"
+    ],
+    "key_prerequisites": [
+      "optim.shooting"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.costate",
+    "label": "Costate equations",
+    "domain": "optimization",
+    "subdomain": "optimization.control",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.control_hamiltonian",
+      "optim.dual_function"
+    ],
+    "key_prerequisites": [
+      "optim.control_hamiltonian"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.bang_bang",
+    "label": "Bang-bang control",
+    "domain": "optimization",
+    "subdomain": "optimization.control",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.control_hamiltonian",
+      "optim.active_constraint"
+    ],
+    "key_prerequisites": [
+      "optim.control_hamiltonian"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.implicit_diff",
+    "label": "Implicit differentiation of layers",
+    "domain": "optimization",
+    "subdomain": "optimization.learning",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.kkt",
+      "optim.newton_system"
+    ],
+    "key_prerequisites": [
+      "optim.kkt"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.bilevel",
+    "label": "Bilevel programs",
+    "domain": "optimization",
+    "subdomain": "optimization.learning",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.implicit_diff",
+      "optim.strong_duality"
+    ],
+    "key_prerequisites": [
+      "optim.implicit_diff"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.meta_gradient",
+    "label": "Meta-gradients",
+    "domain": "optimization",
+    "subdomain": "optimization.learning",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.bilevel",
+      "optim.implicit_diff"
+    ],
+    "key_prerequisites": [
+      "optim.bilevel"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.hypergradient",
+    "label": "Hyperparameter gradients",
+    "domain": "optimization",
+    "subdomain": "optimization.learning",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.meta_gradient",
+      "optim.implicit_diff"
+    ],
+    "key_prerequisites": [
+      "optim.meta_gradient"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.diff_layers",
+    "label": "Differentiable layers",
+    "domain": "optimization",
+    "subdomain": "optimization.learning",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.implicit_diff",
+      "optim.proximal_gradient"
+    ],
+    "key_prerequisites": [
+      "optim.implicit_diff"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.influence",
+    "label": "Influence functions",
+    "domain": "optimization",
+    "subdomain": "optimization.learning",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.implicit_diff",
+      "optim.newton_system"
+    ],
+    "key_prerequisites": [
+      "optim.implicit_diff"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.sam",
+    "label": "Sharpness-aware minimization",
+    "domain": "optimization",
+    "subdomain": "optimization.learning",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.robust_minimax",
+      "optim.gradient_step"
+    ],
+    "key_prerequisites": [
+      "optim.robust_minimax"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.adversarial_training",
+    "label": "Adversarial training",
+    "domain": "optimization",
+    "subdomain": "optimization.learning",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.robust_minimax",
+      "optim.sam"
+    ],
+    "key_prerequisites": [
+      "optim.robust_minimax"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.dro",
+    "label": "Distributionally robust optimisation",
+    "domain": "optimization",
+    "subdomain": "optimization.learning",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.robust_minimax",
+      "optim.lp_dual"
+    ],
+    "key_prerequisites": [
+      "optim.robust_minimax"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.gradient_penalty",
+    "label": "Gradient penalties",
+    "domain": "optimization",
+    "subdomain": "optimization.learning",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.sam",
+      "optim.augmented_lagrangian"
+    ],
+    "key_prerequisites": [
+      "optim.sam"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.branch_cut",
+    "label": "Branch and cut",
+    "domain": "optimization",
+    "subdomain": "optimization.mip",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.branch_bound",
+      "optim.cutting_plane"
+    ],
+    "key_prerequisites": [
+      "optim.branch_bound"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.lagrangian_relaxation",
+    "label": "Lagrangian relaxation for integer programs",
+    "domain": "optimization",
+    "subdomain": "optimization.mip",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.integer_program",
+      "optim.dual_function"
+    ],
+    "key_prerequisites": [
+      "optim.integer_program"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.subgradient_lagrangian",
+    "label": "Subgradient optimisation of the Lagrangian",
+    "domain": "optimization",
+    "subdomain": "optimization.mip",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.lagrangian_relaxation",
+      "optim.subgradient_method"
+    ],
+    "key_prerequisites": [
+      "optim.lagrangian_relaxation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.gomory_cut",
+    "label": "Gomory cuts",
+    "domain": "optimization",
+    "subdomain": "optimization.mip",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.branch_cut",
+      "optim.simplex_pivot"
+    ],
+    "key_prerequisites": [
+      "optim.branch_cut"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.cutting_stock",
+    "label": "The cutting stock problem",
+    "domain": "optimization",
+    "subdomain": "optimization.mip",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.column_generation",
+      "optim.integer_program"
+    ],
+    "key_prerequisites": [
+      "optim.column_generation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.facility_location",
+    "label": "Facility location",
+    "domain": "optimization",
+    "subdomain": "optimization.mip",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.set_cover",
+      "optim.branch_cut"
+    ],
+    "key_prerequisites": [
+      "optim.set_cover"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.tsp_relaxation",
+    "label": "Travelling salesman relaxations",
+    "domain": "optimization",
+    "subdomain": "optimization.mip",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.branch_cut",
+      "optim.lp_relaxation"
+    ],
+    "key_prerequisites": [
+      "optim.branch_cut"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.quadratic_assignment",
+    "label": "The quadratic assignment problem",
+    "domain": "optimization",
+    "subdomain": "optimization.mip",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.integer_program",
+      "optim.matrix_completion"
+    ],
+    "key_prerequisites": [
+      "optim.integer_program"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.big_m",
+    "label": "Big-M formulations",
+    "domain": "optimization",
+    "subdomain": "optimization.mip",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.integer_program",
+      "optim.lp_relaxation"
+    ],
+    "key_prerequisites": [
+      "optim.integer_program"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.sos1",
+    "label": "SOS1 constraints",
+    "domain": "optimization",
+    "subdomain": "optimization.mip",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.big_m",
+      "optim.lp_relaxation"
+    ],
+    "key_prerequisites": [
+      "optim.big_m"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.kkt_solver",
+    "label": "KKT linear solvers",
+    "domain": "optimization",
+    "subdomain": "optimization.numerical",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.kkt_matrix",
+      "optim.newton_system"
+    ],
+    "key_prerequisites": [
+      "optim.kkt_matrix"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.inertia_correction",
+    "label": "Inertia correction",
+    "domain": "optimization",
+    "subdomain": "optimization.numerical",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.kkt_solver",
+      "optim.trust_region_subproblem"
+    ],
+    "key_prerequisites": [
+      "optim.kkt_solver"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.regularized_newton",
+    "label": "Regularised Newton systems",
+    "domain": "optimization",
+    "subdomain": "optimization.numerical",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.newton_optim",
+      "optim.inertia_correction"
+    ],
+    "key_prerequisites": [
+      "optim.newton_optim"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.iterative_refinement",
+    "label": "Iterative refinement",
+    "domain": "optimization",
+    "subdomain": "optimization.numerical",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.kkt_solver",
+      "optim.least_squares"
+    ],
+    "key_prerequisites": [
+      "optim.kkt_solver"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.finite_difference",
+    "label": "Finite-difference gradients",
+    "domain": "optimization",
+    "subdomain": "optimization.numerical",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.gradient_step",
+      "optim.newton_system"
+    ],
+    "key_prerequisites": [
+      "optim.gradient_step"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.complex_step",
+    "label": "Complex-step differentiation",
+    "domain": "optimization",
+    "subdomain": "optimization.numerical",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.finite_difference"
+    ],
+    "key_prerequisites": [
+      "optim.finite_difference"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.autodiff",
+    "label": "Automatic differentiation",
+    "domain": "optimization",
+    "subdomain": "optimization.numerical",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.complex_step",
+      "optim.matrix_free"
+    ],
+    "key_prerequisites": [
+      "optim.complex_step"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.jfnk",
+    "label": "Jacobian-free Newton-Krylov",
+    "domain": "optimization",
+    "subdomain": "optimization.numerical",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.kkt_solver",
+      "optim.matrix_free"
+    ],
+    "key_prerequisites": [
+      "optim.kkt_solver"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.lbfgs",
+    "label": "Limited-memory quasi-Newton",
+    "domain": "optimization",
+    "subdomain": "optimization.numerical",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.bfgs",
+      "optim.wolfe"
+    ],
+    "key_prerequisites": [
+      "optim.bfgs"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.line_search_interp",
+    "label": "Interpolation line search",
+    "domain": "optimization",
+    "subdomain": "optimization.numerical",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.armijo",
+      "optim.wolfe"
+    ],
+    "key_prerequisites": [
+      "optim.armijo"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
   }
 ]

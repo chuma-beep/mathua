@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Block elimination",
+    "section": "Block elimination",
+    "subgoals": [
+      "Eliminate the primal block",
+      "Form the Schur complement",
+      "Solve for the multipliers"
+    ]
+  },
+  {
+    "label": "Indefinite factorisation",
+    "section": "Symmetric indefinite factorisation",
+    "subgoals": [
+      "Factor the full matrix",
+      "Pivot symmetrically",
+      "Read the inertia"
+    ]
+  },
+  {
+    "label": "Which to choose",
+    "section": "Which to choose",
+    "subgoals": [
+      "Count multipliers",
+      "Check primal conditioning",
+      "Weigh robustness against speed"
+    ]
+  }
+]

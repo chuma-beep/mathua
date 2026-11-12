@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The estimate",
+    "section": "The estimate",
+    "subgoals": [
+      "Perturb one point",
+      "Apply the inverse Hessian",
+      "Read the parameter change"
+    ]
+  },
+  {
+    "label": "The linear solve",
+    "section": "The linear solve",
+    "subgoals": [
+      "Use conjugate gradient",
+      "Reuse one factorisation",
+      "Avoid forming the inverse"
+    ]
+  },
+  {
+    "label": "The caveats",
+    "section": "The caveats",
+    "subgoals": [
+      "Require differentiability",
+      "Require a small perturbation",
+      "Check the active set"
+    ]
+  }
+]

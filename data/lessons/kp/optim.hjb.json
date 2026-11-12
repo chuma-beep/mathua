@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Value function",
+    "section": "The value function",
+    "subgoals": [
+      "Record the remaining cost",
+      "Cover every state and time",
+      "Read the costate as its gradient"
+    ]
+  },
+  {
+    "label": "The equation",
+    "section": "The equation",
+    "subgoals": [
+      "Differentiate in time",
+      "Minimise the Hamiltonian",
+      "Impose the terminal condition"
+    ]
+  },
+  {
+    "label": "Why it is hard",
+    "section": "Why it is hard",
+    "subgoals": [
+      "Face state-space growth",
+      "Need a grid or approximation",
+      "Compare with direct methods"
+    ]
+  }
+]

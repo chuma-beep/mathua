@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The storage",
+    "section": "The storage",
+    "subgoals": [
+      "Keep recent step pairs",
+      "Fix the memory budget",
+      "Scale with dimension"
+    ]
+  },
+  {
+    "label": "Two-loop recursion",
+    "section": "The two-loop recursion",
+    "subgoals": [
+      "Walk pairs backward",
+      "Walk them forward",
+      "Match the dense product"
+    ]
+  },
+  {
+    "label": "The scaling",
+    "section": "The scaling",
+    "subgoals": [
+      "Use the latest pair",
+      "Set the initial matrix",
+      "Handle poor scaling"
+    ]
+  }
+]

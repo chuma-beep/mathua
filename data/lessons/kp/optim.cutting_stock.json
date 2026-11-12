@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Pattern model",
+    "section": "The pattern model",
+    "subgoals": [
+      "Count rolls per pattern",
+      "Meet each piece demand",
+      "Minimise roll count"
+    ]
+  },
+  {
+    "label": "Column generation",
+    "section": "Column generation",
+    "subgoals": [
+      "Solve a restricted master",
+      "Price with a knapsack",
+      "Add negative reduced cost"
+    ]
+  },
+  {
+    "label": "Integer step",
+    "section": "The integer step",
+    "subgoals": [
+      "Notice fractional counts",
+      "Branch and price",
+      "Compare with rounding"
+    ]
+  }
+]

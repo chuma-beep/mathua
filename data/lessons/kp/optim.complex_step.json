@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The formula",
+    "section": "The formula",
+    "subgoals": [
+      "Shift by an imaginary step",
+      "Read the imaginary part",
+      "Divide by the step"
+    ]
+  },
+  {
+    "label": "Step size",
+    "section": "The step size",
+    "subgoals": [
+      "Avoid cancellation",
+      "Choose a tiny step",
+      "Accept second-order truncation"
+    ]
+  },
+  {
+    "label": "The requirement",
+    "section": "The requirement",
+    "subgoals": [
+      "Require analyticity",
+      "Accept complex arguments",
+      "Avoid branch cuts"
+    ]
+  }
+]

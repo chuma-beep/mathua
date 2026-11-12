@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Construction",
+    "section": "Construction",
+    "subgoals": [
+      "Define an inner problem",
+      "Solve it forward",
+      "Differentiate its conditions"
+    ]
+  },
+  {
+    "label": "Examples",
+    "section": "The examples",
+    "subgoals": [
+      "Name sparse coding",
+      "Name a projection layer",
+      "Name equilibrium models"
+    ]
+  },
+  {
+    "label": "Design constraint",
+    "section": "The design constraint",
+    "subgoals": [
+      "Require uniqueness",
+      "Add regularisation",
+      "Reject ambiguous solutions"
+    ]
+  }
+]

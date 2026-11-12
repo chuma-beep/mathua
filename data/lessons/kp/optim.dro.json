@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Ambiguity set",
+    "section": "The ambiguity set",
+    "subgoals": [
+      "Choose a divergence ball",
+      "Set the radius",
+      "Let the adversary reweight"
+    ]
+  },
+  {
+    "label": "Dual form",
+    "section": "The dual form",
+    "subgoals": [
+      "Derive the closed dual",
+      "Read a loss penalty",
+      "Compare with parameter penalties"
+    ]
+  },
+  {
+    "label": "Interpretation",
+    "section": "The interpretation",
+    "subgoals": [
+      "Place it between ERM and robust",
+      "Price the conservatism",
+      "Justify the radius"
+    ]
+  }
+]

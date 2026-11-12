@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Loop at a node",
+    "section": "The loop at a node",
+    "subgoals": [
+      "Solve the relaxation",
+      "Separate violated cuts",
+      "Re-solve with the cuts"
+    ]
+  },
+  {
+    "label": "The bound",
+    "section": "The bound",
+    "subgoals": [
+      "Bound the node region",
+      "Prune against the incumbent",
+      "Prefer tighter relaxations"
+    ]
+  },
+  {
+    "label": "Separation",
+    "section": "Separation",
+    "subgoals": [
+      "Find a violated inequality",
+      "Avoid enumeration",
+      "Judge cut strength"
+    ]
+  }
+]

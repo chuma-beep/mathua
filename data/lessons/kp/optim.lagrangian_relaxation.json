@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The relaxation",
+    "section": "The relaxation",
+    "subgoals": [
+      "Price each relaxed constraint",
+      "Keep multipliers nonnegative",
+      "Read a lower bound"
+    ]
+  },
+  {
+    "label": "Choosing what to relax",
+    "section": "Choosing what to relax",
+    "subgoals": [
+      "Target coupling constraints",
+      "Look for decomposition",
+      "Balance bound and difficulty"
+    ]
+  },
+  {
+    "label": "Recovering feasibility",
+    "section": "Recovering feasibility",
+    "subgoals": [
+      "Repair the relaxed point",
+      "Compare with the bound",
+      "Measure the gap"
+    ]
+  }
+]
