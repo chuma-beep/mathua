@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The separator theorem",
+    "section": "The separator theorem",
+    "subgoals": [
+      "State the separator size",
+      "Bound the remaining components",
+      "Apply the theorem"
+    ]
+  },
+  {
+    "label": "Consequences",
+    "section": "Consequences",
+    "subgoals": [
+      "Divide and recurse",
+      "Count the overhead",
+      "Relate to treewidth"
+    ]
+  },
+  {
+    "label": "Grids",
+    "section": "Grids",
+    "subgoals": [
+      "Separate a grid",
+      "Compare with the bound",
+      "Check the path case"
+    ]
+  }
+]

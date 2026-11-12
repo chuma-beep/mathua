@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The cost",
+    "section": "The cost",
+    "subgoals": [
+      "Multiply flow by unit cost",
+      "Sum over the edges",
+      "Respect the capacities"
+    ]
+  },
+  {
+    "label": "Residual costs",
+    "section": "Residual costs",
+    "subgoals": [
+      "Reverse an edge",
+      "Negate its cost",
+      "Look for a cheaper reroute"
+    ]
+  },
+  {
+    "label": "Optimality",
+    "section": "Optimality",
+    "subgoals": [
+      "Build the residual network",
+      "Search for a negative cycle",
+      "Conclude optimality"
+    ]
+  }
+]

@@ -38,6 +38,9 @@ func TestNotificationUnsubscribeTokenRejectsBadInput(t *testing.T) {
 		t.Fatalf("mint: %v", err)
 	}
 	tampered := raw[:len(raw)-1] + "x"
+	if tampered == raw {
+		tampered = raw[:len(raw)-1] + "y"
+	}
 	if _, err := ParseNotificationUnsubscribeToken(tampered); err == nil {
 		t.Error("accepted a tampered token")
 	}

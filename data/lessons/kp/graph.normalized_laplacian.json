@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Invert the square-root degrees",
+      "Scale the adjacency",
+      "Subtract from the identity"
+    ]
+  },
+  {
+    "label": "The spectrum",
+    "section": "The spectrum",
+    "subgoals": [
+      "Bound the eigenvalues",
+      "Count the zeros",
+      "Sum the eigenvalues"
+    ]
+  },
+  {
+    "label": "Comparison",
+    "section": "Comparison",
+    "subgoals": [
+      "Scale a regular graph",
+      "Compute the complete graph value",
+      "Compare with the unnormalized case"
+    ]
+  }
+]

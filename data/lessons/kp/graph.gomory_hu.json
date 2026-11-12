@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The tree",
+    "section": "The tree",
+    "subgoals": [
+      "Count the tree edges",
+      "Read a path minimum",
+      "Match it to a graph cut"
+    ]
+  },
+  {
+    "label": "Construction cost",
+    "section": "Construction cost",
+    "subgoals": [
+      "Count the flow computations",
+      "Split a component",
+      "Repeat until all vertices are separated"
+    ]
+  },
+  {
+    "label": "Cuts on the tree",
+    "section": "Cuts on the tree",
+    "subgoals": [
+      "Remove one tree edge",
+      "Name the two sides",
+      "Check the cut value"
+    ]
+  }
+]

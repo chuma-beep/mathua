@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Place the vertices on a circle",
+      "Enforce the circular gap",
+      "Minimise the ratio"
+    ]
+  },
+  {
+    "label": "Chromatic interpolation",
+    "section": "Chromatic interpolation",
+    "subgoals": [
+      "Compare with the chromatic number",
+      "See the half-open interval",
+      "Identify integer cases"
+    ]
+  },
+  {
+    "label": "Cycles",
+    "section": "Cycles",
+    "subgoals": [
+      "Handle an even cycle",
+      "Compute the five-cycle",
+      "Compute the seven-cycle"
+    ]
+  }
+]

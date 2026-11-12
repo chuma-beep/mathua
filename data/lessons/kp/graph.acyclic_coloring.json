@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Colour properly",
+      "Inspect every colour pair",
+      "Require a forest"
+    ]
+  },
+  {
+    "label": "The bound",
+    "section": "The bound",
+    "subgoals": [
+      "State the degree bound",
+      "Compare trees and complete graphs",
+      "Note the gap to ordinary colouring"
+    ]
+  },
+  {
+    "label": "Basic values",
+    "section": "Basic values",
+    "subgoals": [
+      "Colour a tree",
+      "Colour a complete graph",
+      "Colour a cycle"
+    ]
+  }
+]

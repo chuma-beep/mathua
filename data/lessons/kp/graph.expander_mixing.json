@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The estimate",
+    "section": "The estimate",
+    "subgoals": [
+      "Compute the expected edges",
+      "Scale by the second eigenvalue",
+      "Bound the deviation"
+    ]
+  },
+  {
+    "label": "Consequences",
+    "section": "Consequences",
+    "subgoals": [
+      "Take large sets",
+      "Count their neighbours",
+      "Conclude expansion"
+    ]
+  },
+  {
+    "label": "The parameters",
+    "section": "The parameters",
+    "subgoals": [
+      "Divide by the order",
+      "Multiply the set sizes",
+      "Compare \\(\\lambda\\) with \\(d\\)"
+    ]
+  }
+]

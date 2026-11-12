@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Allow \\(d\\) same-colour neighbours",
+      "Recover ordinary colouring",
+      "State the pair \\((k,d)\\)"
+    ]
+  },
+  {
+    "label": "The degree bound",
+    "section": "The degree bound",
+    "subgoals": [
+      "Order by degree",
+      "Reserve colours for neighbours",
+      "Check the inequality"
+    ]
+  },
+  {
+    "label": "Edge counts",
+    "section": "Edge counts",
+    "subgoals": [
+      "Bound one colour class",
+      "Sum over classes",
+      "Compare with all edges"
+    ]
+  }
+]

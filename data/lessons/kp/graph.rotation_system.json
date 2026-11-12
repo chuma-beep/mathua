@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Darts",
+    "section": "Darts",
+    "subgoals": [
+      "Double the edge count",
+      "Order the darts at a vertex",
+      "Read a rotation"
+    ]
+  },
+  {
+    "label": "Faces from the rotation",
+    "section": "Faces from the rotation",
+    "subgoals": [
+      "Follow the successor rule",
+      "Close a face",
+      "Apply Euler's formula"
+    ]
+  },
+  {
+    "label": "Genus",
+    "section": "Genus",
+    "subgoals": [
+      "Count vertices, edges and faces",
+      "Solve for the genus",
+      "Distinguish planar from higher genus"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Greedy colouring",
+    "section": "Greedy colouring",
+    "subgoals": [
+      "Order the vertices",
+      "Take the smallest available colour",
+      "Compare two orders"
+    ]
+  },
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Maximise over orders",
+      "Describe the colour classes",
+      "Relate to first-fit"
+    ]
+  },
+  {
+    "label": "Values",
+    "section": "Values",
+    "subgoals": [
+      "Colour a complete graph",
+      "Colour a path",
+      "Delete an edge from a complete graph"
+    ]
+  }
+]

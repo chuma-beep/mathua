@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Place vertices on the spine",
+      "Assign edges to pages",
+      "Forbid same-page crossings"
+    ]
+  },
+  {
+    "label": "Outerplanar graphs",
+    "section": "Outerplanar graphs",
+    "subgoals": [
+      "Draw one page",
+      "Recognise an outerplanar graph",
+      "Check a tree"
+    ]
+  },
+  {
+    "label": "Complete graphs",
+    "section": "Complete graphs",
+    "subgoals": [
+      "State the page count",
+      "Derive the lower bound",
+      "Compute a small case"
+    ]
+  }
+]

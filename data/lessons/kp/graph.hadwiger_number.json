@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Contract an edge",
+      "Delete an element",
+      "Identify the largest clique minor"
+    ]
+  },
+  {
+    "label": "Relation to colouring",
+    "section": "Relation to colouring",
+    "subgoals": [
+      "State the conjecture",
+      "Check the small cases",
+      "Connect to the four colour theorem"
+    ]
+  },
+  {
+    "label": "Values",
+    "section": "Values",
+    "subgoals": [
+      "Compute a complete graph",
+      "Compute a cycle",
+      "Compute a tree"
+    ]
+  }
+]

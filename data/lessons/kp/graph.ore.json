@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The degree-sum condition",
+    "section": "The degree-sum condition",
+    "subgoals": [
+      "Identify a nonadjacent pair",
+      "Add the two degrees",
+      "Compare the sum with the order"
+    ]
+  },
+  {
+    "label": "Ore closure",
+    "section": "Ore closure",
+    "subgoals": [
+      "Join a qualifying pair",
+      "Repeat until no pair qualifies",
+      "Read the closure"
+    ]
+  },
+  {
+    "label": "Comparing the hypotheses",
+    "section": "Comparing the hypotheses",
+    "subgoals": [
+      "Derive Ore from Dirac",
+      "Find a graph Ore covers",
+      "Explain the strict inclusion"
+    ]
+  }
+]

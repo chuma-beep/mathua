@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Colour properly",
+      "Check each pair of classes",
+      "Call the colouring complete"
+    ]
+  },
+  {
+    "label": "Edge requirement",
+    "section": "Edge requirement",
+    "subgoals": [
+      "Count the class pairs",
+      "Demand one edge per pair",
+      "Bound the colours by the edges"
+    ]
+  },
+  {
+    "label": "Refinement",
+    "section": "Refinement",
+    "subgoals": [
+      "Split a disconnected pair",
+      "Keep the colouring proper",
+      "Reach completeness"
+    ]
+  }
+]

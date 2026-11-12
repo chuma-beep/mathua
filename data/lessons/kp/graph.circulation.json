@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Conservation",
+    "section": "Conservation",
+    "subgoals": [
+      "Balance inflow and outflow",
+      "Recognise the zero circulation",
+      "Send flow around a cycle"
+    ]
+  },
+  {
+    "label": "Lower bounds",
+    "section": "Lower bounds",
+    "subgoals": [
+      "Subtract the lower bounds",
+      "Build the residual network",
+      "Test feasibility on cuts"
+    ]
+  },
+  {
+    "label": "Cycle decomposition",
+    "section": "Cycle decomposition",
+    "subgoals": [
+      "Find a positive cycle",
+      "Subtract its flow",
+      "Repeat until empty"
+    ]
+  }
+]

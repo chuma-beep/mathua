@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Preflow and labels",
+    "section": "Preflow and labels",
+    "subgoals": [
+      "Saturate the source edges",
+      "Label the vertices",
+      "Accept temporary excess"
+    ]
+  },
+  {
+    "label": "Push and relabel",
+    "section": "Push and relabel",
+    "subgoals": [
+      "Push downhill",
+      "Relabel when stuck",
+      "Return excess to the source"
+    ]
+  },
+  {
+    "label": "The complexity",
+    "section": "The complexity",
+    "subgoals": [
+      "Bound the relabels",
+      "Multiply by edge scans",
+      "Name the practical heuristics"
+    ]
+  }
+]

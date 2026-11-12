@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Edge expansion",
+    "section": "Edge expansion",
+    "subgoals": [
+      "Choose a small set",
+      "Count its boundary",
+      "Divide by its size"
+    ]
+  },
+  {
+    "label": "The inequality",
+    "section": "The inequality",
+    "subgoals": [
+      "Lower bound the gap",
+      "Upper bound the gap",
+      "Apply the square root"
+    ]
+  },
+  {
+    "label": "Examples",
+    "section": "Examples",
+    "subgoals": [
+      "Compute the complete graph case",
+      "Compute a path case",
+      "Compare the two bounds"
+    ]
+  }
+]

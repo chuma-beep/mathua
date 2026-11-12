@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The matrix",
+    "section": "The matrix",
+    "subgoals": [
+      "Index the rows by vertices",
+      "Fill in shortest distances",
+      "Check symmetry"
+    ]
+  },
+  {
+    "label": "Path sums",
+    "section": "Path sums",
+    "subgoals": [
+      "Sum the distances on a path",
+      "Divide by the pair count",
+      "Compare with the order"
+    ]
+  },
+  {
+    "label": "Diameter and radius",
+    "section": "Diameter and radius",
+    "subgoals": [
+      "Take the largest entry",
+      "Take the smallest row maximum",
+      "Distinguish the two matrices"
+    ]
+  }
+]

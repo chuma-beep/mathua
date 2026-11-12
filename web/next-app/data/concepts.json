@@ -16903,6 +16903,718 @@
     "subdomain": "graph_theory.matching"
   },
   {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.handshake",
+    "label": "The handshake lemma",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.graphs.basics"
+    ],
+    "subdomain": "graph_theory.extremal"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.dirac",
+    "label": "Dirac's theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.hamiltonian"
+    ],
+    "subdomain": "graph_theory.extremal"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.ore",
+    "label": "Ore's theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.hamiltonian"
+    ],
+    "subdomain": "graph_theory.extremal"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.erdos_stone",
+    "label": "The Erdos-Stone theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.turan"
+    ],
+    "subdomain": "graph_theory.extremal"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.cage",
+    "label": "Cages",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.girth"
+    ],
+    "subdomain": "graph_theory.extremal"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.zarankiewicz",
+    "label": "The Zarankiewicz problem",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.mantel"
+    ],
+    "subdomain": "graph_theory.extremal"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.critical",
+    "label": "Color-critical graphs",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.chromatic_polynomial"
+    ],
+    "subdomain": "graph_theory.extremal"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.goodman",
+    "label": "Goodman's formula",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.turan"
+    ],
+    "subdomain": "graph_theory.extremal"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.friendship",
+    "label": "The friendship theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.clique"
+    ],
+    "subdomain": "graph_theory.extremal"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.hajnal_szemeredi",
+    "label": "The Hajnal-Szemeredi theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.edge_coloring"
+    ],
+    "subdomain": "graph_theory.extremal"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.hall",
+    "label": "Hall's marriage theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.matching",
+      "graph.perfect_matching"
+    ],
+    "subdomain": "graph_theory.flows"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.konig",
+    "label": "Konig's theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.vertex_cover",
+      "graph.matching"
+    ],
+    "subdomain": "graph_theory.flows"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.min_cost_flow",
+    "label": "Minimum-cost flow",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.max_flow"
+    ],
+    "subdomain": "graph_theory.flows"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.circulation",
+    "label": "Circulations",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.max_flow"
+    ],
+    "subdomain": "graph_theory.flows"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.gomory_hu",
+    "label": "Gomory-Hu trees",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.max_flow",
+      "graph.connectivity"
+    ],
+    "subdomain": "graph_theory.flows"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.multiway_cut",
+    "label": "Multiway cuts",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.max_flow"
+    ],
+    "subdomain": "graph_theory.flows"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.flow_integrality",
+    "label": "The integral flow theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.max_flow"
+    ],
+    "subdomain": "graph_theory.flows"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.edge_disjoint",
+    "label": "Edge-disjoint paths",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.menger",
+      "graph.max_flow"
+    ],
+    "subdomain": "graph_theory.flows"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.dinic",
+    "label": "Dinic's algorithm",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.max_flow"
+    ],
+    "subdomain": "graph_theory.flows"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.push_relabel",
+    "label": "The push-relabel algorithm",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.max_flow"
+    ],
+    "subdomain": "graph_theory.flows"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.choosability",
+    "label": "Choosability",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.list_coloring"
+    ],
+    "subdomain": "graph_theory.coloring"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.grundy",
+    "label": "The Grundy number",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.chromatic_polynomial"
+    ],
+    "subdomain": "graph_theory.coloring"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.achromatic",
+    "label": "The achromatic number",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.chromatic_polynomial",
+      "graph.clique"
+    ],
+    "subdomain": "graph_theory.coloring"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.fractional_coloring",
+    "label": "Fractional coloring",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.chromatic_polynomial",
+      "graph.perfect_graph"
+    ],
+    "subdomain": "graph_theory.coloring"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.circular_coloring",
+    "label": "Circular coloring",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.chromatic_polynomial"
+    ],
+    "subdomain": "graph_theory.coloring"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.defective_coloring",
+    "label": "Defective coloring",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.brooks"
+    ],
+    "subdomain": "graph_theory.coloring"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.acyclic_coloring",
+    "label": "Acyclic coloring",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.edge_coloring"
+    ],
+    "subdomain": "graph_theory.coloring"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.total_coloring",
+    "label": "Total coloring",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.edge_coloring"
+    ],
+    "subdomain": "graph_theory.coloring"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.hadwiger_number",
+    "label": "The Hadwiger number",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.minor",
+      "graph.clique"
+    ],
+    "subdomain": "graph_theory.coloring"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.complete_coloring",
+    "label": "Complete coloring",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.chromatic_polynomial",
+      "graph.clique"
+    ],
+    "subdomain": "graph_theory.coloring"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.incidence",
+    "label": "The incidence matrix",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.adjacency"
+    ],
+    "subdomain": "graph_theory.spectral"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.normalized_laplacian",
+    "label": "The normalized Laplacian",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.laplacian"
+    ],
+    "subdomain": "graph_theory.spectral"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.signless_laplacian",
+    "label": "The signless Laplacian",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.laplacian"
+    ],
+    "subdomain": "graph_theory.spectral"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.interlacing",
+    "label": "Eigenvalue interlacing",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.spectral_radius"
+    ],
+    "subdomain": "graph_theory.spectral"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.closed_walks",
+    "label": "Closed walks and eigenvalues",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.adjacency",
+      "graph.spectral_radius"
+    ],
+    "subdomain": "graph_theory.spectral"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.expander_mixing",
+    "label": "The expander mixing lemma",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.spectral_gap"
+    ],
+    "subdomain": "graph_theory.spectral"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.cheeger",
+    "label": "Cheeger's inequality",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.spectral_gap"
+    ],
+    "subdomain": "graph_theory.spectral"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.heat_kernel",
+    "label": "The heat kernel on a graph",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.laplacian"
+    ],
+    "subdomain": "graph_theory.spectral"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.distance_matrix",
+    "label": "The distance matrix",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.distance"
+    ],
+    "subdomain": "graph_theory.spectral"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.energy",
+    "label": "Graph energy",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.spectral_radius"
+    ],
+    "subdomain": "graph_theory.spectral"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.rotation_system",
+    "label": "Rotation systems",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.planar_dual"
+    ],
+    "subdomain": "graph_theory.planarity"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.nonorientable_genus",
+    "label": "The nonorientable genus",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.genus"
+    ],
+    "subdomain": "graph_theory.planarity"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.toroidal",
+    "label": "Toroidal graphs",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.genus",
+      "graph.kuratowski"
+    ],
+    "subdomain": "graph_theory.planarity"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.one_planar",
+    "label": "1-planar graphs",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.crossing_number"
+    ],
+    "subdomain": "graph_theory.planarity"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.book_embedding",
+    "label": "Book embeddings",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.planar_dual",
+      "graph.outerplanar"
+    ],
+    "subdomain": "graph_theory.planarity"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.page_number",
+    "label": "The page number",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.book_embedding"
+    ],
+    "subdomain": "graph_theory.planarity"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.queue_number",
+    "label": "The queue number",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.book_embedding"
+    ],
+    "subdomain": "graph_theory.planarity"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.bandwidth",
+    "label": "Graph bandwidth",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.treewidth"
+    ],
+    "subdomain": "graph_theory.planarity"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.planar_separator",
+    "label": "Planar separators",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.kuratowski",
+      "graph.treewidth"
+    ],
+    "subdomain": "graph_theory.planarity"
+  },
+  {
+    "domain": "graph_theory",
+    "grading_type": "numeric",
+    "id": "graph.apex",
+    "label": "Apex graphs",
+    "mastery_threshold": {
+      "avg_time_seconds": 28,
+      "streak": 10
+    },
+    "prerequisites": [
+      "graph.minor"
+    ],
+    "subdomain": "graph_theory.planarity"
+  },
+  {
     "domain": "linear_algebra",
     "grading_type": "numeric",
     "id": "linalg.vector.concept",

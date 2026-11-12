@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The surface",
+    "section": "The surface",
+    "subgoals": [
+      "Set the Euler characteristic",
+      "Count cells",
+      "Compare with the plane"
+    ]
+  },
+  {
+    "label": "Edge bound",
+    "section": "Edge bound",
+    "subgoals": [
+      "Bound the face lengths",
+      "Apply Euler's formula",
+      "Solve for the edge count"
+    ]
+  },
+  {
+    "label": "Complete graphs",
+    "section": "Complete graphs",
+    "subgoals": [
+      "Count the edges of \\(K_7\\)",
+      "Check the bound",
+      "See why \\(K_8\\) fails"
+    ]
+  }
+]

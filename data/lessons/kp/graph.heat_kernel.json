@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The equation",
+    "section": "The equation",
+    "subgoals": [
+      "Write the heat equation",
+      "Exponentiate the Laplacian",
+      "Evolve an initial function"
+    ]
+  },
+  {
+    "label": "Spectral form",
+    "section": "Spectral form",
+    "subgoals": [
+      "Expand in eigenvectors",
+      "Attach a decay rate",
+      "Identify the surviving mode"
+    ]
+  },
+  {
+    "label": "The limit",
+    "section": "The limit",
+    "subgoals": [
+      "Send time to infinity",
+      "Project onto constants",
+      "Read the stationary distribution"
+    ]
+  }
+]

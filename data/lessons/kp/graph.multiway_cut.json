@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The problem",
+    "section": "The problem",
+    "subgoals": [
+      "Name the terminals",
+      "Forbid terminal connections",
+      "Reduce the two-terminal case"
+    ]
+  },
+  {
+    "label": "The isolating cut bound",
+    "section": "The isolating cut bound",
+    "subgoals": [
+      "Cut around each terminal",
+      "Discard the largest cut",
+      "Apply the factor"
+    ]
+  },
+  {
+    "label": "The star case",
+    "section": "The star case",
+    "subgoals": [
+      "Count the spokes",
+      "Delete all but one",
+      "Compare with the optimum"
+    ]
+  }
+]

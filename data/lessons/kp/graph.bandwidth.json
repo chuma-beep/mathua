@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Order the vertices",
+      "Measure each edge stretch",
+      "Minimise the maximum"
+    ]
+  },
+  {
+    "label": "Values",
+    "section": "Values",
+    "subgoals": [
+      "Lay out a path",
+      "Lay out a cycle",
+      "Lay out a complete graph"
+    ]
+  },
+  {
+    "label": "Relation to pathwidth",
+    "section": "Relation to pathwidth",
+    "subgoals": [
+      "Compare the two parameters",
+      "State the inequalities",
+      "Explain the extra rigidity"
+    ]
+  }
+]

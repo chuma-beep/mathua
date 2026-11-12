@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Count the pages",
+      "Fix the spine order",
+      "Minimise the count"
+    ]
+  },
+  {
+    "label": "Planar graphs",
+    "section": "Planar graphs",
+    "subgoals": [
+      "State the planar bound",
+      "Note the tight example",
+      "Compare with outerplanar graphs"
+    ]
+  },
+  {
+    "label": "Values",
+    "section": "Values",
+    "subgoals": [
+      "Read a path",
+      "Read a cycle",
+      "Read a complete graph"
+    ]
+  }
+]

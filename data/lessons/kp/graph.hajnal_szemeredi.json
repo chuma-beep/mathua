@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Equitable colouring",
+    "section": "Equitable colouring",
+    "subgoals": [
+      "State the class-size condition",
+      "Relate colours to maximum degree",
+      "Colour a complete graph"
+    ]
+  },
+  {
+    "label": "Class sizes",
+    "section": "Class sizes",
+    "subgoals": [
+      "Divide the order by the colours",
+      "Take floor and ceiling",
+      "Check the complete graph"
+    ]
+  },
+  {
+    "label": "Sharpness",
+    "section": "Sharpness",
+    "subgoals": [
+      "Build a tight example",
+      "Show fewer colours fail",
+      "Compare with Brooks' theorem"
+    ]
+  }
+]

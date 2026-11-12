@@ -1,0 +1,29 @@
+[
+  {
+    "label": "One vertex away from planar",
+    "section": "One vertex away from planar",
+    "subgoals": [
+      "Delete a vertex and test planarity",
+      "Recognise a planar graph as apex",
+      "Check \\(K_5\\) by deleting one vertex"
+    ]
+  },
+  {
+    "label": "The edge budget",
+    "section": "The edge budget",
+    "subgoals": [
+      "Apply the planar bound after deletion",
+      "Add the deleted vertex's edges",
+      "Compare with the apex bound"
+    ]
+  },
+  {
+    "label": "Obstructions",
+    "section": "Obstructions",
+    "subgoals": [
+      "Close the class under minors",
+      "Describe the planar plus one cone",
+      "Place apex graphs in the minor order"
+    ]
+  }
+]

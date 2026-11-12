@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The matrix",
+    "section": "The matrix",
+    "subgoals": [
+      "Size the matrix",
+      "Mark the endpoints",
+      "Read a column"
+    ]
+  },
+  {
+    "label": "The Gram matrix",
+    "section": "The Gram matrix",
+    "subgoals": [
+      "Multiply the incidence matrix",
+      "Recover the degrees",
+      "Recover the adjacency"
+    ]
+  },
+  {
+    "label": "Rank and components",
+    "section": "Rank and components",
+    "subgoals": [
+      "Count the components",
+      "Subtract from the order",
+      "Identify the null space"
+    ]
+  }
+]

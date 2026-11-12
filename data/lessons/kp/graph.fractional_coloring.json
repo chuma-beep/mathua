@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The relaxation",
+    "section": "The relaxation",
+    "subgoals": [
+      "Weight the independent sets",
+      "Cover every vertex",
+      "Minimise the weight"
+    ]
+  },
+  {
+    "label": "Bounds",
+    "section": "Bounds",
+    "subgoals": [
+      "Compare with the clique number",
+      "Compare with the chromatic number",
+      "Use vertex transitivity"
+    ]
+  },
+  {
+    "label": "Values",
+    "section": "Values",
+    "subgoals": [
+      "Compute a complete graph",
+      "Compute a bipartite graph",
+      "Compute the five-cycle"
+    ]
+  }
+]

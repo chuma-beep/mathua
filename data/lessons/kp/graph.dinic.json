@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The level graph",
+    "section": "The level graph",
+    "subgoals": [
+      "Run breadth-first search",
+      "Keep advancing edges",
+      "Push a blocking flow"
+    ]
+  },
+  {
+    "label": "The phase count",
+    "section": "The phase count",
+    "subgoals": [
+      "See the distance grow",
+      "Bound the phases",
+      "Apply the unit-capacity improvement"
+    ]
+  },
+  {
+    "label": "The running time",
+    "section": "The running time",
+    "subgoals": [
+      "Multiply phase cost by phases",
+      "State the general bound",
+      "State the unit-capacity bound"
+    ]
+  }
+]

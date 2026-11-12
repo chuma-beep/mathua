@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The equality",
+    "section": "The equality",
+    "subgoals": [
+      "Bound a cover below by a matching",
+      "Build a cover from a matching",
+      "State the equality"
+    ]
+  },
+  {
+    "label": "Duality",
+    "section": "Duality",
+    "subgoals": [
+      "Write the matching LP",
+      "Write the cover LP",
+      "Apply integrality"
+    ]
+  },
+  {
+    "label": "Small examples",
+    "section": "Small examples",
+    "subgoals": [
+      "Compute a path matching",
+      "Compute a cycle matching",
+      "Compute the complete bipartite case"
+    ]
+  }
+]

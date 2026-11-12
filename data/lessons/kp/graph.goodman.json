@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The formula",
+    "section": "The formula",
+    "subgoals": [
+      "Count all triangles",
+      "Sum the mixed pairs",
+      "Halve and subtract"
+    ]
+  },
+  {
+    "label": "The two-colour split",
+    "section": "The two-colour split",
+    "subgoals": [
+      "Split the edges at a vertex",
+      "Multiply the two sides",
+      "See why each bad triangle is counted twice"
+    ]
+  },
+  {
+    "label": "The lower bound",
+    "section": "The lower bound",
+    "subgoals": [
+      "Evaluate the formula on a degree list",
+      "Compare regular and irregular cases",
+      "Apply the \\(K_6\\) case"
+    ]
+  }
+]

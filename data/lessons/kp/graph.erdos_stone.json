@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The density",
+    "section": "The density",
+    "subgoals": [
+      "Read the chromatic number",
+      "Form the density factor",
+      "Apply the asymptotic formula"
+    ]
+  },
+  {
+    "label": "The Tur\u00e1n graph",
+    "section": "The Tur\u00e1n graph",
+    "subgoals": [
+      "Choose the number of parts",
+      "Balance the part sizes",
+      "Count the edges"
+    ]
+  },
+  {
+    "label": "Bipartite exceptions",
+    "section": "Bipartite exceptions",
+    "subgoals": [
+      "Recognise a bipartite forbidden graph",
+      "See why the density vanishes",
+      "Name the exact replacement"
+    ]
+  }
+]

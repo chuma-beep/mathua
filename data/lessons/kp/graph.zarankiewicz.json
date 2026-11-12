@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The forbidden subgraph",
+    "section": "The forbidden subgraph",
+    "subgoals": [
+      "Draw the forbidden \\(K_{s,t}\\)",
+      "Specialise to a four-cycle",
+      "State what the host graph must avoid"
+    ]
+  },
+  {
+    "label": "The Reiman bound",
+    "section": "The Reiman bound",
+    "subgoals": [
+      "Count length-two paths",
+      "Apply convexity",
+      "Evaluate the bound"
+    ]
+  },
+  {
+    "label": "Counting four-cycles",
+    "section": "Counting four-cycles",
+    "subgoals": [
+      "Choose two vertices on each side",
+      "Multiply the choices",
+      "Compare with the edge count"
+    ]
+  }
+]

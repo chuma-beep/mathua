@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The windmill",
+    "section": "The windmill",
+    "subgoals": [
+      "Count the vertices",
+      "Count the edges",
+      "Count the triangles"
+    ]
+  },
+  {
+    "label": "The conclusion",
+    "section": "The conclusion",
+    "subgoals": [
+      "Name the shared vertex",
+      "Show it is universal",
+      "Match the remaining vertices"
+    ]
+  },
+  {
+    "label": "Counting the pairs",
+    "section": "Counting the pairs",
+    "subgoals": [
+      "Assign a triangle to a pair",
+      "Count the triangles through the hub",
+      "Check uniqueness"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The minimum degree",
+    "section": "The minimum degree",
+    "subgoals": [
+      "Delete a low-degree vertex",
+      "Colour the remainder",
+      "Recolour the vertex"
+    ]
+  },
+  {
+    "label": "The edge lower bound",
+    "section": "The edge lower bound",
+    "subgoals": [
+      "Apply the handshake lemma",
+      "Substitute the minimum degree",
+      "Check the odd cycle case"
+    ]
+  },
+  {
+    "label": "Critical examples",
+    "section": "Critical examples",
+    "subgoals": [
+      "Count the edges of a complete graph",
+      "Identify an odd cycle",
+      "Rule out a cut vertex"
+    ]
+  }
+]

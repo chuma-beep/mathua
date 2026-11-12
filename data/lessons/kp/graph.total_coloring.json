@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Colour vertices and edges",
+      "List the conflict pairs",
+      "Check a small graph"
+    ]
+  },
+  {
+    "label": "The lower bound",
+    "section": "The lower bound",
+    "subgoals": [
+      "Build the conflict clique",
+      "Count its elements",
+      "Conclude the lower bound"
+    ]
+  },
+  {
+    "label": "Values",
+    "section": "Values",
+    "subgoals": [
+      "Colour a complete graph",
+      "Colour a path",
+      "Colour a cycle"
+    ]
+  }
+]

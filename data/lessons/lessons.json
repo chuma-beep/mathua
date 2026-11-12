@@ -9198,5 +9198,205 @@
   {
     "concept_id": "numa.stochastic.rng",
     "source": "authored/numa.stochastic.rng.md"
+  },
+  {
+    "concept_id": "graph.handshake",
+    "source": "authored/graph.handshake.md"
+  },
+  {
+    "concept_id": "graph.dirac",
+    "source": "authored/graph.dirac.md"
+  },
+  {
+    "concept_id": "graph.ore",
+    "source": "authored/graph.ore.md"
+  },
+  {
+    "concept_id": "graph.erdos_stone",
+    "source": "authored/graph.erdos_stone.md"
+  },
+  {
+    "concept_id": "graph.cage",
+    "source": "authored/graph.cage.md"
+  },
+  {
+    "concept_id": "graph.zarankiewicz",
+    "source": "authored/graph.zarankiewicz.md"
+  },
+  {
+    "concept_id": "graph.critical",
+    "source": "authored/graph.critical.md"
+  },
+  {
+    "concept_id": "graph.goodman",
+    "source": "authored/graph.goodman.md"
+  },
+  {
+    "concept_id": "graph.friendship",
+    "source": "authored/graph.friendship.md"
+  },
+  {
+    "concept_id": "graph.hajnal_szemeredi",
+    "source": "authored/graph.hajnal_szemeredi.md"
+  },
+  {
+    "concept_id": "graph.hall",
+    "source": "authored/graph.hall.md"
+  },
+  {
+    "concept_id": "graph.konig",
+    "source": "authored/graph.konig.md"
+  },
+  {
+    "concept_id": "graph.min_cost_flow",
+    "source": "authored/graph.min_cost_flow.md"
+  },
+  {
+    "concept_id": "graph.circulation",
+    "source": "authored/graph.circulation.md"
+  },
+  {
+    "concept_id": "graph.gomory_hu",
+    "source": "authored/graph.gomory_hu.md"
+  },
+  {
+    "concept_id": "graph.multiway_cut",
+    "source": "authored/graph.multiway_cut.md"
+  },
+  {
+    "concept_id": "graph.flow_integrality",
+    "source": "authored/graph.flow_integrality.md"
+  },
+  {
+    "concept_id": "graph.edge_disjoint",
+    "source": "authored/graph.edge_disjoint.md"
+  },
+  {
+    "concept_id": "graph.dinic",
+    "source": "authored/graph.dinic.md"
+  },
+  {
+    "concept_id": "graph.push_relabel",
+    "source": "authored/graph.push_relabel.md"
+  },
+  {
+    "concept_id": "graph.choosability",
+    "source": "authored/graph.choosability.md"
+  },
+  {
+    "concept_id": "graph.grundy",
+    "source": "authored/graph.grundy.md"
+  },
+  {
+    "concept_id": "graph.achromatic",
+    "source": "authored/graph.achromatic.md"
+  },
+  {
+    "concept_id": "graph.fractional_coloring",
+    "source": "authored/graph.fractional_coloring.md"
+  },
+  {
+    "concept_id": "graph.circular_coloring",
+    "source": "authored/graph.circular_coloring.md"
+  },
+  {
+    "concept_id": "graph.defective_coloring",
+    "source": "authored/graph.defective_coloring.md"
+  },
+  {
+    "concept_id": "graph.acyclic_coloring",
+    "source": "authored/graph.acyclic_coloring.md"
+  },
+  {
+    "concept_id": "graph.total_coloring",
+    "source": "authored/graph.total_coloring.md"
+  },
+  {
+    "concept_id": "graph.hadwiger_number",
+    "source": "authored/graph.hadwiger_number.md"
+  },
+  {
+    "concept_id": "graph.complete_coloring",
+    "source": "authored/graph.complete_coloring.md"
+  },
+  {
+    "concept_id": "graph.incidence",
+    "source": "authored/graph.incidence.md"
+  },
+  {
+    "concept_id": "graph.normalized_laplacian",
+    "source": "authored/graph.normalized_laplacian.md"
+  },
+  {
+    "concept_id": "graph.signless_laplacian",
+    "source": "authored/graph.signless_laplacian.md"
+  },
+  {
+    "concept_id": "graph.interlacing",
+    "source": "authored/graph.interlacing.md"
+  },
+  {
+    "concept_id": "graph.closed_walks",
+    "source": "authored/graph.closed_walks.md"
+  },
+  {
+    "concept_id": "graph.expander_mixing",
+    "source": "authored/graph.expander_mixing.md"
+  },
+  {
+    "concept_id": "graph.cheeger",
+    "source": "authored/graph.cheeger.md"
+  },
+  {
+    "concept_id": "graph.heat_kernel",
+    "source": "authored/graph.heat_kernel.md"
+  },
+  {
+    "concept_id": "graph.distance_matrix",
+    "source": "authored/graph.distance_matrix.md"
+  },
+  {
+    "concept_id": "graph.energy",
+    "source": "authored/graph.energy.md"
+  },
+  {
+    "concept_id": "graph.rotation_system",
+    "source": "authored/graph.rotation_system.md"
+  },
+  {
+    "concept_id": "graph.nonorientable_genus",
+    "source": "authored/graph.nonorientable_genus.md"
+  },
+  {
+    "concept_id": "graph.toroidal",
+    "source": "authored/graph.toroidal.md"
+  },
+  {
+    "concept_id": "graph.one_planar",
+    "source": "authored/graph.one_planar.md"
+  },
+  {
+    "concept_id": "graph.book_embedding",
+    "source": "authored/graph.book_embedding.md"
+  },
+  {
+    "concept_id": "graph.page_number",
+    "source": "authored/graph.page_number.md"
+  },
+  {
+    "concept_id": "graph.queue_number",
+    "source": "authored/graph.queue_number.md"
+  },
+  {
+    "concept_id": "graph.bandwidth",
+    "source": "authored/graph.bandwidth.md"
+  },
+  {
+    "concept_id": "graph.planar_separator",
+    "source": "authored/graph.planar_separator.md"
+  },
+  {
+    "concept_id": "graph.apex",
+    "source": "authored/graph.apex.md"
   }
 ]

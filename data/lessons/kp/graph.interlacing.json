@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Cauchy interlacing",
+    "section": "Cauchy interlacing",
+    "subgoals": [
+      "Delete one vertex",
+      "Order both spectra",
+      "Write the chain"
+    ]
+  },
+  {
+    "label": "Repeated deletion",
+    "section": "Repeated deletion",
+    "subgoals": [
+      "Delete \\(k\\) vertices",
+      "Shift the indices",
+      "Bound one eigenvalue"
+    ]
+  },
+  {
+    "label": "Consequences",
+    "section": "Consequences",
+    "subgoals": [
+      "Bound a subgraph radius",
+      "Compare with the parent",
+      "Check the connected case"
+    ]
+  }
+]

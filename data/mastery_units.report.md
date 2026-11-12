@@ -12,20 +12,20 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 2300 |
+| Total concepts | 2350 |
 | Total units | 153 |
 | Minimum unit size | 1 |
-| Median unit size | 10 |
+| Median unit size | 11 |
 | Maximum unit size | 82 |
 | Singleton units | 21 |
-| Units with <= 3 concepts | 40 |
-| Units with > 25 concepts | 33 |
-| Units with > 50 concepts | 2 |
+| Units with <= 3 concepts | 39 |
+| Units with > 25 concepts | 34 |
+| Units with > 50 concepts | 3 |
 | Cross-unit prerequisite edges (derived) | 522 |
 | Backward band edges | 0 |
 
 If the learner is assessed once per unit, then 153 assessments cover the corpus, and the
-median is one assessment per 10 concepts. That is the frequency question this report
+median is one assessment per 11 concepts. That is the frequency question this report
 exists to make concrete.
 
 ## Proposed units
@@ -99,12 +99,12 @@ exists to make concrete.
 | `geometry.b6` | geometry | 6 | 1 | 1 | 20–20 |
 | `geometry.b7` | geometry | 7 | 3 | 2 | 21–22 |
 | `graph_theory.b1` | graph_theory | 1 | 1 | 1 | 5–5 |
-| `graph_theory.b2` | graph_theory | 2 | 3 | 2 | 6–6 |
+| `graph_theory.b2` | graph_theory | 2 | 7 | 2 | 6–7 |
 | `graph_theory.b3` | graph_theory | 3 | 1 | 1 | 11–11 |
-| `graph_theory.b5` | graph_theory | 5 | 2 | 2 | 17–17 |
-| `graph_theory.b6` | graph_theory | 6 | 23 | 5 | 18–20 |
-| `graph_theory.b7` | graph_theory | 7 | 30 | 7 | 21–23 |
-| `graph_theory.b8` | graph_theory | 8 | 10 | 3 | 24–26 |
+| `graph_theory.b5` | graph_theory | 5 | 3 | 2 | 17–17 |
+| `graph_theory.b6` | graph_theory | 6 | 28 | 6 | 18–20 |
+| `graph_theory.b7` | graph_theory | 7 | 59 | 7 | 21–23 |
+| `graph_theory.b8` | graph_theory | 8 | 21 | 6 | 24–26 |
 | `linear_algebra.b0` | linear_algebra | 0 | 1 | 1 | 2–2 |
 | `linear_algebra.b1` | linear_algebra | 1 | 6 | 2 | 3–5 |
 | `linear_algebra.b2` | linear_algebra | 2 | 2 | 2 | 6–8 |
@@ -199,16 +199,16 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 210 | 8 | 56 | 30 | 56 | 14 | 0 |
-| 3 | 153 | 10 | 82 | 21 | 40 | 33 | 0 |
-| 4 | 119 | 17 | 86 | 10 | 21 | 36 | 0 |
-| 5 | 104 | 18 | 104 | 8 | 18 | 41 | 0 |
-| 6 | 95 | 20 | 130 | 8 | 16 | 34 | 0 |
+| 2 | 210 | 8 | 56 | 29 | 54 | 15 | 0 |
+| 3 | 153 | 11 | 82 | 21 | 39 | 34 | 0 |
+| 4 | 119 | 18 | 86 | 10 | 21 | 36 | 0 |
+| 5 | 104 | 19 | 104 | 8 | 18 | 41 | 0 |
+| 6 | 95 | 21 | 130 | 8 | 16 | 34 | 0 |
 | 8 | 73 | 27 | 117 | 3 | 8 | 37 | 0 |
 | 10 | 63 | 28 | 145 | 4 | 8 | 33 | 0 |
 | 12 | 63 | 29 | 191 | 1 | 6 | 36 | 0 |
 | 15 | 50 | 40 | 172 | 1 | 3 | 33 | 0 |
-| 20 | 43 | 61 | 145 | 2 | 4 | 30 | 0 |
+| 20 | 43 | 66 | 145 | 2 | 4 | 31 | 0 |
 | 45 | 26 | 87 | 172 | 0 | 0 | 26 | 0 |
 
 **No width is clean.** Small widths fragment, at 3 there are 21 singleton units, which is a
@@ -499,7 +499,7 @@ Unresolvable subdomains:
 `trigonometry.identities`
 `trigonometry.spherical`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2300
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2350
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings

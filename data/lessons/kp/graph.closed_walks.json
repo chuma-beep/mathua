@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The identity",
+    "section": "The identity",
+    "subgoals": [
+      "Raise the adjacency matrix",
+      "Take the trace",
+      "Sum the eigenvalue powers"
+    ]
+  },
+  {
+    "label": "Small lengths",
+    "section": "Small lengths",
+    "subgoals": [
+      "Count length-two closed walks",
+      "Count length-three closed walks",
+      "Relate to triangles"
+    ]
+  },
+  {
+    "label": "Open walks",
+    "section": "Open walks",
+    "subgoals": [
+      "Read a matrix entry",
+      "Count one-step walks",
+      "Count two-step walks"
+    ]
+  }
+]

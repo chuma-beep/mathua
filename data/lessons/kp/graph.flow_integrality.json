@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Integral optima",
+    "section": "Integral optima",
+    "subgoals": [
+      "Augment along a path",
+      "Keep residual capacities integral",
+      "Reach an integer maximum"
+    ]
+  },
+  {
+    "label": "The cut value",
+    "section": "The cut value",
+    "subgoals": [
+      "Sum the cut capacities",
+      "Apply max-flow min-cut",
+      "Read the integral value"
+    ]
+  },
+  {
+    "label": "Total unimodularity",
+    "section": "Total unimodularity",
+    "subgoals": [
+      "Write the incidence matrix",
+      "Check total unimodularity",
+      "Conclude integral vertices"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Complete colourings",
+    "section": "Complete colourings",
+    "subgoals": [
+      "Colour properly",
+      "Check every colour pair",
+      "Maximise the count"
+    ]
+  },
+  {
+    "label": "The edge requirement",
+    "section": "The edge requirement",
+    "subgoals": [
+      "Count the colour pairs",
+      "Require one edge per pair",
+      "Bound the colours by edges"
+    ]
+  },
+  {
+    "label": "Values",
+    "section": "Values",
+    "subgoals": [
+      "Colour a complete graph",
+      "Colour a path",
+      "Colour a star"
+    ]
+  }
+]

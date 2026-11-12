@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The edge form",
+    "section": "The edge form",
+    "subgoals": [
+      "Pack edge-disjoint paths",
+      "Find a separating edge set",
+      "Apply Menger"
+    ]
+  },
+  {
+    "label": "Global connectivity",
+    "section": "Global connectivity",
+    "subgoals": [
+      "Bound by the minimum degree",
+      "Compute the complete graph value",
+      "Relate local and global"
+    ]
+  },
+  {
+    "label": "Small values",
+    "section": "Small values",
+    "subgoals": [
+      "Check a path",
+      "Check a cycle",
+      "Check a tree"
+    ]
+  }
+]

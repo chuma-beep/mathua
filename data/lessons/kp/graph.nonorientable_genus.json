@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Euler formula",
+    "section": "The Euler formula",
+    "subgoals": [
+      "Count the cells",
+      "Subtract from two",
+      "Read the crosscap number"
+    ]
+  },
+  {
+    "label": "Projective plane",
+    "section": "Projective plane",
+    "subgoals": [
+      "Test planarity of \\(K_5\\)",
+      "Embed it with one crosscap",
+      "Do the same for \\(K_{3,3}\\)"
+    ]
+  },
+  {
+    "label": "Comparison with orientable genus",
+    "section": "Comparison with orientable genus",
+    "subgoals": [
+      "Compare the two formulas",
+      "Bound one genus by the other",
+      "Find a smaller example"
+    ]
+  }
+]

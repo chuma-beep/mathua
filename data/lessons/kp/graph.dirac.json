@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The threshold",
+    "section": "The threshold",
+    "subgoals": [
+      "State the minimum degree",
+      "Round the threshold up",
+      "Apply the condition"
+    ]
+  },
+  {
+    "label": "The edge count",
+    "section": "The edge count",
+    "subgoals": [
+      "Multiply degree by order",
+      "Halve the product",
+      "Compare with the Tur\u00e1n bound"
+    ]
+  },
+  {
+    "label": "Tightness",
+    "section": "Tightness",
+    "subgoals": [
+      "Build the two-clique example",
+      "Compute its minimum degree",
+      "See why no cycle spans both parts"
+    ]
+  }
+]

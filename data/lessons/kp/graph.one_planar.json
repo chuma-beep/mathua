@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Draw the graph",
+      "Count crossings per edge",
+      "Recover the planar case"
+    ]
+  },
+  {
+    "label": "The edge bound",
+    "section": "The edge bound",
+    "subgoals": [
+      "Planarise the crossings",
+      "Bound the faces",
+      "Solve for the edges"
+    ]
+  },
+  {
+    "label": "Examples",
+    "section": "Examples",
+    "subgoals": [
+      "Check \\(K_6\\)",
+      "Check \\(K_7\\)",
+      "Compare with the bound"
+    ]
+  }
+]

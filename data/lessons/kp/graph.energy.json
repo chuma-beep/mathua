@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "List the eigenvalues",
+      "Take absolute values",
+      "Sum them"
+    ]
+  },
+  {
+    "label": "Complete graphs",
+    "section": "Complete graphs",
+    "subgoals": [
+      "Find the eigenvalues",
+      "Count the multiplicity",
+      "Add the magnitudes"
+    ]
+  },
+  {
+    "label": "Bipartite graphs",
+    "section": "Bipartite graphs",
+    "subgoals": [
+      "Use spectral symmetry",
+      "Double the positive part",
+      "Compute the complete bipartite case"
+    ]
+  }
+]

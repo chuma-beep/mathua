@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Moore bound",
+    "section": "The Moore bound",
+    "subgoals": [
+      "Sum the levels of the tree",
+      "Stop at the girth",
+      "Apply the parity case"
+    ]
+  },
+  {
+    "label": "Known cages",
+    "section": "Known cages",
+    "subgoals": [
+      "Name the Petersen cage",
+      "Recall the Heawood order",
+      "Match degree and girth"
+    ]
+  },
+  {
+    "label": "Counting edges",
+    "section": "Counting edges",
+    "subgoals": [
+      "Multiply order by degree",
+      "Halve the product",
+      "Check integrality"
+    ]
+  }
+]

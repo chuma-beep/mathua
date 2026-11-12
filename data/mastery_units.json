@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 2300,
+  "concept_count": 2350,
   "unit_count": 153,
   "units": [
     {
@@ -2211,7 +2211,7 @@
       "domain": "graph_theory",
       "band": 2,
       "depth_min": 6,
-      "depth_max": 6,
+      "depth_max": 7,
       "subdomains": [
         "graph_theory.connectivity",
         "graph_theory.spectral"
@@ -2219,9 +2219,13 @@
       "concept_ids": [
         "graph.bfs",
         "graph.dfs",
-        "graph.laplacian"
+        "graph.heat_kernel",
+        "graph.incidence",
+        "graph.laplacian",
+        "graph.normalized_laplacian",
+        "graph.signless_laplacian"
       ],
-      "concept_count": 3
+      "concept_count": 7
     },
     {
       "id": "graph_theory.b3",
@@ -2250,10 +2254,11 @@
         "graph_theory.extremal"
       ],
       "concept_ids": [
+        "graph.handshake",
         "graph.isomorphism",
         "graph.mantel"
       ],
-      "concept_count": 2
+      "concept_count": 3
     },
     {
       "id": "graph_theory.b6",
@@ -2267,22 +2272,27 @@
         "graph_theory.connectivity",
         "graph_theory.extremal",
         "graph_theory.flows",
-        "graph_theory.planarity"
+        "graph_theory.planarity",
+        "graph_theory.spectral"
       ],
       "concept_ids": [
         "graph.arboricity",
         "graph.automorphism",
         "graph.bellman_ford",
         "graph.bridge",
+        "graph.cage",
         "graph.cograph",
         "graph.complement",
         "graph.connectivity",
         "graph.cut_vertex",
         "graph.degeneracy",
         "graph.distance",
+        "graph.distance_matrix",
+        "graph.erdos_stone",
         "graph.feedback_vertex_set",
         "graph.floyd_warshall",
         "graph.girth",
+        "graph.goodman",
         "graph.hamiltonian",
         "graph.homomorphism",
         "graph.kuratowski",
@@ -2292,9 +2302,10 @@
         "graph.shortest_path",
         "graph.subgraph",
         "graph.tournament",
-        "graph.turan"
+        "graph.turan",
+        "graph.zarankiewicz"
       ],
-      "concept_count": 23
+      "concept_count": 28
     },
     {
       "id": "graph_theory.b7",
@@ -2313,38 +2324,67 @@
         "graph_theory.planarity"
       ],
       "concept_ids": [
+        "graph.acyclic_coloring",
+        "graph.apex",
         "graph.assignment",
+        "graph.bandwidth",
         "graph.blocks",
+        "graph.book_embedding",
         "graph.brooks",
+        "graph.choosability",
         "graph.chordal",
         "graph.chromatic_polynomial",
+        "graph.circular_coloring",
+        "graph.circulation",
+        "graph.critical",
         "graph.crossing_number",
         "graph.dag_paths",
+        "graph.defective_coloring",
+        "graph.dinic",
+        "graph.dirac",
         "graph.edge_coloring",
+        "graph.edge_disjoint",
         "graph.feedback_arc_set",
+        "graph.flow_integrality",
         "graph.four_color",
+        "graph.fractional_coloring",
         "graph.genus",
+        "graph.gomory_hu",
+        "graph.grundy",
+        "graph.hajnal_szemeredi",
         "graph.list_coloring",
         "graph.matching",
         "graph.matroid",
         "graph.max_flow",
         "graph.menger",
+        "graph.min_cost_flow",
         "graph.minor",
+        "graph.multiway_cut",
+        "graph.nonorientable_genus",
+        "graph.one_planar",
+        "graph.ore",
         "graph.outerplanar",
+        "graph.page_number",
         "graph.perfect_graph",
         "graph.perfect_matching",
         "graph.planar_dual",
+        "graph.planar_separator",
+        "graph.push_relabel",
+        "graph.queue_number",
         "graph.ramsey",
         "graph.random_threshold",
+        "graph.rotation_system",
         "graph.stable_matching",
         "graph.strong_connectivity",
         "graph.thickness",
         "graph.topological_sort",
+        "graph.toroidal",
+        "graph.total_coloring",
         "graph.treewidth",
         "graph.union_find",
         "graph.vertex_cover"
       ],
-      "concept_count": 30
+      "concept_count": 59
     },
     {
       "id": "graph_theory.b8",
@@ -2355,22 +2395,36 @@
       "depth_max": 26,
       "subdomains": [
         "graph_theory.basics",
+        "graph_theory.coloring",
+        "graph_theory.extremal",
+        "graph_theory.flows",
         "graph_theory.matching",
         "graph_theory.spectral"
       ],
       "concept_ids": [
+        "graph.achromatic",
+        "graph.cheeger",
         "graph.clique",
         "graph.clique_cover",
+        "graph.closed_walks",
+        "graph.complete_coloring",
         "graph.dominating_set",
         "graph.edge_cover",
+        "graph.energy",
+        "graph.expander_mixing",
+        "graph.friendship",
+        "graph.hadwiger_number",
+        "graph.hall",
         "graph.independent_set",
+        "graph.interlacing",
         "graph.interval",
+        "graph.konig",
         "graph.spectral_gap",
         "graph.spectral_radius",
         "graph.split",
         "graph.tutte"
       ],
-      "concept_count": 10
+      "concept_count": 21
     },
     {
       "id": "linear_algebra.b0",

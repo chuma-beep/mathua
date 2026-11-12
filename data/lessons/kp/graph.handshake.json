@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Summing the degrees",
+    "section": "Summing the degrees",
+    "subgoals": [
+      "Double the edge count",
+      "Sum a degree list",
+      "Check the parity"
+    ]
+  },
+  {
+    "label": "Counting odd vertices",
+    "section": "Counting odd vertices",
+    "subgoals": [
+      "Count odd degrees",
+      "Decide whether a sequence is drawable",
+      "Use the parity rule"
+    ]
+  },
+  {
+    "label": "Average degree",
+    "section": "Average degree",
+    "subgoals": [
+      "Divide the degree sum by the order",
+      "Recover the edge count",
+      "Bound edges from a minimum degree"
+    ]
+  }
+]

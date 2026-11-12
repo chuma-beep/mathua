@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Add the adjacency",
+      "Check positive semidefiniteness",
+      "Read the row sums"
+    ]
+  },
+  {
+    "label": "The spectrum",
+    "section": "The spectrum",
+    "subgoals": [
+      "Sum the eigenvalues",
+      "Locate the zero eigenvalue",
+      "Identify the bipartite case"
+    ]
+  },
+  {
+    "label": "Comparison",
+    "section": "Comparison",
+    "subgoals": [
+      "Write both Laplacians",
+      "Apply a diagonal sign change",
+      "Compare the spectra"
+    ]
+  }
+]

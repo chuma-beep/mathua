@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Order the vertices",
+      "Assign edges to queues",
+      "Forbid nested pairs"
+    ]
+  },
+  {
+    "label": "Nesting versus crossing",
+    "section": "Nesting versus crossing",
+    "subgoals": [
+      "Compare the two patterns",
+      "Draw a nesting",
+      "Draw a crossing"
+    ]
+  },
+  {
+    "label": "Values",
+    "section": "Values",
+    "subgoals": [
+      "Layout a path",
+      "Layout a cycle",
+      "Read the complete graph count"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The condition",
+    "section": "The condition",
+    "subgoals": [
+      "Pick a subset of one side",
+      "Count its neighbours",
+      "Compare with the subset size"
+    ]
+  },
+  {
+    "label": "Deficiency",
+    "section": "Deficiency",
+    "subgoals": [
+      "Find the worst subset",
+      "Compute the shortfall",
+      "Subtract from the side size"
+    ]
+  },
+  {
+    "label": "Regular bipartite graphs",
+    "section": "Regular bipartite graphs",
+    "subgoals": [
+      "Verify Hall on a regular graph",
+      "Remove a perfect matching",
+      "Repeat for the decomposition"
+    ]
+  }
+]

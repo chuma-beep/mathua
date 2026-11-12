@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Assign a list to each vertex",
+      "Choose one colour per list",
+      "Keep adjacent choices distinct"
+    ]
+  },
+  {
+    "label": "Relation to chromatic number",
+    "section": "Relation to chromatic number",
+    "subgoals": [
+      "Use identical lists",
+      "Recover ordinary colouring",
+      "Find a strict gap"
+    ]
+  },
+  {
+    "label": "Basic values",
+    "section": "Basic values",
+    "subgoals": [
+      "Colour a path from lists",
+      "Handle an even cycle",
+      "Handle an odd cycle"
+    ]
+  }
+]
