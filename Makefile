@@ -11,10 +11,14 @@ build-all:
 	GOOS=darwin GOARCH=amd64 go build -o dist/mathua-darwin-amd64 ./cmd/mathua
 	GOOS=darwin GOARCH=arm64 go build -o dist/mathua-darwin-arm64 ./cmd/mathua
 
-test:
-	python3 scripts/check_duplicate_tests.py
+# gofmt is checked here and in validate so a formatting slip cannot pass the
+# local gates and fail the CI gofmt step after a push.
+fmt-check:
 	@unformatted="$$(gofmt -l $$(git ls-files '*.go'))"; \
 	if [ -n "$$unformatted" ]; then echo "gofmt needed on:"; echo "$$unformatted"; exit 1; fi
+
+test: fmt-check
+	python3 scripts/check_duplicate_tests.py
 	go vet ./...
 	go test ./...
 
@@ -47,7 +51,7 @@ e2e-diagnosis:
 	cd web/next-app && rm -rf out && NEXT_PUBLIC_API_URL=http://192.0.2.1:9099 npx next build
 	cd web/next-app && PW_DIAGNOSIS=1 npx playwright test e2e/answer-diagnosis.spec.ts
 
-validate:
+validate: fmt-check
 	python3 scripts/check_duplicate_tests.py
 	go run scripts/validate_graph.go
 	go run ./cmd/validate-mastery-units
