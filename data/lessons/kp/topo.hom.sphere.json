@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The two generators",
+    "section": "The two generators",
+    "subgoals": [
+      "Count the nonzero groups",
+      "Read the total Betti number",
+      "Check the circle"
+    ]
+  },
+  {
+    "label": "Vanishing degrees",
+    "section": "Vanishing degrees",
+    "subgoals": [
+      "Count the interior degrees",
+      "Check the two-sphere",
+      "Check the three-sphere"
+    ]
+  },
+  {
+    "label": "Euler characteristic",
+    "section": "Euler characteristic",
+    "subgoals": [
+      "Evaluate one plus the sign",
+      "Check the circle",
+      "Check the two-sphere"
+    ]
+  }
+]

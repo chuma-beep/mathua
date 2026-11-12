@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Closed orientable surfaces",
+    "section": "Closed orientable surfaces",
+    "subgoals": [
+      "Subtract from two",
+      "Halve the result",
+      "Check the torus"
+    ]
+  },
+  {
+    "label": "With boundary",
+    "section": "With boundary",
+    "subgoals": [
+      "Include the boundary count",
+      "Check the pair of pants",
+      "Check a genus-two surface with one boundary"
+    ]
+  },
+  {
+    "label": "Nonorientable surfaces",
+    "section": "Nonorientable surfaces",
+    "subgoals": [
+      "Subtract from two",
+      "Check the Klein bottle",
+      "Check four crosscaps"
+    ]
+  }
+]

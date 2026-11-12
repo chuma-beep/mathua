@@ -12,19 +12,19 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 2450 |
-| Total units | 156 |
+| Total concepts | 2500 |
+| Total units | 157 |
 | Minimum unit size | 1 |
 | Median unit size | 11 |
 | Maximum unit size | 82 |
 | Singleton units | 22 |
 | Units with <= 3 concepts | 40 |
 | Units with > 25 concepts | 39 |
-| Units with > 50 concepts | 3 |
-| Cross-unit prerequisite edges (derived) | 528 |
+| Units with > 50 concepts | 4 |
+| Cross-unit prerequisite edges (derived) | 529 |
 | Backward band edges | 0 |
 
-If the learner is assessed once per unit, then 156 assessments cover the corpus, and the
+If the learner is assessed once per unit, then 157 assessments cover the corpus, and the
 median is one assessment per 11 concepts. That is the frequency question this report
 exists to make concrete.
 
@@ -180,8 +180,9 @@ exists to make concrete.
 | `statistics.b7` | statistics | 7 | 7 | 3 | 21–22 |
 | `statistics.b8` | statistics | 8 | 3 | 2 | 24–26 |
 | `topology.b10` | topology | 10 | 12 | 3 | 30–32 |
-| `topology.b11` | topology | 11 | 32 | 10 | 33–35 |
-| `topology.b12` | topology | 12 | 28 | 8 | 36–38 |
+| `topology.b11` | topology | 11 | 35 | 11 | 33–35 |
+| `topology.b12` | topology | 12 | 64 | 12 | 36–38 |
+| `topology.b13` | topology | 13 | 11 | 3 | 39–40 |
 | `trigonometry.b2` | trigonometry | 2 | 4 | 1 | 7–8 |
 | `trigonometry.b3` | trigonometry | 3 | 7 | 2 | 9–11 |
 | `trigonometry.b4` | trigonometry | 4 | 25 | 5 | 12–14 |
@@ -202,17 +203,17 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 213 | 9 | 56 | 29 | 55 | 17 | 0 |
-| 3 | 156 | 11 | 82 | 22 | 40 | 39 | 0 |
-| 4 | 121 | 18 | 86 | 10 | 23 | 40 | 0 |
-| 5 | 104 | 20 | 104 | 7 | 18 | 44 | 0 |
+| 2 | 214 | 9 | 56 | 29 | 55 | 18 | 0 |
+| 3 | 157 | 11 | 82 | 22 | 40 | 39 | 0 |
+| 4 | 122 | 18 | 86 | 10 | 24 | 40 | 0 |
+| 5 | 105 | 20 | 104 | 7 | 19 | 44 | 0 |
 | 6 | 96 | 22 | 130 | 8 | 16 | 37 | 0 |
-| 8 | 73 | 30 | 117 | 3 | 8 | 39 | 0 |
-| 10 | 63 | 28 | 145 | 3 | 8 | 34 | 0 |
+| 8 | 74 | 30 | 117 | 3 | 9 | 39 | 0 |
+| 10 | 64 | 28 | 145 | 3 | 9 | 34 | 0 |
 | 12 | 63 | 30 | 191 | 1 | 6 | 37 | 0 |
 | 15 | 50 | 45 | 172 | 1 | 3 | 35 | 0 |
-| 20 | 43 | 66 | 145 | 1 | 4 | 31 | 0 |
-| 45 | 26 | 89 | 172 | 0 | 0 | 26 | 0 |
+| 20 | 44 | 66 | 145 | 1 | 5 | 31 | 0 |
+| 45 | 26 | 90 | 172 | 0 | 0 | 26 | 0 |
 
 **No width is clean.** Small widths fragment, at 3 there are 22 singleton units, which is a
 quiz per concept and is exactly what §12 rules out. Large widths stop fragmenting but produce
@@ -229,7 +230,7 @@ The subdomain condensation of the concept DAG **contains cycles**: grouping conc
 subdomain discards the per-concept ordering, so a concept in subdomain A can be a
 prerequisite of one in subdomain B whose other members depend on A.
 
-**219 of 125 subdomains cannot be levelled**, they sit inside a cycle, or downstream
+**223 of 125 subdomains cannot be levelled**, they sit inside a cycle, or downstream
 of one, so no depth function exists for them at all. (Tarjan puts 26 inside cycles and
 the remaining 34 behind them; Kahn cannot order either group, because ordering a node
 requires its predecessors to be ordered first.) An implementation that ignores this
@@ -495,13 +496,18 @@ Unresolvable subdomains:
 
 `topology.constructions`
 `topology.covering`
+`topology.differential`
 `topology.dimension`
-`topology.invariants`
 
+`topology.geometric`
+`topology.homological`
+`topology.invariants`
 `topology.knot`
+
 `topology.manifolds`
 `topology.metrization`
 `topology.separation`
+`topology.surfaces`
 
 `trigonometry.advanced`
 `trigonometry.equations`
@@ -512,7 +518,7 @@ Unresolvable subdomains:
 `trigonometry.identities`
 `trigonometry.spherical`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2450
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2500
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings

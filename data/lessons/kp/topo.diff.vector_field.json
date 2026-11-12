@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The vanishing condition",
+    "section": "The vanishing condition",
+    "subgoals": [
+      "Read the Euler characteristic",
+      "Check the torus",
+      "Check the sphere"
+    ]
+  },
+  {
+    "label": "Index sum",
+    "section": "Index sum",
+    "subgoals": [
+      "Sum the indices",
+      "Use the Euler characteristic",
+      "Check the torus"
+    ]
+  },
+  {
+    "label": "The sphere",
+    "section": "The sphere",
+    "subgoals": [
+      "Count the minimum zeros",
+      "Recall the index sum",
+      "Compare with the torus"
+    ]
+  }
+]

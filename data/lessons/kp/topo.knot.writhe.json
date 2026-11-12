@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Signed count",
+    "section": "Signed count",
+    "subgoals": [
+      "Add the signs",
+      "Count positive crossings",
+      "Count negative crossings"
+    ]
+  },
+  {
+    "label": "The trefoil",
+    "section": "The trefoil",
+    "subgoals": [
+      "Count the positive crossings",
+      "Check the mirror image",
+      "Compare with the figure-eight"
+    ]
+  },
+  {
+    "label": "The range",
+    "section": "The range",
+    "subgoals": [
+      "Count the possible values",
+      "Check three crossings",
+      "Check five crossings"
+    ]
+  }
+]

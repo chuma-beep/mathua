@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The line",
+    "section": "The line",
+    "subgoals": [
+      "Count the boundary points",
+      "Check the ends",
+      "Compare with a circle"
+    ]
+  },
+  {
+    "label": "Lattices",
+    "section": "Lattices",
+    "subgoals": [
+      "Subtract one from the dimension",
+      "Check the plane",
+      "Check three dimensions"
+    ]
+  },
+  {
+    "label": "Free groups",
+    "section": "Free groups",
+    "subgoals": [
+      "Recognise the Cantor set",
+      "Read its dimension",
+      "Compare with lattices"
+    ]
+  }
+]

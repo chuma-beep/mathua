@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Euler characteristic",
+    "section": "The Euler characteristic",
+    "subgoals": [
+      "Subtract two from the sum",
+      "Apply the formula to two tori",
+      "Check the sphere as the identity"
+    ]
+  },
+  {
+    "label": "Genus adds",
+    "section": "Genus adds",
+    "subgoals": [
+      "Add the two genera",
+      "Read genus from the Euler characteristic",
+      "Count handles after gluing"
+    ]
+  },
+  {
+    "label": "Nonorientable sums",
+    "section": "Nonorientable sums",
+    "subgoals": [
+      "Add crosscap numbers",
+      "Recognise the projective plane",
+      "Compare with the orientable case"
+    ]
+  }
+]

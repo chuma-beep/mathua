@@ -1,0 +1,29 @@
+[
+  {
+    "label": "States",
+    "section": "States",
+    "subgoals": [
+      "Raise two to the crossings",
+      "Check the trefoil",
+      "Check the figure-eight"
+    ]
+  },
+  {
+    "label": "The loop count",
+    "section": "The loop count",
+    "subgoals": [
+      "Count the loops",
+      "Weight by the smoothing difference",
+      "Check a single crossing"
+    ]
+  },
+  {
+    "label": "The unknot",
+    "section": "The unknot",
+    "subgoals": [
+      "Read the normalisation",
+      "Apply the writhe correction",
+      "Compare with the unknot"
+    ]
+  }
+]

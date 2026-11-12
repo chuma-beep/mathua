@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The degree",
+    "section": "The degree",
+    "subgoals": [
+      "Read the polynomial degree",
+      "Check the trefoil",
+      "Relate to the genus"
+    ]
+  },
+  {
+    "label": "Evaluation at one",
+    "section": "Evaluation at one",
+    "subgoals": [
+      "Evaluate at one",
+      "Take the absolute value",
+      "Check the unknot"
+    ]
+  },
+  {
+    "label": "Torus knots",
+    "section": "Torus knots",
+    "subgoals": [
+      "Multiply the shifted parameters",
+      "Check the trefoil",
+      "Check T(2,5)"
+    ]
+  }
+]

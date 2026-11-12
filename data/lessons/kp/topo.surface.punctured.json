@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Euler characteristic",
+    "section": "Euler characteristic",
+    "subgoals": [
+      "Subtract one per puncture",
+      "Compute the punctured torus",
+      "Check the unpunctured case"
+    ]
+  },
+  {
+    "label": "First Betti number",
+    "section": "First Betti number",
+    "subgoals": [
+      "Add twice the genus and the punctures",
+      "Subtract one",
+      "Compute the twice-punctured plane"
+    ]
+  },
+  {
+    "label": "The plane",
+    "section": "The plane",
+    "subgoals": [
+      "Start from one",
+      "Subtract the punctures",
+      "Count the loops"
+    ]
+  }
+]

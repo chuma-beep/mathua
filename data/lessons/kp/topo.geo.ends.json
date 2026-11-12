@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The line",
+    "section": "The line",
+    "subgoals": [
+      "Count the rays",
+      "Check a finite interval",
+      "Compare with the circle"
+    ]
+  },
+  {
+    "label": "Higher dimensions",
+    "section": "Higher dimensions",
+    "subgoals": [
+      "Read the end count",
+      "Check the plane",
+      "Check three dimensions"
+    ]
+  },
+  {
+    "label": "Free groups",
+    "section": "Free groups",
+    "subgoals": [
+      "Recognise the tree",
+      "Count the branches",
+      "Compare with abelian groups"
+    ]
+  }
+]

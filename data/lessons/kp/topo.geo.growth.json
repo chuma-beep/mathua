@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Abelian groups",
+    "section": "Abelian groups",
+    "subgoals": [
+      "Read the dimension",
+      "Check the line",
+      "Check the plane"
+    ]
+  },
+  {
+    "label": "Products",
+    "section": "Products",
+    "subgoals": [
+      "Add the degrees",
+      "Check two lines",
+      "Check a line and a plane"
+    ]
+  },
+  {
+    "label": "Free groups",
+    "section": "Free groups",
+    "subgoals": [
+      "Recognise exponential growth",
+      "Check rank two",
+      "Compare with abelian groups"
+    ]
+  }
+]

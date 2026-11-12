@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The shape",
+    "section": "The shape",
+    "subgoals": [
+      "Count the columns",
+      "Count the rows",
+      "Identify the middle map"
+    ]
+  },
+  {
+    "label": "The hypothesis",
+    "section": "The hypothesis",
+    "subgoals": [
+      "Count the assumed isomorphisms",
+      "Locate them in the diagram",
+      "Check the outer maps"
+    ]
+  },
+  {
+    "label": "The conclusion",
+    "section": "The conclusion",
+    "subgoals": [
+      "Conclude the middle map",
+      "Apply it to a pair",
+      "Compare with the snake lemma"
+    ]
+  }
+]

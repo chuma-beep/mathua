@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Euler characteristic",
+    "section": "Euler characteristic",
+    "subgoals": [
+      "Check the parity of the dimension",
+      "Compute the projective plane",
+      "Compute three dimensions"
+    ]
+  },
+  {
+    "label": "The first homology",
+    "section": "The first homology",
+    "subgoals": [
+      "Read the torsion order",
+      "Check the projective plane",
+      "Check four dimensions"
+    ]
+  },
+  {
+    "label": "Modulo two coefficients",
+    "section": "Modulo two coefficients",
+    "subgoals": [
+      "Count the degrees",
+      "Add one",
+      "Check the projective plane"
+    ]
+  }
+]

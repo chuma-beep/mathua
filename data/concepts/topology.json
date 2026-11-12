@@ -330,7 +330,7 @@
   },
   {
     "id": "topo.compactification.stone_cech",
-    "label": "Stone-Čech compactification",
+    "label": "Stone-\u010cech compactification",
     "domain": "topology",
     "subdomain": "topology.compact",
     "grading_type": "numeric",
@@ -1034,5 +1034,955 @@
       "streak": 10,
       "avg_time_seconds": 26.0
     }
+  },
+  {
+    "id": "topo.surface.connected_sum",
+    "label": "Connected sums of surfaces",
+    "domain": "topology",
+    "subdomain": "topology.surfaces",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.invariant.surface_classification"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.invariant.surface_classification"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.surface.crosscap",
+    "label": "The crosscap number",
+    "domain": "topology",
+    "subdomain": "topology.surfaces",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.invariant.surface_classification"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.invariant.surface_classification"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.surface.handle",
+    "label": "Handle decompositions",
+    "domain": "topology",
+    "subdomain": "topology.surfaces",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.manifolds.boundary"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.manifolds.boundary"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.surface.euler",
+    "label": "Surface Euler characteristic",
+    "domain": "topology",
+    "subdomain": "topology.surfaces",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.invariant.euler"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.invariant.euler"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.surface.punctured",
+    "label": "Punctured surfaces",
+    "domain": "topology",
+    "subdomain": "topology.surfaces",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.invariant.euler"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.invariant.euler"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.surface.boundary",
+    "label": "Surfaces with boundary",
+    "domain": "topology",
+    "subdomain": "topology.surfaces",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.manifolds.boundary"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.manifolds.boundary"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.surface.double_cover",
+    "label": "Orientation double covers",
+    "domain": "topology",
+    "subdomain": "topology.surfaces",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.manifold.orientability"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.manifold.orientability"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.surface.genus_formula",
+    "label": "The genus formula",
+    "domain": "topology",
+    "subdomain": "topology.surfaces",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.invariant.surface_classification"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.invariant.surface_classification"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.surface.boundary_connect",
+    "label": "Boundary connected sums",
+    "domain": "topology",
+    "subdomain": "topology.surfaces",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.surface.boundary"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.surface.boundary"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.surface.triangulation",
+    "label": "Surface triangulations",
+    "domain": "topology",
+    "subdomain": "topology.surfaces",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.invariant.euler"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.invariant.euler"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.diff.tangent_bundle",
+    "label": "Tangent bundles",
+    "domain": "topology",
+    "subdomain": "topology.differential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.manifold"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.manifold"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.diff.vector_field",
+    "label": "Vector fields on manifolds",
+    "domain": "topology",
+    "subdomain": "topology.differential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.diff.tangent_bundle"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.diff.tangent_bundle"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.diff.critical_point",
+    "label": "Critical points of smooth functions",
+    "domain": "topology",
+    "subdomain": "topology.differential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.diff.tangent_bundle"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.diff.tangent_bundle"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.diff.morse",
+    "label": "Morse inequalities",
+    "domain": "topology",
+    "subdomain": "topology.differential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.diff.critical_point"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.diff.critical_point"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.diff.sard",
+    "label": "Sard's theorem",
+    "domain": "topology",
+    "subdomain": "topology.differential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.diff.critical_point"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.diff.critical_point"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.diff.transversality",
+    "label": "Transversality",
+    "domain": "topology",
+    "subdomain": "topology.differential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.diff.sard"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.diff.sard"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.diff.whitney",
+    "label": "The Whitney embedding theorem",
+    "domain": "topology",
+    "subdomain": "topology.differential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.embedding"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.embedding"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.diff.tubular",
+    "label": "Tubular neighbourhoods",
+    "domain": "topology",
+    "subdomain": "topology.differential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.diff.tangent_bundle"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.diff.tangent_bundle"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.diff.degree",
+    "label": "The degree of a smooth map",
+    "domain": "topology",
+    "subdomain": "topology.differential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.algebraic.degree"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.algebraic.degree"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.diff.flow",
+    "label": "Flows of vector fields",
+    "domain": "topology",
+    "subdomain": "topology.differential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.diff.vector_field"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.diff.vector_field"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.hom.chain_complex",
+    "label": "Chain complexes",
+    "domain": "topology",
+    "subdomain": "topology.homological",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.simplicial_homology"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.simplicial_homology"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.hom.exact_sequence",
+    "label": "Long exact sequences",
+    "domain": "topology",
+    "subdomain": "topology.homological",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.hom.chain_complex"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.hom.chain_complex"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.hom.snake_lemma",
+    "label": "The snake lemma",
+    "domain": "topology",
+    "subdomain": "topology.homological",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.hom.exact_sequence"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.hom.exact_sequence"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.hom.five_lemma",
+    "label": "The five lemma",
+    "domain": "topology",
+    "subdomain": "topology.homological",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.hom.exact_sequence"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.hom.exact_sequence"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.hom.kunneth",
+    "label": "The Kunneth formula",
+    "domain": "topology",
+    "subdomain": "topology.homological",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.hom.chain_complex"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.hom.chain_complex"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.hom.universal_coefficient",
+    "label": "The universal coefficient theorem",
+    "domain": "topology",
+    "subdomain": "topology.homological",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.cohomology"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.cohomology"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.hom.euler_poincare",
+    "label": "The Euler-Poincare formula",
+    "domain": "topology",
+    "subdomain": "topology.homological",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.hom.chain_complex"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.hom.chain_complex"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.hom.sphere",
+    "label": "Homology of spheres",
+    "domain": "topology",
+    "subdomain": "topology.homological",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.singular_homology"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.singular_homology"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.hom.projective",
+    "label": "Homology of projective spaces",
+    "domain": "topology",
+    "subdomain": "topology.homological",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.singular_homology"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.singular_homology"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.hom.torus",
+    "label": "Homology of tori",
+    "domain": "topology",
+    "subdomain": "topology.homological",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.hom.kunneth"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.hom.kunneth"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.knot.crossing",
+    "label": "Crossing numbers",
+    "domain": "topology",
+    "subdomain": "topology.knot",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.knot"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.knot"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.knot.unknotting",
+    "label": "Unknotting numbers",
+    "domain": "topology",
+    "subdomain": "topology.knot",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.knot.crossing"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.knot.crossing"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.knot.seifert_genus",
+    "label": "The Seifert genus",
+    "domain": "topology",
+    "subdomain": "topology.knot",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.seifert_surface"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.seifert_surface"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.knot.alexander",
+    "label": "The Alexander polynomial",
+    "domain": "topology",
+    "subdomain": "topology.knot",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.knot"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.knot"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.knot.skein",
+    "label": "Skein relations",
+    "domain": "topology",
+    "subdomain": "topology.knot",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.knot.alexander"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.knot.alexander"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.knot.torus_knot",
+    "label": "Torus knots",
+    "domain": "topology",
+    "subdomain": "topology.knot",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.knot"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.knot"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.knot.connected_sum",
+    "label": "Connected sums of knots",
+    "domain": "topology",
+    "subdomain": "topology.knot",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.knot"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.knot"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.knot.bracket",
+    "label": "The Kauffman bracket",
+    "domain": "topology",
+    "subdomain": "topology.knot",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.jones_polynomial"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.jones_polynomial"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.knot.writhe",
+    "label": "Writhe of a diagram",
+    "domain": "topology",
+    "subdomain": "topology.knot",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.knot"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.knot"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.knot.linking",
+    "label": "Linking numbers",
+    "domain": "topology",
+    "subdomain": "topology.knot",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.knot.writhe"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.knot.writhe"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.geo.cayley",
+    "label": "Cayley graphs",
+    "domain": "topology",
+    "subdomain": "topology.geometric",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.homotopy.fundamental"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.homotopy.fundamental"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.geo.growth",
+    "label": "Growth rates of groups",
+    "domain": "topology",
+    "subdomain": "topology.geometric",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.geo.cayley"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.geo.cayley"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.geo.quasi_isometry",
+    "label": "Quasi-isometries",
+    "domain": "topology",
+    "subdomain": "topology.geometric",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.geo.cayley"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.geo.cayley"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.geo.ends",
+    "label": "Ends of groups",
+    "domain": "topology",
+    "subdomain": "topology.geometric",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.geo.quasi_isometry"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.geo.quasi_isometry"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.geo.svarc_milnor",
+    "label": "The Svarc-Milnor lemma",
+    "domain": "topology",
+    "subdomain": "topology.geometric",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.geo.quasi_isometry"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.geo.quasi_isometry"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.geo.hyperbolic",
+    "label": "Hyperbolic groups",
+    "domain": "topology",
+    "subdomain": "topology.geometric",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.geo.growth"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.geo.growth"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.geo.boundary",
+    "label": "Group boundaries",
+    "domain": "topology",
+    "subdomain": "topology.geometric",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.geo.hyperbolic"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.geo.hyperbolic"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.geo.dehn",
+    "label": "Dehn functions",
+    "domain": "topology",
+    "subdomain": "topology.geometric",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.geo.growth"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.geo.growth"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.geo.amenable",
+    "label": "Amenable groups",
+    "domain": "topology",
+    "subdomain": "topology.geometric",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.geo.growth"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.geo.growth"
+    ],
+    "variants": []
+  },
+  {
+    "id": "topo.geo.property_t",
+    "label": "Property (T)",
+    "domain": "topology",
+    "subdomain": "topology.geometric",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "topo.geo.amenable"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "topo.geo.amenable"
+    ],
+    "variants": []
   }
 ]

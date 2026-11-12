@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Handle counts",
+    "section": "Handle counts",
+    "subgoals": [
+      "Count the 1-handles",
+      "Add the two end handles",
+      "Check the sphere"
+    ]
+  },
+  {
+    "label": "Boundary",
+    "section": "Boundary",
+    "subgoals": [
+      "Relate boundary circles to omitted handles",
+      "Compute the annulus",
+      "Compute the pair of pants"
+    ]
+  },
+  {
+    "label": "Reading the genus",
+    "section": "Reading the genus",
+    "subgoals": [
+      "Halve the 1-handle count",
+      "Recognise a twisted handle",
+      "Compare orientable and nonorientable"
+    ]
+  }
+]

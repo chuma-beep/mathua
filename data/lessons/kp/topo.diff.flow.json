@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The linear flow",
+    "section": "The linear flow",
+    "subgoals": [
+      "Exponentiate the rate",
+      "Compute the multiplier",
+      "Check the decay case"
+    ]
+  },
+  {
+    "label": "Fixed points",
+    "section": "Fixed points",
+    "subgoals": [
+      "Solve for the zeros",
+      "Count the solutions",
+      "Check a quadratic field"
+    ]
+  },
+  {
+    "label": "Divergence",
+    "section": "Divergence",
+    "subgoals": [
+      "Add the partial derivatives",
+      "Check a linear field",
+      "Interpret the sign"
+    ]
+  }
+]

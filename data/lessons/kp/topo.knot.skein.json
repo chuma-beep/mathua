@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The three diagrams",
+    "section": "The three diagrams",
+    "subgoals": [
+      "Count the diagrams",
+      "Identify the crossing signs",
+      "Recognise the smoothing"
+    ]
+  },
+  {
+    "label": "The normalization",
+    "section": "The normalization",
+    "subgoals": [
+      "Assign the unknot value",
+      "Start the recursion",
+      "Check the empty diagram"
+    ]
+  },
+  {
+    "label": "The crossing count",
+    "section": "The crossing count",
+    "subgoals": [
+      "Count the applications",
+      "Reduce the crossing number",
+      "Check the trefoil"
+    ]
+  }
+]

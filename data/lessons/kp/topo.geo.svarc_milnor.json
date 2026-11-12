@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The orbit map",
+    "section": "The orbit map",
+    "subgoals": [
+      "Choose a basepoint",
+      "Translate the basepoint",
+      "Recognise a quasi-isometry"
+    ]
+  },
+  {
+    "label": "The orbit count",
+    "section": "The orbit count",
+    "subgoals": [
+      "Read cocompactness",
+      "Count the fundamental domains",
+      "Check a compact quotient"
+    ]
+  },
+  {
+    "label": "Consequences",
+    "section": "Consequences",
+    "subgoals": [
+      "Infer finite generation",
+      "Compare growth degrees",
+      "Apply it to a universal cover"
+    ]
+  }
+]

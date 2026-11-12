@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Betti numbers",
+    "section": "Betti numbers",
+    "subgoals": [
+      "Read the binomial coefficient",
+      "Compute the three-torus",
+      "Compute the four-torus"
+    ]
+  },
+  {
+    "label": "Total Betti number",
+    "section": "Total Betti number",
+    "subgoals": [
+      "Raise two to the dimension",
+      "Check the two-torus",
+      "Check the three-torus"
+    ]
+  },
+  {
+    "label": "The first Betti number",
+    "section": "The first Betti number",
+    "subgoals": [
+      "Read the dimension",
+      "Check the three-torus",
+      "Compare with the sphere"
+    ]
+  }
+]

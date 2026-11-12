@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The relation",
+    "section": "The relation",
+    "subgoals": [
+      "Subtract twice the genus",
+      "Subtract the boundary circles",
+      "Check the closed case"
+    ]
+  },
+  {
+    "label": "Recovering the boundary",
+    "section": "Recovering the boundary",
+    "subgoals": [
+      "Solve for the boundary count",
+      "Check the annulus",
+      "Check a genus-two example"
+    ]
+  },
+  {
+    "label": "Small examples",
+    "section": "Small examples",
+    "subgoals": [
+      "Compute the disc",
+      "Compute the annulus",
+      "Compute the pair of pants"
+    ]
+  }
+]

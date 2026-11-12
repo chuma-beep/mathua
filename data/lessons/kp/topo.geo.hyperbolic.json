@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Trees",
+    "section": "Trees",
+    "subgoals": [
+      "Read the thinness constant",
+      "Check a tripod",
+      "Compare with the plane"
+    ]
+  },
+  {
+    "label": "Hyperbolic space",
+    "section": "Hyperbolic space",
+    "subgoals": [
+      "Subtract one from the dimension",
+      "Check the hyperbolic plane",
+      "Check three dimensions"
+    ]
+  },
+  {
+    "label": "Growth",
+    "section": "Growth",
+    "subgoals": [
+      "Recognise exponential growth",
+      "Compare with abelian groups",
+      "Check a free group"
+    ]
+  }
+]

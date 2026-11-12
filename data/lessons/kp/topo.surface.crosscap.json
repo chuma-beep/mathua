@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Euler characteristic",
+    "section": "Euler characteristic",
+    "subgoals": [
+      "Subtract the crosscap number from two",
+      "Check the Klein bottle",
+      "Check the projective plane"
+    ]
+  },
+  {
+    "label": "Recovering the number",
+    "section": "Recovering the number",
+    "subgoals": [
+      "Solve for the crosscap number",
+      "Handle a negative Euler characteristic",
+      "Distinguish sphere from projective plane"
+    ]
+  },
+  {
+    "label": "Sums and boundaries",
+    "section": "Sums and boundaries",
+    "subgoals": [
+      "Add crosscap numbers",
+      "Adjust for one boundary circle",
+      "Compare with orientable genus"
+    ]
+  }
+]

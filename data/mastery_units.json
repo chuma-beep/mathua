@@ -5,8 +5,8 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 2450,
-  "unit_count": 156,
+  "concept_count": 2500,
+  "unit_count": 157,
   "units": [
     {
       "id": "abstract_algebra.b6",
@@ -4812,7 +4812,8 @@
         "topology.invariants",
         "topology.manifolds",
         "topology.metrization",
-        "topology.separation"
+        "topology.separation",
+        "topology.surfaces"
       ],
       "concept_ids": [
         "topo.brouwer",
@@ -4846,9 +4847,12 @@
         "topo.separation.normal",
         "topo.separation.tietze",
         "topo.sequential_compact",
+        "topo.surface.euler",
+        "topo.surface.punctured",
+        "topo.surface.triangulation",
         "topo.urysohn"
       ],
-      "concept_count": 32
+      "concept_count": 35
     },
     {
       "id": "topology.b12",
@@ -4861,11 +4865,15 @@
         "topology.algebraic",
         "topology.compact",
         "topology.covering",
+        "topology.differential",
         "topology.dimension",
+        "topology.geometric",
+        "topology.homological",
         "topology.invariants",
         "topology.knot",
         "topology.manifolds",
-        "topology.separation"
+        "topology.separation",
+        "topology.surfaces"
       ],
       "concept_ids": [
         "topo.algebraic.degree",
@@ -4877,16 +4885,45 @@
         "topo.covering.universal",
         "topo.cup_product",
         "topo.deck",
+        "topo.diff.critical_point",
+        "topo.diff.degree",
+        "topo.diff.flow",
+        "topo.diff.morse",
+        "topo.diff.sard",
+        "topo.diff.tangent_bundle",
+        "topo.diff.tubular",
+        "topo.diff.vector_field",
+        "topo.diff.whitney",
         "topo.dimension",
         "topo.embedding",
         "topo.fiber_bundle",
         "topo.fundamental.van_kampen",
+        "topo.geo.amenable",
+        "topo.geo.cayley",
+        "topo.geo.dehn",
+        "topo.geo.ends",
+        "topo.geo.growth",
+        "topo.geo.hyperbolic",
+        "topo.geo.quasi_isometry",
+        "topo.geo.svarc_milnor",
+        "topo.hom.chain_complex",
+        "topo.hom.universal_coefficient",
         "topo.homology.cellular",
         "topo.invariant.betti",
         "topo.invariant.genus",
         "topo.invariant.surface_classification",
         "topo.jones_polynomial",
         "topo.knot",
+        "topo.knot.alexander",
+        "topo.knot.bracket",
+        "topo.knot.connected_sum",
+        "topo.knot.crossing",
+        "topo.knot.linking",
+        "topo.knot.seifert_genus",
+        "topo.knot.skein",
+        "topo.knot.torus_knot",
+        "topo.knot.unknotting",
+        "topo.knot.writhe",
         "topo.manifold.orientability",
         "topo.manifolds.boundary",
         "topo.paracompact",
@@ -4895,9 +4932,43 @@
         "topo.seifert_surface",
         "topo.separation.completely_regular",
         "topo.simplicial_homology",
-        "topo.singular_homology"
+        "topo.singular_homology",
+        "topo.surface.boundary",
+        "topo.surface.boundary_connect",
+        "topo.surface.connected_sum",
+        "topo.surface.crosscap",
+        "topo.surface.double_cover",
+        "topo.surface.genus_formula",
+        "topo.surface.handle"
       ],
-      "concept_count": 28
+      "concept_count": 64
+    },
+    {
+      "id": "topology.b13",
+      "title": "Topology · Stage 14",
+      "domain": "topology",
+      "band": 13,
+      "depth_min": 39,
+      "depth_max": 40,
+      "subdomains": [
+        "topology.differential",
+        "topology.geometric",
+        "topology.homological"
+      ],
+      "concept_ids": [
+        "topo.diff.transversality",
+        "topo.geo.boundary",
+        "topo.geo.property_t",
+        "topo.hom.euler_poincare",
+        "topo.hom.exact_sequence",
+        "topo.hom.five_lemma",
+        "topo.hom.kunneth",
+        "topo.hom.projective",
+        "topo.hom.snake_lemma",
+        "topo.hom.sphere",
+        "topo.hom.torus"
+      ],
+      "concept_count": 11
     },
     {
       "id": "trigonometry.b2",

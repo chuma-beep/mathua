@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Abelian groups",
+    "section": "Abelian groups",
+    "subgoals": [
+      "Recognise amenability",
+      "Check the line",
+      "Check the plane"
+    ]
+  },
+  {
+    "label": "Free groups",
+    "section": "Free groups",
+    "subgoals": [
+      "Recognise non-amenability",
+      "Check rank two",
+      "Compare with abelian groups"
+    ]
+  },
+  {
+    "label": "Finite groups",
+    "section": "Finite groups",
+    "subgoals": [
+      "Use the uniform measure",
+      "Check the trivial group",
+      "Compare with free groups"
+    ]
+  }
+]

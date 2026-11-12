@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The trefoil",
+    "section": "The trefoil",
+    "subgoals": [
+      "Change one crossing",
+      "Compare with the crossing number",
+      "Check the mirror image"
+    ]
+  },
+  {
+    "label": "The figure-eight",
+    "section": "The figure-eight",
+    "subgoals": [
+      "Recall its unknotting number",
+      "Compare with the trefoil",
+      "Check the crossing number"
+    ]
+  },
+  {
+    "label": "Connected sums",
+    "section": "Connected sums",
+    "subgoals": [
+      "Add the two numbers",
+      "Check two trefoils",
+      "Compare with the crossing number"
+    ]
+  }
+]

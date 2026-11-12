@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Degree",
+    "section": "Degree",
+    "subgoals": [
+      "Double the dimension",
+      "Check the line",
+      "Check the plane"
+    ]
+  },
+  {
+    "label": "Free groups",
+    "section": "Free groups",
+    "subgoals": [
+      "Double the rank",
+      "Check rank two",
+      "Explain why the graph is a tree"
+    ]
+  },
+  {
+    "label": "Generators",
+    "section": "Generators",
+    "subgoals": [
+      "Count the directions",
+      "Relate rank to degree",
+      "Check three dimensions"
+    ]
+  }
+]

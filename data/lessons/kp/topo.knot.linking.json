@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The crossing sum",
+    "section": "The crossing sum",
+    "subgoals": [
+      "Sum the mixed crossings",
+      "Halve the sum",
+      "Check equal signs"
+    ]
+  },
+  {
+    "label": "The Hopf link",
+    "section": "The Hopf link",
+    "subgoals": [
+      "Count the mixed crossings",
+      "Apply the sign",
+      "Halve the result"
+    ]
+  },
+  {
+    "label": "The unlink",
+    "section": "The unlink",
+    "subgoals": [
+      "Count the mixed crossings",
+      "Read the linking number",
+      "Distinguish link from unlink"
+    ]
+  }
+]

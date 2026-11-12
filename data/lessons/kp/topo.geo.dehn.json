@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The line",
+    "section": "The line",
+    "subgoals": [
+      "Read the exponent",
+      "Check a loop on a line",
+      "Compare with the plane"
+    ]
+  },
+  {
+    "label": "The plane",
+    "section": "The plane",
+    "subgoals": [
+      "Read the exponent",
+      "Compare area with perimeter",
+      "Check the square"
+    ]
+  },
+  {
+    "label": "Hyperbolic groups",
+    "section": "Hyperbolic groups",
+    "subgoals": [
+      "Read the exponent",
+      "Use thin triangles",
+      "Compare with the plane"
+    ]
+  }
+]

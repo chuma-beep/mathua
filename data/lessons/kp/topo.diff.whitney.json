@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The embedding dimension",
+    "section": "The embedding dimension",
+    "subgoals": [
+      "Double the manifold dimension",
+      "Check a curve",
+      "Check a surface"
+    ]
+  },
+  {
+    "label": "Immersions",
+    "section": "Immersions",
+    "subgoals": [
+      "Subtract one from twice the dimension",
+      "Check a surface",
+      "Check a three-manifold"
+    ]
+  },
+  {
+    "label": "Codimension",
+    "section": "Codimension",
+    "subgoals": [
+      "Read the codimension",
+      "Check a curve in the plane",
+      "Check a surface in four-space"
+    ]
+  }
+]

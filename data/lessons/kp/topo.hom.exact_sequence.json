@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Rank additivity",
+    "section": "Rank additivity",
+    "subgoals": [
+      "Add the outer ranks",
+      "Check a split sequence",
+      "Recognise the middle group"
+    ]
+  },
+  {
+    "label": "Recovering a rank",
+    "section": "Recovering a rank",
+    "subgoals": [
+      "Subtract the known rank",
+      "Check a sequence of vector spaces",
+      "Handle a zero group"
+    ]
+  },
+  {
+    "label": "Length",
+    "section": "Length",
+    "subgoals": [
+      "Count the groups",
+      "Count the maps",
+      "Check a four-term sequence"
+    ]
+  }
+]

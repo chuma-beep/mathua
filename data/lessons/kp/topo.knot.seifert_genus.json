@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Torus knots",
+    "section": "Torus knots",
+    "subgoals": [
+      "Multiply the shifted parameters",
+      "Halve the product",
+      "Check the trefoil"
+    ]
+  },
+  {
+    "label": "Connected sums",
+    "section": "Connected sums",
+    "subgoals": [
+      "Add the genera",
+      "Check two trefoils",
+      "Compare with the crossing number"
+    ]
+  },
+  {
+    "label": "The unknot",
+    "section": "The unknot",
+    "subgoals": [
+      "Read the genus",
+      "Recognise the disc",
+      "Check the trefoil"
+    ]
+  }
+]

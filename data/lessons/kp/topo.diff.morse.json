@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The weak inequality",
+    "section": "The weak inequality",
+    "subgoals": [
+      "Compare counts with Betti numbers",
+      "Check the torus",
+      "Check the sphere"
+    ]
+  },
+  {
+    "label": "The alternating sum",
+    "section": "The alternating sum",
+    "subgoals": [
+      "Compute the alternating sum",
+      "Use the Euler characteristic",
+      "Check genus two"
+    ]
+  },
+  {
+    "label": "Total critical points",
+    "section": "Total critical points",
+    "subgoals": [
+      "Add the Betti numbers",
+      "Check the sphere",
+      "Check the torus"
+    ]
+  }
+]

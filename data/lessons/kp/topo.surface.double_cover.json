@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Euler characteristic",
+    "section": "Euler characteristic",
+    "subgoals": [
+      "Double the characteristic",
+      "Check the projective plane",
+      "Check the torus"
+    ]
+  },
+  {
+    "label": "Genus of the cover",
+    "section": "Genus of the cover",
+    "subgoals": [
+      "Subtract one from the crosscap number",
+      "Cover the Klein bottle",
+      "Cover four crosscaps"
+    ]
+  },
+  {
+    "label": "Disconnected case",
+    "section": "Disconnected case",
+    "subgoals": [
+      "Count the components",
+      "Decide orientability",
+      "Compare the two sheets"
+    ]
+  }
+]

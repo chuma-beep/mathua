@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Euler characteristic",
+    "section": "Euler characteristic",
+    "subgoals": [
+      "Add vertices and faces",
+      "Subtract edges",
+      "Check a tetrahedron"
+    ]
+  },
+  {
+    "label": "Counting edges",
+    "section": "Counting edges",
+    "subgoals": [
+      "Use three faces per edge count",
+      "Subtract the Euler characteristic",
+      "Check the icosahedron"
+    ]
+  },
+  {
+    "label": "Counting faces",
+    "section": "Counting faces",
+    "subgoals": [
+      "Double the vertex surplus",
+      "Check the torus",
+      "Check the sphere"
+    ]
+  }
+]

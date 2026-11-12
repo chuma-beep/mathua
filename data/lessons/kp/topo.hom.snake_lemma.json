@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The connecting map",
+    "section": "The connecting map",
+    "subgoals": [
+      "Count the connecting maps",
+      "Identify source and target",
+      "Check a diagram of three columns"
+    ]
+  },
+  {
+    "label": "The exact sequence",
+    "section": "The exact sequence",
+    "subgoals": [
+      "Count the terms",
+      "Count the maps",
+      "Locate the kernels"
+    ]
+  },
+  {
+    "label": "The alternating count",
+    "section": "The alternating count",
+    "subgoals": [
+      "Alternate the six ranks",
+      "Check the zero sum",
+      "Relate to Euler characteristics"
+    ]
+  }
+]

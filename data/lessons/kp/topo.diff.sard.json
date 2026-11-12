@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The dimension bound",
+    "section": "The dimension bound",
+    "subgoals": [
+      "Subtract one from the source dimension",
+      "Check a real-valued function on a surface",
+      "Check a map between surfaces"
+    ]
+  },
+  {
+    "label": "Codimension",
+    "section": "Codimension",
+    "subgoals": [
+      "Compute the codimension",
+      "Compare source and target",
+      "Check a curve in the plane"
+    ]
+  },
+  {
+    "label": "Measure zero",
+    "section": "Measure zero",
+    "subgoals": [
+      "State the measure",
+      "Count regular values",
+      "Apply it to a height function"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Dimension",
+    "section": "Dimension",
+    "subgoals": [
+      "Double the base dimension",
+      "Check the circle",
+      "Check a surface"
+    ]
+  },
+  {
+    "label": "Rank",
+    "section": "Rank",
+    "subgoals": [
+      "Read the fibre dimension",
+      "Check the circle",
+      "Check three dimensions"
+    ]
+  },
+  {
+    "label": "The unit tangent bundle",
+    "section": "The unit tangent bundle",
+    "subgoals": [
+      "Subtract one from twice the dimension",
+      "Check the circle",
+      "Check a surface"
+    ]
+  }
+]

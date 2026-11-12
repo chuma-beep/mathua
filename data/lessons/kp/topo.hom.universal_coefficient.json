@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The circle",
+    "section": "The circle",
+    "subgoals": [
+      "Read the rank",
+      "Check the Ext term",
+      "Compare with homology"
+    ]
+  },
+  {
+    "label": "The Ext term",
+    "section": "The Ext term",
+    "subgoals": [
+      "Decide whether homology is free",
+      "Set the correction to zero",
+      "Compare ranks"
+    ]
+  },
+  {
+    "label": "Projective space",
+    "section": "Projective space",
+    "subgoals": [
+      "Read the torsion order",
+      "Identify the Ext contribution",
+      "Compare with the circle"
+    ]
+  }
+]

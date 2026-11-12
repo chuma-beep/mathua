@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Dimension of the intersection",
+    "section": "Dimension of the intersection",
+    "subgoals": [
+      "Add the dimensions",
+      "Subtract the ambient dimension",
+      "Check two curves in a surface"
+    ]
+  },
+  {
+    "label": "Codimension adds",
+    "section": "Codimension adds",
+    "subgoals": [
+      "Add the codimensions",
+      "Check a curve and a surface",
+      "Check two surfaces in three-space"
+    ]
+  },
+  {
+    "label": "Generic position",
+    "section": "Generic position",
+    "subgoals": [
+      "Perturb into transverse position",
+      "Recognise a negative expected dimension",
+      "Decide when the intersection is empty"
+    ]
+  }
+]

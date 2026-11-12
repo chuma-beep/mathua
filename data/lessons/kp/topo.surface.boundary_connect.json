@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Genus",
+    "section": "Genus",
+    "subgoals": [
+      "Add the genera",
+      "Check two annuli",
+      "Compare with the closed sum"
+    ]
+  },
+  {
+    "label": "Euler characteristic",
+    "section": "Euler characteristic",
+    "subgoals": [
+      "Subtract one",
+      "Check a disc and an annulus",
+      "Compare with the closed sum"
+    ]
+  },
+  {
+    "label": "Boundary circles",
+    "section": "Boundary circles",
+    "subgoals": [
+      "Add and subtract one",
+      "Check two annuli",
+      "Check two discs"
+    ]
+  }
+]

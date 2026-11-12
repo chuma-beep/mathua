@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Torus knots",
+    "section": "Torus knots",
+    "subgoals": [
+      "Multiply the parameters",
+      "Subtract the larger",
+      "Check the trefoil"
+    ]
+  },
+  {
+    "label": "Small knots",
+    "section": "Small knots",
+    "subgoals": [
+      "Recall the trefoil",
+      "Recall the figure-eight",
+      "Order the two knots"
+    ]
+  },
+  {
+    "label": "Connected sums",
+    "section": "Connected sums",
+    "subgoals": [
+      "Add the crossing numbers",
+      "Check two trefoils",
+      "Compare with the unknot"
+    ]
+  }
+]

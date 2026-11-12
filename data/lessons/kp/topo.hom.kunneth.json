@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Products of spheres",
+    "section": "Products of spheres",
+    "subgoals": [
+      "List the degrees",
+      "Count the generators",
+      "Check the equal-dimension case"
+    ]
+  },
+  {
+    "label": "Tori",
+    "section": "Tori",
+    "subgoals": [
+      "Read the binomial coefficient",
+      "Compute the two-torus",
+      "Compute the three-torus"
+    ]
+  },
+  {
+    "label": "Total Betti number",
+    "section": "Total Betti number",
+    "subgoals": [
+      "Sum the binomial coefficients",
+      "Check the two-torus",
+      "Check the three-torus"
+    ]
+  }
+]

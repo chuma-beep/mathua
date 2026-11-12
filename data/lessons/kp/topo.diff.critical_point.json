@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The index",
+    "section": "The index",
+    "subgoals": [
+      "Count negative eigenvalues",
+      "Check a maximum in two dimensions",
+      "Check a minimum"
+    ]
+  },
+  {
+    "label": "Height on the sphere",
+    "section": "Height on the sphere",
+    "subgoals": [
+      "Count the critical points",
+      "Identify the two indices",
+      "Decide whether the function is Morse"
+    ]
+  },
+  {
+    "label": "Morse data",
+    "section": "Morse data",
+    "subgoals": [
+      "Read the index counts",
+      "Check the circle",
+      "Check the two-sphere"
+    ]
+  }
+]

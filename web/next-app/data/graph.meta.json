@@ -1,7 +1,7 @@
 {
   "quizGateXP": 50,
-  "conceptCount": 2450,
-  "connectionCount": 3395,
+  "conceptCount": 2500,
+  "connectionCount": 3445,
   "domainCount": 24,
   "domainCounts": {
     "abstract_algebra": 76,
@@ -26,7 +26,7 @@
     "probability_theory": 85,
     "real_analysis": 89,
     "statistics": 98,
-    "topology": 72,
+    "topology": 122,
     "trigonometry": 98
   },
   "layoutVersion": 2

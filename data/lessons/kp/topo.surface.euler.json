@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Orientable surfaces",
+    "section": "Orientable surfaces",
+    "subgoals": [
+      "Apply two minus twice the genus",
+      "Compute the torus",
+      "Compute genus three"
+    ]
+  },
+  {
+    "label": "Nonorientable surfaces",
+    "section": "Nonorientable surfaces",
+    "subgoals": [
+      "Apply two minus the crosscap number",
+      "Compute the Klein bottle",
+      "Compute four crosscaps"
+    ]
+  },
+  {
+    "label": "Boundary",
+    "section": "Boundary",
+    "subgoals": [
+      "Subtract one per boundary circle",
+      "Compute the annulus",
+      "Compute the pair of pants"
+    ]
+  }
+]

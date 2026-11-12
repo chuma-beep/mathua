@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Normal rank",
+    "section": "Normal rank",
+    "subgoals": [
+      "Subtract the dimensions",
+      "Check a curve in a surface",
+      "Check a surface in three-space"
+    ]
+  },
+  {
+    "label": "The boundary sphere bundle",
+    "section": "The boundary sphere bundle",
+    "subgoals": [
+      "Subtract one more",
+      "Check a curve in the plane",
+      "Check a surface in three-space"
+    ]
+  },
+  {
+    "label": "Collars",
+    "section": "Collars",
+    "subgoals": [
+      "Identify the product",
+      "Check the interval",
+      "Relate the boundary to the interior"
+    ]
+  }
+]

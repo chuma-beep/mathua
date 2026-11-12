@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Winding",
+    "section": "Winding",
+    "subgoals": [
+      "Read the two winding numbers",
+      "Check T(2,3)",
+      "Check T(3,5)"
+    ]
+  },
+  {
+    "label": "Crossing number",
+    "section": "Crossing number",
+    "subgoals": [
+      "Multiply the parameters",
+      "Subtract the larger",
+      "Check T(2,5)"
+    ]
+  },
+  {
+    "label": "Genus",
+    "section": "Genus",
+    "subgoals": [
+      "Multiply the shifted parameters",
+      "Halve the product",
+      "Check T(2,5)"
+    ]
+  }
+]

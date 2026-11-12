@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The boundary condition",
+    "section": "The boundary condition",
+    "subgoals": [
+      "Count the boundary maps",
+      "Check that two boundaries vanish",
+      "Recognise a cycle"
+    ]
+  },
+  {
+    "label": "Euler characteristic",
+    "section": "Euler characteristic",
+    "subgoals": [
+      "Alternate the ranks",
+      "Compare with Betti numbers",
+      "Check a two-term complex"
+    ]
+  },
+  {
+    "label": "Cycles and boundaries",
+    "section": "Cycles and boundaries",
+    "subgoals": [
+      "Quotient cycles by boundaries",
+      "Read the Betti number",
+      "Check a contractible complex"
+    ]
+  }
+]

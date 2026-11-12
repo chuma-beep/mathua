@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The circle",
+    "section": "The circle",
+    "subgoals": [
+      "Read the exponent",
+      "Count preimages",
+      "Decide the sign"
+    ]
+  },
+  {
+    "label": "The antipodal map",
+    "section": "The antipodal map",
+    "subgoals": [
+      "Compute the exponent",
+      "Check the circle",
+      "Check the two-sphere"
+    ]
+  },
+  {
+    "label": "Constant maps",
+    "section": "Constant maps",
+    "subgoals": [
+      "Count the preimages",
+      "Compare with the identity",
+      "Recognise a degree-zero map"
+    ]
+  }
+]

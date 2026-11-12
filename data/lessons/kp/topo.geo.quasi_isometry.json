@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The distortion constants",
+    "section": "The distortion constants",
+    "subgoals": [
+      "Count the constants",
+      "Read the multiplicative bound",
+      "Read the additive bound"
+    ]
+  },
+  {
+    "label": "Abelian dimensions",
+    "section": "Abelian dimensions",
+    "subgoals": [
+      "Compare the dimensions",
+      "Check the line and plane",
+      "Use growth degree"
+    ]
+  },
+  {
+    "label": "Comparing metrics",
+    "section": "Comparing metrics",
+    "subgoals": [
+      "Bound the ratio",
+      "Check the line",
+      "Check the plane"
+    ]
+  }
+]

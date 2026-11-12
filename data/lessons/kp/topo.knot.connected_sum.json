@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Crossing numbers",
+    "section": "Crossing numbers",
+    "subgoals": [
+      "Add the crossing numbers",
+      "Check two trefoils",
+      "Check a trefoil and the unknot"
+    ]
+  },
+  {
+    "label": "Genera",
+    "section": "Genera",
+    "subgoals": [
+      "Add the genera",
+      "Check two trefoils",
+      "Check the unknot"
+    ]
+  },
+  {
+    "label": "Alexander polynomials",
+    "section": "Alexander polynomials",
+    "subgoals": [
+      "Multiply the polynomials",
+      "Add the degrees",
+      "Check two trefoils"
+    ]
+  }
+]

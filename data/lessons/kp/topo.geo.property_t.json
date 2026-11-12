@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Abelian groups",
+    "section": "Abelian groups",
+    "subgoals": [
+      "Recognise the failure",
+      "Check the line",
+      "Check the plane"
+    ]
+  },
+  {
+    "label": "Finite groups",
+    "section": "Finite groups",
+    "subgoals": [
+      "Average over the group",
+      "Check the trivial group",
+      "Compare with abelian groups"
+    ]
+  },
+  {
+    "label": "Higher rank",
+    "section": "Higher rank",
+    "subgoals": [
+      "Recognise the lattice",
+      "Check rank three",
+      "Compare with a free group"
+    ]
+  }
+]

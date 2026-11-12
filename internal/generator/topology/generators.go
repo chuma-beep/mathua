@@ -47,6 +47,7 @@ func Register(reg *generator.Registry) {
 	}
 	registerWave7(reg)
 	registerWave7Remaining(reg)
+	registerWave20(reg)
 }
 
 // ----- 1. metric -----

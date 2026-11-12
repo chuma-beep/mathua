@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The formula",
+    "section": "The formula",
+    "subgoals": [
+      "Alternate the Betti numbers",
+      "Check the sphere",
+      "Check the torus"
+    ]
+  },
+  {
+    "label": "The torus",
+    "section": "The torus",
+    "subgoals": [
+      "Compute the alternating sum",
+      "Compare with the cell count",
+      "Check the projective plane"
+    ]
+  },
+  {
+    "label": "The total Betti number",
+    "section": "The total Betti number",
+    "subgoals": [
+      "Sum the Betti numbers",
+      "Check the sphere",
+      "Check the two-torus"
+    ]
+  }
+]
