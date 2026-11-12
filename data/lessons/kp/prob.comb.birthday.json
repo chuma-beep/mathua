@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Complement",
+    "section": "Complement",
+    "subgoals": [
+      "Count ordered birthdays",
+      "Count all assignments",
+      "Take the ratio"
+    ]
+  },
+  {
+    "label": "Threshold",
+    "section": "Threshold",
+    "subgoals": [
+      "Solve for half",
+      "Take a square root",
+      "Compare with 365"
+    ]
+  },
+  {
+    "label": "Pairs",
+    "section": "Pairs",
+    "subgoals": [
+      "Count the pairs",
+      "Divide by the days",
+      "Read the expectation"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Density",
+    "section": "Density",
+    "subgoals": [
+      "Normalise the weights",
+      "Raise each coordinate",
+      "Read the parameters"
+    ]
+  },
+  {
+    "label": "Moments",
+    "section": "Moments",
+    "subgoals": [
+      "Divide by the total",
+      "Compute the variance",
+      "Identify the concentration"
+    ]
+  },
+  {
+    "label": "Aggregation",
+    "section": "Aggregation",
+    "subgoals": [
+      "Merge two coordinates",
+      "Add their parameters",
+      "Stay in the family"
+    ]
+  }
+]

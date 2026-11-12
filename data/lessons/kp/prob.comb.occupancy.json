@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Empty boxes",
+    "section": "Empty boxes",
+    "subgoals": [
+      "Fix a box",
+      "Compute emptiness",
+      "Sum over boxes"
+    ]
+  },
+  {
+    "label": "Poisson limit",
+    "section": "Poisson limit",
+    "subgoals": [
+      "Let both counts grow",
+      "Approximate by a Poisson mean",
+      "Use independence"
+    ]
+  },
+  {
+    "label": "Maximum load",
+    "section": "Maximum load",
+    "subgoals": [
+      "Compare n balls with n boxes",
+      "Find the largest pile",
+      "Read the log-log rate"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Take the density",
+      "Divide by survival",
+      "Read the rate"
+    ]
+  },
+  {
+    "label": "From survival",
+    "section": "From survival",
+    "subgoals": [
+      "Integrate the hazard",
+      "Exponentiate negatively",
+      "Recover survival"
+    ]
+  },
+  {
+    "label": "Shapes",
+    "section": "Shapes",
+    "subgoals": [
+      "Name a decreasing case",
+      "Name a constant case",
+      "Name an increasing case"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The equation",
+    "section": "The equation",
+    "subgoals": [
+      "Write the drift term",
+      "Write the diffusion term",
+      "Set the time derivative"
+    ]
+  },
+  {
+    "label": "Interpretation",
+    "section": "Interpretation",
+    "subgoals": [
+      "Read transport",
+      "Read spreading",
+      "Separate the two effects"
+    ]
+  },
+  {
+    "label": "Stationary case",
+    "section": "Stationary case",
+    "subgoals": [
+      "Drop the time derivative",
+      "Solve for the density",
+      "Recognise the Gaussian"
+    ]
+  }
+]

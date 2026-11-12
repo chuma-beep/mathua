@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Expected collisions",
+    "section": "Expected collisions",
+    "subgoals": [
+      "Count the key pairs",
+      "Divide by the buckets",
+      "Read the expectation"
+    ]
+  },
+  {
+    "label": "Load factor",
+    "section": "Load factor",
+    "subgoals": [
+      "Divide keys by buckets",
+      "Relate to bucket length",
+      "Predict the lookup cost"
+    ]
+  },
+  {
+    "label": "Universal hashing",
+    "section": "Universal hashing",
+    "subgoals": [
+      "Bound a pair collision",
+      "Sum over pairs",
+      "Bound the total"
+    ]
+  }
+]

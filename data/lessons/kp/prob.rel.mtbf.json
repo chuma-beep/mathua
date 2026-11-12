@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Constant hazard",
+    "section": "Constant hazard",
+    "subgoals": [
+      "Take the rate",
+      "Invert it",
+      "Read the mean time"
+    ]
+  },
+  {
+    "label": "Repair",
+    "section": "Repair",
+    "subgoals": [
+      "Assume instantaneous repair",
+      "Identify the Poisson process",
+      "Take the inter-arrival mean"
+    ]
+  },
+  {
+    "label": "Distinction",
+    "section": "Distinction",
+    "subgoals": [
+      "Separate the two acronyms",
+      "Choose the repairable case",
+      "Choose the one-shot case"
+    ]
+  }
+]

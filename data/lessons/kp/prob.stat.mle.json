@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Write the likelihood",
+      "Take the logarithm",
+      "Maximise over the parameter"
+    ]
+  },
+  {
+    "label": "Properties",
+    "section": "Properties",
+    "subgoals": [
+      "Use consistency",
+      "Use asymptotic normality",
+      "Read the information variance"
+    ]
+  },
+  {
+    "label": "Computation",
+    "section": "Computation",
+    "subgoals": [
+      "Set the score to zero",
+      "Solve the equations",
+      "Check the exponential family"
+    ]
+  }
+]

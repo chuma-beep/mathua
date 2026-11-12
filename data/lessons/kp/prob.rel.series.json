@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Reliability",
+    "section": "Reliability",
+    "subgoals": [
+      "Multiply the components",
+      "Assume independence",
+      "Read the product"
+    ]
+  },
+  {
+    "label": "Hazard",
+    "section": "Hazard",
+    "subgoals": [
+      "Take logs",
+      "Add the hazards",
+      "Exponentiate back"
+    ]
+  },
+  {
+    "label": "Weakest link",
+    "section": "Weakest link",
+    "subgoals": [
+      "Find the smallest factor",
+      "Bound the product",
+      "See the degradation"
+    ]
+  }
+]

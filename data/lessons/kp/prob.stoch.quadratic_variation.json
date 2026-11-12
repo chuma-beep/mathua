@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Sum squared increments",
+      "Take the mesh to zero",
+      "Identify the limit"
+    ]
+  },
+  {
+    "label": "Why it matters",
+    "section": "Why it matters",
+    "subgoals": [
+      "Compare with total variation",
+      "See which term survives",
+      "Name the correction"
+    ]
+  },
+  {
+    "label": "Computing it",
+    "section": "Computing it",
+    "subgoals": [
+      "Count the subintervals",
+      "Average the squared increments",
+      "Recover the time length"
+    ]
+  }
+]

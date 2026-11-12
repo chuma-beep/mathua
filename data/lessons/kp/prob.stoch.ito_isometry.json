@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Statement",
+    "section": "Statement",
+    "subgoals": [
+      "Square the integral",
+      "Move the expectation inside",
+      "Replace by the integrand squared"
+    ]
+  },
+  {
+    "label": "Use",
+    "section": "Use",
+    "subgoals": [
+      "Place the integral in L2",
+      "Apply a convergence argument",
+      "Compare with deterministic integrals"
+    ]
+  },
+  {
+    "label": "A check",
+    "section": "A check",
+    "subgoals": [
+      "Take a constant integrand",
+      "Read off the variance",
+      "Match the time integral"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Representation",
+    "section": "Representation",
+    "subgoals": [
+      "Pick a random direction",
+      "Scale it",
+      "Add the location"
+    ]
+  },
+  {
+    "label": "Covariance",
+    "section": "Covariance",
+    "subgoals": [
+      "Compute the scale moment",
+      "Multiply the matrix",
+      "Read the shape"
+    ]
+  },
+  {
+    "label": "Examples",
+    "section": "Examples",
+    "subgoals": [
+      "Name a Gaussian case",
+      "Name a heavy-tailed case",
+      "Compare the tails"
+    ]
+  }
+]

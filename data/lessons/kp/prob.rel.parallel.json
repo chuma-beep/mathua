@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Reliability",
+    "section": "Reliability",
+    "subgoals": [
+      "Multiply the failure probabilities",
+      "Subtract from one",
+      "Read the reliability"
+    ]
+  },
+  {
+    "label": "Two components",
+    "section": "Two components",
+    "subgoals": [
+      "Add the reliabilities",
+      "Subtract the overlap",
+      "Compare with one component"
+    ]
+  },
+  {
+    "label": "Limit",
+    "section": "Limit",
+    "subgoals": [
+      "Add a component",
+      "Multiply the failures",
+      "Watch the diminishing gain"
+    ]
+  }
+]

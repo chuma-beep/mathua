@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Map the sample to a value",
+      "Name the parameter",
+      "Describe the sampling distribution"
+    ]
+  },
+  {
+    "label": "Examples",
+    "section": "Examples",
+    "subgoals": [
+      "Estimate a mean",
+      "Estimate a variance",
+      "Compare the two rules"
+    ]
+  },
+  {
+    "label": "Quality",
+    "section": "Quality",
+    "subgoals": [
+      "Measure bias",
+      "Measure variance",
+      "Combine into mean squared error"
+    ]
+  }
+]

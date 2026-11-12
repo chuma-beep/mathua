@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Density",
+    "section": "Density",
+    "subgoals": [
+      "Invert the covariance",
+      "Form the Mahalanobis distance",
+      "Exponentiate"
+    ]
+  },
+  {
+    "label": "Linear maps",
+    "section": "Linear maps",
+    "subgoals": [
+      "Transform the mean",
+      "Transform the covariance",
+      "Keep normality"
+    ]
+  },
+  {
+    "label": "Independence",
+    "section": "Independence",
+    "subgoals": [
+      "Check the covariance",
+      "Use joint normality",
+      "Conclude independence"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Factorisation",
+    "section": "Factorisation",
+    "subgoals": [
+      "Write the likelihood",
+      "Separate the statistic",
+      "Check the parameter-free factor"
+    ]
+  },
+  {
+    "label": "Examples",
+    "section": "Examples",
+    "subgoals": [
+      "Count Bernoulli successes",
+      "Take a normal mean and variance",
+      "Compare with the full sample"
+    ]
+  },
+  {
+    "label": "Meaning",
+    "section": "Meaning",
+    "subgoals": [
+      "Condition on the statistic",
+      "Remove the parameter",
+      "Conclude no information is lost"
+    ]
+  }
+]

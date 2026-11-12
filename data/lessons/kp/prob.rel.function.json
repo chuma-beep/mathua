@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Fix a mission time",
+      "Read the survival probability",
+      "State the conditions"
+    ]
+  },
+  {
+    "label": "Bath tub curve",
+    "section": "Bath tub curve",
+    "subgoals": [
+      "Name the early phase",
+      "Name the useful life",
+      "Name the wear-out phase"
+    ]
+  },
+  {
+    "label": "Design",
+    "section": "Design",
+    "subgoals": [
+      "Add a redundant part",
+      "Assume independence",
+      "Compare reliability"
+    ]
+  }
+]

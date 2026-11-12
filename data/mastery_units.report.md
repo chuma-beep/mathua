@@ -12,19 +12,19 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 2679 |
-| Total units | 161 |
+| Total concepts | 2714 |
+| Total units | 162 |
 | Minimum unit size | 1 |
 | Median unit size | 12 |
 | Maximum unit size | 82 |
 | Singleton units | 24 |
 | Units with <= 3 concepts | 39 |
 | Units with > 25 concepts | 42 |
-| Units with > 50 concepts | 6 |
-| Cross-unit prerequisite edges (derived) | 537 |
+| Units with > 50 concepts | 7 |
+| Cross-unit prerequisite edges (derived) | 538 |
 | Backward band edges | 0 |
 
-If the learner is assessed once per unit, then 161 assessments cover the corpus, and the
+If the learner is assessed once per unit, then 162 assessments cover the corpus, and the
 median is one assessment per 12 concepts. That is the frequency question this report
 exists to make concrete.
 
@@ -166,9 +166,10 @@ exists to make concrete.
 | `precalculus.b8` | precalculus | 8 | 55 | 9 | 24–26 |
 | `precalculus.b9` | precalculus | 9 | 27 | 4 | 27–28 |
 | `probability_theory.b3` | probability_theory | 3 | 2 | 2 | 11–11 |
-| `probability_theory.b4` | probability_theory | 4 | 43 | 10 | 12–14 |
-| `probability_theory.b5` | probability_theory | 5 | 31 | 9 | 15–17 |
-| `probability_theory.b6` | probability_theory | 6 | 9 | 3 | 18–20 |
+| `probability_theory.b4` | probability_theory | 4 | 53 | 14 | 12–14 |
+| `probability_theory.b5` | probability_theory | 5 | 48 | 13 | 15–17 |
+| `probability_theory.b6` | probability_theory | 6 | 12 | 5 | 18–20 |
+| `probability_theory.b7` | probability_theory | 7 | 5 | 1 | 21–23 |
 | `real_analysis.b9` | real_analysis | 9 | 7 | 3 | 27–29 |
 | `real_analysis.b10` | real_analysis | 10 | 33 | 5 | 30–32 |
 | `real_analysis.b11` | real_analysis | 11 | 24 | 5 | 33–35 |
@@ -207,17 +208,17 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 219 | 9 | 56 | 26 | 53 | 24 | 0 |
-| 3 | 161 | 12 | 82 | 24 | 39 | 42 | 0 |
-| 4 | 125 | 19 | 86 | 9 | 22 | 46 | 0 |
-| 5 | 107 | 20 | 104 | 7 | 18 | 45 | 0 |
+| 2 | 220 | 9 | 56 | 25 | 53 | 26 | 0 |
+| 3 | 162 | 12 | 82 | 24 | 39 | 42 | 0 |
+| 4 | 125 | 19 | 86 | 8 | 21 | 46 | 0 |
+| 5 | 107 | 20 | 104 | 6 | 17 | 45 | 0 |
 | 6 | 97 | 23 | 130 | 8 | 14 | 42 | 0 |
 | 8 | 76 | 31 | 117 | 4 | 11 | 40 | 0 |
-| 10 | 65 | 30 | 145 | 3 | 9 | 35 | 0 |
+| 10 | 65 | 30 | 145 | 2 | 8 | 35 | 0 |
 | 12 | 63 | 34 | 191 | 1 | 5 | 40 | 0 |
-| 15 | 51 | 49 | 172 | 1 | 3 | 35 | 0 |
-| 20 | 44 | 67 | 145 | 1 | 5 | 32 | 0 |
-| 45 | 26 | 98 | 172 | 0 | 0 | 26 | 0 |
+| 15 | 51 | 53 | 172 | 1 | 3 | 35 | 0 |
+| 20 | 44 | 67 | 145 | 0 | 4 | 32 | 0 |
+| 45 | 26 | 120 | 172 | 0 | 0 | 26 | 0 |
 
 **No width is clean.** Small widths fragment, at 3 there are 24 singleton units, which is a
 quiz per concept and is exactly what §12 rules out. Large widths stop fragmenting but produce
@@ -234,7 +235,7 @@ The subdomain condensation of the concept DAG **contains cycles**: grouping conc
 subdomain discards the per-concept ordering, so a concept in subdomain A can be a
 prerequisite of one in subdomain B whose other members depend on A.
 
-**233 of 125 subdomains cannot be levelled**, they sit inside a cycle, or downstream
+**238 of 125 subdomains cannot be levelled**, they sit inside a cycle, or downstream
 of one, so no depth function exists for them at all. (Tarjan puts 26 inside cycles and
 the remaining 34 behind them; Kahn cannot order either group, because ordering a node
 requires its predecessors to be ordered first.) An implementation that ignores this
@@ -473,69 +474,75 @@ Unresolvable subdomains:
 `precalculus.vectors`
 `probability_theory.characteristic`
 
+`probability_theory.combinatorial`
 `probability_theory.concentration`
 `probability_theory.convergence`
 `probability_theory.distributions`
-`probability_theory.foundations`
 
+`probability_theory.foundations`
 `probability_theory.information`
 `probability_theory.joint`
 `probability_theory.joint_distributions`
+
 `probability_theory.limits`
-
 `probability_theory.moments`
+`probability_theory.multivariate`
 `probability_theory.processes`
-`probability_theory.random_variables`
-`real_analysis.deriv`
 
+`probability_theory.random_variables`
+`probability_theory.reliability`
+`probability_theory.statistics`
+`probability_theory.stochastic_calculus`
+
+`real_analysis.deriv`
 `real_analysis.limit`
 `real_analysis.measure`
 `real_analysis.metric`
-`real_analysis.order`
 
+`real_analysis.order`
 `real_analysis.seq`
 `statistics.advanced`
 `statistics.central_tendency`
-`statistics.data_collection`
 
+`statistics.data_collection`
 `statistics.data_representation`
 `statistics.distributions`
 `statistics.inference`
-`statistics.probability`
 
+`statistics.probability`
 `statistics.regression`
 `statistics.spread`
 `topology.algebraic`
-`topology.basics`
 
+`topology.basics`
 `topology.compact`
 `topology.connected`
 `topology.constructions`
-`topology.covering`
 
+`topology.covering`
 `topology.differential`
 `topology.dimension`
 `topology.geometric`
-`topology.homological`
 
+`topology.homological`
 `topology.invariants`
 `topology.knot`
 `topology.manifolds`
-`topology.metrization`
 
+`topology.metrization`
 `topology.separation`
 `topology.surfaces`
 `trigonometry.advanced`
-`trigonometry.equations`
 
+`trigonometry.equations`
 `trigonometry.functions`
 `trigonometry.graphs`
 `trigonometry.hyperbolic`
-`trigonometry.identities`
 
+`trigonometry.identities`
 `trigonometry.spherical`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2679
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2714
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings

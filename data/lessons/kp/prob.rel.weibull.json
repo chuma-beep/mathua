@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Survival",
+    "section": "Survival",
+    "subgoals": [
+      "Scale the time",
+      "Raise to the shape",
+      "Exponentiate negatively"
+    ]
+  },
+  {
+    "label": "Hazard",
+    "section": "Hazard",
+    "subgoals": [
+      "Differentiate the log survival",
+      "Read the power",
+      "Classify the shape"
+    ]
+  },
+  {
+    "label": "Special case",
+    "section": "Special case",
+    "subgoals": [
+      "Set shape to one",
+      "Recognise the exponential",
+      "Recall memorylessness"
+    ]
+  }
+]

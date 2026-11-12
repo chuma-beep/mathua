@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Record probability",
+    "section": "Record probability",
+    "subgoals": [
+      "Compare the k-th value",
+      "Use symmetry of orderings",
+      "Read one over k"
+    ]
+  },
+  {
+    "label": "Expected count",
+    "section": "Expected count",
+    "subgoals": [
+      "Sum the probabilities",
+      "Recognise the harmonic number",
+      "Estimate the growth"
+    ]
+  },
+  {
+    "label": "Independence",
+    "section": "Independence",
+    "subgoals": [
+      "Take two record indicators",
+      "Factor their joint probability",
+      "Conclude independence"
+    ]
+  }
+]

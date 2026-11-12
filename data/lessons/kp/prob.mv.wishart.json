@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Draw Gaussian vectors",
+      "Form outer products",
+      "Sum them"
+    ]
+  },
+  {
+    "label": "Mean",
+    "section": "Mean",
+    "subgoals": [
+      "Multiply the covariance",
+      "Count the degrees of freedom",
+      "Normalise"
+    ]
+  },
+  {
+    "label": "Special case",
+    "section": "Special case",
+    "subgoals": [
+      "Take one dimension",
+      "Compare with chi-squared",
+      "Match the scale"
+    ]
+  }
+]

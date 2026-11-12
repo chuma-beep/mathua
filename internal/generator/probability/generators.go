@@ -69,4 +69,5 @@ func Register(reg *generator.Registry) {
 	reg.Register("prob.dist.geometric", &geometricDistributionGen{})
 	registerWave6(reg)
 	registerWave6Remaining(reg)
+	registerWave26(reg)
 }

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Statement",
+    "section": "Statement",
+    "subgoals": [
+      "Assume unbiasedness",
+      "Invert the information",
+      "Read the lower bound"
+    ]
+  },
+  {
+    "label": "Fisher information",
+    "section": "Fisher information",
+    "subgoals": [
+      "Differentiate the log likelihood",
+      "Square the score",
+      "Take the expectation"
+    ]
+  },
+  {
+    "label": "Equality",
+    "section": "Equality",
+    "subgoals": [
+      "Relate score to error",
+      "Check the exponential family",
+      "Attain the bound"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Fix the coverage level",
+      "Draw the sample",
+      "Bound the parameter"
+    ]
+  },
+  {
+    "label": "Construction",
+    "section": "Construction",
+    "subgoals": [
+      "Find a pivot",
+      "Invert the probability statement",
+      "Solve for the parameter"
+    ]
+  },
+  {
+    "label": "Interpretation",
+    "section": "Interpretation",
+    "subgoals": [
+      "Condition on the data",
+      "Separate coverage from the realised interval",
+      "State the long-run frequency"
+    ]
+  }
+]

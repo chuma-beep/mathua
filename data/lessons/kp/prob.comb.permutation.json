@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Cycles",
+    "section": "Cycles",
+    "subgoals": [
+      "Count permutations by cycles",
+      "Identify Stirling numbers",
+      "Check a small case"
+    ]
+  },
+  {
+    "label": "Fixed points",
+    "section": "Fixed points",
+    "subgoals": [
+      "Use linearity",
+      "Sum one over n",
+      "Take the Poisson limit"
+    ]
+  },
+  {
+    "label": "Longest cycle",
+    "section": "Longest cycle",
+    "subgoals": [
+      "Scale by n",
+      "Find the limiting law",
+      "Read the fraction"
+    ]
+  }
+]

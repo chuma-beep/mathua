@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Formula",
+    "section": "Formula",
+    "subgoals": [
+      "Split the covariance",
+      "Invert the observed block",
+      "Update the mean"
+    ]
+  },
+  {
+    "label": "Variance",
+    "section": "Variance",
+    "subgoals": [
+      "Form the Schur complement",
+      "Drop the observed block",
+      "Note the constant covariance"
+    ]
+  },
+  {
+    "label": "Use",
+    "section": "Use",
+    "subgoals": [
+      "Update a state estimate",
+      "Predict a process",
+      "Regress with a kernel"
+    ]
+  }
+]

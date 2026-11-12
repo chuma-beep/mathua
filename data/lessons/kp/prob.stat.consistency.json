@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Fix a tolerance",
+      "Take the limit in probability",
+      "Require the error to vanish"
+    ]
+  },
+  {
+    "label": "Sufficient conditions",
+    "section": "Sufficient conditions",
+    "subgoals": [
+      "Send the bias to zero",
+      "Send the variance to zero",
+      "Apply Chebyshev"
+    ]
+  },
+  {
+    "label": "Failure",
+    "section": "Failure",
+    "subgoals": [
+      "Keep the estimator unbiased",
+      "Keep the variance fixed",
+      "See convergence fail"
+    ]
+  }
+]

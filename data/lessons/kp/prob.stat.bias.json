@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Take the expectation",
+      "Subtract the parameter",
+      "Read the sign"
+    ]
+  },
+  {
+    "label": "Sample variance",
+    "section": "Sample variance",
+    "subgoals": [
+      "Compute the plug-in variance",
+      "See the missing degree of freedom",
+      "Correct the denominator"
+    ]
+  },
+  {
+    "label": "Trade-off",
+    "section": "Trade-off",
+    "subgoals": [
+      "Compare bias",
+      "Compare variance",
+      "Compare mean squared error"
+    ]
+  }
+]

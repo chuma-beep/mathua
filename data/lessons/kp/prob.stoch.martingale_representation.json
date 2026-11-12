@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Statement",
+    "section": "Statement",
+    "subgoals": [
+      "Start from the initial value",
+      "Write the stochastic integral",
+      "Require square integrability"
+    ]
+  },
+  {
+    "label": "Consequence",
+    "section": "Consequence",
+    "subgoals": [
+      "Replicate a claim",
+      "Identify the hedge",
+      "Use one source of noise"
+    ]
+  },
+  {
+    "label": "Uniqueness",
+    "section": "Uniqueness",
+    "subgoals": [
+      "Compare two integrands",
+      "Use the isometry",
+      "Conclude almost-everywhere equality"
+    ]
+  }
+]

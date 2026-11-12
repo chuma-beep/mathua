@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The density",
+    "section": "The density",
+    "subgoals": [
+      "Build the exponential martingale",
+      "Subtract half the variation",
+      "Check positivity"
+    ]
+  },
+  {
+    "label": "Effect on drift",
+    "section": "Effect on drift",
+    "subgoals": [
+      "Shift the process",
+      "Name the new Brownian motion",
+      "Remove the drift"
+    ]
+  },
+  {
+    "label": "Condition",
+    "section": "Condition",
+    "subgoals": [
+      "State Novikov",
+      "Bound the exponential moment",
+      "Conclude the density is a martingale"
+    ]
+  }
+]

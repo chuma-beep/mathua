@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Properties",
+    "section": "Properties",
+    "subgoals": [
+      "Take a linear combination",
+      "Compute its variance",
+      "Conclude semidefiniteness"
+    ]
+  },
+  {
+    "label": "Decomposition",
+    "section": "Decomposition",
+    "subgoals": [
+      "Diagonalise",
+      "Order the eigenvalues",
+      "Read the rotation"
+    ]
+  },
+  {
+    "label": "Rank",
+    "section": "Rank",
+    "subgoals": [
+      "Count positive eigenvalues",
+      "Identify a constraint",
+      "Relate rank to support"
+    ]
+  }
+]

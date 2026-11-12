@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Properties",
+    "section": "Properties",
+    "subgoals": [
+      "Start at one",
+      "Decrease monotonically",
+      "Take the limit"
+    ]
+  },
+  {
+    "label": "Moments",
+    "section": "Moments",
+    "subgoals": [
+      "Integrate survival",
+      "Restrict to positive times",
+      "Read the mean"
+    ]
+  },
+  {
+    "label": "Comparison",
+    "section": "Comparison",
+    "subgoals": [
+      "Compare two curves",
+      "Check every time",
+      "Conclude stochastic order"
+    ]
+  }
+]

@@ -35185,6 +35185,672 @@
     "subdomain": "probability_theory.information"
   },
   {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.stoch.quadratic_variation",
+    "key_prerequisites": [
+      "prob.process.brownian"
+    ],
+    "label": "Quadratic variation",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.process.brownian"
+    ],
+    "subdomain": "probability_theory.stochastic_calculus",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.stoch.ito_formula",
+    "key_prerequisites": [
+      "prob.stoch.quadratic_variation"
+    ],
+    "label": "The Ito formula",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.stoch.quadratic_variation"
+    ],
+    "subdomain": "probability_theory.stochastic_calculus",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.stoch.ito_isometry",
+    "key_prerequisites": [
+      "prob.stoch.ito_formula"
+    ],
+    "label": "The Ito isometry",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.stoch.ito_formula"
+    ],
+    "subdomain": "probability_theory.stochastic_calculus",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.stoch.girsanov",
+    "key_prerequisites": [
+      "prob.stoch.ito_isometry"
+    ],
+    "label": "Girsanov's theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.stoch.ito_isometry"
+    ],
+    "subdomain": "probability_theory.stochastic_calculus",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.stoch.fokker_planck",
+    "key_prerequisites": [
+      "prob.stoch.ito_formula"
+    ],
+    "label": "The Fokker-Planck equation",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.stoch.ito_formula"
+    ],
+    "subdomain": "probability_theory.stochastic_calculus",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.stoch.martingale_representation",
+    "key_prerequisites": [
+      "prob.stoch.ito_isometry"
+    ],
+    "label": "Martingale representation",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.stoch.ito_isometry"
+    ],
+    "subdomain": "probability_theory.stochastic_calculus",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.stoch.levy_characterisation",
+    "key_prerequisites": [
+      "prob.stoch.martingale_representation"
+    ],
+    "label": "Levy's characterisation",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.stoch.martingale_representation"
+    ],
+    "subdomain": "probability_theory.stochastic_calculus",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.stat.estimator",
+    "key_prerequisites": [
+      "prob.rv.expectation"
+    ],
+    "label": "Estimators",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.expectation"
+    ],
+    "subdomain": "probability_theory.statistics",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.stat.bias",
+    "key_prerequisites": [
+      "prob.stat.estimator"
+    ],
+    "label": "Bias of an estimator",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.stat.estimator"
+    ],
+    "subdomain": "probability_theory.statistics",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.stat.consistency",
+    "key_prerequisites": [
+      "prob.stat.bias"
+    ],
+    "label": "Consistency",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.stat.bias"
+    ],
+    "subdomain": "probability_theory.statistics",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.stat.sufficiency",
+    "key_prerequisites": [
+      "prob.stat.estimator"
+    ],
+    "label": "Sufficient statistics",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.stat.estimator"
+    ],
+    "subdomain": "probability_theory.statistics",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.stat.cramer_rao",
+    "key_prerequisites": [
+      "prob.stat.sufficiency"
+    ],
+    "label": "The Cramer-Rao bound",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.stat.sufficiency"
+    ],
+    "subdomain": "probability_theory.statistics",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.stat.mle",
+    "key_prerequisites": [
+      "prob.stat.cramer_rao"
+    ],
+    "label": "Maximum likelihood",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.stat.cramer_rao"
+    ],
+    "subdomain": "probability_theory.statistics",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.stat.confidence",
+    "key_prerequisites": [
+      "prob.stat.mle"
+    ],
+    "label": "Confidence procedures",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.stat.mle"
+    ],
+    "subdomain": "probability_theory.statistics",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.mv.normal",
+    "key_prerequisites": [
+      "prob.dist.normal"
+    ],
+    "label": "The multivariate normal",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.dist.normal",
+      "prob.cov.covariance"
+    ],
+    "subdomain": "probability_theory.multivariate",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.mv.conditioning",
+    "key_prerequisites": [
+      "prob.mv.normal"
+    ],
+    "label": "Gaussian conditioning",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.mv.normal"
+    ],
+    "subdomain": "probability_theory.multivariate",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.mv.covariance",
+    "key_prerequisites": [
+      "prob.cov.covariance"
+    ],
+    "label": "Covariance matrices",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.cov.covariance"
+    ],
+    "subdomain": "probability_theory.multivariate",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.mv.dirichlet",
+    "key_prerequisites": [
+      "prob.mv.normal"
+    ],
+    "label": "The Dirichlet distribution",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.mv.normal"
+    ],
+    "subdomain": "probability_theory.multivariate",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.mv.copula",
+    "key_prerequisites": [
+      "prob.mv.normal"
+    ],
+    "label": "Copulas",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.mv.normal"
+    ],
+    "subdomain": "probability_theory.multivariate",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.mv.wishart",
+    "key_prerequisites": [
+      "prob.mv.covariance"
+    ],
+    "label": "The Wishart distribution",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.mv.covariance"
+    ],
+    "subdomain": "probability_theory.multivariate",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.mv.elliptical",
+    "key_prerequisites": [
+      "prob.mv.normal"
+    ],
+    "label": "Elliptical distributions",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.mv.normal"
+    ],
+    "subdomain": "probability_theory.multivariate",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.comb.coupon",
+    "key_prerequisites": [
+      "prob.rv.expectation"
+    ],
+    "label": "The coupon collector",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.expectation"
+    ],
+    "subdomain": "probability_theory.combinatorial",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.comb.birthday",
+    "key_prerequisites": [
+      "prob.cond.definition"
+    ],
+    "label": "The birthday problem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.cond.definition"
+    ],
+    "subdomain": "probability_theory.combinatorial",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.comb.occupancy",
+    "key_prerequisites": [
+      "prob.dist.binomial"
+    ],
+    "label": "Occupancy problems",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.dist.binomial"
+    ],
+    "subdomain": "probability_theory.combinatorial",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.comb.records",
+    "key_prerequisites": [
+      "prob.rv.expectation"
+    ],
+    "label": "Records of a sequence",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.expectation"
+    ],
+    "subdomain": "probability_theory.combinatorial",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.comb.permutation",
+    "key_prerequisites": [
+      "prob.comb.records"
+    ],
+    "label": "Random permutations",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.comb.records"
+    ],
+    "subdomain": "probability_theory.combinatorial",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.comb.hashing",
+    "key_prerequisites": [
+      "prob.comb.occupancy"
+    ],
+    "label": "Hashing collisions",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.comb.occupancy"
+    ],
+    "subdomain": "probability_theory.combinatorial",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.comb.bins",
+    "key_prerequisites": [
+      "prob.comb.occupancy"
+    ],
+    "label": "Balls into bins",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.comb.occupancy"
+    ],
+    "subdomain": "probability_theory.combinatorial",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.rel.hazard",
+    "key_prerequisites": [
+      "prob.rv.pdf"
+    ],
+    "label": "The hazard rate",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rv.pdf"
+    ],
+    "subdomain": "probability_theory.reliability",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.rel.survival",
+    "key_prerequisites": [
+      "prob.rel.hazard"
+    ],
+    "label": "Survival functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rel.hazard"
+    ],
+    "subdomain": "probability_theory.reliability",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.rel.weibull",
+    "key_prerequisites": [
+      "prob.rel.survival"
+    ],
+    "label": "The Weibull distribution",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rel.survival"
+    ],
+    "subdomain": "probability_theory.reliability",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.rel.function",
+    "key_prerequisites": [
+      "prob.rel.survival"
+    ],
+    "label": "Reliability functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rel.survival"
+    ],
+    "subdomain": "probability_theory.reliability",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.rel.mtbf",
+    "key_prerequisites": [
+      "prob.rel.function"
+    ],
+    "label": "Mean time between failures",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rel.function"
+    ],
+    "subdomain": "probability_theory.reliability",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.rel.series",
+    "key_prerequisites": [
+      "prob.rel.function"
+    ],
+    "label": "Series systems",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rel.function"
+    ],
+    "subdomain": "probability_theory.reliability",
+    "variants": []
+  },
+  {
+    "domain": "probability_theory",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "prob.rel.parallel",
+    "key_prerequisites": [
+      "prob.rel.series"
+    ],
+    "label": "Parallel systems",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prob.rel.series"
+    ],
+    "subdomain": "probability_theory.reliability",
+    "variants": []
+  },
+  {
     "domain": "real_analysis",
     "grading_type": "numeric",
     "id": "ra.order.supremum",

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Expected time",
+    "section": "Expected time",
+    "subgoals": [
+      "Wait for a new coupon",
+      "Sum the geometric means",
+      "Recognise the harmonic number"
+    ]
+  },
+  {
+    "label": "Tail",
+    "section": "Tail",
+    "subgoals": [
+      "Use independence",
+      "Bound the sum",
+      "Concentrate around the mean"
+    ]
+  },
+  {
+    "label": "Variants",
+    "section": "Variants",
+    "subgoals": [
+      "Unequal probabilities",
+      "Recompute the waits",
+      "Keep the log order"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Statement",
+    "section": "Statement",
+    "subgoals": [
+      "Start at zero",
+      "Require a local martingale",
+      "Match quadratic variation to time"
+    ]
+  },
+  {
+    "label": "Why continuity matters",
+    "section": "Why continuity matters",
+    "subgoals": [
+      "Add a jump component",
+      "Keep the variation",
+      "See the conclusion fail"
+    ]
+  },
+  {
+    "label": "Use",
+    "section": "Use",
+    "subgoals": [
+      "Check the martingale property",
+      "Compute the variation",
+      "Conclude Brownian motion"
+    ]
+  }
+]

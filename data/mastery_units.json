@@ -5,8 +5,8 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 2679,
-  "unit_count": 161,
+  "concept_count": 2714,
+  "unit_count": 162,
   "units": [
     {
       "id": "abstract_algebra.b6",
@@ -4485,6 +4485,7 @@
       "depth_max": 14,
       "subdomains": [
         "probability_theory.characteristic",
+        "probability_theory.combinatorial",
         "probability_theory.concentration",
         "probability_theory.convergence",
         "probability_theory.distributions",
@@ -4493,10 +4494,17 @@
         "probability_theory.joint",
         "probability_theory.limits",
         "probability_theory.moments",
-        "probability_theory.random_variables"
+        "probability_theory.multivariate",
+        "probability_theory.random_variables",
+        "probability_theory.reliability",
+        "probability_theory.statistics"
       ],
       "concept_ids": [
         "prob.chf.definition",
+        "prob.comb.birthday",
+        "prob.comb.coupon",
+        "prob.comb.permutation",
+        "prob.comb.records",
         "prob.conc.chernoff",
         "prob.cond.definition",
         "prob.cond.multiplication",
@@ -4526,6 +4534,9 @@
         "prob.limit.markov",
         "prob.limit.weak_law",
         "prob.moments.skew_kurtosis",
+        "prob.mv.covariance",
+        "prob.mv.wishart",
+        "prob.rel.hazard",
         "prob.rv.cdf",
         "prob.rv.definition",
         "prob.rv.expectation",
@@ -4538,9 +4549,12 @@
         "prob.rv.transform",
         "prob.space.continuity",
         "prob.space.inclusion_exclusion",
-        "prob.space.sigma_algebra"
+        "prob.space.sigma_algebra",
+        "prob.stat.bias",
+        "prob.stat.estimator",
+        "prob.stat.sufficiency"
       ],
-      "concept_count": 43
+      "concept_count": 53
     },
     {
       "id": "probability_theory.b5",
@@ -4551,14 +4565,18 @@
       "depth_max": 17,
       "subdomains": [
         "probability_theory.characteristic",
+        "probability_theory.combinatorial",
         "probability_theory.concentration",
         "probability_theory.convergence",
         "probability_theory.distributions",
         "probability_theory.foundations",
         "probability_theory.joint",
         "probability_theory.joint_distributions",
+        "probability_theory.multivariate",
         "probability_theory.processes",
-        "probability_theory.random_variables"
+        "probability_theory.random_variables",
+        "probability_theory.reliability",
+        "probability_theory.statistics"
       ],
       "concept_ids": [
         "prob.bayes.conjugate",
@@ -4568,6 +4586,9 @@
         "prob.chf.continuity",
         "prob.chf.independence",
         "prob.chf.moments",
+        "prob.comb.bins",
+        "prob.comb.hashing",
+        "prob.comb.occupancy",
         "prob.conc.bernstein",
         "prob.conc.hoeffding",
         "prob.conc.mcdiarmid",
@@ -4581,6 +4602,11 @@
         "prob.joint.conditional_density",
         "prob.joint.marginal",
         "prob.joint.rv_independence",
+        "prob.mv.conditioning",
+        "prob.mv.copula",
+        "prob.mv.dirichlet",
+        "prob.mv.elliptical",
+        "prob.mv.normal",
         "prob.process.branching",
         "prob.process.gaussian",
         "prob.process.hidden_markov",
@@ -4590,10 +4616,19 @@
         "prob.process.random_walk",
         "prob.process.renewal",
         "prob.process.transition_matrix",
+        "prob.rel.function",
+        "prob.rel.mtbf",
+        "prob.rel.series",
+        "prob.rel.survival",
+        "prob.rel.weibull",
         "prob.rv.convolution",
-        "prob.rv.multivariate_transform"
+        "prob.rv.multivariate_transform",
+        "prob.stat.confidence",
+        "prob.stat.consistency",
+        "prob.stat.cramer_rao",
+        "prob.stat.mle"
       ],
-      "concept_count": 31
+      "concept_count": 48
     },
     {
       "id": "probability_theory.b6",
@@ -4605,7 +4640,9 @@
       "subdomains": [
         "probability_theory.foundations",
         "probability_theory.joint",
-        "probability_theory.processes"
+        "probability_theory.processes",
+        "probability_theory.reliability",
+        "probability_theory.stochastic_calculus"
       ],
       "concept_ids": [
         "prob.decision.minimax",
@@ -4616,9 +4653,31 @@
         "prob.process.kalman",
         "prob.process.recurrence",
         "prob.process.sde",
-        "prob.process.stationary"
+        "prob.process.stationary",
+        "prob.rel.parallel",
+        "prob.stoch.ito_formula",
+        "prob.stoch.quadratic_variation"
       ],
-      "concept_count": 9
+      "concept_count": 12
+    },
+    {
+      "id": "probability_theory.b7",
+      "title": "Probability Theory · Stage 8",
+      "domain": "probability_theory",
+      "band": 7,
+      "depth_min": 21,
+      "depth_max": 23,
+      "subdomains": [
+        "probability_theory.stochastic_calculus"
+      ],
+      "concept_ids": [
+        "prob.stoch.fokker_planck",
+        "prob.stoch.girsanov",
+        "prob.stoch.ito_isometry",
+        "prob.stoch.levy_characterisation",
+        "prob.stoch.martingale_representation"
+      ],
+      "concept_count": 5
     },
     {
       "id": "real_analysis.b9",

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Maximum load",
+    "section": "Maximum load",
+    "subgoals": [
+      "Throw n balls",
+      "Find the fullest bin",
+      "Read the log-log scale"
+    ]
+  },
+  {
+    "label": "Two choices",
+    "section": "Two choices",
+    "subgoals": [
+      "Sample two bins",
+      "Choose the lighter",
+      "Compare the maxima"
+    ]
+  },
+  {
+    "label": "Concentration",
+    "section": "Concentration",
+    "subgoals": [
+      "Write a bin load",
+      "Apply a tail bound",
+      "Union over bins"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Statement",
+    "section": "Statement",
+    "subgoals": [
+      "Write the first derivative term",
+      "Add the second derivative term",
+      "Identify the integrator"
+    ]
+  },
+  {
+    "label": "The correction",
+    "section": "The correction",
+    "subgoals": [
+      "Integrate against time",
+      "Explain the missing cancellation",
+      "Check the martingale"
+    ]
+  },
+  {
+    "label": "Worked check",
+    "section": "Worked check",
+    "subgoals": [
+      "Apply f(x)=x squared",
+      "Collect the drift",
+      "Subtract the compensator"
+    ]
+  }
+]

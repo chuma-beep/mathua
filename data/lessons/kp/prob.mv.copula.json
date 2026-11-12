@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Sklar's theorem",
+    "section": "Sklar's theorem",
+    "subgoals": [
+      "Apply the marginal CDFs",
+      "Evaluate the copula",
+      "Recover the joint law"
+    ]
+  },
+  {
+    "label": "Gaussian copula",
+    "section": "Gaussian copula",
+    "subgoals": [
+      "Transform to uniforms",
+      "Apply a normal joint law",
+      "Choose arbitrary margins"
+    ]
+  },
+  {
+    "label": "Invariance",
+    "section": "Invariance",
+    "subgoals": [
+      "Transform one coordinate",
+      "Keep the ranks",
+      "Keep the copula"
+    ]
+  }
+]
