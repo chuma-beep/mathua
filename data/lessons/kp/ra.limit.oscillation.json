@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Oscillation at a point",
+    "section": "Oscillation at a point",
+    "subgoals": [
+      "Take the infimum over neighbourhoods",
+      "Compare the two one-sided limits",
+      "Compute the oscillation of a jump"
+    ]
+  },
+  {
+    "label": "Discontinuities as oscillation",
+    "section": "Discontinuities as oscillation",
+    "subgoals": [
+      "State the oscillation criterion",
+      "Classify a removable discontinuity",
+      "Classify a jump discontinuity"
+    ]
+  },
+  {
+    "label": "Oscillation and integrability",
+    "section": "Oscillation and integrability",
+    "subgoals": [
+      "Bound the oscillation on a partition",
+      "Relate oscillation to Riemann sums",
+      "Show continuity at almost every point"
+    ]
+  }
+]

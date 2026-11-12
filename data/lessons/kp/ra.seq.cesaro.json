@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Averaging partial sums",
+    "section": "Averaging partial sums",
+    "subgoals": [
+      "Form the partial sums",
+      "Average the first N sums",
+      "Compute a Cesaro mean"
+    ]
+  },
+  {
+    "label": "Regularity",
+    "section": "Regularity",
+    "subgoals": [
+      "Show convergence implies Cesaro convergence",
+      "Keep the same limit",
+      "Find a divergent example"
+    ]
+  },
+  {
+    "label": "Divergent series made summable",
+    "section": "Divergent series made summable",
+    "subgoals": [
+      "Sum the Grandi series",
+      "Average an arithmetic progression",
+      "Compare Cesaro and Abel summation"
+    ]
+  }
+]

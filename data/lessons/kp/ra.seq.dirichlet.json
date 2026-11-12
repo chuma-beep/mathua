@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Partial summation",
+    "section": "Partial summation",
+    "subgoals": [
+      "Write the summation by parts identity",
+      "Group the terms by partial sums",
+      "Bound the grouped sum"
+    ]
+  },
+  {
+    "label": "Bounded partial sums",
+    "section": "Bounded partial sums",
+    "subgoals": [
+      "Bound the partial sums of the first factor",
+      "Check the second factor decreases to zero",
+      "Apply Dirichlet's test"
+    ]
+  },
+  {
+    "label": "Conditional examples",
+    "section": "Conditional examples",
+    "subgoals": [
+      "Test the alternating harmonic series",
+      "Choose a monotone factor",
+      "Show the bounded factor is essential"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Splitting test sets",
+    "section": "Splitting test sets",
+    "subgoals": [
+      "Choose a test set",
+      "Split it by the candidate set",
+      "Check the additive identity"
+    ]
+  },
+  {
+    "label": "The sigma-algebra",
+    "section": "The sigma-algebra",
+    "subgoals": [
+      "Show the empty set is measurable",
+      "Show complements are measurable",
+      "Show countable unions are measurable"
+    ]
+  },
+  {
+    "label": "Measurable sets",
+    "section": "Measurable sets",
+    "subgoals": [
+      "Identify the measurable sets",
+      "Check a null set is measurable",
+      "Recover Lebesgue measure"
+    ]
+  }
+]

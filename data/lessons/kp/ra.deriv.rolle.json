@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Equal endpoints",
+    "section": "Equal endpoints",
+    "subgoals": [
+      "Check continuity on the closed interval",
+      "Check differentiability inside",
+      "Note the equal endpoint values"
+    ]
+  },
+  {
+    "label": "The interior critical point",
+    "section": "The interior critical point",
+    "subgoals": [
+      "Find the critical point of a quadratic",
+      "Use Fermat's theorem",
+      "Compute the point for given roots"
+    ]
+  },
+  {
+    "label": "Proving the mean value theorem",
+    "section": "Proving the mean value theorem",
+    "subgoals": [
+      "Subtract the chord from the function",
+      "Apply Rolle's theorem",
+      "Recover the mean value statement"
+    ]
+  }
+]

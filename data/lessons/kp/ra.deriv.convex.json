@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The chord condition",
+    "section": "The chord condition",
+    "subgoals": [
+      "Write the chord between two points",
+      "Compare the chord with the graph",
+      "Check the inequality"
+    ]
+  },
+  {
+    "label": "Derivatives and monotonicity",
+    "section": "Derivatives and monotonicity",
+    "subgoals": [
+      "Relate convexity to a monotone derivative",
+      "Use the second derivative test",
+      "Locate an inflection point"
+    ]
+  },
+  {
+    "label": "Jensen's inequality",
+    "section": "Jensen's inequality",
+    "subgoals": [
+      "Average two points",
+      "Apply convexity to the average",
+      "Bound the Jensen gap"
+    ]
+  }
+]

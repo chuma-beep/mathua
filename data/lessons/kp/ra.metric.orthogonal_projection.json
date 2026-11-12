@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Closest points",
+    "section": "Closest points",
+    "subgoals": [
+      "Minimise the distance to a subspace",
+      "Set the derivative to zero",
+      "Solve for the coefficient"
+    ]
+  },
+  {
+    "label": "The projection theorem",
+    "section": "The projection theorem",
+    "subgoals": [
+      "Show the residual is orthogonal",
+      "Show the projection is unique",
+      "Decompose the space"
+    ]
+  },
+  {
+    "label": "Orthonormal expansions",
+    "section": "Orthonormal expansions",
+    "subgoals": [
+      "Expand in an orthonormal basis",
+      "Compute the coefficients",
+      "Check Parseval's identity"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Roots of the terms",
+    "section": "Roots of the terms",
+    "subgoals": [
+      "Take the nth root of a term",
+      "Handle a geometric term",
+      "Estimate a root numerically"
+    ]
+  },
+  {
+    "label": "The limiting root",
+    "section": "The limiting root",
+    "subgoals": [
+      "Compute the limiting root",
+      "Apply the root test",
+      "Compare the root and ratio limits"
+    ]
+  },
+  {
+    "label": "Choosing a test",
+    "section": "Choosing a test",
+    "subgoals": [
+      "Recognise a power series",
+      "Find the radius of convergence",
+      "Decide which test is simpler"
+    ]
+  }
+]

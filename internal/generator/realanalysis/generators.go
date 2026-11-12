@@ -61,6 +61,8 @@ func Register(reg *generator.Registry) {
 	registerConversions(reg)
 	registerWave5(reg)
 	registerWave5Remaining(reg)
+	registerWave6A(reg)
+	registerWave6B(reg)
 	for id, kind := range raBridgeKinds {
 		reg.Register(id, &raBridgeGen{kind: kind})
 	}

@@ -1,10 +1,10 @@
 {
   "concept": "geo.solid.cavalieri",
-  "setup": "Two solids have equal slice areas at [[n]] sampled heights.",
+  "setup": "Two solids have equal slice areas at [[count]] sampled heights.",
   "steps": [
     {
       "fact": "count",
-      "say": "All [[n]] slices agree, so the volumes are equal."
+      "say": "All [[count]] slices agree, so the volumes are equal."
     }
   ],
   "answer": "The volumes are equal."

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Extension of functionals",
+    "section": "Extension of functionals",
+    "subgoals": [
+      "Start with a subspace functional",
+      "Extend by one dimension",
+      "Iterate with Zorn's lemma"
+    ]
+  },
+  {
+    "label": "The dominated form",
+    "section": "The dominated form",
+    "subgoals": [
+      "Assume a sublinear bound",
+      "Preserve the bound in the extension",
+      "Check the norm is preserved"
+    ]
+  },
+  {
+    "label": "Separation",
+    "section": "Separation",
+    "subgoals": [
+      "Separate a point from a closed subspace",
+      "Build the separating functional",
+      "Compute the separation distance"
+    ]
+  }
+]

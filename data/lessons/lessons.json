@@ -11118,5 +11118,129 @@
   {
     "concept_id": "geo.transform.group",
     "source": "authored/geo.transform.group.md"
+  },
+  {
+    "concept_id": "ra.order.dedekind",
+    "source": "authored/ra.order.dedekind.md"
+  },
+  {
+    "concept_id": "ra.order.well_ordering",
+    "source": "authored/ra.order.well_ordering.md"
+  },
+  {
+    "concept_id": "ra.order.cardinal",
+    "source": "authored/ra.order.cardinal.md"
+  },
+  {
+    "concept_id": "ra.seq.root_test",
+    "source": "authored/ra.seq.root_test.md"
+  },
+  {
+    "concept_id": "ra.seq.integral_test",
+    "source": "authored/ra.seq.integral_test.md"
+  },
+  {
+    "concept_id": "ra.seq.cesaro",
+    "source": "authored/ra.seq.cesaro.md"
+  },
+  {
+    "concept_id": "ra.seq.dirichlet",
+    "source": "authored/ra.seq.dirichlet.md"
+  },
+  {
+    "concept_id": "ra.limit.oscillation",
+    "source": "authored/ra.limit.oscillation.md"
+  },
+  {
+    "concept_id": "ra.limit.semicontinuity",
+    "source": "authored/ra.limit.semicontinuity.md"
+  },
+  {
+    "concept_id": "ra.limit.dini",
+    "source": "authored/ra.limit.dini.md"
+  },
+  {
+    "concept_id": "ra.limit.uniform_limit",
+    "source": "authored/ra.limit.uniform_limit.md"
+  },
+  {
+    "concept_id": "ra.deriv.rolle",
+    "source": "authored/ra.deriv.rolle.md"
+  },
+  {
+    "concept_id": "ra.deriv.convex",
+    "source": "authored/ra.deriv.convex.md"
+  },
+  {
+    "concept_id": "ra.deriv.jensen",
+    "source": "authored/ra.deriv.jensen.md"
+  },
+  {
+    "concept_id": "ra.deriv.lipschitz",
+    "source": "authored/ra.deriv.lipschitz.md"
+  },
+  {
+    "concept_id": "ra.deriv.inverse_function",
+    "source": "authored/ra.deriv.inverse_function.md"
+  },
+  {
+    "concept_id": "ra.deriv.cantor_function",
+    "source": "authored/ra.deriv.cantor_function.md"
+  },
+  {
+    "concept_id": "ra.measure.outer",
+    "source": "authored/ra.measure.outer.md"
+  },
+  {
+    "concept_id": "ra.measure.caratheodory",
+    "source": "authored/ra.measure.caratheodory.md"
+  },
+  {
+    "concept_id": "ra.measure.radon_nikodym",
+    "source": "authored/ra.measure.radon_nikodym.md"
+  },
+  {
+    "concept_id": "ra.measure.signed",
+    "source": "authored/ra.measure.signed.md"
+  },
+  {
+    "concept_id": "ra.measure.convergence_in_measure",
+    "source": "authored/ra.measure.convergence_in_measure.md"
+  },
+  {
+    "concept_id": "ra.measure.egorov",
+    "source": "authored/ra.measure.egorov.md"
+  },
+  {
+    "concept_id": "ra.measure.lusin",
+    "source": "authored/ra.measure.lusin.md"
+  },
+  {
+    "concept_id": "ra.metric.cauchy_schwarz",
+    "source": "authored/ra.metric.cauchy_schwarz.md"
+  },
+  {
+    "concept_id": "ra.metric.orthogonal_projection",
+    "source": "authored/ra.metric.orthogonal_projection.md"
+  },
+  {
+    "concept_id": "ra.metric.uniform_boundedness",
+    "source": "authored/ra.metric.uniform_boundedness.md"
+  },
+  {
+    "concept_id": "ra.metric.open_mapping",
+    "source": "authored/ra.metric.open_mapping.md"
+  },
+  {
+    "concept_id": "ra.metric.closed_graph",
+    "source": "authored/ra.metric.closed_graph.md"
+  },
+  {
+    "concept_id": "ra.metric.hahn_banach",
+    "source": "authored/ra.metric.hahn_banach.md"
+  },
+  {
+    "concept_id": "ra.metric.weak_convergence",
+    "source": "authored/ra.metric.weak_convergence.md"
   }
 ]

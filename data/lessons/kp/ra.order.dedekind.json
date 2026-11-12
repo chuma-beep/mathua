@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Cuts of the rationals",
+    "section": "Cuts of the rationals",
+    "subgoals": [
+      "Name the lower set",
+      "Check the cut is downward closed",
+      "Find a rational above the cut"
+    ]
+  },
+  {
+    "label": "Completeness from cuts",
+    "section": "Completeness from cuts",
+    "subgoals": [
+      "Order the cuts by inclusion",
+      "Take the union of a bounded family",
+      "Show the union is the least upper bound"
+    ]
+  },
+  {
+    "label": "Comparing constructions",
+    "section": "Comparing constructions",
+    "subgoals": [
+      "Map a cut to its real number",
+      "Match Dedekind cuts with Cauchy sequences",
+      "Compare two completions"
+    ]
+  }
+]

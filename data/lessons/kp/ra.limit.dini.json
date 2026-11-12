@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Monotone convergence of functions",
+    "section": "Monotone convergence of functions",
+    "subgoals": [
+      "Assume pointwise monotone convergence",
+      "Assume the limit is continuous",
+      "State the uniform conclusion"
+    ]
+  },
+  {
+    "label": "Compactness",
+    "section": "Compactness",
+    "subgoals": [
+      "Cover the domain by level sets",
+      "Extract a finite subcover",
+      "Bound the difference uniformly"
+    ]
+  },
+  {
+    "label": "Why monotonicity is needed",
+    "section": "Why monotonicity is needed",
+    "subgoals": [
+      "Give a non-monotone counterexample",
+      "Show pointwise convergence can fail to be uniform",
+      "Check the compactness hypothesis"
+    ]
+  }
+]

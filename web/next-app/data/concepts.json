@@ -38370,6 +38370,440 @@
     "subdomain": "real_analysis.deriv"
   },
   {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.order.dedekind",
+    "label": "Dedekind cuts",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.order.completeness"
+    ],
+    "subdomain": "real_analysis.order"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.order.well_ordering",
+    "label": "The well-ordering theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.order.zorn"
+    ],
+    "subdomain": "real_analysis.order"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.order.cardinal",
+    "label": "Cardinal arithmetic",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.order.uncountable"
+    ],
+    "subdomain": "real_analysis.order"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.seq.root_test",
+    "label": "The root test",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.seq.tests"
+    ],
+    "subdomain": "real_analysis.seq"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.seq.integral_test",
+    "label": "The integral test",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.seq.tests"
+    ],
+    "subdomain": "real_analysis.seq"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.seq.cesaro",
+    "label": "Cesaro summation",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.seq.convergence"
+    ],
+    "subdomain": "real_analysis.seq"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.seq.dirichlet",
+    "label": "Dirichlet's test for series",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.seq.absolute"
+    ],
+    "subdomain": "real_analysis.seq"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.limit.oscillation",
+    "label": "Oscillation",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.limit.continuity"
+    ],
+    "subdomain": "real_analysis.limit"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.limit.semicontinuity",
+    "label": "Semicontinuity",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.limit.continuity"
+    ],
+    "subdomain": "real_analysis.limit"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.limit.dini",
+    "label": "Dini's theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.deriv.uniform_conv"
+    ],
+    "subdomain": "real_analysis.limit"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.limit.uniform_limit",
+    "label": "Uniform limits of continuous functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.limit.uniform"
+    ],
+    "subdomain": "real_analysis.limit"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.deriv.rolle",
+    "label": "Rolle's theorem in one variable",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.deriv.mvt"
+    ],
+    "subdomain": "real_analysis.deriv"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.deriv.convex",
+    "label": "Convex functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.deriv.mvt"
+    ],
+    "subdomain": "real_analysis.deriv"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.deriv.jensen",
+    "label": "Jensen's inequality",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.deriv.convex"
+    ],
+    "subdomain": "real_analysis.deriv"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.deriv.lipschitz",
+    "label": "Lipschitz continuity",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.limit.uniform"
+    ],
+    "subdomain": "real_analysis.deriv"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.deriv.inverse_function",
+    "label": "The inverse function theorem in one variable",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.deriv.chain"
+    ],
+    "subdomain": "real_analysis.deriv"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.deriv.cantor_function",
+    "label": "The Cantor function",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.measure.cantor_set"
+    ],
+    "subdomain": "real_analysis.deriv"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.measure.outer",
+    "label": "Outer measure",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.measure.lebesgue"
+    ],
+    "subdomain": "real_analysis.measure"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.measure.caratheodory",
+    "label": "Caratheodory's criterion",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.measure.outer"
+    ],
+    "subdomain": "real_analysis.measure"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.measure.radon_nikodym",
+    "label": "The Radon-Nikodym theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.measure.dominated_convergence"
+    ],
+    "subdomain": "real_analysis.measure"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.measure.signed",
+    "label": "Signed measures",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.measure.measurable_sets"
+    ],
+    "subdomain": "real_analysis.measure"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.measure.convergence_in_measure",
+    "label": "Convergence in measure",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.measure.measurable_functions"
+    ],
+    "subdomain": "real_analysis.measure"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.measure.egorov",
+    "label": "Egorov's theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.measure.convergence_in_measure"
+    ],
+    "subdomain": "real_analysis.measure"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.measure.lusin",
+    "label": "Lusin's theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.measure.measurable_functions"
+    ],
+    "subdomain": "real_analysis.measure"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.metric.cauchy_schwarz",
+    "label": "The Cauchy-Schwarz inequality",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.metric.holder"
+    ],
+    "subdomain": "real_analysis.metric"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.metric.orthogonal_projection",
+    "label": "Orthogonal projection in Hilbert space",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.metric.hilbert"
+    ],
+    "subdomain": "real_analysis.metric"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.metric.uniform_boundedness",
+    "label": "The uniform boundedness principle",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.metric.banach"
+    ],
+    "subdomain": "real_analysis.metric"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.metric.open_mapping",
+    "label": "The open mapping theorem for Banach spaces",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.metric.banach"
+    ],
+    "subdomain": "real_analysis.metric"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.metric.closed_graph",
+    "label": "The closed graph theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.metric.banach"
+    ],
+    "subdomain": "real_analysis.metric"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.metric.hahn_banach",
+    "label": "The Hahn-Banach theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.metric.bounded_operator"
+    ],
+    "subdomain": "real_analysis.metric"
+  },
+  {
+    "domain": "real_analysis",
+    "grading_type": "numeric",
+    "id": "ra.metric.weak_convergence",
+    "label": "Weak convergence",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ra.metric.bounded_operator"
+    ],
+    "subdomain": "real_analysis.metric"
+  },
+  {
     "domain": "statistics",
     "grading_type": "numeric",
     "id": "stat.data.read_table",

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Upper and lower",
+    "section": "Upper and lower",
+    "subgoals": [
+      "Define lower semicontinuity",
+      "Define upper semicontinuity",
+      "Relate both to continuity"
+    ]
+  },
+  {
+    "label": "Extreme values",
+    "section": "Extreme values",
+    "subgoals": [
+      "State the extreme value theorem for lsc functions",
+      "Minimise a lower semicontinuous function",
+      "Take a supremum of continuous functions"
+    ]
+  },
+  {
+    "label": "Level sets",
+    "section": "Level sets",
+    "subgoals": [
+      "Describe a superlevel set of an lsc function",
+      "Show the set is closed",
+      "Use level sets to test semicontinuity"
+    ]
+  }
+]

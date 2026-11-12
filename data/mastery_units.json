@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 2780,
+  "concept_count": 2811,
   "unit_count": 163,
   "units": [
     {
@@ -4804,6 +4804,7 @@
         "calc.limit.uniform_continuity",
         "calc.series.cauchy_criterion",
         "ra.deriv.lhopital",
+        "ra.deriv.lipschitz",
         "ra.deriv.power_series",
         "ra.limit.compact",
         "ra.limit.connected",
@@ -4812,20 +4813,26 @@
         "ra.limit.evt",
         "ra.limit.ivt",
         "ra.limit.monotone_fn",
+        "ra.limit.oscillation",
+        "ra.limit.semicontinuity",
         "ra.limit.sequential",
         "ra.limit.uniform",
+        "ra.limit.uniform_limit",
         "ra.metric.complete",
         "ra.metric.continuity",
         "ra.metric.spaces",
         "ra.order.archimedean",
         "ra.order.countable",
+        "ra.order.dedekind",
         "ra.order.density",
         "ra.order.nested_intervals",
+        "ra.order.well_ordering",
         "ra.order.zorn",
         "ra.seq.absolute",
         "ra.seq.bolzano_weierstrass",
         "ra.seq.cauchy",
         "ra.seq.cauchy_criterion",
+        "ra.seq.cesaro",
         "ra.seq.cluster",
         "ra.seq.double_series",
         "ra.seq.liminf",
@@ -4835,7 +4842,7 @@
         "ra.seq.subsequence",
         "ra.seq.tests"
       ],
-      "concept_count": 33
+      "concept_count": 40
     },
     {
       "id": "real_analysis.b11",
@@ -4846,6 +4853,7 @@
       "depth_max": 35,
       "subdomains": [
         "real_analysis.deriv",
+        "real_analysis.limit",
         "real_analysis.measure",
         "real_analysis.metric",
         "real_analysis.order",
@@ -4854,12 +4862,16 @@
       "concept_ids": [
         "ra.deriv.arzela_ascoli",
         "ra.deriv.chain",
+        "ra.deriv.convex",
         "ra.deriv.darboux",
         "ra.deriv.interchange",
+        "ra.deriv.jensen",
         "ra.deriv.mvt",
+        "ra.deriv.rolle",
         "ra.deriv.taylor",
         "ra.deriv.uniform_conv",
         "ra.deriv.weierstrass_approx",
+        "ra.limit.dini",
         "ra.measure.cantor_set",
         "ra.measure.lebesgue",
         "ra.measure.null",
@@ -4871,13 +4883,17 @@
         "ra.metric.equivalent",
         "ra.metric.open_closed",
         "ra.metric.total_bounded",
+        "ra.order.cardinal",
         "ra.order.schroder_bernstein",
         "ra.order.uncountable",
+        "ra.seq.dirichlet",
         "ra.seq.fourier_convergence",
+        "ra.seq.integral_test",
         "ra.seq.rearrangement",
+        "ra.seq.root_test",
         "ra.seq.weierstrass_m"
       ],
-      "concept_count": 24
+      "concept_count": 32
     },
     {
       "id": "real_analysis.b12",
@@ -4894,22 +4910,29 @@
       "concept_ids": [
         "calc.integral.riemann_criteria",
         "ra.deriv.bounded_variation",
+        "ra.deriv.cantor_function",
         "ra.deriv.ftc",
         "ra.deriv.improper",
+        "ra.deriv.inverse_function",
         "ra.deriv.lebesgue_differentiation",
         "ra.deriv.parts",
         "ra.deriv.riemann",
+        "ra.measure.caratheodory",
+        "ra.measure.convergence_in_measure",
         "ra.measure.dominated_convergence",
         "ra.measure.fubini_tonelli",
         "ra.measure.lebesgue_integral",
+        "ra.measure.lusin",
         "ra.measure.measurable_functions",
         "ra.measure.measurable_sets",
         "ra.measure.monotone_convergence",
+        "ra.measure.outer",
         "ra.measure.product",
+        "ra.measure.signed",
         "ra.measure.simple_integral",
         "ra.metric.lp_space"
       ],
-      "concept_count": 16
+      "concept_count": 23
     },
     {
       "id": "real_analysis.b13",
@@ -4926,15 +4949,24 @@
       "concept_ids": [
         "ra.deriv.absolute_continuity",
         "ra.deriv.riemann_stieltjes",
+        "ra.measure.egorov",
         "ra.measure.fatou",
+        "ra.measure.radon_nikodym",
         "ra.metric.banach",
         "ra.metric.bounded_operator",
+        "ra.metric.cauchy_schwarz",
+        "ra.metric.closed_graph",
+        "ra.metric.hahn_banach",
         "ra.metric.hilbert",
         "ra.metric.holder",
         "ra.metric.minkowski",
-        "ra.metric.riesz_representation"
+        "ra.metric.open_mapping",
+        "ra.metric.orthogonal_projection",
+        "ra.metric.riesz_representation",
+        "ra.metric.uniform_boundedness",
+        "ra.metric.weak_convergence"
       ],
-      "concept_count": 9
+      "concept_count": 18
     },
     {
       "id": "statistics.b0",

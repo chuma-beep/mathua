@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The weak topology",
+    "section": "The weak topology",
+    "subgoals": [
+      "Test against every bounded functional",
+      "Define weak convergence",
+      "Compare with the weak star topology"
+    ]
+  },
+  {
+    "label": "Weak versus norm",
+    "section": "Weak versus norm",
+    "subgoals": [
+      "Show norm convergence implies weak convergence",
+      "Give a weakly convergent orthonormal sequence",
+      "Check the norm limit"
+    ]
+  },
+  {
+    "label": "Compactness",
+    "section": "Compactness",
+    "subgoals": [
+      "State weak compactness in reflexive spaces",
+      "Apply to a bounded sequence",
+      "Extract a weakly convergent subsequence"
+    ]
+  }
+]

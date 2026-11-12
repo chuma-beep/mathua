@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The uniform metric",
+    "section": "The uniform metric",
+    "subgoals": [
+      "Define the sup distance",
+      "Compute a sup norm",
+      "Distinguish uniform from pointwise convergence"
+    ]
+  },
+  {
+    "label": "Continuity is preserved",
+    "section": "Continuity is preserved",
+    "subgoals": [
+      "Take a uniformly convergent sequence",
+      "Estimate the difference at two points",
+      "Conclude the limit is continuous"
+    ]
+  },
+  {
+    "label": "Interchanging limits",
+    "section": "Interchanging limits",
+    "subgoals": [
+      "Swap a limit and an integral",
+      "Swap a limit and a derivative",
+      "Check which hypotheses permit the swap"
+    ]
+  }
+]

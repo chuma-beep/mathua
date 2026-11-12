@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Absolute continuity",
+    "section": "Absolute continuity",
+    "subgoals": [
+      "Define absolute continuity of measures",
+      "Check a null set has zero measure",
+      "Compare with singularity"
+    ]
+  },
+  {
+    "label": "The density",
+    "section": "The density",
+    "subgoals": [
+      "State the existence of the density",
+      "Integrate the density over a set",
+      "Compute a measure from a constant density"
+    ]
+  },
+  {
+    "label": "Conditional expectation",
+    "section": "Conditional expectation",
+    "subgoals": [
+      "Define the conditional expectation",
+      "Interpret it as a Radon-Nikodym derivative",
+      "Check the defining identity"
+    ]
+  }
+]

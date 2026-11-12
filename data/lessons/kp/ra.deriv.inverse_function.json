@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Local invertibility",
+    "section": "Local invertibility",
+    "subgoals": [
+      "Check the derivative is nonzero",
+      "Use continuity of the derivative",
+      "Find a neighbourhood of invertibility"
+    ]
+  },
+  {
+    "label": "The derivative of the inverse",
+    "section": "The derivative of the inverse",
+    "subgoals": [
+      "Differentiate the identity f(f inverse(y)) = y",
+      "Solve for the inverse derivative",
+      "Evaluate at a point"
+    ]
+  },
+  {
+    "label": "Global consequences",
+    "section": "Global consequences",
+    "subgoals": [
+      "Extend to a monotone function",
+      "Check the image is an interval",
+      "Compare with the global inverse theorem"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Well-orders",
+    "section": "Well-orders",
+    "subgoals": [
+      "Check every nonempty subset has a least element",
+      "Compare a well-order with a linear order",
+      "Give the natural numbers as an example"
+    ]
+  },
+  {
+    "label": "From choice to well-order",
+    "section": "From choice to well-order",
+    "subgoals": [
+      "State the axiom of choice",
+      "Choose one element from each set",
+      "Build the initial segment"
+    ]
+  },
+  {
+    "label": "Transfinite recursion",
+    "section": "Transfinite recursion",
+    "subgoals": [
+      "Define a recursion on ordinals",
+      "Check the successor step",
+      "Check the limit step"
+    ]
+  }
+]

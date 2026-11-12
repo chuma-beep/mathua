@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Approximation by continuous functions",
+    "section": "Approximation by continuous functions",
+    "subgoals": [
+      "Approximate a measurable function",
+      "Control the sup error",
+      "Use Tietze extension"
+    ]
+  },
+  {
+    "label": "Closed sets",
+    "section": "Closed sets",
+    "subgoals": [
+      "Remove a small open set",
+      "Restrict to the closed remainder",
+      "Check continuity on the remainder"
+    ]
+  },
+  {
+    "label": "Consequences",
+    "section": "Consequences",
+    "subgoals": [
+      "Approximate in measure",
+      "Compare with the density of continuous functions",
+      "Apply to bounded measurable functions"
+    ]
+  }
+]

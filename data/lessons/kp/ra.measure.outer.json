@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Covering by intervals",
+    "section": "Covering by intervals",
+    "subgoals": [
+      "Cover a set by open intervals",
+      "Take the infimum of total lengths",
+      "Compute the measure of an interval"
+    ]
+  },
+  {
+    "label": "Monotonicity and subadditivity",
+    "section": "Monotonicity and subadditivity",
+    "subgoals": [
+      "Show a subset has no larger measure",
+      "Bound a countable union",
+      "Handle a null set"
+    ]
+  },
+  {
+    "label": "From outer to Lebesgue",
+    "section": "From outer to Lebesgue",
+    "subgoals": [
+      "Restrict to measurable sets",
+      "Check countable additivity",
+      "Compare with the length of an interval"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The staircase construction",
+    "section": "The staircase construction",
+    "subgoals": [
+      "Define the function on the middle thirds",
+      "Extend by the Cantor set",
+      "Evaluate at a ternary endpoint"
+    ]
+  },
+  {
+    "label": "Flat intervals",
+    "section": "Flat intervals",
+    "subgoals": [
+      "Identify the removed intervals",
+      "Show the derivative is zero there",
+      "Compute the total length removed"
+    ]
+  },
+  {
+    "label": "A singular function",
+    "section": "A singular function",
+    "subgoals": [
+      "Show the function is continuous",
+      "Show it is not absolutely continuous",
+      "Relate it to the Cantor measure"
+    ]
+  }
+]

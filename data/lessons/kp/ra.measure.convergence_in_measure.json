@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Fix an epsilon",
+      "Measure the superlevel set",
+      "Take the limit in n"
+    ]
+  },
+  {
+    "label": "Almost everywhere versus in measure",
+    "section": "Almost everywhere versus in measure",
+    "subgoals": [
+      "Show almost everywhere implies in measure",
+      "Give a sequence converging only in measure",
+      "Compare the two modes"
+    ]
+  },
+  {
+    "label": "Cauchy in measure",
+    "section": "Cauchy in measure",
+    "subgoals": [
+      "Define a Cauchy sequence in measure",
+      "Extract an almost everywhere convergent subsequence",
+      "Complete the argument"
+    ]
+  }
+]

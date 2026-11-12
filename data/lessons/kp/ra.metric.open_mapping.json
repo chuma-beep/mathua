@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Open maps",
+    "section": "Open maps",
+    "subgoals": [
+      "Take an open set",
+      "Apply the operator",
+      "Check the image is open"
+    ]
+  },
+  {
+    "label": "Surjective operators",
+    "section": "Surjective operators",
+    "subgoals": [
+      "Use completeness of both spaces",
+      "Apply the Baire category theorem",
+      "Cover the target by images of balls"
+    ]
+  },
+  {
+    "label": "Bounded inverses",
+    "section": "Bounded inverses",
+    "subgoals": [
+      "Assume the operator is bijective",
+      "Show the inverse is bounded",
+      "Compute the inverse norm"
+    ]
+  }
+]

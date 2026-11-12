@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The finite form",
+    "section": "The finite form",
+    "subgoals": [
+      "Write the weighted sum",
+      "Apply convexity",
+      "Compare both sides"
+    ]
+  },
+  {
+    "label": "Weights and expectations",
+    "section": "Weights and expectations",
+    "subgoals": [
+      "Normalise the weights",
+      "Interpret the weights as a distribution",
+      "Apply the inequality to an expectation"
+    ]
+  },
+  {
+    "label": "Equality cases",
+    "section": "Equality cases",
+    "subgoals": [
+      "State when equality holds",
+      "Check a linear function",
+      "Check equal arguments"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Closed graphs",
+    "section": "Closed graphs",
+    "subgoals": [
+      "Define the graph of an operator",
+      "Check the graph is closed",
+      "Relate closedness to continuity"
+    ]
+  },
+  {
+    "label": "Continuity from closedness",
+    "section": "Continuity from closedness",
+    "subgoals": [
+      "Assume a closed graph",
+      "Use the open mapping theorem",
+      "Conclude boundedness"
+    ]
+  },
+  {
+    "label": "Applications",
+    "section": "Applications",
+    "subgoals": [
+      "Test a differential operator",
+      "Test a multiplication operator",
+      "Compare with the bounded inverse theorem"
+    ]
+  }
+]

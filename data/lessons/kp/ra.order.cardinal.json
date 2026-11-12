@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Cardinal numbers",
+    "section": "Cardinal numbers",
+    "subgoals": [
+      "Define equipotence",
+      "Name the cardinal of a finite set",
+      "Compare two countable sets"
+    ]
+  },
+  {
+    "label": "Sums and products",
+    "section": "Sums and products",
+    "subgoals": [
+      "Add cardinalities of disjoint sets",
+      "Multiply cardinalities of products",
+      "Compute the power set cardinality"
+    ]
+  },
+  {
+    "label": "Counting the continuum",
+    "section": "Counting the continuum",
+    "subgoals": [
+      "Show the reals are uncountable",
+      "Compare the cardinal of the continuum",
+      "State the continuum hypothesis"
+    ]
+  }
+]

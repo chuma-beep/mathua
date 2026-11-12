@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The inner product",
+    "section": "The inner product",
+    "subgoals": [
+      "Compute a dot product",
+      "Check bilinearity",
+      "Compute a norm from the inner product"
+    ]
+  },
+  {
+    "label": "The inequality",
+    "section": "The inequality",
+    "subgoals": [
+      "Square both sides",
+      "Use the discriminant argument",
+      "Bound the absolute value"
+    ]
+  },
+  {
+    "label": "Equality and angle",
+    "section": "Equality and angle",
+    "subgoals": [
+      "State the equality condition",
+      "Recognise parallel vectors",
+      "Define the angle between vectors"
+    ]
+  }
+]

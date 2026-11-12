@@ -3,7 +3,7 @@
   "setup": "A regular octahedron has [[v]] vertices.",
   "steps": [
     {
-      "fact": "edges",
+      "fact": "e",
       "say": "By Euler's formula the edge count is [[e]]."
     }
   ],

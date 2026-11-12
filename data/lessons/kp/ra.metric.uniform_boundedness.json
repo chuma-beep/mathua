@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Pointwise bounds",
+    "section": "Pointwise bounds",
+    "subgoals": [
+      "Fix a point",
+      "Bound every operator at that point",
+      "Take the supremum over the family"
+    ]
+  },
+  {
+    "label": "The Baire argument",
+    "section": "The Baire argument",
+    "subgoals": [
+      "Use a complete metric space",
+      "Apply Baire's theorem",
+      "Find a ball of uniform boundedness"
+    ]
+  },
+  {
+    "label": "Families of operators",
+    "section": "Families of operators",
+    "subgoals": [
+      "Bound the operator norms",
+      "Give a pointwise bounded family",
+      "Show uniform boundedness follows"
+    ]
+  }
+]

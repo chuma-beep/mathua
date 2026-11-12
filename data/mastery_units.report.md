@@ -12,20 +12,20 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 2780 |
+| Total concepts | 2811 |
 | Total units | 163 |
 | Minimum unit size | 1 |
-| Median unit size | 12 |
+| Median unit size | 13 |
 | Maximum unit size | 82 |
 | Singleton units | 25 |
 | Units with <= 3 concepts | 37 |
-| Units with > 25 concepts | 45 |
+| Units with > 25 concepts | 46 |
 | Units with > 50 concepts | 7 |
 | Cross-unit prerequisite edges (derived) | 539 |
 | Backward band edges | 0 |
 
 If the learner is assessed once per unit, then 163 assessments cover the corpus, and the
-median is one assessment per 12 concepts. That is the frequency question this report
+median is one assessment per 13 concepts. That is the frequency question this report
 exists to make concrete.
 
 ## Proposed units
@@ -172,10 +172,10 @@ exists to make concrete.
 | `probability_theory.b6` | probability_theory | 6 | 12 | 5 | 18–20 |
 | `probability_theory.b7` | probability_theory | 7 | 5 | 1 | 21–23 |
 | `real_analysis.b9` | real_analysis | 9 | 7 | 3 | 27–29 |
-| `real_analysis.b10` | real_analysis | 10 | 33 | 5 | 30–32 |
-| `real_analysis.b11` | real_analysis | 11 | 24 | 5 | 33–35 |
-| `real_analysis.b12` | real_analysis | 12 | 16 | 3 | 36–38 |
-| `real_analysis.b13` | real_analysis | 13 | 9 | 3 | 39–41 |
+| `real_analysis.b10` | real_analysis | 10 | 40 | 5 | 30–32 |
+| `real_analysis.b11` | real_analysis | 11 | 32 | 6 | 33–35 |
+| `real_analysis.b12` | real_analysis | 12 | 23 | 3 | 36–38 |
+| `real_analysis.b13` | real_analysis | 13 | 18 | 3 | 39–41 |
 | `statistics.b0` | statistics | 0 | 4 | 2 | 1–2 |
 | `statistics.b1` | statistics | 1 | 1 | 1 | 3–3 |
 | `statistics.b2` | statistics | 2 | 1 | 1 | 8–8 |
@@ -209,16 +209,16 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 222 | 9 | 56 | 26 | 52 | 28 | 0 |
-| 3 | 163 | 12 | 82 | 25 | 37 | 45 | 0 |
-| 4 | 127 | 18 | 86 | 10 | 23 | 48 | 0 |
-| 5 | 107 | 20 | 104 | 6 | 16 | 47 | 0 |
-| 6 | 98 | 23 | 130 | 9 | 15 | 44 | 0 |
-| 8 | 77 | 31 | 117 | 5 | 12 | 41 | 0 |
-| 10 | 65 | 30 | 145 | 2 | 8 | 35 | 0 |
-| 12 | 64 | 38 | 191 | 2 | 6 | 41 | 0 |
+| 2 | 222 | 10 | 56 | 26 | 51 | 29 | 0 |
+| 3 | 163 | 13 | 82 | 25 | 37 | 46 | 0 |
+| 4 | 127 | 18 | 86 | 10 | 22 | 49 | 0 |
+| 5 | 107 | 20 | 104 | 6 | 15 | 48 | 0 |
+| 6 | 98 | 23 | 130 | 9 | 15 | 45 | 0 |
+| 8 | 77 | 31 | 117 | 5 | 11 | 41 | 0 |
+| 10 | 65 | 30 | 145 | 2 | 7 | 35 | 0 |
+| 12 | 64 | 38 | 191 | 2 | 6 | 42 | 0 |
 | 15 | 51 | 53 | 172 | 1 | 3 | 35 | 0 |
-| 20 | 44 | 68 | 145 | 0 | 4 | 32 | 0 |
+| 20 | 44 | 68 | 145 | 0 | 3 | 32 | 0 |
 | 45 | 26 | 120 | 172 | 0 | 0 | 26 | 0 |
 
 **No width is clean.** Small widths fragment, at 3 there are 25 singleton units, which is a
@@ -543,7 +543,7 @@ Unresolvable subdomains:
 `trigonometry.identities`
 `trigonometry.spherical`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2780
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2811
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings

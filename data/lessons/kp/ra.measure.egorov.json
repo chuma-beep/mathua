@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Almost uniform convergence",
+    "section": "Almost uniform convergence",
+    "subgoals": [
+      "Remove a small exceptional set",
+      "Get uniform convergence on the rest",
+      "State the theorem"
+    ]
+  },
+  {
+    "label": "The exceptional set",
+    "section": "The exceptional set",
+    "subgoals": [
+      "Bound the measure of the bad set",
+      "Choose the truncation index",
+      "Compute the remaining measure"
+    ]
+  },
+  {
+    "label": "Finite measure",
+    "section": "Finite measure",
+    "subgoals": [
+      "Check the finite measure hypothesis",
+      "Give an infinite measure counterexample",
+      "See where the proof uses finiteness"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Positive and negative parts",
+    "section": "Positive and negative parts",
+    "subgoals": [
+      "Split a signed measure by sign",
+      "Check both parts are measures",
+      "Show they are mutually singular"
+    ]
+  },
+  {
+    "label": "Hahn decomposition",
+    "section": "Hahn decomposition",
+    "subgoals": [
+      "Find a positive set",
+      "Find a negative set",
+      "Show the decomposition is essentially unique"
+    ]
+  },
+  {
+    "label": "Total variation",
+    "section": "Total variation",
+    "subgoals": [
+      "Define the total variation measure",
+      "Add the two parts",
+      "Compute the variation of two atoms"
+    ]
+  }
+]

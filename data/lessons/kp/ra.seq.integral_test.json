@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Decreasing terms",
+    "section": "Decreasing terms",
+    "subgoals": [
+      "Check the terms decrease",
+      "Check the terms are positive",
+      "Relate the first term to the integral"
+    ]
+  },
+  {
+    "label": "The integral comparison",
+    "section": "The integral comparison",
+    "subgoals": [
+      "Set up the improper integral",
+      "Evaluate the p-integral",
+      "Conclude convergence or divergence"
+    ]
+  },
+  {
+    "label": "Remainder estimates",
+    "section": "Remainder estimates",
+    "subgoals": [
+      "Bound the tail by an integral",
+      "Solve the bound for the index",
+      "Compare two tail bounds"
+    ]
+  }
+]

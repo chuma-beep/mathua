@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Lipschitz constant",
+    "section": "The Lipschitz constant",
+    "subgoals": [
+      "Divide the change in values by the change in inputs",
+      "Bound the quotient",
+      "Find the best constant"
+    ]
+  },
+  {
+    "label": "Contraction and absolute continuity",
+    "section": "Contraction and absolute continuity",
+    "subgoals": [
+      "Show a contraction has a fixed point",
+      "Relate Lipschitz to absolute continuity",
+      "Integrate the derivative bound"
+    ]
+  },
+  {
+    "label": "Functions that fail",
+    "section": "Functions that fail",
+    "subgoals": [
+      "Test the square root at zero",
+      "Test a function with a vertical tangent",
+      "Show uniform continuity is weaker"
+    ]
+  }
+]
