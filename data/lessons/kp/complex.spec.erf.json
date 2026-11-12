@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Write the integral",
+      "Check the normalisation",
+      "Evaluate at zero"
+    ]
+  },
+  {
+    "label": "Special values",
+    "section": "Special values",
+    "subgoals": [
+      "Use the origin",
+      "Use the limit at infinity",
+      "Apply the odd symmetry"
+    ]
+  },
+  {
+    "label": "Gaussian integral",
+    "section": "Gaussian integral",
+    "subgoals": [
+      "Integrate the Gaussian",
+      "Compare with the constant",
+      "Read the value"
+    ]
+  }
+]

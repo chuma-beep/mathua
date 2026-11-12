@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Quadratic",
+    "section": "Quadratic",
+    "subgoals": [
+      "Read the constant term",
+      "Divide by the leading term",
+      "Check the sign"
+    ]
+  },
+  {
+    "label": "Cubic",
+    "section": "Cubic",
+    "subgoals": [
+      "Apply the cubic sign",
+      "Read the constant term",
+      "Check the product"
+    ]
+  },
+  {
+    "label": "Roots of unity",
+    "section": "Roots of unity",
+    "subgoals": [
+      "Use the constant term",
+      "Apply the parity rule",
+      "Check small n"
+    ]
+  }
+]

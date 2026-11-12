@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Track the argument",
+      "Divide by two pi",
+      "Read the integer"
+    ]
+  },
+  {
+    "label": "Multiple turns",
+    "section": "Multiple turns",
+    "subgoals": [
+      "Count the turns",
+      "Multiply the index",
+      "Check the sign"
+    ]
+  },
+  {
+    "label": "Orientation",
+    "section": "Orientation",
+    "subgoals": [
+      "Reverse the curve",
+      "Negate the index",
+      "Compare both directions"
+    ]
+  }
+]

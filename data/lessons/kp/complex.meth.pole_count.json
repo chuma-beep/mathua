@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Inside",
+    "section": "Inside",
+    "subgoals": [
+      "Factor the denominator",
+      "Test each root",
+      "Count the inside roots"
+    ]
+  },
+  {
+    "label": "Outside",
+    "section": "Outside",
+    "subgoals": [
+      "Test the exterior",
+      "Exclude those roots",
+      "Check the boundary"
+    ]
+  },
+  {
+    "label": "Multiplicity",
+    "section": "Multiplicity",
+    "subgoals": [
+      "Count repetitions",
+      "Add the orders",
+      "Read the total"
+    ]
+  }
+]

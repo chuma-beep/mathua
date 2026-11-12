@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Apply the recurrence",
+      "Check the degree",
+      "Compute a low case"
+    ]
+  },
+  {
+    "label": "Values at 1 and -1",
+    "section": "Values at 1 and -1",
+    "subgoals": [
+      "Evaluate at one",
+      "Evaluate at minus one",
+      "Apply the parity"
+    ]
+  },
+  {
+    "label": "Values at zero",
+    "section": "Values at zero",
+    "subgoals": [
+      "Test odd degree",
+      "Test even degree",
+      "Read the sign"
+    ]
+  }
+]

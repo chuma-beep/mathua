@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Average",
+    "section": "Average",
+    "subgoals": [
+      "Sum the vertices",
+      "Divide by three",
+      "Read the centroid"
+    ]
+  },
+  {
+    "label": "Coordinates",
+    "section": "Coordinates",
+    "subgoals": [
+      "Average the real parts",
+      "Average the imaginary parts",
+      "Combine the results"
+    ]
+  },
+  {
+    "label": "Invariance",
+    "section": "Invariance",
+    "subgoals": [
+      "Apply an affine map",
+      "Track the centroid",
+      "Check the image"
+    ]
+  }
+]

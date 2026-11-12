@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Form",
+    "section": "Form",
+    "subgoals": [
+      "Write the sum",
+      "Match the factors",
+      "Clear denominators"
+    ]
+  },
+  {
+    "label": "Coefficients",
+    "section": "Coefficients",
+    "subgoals": [
+      "Isolate one coefficient",
+      "Set the pole value",
+      "Read the residue"
+    ]
+  },
+  {
+    "label": "Sum",
+    "section": "Sum",
+    "subgoals": [
+      "Add the coefficients",
+      "Compare with infinity",
+      "Check the proper case"
+    ]
+  }
+]

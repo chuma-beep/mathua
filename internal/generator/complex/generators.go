@@ -45,6 +45,7 @@ func Register(reg *generator.Registry) {
 		reg.Register(id, &complexBridgeGen{kind: kind})
 	}
 	registerWave4(reg)
+	registerWave19(reg)
 }
 
 func fmtComplex(r, i int) string {

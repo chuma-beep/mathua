@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The associate class",
+    "section": "The associate class",
+    "subgoals": [
+      "List the four associates",
+      "Apply a unit",
+      "Recognise the class"
+    ]
+  },
+  {
+    "label": "Norm and associates",
+    "section": "Norm and associates",
+    "subgoals": [
+      "Compare the norms",
+      "Check the invariant",
+      "Use the norm test"
+    ]
+  },
+  {
+    "label": "Choosing a representative",
+    "section": "Choosing a representative",
+    "subgoals": [
+      "Pick a canonical associate",
+      "State the rule",
+      "Check uniqueness"
+    ]
+  }
+]

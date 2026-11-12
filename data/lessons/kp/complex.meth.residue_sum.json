@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Finite sum",
+    "section": "Finite sum",
+    "subgoals": [
+      "List the finite poles",
+      "Add the residues",
+      "Read the total"
+    ]
+  },
+  {
+    "label": "Infinity",
+    "section": "Infinity",
+    "subgoals": [
+      "Negate the finite total",
+      "Check the decaying case",
+      "Read the residue"
+    ]
+  },
+  {
+    "label": "Total",
+    "section": "Total",
+    "subgoals": [
+      "Add every residue",
+      "Include infinity",
+      "Check zero"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Zeros",
+    "section": "Zeros",
+    "subgoals": [
+      "Find the first term",
+      "Read the exponent",
+      "Name the order"
+    ]
+  },
+  {
+    "label": "Products",
+    "section": "Products",
+    "subgoals": [
+      "Add the orders",
+      "Check the product",
+      "Read the total"
+    ]
+  },
+  {
+    "label": "Quotients",
+    "section": "Quotients",
+    "subgoals": [
+      "Subtract the orders",
+      "Interpret the sign",
+      "Name the pole"
+    ]
+  }
+]

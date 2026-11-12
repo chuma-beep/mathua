@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Multiplicity",
+    "section": "Multiplicity",
+    "subgoals": [
+      "Divide by the factor",
+      "Count the divisions",
+      "Read the multiplicity"
+    ]
+  },
+  {
+    "label": "Distinct roots",
+    "section": "Distinct roots",
+    "subgoals": [
+      "Count the distinct values",
+      "Subtract repetitions",
+      "Check the total"
+    ]
+  },
+  {
+    "label": "Degree count",
+    "section": "Degree count",
+    "subgoals": [
+      "Sum the multiplicities",
+      "Compare with the degree",
+      "Account for every factor"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Statement",
+    "section": "Statement",
+    "subgoals": [
+      "State the factorisation",
+      "Check the degree",
+      "Count the factors"
+    ]
+  },
+  {
+    "label": "Counting roots",
+    "section": "Counting roots",
+    "subgoals": [
+      "Count with multiplicity",
+      "Compare with the degree",
+      "Handle repetitions"
+    ]
+  },
+  {
+    "label": "Multiplicity",
+    "section": "Multiplicity",
+    "subgoals": [
+      "Read a repeated factor",
+      "Add the repetitions",
+      "Recover the degree"
+    ]
+  }
+]

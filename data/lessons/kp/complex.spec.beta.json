@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Write the gamma ratio",
+      "Cancel common factors",
+      "Read the value"
+    ]
+  },
+  {
+    "label": "Integer values",
+    "section": "Integer values",
+    "subgoals": [
+      "Build the factorial ratio",
+      "Reduce the fraction",
+      "Read the denominator"
+    ]
+  },
+  {
+    "label": "Symmetry",
+    "section": "Symmetry",
+    "subgoals": [
+      "Swap the arguments",
+      "Check the value",
+      "Use the integral"
+    ]
+  }
+]

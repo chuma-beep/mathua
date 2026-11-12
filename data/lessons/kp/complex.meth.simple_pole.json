@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Formula",
+    "section": "Formula",
+    "subgoals": [
+      "Evaluate the numerator",
+      "Evaluate the derivative",
+      "Form the quotient"
+    ]
+  },
+  {
+    "label": "Examples",
+    "section": "Examples",
+    "subgoals": [
+      "Compute a linear residue",
+      "Check the unit residue",
+      "Use the formula"
+    ]
+  },
+  {
+    "label": "Pole count",
+    "section": "Pole count",
+    "subgoals": [
+      "Factor the denominator",
+      "Count the factors",
+      "Match poles to residues"
+    ]
+  }
+]

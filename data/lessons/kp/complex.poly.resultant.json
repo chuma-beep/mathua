@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Form the root differences",
+      "Multiply them",
+      "Read the sign"
+    ]
+  },
+  {
+    "label": "Linear factors",
+    "section": "Linear factors",
+    "subgoals": [
+      "List both root sets",
+      "Multiply differences",
+      "Check the value"
+    ]
+  },
+  {
+    "label": "Common roots",
+    "section": "Common roots",
+    "subgoals": [
+      "Test for a shared root",
+      "Check the zero case",
+      "Decide the answer"
+    ]
+  }
+]

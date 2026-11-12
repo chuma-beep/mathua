@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The criterion",
+    "section": "The criterion",
+    "subgoals": [
+      "Factor the integer",
+      "Check the exponent of three mod four primes",
+      "Decide the case"
+    ]
+  },
+  {
+    "label": "Counting representations",
+    "section": "Counting representations",
+    "subgoals": [
+      "Count divisors in each class",
+      "Subtract the counts",
+      "Multiply by four"
+    ]
+  },
+  {
+    "label": "Small examples",
+    "section": "Small examples",
+    "subgoals": [
+      "Count the representations of a square",
+      "Find both decompositions",
+      "Check the sign count"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Factorials",
+    "section": "Factorials",
+    "subgoals": [
+      "Evaluate at an integer",
+      "Use the recursion",
+      "Compare with the factorial"
+    ]
+  },
+  {
+    "label": "Half-integers",
+    "section": "Half-integers",
+    "subgoals": [
+      "Use the half-integer formula",
+      "Compute the rational factor",
+      "Attach the square root"
+    ]
+  },
+  {
+    "label": "Duplication",
+    "section": "Duplication",
+    "subgoals": [
+      "Apply duplication",
+      "Cancel the gamma terms",
+      "Check the constant"
+    ]
+  }
+]

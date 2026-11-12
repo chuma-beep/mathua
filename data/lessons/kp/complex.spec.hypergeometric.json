@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Series",
+    "section": "Series",
+    "subgoals": [
+      "Read the parameters",
+      "Form the first terms",
+      "Check the ratio"
+    ]
+  },
+  {
+    "label": "Gauss value",
+    "section": "Gauss value",
+    "subgoals": [
+      "Apply the Gauss formula",
+      "Cancel the gammas",
+      "Read the value"
+    ]
+  },
+  {
+    "label": "Special cases",
+    "section": "Special cases",
+    "subgoals": [
+      "Reduce a parameter",
+      "Recognise the series",
+      "Check the sum"
+    ]
+  }
+]

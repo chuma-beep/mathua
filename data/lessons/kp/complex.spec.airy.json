@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Equation",
+    "section": "Equation",
+    "subgoals": [
+      "Read the order",
+      "Identify the coefficient",
+      "Name the solutions"
+    ]
+  },
+  {
+    "label": "Two solutions",
+    "section": "Two solutions",
+    "subgoals": [
+      "Count the basis",
+      "Form a combination",
+      "Check independence"
+    ]
+  },
+  {
+    "label": "Wronskian",
+    "section": "Wronskian",
+    "subgoals": [
+      "Compute the Wronskian",
+      "Check it is constant",
+      "Decide independence"
+    ]
+  }
+]

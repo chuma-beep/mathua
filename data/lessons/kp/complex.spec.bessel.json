@@ -1,0 +1,29 @@
+[
+  {
+    "label": "At zero",
+    "section": "At zero",
+    "subgoals": [
+      "Evaluate order zero",
+      "Evaluate a positive order",
+      "Check the vanishing"
+    ]
+  },
+  {
+    "label": "Parity",
+    "section": "Parity",
+    "subgoals": [
+      "Apply the sign rule",
+      "Relate the orders",
+      "Check an odd case"
+    ]
+  },
+  {
+    "label": "Series",
+    "section": "Series",
+    "subgoals": [
+      "Read the leading power",
+      "Compute the coefficient",
+      "Check the factorial"
+    ]
+  }
+]

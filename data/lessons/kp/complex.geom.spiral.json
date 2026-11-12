@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The multiplier",
+    "section": "The multiplier",
+    "subgoals": [
+      "Read the scale",
+      "Read the angle",
+      "Apply the map"
+    ]
+  },
+  {
+    "label": "Ratio and angle",
+    "section": "Ratio and angle",
+    "subgoals": [
+      "Form the quotient",
+      "Take the modulus",
+      "Take the argument"
+    ]
+  },
+  {
+    "label": "Composition",
+    "section": "Composition",
+    "subgoals": [
+      "Multiply the scales",
+      "Add the angles",
+      "Compose the maps"
+    ]
+  }
+]

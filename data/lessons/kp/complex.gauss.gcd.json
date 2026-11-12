@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Euclidean steps",
+    "section": "Euclidean steps",
+    "subgoals": [
+      "Run one Euclidean step",
+      "Track the norm",
+      "Identify the final remainder"
+    ]
+  },
+  {
+    "label": "Common divisors",
+    "section": "Common divisors",
+    "subgoals": [
+      "Test a common divisor",
+      "Use an integer combination",
+      "Compare the norms"
+    ]
+  },
+  {
+    "label": "Coprime pairs",
+    "section": "Coprime pairs",
+    "subgoals": [
+      "Test for a unit gcd",
+      "Check coprimality",
+      "Use conjugate coordinates"
+    ]
+  }
+]

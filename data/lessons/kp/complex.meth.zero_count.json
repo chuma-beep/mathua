@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Principle",
+    "section": "Principle",
+    "subgoals": [
+      "Count zeros",
+      "Count poles",
+      "Subtract and compare with the winding"
+    ]
+  },
+  {
+    "label": "Polynomials",
+    "section": "Polynomials",
+    "subgoals": [
+      "Use the degree",
+      "Check the contour",
+      "Read the count"
+    ]
+  },
+  {
+    "label": "Entire functions",
+    "section": "Entire functions",
+    "subgoals": [
+      "Test for zeros",
+      "Check the winding",
+      "Decide the count"
+    ]
+  }
+]

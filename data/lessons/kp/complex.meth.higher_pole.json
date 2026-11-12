@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Order",
+    "section": "Order",
+    "subgoals": [
+      "Factor the denominator",
+      "Count the vanishing",
+      "Read the order"
+    ]
+  },
+  {
+    "label": "Coefficient index",
+    "section": "Coefficient index",
+    "subgoals": [
+      "Expand in powers",
+      "Find exponent minus one",
+      "Read the coefficient"
+    ]
+  },
+  {
+    "label": "Simple case",
+    "section": "Simple case",
+    "subgoals": [
+      "Reduce to order one",
+      "Differentiate the numerator",
+      "Check the formula"
+    ]
+  }
+]

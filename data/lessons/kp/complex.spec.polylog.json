@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Write the series",
+      "Check the convergence",
+      "Identify the order"
+    ]
+  },
+  {
+    "label": "At one",
+    "section": "At one",
+    "subgoals": [
+      "Set z to one",
+      "Recognise the zeta series",
+      "Read the value"
+    ]
+  },
+  {
+    "label": "Dilogarithm",
+    "section": "Dilogarithm",
+    "subgoals": [
+      "Use the logarithm case",
+      "Evaluate at one",
+      "Read the constant"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Formula",
+    "section": "Formula",
+    "subgoals": [
+      "Square the linear coefficient",
+      "Subtract four times the product",
+      "Read the sign"
+    ]
+  },
+  {
+    "label": "Sign",
+    "section": "Sign",
+    "subgoals": [
+      "Test the sign",
+      "Name the root type",
+      "Count the roots"
+    ]
+  },
+  {
+    "label": "Double roots",
+    "section": "Double roots",
+    "subgoals": [
+      "Set the discriminant to zero",
+      "Compute the root",
+      "Check the multiplicity"
+    ]
+  }
+]

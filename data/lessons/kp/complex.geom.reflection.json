@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Real axis",
+    "section": "Real axis",
+    "subgoals": [
+      "Conjugate a point",
+      "Compare the parts",
+      "Locate the mirror"
+    ]
+  },
+  {
+    "label": "Imaginary axis",
+    "section": "Imaginary axis",
+    "subgoals": [
+      "Negate the conjugate",
+      "Read the coordinates",
+      "Check the axis"
+    ]
+  },
+  {
+    "label": "Two reflections",
+    "section": "Two reflections",
+    "subgoals": [
+      "Apply twice",
+      "Compose two reflections",
+      "Identify the rotation"
+    ]
+  }
+]

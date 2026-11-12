@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The formula",
+    "section": "The formula",
+    "subgoals": [
+      "Form the two differences",
+      "Take the imaginary part",
+      "Halve the result"
+    ]
+  },
+  {
+    "label": "Doubled area",
+    "section": "Doubled area",
+    "subgoals": [
+      "Compute the determinant",
+      "Keep it doubled",
+      "Read the area"
+    ]
+  },
+  {
+    "label": "Collinearity",
+    "section": "Collinearity",
+    "subgoals": [
+      "Set the area to zero",
+      "Test three points",
+      "Decide the case"
+    ]
+  }
+]

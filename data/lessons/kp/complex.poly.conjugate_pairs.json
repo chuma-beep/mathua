@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The pairing",
+    "section": "The pairing",
+    "subgoals": [
+      "Conjugate a root",
+      "Check the coefficients",
+      "Find the partner"
+    ]
+  },
+  {
+    "label": "Counting",
+    "section": "Counting",
+    "subgoals": [
+      "Count nonreal roots",
+      "Divide into pairs",
+      "Check parity"
+    ]
+  },
+  {
+    "label": "Odd degree",
+    "section": "Odd degree",
+    "subgoals": [
+      "Use the degree parity",
+      "Guarantee a real root",
+      "Check the count"
+    ]
+  }
+]

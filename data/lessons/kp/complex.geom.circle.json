@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Equation",
+    "section": "Equation",
+    "subgoals": [
+      "Write the squared equation",
+      "Expand the modulus",
+      "Read the radius"
+    ]
+  },
+  {
+    "label": "Centre and radius",
+    "section": "Centre and radius",
+    "subgoals": [
+      "Complete the square",
+      "Recover the centre",
+      "Recover the radius"
+    ]
+  },
+  {
+    "label": "Diameter form",
+    "section": "Diameter form",
+    "subgoals": [
+      "Average the endpoints",
+      "Compute the diameter",
+      "Halve the squared length"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Compute the norm from the parts",
+      "Check that the norm is nonnegative",
+      "Recognise a norm of one"
+    ]
+  },
+  {
+    "label": "Geometry",
+    "section": "Geometry",
+    "subgoals": [
+      "Read the norm as squared distance",
+      "List the four points of norm one",
+      "Relate conjugation to the norm"
+    ]
+  },
+  {
+    "label": "Arithmetic",
+    "section": "Arithmetic",
+    "subgoals": [
+      "Multiply two norms",
+      "Check multiplicativity",
+      "Apply the product rule to a square"
+    ]
+  }
+]

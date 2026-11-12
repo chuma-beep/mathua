@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Digamma",
+    "section": "Digamma",
+    "subgoals": [
+      "Differentiate the log gamma",
+      "Evaluate at one",
+      "Read the constant"
+    ]
+  },
+  {
+    "label": "Harmonic numbers",
+    "section": "Harmonic numbers",
+    "subgoals": [
+      "Take the difference",
+      "Build the harmonic sum",
+      "Check a small case"
+    ]
+  },
+  {
+    "label": "Poles",
+    "section": "Poles",
+    "subgoals": [
+      "Locate a pole",
+      "Read the order",
+      "Check the sign"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Squaring",
+    "section": "Squaring",
+    "subgoals": [
+      "Compute the real part",
+      "Compute the imaginary part",
+      "Check the norm"
+    ]
+  },
+  {
+    "label": "The triple",
+    "section": "The triple",
+    "subgoals": [
+      "Read the legs",
+      "Read the hypotenuse",
+      "Check the identity"
+    ]
+  },
+  {
+    "label": "Perimeter and hypotenuse",
+    "section": "Perimeter and hypotenuse",
+    "subgoals": [
+      "Sum the three sides",
+      "Use the norm",
+      "Compare with the square"
+    ]
+  }
+]

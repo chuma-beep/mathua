@@ -9598,5 +9598,205 @@
   {
     "concept_id": "nt.add.additive_energy",
     "source": "authored/nt.add.additive_energy.md"
+  },
+  {
+    "concept_id": "complex.gauss.norm",
+    "source": "authored/complex.gauss.norm.md"
+  },
+  {
+    "concept_id": "complex.gauss.units",
+    "source": "authored/complex.gauss.units.md"
+  },
+  {
+    "concept_id": "complex.gauss.division",
+    "source": "authored/complex.gauss.division.md"
+  },
+  {
+    "concept_id": "complex.gauss.gcd",
+    "source": "authored/complex.gauss.gcd.md"
+  },
+  {
+    "concept_id": "complex.gauss.primes",
+    "source": "authored/complex.gauss.primes.md"
+  },
+  {
+    "concept_id": "complex.gauss.two_squares",
+    "source": "authored/complex.gauss.two_squares.md"
+  },
+  {
+    "concept_id": "complex.gauss.associates",
+    "source": "authored/complex.gauss.associates.md"
+  },
+  {
+    "concept_id": "complex.gauss.pythagorean",
+    "source": "authored/complex.gauss.pythagorean.md"
+  },
+  {
+    "concept_id": "complex.gauss.theta",
+    "source": "authored/complex.gauss.theta.md"
+  },
+  {
+    "concept_id": "complex.gauss.eisenstein",
+    "source": "authored/complex.gauss.eisenstein.md"
+  },
+  {
+    "concept_id": "complex.geom.rotation",
+    "source": "authored/complex.geom.rotation.md"
+  },
+  {
+    "concept_id": "complex.geom.area",
+    "source": "authored/complex.geom.area.md"
+  },
+  {
+    "concept_id": "complex.geom.circle",
+    "source": "authored/complex.geom.circle.md"
+  },
+  {
+    "concept_id": "complex.geom.reflection",
+    "source": "authored/complex.geom.reflection.md"
+  },
+  {
+    "concept_id": "complex.geom.spiral",
+    "source": "authored/complex.geom.spiral.md"
+  },
+  {
+    "concept_id": "complex.geom.ptolemy",
+    "source": "authored/complex.geom.ptolemy.md"
+  },
+  {
+    "concept_id": "complex.geom.triangle",
+    "source": "authored/complex.geom.triangle.md"
+  },
+  {
+    "concept_id": "complex.geom.centroid",
+    "source": "authored/complex.geom.centroid.md"
+  },
+  {
+    "concept_id": "complex.geom.perpendicular",
+    "source": "authored/complex.geom.perpendicular.md"
+  },
+  {
+    "concept_id": "complex.geom.lattice",
+    "source": "authored/complex.geom.lattice.md"
+  },
+  {
+    "concept_id": "complex.poly.fta",
+    "source": "authored/complex.poly.fta.md"
+  },
+  {
+    "concept_id": "complex.poly.vieta_sum",
+    "source": "authored/complex.poly.vieta_sum.md"
+  },
+  {
+    "concept_id": "complex.poly.vieta_product",
+    "source": "authored/complex.poly.vieta_product.md"
+  },
+  {
+    "concept_id": "complex.poly.unity_sum",
+    "source": "authored/complex.poly.unity_sum.md"
+  },
+  {
+    "concept_id": "complex.poly.cyclotomic",
+    "source": "authored/complex.poly.cyclotomic.md"
+  },
+  {
+    "concept_id": "complex.poly.chebyshev",
+    "source": "authored/complex.poly.chebyshev.md"
+  },
+  {
+    "concept_id": "complex.poly.discriminant",
+    "source": "authored/complex.poly.discriminant.md"
+  },
+  {
+    "concept_id": "complex.poly.conjugate_pairs",
+    "source": "authored/complex.poly.conjugate_pairs.md"
+  },
+  {
+    "concept_id": "complex.poly.multiplicity",
+    "source": "authored/complex.poly.multiplicity.md"
+  },
+  {
+    "concept_id": "complex.poly.resultant",
+    "source": "authored/complex.poly.resultant.md"
+  },
+  {
+    "concept_id": "complex.meth.simple_pole",
+    "source": "authored/complex.meth.simple_pole.md"
+  },
+  {
+    "concept_id": "complex.meth.higher_pole",
+    "source": "authored/complex.meth.higher_pole.md"
+  },
+  {
+    "concept_id": "complex.meth.partial_fractions",
+    "source": "authored/complex.meth.partial_fractions.md"
+  },
+  {
+    "concept_id": "complex.meth.residue_sum",
+    "source": "authored/complex.meth.residue_sum.md"
+  },
+  {
+    "concept_id": "complex.meth.winding",
+    "source": "authored/complex.meth.winding.md"
+  },
+  {
+    "concept_id": "complex.meth.pole_count",
+    "source": "authored/complex.meth.pole_count.md"
+  },
+  {
+    "concept_id": "complex.meth.zero_count",
+    "source": "authored/complex.meth.zero_count.md"
+  },
+  {
+    "concept_id": "complex.meth.order",
+    "source": "authored/complex.meth.order.md"
+  },
+  {
+    "concept_id": "complex.meth.jordan",
+    "source": "authored/complex.meth.jordan.md"
+  },
+  {
+    "concept_id": "complex.meth.branch_cut",
+    "source": "authored/complex.meth.branch_cut.md"
+  },
+  {
+    "concept_id": "complex.spec.gamma_half",
+    "source": "authored/complex.spec.gamma_half.md"
+  },
+  {
+    "concept_id": "complex.spec.beta",
+    "source": "authored/complex.spec.beta.md"
+  },
+  {
+    "concept_id": "complex.spec.zeta_even",
+    "source": "authored/complex.spec.zeta_even.md"
+  },
+  {
+    "concept_id": "complex.spec.theta",
+    "source": "authored/complex.spec.theta.md"
+  },
+  {
+    "concept_id": "complex.spec.bessel",
+    "source": "authored/complex.spec.bessel.md"
+  },
+  {
+    "concept_id": "complex.spec.airy",
+    "source": "authored/complex.spec.airy.md"
+  },
+  {
+    "concept_id": "complex.spec.hypergeometric",
+    "source": "authored/complex.spec.hypergeometric.md"
+  },
+  {
+    "concept_id": "complex.spec.polygamma",
+    "source": "authored/complex.spec.polygamma.md"
+  },
+  {
+    "concept_id": "complex.spec.erf",
+    "source": "authored/complex.spec.erf.md"
+  },
+  {
+    "concept_id": "complex.spec.polylog",
+    "source": "authored/complex.spec.polylog.md"
   }
 ]

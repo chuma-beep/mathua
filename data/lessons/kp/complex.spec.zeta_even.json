@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Values",
+    "section": "Values",
+    "subgoals": [
+      "Read the value at two",
+      "Read the value at four",
+      "Identify the pattern"
+    ]
+  },
+  {
+    "label": "Denominators",
+    "section": "Denominators",
+    "subgoals": [
+      "Use the Bernoulli number",
+      "Form the denominator",
+      "Check the sign"
+    ]
+  },
+  {
+    "label": "Trivial zeros",
+    "section": "Trivial zeros",
+    "subgoals": [
+      "Test a negative even integer",
+      "Read the zero",
+      "Name the zero type"
+    ]
+  }
+]

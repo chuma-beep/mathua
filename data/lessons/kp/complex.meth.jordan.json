@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Degree gap",
+    "section": "Degree gap",
+    "subgoals": [
+      "Compare the degrees",
+      "Check the gap",
+      "Decide the limit"
+    ]
+  },
+  {
+    "label": "Semicircle",
+    "section": "Semicircle",
+    "subgoals": [
+      "Bound the arc",
+      "Let the radius grow",
+      "Read the limit"
+    ]
+  },
+  {
+    "label": "Half-plane poles",
+    "section": "Half-plane poles",
+    "subgoals": [
+      "Locate the poles",
+      "Select the half-plane",
+      "Sum the residues"
+    ]
+  }
+]

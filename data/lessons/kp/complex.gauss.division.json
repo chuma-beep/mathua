@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Rounding the quotient",
+    "section": "Rounding the quotient",
+    "subgoals": [
+      "Round a real quotient",
+      "Round both coordinates",
+      "Recover the quotient"
+    ]
+  },
+  {
+    "label": "The remainder bound",
+    "section": "The remainder bound",
+    "subgoals": [
+      "Square the remainder",
+      "Compare with half the divisor norm",
+      "Check the bound"
+    ]
+  },
+  {
+    "label": "Euclidean algorithm",
+    "section": "Euclidean algorithm",
+    "subgoals": [
+      "Take one Euclidean step",
+      "Check the norm decreases",
+      "Name the stopping case"
+    ]
+  }
+]

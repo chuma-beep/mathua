@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The ring",
+    "section": "The ring",
+    "subgoals": [
+      "Use the cube-root relation",
+      "Reduce a power of omega",
+      "Identify the lattice"
+    ]
+  },
+  {
+    "label": "The norm",
+    "section": "The norm",
+    "subgoals": [
+      "Compute the norm",
+      "Check positivity",
+      "Compare with the Gaussian norm"
+    ]
+  },
+  {
+    "label": "Units and primes",
+    "section": "Units and primes",
+    "subgoals": [
+      "Count the units",
+      "List them",
+      "State the Euclidean property"
+    ]
+  }
+]

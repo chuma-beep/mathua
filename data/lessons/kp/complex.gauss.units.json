@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The four units",
+    "section": "The four units",
+    "subgoals": [
+      "Count the units",
+      "Use the norm test",
+      "List the four elements"
+    ]
+  },
+  {
+    "label": "Multiplication by a unit",
+    "section": "Multiplication by a unit",
+    "subgoals": [
+      "Apply a quarter turn",
+      "Negate both parts",
+      "Track the imaginary part"
+    ]
+  },
+  {
+    "label": "Associates",
+    "section": "Associates",
+    "subgoals": [
+      "Identify an associate",
+      "Compare the norms",
+      "Choose a representative"
+    ]
+  }
+]

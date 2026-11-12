@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Dot product",
+    "section": "Dot product",
+    "subgoals": [
+      "Multiply the real parts",
+      "Multiply the imaginary parts",
+      "Add the products"
+    ]
+  },
+  {
+    "label": "Determinant",
+    "section": "Determinant",
+    "subgoals": [
+      "Cross multiply",
+      "Subtract",
+      "Read the area"
+    ]
+  },
+  {
+    "label": "Right angles",
+    "section": "Right angles",
+    "subgoals": [
+      "Test the dot product",
+      "Find a right angle",
+      "Count the right angles"
+    ]
+  }
+]

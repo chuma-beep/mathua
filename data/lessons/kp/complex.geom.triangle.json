@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The inequality",
+    "section": "The inequality",
+    "subgoals": [
+      "Add the moduli",
+      "Compare with the sum",
+      "Check the bound"
+    ]
+  },
+  {
+    "label": "Squared form",
+    "section": "Squared form",
+    "subgoals": [
+      "Expand the square",
+      "Identify the cross term",
+      "Bound it"
+    ]
+  },
+  {
+    "label": "Equality case",
+    "section": "Equality case",
+    "subgoals": [
+      "Test the direction",
+      "Check the ratio",
+      "Decide equality"
+    ]
+  }
+]

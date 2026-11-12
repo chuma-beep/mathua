@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Series",
+    "section": "Series",
+    "subgoals": [
+      "Write the first terms",
+      "Read an exponent",
+      "Identify a coefficient"
+    ]
+  },
+  {
+    "label": "Coefficients",
+    "section": "Coefficients",
+    "subgoals": [
+      "Count the solutions",
+      "Test a square",
+      "Handle zero"
+    ]
+  },
+  {
+    "label": "Modularity",
+    "section": "Modularity",
+    "subgoals": [
+      "Apply the transformation",
+      "Track the factor",
+      "Recognise the form"
+    ]
+  }
+]

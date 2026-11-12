@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Lattice points",
+    "section": "Lattice points",
+    "subgoals": [
+      "Count the cells",
+      "Count the points",
+      "Check the square"
+    ]
+  },
+  {
+    "label": "Distances",
+    "section": "Distances",
+    "subgoals": [
+      "Subtract the points",
+      "Take the norm",
+      "Read the distance"
+    ]
+  },
+  {
+    "label": "Areas",
+    "section": "Areas",
+    "subgoals": [
+      "Form the determinant",
+      "Take the absolute value",
+      "Read the area"
+    ]
+  }
+]

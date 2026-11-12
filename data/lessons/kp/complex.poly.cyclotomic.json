@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "List the primitive roots",
+      "Form the product",
+      "Check the degree"
+    ]
+  },
+  {
+    "label": "Degree",
+    "section": "Degree",
+    "subgoals": [
+      "Compute the totient",
+      "Count coprime residues",
+      "Read the degree"
+    ]
+  },
+  {
+    "label": "Prime case",
+    "section": "Prime case",
+    "subgoals": [
+      "Write the prime polynomial",
+      "Read the degree",
+      "Check the coefficients"
+    ]
+  }
+]

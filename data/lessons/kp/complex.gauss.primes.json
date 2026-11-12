@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The three cases",
+    "section": "The three cases",
+    "subgoals": [
+      "Name the split case",
+      "Name the inert case",
+      "Name the ramified case"
+    ]
+  },
+  {
+    "label": "Counting primes",
+    "section": "Counting primes",
+    "subgoals": [
+      "Count a residue class",
+      "List the primes",
+      "Check the bound"
+    ]
+  },
+  {
+    "label": "Norms of factors",
+    "section": "Norms of factors",
+    "subgoals": [
+      "Read a factor norm",
+      "Compare with the prime",
+      "Handle the factor of two"
+    ]
+  }
+]

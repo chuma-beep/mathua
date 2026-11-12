@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Branch points",
+    "section": "Branch points",
+    "subgoals": [
+      "Locate a branch point",
+      "Loop around it",
+      "Check the change"
+    ]
+  },
+  {
+    "label": "Cuts",
+    "section": "Cuts",
+    "subgoals": [
+      "Join the branch points",
+      "Remove the cut",
+      "Check simple connectivity"
+    ]
+  },
+  {
+    "label": "Principal branch",
+    "section": "Principal branch",
+    "subgoals": [
+      "Fix the argument range",
+      "Choose the branch",
+      "Evaluate the function"
+    ]
+  }
+]

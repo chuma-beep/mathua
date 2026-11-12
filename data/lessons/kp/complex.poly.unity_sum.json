@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The roots",
+    "section": "The roots",
+    "subgoals": [
+      "List the roots",
+      "Count them",
+      "Check the polygon"
+    ]
+  },
+  {
+    "label": "Power sums",
+    "section": "Power sums",
+    "subgoals": [
+      "Test divisibility",
+      "Sum the powers",
+      "Read the two cases"
+    ]
+  },
+  {
+    "label": "Geometric proof",
+    "section": "Geometric proof",
+    "subgoals": [
+      "Form the ratio",
+      "Apply the series formula",
+      "Identify the exception"
+    ]
+  }
+]

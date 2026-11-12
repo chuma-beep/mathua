@@ -5,8 +5,8 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 2400,
-  "unit_count": 154,
+  "concept_count": 2450,
+  "unit_count": 156,
   "units": [
     {
       "id": "abstract_algebra.b6",
@@ -1202,15 +1202,32 @@
       "depth_max": 11,
       "subdomains": [
         "complex_numbers.advanced",
-        "complex_numbers.basics"
+        "complex_numbers.basics",
+        "complex_numbers.geometry"
       ],
       "concept_ids": [
         "complex.adv.inequalities",
         "complex.basics.concept",
         "complex.basics.parts",
+        "complex.geom.lattice",
         "complex.ops.add_sub"
       ],
-      "concept_count": 4
+      "concept_count": 5
+    },
+    {
+      "id": "complex_numbers.b4",
+      "title": "Complex Numbers · Stage 5",
+      "domain": "complex_numbers",
+      "band": 4,
+      "depth_min": 12,
+      "depth_max": 12,
+      "subdomains": [
+        "complex_numbers.geometry"
+      ],
+      "concept_ids": [
+        "complex.geom.centroid"
+      ],
+      "concept_count": 1
     },
     {
       "id": "complex_numbers.b6",
@@ -1236,7 +1253,9 @@
       "depth_max": 23,
       "subdomains": [
         "complex_numbers.advanced",
-        "complex_numbers.basics"
+        "complex_numbers.basics",
+        "complex_numbers.gaussian",
+        "complex_numbers.geometry"
       ],
       "concept_ids": [
         "complex.adv.polar",
@@ -1245,12 +1264,21 @@
         "complex.basics.loci",
         "complex.basics.powers",
         "complex.basics.reciprocal",
+        "complex.gauss.division",
+        "complex.gauss.eisenstein",
+        "complex.gauss.norm",
+        "complex.gauss.pythagorean",
+        "complex.gauss.units",
+        "complex.geom.perpendicular",
+        "complex.geom.reflection",
+        "complex.geom.rotation",
+        "complex.geom.triangle",
         "complex.ops.argument",
         "complex.ops.conjugate",
         "complex.ops.divide",
         "complex.ops.modulus"
       ],
-      "concept_count": 10
+      "concept_count": 19
     },
     {
       "id": "complex_numbers.b8",
@@ -1261,7 +1289,11 @@
       "depth_max": 26,
       "subdomains": [
         "complex_numbers.advanced",
-        "complex_numbers.basics"
+        "complex_numbers.basics",
+        "complex_numbers.gaussian",
+        "complex_numbers.geometry",
+        "complex_numbers.polynomials",
+        "complex_numbers.special"
       ],
       "concept_ids": [
         "complex.adv.branches",
@@ -1277,9 +1309,49 @@
         "complex.adv.roots_unity",
         "complex.adv.trig_exponential",
         "complex.adv.trig_zeros",
-        "complex.basics.arg_arithmetic"
+        "complex.basics.arg_arithmetic",
+        "complex.gauss.associates",
+        "complex.gauss.gcd",
+        "complex.gauss.primes",
+        "complex.gauss.two_squares",
+        "complex.geom.area",
+        "complex.geom.circle",
+        "complex.geom.ptolemy",
+        "complex.geom.spiral",
+        "complex.poly.chebyshev",
+        "complex.poly.conjugate_pairs",
+        "complex.poly.fta",
+        "complex.spec.bessel",
+        "complex.spec.erf"
       ],
-      "concept_count": 14
+      "concept_count": 27
+    },
+    {
+      "id": "complex_numbers.b9",
+      "title": "Complex Numbers · Stage 10",
+      "domain": "complex_numbers",
+      "band": 9,
+      "depth_min": 27,
+      "depth_max": 28,
+      "subdomains": [
+        "complex_numbers.gaussian",
+        "complex_numbers.methods",
+        "complex_numbers.polynomials",
+        "complex_numbers.special"
+      ],
+      "concept_ids": [
+        "complex.gauss.theta",
+        "complex.meth.branch_cut",
+        "complex.poly.cyclotomic",
+        "complex.poly.discriminant",
+        "complex.poly.multiplicity",
+        "complex.poly.resultant",
+        "complex.poly.unity_sum",
+        "complex.poly.vieta_product",
+        "complex.poly.vieta_sum",
+        "complex.spec.airy"
+      ],
+      "concept_count": 10
     },
     {
       "id": "complex_numbers.b10",
@@ -1308,6 +1380,7 @@
       "subdomains": [
         "complex_numbers.advanced",
         "complex_numbers.integral",
+        "complex_numbers.methods",
         "complex_numbers.topology"
       ],
       "concept_ids": [
@@ -1329,11 +1402,16 @@
         "complex.adv.weierstrass_factorization",
         "complex.integral.cauchy_formula",
         "complex.integral.cauchy_goursat",
+        "complex.meth.higher_pole",
+        "complex.meth.order",
+        "complex.meth.pole_count",
+        "complex.meth.simple_pole",
+        "complex.meth.zero_count",
         "complex.series.laurent",
         "complex.series.power",
         "complex.topology.domain"
       ],
-      "concept_count": 21
+      "concept_count": 26
     },
     {
       "id": "complex_numbers.b12",
@@ -1345,6 +1423,8 @@
       "subdomains": [
         "complex_numbers.advanced",
         "complex_numbers.integral",
+        "complex_numbers.methods",
+        "complex_numbers.special",
         "complex_numbers.topology"
       ],
       "concept_ids": [
@@ -1366,9 +1446,20 @@
         "complex.adv.winding",
         "complex.integral.contour",
         "complex.integral.real_integrals",
+        "complex.meth.jordan",
+        "complex.meth.partial_fractions",
+        "complex.meth.residue_sum",
+        "complex.meth.winding",
+        "complex.spec.beta",
+        "complex.spec.gamma_half",
+        "complex.spec.hypergeometric",
+        "complex.spec.polygamma",
+        "complex.spec.polylog",
+        "complex.spec.theta",
+        "complex.spec.zeta_even",
         "complex.topology.riemann_sphere"
       ],
-      "concept_count": 19
+      "concept_count": 30
     },
     {
       "id": "differential_equations.b11",

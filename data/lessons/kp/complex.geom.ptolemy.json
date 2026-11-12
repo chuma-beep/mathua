@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The inequality",
+    "section": "The inequality",
+    "subgoals": [
+      "Multiply opposite distances",
+      "Multiply adjacent pairs",
+      "Compare the sides"
+    ]
+  },
+  {
+    "label": "Rectangle case",
+    "section": "Rectangle case",
+    "subgoals": [
+      "Use the diagonal",
+      "Use the sides",
+      "Check equality"
+    ]
+  },
+  {
+    "label": "Equality",
+    "section": "Equality",
+    "subgoals": [
+      "Test concyclicity",
+      "Check the order",
+      "Decide the case"
+    ]
+  }
+]

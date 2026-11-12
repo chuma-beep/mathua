@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Quarter turns",
+    "section": "Quarter turns",
+    "subgoals": [
+      "Apply one quarter turn",
+      "Swap the coordinates",
+      "Track the sign"
+    ]
+  },
+  {
+    "label": "Coordinates",
+    "section": "Coordinates",
+    "subgoals": [
+      "List the four positions",
+      "Check the square",
+      "Read a coordinate"
+    ]
+  },
+  {
+    "label": "Cycles",
+    "section": "Cycles",
+    "subgoals": [
+      "Count the applications",
+      "Find the period",
+      "Return to the start"
+    ]
+  }
+]

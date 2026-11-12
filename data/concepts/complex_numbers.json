@@ -345,7 +345,7 @@
   },
   {
     "id": "complex.adv.mobius",
-    "label": "Möbius transformations",
+    "label": "M\u00f6bius transformations",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.topology",
     "grading_type": "numeric",
@@ -909,7 +909,7 @@
   },
   {
     "id": "complex.adv.rouche",
-    "label": "Rouché's theorem",
+    "label": "Rouch\u00e9's theorem",
     "domain": "complex_numbers",
     "subdomain": "complex_numbers.advanced",
     "grading_type": "numeric",
@@ -1115,5 +1115,955 @@
       "streak": 10,
       "avg_time_seconds": 26.0
     }
+  },
+  {
+    "id": "complex.gauss.norm",
+    "label": "Norm in the Gaussian integers",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.gaussian",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.ops.conjugate"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.ops.conjugate"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.gauss.units",
+    "label": "Units of the Gaussian integers",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.gaussian",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.gauss.norm"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.gauss.norm"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.gauss.division",
+    "label": "Division in the Gaussian integers",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.gaussian",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.gauss.norm"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.gauss.norm"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.gauss.gcd",
+    "label": "The Gaussian gcd",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.gaussian",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.gauss.division"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.gauss.division"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.gauss.primes",
+    "label": "Gaussian primes",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.gaussian",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.gauss.gcd"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.gauss.gcd"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.gauss.two_squares",
+    "label": "The two-squares theorem",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.gaussian",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.gauss.primes"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.gauss.primes"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.gauss.associates",
+    "label": "Associates and factorisation",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.gaussian",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.gauss.units"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.gauss.units"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.gauss.pythagorean",
+    "label": "Pythagorean triples from squares",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.gaussian",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.gauss.norm"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.gauss.norm"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.gauss.theta",
+    "label": "Theta series of the square lattice",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.gaussian",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.gauss.two_squares"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.gauss.two_squares"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.gauss.eisenstein",
+    "label": "Eisenstein integers",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.gaussian",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.gauss.norm"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.gauss.norm"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.geom.rotation",
+    "label": "Rotation by multiplication",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.geometry",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.ops.mult"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.ops.mult"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.geom.area",
+    "label": "Area from complex coordinates",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.geometry",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.basics.geometry"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.basics.geometry"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.geom.circle",
+    "label": "Circles in the complex plane",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.geometry",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.basics.loci"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.basics.loci"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.geom.reflection",
+    "label": "Reflection in the axes",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.geometry",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.ops.conjugate"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.ops.conjugate"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.geom.spiral",
+    "label": "Spiral similarities",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.geometry",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.polar"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.adv.polar"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.geom.ptolemy",
+    "label": "Ptolemy's inequality",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.geometry",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.basics.geometry"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.basics.geometry"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.geom.triangle",
+    "label": "The triangle inequality for moduli",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.geometry",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.ops.modulus"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.ops.modulus"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.geom.centroid",
+    "label": "Centroids and averages",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.geometry",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.ops.add_sub"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.ops.add_sub"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.geom.perpendicular",
+    "label": "Perpendicularity conditions",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.geometry",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.ops.divide"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.ops.divide"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.geom.lattice",
+    "label": "The Gaussian lattice",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.geometry",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.basics.concept"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.basics.concept"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.poly.fta",
+    "label": "The fundamental theorem for complex polynomials",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.polynomials",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.roots"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.adv.roots"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.poly.vieta_sum",
+    "label": "Sums of roots",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.polynomials",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.poly.fta"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.poly.fta"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.poly.vieta_product",
+    "label": "Products of roots",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.polynomials",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.poly.fta"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.poly.fta"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.poly.unity_sum",
+    "label": "Sums of roots of unity",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.polynomials",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.roots_unity"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.adv.roots_unity"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.poly.cyclotomic",
+    "label": "Polynomials for primitive roots",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.polynomials",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.roots_unity"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.adv.roots_unity"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.poly.chebyshev",
+    "label": "Chebyshev polynomials",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.polynomials",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.trig_exponential"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.adv.trig_exponential"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.poly.discriminant",
+    "label": "The discriminant",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.polynomials",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.poly.vieta_sum"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.poly.vieta_sum"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.poly.conjugate_pairs",
+    "label": "Conjugate pairs",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.polynomials",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.conjugate_roots"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.adv.conjugate_roots"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.poly.multiplicity",
+    "label": "Roots and multiplicity",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.polynomials",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.poly.fta"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.poly.fta"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.poly.resultant",
+    "label": "Resultants of split polynomials",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.polynomials",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.poly.vieta_product"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.poly.vieta_product"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.meth.simple_pole",
+    "label": "Residues from the derivative formula",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.methods",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.residue_simple"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.adv.residue_simple"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.meth.higher_pole",
+    "label": "Poles of higher order",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.methods",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.residue"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.adv.residue"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.meth.partial_fractions",
+    "label": "Partial fractions",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.methods",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.meth.simple_pole"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.meth.simple_pole"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.meth.residue_sum",
+    "label": "The sum of residues",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.methods",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.meth.simple_pole"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.meth.simple_pole"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.meth.winding",
+    "label": "Winding numbers",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.methods",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.winding"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.adv.winding"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.meth.pole_count",
+    "label": "Counting poles",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.methods",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.argument_principle"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.adv.argument_principle"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.meth.zero_count",
+    "label": "Counting zeros",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.methods",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.argument_principle"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.adv.argument_principle"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.meth.order",
+    "label": "Orders of zeros and poles",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.methods",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.argument_principle"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.adv.argument_principle"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.meth.jordan",
+    "label": "Jordan's lemma",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.methods",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.integral.real_integrals"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.integral.real_integrals"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.meth.branch_cut",
+    "label": "Branch cuts",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.methods",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.branches"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.adv.branches"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.spec.gamma_half",
+    "label": "The gamma function at half-integers",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.special",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.gamma"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.adv.gamma"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.spec.beta",
+    "label": "Euler integrals of the first kind",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.special",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.spec.gamma_half"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.spec.gamma_half"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.spec.zeta_even",
+    "label": "Zeta at even integers",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.special",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.analytic_continuation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.adv.analytic_continuation"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.spec.theta",
+    "label": "The theta function",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.special",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.spec.zeta_even"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.spec.zeta_even"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.spec.bessel",
+    "label": "Bessel functions of complex order",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.special",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.hyperbolic"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.adv.hyperbolic"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.spec.airy",
+    "label": "Airy functions",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.special",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.spec.bessel"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.spec.bessel"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.spec.hypergeometric",
+    "label": "The hypergeometric function",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.special",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.spec.gamma_half"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.spec.gamma_half"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.spec.polygamma",
+    "label": "The polygamma function",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.special",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.spec.gamma_half"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.spec.gamma_half"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.spec.erf",
+    "label": "The error function",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.special",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.adv.exponential"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.adv.exponential"
+    ],
+    "variants": []
+  },
+  {
+    "id": "complex.spec.polylog",
+    "label": "Polylogarithms",
+    "domain": "complex_numbers",
+    "subdomain": "complex_numbers.special",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "complex.spec.zeta_even"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    },
+    "encompasses": [],
+    "key_prerequisites": [
+      "complex.spec.zeta_even"
+    ],
+    "variants": []
   }
 ]

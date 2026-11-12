@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The series",
+    "section": "The series",
+    "subgoals": [
+      "Count the terms with small indices",
+      "Read an exponent",
+      "Identify the coefficient"
+    ]
+  },
+  {
+    "label": "Coefficients",
+    "section": "Coefficients",
+    "subgoals": [
+      "Count signed points",
+      "Use the circle",
+      "Compare with r2"
+    ]
+  },
+  {
+    "label": "Modularity",
+    "section": "Modularity",
+    "subgoals": [
+      "State the transformation",
+      "Track the factor",
+      "Recognise a modular form"
+    ]
+  }
+]

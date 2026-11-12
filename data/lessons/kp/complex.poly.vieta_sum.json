@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Quadratic case",
+    "section": "Quadratic case",
+    "subgoals": [
+      "Identify the coefficients",
+      "Negate the linear coefficient",
+      "Divide by the leading term"
+    ]
+  },
+  {
+    "label": "General case",
+    "section": "General case",
+    "subgoals": [
+      "Read the next-to-leading coefficient",
+      "Apply the sign",
+      "Check the degree"
+    ]
+  },
+  {
+    "label": "Roots of unity",
+    "section": "Roots of unity",
+    "subgoals": [
+      "Sum the roots",
+      "Use the missing term",
+      "Check the case n=2"
+    ]
+  }
+]
