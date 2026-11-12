@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Alternating the zeta series",
+    "section": "Alternating the zeta series",
+    "subgoals": [
+      "Write the alternating zeta series",
+      "Sum a partial series",
+      "State the limit at one"
+    ]
+  },
+  {
+    "label": "Relation to the zeta function",
+    "section": "Relation to the zeta function",
+    "subgoals": [
+      "Derive the factor relating eta and zeta",
+      "Evaluate the factor at a given s",
+      "Check against a partial sum"
+    ]
+  },
+  {
+    "label": "Values at even integers",
+    "section": "Values at even integers",
+    "subgoals": [
+      "Use the relation at an even integer",
+      "Compute the exact closed form",
+      "Compare eta with zeta as s grows"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Parentheses in a series",
+    "section": "Parentheses in a series",
+    "subgoals": [
+      "Describe parentheses as a subsequence of partial sums",
+      "Write a grouped series",
+      "Compute its partial sums"
+    ]
+  },
+  {
+    "label": "Grouping a convergent series",
+    "section": "Grouping a convergent series",
+    "subgoals": [
+      "Group a convergent series in pairs",
+      "Total the first few groups",
+      "Compare with the known limit"
+    ]
+  },
+  {
+    "label": "Grouping a divergent series",
+    "section": "Grouping a divergent series",
+    "subgoals": [
+      "Group a divergent series",
+      "Show the original partial sums fail",
+      "State the direction in which grouping is safe"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The standard form",
+    "section": "The standard form",
+    "subgoals": [
+      "Write the standard form",
+      "Identify a, d and r",
+      "Sum the first few terms"
+    ]
+  },
+  {
+    "label": "The summation formula",
+    "section": "The summation formula",
+    "subgoals": [
+      "State the summation formula",
+      "Evaluate its two parts",
+      "Compare with a partial sum"
+    ]
+  },
+  {
+    "label": "A worked total",
+    "section": "A worked total",
+    "subgoals": [
+      "Recognise a weighted series",
+      "Apply the formula at one half",
+      "Check against partial sums"
+    ]
+  }
+]

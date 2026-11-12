@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Lifting a slice",
+    "section": "Lifting a slice",
+    "subgoals": [
+      "Compute the weight of a slice",
+      "Multiply by the lift distance",
+      "Check the result in joules"
+    ]
+  },
+  {
+    "label": "The work integral",
+    "section": "The work integral",
+    "subgoals": [
+      "Write the work integral",
+      "Integrate over the water depth",
+      "Check units and sign"
+    ]
+  },
+  {
+    "label": "A cylindrical tank",
+    "section": "A cylindrical tank",
+    "subgoals": [
+      "Set up a cylindrical tank",
+      "Integrate the lift over the height",
+      "Compare a half-full tank with a full one"
+    ]
+  }
+]

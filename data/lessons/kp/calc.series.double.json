@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Sums over a grid",
+    "section": "Sums over a grid",
+    "subgoals": [
+      "Write a double sum over the grid",
+      "Total a finite block",
+      "Take the limit of the block totals"
+    ]
+  },
+  {
+    "label": "Absolute convergence",
+    "section": "Absolute convergence",
+    "subgoals": [
+      "Define absolute convergence for a grid",
+      "Split into even and odd parts",
+      "Show the order does not matter"
+    ]
+  },
+  {
+    "label": "Separating the factors",
+    "section": "Separating the factors",
+    "subgoals": [
+      "Factor a product summand",
+      "Multiply the two series values",
+      "Check against a finite block"
+    ]
+  }
+]

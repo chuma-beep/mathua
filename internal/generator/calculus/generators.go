@@ -191,6 +191,7 @@ func Register(reg *generator.Registry) {
 	registerWave9(reg)
 	registerWave9Remaining(reg)
 	registerWave21(reg)
+	registerWave22(reg)
 }
 
 type limitConceptGen struct{}

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The defining series",
+    "section": "The defining series",
+    "subgoals": [
+      "Write the zeta series",
+      "Sum the first few terms",
+      "Compare the partial sum with the limit"
+    ]
+  },
+  {
+    "label": "Convergence for s greater than one",
+    "section": "Convergence for s greater than one",
+    "subgoals": [
+      "Apply the integral test to the p-series",
+      "Bound the tail by an integral",
+      "Identify the case that fails"
+    ]
+  },
+  {
+    "label": "Special values",
+    "section": "Special values",
+    "subgoals": [
+      "Quote the even special values",
+      "Evaluate a value numerically",
+      "Explain the case at one"
+    ]
+  }
+]

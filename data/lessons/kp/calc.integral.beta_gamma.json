@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The beta integral",
+    "section": "The beta integral",
+    "subgoals": [
+      "Write the beta integral",
+      "Expand the polynomial integrand",
+      "Integrate term by term"
+    ]
+  },
+  {
+    "label": "The gamma relation",
+    "section": "The gamma relation",
+    "subgoals": [
+      "State the beta-gamma relation",
+      "Evaluate the gamma factors",
+      "Compare with the direct integral"
+    ]
+  },
+  {
+    "label": "A worked value",
+    "section": "A worked value",
+    "subgoals": [
+      "Apply the relation at one half and one half",
+      "Use the value of gamma at one half",
+      "Check the improper integral"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Density on a disk",
+    "section": "Density on a disk",
+    "subgoals": [
+      "Describe a thin ring",
+      "Write the area of the ring",
+      "Express the ring mass"
+    ]
+  },
+  {
+    "label": "The radial integral",
+    "section": "The radial integral",
+    "subgoals": [
+      "Write the radial mass integral",
+      "Integrate a linear density",
+      "Evaluate the total"
+    ]
+  },
+  {
+    "label": "A constant density",
+    "section": "A constant density",
+    "subgoals": [
+      "Set a constant density",
+      "Integrate to get the area formula",
+      "Compare with density times area"
+    ]
+  }
+]

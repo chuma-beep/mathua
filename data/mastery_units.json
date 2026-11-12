@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 2872,
+  "concept_count": 2895,
   "unit_count": 163,
   "units": [
     {
@@ -956,14 +956,20 @@
       "depth_min": 30,
       "depth_max": 32,
       "subdomains": [
+        "calculus.sequences",
         "calculus.series"
       ],
       "concept_ids": [
+        "calc.seq.limit",
+        "calc.seq.subsequence",
         "calc.series.abel",
+        "calc.series.abel_summation",
         "calc.series.abel_theorem",
         "calc.series.absolute",
         "calc.series.alternating",
+        "calc.series.arithmetico_geometric",
         "calc.series.asymptotic",
+        "calc.series.bernoulli",
         "calc.series.binomial",
         "calc.series.borel",
         "calc.series.cauchy_condensation",
@@ -972,10 +978,13 @@
         "calc.series.direct_compare",
         "calc.series.dirichlet_series",
         "calc.series.dirichlet_test",
+        "calc.series.double",
         "calc.series.euler_transform",
         "calc.series.fourier",
         "calc.series.function_series",
+        "calc.series.generating",
         "calc.series.geometric",
+        "calc.series.grouping",
         "calc.series.harmonic",
         "calc.series.integral_test",
         "calc.series.kummer",
@@ -990,6 +999,7 @@
         "calc.series.power",
         "calc.series.power_differentiation",
         "calc.series.power_integration",
+        "calc.series.power_uniqueness",
         "calc.series.raabe",
         "calc.series.radius",
         "calc.series.ratio_test",
@@ -1002,7 +1012,7 @@
         "calc.series.termwise",
         "calc.series.uniform_convergence"
       ],
-      "concept_count": 42
+      "concept_count": 51
     },
     {
       "id": "calc2.b11",
@@ -1012,20 +1022,23 @@
       "depth_min": 33,
       "depth_max": 35,
       "subdomains": [
+        "calculus.advanced",
         "calculus.integrals",
         "calculus.series"
       ],
       "concept_ids": [
         "calc.integral.exp_integral",
         "calc.integral.fourier_coefficients",
+        "calc.integral.stieltjes",
         "calc.integral.substitution",
         "calc.integral.trig_integrals",
         "calc.integral.wallis",
         "calc.series.bertrand",
         "calc.series.estimate",
-        "calc.series.gauss"
+        "calc.series.gauss",
+        "calc.series.stirling"
       ],
-      "concept_count": 8
+      "concept_count": 10
     },
     {
       "id": "calc2.b12",
@@ -1043,18 +1056,22 @@
         "calc.integral.arc_length",
         "calc.integral.area_between",
         "calc.integral.beta",
+        "calc.integral.beta_gamma",
         "calc.integral.center_mass",
         "calc.integral.centroid_curve",
         "calc.integral.consumer_surplus",
         "calc.integral.convergence",
+        "calc.integral.cross_sections",
         "calc.integral.disc",
         "calc.integral.elliptic",
         "calc.integral.fresnel",
+        "calc.integral.holder",
         "calc.integral.hydrostatic",
         "calc.integral.improper",
         "calc.integral.improper_compare",
         "calc.integral.inverse_trig",
         "calc.integral.irrational",
+        "calc.integral.jensen",
         "calc.integral.log",
         "calc.integral.moment_inertia",
         "calc.integral.monte_carlo",
@@ -1064,9 +1081,13 @@
         "calc.integral.numerical_error",
         "calc.integral.p_test",
         "calc.integral.pappus",
+        "calc.integral.parametric_area",
+        "calc.integral.parametric_length",
         "calc.integral.partial_fractions",
         "calc.integral.parts",
         "calc.integral.probability",
+        "calc.integral.pumping",
+        "calc.integral.radial_mass",
         "calc.integral.rationalizing",
         "calc.integral.reduction",
         "calc.integral.romberg",
@@ -1076,15 +1097,18 @@
         "calc.integral.surface_area",
         "calc.integral.trapezoid",
         "calc.integral.trig_substitution",
+        "calc.integral.unbounded",
         "calc.integral.variable_limits",
         "calc.integral.volume",
         "calc.integral.washer",
         "calc.integral.weierstrass_sub",
         "calc.integral.work",
+        "calc.series.eta",
         "calc.series.euler_maclaurin",
-        "calc.series.gamma"
+        "calc.series.gamma",
+        "calc.series.riemann_zeta"
       ],
-      "concept_count": 43
+      "concept_count": 54
     },
     {
       "id": "calc2.b13",
@@ -1097,9 +1121,10 @@
         "calculus.integrals"
       ],
       "concept_ids": [
-        "calc.integral.gauss_legendre"
+        "calc.integral.gauss_legendre",
+        "calc.integral.simpson_38"
       ],
-      "concept_count": 1
+      "concept_count": 2
     },
     {
       "id": "calc3.b9",

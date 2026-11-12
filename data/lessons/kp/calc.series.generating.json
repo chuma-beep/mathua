@@ -1,0 +1,29 @@
+[
+  {
+    "label": "From sequence to series",
+    "section": "From sequence to series",
+    "subgoals": [
+      "Define the ordinary generating function",
+      "Write the series for a given sequence",
+      "Identify its closed form"
+    ]
+  },
+  {
+    "label": "Extracting a coefficient",
+    "section": "Extracting a coefficient",
+    "subgoals": [
+      "Differentiate to extract a coefficient",
+      "Divide by n factorial",
+      "Check a term of a known series"
+    ]
+  },
+  {
+    "label": "The geometric generating function",
+    "section": "The geometric generating function",
+    "subgoals": [
+      "State the geometric series",
+      "Differentiate it to get a weighted series",
+      "Evaluate both at one half"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The epsilon definition",
+    "section": "The epsilon definition",
+    "subgoals": [
+      "State the epsilon condition for convergence",
+      "Choose an index for a stated tolerance",
+      "Check the index against a numeric term"
+    ]
+  },
+  {
+    "label": "Limit laws",
+    "section": "Limit laws",
+    "subgoals": [
+      "Name the three limit laws",
+      "Combine two known limits",
+      "Check the denominator condition"
+    ]
+  },
+  {
+    "label": "A rational limit",
+    "section": "A rational limit",
+    "subgoals": [
+      "Identify the highest power of n",
+      "Divide through and take the limit",
+      "Compare with a large finite index"
+    ]
+  }
+]

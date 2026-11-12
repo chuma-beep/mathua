@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The inequality",
+    "section": "The inequality",
+    "subgoals": [
+      "State Holder's inequality",
+      "Identify the two factors",
+      "Describe the equality case"
+    ]
+  },
+  {
+    "label": "Conjugate exponents",
+    "section": "Conjugate exponents",
+    "subgoals": [
+      "Check that exponents are conjugate",
+      "List a second conjugate pair",
+      "Name the case p equals q equals two"
+    ]
+  },
+  {
+    "label": "A worked pair",
+    "section": "A worked pair",
+    "subgoals": [
+      "Choose a function pair",
+      "Evaluate both sides",
+      "Compare the bound with the value"
+    ]
+  }
+]

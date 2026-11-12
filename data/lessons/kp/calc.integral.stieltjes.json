@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Riemann-Stieltjes sums",
+    "section": "Riemann-Stieltjes sums",
+    "subgoals": [
+      "Write a Riemann-Stieltjes sum",
+      "Reduce it to a Riemann sum",
+      "Describe the effect of scaling alpha"
+    ]
+  },
+  {
+    "label": "Step integrators",
+    "section": "Step integrators",
+    "subgoals": [
+      "Model a step integrator",
+      "Multiply each function value by its jump",
+      "Add the contributions"
+    ]
+  },
+  {
+    "label": "Summing the jumps",
+    "section": "Summing the jumps",
+    "subgoals": [
+      "Use a floor function as integrator",
+      "List the interior jumps",
+      "Add the weighted jumps"
+    ]
+  }
+]

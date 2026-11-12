@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The speed of a parametrisation",
+    "section": "The speed of a parametrisation",
+    "subgoals": [
+      "Differentiate both coordinate functions",
+      "Form the speed",
+      "Evaluate the speed at a point"
+    ]
+  },
+  {
+    "label": "The length integral",
+    "section": "The length integral",
+    "subgoals": [
+      "Write the length integral",
+      "Compute it for a circle",
+      "Compare with the circumference"
+    ]
+  },
+  {
+    "label": "A straight segment",
+    "section": "A straight segment",
+    "subgoals": [
+      "Parametrise a straight segment",
+      "Integrate the constant speed",
+      "Compare with the endpoint distance"
+    ]
+  }
+]

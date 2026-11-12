@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Convexity and averages",
+    "section": "Convexity and averages",
+    "subgoals": [
+      "State convexity through a chord",
+      "Test a quadratic at its midpoint",
+      "Compare the two sides"
+    ]
+  },
+  {
+    "label": "The integral form",
+    "section": "The integral form",
+    "subgoals": [
+      "Write the integral form",
+      "Compute the mean of the variable",
+      "Compare the function of the mean with the mean of the function"
+    ]
+  },
+  {
+    "label": "The gap for a square",
+    "section": "The gap for a square",
+    "subgoals": [
+      "Read the gap as a variance",
+      "Compute it for a uniform interval",
+      "Say when the gap vanishes"
+    ]
+  }
+]

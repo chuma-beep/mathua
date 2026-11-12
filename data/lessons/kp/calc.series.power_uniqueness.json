@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Equal series and equal coefficients",
+    "section": "Equal series and equal coefficients",
+    "subgoals": [
+      "State the uniqueness statement",
+      "Read coefficients off a known series",
+      "Explain why the interval matters"
+    ]
+  },
+  {
+    "label": "Differentiating at the centre",
+    "section": "Differentiating at the centre",
+    "subgoals": [
+      "Differentiate n times at the centre",
+      "Divide by n factorial",
+      "Match a term of a known expansion"
+    ]
+  },
+  {
+    "label": "Consequences",
+    "section": "Consequences",
+    "subgoals": [
+      "Apply uniqueness to an identity",
+      "Extract one coefficient",
+      "Use it to solve a recurrence"
+    ]
+  }
+]

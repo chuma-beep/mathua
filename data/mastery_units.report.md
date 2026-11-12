@@ -12,16 +12,16 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 2872 |
+| Total concepts | 2895 |
 | Total units | 163 |
 | Minimum unit size | 1 |
 | Median unit size | 13 |
 | Maximum unit size | 82 |
-| Singleton units | 23 |
+| Singleton units | 22 |
 | Units with <= 3 concepts | 37 |
 | Units with > 25 concepts | 48 |
-| Units with > 50 concepts | 7 |
-| Cross-unit prerequisite edges (derived) | 540 |
+| Units with > 50 concepts | 9 |
+| Cross-unit prerequisite edges (derived) | 541 |
 | Backward band edges | 0 |
 
 If the learner is assessed once per unit, then 163 assessments cover the corpus, and the
@@ -55,10 +55,10 @@ exists to make concrete.
 | `calc1.b11` | calc1 | 11 | 32 | 4 | 33–35 |
 | `calc1.b12` | calc1 | 12 | 27 | 3 | 36–38 |
 | `calc2.b9` | calc2 | 9 | 3 | 2 | 29–29 |
-| `calc2.b10` | calc2 | 10 | 42 | 1 | 30–32 |
-| `calc2.b11` | calc2 | 11 | 8 | 2 | 33–35 |
-| `calc2.b12` | calc2 | 12 | 43 | 3 | 36–38 |
-| `calc2.b13` | calc2 | 13 | 1 | 1 | 39–39 |
+| `calc2.b10` | calc2 | 10 | 51 | 2 | 30–32 |
+| `calc2.b11` | calc2 | 11 | 10 | 3 | 33–35 |
+| `calc2.b12` | calc2 | 12 | 54 | 3 | 36–38 |
+| `calc2.b13` | calc2 | 13 | 2 | 1 | 39–39 |
 | `calc3.b9` | calc3 | 9 | 5 | 1 | 28–29 |
 | `calc3.b10` | calc3 | 10 | 11 | 3 | 30–32 |
 | `calc3.b11` | calc3 | 11 | 26 | 3 | 33–35 |
@@ -210,7 +210,7 @@ at every width.
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
 | 2 | 222 | 10 | 56 | 24 | 51 | 30 | 0 |
-| 3 | 163 | 13 | 82 | 23 | 37 | 48 | 0 |
+| 3 | 163 | 13 | 82 | 22 | 37 | 48 | 0 |
 | 4 | 127 | 19 | 86 | 8 | 22 | 52 | 0 |
 | 5 | 107 | 20 | 104 | 5 | 15 | 48 | 0 |
 | 6 | 98 | 23 | 130 | 7 | 15 | 45 | 0 |
@@ -221,7 +221,7 @@ at every width.
 | 20 | 44 | 68 | 145 | 0 | 3 | 32 | 0 |
 | 45 | 26 | 120 | 172 | 0 | 0 | 26 | 0 |
 
-**No width is clean.** Small widths fragment, at 3 there are 23 singleton units, which is a
+**No width is clean.** Small widths fragment, at 3 there are 22 singleton units, which is a
 quiz per concept and is exactly what §12 rules out. Large widths stop fragmenting but produce
 units too large to assess: at 45 the partition is just the 17 domains themselves, whose
 largest is 128 concepts. The usable widths trade fragmentation against size rather than
@@ -543,12 +543,12 @@ Unresolvable subdomains:
 `trigonometry.identities`
 `trigonometry.spherical`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2872
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2895
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings
 
-- **anomaly** `singleton_units`: 23 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
+- **anomaly** `singleton_units`: 22 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
 
 ## Not decided here
 

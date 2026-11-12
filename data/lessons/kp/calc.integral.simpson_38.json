@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The three-eighths weights",
+    "section": "The three-eighths weights",
+    "subgoals": [
+      "State the four weights",
+      "Write the single panel formula",
+      "Check that the weights sum to eight"
+    ]
+  },
+  {
+    "label": "The composite rule",
+    "section": "The composite rule",
+    "subgoals": [
+      "State the composite rule",
+      "Assign weight 2 and weight 3",
+      "Count the nodes for a given n"
+    ]
+  },
+  {
+    "label": "One panel by hand",
+    "section": "One panel by hand",
+    "subgoals": [
+      "Tabulate four values",
+      "Apply the weights",
+      "Compare with the exact integral"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The area integral",
+    "section": "The area integral",
+    "subgoals": [
+      "Write the area as an integral of y with respect to x",
+      "Replace dx by x prime dt",
+      "Evaluate a simple polynomial case"
+    ]
+  },
+  {
+    "label": "The substitution",
+    "section": "The substitution",
+    "subgoals": [
+      "State the monotonicity requirement",
+      "Substitute into the parametrised integral",
+      "Handle the sign of the result"
+    ]
+  },
+  {
+    "label": "A worked area",
+    "section": "A worked area",
+    "subgoals": [
+      "Parametrise a square root curve",
+      "Integrate in the parameter",
+      "Confirm with the x integral"
+    ]
+  }
+]

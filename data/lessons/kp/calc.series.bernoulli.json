@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The generating function",
+    "section": "The generating function",
+    "subgoals": [
+      "Write the generating function",
+      "Expand both factors near zero",
+      "State the radius of convergence"
+    ]
+  },
+  {
+    "label": "The first Bernoulli numbers",
+    "section": "The first Bernoulli numbers",
+    "subgoals": [
+      "List the first Bernoulli numbers",
+      "Recover one from the expansion",
+      "Check it against the recurrence"
+    ]
+  },
+  {
+    "label": "Odd terms vanish",
+    "section": "Odd terms vanish",
+    "subgoals": [
+      "State which odd terms vanish",
+      "Use the evenness of the hyperbolic cotangent",
+      "Confirm with the recurrence at n equal to three"
+    ]
+  }
+]

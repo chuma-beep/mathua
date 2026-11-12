@@ -1,0 +1,29 @@
+[
+  {
+    "label": "An unbounded integrand",
+    "section": "An unbounded integrand",
+    "subgoals": [
+      "Write an improper integral at an endpoint",
+      "Integrate from a small lower limit",
+      "Take the limit as the limit falls to zero"
+    ]
+  },
+  {
+    "label": "The comparison test",
+    "section": "The comparison test",
+    "subgoals": [
+      "State the comparison test",
+      "Choose a bounding function",
+      "Conclude convergence from the bound"
+    ]
+  },
+  {
+    "label": "When the integral converges",
+    "section": "When the integral converges",
+    "subgoals": [
+      "State the p test at zero",
+      "Compare a convergent and a divergent case",
+      "Identify the borderline exponent"
+    ]
+  }
+]

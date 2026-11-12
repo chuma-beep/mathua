@@ -20727,5 +20727,161 @@
     "key_prerequisites": [
       "ml.optim.sgd"
     ]
+  },
+  {
+    "id": "calc.seq.limit",
+    "key_prerequisites": [
+      "calc.seq.monotone",
+      "calc.seq.bounded"
+    ]
+  },
+  {
+    "id": "calc.seq.subsequence",
+    "key_prerequisites": [
+      "calc.seq.limit",
+      "calc.seq.bounded"
+    ]
+  },
+  {
+    "id": "calc.series.riemann_zeta",
+    "key_prerequisites": [
+      "calc.series.p_series",
+      "calc.integral.improper"
+    ]
+  },
+  {
+    "id": "calc.series.eta",
+    "key_prerequisites": [
+      "calc.series.alternating",
+      "calc.series.riemann_zeta"
+    ]
+  },
+  {
+    "id": "calc.series.bernoulli",
+    "key_prerequisites": [
+      "calc.series.taylor",
+      "calc.series.power"
+    ]
+  },
+  {
+    "id": "calc.series.double",
+    "key_prerequisites": [
+      "calc.series.positive_terms",
+      "calc.series.geometric"
+    ]
+  },
+  {
+    "id": "calc.series.stirling",
+    "key_prerequisites": [
+      "calc.series.asymptotic",
+      "calc.seq.limit"
+    ]
+  },
+  {
+    "id": "calc.series.abel_summation",
+    "key_prerequisites": [
+      "calc.series.operations",
+      "calc.series.abel"
+    ]
+  },
+  {
+    "id": "calc.series.power_uniqueness",
+    "key_prerequisites": [
+      "calc.series.power",
+      "calc.series.taylor"
+    ]
+  },
+  {
+    "id": "calc.series.grouping",
+    "key_prerequisites": [
+      "calc.series.operations",
+      "calc.series.concept"
+    ]
+  },
+  {
+    "id": "calc.series.generating",
+    "key_prerequisites": [
+      "calc.series.power",
+      "calc.series.geometric"
+    ]
+  },
+  {
+    "id": "calc.series.arithmetico_geometric",
+    "key_prerequisites": [
+      "calc.series.geometric",
+      "calc.series.operations"
+    ]
+  },
+  {
+    "id": "calc.integral.cross_sections",
+    "key_prerequisites": [
+      "calc.integral.volume",
+      "calc.integral.disc"
+    ]
+  },
+  {
+    "id": "calc.integral.parametric_length",
+    "key_prerequisites": [
+      "calc.integral.arc_length"
+    ]
+  },
+  {
+    "id": "calc.integral.parametric_area",
+    "key_prerequisites": [
+      "calc.integral.area_between",
+      "calc.integral.arc_length"
+    ]
+  },
+  {
+    "id": "calc.integral.beta_gamma",
+    "key_prerequisites": [
+      "calc.integral.beta",
+      "calc.series.gamma"
+    ]
+  },
+  {
+    "id": "calc.integral.unbounded",
+    "key_prerequisites": [
+      "calc.integral.improper"
+    ]
+  },
+  {
+    "id": "calc.integral.pumping",
+    "key_prerequisites": [
+      "calc.integral.work"
+    ]
+  },
+  {
+    "id": "calc.integral.simpson_38",
+    "key_prerequisites": [
+      "calc.integral.simpson"
+    ]
+  },
+  {
+    "id": "calc.integral.stieltjes",
+    "key_prerequisites": [
+      "calc.integral.riemann_sums"
+    ]
+  },
+  {
+    "id": "calc.integral.holder",
+    "key_prerequisites": [
+      "calc.integral.properties",
+      "calc.integral.riemann_sums"
+    ]
+  },
+  {
+    "id": "calc.integral.jensen",
+    "key_prerequisites": [
+      "calc.integral.mvt",
+      "calc.integral.average_value"
+    ]
+  },
+  {
+    "id": "calc.integral.radial_mass",
+    "key_prerequisites": [
+      "calc.integral.center_mass",
+      "calc.integral.volume"
+    ]
   }
 ]

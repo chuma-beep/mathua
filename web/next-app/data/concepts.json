@@ -9290,6 +9290,346 @@
     "subdomain": "calculus.series"
   },
   {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.seq.limit",
+    "label": "Limit of a sequence",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.seq.monotone",
+      "calc.seq.bounded"
+    ],
+    "subdomain": "calculus.sequences"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.seq.subsequence",
+    "label": "Subsequences and the Bolzano-Weierstrass theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.seq.limit",
+      "calc.seq.bounded"
+    ],
+    "subdomain": "calculus.sequences"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.riemann_zeta",
+    "label": "The Riemann zeta function as a series",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.p_series",
+      "calc.integral.improper"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.eta",
+    "label": "The Dirichlet eta function",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.alternating",
+      "calc.series.riemann_zeta"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.bernoulli",
+    "label": "Bernoulli numbers",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.taylor",
+      "calc.series.power"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.double",
+    "label": "Convergence of double series",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.positive_terms",
+      "calc.series.geometric"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.stirling",
+    "label": "Stirling's approximation",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.asymptotic",
+      "calc.seq.limit"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.abel_summation",
+    "label": "Abel summation by parts",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.operations",
+      "calc.series.abel"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.power_uniqueness",
+    "label": "Uniqueness of power series coefficients",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.power",
+      "calc.series.taylor"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.grouping",
+    "label": "Grouping the terms of a series",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.operations",
+      "calc.series.concept"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.generating",
+    "label": "Ordinary generating functions as series",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.power",
+      "calc.series.geometric"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.series.arithmetico_geometric",
+    "label": "Arithmetico-geometric series",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.series.geometric",
+      "calc.series.operations"
+    ],
+    "subdomain": "calculus.series"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.cross_sections",
+    "label": "Volumes by known cross sections",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.volume",
+      "calc.integral.disc"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.parametric_length",
+    "label": "Arc length of parametric curves",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.arc_length"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.parametric_area",
+    "label": "Area under a parametric curve",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.area_between",
+      "calc.integral.arc_length"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.beta_gamma",
+    "label": "The beta-gamma relation",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.beta",
+      "calc.series.gamma"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.unbounded",
+    "label": "Improper integrals with unbounded integrands",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.improper"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.pumping",
+    "label": "Work by pumping a liquid",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.work"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.simpson_38",
+    "label": "Simpson's three-eighths rule",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.simpson"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.stieltjes",
+    "label": "Riemann-Stieltjes integrals",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.riemann_sums"
+    ],
+    "subdomain": "calculus.advanced"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.holder",
+    "label": "Holder's inequality for integrals",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.properties",
+      "calc.integral.riemann_sums"
+    ],
+    "subdomain": "calculus.advanced"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.jensen",
+    "label": "Jensen's inequality for integrals",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.mvt",
+      "calc.integral.average_value"
+    ],
+    "subdomain": "calculus.advanced"
+  },
+  {
+    "domain": "calc2",
+    "grading_type": "numeric",
+    "id": "calc.integral.radial_mass",
+    "label": "Mass from a radial density",
+    "mastery_threshold": {
+      "avg_time_seconds": 24,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.center_mass",
+      "calc.integral.volume"
+    ],
+    "subdomain": "calculus.integrals"
+  },
+  {
     "domain": "calc3",
     "grading_type": "symbolic",
     "id": "calc.deriv.partial",

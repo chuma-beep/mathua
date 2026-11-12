@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The summation identity",
+    "section": "The summation identity",
+    "subgoals": [
+      "State the summation identity",
+      "Compute partial sums of a",
+      "Check both sides on a small case"
+    ]
+  },
+  {
+    "label": "Applying it to a product",
+    "section": "Applying it to a product",
+    "subgoals": [
+      "Rewrite a product sum by parts",
+      "Bound the tail with the variation of b",
+      "Compare the bound with a partial tail"
+    ]
+  },
+  {
+    "label": "Dirichlet's test",
+    "section": "Dirichlet's test",
+    "subgoals": [
+      "State Dirichlet's test",
+      "Verify the two hypotheses",
+      "Apply it to a trigonometric series"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "What a subsequence is",
+    "section": "What a subsequence is",
+    "subgoals": [
+      "Define a subsequence by its index set",
+      "List the terms of a simple subsequence",
+      "Compare the subsequence with the original"
+    ]
+  },
+  {
+    "label": "Bolzano-Weierstrass",
+    "section": "Bolzano-Weierstrass",
+    "subgoals": [
+      "State the Bolzano-Weierstrass theorem",
+      "Verify that a sequence is bounded",
+      "Exhibit a convergent subsequence"
+    ]
+  },
+  {
+    "label": "Subsequential limits",
+    "section": "Subsequential limits",
+    "subgoals": [
+      "Define a subsequential limit",
+      "Find every subsequential limit of an example",
+      "Read off the limit superior and inferior"
+    ]
+  }
+]

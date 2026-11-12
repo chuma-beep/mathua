@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Slicing a solid",
+    "section": "Slicing a solid",
+    "subgoals": [
+      "Describe a slice perpendicular to an axis",
+      "Write the area of a slice",
+      "Total the slabs for a constant section"
+    ]
+  },
+  {
+    "label": "The volume integral",
+    "section": "The volume integral",
+    "subgoals": [
+      "Write the volume integral",
+      "Integrate a power area function",
+      "Check the units of the answer"
+    ]
+  },
+  {
+    "label": "Square cross sections",
+    "section": "Square cross sections",
+    "subgoals": [
+      "Find the side length of a square section",
+      "Square it and integrate",
+      "Locate the widest slice as a check"
+    ]
+  }
+]

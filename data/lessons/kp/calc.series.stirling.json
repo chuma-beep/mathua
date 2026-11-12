@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The approximation",
+    "section": "The approximation",
+    "subgoals": [
+      "Write the Stirling formula",
+      "Evaluate it at a small n",
+      "Compare with the exact factorial"
+    ]
+  },
+  {
+    "label": "Where the constants come from",
+    "section": "Where the constants come from",
+    "subgoals": [
+      "Name the source of the square root factor",
+      "Explain the base e from the ratio",
+      "Estimate the first correction"
+    ]
+  },
+  {
+    "label": "Counting digits",
+    "section": "Counting digits",
+    "subgoals": [
+      "Convert a digit count to a logarithm",
+      "Evaluate at n equal to one hundred",
+      "Check the count against the exact value"
+    ]
+  }
+]

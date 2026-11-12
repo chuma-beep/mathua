@@ -11486,5 +11486,97 @@
   {
     "concept_id": "arith.factor.divisor_count",
     "source": "authored/arith.factor.divisor_count.md"
+  },
+  {
+    "concept_id": "calc.seq.limit",
+    "source": "authored/calc.seq.limit.md"
+  },
+  {
+    "concept_id": "calc.seq.subsequence",
+    "source": "authored/calc.seq.subsequence.md"
+  },
+  {
+    "concept_id": "calc.series.riemann_zeta",
+    "source": "authored/calc.series.riemann_zeta.md"
+  },
+  {
+    "concept_id": "calc.series.eta",
+    "source": "authored/calc.series.eta.md"
+  },
+  {
+    "concept_id": "calc.series.bernoulli",
+    "source": "authored/calc.series.bernoulli.md"
+  },
+  {
+    "concept_id": "calc.series.double",
+    "source": "authored/calc.series.double.md"
+  },
+  {
+    "concept_id": "calc.series.stirling",
+    "source": "authored/calc.series.stirling.md"
+  },
+  {
+    "concept_id": "calc.series.abel_summation",
+    "source": "authored/calc.series.abel_summation.md"
+  },
+  {
+    "concept_id": "calc.series.power_uniqueness",
+    "source": "authored/calc.series.power_uniqueness.md"
+  },
+  {
+    "concept_id": "calc.series.grouping",
+    "source": "authored/calc.series.grouping.md"
+  },
+  {
+    "concept_id": "calc.series.generating",
+    "source": "authored/calc.series.generating.md"
+  },
+  {
+    "concept_id": "calc.series.arithmetico_geometric",
+    "source": "authored/calc.series.arithmetico_geometric.md"
+  },
+  {
+    "concept_id": "calc.integral.cross_sections",
+    "source": "authored/calc.integral.cross_sections.md"
+  },
+  {
+    "concept_id": "calc.integral.parametric_length",
+    "source": "authored/calc.integral.parametric_length.md"
+  },
+  {
+    "concept_id": "calc.integral.parametric_area",
+    "source": "authored/calc.integral.parametric_area.md"
+  },
+  {
+    "concept_id": "calc.integral.beta_gamma",
+    "source": "authored/calc.integral.beta_gamma.md"
+  },
+  {
+    "concept_id": "calc.integral.unbounded",
+    "source": "authored/calc.integral.unbounded.md"
+  },
+  {
+    "concept_id": "calc.integral.pumping",
+    "source": "authored/calc.integral.pumping.md"
+  },
+  {
+    "concept_id": "calc.integral.simpson_38",
+    "source": "authored/calc.integral.simpson_38.md"
+  },
+  {
+    "concept_id": "calc.integral.stieltjes",
+    "source": "authored/calc.integral.stieltjes.md"
+  },
+  {
+    "concept_id": "calc.integral.holder",
+    "source": "authored/calc.integral.holder.md"
+  },
+  {
+    "concept_id": "calc.integral.jensen",
+    "source": "authored/calc.integral.jensen.md"
+  },
+  {
+    "concept_id": "calc.integral.radial_mass",
+    "source": "authored/calc.integral.radial_mass.md"
   }
 ]
