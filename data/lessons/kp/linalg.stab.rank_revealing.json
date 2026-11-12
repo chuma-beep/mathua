@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Numerical rank",
+    "section": "Numerical rank",
+    "subgoals": [
+      "Choose a tolerance",
+      "Count large singular values",
+      "Scale by the largest"
+    ]
+  },
+  {
+    "label": "Factorisations",
+    "section": "Factorisations",
+    "subgoals": [
+      "Pivot the columns",
+      "Compare with the SVD",
+      "Read the separation"
+    ]
+  },
+  {
+    "label": "Truncation",
+    "section": "Truncation",
+    "subgoals": [
+      "Drop small values",
+      "Bound the error",
+      "Choose the rank"
+    ]
+  }
+]

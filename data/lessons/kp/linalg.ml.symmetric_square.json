@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Basis",
+    "section": "Basis",
+    "subgoals": [
+      "Count unordered pairs",
+      "Include repeated vectors",
+      "Compute the dimension"
+    ]
+  },
+  {
+    "label": "Quadratic forms",
+    "section": "Quadratic forms",
+    "subgoals": [
+      "Identify the dual",
+      "Polarise a quadratic form",
+      "Read the diagonal"
+    ]
+  },
+  {
+    "label": "Symmetry",
+    "section": "Symmetry",
+    "subgoals": [
+      "Average with the swap",
+      "Symmetrise a pure tensor",
+      "Check the fixed points"
+    ]
+  }
+]

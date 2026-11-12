@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Move the map across",
+      "Use the inner product",
+      "Invoke Riesz"
+    ]
+  },
+  {
+    "label": "Matrix",
+    "section": "Matrix",
+    "subgoals": [
+      "Take the conjugate transpose",
+      "Restrict to the real case",
+      "Check orthonormal bases"
+    ]
+  },
+  {
+    "label": "Kernels",
+    "section": "Kernels",
+    "subgoals": [
+      "Complement the image",
+      "Identify the kernel",
+      "List four subspaces"
+    ]
+  }
+]

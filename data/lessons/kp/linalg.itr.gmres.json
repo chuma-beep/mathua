@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Minimisation",
+    "section": "Minimisation",
+    "subgoals": [
+      "Minimise the residual",
+      "Solve the least-squares problem",
+      "Use the Arnoldi basis"
+    ]
+  },
+  {
+    "label": "Residual",
+    "section": "Residual",
+    "subgoals": [
+      "Read the residual norm",
+      "Avoid forming the iterate",
+      "Test convergence"
+    ]
+  },
+  {
+    "label": "Restarting",
+    "section": "Restarting",
+    "subgoals": [
+      "Bound the basis size",
+      "Restart after m steps",
+      "Compare with full GMRES"
+    ]
+  }
+]

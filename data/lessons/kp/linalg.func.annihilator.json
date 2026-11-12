@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Dimension",
+    "section": "Dimension",
+    "subgoals": [
+      "Subtract the dimension",
+      "Apply rank-nullity",
+      "Read the codimension"
+    ]
+  },
+  {
+    "label": "Duality",
+    "section": "Duality",
+    "subgoals": [
+      "Reverse an inclusion",
+      "Take a double annihilator",
+      "Recover the subspace"
+    ]
+  },
+  {
+    "label": "Orthogonality",
+    "section": "Orthogonality",
+    "subgoals": [
+      "Identify the complement",
+      "Use the Riesz vector",
+      "Compare dimensions"
+    ]
+  }
+]

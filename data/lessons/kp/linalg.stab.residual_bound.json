@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Basic bound",
+    "section": "Basic bound",
+    "subgoals": [
+      "Multiply by the inverse",
+      "Bound the error",
+      "Read the residual"
+    ]
+  },
+  {
+    "label": "Relative form",
+    "section": "Relative form",
+    "subgoals": [
+      "Divide by the solution",
+      "Introduce the condition",
+      "Compare relative quantities"
+    ]
+  },
+  {
+    "label": "Backward stability",
+    "section": "Backward stability",
+    "subgoals": [
+      "Bound the residual",
+      "Invoke stability",
+      "Explain the accuracy"
+    ]
+  }
+]

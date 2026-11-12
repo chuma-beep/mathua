@@ -10398,5 +10398,165 @@
   {
     "concept_id": "abstract.rep.burnside_pq",
     "source": "authored/abstract.rep.burnside_pq.md"
+  },
+  {
+    "concept_id": "linalg.ml.tensor_space",
+    "source": "authored/linalg.ml.tensor_space.md"
+  },
+  {
+    "concept_id": "linalg.ml.symmetric_square",
+    "source": "authored/linalg.ml.symmetric_square.md"
+  },
+  {
+    "concept_id": "linalg.ml.exterior_square",
+    "source": "authored/linalg.ml.exterior_square.md"
+  },
+  {
+    "concept_id": "linalg.ml.wedge",
+    "source": "authored/linalg.ml.wedge.md"
+  },
+  {
+    "concept_id": "linalg.ml.alternating",
+    "source": "authored/linalg.ml.alternating.md"
+  },
+  {
+    "concept_id": "linalg.ml.pfaffian",
+    "source": "authored/linalg.ml.pfaffian.md"
+  },
+  {
+    "concept_id": "linalg.ml.bilinear_rank",
+    "source": "authored/linalg.ml.bilinear_rank.md"
+  },
+  {
+    "concept_id": "linalg.ml.quadratic_rank",
+    "source": "authored/linalg.ml.quadratic_rank.md"
+  },
+  {
+    "concept_id": "linalg.ml.inertia",
+    "source": "authored/linalg.ml.inertia.md"
+  },
+  {
+    "concept_id": "linalg.ml.polarization",
+    "source": "authored/linalg.ml.polarization.md"
+  },
+  {
+    "concept_id": "linalg.func.dual",
+    "source": "authored/linalg.func.dual.md"
+  },
+  {
+    "concept_id": "linalg.func.annihilator",
+    "source": "authored/linalg.func.annihilator.md"
+  },
+  {
+    "concept_id": "linalg.func.quotient",
+    "source": "authored/linalg.func.quotient.md"
+  },
+  {
+    "concept_id": "linalg.func.exact",
+    "source": "authored/linalg.func.exact.md"
+  },
+  {
+    "concept_id": "linalg.func.adjoint",
+    "source": "authored/linalg.func.adjoint.md"
+  },
+  {
+    "concept_id": "linalg.func.riesz",
+    "source": "authored/linalg.func.riesz.md"
+  },
+  {
+    "concept_id": "linalg.func.invariant",
+    "source": "authored/linalg.func.invariant.md"
+  },
+  {
+    "concept_id": "linalg.func.cyclic",
+    "source": "authored/linalg.func.cyclic.md"
+  },
+  {
+    "concept_id": "linalg.func.minimal_polynomial",
+    "source": "authored/linalg.func.minimal_polynomial.md"
+  },
+  {
+    "concept_id": "linalg.func.direct_sum",
+    "source": "authored/linalg.func.direct_sum.md"
+  },
+  {
+    "concept_id": "linalg.itr.jacobi",
+    "source": "authored/linalg.itr.jacobi.md"
+  },
+  {
+    "concept_id": "linalg.itr.gauss_seidel",
+    "source": "authored/linalg.itr.gauss_seidel.md"
+  },
+  {
+    "concept_id": "linalg.itr.sor",
+    "source": "authored/linalg.itr.sor.md"
+  },
+  {
+    "concept_id": "linalg.itr.residual",
+    "source": "authored/linalg.itr.residual.md"
+  },
+  {
+    "concept_id": "linalg.itr.convergence",
+    "source": "authored/linalg.itr.convergence.md"
+  },
+  {
+    "concept_id": "linalg.itr.krylov",
+    "source": "authored/linalg.itr.krylov.md"
+  },
+  {
+    "concept_id": "linalg.itr.arnoldi",
+    "source": "authored/linalg.itr.arnoldi.md"
+  },
+  {
+    "concept_id": "linalg.itr.gmres",
+    "source": "authored/linalg.itr.gmres.md"
+  },
+  {
+    "concept_id": "linalg.itr.cg",
+    "source": "authored/linalg.itr.cg.md"
+  },
+  {
+    "concept_id": "linalg.itr.preconditioner",
+    "source": "authored/linalg.itr.preconditioner.md"
+  },
+  {
+    "concept_id": "linalg.stab.forward_error",
+    "source": "authored/linalg.stab.forward_error.md"
+  },
+  {
+    "concept_id": "linalg.stab.backward_error",
+    "source": "authored/linalg.stab.backward_error.md"
+  },
+  {
+    "concept_id": "linalg.stab.machine_epsilon",
+    "source": "authored/linalg.stab.machine_epsilon.md"
+  },
+  {
+    "concept_id": "linalg.stab.growth",
+    "source": "authored/linalg.stab.growth.md"
+  },
+  {
+    "concept_id": "linalg.stab.pivoting",
+    "source": "authored/linalg.stab.pivoting.md"
+  },
+  {
+    "concept_id": "linalg.stab.condition_error",
+    "source": "authored/linalg.stab.condition_error.md"
+  },
+  {
+    "concept_id": "linalg.stab.residual_bound",
+    "source": "authored/linalg.stab.residual_bound.md"
+  },
+  {
+    "concept_id": "linalg.stab.componentwise",
+    "source": "authored/linalg.stab.componentwise.md"
+  },
+  {
+    "concept_id": "linalg.stab.perturbation",
+    "source": "authored/linalg.stab.perturbation.md"
+  },
+  {
+    "concept_id": "linalg.stab.rank_revealing",
+    "source": "authored/linalg.stab.rank_revealing.md"
   }
 ]

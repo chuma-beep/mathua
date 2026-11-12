@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Dimension",
+    "section": "Dimension",
+    "subgoals": [
+      "Count k-subsets",
+      "Identify the dual basis",
+      "Compute C(n,k)"
+    ]
+  },
+  {
+    "label": "Sign",
+    "section": "Sign",
+    "subgoals": [
+      "Swap two arguments",
+      "Handle repeated arguments",
+      "State the sign rule"
+    ]
+  },
+  {
+    "label": "Top form",
+    "section": "Top form",
+    "subgoals": [
+      "Identify the determinant",
+      "Normalise the generator",
+      "Test dependence"
+    ]
+  }
+]

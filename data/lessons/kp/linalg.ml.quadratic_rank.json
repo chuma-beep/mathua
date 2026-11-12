@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Polar form",
+    "section": "Polar form",
+    "subgoals": [
+      "Recover the bilinear form",
+      "Track the factor two",
+      "Check symmetry"
+    ]
+  },
+  {
+    "label": "Diagonalisation",
+    "section": "Diagonalisation",
+    "subgoals": [
+      "Complete squares",
+      "Count nonzero entries",
+      "Read the rank"
+    ]
+  },
+  {
+    "label": "Zero set",
+    "section": "Zero set",
+    "subgoals": [
+      "Relate rank to the quadric",
+      "Identify a cone",
+      "Test nondegeneracy"
+    ]
+  }
+]

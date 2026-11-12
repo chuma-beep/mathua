@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Perturbation",
+    "section": "Perturbation",
+    "subgoals": [
+      "Perturb entries",
+      "Measure relative size",
+      "Write the bound"
+    ]
+  },
+  {
+    "label": "Condition",
+    "section": "Condition",
+    "subgoals": [
+      "Divide sensitivities",
+      "Compare with the norm",
+      "Read entrywise"
+    ]
+  },
+  {
+    "label": "Scaling",
+    "section": "Scaling",
+    "subgoals": [
+      "Scale rows",
+      "Scale columns",
+      "Improve the condition"
+    ]
+  }
+]

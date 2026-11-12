@@ -60,6 +60,7 @@ func Register(reg *generator.Registry) {
 	registerFoundations(reg)
 	registerBatch(reg)
 	registerWave3(reg)
+	registerWave24(reg)
 }
 
 func containsWord(q, word string) bool {

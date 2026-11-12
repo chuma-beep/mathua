@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Step",
+    "section": "Step",
+    "subgoals": [
+      "Multiply by the matrix",
+      "Orthogonalise",
+      "Normalise the remainder"
+    ]
+  },
+  {
+    "label": "Hessenberg",
+    "section": "Hessenberg",
+    "subgoals": [
+      "Collect the coefficients",
+      "Read the Hessenberg form",
+      "Approximate eigenvalues"
+    ]
+  },
+  {
+    "label": "Cost",
+    "section": "Cost",
+    "subgoals": [
+      "Count inner products",
+      "Count matrix products",
+      "Account for storage"
+    ]
+  }
+]

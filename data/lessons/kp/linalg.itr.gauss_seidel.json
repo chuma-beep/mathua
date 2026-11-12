@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Splitting",
+    "section": "Splitting",
+    "subgoals": [
+      "Take the lower triangle",
+      "Solve forward",
+      "Form the iteration matrix"
+    ]
+  },
+  {
+    "label": "Ordering",
+    "section": "Ordering",
+    "subgoals": [
+      "Choose a sweep direction",
+      "Use updated values",
+      "Compare with Jacobi"
+    ]
+  },
+  {
+    "label": "Convergence",
+    "section": "Convergence",
+    "subgoals": [
+      "Use positive definiteness",
+      "Compare rates",
+      "Check the spectral radius"
+    ]
+  }
+]

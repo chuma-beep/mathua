@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Matrix",
+    "section": "Matrix",
+    "subgoals": [
+      "Represent the form",
+      "Change both bases",
+      "Check rank invariance"
+    ]
+  },
+  {
+    "label": "Nullity",
+    "section": "Nullity",
+    "subgoals": [
+      "Apply rank-nullity",
+      "Identify the radical",
+      "Compute the deficiency"
+    ]
+  },
+  {
+    "label": "Degeneracy",
+    "section": "Degeneracy",
+    "subgoals": [
+      "Test invertibility",
+      "Relate to the radical",
+      "Separate form from matrix"
+    ]
+  }
+]

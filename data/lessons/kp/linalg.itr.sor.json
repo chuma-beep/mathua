@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Parameter",
+    "section": "Parameter",
+    "subgoals": [
+      "Form the combination",
+      "Separate under and over relaxation",
+      "Read the update"
+    ]
+  },
+  {
+    "label": "Optimal value",
+    "section": "Optimal value",
+    "subgoals": [
+      "Use the spectral radius",
+      "Apply the formula",
+      "Check the denominator"
+    ]
+  },
+  {
+    "label": "Range",
+    "section": "Range",
+    "subgoals": [
+      "Bound omega",
+      "Test convergence",
+      "Recognise divergence"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Dimension",
+    "section": "Dimension",
+    "subgoals": [
+      "Count distinct pairs",
+      "Exclude repeats",
+      "Compute the dimension"
+    ]
+  },
+  {
+    "label": "Alternation",
+    "section": "Alternation",
+    "subgoals": [
+      "Apply the sign rule",
+      "Show the square is zero",
+      "Contrast with the symmetric square"
+    ]
+  },
+  {
+    "label": "Area",
+    "section": "Area",
+    "subgoals": [
+      "Read the two-dimensional case",
+      "Identify signed area",
+      "Relate to the determinant"
+    ]
+  }
+]

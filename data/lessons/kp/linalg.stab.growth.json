@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Track the submatrix maximum",
+      "Compare with the original",
+      "Take the largest ratio"
+    ]
+  },
+  {
+    "label": "Bound",
+    "section": "Bound",
+    "subgoals": [
+      "Raise two to n minus one",
+      "Bound the multipliers",
+      "Separate bound from practice"
+    ]
+  },
+  {
+    "label": "Practice",
+    "section": "Practice",
+    "subgoals": [
+      "Sample random matrices",
+      "Construct a worst case",
+      "Interpret the bound"
+    ]
+  }
+]

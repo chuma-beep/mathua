@@ -12,19 +12,19 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 2600 |
-| Total units | 159 |
+| Total concepts | 2640 |
+| Total units | 161 |
 | Minimum unit size | 1 |
 | Median unit size | 11 |
 | Maximum unit size | 82 |
-| Singleton units | 23 |
+| Singleton units | 24 |
 | Units with <= 3 concepts | 40 |
 | Units with > 25 concepts | 41 |
 | Units with > 50 concepts | 5 |
-| Cross-unit prerequisite edges (derived) | 534 |
+| Cross-unit prerequisite edges (derived) | 536 |
 | Backward band edges | 0 |
 
-If the learner is assessed once per unit, then 159 assessments cover the corpus, and the
+If the learner is assessed once per unit, then 161 assessments cover the corpus, and the
 median is one assessment per 11 concepts. That is the frequency question this report
 exists to make concrete.
 
@@ -111,11 +111,13 @@ exists to make concrete.
 | `linear_algebra.b1` | linear_algebra | 1 | 6 | 2 | 3–5 |
 | `linear_algebra.b2` | linear_algebra | 2 | 2 | 2 | 6–8 |
 | `linear_algebra.b3` | linear_algebra | 3 | 20 | 5 | 9–11 |
-| `linear_algebra.b4` | linear_algebra | 4 | 12 | 4 | 12–14 |
-| `linear_algebra.b5` | linear_algebra | 5 | 2 | 2 | 15–16 |
-| `linear_algebra.b7` | linear_algebra | 7 | 7 | 2 | 21–23 |
-| `linear_algebra.b8` | linear_algebra | 8 | 16 | 5 | 24–26 |
-| `linear_algebra.b9` | linear_algebra | 9 | 14 | 5 | 27–29 |
+| `linear_algebra.b4` | linear_algebra | 4 | 24 | 7 | 12–14 |
+| `linear_algebra.b5` | linear_algebra | 5 | 8 | 3 | 15–17 |
+| `linear_algebra.b7` | linear_algebra | 7 | 9 | 3 | 21–23 |
+| `linear_algebra.b8` | linear_algebra | 8 | 22 | 7 | 24–26 |
+| `linear_algebra.b9` | linear_algebra | 9 | 21 | 8 | 27–29 |
+| `linear_algebra.b10` | linear_algebra | 10 | 6 | 2 | 30–32 |
+| `linear_algebra.b11` | linear_algebra | 11 | 1 | 1 | 33–33 |
 | `machine_learning.b3` | machine_learning | 3 | 7 | 3 | 9–11 |
 | `machine_learning.b4` | machine_learning | 4 | 3 | 3 | 12–14 |
 | `machine_learning.b5` | machine_learning | 5 | 16 | 5 | 15–17 |
@@ -205,19 +207,19 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 217 | 9 | 56 | 28 | 56 | 22 | 0 |
-| 3 | 159 | 11 | 82 | 23 | 40 | 41 | 0 |
-| 4 | 124 | 19 | 86 | 11 | 24 | 44 | 0 |
-| 5 | 106 | 20 | 104 | 7 | 19 | 45 | 0 |
-| 6 | 96 | 23 | 130 | 8 | 15 | 41 | 0 |
-| 8 | 75 | 30 | 117 | 4 | 10 | 40 | 0 |
-| 10 | 64 | 30 | 145 | 3 | 9 | 35 | 0 |
-| 12 | 63 | 30 | 191 | 1 | 6 | 39 | 0 |
-| 15 | 50 | 49 | 172 | 1 | 3 | 35 | 0 |
+| 2 | 219 | 9 | 56 | 27 | 55 | 22 | 0 |
+| 3 | 161 | 11 | 82 | 24 | 40 | 41 | 0 |
+| 4 | 125 | 19 | 86 | 10 | 24 | 46 | 0 |
+| 5 | 107 | 20 | 104 | 7 | 18 | 45 | 0 |
+| 6 | 97 | 23 | 130 | 8 | 15 | 42 | 0 |
+| 8 | 76 | 31 | 117 | 4 | 11 | 40 | 0 |
+| 10 | 65 | 30 | 145 | 3 | 9 | 35 | 0 |
+| 12 | 63 | 31 | 191 | 1 | 6 | 40 | 0 |
+| 15 | 51 | 49 | 172 | 1 | 3 | 35 | 0 |
 | 20 | 44 | 66 | 145 | 1 | 5 | 32 | 0 |
-| 45 | 26 | 97 | 172 | 0 | 0 | 26 | 0 |
+| 45 | 26 | 98 | 172 | 0 | 0 | 26 | 0 |
 
-**No width is clean.** Small widths fragment, at 3 there are 23 singleton units, which is a
+**No width is clean.** Small widths fragment, at 3 there are 24 singleton units, which is a
 quiz per concept and is exactly what §12 rules out. Large widths stop fragmenting but produce
 units too large to assess: at 45 the partition is just the 17 domains themselves, whose
 largest is 128 concepts. The usable widths trade fragmentation against size rather than
@@ -232,7 +234,7 @@ The subdomain condensation of the concept DAG **contains cycles**: grouping conc
 subdomain discards the per-concept ordering, so a concept in subdomain A can be a
 prerequisite of one in subdomain B whose other members depend on A.
 
-**228 of 125 subdomains cannot be levelled**, they sit inside a cycle, or downstream
+**232 of 125 subdomains cannot be levelled**, they sit inside a cycle, or downstream
 of one, so no depth function exists for them at all. (Tarjan puts 26 inside cycles and
 the remaining 34 behind them; Kahn cannot order either group, because ordering a node
 requires its predecessors to be ordered first.) An implementation that ignores this
@@ -371,8 +373,13 @@ Unresolvable subdomains:
 `linear_algebra.determinants`
 `linear_algebra.eigenvalues`
 
+`linear_algebra.functional`
 `linear_algebra.inner_product`
+`linear_algebra.iterative`
 `linear_algebra.matrices`
+
+`linear_algebra.multilinear`
+`linear_algebra.stability`
 `linear_algebra.systems`
 `linear_algebra.transformations`
 
@@ -526,12 +533,12 @@ Unresolvable subdomains:
 `trigonometry.identities`
 `trigonometry.spherical`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2600
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2640
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings
 
-- **anomaly** `singleton_units`: 23 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
+- **anomaly** `singleton_units`: 24 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
 
 ## Not decided here
 

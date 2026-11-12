@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Restriction",
+    "section": "Restriction",
+    "subgoals": [
+      "Restrict the map",
+      "Write the block",
+      "Check linearity"
+    ]
+  },
+  {
+    "label": "Eigenlines",
+    "section": "Eigenlines",
+    "subgoals": [
+      "Identify an eigenvector",
+      "Span a line",
+      "Generalise to eigenspaces"
+    ]
+  },
+  {
+    "label": "Irreducibility",
+    "section": "Irreducibility",
+    "subgoals": [
+      "Rule out proper pieces",
+      "Use the complex case",
+      "Relate to eigenvalues"
+    ]
+  }
+]

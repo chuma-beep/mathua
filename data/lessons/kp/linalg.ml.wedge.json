@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Construction",
+    "section": "Construction",
+    "subgoals": [
+      "Expand a wedge",
+      "Use bilinearity",
+      "Read the minors"
+    ]
+  },
+  {
+    "label": "Independence",
+    "section": "Independence",
+    "subgoals": [
+      "Detect dependence",
+      "Test with the top wedge",
+      "Relate to rank"
+    ]
+  },
+  {
+    "label": "Grading",
+    "section": "Grading",
+    "subgoals": [
+      "Count k-subsets",
+      "Compute C(n,k)",
+      "Identify the top degree"
+    ]
+  }
+]

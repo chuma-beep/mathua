@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Eigenvalues",
+    "section": "Eigenvalues",
+    "subgoals": [
+      "Bound by delta",
+      "Use normality",
+      "Introduce eigenvector conditioning"
+    ]
+  },
+  {
+    "label": "Eigenvectors",
+    "section": "Eigenvectors",
+    "subgoals": [
+      "Measure the spectral gap",
+      "Bound the turn",
+      "Detect clustering"
+    ]
+  },
+  {
+    "label": "Pseudospectra",
+    "section": "Pseudospectra",
+    "subgoals": [
+      "Compare with discs",
+      "Recognise non-normality",
+      "Explain transients"
+    ]
+  }
+]

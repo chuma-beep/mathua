@@ -2,6 +2,7 @@ package complex
 
 import (
 	"fmt"
+	"math/big"
 	"math/rand"
 	"strconv"
 
@@ -122,7 +123,7 @@ func (g *w19RestGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 }
 
 func w19PolyFTA(o int) generator.Problem {
-	d := w19N(2, 12)
+	d := w19N(2, 60)
 	f := map[string]string{}
 	w19I(f, "d", d)
 	switch o {
@@ -518,7 +519,7 @@ func w19MethPoleCount(o int) generator.Problem {
 	f := map[string]string{}
 	switch o {
 	case 1:
-		n := w19N(2, 12)
+		n := w19N(2, 60)
 		w19I(f, "n", n)
 		return w19P(o, fmt.Sprintf("How many poles does 1/(z^%d-1) have inside a circle of radius 3? (enter an integer)", n),
 			strconv.Itoa(n), "All n roots of z^n=1 lie on the unit circle.", f)
@@ -539,19 +540,19 @@ func w19MethZeroCount(o int) generator.Problem {
 	f := map[string]string{}
 	switch o {
 	case 1:
-		n := w19N(2, 12)
+		n := w19N(2, 60)
 		w19I(f, "n", n)
 		return w19P(o, fmt.Sprintf("How many zeros does a degree %d polynomial have inside a contour containing all its roots? (enter an integer)", n),
 			strconv.Itoa(n), "Count with multiplicity.", f)
 	case 2:
-		n := w19N(2, 12)
+		n := w19N(2, 60)
 		r := w19N(2, 8)
 		w19I(f, "n", n)
 		w19I(f, "r", r)
 		return w19P(o, fmt.Sprintf("How many zeros does z^%d-1 have inside |z|<%d? (enter an integer)", n, r),
 			strconv.Itoa(n), "All n roots lie on the unit circle.", f)
 	default:
-		k := w19N(1, 9)
+		k := w19N(1, 60)
 		w19I(f, "k", k)
 		return w19P(o, fmt.Sprintf("How many zeros does e^(%dz) have in the complex plane? (enter an integer)", k),
 			"0", "The exponential never vanishes.", f)
@@ -562,18 +563,18 @@ func w19MethOrder(o int) generator.Problem {
 	f := map[string]string{}
 	switch o {
 	case 1:
-		k := w19N(1, 8)
+		k := w19N(1, 60)
 		w19I(f, "k", k)
 		return w19P(o, fmt.Sprintf("What is the order of the zero at z=0 of z^%d? (enter an integer)", k),
 			strconv.Itoa(k), "The exponent is the order.", f)
 	case 2:
-		k1, k2 := w19N(1, 5), w19N(1, 5)
+		k1, k2 := w19N(1, 20), w19N(1, 20)
 		w19I(f, "k1", k1)
 		w19I(f, "k2", k2)
 		return w19P(o, fmt.Sprintf("A function has a zero of order %d and another of order %d. What is the order of their product at the same point? (enter an integer)", k1, k2),
 			strconv.Itoa(k1+k2), "Orders add under multiplication.", f)
 	default:
-		k1 := w19N(4, 9)
+		k1 := w19N(4, 40)
 		k2 := w19N(1, k1-1)
 		w19I(f, "k1", k1)
 		w19I(f, "k2", k2)
@@ -586,18 +587,18 @@ func w19MethJordan(o int) generator.Problem {
 	f := map[string]string{}
 	switch o {
 	case 1:
-		dn, nn := w19N(2, 6), w19N(0, 1)
+		dn, nn := w19N(2, 60), w19N(0, 1)
 		w19I(f, "dn", dn)
 		w19I(f, "nn", nn)
 		return w19P(o, fmt.Sprintf("The denominator has degree %d and the numerator degree %d. What is the degree gap? (enter an integer)", dn, nn),
 			strconv.Itoa(dn-nn), "Subtract the numerator degree from the denominator degree.", f)
 	case 2:
-		k := w19N(1, 9)
+		k := w19N(1, 60)
 		w19I(f, "k", k)
 		return w19P(o, fmt.Sprintf("For a Jordan contour with denominator z^2+%d and numerator 1, what is the degree gap? (enter an integer)", k),
 			"2", "The gap is 2-0.", f)
 	default:
-		k := w19N(1, 9)
+		k := w19N(1, 60)
 		w19I(f, "k", k)
 		return w19P(o, fmt.Sprintf("How many poles of 1/(z^2+%d) lie in the upper half-plane? (enter an integer)", k),
 			"1", "Only the positive imaginary root lies above the real axis.", f)
@@ -640,24 +641,22 @@ func w19SpecGammaHalf(o int) generator.Problem {
 	f := map[string]string{}
 	switch o {
 	case 1:
-		n := w19N(1, 10)
+		n := w19N(1, 20)
 		w19I(f, "n", n)
 		return w19P(o, fmt.Sprintf("What is Gamma(%d) for the integer %d? (enter an integer)", n+1, n+1),
 			strconv.FormatInt(w19Fact(n), 10), "Gamma(n+1)=n!.", f)
 	case 2:
-		n := w19N(1, 8)
-		w19I(f, "n", n)
-		num := w19Fact(2 * n)
-		den := int64(1)
-		for i := 0; i < n; i++ {
-			den *= 4
-		}
-		den *= w19Fact(n)
-		g := w19GCD64(num, den)
-		return w19P(o, fmt.Sprintf("The value Gamma(%d/2) equals sqrt(pi) times a rational number. What is that rational number's denominator in lowest terms? (enter an integer)", 2*n+1),
-			strconv.FormatInt(den/g, 10), "The rational factor is (2n)!/(4^n n!), reduced.", f)
-	default:
 		n := w19N(1, 12)
+		w19I(f, "n", n)
+		num := new(big.Int).MulRange(1, int64(2*n))
+		den := new(big.Int).Lsh(big.NewInt(1), uint(2*n))
+		den.Mul(den, new(big.Int).MulRange(1, int64(n)))
+		g := new(big.Int).GCD(nil, nil, num, den)
+		den.Div(den, g)
+		return w19P(o, fmt.Sprintf("The value Gamma(%d/2) equals sqrt(pi) times a rational number. What is that rational number's denominator in lowest terms? (enter an integer)", 2*n+1),
+			den.String(), "The rational factor is (2n)!/(4^n n!), reduced.", f)
+	default:
+		n := w19N(1, 20)
 		w19I(f, "n", n)
 		return w19P(o, fmt.Sprintf("What is Gamma(%d)? (enter an integer)", n),
 			strconv.FormatInt(w19Fact(n-1), 10), "Gamma(n)=(n-1)!.", f)
@@ -785,17 +784,17 @@ func w19SpecHypergeometric(o int) generator.Problem {
 	f := map[string]string{}
 	switch o {
 	case 1:
-		k := w19N(2, 9)
+		k := w19N(2, 60)
 		w19I(f, "k", k)
 		return w19P(o, fmt.Sprintf("What is 1F0(1;;1-1/%d)? (enter an integer)", k),
 			strconv.Itoa(k), "1F0(1;;z)=1/(1-z), which is k at z=1-1/k.", f)
 	case 2:
-		p := w19N(1, 9)
+		p := w19N(1, 60)
 		w19I(f, "p", p)
 		return w19P(o, fmt.Sprintf("How many numerator parameters does a pFq function have when p = %d? (enter an integer)", p),
 			strconv.Itoa(p), "The parameters before the semicolon are numerator parameters.", f)
 	default:
-		k := w19N(1, 9)
+		k := w19N(1, 60)
 		w19I(f, "k", k)
 		return w19P(o, fmt.Sprintf("What is the %d-th derivative of 0F0(;;z) at zero? (enter an integer)", k),
 			"1", "Every derivative of exp at zero is one.", f)
@@ -806,12 +805,12 @@ func w19SpecPolygamma(o int) generator.Problem {
 	f := map[string]string{}
 	switch o {
 	case 1:
-		n := w19N(1, 9)
+		n := w19N(1, 60)
 		w19I(f, "n", n)
 		return w19P(o, fmt.Sprintf("What is the denominator of psi(%d)-psi(1) as a harmonic number? (enter an integer)", n+1),
 			strconv.Itoa(n), "The difference is H_n, whose denominator can be n.", f)
 	case 2:
-		k := w19N(1, 9)
+		k := w19N(1, 60)
 		w19I(f, "k", k)
 		return w19P(o, fmt.Sprintf("What is %d times (psi(%d)-psi(%d+1))? (enter an integer)", k, k, k),
 			"-1", "The difference is -1/k, so k times it is -1.", f)
@@ -849,7 +848,7 @@ func w19SpecPolylog(o int) generator.Problem {
 		return w19P(o, fmt.Sprintf("What is Li_%d(0)? (enter an integer)", k),
 			"0", "Every polylogarithm vanishes at the origin.", f)
 	case 2:
-		k := w19N(2, 9)
+		k := w19N(2, 60)
 		w19I(f, "k", k)
 		return w19P(o, fmt.Sprintf("Li_1(1-1/%d) equals c*log %d. What is c? (enter an integer)", k, k),
 			"1", "Li_1(z)=-log(1-z), so the value is log k.", f)

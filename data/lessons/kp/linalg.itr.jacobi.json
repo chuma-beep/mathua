@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Splitting",
+    "section": "Splitting",
+    "subgoals": [
+      "Separate the diagonal",
+      "Apply the remainder",
+      "Write the iteration matrix"
+    ]
+  },
+  {
+    "label": "Updates",
+    "section": "Updates",
+    "subgoals": [
+      "Sweep the coordinates",
+      "Keep old values",
+      "Count the work"
+    ]
+  },
+  {
+    "label": "Convergence",
+    "section": "Convergence",
+    "subgoals": [
+      "Compute the spectral radius",
+      "Test diagonal dominance",
+      "Predict convergence"
+    ]
+  }
+]

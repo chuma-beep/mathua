@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Generation",
+    "section": "Generation",
+    "subgoals": [
+      "Iterate the map",
+      "Take the span",
+      "Stop at dependence"
+    ]
+  },
+  {
+    "label": "Dimension",
+    "section": "Dimension",
+    "subgoals": [
+      "Find the first relation",
+      "Read its degree",
+      "Match the dimension"
+    ]
+  },
+  {
+    "label": "Companion block",
+    "section": "Companion block",
+    "subgoals": [
+      "Write the block",
+      "Recognise the companion form",
+      "Assemble the rational form"
+    ]
+  }
+]

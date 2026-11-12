@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Cosets",
+    "section": "Cosets",
+    "subgoals": [
+      "Form a coset",
+      "Test equivalence",
+      "Describe the quotient set"
+    ]
+  },
+  {
+    "label": "Dimension",
+    "section": "Dimension",
+    "subgoals": [
+      "Subtract dimensions",
+      "Identify the quotient map",
+      "Check surjectivity"
+    ]
+  },
+  {
+    "label": "Isomorphism",
+    "section": "Isomorphism",
+    "subgoals": [
+      "Apply the first isomorphism theorem",
+      "Identify kernel and image",
+      "Recover rank-nullity"
+    ]
+  }
+]

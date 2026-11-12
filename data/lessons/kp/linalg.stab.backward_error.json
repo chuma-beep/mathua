@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Perturb the data",
+      "Make the answer exact",
+      "Measure the perturbation"
+    ]
+  },
+  {
+    "label": "Stability",
+    "section": "Stability",
+    "subgoals": [
+      "Compare with epsilon",
+      "Recognise backward stability",
+      "Name pivoting"
+    ]
+  },
+  {
+    "label": "Transfer",
+    "section": "Transfer",
+    "subgoals": [
+      "Multiply by the condition",
+      "Separate the two errors",
+      "Explain a poor answer"
+    ]
+  }
+]

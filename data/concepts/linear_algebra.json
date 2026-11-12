@@ -1163,5 +1163,767 @@
       "streak": 10,
       "avg_time_seconds": 22.0
     }
+  },
+  {
+    "id": "linalg.ml.tensor_space",
+    "label": "Tensor products of vector spaces",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.multilinear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.vec.basis"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.vec.basis"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.ml.symmetric_square",
+    "label": "Symmetric squares",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.multilinear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.ml.tensor_space"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.ml.tensor_space"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.ml.exterior_square",
+    "label": "Exterior squares",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.multilinear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.ml.tensor_space"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.ml.tensor_space"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.ml.wedge",
+    "label": "Wedge products of vectors",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.multilinear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.ml.exterior_square"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.ml.exterior_square"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.ml.alternating",
+    "label": "Alternating multilinear forms",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.multilinear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.ml.wedge"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.ml.wedge"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.ml.pfaffian",
+    "label": "The Pfaffian",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.multilinear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.ml.alternating"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.ml.alternating"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.ml.bilinear_rank",
+    "label": "Rank of a bilinear form",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.multilinear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.matrix.rank"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.matrix.rank"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.ml.quadratic_rank",
+    "label": "Rank of a quadratic form",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.multilinear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.ml.symmetric_square"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.ml.symmetric_square"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.ml.inertia",
+    "label": "Sylvester's law of inertia",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.multilinear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.ml.quadratic_rank"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.ml.quadratic_rank"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.ml.polarization",
+    "label": "The polarization identity",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.multilinear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.ml.quadratic_rank"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.ml.quadratic_rank"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.func.dual",
+    "label": "The dual space",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.functional",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.vec.basis"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.vec.basis"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.func.annihilator",
+    "label": "Annihilators",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.functional",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.func.dual"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.func.dual"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.func.quotient",
+    "label": "Quotient spaces",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.functional",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.subspace"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.subspace"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.func.exact",
+    "label": "Exact sequences of maps",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.functional",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.func.quotient"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.func.quotient"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.func.adjoint",
+    "label": "Adjoint maps",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.functional",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.inner_product"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.inner_product"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.func.riesz",
+    "label": "Riesz representation for inner products",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.functional",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.func.dual",
+      "linalg.inner_product"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.func.dual"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.func.invariant",
+    "label": "Invariant subspaces",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.functional",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.transform.kernel"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.transform.kernel"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.func.cyclic",
+    "label": "Cyclic subspaces",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.functional",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.func.invariant"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.func.invariant"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.func.minimal_polynomial",
+    "label": "The minimal polynomial",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.functional",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.eigen.cayley_hamilton"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.eigen.cayley_hamilton"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.func.direct_sum",
+    "label": "Direct sums",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.functional",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.func.quotient"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.func.quotient"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.itr.jacobi",
+    "label": "Jacobi splitting",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.iterative",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.systems.matrix"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.systems.matrix"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.itr.gauss_seidel",
+    "label": "Gauss-Seidel splitting",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.iterative",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.itr.jacobi"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.itr.jacobi"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.itr.sor",
+    "label": "Over-relaxation parameters",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.iterative",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.itr.gauss_seidel"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.itr.gauss_seidel"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.itr.residual",
+    "label": "Residuals of iterative solvers",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.iterative",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.systems.matrix"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.systems.matrix"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.itr.convergence",
+    "label": "Convergence rates",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.iterative",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.itr.jacobi"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.itr.jacobi"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.itr.krylov",
+    "label": "Krylov subspaces",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.iterative",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.itr.convergence"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.itr.convergence"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.itr.arnoldi",
+    "label": "Arnoldi basis construction",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.iterative",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.itr.krylov"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.itr.krylov"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.itr.gmres",
+    "label": "GMRES",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.iterative",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.itr.arnoldi"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.itr.arnoldi"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.itr.cg",
+    "label": "Conjugate gradients",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.iterative",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.itr.krylov",
+      "linalg.quadratic.definite"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.itr.krylov"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.itr.preconditioner",
+    "label": "Preconditioned iterations",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.iterative",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.itr.cg"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.itr.cg"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.stab.forward_error",
+    "label": "Forward error",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.stability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.matrix.condition"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.matrix.condition"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.stab.backward_error",
+    "label": "Backward error",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.stability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.stab.forward_error"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.stab.forward_error"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.stab.machine_epsilon",
+    "label": "Machine epsilon",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.stability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.stab.backward_error"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.stab.backward_error"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.stab.growth",
+    "label": "Growth factors",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.stability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.decomp.lu"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.decomp.lu"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.stab.pivoting",
+    "label": "Pivoting strategies",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.stability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.stab.growth"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.stab.growth"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.stab.condition_error",
+    "label": "Conditioning of errors",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.stability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.stab.backward_error"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.stab.backward_error"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.stab.residual_bound",
+    "label": "Residual bounds",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.stability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.stab.condition_error"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.stab.condition_error"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.stab.componentwise",
+    "label": "Componentwise stability",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.stability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.stab.residual_bound"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.stab.residual_bound"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.stab.perturbation",
+    "label": "Perturbation theory",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.stability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.stab.condition_error"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.stab.condition_error"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "linalg.stab.rank_revealing",
+    "label": "Rank-revealing factorisations",
+    "domain": "linear_algebra",
+    "subdomain": "linear_algebra.stability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "linalg.decomp.svd"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "linalg.decomp.svd"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
   }
 ]

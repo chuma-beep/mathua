@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Dimension",
+    "section": "Dimension",
+    "subgoals": [
+      "Match the dimension",
+      "Build the dual basis",
+      "Pair basis elements"
+    ]
+  },
+  {
+    "label": "Pairing",
+    "section": "Pairing",
+    "subgoals": [
+      "Evaluate a functional",
+      "Write the coordinate product",
+      "Distinguish row from column"
+    ]
+  },
+  {
+    "label": "Double dual",
+    "section": "Double dual",
+    "subgoals": [
+      "Map into the double dual",
+      "Check injectivity",
+      "Use finite dimension"
+    ]
+  }
+]

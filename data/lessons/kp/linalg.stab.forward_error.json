@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Absolute",
+    "section": "Absolute",
+    "subgoals": [
+      "Subtract the vectors",
+      "Take a norm",
+      "Read the units"
+    ]
+  },
+  {
+    "label": "Relative",
+    "section": "Relative",
+    "subgoals": [
+      "Divide by the answer",
+      "Remove the scale",
+      "Compare problems"
+    ]
+  },
+  {
+    "label": "Bound",
+    "section": "Bound",
+    "subgoals": [
+      "Multiply by the condition number",
+      "Use backward error",
+      "Interpret the product"
+    ]
+  }
+]

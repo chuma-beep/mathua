@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Inertia",
+    "section": "Inertia",
+    "subgoals": [
+      "Count positive squares",
+      "Count negative squares",
+      "State invariance"
+    ]
+  },
+  {
+    "label": "Signature",
+    "section": "Signature",
+    "subgoals": [
+      "Subtract the counts",
+      "Recover inertia from rank",
+      "Read the sign"
+    ]
+  },
+  {
+    "label": "Definiteness",
+    "section": "Definiteness",
+    "subgoals": [
+      "Test positive definiteness",
+      "Recognise indefiniteness",
+      "Count zero directions"
+    ]
+  }
+]

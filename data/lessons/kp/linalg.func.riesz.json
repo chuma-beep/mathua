@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Existence",
+    "section": "Existence",
+    "subgoals": [
+      "Read coefficients",
+      "Build the vector",
+      "Verify the pairing"
+    ]
+  },
+  {
+    "label": "Uniqueness",
+    "section": "Uniqueness",
+    "subgoals": [
+      "Assume two vectors",
+      "Pair with the difference",
+      "Conclude equality"
+    ]
+  },
+  {
+    "label": "Consequences",
+    "section": "Consequences",
+    "subgoals": [
+      "Track conjugation",
+      "Derive the normal equations",
+      "Construct adjoints"
+    ]
+  }
+]

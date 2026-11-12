@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Directions",
+    "section": "Directions",
+    "subgoals": [
+      "Choose conjugate directions",
+      "Minimise along each",
+      "Preserve earlier directions"
+    ]
+  },
+  {
+    "label": "Short recurrence",
+    "section": "Short recurrence",
+    "subgoals": [
+      "Update the residual",
+      "Update the direction",
+      "Keep storage constant"
+    ]
+  },
+  {
+    "label": "Finite termination",
+    "section": "Finite termination",
+    "subgoals": [
+      "Bound by n steps",
+      "Handle rounding",
+      "Use a tolerance"
+    ]
+  }
+]

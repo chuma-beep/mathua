@@ -1,6 +1,7 @@
 package complex
 
 import (
+	"math/big"
 	"strconv"
 	"testing"
 
@@ -683,14 +684,14 @@ func TestWave19AnswersRecompute(t *testing.T) {
 						wave19Check64(t, p, wave19Factorial(t, wave19FactInt(t, p, "n")))
 					case 2:
 						n := wave19FactInt(t, p, "n")
-						num := wave19Factorial(t, 2*n)
-						den := int64(1)
-						for i := 0; i < n; i++ {
-							den *= 4
+						num := new(big.Int).MulRange(1, int64(2*n))
+						den := new(big.Int).Lsh(big.NewInt(1), uint(2*n))
+						den.Mul(den, new(big.Int).MulRange(1, int64(n)))
+						g := new(big.Int).GCD(nil, nil, num, den)
+						den.Div(den, g)
+						if p.Answer != den.String() {
+							t.Fatalf("%s: answer = %s, want %s", p.Question, p.Answer, den.String())
 						}
-						den *= wave19Factorial(t, n)
-						g := wave19GCD64(num, den)
-						wave19Check64(t, p, den/g)
 					default:
 						wave19Check64(t, p, wave19Factorial(t, wave19FactInt(t, p, "n")-1))
 					}

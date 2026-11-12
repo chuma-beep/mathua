@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Rate",
+    "section": "Rate",
+    "subgoals": [
+      "Raise the radius to k",
+      "Bound the error",
+      "Read the asymptotic rate"
+    ]
+  },
+  {
+    "label": "Digits",
+    "section": "Digits",
+    "subgoals": [
+      "Take a base-ten logarithm",
+      "Count digits per step",
+      "Compare radii"
+    ]
+  },
+  {
+    "label": "Acceleration",
+    "section": "Acceleration",
+    "subgoals": [
+      "Use earlier iterates",
+      "Contrast with Krylov",
+      "Keep the spectrum fixed"
+    ]
+  }
+]

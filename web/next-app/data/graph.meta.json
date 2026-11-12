@@ -1,7 +1,7 @@
 {
   "quizGateXP": 50,
-  "conceptCount": 2600,
-  "connectionCount": 3545,
+  "conceptCount": 2640,
+  "connectionCount": 3587,
   "domainCount": 24,
   "domainCounts": {
     "abstract_algebra": 120,
@@ -16,7 +16,7 @@
     "fractions": 67,
     "geometry": 87,
     "graph_theory": 120,
-    "linear_algebra": 80,
+    "linear_algebra": 120,
     "machine_learning": 120,
     "number_theory": 121,
     "numerical_analysis": 120,

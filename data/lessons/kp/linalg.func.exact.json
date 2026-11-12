@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Exactness",
+    "section": "Exactness",
+    "subgoals": [
+      "Check image equals kernel",
+      "Read injectivity at the left",
+      "Read surjectivity at the right"
+    ]
+  },
+  {
+    "label": "Dimension",
+    "section": "Dimension",
+    "subgoals": [
+      "Write the alternating sum",
+      "Apply rank-nullity",
+      "Compute the Euler characteristic"
+    ]
+  },
+  {
+    "label": "Splitting",
+    "section": "Splitting",
+    "subgoals": [
+      "Find a section",
+      "Split a short sequence",
+      "Identify a direct summand"
+    ]
+  }
+]

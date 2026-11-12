@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "List the images",
+      "Take the span",
+      "Bound the dimension"
+    ]
+  },
+  {
+    "label": "Nestedness",
+    "section": "Nestedness",
+    "subgoals": [
+      "Nest the subspaces",
+      "Detect dependence",
+      "Relate to the minimal polynomial"
+    ]
+  },
+  {
+    "label": "Methods",
+    "section": "Methods",
+    "subgoals": [
+      "Build a basis",
+      "Choose an optimality condition",
+      "Compare CG and GMRES"
+    ]
+  }
+]

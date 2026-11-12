@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Sum over matchings",
+      "Apply the sign rule",
+      "Require even order"
+    ]
+  },
+  {
+    "label": "Terms",
+    "section": "Terms",
+    "subgoals": [
+      "Count matchings",
+      "Compute (2m-1)!!",
+      "Check the order-four case"
+    ]
+  },
+  {
+    "label": "Square",
+    "section": "Square",
+    "subgoals": [
+      "Relate to the determinant",
+      "Square the value",
+      "Use alternating symmetry"
+    ]
+  }
+]

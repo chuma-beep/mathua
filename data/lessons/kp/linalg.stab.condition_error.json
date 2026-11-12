@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Amplification",
+    "section": "Amplification",
+    "subgoals": [
+      "Perturb the data",
+      "Multiply by kappa",
+      "Read the worst case"
+    ]
+  },
+  {
+    "label": "Digits",
+    "section": "Digits",
+    "subgoals": [
+      "Count digits of kappa",
+      "Subtract from precision",
+      "Predict lost digits"
+    ]
+  },
+  {
+    "label": "Geometry",
+    "section": "Geometry",
+    "subgoals": [
+      "Measure near-singularity",
+      "Identify collapsed directions",
+      "Compare singular values"
+    ]
+  }
+]

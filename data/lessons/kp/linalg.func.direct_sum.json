@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Dimension",
+    "section": "Dimension",
+    "subgoals": [
+      "Add the dimensions",
+      "Check the intersection",
+      "State uniqueness"
+    ]
+  },
+  {
+    "label": "Projections",
+    "section": "Projections",
+    "subgoals": [
+      "Build a projection",
+      "Check idempotence",
+      "Sum to the identity"
+    ]
+  },
+  {
+    "label": "Decomposition",
+    "section": "Decomposition",
+    "subgoals": [
+      "Block diagonalise",
+      "Preserve summands",
+      "Combine invariant pieces"
+    ]
+  }
+]

@@ -5,8 +5,8 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 2600,
-  "unit_count": 159,
+  "concept_count": 2640,
+  "unit_count": 161,
   "units": [
     {
       "id": "abstract_algebra.b6",
@@ -2673,25 +2673,40 @@
       "depth_max": 14,
       "subdomains": [
         "linear_algebra.determinants",
+        "linear_algebra.functional",
         "linear_algebra.inner_product",
         "linear_algebra.matrices",
+        "linear_algebra.multilinear",
+        "linear_algebra.stability",
         "linear_algebra.vectors"
       ],
       "concept_ids": [
         "linalg.basis.change",
         "linalg.det.properties",
+        "linalg.func.adjoint",
+        "linalg.func.annihilator",
+        "linalg.func.direct_sum",
+        "linalg.func.dual",
+        "linalg.func.exact",
+        "linalg.func.quotient",
+        "linalg.func.riesz",
         "linalg.independence.count",
         "linalg.inner_product",
         "linalg.matrix.determinant_lemma",
         "linalg.matrix.permutation",
         "linalg.matrix.vandermonde",
+        "linalg.ml.exterior_square",
+        "linalg.ml.symmetric_square",
+        "linalg.ml.tensor_space",
         "linalg.orth.complement",
         "linalg.orth.gram_schmidt",
         "linalg.orth.projection_matrix",
+        "linalg.stab.growth",
+        "linalg.stab.pivoting",
         "linalg.subspace",
         "linalg.vec.basis"
       ],
-      "concept_count": 12
+      "concept_count": 24
     },
     {
       "id": "linear_algebra.b5",
@@ -2699,16 +2714,23 @@
       "domain": "linear_algebra",
       "band": 5,
       "depth_min": 15,
-      "depth_max": 16,
+      "depth_max": 17,
       "subdomains": [
         "linear_algebra.decompositions",
+        "linear_algebra.multilinear",
         "linear_algebra.transformations"
       ],
       "concept_ids": [
         "linalg.decomp.qr",
+        "linalg.ml.alternating",
+        "linalg.ml.inertia",
+        "linalg.ml.pfaffian",
+        "linalg.ml.polarization",
+        "linalg.ml.quadratic_rank",
+        "linalg.ml.wedge",
         "linalg.transform.householder"
       ],
-      "concept_count": 2
+      "concept_count": 8
     },
     {
       "id": "linear_algebra.b7",
@@ -2718,10 +2740,13 @@
       "depth_min": 21,
       "depth_max": 23,
       "subdomains": [
+        "linear_algebra.iterative",
         "linear_algebra.systems",
         "linear_algebra.transformations"
       ],
       "concept_ids": [
+        "linalg.itr.jacobi",
+        "linalg.itr.residual",
         "linalg.lintrans.concept",
         "linalg.sys.cramer",
         "linalg.systems.matrix",
@@ -2730,7 +2755,7 @@
         "linalg.transform.givens",
         "linalg.transform.matrix"
       ],
-      "concept_count": 7
+      "concept_count": 9
     },
     {
       "id": "linear_algebra.b8",
@@ -2742,7 +2767,9 @@
       "subdomains": [
         "linear_algebra.eigenvalues",
         "linear_algebra.inner_product",
+        "linear_algebra.iterative",
         "linear_algebra.matrices",
+        "linear_algebra.multilinear",
         "linear_algebra.systems",
         "linear_algebra.transformations"
       ],
@@ -2754,17 +2781,23 @@
         "linalg.eigen.diagonalization",
         "linalg.eigen.trace",
         "linalg.invertible.theorem",
+        "linalg.itr.arnoldi",
+        "linalg.itr.convergence",
+        "linalg.itr.gauss_seidel",
+        "linalg.itr.krylov",
+        "linalg.itr.sor",
         "linalg.matrix.circulant",
         "linalg.matrix.elementary",
         "linalg.matrix.fundamental_subspaces",
         "linalg.matrix.rank",
         "linalg.matrix.rank_factorization",
+        "linalg.ml.bilinear_rank",
         "linalg.orth.least_squares",
         "linalg.rank.nullity",
         "linalg.systems.homogeneous",
         "linalg.transform.kernel"
       ],
-      "concept_count": 16
+      "concept_count": 22
     },
     {
       "id": "linear_algebra.b9",
@@ -2776,7 +2809,10 @@
       "subdomains": [
         "linear_algebra.decompositions",
         "linear_algebra.eigenvalues",
+        "linear_algebra.functional",
+        "linear_algebra.iterative",
         "linear_algebra.matrices",
+        "linear_algebra.stability",
         "linear_algebra.systems",
         "linear_algebra.transformations"
       ],
@@ -2789,14 +2825,57 @@
         "linalg.eigen.cayley_hamilton",
         "linalg.eigen.eigenspace",
         "linalg.eigen.similar",
+        "linalg.func.cyclic",
+        "linalg.func.invariant",
+        "linalg.func.minimal_polynomial",
+        "linalg.itr.cg",
+        "linalg.itr.gmres",
         "linalg.matrix.companion",
         "linalg.matrix.condition",
         "linalg.matrix.trace_identities",
         "linalg.quadratic.definite",
+        "linalg.stab.forward_error",
+        "linalg.stab.rank_revealing",
         "linalg.symmetric.spectral",
         "linalg.transform.invertible"
       ],
-      "concept_count": 14
+      "concept_count": 21
+    },
+    {
+      "id": "linear_algebra.b10",
+      "title": "Linear Algebra · Stage 11",
+      "domain": "linear_algebra",
+      "band": 10,
+      "depth_min": 30,
+      "depth_max": 32,
+      "subdomains": [
+        "linear_algebra.iterative",
+        "linear_algebra.stability"
+      ],
+      "concept_ids": [
+        "linalg.itr.preconditioner",
+        "linalg.stab.backward_error",
+        "linalg.stab.condition_error",
+        "linalg.stab.machine_epsilon",
+        "linalg.stab.perturbation",
+        "linalg.stab.residual_bound"
+      ],
+      "concept_count": 6
+    },
+    {
+      "id": "linear_algebra.b11",
+      "title": "Linear Algebra · Stage 12",
+      "domain": "linear_algebra",
+      "band": 11,
+      "depth_min": 33,
+      "depth_max": 33,
+      "subdomains": [
+        "linear_algebra.stability"
+      ],
+      "concept_ids": [
+        "linalg.stab.componentwise"
+      ],
+      "concept_count": 1
     },
     {
       "id": "machine_learning.b3",

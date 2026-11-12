@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Compute b minus Ax",
+      "Take a norm",
+      "Relate to the error"
+    ]
+  },
+  {
+    "label": "Recursion",
+    "section": "Recursion",
+    "subgoals": [
+      "Update the residual",
+      "Count the work",
+      "Watch accumulation"
+    ]
+  },
+  {
+    "label": "Stopping",
+    "section": "Stopping",
+    "subgoals": [
+      "Set a tolerance",
+      "Scale by b",
+      "Check the condition number"
+    ]
+  }
+]

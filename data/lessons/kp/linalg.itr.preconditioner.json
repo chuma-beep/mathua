@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Construction",
+    "section": "Construction",
+    "subgoals": [
+      "Approximate the inverse",
+      "Keep application cheap",
+      "Choose a family"
+    ]
+  },
+  {
+    "label": "Spectrum",
+    "section": "Spectrum",
+    "subgoals": [
+      "Cluster eigenvalues",
+      "Compare distributions",
+      "Predict the rate"
+    ]
+  },
+  {
+    "label": "Trade-off",
+    "section": "Trade-off",
+    "subgoals": [
+      "Count work per step",
+      "Count steps",
+      "Minimise the total"
+    ]
+  }
+]

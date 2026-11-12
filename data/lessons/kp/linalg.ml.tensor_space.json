@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Dimension",
+    "section": "Dimension",
+    "subgoals": [
+      "Multiply the dimensions",
+      "Count basis pairs",
+      "Separate tensor from matrix"
+    ]
+  },
+  {
+    "label": "Universality",
+    "section": "Universality",
+    "subgoals": [
+      "Factor a bilinear map",
+      "State uniqueness",
+      "Recognise the universal property"
+    ]
+  },
+  {
+    "label": "Indexing",
+    "section": "Indexing",
+    "subgoals": [
+      "Expand a pure tensor",
+      "Read the array shape",
+      "Avoid confusing the two spaces"
+    ]
+  }
+]

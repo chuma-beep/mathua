@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Partial",
+    "section": "Partial",
+    "subgoals": [
+      "Scan the column",
+      "Choose the largest",
+      "Bound the multipliers"
+    ]
+  },
+  {
+    "label": "Complete",
+    "section": "Complete",
+    "subgoals": [
+      "Scan the submatrix",
+      "Compare the cost",
+      "Weigh the stability"
+    ]
+  },
+  {
+    "label": "Permutations",
+    "section": "Permutations",
+    "subgoals": [
+      "Record the swaps",
+      "Form the permutation",
+      "Solve with P A"
+    ]
+  }
+]

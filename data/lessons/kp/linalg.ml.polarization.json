@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Identity",
+    "section": "Identity",
+    "subgoals": [
+      "Write the four terms",
+      "Track the quarter",
+      "Handle the complex signs"
+    ]
+  },
+  {
+    "label": "Real case",
+    "section": "Real case",
+    "subgoals": [
+      "Use two norms",
+      "Subtract the squares",
+      "Divide by four"
+    ]
+  },
+  {
+    "label": "Consequences",
+    "section": "Consequences",
+    "subgoals": [
+      "Recover the pairing",
+      "Preserve norms",
+      "Extend to isometries"
+    ]
+  }
+]

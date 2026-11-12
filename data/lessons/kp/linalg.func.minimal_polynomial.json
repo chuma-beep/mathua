@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Degree",
+    "section": "Degree",
+    "subgoals": [
+      "Bound by the size",
+      "Detect the cyclic case",
+      "Compare with the characteristic degree"
+    ]
+  },
+  {
+    "label": "Roots",
+    "section": "Roots",
+    "subgoals": [
+      "List the eigenvalues",
+      "Read the largest block",
+      "Match exponents"
+    ]
+  },
+  {
+    "label": "Divisibility",
+    "section": "Divisibility",
+    "subgoals": [
+      "Divide the characteristic polynomial",
+      "Interpret the quotient",
+      "Use Cayley-Hamilton"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Value",
+    "section": "Value",
+    "subgoals": [
+      "Count significand bits",
+      "Compute the gap",
+      "Distinguish unit roundoff"
+    ]
+  },
+  {
+    "label": "Digits",
+    "section": "Digits",
+    "subgoals": [
+      "Convert to decimals",
+      "Count digits",
+      "Relate to cancellation"
+    ]
+  },
+  {
+    "label": "Arithmetic",
+    "section": "Arithmetic",
+    "subgoals": [
+      "Bound one operation",
+      "Accumulate bounds",
+      "Compare with exact arithmetic"
+    ]
+  }
+]
