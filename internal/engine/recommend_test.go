@@ -97,6 +97,49 @@ func TestReviewsDue_LearningConceptIsNotAReview(t *testing.T) {
 	}
 }
 
+func TestReviewsDue_MatchesGraphDecayWhenPrerequisiteIsUnmet(t *testing.T) {
+	// Reported from Discord: the graph counted 172 decayed concepts while the
+	// review queue offered 18. A decayed concept whose prerequisite is no
+	// longer met was counted by GetProgress and skipped by the scheduler.
+	e := testEngine(t)
+	st, _ := e.CreateStudent("riley")
+	old := time.Now().Add(-30 * 24 * time.Hour)
+	if err := e.repo.UpsertProgress(&storage.ConceptProgress{
+		StudentID: st.ID, ConceptID: "b", Status: "MASTERED",
+		LastReviewed: &old, LastAttempted: &old,
+	}); err != nil {
+		t.Fatalf("upsert: %v", err)
+	}
+
+	progress, err := e.GetProgress(st.ID)
+	if err != nil {
+		t.Fatalf("get progress: %v", err)
+	}
+	if got := progress["b"].Status; got != "DECAYING" {
+		t.Fatalf("graph status for b = %s, want DECAYING", got)
+	}
+
+	n, err := e.ReviewsDue(st.ID)
+	if err != nil {
+		t.Fatalf("reviews due: %v", err)
+	}
+	if n != 1 {
+		t.Fatalf("ReviewsDue = %d, want 1 to match the graph's decaying count", n)
+	}
+
+	sess, err := e.repo.CreateSession(st.ID)
+	if err != nil {
+		t.Fatalf("create session: %v", err)
+	}
+	q, err := e.NextReviewQuestion(sess.ID, st.ID)
+	if err != nil {
+		t.Fatalf("next review question: %v", err)
+	}
+	if q == nil || q.ConceptID != "b" {
+		t.Fatalf("NextReviewQuestion = %+v, want the decayed concept b", q)
+	}
+}
+
 func TestRecommendNext_DoesNotOfferAQuizWithNoCandidates(t *testing.T) {
 	e := testEngine(t)
 	st, _ := e.CreateStudent("nora")

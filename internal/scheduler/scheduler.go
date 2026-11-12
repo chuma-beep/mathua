@@ -312,13 +312,20 @@ func buildCandidates(dag *concepts.DAG, snapshots map[string]*ConceptSnapshot, n
 		}
 		snap := snapshots[c.ID]
 		effStatus, isReview := effectiveState(snap, now)
-		if effStatus == mastery.StatusMastered && !isReview {
-			if snap == nil || snap.WeaknessScore < weaknessPracticeFloor {
+		// A review is material the learner has already mastered. Prerequisites
+		// gate starting new material, not retaining it, and the corpus adds and
+		// rewrites prerequisite edges over time, so a mastered concept could
+		// otherwise become unservable when one of its prerequisites is newly
+		// inserted. That made the graph show review debt the queue refused.
+		if !isReview {
+			if effStatus == mastery.StatusMastered {
+				if snap == nil || snap.WeaknessScore < weaknessPracticeFloor {
+					continue
+				}
+			}
+			if !prereqsMet(dag, c, snapshots, now) {
 				continue
 			}
-		}
-		if !prereqsMet(dag, c, snapshots, now) {
-			continue
 		}
 		priority := computePriority(snap, now, isReview)
 		out = append(out, Candidate{Concept: c, IsReview: isReview, Priority: priority})
