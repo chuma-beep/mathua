@@ -1,0 +1,19 @@
+{
+  "concept": "arith.money.unit_price",
+  "setup": "This instance publishes [[total]] and [[items]].",
+  "steps": [
+    {
+      "fact": "total",
+      "say": "Read [[total]] from the generated instance."
+    },
+    {
+      "fact": "items",
+      "say": "Read [[items]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the stated relation to the published quantities. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

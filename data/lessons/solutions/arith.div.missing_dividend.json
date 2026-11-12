@@ -1,0 +1,23 @@
+{
+  "concept": "arith.div.missing_dividend",
+  "setup": "This instance publishes [[divisor]], [[quotient]] and [[remainder]].",
+  "steps": [
+    {
+      "fact": "divisor",
+      "say": "Read [[divisor]] from the generated instance."
+    },
+    {
+      "fact": "quotient",
+      "say": "Read [[quotient]] from the generated instance."
+    },
+    {
+      "fact": "remainder",
+      "say": "Read [[remainder]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the stated relation to the published quantities. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

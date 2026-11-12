@@ -75,6 +75,7 @@ func Register(reg *generator.Registry) {
 	registerBatch(reg)
 	registerWave8(reg)
 	registerWave8Remaining(reg)
+	registerWave12(reg)
 }
 
 type addGen struct {

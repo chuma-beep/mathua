@@ -1,0 +1,27 @@
+{
+  "concept": "arith.div.average",
+  "setup": "This instance publishes [[n1]], [[n2]], [[n3]] and [[n4]].",
+  "steps": [
+    {
+      "fact": "n1",
+      "say": "Read [[n1]] from the generated instance."
+    },
+    {
+      "fact": "n2",
+      "say": "Read [[n2]] from the generated instance."
+    },
+    {
+      "fact": "n3",
+      "say": "Read [[n3]] from the generated instance."
+    },
+    {
+      "fact": "n4",
+      "say": "Read [[n4]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the stated relation to the published quantities. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

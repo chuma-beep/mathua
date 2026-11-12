@@ -1,0 +1,23 @@
+{
+  "concept": "arith.add.three_addends",
+  "setup": "This instance publishes [[a]], [[b]] and [[c]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Read [[a]] from the generated instance."
+    },
+    {
+      "fact": "b",
+      "say": "Read [[b]] from the generated instance."
+    },
+    {
+      "fact": "c",
+      "say": "Read [[c]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the stated relation to the published quantities. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

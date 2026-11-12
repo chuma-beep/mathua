@@ -1,0 +1,23 @@
+{
+  "concept": "arith.estimate.reasonableness",
+  "setup": "This instance publishes [[a]], [[b]] and [[unit]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Read [[a]] from the generated instance."
+    },
+    {
+      "fact": "b",
+      "say": "Read [[b]] from the generated instance."
+    },
+    {
+      "fact": "unit",
+      "say": "Read [[unit]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the stated relation to the published quantities. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The idea",
+    "section": "The idea",
+    "subgoals": [
+      "State the relation used in the the idea step",
+      "Identify the quantities in the the idea step",
+      "Carry out the the idea computation for subtraction with regrouping in two columns"
+    ]
+  },
+  {
+    "label": "The computation",
+    "section": "The computation",
+    "subgoals": [
+      "State the relation used in the the computation step",
+      "Identify the quantities in the the computation step",
+      "Carry out the the computation computation for subtraction with regrouping in two columns"
+    ]
+  },
+  {
+    "label": "Reading the result",
+    "section": "Reading the result",
+    "subgoals": [
+      "State the relation used in the reading the result step",
+      "Identify the quantities in the reading the result step",
+      "Carry out the reading the result computation for subtraction with regrouping in two columns"
+    ]
+  }
+]

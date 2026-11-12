@@ -1,0 +1,19 @@
+{
+  "concept": "arith.time.duration",
+  "setup": "This instance publishes [[start]] and [[end]].",
+  "steps": [
+    {
+      "fact": "start",
+      "say": "Read [[start]] from the generated instance."
+    },
+    {
+      "fact": "end",
+      "say": "Read [[end]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the stated relation to the published quantities. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

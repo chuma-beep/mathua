@@ -1,0 +1,15 @@
+{
+  "concept": "arith.factor.divisor_count",
+  "setup": "This instance publishes [[n]], the only quantity needed.",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "Read [[n]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the stated relation to the published quantities. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

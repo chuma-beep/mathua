@@ -1,0 +1,19 @@
+{
+  "concept": "arith.neg.temperature",
+  "setup": "This instance publishes [[start]] and [[change]].",
+  "steps": [
+    {
+      "fact": "start",
+      "say": "Read [[start]] from the generated instance."
+    },
+    {
+      "fact": "change",
+      "say": "Read [[change]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the stated relation to the published quantities. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

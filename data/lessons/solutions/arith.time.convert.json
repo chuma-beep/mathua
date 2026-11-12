@@ -1,0 +1,19 @@
+{
+  "concept": "arith.time.convert",
+  "setup": "This instance publishes [[hours]] and [[minutes]].",
+  "steps": [
+    {
+      "fact": "hours",
+      "say": "Read [[hours]] from the generated instance."
+    },
+    {
+      "fact": "minutes",
+      "say": "Read [[minutes]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the stated relation to the published quantities. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

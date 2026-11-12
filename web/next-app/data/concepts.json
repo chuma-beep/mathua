@@ -5714,6 +5714,430 @@
     "subdomain": "arithmetic.word_problems"
   },
   {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.add.three_addends",
+    "label": "Three-addend column addition",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.add.carry"
+    ],
+    "subdomain": "arithmetic.addition"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.add.four_digit",
+    "label": "Four-digit addition",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.add.triple"
+    ],
+    "subdomain": "arithmetic.addition"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.add.regroup_twice",
+    "label": "Addition with regrouping in two columns",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.add.carry"
+    ],
+    "subdomain": "arithmetic.addition"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.sub.four_digit",
+    "label": "Four-digit subtraction",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.sub.borrow"
+    ],
+    "subdomain": "arithmetic.subtraction"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.sub.regroup_twice",
+    "label": "Subtraction with regrouping in two columns",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.sub.borrow"
+    ],
+    "subdomain": "arithmetic.subtraction"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.sub.missing_subtrahend",
+    "label": "Missing subtrahend",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.sub.borrow"
+    ],
+    "subdomain": "arithmetic.subtraction"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.mult.three_by_two",
+    "label": "Multiplying a three-digit number by a two-digit number",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.mult.two_by_two"
+    ],
+    "subdomain": "arithmetic.multiplication"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.mult.powers_ten",
+    "label": "Multiplying by powers of ten",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.place.powers_ten"
+    ],
+    "subdomain": "arithmetic.multiplication"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.mult.three_by_three",
+    "label": "Multiplying two three-digit numbers",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.mult.two_by_two"
+    ],
+    "subdomain": "arithmetic.multiplication"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.div.three_digit_divisor",
+    "label": "Dividing by a three-digit divisor",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.div.two_digit_divisor"
+    ],
+    "subdomain": "arithmetic.division"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.div.average",
+    "label": "Finding the mean of four numbers",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.div.basic"
+    ],
+    "subdomain": "arithmetic.division"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.div.missing_dividend",
+    "label": "Missing dividend from quotient and remainder",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.div.remainder"
+    ],
+    "subdomain": "arithmetic.division"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.estimate.compatible",
+    "label": "Estimating quotients with compatible numbers",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.estimate.quotient"
+    ],
+    "subdomain": "arithmetic.estimation"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.estimate.reasonableness",
+    "label": "Checking reasonableness of a sum",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.estimate.sum"
+    ],
+    "subdomain": "arithmetic.estimation"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.neg.temperature",
+    "label": "Temperature change",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.neg.add_sub"
+    ],
+    "subdomain": "arithmetic.negatives"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.neg.elevation",
+    "label": "Elevation difference",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.neg.add_sub"
+    ],
+    "subdomain": "arithmetic.negatives"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.order_ops.brackets",
+    "label": "Order of operations with brackets",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.order_ops.nested"
+    ],
+    "subdomain": "arithmetic.order_of_operations"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.order_ops.negatives",
+    "label": "Order of operations with negatives and brackets",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.order_ops.full",
+      "arith.neg.add_sub"
+    ],
+    "subdomain": "arithmetic.order_of_operations"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.word.unit_rate",
+    "label": "Unit rate word problems",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.mult.word",
+      "arith.div.word"
+    ],
+    "subdomain": "arithmetic.word_problems"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.word.comparison",
+    "label": "Comparison word problems",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.sub.word"
+    ],
+    "subdomain": "arithmetic.word_problems"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.dec.compare",
+    "label": "Comparing decimals",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.dec.intro"
+    ],
+    "subdomain": "arithmetic.decimals_intro"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.dec.add",
+    "label": "Adding decimals",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.dec.intro"
+    ],
+    "subdomain": "arithmetic.decimals_intro"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.money.total",
+    "label": "Adding money amounts",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.add.double"
+    ],
+    "subdomain": "arithmetic.word_problems"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.money.discount",
+    "label": "Calculating a discount",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.mult.tables",
+      "arith.dec.intro"
+    ],
+    "subdomain": "arithmetic.word_problems"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.money.unit_price",
+    "label": "Unit price from a total",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.div.basic"
+    ],
+    "subdomain": "arithmetic.word_problems"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.time.convert",
+    "label": "Converting hours and minutes",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.mult.tables"
+    ],
+    "subdomain": "arithmetic.word_problems"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.time.duration",
+    "label": "Elapsed minutes between two times",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.sub.double"
+    ],
+    "subdomain": "arithmetic.word_problems"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.time.pace",
+    "label": "Pace in minutes per kilometre",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.div.basic"
+    ],
+    "subdomain": "arithmetic.word_problems"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.factor.divisor_count",
+    "label": "Number of positive divisors",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.factor.find"
+    ],
+    "subdomain": "arithmetic.factors"
+  },
+  {
+    "domain": "arithmetic",
+    "grading_type": "numeric",
+    "id": "arith.order_ops.exponents",
+    "label": "Order of operations with exponents",
+    "mastery_threshold": {
+      "avg_time_seconds": 20,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.order_ops.nested",
+      "arith.exp.evaluate"
+    ],
+    "subdomain": "arithmetic.order_of_operations"
+  },
+  {
     "domain": "calc1",
     "encompasses": [
       "alg.func.concept"

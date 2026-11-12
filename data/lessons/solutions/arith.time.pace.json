@@ -1,0 +1,19 @@
+{
+  "concept": "arith.time.pace",
+  "setup": "This instance publishes [[minutes]] and [[distance]].",
+  "steps": [
+    {
+      "fact": "minutes",
+      "say": "Read [[minutes]] from the generated instance."
+    },
+    {
+      "fact": "distance",
+      "say": "Read [[distance]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the stated relation to the published quantities. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

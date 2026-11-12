@@ -11366,5 +11366,125 @@
   {
     "concept_id": "arith.neg.subtract",
     "source": "authored/arith.neg.subtract.md"
+  },
+  {
+    "concept_id": "arith.add.three_addends",
+    "source": "authored/arith.add.three_addends.md"
+  },
+  {
+    "concept_id": "arith.add.four_digit",
+    "source": "authored/arith.add.four_digit.md"
+  },
+  {
+    "concept_id": "arith.add.regroup_twice",
+    "source": "authored/arith.add.regroup_twice.md"
+  },
+  {
+    "concept_id": "arith.sub.four_digit",
+    "source": "authored/arith.sub.four_digit.md"
+  },
+  {
+    "concept_id": "arith.sub.regroup_twice",
+    "source": "authored/arith.sub.regroup_twice.md"
+  },
+  {
+    "concept_id": "arith.sub.missing_subtrahend",
+    "source": "authored/arith.sub.missing_subtrahend.md"
+  },
+  {
+    "concept_id": "arith.mult.three_by_two",
+    "source": "authored/arith.mult.three_by_two.md"
+  },
+  {
+    "concept_id": "arith.mult.powers_ten",
+    "source": "authored/arith.mult.powers_ten.md"
+  },
+  {
+    "concept_id": "arith.mult.three_by_three",
+    "source": "authored/arith.mult.three_by_three.md"
+  },
+  {
+    "concept_id": "arith.div.three_digit_divisor",
+    "source": "authored/arith.div.three_digit_divisor.md"
+  },
+  {
+    "concept_id": "arith.div.average",
+    "source": "authored/arith.div.average.md"
+  },
+  {
+    "concept_id": "arith.div.missing_dividend",
+    "source": "authored/arith.div.missing_dividend.md"
+  },
+  {
+    "concept_id": "arith.estimate.compatible",
+    "source": "authored/arith.estimate.compatible.md"
+  },
+  {
+    "concept_id": "arith.estimate.reasonableness",
+    "source": "authored/arith.estimate.reasonableness.md"
+  },
+  {
+    "concept_id": "arith.order_ops.exponents",
+    "source": "authored/arith.order_ops.exponents.md"
+  },
+  {
+    "concept_id": "arith.neg.temperature",
+    "source": "authored/arith.neg.temperature.md"
+  },
+  {
+    "concept_id": "arith.neg.elevation",
+    "source": "authored/arith.neg.elevation.md"
+  },
+  {
+    "concept_id": "arith.order_ops.brackets",
+    "source": "authored/arith.order_ops.brackets.md"
+  },
+  {
+    "concept_id": "arith.order_ops.negatives",
+    "source": "authored/arith.order_ops.negatives.md"
+  },
+  {
+    "concept_id": "arith.word.unit_rate",
+    "source": "authored/arith.word.unit_rate.md"
+  },
+  {
+    "concept_id": "arith.word.comparison",
+    "source": "authored/arith.word.comparison.md"
+  },
+  {
+    "concept_id": "arith.dec.compare",
+    "source": "authored/arith.dec.compare.md"
+  },
+  {
+    "concept_id": "arith.dec.add",
+    "source": "authored/arith.dec.add.md"
+  },
+  {
+    "concept_id": "arith.money.total",
+    "source": "authored/arith.money.total.md"
+  },
+  {
+    "concept_id": "arith.money.discount",
+    "source": "authored/arith.money.discount.md"
+  },
+  {
+    "concept_id": "arith.money.unit_price",
+    "source": "authored/arith.money.unit_price.md"
+  },
+  {
+    "concept_id": "arith.time.convert",
+    "source": "authored/arith.time.convert.md"
+  },
+  {
+    "concept_id": "arith.time.duration",
+    "source": "authored/arith.time.duration.md"
+  },
+  {
+    "concept_id": "arith.time.pace",
+    "source": "authored/arith.time.pace.md"
+  },
+  {
+    "concept_id": "arith.factor.divisor_count",
+    "source": "authored/arith.factor.divisor_count.md"
   }
 ]

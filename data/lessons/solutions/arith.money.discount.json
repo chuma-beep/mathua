@@ -1,0 +1,19 @@
+{
+  "concept": "arith.money.discount",
+  "setup": "This instance publishes [[price]] and [[percent]].",
+  "steps": [
+    {
+      "fact": "price",
+      "say": "Read [[price]] from the generated instance."
+    },
+    {
+      "fact": "percent",
+      "say": "Read [[percent]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the stated relation to the published quantities. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

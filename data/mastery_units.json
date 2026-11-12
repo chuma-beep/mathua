@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 2842,
+  "concept_count": 2872,
   "unit_count": 163,
   "units": [
     {
@@ -524,7 +524,8 @@
         "arithmetic.factors",
         "arithmetic.negatives",
         "arithmetic.place_value",
-        "arithmetic.subtraction"
+        "arithmetic.subtraction",
+        "arithmetic.word_problems"
       ],
       "concept_ids": [
         "arith.add.carry",
@@ -532,6 +533,7 @@
         "arith.add.single",
         "arith.add.word",
         "arith.factor.triangular_numbers",
+        "arith.money.total",
         "arith.neg.number_line",
         "arith.ops.compensation",
         "arith.ops.making_ten",
@@ -541,7 +543,7 @@
         "arith.sub.double",
         "arith.sub.single"
       ],
-      "concept_count": 13
+      "concept_count": 14
     },
     {
       "id": "arithmetic.b1",
@@ -561,7 +563,10 @@
         "arithmetic.word_problems"
       ],
       "concept_ids": [
+        "arith.add.four_digit",
         "arith.add.missing_addend",
+        "arith.add.regroup_twice",
+        "arith.add.three_addends",
         "arith.add.triple",
         "arith.compare.whole",
         "arith.div.concept",
@@ -570,6 +575,8 @@
         "arith.mult.area_model",
         "arith.mult.concept",
         "arith.neg.add_sub",
+        "arith.neg.elevation",
+        "arith.neg.temperature",
         "arith.neg.word",
         "arith.place.base_five",
         "arith.place.binary",
@@ -581,11 +588,16 @@
         "arith.round.tens",
         "arith.round.thousands",
         "arith.sub.borrow",
+        "arith.sub.four_digit",
+        "arith.sub.missing_subtrahend",
+        "arith.sub.regroup_twice",
         "arith.sub.word",
         "arith.sub.zeros",
-        "arith.time.elapsed"
+        "arith.time.duration",
+        "arith.time.elapsed",
+        "arith.word.comparison"
       ],
-      "concept_count": 23
+      "concept_count": 33
     },
     {
       "id": "arithmetic.b2",
@@ -603,23 +615,29 @@
         "arithmetic.multiplication",
         "arithmetic.negatives",
         "arithmetic.order_of_operations",
-        "arithmetic.place_value"
+        "arithmetic.place_value",
+        "arithmetic.word_problems"
       ],
       "concept_ids": [
         "arith.dec.intro",
+        "arith.div.average",
         "arith.div.basic",
         "arith.div.remainder",
         "arith.div.zero",
         "arith.estimate.product",
+        "arith.estimate.reasonableness",
         "arith.exp.concept",
         "arith.exp.evaluate",
         "arith.factor.divisibility",
+        "arith.factor.divisor_count",
         "arith.factor.even_odd",
         "arith.factor.find",
         "arith.factor.multiple",
         "arith.factor.prime",
         "arith.factor.square_numbers",
+        "arith.money.unit_price",
         "arith.mult.double",
+        "arith.mult.powers_ten",
         "arith.mult.tables",
         "arith.mult.triple",
         "arith.mult.two_by_two",
@@ -631,9 +649,11 @@
         "arith.ops.factorial_notation",
         "arith.order_ops.basic",
         "arith.place.millions",
-        "arith.place.powers_ten"
+        "arith.place.powers_ten",
+        "arith.time.convert",
+        "arith.time.pace"
       ],
-      "concept_count": 26
+      "concept_count": 33
     },
     {
       "id": "arithmetic.b3",
@@ -643,6 +663,7 @@
       "depth_min": 9,
       "depth_max": 11,
       "subdomains": [
+        "arithmetic.decimals_intro",
         "arithmetic.division",
         "arithmetic.estimation",
         "arithmetic.exponents",
@@ -652,9 +673,13 @@
         "arithmetic.word_problems"
       ],
       "concept_ids": [
+        "arith.dec.add",
+        "arith.dec.compare",
         "arith.div.interpret_remainder",
         "arith.div.long",
+        "arith.div.missing_dividend",
         "arith.div.partial_quotients",
+        "arith.div.three_digit_divisor",
         "arith.div.two_digit_divisor",
         "arith.div.word",
         "arith.estimate.quotient",
@@ -670,17 +695,24 @@
         "arith.factor.lcm",
         "arith.factor.prime_fact",
         "arith.money.change",
+        "arith.money.discount",
         "arith.mult.lattice",
         "arith.mult.partial_products",
+        "arith.mult.three_by_three",
+        "arith.mult.three_by_two",
+        "arith.order_ops.brackets",
+        "arith.order_ops.exponents",
         "arith.order_ops.full",
+        "arith.order_ops.negatives",
         "arith.order_ops.nested",
         "arith.sqrt.cube",
         "arith.sqrt.estimate",
         "arith.sqrt.perfect",
         "arith.sqrt.simplify",
-        "arith.word.multi_step"
+        "arith.word.multi_step",
+        "arith.word.unit_rate"
       ],
-      "concept_count": 27
+      "concept_count": 38
     },
     {
       "id": "arithmetic.b4",
@@ -690,12 +722,14 @@
       "depth_min": 12,
       "depth_max": 12,
       "subdomains": [
+        "arithmetic.estimation",
         "arithmetic.factors"
       ],
       "concept_ids": [
+        "arith.estimate.compatible",
         "arith.factor.gcf_lcm_word"
       ],
-      "concept_count": 1
+      "concept_count": 2
     },
     {
       "id": "calc1.b8",

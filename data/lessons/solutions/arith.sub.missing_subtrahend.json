@@ -1,0 +1,19 @@
+{
+  "concept": "arith.sub.missing_subtrahend",
+  "setup": "This instance publishes [[a]] and [[c]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Read [[a]] from the generated instance."
+    },
+    {
+      "fact": "c",
+      "say": "Read [[c]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the stated relation to the published quantities. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

@@ -1,0 +1,19 @@
+{
+  "concept": "arith.word.unit_rate",
+  "setup": "This instance publishes [[items]] and [[cost]].",
+  "steps": [
+    {
+      "fact": "items",
+      "say": "Read [[items]] from the generated instance."
+    },
+    {
+      "fact": "cost",
+      "say": "Read [[cost]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the stated relation to the published quantities. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

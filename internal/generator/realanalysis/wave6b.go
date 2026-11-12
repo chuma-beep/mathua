@@ -317,9 +317,9 @@ func w6bSigned(kp int) generator.Problem {
 	var masses []int
 	switch kp {
 	case 1:
-		masses = []int{w6bRNZ(-5, 5), w6bRNZ(-5, 5)}
+		masses = []int{w6bRNZ(-9, 9), w6bRNZ(-9, 9)}
 	case 2:
-		masses = []int{w6bRNZ(-5, 5), w6bRNZ(-5, 5), w6bRNZ(-5, 5)}
+		masses = []int{w6bRNZ(-7, 7), w6bRNZ(-7, 7), w6bRNZ(-7, 7)}
 	default:
 		masses = []int{w6bRNZ(-9, 9), w6bRNZ(-9, 9), w6bRNZ(-9, 9)}
 	}

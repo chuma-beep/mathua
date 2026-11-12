@@ -12,14 +12,14 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 2842 |
+| Total concepts | 2872 |
 | Total units | 163 |
 | Minimum unit size | 1 |
 | Median unit size | 13 |
 | Maximum unit size | 82 |
-| Singleton units | 24 |
+| Singleton units | 23 |
 | Units with <= 3 concepts | 37 |
-| Units with > 25 concepts | 47 |
+| Units with > 25 concepts | 48 |
 | Units with > 50 concepts | 7 |
 | Cross-unit prerequisite edges (derived) | 540 |
 | Backward band edges | 0 |
@@ -44,11 +44,11 @@ exists to make concrete.
 | `algebra.b7` | algebra | 7 | 58 | 11 | 21–23 |
 | `algebra.b8` | algebra | 8 | 49 | 11 | 24–26 |
 | `algebra.b9` | algebra | 9 | 13 | 6 | 27–29 |
-| `arithmetic.b0` | arithmetic | 0 | 13 | 5 | 0–2 |
-| `arithmetic.b1` | arithmetic | 1 | 23 | 8 | 3–5 |
-| `arithmetic.b2` | arithmetic | 2 | 26 | 9 | 6–8 |
-| `arithmetic.b3` | arithmetic | 3 | 27 | 7 | 9–11 |
-| `arithmetic.b4` | arithmetic | 4 | 1 | 1 | 12–12 |
+| `arithmetic.b0` | arithmetic | 0 | 14 | 6 | 0–2 |
+| `arithmetic.b1` | arithmetic | 1 | 33 | 8 | 3–5 |
+| `arithmetic.b2` | arithmetic | 2 | 33 | 10 | 6–8 |
+| `arithmetic.b3` | arithmetic | 3 | 38 | 8 | 9–11 |
+| `arithmetic.b4` | arithmetic | 4 | 2 | 2 | 12–12 |
 | `calc1.b8` | calc1 | 8 | 1 | 1 | 26–26 |
 | `calc1.b9` | calc1 | 9 | 23 | 3 | 27–29 |
 | `calc1.b10` | calc1 | 10 | 37 | 3 | 30–32 |
@@ -209,19 +209,19 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 222 | 10 | 56 | 25 | 51 | 30 | 0 |
-| 3 | 163 | 13 | 82 | 24 | 37 | 47 | 0 |
-| 4 | 127 | 19 | 86 | 9 | 22 | 50 | 0 |
+| 2 | 222 | 10 | 56 | 24 | 51 | 30 | 0 |
+| 3 | 163 | 13 | 82 | 23 | 37 | 48 | 0 |
+| 4 | 127 | 19 | 86 | 8 | 22 | 52 | 0 |
 | 5 | 107 | 20 | 104 | 5 | 15 | 48 | 0 |
-| 6 | 98 | 23 | 130 | 8 | 15 | 45 | 0 |
+| 6 | 98 | 23 | 130 | 7 | 15 | 45 | 0 |
 | 8 | 77 | 31 | 117 | 4 | 11 | 42 | 0 |
 | 10 | 65 | 30 | 145 | 2 | 7 | 35 | 0 |
-| 12 | 64 | 38 | 191 | 2 | 6 | 42 | 0 |
+| 12 | 64 | 38 | 191 | 1 | 6 | 42 | 0 |
 | 15 | 51 | 53 | 172 | 1 | 3 | 35 | 0 |
 | 20 | 44 | 68 | 145 | 0 | 3 | 32 | 0 |
 | 45 | 26 | 120 | 172 | 0 | 0 | 26 | 0 |
 
-**No width is clean.** Small widths fragment, at 3 there are 24 singleton units, which is a
+**No width is clean.** Small widths fragment, at 3 there are 23 singleton units, which is a
 quiz per concept and is exactly what §12 rules out. Large widths stop fragmenting but produce
 units too large to assess: at 45 the partition is just the 17 domains themselves, whose
 largest is 128 concepts. The usable widths trade fragmentation against size rather than
@@ -543,12 +543,12 @@ Unresolvable subdomains:
 `trigonometry.identities`
 `trigonometry.spherical`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2842
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2872
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings
 
-- **anomaly** `singleton_units`: 24 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
+- **anomaly** `singleton_units`: 23 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
 
 ## Not decided here
 

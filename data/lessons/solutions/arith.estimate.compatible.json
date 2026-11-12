@@ -1,0 +1,23 @@
+{
+  "concept": "arith.estimate.compatible",
+  "setup": "This instance publishes [[dividend]], [[divisor]] and [[friendly]].",
+  "steps": [
+    {
+      "fact": "dividend",
+      "say": "Read [[dividend]] from the generated instance."
+    },
+    {
+      "fact": "divisor",
+      "say": "Read [[divisor]] from the generated instance."
+    },
+    {
+      "fact": "friendly",
+      "say": "Read [[friendly]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the stated relation to the published quantities. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

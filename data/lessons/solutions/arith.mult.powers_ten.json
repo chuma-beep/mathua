@@ -1,0 +1,19 @@
+{
+  "concept": "arith.mult.powers_ten",
+  "setup": "This instance publishes [[n]] and [[k]].",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "Read [[n]] from the generated instance."
+    },
+    {
+      "fact": "k",
+      "say": "Read [[k]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the stated relation to the published quantities. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

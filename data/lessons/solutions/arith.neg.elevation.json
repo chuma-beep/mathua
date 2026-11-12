@@ -1,0 +1,19 @@
+{
+  "concept": "arith.neg.elevation",
+  "setup": "This instance publishes [[high]] and [[low]].",
+  "steps": [
+    {
+      "fact": "high",
+      "say": "Read [[high]] from the generated instance."
+    },
+    {
+      "fact": "low",
+      "say": "Read [[low]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the stated relation to the published quantities. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

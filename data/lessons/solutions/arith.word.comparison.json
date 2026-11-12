@@ -1,0 +1,19 @@
+{
+  "concept": "arith.word.comparison",
+  "setup": "This instance publishes [[first]] and [[second]].",
+  "steps": [
+    {
+      "fact": "first",
+      "say": "Read [[first]] from the generated instance."
+    },
+    {
+      "fact": "second",
+      "say": "Read [[second]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the stated relation to the published quantities. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

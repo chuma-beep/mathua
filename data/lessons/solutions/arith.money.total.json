@@ -1,0 +1,23 @@
+{
+  "concept": "arith.money.total",
+  "setup": "This instance publishes [[p1]], [[p2]] and [[p3]].",
+  "steps": [
+    {
+      "fact": "p1",
+      "say": "Read [[p1]] from the generated instance."
+    },
+    {
+      "fact": "p2",
+      "say": "Read [[p2]] from the generated instance."
+    },
+    {
+      "fact": "p3",
+      "say": "Read [[p3]] from the generated instance."
+    },
+    {
+      "fact": "answer",
+      "say": "Apply the stated relation to the published quantities. The requested value is [[answer]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}
