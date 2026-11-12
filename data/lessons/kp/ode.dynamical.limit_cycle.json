@@ -1,0 +1,29 @@
+[
+  {
+    "label": "An isolated closed orbit",
+    "section": "An isolated closed orbit",
+    "subgoals": [
+      "Identify a periodic solution",
+      "Check that nearby orbits are not closed",
+      "State the amplitude"
+    ]
+  },
+  {
+    "label": "Stability",
+    "section": "Stability",
+    "subgoals": [
+      "Define the Poincare map",
+      "Evaluate its derivative",
+      "Classify the cycle"
+    ]
+  },
+  {
+    "label": "Amplitude and frequency",
+    "section": "Amplitude and frequency",
+    "subgoals": [
+      "Compare two initial conditions",
+      "Track the energy balance",
+      "Read the limiting amplitude"
+    ]
+  }
+]

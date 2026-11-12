@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Multiply and integrate",
+    "section": "Multiply and integrate",
+    "subgoals": [
+      "Multiply the equation by the solution",
+      "Integrate over the domain",
+      "Recognise the squared and gradient terms"
+    ]
+  },
+  {
+    "label": "Boundary terms",
+    "section": "Boundary terms",
+    "subgoals": [
+      "Apply the divergence theorem",
+      "Impose the boundary condition",
+      "Drop the vanishing term"
+    ]
+  },
+  {
+    "label": "The decay estimate",
+    "section": "The decay estimate",
+    "subgoals": [
+      "Apply the Poincare inequality",
+      "Solve the differential inequality",
+      "Read the decay rate"
+    ]
+  }
+]

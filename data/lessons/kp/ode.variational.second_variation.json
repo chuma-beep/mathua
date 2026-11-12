@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The quadratic form",
+    "section": "The quadratic form",
+    "subgoals": [
+      "Differentiate the functional twice",
+      "Collect the quadratic terms",
+      "Identify the coefficient"
+    ]
+  },
+  {
+    "label": "Legendre condition",
+    "section": "Legendre condition",
+    "subgoals": [
+      "Evaluate the slope coefficient",
+      "Impose positivity",
+      "Rule out a minimum when it fails"
+    ]
+  },
+  {
+    "label": "Conjugate points",
+    "section": "Conjugate points",
+    "subgoals": [
+      "Write the Jacobi equation",
+      "Find an interior zero",
+      "Decide minimality"
+    ]
+  }
+]

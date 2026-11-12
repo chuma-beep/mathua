@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The functional",
+    "section": "The functional",
+    "subgoals": [
+      "Write the integral",
+      "Identify the Lagrangian arguments",
+      "Evaluate it on a curve"
+    ]
+  },
+  {
+    "label": "The variation",
+    "section": "The variation",
+    "subgoals": [
+      "Choose an admissible perturbation",
+      "Form the family of curves",
+      "Impose the endpoint conditions"
+    ]
+  },
+  {
+    "label": "Stationarity",
+    "section": "Stationarity",
+    "subgoals": [
+      "Differentiate with respect to the parameter",
+      "Set the derivative to zero",
+      "State the condition for all perturbations"
+    ]
+  }
+]

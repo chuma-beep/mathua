@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Construction",
+    "section": "Construction",
+    "subgoals": [
+      "Interpolate the past values",
+      "Differentiate at the new time",
+      "Write the implicit equation"
+    ]
+  },
+  {
+    "label": "First and second order",
+    "section": "First and second order",
+    "subgoals": [
+      "Identify BDF1",
+      "Write the BDF2 coefficients",
+      "Check A-stability"
+    ]
+  },
+  {
+    "label": "Stability limits",
+    "section": "Stability limits",
+    "subgoals": [
+      "State the order bound",
+      "Explain zero-stability",
+      "Choose a practical order"
+    ]
+  }
+]

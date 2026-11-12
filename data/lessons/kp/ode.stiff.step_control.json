@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The error estimate",
+    "section": "The error estimate",
+    "subgoals": [
+      "Compare the embedded pair",
+      "Scale by the solution",
+      "Form the error ratio"
+    ]
+  },
+  {
+    "label": "The controller",
+    "section": "The controller",
+    "subgoals": [
+      "Apply the power law",
+      "Include the safety factor",
+      "Clamp the step"
+    ]
+  },
+  {
+    "label": "Stability ceiling",
+    "section": "Stability ceiling",
+    "subgoals": [
+      "Identify the fast mode",
+      "Compare the two ceilings",
+      "Explain the removed limit"
+    ]
+  }
+]

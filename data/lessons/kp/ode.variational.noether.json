@@ -1,0 +1,29 @@
+[
+  {
+    "label": "A one-parameter symmetry",
+    "section": "A one-parameter symmetry",
+    "subgoals": [
+      "Write the transformation",
+      "Check the action",
+      "Allow a total derivative"
+    ]
+  },
+  {
+    "label": "The conserved current",
+    "section": "The conserved current",
+    "subgoals": [
+      "Vary the Lagrangian",
+      "Integrate by parts",
+      "Read the constant"
+    ]
+  },
+  {
+    "label": "Examples",
+    "section": "Examples",
+    "subgoals": [
+      "Match a translation to momentum",
+      "Match a time shift to energy",
+      "Match a rotation to angular momentum"
+    ]
+  }
+]

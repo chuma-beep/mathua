@@ -11372,6 +11372,985 @@
     "subdomain": "differential_equations.pde"
   },
   {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.pde.well_posed",
+    "key_prerequisites": [
+      "ode.pde.heat"
+    ],
+    "label": "Well-posed problems",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.pde.heat",
+      "ode.boundary_value"
+    ],
+    "subdomain": "differential_equations.pde_theory",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.pde.energy_method",
+    "key_prerequisites": [
+      "ode.pde.heat"
+    ],
+    "label": "Energy methods for parabolic equations",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.pde.heat",
+      "ode.green.function"
+    ],
+    "subdomain": "differential_equations.pde_theory",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.pde.maximum_principle",
+    "key_prerequisites": [
+      "ode.pde.heat"
+    ],
+    "label": "The parabolic maximum principle",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.pde.heat",
+      "ode.pde.laplace_eq"
+    ],
+    "subdomain": "differential_equations.pde_theory",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.pde.heat_kernel",
+    "key_prerequisites": [
+      "ode.pde.heat"
+    ],
+    "label": "The heat kernel",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.pde.heat",
+      "ode.green.function"
+    ],
+    "subdomain": "differential_equations.pde_theory",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.pde.green_identity",
+    "key_prerequisites": [
+      "ode.pde.laplace_eq"
+    ],
+    "label": "Green's identities for the Laplacian",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.pde.laplace_eq",
+      "ode.green.function"
+    ],
+    "subdomain": "differential_equations.pde_theory",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.pde.harmonic_mean",
+    "key_prerequisites": [
+      "ode.pde.laplace_eq"
+    ],
+    "label": "The harmonic mean value property",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.pde.laplace_eq",
+      "ode.pde.green_identity"
+    ],
+    "subdomain": "differential_equations.pde_theory",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.pde.polar_separation",
+    "key_prerequisites": [
+      "ode.pde.laplace_eq"
+    ],
+    "label": "Separation in polar coordinates",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.pde.laplace_eq",
+      "ode.sturm_liouville"
+    ],
+    "subdomain": "differential_equations.pde_theory",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.pde.spherical_harmonics",
+    "key_prerequisites": [
+      "ode.pde.polar_separation"
+    ],
+    "label": "Spherical harmonics",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.pde.polar_separation",
+      "ode.second_order.legendre"
+    ],
+    "subdomain": "differential_equations.pde_theory",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.pde.weak_solution",
+    "key_prerequisites": [
+      "ode.pde.heat"
+    ],
+    "label": "Weak solutions",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.pde.heat",
+      "ode.pde.green_identity"
+    ],
+    "subdomain": "differential_equations.pde_theory",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.pde.characteristics_nd",
+    "key_prerequisites": [
+      "ode.pde.characteristics"
+    ],
+    "label": "Characteristics in higher dimensions",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.pde.characteristics",
+      "ode.pde.wave"
+    ],
+    "subdomain": "differential_equations.pde_theory",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.dynamical.vector_field",
+    "key_prerequisites": [
+      "ode.systems.linear_phase"
+    ],
+    "label": "Vector fields and flows",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.systems.linear_phase",
+      "ode.adv.systems"
+    ],
+    "subdomain": "differential_equations.dynamical",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.dynamical.nullcline",
+    "key_prerequisites": [
+      "ode.systems.linear_phase"
+    ],
+    "label": "Nullclines",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.systems.linear_phase"
+    ],
+    "subdomain": "differential_equations.dynamical",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.dynamical.linearisation",
+    "key_prerequisites": [
+      "ode.stability"
+    ],
+    "label": "Linearisation at a fixed point",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.stability",
+      "ode.systems.linear_phase"
+    ],
+    "subdomain": "differential_equations.dynamical",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.dynamical.hartman_grobman",
+    "key_prerequisites": [
+      "ode.dynamical.linearisation"
+    ],
+    "label": "The Hartman-Grobman theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.dynamical.linearisation"
+    ],
+    "subdomain": "differential_equations.dynamical",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.dynamical.limit_cycle",
+    "key_prerequisites": [
+      "ode.systems.predator_prey"
+    ],
+    "label": "Limit cycles",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.systems.predator_prey",
+      "ode.nonlinear.bifurcation"
+    ],
+    "subdomain": "differential_equations.dynamical",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.dynamical.poincare_bendixson",
+    "key_prerequisites": [
+      "ode.dynamical.limit_cycle"
+    ],
+    "label": "The Poincare-Bendixson theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.dynamical.limit_cycle"
+    ],
+    "subdomain": "differential_equations.dynamical",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.dynamical.lyapunov_exponent",
+    "key_prerequisites": [
+      "ode.nonlinear.lyapunov"
+    ],
+    "label": "Lyapunov exponents",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.nonlinear.lyapunov",
+      "ode.dynamical.linearisation"
+    ],
+    "subdomain": "differential_equations.dynamical",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.dynamical.invariant_manifold",
+    "key_prerequisites": [
+      "ode.dynamical.linearisation"
+    ],
+    "label": "Invariant manifolds",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.dynamical.linearisation"
+    ],
+    "subdomain": "differential_equations.dynamical",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.dynamical.hamiltonian",
+    "key_prerequisites": [
+      "ode.systems.linear_phase"
+    ],
+    "label": "Hamiltonian systems",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.systems.linear_phase",
+      "ode.stability"
+    ],
+    "subdomain": "differential_equations.dynamical",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.dynamical.gradient_flow",
+    "key_prerequisites": [
+      "ode.nonlinear.lyapunov"
+    ],
+    "label": "Gradient flows",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.nonlinear.lyapunov"
+    ],
+    "subdomain": "differential_equations.dynamical",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.asymptotic.regular",
+    "key_prerequisites": [
+      "ode.nonlinear.perturbation"
+    ],
+    "label": "Regular perturbation",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.nonlinear.perturbation",
+      "ode.second_order.power_series"
+    ],
+    "subdomain": "differential_equations.asymptotics",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.asymptotic.singular",
+    "key_prerequisites": [
+      "ode.asymptotic.regular"
+    ],
+    "label": "Singular perturbation",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.asymptotic.regular",
+      "ode.second_order.homogeneous"
+    ],
+    "subdomain": "differential_equations.asymptotics",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.asymptotic.boundary_layer",
+    "key_prerequisites": [
+      "ode.asymptotic.singular"
+    ],
+    "label": "Boundary layers",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.asymptotic.singular",
+      "ode.boundary_value"
+    ],
+    "subdomain": "differential_equations.asymptotics",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.asymptotic.matched",
+    "key_prerequisites": [
+      "ode.asymptotic.boundary_layer"
+    ],
+    "label": "Matched asymptotic expansions",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.asymptotic.boundary_layer"
+    ],
+    "subdomain": "differential_equations.asymptotics",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.asymptotic.multiple_scales",
+    "key_prerequisites": [
+      "ode.asymptotic.regular"
+    ],
+    "label": "The method of multiple scales",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.asymptotic.regular",
+      "ode.second_order.forced"
+    ],
+    "subdomain": "differential_equations.asymptotics",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.asymptotic.wkb",
+    "key_prerequisites": [
+      "ode.second_order.power_series"
+    ],
+    "label": "The WKB approximation",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.second_order.power_series",
+      "ode.asymptotic.singular"
+    ],
+    "subdomain": "differential_equations.asymptotics",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.asymptotic.dominant_balance",
+    "key_prerequisites": [
+      "ode.asymptotic.singular"
+    ],
+    "label": "Dominant balance",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.asymptotic.singular"
+    ],
+    "subdomain": "differential_equations.asymptotics",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.asymptotic.lindstedt",
+    "key_prerequisites": [
+      "ode.asymptotic.multiple_scales"
+    ],
+    "label": "The Poincare-Lindstedt method",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.asymptotic.multiple_scales"
+    ],
+    "subdomain": "differential_equations.asymptotics",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.asymptotic.averaging",
+    "key_prerequisites": [
+      "ode.asymptotic.multiple_scales"
+    ],
+    "label": "Averaging",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.asymptotic.multiple_scales",
+      "ode.nonlinear.bifurcation"
+    ],
+    "subdomain": "differential_equations.asymptotics",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.asymptotic.adiabatic",
+    "key_prerequisites": [
+      "ode.asymptotic.averaging"
+    ],
+    "label": "Adiabatic invariants",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.asymptotic.averaging"
+    ],
+    "subdomain": "differential_equations.asymptotics",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.stiff.ratio",
+    "key_prerequisites": [
+      "ode.numerical.implicit"
+    ],
+    "label": "The stiffness ratio",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.numerical.implicit",
+      "ode.stability"
+    ],
+    "subdomain": "differential_equations.stiff",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.stiff.a_stability",
+    "key_prerequisites": [
+      "ode.stiff.ratio"
+    ],
+    "label": "A-stability",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.stiff.ratio"
+    ],
+    "subdomain": "differential_equations.stiff",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.stiff.l_stability",
+    "key_prerequisites": [
+      "ode.stiff.a_stability"
+    ],
+    "label": "L-stability",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.stiff.a_stability"
+    ],
+    "subdomain": "differential_equations.stiff",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.stiff.trapezoidal",
+    "key_prerequisites": [
+      "ode.stiff.a_stability"
+    ],
+    "label": "The trapezoidal rule",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.stiff.a_stability",
+      "ode.numerical.heun"
+    ],
+    "subdomain": "differential_equations.stiff",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.stiff.bdf",
+    "key_prerequisites": [
+      "ode.numerical.multistep"
+    ],
+    "label": "Backward differentiation formulas",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.numerical.multistep",
+      "ode.stiff.a_stability"
+    ],
+    "subdomain": "differential_equations.stiff",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.stiff.rosenbrock",
+    "key_prerequisites": [
+      "ode.numerical.implicit"
+    ],
+    "label": "Rosenbrock methods",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.numerical.implicit",
+      "ode.stiff.bdf"
+    ],
+    "subdomain": "differential_equations.stiff",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.stiff.stability_region",
+    "key_prerequisites": [
+      "ode.stiff.a_stability"
+    ],
+    "label": "Stability regions",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.stiff.a_stability"
+    ],
+    "subdomain": "differential_equations.stiff",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.stiff.step_control",
+    "key_prerequisites": [
+      "ode.numerical.rkf"
+    ],
+    "label": "Step-size control",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.numerical.rkf"
+    ],
+    "subdomain": "differential_equations.stiff",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.stiff.dae_index",
+    "key_prerequisites": [
+      "ode.stiff.bdf"
+    ],
+    "label": "Differential-algebraic equations",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.stiff.bdf"
+    ],
+    "subdomain": "differential_equations.stiff",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.stiff.symplectic",
+    "key_prerequisites": [
+      "ode.dynamical.hamiltonian"
+    ],
+    "label": "Symplectic integrators",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.dynamical.hamiltonian",
+      "ode.numerical.rk4"
+    ],
+    "subdomain": "differential_equations.stiff",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.variational.functional",
+    "key_prerequisites": [
+      "ode.boundary_value"
+    ],
+    "label": "Functionals and variations",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.boundary_value",
+      "ode.green.function"
+    ],
+    "subdomain": "differential_equations.variational",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.variational.euler_lagrange",
+    "key_prerequisites": [
+      "ode.variational.functional"
+    ],
+    "label": "The variational Euler-Lagrange equation",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.variational.functional"
+    ],
+    "subdomain": "differential_equations.variational",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.variational.natural_bc",
+    "key_prerequisites": [
+      "ode.variational.euler_lagrange"
+    ],
+    "label": "Natural boundary conditions",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.variational.euler_lagrange"
+    ],
+    "subdomain": "differential_equations.variational",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.variational.legendre",
+    "key_prerequisites": [
+      "ode.variational.euler_lagrange"
+    ],
+    "label": "The Legendre transform",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.variational.euler_lagrange"
+    ],
+    "subdomain": "differential_equations.variational",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.variational.hamilton_equations",
+    "key_prerequisites": [
+      "ode.variational.legendre"
+    ],
+    "label": "Hamilton's equations",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.variational.legendre",
+      "ode.dynamical.hamiltonian"
+    ],
+    "subdomain": "differential_equations.variational",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.variational.noether",
+    "key_prerequisites": [
+      "ode.variational.hamilton_equations"
+    ],
+    "label": "Noether's theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.variational.hamilton_equations"
+    ],
+    "subdomain": "differential_equations.variational",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.variational.geodesic",
+    "key_prerequisites": [
+      "ode.variational.euler_lagrange"
+    ],
+    "label": "Geodesic equations",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.variational.euler_lagrange"
+    ],
+    "subdomain": "differential_equations.variational",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.variational.brachistochrone",
+    "key_prerequisites": [
+      "ode.variational.euler_lagrange"
+    ],
+    "label": "The brachistochrone",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.variational.euler_lagrange"
+    ],
+    "subdomain": "differential_equations.variational",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.variational.isoperimetric",
+    "key_prerequisites": [
+      "ode.variational.euler_lagrange"
+    ],
+    "label": "The isoperimetric problem",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.variational.euler_lagrange"
+    ],
+    "subdomain": "differential_equations.variational",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.variational.second_variation",
+    "key_prerequisites": [
+      "ode.variational.euler_lagrange"
+    ],
+    "label": "The second variation",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.variational.euler_lagrange",
+      "ode.sturm_liouville"
+    ],
+    "subdomain": "differential_equations.variational",
+    "variants": []
+  },
+  {
     "domain": "discrete_math",
     "grading_type": "numeric",
     "id": "discrete.logic.propositions",

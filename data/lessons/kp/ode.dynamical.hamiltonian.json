@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Hamilton's equations",
+    "section": "Hamilton's equations",
+    "subgoals": [
+      "Write both equations",
+      "Identify the Hamiltonian",
+      "Check the sign pattern"
+    ]
+  },
+  {
+    "label": "Conservation",
+    "section": "Conservation",
+    "subgoals": [
+      "Differentiate the Hamiltonian",
+      "Substitute the equations",
+      "Conclude constancy"
+    ]
+  },
+  {
+    "label": "Volume and spectra",
+    "section": "Volume and spectra",
+    "subgoals": [
+      "Compute the divergence",
+      "Pair the eigenvalues",
+      "Rule out an attractor"
+    ]
+  }
+]

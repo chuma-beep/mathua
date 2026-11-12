@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The test equation",
+    "section": "The test equation",
+    "subgoals": [
+      "Write the scalar test problem",
+      "Form the complex step parameter",
+      "Interpret the real part"
+    ]
+  },
+  {
+    "label": "Stability function",
+    "section": "Stability function",
+    "subgoals": [
+      "Apply one step",
+      "Read the stability function",
+      "Impose the modulus bound"
+    ]
+  },
+  {
+    "label": "Stability on the half-plane",
+    "section": "Stability on the half-plane",
+    "subgoals": [
+      "State the half-plane condition",
+      "Check an implicit method",
+      "Rule out an explicit method"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "From Lagrangian to Hamiltonian",
+    "section": "From Lagrangian to Hamiltonian",
+    "subgoals": [
+      "Define the momentum",
+      "Perform the Legendre transform",
+      "Write the first-order system"
+    ]
+  },
+  {
+    "label": "The equations",
+    "section": "The equations",
+    "subgoals": [
+      "Write both equations",
+      "Check the signs",
+      "Compare with a gradient flow"
+    ]
+  },
+  {
+    "label": "Conservation",
+    "section": "Conservation",
+    "subgoals": [
+      "Differentiate the Hamiltonian",
+      "Use the equations",
+      "Read the conservation law"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Loss of order",
+    "section": "Loss of order",
+    "subgoals": [
+      "Set the parameter to zero",
+      "Compare the orders",
+      "Count the lost boundary conditions"
+    ]
+  },
+  {
+    "label": "The outer solution",
+    "section": "The outer solution",
+    "subgoals": [
+      "Solve the reduced equation",
+      "Impose the reachable data",
+      "State where it is valid"
+    ]
+  },
+  {
+    "label": "The inner layer",
+    "section": "The inner layer",
+    "subgoals": [
+      "Rescale the variable",
+      "Restore the highest derivative",
+      "Satisfy the missing condition"
+    ]
+  }
+]

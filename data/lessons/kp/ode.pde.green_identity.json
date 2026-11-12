@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The divergence theorem",
+    "section": "The divergence theorem",
+    "subgoals": [
+      "Build the vector field",
+      "Apply the divergence theorem",
+      "Identify the boundary flux"
+    ]
+  },
+  {
+    "label": "The first identity",
+    "section": "The first identity",
+    "subgoals": [
+      "Integrate one Laplacian by parts",
+      "Collect the gradient term",
+      "Read the boundary contribution"
+    ]
+  },
+  {
+    "label": "The second identity",
+    "section": "The second identity",
+    "subgoals": [
+      "Subtract the two orderings",
+      "Cancel the symmetric term",
+      "Read the normal derivative terms"
+    ]
+  }
+]

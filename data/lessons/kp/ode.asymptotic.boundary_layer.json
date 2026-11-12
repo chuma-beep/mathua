@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Balancing",
+    "section": "Balancing",
+    "subgoals": [
+      "Stretch the variable",
+      "Scale each term",
+      "Equate the two largest"
+    ]
+  },
+  {
+    "label": "Thickness",
+    "section": "Thickness",
+    "subgoals": [
+      "Solve for the exponent",
+      "Write the layer width",
+      "Compare two parameter values"
+    ]
+  },
+  {
+    "label": "Matching",
+    "section": "Matching",
+    "subgoals": [
+      "Take the inner limit",
+      "Take the outer limit",
+      "Equate the two"
+    ]
+  }
+]

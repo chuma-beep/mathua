@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The field",
+    "section": "The field",
+    "subgoals": [
+      "Read the velocity at a point",
+      "Check the direction of the arrow",
+      "Identify a stationary point"
+    ]
+  },
+  {
+    "label": "The flow",
+    "section": "The flow",
+    "subgoals": [
+      "Write the flow map",
+      "Apply the group property",
+      "Decide whether it exists globally"
+    ]
+  },
+  {
+    "label": "Orbits",
+    "section": "Orbits",
+    "subgoals": [
+      "Trace one trajectory",
+      "Compare two orbits",
+      "Rule out a crossing"
+    ]
+  }
+]

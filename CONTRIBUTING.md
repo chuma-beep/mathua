@@ -231,7 +231,7 @@ Every lesson is broken into exactly 3 **knowledge points** (KPs), each a subgoal
 
 - `section` names a heading **inside the lesson body** that serves as the worked example. It must match a heading exactly. Do not leave it empty. Since ADR-045, an empty `section` gives the learner a short placeholder that points at Study. It does not show the lesson body.
 - `subgoals` are short labels shown before practice (subgoal-labeling effect). Keep 3 per KP.
-- Every concept has exactly **3 KPs**. All 2200 shards in the corpus do, and `scripts/check_docs.py` fails if a shard has a different count.
+- Every concept has exactly **3 KPs**. All 2250 shards in the corpus do, and `scripts/check_docs.py` fails if a shard has a different count.
 - `scripts/gen_kp_shards.py` generates shard files from an inline spec and validates every section reference against the corpus, add your spec entries there and run `python3 scripts/gen_kp_shards.py <domain-prefix>`.
 
 ## The graph validator
@@ -249,7 +249,7 @@ A second audit guards the lesson corpus (`python3 scripts/audit_lessons.py:191`)
 - a stale `lessons.json` id
 - a lesson file that is missing on disk
 - an orphaned source
-- a KP shard section that does not resolve (all 2200 shard files × 3 = 6600 KPs)
+- a KP shard section that does not resolve (all 2250 shard files × 3 = 6750 KPs)
 - a diagram mapping that points at a missing asset or a non-existent concept (`engine.go:743`, 183 diagrams)
 - a stale course target
 - a `grading_type` or `threshold` that fails its sanity check

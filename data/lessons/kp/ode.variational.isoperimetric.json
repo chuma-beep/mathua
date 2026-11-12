@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The constrained problem",
+    "section": "The constrained problem",
+    "subgoals": [
+      "Write the objective",
+      "Write the constraint integral",
+      "Describe the admissible set"
+    ]
+  },
+  {
+    "label": "The multiplier",
+    "section": "The multiplier",
+    "subgoals": [
+      "Form the combined integrand",
+      "Write the Euler-Lagrange equation",
+      "Solve for the multiplier"
+    ]
+  },
+  {
+    "label": "The classical example",
+    "section": "The classical example",
+    "subgoals": [
+      "Set up area and perimeter",
+      "Recognise constant curvature",
+      "Identify the circle"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Identify the extreme eigenvalues",
+      "Form the ratio",
+      "Read the time-scale spread"
+    ]
+  },
+  {
+    "label": "Why explicit methods suffer",
+    "section": "Why explicit methods suffer",
+    "subgoals": [
+      "Write the stability bound",
+      "Compare step to fast rate",
+      "Explain the wasted steps"
+    ]
+  },
+  {
+    "label": "The symptom",
+    "section": "The symptom",
+    "subgoals": [
+      "Observe the step count",
+      "Change the tolerance",
+      "Confirm the stability limit"
+    ]
+  }
+]

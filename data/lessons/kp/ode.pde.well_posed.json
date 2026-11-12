@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The three requirements",
+    "section": "The three requirements",
+    "subgoals": [
+      "State the three Hadamard requirements",
+      "Identify which requirement a counterexample violates",
+      "Decide whether a problem is well posed"
+    ]
+  },
+  {
+    "label": "Failure by data",
+    "section": "Failure by data",
+    "subgoals": [
+      "State the data for the Cauchy problem",
+      "Compare two nearby data sets",
+      "Carry out the amplification estimate"
+    ]
+  },
+  {
+    "label": "Why the definition matters",
+    "section": "Why the definition matters",
+    "subgoals": [
+      "Relate conditioning to discretisation",
+      "Identify the regularisation step",
+      "Choose the stable formulation"
+    ]
+  }
+]

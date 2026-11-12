@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Length functional",
+    "section": "Length functional",
+    "subgoals": [
+      "Write the length integral",
+      "Replace it by the energy",
+      "Identify the metric"
+    ]
+  },
+  {
+    "label": "The equation",
+    "section": "The equation",
+    "subgoals": [
+      "Apply Euler-Lagrange",
+      "Collect the quadratic velocity term",
+      "Read the acceleration"
+    ]
+  },
+  {
+    "label": "Christoffel symbols",
+    "section": "Christoffel symbols",
+    "subgoals": [
+      "Differentiate the metric",
+      "Form the symbols",
+      "Check the flat case"
+    ]
+  }
+]

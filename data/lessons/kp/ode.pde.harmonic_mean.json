@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Average over a circle",
+    "section": "Average over a circle",
+    "subgoals": [
+      "Write the circular average",
+      "Set the radius",
+      "Equate the average to the centre value"
+    ]
+  },
+  {
+    "label": "Consequence for maxima",
+    "section": "Consequence for maxima",
+    "subgoals": [
+      "Bound the average by the maximum",
+      "Assume a strict interior maximum",
+      "Reach the contradiction"
+    ]
+  },
+  {
+    "label": "The converse",
+    "section": "The converse",
+    "subgoals": [
+      "Expand the average in the radius",
+      "Isolate the Laplacian term",
+      "Conclude harmonicity"
+    ]
+  }
+]

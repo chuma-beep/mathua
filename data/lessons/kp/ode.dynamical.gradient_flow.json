@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The equation",
+    "section": "The equation",
+    "subgoals": [
+      "Write the gradient flow",
+      "Set the velocity to zero",
+      "Find the critical points"
+    ]
+  },
+  {
+    "label": "Monotone decrease",
+    "section": "Monotone decrease",
+    "subgoals": [
+      "Differentiate the potential",
+      "Substitute the flow",
+      "Read the sign"
+    ]
+  },
+  {
+    "label": "Convergence",
+    "section": "Convergence",
+    "subgoals": [
+      "Apply LaSalle's principle",
+      "Identify the limit set",
+      "Estimate the rate"
+    ]
+  }
+]

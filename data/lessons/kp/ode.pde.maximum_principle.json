@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The interior maximum",
+    "section": "The interior maximum",
+    "subgoals": [
+      "Write the sign conditions at an interior maximum",
+      "Substitute into the heat equation",
+      "Conclude the solution is constant"
+    ]
+  },
+  {
+    "label": "Boundary data",
+    "section": "Boundary data",
+    "subgoals": [
+      "Identify the parabolic boundary",
+      "Locate the maximum",
+      "Read the bound from the data"
+    ]
+  },
+  {
+    "label": "Comparison principle",
+    "section": "Comparison principle",
+    "subgoals": [
+      "Compare two ordered solutions",
+      "Apply the principle at an interior point",
+      "Derive uniqueness"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Write the modulus condition",
+      "Plot the boundary",
+      "Locate the origin"
+    ]
+  },
+  {
+    "label": "Explicit methods",
+    "section": "Explicit methods",
+    "subgoals": [
+      "Identify the polynomial",
+      "Find the real-axis extent",
+      "Explain the boundedness"
+    ]
+  },
+  {
+    "label": "Reading the boundary",
+    "section": "Reading the boundary",
+    "subgoals": [
+      "Find the imaginary crossing",
+      "Relate it to oscillation",
+      "Choose a method for a conservative system"
+    ]
+  }
+]

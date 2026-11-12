@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Write the separation ratio",
+      "Take the logarithm",
+      "Divide by the elapsed time"
+    ]
+  },
+  {
+    "label": "The largest exponent",
+    "section": "The largest exponent",
+    "subgoals": [
+      "Compare growth rates",
+      "Select the dominant direction",
+      "Classify the trajectory"
+    ]
+  },
+  {
+    "label": "The spectrum",
+    "section": "The spectrum",
+    "subgoals": [
+      "Count the exponents",
+      "Sum the spectrum",
+      "Relate the sum to divergence"
+    ]
+  }
+]

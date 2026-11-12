@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The trapping region",
+    "section": "The trapping region",
+    "subgoals": [
+      "Construct the boundary",
+      "Check the inward direction",
+      "Confirm compactness"
+    ]
+  },
+  {
+    "label": "The statement",
+    "section": "The statement",
+    "subgoals": [
+      "Rule out fixed points",
+      "Apply the theorem",
+      "Identify the limiting orbit"
+    ]
+  },
+  {
+    "label": "Consequences and limits",
+    "section": "Consequences and limits",
+    "subgoals": [
+      "State what the theorem does not give",
+      "Compare with three dimensions",
+      "Recognise a chaotic alternative"
+    ]
+  }
+]

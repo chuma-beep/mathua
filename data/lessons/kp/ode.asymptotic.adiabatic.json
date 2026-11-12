@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Action variable",
+    "section": "Action variable",
+    "subgoals": [
+      "Write the action integral",
+      "Relate it to energy and frequency",
+      "Compute it for an oscillator"
+    ]
+  },
+  {
+    "label": "Slow parameter change",
+    "section": "Slow parameter change",
+    "subgoals": [
+      "Compare the two time scales",
+      "Estimate the change per period",
+      "Bound the accumulation"
+    ]
+  },
+  {
+    "label": "Consequence",
+    "section": "Consequence",
+    "subgoals": [
+      "Hold the action fixed",
+      "Change the frequency",
+      "Read the energy change"
+    ]
+  }
+]

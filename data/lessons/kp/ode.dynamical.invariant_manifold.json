@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Stable and unstable sets",
+    "section": "Stable and unstable sets",
+    "subgoals": [
+      "Define the stable set",
+      "Define the unstable set",
+      "Compare the two time directions"
+    ]
+  },
+  {
+    "label": "The manifold theorem",
+    "section": "The manifold theorem",
+    "subgoals": [
+      "Count the stable eigenvalues",
+      "Read the manifold dimension",
+      "Identify the tangent space"
+    ]
+  },
+  {
+    "label": "Global consequences",
+    "section": "Global consequences",
+    "subgoals": [
+      "Extend the manifolds globally",
+      "Look for an intersection",
+      "Recognise a homoclinic tangle"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Test functions",
+    "section": "Test functions",
+    "subgoals": [
+      "Choose a compactly supported test function",
+      "Multiply the equation",
+      "Integrate over the domain"
+    ]
+  },
+  {
+    "label": "Integration by parts",
+    "section": "Integration by parts",
+    "subgoals": [
+      "Transfer each derivative",
+      "Track the signs",
+      "Drop the vanishing boundary terms"
+    ]
+  },
+  {
+    "label": "Existence",
+    "section": "Existence",
+    "subgoals": [
+      "Build the Galerkin subspace",
+      "Apply the coercivity estimate",
+      "Recover a classical solution"
+    ]
+  }
+]

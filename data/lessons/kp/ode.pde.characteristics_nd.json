@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Characteristic surfaces",
+    "section": "Characteristic surfaces",
+    "subgoals": [
+      "Write the coefficient vector",
+      "Test tangency to the surface",
+      "Decide whether the data are admissible"
+    ]
+  },
+  {
+    "label": "Transport in several variables",
+    "section": "Transport in several variables",
+    "subgoals": [
+      "Write the characteristic lines",
+      "Carry the initial value along a line",
+      "Read the solution at a point"
+    ]
+  },
+  {
+    "label": "Breakdown",
+    "section": "Breakdown",
+    "subgoals": [
+      "Find where two characteristics meet",
+      "Compare the carried data",
+      "Locate the breakdown"
+    ]
+  }
+]

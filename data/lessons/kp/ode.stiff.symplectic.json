@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Symplectic map",
+    "section": "Symplectic map",
+    "subgoals": [
+      "Write the preserving identity",
+      "Interpret the two-form",
+      "Check a candidate step"
+    ]
+  },
+  {
+    "label": "Stormer-Verlet",
+    "section": "Stormer-Verlet",
+    "subgoals": [
+      "Split the Hamiltonian",
+      "Write the kick-drift-kick step",
+      "Count the force evaluations"
+    ]
+  },
+  {
+    "label": "Long-time behaviour",
+    "section": "Long-time behaviour",
+    "subgoals": [
+      "Compare energy errors",
+      "Bound the oscillation",
+      "Explain the drift of a nonsymplectic method"
+    ]
+  }
+]

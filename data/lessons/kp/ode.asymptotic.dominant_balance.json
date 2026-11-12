@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The scaling ansatz",
+    "section": "The scaling ansatz",
+    "subgoals": [
+      "Scale both variables",
+      "Substitute into the equation",
+      "Read each term exponent"
+    ]
+  },
+  {
+    "label": "Balancing exponents",
+    "section": "Balancing exponents",
+    "subgoals": [
+      "Equate two exponents",
+      "Solve the linear system",
+      "Choose the consistent root"
+    ]
+  },
+  {
+    "label": "Consistency",
+    "section": "Consistency",
+    "subgoals": [
+      "Compare the remaining terms",
+      "Reject a dominant leftover",
+      "Confirm the balance"
+    ]
+  }
+]

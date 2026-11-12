@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Semi-explicit form",
+    "section": "Semi-explicit form",
+    "subgoals": [
+      "Separate differential and algebraic variables",
+      "Write the constraint",
+      "Check the initial values"
+    ]
+  },
+  {
+    "label": "The index",
+    "section": "The index",
+    "subgoals": [
+      "Try to solve for the algebraic variable",
+      "Differentiate the constraint",
+      "Count the differentiations"
+    ]
+  },
+  {
+    "label": "Consequences",
+    "section": "Consequences",
+    "subgoals": [
+      "State the consistency requirement",
+      "Choose a method for index one",
+      "Recognise when reduction is needed"
+    ]
+  }
+]

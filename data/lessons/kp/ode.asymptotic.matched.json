@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Outer and inner",
+    "section": "Outer and inner",
+    "subgoals": [
+      "Write the outer expansion",
+      "Write the inner expansion",
+      "Identify the free constants"
+    ]
+  },
+  {
+    "label": "The matching condition",
+    "section": "The matching condition",
+    "subgoals": [
+      "Expand the outer solution near the layer",
+      "Expand the inner solution far from it",
+      "Equate order by order"
+    ]
+  },
+  {
+    "label": "Composite expansion",
+    "section": "Composite expansion",
+    "subgoals": [
+      "Add the two expansions",
+      "Subtract the overlap",
+      "Check both limits"
+    ]
+  }
+]

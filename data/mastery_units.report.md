@@ -12,19 +12,19 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 2200 |
-| Total units | 149 |
+| Total concepts | 2250 |
+| Total units | 150 |
 | Minimum unit size | 1 |
 | Median unit size | 10 |
 | Maximum unit size | 82 |
-| Singleton units | 20 |
+| Singleton units | 19 |
 | Units with <= 3 concepts | 38 |
-| Units with > 25 concepts | 31 |
+| Units with > 25 concepts | 33 |
 | Units with > 50 concepts | 2 |
-| Cross-unit prerequisite edges (derived) | 516 |
+| Cross-unit prerequisite edges (derived) | 519 |
 | Backward band edges | 0 |
 
-If the learner is assessed once per unit, then 149 assessments cover the corpus, and the
+If the learner is assessed once per unit, then 150 assessments cover the corpus, and the
 median is one assessment per 10 concepts. That is the frequency question this report
 exists to make concrete.
 
@@ -72,10 +72,11 @@ exists to make concrete.
 | `complex_numbers.b11` | complex_numbers | 11 | 21 | 3 | 33–35 |
 | `complex_numbers.b12` | complex_numbers | 12 | 19 | 3 | 36–38 |
 | `differential_equations.b11` | differential_equations | 11 | 6 | 2 | 33–35 |
-| `differential_equations.b12` | differential_equations | 12 | 20 | 4 | 36–38 |
-| `differential_equations.b13` | differential_equations | 13 | 26 | 6 | 39–41 |
-| `differential_equations.b14` | differential_equations | 14 | 13 | 6 | 42–44 |
-| `differential_equations.b15` | differential_equations | 15 | 1 | 1 | 45–45 |
+| `differential_equations.b12` | differential_equations | 12 | 22 | 5 | 36–38 |
+| `differential_equations.b13` | differential_equations | 13 | 29 | 8 | 39–41 |
+| `differential_equations.b14` | differential_equations | 14 | 28 | 10 | 42–44 |
+| `differential_equations.b15` | differential_equations | 15 | 28 | 6 | 45–47 |
+| `differential_equations.b16` | differential_equations | 16 | 3 | 2 | 48–48 |
 | `discrete_math.b1` | discrete_math | 1 | 1 | 1 | 5–5 |
 | `discrete_math.b2` | discrete_math | 2 | 2 | 1 | 7–8 |
 | `discrete_math.b4` | discrete_math | 4 | 5 | 2 | 13–14 |
@@ -195,19 +196,19 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 205 | 7 | 56 | 30 | 54 | 14 | 0 |
-| 3 | 149 | 10 | 82 | 20 | 38 | 31 | 0 |
-| 4 | 117 | 15 | 86 | 11 | 21 | 34 | 0 |
-| 5 | 103 | 15 | 104 | 10 | 19 | 39 | 0 |
-| 6 | 92 | 17 | 130 | 6 | 13 | 32 | 0 |
-| 8 | 72 | 24 | 117 | 4 | 8 | 35 | 0 |
+| 2 | 207 | 7 | 56 | 30 | 55 | 14 | 0 |
+| 3 | 150 | 10 | 82 | 19 | 38 | 33 | 0 |
+| 4 | 118 | 16 | 86 | 11 | 22 | 35 | 0 |
+| 5 | 103 | 15 | 104 | 9 | 18 | 40 | 0 |
+| 6 | 93 | 17 | 130 | 6 | 14 | 33 | 0 |
+| 8 | 73 | 23 | 117 | 4 | 9 | 35 | 0 |
 | 10 | 63 | 26 | 145 | 5 | 9 | 33 | 0 |
-| 12 | 62 | 30 | 191 | 1 | 5 | 35 | 0 |
-| 15 | 50 | 39 | 172 | 2 | 4 | 32 | 0 |
-| 20 | 43 | 50 | 145 | 3 | 5 | 30 | 0 |
-| 45 | 26 | 85 | 172 | 1 | 1 | 25 | 0 |
+| 12 | 63 | 29 | 191 | 1 | 6 | 35 | 0 |
+| 15 | 50 | 39 | 172 | 1 | 3 | 33 | 0 |
+| 20 | 43 | 56 | 145 | 3 | 5 | 30 | 0 |
+| 45 | 26 | 85 | 172 | 0 | 0 | 26 | 0 |
 
-**No width is clean.** Small widths fragment, at 3 there are 20 singleton units, which is a
+**No width is clean.** Small widths fragment, at 3 there are 19 singleton units, which is a
 quiz per concept and is exactly what §12 rules out. Large widths stop fragmenting but produce
 units too large to assess: at 45 the partition is just the 17 domains themselves, whose
 largest is 128 concepts. The usable widths trade fragmentation against size rather than
@@ -222,7 +223,7 @@ The subdomain condensation of the concept DAG **contains cycles**: grouping conc
 subdomain discards the per-concept ordering, so a concept in subdomain A can be a
 prerequisite of one in subdomain B whose other members depend on A.
 
-**203 of 125 subdomains cannot be levelled**, they sit inside a cycle, or downstream
+**208 of 125 subdomains cannot be levelled**, they sit inside a cycle, or downstream
 of one, so no depth function exists for them at all. (Tarjan puts 26 inside cycles and
 the remaining 34 behind them; Kahn cannot order either group, because ordering a node
 requires its predecessors to be ordered first.) An implementation that ignores this
@@ -288,209 +289,215 @@ Unresolvable subdomains:
 
 `complex_numbers.integral`
 `complex_numbers.topology`
+`differential_equations.asymptotics`
 `differential_equations.basics`
-`differential_equations.boundary`
 
+`differential_equations.boundary`
+`differential_equations.dynamical`
 `differential_equations.first_order`
 `differential_equations.integral`
+
 `differential_equations.nonlinear`
 `differential_equations.numerical`
-
 `differential_equations.pde`
+`differential_equations.pde_theory`
+
 `differential_equations.second_order`
 `differential_equations.stability`
+`differential_equations.stiff`
 `differential_equations.systems`
 
 `differential_equations.transforms`
+`differential_equations.variational`
 `discrete_math.algorithms`
 `discrete_math.automata`
-`discrete_math.coding`
 
+`discrete_math.coding`
 `discrete_math.combinatorics`
 `discrete_math.complexity`
 `discrete_math.graph_theory`
-`discrete_math.logic`
 
+`discrete_math.logic`
 `discrete_math.proof`
 `discrete_math.recurrence`
 `discrete_math.sets`
-`frac.compare`
 
+`frac.compare`
 `frac.div`
 `frac.mixed`
 `frac.mult`
-`frac.sub`
 
+`frac.sub`
 `fractions.addition`
 `fractions.concept`
 `fractions.division`
-`fractions.equivalence`
 
+`fractions.equivalence`
 `fractions.mixed`
 `fractions.multiplication`
 `fractions.subtraction`
-`geometry.basics`
 
+`geometry.basics`
 `geometry.coordinate`
 `geometry.solid`
 `geometry.transform`
-`graph_theory.basics`
 
+`graph_theory.basics`
 `graph_theory.coloring`
 `graph_theory.connectivity`
 `graph_theory.extremal`
-`graph_theory.flows`
 
+`graph_theory.flows`
 `graph_theory.matching`
 `graph_theory.planarity`
 `graph_theory.spectral`
-`linear_algebra.decompositions`
 
+`linear_algebra.decompositions`
 `linear_algebra.determinants`
 `linear_algebra.eigenvalues`
 `linear_algebra.inner_product`
-`linear_algebra.matrices`
 
+`linear_algebra.matrices`
 `linear_algebra.systems`
 `linear_algebra.transformations`
 `linear_algebra.vectors`
-`machine_learning.classification`
 
+`machine_learning.classification`
 `machine_learning.data`
 `machine_learning.evaluation`
 `machine_learning.neural_networks`
-`machine_learning.nlp`
 
+`machine_learning.nlp`
 `machine_learning.regression`
 `machine_learning.reinforcement`
 `machine_learning.trees`
-`machine_learning.unsupervised`
 
+`machine_learning.unsupervised`
 `number_theory.advanced`
 `number_theory.analytic`
 `number_theory.applications`
-`number_theory.basics`
 
+`number_theory.basics`
 `numerical_analysis.errors`
 `numerical_analysis.fourier`
 `numerical_analysis.integration`
-`numerical_analysis.roots`
 
+`numerical_analysis.roots`
 `optimization.adaptive`
 `optimization.advanced`
 `optimization.conic_apps`
-`optimization.constrained`
 
+`optimization.constrained`
 `optimization.control`
 `optimization.convex`
 `optimization.decomposition`
-`optimization.discrete`
 
+`optimization.discrete`
 `optimization.foundations`
 `optimization.large_scale`
 `optimization.learning`
-`optimization.mip`
 
+`optimization.mip`
 `optimization.multiobjective`
 `optimization.nonsmooth`
 `optimization.numerical`
-`optimization.saddle`
 
+`optimization.saddle`
 `optimization.stochastic`
 `optimization.structured`
 `optimization.unconstrained`
-`optimization.variance_reduced`
 
+`optimization.variance_reduced`
 `prealgebra.decimals`
 `prealgebra.equations`
 `prealgebra.exponents`
-`prealgebra.inequalities`
 
+`prealgebra.inequalities`
 `prealgebra.measurement`
 `prealgebra.negatives`
 `prealgebra.percentages`
-`prealgebra.ratios`
 
+`prealgebra.ratios`
 `prealgebra.variables`
 `precalculus.analytic`
 `precalculus.conics`
-`precalculus.discrete`
 
+`precalculus.discrete`
 `precalculus.exponential`
 `precalculus.functions`
 `precalculus.parametric`
-`precalculus.polar`
 
+`precalculus.polar`
 `precalculus.polynomials`
 `precalculus.rational`
 `precalculus.sequences`
-`precalculus.systems`
 
+`precalculus.systems`
 `precalculus.vectors`
 `probability_theory.characteristic`
 `probability_theory.concentration`
-`probability_theory.convergence`
 
+`probability_theory.convergence`
 `probability_theory.distributions`
 `probability_theory.foundations`
 `probability_theory.information`
-`probability_theory.joint`
 
+`probability_theory.joint`
 `probability_theory.joint_distributions`
 `probability_theory.limits`
 `probability_theory.moments`
-`probability_theory.processes`
 
+`probability_theory.processes`
 `probability_theory.random_variables`
 `real_analysis.deriv`
 `real_analysis.limit`
-`real_analysis.measure`
 
+`real_analysis.measure`
 `real_analysis.metric`
 `real_analysis.order`
 `real_analysis.seq`
-`statistics.advanced`
 
+`statistics.advanced`
 `statistics.central_tendency`
 `statistics.data_collection`
 `statistics.data_representation`
-`statistics.distributions`
 
+`statistics.distributions`
 `statistics.inference`
 `statistics.probability`
 `statistics.regression`
-`statistics.spread`
 
+`statistics.spread`
 `topology.algebraic`
 `topology.basics`
 `topology.compact`
-`topology.connected`
 
+`topology.connected`
 `topology.constructions`
 `topology.covering`
 `topology.dimension`
-`topology.invariants`
 
+`topology.invariants`
 `topology.knot`
 `topology.manifolds`
 `topology.metrization`
-`topology.separation`
 
+`topology.separation`
 `trigonometry.advanced`
 `trigonometry.equations`
 `trigonometry.functions`
-`trigonometry.graphs`
 
+`trigonometry.graphs`
 `trigonometry.hyperbolic`
 `trigonometry.identities`
 `trigonometry.spherical`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2200
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2250
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings
 
-- **anomaly** `singleton_units`: 20 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
+- **anomaly** `singleton_units`: 19 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
 
 ## Not decided here
 

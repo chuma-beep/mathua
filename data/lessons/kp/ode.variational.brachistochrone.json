@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The functional",
+    "section": "The functional",
+    "subgoals": [
+      "Write the arc length",
+      "Use energy conservation for the speed",
+      "Form the time integral"
+    ]
+  },
+  {
+    "label": "The first integral",
+    "section": "The first integral",
+    "subgoals": [
+      "Note the missing coordinate",
+      "Apply the Beltrami identity",
+      "Separate the equation"
+    ]
+  },
+  {
+    "label": "The solution",
+    "section": "The solution",
+    "subgoals": [
+      "Parametrise the cycloid",
+      "Check the initial slope",
+      "Read the descent time"
+    ]
+  }
+]

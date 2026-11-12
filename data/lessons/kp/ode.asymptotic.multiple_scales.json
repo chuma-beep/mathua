@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Slow times",
+    "section": "Slow times",
+    "subgoals": [
+      "Introduce the slow time",
+      "Rewrite the derivative",
+      "Separate the orders"
+    ]
+  },
+  {
+    "label": "Removing secular terms",
+    "section": "Removing secular terms",
+    "subgoals": [
+      "Identify the resonant forcing",
+      "Set its coefficient to zero",
+      "Read the solvability condition"
+    ]
+  },
+  {
+    "label": "The amplitude equation",
+    "section": "The amplitude equation",
+    "subgoals": [
+      "Collect the conditions",
+      "Write the slow system",
+      "Interpret the amplitude"
+    ]
+  }
+]

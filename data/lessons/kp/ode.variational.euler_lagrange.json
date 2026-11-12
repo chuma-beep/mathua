@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Derivation",
+    "section": "Derivation",
+    "subgoals": [
+      "Differentiate the functional",
+      "Integrate by parts",
+      "Drop the boundary term"
+    ]
+  },
+  {
+    "label": "The equation",
+    "section": "The equation",
+    "subgoals": [
+      "Write the coefficient",
+      "Set it to zero",
+      "Read the order"
+    ]
+  },
+  {
+    "label": "Special cases",
+    "section": "Special cases",
+    "subgoals": [
+      "Remove the position dependence",
+      "Remove the explicit variable",
+      "Use the Beltrami identity"
+    ]
+  }
+]

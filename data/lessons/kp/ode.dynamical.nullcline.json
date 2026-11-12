@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Set one component to zero",
+      "Identify the curve",
+      "State the flow direction on it"
+    ]
+  },
+  {
+    "label": "Reading the signs",
+    "section": "Reading the signs",
+    "subgoals": [
+      "Pick a test point in a region",
+      "Evaluate both components",
+      "Draw the local arrow"
+    ]
+  },
+  {
+    "label": "Fixed points and crossings",
+    "section": "Fixed points and crossings",
+    "subgoals": [
+      "Intersect the two nullclines",
+      "Count the fixed points",
+      "Classify a tangential crossing"
+    ]
+  }
+]

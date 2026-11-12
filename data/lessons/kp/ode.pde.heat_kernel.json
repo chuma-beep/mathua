@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Gaussian kernel",
+    "section": "The Gaussian kernel",
+    "subgoals": [
+      "Write the kernel at a given time",
+      "Check that it integrates to one",
+      "Identify its variance"
+    ]
+  },
+  {
+    "label": "Convolution",
+    "section": "Convolution",
+    "subgoals": [
+      "Form the convolution integral",
+      "Substitute the kernel",
+      "Read the solution at a point"
+    ]
+  },
+  {
+    "label": "Scaling",
+    "section": "Scaling",
+    "subgoals": [
+      "Track the width in time",
+      "Track the height in time",
+      "Check that the product is constant"
+    ]
+  }
+]

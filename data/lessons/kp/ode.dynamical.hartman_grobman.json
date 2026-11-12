@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Hyperbolicity",
+    "section": "Hyperbolicity",
+    "subgoals": [
+      "Compute the eigenvalues",
+      "Check the real parts",
+      "Decide whether the point is hyperbolic"
+    ]
+  },
+  {
+    "label": "Topological conjugacy",
+    "section": "Topological conjugacy",
+    "subgoals": [
+      "State the conjugacy",
+      "Compare two trajectories",
+      "Preserve the time direction"
+    ]
+  },
+  {
+    "label": "What is not preserved",
+    "section": "What is not preserved",
+    "subgoals": [
+      "Compare a centre with a spiral",
+      "Identify an invariant of the conjugacy",
+      "Explain why hyperbolicity is needed"
+    ]
+  }
+]

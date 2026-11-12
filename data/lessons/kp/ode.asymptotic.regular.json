@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The expansion",
+    "section": "The expansion",
+    "subgoals": [
+      "Write the series",
+      "Substitute into the equation",
+      "Collect each power"
+    ]
+  },
+  {
+    "label": "Order by order",
+    "section": "Order by order",
+    "subgoals": [
+      "Solve the leading problem",
+      "Form the correction forcing",
+      "Solve the linear correction"
+    ]
+  },
+  {
+    "label": "Validity",
+    "section": "Validity",
+    "subgoals": [
+      "Compare correction to leading term",
+      "Locate a vanishing leading term",
+      "Decide whether the expansion is uniform"
+    ]
+  }
+]

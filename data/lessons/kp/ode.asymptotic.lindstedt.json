@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Strained coordinate",
+    "section": "Strained coordinate",
+    "subgoals": [
+      "Rescale time by the frequency",
+      "Expand the frequency",
+      "Substitute into the equation"
+    ]
+  },
+  {
+    "label": "Choosing the frequency correction",
+    "section": "Choosing the frequency correction",
+    "subgoals": [
+      "Find the resonant term",
+      "Set it to zero",
+      "Solve for the correction"
+    ]
+  },
+  {
+    "label": "The result",
+    "section": "The result",
+    "subgoals": [
+      "Write the period",
+      "Compare with the linear period",
+      "Read the amplitude dependence"
+    ]
+  }
+]

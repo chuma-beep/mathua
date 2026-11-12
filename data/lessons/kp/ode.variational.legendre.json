@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Compute the conjugate variable",
+      "Form the product",
+      "Subtract the original function"
+    ]
+  },
+  {
+    "label": "Involutivity",
+    "section": "Involutivity",
+    "subgoals": [
+      "Apply the transform again",
+      "Use convexity",
+      "Recover the original"
+    ]
+  },
+  {
+    "label": "Mechanics",
+    "section": "Mechanics",
+    "subgoals": [
+      "Identify the momentum",
+      "Eliminate the velocity",
+      "Write the Hamiltonian"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The formula",
+    "section": "The formula",
+    "subgoals": [
+      "Write the average of the two derivatives",
+      "Impose the new value",
+      "Count the implicit solves"
+    ]
+  },
+  {
+    "label": "Stability function",
+    "section": "Stability function",
+    "subgoals": [
+      "Apply the test problem",
+      "Form the ratio",
+      "Check the modulus"
+    ]
+  },
+  {
+    "label": "Behaviour at infinity",
+    "section": "Behaviour at infinity",
+    "subgoals": [
+      "Take the limit",
+      "Track the sign",
+      "Explain the ringing"
+    ]
+  }
+]

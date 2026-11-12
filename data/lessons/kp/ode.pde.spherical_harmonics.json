@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Separation on the sphere",
+    "section": "Separation on the sphere",
+    "subgoals": [
+      "Write the spherical Laplacian",
+      "Separate the azimuthal equation",
+      "Read the integer order"
+    ]
+  },
+  {
+    "label": "Degree and order",
+    "section": "Degree and order",
+    "subgoals": [
+      "Transform the polar equation",
+      "Apply the regularity condition",
+      "Read the degree"
+    ]
+  },
+  {
+    "label": "Degeneracy",
+    "section": "Degeneracy",
+    "subgoals": [
+      "Count the allowed orders",
+      "Use the degree bound",
+      "Read the degeneracy"
+    ]
+  }
+]

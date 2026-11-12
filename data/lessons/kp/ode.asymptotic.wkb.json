@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The ansatz",
+    "section": "The ansatz",
+    "subgoals": [
+      "Write the exponential ansatz",
+      "Expand the phase",
+      "Collect the orders"
+    ]
+  },
+  {
+    "label": "Eikonal and transport",
+    "section": "Eikonal and transport",
+    "subgoals": [
+      "Solve the eikonal equation",
+      "Write the transport equation",
+      "Read the amplitude"
+    ]
+  },
+  {
+    "label": "Breakdown at turning points",
+    "section": "Breakdown at turning points",
+    "subgoals": [
+      "Find where the coefficient vanishes",
+      "See the amplitude diverge",
+      "Name the local model"
+    ]
+  }
+]

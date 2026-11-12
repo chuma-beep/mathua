@@ -5,8 +5,8 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 2200,
-  "unit_count": 149,
+  "concept_count": 2250,
+  "unit_count": 150,
   "units": [
     {
       "id": "abstract_algebra.b6",
@@ -1402,6 +1402,7 @@
         "differential_equations.first_order",
         "differential_equations.numerical",
         "differential_equations.pde",
+        "differential_equations.pde_theory",
         "differential_equations.second_order"
       ],
       "concept_ids": [
@@ -1420,13 +1421,15 @@
         "ode.numerical.multistep",
         "ode.numerical.rk4",
         "ode.numerical.steps",
+        "ode.pde.characteristics_nd",
         "ode.pde.discriminant",
         "ode.pde.heat",
         "ode.pde.images",
         "ode.pde.laplace_eq",
+        "ode.pde.maximum_principle",
         "ode.second_order.homogeneous"
       ],
-      "concept_count": 20
+      "concept_count": 22
     },
     {
       "id": "differential_equations.b13",
@@ -1436,16 +1439,20 @@
       "depth_min": 39,
       "depth_max": 41,
       "subdomains": [
+        "differential_equations.dynamical",
         "differential_equations.first_order",
         "differential_equations.numerical",
         "differential_equations.second_order",
         "differential_equations.stability",
+        "differential_equations.stiff",
         "differential_equations.systems",
         "differential_equations.transforms"
       ],
       "concept_ids": [
         "ode.adv.systems",
         "ode.characteristic.sum",
+        "ode.dynamical.nullcline",
+        "ode.dynamical.vector_field",
         "ode.first_order.riccati",
         "ode.laplace.value",
         "ode.numerical.rkf",
@@ -1459,6 +1466,7 @@
         "ode.second_order.reduction",
         "ode.second_order.spring",
         "ode.second_order.variation_params",
+        "ode.stiff.step_control",
         "ode.sturm_liouville",
         "ode.systems.linear_phase",
         "ode.systems.matrix_exp",
@@ -1471,7 +1479,7 @@
         "ode.transforms.step",
         "ode.wronskian"
       ],
-      "concept_count": 26
+      "concept_count": 29
     },
     {
       "id": "differential_equations.b14",
@@ -1482,16 +1490,25 @@
       "depth_max": 44,
       "subdomains": [
         "differential_equations.boundary",
+        "differential_equations.dynamical",
         "differential_equations.integral",
         "differential_equations.nonlinear",
         "differential_equations.pde",
+        "differential_equations.pde_theory",
         "differential_equations.stability",
-        "differential_equations.transforms"
+        "differential_equations.stiff",
+        "differential_equations.transforms",
+        "differential_equations.variational"
       ],
       "concept_ids": [
         "ode.boundary.finite_difference",
         "ode.boundary.shooting",
         "ode.boundary_value",
+        "ode.dynamical.hamiltonian",
+        "ode.dynamical.hartman_grobman",
+        "ode.dynamical.invariant_manifold",
+        "ode.dynamical.limit_cycle",
+        "ode.dynamical.linearisation",
         "ode.equilibrium.nonzero",
         "ode.green.function",
         "ode.integral.volterra",
@@ -1499,11 +1516,21 @@
         "ode.nonlinear.lyapunov",
         "ode.nonlinear.perturbation",
         "ode.pde.duhamel",
+        "ode.pde.energy_method",
+        "ode.pde.green_identity",
+        "ode.pde.heat_kernel",
+        "ode.pde.polar_separation",
+        "ode.pde.spherical_harmonics",
+        "ode.pde.well_posed",
         "ode.stability",
+        "ode.stiff.a_stability",
+        "ode.stiff.ratio",
+        "ode.stiff.symplectic",
         "ode.transforms.fourier",
-        "ode.transforms.periodic"
+        "ode.transforms.periodic",
+        "ode.variational.functional"
       ],
-      "concept_count": 13
+      "concept_count": 28
     },
     {
       "id": "differential_equations.b15",
@@ -1511,14 +1538,64 @@
       "domain": "differential_equations",
       "band": 15,
       "depth_min": 45,
-      "depth_max": 45,
+      "depth_max": 47,
       "subdomains": [
-        "differential_equations.integral"
+        "differential_equations.asymptotics",
+        "differential_equations.dynamical",
+        "differential_equations.integral",
+        "differential_equations.pde_theory",
+        "differential_equations.stiff",
+        "differential_equations.variational"
       ],
       "concept_ids": [
-        "ode.integral.fredholm"
+        "ode.asymptotic.averaging",
+        "ode.asymptotic.boundary_layer",
+        "ode.asymptotic.dominant_balance",
+        "ode.asymptotic.lindstedt",
+        "ode.asymptotic.multiple_scales",
+        "ode.asymptotic.regular",
+        "ode.asymptotic.singular",
+        "ode.asymptotic.wkb",
+        "ode.dynamical.gradient_flow",
+        "ode.dynamical.lyapunov_exponent",
+        "ode.dynamical.poincare_bendixson",
+        "ode.integral.fredholm",
+        "ode.pde.harmonic_mean",
+        "ode.pde.weak_solution",
+        "ode.stiff.bdf",
+        "ode.stiff.dae_index",
+        "ode.stiff.l_stability",
+        "ode.stiff.rosenbrock",
+        "ode.stiff.stability_region",
+        "ode.stiff.trapezoidal",
+        "ode.variational.brachistochrone",
+        "ode.variational.euler_lagrange",
+        "ode.variational.geodesic",
+        "ode.variational.hamilton_equations",
+        "ode.variational.isoperimetric",
+        "ode.variational.legendre",
+        "ode.variational.natural_bc",
+        "ode.variational.second_variation"
       ],
-      "concept_count": 1
+      "concept_count": 28
+    },
+    {
+      "id": "differential_equations.b16",
+      "title": "Differential Equations · Stage 17",
+      "domain": "differential_equations",
+      "band": 16,
+      "depth_min": 48,
+      "depth_max": 48,
+      "subdomains": [
+        "differential_equations.asymptotics",
+        "differential_equations.variational"
+      ],
+      "concept_ids": [
+        "ode.asymptotic.adiabatic",
+        "ode.asymptotic.matched",
+        "ode.variational.noether"
+      ],
+      "concept_count": 3
     },
     {
       "id": "discrete_math.b1",

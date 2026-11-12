@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The averaged field",
+    "section": "The averaged field",
+    "subgoals": [
+      "Hold the slow variable fixed",
+      "Integrate over one period",
+      "Write the averaged system"
+    ]
+  },
+  {
+    "label": "The error estimate",
+    "section": "The error estimate",
+    "subgoals": [
+      "Compare the two trajectories",
+      "State the time window",
+      "Read the error order"
+    ]
+  },
+  {
+    "label": "Use",
+    "section": "Use",
+    "subgoals": [
+      "Find the averaged fixed point",
+      "Check its stability",
+      "Interpret the original motion"
+    ]
+  }
+]

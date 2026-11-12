@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Linearisation",
+    "section": "Linearisation",
+    "subgoals": [
+      "Expand the right-hand side",
+      "Collect the new value",
+      "Write the linear system"
+    ]
+  },
+  {
+    "label": "Stage equations",
+    "section": "Stage equations",
+    "subgoals": [
+      "Form the stage matrix",
+      "Factor once",
+      "Solve each stage"
+    ]
+  },
+  {
+    "label": "Cost and use",
+    "section": "Cost and use",
+    "subgoals": [
+      "Count the Jacobians",
+      "Compare with a Newton iteration",
+      "Choose a problem size"
+    ]
+  }
+]

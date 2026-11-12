@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Laplacian in polar form",
+    "section": "The Laplacian in polar form",
+    "subgoals": [
+      "Write the polar Laplacian",
+      "Multiply by the radius squared",
+      "Separate the variables"
+    ]
+  },
+  {
+    "label": "The angular problem",
+    "section": "The angular problem",
+    "subgoals": [
+      "Impose periodicity",
+      "Solve the angular equation",
+      "Read the integer eigenvalue"
+    ]
+  },
+  {
+    "label": "The radial solution",
+    "section": "The radial solution",
+    "subgoals": [
+      "Write the radial equation",
+      "Solve the power ansatz",
+      "Discard the singular power"
+    ]
+  }
+]

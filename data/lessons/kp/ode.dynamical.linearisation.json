@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Jacobian",
+    "section": "The Jacobian",
+    "subgoals": [
+      "Differentiate both components",
+      "Evaluate at the fixed point",
+      "Write the linear system"
+    ]
+  },
+  {
+    "label": "Trace and determinant",
+    "section": "Trace and determinant",
+    "subgoals": [
+      "Compute the trace",
+      "Compute the determinant",
+      "Classify the portrait"
+    ]
+  },
+  {
+    "label": "When the approximation is valid",
+    "section": "When the approximation is valid",
+    "subgoals": [
+      "Compute the eigenvalues",
+      "Check the real parts",
+      "Decide hyperbolicity"
+    ]
+  }
+]

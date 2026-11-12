@@ -43,6 +43,7 @@ func Register(reg *generator.Registry) {
 	registerNumeric(reg)
 	registerBatch(reg)
 	registerWave4(reg)
+	registerWave15(reg)
 }
 
 type conceptGen struct{}

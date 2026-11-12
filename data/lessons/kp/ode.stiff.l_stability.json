@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The extra condition",
+    "section": "The extra condition",
+    "subgoals": [
+      "State the limit at infinity",
+      "Relate it to damping",
+      "Compare with A-stability"
+    ]
+  },
+  {
+    "label": "Backward Euler",
+    "section": "Backward Euler",
+    "subgoals": [
+      "Write its stability function",
+      "Take the limit",
+      "Decide L-stability"
+    ]
+  },
+  {
+    "label": "Practical effect",
+    "section": "Practical effect",
+    "subgoals": [
+      "Apply to a stiff mode",
+      "Look for alternation",
+      "Choose the damped method"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Free endpoint",
+    "section": "Free endpoint",
+    "subgoals": [
+      "Relax the endpoint constraint",
+      "Keep the boundary term",
+      "Require it to vanish"
+    ]
+  },
+  {
+    "label": "Natural condition",
+    "section": "Natural condition",
+    "subgoals": [
+      "Evaluate the slope derivative",
+      "Set it to zero",
+      "Interpret the condition"
+    ]
+  },
+  {
+    "label": "Mixed problems",
+    "section": "Mixed problems",
+    "subgoals": [
+      "Count the constants",
+      "Assign essential and natural conditions",
+      "Solve for the constants"
+    ]
+  }
+]
