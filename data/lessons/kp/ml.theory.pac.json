@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The guarantee",
+    "section": "The guarantee",
+    "subgoals": [
+      "Name epsilon",
+      "Name delta",
+      "Read the probability"
+    ]
+  },
+  {
+    "label": "The sample bound",
+    "section": "The sample bound",
+    "subgoals": [
+      "Count the class",
+      "Invert epsilon",
+      "Add the confidence term"
+    ]
+  },
+  {
+    "label": "Realizability",
+    "section": "Realizability",
+    "subgoals": [
+      "Assume a perfect fit",
+      "Compare with agnostic",
+      "Relax the assumption"
+    ]
+  }
+]

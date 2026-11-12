@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The score",
+    "section": "The score",
+    "subgoals": [
+      "Fit the model",
+      "Read the probability",
+      "Summarise the covariates"
+    ]
+  },
+  {
+    "label": "Inverse weighting",
+    "section": "Inverse weighting",
+    "subgoals": [
+      "Weight the treated",
+      "Weight the controls",
+      "Check the balance"
+    ]
+  },
+  {
+    "label": "Matching",
+    "section": "Matching",
+    "subgoals": [
+      "Find a neighbour",
+      "Pair the units",
+      "Compare the means"
+    ]
+  }
+]

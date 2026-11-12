@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Centring",
+    "section": "Centring",
+    "subgoals": [
+      "Subtract the row means",
+      "Subtract the grand mean",
+      "Check zero mean"
+    ]
+  },
+  {
+    "label": "The eigenproblem",
+    "section": "The eigenproblem",
+    "subgoals": [
+      "Size the matrix",
+      "Count non-zero eigenvalues",
+      "Order the components"
+    ]
+  },
+  {
+    "label": "Projection",
+    "section": "Projection",
+    "subgoals": [
+      "Evaluate the kernels",
+      "Weight the eigenvectors",
+      "Count the cost"
+    ]
+  }
+]

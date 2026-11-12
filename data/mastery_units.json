@@ -5,8 +5,8 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 2511,
-  "unit_count": 157,
+  "concept_count": 2556,
+  "unit_count": 159,
   "units": [
     {
       "id": "abstract_algebra.b6",
@@ -2760,6 +2760,7 @@
       "depth_min": 9,
       "depth_max": 11,
       "subdomains": [
+        "machine_learning.learning_theory",
         "machine_learning.neural_networks",
         "machine_learning.regression"
       ],
@@ -2769,9 +2770,10 @@
         "ml.loss.cross_entropy",
         "ml.loss.mae",
         "ml.loss.mse",
-        "ml.reg.polynomial"
+        "ml.reg.polynomial",
+        "ml.theory.erm"
       ],
-      "concept_count": 6
+      "concept_count": 7
     },
     {
       "id": "machine_learning.b4",
@@ -2781,14 +2783,65 @@
       "depth_min": 12,
       "depth_max": 14,
       "subdomains": [
+        "machine_learning.causal",
         "machine_learning.data",
         "machine_learning.neural_networks"
       ],
       "concept_ids": [
+        "ml.causal.dag",
         "ml.data.scaling",
         "ml.loss.huber"
       ],
-      "concept_count": 2
+      "concept_count": 3
+    },
+    {
+      "id": "machine_learning.b5",
+      "title": "Machine Learning · Stage 6",
+      "domain": "machine_learning",
+      "band": 5,
+      "depth_min": 15,
+      "depth_max": 17,
+      "subdomains": [
+        "machine_learning.causal",
+        "machine_learning.kernels",
+        "machine_learning.learning_theory",
+        "machine_learning.probabilistic",
+        "machine_learning.robustness"
+      ],
+      "concept_ids": [
+        "ml.causal.backdoor",
+        "ml.causal.confounding",
+        "ml.causal.counterfactual",
+        "ml.causal.did",
+        "ml.causal.do",
+        "ml.causal.iv",
+        "ml.causal.propensity",
+        "ml.kernel.gp_regression",
+        "ml.prob.dirichlet",
+        "ml.prob.gaussian_process",
+        "ml.prob.hmc",
+        "ml.prob.mcmc",
+        "ml.robust.differential_privacy",
+        "ml.robust.distribution_shift",
+        "ml.robust.domain_adaptation",
+        "ml.theory.concentration"
+      ],
+      "concept_count": 16
+    },
+    {
+      "id": "machine_learning.b6",
+      "title": "Machine Learning · Stage 7",
+      "domain": "machine_learning",
+      "band": 6,
+      "depth_min": 18,
+      "depth_max": 18,
+      "subdomains": [
+        "machine_learning.causal"
+      ],
+      "concept_ids": [
+        "ml.causal.ate"
+      ],
+      "concept_count": 1
     },
     {
       "id": "machine_learning.b7",
@@ -2821,6 +2874,7 @@
       "subdomains": [
         "machine_learning.neural_networks",
         "machine_learning.nlp",
+        "machine_learning.probabilistic",
         "machine_learning.regression",
         "machine_learning.reinforcement",
         "machine_learning.unsupervised"
@@ -2837,10 +2891,13 @@
         "ml.logistic.regression",
         "ml.nlp.transformer",
         "ml.pca.variance_percent",
+        "ml.prob.gmm",
+        "ml.prob.latent",
+        "ml.prob.variational",
         "ml.reinforcement.qlearning",
         "ml.unsupervised.spectral"
       ],
-      "concept_count": 13
+      "concept_count": 16
     },
     {
       "id": "machine_learning.b9",
@@ -2848,14 +2905,20 @@
       "domain": "machine_learning",
       "band": 9,
       "depth_min": 27,
-      "depth_max": 28,
+      "depth_max": 29,
       "subdomains": [
         "machine_learning.classification",
+        "machine_learning.kernels",
         "machine_learning.neural_networks",
         "machine_learning.nlp",
         "machine_learning.reinforcement"
       ],
       "concept_ids": [
+        "ml.kernel.gram",
+        "ml.kernel.kpca",
+        "ml.kernel.multiple",
+        "ml.kernel.polynomial",
+        "ml.kernel.rbf",
         "ml.loss.hinge",
         "ml.mdp.bellman",
         "ml.naive_bayes",
@@ -2867,24 +2930,28 @@
         "ml.svm.margin",
         "ml.svm.soft_margin"
       ],
-      "concept_count": 10
+      "concept_count": 15
     },
     {
       "id": "machine_learning.b10",
       "title": "Machine Learning · Stage 11",
       "domain": "machine_learning",
       "band": 10,
-      "depth_min": 31,
+      "depth_min": 30,
       "depth_max": 32,
       "subdomains": [
+        "machine_learning.kernels",
         "machine_learning.neural_networks"
       ],
       "concept_ids": [
         "ml.gradient_descent",
+        "ml.kernel.mercer",
+        "ml.kernel.mmd",
+        "ml.kernel.rkhs",
         "ml.optim.sgd",
         "ml.regularization"
       ],
-      "concept_count": 3
+      "concept_count": 6
     },
     {
       "id": "machine_learning.b11",
@@ -2896,8 +2963,11 @@
       "subdomains": [
         "machine_learning.data",
         "machine_learning.evaluation",
+        "machine_learning.learning_theory",
         "machine_learning.neural_networks",
+        "machine_learning.probabilistic",
         "machine_learning.regression",
+        "machine_learning.robustness",
         "machine_learning.trees"
       ],
       "concept_ids": [
@@ -2912,14 +2982,20 @@
         "ml.optim.early_stopping",
         "ml.optim.rmsprop",
         "ml.overfitting",
+        "ml.prob.bayes_opt",
         "ml.reg.elastic_net",
         "ml.reg.lasso",
         "ml.reg.ridge_penalty",
         "ml.regularization.dropout",
+        "ml.robust.federated",
+        "ml.theory.pac",
+        "ml.theory.shattering",
+        "ml.theory.stability",
+        "ml.theory.vc",
         "ml.tree.gini",
         "ml.validation"
       ],
-      "concept_count": 17
+      "concept_count": 23
     },
     {
       "id": "machine_learning.b12",
@@ -2932,7 +3008,10 @@
         "machine_learning.classification",
         "machine_learning.data",
         "machine_learning.evaluation",
+        "machine_learning.learning_theory",
         "machine_learning.neural_networks",
+        "machine_learning.probabilistic",
+        "machine_learning.robustness",
         "machine_learning.trees"
       ],
       "concept_ids": [
@@ -2952,11 +3031,20 @@
         "ml.optim.adamw",
         "ml.optim.batchnorm",
         "ml.optim.momentum",
+        "ml.prob.bayesian_nn",
+        "ml.robust.adversarial",
+        "ml.robust.certified",
+        "ml.robust.fairness",
+        "ml.robust.ood",
+        "ml.robust.poisoning",
+        "ml.theory.no_free_lunch",
+        "ml.theory.rademacher",
+        "ml.theory.sample_complexity",
         "ml.tree.ensemble",
         "ml.tree.gradient_boosting",
         "ml.unsupervised.autoencoder"
       ],
-      "concept_count": 19
+      "concept_count": 28
     },
     {
       "id": "number_theory.b2",

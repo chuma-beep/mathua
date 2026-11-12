@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The surrogate",
+    "section": "The surrogate",
+    "subgoals": [
+      "Fit the surrogate",
+      "Read mean and variance",
+      "Count the observations"
+    ]
+  },
+  {
+    "label": "Acquisition",
+    "section": "Acquisition",
+    "subgoals": [
+      "Maximise expected improvement",
+      "Set the exploration weight",
+      "Compare acquisition rules"
+    ]
+  },
+  {
+    "label": "The cost of a round",
+    "section": "The cost of a round",
+    "subgoals": [
+      "Count evaluations",
+      "Update the posterior",
+      "Stop on a budget"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Average the treated outcomes",
+      "Average the controls",
+      "Subtract"
+    ]
+  },
+  {
+    "label": "The ATT",
+    "section": "The ATT",
+    "subgoals": [
+      "Restrict to the treated",
+      "Compare with the ATE",
+      "Notice heterogeneity"
+    ]
+  },
+  {
+    "label": "Estimation",
+    "section": "Estimation",
+    "subgoals": [
+      "Randomise",
+      "Adjust observational data",
+      "Compare the means"
+    ]
+  }
+]

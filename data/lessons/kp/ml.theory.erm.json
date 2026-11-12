@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The average",
+    "section": "The average",
+    "subgoals": [
+      "Sum the losses",
+      "Divide by the sample",
+      "Compare to the population"
+    ]
+  },
+  {
+    "label": "The 0-1 loss",
+    "section": "The 0-1 loss",
+    "subgoals": [
+      "Count mistakes",
+      "Divide by n",
+      "Read the rate"
+    ]
+  },
+  {
+    "label": "The gap",
+    "section": "The gap",
+    "subgoals": [
+      "Measure the gap",
+      "Bound the capacity",
+      "Trade fit for generalisation"
+    ]
+  }
+]

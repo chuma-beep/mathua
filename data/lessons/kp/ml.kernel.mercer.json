@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The integral operator",
+    "section": "The integral operator",
+    "subgoals": [
+      "Define the operator",
+      "Check the sign of eigenvalues",
+      "Read the eigenfunctions"
+    ]
+  },
+  {
+    "label": "The expansion",
+    "section": "The expansion",
+    "subgoals": [
+      "Write the sum",
+      "Truncate the series",
+      "Interpret the weights"
+    ]
+  },
+  {
+    "label": "The consequence",
+    "section": "The consequence",
+    "subgoals": [
+      "State the inner product",
+      "Justify the trick",
+      "Name the space"
+    ]
+  }
+]

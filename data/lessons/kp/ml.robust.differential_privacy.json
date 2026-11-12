@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Compare neighbours",
+      "Bound the ratio",
+      "Read epsilon"
+    ]
+  },
+  {
+    "label": "The Laplace mechanism",
+    "section": "The Laplace mechanism",
+    "subgoals": [
+      "Compute sensitivity",
+      "Scale the noise",
+      "Apply the mechanism"
+    ]
+  },
+  {
+    "label": "Composition",
+    "section": "Composition",
+    "subgoals": [
+      "Add the budgets",
+      "Track the spend",
+      "Stop at the limit"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The evidence lower bound",
+    "section": "The evidence lower bound",
+    "subgoals": [
+      "Name the two terms",
+      "Take expectations",
+      "Maximise the bound"
+    ]
+  },
+  {
+    "label": "The gap",
+    "section": "The gap",
+    "subgoals": [
+      "State the gap",
+      "Check the sign",
+      "Relate the gap to the divergence"
+    ]
+  },
+  {
+    "label": "Optimisation",
+    "section": "Optimisation",
+    "subgoals": [
+      "Sample the approximation",
+      "Reparameterise",
+      "Estimate the gradient"
+    ]
+  }
+]

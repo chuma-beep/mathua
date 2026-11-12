@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The averaging",
+    "section": "The averaging",
+    "subgoals": [
+      "Average over functions",
+      "Compare algorithms",
+      "Read the expectation"
+    ]
+  },
+  {
+    "label": "The count",
+    "section": "The count",
+    "subgoals": [
+      "Count the objectives",
+      "Use the symmetry",
+      "State the consequence"
+    ]
+  },
+  {
+    "label": "The escape",
+    "section": "The escape",
+    "subgoals": [
+      "Name the prior",
+      "Restrict the class",
+      "Justify the bias"
+    ]
+  }
+]

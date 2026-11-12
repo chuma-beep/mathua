@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The round",
+    "section": "The round",
+    "subgoals": [
+      "Select clients",
+      "Send the model",
+      "Collect the updates"
+    ]
+  },
+  {
+    "label": "Averaging",
+    "section": "Averaging",
+    "subgoals": [
+      "Weight by samples",
+      "Average the updates",
+      "Compare with pooling"
+    ]
+  },
+  {
+    "label": "The heterogeneity",
+    "section": "The heterogeneity",
+    "subgoals": [
+      "Measure the disagreement",
+      "Slow the convergence",
+      "Correct with control variates"
+    ]
+  }
+]

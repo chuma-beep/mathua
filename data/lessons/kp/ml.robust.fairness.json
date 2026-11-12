@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Demographic parity",
+    "section": "Demographic parity",
+    "subgoals": [
+      "Compare positive rates",
+      "Take the gap",
+      "Set a tolerance"
+    ]
+  },
+  {
+    "label": "Equalised odds",
+    "section": "Equalised odds",
+    "subgoals": [
+      "Match true positive rates",
+      "Match false positive rates",
+      "Compare with parity"
+    ]
+  },
+  {
+    "label": "The trade-off",
+    "section": "The trade-off",
+    "subgoals": [
+      "Name the conflict",
+      "Choose a definition",
+      "Document the choice"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The formula",
+    "section": "The formula",
+    "subgoals": [
+      "Evaluate the kernel",
+      "Read the offset",
+      "Compare with the linear kernel"
+    ]
+  },
+  {
+    "label": "The feature count",
+    "section": "The feature count",
+    "subgoals": [
+      "Count homogeneous monomials",
+      "Add lower degrees",
+      "Grow with dimension"
+    ]
+  },
+  {
+    "label": "The degree",
+    "section": "The degree",
+    "subgoals": [
+      "Raise the degree",
+      "Bound the capacity",
+      "Choose by validation"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The perturbation budget",
+    "section": "The perturbation budget",
+    "subgoals": [
+      "Set the norm",
+      "Read the radius",
+      "Scale the input"
+    ]
+  },
+  {
+    "label": "The fast gradient sign method",
+    "section": "The fast gradient sign method",
+    "subgoals": [
+      "Take the gradient",
+      "Read the signs",
+      "Step by epsilon"
+    ]
+  },
+  {
+    "label": "The transfer",
+    "section": "The transfer",
+    "subgoals": [
+      "Attack a surrogate",
+      "Move to the target",
+      "Measure the drop"
+    ]
+  }
+]

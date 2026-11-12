@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Covariate shift",
+    "section": "Covariate shift",
+    "subgoals": [
+      "Fix the conditional",
+      "Move the inputs",
+      "Reweight by the ratio"
+    ]
+  },
+  {
+    "label": "Label shift",
+    "section": "Label shift",
+    "subgoals": [
+      "Fix the class conditionals",
+      "Move the prior",
+      "Adjust the prediction"
+    ]
+  },
+  {
+    "label": "The measurement",
+    "section": "The measurement",
+    "subgoals": [
+      "Compute the distance",
+      "Bound the change",
+      "Compare with zero"
+    ]
+  }
+]

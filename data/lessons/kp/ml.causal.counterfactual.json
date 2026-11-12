@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Potential outcomes",
+    "section": "Potential outcomes",
+    "subgoals": [
+      "Write both outcomes",
+      "Observe one",
+      "Name the missing one"
+    ]
+  },
+  {
+    "label": "The individual effect",
+    "section": "The individual effect",
+    "subgoals": [
+      "Subtract the outcomes",
+      "Note unobservability",
+      "Average instead"
+    ]
+  },
+  {
+    "label": "Assumptions",
+    "section": "Assumptions",
+    "subgoals": [
+      "State SUTVA",
+      "Apply consistency",
+      "Connect to the data"
+    ]
+  }
+]

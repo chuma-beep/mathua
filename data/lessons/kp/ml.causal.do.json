@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The intervention",
+    "section": "The intervention",
+    "subgoals": [
+      "Cut the incoming edges",
+      "Read the new graph",
+      "Name the distribution"
+    ]
+  },
+  {
+    "label": "The rules",
+    "section": "The rules",
+    "subgoals": [
+      "Apply rule one",
+      "Apply rule two",
+      "Check the separation"
+    ]
+  },
+  {
+    "label": "Identifiability",
+    "section": "Identifiability",
+    "subgoals": [
+      "Reduce to observables",
+      "Check every step",
+      "Declare non-identifiability"
+    ]
+  }
+]

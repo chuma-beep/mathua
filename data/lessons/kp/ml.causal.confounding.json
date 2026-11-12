@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The backdoor path",
+    "section": "The backdoor path",
+    "subgoals": [
+      "Draw the path",
+      "Check the arrows",
+      "Identify the confounder"
+    ]
+  },
+  {
+    "label": "Adjustment",
+    "section": "Adjustment",
+    "subgoals": [
+      "Choose a set",
+      "Block every path",
+      "Avoid descendants"
+    ]
+  },
+  {
+    "label": "The bias",
+    "section": "The bias",
+    "subgoals": [
+      "Compare the difference",
+      "Add the bias",
+      "Balance the groups"
+    ]
+  }
+]

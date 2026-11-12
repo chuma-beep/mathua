@@ -10042,5 +10042,185 @@
   {
     "concept_id": "calc.integral.periodic",
     "source": "authored/calc.integral.periodic.md"
+  },
+  {
+    "concept_id": "ml.prob.gaussian_process",
+    "source": "authored/ml.prob.gaussian_process.md"
+  },
+  {
+    "concept_id": "ml.prob.variational",
+    "source": "authored/ml.prob.variational.md"
+  },
+  {
+    "concept_id": "ml.prob.mcmc",
+    "source": "authored/ml.prob.mcmc.md"
+  },
+  {
+    "concept_id": "ml.prob.hmc",
+    "source": "authored/ml.prob.hmc.md"
+  },
+  {
+    "concept_id": "ml.prob.bayes_opt",
+    "source": "authored/ml.prob.bayes_opt.md"
+  },
+  {
+    "concept_id": "ml.prob.dirichlet",
+    "source": "authored/ml.prob.dirichlet.md"
+  },
+  {
+    "concept_id": "ml.prob.latent",
+    "source": "authored/ml.prob.latent.md"
+  },
+  {
+    "concept_id": "ml.prob.gmm",
+    "source": "authored/ml.prob.gmm.md"
+  },
+  {
+    "concept_id": "ml.prob.bayesian_nn",
+    "source": "authored/ml.prob.bayesian_nn.md"
+  },
+  {
+    "concept_id": "ml.kernel.gram",
+    "source": "authored/ml.kernel.gram.md"
+  },
+  {
+    "concept_id": "ml.kernel.rbf",
+    "source": "authored/ml.kernel.rbf.md"
+  },
+  {
+    "concept_id": "ml.kernel.polynomial",
+    "source": "authored/ml.kernel.polynomial.md"
+  },
+  {
+    "concept_id": "ml.kernel.mercer",
+    "source": "authored/ml.kernel.mercer.md"
+  },
+  {
+    "concept_id": "ml.kernel.rkhs",
+    "source": "authored/ml.kernel.rkhs.md"
+  },
+  {
+    "concept_id": "ml.kernel.gp_regression",
+    "source": "authored/ml.kernel.gp_regression.md"
+  },
+  {
+    "concept_id": "ml.kernel.kpca",
+    "source": "authored/ml.kernel.kpca.md"
+  },
+  {
+    "concept_id": "ml.kernel.mmd",
+    "source": "authored/ml.kernel.mmd.md"
+  },
+  {
+    "concept_id": "ml.kernel.multiple",
+    "source": "authored/ml.kernel.multiple.md"
+  },
+  {
+    "concept_id": "ml.theory.vc",
+    "source": "authored/ml.theory.vc.md"
+  },
+  {
+    "concept_id": "ml.theory.shattering",
+    "source": "authored/ml.theory.shattering.md"
+  },
+  {
+    "concept_id": "ml.theory.rademacher",
+    "source": "authored/ml.theory.rademacher.md"
+  },
+  {
+    "concept_id": "ml.theory.pac",
+    "source": "authored/ml.theory.pac.md"
+  },
+  {
+    "concept_id": "ml.theory.no_free_lunch",
+    "source": "authored/ml.theory.no_free_lunch.md"
+  },
+  {
+    "concept_id": "ml.theory.erm",
+    "source": "authored/ml.theory.erm.md"
+  },
+  {
+    "concept_id": "ml.theory.concentration",
+    "source": "authored/ml.theory.concentration.md"
+  },
+  {
+    "concept_id": "ml.theory.stability",
+    "source": "authored/ml.theory.stability.md"
+  },
+  {
+    "concept_id": "ml.theory.sample_complexity",
+    "source": "authored/ml.theory.sample_complexity.md"
+  },
+  {
+    "concept_id": "ml.robust.adversarial",
+    "source": "authored/ml.robust.adversarial.md"
+  },
+  {
+    "concept_id": "ml.robust.certified",
+    "source": "authored/ml.robust.certified.md"
+  },
+  {
+    "concept_id": "ml.robust.poisoning",
+    "source": "authored/ml.robust.poisoning.md"
+  },
+  {
+    "concept_id": "ml.robust.distribution_shift",
+    "source": "authored/ml.robust.distribution_shift.md"
+  },
+  {
+    "concept_id": "ml.robust.domain_adaptation",
+    "source": "authored/ml.robust.domain_adaptation.md"
+  },
+  {
+    "concept_id": "ml.robust.ood",
+    "source": "authored/ml.robust.ood.md"
+  },
+  {
+    "concept_id": "ml.robust.fairness",
+    "source": "authored/ml.robust.fairness.md"
+  },
+  {
+    "concept_id": "ml.robust.differential_privacy",
+    "source": "authored/ml.robust.differential_privacy.md"
+  },
+  {
+    "concept_id": "ml.robust.federated",
+    "source": "authored/ml.robust.federated.md"
+  },
+  {
+    "concept_id": "ml.causal.dag",
+    "source": "authored/ml.causal.dag.md"
+  },
+  {
+    "concept_id": "ml.causal.confounding",
+    "source": "authored/ml.causal.confounding.md"
+  },
+  {
+    "concept_id": "ml.causal.do",
+    "source": "authored/ml.causal.do.md"
+  },
+  {
+    "concept_id": "ml.causal.iv",
+    "source": "authored/ml.causal.iv.md"
+  },
+  {
+    "concept_id": "ml.causal.propensity",
+    "source": "authored/ml.causal.propensity.md"
+  },
+  {
+    "concept_id": "ml.causal.did",
+    "source": "authored/ml.causal.did.md"
+  },
+  {
+    "concept_id": "ml.causal.counterfactual",
+    "source": "authored/ml.causal.counterfactual.md"
+  },
+  {
+    "concept_id": "ml.causal.backdoor",
+    "source": "authored/ml.causal.backdoor.md"
+  },
+  {
+    "concept_id": "ml.causal.ate",
+    "source": "authored/ml.causal.ate.md"
   }
 ]

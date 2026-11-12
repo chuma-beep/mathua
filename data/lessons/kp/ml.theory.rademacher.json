@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Draw the signs",
+      "Maximise the correlation",
+      "Average over draws"
+    ]
+  },
+  {
+    "label": "The bound",
+    "section": "The bound",
+    "subgoals": [
+      "Add the complexity",
+      "Add the confidence term",
+      "Shrink with sample size"
+    ]
+  },
+  {
+    "label": "The sign vectors",
+    "section": "The sign vectors",
+    "subgoals": [
+      "Count the vectors",
+      "Sample the estimate",
+      "Compare with VC bounds"
+    ]
+  }
+]

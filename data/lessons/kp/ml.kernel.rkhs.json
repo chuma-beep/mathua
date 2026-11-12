@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The reproducing property",
+    "section": "The reproducing property",
+    "subgoals": [
+      "State the identity",
+      "Reproduce a value",
+      "Identify the kernel section"
+    ]
+  },
+  {
+    "label": "The representer theorem",
+    "section": "The representer theorem",
+    "subgoals": [
+      "Count the coefficients",
+      "Span the data",
+      "Add the penalty"
+    ]
+  },
+  {
+    "label": "The norm",
+    "section": "The norm",
+    "subgoals": [
+      "Write the quadratic form",
+      "Apply the Gram matrix",
+      "Penalise the coefficients"
+    ]
+  }
+]

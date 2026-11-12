@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The embedding",
+    "section": "The embedding",
+    "subgoals": [
+      "Define the mean map",
+      "Check injectivity",
+      "Read the distance"
+    ]
+  },
+  {
+    "label": "The estimator",
+    "section": "The estimator",
+    "subgoals": [
+      "Average within each sample",
+      "Average across samples",
+      "Count the evaluations"
+    ]
+  },
+  {
+    "label": "The test",
+    "section": "The test",
+    "subgoals": [
+      "Permute the labels",
+      "Calibrate the null",
+      "Choose the kernel"
+    ]
+  }
+]

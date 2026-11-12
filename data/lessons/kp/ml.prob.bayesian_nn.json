@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The posterior over weights",
+    "section": "The posterior over weights",
+    "subgoals": [
+      "Write Bayes' rule",
+      "Check tractability",
+      "Choose an approximation"
+    ]
+  },
+  {
+    "label": "Predictive averaging",
+    "section": "Predictive averaging",
+    "subgoals": [
+      "Average over samples",
+      "Count the samples",
+      "Read the variance"
+    ]
+  },
+  {
+    "label": "Uncertainty",
+    "section": "Uncertainty",
+    "subgoals": [
+      "Separate the two kinds",
+      "Shrink epistemic uncertainty",
+      "Report a predictive interval"
+    ]
+  }
+]

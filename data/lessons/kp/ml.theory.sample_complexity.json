@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The growth",
+    "section": "The growth",
+    "subgoals": [
+      "Invert epsilon",
+      "Add the logarithm",
+      "Scale the capacity"
+    ]
+  },
+  {
+    "label": "Finite classes",
+    "section": "Finite classes",
+    "subgoals": [
+      "Count the class",
+      "Take the logarithm",
+      "Compare with enumeration"
+    ]
+  },
+  {
+    "label": "Infinite classes",
+    "section": "Infinite classes",
+    "subgoals": [
+      "Replace the count",
+      "Use VC dimension",
+      "Keep the shape"
+    ]
+  }
+]

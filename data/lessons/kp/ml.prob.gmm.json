@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Parameter count",
+    "section": "Parameter count",
+    "subgoals": [
+      "Count means and covariances",
+      "Count the weights",
+      "Compare diagonal and full"
+    ]
+  },
+  {
+    "label": "Responsibilities",
+    "section": "Responsibilities",
+    "subgoals": [
+      "Compute a responsibility",
+      "Check the sum",
+      "Read the posterior"
+    ]
+  },
+  {
+    "label": "The EM update",
+    "section": "The EM update",
+    "subgoals": [
+      "Weight the mean",
+      "Weight the covariance",
+      "Update the mixing weight"
+    ]
+  }
+]

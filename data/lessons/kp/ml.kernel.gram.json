@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Size and symmetry",
+    "section": "Size and symmetry",
+    "subgoals": [
+      "Count entries",
+      "Count independent entries",
+      "Check symmetry"
+    ]
+  },
+  {
+    "label": "Positive semidefiniteness",
+    "section": "Positive semidefiniteness",
+    "subgoals": [
+      "Check eigenvalues",
+      "Relate to the kernel",
+      "Test a candidate matrix"
+    ]
+  },
+  {
+    "label": "Rank",
+    "section": "Rank",
+    "subgoals": [
+      "Bound the rank",
+      "Count features",
+      "Detect redundancy"
+    ]
+  }
+]

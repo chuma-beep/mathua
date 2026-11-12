@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The three conditions",
+    "section": "The three conditions",
+    "subgoals": [
+      "Test relevance",
+      "Assume exclusion",
+      "Assume independence"
+    ]
+  },
+  {
+    "label": "Two-stage least squares",
+    "section": "Two-stage least squares",
+    "subgoals": [
+      "Predict the treatment",
+      "Regress the outcome",
+      "Count the stages"
+    ]
+  },
+  {
+    "label": "Weak instruments",
+    "section": "Weak instruments",
+    "subgoals": [
+      "Read the F statistic",
+      "Inflate the variance",
+      "Reject a weak instrument"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The transition matrix",
+    "section": "The transition matrix",
+    "subgoals": [
+      "Count the matrix entries",
+      "Check the row sums",
+      "Read the proposal"
+    ]
+  },
+  {
+    "label": "Stationarity",
+    "section": "Stationarity",
+    "subgoals": [
+      "Test invariance",
+      "Identify the stationary law",
+      "Separate stationarity from convergence"
+    ]
+  },
+  {
+    "label": "Burn-in and autocorrelation",
+    "section": "Burn-in and autocorrelation",
+    "subgoals": [
+      "Choose a burn-in",
+      "Estimate the autocorrelation time",
+      "Compute the effective sample size"
+    ]
+  }
+]

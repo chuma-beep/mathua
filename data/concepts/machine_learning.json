@@ -1085,5 +1085,860 @@
       "streak": 10,
       "avg_time_seconds": 20.0
     }
+  },
+  {
+    "id": "ml.prob.gaussian_process",
+    "label": "Gaussian process priors",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.probabilistic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.bayes.prior"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "prob.bayes.prior"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.prob.variational",
+    "label": "Variational inference",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.probabilistic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.cluster.em"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.cluster.em"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.prob.mcmc",
+    "label": "Markov chain Monte Carlo",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.probabilistic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.bayes.prior"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "prob.bayes.prior"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.prob.hmc",
+    "label": "Hamiltonian Monte Carlo",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.probabilistic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.prob.mcmc"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.prob.mcmc"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.prob.bayes_opt",
+    "label": "Bayesian optimisation",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.probabilistic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.validation"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.validation"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.prob.dirichlet",
+    "label": "Dirichlet priors",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.probabilistic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.bayes.prior"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "prob.bayes.prior"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.prob.latent",
+    "label": "Latent variable models",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.probabilistic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.cluster.em"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.cluster.em"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.prob.gmm",
+    "label": "Gaussian mixture models",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.probabilistic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.cluster.kmeans"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.cluster.kmeans"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.prob.bayesian_nn",
+    "label": "Bayesian neural networks",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.probabilistic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.optim.adam"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.optim.adam"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.kernel.gram",
+    "label": "Gram matrices",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.kernels",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.svm.kernel"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.svm.kernel"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.kernel.rbf",
+    "label": "Radial basis function kernels",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.kernels",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.svm.kernel"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.svm.kernel"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.kernel.polynomial",
+    "label": "Polynomial kernels",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.kernels",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.svm.kernel"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.svm.kernel"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.kernel.mercer",
+    "label": "Mercer's theorem",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.kernels",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.kernel.gram"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.kernel.gram"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.kernel.rkhs",
+    "label": "Reproducing kernel Hilbert spaces",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.kernels",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.kernel.mercer"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.kernel.mercer"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.kernel.gp_regression",
+    "label": "Gaussian process regression",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.kernels",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.prob.gaussian_process"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.prob.gaussian_process"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.kernel.kpca",
+    "label": "Kernel principal components",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.kernels",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.pca.variance_percent"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.pca.variance_percent"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.kernel.mmd",
+    "label": "Maximum mean discrepancy",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.kernels",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.kernel.rkhs"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.kernel.rkhs"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.kernel.multiple",
+    "label": "Multiple kernel learning",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.kernels",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.svm.kernel"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.svm.kernel"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.theory.vc",
+    "label": "VC dimension",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.learning_theory",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.overfitting"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.overfitting"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.theory.shattering",
+    "label": "Shattering",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.learning_theory",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.theory.vc"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.theory.vc"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.theory.rademacher",
+    "label": "Rademacher complexity",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.learning_theory",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.theory.shattering"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.theory.shattering"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.theory.pac",
+    "label": "PAC learning",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.learning_theory",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.theory.vc"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.theory.vc"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.theory.no_free_lunch",
+    "label": "The no free lunch theorem",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.learning_theory",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.bias_variance"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.bias_variance"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.theory.erm",
+    "label": "Empirical risk minimisation",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.learning_theory",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.loss.mse"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.loss.mse"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.theory.concentration",
+    "label": "Concentration inequalities",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.learning_theory",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.chf.clt"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "prob.chf.clt"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.theory.stability",
+    "label": "Algorithmic stability",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.learning_theory",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.overfitting"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.overfitting"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.theory.sample_complexity",
+    "label": "Sample complexity of learning",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.learning_theory",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.theory.pac"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.theory.pac"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.robust.adversarial",
+    "label": "Adversarial examples",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.robustness",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.eval.accuracy"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.eval.accuracy"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.robust.certified",
+    "label": "Certified robustness",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.robustness",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.robust.adversarial"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.robust.adversarial"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.robust.poisoning",
+    "label": "Data poisoning",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.robustness",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.data.leakage"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.data.leakage"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.robust.distribution_shift",
+    "label": "Distribution shift",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.robustness",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.data.scaling"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.data.scaling"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.robust.domain_adaptation",
+    "label": "Domain adaptation",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.robustness",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.robust.distribution_shift"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.robust.distribution_shift"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.robust.ood",
+    "label": "Out-of-distribution detection",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.robustness",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.eval.calibration"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.eval.calibration"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.robust.fairness",
+    "label": "Fairness metrics",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.robustness",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.eval.confusion"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.eval.confusion"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.robust.differential_privacy",
+    "label": "Differential privacy",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.robustness",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.bayes.prior"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "prob.bayes.prior"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.robust.federated",
+    "label": "Federated learning",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.robustness",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.optim.sgd"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.optim.sgd"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.causal.dag",
+    "label": "Causal graphs",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.causal",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "prob.cond.definition"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "prob.cond.definition"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.causal.confounding",
+    "label": "Confounding",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.causal",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.causal.dag"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.causal.dag"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.causal.do",
+    "label": "The do-calculus",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.causal",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.causal.confounding"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.causal.confounding"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.causal.iv",
+    "label": "Instrumental variables",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.causal",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.causal.confounding"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.causal.confounding"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.causal.propensity",
+    "label": "Propensity scores",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.causal",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.causal.confounding"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.causal.confounding"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.causal.did",
+    "label": "Difference in differences",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.causal",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.causal.confounding"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.causal.confounding"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.causal.counterfactual",
+    "label": "Counterfactuals",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.causal",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.causal.do"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.causal.do"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.causal.backdoor",
+    "label": "The backdoor criterion",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.causal",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.causal.confounding"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.causal.confounding"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "ml.causal.ate",
+    "label": "Average treatment effects",
+    "domain": "machine_learning",
+    "subdomain": "machine_learning.causal",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ml.causal.counterfactual"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ml.causal.counterfactual"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
   }
 ]

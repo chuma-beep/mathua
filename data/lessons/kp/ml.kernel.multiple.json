@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The combination",
+    "section": "The combination",
+    "subgoals": [
+      "Weight the sum",
+      "Constrain the weights",
+      "Check positivity"
+    ]
+  },
+  {
+    "label": "The cost",
+    "section": "The cost",
+    "subgoals": [
+      "Count the Gram matrices",
+      "Count the entries",
+      "Share the factorisation"
+    ]
+  },
+  {
+    "label": "The purpose",
+    "section": "The purpose",
+    "subgoals": [
+      "Compare kernel views",
+      "Learn the weights",
+      "Validate the combination"
+    ]
+  }
+]

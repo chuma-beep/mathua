@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The discrepancy",
+    "section": "The discrepancy",
+    "subgoals": [
+      "Measure the difference",
+      "Align the features",
+      "Check the objective"
+    ]
+  },
+  {
+    "label": "The sample sizes",
+    "section": "The sample sizes",
+    "subgoals": [
+      "Count the source",
+      "Count the target",
+      "Use unlabelled features"
+    ]
+  },
+  {
+    "label": "The assumption",
+    "section": "The assumption",
+    "subgoals": [
+      "Share the label rule",
+      "Test the assumption",
+      "Bound the gap"
+    ]
+  }
+]

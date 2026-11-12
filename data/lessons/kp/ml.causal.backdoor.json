@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Blocking",
+    "section": "Blocking",
+    "subgoals": [
+      "Find a backdoor path",
+      "Condition on a node",
+      "Check the block"
+    ]
+  },
+  {
+    "label": "Descendants",
+    "section": "Descendants",
+    "subgoals": [
+      "Identify descendants",
+      "Exclude them",
+      "Keep the effect"
+    ]
+  },
+  {
+    "label": "Minimal sets",
+    "section": "Minimal sets",
+    "subgoals": [
+      "Remove a member",
+      "Recheck the paths",
+      "Keep it minimal"
+    ]
+  }
+]

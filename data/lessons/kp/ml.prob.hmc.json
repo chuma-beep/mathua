@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Leapfrog steps",
+    "section": "Leapfrog steps",
+    "subgoals": [
+      "Count the gradient calls",
+      "Choose the step order",
+      "Keep volume preservation"
+    ]
+  },
+  {
+    "label": "The acceptance ratio",
+    "section": "The acceptance ratio",
+    "subgoals": [
+      "Compare energies",
+      "Apply the Metropolis test",
+      "Relate stability to acceptance"
+    ]
+  },
+  {
+    "label": "Step size and trajectory length",
+    "section": "Step size and trajectory length",
+    "subgoals": [
+      "Balance step size",
+      "Detect a U-turn",
+      "Tune adaptively"
+    ]
+  }
+]

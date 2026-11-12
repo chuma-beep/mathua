@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The structure",
+    "section": "The structure",
+    "subgoals": [
+      "Count the nodes",
+      "Bound the edges",
+      "Check acyclicity"
+    ]
+  },
+  {
+    "label": "Paths",
+    "section": "Paths",
+    "subgoals": [
+      "Follow the arrows",
+      "Find a backdoor path",
+      "Separate the kinds"
+    ]
+  },
+  {
+    "label": "d-separation",
+    "section": "d-separation",
+    "subgoals": [
+      "Block a path",
+      "Condition on a collider",
+      "Test separation"
+    ]
+  }
+]

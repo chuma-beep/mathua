@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The score",
+    "section": "The score",
+    "subgoals": [
+      "Pick a score",
+      "Rank the inputs",
+      "Read the tail"
+    ]
+  },
+  {
+    "label": "The threshold",
+    "section": "The threshold",
+    "subgoals": [
+      "Move the threshold",
+      "Trade the two rates",
+      "Choose an operating point"
+    ]
+  },
+  {
+    "label": "The evaluation",
+    "section": "The evaluation",
+    "subgoals": [
+      "Compute AUROC",
+      "Ignore the base rate",
+      "Compare scores"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Replace-one stability",
+    "section": "Replace-one stability",
+    "subgoals": [
+      "Replace a point",
+      "Compare outputs",
+      "Take the expectation"
+    ]
+  },
+  {
+    "label": "The bound",
+    "section": "The bound",
+    "subgoals": [
+      "Double the parameter",
+      "Add confidence",
+      "Read the gap"
+    ]
+  },
+  {
+    "label": "The appeal",
+    "section": "The appeal",
+    "subgoals": [
+      "Skip the capacity",
+      "Cover any algorithm",
+      "Accept looseness"
+    ]
+  }
+]

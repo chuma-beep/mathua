@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Intervals on a line",
+    "section": "Intervals on a line",
+    "subgoals": [
+      "Shatter two points",
+      "Fail on three",
+      "State the dimension"
+    ]
+  },
+  {
+    "label": "Half-spaces",
+    "section": "Half-spaces",
+    "subgoals": [
+      "Count the parameters",
+      "Add the bias",
+      "State the dimension"
+    ]
+  },
+  {
+    "label": "Rectangles",
+    "section": "Rectangles",
+    "subgoals": [
+      "Shatter four points",
+      "Fail on five",
+      "State the dimension"
+    ]
+  }
+]

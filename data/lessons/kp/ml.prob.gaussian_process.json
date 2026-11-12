@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The covariance matrix",
+    "section": "The covariance matrix",
+    "subgoals": [
+      "Count the covariance entries",
+      "Count independent entries",
+      "Place the observations on the grid"
+    ]
+  },
+  {
+    "label": "Posterior prediction",
+    "section": "Posterior prediction",
+    "subgoals": [
+      "Count the weights",
+      "Read the kernel row",
+      "Keep the mean linear"
+    ]
+  },
+  {
+    "label": "The noise term",
+    "section": "The noise term",
+    "subgoals": [
+      "Add the diagonal term",
+      "Check positive definiteness",
+      "Handle coincident inputs"
+    ]
+  }
+]

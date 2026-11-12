@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The poisoning fraction",
+    "section": "The poisoning fraction",
+    "subgoals": [
+      "Count the controlled points",
+      "Divide by the set size",
+      "Bound the fraction"
+    ]
+  },
+  {
+    "label": "The influence",
+    "section": "The influence",
+    "subgoals": [
+      "Estimate the influence",
+      "Rank the points",
+      "Audit the top ones"
+    ]
+  },
+  {
+    "label": "The target",
+    "section": "The target",
+    "subgoals": [
+      "Degrade accuracy",
+      "Change one prediction",
+      "Choose the goal"
+    ]
+  }
+]

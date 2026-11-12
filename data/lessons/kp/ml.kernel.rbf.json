@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The formula",
+    "section": "The formula",
+    "subgoals": [
+      "Evaluate at zero distance",
+      "Apply the exponent",
+      "Check positivity"
+    ]
+  },
+  {
+    "label": "The length scale",
+    "section": "The length scale",
+    "subgoals": [
+      "Convert gamma to sigma",
+      "Double the scale",
+      "Read the decay"
+    ]
+  },
+  {
+    "label": "The feature space",
+    "section": "The feature space",
+    "subgoals": [
+      "Name the dimension",
+      "Relate to smoothness",
+      "Avoid explicit expansion"
+    ]
+  }
+]

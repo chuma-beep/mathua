@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The labelings",
+    "section": "The labelings",
+    "subgoals": [
+      "Count the labellings",
+      "Realise one",
+      "Realise all"
+    ]
+  },
+  {
+    "label": "Realisation",
+    "section": "Realisation",
+    "subgoals": [
+      "Pick a hypothesis",
+      "Match the labels",
+      "Ignore the rest"
+    ]
+  },
+  {
+    "label": "Monotonicity",
+    "section": "Monotonicity",
+    "subgoals": [
+      "Take a subset",
+      "Keep shattering",
+      "Add a point"
+    ]
+  }
+]

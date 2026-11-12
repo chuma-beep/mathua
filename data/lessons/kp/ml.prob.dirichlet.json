@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The parameter vector",
+    "section": "The parameter vector",
+    "subgoals": [
+      "Count the parameters",
+      "Sum the concentration",
+      "Read a component"
+    ]
+  },
+  {
+    "label": "The mean",
+    "section": "The mean",
+    "subgoals": [
+      "Compute the mean",
+      "Check the sum",
+      "Interpret concentration"
+    ]
+  },
+  {
+    "label": "Conjugacy",
+    "section": "Conjugacy",
+    "subgoals": [
+      "Add the counts",
+      "Keep the family",
+      "Update the concentration"
+    ]
+  }
+]

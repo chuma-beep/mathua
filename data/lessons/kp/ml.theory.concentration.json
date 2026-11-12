@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Hoeffding",
+    "section": "Hoeffding",
+    "subgoals": [
+      "Set the interval width",
+      "Apply the exponent",
+      "Increase the sample"
+    ]
+  },
+  {
+    "label": "Chernoff",
+    "section": "Chernoff",
+    "subgoals": [
+      "Use the multiplicative form",
+      "Compare with Hoeffding",
+      "Read the deviation"
+    ]
+  },
+  {
+    "label": "Union bounds",
+    "section": "Union bounds",
+    "subgoals": [
+      "Count the events",
+      "Multiply the failure",
+      "Add the logarithm"
+    ]
+  }
+]

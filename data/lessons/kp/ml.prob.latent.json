@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The marginal likelihood",
+    "section": "The marginal likelihood",
+    "subgoals": [
+      "Write the integral",
+      "Check tractability",
+      "Interpret the marginal"
+    ]
+  },
+  {
+    "label": "Parameter counting",
+    "section": "Parameter counting",
+    "subgoals": [
+      "Count the parameters",
+      "Compare with a supervised model",
+      "Relate capacity to data"
+    ]
+  },
+  {
+    "label": "Inference",
+    "section": "Inference",
+    "subgoals": [
+      "Run an E step",
+      "Run an M step",
+      "Choose variational inference"
+    ]
+  }
+]

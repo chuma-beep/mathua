@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The margin bound",
+    "section": "The margin bound",
+    "subgoals": [
+      "Read the margin",
+      "Divide by the constant",
+      "Widen the radius"
+    ]
+  },
+  {
+    "label": "Randomised smoothing",
+    "section": "Randomised smoothing",
+    "subgoals": [
+      "Sample the noise",
+      "Estimate the top probability",
+      "Convert to a radius"
+    ]
+  },
+  {
+    "label": "The cost",
+    "section": "The cost",
+    "subgoals": [
+      "Certify one input",
+      "Repeat over the set",
+      "Count the certificates"
+    ]
+  }
+]

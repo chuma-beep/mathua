@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The estimator",
+    "section": "The estimator",
+    "subgoals": [
+      "Take the treated change",
+      "Take the control change",
+      "Subtract"
+    ]
+  },
+  {
+    "label": "The table",
+    "section": "The table",
+    "subgoals": [
+      "Fill the four cells",
+      "Apply the signs",
+      "Read the estimate"
+    ]
+  },
+  {
+    "label": "The assumption",
+    "section": "The assumption",
+    "subgoals": [
+      "State parallel trends",
+      "Plot the pre-period",
+      "Test what is testable"
+    ]
+  }
+]

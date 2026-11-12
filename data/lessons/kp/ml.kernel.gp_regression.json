@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The posterior mean",
+    "section": "The posterior mean",
+    "subgoals": [
+      "Build the kernel vector",
+      "Invert the regularised matrix",
+      "Combine the targets"
+    ]
+  },
+  {
+    "label": "The posterior variance",
+    "section": "The posterior variance",
+    "subgoals": [
+      "Subtract the quadratic form",
+      "Check the observation limit",
+      "Read the noise floor"
+    ]
+  },
+  {
+    "label": "The marginal likelihood",
+    "section": "The marginal likelihood",
+    "subgoals": [
+      "Name the three terms",
+      "Tune the hyperparameters",
+      "Balance fit and complexity"
+    ]
+  }
+]
