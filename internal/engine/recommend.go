@@ -186,6 +186,7 @@ func (e *Engine) conceptSnapshotsFrom(studentID string, progress map[string]*sto
 			Streak:         p.Streak,
 			LastAttempted:  timeOrZero(p.LastAttempted),
 			LastReviewed:   timeOrZero(p.LastReviewed),
+			MasteredAt:     timeOrZero(p.MasteredAt),
 			NextReviewDue:  p.NextReviewDue,
 			RequiredStreak: reqStreak,
 			TimeThreshold:  timeThresh,
@@ -291,13 +292,9 @@ func (e *Engine) RecommendNext(studentID string, exclude []string) (scheduler.Re
 	// after a fact it did not report, and the next caller inherits discrepancies rather than
 	// reading the comment.
 	mastered, attemptedDays := 0, map[string]bool{}
+	now := time.Now().UTC()
 	for _, p := range progress {
-		var elapsed float64
-		if p.FSRSLastReview != nil && !p.FSRSLastReview.IsZero() {
-			elapsed = daysSinceReview(p.FSRSLastReview)
-		} else if p.LastReviewed != nil {
-			elapsed = daysSinceReview(p.LastReviewed)
-		}
+		elapsed := mastery.ReviewElapsedDays(p.FSRSLastReview, p.LastReviewed, p.MasteredAt, p.LastAttempted, now)
 		if mastery.EffectiveStatusFSRS(mastery.Status(p.Status), elapsed, p.FSRSStability, mastery.DecayDays) == mastery.StatusMastered {
 			mastered++
 		}

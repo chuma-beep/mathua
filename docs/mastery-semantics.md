@@ -367,6 +367,18 @@ MASTERED with a streak of 1, leaving `LastReviewed` nil, and `GetProgress` treat
 DECAYING on its way up**: a concept simultaneously stored as MASTERED and read as DECAYING.
 The decay clock now starts on tier attainment, which is what it was always a proxy for.
 
+**Amended 2026-11-12: the two readers disagreed about a missing clock.** Mastery earned
+through study sets `mastered_at` but no review timestamp, and that produced opposite
+readings in the two places that decide whether a concept is due. `GetProgress` assumed 999
+days and reported DECAYING, while the scheduler assumed zero days and treated the row as
+fresh, so the graph counted concepts the review queue would never serve. Both now call
+`mastery.ReviewElapsedDays`, which walks `fsrs_last_review`, `last_reviewed`, `mastered_at`
+and `last_attempted` in that order and reports zero only when none of them exists. Data
+migration 8 gives every mastered row without a clock the mastery date, then the last
+attempt, then the migration time, so existing rows and `GetProgress` agree without waiting
+for the next review. The decay threshold is unchanged at 14 days; only the timestamp the
+threshold is measured from became one rule instead of two.
+
 Also found while wiring this up: the transition logic existed **twice**, 
 `SubmitAnswer` (study, review) and `submitAnswerWithTask` (quiz, diagnostic) each had their
 own copy. Both now read evidence, or a quiz answer would have graded differently from a

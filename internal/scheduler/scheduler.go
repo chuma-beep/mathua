@@ -37,6 +37,7 @@ type ConceptSnapshot struct {
 	Streak         int
 	LastAttempted  time.Time
 	LastReviewed   time.Time
+	MasteredAt     time.Time
 	NextReviewDue  *time.Time
 	RequiredStreak int
 	TimeThreshold  float64
@@ -333,6 +334,15 @@ func buildCandidates(dag *concepts.DAG, snapshots map[string]*ConceptSnapshot, n
 	return out
 }
 
+// atPtr turns a zero time into nil, so ReviewElapsedDays skips a clock that
+// was never written instead of treating it as the zero instant.
+func atPtr(t time.Time) *time.Time {
+	if t.IsZero() {
+		return nil
+	}
+	return &t
+}
+
 func effectiveState(snap *ConceptSnapshot, now time.Time) (mastery.Status, bool) {
 	if snap == nil {
 		return mastery.StatusUnseen, false
@@ -340,15 +350,10 @@ func effectiveState(snap *ConceptSnapshot, now time.Time) (mastery.Status, bool)
 	if snap.Status != mastery.StatusMastered {
 		return snap.Status, false
 	}
-	var elapsedDays float64
-	if snap.FSRSLastReview != nil && !snap.FSRSLastReview.IsZero() {
-		elapsedDays = now.Sub(*snap.FSRSLastReview).Hours() / 24.0
-	} else if !snap.LastReviewed.IsZero() {
-		elapsedDays = now.Sub(snap.LastReviewed).Hours() / 24.0
-	}
-	if elapsedDays < 0 {
-		elapsedDays = 0
-	}
+	// The four timestamps are ranked in one place so the graph's decay status
+	// and the queue's review decision cannot read different clocks.
+	elapsedDays := mastery.ReviewElapsedDays(snap.FSRSLastReview,
+		atPtr(snap.LastReviewed), atPtr(snap.MasteredAt), atPtr(snap.LastAttempted), now)
 	status := mastery.EffectiveStatusFSRS(snap.Status, elapsedDays, snap.FSRSStability, mastery.DecayDays)
 	isReview := status == "DECAYING"
 	if snap.NextReviewDue != nil && !snap.NextReviewDue.After(now) {

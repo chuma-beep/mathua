@@ -2938,17 +2938,13 @@ func (e *Engine) GetProgress(studentID string) (map[string]*storage.ConceptProgr
 		if mastery.Status(p.Status) != mastery.StatusMastered {
 			continue
 		}
-		// No review timestamp means we cannot claim it is fresh, so treat it as
-		// fully decayed rather than pretending it was reviewed just now.
-		days := 999.0
-		if p.FSRSLastReview != nil && !p.FSRSLastReview.IsZero() {
-			days = now.Sub(*p.FSRSLastReview).Hours() / 24
-		} else if p.LastReviewed != nil {
-			days = now.Sub(*p.LastReviewed).Hours() / 24
-		}
-		if days < 0 {
-			days = 0
-		}
+		// One shared clock chain: FSRS review, SM-2 review, mastery, attempt.
+		// A concept mastered through study has no review timestamp yet, and
+		// its decay must start at the mastery date. Reading zero here made the
+		// graph call it fresh while the scheduler called it fresh for a
+		// different reason; reading 999 called it decayed when the queue would
+		// not serve it. ReviewElapsedDays is the single rule both sides use.
+		days := mastery.ReviewElapsedDays(p.FSRSLastReview, p.LastReviewed, p.MasteredAt, p.LastAttempted, now)
 		p.Status = string(mastery.EffectiveStatusFSRS(mastery.StatusMastered, days, p.FSRSStability, mastery.DecayDays))
 	}
 	return progress, nil

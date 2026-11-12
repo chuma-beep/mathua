@@ -272,6 +272,18 @@ func authMigrate(db *sql.DB) error {
 				CAST(strftime('%s','now') AS INTEGER),
 				CAST(strftime('%s','now') AS INTEGER)
 			FROM students`},
+		// v8 review clocks: a concept mastered through study has no review
+		// timestamp, so the graph called it due while the scheduler called it
+		// fresh. Give every mastered row without a clock the best evidence
+		// available: the mastery date, then the last attempt, then now. The
+		// value is RFC 3339 because that is the shape the row scanner parses.
+		8: {`UPDATE concept_progress
+			SET last_reviewed = COALESCE(NULLIF(mastered_at, ''),
+				NULLIF(last_attempted, ''),
+				strftime('%Y-%m-%dT%H:%M:%SZ','now'))
+			WHERE status = 'MASTERED'
+				AND (last_reviewed IS NULL OR last_reviewed = '')
+				AND (fsrs_last_review IS NULL OR fsrs_last_review = '')`},
 	}
 	for v := 1; v <= len(dataMigrations); v++ {
 		if err := runOnceSQLite(db, v, dataMigrations[v]); err != nil {

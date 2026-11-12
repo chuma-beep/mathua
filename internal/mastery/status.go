@@ -1,6 +1,10 @@
 package mastery
 
-import "github.com/chuma-beep/mathua/internal/fsrs"
+import (
+	"time"
+
+	"github.com/chuma-beep/mathua/internal/fsrs"
+)
 
 type Status string
 
@@ -55,4 +59,33 @@ func EffectiveStatusFSRS(current Status, daysSinceLastReview float64, stability 
 		return "DECAYING"
 	}
 	return current
+}
+
+// ReviewElapsedDays is the age of the most recent evidence that a mastered
+// concept was reviewed, in days. It walks four timestamps in order of
+// authority: an FSRS review, an SM-2 review, the moment mastery was awarded,
+// then the last attempt.
+//
+// Mastery is the fallback that matters. A concept mastered through study has
+// no review timestamp until its first review, and the two readers used to
+// disagree about what that meant: the graph assumed 999 days and called it
+// decayed, the scheduler assumed zero and called it fresh. That made every
+// such concept appear due on the graph while the queue never offered it. Both
+// now read the mastery date, so the decay clock starts when mastery is earned.
+//
+// A row with none of the four timestamps reports zero days: there is no
+// evidence it is stale, and the versioned backfill gives legacy rows a real
+// clock at boot.
+func ReviewElapsedDays(fsrsLastReview, lastReviewed, masteredAt, lastAttempted *time.Time, now time.Time) float64 {
+	for _, t := range []*time.Time{fsrsLastReview, lastReviewed, masteredAt, lastAttempted} {
+		if t == nil || t.IsZero() {
+			continue
+		}
+		days := now.Sub(*t).Hours() / 24.0
+		if days < 0 {
+			return 0
+		}
+		return days
+	}
+	return 0
 }

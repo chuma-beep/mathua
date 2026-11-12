@@ -913,6 +913,18 @@ func pgAuthMigrate(db *sql.DB) error {
 				(extract(epoch from now()))::bigint
 			FROM students
 			ON CONFLICT (student_id) DO NOTHING`},
+		// v8 review clocks: mirrors the SQLite migration. A concept mastered
+		// through study has no review timestamp, which made the graph and the
+		// scheduler disagree about whether it was due. Use the mastery date,
+		// then the last attempt, then now, in the RFC 3339 shape the scanner
+		// parses.
+		8: {`UPDATE concept_progress
+			SET last_reviewed = COALESCE(NULLIF(mastered_at, ''),
+				NULLIF(last_attempted, ''),
+				to_char(now() AT TIME ZONE 'UTC', 'YYYY-MM-DD"T"HH24:MI:SS"Z"'))
+			WHERE status = 'MASTERED'
+				AND (last_reviewed IS NULL OR last_reviewed = '')
+				AND (fsrs_last_review IS NULL OR fsrs_last_review = '')`},
 	}
 	for v := 1; v <= len(dataMigrations); v++ {
 		if err := runOncePostgres(db, v, dataMigrations[v]); err != nil {
