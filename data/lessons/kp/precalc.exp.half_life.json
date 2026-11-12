@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The model",
+    "section": "The model",
+    "subgoals": [
+      "Write the base",
+      "Divide time by the half-life",
+      "Multiply the initial amount"
+    ]
+  },
+  {
+    "label": "Solving for time",
+    "section": "Solving for time",
+    "subgoals": [
+      "Take logarithms",
+      "Isolate the exponent",
+      "Divide by the log"
+    ]
+  },
+  {
+    "label": "Remaining fraction",
+    "section": "Remaining fraction",
+    "subgoals": [
+      "Count half-lives",
+      "Use a power of one half",
+      "Check the fraction"
+    ]
+  }
+]

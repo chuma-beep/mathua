@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The model",
+    "section": "The model",
+    "subgoals": [
+      "Write the cosine",
+      "Insert the frequency",
+      "Add the offset"
+    ]
+  },
+  {
+    "label": "Period and frequency",
+    "section": "Period and frequency",
+    "subgoals": [
+      "Divide two pi",
+      "Take the reciprocal",
+      "Check the units"
+    ]
+  },
+  {
+    "label": "Reading parameters",
+    "section": "Reading parameters",
+    "subgoals": [
+      "Read the amplitude",
+      "Read the midline",
+      "Read the start"
+    ]
+  }
+]

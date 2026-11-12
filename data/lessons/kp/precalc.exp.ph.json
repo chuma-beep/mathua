@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Take the concentration",
+      "Apply the log",
+      "Change the sign"
+    ]
+  },
+  {
+    "label": "Converting back",
+    "section": "Converting back",
+    "subgoals": [
+      "Negate the pH",
+      "Raise ten",
+      "State the concentration"
+    ]
+  },
+  {
+    "label": "Neutrality",
+    "section": "Neutrality",
+    "subgoals": [
+      "Compare with seven",
+      "Classify the solution",
+      "Check the direction"
+    ]
+  }
+]

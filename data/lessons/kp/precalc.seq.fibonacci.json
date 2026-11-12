@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The recurrence",
+    "section": "The recurrence",
+    "subgoals": [
+      "Add two terms",
+      "Keep the order",
+      "Continue the list"
+    ]
+  },
+  {
+    "label": "The golden ratio",
+    "section": "The golden ratio",
+    "subgoals": [
+      "Form the ratio",
+      "Solve the quadratic",
+      "Take the positive root"
+    ]
+  },
+  {
+    "label": "Identities",
+    "section": "Identities",
+    "subgoals": [
+      "Sum consecutive terms",
+      "Shift the index",
+      "Check by induction"
+    ]
+  }
+]

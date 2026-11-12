@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Principal ranges",
+    "section": "Principal ranges",
+    "subgoals": [
+      "Recall the range",
+      "Check the input",
+      "Read the angle"
+    ]
+  },
+  {
+    "label": "Composition",
+    "section": "Composition",
+    "subgoals": [
+      "Apply the inverse",
+      "Compare with the range",
+      "Adjust the angle"
+    ]
+  },
+  {
+    "label": "Solving equations",
+    "section": "Solving equations",
+    "subgoals": [
+      "Find the principal value",
+      "Add the period",
+      "List all solutions"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Increasing and decreasing",
+    "section": "Increasing and decreasing",
+    "subgoals": [
+      "Compare consecutive terms",
+      "Find the difference",
+      "Decide the direction"
+    ]
+  },
+  {
+    "label": "Boundedness",
+    "section": "Boundedness",
+    "subgoals": [
+      "Find an upper bound",
+      "Find a lower bound",
+      "Check the terms"
+    ]
+  },
+  {
+    "label": "Convergence",
+    "section": "Convergence",
+    "subgoals": [
+      "Use monotonicity",
+      "Use boundedness",
+      "Name the limit"
+    ]
+  }
+]

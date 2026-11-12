@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The payment formula",
+    "section": "The payment formula",
+    "subgoals": [
+      "Find the periodic rate",
+      "Compute the factor",
+      "Divide and subtract"
+    ]
+  },
+  {
+    "label": "Interest and principal",
+    "section": "Interest and principal",
+    "subgoals": [
+      "Compute interest",
+      "Subtract from payment",
+      "Reduce the balance"
+    ]
+  },
+  {
+    "label": "Remaining balance",
+    "section": "Remaining balance",
+    "subgoals": [
+      "Apply the rate",
+      "Subtract the payment",
+      "Track the balance"
+    ]
+  }
+]

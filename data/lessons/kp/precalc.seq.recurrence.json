@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Iterating",
+    "section": "Iterating",
+    "subgoals": [
+      "Substitute repeatedly",
+      "Collect the multiplier",
+      "Count the steps"
+    ]
+  },
+  {
+    "label": "The closed form",
+    "section": "The closed form",
+    "subgoals": [
+      "Identify the ratio",
+      "Write the power",
+      "Fix the initial term"
+    ]
+  },
+  {
+    "label": "Affine recurrences",
+    "section": "Affine recurrences",
+    "subgoals": [
+      "Find the fixed point",
+      "Shift the sequence",
+      "Write the form"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Swapping coordinates",
+    "section": "Swapping coordinates",
+    "subgoals": [
+      "Swap x and y",
+      "Plot the image point",
+      "Check the pair"
+    ]
+  },
+  {
+    "label": "Reflection",
+    "section": "Reflection",
+    "subgoals": [
+      "Draw the mirror line",
+      "Reflect the curve",
+      "Swap asymptotes"
+    ]
+  },
+  {
+    "label": "Restricting the domain",
+    "section": "Restricting the domain",
+    "subgoals": [
+      "Test one-to-one",
+      "Choose a branch",
+      "Reflect that branch"
+    ]
+  }
+]

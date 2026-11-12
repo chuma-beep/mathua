@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The rule",
+    "section": "The rule",
+    "subgoals": [
+      "Square the unknown side",
+      "Add the other squares",
+      "Subtract the cosine term"
+    ]
+  },
+  {
+    "label": "Finding an angle",
+    "section": "Finding an angle",
+    "subgoals": [
+      "Rearrange for cosine",
+      "Take the inverse",
+      "Check the range"
+    ]
+  },
+  {
+    "label": "Right-triangle check",
+    "section": "Right-triangle check",
+    "subgoals": [
+      "Set the angle to a right angle",
+      "Drop the cosine term",
+      "Recover Pythagoras"
+    ]
+  }
+]

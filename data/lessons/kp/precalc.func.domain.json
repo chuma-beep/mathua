@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Denominators",
+    "section": "Denominators",
+    "subgoals": [
+      "Find excluded inputs",
+      "Solve the denominator",
+      "State the domain"
+    ]
+  },
+  {
+    "label": "Even roots",
+    "section": "Even roots",
+    "subgoals": [
+      "Set the radicand non-negative",
+      "Solve the inequality",
+      "Include the endpoint"
+    ]
+  },
+  {
+    "label": "Logarithms",
+    "section": "Logarithms",
+    "subgoals": [
+      "Require a positive argument",
+      "Solve the inequality",
+      "Intersect restrictions"
+    ]
+  }
+]

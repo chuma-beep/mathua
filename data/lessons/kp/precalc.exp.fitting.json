@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The ratio",
+    "section": "The ratio",
+    "subgoals": [
+      "Divide the outputs",
+      "Cancel the initial value",
+      "Keep the elapsed time"
+    ]
+  },
+  {
+    "label": "The growth factor",
+    "section": "The growth factor",
+    "subgoals": [
+      "Take the root",
+      "Read growth or decay",
+      "Check the size"
+    ]
+  },
+  {
+    "label": "The initial value",
+    "section": "The initial value",
+    "subgoals": [
+      "Substitute a point",
+      "Solve the equation",
+      "State the model"
+    ]
+  }
+]

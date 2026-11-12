@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The formula",
+    "section": "The formula",
+    "subgoals": [
+      "Divide the nominal rate",
+      "Add one",
+      "Raise to n and subtract one"
+    ]
+  },
+  {
+    "label": "Continuous limit",
+    "section": "Continuous limit",
+    "subgoals": [
+      "Take the limit",
+      "Use e to the r",
+      "Subtract one"
+    ]
+  },
+  {
+    "label": "Comparison",
+    "section": "Comparison",
+    "subgoals": [
+      "Convert both offers",
+      "Compare percentages",
+      "Choose the larger"
+    ]
+  }
+]

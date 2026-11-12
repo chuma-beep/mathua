@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Leading term",
+    "section": "Leading term",
+    "subgoals": [
+      "Identify the highest degree",
+      "Read its coefficient",
+      "Fix the ends"
+    ]
+  },
+  {
+    "label": "Even and odd degree",
+    "section": "Even and odd degree",
+    "subgoals": [
+      "Check the parity",
+      "Compare the two ends",
+      "Sketch the tails"
+    ]
+  },
+  {
+    "label": "Rational functions",
+    "section": "Rational functions",
+    "subgoals": [
+      "Compare degrees",
+      "Find the asymptote",
+      "State the limit"
+    ]
+  }
+]

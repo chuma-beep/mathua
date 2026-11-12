@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The formula",
+    "section": "The formula",
+    "subgoals": [
+      "Subtract the y values",
+      "Subtract the x values",
+      "Divide in order"
+    ]
+  },
+  {
+    "label": "Inclination",
+    "section": "Inclination",
+    "subgoals": [
+      "Take the tangent",
+      "Find the angle",
+      "Handle the vertical case"
+    ]
+  },
+  {
+    "label": "Parallel and perpendicular",
+    "section": "Parallel and perpendicular",
+    "subgoals": [
+      "Compare slopes",
+      "Multiply for perpendicularity",
+      "Check the exceptions"
+    ]
+  }
+]

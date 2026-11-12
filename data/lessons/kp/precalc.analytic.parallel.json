@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Parallel test",
+    "section": "Parallel test",
+    "subgoals": [
+      "Compare slopes",
+      "Allow vertical lines",
+      "Decide parallelism"
+    ]
+  },
+  {
+    "label": "Perpendicular test",
+    "section": "Perpendicular test",
+    "subgoals": [
+      "Negate the slope",
+      "Take the reciprocal",
+      "Check the product"
+    ]
+  },
+  {
+    "label": "Building a line",
+    "section": "Building a line",
+    "subgoals": [
+      "Choose the slope",
+      "Use point-slope form",
+      "Rearrange"
+    ]
+  }
+]

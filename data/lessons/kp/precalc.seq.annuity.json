@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Future value",
+    "section": "Future value",
+    "subgoals": [
+      "Accumulate each payment",
+      "Sum the factors",
+      "Multiply by the payment"
+    ]
+  },
+  {
+    "label": "The sum",
+    "section": "The sum",
+    "subgoals": [
+      "Use the geometric sum",
+      "Substitute the ratio",
+      "Simplify"
+    ]
+  },
+  {
+    "label": "Present value",
+    "section": "Present value",
+    "subgoals": [
+      "Discount each payment",
+      "Sum the factors",
+      "Compare with future value"
+    ]
+  }
+]

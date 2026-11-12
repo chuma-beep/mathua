@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Take the ratio",
+      "Apply base ten",
+      "Read the magnitude"
+    ]
+  },
+  {
+    "label": "Comparing events",
+    "section": "Comparing events",
+    "subgoals": [
+      "Subtract magnitudes",
+      "Raise ten",
+      "State the factor"
+    ]
+  },
+  {
+    "label": "Energy",
+    "section": "Energy",
+    "subgoals": [
+      "Compare magnitudes",
+      "Apply the energy relation",
+      "State the ratio"
+    ]
+  }
+]

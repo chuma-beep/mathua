@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Matching bases",
+    "section": "Matching bases",
+    "subgoals": [
+      "Rewrite both sides",
+      "Check the base",
+      "Keep or reverse"
+    ]
+  },
+  {
+    "label": "Logarithms",
+    "section": "Logarithms",
+    "subgoals": [
+      "Take the log",
+      "Isolate the variable",
+      "Respect monotonicity"
+    ]
+  },
+  {
+    "label": "Integer solutions",
+    "section": "Integer solutions",
+    "subgoals": [
+      "Solve over the reals",
+      "Round the bound",
+      "List the integers"
+    ]
+  }
+]

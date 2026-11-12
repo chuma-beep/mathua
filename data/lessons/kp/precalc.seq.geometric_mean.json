@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The mean",
+    "section": "The mean",
+    "subgoals": [
+      "Multiply the endpoints",
+      "Take the root",
+      "Choose the positive value"
+    ]
+  },
+  {
+    "label": "Several means",
+    "section": "Several means",
+    "subgoals": [
+      "Count the gaps",
+      "Take the root of the ratio",
+      "Insert the terms"
+    ]
+  },
+  {
+    "label": "Growth averages",
+    "section": "Growth averages",
+    "subgoals": [
+      "Multiply the factors",
+      "Take the root",
+      "Compare with arithmetic"
+    ]
+  }
+]

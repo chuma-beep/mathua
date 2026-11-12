@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The formula",
+    "section": "The formula",
+    "subgoals": [
+      "Write the line in general form",
+      "Evaluate at the point",
+      "Divide by the norm"
+    ]
+  },
+  {
+    "label": "Why the denominator",
+    "section": "Why the denominator",
+    "subgoals": [
+      "Collect coefficients",
+      "Square and add",
+      "Take the root"
+    ]
+  },
+  {
+    "label": "Perpendicular construction",
+    "section": "Perpendicular construction",
+    "subgoals": [
+      "Build the perpendicular",
+      "Find the intersection",
+      "Measure the segment"
+    ]
+  }
+]

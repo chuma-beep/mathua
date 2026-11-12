@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 2640,
+  "concept_count": 2679,
   "unit_count": 161,
   "units": [
     {
@@ -4235,9 +4235,11 @@
       ],
       "concept_ids": [
         "precalc.analytic.area_polygon",
-        "precalc.analytic.distance"
+        "precalc.analytic.distance",
+        "precalc.analytic.midpoint",
+        "precalc.analytic.slope"
       ],
-      "concept_count": 2
+      "concept_count": 4
     },
     {
       "id": "precalculus.b4",
@@ -4247,10 +4249,14 @@
       "depth_min": 12,
       "depth_max": 14,
       "subdomains": [
+        "precalculus.analytic",
         "precalculus.polar",
         "precalculus.vectors"
       ],
       "concept_ids": [
+        "precalc.analytic.line_forms",
+        "precalc.analytic.parallel",
+        "precalc.analytic.point_line",
         "precalc.polar.coordinates",
         "precalc.polar.graph",
         "precalc.polar.intersection",
@@ -4262,7 +4268,7 @@
         "precalc.vector.three_d",
         "precalc.vector.unit"
       ],
-      "concept_count": 10
+      "concept_count": 13
     },
     {
       "id": "precalculus.b5",
@@ -4312,6 +4318,7 @@
         "precalculus.rational"
       ],
       "concept_ids": [
+        "precalc.analytic.circle_complete",
         "precalc.binomial.multinomial",
         "precalc.conic.circle_radius",
         "precalc.func.average_rate",
@@ -4329,7 +4336,7 @@
         "precalc.poly.zeros_multiplicity",
         "precalc.rational.asymptote"
       ],
-      "concept_count": 16
+      "concept_count": 17
     },
     {
       "id": "precalculus.b8",
@@ -4346,7 +4353,8 @@
         "precalculus.parametric",
         "precalculus.rational",
         "precalculus.sequences",
-        "precalculus.systems"
+        "precalculus.systems",
+        "precalculus.trig"
       ],
       "concept_ids": [
         "precalc.conic.ellipse",
@@ -4357,18 +4365,29 @@
         "precalc.exp.cooling",
         "precalc.exp.doubling",
         "precalc.exp.equation",
+        "precalc.exp.fitting",
         "precalc.exp.growth_model",
+        "precalc.exp.half_life",
         "precalc.exp.logistic",
+        "precalc.func.absolute",
         "precalc.func.arith_combine",
         "precalc.func.composition_value",
         "precalc.func.decomposition",
+        "precalc.func.domain",
+        "precalc.func.end_behavior",
+        "precalc.func.even_odd",
+        "precalc.func.extrema",
         "precalc.func.floor_ceiling",
         "precalc.func.heaviside",
         "precalc.func.inverse_composition",
+        "precalc.func.inverse_graph",
         "precalc.func.inverse_value",
+        "precalc.func.monotonic",
         "precalc.func.one_to_one",
+        "precalc.func.period",
         "precalc.func.piecewise",
         "precalc.func.piecewise_operations",
+        "precalc.func.sign_chart",
         "precalc.induction",
         "precalc.log.evaluate",
         "precalc.parametric.cycloid",
@@ -4382,15 +4401,19 @@
         "precalc.seq.arithmetic",
         "precalc.seq.explicit",
         "precalc.seq.geometric",
+        "precalc.seq.geometric_mean",
         "precalc.seq.power_sums",
         "precalc.seq.summation",
         "precalc.seq.summation_properties",
+        "precalc.seq.telescoping",
         "precalc.series.arithmetic",
         "precalc.series.geometric",
         "precalc.systems.nonlinear",
-        "precalc.systems.nonlinear_inequality"
+        "precalc.systems.nonlinear_inequality",
+        "precalc.trig.radians",
+        "precalc.trig.unit_circle"
       ],
-      "concept_count": 40
+      "concept_count": 55
     },
     {
       "id": "precalculus.b9",
@@ -4402,20 +4425,39 @@
       "subdomains": [
         "precalculus.conics",
         "precalculus.exponential",
-        "precalculus.sequences"
+        "precalculus.sequences",
+        "precalculus.trig"
       ],
       "concept_ids": [
         "precalc.conic.eccentricity",
         "precalc.conic.parametric",
         "precalc.conic.polar",
         "precalc.conic.rotated",
+        "precalc.exp.base_change",
         "precalc.exp.continuous",
+        "precalc.exp.effective_rate",
+        "precalc.exp.inequality",
+        "precalc.exp.log_properties",
         "precalc.exp.logistic_inverse",
+        "precalc.exp.ph",
+        "precalc.exp.richter",
         "precalc.log.equation",
         "precalc.log.scale",
-        "precalc.series.geom_infinite"
+        "precalc.seq.amortization",
+        "precalc.seq.annuity",
+        "precalc.seq.fibonacci",
+        "precalc.seq.monotone",
+        "precalc.seq.recurrence",
+        "precalc.seq.series_bound",
+        "precalc.series.geom_infinite",
+        "precalc.trig.graphs",
+        "precalc.trig.harmonic",
+        "precalc.trig.identities",
+        "precalc.trig.inverse",
+        "precalc.trig.law_cosines",
+        "precalc.trig.law_sines"
       ],
-      "concept_count": 9
+      "concept_count": 27
     },
     {
       "id": "probability_theory.b3",

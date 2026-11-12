@@ -20,6 +20,7 @@ func Register(reg *generator.Registry) {
 	registerBatch(reg)
 	registerWave9(reg)
 	registerWave9Remaining(reg)
+	registerWave25(reg)
 }
 
 var all = []struct {

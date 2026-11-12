@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The formula",
+    "section": "The formula",
+    "subgoals": [
+      "Average the x values",
+      "Average the y values",
+      "Write the point"
+    ]
+  },
+  {
+    "label": "Missing endpoint",
+    "section": "Missing endpoint",
+    "subgoals": [
+      "Double the midpoint",
+      "Subtract the known point",
+      "State the endpoint"
+    ]
+  },
+  {
+    "label": "Three dimensions",
+    "section": "Three dimensions",
+    "subgoals": [
+      "Average each coordinate",
+      "Keep the order",
+      "Write the triple"
+    ]
+  }
+]

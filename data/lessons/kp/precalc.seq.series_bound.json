@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The tail",
+    "section": "The tail",
+    "subgoals": [
+      "Identify the first omitted term",
+      "Divide by one minus the ratio",
+      "Write the tail"
+    ]
+  },
+  {
+    "label": "Bounding the error",
+    "section": "Bounding the error",
+    "subgoals": [
+      "Take the absolute value",
+      "Use the ratio bound",
+      "State the guarantee"
+    ]
+  },
+  {
+    "label": "Choosing n",
+    "section": "Choosing n",
+    "subgoals": [
+      "Set the target",
+      "Solve the inequality",
+      "Round up"
+    ]
+  }
+]

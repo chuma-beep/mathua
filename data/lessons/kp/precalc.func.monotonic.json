@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Reading a graph",
+    "section": "Reading a graph",
+    "subgoals": [
+      "Move left to right",
+      "Mark rising sections",
+      "Mark falling sections"
+    ]
+  },
+  {
+    "label": "Turning points",
+    "section": "Turning points",
+    "subgoals": [
+      "Locate maxima",
+      "Locate minima",
+      "Split the intervals"
+    ]
+  },
+  {
+    "label": "Open intervals",
+    "section": "Open intervals",
+    "subgoals": [
+      "Use open endpoints",
+      "Exclude turning points",
+      "Write interval notation"
+    ]
+  }
+]

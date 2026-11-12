@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Partial fractions",
+    "section": "Partial fractions",
+    "subgoals": [
+      "Split the term",
+      "Write consecutive forms",
+      "Line them up"
+    ]
+  },
+  {
+    "label": "Cancellation",
+    "section": "Cancellation",
+    "subgoals": [
+      "List early terms",
+      "List late terms",
+      "Keep the survivors"
+    ]
+  },
+  {
+    "label": "Infinite case",
+    "section": "Infinite case",
+    "subgoals": [
+      "Take partial sums",
+      "Pass to the limit",
+      "Check convergence"
+    ]
+  }
+]

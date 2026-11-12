@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Parameters",
+    "section": "Parameters",
+    "subgoals": [
+      "Read the amplitude",
+      "Read the period",
+      "Read the shifts"
+    ]
+  },
+  {
+    "label": "Five key points",
+    "section": "Five key points",
+    "subgoals": [
+      "Mark the midline",
+      "Mark the extrema",
+      "Join one period"
+    ]
+  },
+  {
+    "label": "Phase shift",
+    "section": "Phase shift",
+    "subgoals": [
+      "Factor the frequency",
+      "Read the shift",
+      "Move the wave"
+    ]
+  }
+]

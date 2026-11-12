@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Critical inputs",
+    "section": "Critical inputs",
+    "subgoals": [
+      "Find zeros",
+      "Find undefined points",
+      "Order them"
+    ]
+  },
+  {
+    "label": "Test values",
+    "section": "Test values",
+    "subgoals": [
+      "Pick one input per interval",
+      "Evaluate the sign",
+      "Record it"
+    ]
+  },
+  {
+    "label": "Reading the chart",
+    "section": "Reading the chart",
+    "subgoals": [
+      "Choose plus or minus",
+      "Include endpoints",
+      "Write the solution"
+    ]
+  }
+]

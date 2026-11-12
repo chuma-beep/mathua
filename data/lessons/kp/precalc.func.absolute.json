@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Piecewise form",
+    "section": "Piecewise form",
+    "subgoals": [
+      "Find the zero",
+      "Write both pieces",
+      "Join them"
+    ]
+  },
+  {
+    "label": "Transformations",
+    "section": "Transformations",
+    "subgoals": [
+      "Move the vertex",
+      "Change the slope",
+      "Reflect an arm"
+    ]
+  },
+  {
+    "label": "Equations",
+    "section": "Equations",
+    "subgoals": [
+      "Split the signs",
+      "Solve both",
+      "Check both"
+    ]
+  }
+]

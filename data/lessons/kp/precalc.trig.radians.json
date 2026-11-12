@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Conversion",
+    "section": "Conversion",
+    "subgoals": [
+      "Multiply by pi over 180",
+      "Simplify the fraction",
+      "Keep the unit"
+    ]
+  },
+  {
+    "label": "Arc length",
+    "section": "Arc length",
+    "subgoals": [
+      "Multiply radius by angle",
+      "Keep radians",
+      "Measure the arc"
+    ]
+  },
+  {
+    "label": "Common angles",
+    "section": "Common angles",
+    "subgoals": [
+      "Recall the fractions",
+      "Convert both ways",
+      "Check a full turn"
+    ]
+  }
+]

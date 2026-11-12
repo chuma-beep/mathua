@@ -10558,5 +10558,161 @@
   {
     "concept_id": "linalg.stab.rank_revealing",
     "source": "authored/linalg.stab.rank_revealing.md"
+  },
+  {
+    "concept_id": "precalc.func.domain",
+    "source": "authored/precalc.func.domain.md"
+  },
+  {
+    "concept_id": "precalc.func.even_odd",
+    "source": "authored/precalc.func.even_odd.md"
+  },
+  {
+    "concept_id": "precalc.func.monotonic",
+    "source": "authored/precalc.func.monotonic.md"
+  },
+  {
+    "concept_id": "precalc.func.extrema",
+    "source": "authored/precalc.func.extrema.md"
+  },
+  {
+    "concept_id": "precalc.func.end_behavior",
+    "source": "authored/precalc.func.end_behavior.md"
+  },
+  {
+    "concept_id": "precalc.func.period",
+    "source": "authored/precalc.func.period.md"
+  },
+  {
+    "concept_id": "precalc.func.inverse_graph",
+    "source": "authored/precalc.func.inverse_graph.md"
+  },
+  {
+    "concept_id": "precalc.func.sign_chart",
+    "source": "authored/precalc.func.sign_chart.md"
+  },
+  {
+    "concept_id": "precalc.func.absolute",
+    "source": "authored/precalc.func.absolute.md"
+  },
+  {
+    "concept_id": "precalc.exp.half_life",
+    "source": "authored/precalc.exp.half_life.md"
+  },
+  {
+    "concept_id": "precalc.exp.fitting",
+    "source": "authored/precalc.exp.fitting.md"
+  },
+  {
+    "concept_id": "precalc.exp.base_change",
+    "source": "authored/precalc.exp.base_change.md"
+  },
+  {
+    "concept_id": "precalc.exp.log_properties",
+    "source": "authored/precalc.exp.log_properties.md"
+  },
+  {
+    "concept_id": "precalc.exp.richter",
+    "source": "authored/precalc.exp.richter.md"
+  },
+  {
+    "concept_id": "precalc.exp.ph",
+    "source": "authored/precalc.exp.ph.md"
+  },
+  {
+    "concept_id": "precalc.exp.effective_rate",
+    "source": "authored/precalc.exp.effective_rate.md"
+  },
+  {
+    "concept_id": "precalc.exp.inequality",
+    "source": "authored/precalc.exp.inequality.md"
+  },
+  {
+    "concept_id": "precalc.analytic.midpoint",
+    "source": "authored/precalc.analytic.midpoint.md"
+  },
+  {
+    "concept_id": "precalc.analytic.slope",
+    "source": "authored/precalc.analytic.slope.md"
+  },
+  {
+    "concept_id": "precalc.analytic.parallel",
+    "source": "authored/precalc.analytic.parallel.md"
+  },
+  {
+    "concept_id": "precalc.analytic.line_forms",
+    "source": "authored/precalc.analytic.line_forms.md"
+  },
+  {
+    "concept_id": "precalc.analytic.point_line",
+    "source": "authored/precalc.analytic.point_line.md"
+  },
+  {
+    "concept_id": "precalc.analytic.circle_complete",
+    "source": "authored/precalc.analytic.circle_complete.md"
+  },
+  {
+    "concept_id": "precalc.trig.radians",
+    "source": "authored/precalc.trig.radians.md"
+  },
+  {
+    "concept_id": "precalc.trig.unit_circle",
+    "source": "authored/precalc.trig.unit_circle.md"
+  },
+  {
+    "concept_id": "precalc.trig.law_sines",
+    "source": "authored/precalc.trig.law_sines.md"
+  },
+  {
+    "concept_id": "precalc.trig.law_cosines",
+    "source": "authored/precalc.trig.law_cosines.md"
+  },
+  {
+    "concept_id": "precalc.trig.identities",
+    "source": "authored/precalc.trig.identities.md"
+  },
+  {
+    "concept_id": "precalc.trig.inverse",
+    "source": "authored/precalc.trig.inverse.md"
+  },
+  {
+    "concept_id": "precalc.trig.graphs",
+    "source": "authored/precalc.trig.graphs.md"
+  },
+  {
+    "concept_id": "precalc.trig.harmonic",
+    "source": "authored/precalc.trig.harmonic.md"
+  },
+  {
+    "concept_id": "precalc.seq.telescoping",
+    "source": "authored/precalc.seq.telescoping.md"
+  },
+  {
+    "concept_id": "precalc.seq.recurrence",
+    "source": "authored/precalc.seq.recurrence.md"
+  },
+  {
+    "concept_id": "precalc.seq.fibonacci",
+    "source": "authored/precalc.seq.fibonacci.md"
+  },
+  {
+    "concept_id": "precalc.seq.monotone",
+    "source": "authored/precalc.seq.monotone.md"
+  },
+  {
+    "concept_id": "precalc.seq.geometric_mean",
+    "source": "authored/precalc.seq.geometric_mean.md"
+  },
+  {
+    "concept_id": "precalc.seq.annuity",
+    "source": "authored/precalc.seq.annuity.md"
+  },
+  {
+    "concept_id": "precalc.seq.amortization",
+    "source": "authored/precalc.seq.amortization.md"
+  },
+  {
+    "concept_id": "precalc.seq.series_bound",
+    "source": "authored/precalc.seq.series_bound.md"
   }
 ]

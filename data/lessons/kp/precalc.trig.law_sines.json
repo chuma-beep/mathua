@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The rule",
+    "section": "The rule",
+    "subgoals": [
+      "Pair side and angle",
+      "Write the ratios",
+      "Solve for the unknown"
+    ]
+  },
+  {
+    "label": "The ambiguous case",
+    "section": "The ambiguous case",
+    "subgoals": [
+      "Find the sine",
+      "Test the supplement",
+      "Check the angle sum"
+    ]
+  },
+  {
+    "label": "Circumference",
+    "section": "Circumference",
+    "subgoals": [
+      "Use the common ratio",
+      "Double the radius",
+      "Verify the sides"
+    ]
+  }
+]

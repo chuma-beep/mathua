@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Local and absolute",
+    "section": "Local and absolute",
+    "subgoals": [
+      "Compare nearby values",
+      "Compare the whole domain",
+      "Name the type"
+    ]
+  },
+  {
+    "label": "Turning points",
+    "section": "Turning points",
+    "subgoals": [
+      "Find where direction changes",
+      "Read the peak",
+      "Read the valley"
+    ]
+  },
+  {
+    "label": "Counting extrema",
+    "section": "Counting extrema",
+    "subgoals": [
+      "Use the degree",
+      "Subtract one",
+      "Bound the count"
+    ]
+  }
+]

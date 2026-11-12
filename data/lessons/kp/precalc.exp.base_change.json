@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The formula",
+    "section": "The formula",
+    "subgoals": [
+      "Write the quotient",
+      "Use one new base",
+      "Keep the argument on top"
+    ]
+  },
+  {
+    "label": "Choosing a base",
+    "section": "Choosing a base",
+    "subgoals": [
+      "Pick ten for arithmetic",
+      "Pick e for calculus",
+      "Convert both logs"
+    ]
+  },
+  {
+    "label": "Check by exponentiating",
+    "section": "Check by exponentiating",
+    "subgoals": [
+      "Raise the base",
+      "Compare with the argument",
+      "Confirm the value"
+    ]
+  }
+]

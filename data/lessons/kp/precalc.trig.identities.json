@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The main identity",
+    "section": "The main identity",
+    "subgoals": [
+      "Square sine and cosine",
+      "Add them",
+      "Use the circle"
+    ]
+  },
+  {
+    "label": "Dividing through",
+    "section": "Dividing through",
+    "subgoals": [
+      "Divide by cosine squared",
+      "Divide by sine squared",
+      "Name both forms"
+    ]
+  },
+  {
+    "label": "Using an identity",
+    "section": "Using an identity",
+    "subgoals": [
+      "Choose a replacement",
+      "Convert to one function",
+      "Simplify"
+    ]
+  }
+]

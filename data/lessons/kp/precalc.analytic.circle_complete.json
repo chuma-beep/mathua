@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Completing the square",
+    "section": "Completing the square",
+    "subgoals": [
+      "Group the terms",
+      "Add half-coefficient squares",
+      "Balance both sides"
+    ]
+  },
+  {
+    "label": "Reading the centre",
+    "section": "Reading the centre",
+    "subgoals": [
+      "Read the shifts",
+      "Reverse the signs",
+      "State the centre"
+    ]
+  },
+  {
+    "label": "The radius",
+    "section": "The radius",
+    "subgoals": [
+      "Isolate the constant",
+      "Take the root",
+      "Check the sign"
+    ]
+  }
+]

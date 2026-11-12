@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Product and quotient",
+    "section": "Product and quotient",
+    "subgoals": [
+      "Split a product",
+      "Split a quotient",
+      "Keep the base"
+    ]
+  },
+  {
+    "label": "Power rule",
+    "section": "Power rule",
+    "subgoals": [
+      "Move the exponent",
+      "Multiply the log",
+      "Isolate the unknown"
+    ]
+  },
+  {
+    "label": "Validity",
+    "section": "Validity",
+    "subgoals": [
+      "Require positive arguments",
+      "Track restrictions",
+      "Check the solution"
+    ]
+  }
+]

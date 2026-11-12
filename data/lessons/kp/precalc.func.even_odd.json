@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Testing a rule",
+    "section": "Testing a rule",
+    "subgoals": [
+      "Substitute -x",
+      "Simplify",
+      "Compare with f(x)"
+    ]
+  },
+  {
+    "label": "Powers",
+    "section": "Powers",
+    "subgoals": [
+      "Check the exponent",
+      "Check every term",
+      "Decide the parity"
+    ]
+  },
+  {
+    "label": "Symmetry",
+    "section": "Symmetry",
+    "subgoals": [
+      "Reflect across the y-axis",
+      "Rotate about the origin",
+      "Name the symmetry"
+    ]
+  }
+]

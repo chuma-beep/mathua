@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "State the repeat rule",
+      "Check a shift",
+      "Use any period"
+    ]
+  },
+  {
+    "label": "Fundamental period",
+    "section": "Fundamental period",
+    "subgoals": [
+      "Find the smallest repeat",
+      "Reject multiples",
+      "Name the period"
+    ]
+  },
+  {
+    "label": "Scaled periods",
+    "section": "Scaled periods",
+    "subgoals": [
+      "Divide by the frequency",
+      "Take the absolute value",
+      "Measure one cycle"
+    ]
+  }
+]

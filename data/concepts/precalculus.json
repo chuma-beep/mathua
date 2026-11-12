@@ -1169,5 +1169,755 @@
       "streak": 10,
       "avg_time_seconds": 24.0
     }
+  },
+  {
+    "id": "precalc.func.domain",
+    "label": "The domain of a function",
+    "domain": "precalculus",
+    "subdomain": "precalculus.functions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.func.transformations"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.func.transformations"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.func.even_odd",
+    "label": "Parity of functions",
+    "domain": "precalculus",
+    "subdomain": "precalculus.functions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.func.transformations"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.func.transformations"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.func.monotonic",
+    "label": "Increasing and decreasing intervals",
+    "domain": "precalculus",
+    "subdomain": "precalculus.functions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.func.transformations",
+      "precalc.poly.graph"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.func.transformations"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.func.extrema",
+    "label": "Local extrema",
+    "domain": "precalculus",
+    "subdomain": "precalculus.functions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.func.monotonic"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.func.monotonic"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.func.end_behavior",
+    "label": "End behavior",
+    "domain": "precalculus",
+    "subdomain": "precalculus.functions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.poly.graph"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.poly.graph"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.func.period",
+    "label": "Periodic functions",
+    "domain": "precalculus",
+    "subdomain": "precalculus.functions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.func.transformations"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.func.transformations"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.func.inverse_graph",
+    "label": "Reflecting graphs to invert them",
+    "domain": "precalculus",
+    "subdomain": "precalculus.functions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.func.inverse_value",
+      "precalc.func.one_to_one"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.func.inverse_value"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.func.sign_chart",
+    "label": "Sign charts for functions",
+    "domain": "precalculus",
+    "subdomain": "precalculus.functions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.poly.inequality"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.poly.inequality"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.func.absolute",
+    "label": "Absolute value functions",
+    "domain": "precalculus",
+    "subdomain": "precalculus.functions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.func.transformations"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.func.transformations"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.exp.half_life",
+    "label": "Half-life",
+    "domain": "precalculus",
+    "subdomain": "precalculus.exponential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.exp.growth_model"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.exp.growth_model"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.exp.fitting",
+    "label": "Fitting an exponential model",
+    "domain": "precalculus",
+    "subdomain": "precalculus.exponential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.exp.growth_model",
+      "precalc.exp.equation"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.exp.growth_model"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.exp.base_change",
+    "label": "Changing the logarithm base",
+    "domain": "precalculus",
+    "subdomain": "precalculus.exponential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.log.evaluate"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.log.evaluate"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.exp.log_properties",
+    "label": "The laws of logarithms",
+    "domain": "precalculus",
+    "subdomain": "precalculus.exponential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.log.evaluate"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.log.evaluate"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.exp.richter",
+    "label": "The Richter scale",
+    "domain": "precalculus",
+    "subdomain": "precalculus.exponential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.log.scale"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.log.scale"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.exp.ph",
+    "label": "The pH scale",
+    "domain": "precalculus",
+    "subdomain": "precalculus.exponential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.log.scale"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.log.scale"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.exp.effective_rate",
+    "label": "Effective annual rate",
+    "domain": "precalculus",
+    "subdomain": "precalculus.exponential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.exp.compound_interest"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.exp.compound_interest"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.exp.inequality",
+    "label": "Exponential inequalities",
+    "domain": "precalculus",
+    "subdomain": "precalculus.exponential",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.exp.equation",
+      "precalc.log.equation"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.exp.equation"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.analytic.midpoint",
+    "label": "The midpoint formula",
+    "domain": "precalculus",
+    "subdomain": "precalculus.analytic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.analytic.distance"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.analytic.distance"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.analytic.slope",
+    "label": "Slope and inclination",
+    "domain": "precalculus",
+    "subdomain": "precalculus.analytic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.analytic.distance"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.analytic.distance"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.analytic.parallel",
+    "label": "Line parallelism and perpendicularity",
+    "domain": "precalculus",
+    "subdomain": "precalculus.analytic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.analytic.slope"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.analytic.slope"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.analytic.line_forms",
+    "label": "Forms of a line",
+    "domain": "precalculus",
+    "subdomain": "precalculus.analytic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.analytic.slope"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.analytic.slope"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.analytic.point_line",
+    "label": "Distance from a point to a line",
+    "domain": "precalculus",
+    "subdomain": "precalculus.analytic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.analytic.slope",
+      "precalc.analytic.distance"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.analytic.slope"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.analytic.circle_complete",
+    "label": "Completing the square for circles",
+    "domain": "precalculus",
+    "subdomain": "precalculus.analytic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.conic.circle_radius"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.conic.circle_radius"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.trig.radians",
+    "label": "Radian measure",
+    "domain": "precalculus",
+    "subdomain": "precalculus.trig",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.func.period"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.func.period"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.trig.unit_circle",
+    "label": "The unit circle",
+    "domain": "precalculus",
+    "subdomain": "precalculus.trig",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.trig.radians"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.trig.radians"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.trig.law_sines",
+    "label": "The law of sines",
+    "domain": "precalculus",
+    "subdomain": "precalculus.trig",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.trig.unit_circle"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.trig.unit_circle"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.trig.law_cosines",
+    "label": "The law of cosines",
+    "domain": "precalculus",
+    "subdomain": "precalculus.trig",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.trig.unit_circle"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.trig.unit_circle"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.trig.identities",
+    "label": "Pythagorean identities",
+    "domain": "precalculus",
+    "subdomain": "precalculus.trig",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.trig.unit_circle"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.trig.unit_circle"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.trig.inverse",
+    "label": "Inverse trigonometric functions",
+    "domain": "precalculus",
+    "subdomain": "precalculus.trig",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.trig.unit_circle",
+      "precalc.func.inverse_value"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.trig.unit_circle"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.trig.graphs",
+    "label": "Graphs of sine and cosine",
+    "domain": "precalculus",
+    "subdomain": "precalculus.trig",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.func.period",
+      "precalc.trig.unit_circle"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.func.period"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.trig.harmonic",
+    "label": "Harmonic motion",
+    "domain": "precalculus",
+    "subdomain": "precalculus.trig",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.trig.graphs"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.trig.graphs"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.seq.telescoping",
+    "label": "Telescoping sums",
+    "domain": "precalculus",
+    "subdomain": "precalculus.sequences",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.seq.summation"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.seq.summation"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.seq.recurrence",
+    "label": "Closed forms for first-order recurrences",
+    "domain": "precalculus",
+    "subdomain": "precalculus.sequences",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.seq.geometric",
+      "precalc.seq.explicit"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.seq.geometric"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.seq.fibonacci",
+    "label": "Fibonacci numbers",
+    "domain": "precalculus",
+    "subdomain": "precalculus.sequences",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.seq.recurrence"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.seq.recurrence"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.seq.monotone",
+    "label": "Monotonicity of sequences",
+    "domain": "precalculus",
+    "subdomain": "precalculus.sequences",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.seq.explicit"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.seq.explicit"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.seq.geometric_mean",
+    "label": "Geometric means",
+    "domain": "precalculus",
+    "subdomain": "precalculus.sequences",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.seq.geometric"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.seq.geometric"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.seq.annuity",
+    "label": "Annuities",
+    "domain": "precalculus",
+    "subdomain": "precalculus.sequences",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.series.geometric",
+      "precalc.exp.compound_interest"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.series.geometric"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.seq.amortization",
+    "label": "Amortisation",
+    "domain": "precalculus",
+    "subdomain": "precalculus.sequences",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.seq.annuity"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.seq.annuity"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "precalc.seq.series_bound",
+    "label": "Bounds on series remainders",
+    "domain": "precalculus",
+    "subdomain": "precalculus.sequences",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "precalc.series.geom_infinite"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "precalc.series.geom_infinite"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
   }
 ]

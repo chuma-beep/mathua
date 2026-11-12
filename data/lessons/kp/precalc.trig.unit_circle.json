@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Coordinates",
+    "section": "Coordinates",
+    "subgoals": [
+      "Read x as cosine",
+      "Read y as sine",
+      "Check the identity"
+    ]
+  },
+  {
+    "label": "Quadrants",
+    "section": "Quadrants",
+    "subgoals": [
+      "Locate the quadrant",
+      "Assign the signs",
+      "Write the point"
+    ]
+  },
+  {
+    "label": "Reference angles",
+    "section": "Reference angles",
+    "subgoals": [
+      "Reduce the angle",
+      "Use the first quadrant",
+      "Apply the sign"
+    ]
+  }
+]

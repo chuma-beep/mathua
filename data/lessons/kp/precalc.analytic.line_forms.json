@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Slope-intercept",
+    "section": "Slope-intercept",
+    "subgoals": [
+      "Read the slope",
+      "Read the intercept",
+      "Graph the line"
+    ]
+  },
+  {
+    "label": "Point-slope",
+    "section": "Point-slope",
+    "subgoals": [
+      "Use a known point",
+      "Insert the slope",
+      "Expand if needed"
+    ]
+  },
+  {
+    "label": "Standard form",
+    "section": "Standard form",
+    "subgoals": [
+      "Collect the variables",
+      "Scale the coefficients",
+      "Find the intercepts"
+    ]
+  }
+]
