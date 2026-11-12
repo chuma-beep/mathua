@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Put both terms in one form",
+    "section": "The method",
+    "subgoals": [
+      "Convert the decimal to a fraction or the fraction to a decimal",
+      "Subtract in the chosen form",
+      "Reduce the answer"
+    ]
+  },
+  {
+    "label": "Seven eighths minus one half",
+    "section": "A worked difference",
+    "subgoals": [
+      "Write the decimal as a fraction",
+      "Subtract over eighths",
+      "Express the answer as a decimal"
+    ]
+  },
+  {
+    "label": "Add the decimal back",
+    "section": "Checking the result",
+    "subgoals": [
+      "Add the difference to the decimal",
+      "Confirm the fraction",
+      "Check the number of decimal places"
+    ]
+  }
+]

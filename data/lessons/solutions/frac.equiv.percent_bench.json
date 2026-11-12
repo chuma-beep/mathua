@@ -1,0 +1,19 @@
+{
+  "concept": "frac.equiv.percent_bench",
+  "setup": "The question connects a fraction with a percent.",
+  "steps": [
+    {
+      "fact": "",
+      "say": "A percent is a count out of 100, so a fraction becomes a percent by scaling it to a denominator of 100."
+    },
+    {
+      "fact": "",
+      "say": "Multiplying by 100 after dividing the numerator by the denominator gives the same result."
+    },
+    {
+      "fact": "",
+      "say": "A percent written as a fraction is that number over 100, reduced by any common factor."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

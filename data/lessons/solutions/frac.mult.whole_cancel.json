@@ -1,0 +1,19 @@
+{
+  "concept": "frac.mult.whole_cancel",
+  "setup": "A whole number is multiplied by a fraction.",
+  "steps": [
+    {
+      "fact": "w",
+      "say": "The whole number [[w]] is multiplied by the numerator, which raises the count of parts."
+    },
+    {
+      "fact": "b",
+      "say": "The denominator [[b]] is left as it is, and any shared factor between the new numerator and [[b]] is cancelled."
+    },
+    {
+      "fact": "",
+      "say": "Cancelling before or after multiplying gives the same reduced result."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

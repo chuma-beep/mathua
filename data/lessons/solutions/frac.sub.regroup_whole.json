@@ -1,0 +1,19 @@
+{
+  "concept": "frac.sub.regroup_whole",
+  "setup": "A fraction is subtracted from a whole number.",
+  "steps": [
+    {
+      "fact": "w",
+      "say": "The whole number is [[w]]."
+    },
+    {
+      "fact": "b",
+      "say": "Borrow one whole and write it as [[b]]/[[b]], which is the same value over the denominator [[b]]."
+    },
+    {
+      "fact": "a",
+      "say": "The fraction [[a]]/[[b]] is then taken from that borrowed whole, leaving the rest of the whole number intact."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

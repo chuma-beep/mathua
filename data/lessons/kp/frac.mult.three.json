@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Cancel across all three factors",
+    "section": "The method",
+    "subgoals": [
+      "Write every factor as a numerator over a denominator",
+      "Cancel any factor shared across the product",
+      "Multiply the reduced parts"
+    ]
+  },
+  {
+    "label": "Two thirds times nine tenths times five sixths",
+    "section": "A worked product",
+    "subgoals": [
+      "Cancel before multiplying",
+      "Multiply the remaining parts",
+      "Reduce the result"
+    ]
+  },
+  {
+    "label": "Divide back by two factors",
+    "section": "Checking the result",
+    "subgoals": [
+      "Divide the product by the last factor",
+      "Divide again by the middle factor",
+      "Recover the first factor"
+    ]
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "concept": "frac.mult.scaling",
+  "setup": "A whole number is scaled by a fraction.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The scale factor is [[a]]/[[b]]."
+    },
+    {
+      "fact": "w",
+      "say": "Scaling [[w]] by that factor multiplies [[w]] by the numerator and divides by the denominator."
+    },
+    {
+      "fact": "",
+      "say": "A factor below 1 shrinks the original, a factor above 1 enlarges it and a factor of exactly 1 leaves it unchanged."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

@@ -1,0 +1,19 @@
+{
+  "concept": "frac.div.measurement",
+  "setup": "A mixed quantity is split into equal pieces and the count of pieces is asked.",
+  "steps": [
+    {
+      "fact": "w",
+      "say": "The mixed number is [[w]] whole units plus [[a]]/[[b]] of one more."
+    },
+    {
+      "fact": "",
+      "say": "Dividing by a piece of size k/[[c]] multiplies by [[c]]/k, so the count is the number of pieces that fit."
+    },
+    {
+      "fact": "",
+      "say": "The pieces must be the same size, so the count is the number of complete pieces."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

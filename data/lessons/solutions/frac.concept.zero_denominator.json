@@ -1,0 +1,15 @@
+{
+  "concept": "frac.concept.zero_denominator",
+  "setup": "The question turns on when a fraction is undefined.",
+  "steps": [
+    {
+      "fact": "",
+      "say": "A fraction is a division, and division by zero has no value, so a denominator of zero makes the expression undefined."
+    },
+    {
+      "fact": "",
+      "say": "To find where a denominator vanishes, set that denominator equal to zero and solve for the variable."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

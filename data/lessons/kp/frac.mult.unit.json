@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Multiply by one over n",
+    "section": "The method",
+    "subgoals": [
+      "Keep the numerator",
+      "Multiply the denominator by n",
+      "Reduce if a common factor appears"
+    ]
+  },
+  {
+    "label": "Three quarters times one fifth",
+    "section": "A worked product",
+    "subgoals": [
+      "Multiply the denominators",
+      "Write the new fraction",
+      "Confirm the size shrank"
+    ]
+  },
+  {
+    "label": "Multiply back by n",
+    "section": "Checking the result",
+    "subgoals": [
+      "Multiply the product by five",
+      "Recover the original fraction",
+      "Check a second unit fraction"
+    ]
+  }
+]

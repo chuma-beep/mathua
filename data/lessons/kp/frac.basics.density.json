@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Averaging two fractions",
+    "section": "The definition",
+    "subgoals": [
+      "Name two fractions in increasing order",
+      "Add the endpoints and halve the sum",
+      "Show the average is a fraction between them"
+    ]
+  },
+  {
+    "label": "Midpoint of one quarter and one half",
+    "section": "An example",
+    "subgoals": [
+      "Compute the midpoint as three eighths",
+      "Place the three values in order",
+      "Repeat with a smaller gap"
+    ]
+  },
+  {
+    "label": "No next fraction",
+    "section": "Why it matters",
+    "subgoals": [
+      "Contrast with the whole numbers",
+      "Explain precision on a ruler",
+      "State why rounding discards information"
+    ]
+  }
+]

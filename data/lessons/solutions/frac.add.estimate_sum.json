@@ -1,0 +1,19 @@
+{
+  "concept": "frac.add.estimate_sum",
+  "setup": "Two fractions are being added and the result is estimated.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The fractions are [[a]]/[[b]] and [[c]]/[[d]]."
+    },
+    {
+      "fact": "",
+      "say": "Each fraction sits between two whole numbers, so rounding both before adding gives a total close to the exact sum."
+    },
+    {
+      "fact": "",
+      "say": "The exact sum can then be placed against the whole number or the benchmark the question names."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

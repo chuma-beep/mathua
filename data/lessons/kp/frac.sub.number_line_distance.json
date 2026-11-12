@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Take the absolute difference",
+    "section": "The method",
+    "subgoals": [
+      "Subtract the smaller value from the larger",
+      "Take the absolute value",
+      "Read the result as a length"
+    ]
+  },
+  {
+    "label": "The gap from one quarter to five sixths",
+    "section": "A worked difference",
+    "subgoals": [
+      "Write both fractions over twelfths",
+      "Subtract the smaller from the larger",
+      "Reduce the distance"
+    ]
+  },
+  {
+    "label": "Add the two spans",
+    "section": "Checking the result",
+    "subgoals": [
+      "Measure from zero to the first point",
+      "Add the gap to reach the second point",
+      "Confirm the second coordinate"
+    ]
+  }
+]

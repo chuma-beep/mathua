@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Round both terms to landmarks",
+    "section": "The method",
+    "subgoals": [
+      "Round the minuend to a benchmark",
+      "Round the subtrahend to a benchmark",
+      "Subtract the rounded values"
+    ]
+  },
+  {
+    "label": "Seven eighths minus five twelfths",
+    "section": "A worked difference",
+    "subgoals": [
+      "Round both fractions to simple values",
+      "Compute the exact difference in twenty fourths",
+      "Compare the estimate with the exact value"
+    ]
+  },
+  {
+    "label": "A lower and an upper bound",
+    "section": "Checking the result",
+    "subgoals": [
+      "Subtract the larger subtrahend",
+      "Subtract the smaller subtrahend",
+      "Place the exact value between the bounds"
+    ]
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "concept": "frac.sub.estimate_diff",
+  "setup": "Two fractions are subtracted and the difference is estimated.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The fractions are [[a]]/[[b]] and [[c]]/[[d]]."
+    },
+    {
+      "fact": "",
+      "say": "Each fraction sits between two whole numbers, so rounding both before subtracting gives a difference close to the exact one."
+    },
+    {
+      "fact": "",
+      "say": "The absolute difference is the distance between them, with no sign attached."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

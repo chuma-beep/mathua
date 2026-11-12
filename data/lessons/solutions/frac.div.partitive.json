@@ -1,0 +1,19 @@
+{
+  "concept": "frac.div.partitive",
+  "setup": "A fraction is shared equally among a number of people.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The amount shared is [[a]]/[[b]]."
+    },
+    {
+      "fact": "c",
+      "say": "Sharing equally among [[c]] people divides the amount by [[c]]."
+    },
+    {
+      "fact": "b",
+      "say": "Dividing by a whole number multiplies the denominator, so [[b]] becomes [[b]] times [[c]] before any cancelling."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

@@ -1,0 +1,15 @@
+{
+  "concept": "frac.basics.density",
+  "setup": "The question counts fractions with denominator [[d]] inside an interval.",
+  "steps": [
+    {
+      "fact": "d",
+      "say": "The denominator [[d]] fixes the size of one step: each step along the number line is 1/[[d]]."
+    },
+    {
+      "fact": "",
+      "say": "Only numerators strictly inside the interval count, so the two endpoints are left out."
+    }
+  ],
+  "answer": "So [[answer]] fractions with denominator [[d]] lie strictly inside the interval."
+}

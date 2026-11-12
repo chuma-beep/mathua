@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Compare the quantities in one unit",
+    "section": "The method",
+    "subgoals": [
+      "Read both quantities in the same unit",
+      "Compare the whole parts",
+      "Compare the fractions when the wholes tie"
+    ]
+  },
+  {
+    "label": "Two ropes of similar length",
+    "section": "A worked example",
+    "subgoals": [
+      "Compare three and two thirds with three and three quarters",
+      "Convert the fractions to twelfths",
+      "State which rope is longer and by how much"
+    ]
+  },
+  {
+    "label": "Add the difference back",
+    "section": "Checking the result",
+    "subgoals": [
+      "Add the difference to the shorter length",
+      "Confirm the longer length",
+      "Check a second pair of lengths"
+    ]
+  }
+]

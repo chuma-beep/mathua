@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Add reciprocals of whole numbers",
+    "section": "The method",
+    "subgoals": [
+      "Write both fractions with denominator one",
+      "Use the product of the denominators",
+      "Reduce the result"
+    ]
+  },
+  {
+    "label": "One quarter plus one sixth",
+    "section": "A worked sum",
+    "subgoals": [
+      "Convert to twelfths",
+      "Add the numerators",
+      "Reduce five twelfths"
+    ]
+  },
+  {
+    "label": "Subtract one addend",
+    "section": "Checking the result",
+    "subgoals": [
+      "Subtract one quarter from the sum",
+      "Confirm the other addend appears",
+      "Check the denominator is not added"
+    ]
+  }
+]

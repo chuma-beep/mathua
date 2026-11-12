@@ -1,0 +1,19 @@
+{
+  "concept": "frac.sub.missing_minuend",
+  "setup": "The number a subtraction starts from is missing.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The fraction being subtracted is [[a]]/[[b]]."
+    },
+    {
+      "fact": "",
+      "say": "A subtraction reads start minus part equals difference, so the start is the part plus the difference."
+    },
+    {
+      "fact": "",
+      "say": "Adding the subtrahend back to the difference reverses the subtraction."
+    }
+  ],
+  "answer": "So the missing minuend is [[answer]]."
+}

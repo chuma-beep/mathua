@@ -1,0 +1,19 @@
+{
+  "concept": "frac.sub.number_line_distance",
+  "setup": "The distance between two fractions on the number line is measured.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The two points are [[a]]/[[b]] and [[c]]/[[d]]."
+    },
+    {
+      "fact": "",
+      "say": "A common denominator puts both points on the same ruler, so the distance is a whole number of those parts."
+    },
+    {
+      "fact": "",
+      "say": "Distance is the larger position minus the smaller one, so it is never negative."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

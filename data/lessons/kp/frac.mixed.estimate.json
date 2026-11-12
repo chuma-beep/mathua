@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Round each mixed number",
+    "section": "The method",
+    "subgoals": [
+      "Round the fraction part to zero, one half or one",
+      "Carry the rounding into the whole part",
+      "Compute with the rounded values"
+    ]
+  },
+  {
+    "label": "A sum and a difference",
+    "section": "A worked example",
+    "subgoals": [
+      "Estimate four and seven eighths plus two and one sixth",
+      "Estimate seven and nine tenths minus three and one fifth",
+      "Compare each estimate with its exact value"
+    ]
+  },
+  {
+    "label": "Bound the exact value",
+    "section": "Checking the result",
+    "subgoals": [
+      "Compute the exact sum in twenty fourths",
+      "Check the estimate against the exact value",
+      "Confirm the size of the error"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Multiply by the reciprocal",
+    "section": "The method",
+    "subgoals": [
+      "Identify the divisor",
+      "Invert the divisor",
+      "Multiply and reduce"
+    ]
+  },
+  {
+    "label": "Three quarters divided by two fifths",
+    "section": "A worked quotient",
+    "subgoals": [
+      "Invert two fifths",
+      "Multiply the fractions",
+      "Write the quotient as a mixed number"
+    ]
+  },
+  {
+    "label": "Multiply the quotient by the divisor",
+    "section": "Checking the result",
+    "subgoals": [
+      "Multiply the quotient by the divisor",
+      "Confirm the dividend returns",
+      "Repeat with a second pair"
+    ]
+  }
+]

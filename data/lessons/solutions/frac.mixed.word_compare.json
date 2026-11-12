@@ -1,0 +1,19 @@
+{
+  "concept": "frac.mixed.word_compare",
+  "setup": "Two mixed quantities in a word problem are compared.",
+  "steps": [
+    {
+      "fact": "w1",
+      "say": "The first quantity is [[w1]] whole units and [[a]]/[[b]], and the second is [[w2]] whole units and [[c]]/[[d]]."
+    },
+    {
+      "fact": "",
+      "say": "The whole parts settle most comparisons, because a larger whole unit makes a larger quantity."
+    },
+    {
+      "fact": "",
+      "say": "When the whole parts match the fractional parts decide, and cross multiplication compares them exactly."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

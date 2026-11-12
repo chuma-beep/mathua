@@ -1,0 +1,29 @@
+[
+  {
+    "label": "One part of n equal parts",
+    "section": "The definition",
+    "subgoals": [
+      "Cut a whole into n equal parts",
+      "Name one part as one over n",
+      "Build a general fraction from copies"
+    ]
+  },
+  {
+    "label": "Seven tenths as copies",
+    "section": "An example",
+    "subgoals": [
+      "Write seven tenths as repeated unit fractions",
+      "Mark tenths on a number line",
+      "Compare one third with one quarter"
+    ]
+  },
+  {
+    "label": "The building block",
+    "section": "Why it matters",
+    "subgoals": [
+      "Decompose a fraction into unit fractions",
+      "Relate the unit fraction to division",
+      "Use the reciprocal in later operations"
+    ]
+  }
+]

@@ -11846,5 +11846,217 @@
   {
     "concept_id": "trig.ident.tangent_triple",
     "source": "authored/trig.ident.tangent_triple.md"
+  },
+  {
+    "concept_id": "frac.basics.density",
+    "source": "authored/frac.basics.density.md"
+  },
+  {
+    "concept_id": "frac.basics.whole",
+    "source": "authored/frac.basics.whole.md"
+  },
+  {
+    "concept_id": "frac.concept.proper_improper",
+    "source": "authored/frac.concept.proper_improper.md"
+  },
+  {
+    "concept_id": "frac.concept.zero_denominator",
+    "source": "authored/frac.concept.zero_denominator.md"
+  },
+  {
+    "concept_id": "frac.concept.equal_parts",
+    "source": "authored/frac.concept.equal_parts.md"
+  },
+  {
+    "concept_id": "frac.concept.unit_meaning",
+    "source": "authored/frac.concept.unit_meaning.md"
+  },
+  {
+    "concept_id": "frac.equiv.cross_check",
+    "source": "authored/frac.equiv.cross_check.md"
+  },
+  {
+    "concept_id": "frac.equiv.simplify_gcf",
+    "source": "authored/frac.equiv.simplify_gcf.md"
+  },
+  {
+    "concept_id": "frac.equiv.lowest_terms_check",
+    "source": "authored/frac.equiv.lowest_terms_check.md"
+  },
+  {
+    "concept_id": "frac.equiv.chain",
+    "source": "authored/frac.equiv.chain.md"
+  },
+  {
+    "concept_id": "frac.equiv.missing_number",
+    "source": "authored/frac.equiv.missing_number.md"
+  },
+  {
+    "concept_id": "frac.equiv.benchmark_choice",
+    "source": "authored/frac.equiv.benchmark_choice.md"
+  },
+  {
+    "concept_id": "frac.equiv.decimal_order",
+    "source": "authored/frac.equiv.decimal_order.md"
+  },
+  {
+    "concept_id": "frac.equiv.percent_bench",
+    "source": "authored/frac.equiv.percent_bench.md"
+  },
+  {
+    "concept_id": "frac.add.whole",
+    "source": "authored/frac.add.whole.md"
+  },
+  {
+    "concept_id": "frac.add.estimate_sum",
+    "source": "authored/frac.add.estimate_sum.md"
+  },
+  {
+    "concept_id": "frac.add.regroup",
+    "source": "authored/frac.add.regroup.md"
+  },
+  {
+    "concept_id": "frac.add.unit_fractions",
+    "source": "authored/frac.add.unit_fractions.md"
+  },
+  {
+    "concept_id": "frac.add.missing_addend",
+    "source": "authored/frac.add.missing_addend.md"
+  },
+  {
+    "concept_id": "frac.add.associative",
+    "source": "authored/frac.add.associative.md"
+  },
+  {
+    "concept_id": "frac.add.same_numerator",
+    "source": "authored/frac.add.same_numerator.md"
+  },
+  {
+    "concept_id": "frac.add.decimal_mix",
+    "source": "authored/frac.add.decimal_mix.md"
+  },
+  {
+    "concept_id": "frac.sub.missing_minuend",
+    "source": "authored/frac.sub.missing_minuend.md"
+  },
+  {
+    "concept_id": "frac.sub.missing_subtrahend",
+    "source": "authored/frac.sub.missing_subtrahend.md"
+  },
+  {
+    "concept_id": "frac.sub.estimate_diff",
+    "source": "authored/frac.sub.estimate_diff.md"
+  },
+  {
+    "concept_id": "frac.sub.regroup_whole",
+    "source": "authored/frac.sub.regroup_whole.md"
+  },
+  {
+    "concept_id": "frac.sub.negative_result",
+    "source": "authored/frac.sub.negative_result.md"
+  },
+  {
+    "concept_id": "frac.sub.three",
+    "source": "authored/frac.sub.three.md"
+  },
+  {
+    "concept_id": "frac.sub.decimal_mix",
+    "source": "authored/frac.sub.decimal_mix.md"
+  },
+  {
+    "concept_id": "frac.sub.number_line_distance",
+    "source": "authored/frac.sub.number_line_distance.md"
+  },
+  {
+    "concept_id": "frac.mult.whole_cancel",
+    "source": "authored/frac.mult.whole_cancel.md"
+  },
+  {
+    "concept_id": "frac.mult.estimate_product",
+    "source": "authored/frac.mult.estimate_product.md"
+  },
+  {
+    "concept_id": "frac.mult.scaling",
+    "source": "authored/frac.mult.scaling.md"
+  },
+  {
+    "concept_id": "frac.mult.unit",
+    "source": "authored/frac.mult.unit.md"
+  },
+  {
+    "concept_id": "frac.mult.three",
+    "source": "authored/frac.mult.three.md"
+  },
+  {
+    "concept_id": "frac.mult.mixed_improper",
+    "source": "authored/frac.mult.mixed_improper.md"
+  },
+  {
+    "concept_id": "frac.mult.decimal",
+    "source": "authored/frac.mult.decimal.md"
+  },
+  {
+    "concept_id": "frac.mult.predict",
+    "source": "authored/frac.mult.predict.md"
+  },
+  {
+    "concept_id": "frac.div.reciprocal_check",
+    "source": "authored/frac.div.reciprocal_check.md"
+  },
+  {
+    "concept_id": "frac.div.estimate_quotient",
+    "source": "authored/frac.div.estimate_quotient.md"
+  },
+  {
+    "concept_id": "frac.div.complex_simplify",
+    "source": "authored/frac.div.complex_simplify.md"
+  },
+  {
+    "concept_id": "frac.div.unit",
+    "source": "authored/frac.div.unit.md"
+  },
+  {
+    "concept_id": "frac.div.measurement",
+    "source": "authored/frac.div.measurement.md"
+  },
+  {
+    "concept_id": "frac.div.partitive",
+    "source": "authored/frac.div.partitive.md"
+  },
+  {
+    "concept_id": "frac.div.three",
+    "source": "authored/frac.div.three.md"
+  },
+  {
+    "concept_id": "frac.div.zero",
+    "source": "authored/frac.div.zero.md"
+  },
+  {
+    "concept_id": "frac.mixed.compare_whole",
+    "source": "authored/frac.mixed.compare_whole.md"
+  },
+  {
+    "concept_id": "frac.mixed.negative_improper",
+    "source": "authored/frac.mixed.negative_improper.md"
+  },
+  {
+    "concept_id": "frac.mixed.borrow_twice",
+    "source": "authored/frac.mixed.borrow_twice.md"
+  },
+  {
+    "concept_id": "frac.mixed.div_whole",
+    "source": "authored/frac.mixed.div_whole.md"
+  },
+  {
+    "concept_id": "frac.mixed.estimate",
+    "source": "authored/frac.mixed.estimate.md"
+  },
+  {
+    "concept_id": "frac.mixed.percent",
+    "source": "authored/frac.mixed.percent.md"
+  },
+  {
+    "concept_id": "frac.mixed.word_compare",
+    "source": "authored/frac.mixed.word_compare.md"
   }
 ]

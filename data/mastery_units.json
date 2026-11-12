@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 2962,
+  "concept_count": 3015,
   "unit_count": 165,
   "units": [
     {
@@ -2128,10 +2128,15 @@
         "frac.basics.equivalent",
         "frac.basics.number_line",
         "frac.basics.parts",
+        "frac.basics.whole",
+        "frac.concept.equal_parts",
+        "frac.concept.proper_improper",
+        "frac.concept.unit_meaning",
+        "frac.concept.zero_denominator",
         "frac.ops.mult",
         "frac.ops.to_decimal"
       ],
-      "concept_count": 8
+      "concept_count": 13
     },
     {
       "id": "fractions.b3",
@@ -2144,6 +2149,7 @@
         "frac.compare",
         "frac.div",
         "frac.mult",
+        "fractions.addition",
         "fractions.concept",
         "fractions.division",
         "fractions.equivalence",
@@ -2152,6 +2158,10 @@
         "fractions.subtraction"
       ],
       "concept_ids": [
+        "frac.add.same_numerator",
+        "frac.add.unit_fractions",
+        "frac.add.whole",
+        "frac.basics.density",
         "frac.basics.improper_number_line",
         "frac.basics.set",
         "frac.compare.cross",
@@ -2162,18 +2172,43 @@
         "frac.complex",
         "frac.div.by_whole",
         "frac.div.common_denominator",
+        "frac.div.complex_simplify",
+        "frac.div.estimate_quotient",
         "frac.div.missing_factor",
+        "frac.div.partitive",
+        "frac.div.reciprocal_check",
+        "frac.div.three",
+        "frac.div.unit",
         "frac.div.whole",
         "frac.div.word",
+        "frac.div.zero",
+        "frac.equiv.benchmark_choice",
+        "frac.equiv.chain",
+        "frac.equiv.cross_check",
+        "frac.equiv.decimal_order",
+        "frac.equiv.missing_number",
+        "frac.equiv.percent_bench",
         "frac.equivalent.scale",
         "frac.how_many",
+        "frac.mixed.compare_whole",
         "frac.mixed.convert",
         "frac.mixed.div",
+        "frac.mixed.div_whole",
         "frac.mixed.mult",
+        "frac.mixed.percent",
         "frac.mixed.to_decimal",
+        "frac.mixed.word_compare",
         "frac.mult.area_model",
         "frac.mult.cancel",
+        "frac.mult.decimal",
+        "frac.mult.estimate_product",
+        "frac.mult.mixed_improper",
+        "frac.mult.predict",
+        "frac.mult.scaling",
+        "frac.mult.three",
+        "frac.mult.unit",
         "frac.mult.whole",
+        "frac.mult.whole_cancel",
         "frac.mult.word",
         "frac.of_fraction",
         "frac.of_number",
@@ -2189,7 +2224,7 @@
         "frac.recipe.scale",
         "frac.sub.same"
       ],
-      "concept_count": 36
+      "concept_count": 65
     },
     {
       "id": "fractions.b4",
@@ -2202,18 +2237,29 @@
         "frac.sub",
         "fractions.addition",
         "fractions.concept",
+        "fractions.division",
         "fractions.equivalence",
         "fractions.mixed",
         "fractions.subtraction"
       ],
       "concept_ids": [
+        "frac.add.associative",
+        "frac.add.decimal_mix",
         "frac.add.diff",
+        "frac.add.estimate_sum",
+        "frac.add.missing_addend",
         "frac.add.number_line",
+        "frac.add.regroup",
         "frac.add.three",
         "frac.add.word",
+        "frac.div.measurement",
+        "frac.equiv.lowest_terms_check",
+        "frac.equiv.simplify_gcf",
         "frac.lcd",
         "frac.mixed.add",
         "frac.mixed.add_carry",
+        "frac.mixed.estimate",
+        "frac.mixed.negative_improper",
         "frac.mixed.sub",
         "frac.ops.negative",
         "frac.ops.repeating_decimal",
@@ -2221,14 +2267,22 @@
         "frac.percent.of_fraction",
         "frac.reciprocal",
         "frac.remaining",
+        "frac.sub.decimal_mix",
         "frac.sub.diff",
+        "frac.sub.estimate_diff",
+        "frac.sub.missing_minuend",
+        "frac.sub.missing_subtrahend",
+        "frac.sub.negative_result",
         "frac.sub.number_line",
+        "frac.sub.number_line_distance",
+        "frac.sub.regroup_whole",
+        "frac.sub.three",
         "frac.sub.whole",
         "frac.sub.word",
         "frac.unit_decompose",
         "frac.word.multi_step"
       ],
-      "concept_count": 20
+      "concept_count": 38
     },
     {
       "id": "fractions.b5",
@@ -2236,7 +2290,7 @@
       "domain": "fractions",
       "band": 5,
       "depth_min": 15,
-      "depth_max": 15,
+      "depth_max": 16,
       "subdomains": [
         "frac.mixed",
         "fractions.concept",
@@ -2244,10 +2298,11 @@
       ],
       "concept_ids": [
         "frac.mixed.borrow",
+        "frac.mixed.borrow_twice",
         "frac.mixed.word",
         "frac.word.remaining_two_step"
       ],
-      "concept_count": 3
+      "concept_count": 4
     },
     {
       "id": "geometry.b0",

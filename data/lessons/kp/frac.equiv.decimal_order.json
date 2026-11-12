@@ -1,0 +1,29 @@
+[
+  {
+    "label": "One form for every entry",
+    "section": "The rule",
+    "subgoals": [
+      "Convert every entry to decimals or to fractions",
+      "Keep enough decimal places to separate close values",
+      "Order the converted list"
+    ]
+  },
+  {
+    "label": "Four values in mixed form",
+    "section": "A worked example",
+    "subgoals": [
+      "Convert three fifths and seven twelfths",
+      "Write all four values to four places",
+      "Place them in increasing order"
+    ]
+  },
+  {
+    "label": "Subtract the close pair",
+    "section": "Checking the result",
+    "subgoals": [
+      "Compare the two closest values exactly",
+      "Compute their difference as a fraction",
+      "Confirm the position of the repeating decimal"
+    ]
+  }
+]

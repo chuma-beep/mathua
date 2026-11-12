@@ -1,0 +1,19 @@
+{
+  "concept": "frac.div.complex_simplify",
+  "setup": "A complex fraction is simplified.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The top fraction is [[a]]/[[b]] and the bottom fraction is [[c]]/[[d]]."
+    },
+    {
+      "fact": "",
+      "say": "A fraction of two fractions is a division, so it becomes the top fraction times the reciprocal of the bottom one."
+    },
+    {
+      "fact": "",
+      "say": "The resulting product is reduced by cancelling shared factors."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

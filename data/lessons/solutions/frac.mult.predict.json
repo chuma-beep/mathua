@@ -1,0 +1,19 @@
+{
+  "concept": "frac.mult.predict",
+  "setup": "The size of a product is predicted without computing it.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The first factor is [[a]]/[[b]] and the second is [[c]]/[[d]]."
+    },
+    {
+      "fact": "",
+      "say": "A factor greater than 1 makes the product larger than the other factor and a factor less than 1 makes it smaller."
+    },
+    {
+      "fact": "",
+      "say": "The product can also be compared with 1 by comparing the product of the numerators with the product of the denominators."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

@@ -1,0 +1,19 @@
+{
+  "concept": "frac.mixed.percent",
+  "setup": "A percent is being found from a fraction or a mixed number.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The fractional part is [[a]]/[[b]]."
+    },
+    {
+      "fact": "",
+      "say": "A percent counts hundredths, so the value is scaled to a denominator of 100."
+    },
+    {
+      "fact": "",
+      "say": "Multiplying by 100 after dividing the numerator by the denominator gives the percent."
+    }
+  ],
+  "answer": "So the percent asked for is [[answer]]."
+}

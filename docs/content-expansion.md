@@ -25,8 +25,8 @@ and the artifact it describes are one fact (AGENTS.md section 7).
 | Courses | `data/courses.json` | named target sets |
 | Destinations | `data/destinations.json` | named bundles of courses |
 
-Two numbers are useful to hold together. There are 2962 concepts, and there are 2962 KP shard files
-holding 8886 knowledge points, three per concept.
+Two numbers are useful to hold together. There are 3015 concepts, and there are 3015 KP shard files
+holding 9045 knowledge points, three per concept.
 
 ## 2. The pipeline
 
@@ -69,11 +69,11 @@ means a new thin concept cannot be added quietly.
 
 ## 4. Where the corpus is thin
 
-### 4.1 The course catalog reaches 2962 of the 2962 concepts
+### 4.1 The course catalog reaches 3015 of the 3015 concepts
 
 Courses carry target sets, and a target expands to its transitive prerequisite closure in
 `internal/planning/planner.go:64` (`collectChain`). Across the 29 courses those closures reach
-2962 of the 2962 concepts: 0 of them have a node, a generator, a lesson and three KP shards and
+3015 of the 3015 concepts: 0 of them have a node, a generator, a lesson and three KP shards and
 still sit outside every named course path. The wiring batch of 2026-10-19 moved the 149 that used
 to sit there into the courses that teach their subject, and the table stays as the measurement on
 the number, because a concept that no course targets is unreachable whatever the diagnostic
@@ -90,7 +90,7 @@ The count of unreachable concepts by domain:
 | topology | 122 | 0 |
 | statistics | 120 | 0 |
 | precalculus | 120 | 0 |
-| fractions | 67 | 0 |
+| fractions | 120 | 0 |
 | machine_learning | 120 | 0 |
 | complex_numbers | 121 | 0 |
 | number_theory | 121 | 0 |
@@ -405,7 +405,7 @@ because the change this section prepares for is the one that would have tripped 
 
 ### 5.5 The concept target, and where it goes
 
-The catalog holds 2962 concepts. The remaining per-domain targets add up to 0, and this is the
+The catalog holds 3015 concepts. The remaining per-domain targets add up to 0, and this is the
 table that says where: the 2,150-concept target agreed on 2026-11-12. `Now` is read from the corpus;
 `Target` is the decision. The rows keep the order step 6 of section 6 used, largest deficit first.
 
@@ -434,7 +434,7 @@ table that says where: the 2,150-concept target agreed on 2026-11-12. `Now` is r
 | arithmetic | school | 120 | 120 | +0 |
 | prealgebra | school | 120 | 120 | +0 |
 | geometry | school | 120 | 120 | +0 |
-| fractions | school | 67 | 67 | +0 |
+| fractions | school | 120 | 120 | +0 |
 
 **The 2,150-concept target.** The 650 new concepts split by tier as school 482 to 602 (+120,
 24.9%), bridge 357 to 487 (+130, 36.4%) and university 661 to 1,061 (+400, 60.5%). University

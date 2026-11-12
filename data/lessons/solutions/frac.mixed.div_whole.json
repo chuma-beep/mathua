@@ -1,0 +1,19 @@
+{
+  "concept": "frac.mixed.div_whole",
+  "setup": "A mixed number is divided by a whole number.",
+  "steps": [
+    {
+      "fact": "w",
+      "say": "The mixed number is [[w]] whole units and [[a]]/[[b]]."
+    },
+    {
+      "fact": "",
+      "say": "Turn it into an improper fraction first: [[w]] times [[b]] plus [[a]], over [[b]]."
+    },
+    {
+      "fact": "c",
+      "say": "Dividing by [[c]] multiplies the denominator, so the result is over [[b]] times [[c]] before cancelling."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

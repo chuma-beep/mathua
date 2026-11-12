@@ -1,0 +1,19 @@
+{
+  "concept": "frac.mult.three",
+  "setup": "Three fractions are multiplied.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The factors are [[a]]/[[b]], [[c]]/[[d]] and [[e]]/[[f]]."
+    },
+    {
+      "fact": "",
+      "say": "Multiplication of fractions multiplies the numerators together and the denominators together."
+    },
+    {
+      "fact": "",
+      "say": "Shared factors between any numerator and any denominator can be cancelled before the final product is written."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

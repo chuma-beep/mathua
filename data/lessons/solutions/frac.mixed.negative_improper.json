@@ -1,0 +1,19 @@
+{
+  "concept": "frac.mixed.negative_improper",
+  "setup": "A negative mixed number is written in another form.",
+  "steps": [
+    {
+      "fact": "w",
+      "say": "The mixed number is [[w]] whole units and [[a]]/[[b]]."
+    },
+    {
+      "fact": "",
+      "say": "The improper numerator is [[w]] times [[b]] plus [[a]], over [[b]]."
+    },
+    {
+      "fact": "",
+      "say": "The sign applies to the whole value, so the negative form carries a negative numerator or a negative whole part."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

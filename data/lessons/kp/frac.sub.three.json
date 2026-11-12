@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Subtract from left to right",
+    "section": "The method",
+    "subgoals": [
+      "Subtract the first two fractions",
+      "Subtract the third from that result",
+      "Reduce the final value"
+    ]
+  },
+  {
+    "label": "Seven eighths minus a quarter minus three eighths",
+    "section": "A worked difference",
+    "subgoals": [
+      "Convert the quarter to eighths",
+      "Subtract both terms in order",
+      "Reduce two eighths"
+    ]
+  },
+  {
+    "label": "Add all three parts",
+    "section": "Checking the result",
+    "subgoals": [
+      "Add the result to both subtrahends",
+      "Confirm the minuend",
+      "Try a common denominator instead"
+    ]
+  }
+]

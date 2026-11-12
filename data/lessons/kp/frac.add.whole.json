@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Give the whole a denominator",
+    "section": "The method",
+    "subgoals": [
+      "Write the whole number over one",
+      "Rewrite it over the fraction denominator",
+      "Add the numerators"
+    ]
+  },
+  {
+    "label": "Two and three fifths",
+    "section": "A worked sum",
+    "subgoals": [
+      "Convert two to tenths",
+      "Add the numerators",
+      "Write the result as a mixed number"
+    ]
+  },
+  {
+    "label": "Subtract the whole back",
+    "section": "Checking the result",
+    "subgoals": [
+      "Subtract the whole number from the sum",
+      "Compare with the original fraction",
+      "Check with decimal values"
+    ]
+  }
+]

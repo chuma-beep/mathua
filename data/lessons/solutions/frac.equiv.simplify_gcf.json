@@ -1,0 +1,19 @@
+{
+  "concept": "frac.equiv.simplify_gcf",
+  "setup": "A fraction is being reduced by its greatest common factor.",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "The numerator is [[n]] and the denominator is [[d]]."
+    },
+    {
+      "fact": "",
+      "say": "The greatest common factor is the largest number that divides both parts with no remainder."
+    },
+    {
+      "fact": "",
+      "say": "Dividing the numerator and the denominator by that factor keeps the value and lowers the terms."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

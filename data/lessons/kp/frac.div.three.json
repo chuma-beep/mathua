@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Invert and multiply twice",
+    "section": "The method",
+    "subgoals": [
+      "Divide by the first divisor",
+      "Divide the result by the second divisor",
+      "Reduce the final value"
+    ]
+  },
+  {
+    "label": "Three quarters divided twice",
+    "section": "A worked quotient",
+    "subgoals": [
+      "Invert the first divisor",
+      "Invert the second divisor",
+      "Multiply all three fractions"
+    ]
+  },
+  {
+    "label": "Multiply both divisors back",
+    "section": "Checking the result",
+    "subgoals": [
+      "Multiply the quotient by the second divisor",
+      "Multiply again by the first divisor",
+      "Recover the dividend"
+    ]
+  }
+]

@@ -1,6 +1,6 @@
 [
   {
-    "heuristic": "trig siblings interfere — non-trivial group 5 members",
+    "heuristic": "trig siblings interfere \u2014 non-trivial group 5 members",
     "interference_group": "trig.basic",
     "members": [
       "trig.basics.radians",
@@ -21,7 +21,7 @@
     ]
   },
   {
-    "heuristic": "abstract group siblings interfere — normal/lagrange/quotient/action/sylow",
+    "heuristic": "abstract group siblings interfere \u2014 normal/lagrange/quotient/action/sylow",
     "interference_group": "abstract.group",
     "members": [
       "abstract.group.normal",
@@ -43,7 +43,7 @@
     ]
   },
   {
-    "heuristic": "ml arch siblings interfere — cnn/rnn/transformer/gan",
+    "heuristic": "ml arch siblings interfere \u2014 cnn/rnn/transformer/gan",
     "interference_group": "ml.arch",
     "members": [
       "ml.arch.cnn",
@@ -63,8 +63,8 @@
     ]
   },
   {
-    "heuristic": "new subdomains for ML beyond 20 — ml.reinforcement / ml.nlp",
-    "note": "Future ML 20→30 will split single subdomain machine_learning.neural_networks into ml.reinforcement and ml.nlp to restore scheduler dissimilarity (scheduler.go:80 NextSmart distinct subdomain filter) — reserve note, no interference yet"
+    "heuristic": "new subdomains for ML beyond 20 \u2014 ml.reinforcement / ml.nlp",
+    "note": "Future ML 20\u219230 will split single subdomain machine_learning.neural_networks into ml.reinforcement and ml.nlp to restore scheduler dissimilarity (scheduler.go:80 NextSmart distinct subdomain filter) \u2014 reserve note, no interference yet"
   },
   {
     "heuristic": "linalg determinant and inverse siblings interfere",
@@ -3284,7 +3284,7 @@
       "alg.func.concept"
     ],
     "heuristic": "calc.encompasses.alg",
-    "note": "calc.* encompasses alg.* — higher integration encompasses function concept for layering",
+    "note": "calc.* encompasses alg.* \u2014 higher integration encompasses function concept for layering",
     "variants": [
       {
         "difficulty": 0.3,
@@ -10339,7 +10339,7 @@
       "ml.regularization",
       "ml.loss.cross_entropy"
     ],
-    "heuristic": "ml dropout variants — easy/hard",
+    "heuristic": "ml dropout variants \u2014 easy/hard",
     "variants": [
       {
         "difficulty": 0.3,
@@ -21404,6 +21404,490 @@
     "encompasses": [
       "trig.ident.triple_angle",
       "trig.basics.tan_def"
+    ]
+  },
+  {
+    "id": "frac.basics.density",
+    "key_prerequisites": [
+      "frac.basics.number_line"
+    ],
+    "encompasses": [
+      "frac.basics.number_line"
+    ]
+  },
+  {
+    "id": "frac.basics.whole",
+    "key_prerequisites": [
+      "frac.basics.concept"
+    ],
+    "encompasses": [
+      "frac.basics.concept"
+    ]
+  },
+  {
+    "id": "frac.concept.proper_improper",
+    "key_prerequisites": [
+      "frac.basics.parts"
+    ],
+    "encompasses": [
+      "frac.basics.parts"
+    ]
+  },
+  {
+    "id": "frac.concept.zero_denominator",
+    "key_prerequisites": [
+      "frac.basics.parts"
+    ],
+    "encompasses": [
+      "frac.basics.parts"
+    ]
+  },
+  {
+    "id": "frac.concept.equal_parts",
+    "key_prerequisites": [
+      "frac.basics.concept"
+    ],
+    "encompasses": [
+      "frac.basics.concept"
+    ]
+  },
+  {
+    "id": "frac.concept.unit_meaning",
+    "key_prerequisites": [
+      "frac.basics.parts"
+    ],
+    "encompasses": [
+      "frac.basics.parts"
+    ]
+  },
+  {
+    "id": "frac.equiv.cross_check",
+    "key_prerequisites": [
+      "frac.basics.equivalent"
+    ],
+    "encompasses": [
+      "frac.basics.equivalent"
+    ]
+  },
+  {
+    "id": "frac.equiv.simplify_gcf",
+    "key_prerequisites": [
+      "frac.ops.simplify"
+    ],
+    "encompasses": [
+      "frac.ops.simplify"
+    ]
+  },
+  {
+    "id": "frac.equiv.lowest_terms_check",
+    "key_prerequisites": [
+      "frac.ops.simplify"
+    ],
+    "encompasses": [
+      "frac.ops.simplify"
+    ]
+  },
+  {
+    "id": "frac.equiv.chain",
+    "key_prerequisites": [
+      "frac.basics.equivalent"
+    ],
+    "encompasses": [
+      "frac.basics.equivalent"
+    ]
+  },
+  {
+    "id": "frac.equiv.missing_number",
+    "key_prerequisites": [
+      "frac.basics.equivalent"
+    ],
+    "encompasses": [
+      "frac.basics.equivalent"
+    ]
+  },
+  {
+    "id": "frac.equiv.benchmark_choice",
+    "key_prerequisites": [
+      "frac.ops.benchmark"
+    ],
+    "encompasses": [
+      "frac.ops.benchmark"
+    ]
+  },
+  {
+    "id": "frac.equiv.decimal_order",
+    "key_prerequisites": [
+      "frac.ops.to_decimal",
+      "frac.ops.compare"
+    ],
+    "encompasses": [
+      "frac.ops.to_decimal"
+    ]
+  },
+  {
+    "id": "frac.equiv.percent_bench",
+    "key_prerequisites": [
+      "frac.percent.convert"
+    ],
+    "encompasses": [
+      "frac.percent.convert"
+    ]
+  },
+  {
+    "id": "frac.add.whole",
+    "key_prerequisites": [
+      "frac.add.same"
+    ],
+    "encompasses": [
+      "frac.add.same"
+    ]
+  },
+  {
+    "id": "frac.add.estimate_sum",
+    "key_prerequisites": [
+      "frac.add.diff"
+    ],
+    "encompasses": [
+      "frac.add.diff"
+    ]
+  },
+  {
+    "id": "frac.add.regroup",
+    "key_prerequisites": [
+      "frac.add.diff"
+    ],
+    "encompasses": [
+      "frac.add.diff"
+    ]
+  },
+  {
+    "id": "frac.add.unit_fractions",
+    "key_prerequisites": [
+      "frac.add.same"
+    ],
+    "encompasses": [
+      "frac.add.same"
+    ]
+  },
+  {
+    "id": "frac.add.missing_addend",
+    "key_prerequisites": [
+      "frac.add.diff"
+    ],
+    "encompasses": [
+      "frac.add.diff"
+    ]
+  },
+  {
+    "id": "frac.add.associative",
+    "key_prerequisites": [
+      "frac.add.three"
+    ],
+    "encompasses": [
+      "frac.add.three"
+    ]
+  },
+  {
+    "id": "frac.add.same_numerator",
+    "key_prerequisites": [
+      "frac.add.same"
+    ],
+    "encompasses": [
+      "frac.add.same"
+    ]
+  },
+  {
+    "id": "frac.add.decimal_mix",
+    "key_prerequisites": [
+      "frac.add.diff",
+      "frac.ops.to_decimal"
+    ],
+    "encompasses": [
+      "frac.add.diff"
+    ]
+  },
+  {
+    "id": "frac.sub.missing_minuend",
+    "key_prerequisites": [
+      "frac.sub.diff"
+    ],
+    "encompasses": [
+      "frac.sub.diff"
+    ]
+  },
+  {
+    "id": "frac.sub.missing_subtrahend",
+    "key_prerequisites": [
+      "frac.sub.diff"
+    ],
+    "encompasses": [
+      "frac.sub.diff"
+    ]
+  },
+  {
+    "id": "frac.sub.estimate_diff",
+    "key_prerequisites": [
+      "frac.sub.diff"
+    ],
+    "encompasses": [
+      "frac.sub.diff"
+    ]
+  },
+  {
+    "id": "frac.sub.regroup_whole",
+    "key_prerequisites": [
+      "frac.sub.whole"
+    ],
+    "encompasses": [
+      "frac.sub.whole"
+    ]
+  },
+  {
+    "id": "frac.sub.negative_result",
+    "key_prerequisites": [
+      "frac.sub.diff",
+      "frac.ops.negative"
+    ],
+    "encompasses": [
+      "frac.sub.diff"
+    ]
+  },
+  {
+    "id": "frac.sub.three",
+    "key_prerequisites": [
+      "frac.sub.diff"
+    ],
+    "encompasses": [
+      "frac.sub.diff"
+    ]
+  },
+  {
+    "id": "frac.sub.decimal_mix",
+    "key_prerequisites": [
+      "frac.sub.diff",
+      "frac.ops.to_decimal"
+    ],
+    "encompasses": [
+      "frac.sub.diff"
+    ]
+  },
+  {
+    "id": "frac.sub.number_line_distance",
+    "key_prerequisites": [
+      "frac.sub.number_line"
+    ],
+    "encompasses": [
+      "frac.sub.number_line"
+    ]
+  },
+  {
+    "id": "frac.mult.whole_cancel",
+    "key_prerequisites": [
+      "frac.mult.whole"
+    ],
+    "encompasses": [
+      "frac.mult.whole"
+    ]
+  },
+  {
+    "id": "frac.mult.estimate_product",
+    "key_prerequisites": [
+      "frac.ops.mult"
+    ],
+    "encompasses": [
+      "frac.ops.mult"
+    ]
+  },
+  {
+    "id": "frac.mult.scaling",
+    "key_prerequisites": [
+      "frac.of_number"
+    ],
+    "encompasses": [
+      "frac.of_number"
+    ]
+  },
+  {
+    "id": "frac.mult.unit",
+    "key_prerequisites": [
+      "frac.ops.mult"
+    ],
+    "encompasses": [
+      "frac.ops.mult"
+    ]
+  },
+  {
+    "id": "frac.mult.three",
+    "key_prerequisites": [
+      "frac.ops.mult"
+    ],
+    "encompasses": [
+      "frac.ops.mult"
+    ]
+  },
+  {
+    "id": "frac.mult.mixed_improper",
+    "key_prerequisites": [
+      "frac.mixed.mult"
+    ],
+    "encompasses": [
+      "frac.mixed.mult"
+    ]
+  },
+  {
+    "id": "frac.mult.decimal",
+    "key_prerequisites": [
+      "frac.ops.mult",
+      "frac.ops.to_decimal"
+    ],
+    "encompasses": [
+      "frac.ops.mult"
+    ]
+  },
+  {
+    "id": "frac.mult.predict",
+    "key_prerequisites": [
+      "frac.ops.mult"
+    ],
+    "encompasses": [
+      "frac.ops.mult"
+    ]
+  },
+  {
+    "id": "frac.div.reciprocal_check",
+    "key_prerequisites": [
+      "frac.ops.div"
+    ],
+    "encompasses": [
+      "frac.ops.div"
+    ]
+  },
+  {
+    "id": "frac.div.estimate_quotient",
+    "key_prerequisites": [
+      "frac.ops.div"
+    ],
+    "encompasses": [
+      "frac.ops.div"
+    ]
+  },
+  {
+    "id": "frac.div.complex_simplify",
+    "key_prerequisites": [
+      "frac.complex"
+    ],
+    "encompasses": [
+      "frac.complex"
+    ]
+  },
+  {
+    "id": "frac.div.unit",
+    "key_prerequisites": [
+      "frac.ops.div"
+    ],
+    "encompasses": [
+      "frac.ops.div"
+    ]
+  },
+  {
+    "id": "frac.div.measurement",
+    "key_prerequisites": [
+      "frac.div.word"
+    ],
+    "encompasses": [
+      "frac.div.word"
+    ]
+  },
+  {
+    "id": "frac.div.partitive",
+    "key_prerequisites": [
+      "frac.div.whole"
+    ],
+    "encompasses": [
+      "frac.div.whole"
+    ]
+  },
+  {
+    "id": "frac.div.three",
+    "key_prerequisites": [
+      "frac.ops.div"
+    ],
+    "encompasses": [
+      "frac.ops.div"
+    ]
+  },
+  {
+    "id": "frac.div.zero",
+    "key_prerequisites": [
+      "frac.ops.div"
+    ],
+    "encompasses": [
+      "frac.ops.div"
+    ]
+  },
+  {
+    "id": "frac.mixed.compare_whole",
+    "key_prerequisites": [
+      "frac.mixed.convert"
+    ],
+    "encompasses": [
+      "frac.mixed.convert"
+    ]
+  },
+  {
+    "id": "frac.mixed.negative_improper",
+    "key_prerequisites": [
+      "frac.mixed.convert",
+      "frac.ops.negative"
+    ],
+    "encompasses": [
+      "frac.mixed.convert"
+    ]
+  },
+  {
+    "id": "frac.mixed.borrow_twice",
+    "key_prerequisites": [
+      "frac.mixed.borrow"
+    ],
+    "encompasses": [
+      "frac.mixed.borrow"
+    ]
+  },
+  {
+    "id": "frac.mixed.div_whole",
+    "key_prerequisites": [
+      "frac.mixed.div"
+    ],
+    "encompasses": [
+      "frac.mixed.div"
+    ]
+  },
+  {
+    "id": "frac.mixed.estimate",
+    "key_prerequisites": [
+      "frac.mixed.add"
+    ],
+    "encompasses": [
+      "frac.mixed.add"
+    ]
+  },
+  {
+    "id": "frac.mixed.percent",
+    "key_prerequisites": [
+      "frac.mixed.to_decimal",
+      "frac.percent.convert"
+    ],
+    "encompasses": [
+      "frac.mixed.to_decimal"
+    ]
+  },
+  {
+    "id": "frac.mixed.word_compare",
+    "key_prerequisites": [
+      "frac.mixed.compare_whole"
+    ],
+    "encompasses": [
+      "frac.mixed.compare_whole"
     ]
   }
 ]

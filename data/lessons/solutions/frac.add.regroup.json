@@ -1,0 +1,19 @@
+{
+  "concept": "frac.add.regroup",
+  "setup": "Two fractions with the same denominator are added.",
+  "steps": [
+    {
+      "fact": "b",
+      "say": "Both fractions are over the denominator [[b]], so one whole is [[b]]/[[b]]."
+    },
+    {
+      "fact": "a",
+      "say": "The numerators [[a]] and [[c]] are added directly because the parts are the same size."
+    },
+    {
+      "fact": "",
+      "say": "If the numerator total reaches the denominator, trade one whole out and keep the remainder on top."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

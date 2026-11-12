@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Parts of equal size",
+    "section": "The definition",
+    "subgoals": [
+      "Split the whole into equal shares",
+      "Check that each share has the same measure",
+      "Name one share as a unit fraction"
+    ]
+  },
+  {
+    "label": "A rectangle cut into strips",
+    "section": "An example",
+    "subgoals": [
+      "Divide a twelve by five rectangle into four strips",
+      "Compute the area of each strip",
+      "Compare the shaded area with three quarters"
+    ]
+  },
+  {
+    "label": "Why unequal cuts fail",
+    "section": "Why it matters",
+    "subgoals": [
+      "Show that four unequal pieces are not quarters",
+      "Connect equal parts with number line intervals",
+      "Apply the idea to fair sharing"
+    ]
+  }
+]

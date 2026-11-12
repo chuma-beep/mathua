@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Use one form for both factors",
+    "section": "The method",
+    "subgoals": [
+      "Decide between fraction and decimal form",
+      "Convert the decimal or divide the fraction",
+      "Multiply and reduce"
+    ]
+  },
+  {
+    "label": "Three fifths times one quarter",
+    "section": "A worked product",
+    "subgoals": [
+      "Write the decimal as a fraction",
+      "Multiply the fractions",
+      "Express the result as a decimal"
+    ]
+  },
+  {
+    "label": "Divide by the decimal",
+    "section": "Checking the result",
+    "subgoals": [
+      "Divide the product by the decimal factor",
+      "Confirm the original fraction",
+      "Check the decimal places"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Add wholes, add fractions, carry",
+    "section": "The method",
+    "subgoals": [
+      "Add the whole parts",
+      "Add the fractions over a common denominator",
+      "Carry one when the fraction sum reaches a whole"
+    ]
+  },
+  {
+    "label": "Two and three quarters plus one and five sixths",
+    "section": "A worked sum",
+    "subgoals": [
+      "Convert the fractions to twelfths",
+      "Regroup nineteen twelfths",
+      "Add the whole parts with the carry"
+    ]
+  },
+  {
+    "label": "Convert both to improper form",
+    "section": "Checking the result",
+    "subgoals": [
+      "Write both mixed numbers as improper fractions",
+      "Add over one denominator",
+      "Compare with the mixed result"
+    ]
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "concept": "frac.div.unit",
+  "setup": "A fraction is divided by a unit fraction.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The dividend is [[a]]/[[b]] and the divisor has numerator 1 over [[c]]."
+    },
+    {
+      "fact": "",
+      "say": "Dividing by 1/[[c]] is the same as multiplying by [[c]], so the count of parts grows."
+    },
+    {
+      "fact": "",
+      "say": "The result is written over [[b]] and then reduced by any common factor."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

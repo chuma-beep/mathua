@@ -1,0 +1,19 @@
+{
+  "concept": "frac.div.zero",
+  "setup": "The question involves division by zero or division of zero.",
+  "steps": [
+    {
+      "fact": "",
+      "say": "Division by zero is undefined, because no number times zero can produce a nonzero numerator."
+    },
+    {
+      "fact": "",
+      "say": "A denominator is zero at the value of the variable that makes it vanish."
+    },
+    {
+      "fact": "",
+      "say": "Zero divided by any nonzero number is zero."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

@@ -1,0 +1,19 @@
+{
+  "concept": "frac.equiv.cross_check",
+  "setup": "The question checks whether two fractions name the same number.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The first fraction runs from the numerator [[a]] over the denominator [[b]]."
+    },
+    {
+      "fact": "c",
+      "say": "The second fraction carries the numerator [[c]]."
+    },
+    {
+      "fact": "",
+      "say": "Cross multiplying pairs the numerator of one fraction with the denominator of the other. If the two products agree, the fractions are equivalent."
+    }
+  ],
+  "answer": "The value the question asks for is [[answer]]."
+}

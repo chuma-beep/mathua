@@ -1,0 +1,19 @@
+{
+  "concept": "frac.mult.unit",
+  "setup": "A fraction is multiplied by a unit fraction.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The first factor is [[a]]/[[b]] and the unit fraction is 1/[[c]]."
+    },
+    {
+      "fact": "",
+      "say": "Multiplying by a unit fraction leaves the numerator unchanged and multiplies the denominator, because each part is cut into smaller equal pieces."
+    },
+    {
+      "fact": "",
+      "say": "The product can be left unreduced or reduced, and both forms name the same number."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

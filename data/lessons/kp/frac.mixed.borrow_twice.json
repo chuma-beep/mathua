@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Borrow once per subtraction",
+    "section": "The method",
+    "subgoals": [
+      "Convert the fractions to a common denominator",
+      "Borrow one whole when the fraction is too small",
+      "Repeat for the next subtraction in the chain"
+    ]
+  },
+  {
+    "label": "Seven and a fifth minus two terms",
+    "section": "A worked example",
+    "subgoals": [
+      "Subtract two and three quarters",
+      "Subtract one and a half from that result",
+      "Write the final mixed number"
+    ]
+  },
+  {
+    "label": "Add both subtrahends back",
+    "section": "Checking the result",
+    "subgoals": [
+      "Add the first subtrahend to the result",
+      "Add the second subtrahend",
+      "Confirm the original minuend"
+    ]
+  }
+]

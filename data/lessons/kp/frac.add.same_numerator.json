@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Factor the shared numerator",
+    "section": "The method",
+    "subgoals": [
+      "Note the common numerator",
+      "Add the denominators",
+      "Multiply the sum by the numerator over the product"
+    ]
+  },
+  {
+    "label": "Two thirds plus two fifths",
+    "section": "A worked sum",
+    "subgoals": [
+      "Compute the denominator product",
+      "Add the denominators",
+      "Simplify the resulting fraction"
+    ]
+  },
+  {
+    "label": "Common denominator and a warning",
+    "section": "Checking the result",
+    "subgoals": [
+      "Convert both fractions to fifteenths",
+      "Add the numerators",
+      "Show why adding denominators is wrong"
+    ]
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "concept": "frac.div.three",
+  "setup": "Two divisions are performed in order on three fractions.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The fractions are [[a]]/[[b]], [[c]]/[[d]] and [[e]]/[[f]]."
+    },
+    {
+      "fact": "",
+      "say": "Each division by a fraction is a multiplication by its reciprocal, applied from left to right."
+    },
+    {
+      "fact": "",
+      "say": "The resulting product is reduced by cancelling shared factors."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

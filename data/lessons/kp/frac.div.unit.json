@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Multiply by the denominator",
+    "section": "The method",
+    "subgoals": [
+      "Identify the unit fraction divisor",
+      "Multiply the dividend by its denominator",
+      "Reduce the result"
+    ]
+  },
+  {
+    "label": "Three quarters divided by one eighth",
+    "section": "A worked quotient",
+    "subgoals": [
+      "Multiply three quarters by eight",
+      "Reduce the improper result",
+      "Read the quotient as a count of eighths"
+    ]
+  },
+  {
+    "label": "Multiply back by one eighth",
+    "section": "Checking the result",
+    "subgoals": [
+      "Multiply the quotient by one eighth",
+      "Confirm the dividend",
+      "Test a second unit fraction"
+    ]
+  }
+]

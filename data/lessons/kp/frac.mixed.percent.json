@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Convert to an improper fraction first",
+    "section": "The method",
+    "subgoals": [
+      "Write the mixed number as an improper fraction",
+      "Multiply by one hundred",
+      "Divide and attach the percent sign"
+    ]
+  },
+  {
+    "label": "Two and a half as a percent",
+    "section": "A worked example",
+    "subgoals": [
+      "Convert two and a half to five halves",
+      "Multiply by one hundred",
+      "Repeat with one and three quarters"
+    ]
+  },
+  {
+    "label": "Convert the percent back",
+    "section": "Checking the result",
+    "subgoals": [
+      "Write the percent over one hundred",
+      "Reduce to a mixed number",
+      "Check the percent of a convenient whole"
+    ]
+  }
+]

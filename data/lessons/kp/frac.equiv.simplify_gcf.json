@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Divide by the greatest common factor",
+    "section": "The rule",
+    "subgoals": [
+      "List the common factors of both parts",
+      "Take the largest one",
+      "Divide numerator and denominator by it"
+    ]
+  },
+  {
+    "label": "Forty five over sixty",
+    "section": "A worked example",
+    "subgoals": [
+      "Find the greatest common factor",
+      "Divide both parts",
+      "Compare the result with the original"
+    ]
+  },
+  {
+    "label": "Products and common factors",
+    "section": "Checking the result",
+    "subgoals": [
+      "Cross multiply the simplified fraction",
+      "Confirm no common factor remains",
+      "Explain why one step is enough"
+    ]
+  }
+]

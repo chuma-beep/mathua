@@ -1,0 +1,15 @@
+{
+  "concept": "frac.basics.whole",
+  "setup": "A whole number is being written as a fraction.",
+  "steps": [
+    {
+      "fact": "w",
+      "say": "Each whole unit is worth one full denominator's worth of parts, and there are [[w]] of them."
+    },
+    {
+      "fact": "",
+      "say": "Multiply the whole number by the denominator to count the parts, or divide the numerator by the whole number to recover the denominator."
+    }
+  ],
+  "answer": "So the number the question asks for is [[answer]]."
+}

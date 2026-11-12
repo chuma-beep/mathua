@@ -1,0 +1,19 @@
+{
+  "concept": "frac.add.same_numerator",
+  "setup": "Two fractions with the same numerator are added.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Both fractions take the same numerator [[a]], over the denominators [[b]] and [[d]]."
+    },
+    {
+      "fact": "",
+      "say": "A common denominator is a multiple of both denominators, so each fraction is rewritten with its numerator scaled by the same factor as its denominator."
+    },
+    {
+      "fact": "",
+      "say": "Once the denominators match, the scaled numerators are added."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

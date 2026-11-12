@@ -1,0 +1,19 @@
+{
+  "concept": "frac.sub.three",
+  "setup": "Three fractions with the same denominator are subtracted in order.",
+  "steps": [
+    {
+      "fact": "b",
+      "say": "All three fractions share the denominator [[b]]."
+    },
+    {
+      "fact": "a",
+      "say": "The numerators [[a]], [[c]] and [[e]] are subtracted from left to right."
+    },
+    {
+      "fact": "",
+      "say": "Because the parts are the same size, the single numerator that remains is a count of those parts."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

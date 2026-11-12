@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Exclude a zero divisor",
+    "section": "The method",
+    "subgoals": [
+      "Check the divisor before dividing",
+      "Decide whether it is zero",
+      "Stop when no quotient exists"
+    ]
+  },
+  {
+    "label": "Five divided by a shrinking divisor",
+    "section": "A worked quotient",
+    "subgoals": [
+      "Divide five by one hundredth",
+      "Divide five by one thousandth",
+      "Observe the growth as the divisor nears zero"
+    ]
+  },
+  {
+    "label": "Multiply the supposed quotient",
+    "section": "Checking the result",
+    "subgoals": [
+      "Multiply any proposed quotient by zero",
+      "Compare with the dividend",
+      "Explain why zero over zero is indeterminate"
+    ]
+  }
+]

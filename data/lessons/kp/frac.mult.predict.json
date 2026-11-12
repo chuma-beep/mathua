@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Compare the second factor with one",
+    "section": "The method",
+    "subgoals": [
+      "Identify the quantity being scaled",
+      "Compare the multiplier with one",
+      "Predict larger, smaller or unchanged"
+    ]
+  },
+  {
+    "label": "Seven ninths under two multipliers",
+    "section": "A worked product",
+    "subgoals": [
+      "Multiply by six fifths",
+      "Multiply by four fifths",
+      "Order the three values"
+    ]
+  },
+  {
+    "label": "Divide out the multiplier",
+    "section": "Checking the result",
+    "subgoals": [
+      "Divide each product by its multiplier",
+      "Recover seven ninths",
+      "Compare the exact values with the prediction"
+    ]
+  }
+]

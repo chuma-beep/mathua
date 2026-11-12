@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Keep the sign outside the conversion",
+    "section": "The method",
+    "subgoals": [
+      "Convert the positive mixed number to an improper fraction",
+      "Attach the negative sign to the whole result",
+      "Do not subtract the fraction part"
+    ]
+  },
+  {
+    "label": "Negative two and three quarters",
+    "section": "A worked example",
+    "subgoals": [
+      "Convert two and three quarters",
+      "Attach the negative sign",
+      "Compare with the common wrong answer"
+    ]
+  },
+  {
+    "label": "Decimal and division checks",
+    "section": "Checking the result",
+    "subgoals": [
+      "Write the improper fraction as a decimal",
+      "Confirm the mixed number value",
+      "Test a second negative mixed number"
+    ]
+  }
+]

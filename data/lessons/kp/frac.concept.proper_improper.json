@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Numerator against denominator",
+    "section": "The definition",
+    "subgoals": [
+      "Compare numerator with denominator",
+      "Classify the fraction as proper or improper",
+      "State whether the value is below or above one"
+    ]
+  },
+  {
+    "label": "Sorting a short list",
+    "section": "An example",
+    "subgoals": [
+      "Classify four given fractions",
+      "Convert each improper fraction to a mixed number",
+      "Order the list by value"
+    ]
+  },
+  {
+    "label": "Choosing the useful form",
+    "section": "Why it matters",
+    "subgoals": [
+      "Estimate size from the classification",
+      "Decide when a mixed number reads better",
+      "See why multiplication prefers improper form"
+    ]
+  }
+]

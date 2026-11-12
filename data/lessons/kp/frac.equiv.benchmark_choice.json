@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Compare each fraction with a landmark",
+    "section": "The rule",
+    "subgoals": [
+      "Choose zero, one half or one",
+      "Place each fraction against the landmark",
+      "Compare the distances from it"
+    ]
+  },
+  {
+    "label": "Five ninths against six elevenths",
+    "section": "A worked example",
+    "subgoals": [
+      "Check that both exceed one half",
+      "Compute each distance above one half",
+      "Decide which fraction is larger"
+    ]
+  },
+  {
+    "label": "One subtraction and one cross product",
+    "section": "Checking the result",
+    "subgoals": [
+      "Subtract the fractions over a common denominator",
+      "Confirm the sign of the difference",
+      "Cross multiply to confirm the order"
+    ]
+  }
+]

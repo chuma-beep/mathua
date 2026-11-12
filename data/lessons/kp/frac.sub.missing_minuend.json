@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Add the difference to the subtrahend",
+    "section": "The method",
+    "subgoals": [
+      "Name the unknown minuend",
+      "Add the difference to the known subtrahend",
+      "Reduce the sum"
+    ]
+  },
+  {
+    "label": "An unknown minus three sevenths",
+    "section": "A worked difference",
+    "subgoals": [
+      "Add the difference to the subtrahend",
+      "Write the result over sevenths",
+      "Repeat with unlike denominators"
+    ]
+  },
+  {
+    "label": "Subtract the subtrahend",
+    "section": "Checking the result",
+    "subgoals": [
+      "Subtract the known term from the found value",
+      "Confirm the stated difference",
+      "Check with decimal values"
+    ]
+  }
+]

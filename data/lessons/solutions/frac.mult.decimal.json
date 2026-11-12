@@ -1,0 +1,19 @@
+{
+  "concept": "frac.mult.decimal",
+  "setup": "A fraction is multiplied by a decimal.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The fraction is [[a]]/[[b]]."
+    },
+    {
+      "fact": "dec",
+      "say": "The decimal is the two-digit number [[dec]] after the point, so it is [[dec]] hundredths and can be written over 100."
+    },
+    {
+      "fact": "",
+      "say": "Multiplying the two fractions gives a numerator over 100 times [[b]], which is then reduced by any common factor."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

@@ -1,0 +1,19 @@
+{
+  "concept": "frac.sub.missing_subtrahend",
+  "setup": "The amount removed in a subtraction is missing.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The subtraction starts from [[a]]/[[b]]."
+    },
+    {
+      "fact": "",
+      "say": "Start minus part equals difference, so the part is the start minus the difference."
+    },
+    {
+      "fact": "",
+      "say": "The subtrahend is what was taken away, which is the gap between the start and what is left."
+    }
+  ],
+  "answer": "So the missing subtrahend is [[answer]]."
+}

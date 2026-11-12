@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Division by zero has no value",
+    "section": "The definition",
+    "subgoals": [
+      "Read a fraction as a division",
+      "Ask for a quotient that solves the multiplication",
+      "Show that no such quotient exists"
+    ]
+  },
+  {
+    "label": "A denominator that shrinks",
+    "section": "An example",
+    "subgoals": [
+      "Compute five divided by one tenth",
+      "Shrink the denominator toward zero",
+      "Observe the quotient growing without bound"
+    ]
+  },
+  {
+    "label": "Restrictions on a domain",
+    "section": "Why it matters",
+    "subgoals": [
+      "Find where a rational expression is undefined",
+      "Exclude that input from the domain",
+      "Check the denominator before simplifying"
+    ]
+  }
+]

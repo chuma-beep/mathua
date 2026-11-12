@@ -1,0 +1,19 @@
+{
+  "concept": "frac.add.decimal_mix",
+  "setup": "A fraction and a decimal are added.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The fraction is [[a]]/[[b]], which is rewritten in hundredths before the addition."
+    },
+    {
+      "fact": "dec",
+      "say": "The decimal is the two-digit number [[dec]] written after the point, so it counts [[dec]] hundredths."
+    },
+    {
+      "fact": "",
+      "say": "With both values counted in hundredths, the numerators are added over 100."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

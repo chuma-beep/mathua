@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Products across the equals sign",
+    "section": "The rule",
+    "subgoals": [
+      "Multiply each numerator by the other denominator",
+      "Compare the two products",
+      "State what equality of the products means"
+    ]
+  },
+  {
+    "label": "Six eighths against nine twelfths",
+    "section": "A worked example",
+    "subgoals": [
+      "Compute both cross products",
+      "Confirm they agree",
+      "Reduce both fractions to one form"
+    ]
+  },
+  {
+    "label": "A pair that fails",
+    "section": "Checking the result",
+    "subgoals": [
+      "Test three fifths against five eighths",
+      "Read the direction from the products",
+      "Confirm with decimal values"
+    ]
+  }
+]

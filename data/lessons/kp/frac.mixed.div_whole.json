@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Convert then divide",
+    "section": "The method",
+    "subgoals": [
+      "Write the mixed number as an improper fraction",
+      "Divide by the whole number",
+      "Return to mixed form if needed"
+    ]
+  },
+  {
+    "label": "Two and a half divided by five",
+    "section": "A worked example",
+    "subgoals": [
+      "Convert two and a half to halves",
+      "Multiply by one fifth",
+      "State the size of one share"
+    ]
+  },
+  {
+    "label": "Multiply by the whole number",
+    "section": "Checking the result",
+    "subgoals": [
+      "Multiply the quotient by five",
+      "Confirm the mixed number",
+      "Check a second mixed number"
+    ]
+  }
+]

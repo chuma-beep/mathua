@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Multiply both parts by one number",
+    "section": "The rule",
+    "subgoals": [
+      "Choose a nonzero multiplier",
+      "Apply it to numerator and denominator",
+      "Keep every term equal to the first"
+    ]
+  },
+  {
+    "label": "Two thirds extended twice",
+    "section": "A worked example",
+    "subgoals": [
+      "Extend two thirds to fifteenths",
+      "Extend the result to thirtieths",
+      "Write the chain in order"
+    ]
+  },
+  {
+    "label": "Cross products along the chain",
+    "section": "Checking the result",
+    "subgoals": [
+      "Cross multiply adjacent terms",
+      "Reduce each term back",
+      "Confirm the chain closes at the start"
+    ]
+  }
+]

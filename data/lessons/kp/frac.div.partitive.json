@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Share the amount among the groups",
+    "section": "The method",
+    "subgoals": [
+      "Identify the amount being shared",
+      "Identify the number of shares",
+      "Divide the amount by the number of shares"
+    ]
+  },
+  {
+    "label": "Three quarters shared among three",
+    "section": "A worked quotient",
+    "subgoals": [
+      "Divide the fraction by the whole number",
+      "Reduce the result",
+      "State the size of one share"
+    ]
+  },
+  {
+    "label": "Multiply one share by the number of shares",
+    "section": "Checking the result",
+    "subgoals": [
+      "Multiply the share by the number of recipients",
+      "Confirm the original amount",
+      "Check a second sharing case"
+    ]
+  }
+]

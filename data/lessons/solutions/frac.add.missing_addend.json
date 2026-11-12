@@ -1,0 +1,19 @@
+{
+  "concept": "frac.add.missing_addend",
+  "setup": "One addend in a sum is missing.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The known fraction is [[a]]/[[b]]."
+    },
+    {
+      "fact": "c",
+      "say": "The target sum has numerator [[c]]."
+    },
+    {
+      "fact": "",
+      "say": "Subtracting the known addend from the total leaves the missing addend, so the answer is the gap between them."
+    }
+  ],
+  "answer": "So the missing addend is [[answer]]."
+}

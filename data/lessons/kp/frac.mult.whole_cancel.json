@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Multiply the numerator and cancel early",
+    "section": "The method",
+    "subgoals": [
+      "Write the whole number as a numerator",
+      "Cancel a common factor with the denominator",
+      "Multiply what remains"
+    ]
+  },
+  {
+    "label": "Four times three eighths",
+    "section": "A worked product",
+    "subgoals": [
+      "Cancel four against eight",
+      "Multiply the reduced parts",
+      "Write the answer as a mixed number"
+    ]
+  },
+  {
+    "label": "Repeated addition and division",
+    "section": "Checking the result",
+    "subgoals": [
+      "Add the fraction four times",
+      "Divide the product by four",
+      "Compare both checks"
+    ]
+  }
+]

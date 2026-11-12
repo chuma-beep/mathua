@@ -51,6 +51,7 @@ func Register(reg *generator.Registry) {
 	registerWave8Remaining(reg)
 	registerWave9(reg)
 	registerWave9Remaining(reg)
+	registerWave10(reg)
 }
 
 func fracStr(num, den int) string { return fmt.Sprintf("%d/%d", num, den) }

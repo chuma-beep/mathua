@@ -1,0 +1,19 @@
+{
+  "concept": "frac.equiv.lowest_terms_check",
+  "setup": "The question asks about a fraction in lowest terms.",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "The fraction is [[n]]/[[d]]."
+    },
+    {
+      "fact": "",
+      "say": "A fraction is in lowest terms when the only common factor of the numerator and the denominator is 1."
+    },
+    {
+      "fact": "",
+      "say": "Any shared factor larger than 1 means the fraction can still be reduced."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

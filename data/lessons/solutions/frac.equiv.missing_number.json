@@ -1,0 +1,19 @@
+{
+  "concept": "frac.equiv.missing_number",
+  "setup": "One number in a pair of equivalent fractions is missing.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The known fraction is [[a]]/[[b]]."
+    },
+    {
+      "fact": "k",
+      "say": "The parts were scaled by [[k]]: both the numerator and the denominator are multiplied by that same factor."
+    },
+    {
+      "fact": "",
+      "say": "An equivalent fraction has the same value, so the scaling factor is what links the known numbers to the missing one."
+    }
+  ],
+  "answer": "So the missing number is [[answer]]."
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Borrow one whole",
+    "section": "The method",
+    "subgoals": [
+      "Write the whole number with a fractional part",
+      "Borrow one as a fraction equal to one",
+      "Subtract wholes and fractions separately"
+    ]
+  },
+  {
+    "label": "Five minus two and three quarters",
+    "section": "A worked difference",
+    "subgoals": [
+      "Rewrite five as four and four quarters",
+      "Subtract the whole parts",
+      "Subtract the fraction parts"
+    ]
+  },
+  {
+    "label": "Add the difference back",
+    "section": "Checking the result",
+    "subgoals": [
+      "Add the result to the subtrahend",
+      "Confirm the original whole number",
+      "Check a case with unlike denominators"
+    ]
+  }
+]

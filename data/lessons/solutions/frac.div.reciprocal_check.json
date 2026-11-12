@@ -1,0 +1,19 @@
+{
+  "concept": "frac.div.reciprocal_check",
+  "setup": "A fraction is divided by a fraction.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The dividend is [[a]]/[[b]] and the divisor is [[c]]/[[d]]."
+    },
+    {
+      "fact": "",
+      "say": "Dividing by a fraction is the same as multiplying by its reciprocal, so the divisor is turned upside down."
+    },
+    {
+      "fact": "",
+      "say": "The product then follows the multiplication rule, numerators together and denominators together."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

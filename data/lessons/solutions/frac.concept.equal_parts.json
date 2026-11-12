@@ -1,0 +1,15 @@
+{
+  "concept": "frac.concept.equal_parts",
+  "setup": "The question treats a whole as a set of equal parts.",
+  "steps": [
+    {
+      "fact": "",
+      "say": "Equal parts means every piece has the same size, so the number of pieces and the size of each piece are tied together."
+    },
+    {
+      "fact": "",
+      "say": "The denominator counts how many equal parts make one whole, so one part is 1 over that count."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

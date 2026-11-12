@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Find the multiplier or cross multiply",
+    "section": "The rule",
+    "subgoals": [
+      "Compare the two denominators",
+      "Find the multiplier between them",
+      "Apply the same multiplier to the numerator"
+    ]
+  },
+  {
+    "label": "Three fifths over twenty",
+    "section": "A worked example",
+    "subgoals": [
+      "Scale the denominator from five to twenty",
+      "Scale the numerator by the same factor",
+      "Repeat with the numerator missing"
+    ]
+  },
+  {
+    "label": "Cross products agree",
+    "section": "Checking the result",
+    "subgoals": [
+      "Multiply across the completed equality",
+      "Confirm both products match",
+      "Reduce the completed fraction"
+    ]
+  }
+]

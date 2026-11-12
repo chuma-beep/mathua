@@ -1,0 +1,19 @@
+{
+  "concept": "frac.mixed.compare_whole",
+  "setup": "Two mixed numbers are compared.",
+  "steps": [
+    {
+      "fact": "w1",
+      "say": "The first mixed number has whole part [[w1]] and the second has whole part [[w2]]."
+    },
+    {
+      "fact": "",
+      "say": "Comparing the whole parts first settles most cases, because a larger whole part makes a larger number."
+    },
+    {
+      "fact": "",
+      "say": "When the whole parts are equal the fractional parts decide, and cross multiplication compares them exactly."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

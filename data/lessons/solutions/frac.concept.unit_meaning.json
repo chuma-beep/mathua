@@ -1,0 +1,15 @@
+{
+  "concept": "frac.concept.unit_meaning",
+  "setup": "A unit fraction is one equal part of a whole.",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "The denominator [[n]] says the whole is split into [[n]] equal parts."
+    },
+    {
+      "fact": "n",
+      "say": "One part is 1/[[n]] of the whole, so counting parts and counting wholes are two views of the same split."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Round the dividend and divisor",
+    "section": "The method",
+    "subgoals": [
+      "Round both fractions to benchmarks",
+      "Divide the rounded values",
+      "Note the direction of each rounding"
+    ]
+  },
+  {
+    "label": "Seven eighths divided by one quarter",
+    "section": "A worked quotient",
+    "subgoals": [
+      "Round the dividend to one",
+      "Divide by the benchmark divisor",
+      "Compare with the exact quotient"
+    ]
+  },
+  {
+    "label": "Bracket the quotient",
+    "section": "Checking the result",
+    "subgoals": [
+      "Divide the lower dividend by the upper divisor",
+      "Divide the upper dividend by the lower divisor",
+      "Place the exact quotient between the bounds"
+    ]
+  }
+]

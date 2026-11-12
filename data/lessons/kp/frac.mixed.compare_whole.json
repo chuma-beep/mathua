@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Compare the whole parts first",
+    "section": "The method",
+    "subgoals": [
+      "Read the whole part of each mixed number",
+      "Compare the whole parts",
+      "Compare fractions only when the wholes match"
+    ]
+  },
+  {
+    "label": "Two pairs with different wholes",
+    "section": "A worked example",
+    "subgoals": [
+      "Compare three and two fifths with three and five eighths",
+      "Compare four and one eighth with three and seven eighths",
+      "State the order of the four values"
+    ]
+  },
+  {
+    "label": "Fractions and decimals",
+    "section": "Checking the result",
+    "subgoals": [
+      "Cross multiply the fractional parts",
+      "Write each mixed number as a decimal",
+      "Confirm the order both ways"
+    ]
+  }
+]

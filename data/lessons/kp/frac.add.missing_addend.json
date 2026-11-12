@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Subtract the known addend",
+    "section": "The method",
+    "subgoals": [
+      "Name the unknown addend",
+      "Subtract the known addend from the total",
+      "Reduce the difference"
+    ]
+  },
+  {
+    "label": "An unknown plus three eighths",
+    "section": "A worked sum",
+    "subgoals": [
+      "Write the total over eighths",
+      "Subtract the known numerator",
+      "Reduce the result"
+    ]
+  },
+  {
+    "label": "Add the parts back",
+    "section": "Checking the result",
+    "subgoals": [
+      "Add the found addend to the known one",
+      "Confirm the original total",
+      "Check with a second denominator"
+    ]
+  }
+]

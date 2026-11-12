@@ -1,0 +1,19 @@
+{
+  "concept": "frac.mult.mixed_improper",
+  "setup": "A mixed number is multiplied by a fraction.",
+  "steps": [
+    {
+      "fact": "w",
+      "say": "The mixed number combines [[w]] whole units with the fraction [[a]]/[[b]]."
+    },
+    {
+      "fact": "",
+      "say": "Writing it as an improper fraction multiplies [[w]] by [[b]] and adds [[a]], all over [[b]]."
+    },
+    {
+      "fact": "",
+      "say": "The two fractions are then multiplied straight across, numerators together and denominators together."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

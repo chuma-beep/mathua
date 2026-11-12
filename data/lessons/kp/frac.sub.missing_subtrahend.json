@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Subtract the difference",
+    "section": "The method",
+    "subgoals": [
+      "Name the unknown subtrahend",
+      "Subtract the difference from the minuend",
+      "Reduce the result"
+    ]
+  },
+  {
+    "label": "Seven ninths minus an unknown",
+    "section": "A worked difference",
+    "subgoals": [
+      "Subtract the stated difference",
+      "Keep the denominator ninths",
+      "Repeat with a different denominator"
+    ]
+  },
+  {
+    "label": "Restore the difference",
+    "section": "Checking the result",
+    "subgoals": [
+      "Subtract the found value from the minuend",
+      "Confirm the stated difference",
+      "Check that the result is not negative"
+    ]
+  }
+]

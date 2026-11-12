@@ -1,0 +1,19 @@
+{
+  "concept": "frac.add.unit_fractions",
+  "setup": "The question works with unit fractions, which have numerator 1.",
+  "steps": [
+    {
+      "fact": "",
+      "say": "A unit fraction has 1 on top, so its denominator alone names its size."
+    },
+    {
+      "fact": "",
+      "say": "Adding unit fractions means rewriting them over a common denominator before the numerators can be added."
+    },
+    {
+      "fact": "",
+      "say": "The least common denominator is the smallest number that both denominators divide into."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

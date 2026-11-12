@@ -1,0 +1,19 @@
+{
+  "concept": "frac.div.estimate_quotient",
+  "setup": "A quotient of two fractions is estimated.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The dividend is [[a]]/[[b]] and the divisor is [[c]]/[[d]]."
+    },
+    {
+      "fact": "",
+      "say": "The quotient answers how many copies of the divisor fit into the dividend."
+    },
+    {
+      "fact": "",
+      "say": "Rewriting the division as multiplication by the reciprocal places the quotient on the same scale as whole numbers and benchmarks."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

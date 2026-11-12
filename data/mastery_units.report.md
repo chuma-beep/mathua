@@ -12,15 +12,15 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 2962 |
+| Total concepts | 3015 |
 | Total units | 165 |
 | Minimum unit size | 1 |
 | Median unit size | 13 |
 | Maximum unit size | 82 |
 | Singleton units | 21 |
-| Units with <= 3 concepts | 39 |
-| Units with > 25 concepts | 51 |
-| Units with > 50 concepts | 10 |
+| Units with <= 3 concepts | 38 |
+| Units with > 25 concepts | 52 |
+| Units with > 50 concepts | 11 |
 | Cross-unit prerequisite edges (derived) | 546 |
 | Backward band edges | 0 |
 
@@ -89,10 +89,10 @@ exists to make concrete.
 | `discrete_math.b8` | discrete_math | 8 | 9 | 2 | 24–26 |
 | `discrete_math.b9` | discrete_math | 9 | 20 | 4 | 27–29 |
 | `discrete_math.b10` | discrete_math | 10 | 1 | 1 | 30–30 |
-| `fractions.b2` | fractions | 2 | 8 | 4 | 6–8 |
-| `fractions.b3` | fractions | 3 | 36 | 9 | 9–11 |
-| `fractions.b4` | fractions | 4 | 20 | 6 | 12–14 |
-| `fractions.b5` | fractions | 5 | 3 | 3 | 15–15 |
+| `fractions.b2` | fractions | 2 | 13 | 4 | 6–8 |
+| `fractions.b3` | fractions | 3 | 65 | 10 | 9–11 |
+| `fractions.b4` | fractions | 4 | 38 | 7 | 12–14 |
+| `fractions.b5` | fractions | 5 | 4 | 3 | 15–16 |
 | `geometry.b0` | geometry | 0 | 8 | 5 | 0–2 |
 | `geometry.b1` | geometry | 1 | 28 | 7 | 3–5 |
 | `geometry.b2` | geometry | 2 | 5 | 3 | 6–8 |
@@ -211,16 +211,16 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 225 | 10 | 56 | 26 | 53 | 31 | 0 |
-| 3 | 165 | 13 | 82 | 21 | 39 | 51 | 0 |
-| 4 | 129 | 18 | 86 | 10 | 24 | 53 | 0 |
-| 5 | 107 | 21 | 104 | 5 | 15 | 49 | 0 |
-| 6 | 99 | 23 | 130 | 7 | 16 | 46 | 0 |
-| 8 | 77 | 33 | 117 | 4 | 11 | 43 | 0 |
-| 10 | 65 | 35 | 145 | 2 | 7 | 35 | 0 |
-| 12 | 64 | 41 | 191 | 1 | 6 | 42 | 0 |
-| 15 | 51 | 53 | 172 | 1 | 3 | 35 | 0 |
-| 20 | 44 | 77 | 145 | 0 | 3 | 32 | 0 |
+| 2 | 226 | 10 | 56 | 27 | 53 | 34 | 0 |
+| 3 | 165 | 13 | 82 | 21 | 38 | 52 | 0 |
+| 4 | 130 | 18 | 86 | 11 | 24 | 54 | 0 |
+| 5 | 107 | 21 | 104 | 5 | 14 | 50 | 0 |
+| 6 | 99 | 24 | 130 | 7 | 16 | 47 | 0 |
+| 8 | 78 | 33 | 117 | 5 | 11 | 43 | 0 |
+| 10 | 65 | 35 | 145 | 2 | 7 | 36 | 0 |
+| 12 | 64 | 41 | 191 | 1 | 6 | 43 | 0 |
+| 15 | 51 | 53 | 172 | 1 | 2 | 35 | 0 |
+| 20 | 44 | 79 | 145 | 0 | 3 | 32 | 0 |
 | 45 | 26 | 120 | 172 | 0 | 0 | 26 | 0 |
 
 **No width is clean.** Small widths fragment, at 3 there are 21 singleton units, which is a
@@ -545,7 +545,7 @@ Unresolvable subdomains:
 `trigonometry.identities`
 `trigonometry.spherical`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2962
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 3015
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings

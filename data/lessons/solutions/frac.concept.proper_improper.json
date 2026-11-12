@@ -1,0 +1,15 @@
+{
+  "concept": "frac.concept.proper_improper",
+  "setup": "The question is about the form of a fraction.",
+  "steps": [
+    {
+      "fact": "",
+      "say": "A proper fraction has a numerator smaller than its denominator, so its value is less than 1."
+    },
+    {
+      "fact": "",
+      "say": "An improper fraction has a numerator at least as large as its denominator, and dividing the numerator by the denominator gives its whole part."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

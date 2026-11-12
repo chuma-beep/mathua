@@ -1,0 +1,19 @@
+{
+  "concept": "frac.equiv.decimal_order",
+  "setup": "Three values are written as tenths so that they can be ordered.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The numerators are [[a]], [[b]] and [[c]], all over the same denominator of 10."
+    },
+    {
+      "fact": "",
+      "say": "With a shared denominator the size of a tenth is fixed, so the numerators decide the order."
+    },
+    {
+      "fact": "",
+      "say": "A decimal written to one place is the same as that many tenths, so it takes its place on the same scale."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

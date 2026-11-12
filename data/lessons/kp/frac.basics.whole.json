@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Any whole number over one",
+    "section": "The definition",
+    "subgoals": [
+      "Write a whole number with denominator one",
+      "Multiply numerator and denominator by the same number",
+      "Keep the value unchanged"
+    ]
+  },
+  {
+    "label": "Five with denominator three",
+    "section": "An example",
+    "subgoals": [
+      "Convert five to fifteenths",
+      "Subtract four thirds from it",
+      "Convert the result back to a mixed number"
+    ]
+  },
+  {
+    "label": "One denominator for a sum",
+    "section": "Why it matters",
+    "subgoals": [
+      "Rewrite a whole number for a common denominator",
+      "Place whole numbers and fractions on one line",
+      "See whole numbers as a subset of the rationals"
+    ]
+  }
+]

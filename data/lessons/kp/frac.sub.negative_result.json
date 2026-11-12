@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Subtract the smaller from the larger",
+    "section": "The method",
+    "subgoals": [
+      "Compare the two fractions",
+      "Subtract in the usual order",
+      "Attach the sign of the larger term"
+    ]
+  },
+  {
+    "label": "Three eighths minus five eighths",
+    "section": "A worked difference",
+    "subgoals": [
+      "Subtract the numerators",
+      "Reduce the negative result",
+      "Repeat with unlike denominators"
+    ]
+  },
+  {
+    "label": "Add the difference back",
+    "section": "Checking the result",
+    "subgoals": [
+      "Add the result to the subtrahend",
+      "Confirm the minuend",
+      "Place the result left of zero"
+    ]
+  }
+]

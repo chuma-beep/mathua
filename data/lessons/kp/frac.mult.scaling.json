@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Compare the multiplier with one",
+    "section": "The method",
+    "subgoals": [
+      "Identify the multiplier",
+      "Decide whether it is below, at or above one",
+      "Predict the direction of the change"
+    ]
+  },
+  {
+    "label": "Twelve scaled three ways",
+    "section": "A worked product",
+    "subgoals": [
+      "Multiply twelve by three quarters",
+      "Multiply twelve by five quarters",
+      "Multiply twelve by one"
+    ]
+  },
+  {
+    "label": "The ratio of product to start",
+    "section": "Checking the result",
+    "subgoals": [
+      "Divide each product by twelve",
+      "Compare each ratio with the multiplier",
+      "Confirm the direction of each change"
+    ]
+  }
+]

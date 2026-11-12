@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Choose one form for both terms",
+    "section": "The method",
+    "subgoals": [
+      "Decide between fraction and decimal form",
+      "Convert the other term",
+      "Add in the chosen form"
+    ]
+  },
+  {
+    "label": "Three quarters plus four tenths",
+    "section": "A worked sum",
+    "subgoals": [
+      "Convert the decimal to a fraction",
+      "Add over twentieths",
+      "Write the answer in both forms"
+    ]
+  },
+  {
+    "label": "Subtract one term",
+    "section": "Checking the result",
+    "subgoals": [
+      "Subtract the decimal from the total",
+      "Confirm the fraction returns",
+      "Check the decimal places"
+    ]
+  }
+]

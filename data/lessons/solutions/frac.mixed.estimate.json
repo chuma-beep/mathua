@@ -1,0 +1,19 @@
+{
+  "concept": "frac.mixed.estimate",
+  "setup": "Two mixed numbers are combined and the result is estimated.",
+  "steps": [
+    {
+      "fact": "w1",
+      "say": "The mixed numbers have whole parts [[w1]] and [[w2]]."
+    },
+    {
+      "fact": "",
+      "say": "The whole parts carry most of the size, so adding or subtracting them first gives a close estimate."
+    },
+    {
+      "fact": "",
+      "say": "The fractional parts then adjust that estimate, and the nearest whole number is reported."
+    }
+  ],
+  "answer": "So the estimate is [[answer]]."
+}

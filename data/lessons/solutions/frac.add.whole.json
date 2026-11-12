@@ -1,0 +1,19 @@
+{
+  "concept": "frac.add.whole",
+  "setup": "A whole number is being combined with a fraction.",
+  "steps": [
+    {
+      "fact": "w",
+      "say": "The whole number [[w]] is worth [[w]] full units, and each unit can be written over the denominator."
+    },
+    {
+      "fact": "b",
+      "say": "Every whole contributes [[b]]/[[b]], so the denominator [[b]] stays the same while the count of parts grows."
+    },
+    {
+      "fact": "",
+      "say": "Adding the whole part to the fractional part means counting all the parts over that one denominator."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

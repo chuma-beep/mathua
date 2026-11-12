@@ -1,0 +1,19 @@
+{
+  "concept": "frac.mult.estimate_product",
+  "setup": "Two fractions are multiplied and the product is estimated.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The factors are [[a]]/[[b]] and [[c]]/[[d]]."
+    },
+    {
+      "fact": "",
+      "say": "Each factor lies between 0 and 1, so the product is smaller than either factor."
+    },
+    {
+      "fact": "",
+      "say": "Rounding the factors to nearby benchmarks places the product against 0, 1/2 or 1."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

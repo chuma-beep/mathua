@@ -1,0 +1,19 @@
+{
+  "concept": "frac.equiv.benchmark_choice",
+  "setup": "A fraction is being compared with the benchmarks 0, 1/2 and 1.",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "The numerator [[n]] measures how many equal parts are taken while the denominator fixes the size of each part."
+    },
+    {
+      "fact": "",
+      "say": "Half of the denominator marks the halfway point: a numerator below it sits nearer 0 and a numerator above it sits nearer 1."
+    },
+    {
+      "fact": "",
+      "say": "Comparing the distance to each benchmark shows which one is closest."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

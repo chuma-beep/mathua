@@ -1,0 +1,19 @@
+{
+  "concept": "frac.mixed.borrow_twice",
+  "setup": "One mixed number is subtracted from another and a whole must be borrowed.",
+  "steps": [
+    {
+      "fact": "w1",
+      "say": "The first mixed number is [[w1]] and [[a]]/[[b]], and the second is [[w2]] and [[c]]/[[d]]."
+    },
+    {
+      "fact": "",
+      "say": "Borrow one whole from the whole part and add it to the fraction as [[b]]/[[b]]."
+    },
+    {
+      "fact": "",
+      "say": "After borrowing, the whole part drops by one and the fractional numerator grows by [[b]], so the subtraction can proceed."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Convert before multiplying",
+    "section": "The method",
+    "subgoals": [
+      "Write each mixed number as an improper fraction",
+      "Multiply the improper fractions",
+      "Convert the product back"
+    ]
+  },
+  {
+    "label": "Two and a half times one and a third",
+    "section": "A worked product",
+    "subgoals": [
+      "Convert both factors to improper fractions",
+      "Multiply and reduce",
+      "Write the result as a mixed number"
+    ]
+  },
+  {
+    "label": "Divide by one factor",
+    "section": "Checking the result",
+    "subgoals": [
+      "Divide the product by the first factor",
+      "Confirm the second factor",
+      "Check the size against an estimate"
+    ]
+  }
+]

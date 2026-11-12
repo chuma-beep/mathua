@@ -1,0 +1,19 @@
+{
+  "concept": "frac.sub.negative_result",
+  "setup": "The first fraction is smaller than the second, so the subtraction crosses zero.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The first fraction is [[a]]/[[b]] and the second is [[c]]/[[d]]."
+    },
+    {
+      "fact": "",
+      "say": "Over a common denominator the two numerators can be compared directly, and the first is the smaller."
+    },
+    {
+      "fact": "",
+      "say": "Subtracting the larger from the smaller gives a negative signed numerator, whose magnitude is the size of the gap."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

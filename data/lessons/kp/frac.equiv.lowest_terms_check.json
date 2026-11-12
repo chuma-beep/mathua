@@ -1,0 +1,29 @@
+[
+  {
+    "label": "No shared factor above one",
+    "section": "The rule",
+    "subgoals": [
+      "Find the factors of the numerator",
+      "Find the factors of the denominator",
+      "Decide whether any factor apart from one is shared"
+    ]
+  },
+  {
+    "label": "Three fractions tested",
+    "section": "A worked example",
+    "subgoals": [
+      "Simplify thirty five over forty",
+      "Test fifteen over twenty eight",
+      "Simplify twenty one over twenty seven"
+    ]
+  },
+  {
+    "label": "Primes up to the square root",
+    "section": "Checking the result",
+    "subgoals": [
+      "Test only primes up to the square root",
+      "Confirm the reduced form is unchanged",
+      "State the criterion in one sentence"
+    ]
+  }
+]

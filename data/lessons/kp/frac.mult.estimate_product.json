@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Round both factors",
+    "section": "The method",
+    "subgoals": [
+      "Choose a benchmark for each factor",
+      "Multiply the benchmarks",
+      "Note the direction of each rounding"
+    ]
+  },
+  {
+    "label": "Eleven twelfths times five eighths",
+    "section": "A worked product",
+    "subgoals": [
+      "Round the factors to one and one half",
+      "Multiply the exact fractions",
+      "Compare the estimate with the exact value"
+    ]
+  },
+  {
+    "label": "Bracket the product",
+    "section": "Checking the result",
+    "subgoals": [
+      "Multiply the lower bounds",
+      "Multiply the upper bounds",
+      "Confirm the exact value lies between"
+    ]
+  }
+]

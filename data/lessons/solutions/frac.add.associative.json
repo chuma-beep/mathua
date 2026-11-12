@@ -1,0 +1,19 @@
+{
+  "concept": "frac.add.associative",
+  "setup": "Three fractions with the same denominator are added.",
+  "steps": [
+    {
+      "fact": "b",
+      "say": "All three fractions share the denominator [[b]], so every part has the same size."
+    },
+    {
+      "fact": "a",
+      "say": "The numerators [[a]], [[c]] and [[e]] can be added in any order."
+    },
+    {
+      "fact": "",
+      "say": "Grouping the terms differently does not change the total, which is the associative property."
+    }
+  ],
+  "answer": "So the value asked for is [[answer]]."
+}

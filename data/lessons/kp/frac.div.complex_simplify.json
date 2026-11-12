@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Multiply by the reciprocal of the denominator",
+    "section": "The method",
+    "subgoals": [
+      "Identify the numerator fraction",
+      "Identify the denominator fraction",
+      "Multiply the numerator by the reciprocal of the denominator"
+    ]
+  },
+  {
+    "label": "Three quarters over nine eighths",
+    "section": "A worked quotient",
+    "subgoals": [
+      "Invert the lower fraction",
+      "Multiply and cancel",
+      "Reduce the result"
+    ]
+  },
+  {
+    "label": "Rebuild the numerator",
+    "section": "Checking the result",
+    "subgoals": [
+      "Multiply the result by the lower fraction",
+      "Confirm the upper fraction",
+      "Check that the denominator is nonzero"
+    ]
+  }
+]

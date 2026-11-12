@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Percent as a fraction of one hundred",
+    "section": "The rule",
+    "subgoals": [
+      "Write the percent over one hundred",
+      "Reduce to a familiar fraction",
+      "Use the common equivalents as landmarks"
+    ]
+  },
+  {
+    "label": "Three eighths against seven twentieths",
+    "section": "A worked example",
+    "subgoals": [
+      "Convert three eighths to a percent",
+      "Convert seven twentieths to a percent",
+      "Order the two values"
+    ]
+  },
+  {
+    "label": "Convert the percent back",
+    "section": "Checking the result",
+    "subgoals": [
+      "Write the percent over one hundred",
+      "Reduce the resulting fraction",
+      "Confirm the original fraction returns"
+    ]
+  }
+]

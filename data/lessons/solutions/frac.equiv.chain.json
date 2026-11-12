@@ -1,0 +1,19 @@
+{
+  "concept": "frac.equiv.chain",
+  "setup": "A chain of equivalent fractions is being completed.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The chain starts at [[a]]/[[b]]."
+    },
+    {
+      "fact": "k",
+      "say": "Multiplying the numerator and the denominator by the same number [[k]] produces an equivalent fraction."
+    },
+    {
+      "fact": "",
+      "say": "The value of the fraction does not change, only the number of parts and the size of each part."
+    }
+  ],
+  "answer": "So the missing value in the chain is [[answer]]."
+}

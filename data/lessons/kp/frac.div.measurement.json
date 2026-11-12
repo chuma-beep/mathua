@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Count groups of a given size",
+    "section": "The method",
+    "subgoals": [
+      "Identify the size of one group",
+      "Divide the total by that size",
+      "Interpret the quotient as a number of groups"
+    ]
+  },
+  {
+    "label": "Two and a half divided by one quarter",
+    "section": "A worked quotient",
+    "subgoals": [
+      "Convert the mixed number to quarters",
+      "Divide by the group size",
+      "State what the quotient counts"
+    ]
+  },
+  {
+    "label": "Multiply the count by the group size",
+    "section": "Checking the result",
+    "subgoals": [
+      "Multiply the number of groups by one quarter",
+      "Confirm the original total",
+      "Check a whole number case"
+    ]
+  }
+]

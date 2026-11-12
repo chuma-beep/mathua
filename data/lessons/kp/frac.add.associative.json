@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Group compatible fractions",
+    "section": "The method",
+    "subgoals": [
+      "Look for pairs with a sum of one",
+      "Reorder the addends",
+      "Add the grouped pairs"
+    ]
+  },
+  {
+    "label": "One third, two fifths and two thirds",
+    "section": "A worked sum",
+    "subgoals": [
+      "Pair the thirds",
+      "Add the remaining fifth",
+      "Write the mixed result"
+    ]
+  },
+  {
+    "label": "One common denominator",
+    "section": "Checking the result",
+    "subgoals": [
+      "Convert every addend to fifteenths",
+      "Add the numerators in order",
+      "Compare with the grouped result"
+    ]
+  }
+]

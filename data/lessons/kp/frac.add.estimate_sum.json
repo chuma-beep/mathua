@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Round to zero, one half or one",
+    "section": "The method",
+    "subgoals": [
+      "Place each fraction near a benchmark",
+      "Add the benchmarks",
+      "Note whether the rounding went up or down"
+    ]
+  },
+  {
+    "label": "Five eighths and four ninths",
+    "section": "A worked sum",
+    "subgoals": [
+      "Round both fractions to one half",
+      "Add the exact fractions over seventy seconds",
+      "Compare the estimate with the total"
+    ]
+  },
+  {
+    "label": "Bracket the answer",
+    "section": "Checking the result",
+    "subgoals": [
+      "Bound the sum from below",
+      "Bound the sum from above",
+      "Confirm the exact value sits inside"
+    ]
+  }
+]
