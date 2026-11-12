@@ -29,6 +29,14 @@ e2e:
 	cd web/next-app && rm -rf out && npx next build
 	cd web/next-app && npx playwright test
 
+# The frontend half of the CI gate short of Playwright, which needs browsers
+# installed. Run it before a push that touches web/next-app.
+web-ci:
+	cd web/next-app && npm run typecheck
+	cd web/next-app && npm test
+	cd web/next-app && npm run lint
+	cd web/next-app && npm run build
+
 # Prove the browser suite does not depend on a real API. The bundle is normally
 # built against the deployed API (web/next-app/.env.production), so an endpoint no
 # stub claims is answered by production, and a page that waits for that answer can
@@ -51,7 +59,7 @@ e2e-diagnosis:
 	cd web/next-app && rm -rf out && NEXT_PUBLIC_API_URL=http://192.0.2.1:9099 npx next build
 	cd web/next-app && PW_DIAGNOSIS=1 npx playwright test e2e/answer-diagnosis.spec.ts
 
-validate: fmt-check
+validate: fmt-check lint-go
 	python3 scripts/check_duplicate_tests.py
 	go run scripts/validate_graph.go
 	go run ./cmd/validate-mastery-units
@@ -63,6 +71,12 @@ validate: fmt-check
 	python3 scripts/check_ste.py
 	node web/next-app/scripts/build-docs.mjs --check
 	go test ./internal/generator/ -run TestLearnerDomainsHaveSchemas
+
+# The CI gates that have failed after a push, in one local command. It covers
+# the Go suite, the corpus checks, the security scan and the frontend checks;
+# Playwright is the only CI step it cannot mirror locally.
+prepush: fmt-check lint-go test validate web-ci
+	npx --yes aislop@0.16.1 ci
 
 # Strict LaTeX check: runs every math span in the lesson corpus through Compute
 # Engine and reports the malformed ones. Needs node (for the CE dependency) and

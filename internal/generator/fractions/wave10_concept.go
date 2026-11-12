@@ -7,6 +7,7 @@ package fractions
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/chuma-beep/mathua/internal/generator"
 	"github.com/chuma-beep/mathua/internal/mathutil"
@@ -84,19 +85,16 @@ func w10ZeroDenominator(kp int) generator.Problem {
 	switch kp {
 	case 1:
 		zeros := 0
-		parts := ""
+		parts := make([]string, 0, 3)
 		for i := 0; i < 3; i++ {
 			if w10R(1, 2) == 1 {
 				zeros++
-				parts += fmt.Sprintf("x%d/0", i+1)
+				parts = append(parts, fmt.Sprintf("x%d/0", i+1))
 			} else {
-				parts += fmt.Sprintf("x%d/%d", i+1, w10R(2, 9))
-			}
-			if i < 2 {
-				parts += ", "
+				parts = append(parts, fmt.Sprintf("x%d/%d", i+1, w10R(2, 9)))
 			}
 		}
-		return w10Problem(kp, fmt.Sprintf("How many of these expressions are undefined: %s?", parts), zeros,
+		return w10Problem(kp, fmt.Sprintf("How many of these expressions are undefined: %s?", strings.Join(parts, ", ")), zeros,
 			fmt.Sprintf("A fraction is undefined exactly when its denominator is zero, and %d of the three denominators are zero.", zeros), "zeros", zeros)
 	case 2:
 		k := w10R(2, 12)

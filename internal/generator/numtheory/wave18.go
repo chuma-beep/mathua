@@ -148,16 +148,19 @@ func w18GCD(a, b int) int {
 	return a
 }
 
-func w18ExtGCD(a, b int) (int, int, int) {
-	if b == 0 {
-		return a, 1, 0
+func w18ExtGCD(a, b int) (int, int) {
+	oldR, r := a, b
+	oldS, s := 1, 0
+	for r != 0 {
+		q := oldR / r
+		oldR, r = r, oldR-q*r
+		oldS, s = s, oldS-q*s
 	}
-	g, x, y := w18ExtGCD(b, a%b)
-	return g, y, x - (a/b)*y
+	return oldR, oldS
 }
 
 func w18ModInverse(a, m int) int {
-	g, x, _ := w18ExtGCD(((a%m)+m)%m, m)
+	g, x := w18ExtGCD(((a%m)+m)%m, m)
 	if g != 1 {
 		return 0
 	}
