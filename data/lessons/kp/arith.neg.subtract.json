@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Subtract a negative number",
+    "section": "Subtracting a Negative",
+    "subgoals": [
+      "Rewrite the subtraction as addition",
+      "Add the opposite value",
+      "Check the move on a number line"
+    ]
+  },
+  {
+    "label": "Subtract between negatives",
+    "section": "Two Negative Numbers",
+    "subgoals": [
+      "Keep the first number's sign",
+      "Add the opposite of the second",
+      "Avoid flipping both signs"
+    ]
+  },
+  {
+    "label": "Order a signed expression",
+    "section": "Order With Negatives",
+    "subgoals": [
+      "Rewrite every subtraction as addition",
+      "Work from left to right",
+      "Keep positive terms unchanged"
+    ]
+  }
+]

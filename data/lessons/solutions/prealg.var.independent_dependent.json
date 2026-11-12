@@ -1,0 +1,15 @@
+{
+  "concept": "prealg.var.independent_dependent",
+  "setup": "The rule is output = [[rate]] times input + [[start]].",
+  "steps": [
+    {
+      "fact": "rate",
+      "say": "Multiply the input by the rate [[rate]]."
+    },
+    {
+      "fact": "input",
+      "say": "Use the input value [[input]] that the question supplies."
+    }
+  ],
+  "answer": "The output is [[answer]]."
+}

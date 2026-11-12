@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Compare decimals place by place",
+    "section": "Comparing Decimals Digit by Digit",
+    "subgoals": [
+      "Line up the decimal points",
+      "Pad the shorter decimal with zeros",
+      "Let the first differing place decide"
+    ]
+  },
+  {
+    "label": "Order a decimal list",
+    "section": "Ordering a List of Decimals",
+    "subgoals": [
+      "Sort by the highest place value first",
+      "Break ties with the next place",
+      "Check each neighboring pair"
+    ]
+  },
+  {
+    "label": "Order signed decimals",
+    "section": "Decimals Below Zero",
+    "subgoals": [
+      "Locate each negative decimal left of zero",
+      "Treat the value farther from zero as smaller",
+      "Place positives after negatives"
+    ]
+  }
+]

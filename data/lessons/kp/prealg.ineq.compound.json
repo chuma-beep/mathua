@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Trap a variable between bounds",
+    "section": "Between Two Bounds",
+    "subgoals": [
+      "Apply each operation to all three parts",
+      "Keep the inequality directions",
+      "Write the result as one interval"
+    ]
+  },
+  {
+    "label": "Read endpoint symbols",
+    "section": "Including the Endpoints",
+    "subgoals": [
+      "Distinguish strict from inclusive signs",
+      "Decide whether each endpoint counts",
+      "Measure the interval length"
+    ]
+  },
+  {
+    "label": "Count integers in an interval",
+    "section": "Counting Integers in an Interval",
+    "subgoals": [
+      "List the integers from the bounds",
+      "Add one for the inclusive endpoint",
+      "Adjust the count for strict signs"
+    ]
+  }
+]

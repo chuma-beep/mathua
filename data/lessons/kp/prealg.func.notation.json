@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Read f of x",
+    "section": "Reading f of x",
+    "subgoals": [
+      "Name the rule and its input",
+      "Read f(4) as an output",
+      "Avoid treating f as a multiplier"
+    ]
+  },
+  {
+    "label": "Evaluate function notation",
+    "section": "Evaluating Function Notation",
+    "subgoals": [
+      "Replace every x with the input",
+      "Keep brackets around negatives",
+      "Simplify by the order of operations"
+    ]
+  },
+  {
+    "label": "Solve for an input",
+    "section": "Solving f of x for an Input",
+    "subgoals": [
+      "Set the rule equal to the output",
+      "Solve the resulting equation",
+      "Report the answer as an input"
+    ]
+  }
+]

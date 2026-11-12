@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Read a whole power of ten",
+    "section": "Ten to a Whole Power",
+    "subgoals": [
+      "Expand the power as repeated tens",
+      "Count the zeros in the answer",
+      "Match zeros to the exponent"
+    ]
+  },
+  {
+    "label": "Explain the zero power",
+    "section": "The Zero and First Powers",
+    "subgoals": [
+      "Read the first power as ten",
+      "Divide equal powers to reach zero",
+      "Accept that ten to zero is one"
+    ]
+  },
+  {
+    "label": "Multiply powers of ten",
+    "section": "Multiplying Powers of Ten",
+    "subgoals": [
+      "Add the exponents",
+      "Multiply the coefficients separately",
+      "Rewrite in standard form"
+    ]
+  }
+]

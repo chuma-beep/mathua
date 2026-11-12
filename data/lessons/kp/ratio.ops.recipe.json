@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Scale servings up",
+    "section": "Scaling Servings Up",
+    "subgoals": [
+      "Divide new servings by old servings",
+      "Multiply each ingredient amount",
+      "Expect every amount to grow"
+    ]
+  },
+  {
+    "label": "Scale servings down",
+    "section": "Scaling Servings Down",
+    "subgoals": [
+      "Build a factor below one",
+      "Reduce each ingredient amount",
+      "Convert tiny measures to millilitres"
+    ]
+  },
+  {
+    "label": "Find the scale factor",
+    "section": "Finding the Scale Factor",
+    "subgoals": [
+      "Divide the new quantity by the old",
+      "Multiply every ingredient by it",
+      "Check one amount against a rough double"
+    ]
+  }
+]

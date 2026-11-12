@@ -1,0 +1,15 @@
+{
+  "concept": "prealg.ineq.compound",
+  "setup": "The compound inequality uses the bounds [[lo]] and [[hi]].",
+  "steps": [
+    {
+      "fact": "lo",
+      "say": "Start at the lower bound [[lo]] and list the integers from there."
+    },
+    {
+      "fact": "hi",
+      "say": "Stop at the upper bound [[hi]] and count how many integers the interval contains."
+    }
+  ],
+  "answer": "There are [[answer]] integers in the interval."
+}

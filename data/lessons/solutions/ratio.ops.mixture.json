@@ -1,0 +1,15 @@
+{
+  "concept": "ratio.ops.mixture",
+  "setup": "Paint is mixed in the ratio [[part_a]] to [[part_b]], and the batch totals [[total]].",
+  "steps": [
+    {
+      "fact": "part_a",
+      "say": "Add the two ratio numbers to find the number of equal parts."
+    },
+    {
+      "fact": "part_b",
+      "say": "Take the share that belongs to the part the question names."
+    }
+  ],
+  "answer": "The amount is [[answer]]."
+}

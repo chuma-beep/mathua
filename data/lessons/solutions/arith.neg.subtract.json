@@ -1,0 +1,15 @@
+{
+  "concept": "arith.neg.subtract",
+  "setup": "Subtract the negative value using [[a]] and [[b]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Rewrite subtracting a negative as adding the positive."
+    },
+    {
+      "fact": "b",
+      "say": "Combine the two signed values, keeping the sign of the larger magnitude."
+    }
+  ],
+  "answer": "The result is [[answer]]."
+}

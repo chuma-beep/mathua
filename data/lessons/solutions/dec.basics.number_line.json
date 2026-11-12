@@ -1,0 +1,15 @@
+{
+  "concept": "dec.basics.number_line",
+  "setup": "The point sits at [[value]] on the number line.",
+  "steps": [
+    {
+      "fact": "base",
+      "say": "The integer just below the point is [[base]]."
+    },
+    {
+      "fact": "tenths",
+      "say": "Counting up from [[base]], the point is [[tenths]] tenths along."
+    }
+  ],
+  "answer": "So the point is [[answer]] tenths above the lower integer."
+}

@@ -1,0 +1,15 @@
+{
+  "concept": "prealg.ineq.check",
+  "setup": "Test x = [[x]] in the inequality built from [[a]], [[b]] and [[c]].",
+  "steps": [
+    {
+      "fact": "x",
+      "say": "Substitute [[x]] for x."
+    },
+    {
+      "fact": "a",
+      "say": "Evaluate the left side and compare it with the right side."
+    }
+  ],
+  "answer": "The answer is [[answer]], where 1 means yes and 0 means no."
+}

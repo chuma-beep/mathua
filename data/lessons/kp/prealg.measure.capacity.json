@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Convert cups to quarts",
+    "section": "Cups, Pints, and Quarts",
+    "subgoals": [
+      "Recall two cups per pint",
+      "Recall four cups per quart",
+      "Divide for a larger unit"
+    ]
+  },
+  {
+    "label": "Convert quarts to gallons",
+    "section": "Quarts and Gallons",
+    "subgoals": [
+      "Recall four quarts per gallon",
+      "Divide quarts by four",
+      "Multiply gallons by four"
+    ]
+  },
+  {
+    "label": "Convert a mixed capacity",
+    "section": "Converting a Capacity",
+    "subgoals": [
+      "Choose one target unit",
+      "Convert each part into it",
+      "Add the converted parts"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Read absolute value as distance",
+    "section": "Distance From Zero",
+    "subgoals": [
+      "Interpret the absolute value as a distance",
+      "Split the statement in both directions",
+      "Write the compound interval"
+    ]
+  },
+  {
+    "label": "Split a shifted inequality",
+    "section": "Strict Absolute Value Inequalities",
+    "subgoals": [
+      "Identify the centre of the distance",
+      "Choose an interval or two rays",
+      "Keep strict signs on both bounds"
+    ]
+  },
+  {
+    "label": "Count integer solutions",
+    "section": "Counting Integer Solutions",
+    "subgoals": [
+      "Solve the inequality first",
+      "List integers inside the interval",
+      "Exclude strict endpoints"
+    ]
+  }
+]

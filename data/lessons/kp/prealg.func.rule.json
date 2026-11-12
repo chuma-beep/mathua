@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Find the pattern in a table",
+    "section": "Rules From a Table",
+    "subgoals": [
+      "Compare outputs as inputs rise by one",
+      "Check the difference is constant",
+      "Reject tables that are not linear"
+    ]
+  },
+  {
+    "label": "Find the multiplier",
+    "section": "The Multiplier",
+    "subgoals": [
+      "Read the change per step",
+      "Test the multiplier on a row",
+      "Measure the gap to the table value"
+    ]
+  },
+  {
+    "label": "Find the starting value",
+    "section": "The Starting Value",
+    "subgoals": [
+      "Read the output at input zero",
+      "Add the starting value to the rule",
+      "Check a row not used to build it"
+    ]
+  }
+]

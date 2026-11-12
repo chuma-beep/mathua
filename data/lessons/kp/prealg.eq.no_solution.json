@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Solve for one value",
+    "section": "One Solution",
+    "subgoals": [
+      "Collect the variable terms",
+      "Divide by a nonzero coefficient",
+      "Substitute the answer back"
+    ]
+  },
+  {
+    "label": "Recognize no solution",
+    "section": "No Solution",
+    "subgoals": [
+      "Collect and cancel the variable",
+      "Read the leftover statement",
+      "Reject a false statement"
+    ]
+  },
+  {
+    "label": "Recognize an identity",
+    "section": "Infinitely Many Solutions",
+    "subgoals": [
+      "Simplify both sides",
+      "Read the leftover statement",
+      "Accept a true statement for every value"
+    ]
+  }
+]

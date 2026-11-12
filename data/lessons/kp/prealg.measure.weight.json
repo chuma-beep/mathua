@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Convert ounces and pounds",
+    "section": "Ounces and Pounds",
+    "subgoals": [
+      "Multiply pounds by sixteen",
+      "Divide ounces by sixteen",
+      "Keep the remainder in ounces"
+    ]
+  },
+  {
+    "label": "Convert grams and kilograms",
+    "section": "Grams and Kilograms",
+    "subgoals": [
+      "Move the decimal three places",
+      "Multiply kilograms by one thousand",
+      "Divide grams by one thousand"
+    ]
+  },
+  {
+    "label": "Convert pounds and tons",
+    "section": "Pounds and Tons",
+    "subgoals": [
+      "Multiply tons by two thousand",
+      "Divide pounds by two thousand",
+      "Keep tons and tonnes apart"
+    ]
+  }
+]

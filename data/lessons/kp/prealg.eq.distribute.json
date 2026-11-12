@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Distribute before solving",
+    "section": "Distributing Before Solving",
+    "subgoals": [
+      "Multiply each term inside the bracket",
+      "Move the constant term",
+      "Divide by the coefficient"
+    ]
+  },
+  {
+    "label": "Distribute a negative multiplier",
+    "section": "A Negative Multiplier",
+    "subgoals": [
+      "Change the sign of every inside term",
+      "Solve the two step equation",
+      "Check with the bracketed value"
+    ]
+  },
+  {
+    "label": "Finish a two step equation",
+    "section": "Two Steps After Distributing",
+    "subgoals": [
+      "Simplify after distributing",
+      "Undo subtraction then multiplication",
+      "Substitute the answer back"
+    ]
+  }
+]

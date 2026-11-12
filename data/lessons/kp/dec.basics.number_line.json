@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Read tenths on the line",
+    "section": "Reading Tenths on a Number Line",
+    "subgoals": [
+      "Divide the unit interval into ten equal parts",
+      "Count steps to the right of zero",
+      "Name the decimal at the marked point"
+    ]
+  },
+  {
+    "label": "Place a decimal between integers",
+    "section": "Locating a Decimal Between Two Integers",
+    "subgoals": [
+      "Find the two integers that bound the value",
+      "Split the interval into tenths",
+      "Move the right number of steps from the lower integer"
+    ]
+  },
+  {
+    "label": "Measure between two decimals",
+    "section": "Distance Between Decimal Points",
+    "subgoals": [
+      "Subtract the smaller position from the larger",
+      "Count the steps across whole numbers",
+      "Report the distance as a positive value"
+    ]
+  }
+]

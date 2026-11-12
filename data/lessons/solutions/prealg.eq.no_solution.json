@@ -1,0 +1,15 @@
+{
+  "concept": "prealg.eq.no_solution",
+  "setup": "Compare [[a]]x + [[b]] with [[c]]x + [[d]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Look first at the coefficients of x."
+    },
+    {
+      "fact": "b",
+      "say": "If the coefficients match, compare the constants to decide between no solution and every number."
+    }
+  ],
+  "answer": "The number of solutions is [[answer]], where 2 means infinitely many."
+}

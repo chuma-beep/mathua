@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Find mass from density",
+    "section": "Mass From Density and Volume",
+    "subgoals": [
+      "Multiply density by volume",
+      "Carry the units through the product",
+      "Report the mass in grams"
+    ]
+  },
+  {
+    "label": "Find volume from mass",
+    "section": "Volume From Mass and Density",
+    "subgoals": [
+      "Divide mass by density",
+      "Check the inverted units",
+      "Write each unit beside its number"
+    ]
+  },
+  {
+    "label": "Find density from mass and volume",
+    "section": "Density From Mass and Volume",
+    "subgoals": [
+      "Divide mass by volume",
+      "Attach grams per cubic centimetre",
+      "Compare with known densities"
+    ]
+  }
+]

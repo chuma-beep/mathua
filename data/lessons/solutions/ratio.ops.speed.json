@@ -1,0 +1,15 @@
+{
+  "concept": "ratio.ops.speed",
+  "setup": "A vehicle moves at a steady rate of [[rate]] for [[time]] units of time.",
+  "steps": [
+    {
+      "fact": "rate",
+      "say": "Distance equals rate multiplied by time."
+    },
+    {
+      "fact": "distance",
+      "say": "The full trip covers [[distance]] distance units."
+    }
+  ],
+  "answer": "The value the question asks for is [[answer]]."
+}

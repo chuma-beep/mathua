@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Find a total cost",
+    "section": "Finding a Total Cost",
+    "subgoals": [
+      "Multiply the price by the quantity",
+      "Align the decimal points",
+      "Add the line items"
+    ]
+  },
+  {
+    "label": "Work out change",
+    "section": "Working With Change",
+    "subgoals": [
+      "Subtract the total from the amount paid",
+      "Estimate to catch a misplaced point",
+      "Write the change with two decimal places"
+    ]
+  },
+  {
+    "label": "Add fees to a subtotal",
+    "section": "Combining Price and Fee",
+    "subgoals": [
+      "Compute the subtotal first",
+      "Add shipping and tax",
+      "Subtract the final total from the payment"
+    ]
+  }
+]

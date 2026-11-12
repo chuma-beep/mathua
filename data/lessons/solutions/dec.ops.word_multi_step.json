@@ -1,0 +1,15 @@
+{
+  "concept": "dec.ops.word_multi_step",
+  "setup": "The bill combines [[items]] items at [[price]] each with a fee or adjustment of [[fee]].",
+  "steps": [
+    {
+      "fact": "items",
+      "say": "Multiply the quantity by the unit price first."
+    },
+    {
+      "fact": "fee",
+      "say": "Then apply the fee or adjustment of [[fee]], adding or subtracting as the story says."
+    }
+  ],
+  "answer": "The amount the question asks for is [[answer]]."
+}

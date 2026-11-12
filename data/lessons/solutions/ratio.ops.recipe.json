@@ -1,0 +1,15 @@
+{
+  "concept": "ratio.ops.recipe",
+  "setup": "A recipe for [[servings]] servings uses [[cups]] cups of the main ingredient.",
+  "steps": [
+    {
+      "fact": "servings",
+      "say": "Divide to find the amount used by one serving."
+    },
+    {
+      "fact": "other_servings",
+      "say": "Multiply that amount by [[other_servings]] to reach the new batch size."
+    }
+  ],
+  "answer": "The scaled quantity is [[answer]]."
+}

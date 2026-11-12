@@ -1,0 +1,15 @@
+{
+  "concept": "prealg.measure.area_units",
+  "setup": "Convert [[quantity]] square units using the factor [[factor]].",
+  "steps": [
+    {
+      "fact": "quantity",
+      "say": "Multiply the quantity [[quantity]] by the factor for square units."
+    },
+    {
+      "fact": "factor",
+      "say": "A square unit conversion squares the linear factor, which gives [[factor]]."
+    }
+  ],
+  "answer": "The converted area is [[answer]]."
+}

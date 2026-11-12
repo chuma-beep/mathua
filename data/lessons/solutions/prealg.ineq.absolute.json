@@ -1,0 +1,15 @@
+{
+  "concept": "prealg.ineq.absolute",
+  "setup": "The inequality uses |x| < [[a]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The solutions run from the negative of the bound to the positive bound, so the interval is built around [[a]]."
+    },
+    {
+      "fact": "answer",
+      "say": "Count the integers strictly between the two ends."
+    }
+  ],
+  "answer": "There are [[answer]] integer solutions."
+}

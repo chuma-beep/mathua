@@ -1,0 +1,15 @@
+{
+  "concept": "dec.convert.repeating",
+  "setup": "The repeating block is [[digit]] and the matching denominator is [[denominator]].",
+  "steps": [
+    {
+      "fact": "digit",
+      "say": "Put the repeating block in the numerator, so the numerator starts as [[digit]]."
+    },
+    {
+      "fact": "denominator",
+      "say": "A repeating decimal needs one 9 in the denominator for each digit in its block, which gives [[denominator]]."
+    }
+  ],
+  "answer": "The numerator is [[answer]]."
+}

@@ -1,0 +1,15 @@
+{
+  "concept": "prealg.measure.capacity",
+  "setup": "Convert [[quantity]] units using the factor [[factor]].",
+  "steps": [
+    {
+      "fact": "quantity",
+      "say": "Multiply the quantity [[quantity]] by the conversion factor."
+    },
+    {
+      "fact": "factor",
+      "say": "The factor from the smaller unit to the larger unit, or the reverse, is [[factor]]."
+    }
+  ],
+  "answer": "The converted quantity is [[answer]]."
+}

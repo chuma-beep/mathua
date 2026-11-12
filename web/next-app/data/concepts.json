@@ -33305,6 +33305,446 @@
     "subdomain": "prealgebra.measurement"
   },
   {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "dec.basics.number_line",
+    "label": "Decimals on a number line",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "dec.basics.compare"
+    ],
+    "subdomain": "prealgebra.decimals"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "dec.ops.compare_order",
+    "label": "Ordering decimals",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "dec.basics.compare"
+    ],
+    "subdomain": "prealgebra.decimals"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "dec.convert.repeating",
+    "label": "Repeating decimals as fractions",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "dec.convert.to_frac"
+    ],
+    "subdomain": "prealgebra.decimals"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "dec.ops.word_multi_step",
+    "label": "Multi-step decimal word problems",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "dec.ops.add.word",
+      "dec.ops.mult.word"
+    ],
+    "subdomain": "prealgebra.decimals"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "pct.basics.benchmarks",
+    "label": "Benchmark percentages",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "pct.basics.concept"
+    ],
+    "subdomain": "prealgebra.percentages"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "pct.ops.depreciation",
+    "label": "Depreciation as a percent decrease",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "pct.ops.increase"
+    ],
+    "subdomain": "prealgebra.percentages"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "pct.ops.concentration",
+    "label": "Percentage concentration of a mixture",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "pct.ops.of_number"
+    ],
+    "subdomain": "prealgebra.percentages"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "pct.ops.tip_split",
+    "label": "Splitting a bill that includes a tip",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "pct.ops.tax_tip"
+    ],
+    "subdomain": "prealgebra.percentages"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "ratio.ops.similar_figures",
+    "label": "Ratios in similar figures",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ratio.ops.proportion"
+    ],
+    "subdomain": "prealgebra.ratios"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "ratio.ops.recipe",
+    "label": "Scaling a recipe with ratios",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ratio.ops.proportion"
+    ],
+    "subdomain": "prealgebra.ratios"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "ratio.ops.mixture",
+    "label": "Mixing paint in a given ratio",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ratio.ops.simplify"
+    ],
+    "subdomain": "prealgebra.ratios"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "ratio.ops.speed",
+    "label": "Speed as a unit rate",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ratio.ops.rate"
+    ],
+    "subdomain": "prealgebra.ratios"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "ratio.ops.density",
+    "label": "Density as a rate",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ratio.ops.rate"
+    ],
+    "subdomain": "prealgebra.ratios"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.expr.substitute_negative",
+    "label": "Evaluating expressions at negative values",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.expr.evaluate"
+    ],
+    "subdomain": "prealgebra.variables"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.expr.factor_common",
+    "label": "Factoring out a common factor",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.expr.distribute"
+    ],
+    "subdomain": "prealgebra.variables"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.var.independent_dependent",
+    "label": "Independent and dependent variables",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.func.table"
+    ],
+    "subdomain": "prealgebra.variables"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.func.notation",
+    "label": "Function notation",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.func.table"
+    ],
+    "subdomain": "prealgebra.variables"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.func.rule",
+    "label": "Writing a function rule from a table",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.func.table"
+    ],
+    "subdomain": "prealgebra.variables"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.eq.variables_both_sides",
+    "label": "Equations with variables on both sides",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.eq.two_step"
+    ],
+    "subdomain": "prealgebra.equations"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.eq.distribute",
+    "label": "Equations that need distributing first",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.eq.two_step",
+      "prealg.expr.distribute"
+    ],
+    "subdomain": "prealgebra.equations"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.eq.proportion",
+    "label": "Solving equations that are proportions",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.eq.one_step_mult",
+      "ratio.ops.proportion"
+    ],
+    "subdomain": "prealgebra.equations"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.eq.no_solution",
+    "label": "Equations with no solution or infinitely many solutions",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.eq.variables_both_sides"
+    ],
+    "subdomain": "prealgebra.equations"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.ineq.compound",
+    "label": "Compound inequalities in one variable",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.ineq.two_step"
+    ],
+    "subdomain": "prealgebra.inequalities"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.ineq.absolute",
+    "label": "Absolute value inequalities",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.ineq.one_step",
+      "arith.neg.abs_value"
+    ],
+    "subdomain": "prealgebra.inequalities"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.ineq.check",
+    "label": "Checking a solution to an inequality",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.ineq.one_step"
+    ],
+    "subdomain": "prealgebra.inequalities"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.measure.capacity",
+    "label": "Converting units of capacity",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.measure.convert"
+    ],
+    "subdomain": "prealgebra.measurement"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.measure.weight",
+    "label": "Converting units of weight and mass",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.measure.metric"
+    ],
+    "subdomain": "prealgebra.measurement"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.measure.area_units",
+    "label": "Converting square units",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "prealg.measure.metric",
+      "arith.exp.evaluate"
+    ],
+    "subdomain": "prealgebra.measurement"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.exp.powers_of_ten",
+    "label": "Powers of ten and their exponents",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.exp.evaluate",
+      "arith.place.powers_ten"
+    ],
+    "subdomain": "prealgebra.exponents"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "prealg.exp.expanded_form",
+    "label": "Writing a power in expanded form",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.exp.evaluate"
+    ],
+    "subdomain": "prealgebra.exponents"
+  },
+  {
+    "domain": "prealgebra",
+    "grading_type": "numeric",
+    "id": "arith.neg.subtract",
+    "label": "Subtracting negative numbers",
+    "mastery_threshold": {
+      "avg_time_seconds": 10,
+      "streak": 10
+    },
+    "prerequisites": [
+      "arith.neg.number_line"
+    ],
+    "subdomain": "prealgebra.negatives"
+  },
+  {
     "domain": "precalculus",
     "grading_type": "numeric",
     "id": "precalc.func.transformations",

@@ -1,0 +1,15 @@
+{
+  "concept": "prealg.expr.substitute_negative",
+  "setup": "Evaluate the expression [[a]]x + [[b]] at x = [[x]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Multiply [[a]] by [[x]], keeping the sign of the negative value."
+    },
+    {
+      "fact": "b",
+      "say": "Add [[b]] to that product."
+    }
+  ],
+  "answer": "The value of the expression is [[answer]]."
+}

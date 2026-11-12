@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Find distance from rate",
+    "section": "Distance From Rate and Time",
+    "subgoals": [
+      "Convert time to hours",
+      "Multiply rate by time",
+      "Keep the units consistent"
+    ]
+  },
+  {
+    "label": "Find time from distance",
+    "section": "Time From Distance and Speed",
+    "subgoals": [
+      "Divide distance by speed",
+      "Rearrange the rate relationship",
+      "Check the time looks reasonable"
+    ]
+  },
+  {
+    "label": "Find speed from a trip",
+    "section": "Speed From Distance and Time",
+    "subgoals": [
+      "Divide total distance by total time",
+      "Avoid averaging the speeds",
+      "Attach the correct units"
+    ]
+  }
+]

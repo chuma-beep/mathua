@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Read the parts of a mix",
+    "section": "Parts of a Mixture",
+    "subgoals": [
+      "Add the parts to get the whole",
+      "Divide the total by the parts",
+      "Add the color amounts back"
+    ]
+  },
+  {
+    "label": "Work one part at a time",
+    "section": "One Part at a Time",
+    "subgoals": [
+      "Find the size of one part",
+      "Multiply by each color's parts",
+      "Name the part size as a rate"
+    ]
+  },
+  {
+    "label": "Recover the total from a part",
+    "section": "Total From a Part",
+    "subgoals": [
+      "Divide the given amount by its parts",
+      "Multiply the part size by total parts",
+      "Add the ingredients to confirm"
+    ]
+  }
+]

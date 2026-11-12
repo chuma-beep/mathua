@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Collect variables on one side",
+    "section": "Collecting Variables on One Side",
+    "subgoals": [
+      "Subtract the smaller variable term",
+      "Move the constants to the other side",
+      "Divide by the coefficient"
+    ]
+  },
+  {
+    "label": "Combine repeated variable terms",
+    "section": "Equations With Variables Twice",
+    "subgoals": [
+      "Combine like terms on each side",
+      "Collect the variable on one side",
+      "Solve and simplify"
+    ]
+  },
+  {
+    "label": "Check both sides",
+    "section": "Checking Both Sides",
+    "subgoals": [
+      "Substitute the solution into each side",
+      "Compare the two values",
+      "Recheck the collection step on a mismatch"
+    ]
+  }
+]

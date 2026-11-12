@@ -80,6 +80,8 @@ func Register(reg *generator.Registry) {
 
 	registerBatch(reg)
 	registerWave10(reg)
+	registerWave11A(reg)
+	registerWave11B(reg)
 }
 
 // Decimals

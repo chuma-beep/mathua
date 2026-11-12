@@ -1,0 +1,15 @@
+{
+  "concept": "prealg.expr.factor_common",
+  "setup": "The terms are [[a]] and [[b]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "List the factors of each term, including the numerical ones."
+    },
+    {
+      "fact": "gcf",
+      "say": "The greatest factor the terms share is [[gcf]]."
+    }
+  ],
+  "answer": "The greatest common factor is [[answer]]."
+}

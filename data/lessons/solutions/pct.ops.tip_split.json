@@ -1,0 +1,15 @@
+{
+  "concept": "pct.ops.tip_split",
+  "setup": "A bill of [[bill]] carries a tip of [[tip_percent]] percent and is shared by [[people]] people.",
+  "steps": [
+    {
+      "fact": "bill",
+      "say": "Find the tip by applying [[tip_percent]] to [[bill]]."
+    },
+    {
+      "fact": "people",
+      "say": "Divide by [[people]] when the question asks for one person's share."
+    }
+  ],
+  "answer": "The amount asked for is [[answer]]."
+}

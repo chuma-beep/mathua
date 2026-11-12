@@ -1,0 +1,15 @@
+{
+  "concept": "prealg.exp.expanded_form",
+  "setup": "Evaluate the power with base [[base]] and exponent [[exponent]].",
+  "steps": [
+    {
+      "fact": "base",
+      "say": "The base [[base]] is written as a repeated factor."
+    },
+    {
+      "fact": "exponent",
+      "say": "It appears [[exponent]] times, then the factors are multiplied."
+    }
+  ],
+  "answer": "The value is [[answer]]."
+}

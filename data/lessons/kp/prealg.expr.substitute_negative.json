@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Substitute a negative value",
+    "section": "Substituting a Negative Value",
+    "subgoals": [
+      "Replace the variable with brackets",
+      "Apply the order of operations",
+      "Keep the sign attached to the number"
+    ]
+  },
+  {
+    "label": "Square a negative number",
+    "section": "Squares of Negative Numbers",
+    "subgoals": [
+      "Square the bracketed value",
+      "Compare with the unbracketed square",
+      "Evaluate each term before adding"
+    ]
+  },
+  {
+    "label": "Subtract a product",
+    "section": "Subtracting a Product",
+    "subgoals": [
+      "Multiply before subtracting",
+      "Turn minus a negative into addition",
+      "Write the substitution line first"
+    ]
+  }
+]

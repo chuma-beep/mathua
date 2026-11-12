@@ -1,0 +1,15 @@
+{
+  "concept": "prealg.func.notation",
+  "setup": "The function is f(x) = [[a]]x + [[b]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Substitute the given input wherever x appears."
+    },
+    {
+      "fact": "b",
+      "say": "Apply the multiplier and then the constant."
+    }
+  ],
+  "answer": "The result is [[answer]]."
+}

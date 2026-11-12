@@ -1,0 +1,15 @@
+{
+  "concept": "prealg.eq.proportion",
+  "setup": "The proportion involves the values [[a]], [[b]] and [[c]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Cross multiply so the products sit on opposite sides."
+    },
+    {
+      "fact": "b",
+      "say": "Divide by the coefficient that is attached to x."
+    }
+  ],
+  "answer": "x = [[answer]]."
+}

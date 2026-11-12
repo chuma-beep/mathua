@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Compute percent by volume",
+    "section": "Percent by Volume",
+    "subgoals": [
+      "Divide the solute by the total volume",
+      "Convert the decimal to a percent",
+      "Use the finished volume as the denominator"
+    ]
+  },
+  {
+    "label": "Find the solute amount",
+    "section": "Finding the Amount of Solute",
+    "subgoals": [
+      "Convert the percent to a decimal",
+      "Multiply by the total volume",
+      "Check by dividing back"
+    ]
+  },
+  {
+    "label": "Dilute a solution",
+    "section": "Diluting a Solution",
+    "subgoals": [
+      "Hold the solute amount fixed",
+      "Solve for the new total volume",
+      "Subtract the original volume from the new one"
+    ]
+  }
+]

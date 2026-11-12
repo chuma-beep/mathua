@@ -1,0 +1,15 @@
+{
+  "concept": "ratio.ops.density",
+  "setup": "A material has density [[density]] and volume [[volume]].",
+  "steps": [
+    {
+      "fact": "density",
+      "say": "Mass equals density multiplied by volume."
+    },
+    {
+      "fact": "mass",
+      "say": "The full volume has mass [[mass]]."
+    }
+  ],
+  "answer": "The value the question asks for is [[answer]]."
+}

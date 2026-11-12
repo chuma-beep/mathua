@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Use ten percent as a base",
+    "section": "Ten Percent as a Benchmark",
+    "subgoals": [
+      "Move the decimal point one place left",
+      "Multiply or halve to reach the wanted rate",
+      "Check the result against the whole"
+    ]
+  },
+  {
+    "label": "Use half and a quarter",
+    "section": "Fifty Percent and One Quarter",
+    "subgoals": [
+      "Halve the number for fifty percent",
+      "Halve again for twenty-five percent",
+      "Use the complement for large discounts"
+    ]
+  },
+  {
+    "label": "Find one percent",
+    "section": "One Percent of a Number",
+    "subgoals": [
+      "Move the decimal point two places left",
+      "Multiply by the number of percent",
+      "Add benchmarks for awkward rates"
+    ]
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "concept": "prealg.eq.variables_both_sides",
+  "setup": "Solve [[a]]x + [[b]] = [[c]]x + [[d]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Collect the x terms on one side by subtracting the smaller coefficient."
+    },
+    {
+      "fact": "b",
+      "say": "Move the constants to the other side, then divide by the remaining coefficient."
+    }
+  ],
+  "answer": "x = [[answer]]."
+}

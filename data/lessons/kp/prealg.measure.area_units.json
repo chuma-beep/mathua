@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Convert square feet and yards",
+    "section": "Square Feet and Square Yards",
+    "subgoals": [
+      "Square the linear factor of three",
+      "Divide square feet by nine",
+      "Avoid dividing by three"
+    ]
+  },
+  {
+    "label": "Convert square centimeters and meters",
+    "section": "Square Centimeters and Square Meters",
+    "subgoals": [
+      "Square the factor of one hundred",
+      "Divide square centimeters by ten thousand",
+      "Multiply square meters by ten thousand"
+    ]
+  },
+  {
+    "label": "Convert square inches and feet",
+    "section": "Square Inches and Square Feet",
+    "subgoals": [
+      "Square the factor of twelve",
+      "Divide square inches by one hundred forty-four",
+      "Estimate the size of a square foot"
+    ]
+  }
+]

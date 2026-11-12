@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Cross multiply a proportion",
+    "section": "Cross Multiplication",
+    "subgoals": [
+      "Multiply each numerator by the opposite denominator",
+      "Set the two products equal",
+      "Solve the linear equation"
+    ]
+  },
+  {
+    "label": "Solve for a denominator",
+    "section": "The Variable in the Denominator",
+    "subgoals": [
+      "Cross multiply as usual",
+      "Exclude a zero denominator",
+      "Divide by the coefficient"
+    ]
+  },
+  {
+    "label": "Handle a sum in a numerator",
+    "section": "Proportions With a Sum",
+    "subgoals": [
+      "Cross multiply the expression",
+      "Divide before distributing when possible",
+      "Substitute to confirm both ratios"
+    ]
+  }
+]

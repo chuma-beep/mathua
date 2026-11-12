@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Find the greatest common factor",
+    "section": "Finding the Greatest Common Factor",
+    "subgoals": [
+      "List shared divisors of the coefficients",
+      "Take the smallest shared power of each variable",
+      "Confirm the factor divides every term"
+    ]
+  },
+  {
+    "label": "Factor two terms",
+    "section": "Factoring Two Terms",
+    "subgoals": [
+      "Divide each term by the factor",
+      "Write the factor outside the bracket",
+      "Keep a 1 where a term equals the factor"
+    ]
+  },
+  {
+    "label": "Check by distributing",
+    "section": "Checking by Distributing",
+    "subgoals": [
+      "Multiply the factor by each term",
+      "Compare with the starting expression",
+      "Hunt for a sign error"
+    ]
+  }
+]

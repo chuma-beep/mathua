@@ -1,0 +1,15 @@
+{
+  "concept": "pct.ops.depreciation",
+  "setup": "An item worth [[value]] loses [[rate]] percent.",
+  "steps": [
+    {
+      "fact": "value",
+      "say": "Apply the rate to the starting value [[value]] to get the loss."
+    },
+    {
+      "fact": "rate",
+      "say": "Subtract the loss from the value, and repeat the same step for each further year."
+    }
+  ],
+  "answer": "The amount the question asks for is [[answer]]."
+}

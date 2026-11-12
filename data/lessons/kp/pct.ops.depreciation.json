@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Find one year of value",
+    "section": "Value After One Year",
+    "subgoals": [
+      "Multiply the starting value by the rate",
+      "Subtract the loss",
+      "Confirm with the remaining percent"
+    ]
+  },
+  {
+    "label": "Report the loss",
+    "section": "Finding the Loss",
+    "subgoals": [
+      "Subtract the new value from the old",
+      "Divide the loss by the starting value",
+      "Avoid dividing by the new value"
+    ]
+  },
+  {
+    "label": "Repeat the annual loss",
+    "section": "Repeated Annual Loss",
+    "subgoals": [
+      "Apply the rate to the latest value",
+      "Track the shrinking base",
+      "Compare with the simple percent total"
+    ]
+  }
+]

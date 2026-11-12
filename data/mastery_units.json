@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 2811,
+  "concept_count": 2842,
   "unit_count": 163,
   "units": [
     {
@@ -4129,9 +4129,10 @@
         "prealgebra.negatives"
       ],
       "concept_ids": [
-        "arith.neg.abs_value"
+        "arith.neg.abs_value",
+        "arith.neg.subtract"
       ],
-      "concept_count": 1
+      "concept_count": 2
     },
     {
       "id": "prealgebra.b2",
@@ -4169,19 +4170,24 @@
         "arith.neg.order_ops",
         "dec.basics.compare",
         "dec.basics.expanded",
+        "dec.basics.number_line",
         "dec.basics.place_value",
         "dec.convert.from_frac",
         "dec.ops.add",
         "dec.ops.add.word",
+        "dec.ops.compare_order",
         "dec.ops.estimate",
         "dec.ops.mult",
         "dec.ops.round",
         "dec.ops.sub",
+        "pct.basics.benchmarks",
         "pct.basics.concept",
         "pct.convert.from_dec",
         "pct.convert.to_dec",
         "pct.ops.of_number",
         "pct.ops.percent_points",
+        "prealg.exp.expanded_form",
+        "prealg.exp.powers_of_ten",
         "prealg.graph.interpret",
         "prealg.ratio.part_whole",
         "prealg.ratio.tape",
@@ -4191,7 +4197,7 @@
         "prealg.types",
         "ratio.ops.simplify"
       ],
-      "concept_count": 26
+      "concept_count": 31
     },
     {
       "id": "prealgebra.b4",
@@ -4211,6 +4217,7 @@
       "concept_ids": [
         "arith.exp.sci_notation",
         "arith.sci_notation.ops",
+        "dec.convert.repeating",
         "dec.convert.to_frac",
         "dec.ops.div",
         "dec.ops.div.word",
@@ -4218,8 +4225,11 @@
         "dec.ops.mult.word",
         "dec.ops.powers_ten",
         "dec.ops.sub.word",
+        "dec.ops.word_multi_step",
         "pct.ops.change",
         "pct.ops.commission",
+        "pct.ops.concentration",
+        "pct.ops.depreciation",
         "pct.ops.discount",
         "pct.ops.error",
         "pct.ops.find_rate",
@@ -4230,22 +4240,29 @@
         "pct.ops.successive",
         "pct.ops.tax_tip",
         "prealg.expr.evaluate",
+        "prealg.measure.area_units",
         "prealg.measure.convert",
         "prealg.measure.metric",
         "prealg.measure.precision",
+        "prealg.measure.weight",
         "prealg.ratio.constant",
         "prealg.real.properties",
         "prealg.var.concept",
         "ratio.ops.better_buy",
+        "ratio.ops.density",
+        "ratio.ops.mixture",
         "ratio.ops.percent_proportion",
         "ratio.ops.proportion",
         "ratio.ops.proportion.word",
         "ratio.ops.proportional_graph",
         "ratio.ops.rate",
         "ratio.ops.rate.word",
-        "ratio.ops.scale"
+        "ratio.ops.recipe",
+        "ratio.ops.scale",
+        "ratio.ops.similar_figures",
+        "ratio.ops.speed"
       ],
-      "concept_count": 35
+      "concept_count": 46
     },
     {
       "id": "prealgebra.b5",
@@ -4264,26 +4281,34 @@
       ],
       "concept_ids": [
         "pct.ops.simple_interest",
+        "pct.ops.tip_split",
         "prealg.eq.check",
         "prealg.eq.one_step_add",
         "prealg.eq.one_step_mult",
+        "prealg.eq.proportion",
         "prealg.eq.two_step",
         "prealg.expr.coefficient",
         "prealg.expr.distribute",
         "prealg.expr.distribute_simplify",
+        "prealg.expr.factor_common",
         "prealg.expr.formula",
         "prealg.expr.like_terms",
         "prealg.expr.simplify",
+        "prealg.expr.substitute_negative",
         "prealg.expr.translate",
         "prealg.expr.two_variables",
+        "prealg.func.notation",
+        "prealg.func.rule",
         "prealg.func.table",
         "prealg.ineq.one_step",
+        "prealg.measure.capacity",
         "prealg.measure.dimensional",
         "prealg.measure.temperature",
         "prealg.measure.time",
+        "prealg.var.independent_dependent",
         "ratio.ops.table"
       ],
-      "concept_count": 19
+      "concept_count": 27
     },
     {
       "id": "prealgebra.b6",
@@ -4297,15 +4322,21 @@
         "prealgebra.inequalities"
       ],
       "concept_ids": [
+        "prealg.eq.distribute",
         "prealg.eq.fractions",
         "prealg.eq.literal",
+        "prealg.eq.no_solution",
+        "prealg.eq.variables_both_sides",
         "prealg.eq.word",
+        "prealg.ineq.absolute",
+        "prealg.ineq.check",
+        "prealg.ineq.compound",
         "prealg.ineq.graph",
         "prealg.ineq.negative",
         "prealg.ineq.two_step",
         "prealg.ineq.word"
       ],
-      "concept_count": 7
+      "concept_count": 13
     },
     {
       "id": "precalculus.b3",

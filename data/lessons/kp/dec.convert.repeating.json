@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Show why one third repeats",
+    "section": "Why 0.333... Equals One Third",
+    "subgoals": [
+      "Set the repeating decimal equal to x",
+      "Shift one place by multiplying by ten",
+      "Subtract and solve for x"
+    ]
+  },
+  {
+    "label": "Handle repeated blocks",
+    "section": "Repeating Nines and Repeated Digits",
+    "subgoals": [
+      "Shift by the length of the repeating block",
+      "Subtract the two shifted equations",
+      "Reduce the resulting fraction"
+    ]
+  },
+  {
+    "label": "Convert a repeating decimal",
+    "section": "Writing a Repeating Decimal as a Fraction",
+    "subgoals": [
+      "Shift past the non-repeating digits",
+      "Subtract the shifted forms",
+      "Divide by the difference of powers of ten"
+    ]
+  }
+]

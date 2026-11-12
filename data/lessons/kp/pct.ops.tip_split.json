@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Compute the tip",
+    "section": "Computing the Tip",
+    "subgoals": [
+      "Take the percent of the subtotal",
+      "Keep tax out of the tip base",
+      "Check with a ten percent benchmark"
+    ]
+  },
+  {
+    "label": "Split the total",
+    "section": "Splitting the Total",
+    "subgoals": [
+      "Add the tip to the bill",
+      "Divide by the number of diners",
+      "Split after tipping, not before"
+    ]
+  },
+  {
+    "label": "Separate tax and tip",
+    "section": "Tip, Tax, and Shares",
+    "subgoals": [
+      "Compute tax on the meal",
+      "Compute the tip on the meal",
+      "Divide the final total into shares"
+    ]
+  }
+]

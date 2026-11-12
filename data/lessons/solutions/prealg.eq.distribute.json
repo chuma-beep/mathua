@@ -1,0 +1,15 @@
+{
+  "concept": "prealg.eq.distribute",
+  "setup": "Solve [[a]](x + [[b]]) = [[c]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Distribute [[a]] over the parentheses before doing anything else."
+    },
+    {
+      "fact": "b",
+      "say": "Then isolate x with inverse operations."
+    }
+  ],
+  "answer": "x = [[answer]]."
+}

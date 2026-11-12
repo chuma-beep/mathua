@@ -11242,5 +11242,129 @@
   {
     "concept_id": "ra.metric.weak_convergence",
     "source": "authored/ra.metric.weak_convergence.md"
+  },
+  {
+    "concept_id": "dec.basics.number_line",
+    "source": "authored/dec.basics.number_line.md"
+  },
+  {
+    "concept_id": "dec.ops.compare_order",
+    "source": "authored/dec.ops.compare_order.md"
+  },
+  {
+    "concept_id": "dec.convert.repeating",
+    "source": "authored/dec.convert.repeating.md"
+  },
+  {
+    "concept_id": "dec.ops.word_multi_step",
+    "source": "authored/dec.ops.word_multi_step.md"
+  },
+  {
+    "concept_id": "pct.basics.benchmarks",
+    "source": "authored/pct.basics.benchmarks.md"
+  },
+  {
+    "concept_id": "pct.ops.depreciation",
+    "source": "authored/pct.ops.depreciation.md"
+  },
+  {
+    "concept_id": "pct.ops.concentration",
+    "source": "authored/pct.ops.concentration.md"
+  },
+  {
+    "concept_id": "pct.ops.tip_split",
+    "source": "authored/pct.ops.tip_split.md"
+  },
+  {
+    "concept_id": "ratio.ops.similar_figures",
+    "source": "authored/ratio.ops.similar_figures.md"
+  },
+  {
+    "concept_id": "ratio.ops.recipe",
+    "source": "authored/ratio.ops.recipe.md"
+  },
+  {
+    "concept_id": "ratio.ops.mixture",
+    "source": "authored/ratio.ops.mixture.md"
+  },
+  {
+    "concept_id": "ratio.ops.speed",
+    "source": "authored/ratio.ops.speed.md"
+  },
+  {
+    "concept_id": "ratio.ops.density",
+    "source": "authored/ratio.ops.density.md"
+  },
+  {
+    "concept_id": "prealg.expr.substitute_negative",
+    "source": "authored/prealg.expr.substitute_negative.md"
+  },
+  {
+    "concept_id": "prealg.expr.factor_common",
+    "source": "authored/prealg.expr.factor_common.md"
+  },
+  {
+    "concept_id": "prealg.var.independent_dependent",
+    "source": "authored/prealg.var.independent_dependent.md"
+  },
+  {
+    "concept_id": "prealg.func.notation",
+    "source": "authored/prealg.func.notation.md"
+  },
+  {
+    "concept_id": "prealg.func.rule",
+    "source": "authored/prealg.func.rule.md"
+  },
+  {
+    "concept_id": "prealg.eq.variables_both_sides",
+    "source": "authored/prealg.eq.variables_both_sides.md"
+  },
+  {
+    "concept_id": "prealg.eq.distribute",
+    "source": "authored/prealg.eq.distribute.md"
+  },
+  {
+    "concept_id": "prealg.eq.proportion",
+    "source": "authored/prealg.eq.proportion.md"
+  },
+  {
+    "concept_id": "prealg.eq.no_solution",
+    "source": "authored/prealg.eq.no_solution.md"
+  },
+  {
+    "concept_id": "prealg.ineq.compound",
+    "source": "authored/prealg.ineq.compound.md"
+  },
+  {
+    "concept_id": "prealg.ineq.absolute",
+    "source": "authored/prealg.ineq.absolute.md"
+  },
+  {
+    "concept_id": "prealg.ineq.check",
+    "source": "authored/prealg.ineq.check.md"
+  },
+  {
+    "concept_id": "prealg.measure.capacity",
+    "source": "authored/prealg.measure.capacity.md"
+  },
+  {
+    "concept_id": "prealg.measure.weight",
+    "source": "authored/prealg.measure.weight.md"
+  },
+  {
+    "concept_id": "prealg.measure.area_units",
+    "source": "authored/prealg.measure.area_units.md"
+  },
+  {
+    "concept_id": "prealg.exp.powers_of_ten",
+    "source": "authored/prealg.exp.powers_of_ten.md"
+  },
+  {
+    "concept_id": "prealg.exp.expanded_form",
+    "source": "authored/prealg.exp.expanded_form.md"
+  },
+  {
+    "concept_id": "arith.neg.subtract",
+    "source": "authored/arith.neg.subtract.md"
   }
 ]

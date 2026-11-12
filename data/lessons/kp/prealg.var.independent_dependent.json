@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Separate input and output",
+    "section": "Input and Output",
+    "subgoals": [
+      "Name the quantity chosen first",
+      "Name the quantity that responds",
+      "Compute one output from an input"
+    ]
+  },
+  {
+    "label": "Choose the independent variable",
+    "section": "Choosing the Independent Variable",
+    "subgoals": [
+      "Ask which quantity can be set freely",
+      "Place it in the first column",
+      "Label the axes in the same order"
+    ]
+  },
+  {
+    "label": "Read a rule",
+    "section": "Reading a Rule",
+    "subgoals": [
+      "Identify the input in the equation",
+      "Substitute to find the output",
+      "Divide when reading backwards"
+    ]
+  }
+]

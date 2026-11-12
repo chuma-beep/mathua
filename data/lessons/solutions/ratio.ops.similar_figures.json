@@ -1,0 +1,15 @@
+{
+  "concept": "ratio.ops.similar_figures",
+  "setup": "Two similar figures have corresponding sides [[a]] and [[b]], and another side measures [[c]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "Match each side with its corresponding side and write the proportion."
+    },
+    {
+      "fact": "b",
+      "say": "Scale from the figure with side [[a]] to the figure with side [[b]]."
+    }
+  ],
+  "answer": "The missing measurement is [[answer]]."
+}

@@ -1,0 +1,15 @@
+{
+  "concept": "pct.basics.benchmarks",
+  "setup": "You want [[percent]] percent of [[number]].",
+  "steps": [
+    {
+      "fact": "percent",
+      "say": "Write the percent as a decimal by dividing by 100."
+    },
+    {
+      "fact": "number",
+      "say": "Multiply that decimal by [[number]]."
+    }
+  ],
+  "answer": "So [[percent]] percent of [[number]] is [[answer]]."
+}

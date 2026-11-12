@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Match corresponding sides",
+    "section": "Corresponding Sides",
+    "subgoals": [
+      "Pair sides by position and angle",
+      "Write the ratio in one direction",
+      "Keep the direction for every pair"
+    ]
+  },
+  {
+    "label": "Find a missing side",
+    "section": "Finding a Missing Side",
+    "subgoals": [
+      "Set up the proportion from a known pair",
+      "Cross multiply and solve",
+      "Check the new pair has the same ratio"
+    ]
+  },
+  {
+    "label": "Compare perimeters",
+    "section": "Perimeters of Similar Figures",
+    "subgoals": [
+      "Scale the perimeter by the side factor",
+      "Square the factor for area",
+      "Keep the two rules apart"
+    ]
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "concept": "prealg.func.rule",
+  "setup": "A table follows the rule y = [[a]]x + [[b]], and the question uses x = [[x]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The multiplier that takes each input to the next output is [[a]]."
+    },
+    {
+      "fact": "b",
+      "say": "The starting value, the output when x is 0, is [[b]]."
+    }
+  ],
+  "answer": "The requested value is [[answer]]."
+}

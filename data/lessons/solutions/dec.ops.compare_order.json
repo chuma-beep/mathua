@@ -1,0 +1,15 @@
+{
+  "concept": "dec.ops.compare_order",
+  "setup": "Compare every decimal in the list with [[threshold]].",
+  "steps": [
+    {
+      "fact": "threshold",
+      "say": "A decimal counts only when it sits on the side of [[threshold]] that the question names."
+    },
+    {
+      "fact": "count",
+      "say": "Work through the list and keep a running count, which reaches [[count]]."
+    }
+  ],
+  "answer": "So [[answer]] decimals satisfy the comparison."
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Test a candidate value",
+    "section": "Testing a Value",
+    "subgoals": [
+      "Substitute the value for the variable",
+      "Simplify each side",
+      "Compare the two sides"
+    ]
+  },
+  {
+    "label": "Test the boundary",
+    "section": "The Boundary Value",
+    "subgoals": [
+      "Solve to find the boundary",
+      "Substitute the boundary value",
+      "Decide from the inequality sign"
+    ]
+  },
+  {
+    "label": "Accept or reject a value",
+    "section": "Accepting or Rejecting",
+    "subgoals": [
+      "Test a value outside the interval",
+      "Test a value inside the interval",
+      "Report each verdict separately"
+    ]
+  }
+]

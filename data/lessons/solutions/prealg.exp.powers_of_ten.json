@@ -1,0 +1,15 @@
+{
+  "concept": "prealg.exp.powers_of_ten",
+  "setup": "Compute 10 raised to the power [[exponent]].",
+  "steps": [
+    {
+      "fact": "exponent",
+      "say": "The exponent counts the factors of ten, so [[exponent]] factors are written out."
+    },
+    {
+      "fact": "answer",
+      "say": "Multiply the factors of ten together."
+    }
+  ],
+  "answer": "The value is [[answer]]."
+}

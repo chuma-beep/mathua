@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Expand a power",
+    "section": "Expanded Form of a Power",
+    "subgoals": [
+      "Name the base and the exponent",
+      "Write the repeated product",
+      "Multiply to the value"
+    ]
+  },
+  {
+    "label": "Compress a product",
+    "section": "From Product to Power",
+    "subgoals": [
+      "Count the repeated factors",
+      "Check the base is the same",
+      "Write the power and evaluate it"
+    ]
+  },
+  {
+    "label": "Evaluate a small power",
+    "section": "Evaluating Small Powers",
+    "subgoals": [
+      "Expand the factors",
+      "Multiply in pairs or stages",
+      "Estimate the size first"
+    ]
+  }
+]

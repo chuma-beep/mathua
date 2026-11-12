@@ -1,0 +1,15 @@
+{
+  "concept": "pct.ops.concentration",
+  "setup": "A mixture contains solute [[solute]] in a solution of [[solution]], and its stated concentration is [[percent]] percent.",
+  "steps": [
+    {
+      "fact": "solute",
+      "say": "Compare the solute with the whole solution, not with the solvent alone."
+    },
+    {
+      "fact": "percent",
+      "say": "The concentration says how many parts of solute sit in every hundred parts of solution."
+    }
+  ],
+  "answer": "The quantity the question asks for is [[answer]]."
+}
