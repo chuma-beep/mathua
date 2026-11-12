@@ -11758,5 +11758,93 @@
   {
     "concept_id": "stat.reg.ridge",
     "source": "authored/stat.reg.ridge.md"
+  },
+  {
+    "concept_id": "trig.eq.factoring",
+    "source": "authored/trig.eq.factoring.md"
+  },
+  {
+    "concept_id": "trig.eq.reciprocal",
+    "source": "authored/trig.eq.reciprocal.md"
+  },
+  {
+    "concept_id": "trig.eq.mixed_angles",
+    "source": "authored/trig.eq.mixed_angles.md"
+  },
+  {
+    "concept_id": "trig.eq.extraneous",
+    "source": "authored/trig.eq.extraneous.md"
+  },
+  {
+    "concept_id": "trig.eq.absolute",
+    "source": "authored/trig.eq.absolute.md"
+  },
+  {
+    "concept_id": "trig.func.higher_derivatives",
+    "source": "authored/trig.func.higher_derivatives.md"
+  },
+  {
+    "concept_id": "trig.func.taylor",
+    "source": "authored/trig.func.taylor.md"
+  },
+  {
+    "concept_id": "trig.func.power_integrals",
+    "source": "authored/trig.func.power_integrals.md"
+  },
+  {
+    "concept_id": "trig.graph.damping",
+    "source": "authored/trig.graph.damping.md"
+  },
+  {
+    "concept_id": "trig.graph.envelope",
+    "source": "authored/trig.graph.envelope.md"
+  },
+  {
+    "concept_id": "trig.graph.beats",
+    "source": "authored/trig.graph.beats.md"
+  },
+  {
+    "concept_id": "trig.hyperbolic.catenary",
+    "source": "authored/trig.hyperbolic.catenary.md"
+  },
+  {
+    "concept_id": "trig.hyperbolic.gudermannian",
+    "source": "authored/trig.hyperbolic.gudermannian.md"
+  },
+  {
+    "concept_id": "trig.hyperbolic.addition",
+    "source": "authored/trig.hyperbolic.addition.md"
+  },
+  {
+    "concept_id": "trig.hyperbolic.integral",
+    "source": "authored/trig.hyperbolic.integral.md"
+  },
+  {
+    "concept_id": "trig.spherical.right",
+    "source": "authored/trig.spherical.right.md"
+  },
+  {
+    "concept_id": "trig.spherical.polar",
+    "source": "authored/trig.spherical.polar.md"
+  },
+  {
+    "concept_id": "trig.spherical.polygon",
+    "source": "authored/trig.spherical.polygon.md"
+  },
+  {
+    "concept_id": "trig.basics.gradian",
+    "source": "authored/trig.basics.gradian.md"
+  },
+  {
+    "concept_id": "trig.basics.signed",
+    "source": "authored/trig.basics.signed.md"
+  },
+  {
+    "concept_id": "trig.ident.conditional",
+    "source": "authored/trig.ident.conditional.md"
+  },
+  {
+    "concept_id": "trig.ident.tangent_triple",
+    "source": "authored/trig.ident.tangent_triple.md"
   }
 ]

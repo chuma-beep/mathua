@@ -1,0 +1,19 @@
+{
+  "concept": "trig.func.taylor",
+  "setup": "A Taylor series for a trigonometric function is given, and the question asks for one part of one of its terms.",
+  "steps": [
+    {
+      "fact": "",
+      "say": "The series for the sine pairs each odd power with the factorial of that power, and the series for the cosine does the same with the even powers."
+    },
+    {
+      "fact": "",
+      "say": "A factorial such as (2n+1)! multiplies every integer from 1 up to 2n+1, so the denominator grows quickly and its value is exact."
+    },
+    {
+      "fact": "",
+      "say": "Substituting the exponent the question names, or expanding the shifted sine far enough to read the coefficient of x cubed, gives the number asked for."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

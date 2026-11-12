@@ -1,0 +1,19 @@
+{
+  "concept": "trig.hyperbolic.integral",
+  "setup": "An integral of a hyperbolic function is taken, with the bound or the inner coefficient equal to [[a]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The derivative of sinh u is cosh u and the derivative of cosh u is sinh u, so each function is the antiderivative of the other."
+    },
+    {
+      "fact": "a",
+      "say": "A definite integral evaluates the antiderivative at the upper limit and subtracts its value at the lower limit, and an inner coefficient is divided out by the chain rule."
+    },
+    {
+      "fact": "a",
+      "say": "With [[a]] in place the result is the hyperbolic function of [[a]] less its value at the lower limit, or a fraction with denominator [[a]] when the chain rule applies."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

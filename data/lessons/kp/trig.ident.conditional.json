@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Identities that need a condition",
+    "section": "Identities that need a condition",
+    "subgoals": [
+      "State the condition with the identity",
+      "Test a pair of angles that satisfies it",
+      "Test a pair that fails it"
+    ]
+  },
+  {
+    "label": "Complementary angles",
+    "section": "Complementary angles",
+    "subgoals": [
+      "Replace one angle by its complement",
+      "Use the cofunction relation",
+      "Check the product of the tangents"
+    ]
+  },
+  {
+    "label": "Angles of a triangle",
+    "section": "Angles of a triangle",
+    "subgoals": [
+      "Use the angle sum of a triangle",
+      "Check the tangent sum and product",
+      "Substitute a concrete triple"
+    ]
+  }
+]

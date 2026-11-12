@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The double-angle formulas",
+    "section": "The double-angle formulas",
+    "subgoals": [
+      "Set both arguments equal",
+      "Evaluate the hyperbolic sine and cosine",
+      "Check the double angle numerically"
+    ]
+  },
+  {
+    "label": "Adding two hyperbolic angles",
+    "section": "Adding two hyperbolic angles",
+    "subgoals": [
+      "Apply the sum formula for sinh",
+      "Apply the sum formula for cosh",
+      "Watch the plus sign in the cosine formula"
+    ]
+  },
+  {
+    "label": "Products of sinh and cosh",
+    "section": "Products of sinh and cosh",
+    "subgoals": [
+      "Turn a sine product into a difference of cosines",
+      "Turn a cosine product into a sum",
+      "Check against the direct product"
+    ]
+  }
+]

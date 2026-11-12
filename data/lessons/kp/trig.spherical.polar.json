@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The polar construction",
+    "section": "The polar construction",
+    "subgoals": [
+      "Pick the pole on the same side",
+      "Repeat the choice for each side",
+      "Identify the supplement relation"
+    ]
+  },
+  {
+    "label": "Sides from angles",
+    "section": "Sides from angles",
+    "subgoals": [
+      "Subtract each angle from 180",
+      "List the polar sides",
+      "Note the right angle case"
+    ]
+  },
+  {
+    "label": "Summing the polar sides",
+    "section": "Summing the polar sides",
+    "subgoals": [
+      "Add the three polar sides",
+      "Relate the sum to the original angle sum",
+      "Check the polar angle sum"
+    ]
+  }
+]

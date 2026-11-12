@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Adding two close frequencies",
+    "section": "Adding two close frequencies",
+    "subgoals": [
+      "Add the two waves with the sum identity",
+      "Separate the slow factor from the fast one",
+      "Read the amplitude of the sum"
+    ]
+  },
+  {
+    "label": "The beat frequency",
+    "section": "The beat frequency",
+    "subgoals": [
+      "Take the difference of the two frequencies",
+      "Peak the absolute value twice per cycle",
+      "Count the beats in one second"
+    ]
+  },
+  {
+    "label": "Counting beats over time",
+    "section": "Counting beats over time",
+    "subgoals": [
+      "Multiply the rate by the time span",
+      "Check a second pair of frequencies",
+      "Note the limit at zero difference"
+    ]
+  }
+]

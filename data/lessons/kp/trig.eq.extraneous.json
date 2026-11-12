@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Where squaring adds roots",
+    "section": "Where squaring adds roots",
+    "subgoals": [
+      "Square both sides of the equation",
+      "Simplify with the Pythagorean identity",
+      "Collect the candidate angles"
+    ]
+  },
+  {
+    "label": "Testing each candidate",
+    "section": "Testing each candidate",
+    "subgoals": [
+      "Substitute each candidate into the original",
+      "Compare the sign of both sides",
+      "Reject the candidates that fail"
+    ]
+  },
+  {
+    "label": "Reporting the valid set",
+    "section": "Reporting the valid set",
+    "subgoals": [
+      "Repeat the test on a second equation",
+      "Keep only the surviving angles",
+      "State the count in one turn"
+    ]
+  }
+]

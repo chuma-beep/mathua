@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The decaying envelope",
+    "section": "The decaying envelope",
+    "subgoals": [
+      "Write the exponential factor beside the wave",
+      "Read the amplitude at the start",
+      "Read the amplitude after ten units"
+    ]
+  },
+  {
+    "label": "Half-lives of amplitude",
+    "section": "Half-lives of amplitude",
+    "subgoals": [
+      "Solve for the time that halves the amplitude",
+      "Step through the successive half-lives",
+      "Check each height against the factor"
+    ]
+  },
+  {
+    "label": "Reading a damped graph",
+    "section": "Reading a damped graph",
+    "subgoals": [
+      "Locate the successive peaks",
+      "Divide one peak by the previous peak",
+      "Turn the ratio into a decay rate"
+    ]
+  }
+]

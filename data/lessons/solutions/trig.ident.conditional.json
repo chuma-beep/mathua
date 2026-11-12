@@ -1,0 +1,19 @@
+{
+  "concept": "trig.ident.conditional",
+  "setup": "A conditional statement about complementary angles or about the angles of a triangle fixes the unknown angle.",
+  "steps": [
+    {
+      "fact": "",
+      "say": "Complementary angles add to 90 degrees, so a complement is found by subtracting the known angle from 90."
+    },
+    {
+      "fact": "",
+      "say": "The angles of a plane triangle add to 180 degrees, so the third angle is 180 minus the other two."
+    },
+    {
+      "fact": "",
+      "say": "When two angles are each complementary to the same angle they are equal, so either one answers the question."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

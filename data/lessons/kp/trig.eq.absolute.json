@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Both signs of the inside",
+    "section": "Both signs of the inside",
+    "subgoals": [
+      "Write the two signed equations",
+      "Solve each equation separately",
+      "Combine the four angles"
+    ]
+  },
+  {
+    "label": "A full turn of solutions",
+    "section": "A full turn of solutions",
+    "subgoals": [
+      "Count the touches in a half turn",
+      "Double the count for the absolute value",
+      "Treat a peak value as a single angle"
+    ]
+  },
+  {
+    "label": "The tangent case",
+    "section": "The tangent case",
+    "subgoals": [
+      "Split the tangent into both signs",
+      "Solve across two half turns",
+      "Reject values outside the range of the ratio"
+    ]
+  }
+]

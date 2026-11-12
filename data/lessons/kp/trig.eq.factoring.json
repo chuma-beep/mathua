@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The zero-product step",
+    "section": "The zero-product step",
+    "subgoals": [
+      "Collect the terms on one side",
+      "Factor the expression into a product",
+      "Read each factor equal to zero"
+    ]
+  },
+  {
+    "label": "Removing common factors",
+    "section": "Removing common factors",
+    "subgoals": [
+      "Factor out the shared ratio instead of dividing",
+      "Recover the roots the division would lose",
+      "Count both branches in the answer"
+    ]
+  },
+  {
+    "label": "Checking every branch",
+    "section": "Checking every branch",
+    "subgoals": [
+      "Test each factor against the range of the ratio",
+      "Discard a factor that no angle satisfies",
+      "Report the surviving angles"
+    ]
+  }
+]

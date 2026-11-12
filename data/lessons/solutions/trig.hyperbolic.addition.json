@@ -1,0 +1,19 @@
+{
+  "concept": "trig.hyperbolic.addition",
+  "setup": "A hyperbolic sine and a hyperbolic cosine are given for one angle or for two, and the question asks for a double or a sum value.",
+  "steps": [
+    {
+      "fact": "",
+      "say": "The addition formulas are sinh(x+y) = sinh x cosh y + cosh x sinh y and cosh(x+y) = cosh x cosh y + sinh x sinh y."
+    },
+    {
+      "fact": "",
+      "say": "Setting the two angles equal gives the double-angle forms sinh 2x = 2 sinh x cosh x and cosh 2x = sinh squared x + cosh squared x."
+    },
+    {
+      "fact": "",
+      "say": "Substituting the given sine and cosine values into the formula the question names gives the result, and unlike the circular case no term changes sign."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

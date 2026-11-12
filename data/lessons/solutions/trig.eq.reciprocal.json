@@ -1,0 +1,19 @@
+{
+  "concept": "trig.eq.reciprocal",
+  "setup": "A right triangle has legs [[a]] and [[b]] and hypotenuse [[h]], and the problem gives one reciprocal ratio for an acute angle.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The cosine of the angle is the adjacent leg over the hypotenuse, which here is [[a]] over [[h]]."
+    },
+    {
+      "fact": "b",
+      "say": "The sine of the angle is the opposite leg over the hypotenuse, which here is [[b]] over [[h]]."
+    },
+    {
+      "fact": "h",
+      "say": "Secant, cosecant and cotangent invert the cosine, the sine and the tangent, so the ratio the question wants is the given one turned upside down: its numerator is the side that was the denominator."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

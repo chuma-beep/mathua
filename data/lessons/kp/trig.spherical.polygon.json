@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Excess of a polygon",
+    "section": "Excess of a polygon",
+    "subgoals": [
+      "Subtract the plane angle sum",
+      "Convert the excess to radians",
+      "Read the area on the unit sphere"
+    ]
+  },
+  {
+    "label": "Equal-angle polygons",
+    "section": "Equal-angle polygons",
+    "subgoals": [
+      "Multiply the equal angle by the number of sides",
+      "Subtract the plane sum",
+      "Compare polygons of different order"
+    ]
+  },
+  {
+    "label": "From excess to area",
+    "section": "From excess to area",
+    "subgoals": [
+      "Square the radius",
+      "Multiply the excess by the square",
+      "Check against the lune formula"
+    ]
+  }
+]

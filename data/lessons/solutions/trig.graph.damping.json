@@ -1,0 +1,15 @@
+{
+  "concept": "trig.graph.damping",
+  "setup": "A damped wave loses a fixed fraction of its amplitude in each equal interval of time.",
+  "steps": [
+    {
+      "fact": "",
+      "say": "Halving once per half-life leaves the starting amplitude divided by two, once for every half-life that has passed."
+    },
+    {
+      "fact": "",
+      "say": "The number of half-lives is the elapsed time divided by the half-life, and the continuous form e^(-kt) reads the same way, with the rate k multiplied by the elapsed time t."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

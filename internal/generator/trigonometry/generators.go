@@ -57,6 +57,7 @@ func Register(reg *generator.Registry) {
 	registerFuncRatios(reg)
 	registerWave8(reg)
 	registerWave8Remaining(reg)
+	registerWave9(reg)
 }
 
 type radiansGen struct{}

@@ -1,0 +1,19 @@
+{
+  "concept": "trig.basics.signed",
+  "setup": "A rotation is signed, with anticlockwise positive, and this instance gives [[k]] degrees.",
+  "steps": [
+    {
+      "fact": "k",
+      "say": "A clockwise turn of [[k]] degrees has signed measure -[[k]], so the sign records the direction and the magnitude stays positive."
+    },
+    {
+      "fact": "k",
+      "say": "Coterminal angles differ by whole turns of 360 degrees, so adding one turn to a negative measure brings it into [0, 360)."
+    },
+    {
+      "fact": "k",
+      "say": "The reduction removes the largest whole number of turns that fits and adds one turn back when the remainder is negative."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

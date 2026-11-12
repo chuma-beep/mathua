@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The reduction formula",
+    "section": "The reduction formula",
+    "subgoals": [
+      "Integrate by parts once",
+      "Lower the exponent by two",
+      "Evaluate the reduced integral at the limits"
+    ]
+  },
+  {
+    "label": "Odd and even powers",
+    "section": "Odd and even powers",
+    "subgoals": [
+      "Substitute cosine for an odd power",
+      "Use the double angle for an even power",
+      "Integrate over the quarter turn"
+    ]
+  },
+  {
+    "label": "Wallis products",
+    "section": "Wallis products",
+    "subgoals": [
+      "Build the recurrence from the reduction",
+      "Start from the zero and first powers",
+      "Multiply the successive ratios"
+    ]
+  }
+]

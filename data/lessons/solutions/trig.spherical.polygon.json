@@ -1,0 +1,19 @@
+{
+  "concept": "trig.spherical.polygon",
+  "setup": "A regular spherical polygon has [[n]] equal angles of [[A]] degrees, and the question asks for its excess.",
+  "steps": [
+    {
+      "fact": "A",
+      "say": "The excess is the amount by which the angle sum of the polygon exceeds the flat total, and each angle contributes [[A]] degrees."
+    },
+    {
+      "fact": "n",
+      "say": "A flat polygon with [[n]] sides has angle sum ([[n]] - 2) times 180 degrees, and that sum is the baseline."
+    },
+    {
+      "fact": "n",
+      "say": "Subtracting the baseline from [[n]] times [[A]] leaves the excess in degrees."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

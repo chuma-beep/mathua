@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The gradian scale",
+    "section": "The gradian scale",
+    "subgoals": [
+      "Count 400 gradians in a turn",
+      "Relate one gradian to 0.9 degrees",
+      "Place a right angle at 100 gradians"
+    ]
+  },
+  {
+    "label": "Converting degrees and gradians",
+    "section": "Converting degrees and gradians",
+    "subgoals": [
+      "Multiply gradians by 0.9",
+      "Divide degrees by 0.9",
+      "Keep the direction of the conversion clear"
+    ]
+  },
+  {
+    "label": "A right angle in gradians",
+    "section": "A right angle in gradians",
+    "subgoals": [
+      "Anchor the right angle at 100",
+      "Convert a triangle's angles",
+      "Check against the radian value"
+    ]
+  }
+]

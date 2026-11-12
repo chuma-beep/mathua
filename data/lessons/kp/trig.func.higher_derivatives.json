@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The four-step cycle",
+    "section": "The four-step cycle",
+    "subgoals": [
+      "Differentiate four times to return to the start",
+      "Reduce the order modulo four",
+      "Name the function the remainder selects"
+    ]
+  },
+  {
+    "label": "Derivatives of a scaled angle",
+    "section": "Derivatives of a scaled angle",
+    "subgoals": [
+      "Bring down the inner factor at each step",
+      "Track the power of the scale",
+      "Evaluate the result at zero"
+    ]
+  },
+  {
+    "label": "The pattern at zero",
+    "section": "The pattern at zero",
+    "subgoals": [
+      "List the values of the derivatives at zero",
+      "Use the remainder to fix the sign",
+      "Compare the starting values of sine and cosine"
+    ]
+  }
+]

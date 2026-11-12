@@ -1,0 +1,19 @@
+{
+  "concept": "trig.hyperbolic.gudermannian",
+  "setup": "The Gudermannian angle gd(u) is defined so that tan(gd u) = sinh u, and this instance supplies the value [[x]].",
+  "steps": [
+    {
+      "fact": "x",
+      "say": "By definition the tangent of the Gudermannian angle is the hyperbolic sine of the argument, so the two agree at every value."
+    },
+    {
+      "fact": "x",
+      "say": "The explicit form gd(u) = 2 arctan(e^u) - pi/2 turns that relation into an angle in radians, and radians are converted to degrees when degrees are asked for."
+    },
+    {
+      "fact": "x",
+      "say": "Using [[x]] as the quantity the question supplies and rounding to the nearest unit gives the requested value."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

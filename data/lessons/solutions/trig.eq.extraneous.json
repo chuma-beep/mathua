@@ -1,0 +1,19 @@
+{
+  "concept": "trig.eq.extraneous",
+  "setup": "Squaring the equation [[fn]] x = c, with a positive c below 1, produces extra solutions on an interval of [[N]] turns.",
+  "steps": [
+    {
+      "fact": "fn",
+      "say": "Squaring turns the right side into c squared, and both [[fn]] x = c and [[fn]] x = -c satisfy the squared equation."
+    },
+    {
+      "fact": "N",
+      "say": "The negative branch mirrors the positive one, so each genuine solution gains a partner in the same turn."
+    },
+    {
+      "fact": "N",
+      "say": "The pattern repeats in each of the [[N]] turns, so the extraneous count equals the count of genuine solutions."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

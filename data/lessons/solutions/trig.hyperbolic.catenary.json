@@ -1,0 +1,19 @@
+{
+  "concept": "trig.hyperbolic.catenary",
+  "setup": "A chain hangs in the curve y = [[a]] cosh(x/[[a]]).",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The parameter [[a]] scales the curve and sets its lowest point, because cosh 0 = 1 gives a height of [[a]] at x = 0."
+    },
+    {
+      "fact": "a",
+      "say": "A height comes from substituting the given x into [[a]] cosh(x/[[a]]), so the ratio x over [[a]] decides the factor and [[a]] scales it."
+    },
+    {
+      "fact": "a",
+      "say": "An arc length uses cosh squared minus sinh squared equals 1, which turns the arc element into cosh(x/[[a]]) dx, and its antiderivative is [[a]] sinh(x/[[a]])."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

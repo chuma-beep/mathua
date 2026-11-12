@@ -5,8 +5,8 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 2940,
-  "unit_count": 164,
+  "concept_count": 2962,
+  "unit_count": 165,
   "units": [
     {
       "id": "abstract_algebra.b6",
@@ -5574,10 +5574,11 @@
       "concept_ids": [
         "trig.basics.arc_length",
         "trig.basics.coterminal",
+        "trig.basics.gradian",
         "trig.basics.radians",
         "trig.basics.unit_circle"
       ],
-      "concept_count": 4
+      "concept_count": 5
     },
     {
       "id": "trigonometry.b3",
@@ -5595,11 +5596,12 @@
         "trig.basics.quadrant",
         "trig.basics.reference_angle",
         "trig.basics.sector_area",
+        "trig.basics.signed",
         "trig.basics.sin_cos_def",
         "trig.basics.special_angles",
         "trig.ident.cofunction"
       ],
-      "concept_count": 7
+      "concept_count": 8
     },
     {
       "id": "trigonometry.b4",
@@ -5611,6 +5613,7 @@
       "subdomains": [
         "trigonometry.advanced",
         "trigonometry.basics",
+        "trigonometry.equations",
         "trigonometry.hyperbolic",
         "trigonometry.identities",
         "trigonometry.spherical"
@@ -5631,10 +5634,14 @@
         "trig.basics.segment_area",
         "trig.basics.tan_def",
         "trig.basics.versine",
+        "trig.eq.absolute",
         "trig.eq.basic",
+        "trig.eq.extraneous",
         "trig.eq.homogeneous",
         "trig.eq.linear",
         "trig.eq.quadratic",
+        "trig.eq.reciprocal",
+        "trig.hyperbolic.catenary",
         "trig.hyperbolic.derivative",
         "trig.hyperbolic.inverse",
         "trig.hyperbolic.sinh_cosh",
@@ -5642,7 +5649,7 @@
         "trig.ineq.basic",
         "trig.spherical.law_sines"
       ],
-      "concept_count": 25
+      "concept_count": 29
     },
     {
       "id": "trigonometry.b5",
@@ -5668,6 +5675,7 @@
       "depth_max": 23,
       "subdomains": [
         "trigonometry.advanced",
+        "trigonometry.equations",
         "trigonometry.functions",
         "trigonometry.graphs",
         "trigonometry.hyperbolic",
@@ -5676,18 +5684,23 @@
       "concept_ids": [
         "trig.adv.arctan",
         "trig.adv.inverse",
+        "trig.eq.factoring",
         "trig.func.arcsine",
         "trig.func.cosecant",
         "trig.func.cosine",
         "trig.func.cotangent",
+        "trig.func.higher_derivatives",
         "trig.func.secant",
         "trig.func.sine",
         "trig.func.tangent",
+        "trig.func.taylor",
         "trig.graph.amplitude",
         "trig.graph.cos",
         "trig.graph.period",
         "trig.graph.sin",
+        "trig.hyperbolic.addition",
         "trig.hyperbolic.identities",
+        "trig.hyperbolic.integral",
         "trig.ident.double_angle",
         "trig.ident.even_odd",
         "trig.ident.half_angle",
@@ -5698,7 +5711,7 @@
         "trig.ident.triple_angle",
         "trig.ineq.advanced"
       ],
-      "concept_count": 23
+      "concept_count": 28
     },
     {
       "id": "trigonometry.b8",
@@ -5713,6 +5726,7 @@
         "trigonometry.equations",
         "trigonometry.functions",
         "trigonometry.graphs",
+        "trigonometry.hyperbolic",
         "trigonometry.identities",
         "trigonometry.spherical"
       ],
@@ -5734,11 +5748,16 @@
         "trig.adv.weierstrass",
         "trig.basics.periodicity",
         "trig.eq.general_solution",
+        "trig.eq.mixed_angles",
         "trig.eq.multiple_angle",
         "trig.eq.using_identities",
         "trig.func.arccosine",
         "trig.func.arccotangent",
         "trig.func.arctangent",
+        "trig.func.power_integrals",
+        "trig.graph.beats",
+        "trig.graph.damping",
+        "trig.graph.envelope",
         "trig.graph.frequency",
         "trig.graph.harmonic_motion",
         "trig.graph.inverse",
@@ -5747,16 +5766,36 @@
         "trig.graph.sinusoidal_model",
         "trig.graph.tan",
         "trig.graph.transformations",
+        "trig.hyperbolic.gudermannian",
+        "trig.ident.conditional",
         "trig.ident.law_tangents",
         "trig.ident.mollweide",
         "trig.ident.product_to_sum",
         "trig.ident.pythagorean_variants",
         "trig.ident.sum_to_product",
+        "trig.ident.tangent_triple",
         "trig.spherical.excess",
         "trig.spherical.haversine",
-        "trig.spherical.law_cosines"
+        "trig.spherical.law_cosines",
+        "trig.spherical.right"
       ],
-      "concept_count": 38
+      "concept_count": 47
+    },
+    {
+      "id": "trigonometry.b9",
+      "title": "Trigonometry · Stage 10",
+      "domain": "trigonometry",
+      "band": 9,
+      "depth_min": 27,
+      "depth_max": 27,
+      "subdomains": [
+        "trigonometry.spherical"
+      ],
+      "concept_ids": [
+        "trig.spherical.polar",
+        "trig.spherical.polygon"
+      ],
+      "concept_count": 2
     }
   ]
 }

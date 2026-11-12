@@ -21171,5 +21171,239 @@
     "key_prerequisites": [
       "stat.reg.multiple"
     ]
+  },
+  {
+    "id": "trig.eq.factoring",
+    "key_prerequisites": [
+      "trig.eq.basic",
+      "trig.ident.identities"
+    ],
+    "encompasses": [
+      "trig.eq.basic",
+      "trig.ident.identities"
+    ]
+  },
+  {
+    "id": "trig.eq.reciprocal",
+    "key_prerequisites": [
+      "trig.basics.reciprocal",
+      "trig.eq.basic"
+    ],
+    "encompasses": [
+      "trig.basics.reciprocal",
+      "trig.eq.basic"
+    ]
+  },
+  {
+    "id": "trig.eq.mixed_angles",
+    "key_prerequisites": [
+      "trig.eq.multiple_angle",
+      "trig.ident.sum_diff"
+    ],
+    "encompasses": [
+      "trig.eq.multiple_angle",
+      "trig.ident.sum_diff"
+    ]
+  },
+  {
+    "id": "trig.eq.extraneous",
+    "key_prerequisites": [
+      "trig.eq.basic",
+      "trig.eq.quadratic"
+    ],
+    "encompasses": [
+      "trig.eq.basic",
+      "trig.eq.quadratic"
+    ]
+  },
+  {
+    "id": "trig.eq.absolute",
+    "key_prerequisites": [
+      "trig.eq.basic",
+      "trig.ineq.basic"
+    ],
+    "encompasses": [
+      "trig.eq.basic",
+      "trig.ineq.basic"
+    ]
+  },
+  {
+    "id": "trig.func.higher_derivatives",
+    "key_prerequisites": [
+      "trig.func.sine",
+      "trig.func.cosine"
+    ],
+    "encompasses": [
+      "trig.func.sine",
+      "trig.func.cosine"
+    ]
+  },
+  {
+    "id": "trig.func.taylor",
+    "key_prerequisites": [
+      "trig.func.sine",
+      "trig.func.cosine"
+    ],
+    "encompasses": [
+      "trig.func.sine",
+      "trig.func.cosine"
+    ]
+  },
+  {
+    "id": "trig.func.power_integrals",
+    "key_prerequisites": [
+      "trig.func.sine",
+      "trig.ident.power_reduction"
+    ],
+    "encompasses": [
+      "trig.func.sine",
+      "trig.ident.power_reduction"
+    ]
+  },
+  {
+    "id": "trig.graph.damping",
+    "key_prerequisites": [
+      "trig.graph.transformations",
+      "trig.graph.amplitude"
+    ],
+    "encompasses": [
+      "trig.graph.transformations",
+      "trig.graph.amplitude"
+    ]
+  },
+  {
+    "id": "trig.graph.envelope",
+    "key_prerequisites": [
+      "trig.graph.amplitude",
+      "trig.ident.product_to_sum"
+    ],
+    "encompasses": [
+      "trig.graph.amplitude",
+      "trig.ident.product_to_sum"
+    ]
+  },
+  {
+    "id": "trig.graph.beats",
+    "key_prerequisites": [
+      "trig.adv.harmonic_addition",
+      "trig.graph.frequency"
+    ],
+    "encompasses": [
+      "trig.adv.harmonic_addition",
+      "trig.graph.frequency"
+    ]
+  },
+  {
+    "id": "trig.hyperbolic.catenary",
+    "key_prerequisites": [
+      "trig.hyperbolic.sinh_cosh",
+      "trig.hyperbolic.tanh_coth"
+    ],
+    "encompasses": [
+      "trig.hyperbolic.sinh_cosh",
+      "trig.hyperbolic.tanh_coth"
+    ]
+  },
+  {
+    "id": "trig.hyperbolic.gudermannian",
+    "key_prerequisites": [
+      "trig.hyperbolic.tanh_coth",
+      "trig.adv.arctan"
+    ],
+    "encompasses": [
+      "trig.hyperbolic.tanh_coth",
+      "trig.adv.arctan"
+    ]
+  },
+  {
+    "id": "trig.hyperbolic.addition",
+    "key_prerequisites": [
+      "trig.hyperbolic.identities",
+      "trig.hyperbolic.sinh_cosh"
+    ],
+    "encompasses": [
+      "trig.hyperbolic.identities",
+      "trig.hyperbolic.sinh_cosh"
+    ]
+  },
+  {
+    "id": "trig.hyperbolic.integral",
+    "key_prerequisites": [
+      "trig.hyperbolic.derivative",
+      "trig.func.sine"
+    ],
+    "encompasses": [
+      "trig.hyperbolic.derivative",
+      "trig.func.sine"
+    ]
+  },
+  {
+    "id": "trig.spherical.right",
+    "key_prerequisites": [
+      "trig.spherical.law_cosines"
+    ],
+    "encompasses": [
+      "trig.spherical.law_cosines"
+    ]
+  },
+  {
+    "id": "trig.spherical.polar",
+    "key_prerequisites": [
+      "trig.spherical.right"
+    ],
+    "encompasses": [
+      "trig.spherical.right"
+    ]
+  },
+  {
+    "id": "trig.spherical.polygon",
+    "key_prerequisites": [
+      "trig.spherical.excess"
+    ],
+    "encompasses": [
+      "trig.spherical.excess"
+    ]
+  },
+  {
+    "id": "trig.basics.gradian",
+    "key_prerequisites": [
+      "trig.basics.radians"
+    ],
+    "encompasses": [
+      "trig.basics.radians"
+    ]
+  },
+  {
+    "id": "trig.basics.signed",
+    "key_prerequisites": [
+      "trig.basics.coterminal",
+      "trig.basics.reference_angle"
+    ],
+    "encompasses": [
+      "trig.basics.coterminal",
+      "trig.basics.reference_angle"
+    ]
+  },
+  {
+    "id": "trig.ident.conditional",
+    "key_prerequisites": [
+      "trig.ident.identities",
+      "trig.eq.using_identities"
+    ],
+    "encompasses": [
+      "trig.ident.identities",
+      "trig.eq.using_identities"
+    ]
+  },
+  {
+    "id": "trig.ident.tangent_triple",
+    "key_prerequisites": [
+      "trig.ident.triple_angle",
+      "trig.basics.tan_def"
+    ],
+    "encompasses": [
+      "trig.ident.triple_angle",
+      "trig.basics.tan_def"
+    ]
   }
 ]

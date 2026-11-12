@@ -1523,5 +1523,333 @@
       "streak": 10,
       "avg_time_seconds": 24.0
     }
-  }
+  },
+
+    {
+      "id": "trig.eq.factoring",
+      "label": "Solving trigonometric equations by factoring",
+      "domain": "trigonometry",
+      "subdomain": "trigonometry.equations",
+      "grading_type": "numeric",
+      "prerequisites": [
+        "trig.eq.basic",
+        "trig.ident.identities"
+      ],
+      "mastery_threshold": {
+        "streak": 10,
+        "avg_time_seconds": 24.0
+      }
+    },
+    {
+      "id": "trig.eq.reciprocal",
+      "label": "Equations with reciprocal trigonometric functions",
+      "domain": "trigonometry",
+      "subdomain": "trigonometry.equations",
+      "grading_type": "numeric",
+      "prerequisites": [
+        "trig.basics.reciprocal",
+        "trig.eq.basic"
+      ],
+      "mastery_threshold": {
+        "streak": 10,
+        "avg_time_seconds": 24.0
+      }
+    },
+    {
+      "id": "trig.eq.mixed_angles",
+      "label": "Equations with mixed angles",
+      "domain": "trigonometry",
+      "subdomain": "trigonometry.equations",
+      "grading_type": "numeric",
+      "prerequisites": [
+        "trig.eq.multiple_angle",
+        "trig.ident.sum_diff"
+      ],
+      "mastery_threshold": {
+        "streak": 10,
+        "avg_time_seconds": 24.0
+      }
+    },
+    {
+      "id": "trig.eq.extraneous",
+      "label": "Extraneous solutions in trigonometric equations",
+      "domain": "trigonometry",
+      "subdomain": "trigonometry.equations",
+      "grading_type": "numeric",
+      "prerequisites": [
+        "trig.eq.basic",
+        "trig.eq.quadratic"
+      ],
+      "mastery_threshold": {
+        "streak": 10,
+        "avg_time_seconds": 24.0
+      }
+    },
+    {
+      "id": "trig.eq.absolute",
+      "label": "Equations with absolute values of trigonometric functions",
+      "domain": "trigonometry",
+      "subdomain": "trigonometry.equations",
+      "grading_type": "numeric",
+      "prerequisites": [
+        "trig.eq.basic",
+        "trig.ineq.basic"
+      ],
+      "mastery_threshold": {
+        "streak": 10,
+        "avg_time_seconds": 24.0
+      }
+    },
+    {
+      "id": "trig.func.higher_derivatives",
+      "label": "Higher derivatives of sine and cosine",
+      "domain": "trigonometry",
+      "subdomain": "trigonometry.functions",
+      "grading_type": "numeric",
+      "prerequisites": [
+        "trig.func.sine",
+        "trig.func.cosine"
+      ],
+      "mastery_threshold": {
+        "streak": 10,
+        "avg_time_seconds": 24.0
+      }
+    },
+    {
+      "id": "trig.func.taylor",
+      "label": "Taylor series of sine and cosine",
+      "domain": "trigonometry",
+      "subdomain": "trigonometry.functions",
+      "grading_type": "numeric",
+      "prerequisites": [
+        "trig.func.sine",
+        "trig.func.cosine"
+      ],
+      "mastery_threshold": {
+        "streak": 10,
+        "avg_time_seconds": 24.0
+      }
+    },
+    {
+      "id": "trig.func.power_integrals",
+      "label": "Integrals of powers of sine and cosine",
+      "domain": "trigonometry",
+      "subdomain": "trigonometry.functions",
+      "grading_type": "numeric",
+      "prerequisites": [
+        "trig.func.sine",
+        "trig.ident.power_reduction"
+      ],
+      "mastery_threshold": {
+        "streak": 10,
+        "avg_time_seconds": 24.0
+      }
+    },
+    {
+      "id": "trig.graph.damping",
+      "label": "Damped sinusoidal graphs",
+      "domain": "trigonometry",
+      "subdomain": "trigonometry.graphs",
+      "grading_type": "numeric",
+      "prerequisites": [
+        "trig.graph.transformations",
+        "trig.graph.amplitude"
+      ],
+      "mastery_threshold": {
+        "streak": 10,
+        "avg_time_seconds": 24.0
+      }
+    },
+    {
+      "id": "trig.graph.envelope",
+      "label": "The envelope of a modulated wave",
+      "domain": "trigonometry",
+      "subdomain": "trigonometry.graphs",
+      "grading_type": "numeric",
+      "prerequisites": [
+        "trig.graph.amplitude",
+        "trig.ident.product_to_sum"
+      ],
+      "mastery_threshold": {
+        "streak": 10,
+        "avg_time_seconds": 24.0
+      }
+    },
+    {
+      "id": "trig.graph.beats",
+      "label": "Beats in combined waveforms",
+      "domain": "trigonometry",
+      "subdomain": "trigonometry.graphs",
+      "grading_type": "numeric",
+      "prerequisites": [
+        "trig.adv.harmonic_addition",
+        "trig.graph.frequency"
+      ],
+      "mastery_threshold": {
+        "streak": 10,
+        "avg_time_seconds": 24.0
+      }
+    },
+    {
+      "id": "trig.hyperbolic.catenary",
+      "label": "The catenary curve",
+      "domain": "trigonometry",
+      "subdomain": "trigonometry.hyperbolic",
+      "grading_type": "numeric",
+      "prerequisites": [
+        "trig.hyperbolic.sinh_cosh",
+        "trig.hyperbolic.tanh_coth"
+      ],
+      "mastery_threshold": {
+        "streak": 10,
+        "avg_time_seconds": 24.0
+      }
+    },
+    {
+      "id": "trig.hyperbolic.gudermannian",
+      "label": "The Gudermannian angle",
+      "domain": "trigonometry",
+      "subdomain": "trigonometry.hyperbolic",
+      "grading_type": "numeric",
+      "prerequisites": [
+        "trig.hyperbolic.tanh_coth",
+        "trig.adv.arctan"
+      ],
+      "mastery_threshold": {
+        "streak": 10,
+        "avg_time_seconds": 24.0
+      }
+    },
+    {
+      "id": "trig.hyperbolic.addition",
+      "label": "Addition formulas for hyperbolic functions",
+      "domain": "trigonometry",
+      "subdomain": "trigonometry.hyperbolic",
+      "grading_type": "numeric",
+      "prerequisites": [
+        "trig.hyperbolic.identities",
+        "trig.hyperbolic.sinh_cosh"
+      ],
+      "mastery_threshold": {
+        "streak": 10,
+        "avg_time_seconds": 24.0
+      }
+    },
+    {
+      "id": "trig.hyperbolic.integral",
+      "label": "Integrals of hyperbolic functions",
+      "domain": "trigonometry",
+      "subdomain": "trigonometry.hyperbolic",
+      "grading_type": "numeric",
+      "prerequisites": [
+        "trig.hyperbolic.derivative",
+        "trig.func.sine"
+      ],
+      "mastery_threshold": {
+        "streak": 10,
+        "avg_time_seconds": 24.0
+      }
+    },
+    {
+      "id": "trig.spherical.right",
+      "label": "Right spherical triangles",
+      "domain": "trigonometry",
+      "subdomain": "trigonometry.spherical",
+      "grading_type": "numeric",
+      "prerequisites": [
+        "trig.spherical.law_cosines"
+      ],
+      "mastery_threshold": {
+        "streak": 10,
+        "avg_time_seconds": 24.0
+      }
+    },
+    {
+      "id": "trig.spherical.polar",
+      "label": "Polar spherical triangles",
+      "domain": "trigonometry",
+      "subdomain": "trigonometry.spherical",
+      "grading_type": "numeric",
+      "prerequisites": [
+        "trig.spherical.right"
+      ],
+      "mastery_threshold": {
+        "streak": 10,
+        "avg_time_seconds": 24.0
+      }
+    },
+    {
+      "id": "trig.spherical.polygon",
+      "label": "Area of a spherical polygon",
+      "domain": "trigonometry",
+      "subdomain": "trigonometry.spherical",
+      "grading_type": "numeric",
+      "prerequisites": [
+        "trig.spherical.excess"
+      ],
+      "mastery_threshold": {
+        "streak": 10,
+        "avg_time_seconds": 24.0
+      }
+    },
+    {
+      "id": "trig.basics.gradian",
+      "label": "Gradians and angle units",
+      "domain": "trigonometry",
+      "subdomain": "trigonometry.basics",
+      "grading_type": "numeric",
+      "prerequisites": [
+        "trig.basics.radians"
+      ],
+      "mastery_threshold": {
+        "streak": 10,
+        "avg_time_seconds": 24.0
+      }
+    },
+    {
+      "id": "trig.basics.signed",
+      "label": "Signed angles and clockwise rotation",
+      "domain": "trigonometry",
+      "subdomain": "trigonometry.basics",
+      "grading_type": "numeric",
+      "prerequisites": [
+        "trig.basics.coterminal",
+        "trig.basics.reference_angle"
+      ],
+      "mastery_threshold": {
+        "streak": 10,
+        "avg_time_seconds": 24.0
+      }
+    },
+    {
+      "id": "trig.ident.conditional",
+      "label": "Conditional trigonometric identities",
+      "domain": "trigonometry",
+      "subdomain": "trigonometry.identities",
+      "grading_type": "numeric",
+      "prerequisites": [
+        "trig.ident.identities",
+        "trig.eq.using_identities"
+      ],
+      "mastery_threshold": {
+        "streak": 10,
+        "avg_time_seconds": 24.0
+      }
+    },
+    {
+      "id": "trig.ident.tangent_triple",
+      "label": "The tangent triple-angle formula",
+      "domain": "trigonometry",
+      "subdomain": "trigonometry.identities",
+      "grading_type": "numeric",
+      "prerequisites": [
+        "trig.ident.triple_angle",
+        "trig.basics.tan_def"
+      ],
+      "mastery_threshold": {
+        "streak": 10,
+        "avg_time_seconds": 24.0
+      }
+    }
+
 ]

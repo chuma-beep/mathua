@@ -1,0 +1,19 @@
+{
+  "concept": "trig.func.higher_derivatives",
+  "setup": "A function built from sin([[a]]x) or cos([[a]]x), or from x sin([[a]]x), is differentiated several times, and its value at x = 0 is asked for.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The chain rule brings down a factor of [[a]] at every differentiation, because the inner function is [[a]]x."
+    },
+    {
+      "fact": "a",
+      "say": "Each derivative moves along the cycle sine, cosine, minus sine, minus cosine, and four steps bring the cycle back to its start."
+    },
+    {
+      "fact": "a",
+      "say": "At x = 0 the sine is 0 and the cosine is 1, so the surviving term is a power of [[a]] times 1, 0 or -1, or twice [[a]] when the function also carries a factor of x."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

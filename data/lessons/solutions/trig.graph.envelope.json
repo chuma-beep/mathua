@@ -1,0 +1,19 @@
+{
+  "concept": "trig.graph.envelope",
+  "setup": "A wave has envelope A(t) = [[a]] + [[b]] cos t, and the question asks for a feature of that envelope.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The constant [[a]] sets the midline, and the cosine term swings [[b]] above and below it."
+    },
+    {
+      "fact": "b",
+      "say": "The cosine reaches 1 at its peak and -1 at its trough, so the envelope runs from [[a]] - [[b]] to [[a]] + [[b]]."
+    },
+    {
+      "fact": "a",
+      "say": "The spread is the difference between those two extremes, which is twice [[b]]."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

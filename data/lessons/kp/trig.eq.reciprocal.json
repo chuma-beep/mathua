@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Rewriting in sine and cosine",
+    "section": "Rewriting in sine and cosine",
+    "subgoals": [
+      "Replace secant with the reciprocal of cosine",
+      "Replace cosecant with the reciprocal of sine",
+      "Write cotangent as cosine over sine"
+    ]
+  },
+  {
+    "label": "Clearing denominators",
+    "section": "Clearing denominators",
+    "subgoals": [
+      "Multiply through by the denominator",
+      "Solve the resulting polynomial in one ratio",
+      "List every angle in one turn"
+    ]
+  },
+  {
+    "label": "Rejecting undefined values",
+    "section": "Rejecting undefined values",
+    "subgoals": [
+      "Find where the original denominators vanish",
+      "Remove those angles from the candidate list",
+      "Keep the angles that leave every ratio defined"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The triple-angle formula",
+    "section": "The triple-angle formula",
+    "subgoals": [
+      "Rewrite the triple angle from the tangent",
+      "Substitute a known tangent",
+      "Check against the tangent of the triple"
+    ]
+  },
+  {
+    "label": "The reciprocal tangent case",
+    "section": "The reciprocal tangent case",
+    "subgoals": [
+      "Invert the formula",
+      "Substitute a cotangent value",
+      "Check the reciprocal answer"
+    ]
+  },
+  {
+    "label": "Signs and reductions",
+    "section": "Signs and reductions",
+    "subgoals": [
+      "Use the period of the triple angle",
+      "Substitute a small tangent",
+      "Watch the sign of the result"
+    ]
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "concept": "trig.basics.gradian",
+  "setup": "Gradians and degrees measure the same turn, with 100 gradians equal to 90 degrees, and this instance scales that pair by [[k]].",
+  "steps": [
+    {
+      "fact": "k",
+      "say": "One right angle is 90 degrees or 100 gradians, so one degree is 10/9 of a gradian and one gradian is 9/10 of a degree."
+    },
+    {
+      "fact": "k",
+      "say": "The given angle is a multiple of 9 degrees or of 10 gradians, so the conversion is exact and stays a whole number."
+    },
+    {
+      "fact": "k",
+      "say": "Scaling by [[k]] keeps the proportion, so the converted measure follows from multiplying or dividing by that factor."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

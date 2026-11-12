@@ -12,19 +12,19 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 2940 |
-| Total units | 164 |
+| Total concepts | 2962 |
+| Total units | 165 |
 | Minimum unit size | 1 |
 | Median unit size | 13 |
 | Maximum unit size | 82 |
 | Singleton units | 21 |
-| Units with <= 3 concepts | 38 |
-| Units with > 25 concepts | 49 |
+| Units with <= 3 concepts | 39 |
+| Units with > 25 concepts | 51 |
 | Units with > 50 concepts | 10 |
-| Cross-unit prerequisite edges (derived) | 545 |
+| Cross-unit prerequisite edges (derived) | 546 |
 | Backward band edges | 0 |
 
-If the learner is assessed once per unit, then 164 assessments cover the corpus, and the
+If the learner is assessed once per unit, then 165 assessments cover the corpus, and the
 median is one assessment per 13 concepts. That is the frequency question this report
 exists to make concrete.
 
@@ -190,12 +190,13 @@ exists to make concrete.
 | `topology.b11` | topology | 11 | 35 | 11 | 33–35 |
 | `topology.b12` | topology | 12 | 64 | 12 | 36–38 |
 | `topology.b13` | topology | 13 | 11 | 3 | 39–40 |
-| `trigonometry.b2` | trigonometry | 2 | 4 | 1 | 7–8 |
-| `trigonometry.b3` | trigonometry | 3 | 7 | 2 | 9–11 |
-| `trigonometry.b4` | trigonometry | 4 | 25 | 5 | 12–14 |
+| `trigonometry.b2` | trigonometry | 2 | 5 | 1 | 7–8 |
+| `trigonometry.b3` | trigonometry | 3 | 8 | 2 | 9–11 |
+| `trigonometry.b4` | trigonometry | 4 | 29 | 6 | 12–14 |
 | `trigonometry.b5` | trigonometry | 5 | 1 | 1 | 15–15 |
-| `trigonometry.b7` | trigonometry | 7 | 23 | 5 | 21–23 |
-| `trigonometry.b8` | trigonometry | 8 | 38 | 7 | 24–26 |
+| `trigonometry.b7` | trigonometry | 7 | 28 | 6 | 21–23 |
+| `trigonometry.b8` | trigonometry | 8 | 47 | 8 | 24–26 |
+| `trigonometry.b9` | trigonometry | 9 | 2 | 1 | 27–27 |
 
 ## Backward band edges
 
@@ -211,15 +212,15 @@ at every width.
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
 | 2 | 225 | 10 | 56 | 26 | 53 | 31 | 0 |
-| 3 | 164 | 13 | 82 | 21 | 38 | 49 | 0 |
-| 4 | 129 | 18 | 86 | 10 | 24 | 52 | 0 |
-| 5 | 107 | 20 | 104 | 5 | 15 | 48 | 0 |
-| 6 | 99 | 23 | 130 | 7 | 16 | 45 | 0 |
-| 8 | 77 | 33 | 117 | 4 | 11 | 42 | 0 |
-| 10 | 65 | 30 | 145 | 2 | 7 | 35 | 0 |
-| 12 | 64 | 39 | 191 | 1 | 6 | 42 | 0 |
+| 3 | 165 | 13 | 82 | 21 | 39 | 51 | 0 |
+| 4 | 129 | 18 | 86 | 10 | 24 | 53 | 0 |
+| 5 | 107 | 21 | 104 | 5 | 15 | 49 | 0 |
+| 6 | 99 | 23 | 130 | 7 | 16 | 46 | 0 |
+| 8 | 77 | 33 | 117 | 4 | 11 | 43 | 0 |
+| 10 | 65 | 35 | 145 | 2 | 7 | 35 | 0 |
+| 12 | 64 | 41 | 191 | 1 | 6 | 42 | 0 |
 | 15 | 51 | 53 | 172 | 1 | 3 | 35 | 0 |
-| 20 | 44 | 68 | 145 | 0 | 3 | 32 | 0 |
+| 20 | 44 | 77 | 145 | 0 | 3 | 32 | 0 |
 | 45 | 26 | 120 | 172 | 0 | 0 | 26 | 0 |
 
 **No width is clean.** Small widths fragment, at 3 there are 21 singleton units, which is a
@@ -544,7 +545,7 @@ Unresolvable subdomains:
 `trigonometry.identities`
 `trigonometry.spherical`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2940
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2962
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings

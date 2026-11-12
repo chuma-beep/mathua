@@ -1,0 +1,19 @@
+{
+  "concept": "trig.eq.mixed_angles",
+  "setup": "The angle inside the function is [[m]] times x, and the interval given for x covers [[N]] full turns.",
+  "steps": [
+    {
+      "fact": "m",
+      "say": "Substituting u = [[m]]x leaves an equation about the sine or the cosine of u alone."
+    },
+    {
+      "fact": "m",
+      "say": "The multiplier makes u run [[m]] times faster than x, so the interval for u is [[m]] times as long as the interval for x."
+    },
+    {
+      "fact": "N",
+      "say": "Every turn of u contains the same number of solutions, so counting one turn and multiplying by the number of turns gives the total, and a half-open interval does not count its end twice."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

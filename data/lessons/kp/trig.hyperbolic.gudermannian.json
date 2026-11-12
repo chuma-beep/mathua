@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Defining the angle",
+    "section": "Defining the angle",
+    "subgoals": [
+      "Write the definition with the exponential",
+      "Use the sine and tangent forms",
+      "Check the value at zero"
+    ]
+  },
+  {
+    "label": "Degrees from a hyperbolic input",
+    "section": "Degrees from a hyperbolic input",
+    "subgoals": [
+      "Take the hyperbolic tangent of the input",
+      "Invert the sine to get the angle",
+      "Convert the angle to degrees"
+    ]
+  },
+  {
+    "label": "The tangent relation",
+    "section": "The tangent relation",
+    "subgoals": [
+      "Take the hyperbolic sine of the input",
+      "Invert the tangent",
+      "Compare the two routes"
+    ]
+  }
+]

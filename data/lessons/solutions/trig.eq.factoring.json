@@ -1,0 +1,19 @@
+{
+  "concept": "trig.eq.factoring",
+  "setup": "A product of two trigonometric factors equals zero, and the equation is solved on an interval of [[N]] full turns.",
+  "steps": [
+    {
+      "fact": "N",
+      "say": "A product is zero exactly when at least one of its factors is zero, so each factor is solved on its own."
+    },
+    {
+      "fact": "N",
+      "say": "Each factor repeats with a period that divides one turn of 360 degrees, so the angles it produces come back in every one of the [[N]] turns."
+    },
+    {
+      "fact": "N",
+      "say": "The total counts the distinct angles from both factors across the interval, so an angle that both factors share is counted once."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

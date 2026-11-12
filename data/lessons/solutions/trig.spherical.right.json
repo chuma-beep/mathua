@@ -1,0 +1,19 @@
+{
+  "concept": "trig.spherical.right",
+  "setup": "A right spherical triangle has one right angle, and two of its other parts are given.",
+  "steps": [
+    {
+      "fact": "",
+      "say": "In a right spherical triangle the Napier rules link the five remaining parts, so any two of them fix the rest."
+    },
+    {
+      "fact": "",
+      "say": "The rule for the hypotenuse is cos c = cos a cos b, and the rule for an oblique angle is cos A = cos a sin B."
+    },
+    {
+      "fact": "",
+      "say": "An inverse cosine returns the angle in degrees, and when both oblique angles are given their sum follows by plain addition."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

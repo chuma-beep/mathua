@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Maximum and minimum of the envelope",
+    "section": "Maximum and minimum of the envelope",
+    "subgoals": [
+      "Read the amplitude from the slow factor",
+      "Find its largest value",
+      "Find its smallest value"
+    ]
+  },
+  {
+    "label": "The spread of a modulated wave",
+    "section": "The spread of a modulated wave",
+    "subgoals": [
+      "Double the amplitude to get the spread",
+      "Evaluate the spread at the widest point",
+      "Evaluate it at the narrowest point"
+    ]
+  },
+  {
+    "label": "Sketching the envelope",
+    "section": "Sketching the envelope",
+    "subgoals": [
+      "Draw the two slow curves",
+      "Mark the carrier period",
+      "Fit each crest to the curve"
+    ]
+  }
+]

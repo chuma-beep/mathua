@@ -1,0 +1,15 @@
+{
+  "concept": "trig.graph.beats",
+  "setup": "Two tones of nearby frequency sound together, and the slow rise and fall of their sum is heard as beats.",
+  "steps": [
+    {
+      "fact": "",
+      "say": "The beat frequency is the difference between the two tone frequencies, because the two waves agree in phase once for every cycle of that difference."
+    },
+    {
+      "fact": "",
+      "say": "The number of beats in a stretch of time is the beat frequency multiplied by the length of the stretch in seconds."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

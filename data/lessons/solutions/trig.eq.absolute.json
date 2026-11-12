@@ -1,0 +1,19 @@
+{
+  "concept": "trig.eq.absolute",
+  "setup": "The equation sets the absolute value of a trigonometric function equal to a positive constant, and the interval covers [[N]] periods of that function.",
+  "steps": [
+    {
+      "fact": "N",
+      "say": "An absolute value equation splits into two signed equations, one for the positive value and one for the negative value."
+    },
+    {
+      "fact": "N",
+      "say": "Each period of the function holds the same number of solutions for each sign, because the graph repeats exactly."
+    },
+    {
+      "fact": "N",
+      "say": "Multiplying the count in one period by the [[N]] periods covers the interval, and the two signs occur at different angles so no solution is counted twice."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

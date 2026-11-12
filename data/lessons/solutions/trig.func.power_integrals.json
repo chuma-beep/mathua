@@ -1,0 +1,19 @@
+{
+  "concept": "trig.func.power_integrals",
+  "setup": "The integral of sin^n x from 0 to pi/2 is reduced to a ratio of double factorials, and this instance has n = [[n]].",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "The reduction I_n = ((n-1)/n) I_(n-2) lowers the exponent by two at each use, so the factors together use every integer from [[n]] down to 2."
+    },
+    {
+      "fact": "n",
+      "say": "A double factorial keeps only every other integer, so k!! is the product of k, k-2, k-4 and so on down to 1 or 2."
+    },
+    {
+      "fact": "n",
+      "say": "The odd integers and the even integers of the product form the two double factorials of the ratio, and an odd power leaves the ratio alone while an even power carries an extra factor of pi/2."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}

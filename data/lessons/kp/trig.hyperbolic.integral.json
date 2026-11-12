@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The basic antiderivatives",
+    "section": "The basic antiderivatives",
+    "subgoals": [
+      "Read each derivative backwards",
+      "Fix the sign of each antiderivative",
+      "Differentiate the answer to check"
+    ]
+  },
+  {
+    "label": "Definite integrals",
+    "section": "Definite integrals",
+    "subgoals": [
+      "Evaluate the antiderivative at the upper limit",
+      "Subtract the value at the lower limit",
+      "Compare the two integrals on the interval"
+    ]
+  },
+  {
+    "label": "The chain rule case",
+    "section": "The chain rule case",
+    "subgoals": [
+      "Divide by the inner factor",
+      "Evaluate over the interval",
+      "Check the size of the result"
+    ]
+  }
+]

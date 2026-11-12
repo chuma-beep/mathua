@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Angles of a right spherical triangle",
+    "section": "Angles of a right spherical triangle",
+    "subgoals": [
+      "Name the five parts of the triangle",
+      "Fix the triangle from two parts",
+      "Compare with the plane triangle"
+    ]
+  },
+  {
+    "label": "The spherical Pythagorean relation",
+    "section": "The spherical Pythagorean relation",
+    "subgoals": [
+      "Multiply the cosines of the legs",
+      "Take the inverse cosine",
+      "Compare the hypotenuse with the plane value"
+    ]
+  },
+  {
+    "label": "Solving for an angle",
+    "section": "Solving for an angle",
+    "subgoals": [
+      "Use the tangent rule for the angle",
+      "Evaluate the ratio",
+      "Check with the sine rule"
+    ]
+  }
+]

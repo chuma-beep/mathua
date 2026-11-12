@@ -1,0 +1,29 @@
+[
+  {
+    "label": "A double angle beside a single angle",
+    "section": "A double angle beside a single angle",
+    "subgoals": [
+      "Expand the double angle into products",
+      "Factor out the ratio the terms share",
+      "Split into single-angle equations"
+    ]
+  },
+  {
+    "label": "Reducing to one angle",
+    "section": "Reducing to one angle",
+    "subgoals": [
+      "Apply the double-angle identity to the squared term",
+      "Solve the equation in one ratio",
+      "Give all four angles in the turn"
+    ]
+  },
+  {
+    "label": "Counting solutions in a turn",
+    "section": "Counting solutions in a turn",
+    "subgoals": [
+      "Solve the multiple angle across its own range",
+      "Divide each solution by the multiplier",
+      "Count the turns the multiple angle spans"
+    ]
+  }
+]

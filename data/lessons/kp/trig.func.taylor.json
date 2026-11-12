@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The sine series",
+    "section": "The sine series",
+    "subgoals": [
+      "Keep only the odd powers",
+      "Divide each power by its factorial",
+      "Check the partial sum at x = 1"
+    ]
+  },
+  {
+    "label": "The cosine series",
+    "section": "The cosine series",
+    "subgoals": [
+      "Keep only the even powers",
+      "Start the series at one",
+      "Compare the partial sum with the cosine"
+    ]
+  },
+  {
+    "label": "Reading a coefficient",
+    "section": "Reading a coefficient",
+    "subgoals": [
+      "Read the power from the factorial",
+      "Treat a missing power as a zero coefficient",
+      "Link each coefficient to the derivative at zero"
+    ]
+  }
+]

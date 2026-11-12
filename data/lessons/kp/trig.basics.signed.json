@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Positive and negative rotation",
+    "section": "Positive and negative rotation",
+    "subgoals": [
+      "Give counterclockwise rotation a positive sign",
+      "Give clockwise rotation a negative sign",
+      "Read the sine at a negative angle"
+    ]
+  },
+  {
+    "label": "Coterminal angles",
+    "section": "Coterminal angles",
+    "subgoals": [
+      "Add or subtract whole turns",
+      "List the family for one angle",
+      "Keep the ratios unchanged"
+    ]
+  },
+  {
+    "label": "Reducing a large negative angle",
+    "section": "Reducing a large negative angle",
+    "subgoals": [
+      "Add whole turns until the angle is small",
+      "Choose the number of turns",
+      "Evaluate the reduced angle"
+    ]
+  }
+]

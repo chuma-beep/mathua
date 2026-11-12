@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The hanging chain equation",
+    "section": "The hanging chain equation",
+    "subgoals": [
+      "Set the scale from tension and weight",
+      "Write the height as a hyperbolic cosine",
+      "Evaluate the height at the lowest point"
+    ]
+  },
+  {
+    "label": "Height along the curve",
+    "section": "Height along the curve",
+    "subgoals": [
+      "Evaluate the height away from the centre",
+      "Compare it with the quadratic approximation",
+      "Note where the approximation drifts"
+    ]
+  },
+  {
+    "label": "Arc length of a catenary",
+    "section": "Arc length of a catenary",
+    "subgoals": [
+      "Use the hyperbolic sine for arc length",
+      "Evaluate over a symmetric stretch",
+      "Compare the length with the span"
+    ]
+  }
+]

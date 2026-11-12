@@ -1,0 +1,19 @@
+{
+  "concept": "trig.spherical.polar",
+  "setup": "A spherical triangle and its polar triangle are related part by part, and this instance gives one of those parts or all three.",
+  "steps": [
+    {
+      "fact": "",
+      "say": "The polar triangle is built from the poles of the original sides, and the construction makes each part of one triangle the supplement of a part of the other."
+    },
+    {
+      "fact": "",
+      "say": "A supplement is 180 degrees minus the given part, so 180 - A, 180 - B and 180 - C are the three sides of the polar triangle."
+    },
+    {
+      "fact": "",
+      "say": "When all three are asked for together, they add to 540 degrees minus the sum of the three original angles."
+    }
+  ],
+  "answer": "The answer is [[answer]]."
+}
