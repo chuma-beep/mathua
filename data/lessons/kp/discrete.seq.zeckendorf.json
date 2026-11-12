@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The theorem",
+    "section": "The theorem",
+    "subgoals": [
+      "List the Fibonacci numbers",
+      "Forbid consecutive indices",
+      "State uniqueness"
+    ]
+  },
+  {
+    "label": "The greedy algorithm",
+    "section": "The greedy algorithm",
+    "subgoals": [
+      "Take the largest term",
+      "Subtract and repeat",
+      "Check the gap"
+    ]
+  },
+  {
+    "label": "Uniqueness",
+    "section": "Uniqueness",
+    "subgoals": [
+      "Compare largest terms",
+      "Bound the remainder",
+      "Derive the contradiction"
+    ]
+  }
+]

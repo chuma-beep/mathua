@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Well-ordering",
+    "section": "Well-ordering",
+    "subgoals": [
+      "Assume a counterexample",
+      "Take the least one",
+      "Use positivity"
+    ]
+  },
+  {
+    "label": "The descent step",
+    "section": "The descent step",
+    "subgoals": [
+      "Construct a smaller witness",
+      "Preserve the property",
+      "Check strict decrease"
+    ]
+  },
+  {
+    "label": "The contradiction",
+    "section": "The contradiction",
+    "subgoals": [
+      "Compare with minimality",
+      "Conclude no witness",
+      "State the theorem"
+    ]
+  }
+]

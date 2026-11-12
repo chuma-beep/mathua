@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Polynomial space",
+    "section": "Polynomial space",
+    "subgoals": [
+      "Bound the tape",
+      "Allow long runs",
+      "Reuse cells"
+    ]
+  },
+  {
+    "label": "QBF completeness",
+    "section": "QBF completeness",
+    "subgoals": [
+      "Read the quantifiers",
+      "Alternate players",
+      "Reduce from QBF"
+    ]
+  },
+  {
+    "label": "Inclusions",
+    "section": "Inclusions",
+    "subgoals": [
+      "Place NP inside",
+      "Place inside EXP",
+      "State the open gaps"
+    ]
+  }
+]

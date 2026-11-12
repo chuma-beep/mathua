@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Weight by probability",
+      "Take the logarithm",
+      "Sum the surprises"
+    ]
+  },
+  {
+    "label": "Units",
+    "section": "Units",
+    "subgoals": [
+      "Choose the logarithm base",
+      "Convert nats to bits",
+      "Read the bound in bits"
+    ]
+  },
+  {
+    "label": "The coding bound",
+    "section": "The coding bound",
+    "subgoals": [
+      "Compare average length",
+      "State the lower bound",
+      "Place Huffman within one bit"
+    ]
+  }
+]

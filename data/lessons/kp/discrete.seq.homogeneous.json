@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The form",
+    "section": "The form",
+    "subgoals": [
+      "Identify the order",
+      "Collect the coefficients",
+      "Read the initial values"
+    ]
+  },
+  {
+    "label": "The characteristic equation",
+    "section": "The characteristic equation",
+    "subgoals": [
+      "Substitute r^n",
+      "Collect the polynomial",
+      "Find the roots"
+    ]
+  },
+  {
+    "label": "Superposition",
+    "section": "Superposition",
+    "subgoals": [
+      "Combine two solutions",
+      "Count the basis",
+      "Match initial values"
+    ]
+  }
+]

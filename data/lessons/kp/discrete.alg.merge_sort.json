@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Divide and merge",
+    "section": "Divide and merge",
+    "subgoals": [
+      "Halve the array",
+      "Merge two sorted runs",
+      "Take the smaller front element"
+    ]
+  },
+  {
+    "label": "The recurrence",
+    "section": "The recurrence",
+    "subgoals": [
+      "Write the halving recurrence",
+      "Apply the master theorem",
+      "Count the merge work"
+    ]
+  },
+  {
+    "label": "Stability",
+    "section": "Stability",
+    "subgoals": [
+      "Break ties to the left",
+      "Preserve equal keys",
+      "Compare with quicksort"
+    ]
+  }
+]

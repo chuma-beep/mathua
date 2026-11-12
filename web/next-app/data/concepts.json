@@ -15654,6 +15654,633 @@
     "subdomain": "discrete_math.algorithms"
   },
   {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.alg.quicksort",
+    "key_prerequisites": [
+      "discrete.algorithms.dynamic_programming"
+    ],
+    "label": "Quicksort",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.algorithms.dynamic_programming"
+    ],
+    "subdomain": "discrete_math.algorithms",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.alg.merge_sort",
+    "key_prerequisites": [
+      "discrete.algorithms.dynamic_programming"
+    ],
+    "label": "Merge sort",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.algorithms.dynamic_programming"
+    ],
+    "subdomain": "discrete_math.algorithms",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.alg.binary_search",
+    "key_prerequisites": [
+      "discrete.algorithms.dynamic_programming"
+    ],
+    "label": "Binary search",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.algorithms.dynamic_programming"
+    ],
+    "subdomain": "discrete_math.algorithms",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.alg.dijkstra",
+    "key_prerequisites": [
+      "discrete.algorithms.greedy"
+    ],
+    "label": "Dijkstra's algorithm",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.algorithms.greedy"
+    ],
+    "subdomain": "discrete_math.algorithms",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.alg.huffman",
+    "key_prerequisites": [
+      "discrete.algorithms.greedy"
+    ],
+    "label": "Huffman coding",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.algorithms.greedy"
+    ],
+    "subdomain": "discrete_math.algorithms",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.alg.backtracking",
+    "key_prerequisites": [
+      "discrete.algorithms.dynamic_programming"
+    ],
+    "label": "Backtracking",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.algorithms.dynamic_programming"
+    ],
+    "subdomain": "discrete_math.algorithms",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.alg.branch_bound",
+    "key_prerequisites": [
+      "discrete.algorithms.dynamic_programming"
+    ],
+    "label": "Branch-and-bound search",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.algorithms.dynamic_programming"
+    ],
+    "subdomain": "discrete_math.algorithms",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.coding.entropy",
+    "key_prerequisites": [
+      "discrete.coding.hamming"
+    ],
+    "label": "Shannon entropy",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.coding.hamming"
+    ],
+    "subdomain": "discrete_math.coding",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.coding.convolutional",
+    "key_prerequisites": [
+      "discrete.coding.linear"
+    ],
+    "label": "Convolutional codes",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.coding.linear"
+    ],
+    "subdomain": "discrete_math.coding",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.coding.ldpc",
+    "key_prerequisites": [
+      "discrete.coding.linear"
+    ],
+    "label": "LDPC codes",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.coding.linear"
+    ],
+    "subdomain": "discrete_math.coding",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.coding.bch",
+    "key_prerequisites": [
+      "discrete.coding.cyclic"
+    ],
+    "label": "BCH codes",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.coding.cyclic"
+    ],
+    "subdomain": "discrete_math.coding",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.coding.singleton",
+    "key_prerequisites": [
+      "discrete.coding.hamming"
+    ],
+    "label": "The Singleton bound",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.coding.hamming"
+    ],
+    "subdomain": "discrete_math.coding",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.complexity.space",
+    "key_prerequisites": [
+      "discrete.complexity.np_complete"
+    ],
+    "label": "Space complexity",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.complexity.np_complete"
+    ],
+    "subdomain": "discrete_math.complexity",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.complexity.hierarchy",
+    "key_prerequisites": [
+      "discrete.complexity.np_complete"
+    ],
+    "label": "The time hierarchy theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.complexity.np_complete"
+    ],
+    "subdomain": "discrete_math.complexity",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.complexity.conp",
+    "key_prerequisites": [
+      "discrete.complexity.np_complete"
+    ],
+    "label": "coNP",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.complexity.np_complete"
+    ],
+    "subdomain": "discrete_math.complexity",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.complexity.pspace",
+    "key_prerequisites": [
+      "discrete.complexity.np_complete"
+    ],
+    "label": "PSPACE",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.complexity.np_complete"
+    ],
+    "subdomain": "discrete_math.complexity",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.complexity.approximation",
+    "key_prerequisites": [
+      "discrete.complexity.np_complete"
+    ],
+    "label": "Approximation algorithms",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.complexity.np_complete"
+    ],
+    "subdomain": "discrete_math.complexity",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.complexity.fpt",
+    "key_prerequisites": [
+      "discrete.complexity.np_complete"
+    ],
+    "label": "Fixed-parameter tractability",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.complexity.np_complete"
+    ],
+    "subdomain": "discrete_math.complexity",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.seq.homogeneous",
+    "key_prerequisites": [
+      "discrete.recurrence.master_theorem"
+    ],
+    "label": "Homogeneous linear recurrences",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.recurrence.master_theorem"
+    ],
+    "subdomain": "discrete_math.recurrence",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.seq.characteristic",
+    "key_prerequisites": [
+      "discrete.recurrence.master_theorem"
+    ],
+    "label": "Characteristic roots",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.recurrence.master_theorem"
+    ],
+    "subdomain": "discrete_math.recurrence",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.seq.nonhomogeneous",
+    "key_prerequisites": [
+      "discrete.recurrence.master_theorem"
+    ],
+    "label": "Nonhomogeneous recurrences",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.recurrence.master_theorem"
+    ],
+    "subdomain": "discrete_math.recurrence",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.seq.zeckendorf",
+    "key_prerequisites": [
+      "discrete.sequences.linear_recurrence"
+    ],
+    "label": "Zeckendorf representation",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.sequences.linear_recurrence"
+    ],
+    "subdomain": "discrete_math.recurrence",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.seq.continued_fraction",
+    "key_prerequisites": [
+      "discrete.sequences.linear_recurrence"
+    ],
+    "label": "Continued fraction expansions",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.sequences.linear_recurrence"
+    ],
+    "subdomain": "discrete_math.recurrence",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.seq.ackermann",
+    "key_prerequisites": [
+      "discrete.recurrence.master_theorem"
+    ],
+    "label": "The Ackermann function",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.recurrence.master_theorem"
+    ],
+    "subdomain": "discrete_math.recurrence",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.sets.cardinality",
+    "key_prerequisites": [
+      "discrete.sets.countable"
+    ],
+    "label": "Cardinality of finite sets",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.sets.countable"
+    ],
+    "subdomain": "discrete_math.sets",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.sets.cartesian",
+    "key_prerequisites": [
+      "discrete.sets.countable"
+    ],
+    "label": "Cartesian products",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.sets.countable"
+    ],
+    "subdomain": "discrete_math.sets",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.sets.equivalence_classes",
+    "key_prerequisites": [
+      "discrete.sets.relation_closure"
+    ],
+    "label": "Equivalence classes",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.sets.relation_closure"
+    ],
+    "subdomain": "discrete_math.sets",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.sets.lattice",
+    "key_prerequisites": [
+      "discrete.sets.relation_closure"
+    ],
+    "label": "Lattices",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.sets.relation_closure"
+    ],
+    "subdomain": "discrete_math.sets",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.proof.invariant",
+    "key_prerequisites": [
+      "discrete.proof.cases"
+    ],
+    "label": "Loop invariants",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.proof.cases"
+    ],
+    "subdomain": "discrete_math.proof",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.proof.diagonal",
+    "key_prerequisites": [
+      "discrete.proof.cases"
+    ],
+    "label": "Cantor's diagonal argument",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.proof.cases"
+    ],
+    "subdomain": "discrete_math.proof",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.proof.descent",
+    "key_prerequisites": [
+      "discrete.proof.cases"
+    ],
+    "label": "Infinite descent",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.proof.cases"
+    ],
+    "subdomain": "discrete_math.proof",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.proof.constructive",
+    "key_prerequisites": [
+      "discrete.proof.cases"
+    ],
+    "label": "Constructive proofs",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.proof.cases"
+    ],
+    "subdomain": "discrete_math.proof",
+    "variants": []
+  },
+  {
+    "domain": "discrete_math",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "discrete.proof.nonconstructive",
+    "key_prerequisites": [
+      "discrete.proof.cases"
+    ],
+    "label": "Nonconstructive proofs",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "discrete.proof.cases"
+    ],
+    "subdomain": "discrete_math.proof",
+    "variants": []
+  },
+  {
     "domain": "fractions",
     "grading_type": "numeric",
     "id": "frac.basics.concept",

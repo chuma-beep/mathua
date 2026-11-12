@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Separate parameter from size",
+      "Confine the exponential",
+      "Compare with n^k"
+    ]
+  },
+  {
+    "label": "Kernels",
+    "section": "Kernels",
+    "subgoals": [
+      "Reduce in polynomial time",
+      "Bound the kernel size",
+      "Derive an FPT algorithm"
+    ]
+  },
+  {
+    "label": "Examples",
+    "section": "Examples",
+    "subgoals": [
+      "Parameterise vertex cover",
+      "Contrast independent set",
+      "Choose the parameter"
+    ]
+  }
+]

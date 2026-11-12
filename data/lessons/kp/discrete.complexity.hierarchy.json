@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Diagonalisation",
+    "section": "Diagonalisation",
+    "subgoals": [
+      "Enumerate the machines",
+      "Disagree on the diagonal",
+      "Conclude separation"
+    ]
+  },
+  {
+    "label": "Time constructibility",
+    "section": "Time constructibility",
+    "subgoals": [
+      "Simulate within the bound",
+      "Budget the steps",
+      "State the condition"
+    ]
+  },
+  {
+    "label": "Consequences",
+    "section": "Consequences",
+    "subgoals": [
+      "Separate P from EXP",
+      "Explain the NP gap",
+      "Compare with space"
+    ]
+  }
+]

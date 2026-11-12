@@ -10854,5 +10854,137 @@
   {
     "concept_id": "prob.rel.parallel",
     "source": "authored/prob.rel.parallel.md"
+  },
+  {
+    "concept_id": "discrete.alg.quicksort",
+    "source": "authored/discrete.alg.quicksort.md"
+  },
+  {
+    "concept_id": "discrete.alg.merge_sort",
+    "source": "authored/discrete.alg.merge_sort.md"
+  },
+  {
+    "concept_id": "discrete.alg.binary_search",
+    "source": "authored/discrete.alg.binary_search.md"
+  },
+  {
+    "concept_id": "discrete.alg.dijkstra",
+    "source": "authored/discrete.alg.dijkstra.md"
+  },
+  {
+    "concept_id": "discrete.alg.huffman",
+    "source": "authored/discrete.alg.huffman.md"
+  },
+  {
+    "concept_id": "discrete.alg.backtracking",
+    "source": "authored/discrete.alg.backtracking.md"
+  },
+  {
+    "concept_id": "discrete.alg.branch_bound",
+    "source": "authored/discrete.alg.branch_bound.md"
+  },
+  {
+    "concept_id": "discrete.coding.entropy",
+    "source": "authored/discrete.coding.entropy.md"
+  },
+  {
+    "concept_id": "discrete.coding.convolutional",
+    "source": "authored/discrete.coding.convolutional.md"
+  },
+  {
+    "concept_id": "discrete.coding.ldpc",
+    "source": "authored/discrete.coding.ldpc.md"
+  },
+  {
+    "concept_id": "discrete.coding.bch",
+    "source": "authored/discrete.coding.bch.md"
+  },
+  {
+    "concept_id": "discrete.coding.singleton",
+    "source": "authored/discrete.coding.singleton.md"
+  },
+  {
+    "concept_id": "discrete.complexity.space",
+    "source": "authored/discrete.complexity.space.md"
+  },
+  {
+    "concept_id": "discrete.complexity.hierarchy",
+    "source": "authored/discrete.complexity.hierarchy.md"
+  },
+  {
+    "concept_id": "discrete.complexity.conp",
+    "source": "authored/discrete.complexity.conp.md"
+  },
+  {
+    "concept_id": "discrete.complexity.pspace",
+    "source": "authored/discrete.complexity.pspace.md"
+  },
+  {
+    "concept_id": "discrete.complexity.approximation",
+    "source": "authored/discrete.complexity.approximation.md"
+  },
+  {
+    "concept_id": "discrete.complexity.fpt",
+    "source": "authored/discrete.complexity.fpt.md"
+  },
+  {
+    "concept_id": "discrete.seq.homogeneous",
+    "source": "authored/discrete.seq.homogeneous.md"
+  },
+  {
+    "concept_id": "discrete.seq.characteristic",
+    "source": "authored/discrete.seq.characteristic.md"
+  },
+  {
+    "concept_id": "discrete.seq.nonhomogeneous",
+    "source": "authored/discrete.seq.nonhomogeneous.md"
+  },
+  {
+    "concept_id": "discrete.seq.zeckendorf",
+    "source": "authored/discrete.seq.zeckendorf.md"
+  },
+  {
+    "concept_id": "discrete.seq.continued_fraction",
+    "source": "authored/discrete.seq.continued_fraction.md"
+  },
+  {
+    "concept_id": "discrete.seq.ackermann",
+    "source": "authored/discrete.seq.ackermann.md"
+  },
+  {
+    "concept_id": "discrete.sets.cardinality",
+    "source": "authored/discrete.sets.cardinality.md"
+  },
+  {
+    "concept_id": "discrete.sets.cartesian",
+    "source": "authored/discrete.sets.cartesian.md"
+  },
+  {
+    "concept_id": "discrete.sets.equivalence_classes",
+    "source": "authored/discrete.sets.equivalence_classes.md"
+  },
+  {
+    "concept_id": "discrete.sets.lattice",
+    "source": "authored/discrete.sets.lattice.md"
+  },
+  {
+    "concept_id": "discrete.proof.invariant",
+    "source": "authored/discrete.proof.invariant.md"
+  },
+  {
+    "concept_id": "discrete.proof.diagonal",
+    "source": "authored/discrete.proof.diagonal.md"
+  },
+  {
+    "concept_id": "discrete.proof.descent",
+    "source": "authored/discrete.proof.descent.md"
+  },
+  {
+    "concept_id": "discrete.proof.constructive",
+    "source": "authored/discrete.proof.constructive.md"
+  },
+  {
+    "concept_id": "discrete.proof.nonconstructive",
+    "source": "authored/discrete.proof.nonconstructive.md"
   }
 ]

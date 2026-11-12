@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The search tree",
+    "section": "The search tree",
+    "subgoals": [
+      "Fix one decision per level",
+      "Recognise a partial assignment",
+      "Stop at a leaf"
+    ]
+  },
+  {
+    "label": "Pruning",
+    "section": "Pruning",
+    "subgoals": [
+      "Detect a violated constraint",
+      "Skip the subtree",
+      "Order the choices"
+    ]
+  },
+  {
+    "label": "N queens",
+    "section": "N queens",
+    "subgoals": [
+      "Place row by row",
+      "Check columns and diagonals",
+      "Count pruned boards"
+    ]
+  }
+]

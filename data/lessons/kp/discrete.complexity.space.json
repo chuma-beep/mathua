@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The resource",
+    "section": "The resource",
+    "subgoals": [
+      "Count working cells",
+      "Exclude the input tape",
+      "Take the maximum"
+    ]
+  },
+  {
+    "label": "Inclusions",
+    "section": "Inclusions",
+    "subgoals": [
+      "Place P inside NP",
+      "Place NP inside PSPACE",
+      "Explain the chain"
+    ]
+  },
+  {
+    "label": "Savitch's theorem",
+    "section": "Savitch's theorem",
+    "subgoals": [
+      "Square the space",
+      "Remove nondeterminism",
+      "Compare with time"
+    ]
+  }
+]

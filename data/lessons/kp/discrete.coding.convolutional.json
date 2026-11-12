@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The shift register",
+    "section": "The shift register",
+    "subgoals": [
+      "Shift in one bit",
+      "Combine register taps",
+      "Emit output bits"
+    ]
+  },
+  {
+    "label": "The trellis",
+    "section": "The trellis",
+    "subgoals": [
+      "Label states by register",
+      "Follow transition labels",
+      "Trace a received path"
+    ]
+  },
+  {
+    "label": "Viterbi decoding",
+    "section": "Viterbi decoding",
+    "subgoals": [
+      "Keep the best path per state",
+      "Advance one time step",
+      "Backtrack the survivor"
+    ]
+  }
+]

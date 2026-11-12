@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The halving",
+    "section": "The halving",
+    "subgoals": [
+      "Compare with the middle",
+      "Discard one half",
+      "Repeat on the other"
+    ]
+  },
+  {
+    "label": "The invariant",
+    "section": "The invariant",
+    "subgoals": [
+      "State the bound invariant",
+      "Check the crossing case",
+      "Handle duplicates"
+    ]
+  },
+  {
+    "label": "Logarithmic steps",
+    "section": "Logarithmic steps",
+    "subgoals": [
+      "Halve the candidate count",
+      "Count comparisons",
+      "Take the ceiling"
+    ]
+  }
+]

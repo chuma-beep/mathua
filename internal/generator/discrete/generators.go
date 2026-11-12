@@ -55,6 +55,7 @@ func Register(reg *generator.Registry) {
 	registerCombinatoricsBatch(reg)
 	registerWave6(reg)
 	registerWave6Remaining(reg)
+	registerWave27(reg)
 }
 
 // ----- 1. propositions -----

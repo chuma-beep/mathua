@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Witnesses",
+    "section": "Witnesses",
+    "subgoals": [
+      "Exhibit the object",
+      "Verify the property",
+      "Name the quantifier"
+    ]
+  },
+  {
+    "label": "Algorithms as witnesses",
+    "section": "Algorithms as witnesses",
+    "subgoals": [
+      "Describe the procedure",
+      "Prove termination",
+      "Prove correctness"
+    ]
+  },
+  {
+    "label": "Constructive logic",
+    "section": "Constructive logic",
+    "subgoals": [
+      "Contrast with contradiction",
+      "Check the negation",
+      "State the school"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The three properties",
+    "section": "The three properties",
+    "subgoals": [
+      "Check reflexivity",
+      "Check symmetry",
+      "Check transitivity"
+    ]
+  },
+  {
+    "label": "The partition",
+    "section": "The partition",
+    "subgoals": [
+      "Show classes cover",
+      "Show disjointness",
+      "Identify the class of an element"
+    ]
+  },
+  {
+    "label": "Quotients",
+    "section": "Quotients",
+    "subgoals": [
+      "Form the class set",
+      "Choose representatives",
+      "Prove well-definedness"
+    ]
+  }
+]

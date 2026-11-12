@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Ordered pairs",
+    "section": "Ordered pairs",
+    "subgoals": [
+      "Pair each element",
+      "Respect order",
+      "Compare with a set"
+    ]
+  },
+  {
+    "label": "Size",
+    "section": "Size",
+    "subgoals": [
+      "Multiply the sizes",
+      "Count independent choices",
+      "Check the empty set"
+    ]
+  },
+  {
+    "label": "Relations and functions",
+    "section": "Relations and functions",
+    "subgoals": [
+      "Take a subset of pairs",
+      "Enforce one output",
+      "Count the relations"
+    ]
+  }
+]

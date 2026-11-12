@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Partitioning",
+    "section": "Partitioning",
+    "subgoals": [
+      "Move smaller elements left",
+      "Place the pivot",
+      "Scan once per pass"
+    ]
+  },
+  {
+    "label": "Expected cost",
+    "section": "Expected cost",
+    "subgoals": [
+      "Write the recurrence",
+      "Balance the two sides",
+      "Count the partition work"
+    ]
+  },
+  {
+    "label": "Worst case",
+    "section": "Worst case",
+    "subgoals": [
+      "Identify the degenerate split",
+      "Count the passes",
+      "Compare with merge sort"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Cyclic structure",
+    "section": "Cyclic structure",
+    "subgoals": [
+      "Shift a codeword",
+      "Reduce modulo x^n-1",
+      "Identify the generator"
+    ]
+  },
+  {
+    "label": "Designed distance",
+    "section": "Designed distance",
+    "subgoals": [
+      "Count consecutive roots",
+      "State the distance bound",
+      "Compare with the true distance"
+    ]
+  },
+  {
+    "label": "Decoding",
+    "section": "Decoding",
+    "subgoals": [
+      "Evaluate syndromes",
+      "Run Berlekamp-Massey",
+      "Locate the errors"
+    ]
+  }
+]

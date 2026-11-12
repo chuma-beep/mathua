@@ -12,20 +12,20 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 2714 |
+| Total concepts | 2747 |
 | Total units | 162 |
 | Minimum unit size | 1 |
-| Median unit size | 12 |
+| Median unit size | 13 |
 | Maximum unit size | 82 |
 | Singleton units | 24 |
-| Units with <= 3 concepts | 39 |
+| Units with <= 3 concepts | 38 |
 | Units with > 25 concepts | 42 |
 | Units with > 50 concepts | 7 |
 | Cross-unit prerequisite edges (derived) | 538 |
 | Backward band edges | 0 |
 
 If the learner is assessed once per unit, then 162 assessments cover the corpus, and the
-median is one assessment per 12 concepts. That is the frequency question this report
+median is one assessment per 13 concepts. That is the frequency question this report
 exists to make concrete.
 
 ## Proposed units
@@ -83,10 +83,10 @@ exists to make concrete.
 | `discrete_math.b2` | discrete_math | 2 | 2 | 1 | 7–8 |
 | `discrete_math.b4` | discrete_math | 4 | 5 | 2 | 13–14 |
 | `discrete_math.b5` | discrete_math | 5 | 19 | 4 | 15–17 |
-| `discrete_math.b6` | discrete_math | 6 | 37 | 8 | 18–20 |
-| `discrete_math.b7` | discrete_math | 7 | 10 | 5 | 21–23 |
-| `discrete_math.b8` | discrete_math | 8 | 3 | 2 | 24–26 |
-| `discrete_math.b9` | discrete_math | 9 | 9 | 4 | 27–29 |
+| `discrete_math.b6` | discrete_math | 6 | 41 | 8 | 18–20 |
+| `discrete_math.b7` | discrete_math | 7 | 22 | 8 | 21–23 |
+| `discrete_math.b8` | discrete_math | 8 | 9 | 2 | 24–26 |
+| `discrete_math.b9` | discrete_math | 9 | 20 | 4 | 27–29 |
 | `discrete_math.b10` | discrete_math | 10 | 1 | 1 | 30–30 |
 | `fractions.b2` | fractions | 2 | 8 | 4 | 6–8 |
 | `fractions.b3` | fractions | 3 | 36 | 9 | 9–11 |
@@ -208,16 +208,16 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 220 | 9 | 56 | 25 | 53 | 26 | 0 |
-| 3 | 162 | 12 | 82 | 24 | 39 | 42 | 0 |
-| 4 | 125 | 19 | 86 | 8 | 21 | 46 | 0 |
-| 5 | 107 | 20 | 104 | 6 | 17 | 45 | 0 |
-| 6 | 97 | 23 | 130 | 8 | 14 | 42 | 0 |
-| 8 | 76 | 31 | 117 | 4 | 11 | 40 | 0 |
+| 2 | 220 | 9 | 56 | 25 | 52 | 27 | 0 |
+| 3 | 162 | 13 | 82 | 24 | 38 | 42 | 0 |
+| 4 | 125 | 19 | 86 | 8 | 21 | 47 | 0 |
+| 5 | 107 | 20 | 104 | 6 | 17 | 47 | 0 |
+| 6 | 97 | 23 | 130 | 8 | 14 | 43 | 0 |
+| 8 | 76 | 31 | 117 | 4 | 11 | 41 | 0 |
 | 10 | 65 | 30 | 145 | 2 | 8 | 35 | 0 |
-| 12 | 63 | 34 | 191 | 1 | 5 | 40 | 0 |
+| 12 | 63 | 34 | 191 | 1 | 5 | 41 | 0 |
 | 15 | 51 | 53 | 172 | 1 | 3 | 35 | 0 |
-| 20 | 44 | 67 | 145 | 0 | 4 | 32 | 0 |
+| 20 | 44 | 68 | 145 | 0 | 4 | 32 | 0 |
 | 45 | 26 | 120 | 172 | 0 | 0 | 26 | 0 |
 
 **No width is clean.** Small widths fragment, at 3 there are 24 singleton units, which is a
@@ -542,7 +542,7 @@ Unresolvable subdomains:
 `trigonometry.identities`
 `trigonometry.spherical`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2714
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2747
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings

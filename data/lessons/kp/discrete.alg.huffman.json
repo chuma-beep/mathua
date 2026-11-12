@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The greedy merge",
+    "section": "The greedy merge",
+    "subgoals": [
+      "Take two smallest weights",
+      "Merge into a parent",
+      "Repeat to one root"
+    ]
+  },
+  {
+    "label": "Prefix codes",
+    "section": "Prefix codes",
+    "subgoals": [
+      "Place symbols at leaves",
+      "Check the prefix rule",
+      "Decode without separators"
+    ]
+  },
+  {
+    "label": "Optimality",
+    "section": "Optimality",
+    "subgoals": [
+      "Exchange the deepest pair",
+      "Compare code lengths",
+      "Prove the greedy step"
+    ]
+  }
+]

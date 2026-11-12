@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Complement the language",
+      "Place it in NP",
+      "Name tautology"
+    ]
+  },
+  {
+    "label": "Certificates",
+    "section": "Certificates",
+    "subgoals": [
+      "Refute membership",
+      "Exhibit a falsifier",
+      "Connect to SAT"
+    ]
+  },
+  {
+    "label": "The open question",
+    "section": "The open question",
+    "subgoals": [
+      "State NP versus coNP",
+      "Explain the consequence",
+      "Compare with P"
+    ]
+  }
+]

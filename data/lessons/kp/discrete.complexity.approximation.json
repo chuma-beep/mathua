@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The ratio",
+    "section": "The ratio",
+    "subgoals": [
+      "Compare with the optimum",
+      "State the factor",
+      "Handle both directions"
+    ]
+  },
+  {
+    "label": "Schemes",
+    "section": "Schemes",
+    "subgoals": [
+      "Fix epsilon",
+      "Bound the running time",
+      "Distinguish PTAS from FPTAS"
+    ]
+  },
+  {
+    "label": "Hardness of approximation",
+    "section": "Hardness of approximation",
+    "subgoals": [
+      "Name the threshold",
+      "Cite PCP",
+      "Explain the gap"
+    ]
+  }
+]

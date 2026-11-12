@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 2714,
+  "concept_count": 2747,
   "unit_count": 162,
   "units": [
     {
@@ -1854,11 +1854,15 @@
         "discrete.automata.nfa",
         "discrete.automata.pumping_lemma",
         "discrete.automata.regex",
+        "discrete.coding.convolutional",
         "discrete.coding.cyclic",
+        "discrete.coding.entropy",
         "discrete.coding.generator",
         "discrete.coding.hamming",
+        "discrete.coding.ldpc",
         "discrete.coding.linear",
         "discrete.coding.reed_solomon",
+        "discrete.coding.singleton",
         "discrete.combinatorics.burnside",
         "discrete.combinatorics.derangement",
         "discrete.combinatorics.integer_partitions",
@@ -1887,7 +1891,7 @@
         "discrete.sets.relation_closure",
         "discrete.sets.relations"
       ],
-      "concept_count": 37
+      "concept_count": 41
     },
     {
       "id": "discrete_math.b7",
@@ -1899,23 +1903,38 @@
       "subdomains": [
         "discrete_math.algorithms",
         "discrete_math.automata",
+        "discrete_math.coding",
         "discrete_math.combinatorics",
         "discrete_math.complexity",
-        "discrete_math.graph_theory"
+        "discrete_math.graph_theory",
+        "discrete_math.proof",
+        "discrete_math.sets"
       ],
       "concept_ids": [
+        "discrete.alg.dijkstra",
+        "discrete.alg.huffman",
         "discrete.algorithms.greedy",
         "discrete.automata.decidability",
         "discrete.automata.halting",
         "discrete.automata.pda",
         "discrete.automata.turing",
+        "discrete.coding.bch",
         "discrete.combinatorics.bell",
         "discrete.combinatorics.pascal",
         "discrete.combinatorics.stirling_second",
         "discrete.complexity.reduction",
-        "discrete.graphs.bipartite"
+        "discrete.graphs.bipartite",
+        "discrete.proof.constructive",
+        "discrete.proof.descent",
+        "discrete.proof.diagonal",
+        "discrete.proof.invariant",
+        "discrete.proof.nonconstructive",
+        "discrete.sets.cardinality",
+        "discrete.sets.cartesian",
+        "discrete.sets.equivalence_classes",
+        "discrete.sets.lattice"
       ],
-      "concept_count": 10
+      "concept_count": 22
     },
     {
       "id": "discrete_math.b8",
@@ -1929,11 +1948,17 @@
         "discrete_math.recurrence"
       ],
       "concept_ids": [
+        "discrete.complexity.approximation",
+        "discrete.complexity.conp",
         "discrete.complexity.cook_levin",
+        "discrete.complexity.fpt",
+        "discrete.complexity.hierarchy",
         "discrete.complexity.np_complete",
+        "discrete.complexity.pspace",
+        "discrete.complexity.space",
         "discrete.sequences.recurrence"
       ],
-      "concept_count": 3
+      "concept_count": 9
     },
     {
       "id": "discrete_math.b9",
@@ -1949,17 +1974,28 @@
         "discrete_math.recurrence"
       ],
       "concept_ids": [
+        "discrete.alg.backtracking",
+        "discrete.alg.binary_search",
+        "discrete.alg.branch_bound",
+        "discrete.alg.merge_sort",
+        "discrete.alg.quicksort",
         "discrete.algorithms.dynamic_programming",
         "discrete.combinatorics.catalan",
         "discrete.proof.induction",
         "discrete.proof.strong_induction",
         "discrete.proof.structural",
         "discrete.recurrence.master_theorem",
+        "discrete.seq.ackermann",
+        "discrete.seq.characteristic",
+        "discrete.seq.continued_fraction",
+        "discrete.seq.homogeneous",
+        "discrete.seq.nonhomogeneous",
+        "discrete.seq.zeckendorf",
         "discrete.sequences.generating_functions",
         "discrete.sequences.growth_rates",
         "discrete.sequences.linear_recurrence"
       ],
-      "concept_count": 9
+      "concept_count": 20
     },
     {
       "id": "discrete_math.b10",

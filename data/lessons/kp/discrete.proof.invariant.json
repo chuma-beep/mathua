@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Initialisation",
+    "section": "Initialisation",
+    "subgoals": [
+      "State the invariant",
+      "Check before the loop",
+      "Choose the bounds"
+    ]
+  },
+  {
+    "label": "Preservation",
+    "section": "Preservation",
+    "subgoals": [
+      "Assume before the body",
+      "Restore after the body",
+      "Close the induction"
+    ]
+  },
+  {
+    "label": "Termination",
+    "section": "Termination",
+    "subgoals": [
+      "Combine with the exit guard",
+      "Derive the postcondition",
+      "Show the loop ends"
+    ]
+  }
+]

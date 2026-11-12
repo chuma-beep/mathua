@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Apply the base cases",
+      "Nest the recursion",
+      "Evaluate a small value"
+    ]
+  },
+  {
+    "label": "Growth",
+    "section": "Growth",
+    "subgoals": [
+      "Derive the first rows",
+      "Compare with powers",
+      "Recognise the tower"
+    ]
+  },
+  {
+    "label": "Non-primitive recursion",
+    "section": "Non-primitive recursion",
+    "subgoals": [
+      "Bound primitive loops",
+      "Show the dependence",
+      "Conclude the separation"
+    ]
+  }
+]

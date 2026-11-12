@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The expansion",
+    "section": "The expansion",
+    "subgoals": [
+      "Take the integer part",
+      "Invert the remainder",
+      "Repeat"
+    ]
+  },
+  {
+    "label": "Convergents",
+    "section": "Convergents",
+    "subgoals": [
+      "Truncate the expansion",
+      "Apply the recurrence",
+      "Alternate the bounds"
+    ]
+  },
+  {
+    "label": "Best approximation",
+    "section": "Best approximation",
+    "subgoals": [
+      "Compare denominators",
+      "Check closeness",
+      "Reconstruct a rational"
+    ]
+  }
+]

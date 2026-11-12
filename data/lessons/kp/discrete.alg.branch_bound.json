@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Bounding",
+    "section": "Bounding",
+    "subgoals": [
+      "Build an optimistic bound",
+      "Relax a constraint",
+      "Compare with the incumbent"
+    ]
+  },
+  {
+    "label": "Pruning by bound",
+    "section": "Pruning by bound",
+    "subgoals": [
+      "Keep the best feasible value",
+      "Discard dominated nodes",
+      "Prove the bound is safe"
+    ]
+  },
+  {
+    "label": "Branching order",
+    "section": "Branching order",
+    "subgoals": [
+      "Order children by bound",
+      "Raise the incumbent early",
+      "Count pruned nodes"
+    ]
+  }
+]

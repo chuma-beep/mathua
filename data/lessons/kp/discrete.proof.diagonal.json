@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Assuming a listing",
+    "section": "Assuming a listing",
+    "subgoals": [
+      "Enumerate the rows",
+      "Write digit expansions",
+      "Index the entries"
+    ]
+  },
+  {
+    "label": "The diagonal",
+    "section": "The diagonal",
+    "subgoals": [
+      "Change the diagonal digit",
+      "Avoid trailing nines",
+      "Build the new number"
+    ]
+  },
+  {
+    "label": "The contradiction",
+    "section": "The contradiction",
+    "subgoals": [
+      "Compare with every row",
+      "Find a differing digit",
+      "Conclude no listing"
+    ]
+  }
+]

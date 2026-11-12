@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Particular plus homogeneous",
+    "section": "Particular plus homogeneous",
+    "subgoals": [
+      "Find one particular solution",
+      "Add the homogeneous part",
+      "Fit the initial values"
+    ]
+  },
+  {
+    "label": "Guessing a particular solution",
+    "section": "Guessing a particular solution",
+    "subgoals": [
+      "Match the forcing shape",
+      "Substitute the guess",
+      "Solve the coefficients"
+    ]
+  },
+  {
+    "label": "Resonance",
+    "section": "Resonance",
+    "subgoals": [
+      "Check the homogeneous roots",
+      "Multiply by n",
+      "Re-substitute"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Counting",
+    "section": "Counting",
+    "subgoals": [
+      "Count both classes",
+      "Compare the sizes",
+      "Conclude existence"
+    ]
+  },
+  {
+    "label": "Contradiction",
+    "section": "Contradiction",
+    "subgoals": [
+      "Assume nonexistence",
+      "Derive a contradiction",
+      "Conclude existence"
+    ]
+  },
+  {
+    "label": "The cost",
+    "section": "The cost",
+    "subgoals": [
+      "Note the missing witness",
+      "Contrast with construction",
+      "Keep the bound"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Relaxation",
+    "section": "Relaxation",
+    "subgoals": [
+      "Settle the closest vertex",
+      "Relax outgoing edges",
+      "Update tentative distances"
+    ]
+  },
+  {
+    "label": "The priority queue",
+    "section": "The priority queue",
+    "subgoals": [
+      "Extract the minimum",
+      "Insert improved keys",
+      "Count heap operations"
+    ]
+  },
+  {
+    "label": "Why weights must be non-negative",
+    "section": "Why weights must be non-negative",
+    "subgoals": [
+      "Find the failing edge",
+      "State the invariant",
+      "Compare with Bellman-Ford"
+    ]
+  }
+]

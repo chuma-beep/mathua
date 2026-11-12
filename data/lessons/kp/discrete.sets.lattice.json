@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Meet and join",
+    "section": "Meet and join",
+    "subgoals": [
+      "Find the least upper bound",
+      "Find the greatest lower bound",
+      "Check both exist"
+    ]
+  },
+  {
+    "label": "Algebraic laws",
+    "section": "Algebraic laws",
+    "subgoals": [
+      "Apply absorption",
+      "Use associativity",
+      "Switch to the identities"
+    ]
+  },
+  {
+    "label": "Distributivity",
+    "section": "Distributivity",
+    "subgoals": [
+      "Distribute meet over join",
+      "Compare the dual law",
+      "Identify a Boolean algebra"
+    ]
+  }
+]

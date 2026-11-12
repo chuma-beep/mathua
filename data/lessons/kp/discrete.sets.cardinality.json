@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Bijective definition",
+    "section": "Bijective definition",
+    "subgoals": [
+      "Exhibit a bijection",
+      "Compare sizes",
+      "Extend to infinite sets"
+    ]
+  },
+  {
+    "label": "Sums and products",
+    "section": "Sums and products",
+    "subgoals": [
+      "Add disjoint sizes",
+      "Multiply product sizes",
+      "Correct an overlap"
+    ]
+  },
+  {
+    "label": "Subsets",
+    "section": "Subsets",
+    "subgoals": [
+      "Count all subsets",
+      "Fix a size",
+      "Use the binomial coefficient"
+    ]
+  }
+]

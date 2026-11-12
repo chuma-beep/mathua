@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Distinct roots",
+    "section": "Distinct roots",
+    "subgoals": [
+      "Form the roots",
+      "Assign constants",
+      "Solve for the initial values"
+    ]
+  },
+  {
+    "label": "Repeated roots",
+    "section": "Repeated roots",
+    "subgoals": [
+      "Count multiplicity",
+      "Multiply by powers of n",
+      "Span the solutions"
+    ]
+  },
+  {
+    "label": "Dominant root",
+    "section": "Dominant root",
+    "subgoals": [
+      "Compare moduli",
+      "Read the growth rate",
+      "Handle a tie"
+    ]
+  }
+]

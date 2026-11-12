@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The bound",
+    "section": "The bound",
+    "subgoals": [
+      "Puncture the last coordinates",
+      "Argue distinctness",
+      "Derive the exponent"
+    ]
+  },
+  {
+    "label": "MDS codes",
+    "section": "MDS codes",
+    "subgoals": [
+      "Check equality",
+      "Name Reed-Solomon",
+      "Compare parameters"
+    ]
+  },
+  {
+    "label": "Consequences",
+    "section": "Consequences",
+    "subgoals": [
+      "Compare with Hamming",
+      "Count redundancy",
+      "Choose the bound"
+    ]
+  }
+]

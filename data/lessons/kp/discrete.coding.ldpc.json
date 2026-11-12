@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The parity-check matrix",
+    "section": "The parity-check matrix",
+    "subgoals": [
+      "Check a codeword",
+      "Count nonzeros per row",
+      "Compute the rate"
+    ]
+  },
+  {
+    "label": "Iterative decoding",
+    "section": "Iterative decoding",
+    "subgoals": [
+      "Send variable messages",
+      "Send check messages",
+      "Repeat rounds"
+    ]
+  },
+  {
+    "label": "The rate",
+    "section": "The rate",
+    "subgoals": [
+      "Subtract the rank",
+      "Divide by the length",
+      "Compare with repetition"
+    ]
+  }
+]
