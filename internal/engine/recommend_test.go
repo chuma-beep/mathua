@@ -140,6 +140,49 @@ func TestReviewsDue_MatchesGraphDecayWhenPrerequisiteIsUnmet(t *testing.T) {
 	}
 }
 
+func TestReviewsDue_MatchesGraphDecayWhenMasteryPredatesReviewClock(t *testing.T) {
+	// The same Discord report, second cause: a concept mastered through study
+	// has a mastery date but no review date. The graph used to call it decayed
+	// (999 days) while the scheduler called it fresh (0 days). Both now start
+	// the decay clock at mastery, so the graph and the queue agree.
+	e := testEngine(t)
+	st, _ := e.CreateStudent("sam")
+	old := time.Now().Add(-30 * 24 * time.Hour)
+	if err := e.repo.UpsertProgress(&storage.ConceptProgress{
+		StudentID: st.ID, ConceptID: "b", Status: "MASTERED", MasteredAt: &old,
+	}); err != nil {
+		t.Fatalf("upsert: %v", err)
+	}
+
+	progress, err := e.GetProgress(st.ID)
+	if err != nil {
+		t.Fatalf("get progress: %v", err)
+	}
+	if got := progress["b"].Status; got != "DECAYING" {
+		t.Fatalf("graph status for b = %s, want DECAYING", got)
+	}
+
+	n, err := e.ReviewsDue(st.ID)
+	if err != nil {
+		t.Fatalf("reviews due: %v", err)
+	}
+	if n != 1 {
+		t.Fatalf("ReviewsDue = %d, want 1 to match the graph's decaying count", n)
+	}
+
+	sess, err := e.repo.CreateSession(st.ID)
+	if err != nil {
+		t.Fatalf("create session: %v", err)
+	}
+	q, err := e.NextReviewQuestion(sess.ID, st.ID)
+	if err != nil {
+		t.Fatalf("next review question: %v", err)
+	}
+	if q == nil || q.ConceptID != "b" {
+		t.Fatalf("NextReviewQuestion = %+v, want the decayed concept b", q)
+	}
+}
+
 func TestRecommendNext_DoesNotOfferAQuizWithNoCandidates(t *testing.T) {
 	e := testEngine(t)
 	st, _ := e.CreateStudent("nora")

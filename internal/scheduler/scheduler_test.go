@@ -205,6 +205,26 @@ func TestNext_DecayingPriority(t *testing.T) {
 	}
 }
 
+func TestDueReviewCount_UsesMasteredAtWhenNoReviewClock(t *testing.T) {
+	// Mastery earned through study has no review timestamp. The decay clock
+	// starts at MasteredAt, so a 20-day-old mastery is a due review even
+	// though LastReviewed and FSRSLastReview are both zero.
+	d := miniDAG(t)
+	s := New(d)
+	old := time.Now().UTC().AddDate(0, 0, -20)
+	now := time.Now().UTC()
+	snap := map[string]*ConceptSnapshot{
+		"b": {Status: mastery.StatusMastered, MasteredAt: old, RequiredStreak: 3},
+	}
+	if got := s.DueReviewCount(snap, now); got != 1 {
+		t.Fatalf("DueReviewCount = %d, want 1", got)
+	}
+	nx := s.NextReview(snap, "")
+	if nx == nil || nx.Concept.ID != "b" {
+		t.Fatalf("NextReview = %+v, want concept b", nx)
+	}
+}
+
 func TestNext_70_30_BalancePrefersReview(t *testing.T) {
 	d := miniDAG(t)
 	s := New(d)

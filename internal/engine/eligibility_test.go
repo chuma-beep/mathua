@@ -2,6 +2,7 @@ package engine
 
 import (
 	"testing"
+	"time"
 
 	"github.com/chuma-beep/mathua/internal/concepts"
 	"github.com/chuma-beep/mathua/internal/diagnostic"
@@ -43,23 +44,35 @@ func TestEligibilityFor_FreshLearner(t *testing.T) {
 // A MASTERED row with no review timestamp (legacy or freshly seeded) reads
 // as DECAYING, never as fresh mastery: GetProgress applies decay on read,
 // and a missing date is the stalest possible signal.
-func TestGetProgress_NilLastReviewedReadsDecaying(t *testing.T) {
+func TestGetProgress_DecaysFromMasteryWhenNoReviewClock(t *testing.T) {
+	// A concept mastered through study has no review timestamp until its first
+	// review. The decay clock must start at mastery: treating the missing clock
+	// as 999 days called every freshly mastered concept due, while the
+	// scheduler treated the same row as fresh and never offered it.
 	e := testEngine(t)
 	st, err := e.CreateStudent("legacy-mastered")
 	if err != nil {
 		t.Fatalf("create student: %v", err)
 	}
-	if err := e.repo.UpsertProgress(&storage.ConceptProgress{
-		StudentID: st.ID, ConceptID: "a", Status: "MASTERED", Streak: 5,
-	}); err != nil {
-		t.Fatalf("seed mastery: %v", err)
+	fresh := time.Now().UTC().Add(-time.Hour)
+	stale := time.Now().UTC().AddDate(0, 0, -30)
+	for id, masteredAt := range map[string]time.Time{"a": fresh, "b": stale} {
+		if err := e.repo.UpsertProgress(&storage.ConceptProgress{
+			StudentID: st.ID, ConceptID: id, Status: "MASTERED", Streak: 5,
+			MasteredAt: &masteredAt,
+		}); err != nil {
+			t.Fatalf("seed mastery %s: %v", id, err)
+		}
 	}
 	got, err := e.GetProgress(st.ID)
 	if err != nil {
 		t.Fatalf("get progress: %v", err)
 	}
-	if got["a"].Status != "DECAYING" {
-		t.Errorf("status = %q, want DECAYING", got["a"].Status)
+	if got["a"].Status != "MASTERED" {
+		t.Errorf("fresh mastery status = %q, want MASTERED", got["a"].Status)
+	}
+	if got["b"].Status != "DECAYING" {
+		t.Errorf("stale mastery status = %q, want DECAYING", got["b"].Status)
 	}
 }
 

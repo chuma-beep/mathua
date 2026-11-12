@@ -1737,17 +1737,34 @@ func TestGetProgress_AppliesDecayOnRead(t *testing.T) {
 		t.Fatalf("seed: %v", err)
 	}
 
-	// No LastReviewed at all: we cannot claim it is fresh.
+	// No timestamp at all: there is no evidence the row is stale, and the
+	// scheduler treats the same row as fresh. The graph must agree with it.
 	got, err := e.GetProgress(st.ID)
 	if err != nil {
 		t.Fatalf("get: %v", err)
 	}
+	if got["a"].Status != string(mastery.StatusMastered) {
+		t.Errorf("status = %q, want MASTERED when no clock is set", got["a"].Status)
+	}
+
+	// Mastered with no review clock: the decay clock starts at mastery.
+	now := time.Now().UTC()
+	mastered := now.AddDate(0, 0, -15)
+	if err := e.repo.UpsertProgress(&storage.ConceptProgress{
+		StudentID: st.ID, ConceptID: "a", Status: string(mastery.StatusMastered), Streak: 3,
+		MasteredAt: &mastered,
+	}); err != nil {
+		t.Fatalf("seed mastery date: %v", err)
+	}
+	got, err = e.GetProgress(st.ID)
+	if err != nil {
+		t.Fatalf("get: %v", err)
+	}
 	if got["a"].Status != "DECAYING" {
-		t.Errorf("status = %q, want DECAYING for a review with no timestamp", got["a"].Status)
+		t.Errorf("status = %q, want DECAYING 15 days after mastery", got["a"].Status)
 	}
 
 	// Reviewed just now: still mastered.
-	now := time.Now().UTC()
 	if err := e.repo.UpsertProgress(&storage.ConceptProgress{
 		StudentID: st.ID, ConceptID: "a", Status: string(mastery.StatusMastered), Streak: 3,
 		LastReviewed: &now,

@@ -916,6 +916,64 @@ func TestDataMigrations_RunOnce(t *testing.T) {
 	}
 }
 
+func TestReviewClockBackfillForMasteredRows(t *testing.T) {
+	// A concept mastered through study has no review clock. Migration 8 gives
+	// it one so the graph's decay status and the scheduler's review decision
+	// read the same timestamp.
+	store := newTestStore(t)
+	st, err := store.CreateStudent("legacy-review-clock")
+	if err != nil {
+		t.Fatalf("create student: %v", err)
+	}
+	masteredAt := time.Now().UTC().AddDate(0, 0, -40).Truncate(time.Second)
+	if err := store.UpsertProgress(&ConceptProgress{
+		StudentID: st.ID, ConceptID: "a", Status: "MASTERED", MasteredAt: &masteredAt,
+	}); err != nil {
+		t.Fatalf("seed mastery date: %v", err)
+	}
+	if err := store.UpsertProgress(&ConceptProgress{
+		StudentID: st.ID, ConceptID: "b", Status: "MASTERED",
+	}); err != nil {
+		t.Fatalf("seed empty clock: %v", err)
+	}
+
+	execSeed(t, store, "DELETE FROM schema_migrations WHERE version = ?", 8)
+	if err := store.Migrate(); err != nil {
+		t.Fatalf("re-migrate: %v", err)
+	}
+
+	all, err := store.GetAllProgress(st.ID)
+	if err != nil {
+		t.Fatalf("get progress: %v", err)
+	}
+	a := all["a"]
+	if a == nil || a.LastReviewed == nil {
+		t.Fatalf("mastery-date row: expected a review clock, got %+v", a)
+	}
+	if diff := a.LastReviewed.Sub(masteredAt); diff > time.Second || diff < -time.Second {
+		t.Errorf("review clock = %v, want the mastery date %v", a.LastReviewed, masteredAt)
+	}
+	b := all["b"]
+	if b == nil || b.LastReviewed == nil {
+		t.Fatalf("empty-clock row: expected the now fallback, got %+v", b)
+	}
+	if age := time.Since(*b.LastReviewed); age < 0 || age > time.Minute {
+		t.Errorf("fallback clock age = %v, want recent", age)
+	}
+
+	// A second migration must not move a clock that is already set.
+	if err := store.Migrate(); err != nil {
+		t.Fatalf("second migrate: %v", err)
+	}
+	again, err := store.GetAllProgress(st.ID)
+	if err != nil {
+		t.Fatalf("get progress again: %v", err)
+	}
+	if !again["a"].LastReviewed.Equal(*a.LastReviewed) || !again["b"].LastReviewed.Equal(*b.LastReviewed) {
+		t.Error("a second migration moved a review clock")
+	}
+}
+
 // Batch 1: quiz 150 XP gate completions round-trip.
 
 func TestQuizCompletion_RoundTrip(t *testing.T) {

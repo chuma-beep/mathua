@@ -146,7 +146,7 @@ Eighteen tables. The five that carry the learning loop are `students`, `concept_
 - `sessions(student_id)`  --  Session history
 - `attempts(session_id)`  --  Attempts per session
 - `attempts(student_id, timestamp)`  --  Time-series queries
-- `attempts(student_id, concept_id, timestamp)`  --  Aggregate efficacy `GetAllAttempts` (`sqlite.go:1505`)
+- `attempts(student_id, concept_id, timestamp)`  --  Aggregate efficacy `GetAllAttempts` (`sqlite.go:1755`)
 - `questions(concept_id)`  --  Question lookup
 - `students(share_token)`  --  Share link lookup (`migrate.go:69`)
 - `active_sessions(student_id)`, `active_sessions(attempt_id)`  --  Session recovery
