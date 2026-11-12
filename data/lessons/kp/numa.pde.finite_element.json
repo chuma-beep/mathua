@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Weak form",
+    "section": "Weak form",
+    "subgoals": [
+      "Multiply by a test function",
+      "Integrate by parts",
+      "Identify the boundary terms"
+    ]
+  },
+  {
+    "label": "Basis functions",
+    "section": "Basis functions",
+    "subgoals": [
+      "Draw a hat function",
+      "Count nodes and elements",
+      "Evaluate at a node"
+    ]
+  },
+  {
+    "label": "Assembly",
+    "section": "Assembly",
+    "subgoals": [
+      "Assemble element matrices",
+      "Share nodes between elements",
+      "Explain the sparsity"
+    ]
+  }
+]

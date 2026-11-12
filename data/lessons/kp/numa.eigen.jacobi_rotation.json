@@ -1,0 +1,29 @@
+[
+  {
+    "label": "One rotation",
+    "section": "One rotation",
+    "subgoals": [
+      "Choose the rotation angle",
+      "Zero the chosen entry",
+      "Limit the affected rows"
+    ]
+  },
+  {
+    "label": "A sweep",
+    "section": "A sweep",
+    "subgoals": [
+      "Count the pairs",
+      "Repeat the sweep",
+      "State the convergence order"
+    ]
+  },
+  {
+    "label": "Guarantees",
+    "section": "Guarantees",
+    "subgoals": [
+      "Preserve the spectrum",
+      "Compare with QR",
+      "Explain the robustness"
+    ]
+  }
+]

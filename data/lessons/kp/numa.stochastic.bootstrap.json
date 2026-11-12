@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The procedure",
+    "section": "The procedure",
+    "subgoals": [
+      "Resample with replacement",
+      "Recompute the statistic",
+      "Collect the replicates"
+    ]
+  },
+  {
+    "label": "Standard error",
+    "section": "Standard error",
+    "subgoals": [
+      "Take the replicate spread",
+      "Increase the replicate count",
+      "Compare with the analytic value"
+    ]
+  },
+  {
+    "label": "Limits",
+    "section": "Limits",
+    "subgoals": [
+      "Recognise an order statistic",
+      "Handle dependent data",
+      "Use a block scheme"
+    ]
+  }
+]

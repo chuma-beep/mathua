@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The formula",
+    "section": "The formula",
+    "subgoals": [
+      "Divide by the root count",
+      "Use the population variance",
+      "State unbiasedness"
+    ]
+  },
+  {
+    "label": "Rate",
+    "section": "Rate",
+    "subgoals": [
+      "Quadruple the samples",
+      "Halve the error",
+      "Gain a decimal digit"
+    ]
+  },
+  {
+    "label": "Estimation",
+    "section": "Estimation",
+    "subgoals": [
+      "Plug in the sample variance",
+      "Build an interval",
+      "Use a t quantile"
+    ]
+  }
+]

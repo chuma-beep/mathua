@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Work count",
+    "section": "Work count",
+    "subgoals": [
+      "Count the multiply-adds",
+      "Size the output",
+      "Skip the zeros"
+    ]
+  },
+  {
+    "label": "Memory traffic",
+    "section": "Memory traffic",
+    "subgoals": [
+      "Identify the streams",
+      "Block the rows",
+      "Improve input reuse"
+    ]
+  },
+  {
+    "label": "Parallelism",
+    "section": "Parallelism",
+    "subgoals": [
+      "Split by rows",
+      "Avoid synchronisation",
+      "Balance uneven rows"
+    ]
+  }
+]

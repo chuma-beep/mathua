@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Global basis",
+    "section": "Global basis",
+    "subgoals": [
+      "Choose Fourier modes",
+      "Choose Chebyshev polynomials",
+      "Transform to coefficients"
+    ]
+  },
+  {
+    "label": "Convergence",
+    "section": "Convergence",
+    "subgoals": [
+      "State exponential decay",
+      "Recognise Gibbs behaviour",
+      "Relate smoothness to rate"
+    ]
+  },
+  {
+    "label": "Cost",
+    "section": "Cost",
+    "subgoals": [
+      "Use the FFT",
+      "Differentiate diagonally",
+      "Avoid forming the operator"
+    ]
+  }
+]

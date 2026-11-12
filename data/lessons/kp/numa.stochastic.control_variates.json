@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The estimator",
+    "section": "The estimator",
+    "subgoals": [
+      "Subtract the centred control",
+      "Keep unbiasedness",
+      "Choose beta freely"
+    ]
+  },
+  {
+    "label": "Optimal coefficient",
+    "section": "Optimal coefficient",
+    "subgoals": [
+      "Use the covariance ratio",
+      "Minimise the variance",
+      "Read the correlation"
+    ]
+  },
+  {
+    "label": "Many controls",
+    "section": "Many controls",
+    "subgoals": [
+      "Fit several coefficients",
+      "Estimate the covariance",
+      "Compare the fit cost"
+    ]
+  }
+]

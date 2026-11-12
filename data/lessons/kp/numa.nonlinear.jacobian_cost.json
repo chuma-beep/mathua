@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Finite differences",
+    "section": "Finite differences",
+    "subgoals": [
+      "Count forward evaluations",
+      "Count central evaluations",
+      "State the accuracy order"
+    ]
+  },
+  {
+    "label": "Automatic differentiation",
+    "section": "Automatic differentiation",
+    "subgoals": [
+      "Use forward mode",
+      "Use reverse mode",
+      "Match mode to shape"
+    ]
+  },
+  {
+    "label": "Structure",
+    "section": "Structure",
+    "subgoals": [
+      "Colour the columns",
+      "Group compatible columns",
+      "Reduce the perturbations"
+    ]
+  }
+]

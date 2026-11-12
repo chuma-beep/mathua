@@ -21147,6 +21147,956 @@
     "subdomain": "numerical_analysis.optimization"
   },
   {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.eigen.hessenberg",
+    "key_prerequisites": [
+      "numa.linear.elimination"
+    ],
+    "label": "Hessenberg reduction",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.linear.elimination"
+    ],
+    "subdomain": "numerical_analysis.eigen",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.eigen.rayleigh",
+    "key_prerequisites": [
+      "numa.linear.power"
+    ],
+    "label": "The Rayleigh quotient",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.linear.power"
+    ],
+    "subdomain": "numerical_analysis.eigen",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.eigen.lanczos",
+    "key_prerequisites": [
+      "numa.linear.cg"
+    ],
+    "label": "The Lanczos iteration",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.linear.cg"
+    ],
+    "subdomain": "numerical_analysis.eigen",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.eigen.arnoldi",
+    "key_prerequisites": [
+      "numa.linear.qr_algorithm"
+    ],
+    "label": "The Arnoldi iteration",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.linear.qr_algorithm"
+    ],
+    "subdomain": "numerical_analysis.eigen",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.eigen.jacobi_rotation",
+    "key_prerequisites": [
+      "numa.linear.elimination"
+    ],
+    "label": "Jacobi rotations",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.linear.elimination"
+    ],
+    "subdomain": "numerical_analysis.eigen",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.eigen.deflation",
+    "key_prerequisites": [
+      "numa.linear.power"
+    ],
+    "label": "Deflation",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.linear.power"
+    ],
+    "subdomain": "numerical_analysis.eigen",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.eigen.svd",
+    "key_prerequisites": [
+      "numa.linear.least_squares_qr"
+    ],
+    "label": "The singular value decomposition",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.linear.least_squares_qr"
+    ],
+    "subdomain": "numerical_analysis.eigen",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.eigen.condition_svd",
+    "key_prerequisites": [
+      "numa.linear.matrix_condition"
+    ],
+    "label": "Conditioning from singular values",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.linear.matrix_condition"
+    ],
+    "subdomain": "numerical_analysis.eigen",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.eigen.generalized",
+    "key_prerequisites": [
+      "numa.linear.cholesky"
+    ],
+    "label": "The generalized eigenvalue problem",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.linear.cholesky"
+    ],
+    "subdomain": "numerical_analysis.eigen",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.eigen.sensitivity",
+    "key_prerequisites": [
+      "numa.errors.conditioning"
+    ],
+    "label": "Eigenvalue sensitivity",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.errors.conditioning"
+    ],
+    "subdomain": "numerical_analysis.eigen",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.sparse.csr",
+    "key_prerequisites": [
+      "numa.linear.elimination"
+    ],
+    "label": "Compressed sparse row storage",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.linear.elimination"
+    ],
+    "subdomain": "numerical_analysis.sparse",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.sparse.csc",
+    "key_prerequisites": [
+      "numa.sparse.csr"
+    ],
+    "label": "Compressed sparse column storage",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.sparse.csr"
+    ],
+    "subdomain": "numerical_analysis.sparse",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.sparse.matvec",
+    "key_prerequisites": [
+      "numa.sparse.csr"
+    ],
+    "label": "Sparse matrix-vector products",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.sparse.csr"
+    ],
+    "subdomain": "numerical_analysis.sparse",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.sparse.fill_in",
+    "key_prerequisites": [
+      "numa.linear.lu"
+    ],
+    "label": "Fill-in",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.linear.lu"
+    ],
+    "subdomain": "numerical_analysis.sparse",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.sparse.ordering",
+    "key_prerequisites": [
+      "numa.sparse.fill_in"
+    ],
+    "label": "Fill-reducing orderings",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.sparse.fill_in"
+    ],
+    "subdomain": "numerical_analysis.sparse",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.sparse.preconditioner",
+    "key_prerequisites": [
+      "numa.linear.cg"
+    ],
+    "label": "Preconditioners",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.linear.cg"
+    ],
+    "subdomain": "numerical_analysis.sparse",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.sparse.sparse_lu",
+    "key_prerequisites": [
+      "numa.sparse.fill_in"
+    ],
+    "label": "Sparse LU factorisation",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.sparse.fill_in"
+    ],
+    "subdomain": "numerical_analysis.sparse",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.sparse.multigrid",
+    "key_prerequisites": [
+      "numa.linear.sor"
+    ],
+    "label": "Multigrid",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.linear.sor"
+    ],
+    "subdomain": "numerical_analysis.sparse",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.sparse.banded",
+    "key_prerequisites": [
+      "numa.linear.thomas"
+    ],
+    "label": "Banded storage",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.linear.thomas"
+    ],
+    "subdomain": "numerical_analysis.sparse",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.sparse.drop_tolerance",
+    "key_prerequisites": [
+      "numa.sparse.fill_in"
+    ],
+    "label": "Drop tolerances",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.sparse.fill_in"
+    ],
+    "subdomain": "numerical_analysis.sparse",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.pde.cfl",
+    "key_prerequisites": [
+      "numa.diff.finite"
+    ],
+    "label": "The CFL condition",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.diff.finite"
+    ],
+    "subdomain": "numerical_analysis.pde",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.pde.explicit_heat",
+    "key_prerequisites": [
+      "numa.pde.cfl"
+    ],
+    "label": "The explicit heat scheme",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.pde.cfl"
+    ],
+    "subdomain": "numerical_analysis.pde",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.pde.implicit_heat",
+    "key_prerequisites": [
+      "numa.pde.explicit_heat"
+    ],
+    "label": "The implicit heat scheme",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.pde.explicit_heat"
+    ],
+    "subdomain": "numerical_analysis.pde",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.pde.crank_nicolson",
+    "key_prerequisites": [
+      "numa.pde.implicit_heat"
+    ],
+    "label": "The Crank-Nicolson scheme",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.pde.implicit_heat"
+    ],
+    "subdomain": "numerical_analysis.pde",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.pde.method_of_lines",
+    "key_prerequisites": [
+      "numa.diff.finite"
+    ],
+    "label": "The method of lines",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.diff.finite"
+    ],
+    "subdomain": "numerical_analysis.pde",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.pde.upwind",
+    "key_prerequisites": [
+      "numa.pde.cfl"
+    ],
+    "label": "Upwind differencing",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.pde.cfl"
+    ],
+    "subdomain": "numerical_analysis.pde",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.pde.finite_element",
+    "key_prerequisites": [
+      "numa.integration.gauss"
+    ],
+    "label": "Finite elements",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.integration.gauss"
+    ],
+    "subdomain": "numerical_analysis.pde",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.pde.stiffness_matrix",
+    "key_prerequisites": [
+      "numa.pde.finite_element"
+    ],
+    "label": "The stiffness matrix",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.pde.finite_element"
+    ],
+    "subdomain": "numerical_analysis.pde",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.pde.mesh",
+    "key_prerequisites": [
+      "numa.pde.finite_element"
+    ],
+    "label": "Mesh refinement",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.pde.finite_element"
+    ],
+    "subdomain": "numerical_analysis.pde",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.pde.spectral",
+    "key_prerequisites": [
+      "numa.fourier.fft"
+    ],
+    "label": "Spectral methods",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.fourier.fft"
+    ],
+    "subdomain": "numerical_analysis.pde",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.nonlinear.newton_system",
+    "key_prerequisites": [
+      "numa.roots.newton"
+    ],
+    "label": "Newton's method for systems",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.roots.newton"
+    ],
+    "subdomain": "numerical_analysis.nonlinear",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.nonlinear.jacobian_cost",
+    "key_prerequisites": [
+      "numa.nonlinear.newton_system"
+    ],
+    "label": "Jacobian assembly",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.nonlinear.newton_system"
+    ],
+    "subdomain": "numerical_analysis.nonlinear",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.nonlinear.broyden",
+    "key_prerequisites": [
+      "numa.nonlinear.newton_system"
+    ],
+    "label": "Broyden's method",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.nonlinear.newton_system"
+    ],
+    "subdomain": "numerical_analysis.nonlinear",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.nonlinear.secant_condition",
+    "key_prerequisites": [
+      "numa.nonlinear.broyden"
+    ],
+    "label": "The secant condition",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.nonlinear.broyden"
+    ],
+    "subdomain": "numerical_analysis.nonlinear",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.nonlinear.continuation",
+    "key_prerequisites": [
+      "numa.roots.fixed_point"
+    ],
+    "label": "Continuation methods",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.roots.fixed_point"
+    ],
+    "subdomain": "numerical_analysis.nonlinear",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.nonlinear.trust_region",
+    "key_prerequisites": [
+      "numa.optimization.line_search"
+    ],
+    "label": "Trust-region methods",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.optimization.line_search"
+    ],
+    "subdomain": "numerical_analysis.nonlinear",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.nonlinear.levenberg_marquardt",
+    "key_prerequisites": [
+      "numa.least_squares.gauss_newton"
+    ],
+    "label": "Levenberg-Marquardt",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.least_squares.gauss_newton"
+    ],
+    "subdomain": "numerical_analysis.nonlinear",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.nonlinear.residual_norm",
+    "key_prerequisites": [
+      "numa.nonlinear.newton_system"
+    ],
+    "label": "Residual norms",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.nonlinear.newton_system"
+    ],
+    "subdomain": "numerical_analysis.nonlinear",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.nonlinear.armijo",
+    "key_prerequisites": [
+      "numa.optimization.line_search"
+    ],
+    "label": "Armijo sufficient decrease",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.optimization.line_search"
+    ],
+    "subdomain": "numerical_analysis.nonlinear",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.nonlinear.quadratic_convergence",
+    "key_prerequisites": [
+      "numa.nonlinear.newton_system"
+    ],
+    "label": "Quadratic convergence",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.nonlinear.newton_system"
+    ],
+    "subdomain": "numerical_analysis.nonlinear",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.stochastic.standard_error",
+    "key_prerequisites": [
+      "numa.integration.monte_carlo"
+    ],
+    "label": "Monte Carlo standard error",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.integration.monte_carlo"
+    ],
+    "subdomain": "numerical_analysis.stochastic",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.stochastic.antithetic",
+    "key_prerequisites": [
+      "numa.stochastic.standard_error"
+    ],
+    "label": "Antithetic variates",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.stochastic.standard_error"
+    ],
+    "subdomain": "numerical_analysis.stochastic",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.stochastic.control_variates",
+    "key_prerequisites": [
+      "numa.stochastic.standard_error"
+    ],
+    "label": "Control variate estimators",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.stochastic.standard_error"
+    ],
+    "subdomain": "numerical_analysis.stochastic",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.stochastic.importance",
+    "key_prerequisites": [
+      "numa.integration.monte_carlo"
+    ],
+    "label": "Importance sampling for integrals",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.integration.monte_carlo"
+    ],
+    "subdomain": "numerical_analysis.stochastic",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.stochastic.stratified",
+    "key_prerequisites": [
+      "numa.stochastic.standard_error"
+    ],
+    "label": "Stratified Monte Carlo",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.stochastic.standard_error"
+    ],
+    "subdomain": "numerical_analysis.stochastic",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.stochastic.quasi",
+    "key_prerequisites": [
+      "numa.integration.monte_carlo"
+    ],
+    "label": "Quasi-Monte Carlo",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.integration.monte_carlo"
+    ],
+    "subdomain": "numerical_analysis.stochastic",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.stochastic.metropolis",
+    "key_prerequisites": [
+      "numa.stochastic.standard_error"
+    ],
+    "label": "Metropolis-Hastings",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.stochastic.standard_error"
+    ],
+    "subdomain": "numerical_analysis.stochastic",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.stochastic.gibbs",
+    "key_prerequisites": [
+      "numa.stochastic.metropolis"
+    ],
+    "label": "Gibbs sampling",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.stochastic.metropolis"
+    ],
+    "subdomain": "numerical_analysis.stochastic",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.stochastic.bootstrap",
+    "key_prerequisites": [
+      "numa.stochastic.standard_error"
+    ],
+    "label": "The bootstrap",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.stochastic.standard_error"
+    ],
+    "subdomain": "numerical_analysis.stochastic",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.stochastic.rng",
+    "key_prerequisites": [
+      "numa.stochastic.quasi"
+    ],
+    "label": "Pseudorandom generators",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.stochastic.quasi"
+    ],
+    "subdomain": "numerical_analysis.stochastic",
+    "variants": []
+  },
+  {
     "domain": "optimization",
     "grading_type": "numeric",
     "id": "optim.problem.anatomy",

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Pairing",
+    "section": "Pairing",
+    "subgoals": [
+      "Reflect the uniform",
+      "Average the pair",
+      "Count the evaluations"
+    ]
+  },
+  {
+    "label": "Variance",
+    "section": "Variance",
+    "subgoals": [
+      "Use the correlation",
+      "Form the pair variance",
+      "Prefer negative correlation"
+    ]
+  },
+  {
+    "label": "Limits",
+    "section": "Limits",
+    "subgoals": [
+      "Check monotonicity",
+      "Watch for variance growth",
+      "Compare with plain sampling"
+    ]
+  }
+]

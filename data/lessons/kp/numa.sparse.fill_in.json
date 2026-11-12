@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Where it comes from",
+    "section": "Where it comes from",
+    "subgoals": [
+      "Eliminate a pivot",
+      "Couple the neighbours",
+      "Predict the new entries"
+    ]
+  },
+  {
+    "label": "Counting it",
+    "section": "Counting it",
+    "subgoals": [
+      "Count the factor entries",
+      "Subtract the original count",
+      "Compare two orders"
+    ]
+  },
+  {
+    "label": "Control",
+    "section": "Control",
+    "subgoals": [
+      "Predict fill symbolically",
+      "Choose an ordering",
+      "Measure the symbolic cost"
+    ]
+  }
+]

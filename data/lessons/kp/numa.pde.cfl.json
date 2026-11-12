@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The number",
+    "section": "The number",
+    "subgoals": [
+      "Compute the Courant number",
+      "Apply the unit bound",
+      "Scale by the spacing"
+    ]
+  },
+  {
+    "label": "What it means",
+    "section": "What it means",
+    "subgoals": [
+      "Compare domains of dependence",
+      "Explain the instability",
+      "Relate step to cell crossing"
+    ]
+  },
+  {
+    "label": "Refinement",
+    "section": "Refinement",
+    "subgoals": [
+      "Halve the spacing",
+      "Halve the step",
+      "Count the extra work"
+    ]
+  }
+]

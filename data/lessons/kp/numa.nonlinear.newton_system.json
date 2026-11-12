@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The step",
+    "section": "The step",
+    "subgoals": [
+      "Evaluate the Jacobian",
+      "Solve the linear system",
+      "Update the iterate"
+    ]
+  },
+  {
+    "label": "Local convergence",
+    "section": "Local convergence",
+    "subgoals": [
+      "Square the error",
+      "State the local condition",
+      "Recognise a singular Jacobian"
+    ]
+  },
+  {
+    "label": "Cost",
+    "section": "Cost",
+    "subgoals": [
+      "Count the Jacobian entries",
+      "Count the dense solve",
+      "Compare with quasi-Newton"
+    ]
+  }
+]

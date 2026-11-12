@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The band",
+    "section": "The band",
+    "subgoals": [
+      "Read the bandwidths",
+      "Count the stored entries",
+      "Compare with dense storage"
+    ]
+  },
+  {
+    "label": "Elimination",
+    "section": "Elimination",
+    "subgoals": [
+      "Preserve the band",
+      "Keep pivots inside it",
+      "Recognise when it breaks"
+    ]
+  },
+  {
+    "label": "Cost",
+    "section": "Cost",
+    "subgoals": [
+      "Count the elimination work",
+      "Use the bandwidth",
+      "Compare with dense cost"
+    ]
+  }
+]

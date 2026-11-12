@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Layout",
+    "section": "Layout",
+    "subgoals": [
+      "Group values by column",
+      "Read the column pointers",
+      "Locate one column"
+    ]
+  },
+  {
+    "label": "Choosing a format",
+    "section": "Choosing a format",
+    "subgoals": [
+      "Match format to kernel",
+      "Convert in one pass",
+      "Avoid repeated conversion"
+    ]
+  },
+  {
+    "label": "Storage",
+    "section": "Storage",
+    "subgoals": [
+      "Count the stored numbers",
+      "Compare with the row format",
+      "Explain the difference"
+    ]
+  }
+]

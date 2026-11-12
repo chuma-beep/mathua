@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Local heuristics",
+    "section": "Local heuristics",
+    "subgoals": [
+      "Pick the minimum degree",
+      "Reduce the bandwidth",
+      "Compare the two aims"
+    ]
+  },
+  {
+    "label": "Nested dissection",
+    "section": "Nested dissection",
+    "subgoals": [
+      "Find a separator",
+      "Recurse on the parts",
+      "Order the separator last"
+    ]
+  },
+  {
+    "label": "Trade-offs",
+    "section": "Trade-offs",
+    "subgoals": [
+      "Recognise the hard problem",
+      "Measure the symbolic fill",
+      "Choose a heuristic"
+    ]
+  }
+]

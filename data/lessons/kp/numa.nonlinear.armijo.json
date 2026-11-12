@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Statement",
+    "section": "Statement",
+    "subgoals": [
+      "Write the inequality",
+      "Use the directional derivative",
+      "Choose the constant"
+    ]
+  },
+  {
+    "label": "Backtracking",
+    "section": "Backtracking",
+    "subgoals": [
+      "Start at one",
+      "Shrink by rho",
+      "Count the evaluations"
+    ]
+  },
+  {
+    "label": "Why it suffices",
+    "section": "Why it suffices",
+    "subgoals": [
+      "Pair with curvature",
+      "Prove convergence",
+      "Prevent increase"
+    ]
+  }
+]

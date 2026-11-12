@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Cholesky reduction",
+    "section": "Cholesky reduction",
+    "subgoals": [
+      "Factor the mass matrix",
+      "Congruence-transform the operator",
+      "Solve the standard problem"
+    ]
+  },
+  {
+    "label": "Singular B",
+    "section": "Singular B",
+    "subgoals": [
+      "Find the null directions",
+      "Count infinite eigenvalues",
+      "Interpret the missing frequencies"
+    ]
+  },
+  {
+    "label": "Applications",
+    "section": "Applications",
+    "subgoals": [
+      "Recognise vibration analysis",
+      "Recognise constrained least squares",
+      "Choose the right formulation"
+    ]
+  }
+]

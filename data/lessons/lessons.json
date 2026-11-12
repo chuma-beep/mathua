@@ -8998,5 +8998,205 @@
   {
     "concept_id": "ode.variational.second_variation",
     "source": "authored/ode.variational.second_variation.md"
+  },
+  {
+    "concept_id": "numa.eigen.hessenberg",
+    "source": "authored/numa.eigen.hessenberg.md"
+  },
+  {
+    "concept_id": "numa.eigen.rayleigh",
+    "source": "authored/numa.eigen.rayleigh.md"
+  },
+  {
+    "concept_id": "numa.eigen.lanczos",
+    "source": "authored/numa.eigen.lanczos.md"
+  },
+  {
+    "concept_id": "numa.eigen.arnoldi",
+    "source": "authored/numa.eigen.arnoldi.md"
+  },
+  {
+    "concept_id": "numa.eigen.jacobi_rotation",
+    "source": "authored/numa.eigen.jacobi_rotation.md"
+  },
+  {
+    "concept_id": "numa.eigen.deflation",
+    "source": "authored/numa.eigen.deflation.md"
+  },
+  {
+    "concept_id": "numa.eigen.svd",
+    "source": "authored/numa.eigen.svd.md"
+  },
+  {
+    "concept_id": "numa.eigen.condition_svd",
+    "source": "authored/numa.eigen.condition_svd.md"
+  },
+  {
+    "concept_id": "numa.eigen.generalized",
+    "source": "authored/numa.eigen.generalized.md"
+  },
+  {
+    "concept_id": "numa.eigen.sensitivity",
+    "source": "authored/numa.eigen.sensitivity.md"
+  },
+  {
+    "concept_id": "numa.sparse.csr",
+    "source": "authored/numa.sparse.csr.md"
+  },
+  {
+    "concept_id": "numa.sparse.csc",
+    "source": "authored/numa.sparse.csc.md"
+  },
+  {
+    "concept_id": "numa.sparse.matvec",
+    "source": "authored/numa.sparse.matvec.md"
+  },
+  {
+    "concept_id": "numa.sparse.fill_in",
+    "source": "authored/numa.sparse.fill_in.md"
+  },
+  {
+    "concept_id": "numa.sparse.ordering",
+    "source": "authored/numa.sparse.ordering.md"
+  },
+  {
+    "concept_id": "numa.sparse.preconditioner",
+    "source": "authored/numa.sparse.preconditioner.md"
+  },
+  {
+    "concept_id": "numa.sparse.sparse_lu",
+    "source": "authored/numa.sparse.sparse_lu.md"
+  },
+  {
+    "concept_id": "numa.sparse.multigrid",
+    "source": "authored/numa.sparse.multigrid.md"
+  },
+  {
+    "concept_id": "numa.sparse.banded",
+    "source": "authored/numa.sparse.banded.md"
+  },
+  {
+    "concept_id": "numa.sparse.drop_tolerance",
+    "source": "authored/numa.sparse.drop_tolerance.md"
+  },
+  {
+    "concept_id": "numa.pde.cfl",
+    "source": "authored/numa.pde.cfl.md"
+  },
+  {
+    "concept_id": "numa.pde.explicit_heat",
+    "source": "authored/numa.pde.explicit_heat.md"
+  },
+  {
+    "concept_id": "numa.pde.implicit_heat",
+    "source": "authored/numa.pde.implicit_heat.md"
+  },
+  {
+    "concept_id": "numa.pde.crank_nicolson",
+    "source": "authored/numa.pde.crank_nicolson.md"
+  },
+  {
+    "concept_id": "numa.pde.method_of_lines",
+    "source": "authored/numa.pde.method_of_lines.md"
+  },
+  {
+    "concept_id": "numa.pde.upwind",
+    "source": "authored/numa.pde.upwind.md"
+  },
+  {
+    "concept_id": "numa.pde.finite_element",
+    "source": "authored/numa.pde.finite_element.md"
+  },
+  {
+    "concept_id": "numa.pde.stiffness_matrix",
+    "source": "authored/numa.pde.stiffness_matrix.md"
+  },
+  {
+    "concept_id": "numa.pde.mesh",
+    "source": "authored/numa.pde.mesh.md"
+  },
+  {
+    "concept_id": "numa.pde.spectral",
+    "source": "authored/numa.pde.spectral.md"
+  },
+  {
+    "concept_id": "numa.nonlinear.newton_system",
+    "source": "authored/numa.nonlinear.newton_system.md"
+  },
+  {
+    "concept_id": "numa.nonlinear.jacobian_cost",
+    "source": "authored/numa.nonlinear.jacobian_cost.md"
+  },
+  {
+    "concept_id": "numa.nonlinear.broyden",
+    "source": "authored/numa.nonlinear.broyden.md"
+  },
+  {
+    "concept_id": "numa.nonlinear.secant_condition",
+    "source": "authored/numa.nonlinear.secant_condition.md"
+  },
+  {
+    "concept_id": "numa.nonlinear.continuation",
+    "source": "authored/numa.nonlinear.continuation.md"
+  },
+  {
+    "concept_id": "numa.nonlinear.trust_region",
+    "source": "authored/numa.nonlinear.trust_region.md"
+  },
+  {
+    "concept_id": "numa.nonlinear.levenberg_marquardt",
+    "source": "authored/numa.nonlinear.levenberg_marquardt.md"
+  },
+  {
+    "concept_id": "numa.nonlinear.residual_norm",
+    "source": "authored/numa.nonlinear.residual_norm.md"
+  },
+  {
+    "concept_id": "numa.nonlinear.armijo",
+    "source": "authored/numa.nonlinear.armijo.md"
+  },
+  {
+    "concept_id": "numa.nonlinear.quadratic_convergence",
+    "source": "authored/numa.nonlinear.quadratic_convergence.md"
+  },
+  {
+    "concept_id": "numa.stochastic.standard_error",
+    "source": "authored/numa.stochastic.standard_error.md"
+  },
+  {
+    "concept_id": "numa.stochastic.antithetic",
+    "source": "authored/numa.stochastic.antithetic.md"
+  },
+  {
+    "concept_id": "numa.stochastic.control_variates",
+    "source": "authored/numa.stochastic.control_variates.md"
+  },
+  {
+    "concept_id": "numa.stochastic.importance",
+    "source": "authored/numa.stochastic.importance.md"
+  },
+  {
+    "concept_id": "numa.stochastic.stratified",
+    "source": "authored/numa.stochastic.stratified.md"
+  },
+  {
+    "concept_id": "numa.stochastic.quasi",
+    "source": "authored/numa.stochastic.quasi.md"
+  },
+  {
+    "concept_id": "numa.stochastic.metropolis",
+    "source": "authored/numa.stochastic.metropolis.md"
+  },
+  {
+    "concept_id": "numa.stochastic.gibbs",
+    "source": "authored/numa.stochastic.gibbs.md"
+  },
+  {
+    "concept_id": "numa.stochastic.bootstrap",
+    "source": "authored/numa.stochastic.bootstrap.md"
+  },
+  {
+    "concept_id": "numa.stochastic.rng",
+    "source": "authored/numa.stochastic.rng.md"
   }
 ]

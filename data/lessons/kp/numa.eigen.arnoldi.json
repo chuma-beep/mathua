@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Gram-Schmidt",
+    "section": "Gram-Schmidt",
+    "subgoals": [
+      "Orthogonalise the new vector",
+      "Use modified Gram-Schmidt",
+      "Compare with the Lanczos recurrence"
+    ]
+  },
+  {
+    "label": "The Hessenberg matrix",
+    "section": "The Hessenberg matrix",
+    "subgoals": [
+      "Read the projection",
+      "Identify the Hessenberg structure",
+      "Approximate the spectrum"
+    ]
+  },
+  {
+    "label": "Cost",
+    "section": "Cost",
+    "subgoals": [
+      "Count the products",
+      "Count the orthogonalisation work",
+      "State the total order"
+    ]
+  }
+]

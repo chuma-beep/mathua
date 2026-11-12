@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The update",
+    "section": "The update",
+    "subgoals": [
+      "Form the residual change",
+      "Apply the rank-one update",
+      "Keep the secant condition"
+    ]
+  },
+  {
+    "label": "Cost",
+    "section": "Cost",
+    "subgoals": [
+      "Count the products",
+      "Count the update entries",
+      "Compare with Newton"
+    ]
+  },
+  {
+    "label": "Trade-off",
+    "section": "Trade-off",
+    "subgoals": [
+      "State the convergence order",
+      "Weigh Jacobian cost",
+      "Choose a method"
+    ]
+  }
+]

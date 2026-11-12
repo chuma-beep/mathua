@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The system",
+    "section": "The system",
+    "subgoals": [
+      "Form the implicit matrix",
+      "Solve a tridiagonal system",
+      "Count the solve cost"
+    ]
+  },
+  {
+    "label": "Stability",
+    "section": "Stability",
+    "subgoals": [
+      "Write the amplification factor",
+      "Bound it by one",
+      "Remove the step limit"
+    ]
+  },
+  {
+    "label": "Accuracy",
+    "section": "Accuracy",
+    "subgoals": [
+      "State the order in time",
+      "State the order in space",
+      "Distinguish stability from accuracy"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The estimator",
+    "section": "The estimator",
+    "subgoals": [
+      "Weight the stratum means",
+      "Sum the weights to one",
+      "Keep the estimator unbiased"
+    ]
+  },
+  {
+    "label": "Variance",
+    "section": "Variance",
+    "subgoals": [
+      "Sum the within variances",
+      "Divide by the counts",
+      "Exclude between-stratum variation"
+    ]
+  },
+  {
+    "label": "Allocation",
+    "section": "Allocation",
+    "subgoals": [
+      "Apply Neyman allocation",
+      "Try proportional allocation",
+      "Compare the variances"
+    ]
+  }
+]

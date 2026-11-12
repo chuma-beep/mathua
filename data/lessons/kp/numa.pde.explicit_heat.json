@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The update",
+    "section": "The update",
+    "subgoals": [
+      "Write the three-point stencil",
+      "Form the ratio r",
+      "Advance one step"
+    ]
+  },
+  {
+    "label": "Stability",
+    "section": "Stability",
+    "subgoals": [
+      "Bound r by one half",
+      "Relate step to spacing",
+      "Predict the refinement cost"
+    ]
+  },
+  {
+    "label": "Cost",
+    "section": "Cost",
+    "subgoals": [
+      "Count the steps",
+      "Multiply by the per-step work",
+      "Compare with implicit"
+    ]
+  }
+]

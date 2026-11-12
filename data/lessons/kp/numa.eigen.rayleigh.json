@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Compute the quotient",
+      "Use the weighted average",
+      "Show scaling invariance"
+    ]
+  },
+  {
+    "label": "Stationarity",
+    "section": "Stationarity",
+    "subgoals": [
+      "Set the gradient to zero",
+      "Recognise an eigenvector",
+      "Read the eigenvalue"
+    ]
+  },
+  {
+    "label": "Convergence rate",
+    "section": "Convergence rate",
+    "subgoals": [
+      "Compare the eigenvalue ratio",
+      "State the quotient rate",
+      "Explain the acceleration"
+    ]
+  }
+]

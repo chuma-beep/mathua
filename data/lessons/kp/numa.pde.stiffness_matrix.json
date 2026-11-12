@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Entries",
+    "section": "Entries",
+    "subgoals": [
+      "Integrate the gradients",
+      "Use neighbour overlap",
+      "Read one matrix entry"
+    ]
+  },
+  {
+    "label": "Assembly cost",
+    "section": "Assembly cost",
+    "subgoals": [
+      "Count element blocks",
+      "Square the local basis size",
+      "Total the assembly work"
+    ]
+  },
+  {
+    "label": "Conditioning",
+    "section": "Conditioning",
+    "subgoals": [
+      "Refine the mesh",
+      "Predict the condition growth",
+      "Choose a remedy"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The ratio",
+    "section": "The ratio",
+    "subgoals": [
+      "Compute actual reduction",
+      "Compute predicted reduction",
+      "Form the ratio"
+    ]
+  },
+  {
+    "label": "The subproblem",
+    "section": "The subproblem",
+    "subgoals": [
+      "Solve in the ball",
+      "Use a dogleg path",
+      "Reach the boundary"
+    ]
+  },
+  {
+    "label": "Robustness",
+    "section": "Robustness",
+    "subgoals": [
+      "Bound every step",
+      "Prove global convergence",
+      "Compare with line search"
+    ]
+  }
+]

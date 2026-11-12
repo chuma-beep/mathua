@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Linear congruential",
+    "section": "Linear congruential",
+    "subgoals": [
+      "Apply the recurrence",
+      "Bound the period",
+      "Spot lattice structure"
+    ]
+  },
+  {
+    "label": "Modern generators",
+    "section": "Modern generators",
+    "subgoals": [
+      "State the Mersenne period",
+      "Rule out cryptographic use",
+      "Choose a counter-based generator"
+    ]
+  },
+  {
+    "label": "Seeding",
+    "section": "Seeding",
+    "subgoals": [
+      "Separate the streams",
+      "Avoid repeated seeds",
+      "Check reproducibility"
+    ]
+  }
+]

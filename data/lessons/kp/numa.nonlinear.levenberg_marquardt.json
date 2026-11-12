@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The system",
+    "section": "The system",
+    "subgoals": [
+      "Add the damping term",
+      "Solve the shifted system",
+      "Take the limits of lambda"
+    ]
+  },
+  {
+    "label": "Damping update",
+    "section": "Damping update",
+    "subgoals": [
+      "Reduce after success",
+      "Increase after failure",
+      "Adapt to linearity"
+    ]
+  },
+  {
+    "label": "Cost",
+    "section": "Cost",
+    "subgoals": [
+      "Factor once per lambda",
+      "Count the trial solves",
+      "Compare with Gauss-Newton"
+    ]
+  }
+]

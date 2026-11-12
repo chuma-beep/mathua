@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Three arrays",
+    "section": "Three arrays",
+    "subgoals": [
+      "Name the three arrays",
+      "Count entries per array",
+      "Store one row per slice"
+    ]
+  },
+  {
+    "label": "Row access",
+    "section": "Row access",
+    "subgoals": [
+      "Read the row pointers",
+      "Scan the slice",
+      "Find a column index"
+    ]
+  },
+  {
+    "label": "Cost",
+    "section": "Cost",
+    "subgoals": [
+      "Count the stored numbers",
+      "Compare with dense storage",
+      "Decide when the format wins"
+    ]
+  }
+]

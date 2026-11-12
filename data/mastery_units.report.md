@@ -12,19 +12,19 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 2250 |
-| Total units | 150 |
+| Total concepts | 2300 |
+| Total units | 153 |
 | Minimum unit size | 1 |
 | Median unit size | 10 |
 | Maximum unit size | 82 |
-| Singleton units | 19 |
-| Units with <= 3 concepts | 38 |
+| Singleton units | 21 |
+| Units with <= 3 concepts | 40 |
 | Units with > 25 concepts | 33 |
 | Units with > 50 concepts | 2 |
-| Cross-unit prerequisite edges (derived) | 519 |
+| Cross-unit prerequisite edges (derived) | 522 |
 | Backward band edges | 0 |
 
-If the learner is assessed once per unit, then 150 assessments cover the corpus, and the
+If the learner is assessed once per unit, then 153 assessments cover the corpus, and the
 median is one assessment per 10 concepts. That is the frequency question this report
 exists to make concrete.
 
@@ -127,15 +127,18 @@ exists to make concrete.
 | `number_theory.b4` | number_theory | 4 | 23 | 4 | 12–14 |
 | `number_theory.b5` | number_theory | 5 | 19 | 3 | 15–17 |
 | `number_theory.b6` | number_theory | 6 | 1 | 1 | 20–20 |
-| `numerical_analysis.b0` | numerical_analysis | 0 | 12 | 5 | 0–2 |
+| `numerical_analysis.b0` | numerical_analysis | 0 | 13 | 6 | 0–2 |
+| `numerical_analysis.b1` | numerical_analysis | 1 | 8 | 3 | 3–5 |
+| `numerical_analysis.b2` | numerical_analysis | 2 | 1 | 1 | 6–6 |
 | `numerical_analysis.b6` | numerical_analysis | 6 | 1 | 1 | 20–20 |
 | `numerical_analysis.b7` | numerical_analysis | 7 | 12 | 2 | 21–23 |
-| `numerical_analysis.b8` | numerical_analysis | 8 | 11 | 2 | 24–26 |
-| `numerical_analysis.b9` | numerical_analysis | 9 | 6 | 2 | 27–28 |
-| `numerical_analysis.b10` | numerical_analysis | 10 | 6 | 2 | 30–32 |
-| `numerical_analysis.b11` | numerical_analysis | 11 | 8 | 2 | 33–34 |
+| `numerical_analysis.b8` | numerical_analysis | 8 | 20 | 4 | 24–26 |
+| `numerical_analysis.b9` | numerical_analysis | 9 | 16 | 5 | 27–29 |
+| `numerical_analysis.b10` | numerical_analysis | 10 | 7 | 3 | 30–32 |
+| `numerical_analysis.b11` | numerical_analysis | 11 | 15 | 3 | 33–35 |
 | `numerical_analysis.b12` | numerical_analysis | 12 | 7 | 1 | 36–38 |
-| `numerical_analysis.b13` | numerical_analysis | 13 | 6 | 2 | 39–40 |
+| `numerical_analysis.b13` | numerical_analysis | 13 | 18 | 4 | 39–41 |
+| `numerical_analysis.b14` | numerical_analysis | 14 | 1 | 1 | 42–42 |
 | `optimization.b11` | optimization | 11 | 5 | 2 | 34–35 |
 | `optimization.b12` | optimization | 12 | 48 | 10 | 36–38 |
 | `optimization.b13` | optimization | 13 | 82 | 17 | 39–41 |
@@ -196,19 +199,19 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 207 | 7 | 56 | 30 | 55 | 14 | 0 |
-| 3 | 150 | 10 | 82 | 19 | 38 | 33 | 0 |
-| 4 | 118 | 16 | 86 | 11 | 22 | 35 | 0 |
-| 5 | 103 | 15 | 104 | 9 | 18 | 40 | 0 |
-| 6 | 93 | 17 | 130 | 6 | 14 | 33 | 0 |
-| 8 | 73 | 23 | 117 | 4 | 9 | 35 | 0 |
-| 10 | 63 | 26 | 145 | 5 | 9 | 33 | 0 |
-| 12 | 63 | 29 | 191 | 1 | 6 | 35 | 0 |
-| 15 | 50 | 39 | 172 | 1 | 3 | 33 | 0 |
-| 20 | 43 | 56 | 145 | 3 | 5 | 30 | 0 |
-| 45 | 26 | 85 | 172 | 0 | 0 | 26 | 0 |
+| 2 | 210 | 8 | 56 | 30 | 56 | 14 | 0 |
+| 3 | 153 | 10 | 82 | 21 | 40 | 33 | 0 |
+| 4 | 119 | 17 | 86 | 10 | 21 | 36 | 0 |
+| 5 | 104 | 18 | 104 | 8 | 18 | 41 | 0 |
+| 6 | 95 | 20 | 130 | 8 | 16 | 34 | 0 |
+| 8 | 73 | 27 | 117 | 3 | 8 | 37 | 0 |
+| 10 | 63 | 28 | 145 | 4 | 8 | 33 | 0 |
+| 12 | 63 | 29 | 191 | 1 | 6 | 36 | 0 |
+| 15 | 50 | 40 | 172 | 1 | 3 | 33 | 0 |
+| 20 | 43 | 61 | 145 | 2 | 4 | 30 | 0 |
+| 45 | 26 | 87 | 172 | 0 | 0 | 26 | 0 |
 
-**No width is clean.** Small widths fragment, at 3 there are 19 singleton units, which is a
+**No width is clean.** Small widths fragment, at 3 there are 21 singleton units, which is a
 quiz per concept and is exactly what §12 rules out. Large widths stop fragmenting but produce
 units too large to assess: at 45 the partition is just the 17 domains themselves, whose
 largest is 128 concepts. The usable widths trade fragmentation against size rather than
@@ -223,7 +226,7 @@ The subdomain condensation of the concept DAG **contains cycles**: grouping conc
 subdomain discards the per-concept ordering, so a concept in subdomain A can be a
 prerequisite of one in subdomain B whose other members depend on A.
 
-**208 of 125 subdomains cannot be levelled**, they sit inside a cycle, or downstream
+**211 of 125 subdomains cannot be levelled**, they sit inside a cycle, or downstream
 of one, so no depth function exists for them at all. (Tarjan puts 26 inside cycles and
 the remaining 34 behind them; Kahn cannot order either group, because ordering a node
 requires its predecessors to be ordered first.) An implementation that ignores this
@@ -382,122 +385,126 @@ Unresolvable subdomains:
 `numerical_analysis.fourier`
 `numerical_analysis.integration`
 
+`numerical_analysis.pde`
 `numerical_analysis.roots`
+`numerical_analysis.sparse`
+`numerical_analysis.stochastic`
+
 `optimization.adaptive`
 `optimization.advanced`
 `optimization.conic_apps`
-
 `optimization.constrained`
+
 `optimization.control`
 `optimization.convex`
 `optimization.decomposition`
-
 `optimization.discrete`
+
 `optimization.foundations`
 `optimization.large_scale`
 `optimization.learning`
-
 `optimization.mip`
+
 `optimization.multiobjective`
 `optimization.nonsmooth`
 `optimization.numerical`
-
 `optimization.saddle`
+
 `optimization.stochastic`
 `optimization.structured`
 `optimization.unconstrained`
-
 `optimization.variance_reduced`
+
 `prealgebra.decimals`
 `prealgebra.equations`
 `prealgebra.exponents`
-
 `prealgebra.inequalities`
+
 `prealgebra.measurement`
 `prealgebra.negatives`
 `prealgebra.percentages`
-
 `prealgebra.ratios`
+
 `prealgebra.variables`
 `precalculus.analytic`
 `precalculus.conics`
-
 `precalculus.discrete`
+
 `precalculus.exponential`
 `precalculus.functions`
 `precalculus.parametric`
-
 `precalculus.polar`
+
 `precalculus.polynomials`
 `precalculus.rational`
 `precalculus.sequences`
-
 `precalculus.systems`
+
 `precalculus.vectors`
 `probability_theory.characteristic`
 `probability_theory.concentration`
-
 `probability_theory.convergence`
+
 `probability_theory.distributions`
 `probability_theory.foundations`
 `probability_theory.information`
-
 `probability_theory.joint`
+
 `probability_theory.joint_distributions`
 `probability_theory.limits`
 `probability_theory.moments`
-
 `probability_theory.processes`
+
 `probability_theory.random_variables`
 `real_analysis.deriv`
 `real_analysis.limit`
-
 `real_analysis.measure`
+
 `real_analysis.metric`
 `real_analysis.order`
 `real_analysis.seq`
-
 `statistics.advanced`
+
 `statistics.central_tendency`
 `statistics.data_collection`
 `statistics.data_representation`
-
 `statistics.distributions`
+
 `statistics.inference`
 `statistics.probability`
 `statistics.regression`
-
 `statistics.spread`
+
 `topology.algebraic`
 `topology.basics`
 `topology.compact`
-
 `topology.connected`
+
 `topology.constructions`
 `topology.covering`
 `topology.dimension`
-
 `topology.invariants`
+
 `topology.knot`
 `topology.manifolds`
 `topology.metrization`
-
 `topology.separation`
+
 `trigonometry.advanced`
 `trigonometry.equations`
 `trigonometry.functions`
-
 `trigonometry.graphs`
+
 `trigonometry.hyperbolic`
 `trigonometry.identities`
 `trigonometry.spherical`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2250
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2300
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings
 
-- **anomaly** `singleton_units`: 19 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
+- **anomaly** `singleton_units`: 21 unit(s) hold a single concept; the spec forbids a quiz per concept, so these need merging
 
 ## Not decided here
 

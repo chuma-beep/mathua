@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Left and right",
+    "section": "Left and right",
+    "subgoals": [
+      "Choose the side",
+      "Preserve symmetry",
+      "Apply the inverse"
+    ]
+  },
+  {
+    "label": "Jacobi",
+    "section": "Jacobi",
+    "subgoals": [
+      "Read the diagonal",
+      "Scale the residual",
+      "Count the cost"
+    ]
+  },
+  {
+    "label": "Quality measure",
+    "section": "Quality measure",
+    "subgoals": [
+      "Form the preconditioned matrix",
+      "Relate condition to steps",
+      "Compare preconditioners"
+    ]
+  }
+]

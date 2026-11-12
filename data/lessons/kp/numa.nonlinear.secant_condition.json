@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Statement",
+    "section": "Statement",
+    "subgoals": [
+      "Write the step and change",
+      "Apply the model",
+      "Solve the scalar case"
+    ]
+  },
+  {
+    "label": "Underdetermined in higher dimensions",
+    "section": "Underdetermined in higher dimensions",
+    "subgoals": [
+      "Count equations and unknowns",
+      "Apply a minimum-change rule",
+      "Choose the rank-one update"
+    ]
+  },
+  {
+    "label": "Role in convergence",
+    "section": "Role in convergence",
+    "subgoals": [
+      "Enforce the condition",
+      "Explain the superlinear rate",
+      "Recognise a stalled step"
+    ]
+  }
+]

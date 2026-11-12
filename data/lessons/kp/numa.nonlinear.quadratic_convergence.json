@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Write the error bound",
+      "Identify the constant",
+      "Square the previous error"
+    ]
+  },
+  {
+    "label": "Digit count",
+    "section": "Digit count",
+    "subgoals": [
+      "Double the digits",
+      "Count the steps",
+      "Reach machine precision"
+    ]
+  },
+  {
+    "label": "Failure modes",
+    "section": "Failure modes",
+    "subgoals": [
+      "Recognise a multiple root",
+      "Lose the quadratic term",
+      "Detect a poor Jacobian"
+    ]
+  }
+]

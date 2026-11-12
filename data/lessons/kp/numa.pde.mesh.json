@@ -1,0 +1,29 @@
+[
+  {
+    "label": "h and p",
+    "section": "h and p",
+    "subgoals": [
+      "Subdivide the cells",
+      "Raise the degree",
+      "Compare the two routes"
+    ]
+  },
+  {
+    "label": "Error rate",
+    "section": "Error rate",
+    "subgoals": [
+      "Halve the cell size",
+      "Apply the error rate",
+      "Compare the two norms"
+    ]
+  },
+  {
+    "label": "Adaptivity",
+    "section": "Adaptivity",
+    "subgoals": [
+      "Estimate the local error",
+      "Mark the worst cells",
+      "Refine selectively"
+    ]
+  }
+]

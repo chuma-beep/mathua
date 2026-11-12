@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Semi-discrete system",
+    "section": "Semi-discrete system",
+    "subgoals": [
+      "Discretise space",
+      "Count the interior nodes",
+      "Write the ODE system"
+    ]
+  },
+  {
+    "label": "Stiffness",
+    "section": "Stiffness",
+    "subgoals": [
+      "Inspect the eigenvalues",
+      "Recognise a stiff system",
+      "Choose an implicit solver"
+    ]
+  },
+  {
+    "label": "Choice of solver",
+    "section": "Choice of solver",
+    "subgoals": [
+      "Balance both errors",
+      "Count the linear solves",
+      "Compare explicit and implicit"
+    ]
+  }
+]

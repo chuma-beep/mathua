@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The weight",
+    "section": "The weight",
+    "subgoals": [
+      "Form the likelihood ratio",
+      "Reweight the sample",
+      "Average the result"
+    ]
+  },
+  {
+    "label": "Variance",
+    "section": "Variance",
+    "subgoals": [
+      "Match proposal to integrand",
+      "Watch the tails",
+      "Avoid infinite variance"
+    ]
+  },
+  {
+    "label": "Diagnostics",
+    "section": "Diagnostics",
+    "subgoals": [
+      "Compute the effective size",
+      "Spot dominant weights",
+      "Compare with the sample count"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The recurrence",
+    "section": "The recurrence",
+    "subgoals": [
+      "Write the three-term recurrence",
+      "Inherit orthogonality from symmetry",
+      "Keep two previous vectors"
+    ]
+  },
+  {
+    "label": "The projected problem",
+    "section": "The projected problem",
+    "subgoals": [
+      "Form the tridiagonal matrix",
+      "Estimate extreme eigenvalues",
+      "Increase the subspace size"
+    ]
+  },
+  {
+    "label": "Cost",
+    "section": "Cost",
+    "subgoals": [
+      "Count matrix-vector products",
+      "Count stored vectors",
+      "Compare with a factorisation"
+    ]
+  }
+]

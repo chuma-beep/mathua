@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Form the ratio",
+      "Handle the singular case",
+      "Use the 2-norm"
+    ]
+  },
+  {
+    "label": "Error bound",
+    "section": "Error bound",
+    "subgoals": [
+      "Perturb the matrix",
+      "Bound the solution change",
+      "Recognise a sharp case"
+    ]
+  },
+  {
+    "label": "Reading the ratio",
+    "section": "Reading the ratio",
+    "subgoals": [
+      "Interpret a small ratio",
+      "Convert a factor to digits",
+      "Compare problems"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Two phases",
+    "section": "Two phases",
+    "subgoals": [
+      "Build the elimination tree",
+      "Predict the pattern",
+      "Compute the values"
+    ]
+  },
+  {
+    "label": "Pivoting",
+    "section": "Pivoting",
+    "subgoals": [
+      "Bound the multipliers",
+      "Limit the reordering",
+      "Balance stability and sparsity"
+    ]
+  },
+  {
+    "label": "Cost",
+    "section": "Cost",
+    "subgoals": [
+      "Count the factor nonzeros",
+      "Use the band width",
+      "Compare with dense LU"
+    ]
+  }
+]

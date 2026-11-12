@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Form the residual",
+      "Take the Euclidean norm",
+      "Scale by the data"
+    ]
+  },
+  {
+    "label": "Relative test",
+    "section": "Relative test",
+    "subgoals": [
+      "Divide by the right-hand side",
+      "Set a tolerance",
+      "Count significant digits"
+    ]
+  },
+  {
+    "label": "Relation to error",
+    "section": "Relation to error",
+    "subgoals": [
+      "Relate residual to error",
+      "Apply the inverse Jacobian",
+      "Recognise ill conditioning"
+    ]
+  }
+]

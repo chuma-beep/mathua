@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Acceptance",
+    "section": "Acceptance",
+    "subgoals": [
+      "Form the target ratio",
+      "Cancel a symmetric proposal",
+      "Cap the probability at one"
+    ]
+  },
+  {
+    "label": "Detailed balance",
+    "section": "Detailed balance",
+    "subgoals": [
+      "State detailed balance",
+      "Avoid the normalising constant",
+      "Show stationarity"
+    ]
+  },
+  {
+    "label": "Tuning",
+    "section": "Tuning",
+    "subgoals": [
+      "Diagnose slow mixing",
+      "Diagnose rejection",
+      "Target the acceptance rate"
+    ]
+  }
+]

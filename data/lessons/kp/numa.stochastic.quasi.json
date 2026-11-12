@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Discrepancy",
+    "section": "Discrepancy",
+    "subgoals": [
+      "Compare counts in a box",
+      "Bound the discrepancy",
+      "Use a low-discrepancy sequence"
+    ]
+  },
+  {
+    "label": "Error rate",
+    "section": "Error rate",
+    "subgoals": [
+      "Compare with the random rate",
+      "See the logarithm",
+      "Limit the dimension"
+    ]
+  },
+  {
+    "label": "Randomisation",
+    "section": "Randomisation",
+    "subgoals": [
+      "Scramble the sequence",
+      "Recover unbiasedness",
+      "Estimate the error"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Symmetric deflation",
+    "section": "Symmetric deflation",
+    "subgoals": [
+      "Subtract the rank-one term",
+      "Keep the other eigenpairs",
+      "Send the found value to zero"
+    ]
+  },
+  {
+    "label": "Nonsymmetric deflation",
+    "section": "Nonsymmetric deflation",
+    "subgoals": [
+      "Use left and right vectors",
+      "Preserve the remaining spectrum",
+      "Apply the rank-one update"
+    ]
+  },
+  {
+    "label": "Use in practice",
+    "section": "Use in practice",
+    "subgoals": [
+      "Deflate a block",
+      "Count the update cost",
+      "Compare with a fresh solve"
+    ]
+  }
+]

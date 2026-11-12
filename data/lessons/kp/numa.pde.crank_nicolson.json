@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The average",
+    "section": "The average",
+    "subgoals": [
+      "Split the operator in half",
+      "Form both sides",
+      "Solve the step"
+    ]
+  },
+  {
+    "label": "Order",
+    "section": "Order",
+    "subgoals": [
+      "Cancel the first-order term",
+      "State the second-order rate",
+      "Count the systems"
+    ]
+  },
+  {
+    "label": "Behaviour",
+    "section": "Behaviour",
+    "subgoals": [
+      "Recognise the oscillation",
+      "Damp the start",
+      "Keep the stability"
+    ]
+  }
+]

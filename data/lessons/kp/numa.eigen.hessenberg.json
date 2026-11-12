@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Similarity transformations",
+    "section": "Similarity transformations",
+    "subgoals": [
+      "Apply a similarity transform",
+      "Preserve the spectrum",
+      "Zero a column with one reflector"
+    ]
+  },
+  {
+    "label": "The cost",
+    "section": "The cost",
+    "subgoals": [
+      "Count the reduction flops",
+      "Compare with dense LU",
+      "Place the cost before iteration"
+    ]
+  },
+  {
+    "label": "Why Hessenberg",
+    "section": "Why Hessenberg",
+    "subgoals": [
+      "Count the QR step cost",
+      "Explain the subdiagonal saving",
+      "Choose the reduced form"
+    ]
+  }
+]

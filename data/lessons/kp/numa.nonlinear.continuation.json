@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Prediction and correction",
+    "section": "Prediction and correction",
+    "subgoals": [
+      "Take a tangent predictor",
+      "Correct with Newton",
+      "Adapt the step"
+    ]
+  },
+  {
+    "label": "Parameter stepping",
+    "section": "Parameter stepping",
+    "subgoals": [
+      "Count the steps",
+      "Count the linear solves",
+      "Choose the step size"
+    ]
+  },
+  {
+    "label": "Folds",
+    "section": "Folds",
+    "subgoals": [
+      "Recognise a turning point",
+      "Switch to arc length",
+      "Continue through the fold"
+    ]
+  }
+]

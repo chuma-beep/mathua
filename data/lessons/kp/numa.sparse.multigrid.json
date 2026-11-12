@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Smoothing",
+    "section": "Smoothing",
+    "subgoals": [
+      "Damp the high frequencies",
+      "Leave a smooth residual",
+      "Choose a smoother"
+    ]
+  },
+  {
+    "label": "The cycle",
+    "section": "The cycle",
+    "subgoals": [
+      "Restrict the residual",
+      "Solve coarsely",
+      "Prolongate the correction"
+    ]
+  },
+  {
+    "label": "Complexity",
+    "section": "Complexity",
+    "subgoals": [
+      "Count the levels",
+      "Count the work per cycle",
+      "Compare with a direct solve"
+    ]
+  }
+]

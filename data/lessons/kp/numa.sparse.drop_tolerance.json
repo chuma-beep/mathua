@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Incomplete LU",
+    "section": "Incomplete LU",
+    "subgoals": [
+      "Keep the original pattern",
+      "Apply a drop threshold",
+      "Compare with full LU"
+    ]
+  },
+  {
+    "label": "Effect on convergence",
+    "section": "Effect on convergence",
+    "subgoals": [
+      "Trade fill for steps",
+      "Measure the preconditioner",
+      "Choose a tolerance"
+    ]
+  },
+  {
+    "label": "Stability",
+    "section": "Stability",
+    "subgoals": [
+      "Detect a small pivot",
+      "Shift the diagonal",
+      "Reduce the shift"
+    ]
+  }
+]

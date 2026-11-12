@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Singular values",
+    "section": "Singular values",
+    "subgoals": [
+      "Relate values to eigenvalues",
+      "Count the values",
+      "Order them by size"
+    ]
+  },
+  {
+    "label": "Low rank",
+    "section": "Low rank",
+    "subgoals": [
+      "Identify the null directions",
+      "Truncate the expansion",
+      "State the approximation property"
+    ]
+  },
+  {
+    "label": "Computation",
+    "section": "Computation",
+    "subgoals": [
+      "Bidiagonalise the matrix",
+      "Apply implicit QR",
+      "State the dense cost"
+    ]
+  }
+]

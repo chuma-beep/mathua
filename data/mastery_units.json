@@ -5,8 +5,8 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 2250,
-  "unit_count": 150,
+  "concept_count": 2300,
+  "unit_count": 153,
   "units": [
     {
       "id": "abstract_algebra.b6",
@@ -2960,6 +2960,7 @@
       "subdomains": [
         "numerical_analysis.approx",
         "numerical_analysis.diff",
+        "numerical_analysis.eigen",
         "numerical_analysis.errors",
         "numerical_analysis.linear",
         "numerical_analysis.optimization"
@@ -2967,6 +2968,7 @@
       "concept_ids": [
         "numa.approx.pade",
         "numa.diff.finite",
+        "numa.eigen.sensitivity",
         "numa.errors.absolute",
         "numa.errors.backward",
         "numa.errors.cancellation",
@@ -2978,7 +2980,46 @@
         "numa.linear.matrix_condition",
         "numa.optimization.line_search"
       ],
-      "concept_count": 12
+      "concept_count": 13
+    },
+    {
+      "id": "numerical_analysis.b1",
+      "title": "Numerical Analysis · Stage 2",
+      "domain": "numerical_analysis",
+      "band": 1,
+      "depth_min": 3,
+      "depth_max": 5,
+      "subdomains": [
+        "numerical_analysis.eigen",
+        "numerical_analysis.nonlinear",
+        "numerical_analysis.pde"
+      ],
+      "concept_ids": [
+        "numa.eigen.condition_svd",
+        "numa.nonlinear.armijo",
+        "numa.nonlinear.trust_region",
+        "numa.pde.cfl",
+        "numa.pde.explicit_heat",
+        "numa.pde.implicit_heat",
+        "numa.pde.method_of_lines",
+        "numa.pde.upwind"
+      ],
+      "concept_count": 8
+    },
+    {
+      "id": "numerical_analysis.b2",
+      "title": "Numerical Analysis · Stage 3",
+      "domain": "numerical_analysis",
+      "band": 2,
+      "depth_min": 6,
+      "depth_max": 6,
+      "subdomains": [
+        "numerical_analysis.pde"
+      ],
+      "concept_ids": [
+        "numa.pde.crank_nicolson"
+      ],
+      "concept_count": 1
     },
     {
       "id": "numerical_analysis.b6",
@@ -3030,10 +3071,16 @@
       "depth_min": 24,
       "depth_max": 26,
       "subdomains": [
+        "numerical_analysis.eigen",
         "numerical_analysis.fourier",
-        "numerical_analysis.linear"
+        "numerical_analysis.linear",
+        "numerical_analysis.sparse"
       ],
       "concept_ids": [
+        "numa.eigen.hessenberg",
+        "numa.eigen.jacobi_rotation",
+        "numa.eigen.lanczos",
+        "numa.eigen.svd",
         "numa.fourier.fft",
         "numa.linear.cg",
         "numa.linear.elimination",
@@ -3044,9 +3091,14 @@
         "numa.linear.pivoting",
         "numa.linear.power",
         "numa.linear.qr_algorithm",
-        "numa.linear.thomas"
+        "numa.linear.thomas",
+        "numa.sparse.csc",
+        "numa.sparse.csr",
+        "numa.sparse.fill_in",
+        "numa.sparse.matvec",
+        "numa.sparse.preconditioner"
       ],
-      "concept_count": 11
+      "concept_count": 20
     },
     {
       "id": "numerical_analysis.b9",
@@ -3054,20 +3106,33 @@
       "domain": "numerical_analysis",
       "band": 9,
       "depth_min": 27,
-      "depth_max": 28,
+      "depth_max": 29,
       "subdomains": [
+        "numerical_analysis.eigen",
         "numerical_analysis.fourier",
-        "numerical_analysis.linear"
+        "numerical_analysis.linear",
+        "numerical_analysis.pde",
+        "numerical_analysis.sparse"
       ],
       "concept_ids": [
+        "numa.eigen.arnoldi",
+        "numa.eigen.deflation",
+        "numa.eigen.generalized",
+        "numa.eigen.rayleigh",
         "numa.fourier.aliasing",
         "numa.fourier.dft",
         "numa.linear.cholesky",
         "numa.linear.inverse_power",
         "numa.linear.iter_convergence",
-        "numa.linear.sor"
+        "numa.linear.sor",
+        "numa.pde.spectral",
+        "numa.sparse.banded",
+        "numa.sparse.drop_tolerance",
+        "numa.sparse.multigrid",
+        "numa.sparse.ordering",
+        "numa.sparse.sparse_lu"
       ],
-      "concept_count": 6
+      "concept_count": 16
     },
     {
       "id": "numerical_analysis.b10",
@@ -3078,17 +3143,19 @@
       "depth_max": 32,
       "subdomains": [
         "numerical_analysis.interp",
+        "numerical_analysis.nonlinear",
         "numerical_analysis.roots"
       ],
       "concept_ids": [
         "numa.interp.hermite",
+        "numa.nonlinear.continuation",
         "numa.roots.bisection",
         "numa.roots.brent",
         "numa.roots.false_position",
         "numa.roots.fixed_point",
         "numa.roots.newton"
       ],
-      "concept_count": 6
+      "concept_count": 7
     },
     {
       "id": "numerical_analysis.b11",
@@ -3096,13 +3163,21 @@
       "domain": "numerical_analysis",
       "band": 11,
       "depth_min": 33,
-      "depth_max": 34,
+      "depth_max": 35,
       "subdomains": [
         "numerical_analysis.linear",
+        "numerical_analysis.nonlinear",
         "numerical_analysis.roots"
       ],
       "concept_ids": [
         "numa.least_squares.gauss_newton",
+        "numa.nonlinear.broyden",
+        "numa.nonlinear.jacobian_cost",
+        "numa.nonlinear.levenberg_marquardt",
+        "numa.nonlinear.newton_system",
+        "numa.nonlinear.quadratic_convergence",
+        "numa.nonlinear.residual_norm",
+        "numa.nonlinear.secant_condition",
         "numa.roots.aitken",
         "numa.roots.bracketing",
         "numa.roots.horner",
@@ -3111,7 +3186,7 @@
         "numa.roots.order",
         "numa.roots.secant"
       ],
-      "concept_count": 8
+      "concept_count": 15
     },
     {
       "id": "numerical_analysis.b12",
@@ -3140,10 +3215,12 @@
       "domain": "numerical_analysis",
       "band": 13,
       "depth_min": 39,
-      "depth_max": 40,
+      "depth_max": 41,
       "subdomains": [
         "numerical_analysis.diff",
-        "numerical_analysis.integration"
+        "numerical_analysis.integration",
+        "numerical_analysis.pde",
+        "numerical_analysis.stochastic"
       ],
       "concept_ids": [
         "numa.diff.richardson",
@@ -3151,9 +3228,36 @@
         "numa.integration.gauss_kronrod",
         "numa.integration.improper",
         "numa.integration.monte_carlo",
-        "numa.integration.romberg"
+        "numa.integration.romberg",
+        "numa.pde.finite_element",
+        "numa.pde.mesh",
+        "numa.pde.stiffness_matrix",
+        "numa.stochastic.antithetic",
+        "numa.stochastic.bootstrap",
+        "numa.stochastic.control_variates",
+        "numa.stochastic.importance",
+        "numa.stochastic.metropolis",
+        "numa.stochastic.quasi",
+        "numa.stochastic.rng",
+        "numa.stochastic.standard_error",
+        "numa.stochastic.stratified"
       ],
-      "concept_count": 6
+      "concept_count": 18
+    },
+    {
+      "id": "numerical_analysis.b14",
+      "title": "Numerical Analysis · Stage 15",
+      "domain": "numerical_analysis",
+      "band": 14,
+      "depth_min": 42,
+      "depth_max": 42,
+      "subdomains": [
+        "numerical_analysis.stochastic"
+      ],
+      "concept_ids": [
+        "numa.stochastic.gibbs"
+      ],
+      "concept_count": 1
     },
     {
       "id": "optimization.b11",

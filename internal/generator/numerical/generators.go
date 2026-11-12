@@ -67,4 +67,5 @@ func Register(reg *generator.Registry) {
 	for id, kind := range numaBridgeKinds {
 		reg.Register(id, &numaBridgeGen{kind: kind})
 	}
+	registerWave16(reg)
 }

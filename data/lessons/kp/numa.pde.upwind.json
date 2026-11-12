@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The stencil",
+    "section": "The stencil",
+    "subgoals": [
+      "Read the flow direction",
+      "Pick the one-sided difference",
+      "Write the stencil"
+    ]
+  },
+  {
+    "label": "Numerical diffusion",
+    "section": "Numerical diffusion",
+    "subgoals": [
+      "Identify the truncation term",
+      "Scale by the cell size",
+      "Predict the smearing"
+    ]
+  },
+  {
+    "label": "Accuracy",
+    "section": "Accuracy",
+    "subgoals": [
+      "State the order",
+      "Reduce the smearing",
+      "Watch for oscillations"
+    ]
+  }
+]

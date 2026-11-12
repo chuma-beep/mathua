@@ -1,0 +1,29 @@
+[
+  {
+    "label": "First-order shift",
+    "section": "First-order shift",
+    "subgoals": [
+      "Perturb the matrix",
+      "Use both eigenvectors",
+      "Compute the first-order shift"
+    ]
+  },
+  {
+    "label": "The amplification factor",
+    "section": "The amplification factor",
+    "subgoals": [
+      "Form the reciprocal overlap",
+      "Check the normal case",
+      "Recognise a defective limit"
+    ]
+  },
+  {
+    "label": "Practical reading",
+    "section": "Practical reading",
+    "subgoals": [
+      "Resolve a cluster",
+      "Prefer invariant subspaces",
+      "Interpret the perturbation"
+    ]
+  }
+]

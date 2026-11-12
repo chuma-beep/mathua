@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The sweep",
+    "section": "The sweep",
+    "subgoals": [
+      "Draw each coordinate",
+      "Use its full conditional",
+      "Complete the sweep"
+    ]
+  },
+  {
+    "label": "Relation to Metropolis",
+    "section": "Relation to Metropolis",
+    "subgoals": [
+      "Set the acceptance to one",
+      "Identify the proposal",
+      "Compare the algorithms"
+    ]
+  },
+  {
+    "label": "Limitations",
+    "section": "Limitations",
+    "subgoals": [
+      "Spot dependent coordinates",
+      "Reparametrise the model",
+      "Block the updates"
+    ]
+  }
+]
