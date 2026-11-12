@@ -385,6 +385,26 @@ func TestComputePriority_AboveCapStabilityLowersDecayBonus(t *testing.T) {
 	}
 }
 
+func TestDueReviewCount_ServesDecayedConceptWithUnmetPrerequisite(t *testing.T) {
+	// miniDAG makes b depend on a. A learner can master b and later find a
+	// renamed or a new prerequisite inserted by a corpus wave. The graph still
+	// counts b as decayed, so the review queue has to serve it.
+	d := miniDAG(t)
+	s := New(d)
+	now := time.Now().UTC()
+	old := now.Add(-30 * 24 * time.Hour)
+	snap := map[string]*ConceptSnapshot{
+		"b": {Status: mastery.StatusMastered, LastReviewed: old, LastAttempted: old, RequiredStreak: 3},
+	}
+	if got := s.DueReviewCount(snap, now); got != 1 {
+		t.Fatalf("DueReviewCount = %d, want 1 for a decayed concept with an unmet prerequisite", got)
+	}
+	nx := s.NextReview(snap, "")
+	if nx == nil || nx.Concept.ID != "b" || !nx.IsReview {
+		t.Fatalf("NextReview = %+v, want the decayed concept b", nx)
+	}
+}
+
 func TestNextReview_AboveCapStabilityRemainsDueAndOrdersLower(t *testing.T) {
 	now := time.Now().UTC()
 	d := miniDAG(t)
