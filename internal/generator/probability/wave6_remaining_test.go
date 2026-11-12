@@ -258,7 +258,7 @@ func w6RemTestProbAnswer(t *testing.T, kind string, kp int, p generator.Problem)
 			n := w6RemTestInt(t, p, "n")
 			return 2 * w6RemTestLog2(n*n)
 		}
-		return w6RemTestLog2(len(weights))
+		return w6RemTestLog2(w6RemTestInt(t, p, "outcomes"))
 	case "kl":
 		if kp == 1 {
 			return w6RemTestLog2(w6RemTestInt(t, p, "n"))

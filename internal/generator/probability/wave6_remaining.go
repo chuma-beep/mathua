@@ -201,20 +201,20 @@ func w6Gaussian(kp int) generator.Problem {
 }
 
 func w6HMM(kp int) generator.Problem {
-	k := w6PRem(2, 12)
-	e00 := w6PRem(1, 9)
-	e01 := w6PRem(1, 9)
+	k := w6PRem(2, 24)
+	e00 := w6PRem(1, 99)
+	e01 := w6PRem(1, 99)
 	f := map[string]string{"states": strconv.Itoa(k), "emit00": strconv.Itoa(e00), "emit01": strconv.Itoa(e01)}
 	switch kp {
 	case 1:
 		return w6PM(kp, fmt.Sprintf("A hidden Markov model has %d states. How many free transition parameters are needed when each row of the transition matrix sums to one?", k), strconv.Itoa(k*(k-1)),
 			"Each of the k rows has k-1 free entries.", f)
 	case 2:
-		return w6PM(kp, fmt.Sprintf("For a two-state HMM, the emission probability of symbol 0 from state 0 is %d/10. What is 10 times that probability?", e00), strconv.Itoa(e00),
-			"The probability is already stated in tenths.", f)
+		return w6PM(kp, fmt.Sprintf("For a two-state HMM, the emission probability of symbol 0 from state 0 is %d/100. What is 100 times that probability?", e00), strconv.Itoa(e00),
+			"The probability is already stated in hundredths.", f)
 	default:
-		return w6PM(kp, fmt.Sprintf("For a two-state HMM, the emission probability of symbol 1 from state 0 is %d/10. What is 10 times that probability?", e01), strconv.Itoa(e01),
-			"The probability is already stated in tenths.", f)
+		return w6PM(kp, fmt.Sprintf("For a two-state HMM, the emission probability of symbol 1 from state 0 is %d/100. What is 100 times that probability?", e01), strconv.Itoa(e01),
+			"The probability is already stated in hundredths.", f)
 	}
 }
 
@@ -275,7 +275,7 @@ func w6Bernstein(kp int) generator.Problem {
 }
 
 func w6McDiarmid(kp int) generator.Problem {
-	n := 2 * w6PRem(2, 10)
+	n := 2 * w6PRem(2, 30)
 	t := n / 2
 	f := map[string]string{"n": strconv.Itoa(n), "t": strconv.Itoa(t)}
 	switch kp {
@@ -454,7 +454,6 @@ func w6Entropy(kp int) generator.Problem {
 		{1, 1}, {2, 2}, {4, 4},
 		{1, 1, 2}, {2, 2, 4}, {4, 4, 8},
 		{1, 1, 1, 1}, {2, 2, 2, 2}, {4, 4, 4, 4},
-		{1, 1, 1, 1, 4},
 		{1, 1, 1, 1, 1, 1, 1, 1},
 		{2, 2, 2, 2, 2, 2, 2, 2},
 	}
@@ -474,12 +473,14 @@ func w6Entropy(kp int) generator.Problem {
 		return w6PM(kp, fmt.Sprintf("A distribution has weights %s over outcomes. What is 2 times its entropy in bits?", joinInts(p)), strconv.Itoa(twoH),
 			"Entropy is the sum of p log2(1/p); multiply the result by 2.", f)
 	case 2:
-		n := w6PRem(2, 10)
+		n := 1 << w6PRem(1, 16)
 		f["n"] = strconv.Itoa(n)
 		return w6PM(kp, fmt.Sprintf("Two independent variables have %d equally likely outcomes each. What is 2 times the entropy of the pair in bits?", n), strconv.Itoa(2*log2Int(n*n)),
 			"Independent entropy adds.", f)
 	default:
-		return w6PM(kp, fmt.Sprintf("What is the maximum entropy in bits of a distribution on %d equally likely outcomes?", len(p)), strconv.Itoa(log2Int(len(p))),
+		n := 1 << w6PRem(1, 16)
+		f["outcomes"] = strconv.Itoa(n)
+		return w6PM(kp, fmt.Sprintf("What is the maximum entropy in bits of a distribution on %d equally likely outcomes?", n), strconv.Itoa(log2Int(n)),
 			"The uniform distribution maximises entropy.", f)
 	}
 }
