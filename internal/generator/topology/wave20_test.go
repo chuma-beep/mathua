@@ -646,10 +646,10 @@ func wave20Cases() []wave20Case {
 		}
 	})
 	add("topo.geo.dehn", func(t *testing.T, p generator.Problem, kp int) int {
-		if kp == 1 {
-			return 1
+		if kp == 2 {
+			return 2
 		}
-		return 2
+		return 1
 	})
 	add("topo.geo.amenable", func(t *testing.T, p generator.Problem, kp int) int {
 		if kp == 1 {

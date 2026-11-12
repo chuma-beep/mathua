@@ -6533,6 +6533,120 @@
     "subdomain": "calculus.integrals"
   },
   {
+    "domain": "calc1",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "calc.deriv.reciprocal",
+    "key_prerequisites": [
+      "calc.deriv.quotient_rule"
+    ],
+    "label": "The reciprocal rule",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.deriv.quotient_rule"
+    ],
+    "subdomain": "calculus.derivatives",
+    "variants": []
+  },
+  {
+    "domain": "calc1",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "calc.deriv.leibniz_rule",
+    "key_prerequisites": [
+      "calc.deriv.higher_order"
+    ],
+    "label": "The Leibniz rule for higher derivatives",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.deriv.higher_order"
+    ],
+    "subdomain": "calculus.derivatives",
+    "variants": []
+  },
+  {
+    "domain": "calc1",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "calc.deriv.linear_error",
+    "key_prerequisites": [
+      "calc.deriv.linear_approx"
+    ],
+    "label": "The error in linear approximation",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.deriv.linear_approx"
+    ],
+    "subdomain": "calculus.derivatives",
+    "variants": []
+  },
+  {
+    "domain": "calc1",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "calc.limit.stolz",
+    "key_prerequisites": [
+      "calc.seq.convergence"
+    ],
+    "label": "The Stolz-Cesaro theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.seq.convergence"
+    ],
+    "subdomain": "calculus.limits",
+    "variants": []
+  },
+  {
+    "domain": "calc1",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "calc.seq.recursive",
+    "key_prerequisites": [
+      "calc.seq.convergence"
+    ],
+    "label": "Limits of recursive sequences",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.seq.convergence"
+    ],
+    "subdomain": "calculus.sequences",
+    "variants": []
+  },
+  {
+    "domain": "calc1",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "calc.integral.periodic",
+    "key_prerequisites": [
+      "calc.integral.properties"
+    ],
+    "label": "Integrals of periodic functions",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "calc.integral.properties"
+    ],
+    "subdomain": "calculus.integrals",
+    "variants": []
+  },
+  {
     "domain": "calc2",
     "grading_type": "expression",
     "id": "calc.integral.substitution",
@@ -13298,6 +13412,82 @@
       "ode.sturm_liouville"
     ],
     "subdomain": "differential_equations.variational",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.systems.coupled",
+    "key_prerequisites": [
+      "ode.systems.matrix_exp"
+    ],
+    "label": "Coupled oscillators",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.systems.matrix_exp"
+    ],
+    "subdomain": "differential_equations.systems",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.boundary.eigenfunction",
+    "key_prerequisites": [
+      "ode.sturm_liouville"
+    ],
+    "label": "Eigenfunction expansions",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.sturm_liouville"
+    ],
+    "subdomain": "differential_equations.boundary",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.integral.resolvent",
+    "key_prerequisites": [
+      "ode.integral.fredholm"
+    ],
+    "label": "Resolvent kernels",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.integral.fredholm"
+    ],
+    "subdomain": "differential_equations.integral",
+    "variants": []
+  },
+  {
+    "domain": "differential_equations",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "ode.nonlinear.hopf",
+    "key_prerequisites": [
+      "ode.nonlinear.bifurcation"
+    ],
+    "label": "The Hopf bifurcation",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "ode.nonlinear.bifurcation"
+    ],
+    "subdomain": "differential_equations.nonlinear",
     "variants": []
   },
   {
@@ -24470,6 +24660,25 @@
       "numa.stochastic.quasi"
     ],
     "subdomain": "numerical_analysis.stochastic",
+    "variants": []
+  },
+  {
+    "domain": "numerical_analysis",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "numa.optimization.anderson",
+    "key_prerequisites": [
+      "numa.optimization.line_search"
+    ],
+    "label": "Anderson acceleration",
+    "mastery_threshold": {
+      "avg_time_seconds": 32,
+      "streak": 10
+    },
+    "prerequisites": [
+      "numa.optimization.line_search"
+    ],
+    "subdomain": "numerical_analysis.optimization",
     "variants": []
   },
   {

@@ -715,7 +715,7 @@ func TestWave19AnswersRecompute(t *testing.T) {
 						dens := []int64{6, 90, 945, 9450, 93555, 638512875, 18243225, 325641566250}
 						wave19Check64(t, p, m*dens[k-1])
 					case 2:
-						wave19Check(t, p, -wave19FactInt(t, p, "k"))
+						wave19Check(t, p, -wave19FactInt(t, p, "k")*wave19FactInt(t, p, "m"))
 					default:
 						wave19Check(t, p, 0)
 					}

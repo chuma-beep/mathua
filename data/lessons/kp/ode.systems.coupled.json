@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The state",
+    "section": "The state",
+    "subgoals": [
+      "Count position and velocity",
+      "Double the oscillator count",
+      "Write the first-order size"
+    ]
+  },
+  {
+    "label": "The stiffness matrix",
+    "section": "The stiffness matrix",
+    "subgoals": [
+      "Count the entries",
+      "Read the symmetry",
+      "Identify the mode shapes"
+    ]
+  },
+  {
+    "label": "Two equal masses",
+    "section": "Two equal masses",
+    "subgoals": [
+      "Find the zero mode",
+      "Square the relative frequency",
+      "Separate translation from motion"
+    ]
+  }
+]

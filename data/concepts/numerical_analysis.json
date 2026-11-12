@@ -1926,5 +1926,24 @@
       "streak": 10,
       "avg_time_seconds": 32.0
     }
+  },
+  {
+    "id": "numa.optimization.anderson",
+    "label": "Anderson acceleration",
+    "domain": "numerical_analysis",
+    "subdomain": "numerical_analysis.optimization",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "numa.optimization.line_search"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "numa.optimization.line_search"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
   }
 ]

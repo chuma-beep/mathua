@@ -12,14 +12,14 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 2500 |
+| Total concepts | 2511 |
 | Total units | 157 |
 | Minimum unit size | 1 |
 | Median unit size | 11 |
 | Maximum unit size | 82 |
 | Singleton units | 22 |
 | Units with <= 3 concepts | 40 |
-| Units with > 25 concepts | 39 |
+| Units with > 25 concepts | 40 |
 | Units with > 50 concepts | 4 |
 | Cross-unit prerequisite edges (derived) | 529 |
 | Backward band edges | 0 |
@@ -50,10 +50,10 @@ exists to make concrete.
 | `arithmetic.b3` | arithmetic | 3 | 27 | 7 | 9–11 |
 | `arithmetic.b4` | arithmetic | 4 | 1 | 1 | 12–12 |
 | `calc1.b8` | calc1 | 8 | 1 | 1 | 26–26 |
-| `calc1.b9` | calc1 | 9 | 21 | 3 | 27–29 |
+| `calc1.b9` | calc1 | 9 | 23 | 3 | 27–29 |
 | `calc1.b10` | calc1 | 10 | 37 | 3 | 30–32 |
-| `calc1.b11` | calc1 | 11 | 30 | 4 | 33–35 |
-| `calc1.b12` | calc1 | 12 | 25 | 3 | 36–38 |
+| `calc1.b11` | calc1 | 11 | 32 | 4 | 33–35 |
+| `calc1.b12` | calc1 | 12 | 27 | 3 | 36–38 |
 | `calc2.b9` | calc2 | 9 | 3 | 2 | 29–29 |
 | `calc2.b10` | calc2 | 10 | 42 | 1 | 30–32 |
 | `calc2.b11` | calc2 | 11 | 8 | 2 | 33–35 |
@@ -75,9 +75,9 @@ exists to make concrete.
 | `complex_numbers.b12` | complex_numbers | 12 | 30 | 5 | 36–38 |
 | `differential_equations.b11` | differential_equations | 11 | 6 | 2 | 33–35 |
 | `differential_equations.b12` | differential_equations | 12 | 22 | 5 | 36–38 |
-| `differential_equations.b13` | differential_equations | 13 | 29 | 8 | 39–41 |
-| `differential_equations.b14` | differential_equations | 14 | 28 | 10 | 42–44 |
-| `differential_equations.b15` | differential_equations | 15 | 28 | 6 | 45–47 |
+| `differential_equations.b13` | differential_equations | 13 | 30 | 8 | 39–41 |
+| `differential_equations.b14` | differential_equations | 14 | 30 | 10 | 42–44 |
+| `differential_equations.b15` | differential_equations | 15 | 29 | 6 | 45–47 |
 | `differential_equations.b16` | differential_equations | 16 | 3 | 2 | 48–48 |
 | `discrete_math.b1` | discrete_math | 1 | 1 | 1 | 5–5 |
 | `discrete_math.b2` | discrete_math | 2 | 2 | 1 | 7–8 |
@@ -131,7 +131,7 @@ exists to make concrete.
 | `number_theory.b6` | number_theory | 6 | 11 | 5 | 18–20 |
 | `number_theory.b7` | number_theory | 7 | 1 | 1 | 21–21 |
 | `numerical_analysis.b0` | numerical_analysis | 0 | 13 | 6 | 0–2 |
-| `numerical_analysis.b1` | numerical_analysis | 1 | 8 | 3 | 3–5 |
+| `numerical_analysis.b1` | numerical_analysis | 1 | 9 | 4 | 3–5 |
 | `numerical_analysis.b2` | numerical_analysis | 2 | 1 | 1 | 6–6 |
 | `numerical_analysis.b6` | numerical_analysis | 6 | 1 | 1 | 20–20 |
 | `numerical_analysis.b7` | numerical_analysis | 7 | 12 | 2 | 21–23 |
@@ -203,14 +203,14 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 214 | 9 | 56 | 29 | 55 | 18 | 0 |
-| 3 | 157 | 11 | 82 | 22 | 40 | 39 | 0 |
-| 4 | 122 | 18 | 86 | 10 | 24 | 40 | 0 |
+| 2 | 214 | 9 | 56 | 29 | 55 | 19 | 0 |
+| 3 | 157 | 11 | 82 | 22 | 40 | 40 | 0 |
+| 4 | 122 | 19 | 86 | 10 | 24 | 41 | 0 |
 | 5 | 105 | 20 | 104 | 7 | 19 | 44 | 0 |
-| 6 | 96 | 22 | 130 | 8 | 16 | 37 | 0 |
+| 6 | 96 | 22 | 130 | 8 | 16 | 38 | 0 |
 | 8 | 74 | 30 | 117 | 3 | 9 | 39 | 0 |
 | 10 | 64 | 28 | 145 | 3 | 9 | 34 | 0 |
-| 12 | 63 | 30 | 191 | 1 | 6 | 37 | 0 |
+| 12 | 63 | 30 | 191 | 1 | 6 | 38 | 0 |
 | 15 | 50 | 45 | 172 | 1 | 3 | 35 | 0 |
 | 20 | 44 | 66 | 145 | 1 | 5 | 31 | 0 |
 | 45 | 26 | 90 | 172 | 0 | 0 | 26 | 0 |
@@ -518,7 +518,7 @@ Unresolvable subdomains:
 `trigonometry.identities`
 `trigonometry.spherical`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2500
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2511
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings

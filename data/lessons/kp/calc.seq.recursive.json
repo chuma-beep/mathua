@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Halving",
+    "section": "Halving",
+    "subgoals": [
+      "Halve repeatedly",
+      "Count the halvings",
+      "Reach the threshold"
+    ]
+  },
+  {
+    "label": "Averaging",
+    "section": "Averaging",
+    "subgoals": [
+      "Solve the fixed-point equation",
+      "Read the constant",
+      "Check convergence"
+    ]
+  },
+  {
+    "label": "A linear map",
+    "section": "A linear map",
+    "subgoals": [
+      "Solve for the limit",
+      "Divide by one minus r",
+      "Double the constant"
+    ]
+  }
+]

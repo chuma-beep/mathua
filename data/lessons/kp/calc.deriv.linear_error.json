@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The bound",
+    "section": "The bound",
+    "subgoals": [
+      "Read the curvature bound",
+      "Square the step",
+      "Halve the product"
+    ]
+  },
+  {
+    "label": "The curvature",
+    "section": "The curvature",
+    "subgoals": [
+      "Double the bound",
+      "Keep the step fixed",
+      "Compare the errors"
+    ]
+  },
+  {
+    "label": "Scaling the step",
+    "section": "Scaling the step",
+    "subgoals": [
+      "Scale the step",
+      "Square the factor",
+      "Predict the new error"
+    ]
+  }
+]

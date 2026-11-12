@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The term count",
+    "section": "The term count",
+    "subgoals": [
+      "Count the splits",
+      "Add the endpoints",
+      "Index from zero"
+    ]
+  },
+  {
+    "label": "The coefficient",
+    "section": "The coefficient",
+    "subgoals": [
+      "Choose the order split",
+      "Read the binomial coefficient",
+      "Use symmetry"
+    ]
+  },
+  {
+    "label": "The second derivative",
+    "section": "The second derivative",
+    "subgoals": [
+      "Expand three terms",
+      "Read the middle coefficient",
+      "Check the endpoints"
+    ]
+  }
+]

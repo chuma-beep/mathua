@@ -9998,5 +9998,49 @@
   {
     "concept_id": "topo.geo.property_t",
     "source": "authored/topo.geo.property_t.md"
+  },
+  {
+    "concept_id": "numa.optimization.anderson",
+    "source": "authored/numa.optimization.anderson.md"
+  },
+  {
+    "concept_id": "ode.systems.coupled",
+    "source": "authored/ode.systems.coupled.md"
+  },
+  {
+    "concept_id": "ode.boundary.eigenfunction",
+    "source": "authored/ode.boundary.eigenfunction.md"
+  },
+  {
+    "concept_id": "ode.integral.resolvent",
+    "source": "authored/ode.integral.resolvent.md"
+  },
+  {
+    "concept_id": "ode.nonlinear.hopf",
+    "source": "authored/ode.nonlinear.hopf.md"
+  },
+  {
+    "concept_id": "calc.deriv.reciprocal",
+    "source": "authored/calc.deriv.reciprocal.md"
+  },
+  {
+    "concept_id": "calc.deriv.leibniz_rule",
+    "source": "authored/calc.deriv.leibniz_rule.md"
+  },
+  {
+    "concept_id": "calc.deriv.linear_error",
+    "source": "authored/calc.deriv.linear_error.md"
+  },
+  {
+    "concept_id": "calc.limit.stolz",
+    "source": "authored/calc.limit.stolz.md"
+  },
+  {
+    "concept_id": "calc.seq.recursive",
+    "source": "authored/calc.seq.recursive.md"
+  },
+  {
+    "concept_id": "calc.integral.periodic",
+    "source": "authored/calc.integral.periodic.md"
   }
 ]

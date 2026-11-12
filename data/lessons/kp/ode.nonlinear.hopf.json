@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The critical parameter",
+    "section": "The critical parameter",
+    "subgoals": [
+      "Locate the imaginary crossing",
+      "Compare with the parameter",
+      "Decide stability"
+    ]
+  },
+  {
+    "label": "The frequency",
+    "section": "The frequency",
+    "subgoals": [
+      "Read the imaginary part",
+      "Square the frequency",
+      "Name the cycle period"
+    ]
+  },
+  {
+    "label": "The amplitude",
+    "section": "The amplitude",
+    "subgoals": [
+      "Measure the parameter gap",
+      "Square the amplitude",
+      "See the square-root law"
+    ]
+  }
+]

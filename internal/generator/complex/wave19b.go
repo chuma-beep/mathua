@@ -699,9 +699,11 @@ func w19SpecZetaEven(o int) generator.Problem {
 			strconv.FormatInt(int64(m)*den, 10), "Multiply the Bernoulli denominator by the stated factor.", f)
 	case 2:
 		k := w19N(1, 9)
+		m := w19N(1, 5)
 		w19I(f, "k", k)
-		return w19P(o, fmt.Sprintf("If zeta(0) is written with denominator %d, what is its numerator? (enter an integer)", 2*k),
-			strconv.Itoa(-k), "zeta(0) is -1/2, so the numerator is -k over the denominator 2k.", f)
+		w19I(f, "m", m)
+		return w19P(o, fmt.Sprintf("If zeta(0) is written with denominator %d, what is its numerator? (enter an integer)", 2*k*m),
+			strconv.Itoa(-k*m), "zeta(0) is -1/2, so the numerator is -k*m over the denominator 2km.", f)
 	default:
 		k := w19N(1, 15)
 		w19I(f, "k", k)

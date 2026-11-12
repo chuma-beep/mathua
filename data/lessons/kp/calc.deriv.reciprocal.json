@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The formula",
+    "section": "The formula",
+    "subgoals": [
+      "Differentiate a negative power",
+      "Read the coefficient",
+      "Raise the exponent"
+    ]
+  },
+  {
+    "label": "At a point",
+    "section": "At a point",
+    "subgoals": [
+      "Evaluate the denominator",
+      "Square the point",
+      "Fix the sign"
+    ]
+  },
+  {
+    "label": "The quotient link",
+    "section": "The quotient link",
+    "subgoals": [
+      "Apply the quotient rule",
+      "Keep the numerator negative",
+      "Square the denominator"
+    ]
+  }
+]

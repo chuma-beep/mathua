@@ -1923,5 +1923,81 @@
       "streak": 10,
       "avg_time_seconds": 32.0
     }
+  },
+  {
+    "id": "ode.systems.coupled",
+    "label": "Coupled oscillators",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.systems",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.systems.matrix_exp"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ode.systems.matrix_exp"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "ode.boundary.eigenfunction",
+    "label": "Eigenfunction expansions",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.boundary",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.sturm_liouville"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ode.sturm_liouville"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "ode.integral.resolvent",
+    "label": "Resolvent kernels",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.integral",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.integral.fredholm"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ode.integral.fredholm"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "ode.nonlinear.hopf",
+    "label": "The Hopf bifurcation",
+    "domain": "differential_equations",
+    "subdomain": "differential_equations.nonlinear",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "ode.nonlinear.bifurcation"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "ode.nonlinear.bifurcation"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
   }
 ]

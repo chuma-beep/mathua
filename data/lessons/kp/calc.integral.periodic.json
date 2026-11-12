@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Many periods",
+    "section": "Many periods",
+    "subgoals": [
+      "Integrate one period",
+      "Count the periods",
+      "Multiply"
+    ]
+  },
+  {
+    "label": "Splitting a period",
+    "section": "Splitting a period",
+    "subgoals": [
+      "Subtract the first half",
+      "Keep the whole",
+      "Check the sum"
+    ]
+  },
+  {
+    "label": "The average",
+    "section": "The average",
+    "subgoals": [
+      "Divide by the period",
+      "Read the mean",
+      "Compare with the peak"
+    ]
+  }
+]

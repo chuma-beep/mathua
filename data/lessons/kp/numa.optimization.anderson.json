@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The history",
+    "section": "The history",
+    "subgoals": [
+      "Count stored residuals",
+      "Size the least-squares problem",
+      "Place the depth in the cost"
+    ]
+  },
+  {
+    "label": "The mixing step",
+    "section": "The mixing step",
+    "subgoals": [
+      "Weigh the correction",
+      "Read the damping factor",
+      "Recover plain iteration"
+    ]
+  },
+  {
+    "label": "The saving",
+    "section": "The saving",
+    "subgoals": [
+      "Count the steps saved",
+      "Compare with plain iteration",
+      "Keep the convergence rate"
+    ]
+  }
+]

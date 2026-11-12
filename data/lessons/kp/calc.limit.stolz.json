@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The ratio",
+    "section": "The ratio",
+    "subgoals": [
+      "Form consecutive differences",
+      "Divide the differences",
+      "Take the limit"
+    ]
+  },
+  {
+    "label": "The exponent",
+    "section": "The exponent",
+    "subgoals": [
+      "Compare the powers",
+      "Read the leading exponent",
+      "Add one for the numerator"
+    ]
+  },
+  {
+    "label": "The geometric case",
+    "section": "The geometric case",
+    "subgoals": [
+      "Divide the bases",
+      "Check the ordering",
+      "Read the limit"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The geometric case",
+    "section": "The geometric case",
+    "subgoals": [
+      "Set the constant kernel",
+      "Sum the geometric series",
+      "Read the resolvent factor"
+    ]
+  },
+  {
+    "label": "The series",
+    "section": "The series",
+    "subgoals": [
+      "Choose a truncation",
+      "Apply the operator",
+      "Count the terms"
+    ]
+  },
+  {
+    "label": "The determinant",
+    "section": "The determinant",
+    "subgoals": [
+      "Evaluate one minus lambda",
+      "Find the numerator",
+      "Locate the pole"
+    ]
+  }
+]

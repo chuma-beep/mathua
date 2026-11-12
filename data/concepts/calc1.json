@@ -1653,5 +1653,119 @@
       "streak": 10,
       "avg_time_seconds": 24.0
     }
+  },
+  {
+    "id": "calc.deriv.reciprocal",
+    "label": "The reciprocal rule",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.quotient_rule"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "calc.deriv.quotient_rule"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "calc.deriv.leibniz_rule",
+    "label": "The Leibniz rule for higher derivatives",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.higher_order"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "calc.deriv.higher_order"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "calc.deriv.linear_error",
+    "label": "The error in linear approximation",
+    "domain": "calc1",
+    "subdomain": "calculus.derivatives",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.linear_approx"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "calc.deriv.linear_approx"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "calc.limit.stolz",
+    "label": "The Stolz-Cesaro theorem",
+    "domain": "calc1",
+    "subdomain": "calculus.limits",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.seq.convergence"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "calc.seq.convergence"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "calc.seq.recursive",
+    "label": "Limits of recursive sequences",
+    "domain": "calc1",
+    "subdomain": "calculus.sequences",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.seq.convergence"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "calc.seq.convergence"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "calc.integral.periodic",
+    "label": "Integrals of periodic functions",
+    "domain": "calc1",
+    "subdomain": "calculus.integrals",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.integral.properties"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "calc.integral.properties"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
   }
 ]

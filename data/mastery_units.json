@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 2500,
+  "concept_count": 2511,
   "unit_count": 157,
   "units": [
     {
@@ -698,10 +698,12 @@
         "calc.limit.properties",
         "calc.limit.sine_limit",
         "calc.limit.squeeze",
+        "calc.limit.stolz",
         "calc.seq.concept",
-        "calc.seq.convergence"
+        "calc.seq.convergence",
+        "calc.seq.recursive"
       ],
-      "concept_count": 21
+      "concept_count": 23
     },
     {
       "id": "calc1.b10",
@@ -781,6 +783,7 @@
         "calc.deriv.higher_order",
         "calc.deriv.implicit",
         "calc.deriv.inverse_func",
+        "calc.deriv.linear_error",
         "calc.deriv.marginal_analysis",
         "calc.deriv.mvt_applications",
         "calc.deriv.newton",
@@ -793,6 +796,7 @@
         "calc.deriv.piecewise",
         "calc.deriv.product_rule",
         "calc.deriv.quotient_rule",
+        "calc.deriv.reciprocal",
         "calc.deriv.second_test",
         "calc.deriv.sign",
         "calc.deriv.trig",
@@ -801,7 +805,7 @@
         "calc.integral.riemann_sums",
         "calc.vec.parametric_derivative"
       ],
-      "concept_count": 30
+      "concept_count": 32
     },
     {
       "id": "calc1.b12",
@@ -822,6 +826,7 @@
         "calc.deriv.implicit_second",
         "calc.deriv.inverse_hyperbolic",
         "calc.deriv.inverse_trig",
+        "calc.deriv.leibniz_rule",
         "calc.deriv.log_diff",
         "calc.deriv.parametric_second",
         "calc.deriv.related_rates",
@@ -837,12 +842,13 @@
         "calc.integral.initial_value",
         "calc.integral.leibniz",
         "calc.integral.motion",
+        "calc.integral.periodic",
         "calc.integral.piecewise",
         "calc.integral.properties",
         "calc.integral.symmetry",
         "calc.integral.total_distance"
       ],
-      "concept_count": 25
+      "concept_count": 27
     },
     {
       "id": "calc2.b9",
@@ -1559,6 +1565,7 @@
         "ode.second_order.variation_params",
         "ode.stiff.step_control",
         "ode.sturm_liouville",
+        "ode.systems.coupled",
         "ode.systems.linear_phase",
         "ode.systems.matrix_exp",
         "ode.systems.predator_prey",
@@ -1570,7 +1577,7 @@
         "ode.transforms.step",
         "ode.wronskian"
       ],
-      "concept_count": 29
+      "concept_count": 30
     },
     {
       "id": "differential_equations.b14",
@@ -1592,6 +1599,7 @@
         "differential_equations.variational"
       ],
       "concept_ids": [
+        "ode.boundary.eigenfunction",
         "ode.boundary.finite_difference",
         "ode.boundary.shooting",
         "ode.boundary_value",
@@ -1604,6 +1612,7 @@
         "ode.green.function",
         "ode.integral.volterra",
         "ode.nonlinear.bifurcation",
+        "ode.nonlinear.hopf",
         "ode.nonlinear.lyapunov",
         "ode.nonlinear.perturbation",
         "ode.pde.duhamel",
@@ -1621,7 +1630,7 @@
         "ode.transforms.periodic",
         "ode.variational.functional"
       ],
-      "concept_count": 28
+      "concept_count": 30
     },
     {
       "id": "differential_equations.b15",
@@ -1651,6 +1660,7 @@
         "ode.dynamical.lyapunov_exponent",
         "ode.dynamical.poincare_bendixson",
         "ode.integral.fredholm",
+        "ode.integral.resolvent",
         "ode.pde.harmonic_mean",
         "ode.pde.weak_solution",
         "ode.stiff.bdf",
@@ -1668,7 +1678,7 @@
         "ode.variational.natural_bc",
         "ode.variational.second_variation"
       ],
-      "concept_count": 28
+      "concept_count": 29
     },
     {
       "id": "differential_equations.b16",
@@ -3214,19 +3224,21 @@
       "subdomains": [
         "numerical_analysis.eigen",
         "numerical_analysis.nonlinear",
+        "numerical_analysis.optimization",
         "numerical_analysis.pde"
       ],
       "concept_ids": [
         "numa.eigen.condition_svd",
         "numa.nonlinear.armijo",
         "numa.nonlinear.trust_region",
+        "numa.optimization.anderson",
         "numa.pde.cfl",
         "numa.pde.explicit_heat",
         "numa.pde.implicit_heat",
         "numa.pde.method_of_lines",
         "numa.pde.upwind"
       ],
-      "concept_count": 8
+      "concept_count": 9
     },
     {
       "id": "numerical_analysis.b2",

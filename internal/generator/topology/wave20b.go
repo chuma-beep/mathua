@@ -734,10 +734,10 @@ func w20GeoDehn(kp int) generator.Problem {
 		return w20T(kp, fmt.Sprintf("What is the polynomial degree of the Dehn function of \\(\\mathbb{Z}^{%d}\\)?", n),
 			"2", fmt.Sprintf("For \\(n\\ge 2\\), \\(\\mathbb{Z}^n\\) has a quadratic Dehn function, of degree 2; here \\(n=%d\\).", n), f)
 	default:
-		n := w20R(3, 30)
-		w20I(f, "n", n)
-		return w20T(kp, fmt.Sprintf("What is the polynomial degree of the Dehn function of \\(\\mathbb{Z}^{%d}\\)?", n),
-			"2", fmt.Sprintf("For \\(n\\ge 2\\), \\(\\mathbb{Z}^n\\) has a quadratic Dehn function, of degree 2; here \\(n=%d\\).", n), f)
+		c := w20R(1, 30)
+		w20I(f, "c", c)
+		return w20T(kp, fmt.Sprintf("A hyperbolic group has Dehn function bounded by %d n. What is its polynomial degree?", c),
+			"1", fmt.Sprintf("A linear bound \\(%d n\\) has degree 1.", c), f)
 	}
 }
 

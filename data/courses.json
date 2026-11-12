@@ -791,7 +791,13 @@
       "calc.deriv.related_rates_angle",
       "calc.deriv.optimization_distance",
       "calc.deriv.optimization_cylinder",
-      "calc.integral.floor"
+      "calc.integral.floor",
+      "calc.deriv.reciprocal",
+      "calc.deriv.leibniz_rule",
+      "calc.deriv.linear_error",
+      "calc.limit.stolz",
+      "calc.seq.recursive",
+      "calc.integral.periodic"
     ]
   },
   {
@@ -1444,7 +1450,11 @@
       "ode.variational.natural_bc",
       "ode.variational.noether",
       "ode.variational.second_variation",
-      "ode.wronskian"
+      "ode.wronskian",
+      "ode.systems.coupled",
+      "ode.boundary.eigenfunction",
+      "ode.integral.resolvent",
+      "ode.nonlinear.hopf"
     ]
   },
   {
@@ -2166,7 +2176,8 @@
       "numa.nonlinear.levenberg_marquardt",
       "numa.stochastic.bootstrap",
       "numa.sparse.matvec",
-      "numa.eigen.condition_svd"
+      "numa.eigen.condition_svd",
+      "numa.optimization.anderson"
     ]
   },
   {

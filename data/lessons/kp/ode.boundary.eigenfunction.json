@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The zeros",
+    "section": "The zeros",
+    "subgoals": [
+      "Count interior zeros",
+      "Index the mode",
+      "Read the plot"
+    ]
+  },
+  {
+    "label": "The coefficients",
+    "section": "The coefficients",
+    "subgoals": [
+      "Count the terms",
+      "Integrate against each mode",
+      "Divide by the norm"
+    ]
+  },
+  {
+    "label": "The norm",
+    "section": "The norm",
+    "subgoals": [
+      "Square the sine",
+      "Integrate over the interval",
+      "Recover the length"
+    ]
+  }
+]
