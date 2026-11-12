@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definitions",
+    "section": "Definitions",
+    "subgoals": [
+      "Write the normalizer",
+      "Compare with the centralizer",
+      "Check containment"
+    ]
+  },
+  {
+    "label": "Class size",
+    "section": "Class size",
+    "subgoals": [
+      "Use orbit-stabilizer",
+      "Compute the index",
+      "Recover the class"
+    ]
+  },
+  {
+    "label": "Centres",
+    "section": "Centres",
+    "subgoals": [
+      "Intersect centralizers",
+      "Count central elements",
+      "Check the dihedral case"
+    ]
+  }
+]

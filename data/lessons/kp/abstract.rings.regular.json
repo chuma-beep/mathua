@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Find the dimension",
+      "Count generators",
+      "Compare the two"
+    ]
+  },
+  {
+    "label": "Embedding dimension",
+    "section": "Embedding dimension",
+    "subgoals": [
+      "Minimise the generating set",
+      "Compute the quotient",
+      "Check equality"
+    ]
+  },
+  {
+    "label": "Smooth models",
+    "section": "Smooth models",
+    "subgoals": [
+      "Locate a smooth point",
+      "Compute its local ring",
+      "Confirm regularity"
+    ]
+  }
+]

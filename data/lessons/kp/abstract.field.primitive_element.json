@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Statement",
+    "section": "Statement",
+    "subgoals": [
+      "Find a generator",
+      "Compute its degree",
+      "Compare with the extension"
+    ]
+  },
+  {
+    "label": "Conjugates",
+    "section": "Conjugates",
+    "subgoals": [
+      "Count embeddings",
+      "List the conjugates",
+      "Match the degree"
+    ]
+  },
+  {
+    "label": "Separability",
+    "section": "Separability",
+    "subgoals": [
+      "Check distinct roots",
+      "Find a counterexample",
+      "Assume perfection"
+    ]
+  }
+]

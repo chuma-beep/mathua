@@ -698,7 +698,7 @@ func w19SpecZetaEven(o int) generator.Problem {
 		return w19P(o, fmt.Sprintf("If zeta(%d) is pi^%d divided by an integer d, what is %d*d? (enter a number)", 2*k, 2*k, m),
 			strconv.FormatInt(int64(m)*den, 10), "Multiply the Bernoulli denominator by the stated factor.", f)
 	case 2:
-		k := w19N(1, 9)
+		k := w19N(1, 20)
 		m := w19N(1, 5)
 		w19I(f, "k", k)
 		w19I(f, "m", m)

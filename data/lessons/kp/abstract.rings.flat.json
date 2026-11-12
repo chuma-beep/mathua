@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Tensor a sequence",
+      "Check exactness",
+      "Compare with projectives"
+    ]
+  },
+  {
+    "label": "Examples",
+    "section": "Examples",
+    "subgoals": [
+      "Test the rationals",
+      "Test a cyclic group",
+      "Find the torsion obstruction"
+    ]
+  },
+  {
+    "label": "Local test",
+    "section": "Local test",
+    "subgoals": [
+      "Localise at maximals",
+      "Test each piece",
+      "Conclude globally"
+    ]
+  }
+]

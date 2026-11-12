@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Split the primes",
+      "Check coprimality",
+      "Compute the order"
+    ]
+  },
+  {
+    "label": "Existence",
+    "section": "Existence",
+    "subgoals": [
+      "Assume solvability",
+      "Find the subgroup",
+      "Compare conjugates"
+    ]
+  },
+  {
+    "label": "Counting",
+    "section": "Counting",
+    "subgoals": [
+      "Use the divisibility",
+      "Apply the congruence",
+      "Count the subgroups"
+    ]
+  }
+]

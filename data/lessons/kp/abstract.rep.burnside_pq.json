@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Statement",
+    "section": "Statement",
+    "subgoals": [
+      "Factor the order",
+      "Count the primes",
+      "Conclude solvability"
+    ]
+  },
+  {
+    "label": "Character input",
+    "section": "Character input",
+    "subgoals": [
+      "Take a non-linear character",
+      "Check the degree",
+      "Find the divisor"
+    ]
+  },
+  {
+    "label": "Consequence",
+    "section": "Consequence",
+    "subgoals": [
+      "Find a normal subgroup",
+      "Pass to the quotient",
+      "Induct on the order"
+    ]
+  }
+]

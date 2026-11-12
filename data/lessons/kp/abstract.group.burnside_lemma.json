@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Formula",
+    "section": "Formula",
+    "subgoals": [
+      "Sum fixed points",
+      "Divide by the order",
+      "Count orbits"
+    ]
+  },
+  {
+    "label": "Identity",
+    "section": "Identity",
+    "subgoals": [
+      "Count the set",
+      "Apply the identity",
+      "Check the average"
+    ]
+  },
+  {
+    "label": "Rotations",
+    "section": "Rotations",
+    "subgoals": [
+      "Check transitivity",
+      "Count the orbit",
+      "Confirm with the formula"
+    ]
+  }
+]

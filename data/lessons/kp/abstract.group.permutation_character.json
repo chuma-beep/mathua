@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Evaluate on elements",
+      "Count fixed points",
+      "Read the degree"
+    ]
+  },
+  {
+    "label": "Orbits",
+    "section": "Orbits",
+    "subgoals": [
+      "Take the inner product",
+      "Identify trivial copies",
+      "Count orbits"
+    ]
+  },
+  {
+    "label": "Cycles",
+    "section": "Cycles",
+    "subgoals": [
+      "Count moved points",
+      "Subtract from n",
+      "Check a transposition"
+    ]
+  }
+]

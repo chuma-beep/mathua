@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Keep the subgroup action",
+      "Forget the rest",
+      "Check the axioms"
+    ]
+  },
+  {
+    "label": "Dimension",
+    "section": "Dimension",
+    "subgoals": [
+      "Compare dimensions",
+      "Check the identity",
+      "Confirm preservation"
+    ]
+  },
+  {
+    "label": "Index",
+    "section": "Index",
+    "subgoals": [
+      "Count cosets",
+      "Compute the index",
+      "Use it for induction"
+    ]
+  }
+]

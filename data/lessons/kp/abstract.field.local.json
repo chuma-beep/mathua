@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Find the valuation",
+      "Check completeness",
+      "Count the residue field"
+    ]
+  },
+  {
+    "label": "Ramification",
+    "section": "Ramification",
+    "subgoals": [
+      "Compute e",
+      "Compute f",
+      "Multiply them"
+    ]
+  },
+  {
+    "label": "Residue field",
+    "section": "Residue field",
+    "subgoals": [
+      "Take the quotient",
+      "Count elements",
+      "Write the prime power"
+    ]
+  }
+]

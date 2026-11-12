@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Statement",
+    "section": "Statement",
+    "subgoals": [
+      "Compute the norm",
+      "Write the ratio",
+      "Check the generator"
+    ]
+  },
+  {
+    "label": "Vanishing",
+    "section": "Vanishing",
+    "subgoals": [
+      "Take the cocycle",
+      "Apply the ratio",
+      "Show triviality"
+    ]
+  },
+  {
+    "label": "Norm kernel",
+    "section": "Norm kernel",
+    "subgoals": [
+      "Count the kernel",
+      "Compare with the degree",
+      "Confirm the size"
+    ]
+  }
+]

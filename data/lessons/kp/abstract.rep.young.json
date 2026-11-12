@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Diagrams",
+    "section": "Diagrams",
+    "subgoals": [
+      "Draw the rows",
+      "Check the partition",
+      "Count the boxes"
+    ]
+  },
+  {
+    "label": "Standard tableaux",
+    "section": "Standard tableaux",
+    "subgoals": [
+      "Fill the boxes",
+      "Check the orders",
+      "Count the fillings"
+    ]
+  },
+  {
+    "label": "Hook length",
+    "section": "Hook length",
+    "subgoals": [
+      "Compute the hooks",
+      "Multiply them",
+      "Divide n factorial"
+    ]
+  }
+]

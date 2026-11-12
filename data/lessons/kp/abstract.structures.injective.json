@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Draw the extension",
+      "Extend the map",
+      "Check commutativity"
+    ]
+  },
+  {
+    "label": "Examples",
+    "section": "Examples",
+    "subgoals": [
+      "Test the rationals",
+      "Test the integers",
+      "Find the obstruction"
+    ]
+  },
+  {
+    "label": "Divisibility",
+    "section": "Divisibility",
+    "subgoals": [
+      "Divide by integers",
+      "Check closure",
+      "Apply the criterion"
+    ]
+  }
+]

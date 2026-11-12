@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Find a free cover",
+      "Split the surjection",
+      "Identify the summand"
+    ]
+  },
+  {
+    "label": "Lifting",
+    "section": "Lifting",
+    "subgoals": [
+      "Draw the square",
+      "Lift the map",
+      "Check commutativity"
+    ]
+  },
+  {
+    "label": "Rank",
+    "section": "Rank",
+    "subgoals": [
+      "Localise",
+      "Use freeness",
+      "Compute the rank"
+    ]
+  }
+]

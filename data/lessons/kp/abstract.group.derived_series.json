@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Construction",
+    "section": "Construction",
+    "subgoals": [
+      "Iterate commutators",
+      "Check normality",
+      "Stop at the trivial group"
+    ]
+  },
+  {
+    "label": "Solvability",
+    "section": "Solvability",
+    "subgoals": [
+      "Count the steps",
+      "Compare with composition series",
+      "Name the length"
+    ]
+  },
+  {
+    "label": "Examples",
+    "section": "Examples",
+    "subgoals": [
+      "Check the abelian case",
+      "Compute $S_3$",
+      "Recall $S_n$"
+    ]
+  }
+]

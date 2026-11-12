@@ -10222,5 +10222,181 @@
   {
     "concept_id": "ml.causal.ate",
     "source": "authored/ml.causal.ate.md"
+  },
+  {
+    "concept_id": "abstract.group.conjugacy",
+    "source": "authored/abstract.group.conjugacy.md"
+  },
+  {
+    "concept_id": "abstract.group.normalizer",
+    "source": "authored/abstract.group.normalizer.md"
+  },
+  {
+    "concept_id": "abstract.group.derived_series",
+    "source": "authored/abstract.group.derived_series.md"
+  },
+  {
+    "concept_id": "abstract.group.frattini",
+    "source": "authored/abstract.group.frattini.md"
+  },
+  {
+    "concept_id": "abstract.group.hall",
+    "source": "authored/abstract.group.hall.md"
+  },
+  {
+    "concept_id": "abstract.group.exponent",
+    "source": "authored/abstract.group.exponent.md"
+  },
+  {
+    "concept_id": "abstract.group.transfer",
+    "source": "authored/abstract.group.transfer.md"
+  },
+  {
+    "concept_id": "abstract.group.cohomology",
+    "source": "authored/abstract.group.cohomology.md"
+  },
+  {
+    "concept_id": "abstract.group.burnside_lemma",
+    "source": "authored/abstract.group.burnside_lemma.md"
+  },
+  {
+    "concept_id": "abstract.group.permutation_character",
+    "source": "authored/abstract.group.permutation_character.md"
+  },
+  {
+    "concept_id": "abstract.rings.groebner",
+    "source": "authored/abstract.rings.groebner.md"
+  },
+  {
+    "concept_id": "abstract.rings.regular",
+    "source": "authored/abstract.rings.regular.md"
+  },
+  {
+    "concept_id": "abstract.rings.krull",
+    "source": "authored/abstract.rings.krull.md"
+  },
+  {
+    "concept_id": "abstract.rings.integral_closure",
+    "source": "authored/abstract.rings.integral_closure.md"
+  },
+  {
+    "concept_id": "abstract.rings.dvr",
+    "source": "authored/abstract.rings.dvr.md"
+  },
+  {
+    "concept_id": "abstract.rings.artinian",
+    "source": "authored/abstract.rings.artinian.md"
+  },
+  {
+    "concept_id": "abstract.rings.local",
+    "source": "authored/abstract.rings.local.md"
+  },
+  {
+    "concept_id": "abstract.rings.symmetric_algebra",
+    "source": "authored/abstract.rings.symmetric_algebra.md"
+  },
+  {
+    "concept_id": "abstract.rings.flat",
+    "source": "authored/abstract.rings.flat.md"
+  },
+  {
+    "concept_id": "abstract.rings.completion",
+    "source": "authored/abstract.rings.completion.md"
+  },
+  {
+    "concept_id": "abstract.structures.projective",
+    "source": "authored/abstract.structures.projective.md"
+  },
+  {
+    "concept_id": "abstract.structures.injective",
+    "source": "authored/abstract.structures.injective.md"
+  },
+  {
+    "concept_id": "abstract.structures.spectral_sequence",
+    "source": "authored/abstract.structures.spectral_sequence.md"
+  },
+  {
+    "concept_id": "abstract.structures.chain_homotopy",
+    "source": "authored/abstract.structures.chain_homotopy.md"
+  },
+  {
+    "concept_id": "abstract.structures.derived_functor",
+    "source": "authored/abstract.structures.derived_functor.md"
+  },
+  {
+    "concept_id": "abstract.structures.exact_functor",
+    "source": "authored/abstract.structures.exact_functor.md"
+  },
+  {
+    "concept_id": "abstract.structures.direct_limit",
+    "source": "authored/abstract.structures.direct_limit.md"
+  },
+  {
+    "concept_id": "abstract.structures.free_resolution",
+    "source": "authored/abstract.structures.free_resolution.md"
+  },
+  {
+    "concept_id": "abstract.field.perfect",
+    "source": "authored/abstract.field.perfect.md"
+  },
+  {
+    "concept_id": "abstract.field.normal",
+    "source": "authored/abstract.field.normal.md"
+  },
+  {
+    "concept_id": "abstract.field.primitive_element",
+    "source": "authored/abstract.field.primitive_element.md"
+  },
+  {
+    "concept_id": "abstract.field.artin",
+    "source": "authored/abstract.field.artin.md"
+  },
+  {
+    "concept_id": "abstract.field.kummer",
+    "source": "authored/abstract.field.kummer.md"
+  },
+  {
+    "concept_id": "abstract.field.hilbert90",
+    "source": "authored/abstract.field.hilbert90.md"
+  },
+  {
+    "concept_id": "abstract.field.local",
+    "source": "authored/abstract.field.local.md"
+  },
+  {
+    "concept_id": "abstract.field.padic",
+    "source": "authored/abstract.field.padic.md"
+  },
+  {
+    "concept_id": "abstract.rep.orthogonality",
+    "source": "authored/abstract.rep.orthogonality.md"
+  },
+  {
+    "concept_id": "abstract.rep.regular",
+    "source": "authored/abstract.rep.regular.md"
+  },
+  {
+    "concept_id": "abstract.rep.tensor",
+    "source": "authored/abstract.rep.tensor.md"
+  },
+  {
+    "concept_id": "abstract.rep.restriction",
+    "source": "authored/abstract.rep.restriction.md"
+  },
+  {
+    "concept_id": "abstract.rep.frobenius",
+    "source": "authored/abstract.rep.frobenius.md"
+  },
+  {
+    "concept_id": "abstract.rep.fourier",
+    "source": "authored/abstract.rep.fourier.md"
+  },
+  {
+    "concept_id": "abstract.rep.young",
+    "source": "authored/abstract.rep.young.md"
+  },
+  {
+    "concept_id": "abstract.rep.burnside_pq",
+    "source": "authored/abstract.rep.burnside_pq.md"
   }
 ]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Intersect maximals",
+      "Use the p-group formula",
+      "Check normality"
+    ]
+  },
+  {
+    "label": "Non-generators",
+    "section": "Non-generators",
+    "subgoals": [
+      "Remove one element",
+      "Compare generated subgroups",
+      "Apply the definition"
+    ]
+  },
+  {
+    "label": "Quotient",
+    "section": "Quotient",
+    "subgoals": [
+      "Compute the order",
+      "Identify the exponent",
+      "Count generators"
+    ]
+  }
+]

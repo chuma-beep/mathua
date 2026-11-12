@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Count maximal ideals",
+      "Identify the non-units",
+      "Confirm uniqueness"
+    ]
+  },
+  {
+    "label": "Localisation",
+    "section": "Localisation",
+    "subgoals": [
+      "Invert the complement",
+      "Find the maximal ideal",
+      "Check locality"
+    ]
+  },
+  {
+    "label": "Residue field",
+    "section": "Residue field",
+    "subgoals": [
+      "Take the quotient",
+      "Check the field",
+      "Compute its size"
+    ]
+  }
+]

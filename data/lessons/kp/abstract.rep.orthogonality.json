@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Inner product",
+    "section": "Inner product",
+    "subgoals": [
+      "Average over the group",
+      "Pair the characters",
+      "Read zero or one"
+    ]
+  },
+  {
+    "label": "Sum of squares",
+    "section": "Sum of squares",
+    "subgoals": [
+      "Square the degrees",
+      "Add them",
+      "Compare with the order"
+    ]
+  },
+  {
+    "label": "Class count",
+    "section": "Class count",
+    "subgoals": [
+      "Count classes",
+      "Count characters",
+      "Match the two"
+    ]
+  }
+]

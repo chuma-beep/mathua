@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Counting classes",
+    "section": "Counting classes",
+    "subgoals": [
+      "Count partitions",
+      "Match cycle types",
+      "Use the class equation"
+    ]
+  },
+  {
+    "label": "Dihedral classes",
+    "section": "Dihedral classes",
+    "subgoals": [
+      "Separate rotations",
+      "Count reflection classes",
+      "Check parity"
+    ]
+  },
+  {
+    "label": "Abelian case",
+    "section": "Abelian case",
+    "subgoals": [
+      "Identify singletons",
+      "Count elements",
+      "Relate to characters"
+    ]
+  }
+]

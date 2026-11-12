@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Act diagonally",
+      "Multiply dimensions",
+      "Check the action"
+    ]
+  },
+  {
+    "label": "Characters",
+    "section": "Characters",
+    "subgoals": [
+      "Evaluate both",
+      "Multiply values",
+      "Compare characters"
+    ]
+  },
+  {
+    "label": "Symmetric and exterior",
+    "section": "Symmetric and exterior",
+    "subgoals": [
+      "Count symmetric pairs",
+      "Count alternating pairs",
+      "Check the sum"
+    ]
+  }
+]

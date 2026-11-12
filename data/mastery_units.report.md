@@ -12,7 +12,7 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 2556 |
+| Total concepts | 2600 |
 | Total units | 159 |
 | Minimum unit size | 1 |
 | Median unit size | 11 |
@@ -20,7 +20,7 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 | Singleton units | 23 |
 | Units with <= 3 concepts | 40 |
 | Units with > 25 concepts | 41 |
-| Units with > 50 concepts | 4 |
+| Units with > 50 concepts | 5 |
 | Cross-unit prerequisite edges (derived) | 534 |
 | Backward band edges | 0 |
 
@@ -33,10 +33,10 @@ exists to make concrete.
 | Unit | Domain | Band | Concepts | Subdomains | Depth |
 |---|---|---|---|---|---|
 | `abstract_algebra.b6` | abstract_algebra | 6 | 6 | 1 | 18–20 |
-| `abstract_algebra.b7` | abstract_algebra | 7 | 11 | 3 | 21–23 |
-| `abstract_algebra.b8` | abstract_algebra | 8 | 28 | 5 | 24–26 |
-| `abstract_algebra.b9` | abstract_algebra | 9 | 27 | 5 | 27–29 |
-| `abstract_algebra.b10` | abstract_algebra | 10 | 4 | 2 | 30–31 |
+| `abstract_algebra.b7` | abstract_algebra | 7 | 13 | 3 | 21–23 |
+| `abstract_algebra.b8` | abstract_algebra | 8 | 40 | 5 | 24–26 |
+| `abstract_algebra.b9` | abstract_algebra | 9 | 54 | 5 | 27–29 |
+| `abstract_algebra.b10` | abstract_algebra | 10 | 7 | 4 | 30–32 |
 | `algebra.b3` | algebra | 3 | 4 | 1 | 10–11 |
 | `algebra.b4` | algebra | 4 | 2 | 1 | 12–12 |
 | `algebra.b5` | algebra | 5 | 5 | 1 | 16–17 |
@@ -205,12 +205,12 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 216 | 9 | 56 | 27 | 55 | 20 | 0 |
+| 2 | 217 | 9 | 56 | 28 | 56 | 22 | 0 |
 | 3 | 159 | 11 | 82 | 23 | 40 | 41 | 0 |
-| 4 | 123 | 19 | 86 | 10 | 23 | 43 | 0 |
+| 4 | 124 | 19 | 86 | 11 | 24 | 44 | 0 |
 | 5 | 106 | 20 | 104 | 7 | 19 | 45 | 0 |
 | 6 | 96 | 23 | 130 | 8 | 15 | 41 | 0 |
-| 8 | 74 | 31 | 117 | 3 | 9 | 40 | 0 |
+| 8 | 75 | 30 | 117 | 4 | 10 | 40 | 0 |
 | 10 | 64 | 30 | 145 | 3 | 9 | 35 | 0 |
 | 12 | 63 | 30 | 191 | 1 | 6 | 39 | 0 |
 | 15 | 50 | 49 | 172 | 1 | 3 | 35 | 0 |
@@ -526,7 +526,7 @@ Unresolvable subdomains:
 `trigonometry.identities`
 `trigonometry.spherical`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2556
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2600
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings

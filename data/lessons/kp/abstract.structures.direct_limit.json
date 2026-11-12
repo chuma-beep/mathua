@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Take the disjoint union",
+      "Identify compatible elements",
+      "Form the limit"
+    ]
+  },
+  {
+    "label": "Universal property",
+    "section": "Universal property",
+    "subgoals": [
+      "Draw the cone",
+      "Factor the map",
+      "Check uniqueness"
+    ]
+  },
+  {
+    "label": "Stages",
+    "section": "Stages",
+    "subgoals": [
+      "Index the stages",
+      "Count the modules",
+      "Pass to the limit"
+    ]
+  }
+]

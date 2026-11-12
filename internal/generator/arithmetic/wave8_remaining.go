@@ -241,7 +241,7 @@ func w8Compensation(kp int) generator.Problem {
 		return w8R(kp, fmt.Sprintf("What is \\(%d+%d\\)? (enter a number)", a, delta), strconv.Itoa(a+delta),
 			fmt.Sprintf("Add ten to get %d, then subtract %d to get %d.", a+10, 10-delta, a+delta), f)
 	default:
-		return w8R(kp, fmt.Sprintf("What is \\(%d+10\\)? (enter a number)", a), strconv.Itoa(a+10),
+		return w8R(kp, fmt.Sprintf("Adding 10 to %d gives what? (enter a number)", a), strconv.Itoa(a+10),
 			fmt.Sprintf("\\(%d+10=%d\\).", a, a+10), f)
 	}
 }

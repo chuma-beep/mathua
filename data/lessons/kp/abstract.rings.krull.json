@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Build a chain",
+      "Count inclusions",
+      "Take the supremum"
+    ]
+  },
+  {
+    "label": "Examples",
+    "section": "Examples",
+    "subgoals": [
+      "Check the field",
+      "Check the integers",
+      "Check the polynomial ring"
+    ]
+  },
+  {
+    "label": "Local rings",
+    "section": "Local rings",
+    "subgoals": [
+      "Find the maximal ideal",
+      "Count generators",
+      "Compare with the dimension"
+    ]
+  }
+]

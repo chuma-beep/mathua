@@ -48,6 +48,7 @@ func Register(reg *generator.Registry) {
 	registerConversions(reg)
 	registerWave7(reg)
 	registerWave7Remaining(reg)
+	registerWave23(reg)
 }
 
 // ----- 1. group.def -----

@@ -726,7 +726,7 @@ func w20GeoDehn(kp int) generator.Problem {
 		n := w20R(1, 30)
 		w20I(f, "n", n)
 		degree := 1
-		return w20T(kp, fmt.Sprintf("What is the polynomial degree of the Dehn function of \\(\\mathbb{Z}^{%d}\\)?", n),
+		return w20T(kp, fmt.Sprintf("The Dehn function of \\(\\mathbb{Z}^{%d}\\) is linear. What is its polynomial degree?", n),
 			strconv.Itoa(degree), "The Dehn function of a hyperbolic group, and of \\(\\mathbb{Z}\\), is linear, of degree 1.", f)
 	case 2:
 		n := w20R(2, 30)

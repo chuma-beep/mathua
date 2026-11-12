@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Take the group algebra",
+      "Act by left multiplication",
+      "Read the dimension"
+    ]
+  },
+  {
+    "label": "Decomposition",
+    "section": "Decomposition",
+    "subgoals": [
+      "List irreducibles",
+      "Use degrees",
+      "Sum the squares"
+    ]
+  },
+  {
+    "label": "Trivial copy",
+    "section": "Trivial copy",
+    "subgoals": [
+      "Find invariant vectors",
+      "Count them",
+      "Identify the copy"
+    ]
+  }
+]

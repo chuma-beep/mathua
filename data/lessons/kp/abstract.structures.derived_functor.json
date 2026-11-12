@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Construction",
+    "section": "Construction",
+    "subgoals": [
+      "Resolve the module",
+      "Apply the functor",
+      "Take homology"
+    ]
+  },
+  {
+    "label": "Vanishing",
+    "section": "Vanishing",
+    "subgoals": [
+      "Find the dimension",
+      "Check the range",
+      "Confirm zero"
+    ]
+  },
+  {
+    "label": "Length",
+    "section": "Length",
+    "subgoals": [
+      "Count the terms",
+      "Index from zero",
+      "Include the original functor"
+    ]
+  }
+]

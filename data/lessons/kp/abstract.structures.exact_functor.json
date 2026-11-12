@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Apply the functor",
+      "Check the sequence",
+      "Confirm exactness"
+    ]
+  },
+  {
+    "label": "One-sided",
+    "section": "One-sided",
+    "subgoals": [
+      "Keep the kernel",
+      "Compare with the cokernel",
+      "Name the side"
+    ]
+  },
+  {
+    "label": "Terms",
+    "section": "Terms",
+    "subgoals": [
+      "Count the terms",
+      "Apply the functor",
+      "Compare the counts"
+    ]
+  }
+]

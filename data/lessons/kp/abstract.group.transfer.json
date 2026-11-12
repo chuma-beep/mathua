@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Construction",
+    "section": "Construction",
+    "subgoals": [
+      "Choose representatives",
+      "Track the action",
+      "Multiply the corrections"
+    ]
+  },
+  {
+    "label": "Kernel",
+    "section": "Kernel",
+    "subgoals": [
+      "Compute the commutator",
+      "Intersect with the kernel",
+      "Read the index"
+    ]
+  },
+  {
+    "label": "Sylow data",
+    "section": "Sylow data",
+    "subgoals": [
+      "Apply the congruence",
+      "Use the divisibility",
+      "Count the subgroups"
+    ]
+  }
+]

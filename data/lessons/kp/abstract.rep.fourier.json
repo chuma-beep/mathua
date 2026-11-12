@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Expansion",
+    "section": "Expansion",
+    "subgoals": [
+      "Choose coefficients",
+      "Combine matrix entries",
+      "Recover the function"
+    ]
+  },
+  {
+    "label": "Abelian case",
+    "section": "Abelian case",
+    "subgoals": [
+      "Count characters",
+      "Build the transform",
+      "Check invertibility"
+    ]
+  },
+  {
+    "label": "Inversion",
+    "section": "Inversion",
+    "subgoals": [
+      "Average the coefficients",
+      "Apply the dual",
+      "Recover the values"
+    ]
+  }
+]

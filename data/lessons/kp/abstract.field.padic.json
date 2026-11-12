@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Valuation",
+    "section": "Valuation",
+    "subgoals": [
+      "Factor out p",
+      "Read the exponent",
+      "Compute the value"
+    ]
+  },
+  {
+    "label": "Expansions",
+    "section": "Expansions",
+    "subgoals": [
+      "Write base p",
+      "Count the digits",
+      "Check convergence"
+    ]
+  },
+  {
+    "label": "Residue field",
+    "section": "Residue field",
+    "subgoals": [
+      "Reduce modulo p",
+      "Count the classes",
+      "Identify the field"
+    ]
+  }
+]

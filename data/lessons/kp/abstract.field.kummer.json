@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Setting",
+    "section": "Setting",
+    "subgoals": [
+      "Adjoin a root of unity",
+      "Check the power map",
+      "Prepare the extension"
+    ]
+  },
+  {
+    "label": "Degree",
+    "section": "Degree",
+    "subgoals": [
+      "Adjoin the root",
+      "Compute the degree",
+      "Divide by n"
+    ]
+  },
+  {
+    "label": "Galois group",
+    "section": "Galois group",
+    "subgoals": [
+      "Act on the root",
+      "Identify the multiplier",
+      "Read the subgroup"
+    ]
+  }
+]

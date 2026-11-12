@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Take an irreducible",
+      "Check repeated roots",
+      "Decide separability"
+    ]
+  },
+  {
+    "label": "Examples",
+    "section": "Examples",
+    "subgoals": [
+      "Check a finite field",
+      "Check characteristic zero",
+      "Find a non-example"
+    ]
+  },
+  {
+    "label": "Inseparable degree",
+    "section": "Inseparable degree",
+    "subgoals": [
+      "Take the p-th root",
+      "Count the layers",
+      "Read the degree"
+    ]
+  }
+]

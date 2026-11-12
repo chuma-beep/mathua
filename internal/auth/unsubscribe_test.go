@@ -37,10 +37,17 @@ func TestNotificationUnsubscribeTokenRejectsBadInput(t *testing.T) {
 	if err != nil {
 		t.Fatalf("mint: %v", err)
 	}
-	tampered := raw[:len(raw)-1] + "x"
-	if tampered == raw {
-		tampered = raw[:len(raw)-1] + "y"
+	parts := strings.Split(raw, ".")
+	if len(parts) != 3 {
+		t.Fatalf("token has %d parts, want 3", len(parts))
 	}
+	sig := []byte(parts[2])
+	if sig[0] == 'A' {
+		sig[0] = 'B'
+	} else {
+		sig[0] = 'A'
+	}
+	tampered := parts[0] + "." + parts[1] + "." + string(sig)
 	if _, err := ParseNotificationUnsubscribeToken(tampered); err == nil {
 		t.Error("accepted a tampered token")
 	}

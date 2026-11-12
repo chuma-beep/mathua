@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Write the relation",
+      "Apply the boundary",
+      "Pass to homology"
+    ]
+  },
+  {
+    "label": "Boundary",
+    "section": "Boundary",
+    "subgoals": [
+      "Apply twice",
+      "Check the square",
+      "Identify cycles"
+    ]
+  },
+  {
+    "label": "Components",
+    "section": "Components",
+    "subgoals": [
+      "Index the degrees",
+      "Count the maps",
+      "Check the ends"
+    ]
+  }
+]

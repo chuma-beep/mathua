@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Pages",
+    "section": "Pages",
+    "subgoals": [
+      "Take homology",
+      "Advance the page",
+      "Check the differential"
+    ]
+  },
+  {
+    "label": "Bidegree",
+    "section": "Bidegree",
+    "subgoals": [
+      "Draw the grid",
+      "Count entries",
+      "Follow the bidegree"
+    ]
+  },
+  {
+    "label": "Convergence",
+    "section": "Convergence",
+    "subgoals": [
+      "Track an entry",
+      "Watch the differentials",
+      "Identify the limit"
+    ]
+  }
+]

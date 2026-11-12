@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Leading terms",
+    "section": "Leading terms",
+    "subgoals": [
+      "Choose an order",
+      "Take leading terms",
+      "Generate the initial ideal"
+    ]
+  },
+  {
+    "label": "Standard monomials",
+    "section": "Standard monomials",
+    "subgoals": [
+      "List the monomials",
+      "Remove the initial ideal",
+      "Count the basis"
+    ]
+  },
+  {
+    "label": "Monomial ideals",
+    "section": "Monomial ideals",
+    "subgoals": [
+      "Multiply the exponents",
+      "Check a small case",
+      "Count the quotient"
+    ]
+  }
+]

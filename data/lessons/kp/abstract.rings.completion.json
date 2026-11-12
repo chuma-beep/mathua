@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Take quotients",
+      "Form the inverse limit",
+      "Identify the completion"
+    ]
+  },
+  {
+    "label": "Example",
+    "section": "Example",
+    "subgoals": [
+      "Localise at p",
+      "Complete",
+      "Recognise the p-adics"
+    ]
+  },
+  {
+    "label": "Stages",
+    "section": "Stages",
+    "subgoals": [
+      "Index the stages",
+      "Compute the first",
+      "Count the terms"
+    ]
+  }
+]

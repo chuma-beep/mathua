@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Statement",
+    "section": "Statement",
+    "subgoals": [
+      "Induce the representation",
+      "Restrict the other",
+      "Compare multiplicities"
+    ]
+  },
+  {
+    "label": "Dimension",
+    "section": "Dimension",
+    "subgoals": [
+      "Multiply the dimension",
+      "Multiply by the index",
+      "Confirm the index formula"
+    ]
+  },
+  {
+    "label": "Multiplicity",
+    "section": "Multiplicity",
+    "subgoals": [
+      "Take the inner product",
+      "Use the subgroup",
+      "Read the integer"
+    ]
+  }
+]

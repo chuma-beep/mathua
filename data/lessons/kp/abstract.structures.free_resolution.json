@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Construction",
+    "section": "Construction",
+    "subgoals": [
+      "Cover the module",
+      "Resolve the kernel",
+      "Stop when free"
+    ]
+  },
+  {
+    "label": "Betti numbers",
+    "section": "Betti numbers",
+    "subgoals": [
+      "Count the generators",
+      "Record the ranks",
+      "Sum the Betti numbers"
+    ]
+  },
+  {
+    "label": "Length",
+    "section": "Length",
+    "subgoals": [
+      "Count the maps",
+      "Find the dimension",
+      "Check the last term"
+    ]
+  }
+]

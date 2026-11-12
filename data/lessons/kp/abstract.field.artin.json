@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Statement",
+    "section": "Statement",
+    "subgoals": [
+      "Take the fixed field",
+      "Check the group",
+      "Apply the theorem"
+    ]
+  },
+  {
+    "label": "Degree",
+    "section": "Degree",
+    "subgoals": [
+      "Count automorphisms",
+      "Compare with the degree",
+      "Confirm equality"
+    ]
+  },
+  {
+    "label": "Converse",
+    "section": "Converse",
+    "subgoals": [
+      "Start from a Galois extension",
+      "Take its group",
+      "Recover the fixed field"
+    ]
+  }
+]

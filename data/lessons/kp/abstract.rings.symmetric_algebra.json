@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Start from tensors",
+      "Impose commutativity",
+      "Take the quotient"
+    ]
+  },
+  {
+    "label": "Graded pieces",
+    "section": "Graded pieces",
+    "subgoals": [
+      "Count monomials",
+      "Apply stars and bars",
+      "Check a small case"
+    ]
+  },
+  {
+    "label": "Polynomial model",
+    "section": "Polynomial model",
+    "subgoals": [
+      "Choose a basis",
+      "Name the variables",
+      "Compare dimensions"
+    ]
+  }
+]

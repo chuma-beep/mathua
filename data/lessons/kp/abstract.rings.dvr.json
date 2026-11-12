@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Valuation",
+    "section": "Valuation",
+    "subgoals": [
+      "Pick a uniformiser",
+      "Compute its value",
+      "Read the order"
+    ]
+  },
+  {
+    "label": "Ideals",
+    "section": "Ideals",
+    "subgoals": [
+      "List the powers",
+      "Check principality",
+      "Identify the maximal ideal"
+    ]
+  },
+  {
+    "label": "Residue field",
+    "section": "Residue field",
+    "subgoals": [
+      "Take the quotient",
+      "Count its elements",
+      "Check the field axioms"
+    ]
+  }
+]

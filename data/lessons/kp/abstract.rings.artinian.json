@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Take a descending chain",
+      "Wait for stabilisation",
+      "Compare with Noetherian"
+    ]
+  },
+  {
+    "label": "Structure",
+    "section": "Structure",
+    "subgoals": [
+      "Factor the ring",
+      "Identify the local factors",
+      "Count them"
+    ]
+  },
+  {
+    "label": "Examples",
+    "section": "Examples",
+    "subgoals": [
+      "Compute the dimension",
+      "Check the chain condition",
+      "Identify the maximal ideal"
+    ]
+  }
+]

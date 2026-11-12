@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Write a monic polynomial",
+      "Find a root",
+      "Check integrality"
+    ]
+  },
+  {
+    "label": "Normal domains",
+    "section": "Normal domains",
+    "subgoals": [
+      "Pass to fractions",
+      "Take the closure",
+      "Compare with the domain"
+    ]
+  },
+  {
+    "label": "Quadratic orders",
+    "section": "Quadratic orders",
+    "subgoals": [
+      "Choose a basis",
+      "Compute the rank",
+      "Identify the closure"
+    ]
+  }
+]

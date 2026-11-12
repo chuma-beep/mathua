@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Take the lcm",
+      "Check Lagrange",
+      "Find the least value"
+    ]
+  },
+  {
+    "label": "Examples",
+    "section": "Examples",
+    "subgoals": [
+      "Compute the cyclic case",
+      "Compute the symmetric case",
+      "Compare with the order"
+    ]
+  },
+  {
+    "label": "Dihedral case",
+    "section": "Dihedral case",
+    "subgoals": [
+      "Combine rotations",
+      "Include reflections",
+      "Take the lcm"
+    ]
+  }
+]

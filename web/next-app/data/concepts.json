@@ -1114,6 +1114,842 @@
     "subdomain": "abstract_algebra.structures"
   },
   {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.group.conjugacy",
+    "key_prerequisites": [
+      "abstract.group.action"
+    ],
+    "label": "Conjugacy classes",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.action"
+    ],
+    "subdomain": "abstract_algebra.groups",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.group.normalizer",
+    "key_prerequisites": [
+      "abstract.group.subgroup"
+    ],
+    "label": "Normalizers and centralizers",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.subgroup"
+    ],
+    "subdomain": "abstract_algebra.groups",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.group.derived_series",
+    "key_prerequisites": [
+      "abstract.group.commutator"
+    ],
+    "label": "The derived series",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.commutator"
+    ],
+    "subdomain": "abstract_algebra.groups",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.group.frattini",
+    "key_prerequisites": [
+      "abstract.group.p_group"
+    ],
+    "label": "The Frattini subgroup",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.p_group"
+    ],
+    "subdomain": "abstract_algebra.groups",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.group.hall",
+    "key_prerequisites": [
+      "abstract.group.sylow"
+    ],
+    "label": "Hall subgroups",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.sylow"
+    ],
+    "subdomain": "abstract_algebra.groups",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.group.exponent",
+    "key_prerequisites": [
+      "abstract.group.order"
+    ],
+    "label": "The exponent of a group",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.order"
+    ],
+    "subdomain": "abstract_algebra.groups",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.group.transfer",
+    "key_prerequisites": [
+      "abstract.group.abelian_classification"
+    ],
+    "label": "The transfer homomorphism",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.abelian_classification"
+    ],
+    "subdomain": "abstract_algebra.groups",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.group.cohomology",
+    "key_prerequisites": [
+      "abstract.group.extension"
+    ],
+    "label": "Group cohomology",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.extension"
+    ],
+    "subdomain": "abstract_algebra.groups",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.group.burnside_lemma",
+    "key_prerequisites": [
+      "abstract.group.action"
+    ],
+    "label": "Burnside's orbit formula",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.action"
+    ],
+    "subdomain": "abstract_algebra.groups",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.group.permutation_character",
+    "key_prerequisites": [
+      "abstract.rep.character"
+    ],
+    "label": "Permutation characters",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rep.character"
+    ],
+    "subdomain": "abstract_algebra.groups",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.rings.groebner",
+    "key_prerequisites": [
+      "abstract.rings.polynomial"
+    ],
+    "label": "Groebner bases",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rings.polynomial"
+    ],
+    "subdomain": "abstract_algebra.rings",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.rings.regular",
+    "key_prerequisites": [
+      "abstract.rings.prime_ideal"
+    ],
+    "label": "Regular local rings",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rings.prime_ideal"
+    ],
+    "subdomain": "abstract_algebra.rings",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.rings.krull",
+    "key_prerequisites": [
+      "abstract.rings.noetherian"
+    ],
+    "label": "Krull dimension",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rings.noetherian"
+    ],
+    "subdomain": "abstract_algebra.rings",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.rings.integral_closure",
+    "key_prerequisites": [
+      "abstract.rings.dedekind"
+    ],
+    "label": "Integral closure",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rings.dedekind"
+    ],
+    "subdomain": "abstract_algebra.rings",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.rings.dvr",
+    "key_prerequisites": [
+      "abstract.rings.valuation"
+    ],
+    "label": "Discrete valuation rings",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rings.valuation"
+    ],
+    "subdomain": "abstract_algebra.rings",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.rings.artinian",
+    "key_prerequisites": [
+      "abstract.rings.noetherian"
+    ],
+    "label": "Artinian rings",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rings.noetherian"
+    ],
+    "subdomain": "abstract_algebra.rings",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.rings.local",
+    "key_prerequisites": [
+      "abstract.rings.prime_ideal"
+    ],
+    "label": "Local rings",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rings.prime_ideal"
+    ],
+    "subdomain": "abstract_algebra.rings",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.rings.symmetric_algebra",
+    "key_prerequisites": [
+      "abstract.structures.tensor"
+    ],
+    "label": "Symmetric algebras",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.structures.tensor"
+    ],
+    "subdomain": "abstract_algebra.rings",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.rings.flat",
+    "key_prerequisites": [
+      "abstract.structures.tensor"
+    ],
+    "label": "Flat modules",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.structures.tensor"
+    ],
+    "subdomain": "abstract_algebra.rings",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.rings.completion",
+    "key_prerequisites": [
+      "abstract.rings.local"
+    ],
+    "label": "Completions of rings",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rings.local"
+    ],
+    "subdomain": "abstract_algebra.rings",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.structures.projective",
+    "key_prerequisites": [
+      "abstract.structures.module"
+    ],
+    "label": "Projective modules",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.structures.module"
+    ],
+    "subdomain": "abstract_algebra.structures",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.structures.injective",
+    "key_prerequisites": [
+      "abstract.structures.module"
+    ],
+    "label": "Injective modules",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.structures.module"
+    ],
+    "subdomain": "abstract_algebra.structures",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.structures.spectral_sequence",
+    "key_prerequisites": [
+      "abstract.structures.exact_sequence"
+    ],
+    "label": "Spectral sequences",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.structures.exact_sequence"
+    ],
+    "subdomain": "abstract_algebra.structures",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.structures.chain_homotopy",
+    "key_prerequisites": [
+      "abstract.structures.exact_sequence"
+    ],
+    "label": "Chain homotopies",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.structures.exact_sequence"
+    ],
+    "subdomain": "abstract_algebra.structures",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.structures.derived_functor",
+    "key_prerequisites": [
+      "abstract.structures.ext"
+    ],
+    "label": "Derived functors",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.structures.ext"
+    ],
+    "subdomain": "abstract_algebra.structures",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.structures.exact_functor",
+    "key_prerequisites": [
+      "abstract.structures.module_hom"
+    ],
+    "label": "Exact functors",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.structures.module_hom"
+    ],
+    "subdomain": "abstract_algebra.structures",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.structures.direct_limit",
+    "key_prerequisites": [
+      "abstract.structures.module"
+    ],
+    "label": "Direct limits",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.structures.module"
+    ],
+    "subdomain": "abstract_algebra.structures",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.structures.free_resolution",
+    "key_prerequisites": [
+      "abstract.structures.fg_module"
+    ],
+    "label": "Free resolutions",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.structures.fg_module"
+    ],
+    "subdomain": "abstract_algebra.structures",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.field.perfect",
+    "key_prerequisites": [
+      "abstract.field.separable"
+    ],
+    "label": "Perfect fields",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.field.separable"
+    ],
+    "subdomain": "abstract_algebra.fields",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.field.normal",
+    "key_prerequisites": [
+      "abstract.field.extension"
+    ],
+    "label": "Normal extensions",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.field.extension"
+    ],
+    "subdomain": "abstract_algebra.fields",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.field.primitive_element",
+    "key_prerequisites": [
+      "abstract.field.algebraic"
+    ],
+    "label": "The primitive element theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.field.algebraic"
+    ],
+    "subdomain": "abstract_algebra.fields",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.field.artin",
+    "key_prerequisites": [
+      "abstract.structures.galois"
+    ],
+    "label": "Artin's theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.structures.galois"
+    ],
+    "subdomain": "abstract_algebra.fields",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.field.kummer",
+    "key_prerequisites": [
+      "abstract.field.cyclotomic"
+    ],
+    "label": "Kummer extensions",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.field.cyclotomic"
+    ],
+    "subdomain": "abstract_algebra.fields",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.field.hilbert90",
+    "key_prerequisites": [
+      "abstract.field.galois_group"
+    ],
+    "label": "Hilbert's theorem 90",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.field.galois_group"
+    ],
+    "subdomain": "abstract_algebra.fields",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.field.local",
+    "key_prerequisites": [
+      "abstract.rings.valuation"
+    ],
+    "label": "Local fields",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rings.valuation"
+    ],
+    "subdomain": "abstract_algebra.fields",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.field.padic",
+    "key_prerequisites": [
+      "abstract.rings.completion"
+    ],
+    "label": "The p-adic numbers",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rings.completion"
+    ],
+    "subdomain": "abstract_algebra.fields",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.rep.orthogonality",
+    "key_prerequisites": [
+      "abstract.rep.character"
+    ],
+    "label": "Orthogonality relations",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rep.character"
+    ],
+    "subdomain": "abstract_algebra.representations",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.rep.regular",
+    "key_prerequisites": [
+      "abstract.rep.representation"
+    ],
+    "label": "The regular representation",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rep.representation"
+    ],
+    "subdomain": "abstract_algebra.representations",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.rep.tensor",
+    "key_prerequisites": [
+      "abstract.rep.representation"
+    ],
+    "label": "Tensor products of representations",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rep.representation"
+    ],
+    "subdomain": "abstract_algebra.representations",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.rep.restriction",
+    "key_prerequisites": [
+      "abstract.rep.induced"
+    ],
+    "label": "Restriction of representations",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rep.induced"
+    ],
+    "subdomain": "abstract_algebra.representations",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.rep.frobenius",
+    "key_prerequisites": [
+      "abstract.rep.induced"
+    ],
+    "label": "Frobenius reciprocity",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rep.induced"
+    ],
+    "subdomain": "abstract_algebra.representations",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.rep.fourier",
+    "key_prerequisites": [
+      "abstract.rep.character"
+    ],
+    "label": "Fourier analysis on finite groups",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rep.character"
+    ],
+    "subdomain": "abstract_algebra.representations",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.rep.young",
+    "key_prerequisites": [
+      "abstract.rep.representation"
+    ],
+    "label": "Young tableaux",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.rep.representation"
+    ],
+    "subdomain": "abstract_algebra.representations",
+    "variants": []
+  },
+  {
+    "domain": "abstract_algebra",
+    "encompasses": [],
+    "grading_type": "numeric",
+    "id": "abstract.rep.burnside_pq",
+    "key_prerequisites": [
+      "abstract.group.solvable"
+    ],
+    "label": "Burnside's p^q theorem",
+    "mastery_threshold": {
+      "avg_time_seconds": 30,
+      "streak": 10
+    },
+    "prerequisites": [
+      "abstract.group.solvable"
+    ],
+    "subdomain": "abstract_algebra.representations",
+    "variants": []
+  },
+  {
     "domain": "algebra",
     "grading_type": "numeric",
     "id": "alg.linear.slope",

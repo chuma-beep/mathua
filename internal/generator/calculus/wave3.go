@@ -235,7 +235,7 @@ func (g *w3RaabeGen) Generate(ctx generator.GeneratorContext) generator.Problem 
 	switch kp {
 	case 1:
 		p := rand.Intn(20) + 1
-		question := fmt.Sprintf("For the positive-term series with \\(a_n=1/n^{%d}\\), compute Raabe's limit \\(L=\\lim_{n\\to\\infty} n(1-a_{n+1}/a_n)\\).", p)
+		question := fmt.Sprintf("Apply Raabe's test to the positive-term series with \\(a_n=1/n^{%d}\\), and compute the limit \\(L=\\lim_{n\\to\\infty} n(1-a_{n+1}/a_n)\\).", p)
 		explanation := fmt.Sprintf("\\(a_{n+1}/a_n=(n/(n+1))^{%d}=(1+1/n)^{-%d}=1-%d/n+O(1/n^2)\\). Thus \\(n(1-a_{n+1}/a_n)\\to %d\\), so \\(L=%d\\).", p, p, p, p, p)
 		return generator.Problem{
 			Question:    question,

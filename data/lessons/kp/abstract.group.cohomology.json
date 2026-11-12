@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Take crossed maps",
+      "Quotient by principal maps",
+      "Identify fixed points"
+    ]
+  },
+  {
+    "label": "Vanishing",
+    "section": "Vanishing",
+    "subgoals": [
+      "Use the resolution",
+      "Apply the cyclic action",
+      "Find the order"
+    ]
+  },
+  {
+    "label": "Free groups",
+    "section": "Free groups",
+    "subgoals": [
+      "Count generators",
+      "Compute the rank",
+      "Compare with the abelianization"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Embed the field",
+      "Track a conjugate",
+      "Check membership"
+    ]
+  },
+  {
+    "label": "Splitting fields",
+    "section": "Splitting fields",
+    "subgoals": [
+      "Factor the polynomial",
+      "Adjoin the roots",
+      "Identify the field"
+    ]
+  },
+  {
+    "label": "Roots of unity",
+    "section": "Roots of unity",
+    "subgoals": [
+      "Count primitive roots",
+      "Compute the totient",
+      "Read the degree"
+    ]
+  }
+]
