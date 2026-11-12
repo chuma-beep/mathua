@@ -1,0 +1,15 @@
+{
+  "concept": "geo.coord.three_d",
+  "setup": "Two points differ by ([[dx]], [[dy]], [[dz]]).",
+  "steps": [
+    {
+      "fact": "dx",
+      "say": "The x difference is [[dx]]."
+    },
+    {
+      "fact": "dy",
+      "say": "The y difference is [[dy]]."
+    }
+  ],
+  "answer": "The squared distance is [[sq]]."
+}

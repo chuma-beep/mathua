@@ -1,0 +1,15 @@
+{
+  "concept": "geo.coord.normal_line",
+  "setup": "A line is written as [[a]]x+[[b]]y=[[c]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The x coefficient is [[a]]."
+    },
+    {
+      "fact": "b",
+      "say": "The y coefficient is [[b]]."
+    }
+  ],
+  "answer": "The squared normal length is [[sq]]."
+}

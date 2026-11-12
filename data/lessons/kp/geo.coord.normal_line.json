@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The normal vector",
+    "section": "The normal vector",
+    "subgoals": [
+      "Read the coefficients",
+      "Square them",
+      "Add the squares"
+    ]
+  },
+  {
+    "label": "Distance to the origin",
+    "section": "Distance to the origin",
+    "subgoals": [
+      "Take absolute c",
+      "Divide by the normal length",
+      "Report the distance"
+    ]
+  },
+  {
+    "label": "Parallel lines",
+    "section": "Parallel lines",
+    "subgoals": [
+      "Compare normals",
+      "Check proportionality",
+      "Declare parallel"
+    ]
+  }
+]

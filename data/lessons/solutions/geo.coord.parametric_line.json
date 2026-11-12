@@ -1,0 +1,15 @@
+{
+  "concept": "geo.coord.parametric_line",
+  "setup": "A line has base point ([[x0]], [[y0]]) and direction ([[dx]], [[dy]]).",
+  "steps": [
+    {
+      "fact": "x0",
+      "say": "The base x coordinate is [[x0]]."
+    },
+    {
+      "fact": "dx",
+      "say": "The x direction is [[dx]]."
+    }
+  ],
+  "answer": "At parameter t=[[t]] the x coordinate is [[x]]."
+}

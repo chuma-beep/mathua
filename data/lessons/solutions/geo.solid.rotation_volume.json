@@ -1,0 +1,15 @@
+{
+  "concept": "geo.solid.rotation_volume",
+  "setup": "A solid of revolution has constant radius [[r]] over height [[h]].",
+  "steps": [
+    {
+      "fact": "r2",
+      "say": "The squared radius is [[r]] squared, which is [[r2]]."
+    },
+    {
+      "fact": "volume",
+      "say": "The volume is pi times [[r2]] times [[h]], with coefficient [[r2h]]."
+    }
+  ],
+  "answer": "The volume is pi times [[r2h]]."
+}

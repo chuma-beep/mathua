@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Equal slices",
+    "section": "Equal slices",
+    "subgoals": [
+      "Pair the heights",
+      "Compare areas",
+      "Conclude equality"
+    ]
+  },
+  {
+    "label": "Shearing",
+    "section": "Shearing",
+    "subgoals": [
+      "Shear the solid",
+      "Keep slice areas",
+      "Keep the volume"
+    ]
+  },
+  {
+    "label": "Comparing pyramids",
+    "section": "Comparing pyramids",
+    "subgoals": [
+      "Match base areas",
+      "Match heights",
+      "Use one third"
+    ]
+  }
+]

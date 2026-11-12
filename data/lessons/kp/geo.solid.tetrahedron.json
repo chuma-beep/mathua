@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Faces and vertices",
+    "section": "Faces and vertices",
+    "subgoals": [
+      "Count the faces",
+      "Count the vertices",
+      "Count the edges"
+    ]
+  },
+  {
+    "label": "The height",
+    "section": "The height",
+    "subgoals": [
+      "Find the base centroid",
+      "Drop the height",
+      "Apply one third"
+    ]
+  },
+  {
+    "label": "Symmetry",
+    "section": "Symmetry",
+    "subgoals": [
+      "Join every pair",
+      "Permute the vertices",
+      "Compare with a cube"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Two steps",
+    "section": "Two steps",
+    "subgoals": [
+      "Reflect first",
+      "Translate second",
+      "Keep the order"
+    ]
+  },
+  {
+    "label": "The glide distance",
+    "section": "The glide distance",
+    "subgoals": [
+      "Measure the slide",
+      "Compare with reflection",
+      "Name the special case"
+    ]
+  },
+  {
+    "label": "No fixed point",
+    "section": "No fixed point",
+    "subgoals": [
+      "Test a point",
+      "Solve for a fixed point",
+      "Conclude none"
+    ]
+  }
+]

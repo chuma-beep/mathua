@@ -1,0 +1,15 @@
+{
+  "concept": "geo.coord.polar_curve",
+  "setup": "A polar circle is r=[[twoa]] cos theta.",
+  "steps": [
+    {
+      "fact": "twoa",
+      "say": "Twice the radius is [[twoa]]."
+    },
+    {
+      "fact": "r",
+      "say": "The radius is [[r]]."
+    }
+  ],
+  "answer": "The radius is [[r]]."
+}

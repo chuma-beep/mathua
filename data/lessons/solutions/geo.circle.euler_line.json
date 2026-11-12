@@ -1,0 +1,11 @@
+{
+  "concept": "geo.circle.euler_line",
+  "setup": "A triangle has circumradius [[R]] and the centroid divides the Euler line in the ratio [[a]] to [[b]].",
+  "steps": [
+    {
+      "fact": "ratio",
+      "say": "The centroid is twice as far from the orthocentre, so the ratio is [[a]] to [[b]]."
+    }
+  ],
+  "answer": "The ratio is [[a]] to [[b]]."
+}

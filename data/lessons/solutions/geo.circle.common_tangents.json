@@ -1,0 +1,15 @@
+{
+  "concept": "geo.circle.common_tangents",
+  "setup": "Two circles have radii [[r1]] and [[r2]] and centre distance [[d]].",
+  "steps": [
+    {
+      "fact": "sum",
+      "say": "The sum of the radii is [[r1]] + [[r2]] = [[sum]]."
+    },
+    {
+      "fact": "internal",
+      "say": "The number of internal tangents depends on [[d]] against [[sum]]."
+    }
+  ],
+  "answer": "There are [[tangents]] common tangents in total."
+}

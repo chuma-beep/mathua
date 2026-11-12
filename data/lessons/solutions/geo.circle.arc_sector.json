@@ -1,0 +1,15 @@
+{
+  "concept": "geo.circle.arc_sector",
+  "setup": "A sector has central angle [[theta]] degrees and radius [[r]].",
+  "steps": [
+    {
+      "fact": "arc",
+      "say": "The arc numerator is [[theta]] times the radius, over 180."
+    },
+    {
+      "fact": "sector",
+      "say": "The sector numerator is [[theta]] times [[r]] squared, over 360."
+    }
+  ],
+  "answer": "The sector area uses numerator [[theta*r*r]] over 360."
+}

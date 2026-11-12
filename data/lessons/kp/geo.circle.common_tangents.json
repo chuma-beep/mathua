@@ -1,0 +1,29 @@
+[
+  {
+    "label": "External tangents",
+    "section": "External tangents",
+    "subgoals": [
+      "Count the outside lines",
+      "Name the homothety centre",
+      "Check disjointness"
+    ]
+  },
+  {
+    "label": "Internal tangents",
+    "section": "Internal tangents",
+    "subgoals": [
+      "Compare distance and radii",
+      "Count the crossing lines",
+      "Handle tangency"
+    ]
+  },
+  {
+    "label": "Counting the tangents",
+    "section": "Counting the tangents",
+    "subgoals": [
+      "Add both families",
+      "Classify the position",
+      "Check the total"
+    ]
+  }
+]

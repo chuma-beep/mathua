@@ -1,0 +1,15 @@
+{
+  "concept": "geo.coord.area_polygon",
+  "setup": "A triangle has legs [[a]] and [[b]] at a right angle.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "One leg is [[a]]."
+    },
+    {
+      "fact": "b",
+      "say": "The other leg is [[b]]."
+    }
+  ],
+  "answer": "Twice the area is [[twice]]."
+}

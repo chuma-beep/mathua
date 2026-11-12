@@ -1,0 +1,11 @@
+{
+  "concept": "geo.solid.octahedron",
+  "setup": "A regular octahedron has [[v]] vertices.",
+  "steps": [
+    {
+      "fact": "edges",
+      "say": "By Euler's formula the edge count is [[e]]."
+    }
+  ],
+  "answer": "It has [[e]] edges."
+}

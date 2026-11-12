@@ -1,0 +1,15 @@
+{
+  "concept": "geo.polygon.apothem",
+  "setup": "A regular polygon has \\(n=[[n]]\\) sides of length \\(s=[[s]]\\) and apothem \\(a=[[a]]\\).",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "The number of sides is [[n]]."
+    },
+    {
+      "fact": "a",
+      "say": "The apothem is [[a]]."
+    }
+  ],
+  "answer": "The apothem is the key length."
+}

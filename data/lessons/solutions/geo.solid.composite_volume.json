@@ -1,0 +1,11 @@
+{
+  "concept": "geo.solid.composite_volume",
+  "setup": "A composite solid splits into [[n]] disjoint pieces of volumes [[v1]], [[v2]] and [[v3]].",
+  "steps": [
+    {
+      "fact": "total",
+      "say": "The total volume is [[v1]] + [[v2]] + [[v3]] = [[total]]."
+    }
+  ],
+  "answer": "The total volume is [[total]]."
+}

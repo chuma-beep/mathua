@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The defining product",
+    "section": "The defining product",
+    "subgoals": [
+      "Square the radius",
+      "Measure the point",
+      "Multiply the distances"
+    ]
+  },
+  {
+    "label": "Lines and circles",
+    "section": "Lines and circles",
+    "subgoals": [
+      "Invert a line",
+      "Invert a circle",
+      "Track the centre"
+    ]
+  },
+  {
+    "label": "Angles and distances",
+    "section": "Angles and distances",
+    "subgoals": [
+      "Preserve the angle",
+      "Reverse orientation",
+      "Use the product"
+    ]
+  }
+]

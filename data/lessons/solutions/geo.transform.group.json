@@ -1,0 +1,11 @@
+{
+  "concept": "geo.transform.group",
+  "setup": "A regular polygon has \\(n=[[n]]\\) sides.",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "The polygon has [[n]] sides."
+    }
+  ],
+  "answer": "Count rotations and reflections."
+}

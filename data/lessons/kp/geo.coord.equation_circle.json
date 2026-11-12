@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The equation",
+    "section": "The equation",
+    "subgoals": [
+      "Write the squared distance",
+      "Set it equal to r squared",
+      "Identify the centre"
+    ]
+  },
+  {
+    "label": "Completing the square",
+    "section": "Completing the square",
+    "subgoals": [
+      "Group x terms",
+      "Group y terms",
+      "Read the radius"
+    ]
+  },
+  {
+    "label": "Translation",
+    "section": "Translation",
+    "subgoals": [
+      "Move the centre",
+      "Keep the radius",
+      "Shift every point"
+    ]
+  }
+]

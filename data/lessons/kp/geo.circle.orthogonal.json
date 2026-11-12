@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The right angle",
+    "section": "The right angle",
+    "subgoals": [
+      "Draw the radii",
+      "Relate tangents to radii",
+      "Mark the right angle"
+    ]
+  },
+  {
+    "label": "The squared condition",
+    "section": "The squared condition",
+    "subgoals": [
+      "Square the distance",
+      "Sum the squared radii",
+      "Compare the two"
+    ]
+  },
+  {
+    "label": "Using the condition",
+    "section": "Using the condition",
+    "subgoals": [
+      "Swap the circles",
+      "Keep the relation",
+      "Find the centre locus"
+    ]
+  }
+]

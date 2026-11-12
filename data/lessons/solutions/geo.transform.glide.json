@@ -1,0 +1,15 @@
+{
+  "concept": "geo.transform.glide",
+  "setup": "A glide reflection slides by \\(d=[[d]]\\) along its axis and is applied to \\([[n]]\\) points.",
+  "steps": [
+    {
+      "fact": "d",
+      "say": "The glide distance is [[d]]."
+    },
+    {
+      "fact": "n",
+      "say": "There are [[n]] points."
+    }
+  ],
+  "answer": "The slide length is the glide distance."
+}

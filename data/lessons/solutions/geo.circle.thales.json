@@ -1,0 +1,11 @@
+{
+  "concept": "geo.circle.thales",
+  "setup": "A circle has diameter [[d]].",
+  "steps": [
+    {
+      "fact": "r",
+      "say": "The radius is half the diameter: [[d]]/2 = [[r]]."
+    }
+  ],
+  "answer": "The radius is [[r]]."
+}

@@ -1257,5 +1257,632 @@
       "streak": 10,
       "avg_time_seconds": 18.0
     }
+  },
+  {
+    "id": "geo.coord.vector",
+    "label": "Vectors in the plane",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.coord.slope"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.coord.slope"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.coord.dot",
+    "label": "The plane dot product",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.coord.vector"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.coord.vector"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.coord.parametric_line",
+    "label": "Parametric equations of a line",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.coord.vector"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.coord.vector"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.coord.normal_line",
+    "label": "The normal form of a line",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.coord.dot"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.coord.dot"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.coord.equation_circle",
+    "label": "Circle equations from centre and radius",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.coord.distance"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.coord.distance"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.coord.rotated_conic",
+    "label": "Rotations of conics",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.coord.lines"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.coord.lines"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.coord.polar_curve",
+    "label": "Polar curves",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.coord.polar"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.coord.polar"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.coord.area_polygon",
+    "label": "The shoelace formula",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.coord.distance"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.coord.distance"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.coord.line_intersection",
+    "label": "Intersecting lines",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.coord.lines"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.coord.lines"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.coord.three_d",
+    "label": "Three-dimensional coordinates",
+    "domain": "geometry",
+    "subdomain": "geometry.coordinate",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.coord.distance"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.coord.distance"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.circle.thales",
+    "label": "Thales' theorem",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.circle.inscribed_angle"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.circle.inscribed_angle"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.circle.arc_sector",
+    "label": "Arcs and sectors",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.circle.arc_measure"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.circle.arc_measure"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.circle.segment_area",
+    "label": "Circular segments",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.circle.arc_sector"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.circle.arc_sector"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.circle.common_tangents",
+    "label": "Common tangents",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.circle.tangent_length"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.circle.tangent_length"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.circle.orthogonal",
+    "label": "Orthogonal circles",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.circle.power_point"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.circle.power_point"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.circle.inversion",
+    "label": "Circle inversion",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.circle.power_point"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.circle.power_point"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.circle.nine_point",
+    "label": "The nine-point circle",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.orthocenter"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.triangle.orthocenter"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.circle.euler_line",
+    "label": "Euler line",
+    "domain": "geometry",
+    "subdomain": "geometry.circles",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.triangle.median_centroid"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.triangle.median_centroid"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.solid.tetrahedron",
+    "label": "Regular tetrahedra",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.solid.pyramid_volume"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.solid.pyramid_volume"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.solid.octahedron",
+    "label": "Regular octahedra",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.solid.tetrahedron"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.solid.tetrahedron"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.solid.platonic",
+    "label": "Platonic solids",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.solid.euler"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.solid.euler"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.solid.oblique_prism",
+    "label": "Oblique prisms",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.solid.prism_volume"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.solid.prism_volume"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.solid.composite_volume",
+    "label": "Composite solids",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.solid.volume_rect"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.solid.volume_rect"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.solid.cavalieri",
+    "label": "Cavalieri's principle",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.solid.prism_volume"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.solid.prism_volume"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.solid.rotation_volume",
+    "label": "Volumes of revolution",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.solid.cylinder"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.solid.cylinder"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.solid.truncated_cone",
+    "label": "Truncated cones",
+    "domain": "geometry",
+    "subdomain": "geometry.solid",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.solid.frustum"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.solid.frustum"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.polygon.apothem",
+    "label": "Apothem and area",
+    "domain": "geometry",
+    "subdomain": "geometry.polygons",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.polygon.area_regular"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.polygon.area_regular"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.polygon.star",
+    "label": "Star polygons",
+    "domain": "geometry",
+    "subdomain": "geometry.polygons",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.polygon.interior_angles"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.polygon.interior_angles"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.polygon.constructible",
+    "label": "Constructible polygons",
+    "domain": "geometry",
+    "subdomain": "geometry.polygons",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.polygon.interior_angles"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.polygon.interior_angles"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.polygon.quadrilateral_area",
+    "label": "Areas of quadrilaterals",
+    "domain": "geometry",
+    "subdomain": "geometry.polygons",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.quad.area"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.quad.area"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.transform.homothety",
+    "label": "Homothety",
+    "domain": "geometry",
+    "subdomain": "geometry.transform",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.transform.dilation"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.transform.dilation"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.transform.glide",
+    "label": "Glide reflections",
+    "domain": "geometry",
+    "subdomain": "geometry.transform",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.transform.reflection"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.transform.reflection"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "geo.transform.group",
+    "label": "Transformation groups",
+    "domain": "geometry",
+    "subdomain": "geometry.transform",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "geo.transform.composition"
+    ],
+    "encompasses": [],
+    "key_prerequisites": [
+      "geo.transform.composition"
+    ],
+    "variants": [],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
   }
 ]

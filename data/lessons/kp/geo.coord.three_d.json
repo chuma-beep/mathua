@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Coordinates",
+    "section": "Coordinates",
+    "subgoals": [
+      "Read three coordinates",
+      "Identify each axis",
+      "Place the point"
+    ]
+  },
+  {
+    "label": "Distance",
+    "section": "Distance",
+    "subgoals": [
+      "Subtract coordinates",
+      "Square and add",
+      "Take the root"
+    ]
+  },
+  {
+    "label": "Midpoints",
+    "section": "Midpoints",
+    "subgoals": [
+      "Average x",
+      "Average y",
+      "Average z"
+    ]
+  }
+]

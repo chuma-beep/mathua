@@ -1,0 +1,11 @@
+{
+  "concept": "geo.solid.platonic",
+  "setup": "A Platonic solid has [[f]] faces.",
+  "steps": [
+    {
+      "fact": "count",
+      "say": "The five Platonic solids have 4, 6, 8, 12 and 20 faces; here the count is [[f]]."
+    }
+  ],
+  "answer": "The solid has [[f]] faces."
+}

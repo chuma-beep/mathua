@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The system",
+    "section": "The system",
+    "subgoals": [
+      "Write both equations",
+      "Eliminate one variable",
+      "Solve the other"
+    ]
+  },
+  {
+    "label": "Parallel lines",
+    "section": "Parallel lines",
+    "subgoals": [
+      "Compare slopes",
+      "Check the determinant",
+      "Decide misses or coincides"
+    ]
+  },
+  {
+    "label": "The determinant",
+    "section": "The determinant",
+    "subgoals": [
+      "Multiply across",
+      "Subtract",
+      "Read the determinant"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The scale factor",
+    "section": "The scale factor",
+    "subgoals": [
+      "Multiply distances",
+      "Find the image",
+      "Name the fixed point"
+    ]
+  },
+  {
+    "label": "Areas",
+    "section": "Areas",
+    "subgoals": [
+      "Square the factor",
+      "Compare lengths",
+      "Check a doubling"
+    ]
+  },
+  {
+    "label": "The centre",
+    "section": "The centre",
+    "subgoals": [
+      "Identify fixed points",
+      "Handle negative factors",
+      "Locate the image"
+    ]
+  }
+]

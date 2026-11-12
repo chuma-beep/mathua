@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Adding the pieces",
+    "section": "Adding the pieces",
+    "subgoals": [
+      "Split the solid",
+      "Compute each volume",
+      "Add the parts"
+    ]
+  },
+  {
+    "label": "Subtracting overlaps",
+    "section": "Subtracting overlaps",
+    "subgoals": [
+      "Find the overlap",
+      "Subtract once",
+      "Check triple regions"
+    ]
+  },
+  {
+    "label": "Choosing a split",
+    "section": "Choosing a split",
+    "subgoals": [
+      "Follow flat faces",
+      "Measure each part",
+      "Compare two splits"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Subtracting the triangle",
+    "section": "Subtracting the triangle",
+    "subgoals": [
+      "Name the two pieces",
+      "Subtract the triangle",
+      "Keep the arc"
+    ]
+  },
+  {
+    "label": "The sector term",
+    "section": "The sector term",
+    "subgoals": [
+      "Use the angle fraction",
+      "Square the radius",
+      "Divide by 360"
+    ]
+  },
+  {
+    "label": "Small and large segments",
+    "section": "Small and large segments",
+    "subgoals": [
+      "Add the two segments",
+      "Compare with the disc",
+      "Identify the minor arc"
+    ]
+  }
+]

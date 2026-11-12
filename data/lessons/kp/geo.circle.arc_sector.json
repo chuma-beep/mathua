@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The arc length",
+    "section": "The arc length",
+    "subgoals": [
+      "Form the angle fraction",
+      "Multiply the circumference",
+      "Check the denominator"
+    ]
+  },
+  {
+    "label": "The sector area",
+    "section": "The sector area",
+    "subgoals": [
+      "Square the radius",
+      "Apply the fraction",
+      "Compare with the disc"
+    ]
+  },
+  {
+    "label": "Choosing the fraction",
+    "section": "Choosing the fraction",
+    "subgoals": [
+      "Compare two angles",
+      "Scale length",
+      "Scale area"
+    ]
+  }
+]

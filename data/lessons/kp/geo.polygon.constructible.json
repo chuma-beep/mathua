@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The criterion",
+    "section": "The criterion",
+    "subgoals": [
+      "State the factorisation",
+      "Identify Fermat primes",
+      "Test a side count"
+    ]
+  },
+  {
+    "label": "The Fermat primes",
+    "section": "The Fermat primes",
+    "subgoals": [
+      "List the known primes",
+      "Count them",
+      "Multiply distinct ones"
+    ]
+  },
+  {
+    "label": "Small cases",
+    "section": "Small cases",
+    "subgoals": [
+      "Check the triangle",
+      "Check the heptagon",
+      "Compare powers of two"
+    ]
+  }
+]

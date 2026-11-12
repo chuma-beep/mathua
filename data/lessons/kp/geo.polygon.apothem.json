@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The apothem",
+    "section": "The apothem",
+    "subgoals": [
+      "Name the apothem",
+      "Relate it to the radius",
+      "Use half a side"
+    ]
+  },
+  {
+    "label": "The perimeter",
+    "section": "The perimeter",
+    "subgoals": [
+      "Multiply sides by length",
+      "Halve the perimeter",
+      "Multiply by the apothem"
+    ]
+  },
+  {
+    "label": "Worked count",
+    "section": "Worked count",
+    "subgoals": [
+      "Check the square",
+      "Compare with the area",
+      "Count the triangles"
+    ]
+  }
+]

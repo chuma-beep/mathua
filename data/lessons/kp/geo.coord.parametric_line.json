@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The form",
+    "section": "The form",
+    "subgoals": [
+      "Read the base point",
+      "Read the direction",
+      "Trace the parameter"
+    ]
+  },
+  {
+    "label": "One parameter",
+    "section": "One parameter",
+    "subgoals": [
+      "Count the parameters",
+      "Compare with a plane",
+      "Fix the dimension"
+    ]
+  },
+  {
+    "label": "Coordinates",
+    "section": "Coordinates",
+    "subgoals": [
+      "Write x in t",
+      "Write y in t",
+      "Eliminate t"
+    ]
+  }
+]

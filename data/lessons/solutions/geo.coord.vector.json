@@ -1,0 +1,15 @@
+{
+  "concept": "geo.coord.vector",
+  "setup": "A displacement has components ([[a]], [[b]]).",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The x component is [[a]]."
+    },
+    {
+      "fact": "b",
+      "say": "The y component is [[b]]."
+    }
+  ],
+  "answer": "The squared length is [[sq]]."
+}

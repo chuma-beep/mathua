@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The quadratic form",
+    "section": "The quadratic form",
+    "subgoals": [
+      "Collect quadratic terms",
+      "Form the matrix",
+      "Rotate the axes"
+    ]
+  },
+  {
+    "label": "Invariants",
+    "section": "Invariants",
+    "subgoals": [
+      "Add the diagonal",
+      "Compare before and after",
+      "Keep the type"
+    ]
+  },
+  {
+    "label": "Right angles",
+    "section": "Right angles",
+    "subgoals": [
+      "Swap squared terms",
+      "Flip the cross term",
+      "Check the angle"
+    ]
+  }
+]

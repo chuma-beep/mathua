@@ -1,0 +1,15 @@
+{
+  "concept": "geo.solid.truncated_cone",
+  "setup": "A truncated cone has radii [[R]] and [[r]] and height [[h]].",
+  "steps": [
+    {
+      "fact": "factor",
+      "say": "The quadratic factor is [[R]] squared plus [[R]] times [[r]] plus [[r]] squared, which is [[factor]]."
+    },
+    {
+      "fact": "volume",
+      "say": "The volume is pi times [[h]] times [[factor]] over 3."
+    }
+  ],
+  "answer": "The volume is pi times [[h*factor]] over 3."
+}

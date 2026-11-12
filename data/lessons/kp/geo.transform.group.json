@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Closure",
+    "section": "Closure",
+    "subgoals": [
+      "Compose two maps",
+      "Stay an isometry",
+      "Check a square"
+    ]
+  },
+  {
+    "label": "Inverses",
+    "section": "Inverses",
+    "subgoals": [
+      "Undo a rotation",
+      "Undo a reflection",
+      "Return every point"
+    ]
+  },
+  {
+    "label": "The dihedral count",
+    "section": "The dihedral count",
+    "subgoals": [
+      "Count rotations",
+      "Count reflections",
+      "Double for the group"
+    ]
+  }
+]

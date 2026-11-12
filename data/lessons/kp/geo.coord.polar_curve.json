@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Polar coordinates",
+    "section": "Polar coordinates",
+    "subgoals": [
+      "Read r",
+      "Read theta",
+      "Convert to x and y"
+    ]
+  },
+  {
+    "label": "Circles through the origin",
+    "section": "Circles through the origin",
+    "subgoals": [
+      "Read the coefficient",
+      "Halve it for the radius",
+      "Locate the centre"
+    ]
+  },
+  {
+    "label": "Symmetry",
+    "section": "Symmetry",
+    "subgoals": [
+      "Replace theta",
+      "Compare the equation",
+      "Read the symmetry"
+    ]
+  }
+]

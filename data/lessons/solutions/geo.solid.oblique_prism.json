@@ -1,0 +1,11 @@
+{
+  "concept": "geo.solid.oblique_prism",
+  "setup": "An oblique prism has base area [[base]] and perpendicular height [[height]].",
+  "steps": [
+    {
+      "fact": "volume",
+      "say": "The volume is [[base]] times [[height]], which is [[volume]]."
+    }
+  ],
+  "answer": "The volume is [[volume]]."
+}

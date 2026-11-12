@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Base and height",
+    "section": "Base and height",
+    "subgoals": [
+      "Identify the base",
+      "Measure perpendicular height",
+      "Multiply"
+    ]
+  },
+  {
+    "label": "Cavalieri",
+    "section": "Cavalieri",
+    "subgoals": [
+      "Compare slices",
+      "Shear the prism",
+      "Keep the volume"
+    ]
+  },
+  {
+    "label": "Surface area",
+    "section": "Surface area",
+    "subgoals": [
+      "Find parallelogram faces",
+      "Add the bases",
+      "Compare with a right prism"
+    ]
+  }
+]

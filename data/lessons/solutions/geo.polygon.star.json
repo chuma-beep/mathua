@@ -1,0 +1,15 @@
+{
+  "concept": "geo.polygon.star",
+  "setup": "A star polygon \\(\\{[[n]]/[[k]]\\}\\) joins vertices in steps of \\([[k]]\\).",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "There are [[n]] vertices."
+    },
+    {
+      "fact": "k",
+      "say": "Each step advances by [[k]]."
+    }
+  ],
+  "answer": "The step and the vertex count fix the star."
+}

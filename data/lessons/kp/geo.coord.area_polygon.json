@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The formula",
+    "section": "The formula",
+    "subgoals": [
+      "List the vertices in order",
+      "Cross multiply neighbours",
+      "Halve the total"
+    ]
+  },
+  {
+    "label": "Orientation",
+    "section": "Orientation",
+    "subgoals": [
+      "Reverse the order",
+      "Watch the sign",
+      "Take the absolute value"
+    ]
+  },
+  {
+    "label": "Triangles",
+    "section": "Triangles",
+    "subgoals": [
+      "Take three vertices",
+      "Compute the determinant",
+      "Halve the result"
+    ]
+  }
+]

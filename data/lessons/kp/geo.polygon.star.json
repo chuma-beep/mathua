@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The step",
+    "section": "The step",
+    "subgoals": [
+      "Read the notation",
+      "Reduce the step",
+      "Count vertices"
+    ]
+  },
+  {
+    "label": "The cycles",
+    "section": "The cycles",
+    "subgoals": [
+      "Take the gcd",
+      "Count components",
+      "Check a pentagram"
+    ]
+  },
+  {
+    "label": "The turning angle",
+    "section": "The turning angle",
+    "subgoals": [
+      "Compute the turn",
+      "Close the cycle",
+      "Count edges"
+    ]
+  }
+]

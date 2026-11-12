@@ -1,0 +1,15 @@
+{
+  "concept": "geo.coord.line_intersection",
+  "setup": "Two lines have coefficient determinant [[det]].",
+  "steps": [
+    {
+      "fact": "det",
+      "say": "The determinant is [[det]]."
+    },
+    {
+      "fact": "slope",
+      "say": "Their slope is [[slope]]."
+    }
+  ],
+  "answer": "The determinant is [[det]]."
+}

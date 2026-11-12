@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The formula",
+    "section": "The formula",
+    "subgoals": [
+      "Multiply matching components",
+      "Add the products",
+      "Report a scalar"
+    ]
+  },
+  {
+    "label": "Perpendicularity",
+    "section": "Perpendicularity",
+    "subgoals": [
+      "Set the dot product to zero",
+      "Exclude zero vectors",
+      "Read perpendicularity"
+    ]
+  },
+  {
+    "label": "The cosine",
+    "section": "The cosine",
+    "subgoals": [
+      "Divide by both lengths",
+      "Read the cosine",
+      "Recover the angle"
+    ]
+  }
+]

@@ -64,6 +64,7 @@ func Register(reg *generator.Registry) {
 	registerAngleFacts(reg)
 	registerFinal(reg)
 	registerWave10(reg)
+	registerWave28(reg)
 }
 
 type pointsLinesGen struct{}

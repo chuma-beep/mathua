@@ -1,0 +1,11 @@
+{
+  "concept": "geo.circle.segment_area",
+  "setup": "A segment is cut from a sector of radius [[r]] and angle [[theta]].",
+  "steps": [
+    {
+      "fact": "sector",
+      "say": "The sector numerator is [[theta]] times [[r]] squared over 360."
+    }
+  ],
+  "answer": "The segment removes one triangle from that sector."
+}

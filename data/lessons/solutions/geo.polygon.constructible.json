@@ -1,0 +1,15 @@
+{
+  "concept": "geo.polygon.constructible",
+  "setup": "A regular polygon has \\(n=[[n]]\\) sides. Enter 1 when it is constructible and 0 otherwise.",
+  "steps": [
+    {
+      "fact": "n",
+      "say": "The side count is [[n]]."
+    },
+    {
+      "fact": "primes",
+      "say": "Up to [[primes]] Fermat primes are considered."
+    }
+  ],
+  "answer": "The side count decides constructibility."
+}

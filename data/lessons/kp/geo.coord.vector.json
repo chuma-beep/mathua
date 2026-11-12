@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Components",
+    "section": "Components",
+    "subgoals": [
+      "Subtract the coordinates",
+      "Square both components",
+      "Add the squares"
+    ]
+  },
+  {
+    "label": "Addition",
+    "section": "Addition",
+    "subgoals": [
+      "Add the x components",
+      "Add the y components",
+      "Read the resultant"
+    ]
+  },
+  {
+    "label": "Scaling",
+    "section": "Scaling",
+    "subgoals": [
+      "Multiply both components",
+      "Scale the length",
+      "Keep the direction"
+    ]
+  }
+]

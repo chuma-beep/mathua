@@ -1,0 +1,11 @@
+{
+  "concept": "geo.circle.nine_point",
+  "setup": "A triangle has circumradius [[R]].",
+  "steps": [
+    {
+      "fact": "r9",
+      "say": "The nine-point radius is half the circumradius: [[R]]/2 = [[r9]]."
+    }
+  ],
+  "answer": "The nine-point circle has radius [[r9]]."
+}

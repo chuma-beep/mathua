@@ -10986,5 +10986,137 @@
   {
     "concept_id": "discrete.proof.nonconstructive",
     "source": "authored/discrete.proof.nonconstructive.md"
+  },
+  {
+    "concept_id": "geo.coord.vector",
+    "source": "authored/geo.coord.vector.md"
+  },
+  {
+    "concept_id": "geo.coord.dot",
+    "source": "authored/geo.coord.dot.md"
+  },
+  {
+    "concept_id": "geo.coord.parametric_line",
+    "source": "authored/geo.coord.parametric_line.md"
+  },
+  {
+    "concept_id": "geo.coord.normal_line",
+    "source": "authored/geo.coord.normal_line.md"
+  },
+  {
+    "concept_id": "geo.coord.equation_circle",
+    "source": "authored/geo.coord.equation_circle.md"
+  },
+  {
+    "concept_id": "geo.coord.rotated_conic",
+    "source": "authored/geo.coord.rotated_conic.md"
+  },
+  {
+    "concept_id": "geo.coord.polar_curve",
+    "source": "authored/geo.coord.polar_curve.md"
+  },
+  {
+    "concept_id": "geo.coord.area_polygon",
+    "source": "authored/geo.coord.area_polygon.md"
+  },
+  {
+    "concept_id": "geo.coord.line_intersection",
+    "source": "authored/geo.coord.line_intersection.md"
+  },
+  {
+    "concept_id": "geo.coord.three_d",
+    "source": "authored/geo.coord.three_d.md"
+  },
+  {
+    "concept_id": "geo.circle.thales",
+    "source": "authored/geo.circle.thales.md"
+  },
+  {
+    "concept_id": "geo.circle.arc_sector",
+    "source": "authored/geo.circle.arc_sector.md"
+  },
+  {
+    "concept_id": "geo.circle.segment_area",
+    "source": "authored/geo.circle.segment_area.md"
+  },
+  {
+    "concept_id": "geo.circle.common_tangents",
+    "source": "authored/geo.circle.common_tangents.md"
+  },
+  {
+    "concept_id": "geo.circle.orthogonal",
+    "source": "authored/geo.circle.orthogonal.md"
+  },
+  {
+    "concept_id": "geo.circle.inversion",
+    "source": "authored/geo.circle.inversion.md"
+  },
+  {
+    "concept_id": "geo.circle.nine_point",
+    "source": "authored/geo.circle.nine_point.md"
+  },
+  {
+    "concept_id": "geo.circle.euler_line",
+    "source": "authored/geo.circle.euler_line.md"
+  },
+  {
+    "concept_id": "geo.solid.tetrahedron",
+    "source": "authored/geo.solid.tetrahedron.md"
+  },
+  {
+    "concept_id": "geo.solid.octahedron",
+    "source": "authored/geo.solid.octahedron.md"
+  },
+  {
+    "concept_id": "geo.solid.platonic",
+    "source": "authored/geo.solid.platonic.md"
+  },
+  {
+    "concept_id": "geo.solid.oblique_prism",
+    "source": "authored/geo.solid.oblique_prism.md"
+  },
+  {
+    "concept_id": "geo.solid.composite_volume",
+    "source": "authored/geo.solid.composite_volume.md"
+  },
+  {
+    "concept_id": "geo.solid.cavalieri",
+    "source": "authored/geo.solid.cavalieri.md"
+  },
+  {
+    "concept_id": "geo.solid.rotation_volume",
+    "source": "authored/geo.solid.rotation_volume.md"
+  },
+  {
+    "concept_id": "geo.solid.truncated_cone",
+    "source": "authored/geo.solid.truncated_cone.md"
+  },
+  {
+    "concept_id": "geo.polygon.apothem",
+    "source": "authored/geo.polygon.apothem.md"
+  },
+  {
+    "concept_id": "geo.polygon.star",
+    "source": "authored/geo.polygon.star.md"
+  },
+  {
+    "concept_id": "geo.polygon.constructible",
+    "source": "authored/geo.polygon.constructible.md"
+  },
+  {
+    "concept_id": "geo.polygon.quadrilateral_area",
+    "source": "authored/geo.polygon.quadrilateral_area.md"
+  },
+  {
+    "concept_id": "geo.transform.homothety",
+    "source": "authored/geo.transform.homothety.md"
+  },
+  {
+    "concept_id": "geo.transform.glide",
+    "source": "authored/geo.transform.glide.md"
+  },
+  {
+    "concept_id": "geo.transform.group",
+    "source": "authored/geo.transform.group.md"
   }
 ]

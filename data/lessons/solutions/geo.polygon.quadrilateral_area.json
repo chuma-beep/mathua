@@ -1,0 +1,15 @@
+{
+  "concept": "geo.polygon.quadrilateral_area",
+  "setup": "A rectangle has sides \\(a=[[a]]\\) and \\(b=[[b]]\\).",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The first side is [[a]]."
+    },
+    {
+      "fact": "b",
+      "say": "The second side is [[b]]."
+    }
+  ],
+  "answer": "Multiply the sides for the area."
+}

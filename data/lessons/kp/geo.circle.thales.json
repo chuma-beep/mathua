@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The semicircle",
+    "section": "The semicircle",
+    "subgoals": [
+      "State the right angle",
+      "Name the diameter",
+      "Use the converse"
+    ]
+  },
+  {
+    "label": "The radius",
+    "section": "The radius",
+    "subgoals": [
+      "Halve the diameter",
+      "Mark the centre",
+      "Compare with a chord"
+    ]
+  },
+  {
+    "label": "Computing with the theorem",
+    "section": "Computing with the theorem",
+    "subgoals": [
+      "Double the radius",
+      "Identify the hypotenuse",
+      "Check the right angle"
+    ]
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "concept": "geo.circle.orthogonal",
+  "setup": "Two circles have radii [[r1]] and [[r2]] and meet orthogonally.",
+  "steps": [
+    {
+      "fact": "sum",
+      "say": "The squared centre distance is [[r1]] squared plus [[r2]] squared, which is [[d2]]."
+    }
+  ],
+  "answer": "The squared centre distance is [[d2]]."
+}

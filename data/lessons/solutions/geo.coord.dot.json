@@ -1,0 +1,15 @@
+{
+  "concept": "geo.coord.dot",
+  "setup": "Two vectors are compared with the dot product.",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The first component product is [[a]]."
+    },
+    {
+      "fact": "b",
+      "say": "The second component product is [[b]]."
+    }
+  ],
+  "answer": "The dot product is [[dot]]."
+}

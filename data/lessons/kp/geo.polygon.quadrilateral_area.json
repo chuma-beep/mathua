@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The rectangle",
+    "section": "The rectangle",
+    "subgoals": [
+      "Multiply the sides",
+      "Check a square",
+      "Name the units"
+    ]
+  },
+  {
+    "label": "The trapezoid",
+    "section": "The trapezoid",
+    "subgoals": [
+      "Average the bases",
+      "Multiply by height",
+      "Halve nothing twice"
+    ]
+  },
+  {
+    "label": "The diagonal",
+    "section": "The diagonal",
+    "subgoals": [
+      "Draw a diagonal",
+      "Add two triangles",
+      "Count the pieces"
+    ]
+  }
+]

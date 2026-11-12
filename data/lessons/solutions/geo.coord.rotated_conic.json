@@ -1,0 +1,15 @@
+{
+  "concept": "geo.coord.rotated_conic",
+  "setup": "A conic has squared-term coefficients [[a]] and [[c]].",
+  "steps": [
+    {
+      "fact": "a",
+      "say": "The x squared coefficient is [[a]]."
+    },
+    {
+      "fact": "c",
+      "say": "The y squared coefficient is [[c]]."
+    }
+  ],
+  "answer": "The trace is [[trace]]."
+}

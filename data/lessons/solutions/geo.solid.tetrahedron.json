@@ -1,0 +1,11 @@
+{
+  "concept": "geo.solid.tetrahedron",
+  "setup": "A regular tetrahedron has [[a]] vertices.",
+  "steps": [
+    {
+      "fact": "faces",
+      "say": "A tetrahedron has four faces, so with [[a]] vertices the count is 4."
+    }
+  ],
+  "answer": "It has [[faces]] faces."
+}

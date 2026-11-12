@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The disc method",
+    "section": "The disc method",
+    "subgoals": [
+      "Take a thin slice",
+      "Square the radius",
+      "Integrate"
+    ]
+  },
+  {
+    "label": "Constant radius",
+    "section": "Constant radius",
+    "subgoals": [
+      "Pull out the constant",
+      "Multiply by the height",
+      "Recognise a cylinder"
+    ]
+  },
+  {
+    "label": "The washer method",
+    "section": "The washer method",
+    "subgoals": [
+      "Subtract squared radii",
+      "Integrate the area",
+      "Check the inner curve"
+    ]
+  }
+]

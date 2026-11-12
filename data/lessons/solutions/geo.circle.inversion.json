@@ -1,0 +1,15 @@
+{
+  "concept": "geo.circle.inversion",
+  "setup": "A point at distance [[d]] is inverted in a circle of radius [[R]].",
+  "steps": [
+    {
+      "fact": "r2",
+      "say": "The squared radius is [[R]] squared, which is [[r2]]."
+    },
+    {
+      "fact": "image",
+      "say": "The image distance is [[r2]] divided by [[d]], which is [[image]]."
+    }
+  ],
+  "answer": "The image lies at distance [[image]]."
+}

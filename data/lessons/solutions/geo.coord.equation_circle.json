@@ -1,0 +1,15 @@
+{
+  "concept": "geo.coord.equation_circle",
+  "setup": "A circle has centre ([[h]], [[k]]) and radius [[r]].",
+  "steps": [
+    {
+      "fact": "h",
+      "say": "The x coordinate of the centre is [[h]]."
+    },
+    {
+      "fact": "r2",
+      "say": "The square of the radius is [[r2]]."
+    }
+  ],
+  "answer": "The radius is [[r]]."
+}

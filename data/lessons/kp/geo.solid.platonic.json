@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The five solids",
+    "section": "The five solids",
+    "subgoals": [
+      "List the solids",
+      "Check regularity",
+      "Count them"
+    ]
+  },
+  {
+    "label": "Faces and duals",
+    "section": "Faces and duals",
+    "subgoals": [
+      "Pair the duals",
+      "Count cube faces",
+      "Count dodecahedron faces"
+    ]
+  },
+  {
+    "label": "Euler's formula",
+    "section": "Euler's formula",
+    "subgoals": [
+      "Substitute counts",
+      "Check the total",
+      "Use the vertex figure"
+    ]
+  }
+]

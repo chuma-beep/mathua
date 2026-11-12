@@ -1,0 +1,15 @@
+{
+  "concept": "geo.transform.homothety",
+  "setup": "A homothety has scale factor \\(k=[[k]]\\) and sends a point at distance \\([[d]]\\) from the centre to a new distance.",
+  "steps": [
+    {
+      "fact": "k",
+      "say": "The factor is [[k]]."
+    },
+    {
+      "fact": "d",
+      "say": "The original distance is [[d]]."
+    }
+  ],
+  "answer": "Multiply the distance by the factor."
+}

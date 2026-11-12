@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The volume formula",
+    "section": "The volume formula",
+    "subgoals": [
+      "Square both radii",
+      "Add the cross term",
+      "Divide by three"
+    ]
+  },
+  {
+    "label": "The quadratic factor",
+    "section": "The quadratic factor",
+    "subgoals": [
+      "Set the radii equal",
+      "Check the limit",
+      "Keep the cross term"
+    ]
+  },
+  {
+    "label": "Slant height",
+    "section": "Slant height",
+    "subgoals": [
+      "Form the right triangle",
+      "Use the radius difference",
+      "Find the hypotenuse"
+    ]
+  }
+]

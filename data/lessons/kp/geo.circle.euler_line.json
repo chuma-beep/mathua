@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Three centres",
+    "section": "Three centres",
+    "subgoals": [
+      "Name the centres",
+      "Check collinearity",
+      "Handle the equilateral case"
+    ]
+  },
+  {
+    "label": "The ratio",
+    "section": "The ratio",
+    "subgoals": [
+      "Measure from the centroid",
+      "Write the ratio",
+      "Reverse the ratio"
+    ]
+  },
+  {
+    "label": "Special triangles",
+    "section": "Special triangles",
+    "subgoals": [
+      "Use symmetry",
+      "Place the orthocentre",
+      "Check a right triangle"
+    ]
+  }
+]

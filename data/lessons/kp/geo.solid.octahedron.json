@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Faces and edges",
+    "section": "Faces and edges",
+    "subgoals": [
+      "Count the faces",
+      "Count the vertices",
+      "Count the edges"
+    ]
+  },
+  {
+    "label": "The dual cube",
+    "section": "The dual cube",
+    "subgoals": [
+      "Mark cube faces",
+      "Join the centres",
+      "Count both solids"
+    ]
+  },
+  {
+    "label": "Coordinates",
+    "section": "Coordinates",
+    "subgoals": [
+      "Place the vertices",
+      "Measure the diagonal",
+      "Relate to the radius"
+    ]
+  }
+]

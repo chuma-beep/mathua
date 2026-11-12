@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The nine points",
+    "section": "The nine points",
+    "subgoals": [
+      "Count the midpoints",
+      "Count the feet",
+      "Count the upper midpoints"
+    ]
+  },
+  {
+    "label": "The radius",
+    "section": "The radius",
+    "subgoals": [
+      "Halve the circumradius",
+      "Locate the centre",
+      "Compare with the circumcircle"
+    ]
+  },
+  {
+    "label": "The Euler line",
+    "section": "The Euler line",
+    "subgoals": [
+      "Place the centre",
+      "Name the line",
+      "Relate the two centres"
+    ]
+  }
+]

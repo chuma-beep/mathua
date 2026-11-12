@@ -5,8 +5,8 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 2747,
-  "unit_count": 162,
+  "concept_count": 2780,
+  "unit_count": 163,
   "units": [
     {
       "id": "abstract_algebra.b6",
@@ -2200,9 +2200,12 @@
         "geo.basic.transversal",
         "geo.basic.vertical",
         "geo.circle.cyclic_quad",
+        "geo.circle.thales",
+        "geo.polygon.constructible",
         "geo.polygon.diagonal_count",
         "geo.polygon.exterior_angle",
         "geo.polygon.interior_angles",
+        "geo.polygon.star",
         "geo.polygon.tessellation",
         "geo.quad.perimeter",
         "geo.similar.area_ratio",
@@ -2210,6 +2213,7 @@
         "geo.similar.missing_side",
         "geo.similar.ratio",
         "geo.transform.dilation",
+        "geo.transform.homothety",
         "geo.transform.rotation",
         "geo.transform.symmetry",
         "geo.transform.translation",
@@ -2221,7 +2225,7 @@
         "geo.triangle.isosceles",
         "geo.triangle.midsegment"
       ],
-      "concept_count": 24
+      "concept_count": 28
     },
     {
       "id": "geometry.b2",
@@ -2238,10 +2242,11 @@
       "concept_ids": [
         "geo.quad.area",
         "geo.transform.composition",
+        "geo.transform.group",
         "geo.triangle.area",
         "geo.triangle.incenter"
       ],
-      "concept_count": 4
+      "concept_count": 5
     },
     {
       "id": "geometry.b3",
@@ -2261,18 +2266,25 @@
       "concept_ids": [
         "geo.area.composite",
         "geo.circle.chord",
+        "geo.circle.nine_point",
         "geo.coord.distance",
         "geo.coord.midpoint",
+        "geo.polygon.apothem",
         "geo.polygon.area_regular",
+        "geo.polygon.quadrilateral_area",
         "geo.quad.properties",
         "geo.quad.trapezoid_area",
+        "geo.solid.cavalieri",
+        "geo.solid.composite_volume",
         "geo.solid.cross_section",
         "geo.solid.density",
         "geo.solid.euler",
+        "geo.solid.oblique_prism",
         "geo.solid.prism_volume",
         "geo.solid.pyramid_volume",
         "geo.solid.similar_volume",
         "geo.solid.surface_area",
+        "geo.solid.tetrahedron",
         "geo.solid.volume_rect",
         "geo.triangle.altitude",
         "geo.triangle.orthocenter",
@@ -2281,7 +2293,7 @@
         "geo.triangle.pythagorean_converse",
         "geo.triangle.special_right"
       ],
-      "concept_count": 21
+      "concept_count": 28
     },
     {
       "id": "geometry.b4",
@@ -2298,22 +2310,33 @@
       ],
       "concept_ids": [
         "geo.circle.arc_measure",
+        "geo.circle.arc_sector",
         "geo.circle.area",
         "geo.circle.chord_segments",
         "geo.circle.circumference",
+        "geo.circle.common_tangents",
+        "geo.circle.euler_line",
+        "geo.circle.inversion",
+        "geo.circle.orthogonal",
         "geo.circle.power_point",
         "geo.circle.radical_axis",
         "geo.circle.sagitta",
         "geo.circle.secant",
         "geo.circle.tangent_chord",
         "geo.circle.tangent_length",
+        "geo.coord.area_polygon",
         "geo.coord.distance_3d",
+        "geo.coord.equation_circle",
         "geo.coord.polar",
+        "geo.coord.polar_curve",
         "geo.coord.section",
         "geo.coord.sphere_equation",
+        "geo.coord.three_d",
         "geo.solid.cone",
         "geo.solid.curved_surface_area",
         "geo.solid.cylinder",
+        "geo.solid.octahedron",
+        "geo.solid.platonic",
         "geo.solid.sphere",
         "geo.triangle.apollonius",
         "geo.triangle.cevian",
@@ -2322,7 +2345,7 @@
         "geo.triangle.perpendicular_bisector",
         "geo.triangle.special_right_45"
       ],
-      "concept_count": 24
+      "concept_count": 35
     },
     {
       "id": "geometry.b5",
@@ -2330,15 +2353,19 @@
       "domain": "geometry",
       "band": 5,
       "depth_min": 15,
-      "depth_max": 15,
+      "depth_max": 16,
       "subdomains": [
+        "geometry.circles",
         "geometry.solid"
       ],
       "concept_ids": [
+        "geo.circle.segment_area",
         "geo.solid.frustum",
-        "geo.solid.hemisphere"
+        "geo.solid.hemisphere",
+        "geo.solid.rotation_volume",
+        "geo.solid.truncated_cone"
       ],
-      "concept_count": 2
+      "concept_count": 5
     },
     {
       "id": "geometry.b6",
@@ -2361,17 +2388,38 @@
       "domain": "geometry",
       "band": 7,
       "depth_min": 21,
-      "depth_max": 22,
+      "depth_max": 23,
       "subdomains": [
         "geometry.coordinate",
         "geometry.transform"
       ],
       "concept_ids": [
+        "geo.coord.dot",
+        "geo.coord.line_intersection",
+        "geo.coord.parametric_line",
+        "geo.coord.rotated_conic",
         "geo.coord.slope",
+        "geo.coord.vector",
+        "geo.transform.glide",
         "geo.transform.isometry",
         "geo.transform.reflection"
       ],
-      "concept_count": 3
+      "concept_count": 9
+    },
+    {
+      "id": "geometry.b8",
+      "title": "Geometry · Stage 9",
+      "domain": "geometry",
+      "band": 8,
+      "depth_min": 24,
+      "depth_max": 24,
+      "subdomains": [
+        "geometry.coordinate"
+      ],
+      "concept_ids": [
+        "geo.coord.normal_line"
+      ],
+      "concept_count": 1
     },
     {
       "id": "graph_theory.b1",
