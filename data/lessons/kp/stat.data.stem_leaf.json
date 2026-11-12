@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Stems and leaves",
+    "section": "Stems and leaves",
+    "subgoals": [
+      "Choose a cut point for the stem",
+      "Write the remaining digit as the leaf",
+      "Recover each value from its row"
+    ]
+  },
+  {
+    "label": "Ordering the data",
+    "section": "Ordering the data",
+    "subgoals": [
+      "Sort leaves within each stem",
+      "Keep every observation represented",
+      "Locate the median position in the listing"
+    ]
+  },
+  {
+    "label": "Reading a plot",
+    "section": "Reading a plot",
+    "subgoals": [
+      "Treat each stem as an interval",
+      "Compare row lengths to find the mode",
+      "Describe the shape from the rows"
+    ]
+  }
+]

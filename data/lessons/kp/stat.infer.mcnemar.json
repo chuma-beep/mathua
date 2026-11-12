@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Paired binary data",
+    "section": "Paired binary data",
+    "subgoals": [
+      "Tabulate the four pair types",
+      "Count the agreeing pairs",
+      "Set the agreeing pairs aside"
+    ]
+  },
+  {
+    "label": "Discordant pairs",
+    "section": "Discordant pairs",
+    "subgoals": [
+      "Identify the two discordant cells",
+      "Split the total like fair coin tosses",
+      "Compare observed with expected counts"
+    ]
+  },
+  {
+    "label": "The test statistic",
+    "section": "The test statistic",
+    "subgoals": [
+      "Square the difference of the discordant counts",
+      "Divide by their sum",
+      "Use the exact binomial form when counts are small"
+    ]
+  }
+]

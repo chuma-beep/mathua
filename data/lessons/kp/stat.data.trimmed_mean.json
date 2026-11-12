@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Why trim",
+    "section": "Why trim",
+    "subgoals": [
+      "Compare a mean with an outlier to the median",
+      "Explain the leverage of an extreme value",
+      "Place the trimmed mean between the two"
+    ]
+  },
+  {
+    "label": "Removing the extremes",
+    "section": "Removing the extremes",
+    "subgoals": [
+      "Turn the trim share into a count",
+      "Drop that count from both ends",
+      "State the rounding rule used"
+    ]
+  },
+  {
+    "label": "The trimmed average",
+    "section": "The trimmed average",
+    "subgoals": [
+      "Average the remaining values",
+      "Compare with the untrimmed mean",
+      "Report how much the extreme mattered"
+    ]
+  }
+]

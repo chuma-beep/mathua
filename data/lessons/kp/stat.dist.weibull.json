@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The survival function",
+    "section": "The survival function",
+    "subgoals": [
+      "Write survival as a power of time",
+      "Evaluate it at the scale",
+      "Compute survival at a fraction of the scale"
+    ]
+  },
+  {
+    "label": "The shape parameter",
+    "section": "The shape parameter",
+    "subgoals": [
+      "Read a falling hazard from k below 1",
+      "Read a constant hazard at k equal to 1",
+      "Read a rising hazard from k above 2"
+    ]
+  },
+  {
+    "label": "Reading a ratio",
+    "section": "Reading a ratio",
+    "subgoals": [
+      "Divide survival at two times",
+      "Cancel the scale parameter",
+      "Interpret a sharp fall past the scale"
+    ]
+  }
+]

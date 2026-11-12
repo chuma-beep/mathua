@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Reading the cells",
+    "section": "Reading the cells",
+    "subgoals": [
+      "Name both variables for a cell",
+      "Count only cases holding both levels",
+      "Separate a cell from its row total"
+    ]
+  },
+  {
+    "label": "Row and column totals",
+    "section": "Row and column totals",
+    "subgoals": [
+      "Add a row to its one-variable count",
+      "Add a column to its one-variable count",
+      "Check the grand total against both margins"
+    ]
+  },
+  {
+    "label": "A worked table",
+    "section": "A worked table",
+    "subgoals": [
+      "Compute the four margins",
+      "Take a share of the grand total",
+      "Take a share within a row"
+    ]
+  }
+]

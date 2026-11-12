@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The tail index",
+    "section": "The tail index",
+    "subgoals": [
+      "Write the survival function",
+      "Evaluate survival at twice the minimum",
+      "Connect a small index to heavy tails"
+    ]
+  },
+  {
+    "label": "The mean",
+    "section": "The mean",
+    "subgoals": [
+      "Apply the mean formula",
+      "State the condition on the index",
+      "Explain the divergence near 1"
+    ]
+  },
+  {
+    "label": "A worked example",
+    "section": "A worked example",
+    "subgoals": [
+      "Compute the mean of the tail",
+      "Take a share above a threshold",
+      "Read the result as concentration"
+    ]
+  }
+]

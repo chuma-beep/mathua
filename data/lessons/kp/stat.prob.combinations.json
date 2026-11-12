@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Order does not matter",
+    "section": "Order does not matter",
+    "subgoals": [
+      "Identify a selection where order is irrelevant",
+      "Compare a selection with its orderings",
+      "Keep only one copy of each subset"
+    ]
+  },
+  {
+    "label": "Dividing out the orderings",
+    "section": "Dividing out the orderings",
+    "subgoals": [
+      "Write the binomial formula",
+      "Divide by r factorial",
+      "Divide by the factorial of the remainder"
+    ]
+  },
+  {
+    "label": "A worked count",
+    "section": "A worked count",
+    "subgoals": [
+      "Substitute the two counts",
+      "Simplify the factorials",
+      "Turn the count into a probability"
+    ]
+  }
+]

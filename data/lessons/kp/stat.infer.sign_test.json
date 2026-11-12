@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Signs of differences",
+    "section": "Signs of differences",
+    "subgoals": [
+      "Subtract each pair in a fixed direction",
+      "Record only the sign",
+      "Ignore the size of the difference"
+    ]
+  },
+  {
+    "label": "The test statistic",
+    "section": "The test statistic",
+    "subgoals": [
+      "Count the positive signs",
+      "Drop the zero differences",
+      "Use the binomial with p equal to one half"
+    ]
+  },
+  {
+    "label": "A worked count",
+    "section": "A worked count",
+    "subgoals": [
+      "Reduce the sample by the zeros",
+      "Sum the tail probabilities",
+      "Compare the p-value with 0.05"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Order matters",
+    "section": "Order matters",
+    "subgoals": [
+      "Distinguish ordered pairs from pairs",
+      "Count both orders of one selection",
+      "Compare with the unordered count"
+    ]
+  },
+  {
+    "label": "The falling product",
+    "section": "The falling product",
+    "subgoals": [
+      "Multiply descending factors",
+      "Use one factor per position",
+      "Stop after r factors"
+    ]
+  },
+  {
+    "label": "A worked count",
+    "section": "A worked count",
+    "subgoals": [
+      "Assign choices to each role",
+      "Multiply the choice counts",
+      "Divide by the factorial for untitled roles"
+    ]
+  }
+]

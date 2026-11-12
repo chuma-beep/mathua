@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The ridge penalty",
+    "section": "The ridge penalty",
+    "subgoals": [
+      "Add a penalty on squared coefficients",
+      "Leave the intercept unpenalised",
+      "Describe the fit at the two extremes of the penalty"
+    ]
+  },
+  {
+    "label": "The closed form",
+    "section": "The closed form",
+    "subgoals": [
+      "Add the penalty to the diagonal",
+      "Invert the penalised matrix",
+      "Explain why the inverse now exists"
+    ]
+  },
+  {
+    "label": "Choosing lambda",
+    "section": "Choosing lambda",
+    "subgoals": [
+      "Search a grid of penalty values",
+      "Compare held-out errors",
+      "Standardise predictors before penalising"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Running totals",
+    "section": "Running totals",
+    "subgoals": [
+      "Add each frequency in turn",
+      "Carry the previous total forward",
+      "Confirm the last entry counts every observation"
+    ]
+  },
+  {
+    "label": "Finding a total",
+    "section": "Finding a total",
+    "subgoals": [
+      "Read the sample size from the last entry",
+      "Locate the median position",
+      "Pick the class holding that position"
+    ]
+  },
+  {
+    "label": "Recovering a class",
+    "section": "Recovering a class",
+    "subgoals": [
+      "Subtract consecutive cumulative entries",
+      "Read the first class from its own entry",
+      "Recognise a zero gap as an empty class"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Branches and paths",
+    "section": "Branches and paths",
+    "subgoals": [
+      "Split the first stage into branches",
+      "Label each later branch conditionally",
+      "Update probabilities after each draw"
+    ]
+  },
+  {
+    "label": "Multiplying along a path",
+    "section": "Multiplying along a path",
+    "subgoals": [
+      "Find the product of branch probabilities",
+      "Read a path as one outcome",
+      "Compare paths that select the same pair"
+    ]
+  },
+  {
+    "label": "Complementary paths",
+    "section": "Complementary paths",
+    "subgoals": [
+      "Sum the leaf probabilities to 1",
+      "Use the complement path as a shortcut",
+      "Check the total against 1"
+    ]
+  }
+]

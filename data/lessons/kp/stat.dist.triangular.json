@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Three parameters",
+    "section": "Three parameters",
+    "subgoals": [
+      "Name the minimum, maximum and mode",
+      "Write the density on each side of the mode",
+      "Evaluate the density at the peak"
+    ]
+  },
+  {
+    "label": "The mean",
+    "section": "The mean",
+    "subgoals": [
+      "Average the three parameters",
+      "Compare the mean with the mode",
+      "Read the direction the mode pulls"
+    ]
+  },
+  {
+    "label": "A worked triangle",
+    "section": "A worked triangle",
+    "subgoals": [
+      "Substitute the three parameters",
+      "Compute the mean and variance",
+      "Take the square root for the spread"
+    ]
+  }
+]

@@ -1,6 +1,6 @@
 [
   {
-    "heuristic": "trig siblings interfere \u2014 non-trivial group 5 members",
+    "heuristic": "trig siblings interfere — non-trivial group 5 members",
     "interference_group": "trig.basic",
     "members": [
       "trig.basics.radians",
@@ -21,7 +21,7 @@
     ]
   },
   {
-    "heuristic": "abstract group siblings interfere \u2014 normal/lagrange/quotient/action/sylow",
+    "heuristic": "abstract group siblings interfere — normal/lagrange/quotient/action/sylow",
     "interference_group": "abstract.group",
     "members": [
       "abstract.group.normal",
@@ -43,7 +43,7 @@
     ]
   },
   {
-    "heuristic": "ml arch siblings interfere \u2014 cnn/rnn/transformer/gan",
+    "heuristic": "ml arch siblings interfere — cnn/rnn/transformer/gan",
     "interference_group": "ml.arch",
     "members": [
       "ml.arch.cnn",
@@ -63,8 +63,8 @@
     ]
   },
   {
-    "heuristic": "new subdomains for ML beyond 20 \u2014 ml.reinforcement / ml.nlp",
-    "note": "Future ML 20\u219230 will split single subdomain machine_learning.neural_networks into ml.reinforcement and ml.nlp to restore scheduler dissimilarity (scheduler.go:80 NextSmart distinct subdomain filter) \u2014 reserve note, no interference yet"
+    "heuristic": "new subdomains for ML beyond 20 — ml.reinforcement / ml.nlp",
+    "note": "Future ML 20→30 will split single subdomain machine_learning.neural_networks into ml.reinforcement and ml.nlp to restore scheduler dissimilarity (scheduler.go:80 NextSmart distinct subdomain filter) — reserve note, no interference yet"
   },
   {
     "heuristic": "linalg determinant and inverse siblings interfere",
@@ -3284,7 +3284,7 @@
       "alg.func.concept"
     ],
     "heuristic": "calc.encompasses.alg",
-    "note": "calc.* encompasses alg.* \u2014 higher integration encompasses function concept for layering",
+    "note": "calc.* encompasses alg.* — higher integration encompasses function concept for layering",
     "variants": [
       {
         "difficulty": 0.3,
@@ -10339,7 +10339,7 @@
       "ml.regularization",
       "ml.loss.cross_entropy"
     ],
-    "heuristic": "ml dropout variants \u2014 easy/hard",
+    "heuristic": "ml dropout variants — easy/hard",
     "variants": [
       {
         "difficulty": 0.3,
@@ -21038,6 +21038,138 @@
     "key_prerequisites": [
       "calc.series.stirling",
       "calc.adv.gamma_function"
+    ]
+  },
+  {
+    "id": "stat.data.two_way_table",
+    "key_prerequisites": [
+      "stat.data.read_table"
+    ]
+  },
+  {
+    "id": "stat.data.stem_leaf",
+    "key_prerequisites": [
+      "stat.data.line_plot"
+    ]
+  },
+  {
+    "id": "stat.data.cumulative_frequency",
+    "key_prerequisites": [
+      "stat.data.histogram"
+    ]
+  },
+  {
+    "id": "stat.data.percentile",
+    "key_prerequisites": [
+      "stat.quartile.value"
+    ]
+  },
+  {
+    "id": "stat.data.trimmed_mean",
+    "key_prerequisites": [
+      "stat.data.mean"
+    ]
+  },
+  {
+    "id": "stat.data.midrange",
+    "key_prerequisites": [
+      "stat.data.range"
+    ]
+  },
+  {
+    "id": "stat.prob.union",
+    "key_prerequisites": [
+      "stat.prob.basic"
+    ]
+  },
+  {
+    "id": "stat.prob.tree",
+    "key_prerequisites": [
+      "stat.prob.compound"
+    ]
+  },
+  {
+    "id": "stat.prob.total_probability",
+    "key_prerequisites": [
+      "stat.prob.conditional"
+    ]
+  },
+  {
+    "id": "stat.prob.permutations",
+    "key_prerequisites": [
+      "stat.prob.counting"
+    ]
+  },
+  {
+    "id": "stat.prob.combinations",
+    "key_prerequisites": [
+      "stat.prob.counting"
+    ]
+  },
+  {
+    "id": "stat.prob.odds",
+    "key_prerequisites": [
+      "stat.prob.basic"
+    ]
+  },
+  {
+    "id": "stat.dist.weibull",
+    "key_prerequisites": [
+      "stat.dist.exponential"
+    ]
+  },
+  {
+    "id": "stat.dist.cauchy",
+    "key_prerequisites": [
+      "stat.dist.normal"
+    ]
+  },
+  {
+    "id": "stat.dist.triangular",
+    "key_prerequisites": [
+      "stat.dist.uniform"
+    ]
+  },
+  {
+    "id": "stat.dist.pareto",
+    "key_prerequisites": [
+      "stat.dist.exponential"
+    ]
+  },
+  {
+    "id": "stat.infer.fisher_exact",
+    "key_prerequisites": [
+      "stat.test.chi_square_independence"
+    ]
+  },
+  {
+    "id": "stat.infer.mcnemar",
+    "key_prerequisites": [
+      "stat.infer.paired"
+    ]
+  },
+  {
+    "id": "stat.infer.sign_test",
+    "key_prerequisites": [
+      "stat.infer.nonparametric"
+    ]
+  },
+  {
+    "id": "stat.reg.cooks_distance",
+    "key_prerequisites": [
+      "stat.reg.residual"
+    ]
+  },
+  {
+    "id": "stat.reg.polynomial",
+    "key_prerequisites": [
+      "stat.reg.multiple"
+    ]
+  },
+  {
+    "id": "stat.reg.ridge",
+    "key_prerequisites": [
+      "stat.reg.multiple"
     ]
   }
 ]

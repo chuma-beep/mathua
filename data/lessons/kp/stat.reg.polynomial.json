@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Curvature in the model",
+    "section": "Curvature in the model",
+    "subgoals": [
+      "Explain what a constant slope assumes",
+      "Add a squared predictor term",
+      "Read the sign of the squared coefficient"
+    ]
+  },
+  {
+    "label": "Coefficients and predictors",
+    "section": "Coefficients and predictors",
+    "subgoals": [
+      "Treat each power as a separate predictor",
+      "Test the squared coefficient",
+      "Centre the predictor before fitting"
+    ]
+  },
+  {
+    "label": "Interactions",
+    "section": "Interactions",
+    "subgoals": [
+      "Distinguish a product term from a power term",
+      "Count interaction terms for several predictors",
+      "Choose the term from the mechanism"
+    ]
+  }
+]

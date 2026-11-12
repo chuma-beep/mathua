@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Fixed margins",
+    "section": "Fixed margins",
+    "subgoals": [
+      "Condition on both sets of totals",
+      "Show that one cell fixes the table",
+      "Name the null distribution"
+    ]
+  },
+  {
+    "label": "The range of a cell",
+    "section": "The range of a cell",
+    "subgoals": [
+      "Compute the lower bound from the margins",
+      "Compute the upper bound from the margins",
+      "Reject values forcing a negative cell"
+    ]
+  },
+  {
+    "label": "Why it is exact",
+    "section": "Why it is exact",
+    "subgoals": [
+      "Sum hypergeometric probabilities",
+      "Compute the probability of one table",
+      "Add the tables at least as extreme"
+    ]
+  }
+]

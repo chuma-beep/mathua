@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Influence of one point",
+    "section": "Influence of one point",
+    "subgoals": [
+      "Distinguish influence from a large residual",
+      "Weight the residual by leverage",
+      "Read the distance as a change in fitted values"
+    ]
+  },
+  {
+    "label": "The 4/n cutoff",
+    "section": "The 4/n cutoff",
+    "subgoals": [
+      "Divide 4 by the sample size",
+      "Compare each distance with the cutoff",
+      "Treat the cutoff as a screen"
+    ]
+  },
+  {
+    "label": "A worked check",
+    "section": "A worked check",
+    "subgoals": [
+      "Substitute leverage and residual",
+      "Compare with the cutoff",
+      "Refit without the point to measure the change"
+    ]
+  }
+]

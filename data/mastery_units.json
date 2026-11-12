@@ -5,7 +5,7 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 2918,
+  "concept_count": 2940,
   "unit_count": 164,
   "units": [
     {
@@ -5110,9 +5110,10 @@
         "stat.data.bar_graph",
         "stat.data.measurement_levels",
         "stat.data.read_table",
-        "stat.data.study_design"
+        "stat.data.study_design",
+        "stat.data.two_way_table"
       ],
-      "concept_count": 4
+      "concept_count": 5
     },
     {
       "id": "statistics.b1",
@@ -5120,14 +5121,15 @@
       "domain": "statistics",
       "band": 1,
       "depth_min": 3,
-      "depth_max": 3,
+      "depth_max": 4,
       "subdomains": [
         "statistics.data_representation"
       ],
       "concept_ids": [
-        "stat.data.line_plot"
+        "stat.data.line_plot",
+        "stat.data.stem_leaf"
       ],
-      "concept_count": 1
+      "concept_count": 2
     },
     {
       "id": "statistics.b2",
@@ -5166,10 +5168,14 @@
         "stat.adv.rms",
         "stat.adv.variance",
         "stat.data.box_plot",
+        "stat.data.cumulative_frequency",
         "stat.data.histogram",
         "stat.data.median",
+        "stat.data.midrange",
         "stat.data.mode",
+        "stat.data.percentile",
         "stat.data.range",
+        "stat.data.trimmed_mean",
         "stat.data.weighted_mean",
         "stat.dist.bernoulli",
         "stat.prob.basic",
@@ -5179,14 +5185,16 @@
         "stat.prob.continuous_rv",
         "stat.prob.discrete_rv",
         "stat.prob.expected_value",
+        "stat.prob.odds",
         "stat.prob.sample_space",
+        "stat.prob.union",
         "stat.quartile.value",
         "stat.spread.iqr",
         "stat.spread.mad",
         "stat.spread.std_dev",
         "stat.zscore.value"
       ],
-      "concept_count": 25
+      "concept_count": 31
     },
     {
       "id": "statistics.b4",
@@ -5210,6 +5218,7 @@
         "stat.data.skew",
         "stat.dist.beta",
         "stat.dist.binomial",
+        "stat.dist.cauchy",
         "stat.dist.chi_square",
         "stat.dist.empirical_rule",
         "stat.dist.exponential",
@@ -5221,23 +5230,30 @@
         "stat.dist.negative_binomial",
         "stat.dist.normal",
         "stat.dist.normal_approx",
+        "stat.dist.pareto",
         "stat.dist.poisson",
         "stat.dist.student_t",
+        "stat.dist.triangular",
         "stat.dist.uniform",
+        "stat.dist.weibull",
         "stat.dist.z_table",
         "stat.infer.confidence",
         "stat.infer.sampling",
+        "stat.prob.combinations",
         "stat.prob.conditional",
         "stat.prob.counting",
         "stat.prob.independence",
         "stat.prob.mutually_exclusive",
+        "stat.prob.permutations",
+        "stat.prob.total_probability",
+        "stat.prob.tree",
         "stat.reg.correlation",
         "stat.reg.r2",
         "stat.sampling.methods",
         "stat.sampling.se",
         "stat.spread.outlier"
       ],
-      "concept_count": 30
+      "concept_count": 38
     },
     {
       "id": "statistics.b5",
@@ -5261,6 +5277,7 @@
         "stat.infer.proportion",
         "stat.infer.proportion_test",
         "stat.infer.pvalue",
+        "stat.infer.sign_test",
         "stat.infer.ttest",
         "stat.infer.ztest",
         "stat.test.anova",
@@ -5268,7 +5285,7 @@
         "stat.test.chi_square_independence",
         "stat.test.kruskal_wallis"
       ],
-      "concept_count": 17
+      "concept_count": 18
     },
     {
       "id": "statistics.b6",
@@ -5283,6 +5300,8 @@
       ],
       "concept_ids": [
         "stat.infer.effect_size",
+        "stat.infer.fisher_exact",
+        "stat.infer.mcnemar",
         "stat.infer.multiple_comparisons",
         "stat.infer.paired",
         "stat.infer.power",
@@ -5293,7 +5312,7 @@
         "stat.test.permutation",
         "stat.test.wilcoxon"
       ],
-      "concept_count": 10
+      "concept_count": 12
     },
     {
       "id": "statistics.b7",
@@ -5310,13 +5329,16 @@
       "concept_ids": [
         "stat.data.missing",
         "stat.infer.regression_slope",
+        "stat.reg.cooks_distance",
         "stat.reg.information_criteria",
         "stat.reg.multiple",
+        "stat.reg.polynomial",
         "stat.reg.prediction_interval",
         "stat.reg.quantile",
-        "stat.reg.residual"
+        "stat.reg.residual",
+        "stat.reg.ridge"
       ],
-      "concept_count": 7
+      "concept_count": 10
     },
     {
       "id": "statistics.b8",

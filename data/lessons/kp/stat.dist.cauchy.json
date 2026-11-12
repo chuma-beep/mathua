@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Heavy tails",
+    "section": "Heavy tails",
+    "subgoals": [
+      "Compare the tail decay with the normal",
+      "Estimate a far-tail probability",
+      "Explain why the mean integral diverges"
+    ]
+  },
+  {
+    "label": "The quartiles",
+    "section": "The quartiles",
+    "subgoals": [
+      "Invert the distribution function",
+      "Solve for the quartile values",
+      "Contrast the spread with the variance"
+    ]
+  },
+  {
+    "label": "A worked spread",
+    "section": "A worked spread",
+    "subgoals": [
+      "Locate the median in an ordered sample",
+      "Show how one draw moves the mean",
+      "Prefer the median for heavy tails"
+    ]
+  }
+]

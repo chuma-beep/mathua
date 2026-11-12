@@ -1417,5 +1417,313 @@
       "streak": 10,
       "avg_time_seconds": 24.0
     }
+  },
+  {
+    "id": "stat.data.two_way_table",
+    "label": "Two-way tables",
+    "domain": "statistics",
+    "subdomain": "statistics.data_representation",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.read_table"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "stat.data.stem_leaf",
+    "label": "Stem-and-leaf plots",
+    "domain": "statistics",
+    "subdomain": "statistics.data_representation",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.line_plot"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "stat.data.cumulative_frequency",
+    "label": "Cumulative frequency tables",
+    "domain": "statistics",
+    "subdomain": "statistics.data_representation",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.histogram"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "stat.data.percentile",
+    "label": "Percentiles",
+    "domain": "statistics",
+    "subdomain": "statistics.central_tendency",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.quartile.value"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 14.0
+    }
+  },
+  {
+    "id": "stat.data.trimmed_mean",
+    "label": "The trimmed mean",
+    "domain": "statistics",
+    "subdomain": "statistics.central_tendency",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.mean"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 16.0
+    }
+  },
+  {
+    "id": "stat.data.midrange",
+    "label": "The midrange",
+    "domain": "statistics",
+    "subdomain": "statistics.central_tendency",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.data.range"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "stat.prob.union",
+    "label": "The addition rule for probability",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.basic"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 14.0
+    }
+  },
+  {
+    "id": "stat.prob.tree",
+    "label": "Probability tree diagrams",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.compound"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 16.0
+    }
+  },
+  {
+    "id": "stat.prob.total_probability",
+    "label": "Total probability from a partition",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.conditional"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "stat.prob.permutations",
+    "label": "Counting ordered arrangements",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.counting"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 16.0
+    }
+  },
+  {
+    "id": "stat.prob.combinations",
+    "label": "Counting unordered selections",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.counting"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 16.0
+    }
+  },
+  {
+    "id": "stat.prob.odds",
+    "label": "Odds and probability",
+    "domain": "statistics",
+    "subdomain": "statistics.probability",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.prob.basic"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 12.0
+    }
+  },
+  {
+    "id": "stat.dist.weibull",
+    "label": "Weibull lifetime distributions",
+    "domain": "statistics",
+    "subdomain": "statistics.distributions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.dist.exponential"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "stat.dist.cauchy",
+    "label": "The Cauchy distribution",
+    "domain": "statistics",
+    "subdomain": "statistics.distributions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.dist.normal"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "stat.dist.triangular",
+    "label": "The triangular distribution",
+    "domain": "statistics",
+    "subdomain": "statistics.distributions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.dist.uniform"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "stat.dist.pareto",
+    "label": "The Pareto distribution",
+    "domain": "statistics",
+    "subdomain": "statistics.distributions",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.dist.exponential"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "stat.infer.fisher_exact",
+    "label": "Fisher's exact test",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.test.chi_square_independence"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "stat.infer.mcnemar",
+    "label": "McNemar's test",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.paired"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "stat.infer.sign_test",
+    "label": "The sign test",
+    "domain": "statistics",
+    "subdomain": "statistics.inference",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.infer.nonparametric"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 18.0
+    }
+  },
+  {
+    "id": "stat.reg.cooks_distance",
+    "label": "Cook's distance",
+    "domain": "statistics",
+    "subdomain": "statistics.regression",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.reg.residual"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "stat.reg.polynomial",
+    "label": "Polynomial regression models",
+    "domain": "statistics",
+    "subdomain": "statistics.regression",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.reg.multiple"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 20.0
+    }
+  },
+  {
+    "id": "stat.reg.ridge",
+    "label": "Ridge regression",
+    "domain": "statistics",
+    "subdomain": "statistics.regression",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "stat.reg.multiple"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 22.0
+    }
   }
 ]

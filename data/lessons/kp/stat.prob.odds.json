@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Odds in favour",
+    "section": "Odds in favour",
+    "subgoals": [
+      "Divide the event probability by its complement",
+      "Write the ratio in the form a to b",
+      "Keep odds distinct from probability"
+    ]
+  },
+  {
+    "label": "Converting to probability",
+    "section": "Converting to probability",
+    "subgoals": [
+      "Add the two odds terms",
+      "Divide the favour term by the sum",
+      "Check the result lies between 0 and 1"
+    ]
+  },
+  {
+    "label": "Odds against",
+    "section": "Odds against",
+    "subgoals": [
+      "Invert the ratio",
+      "Convert odds against to probability",
+      "Read an implied probability from a price"
+    ]
+  }
+]

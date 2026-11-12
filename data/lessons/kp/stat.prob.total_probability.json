@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Partitioning the sample space",
+    "section": "Partitioning the sample space",
+    "subgoals": [
+      "List mutually exclusive parts",
+      "Check that the parts cover every case",
+      "Assign each part its probability"
+    ]
+  },
+  {
+    "label": "Weighting each part",
+    "section": "Weighting each part",
+    "subgoals": [
+      "Multiply the conditional by the part probability",
+      "Add one term for each part",
+      "Confirm the weights sum to 1"
+    ]
+  },
+  {
+    "label": "A worked total",
+    "section": "A worked total",
+    "subgoals": [
+      "Compute each path probability",
+      "Add the contributions",
+      "Convert a contribution into a share"
+    ]
+  }
+]

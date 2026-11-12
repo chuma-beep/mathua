@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The midpoint of the extremes",
+    "section": "The midpoint of the extremes",
+    "subgoals": [
+      "Identify the minimum and maximum",
+      "Centre the range interval",
+      "Contrast it with the median"
+    ]
+  },
+  {
+    "label": "Computing it",
+    "section": "Computing it",
+    "subgoals": [
+      "Add the two extremes",
+      "Halve the sum",
+      "Compare the result with the mean"
+    ]
+  },
+  {
+    "label": "Its limits",
+    "section": "Its limits",
+    "subgoals": [
+      "Explain the zero breakdown point",
+      "Name a case where the extremes are reliable",
+      "Avoid calling it a robust centre"
+    ]
+  }
+]

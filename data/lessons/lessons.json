@@ -11670,5 +11670,93 @@
   {
     "concept_id": "calc.adv.asymptotic",
     "source": "authored/calc.adv.asymptotic.md"
+  },
+  {
+    "concept_id": "stat.data.two_way_table",
+    "source": "authored/stat.data.two_way_table.md"
+  },
+  {
+    "concept_id": "stat.data.stem_leaf",
+    "source": "authored/stat.data.stem_leaf.md"
+  },
+  {
+    "concept_id": "stat.data.cumulative_frequency",
+    "source": "authored/stat.data.cumulative_frequency.md"
+  },
+  {
+    "concept_id": "stat.data.percentile",
+    "source": "authored/stat.data.percentile.md"
+  },
+  {
+    "concept_id": "stat.data.trimmed_mean",
+    "source": "authored/stat.data.trimmed_mean.md"
+  },
+  {
+    "concept_id": "stat.data.midrange",
+    "source": "authored/stat.data.midrange.md"
+  },
+  {
+    "concept_id": "stat.prob.union",
+    "source": "authored/stat.prob.union.md"
+  },
+  {
+    "concept_id": "stat.prob.tree",
+    "source": "authored/stat.prob.tree.md"
+  },
+  {
+    "concept_id": "stat.prob.total_probability",
+    "source": "authored/stat.prob.total_probability.md"
+  },
+  {
+    "concept_id": "stat.prob.permutations",
+    "source": "authored/stat.prob.permutations.md"
+  },
+  {
+    "concept_id": "stat.prob.combinations",
+    "source": "authored/stat.prob.combinations.md"
+  },
+  {
+    "concept_id": "stat.prob.odds",
+    "source": "authored/stat.prob.odds.md"
+  },
+  {
+    "concept_id": "stat.dist.weibull",
+    "source": "authored/stat.dist.weibull.md"
+  },
+  {
+    "concept_id": "stat.dist.cauchy",
+    "source": "authored/stat.dist.cauchy.md"
+  },
+  {
+    "concept_id": "stat.dist.triangular",
+    "source": "authored/stat.dist.triangular.md"
+  },
+  {
+    "concept_id": "stat.dist.pareto",
+    "source": "authored/stat.dist.pareto.md"
+  },
+  {
+    "concept_id": "stat.infer.fisher_exact",
+    "source": "authored/stat.infer.fisher_exact.md"
+  },
+  {
+    "concept_id": "stat.infer.mcnemar",
+    "source": "authored/stat.infer.mcnemar.md"
+  },
+  {
+    "concept_id": "stat.infer.sign_test",
+    "source": "authored/stat.infer.sign_test.md"
+  },
+  {
+    "concept_id": "stat.reg.cooks_distance",
+    "source": "authored/stat.reg.cooks_distance.md"
+  },
+  {
+    "concept_id": "stat.reg.polynomial",
+    "source": "authored/stat.reg.polynomial.md"
+  },
+  {
+    "concept_id": "stat.reg.ridge",
+    "source": "authored/stat.reg.ridge.md"
   }
 ]

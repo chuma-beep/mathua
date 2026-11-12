@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The union of two events",
+    "section": "The union of two events",
+    "subgoals": [
+      "List outcomes in either event",
+      "Add the two probabilities",
+      "Notice the outcomes counted twice"
+    ]
+  },
+  {
+    "label": "Subtracting the overlap",
+    "section": "Subtracting the overlap",
+    "subgoals": [
+      "Write the addition rule",
+      "Identify the intersection",
+      "Drop the term when events are exclusive"
+    ]
+  },
+  {
+    "label": "A worked union",
+    "section": "A worked union",
+    "subgoals": [
+      "Add the two counts",
+      "Subtract the joint count",
+      "Divide by the grand total"
+    ]
+  }
+]

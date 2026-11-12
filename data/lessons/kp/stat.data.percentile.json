@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The nearest-rank rule",
+    "section": "The nearest-rank rule",
+    "subgoals": [
+      "Multiply the sample size by k over 100",
+      "Round the position up to a whole number",
+      "Take the value at that rank"
+    ]
+  },
+  {
+    "label": "Reading a percentile",
+    "section": "Reading a percentile",
+    "subgoals": [
+      "Separate rank from raw score",
+      "State the share below and above",
+      "Convert a percentile to a position"
+    ]
+  },
+  {
+    "label": "Counting below",
+    "section": "Counting below",
+    "subgoals": [
+      "Multiply the share by the sample size",
+      "Allow for ties and rounding",
+      "Check the count against the data"
+    ]
+  }
+]
