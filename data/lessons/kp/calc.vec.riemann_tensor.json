@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The commutator of covariant derivatives",
+    "section": "The commutator of covariant derivatives",
+    "subgoals": [
+      "Compare the two orders",
+      "Extract the linear term",
+      "Observe the flat case"
+    ]
+  },
+  {
+    "label": "The tensor in components",
+    "section": "The tensor in components",
+    "subgoals": [
+      "Differentiate the symbols",
+      "Add the quadratic term",
+      "Use the antisymmetries"
+    ]
+  },
+  {
+    "label": "A worked plane and sphere",
+    "section": "A worked plane and sphere",
+    "subgoals": [
+      "Show the plane vanishes in polar form",
+      "Compute the sphere component",
+      "Read the sectional curvature"
+    ]
+  }
+]

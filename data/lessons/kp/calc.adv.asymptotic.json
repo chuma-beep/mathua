@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The meaning of an asymptotic series",
+    "section": "The meaning of an asymptotic series",
+    "subgoals": [
+      "Compare the remainder with the last term",
+      "Allow divergence",
+      "Locate the best truncation"
+    ]
+  },
+  {
+    "label": "Integrating by parts repeatedly",
+    "section": "Integrating by parts repeatedly",
+    "subgoals": [
+      "Integrate once",
+      "Collect the factorial",
+      "See the terms grow"
+    ]
+  },
+  {
+    "label": "A worked expansion",
+    "section": "A worked expansion",
+    "subgoals": [
+      "Evaluate the prefactor",
+      "Add successive corrections",
+      "Compare with the true value"
+    ]
+  }
+]

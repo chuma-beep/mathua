@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The connection one-form",
+    "section": "The connection one-form",
+    "subgoals": [
+      "Choose an orthonormal frame",
+      "Use metric compatibility",
+      "Record the turning of the frame"
+    ]
+  },
+  {
+    "label": "The curvature two-form",
+    "section": "The curvature two-form",
+    "subgoals": [
+      "Differentiate the connection",
+      "Add the wedge term",
+      "Check the flat plane"
+    ]
+  },
+  {
+    "label": "Cartan's structure equations",
+    "section": "Cartan's structure equations",
+    "subgoals": [
+      "Write the torsion equation",
+      "Write the curvature equation",
+      "Evaluate the sphere"
+    ]
+  }
+]

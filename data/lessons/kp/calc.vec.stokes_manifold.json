@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The boundary operator",
+    "section": "The boundary operator",
+    "subgoals": [
+      "Lower the dimension by one",
+      "Induce the orientation",
+      "Note that the boundary of a boundary is empty"
+    ]
+  },
+  {
+    "label": "The general statement",
+    "section": "The general statement",
+    "subgoals": [
+      "Integrate the derivative inside",
+      "Integrate the form on the boundary",
+      "Recover the classical theorems"
+    ]
+  },
+  {
+    "label": "A worked boundary integral",
+    "section": "A worked boundary integral",
+    "subgoals": [
+      "Differentiate the one-form",
+      "Integrate over the square",
+      "Sum the contributing edges"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The metric connection",
+    "section": "The metric connection",
+    "subgoals": [
+      "Require metric compatibility",
+      "Require vanishing torsion",
+      "Note that the metric determines the connection"
+    ]
+  },
+  {
+    "label": "The formula in coordinates",
+    "section": "The formula in coordinates",
+    "subgoals": [
+      "Contract the inverse metric",
+      "Differentiate the metric entries",
+      "Evaluate the polar symbols"
+    ]
+  },
+  {
+    "label": "A worked surface",
+    "section": "A worked surface",
+    "subgoals": [
+      "Read the sphere metric",
+      "Compute the two symbols",
+      "Evaluate at a chosen angle"
+    ]
+  }
+]

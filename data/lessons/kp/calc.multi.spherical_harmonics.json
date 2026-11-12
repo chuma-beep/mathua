@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Separating the sphere",
+    "section": "Separating the sphere",
+    "subgoals": [
+      "Write the product ansatz",
+      "Identify the angular eigenvalue",
+      "Relate it to the radial equation"
+    ]
+  },
+  {
+    "label": "The spherical harmonics",
+    "section": "The spherical harmonics",
+    "subgoals": [
+      "Count the functions for each degree",
+      "State orthonormality",
+      "Expand a function in the basis"
+    ]
+  },
+  {
+    "label": "The first few harmonics",
+    "section": "The first few harmonics",
+    "subgoals": [
+      "Write the constant harmonic",
+      "Normalize it over the sphere",
+      "Evaluate the degree-one harmonic"
+    ]
+  }
+]

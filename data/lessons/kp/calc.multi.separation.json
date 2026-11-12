@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Splitting the variables",
+    "section": "Splitting the variables",
+    "subgoals": [
+      "Assume a product solution",
+      "Divide by the product",
+      "Set both sides to a constant"
+    ]
+  },
+  {
+    "label": "Boundary conditions",
+    "section": "Boundary conditions",
+    "subgoals": [
+      "Translate the end values",
+      "Solve the eigenvalue problem",
+      "Keep the allowed values"
+    ]
+  },
+  {
+    "label": "The separated solutions",
+    "section": "The separated solutions",
+    "subgoals": [
+      "Form the exponential factor",
+      "Evaluate at a time and a point",
+      "Explain the Fourier series"
+    ]
+  }
+]

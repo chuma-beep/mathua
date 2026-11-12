@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The integration by parts definition",
+    "section": "The integration by parts definition",
+    "subgoals": [
+      "Move the derivative to the test function",
+      "Drop the boundary term",
+      "Match the classical case"
+    ]
+  },
+  {
+    "label": "An example with a corner",
+    "section": "An example with a corner",
+    "subgoals": [
+      "Take the absolute value",
+      "Find the piecewise derivative",
+      "Compute the squared norm"
+    ]
+  },
+  {
+    "label": "Sobolev regularity",
+    "section": "Sobolev regularity",
+    "subgoals": [
+      "Raise the order by one",
+      "Note where the order stops",
+      "Locate the obstruction"
+    ]
+  }
+]

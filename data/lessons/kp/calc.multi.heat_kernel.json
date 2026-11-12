@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The heat equation",
+    "section": "The heat equation",
+    "subgoals": [
+      "State the equation",
+      "Read the time derivative as curvature",
+      "Check the sine decay"
+    ]
+  },
+  {
+    "label": "The Gaussian kernel",
+    "section": "The Gaussian kernel",
+    "subgoals": [
+      "Write the Gaussian",
+      "Check the unit integral",
+      "Evaluate at a time and a point"
+    ]
+  },
+  {
+    "label": "The convolution formula",
+    "section": "The convolution formula",
+    "subgoals": [
+      "Convolve the kernel with the data",
+      "Test constant data",
+      "Test a quadratic profile"
+    ]
+  }
+]

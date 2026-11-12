@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The weak formulation",
+    "section": "The weak formulation",
+    "subgoals": [
+      "Multiply by a test function",
+      "Integrate by parts",
+      "Require the identity for all tests"
+    ]
+  },
+  {
+    "label": "Existence by Lax-Milgram",
+    "section": "Existence by Lax-Milgram",
+    "subgoals": [
+      "Check boundedness",
+      "Get coercivity from Poincare",
+      "Conclude uniqueness"
+    ]
+  },
+  {
+    "label": "A one-dimensional example",
+    "section": "A one-dimensional example",
+    "subgoals": [
+      "Solve the classical problem",
+      "Choose a test function",
+      "Match both sides"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The travelling wave form",
+    "section": "The travelling wave form",
+    "subgoals": [
+      "Write the two profiles",
+      "Assign the direction of travel",
+      "Verify by differentiating"
+    ]
+  },
+  {
+    "label": "D'Alembert's formula",
+    "section": "D'Alembert's formula",
+    "subgoals": [
+      "Split the initial position",
+      "Integrate the initial velocity",
+      "Check the time-zero limit"
+    ]
+  },
+  {
+    "label": "A worked initial profile",
+    "section": "A worked initial profile",
+    "subgoals": [
+      "Choose a sine profile",
+      "Substitute the time and the point",
+      "Compare with the travelling form"
+    ]
+  }
+]

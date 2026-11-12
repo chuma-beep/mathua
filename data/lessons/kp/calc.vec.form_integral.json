@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Pulling back to a parameter domain",
+    "section": "Pulling back to a parameter domain",
+    "subgoals": [
+      "Choose a parameterization",
+      "Substitute into the form",
+      "Read off the area factor"
+    ]
+  },
+  {
+    "label": "The integral of a two-form",
+    "section": "The integral of a two-form",
+    "subgoals": [
+      "Expand in the three basis forms",
+      "Match the vector field",
+      "Pull back the area form"
+    ]
+  },
+  {
+    "label": "A worked flux",
+    "section": "A worked flux",
+    "subgoals": [
+      "Integrate over the angle ranges",
+      "Multiply the two factors",
+      "Compare with the ball volume"
+    ]
+  }
+]

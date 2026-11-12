@@ -11578,5 +11578,97 @@
   {
     "concept_id": "calc.integral.radial_mass",
     "source": "authored/calc.integral.radial_mass.md"
+  },
+  {
+    "concept_id": "calc.multi.laplace_operator",
+    "source": "authored/calc.multi.laplace_operator.md"
+  },
+  {
+    "concept_id": "calc.multi.green_function",
+    "source": "authored/calc.multi.green_function.md"
+  },
+  {
+    "concept_id": "calc.multi.heat_kernel",
+    "source": "authored/calc.multi.heat_kernel.md"
+  },
+  {
+    "concept_id": "calc.multi.wave_equation",
+    "source": "authored/calc.multi.wave_equation.md"
+  },
+  {
+    "concept_id": "calc.multi.separation",
+    "source": "authored/calc.multi.separation.md"
+  },
+  {
+    "concept_id": "calc.multi.sturm_liouville",
+    "source": "authored/calc.multi.sturm_liouville.md"
+  },
+  {
+    "concept_id": "calc.multi.legendre",
+    "source": "authored/calc.multi.legendre.md"
+  },
+  {
+    "concept_id": "calc.multi.bessel",
+    "source": "authored/calc.multi.bessel.md"
+  },
+  {
+    "concept_id": "calc.multi.spherical_harmonics",
+    "source": "authored/calc.multi.spherical_harmonics.md"
+  },
+  {
+    "concept_id": "calc.multi.delta",
+    "source": "authored/calc.multi.delta.md"
+  },
+  {
+    "concept_id": "calc.multi.weak_derivative",
+    "source": "authored/calc.multi.weak_derivative.md"
+  },
+  {
+    "concept_id": "calc.multi.sobolev",
+    "source": "authored/calc.multi.sobolev.md"
+  },
+  {
+    "concept_id": "calc.multi.weak_solution",
+    "source": "authored/calc.multi.weak_solution.md"
+  },
+  {
+    "concept_id": "calc.vec.form_integral",
+    "source": "authored/calc.vec.form_integral.md"
+  },
+  {
+    "concept_id": "calc.vec.stokes_manifold",
+    "source": "authored/calc.vec.stokes_manifold.md"
+  },
+  {
+    "concept_id": "calc.vec.de_rham",
+    "source": "authored/calc.vec.de_rham.md"
+  },
+  {
+    "concept_id": "calc.vec.hodge_star",
+    "source": "authored/calc.vec.hodge_star.md"
+  },
+  {
+    "concept_id": "calc.vec.christoffel",
+    "source": "authored/calc.vec.christoffel.md"
+  },
+  {
+    "concept_id": "calc.vec.covariant_derivative",
+    "source": "authored/calc.vec.covariant_derivative.md"
+  },
+  {
+    "concept_id": "calc.vec.riemann_tensor",
+    "source": "authored/calc.vec.riemann_tensor.md"
+  },
+  {
+    "concept_id": "calc.vec.connection_form",
+    "source": "authored/calc.vec.connection_form.md"
+  },
+  {
+    "concept_id": "calc.adv.gamma_function",
+    "source": "authored/calc.adv.gamma_function.md"
+  },
+  {
+    "concept_id": "calc.adv.asymptotic",
+    "source": "authored/calc.adv.asymptotic.md"
   }
 ]

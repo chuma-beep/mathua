@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition on a basis",
+    "section": "The definition on a basis",
+    "subgoals": [
+      "Take the complementary basis form",
+      "Fix the sign by orientation",
+      "Apply the star twice"
+    ]
+  },
+  {
+    "label": "The star in three dimensions",
+    "section": "The star in three dimensions",
+    "subgoals": [
+      "Send a one-form to a two-form",
+      "Use cyclic symmetry",
+      "Convert a vector field"
+    ]
+  },
+  {
+    "label": "The codifferential",
+    "section": "The codifferential",
+    "subgoals": [
+      "Combine the star with the derivative",
+      "Identify minus the divergence",
+      "Split the Laplacian"
+    ]
+  }
+]

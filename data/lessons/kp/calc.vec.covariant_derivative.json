@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Differentiating along a curve",
+    "section": "Differentiating along a curve",
+    "subgoals": [
+      "Differentiate the components",
+      "Add the symbol correction",
+      "Explain the turning basis"
+    ]
+  },
+  {
+    "label": "The covariant derivative in coordinates",
+    "section": "The covariant derivative in coordinates",
+    "subgoals": [
+      "Apply the symbols to a vector",
+      "Change the sign for a one-form",
+      "Check the tensor law"
+    ]
+  },
+  {
+    "label": "Parallel transport",
+    "section": "Parallel transport",
+    "subgoals": [
+      "Set the derivative to zero",
+      "Transport around a latitude",
+      "Read off the holonomy"
+    ]
+  }
+]

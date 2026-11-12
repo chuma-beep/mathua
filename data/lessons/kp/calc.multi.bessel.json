@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Bessel equation",
+    "section": "The Bessel equation",
+    "subgoals": [
+      "Write the equation for order n",
+      "Note the singular coefficient",
+      "Specialize to order 0"
+    ]
+  },
+  {
+    "label": "The series solution",
+    "section": "The series solution",
+    "subgoals": [
+      "Insert the power series",
+      "Read the coefficients",
+      "Check the radius of convergence"
+    ]
+  },
+  {
+    "label": "A worked value",
+    "section": "A worked value",
+    "subgoals": [
+      "Set x = 2",
+      "Sum the alternating terms",
+      "Locate the first positive zero"
+    ]
+  }
+]

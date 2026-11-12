@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The integral definition",
+    "section": "The integral definition",
+    "subgoals": [
+      "Write the integrand",
+      "Check both ends converge",
+      "Evaluate at a positive integer"
+    ]
+  },
+  {
+    "label": "The functional equation",
+    "section": "The functional equation",
+    "subgoals": [
+      "Integrate by parts",
+      "Drop the boundary terms",
+      "Continue past the origin"
+    ]
+  },
+  {
+    "label": "Values at half-integers",
+    "section": "Values at half-integers",
+    "subgoals": [
+      "Start from one half",
+      "Multiply by the half-integer",
+      "State the general pattern"
+    ]
+  }
+]

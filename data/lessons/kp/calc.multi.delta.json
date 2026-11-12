@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The defining property",
+    "section": "The defining property",
+    "subgoals": [
+      "Integrate against a test function",
+      "Read the value at the point",
+      "Write the product form"
+    ]
+  },
+  {
+    "label": "Scaling and translation",
+    "section": "Scaling and translation",
+    "subgoals": [
+      "Bring in the Jacobian factor",
+      "Apply the scaling in the plane",
+      "Move the point by translation"
+    ]
+  },
+  {
+    "label": "The delta as a measure",
+    "section": "The delta as a measure",
+    "subgoals": [
+      "Assign mass to a set",
+      "Compose with a level function",
+      "Divide by the gradient length"
+    ]
+  }
+]

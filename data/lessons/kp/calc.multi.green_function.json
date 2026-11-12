@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The defining property",
+    "section": "The defining property",
+    "subgoals": [
+      "Write the singular equation",
+      "Impose the zero boundary value",
+      "Integrate the kernel against the source"
+    ]
+  },
+  {
+    "label": "The fundamental solution",
+    "section": "The fundamental solution",
+    "subgoals": [
+      "Recall the plane kernel",
+      "Recall the space kernel",
+      "Fix the constant by flux"
+    ]
+  },
+  {
+    "label": "A Green function on a disk",
+    "section": "A Green function on a disk",
+    "subgoals": [
+      "Subtract the harmonic correction",
+      "Evaluate the kernel at a radius",
+      "Compare with the known solution"
+    ]
+  }
+]

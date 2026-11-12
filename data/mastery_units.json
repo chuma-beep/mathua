@@ -5,8 +5,8 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 2895,
-  "unit_count": 163,
+  "concept_count": 2918,
+  "unit_count": 164,
   "units": [
     {
       "id": "abstract_algebra.b6",
@@ -1196,6 +1196,7 @@
         "calc.multi.inverse_function",
         "calc.multi.lagrange",
         "calc.multi.lagrange_two",
+        "calc.multi.laplace_operator",
         "calc.multi.level_curves",
         "calc.multi.maximum_principle",
         "calc.multi.mean_value",
@@ -1206,13 +1207,14 @@
         "calc.multi.tangent_plane",
         "calc.multi.taylor2",
         "calc.multi.transform_jacobian",
+        "calc.multi.wave_equation",
         "calc.vec.curl_3d",
         "calc.vec.differential_form",
         "calc.vec.divergence",
         "calc.vec.identities",
         "calc.vec.jacobian_value"
       ],
-      "concept_count": 26
+      "concept_count": 28
     },
     {
       "id": "calc3.b12",
@@ -1237,14 +1239,23 @@
         "calc.integral.mass_density",
         "calc.integral.substitution_value",
         "calc.integral.surface_scalar",
+        "calc.multi.bessel",
         "calc.multi.change_order",
+        "calc.multi.delta",
         "calc.multi.double_integral_rect",
         "calc.multi.double_integral_region",
+        "calc.multi.green_function",
+        "calc.multi.heat_kernel",
         "calc.multi.implicit_function",
         "calc.multi.iterated_limits",
+        "calc.multi.legendre",
         "calc.multi.mass_lamina",
+        "calc.multi.separation",
+        "calc.multi.sobolev",
+        "calc.multi.sturm_liouville",
         "calc.multi.triple_integral_box",
         "calc.multi.triple_integral_region",
+        "calc.multi.weak_derivative",
         "calc.polar.arc_length",
         "calc.polar.area",
         "calc.polar.slope",
@@ -1256,6 +1267,7 @@
         "calc.vec.euler_lagrange",
         "calc.vec.exterior_derivative",
         "calc.vec.flux_uniform",
+        "calc.vec.form_integral",
         "calc.vec.frenet",
         "calc.vec.greens_theorem",
         "calc.vec.line_integral",
@@ -1272,7 +1284,7 @@
         "calc.vec.wedge_product",
         "calc.vec.work"
       ],
-      "concept_count": 41
+      "concept_count": 51
     },
     {
       "id": "calc3.b13",
@@ -1287,8 +1299,14 @@
         "calculus.vector"
       ],
       "concept_ids": [
+        "calc.adv.asymptotic",
+        "calc.adv.gamma_function",
         "calc.multi.moments_3d",
+        "calc.multi.spherical_harmonics",
         "calc.multi.surface_measure",
+        "calc.multi.weak_solution",
+        "calc.vec.christoffel",
+        "calc.vec.de_rham",
         "calc.vec.first_variation",
         "calc.vec.flux_general",
         "calc.vec.gauge",
@@ -1296,13 +1314,32 @@
         "calc.vec.geodesic",
         "calc.vec.greens_identity",
         "calc.vec.helmholtz",
+        "calc.vec.hodge_star",
         "calc.vec.minimal_surface",
         "calc.vec.orientation",
         "calc.vec.oriented_flux",
         "calc.vec.parametric_surface",
+        "calc.vec.stokes_manifold",
         "calc.vec.surface_tangent"
       ],
-      "concept_count": 14
+      "concept_count": 22
+    },
+    {
+      "id": "calc3.b14",
+      "title": "Calc3 · Stage 15",
+      "domain": "calc3",
+      "band": 14,
+      "depth_min": 42,
+      "depth_max": 44,
+      "subdomains": [
+        "calculus.vector"
+      ],
+      "concept_ids": [
+        "calc.vec.connection_form",
+        "calc.vec.covariant_derivative",
+        "calc.vec.riemann_tensor"
+      ],
+      "concept_count": 3
     },
     {
       "id": "complex_numbers.b3",

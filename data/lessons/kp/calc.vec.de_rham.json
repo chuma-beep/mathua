@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Closed and exact forms",
+    "section": "Closed and exact forms",
+    "subgoals": [
+      "Differentiate to test closure",
+      "Look for a primitive",
+      "See why exact implies closed"
+    ]
+  },
+  {
+    "label": "The cohomology groups",
+    "section": "The cohomology groups",
+    "subgoals": [
+      "Form the quotient",
+      "Read the zeroth group",
+      "Name the Betti numbers"
+    ]
+  },
+  {
+    "label": "The circle and the punctured plane",
+    "section": "The circle and the punctured plane",
+    "subgoals": [
+      "Write the angle form",
+      "Integrate around the circle",
+      "Conclude that the form is not exact"
+    ]
+  }
+]

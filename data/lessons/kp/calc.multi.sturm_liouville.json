@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Sturm-Liouville form",
+    "section": "The Sturm-Liouville form",
+    "subgoals": [
+      "Write the self-adjoint form",
+      "Identify the weight",
+      "Move derivatives by parts"
+    ]
+  },
+  {
+    "label": "Eigenvalues and eigenfunctions",
+    "section": "Eigenvalues and eigenfunctions",
+    "subgoals": [
+      "List the spectral facts",
+      "State weighted orthogonality",
+      "Count eigenfunctions per eigenvalue"
+    ]
+  },
+  {
+    "label": "An example on an interval",
+    "section": "An example on an interval",
+    "subgoals": [
+      "Fix the interval and data",
+      "Solve for the eigenvalues",
+      "Check the norm and orthogonality"
+    ]
+  }
+]

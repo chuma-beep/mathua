@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The generating function",
+    "section": "The generating function",
+    "subgoals": [
+      "Write the generator",
+      "Expand in powers of t",
+      "Read off the first polynomials"
+    ]
+  },
+  {
+    "label": "The recurrence relation",
+    "section": "The recurrence relation",
+    "subgoals": [
+      "Apply the recurrence at n = 1",
+      "Compare with the closed form",
+      "Evaluate at a chosen point"
+    ]
+  },
+  {
+    "label": "Orthogonality",
+    "section": "Orthogonality",
+    "subgoals": [
+      "State the integral relation",
+      "Use parity to vanish",
+      "Compute the norm of the second polynomial"
+    ]
+  }
+]

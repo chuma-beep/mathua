@@ -1391,5 +1391,345 @@
       "streak": 10,
       "avg_time_seconds": 32.0
     }
+  },
+  {
+    "id": "calc.multi.laplace_operator",
+    "label": "The Laplacian",
+    "domain": "calc3",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.partial_higher",
+      "calc.vec.divergence"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.multi.green_function",
+    "label": "Green functions for the Laplacian",
+    "domain": "calc3",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.laplace_operator",
+      "calc.multi.fundamental_solution"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.multi.heat_kernel",
+    "label": "The heat kernel on the real line",
+    "domain": "calc3",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.green_function",
+      "calc.multi.fourier"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.multi.wave_equation",
+    "label": "The wave equation in one dimension",
+    "domain": "calc3",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.deriv.partial_higher",
+      "calc.multi.fourier"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.multi.separation",
+    "label": "Separation of variables",
+    "domain": "calc3",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.wave_equation",
+      "calc.multi.dirichlet"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.multi.sturm_liouville",
+    "label": "Sturm-Liouville problems",
+    "domain": "calc3",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.separation",
+      "calc.seq.function_sequences"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.multi.legendre",
+    "label": "Legendre polynomials and their generating function",
+    "domain": "calc3",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.sturm_liouville"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.multi.bessel",
+    "label": "Bessel functions of the first kind",
+    "domain": "calc3",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.sturm_liouville"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.multi.spherical_harmonics",
+    "label": "Spherical harmonics in three dimensions",
+    "domain": "calc3",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.legendre",
+      "calc.multi.coordinates_jacobian"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.multi.delta",
+    "label": "The Dirac delta in several variables",
+    "domain": "calc3",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.fundamental_solution",
+      "calc.multi.convolution"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.multi.weak_derivative",
+    "label": "Weak derivatives",
+    "domain": "calc3",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.delta",
+      "calc.multi.green_function"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.multi.sobolev",
+    "label": "Sobolev spaces",
+    "domain": "calc3",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.weak_derivative"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.multi.weak_solution",
+    "label": "Weak solutions of elliptic problems",
+    "domain": "calc3",
+    "subdomain": "calculus.multivariable",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.sobolev",
+      "calc.multi.dirichlet"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "calc.vec.form_integral",
+    "label": "Integrating differential forms",
+    "domain": "calc3",
+    "subdomain": "calculus.vector",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.vec.differential_form",
+      "calc.vec.pullback"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 34.0
+    }
+  },
+  {
+    "id": "calc.vec.stokes_manifold",
+    "label": "Stokes' theorem on manifolds",
+    "domain": "calc3",
+    "subdomain": "calculus.vector",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.vec.form_integral",
+      "calc.vec.general_stokes"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 34.0
+    }
+  },
+  {
+    "id": "calc.vec.de_rham",
+    "label": "The de Rham cohomology",
+    "domain": "calc3",
+    "subdomain": "calculus.vector",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.vec.closed_exact",
+      "calc.vec.stokes_manifold"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 34.0
+    }
+  },
+  {
+    "id": "calc.vec.hodge_star",
+    "label": "The Hodge star operator",
+    "domain": "calc3",
+    "subdomain": "calculus.vector",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.vec.wedge_product",
+      "calc.multi.surface_measure"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 34.0
+    }
+  },
+  {
+    "id": "calc.vec.christoffel",
+    "label": "Christoffel symbols",
+    "domain": "calc3",
+    "subdomain": "calculus.vector",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.multi.surface_measure",
+      "calc.vec.curvature"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 34.0
+    }
+  },
+  {
+    "id": "calc.vec.covariant_derivative",
+    "label": "Covariant derivatives",
+    "domain": "calc3",
+    "subdomain": "calculus.vector",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.vec.christoffel"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 34.0
+    }
+  },
+  {
+    "id": "calc.vec.riemann_tensor",
+    "label": "The Riemann curvature tensor",
+    "domain": "calc3",
+    "subdomain": "calculus.vector",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.vec.covariant_derivative"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 34.0
+    }
+  },
+  {
+    "id": "calc.vec.connection_form",
+    "label": "Connection forms and curvature",
+    "domain": "calc3",
+    "subdomain": "calculus.vector",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.vec.covariant_derivative",
+      "calc.vec.riemann_tensor"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 34.0
+    }
+  },
+  {
+    "id": "calc.adv.gamma_function",
+    "label": "The gamma function and its integral",
+    "domain": "calc3",
+    "subdomain": "calculus.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.gamma",
+      "calc.integral.beta_gamma"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
+  },
+  {
+    "id": "calc.adv.asymptotic",
+    "label": "Asymptotic expansions",
+    "domain": "calc3",
+    "subdomain": "calculus.advanced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "calc.series.stirling",
+      "calc.adv.gamma_function"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 30.0
+    }
   }
 ]

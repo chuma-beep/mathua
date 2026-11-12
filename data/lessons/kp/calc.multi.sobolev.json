@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The Sobolev norm",
+    "section": "The Sobolev norm",
+    "subgoals": [
+      "Sum the derivative norms",
+      "Take the square root",
+      "Recognize the order-zero case"
+    ]
+  },
+  {
+    "label": "Embedding into continuous functions",
+    "section": "Embedding into continuous functions",
+    "subgoals": [
+      "Compare the order with half the dimension",
+      "Check the one-dimensional case",
+      "Check the three-dimensional case"
+    ]
+  },
+  {
+    "label": "A worked norm",
+    "section": "A worked norm",
+    "subgoals": [
+      "Integrate the square",
+      "Integrate the squared derivative",
+      "Add the two contributions"
+    ]
+  }
+]

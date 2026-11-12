@@ -12,19 +12,19 @@ assessed; `3` is a candidate, not a decision. Regenerate with `-band 2` or `-ban
 
 | Metric | Value |
 |---|---|
-| Total concepts | 2895 |
-| Total units | 163 |
+| Total concepts | 2918 |
+| Total units | 164 |
 | Minimum unit size | 1 |
 | Median unit size | 13 |
 | Maximum unit size | 82 |
 | Singleton units | 22 |
-| Units with <= 3 concepts | 37 |
+| Units with <= 3 concepts | 38 |
 | Units with > 25 concepts | 48 |
-| Units with > 50 concepts | 9 |
-| Cross-unit prerequisite edges (derived) | 541 |
+| Units with > 50 concepts | 10 |
+| Cross-unit prerequisite edges (derived) | 545 |
 | Backward band edges | 0 |
 
-If the learner is assessed once per unit, then 163 assessments cover the corpus, and the
+If the learner is assessed once per unit, then 164 assessments cover the corpus, and the
 median is one assessment per 13 concepts. That is the frequency question this report
 exists to make concrete.
 
@@ -61,9 +61,10 @@ exists to make concrete.
 | `calc2.b13` | calc2 | 13 | 2 | 1 | 39–39 |
 | `calc3.b9` | calc3 | 9 | 5 | 1 | 28–29 |
 | `calc3.b10` | calc3 | 10 | 11 | 3 | 30–32 |
-| `calc3.b11` | calc3 | 11 | 26 | 3 | 33–35 |
-| `calc3.b12` | calc3 | 12 | 41 | 6 | 36–38 |
-| `calc3.b13` | calc3 | 13 | 14 | 3 | 39–41 |
+| `calc3.b11` | calc3 | 11 | 28 | 3 | 33–35 |
+| `calc3.b12` | calc3 | 12 | 51 | 6 | 36–38 |
+| `calc3.b13` | calc3 | 13 | 22 | 3 | 39–41 |
+| `calc3.b14` | calc3 | 14 | 3 | 1 | 42–44 |
 | `complex_numbers.b3` | complex_numbers | 3 | 5 | 3 | 10–11 |
 | `complex_numbers.b4` | complex_numbers | 4 | 1 | 1 | 12–12 |
 | `complex_numbers.b6` | complex_numbers | 6 | 1 | 1 | 20–20 |
@@ -209,11 +210,11 @@ at every width.
 
 | Band width | Units | Median | Max | Singletons | <=3 | >25 | Backward |
 |---|---|---|---|---|---|---|---|
-| 2 | 222 | 10 | 56 | 24 | 51 | 30 | 0 |
-| 3 | 163 | 13 | 82 | 22 | 37 | 48 | 0 |
-| 4 | 127 | 19 | 86 | 8 | 22 | 52 | 0 |
+| 2 | 224 | 10 | 56 | 25 | 53 | 31 | 0 |
+| 3 | 164 | 13 | 82 | 22 | 38 | 48 | 0 |
+| 4 | 128 | 19 | 86 | 9 | 23 | 52 | 0 |
 | 5 | 107 | 20 | 104 | 5 | 15 | 48 | 0 |
-| 6 | 98 | 23 | 130 | 7 | 15 | 45 | 0 |
+| 6 | 99 | 23 | 130 | 7 | 16 | 45 | 0 |
 | 8 | 77 | 31 | 117 | 4 | 11 | 42 | 0 |
 | 10 | 65 | 30 | 145 | 2 | 7 | 35 | 0 |
 | 12 | 64 | 38 | 191 | 1 | 6 | 42 | 0 |
@@ -543,7 +544,7 @@ Unresolvable subdomains:
 `trigonometry.identities`
 `trigonometry.spherical`
 
-Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2895
+Concept depth is a proper topological ranking on an acyclic graph, so it resolves all 2918
 concepts and yields zero backward band edges by construction.
 
 ## Validation findings

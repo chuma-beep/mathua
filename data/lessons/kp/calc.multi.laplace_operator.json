@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The sum of second partials",
+    "section": "The sum of second partials",
+    "subgoals": [
+      "Differentiate twice in each variable",
+      "Hold the other variable fixed",
+      "Add the two second derivatives"
+    ]
+  },
+  {
+    "label": "The Laplacian in polar coordinates",
+    "section": "The Laplacian in polar coordinates",
+    "subgoals": [
+      "Write the polar form",
+      "Apply it to a radial function",
+      "Check against the Cartesian result"
+    ]
+  },
+  {
+    "label": "A worked computation",
+    "section": "A worked computation",
+    "subgoals": [
+      "Compute both second derivatives",
+      "Evaluate at the given point",
+      "Confirm a harmonic case"
+    ]
+  }
+]
