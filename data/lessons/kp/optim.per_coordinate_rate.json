@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Diagonal scaling",
+    "section": "The diagonal scaling",
+    "subgoals": [
+      "Scale each coordinate",
+      "Use a coordinate statistic",
+      "Become rescaling invariant"
+    ]
+  },
+  {
+    "label": "Condition number",
+    "section": "The condition number",
+    "subgoals": [
+      "Improve the diagonal case",
+      "Fail under rotation",
+      "Recognise the limit"
+    ]
+  },
+  {
+    "label": "The cost",
+    "section": "The cost",
+    "subgoals": [
+      "Store one statistic",
+      "Keep linear arithmetic",
+      "Accept small overhead"
+    ]
+  }
+]

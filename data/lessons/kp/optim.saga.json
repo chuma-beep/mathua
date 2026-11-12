@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Gradient table",
+    "section": "The gradient table",
+    "subgoals": [
+      "Store one gradient per sample",
+      "Replace one entry per step",
+      "Combine new, old and average"
+    ]
+  },
+  {
+    "label": "The update",
+    "section": "The update",
+    "subgoals": [
+      "Subtract the old entry",
+      "Add the table average",
+      "Update the average incrementally"
+    ]
+  },
+  {
+    "label": "Memory and bias",
+    "section": "Memory and bias",
+    "subgoals": [
+      "Cost one vector per sample",
+      "Stay unbiased at every step",
+      "Converge stored entries"
+    ]
+  }
+]

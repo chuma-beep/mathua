@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Reduced cost",
+    "section": "Too many columns",
+    "subgoals": [
+      "Take the column's cost",
+      "Subtract the priced constraint contributions",
+      "Report the reduced cost"
+    ]
+  },
+  {
+    "label": "Pricing choice",
+    "section": "The pricing problem",
+    "subgoals": [
+      "Compare the reduced costs",
+      "Choose the most negative",
+      "Decide whether any column improves"
+    ]
+  },
+  {
+    "label": "Iteration count",
+    "section": "The restricted master",
+    "subgoals": [
+      "Count the columns added",
+      "Stop when pricing finds none",
+      "Report the number of rounds"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Lifted size",
+    "section": "The lift",
+    "subgoals": [
+      "Count the entries of a symmetric matrix",
+      "Include the diagonal once",
+      "Report the number of variables"
+    ]
+  },
+  {
+    "label": "Trace relation",
+    "section": "Why the relaxation is looser",
+    "subgoals": [
+      "Take the trace of the lifted matrix",
+      "Compare it with the squared norm",
+      "State the identity"
+    ]
+  },
+  {
+    "label": "PSD test",
+    "section": "Recovering a vector",
+    "subgoals": [
+      "Check the leading minors",
+      "Reject a negative minor",
+      "Decide whether the matrix is semidefinite"
+    ]
+  }
+]

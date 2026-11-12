@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Subdifferential sum",
+    "section": "Subdifferentials in KKT",
+    "subgoals": [
+      "List the subgradients of each term",
+      "Add the multiplier terms",
+      "Report the resulting set"
+    ]
+  },
+  {
+    "label": "Inclusion test",
+    "section": "The inclusion",
+    "subgoals": [
+      "Choose one element from each set",
+      "Sum them",
+      "Decide whether zero is reachable"
+    ]
+  },
+  {
+    "label": "Multiplier sign",
+    "section": "Verifying a point",
+    "subgoals": [
+      "Check each active constraint",
+      "Compare its multiplier with zero",
+      "Decide whether the sign condition holds"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "First update",
+    "section": "The split variable",
+    "subgoals": [
+      "Fix the second copy",
+      "Minimise the penalised objective",
+      "Report the new first copy"
+    ]
+  },
+  {
+    "label": "Second update",
+    "section": "The two updates",
+    "subgoals": [
+      "Fix the first copy",
+      "Enforce the constraint with the penalty",
+      "Report the new second copy"
+    ]
+  },
+  {
+    "label": "Residual",
+    "section": "Stopping",
+    "subgoals": [
+      "Subtract the copies",
+      "Take the absolute value",
+      "Report the primal residual"
+    ]
+  }
+]

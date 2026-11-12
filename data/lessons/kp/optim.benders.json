@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Subproblem value",
+    "section": "Complicating variables",
+    "subgoals": [
+      "Fix the master variables",
+      "Solve the continuous subproblem",
+      "Report its optimal value"
+    ]
+  },
+  {
+    "label": "Cut intercept",
+    "section": "The cut",
+    "subgoals": [
+      "Evaluate the dual multipliers",
+      "Subtract the priced terms from the value",
+      "Report the intercept"
+    ]
+  },
+  {
+    "label": "Gap",
+    "section": "The master sequence",
+    "subgoals": [
+      "Compare the master value with the subproblem value",
+      "Subtract the smaller from the larger",
+      "Report the gap"
+    ]
+  }
+]

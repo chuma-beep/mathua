@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Running averages",
+    "section": "Running averages",
+    "subgoals": [
+      "Track squared gradients",
+      "Track squared updates",
+      "Choose the decay"
+    ]
+  },
+  {
+    "label": "The step",
+    "section": "The step",
+    "subgoals": [
+      "Take the root ratio",
+      "Add a stability constant",
+      "Drop the global rate"
+    ]
+  },
+  {
+    "label": "Behaviour",
+    "section": "Behaviour",
+    "subgoals": [
+      "Start cautiously",
+      "Adapt per coordinate",
+      "Reflect seen curvature"
+    ]
+  }
+]

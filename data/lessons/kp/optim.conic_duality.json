@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Dual membership",
+    "section": "The dual cone",
+    "subgoals": [
+      "Take the inner product with each generator",
+      "Check the sign",
+      "Decide whether the vector is in the dual cone"
+    ]
+  },
+  {
+    "label": "Conic bound",
+    "section": "Weak duality for cones",
+    "subgoals": [
+      "Evaluate the dual objective",
+      "Compare with the primal value",
+      "Report the bound"
+    ]
+  },
+  {
+    "label": "Complementary product",
+    "section": "Complementarity",
+    "subgoals": [
+      "Multiply the variable by its slack",
+      "Sum over the cone",
+      "Report the product"
+    ]
+  }
+]

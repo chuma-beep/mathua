@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Regret definition",
+    "section": "The regret definition",
+    "subgoals": [
+      "Sum the loss difference",
+      "Compare with the best fixed point",
+      "Ask for sublinear growth"
+    ]
+  },
+  {
+    "label": "Adaptive bound",
+    "section": "The adaptive bound",
+    "subgoals": [
+      "Use accumulated squares",
+      "Use the step count",
+      "Weight uneven coordinates"
+    ]
+  },
+  {
+    "label": "Reading the bound",
+    "section": "Reading the bound",
+    "subgoals": [
+      "Explain scale tolerance",
+      "Accept log factors",
+      "Depend on the comparator"
+    ]
+  }
+]

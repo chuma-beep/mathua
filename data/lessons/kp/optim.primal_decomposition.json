@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Block count",
+    "section": "Blocks and coupling",
+    "subgoals": [
+      "Count the independent blocks",
+      "Check that each has local variables",
+      "Report the count"
+    ]
+  },
+  {
+    "label": "Coupling rows",
+    "section": "The master problem",
+    "subgoals": [
+      "Count the shared resources",
+      "Add one row per resource",
+      "Report the row count"
+    ]
+  },
+  {
+    "label": "Allocation residual",
+    "section": "Convergence",
+    "subgoals": [
+      "Sum the allocated shares",
+      "Compare with the resource",
+      "Report the residual"
+    ]
+  }
+]

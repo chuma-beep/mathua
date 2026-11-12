@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Epoch length",
+    "section": "Epoch length",
+    "subgoals": [
+      "Fix the inner steps",
+      "Refresh once per pass",
+      "Balance bias and cost"
+    ]
+  },
+  {
+    "label": "The snapshot point",
+    "section": "The snapshot point",
+    "subgoals": [
+      "Take it at the epoch start",
+      "Keep steps small",
+      "Preserve the correction"
+    ]
+  },
+  {
+    "label": "Cost per epoch",
+    "section": "Cost per epoch",
+    "subgoals": [
+      "Pay one full gradient",
+      "Pay a sample per step",
+      "Amortise the pass"
+    ]
+  }
+]

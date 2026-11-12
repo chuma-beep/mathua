@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Averaging rule",
+    "section": "The averaging rule",
+    "subgoals": [
+      "Refresh one entry",
+      "Use the table mean",
+      "Maintain a running sum"
+    ]
+  },
+  {
+    "label": "Bias at the start",
+    "section": "Bias at the start",
+    "subgoals": [
+      "Expect a biased table",
+      "Start with a full pass",
+      "Fill every entry"
+    ]
+  },
+  {
+    "label": "Convergence behaviour",
+    "section": "Convergence behaviour",
+    "subgoals": [
+      "Decrease the step",
+      "Reach a neighbourhood",
+      "Bound the radius"
+    ]
+  }
+]

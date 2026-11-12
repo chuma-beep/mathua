@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Epigraph variables",
+    "section": "The epigraph step",
+    "subgoals": [
+      "Introduce one epigraph variable per quadratic",
+      "Factor the matrix into a square root",
+      "Write the norm bound"
+    ]
+  },
+  {
+    "label": "Rotated membership",
+    "section": "The rotated cone",
+    "subgoals": [
+      "Multiply the two scalars",
+      "Compare with the squared norm",
+      "Decide whether the point is in the rotated cone"
+    ]
+  },
+  {
+    "label": "Exactness test",
+    "section": "When the reformulation is exact",
+    "subgoals": [
+      "Check the smallest eigenvalue",
+      "Reject a negative eigenvalue",
+      "State whether the cone form is exact"
+    ]
+  }
+]

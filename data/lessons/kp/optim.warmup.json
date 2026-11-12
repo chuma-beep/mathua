@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Linear warmup",
+    "section": "Linear warmup",
+    "subgoals": [
+      "Ramp from zero",
+      "Reach the target rate",
+      "Keep the ramp short"
+    ]
+  },
+  {
+    "label": "Why it helps",
+    "section": "Why it helps",
+    "subgoals": [
+      "Settle early statistics",
+      "Avoid large steps",
+      "Moderate the product"
+    ]
+  },
+  {
+    "label": "The cost",
+    "section": "The cost",
+    "subgoals": [
+      "Spend reduced steps",
+      "Avoid long ramps",
+      "Keep a small fraction"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Portfolio risk",
+    "section": "Risk as a norm",
+    "subgoals": [
+      "Multiply the weights by the covariance square root",
+      "Take the norm of the result",
+      "Report the risk"
+    ]
+  },
+  {
+    "label": "Return test",
+    "section": "The return constraint",
+    "subgoals": [
+      "Multiply the weights by expected returns",
+      "Compare with the required return",
+      "Decide whether the portfolio qualifies"
+    ]
+  },
+  {
+    "label": "Frontier comparison",
+    "section": "The efficient frontier",
+    "subgoals": [
+      "Compare risk at equal return",
+      "Compare return at equal risk",
+      "Choose the dominating portfolio"
+    ]
+  }
+]

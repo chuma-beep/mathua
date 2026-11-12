@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Block partial",
+    "section": "One block at a time",
+    "subgoals": [
+      "Fix the other blocks",
+      "Differentiate in one block variable",
+      "Report the partial derivative"
+    ]
+  },
+  {
+    "label": "Block count",
+    "section": "The block gradient",
+    "subgoals": [
+      "Partition the variables",
+      "Count the groups",
+      "Report the number of blocks"
+    ]
+  },
+  {
+    "label": "Sweep count",
+    "section": "Sweep order",
+    "subgoals": [
+      "Count the blocks per sweep",
+      "Count the sweeps",
+      "Report the total block solves"
+    ]
+  }
+]

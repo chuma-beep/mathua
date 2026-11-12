@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Coupled decay",
+    "section": "Coupled decay",
+    "subgoals": [
+      "Add decay to the gradient",
+      "Scale by the denominator",
+      "Lose per-coordinate parity"
+    ]
+  },
+  {
+    "label": "Decoupled decay",
+    "section": "Decoupled decay",
+    "subgoals": [
+      "Shrink the parameters",
+      "Add the adaptive step",
+      "Keep decay uniform"
+    ]
+  },
+  {
+    "label": "The effect",
+    "section": "The effect",
+    "subgoals": [
+      "Agree only when constant",
+      "Differ in general",
+      "Prefer predictable shrinkage"
+    ]
+  }
+]

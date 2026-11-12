@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Size of the bias",
+    "section": "The size of the bias",
+    "subgoals": [
+      "Compute the missing weight",
+      "See it decay with k",
+      "Expect the largest early"
+    ]
+  },
+  {
+    "label": "The correction",
+    "section": "The correction",
+    "subgoals": [
+      "Divide by one minus decay to k",
+      "Correct both moments",
+      "Restore the scale"
+    ]
+  },
+  {
+    "label": "Effect on steps",
+    "section": "The effect on steps",
+    "subgoals": [
+      "Avoid tiny early steps",
+      "Scale the denominator",
+      "Help short runs"
+    ]
+  }
+]

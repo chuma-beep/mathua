@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Residual value",
+    "section": "What a certificate proves",
+    "subgoals": [
+      "Form the stationarity expression",
+      "Substitute the candidate",
+      "Report the residual"
+    ]
+  },
+  {
+    "label": "Sign test",
+    "section": "The residual test",
+    "subgoals": [
+      "Check every multiplier",
+      "Compare with the required sign",
+      "Decide whether dual feasibility holds"
+    ]
+  },
+  {
+    "label": "Certificate decision",
+    "section": "Reading a failure",
+    "subgoals": [
+      "Compare the primal and dual values",
+      "Check the residual",
+      "Decide whether optimality is proved"
+    ]
+  }
+]

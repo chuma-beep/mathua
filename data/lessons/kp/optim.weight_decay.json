@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Penalty view",
+    "section": "The penalty view",
+    "subgoals": [
+      "Add a squared norm",
+      "Get a proportional term",
+      "Depend on scaling"
+    ]
+  },
+  {
+    "label": "Projection view",
+    "section": "The projection view",
+    "subgoals": [
+      "Shrink by a factor",
+      "Ignore the gradient",
+      "Move towards the origin"
+    ]
+  },
+  {
+    "label": "Choosing the strength",
+    "section": "Choosing the strength",
+    "subgoals": [
+      "Set a time scale",
+      "Stay slower than learning",
+      "Finish within the run"
+    ]
+  }
+]

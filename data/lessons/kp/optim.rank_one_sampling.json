@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Term structure",
+    "section": "The term structure",
+    "subgoals": [
+      "Form an outer product",
+      "Touch one row",
+      "Touch one column"
+    ]
+  },
+  {
+    "label": "The step",
+    "section": "The step",
+    "subgoals": [
+      "Apply the sampled gradient",
+      "Leave other blocks fixed",
+      "Keep the update cheap"
+    ]
+  },
+  {
+    "label": "The variance",
+    "section": "The variance",
+    "subgoals": [
+      "Expect skew from coverage",
+      "Weight by norms",
+      "Reduce the spread"
+    ]
+  }
+]

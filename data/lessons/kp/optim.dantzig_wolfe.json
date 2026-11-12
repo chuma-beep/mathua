@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Convex combination",
+    "section": "Extreme points as columns",
+    "subgoals": [
+      "Multiply the extreme points by their weights",
+      "Sum the products",
+      "Check that the weights sum to one"
+    ]
+  },
+  {
+    "label": "Master bound",
+    "section": "The master and pricing",
+    "subgoals": [
+      "Solve the restricted master",
+      "Compare with the best known value",
+      "Report the bound"
+    ]
+  },
+  {
+    "label": "Duality gap",
+    "section": "Reading the bound",
+    "subgoals": [
+      "Subtract the known value from the bound",
+      "Take the absolute value",
+      "Report the gap"
+    ]
+  }
+]

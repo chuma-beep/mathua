@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Batch averaging",
+    "section": "Batch averaging",
+    "subgoals": [
+      "Average independent samples",
+      "Halve the variance",
+      "Drop the deviation by root two"
+    ]
+  },
+  {
+    "label": "Correlated samples",
+    "section": "Correlated samples",
+    "subgoals": [
+      "Account for correlation",
+      "Compute effective size",
+      "Expect slower decay"
+    ]
+  },
+  {
+    "label": "Cost accounting",
+    "section": "Cost accounting",
+    "subgoals": [
+      "Spend one budget",
+      "Produce one direction",
+      "Compare with single steps"
+    ]
+  }
+]

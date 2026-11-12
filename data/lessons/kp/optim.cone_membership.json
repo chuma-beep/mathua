@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Squared norm",
+    "section": "The second-order cone",
+    "subgoals": [
+      "Square each tail entry",
+      "Sum the squares",
+      "Report the squared norm"
+    ]
+  },
+  {
+    "label": "Membership test",
+    "section": "Testing a point",
+    "subgoals": [
+      "Compare the scalar with the norm",
+      "Handle the negative scalar case",
+      "Decide whether the point is in the cone"
+    ]
+  },
+  {
+    "label": "Cone margin",
+    "section": "The boundary",
+    "subgoals": [
+      "Take the norm of the tail",
+      "Subtract it from the scalar",
+      "Report the margin"
+    ]
+  }
+]

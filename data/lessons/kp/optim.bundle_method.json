@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Model value",
+    "section": "The cutting model",
+    "subgoals": [
+      "Evaluate each linear piece",
+      "Take the largest",
+      "Report the model value"
+    ]
+  },
+  {
+    "label": "Bundle size",
+    "section": "The trust region",
+    "subgoals": [
+      "Count the stored subgradients",
+      "Drop the least useful piece",
+      "Report the bundle size"
+    ]
+  },
+  {
+    "label": "Trust step",
+    "section": "The master",
+    "subgoals": [
+      "Minimise the model with the radius",
+      "Check the radius",
+      "Report the proposed point"
+    ]
+  }
+]

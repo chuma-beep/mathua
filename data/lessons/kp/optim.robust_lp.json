@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Worst-case shift",
+    "section": "Uncertainty as a norm ball",
+    "subgoals": [
+      "Compute the norm of the variable",
+      "Multiply by the radius",
+      "Add the nominal left side"
+    ]
+  },
+  {
+    "label": "Radius budget",
+    "section": "The worst case",
+    "subgoals": [
+      "Subtract the nominal value from the bound",
+      "Divide by the norm of the variable",
+      "Report the largest radius that stays feasible"
+    ]
+  },
+  {
+    "label": "Feasibility test",
+    "section": "The robust counterpart",
+    "subgoals": [
+      "Evaluate the worst case",
+      "Compare it with the bound",
+      "Decide whether the point is robustly feasible"
+    ]
+  }
+]

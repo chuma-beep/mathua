@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Diagonal dominance",
+    "section": "Simultaneous updates",
+    "subgoals": [
+      "Sum the off-diagonal magnitudes in a row",
+      "Compare with the diagonal magnitude",
+      "Decide whether the row is dominant"
+    ]
+  },
+  {
+    "label": "Iteration count",
+    "section": "The iteration matrix",
+    "subgoals": [
+      "Apply one sweep",
+      "Check the residual against the tolerance",
+      "Report the number of sweeps"
+    ]
+  },
+  {
+    "label": "Updated value",
+    "section": "Spectral radius",
+    "subgoals": [
+      "Read the previous iterate",
+      "Apply the diagonal update",
+      "Report the new value"
+    ]
+  }
+]

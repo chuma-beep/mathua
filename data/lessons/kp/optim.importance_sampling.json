@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Weighted estimator",
+    "section": "The weighted estimator",
+    "subgoals": [
+      "Weight by p over q",
+      "Keep the expectation",
+      "Lower the variance"
+    ]
+  },
+  {
+    "label": "Choosing the distribution",
+    "section": "Choosing the distribution",
+    "subgoals": [
+      "Put mass on large terms",
+      "Approximate the ideal",
+      "Use norms as proxies"
+    ]
+  },
+  {
+    "label": "The variance trade",
+    "section": "The variance trade",
+    "subgoals": [
+      "Watch effective size",
+      "Clip extreme weights",
+      "Mix with uniform"
+    ]
+  }
+]

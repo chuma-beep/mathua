@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Consensus average",
+    "section": "Local copies",
+    "subgoals": [
+      "Sum the local copies",
+      "Divide by the number of blocks",
+      "Report the average"
+    ]
+  },
+  {
+    "label": "Penalty term",
+    "section": "The consensus penalty",
+    "subgoals": [
+      "Subtract the average from a copy",
+      "Square the difference",
+      "Multiply by the penalty weight"
+    ]
+  },
+  {
+    "label": "Disagreement",
+    "section": "The update order",
+    "subgoals": [
+      "Compute each deviation",
+      "Take the largest absolute deviation",
+      "Report the residual"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Envelope value",
+    "section": "The envelope",
+    "subgoals": [
+      "Compute the proximal image",
+      "Evaluate the original there",
+      "Add the scaled squared distance"
+    ]
+  },
+  {
+    "label": "Envelope gradient",
+    "section": "The gradient",
+    "subgoals": [
+      "Subtract the proximal image from the point",
+      "Divide by the smoothing parameter",
+      "Report the gradient"
+    ]
+  },
+  {
+    "label": "Envelope gap",
+    "section": "The smoothing effect",
+    "subgoals": [
+      "Evaluate the original at the point",
+      "Subtract the envelope value",
+      "Report the gap"
+    ]
+  }
+]

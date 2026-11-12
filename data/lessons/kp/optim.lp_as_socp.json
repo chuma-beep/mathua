@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Slack in the cone",
+    "section": "A linear program in conic form",
+    "subgoals": [
+      "Split each free variable into two nonnegative parts",
+      "Write each slack as a cone entry",
+      "Count the entries the cone needs"
+    ]
+  },
+  {
+    "label": "Scalar membership",
+    "section": "The scalar cone",
+    "subgoals": [
+      "Compare the scalar with the norm of the empty tail",
+      "Check the sign of the scalar",
+      "Decide whether the point is in the cone"
+    ]
+  },
+  {
+    "label": "Reformulation size",
+    "section": "What the reformulation buys",
+    "subgoals": [
+      "Count original constraints",
+      "Add one slack per inequality",
+      "Report the cone dimension"
+    ]
+  }
+]

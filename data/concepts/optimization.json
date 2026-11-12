@@ -1751,5 +1751,867 @@
       "streak": 10,
       "avg_time_seconds": 45.0
     }
+  },
+  {
+    "id": "optim.svrg",
+    "label": "Stochastic variance-reduced gradients",
+    "domain": "optimization",
+    "subdomain": "optimization.variance_reduced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.variance_reduction",
+      "optim.gradient_step"
+    ],
+    "key_prerequisites": [
+      "optim.variance_reduction"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.saga",
+    "label": "The SAGA estimator",
+    "domain": "optimization",
+    "subdomain": "optimization.variance_reduced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.svrg"
+    ],
+    "key_prerequisites": [
+      "optim.svrg"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.sag",
+    "label": "The SAG estimator",
+    "domain": "optimization",
+    "subdomain": "optimization.variance_reduced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.saga"
+    ],
+    "key_prerequisites": [
+      "optim.saga"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.control_variate",
+    "label": "Control variates",
+    "domain": "optimization",
+    "subdomain": "optimization.variance_reduced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.svrg"
+    ],
+    "key_prerequisites": [
+      "optim.svrg"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.importance_sampling",
+    "label": "Importance sampling",
+    "domain": "optimization",
+    "subdomain": "optimization.variance_reduced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.control_variate"
+    ],
+    "key_prerequisites": [
+      "optim.control_variate"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.stratified_sampling",
+    "label": "Stratified sampling",
+    "domain": "optimization",
+    "subdomain": "optimization.variance_reduced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.importance_sampling"
+    ],
+    "key_prerequisites": [
+      "optim.importance_sampling"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.rank_one_sampling",
+    "label": "Rank-one sampling",
+    "domain": "optimization",
+    "subdomain": "optimization.variance_reduced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.importance_sampling"
+    ],
+    "key_prerequisites": [
+      "optim.importance_sampling"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.svrg_epoch",
+    "label": "Snapshots and epochs",
+    "domain": "optimization",
+    "subdomain": "optimization.variance_reduced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.svrg"
+    ],
+    "key_prerequisites": [
+      "optim.svrg"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.gradient_aggregation",
+    "label": "Gradient aggregation",
+    "domain": "optimization",
+    "subdomain": "optimization.variance_reduced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.svrg"
+    ],
+    "key_prerequisites": [
+      "optim.svrg"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.variance_bound",
+    "label": "Bounds on gradient variance",
+    "domain": "optimization",
+    "subdomain": "optimization.variance_reduced",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.variance_reduction"
+    ],
+    "key_prerequisites": [
+      "optim.variance_reduction"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.adadelta",
+    "label": "The Adadelta method",
+    "domain": "optimization",
+    "subdomain": "optimization.adaptive",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.adagrad"
+    ],
+    "key_prerequisites": [
+      "optim.adagrad"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.rmsprop",
+    "label": "RMSProp",
+    "domain": "optimization",
+    "subdomain": "optimization.adaptive",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.adadelta"
+    ],
+    "key_prerequisites": [
+      "optim.adadelta"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.adamw",
+    "label": "AdamW and decoupled weight decay",
+    "domain": "optimization",
+    "subdomain": "optimization.adaptive",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.adam",
+      "optim.adagrad"
+    ],
+    "key_prerequisites": [
+      "optim.adam"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.amsgrad",
+    "label": "AMSGrad and long-term memory",
+    "domain": "optimization",
+    "subdomain": "optimization.adaptive",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.adam"
+    ],
+    "key_prerequisites": [
+      "optim.adam"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.bias_correction",
+    "label": "Bias correction in adaptive methods",
+    "domain": "optimization",
+    "subdomain": "optimization.adaptive",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.adam"
+    ],
+    "key_prerequisites": [
+      "optim.adam"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.learning_rate_decay",
+    "label": "Learning-rate decay",
+    "domain": "optimization",
+    "subdomain": "optimization.adaptive",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.learning_rate_schedule"
+    ],
+    "key_prerequisites": [
+      "optim.learning_rate_schedule"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.warmup",
+    "label": "Learning-rate warmup",
+    "domain": "optimization",
+    "subdomain": "optimization.adaptive",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.learning_rate_schedule"
+    ],
+    "key_prerequisites": [
+      "optim.learning_rate_schedule"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.adaptive_regret",
+    "label": "Regret bounds for adaptive methods",
+    "domain": "optimization",
+    "subdomain": "optimization.adaptive",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.adagrad"
+    ],
+    "key_prerequisites": [
+      "optim.adagrad"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.per_coordinate_rate",
+    "label": "Per-coordinate step sizes",
+    "domain": "optimization",
+    "subdomain": "optimization.adaptive",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.adagrad"
+    ],
+    "key_prerequisites": [
+      "optim.adagrad"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.weight_decay",
+    "label": "Weight decay as a constraint",
+    "domain": "optimization",
+    "subdomain": "optimization.adaptive",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.adamw"
+    ],
+    "key_prerequisites": [
+      "optim.adamw"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.lp_as_socp",
+    "label": "Linear programs as cone programs",
+    "domain": "optimization",
+    "subdomain": "optimization.conic_apps",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.second_order_cone",
+      "optim.lp_standard_form"
+    ],
+    "key_prerequisites": [
+      "optim.second_order_cone"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.qp_as_socp",
+    "label": "Convex quadratics as cone programs",
+    "domain": "optimization",
+    "subdomain": "optimization.conic_apps",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.second_order_cone",
+      "optim.quadratic_program"
+    ],
+    "key_prerequisites": [
+      "optim.second_order_cone"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.robust_lp",
+    "label": "Robust linear programs",
+    "domain": "optimization",
+    "subdomain": "optimization.conic_apps",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.second_order_cone"
+    ],
+    "key_prerequisites": [
+      "optim.second_order_cone"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.portfolio_socp",
+    "label": "Portfolio selection as a cone program",
+    "domain": "optimization",
+    "subdomain": "optimization.conic_apps",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.second_order_cone"
+    ],
+    "key_prerequisites": [
+      "optim.second_order_cone"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.sdp_relaxation",
+    "label": "Semidefinite relaxations",
+    "domain": "optimization",
+    "subdomain": "optimization.conic_apps",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.semidefinite",
+      "optim.quadratic_program"
+    ],
+    "key_prerequisites": [
+      "optim.semidefinite"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.max_cut_sdp",
+    "label": "The max-cut relaxation",
+    "domain": "optimization",
+    "subdomain": "optimization.conic_apps",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.sdp_relaxation"
+    ],
+    "key_prerequisites": [
+      "optim.sdp_relaxation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.matrix_completion",
+    "label": "Matrix completion",
+    "domain": "optimization",
+    "subdomain": "optimization.conic_apps",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.semidefinite"
+    ],
+    "key_prerequisites": [
+      "optim.semidefinite"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.certificate_check",
+    "label": "Checking a dual certificate",
+    "domain": "optimization",
+    "subdomain": "optimization.conic_apps",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.dual_certificate"
+    ],
+    "key_prerequisites": [
+      "optim.dual_certificate"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.conic_duality",
+    "label": "Duality over cones",
+    "domain": "optimization",
+    "subdomain": "optimization.conic_apps",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.conic_program",
+      "optim.weak_duality"
+    ],
+    "key_prerequisites": [
+      "optim.conic_program"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.cone_membership",
+    "label": "Testing cone membership",
+    "domain": "optimization",
+    "subdomain": "optimization.conic_apps",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.second_order_cone"
+    ],
+    "key_prerequisites": [
+      "optim.second_order_cone"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.dual_decomposition",
+    "label": "Dual decomposition",
+    "domain": "optimization",
+    "subdomain": "optimization.decomposition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.decomposition",
+      "optim.lp_dual"
+    ],
+    "key_prerequisites": [
+      "optim.decomposition"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.primal_decomposition",
+    "label": "Primal decomposition",
+    "domain": "optimization",
+    "subdomain": "optimization.decomposition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.dual_decomposition"
+    ],
+    "key_prerequisites": [
+      "optim.dual_decomposition"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.consensus_admm",
+    "label": "Consensus ADMM",
+    "domain": "optimization",
+    "subdomain": "optimization.decomposition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.consensus",
+      "optim.admm"
+    ],
+    "key_prerequisites": [
+      "optim.consensus"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.alternating_direction",
+    "label": "The alternating direction step",
+    "domain": "optimization",
+    "subdomain": "optimization.decomposition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.admm"
+    ],
+    "key_prerequisites": [
+      "optim.admm"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.block_coordinate",
+    "label": "Block coordinate descent",
+    "domain": "optimization",
+    "subdomain": "optimization.decomposition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.decomposition",
+      "optim.coordinate_descent"
+    ],
+    "key_prerequisites": [
+      "optim.decomposition"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.jacobi_iteration",
+    "label": "Jacobi iteration",
+    "domain": "optimization",
+    "subdomain": "optimization.decomposition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.block_coordinate"
+    ],
+    "key_prerequisites": [
+      "optim.block_coordinate"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.gauss_seidel",
+    "label": "Gauss-Seidel iteration",
+    "domain": "optimization",
+    "subdomain": "optimization.decomposition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.block_coordinate"
+    ],
+    "key_prerequisites": [
+      "optim.block_coordinate"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.column_generation",
+    "label": "Column generation",
+    "domain": "optimization",
+    "subdomain": "optimization.decomposition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.decomposition",
+      "optim.lp_sensitivity"
+    ],
+    "key_prerequisites": [
+      "optim.decomposition"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.dantzig_wolfe",
+    "label": "Dantzig-Wolfe decomposition",
+    "domain": "optimization",
+    "subdomain": "optimization.decomposition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.column_generation"
+    ],
+    "key_prerequisites": [
+      "optim.column_generation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.benders",
+    "label": "Benders decomposition",
+    "domain": "optimization",
+    "subdomain": "optimization.decomposition",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.decomposition",
+      "optim.cutting_plane"
+    ],
+    "key_prerequisites": [
+      "optim.decomposition"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.proximal_point",
+    "label": "The proximal point step",
+    "domain": "optimization",
+    "subdomain": "optimization.nonsmooth",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.proximal_operator"
+    ],
+    "key_prerequisites": [
+      "optim.proximal_operator"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.moreau_envelope",
+    "label": "The Moreau envelope",
+    "domain": "optimization",
+    "subdomain": "optimization.nonsmooth",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.proximal_operator"
+    ],
+    "key_prerequisites": [
+      "optim.proximal_operator"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.dual_smoothing",
+    "label": "Smoothing a dual problem",
+    "domain": "optimization",
+    "subdomain": "optimization.nonsmooth",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.nonsmooth_optimality"
+    ],
+    "key_prerequisites": [
+      "optim.nonsmooth_optimality"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.smoothing_parameter",
+    "label": "Choosing a smoothing parameter",
+    "domain": "optimization",
+    "subdomain": "optimization.nonsmooth",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.dual_smoothing"
+    ],
+    "key_prerequisites": [
+      "optim.dual_smoothing"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.huber_loss",
+    "label": "The Huber loss",
+    "domain": "optimization",
+    "subdomain": "optimization.nonsmooth",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.nonsmooth_optimality"
+    ],
+    "key_prerequisites": [
+      "optim.nonsmooth_optimality"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.hinge_loss",
+    "label": "The hinge loss",
+    "domain": "optimization",
+    "subdomain": "optimization.nonsmooth",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.nonsmooth_optimality"
+    ],
+    "key_prerequisites": [
+      "optim.nonsmooth_optimality"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.subgradient_method",
+    "label": "The subgradient method",
+    "domain": "optimization",
+    "subdomain": "optimization.nonsmooth",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.subgradient"
+    ],
+    "key_prerequisites": [
+      "optim.subgradient"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.polyak_step",
+    "label": "The Polyak step size",
+    "domain": "optimization",
+    "subdomain": "optimization.nonsmooth",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.subgradient_method"
+    ],
+    "key_prerequisites": [
+      "optim.subgradient_method"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.bundle_method",
+    "label": "Bundle methods",
+    "domain": "optimization",
+    "subdomain": "optimization.nonsmooth",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.nonsmooth_optimality"
+    ],
+    "key_prerequisites": [
+      "optim.nonsmooth_optimality"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
+  },
+  {
+    "id": "optim.nonsmooth_kkt",
+    "label": "KKT conditions without smoothness",
+    "domain": "optimization",
+    "subdomain": "optimization.nonsmooth",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "optim.nonsmooth_optimality",
+      "optim.kkt"
+    ],
+    "key_prerequisites": [
+      "optim.nonsmooth_optimality"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 45.0
+    }
   }
 ]

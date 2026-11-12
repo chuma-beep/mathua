@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Observation count",
+    "section": "Observed entries",
+    "subgoals": [
+      "Count the known positions",
+      "Compare with the matrix size",
+      "Report the fraction observed"
+    ]
+  },
+  {
+    "label": "Nuclear norm of a diagonal",
+    "section": "The nuclear-norm proxy",
+    "subgoals": [
+      "Take absolute values of the diagonal",
+      "Sum them",
+      "Report the norm"
+    ]
+  },
+  {
+    "label": "Rank test",
+    "section": "Recovery conditions",
+    "subgoals": [
+      "Count the nonzero singular values",
+      "Compare with the target rank",
+      "Decide whether the matrix is low rank"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Step decay",
+    "section": "Step decay",
+    "subgoals": [
+      "Pick milestones",
+      "Multiply by a factor",
+      "Accept abrupt drops"
+    ]
+  },
+  {
+    "label": "Polynomial decay",
+    "section": "Polynomial decay",
+    "subgoals": [
+      "Choose an exponent",
+      "Follow a power law",
+      "Match the proof"
+    ]
+  },
+  {
+    "label": "Exponential decay",
+    "section": "Exponential decay",
+    "subgoals": [
+      "Decay each epoch",
+      "Reach the target",
+      "Set a floor"
+    ]
+  }
+]

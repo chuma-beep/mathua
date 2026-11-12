@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Prox of a quadratic",
+    "section": "The proximal step",
+    "subgoals": [
+      "Add the quadratic to the distance penalty",
+      "Set the derivative to zero",
+      "Report the new point"
+    ]
+  },
+  {
+    "label": "Fixed point test",
+    "section": "The fixed point",
+    "subgoals": [
+      "Apply the proximal map",
+      "Compare the result with the input",
+      "Decide whether the point is stationary"
+    ]
+  },
+  {
+    "label": "Step count",
+    "section": "Choosing the step",
+    "subgoals": [
+      "Apply the map repeatedly",
+      "Stop when the change is below the tolerance",
+      "Report the number of steps"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Huber value",
+    "section": "Quadratic near zero",
+    "subgoals": [
+      "Compute the residual",
+      "Compare with the threshold",
+      "Report the loss"
+    ]
+  },
+  {
+    "label": "Huber slope",
+    "section": "Linear in the tail",
+    "subgoals": [
+      "Check the residual size",
+      "Choose the quadratic or linear branch",
+      "Report the derivative"
+    ]
+  },
+  {
+    "label": "Threshold choice",
+    "section": "The transition point",
+    "subgoals": [
+      "Set the threshold",
+      "Compare with the residual scale",
+      "Report the fraction inside"
+    ]
+  }
+]

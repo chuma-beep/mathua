@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The maximum",
+    "section": "The maximum",
+    "subgoals": [
+      "Keep the largest second moment",
+      "Never decrease it",
+      "Prevent step growth"
+    ]
+  },
+  {
+    "label": "The consequence",
+    "section": "The consequence",
+    "subgoals": [
+      "Make steps non-increasing",
+      "Recover convergence",
+      "Accept slower response"
+    ]
+  },
+  {
+    "label": "When it matters",
+    "section": "When it matters",
+    "subgoals": [
+      "Expect sparse settings",
+      "Expect sharp scale changes",
+      "Agree on smooth problems"
+    ]
+  }
+]

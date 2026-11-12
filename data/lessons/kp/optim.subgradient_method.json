@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Step size",
+    "section": "The step rule",
+    "subgoals": [
+      "Choose the step rule",
+      "Divide by the iteration count",
+      "Report the step"
+    ]
+  },
+  {
+    "label": "Next iterate",
+    "section": "Diminishing steps",
+    "subgoals": [
+      "Pick a subgradient",
+      "Subtract the scaled subgradient",
+      "Report the new point"
+    ]
+  },
+  {
+    "label": "Rate factor",
+    "section": "The convergence rate",
+    "subgoals": [
+      "Take the square root of the iteration count",
+      "Divide the initial distance by it",
+      "Report the bound"
+    ]
+  }
+]

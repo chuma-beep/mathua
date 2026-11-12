@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Smoothed value",
+    "section": "Why the dual is rough",
+    "subgoals": [
+      "Evaluate the rough dual",
+      "Add the smoothing term",
+      "Report the value"
+    ]
+  },
+  {
+    "label": "Entropy term",
+    "section": "The smoothing term",
+    "subgoals": [
+      "Compute the probabilities",
+      "Take the weighted logarithms",
+      "Multiply by the temperature"
+    ]
+  },
+  {
+    "label": "Error bound",
+    "section": "The temperature",
+    "subgoals": [
+      "Compare the smoothed and rough values",
+      "Divide by the smoothing parameter",
+      "Report the bound factor"
+    ]
+  }
+]

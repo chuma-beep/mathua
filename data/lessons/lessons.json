@@ -8398,5 +8398,205 @@
   {
     "concept_id": "optim.nonsmooth_optimality",
     "source": "authored/optim.nonsmooth_optimality.md"
+  },
+  {
+    "concept_id": "optim.svrg",
+    "source": "authored/optim.svrg.md"
+  },
+  {
+    "concept_id": "optim.saga",
+    "source": "authored/optim.saga.md"
+  },
+  {
+    "concept_id": "optim.sag",
+    "source": "authored/optim.sag.md"
+  },
+  {
+    "concept_id": "optim.control_variate",
+    "source": "authored/optim.control_variate.md"
+  },
+  {
+    "concept_id": "optim.importance_sampling",
+    "source": "authored/optim.importance_sampling.md"
+  },
+  {
+    "concept_id": "optim.stratified_sampling",
+    "source": "authored/optim.stratified_sampling.md"
+  },
+  {
+    "concept_id": "optim.rank_one_sampling",
+    "source": "authored/optim.rank_one_sampling.md"
+  },
+  {
+    "concept_id": "optim.svrg_epoch",
+    "source": "authored/optim.svrg_epoch.md"
+  },
+  {
+    "concept_id": "optim.gradient_aggregation",
+    "source": "authored/optim.gradient_aggregation.md"
+  },
+  {
+    "concept_id": "optim.variance_bound",
+    "source": "authored/optim.variance_bound.md"
+  },
+  {
+    "concept_id": "optim.adadelta",
+    "source": "authored/optim.adadelta.md"
+  },
+  {
+    "concept_id": "optim.rmsprop",
+    "source": "authored/optim.rmsprop.md"
+  },
+  {
+    "concept_id": "optim.adamw",
+    "source": "authored/optim.adamw.md"
+  },
+  {
+    "concept_id": "optim.amsgrad",
+    "source": "authored/optim.amsgrad.md"
+  },
+  {
+    "concept_id": "optim.bias_correction",
+    "source": "authored/optim.bias_correction.md"
+  },
+  {
+    "concept_id": "optim.learning_rate_decay",
+    "source": "authored/optim.learning_rate_decay.md"
+  },
+  {
+    "concept_id": "optim.warmup",
+    "source": "authored/optim.warmup.md"
+  },
+  {
+    "concept_id": "optim.adaptive_regret",
+    "source": "authored/optim.adaptive_regret.md"
+  },
+  {
+    "concept_id": "optim.per_coordinate_rate",
+    "source": "authored/optim.per_coordinate_rate.md"
+  },
+  {
+    "concept_id": "optim.weight_decay",
+    "source": "authored/optim.weight_decay.md"
+  },
+  {
+    "concept_id": "optim.lp_as_socp",
+    "source": "authored/optim.lp_as_socp.md"
+  },
+  {
+    "concept_id": "optim.qp_as_socp",
+    "source": "authored/optim.qp_as_socp.md"
+  },
+  {
+    "concept_id": "optim.robust_lp",
+    "source": "authored/optim.robust_lp.md"
+  },
+  {
+    "concept_id": "optim.portfolio_socp",
+    "source": "authored/optim.portfolio_socp.md"
+  },
+  {
+    "concept_id": "optim.sdp_relaxation",
+    "source": "authored/optim.sdp_relaxation.md"
+  },
+  {
+    "concept_id": "optim.max_cut_sdp",
+    "source": "authored/optim.max_cut_sdp.md"
+  },
+  {
+    "concept_id": "optim.matrix_completion",
+    "source": "authored/optim.matrix_completion.md"
+  },
+  {
+    "concept_id": "optim.certificate_check",
+    "source": "authored/optim.certificate_check.md"
+  },
+  {
+    "concept_id": "optim.conic_duality",
+    "source": "authored/optim.conic_duality.md"
+  },
+  {
+    "concept_id": "optim.cone_membership",
+    "source": "authored/optim.cone_membership.md"
+  },
+  {
+    "concept_id": "optim.dual_decomposition",
+    "source": "authored/optim.dual_decomposition.md"
+  },
+  {
+    "concept_id": "optim.primal_decomposition",
+    "source": "authored/optim.primal_decomposition.md"
+  },
+  {
+    "concept_id": "optim.consensus_admm",
+    "source": "authored/optim.consensus_admm.md"
+  },
+  {
+    "concept_id": "optim.alternating_direction",
+    "source": "authored/optim.alternating_direction.md"
+  },
+  {
+    "concept_id": "optim.block_coordinate",
+    "source": "authored/optim.block_coordinate.md"
+  },
+  {
+    "concept_id": "optim.jacobi_iteration",
+    "source": "authored/optim.jacobi_iteration.md"
+  },
+  {
+    "concept_id": "optim.gauss_seidel",
+    "source": "authored/optim.gauss_seidel.md"
+  },
+  {
+    "concept_id": "optim.column_generation",
+    "source": "authored/optim.column_generation.md"
+  },
+  {
+    "concept_id": "optim.dantzig_wolfe",
+    "source": "authored/optim.dantzig_wolfe.md"
+  },
+  {
+    "concept_id": "optim.benders",
+    "source": "authored/optim.benders.md"
+  },
+  {
+    "concept_id": "optim.proximal_point",
+    "source": "authored/optim.proximal_point.md"
+  },
+  {
+    "concept_id": "optim.moreau_envelope",
+    "source": "authored/optim.moreau_envelope.md"
+  },
+  {
+    "concept_id": "optim.dual_smoothing",
+    "source": "authored/optim.dual_smoothing.md"
+  },
+  {
+    "concept_id": "optim.smoothing_parameter",
+    "source": "authored/optim.smoothing_parameter.md"
+  },
+  {
+    "concept_id": "optim.huber_loss",
+    "source": "authored/optim.huber_loss.md"
+  },
+  {
+    "concept_id": "optim.hinge_loss",
+    "source": "authored/optim.hinge_loss.md"
+  },
+  {
+    "concept_id": "optim.subgradient_method",
+    "source": "authored/optim.subgradient_method.md"
+  },
+  {
+    "concept_id": "optim.polyak_step",
+    "source": "authored/optim.polyak_step.md"
+  },
+  {
+    "concept_id": "optim.bundle_method",
+    "source": "authored/optim.bundle_method.md"
+  },
+  {
+    "concept_id": "optim.nonsmooth_kkt",
+    "source": "authored/optim.nonsmooth_kkt.md"
   }
 ]

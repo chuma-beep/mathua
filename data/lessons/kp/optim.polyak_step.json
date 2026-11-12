@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Polyak step",
+    "section": "The unknown optimum",
+    "subgoals": [
+      "Compute the value gap",
+      "Divide by the squared norm",
+      "Report the step"
+    ]
+  },
+  {
+    "label": "Best value",
+    "section": "The step formula",
+    "subgoals": [
+      "Compare the new value with the best",
+      "Keep the smaller",
+      "Report the best value"
+    ]
+  },
+  {
+    "label": "Gap estimate",
+    "section": "The stopping test",
+    "subgoals": [
+      "Subtract the best value from the estimate",
+      "Take the positive part",
+      "Report the gap"
+    ]
+  }
+]

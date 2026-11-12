@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Cut value",
+    "section": "The cut as a quadratic",
+    "subgoals": [
+      "Sum the weights of crossing edges",
+      "Compare the two sides",
+      "Report the cut weight"
+    ]
+  },
+  {
+    "label": "Relaxed bound",
+    "section": "The relaxation",
+    "subgoals": [
+      "Compute the quadratic objective",
+      "Check the unit diagonal",
+      "Report the bound"
+    ]
+  },
+  {
+    "label": "Gap comparison",
+    "section": "The rounding bound",
+    "subgoals": [
+      "Subtract the cut value from the bound",
+      "Divide by the bound",
+      "Report the relative gap"
+    ]
+  }
+]

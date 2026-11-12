@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Bounded second moment",
+    "section": "Bounded second moment",
+    "subgoals": [
+      "Bound the squared norm",
+      "Pick a constant step",
+      "Accept a neighbourhood"
+    ]
+  },
+  {
+    "label": "Bounded variance at the optimum",
+    "section": "Bounded variance at the optimum",
+    "subgoals": [
+      "Bound at the solution",
+      "Shrink the neighbourhood",
+      "Use the smaller constant"
+    ]
+  },
+  {
+    "label": "The relaxation term",
+    "section": "The relaxation term",
+    "subgoals": [
+      "Grow with the norm",
+      "Allow far-field noise",
+      "Keep the local bound"
+    ]
+  }
+]

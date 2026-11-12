@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Error bound",
+    "section": "The accuracy trade",
+    "subgoals": [
+      "Multiply the parameter by the Lipschitz constant",
+      "Divide by the step size",
+      "Report the bound"
+    ]
+  },
+  {
+    "label": "Iteration count",
+    "section": "Choosing one value",
+    "subgoals": [
+      "Estimate the conditioning",
+      "Invert the parameter",
+      "Report the expected count"
+    ]
+  },
+  {
+    "label": "Parameter update",
+    "section": "The schedule",
+    "subgoals": [
+      "Halve the parameter",
+      "Check the stopping rule",
+      "Report the new value"
+    ]
+  }
+]

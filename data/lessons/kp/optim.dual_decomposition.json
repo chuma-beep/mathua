@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Block objective",
+    "section": "Split the objective",
+    "subgoals": [
+      "Fix the shared price",
+      "Minimise the block Lagrangian",
+      "Report the block value"
+    ]
+  },
+  {
+    "label": "Price sum",
+    "section": "The dual price",
+    "subgoals": [
+      "Multiply each shared constraint by its price",
+      "Sum the terms",
+      "Report the total"
+    ]
+  },
+  {
+    "label": "Subproblem count",
+    "section": "Coordinating subproblems",
+    "subgoals": [
+      "Count the blocks",
+      "Check that each block has its own variables",
+      "Report the number of subproblems"
+    ]
+  }
+]

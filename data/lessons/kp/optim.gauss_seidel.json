@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Updated value",
+    "section": "Sequential updates",
+    "subgoals": [
+      "Use the newest values from the current sweep",
+      "Apply the row update",
+      "Report the value"
+    ]
+  },
+  {
+    "label": "Sweep count",
+    "section": "The triangular split",
+    "subgoals": [
+      "Apply sweeps until the residual is small",
+      "Count the sweeps",
+      "Report the count"
+    ]
+  },
+  {
+    "label": "Method ratio",
+    "section": "Comparing with Jacobi",
+    "subgoals": [
+      "Count the Jacobi sweeps",
+      "Count the Gauss-Seidel sweeps",
+      "Report the ratio"
+    ]
+  }
+]

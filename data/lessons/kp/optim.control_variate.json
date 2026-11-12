@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The estimator",
+    "section": "The estimator",
+    "subgoals": [
+      "Subtract the variate",
+      "Add its known mean",
+      "Keep unbiasedness"
+    ]
+  },
+  {
+    "label": "Choosing the coefficient",
+    "section": "Choosing the coefficient",
+    "subgoals": [
+      "Use the covariance ratio",
+      "Estimate from a pilot",
+      "Fix the coefficient"
+    ]
+  },
+  {
+    "label": "The variance reduction",
+    "section": "The variance reduction",
+    "subgoals": [
+      "Square the correlation",
+      "Remove most noise",
+      "Track the part that moves"
+    ]
+  }
+]

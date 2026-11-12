@@ -332,6 +332,7 @@ func Register(reg *generator.Registry) {
 	registerConstrained(reg)
 	registerDiscrete(reg)
 	registerWave12(reg)
+	registerWave13(reg)
 }
 
 func registerFoundations(reg *generator.Registry) {

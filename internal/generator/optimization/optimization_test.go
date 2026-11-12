@@ -49,7 +49,33 @@ var wave12IDs = []string{
 	"optim.trust_region_global", "optim.nonsmooth_optimality",
 }
 
-var allOptimizationIDs = append(append([]string{}, wave11IDs...), wave12IDs...)
+var wave13IDs = []string{
+	"optim.svrg", "optim.saga", "optim.sag", "optim.control_variate",
+	"optim.importance_sampling", "optim.stratified_sampling",
+	"optim.rank_one_sampling", "optim.svrg_epoch", "optim.gradient_aggregation",
+	"optim.variance_bound", "optim.adadelta", "optim.rmsprop", "optim.adamw",
+	"optim.amsgrad", "optim.bias_correction", "optim.learning_rate_decay",
+	"optim.warmup", "optim.adaptive_regret", "optim.per_coordinate_rate",
+	"optim.weight_decay", "optim.lp_as_socp", "optim.qp_as_socp",
+	"optim.robust_lp", "optim.portfolio_socp", "optim.sdp_relaxation",
+	"optim.max_cut_sdp", "optim.matrix_completion", "optim.certificate_check",
+	"optim.conic_duality", "optim.cone_membership", "optim.dual_decomposition",
+	"optim.primal_decomposition", "optim.consensus_admm",
+	"optim.alternating_direction", "optim.block_coordinate",
+	"optim.jacobi_iteration", "optim.gauss_seidel", "optim.column_generation",
+	"optim.dantzig_wolfe", "optim.benders", "optim.proximal_point",
+	"optim.moreau_envelope", "optim.dual_smoothing",
+	"optim.smoothing_parameter", "optim.huber_loss", "optim.hinge_loss",
+	"optim.subgradient_method", "optim.polyak_step", "optim.bundle_method",
+	"optim.nonsmooth_kkt",
+}
+
+// allOptimizationIDs is every concept the package owns, across all three waves.
+var allOptimizationIDs = func() []string {
+	ids := append([]string{}, wave11IDs...)
+	ids = append(ids, wave12IDs...)
+	return append(ids, wave13IDs...)
+}()
 
 func wave11Registry(t *testing.T) *generator.Registry {
 	t.Helper()

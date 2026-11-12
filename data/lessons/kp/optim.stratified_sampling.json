@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The strata",
+    "section": "The strata",
+    "subgoals": [
+      "Sample each stratum",
+      "Weight by share",
+      "Sum within variances"
+    ]
+  },
+  {
+    "label": "Allocation",
+    "section": "Allocation",
+    "subgoals": [
+      "Use proportional allocation",
+      "Use spread-aware allocation",
+      "Fix the budget"
+    ]
+  },
+  {
+    "label": "The gain",
+    "section": "The gain",
+    "subgoals": [
+      "Remove between-group variance",
+      "Separate the strata",
+      "Expect little from overlap"
+    ]
+  }
+]

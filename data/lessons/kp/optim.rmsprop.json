@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The denominator",
+    "section": "The denominator",
+    "subgoals": [
+      "Average squared gradients",
+      "Take the root",
+      "Scale each coordinate"
+    ]
+  },
+  {
+    "label": "The decay",
+    "section": "The decay",
+    "subgoals": [
+      "Choose a long memory",
+      "React to spikes",
+      "Smooth the denominator"
+    ]
+  },
+  {
+    "label": "Comparison with Adagrad",
+    "section": "Comparison with Adagrad",
+    "subgoals": [
+      "Forget old squares",
+      "Avoid a vanishing step",
+      "Keep scaling per coordinate"
+    ]
+  }
+]

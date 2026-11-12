@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Margin",
+    "section": "The margin",
+    "subgoals": [
+      "Take the signed distance",
+      "Check the label",
+      "Report the margin"
+    ]
+  },
+  {
+    "label": "Hinge loss",
+    "section": "The loss value",
+    "subgoals": [
+      "Subtract the margin from one",
+      "Take the positive part",
+      "Report the loss"
+    ]
+  },
+  {
+    "label": "Subgradient",
+    "section": "The subgradient",
+    "subgoals": [
+      "Compare the margin with one",
+      "Choose the slope",
+      "Report the subgradient"
+    ]
+  }
+]

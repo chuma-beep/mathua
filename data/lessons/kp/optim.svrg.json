@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Snapshot correction",
+    "section": "The snapshot correction",
+    "subgoals": [
+      "Subtract the sample snapshot gradient",
+      "Add the full snapshot gradient",
+      "Keep the expectation unchanged"
+    ]
+  },
+  {
+    "label": "Inner loop",
+    "section": "The inner loop",
+    "subgoals": [
+      "Draw one sample",
+      "Apply the corrected step",
+      "Refresh once per pass"
+    ]
+  },
+  {
+    "label": "Variance argument",
+    "section": "The variance argument",
+    "subgoals": [
+      "Cancel in expectation",
+      "Shrink near the snapshot",
+      "Pay sample cost per step"
+    ]
+  }
+]
