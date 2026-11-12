@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The public key",
+    "section": "The public key",
+    "subgoals": [
+      "Choose a generator",
+      "Raise to the private key",
+      "Publish the triple"
+    ]
+  },
+  {
+    "label": "The ciphertext",
+    "section": "The ciphertext",
+    "subgoals": [
+      "Draw an ephemeral exponent",
+      "Form the shared secret",
+      "Mask the message"
+    ]
+  },
+  {
+    "label": "Decryption",
+    "section": "Decryption",
+    "subgoals": [
+      "Raise the first part",
+      "Divide out the secret",
+      "Recover the message"
+    ]
+  }
+]

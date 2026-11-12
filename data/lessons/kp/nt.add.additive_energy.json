@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Form all sums",
+      "Count equal pairs",
+      "Include trivial quadruples"
+    ]
+  },
+  {
+    "label": "Bounds",
+    "section": "Bounds",
+    "subgoals": [
+      "Lower bound",
+      "Upper bound",
+      "Compare the powers"
+    ]
+  },
+  {
+    "label": "Structure",
+    "section": "Structure",
+    "subgoals": [
+      "Force a progression",
+      "State pseudorandomness",
+      "Connect the extremes"
+    ]
+  }
+]

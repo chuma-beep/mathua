@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Count up to n",
+      "Divide by n",
+      "Take the infimum"
+    ]
+  },
+  {
+    "label": "The sumset bound",
+    "section": "The sumset bound",
+    "subgoals": [
+      "Require zero",
+      "Take reciprocals",
+      "Cover all integers"
+    ]
+  },
+  {
+    "label": "Applications",
+    "section": "Applications",
+    "subgoals": [
+      "Sum primes",
+      "Bound the count",
+      "Compare with Vinogradov"
+    ]
+  }
+]

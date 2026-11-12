@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Small doubling",
+    "section": "Small doubling",
+    "subgoals": [
+      "Compare sizes",
+      "Name the constant",
+      "Predict structure"
+    ]
+  },
+  {
+    "label": "The 3k minus 4 bound",
+    "section": "The 3k minus 4 bound",
+    "subgoals": [
+      "Apply the bound",
+      "Bound the interval",
+      "Check sharpness"
+    ]
+  },
+  {
+    "label": "Consequences",
+    "section": "Consequences",
+    "subgoals": [
+      "State the inverse",
+      "Find a progression",
+      "Use the structure"
+    ]
+  }
+]

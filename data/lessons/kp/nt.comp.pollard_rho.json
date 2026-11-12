@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The iteration",
+    "section": "The iteration",
+    "subgoals": [
+      "Square and add",
+      "Reduce modulo n",
+      "Advance the sequence"
+    ]
+  },
+  {
+    "label": "The gcd step",
+    "section": "The gcd step",
+    "subgoals": [
+      "Take a difference",
+      "Compute the gcd",
+      "Test for a factor"
+    ]
+  },
+  {
+    "label": "The expected cost",
+    "section": "The expected cost",
+    "subgoals": [
+      "Take a square root",
+      "Compare with n",
+      "Explain the dependence"
+    ]
+  }
+]

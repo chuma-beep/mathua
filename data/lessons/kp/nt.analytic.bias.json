@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The observation",
+    "section": "The observation",
+    "subgoals": [
+      "Compare two classes",
+      "Count primes to a bound",
+      "Note the small margin"
+    ]
+  },
+  {
+    "label": "The logarithmic density",
+    "section": "The logarithmic density",
+    "subgoals": [
+      "Distinguish density from limit",
+      "State the measure",
+      "Explain the reversal"
+    ]
+  },
+  {
+    "label": "Counting a range",
+    "section": "Counting a range",
+    "subgoals": [
+      "Sieve a finite range",
+      "Split by residue",
+      "Compare the counts"
+    ]
+  }
+]

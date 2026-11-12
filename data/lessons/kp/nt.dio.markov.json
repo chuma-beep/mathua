@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The equation",
+    "section": "The equation",
+    "subgoals": [
+      "Check the base triple",
+      "Fix two entries",
+      "Write the quadratic"
+    ]
+  },
+  {
+    "label": "Vieta jumping",
+    "section": "Vieta jumping",
+    "subgoals": [
+      "Sum the roots",
+      "Subtract the known root",
+      "Verify positivity"
+    ]
+  },
+  {
+    "label": "The tree",
+    "section": "The tree",
+    "subgoals": [
+      "Start at one one one",
+      "Replace one entry",
+      "Generate neighbours"
+    ]
+  }
+]

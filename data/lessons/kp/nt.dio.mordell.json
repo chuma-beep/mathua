@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The curve",
+    "section": "The curve",
+    "subgoals": [
+      "Evaluate the right side",
+      "Check distinct roots",
+      "Identify the curve"
+    ]
+  },
+  {
+    "label": "The discriminant",
+    "section": "The discriminant",
+    "subgoals": [
+      "Cube the constant",
+      "Multiply by twenty-seven",
+      "Include the factor sixteen"
+    ]
+  },
+  {
+    "label": "Integral points",
+    "section": "Integral points",
+    "subgoals": [
+      "State finiteness",
+      "Test small x",
+      "Check the square"
+    ]
+  }
+]

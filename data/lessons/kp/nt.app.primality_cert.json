@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Pratt certificates",
+    "section": "Pratt certificates",
+    "subgoals": [
+      "Exhibit a primitive root",
+      "Factor p minus one",
+      "Recurse on factors"
+    ]
+  },
+  {
+    "label": "Certificate size",
+    "section": "Certificate size",
+    "subgoals": [
+      "Count prime factors",
+      "Count multiplicity",
+      "Compare smooth and rough cases"
+    ]
+  },
+  {
+    "label": "Verification",
+    "section": "Verification",
+    "subgoals": [
+      "Check the order",
+      "Verify a factor",
+      "Bound the work"
+    ]
+  }
+]

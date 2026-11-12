@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Characters",
+    "section": "Characters",
+    "subgoals": [
+      "Count the characters",
+      "Identify the principal one",
+      "Test periodicity"
+    ]
+  },
+  {
+    "label": "The principal character",
+    "section": "The principal character",
+    "subgoals": [
+      "Compare with zeta",
+      "List the missing primes",
+      "Count distinct factors"
+    ]
+  },
+  {
+    "label": "Nonvanishing at one",
+    "section": "Nonvanishing at one",
+    "subgoals": [
+      "State the theorem",
+      "Connect to progressions",
+      "Explain the role of the twist"
+    ]
+  }
+]

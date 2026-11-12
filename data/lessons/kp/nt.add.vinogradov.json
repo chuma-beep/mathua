@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The statement",
+    "section": "The statement",
+    "subgoals": [
+      "State the parity",
+      "Name the bound",
+      "Compare with Goldbach"
+    ]
+  },
+  {
+    "label": "The method",
+    "section": "The method",
+    "subgoals": [
+      "Split major and minor arcs",
+      "Estimate the minor arcs",
+      "Extract the main term"
+    ]
+  },
+  {
+    "label": "Small cases",
+    "section": "Small cases",
+    "subgoals": [
+      "Find the first odd case",
+      "Check a representation",
+      "Explain the gap"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The family",
+    "section": "The family",
+    "subgoals": [
+      "Choose a prime",
+      "Choose a and b",
+      "Reduce twice"
+    ]
+  },
+  {
+    "label": "Collision probability",
+    "section": "Collision probability",
+    "subgoals": [
+      "Fix two keys",
+      "Count colliding parameters",
+      "Divide by the family size"
+    ]
+  },
+  {
+    "label": "Choosing parameters",
+    "section": "Choosing parameters",
+    "subgoals": [
+      "Bound the keys",
+      "Count the pairs",
+      "Sample uniformly"
+    ]
+  }
+]

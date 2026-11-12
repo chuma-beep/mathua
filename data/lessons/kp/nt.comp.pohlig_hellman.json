@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The reduction",
+    "section": "The reduction",
+    "subgoals": [
+      "Factor the order",
+      "Solve each component",
+      "Combine residues"
+    ]
+  },
+  {
+    "label": "The cost",
+    "section": "The cost",
+    "subgoals": [
+      "Find the largest factor",
+      "Compare with the order",
+      "Explain smoothness"
+    ]
+  },
+  {
+    "label": "The defence",
+    "section": "The defence",
+    "subgoals": [
+      "Choose a large prime factor",
+      "Reject smooth orders",
+      "Justify the size"
+    ]
+  }
+]

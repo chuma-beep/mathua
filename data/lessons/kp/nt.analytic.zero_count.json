@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The counting function",
+    "section": "The counting function",
+    "subgoals": [
+      "State the leading term",
+      "Separate the logarithm",
+      "Interpret the density"
+    ]
+  },
+  {
+    "label": "A tractable height",
+    "section": "A tractable height",
+    "subgoals": [
+      "Choose a multiple of two pi",
+      "Simplify the factor",
+      "Evaluate the leading count"
+    ]
+  },
+  {
+    "label": "Trivial zeros",
+    "section": "Trivial zeros",
+    "subgoals": [
+      "Locate the sequence",
+      "Count up to a bound",
+      "Compare with the nontrivial density"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The integral",
+    "section": "The integral",
+    "subgoals": [
+      "Write the exponential sum",
+      "Integrate over the circle",
+      "Read the count"
+    ]
+  },
+  {
+    "label": "Major and minor arcs",
+    "section": "Major and minor arcs",
+    "subgoals": [
+      "Choose small denominators",
+      "Bound the rest",
+      "Add the contributions"
+    ]
+  },
+  {
+    "label": "The singular series",
+    "section": "The singular series",
+    "subgoals": [
+      "Factor over primes",
+      "Name the series",
+      "Evaluate a local factor"
+    ]
+  }
+]

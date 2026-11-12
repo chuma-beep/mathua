@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Beyond the series",
+    "section": "Beyond the series",
+    "subgoals": [
+      "Name the pole",
+      "State the residue",
+      "Separate series from continuation"
+    ]
+  },
+  {
+    "label": "Values at negative integers",
+    "section": "Values at negative integers",
+    "subgoals": [
+      "Use a Bernoulli number",
+      "Read the denominator",
+      "Check the sign"
+    ]
+  },
+  {
+    "label": "Trivial zeros",
+    "section": "Trivial zeros",
+    "subgoals": [
+      "Locate a trivial zero",
+      "Blame the gamma factor",
+      "Count zeros up to a height"
+    ]
+  }
+]

@@ -5,8 +5,8 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 2350,
-  "unit_count": 153,
+  "concept_count": 2400,
+  "unit_count": 154,
   "units": [
     {
       "id": "abstract_algebra.b6",
@@ -2880,10 +2880,19 @@
       "depth_min": 9,
       "depth_max": 11,
       "subdomains": [
+        "number_theory.additive",
         "number_theory.advanced",
-        "number_theory.basics"
+        "number_theory.applications",
+        "number_theory.basics",
+        "number_theory.computational"
       ],
       "concept_ids": [
+        "nt.add.additive_bases",
+        "nt.add.additive_energy",
+        "nt.add.cauchy_davenport",
+        "nt.add.freiman",
+        "nt.add.sumsets",
+        "nt.add.vinogradov",
         "nt.adv.aliquot",
         "nt.adv.bertrand",
         "nt.adv.consecutive_sums",
@@ -2900,6 +2909,9 @@
         "nt.adv.repunit",
         "nt.adv.twin_primes",
         "nt.adv.valuation",
+        "nt.app.checksum",
+        "nt.app.reed_solomon",
+        "nt.app.universal_hashing",
         "nt.base.convert",
         "nt.basics.congruence",
         "nt.basics.digital_root",
@@ -2907,12 +2919,13 @@
         "nt.basics.mod_power",
         "nt.basics.modular",
         "nt.basics.prime_inf",
+        "nt.comp.trial_division",
         "nt.congruence.linear",
         "nt.divisor.count",
         "nt.divisor.sum",
         "nt.prime.exponent"
       ],
-      "concept_count": 27
+      "concept_count": 37
     },
     {
       "id": "number_theory.b4",
@@ -2922,12 +2935,17 @@
       "depth_min": 12,
       "depth_max": 14,
       "subdomains": [
+        "number_theory.additive",
         "number_theory.advanced",
         "number_theory.analytic",
         "number_theory.applications",
-        "number_theory.basics"
+        "number_theory.basics",
+        "number_theory.computational",
+        "number_theory.diophantine"
       ],
       "concept_ids": [
+        "nt.add.circle_method",
+        "nt.add.schnirelmann",
         "nt.adv.amicable",
         "nt.adv.arithmetic_functions",
         "nt.adv.carmichael_function",
@@ -2940,8 +2958,12 @@
         "nt.adv.perfect_numbers",
         "nt.adv.quadratic_reciprocity",
         "nt.adv.wilson",
+        "nt.analytic.mertens",
         "nt.analytic.prime_number_theorem",
         "nt.app.crypto",
+        "nt.app.primality_cert",
+        "nt.app.rsa_keygen",
+        "nt.app.secret_sharing",
         "nt.basics.bezout",
         "nt.basics.crt",
         "nt.basics.decimal_period",
@@ -2949,10 +2971,15 @@
         "nt.basics.fta",
         "nt.basics.mod_inverse",
         "nt.basics.order_mod",
+        "nt.comp.aks",
+        "nt.comp.pollard_rho",
+        "nt.dio.abc",
+        "nt.dio.fermat_last",
+        "nt.dio.frobenius",
         "nt.pythagorean.hypotenuse",
         "nt.residue.count"
       ],
-      "concept_count": 23
+      "concept_count": 34
     },
     {
       "id": "number_theory.b5",
@@ -2962,11 +2989,16 @@
       "depth_min": 15,
       "depth_max": 17,
       "subdomains": [
+        "number_theory.additive",
         "number_theory.advanced",
         "number_theory.analytic",
-        "number_theory.applications"
+        "number_theory.applications",
+        "number_theory.computational",
+        "number_theory.diophantine"
       ],
       "concept_ids": [
+        "nt.add.goldbach_count",
+        "nt.add.partitions",
         "nt.adv.chebyshev",
         "nt.adv.class_number",
         "nt.adv.continued_fractions",
@@ -2984,23 +3016,68 @@
         "nt.adv.quadratic_forms",
         "nt.adv.sieve",
         "nt.adv.two_squares",
+        "nt.analytic.abel",
+        "nt.analytic.continuation",
+        "nt.analytic.dirichlet_series",
+        "nt.analytic.euler_product",
+        "nt.analytic.functional_equation",
         "nt.analytic.zeta",
-        "nt.app.key_exchange"
+        "nt.app.factorization",
+        "nt.app.key_exchange",
+        "nt.comp.bsgs",
+        "nt.comp.cf_factor",
+        "nt.comp.lll",
+        "nt.comp.nfs",
+        "nt.comp.pratt",
+        "nt.comp.quadratic_sieve",
+        "nt.dio.catalan",
+        "nt.dio.markov",
+        "nt.dio.three_squares",
+        "nt.dio.waring"
       ],
-      "concept_count": 19
+      "concept_count": 37
     },
     {
       "id": "number_theory.b6",
       "title": "Number Theory · Stage 7",
       "domain": "number_theory",
       "band": 6,
-      "depth_min": 20,
+      "depth_min": 18,
       "depth_max": 20,
       "subdomains": [
-        "number_theory.advanced"
+        "number_theory.advanced",
+        "number_theory.analytic",
+        "number_theory.applications",
+        "number_theory.computational",
+        "number_theory.diophantine"
       ],
       "concept_ids": [
-        "nt.adv.diophantine"
+        "nt.adv.diophantine",
+        "nt.analytic.dirichlet_l",
+        "nt.analytic.explicit_formula",
+        "nt.analytic.zero_count",
+        "nt.app.ecc",
+        "nt.app.elgamal",
+        "nt.app.zero_knowledge",
+        "nt.comp.pohlig_hellman",
+        "nt.dio.four_cubes",
+        "nt.dio.mordell",
+        "nt.dio.taxicab"
+      ],
+      "concept_count": 11
+    },
+    {
+      "id": "number_theory.b7",
+      "title": "Number Theory · Stage 8",
+      "domain": "number_theory",
+      "band": 7,
+      "depth_min": 21,
+      "depth_max": 21,
+      "subdomains": [
+        "number_theory.analytic"
+      ],
+      "concept_ids": [
+        "nt.analytic.bias"
       ],
       "concept_count": 1
     },

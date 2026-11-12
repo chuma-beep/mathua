@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The split",
+    "section": "The split",
+    "subgoals": [
+      "Take the square root",
+      "Write i m plus j",
+      "Separate the unknowns"
+    ]
+  },
+  {
+    "label": "The tables",
+    "section": "The tables",
+    "subgoals": [
+      "Build baby steps",
+      "Build giant steps",
+      "Match an entry"
+    ]
+  },
+  {
+    "label": "The cost",
+    "section": "The cost",
+    "subgoals": [
+      "Count time",
+      "Count memory",
+      "Compare with brute force"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The identity",
+    "section": "The identity",
+    "subgoals": [
+      "Raise the polynomial",
+      "Reduce modulo n",
+      "Check a range of shifts"
+    ]
+  },
+  {
+    "label": "The modulus",
+    "section": "The modulus",
+    "subgoals": [
+      "Choose r",
+      "Reduce the degree",
+      "Bound the checks"
+    ]
+  },
+  {
+    "label": "The cost",
+    "section": "The cost",
+    "subgoals": [
+      "State the exponent",
+      "Compare with Miller-Rabin",
+      "Explain the tradeoff"
+    ]
+  }
+]

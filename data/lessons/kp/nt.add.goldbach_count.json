@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The count",
+    "section": "The count",
+    "subgoals": [
+      "List prime pairs",
+      "Remove order",
+      "Count the pairs"
+    ]
+  },
+  {
+    "label": "Small values",
+    "section": "Small values",
+    "subgoals": [
+      "Test a small even",
+      "Test the next",
+      "Compare the counts"
+    ]
+  },
+  {
+    "label": "The asymptotic",
+    "section": "The asymptotic",
+    "subgoals": [
+      "Name the method",
+      "Write the series",
+      "Explain the gap"
+    ]
+  }
+]

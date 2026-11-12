@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Two cubes",
+    "section": "Two cubes",
+    "subgoals": [
+      "Cube the pair",
+      "Add the cubes",
+      "Recognise the number"
+    ]
+  },
+  {
+    "label": "Three ways",
+    "section": "Three ways",
+    "subgoals": [
+      "Count representations",
+      "State the smallest",
+      "Compare growth"
+    ]
+  },
+  {
+    "label": "Checking a representation",
+    "section": "Checking a representation",
+    "subgoals": [
+      "Compute both cubes",
+      "Add",
+      "Compare with the bound"
+    ]
+  }
+]

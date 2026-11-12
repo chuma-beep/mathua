@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Commit and challenge",
+    "section": "Commit and challenge",
+    "subgoals": [
+      "Commit to a random value",
+      "Answer the challenge",
+      "Check the relation"
+    ]
+  },
+  {
+    "label": "Soundness error",
+    "section": "Soundness error",
+    "subgoals": [
+      "Compute one-round error",
+      "Repeat independently",
+      "Multiply the errors"
+    ]
+  },
+  {
+    "label": "Repetition count",
+    "section": "Repetition count",
+    "subgoals": [
+      "Choose a target exponent",
+      "Count repetitions",
+      "Compare with the bound"
+    ]
+  }
+]

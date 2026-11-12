@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The obstruction",
+    "section": "The obstruction",
+    "subgoals": [
+      "List cube residues",
+      "Sum four of them",
+      "Identify the missing classes"
+    ]
+  },
+  {
+    "label": "Small solutions",
+    "section": "Small solutions",
+    "subgoals": [
+      "Cube each term",
+      "Add with signs",
+      "Check the target"
+    ]
+  },
+  {
+    "label": "The open problem",
+    "section": "The open problem",
+    "subgoals": [
+      "State the conjecture",
+      "Compare three cubes",
+      "Explain the obstruction"
+    ]
+  }
+]

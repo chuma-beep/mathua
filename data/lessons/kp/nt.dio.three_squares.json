@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The theorem",
+    "section": "The theorem",
+    "subgoals": [
+      "State the excluded form",
+      "Divide out powers of four",
+      "Decide representability"
+    ]
+  },
+  {
+    "label": "The obstruction",
+    "section": "The obstruction",
+    "subgoals": [
+      "Reduce modulo eight",
+      "List square residues",
+      "Sum three of them"
+    ]
+  },
+  {
+    "label": "Descent",
+    "section": "Descent",
+    "subgoals": [
+      "Assume divisibility by four",
+      "Show all roots are even",
+      "Divide and repeat"
+    ]
+  }
+]

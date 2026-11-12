@@ -118,7 +118,7 @@
   },
   {
     "id": "nt.basics.bezout",
-    "label": "Bézout's identity",
+    "label": "B\u00e9zout's identity",
     "domain": "number_theory",
     "subdomain": "number_theory.basics",
     "grading_type": "numeric",
@@ -232,7 +232,7 @@
   },
   {
     "id": "nt.adv.mobius",
-    "label": "Möbius function and inversion",
+    "label": "M\u00f6bius function and inversion",
     "domain": "number_theory",
     "subdomain": "number_theory.advanced",
     "grading_type": "numeric",
@@ -1011,6 +1011,720 @@
     "mastery_threshold": {
       "streak": 10,
       "avg_time_seconds": 22.0
+    }
+  },
+  {
+    "id": "nt.analytic.dirichlet_series",
+    "label": "Dirichlet series of arithmetic functions",
+    "domain": "number_theory",
+    "subdomain": "number_theory.analytic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.arithmetic_functions"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.analytic.euler_product",
+    "label": "The Euler product",
+    "domain": "number_theory",
+    "subdomain": "number_theory.analytic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.analytic.dirichlet_series"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.analytic.continuation",
+    "label": "Continuing the zeta function",
+    "domain": "number_theory",
+    "subdomain": "number_theory.analytic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.analytic.zeta"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.analytic.functional_equation",
+    "label": "The zeta functional equation",
+    "domain": "number_theory",
+    "subdomain": "number_theory.analytic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.analytic.continuation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.analytic.zero_count",
+    "label": "Counting zeta zeros",
+    "domain": "number_theory",
+    "subdomain": "number_theory.analytic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.analytic.functional_equation"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.analytic.explicit_formula",
+    "label": "The explicit formula",
+    "domain": "number_theory",
+    "subdomain": "number_theory.analytic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.analytic.zero_count",
+      "nt.adv.chebyshev"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.analytic.mertens",
+    "label": "Mertens theorems",
+    "domain": "number_theory",
+    "subdomain": "number_theory.analytic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.mobius"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.analytic.abel",
+    "label": "Abel summation",
+    "domain": "number_theory",
+    "subdomain": "number_theory.analytic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.arithmetic_functions"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.analytic.dirichlet_l",
+    "label": "Dirichlet L-functions",
+    "domain": "number_theory",
+    "subdomain": "number_theory.analytic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.dirichlet",
+      "nt.analytic.explicit_formula"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.analytic.bias",
+    "label": "Chebyshev's bias",
+    "domain": "number_theory",
+    "subdomain": "number_theory.analytic",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.analytic.dirichlet_l",
+      "nt.adv.prime_counting"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.app.rsa_keygen",
+    "label": "RSA key generation",
+    "domain": "number_theory",
+    "subdomain": "number_theory.applications",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.app.crypto",
+      "nt.adv.euler_phi"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.app.elgamal",
+    "label": "ElGamal encryption",
+    "domain": "number_theory",
+    "subdomain": "number_theory.applications",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.app.key_exchange",
+      "nt.adv.primitive_root"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.app.secret_sharing",
+    "label": "Shamir secret sharing",
+    "domain": "number_theory",
+    "subdomain": "number_theory.applications",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.basics.mod_inverse",
+      "nt.basics.crt"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.app.checksum",
+    "label": "Modular checksums",
+    "domain": "number_theory",
+    "subdomain": "number_theory.applications",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.basics.modular"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.app.zero_knowledge",
+    "label": "Zero-knowledge proofs",
+    "domain": "number_theory",
+    "subdomain": "number_theory.applications",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.app.elgamal"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.app.ecc",
+    "label": "Elliptic curve cryptography",
+    "domain": "number_theory",
+    "subdomain": "number_theory.applications",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.elliptic_curve",
+      "nt.basics.mod_inverse"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.app.primality_cert",
+    "label": "Primality certificates",
+    "domain": "number_theory",
+    "subdomain": "number_theory.applications",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.miller_rabin"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.app.reed_solomon",
+    "label": "Reed-Solomon error correction",
+    "domain": "number_theory",
+    "subdomain": "number_theory.applications",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.basics.modular",
+      "nt.app.checksum"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.app.factorization",
+    "label": "Factorisation algorithms",
+    "domain": "number_theory",
+    "subdomain": "number_theory.applications",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.sieve",
+      "nt.basics.mod_power"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.app.universal_hashing",
+    "label": "Universal hashing",
+    "domain": "number_theory",
+    "subdomain": "number_theory.applications",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.basics.modular"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.dio.three_squares",
+    "label": "Sums of three squares",
+    "domain": "number_theory",
+    "subdomain": "number_theory.diophantine",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.four_squares"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.dio.waring",
+    "label": "Waring's problem",
+    "domain": "number_theory",
+    "subdomain": "number_theory.diophantine",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.four_squares"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.dio.markov",
+    "label": "The Markov equation",
+    "domain": "number_theory",
+    "subdomain": "number_theory.diophantine",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.quadratic_forms"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.dio.mordell",
+    "label": "Mordell equations",
+    "domain": "number_theory",
+    "subdomain": "number_theory.diophantine",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.elliptic_curve"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.dio.catalan",
+    "label": "Catalan's conjecture",
+    "domain": "number_theory",
+    "subdomain": "number_theory.diophantine",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.pell"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.dio.abc",
+    "label": "The abc conjecture",
+    "domain": "number_theory",
+    "subdomain": "number_theory.diophantine",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.basics.fta"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.dio.taxicab",
+    "label": "Taxicab numbers",
+    "domain": "number_theory",
+    "subdomain": "number_theory.diophantine",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.dio.waring"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.dio.frobenius",
+    "label": "The Frobenius coin problem",
+    "domain": "number_theory",
+    "subdomain": "number_theory.diophantine",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.basics.bezout"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.dio.fermat_last",
+    "label": "Fermat's last theorem",
+    "domain": "number_theory",
+    "subdomain": "number_theory.diophantine",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.pythagorean.hypotenuse"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.dio.four_cubes",
+    "label": "Sums of four cubes",
+    "domain": "number_theory",
+    "subdomain": "number_theory.diophantine",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.dio.waring"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.comp.trial_division",
+    "label": "Trial division",
+    "domain": "number_theory",
+    "subdomain": "number_theory.computational",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.basics.divisibility"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.comp.pollard_rho",
+    "label": "Pollard rho",
+    "domain": "number_theory",
+    "subdomain": "number_theory.computational",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.comp.trial_division",
+      "nt.basics.gcd_euclidean"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.comp.quadratic_sieve",
+    "label": "The quadratic sieve",
+    "domain": "number_theory",
+    "subdomain": "number_theory.computational",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.comp.pollard_rho",
+      "nt.adv.sieve"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.comp.aks",
+    "label": "The AKS primality test",
+    "domain": "number_theory",
+    "subdomain": "number_theory.computational",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.miller_rabin"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.comp.bsgs",
+    "label": "Baby-step giant-step",
+    "domain": "number_theory",
+    "subdomain": "number_theory.computational",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.discrete_log"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.comp.pohlig_hellman",
+    "label": "The Pohlig-Hellman algorithm",
+    "domain": "number_theory",
+    "subdomain": "number_theory.computational",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.comp.bsgs"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.comp.lll",
+    "label": "Lattice reduction",
+    "domain": "number_theory",
+    "subdomain": "number_theory.computational",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.quadratic_forms"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.comp.pratt",
+    "label": "Pratt certificates",
+    "domain": "number_theory",
+    "subdomain": "number_theory.computational",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.primitive_root",
+      "nt.app.primality_cert"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.comp.cf_factor",
+    "label": "Continued fraction factorisation",
+    "domain": "number_theory",
+    "subdomain": "number_theory.computational",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.continued_fractions",
+      "nt.comp.trial_division"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.comp.nfs",
+    "label": "The number field sieve",
+    "domain": "number_theory",
+    "subdomain": "number_theory.computational",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.comp.quadratic_sieve"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.add.partitions",
+    "label": "Partitions of an integer",
+    "domain": "number_theory",
+    "subdomain": "number_theory.additive",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.arithmetic_functions"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.add.vinogradov",
+    "label": "Vinogradov's theorem",
+    "domain": "number_theory",
+    "subdomain": "number_theory.additive",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.goldbach"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.add.circle_method",
+    "label": "The circle method",
+    "domain": "number_theory",
+    "subdomain": "number_theory.additive",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.add.vinogradov"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.add.schnirelmann",
+    "label": "Schnirelmann density",
+    "domain": "number_theory",
+    "subdomain": "number_theory.additive",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.add.vinogradov"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.add.sumsets",
+    "label": "Sumsets",
+    "domain": "number_theory",
+    "subdomain": "number_theory.additive",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.basics.modular"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.add.cauchy_davenport",
+    "label": "The Cauchy-Davenport theorem",
+    "domain": "number_theory",
+    "subdomain": "number_theory.additive",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.add.sumsets"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.add.freiman",
+    "label": "Freiman's theorem",
+    "domain": "number_theory",
+    "subdomain": "number_theory.additive",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.add.sumsets"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.add.additive_bases",
+    "label": "Additive bases",
+    "domain": "number_theory",
+    "subdomain": "number_theory.additive",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.add.sumsets"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.add.goldbach_count",
+    "label": "Counting Goldbach partitions",
+    "domain": "number_theory",
+    "subdomain": "number_theory.additive",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.adv.goldbach",
+      "nt.adv.prime_counting"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
+    }
+  },
+  {
+    "id": "nt.add.additive_energy",
+    "label": "Additive energy",
+    "domain": "number_theory",
+    "subdomain": "number_theory.additive",
+    "grading_type": "numeric",
+    "prerequisites": [
+      "nt.add.sumsets"
+    ],
+    "mastery_threshold": {
+      "streak": 10,
+      "avg_time_seconds": 32.0
     }
   }
 ]

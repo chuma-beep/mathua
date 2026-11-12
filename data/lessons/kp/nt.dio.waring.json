@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The function g(k)",
+    "section": "The function g(k)",
+    "subgoals": [
+      "Define the least count",
+      "State finiteness",
+      "Compare with G(k)"
+    ]
+  },
+  {
+    "label": "The formula",
+    "section": "The formula",
+    "subgoals": [
+      "Raise two to k",
+      "Floor three halves to k",
+      "Subtract two"
+    ]
+  },
+  {
+    "label": "Small cases",
+    "section": "Small cases",
+    "subgoals": [
+      "Recall four squares",
+      "Recall nine cubes",
+      "Evaluate a larger k"
+    ]
+  }
+]

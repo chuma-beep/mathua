@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The identity",
+    "section": "The identity",
+    "subgoals": [
+      "Expand one prime factor",
+      "Recover a geometric series",
+      "Connect to unique factorisation"
+    ]
+  },
+  {
+    "label": "Truncation",
+    "section": "Truncation",
+    "subgoals": [
+      "Bound the primes",
+      "Count exponent choices",
+      "Multiply the local counts"
+    ]
+  },
+  {
+    "label": "The reciprocal",
+    "section": "The reciprocal",
+    "subgoals": [
+      "Invert the local factor",
+      "Read off the sign",
+      "Identify the M\u00f6bius coefficient"
+    ]
+  }
+]

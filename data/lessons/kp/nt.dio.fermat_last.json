@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The statement",
+    "section": "The statement",
+    "subgoals": [
+      "Fix an exponent above two",
+      "Rule out positive solutions",
+      "Compare with exponent two"
+    ]
+  },
+  {
+    "label": "The exponent two",
+    "section": "The exponent two",
+    "subgoals": [
+      "Generate a triple",
+      "Check the identity",
+      "Count small triples"
+    ]
+  },
+  {
+    "label": "The proof",
+    "section": "The proof",
+    "subgoals": [
+      "Name modularity",
+      "Connect to elliptic curves",
+      "Explain the length"
+    ]
+  }
+]

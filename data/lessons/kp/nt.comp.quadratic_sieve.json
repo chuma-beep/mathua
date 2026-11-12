@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The factor base",
+    "section": "The factor base",
+    "subgoals": [
+      "Choose a bound",
+      "Test residues",
+      "Count the base"
+    ]
+  },
+  {
+    "label": "Relations",
+    "section": "Relations",
+    "subgoals": [
+      "Evaluate the polynomial",
+      "Test smoothness",
+      "Record exponents"
+    ]
+  },
+  {
+    "label": "Linear algebra",
+    "section": "Linear algebra",
+    "subgoals": [
+      "Reduce modulo two",
+      "Find a dependency",
+      "Build a square"
+    ]
+  }
+]

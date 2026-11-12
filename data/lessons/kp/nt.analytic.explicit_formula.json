@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The main term",
+    "section": "The main term",
+    "subgoals": [
+      "Identify the identity term",
+      "Compare with the correction",
+      "Evaluate at a power of ten"
+    ]
+  },
+  {
+    "label": "The zero sum",
+    "section": "The zero sum",
+    "subgoals": [
+      "Pair conjugate zeros",
+      "Write one contribution",
+      "Count paired terms"
+    ]
+  },
+  {
+    "label": "The constant term",
+    "section": "The constant term",
+    "subgoals": [
+      "Name the constant",
+      "Extract two pi",
+      "Place it in the formula"
+    ]
+  }
+]

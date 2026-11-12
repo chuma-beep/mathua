@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The code",
+    "section": "The code",
+    "subgoals": [
+      "Choose the field size",
+      "Set the length",
+      "Evaluate the polynomial"
+    ]
+  },
+  {
+    "label": "The redundancy",
+    "section": "The redundancy",
+    "subgoals": [
+      "Subtract dimension",
+      "Count parity symbols",
+      "Relate to distance"
+    ]
+  },
+  {
+    "label": "Error correction",
+    "section": "Error correction",
+    "subgoals": [
+      "Halve the redundancy",
+      "Round down",
+      "Compare with detection"
+    ]
+  }
+]

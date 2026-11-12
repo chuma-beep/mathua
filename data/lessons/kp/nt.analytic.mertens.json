@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The summatory function",
+    "section": "The summatory function",
+    "subgoals": [
+      "Sum the M\u00f6bius values",
+      "Read the parity",
+      "Evaluate a small case"
+    ]
+  },
+  {
+    "label": "The square-root bound",
+    "section": "The square-root bound",
+    "subgoals": [
+      "State the bound",
+      "Compare with n",
+      "Test a small n"
+    ]
+  },
+  {
+    "label": "Squarefree density",
+    "section": "Squarefree density",
+    "subgoals": [
+      "Count squarefree integers",
+      "State the density",
+      "Connect to six over pi squared"
+    ]
+  }
+]

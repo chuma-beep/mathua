@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The expansion",
+    "section": "The expansion",
+    "subgoals": [
+      "Expand the root",
+      "Find the period",
+      "Write a convergent"
+    ]
+  },
+  {
+    "label": "The congruence",
+    "section": "The congruence",
+    "subgoals": [
+      "Square the numerator",
+      "Subtract n times the square",
+      "Record the remainder"
+    ]
+  },
+  {
+    "label": "Combining relations",
+    "section": "Combining relations",
+    "subgoals": [
+      "Collect smooth values",
+      "Reduce exponents",
+      "Extract a factor"
+    ]
+  }
+]

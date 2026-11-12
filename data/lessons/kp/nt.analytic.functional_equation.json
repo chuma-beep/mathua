@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The completed function",
+    "section": "The completed function",
+    "subgoals": [
+      "Build the gamma factor",
+      "Add the pi power",
+      "State the invariance"
+    ]
+  },
+  {
+    "label": "The exponent",
+    "section": "The exponent",
+    "subgoals": [
+      "Read the exponent",
+      "Double a half",
+      "Check an integer case"
+    ]
+  },
+  {
+    "label": "Consequences",
+    "section": "Consequences",
+    "subgoals": [
+      "Force a trivial zero",
+      "Constrain the strip",
+      "Transfer growth"
+    ]
+  }
+]

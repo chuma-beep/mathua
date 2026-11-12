@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The statement",
+    "section": "The statement",
+    "subgoals": [
+      "Add the sizes",
+      "Subtract one",
+      "Cap at the prime"
+    ]
+  },
+  {
+    "label": "Sharpness",
+    "section": "Sharpness",
+    "subgoals": [
+      "Use an interval",
+      "Compute the sumset",
+      "Compare with the bound"
+    ]
+  },
+  {
+    "label": "The cap",
+    "section": "The cap",
+    "subgoals": [
+      "Exceed the field size",
+      "Cover the field",
+      "State the minimum"
+    ]
+  }
+]

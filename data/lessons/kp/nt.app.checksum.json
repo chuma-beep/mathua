@@ -1,0 +1,29 @@
+[
+  {
+    "label": "ISBN-10",
+    "section": "ISBN-10",
+    "subgoals": [
+      "Weight the digits",
+      "Reduce modulo eleven",
+      "Solve for the check digit"
+    ]
+  },
+  {
+    "label": "ISBN-13",
+    "section": "ISBN-13",
+    "subgoals": [
+      "Alternate one and three",
+      "Sum the products",
+      "Solve modulo ten"
+    ]
+  },
+  {
+    "label": "The Luhn check",
+    "section": "The Luhn check",
+    "subgoals": [
+      "Double alternate digits",
+      "Reduce above nine",
+      "Complete the total"
+    ]
+  }
+]

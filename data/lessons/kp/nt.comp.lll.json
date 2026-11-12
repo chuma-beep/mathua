@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The goal",
+    "section": "The goal",
+    "subgoals": [
+      "Describe the lattice",
+      "Shorten a basis",
+      "Check near-orthogonality"
+    ]
+  },
+  {
+    "label": "The approximation",
+    "section": "The approximation",
+    "subgoals": [
+      "State the factor",
+      "Compare with exact SVP",
+      "Explain the dimension"
+    ]
+  },
+  {
+    "label": "Applications",
+    "section": "Applications",
+    "subgoals": [
+      "Attack a knapsack",
+      "Find a relation",
+      "Name a stronger method"
+    ]
+  }
+]

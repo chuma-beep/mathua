@@ -49,6 +49,8 @@ func Register(reg *generator.Registry) {
 	registerBatch(reg)
 	registerConversions(reg)
 	registerWave3(reg)
+	registerWave18(reg)
+	registerWave18Rest(reg)
 }
 
 type divisibilityGen struct{}

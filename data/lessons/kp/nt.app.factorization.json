@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Trial division",
+    "section": "Trial division",
+    "subgoals": [
+      "Divide by small primes",
+      "Stop at the square root",
+      "Count the divisions"
+    ]
+  },
+  {
+    "label": "Fermat's method",
+    "section": "Fermat's method",
+    "subgoals": [
+      "Take the ceiling root",
+      "Form the difference",
+      "Extract the square"
+    ]
+  },
+  {
+    "label": "Modern methods",
+    "section": "Modern methods",
+    "subgoals": [
+      "Collect congruences",
+      "Combine relations",
+      "Extract a factor"
+    ]
+  }
+]

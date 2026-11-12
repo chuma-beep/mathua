@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The modulus",
+    "section": "The modulus",
+    "subgoals": [
+      "Multiply the primes",
+      "Keep the factors secret",
+      "State the public key"
+    ]
+  },
+  {
+    "label": "The totient",
+    "section": "The totient",
+    "subgoals": [
+      "Subtract one from each prime",
+      "Multiply",
+      "Count the units"
+    ]
+  },
+  {
+    "label": "The private exponent",
+    "section": "The private exponent",
+    "subgoals": [
+      "Invert e",
+      "Reduce modulo the totient",
+      "Check the product"
+    ]
+  }
+]

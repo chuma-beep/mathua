@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The radical",
+    "section": "The radical",
+    "subgoals": [
+      "Factor each part",
+      "Drop multiplicities",
+      "Multiply the distinct primes"
+    ]
+  },
+  {
+    "label": "The quality",
+    "section": "The quality",
+    "subgoals": [
+      "Take logarithms",
+      "Compare c with the radical",
+      "Identify exceptional triples"
+    ]
+  },
+  {
+    "label": "Consequences",
+    "section": "Consequences",
+    "subgoals": [
+      "State a consequence",
+      "Connect to Fermat",
+      "Explain finiteness"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Definition",
+    "section": "Definition",
+    "subgoals": [
+      "Write the series",
+      "Name its half-plane",
+      "Separate growth from coefficients"
+    ]
+  },
+  {
+    "label": "Products and convolution",
+    "section": "Products and convolution",
+    "subgoals": [
+      "Multiply two series",
+      "Identify Dirichlet convolution",
+      "Recognise the divisor function"
+    ]
+  },
+  {
+    "label": "Coefficients of powers",
+    "section": "Coefficients of powers",
+    "subgoals": [
+      "Expand a prime power",
+      "Count ordered factorisations",
+      "Evaluate the binomial coefficient"
+    ]
+  }
+]

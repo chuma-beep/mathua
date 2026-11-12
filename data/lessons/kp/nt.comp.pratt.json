@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The certificate",
+    "section": "The certificate",
+    "subgoals": [
+      "Exhibit a primitive root",
+      "Factor p minus one",
+      "Attach subcertificates"
+    ]
+  },
+  {
+    "label": "The verification",
+    "section": "The verification",
+    "subgoals": [
+      "Check the order",
+      "Test each prime factor",
+      "Recurse to the base"
+    ]
+  },
+  {
+    "label": "The size",
+    "section": "The size",
+    "subgoals": [
+      "Count factors",
+      "Follow the chain",
+      "Compare smooth and rough"
+    ]
+  }
+]

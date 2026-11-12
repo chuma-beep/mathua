@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The identity",
+    "section": "The identity",
+    "subgoals": [
+      "Write the boundary term",
+      "Write the integral",
+      "Check the signs"
+    ]
+  },
+  {
+    "label": "Polynomial weights",
+    "section": "Polynomial weights",
+    "subgoals": [
+      "Sum unit coefficients",
+      "Integrate the weight",
+      "Evaluate at the top"
+    ]
+  },
+  {
+    "label": "Why it helps",
+    "section": "Why it helps",
+    "subgoals": [
+      "Replace coefficients by averages",
+      "Estimate the integral",
+      "Recover the boundary"
+    ]
+  }
+]

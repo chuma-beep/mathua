@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The statement",
+    "section": "The statement",
+    "subgoals": [
+      "Name the equation",
+      "Require exponents above one",
+      "State uniqueness"
+    ]
+  },
+  {
+    "label": "The small case",
+    "section": "The small case",
+    "subgoals": [
+      "Compute two cubed",
+      "Compute three squared",
+      "Take the difference"
+    ]
+  },
+  {
+    "label": "Why it is hard",
+    "section": "Why it is hard",
+    "subgoals": [
+      "Compare exponent structures",
+      "Name the method",
+      "Explain the exception"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Two coins",
+    "section": "Two coins",
+    "subgoals": [
+      "Multiply the coins",
+      "Subtract both",
+      "State the largest gap"
+    ]
+  },
+  {
+    "label": "The count",
+    "section": "The count",
+    "subgoals": [
+      "Subtract one from each",
+      "Multiply",
+      "Halve the product"
+    ]
+  },
+  {
+    "label": "More coins",
+    "section": "More coins",
+    "subgoals": [
+      "Compare with two coins",
+      "Name the structure",
+      "Explain the missing formula"
+    ]
+  }
+]

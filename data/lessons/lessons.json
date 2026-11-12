@@ -9398,5 +9398,205 @@
   {
     "concept_id": "graph.apex",
     "source": "authored/graph.apex.md"
+  },
+  {
+    "concept_id": "nt.analytic.dirichlet_series",
+    "source": "authored/nt.analytic.dirichlet_series.md"
+  },
+  {
+    "concept_id": "nt.analytic.euler_product",
+    "source": "authored/nt.analytic.euler_product.md"
+  },
+  {
+    "concept_id": "nt.analytic.continuation",
+    "source": "authored/nt.analytic.continuation.md"
+  },
+  {
+    "concept_id": "nt.analytic.functional_equation",
+    "source": "authored/nt.analytic.functional_equation.md"
+  },
+  {
+    "concept_id": "nt.analytic.zero_count",
+    "source": "authored/nt.analytic.zero_count.md"
+  },
+  {
+    "concept_id": "nt.analytic.explicit_formula",
+    "source": "authored/nt.analytic.explicit_formula.md"
+  },
+  {
+    "concept_id": "nt.analytic.mertens",
+    "source": "authored/nt.analytic.mertens.md"
+  },
+  {
+    "concept_id": "nt.analytic.abel",
+    "source": "authored/nt.analytic.abel.md"
+  },
+  {
+    "concept_id": "nt.analytic.dirichlet_l",
+    "source": "authored/nt.analytic.dirichlet_l.md"
+  },
+  {
+    "concept_id": "nt.analytic.bias",
+    "source": "authored/nt.analytic.bias.md"
+  },
+  {
+    "concept_id": "nt.app.rsa_keygen",
+    "source": "authored/nt.app.rsa_keygen.md"
+  },
+  {
+    "concept_id": "nt.app.elgamal",
+    "source": "authored/nt.app.elgamal.md"
+  },
+  {
+    "concept_id": "nt.app.secret_sharing",
+    "source": "authored/nt.app.secret_sharing.md"
+  },
+  {
+    "concept_id": "nt.app.checksum",
+    "source": "authored/nt.app.checksum.md"
+  },
+  {
+    "concept_id": "nt.app.zero_knowledge",
+    "source": "authored/nt.app.zero_knowledge.md"
+  },
+  {
+    "concept_id": "nt.app.ecc",
+    "source": "authored/nt.app.ecc.md"
+  },
+  {
+    "concept_id": "nt.app.primality_cert",
+    "source": "authored/nt.app.primality_cert.md"
+  },
+  {
+    "concept_id": "nt.app.reed_solomon",
+    "source": "authored/nt.app.reed_solomon.md"
+  },
+  {
+    "concept_id": "nt.app.factorization",
+    "source": "authored/nt.app.factorization.md"
+  },
+  {
+    "concept_id": "nt.app.universal_hashing",
+    "source": "authored/nt.app.universal_hashing.md"
+  },
+  {
+    "concept_id": "nt.dio.three_squares",
+    "source": "authored/nt.dio.three_squares.md"
+  },
+  {
+    "concept_id": "nt.dio.waring",
+    "source": "authored/nt.dio.waring.md"
+  },
+  {
+    "concept_id": "nt.dio.markov",
+    "source": "authored/nt.dio.markov.md"
+  },
+  {
+    "concept_id": "nt.dio.mordell",
+    "source": "authored/nt.dio.mordell.md"
+  },
+  {
+    "concept_id": "nt.dio.catalan",
+    "source": "authored/nt.dio.catalan.md"
+  },
+  {
+    "concept_id": "nt.dio.abc",
+    "source": "authored/nt.dio.abc.md"
+  },
+  {
+    "concept_id": "nt.dio.taxicab",
+    "source": "authored/nt.dio.taxicab.md"
+  },
+  {
+    "concept_id": "nt.dio.frobenius",
+    "source": "authored/nt.dio.frobenius.md"
+  },
+  {
+    "concept_id": "nt.dio.fermat_last",
+    "source": "authored/nt.dio.fermat_last.md"
+  },
+  {
+    "concept_id": "nt.dio.four_cubes",
+    "source": "authored/nt.dio.four_cubes.md"
+  },
+  {
+    "concept_id": "nt.comp.trial_division",
+    "source": "authored/nt.comp.trial_division.md"
+  },
+  {
+    "concept_id": "nt.comp.pollard_rho",
+    "source": "authored/nt.comp.pollard_rho.md"
+  },
+  {
+    "concept_id": "nt.comp.quadratic_sieve",
+    "source": "authored/nt.comp.quadratic_sieve.md"
+  },
+  {
+    "concept_id": "nt.comp.aks",
+    "source": "authored/nt.comp.aks.md"
+  },
+  {
+    "concept_id": "nt.comp.bsgs",
+    "source": "authored/nt.comp.bsgs.md"
+  },
+  {
+    "concept_id": "nt.comp.pohlig_hellman",
+    "source": "authored/nt.comp.pohlig_hellman.md"
+  },
+  {
+    "concept_id": "nt.comp.lll",
+    "source": "authored/nt.comp.lll.md"
+  },
+  {
+    "concept_id": "nt.comp.pratt",
+    "source": "authored/nt.comp.pratt.md"
+  },
+  {
+    "concept_id": "nt.comp.cf_factor",
+    "source": "authored/nt.comp.cf_factor.md"
+  },
+  {
+    "concept_id": "nt.comp.nfs",
+    "source": "authored/nt.comp.nfs.md"
+  },
+  {
+    "concept_id": "nt.add.partitions",
+    "source": "authored/nt.add.partitions.md"
+  },
+  {
+    "concept_id": "nt.add.vinogradov",
+    "source": "authored/nt.add.vinogradov.md"
+  },
+  {
+    "concept_id": "nt.add.circle_method",
+    "source": "authored/nt.add.circle_method.md"
+  },
+  {
+    "concept_id": "nt.add.schnirelmann",
+    "source": "authored/nt.add.schnirelmann.md"
+  },
+  {
+    "concept_id": "nt.add.sumsets",
+    "source": "authored/nt.add.sumsets.md"
+  },
+  {
+    "concept_id": "nt.add.cauchy_davenport",
+    "source": "authored/nt.add.cauchy_davenport.md"
+  },
+  {
+    "concept_id": "nt.add.freiman",
+    "source": "authored/nt.add.freiman.md"
+  },
+  {
+    "concept_id": "nt.add.additive_bases",
+    "source": "authored/nt.add.additive_bases.md"
+  },
+  {
+    "concept_id": "nt.add.goldbach_count",
+    "source": "authored/nt.add.goldbach_count.md"
+  },
+  {
+    "concept_id": "nt.add.additive_energy",
+    "source": "authored/nt.add.additive_energy.md"
   }
 ]

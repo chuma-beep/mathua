@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The bound",
+    "section": "The bound",
+    "subgoals": [
+      "Take the square root",
+      "Stop at the bound",
+      "Justify completeness"
+    ]
+  },
+  {
+    "label": "The count",
+    "section": "The count",
+    "subgoals": [
+      "Sieve the primes",
+      "Count below the bound",
+      "Compare with the bound"
+    ]
+  },
+  {
+    "label": "When it wins",
+    "section": "When it wins",
+    "subgoals": [
+      "Test a small factor",
+      "Test a semiprime",
+      "Choose a hybrid"
+    ]
+  }
+]

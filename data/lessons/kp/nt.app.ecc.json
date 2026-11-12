@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The curve equation",
+    "section": "The curve equation",
+    "subgoals": [
+      "Evaluate the right side",
+      "Reduce modulo the prime",
+      "Check a point"
+    ]
+  },
+  {
+    "label": "The group law",
+    "section": "The group law",
+    "subgoals": [
+      "Compute the slope numerator",
+      "Invert the denominator",
+      "Reflect the third point"
+    ]
+  },
+  {
+    "label": "Key size",
+    "section": "Key size",
+    "subgoals": [
+      "State Hasse's bound",
+      "Take the square root",
+      "Compare group sizes"
+    ]
+  }
+]

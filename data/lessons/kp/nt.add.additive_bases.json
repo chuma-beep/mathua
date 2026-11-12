@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The order",
+    "section": "The order",
+    "subgoals": [
+      "Define the order",
+      "Check squares",
+      "Check integers"
+    ]
+  },
+  {
+    "label": "Counting elements",
+    "section": "Counting elements",
+    "subgoals": [
+      "Count sums",
+      "Bound the set",
+      "Take the h-th root"
+    ]
+  },
+  {
+    "label": "Examples",
+    "section": "Examples",
+    "subgoals": [
+      "Name the cube order",
+      "Connect to Waring",
+      "Compare with order one"
+    ]
+  }
+]

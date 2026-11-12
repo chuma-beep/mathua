@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Form all sums",
+      "Remove duplicates",
+      "Count the result"
+    ]
+  },
+  {
+    "label": "Intervals",
+    "section": "Intervals",
+    "subgoals": [
+      "Add the lengths",
+      "Subtract one",
+      "Check the endpoints"
+    ]
+  },
+  {
+    "label": "Doubling",
+    "section": "Doubling",
+    "subgoals": [
+      "Double the set",
+      "Divide by the size",
+      "Interpret a small ratio"
+    ]
+  }
+]

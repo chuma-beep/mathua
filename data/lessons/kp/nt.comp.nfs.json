@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The idea",
+    "section": "The idea",
+    "subgoals": [
+      "Choose two polynomials",
+      "Share a root modulo n",
+      "Collect smooth pairs"
+    ]
+  },
+  {
+    "label": "The complexity",
+    "section": "The complexity",
+    "subgoals": [
+      "State the exponent",
+      "Take the cube root",
+      "Name the constant"
+    ]
+  },
+  {
+    "label": "The record",
+    "section": "The record",
+    "subgoals": [
+      "Name a record",
+      "Compare with RSA sizes",
+      "Explain the growth"
+    ]
+  }
+]

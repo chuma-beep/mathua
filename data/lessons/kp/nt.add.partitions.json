@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The count",
+    "section": "The count",
+    "subgoals": [
+      "List small partitions",
+      "Count unordered sums",
+      "Compare with compositions"
+    ]
+  },
+  {
+    "label": "Distinct parts",
+    "section": "Distinct parts",
+    "subgoals": [
+      "Count distinct partitions",
+      "Count odd partitions",
+      "State Euler's identity"
+    ]
+  },
+  {
+    "label": "The recurrence",
+    "section": "The recurrence",
+    "subgoals": [
+      "Name pentagonal numbers",
+      "Apply the recurrence",
+      "Compute the next value"
+    ]
+  }
+]
