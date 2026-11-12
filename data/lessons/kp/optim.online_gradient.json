@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Regret",
+    "section": "Regret",
+    "subgoals": [
+      "Compute a regret",
+      "Compare with the best point",
+      "Average over rounds"
+    ]
+  },
+  {
+    "label": "The bound",
+    "section": "The bound",
+    "subgoals": [
+      "Evaluate a root step",
+      "Grow the regret",
+      "Check sublinearity"
+    ]
+  },
+  {
+    "label": "Static versus dynamic",
+    "section": "Static versus dynamic",
+    "subgoals": [
+      "Pick a comparator",
+      "Bound a moving target",
+      "Interpret the extra term"
+    ]
+  }
+]

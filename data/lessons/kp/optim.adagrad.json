@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The accumulator",
+    "section": "The accumulator",
+    "subgoals": [
+      "Update the accumulator",
+      "Compute one coordinate step",
+      "Compare two coordinates"
+    ]
+  },
+  {
+    "label": "The effect",
+    "section": "The effect",
+    "subgoals": [
+      "Explain a slowed coordinate",
+      "Handle a sparse feature",
+      "Predict the decay"
+    ]
+  },
+  {
+    "label": "A scalar case",
+    "section": "A scalar case",
+    "subgoals": [
+      "Take equal gradients",
+      "Divide by the root count",
+      "Reach a small step"
+    ]
+  }
+]

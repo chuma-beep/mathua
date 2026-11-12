@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The update",
+    "section": "The update",
+    "subgoals": [
+      "Apply one sampled step",
+      "Predict the next iterate",
+      "Compare two directions"
+    ]
+  },
+  {
+    "label": "Step sizes",
+    "section": "Step sizes",
+    "subgoals": [
+      "Evaluate a schedule",
+      "Choose a fixed step",
+      "Shrink the neighbourhood"
+    ]
+  },
+  {
+    "label": "What is guaranteed",
+    "section": "What is guaranteed",
+    "subgoals": [
+      "State the stationarity target",
+      "Average the iterates",
+      "Separate convex from nonconvex"
+    ]
+  }
+]

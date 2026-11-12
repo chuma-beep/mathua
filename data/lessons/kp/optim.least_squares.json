@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The objective",
+    "section": "The objective",
+    "subgoals": [
+      "Evaluate a residual",
+      "Square and sum",
+      "Compare two fits"
+    ]
+  },
+  {
+    "label": "The normal equations",
+    "section": "The normal equations",
+    "subgoals": [
+      "Form the left side",
+      "Form the right side",
+      "Solve the system"
+    ]
+  },
+  {
+    "label": "Residual at the solution",
+    "section": "Residual at the solution",
+    "subgoals": [
+      "Compute the residual",
+      "Test orthogonality",
+      "Read the fit"
+    ]
+  }
+]

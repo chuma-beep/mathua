@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Stationarity",
+    "section": "Stationarity",
+    "subgoals": [
+      "Form a gradient combination",
+      "Test for zero",
+      "Check nonnegativity"
+    ]
+  },
+  {
+    "label": "The multiplier cone",
+    "section": "The multiplier cone",
+    "subgoals": [
+      "Test cone membership",
+      "Find a supporting weight",
+      "Reject a point"
+    ]
+  },
+  {
+    "label": "Weighted stationarity",
+    "section": "Weighted stationarity",
+    "subgoals": [
+      "Normalise the weights",
+      "Relate to a weighted sum",
+      "Read trade-offs"
+    ]
+  }
+]

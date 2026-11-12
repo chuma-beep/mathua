@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The neighbourhood",
+    "section": "The neighbourhood",
+    "subgoals": [
+      "Compute a lower product bound",
+      "Compute an upper product bound",
+      "Measure the width of the band"
+    ]
+  },
+  {
+    "label": "The damped step",
+    "section": "The damped step",
+    "subgoals": [
+      "Compare a product with the bound",
+      "Choose the damping factor",
+      "Keep slacks positive"
+    ]
+  },
+  {
+    "label": "The reduction",
+    "section": "The reduction",
+    "subgoals": [
+      "Apply the reduction factor",
+      "Predict the remaining gap",
+      "Count the iterations"
+    ]
+  }
+]

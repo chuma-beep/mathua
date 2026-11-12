@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The barrier family",
+    "section": "The barrier family",
+    "subgoals": [
+      "Write the barrier objective",
+      "Identify the barrier parameter",
+      "Relate mu to the slack"
+    ]
+  },
+  {
+    "label": "Following the parameter",
+    "section": "Following the parameter",
+    "subgoals": [
+      "Predict the direction of movement",
+      "Bound the duality gap",
+      "Choose a reduction factor"
+    ]
+  },
+  {
+    "label": "Reading a point",
+    "section": "Reading a point",
+    "subgoals": [
+      "Solve the stationarity equation",
+      "Estimate a multiplier",
+      "Interpret a shrinking slack"
+    ]
+  }
+]

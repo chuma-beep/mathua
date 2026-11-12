@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The average",
+    "section": "The average",
+    "subgoals": [
+      "Average two iterates",
+      "Compare with the last iterate",
+      "Return the mean"
+    ]
+  },
+  {
+    "label": "Variance",
+    "section": "Variance",
+    "subgoals": [
+      "Divide the variance",
+      "Count the iterates",
+      "Predict the benefit"
+    ]
+  },
+  {
+    "label": "Weighting",
+    "section": "Weighting",
+    "subgoals": [
+      "Choose weights",
+      "Favour late iterates",
+      "Normalise"
+    ]
+  }
+]

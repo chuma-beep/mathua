@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Local copies",
+    "section": "Local copies",
+    "subgoals": [
+      "Write the consensus constraint",
+      "Count the copies",
+      "Separate local objectives"
+    ]
+  },
+  {
+    "label": "Averaging",
+    "section": "Averaging",
+    "subgoals": [
+      "Compute the average",
+      "Take a local step",
+      "Pull toward the mean"
+    ]
+  },
+  {
+    "label": "Agreement",
+    "section": "Agreement",
+    "subgoals": [
+      "Measure the spread",
+      "Test consensus",
+      "Bound the disagreement"
+    ]
+  }
+]

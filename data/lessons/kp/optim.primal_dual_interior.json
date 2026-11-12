@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The residuals",
+    "section": "The residuals",
+    "subgoals": [
+      "Evaluate the complementarity residual",
+      "Relate a residual to mu",
+      "Identify the active constraint"
+    ]
+  },
+  {
+    "label": "The Newton system",
+    "section": "The Newton system",
+    "subgoals": [
+      "Count the unknowns",
+      "Assemble the diagonal block",
+      "Solve the linear system"
+    ]
+  },
+  {
+    "label": "The step length",
+    "section": "The step length",
+    "subgoals": [
+      "Respect positivity",
+      "Take a fraction of the step",
+      "Check the new products"
+    ]
+  }
+]

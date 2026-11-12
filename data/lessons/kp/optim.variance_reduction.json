@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The estimator",
+    "section": "The estimator",
+    "subgoals": [
+      "Form the corrected gradient",
+      "Check the expectation",
+      "Compare with a sample gradient"
+    ]
+  },
+  {
+    "label": "The cost",
+    "section": "The cost",
+    "subgoals": [
+      "Amortise a snapshot",
+      "Count cheap steps",
+      "Choose the epoch length"
+    ]
+  },
+  {
+    "label": "A simple form",
+    "section": "A simple form",
+    "subgoals": [
+      "Use a constant step",
+      "Refresh the snapshot",
+      "Bound the variance"
+    ]
+  }
+]

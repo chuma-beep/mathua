@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The set",
+    "section": "The set",
+    "subgoals": [
+      "Test front membership",
+      "Reject a dominated point",
+      "Describe the front"
+    ]
+  },
+  {
+    "label": "Finding a front",
+    "section": "Finding a front",
+    "subgoals": [
+      "Scan pairs",
+      "Mark dominated points",
+      "Count the survivors"
+    ]
+  },
+  {
+    "label": "Front size",
+    "section": "Front size",
+    "subgoals": [
+      "Count front points",
+      "Compare two instances",
+      "Relate size to choice"
+    ]
+  }
+]

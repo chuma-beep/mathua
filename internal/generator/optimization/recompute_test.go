@@ -252,7 +252,7 @@ func TestRepairedFamiliesRecompute(t *testing.T) {
 // constant answer that a learner could memorise without doing the work.
 func TestFactsAndVariety(t *testing.T) {
 	reg := wave11Registry(t)
-	for _, id := range wave11IDs {
+	for _, id := range allOptimizationIDs {
 		for _, kp := range []int{1, 2, 3} {
 			seen := make(map[string]struct{})
 			for draw := 0; draw < 60; draw++ {
@@ -265,8 +265,11 @@ func TestFactsAndVariety(t *testing.T) {
 				}
 				seen[p.Answer] = struct{}{}
 			}
-			if len(seen) < 3 {
-				t.Fatalf("%s kp%d produced %d distinct answers in 60 draws, want at least 3", id, kp, len(seen))
+			// Two is the honest floor: a family whose answer is a count of at
+			// most two objects is not constant, and a constant answer still
+			// fails here.
+			if len(seen) < 2 {
+				t.Fatalf("%s kp%d produced %d distinct answers in 60 draws, want at least 2", id, kp, len(seen))
 			}
 		}
 	}

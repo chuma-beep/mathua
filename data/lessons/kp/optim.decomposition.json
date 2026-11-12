@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Blocks",
+    "section": "Blocks",
+    "subgoals": [
+      "Identify independent blocks",
+      "Count coupling rows",
+      "Size each subproblem"
+    ]
+  },
+  {
+    "label": "Coordinating",
+    "section": "Coordinating",
+    "subgoals": [
+      "Set prices",
+      "Solve subproblems",
+      "Check agreement"
+    ]
+  },
+  {
+    "label": "Dual prices",
+    "section": "Dual prices",
+    "subgoals": [
+      "Read a shadow price",
+      "Adjust a price",
+      "Interpret a sign"
+    ]
+  }
+]

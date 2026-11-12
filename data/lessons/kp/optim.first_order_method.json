@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Cheap iterations",
+    "section": "Cheap iterations",
+    "subgoals": [
+      "Cost one gradient",
+      "Compare with a factorisation",
+      "Predict the step time"
+    ]
+  },
+  {
+    "label": "Memory",
+    "section": "Memory",
+    "subgoals": [
+      "Count vectors",
+      "Compare with Newton",
+      "Fit a memory budget"
+    ]
+  },
+  {
+    "label": "Convergence",
+    "section": "Convergence",
+    "subgoals": [
+      "Read the condition number",
+      "Predict iterations",
+      "Choose an accelerator"
+    ]
+  }
+]

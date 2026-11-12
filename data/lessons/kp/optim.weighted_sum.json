@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The scalarisation",
+    "section": "The scalarisation",
+    "subgoals": [
+      "Form a weighted sum",
+      "Minimise it",
+      "Recover a front point"
+    ]
+  },
+  {
+    "label": "Supported points",
+    "section": "Supported points",
+    "subgoals": [
+      "Recognise a supported point",
+      "Detect an unsupported one",
+      "Explain the gap"
+    ]
+  },
+  {
+    "label": "Weights and trade-offs",
+    "section": "Weights and trade-offs",
+    "subgoals": [
+      "Read a slope",
+      "Choose weights",
+      "Predict the selected point"
+    ]
+  }
+]

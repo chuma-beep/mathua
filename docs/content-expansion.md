@@ -25,8 +25,8 @@ and the artifact it describes are one fact (AGENTS.md section 7).
 | Courses | `data/courses.json` | named target sets |
 | Destinations | `data/destinations.json` | named bundles of courses |
 
-Two numbers are useful to hold together. There are 2050 concepts, and there are 2050 KP shard files
-holding 6150 knowledge points, three per concept.
+Two numbers are useful to hold together. There are 2100 concepts, and there are 2100 KP shard files
+holding 6300 knowledge points, three per concept.
 
 ## 2. The pipeline
 
@@ -53,11 +53,11 @@ leaves the learner a placeholder instead of a worked example, and the audit refu
 All four content and documentation guards pass on the current corpus:
 
 ```
-OK: 2050 concepts across 24 domains                   scripts/validate_graph.go
-OK: 2050 concepts mapped, 2050 entries, 1949 sources,
-    2050 kp files, 6150 KPs, kp shards resolved,
+OK: 2100 concepts across 24 domains                   scripts/validate_graph.go
+OK: 2100 concepts mapped, 2100 entries, 1999 sources,
+    2100 kp files, 6300 KPs, kp shards resolved,
     0 issues                                          scripts/audit_lessons.py
-counts ok: 2050 concepts, 2050 KP files, 29 courses   scripts/counts.py --check
+counts ok: 2100 concepts, 2100 KP files, 29 courses   scripts/counts.py --check
 OK: docs agree with the code and the corpus           scripts/check_docs.py
 ```
 
@@ -69,11 +69,11 @@ means a new thin concept cannot be added quietly.
 
 ## 4. Where the corpus is thin
 
-### 4.1 The course catalog reaches 2050 of the 2050 concepts
+### 4.1 The course catalog reaches 2100 of the 2100 concepts
 
 Courses carry target sets, and a target expands to its transitive prerequisite closure in
 `internal/planning/planner.go:64` (`collectChain`). Across the 29 courses those closures reach
-2050 of the 2050 concepts: 0 of them have a node, a generator, a lesson and three KP shards and
+2100 of the 2100 concepts: 0 of them have a node, a generator, a lesson and three KP shards and
 still sit outside every named course path. The wiring batch of 2026-10-19 moved the 149 that used
 to sit there into the courses that teach their subject, and the table stays as the measurement on
 the number, because a concept that no course targets is unreachable whatever the diagnostic
@@ -404,13 +404,13 @@ because the change this section prepares for is the one that would have tripped 
 
 ### 5.5 The concept target, and where it goes
 
-The catalog holds 2050 concepts. The remaining per-domain targets add up to 0, and this is the
-table that says where: the 2,050-concept target agreed on 2026-11-10. `Now` is read from the corpus;
+The catalog holds 2100 concepts. The remaining per-domain targets add up to 0, and this is the
+table that says where: the 2,100-concept target agreed on 2026-11-12. `Now` is read from the corpus;
 `Target` is the decision. The rows keep the order step 6 of section 6 used, largest deficit first.
 
 | Domain | Tier | Now | Target | Add |
 |---|---|---:|---:|---:|
-| optimization | university | 50 | 50 | +0 |
+| optimization | university | 100 | 100 | +0 |
 | algebra | school | 171 | 171 | +0 |
 | calc1 | bridge | 114 | 114 | +0 |
 | calc2 | bridge | 97 | 97 | +0 |
@@ -435,8 +435,8 @@ table that says where: the 2,050-concept target agreed on 2026-11-10. `Now` is r
 | geometry | school | 87 | 87 | +0 |
 | fractions | school | 67 | 67 | +0 |
 
-**The 2,050-concept target.** The 550 new concepts split by tier as school 482 to 602 (+120,
-24.9%), bridge 357 to 487 (+130, 36.4%) and university 661 to 961 (+300, 45.4%). University
+**The 2,100-concept target.** The 600 new concepts split by tier as school 482 to 602 (+120,
+24.9%), bridge 357 to 487 (+130, 36.4%) and university 661 to 1,011 (+350, 53.0%). University
 mathematics receives the largest share; school mathematics grows most conservatively.
 
 Wave 1 is a mandatory 50-concept pilot: algebra +14, numerical_analysis +20 and calc1 +16. The first

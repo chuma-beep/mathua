@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The idea",
+    "section": "The idea",
+    "subgoals": [
+      "Fix one objective",
+      "Bound the others",
+      "Read the optimum"
+    ]
+  },
+  {
+    "label": "Choosing epsilon",
+    "section": "Choosing epsilon",
+    "subgoals": [
+      "Test a tight bound",
+      "Test a loose bound",
+      "Choose a useful range"
+    ]
+  },
+  {
+    "label": "Feasibility",
+    "section": "Feasibility",
+    "subgoals": [
+      "Check the bounds",
+      "Recognise infeasibility",
+      "Adjust epsilon"
+    ]
+  }
+]

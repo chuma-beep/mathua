@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Sufficient conditions",
+    "section": "Sufficient conditions",
+    "subgoals": [
+      "Check convexity",
+      "Apply a weighted sum",
+      "Conclude global optimality"
+    ]
+  },
+  {
+    "label": "Convex fronts",
+    "section": "Convex fronts",
+    "subgoals": [
+      "Recognise a convex front",
+      "Find an unsupported point",
+      "Explain the gap"
+    ]
+  },
+  {
+    "label": "Testing a candidate",
+    "section": "Testing a candidate",
+    "subgoals": [
+      "Compare with neighbours",
+      "Find a dominating point",
+      "Stop at the front"
+    ]
+  }
+]

@@ -5,8 +5,8 @@
   "band_width": 3,
   "note": "DRAFT, ADR-046 D3. Band width is the open decision (how often a learner is assessed), not product policy. Unit prerequisite order is DERIVED from the concept DAG and deliberately not stored: authoring it would be a second hierarchy. Do not hand-edit concept_ids; regenerate with `go run ./cmd/masteryunits -band N`.",
   "source": "data/concepts",
-  "concept_count": 2050,
-  "unit_count": 147,
+  "concept_count": 2100,
+  "unit_count": 148,
   "units": [
     {
       "id": "abstract_algebra.b6",
@@ -3086,15 +3086,17 @@
       "depth_min": 34,
       "depth_max": 35,
       "subdomains": [
-        "optimization.foundations"
+        "optimization.foundations",
+        "optimization.multiobjective"
       ],
       "concept_ids": [
         "optim.convex_set",
         "optim.feasible.set",
         "optim.local_global",
+        "optim.pareto_dominance",
         "optim.problem.anatomy"
       ],
-      "concept_count": 4
+      "concept_count": 5
     },
     {
       "id": "optimization.b12",
@@ -3108,33 +3110,55 @@
         "optimization.convex",
         "optimization.discrete",
         "optimization.foundations",
+        "optimization.large_scale",
+        "optimization.multiobjective",
+        "optimization.stochastic",
+        "optimization.structured",
         "optimization.unconstrained"
       ],
       "concept_ids": [
         "optim.basic_solution",
         "optim.coercivity",
         "optim.coordinate_descent",
+        "optim.crowding_distance",
         "optim.cutting_plane",
+        "optim.dual_coordinate",
         "optim.dual_function",
         "optim.epigraph",
+        "optim.epsilon_constraint",
         "optim.equality_lagrange",
         "optim.first_order",
+        "optim.first_order_method",
+        "optim.goal_programming",
         "optim.gradient_step",
         "optim.hessian",
         "optim.integer_program",
         "optim.knapsack",
+        "optim.least_squares",
         "optim.lp_dual",
         "optim.lp_relaxation",
         "optim.lp_standard_form",
+        "optim.nondominated_sort",
+        "optim.nonsmooth_optimality",
+        "optim.pareto_front",
+        "optim.pareto_optimality",
         "optim.projected_gradient",
+        "optim.proximal_gradient",
+        "optim.proximal_operator",
+        "optim.regularized_least_squares",
         "optim.second_order",
         "optim.set_cover",
+        "optim.sgd",
         "optim.simplex_pivot",
+        "optim.soft_threshold",
+        "optim.sparsity",
         "optim.step_size",
         "optim.strict_convexity",
-        "optim.subgradient"
+        "optim.subgradient",
+        "optim.tradeoff_rate",
+        "optim.weighted_sum"
       ],
-      "concept_count": 22
+      "concept_count": 40
     },
     {
       "id": "optimization.b13",
@@ -3144,34 +3168,63 @@
       "depth_min": 39,
       "depth_max": 41,
       "subdomains": [
+        "optimization.advanced",
         "optimization.constrained",
         "optimization.convex",
         "optimization.discrete",
+        "optimization.large_scale",
+        "optimization.multiobjective",
+        "optimization.stochastic",
+        "optimization.structured",
         "optimization.unconstrained"
       ],
       "concept_ids": [
         "optim.active_constraint",
+        "optim.adagrad",
+        "optim.adam",
+        "optim.admm",
         "optim.armijo",
         "optim.augmented_lagrangian",
         "optim.barrier",
         "optim.bfgs",
         "optim.branch_bound",
         "optim.complementary_slackness",
+        "optim.conic_program",
         "optim.conjugate_direction",
+        "optim.dual_certificate",
+        "optim.infeasibility_certificate",
         "optim.integrality_gap",
         "optim.kkt",
         "optim.kkt_matrix",
+        "optim.kkt_multiobjective",
+        "optim.lasso",
+        "optim.learning_rate_schedule",
+        "optim.matrix_free",
+        "optim.mini_batch",
+        "optim.momentum",
         "optim.newton_optim",
+        "optim.online_gradient",
+        "optim.orthogonal_projection",
         "optim.penalty",
+        "optim.preconditioning",
+        "optim.quadratic_program",
+        "optim.sample_complexity",
+        "optim.second_order_cone",
+        "optim.semidefinite",
         "optim.slater",
+        "optim.stochastic_averaging",
+        "optim.stochastic_noise",
         "optim.strong_duality",
+        "optim.subsampling",
         "optim.transportation",
+        "optim.trust_region_global",
         "optim.trust_region_ratio",
         "optim.trust_region_subproblem",
+        "optim.variance_reduction",
         "optim.weak_duality",
         "optim.wolfe"
       ],
-      "concept_count": 20
+      "concept_count": 44
     },
     {
       "id": "optimization.b14",
@@ -3179,18 +3232,41 @@
       "domain": "optimization",
       "band": 14,
       "depth_min": 42,
-      "depth_max": 43,
+      "depth_max": 44,
       "subdomains": [
+        "optimization.advanced",
         "optimization.constrained",
-        "optimization.convex"
+        "optimization.convex",
+        "optimization.large_scale"
       ],
       "concept_ids": [
         "optim.active_set",
+        "optim.central_path",
+        "optim.consensus",
+        "optim.decomposition",
         "optim.duality_gap",
         "optim.lp_sensitivity",
+        "optim.path_following",
+        "optim.primal_dual_interior",
         "optim.shadow_price"
       ],
-      "concept_count": 4
+      "concept_count": 9
+    },
+    {
+      "id": "optimization.b15",
+      "title": "Optimization · Stage 16",
+      "domain": "optimization",
+      "band": 15,
+      "depth_min": 45,
+      "depth_max": 45,
+      "subdomains": [
+        "optimization.advanced"
+      ],
+      "concept_ids": [
+        "optim.interior_convergence",
+        "optim.newton_system"
+      ],
+      "concept_count": 2
     },
     {
       "id": "prealgebra.b0",

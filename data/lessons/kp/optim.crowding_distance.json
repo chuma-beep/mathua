@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Neighbours",
+    "section": "Neighbours",
+    "subgoals": [
+      "Sort by an objective",
+      "Find the neighbours",
+      "Measure a gap"
+    ]
+  },
+  {
+    "label": "The distance",
+    "section": "The distance",
+    "subgoals": [
+      "Normalise gaps",
+      "Sum objectives",
+      "Compare two points"
+    ]
+  },
+  {
+    "label": "Boundary points",
+    "section": "Boundary points",
+    "subgoals": [
+      "Identify an extreme",
+      "Assign an infinite distance",
+      "Protect the extent"
+    ]
+  }
+]

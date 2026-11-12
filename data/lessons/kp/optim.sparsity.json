@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Nonzeros",
+    "section": "Nonzeros",
+    "subgoals": [
+      "Count nonzeros",
+      "Compute density",
+      "Compare with dense storage"
+    ]
+  },
+  {
+    "label": "Storage",
+    "section": "Storage",
+    "subgoals": [
+      "Size coordinate storage",
+      "Size compressed storage",
+      "Choose a format"
+    ]
+  },
+  {
+    "label": "Work",
+    "section": "Work",
+    "subgoals": [
+      "Cost a product",
+      "Count touches",
+      "Predict the runtime"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Variance",
+    "section": "Variance",
+    "subgoals": [
+      "Compute a batch variance",
+      "Compare two batch sizes",
+      "Find a standard deviation"
+    ]
+  },
+  {
+    "label": "Bias",
+    "section": "Bias",
+    "subgoals": [
+      "Compute an expectation",
+      "Detect a biased sampler",
+      "Correct the weights"
+    ]
+  },
+  {
+    "label": "Heavy tails",
+    "section": "Heavy tails",
+    "subgoals": [
+      "Clip an outlier",
+      "Compare with a bounded assumption",
+      "Choose a robust average"
+    ]
+  }
+]

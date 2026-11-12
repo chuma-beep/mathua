@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The penalty",
+    "section": "The penalty",
+    "subgoals": [
+      "Write the penalised objective",
+      "Evaluate it",
+      "Shift the diagonal"
+    ]
+  },
+  {
+    "label": "The effect",
+    "section": "The effect",
+    "subgoals": [
+      "Compare two penalties",
+      "Measure the shrinkage",
+      "Read the residual"
+    ]
+  },
+  {
+    "label": "Choosing the penalty",
+    "section": "Choosing the penalty",
+    "subgoals": [
+      "Try a grid",
+      "Validate",
+      "Choose a strength"
+    ]
+  }
+]

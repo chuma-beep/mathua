@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The average",
+    "section": "The average",
+    "subgoals": [
+      "Average two gradients",
+      "Keep the expectation",
+      "Reduce the variance"
+    ]
+  },
+  {
+    "label": "The cost",
+    "section": "The cost",
+    "subgoals": [
+      "Count the arithmetic",
+      "Compare batch sizes",
+      "Choose for throughput"
+    ]
+  },
+  {
+    "label": "Choosing a batch",
+    "section": "Choosing a batch",
+    "subgoals": [
+      "Measure the speedup",
+      "Find the knee",
+      "Stop doubling"
+    ]
+  }
+]

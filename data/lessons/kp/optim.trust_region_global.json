@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The ratio test",
+    "section": "The ratio test",
+    "subgoals": [
+      "Compute the ratio",
+      "Accept or reject",
+      "Compare with a threshold"
+    ]
+  },
+  {
+    "label": "The radius",
+    "section": "The radius",
+    "subgoals": [
+      "Shrink the radius",
+      "Grow the radius",
+      "Track model quality"
+    ]
+  },
+  {
+    "label": "Global convergence",
+    "section": "Global convergence",
+    "subgoals": [
+      "Argue by contradiction",
+      "Use a small radius",
+      "Force the gradient to zero"
+    ]
+  }
+]

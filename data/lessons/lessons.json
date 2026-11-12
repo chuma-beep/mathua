@@ -8198,5 +8198,205 @@
   {
     "concept_id": "optim.integrality_gap",
     "source": "authored/optim.integrality_gap.md"
+  },
+  {
+    "concept_id": "optim.central_path",
+    "source": "authored/optim.central_path.md"
+  },
+  {
+    "concept_id": "optim.path_following",
+    "source": "authored/optim.path_following.md"
+  },
+  {
+    "concept_id": "optim.primal_dual_interior",
+    "source": "authored/optim.primal_dual_interior.md"
+  },
+  {
+    "concept_id": "optim.newton_system",
+    "source": "authored/optim.newton_system.md"
+  },
+  {
+    "concept_id": "optim.conic_program",
+    "source": "authored/optim.conic_program.md"
+  },
+  {
+    "concept_id": "optim.second_order_cone",
+    "source": "authored/optim.second_order_cone.md"
+  },
+  {
+    "concept_id": "optim.semidefinite",
+    "source": "authored/optim.semidefinite.md"
+  },
+  {
+    "concept_id": "optim.dual_certificate",
+    "source": "authored/optim.dual_certificate.md"
+  },
+  {
+    "concept_id": "optim.infeasibility_certificate",
+    "source": "authored/optim.infeasibility_certificate.md"
+  },
+  {
+    "concept_id": "optim.interior_convergence",
+    "source": "authored/optim.interior_convergence.md"
+  },
+  {
+    "concept_id": "optim.sgd",
+    "source": "authored/optim.sgd.md"
+  },
+  {
+    "concept_id": "optim.mini_batch",
+    "source": "authored/optim.mini_batch.md"
+  },
+  {
+    "concept_id": "optim.variance_reduction",
+    "source": "authored/optim.variance_reduction.md"
+  },
+  {
+    "concept_id": "optim.momentum",
+    "source": "authored/optim.momentum.md"
+  },
+  {
+    "concept_id": "optim.adagrad",
+    "source": "authored/optim.adagrad.md"
+  },
+  {
+    "concept_id": "optim.adam",
+    "source": "authored/optim.adam.md"
+  },
+  {
+    "concept_id": "optim.learning_rate_schedule",
+    "source": "authored/optim.learning_rate_schedule.md"
+  },
+  {
+    "concept_id": "optim.stochastic_noise",
+    "source": "authored/optim.stochastic_noise.md"
+  },
+  {
+    "concept_id": "optim.sample_complexity",
+    "source": "authored/optim.sample_complexity.md"
+  },
+  {
+    "concept_id": "optim.online_gradient",
+    "source": "authored/optim.online_gradient.md"
+  },
+  {
+    "concept_id": "optim.pareto_dominance",
+    "source": "authored/optim.pareto_dominance.md"
+  },
+  {
+    "concept_id": "optim.pareto_front",
+    "source": "authored/optim.pareto_front.md"
+  },
+  {
+    "concept_id": "optim.weighted_sum",
+    "source": "authored/optim.weighted_sum.md"
+  },
+  {
+    "concept_id": "optim.epsilon_constraint",
+    "source": "authored/optim.epsilon_constraint.md"
+  },
+  {
+    "concept_id": "optim.goal_programming",
+    "source": "authored/optim.goal_programming.md"
+  },
+  {
+    "concept_id": "optim.tradeoff_rate",
+    "source": "authored/optim.tradeoff_rate.md"
+  },
+  {
+    "concept_id": "optim.kkt_multiobjective",
+    "source": "authored/optim.kkt_multiobjective.md"
+  },
+  {
+    "concept_id": "optim.pareto_optimality",
+    "source": "authored/optim.pareto_optimality.md"
+  },
+  {
+    "concept_id": "optim.nondominated_sort",
+    "source": "authored/optim.nondominated_sort.md"
+  },
+  {
+    "concept_id": "optim.crowding_distance",
+    "source": "authored/optim.crowding_distance.md"
+  },
+  {
+    "concept_id": "optim.sparsity",
+    "source": "authored/optim.sparsity.md"
+  },
+  {
+    "concept_id": "optim.first_order_method",
+    "source": "authored/optim.first_order_method.md"
+  },
+  {
+    "concept_id": "optim.dual_coordinate",
+    "source": "authored/optim.dual_coordinate.md"
+  },
+  {
+    "concept_id": "optim.decomposition",
+    "source": "authored/optim.decomposition.md"
+  },
+  {
+    "concept_id": "optim.admm",
+    "source": "authored/optim.admm.md"
+  },
+  {
+    "concept_id": "optim.consensus",
+    "source": "authored/optim.consensus.md"
+  },
+  {
+    "concept_id": "optim.stochastic_averaging",
+    "source": "authored/optim.stochastic_averaging.md"
+  },
+  {
+    "concept_id": "optim.subsampling",
+    "source": "authored/optim.subsampling.md"
+  },
+  {
+    "concept_id": "optim.matrix_free",
+    "source": "authored/optim.matrix_free.md"
+  },
+  {
+    "concept_id": "optim.preconditioning",
+    "source": "authored/optim.preconditioning.md"
+  },
+  {
+    "concept_id": "optim.least_squares",
+    "source": "authored/optim.least_squares.md"
+  },
+  {
+    "concept_id": "optim.regularized_least_squares",
+    "source": "authored/optim.regularized_least_squares.md"
+  },
+  {
+    "concept_id": "optim.lasso",
+    "source": "authored/optim.lasso.md"
+  },
+  {
+    "concept_id": "optim.proximal_operator",
+    "source": "authored/optim.proximal_operator.md"
+  },
+  {
+    "concept_id": "optim.proximal_gradient",
+    "source": "authored/optim.proximal_gradient.md"
+  },
+  {
+    "concept_id": "optim.soft_threshold",
+    "source": "authored/optim.soft_threshold.md"
+  },
+  {
+    "concept_id": "optim.orthogonal_projection",
+    "source": "authored/optim.orthogonal_projection.md"
+  },
+  {
+    "concept_id": "optim.quadratic_program",
+    "source": "authored/optim.quadratic_program.md"
+  },
+  {
+    "concept_id": "optim.trust_region_global",
+    "source": "authored/optim.trust_region_global.md"
+  },
+  {
+    "concept_id": "optim.nonsmooth_optimality",
+    "source": "authored/optim.nonsmooth_optimality.md"
   }
 ]

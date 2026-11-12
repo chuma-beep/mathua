@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Marginal rate",
+    "section": "Marginal rate",
+    "subgoals": [
+      "Compute a slope",
+      "Interpret its sign",
+      "Compare two regions"
+    ]
+  },
+  {
+    "label": "Units",
+    "section": "Units",
+    "subgoals": [
+      "Attach units",
+      "Normalise objectives",
+      "Avoid a false comparison"
+    ]
+  },
+  {
+    "label": "Reading a front",
+    "section": "Reading a front",
+    "subgoals": [
+      "Use two points",
+      "Estimate a derivative",
+      "Decide where to move"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Project a point",
+      "Measure the residual",
+      "Check orthogonality"
+    ]
+  },
+  {
+    "label": "A convex set",
+    "section": "A convex set",
+    "subgoals": [
+      "Project onto a convex set",
+      "Handle a nonconvex set",
+      "Compare answers"
+    ]
+  },
+  {
+    "label": "Nonexpansiveness",
+    "section": "Nonexpansiveness",
+    "subgoals": [
+      "Compare two projections",
+      "Bound the distance",
+      "Use stability"
+    ]
+  }
+]

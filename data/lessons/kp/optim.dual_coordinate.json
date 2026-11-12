@@ -1,0 +1,29 @@
+[
+  {
+    "label": "One coordinate at a time",
+    "section": "One coordinate at a time",
+    "subgoals": [
+      "Fix the other multipliers",
+      "Maximise one variable",
+      "Update it"
+    ]
+  },
+  {
+    "label": "The update",
+    "section": "The update",
+    "subgoals": [
+      "Compute the unconstrained value",
+      "Clamp to the box",
+      "Check the bound"
+    ]
+  },
+  {
+    "label": "Convergence",
+    "section": "Convergence",
+    "subgoals": [
+      "Measure a sweep",
+      "Compare with a tolerance",
+      "Stop"
+    ]
+  }
+]

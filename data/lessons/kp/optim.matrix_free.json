@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Products only",
+    "section": "Products only",
+    "subgoals": [
+      "Count products",
+      "Implement a product",
+      "Avoid a factorisation"
+    ]
+  },
+  {
+    "label": "Iterations",
+    "section": "Iterations",
+    "subgoals": [
+      "Bound exact iterations",
+      "Estimate practical ones",
+      "Read the condition number"
+    ]
+  },
+  {
+    "label": "Memory",
+    "section": "Memory",
+    "subgoals": [
+      "Count vectors",
+      "Compare with a factorisation",
+      "Fit a budget"
+    ]
+  }
+]

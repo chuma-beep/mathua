@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The iteration count",
+    "section": "The iteration count",
+    "subgoals": [
+      "Apply a reduction factor",
+      "Count the steps",
+      "Reach a target gap"
+    ]
+  },
+  {
+    "label": "Work per iteration",
+    "section": "Work per iteration",
+    "subgoals": [
+      "Estimate a factorisation",
+      "Multiply by the steps",
+      "Compare two sizes"
+    ]
+  },
+  {
+    "label": "Polynomial bounds",
+    "section": "Polynomial bounds",
+    "subgoals": [
+      "Read a worst-case bound",
+      "Separate dimension from accuracy",
+      "Predict the scaling"
+    ]
+  }
+]

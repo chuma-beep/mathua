@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The block form",
+    "section": "The block form",
+    "subgoals": [
+      "Identify the blocks",
+      "Compute the trace",
+      "Check the zero corner"
+    ]
+  },
+  {
+    "label": "The Schur complement",
+    "section": "The Schur complement",
+    "subgoals": [
+      "Eliminate the primal block",
+      "Count the multiplier system",
+      "Compare the sizes"
+    ]
+  },
+  {
+    "label": "The conditioning",
+    "section": "The conditioning",
+    "subgoals": [
+      "Compute a diagonal term",
+      "Watch the parameter",
+      "Choose a remedy"
+    ]
+  }
+]

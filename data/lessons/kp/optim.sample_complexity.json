@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The convex rate",
+    "section": "The convex rate",
+    "subgoals": [
+      "Read the inverse accuracy",
+      "Include the condition number",
+      "Compare two targets"
+    ]
+  },
+  {
+    "label": "The batch trade",
+    "section": "The batch trade",
+    "subgoals": [
+      "Multiply steps by batch",
+      "Hold the sample budget",
+      "Choose a batch"
+    ]
+  },
+  {
+    "label": "The nonconvex rate",
+    "section": "The nonconvex rate",
+    "subgoals": [
+      "Square the accuracy",
+      "Compare rates",
+      "Predict the cost"
+    ]
+  }
+]

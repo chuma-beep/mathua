@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The idea",
+    "section": "The idea",
+    "subgoals": [
+      "Apply a preconditioner",
+      "Preserve the solution",
+      "Compare with the original"
+    ]
+  },
+  {
+    "label": "Condition number",
+    "section": "Condition number",
+    "subgoals": [
+      "Compute a condition number",
+      "Predict iterations",
+      "Measure the gain"
+    ]
+  },
+  {
+    "label": "Cost",
+    "section": "Cost",
+    "subgoals": [
+      "Cost an application",
+      "Compare two preconditioners",
+      "Choose one"
+    ]
+  }
+]

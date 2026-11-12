@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The rule",
+    "section": "The rule",
+    "subgoals": [
+      "Subtract the penalty from the magnitude",
+      "Keep the sign",
+      "Reach zero"
+    ]
+  },
+  {
+    "label": "The threshold",
+    "section": "The threshold",
+    "subgoals": [
+      "Compute a threshold",
+      "Compare two penalties",
+      "Count survivors"
+    ]
+  },
+  {
+    "label": "Two-sided",
+    "section": "Two-sided",
+    "subgoals": [
+      "Handle a negative input",
+      "Check symmetry",
+      "Plot the shift"
+    ]
+  }
+]

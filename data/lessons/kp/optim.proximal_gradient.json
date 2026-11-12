@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The iteration",
+    "section": "The iteration",
+    "subgoals": [
+      "Take the gradient step",
+      "Apply the proximal operator",
+      "Evaluate the objective"
+    ]
+  },
+  {
+    "label": "The step size",
+    "section": "The step size",
+    "subgoals": [
+      "Bound the step",
+      "Test a large step",
+      "Choose a safe one"
+    ]
+  },
+  {
+    "label": "Convergence",
+    "section": "Convergence",
+    "subgoals": [
+      "Check descent",
+      "Read the rate",
+      "Stop at a tolerance"
+    ]
+  }
+]

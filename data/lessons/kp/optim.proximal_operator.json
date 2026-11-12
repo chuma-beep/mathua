@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Write the proximal objective",
+      "Minimise it",
+      "Interpret the step"
+    ]
+  },
+  {
+    "label": "A quadratic example",
+    "section": "A quadratic example",
+    "subgoals": [
+      "Apply the formula",
+      "Compare two steps",
+      "Reach the minimiser"
+    ]
+  },
+  {
+    "label": "Why it helps",
+    "section": "Why it helps",
+    "subgoals": [
+      "Split smooth and nonsmooth",
+      "Compose operators",
+      "Iterate"
+    ]
+  }
+]

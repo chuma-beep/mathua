@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Fronts",
+    "section": "Fronts",
+    "subgoals": [
+      "Remove a front",
+      "Resort",
+      "Count the layers"
+    ]
+  },
+  {
+    "label": "The first front",
+    "section": "The first front",
+    "subgoals": [
+      "Identify front one",
+      "Allow ties",
+      "Reject dominated points"
+    ]
+  },
+  {
+    "label": "Later fronts",
+    "section": "Later fronts",
+    "subgoals": [
+      "Assign a front number",
+      "Compare two points",
+      "Rank a population"
+    ]
+  }
+]

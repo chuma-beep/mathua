@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The standard form",
+    "section": "The standard form",
+    "subgoals": [
+      "Write the conic constraint",
+      "Count the primal variables",
+      "Test a point for membership"
+    ]
+  },
+  {
+    "label": "The dual cone",
+    "section": "The dual cone",
+    "subgoals": [
+      "Write the dual objective",
+      "Count the dual variables",
+      "Test dual feasibility"
+    ]
+  },
+  {
+    "label": "Self-dual cones",
+    "section": "Self-dual cones",
+    "subgoals": [
+      "Recognise a self-dual cone",
+      "Compare the two dimensions",
+      "Use symmetry"
+    ]
+  }
+]

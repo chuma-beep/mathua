@@ -27,6 +27,30 @@ var wave11IDs = []string{
 	"optim.transportation", "optim.set_cover", "optim.integrality_gap",
 }
 
+var wave12IDs = []string{
+	"optim.central_path", "optim.path_following", "optim.primal_dual_interior",
+	"optim.newton_system", "optim.conic_program", "optim.second_order_cone",
+	"optim.semidefinite", "optim.dual_certificate", "optim.infeasibility_certificate",
+	"optim.interior_convergence",
+	"optim.sgd", "optim.mini_batch", "optim.variance_reduction", "optim.momentum",
+	"optim.adagrad", "optim.adam", "optim.learning_rate_schedule",
+	"optim.stochastic_noise", "optim.sample_complexity", "optim.online_gradient",
+	"optim.pareto_dominance", "optim.pareto_front", "optim.weighted_sum",
+	"optim.epsilon_constraint", "optim.goal_programming", "optim.tradeoff_rate",
+	"optim.kkt_multiobjective", "optim.pareto_optimality", "optim.nondominated_sort",
+	"optim.crowding_distance",
+	"optim.sparsity", "optim.first_order_method", "optim.dual_coordinate",
+	"optim.decomposition", "optim.admm", "optim.consensus",
+	"optim.stochastic_averaging", "optim.subsampling", "optim.matrix_free",
+	"optim.preconditioning",
+	"optim.least_squares", "optim.regularized_least_squares", "optim.lasso",
+	"optim.proximal_operator", "optim.proximal_gradient", "optim.soft_threshold",
+	"optim.orthogonal_projection", "optim.quadratic_program",
+	"optim.trust_region_global", "optim.nonsmooth_optimality",
+}
+
+var allOptimizationIDs = append(append([]string{}, wave11IDs...), wave12IDs...)
+
 func wave11Registry(t *testing.T) *generator.Registry {
 	t.Helper()
 	reg := generator.NewRegistry()
@@ -38,7 +62,7 @@ func wave11Registry(t *testing.T) *generator.Registry {
 // names the quantity it wants rather than a theorem.
 func TestEveryAnswerIsNumeric(t *testing.T) {
 	reg := wave11Registry(t)
-	for _, id := range wave11IDs {
+	for _, id := range allOptimizationIDs {
 		for _, kp := range []int{1, 2, 3} {
 			for draw := 0; draw < 20; draw++ {
 				p, err := reg.GenerateContext(id, generator.GeneratorContext{KPOrdinal: kp})
@@ -67,7 +91,7 @@ func TestEveryAnswerIsNumeric(t *testing.T) {
 // design target of twenty per ordinal in two hundred draws.
 func TestEveryOrdinalHasEnoughVariety(t *testing.T) {
 	reg := wave11Registry(t)
-	for _, id := range wave11IDs {
+	for _, id := range allOptimizationIDs {
 		for kp := 1; kp <= 3; kp++ {
 			short := map[string]bool{}
 			for draw := 0; draw < 12; draw++ {

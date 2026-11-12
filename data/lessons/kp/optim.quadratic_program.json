@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The form",
+    "section": "The form",
+    "subgoals": [
+      "Evaluate the objective",
+      "Check convexity",
+      "Write the constraints"
+    ]
+  },
+  {
+    "label": "The KKT system",
+    "section": "The KKT system",
+    "subgoals": [
+      "Form the stationarity condition",
+      "Identify active constraints",
+      "Solve a small system"
+    ]
+  },
+  {
+    "label": "Solving it",
+    "section": "Solving it",
+    "subgoals": [
+      "Take an active-set step",
+      "Apply a barrier",
+      "Compare methods"
+    ]
+  }
+]

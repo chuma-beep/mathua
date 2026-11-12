@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The definition",
+    "section": "The definition",
+    "subgoals": [
+      "Compare two objective vectors",
+      "Decide dominance",
+      "Discard a dominated point"
+    ]
+  },
+  {
+    "label": "Weak dominance",
+    "section": "Weak dominance",
+    "subgoals": [
+      "Distinguish weak from strict",
+      "Handle equal vectors",
+      "Apply the definition"
+    ]
+  },
+  {
+    "label": "A test on two points",
+    "section": "A test on two points",
+    "subgoals": [
+      "Count winning coordinates",
+      "Count losing coordinates",
+      "Reach a verdict"
+    ]
+  }
+]

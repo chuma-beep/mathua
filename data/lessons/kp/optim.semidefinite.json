@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The cone",
+    "section": "The cone",
+    "subgoals": [
+      "Test a diagonal matrix",
+      "Find the smallest eigenvalue",
+      "Recognise the interior"
+    ]
+  },
+  {
+    "label": "The constraint",
+    "section": "The constraint",
+    "subgoals": [
+      "Evaluate an affine matrix",
+      "Check the diagonal",
+      "Count the free entries"
+    ]
+  },
+  {
+    "label": "The dual",
+    "section": "The dual",
+    "subgoals": [
+      "Form the dual matrix",
+      "Compute the trace product",
+      "Interpret the gap"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The two averages",
+    "section": "The two averages",
+    "subgoals": [
+      "Update a moment",
+      "Separate first from second",
+      "Weight recent values"
+    ]
+  },
+  {
+    "label": "Bias correction",
+    "section": "Bias correction",
+    "subgoals": [
+      "Compute the correction",
+      "Remove the initial bias",
+      "Compare early steps"
+    ]
+  },
+  {
+    "label": "The update",
+    "section": "The update",
+    "subgoals": [
+      "Form the ratio",
+      "Scale the step",
+      "Check the sign"
+    ]
+  }
+]

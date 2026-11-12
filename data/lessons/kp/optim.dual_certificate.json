@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The bound",
+    "section": "The bound",
+    "subgoals": [
+      "Evaluate the dual objective",
+      "Check dual feasibility",
+      "Compare with a primal value"
+    ]
+  },
+  {
+    "label": "The gap",
+    "section": "The gap",
+    "subgoals": [
+      "Compute the gap",
+      "Decide optimality",
+      "Report the bound"
+    ]
+  },
+  {
+    "label": "Certificates in practice",
+    "section": "Certificates in practice",
+    "subgoals": [
+      "Test a certificate",
+      "Interpret a small violation",
+      "Reject a false proof"
+    ]
+  }
+]

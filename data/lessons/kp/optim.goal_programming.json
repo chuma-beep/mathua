@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Goals and deviations",
+    "section": "Goals and deviations",
+    "subgoals": [
+      "Write a deviation",
+      "Minimise a total deviation",
+      "Interpret a shortfall"
+    ]
+  },
+  {
+    "label": "Weighted deviations",
+    "section": "Weighted deviations",
+    "subgoals": [
+      "Apply weights",
+      "Compare two plans",
+      "Set a zero weight"
+    ]
+  },
+  {
+    "label": "Lexicographic order",
+    "section": "Lexicographic order",
+    "subgoals": [
+      "Rank deviations",
+      "Minimise the largest",
+      "Break a tie"
+    ]
+  }
+]

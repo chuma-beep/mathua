@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The objective",
+    "section": "The objective",
+    "subgoals": [
+      "Evaluate the penalty",
+      "Compare with a quadratic penalty",
+      "Recognise the kink"
+    ]
+  },
+  {
+    "label": "Sparsity",
+    "section": "Sparsity",
+    "subgoals": [
+      "Count nonzeros",
+      "Compare two penalties",
+      "Explain a zero coefficient"
+    ]
+  },
+  {
+    "label": "A closed form",
+    "section": "A closed form",
+    "subgoals": [
+      "Apply a soft threshold",
+      "Handle a small estimate",
+      "Read the result"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The split",
+    "section": "The split",
+    "subgoals": [
+      "Write the copy constraint",
+      "Identify the blocks",
+      "Choose an order"
+    ]
+  },
+  {
+    "label": "The steps",
+    "section": "The steps",
+    "subgoals": [
+      "Minimise one block",
+      "Minimise the other",
+      "Update the dual"
+    ]
+  },
+  {
+    "label": "The penalty",
+    "section": "The penalty",
+    "subgoals": [
+      "Choose a penalty",
+      "Measure a residual",
+      "Adjust the penalty"
+    ]
+  }
+]

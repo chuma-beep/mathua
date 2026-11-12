@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The cone",
+    "section": "The cone",
+    "subgoals": [
+      "Test a point for membership",
+      "Find the smallest cone scalar",
+      "Use the norm"
+    ]
+  },
+  {
+    "label": "The dual",
+    "section": "The dual",
+    "subgoals": [
+      "Write a dual pair",
+      "Compute the complementarity product",
+      "Check self-duality"
+    ]
+  },
+  {
+    "label": "A simple model",
+    "section": "A simple model",
+    "subgoals": [
+      "Fix the linear relation",
+      "Compute the norm",
+      "Return the optimal scalar"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Sampling rate",
+    "section": "Sampling rate",
+    "subgoals": [
+      "Scale a sample average",
+      "Compute an inverse rate",
+      "Compare two rates"
+    ]
+  },
+  {
+    "label": "Cost",
+    "section": "Cost",
+    "subgoals": [
+      "Cost a sample",
+      "Compare with a full pass",
+      "Choose a rate"
+    ]
+  },
+  {
+    "label": "Bias",
+    "section": "Bias",
+    "subgoals": [
+      "Test unbiasedness",
+      "Detect a biased subset",
+      "Correct the estimate"
+    ]
+  }
+]

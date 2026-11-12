@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Farkas' lemma",
+    "section": "Farkas' lemma",
+    "subgoals": [
+      "Compute the right-hand product",
+      "State the alternative",
+      "Recognise the form"
+    ]
+  },
+  {
+    "label": "Reading the certificate",
+    "section": "Reading the certificate",
+    "subgoals": [
+      "Compute a column product",
+      "Check the sign pattern",
+      "Reach a contradiction"
+    ]
+  },
+  {
+    "label": "Numerical caution",
+    "section": "Numerical caution",
+    "subgoals": [
+      "Scale a certificate",
+      "Test a rounded certificate",
+      "Decide whether it proves anything"
+    ]
+  }
+]

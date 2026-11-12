@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The recursion",
+    "section": "The recursion",
+    "subgoals": [
+      "Update the velocity",
+      "Move the point",
+      "Repeat one step"
+    ]
+  },
+  {
+    "label": "The effective step",
+    "section": "The effective step",
+    "subgoals": [
+      "Compute the steady factor",
+      "Compare decay values",
+      "Predict the acceleration"
+    ]
+  },
+  {
+    "label": "Oscillation",
+    "section": "Oscillation",
+    "subgoals": [
+      "Cancel alternating terms",
+      "Damp a zigzag",
+      "Choose a stable decay"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "The condition",
+    "section": "The condition",
+    "subgoals": [
+      "Check zero membership",
+      "Reduce to the smooth case",
+      "Interpret the result"
+    ]
+  },
+  {
+    "label": "Kinks",
+    "section": "Kinks",
+    "subgoals": [
+      "Compute a subdifferential",
+      "Test a kink",
+      "Find an optimum"
+    ]
+  },
+  {
+    "label": "Constrained form",
+    "section": "Constrained form",
+    "subgoals": [
+      "Form a normal cone",
+      "Add subgradients",
+      "Test membership"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Polynomial decay",
+    "section": "Polynomial decay",
+    "subgoals": [
+      "Evaluate a polynomial step",
+      "Compare exponents",
+      "Reach a target step"
+    ]
+  },
+  {
+    "label": "Staircase decay",
+    "section": "Staircase decay",
+    "subgoals": [
+      "Apply a milestone factor",
+      "Count milestones",
+      "Find the current step"
+    ]
+  },
+  {
+    "label": "Warmup",
+    "section": "Warmup",
+    "subgoals": [
+      "Ramp the step",
+      "Choose the warmup length",
+      "Hand over to decay"
+    ]
+  }
+]
