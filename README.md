@@ -9,6 +9,8 @@
 ╚═╝     ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝
 </pre>
 
+<img src="web/next-app/public/og-github.png" alt="The Mathua landing page, showing the adaptive mathematics hero" width="100%">
+
 **Math Understanding Agent**
 
 *An open-source adaptive math learning engine*
