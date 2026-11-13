@@ -30,3 +30,10 @@ it('accepts an explicit same-origin build', () => {
   vi.stubEnv('NODE_ENV', 'production')
   expect(resolveAPIBase('', true)).toBe('')
 })
+
+// A developer .env that names localhost must not survive into a Worker or
+// Docker build. The same-origin flag wins over any configured origin.
+it('prefers same-origin over a configured origin', () => {
+  vi.stubEnv('NODE_ENV', 'production')
+  expect(resolveAPIBase('http://localhost:8080', true)).toBe('')
+})

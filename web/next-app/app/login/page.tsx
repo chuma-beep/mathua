@@ -7,7 +7,7 @@ import { useTheme } from '../../hooks/useTheme'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import SectionHeader from '../../components/SectionHeader'
-import { signup, login, validateToken, requestPasswordReset, completePasswordReset, startOAuthLogin, googleOneTap, OAUTH_LABELS, type OAuthProvider, API_BASE, getConfig } from '../../lib/api'
+import { signup, login, validateToken, requestPasswordReset, completePasswordReset, startOAuthLogin, OAUTH_LABELS, type OAuthProvider, API_BASE, getConfig } from '../../lib/api'
 import { clearGuest, establishSession, getGuestId, isLoggedIn } from '../../lib/auth'
 import { LOGIN_HERO } from '../../lib/loginHero'
 
@@ -35,33 +35,6 @@ type LoginAction =
   | { type: 'TOGGLE_SHOW_PASSWORD' }
   | { type: 'SET_ATTEMPTED'; attempted: boolean }
   | { type: 'SET_FIELD_ERRORS'; fieldErrors: LoginState['fieldErrors'] }
-
-interface GoogleIdConfiguration {
-  client_id: string
-  callback: (resp: { credential?: string }) => void
-  auto_select: boolean
-  cancel_on_tap_outside: boolean
-}
-
-interface GoogleButtonConfiguration {
-  theme: string
-  size: string
-  width: number
-  text: string
-  shape: string
-}
-
-interface GoogleWindow {
-  google?: {
-    accounts: {
-      id: {
-        initialize: (config: GoogleIdConfiguration) => void
-        renderButton: (element: HTMLElement, config: GoogleButtonConfiguration) => void
-        prompt: () => void
-      }
-    }
-  }
-}
 
 const initialState: LoginState = {
   tab: 'login',
@@ -191,7 +164,6 @@ function LoginInner() {
   const { push, back } = useRouter()
   const searchParams = useSearchParams()
   const [state, dispatch] = useReducer(loginReducer, initialState)
-  const [googleReady, setGoogleReady] = useState(false)
   const [googleError, setGoogleError] = useState('')
   const [googleLoading, setGoogleLoading] = useState(false)
   const [authDisabled, setAuthDisabled] = useState(false)
@@ -233,7 +205,9 @@ function LoginInner() {
     }
   }, [searchParams, push, ret])
 
-  // GIS One-Tap init (+ auth availability probe)
+  // Auth availability probe. The Google button is a plain redirect to the
+  // backend. GIS One Tap was removed because a rejected client id hid the
+  // working fallback button and left the page with no usable Google path.
   useEffect(() => {
     let cancelled = false
     getConfig().then(cfg => {
@@ -245,40 +219,9 @@ function LoginInner() {
       if (Array.isArray(cfg.providers)) {
         setProviders(cfg.providers.filter((p): p is OAuthProvider => p !== 'google' && p in OAUTH_LABELS))
       }
-      const cid = cfg.google_client_id
-      if (!cid || cancelled) return
-      const src = 'https://accounts.google.com/gsi/client'
-      const existing = document.querySelector(`script[src="${src}"]`) as HTMLScriptElement | null
-      const init = () => {
-        const g = (window as GoogleWindow).google
-        if (!g) return
-        try {
-          g.accounts.id.initialize({
-            client_id: cid,
-            callback: async (resp: { credential?: string }) => {
-              if (!resp?.credential) return
-              setGoogleLoading(true)
-              setGoogleError('')
-              try {
-                const data = await googleOneTap(resp.credential)
-                await establishSession(data.token, { student_id: data.student_id, name: data.name, username: '', concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: data.diagnostic_completed })
-                push(ret)
-              } catch (e) { setGoogleError((e as Error).message || 'Google sign-in failed') } finally { setGoogleLoading(false) }
-            },
-            auto_select: false,
-            cancel_on_tap_outside: true,
-          })
-          const el = document.getElementById('g_id_onload')
-          if (el) g.accounts.id.renderButton(el, { theme: 'outline', size: 'large', width: 320, text: 'continue_with', shape: 'square' })
-          g.accounts.id.prompt()
-          setGoogleReady(true)
-        } catch {}
-      }
-      if (existing) { init(); return }
-      const s = document.createElement('script'); s.src = src; s.async = true; s.defer = true; s.onload = init; document.head.appendChild(s)
     }).catch(() => { if (!cancelled) setGoogleError('Could not reach the server, check your connection and reload') })
     return () => { cancelled = true }
-  }, [push, ret])
+  }, [])
 
   const handleGoogleRedirect = () => {
     setGoogleError('')
@@ -576,15 +519,10 @@ function LoginInner() {
             </div>
             <div className="space-y-2">
               {(providers.length === 0 || providers.includes('google')) && (
-              <>
-              <div id="g_id_onload" className="flex justify-center min-h-[44px] items-center" />
-              {!googleReady && (
                 <button type="button" onClick={handleGoogleRedirect} disabled={googleLoading} className="w-full border border-mathua-border bg-white text-[#3c4043] hover:bg-gray-50 rounded-none h-12 font-medium text-sm flex items-center justify-center gap-2 disabled:opacity-50">
                   <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-5.09s.27-3.64.76-5.09l-7.98-6.19C.92 15.77 0 19.69 0 24s.92 8.23 2.56 11.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
                   {googleLoading ? 'Connecting…' : 'Continue with Google'}
                 </button>
-              )}
-              </>
               )}
               {providers.map(p => (
                 <button
