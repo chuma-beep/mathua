@@ -7,7 +7,7 @@ import { useTheme } from '../../hooks/useTheme'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import SectionHeader from '../../components/SectionHeader'
-import { signup, login, validateToken, requestPasswordReset, completePasswordReset, startOAuthLogin, OAUTH_LABELS, type OAuthProvider, API_BASE, getConfig } from '../../lib/api'
+import { signup, login, validateToken, requestPasswordReset, completePasswordReset, startOAuthLogin, googleOneTap, OAUTH_LABELS, type OAuthProvider, API_BASE, getConfig } from '../../lib/api'
 import { clearGuest, establishSession, getGuestId, isLoggedIn } from '../../lib/auth'
 import { LOGIN_HERO } from '../../lib/loginHero'
 
@@ -35,6 +35,24 @@ type LoginAction =
   | { type: 'TOGGLE_SHOW_PASSWORD' }
   | { type: 'SET_ATTEMPTED'; attempted: boolean }
   | { type: 'SET_FIELD_ERRORS'; fieldErrors: LoginState['fieldErrors'] }
+
+interface GoogleIdConfiguration {
+  client_id: string
+  callback: (resp: { credential?: string }) => void
+  auto_select: boolean
+  cancel_on_tap_outside: boolean
+}
+
+interface GoogleWindow {
+  google?: {
+    accounts: {
+      id: {
+        initialize: (config: GoogleIdConfiguration) => void
+        prompt: () => void
+      }
+    }
+  }
+}
 
 const initialState: LoginState = {
   tab: 'login',
@@ -205,9 +223,9 @@ function LoginInner() {
     }
   }, [searchParams, push, ret])
 
-  // Auth availability probe. The Google button is a plain redirect to the
-  // backend. GIS One Tap was removed because a rejected client id hid the
-  // working fallback button and left the page with no usable Google path.
+  // Auth availability probe plus Google One Tap. The backend redirect button
+  // stays visible regardless, so a rejected client id or an empty Google
+  // session can never remove the only working path.
   useEffect(() => {
     let cancelled = false
     getConfig().then(cfg => {
@@ -219,9 +237,49 @@ function LoginInner() {
       if (Array.isArray(cfg.providers)) {
         setProviders(cfg.providers.filter((p): p is OAuthProvider => p !== 'google' && p in OAUTH_LABELS))
       }
+      const cid = (cfg.google_client_id || '').trim()
+      if (!cid || cancelled) return
+      const src = 'https://accounts.google.com/gsi/client'
+      const existing = document.querySelector(`script[src="${src}"]`) as HTMLScriptElement | null
+      const init = () => {
+        const g = (window as GoogleWindow).google
+        if (!g?.accounts?.id) return
+        try {
+          g.accounts.id.initialize({
+            client_id: cid,
+            callback: async (resp: { credential?: string }) => {
+              if (!resp?.credential) return
+              setGoogleLoading(true)
+              setGoogleError('')
+              try {
+                const data = await googleOneTap(resp.credential)
+                await establishSession(data.token, { student_id: data.student_id, name: data.name, username: '', concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: data.diagnostic_completed })
+                push(ret)
+              } catch (e) {
+                setGoogleError((e as Error).message || 'Google sign-in failed')
+              } finally {
+                setGoogleLoading(false)
+              }
+            },
+            auto_select: false,
+            cancel_on_tap_outside: true,
+          })
+          g.accounts.id.prompt()
+        } catch {
+          // One Tap is optional. The redirect button below remains the
+          // reliable path when Google rejects the prompt.
+        }
+      }
+      if (existing) { init(); return }
+      const s = document.createElement('script')
+      s.src = src
+      s.async = true
+      s.defer = true
+      s.onload = init
+      document.head.appendChild(s)
     }).catch(() => { if (!cancelled) setGoogleError('Could not reach the server, check your connection and reload') })
     return () => { cancelled = true }
-  }, [])
+  }, [push, ret])
 
   const handleGoogleRedirect = () => {
     setGoogleError('')
