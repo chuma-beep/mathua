@@ -106,6 +106,17 @@ func w3L(o int, q, a, ex string, facts map[string]string) generator.Problem {
 
 func w3LI(m map[string]string, k string, v int) { m[k] = strconv.Itoa(v) }
 
+// w3LVec renders a vector with commas so a row of numbers cannot be mistaken
+// for a scalar or a product. Report 461 read "[-3 -3 4]" as a non-square
+// matrix and concluded the trace was undefined.
+func w3LVec(v []int) string {
+	parts := make([]string, len(v))
+	for i, x := range v {
+		parts[i] = strconv.Itoa(x)
+	}
+	return "(" + strings.Join(parts, ", ") + ")"
+}
+
 func w3LR(lo, hi int) int {
 	if hi <= lo {
 		return lo
@@ -531,14 +542,14 @@ func w3OuterProduct(kp int) generator.Problem {
 		i, j := w3LR(0, 2), w3LR(0, 2)
 		w3LI(f, "row", i+1)
 		w3LI(f, "col", j+1)
-		return w3L(kp, fmt.Sprintf("For \\(u=%v\\) and \\(v=%v\\), what is the (%d,%d) entry of \\(uv^T\\)? (enter a number)", u, v, i+1, j+1), strconv.Itoa(u[i]*v[j]),
+		return w3L(kp, fmt.Sprintf("For \\(u=%s\\) and \\(v=%s\\), what is the (%d,%d) entry of \\(uv^T\\)? (enter a number)", w3LVec(u), w3LVec(v), i+1, j+1), strconv.Itoa(u[i]*v[j]),
 			fmt.Sprintf("The (i,j) entry of an outer product is \\(u_i v_j=(%d)(%d)=%d\\).", u[i], v[j], u[i]*v[j]), f)
 	case 2:
 		dot := u[0]*v[0] + u[1]*v[1] + u[2]*v[2]
-		return w3L(kp, fmt.Sprintf("For \\(u=%v\\) and \\(v=%v\\), what is \\(\\operatorname{tr}(uv^T)\\)? (enter a number)", u, v), strconv.Itoa(dot),
+		return w3L(kp, fmt.Sprintf("For \\(u=%s\\) and \\(v=%s\\), what is \\(\\operatorname{tr}(uv^T)\\)? (enter a number)", w3LVec(u), w3LVec(v)), strconv.Itoa(dot),
 			fmt.Sprintf("The trace of an outer product is \\(u\\cdot v=%d\\).", dot), f)
 	default:
-		return w3L(kp, fmt.Sprintf("For nonzero \\(u=%v\\) and \\(v=%v\\), what is \\(\\operatorname{rank}(uv^T)\\)? (enter a number)", u, v), "1",
+		return w3L(kp, fmt.Sprintf("For nonzero \\(u=%s\\) and \\(v=%s\\), what is \\(\\operatorname{rank}(uv^T)\\)? (enter a number)", w3LVec(u), w3LVec(v)), "1",
 			"Every nonzero outer product is a rank-one matrix.", f)
 	}
 }

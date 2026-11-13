@@ -1090,7 +1090,9 @@ type seqGeomGen struct{}
 func (g *seqGeomGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	a1 := rand.Intn(5) + 2
 	r := rand.Intn(3) + 2
-	n := rand.Intn(4) + 2
+	// The question prints the first three terms, so asking for term 2 or 3
+	// answers itself. Report 453 asked for term 3 of 5, 10, 20; start at 4.
+	n := rand.Intn(4) + 4
 	an := a1 * mathutil.IntPow(r, n-1)
 	return generator.Problem{
 		Question:    fmt.Sprintf("Geometric sequence: \\(%d, %d, %d, \\ldots\\) Find term %d.", a1, a1*r, a1*r*r, n),

@@ -237,8 +237,22 @@ func (g *trigBridgeGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		case 2:
 			r := 2 * (1 + rand.Intn(9))
 			angle := []int{90, 180, 270}[rand.Intn(3)]
+			// Area is (1/2) r^2 |sin(theta)|. The old code returned r^2/2 for
+			// all three angles, so a triangle with a straight 180 degree angle
+			// was credited with positive area. Report 456 answered 0 and was
+			// marked wrong.
 			ans := r * r / 2
-			return trigProb(o, fmt.Sprintf("A triangle has two sides of length %d meeting at %d degrees. What is its area? (enter a number)", r, angle), strconv.Itoa(ans), fmt.Sprintf("Area is (1/2) r^2 sin(theta); here sin is 0, 1 or -1, and the magnitude gives %d.", ans))
+			var reason string
+			switch angle {
+			case 180:
+				ans = 0
+				reason = "the sides meet in a straight line, so the height is zero"
+			case 270:
+				reason = "sin(270) is -1 and the area uses its magnitude"
+			default:
+				reason = "sin(90) is 1"
+			}
+			return trigProb(o, fmt.Sprintf("A triangle has two sides of length %d meeting at %d degrees. What is its area? (enter a number)", r, angle), strconv.Itoa(ans), fmt.Sprintf("Area is (1/2) r^2 |sin(theta)|; %s, giving %d.", reason, ans))
 		default:
 			r := 2 * (1 + rand.Intn(9))
 			ans := r * r / 2
