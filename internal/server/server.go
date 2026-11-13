@@ -104,9 +104,9 @@ func isAllowedOrigin(origin string) bool {
 }
 
 // matchOriginPattern supports "*" wildcards via prefix/suffix split.
-// e.g. "*.vercel.app" matches "https://foo.vercel.app"
+// e.g. "*.example.com" matches "https://foo.example.com"
 //
-//	"https://*.vercel.app" matches "https://mathua.vercel.app" but not "http://..."
+//	"https://*.example.com" matches "https://preview.example.com" but not "http://..."
 func matchOriginPattern(origin, pattern string) bool {
 	if !strings.Contains(pattern, "*") {
 		return origin == pattern

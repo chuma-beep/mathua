@@ -7,7 +7,6 @@ import ChromeToggle from '@/components/ChromeToggle'
 import AssistantDock from '@/components/AssistantDock'
 import ScrollToTopOnNavigate from '@/components/ScrollToTopOnNavigate'
 import { SITE_URL } from '@/lib/site'
-import { Analytics } from '@vercel/analytics/react'
 // MathLive's own stylesheet for the <math-field> rendering (MathML). Loaded here,
 // not in the lazily-loaded component, so the chunk has no CSS side-effect.
 import 'mathlive/static.css'
@@ -16,7 +15,7 @@ import './globals.css'
 // Self-hosted variable fonts (vendored from Google Fonts 2026-09-28:
 // JetBrains Mono v24 + Space Grotesk v22, latin subsets). next/font/google
 // fetches at build time and fails the build without network, vendoring
-// keeps Vercel/Docker builds hermetic.
+// keeps Docker and Worker builds hermetic.
 const jetbrainsMono = localFont({
   src: [
     { path: './fonts/jetbrains-mono-latin-normal.woff2', weight: '400 500', style: 'normal' },
@@ -114,10 +113,6 @@ export default function RootLayout({
           {children}
         </div>
         <Toaster />
-        {/* Vercel serves the analytics script at /_vercel/insights. The static
-            export that the e2e suite serves has no such route, and its 404 is a
-            console error, which the suite correctly fails on. */}
-        {process.env.VERCEL === '1' && <Analytics />}
         <ServiceWorkerRegistrar />
         {/* The chrome tap control, mounted here rather than inside Header: the
             header is `inert` while hidden, which would disable the one control

@@ -1,6 +1,6 @@
 // Canonical public origin for metadata, robots and sitemap.
 // Override per deployment with NEXT_PUBLIC_SITE_URL (e.g. a self-hosted
-// Fly instance); defaults to the Vercel front-end.
+// instance); defaults to the public origin.
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://mathua.com'
 
 // Public, indexable routes only. App views (profile, session, settings,
