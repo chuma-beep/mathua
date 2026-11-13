@@ -63,4 +63,4 @@ The engine targets `80%` difficulty via `engine.computeDifficulty` (`internal/en
 
 ## Full documentation
 
-For interactive D2 diagrams, internal module detail and formatted code blocks, see the **[Architecture docs](https://mathua.vercel.app/docs/architecture)** in the web app.
+For interactive D2 diagrams, internal module detail and formatted code blocks, see the **[Architecture docs](https://mathua.com/docs/architecture)** in the web app.

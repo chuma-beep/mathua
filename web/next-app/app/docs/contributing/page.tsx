@@ -568,7 +568,7 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
         </p>
         {[
           'Backend: Go binary on Fly.io (Dockerfile, fly.toml). Requires a persistent volume for SQLite (mathua_data at /data) and a JWT_SECRET environment variable.',
-          'Frontend: Static export on Vercel via GitHub auto-deploy. The NEXT_PUBLIC_API_URL env var points to the Fly.io backend. Set in .env.production.',
+          'Frontend: Static export served by a Cloudflare Worker at mathua.com. The Worker proxies /api/* to the Fly.io backend on the same origin.',
           'Local development: Backend on :8080, frontend on :3000. NEXT_PUBLIC_API_URL in .env.local should be http://localhost:8080.',
           'The Dockerfile is multi-stage: golang:1.26-bookworm builder → debian:bookworm-slim runtime. CGO_ENABLED=1 is required for SQLite.',
         ].map((rule) => (

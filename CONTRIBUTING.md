@@ -271,4 +271,4 @@ Reviews usually happen within a few days. If a week passes with no response, pin
 
 ## Full guide
 
-For the detailed walkthrough with field schemas, code examples and design conventions, see the **[Contributing docs](https://mathua.vercel.app/docs/contributing)** in the web app.
+For the detailed walkthrough with field schemas, code examples and design conventions, see the **[Contributing docs](https://mathua.com/docs/contributing)** in the web app.

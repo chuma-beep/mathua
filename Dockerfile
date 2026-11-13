@@ -18,8 +18,8 @@ RUN STAMP="build-$(date -u +%Y%m%dT%H%M%SZ)" && \
     sed -i "s/^const VERSION = '[^']*'/const VERSION = 'v2-${STAMP}'/" ./web/next-app/public/sw.js && \
     grep -q "^const VERSION = 'v2-build-[0-9]\{8\}T" ./web/next-app/public/sw.js
 # Single-binary: same origin => relative fetches. Empty API base bakes fetch('/api/...') 
-# which works on any Fly hostname (mathua.fly.dev, mathua-xxx.fly.dev). For split Vercel+Fly,
-# set build arg NEXT_PUBLIC_API_URL=https://mathua.fly.dev
+# which works on any Fly hostname (mathua.fly.dev, mathua-xxx.fly.dev). For a split
+# deployment, set build arg NEXT_PUBLIC_API_URL=https://api.example.com
 ARG NEXT_PUBLIC_API_URL=""
 ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 # This image serves the export and the API from one origin, so /api/* is correct.

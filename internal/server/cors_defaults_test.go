@@ -30,10 +30,10 @@ func TestCORS_MissingConfigurationIsNotAllowAll(t *testing.T) {
 }
 
 func TestCORS_UsesTheConfiguredList(t *testing.T) {
-	t.Setenv("CORS_ALLOWED_ORIGINS", "https://mathua.com, https://*.vercel.app")
+	t.Setenv("CORS_ALLOWED_ORIGINS", "https://mathua.com, https://*.example.com")
 	resetOrigins()
 
-	for _, ok := range []string{"https://mathua.com", "https://branch.vercel.app"} {
+	for _, ok := range []string{"https://mathua.com", "https://branch.example.com"} {
 		if !isAllowedOrigin(ok) {
 			t.Errorf("%s was refused", ok)
 		}

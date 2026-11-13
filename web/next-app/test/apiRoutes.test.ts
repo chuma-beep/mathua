@@ -52,7 +52,6 @@ describe('every API route has a caller', () => {
       ['/api/auth/me', 'login/register alias for the same handler'],
       ['/api/admin/login', 'form post from the admin page'],
       ['/api/admin/logout', 'called from the admin page'],
-      ['/api/vercel', 'deployment webhook, no browser caller'],
       ['/api/activity', 'fetched by the profile and heatmap'],
       // Emitted by the server inside leaderboard and league avatar payloads;
       // the client fetches whatever URL it was given and never names the route.
