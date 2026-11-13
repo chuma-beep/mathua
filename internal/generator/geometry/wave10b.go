@@ -71,7 +71,10 @@ type w10gCircumcenterGen struct{}
 
 func (g *w10gCircumcenterGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	o := w10GOrd(ctx)
-	s := 1 + rand.Intn(10)
+	// Thirty scale factors keep the twelve-draw variety gate above its
+	// five-question floor. Ten factors sat close enough to the floor that the
+	// fixed seed could draw only four.
+	s := 1 + rand.Intn(30)
 	b, c, hyp := 6*s, 8*s, 10*s
 	x, y := b/2, c/2
 	r := hyp / 2
@@ -95,7 +98,9 @@ type w10gIncenterGen struct{}
 
 func (g *w10gIncenterGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	o := w10GOrd(ctx)
-	k := 1 + rand.Intn(10)
+	// Same thirty-value answer space as the circumcenter: the incenter
+	// coordinates are (k, k), so the question count follows k directly.
+	k := 1 + rand.Intn(30)
 	b, c, hyp := 3*k, 4*k, 5*k
 	r := (b + c - hyp) / 2
 	facts := map[string]string{}
