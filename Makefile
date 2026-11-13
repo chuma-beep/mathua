@@ -17,10 +17,14 @@ fmt-check:
 	@unformatted="$$(gofmt -l $$(git ls-files '*.go'))"; \
 	if [ -n "$$unformatted" ]; then echo "gofmt needed on:"; echo "$$unformatted"; exit 1; fi
 
+# Go 1.24 made math/rand.Seed a no-op unless GODEBUG=randseednop=0. The
+# generator diversity tests seed the global source on purpose, so without this
+# they draw a fresh sequence every run and fail intermittently on the narrowest
+# ordinals. The fuzz target below stays unseeded on purpose.
 test: fmt-check
 	python3 scripts/check_duplicate_tests.py
 	go vet ./...
-	go test ./...
+	GODEBUG=randseednop=0 go test ./...
 
 # The browser suite runs against the static export, so it needs a fresh `out/`
 # first. CI shards this; locally it is one command. Nothing else runs it, which
