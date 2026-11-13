@@ -168,7 +168,11 @@ func (g *arithBridgeGen) Generate(ctx generator.GeneratorContext) generator.Prob
 			if b0 == 0 {
 				b0 = 10
 			}
-			return arithProb(o, fmt.Sprintf("Estimate %d divided by %d by rounding the dividend to the nearest hundred and the divisor to the nearest ten. What quotient do you get? (enter a number)", a, b), strconv.Itoa(a0/b0), fmt.Sprintf("%d rounds to %d and %d rounds to %d, so the estimate is %d divided by %d, which is %d.", a, a0, b, b0, a0, b0, a0/b0))
+			// A quotient of 500 by 30 is about 17, not 16. Truncating the
+			// division made the stated estimate disagree with its own
+			// explanation, which is what report 458 caught.
+			est := (a0 + b0/2) / b0
+			return arithProb(o, fmt.Sprintf("Estimate %d divided by %d by rounding the dividend to the nearest hundred and the divisor to the nearest ten. What quotient do you get? (enter a number)", a, b), strconv.Itoa(est), fmt.Sprintf("%d rounds to %d and %d rounds to %d, so the estimate is %d divided by %d, which is about %d.", a, a0, b, b0, a0, b0, est))
 		case 2:
 			b := 11 + rand.Intn(20)
 			q := 3 + rand.Intn(15)
@@ -178,7 +182,8 @@ func (g *arithBridgeGen) Generate(ctx generator.GeneratorContext) generator.Prob
 				b0 = 10
 			}
 			a0 := 10 * ((a + 5) / 10)
-			return arithProb(o, fmt.Sprintf("Estimate %d divided by %d by rounding both numbers to the nearest ten. What is the estimated quotient? (enter a number)", a, b), strconv.Itoa(a0/b0), fmt.Sprintf("Rounding gives %d and %d. Their quotient is about %d.", a0, b0, a0/b0))
+			est := (a0 + b0/2) / b0
+			return arithProb(o, fmt.Sprintf("Estimate %d divided by %d by rounding both numbers to the nearest ten. What is the estimated quotient? (enter a number)", a, b), strconv.Itoa(est), fmt.Sprintf("Rounding gives %d and %d. Their quotient is about %d.", a0, b0, est))
 		default:
 			b := 12 + rand.Intn(20)
 			q := 5 + rand.Intn(20)

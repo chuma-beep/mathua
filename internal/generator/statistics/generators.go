@@ -1611,7 +1611,7 @@ func (g *normalDistGen) Generate(ctx generator.GeneratorContext) generator.Probl
 		{"About what proportion of Normal data falls within 2 SD of the mean? Answer as a decimal.", "0.95", "About 0.68 within 1 SD, 0.95 within 2 SD, 0.997 within 3 SD."},
 		{"What is the mean of a standard Normal distribution?", "0", "Standard Normal: N(0,1) with μ=0, σ=1."},
 		{"What is the variance of a standard Normal distribution?", "1", "Standard Normal: N(0,1) with μ=0, σ²=1."},
-		{"If X = 70 comes from a Normal population with mean 50 and SD 10, what is the z-score?", "2", "Standardization: z = (x - mean)/SD = 30/10."},
+		{"If X = 70 comes from a Normal population with mean 50 and SD 10, what is the z-score?", "2", "Standardization: z = (x - mean)/SD = 20/10."},
 		{"The Normal distribution is symmetric about its ____.", "mean", "The Normal distribution is symmetric about μ."},
 		{"What is the shape of the Normal distribution?", "bell curve", "The Normal distribution has the characteristic bell curve shape."},
 		{"Do sample means approach a Normal distribution as the sample size grows? (yes/no)", "yes", "CLT: sample means of independent identical variables approach Normal as n grows."},

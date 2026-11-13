@@ -186,7 +186,10 @@ func (g *fracBridgeGen) Generate(ctx generator.GeneratorContext) generator.Probl
 				den := 5 + rand.Intn(8)
 				num := 1 + rand.Intn(den-1)
 				vals[i] = num * 100 / den
-				if 2*num > den {
+				// Closer to 1 than to 1/2 means above the midpoint 3/4, not
+				// merely above 1/2. Reports 454 and 460 both answered 57/100
+				// and 1 correctly and were marked wrong by the old test.
+				if 4*vals[i] > 300 {
 					count++
 				}
 			}

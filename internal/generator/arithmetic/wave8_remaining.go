@@ -356,7 +356,7 @@ func w8TriangularNumbers(kp int) generator.Problem {
 	switch kp {
 	case 1:
 		return w8R(kp, fmt.Sprintf("What is the %dth triangular number \\(T_{%d}\\)? (enter a number)", n, n), strconv.Itoa(n*(n+1)/2),
-			fmt.Sprintf("\\(T_n=n(n+1)/2=%d\\times%d/2=%d\\).", n, n+1, n*(n+1)/2), f)
+			fmt.Sprintf("Triangular numbers count the dots in a triangle with n rows: \\(T_n=n(n+1)/2=%d\\times%d/2=%d\\).", n, n+1, n*(n+1)/2), f)
 	case 2:
 		return w8R(kp, fmt.Sprintf("The triangular number %d has which index? (enter a number)", n*(n+1)/2), strconv.Itoa(n),
 			fmt.Sprintf("Solve \\(k(k+1)/2=%d\\). The positive integer solution is %d.", n*(n+1)/2, n), f)

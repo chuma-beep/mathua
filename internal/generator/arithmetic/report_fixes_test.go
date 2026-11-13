@@ -28,7 +28,7 @@ func TestEstimateQuotientCaseOneRoundsDividendToHundred(t *testing.T) {
 		}
 		a0 := 100 * ((a + 50) / 100)
 		b0 := 10 * ((b + 5) / 10)
-		want := a0 / b0
+		want := (a0 + b0/2) / b0
 		got, err := strconv.Atoi(p.Answer)
 		if err != nil {
 			t.Fatalf("answer %q is not an integer", p.Answer)
@@ -41,6 +41,47 @@ func TestEstimateQuotientCaseOneRoundsDividendToHundred(t *testing.T) {
 		}
 		if !strings.Contains(p.Explanation, fmt.Sprintf("%d rounds to %d", a, a0)) {
 			t.Fatalf("explanation does not use rounded dividend %d: %q", a0, p.Explanation)
+		}
+		if !strings.Contains(p.Explanation, "about") {
+			t.Fatalf("explanation still claims an exact quotient: %q", p.Explanation)
+		}
+	}
+}
+
+// Report 458: 508/26 rounds to 500/30, which is about 17, not 16. The old
+// generator truncated the division and called the result exact.
+func TestEstimateQuotientRoundsToNearest(t *testing.T) {
+	g := &arithBridgeGen{kind: "estimate_quotient"}
+	re := regexp.MustCompile(`Estimate (\d+) divided by (\d+)`)
+	for kp := 1; kp <= 2; kp++ {
+		for i := 0; i < 200; i++ {
+			p := g.Generate(generator.GeneratorContext{KPOrdinal: kp})
+			m := re.FindStringSubmatch(p.Question)
+			if m == nil {
+				t.Fatalf("unexpected question: %q", p.Question)
+			}
+			a, _ := strconv.Atoi(m[1])
+			b, _ := strconv.Atoi(m[2])
+			a0 := 10 * ((a + 5) / 10)
+			b0 := 10 * ((b + 5) / 10)
+			if kp == 1 {
+				a0 = 100 * ((a + 50) / 100)
+			}
+			want := (a0 + b0/2) / b0
+			if p.Answer != strconv.Itoa(want) {
+				t.Fatalf("kp%d %q answered %s, want %d", kp, p.Question, p.Answer, want)
+			}
+		}
+	}
+}
+
+// Report 452: the explanation used T_n without saying what a triangular number
+// is, so the one term the report asked about was never defined.
+func TestTriangularExplanationDefinesTerm(t *testing.T) {
+	for i := 0; i < 100; i++ {
+		p := w8TriangularNumbers(1)
+		if !strings.Contains(p.Explanation, "count the dots") {
+			t.Fatalf("triangular explanation does not define the term: %q", p.Explanation)
 		}
 	}
 }

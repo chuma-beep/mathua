@@ -307,9 +307,18 @@ func w10BenchmarkChoice(kp int) generator.Problem {
 }
 
 func w10DecimalOrder(kp int) generator.Problem {
+	// The three tenths must be distinct: a repeated value makes "which is
+	// largest" ambiguous and "what position is 0.c" have two answers, which is
+	// exactly the ambiguity report 462 described.
 	a := w10R(1, 9)
 	b := w10R(1, 9)
+	for b == a {
+		b = w10R(1, 9)
+	}
 	c := w10R(1, 9)
+	for c == a || c == b {
+		c = w10R(1, 9)
+	}
 	switch kp {
 	case 1:
 		count := 0

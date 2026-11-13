@@ -8,6 +8,23 @@ import (
 	"github.com/chuma-beep/mathua/internal/generator"
 )
 
+// Report 450: the z-score question used x=70 and mean=50, but the explanation
+// wrote 30/10. The answer 2 was right while the working shown was wrong.
+func TestNormalZScoreExplanationMatchesQuestion(t *testing.T) {
+	g := &normalDistGen{}
+	for i := 0; i < 500; i++ {
+		p := g.Generate(generator.GeneratorContext{})
+		if !strings.Contains(p.Question, "z-score") {
+			continue
+		}
+		if !strings.Contains(p.Explanation, "20/10") {
+			t.Fatalf("z-score explanation does not match x=70 and mean=50: %q", p.Explanation)
+		}
+		return
+	}
+	t.Fatal("z-score entry was never drawn")
+}
+
 func TestMeanAnswerIsExact(t *testing.T) {
 	gen := &meanGen{}
 	for seed := int64(1); seed <= 200; seed++ {
