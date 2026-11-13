@@ -354,7 +354,10 @@ var wave13Families = map[string][3]func() trio{
 				fmt.Sprintf("%d times %d is %d.", total, each, total*each))
 		},
 		func() trio {
-			weight := 2 * limit(1, 20)
+			// The answer space is half the weight range. Thirty values rather
+			// than twenty keeps 200 draws above the twenty-distinct design
+			// target with certainty instead of leaving it to sampling luck.
+			weight := 2 * limit(1, 30)
 			return mk(fmt.Sprintf("Decoupled decay multiplies a weight of %d by one half. Enter the result.", weight), weight/2,
 				fmt.Sprintf("Half of %d is %d.", weight, weight/2))
 		},
