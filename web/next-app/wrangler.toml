@@ -7,6 +7,10 @@ workers_dev = true
 directory = "./out"
 binding = "ASSETS"
 not_found_handling = "404-page"
+# API navigations must reach the Worker before the asset router serves the
+# 404 page. Without this, a browser navigation to /api/auth/google/login is
+# treated as a missing asset and never reaches the origin.
+run_worker_first = true
 
 [[routes]]
 pattern = "mathua.com/*"
