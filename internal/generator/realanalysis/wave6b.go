@@ -201,7 +201,7 @@ func w6bOuterMeasure(kp int) generator.Problem {
 	switch kp {
 	case 1:
 		a := w6bRR(-4, 2)
-		b := a + w6bRR(1, 10)
+		b := a + w6bRR(1, 18)
 		w6bI(f, "a", a)
 		w6bI(f, "b", b)
 		ans := b - a
@@ -209,7 +209,7 @@ func w6bOuterMeasure(kp int) generator.Problem {
 			fmt.Sprintf("The outer measure of a bounded interval is its length: \\(%d-%d=%d\\).", b, a, ans), f)
 	case 2:
 		a := w6bRR(-4, 2)
-		b := a + w6bRR(1, 10)
+		b := a + w6bRR(1, 18)
 		n := w6bRR(1, 9)
 		w6bI(f, "a", a)
 		w6bI(f, "b", b)
@@ -237,7 +237,7 @@ func w6bCaratheodory(kp int) generator.Problem {
 	switch kp {
 	case 1:
 		a := w6bRR(-4, 0)
-		c := a + w6bRR(1, 6)
+		c := a + w6bRR(1, 18)
 		b := c + w6bRR(1, 10)
 		w6bI(f, "a", a)
 		w6bI(f, "b", b)
@@ -247,9 +247,9 @@ func w6bCaratheodory(kp int) generator.Problem {
 			fmt.Sprintf("\\(E\\cap A^c=[%d,%d]\\), which has measure \\(%d-%d=%d\\).", c, b, b, c, ans), f)
 	case 2:
 		a := w6bRR(-5, 0)
-		b := a + w6bRR(1, 5)
-		c := b + w6bRR(1, 5)
-		d := c + w6bRR(1, 5)
+		b := a + w6bRR(1, 10)
+		c := b + w6bRR(1, 10)
+		d := c + w6bRR(1, 10)
 		w6bI(f, "a", a)
 		w6bI(f, "b", b)
 		w6bI(f, "c", c)
@@ -352,9 +352,9 @@ func w6bConvergenceInMeasure(kp int) generator.Problem {
 	n := w6bRR(2, 5)
 	t := w6bRR(1, 4)
 	c := n * t
-	q0 := w6bRR(1, 12)
+	q0 := w6bRR(1, 15)
 	e := t * q0
-	r := w6bRR(1, 10)
+	r := w6bRR(1, 15)
 	l := q0 + r
 	switch kp {
 	case 2:
@@ -362,7 +362,7 @@ func w6bConvergenceInMeasure(kp int) generator.Problem {
 		cc := w6bRR(2, 5)
 		ee := w6bRR(1, 6)
 		q := ee * nn / cc
-		s := w6bRR(2, 12)
+		s := w6bRR(2, 16)
 		bigN := q + s
 		w6bI(f, "n", nn)
 		w6bI(f, "c", cc)
@@ -438,7 +438,7 @@ func w6bLusin(kp int) generator.Problem {
 	case 2:
 		count := w6bRR(2, 3)
 		each := w6bRR(1, 4)
-		slack := w6bRR(1, 10)
+		slack := w6bRR(1, 15)
 		total := count*each + slack
 		w6bI(f, "total", total)
 		w6bI(f, "intervals", count)
@@ -449,7 +449,7 @@ func w6bLusin(kp int) generator.Problem {
 			fmt.Sprintf("The removed measure is \\(%d\\cdot%d=%d\\), so \\(%d-%d=%d\\) remains.", count, each, count*each, total, count*each, ans), f)
 	default:
 		r1, r2, r3 := w6bRR(1, 3), w6bRR(1, 3), w6bRR(1, 3)
-		slack := w6bRR(1, 10)
+		slack := w6bRR(1, 15)
 		total := r1 + r2 + r3 + slack
 		w6bI(f, "total", total)
 		w6bI(f, "removed1", r1)
@@ -490,7 +490,7 @@ func w6bProjection(kp int) generator.Problem {
 	switch kp {
 	case 1:
 		a, b := w6bRNZ(-4, 4), w6bRNZ(-4, 4)
-		k := w6bRR(2, 10)
+		k := w6bRR(2, 16)
 		w6bI(f, "a", a)
 		w6bI(f, "b", b)
 		w6bI(f, "k", k)
@@ -553,8 +553,8 @@ func w6bOpenMapping(kp int) generator.Problem {
 		return w6bR(kp, fmt.Sprintf("The map \\(T(x,y)=(%d x,%d y)\\) is open. The image of the ball of radius %d centred at the origin contains a ball of radius \\(s\\) centred at the origin. What is \\(s\\)? (enter a number)", a, a, r), strconv.Itoa(ans),
 			fmt.Sprintf("The map scales every vector by \\(|%d|=%d\\), so the image ball has radius \\(%d\\cdot%d=%d\\).", a, w6bAbs(a), w6bAbs(a), r, ans), f)
 	case 2:
-		a := w6bRNZ(-12, 12)
-		b := w6bRNZ(-12, 12)
+		a := w6bRNZ(-16, 16)
+		b := w6bRNZ(-16, 16)
 		w6bI(f, "a", a)
 		w6bI(f, "b", b)
 		ans := w6bMin(w6bAbs(a), w6bAbs(b))
@@ -577,8 +577,12 @@ func w6bClosedGraph(kp int) generator.Problem {
 	f := map[string]string{}
 	switch kp {
 	case 1:
-		a := w6bRNZ(-9, 9)
-		b := w6bRNZ(-9, 9)
+		// The norm is max(|a|,|b|), so the answer space is only as wide as the
+		// operand range. A 1..9 range gives nine answers, which the diversity
+		// test can miss two of in 200 draws; the wider range keeps the question
+		// varied without making the arithmetic harder than the concept needs.
+		a := w6bRNZ(-19, 19)
+		b := w6bRNZ(-19, 19)
 		w6bI(f, "a", a)
 		w6bI(f, "b", b)
 		ans := w6bMax(w6bAbs(a), w6bAbs(b))
@@ -607,10 +611,10 @@ func w6bClosedGraph(kp int) generator.Problem {
 
 func w6bHahnBanach(kp int) generator.Problem {
 	f := map[string]string{}
-	a := w6bRNZ(-9, 9)
-	b := w6bRNZ(-9, 9)
-	p := w6bRR(-9, 9)
-	q := w6bRR(-9, 9)
+	a := w6bRNZ(-14, 14)
+	b := w6bRNZ(-14, 14)
+	p := w6bRR(-14, 14)
+	q := w6bRR(-14, 14)
 	w6bI(f, "a", a)
 	w6bI(f, "b", b)
 	w6bI(f, "p", p)
