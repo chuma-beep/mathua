@@ -62,7 +62,13 @@ jobs:
             echo "$unformatted"
             exit 1
           fi
+      # The generator diversity tests call math/rand.Seed to pin a sequence.
+      # Go 1.24 made Seed a no-op unless this is set, so the suite was drawing a
+      # fresh sequence every run and failing whenever a narrow ordinal had an
+      # unlucky twelve draws. The fuzz step below stays unseeded on purpose.
       - run: go test ./...
+        env:
+          GODEBUG: randseednop=0
       - run: make lint-go
       - run: go run scripts/validate_graph.go
       # These two run in `make validate` and were absent here, which is how a
