@@ -1,0 +1,17 @@
+name = "mathua-web"
+main = "cloudflare/worker.js"
+compatibility_date = "2026-11-13"
+workers_dev = true
+
+[assets]
+directory = "./out"
+binding = "ASSETS"
+not_found_handling = "404-page"
+
+[[routes]]
+pattern = "mathua.com/*"
+zone_name = "mathua.com"
+
+[[routes]]
+pattern = "www.mathua.com/*"
+zone_name = "mathua.com"

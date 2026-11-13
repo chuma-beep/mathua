@@ -385,7 +385,7 @@ func main() {
 	}
 	httpSrv := &http.Server{
 		Addr:         fmt.Sprintf(":%d", *port),
-		Handler:      server.GzipMiddleware(securityHeaders(mux)),
+		Handler:      server.GzipMiddleware(securityHeaders(server.EdgeGuard(mux))),
 		ReadTimeout:  15 * time.Second,
 		WriteTimeout: 30 * time.Second,
 		IdleTimeout:  60 * time.Second,
