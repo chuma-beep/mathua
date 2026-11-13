@@ -5546,9 +5546,15 @@ func (s *Server) handleGoogleCallback(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, u, http.StatusFound)
 }
 
-// frontendRedirect builds the post-OAuth landing URL. With an http(s) base it
-// returns an absolute URL on the frontend origin; otherwise (empty or invalid
-// base) it falls back to the relative path so single-binary mode is unchanged.
+// frontendRedirect builds the post-OAuth landing URL. The token is consumed by
+// /login, which is the only page that establishes the session from it, so every
+// provider lands there and carries the eventual destination as `return`. Sending
+// the token to the destination directly dropped it: /profile does not read a
+// token query, so Google sign-in returned to a guest session.
+//
+// With an http(s) base it returns an absolute URL on the frontend origin;
+// otherwise (empty or invalid base) it falls back to the relative path so
+// single-binary mode is unchanged.
 func frontendRedirect(base, ret, token, name, id string) string {
 	q := url.Values{}
 	q.Set("token", token)
@@ -5560,16 +5566,17 @@ func frontendRedirect(base, ret, token, name, id string) string {
 	if !strings.HasPrefix(ret, "/") {
 		ret = "/" + ret
 	}
-	suffix := ret + "?" + q.Encode()
+	q.Set("return", ret)
+	const loginPath = "/login"
 	if strings.TrimSpace(base) == "" {
-		return suffix
+		return loginPath + "?" + q.Encode()
 	}
 	parsed, err := url.Parse(strings.TrimSpace(base))
 	if err != nil || (parsed.Scheme != "http" && parsed.Scheme != "https") || parsed.Host == "" {
 		log.Printf("warning: ignoring invalid FRONTEND_URL %q (want http(s)://host)", base)
-		return suffix
+		return loginPath + "?" + q.Encode()
 	}
-	parsed.Path = strings.TrimSuffix(parsed.Path, "/") + ret
+	parsed.Path = strings.TrimSuffix(parsed.Path, "/") + loginPath
 	parsed.RawQuery = q.Encode()
 	parsed.Fragment = ""
 	return parsed.String()
