@@ -200,6 +200,12 @@ type Server struct {
 	// minutes. The database-backed active counter only moves when a learner
 	// answers, so it cannot say who is browsing now.
 	presence *presenceTracker
+	// turnstileSecret enables the Cloudflare Turnstile check on signup and
+	// password login. An empty value disables it, so a deployment without a
+	// widget keeps working. The URL and client are fields for tests.
+	turnstileSecret string
+	turnstileURL    string
+	turnstileClient *http.Client
 }
 
 // AILimits are the per-request token budgets the AI handlers apply.
@@ -255,6 +261,9 @@ func New(eng *engine.Engine, repo storage.Repository, auth *auth.AuthService, op
 		quizSessions:         make(map[string]*quiz.Session),
 		quizCreated:          make(map[string]time.Time),
 		presence:             newPresenceTracker(time.Now),
+		turnstileSecret:      strings.TrimSpace(os.Getenv("TURNSTILE_SECRET")),
+		turnstileURL:         turnstileSiteverifyURL,
+		turnstileClient:      &http.Client{Timeout: 5 * time.Second},
 		authLimiter:          newRateLimiter(5, 10, time.Minute, trustedHeader),
 		writeLimiter:         newRateLimiter(20, 20, 3*time.Second, trustedHeader),
 		shareLimiter:         newRateLimiter(10, 10, 6*time.Second, trustedHeader),
@@ -4977,11 +4986,12 @@ func logRequest(next http.HandlerFunc) http.HandlerFunc {
 }
 
 type signupReq struct {
-	Name      string `json:"name"`
-	Username  string `json:"username"`
-	Password  string `json:"password"`
-	Email     string `json:"email"`
-	StudentID string `json:"student_id"`
+	Name           string `json:"name"`
+	Username       string `json:"username"`
+	Password       string `json:"password"`
+	Email          string `json:"email"`
+	StudentID      string `json:"student_id"`
+	TurnstileToken string `json:"turnstile_token"`
 }
 
 type authRes struct {
@@ -5083,6 +5093,10 @@ func (s *Server) handleSignup(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "invalid request", 400)
 		return
 	}
+	if !s.verifyTurnstile(req.TurnstileToken) {
+		writeError(w, "captcha verification failed", 403)
+		return
+	}
 	if req.Username == "" || req.Password == "" || req.Name == "" {
 		writeError(w, "name, username, and password are required", 400)
 		return
@@ -5136,8 +5150,9 @@ func (s *Server) handleSignup(w http.ResponseWriter, r *http.Request) {
 }
 
 type loginReq struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
+	Username       string `json:"username"`
+	Password       string `json:"password"`
+	TurnstileToken string `json:"turnstile_token"`
 }
 
 func (s *Server) handleLogin(w http.ResponseWriter, r *http.Request) {
@@ -5152,6 +5167,10 @@ func (s *Server) handleLogin(w http.ResponseWriter, r *http.Request) {
 	var req loginReq
 	if err := decodeJSON(w, r, &req); err != nil {
 		writeError(w, "invalid request", 400)
+		return
+	}
+	if !s.verifyTurnstile(req.TurnstileToken) {
+		writeError(w, "captcha verification failed", 403)
 		return
 	}
 	token, st, err := s.auth.Login(req.Username, req.Password)
