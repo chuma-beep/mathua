@@ -3,7 +3,9 @@ import { chromium } from '@playwright/test'
 // Production login monitor. The Fly health check stayed green through an
 // eight-hour login outage because it never exercised the browser bundle. This
 // script checks what a learner actually does: render the form, submit a wrong
-// password, and click the Google button.
+// password, and click the Google button. When Turnstile is enabled the form
+// stops at the verification prompt, so the script checks that prompt and then
+// proves the API still rejects a tokenless login.
 const BASE = process.env.MATHUA_BASE_URL || 'https://mathua.com'
 const EXPECTED_CALLBACK = `${BASE}/api/auth/google/callback`
 
@@ -39,10 +41,34 @@ async function main() {
     await google.waitFor({ state: 'visible', timeout: 20000 })
 
     const stamp = Date.now()
-    await page.locator('#username').fill(`login_monitor_${stamp}`)
-    await page.locator('#password').fill(`wrong-password-${stamp}`)
+    const username = `login_monitor_${stamp}`
+    const password = `wrong-password-${stamp}`
+    await page.locator('#username').fill(username)
+    await page.locator('#password').fill(password)
     await page.locator('[data-testid="auth-submit"]').click()
-    await page.getByText(/Invalid credentials/i).first().waitFor({ state: 'visible', timeout: 20000 })
+
+    const invalid = page.getByText(/Invalid credentials/i).first()
+    const turnstilePrompt = page.getByText(/Complete the verification/i).first()
+    const outcome = await Promise.race([
+      invalid.waitFor({ state: 'visible', timeout: 20000 }).then(() => 'invalid'),
+      turnstilePrompt.waitFor({ state: 'visible', timeout: 20000 }).then(() => 'turnstile'),
+    ]).catch(() => fail('neither Invalid credentials nor the verification prompt appeared'))
+
+    let apiStatus = 0
+    if (outcome === 'turnstile') {
+      const result = await page.evaluate(async ({ username, password }) => {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password }),
+        })
+        return { status: res.status, body: await res.text() }
+      }, { username, password })
+      apiStatus = result.status
+      if (result.status !== 403 || !result.body.includes('captcha verification failed')) {
+        fail(`tokenless login returned ${result.status}: ${result.body}`)
+      }
+    }
 
     await google.click()
     await page.waitForURL(/accounts\.google\.com/, { timeout: 25000 })
@@ -59,7 +85,9 @@ async function main() {
     console.log(JSON.stringify({
       ok: true,
       base: BASE,
-      invalidCredentials: true,
+      invalidCredentials: outcome === 'invalid',
+      turnstilePrompt: outcome === 'turnstile',
+      apiStatus: apiStatus || undefined,
       googleReached: true,
       clientId,
       redirectUri,
