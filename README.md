@@ -23,11 +23,15 @@
 [![Concepts](https://img.shields.io/badge/concepts-3015-a8a0f0?style=flat-square)](#content)
 [![Domains](https://img.shields.io/badge/domains-24-c8a96e?style=flat-square)](#content)
 
+<br>
+
+**[Start learning at mathua.com](https://mathua.com)** · **[Star Mathua on GitHub](https://github.com/chuma-beep/mathua)**
+
 </div>
 
 ---
 
-Mathua is a local-first adaptive math learning engine inspired by the mastery-gating philosophy of Math Academy. It guides a learner from arithmetic through university math through a checked prerequisite DAG of 2050 atomic concepts and 29 courses, never advancing until speed and accuracy thresholds are both met. Knowledge is scaffolded into 9045 worked examples (3015 KP shard files × 3 subgoals each) with subgoal labels and 183 dual-coded diagrams. It runs as a Go backend serving a React + Next.js frontend, covering leagues, parent/teacher share links and graph visualisation. Transcripts export as CSV via the API.
+Mathua is a local-first adaptive math learning engine inspired by the mastery-gating philosophy of Math Academy. It guides a learner from arithmetic through university math through a checked prerequisite DAG of 3015 atomic concepts and 29 courses, never advancing until the evidence says the prerequisite is mastered. Knowledge is scaffolded into 9045 worked examples (3015 KP shard files × 3 subgoals each) with subgoal labels and 183 dual-coded diagrams. It runs as a Go backend serving a React + Next.js frontend, covering leagues, parent/teacher share links and graph visualisation. Transcripts export as CSV via the API.
 
 ---
 
@@ -42,6 +46,10 @@ Mathua is a local-first adaptive math learning engine inspired by the mastery-ga
 ---
 
 ## Getting started
+
+### Try it
+
+The hosted version is at **[mathua.com](https://mathua.com)**. No account is needed to start: guest progress stays in the browser until you create an account.
 
 ### Build from source
 ```bash
@@ -96,7 +104,7 @@ The graph contains **3015 concepts** across **24 domains** (3015 KP shard files 
 
 ### Mastery gating
 
-Every concept has two thresholds: a **streak** (consecutive correct answers required) and a **time limit** (maximum acceptable average response time in seconds). Both must be met simultaneously.
+Every concept advances on evidence, not one streak. The engine reads the last six attempts and scores accuracy, the difficulty each question was served at, the variety of problem instances and response time. A concept advances at an evidence score of 0.6 once at least six attempts support it. Speed still matters because time is one of the inputs, but a single miss no longer erases the whole run.
 
 A concept moves through five states:
 
@@ -117,7 +125,7 @@ interleaving: no two consecutive questions share a subdomain
 top-3 dissimilar candidates → 70/30 new/review balance
 ```
 
-Three hard rules apply: never surface a concept whose prerequisites are not mastered, never show the same concept twice in a row, maintain roughly 70% new/practicing and 30% review.
+Three hard rules apply: never surface new material whose prerequisites are not mastered, never show the same concept twice in a row, maintain roughly 70% new/practicing and 30% review. Reviews of mastered concepts bypass the prerequisite gate, because retention is not acquisition.
 
 ### Spaced repetition
 
@@ -180,6 +188,8 @@ The five-layer architecture, UI, API, Core Engine, Grading, Storage, is fully do
 ## Contributing
 
 The most impactful contributions are new concepts and improved generators. Adding a concept requires exactly three things: a JSON entry in the concept graph, a Go generator function and a fuzz test. Adding a lesson shard requires exactly 3 KPs per concept (`data/lessons/kp/<id>.json`) with verified section refs. See **[`CONTRIBUTING.md`](CONTRIBUTING.md)** for the quick-start guide and the full **[contributing docs](/docs/contributing)** for the detailed walkthrough with code examples and field schemas.
+
+If Mathua is useful to you, a star on GitHub helps other learners find it: **[github.com/chuma-beep/mathua](https://github.com/chuma-beep/mathua)**.
 
 ---
 
