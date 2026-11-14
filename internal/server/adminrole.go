@@ -169,17 +169,23 @@ func (s *Server) handleAdminOverview(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "failed to count active learners", 500)
 		return
 	}
+	// Signed-in learners seen on any request, not only on an answer. The
+	// answer-based count above is the longer window; this one says who is
+	// browsing right now.
+	onlineNow := s.presence.Count(now)
 	writeJSON(w, map[string]interface{}{
-		"users":               users,
-		"active_now":          activeNow,
-		"active_now_guests":   activeNowGuests,
-		"active_today":        activeToday,
-		"active_today_guests": activeTodayGuests,
-		"staff":               staff,
-		"owners":              owners,
-		"concepts":            conceptCount,
-		"domains":             domainCount,
-		"questions":           questions,
+		"users":                 users,
+		"active_now":            activeNow,
+		"active_now_guests":     activeNowGuests,
+		"active_today":          activeToday,
+		"active_today_guests":   activeTodayGuests,
+		"online_now":            onlineNow,
+		"online_window_seconds": int(onlineWindow.Seconds()),
+		"staff":                 staff,
+		"owners":                owners,
+		"concepts":              conceptCount,
+		"domains":               domainCount,
+		"questions":             questions,
 		"reports": map[string]int{
 			"open":      reportCounts["open"],
 			"reviewing": reportCounts["reviewing"],

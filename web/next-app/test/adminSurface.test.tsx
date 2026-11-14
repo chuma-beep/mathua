@@ -282,6 +282,7 @@ describe('the overview is a landing page', () => {
   beforeEach(() => {
     vi.mocked(adminOverview).mockResolvedValue({
       users: 4, active_now: 3, active_now_guests: 2, active_today: 9, active_today_guests: 4,
+      online_now: 1, online_window_seconds: 300,
       staff: 1, owners: 1, concepts: 657, domains: 15, questions: 120,
       reports: { open: 2, reviewing: 1, resolved: 5, dismissed: 0, outstanding: 3 },
       recent_activity: [],
@@ -298,6 +299,7 @@ describe('the overview is a landing page', () => {
     // Live usage sits beside the static counts, split from guest seats.
     expect(screen.getByText('Active now')).toBeTruthy()
     expect(screen.getByText('Guests today')).toBeTruthy()
+    expect(screen.getByText('Online now')).toBeTruthy()
     expect(screen.getByText('9')).toBeTruthy()
     for (const word of ['retention', 'cohort', 'revenue', 'churn', 'engagement']) {
       expect(document.body.textContent?.toLowerCase()).not.toContain(word)
@@ -307,6 +309,7 @@ describe('the overview is a landing page', () => {
   it('says plainly when there are no owners', async () => {
     vi.mocked(adminOverview).mockResolvedValue({
       users: 4, active_now: 0, active_now_guests: 0, active_today: 0, active_today_guests: 0,
+      online_now: 0, online_window_seconds: 300,
       staff: 0, owners: 0, concepts: 657, domains: 15, questions: 120,
       reports: { open: 2, reviewing: 1, resolved: 5, dismissed: 0, outstanding: 3 },
       recent_activity: [],

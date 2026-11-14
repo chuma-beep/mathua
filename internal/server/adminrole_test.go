@@ -729,6 +729,8 @@ func TestAdminOverviewReportsLiveCounts(t *testing.T) {
 		ActiveNowGuests   int `json:"active_now_guests"`
 		ActiveToday       int `json:"active_today"`
 		ActiveTodayGuests int `json:"active_today_guests"`
+		OnlineNow         int `json:"online_now"`
+		OnlineWindowSecs  int `json:"online_window_seconds"`
 		Staff             int `json:"staff"`
 		Owners            int `json:"owners"`
 		Concepts          int `json:"concepts"`
@@ -746,6 +748,9 @@ func TestAdminOverviewReportsLiveCounts(t *testing.T) {
 	if out.ActiveNow != 0 || out.ActiveNowGuests != 0 || out.ActiveToday != 0 || out.ActiveTodayGuests != 0 {
 		t.Errorf("active counts = %d/%d now, %d/%d today, want all zero",
 			out.ActiveNow, out.ActiveNowGuests, out.ActiveToday, out.ActiveTodayGuests)
+	}
+	if out.OnlineNow != 0 || out.OnlineWindowSecs != 300 {
+		t.Errorf("online now = %d over %ds, want 0 over 300s", out.OnlineNow, out.OnlineWindowSecs)
 	}
 	if out.Staff != 1 {
 		t.Errorf("staff = %d, want 1", out.Staff)
