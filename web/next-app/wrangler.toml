@@ -19,6 +19,12 @@ not_found_handling = "404-page"
 # treated as a missing asset and never reaches the origin.
 run_worker_first = true
 
+# Workers Builds runs `npx wrangler preview` for pull requests. Wrangler refuses
+# that command without an explicit previews block, even when the block is empty.
+# The preview build command still has to run the export build, because `out` is
+# not committed and the Worker's assets binding reads it.
+[previews]
+
 [[routes]]
 pattern = "mathua.com/*"
 zone_name = "mathua.com"
