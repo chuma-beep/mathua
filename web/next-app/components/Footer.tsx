@@ -248,6 +248,14 @@ export default function Footer({ className = '' }: FooterProps) {
             >
               Support Mathua
             </a>
+            <a
+              href="https://github.com/chuma-beep/mathua"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-2 block font-mono text-[11px] uppercase tracking-[0.12em] underline underline-offset-4 transition-colors hover:no-underline"
+            >
+              Star Mathua on GitHub
+            </a>
             <div className="mt-4 max-w-[250px]">
               <p className="text-sm leading-relaxed text-[var(--footer-ink-muted)]">
                 Know someone who wants to learn? Share Mathua with them.

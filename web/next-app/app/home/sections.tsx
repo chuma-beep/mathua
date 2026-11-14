@@ -101,7 +101,7 @@ export function HeroSection({ onGetStarted }: { onGetStarted: () => void }) {
           </a>
         </div>
         <p className="reveal mt-4 font-mono text-[11px] text-mathua-blue" style={{ animationDelay: '320ms' }}>
-          No account needed to start.
+          No account needed. <Link href="/learn" className="underline underline-offset-4 hover:no-underline">Try the demo</Link>.
         </p>
       </div>
     </section>
