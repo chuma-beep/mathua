@@ -196,6 +196,10 @@ type Server struct {
 	// means push is not configured, and the API says so rather than handing out
 	// a subscription that could never be delivered.
 	pushPublicKey string
+	// presence counts signed-in learners seen on any request in the last few
+	// minutes. The database-backed active counter only moves when a learner
+	// answers, so it cannot say who is browsing now.
+	presence *presenceTracker
 }
 
 // AILimits are the per-request token budgets the AI handlers apply.
@@ -250,6 +254,7 @@ func New(eng *engine.Engine, repo storage.Repository, auth *auth.AuthService, op
 		diagCreated:          make(map[string]time.Time),
 		quizSessions:         make(map[string]*quiz.Session),
 		quizCreated:          make(map[string]time.Time),
+		presence:             newPresenceTracker(time.Now),
 		authLimiter:          newRateLimiter(5, 10, time.Minute, trustedHeader),
 		writeLimiter:         newRateLimiter(20, 20, 3*time.Second, trustedHeader),
 		shareLimiter:         newRateLimiter(10, 10, 6*time.Second, trustedHeader),
@@ -3412,6 +3417,7 @@ func (s *Server) authMiddleware(next http.HandlerFunc) http.HandlerFunc {
 			http.Error(w, `{"error":"invalid token"}`, 401)
 			return
 		}
+		s.presence.Touch(studentID)
 		ctx := r.Context()
 		r = r.WithContext(context.WithValue(ctx, authStudentKey{}, studentID))
 		next(w, r)
@@ -3436,6 +3442,7 @@ func (s *Server) optionalAuthMiddleware(next http.HandlerFunc) http.HandlerFunc 
 			next(w, r)
 			return
 		}
+		s.presence.Touch(studentID)
 		ctx := r.Context()
 		r = r.WithContext(context.WithValue(ctx, authStudentKey{}, studentID))
 		next(w, r)

@@ -68,6 +68,7 @@ export default function AdminOverviewPage() {
               <Stat label="Resolved" value={data.reports.resolved} />
               <Stat label="Active now" value={data.active_now} />
               <Stat label="Guests now" value={data.active_now_guests} />
+              <Stat label="Online now" value={data.online_now} />
               <Stat label="Active today" value={data.active_today} />
               <Stat label="Guests today" value={data.active_today_guests} />
               <Stat label="Staff" value={data.staff} />

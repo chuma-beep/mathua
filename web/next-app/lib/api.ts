@@ -1983,6 +1983,10 @@ const AdminOverviewSchema = z.object({
 	active_now_guests: z.number(),
 	active_today: z.number(),
 	active_today_guests: z.number(),
+	// Signed-in learners seen on any request inside a short window. This is
+	// browsing presence, not the answer-based activity above.
+	online_now: z.number(),
+	online_window_seconds: z.number(),
 	staff: z.number(),
 	owners: z.number(),
 	concepts: z.number(),

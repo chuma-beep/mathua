@@ -126,6 +126,17 @@ export default function RootLayout({
             browser can otherwise leave the old offset in place until the new
             page has laid out. Back and forward keep their restored position. */}
         <ScrollToTopOnNavigate />
+        {/* Cloudflare Web Analytics. The token is public and the beacon is only
+            requested when a build supplies one, so local and self-hosted builds
+            stay free of a third-party request. Zone and Worker metrics do not
+            need this script. */}
+        {process.env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN ? (
+          <Script
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            strategy="afterInteractive"
+            data-cf-beacon={JSON.stringify({ token: process.env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN })}
+          />
+        ) : null}
       </body>
     </html>
   )
