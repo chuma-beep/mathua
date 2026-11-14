@@ -41,7 +41,20 @@ RUN CGO_ENABLED=1 go build -o /mathua ./cmd/mathua
 FROM debian:bookworm-slim
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libsqlite3-0 ca-certificates curl python3 python3-venv && rm -rf /var/lib/apt/lists/*
+    libsqlite3-0 ca-certificates curl tar python3 python3-venv && rm -rf /var/lib/apt/lists/*
+
+# Litestream streams the SQLite WAL to S3-compatible storage. The binary is
+# pinned by version and checksum so a release swap cannot change what
+# production restores from. The entrypoint is a plain exec when no bucket is
+# configured, so the backup path is opt-in.
+ARG LITESTREAM_VERSION=0.3.13
+ARG LITESTREAM_SHA256=eb75a3de5cab03875cdae9f5f539e6aedadd66607003d9b1e7a9077948818ba0
+RUN curl -fsSL "https://github.com/benbjohnson/litestream/releases/download/v${LITESTREAM_VERSION}/litestream-v${LITESTREAM_VERSION}-linux-amd64.tar.gz" \
+        -o /tmp/litestream.tar.gz \
+    && echo "${LITESTREAM_SHA256}  /tmp/litestream.tar.gz" | sha256sum -c - \
+    && tar -xzf /tmp/litestream.tar.gz -C /usr/local/bin litestream \
+    && rm /tmp/litestream.tar.gz \
+    && litestream version
 
 # SymPy grading runtime. findSymPyService resolves ./grading/sympy_service.py
 # from WORKDIR /app, and execs `python3`, so the venv must be first on PATH.
@@ -66,6 +79,10 @@ RUN printf '%s\n' '{"id":"1","expected":"5^4","answer":"625"}' \
       | python3 /app/grading/sympy_service.py \
       | grep -q '"correct": true'
 
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+COPY litestream.yml /etc/litestream.yml
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
 WORKDIR /app
 ENV PORT=8080
 ENV DATABASE_URL=/data/mathua.db
@@ -75,4 +92,5 @@ EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
     CMD curl -fsS http://localhost:8080/api/health || exit 1
 
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 CMD ["/mathua", "-serve", "-port", "8080"]

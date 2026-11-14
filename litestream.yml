@@ -1,0 +1,12 @@
+dbs:
+  - path: /data/mathua.db
+    replicas:
+      - type: s3
+        bucket: ${LITESTREAM_BUCKET}
+        path: mathua.db
+        endpoint: ${LITESTREAM_ENDPOINT}
+        region: auto
+        access-key-id: ${LITESTREAM_ACCESS_KEY_ID}
+        secret-access-key: ${LITESTREAM_SECRET_ACCESS_KEY}
+        retention: 720h
+        sync-interval: 10s
