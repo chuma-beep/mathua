@@ -119,7 +119,7 @@ describe('LoginPage', () => {
     fireEvent.change(screen.getByLabelText('Email'), { target: { value: '  Ada@Example.com  ' } })
     fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'Engine!n1' } })
     submitForm(screen.getByRole('button', { name: 'Create Account' }))
-    expect(signupMock).toHaveBeenCalledWith('Ada', 'ada', 'Engine!n1', 'Ada@Example.com', undefined)
+    expect(signupMock).toHaveBeenCalledWith('Ada', 'ada', 'Engine!n1', 'Ada@Example.com', undefined, '')
   })
 
   it('passes the guest id to signup and clears the guest identity', async () => {
@@ -134,7 +134,7 @@ describe('LoginPage', () => {
     fireEvent.change(screen.getByLabelText('Email'), { target: { value: 'ada@example.com' } })
     fireEvent.change(screen.getByLabelText('Password'), { target: { value: 'Engine!n1' } })
     submitForm(screen.getByRole('button', { name: 'Create Account' }))
-    await waitFor(() => expect(signupMock).toHaveBeenCalledWith('Ada', 'ada', 'Engine!n1', 'ada@example.com', 'guest_abc'))
+    await waitFor(() => expect(signupMock).toHaveBeenCalledWith('Ada', 'ada', 'Engine!n1', 'ada@example.com', 'guest_abc', ''))
     expect(localStorage.getItem('mathua_guest_id')).toBeNull()
     expect(localStorage.getItem('mathua_guest_token')).toBeNull()
   })

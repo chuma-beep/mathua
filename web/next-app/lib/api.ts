@@ -601,21 +601,21 @@ export interface AuthRes {
   diagnostic_completed: boolean
 }
 
-export async function signup(name: string, username: string, password: string, email?: string, guestId?: string): Promise<AuthRes> {
+export async function signup(name: string, username: string, password: string, email?: string, guestId?: string, turnstileToken = ''): Promise<AuthRes> {
 	const res = await authedFetch(`${API_BASE}/api/auth/signup`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ name, username, password, email: email ?? '', student_id: guestId ?? '' }),
+		body: JSON.stringify({ name, username, password, email: email ?? '', student_id: guestId ?? '', turnstile_token: turnstileToken }),
 	})
 	if (!res.ok) await throwWithResponse(res, `Signup failed`)
 	return validateResponse(AuthResSchema, await res.json(), 'signup') as AuthRes
 }
 
-export async function login(username: string, password: string): Promise<AuthRes> {
+export async function login(username: string, password: string, turnstileToken = ''): Promise<AuthRes> {
 	const res = await authedFetch(`${API_BASE}/api/auth/login`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ username, password }),
+		body: JSON.stringify({ username, password, turnstile_token: turnstileToken }),
 	})
 	if (res.status === 429) throw new Error('Too many attempts, try again shortly')
 	if (!res.ok) throw new Error('Invalid credentials')

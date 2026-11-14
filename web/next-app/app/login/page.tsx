@@ -2,7 +2,7 @@
 
 import Loading from '../../components/Loading'
 
-import { Suspense, useEffect, useReducer, useState } from 'react'
+import { Suspense, useEffect, useReducer, useRef, useState } from 'react'
 import { useTheme } from '../../hooks/useTheme'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
@@ -10,6 +10,30 @@ import SectionHeader from '../../components/SectionHeader'
 import { signup, login, validateToken, requestPasswordReset, completePasswordReset, startOAuthLogin, googleOneTap, OAUTH_LABELS, type OAuthProvider, API_BASE, getConfig } from '../../lib/api'
 import { clearGuest, establishSession, getGuestId, isLoggedIn } from '../../lib/auth'
 import { LOGIN_HERO } from '../../lib/loginHero'
+
+// Turnstile is opt-in. An empty site key omits the widget, and the server
+// skips verification when TURNSTILE_SECRET is empty, so local development and
+// self-hosted deployments without a widget are unchanged.
+const TURNSTILE_SITE_KEY = (process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || '').trim()
+
+interface TurnstileApi {
+  render: (
+    element: HTMLElement,
+    options: {
+      sitekey: string
+      theme?: 'light' | 'dark' | 'auto'
+      callback: (token: string) => void
+      'expired-callback'?: () => void
+      'error-callback'?: () => void
+    }
+  ) => string
+  reset: (widgetId?: string) => void
+  remove: (widgetId: string) => void
+}
+
+function turnstileApi(): TurnstileApi | undefined {
+  return (window as unknown as { turnstile?: TurnstileApi }).turnstile
+}
 
 type LoginState = {
   tab: 'login' | 'signup'
@@ -186,6 +210,9 @@ function LoginInner() {
   const [googleLoading, setGoogleLoading] = useState(false)
   const [authDisabled, setAuthDisabled] = useState(false)
   const [providers, setProviders] = useState<OAuthProvider[]>([])
+  const turnstileRef = useRef<HTMLDivElement>(null)
+  const turnstileWidget = useRef<string | null>(null)
+  const [turnstileToken, setTurnstileToken] = useState('')
 
   // Safe post-login target: same-origin paths only (never protocol-relative).
   const ret = (() => {
@@ -281,6 +308,50 @@ function LoginInner() {
     return () => { cancelled = true }
   }, [push, ret])
 
+  // Turnstile renders only when a site key is configured. The script is loaded
+  // explicitly so the widget can be reset after a rejected password or an
+  // expired token, which a one-shot implicit widget cannot do.
+  useEffect(() => {
+    if (!TURNSTILE_SITE_KEY) return
+    let cancelled = false
+    const render = () => {
+      if (cancelled || !turnstileRef.current || turnstileWidget.current) return
+      const api = turnstileApi()
+      if (!api) return
+      turnstileWidget.current = api.render(turnstileRef.current, {
+        sitekey: TURNSTILE_SITE_KEY,
+        theme: 'dark',
+        callback: token => setTurnstileToken(token),
+        'expired-callback': () => setTurnstileToken(''),
+        'error-callback': () => setTurnstileToken(''),
+      })
+    }
+    const existing = document.querySelector<HTMLScriptElement>('script[data-mathua-turnstile]')
+    if (existing) {
+      if (turnstileApi()) render()
+      else existing.addEventListener('load', render)
+      return () => {
+        cancelled = true
+        existing.removeEventListener('load', render)
+      }
+    }
+    const script = document.createElement('script')
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'
+    script.async = true
+    script.defer = true
+    script.dataset.mathuaTurnstile = '1'
+    script.addEventListener('load', render)
+    document.head.appendChild(script)
+    return () => {
+      cancelled = true
+      script.removeEventListener('load', render)
+      if (turnstileWidget.current) {
+        turnstileApi()?.remove(turnstileWidget.current)
+        turnstileWidget.current = null
+      }
+    }
+  }, [])
+
   const handleGoogleRedirect = () => {
     setGoogleError('')
     window.location.href = `${API_BASE}/api/auth/google/login?return=${encodeURIComponent('/profile')}`
@@ -356,12 +427,16 @@ function LoginInner() {
     const fieldErrors = validateFields(state.tab, state)
     dispatch({ type: 'SET_FIELD_ERRORS', fieldErrors })
     if (Object.keys(fieldErrors).length > 0) return
+    if (TURNSTILE_SITE_KEY && !turnstileToken) {
+      dispatch({ type: 'SET_ERROR', error: 'Complete the verification and try again.' })
+      return
+    }
     dispatch({ type: 'SET_ERROR', error: '' })
     dispatch({ type: 'SET_LOADING', loading: true })
     try {
       const res = state.tab === 'signup'
-        ? await signup(state.name.trim(), state.username.trim(), state.password, state.email.trim(), getGuestId() ?? undefined)
-        : await login(state.username.trim(), state.password)
+        ? await signup(state.name.trim(), state.username.trim(), state.password, state.email.trim(), getGuestId() ?? undefined, turnstileToken)
+        : await login(state.username.trim(), state.password, turnstileToken)
       await establishSession(res.token, { student_id: res.student_id, name: res.name, username: state.username.trim(), concepts_mastered: 0, current_streak: 0, level: 'Novice', diagnostic_completed: res.diagnostic_completed })
       // A successful signup consumes the guest identity: the account now owns
       // the same row, so leaving the guest token behind would only be a second
@@ -369,6 +444,10 @@ function LoginInner() {
       if (state.tab === 'signup') clearGuest()
       push(ret)
     } catch (e: any) {
+      if (TURNSTILE_SITE_KEY) {
+        turnstileApi()?.reset(turnstileWidget.current ?? undefined)
+        setTurnstileToken('')
+      }
       dispatch({ type: 'SET_ERROR', error: e.message || 'Authentication failed' })
     } finally { dispatch({ type: 'SET_LOADING', loading: false }) }
   }
@@ -567,6 +646,9 @@ function LoginInner() {
               {state.fieldErrors.password && <p id="password-error" className="text-mathua-red text-xs mt-1">{state.fieldErrors.password}</p>}
             </div>
             {state.error && <p className="text-mathua-red text-xs">{state.error}</p>}
+            {TURNSTILE_SITE_KEY && (
+              <div ref={turnstileRef} className="flex min-h-[65px] justify-center" />
+            )}
             <button type="submit" disabled={state.loading || authDisabled} data-testid="auth-submit" className="w-full border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint rounded-none h-12 font-medium text-sm disabled:opacity-50">
               {state.loading ? (<><Loading inline size={13} /> Loading…</>) : state.tab === 'signup' ? 'Create Account' : 'Login'}
             </button>
