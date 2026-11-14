@@ -227,7 +227,7 @@ docker compose up
 cp .env.example .env && docker compose up
 ```
 
-The server is available at `http://localhost:8080`. A `Dockerfile` and `docker-compose.yml` are included in the repo.
+The server is available at `http://localhost:8080`. A `Dockerfile` and `docker-compose.yml` are included in the repo. For production SQLite backups to Cloudflare R2, see [docs/backups.md](docs/backups.md).
 
 ### Repairing grading data
 
