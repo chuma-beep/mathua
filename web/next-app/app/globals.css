@@ -23,6 +23,14 @@
     --accent-blue-hover: oklch(0.53 0.17 255);
     --accent-green: #059669;
     --accent-red: #dc2626;
+    /* Admin analytics series. Separate from the accent tokens because two of
+       those (blue and teal) are close enough to be indistinguishable in a
+       stacked chart, and a categorical scale needs five distinct hues. */
+    --chart-1: oklch(0.6 0.16 255);
+    --chart-2: oklch(0.7 0.15 70);
+    --chart-3: #059669;
+    --chart-4: #dc2626;
+    --chart-5: oklch(0.58 0.18 300);
     --heat-0: #EBEFF4;
     --heat-1: #C0DAFC;
     --heat-2: #7DAEEC;
@@ -69,6 +77,11 @@
     --accent-blue-hover: oklch(0.79 0.14 230);
     --accent-green: #10b981;
     --accent-red: #ef4444;
+    --chart-1: oklch(0.72 0.145 230);
+    --chart-2: oklch(0.78 0.14 75);
+    --chart-3: #10b981;
+    --chart-4: #ef4444;
+    --chart-5: oklch(0.72 0.16 300);
     --heat-0: #191B1D;
     --heat-1: #06384B;
     --heat-2: #005E82;

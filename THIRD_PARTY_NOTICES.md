@@ -87,7 +87,8 @@ Upstream: <https://cortexjs.io/compute-engine/>
 ### Other npm dependencies
 
 KaTeX (MIT) renders question text, answers and lesson content; dagre, lucide-react,
-remark-math and rehype-katex (MIT) support layout, icons and Markdown. Their licence
+remark-math and rehype-katex (MIT) support layout, icons and Markdown. Recharts (MIT)
+renders the admin analytics charts through the shadcn chart wrapper. Their licence
 texts ship inside each package under `node_modules/`, and are reproduced here on
 upgrade by the package manager.
 
