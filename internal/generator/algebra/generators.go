@@ -693,12 +693,24 @@ func (g *factorTrinomialGen) Generate(ctx generator.GeneratorContext) generator.
 type factorDiffSquaresGen struct{}
 
 func (g *factorDiffSquaresGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	a := rand.Intn(8) + 2
+	kp := waveKP(ctx)
+	// The expression stays x^2 - a^2. The ordinal draws a from a different
+	// band, so the three branches factor different squares.
+	var a int
+	switch kp {
+	case 2:
+		a = rand.Intn(15) + 16 // 16..30
+	case 3:
+		a = rand.Intn(20) + 31 // 31..50
+	default:
+		a = rand.Intn(14) + 2 // 2..15
+	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Factor: \\(x^{2} - %d\\)", a*a),
 		Answer:      fmt.Sprintf("(x + %d)(x - %d)", a, a),
 		Explanation: fmt.Sprintf("\\(x^{2} - %d = (x + %d)(x - %d)\\)", a*a, a, a),
 		Facts:       map[string]string{"a2": strconv.Itoa(a * a), "a": strconv.Itoa(a)},
+		KPOrdinal:   kp,
 	}
 }
 
@@ -769,24 +781,52 @@ func (g *quadSolveFactorGen) Generate(ctx generator.GeneratorContext) generator.
 }
 
 type quadCompleteSquareGen struct {
-	mu   sync.Mutex
-	last int
+	mu           sync.Mutex
+	lastQuestion string
 }
 
 func (g *quadCompleteSquareGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	kp := waveKP(ctx)
 	g.mu.Lock()
-	r := rand.Intn(9) + 1
-	if r == g.last {
-		r = r%9 + 1
+	// The task stays "x^2 + bx + __ is a perfect square", as the authored
+	// schema names. KP1 uses a negative middle term, KP2 a positive one and
+	// KP3 a larger mixed-sign band, so the three ordinals pose different
+	// squares. The last question is compared as text because the sign now
+	// varies as well as the magnitude.
+	var r, b int
+	var question string
+	for attempt := 0; attempt < 20; attempt++ {
+		switch kp {
+		case 2:
+			r = rand.Intn(12) + 1 // 1..12
+			b = 2 * r
+		case 3:
+			r = rand.Intn(12) + 13 // 13..24
+			b = 2 * r
+			if rand.Intn(2) == 0 {
+				b = -b
+			}
+		default:
+			r = rand.Intn(12) + 1 // 1..12
+			b = -2 * r
+		}
+		question = fmt.Sprintf("Complete the square: \\(x^{2} %+dx + \\_\\_\\) to make a perfect square.", b)
+		if question != g.lastQuestion {
+			break
+		}
 	}
-	g.last = r
+	g.lastQuestion = question
 	g.mu.Unlock()
-	b := -2 * r
+	// The fact r is the number b/2 that goes into the binomial, not its
+	// magnitude: with a negative middle term b/2 is negative, and the authored
+	// schema reads b/2 = r. The answer r^2 is unchanged either way.
+	r = b / 2
 	return generator.Problem{
-		Question:    fmt.Sprintf("Complete the square: \\(x^{2} %+dx + \\_\\_\\) to make a perfect square.", b),
+		Question:    question,
 		Answer:      fmt.Sprintf("%d", r*r),
 		Explanation: fmt.Sprintf("\\(\\left(\\frac{b}{2}\\right)^{2} = \\left(\\frac{%d}{2}\\right)^{2} = %d\\)", b, r*r),
 		Facts:       map[string]string{"b": strconv.Itoa(b), "r": strconv.Itoa(r), "r2": strconv.Itoa(r * r)},
+		KPOrdinal:   kp,
 	}
 }
 
@@ -1410,27 +1450,53 @@ func (g *extraneousRootsGen) Generate(ctx generator.GeneratorContext) generator.
 type eqIrrationalGen struct{}
 
 func (g *eqIrrationalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	x := rand.Intn(8) + 2
+	kp := waveKP(ctx)
+	// The equation stays sqrt(x) = k, the shape the authored schema names.
+	// The ordinal draws k from a different band, so KP1 meets small roots,
+	// KP2 medium ones and KP3 large ones instead of the same eight values.
+	var x int
+	switch kp {
+	case 2:
+		x = rand.Intn(12) + 14 // 14..25
+	case 3:
+		x = rand.Intn(15) + 26 // 26..40
+	default:
+		x = rand.Intn(12) + 2 // 2..13
+	}
 	k := x * x
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: \\(\\sqrt{x} = %d\\)", x),
+		Question:    fmt.Sprintf("Solve: \\(\\sqrt{x} = %d\\). (enter a number)", x),
 		Answer:      fmt.Sprintf("%d", k),
 		Explanation: fmt.Sprintf("Square both sides: \\(x = %d^{2} = %d\\)", x, k),
 		Facts:       map[string]string{"x": strconv.Itoa(x), "k": strconv.Itoa(k)},
+		KPOrdinal:   kp,
 	}
 }
 
 type eqLogGen struct{}
 
 func (g *eqLogGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	b := rand.Intn(3) + 2
-	e := rand.Intn(3) + 1
+	kp := waveKP(ctx)
+	// The equation stays log_b(x) = e. The ordinal chooses the exponent band:
+	// one or two steps, three or four, then five or six, so no two branches
+	// share the same set of powers.
+	b := rand.Intn(9) + 2 // 2..10
+	var e int
+	switch kp {
+	case 2:
+		e = rand.Intn(2) + 3 // 3..4
+	case 3:
+		e = rand.Intn(2) + 5 // 5..6
+	default:
+		e = rand.Intn(2) + 1 // 1..2
+	}
 	v := mathutil.IntPow(b, e)
 	return generator.Problem{
-		Question:    fmt.Sprintf("Solve: \\(\\log_{%d}(x) = %d\\)", b, e),
+		Question:    fmt.Sprintf("Solve: \\(\\log_{%d}(x) = %d\\). (enter a number)", b, e),
 		Answer:      fmt.Sprintf("%d", v),
 		Explanation: fmt.Sprintf("\\(\\log_{%d}(x) = %d\\) → \\(x = %d^{%d} = %d\\)", b, e, b, e, v),
 		Facts:       map[string]string{"base": strconv.Itoa(b), "e": strconv.Itoa(e), "v": strconv.Itoa(v)},
+		KPOrdinal:   kp,
 	}
 }
 
@@ -1482,13 +1548,25 @@ func (g *eqTrinomialGen) AnswerFormat() generator.AnswerFormat {
 }
 
 func (g *eqTrinomialGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	r := rand.Intn(6) + 2
-	// x^2 + 2r x + r^2 = 0
+	kp := waveKP(ctx)
+	// x^2 + 2r x + r^2 = 0 stays the perfect-square trinomial the authored
+	// schema names. The ordinal picks the size of r, so each branch poses a
+	// different band of constants rather than the same six.
+	var r int
+	switch kp {
+	case 2:
+		r = rand.Intn(12) + 14 // 14..25
+	case 3:
+		r = rand.Intn(15) + 26 // 26..40
+	default:
+		r = rand.Intn(12) + 2 // 2..13
+	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("Solve for \\(x\\): \\(x^{2} + %dx + %d = 0\\). Enter the value of \\(x\\).", 2*r, r*r),
 		Answer:      fmt.Sprintf("%d", -r),
 		Explanation: fmt.Sprintf("\\((x + %d)^{2} = 0\\) → \\(x = %d\\)", r, -r),
 		Facts:       map[string]string{"r": strconv.Itoa(r), "coef": strconv.Itoa(2 * r), "const": strconv.Itoa(r * r), "x": strconv.Itoa(-r)},
+		KPOrdinal:   kp,
 	}
 }
 
@@ -1635,22 +1713,89 @@ func (g *funcDomainGen) Generate(ctx generator.GeneratorContext) generator.Probl
 type funcEvenOddGen struct{}
 
 func (g *funcEvenOddGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		question string
-		answer   string
-		exp      string
+	kp := waveKP(ctx)
+	type entry struct{ expr, parity, why string }
+	var entries []entry
+	// Even families. The power is at least two so every term is a genuine
+	// even function and the classification cannot be ambiguous.
+	for n := 1; n <= 8; n++ {
+		exp := 2 * n
+		entries = append(entries, entry{
+			expr:   fmt.Sprintf("x^{%d}", exp),
+			parity: "even",
+			why:    fmt.Sprintf("\\((-x)^{%d} = x^{%d}\\)", exp, exp),
+		})
 	}
-	entries := []entry{
-		{"Is \\(f(x) = x^{2}\\) even or odd?", "even", "\\(f(-x) = (-x)^{2} = x^{2} = f(x)\\), so it is even."},
-		{"Is \\(f(x) = x^{3}\\) even or odd?", "odd", "\\(f(-x) = (-x)^{3} = -x^{3} = -f(x)\\), so it is odd."},
-		{"Is \\(f(x) = \\sin(x)\\) even or odd?", "odd", "\\(\\sin(-x) = -\\sin(x)\\), so sine is odd."},
-		{"Is \\(f(x) = \\cos(x)\\) even or odd?", "even", "\\(\\cos(-x) = \\cos(x)\\), so cosine is even."},
-		{"Is \\(f(x) = x^{2} + 1\\) even or odd?", "even", "\\(f(-x) = (-x)^{2}+1 = x^{2}+1 = f(x)\\), so it is even."},
-		{"Is \\(f(x) = |x|\\) even or odd?", "even", "\\(|-x| = |x|\\), so absolute value is even."},
+	for c := 2; c <= 5; c++ {
+		for n := 1; n <= 3; n++ {
+			exp := 2 * n
+			entries = append(entries, entry{
+				expr:   fmt.Sprintf("%dx^{%d}", c, exp),
+				parity: "even",
+				why:    fmt.Sprintf("\\(%d(-x)^{%d} = %dx^{%d}\\)", c, exp, c, exp),
+			})
+		}
 	}
-	e := entries[rand.Intn(len(entries))]
+	for n := 1; n <= 4; n++ {
+		exp := 2 * n
+		entries = append(entries, entry{
+			expr:   fmt.Sprintf("x^{%d} + %d", exp, n),
+			parity: "even",
+			why:    fmt.Sprintf("\\((-x)^{%d} + %d = x^{%d} + %d\\)", exp, n, exp, n),
+		})
+	}
+	entries = append(entries,
+		entry{"|x|", "even", "\\(|-x| = |x|\\)"},
+		entry{"\\cos(x)", "even", "\\(\\cos(-x) = \\cos(x)\\)"},
+		entry{"x^{4} + x^{2}", "even", "both terms are even powers of \\(x\\)"},
+		entry{"x^{6} + x^{4}", "even", "both terms are even powers of \\(x\\)"},
+		entry{"|x| + 3", "even", "\\(|-x| + 3 = |x| + 3\\)"},
+	)
+	// Odd families.
+	for n := 1; n <= 8; n++ {
+		exp := 2*n + 1
+		entries = append(entries, entry{
+			expr:   fmt.Sprintf("x^{%d}", exp),
+			parity: "odd",
+			why:    fmt.Sprintf("\\((-x)^{%d} = -x^{%d}\\)", exp, exp),
+		})
+	}
+	for c := 2; c <= 5; c++ {
+		for n := 1; n <= 3; n++ {
+			exp := 2*n + 1
+			entries = append(entries, entry{
+				expr:   fmt.Sprintf("%dx^{%d}", c, exp),
+				parity: "odd",
+				why:    fmt.Sprintf("\\(%d(-x)^{%d} = -%dx^{%d}\\)", c, exp, c, exp),
+			})
+		}
+	}
+	entries = append(entries,
+		entry{"\\sin(x)", "odd", "\\(\\sin(-x) = -\\sin(x)\\)"},
+		entry{"x^{3} + x", "odd", "both terms are odd powers of \\(x\\)"},
+		entry{"x^{5} + x^{3}", "odd", "both terms are odd powers of \\(x\\)"},
+		entry{"\\sin(x) + x^{3}", "odd", "a sum of odd functions is odd"},
+	)
+
+	// KP1 compares both symmetries, KP2 stays on even functions and KP3 stays
+	// on odd ones, so the ordinal changes the family under test.
+	var pool []entry
+	for _, e := range entries {
+		if kp == 2 && e.parity != "even" {
+			continue
+		}
+		if kp == 3 && e.parity != "odd" {
+			continue
+		}
+		pool = append(pool, e)
+	}
+	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{
-		Question: e.question, Answer: e.answer, Explanation: e.exp,
+		Question:    fmt.Sprintf("Is \\(f(x) = %s\\) even or odd?", e.expr),
+		Answer:      e.parity,
+		Explanation: fmt.Sprintf("For \\(f(x) = %s\\), %s. So the function is %s.", e.expr, e.why, e.parity),
+		Facts:       map[string]string{"function": e.expr, "parity": e.parity, "answer": e.parity},
+		KPOrdinal:   kp,
 	}
 }
 
@@ -1759,9 +1904,27 @@ func (g *funcSigmoidGen) Generate(ctx generator.GeneratorContext) generator.Prob
 type funcSignGen struct{}
 
 func (g *funcSignGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	x := rand.Intn(10) - 5
-	if x == 0 {
-		x = 3
+	kp := waveKP(ctx)
+	// f stays the identity map the authored schema names. The ordinal chooses
+	// how far from zero the sample lies: KP1 near zero, KP2 in the tens and
+	// KP3 further out, so the three branches do not share the same inputs.
+	limit := 10
+	switch kp {
+	case 2:
+		limit = 40
+	case 3:
+		limit = 120
+	}
+	offset := 0
+	switch kp {
+	case 2:
+		offset = 10
+	case 3:
+		offset = 40
+	}
+	x := rand.Intn(limit-offset) + offset + 1
+	if rand.Intn(2) == 0 {
+		x = -x
 	}
 	ans := "positive"
 	if x < 0 {
@@ -1772,6 +1935,7 @@ func (g *funcSignGen) Generate(ctx generator.GeneratorContext) generator.Problem
 		Answer:      ans,
 		Explanation: fmt.Sprintf("At x = %d, f(x) = %d, which is %s.", x, x, ans),
 		Facts:       map[string]string{"x": strconv.Itoa(x), "ans": ans},
+		KPOrdinal:   kp,
 	}
 }
 
@@ -1857,26 +2021,50 @@ func (g *ineqIntervalGen) Generate(ctx generator.GeneratorContext) generator.Pro
 type ineqIrrationalGen struct{}
 
 func (g *ineqIrrationalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	x := rand.Intn(8) + 2
+	kp := waveKP(ctx)
+	// The inequality stays sqrt(x) > k. The ordinal draws k from a different
+	// band so the three branches pose different integer squares.
+	var x int
+	switch kp {
+	case 2:
+		x = rand.Intn(12) + 14 // 14..25
+	case 3:
+		x = rand.Intn(15) + 26 // 26..40
+	default:
+		x = rand.Intn(12) + 2 // 2..13
+	}
 	return generator.Problem{
 		Question:    fmt.Sprintf("What is the smallest integer \\(x\\) with \\(\\sqrt{x} > %d\\)? (enter a number)", x),
 		Answer:      fmt.Sprintf("%d", x*x+1),
 		Explanation: fmt.Sprintf("\\(\\sqrt{x} > %d\\) → \\(x > %d^{2} = %d\\) (x ≥ 0 implied), so the smallest integer is %d", x, x, x*x, x*x+1),
 		Facts:       map[string]string{"x": strconv.Itoa(x), "x2": strconv.Itoa(x * x), "ans": strconv.Itoa(x*x + 1)},
+		KPOrdinal:   kp,
 	}
 }
 
 type ineqLogGen struct{}
 
 func (g *ineqLogGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	b := rand.Intn(3) + 2
-	e := rand.Intn(3) + 1
+	kp := waveKP(ctx)
+	// The inequality stays log_b(x) > e. The ordinal chooses the exponent
+	// band, so each branch compares against a different family of powers.
+	b := rand.Intn(7) + 2 // 2..8
+	var e int
+	switch kp {
+	case 2:
+		e = rand.Intn(2) + 3 // 3..4
+	case 3:
+		e = rand.Intn(2) + 5 // 5..6
+	default:
+		e = rand.Intn(2) + 1 // 1..2
+	}
 	v := mathutil.IntPow(b, e)
 	return generator.Problem{
 		Question:    fmt.Sprintf("What is the smallest integer \\(x\\) with \\(\\log_{%d}(x) > %d\\)? (enter a number)", b, e),
 		Answer:      fmt.Sprintf("%d", v+1),
 		Explanation: fmt.Sprintf("\\(\\log_{%d}(x) > %d\\) → \\(x > %d^{%d} = %d\\) (base > 1 preserves inequality), so the smallest integer is %d", b, e, b, e, v, v+1),
 		Facts:       map[string]string{"base": strconv.Itoa(b), "e": strconv.Itoa(e), "v": strconv.Itoa(v), "x": strconv.Itoa(v + 1)},
+		KPOrdinal:   kp,
 	}
 }
 

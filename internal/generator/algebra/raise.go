@@ -97,8 +97,20 @@ func algPickMC(claims []algMCClaim) generator.Problem {
 type piecewiseGen struct{}
 
 func (g *piecewiseGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	xs := []int{-4, -2, -1, 0, 1, 2, 3, 5}
-	x0 := xs[rand.Intn(len(xs))]
+	kp := waveKP(ctx)
+	// The function stays the two-piece rule the authored schema describes.
+	// The ordinal chooses which side of the boundary the learner meets: KP1
+	// mixes both branches, KP2 stays on the negative branch and KP3 stays on
+	// the nonnegative branch. Each range is wider than ten inputs.
+	var x0 int
+	switch kp {
+	case 2:
+		x0 = -(rand.Intn(30) + 1)
+	case 3:
+		x0 = rand.Intn(31)
+	default:
+		x0 = rand.Intn(21) - 10
+	}
 	answer := 0
 	branch := ""
 	if x0 < 0 {
@@ -116,6 +128,7 @@ func (g *piecewiseGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		Facts: map[string]string{
 			"x0": strconv.Itoa(x0), "answer": strconv.Itoa(answer),
 		},
+		KPOrdinal: kp,
 	}
 }
 
@@ -240,30 +253,35 @@ func (g *inverseDomainGen) Generate(ctx generator.GeneratorContext) generator.Pr
 type expGraphGen struct{}
 
 func (g *expGraphGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct{ a, b, x int }
-	claims := []claim{
-		{a: 2, b: 3, x: 4},
-		{a: 3, b: 2, x: 3},
-		{a: 5, b: 2, x: 4},
-		{a: 4, b: 3, x: 2},
-		{a: 2, b: 5, x: 2},
-		{a: 6, b: 2, x: 3},
+	kp := waveKP(ctx)
+	// The function keeps the shape f(x) = a b^x the authored schema names.
+	// KP1 reads a small exponent, KP2 reads a larger one so the constant
+	// factor per unit step is visible, and KP3 uses a base above five where
+	// the growth is unmistakable.
+	a := rand.Intn(8) + 2
+	var b, x int
+	switch kp {
+	case 2:
+		b = rand.Intn(4) + 2
+		x = rand.Intn(2) + 4
+	case 3:
+		b = rand.Intn(4) + 6
+		x = rand.Intn(2) + 2
+	default:
+		b = rand.Intn(4) + 2
+		x = rand.Intn(2) + 2
 	}
-	c := claims[rand.Intn(len(claims))]
-	value := 1
-	for i := 0; i < c.x; i++ {
-		value *= c.b
-	}
-	value *= c.a
+	value := a * algPowInt(b, x)
 	return generator.Problem{
-		Question: "For the exponential function f(x) = " + strconv.Itoa(c.a) + " times " + strconv.Itoa(c.b) +
-			"^x, what is f(" + strconv.Itoa(c.x) + ")?",
+		Question: "For the exponential function f(x) = " + strconv.Itoa(a) + " times " + strconv.Itoa(b) +
+			"^x, what is f(" + strconv.Itoa(x) + ")?",
 		Answer: strconv.Itoa(value),
-		Explanation: "Raising the base " + strconv.Itoa(c.b) + " to the power " + strconv.Itoa(c.x) + " and multiplying by " +
-			strconv.Itoa(c.a) + " gives " + strconv.Itoa(value) + ".",
+		Explanation: "Raising the base " + strconv.Itoa(b) + " to the power " + strconv.Itoa(x) + " and multiplying by " +
+			strconv.Itoa(a) + " gives " + strconv.Itoa(value) + ".",
 		Facts: map[string]string{
-			"a": strconv.Itoa(c.a), "b": strconv.Itoa(c.b), "x": strconv.Itoa(c.x), "answer": strconv.Itoa(value),
+			"a": strconv.Itoa(a), "b": strconv.Itoa(b), "x": strconv.Itoa(x), "answer": strconv.Itoa(value),
 		},
+		KPOrdinal: kp,
 	}
 }
 
@@ -274,28 +292,37 @@ func (g *expGraphGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type compoundGen struct{}
 
 func (g *compoundGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct{ p, r, t int }
-	claims := []claim{
-		{p: 1000, r: 5, t: 3},
-		{p: 2000, r: 4, t: 2},
-		{p: 500, r: 10, t: 3},
-		{p: 1500, r: 3, t: 4},
-		{p: 800, r: 6, t: 2},
-		{p: 2500, r: 2, t: 5},
+	kp := waveKP(ctx)
+	// The formula stays annual compounding, A = P(1 + r)^t, as the authored
+	// schema states. The ordinal moves along the same curve: KP1 draws a
+	// short horizon and a small principal, KP2 a medium one and KP3 a long
+	// one, so no ordinal repeats another's parameter set.
+	var p, t int
+	switch kp {
+	case 2:
+		p = (rand.Intn(30) + 20) * 100 // 2000..4900
+		t = rand.Intn(3) + 5           // 5..7
+	case 3:
+		p = (rand.Intn(50) + 50) * 100 // 5000..9900
+		t = rand.Intn(3) + 8           // 8..10
+	default:
+		p = (rand.Intn(15) + 5) * 100 // 500..1900
+		t = rand.Intn(3) + 2          // 2..4
 	}
-	c := claims[rand.Intn(len(claims))]
-	value := float64(c.p) * math.Pow(1+float64(c.r)/100, float64(c.t))
+	r := rand.Intn(8) + 2 // 2..9 percent
+	value := float64(p) * math.Pow(1+float64(r)/100, float64(t))
 	answer := fmt.Sprintf("%.2f", value)
 	return generator.Problem{
-		Question: "An investment of " + strconv.Itoa(c.p) + " dollars earns " + strconv.Itoa(c.r) +
-			" percent interest per year, compounded once a year, for " + strconv.Itoa(c.t) +
+		Question: "An investment of " + strconv.Itoa(p) + " dollars earns " + strconv.Itoa(r) +
+			" percent interest per year, compounded once a year, for " + strconv.Itoa(t) +
 			" years. Using A = P(1 + r)^t, what is the value at the end, in dollars? (round to cents)",
 		Answer: answer,
-		Explanation: "With P = " + strconv.Itoa(c.p) + ", the annual factor is 1 + " + strconv.Itoa(c.r) +
-			"/100, and raising it to the power " + strconv.Itoa(c.t) + " and multiplying by P gives " + answer + " dollars.",
+		Explanation: "With P = " + strconv.Itoa(p) + ", the annual factor is 1 + " + strconv.Itoa(r) +
+			"/100, and raising it to the power " + strconv.Itoa(t) + " and multiplying by P gives " + answer + " dollars.",
 		Facts: map[string]string{
-			"p": strconv.Itoa(c.p), "r": strconv.Itoa(c.r), "t": strconv.Itoa(c.t), "answer": answer,
+			"p": strconv.Itoa(p), "r": strconv.Itoa(r), "t": strconv.Itoa(t), "answer": answer,
 		},
+		KPOrdinal: kp,
 	}
 }
 
@@ -374,29 +401,32 @@ func algPowInt(base, exp int) int {
 type logModelGen struct{}
 
 func (g *logModelGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct{ b, k int }
-	claims := []claim{
-		{b: 2, k: 3},
-		{b: 2, k: 4},
-		{b: 3, k: 2},
-		{b: 5, k: 2},
-		{b: 10, k: 3},
-		{b: 3, k: 3},
+	kp := waveKP(ctx)
+	// The equation stays log_b(x) = k. The ordinal selects the exponent band:
+	// KP1 rewrites a one- or two-step logarithm, KP2 a three- or four-step
+	// one and KP3 a five- or six-step one, so the three ordinals do not share
+	// a single fixed table.
+	b := rand.Intn(7) + 2 // 2..8
+	var k int
+	switch kp {
+	case 2:
+		k = rand.Intn(2) + 3 // 3..4
+	case 3:
+		k = rand.Intn(2) + 5 // 5..6
+	default:
+		k = rand.Intn(2) + 1 // 1..2
 	}
-	c := claims[rand.Intn(len(claims))]
-	value := 1
-	for i := 0; i < c.k; i++ {
-		value *= c.b
-	}
+	value := algPowInt(b, k)
 	return generator.Problem{
-		Question: "Solve log base " + strconv.Itoa(c.b) + " of x = " + strconv.Itoa(c.k) +
-			" for x.",
+		Question: "Solve log base " + strconv.Itoa(b) + " of x = " + strconv.Itoa(k) +
+			" for x. (enter a number)",
 		Answer: strconv.Itoa(value),
-		Explanation: "The equation says the base " + strconv.Itoa(c.b) + " raised to the power " + strconv.Itoa(c.k) +
+		Explanation: "The equation says the base " + strconv.Itoa(b) + " raised to the power " + strconv.Itoa(k) +
 			" equals x, so x = " + strconv.Itoa(value) + ".",
 		Facts: map[string]string{
-			"b": strconv.Itoa(c.b), "k": strconv.Itoa(c.k), "answer": strconv.Itoa(value),
+			"b": strconv.Itoa(b), "k": strconv.Itoa(k), "answer": strconv.Itoa(value),
 		},
+		KPOrdinal: kp,
 	}
 }
 
@@ -407,26 +437,31 @@ func (g *logModelGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type radicalSimplifyGen struct{}
 
 func (g *radicalSimplifyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct{ a, b int }
-	claims := []claim{
-		{a: 2, b: 2},
-		{a: 3, b: 2},
-		{a: 4, b: 2},
-		{a: 2, b: 3},
-		{a: 3, b: 5},
-		{a: 5, b: 2},
-		{a: 2, b: 7},
-		{a: 3, b: 6},
+	kp := waveKP(ctx)
+	// The squarefree factor b is drawn from a band per ordinal, and a covers a
+	// wide range, so n = a^2 b is a fresh number rather than one of eight.
+	squarefree := []int{2, 3, 5, 6, 7, 10, 11, 13, 14, 15, 17}
+	var a, b int
+	switch kp {
+	case 2:
+		a = rand.Intn(8) + 9 // 9..16
+		b = squarefree[rand.Intn(7)]
+	case 3:
+		a = rand.Intn(11) + 2 // 2..12
+		b = squarefree[rand.Intn(6)+5]
+	default:
+		a = rand.Intn(7) + 2 // 2..8
+		b = squarefree[rand.Intn(5)]
 	}
-	c := claims[rand.Intn(len(claims))]
-	n := c.a * c.a * c.b
+	n := a * a * b
 	return generator.Problem{
-		Question:    fmt.Sprintf("The square root of %d can be written as \\(a\\sqrt{b}\\), where \\(b\\) is squarefree. What is the whole number \\(a\\)?", n),
-		Answer:      strconv.Itoa(c.a),
-		Explanation: fmt.Sprintf("Since %d = %d times %d, the square root is \\(%d\\sqrt{%d}\\).", n, c.a*c.a, c.b, c.a, c.b),
+		Question:    fmt.Sprintf("The square root of %d can be written as \\(a\\sqrt{b}\\), where \\(b\\) is squarefree. What is the whole number \\(a\\)? (enter a number)", n),
+		Answer:      strconv.Itoa(a),
+		Explanation: fmt.Sprintf("Since %d = %d times %d, the square root is \\(%d\\sqrt{%d}\\).", n, a*a, b, a, b),
 		Facts: map[string]string{
-			"n": strconv.Itoa(n), "a": strconv.Itoa(c.a), "b": strconv.Itoa(c.b), "answer": strconv.Itoa(c.a),
+			"n": strconv.Itoa(n), "a": strconv.Itoa(a), "b": strconv.Itoa(b), "answer": strconv.Itoa(a),
 		},
+		KPOrdinal: kp,
 	}
 }
 
@@ -437,27 +472,41 @@ func (g *radicalSimplifyGen) Generate(ctx generator.GeneratorContext) generator.
 type radicalOpsGen struct{}
 
 func (g *radicalOpsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct{ a, b, c int }
-	claims := []claim{
-		{a: 2, b: 3, c: 2},
-		{a: 5, b: 2, c: 3},
-		{a: 4, b: 3, c: 5},
-		{a: 7, b: 2, c: 7},
-		{a: 6, b: 5, c: 6},
-		{a: 3, b: 8, c: 2},
+	kp := waveKP(ctx)
+	// The operation stays "add two like radicals". The ordinal chooses a band
+	// of squarefree radicands and a coefficient range, so the three ordinals
+	// pose different families instead of replaying six fixed pairs.
+	bands := [3][]int{
+		{2, 3, 5, 6},
+		{7, 10, 11, 13, 14},
+		{15, 17, 19, 21, 22},
 	}
-	c := claims[rand.Intn(len(claims))]
-	sum := c.a + c.b
+	band := bands[kp-1]
+	c := band[rand.Intn(len(band))]
+	var a, b int
+	switch kp {
+	case 2:
+		a = rand.Intn(12) + 3 // 3..14
+		b = rand.Intn(12) + 3
+	case 3:
+		a = rand.Intn(15) + 2 // 2..16
+		b = rand.Intn(15) + 2
+	default:
+		a = rand.Intn(9) + 2 // 2..10
+		b = rand.Intn(9) + 2
+	}
+	sum := a + b
 	return generator.Problem{
-		Question: "Simplify " + strconv.Itoa(c.a) + " times the square root of " + strconv.Itoa(c.c) + " plus " +
-			strconv.Itoa(c.b) + " times the square root of " + strconv.Itoa(c.c) +
-			". The result is k times the square root of " + strconv.Itoa(c.c) + "; what is k?",
+		Question: "Simplify " + strconv.Itoa(a) + " times the square root of " + strconv.Itoa(c) + " plus " +
+			strconv.Itoa(b) + " times the square root of " + strconv.Itoa(c) +
+			". The result is k times the square root of " + strconv.Itoa(c) + "; what is k? (enter a number)",
 		Answer: strconv.Itoa(sum),
-		Explanation: "The two terms share the radical, so their coefficients add: " + strconv.Itoa(c.a) + " + " +
-			strconv.Itoa(c.b) + " = " + strconv.Itoa(sum) + ".",
+		Explanation: "The two terms share the radical, so their coefficients add: " + strconv.Itoa(a) + " + " +
+			strconv.Itoa(b) + " = " + strconv.Itoa(sum) + ".",
 		Facts: map[string]string{
-			"a": strconv.Itoa(c.a), "b": strconv.Itoa(c.b), "c": strconv.Itoa(c.c), "answer": strconv.Itoa(sum),
+			"a": strconv.Itoa(a), "b": strconv.Itoa(b), "c": strconv.Itoa(c), "answer": strconv.Itoa(sum),
 		},
+		KPOrdinal: kp,
 	}
 }
 
@@ -594,27 +643,40 @@ func (g *complexFractionGen) Generate(ctx generator.GeneratorContext) generator.
 type proportionsGen struct{}
 
 func (g *proportionsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct{ a, b, k int }
-	claims := []claim{
-		{a: 2, b: 3, k: 4},
-		{a: 3, b: 5, k: 2},
-		{a: 4, b: 7, k: 3},
-		{a: 5, b: 4, k: 6},
-		{a: 2, b: 9, k: 5},
-		{a: 6, b: 5, k: 4},
+	kp := waveKP(ctx)
+	// The proportion keeps the shape a/b = num/x the authored schema names.
+	// The scale k sets num = ak and x = bk, so every draw divides exactly; the
+	// ordinal uses a different band of scales and a wider pair of ratios.
+	var a, b, k, lo, hi int
+	switch kp {
+	case 2:
+		lo, hi = 3, 12
+		k = rand.Intn(3) + 5 // 5..7
+	case 3:
+		lo, hi = 2, 12
+		k = rand.Intn(4) + 8 // 8..11
+	default:
+		lo, hi = 2, 10
+		k = rand.Intn(3) + 2 // 2..4
 	}
-	c := claims[rand.Intn(len(claims))]
-	num := c.a * c.k
-	x := c.b * c.k
+	a = rand.Intn(hi-lo+1) + lo
+	b = rand.Intn(hi-lo+1) + lo
+	// A proportion with a equal to b is the trivial 1 = num/x, so redraw.
+	for b == a {
+		b = rand.Intn(hi-lo+1) + lo
+	}
+	num := a * k
+	x := b * k
 	return generator.Problem{
-		Question: "Solve the proportion " + strconv.Itoa(c.a) + "/" + strconv.Itoa(c.b) + " = " + strconv.Itoa(num) +
-			"/x for x.",
+		Question: "Solve the proportion " + strconv.Itoa(a) + "/" + strconv.Itoa(b) + " = " + strconv.Itoa(num) +
+			"/x for x. (enter a number)",
 		Answer: strconv.Itoa(x),
-		Explanation: "Cross-multiplying gives " + strconv.Itoa(c.a) + "x = " + strconv.Itoa(c.b) + " times " + strconv.Itoa(num) +
+		Explanation: "Cross-multiplying gives " + strconv.Itoa(a) + "x = " + strconv.Itoa(b) + " times " + strconv.Itoa(num) +
 			", so x = " + strconv.Itoa(x) + ".",
 		Facts: map[string]string{
-			"a": strconv.Itoa(c.a), "b": strconv.Itoa(c.b), "num": strconv.Itoa(num), "answer": strconv.Itoa(x),
+			"a": strconv.Itoa(a), "b": strconv.Itoa(b), "num": strconv.Itoa(num), "answer": strconv.Itoa(x),
 		},
+		KPOrdinal: kp,
 	}
 }
 
@@ -737,17 +799,29 @@ func (g *matricesGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type nonlinearSystemGen struct{}
 
 func (g *nonlinearSystemGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	ks := []int{2, 3, 4, 5, 6, 7}
-	k := ks[rand.Intn(len(ks))]
+	kp := waveKP(ctx)
+	// The system stays y = x^2 and y = kx, whose nonzero solution is x = k.
+	// The ordinal draws k from a different band so the three branches do not
+	// share one fixed list of six slopes.
+	var k int
+	switch kp {
+	case 2:
+		k = rand.Intn(12) + 14 // 14..25
+	case 3:
+		k = rand.Intn(15) + 26 // 26..40
+	default:
+		k = rand.Intn(12) + 2 // 2..13
+	}
 	y := k * k
 	return generator.Problem{
-		Question: "The system y = x^2 and y = " + strconv.Itoa(k) + "x has two solutions. What is the y-coordinate of the solution with x not equal to 0?",
+		Question: "The system y = x^2 and y = " + strconv.Itoa(k) + "x has two solutions. What is the y-coordinate of the solution with x not equal to 0? (enter a number)",
 		Answer:   strconv.Itoa(y),
 		Explanation: "Setting x^2 equal to " + strconv.Itoa(k) + "x gives x(x - " + strconv.Itoa(k) +
 			") = 0, so the nonzero solution has x = " + strconv.Itoa(k) + " and y = " + strconv.Itoa(k) + "^2 = " + strconv.Itoa(y) + ".",
 		Facts: map[string]string{
 			"k": strconv.Itoa(k), "x": strconv.Itoa(k), "answer": strconv.Itoa(y),
 		},
+		KPOrdinal: kp,
 	}
 }
 
@@ -758,27 +832,33 @@ func (g *nonlinearSystemGen) Generate(ctx generator.GeneratorContext) generator.
 type sigmaGen struct{}
 
 func (g *sigmaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct{ a, b, n int }
-	claims := []claim{
-		{a: 1, b: 0, n: 5},
-		{a: 2, b: 1, n: 4},
-		{a: 3, b: 2, n: 6},
-		{a: 1, b: 3, n: 8},
-		{a: 2, b: 5, n: 5},
-		{a: 4, b: 0, n: 5},
+	kp := waveKP(ctx)
+	// The term stays ai + b. The ordinal chooses a band of upper limits: KP1
+	// reads a short sum, KP2 a medium one and KP3 a long one, so the three
+	// branches never replay the same six rows.
+	var n int
+	switch kp {
+	case 2:
+		n = rand.Intn(5) + 8 // 8..12
+	case 3:
+		n = rand.Intn(6) + 13 // 13..18
+	default:
+		n = rand.Intn(5) + 3 // 3..7
 	}
-	c := claims[rand.Intn(len(claims))]
-	tri := c.n * (c.n + 1) / 2
-	sum := c.a*tri + c.b*c.n
+	a := rand.Intn(6) + 1 // 1..6
+	b := rand.Intn(9) + 1 // 1..9
+	tri := n * (n + 1) / 2
+	sum := a*tri + b*n
 	return generator.Problem{
-		Question: "Evaluate the sum from i = 1 to " + strconv.Itoa(c.n) + " of (" + strconv.Itoa(c.a) + "i + " +
-			strconv.Itoa(c.b) + ").",
+		Question: "Evaluate the sum from i = 1 to " + strconv.Itoa(n) + " of (" + strconv.Itoa(a) + "i + " +
+			strconv.Itoa(b) + "). (enter a number)",
 		Answer: strconv.Itoa(sum),
-		Explanation: "The sum splits into " + strconv.Itoa(c.a) + " times the sum of i, which is " + strconv.Itoa(tri) +
-			", plus " + strconv.Itoa(c.b) + " times " + strconv.Itoa(c.n) + " terms, giving " + strconv.Itoa(sum) + ".",
+		Explanation: "The sum splits into " + strconv.Itoa(a) + " times the sum of i, which is " + strconv.Itoa(tri) +
+			", plus " + strconv.Itoa(b) + " times " + strconv.Itoa(n) + " terms, giving " + strconv.Itoa(sum) + ".",
 		Facts: map[string]string{
-			"a": strconv.Itoa(c.a), "b": strconv.Itoa(c.b), "n": strconv.Itoa(c.n), "answer": strconv.Itoa(sum),
+			"a": strconv.Itoa(a), "b": strconv.Itoa(b), "n": strconv.Itoa(n), "answer": strconv.Itoa(sum),
 		},
+		KPOrdinal: kp,
 	}
 }
 

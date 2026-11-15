@@ -328,13 +328,13 @@ func (g *algBridgeGen) Generate(ctx generator.GeneratorContext) generator.Proble
 	case "composite_domain":
 		switch o {
 		case 1:
-			a := rand.Intn(7) - 2
+			a := rand.Intn(21) - 8 // -8..12
 			return algProb(o, fmt.Sprintf("Let f(x) = sqrt(x) and g(x) = x - %d. What is the smallest integer in the domain of f(g(x))? (enter a number)", a), strconv.Itoa(a), fmt.Sprintf("The composite needs x - %d >= 0, so the smallest integer is %d.", a, a))
 		case 2:
-			a := rand.Intn(6)
+			a := rand.Intn(15) // 0..14
 			return algProb(o, fmt.Sprintf("Let f(x) = sqrt(x) and g(x) = 1/(x - %d). What is the smallest integer in the domain of f(g(x))? (enter a number)", a), strconv.Itoa(a+1), fmt.Sprintf("The inner function needs x > %d and its output is positive there, so the smallest integer is %d.", a, a+1))
 		default:
-			a := rand.Intn(6) - 2
+			a := rand.Intn(21) - 8 // -8..12
 			return algProb(o, fmt.Sprintf("Let f(x) = ln(x) and g(x) = x - %d. What is the smallest integer in the domain of f(g(x))? (enter a number)", a), strconv.Itoa(a+1), fmt.Sprintf("The logarithm needs x - %d > 0, so the smallest integer is %d.", a, a+1))
 		}
 	case "linear_word":

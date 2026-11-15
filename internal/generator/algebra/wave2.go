@@ -169,7 +169,7 @@ type logScaleGen struct{}
 
 func (g *logScaleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	kp := waveKP(ctx)
-	k := rand.Intn(6) + 1 // 1..6
+	k := rand.Intn(14) + 1 // 1..14, so one ordinal supplies fourteen scales
 
 	var question, explanation string
 	var answer int
@@ -258,7 +258,7 @@ type parabolaFocusGen struct{}
 
 func (g *parabolaFocusGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	kp := waveKP(ctx)
-	p := rand.Intn(5) + 1
+	p := rand.Intn(18) + 1 // 1..18 focal distances; the ordinal asks a different quantity
 
 	var question, explanation string
 	var answer int
@@ -294,9 +294,20 @@ type ellipseFociGen struct{}
 
 func (g *ellipseFociGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 	kp := waveKP(ctx)
+	// Every Pythagorean triple with legs m^2-n^2 and 2mn and hypotenuse
+	// m^2+n^2 is an ellipse with a = m^2+n^2, so drawing m > n produces a
+	// fresh ellipse per draw instead of repeating a table of eight. Both
+	// assignments of the two legs to b and c are valid, because
+	// 2mn < m^2+n^2 whenever m and n differ.
+	m := rand.Intn(8) + 2 // 2..9
+	n := rand.Intn(m-1) + 1
+	leg1 := m*m - n*n
+	leg2 := 2 * m * n
 	type triple struct{ a, b, c int }
-	pairs := []triple{{5, 3, 4}, {5, 4, 3}, {10, 6, 8}, {10, 8, 6}, {13, 5, 12}, {13, 12, 5}, {17, 8, 15}, {17, 15, 8}}
-	t := pairs[rand.Intn(len(pairs))]
+	t := triple{a: m*m + n*n, b: leg1, c: leg2}
+	if rand.Intn(2) == 0 {
+		t.b, t.c = leg2, leg1
+	}
 
 	var question, explanation string
 	var answer int
