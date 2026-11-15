@@ -150,7 +150,7 @@ func w4Clairaut(kp int) generator.Problem {
 }
 
 func w4Riccati(kp int) generator.Problem {
-	a := w4OR(1, 7)
+	a := w4OR(1, 14)
 	f := map[string]string{}
 	w4OI(f, "a", a)
 	lead := fmt.Sprintf("%d y^2", a)
@@ -159,8 +159,8 @@ func w4Riccati(kp int) generator.Problem {
 	}
 	switch kp {
 	case 1:
-		return w4O(kp, fmt.Sprintf("For \\(y'=%s-%d\\), what constant particular solution \\(y=k\\) works?", lead, a), "1",
-			fmt.Sprintf("\\(y=1\\) gives \\(y'=0\\) and \\(%d\\cdot1^2-%d=0\\).", a, a), f)
+		return w4O(kp, fmt.Sprintf("For \\(y'=%s-%d\\), what positive constant particular solution \\(y=k\\) works?", lead, a), "1",
+			fmt.Sprintf("\\(y=1\\) gives \\(y'=0\\) and \\(%d\\cdot1^2-%d=0\\), and it is the positive one.", a, a), f)
 	case 2:
 		return w4O(kp, fmt.Sprintf("For \\(y'=%d y^2-%d\\), after \\(y=1+1/u\\), what is the coefficient of \\(u\\) in the resulting linear equation?", a, a), strconv.Itoa(2*a),
 			fmt.Sprintf("The substitution gives \\(u'+%du=-%d\\), so the coefficient is %d.", 2*a, a, 2*a), f)
@@ -538,7 +538,7 @@ func w4Perturbation(kp int) generator.Problem {
 }
 
 func w4Duhamel(kp int) generator.Problem {
-	a := w4OR(1, 9)
+	a := w4OR(1, 14)
 	f := map[string]string{}
 	w4OI(f, "a", a)
 	switch kp {

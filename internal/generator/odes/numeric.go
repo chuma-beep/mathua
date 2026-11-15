@@ -198,35 +198,66 @@ func (g *eulerStepsGen) Generate(ctx generator.GeneratorContext) generator.Probl
 	}
 }
 
-// laplaceValueGen evaluates the Laplace transform of a monomial at s = 1.
+// laplaceValueGen evaluates the Laplace transform of a monomial at a point.
+//
+// The three knowledge points ask three different integer facts about the same
+// transform: the value at s = 1, the power of s in the denominator and the
+// ratio of two consecutive transforms. Every answer is an integer because the
+// concept ships with the numeric grader.
 type laplaceValueGen struct{}
 
-func (g *laplaceValueGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	// The power is drawn from a range that widens with difficulty. It used to
-	// span four values in total, so a learner reviewing this concept saw the
-	// same factorial asked four ways and nothing else.
-	minN := mathutil.ScaleInt(ctx.Difficulty, 2, 5)
-	maxN := mathutil.ScaleInt(ctx.Difficulty, 5, 9)
-	n := minN + rand.Intn(maxN-minN+1)
+func laplaceFactorial(n int) int {
 	f := 1
 	for i := 2; i <= n; i++ {
 		f *= i
 	}
-	ans := strconv.Itoa(f)
+	return f
+}
 
-	q := fmt.Sprintf("Evaluate the Laplace transform \\(L\\{t^{%d}\\}(s)\\) at \\(s = 1\\).", n)
-	exp := fmt.Sprintf("Subgoal 1: State governing formula. The Laplace transform of the power function t^n for a non-negative integer n is L{t^n}(s) = n! / s^{n+1} for s > 0.\n\nSubgoal 2: Substitute parameters. Substitute power n = %d and evaluation point s = 1 into the transform: L{t^%d}(1) = %d! / 1^{%d}.\n\nSubgoal 3: Evaluate and simplify. Compute the factorial %d! = %d and divide by 1: %d / 1 = %d.",
-		n, n, n, n+1, n, f, f, f)
-
-	return generator.Problem{
-		Question:    q,
-		Answer:      ans,
-		Explanation: exp,
-		Facts: map[string]string{
-			"n":      strconv.Itoa(n),
-			"s":      "1",
-			"answer": ans,
-		},
+func (g *laplaceValueGen) Generate(ctx generator.GeneratorContext) generator.Problem {
+	o := odeBridgeOrdinal(ctx)
+	switch o {
+	case 1:
+		n := 1 + rand.Intn(12)
+		f := laplaceFactorial(n)
+		ans := strconv.Itoa(f)
+		q := fmt.Sprintf("Evaluate the Laplace transform \\(L\\{t^{%d}\\}(s)\\) at \\(s = 1\\).", n)
+		exp := fmt.Sprintf("Subgoal 1: State governing formula. The Laplace transform of the power function t^n for a non-negative integer n is L{t^n}(s) = n! / s^{n+1} for s > 0.\n\nSubgoal 2: Substitute parameters. Substitute power n = %d and evaluation point s = 1 into the transform: L{t^%d}(1) = %d! / 1^{%d}.\n\nSubgoal 3: Evaluate and simplify. Compute the factorial %d! = %d and divide by 1: %d / 1 = %d.",
+			n, n, n, n+1, n, f, f, f)
+		return generator.Problem{
+			Question:    q,
+			Answer:      ans,
+			Explanation: exp,
+			Facts:       map[string]string{"n": strconv.Itoa(n), "s": "1", "answer": ans},
+			KPOrdinal:   o,
+		}
+	case 2:
+		n := rand.Intn(13)
+		ans := strconv.Itoa(n + 1)
+		q := fmt.Sprintf("For the transform \\(L\\{t^{%d}\\}(s)\\) written as n! over s to the power n + 1, enter the exponent of s in the denominator.", n)
+		exp := fmt.Sprintf("Subgoal 1: State governing formula. The Laplace transform of t^n is L{t^n}(s) = n! / s^{n+1}, so the denominator carries s raised to the power n + 1.\n\nSubgoal 2: Substitute parameters. The power in the question is n = %d, so the exponent is n + 1 = %d.\n\nSubgoal 3: Evaluate and simplify. The denominator is s to the power %d.",
+			n, n+1, n+1)
+		return generator.Problem{
+			Question:    q,
+			Answer:      ans,
+			Explanation: exp,
+			Facts:       map[string]string{"n": strconv.Itoa(n), "answer": ans},
+			KPOrdinal:   o,
+		}
+	default:
+		n := 1 + rand.Intn(12)
+		ans := strconv.Itoa(n + 1)
+		q := fmt.Sprintf("At \\(s = 1\\) the transform of \\(t^{%d}\\) equals %d!. Enter the transform of the next power at \\(s = 1\\) divided by the transform of \\(t^{%d}\\) at \\(s = 1\\).",
+			n, n, n)
+		exp := fmt.Sprintf("Subgoal 1: State governing formula. Since L{t^n}(1) = n!, the ratio of consecutive transforms is L{t^(n+1)}(1) / L{t^n}(1) = (n+1)! / n!.\n\nSubgoal 2: Substitute parameters. With n = %d the numerator is %d! and the denominator is %d!.\n\nSubgoal 3: Evaluate and simplify. The factorial ratio (n+1)! / n! equals n + 1, which is %d.",
+			n, n+1, n, n+1)
+		return generator.Problem{
+			Question:    q,
+			Answer:      ans,
+			Explanation: exp,
+			Facts:       map[string]string{"n": strconv.Itoa(n), "answer": ans},
+			KPOrdinal:   o,
+		}
 	}
 }
 

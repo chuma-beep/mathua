@@ -175,12 +175,12 @@ var wave15FamiliesA = map[string][3]func() w15Trio{
 	},
 	"ode.pde.polar_separation": {
 		func() w15Trio {
-			n := w15Limit(2, 9)
+			n := w15Limit(2, 13)
 			return w15Mk(fmt.Sprintf("The angular separation constant of a periodic solution is n squared. Enter the constant for n equal to %d.", n), n*n,
 				fmt.Sprintf("%d squared is %d.", n, n*n))
 		},
 		func() w15Trio {
-			radius, n := w15Limit(2, 3), w15Limit(2, 4)
+			radius, n := w15Limit(2, 3), w15Limit(2, 7)
 			value := 1
 			for i := 0; i < n; i++ {
 				value *= radius
@@ -189,7 +189,7 @@ var wave15FamiliesA = map[string][3]func() w15Trio{
 				fmt.Sprintf("%d to the power %d is %d.", radius, n, value))
 		},
 		func() w15Trio {
-			n := w15Limit(1, 8)
+			n := w15Limit(1, 13)
 			return w15Mk(fmt.Sprintf("The function cos(n theta) has n periods in a full turn. For n equal to %d, enter the number of zeros in one full turn.", n), 2*n,
 				fmt.Sprintf("Each period contributes two zeros, so %d periods give %d.", n, 2*n))
 		},
@@ -304,17 +304,17 @@ var wave15FamiliesB = map[string][3]func() w15Trio{
 	},
 	"ode.dynamical.hartman_grobman": {
 		func() w15Trio {
-			stable := w15Limit(1, 6)
+			stable := w15Limit(1, 14)
 			return w15Mk(fmt.Sprintf("A hyperbolic fixed point has %d eigenvalues with negative real part. Enter the dimension of its stable manifold.", stable), stable,
 				fmt.Sprintf("Each negative eigenvalue contributes one stable direction, so the dimension is %d.", stable))
 		},
 		func() w15Trio {
-			unstable := w15Limit(1, 6)
+			unstable := w15Limit(1, 14)
 			return w15Mk(fmt.Sprintf("A hyperbolic fixed point has %d eigenvalues with positive real part. Enter the dimension of its unstable manifold.", unstable), unstable,
 				fmt.Sprintf("Each positive eigenvalue contributes one unstable direction, so the dimension is %d.", unstable))
 		},
 		func() w15Trio {
-			zero := w15Limit(1, 6)
+			zero := w15Limit(1, 14)
 			return w15Mk(fmt.Sprintf("A Jacobian has %d zero eigenvalues among its spectrum. Enter the number of eigenvalues on the imaginary axis.", zero), zero,
 				fmt.Sprintf("A zero eigenvalue lies on the imaginary axis, so the count is %d.", zero))
 		},
@@ -409,17 +409,17 @@ var wave15FamiliesB = map[string][3]func() w15Trio{
 	},
 	"ode.dynamical.gradient_flow": {
 		func() w15Trio {
-			x := w15Limit(1, 9)
+			x := w15Limit(1, 12)
 			return w15Mk(fmt.Sprintf("The potential is x squared and the flow is x' = -2x. Enter the magnitude of the rate of decrease of the potential at x equal to %d.", x), 2*x*x,
 				fmt.Sprintf("The derivative of the potential along the flow is -2x squared, whose magnitude at %d is %d.", x, 2*x*x))
 		},
 		func() w15Trio {
-			critical := w15Limit(1, 9)
-			return w15Mk(fmt.Sprintf("A potential has %d critical points. Enter the number of fixed points of its gradient flow.", critical), critical,
-				fmt.Sprintf("Fixed points of the flow are exactly the critical points, so there are %d.", critical))
+			critical, saddles := w15Limit(6, 20), w15Limit(1, 4)
+			return w15Mk(fmt.Sprintf("A potential has %d critical points, and %d of them are saddles. Enter the number of fixed points of its gradient flow that are local minima or maxima.", critical, saddles), critical-saddles,
+				fmt.Sprintf("Every critical point is a fixed point of the flow. Removing the %d saddles leaves %d - %d = %d minima or maxima.", saddles, critical, saddles, critical-saddles))
 		},
 		func() w15Trio {
-			curvature := w15Limit(1, 9)
+			curvature := w15Limit(1, 12)
 			return w15Mk(fmt.Sprintf("The potential is %d x squared. Enter the decay rate of the linearised flow at the origin.", curvature), 2*curvature,
 				fmt.Sprintf("Differentiating %d x squared gives 2 times %d, which is %d.", curvature, curvature, 2*curvature))
 		},

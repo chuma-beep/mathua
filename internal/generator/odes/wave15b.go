@@ -2,7 +2,10 @@ package odes
 
 // Wave 15, second half: stiff solvers and the calculus of variations.
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+)
 
 // wave15FamiliesC covers stiff numerical methods and variational problems.
 var wave15FamiliesC = map[string][3]func() w15Trio{
@@ -25,70 +28,78 @@ var wave15FamiliesC = map[string][3]func() w15Trio{
 	},
 	"ode.stiff.a_stability": {
 		func() w15Trio {
-			rate := w15Limit(1, 9)
-			return w15Mk(fmt.Sprintf("Backward Euler has stability function 1 over (1 - z). At z equal to -%d, enter the denominator.", rate), 1+rate,
-				fmt.Sprintf("1 - (-%d) = %d.", rate, 1+rate))
+			unit, denominator := w15Limit(1, 8), w15Limit(2, 9)
+			return w15Mk(fmt.Sprintf("Backward Euler has stability function 1 over (1 - z). At z equal to -%d over %d, enter the numerator of 1 - z written over the denominator %d.", unit, denominator, denominator), unit+denominator,
+				fmt.Sprintf("1 - (-%d over %d) = 1 + %d over %d = %d over %d, so the numerator is %d.", unit, denominator, unit, denominator, denominator+unit, denominator, unit+denominator))
 		},
 		func() w15Trio {
-			order := w15Limit(1, 5)
+			order := w15Limit(1, 12)
 			return w15Mk(fmt.Sprintf("An A-stable method has stability function 1 over (1 - z) to the power %d. At z equal to -1, enter the denominator.", order), 1<<order,
 				fmt.Sprintf("The denominator is 2 to the power %d, which is %d.", order, 1<<order))
 		},
 		func() w15Trio {
-			rate := w15Limit(1, 9)
+			rate := w15Limit(1, 14)
 			return w15Mk(fmt.Sprintf("The test parameter is z equal to -%d. Enter the real part of z as a positive number.", rate), rate,
 				fmt.Sprintf("The real part is -%d, whose magnitude is %d.", rate, rate))
 		},
 	},
 	"ode.stiff.l_stability": {
 		func() w15Trio {
-			rate := w15Limit(2, 9)
+			rate := w15Limit(1, 12)
 			return w15Mk(fmt.Sprintf("Backward Euler at z equal to -%d gives a factor of 1 over %d. Enter the denominator.", rate, 1+rate), 1+rate,
 				fmt.Sprintf("1 - (-%d) = %d.", rate, 1+rate))
 		},
 		func() w15Trio {
-			steps := w15Limit(1, 5)
+			steps := w15Limit(1, 12)
 			return w15Mk(fmt.Sprintf("At z equal to -1 the factor is one half, and %d steps multiply the factors. Enter the denominator of the result.", steps), 1<<steps,
 				fmt.Sprintf("One half to the power %d has denominator 2 to the power %d, which is %d.", steps, steps, 1<<steps))
 		},
 		func() w15Trio {
-			rate := w15Limit(2, 6)
+			rate := w15Limit(2, 13)
 			return w15Mk(fmt.Sprintf("The trapezoidal rule gives (2 - m) over (2 + m) at z equal to -m. For m equal to %d, enter the magnitude of the numerator.", rate), rate-2,
 				fmt.Sprintf("The numerator is 2 - %d, whose magnitude is %d.", rate, rate-2))
 		},
 	},
 	"ode.stiff.trapezoidal": {
 		func() w15Trio {
-			rate := w15Limit(2, 9)
+			rate := w15Limit(2, 13)
 			return w15Mk(fmt.Sprintf("The trapezoidal rule at z equal to -2k gives a factor whose magnitude is (k - 1) over (k + 1). For k equal to %d, enter the numerator.", rate), rate-1,
 				fmt.Sprintf("The numerator is %d - 1, which is %d.", rate, rate-1))
 		},
 		func() w15Trio {
-			rate := w15Limit(2, 9)
+			rate := w15Limit(2, 13)
 			return w15Mk(fmt.Sprintf("At z equal to -2k the trapezoidal rule gives a factor whose magnitude is (k - 1) over (k + 1). For k equal to %d, enter the denominator.", rate), rate+1,
 				fmt.Sprintf("The denominator is %d + 1, which is %d.", rate, rate+1))
 		},
 		func() w15Trio {
-			length := w15Limit(1, 9)
-			return w15Mk(fmt.Sprintf("The trapezoidal rule is applied over %d subintervals of unit length. Enter the total length.", length), length,
-				fmt.Sprintf("%d unit subintervals cover a length of %d.", length, length))
+			intervals, length := w15Limit(2, 6), w15Limit(2, 5)
+			return w15Mk(fmt.Sprintf("The trapezoidal rule is applied over %d equal subintervals, each of length %d. Enter the total length.", intervals, length), intervals*length,
+				fmt.Sprintf("%d subintervals of length %d cover a total length of %d.", intervals, length, intervals*length))
 		},
 	},
 	"ode.stiff.bdf": {
 		func() w15Trio {
-			order := w15Limit(1, 5)
-			return w15Mk(fmt.Sprintf("A BDF method of order %d uses the new value plus the previous values. Enter the total number of values in the formula.", order), order+1,
-				fmt.Sprintf("The new value plus %d past values gives %d values.", order, order+1))
+			order, components := w15Limit(1, 6), w15Limit(2, 4)
+			return w15Mk(fmt.Sprintf("A BDF method of order %d uses the new value plus the previous values, once for each of %d coupled components. Enter the number of values the formula stores per step.", order, components), components*(order+1),
+				fmt.Sprintf("The new value plus %d past values gives %d values per component, and %d components give %d values.", order, order+1, components, components*(order+1)))
 		},
 		func() w15Trio {
-			order := w15Limit(1, 5)
-			return w15Mk(fmt.Sprintf("The BDF family is zero-stable for orders up to six. A formula of order %d is stable. Enter six minus that order.", order), 6-order,
-				fmt.Sprintf("6 - %d = %d.", order, 6-order))
+			order := w15Limit(1, 6)
+			if rand.Intn(2) == 0 {
+				return w15Mk(fmt.Sprintf("The BDF family is zero-stable for orders up to six. A formula of order %d is stable. Enter six minus that order.", order), 6-order,
+					fmt.Sprintf("6 - %d = %d.", order, 6-order))
+			}
+			return w15Mk(fmt.Sprintf("The BDF family is zero-stable for orders up to six. Enter how many orders from %d through six inclusive are zero-stable.", order), 7-order,
+				fmt.Sprintf("The orders %d, ..., 6 are %d in number, since 6 - %d + 1 = %d.", order, 7-order, order, 7-order))
 		},
 		func() w15Trio {
-			order := w15Limit(2, 6)
-			return w15Mk(fmt.Sprintf("A BDF method of order %d uses the previous %d values. Enter the number of past values.", order, order), order,
-				fmt.Sprintf("The method uses %d past values.", order))
+			order := w15Limit(1, 6)
+			if rand.Intn(2) == 0 {
+				return w15Mk(fmt.Sprintf("A BDF method of order %d uses the previous %d values. Enter the number of past values.", order, order), order,
+					fmt.Sprintf("The method uses %d past values.", order))
+			}
+			return w15Mk(fmt.Sprintf("A BDF method of order %d takes one new value and one value for each lower order. Enter the total number of values in the formula.", order), order+1,
+				fmt.Sprintf("One new value plus %d past values gives %d values in total.", order, order+1))
 		},
 	},
 	"ode.stiff.rosenbrock": {
@@ -165,17 +176,17 @@ var wave15FamiliesC = map[string][3]func() w15Trio{
 	},
 	"ode.stiff.symplectic": {
 		func() w15Trio {
-			steps := w15Limit(1, 6)
+			steps := w15Limit(1, 14)
 			return w15Mk(fmt.Sprintf("Stormer-Verlet uses one force evaluation per step. Enter the number of evaluations over %d steps.", steps), steps,
 				fmt.Sprintf("One per step over %d steps is %d.", steps, steps))
 		},
 		func() w15Trio {
-			dimension := w15Limit(1, 6)
+			dimension := w15Limit(1, 14)
 			return w15Mk(fmt.Sprintf("A symplectic form on phase space has even dimension 2n, and n equals %d. Enter n.", dimension), dimension,
 				fmt.Sprintf("The half-dimension is %d.", dimension))
 		},
 		func() w15Trio {
-			bound := w15Limit(1, 9)
+			bound := w15Limit(1, 12)
 			return w15Mk(fmt.Sprintf("A symplectic method keeps the energy error between -%d and %d. Enter the peak-to-peak amplitude.", bound, bound), 2*bound,
 				fmt.Sprintf("%d - (-%d) = %d.", bound, bound, 2*bound))
 		},
@@ -200,19 +211,19 @@ var wave15FamiliesC = map[string][3]func() w15Trio{
 	},
 	"ode.variational.euler_lagrange": {
 		func() w15Trio {
-			slope := w15Limit(1, 9)
+			slope := w15Limit(1, 14)
 			return w15Mk(fmt.Sprintf("The Lagrangian is half the square of the slope. At slope %d, enter the derivative of the Lagrangian with respect to the slope.", slope), slope,
 				fmt.Sprintf("Differentiating half the square gives the slope itself, which is %d.", slope))
 		},
 		func() w15Trio {
-			coefficient := w15Limit(1, 9)
+			coefficient := w15Limit(1, 12)
 			return w15Mk(fmt.Sprintf("The Lagrangian is %d times the square of the slope. Enter its second derivative with respect to the slope.", coefficient), 2*coefficient,
 				fmt.Sprintf("The second derivative is twice %d, which is %d.", coefficient, 2*coefficient))
 		},
 		func() w15Trio {
-			coefficient := w15Limit(1, 9)
-			return w15Mk(fmt.Sprintf("The Lagrangian is %d times x times the square of the slope. At x equal to 1 and slope equal to 1, enter its derivative with respect to the slope.", coefficient), 2*coefficient,
-				fmt.Sprintf("The derivative is twice %d times x times the slope, which is %d at the given point.", coefficient, 2*coefficient))
+			coefficient, position := w15Limit(1, 12), w15Limit(1, 3)
+			return w15Mk(fmt.Sprintf("The Lagrangian is %d times x times the square of the slope. At x equal to %d and slope equal to 1, enter its derivative with respect to the slope.", coefficient, position), 2*coefficient*position,
+				fmt.Sprintf("The derivative is twice %d times x times the slope, which is %d at the given point.", coefficient, 2*coefficient*position))
 		},
 	},
 	"ode.variational.natural_bc": {
@@ -239,17 +250,17 @@ var wave15FamiliesC = map[string][3]func() w15Trio{
 	},
 	"ode.variational.legendre": {
 		func() w15Trio {
-			coefficient := w15Limit(1, 9)
+			coefficient := w15Limit(1, 12)
 			return w15Mk(fmt.Sprintf("The function is %d times x squared. Enter its derivative at x equal to 1.", coefficient), 2*coefficient,
 				fmt.Sprintf("The derivative is twice %d times x, which is %d at x equal to 1.", coefficient, 2*coefficient))
 		},
 		func() w15Trio {
-			coefficient := w15Limit(1, 9)
+			coefficient := w15Limit(1, 12)
 			return w15Mk(fmt.Sprintf("The function is %d times x squared and the conjugate variable is twice %d. Enter the Legendre transform.", coefficient, coefficient), coefficient,
 				fmt.Sprintf("For this quadratic the transform equals the function value at the conjugate point, which is %d.", coefficient))
 		},
 		func() w15Trio {
-			slope := w15Limit(1, 5)
+			slope := w15Limit(1, 12)
 			return w15Mk(fmt.Sprintf("The function is x squared, so the Legendre transform is the square of the conjugate variable divided by four. At conjugate variable %d, enter the transform.", 2*slope), slope*slope,
 				fmt.Sprintf("The transform is (2 times %d) squared over four, which is %d.", slope, slope*slope))
 		},
@@ -307,34 +318,34 @@ var wave15FamiliesC = map[string][3]func() w15Trio{
 	},
 	"ode.variational.brachistochrone": {
 		func() w15Trio {
-			scale := w15Limit(1, 9)
+			scale := w15Limit(1, 12)
 			return w15Mk(fmt.Sprintf("The cycloid has y equal to a times (1 - cos theta). At theta equal to pi and a equal to %d, enter y.", scale), 2*scale,
 				fmt.Sprintf("1 - cos pi is 2, so y is twice %d, which is %d.", scale, 2*scale))
 		},
 		func() w15Trio {
-			scale := w15Limit(1, 9)
+			scale := w15Limit(1, 12)
 			return w15Mk(fmt.Sprintf("The cycloid has y equal to a times (1 - cos theta). At theta equal to pi over 2 and a equal to %d, enter y.", scale), scale,
 				fmt.Sprintf("1 - cos pi over 2 is 1, so y equals %d.", scale))
 		},
 		func() w15Trio {
-			scale := w15Limit(2, 9)
+			scale := w15Limit(2, 13)
 			return w15Mk(fmt.Sprintf("The descent time scales as the square root of a. If a is multiplied by %d squared, enter the factor by which the time grows.", scale), scale,
 				fmt.Sprintf("The square root of %d squared is %d.", scale, scale))
 		},
 	},
 	"ode.variational.isoperimetric": {
 		func() w15Trio {
-			radius := w15Limit(1, 9)
+			radius := w15Limit(1, 12)
 			return w15Mk(fmt.Sprintf("A circle has radius %d. Enter its area divided by pi times its radius.", radius), radius,
 				fmt.Sprintf("The area is pi times %d squared, and dividing by pi times %d leaves %d.", radius, radius, radius))
 		},
 		func() w15Trio {
-			quotient := w15Limit(1, 9)
+			quotient := w15Limit(1, 12)
 			return w15Mk(fmt.Sprintf("A circle of perimeter 2 pi k has radius k. For perimeter equal to 2 pi times %d, enter the radius.", quotient), quotient,
 				fmt.Sprintf("The radius is the factor %d.", quotient))
 		},
 		func() w15Trio {
-			side := w15Limit(2, 9)
+			side := w15Limit(2, 13)
 			return w15Mk(fmt.Sprintf("A square with perimeter 4s has side s. For perimeter %d, enter the side.", 4*side), side,
 				fmt.Sprintf("%d divided by 4 is %d.", 4*side, side))
 		},
