@@ -203,8 +203,8 @@ func (g *powerReductionGen) Generate(ctx generator.GeneratorContext) generator.P
 		// A Pythagorean triple forces cos 2theta = (b^2-a^2)/(a^2+b^2), so the
 		// doubled angle has an exact cosine that a learner can check against
 		// the double-angle formula rather than a table.
-		a, b, _ := pythagoreanPair(9)
-		num, den := b*b-a*a, a*a+b*b
+		a, b, c := pythagoreanPair(9)
+		num, den := b*b-a*a, c*c
 		d := gcd(num, den)
 		cosNum, cosDen = num/d, den/d
 	}
