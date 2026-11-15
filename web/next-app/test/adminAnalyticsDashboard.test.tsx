@@ -85,6 +85,13 @@ describe('admin analytics dashboard', () => {
     expect(adminAnalytics).toHaveBeenCalledWith('7d', expect.objectContaining({ sections: expect.any(Array) }))
   })
 
+  it('renders the growth and learning charts', async () => {
+    render(<AdminAnalyticsDashboard />)
+    await screen.findByText('User growth and participation')
+    expect(screen.getByText('Learning improvement')).toBeTruthy()
+    expect(screen.getAllByText('New registrations').length).toBeGreaterThan(0)
+  })
+
   it('loads the sections for the selected tab', async () => {
     render(<AdminAnalyticsDashboard />)
     await screen.findByText('Unique learners')
