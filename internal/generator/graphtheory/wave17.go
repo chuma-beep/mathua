@@ -575,7 +575,7 @@ func w17GomoryHu(kp int) generator.Problem {
 }
 
 func w17MultiwayCut(kp int) generator.Problem {
-	k := w17N(3, 10)
+	k := w17N(3, 15)
 	switch kp {
 	case 1:
 		return w17P(kp,

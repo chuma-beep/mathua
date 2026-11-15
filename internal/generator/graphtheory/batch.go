@@ -19,6 +19,7 @@ import (
 	"fmt"
 	"math/rand"
 	"strconv"
+	"strings"
 
 	"github.com/chuma-beep/mathua/internal/generator"
 	"github.com/chuma-beep/mathua/internal/mathutil"
@@ -304,31 +305,84 @@ func (g *bridgeGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 
 type connectivityGen struct{}
 
+// Generate varies the graph and the invariant. The first ordinal asks for the
+// vertex connectivity of a cycle, a path or a disconnected graph, the second for
+// the complete and complete bipartite graphs the section works through, and the
+// third for edge connectivity, where the chain kappa <= lambda <= delta is the
+// subject.
 func (g *connectivityGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question string
-		answer   string
-		kind     string
-		a, b     int
-		reason   string
+	o := graphOrdinal(ctx)
+	facts := map[string]string{}
+	var kind, question, reason string
+	ans := 0
+
+	switch o {
+	case 1:
+		switch rand.Intn(3) {
+		case 0:
+			n := graphRange(3, 14)
+			kind, ans = "cycle", 2
+			facts["n"] = strconv.Itoa(n)
+			question = fmt.Sprintf("What is the vertex connectivity kappa(C_%d)? (enter a number)", n)
+			reason = fmt.Sprintf("Deleting one vertex of C_%d leaves the connected path P_%d, while deleting two vertices that are not adjacent disconnects the cycle, so kappa(C_%d) = %d.", n, n-1, n, ans)
+		case 1:
+			n := graphRange(2, 14)
+			kind, ans = "path", 1
+			facts["n"] = strconv.Itoa(n)
+			question = fmt.Sprintf("What is the vertex connectivity kappa(P_%d)? (enter a number)", n)
+			reason = fmt.Sprintf("Every internal vertex of P_%d is a cut vertex, so one deletion disconnects the path and kappa(P_%d) = %d.", n, n, ans)
+		default:
+			k := graphRange(2, 5)
+			n := 3*k + graphRange(0, 9)
+			kind, ans = "disjoint", 0
+			facts["n"] = strconv.Itoa(n)
+			facts["components"] = strconv.Itoa(k)
+			question = fmt.Sprintf("A graph on %d vertices is the disjoint union of %d cycles. What is its vertex connectivity? (enter a number)", n, k)
+			reason = fmt.Sprintf("The graph already has %d components, and deleting vertices cannot rejoin them, so the vertex connectivity is %d.", k, ans)
+		}
+	case 2:
+		if rand.Intn(2) == 0 {
+			n := graphRange(3, 13)
+			kind, ans = "complete", n-1
+			facts["a"] = strconv.Itoa(n)
+			question = fmt.Sprintf("What is the vertex connectivity kappa(K_%d)? (enter a number)", n)
+			reason = fmt.Sprintf("Deleting any %d vertices of K_%d leaves a single vertex, and fewer deletions leave a complete graph on at least two vertices, so kappa(K_%d) = %d - 1 = %d.", n-1, n, n, n, ans)
+		} else {
+			a := graphRange(2, 6)
+			b := graphRange(2, 7)
+			m := graphMin(a, b)
+			kind, ans = "bipartite", m
+			facts["a"], facts["b"] = strconv.Itoa(a), strconv.Itoa(b)
+			question = fmt.Sprintf("What is the vertex connectivity kappa(K_{%d,%d})? (enter a number)", a, b)
+			reason = fmt.Sprintf("Deleting the whole side of size %d isolates every vertex on the other side, and no smaller set disconnects K_{%d,%d}, so kappa = %d.", m, a, b, ans)
+		}
+	default:
+		switch rand.Intn(3) {
+		case 0:
+			n := graphRange(3, 13)
+			kind, ans = "complete", n-1
+			facts["a"] = strconv.Itoa(n)
+			question = fmt.Sprintf("What is the edge connectivity lambda(K_%d)? (enter a number)", n)
+			reason = fmt.Sprintf("All %d edges at a vertex must be cut to isolate it, and kappa <= lambda <= delta forces equality at %d for K_%d, so lambda(K_%d) = %d.", n-1, n-1, n, n, ans)
+		case 1:
+			n := graphRange(3, 15)
+			kind, ans = "path", 1
+			facts["n"] = strconv.Itoa(n)
+			question = fmt.Sprintf("What is the edge connectivity lambda of a tree on %d vertices? (enter a number)", n)
+			reason = "Every edge of a tree is a bridge, so cutting one edge disconnects it and lambda = 1."
+		default:
+			a := graphRange(2, 6)
+			b := graphRange(2, 7)
+			m := graphMin(a, b)
+			kind, ans = "bipartite", m
+			facts["a"], facts["b"] = strconv.Itoa(a), strconv.Itoa(b)
+			question = fmt.Sprintf("What is the edge connectivity lambda(K_{%d,%d})? (enter a number)", a, b)
+			reason = fmt.Sprintf("K_{%d,%d} has minimum degree %d and the minimum degree is an upper bound on lambda, while the %d edges at one vertex of the smaller side form a cut, so lambda = %d.", a, b, m, m, ans)
+		}
 	}
-	claims := []claim{
-		{question: "What is the vertex connectivity kappa(K_5)? (enter a number)", answer: "4", kind: "complete", a: 5, reason: "Removing any four vertices leaves one vertex, and removing fewer cannot disconnect K_5."},
-		{question: "What is the vertex connectivity kappa(C_6)? (enter a number)", answer: "2", kind: "cycle", a: 6, reason: "Two vertices can disconnect a cycle, and no single vertex can."},
-		{question: "What is the vertex connectivity kappa(P_5)? (enter a number)", answer: "1", kind: "path", a: 5, reason: "Any internal vertex disconnects a path."},
-		{question: "What is the vertex connectivity kappa(K_{3,3})? (enter a number)", answer: "3", kind: "bipartite", a: 3, b: 3, reason: "Removing one side disconnects the graph, and no smaller set does."},
-		{question: "What is the vertex connectivity kappa(K_{2,4})? (enter a number)", answer: "2", kind: "bipartite", a: 2, b: 4, reason: "Removing the two vertices of the smaller side disconnects the graph."},
-		{question: "What is the vertex connectivity kappa of two disjoint cycles? (enter a number)", answer: "0", kind: "disjoint", reason: "A disconnected graph has vertex connectivity 0."},
-	}
-	c := claims[rand.Intn(len(claims))]
-	facts := map[string]string{"kind": c.kind, "answer": c.answer}
-	if c.a > 0 {
-		facts["a"] = strconv.Itoa(c.a)
-	}
-	if c.b > 0 {
-		facts["b"] = strconv.Itoa(c.b)
-	}
-	return generator.Problem{Question: c.question, Answer: c.answer, Explanation: c.reason, Facts: facts}
+
+	facts["kind"] = kind
+	return graphNumeric(o, question, ans, reason, facts)
 }
 
 // ---------------------------------------------------------------------------
@@ -414,31 +468,76 @@ func (g *tutteGen) Generate(ctx generator.GeneratorContext) generator.Problem { 
 
 type vertexCoverGen struct{}
 
+// Generate draws the graph the cover belongs to: a path or a cycle at the first
+// ordinal, the worked paths, stars and cycles at the second, and complete
+// bipartite graphs, where Koenig's theorem gives the smaller side, at the third.
 func (g *vertexCoverGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question string
-		answer   string
-		kind     string
-		a, b     int
-		reason   string
+	o := graphOrdinal(ctx)
+	facts := map[string]string{}
+	var kind, question, reason string
+	ans := 0
+
+	pathClaim := func() {
+		n := graphRange(3, 15)
+		kind, ans = "path", n/2
+		facts["a"] = strconv.Itoa(n)
+		question = fmt.Sprintf("What is the minimum vertex cover size of the path P_%d? (enter a number)", n)
+		reason = fmt.Sprintf("Choosing vertices 2, 4 and so on covers every edge of P_%d, and each chosen vertex covers two edges, so the minimum is %d / 2 = %d.", n, n, ans)
 	}
-	claims := []claim{
-		{question: "What is the minimum vertex cover size of the path P_4? (enter a number)", answer: "2", kind: "path", a: 4, reason: "The two internal vertices cover every edge."},
-		{question: "What is the minimum vertex cover size of the cycle C_6? (enter a number)", answer: "3", kind: "cycle", a: 6, reason: "Alternate vertices cover all six edges, and two cannot."},
-		{question: "What is the minimum vertex cover size of the star K_{1,5}? (enter a number)", answer: "1", kind: "star", a: 5, reason: "The centre covers every edge."},
-		{question: "What is the minimum vertex cover size of K_{2,3}? (enter a number)", answer: "2", kind: "bipartite", a: 2, b: 3, reason: "Koenig's theorem gives the smaller side, 2."},
-		{question: "What is the minimum vertex cover size of the path P_5? (enter a number)", answer: "2", kind: "path", a: 5, reason: "Two well-placed internal vertices cover all four edges."},
-		{question: "What is the minimum vertex cover size of K_{3,3}? (enter a number)", answer: "3", kind: "bipartite", a: 3, b: 3, reason: "Koenig's theorem gives 3, one entire side."},
+	cycleClaim := func() {
+		n := graphRange(4, 15)
+		// A cover is the complement of an independent set, and the largest
+		// independent set of C_n has floor(n/2) vertices, so the smallest cover
+		// has n - floor(n/2) = ceil(n/2) vertices. On an odd cycle that is one
+		// more than half.
+		kind, ans = "cycle", (n+1)/2
+		facts["a"] = strconv.Itoa(n)
+		question = fmt.Sprintf("What is the minimum vertex cover size of the cycle C_%d? (enter a number)", n)
+		reason = fmt.Sprintf("A cover is the complement of an independent set, and the largest independent set of C_%d has floor(%d / 2) = %d vertices, so the smallest cover has %d - %d = %d.", n, n, n/2, n, n/2, ans)
 	}
-	c := claims[rand.Intn(len(claims))]
-	facts := map[string]string{"kind": c.kind, "answer": c.answer}
-	if c.a > 0 {
-		facts["a"] = strconv.Itoa(c.a)
+	starClaim := func() {
+		k := graphRange(3, 14)
+		kind, ans = "star", 1
+		facts["a"] = strconv.Itoa(k)
+		question = fmt.Sprintf("What is the minimum vertex cover size of the star K_{1,%d}? (enter a number)", k)
+		reason = fmt.Sprintf("The centre meets all %d leaf edges, and no cover can be smaller than one vertex, so the minimum is 1.", k)
 	}
-	if c.b > 0 {
-		facts["b"] = strconv.Itoa(c.b)
+	bipartiteClaim := func() {
+		a := graphRange(2, 7)
+		b := graphRange(2, 8)
+		m := graphMin(a, b)
+		kind, ans = "bipartite", m
+		facts["a"], facts["b"] = strconv.Itoa(a), strconv.Itoa(b)
+		question = fmt.Sprintf("What is the minimum vertex cover size of K_{%d,%d}? (enter a number)", a, b)
+		reason = fmt.Sprintf("Koenig's theorem equates the cover with the maximum matching, and a matching of K_{%d,%d} saturates the smaller side, so the minimum is %d.", a, b, m)
 	}
-	return generator.Problem{Question: c.question, Answer: c.answer, Explanation: c.reason, Facts: facts}
+
+	switch o {
+	case 1:
+		if rand.Intn(2) == 0 {
+			pathClaim()
+		} else {
+			cycleClaim()
+		}
+	case 2:
+		switch rand.Intn(3) {
+		case 0:
+			pathClaim()
+		case 1:
+			starClaim()
+		default:
+			cycleClaim()
+		}
+	default:
+		if rand.Intn(3) == 0 {
+			pathClaim()
+		} else {
+			bipartiteClaim()
+		}
+	}
+
+	facts["kind"] = kind
+	return graphNumeric(o, question, ans, reason, facts)
 }
 
 // ---------------------------------------------------------------------------
@@ -447,31 +546,79 @@ func (g *vertexCoverGen) Generate(ctx generator.GeneratorContext) generator.Prob
 
 type independentSetGen struct{}
 
+// Generate draws the graph whose independence number is asked for: a path or a
+// cycle at the first ordinal, the worked path, star and complete bipartite
+// examples at the second, and the star, cycle and bipartite families that
+// complement a cover at the third.
 func (g *independentSetGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question string
-		answer   string
-		kind     string
-		a, b     int
-		reason   string
+	o := graphOrdinal(ctx)
+	facts := map[string]string{}
+	var kind, question, reason string
+	ans := 0
+
+	pathClaim := func() {
+		n := graphRange(3, 15)
+		kind, ans = "path", (n+1)/2
+		facts["a"] = strconv.Itoa(n)
+		question = fmt.Sprintf("An independent set has no two adjacent vertices. What is the maximum independent set size of the path P_%d? (enter a number)", n)
+		reason = fmt.Sprintf("Vertices 1, 3, 5 and so on are pairwise non-adjacent, and no independent set of P_%d is larger, so the maximum is ceil(%d / 2) = %d.", n, n, ans)
 	}
-	claims := []claim{
-		{question: "An independent set has no two adjacent vertices. What is the maximum independent set size of the path P_4, a line of 4 vertices? (enter a number)", answer: "2", kind: "path", a: 4, reason: "The two endpoints and the two internal vertices split into two independent pairs."},
-		{question: "An independent set has no two adjacent vertices. What is the maximum independent set size of the cycle C_6, a ring of 6 vertices? (enter a number)", answer: "3", kind: "cycle", a: 6, reason: "Alternate vertices are independent and there are three."},
-		{question: "An independent set has no two adjacent vertices. What is the maximum independent set size of the star K_{1,5}, one centre joined to 5 leaves? (enter a number)", answer: "5", kind: "star", a: 5, reason: "All five leaves are pairwise non-adjacent."},
-		{question: "An independent set has no two adjacent vertices. What is the maximum independent set size of the complete bipartite graph K_{2,3}, with sides of 2 and 3 vertices? (enter a number)", answer: "3", kind: "bipartite", a: 2, b: 3, reason: "The larger side of a complete bipartite graph is independent."},
-		{question: "An independent set has no two adjacent vertices. What is the maximum independent set size of the path P_5, a line of 5 vertices? (enter a number)", answer: "3", kind: "path", a: 5, reason: "Vertices 1, 3 and 5 are pairwise non-adjacent."},
-		{question: "An independent set has no two adjacent vertices. What is the maximum independent set size of the cycle C_5, a ring of 5 vertices? (enter a number)", answer: "2", kind: "cycle", a: 5, reason: "Two non-adjacent vertices is the maximum in an odd cycle."},
+	cycleClaim := func() {
+		n := graphRange(4, 15)
+		kind, ans = "cycle", n/2
+		facts["a"] = strconv.Itoa(n)
+		question = fmt.Sprintf("An independent set has no two adjacent vertices. What is the maximum independent set size of the cycle C_%d? (enter a number)", n)
+		reason = fmt.Sprintf("No independent set of C_%d can hold two adjacent vertices, and alternating around the ring gives floor(%d / 2) = %d.", n, n, ans)
 	}
-	c := claims[rand.Intn(len(claims))]
-	facts := map[string]string{"kind": c.kind, "answer": c.answer}
-	if c.a > 0 {
-		facts["a"] = strconv.Itoa(c.a)
+	starClaim := func() {
+		k := graphRange(3, 14)
+		kind, ans = "star", k
+		facts["a"] = strconv.Itoa(k)
+		question = fmt.Sprintf("An independent set has no two adjacent vertices. What is the maximum independent set size of the star K_{1,%d}? (enter a number)", k)
+		reason = fmt.Sprintf("All %d leaves are pairwise non-adjacent, so they form an independent set of size %d, and the centre cannot join them.", k, ans)
 	}
-	if c.b > 0 {
-		facts["b"] = strconv.Itoa(c.b)
+	bipartiteClaim := func() {
+		a := graphRange(2, 7)
+		b := graphRange(2, 8)
+		m := a
+		if b > m {
+			m = b
+		}
+		kind, ans = "bipartite", m
+		facts["a"], facts["b"] = strconv.Itoa(a), strconv.Itoa(b)
+		question = fmt.Sprintf("An independent set has no two adjacent vertices. What is the maximum independent set size of K_{%d,%d}? (enter a number)", a, b)
+		reason = fmt.Sprintf("Every vertex of one side is non-adjacent to the rest of its own side, so the larger side of size %d is independent and no larger set is.", m)
 	}
-	return generator.Problem{Question: c.question, Answer: c.answer, Explanation: c.reason, Facts: facts}
+
+	switch o {
+	case 1:
+		if rand.Intn(2) == 0 {
+			pathClaim()
+		} else {
+			cycleClaim()
+		}
+	case 2:
+		switch rand.Intn(3) {
+		case 0:
+			pathClaim()
+		case 1:
+			starClaim()
+		default:
+			bipartiteClaim()
+		}
+	default:
+		switch rand.Intn(3) {
+		case 0:
+			starClaim()
+		case 1:
+			cycleClaim()
+		default:
+			bipartiteClaim()
+		}
+	}
+
+	facts["kind"] = kind
+	return graphNumeric(o, question, ans, reason, facts)
 }
 
 // ---------------------------------------------------------------------------
@@ -480,29 +627,82 @@ func (g *independentSetGen) Generate(ctx generator.GeneratorContext) generator.P
 
 type chromaticPolynomialGen struct{}
 
+// Generate evaluates the chromatic polynomial at a drawn k for a drawn graph:
+// a path at the first ordinal where the counting argument is the subject, the
+// worked paths, cycles and complete graphs at the second, and complete graphs
+// and trees at the third, where the polynomial is evaluated and factored.
 func (g *chromaticPolynomialGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question string
-		answer   string
-		kind     string
-		n, k     int
-		reason   string
+	o := graphOrdinal(ctx)
+	facts := map[string]string{}
+	var kind, question, reason string
+	ans := 0
+
+	pathClaim := func() {
+		n := graphRange(3, 10)
+		k := graphRange(2, 5)
+		kind, ans = "path", k*graphIntPow(k-1, n-1)
+		facts["n"], facts["k"] = strconv.Itoa(n), strconv.Itoa(k)
+		question = fmt.Sprintf("What is P(P_%d, %d), the chromatic polynomial of the path P_%d evaluated at %d? (enter a number)", n, k, n, k)
+		reason = fmt.Sprintf("A path is coloured from one end: the first vertex has %d choices and each of the other %d vertices has %d once its predecessor is fixed, so P(P_%d, %d) = %d * %d^%d = %d.", k, n-1, k-1, n, k, k, k-1, n-1, ans)
 	}
-	claims := []claim{
-		{question: "What is P(P_4, 3), the chromatic polynomial of the path P_4 evaluated at 3? (enter a number)", answer: "24", kind: "path", n: 4, k: 3, reason: "P(P_n,k) = k(k-1)^(n-1), so 3*2^3 = 24."},
-		{question: "What is P(C_4, 3), the chromatic polynomial of the cycle C_4 evaluated at 3? (enter a number)", answer: "18", kind: "cycle", n: 4, k: 3, reason: "P(C_n,k) = (k-1)^n + (-1)^n(k-1), so 2^4 + 2 = 18."},
-		{question: "What is P(K_3, 4), the chromatic polynomial of K_3 evaluated at 4? (enter a number)", answer: "24", kind: "complete", n: 3, k: 4, reason: "The colors must be distinct, so 4*3*2 = 24."},
-		{question: "What is P(T_5, 2), the chromatic polynomial of a tree on 5 vertices evaluated at 2? (enter a number)", answer: "2", kind: "tree", n: 5, k: 2, reason: "A tree is bipartite, so with two colors the first vertex has 2 choices and each later vertex has 1."},
-		{question: "What is P(C_3, 3), the chromatic polynomial of the triangle evaluated at 3? (enter a number)", answer: "6", kind: "cycle", n: 3, k: 3, reason: "P(C_3,k) = (k-1)^3 - (k-1), so 8 - 2 = 6."},
-		{question: "What is P(P_3, 2), the chromatic polynomial of the path P_3 evaluated at 2? (enter a number)", answer: "2", kind: "path", n: 3, k: 2, reason: "P(P_3,k) = k(k-1)^2, so 2*1 = 2."},
+	cycleClaim := func() {
+		n := graphRange(3, 9)
+		k := graphRange(2, 4)
+		sign := 1
+		if n%2 == 1 {
+			sign = -1
+		}
+		op := "+"
+		if sign < 0 {
+			op = "-"
+		}
+		kind, ans = "cycle", graphIntPow(k-1, n)+sign*(k-1)
+		facts["n"], facts["k"] = strconv.Itoa(n), strconv.Itoa(k)
+		question = fmt.Sprintf("What is P(C_%d, %d), the chromatic polynomial of the cycle C_%d evaluated at %d? (enter a number)", n, k, n, k)
+		reason = fmt.Sprintf("P(C_n, k) = (k-1)^n + (-1)^n (k-1), so P(C_%d, %d) = %d^%d %s %d = %d.", n, k, k-1, n, op, k-1, ans)
 	}
-	c := claims[rand.Intn(len(claims))]
-	return generator.Problem{
-		Question:    c.question,
-		Answer:      c.answer,
-		Explanation: c.reason,
-		Facts:       map[string]string{"kind": c.kind, "n": strconv.Itoa(c.n), "k": strconv.Itoa(c.k), "answer": c.answer},
+	completeClaim := func() {
+		n := graphRange(3, 6)
+		k := graphRange(n, n+4)
+		term := 1
+		parts := make([]string, 0, n)
+		for j := 0; j < n; j++ {
+			term *= k - j
+			parts = append(parts, strconv.Itoa(k-j))
+		}
+		kind, ans = "complete", term
+		facts["n"], facts["k"] = strconv.Itoa(n), strconv.Itoa(k)
+		question = fmt.Sprintf("What is P(K_%d, %d), the chromatic polynomial of K_%d evaluated at %d? (enter a number)", n, k, n, k)
+		reason = fmt.Sprintf("Every pair of vertices of K_%d is adjacent, so the colours must all differ: %s = %d.", n, strings.Join(parts, " * "), ans)
 	}
+	treeClaim := func() {
+		n := graphRange(3, 14)
+		k := graphRange(2, 4)
+		kind, ans = "tree", k*graphIntPow(k-1, n-1)
+		facts["n"], facts["k"] = strconv.Itoa(n), strconv.Itoa(k)
+		question = fmt.Sprintf("What is P(T_%d, %d), the chromatic polynomial of a tree on %d vertices evaluated at %d? (enter a number)", n, k, n, k)
+		reason = fmt.Sprintf("A tree on %d vertices has %d edges and no cycle, so the first vertex has %d choices and each of the other %d vertices has %d: %d * %d^%d = %d.", n, n-1, k, n-1, k-1, k, k-1, n-1, ans)
+	}
+
+	switch o {
+	case 1:
+		pathClaim()
+	case 2:
+		if rand.Intn(2) == 0 {
+			cycleClaim()
+		} else {
+			completeClaim()
+		}
+	default:
+		if rand.Intn(2) == 0 {
+			completeClaim()
+		} else {
+			treeClaim()
+		}
+	}
+
+	facts["kind"] = kind
+	return graphNumeric(o, question, ans, reason, facts)
 }
 
 // ---------------------------------------------------------------------------
@@ -521,29 +721,78 @@ func (g *brooksGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 
 type edgeColoringGen struct{}
 
+// Generate draws the graph whose edge chromatic number is asked for: a cycle or
+// a path at the first ordinal, the worked complete graphs and cycles at the
+// second, and the stars and paths of Vizing's classification at the third.
 func (g *edgeColoringGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question string
-		answer   string
-		kind     string
-		n        int
-		reason   string
+	o := graphOrdinal(ctx)
+	facts := map[string]string{}
+	var kind, question, reason string
+	ans := 0
+
+	pathClaim := func() {
+		n := graphRange(3, 15)
+		kind, ans = "path", 2
+		facts["n"] = strconv.Itoa(n)
+		question = fmt.Sprintf("What is the edge chromatic number of the path P_%d? (enter a number)", n)
+		reason = fmt.Sprintf("Consecutive edges of P_%d share a vertex and must differ, and alternating two colours does that, so the edge chromatic number is 2.", n)
 	}
-	claims := []claim{
-		{question: "What is the edge chromatic number of K_4? (enter a number)", answer: "3", kind: "complete", n: 4, reason: "K_n with n even needs n - 1 = 3 colors."},
-		{question: "What is the edge chromatic number of K_5? (enter a number)", answer: "5", kind: "complete", n: 5, reason: "K_n with n odd needs n = 5 colors."},
-		{question: "What is the edge chromatic number of C_4? (enter a number)", answer: "2", kind: "cycle", n: 4, reason: "An even cycle alternates two colors."},
-		{question: "What is the edge chromatic number of C_5? (enter a number)", answer: "3", kind: "cycle", n: 5, reason: "An odd cycle needs three colors."},
-		{question: "What is the edge chromatic number of the path P_4? (enter a number)", answer: "2", kind: "path", n: 4, reason: "Adjacent edges must differ, so two colors suffice and one does not."},
-		{question: "What is the edge chromatic number of the star K_{1,4}? (enter a number)", answer: "4", kind: "star", n: 4, reason: "All four edges meet at the centre, so all four colors are needed."},
+	cycleClaim := func() {
+		n := graphRange(3, 15)
+		kind, ans = "cycle", 3
+		if n%2 == 0 {
+			ans = 2
+			reason = fmt.Sprintf("C_%d is even, so two colours alternate around it and one colour cannot colour two adjacent edges: the edge chromatic number is 2.", n)
+		} else {
+			reason = fmt.Sprintf("C_%d is odd, so two colours cannot alternate all the way round and three are needed: the edge chromatic number is 3.", n)
+		}
+		facts["n"] = strconv.Itoa(n)
+		question = fmt.Sprintf("What is the edge chromatic number of the cycle C_%d? (enter a number)", n)
 	}
-	c := claims[rand.Intn(len(claims))]
-	return generator.Problem{
-		Question:    c.question,
-		Answer:      c.answer,
-		Explanation: c.reason,
-		Facts:       map[string]string{"kind": c.kind, "n": strconv.Itoa(c.n), "answer": c.answer},
+	completeClaim := func() {
+		n := graphRange(3, 14)
+		kind = "complete"
+		if n%2 == 0 {
+			ans = n - 1
+			reason = fmt.Sprintf("K_%d with %d even is 1-factorable: its %d edges split into %d perfect matchings, so the edge chromatic number is %d - 1 = %d.", n, n, n*(n-1)/2, n-1, n, ans)
+		} else {
+			ans = n
+			reason = fmt.Sprintf("K_%d with %d odd has %d edges, and each colour class is a matching of at most %d edges, so %d colours cover at most %d edges and %d are needed; %d suffice, so the answer is %d.", n, n, n*(n-1)/2, (n-1)/2, n-1, (n-1)*(n-1)/2, n, n, ans)
+		}
+		facts["n"] = strconv.Itoa(n)
+		question = fmt.Sprintf("What is the edge chromatic number of K_%d? (enter a number)", n)
 	}
+	starClaim := func() {
+		k := graphRange(2, 14)
+		kind, ans = "star", k
+		facts["n"] = strconv.Itoa(k)
+		question = fmt.Sprintf("What is the edge chromatic number of the star K_{1,%d}? (enter a number)", k)
+		reason = fmt.Sprintf("All %d edges meet at the centre, so no two of them may share a colour and the edge chromatic number is %d.", k, ans)
+	}
+
+	switch o {
+	case 1:
+		if rand.Intn(2) == 0 {
+			cycleClaim()
+		} else {
+			pathClaim()
+		}
+	case 2:
+		if rand.Intn(2) == 0 {
+			completeClaim()
+		} else {
+			cycleClaim()
+		}
+	default:
+		if rand.Intn(2) == 0 {
+			starClaim()
+		} else {
+			pathClaim()
+		}
+	}
+
+	facts["kind"] = kind
+	return graphNumeric(o, question, ans, reason, facts)
 }
 
 // ---------------------------------------------------------------------------
@@ -562,27 +811,66 @@ func (g *perfectGraphGen) Generate(ctx generator.GeneratorContext) generator.Pro
 
 type listColoringGen struct{}
 
+// Generate draws the graph whose list chromatic number is asked for: paths and
+// cycles at the first ordinal, the worked even and odd cycles at the second, and
+// paths at the third.
 func (g *listColoringGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question string
-		answer   string
-		kind     string
-		n        int
-		reason   string
+	o := graphOrdinal(ctx)
+	facts := map[string]string{}
+	var kind, question, reason string
+	ans := 0
+
+	pathClaim := func() {
+		n := graphRange(3, 15)
+		kind, ans = "path", 2
+		facts["n"] = strconv.Itoa(n)
+		question = fmt.Sprintf("What is the list chromatic number of the path P_%d? (enter a number)", n)
+		reason = fmt.Sprintf("Colour P_%d from one end, always choosing a colour from the current list other than the previous vertex's colour; each list has two colours and only one is forbidden, so two suffice and one does not.", n)
 	}
-	claims := []claim{
-		{question: "What is the list chromatic number of C_4? (enter a number)", answer: "2", kind: "cycle", n: 4, reason: "Even cycles are 2-choosable."},
-		{question: "What is the list chromatic number of C_5? (enter a number)", answer: "3", kind: "cycle", n: 5, reason: "Odd cycles are not 2-choosable and need three colors."},
-		{question: "What is the list chromatic number of the path P_5? (enter a number)", answer: "2", kind: "path", n: 5, reason: "A path is 2-choosable: color from one end, avoiding the previous color."},
-		{question: "What is the list chromatic number of C_6? (enter a number)", answer: "2", kind: "cycle", n: 6, reason: "Even cycles are 2-choosable."},
-		{question: "What is the list chromatic number of C_7? (enter a number)", answer: "3", kind: "cycle", n: 7, reason: "Odd cycles need three colors even with arbitrary lists."},
-		{question: "What is the list chromatic number of the path P_3? (enter a number)", answer: "2", kind: "path", n: 3, reason: "A path with at least one edge is 2-choosable."},
+	cycleClaim := func() {
+		n := graphRange(3, 15)
+		kind, ans = "cycle", 3
+		if n%2 == 0 {
+			ans = 2
+			reason = fmt.Sprintf("C_%d is even and every even cycle is 2-choosable: alternate colours around the ring, and one colour cannot cover two adjacent lists. The list chromatic number is 2.", n)
+		} else {
+			reason = fmt.Sprintf("C_%d is odd, and an odd cycle is not 2-choosable, so its list chromatic number is 3.", n)
+		}
+		facts["n"] = strconv.Itoa(n)
+		question = fmt.Sprintf("What is the list chromatic number of the cycle C_%d? (enter a number)", n)
 	}
-	c := claims[rand.Intn(len(claims))]
-	return generator.Problem{
-		Question:    c.question,
-		Answer:      c.answer,
-		Explanation: c.reason,
-		Facts:       map[string]string{"kind": c.kind, "n": strconv.Itoa(c.n), "answer": c.answer},
+	evenOddClaim := func() {
+		n := 2 * graphRange(2, 7)
+		if rand.Intn(2) == 0 {
+			n++
+		}
+		kind = "cycle"
+		parity := "odd"
+		if n%2 == 0 {
+			parity = "even"
+			ans = 2
+			reason = fmt.Sprintf("C_%d is an even cycle, and every even cycle is 2-choosable, so its list chromatic number is 2.", n)
+		} else {
+			ans = 3
+			reason = fmt.Sprintf("C_%d is an odd cycle, which is not 2-choosable, so its list chromatic number is 3.", n)
+		}
+		facts["n"] = strconv.Itoa(n)
+		question = fmt.Sprintf("An even cycle is 2-choosable and an odd cycle is not. What is the list chromatic number of C_%d, whose length is %s? (enter a number)", n, parity)
 	}
+
+	switch o {
+	case 1:
+		if rand.Intn(2) == 0 {
+			pathClaim()
+		} else {
+			cycleClaim()
+		}
+	case 2:
+		evenOddClaim()
+	default:
+		pathClaim()
+	}
+
+	facts["kind"] = kind
+	return graphNumeric(o, question, ans, reason, facts)
 }

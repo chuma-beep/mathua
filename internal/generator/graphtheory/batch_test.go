@@ -372,7 +372,8 @@ func TestBatchVertexCoverRecomputes(t *testing.T) {
 		case "path":
 			want = graphFactInt(t, p, "a") / 2
 		case "cycle":
-			want = graphFactInt(t, p, "a") / 2
+			// The complement of an independent set: n - floor(n/2) = ceil(n/2).
+			want = (graphFactInt(t, p, "a") + 1) / 2
 		case "star":
 			want = 1
 		case "bipartite":
