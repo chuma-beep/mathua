@@ -162,6 +162,20 @@ describe('the service worker and Cloudflare-injected pages', () => {
     expect(worker.puts).toHaveLength(1)
   })
 
+  it('caches a Next 16 segment payload for offline link navigation', async () => {
+    const worker = loadWorker(async () => new Response('payload', { status: 200 }))
+    const request = {
+      method: 'GET',
+      mode: 'cors',
+      url: 'https://mathua.com/learn/__next._full.txt',
+    }
+
+    await worker.dispatchFetch(request)
+
+    expect(worker.puts).toHaveLength(1)
+    expect(worker.store.has(request.url)).toBe(true)
+  })
+
   it('serves the offline page rather than a cached challenged page', async () => {
     const worker = loadWorker(async () => {
       throw new TypeError('Failed to fetch')
