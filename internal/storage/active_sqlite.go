@@ -15,8 +15,8 @@ func (s *SQLiteStore) ActiveLearnerCounts(since, dayStart time.Time) (int, int, 
 	var activeNow, activeNowGuests int
 	if err := s.db.QueryRow(
 		`SELECT
-		   COUNT(DISTINCT CASE WHEN student_id NOT LIKE 'guest_%' THEN student_id END),
-		   COUNT(DISTINCT CASE WHEN student_id LIKE 'guest_%' THEN student_id END)
+		   COUNT(DISTINCT CASE WHEN substr(student_id, 1, 6) <> 'guest_' THEN student_id END),
+		   COUNT(DISTINCT CASE WHEN substr(student_id, 1, 6) = 'guest_' THEN student_id END)
 		 FROM active_sessions
 		 WHERE datetime(updated_at) >= datetime(?)`,
 		since.UTC().Format(time.RFC3339)).Scan(&activeNow, &activeNowGuests); err != nil {
@@ -26,8 +26,8 @@ func (s *SQLiteStore) ActiveLearnerCounts(since, dayStart time.Time) (int, int, 
 	var activeToday, activeTodayGuests int
 	if err := s.db.QueryRow(
 		`SELECT
-		   COUNT(DISTINCT CASE WHEN student_id NOT LIKE 'guest_%' THEN student_id END),
-		   COUNT(DISTINCT CASE WHEN student_id LIKE 'guest_%' THEN student_id END)
+		   COUNT(DISTINCT CASE WHEN substr(student_id, 1, 6) <> 'guest_' THEN student_id END),
+		   COUNT(DISTINCT CASE WHEN substr(student_id, 1, 6) = 'guest_' THEN student_id END)
 		 FROM attempts
 		 WHERE datetime(timestamp) >= datetime(?)`,
 		dayStart.UTC().Format(time.RFC3339)).Scan(&activeToday, &activeTodayGuests); err != nil {

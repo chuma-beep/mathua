@@ -150,6 +150,7 @@ func authMigrate(db *sql.DB) error {
 			WHERE google_id IS NOT NULL AND google_id != ''`,
 		"CREATE INDEX IF NOT EXISTS idx_students_email ON students(email)",
 		"CREATE INDEX IF NOT EXISTS idx_students_google_id ON students(google_id)",
+		"CREATE INDEX IF NOT EXISTS idx_attempts_timestamp ON attempts(timestamp)",
 		"ALTER TABLE concept_progress ADD COLUMN weakness_score REAL NOT NULL DEFAULT 0",
 		"ALTER TABLE concept_progress ADD COLUMN placement_seeded INTEGER NOT NULL DEFAULT 0",
 		"ALTER TABLE concept_progress ADD COLUMN is_provisional INTEGER NOT NULL DEFAULT 0",

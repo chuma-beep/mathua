@@ -618,6 +618,8 @@ func (s *Server) Register(mux *http.ServeMux) {
 	// boundary and does not open any of these routes.
 	mux.HandleFunc("/api/admin/me", logRequest(cors(s.requirePermission(admin.Access, s.handleAdminMe))))
 	mux.HandleFunc("/api/admin/overview", logRequest(cors(s.requirePermission(admin.Access, s.handleAdminOverview))))
+	mux.HandleFunc("/api/admin/analytics/live", logRequest(cors(s.requirePermission(admin.Access, s.handleAdminAnalyticsLive))))
+	mux.HandleFunc("/api/admin/analytics", logRequest(cors(s.requirePermission(admin.Access, s.handleAdminAnalytics))))
 	mux.HandleFunc("/api/admin/reports", logRequest(cors(s.requirePermission(admin.ReportsRead, s.handleAdminReports))))
 	// One decision across a concept's unsettled reports. A write, so it names
 	// ReportsModerate rather than ReportsRead; the exact pattern wins over the
