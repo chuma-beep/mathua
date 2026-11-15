@@ -3,6 +3,7 @@ package numtheory
 import (
 	"fmt"
 	"math/rand"
+	"sort"
 	"strings"
 
 	"github.com/chuma-beep/mathua/internal/generator"
@@ -244,17 +245,30 @@ func (g *wilsonGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type primeInfGen struct{}
 
 func (g *primeInfGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	sets := [][]int{{2, 3}, {2, 3, 5}, {2, 3, 5, 7}, {3, 5, 7}}
-	set := sets[rand.Intn(len(sets))]
+	// Vary which primes Euclid multiplies, not just the arithmetic. The KP
+	// ordinal sets the size of the set so all three branches stay distinct.
+	primes := []int{2, 3, 5, 7, 11, 13, 17, 19}
+	size := 2
+	if ctx.KPOrdinal >= 1 && ctx.KPOrdinal <= 3 {
+		size = ctx.KPOrdinal + 1
+	} else if ctx.KPOrdinal == 0 {
+		size = 2 + rand.Intn(3)
+	}
+	perm := rand.Perm(len(primes))
+	chosen := make([]int, 0, size)
+	for _, i := range perm[:size] {
+		chosen = append(chosen, primes[i])
+	}
+	sort.Ints(chosen)
 	prod := 1
-	for _, p := range set {
+	for _, p := range chosen {
 		prod *= p
 	}
 	n := prod + 1
 	return generator.Problem{
-		Question:    fmt.Sprintf("Euclid's construction: N = %d + 1. What is N? (enter a number)", prod),
+		Question:    fmt.Sprintf("Euclid's construction starts from the primes \\(%s\\). Multiply them and add 1. What is \\(N\\)? (enter a number)", joinProd(chosen)),
 		Answer:      fmt.Sprintf("%d", n),
-		Explanation: fmt.Sprintf("Multiply the listed primes to get %d, then add 1, so N = %d.", prod, n),
+		Explanation: fmt.Sprintf("The primes are \\(%s\\). Their product is %d, and adding 1 gives \\(N = %d\\).", joinProd(chosen), prod, n),
 		Facts:       map[string]string{"product": fmt.Sprintf("%d", prod), "N": fmt.Sprintf("%d", n)},
 	}
 }

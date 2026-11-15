@@ -312,9 +312,9 @@ func (g *multiStepEqGen) Generate(ctx generator.GeneratorContext) generator.Prob
 	}
 	scale := int(1 + d*8)
 	if ctx.KPOrdinal == 1 {
-		scale = 1
-	} else if ctx.KPOrdinal == 2 {
 		scale = 4
+	} else if ctx.KPOrdinal == 2 {
+		scale = 6
 	}
 	x := rand.Intn(scale*2) + 2
 	a := rand.Intn(scale) + 2

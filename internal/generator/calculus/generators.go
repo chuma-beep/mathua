@@ -705,8 +705,8 @@ func (g *integralAreaBetweenGen) Generate(ctx generator.GeneratorContext) genera
 	switch mode {
 	case 0:
 		// Area between y = mx and y = 0 from x = 0 to x = L with m even
-		m := 2 * mathutil.ScaleInt(ctx.Difficulty, 1, 6)
-		L := mathutil.ScaleInt(ctx.Difficulty, 1, 8)
+		m := 2 * randRange(ctx.Difficulty, 1, 9)
+		L := randRange(ctx.Difficulty, 1, 8)
 		ans := (m * L * L) / 2
 		return generator.Problem{
 			Question: fmt.Sprintf("Find the area enclosed between \\(y = %d x\\) and the x-axis \\(y = 0\\) from \\(x = 0\\) to \\(x = %d\\).", m, L),
@@ -717,7 +717,7 @@ func (g *integralAreaBetweenGen) Generate(ctx generator.GeneratorContext) genera
 		}
 	case 1:
 		// Area between parabola y = r^2 - x^2 and y = 0 on [-r, r] with r = 3k
-		k := mathutil.ScaleInt(ctx.Difficulty, 1, 4)
+		k := randRange(ctx.Difficulty, 1, 12)
 		r := 3 * k
 		H := r * r
 		ans := (4 * r * r * r) / 3
@@ -730,7 +730,7 @@ func (g *integralAreaBetweenGen) Generate(ctx generator.GeneratorContext) genera
 		}
 	case 2:
 		// Area between y = kx and y = x^2 from x = 0 to x = k with k = 6m
-		m := mathutil.ScaleInt(ctx.Difficulty, 1, 2)
+		m := randRange(ctx.Difficulty, 1, 12)
 		k := 6 * m
 		ans := (k * k * k) / 6
 		return generator.Problem{
@@ -1327,7 +1327,7 @@ func (g *cauchyMVTGen) Generate(ctx generator.GeneratorContext) generator.Proble
 		}
 	case 1:
 		// f(x) = x^3, g(x) = x^2 on [0, 3k] -> c = 2k
-		k := mathutil.ScaleInt(ctx.Difficulty, 1, 5)
+		k := randRange(ctx.Difficulty, 1, 20)
 		b := 3 * k
 		cVal := 2 * k
 		return generator.Problem{
@@ -1477,15 +1477,17 @@ func (g *differenceQuotientGen) Generate(ctx generator.GeneratorContext) generat
 				"Subgoal 3: Divide by \\(h\\): \\(\\frac{%d h}{h} = %d\\).", m, b, m, b, m, m, m),
 		}
 	case 2:
-		// f(x) = x^3 at x0 = 1
-		h := mathutil.ScaleInt(ctx.Difficulty, 1, 4)
-		ans := 3 + 3*h + h*h
+		// f(x) = x^3 at a variable base point, so both x0 and h vary.
+		x0 := randRange(ctx.Difficulty, 1, 9)
+		h := randRange(ctx.Difficulty, 1, 12)
+		ans := 3*x0*x0 + 3*x0*h + h*h
 		return generator.Problem{
-			Question: fmt.Sprintf("For \\(f(x) = x^3\\), compute the difference quotient \\(\\frac{f(1 + %d) - f(1)}{%d}\\).", h, h),
+			Question: fmt.Sprintf("For \\(f(x) = x^3\\), compute the difference quotient \\(\\frac{f(%d + %d) - f(%d)}{%d}\\).", x0, h, x0, h),
 			Answer:   fmt.Sprintf("%d", ans),
-			Explanation: fmt.Sprintf("Subgoal 1: Expand \\(f(1 + h) = (1 + h)^3 = 1 + 3h + 3h^2 + h^3\\).\\n"+
-				"Subgoal 2: Subtract \\(f(1) = 1\\) to get \\(3h + 3h^2 + h^3\\), and divide by \\(h\\) to obtain \\(3 + 3h + h^2\\).\\n"+
-				"Subgoal 3: Substitute \\(h = %d\\): \\(3 + 3(%d) + (%d)^2 = 3 + %d + %d = %d\\).", h, h, h, 3*h, h*h, ans),
+			Explanation: fmt.Sprintf("Subgoal 1: Expand \\((x_0 + h)^3 = x_0^3 + 3x_0^2h + 3x_0h^2 + h^3\\) with \\(x_0 = %d\\) and \\(h = %d\\).\\n"+
+				"Subgoal 2: Subtract \\(f(x_0) = x_0^3\\), leaving \\(3x_0^2h + 3x_0h^2 + h^3\\), and divide by \\(h\\) to obtain \\(3x_0^2 + 3x_0h + h^2\\).\\n"+
+				"Subgoal 3: Substitute: \\(3(%d)^2 + 3(%d)(%d) + (%d)^2 = %d\\).", x0, h, x0, x0, h, h, ans),
+			Facts: map[string]string{"x0": fmt.Sprintf("%d", x0), "h": fmt.Sprintf("%d", h), "answer": fmt.Sprintf("%d", ans)},
 		}
 	case 3:
 		// Limit of difference quotient (instantaneous derivative)
@@ -3424,7 +3426,7 @@ func (g *integralCenterMassGen) Generate(ctx generator.GeneratorContext) generat
 		}
 	case 2:
 		// Rod on [0, L] with rho(x) = x^2, where L = 4 m -> xbar = 3 m
-		m := mathutil.ScaleInt(ctx.Difficulty, 1, 5)
+		m := randRange(ctx.Difficulty, 1, 20)
 		L := 4 * m
 		ans := 3 * m
 		return generator.Problem{
@@ -3494,7 +3496,7 @@ func (g *integralTrapezoidGen) Generate(ctx generator.GeneratorContext) generato
 	switch mode {
 	case 0:
 		// Trapezoidal approximation for f(x) = x^2 on [0, 2k] with n = 1 -> T_1 = 4 k^3
-		k := mathutil.ScaleInt(ctx.Difficulty, 1, 4)
+		k := randRange(ctx.Difficulty, 1, 12)
 		b := 2 * k
 		ans := 4 * k * k * k
 		return generator.Problem{
@@ -3520,7 +3522,7 @@ func (g *integralTrapezoidGen) Generate(ctx generator.GeneratorContext) generato
 		}
 	case 2:
 		// Trapezoidal approximation for f(x) = x^2 on [0, 2k] with n = 2 -> T_2 = 3 k^3
-		k := mathutil.ScaleInt(ctx.Difficulty, 1, 4)
+		k := randRange(ctx.Difficulty, 1, 12)
 		b := 2 * k
 		ans := 3 * k * k * k
 		return generator.Problem{
@@ -3566,7 +3568,7 @@ func (g *integralSimpsonGen) Generate(ctx generator.GeneratorContext) generator.
 	switch mode {
 	case 0:
 		// Simpson's rule for cubic f(x) = x^3 on [0, 2k] with n = 2 -> exact integral (2k)^4 / 4 = 4 k^4
-		k := mathutil.ScaleInt(ctx.Difficulty, 1, 4)
+		k := randRange(ctx.Difficulty, 1, 15)
 		b := 2 * k
 		ans := 4 * k * k * k * k
 		return generator.Problem{
@@ -3578,7 +3580,7 @@ func (g *integralSimpsonGen) Generate(ctx generator.GeneratorContext) generator.
 		}
 	case 1:
 		// Simpson's rule for quadratic f(x) = 3 x^2 on [0, 2k] with n = 2 -> exact integral (2k)^3 = 8 k^3
-		k := mathutil.ScaleInt(ctx.Difficulty, 1, 4)
+		k := randRange(ctx.Difficulty, 1, 15)
 		b := 2 * k
 		ans := 8 * k * k * k
 		return generator.Problem{
@@ -3589,18 +3591,25 @@ func (g *integralSimpsonGen) Generate(ctx generator.GeneratorContext) generator.
 				"Subgoal 3: Compute: \\(%d^3 = %d\\).", b, b, b, ans),
 		}
 	case 2:
-		// What is the smallest even number of subintervals n usable in Simpson's rule?
+		// Simpson's Rule needs an even number of subintervals. Ask for the
+		// smallest even n that exactly covers [a, b] at width h, so the
+		// question varies instead of always returning 2.
+		n := 2 * randRange(ctx.Difficulty, 1, 10)
+		h := randRange(ctx.Difficulty, 1, 6)
+		a := randRange(ctx.Difficulty, 0, 9)
+		b := a + n*h
 		return generator.Problem{
-			Question: "What is the smallest number of subintervals \\(n\\) required to apply Simpson's Rule?",
-			Answer:   "2",
-			Explanation: "Subgoal 1: State the requirement for Simpson's Rule: parabolas are fit across pairs of adjacent subintervals.\\n" +
-				"Subgoal 2: Deduce that \\(n\\) must be an even positive integer.\\n" +
-				"Subgoal 3: Identify the smallest positive even integer: \\(n = 2\\).",
+			Question: fmt.Sprintf("The interval \\([%d, %d]\\) is divided into equal subintervals of width %d. Simpson's Rule requires an even number of subintervals. What is the smallest even \\(n\\) that covers the interval?", a, b, h),
+			Answer:   fmt.Sprintf("%d", n),
+			Explanation: fmt.Sprintf("Subgoal 1: State the requirement for Simpson's Rule: parabolas are fit across pairs of adjacent subintervals, so \\(n\\) must be even.\\n"+
+				"Subgoal 2: Compute the interval width \\(b - a = %d - %d = %d\\), with each subinterval of width \\(h = %d\\).\\n"+
+				"Subgoal 3: Divide: \\(n = \\frac{%d}{%d} = %d\\), which is even.", b, a, b-a, h, b-a, h, n),
+			Facts: map[string]string{"a": fmt.Sprintf("%d", a), "b": fmt.Sprintf("%d", b), "h": fmt.Sprintf("%d", h), "n": fmt.Sprintf("%d", n)},
 		}
 	case 3:
 		// Simpson's rule for linear f(x) = 2mx on [0, 2k] with n = 2 -> exact integral 4 m k^2
-		m := mathutil.ScaleInt(ctx.Difficulty, 1, 5)
-		k := mathutil.ScaleInt(ctx.Difficulty, 1, 5)
+		m := randRange(ctx.Difficulty, 1, 8)
+		k := randRange(ctx.Difficulty, 1, 8)
 		b := 2 * k
 		ans := 4 * m * k * k
 		coeff := 2 * m
@@ -3613,7 +3622,7 @@ func (g *integralSimpsonGen) Generate(ctx generator.GeneratorContext) generator.
 		}
 	default:
 		// Simpson's rule for f(x) = x^2 on [0, 6k] with n = 2 -> exact value 72 k^3
-		k := mathutil.ScaleInt(ctx.Difficulty, 1, 3)
+		k := randRange(ctx.Difficulty, 1, 8)
 		b := 6 * k
 		ans := 72 * k * k * k
 		return generator.Problem{
