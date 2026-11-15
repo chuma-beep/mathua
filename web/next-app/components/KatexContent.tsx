@@ -216,7 +216,7 @@ export default function KatexContent({
             </code>
           ),
           img: ({ src, alt }) => {
-            const url = resolveLessonImageUrl(src)
+            const url = typeof src === 'string' ? resolveLessonImageUrl(src) : undefined
             // Lesson-sourced images come from arbitrary remote/relative URLs without
             // intrinsic dimensions, so next/image optimization does not apply here.
             // A missing alt falls back to the file name (never empty on content

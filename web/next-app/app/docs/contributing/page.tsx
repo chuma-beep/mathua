@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
-import dynamic from 'next/dynamic'
 import SectionHeader from '../../../components/SectionHeader'
-import Loading from '../../../components/Loading'
+import PrWorkflowClient from '../../../components/PrWorkflowClient'
 import Link from 'next/link'
 import { DOMAIN_COUNT } from '../../../lib/curriculumFacts'
 
@@ -9,19 +8,6 @@ export const metadata: Metadata = {
   title: 'Contributing \u2014 Mathua',
   description: 'How to contribute to Mathua: concepts, generators, frontend components and more.',
 }
-
-const PrWorkflow = dynamic(() => import('../../../components/PrWorkflow'), {
-  ssr: false,
-  loading: () => (
-    <div style={{
-      height: 400, border: '0.5px solid var(--border)',
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
-      color: 'var(--text-muted)', fontFamily: "var(--font-jetbrains-mono), 'JetBrains Mono', monospace", fontSize: '13px',
-    }}>
-      <Loading label="LOADING WORKFLOW" />
-    </div>
-  ),
-})
 
 const headingFont = "var(--font-space-grotesk), 'Space Grotesk', serif"
 const bodyFont = "var(--font-space-grotesk), 'Space Grotesk', serif"
@@ -628,7 +614,7 @@ func (g *AddSingleGen) Generate(ctx generator.GeneratorContext) generator.Proble
             {step}
           </div>
         ))}
-        <PrWorkflow />
+        <PrWorkflowClient />
         <p style={{ ...bodyStyle, marginTop: '1rem' }}>
           Reviews usually happen within a few days. If a week passes with no
           response, feel free to ping the thread. We read every PR.
