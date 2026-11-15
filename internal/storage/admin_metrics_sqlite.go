@@ -25,8 +25,7 @@ func (s *SQLiteStore) AdminMetrics(since, until time.Time, bucket time.Duration,
 	if bucketSec <= 0 {
 		bucketSec = int64((24 * time.Hour) / time.Second)
 	}
-	sinceText := since.UTC().Format(time.RFC3339)
-	untilText := until.UTC().Format(time.RFC3339)
+	sinceText, untilText := sqliteTimeBounds(since, until)
 
 	out := &AdminMetrics{
 		MasteredByConcept: map[string]int{},
@@ -110,7 +109,7 @@ func (s *SQLiteStore) AdminLiveMetrics(since time.Time) (AdminLiveMetrics, error
 	}
 	if err := s.db.QueryRow(
 		`SELECT COUNT(*) FROM active_sessions WHERE datetime(updated_at) >= datetime(?)`,
-		since.UTC().Format(time.RFC3339)).Scan(&live.ActiveSessions); err != nil {
+		sqliteLowerTime(since)).Scan(&live.ActiveSessions); err != nil {
 		return live, fmt.Errorf("admin live sessions: %w", err)
 	}
 	return live, nil
@@ -230,6 +229,7 @@ func (s *SQLiteStore) adminSQLiteSignups(out *AdminMetrics, since, until string,
 	if err := rows.Err(); err != nil {
 		return err
 	}
+	out.Totals.DiagnosticCohortRegistered = out.Totals.NewRegistrations
 	// Cohort, current state: accounts registered in the window that have
 	// completed a diagnostic by the time of this request. Completion can
 	// happen after the window closes, which is why this is not an event rate.
@@ -239,7 +239,7 @@ func (s *SQLiteStore) adminSQLiteSignups(out *AdminMetrics, since, until string,
 		  AND substr(id, 1, 6) <> 'guest_'
 		  AND (COALESCE(username, '') <> '' OR COALESCE(password_hash, '') <> ''
 		    OR COALESCE(email, '') <> '' OR COALESCE(google_id, '') <> '')`,
-		since, until).Scan(&out.Totals.RegisteredDiagnosticCohort); err != nil {
+		since, until).Scan(&out.Totals.DiagnosticCohortCompleted); err != nil {
 		return fmt.Errorf("admin diagnostic cohort: %w", err)
 	}
 	return nil

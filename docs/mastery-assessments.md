@@ -60,7 +60,7 @@ retake policy (D5) needs the log; the dashboard needs only the latest.
 Recommended: **B**. The cost of an extra table is one insert; the cost of losing attempt
 history is being unable to enforce or explain a retake rule. Note that `quiz.Session.Attempts`
 already exists per session (`internal/quiz/quiz.go:19`) but is deleted on completion
-(`server.go:4569`) and lives in memory, so it is not a history today.
+(`server.go:4571`) and lives in memory, so it is not a history today.
 
 Carry into the ADR: attempts are an event log; "is an assessment currently required" is derived
 from it, not stored as a boolean that events must keep in sync.

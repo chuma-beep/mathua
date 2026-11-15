@@ -1,7 +1,9 @@
 package server
 
 import (
+	"context"
 	"encoding/json"
+	"errors"
 	"net/http"
 	"sort"
 	"strings"
@@ -17,8 +19,9 @@ const adminAnalyticsCacheTTL = 30 * time.Second
 // The live strip never touches it: live values must be current, and caching
 // them would make the stale badge lie.
 type adminAnalyticsCache struct {
-	mu      sync.Mutex
-	entries map[string]adminAnalyticsCacheEntry
+	mu       sync.Mutex
+	entries  map[string]adminAnalyticsCacheEntry
+	inflight map[string]*adminAnalyticsFlight
 }
 
 type adminAnalyticsCacheEntry struct {
@@ -26,34 +29,74 @@ type adminAnalyticsCacheEntry struct {
 	payload []byte
 }
 
+// adminAnalyticsFlight is one in-process computation. A concurrent request for
+// the same key waits on done instead of issuing the same expensive queries.
+type adminAnalyticsFlight struct {
+	done    chan struct{}
+	payload []byte
+	err     error
+}
+
 func newAdminAnalyticsCache() *adminAnalyticsCache {
-	return &adminAnalyticsCache{entries: make(map[string]adminAnalyticsCacheEntry)}
+	return &adminAnalyticsCache{
+		entries:  make(map[string]adminAnalyticsCacheEntry),
+		inflight: make(map[string]*adminAnalyticsFlight),
+	}
 }
 
-func (c *adminAnalyticsCache) get(key string, now time.Time) ([]byte, bool) {
+// begin returns a cached payload when one is fresh. Otherwise exactly one
+// caller becomes the leader and the rest wait on the returned flight.
+func (c *adminAnalyticsCache) begin(key string, now time.Time) (payload []byte, flight *adminAnalyticsFlight, leader, cached bool) {
 	if c == nil {
-		return nil, false
-	}
-	c.mu.Lock()
-	defer c.mu.Unlock()
-	entry, ok := c.entries[key]
-	if !ok || !now.Before(entry.expires) {
-		if ok {
-			delete(c.entries, key)
-		}
-		return nil, false
-	}
-	return entry.payload, true
-}
-
-func (c *adminAnalyticsCache) put(key string, payload []byte, now time.Time) {
-	if c == nil {
-		return
+		return nil, nil, true, false
 	}
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	if c.entries == nil {
 		c.entries = make(map[string]adminAnalyticsCacheEntry)
+	}
+	if c.inflight == nil {
+		c.inflight = make(map[string]*adminAnalyticsFlight)
+	}
+	if entry, ok := c.entries[key]; ok && now.Before(entry.expires) {
+		return entry.payload, nil, false, true
+	}
+	if existing := c.inflight[key]; existing != nil {
+		return nil, existing, false, false
+	}
+	flight = &adminAnalyticsFlight{done: make(chan struct{})}
+	c.inflight[key] = flight
+	return nil, flight, true, false
+}
+
+func (c *adminAnalyticsCache) wait(ctx context.Context, flight *adminAnalyticsFlight) ([]byte, error) {
+	if flight == nil {
+		return nil, errors.New("analytics flight is missing")
+	}
+	select {
+	case <-flight.done:
+		return flight.payload, flight.err
+	case <-ctx.Done():
+		return nil, ctx.Err()
+	}
+}
+
+func (c *adminAnalyticsCache) finish(key string, payload []byte, err error, now time.Time) {
+	if c == nil {
+		return
+	}
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	flight := c.inflight[key]
+	if flight == nil {
+		return
+	}
+	flight.payload = payload
+	flight.err = err
+	close(flight.done)
+	delete(c.inflight, key)
+	if err != nil {
+		return
 	}
 	// Bound the map: only the handful of range and section combinations the
 	// admin page requests should ever be present.
@@ -161,7 +204,19 @@ func (s *Server) handleAdminAnalytics(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	cacheKey := adminAnalyticsCacheKey(window.Name, view, sections)
-	if payload, ok := s.analyticsCache.get(cacheKey, now); ok {
+	payload, flight, leader, cached := s.analyticsCache.begin(cacheKey, now)
+	if cached {
+		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("Cache-Control", "private, max-age=30")
+		_, _ = w.Write(payload)
+		return
+	}
+	if !leader {
+		payload, waitErr := s.analyticsCache.wait(r.Context(), flight)
+		if waitErr != nil {
+			writeError(w, "analytics request was canceled", http.StatusServiceUnavailable)
+			return
+		}
 		w.Header().Set("Content-Type", "application/json")
 		w.Header().Set("Cache-Control", "private, max-age=30")
 		_, _ = w.Write(payload)
@@ -170,6 +225,7 @@ func (s *Server) handleAdminAnalytics(w http.ResponseWriter, r *http.Request) {
 
 	metrics, err := store.AdminMetrics(window.Since, window.Until, window.Bucket)
 	if err != nil {
+		s.analyticsCache.finish(cacheKey, nil, err, now)
 		writeError(w, "failed to load analytics", http.StatusInternalServerError)
 		return
 	}
@@ -191,12 +247,13 @@ func (s *Server) handleAdminAnalytics(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	payload, err := json.Marshal(resp)
+	payload, err = json.Marshal(resp)
 	if err != nil {
+		s.analyticsCache.finish(cacheKey, nil, err, now)
 		writeError(w, "failed to encode analytics", http.StatusInternalServerError)
 		return
 	}
-	s.analyticsCache.put(cacheKey, payload, now)
+	s.analyticsCache.finish(cacheKey, payload, nil, now)
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Cache-Control", "private, max-age=30")
 	_, _ = w.Write(payload)

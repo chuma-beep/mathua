@@ -212,7 +212,7 @@ const metrics: AdminMetricDefinition[] = [
   {
     id: 'registered_diagnostic_cohort',
     label: 'Registered in window, diagnostic completed to date',
-    definition: 'Accounts registered in the selected window that have completed a diagnostic by the time of this request.',
+    definition: 'Accounts registered in the selected window that have completed a diagnostic by the time of this request. The denominator is new registrations for the same window.',
     kind: 'current',
     window: 'Registered in selected window; completion current',
     format: 'number',
