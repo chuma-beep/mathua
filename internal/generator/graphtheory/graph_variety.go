@@ -3,7 +3,129 @@ package graphtheory
 import (
 	"fmt"
 	"math/rand"
+	"strconv"
+
+	"github.com/chuma-beep/mathua/internal/generator"
 )
+
+// graphOrdinal returns the knowledge-point ordinal this draw serves: the one the
+// engine asked for, or a uniform draw when the caller named none. The registry
+// passes 0 outside a lesson, and every concept here still owes that caller a
+// question from one of its three branches.
+func graphOrdinal(ctx generator.GeneratorContext) int {
+	if ctx.KPOrdinal >= 1 && ctx.KPOrdinal <= 3 {
+		return ctx.KPOrdinal
+	}
+	return 1 + rand.Intn(3)
+}
+
+// graphRange draws an integer from lo to hi inclusive.
+func graphRange(lo, hi int) int { return lo + rand.Intn(hi-lo+1) }
+
+// graphNumeric builds a numeric-answer problem from drawn parameters. It records
+// the ordinal and the answer, so every number in the answer can be recomputed
+// from Facts.
+func graphNumeric(o int, question string, answer int, explanation string, facts map[string]string) generator.Problem {
+	if facts == nil {
+		facts = map[string]string{}
+	}
+	s := strconv.Itoa(answer)
+	facts["answer"] = s
+	return generator.Problem{Question: question, Answer: s, Explanation: explanation, Facts: facts, KPOrdinal: o}
+}
+
+// graphIntPow raises base to exp for the small non-negative exponents the
+// counting formulas use.
+func graphIntPow(base, exp int) int {
+	out := 1
+	for i := 0; i < exp; i++ {
+		out *= base
+	}
+	return out
+}
+
+// graphWalks counts the walks of the given length from one vertex to another in
+// a path, cycle or complete graph, 0-based. The adjacency entry (A^length)_{ij}
+// is the number asked for, so the count is computed rather than asserted.
+func graphWalks(kind string, n, from, to, length int) int {
+	adjacent := func(i, j int) bool {
+		if i == j {
+			return false
+		}
+		switch kind {
+		case "complete":
+			return true
+		case "path":
+			return j == i+1 || j == i-1
+		case "cycle":
+			return j == (i+1)%n || j == (i+n-1)%n
+		}
+		return false
+	}
+	counts := make([]int, n)
+	counts[from] = 1
+	for step := 0; step < length; step++ {
+		next := make([]int, n)
+		for i := 0; i < n; i++ {
+			if counts[i] == 0 {
+				continue
+			}
+			for j := 0; j < n; j++ {
+				if adjacent(i, j) {
+					next[j] += counts[i]
+				}
+			}
+		}
+		counts = next
+	}
+	return counts[to]
+}
+
+// graphMaxFlowValue runs Edmonds-Karp on an integer capacity list, so a drawn
+// network's answer is computed rather than tabulated. Parallel edges are summed,
+// matching the way the capacity list is read back.
+func graphMaxFlowValue(nodes int, edges [][3]int) int {
+	capacity := make([][]int, nodes)
+	for i := range capacity {
+		capacity[i] = make([]int, nodes)
+	}
+	for _, e := range edges {
+		capacity[e[0]][e[1]] += e[2]
+	}
+	flow := 0
+	for {
+		parent := make([]int, nodes)
+		for i := range parent {
+			parent[i] = -1
+		}
+		parent[0] = 0
+		queue := []int{0}
+		for len(queue) > 0 && parent[nodes-1] == -1 {
+			u := queue[0]
+			queue = queue[1:]
+			for v := 0; v < nodes; v++ {
+				if parent[v] == -1 && capacity[u][v] > 0 {
+					parent[v] = u
+					queue = append(queue, v)
+				}
+			}
+		}
+		if parent[nodes-1] == -1 {
+			return flow
+		}
+		bottleneck := 1 << 30
+		for v := nodes - 1; v != 0; v = parent[v] {
+			if capacity[parent[v]][v] < bottleneck {
+				bottleneck = capacity[parent[v]][v]
+			}
+		}
+		for v := nodes - 1; v != 0; v = parent[v] {
+			capacity[parent[v]][v] -= bottleneck
+			capacity[v][parent[v]] += bottleneck
+		}
+		flow += bottleneck
+	}
+}
 
 // graphClaim is the shape the graph-theory generators use for a recognition
 // question. It is declared once at package level so a computed claim can be

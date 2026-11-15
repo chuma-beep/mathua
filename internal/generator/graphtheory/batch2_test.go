@@ -215,6 +215,21 @@ func graphCeilDiv(a, b int) int {
 	return (a + b - 1) / b
 }
 
+// graphBinom is the binomial coefficient the Erdos-Szekeres Ramsey bound uses.
+func graphBinom(n, k int) int {
+	if k < 0 || k > n {
+		return 0
+	}
+	if k > n-k {
+		k = n - k
+	}
+	out := 1
+	for i := 1; i <= k; i++ {
+		out = out * (n - k + i) / i
+	}
+	return out
+}
+
 func graphSpectralGapCycle(n int) int {
 	return int(math.Round(2 - 2*math.Cos(2*math.Pi/float64(n))))
 }
@@ -526,17 +541,36 @@ func TestBatch2RamseyRecomputes(t *testing.T) {
 	reg := graphBatchRegistry(t)
 	table := map[[2]int]int{
 		{2, 3}: 3, {2, 4}: 4, {2, 5}: 5,
-		{3, 3}: 6, {3, 4}: 9, {3, 5}: 14, {4, 4}: 18,
+		{3, 3}: 6, {3, 4}: 9, {3, 5}: 14, {3, 6}: 18, {3, 7}: 23, {3, 8}: 28,
+		{4, 4}: 18, {4, 5}: 25,
 	}
 	for i := 0; i < 200; i++ {
 		p := graphBatchSample(t, reg, "graph.ramsey", i)
-		key := [2]int{graphFactInt(t, p, "a"), graphFactInt(t, p, "b")}
-		want, ok := table[key]
-		if !ok {
-			t.Fatalf("ramsey: no table entry for %v", key)
+		a := graphFactInt(t, p, "a")
+		b := graphFactInt(t, p, "b")
+		var want int
+		switch p.Facts["kind"] {
+		case "two":
+			// R(2,b) = b: the second colour alone must supply the K_b.
+			want = b
+		case "bound":
+			// Erdos-Szekeres: R(a,b) <= C(a+b-2, a-1).
+			want = graphBinom(a+b-2, a-1)
+		default:
+			// R(a,b) = R(b,a): swapping the two colours swaps the two cliques,
+			// so the table only needs one order of each pair.
+			key := [2]int{a, b}
+			if key[0] > key[1] {
+				key[0], key[1] = key[1], key[0]
+			}
+			var ok bool
+			want, ok = table[key]
+			if !ok {
+				t.Fatalf("ramsey: no table entry for %v", key)
+			}
 		}
 		if p.Answer != strconv.Itoa(want) {
-			t.Fatalf("ramsey: %v answers %s, want %d", key, p.Answer, want)
+			t.Fatalf("ramsey: a=%d b=%d kind=%q answers %s, want %d", a, b, p.Facts["kind"], p.Answer, want)
 		}
 	}
 }
@@ -571,9 +605,25 @@ func TestBatch2TournamentRecomputes(t *testing.T) {
 	for i := 0; i < 200; i++ {
 		p := graphBatchSample(t, reg, "graph.tournament", i)
 		n := graphFactInt(t, p, "n")
-		want := 1 << (n * (n - 1) / 2)
+		games := n * (n - 1) / 2
+		var want int
+		switch p.Facts["kind"] {
+		case "count":
+			want = 1 << games
+		case "transitive":
+			want = 1
+			for i := 2; i <= n; i++ {
+				want *= i
+			}
+		case "games", "scores":
+			want = games
+		case "path":
+			want = n - 1
+		default:
+			t.Fatalf("tournament: unknown kind %q", p.Facts["kind"])
+		}
 		if p.Answer != strconv.Itoa(want) {
-			t.Fatalf("tournament: n=%d answers %s, want %d", n, p.Answer, want)
+			t.Fatalf("tournament: n=%d kind=%q answers %s, want %d", n, p.Facts["kind"], p.Answer, want)
 		}
 	}
 }

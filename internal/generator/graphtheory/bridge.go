@@ -101,21 +101,21 @@ func (g *graphBridgeGen) Generate(ctx generator.GeneratorContext) generator.Prob
 func hamiltonianProblem(o int) generator.Problem {
 	switch o {
 	case 1:
-		n := 3 + rand.Intn(7)
+		n := 3 + rand.Intn(11)
 		ans := graphFactorial(n-1) / 2
 		return graphBridgeProblem(o,
 			fmt.Sprintf("How many distinct Hamiltonian cycles does the complete graph K_%d have? (enter a number)", n),
 			strconv.Itoa(ans),
 			fmt.Sprintf("Fix one starting vertex, order the other %d vertices, and divide by two for direction: %d!/2 = %d.", n-1, n-1, ans))
 	case 2:
-		n := 2 * (2 + rand.Intn(5))
+		n := 2 * (2 + rand.Intn(12))
 		ans := n / 2
 		return graphBridgeProblem(o,
 			fmt.Sprintf("Dirac's condition guarantees a Hamiltonian cycle in a simple graph on %d vertices when every vertex has degree at least what value? (enter a number)", n),
 			strconv.Itoa(ans),
 			fmt.Sprintf("Dirac's bound is half the vertex count: %d/2 = %d.", n, ans))
 	default:
-		n := 3 + rand.Intn(9)
+		n := 3 + rand.Intn(12)
 		return graphBridgeProblem(o,
 			fmt.Sprintf("The cycle graph C_%d is itself a Hamiltonian cycle. How many edges does that Hamiltonian cycle contain? (enter a number)", n),
 			strconv.Itoa(n),
@@ -314,19 +314,19 @@ func shortestPathProblem(o int) generator.Problem {
 func degeneracyProblem(o int) generator.Problem {
 	switch o {
 	case 1:
-		n := 2 + rand.Intn(7)
+		n := 2 + rand.Intn(12)
 		return graphBridgeProblem(o,
 			fmt.Sprintf("What is the degeneracy of the complete graph K_%d? (enter a number)", n),
 			strconv.Itoa(n-1),
 			fmt.Sprintf("Every subgraph of K_%d is complete, so its minimum degree is at most %d, and the whole graph attains %d.", n, n-1, n-1))
 	case 2:
-		n := 3 + rand.Intn(8)
+		n := 3 + rand.Intn(12)
 		return graphBridgeProblem(o,
 			fmt.Sprintf("What is the degeneracy of a tree on %d vertices? (enter a number)", n),
 			"1",
 			"Every subgraph of a tree is a forest and has a leaf, so the minimum degree is at most 1, and an edge attains 1.")
 	default:
-		n := 3 + rand.Intn(8)
+		n := 3 + rand.Intn(12)
 		return graphBridgeProblem(o,
 			fmt.Sprintf("What is the degeneracy of the cycle graph C_%d? (enter a number)", n),
 			"2",
