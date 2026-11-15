@@ -54,51 +54,109 @@ func registerBatch(reg *generator.Registry) {
 type hyperbolicDerivGen struct{}
 
 func (g *hyperbolicDerivGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question string
-		answer   string
-		rule     string
-		reason   string
+	kp := calcKP(ctx)
+	var question, answer, rule, reason string
+	facts := map[string]string{}
+	switch kp {
+	case 1:
+		// Basic hyperbolic rules with a frequency multiplier. The multiplier is
+		// silent when it is one, so the original sinh(x) questions remain.
+		a := randRange(ctx.Difficulty, 1, 12)
+		switch rand.Intn(3) {
+		case 0:
+			rule = "sinh"
+			question = fmt.Sprintf("Differentiate f(x) = sinh(%s) with respect to x. (enter an expression)", hypArg(a))
+			answer = hypScaled(a, "cosh")
+			if a == 1 {
+				reason = "The derivative of sinh is cosh: d/dx sinh(x) = cosh(x)."
+			} else {
+				reason = fmt.Sprintf("The derivative of sinh is cosh, and the chain rule multiplies by the inner derivative %d when the argument is %dx.", a, a)
+			}
+		case 1:
+			rule = "cosh"
+			question = fmt.Sprintf("Differentiate f(x) = cosh(%s) with respect to x. (enter an expression)", hypArg(a))
+			answer = hypScaled(a, "sinh")
+			if a == 1 {
+				reason = "The derivative of cosh is sinh, with no sign change: d/dx cosh(x) = sinh(x)."
+			} else {
+				reason = fmt.Sprintf("The derivative of cosh is sinh, with no sign change, and the chain rule multiplies by %d when the argument is %dx.", a, a)
+			}
+		default:
+			rule = "tanh"
+			question = fmt.Sprintf("Differentiate f(x) = tanh(%s) with respect to x. (enter an expression)", hypArg(a))
+			answer = hypTanh(a)
+			reason = fmt.Sprintf("d/dx tanh(u) = sech^2(u) u', so tanh(%s) differentiates to %s.", hypArg(a), answer)
+		}
+		facts["a"] = strconv.Itoa(a)
+	case 2:
+		// Chain rule with a power inner function.
+		n := randRange(ctx.Difficulty, 2, 8)
+		if rand.Intn(2) == 0 {
+			rule = "sinh_chain"
+			question = fmt.Sprintf("Differentiate f(x) = sinh(x^%d) with respect to x. (enter an expression)", n)
+			answer = hypChain(n, "cosh")
+			reason = fmt.Sprintf("The chain rule gives cosh(x^%d) times the derivative %d x^%d of the inner function.", n, n, n-1)
+		} else {
+			rule = "cosh_chain"
+			question = fmt.Sprintf("Differentiate f(x) = cosh(x^%d) with respect to x. (enter an expression)", n)
+			answer = hypChain(n, "sinh")
+			reason = fmt.Sprintf("The chain rule gives sinh(x^%d) times the derivative %d x^%d of the inner function.", n, n, n-1)
+		}
+		facts["n"] = strconv.Itoa(n)
+	default:
+		// The reciprocal argument keeps the answer a genuine fraction.
+		a := randRange(ctx.Difficulty, 2, 16)
+		rule = "tanh_chain"
+		question = fmt.Sprintf("Differentiate f(x) = tanh(x/%d) with respect to x. (enter an expression)", a)
+		answer = fmt.Sprintf("(1/%d)/cosh(x/%d)^2", a, a)
+		reason = fmt.Sprintf("The derivative is sech^2(x/%d) times the inner derivative 1/%d, giving (1/%d)/cosh(x/%d)^2.", a, a, a, a)
+		facts["a"] = strconv.Itoa(a)
 	}
-	claims := []claim{
-		{
-			question: "Differentiate f(x) = sinh(x) with respect to x. (enter an expression)",
-			answer:   "cosh(x)", rule: "sinh",
-			reason: "The derivative of sinh is cosh: d/dx sinh(x) = cosh(x).",
-		},
-		{
-			question: "Differentiate f(x) = cosh(x) with respect to x. (enter an expression)",
-			answer:   "sinh(x)", rule: "cosh",
-			reason: "The derivative of cosh is sinh, with no sign change: d/dx cosh(x) = sinh(x).",
-		},
-		{
-			question: "Differentiate f(x) = tanh(x) with respect to x. (enter an expression)",
-			answer:   "1/cosh(x)^2", rule: "tanh",
-			reason: "d/dx tanh(x) = sech^2(x) = 1/cosh(x)^2.",
-		},
-		{
-			question: "Differentiate f(x) = sinh(3x) with respect to x. (enter an expression)",
-			answer:   "3*cosh(3*x)", rule: "sinh_chain",
-			reason: "The chain rule gives cosh(3x) times the derivative 3 of the inner function.",
-		},
-		{
-			question: "Differentiate f(x) = cosh(x^2) with respect to x. (enter an expression)",
-			answer:   "2*x*sinh(x^2)", rule: "cosh_chain",
-			reason: "The chain rule gives sinh(x^2) times the derivative 2x of the inner function.",
-		},
-		{
-			question: "Differentiate f(x) = tanh(x/2) with respect to x. (enter an expression)",
-			answer:   "(1/2)/cosh(x/2)^2", rule: "tanh_chain",
-			reason: "The derivative is sech^2(x/2) times the inner derivative 1/2, giving (1/2)/cosh(x/2)^2.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
+	facts["rule"] = rule
+	facts["answer"] = answer
 	return generator.Problem{
-		Question:    c.question,
-		Answer:      c.answer,
-		Explanation: c.reason,
-		Facts:       map[string]string{"rule": c.rule, "answer": c.answer},
+		Question:    question,
+		Answer:      answer,
+		Explanation: reason,
+		Facts:       facts,
+		KPOrdinal:   kp,
 	}
+}
+
+// hypArg renders the argument of a hyperbolic function: a multiplier of one is
+// silent, so sinh(1x) never appears.
+func hypArg(a int) string {
+	if a == 1 {
+		return "x"
+	}
+	return fmt.Sprintf("%dx", a)
+}
+
+// hypScaled renders the derivative of fn(a x), which is a times the companion
+// hyperbolic function evaluated at a x.
+func hypScaled(a int, fn string) string {
+	if a == 1 {
+		return fmt.Sprintf("%s(x)", fn)
+	}
+	return fmt.Sprintf("%d*%s(%d*x)", a, fn, a)
+}
+
+// hypTanh renders the derivative of tanh(a x).
+func hypTanh(a int) string {
+	if a == 1 {
+		return "1/cosh(x)^2"
+	}
+	return fmt.Sprintf("%d/cosh(%d*x)^2", a, a)
+}
+
+// hypChain renders the derivative of fn(x^n), where fn is the companion
+// hyperbolic function: n x^(n-1) fn(x^n).
+func hypChain(n int, fn string) string {
+	power := "x"
+	if n-1 > 1 {
+		power = fmt.Sprintf("x^%d", n-1)
+	}
+	return fmt.Sprintf("%d*%s*%s(x^%d)", n, power, fn, n)
 }
 
 // ---------------------------------------------------------------------------

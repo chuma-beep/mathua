@@ -171,18 +171,38 @@ func w9rContinuityInverse(kp int) generator.Problem {
 }
 
 func w9rContinuityExtension(kp int) generator.Problem {
-	a := w9rCR(1, 8)
+	a := w9rCR(1, 20)
 	f := map[string]string{}
 	w9rCI(f, "a", a)
+	// A cubic numerator gives a different continuous extension, x^2+ax+a^2,
+	// with the same removable factor x-a.
+	if rand.Intn(2) == 0 {
+		f["family"] = "cubic"
+		cube := a * a * a
+		switch kp {
+		case 1:
+			return w9rC(kp, fmt.Sprintf("For \\(f(x)=(x^3-%d)/(x-%d)\\), what is \\(\\lim_{x\\to %d}f(x)\\)? (enter a number)", cube, a, a), strconv.Itoa(3*a*a),
+				fmt.Sprintf("Factor the numerator as \\((x-%d)(x^2+%dx+%d)\\), so the limit is \\(3\\cdot%d^2=%d\\).", a, a, a*a, a, 3*a*a), f)
+		case 2:
+			return w9rC(kp, fmt.Sprintf("What value at \\(x=%d\\) makes \\(f(x)=(x^3-%d)/(x-%d)\\) continuous? (enter a number)", a, cube, a), strconv.Itoa(3*a*a),
+				fmt.Sprintf("The continuous extension value is the limit \\(3\\cdot%d^2=%d\\).", a, 3*a*a), f)
+		default:
+			value := 3*a*a + 3*a + 1
+			return w9rC(kp, fmt.Sprintf("For \\(f(x)=(x^3-%d)/(x-%d)\\), what is \\(f(%d)\\) after the removable discontinuity is filled? (enter a number)", cube, a, a+1), strconv.Itoa(value),
+				fmt.Sprintf("After cancelling the common factor the function is \\(x^2+%dx+%d\\), so at \\(x=%d\\) the value is %d.", a, a*a, a+1, value), f)
+		}
+	}
+	f["family"] = "quadratic"
+	square := a * a
 	switch kp {
 	case 1:
-		return w9rC(kp, fmt.Sprintf("For \\(f(x)=(x^2-%d)/(x-%d)\\), what is \\(\\lim_{x\\to %d}f(x)\\)? (enter a number)", a*a, a, a), strconv.Itoa(2*a),
+		return w9rC(kp, fmt.Sprintf("For \\(f(x)=(x^2-%d)/(x-%d)\\), what is \\(\\lim_{x\\to %d}f(x)\\)? (enter a number)", square, a, a), strconv.Itoa(2*a),
 			fmt.Sprintf("Factor the numerator as \\((x-%d)(x+%d)\\), so the limit is \\(2\\cdot%d=%d\\).", a, a, a, 2*a), f)
 	case 2:
-		return w9rC(kp, fmt.Sprintf("What value at \\(x=%d\\) makes \\(f(x)=(x^2-%d)/(x-%d)\\) continuous? (enter a number)", a, a*a, a), strconv.Itoa(2*a),
+		return w9rC(kp, fmt.Sprintf("What value at \\(x=%d\\) makes \\(f(x)=(x^2-%d)/(x-%d)\\) continuous? (enter a number)", a, square, a), strconv.Itoa(2*a),
 			fmt.Sprintf("The continuous extension value is the limit \\(2\\cdot%d=%d\\).", a, 2*a), f)
 	default:
-		return w9rC(kp, fmt.Sprintf("For \\(f(x)=(x^2-%d)/(x-%d)\\), what is \\(f(%d)\\) after the removable discontinuity is filled?", a*a, a, a+1), strconv.Itoa(2*a+1),
+		return w9rC(kp, fmt.Sprintf("For \\(f(x)=(x^2-%d)/(x-%d)\\), what is \\(f(%d)\\) after the removable discontinuity is filled? (enter a number)", square, a, a+1), strconv.Itoa(2*a+1),
 			fmt.Sprintf("After cancelling the common factor the function is \\(x+%d\\), so at \\(x=%d\\) the value is %d.", a, a+1, 2*a+1), f)
 	}
 }
@@ -282,53 +302,99 @@ func w9rAngle(kp int) generator.Problem {
 }
 
 func w9rOptimizationDistance(kp int) generator.Problem {
-	a := 2 * w9rCR(1, 8)
+	// The nearest point on y=x is the projection ((p+q)/2, (p+q)/2). Choosing
+	// p and q with the same parity keeps that coordinate whole.
+	p := w9rCR(1, 20)
+	q := w9rCR(0, 20)
+	if (p+q)%2 != 0 {
+		q++
+	}
+	x0 := (p + q) / 2
 	f := map[string]string{}
-	w9rCI(f, "a", a)
+	w9rCI(f, "p", p)
+	w9rCI(f, "q", q)
+	w9rCI(f, "x0", x0)
 	switch kp {
 	case 1:
-		return w9rC(kp, fmt.Sprintf("What is the x-coordinate of the point on \\(y=x\\) closest to \\((%d,0)\\)? (enter a number)", a), strconv.Itoa(a/2),
-			fmt.Sprintf("Minimise \\((x-%d)^2+x^2\\). The derivative gives \\(x=%d/2=%d\\).", a, a, a/2), f)
+		return w9rC(kp, fmt.Sprintf("What is the x-coordinate of the point on \\(y=x\\) closest to \\((%d,%d)\\)? (enter a number)", p, q), strconv.Itoa(x0),
+			fmt.Sprintf("Minimise \\((x-%d)^2+(x-%d)^2\\). The derivative gives \\(x=(%d+%d)/2=%d\\).", p, q, p, q, x0), f)
 	case 2:
-		return w9rC(kp, fmt.Sprintf("For \\((%d,0)\\), what is the minimum squared distance to the line \\(y=x\\)? (enter a number)", a), strconv.Itoa(a*a/2),
-			fmt.Sprintf("At \\(x=%d/2\\), the squared distance is \\((a/2)^2+(a/2)^2=%d\\).", a, a*a/2), f)
+		return w9rC(kp, fmt.Sprintf("For \\((%d,%d)\\), what is the minimum squared distance to the line \\(y=x\\)? (enter a number)", p, q), strconv.Itoa((p-q)*(p-q)/2),
+			fmt.Sprintf("At \\(x=%d\\), the squared distance is \\((%d-%d)^2/2=%d\\).", x0, p, q, (p-q)*(p-q)/2), f)
 	default:
-		return w9rC(kp, fmt.Sprintf("For \\((%d,0)\\) and the line \\(y=x\\), what is \\(x+y\\) at the closest point? (enter a number)", a), strconv.Itoa(a),
-			fmt.Sprintf("The closest point is \\((a/2,a/2)\\), so \\(x+y=a=%d\\).", a), f)
+		return w9rC(kp, fmt.Sprintf("For \\((%d,%d)\\) and the line \\(y=x\\), what is \\(x+y\\) at the closest point? (enter a number)", p, q), strconv.Itoa(p+q),
+			fmt.Sprintf("The closest point is \\((%d,%d)\\), so \\(x+y=%d+%d=%d\\).", x0, x0, x0, x0, p+q), f)
 	}
 }
 
 func w9rOptimizationCylinder(kp int) generator.Problem {
-	r := w9rCR(1, 6)
+	r := w9rCR(1, 15)
+	// A closed cylinder minimises surface area at h = 2r; removing the lid
+	// changes the optimum to h = r and the volume to pi r^3.
+	kind := "closed"
+	h := 2 * r
+	volume := 2 * r * r * r
+	if rand.Intn(2) == 0 {
+		kind = "open-topped"
+		h = r
+		volume = r * r * r
+	}
 	f := map[string]string{}
 	w9rCI(f, "r", r)
+	w9rCI(f, "h", h)
+	w9rCI(f, "volume", volume)
 	switch kp {
 	case 1:
-		return w9rC(kp, fmt.Sprintf("A cylinder with volume \\(%d\\pi\\) is designed to minimise surface area. What is its radius? (enter a number)", 2*r*r*r), strconv.Itoa(r),
-			fmt.Sprintf("The optimal condition is \\(h=2r\\) with \\(V=2\\pi r^3=%d\\pi\\), so \\(r=%d\\).", 2*r*r*r, r), f)
+		return w9rC(kp, fmt.Sprintf("A %s cylinder with volume \\(%d\\pi\\) is designed to minimise surface area. What is its radius? (enter a number)", kind, volume), strconv.Itoa(r),
+			fmt.Sprintf("The optimal condition is \\(h=%s\\) with \\(V=%s\\pi=%d\\pi\\), so \\(r=%d\\).", cylinderHeightRule(kind), cylinderVolumeTerm(volume/(r*r*r)), volume, r), f)
 	case 2:
-		return w9rC(kp, fmt.Sprintf("For the optimal cylinder with radius %d, what is its height? (enter a number)", r), strconv.Itoa(2*r),
-			fmt.Sprintf("Surface area is minimised when \\(h=2r=2\\cdot%d=%d\\).", r, 2*r), f)
+		return w9rC(kp, fmt.Sprintf("For the optimal %s cylinder with radius %d, what is its height? (enter a number)", kind, r), strconv.Itoa(h),
+			fmt.Sprintf("Surface area is minimised when \\(h=%s\\), so \\(h=%d\\).", cylinderHeightRule(kind), h), f)
 	default:
-		return w9rC(kp, fmt.Sprintf("For the optimal cylinder with radius %d, what is \\(V/\\pi\\)? (enter a number)", r), strconv.Itoa(2*r*r*r),
-			fmt.Sprintf("\\(V/\\pi=2r^3=2\\cdot%d=%d\\).", r*r*r, 2*r*r*r), f)
+		return w9rC(kp, fmt.Sprintf("For the optimal %s cylinder with radius %d, what is \\(V/\\pi\\)? (enter a number)", kind, r), strconv.Itoa(volume),
+			fmt.Sprintf("\\(V/\\pi=%s=%d\\).", cylinderVolumeTerm(volume/(r*r*r)), volume), f)
 	}
 }
 
+// cylinderVolumeTerm renders the volume-to-pi ratio of an optimal cylinder:
+// 2r^3 for a closed can and r^3 when the top is open.
+func cylinderVolumeTerm(mult int) string {
+	if mult == 1 {
+		return "r^3"
+	}
+	return fmt.Sprintf("%d r^3", mult)
+}
+
+// cylinderHeightRule names the height-to-radius ratio at the optimal cylinder,
+// which is 2 for a closed can and 1 when the top is open.
+func cylinderHeightRule(kind string) string {
+	if kind == "open-topped" {
+		return "r"
+	}
+	return "2r"
+}
+
 func w9rIntegralFloor(kp int) generator.Problem {
-	n := w9rCR(2, 10)
+	n := w9rCR(2, 20)
+	a := w9rCR(0, 12)
+	sum := a*n + n*(n-1)/2
 	f := map[string]string{}
 	w9rCI(f, "n", n)
+	w9rCI(f, "a", a)
 	switch kp {
 	case 1:
-		return w9rC(kp, fmt.Sprintf("What is \\(\\int_0^{%d}\\lfloor x\\rfloor\\,dx\\)? (enter a number)", n), strconv.Itoa(n*(n-1)/2),
-			fmt.Sprintf("The integral is \\(0+1+\\cdots+(%d)=%d\\).", n-1, n*(n-1)/2), f)
+		return w9rC(kp, fmt.Sprintf("What is \\(\\int_%d^{%d}\\lfloor x\\rfloor\\,dx\\)? (enter a number)", a, a+n), strconv.Itoa(sum),
+			fmt.Sprintf("The integral is \\(%d+%d+\\cdots+(%d)=%d\\).", a, a+1, a+n-1, sum), f)
 	case 2:
-		return w9rC(kp, fmt.Sprintf("What is \\(\\sum_{k=0}^{%d}\\lfloor k\\rfloor\\)? (enter a number)", n-1), strconv.Itoa(n*(n-1)/2),
-			fmt.Sprintf("The sum is \\(0+1+\\cdots+(%d)=%d\\).", n-1, n*(n-1)/2), f)
+		return w9rC(kp, fmt.Sprintf("What is \\(\\sum_{k=%d}^{%d}\\lfloor k\\rfloor\\)? (enter a number)", a, a+n-1), strconv.Itoa(sum),
+			fmt.Sprintf("The sum is \\(%d+%d+\\cdots+(%d)=%d\\).", a, a+1, a+n-1, sum), f)
 	default:
-		return w9rC(kp, fmt.Sprintf("How many jump discontinuities does \\(\\lfloor x\\rfloor\\) have on \\((0,%d)\\)? (enter a number)", n), strconv.Itoa(n-1),
-			fmt.Sprintf("The floor jumps at \\(1,2,\\ldots,%d\\), so there are %d jumps.", n-1, n-1), f)
+		if n-1 == 1 {
+			return w9rC(kp, fmt.Sprintf("How many jump discontinuities does \\(\\lfloor x\\rfloor\\) have on \\((%d,%d)\\)? (enter a number)", a, a+n), strconv.Itoa(n-1),
+				fmt.Sprintf("The floor jumps once, at the single integer strictly between %d and %d.", a, a+n), f)
+		}
+		return w9rC(kp, fmt.Sprintf("How many jump discontinuities does \\(\\lfloor x\\rfloor\\) have on \\((%d,%d)\\)? (enter a number)", a, a+n), strconv.Itoa(n-1),
+			fmt.Sprintf("The floor jumps at each integer strictly between %d and %d, so there are %d jumps.", a, a+n, n-1), f)
 	}
 }
 

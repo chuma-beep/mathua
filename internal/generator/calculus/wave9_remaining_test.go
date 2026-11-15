@@ -67,6 +67,12 @@ func w9rTestCalculusAnswer(t *testing.T, kind string, kp int, p generator.Proble
 		return 3 * r * r
 	case "continuity_extension":
 		a := w9rTestInt(t, p, "a")
+		if p.Facts["family"] == "cubic" {
+			if kp == 1 || kp == 2 {
+				return 3 * a * a
+			}
+			return 3*a*a + 3*a + 1
+		}
 		if kp == 1 || kp == 2 {
 			return 2 * a
 		}
@@ -110,27 +116,29 @@ func w9rTestCalculusAnswer(t *testing.T, kind string, kp int, p generator.Proble
 		}
 		return h * rate
 	case "optimization_distance":
-		a := w9rTestInt(t, p, "a")
+		p0, q0 := w9rTestInt(t, p, "p"), w9rTestInt(t, p, "q")
 		if kp == 1 {
-			return a / 2
+			return (p0 + q0) / 2
 		}
 		if kp == 2 {
-			return a * a / 2
+			return (p0 - q0) * (p0 - q0) / 2
 		}
-		return a
+		return p0 + q0
 	case "optimization_cylinder":
 		r := w9rTestInt(t, p, "r")
+		h := w9rTestInt(t, p, "h")
 		if kp == 1 {
 			return r
 		}
 		if kp == 2 {
-			return 2 * r
+			return h
 		}
-		return 2 * r * r * r
+		return r * r * h
 	case "integral_floor":
 		n := w9rTestInt(t, p, "n")
+		a := w9rTestInt(t, p, "a")
 		if kp == 1 || kp == 2 {
-			return n * (n - 1) / 2
+			return a*n + n*(n-1)/2
 		}
 		return n - 1
 	case "abel_theorem":

@@ -193,30 +193,66 @@ func TestBatchAnswersGradeWithTheirShippedType(t *testing.T) {
 
 func TestBatchHyperbolicMatchesRule(t *testing.T) {
 	reg := calcBatchRegistry(t)
-	want := map[string]string{
-		"sinh":       "cosh(x)",
-		"cosh":       "sinh(x)",
-		"tanh":       "1/cosh(x)^2",
-		"sinh_chain": "3*cosh(3*x)",
-		"cosh_chain": "2*x*sinh(x^2)",
-		"tanh_chain": "(1/2)/cosh(x/2)^2",
+	want := map[string]bool{
+		"sinh": true, "cosh": true, "tanh": true,
+		"sinh_chain": true, "cosh_chain": true, "tanh_chain": true,
 	}
 	seen := map[string]bool{}
 	for i := 0; i < 300; i++ {
 		p := calcBatchSample(t, reg, "calc.deriv.hyperbolic", i)
 		rule := p.Facts["rule"]
 		seen[rule] = true
-		w, ok := want[rule]
-		if !ok {
+		if !want[rule] {
 			t.Fatalf("hyperbolic: unknown rule %q", rule)
 		}
-		if p.Answer != w {
-			t.Fatalf("hyperbolic: rule %s answers %q, want %q", rule, p.Answer, w)
+		var expected string
+		switch rule {
+		case "sinh":
+			a := calcFactInt(t, p, "a")
+			if a == 1 {
+				expected = "cosh(x)"
+			} else {
+				expected = fmt.Sprintf("%d*cosh(%d*x)", a, a)
+			}
+		case "cosh":
+			a := calcFactInt(t, p, "a")
+			if a == 1 {
+				expected = "sinh(x)"
+			} else {
+				expected = fmt.Sprintf("%d*sinh(%d*x)", a, a)
+			}
+		case "tanh":
+			a := calcFactInt(t, p, "a")
+			if a == 1 {
+				expected = "1/cosh(x)^2"
+			} else {
+				expected = fmt.Sprintf("%d/cosh(%d*x)^2", a, a)
+			}
+		case "sinh_chain":
+			n := calcFactInt(t, p, "n")
+			expected = hyperbolicChainAnswer(n, "cosh")
+		case "cosh_chain":
+			n := calcFactInt(t, p, "n")
+			expected = hyperbolicChainAnswer(n, "sinh")
+		case "tanh_chain":
+			a := calcFactInt(t, p, "a")
+			expected = fmt.Sprintf("(1/%d)/cosh(x/%d)^2", a, a)
+		}
+		if p.Answer != expected {
+			t.Fatalf("hyperbolic: rule %s answers %q, want %q", rule, p.Answer, expected)
 		}
 	}
 	if len(seen) != len(want) {
 		t.Fatalf("hyperbolic: expected all %d rules, saw %v", len(want), seen)
 	}
+}
+
+// hyperbolicChainAnswer independently writes n x^(n-1) fn(x^n).
+func hyperbolicChainAnswer(n int, fn string) string {
+	if n == 2 {
+		return fmt.Sprintf("2*x*%s(x^2)", fn)
+	}
+	return fmt.Sprintf("%d*x^%d*%s(x^%d)", n, n-1, fn, n)
 }
 
 func TestBatchParametricSecondRecomputes(t *testing.T) {

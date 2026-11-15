@@ -30,8 +30,13 @@ func TestWave2AnswersMatchFacts(t *testing.T) {
 			gen:  &complexFractionLimitGen{},
 			check: func(t *testing.T, p generator.Problem, kp int) {
 				a := calcFactInt(t, p, "a")
-				if p.Answer != strconv.Itoa(a*a) {
-					t.Fatalf("answer = %s, want %d", p.Answer, a*a)
+				b := calcFactInt(t, p, "b")
+				want := a * a
+				if b > 0 {
+					want = b * b * b / 2
+				}
+				if p.Answer != strconv.Itoa(want) {
+					t.Fatalf("answer = %s, want %d", p.Answer, want)
 				}
 			},
 		},
@@ -39,7 +44,23 @@ func TestWave2AnswersMatchFacts(t *testing.T) {
 			name: "absolute value limits",
 			gen:  &absoluteValueLimitGen{},
 			check: func(t *testing.T, p generator.Problem, kp int) {
-				want := []int{-1, 1, 0}[kp-1]
+				want := 0
+				switch kp {
+				case 1:
+					want = -1
+					if p.Facts["mirrored"] == "true" {
+						want = 1
+					}
+				case 2:
+					want = 1
+					if p.Facts["mirrored"] == "true" {
+						want = -1
+					}
+				default:
+					if p.Facts["form"] == "ratio" {
+						want = 1
+					}
+				}
 				if p.Answer != strconv.Itoa(want) {
 					t.Fatalf("answer = %s, want %d", p.Answer, want)
 				}
@@ -50,7 +71,17 @@ func TestWave2AnswersMatchFacts(t *testing.T) {
 			gen:  &normalLineGen{},
 			check: func(t *testing.T, p generator.Problem, kp int) {
 				a := calcFactInt(t, p, "a")
-				want := []int{2 * a, 2 * a, 3 * a * a}[kp-1]
+				var want int
+				switch p.Facts["function"] {
+				case "x^3":
+					want = 3 * a * a
+				case "x^2+x":
+					want = 2*a + 1
+				case "x^4":
+					want = 4 * a * a * a
+				default:
+					want = 2 * a
+				}
 				if p.Answer != strconv.Itoa(want) {
 					t.Fatalf("answer = %s, want %d", p.Answer, want)
 				}
@@ -76,6 +107,9 @@ func TestWave2AnswersMatchFacts(t *testing.T) {
 				perimeter := calcFactInt(t, p, "perimeter")
 				width := perimeter / 4
 				length := perimeter - 2*width
+				if p.Facts["divided"] == "true" {
+					length = width
+				}
 				area := width * length
 				want := []int{width, length, area}[kp-1]
 				if p.Answer != strconv.Itoa(want) {
@@ -105,10 +139,17 @@ func TestWave2AnswersMatchFacts(t *testing.T) {
 				x := calcFactInt(t, p, "x")
 				y := calcFactInt(t, p, "y")
 				l := calcFactInt(t, p, "ladder")
+				factor := calcFactInt(t, p, "factor")
 				if x*x+y*y != l*l {
 					t.Fatalf("%d-%d-%d is not a right triangle", x, y, l)
 				}
-				want := []int{y, 1, x}[kp-1]
+				want := y * factor
+				switch kp {
+				case 2:
+					want = calcFactInt(t, p, "sign")
+				case 3:
+					want = x * factor
+				}
 				if p.Answer != strconv.Itoa(want) {
 					t.Fatalf("answer = %s, want %d", p.Answer, want)
 				}
@@ -121,8 +162,9 @@ func TestWave2AnswersMatchFacts(t *testing.T) {
 				h := calcFactInt(t, p, "h")
 				c := calcFactInt(t, p, "c")
 				dh := calcFactInt(t, p, "dh")
-				if 4*c != h*h*dh {
-					t.Fatalf("c=%d does not satisfy h^2 dh / 4", c)
+				ratio := calcFactInt(t, p, "ratio")
+				if ratio*ratio*c != h*h*dh {
+					t.Fatalf("c=%d does not satisfy h^2 dh / ratio^2", c)
 				}
 				want := []int{dh, c, h}[kp-1]
 				if p.Answer != strconv.Itoa(want) {
@@ -165,7 +207,8 @@ func TestWave2AnswersMatchFacts(t *testing.T) {
 			gen:  &absoluteIntegralGen{},
 			check: func(t *testing.T, p generator.Problem, kp int) {
 				a := calcFactInt(t, p, "a")
-				want := []int{a * a, a * a / 2, a * a / 2}[kp-1]
+				shift := calcFactInt(t, p, "shift")
+				want := []int{a * a, a*a/2 + shift*a, a*a/2 + a*shift}[kp-1]
 				if p.Answer != strconv.Itoa(want) {
 					t.Fatalf("answer = %s, want %d", p.Answer, want)
 				}
