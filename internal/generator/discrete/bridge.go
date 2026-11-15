@@ -56,101 +56,15 @@ func (g *discBridgeGen) Generate(ctx generator.GeneratorContext) generator.Probl
 }
 
 func masterTheoremProblem(o int) generator.Problem {
-	switch o {
-	case 1:
-		type pair struct {
-			a, b int
-			ans  string
-		}
-		pairs := []pair{{4, 2, "2"}, {8, 2, "3"}, {16, 2, "4"}, {2, 4, "0.5"}, {3, 9, "0.5"}, {9, 3, "2"}, {27, 3, "3"}, {8, 4, "1.5"}}
-		p := pairs[rand.Intn(len(pairs))]
-		return discProblem(o,
-			fmt.Sprintf("A recurrence has the form T(n) = %d T(n/%d) + f(n). What is log base %d of %d? (enter a decimal)", p.a, p.b, p.b, p.a),
-			p.ans,
-			fmt.Sprintf("The exponent is log base %d of %d = %s.", p.b, p.a, p.ans))
-	case 2:
-		type triple struct{ a, b, k, class int }
-		triples := []triple{{4, 2, 1, 1}, {8, 2, 2, 1}, {16, 2, 2, 1}, {2, 2, 1, 2}, {3, 3, 2, 2}, {2, 2, 3, 3}, {3, 3, 4, 3}, {4, 2, 4, 3}}
-		t := triples[rand.Intn(len(triples))]
-		return discProblem(o,
-			fmt.Sprintf("For T(n) = %d T(n/%d) + n^%d, which master-theorem case applies? Enter 1 if the recursive term dominates, 2 for a tie, or 3 if the extra work dominates.", t.a, t.b, t.k),
-			strconv.Itoa(t.class),
-			fmt.Sprintf("Compare log base %d of %d with the extra-work exponent %d; the comparison gives case %d.", t.b, t.a, t.k, t.class))
-	default:
-		type triple struct{ a, b, k, exp int }
-		triples := []triple{{4, 2, 3, 3}, {8, 2, 1, 3}, {16, 2, 2, 4}, {2, 2, 3, 3}, {9, 3, 1, 2}, {27, 3, 4, 4}, {4, 2, 0, 2}, {8, 2, 0, 3}}
-		t := triples[rand.Intn(len(triples))]
-		return discProblem(o,
-			fmt.Sprintf("For T(n) = %d T(n/%d) + n^%d, the solution is Theta(n^p) times at most a logarithmic factor. What is p? (enter a number)", t.a, t.b, t.k),
-			strconv.Itoa(t.exp),
-			fmt.Sprintf("The exponent p is the larger of log base %d of %d and %d, which is %d.", t.b, t.a, t.k, t.exp))
-	}
+	return w2gMasterTheorem(o)
 }
 
 func booleanFunctionsProblem(o int) generator.Problem {
-	switch o {
-	case 1:
-		n := rand.Intn(5)
-		ans := 1 << (1 << n)
-		return discProblem(o,
-			fmt.Sprintf("How many Boolean functions of %d variable(s) are there? (enter a number)", n),
-			strconv.Itoa(ans),
-			fmt.Sprintf("There are 2^%d truth-table rows, and each row can output 0 or 1, so the count is 2^(2^%d) = %d.", n, n, ans))
-	case 2:
-		type expr struct {
-			text string
-			ones int
-		}
-		exprs := []expr{{"x AND y", 1}, {"x OR y", 3}, {"x XOR y", 2}, {"NOT x", 2}, {"x AND NOT y", 1}, {"NOT (x AND y)", 3}, {"x OR NOT y", 3}, {"x NAND y", 3}}
-		e := exprs[rand.Intn(len(exprs))]
-		return discProblem(o,
-			fmt.Sprintf("For two inputs, how many of the four truth-table rows make %s true? (enter a number)", e.text),
-			strconv.Itoa(e.ones),
-			fmt.Sprintf("Exactly %d of the four assignments make %s true.", e.ones, e.text))
-	default:
-		type expr struct {
-			text string
-			ones int
-		}
-		exprs := []expr{{"x AND y AND z", 2}, {"x OR y", 12}, {"x XOR y", 8}, {"x AND y", 4}, {"NOT x AND y", 4}, {"x OR y OR z", 14}, {"x XOR y XOR z", 8}}
-		e := exprs[rand.Intn(len(exprs))]
-		return discProblem(o,
-			fmt.Sprintf("For four Boolean variables, how many of the sixteen assignments make %s true? (enter a number)", e.text),
-			strconv.Itoa(e.ones),
-			fmt.Sprintf("Counting the satisfying rows of the sixteen gives %d for %s.", e.ones, e.text))
-	}
+	return w2gBooleanFunctions(o)
 }
 
 func burnsideProblem(o int) generator.Problem {
-	switch o {
-	case 1:
-		type pair struct{ n, k, ans int }
-		pairs := []pair{{3, 2, 4}, {4, 2, 6}, {5, 2, 8}, {6, 2, 14}, {3, 3, 11}, {4, 3, 24}}
-		p := pairs[rand.Intn(len(pairs))]
-		return discProblem(o,
-			fmt.Sprintf("How many distinct necklaces can be made from %d beads and %d colours, counting two necklaces as the same when one is a rotation of the other? (enter a number)", p.n, p.k),
-			strconv.Itoa(p.ans),
-			fmt.Sprintf("Burnside averages the fixed colourings over the %d rotations, which gives %d.", p.n, p.ans))
-	case 2:
-		type args struct{ n, k, d, ans int }
-		all := []args{{4, 2, 1, 2}, {4, 2, 2, 4}, {4, 3, 2, 9}, {6, 2, 2, 4}, {6, 2, 3, 8}, {6, 3, 3, 27}}
-		a := all[rand.Intn(len(all))]
-		return discProblem(o,
-			fmt.Sprintf("%d positions are coloured with %d colours. How many colourings are fixed by a rotation of the positions by %d step(s)? (enter a number)", a.n, a.k, a.d),
-			strconv.Itoa(a.ans),
-			fmt.Sprintf("The rotation splits the positions into gcd(%d, %d) cycles, so %d to that power gives %d fixed colourings.", a.n, a.d, a.k, a.ans))
-	default:
-		type args struct {
-			shape  string
-			k, ans int
-		}
-		all := []args{{"a square", 2, 6}, {"a square", 3, 21}, {"a square", 4, 100}, {"a triangle", 2, 4}, {"a triangle", 3, 11}, {"a triangle", 4, 24}}
-		a := all[rand.Intn(len(all))]
-		return discProblem(o,
-			fmt.Sprintf("How many distinct colourings of %s with %d colours are there, up to rotation? (enter a number)", a.shape, a.k),
-			strconv.Itoa(a.ans),
-			fmt.Sprintf("Burnside's lemma over the rotations of %s gives %d.", a.shape, a.ans))
-	}
+	return w2gBurnside(o)
 }
 
 func egfProblem(o int) generator.Problem {
@@ -186,38 +100,7 @@ func egfProblem(o int) generator.Problem {
 }
 
 func resolutionProblem(o int) generator.Problem {
-	switch o {
-	case 1:
-		p := 2 + rand.Intn(3)
-		q := 2 + rand.Intn(3)
-		ans := p + q - 2
-		return discProblem(o,
-			fmt.Sprintf("A clause has %d literals and another has %d literals. They share exactly one complementary pair. How many literals are in their resolvent? (enter a number)", p, q),
-			strconv.Itoa(ans),
-			fmt.Sprintf("Delete the two complementary literals: %d + %d - 2 = %d.", p, q, ans))
-	case 2:
-		type pair struct {
-			text string
-			ans  int
-		}
-		all := []pair{{"(x OR y) and (NOT x OR z)", 1}, {"(x OR y) and (NOT z OR w)", 0}, {"(x OR y OR z) and (NOT x OR NOT y)", 2}, {"(x) and (NOT x)", 1}, {"(x OR y) and (NOT y OR z)", 1}}
-		p := all[rand.Intn(len(all))]
-		return discProblem(o,
-			fmt.Sprintf("How many distinct resolvents can be formed from %s? (enter a number)", p.text),
-			strconv.Itoa(p.ans),
-			fmt.Sprintf("Count the complementary variables between the two clauses; each pair gives one resolvent, so the answer is %d.", p.ans))
-	default:
-		type formula struct {
-			text  string
-			units int
-		}
-		all := []formula{{"(x) AND (y) AND (NOT x OR z)", 2}, {"(x OR y) AND (NOT x) AND (NOT y)", 0}, {"(x) AND (NOT x OR y) AND (NOT y OR z)", 1}, {"(x) AND (y) AND (z) AND (NOT x OR NOT y)", 3}, {"(x OR y) AND (NOT x OR y) AND (z)", 1}}
-		f := all[rand.Intn(len(all))]
-		return discProblem(o,
-			fmt.Sprintf("How many unit clauses appear in %s? (enter a number)", f.text),
-			strconv.Itoa(f.units),
-			fmt.Sprintf("A unit clause has one literal; counting them in the formula gives %d.", f.units))
-	}
+	return w2gResolution(o)
 }
 
 func relationClosureProblem(o int) generator.Problem {
@@ -279,30 +162,7 @@ func fsmProblem(o int) generator.Problem {
 }
 
 func proofCasesProblem(o int) generator.Problem {
-	switch o {
-	case 1:
-		m := 2 + rand.Intn(5)
-		return discProblem(o,
-			fmt.Sprintf("A proof splits integers into cases according to their remainder modulo %d. How many cases are needed? (enter a number)", m),
-			strconv.Itoa(m),
-			fmt.Sprintf("The possible remainders modulo %d are 0 through %d, so there are %d cases.", m, m-1, m))
-	case 2:
-		k := 1 + rand.Intn(5)
-		ans := 1
-		for i := 0; i < k; i++ {
-			ans *= 2
-		}
-		return discProblem(o,
-			fmt.Sprintf("A proof analyses the sign of a product of %d factors. Each factor is positive or negative. How many sign cases are there? (enter a number)", k),
-			strconv.Itoa(ans),
-			fmt.Sprintf("Each factor has two signs, so %d factors give 2^%d = %d cases.", k, k, ans))
-	default:
-		m := 1 + rand.Intn(5)
-		return discProblem(o,
-			fmt.Sprintf("A proof splits on the remainder modulo %d and also on whether the integer is positive, negative or zero. How many cases are there? (enter a number)", m),
-			strconv.Itoa(3*m),
-			fmt.Sprintf("There are %d residues and three signs, so the total is 3 x %d = %d.", m, m, 3*m))
-	}
+	return w2gProofCases(o)
 }
 
 func hammingProblem(o int) generator.Problem {
