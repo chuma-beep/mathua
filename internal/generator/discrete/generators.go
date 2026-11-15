@@ -403,61 +403,7 @@ func (g *vennGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type permutationsGen struct{}
 
 func (g *permutationsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type qType struct {
-		question string
-		answer   int
-		exp      string
-	}
-
-	questions := []qType{
-		{
-			"How many ways to arrange 5 books on a shelf?",
-			120,
-			"5! = 5 × 4 × 3 × 2 × 1 = 120",
-		},
-		{
-			"How many ways to arrange 4 books on a shelf?",
-			24,
-			"4! = 4 × 3 × 2 × 1 = 24",
-		},
-		{
-			"How many ways to arrange 3 books on a shelf?",
-			6,
-			"3! = 3 × 2 × 1 = 6",
-		},
-		{
-			"How many ways can 6 people line up?",
-			720,
-			"6! = 6 × 5 × 4 × 3 × 2 × 1 = 720",
-		},
-		{
-			"How many ways to pick 1st, 2nd, and 3rd place from 10 runners?",
-			720,
-			"\\(10 \\times 9 \\times 8 = 720\\) (\\(_{10}P_{3} = 10! / 7!\\))",
-		},
-		{
-			"How many ways to pick 1st and 2nd place from 8 runners?",
-			56,
-			"8 × 7 = 56 (8P2 = 8! / 6!)",
-		},
-		{
-			"How many ways to arrange the letters A, B, C, D, E?",
-			120,
-			"5! = 5 × 4 × 3 × 2 × 1 = 120",
-		},
-		{
-			"How many ways to select a president and vice-president from 12 candidates?",
-			132,
-			"12 × 11 = 132 (12P2 = 12! / 10!)",
-		},
-	}
-
-	q := questions[rand.Intn(len(questions))]
-	return generator.Problem{
-		Question:    q.question,
-		Answer:      fmt.Sprintf("%d", q.answer),
-		Explanation: q.exp,
-	}
+	return w2gPermutations(discOrdinal(ctx))
 }
 
 // ----- 8. combinations -----
@@ -509,23 +455,7 @@ func (g *combinationsGen) Generate(ctx generator.GeneratorContext) generator.Pro
 type pascalGen struct{}
 
 func (g *pascalGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*5)
-	// Easy rows 2..4: at Difficulty 0.12 scale=1, so all three rows are
-	// reachable and the pool discriminates (1,2,1 vs 1,3,3,1 vs 1,4,6,4,1).
-	n := 2 + rand.Intn(3)
-	if scale > 3 {
-		n = 2 + rand.Intn(6) // rows 2..7
-	}
-	row := pascalRow(n)
-	parts := make([]string, len(row))
-	for i, v := range row {
-		parts[i] = strconv.Itoa(v)
-	}
-	return generator.Problem{
-		Question:    fmt.Sprintf("What is row %d of Pascal's triangle, counting the top 1 as row 0? (answer as comma-separated numbers)", n),
-		Answer:      strings.Join(parts, ","),
-		Explanation: fmt.Sprintf("Row %d, counting the top 1 as row 0: %s", n, strings.Join(parts, ",")),
-	}
+	return w2gPascal(discOrdinal(ctx))
 }
 
 func pascalRow(n int) []int {
@@ -803,60 +733,7 @@ func (g *treesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type recurrenceGen struct{}
 
 func (g *recurrenceGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type qType struct {
-		question string
-		answer   string
-		exp      string
-	}
-	questions := []qType{
-		{
-			"If \\(a_{n} = a_{n-1} + 2\\) and \\(a_{1} = 1\\), what is \\(a_{4}\\)?",
-			"7",
-			"a_2 = 1+2 = 3, a_3 = 3+2 = 5, a_4 = 5+2 = 7",
-		},
-		{
-			"If \\(a_{n} = a_{n-1} + 3\\) and \\(a_{1} = 2\\), what is \\(a_{4}\\)?",
-			"11",
-			"a_2 = 2+3 = 5, a_3 = 5+3 = 8, a_4 = 8+3 = 11",
-		},
-		{
-			"If \\(a_{n} = 2a_{n-1}\\) and \\(a_{1} = 3\\), what is \\(a_{4}\\)?",
-			"24",
-			"\\(a_{2} = 2 \\times 3 = 6\\), \\(a_{3} = 2 \\times 6 = 12\\), \\(a_{4} = 2 \\times 12 = 24\\)",
-		},
-		{
-			"If \\(a_{n} = 2a_{n-1}\\) and \\(a_{1} = 5\\), what is \\(a_{5}\\)?",
-			"80",
-			"\\(a_{2} = 5 \\times 2 = 10\\), \\(a_{3} = 10 \\times 2 = 20\\), \\(a_{4} = 20 \\times 2 = 40\\), \\(a_{5} = 40 \\times 2 = 80\\)",
-		},
-		{
-			"What is \\(a_{5}\\) if \\(a_{n} = 2n - 1\\)?",
-			"9",
-			"a_5 = 2(5) − 1 = 10 − 1 = 9",
-		},
-		{
-			"What is \\(a_{6}\\) if \\(a_{n} = 3n + 1\\)?",
-			"19",
-			"a_6 = 3(6) + 1 = 18 + 1 = 19",
-		},
-		{
-			"What is \\(a_{10}\\) if \\(a_{n} = n^{2}\\)?",
-			"100",
-			"a_10 = 10^2 = 100",
-		},
-		{
-			"If \\(a_{n} = a_{n-1} + a_{n-2}\\) and \\(a_{1} = 1\\), \\(a_{2} = 1\\), what is \\(a_{6}\\)?",
-			"8",
-			"a_3=2, a_4=3, a_5=5, a_6=8 (Fibonacci sequence)",
-		},
-	}
-
-	q := questions[rand.Intn(len(questions))]
-	return generator.Problem{
-		Question:    q.question,
-		Answer:      q.answer,
-		Explanation: q.exp,
-	}
+	return w2gRecurrence(discOrdinal(ctx))
 }
 
 // ----- 14. binomial theorem -----

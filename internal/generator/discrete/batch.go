@@ -269,29 +269,7 @@ func (g *countableGen) Generate(ctx generator.GeneratorContext) generator.Proble
 type complementGen struct{}
 
 func (g *complementGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	m := 2 + rand.Intn(3) // 2..4 letters, one of them a
-	L := 3 + rand.Intn(3) // 3..5
-	total := 1
-	for i := 0; i < L; i++ {
-		total *= m
-	}
-	none := 1
-	for i := 0; i < L; i++ {
-		none *= m - 1
-	}
-	answer := total - none
-	q := fmt.Sprintf("How many strings of length %d over an alphabet of %d letters contain at least one \u2018a\u2019?", L, m)
-	p := generator.Problem{
-		Question: q,
-		Answer:   strconv.Itoa(answer),
-		Facts: map[string]string{
-			"letters": strconv.Itoa(m), "length": strconv.Itoa(L),
-			"total": strconv.Itoa(total), "none": strconv.Itoa(none), "value": strconv.Itoa(answer),
-		},
-	}
-	p.Explanation = fmt.Sprintf("Count the complement instead: %d^%d = %d strings in all, and %d^%d = %d contain no \u2018a\u2019. The difference is %d.",
-		m, L, total, m-1, L, none, answer)
-	return p
+	return w2gComplement(discOrdinal(ctx))
 }
 
 // ----- 11. bipartite matching -----
@@ -418,33 +396,7 @@ func (g *cayleyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type degreeSequenceGen struct{}
 
 func (g *degreeSequenceGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	a := 2 + rand.Intn(3) // left part size, 2..4
-	b := 2 + rand.Intn(3) // right part size, 2..4
-	var degrees []int
-	for i := 0; i < a; i++ {
-		degrees = append(degrees, b)
-	}
-	for i := 0; i < b; i++ {
-		degrees = append(degrees, a)
-	}
-	sort.Sort(sort.Reverse(sort.IntSlice(degrees)))
-	sum := 0
-	for _, d := range degrees {
-		sum += d
-	}
-	answer := intsString(degrees, ",")
-	q := fmt.Sprintf("Give the degree sequence of the complete bipartite graph K(%d, %d) in non-increasing order, separated by commas (for example 3,3,2).", a, b)
-	p := generator.Problem{
-		Question: q,
-		Answer:   answer,
-		Facts: map[string]string{
-			"a": strconv.Itoa(a), "b": strconv.Itoa(b), "sequence": answer,
-			"sum": strconv.Itoa(sum), "edges": strconv.Itoa(a * b),
-		},
-	}
-	p.Explanation = fmt.Sprintf("Each of the %d vertices in the first part has degree %d and each of the %d in the second has degree %d, so the sequence is %s. Its sum is %d = 2 \u00b7 %d, as the handshake lemma requires.",
-		a, b, b, a, answer, sum, a*b)
-	return p
+	return w2gDegreeSequence(discOrdinal(ctx))
 }
 
 // ----- 15. linear recurrence -----

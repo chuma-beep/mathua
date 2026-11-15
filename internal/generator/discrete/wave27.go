@@ -263,17 +263,7 @@ func w27BranchBound(o int) generator.Problem {
 }
 
 func w27Entropy(o int) generator.Problem {
-	k := w27N(2, 10)
-	f := map[string]string{}
-	w27I(f, "k", k)
-	switch o {
-	case 1:
-		return w27P(o, fmt.Sprintf("A source has %d outcomes. How many probabilities enter its entropy?", k), strconv.Itoa(k), "One probability per outcome.", f)
-	case 2:
-		return w27P(o, fmt.Sprintf("A uniform source has %d equally likely outcomes. How many bits does each symbol carry?", k), strconv.Itoa(w27CeilLog2(k)), "The entropy is the base-two logarithm.", f)
-	default:
-		return w27P(o, fmt.Sprintf("The probabilities of %d outcomes sum to what value?", k), "1", "A distribution is normalised.", f)
-	}
+	return w2gEntropy(o)
 }
 
 func w27Convolutional(o int) generator.Problem {
