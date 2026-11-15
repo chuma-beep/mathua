@@ -1,6 +1,7 @@
 package server
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
@@ -31,6 +32,7 @@ func TestAdminAnalyticsRequiresPermissionAndReturnsWindow(t *testing.T) {
 		BucketSeconds     int64                        `json:"bucket_seconds"`
 		PartialLastBucket bool                         `json:"partial_last_bucket"`
 		Accounts          storage.AdminAccountCounts   `json:"accounts"`
+		Totals            *storage.AdminMetricTotals   `json:"totals"`
 		Activity          []storage.AdminActivityPoint `json:"activity"`
 		Previous          *storage.AdminMetricTotals   `json:"previous"`
 		PreviousFrom      *time.Time                   `json:"previous_from"`
@@ -52,6 +54,9 @@ func TestAdminAnalyticsRequiresPermissionAndReturnsWindow(t *testing.T) {
 	}
 	if out.Accounts.Total < 3 {
 		t.Fatalf("accounts total = %d, want at least the three test accounts", out.Accounts.Total)
+	}
+	if out.Totals == nil || out.Totals.DiagnosticCohortRegistered < 3 {
+		t.Fatalf("diagnostic cohort denominator missing from response: %+v", out.Totals)
 	}
 	if out.Previous == nil || out.PreviousFrom == nil || out.PreviousTo == nil {
 		t.Fatal("previous equal window should be present")
@@ -160,11 +165,37 @@ func TestAdminAnalyticsRejectsUnknownSection(t *testing.T) {
 func TestAdminAnalyticsCacheTTL(t *testing.T) {
 	cache := newAdminAnalyticsCache()
 	now := time.Now()
-	cache.put("key", []byte("payload"), now)
-	if got, ok := cache.get("key", now.Add(29*time.Second)); !ok || string(got) != "payload" {
-		t.Fatalf("cache at 29s = %q, %v; want payload, true", got, ok)
+	if _, flight, leader, cached := cache.begin("key", now); !leader || cached || flight == nil {
+		t.Fatal("first request should lead a flight")
 	}
-	if _, ok := cache.get("key", now.Add(31*time.Second)); ok {
-		t.Fatal("cache entry should expire after thirty seconds")
+	cache.finish("key", []byte("payload"), nil, now)
+	if got, flight, leader, cached := cache.begin("key", now.Add(29*time.Second)); !cached || leader || flight != nil || string(got) != "payload" {
+		t.Fatalf("cache at 29s = %q, flight=%v leader=%v cached=%v; want payload hit", got, flight, leader, cached)
+	}
+	if _, flight, leader, cached := cache.begin("key", now.Add(31*time.Second)); !leader || cached || flight == nil {
+		t.Fatal("expired entry should start a new flight")
+	}
+}
+
+func TestAdminAnalyticsCacheDeduplicatesConcurrentMisses(t *testing.T) {
+	cache := newAdminAnalyticsCache()
+	now := time.Now()
+	_, first, leader, cached := cache.begin("key", now)
+	if !leader || cached {
+		t.Fatal("first request should lead")
+	}
+	_, second, leader, cached := cache.begin("key", now)
+	if leader || cached {
+		t.Fatal("second request should wait on the in-flight computation")
+	}
+	if first != second {
+		t.Fatal("both requests should share one flight")
+	}
+	cache.finish("key", []byte("shared"), nil, now)
+	if got, err := cache.wait(context.Background(), second); err != nil || string(got) != "shared" {
+		t.Fatalf("waiter got %q, %v; want shared, nil", got, err)
+	}
+	if _, flight, leader, cached := cache.begin("key", now.Add(time.Second)); leader || !cached || flight != nil {
+		t.Fatal("completed flight should be a cache hit")
 	}
 }

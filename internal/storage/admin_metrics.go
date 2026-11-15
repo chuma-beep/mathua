@@ -98,7 +98,8 @@ type AdminMetricTotals struct {
 	Answers                    int `json:"answers"`
 	Correct                    int `json:"correct"`
 	NewRegistrations           int `json:"new_registrations"`
-	RegisteredDiagnosticCohort int `json:"registered_diagnostic_cohort"`
+	DiagnosticCohortRegistered int `json:"diagnostic_cohort_registered"`
+	DiagnosticCohortCompleted  int `json:"diagnostic_cohort_completed"`
 	QuizCompletions            int `json:"quiz_completions"`
 	TimedQuizCompletions       int `json:"timed_quiz_completions"`
 	XPAwarded                  int `json:"xp_awarded"`
@@ -167,6 +168,31 @@ func adminSectionRequested(sections []string, name string) bool {
 func adminDatePrefilter(since, until time.Time) (string, string) {
 	return since.UTC().AddDate(0, 0, -1).Format("2006-01-02"),
 		until.UTC().AddDate(0, 0, 1).Format("2006-01-02")
+}
+
+// sqliteTimeBounds normalises a half-open window for SQLite's second-precision
+// datetime() parser. A subsecond lower bound is rounded up and a subsecond
+// upper bound is rounded up to the next whole second, so an event stored
+// without fractional seconds is not dropped merely because the request
+// arrived later in the same second.
+func sqliteTimeBounds(since, until time.Time) (string, string) {
+	lower := since.UTC()
+	if lower.Nanosecond() != 0 {
+		lower = lower.Truncate(time.Second).Add(time.Second)
+	}
+	upper := until.UTC()
+	if upper.Nanosecond() != 0 {
+		upper = upper.Truncate(time.Second).Add(time.Second)
+	}
+	return lower.Format(time.RFC3339), upper.Format(time.RFC3339)
+}
+
+func sqliteLowerTime(t time.Time) string {
+	lower := t.UTC()
+	if lower.Nanosecond() != 0 {
+		lower = lower.Truncate(time.Second).Add(time.Second)
+	}
+	return lower.Format(time.RFC3339)
 }
 
 // adminBucketStarts walks aligned bucket boundaries from since to until.
