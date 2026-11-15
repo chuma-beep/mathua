@@ -694,7 +694,7 @@ describe('LearnStepper question handoff', () => {
     render(<LearnStepper conceptId={CID} />)
     fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
     await findMathField()
-    expect(Element.prototype.scrollIntoView).toHaveBeenLastCalledWith({ behavior: 'auto', block: 'nearest' })
+    await waitFor(() => expect(Element.prototype.scrollIntoView).toHaveBeenLastCalledWith({ behavior: 'auto', block: 'nearest' }))
   })
 
   it('starts only once even when Next is clicked repeatedly before rendering', async () => {
