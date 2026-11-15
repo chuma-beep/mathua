@@ -6,6 +6,7 @@ import AppShell from '../../components/app-shell'
 import Footer from '../../components/Footer'
 import SectionHeader from '../../components/SectionHeader'
 import AdminNav from '../../components/AdminNav'
+import AdminAnalyticsDashboard from '../../components/admin/analytics'
 import Loading from '../../components/Loading'
 import { adminOverview, getErrorMessage, type AdminOverview } from '../../lib/api'
 import { useAdminMe } from '../../hooks/useAdminMe'
@@ -62,15 +63,12 @@ export default function AdminOverviewPage() {
               </span>
             </Link>
 
-            <dl className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            <AdminAnalyticsDashboard />
+
+            <dl className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-2">
               <Stat label="Open" value={data.reports.open} />
               <Stat label="Reviewing" value={data.reports.reviewing} />
               <Stat label="Resolved" value={data.reports.resolved} />
-              <Stat label="Active now" value={data.active_now} />
-              <Stat label="Guests now" value={data.active_now_guests} />
-              <Stat label="Online now" value={data.online_now} />
-              <Stat label="Active today" value={data.active_today} />
-              <Stat label="Guests today" value={data.active_today_guests} />
               <Stat label="Staff" value={data.staff} />
               <Stat label="Owners" value={data.owners} />
               <Stat label="Accounts" value={data.users} />
