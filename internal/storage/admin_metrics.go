@@ -91,40 +91,41 @@ type AdminAccountCounts struct {
 // AdminMetrics, not here, so a previous-window comparison cannot accidentally
 // claim that mastery or report status was reconstructed historically.
 type AdminMetricTotals struct {
-	UniqueLearners       int `json:"unique_learners"`
-	UniqueRegistered     int `json:"unique_registered"`
-	UniqueGuests         int `json:"unique_guests"`
-	UniqueUnclassified   int `json:"unique_unclassified"`
-	Answers              int `json:"answers"`
-	Correct              int `json:"correct"`
-	NewRegistrations     int `json:"new_registrations"`
-	QuizCompletions      int `json:"quiz_completions"`
-	TimedQuizCompletions int `json:"timed_quiz_completions"`
-	XPAwarded            int `json:"xp_awarded"`
-	XPDeducted           int `json:"xp_deducted"`
-	DiagnosticCompleted  int `json:"diagnostic_completed"`
-	ReportsOpened        int `json:"reports_opened"`
-	ReportsResolved      int `json:"reports_resolved"`
+	UniqueLearners             int `json:"unique_learners"`
+	UniqueRegistered           int `json:"unique_registered"`
+	UniqueGuests               int `json:"unique_guests"`
+	UniqueUnclassified         int `json:"unique_unclassified"`
+	Answers                    int `json:"answers"`
+	Correct                    int `json:"correct"`
+	NewRegistrations           int `json:"new_registrations"`
+	RegisteredDiagnosticCohort int `json:"registered_diagnostic_cohort"`
+	QuizCompletions            int `json:"quiz_completions"`
+	TimedQuizCompletions       int `json:"timed_quiz_completions"`
+	XPAwarded                  int `json:"xp_awarded"`
+	XPDeducted                 int `json:"xp_deducted"`
+	DiagnosticCompletions      int `json:"diagnostic_completions"`
+	ReportsOpened              int `json:"reports_opened"`
+	ReportsResolved            int `json:"reports_resolved"`
 }
 
 // AdminMetrics is one historical window for the admin dashboard. Current-state
 // fields are labelled as such by the API; they are not part of Totals.
 type AdminMetrics struct {
-	Accounts          AdminAccountCounts   `json:"accounts"`
-	Totals            AdminMetricTotals    `json:"totals"`
-	Activity          []AdminActivityPoint `json:"activity"`
-	Signups           []AdminSeriesPoint   `json:"signups"`
-	Mastery           []AdminSeriesPoint   `json:"mastery"`
-	XP                []AdminXPPoint       `json:"xp"`
-	Reports           []AdminReportPoint   `json:"reports"`
-	Quizzes           []AdminSeriesPoint   `json:"quizzes"`
-	TimedQuizzes      []AdminSeriesPoint   `json:"timed_quizzes"`
-	Diagnostics       []AdminSeriesPoint   `json:"diagnostics"`
-	TopConcepts       []AdminConceptMetric `json:"top_concepts"`
-	MostReported      []AdminConceptMetric `json:"most_reported"`
-	MasteredByConcept map[string]int       `json:"mastered_by_concept"`
-	MasteredCurrent   int                  `json:"mastered_current"`
-	ReportStatus      map[string]int       `json:"report_status"`
+	Accounts              AdminAccountCounts   `json:"accounts"`
+	Totals                AdminMetricTotals    `json:"totals"`
+	Activity              []AdminActivityPoint `json:"activity"`
+	Signups               []AdminSeriesPoint   `json:"signups"`
+	Mastery               []AdminSeriesPoint   `json:"mastery"`
+	XP                    []AdminXPPoint       `json:"xp"`
+	Reports               []AdminReportPoint   `json:"reports"`
+	Quizzes               []AdminSeriesPoint   `json:"quizzes"`
+	TimedQuizzes          []AdminSeriesPoint   `json:"timed_quizzes"`
+	DiagnosticCompletions []AdminSeriesPoint   `json:"diagnostic_completions,omitempty"`
+	TopConcepts           []AdminConceptMetric `json:"top_concepts"`
+	MostReported          []AdminConceptMetric `json:"most_reported"`
+	MasteredByConcept     map[string]int       `json:"mastered_by_concept"`
+	MasteredCurrent       int                  `json:"mastered_current"`
+	ReportStatus          map[string]int       `json:"report_status"`
 }
 
 // AdminLiveMetrics is the uncached live strip. It deliberately carries no
@@ -140,8 +141,32 @@ type AdminLiveMetrics struct {
 // this interface and returns a clear error when a test double does not
 // implement it.
 type AdminMetricsStore interface {
-	AdminMetrics(since, until time.Time, bucket time.Duration) (*AdminMetrics, error)
+	AdminMetrics(since, until time.Time, bucket time.Duration, sections ...string) (*AdminMetrics, error)
 	AdminLiveMetrics(since time.Time) (AdminLiveMetrics, error)
+}
+
+// adminDatePrefilter is a conservative text range for an indexed timestamp
+// column. Stored timestamps begin with YYYY-MM-DD in both stores, even when
+// the rest of the value uses a space separator, a fractional second or an
+// offset. Widening by one day covers an offset that moves the calendar day,
+// and the exact datetime/timestamptz filter still decides the true boundary.
+// The text predicate is what lets the plain attempts(timestamp) index narrow
+// the scan; datetime(timestamp) alone would force a full scan.
+func adminSectionRequested(sections []string, name string) bool {
+	if len(sections) == 0 {
+		return true
+	}
+	for _, section := range sections {
+		if section == "all" || section == name {
+			return true
+		}
+	}
+	return false
+}
+
+func adminDatePrefilter(since, until time.Time) (string, string) {
+	return since.UTC().AddDate(0, 0, -1).Format("2006-01-02"),
+		until.UTC().AddDate(0, 0, 1).Format("2006-01-02")
 }
 
 // adminBucketStarts walks aligned bucket boundaries from since to until.

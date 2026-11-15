@@ -1,6 +1,7 @@
 package storage
 
 import (
+	"os"
 	"testing"
 	"time"
 )
@@ -141,8 +142,11 @@ func TestAdminMetricsCore(t *testing.T) {
 	if m.Totals.XPAwarded != 100 || m.Totals.XPDeducted != 25 {
 		t.Fatalf("xp = %d/%d, want 100/25", m.Totals.XPAwarded, m.Totals.XPDeducted)
 	}
-	if m.Totals.DiagnosticCompleted != 1 {
-		t.Fatalf("diagnostic completions = %d, want 1", m.Totals.DiagnosticCompleted)
+	if m.Totals.DiagnosticCompletions != 1 {
+		t.Fatalf("diagnostic completions = %d, want 1", m.Totals.DiagnosticCompletions)
+	}
+	if m.Totals.RegisteredDiagnosticCohort != 1 {
+		t.Fatalf("registered diagnostic cohort = %d, want 1", m.Totals.RegisteredDiagnosticCohort)
 	}
 	if m.Totals.ReportsOpened != 1 || m.ReportStatus["open"] != 1 {
 		t.Fatalf("reports = %+v status = %+v, want one open", m.Totals, m.ReportStatus)
@@ -150,12 +154,16 @@ func TestAdminMetricsCore(t *testing.T) {
 	if len(m.Activity) < 3 {
 		t.Fatalf("activity buckets = %d, want at least 3", len(m.Activity))
 	}
-	var answers int
+	var answers, activityUnclassified int
 	for _, p := range m.Activity {
 		answers += p.Answers
+		activityUnclassified += p.Unclassified
 	}
 	if answers != 3 {
 		t.Fatalf("activity answers = %d, want 3", answers)
+	}
+	if activityUnclassified != 1 {
+		t.Fatalf("activity unclassified = %d, want 1 separate segment", activityUnclassified)
 	}
 	if len(m.TopConcepts) != 1 || m.TopConcepts[0].ConceptID != "admin.metric.concept" ||
 		m.TopConcepts[0].Attempts != 3 || m.TopConcepts[0].Correct != 2 || m.TopConcepts[0].Reports != 1 {
@@ -163,5 +171,76 @@ func TestAdminMetricsCore(t *testing.T) {
 	}
 	if len(m.MostReported) != 1 || m.MostReported[0].Reports != 1 {
 		t.Fatalf("most reported = %+v", m.MostReported)
+	}
+}
+
+// TestAdminMetricsTimestampBoundaries covers the two storage shapes the
+// timestamp filter must survive: RFC3339 in SQLite and now()::text style in
+// Postgres, plus a fractional second and a space separator. The window is in
+// 2099 so a shared Postgres database cannot contribute rows.
+func TestAdminMetricsTimestampBoundaries(t *testing.T) {
+	t.Run("sqlite", func(t *testing.T) {
+		testAdminMetricsTimestampBoundaries(t, newSQLiteStore(t))
+	})
+	t.Run("postgres", func(t *testing.T) {
+		if os.Getenv("TEST_POSTGRES_DSN") == "" {
+			t.Skip("TEST_POSTGRES_DSN not set; skipping Postgres boundary check")
+		}
+		testAdminMetricsTimestampBoundaries(t, newPostgresStore(t))
+	})
+}
+
+func testAdminMetricsTimestampBoundaries(t *testing.T, store Repository) {
+	t.Helper()
+	st, err := store.CreateStudent("boundary learner")
+	if err != nil {
+		t.Fatalf("create student: %v", err)
+	}
+	if err := store.EnsureSession("sess-boundary-2099", st.ID); err != nil {
+		t.Fatalf("ensure session: %v", err)
+	}
+	timestamps := []string{
+		"2099-01-01T00:00:00Z",
+		"2099-01-01 23:59:59+00:00",
+		"2099-01-01T12:00:00.123456Z",
+		"2099-01-02T00:00:00Z", // outside the half-open window
+	}
+	for i, ts := range timestamps {
+		query := `INSERT INTO attempts
+			(session_id, student_id, concept_id, answer, expected, correct,
+			 elapsed_seconds, timestamp, question, source, explanation)
+			VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+		var err error
+		switch s := store.(type) {
+		case *SQLiteStore:
+			_, err = s.db.Exec(query, "sess-boundary-2099", st.ID, "boundary.concept", "1", "1", 1, 1.0, ts, "q", "practice", "")
+		case *PostgresStore:
+			_, err = s.db.Exec(rebindDollars(query), "sess-boundary-2099", st.ID, "boundary.concept", "1", "1", 1, 1.0, ts, "q", "practice", "")
+		default:
+			t.Fatalf("unexpected store %T", store)
+		}
+		if err != nil {
+			t.Fatalf("insert attempt %d: %v", i, err)
+		}
+	}
+
+	metricsStore, ok := store.(AdminMetricsStore)
+	if !ok {
+		t.Fatalf("store %T does not implement AdminMetricsStore", store)
+	}
+	since := time.Date(2099, 1, 1, 0, 0, 0, 0, time.UTC)
+	until := time.Date(2099, 1, 2, 0, 0, 0, 0, time.UTC)
+	m, err := metricsStore.AdminMetrics(since, until, 24*time.Hour)
+	if err != nil {
+		t.Fatalf("admin metrics: %v", err)
+	}
+	if m.Totals.Answers != 3 {
+		t.Fatalf("answers = %d, want 3 inside the half-open window", m.Totals.Answers)
+	}
+	if len(m.Activity) != 1 {
+		t.Fatalf("activity buckets = %d, want 1", len(m.Activity))
+	}
+	if m.Activity[0].Answers != 3 {
+		t.Fatalf("activity answers = %d, want 3", m.Activity[0].Answers)
 	}
 }

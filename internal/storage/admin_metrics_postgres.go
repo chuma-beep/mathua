@@ -15,7 +15,7 @@ const adminPostgresClass = `CASE
 	ELSE 'unclassified'
 END`
 
-func (s *PostgresStore) AdminMetrics(since, until time.Time, bucket time.Duration) (*AdminMetrics, error) {
+func (s *PostgresStore) AdminMetrics(since, until time.Time, bucket time.Duration, sections ...string) (*AdminMetrics, error) {
 	if !until.After(since) {
 		return nil, fmt.Errorf("admin metrics: until must be after since")
 	}
@@ -27,47 +27,80 @@ func (s *PostgresStore) AdminMetrics(since, until time.Time, bucket time.Duratio
 		MasteredByConcept: map[string]int{},
 		ReportStatus:      map[string]int{},
 	}
-	if err := s.adminPostgresAccounts(out); err != nil {
-		return nil, err
+	wantsTotals := adminSectionRequested(sections, "totals")
+	if adminSectionRequested(sections, "accounts") {
+		if err := s.adminPostgresAccounts(out); err != nil {
+			return nil, err
+		}
 	}
-	if err := s.adminPostgresActivity(out, since, until, bucketSec); err != nil {
-		return nil, err
+	if adminSectionRequested(sections, "activity") || wantsTotals {
+		if err := s.adminPostgresActivity(out, since, until, bucketSec); err != nil {
+			return nil, err
+		}
 	}
-	if err := s.adminPostgresSignups(out, since, until, bucketSec); err != nil {
-		return nil, err
+	if adminSectionRequested(sections, "signups") || wantsTotals {
+		if err := s.adminPostgresSignups(out, since, until, bucketSec); err != nil {
+			return nil, err
+		}
 	}
-	if err := s.adminPostgresMastery(out, since, until, bucketSec); err != nil {
-		return nil, err
+	if adminSectionRequested(sections, "mastery") {
+		if err := s.adminPostgresMastery(out, since, until, bucketSec); err != nil {
+			return nil, err
+		}
 	}
-	if err := s.adminPostgresXP(out, since, until, bucketSec); err != nil {
-		return nil, err
+	if adminSectionRequested(sections, "xp") || wantsTotals {
+		if err := s.adminPostgresXP(out, since, until, bucketSec); err != nil {
+			return nil, err
+		}
 	}
-	if err := s.adminPostgresQuizzes(out, since, until, bucketSec); err != nil {
-		return nil, err
+	if adminSectionRequested(sections, "quizzes") || adminSectionRequested(sections, "diagnostics") || wantsTotals {
+		if err := s.adminPostgresQuizzes(out, since, until, bucketSec); err != nil {
+			return nil, err
+		}
 	}
-	if err := s.adminPostgresReports(out, since, until, bucketSec); err != nil {
-		return nil, err
+	if adminSectionRequested(sections, "reports") || adminSectionRequested(sections, "status") || wantsTotals {
+		if err := s.adminPostgresReports(out, since, until, bucketSec); err != nil {
+			return nil, err
+		}
 	}
-	if err := s.adminPostgresConcepts(out, since, until); err != nil {
-		return nil, err
+	if adminSectionRequested(sections, "concepts") {
+		if err := s.adminPostgresConcepts(out, since, until); err != nil {
+			return nil, err
+		}
 	}
 	starts := adminBucketStarts(since, until, bucket)
-	out.Activity = adminFillActivity(out.Activity, starts)
-	out.Signups = adminFillSeries(out.Signups, starts)
-	out.Mastery = adminFillSeries(out.Mastery, starts)
-	out.XP = adminFillXP(out.XP, starts)
-	out.Reports = adminFillReports(out.Reports, starts)
-	out.Quizzes = adminFillSeries(out.Quizzes, starts)
-	out.TimedQuizzes = adminFillSeries(out.TimedQuizzes, starts)
-	out.Diagnostics = adminFillSeries(out.Diagnostics, starts)
+	if adminSectionRequested(sections, "activity") {
+		out.Activity = adminFillActivity(out.Activity, starts)
+	}
+	if adminSectionRequested(sections, "signups") {
+		out.Signups = adminFillSeries(out.Signups, starts)
+	}
+	if adminSectionRequested(sections, "mastery") {
+		out.Mastery = adminFillSeries(out.Mastery, starts)
+	}
+	if adminSectionRequested(sections, "xp") {
+		out.XP = adminFillXP(out.XP, starts)
+	}
+	if adminSectionRequested(sections, "reports") {
+		out.Reports = adminFillReports(out.Reports, starts)
+	}
+	if adminSectionRequested(sections, "quizzes") {
+		out.Quizzes = adminFillSeries(out.Quizzes, starts)
+		out.TimedQuizzes = adminFillSeries(out.TimedQuizzes, starts)
+	}
+	if adminSectionRequested(sections, "diagnostics") {
+		out.DiagnosticCompletions = adminFillSeries(out.DiagnosticCompletions, starts)
+	}
 	return out, nil
 }
 
 func (s *PostgresStore) AdminLiveMetrics(since time.Time) (AdminLiveMetrics, error) {
 	var live AdminLiveMetrics
+	dateLo, dateHi := adminDatePrefilter(since, time.Now().UTC())
 	if err := s.db.QueryRow(
-		`SELECT COUNT(*) FROM attempts WHERE timestamp::timestamptz >= $1`,
-		since.UTC()).Scan(&live.Answers15m); err != nil {
+		`SELECT COUNT(*) FROM attempts
+		 WHERE timestamp::timestamptz >= $1 AND timestamp >= $2 AND timestamp < $3`,
+		since.UTC(), dateLo, dateHi).Scan(&live.Answers15m); err != nil {
 		return live, fmt.Errorf("admin live answers: %w", err)
 	}
 	if err := s.db.QueryRow(
@@ -100,6 +133,7 @@ func (s *PostgresStore) adminPostgresAccounts(out *AdminMetrics) error {
 }
 
 func (s *PostgresStore) adminPostgresActivity(out *AdminMetrics, since, until time.Time, bucketSec int64) error {
+	dateLo, dateHi := adminDatePrefilter(since, until)
 	activity, err := s.db.Query(`SELECT bucket,
 		COUNT(DISTINCT CASE WHEN class = 'registered' THEN student_id END),
 		COUNT(DISTINCT CASE WHEN class = 'guest' THEN student_id END),
@@ -111,8 +145,9 @@ func (s *PostgresStore) adminPostgresActivity(out *AdminMetrics, since, until ti
 				`+adminPostgresClass+` AS class
 			FROM attempts a LEFT JOIN students s ON s.id = a.student_id
 			WHERE a.timestamp::timestamptz >= $2 AND a.timestamp::timestamptz < $3
+			  AND a.timestamp >= $4 AND a.timestamp < $5
 		) classified
-		GROUP BY bucket ORDER BY bucket`, bucketSec, since.UTC(), until.UTC())
+		GROUP BY bucket ORDER BY bucket`, bucketSec, since.UTC(), until.UTC(), dateLo, dateHi)
 	if err != nil {
 		return fmt.Errorf("admin activity: %w", err)
 	}
@@ -142,7 +177,8 @@ func (s *PostgresStore) adminPostgresActivity(out *AdminMetrics, since, until ti
 			SELECT a.student_id, a.correct, `+adminPostgresClass+` AS class
 			FROM attempts a LEFT JOIN students s ON s.id = a.student_id
 			WHERE a.timestamp::timestamptz >= $1 AND a.timestamp::timestamptz < $2
-		) classified`, since.UTC(), until.UTC()).Scan(&totals.all, &totals.registered,
+			  AND a.timestamp >= $3 AND a.timestamp < $4
+		) classified`, since.UTC(), until.UTC(), dateLo, dateHi).Scan(&totals.all, &totals.registered,
 		&totals.guests, &totals.unclassified, &totals.answers, &totals.correct); err != nil {
 		return fmt.Errorf("admin activity totals: %w", err)
 	}
@@ -181,7 +217,19 @@ func (s *PostgresStore) adminPostgresSignups(out *AdminMetrics, since, until tim
 		out.Signups = append(out.Signups, p)
 		out.Totals.NewRegistrations += p.Value
 	}
-	return rows.Err()
+	if err := rows.Err(); err != nil {
+		return err
+	}
+	if err := s.db.QueryRow(`SELECT COUNT(*) FROM students
+		WHERE diagnostic_completed_at <> ''
+		  AND created_at::timestamptz >= $1 AND created_at::timestamptz < $2
+		  AND substr(id, 1, 6) <> 'guest_'
+		  AND (COALESCE(username, '') <> '' OR COALESCE(password_hash, '') <> ''
+		    OR COALESCE(email, '') <> '' OR COALESCE(google_id, '') <> '')`,
+		since.UTC(), until.UTC()).Scan(&out.Totals.RegisteredDiagnosticCohort); err != nil {
+		return fmt.Errorf("admin diagnostic cohort: %w", err)
+	}
+	return nil
 }
 
 func (s *PostgresStore) adminPostgresMastery(out *AdminMetrics, since, until time.Time, bucketSec int64) error {
@@ -310,8 +358,8 @@ func (s *PostgresStore) adminPostgresQuizzes(out *AdminMetrics, since, until tim
 		if err := diag.Scan(&p.Start, &p.Value); err != nil {
 			return fmt.Errorf("admin diagnostics scan: %w", err)
 		}
-		out.Diagnostics = append(out.Diagnostics, p)
-		out.Totals.DiagnosticCompleted += p.Value
+		out.DiagnosticCompletions = append(out.DiagnosticCompletions, p)
+		out.Totals.DiagnosticCompletions += p.Value
 	}
 	return diag.Err()
 }
@@ -375,11 +423,13 @@ func (s *PostgresStore) adminPostgresReports(out *AdminMetrics, since, until tim
 }
 
 func (s *PostgresStore) adminPostgresConcepts(out *AdminMetrics, since, until time.Time) error {
+	dateLo, dateHi := adminDatePrefilter(since, until)
 	byConcept := map[string]*AdminConceptMetric{}
 	rows, err := s.db.Query(`SELECT concept_id, COUNT(*), COALESCE(SUM(correct), 0)
 		FROM attempts
 		WHERE timestamp::timestamptz >= $1 AND timestamp::timestamptz < $2
-		GROUP BY concept_id`, since.UTC(), until.UTC())
+		  AND timestamp >= $3 AND timestamp < $4
+		GROUP BY concept_id`, since.UTC(), until.UTC(), dateLo, dateHi)
 	if err != nil {
 		return fmt.Errorf("admin concept attempts: %w", err)
 	}

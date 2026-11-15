@@ -1,13 +1,72 @@
 package server
 
 import (
+	"encoding/json"
 	"net/http"
+	"sort"
+	"strings"
+	"sync"
 	"time"
 
 	"github.com/chuma-beep/mathua/internal/storage"
 )
 
-const adminAnalyticsCacheSeconds = 30
+const adminAnalyticsCacheTTL = 30 * time.Second
+
+// adminAnalyticsCache is an in-process TTL cache for historical aggregates.
+// The live strip never touches it: live values must be current, and caching
+// them would make the stale badge lie.
+type adminAnalyticsCache struct {
+	mu      sync.Mutex
+	entries map[string]adminAnalyticsCacheEntry
+}
+
+type adminAnalyticsCacheEntry struct {
+	expires time.Time
+	payload []byte
+}
+
+func newAdminAnalyticsCache() *adminAnalyticsCache {
+	return &adminAnalyticsCache{entries: make(map[string]adminAnalyticsCacheEntry)}
+}
+
+func (c *adminAnalyticsCache) get(key string, now time.Time) ([]byte, bool) {
+	if c == nil {
+		return nil, false
+	}
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	entry, ok := c.entries[key]
+	if !ok || !now.Before(entry.expires) {
+		if ok {
+			delete(c.entries, key)
+		}
+		return nil, false
+	}
+	return entry.payload, true
+}
+
+func (c *adminAnalyticsCache) put(key string, payload []byte, now time.Time) {
+	if c == nil {
+		return
+	}
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	if c.entries == nil {
+		c.entries = make(map[string]adminAnalyticsCacheEntry)
+	}
+	// Bound the map: only the handful of range and section combinations the
+	// admin page requests should ever be present.
+	if len(c.entries) > 64 {
+		for k := range c.entries {
+			delete(c.entries, k)
+			if len(c.entries) <= 32 {
+				break
+			}
+		}
+	}
+	c.entries[key] = adminAnalyticsCacheEntry{expires: now.Add(adminAnalyticsCacheTTL), payload: payload}
+}
 
 // adminAnalyticsRange is the resolved window for one historical request.
 // Rolling ranges are measured back from now; daily ranges start at UTC
@@ -19,17 +78,36 @@ type adminAnalyticsRange struct {
 	Bucket time.Duration
 }
 
-// adminAnalyticsResponse embeds the storage projection so the JSON shape and
-// the storage types cannot drift into two definitions.
+// adminAnalyticsResponse is explicit rather than an embedding so a request
+// for one section can omit the others and the payload is genuinely lazy.
 type adminAnalyticsResponse struct {
 	Range             string                     `json:"range"`
+	View              string                     `json:"view,omitempty"`
+	Sections          []string                   `json:"sections,omitempty"`
 	From              time.Time                  `json:"from"`
 	To                time.Time                  `json:"to"`
 	BucketSeconds     int64                      `json:"bucket_seconds"`
 	GeneratedAt       time.Time                  `json:"generated_at"`
 	PartialLastBucket bool                       `json:"partial_last_bucket"`
 	Previous          *storage.AdminMetricTotals `json:"previous,omitempty"`
-	*storage.AdminMetrics
+	PreviousFrom      *time.Time                 `json:"previous_from,omitempty"`
+	PreviousTo        *time.Time                 `json:"previous_to,omitempty"`
+
+	Accounts              *storage.AdminAccountCounts  `json:"accounts,omitempty"`
+	Totals                *storage.AdminMetricTotals   `json:"totals,omitempty"`
+	Activity              []storage.AdminActivityPoint `json:"activity,omitempty"`
+	Signups               []storage.AdminSeriesPoint   `json:"signups,omitempty"`
+	Mastery               []storage.AdminSeriesPoint   `json:"mastery,omitempty"`
+	XP                    []storage.AdminXPPoint       `json:"xp,omitempty"`
+	Reports               []storage.AdminReportPoint   `json:"reports,omitempty"`
+	Quizzes               []storage.AdminSeriesPoint   `json:"quizzes,omitempty"`
+	TimedQuizzes          []storage.AdminSeriesPoint   `json:"timed_quizzes,omitempty"`
+	DiagnosticCompletions []storage.AdminSeriesPoint   `json:"diagnostic_completions,omitempty"`
+	TopConcepts           []storage.AdminConceptMetric `json:"top_concepts,omitempty"`
+	MostReported          []storage.AdminConceptMetric `json:"most_reported,omitempty"`
+	MasteredByConcept     map[string]int               `json:"mastered_by_concept,omitempty"`
+	MasteredCurrent       *int                         `json:"mastered_current,omitempty"`
+	ReportStatus          map[string]int               `json:"report_status,omitempty"`
 }
 
 type adminAnalyticsLiveResponse struct {
@@ -42,6 +120,24 @@ type adminAnalyticsLiveResponse struct {
 	GeneratedAt         time.Time `json:"generated_at"`
 }
 
+// adminAnalyticsViews maps the UI view names to the sections they need. A
+// caller can also pass sections directly; view is a convenience, not a second
+// data path.
+var adminAnalyticsViews = map[string][]string{
+	"overview":       {"accounts", "totals", "activity"},
+	"usage":          {"activity", "signups", "quizzes", "diagnostics"},
+	"learning":       {"mastery", "xp", "quizzes", "concepts"},
+	"operations":     {"reports"},
+	"administration": {"accounts"},
+}
+
+var adminAnalyticsSectionNames = map[string]bool{
+	"all": true, "accounts": true, "totals": true, "activity": true,
+	"signups": true, "mastery": true, "xp": true, "reports": true,
+	"quizzes": true, "timed_quizzes": true, "diagnostics": true,
+	"concepts": true, "status": true,
+}
+
 func (s *Server) handleAdminAnalytics(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		writeError(w, "method not allowed", http.StatusMethodNotAllowed)
@@ -52,36 +148,167 @@ func (s *Server) handleAdminAnalytics(w http.ResponseWriter, r *http.Request) {
 		writeError(w, "analytics are not available", http.StatusNotImplemented)
 		return
 	}
-	window, ok := resolveAdminAnalyticsRange(r.URL.Query().Get("range"), time.Now().UTC())
+	now := time.Now().UTC()
+	window, ok := resolveAdminAnalyticsRange(r.URL.Query().Get("range"), now)
 	if !ok {
 		writeError(w, "invalid range", http.StatusBadRequest)
 		return
 	}
+	view := strings.TrimSpace(r.URL.Query().Get("view"))
+	sections, err := resolveAdminAnalyticsSections(r.URL.Query().Get("sections"), view)
+	if err != nil {
+		writeError(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	cacheKey := adminAnalyticsCacheKey(window.Name, view, sections)
+	if payload, ok := s.analyticsCache.get(cacheKey, now); ok {
+		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("Cache-Control", "private, max-age=30")
+		_, _ = w.Write(payload)
+		return
+	}
+
 	metrics, err := store.AdminMetrics(window.Since, window.Until, window.Bucket)
 	if err != nil {
 		writeError(w, "failed to load analytics", http.StatusInternalServerError)
 		return
 	}
+	resp := buildAdminAnalyticsResponse(window, metrics, sections, view, now)
+
+	// A previous-period comparison is only meaningful for event counts and
+	// only when totals are requested. It is an equal elapsed window, so a
+	// partial current day is never compared with a full prior day.
+	if adminSectionWanted(sections, "totals") {
+		span := window.Until.Sub(window.Since)
+		if span > 0 {
+			prevFrom := window.Since.Add(-span)
+			prevTo := window.Since
+			if previous, prevErr := store.AdminMetrics(prevFrom, prevTo, window.Bucket, "totals"); prevErr == nil {
+				resp.Previous = &previous.Totals
+				resp.PreviousFrom = &prevFrom
+				resp.PreviousTo = &prevTo
+			}
+		}
+	}
+
+	payload, err := json.Marshal(resp)
+	if err != nil {
+		writeError(w, "failed to encode analytics", http.StatusInternalServerError)
+		return
+	}
+	s.analyticsCache.put(cacheKey, payload, now)
+	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Cache-Control", "private, max-age=30")
+	_, _ = w.Write(payload)
+}
+
+func buildAdminAnalyticsResponse(window adminAnalyticsRange, metrics *storage.AdminMetrics, sections []string, view string, now time.Time) adminAnalyticsResponse {
 	resp := adminAnalyticsResponse{
 		Range:             window.Name,
+		View:              view,
+		Sections:          sections,
 		From:              window.Since,
 		To:                window.Until,
 		BucketSeconds:     int64(window.Bucket / time.Second),
-		GeneratedAt:       time.Now().UTC(),
+		GeneratedAt:       now,
 		PartialLastBucket: lastBucketPartial(window),
-		AdminMetrics:      metrics,
 	}
-	// A previous-period comparison is only meaningful for event counts.
-	// Current-state fields such as mastery and report status deliberately do
-	// not appear in Previous; they are not reconstructed history.
-	span := window.Until.Sub(window.Since)
-	if span > 0 {
-		if previous, prevErr := store.AdminMetrics(window.Since.Add(-span), window.Since, window.Bucket); prevErr == nil {
-			resp.Previous = &previous.Totals
+	if adminSectionWanted(sections, "accounts") {
+		resp.Accounts = &metrics.Accounts
+	}
+	if adminSectionWanted(sections, "totals") {
+		resp.Totals = &metrics.Totals
+	}
+	if adminSectionWanted(sections, "activity") {
+		resp.Activity = metrics.Activity
+	}
+	if adminSectionWanted(sections, "signups") {
+		resp.Signups = metrics.Signups
+	}
+	if adminSectionWanted(sections, "mastery") {
+		resp.Mastery = metrics.Mastery
+		resp.MasteredByConcept = metrics.MasteredByConcept
+		resp.MasteredCurrent = &metrics.MasteredCurrent
+	}
+	if adminSectionWanted(sections, "xp") {
+		resp.XP = metrics.XP
+	}
+	if adminSectionWanted(sections, "reports") || adminSectionWanted(sections, "status") {
+		resp.Reports = metrics.Reports
+		resp.ReportStatus = metrics.ReportStatus
+	}
+	if adminSectionWanted(sections, "quizzes") {
+		resp.Quizzes = metrics.Quizzes
+		resp.TimedQuizzes = metrics.TimedQuizzes
+	}
+	if adminSectionWanted(sections, "diagnostics") {
+		resp.DiagnosticCompletions = metrics.DiagnosticCompletions
+	}
+	if adminSectionWanted(sections, "concepts") {
+		resp.TopConcepts = metrics.TopConcepts
+		resp.MostReported = metrics.MostReported
+	}
+	return resp
+}
+
+func adminSectionWanted(sections []string, name string) bool {
+	if len(sections) == 0 {
+		return true
+	}
+	for _, section := range sections {
+		if section == "all" || section == name {
+			return true
 		}
 	}
-	w.Header().Set("Cache-Control", "private, max-age=30")
-	writeJSON(w, resp)
+	return false
+}
+
+func resolveAdminAnalyticsSections(raw, view string) ([]string, error) {
+	if strings.TrimSpace(raw) == "" {
+		if view == "" {
+			return nil, nil
+		}
+		sections, ok := adminAnalyticsViews[view]
+		if !ok {
+			return nil, errInvalidAdminView
+		}
+		return sections, nil
+	}
+	seen := map[string]bool{}
+	out := make([]string, 0, 4)
+	for _, part := range strings.Split(raw, ",") {
+		name := strings.TrimSpace(part)
+		if name == "" {
+			continue
+		}
+		if !adminAnalyticsSectionNames[name] {
+			return nil, errInvalidAdminSection
+		}
+		if !seen[name] {
+			seen[name] = true
+			out = append(out, name)
+		}
+	}
+	sort.Strings(out)
+	if len(out) == 0 {
+		return nil, errInvalidAdminSection
+	}
+	return out, nil
+}
+
+var (
+	errInvalidAdminView    = &adminAnalyticsError{"invalid view"}
+	errInvalidAdminSection = &adminAnalyticsError{"invalid sections"}
+)
+
+type adminAnalyticsError struct{ msg string }
+
+func (e *adminAnalyticsError) Error() string { return e.msg }
+
+func adminAnalyticsCacheKey(rangeName, view string, sections []string) string {
+	copied := append([]string(nil), sections...)
+	sort.Strings(copied)
+	return rangeName + "|" + view + "|" + strings.Join(copied, ",")
 }
 
 func (s *Server) handleAdminAnalyticsLive(w http.ResponseWriter, r *http.Request) {

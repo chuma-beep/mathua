@@ -2060,11 +2060,12 @@ const AdminMetricTotalsSchema = z.object({
 	answers: z.number(),
 	correct: z.number(),
 	new_registrations: z.number(),
+	registered_diagnostic_cohort: z.number(),
 	quiz_completions: z.number(),
 	timed_quiz_completions: z.number(),
 	xp_awarded: z.number(),
 	xp_deducted: z.number(),
-	diagnostic_completed: z.number(),
+	diagnostic_completions: z.number(),
 	reports_opened: z.number(),
 	reports_resolved: z.number(),
 })
@@ -2078,27 +2079,31 @@ const AdminAccountCountsSchema = z.object({
 
 export const AdminAnalyticsSchema = z.object({
 	range: z.string(),
+	view: z.string().optional(),
+	sections: z.array(z.string()).optional(),
 	from: z.string(),
 	to: z.string(),
 	bucket_seconds: z.number(),
 	generated_at: z.string(),
 	partial_last_bucket: z.boolean(),
 	previous: AdminMetricTotalsSchema.nullable().optional(),
-	accounts: AdminAccountCountsSchema,
-	totals: AdminMetricTotalsSchema,
-	activity: z.array(AdminActivityPointSchema),
-	signups: z.array(AdminSeriesPointSchema),
-	mastery: z.array(AdminSeriesPointSchema),
-	xp: z.array(AdminXPPointSchema),
-	reports: z.array(AdminReportPointSchema),
-	quizzes: z.array(AdminSeriesPointSchema),
-	timed_quizzes: z.array(AdminSeriesPointSchema),
-	diagnostics: z.array(AdminSeriesPointSchema),
-	top_concepts: z.array(AdminConceptMetricSchema),
-	most_reported: z.array(AdminConceptMetricSchema),
-	mastered_by_concept: z.record(z.string(), z.number()),
-	mastered_current: z.number(),
-	report_status: z.record(z.string(), z.number()),
+	previous_from: z.string().optional(),
+	previous_to: z.string().optional(),
+	accounts: AdminAccountCountsSchema.optional(),
+	totals: AdminMetricTotalsSchema.optional(),
+	activity: z.array(AdminActivityPointSchema).optional(),
+	signups: z.array(AdminSeriesPointSchema).optional(),
+	mastery: z.array(AdminSeriesPointSchema).optional(),
+	xp: z.array(AdminXPPointSchema).optional(),
+	reports: z.array(AdminReportPointSchema).optional(),
+	quizzes: z.array(AdminSeriesPointSchema).optional(),
+	timed_quizzes: z.array(AdminSeriesPointSchema).optional(),
+	diagnostic_completions: z.array(AdminSeriesPointSchema).optional(),
+	top_concepts: z.array(AdminConceptMetricSchema).optional(),
+	most_reported: z.array(AdminConceptMetricSchema).optional(),
+	mastered_by_concept: z.record(z.string(), z.number()).optional(),
+	mastered_current: z.number().optional(),
+	report_status: z.record(z.string(), z.number()).optional(),
 })
 
 export const AdminAnalyticsLiveSchema = z.object({
@@ -2120,8 +2125,14 @@ export type { AdminMetricDefinition, AdminMetricFormat, AdminMetricKind } from '
 
 export type AdminAnalyticsLive = z.infer<typeof AdminAnalyticsLiveSchema>
 
-export async function adminAnalytics(range: string): Promise<AdminAnalytics> {
-	const res = await authedFetch(`${API_BASE}/api/admin/analytics?range=${encodeURIComponent(range)}`)
+export async function adminAnalytics(
+	range: string,
+	options: { sections?: string[]; view?: string } = {},
+): Promise<AdminAnalytics> {
+	const params = new URLSearchParams({ range })
+	if (options.view) params.set('view', options.view)
+	if (options.sections && options.sections.length > 0) params.set('sections', options.sections.join(','))
+	const res = await authedFetch(`${API_BASE}/api/admin/analytics?${params.toString()}`)
 	if (!res.ok) await throwWithResponse(res, 'Could not load analytics')
 	return validateResponse(AdminAnalyticsSchema, await res.json(), 'adminAnalytics')
 }

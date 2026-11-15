@@ -19,11 +19,12 @@ const analyticsFixture = {
     answers: 2,
     correct: 1,
     new_registrations: 0,
+    registered_diagnostic_cohort: 0,
     quiz_completions: 0,
     timed_quiz_completions: 0,
     xp_awarded: 10,
     xp_deducted: 0,
-    diagnostic_completed: 0,
+    diagnostic_completions: 0,
     reports_opened: 0,
     reports_resolved: 0,
   },
@@ -36,11 +37,12 @@ const analyticsFixture = {
     answers: 3,
     correct: 2,
     new_registrations: 1,
+    registered_diagnostic_cohort: 1,
     quiz_completions: 0,
     timed_quiz_completions: 0,
     xp_awarded: 10,
     xp_deducted: 0,
-    diagnostic_completed: 1,
+    diagnostic_completions: 1,
     reports_opened: 0,
     reports_resolved: 0,
   },
@@ -51,7 +53,7 @@ const analyticsFixture = {
   reports: [{ start: 0, opened: 0, resolved: 0 }],
   quizzes: [emptyPoint],
   timed_quizzes: [emptyPoint],
-  diagnostics: [emptyPoint],
+  diagnostic_completions: [emptyPoint],
   top_concepts: [{ concept_id: 'a', attempts: 3, correct: 2, reports: 0 }],
   most_reported: [],
   mastered_by_concept: { a: 1 },
@@ -91,6 +93,19 @@ describe('admin metric registry', () => {
     expect(adminMetric('guest_activity')?.definition).toMatch(/guest/i)
     expect(adminMetric('unclassified_activity')?.caveat).toMatch(/never folded/i)
   })
+
+  it('puts the retained-rows caveat on every event metric', () => {
+    for (const metric of ADMIN_METRICS.filter(metric => metric.kind === 'event')) {
+      expect(metric.caveat, metric.id).toMatch(/retained rows only/i)
+    }
+  })
+
+  it('labels the diagnostic cohort as current state, not an event rate', () => {
+    const metric = adminMetric('registered_diagnostic_cohort')
+    expect(metric?.kind).toBe('current')
+    expect(metric?.label).toMatch(/completed to date/i)
+    expect(metric?.caveat).toMatch(/cohort, not an event rate/i)
+  })
 })
 
 describe('admin analytics schema', () => {
@@ -106,9 +121,9 @@ describe('admin analytics schema', () => {
     expect(AdminAnalyticsSchema.parse(withoutPrevious).previous).toBeUndefined()
   })
 
-  it('rejects a missing totals block', () => {
-    const { totals: _totals, ...broken } = analyticsFixture
-    expect(() => AdminAnalyticsSchema.parse(broken)).toThrow()
+  it('allows a section response without totals', () => {
+    const { totals: _totals, ...sectionOnly } = analyticsFixture
+    expect(AdminAnalyticsSchema.parse(sectionOnly).totals).toBeUndefined()
   })
 
   it('accepts the live strip', () => {

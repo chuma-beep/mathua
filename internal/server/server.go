@@ -168,10 +168,11 @@ type Server struct {
 	// memory: logins survive restarts and work behind a second replica.
 	// Diag/quiz sessions stay in memory by design (Fix 6): short-lived
 	// capability UUIDs swept hourly; a restart just means a retake.
-	mu           sync.Mutex
-	authLimiter  *rateLimiter
-	writeLimiter *rateLimiter
-	shareLimiter *rateLimiter
+	mu             sync.Mutex
+	analyticsCache *adminAnalyticsCache
+	authLimiter    *rateLimiter
+	writeLimiter   *rateLimiter
+	shareLimiter   *rateLimiter
 	// aiChain and aiQuota are optional. When aiChain is nil the AI endpoints
 	// answer "unavailable" and every deterministic path is unchanged: AI is an
 	// enhancement, never a dependency.
@@ -260,6 +261,7 @@ func New(eng *engine.Engine, repo storage.Repository, auth *auth.AuthService, op
 		diagCreated:          make(map[string]time.Time),
 		quizSessions:         make(map[string]*quiz.Session),
 		quizCreated:          make(map[string]time.Time),
+		analyticsCache:       newAdminAnalyticsCache(),
 		presence:             newPresenceTracker(time.Now),
 		turnstileSecret:      strings.TrimSpace(os.Getenv("TURNSTILE_SECRET")),
 		turnstileURL:         turnstileSiteverifyURL,
