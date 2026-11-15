@@ -176,7 +176,13 @@ export default function MathLiveField({
   }, [value, emit])
 
   useEffect(() => {
-    if (focusRequest > 0) handleRef?.current?.focus()
+    if (focusRequest <= 0) return
+    // A queued request can land after the learner has moved to another control
+    // in the card. Do not pull the caret back from Report or Check.
+    const el = ref.current
+    const active = document.activeElement as HTMLElement | null
+    if (active && active !== document.body && active !== el && !active.closest('.mathua-math-input')) return
+    handleRef?.current?.focus()
   }, [focusRequest, handleRef])
 
   // The learner was typing into the loading input when this chunk arrived. That input
@@ -188,6 +194,11 @@ export default function MathLiveField({
   useEffect(() => {
     const el = ref.current
     if (!el || !autoFocusOnMount.current) return
+    // The chunk can resolve after the learner has already reached another
+    // control, such as Report. Move the caret only when focus is still in the
+    // answer area (or nowhere); React 19 can run this mount effect late.
+    const active = document.activeElement as HTMLElement | null
+    if (active && active !== document.body && active !== el && !active.closest('.mathua-math-input')) return
     el.focus()
     el.executeCommand('moveToMathfieldEnd')
   }, [])

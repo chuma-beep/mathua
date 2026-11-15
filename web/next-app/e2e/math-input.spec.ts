@@ -451,14 +451,26 @@ test.describe('visual integration', () => {
     await focusAnswerField(page)
     await showVirtualKeyboard(page)
 
-    const accent = await page.evaluate(() =>
+    const accentVar = await page.evaluate(() =>
       getComputedStyle(document.body).getPropertyValue('--accent-blue').trim(),
     )
+    expect(accentVar).not.toBe('')
+    // Compare computed colours, not the raw custom-property string. Chromium
+    // serializes `lab(52.5287% .942767 -55.1324)` as `lab(52.5287 0.942767
+    // -55.1324)` on a computed border, so a raw token comparison fails on
+    // formatting while the colour is identical.
+    const accent = await page.evaluate(() => {
+      const probe = document.createElement('span')
+      probe.style.borderTop = '2px solid var(--accent-blue)'
+      document.body.appendChild(probe)
+      const colour = getComputedStyle(probe).borderTopColor
+      probe.remove()
+      return colour
+    })
     const blue = await page.evaluate(() => {
       const field = document.querySelector('math-field[placeholder*="Your answer"]')
       return field ? getComputedStyle(field).borderTopColor : null
     })
-    expect(accent).not.toBe('')
     // ...and it is the one brand blue, not a second shade. `mathua-blue` resolves to the
     // same `--accent-blue`, so this cannot drift from the token the rest of the app uses.
     expect(blue).toBe(accent)

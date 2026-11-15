@@ -253,22 +253,22 @@ describe('LearnStepper done state (PR5)', () => {
       vi.mocked(getDueReviews).mockImplementation(hang)
       vi.mocked(getScores).mockImplementation(hang)
       render(<LearnStepper conceptId={CID} />)
-      await vi.advanceTimersByTimeAsync(10)
+      await act(async () => { await vi.advanceTimersByTimeAsync(10) })
 
       fireEvent.click(screen.getByRole('button', { name: 'Next →' }))
-      await vi.advanceTimersByTimeAsync(10)
+      await act(async () => { await vi.advanceTimersByTimeAsync(10) })
 
       for (let i = 0; i < 2; i++) {
         const inputs = screen.getAllByPlaceholderText(/Your answer/)
         const input = inputs[inputs.length - 1]
         typeAnswer(input, '5')
         fireEvent.click(within(answerCard(input)).getByRole('button', { name: 'Check' }))
-        await vi.advanceTimersByTimeAsync(500)
+        await act(async () => { await vi.advanceTimersByTimeAsync(500) })
       }
 
       expect(screen.getByText(/Complete, 2\/2 correct/)).toBeTruthy()
       // Shelf fetch hangs: past the timeout the failure branch renders.
-      await vi.advanceTimersByTimeAsync(9000)
+      await act(async () => { await vi.advanceTimersByTimeAsync(9000) })
       expect(screen.getByRole('button', { name: 'Practice again' })).toBeTruthy()
       const profile = screen.getByRole('link', { name: 'Back to Profile' })
       expect(profile.getAttribute('href')).toBe('/profile')

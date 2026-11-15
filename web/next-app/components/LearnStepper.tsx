@@ -128,6 +128,10 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
   // No navigation until the click, learner disposes via the alternatives.
   const [nextShelf, setNextShelf] = useState<Shelf | null>(null)
   const [nextLoading, setNextLoading] = useState(false)
+  // Distinguishes "the shelf fetch has not answered yet" from "it answered
+  // with nothing usable". The fallback link below must not render during the
+  // first paint: it points at the picker and looks like a finished answer.
+  const [nextSettled, setNextSettled] = useState(false)
   const [shelfProgress, setShelfProgress] = useState<Record<string, ConceptProgress>>({})
   const nextFetchedRef = useRef(false)
   const seenRef = useRef<string[]>([])
@@ -171,6 +175,22 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
     }
     const card = questionCardRef.current
     if (lastEntryKind !== 'q' || !card) return
+    // A new question card focuses its answer field, but a late effect must not
+    // pull focus away from a control the learner already reached inside this
+    // card, such as Report. React 19 can run this effect after the first click.
+    const active = document.activeElement as HTMLElement | null
+    const answerControl =
+      active?.tagName === 'MATH-FIELD' ||
+      (active?.tagName === 'INPUT' &&
+        (active.getAttribute('aria-label') === 'Your answer' ||
+          active.getAttribute('placeholder') === 'Your answer'))
+    const interactiveInsideCard =
+      active !== null &&
+      active !== document.body &&
+      card.contains(active) &&
+      !answerControl &&
+      ['BUTTON', 'A', 'INPUT', 'TEXTAREA', 'SELECT'].includes(active.tagName)
+    if (interactiveInsideCard) return
     answerFocusRef.current?.focus()
     const topPadding = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0
     const bottomMargin = parseFloat(getComputedStyle(card).scrollMarginBottom) || 0
@@ -233,6 +253,7 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
     setBannerDismissed(false)
     setNextShelf(null)
     setNextLoading(false)
+    setNextSettled(false)
     nextFetchedRef.current = false
     load()
   }, [load])
@@ -267,6 +288,7 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
     if ((!hasDone && !isMastered) || nextFetchedRef.current) return
     nextFetchedRef.current = true
     setNextLoading(true)
+    setNextSettled(false)
     const info = getUserInfo()
     const sid = info?.student_id ?? ''
     const timeout = new Promise<never>((_, reject) => {
@@ -289,7 +311,10 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
       setNextShelf(next)
     }).catch(() => {
       nextFetchedRef.current = false
-    }).finally(() => setNextLoading(false))
+    }).finally(() => {
+      setNextLoading(false)
+      setNextSettled(true)
+    })
   }, [hasDone, isMastered, conceptId])
 
   // Only a real concept change may render a navigating <Link>. A same-concept
@@ -681,7 +706,7 @@ export default function LearnStepper({ conceptId, returnStack = [] }: Props) {
                   Finding next concept…
                 </span>
               )}
-              {!nextLoading && !canContinue && (
+              {!nextLoading && nextSettled && !canContinue && (
                 <Link
                   href="/learn"
                   className="border border-mathua-blue text-mathua-blue hover:bg-mathua-blue-faint px-4 py-2 font-mono text-xs inline-flex items-center min-h-[40px]"

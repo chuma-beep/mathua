@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { act, render, screen, fireEvent, waitFor } from '@testing-library/react'
 import ReportButton from '../components/ReportButton'
 import { submitReport } from '../lib/api'
 
@@ -71,7 +71,7 @@ describe('the report sheet', () => {
 
       await waitFor(() => expect(screen.getByText(/thanks, reported/i)).toBeInTheDocument())
 
-      await vi.advanceTimersByTimeAsync(4100)
+      await act(async () => { await vi.advanceTimersByTimeAsync(4100) })
       expect(screen.getByRole('button', { name: /report a problem/i })).toBeInTheDocument()
     } finally {
       vi.useRealTimers()
