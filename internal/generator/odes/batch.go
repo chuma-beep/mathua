@@ -61,28 +61,44 @@ func (g *bernoulliGen) Generate(ctx generator.GeneratorContext) generator.Proble
 type cauchyEulerGen struct{}
 
 func (g *cauchyEulerGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		a, b   int
-		answer string
-		reason string
+	o := odeBridgeOrdinal(ctx)
+	// Draw the two integer characteristic roots directly. With roots p and q
+	// the characteristic equation m^2 + (a-1)m + b = 0 factors as (m-p)(m-q),
+	// so a = 1-p-q and b = p*q, and the discriminant (p-q)^2 is never negative.
+	p := w4OR(-6, 2)
+	q := p + 1 + w4OR(1, 8)
+	a, b := 1-p-q, p*q
+	facts := map[string]string{
+		"a": strconv.Itoa(a),
+		"b": strconv.Itoa(b),
+		"p": strconv.Itoa(p),
+		"q": strconv.Itoa(q),
 	}
-	claims := []claim{
-		{a: -2, b: 2, answer: "2", reason: "The characteristic equation is m^2 - 3m + 2 = 0 with roots 1 and 2; the larger is 2."},
-		{a: 1, b: -1, answer: "1", reason: "The characteristic equation is m^2 - 1 = 0 with roots -1 and 1; the larger is 1."},
-		{a: -3, b: 4, answer: "2", reason: "The characteristic equation is m^2 - 4m + 4 = 0, a double root at 2."},
-		{a: 2, b: -6, answer: "2", reason: "The characteristic equation is m^2 + m - 6 = (m+3)(m-2), so the larger root is 2."},
-		{a: -5, b: 9, answer: "3", reason: "The characteristic equation is m^2 - 6m + 9 = 0, a double root at 3."},
-		{a: 4, b: 2, answer: "-1", reason: "The characteristic equation is m^2 + 3m + 2 = (m+1)(m+2), so the larger root is -1."},
-	}
-	c := claims[rand.Intn(len(claims))]
-	return generator.Problem{
-		Question: "For the Cauchy-Euler equation x^2 y'' + (" + strconv.Itoa(c.a) +
-			") x y' + (" + strconv.Itoa(c.b) +
-			") y = 0, substitute y = x^m. What is the larger root of m(m-1) + (" +
-			strconv.Itoa(c.a) + ") m + (" + strconv.Itoa(c.b) + ") = 0? (enter a number)",
-		Answer:      c.answer,
-		Explanation: c.reason,
-		Facts:       map[string]string{"a": strconv.Itoa(c.a), "b": strconv.Itoa(c.b), "answer": c.answer},
+	stem := fmt.Sprintf("For the Cauchy-Euler equation x^2 y'' + (%d) x y' + (%d) y = 0, substitute y = x^m.", a, b)
+	characteristic := fmt.Sprintf("m(m-1) + (%d) m + (%d) = 0", a, b)
+	factorised := fmt.Sprintf("(m - (%d))(m - (%d))", p, q)
+	switch o {
+	case 1:
+		facts["ask"] = "larger"
+		return odeBridgeProblem(o,
+			stem+" What is the larger root of "+characteristic+"? (enter a number)",
+			strconv.Itoa(q),
+			fmt.Sprintf("The characteristic equation is m^2 + (%d) m + (%d) = %s, so the larger root is %d.", a-1, b, factorised, q),
+			facts)
+	case 2:
+		facts["ask"] = "smaller"
+		return odeBridgeProblem(o,
+			stem+" What is the smaller root of "+characteristic+"? (enter a number)",
+			strconv.Itoa(p),
+			fmt.Sprintf("The characteristic equation is m^2 + (%d) m + (%d) = %s, so the smaller root is %d.", a-1, b, factorised, p),
+			facts)
+	default:
+		facts["ask"] = "sum"
+		return odeBridgeProblem(o,
+			stem+" The roots are the exponents in y = x^m. What is the sum of the two roots of "+characteristic+"? (enter a number)",
+			strconv.Itoa(p+q),
+			fmt.Sprintf("The characteristic equation is m^2 + (%d) m + (%d) = %s, whose roots %d and %d sum to %d.", a-1, b, factorised, p, q, p+q),
+			facts)
 	}
 }
 
@@ -103,54 +119,43 @@ func (g *reductionGen) Generate(ctx generator.GeneratorContext) generator.Proble
 type powerSeriesGen struct{}
 
 func (g *powerSeriesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question string
-		answer   string
-		kind     string
-		k        int
-		y0       int
-		reason   string
-	}
-	claims := []claim{
-		{
-			question: "For y' = 2y with y(0) = 1, write the solution as a power series sum a_n x^n. What is a_2? (enter a number)",
-			answer:   "2", kind: "first", k: 2, y0: 1,
-			reason: "The solution is e^(2x) = sum (2x)^n/n!, so a_2 = 2^2/2 = 2.",
-		},
-		{
-			question: "For y' = 3y with y(0) = 1, write the solution as a power series sum a_n x^n. What is a_2? (enter a decimal)",
-			answer:   "4.5", kind: "first", k: 3, y0: 1,
-			reason: "The solution is e^(3x), so a_2 = 3^2/2 = 4.5.",
-		},
-		{
-			question: "For y' = y with y(0) = 2, write the solution as a power series sum a_n x^n. What is a_2? (enter a number)",
-			answer:   "1", kind: "first", k: 1, y0: 2,
-			reason: "The solution is 2e^x = 2 sum x^n/n!, so a_2 = 2/2 = 1.",
-		},
-		{
-			question: "For y'' + y = 0 with y(0) = 1 and y'(0) = 0, the solution is cos x = sum a_n x^n. What is a_2? (enter a decimal)",
-			answer:   "-0.5", kind: "cos", k: 1, y0: 1,
-			reason: "The cosine series is 1 - x^2/2 + ..., so a_2 = -1/2 = -0.5.",
-		},
-		{
-			question: "For y'' - y = 0 with y(0) = 1 and y'(0) = 0, the solution is cosh x = sum a_n x^n. What is a_2? (enter a decimal)",
-			answer:   "0.5", kind: "cosh", k: 1, y0: 1,
-			reason: "The cosh series is 1 + x^2/2 + ..., so a_2 = 1/2 = 0.5.",
-		},
-		{
-			question: "For y' = 4y with y(0) = 1, write the solution as a power series sum a_n x^n. What is a_2? (enter a number)",
-			answer:   "8", kind: "first", k: 4, y0: 1,
-			reason: "The solution is e^(4x), so a_2 = 4^2/2 = 8.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	return generator.Problem{
-		Question:    c.question,
-		Answer:      c.answer,
-		Explanation: c.reason,
-		Facts: map[string]string{
-			"kind": c.kind, "k": strconv.Itoa(c.k), "y0": strconv.Itoa(c.y0), "answer": c.answer,
-		},
+	o := odeBridgeOrdinal(ctx)
+	facts := map[string]string{}
+	switch o {
+	case 1:
+		k, y0 := w4OR(2, 7), w4OR(1, 3)
+		answer := float64(y0*k*k) / 2
+		facts["kind"] = "first"
+		facts["k"] = strconv.Itoa(k)
+		facts["y0"] = strconv.Itoa(y0)
+		return odeBridgeProblem(o,
+			fmt.Sprintf("For y' = %d y with y(0) = %d, write the solution as a power series sum a_n x^n. What is a_2? (enter a decimal)", k, y0),
+			strconv.FormatFloat(answer, 'f', -1, 64),
+			fmt.Sprintf("The solution is %d e^(%d x) = %d sum (%d x)^n/n!, so a_2 = %d times %d squared over 2 = %s.",
+				y0, k, y0, k, y0, k, strconv.FormatFloat(answer, 'f', -1, 64)),
+			facts)
+	case 2:
+		k := w4OR(1, 12)
+		answer := -float64(k*k) / 2
+		facts["kind"] = "cos"
+		facts["k"] = strconv.Itoa(k)
+		facts["y0"] = "1"
+		return odeBridgeProblem(o,
+			fmt.Sprintf("For y'' + %d y = 0 with y(0) = 1 and y'(0) = 0, the solution is cos(%d x) = sum a_n x^n. What is a_2? (enter a decimal)", k*k, k),
+			strconv.FormatFloat(answer, 'f', -1, 64),
+			fmt.Sprintf("The cosine series is 1 - (%d x)^2/2 + ..., so a_2 = -%d/2 = %s.", k, k*k, strconv.FormatFloat(answer, 'f', -1, 64)),
+			facts)
+	default:
+		k := w4OR(1, 12)
+		answer := float64(k*k) / 2
+		facts["kind"] = "cosh"
+		facts["k"] = strconv.Itoa(k)
+		facts["y0"] = "1"
+		return odeBridgeProblem(o,
+			fmt.Sprintf("For y'' - %d y = 0 with y(0) = 1 and y'(0) = 0, the solution is cosh(%d x) = sum a_n x^n. What is a_2? (enter a decimal)", k*k, k),
+			strconv.FormatFloat(answer, 'f', -1, 64),
+			fmt.Sprintf("The cosh series is 1 + (%d x)^2/2 + ..., so a_2 = %d/2 = %s.", k, k*k, strconv.FormatFloat(answer, 'f', -1, 64)),
+			facts)
 	}
 }
 
@@ -180,57 +185,64 @@ func (g *stepGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 
 type springGen struct{}
 
+// odeQuarterTurn returns cos and sin of q times pi over 2 for an integer q.
+// Every evaluation time in this generator is a quarter turn of the oscillation,
+// so the solution is an integer without any trigonometry in floating point.
+func odeQuarterTurn(q int) (int, int) {
+	switch ((q % 4) + 4) % 4 {
+	case 0:
+		return 1, 0
+	case 1:
+		return 0, 1
+	case 2:
+		return -1, 0
+	default:
+		return 0, -1
+	}
+}
+
 func (g *springGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question string
-		answer   string
-		omega2   int
-		y0, v0   int
-		tLabel   string
-		reason   string
+	o := odeBridgeOrdinal(ctx)
+	var omega, y0, v0, turns int
+	var label string
+	switch o {
+	case 1:
+		s := w4OR(1, 6)
+		omega = 2 * s
+		y0 = w4OR(0, 5)
+		v0 = omega * w4OR(-3, 3)
+		turns = s
+		label = "pi/4"
+	case 2:
+		s := w4OR(1, 4)
+		omega = 3 * s
+		y0 = w4OR(0, 5)
+		v0 = omega * w4OR(-3, 3)
+		turns = s
+		label = "pi/6"
+	default:
+		s := w4OR(1, 6)
+		omega = s
+		y0 = w4OR(0, 6)
+		v0 = omega * w4OR(-3, 3)
+		turns = 2 * s
+		label = "pi"
 	}
-	claims := []claim{
-		{
-			question: "Solve y'' + 4y = 0 with y(0) = 0 and y'(0) = 2. What is y(pi/4)? (enter a number)",
-			answer:   "1", omega2: 4, y0: 0, v0: 2, tLabel: "pi/4",
-			reason: "The solution is sin(2t), and sin(pi/2) = 1.",
-		},
-		{
-			question: "Solve y'' + y = 0 with y(0) = 1 and y'(0) = 0. What is y(pi)? (enter a number)",
-			answer:   "-1", omega2: 1, y0: 1, v0: 0, tLabel: "pi",
-			reason: "The solution is cos(t), and cos(pi) = -1.",
-		},
-		{
-			question: "Solve y'' + 4y = 0 with y(0) = 2 and y'(0) = 0. What is y(pi/4)? (enter a number)",
-			answer:   "0", omega2: 4, y0: 2, v0: 0, tLabel: "pi/4",
-			reason: "The solution is 2cos(2t), and cos(pi/2) = 0.",
-		},
-		{
-			question: "Solve y'' + 9y = 0 with y(0) = 0 and y'(0) = 3. What is y(pi/6)? (enter a number)",
-			answer:   "1", omega2: 9, y0: 0, v0: 3, tLabel: "pi/6",
-			reason: "The solution is sin(3t), and sin(pi/2) = 1.",
-		},
-		{
-			question: "Solve y'' + 9y = 0 with y(0) = 1 and y'(0) = 0. What is y(pi/6)? (enter a number)",
-			answer:   "0", omega2: 9, y0: 1, v0: 0, tLabel: "pi/6",
-			reason: "The solution is cos(3t), and cos(pi/2) = 0.",
-		},
-		{
-			question: "Solve y'' + 4y = 0 with y(0) = 0 and y'(0) = 4. What is y(pi/4)? (enter a number)",
-			answer:   "2", omega2: 4, y0: 0, v0: 4, tLabel: "pi/4",
-			reason: "The solution is 2sin(2t), and sin(pi/2) = 1, so the value is 2.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	return generator.Problem{
-		Question:    c.question,
-		Answer:      c.answer,
-		Explanation: c.reason,
-		Facts: map[string]string{
-			"omega2": strconv.Itoa(c.omega2), "y0": strconv.Itoa(c.y0),
-			"v0": strconv.Itoa(c.v0), "t": c.tLabel, "answer": c.answer,
-		},
-	}
+	cosine, sine := odeQuarterTurn(turns)
+	amplitude := v0 / omega
+	answer := y0*cosine + amplitude*sine
+	return odeBridgeProblem(o,
+		fmt.Sprintf("Solve y'' + %d y = 0 with y(0) = %d and y'(0) = %d. What is y(%s)? (enter a number)",
+			omega*omega, y0, v0, label),
+		strconv.Itoa(answer),
+		fmt.Sprintf("The solution is %d cos(%d t) + (%d) sin(%d t). At t = %s the cosine equals %d and the sine equals %d, so y = %d.",
+			y0, omega, amplitude, omega, label, cosine, sine, answer),
+		map[string]string{
+			"omega2": strconv.Itoa(omega * omega),
+			"y0":     strconv.Itoa(y0),
+			"v0":     strconv.Itoa(v0),
+			"t":      label,
+		})
 }
 
 // ---------------------------------------------------------------------------
@@ -240,54 +252,46 @@ func (g *springGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type mixingGen struct{}
 
 func (g *mixingGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question string
-		answer   string
-		v, rate  int
-		c        float64
-		reason   string
+	o := odeBridgeOrdinal(ctx)
+	// The volume is a multiple of 20 and the concentration a multiple of 5
+	// hundredths, so V*c is an integer and the grader never sees float noise.
+	volume := 20 * w4OR(1, 20)
+	rate := w4OR(2, 20)
+	hundredths := []int{10, 20, 25, 40, 50}[rand.Intn(5)]
+	answer := volume * hundredths / 100
+	grams := hundredths * 10
+	facts := map[string]string{
+		"v":      strconv.Itoa(volume),
+		"rate":   strconv.Itoa(rate),
+		"c":      odeDecimal(float64(hundredths) / 100),
+		"answer": strconv.Itoa(answer),
 	}
-	claims := []claim{
-		{
-			question: "A tank holds 100 litres of water. Brine with 0.2 kg/L enters at 5 L/min and the well-mixed solution leaves at 5 L/min. What is the limiting amount of salt in the tank? (enter a number)",
-			answer:   "20", v: 100, rate: 5, c: 0.2,
-			reason: "At equilibrium inflow equals outflow: 5(0.2) = 5Q/100, so Q = 100(0.2) = 20.",
-		},
-		{
-			question: "A tank holds 100 litres of water. Brine with 0.1 kg/L enters at 10 L/min and the well-mixed solution leaves at 10 L/min. What is the limiting amount of salt in the tank? (enter a number)",
-			answer:   "10", v: 100, rate: 10, c: 0.1,
-			reason: "The equilibrium is Q = V c = 100(0.1) = 10.",
-		},
-		{
-			question: "A tank holds 200 litres of water. Brine with 0.5 kg/L enters at 10 L/min and the well-mixed solution leaves at 10 L/min. What is the limiting amount of salt in the tank? (enter a number)",
-			answer:   "100", v: 200, rate: 10, c: 0.5,
-			reason: "The equilibrium is Q = V c = 200(0.5) = 100.",
-		},
-		{
-			question: "A tank holds 50 litres of water. Brine with 0.4 kg/L enters at 5 L/min and the well-mixed solution leaves at 5 L/min. What is the limiting amount of salt in the tank? (enter a number)",
-			answer:   "20", v: 50, rate: 5, c: 0.4,
-			reason: "The equilibrium is Q = V c = 50(0.4) = 20.",
-		},
-		{
-			question: "A tank holds 100 litres of water. Brine with 0.3 kg/L enters at 2 L/min and the well-mixed solution leaves at 2 L/min. What is the limiting amount of salt in the tank? (enter a number)",
-			answer:   "30", v: 100, rate: 2, c: 0.3,
-			reason: "The equilibrium is Q = V c = 100(0.3) = 30; the flow rate cancels.",
-		},
-		{
-			question: "A tank holds 400 litres of water. Brine with 0.1 kg/L enters at 20 L/min and the well-mixed solution leaves at 20 L/min. What is the limiting amount of salt in the tank? (enter a number)",
-			answer:   "40", v: 400, rate: 20, c: 0.1,
-			reason: "The equilibrium is Q = V c = 400(0.1) = 40.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	return generator.Problem{
-		Question:    c.question,
-		Answer:      c.answer,
-		Explanation: c.reason,
-		Facts: map[string]string{
-			"v": strconv.Itoa(c.v), "rate": strconv.Itoa(c.rate),
-			"c": strconv.FormatFloat(c.c, 'g', -1, 64), "answer": c.answer,
-		},
+	switch o {
+	case 1:
+		return odeBridgeProblem(o,
+			fmt.Sprintf("A tank holds %d litres of water. Brine with %s kg/L enters at %d L/min and the well-mixed solution leaves at the same rate. What is the limiting amount of salt in the tank? (enter a number)",
+				volume, odeDecimal(float64(hundredths)/100), rate),
+			strconv.Itoa(answer),
+			fmt.Sprintf("At equilibrium inflow equals outflow: %d times %s equals %d times Q over %d, so Q = %d times %s = %d.",
+				rate, odeDecimal(float64(hundredths)/100), rate, volume, volume, odeDecimal(float64(hundredths)/100), answer),
+			facts)
+	case 2:
+		initial := w4OR(1, 30)
+		return odeBridgeProblem(o,
+			fmt.Sprintf("A tank holds %d litres and starts with %d kg of salt dissolved in it. Brine with %s kg/L enters at %d L/min and the well-mixed solution leaves at the same rate. What is the limiting amount of salt in the tank? (enter a number)",
+				volume, initial, odeDecimal(float64(hundredths)/100), rate),
+			strconv.Itoa(answer),
+			fmt.Sprintf("The initial %d kg washes out or grows towards the equilibrium, which depends only on the inflow: Q = %d times %s = %d.",
+				initial, volume, odeDecimal(float64(hundredths)/100), answer),
+			facts)
+	default:
+		return odeBridgeProblem(o,
+			fmt.Sprintf("Brine with %d grams per litre enters a %d-litre tank at %d L/min and the well-mixed solution leaves at the same rate. What is the limiting amount of salt in the tank, in kilograms? (enter a number)",
+				grams, volume, rate),
+			strconv.Itoa(answer),
+			fmt.Sprintf("%d grams per litre is %s kg/L, so the equilibrium is Q = %d times %s = %d kg.",
+				grams, odeDecimal(float64(hundredths)/100), volume, odeDecimal(float64(hundredths)/100), answer),
+			facts)
 	}
 }
 
@@ -298,55 +302,42 @@ func (g *mixingGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type predatorPreyGen struct{}
 
 func (g *predatorPreyGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		question string
-		answer   string
-		a, b, c  int
-		d        int
-		ask      string
-		reason   string
+	o := odeBridgeOrdinal(ctx)
+	// Draw the two coordinates of the coexistence equilibrium, then choose the
+	// coefficients that produce them: x* = c/d and y* = a/b exactly.
+	d := w4OR(2, 5)
+	xStar := w4OR(1, 8)
+	c := d * xStar
+	b := w4OR(1, 5)
+	yStar := w4OR(1, 8)
+	a := b * yStar
+	facts := map[string]string{
+		"a": strconv.Itoa(a), "b": strconv.Itoa(b),
+		"c": strconv.Itoa(c), "d": strconv.Itoa(d),
 	}
-	claims := []claim{
-		{
-			question: "For the Lotka-Volterra system x' = ax - bxy, y' = -cy + dxy with a = 2, b = 1, c = 3 and d = 1, what is the x-coordinate c/d of the nonzero equilibrium? (enter a number)",
-			answer:   "3", a: 2, b: 1, c: 3, d: 1, ask: "x",
-			reason: "Setting y' = 0 gives x = c/d = 3/1 = 3.",
-		},
-		{
-			question: "For the Lotka-Volterra system x' = ax - bxy, y' = -cy + dxy with a = 4, b = 2, c = 2 and d = 1, what is the y-coordinate a/b of the nonzero equilibrium? (enter a number)",
-			answer:   "2", a: 4, b: 2, c: 2, d: 1, ask: "y",
-			reason: "Setting x' = 0 gives y = a/b = 4/2 = 2.",
-		},
-		{
-			question: "For the Lotka-Volterra system x' = ax - bxy, y' = -cy + dxy with a = 1, b = 1, c = 5 and d = 1, what is the x-coordinate c/d of the nonzero equilibrium? (enter a number)",
-			answer:   "5", a: 1, b: 1, c: 5, d: 1, ask: "x",
-			reason: "Setting y' = 0 gives x = c/d = 5.",
-		},
-		{
-			question: "For the Lotka-Volterra system x' = ax - bxy, y' = -cy + dxy with a = 6, b = 3, c = 4 and d = 2, what is the x-coordinate c/d of the nonzero equilibrium? (enter a number)",
-			answer:   "2", a: 6, b: 3, c: 4, d: 2, ask: "x",
-			reason: "Setting y' = 0 gives x = c/d = 4/2 = 2.",
-		},
-		{
-			question: "For the Lotka-Volterra system x' = ax - bxy, y' = -cy + dxy with a = 3, b = 1, c = 1 and d = 1, what is the y-coordinate a/b of the nonzero equilibrium? (enter a number)",
-			answer:   "3", a: 3, b: 1, c: 1, d: 1, ask: "y",
-			reason: "Setting x' = 0 gives y = a/b = 3.",
-		},
-		{
-			question: "For the Lotka-Volterra system x' = ax - bxy, y' = -cy + dxy with a = 5, b = 1, c = 10 and d = 2, what is the x-coordinate c/d of the nonzero equilibrium? (enter a number)",
-			answer:   "5", a: 5, b: 1, c: 10, d: 2, ask: "x",
-			reason: "Setting y' = 0 gives x = c/d = 10/2 = 5.",
-		},
-	}
-	c := claims[rand.Intn(len(claims))]
-	return generator.Problem{
-		Question:    c.question,
-		Answer:      c.answer,
-		Explanation: c.reason,
-		Facts: map[string]string{
-			"a": strconv.Itoa(c.a), "b": strconv.Itoa(c.b),
-			"c": strconv.Itoa(c.c), "d": strconv.Itoa(c.d), "ask": c.ask, "answer": c.answer,
-		},
+	system := fmt.Sprintf("For the Lotka-Volterra system x' = ax - bxy, y' = -cy + dxy with a = %d, b = %d, c = %d and d = %d", a, b, c, d)
+	switch o {
+	case 1:
+		facts["ask"] = "x"
+		return odeBridgeProblem(o,
+			system+", what is the x-coordinate c/d of the nonzero equilibrium? (enter a number)",
+			strconv.Itoa(xStar),
+			fmt.Sprintf("Setting y' = 0 gives x = c/d = %d/%d = %d.", c, d, xStar),
+			facts)
+	case 2:
+		facts["ask"] = "y"
+		return odeBridgeProblem(o,
+			system+", what is the y-coordinate a/b of the nonzero equilibrium? (enter a number)",
+			strconv.Itoa(yStar),
+			fmt.Sprintf("Setting x' = 0 gives y = a/b = %d/%d = %d.", a, b, yStar),
+			facts)
+	default:
+		facts["ask"] = "x"
+		return odeBridgeProblem(o,
+			system+", the nonzero equilibrium is the coexistence state. What is the prey population there? (enter a number)",
+			strconv.Itoa(xStar),
+			fmt.Sprintf("At coexistence y' = 0, so the prey population is x = c/d = %d/%d = %d.", c, d, xStar),
+			facts)
 	}
 }
 

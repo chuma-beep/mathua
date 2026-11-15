@@ -214,7 +214,17 @@ func TestBatchCauchyEulerRecomputes(t *testing.T) {
 		}
 		root1 := (-bb + math.Sqrt(disc)) / 2
 		root2 := (-bb - math.Sqrt(disc)) / 2
-		want := math.Max(root1, root2)
+		var want float64
+		switch p.Facts["ask"] {
+		case "larger":
+			want = math.Max(root1, root2)
+		case "smaller":
+			want = math.Min(root1, root2)
+		case "sum":
+			want = root1 + root2
+		default:
+			t.Fatalf("cauchy-euler: unknown ask %q", p.Facts["ask"])
+		}
 		answer, err := strconv.ParseFloat(p.Answer, 64)
 		if err != nil {
 			t.Fatalf("cauchy-euler: non-numeric answer %q", p.Answer)
