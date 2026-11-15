@@ -23,7 +23,10 @@ const ASSET_CACHE = `mathua-assets-${VERSION}`
 // redirected cached response is invalid for navigations.
 const PRECACHE_URLS = ['/', '/offline']
 
-const ASSET_PATTERN = /\/_next\/static\/|\/diagrams\/|\/icons\/|\.(?:png|jpe?g|gif|svg|ico|webp|woff2?|ttf|css|js|webmanifest)$/i
+// `.txt` covers the per-segment payloads Next 16 emits for client navigation
+// (`__next._full.txt`, `__next.learn.__PAGE__.txt`). They are static per build
+// and must be cached, or a link click fails offline even when its HTML is cached.
+const ASSET_PATTERN = /\/_next\/static\/|\/diagrams\/|\/icons\/|\.(?:png|jpe?g|gif|svg|ico|webp|woff2?|ttf|css|js|webmanifest|txt)$/i
 
 self.addEventListener('install', event => {
   event.waitUntil(
