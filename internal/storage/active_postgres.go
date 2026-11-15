@@ -12,8 +12,8 @@ func (s *PostgresStore) ActiveLearnerCounts(since, dayStart time.Time) (int, int
 	var activeNow, activeNowGuests int
 	if err := s.db.QueryRow(
 		`SELECT
-		   COUNT(DISTINCT CASE WHEN student_id NOT LIKE 'guest_%' THEN student_id END),
-		   COUNT(DISTINCT CASE WHEN student_id LIKE 'guest_%' THEN student_id END)
+		   COUNT(DISTINCT CASE WHEN substr(student_id, 1, 6) <> 'guest_' THEN student_id END),
+		   COUNT(DISTINCT CASE WHEN substr(student_id, 1, 6) = 'guest_' THEN student_id END)
 		 FROM active_sessions
 		 WHERE updated_at::timestamptz >= $1`,
 		since.UTC()).Scan(&activeNow, &activeNowGuests); err != nil {
@@ -23,8 +23,8 @@ func (s *PostgresStore) ActiveLearnerCounts(since, dayStart time.Time) (int, int
 	var activeToday, activeTodayGuests int
 	if err := s.db.QueryRow(
 		`SELECT
-		   COUNT(DISTINCT CASE WHEN student_id NOT LIKE 'guest_%' THEN student_id END),
-		   COUNT(DISTINCT CASE WHEN student_id LIKE 'guest_%' THEN student_id END)
+		   COUNT(DISTINCT CASE WHEN substr(student_id, 1, 6) <> 'guest_' THEN student_id END),
+		   COUNT(DISTINCT CASE WHEN substr(student_id, 1, 6) = 'guest_' THEN student_id END)
 		 FROM attempts
 		 WHERE timestamp::timestamptz >= $1`,
 		dayStart.UTC()).Scan(&activeToday, &activeTodayGuests); err != nil {

@@ -226,6 +226,7 @@ CREATE INDEX IF NOT EXISTS idx_sessions_student  ON sessions(student_id);
 CREATE INDEX IF NOT EXISTS idx_attempts_session  ON attempts(session_id);
 CREATE INDEX IF NOT EXISTS idx_attempts_student  ON attempts(student_id, timestamp);
 CREATE INDEX IF NOT EXISTS idx_attempts_cover    ON attempts(student_id, concept_id, timestamp);
+CREATE INDEX IF NOT EXISTS idx_attempts_timestamp ON attempts(timestamp);
 
 CREATE TABLE IF NOT EXISTS questions (
     id         SERIAL PRIMARY KEY,
@@ -791,6 +792,7 @@ func pgAuthMigrate(db *sql.DB) error {
 		"ALTER TABLE notification_preferences ADD COLUMN IF NOT EXISTS digest TEXT NOT NULL DEFAULT 'immediate'",
 		"CREATE INDEX IF NOT EXISTS idx_students_email ON students(email)",
 		"CREATE INDEX IF NOT EXISTS idx_students_google_id ON students(google_id)",
+		"CREATE INDEX IF NOT EXISTS idx_attempts_timestamp ON attempts(timestamp)",
 		"ALTER TABLE concept_progress ADD COLUMN IF NOT EXISTS weakness_score DOUBLE PRECISION NOT NULL DEFAULT 0",
 		"ALTER TABLE concept_progress ADD COLUMN IF NOT EXISTS placement_seeded INTEGER NOT NULL DEFAULT 0",
 		"ALTER TABLE concept_progress ADD COLUMN IF NOT EXISTS is_provisional INTEGER NOT NULL DEFAULT 0",

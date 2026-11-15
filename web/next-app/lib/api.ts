@@ -2019,6 +2019,119 @@ export async function adminOverview(): Promise<AdminOverview> {
 	return validateResponse(AdminOverviewSchema, await res.json(), 'adminOverview')
 }
 
+const AdminActivityPointSchema = z.object({
+	start: z.number(),
+	registered: z.number(),
+	guests: z.number(),
+	unclassified: z.number(),
+	answers: z.number(),
+	correct: z.number(),
+})
+
+const AdminSeriesPointSchema = z.object({
+	start: z.number(),
+	value: z.number(),
+})
+
+const AdminXPPointSchema = z.object({
+	start: z.number(),
+	awarded: z.number(),
+	deducted: z.number(),
+})
+
+const AdminReportPointSchema = z.object({
+	start: z.number(),
+	opened: z.number(),
+	resolved: z.number(),
+})
+
+const AdminConceptMetricSchema = z.object({
+	concept_id: z.string(),
+	attempts: z.number(),
+	correct: z.number(),
+	reports: z.number(),
+})
+
+const AdminMetricTotalsSchema = z.object({
+	unique_learners: z.number(),
+	unique_registered: z.number(),
+	unique_guests: z.number(),
+	unique_unclassified: z.number(),
+	answers: z.number(),
+	correct: z.number(),
+	new_registrations: z.number(),
+	quiz_completions: z.number(),
+	timed_quiz_completions: z.number(),
+	xp_awarded: z.number(),
+	xp_deducted: z.number(),
+	diagnostic_completed: z.number(),
+	reports_opened: z.number(),
+	reports_resolved: z.number(),
+})
+
+const AdminAccountCountsSchema = z.object({
+	total: z.number(),
+	registered: z.number(),
+	guest: z.number(),
+	unclassified: z.number(),
+})
+
+export const AdminAnalyticsSchema = z.object({
+	range: z.string(),
+	from: z.string(),
+	to: z.string(),
+	bucket_seconds: z.number(),
+	generated_at: z.string(),
+	partial_last_bucket: z.boolean(),
+	previous: AdminMetricTotalsSchema.nullable().optional(),
+	accounts: AdminAccountCountsSchema,
+	totals: AdminMetricTotalsSchema,
+	activity: z.array(AdminActivityPointSchema),
+	signups: z.array(AdminSeriesPointSchema),
+	mastery: z.array(AdminSeriesPointSchema),
+	xp: z.array(AdminXPPointSchema),
+	reports: z.array(AdminReportPointSchema),
+	quizzes: z.array(AdminSeriesPointSchema),
+	timed_quizzes: z.array(AdminSeriesPointSchema),
+	diagnostics: z.array(AdminSeriesPointSchema),
+	top_concepts: z.array(AdminConceptMetricSchema),
+	most_reported: z.array(AdminConceptMetricSchema),
+	mastered_by_concept: z.record(z.string(), z.number()),
+	mastered_current: z.number(),
+	report_status: z.record(z.string(), z.number()),
+})
+
+export const AdminAnalyticsLiveSchema = z.object({
+	online_now: z.number(),
+	online_window_seconds: z.number(),
+	practicing_now: z.number(),
+	guest_practice_now: z.number(),
+	answers_15m: z.number(),
+	active_sessions: z.number(),
+	generated_at: z.string(),
+})
+
+export type AdminAnalytics = z.infer<typeof AdminAnalyticsSchema>
+// The registry is part of the admin analytics contract. Phase 1a has no view
+// to import it directly yet, so the API module re-exports it and Phase 1b can
+// move the import to the components that render the definitions.
+export { ADMIN_METRICS, adminMetric } from './adminMetrics'
+export type { AdminMetricDefinition, AdminMetricFormat, AdminMetricKind } from './adminMetrics'
+
+export type AdminAnalyticsLive = z.infer<typeof AdminAnalyticsLiveSchema>
+
+export async function adminAnalytics(range: string): Promise<AdminAnalytics> {
+	const res = await authedFetch(`${API_BASE}/api/admin/analytics?range=${encodeURIComponent(range)}`)
+	if (!res.ok) await throwWithResponse(res, 'Could not load analytics')
+	return validateResponse(AdminAnalyticsSchema, await res.json(), 'adminAnalytics')
+}
+
+export async function adminAnalyticsLive(): Promise<AdminAnalyticsLive> {
+	const res = await authedFetch(`${API_BASE}/api/admin/analytics/live`, { cache: 'no-store' })
+	if (!res.ok) await throwWithResponse(res, 'Could not load live analytics')
+	return validateResponse(AdminAnalyticsLiveSchema, await res.json(), 'adminAnalyticsLive')
+}
+
 // The account page reads one response: profile, role history, counts and the reports that
 // account filed. Splitting it into four requests would give the page four ways to half-load,
 // and the counts would disagree with the list while the slower one was still arriving.

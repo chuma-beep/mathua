@@ -219,6 +219,7 @@ CREATE INDEX IF NOT EXISTS idx_sessions_student  ON sessions(student_id);
 CREATE INDEX IF NOT EXISTS idx_attempts_session  ON attempts(session_id);
 CREATE INDEX IF NOT EXISTS idx_attempts_student  ON attempts(student_id, timestamp);
 CREATE INDEX IF NOT EXISTS idx_attempts_cover    ON attempts(student_id, concept_id, timestamp);
+CREATE INDEX IF NOT EXISTS idx_attempts_timestamp ON attempts(timestamp);
 
 CREATE TABLE IF NOT EXISTS questions (
     id         INTEGER PRIMARY KEY AUTOINCREMENT,

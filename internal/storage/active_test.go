@@ -86,6 +86,43 @@ func TestActiveLearnerCounts_SplitsGuestsAndWindows(t *testing.T) {
 	}
 }
 
+// TestActiveLearnerCounts_DoesNotTreatGuestXAsGuest pins the wildcard fix.
+// `LIKE 'guest_%'` treats `_` as one character, so it classified guestX as a
+// guest. The prefix test must be exact.
+func TestActiveLearnerCounts_DoesNotTreatGuestXAsGuest(t *testing.T) {
+	store := newTestStore(t)
+	now := time.Date(2026, 10, 24, 12, 0, 0, 0, time.UTC)
+
+	uuid, err := store.CreateStudent("uuid guest")
+	if err != nil {
+		t.Fatalf("create uuid guest: %v", err)
+	}
+	guestX, err := store.ClaimGuestStudent("guestX", "guestX")
+	if err != nil {
+		t.Fatalf("create guestX: %v", err)
+	}
+	guest, err := store.ClaimGuestStudent("guest_abc", "real guest")
+	if err != nil {
+		t.Fatalf("create real guest: %v", err)
+	}
+
+	for _, st := range []*Student{uuid, guestX, guest} {
+		sid := "sess-prefix-" + st.ID
+		if err := store.EnsureSession(sid, st.ID); err != nil {
+			t.Fatalf("session %s: %v", st.ID, err)
+		}
+		seedActiveSession(t, store, sid, st.ID, "att-prefix-"+st.ID, now)
+	}
+
+	activeNow, guests, _, _, err := store.ActiveLearnerCounts(now.Add(-15*time.Minute), now)
+	if err != nil {
+		t.Fatalf("counts: %v", err)
+	}
+	if activeNow != 2 || guests != 1 {
+		t.Fatalf("active now = %d accounts / %d guests, want 2/1", activeNow, guests)
+	}
+}
+
 // seedActiveSession writes the row EnsureSession leaves behind, with the fields
 // it fills in for itself. The sweep is tested at a fixed instant, so the stale
 // seat needs an updated_at two hours old and no exported method can express
