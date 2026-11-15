@@ -501,30 +501,93 @@ func (g *lawCosinesGen) Generate(ctx generator.GeneratorContext) generator.Probl
 	}
 }
 
+// trigQA is one fixed written question with its answer and its reasoning. The
+// variety pass keeps the strongest written questions from a pool and places
+// parameterised forms beside them, so a branch is never a table of eight.
+type trigQA struct {
+	question string
+	answer   string
+	exp      string
+}
+
 // arctan: compute arctan values and properties
 type arctanGen struct{}
 
+// arctanExactArgs are the arguments whose arctangent is a whole number of
+// degrees. There are only finitely many, so this half of the supply is a table;
+// the reciprocal and telescoping identities below add the parameterised half.
+var arctanExactArgs = []struct{ arg, deg string }{
+	{"0", "0"},
+	{"1", "45"},
+	{"-1", "-45"},
+	{"\\sqrt{3}", "60"},
+	{"-\\sqrt{3}", "-60"},
+	{"1/\\sqrt{3}", "30"},
+	{"-1/\\sqrt{3}", "-30"},
+	{"\\sqrt{3}/3", "30"},
+	{"-\\sqrt{3}/3", "-30"},
+}
+
 func (g *arctanGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		question string
-		answer   string
-		exp      string
-	}
-	entries := []entry{
-		{"What is \\(\\arctan(1)\\) in degrees?", "45", "\\(\\tan(45^{\\circ}) = 1\\), so \\(\\arctan(1) = 45^{\\circ}\\)."},
-		{"What is \\(\\arctan(0)\\) in degrees?", "0", "\\(\\tan(0^{\\circ}) = 0\\), so \\(\\arctan(0) = 0^{\\circ}\\)."},
-		{"What is \\(\\arctan(\\sqrt{3})\\) in degrees?", "60", "\\(\\tan(60^{\\circ}) = \\sqrt{3}\\), so \\(\\arctan(\\sqrt{3}) = 60^{\\circ}\\)."},
-		{"What is \\(\\arctan(1/\\sqrt{3})\\) in degrees?", "30", "\\(\\tan(30^{\\circ}) = 1/\\sqrt{3}\\), so \\(\\arctan(1/\\sqrt{3}) = 30^{\\circ}\\)."},
-		{"What is the range of \\(\\arctan(x)\\)? (in degrees)", "-90 to 90", "\\(\\arctan(x)\\) returns values in \\((-90^{\\circ}, 90^{\\circ})\\)."},
-		{"Is \\(\\arctan(x)\\) an odd function? (yes/no)", "yes", "\\(\\arctan(-x) = -\\arctan(x)\\), so it is odd."},
-		{"As \\(x \\to \\infty\\), \\(\\arctan(x)\\) approaches what value in degrees?", "90", "\\(\\lim_{x\\to\\infty} \\arctan(x) = 90^{\\circ}\\)."},
-		{"As \\(x \\to -\\infty\\), \\(\\arctan(x)\\) approaches what value in degrees?", "-90", "\\(\\lim_{x\\to-\\infty} \\arctan(x) = -90^{\\circ}\\)."},
-	}
-	e := entries[rand.Intn(len(entries))]
-	return generator.Problem{
-		Question:    e.question,
-		Answer:      e.answer,
-		Explanation: e.exp,
+	o := trigOrdinal(ctx)
+	switch o {
+	case 1:
+		if rand.Intn(3) > 0 {
+			e := arctanExactArgs[rand.Intn(len(arctanExactArgs))]
+			return trigProb(o,
+				fmt.Sprintf("What is \\(\\arctan(%s)\\) in degrees?", e.arg),
+				e.deg,
+				fmt.Sprintf("\\(\\tan(%s^{\\circ}) = %s\\), so \\(\\arctan(%s) = %s^{\\circ}\\).", e.deg, e.arg, e.arg, e.deg))
+		}
+		// arctan(x) + arctan(1/x) is a right angle for every positive x,
+		// because the two arguments are complementary slopes.
+		k := 2 + rand.Intn(19)
+		return trigProb(o,
+			fmt.Sprintf("For \\(x = %d > 0\\), what is \\(\\arctan(x) + \\arctan(1/x)\\) in degrees?", k),
+			"90",
+			fmt.Sprintf("The two arguments are reciprocal slopes, so the angles are complementary: \\(\\arctan(%d) + \\arctan(1/%d) = 90^{\\circ}\\).", k, k))
+	case 2:
+		written := []trigQA{
+			{"What is the range of \\(\\arctan(x)\\)? (in degrees)", "-90 to 90", "\\(\\arctan(x)\\) returns values in \\((-90^{\\circ}, 90^{\\circ})\\)."},
+			{"Is \\(\\arctan(x)\\) an odd function? (yes/no)", "yes", "\\(\\arctan(-x) = -\\arctan(x)\\), so it is odd."},
+			{"As \\(x \\to \\infty\\), \\(\\arctan(x)\\) approaches what value in degrees?", "90", "\\(\\lim_{x\\to\\infty} \\arctan(x) = 90^{\\circ}\\)."},
+			{"As \\(x \\to -\\infty\\), \\(\\arctan(x)\\) approaches what value in degrees?", "-90", "\\(\\lim_{x\\to-\\infty} \\arctan(x) = -90^{\\circ}\\)."},
+			{"Is \\(\\arctan(x)\\) increasing on its whole domain? (yes/no)", "yes", "Its derivative \\(1/(1+x^2)\\) is positive everywhere, so the graph never turns back."},
+			{"How many horizontal asymptotes does \\(y = \\arctan(x)\\) have? (enter a number)", "2", "The graph approaches \\(y = 90^{\\circ}\\) and \\(y = -90^{\\circ}\\), so it has two."},
+			{"What is \\(\\arctan(0)\\) in degrees?", "0", "\\(\\tan(0^{\\circ}) = 0\\), so \\(\\arctan(0) = 0^{\\circ}\\)."},
+			{"What is the derivative of \\(\\arctan(x)\\) at \\(x = 0\\)?", "1", "The derivative is \\(1/(1+x^2)\\), which equals 1 at the origin."},
+		}
+		if rand.Intn(2) == 0 {
+			e := written[rand.Intn(len(written))]
+			return trigProb(o, e.question, e.answer, e.exp)
+		}
+		// tan(arctan(x)) returns x on the whole real line, unlike the
+		// compositions that only return the principal value.
+		k := 2 + rand.Intn(23)
+		return trigProb(o,
+			fmt.Sprintf("For \\(x = %d\\), what is \\(\\tan(\\arctan(x))\\)? (enter a number)", k),
+			strconv.Itoa(k),
+			fmt.Sprintf("\\(\\arctan\\) returns an angle whose tangent is the input, so \\(\\tan(\\arctan(%d)) = %d\\).", k, k))
+	default:
+		written := []trigQA{
+			{"What is \\(\\arctan(1/2) + \\arctan(1/3)\\) in degrees?", "45", "The tangent-addition formula gives \\((1/2+1/3)/(1-1/6) = 1\\), so the sum is \\(45^{\\circ}\\)."},
+			{"What is \\(\\arctan(1) + \\arctan(2) + \\arctan(3)\\) in degrees?", "180", "The first two terms add to \\(108.43^{\\circ}\\), and the third brings the total to a straight angle."},
+			{"What is \\(\\arctan(1/2) + \\arctan(1/5) + \\arctan(1/8)\\) in degrees?", "45", "The tangent-addition formula applied twice leaves a tangent of 1, so the three angles total \\(45^{\\circ}\\)."},
+			{"What is \\(\\arctan(\\sqrt{3}) - \\arctan(1/\\sqrt{3})\\) in degrees?", "30", "\\(60^{\\circ} - 30^{\\circ} = 30^{\\circ}\\)."},
+			{"What is \\(\\lim_{x\\to 0} \\arctan(x)/x\\)?", "1", "Near the origin \\(\\arctan(x)\\) matches \\(x\\), so the ratio tends to 1."},
+			{"What is the derivative of \\(\\arctan(x)\\) at \\(x = 1\\)? Give an exact fraction.", "1/2", "The derivative is \\(1/(1+x^2)\\), which equals \\(1/2\\) at \\(x = 1\\)."},
+			{"If \\(\\arctan(x) = 30^{\\circ}\\), what is \\(x\\)?", "1/\\sqrt{3}", "\\(x = \\tan(30^{\\circ}) = 1/\\sqrt{3}\\)."},
+			{"How many solutions does \\(\\arctan(x) = 45^{\\circ}\\) have? (enter a number)", "1", "\\(\\arctan\\) is one-to-one, so the horizontal line meets the graph once."},
+		}
+		if rand.Intn(2) == 0 {
+			e := written[rand.Intn(len(written))]
+			return trigProb(o, e.question, e.answer, e.exp)
+		}
+		k := 1 + rand.Intn(19)
+		return trigProb(o,
+			fmt.Sprintf("For \\(x = -%d < 0\\), what is \\(\\arctan(x) + \\arctan(1/x)\\) in degrees?", k),
+			"-90",
+			fmt.Sprintf("For a negative argument both principal angles are negative, and reciprocal slopes are still complementary: \\(\\arctan(-%d) + \\arctan(-1/%d) = -90^{\\circ}\\).", k, k))
 	}
 }
 
@@ -567,30 +630,102 @@ func (g *rightTriangleGen) Generate(ctx generator.GeneratorContext) generator.Pr
 	}
 }
 
+// trigDegreeList renders a comma separated list of degree answers the way an
+// explanation reads it: 30,150 becomes 30° and 150°.
+func trigDegreeList(list string) string {
+	parts := strings.Split(list, ",")
+	for i, p := range parts {
+		parts[i] = p + "^{\\circ}"
+	}
+	if len(parts) == 1 {
+		return parts[0]
+	}
+	return strings.Join(parts[:len(parts)-1], ", ") + " and " + parts[len(parts)-1]
+}
+
 // basic trig equations
 type trigEqBasicGen struct{}
 
 func (g *trigEqBasicGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		question string
-		answer   string
-		exp      string
+	o := trigOrdinal(ctx)
+	type solution struct{ equation, answer string }
+	pool := []solution{
+		{"\\sin(x) = 0", "0,180"},
+		{"\\sin(x) = 1", "90"},
+		{"\\sin(x) = -1", "270"},
+		{"\\sin(x) = 1/2", "30,150"},
+		{"\\sin(x) = -1/2", "210,330"},
+		{"\\sin(x) = \\sqrt{2}/2", "45,135"},
+		{"\\sin(x) = -\\sqrt{2}/2", "225,315"},
+		{"\\sin(x) = \\sqrt{3}/2", "60,120"},
+		{"\\sin(x) = -\\sqrt{3}/2", "240,300"},
+		// A doubled argument compresses two periods into the first turn, so the
+		// solution set is a different one even for the same right-hand side.
+		{"\\sin(2x) = 0", "0,90,180,270"},
+		{"\\sin(2x) = 1", "45,225"},
+		{"\\sin(2x) = -1", "135,315"},
+		{"\\sin(2x) = 1/2", "15,75,195,255"},
+		{"\\sin(2x) = -1/2", "105,165,285,345"},
+		{"\\sin(3x) = 0", "0,60,120,180,240,300"},
+		{"\\sin(3x) = 1", "30,150,270"},
 	}
-	entries := []entry{
-		{"Solve \\(\\sin(x) = 0\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "0,180", "\\(\\sin(x) = 0\\) when \\(x = 0^{\\circ}\\) or \\(x = 180^{\\circ}\\) in \\([0^{\\circ},360^{\\circ})\\)."},
-		{"Solve \\(\\cos(x) = 0\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "90,270", "\\(\\cos(x) = 0\\) when \\(x = 90^{\\circ}\\) or \\(x = 270^{\\circ}\\) in \\([0^{\\circ},360^{\\circ})\\)."},
-		{"Solve \\(\\sin(x) = 1\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "90", "\\(\\sin(x) = 1\\) only at \\(x = 90^{\\circ}\\) in \\([0^{\\circ},360^{\\circ})\\)."},
-		{"Solve \\(\\cos(x) = 1\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "0", "\\(\\cos(x) = 1\\) only at \\(x = 0^{\\circ}\\) in \\([0^{\\circ},360^{\\circ})\\)."},
-		{"Solve \\(\\sin(x) = -1\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "270", "\\(\\sin(x) = -1\\) only at \\(x = 270^{\\circ}\\) in \\([0^{\\circ},360^{\\circ})\\)."},
-		{"Solve \\(\\tan(x) = 0\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "0,180", "\\(\\tan(x) = \\sin(x)/\\cos(x)\\), so \\(\\tan(x) = 0\\) when \\(\\sin(x) = 0\\) at \\(x = 0^{\\circ},180^{\\circ}\\)."},
-		{"Solve \\(\\sin(x) = 1/2\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "30,150", "\\(\\sin(30^{\\circ}) = 1/2\\) and \\(\\sin(150^{\\circ}) = 1/2\\) in \\([0^{\\circ},360^{\\circ})\\)."},
-		{"Solve \\(\\cos(x) = 1/2\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", "60,300", "\\(\\cos(60^{\\circ}) = 1/2\\) and \\(\\cos(300^{\\circ}) = 1/2\\) in \\([0^{\\circ},360^{\\circ})\\)."},
+	switch o {
+	case 2:
+		pool = []solution{
+			{"\\cos(x) = 0", "90,270"},
+			{"\\cos(x) = 1", "0"},
+			{"\\cos(x) = -1", "180"},
+			{"\\cos(x) = 1/2", "60,300"},
+			{"\\cos(x) = -1/2", "120,240"},
+			{"\\cos(x) = \\sqrt{2}/2", "45,315"},
+			{"\\cos(x) = -\\sqrt{2}/2", "135,225"},
+			{"\\cos(x) = \\sqrt{3}/2", "30,330"},
+			{"\\cos(x) = -\\sqrt{3}/2", "150,210"},
+			{"\\cos(2x) = 0", "45,135,225,315"},
+			{"\\cos(2x) = 1", "0,180"},
+			{"\\cos(2x) = -1", "90,270"},
+			{"\\cos(2x) = 1/2", "30,150,210,330"},
+			{"\\cos(2x) = -1/2", "60,120,240,300"},
+			{"\\cos(3x) = 0", "30,90,150,210,270,330"},
+			{"\\cos(3x) = -1", "60,180,300"},
+		}
+	case 3:
+		pool = []solution{
+			{"\\tan(x) = 0", "0,180"},
+			{"\\tan(x) = 1", "45,225"},
+			{"\\tan(x) = -1", "135,315"},
+			{"\\tan(x) = \\sqrt{3}", "60,240"},
+			{"\\tan(x) = -\\sqrt{3}", "120,300"},
+			{"\\tan(x) = 1/\\sqrt{3}", "30,210"},
+			{"\\tan(x) = -1/\\sqrt{3}", "150,330"},
+			{"\\tan(2x) = 0", "0,90,180,270"},
+		}
+		// A value outside the range of the function has no solution, which is a
+		// different question from solving one that does.
+		if rand.Intn(3) == 0 {
+			type impossible struct{ equation string }
+			out := []impossible{
+				{"\\sin(x) = 2"}, {"\\sin(x) = -2"}, {"\\sin(x) = 3/2"},
+				{"\\cos(x) = 2"}, {"\\cos(x) = -2"}, {"\\cos(x) = 3/2"},
+			}
+			e := out[rand.Intn(len(out))]
+			return generator.Problem{
+				Question:    fmt.Sprintf("How many solutions does \\(%s\\) have for \\(0^{\\circ} \\leq x < 360^{\\circ}\\)? (enter a number)", e.equation),
+				Answer:      "0",
+				Explanation: fmt.Sprintf("The sine and cosine functions never leave \\([-1, 1]\\), so \\(%s\\) is never reached and there are no solutions.", e.equation),
+				Facts:       map[string]string{"equation": e.equation, "answer": "0"},
+				KPOrdinal:   o,
+			}
+		}
 	}
-	e := entries[rand.Intn(len(entries))]
+	e := pool[rand.Intn(len(pool))]
 	return generator.Problem{
-		Question:    e.question,
-		Answer:      e.answer,
-		Explanation: e.exp,
+		Question: fmt.Sprintf("Solve \\(%s\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\).", e.equation),
+		Answer:   e.answer,
+		Explanation: fmt.Sprintf("On the first turn, \\(%s\\) holds at \\(x = %s\\). These are the angles the unit circle assigns that value, and no other angle in \\([0^{\\circ}, 360^{\\circ})\\) shares it.",
+			e.equation, trigDegreeList(e.answer)),
+		Facts:     map[string]string{"equation": e.equation, "answer": e.answer},
+		KPOrdinal: o,
 	}
 }
 
@@ -626,25 +761,83 @@ func (g *trigEqHomogeneousGen) Grade(expected, userAnswer string) grader.Result 
 	return router.Grade(grader.GradingTuple, expected, userAnswer)
 }
 
+// trigTurnList lists the angles a tangent value repeats at inside a whole
+// number of turns. The tangent period is 180 degrees, so an interval of
+// 360*turns degrees holds 2*turns solutions.
+func trigTurnList(base, turns int) string {
+	parts := make([]string, 0, 2*turns)
+	for j := 0; j < 2*turns; j++ {
+		parts = append(parts, strconv.Itoa(base+180*j))
+	}
+	return strings.Join(parts, ",")
+}
+
+// homogeneousEntry is one linear equation in sine and cosine, with the tangent
+// value it reduces to and the first-turn angle that tangent starts from.
+type homogeneousEntry struct {
+	equation string
+	slope    string
+	base     int
+}
+
+var homogeneousEquations = []homogeneousEntry{
+	{"\\sin(x) - \\cos(x) = 0", "1", 45},
+	{"2\\sin(x) - 2\\cos(x) = 0", "1", 45},
+	{"\\sin(x) + \\cos(x) = 0", "-1", 135},
+	{"3\\sin(x) + 3\\cos(x) = 0", "-1", 135},
+	{"\\sqrt{3}\\sin(x) - \\cos(x) = 0", "1/\\sqrt{3}", 30},
+	{"3\\sin(x) - \\sqrt{3}\\cos(x) = 0", "1/\\sqrt{3}", 30},
+	{"\\sin(x) - \\sqrt{3}\\cos(x) = 0", "\\sqrt{3}", 60},
+	{"\\sqrt{3}\\sin(x) - 3\\cos(x) = 0", "\\sqrt{3}", 60},
+	{"\\sin(x) + \\sqrt{3}\\cos(x) = 0", "-\\sqrt{3}", 120},
+	{"\\sqrt{3}\\sin(x) + \\cos(x) = 0", "-1/\\sqrt{3}", 150},
+	{"\\sin(x) = 0", "0", 0},
+	{"2\\sin(x) = 0", "0", 0},
+}
+
+var homogeneousMethods = []trigQA{
+	{"What substitution is used to solve \\(a\\sin(x) + b\\cos(x) = 0\\)?", "tan(x) = -b/a", "Divide both sides by \\(\\cos(x)\\): \\(a\\tan(x) + b = 0 \\to \\tan(x) = -b/a\\)."},
+	{"What is the general method to solve \\(a\\sin(x) + b\\cos(x) = 0\\)?", "divide by cos(x)", "Dividing by \\(\\cos(x)\\) gives \\(a\\tan(x) + b = 0\\), which can be solved for \\(x\\)."},
+}
+
+var homogeneousGeneral = []trigQA{
+	{"Solve \\(\\tan(x) = 1\\) for all real \\(x\\) in degrees. Enter the general solution in the form a + 180k.", "45 + 180k", "\\(\\tan\\) repeats every \\(180^{\\circ}\\), so every solution is \\(45^{\\circ}\\) plus a whole number of half-turns."},
+	{"Solve \\(\\tan(x) = \\sqrt{3}\\) for all real \\(x\\) in degrees. Enter the general solution in the form a + 180k.", "60 + 180k", "The first solution is \\(60^{\\circ}\\) and the tangent period adds \\(180^{\\circ}\\) each time."},
+	{"Solve \\(\\tan(x) = 1/\\sqrt{3}\\) for all real \\(x\\) in degrees. Enter the general solution in the form a + 180k.", "30 + 180k", "The first solution is \\(30^{\\circ}\\) and the tangent period adds \\(180^{\\circ}\\) each time."},
+	{"Solve \\(\\tan(x) = -1\\) for all real \\(x\\) in degrees. Enter the general solution in the form a + 180k.", "135 + 180k", "The first positive solution is \\(135^{\\circ}\\), and every half-turn repeats it."},
+	{"Solve \\(\\tan(x) = -\\sqrt{3}\\) for all real \\(x\\) in degrees. Enter the general solution in the form a + 180k.", "120 + 180k", "The first positive solution is \\(120^{\\circ}\\), and every half-turn repeats it."},
+	{"Solve \\(\\tan(x) = -1/\\sqrt{3}\\) for all real \\(x\\) in degrees. Enter the general solution in the form a + 180k.", "150 + 180k", "The first positive solution is \\(150^{\\circ}\\), and every half-turn repeats it."},
+	{"Solve \\(\\sin(x) = 0\\) for all real \\(x\\) in degrees. Enter the general solution in the form 180k.", "180k", "The sine vanishes at every whole number of half-turns."},
+	{"Solve \\(\\cos(x) = 0\\) for all real \\(x\\) in degrees. Enter the general solution in the form a + 180k.", "90 + 180k", "The cosine vanishes at every quarter-turn followed by whole half-turns."},
+}
+
 func (g *trigEqHomogeneousGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		question string
-		answer   string
-		exp      string
+	o := trigOrdinal(ctx)
+	turns := 1
+	switch o {
+	case 2:
+		turns = 2
+	case 3:
+		turns = 3
+		if rand.Intn(2) == 0 {
+			e := homogeneousGeneral[rand.Intn(len(homogeneousGeneral))]
+			return trigProb(o, e.question, e.answer, e.exp)
+		}
 	}
-	entries := []entry{
-		{"What substitution is used to solve \\(a\\sin(x) + b\\cos(x) = 0\\)?", "tan(x) = -b/a", "Divide both sides by \\(\\cos(x)\\): \\(a\\tan(x) + b = 0 \\to \\tan(x) = -b/a\\)."},
-		{"Solve \\(\\sin(x) - \\cos(x) = 0\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\). Enter degrees separated by commas.", "45,225", "\\(\\sin(x) = \\cos(x) \\to \\tan(x) = 1 \\to x = 45^{\\circ}, 225^{\\circ}\\)."},
-		{"Solve \\(\\sin(x) + \\cos(x) = 0\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\). Enter degrees separated by commas.", "135,315", "\\(\\sin(x) = -\\cos(x) \\to \\tan(x) = -1 \\to x = 135^{\\circ}, 315^{\\circ}\\)."},
-		{"Solve \\(\\sqrt{3}\\sin(x) - \\cos(x) = 0\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\). Enter degrees separated by commas.", "30,210", "\\(\\sqrt{3}\\sin(x) = \\cos(x) \\to \\tan(x) = 1/\\sqrt{3} \\to x = 30^{\\circ}, 210^{\\circ}\\)."},
-		{"Solve \\(\\sin(x) - \\sqrt{3}\\cos(x) = 0\\) for \\(0^{\\circ} \\leq x < 360^{\\circ}\\). Enter degrees separated by commas.", "60,240", "\\(\\sin(x) = \\sqrt{3}\\cos(x) \\to \\tan(x) = \\sqrt{3} \\to x = 60^{\\circ}, 240^{\\circ}\\)."},
-		{"What is the general method to solve \\(a\\sin(x) + b\\cos(x) = 0\\)?", "divide by cos(x)", "Dividing by \\(\\cos(x)\\) gives \\(a\\tan(x) + b = 0\\), which can be solved for \\(x\\)."},
+	if o == 1 && rand.Intn(4) == 0 {
+		e := homogeneousMethods[rand.Intn(len(homogeneousMethods))]
+		return trigProb(o, e.question, e.answer, e.exp)
 	}
-	e := entries[rand.Intn(len(entries))]
+	e := homogeneousEquations[rand.Intn(len(homogeneousEquations))]
+	answer := trigTurnList(e.base, turns)
+	limit := 360 * turns
 	return generator.Problem{
-		Question:    e.question,
-		Answer:      e.answer,
-		Explanation: e.exp,
+		Question: fmt.Sprintf("Solve \\(%s\\) for \\(0^{\\circ} \\leq x < %d^{\\circ}\\). Enter degrees separated by commas.", e.equation, limit),
+		Answer:   answer,
+		Explanation: fmt.Sprintf("Dividing by \\(\\cos(x)\\) turns \\(%s\\) into \\(\\tan(x) = %s\\), whose first-turn angle is \\(%d^{\\circ}\\). The tangent repeats every \\(180^{\\circ}\\), so \\([0^{\\circ}, %d^{\\circ})\\) holds the solutions \\(x = %s\\).",
+			e.equation, e.slope, e.base, limit, trigDegreeList(answer)),
+		Facts:     map[string]string{"equation": e.equation, "slope": e.slope, "base": strconv.Itoa(e.base), "turns": strconv.Itoa(turns), "answer": answer},
+		KPOrdinal: o,
 	}
 }
 
@@ -652,26 +845,83 @@ func (g *trigEqHomogeneousGen) Generate(ctx generator.GeneratorContext) generato
 type sinhCoshGen struct{}
 
 func (g *sinhCoshGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		question string
-		answer   string
-		exp      string
-	}
-	entries := []entry{
-		{"What is sinh(0)? (enter a number)", "0", "sinh(0) = (e^{0} - e^{-0})/2 = (1 - 1)/2 = 0; \\(\\sinh(x) = (e^{x} - e^{-x})/2\\), the odd part of the exponential function."},
-		{"What is cosh(0)? (enter a number)", "1", "cosh(0) = (e^{0} + e^{-0})/2 = (1 + 1)/2 = 1; \\(\\cosh(x) = (e^{x} + e^{-x})/2\\), the even part of the exponential function."},
-		{"What is \\(\\cosh^{2}(x) - \\sinh^{2}(x)\\)?", "1", "\\(\\cosh^{2}(x) - \\sinh^{2}(x) = 1\\) (the hyperbolic analogue of \\(\\cos^{2}+\\sin^{2}=1\\))."},
-		{"Is \\(\\sinh(x)\\) an even or odd function?", "odd", "\\(\\sinh(-x) = -\\sinh(x)\\), so \\(\\sinh\\) is odd."},
-		{"Is \\(\\cosh(x)\\) an even or odd function?", "even", "\\(\\cosh(-x) = \\cosh(x)\\), so \\(\\cosh\\) is even."},
-		{"What is the derivative of \\(\\sinh(x)\\)?", "cosh(x)", "\\(d/dx \\sinh(x) = \\cosh(x)\\)."},
-		{"What is the derivative of \\(\\cosh(x)\\)?", "sinh(x)", "\\(d/dx \\cosh(x) = \\sinh(x)\\)."},
-		{"What is cosh(x)^2 - sinh(x)^2? (enter a number)", "1", "The fundamental hyperbolic identity gives \\(\\cosh^{2}(x) - \\sinh^{2}(x) = 1\\)."},
-	}
-	e := entries[rand.Intn(len(entries))]
-	return generator.Problem{
-		Question:    e.question,
-		Answer:      e.answer,
-		Explanation: e.exp,
+	o := trigOrdinal(ctx)
+	switch o {
+	case 1:
+		written := []trigQA{
+			{"What is sinh(0)? (enter a number)", "0", "sinh(0) = (e^{0} - e^{-0})/2 = (1 - 1)/2 = 0; \\(\\sinh(x) = (e^{x} - e^{-x})/2\\), the odd part of the exponential function."},
+			{"What is cosh(0)? (enter a number)", "1", "cosh(0) = (e^{0} + e^{-0})/2 = (1 + 1)/2 = 1; \\(\\cosh(x) = (e^{x} + e^{-x})/2\\), the even part of the exponential function."},
+			{"What is \\(\\cosh^{2}(x) - \\sinh^{2}(x)\\)?", "1", "\\(\\cosh^{2}(x) - \\sinh^{2}(x) = 1\\) (the hyperbolic analogue of \\(\\cos^{2}+\\sin^{2}=1\\))."},
+			{"Is \\(\\sinh(x)\\) an even or odd function?", "odd", "\\(\\sinh(-x) = -\\sinh(x)\\), so \\(\\sinh\\) is odd."},
+			{"Is \\(\\cosh(x)\\) an even or odd function?", "even", "\\(\\cosh(-x) = \\cosh(x)\\), so \\(\\cosh\\) is even."},
+			{"What is the derivative of \\(\\sinh(x)\\)?", "cosh(x)", "\\(d/dx \\sinh(x) = \\cosh(x)\\)."},
+			{"What is the derivative of \\(\\cosh(x)\\)?", "sinh(x)", "\\(d/dx \\cosh(x) = \\sinh(x)\\)."},
+			{"What is \\(\\sinh(-x)\\) in terms of \\(\\sinh(x)\\)?", "-sinh(x)", "\\(\\sinh\\) is odd, so the sign comes out."},
+			{"What is \\(\\cosh(-x)\\) in terms of \\(\\cosh(x)\\)?", "cosh(x)", "\\(\\cosh\\) is even, so the value is unchanged."},
+		}
+		if rand.Intn(2) == 0 {
+			e := written[rand.Intn(len(written))]
+			return trigProb(o, e.question, e.answer, e.exp)
+		}
+		// sinh(ln k) = (k - 1/k)/2, which is rational for every whole k.
+		k := 2 + rand.Intn(11)
+		return trigProb(o,
+			fmt.Sprintf("What is \\(\\sinh(\\ln %d)\\)? Give an exact fraction.", k),
+			trigFrac(k*k-1, 2*k),
+			fmt.Sprintf("\\(\\sinh(\\ln %d) = (e^{\\ln %d} - e^{-\\ln %d})/2 = (%d - 1/%d)/2 = %s\\).", k, k, k, k, k, trigFrac(k*k-1, 2*k)))
+	case 2:
+		written := []trigQA{
+			{"What is \\(\\cosh^{2}(x) - \\sinh^{2}(x)\\)?", "1", "\\(\\cosh^{2}(x) - \\sinh^{2}(x) = 1\\) for every real \\(x\\)."},
+			{"What is the second derivative of \\(\\sinh(x)\\)?", "sinh(x)", "Differentiating \\(\\cosh(x)\\) returns \\(\\sinh(x)\\)."},
+			{"What is the second derivative of \\(\\cosh(x)\\)?", "cosh(x)", "Differentiating \\(\\sinh(x)\\) returns \\(\\cosh(x)\\)."},
+			{"What is the indefinite integral of \\(\\sinh(x)\\)?", "cosh(x)", "Since \\(d/dx \\cosh(x) = \\sinh(x)\\), the integral is \\(\\cosh(x) + c\\)."},
+			{"What is the indefinite integral of \\(\\cosh(x)\\)?", "sinh(x)", "Since \\(d/dx \\sinh(x) = \\cosh(x)\\), the integral is \\(\\sinh(x) + c\\)."},
+			{"What is \\(\\sinh(2x)\\) in terms of \\(\\sinh(x)\\) and \\(\\cosh(x)\\)?", "2*sinh(x)*cosh(x)", "\\(\\sinh(2x) = 2\\sinh(x)\\cosh(x)\\)."},
+			{"What is \\(\\cosh(2x)\\) in terms of \\(\\sinh(x)\\) and \\(\\cosh(x)\\)?", "cosh(x)^2 + sinh(x)^2", "\\(\\cosh(2x) = \\cosh^{2}(x) + \\sinh^{2}(x)\\)."},
+		}
+		if rand.Intn(2) == 0 {
+			e := written[rand.Intn(len(written))]
+			return trigProb(o, e.question, e.answer, e.exp)
+		}
+		// The chain rule on sinh(kx) and on cosh(kx) carries the coefficient.
+		k := 2 + rand.Intn(11)
+		if rand.Intn(2) == 0 {
+			return trigProb(o,
+				fmt.Sprintf("What is the derivative of \\(\\sinh(%dx)\\)?", k),
+				fmt.Sprintf("%d cosh(%dx)", k, k),
+				fmt.Sprintf("The chain rule multiplies by the inner coefficient %d, so the derivative is \\(%d\\cosh(%dx)\\).", k, k, k))
+		}
+		return trigProb(o,
+			fmt.Sprintf("What is the derivative of \\(\\cosh(%dx)\\)?", k),
+			fmt.Sprintf("%d sinh(%dx)", k, k),
+			fmt.Sprintf("The chain rule multiplies by the inner coefficient %d, so the derivative is \\(%d\\sinh(%dx)\\).", k, k, k))
+	default:
+		written := []trigQA{
+			{"What is \\(\\cosh(2x)\\) in terms of \\(\\cosh(x)\\) alone?", "2*cosh(x)^2 - 1", "\\(\\cosh(2x) = 2\\cosh^{2}(x) - 1\\)."},
+			{"What is \\(\\sinh(x+y)\\) in terms of the hyperbolic functions of \\(x\\) and \\(y\\)?", "sinh(x)cosh(y) + cosh(x)sinh(y)", "\\(\\sinh(x+y) = \\sinh(x)\\cosh(y) + \\cosh(x)\\sinh(y)\\)."},
+			{"What is \\(\\cosh(x+y)\\) in terms of the hyperbolic functions of \\(x\\) and \\(y\\)?", "cosh(x)cosh(y) + sinh(x)sinh(y)", "\\(\\cosh(x+y) = \\cosh(x)\\cosh(y) + \\sinh(x)\\sinh(y)\\)."},
+		}
+		if rand.Intn(4) == 0 {
+			e := written[rand.Intn(len(written))]
+			return trigProb(o, e.question, e.answer, e.exp)
+		}
+		// cosh(ln k) is rational, and so is cosh(2x) built from the pair
+		// sinh(ln k) and cosh(ln k).
+		k := 2 + rand.Intn(11)
+		switch rand.Intn(2) {
+		case 0:
+			return trigProb(o,
+				fmt.Sprintf("What is \\(\\cosh(\\ln %d)\\)? Give an exact fraction.", k),
+				trigFrac(k*k+1, 2*k),
+				fmt.Sprintf("\\(\\cosh(\\ln %d) = (%d + 1/%d)/2 = %s\\).", k, k, k, trigFrac(k*k+1, 2*k)))
+		default:
+			sinhPart := trigFrac(k*k-1, 2*k)
+			coshPart := trigFrac(k*k+1, 2*k)
+			return trigProb(o,
+				fmt.Sprintf("If \\(\\sinh x = %s\\) and \\(\\cosh x = %s\\), what is \\(\\cosh(2x)\\)? Give an exact fraction.", sinhPart, coshPart),
+				trigFrac(k*k*k*k+1, 2*k*k),
+				fmt.Sprintf("\\(\\cosh(2x) = \\cosh^{2}(x) + \\sinh^{2}(x) = %s\\).", trigFrac(k*k*k*k+1, 2*k*k)))
+		}
 	}
 }
 
@@ -679,26 +929,73 @@ func (g *sinhCoshGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type tanhCothGen struct{}
 
 func (g *tanhCothGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		question string
-		answer   string
-		exp      string
-	}
-	entries := []entry{
-		{"What is the definition of \\(\\tanh(x)\\)?", "sinh(x)/cosh(x)", "\\(\\tanh(x) = \\sinh(x)/\\cosh(x) = (e^{x} - e^{-x})/(e^{x} + e^{-x})\\)."},
-		{"What is the definition of \\(\\coth(x)\\)?", "cosh(x)/sinh(x)", "\\(\\coth(x) = \\cosh(x)/\\sinh(x) = 1/\\tanh(x)\\)."},
-		{"What is \\(\\tanh(0)\\)?", "0", "\\(\\tanh(0) = \\sinh(0)/\\cosh(0) = 0/1 = 0\\)."},
-		{"As \\(x \\to \\infty\\), \\(\\tanh(x)\\) approaches what value?", "1", "\\(\\lim_{x\\to\\infty} \\tanh(x) = 1\\) because \\(e^{x}\\) dominates \\(e^{-x}\\)."},
-		{"As \\(x \\to -\\infty\\), \\(\\tanh(x)\\) approaches what value?", "-1", "\\(\\lim_{x\\to-\\infty} \\tanh(x) = -1\\) because \\(e^{-x}\\) dominates \\(e^{x}\\)."},
-		{"How many horizontal asymptotes does \\(y = \\tanh(x)\\) have? (enter a number)", "2", "\\(\\tanh(x)\\) maps real numbers to the open interval \\((-1, 1)\\), with horizontal asymptotes \\(y = 1\\) and \\(y = -1\\)."},
-		{"What is \\(1 - \\tanh^{2}(x)\\)?", "sech(x)^2", "\\(1 - \\tanh^{2}(x) = \\sech^{2}(x) = 1/\\cosh^{2}(x)\\)."},
-		{"Is \\(\\tanh(x)\\) an even or odd function?", "odd", "\\(\\tanh(-x) = -\\tanh(x)\\), so \\(\\tanh\\) is odd."},
-	}
-	e := entries[rand.Intn(len(entries))]
-	return generator.Problem{
-		Question:    e.question,
-		Answer:      e.answer,
-		Explanation: e.exp,
+	o := trigOrdinal(ctx)
+	switch o {
+	case 1:
+		written := []trigQA{
+			{"What is the definition of \\(\\tanh(x)\\)?", "sinh(x)/cosh(x)", "\\(\\tanh(x) = \\sinh(x)/\\cosh(x) = (e^{x} - e^{-x})/(e^{x} + e^{-x})\\)."},
+			{"What is \\(\\tanh(0)\\)?", "0", "\\(\\tanh(0) = \\sinh(0)/\\cosh(0) = 0/1 = 0\\)."},
+			{"As \\(x \\to \\infty\\), \\(\\tanh(x)\\) approaches what value?", "1", "\\(\\lim_{x\\to\\infty} \\tanh(x) = 1\\) because \\(e^{x}\\) dominates \\(e^{-x}\\)."},
+			{"As \\(x \\to -\\infty\\), \\(\\tanh(x)\\) approaches what value?", "-1", "\\(\\lim_{x\\to-\\infty} \\tanh(x) = -1\\) because \\(e^{-x}\\) dominates \\(e^{x}\\)."},
+			{"How many horizontal asymptotes does \\(y = \\tanh(x)\\) have? (enter a number)", "2", "\\(\\tanh(x)\\) maps real numbers to the open interval \\((-1, 1)\\), with horizontal asymptotes \\(y = 1\\) and \\(y = -1\\)."},
+			{"Is \\(\\tanh(x)\\) an even or odd function?", "odd", "\\(\\tanh(-x) = -\\tanh(x)\\), so \\(\\tanh\\) is odd."},
+			{"What is \\(\\tanh(-x)\\) in terms of \\(\\tanh(x)\\)?", "-tanh(x)", "\\(\\tanh\\) is odd, so the sign comes out."},
+			{"What is the limit of \\(\\tanh(x)\\) as \\(x \\to 0\\)?", "0", "The hyperbolic tangent is continuous at the origin and \\(\\tanh(0) = 0\\)."},
+		}
+		if rand.Intn(2) == 0 {
+			e := written[rand.Intn(len(written))]
+			return trigProb(o, e.question, e.answer, e.exp)
+		}
+		// tanh(ln k) = (k^2-1)/(k^2+1), which is rational for every whole k.
+		k := 2 + rand.Intn(11)
+		return trigProb(o,
+			fmt.Sprintf("What is \\(\\tanh(\\ln %d)\\)? Give an exact fraction.", k),
+			trigFrac(k*k-1, k*k+1),
+			fmt.Sprintf("\\(\\tanh(\\ln %d) = (%d - 1/%d)/(%d + 1/%d) = %s\\).", k, k, k, k, k, trigFrac(k*k-1, k*k+1)))
+	case 2:
+		written := []trigQA{
+			{"What is the definition of \\(\\coth(x)\\)?", "cosh(x)/sinh(x)", "\\(\\coth(x) = \\cosh(x)/\\sinh(x) = 1/\\tanh(x)\\)."},
+			{"What is \\(\\coth(x)\\) at \\(x = 0\\)?", "undefined", "\\(\\sinh(0) = 0\\), so \\(\\coth\\) has a vertical asymptote at the origin and no value there."},
+			{"At which \\(x\\) in \\((-1, 1)\\) is \\(\\coth(x)\\) undefined? (enter a number)", "0", "\\(\\coth\\) is undefined only where \\(\\sinh(x) = 0\\), which is the single point \\(x = 0\\) in that interval."},
+			{"Is \\(\\coth(x)\\) an even or odd function?", "odd", "\\(\\coth(-x) = -\\coth(x)\\), so \\(\\coth\\) is odd."},
+			{"As \\(x \\to \\infty\\), \\(\\coth(x)\\) approaches what value?", "1", "Both \\(\\cosh(x)\\) and \\(\\sinh(x)\\) grow like \\(e^{x}/2\\), so their ratio tends to 1."},
+			{"As \\(x \\to 0^{+}\\), \\(\\coth(x)\\) approaches what value?", "+infinity", "The numerator tends to 1 while the denominator tends to zero from above."},
+			{"What is \\(1 - \\coth^{2}(x)\\)?", "-csch(x)^2", "\\(\\coth^{2}(x) - 1 = \\operatorname{csch}^{2}(x)\\), so \\(1 - \\coth^{2}(x) = -\\operatorname{csch}^{2}(x)\\)."},
+		}
+		if rand.Intn(2) == 0 {
+			e := written[rand.Intn(len(written))]
+			return trigProb(o, e.question, e.answer, e.exp)
+		}
+		k := 2 + rand.Intn(11)
+		return trigProb(o,
+			fmt.Sprintf("What is \\(\\coth(\\ln %d)\\)? Give an exact fraction.", k),
+			trigFrac(k*k+1, k*k-1),
+			fmt.Sprintf("\\(\\coth(\\ln %d) = (%d + 1/%d)/(%d - 1/%d) = %s\\).", k, k, k, k, k, trigFrac(k*k+1, k*k-1)))
+	default:
+		written := []trigQA{
+			{"What is \\(1 - \\tanh^{2}(x)\\)?", "sech(x)^2", "\\(1 - \\tanh^{2}(x) = \\operatorname{sech}^{2}(x) = 1/\\cosh^{2}(x)\\)."},
+			{"What is \\(\\tanh(x+y)\\) in terms of \\(\\tanh(x)\\) and \\(\\tanh(y)\\)?", "(tanh(x)+tanh(y))/(1+tanh(x)tanh(y))", "\\(\\tanh(x+y) = \\frac{\\tanh(x)+\\tanh(y)}{1+\\tanh(x)\\tanh(y)}\\)."},
+			{"What is \\(\\coth(x+y)\\) in terms of \\(\\coth(x)\\) and \\(\\coth(y)\\)?", "(coth(x)coth(y)+1)/(coth(x)+coth(y))", "\\(\\coth(x+y) = \\frac{\\coth(x)\\coth(y)+1}{\\coth(x)+\\coth(y)}\\)."},
+			{"What is the derivative of \\(\\tanh(x)\\)?", "sech(x)^2", "\\(d/dx \\tanh(x) = \\operatorname{sech}^{2}(x)\\)."},
+			{"What is the derivative of \\(\\coth(x)\\)?", "-csch(x)^2", "\\(d/dx \\coth(x) = -\\operatorname{csch}^{2}(x)\\)."},
+		}
+		if rand.Intn(4) == 0 {
+			e := written[rand.Intn(len(written))]
+			return trigProb(o, e.question, e.answer, e.exp)
+		}
+		// The chain rule on tanh(kx) and on coth(kx) carries the coefficient and
+		// the sign, so both are exact written answers.
+		k := 2 + rand.Intn(11)
+		if rand.Intn(2) == 0 {
+			return trigProb(o,
+				fmt.Sprintf("What is the derivative of \\(\\tanh(%dx)\\)?", k),
+				fmt.Sprintf("%d sech(%dx)^2", k, k),
+				fmt.Sprintf("The chain rule multiplies by the inner coefficient %d, so the derivative is \\(%d\\operatorname{sech}^{2}(%dx)\\).", k, k, k))
+		}
+		return trigProb(o,
+			fmt.Sprintf("What is the derivative of \\(\\coth(%dx)\\)?", k),
+			fmt.Sprintf("-%d csch(%dx)^2", k, k),
+			fmt.Sprintf("The chain rule multiplies by the inner coefficient %d and the derivative of coth is negative, so the answer is \\(-%d\\operatorname{csch}^{2}(%dx)\\).", k, k, k))
 	}
 }
 
@@ -706,26 +1003,63 @@ func (g *tanhCothGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type trigIdentGen struct{}
 
 func (g *trigIdentGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		question string
-		answer   string
-		exp      string
-	}
-	entries := []entry{
-		{"Simplify \\(\\sin^{2}(x) + \\cos^{2}(x)\\).", "1", "\\(\\sin^{2}(x) + \\cos^{2}(x) = 1\\) (the Pythagorean identity)."},
-		{"What is 1 + tan(x)^2 at x = 45 degrees? (enter a number)", "2", "At 45 degrees, tan = 1, so 1 + tan^2 = 1 + 1 = 2; in general \\(1 + \\tan^{2}(x) = \\sec^{2}(x)\\), derived from \\(\\sin^{2}+\\cos^{2}=1\\) divided by \\(\\cos^{2}\\)."},
-		{"Simplify \\(1 + \\cot^{2}(x)\\).", "csc(x)^2", "\\(1 + \\cot^{2}(x) = \\csc^{2}(x)\\), derived from \\(\\sin^{2}+\\cos^{2}=1\\) divided by \\(\\sin^{2}\\)."},
-		{"What is \\(\\sin(2x)\\) in terms of \\(\\sin(x)\\) and \\(\\cos(x)\\)?", "2*sin(x)*cos(x)", "\\(\\sin(2x) = 2\\sin(x)\\cos(x)\\) (double angle formula)."},
-		{"What is cos(2x) at x = 90 degrees? (enter a number)", "-1", "cos(180 degrees) = -1; in general \\(\\cos(2x) = 2\\cos^{2}(x) - 1 = \\cos^{2}(x) - \\sin^{2}(x) = 1 - 2\\sin^{2}(x)\\)."},
-		{"What is \\(\\sin(-x)\\) in terms of \\(\\sin(x)\\)?", "-sin(x)", "\\(\\sin(-x) = -\\sin(x)\\) (sine is odd)."},
-		{"What is \\(\\cos(-x)\\) in terms of \\(\\cos(x)\\)?", "cos(x)", "\\(\\cos(-x) = \\cos(x)\\) (cosine is even)."},
-		{"Simplify \\(\\sin(x)\\cos(y) + \\cos(x)\\sin(y)\\).", "sin(x+y)", "\\(\\sin(x+y) = \\sin(x)\\cos(y) + \\cos(x)\\sin(y)\\) (addition formula)."},
-	}
-	e := entries[rand.Intn(len(entries))]
-	return generator.Problem{
-		Question:    e.question,
-		Answer:      e.answer,
-		Explanation: e.exp,
+	o := trigOrdinal(ctx)
+	switch o {
+	case 1:
+		written := []trigQA{
+			{"Simplify \\(\\sin^{2}(x) + \\cos^{2}(x)\\).", "1", "\\(\\sin^{2}(x) + \\cos^{2}(x) = 1\\) (the Pythagorean identity)."},
+			{"Simplify \\(1 + \\cot^{2}(x)\\).", "csc(x)^2", "\\(1 + \\cot^{2}(x) = \\csc^{2}(x)\\), derived from \\(\\sin^{2}+\\cos^{2}=1\\) divided by \\(\\sin^{2}\\)."},
+			{"Simplify \\(1 + \\tan^{2}(x)\\).", "sec(x)^2", "\\(1 + \\tan^{2}(x) = \\sec^{2}(x)\\), derived from \\(\\sin^{2}+\\cos^{2}=1\\) divided by \\(\\cos^{2}\\)."},
+			{"What is 1 + tan(x)^2 at x = 45 degrees? (enter a number)", "2", "At 45 degrees, tan = 1, so 1 + tan^2 = 1 + 1 = 2; in general \\(1 + \\tan^{2}(x) = \\sec^{2}(x)\\), derived from \\(\\sin^{2}+\\cos^{2}=1\\) divided by \\(\\cos^{2}\\)."},
+		}
+		if rand.Intn(3) == 0 {
+			e := written[rand.Intn(len(written))]
+			return trigProb(o, e.question, e.answer, e.exp)
+		}
+		// A Pythagorean triple supplies an exact sine, so the identity returns
+		// an exact rational square rather than a rounded decimal.
+		a, b, c := pythagoreanPair(9)
+		return trigProb(o,
+			fmt.Sprintf("If \\(\\sin(x) = %d/%d\\) and \\(x\\) is acute, what is \\(\\cos^{2}(x)\\)? Give an exact fraction.", a, c),
+			trigFrac(b*b, c*c),
+			fmt.Sprintf("\\(\\cos^{2}(x) = 1 - \\sin^{2}(x) = 1 - %d/%d = %d/%d\\), which reduces to %s.",
+				a*a, c*c, c*c-a*a, c*c, trigFrac(b*b, c*c)))
+	case 2:
+		written := []trigQA{
+			{"What is \\(\\sin(-x)\\) in terms of \\(\\sin(x)\\)?", "-sin(x)", "\\(\\sin(-x) = -\\sin(x)\\) (sine is odd)."},
+			{"What is \\(\\cos(-x)\\) in terms of \\(\\cos(x)\\)?", "cos(x)", "\\(\\cos(-x) = \\cos(x)\\) (cosine is even)."},
+			{"What is \\(\\sin(2x)\\) in terms of \\(\\sin(x)\\) and \\(\\cos(x)\\)?", "2*sin(x)*cos(x)", "\\(\\sin(2x) = 2\\sin(x)\\cos(x)\\) (double angle formula)."},
+			{"What is cos(2x) at x = 90 degrees? (enter a number)", "-1", "cos(180 degrees) = -1; in general \\(\\cos(2x) = 2\\cos^{2}(x) - 1 = \\cos^{2}(x) - \\sin^{2}(x) = 1 - 2\\sin^{2}(x)\\)."},
+			{"What is \\(\\cos(2x)\\) in terms of \\(\\cos(x)\\) alone?", "2*cos(x)^2 - 1", "\\(\\cos(2x) = 2\\cos^{2}(x) - 1\\)."},
+		}
+		if rand.Intn(3) == 0 {
+			e := written[rand.Intn(len(written))]
+			return trigProb(o, e.question, e.answer, e.exp)
+		}
+		a, b, c := pythagoreanPair(9)
+		return trigProb(o,
+			fmt.Sprintf("If \\(\\sin(x) = %d/%d\\) and \\(x\\) is acute, what is \\(\\sin(2x)\\)? Give an exact fraction.", a, c),
+			trigFrac(2*a*b, c*c),
+			fmt.Sprintf("\\(\\sin(2x) = 2\\sin(x)\\cos(x)\\), and the triple gives \\(\\cos(x) = %d/%d\\), so the product is \\(2 \\cdot %d/%d \\cdot %d/%d = %s\\).",
+				b, c, a, c, b, c, trigFrac(2*a*b, c*c)))
+	default:
+		written := []trigQA{
+			{"Simplify \\(\\sin(x)\\cos(y) + \\cos(x)\\sin(y)\\).", "sin(x+y)", "\\(\\sin(x+y) = \\sin(x)\\cos(y) + \\cos(x)\\sin(y)\\) (addition formula)."},
+			{"Simplify \\(\\cos(x)\\cos(y) - \\sin(x)\\sin(y)\\).", "cos(x+y)", "\\(\\cos(x+y) = \\cos(x)\\cos(y) - \\sin(x)\\sin(y)\\) (addition formula)."},
+			{"Simplify \\(\\sin(x)\\cos(y) - \\cos(x)\\sin(y)\\).", "sin(x-y)", "\\(\\sin(x-y) = \\sin(x)\\cos(y) - \\cos(x)\\sin(y)\\)."},
+			{"Simplify \\(\\cos(x)\\cos(y) + \\sin(x)\\sin(y)\\).", "cos(x-y)", "\\(\\cos(x-y) = \\cos(x)\\cos(y) + \\sin(x)\\sin(y)\\)."},
+			{"What is \\(\\tan(2x)\\) in terms of \\(\\tan(x)\\)?", "2*tan(x)/(1-tan(x)^2)", "\\(\\tan(2x) = \\frac{2\\tan(x)}{1-\\tan^{2}(x)}\\)."},
+		}
+		if rand.Intn(3) == 0 {
+			e := written[rand.Intn(len(written))]
+			return trigProb(o, e.question, e.answer, e.exp)
+		}
+		a, b, c := pythagoreanPair(9)
+		return trigProb(o,
+			fmt.Sprintf("If \\(\\sin(x) = %d/%d\\) and \\(x\\) is acute, what is \\(\\cos(2x)\\)? Give an exact fraction.", a, c),
+			trigFrac(b*b-a*a, c*c),
+			fmt.Sprintf("\\(\\cos(2x) = \\cos^{2}(x) - \\sin^{2}(x) = %d/%d - %d/%d = %s\\).",
+				b*b, c*c, a*a, c*c, trigFrac(b*b-a*a, c*c)))
 	}
 }
 
@@ -733,26 +1067,98 @@ func (g *trigIdentGen) Generate(ctx generator.GeneratorContext) generator.Proble
 type trigIneqGen struct{}
 
 func (g *trigIneqGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type entry struct {
-		question string
-		answer   string
-		exp      string
-	}
-	entries := []entry{
-		{"For \\(0^{\\circ} < x < 90^{\\circ}\\), is \\(\\sin(x)\\) increasing or decreasing?", "increasing", "\\(\\sin(x)\\) increases from 0 to 1 on \\([0^{\\circ}, 90^{\\circ}]\\)."},
-		{"For \\(0^{\\circ} < x < 90^{\\circ}\\), is \\(\\cos(x)\\) increasing or decreasing?", "decreasing", "\\(\\cos(x)\\) decreases from 1 to 0 on \\([0^{\\circ}, 90^{\\circ}]\\)."},
-		{"For \\(0^{\\circ} < x < 90^{\\circ}\\), is \\(\\tan(x)\\) increasing or decreasing?", "increasing", "\\(\\tan(x)\\) increases from 0 to \\(\\infty\\) on \\([0^{\\circ}, 90^{\\circ})\\)."},
-		{"What is the maximum value of \\(\\sin(x)\\)?", "1", "The maximum of \\(\\sin(x)\\) is 1, achieved at \\(x = 90^{\\circ}\\)."},
-		{"What is the minimum value of \\(\\sin(x)\\)?", "-1", "The minimum of \\(\\sin(x)\\) is -1, achieved at \\(x = 270^{\\circ}\\)."},
-		{"What is the maximum value of \\(\\cos(x)\\)?", "1", "The maximum of \\(\\cos(x)\\) is 1, achieved at \\(x = 0^{\\circ}\\)."},
-		{"What is the minimum value of \\(\\cos(x)\\)?", "-1", "The minimum of \\(\\cos(x)\\) is -1, achieved at \\(x = 180^{\\circ}\\)."},
-		{"For \\(90^{\\circ} < x < 180^{\\circ}\\), is \\(\\sin(x)\\) positive or negative?", "positive", "\\(\\sin(x)\\) is positive in Quadrant II (\\(90^{\\circ}\\) to \\(180^{\\circ}\\))."},
-	}
-	e := entries[rand.Intn(len(entries))]
-	return generator.Problem{
-		Question:    e.question,
-		Answer:      e.answer,
-		Explanation: e.exp,
+	o := trigOrdinal(ctx)
+	switch o {
+	case 1:
+		written := []trigQA{
+			{"What is the maximum value of \\(\\sin(x)\\)?", "1", "The maximum of \\(\\sin(x)\\) is 1, achieved at \\(x = 90^{\\circ}\\)."},
+			{"What is the minimum value of \\(\\sin(x)\\)?", "-1", "The minimum of \\(\\sin(x)\\) is -1, achieved at \\(x = 270^{\\circ}\\)."},
+			{"What is the maximum value of \\(\\cos(x)\\)?", "1", "The maximum of \\(\\cos(x)\\) is 1, achieved at \\(x = 0^{\\circ}\\)."},
+			{"What is the minimum value of \\(\\cos(x)\\)?", "-1", "The minimum of \\(\\cos(x)\\) is -1, achieved at \\(x = 180^{\\circ}\\)."},
+		}
+		if rand.Intn(2) == 0 {
+			e := written[rand.Intn(len(written))]
+			return trigProb(o, e.question, e.answer, e.exp)
+		}
+		// A vertical shift or a coefficient moves the extreme value by an
+		// amount the learner has to read off the expression.
+		k := 1 + rand.Intn(20)
+		switch rand.Intn(4) {
+		case 0:
+			return trigProb(o,
+				fmt.Sprintf("What is the maximum value of \\(y = %d + \\sin(x)\\)?", k),
+				strconv.Itoa(k+1),
+				fmt.Sprintf("The sine never exceeds 1, so the maximum is \\(%d + 1 = %d\\).", k, k+1))
+		case 1:
+			return trigProb(o,
+				fmt.Sprintf("What is the minimum value of \\(y = %d + \\cos(x)\\)?", k),
+				strconv.Itoa(k-1),
+				fmt.Sprintf("The cosine never drops below -1, so the minimum is \\(%d - 1 = %d\\).", k, k-1))
+		case 2:
+			return trigProb(o,
+				fmt.Sprintf("What is the maximum value of \\(y = %d\\sin(x)\\)?", k),
+				strconv.Itoa(k),
+				fmt.Sprintf("The positive coefficient scales the peak of the sine, so the maximum is %d.", k))
+		default:
+			return trigProb(o,
+				fmt.Sprintf("What is the minimum value of \\(y = -%d\\cos(x)\\)?", k),
+				strconv.Itoa(-k),
+				fmt.Sprintf("The cosine reaches 1 at the origin, so \\(-%d\\cos(x)\\) reaches \\(-%d\\) there.", k, k))
+		}
+	case 2:
+		fn := []string{"\\sin", "\\cos", "\\tan"}[rand.Intn(3)]
+		angle := 1 + rand.Intn(359)
+		for angle%90 == 0 {
+			angle = 1 + rand.Intn(359)
+		}
+		positive := false
+		switch fn {
+		case "\\sin":
+			positive = angle < 180
+		case "\\cos":
+			positive = angle < 90 || angle > 270
+		default:
+			positive = angle < 90 || (angle > 180 && angle < 270)
+		}
+		word := "negative"
+		if positive {
+			word = "positive"
+		}
+		return generator.Problem{
+			Question:    fmt.Sprintf("For \\(x = %d^{\\circ}\\), is \\(%s(x)\\) positive or negative?", angle, fn),
+			Answer:      word,
+			Explanation: fmt.Sprintf("An angle of \\(%d^{\\circ}\\) terminates in quadrant %d, where \\(%s\\) is %s. The sign of a trigonometric function is fixed by the quadrant, not by the size of the angle.", angle, angle/90+1, strings.TrimPrefix(fn, "\\"), word),
+			Facts:       map[string]string{"fn": fn, "angle": strconv.Itoa(angle), "answer": word},
+			KPOrdinal:   o,
+		}
+	default:
+		type monotone struct {
+			fn       string
+			lo, hi   int
+			behavior string
+		}
+		pool := []monotone{
+			{"\\sin", 0, 90, "increasing"},
+			{"\\sin", 90, 270, "decreasing"},
+			{"\\sin", 270, 360, "increasing"},
+			{"\\sin", 0, 180, "neither"},
+			{"\\cos", 0, 180, "decreasing"},
+			{"\\cos", 180, 360, "increasing"},
+			{"\\cos", 0, 90, "decreasing"},
+			{"\\cos", 90, 180, "decreasing"},
+			{"\\cos", 0, 360, "neither"},
+			{"\\tan", 0, 90, "increasing"},
+			{"\\tan", 90, 180, "increasing"},
+			{"\\tan", 180, 270, "increasing"},
+		}
+		e := pool[rand.Intn(len(pool))]
+		return generator.Problem{
+			Question:    fmt.Sprintf("For \\(%d^{\\circ} < x < %d^{\\circ}\\), is \\(%s(x)\\) increasing, decreasing or neither?", e.lo, e.hi, e.fn),
+			Answer:      e.behavior,
+			Explanation: fmt.Sprintf("On \\((%d^{\\circ}, %d^{\\circ})\\), \\(%s(x)\\) is %s. The sign of the derivative decides the direction, and a curve that turns inside the interval is neither increasing nor decreasing over the whole of it.", e.lo, e.hi, e.fn, e.behavior),
+			Facts:       map[string]string{"fn": e.fn, "lo": strconv.Itoa(e.lo), "hi": strconv.Itoa(e.hi), "answer": e.behavior},
+			KPOrdinal:   o,
+		}
 	}
 }
 

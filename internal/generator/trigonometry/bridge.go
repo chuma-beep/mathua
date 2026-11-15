@@ -198,21 +198,23 @@ func (g *trigBridgeGen) Generate(ctx generator.GeneratorContext) generator.Probl
 			return trigProb(o, fmt.Sprintf("How many complete cycles does y = cos(%dx) make over 360 degrees? (enter a number)", b), strconv.Itoa(b), fmt.Sprintf("The graph completes %d cycles in 360 degrees because the coefficient is %d.", b, b))
 		}
 	case "using_identities":
+		// A Pythagorean triple fixes sin x and cos x together, so every branch
+		// below computes its answer instead of reading one off a table.
+		a, b, c := pythagoreanPair(9)
 		switch o {
 		case 1:
-			t := triples[rand.Intn(len(triples))]
-			a, b := t[0], t[1]
-			return trigProb(o, fmt.Sprintf("An angle x in the first quadrant has sin x = %d/%d. What is cos x? (enter a decimal)", a, a*a+b*b), trigDecimal(float64(b)/float64(a*a+b*b)), fmt.Sprintf("cos x = sqrt(1 - sin^2 x) = %d/%d = %.2f.", b, a*a+b*b, float64(b)/float64(a*a+b*b)))
+			return trigProb(o, fmt.Sprintf("An angle x in the first quadrant has sin x = %d/%d. What is cos x? (enter a decimal)", a, c), trigDecimal(float64(b)/float64(c)), fmt.Sprintf("cos x = sqrt(1 - sin^2 x) = %d/%d = %.2f.", b, c, float64(b)/float64(c)))
 		case 2:
-			t := triples[rand.Intn(len(triples))]
-			a, b := t[0], t[1]
-			return trigProb(o, fmt.Sprintf("An angle x in the first quadrant has sin x = %d/%d and cos x = %d/%d. What is tan x? (enter a decimal)", a, a*a+b*b, b, a*a+b*b), trigDecimal(float64(a)/float64(b)), fmt.Sprintf("tan x = sin x / cos x = %d/%d = %.2f.", a, b, float64(a)/float64(b)))
+			return trigProb(o, fmt.Sprintf("An angle x in the first quadrant has sin x = %d/%d and cos x = %d/%d. What is tan x? (enter a decimal)", a, c, b, c), trigDecimal(float64(a)/float64(b)), fmt.Sprintf("tan x = sin x / cos x = %d/%d = %.2f.", a, b, float64(a)/float64(b)))
 		default:
-			t := triples[rand.Intn(len(triples))]
-			a := t[0]
-			s := float64(a) / float64(a*a+t[1]*t[1])
-			v := 1 - 2*s*s
-			return trigProb(o, fmt.Sprintf("An angle x in the first quadrant has sin x = %d/%d. Use cos 2x = 1 - 2 sin^2 x to find cos 2x. (enter a decimal)", a, a*a+t[1]*t[1]), trigDecimal(v), fmt.Sprintf("cos 2x = 1 - 2(%d/%d)^2 = %.2f.", a, a*a+t[1]*t[1], v))
+			if rand.Intn(2) == 0 {
+				s := float64(a) / float64(c)
+				v := 1 - 2*s*s
+				return trigProb(o, fmt.Sprintf("An angle x in the first quadrant has sin x = %d/%d. Use cos 2x = 1 - 2 sin^2 x to find cos 2x. (enter a decimal)", a, c), trigDecimal(v), fmt.Sprintf("cos 2x = 1 - 2(%d/%d)^2 = %.2f.", a, c, v))
+			}
+			cs := float64(b) / float64(c)
+			v := 2*cs*cs - 1
+			return trigProb(o, fmt.Sprintf("An angle x in the first quadrant has cos x = %d/%d. Use cos 2x = 2 cos^2 x - 1 to find cos 2x. (enter a decimal)", b, c), trigDecimal(v), fmt.Sprintf("cos 2x = 2(%d/%d)^2 - 1 = %.2f.", b, c, v))
 		}
 	case "harmonic_motion":
 		switch o {

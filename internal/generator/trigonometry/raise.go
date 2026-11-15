@@ -172,22 +172,51 @@ func (g *bearingsGen) Generate(ctx generator.GeneratorContext) generator.Problem
 // Power reduction (numeric)
 // ---------------------------------------------------------------------------
 
+// powerCosPair returns a rational cosine in lowest terms with a denominator in
+// [lo, hi]. Every rational between -1 and 1 is the cosine of some angle 2theta,
+// so the value itself is the only parameter the question needs.
+func powerCosPair(lo, hi int) (int, int) {
+	if hi < lo {
+		hi = lo
+	}
+	for attempt := 0; attempt < 40; attempt++ {
+		den := lo + rand.Intn(hi-lo+1)
+		num := trigSmallInt(-(den - 1), den-1)
+		if gcd(num, den) == 1 {
+			return num, den
+		}
+	}
+	return 1, 2
+}
+
 type powerReductionGen struct{}
 
 func (g *powerReductionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct{ cosNum, cosDen int }
-	claims := []claim{
-		{7, 25}, {-7, 25}, {1, 4}, {-1, 4}, {3, 5}, {-3, 5}, {1, 2}, {0, 1},
+	o := trigOrdinal(ctx)
+	var cosNum, cosDen int
+	switch o {
+	case 1:
+		cosNum, cosDen = powerCosPair(2, 5)
+	case 2:
+		cosNum, cosDen = powerCosPair(5, 12)
+	default:
+		// A Pythagorean triple forces cos 2theta = (b^2-a^2)/(a^2+b^2), so the
+		// doubled angle has an exact cosine that a learner can check against
+		// the double-angle formula rather than a table.
+		a, b, _ := pythagoreanPair(9)
+		num, den := b*b-a*a, a*a+b*b
+		d := gcd(num, den)
+		cosNum, cosDen = num/d, den/d
 	}
-	c := claims[rand.Intn(len(claims))]
 	// sin^2 t = (1 - cos 2t)/2 = (den - num)/(2 den)
-	answer := trigFrac(c.cosDen-c.cosNum, 2*c.cosDen)
+	answer := trigFrac(cosDen-cosNum, 2*cosDen)
 	return generator.Problem{
-		Question: fmt.Sprintf("If \\(\\cos(2\\theta) = %s\\), what is \\(\\sin^2\\theta\\)? Give an exact fraction.", trigFrac(c.cosNum, c.cosDen)),
+		Question: fmt.Sprintf("If \\(\\cos(2\\theta) = %s\\), what is \\(\\sin^2\\theta\\)? Give an exact fraction.", trigFrac(cosNum, cosDen)),
 		Answer:   answer,
 		Explanation: fmt.Sprintf("The power-reduction identity is \\(\\sin^2\\theta = (1 - \\cos(2\\theta))/2\\). Substituting the given value gives \\((1 - %s)/2 = %s\\). The identity is the double-angle formula solved for the squared sine, and it is what turns an even power of a sine into a first power of a cosine for integration.",
-			trigFrac(c.cosNum, c.cosDen), answer),
-		Facts: map[string]string{"cos_num": strconv.Itoa(c.cosNum), "cos_den": strconv.Itoa(c.cosDen), "answer": answer},
+			trigFrac(cosNum, cosDen), answer),
+		Facts:     map[string]string{"cos_num": strconv.Itoa(cosNum), "cos_den": strconv.Itoa(cosDen), "answer": answer},
+		KPOrdinal: o,
 	}
 }
 
@@ -218,16 +247,28 @@ func (g *powerReductionGen) Generate(ctx generator.GeneratorContext) generator.P
 type hyperbolicInverseGen struct{}
 
 func (g *hyperbolicInverseGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type triple struct{ opp, adj, hyp int }
-	triples := []triple{{3, 4, 5}, {5, 12, 13}, {8, 15, 17}, {7, 24, 25}, {20, 21, 29}, {9, 40, 41}}
-	tr := triples[rand.Intn(len(triples))]
-	answer := trigFrac(tr.hyp, tr.adj)
+	o := trigOrdinal(ctx)
+	maxM := 6
+	switch o {
+	case 2:
+		maxM = 8
+	case 3:
+		maxM = 10
+	}
+	// cosh^2 x - sinh^2 x = 1 has the shape of a Pythagorean triple, so the
+	// triple supplies both the given hyperbolic sine and the exact cosine.
+	opp, adj, hyp := pythagoreanPair(maxM)
+	if rand.Intn(2) == 0 {
+		opp, adj = adj, opp
+	}
+	answer := trigFrac(hyp, adj)
 	return generator.Problem{
-		Question: fmt.Sprintf("If \\(\\sinh x = %d/%d\\) and \\(x\\) is positive, what is \\(\\cosh x\\)? Give an exact fraction.", tr.opp, tr.adj),
+		Question: fmt.Sprintf("If \\(\\sinh x = %d/%d\\) and \\(x\\) is positive, what is \\(\\cosh x\\)? Give an exact fraction.", opp, adj),
 		Answer:   answer,
 		Explanation: fmt.Sprintf("The hyperbolic identity gives \\(\\cosh^2 x = 1 + \\sinh^2 x = 1 + %d/%d = %d/%d\\), so \\(\\cosh x = %s\\). The positive root is taken because the hyperbolic cosine is at least one for every real input, and the triple %d, %d, %d is the arithmetic that makes the root exact.",
-			tr.opp*tr.opp, tr.adj*tr.adj, tr.hyp*tr.hyp, tr.adj*tr.adj, answer, tr.opp, tr.adj, tr.hyp),
-		Facts: map[string]string{"opp": strconv.Itoa(tr.opp), "adj": strconv.Itoa(tr.adj), "hyp": strconv.Itoa(tr.hyp), "answer": answer},
+			opp*opp, adj*adj, hyp*hyp, adj*adj, answer, opp, adj, hyp),
+		Facts:     map[string]string{"opp": strconv.Itoa(opp), "adj": strconv.Itoa(adj), "hyp": strconv.Itoa(hyp), "answer": answer},
+		KPOrdinal: o,
 	}
 }
 
@@ -269,26 +310,52 @@ func (g *polarGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 // Vector projection (numeric)
 // ---------------------------------------------------------------------------
 
+// projectionPartner returns a second component that makes the scalar
+// projection onto (3, 4) a whole number. The projection is
+// (3 u1 + 4 u2)/5, so u2 is drawn from the values in range that satisfy the
+// congruence rather than rejected after the fact.
+func projectionPartner(u1, span int) int {
+	candidates := make([]int, 0, 2*span+1)
+	for u2 := -span; u2 <= span; u2++ {
+		if (3*u1+4*u2)%5 == 0 {
+			candidates = append(candidates, u2)
+		}
+	}
+	if len(candidates) == 0 {
+		return 0
+	}
+	return candidates[rand.Intn(len(candidates))]
+}
+
 type projectionGen struct{}
 
 func (g *projectionGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct{ u1, u2 int }
-	claims := []claim{
-		{2, 1}, {1, 3}, {5, 0}, {0, 5}, {3, 4}, {4, 3}, {6, 2}, {-1, 2},
+	o := trigOrdinal(ctx)
+	span := 9
+	switch o {
+	case 2:
+		span = 25
+	case 3:
+		span = 99
 	}
-	c := claims[rand.Intn(len(claims))]
+	u1 := trigSmallInt(-span, span)
+	u2 := projectionPartner(u1, span)
 	// v = (3, 4) has length 5, so the scalar projection is (3 u1 + 4 u2)/5.
-	num := 3*c.u1 + 4*c.u2
-	for num%5 != 0 {
-		c = claims[rand.Intn(len(claims))]
-		num = 3*c.u1 + 4*c.u2
-	}
+	num := 3*u1 + 4*u2
 	answer := num / 5
+	question := fmt.Sprintf("What is the scalar projection of the vector \\(\\mathbf{u} = (%d, %d)\\) onto the vector \\(\\mathbf{v} = (3, 4)\\)?", u1, u2)
+	if o == 2 {
+		question = fmt.Sprintf("Find the component of \\(\\mathbf{u} = (%d, %d)\\) in the direction of \\(\\mathbf{v} = (3, 4)\\).", u1, u2)
+	}
+	if o == 3 {
+		question = fmt.Sprintf("What is the signed length of the shadow that \\(\\mathbf{u} = (%d, %d)\\) casts on the line through \\(\\mathbf{v} = (3, 4)\\)?", u1, u2)
+	}
 	return generator.Problem{
-		Question: fmt.Sprintf("What is the scalar projection of the vector \\(\\mathbf{u} = (%d, %d)\\) onto the vector \\(\\mathbf{v} = (3, 4)\\)?", c.u1, c.u2),
+		Question: question,
 		Answer:   strconv.Itoa(answer),
 		Explanation: fmt.Sprintf("The scalar projection is the dot product divided by the length of \\(\\mathbf{v}\\): \\((%d)(3) + (%d)(4) = %d\\), and the length of \\(\\mathbf{v}\\) is \\(\\sqrt{9 + 16} = 5\\), so the projection is \\(%d/5 = %d\\). The sign of the result says whether \\(\\mathbf{u}\\) points along \\(\\mathbf{v}\\) or against it.",
-			c.u1, c.u2, num, num, answer),
-		Facts: map[string]string{"u1": strconv.Itoa(c.u1), "u2": strconv.Itoa(c.u2), "answer": strconv.Itoa(answer)},
+			u1, u2, num, num, answer),
+		Facts:     map[string]string{"u1": strconv.Itoa(u1), "u2": strconv.Itoa(u2), "answer": strconv.Itoa(answer)},
+		KPOrdinal: o,
 	}
 }

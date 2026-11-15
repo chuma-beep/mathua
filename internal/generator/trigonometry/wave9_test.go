@@ -107,6 +107,14 @@ func w9TestAnswer(t *testing.T, kind string, kp int, p generator.Problem) int {
 			return a * a * a
 		}
 		n := w9TestInt(t, p, "n")
+		// The branch asks for either the factorial denominator or the exponent
+		// of x, and the facts say which the answer belongs to.
+		if p.Facts["want"] == "exponent" {
+			if kp == 1 {
+				return 2*n + 1
+			}
+			return 2 * n
+		}
 		if kp == 1 {
 			return w9Fact(2*n + 1)
 		}
@@ -115,6 +123,11 @@ func w9TestAnswer(t *testing.T, kind string, kp int, p generator.Problem) int {
 		n := w9TestInt(t, p, "n")
 		if kp == 2 {
 			return w9DoubleFact(n)
+		}
+		if kp == 3 {
+			// The question asks for the reduced numerator of (n-1)!!/n!!.
+			num, den := w9DoubleFact(n-1), w9DoubleFact(n)
+			return num / gcd(num, den)
 		}
 		return w9DoubleFact(n - 1)
 	case "damping":
