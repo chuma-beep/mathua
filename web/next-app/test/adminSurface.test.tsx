@@ -3,13 +3,16 @@ import { render, screen, fireEvent, waitFor, within } from '@testing-library/rea
 import AdminUsersPage from '../app/admin/users/page'
 import AdminAuditPage from '../app/admin/audit/page'
 import AdminOverviewPage from '../app/admin/page'
-import { searchAdminUsers, setUserRole, adminOverview, listAdminAudit } from '../lib/api'
+import { searchAdminUsers, setUserRole, adminOverview, listAdminAudit, adminAnalytics, adminAnalyticsLive, getAdminNotificationHealth } from '../lib/api'
 import type { AdminUser, Role } from '../lib/api'
 import type { UserInfo } from '../lib/auth'
 
 vi.mock('../lib/api', async (importOriginal) => ({
   ...(await importOriginal<typeof import('../lib/api')>()),
   adminOverview: vi.fn(),
+  adminAnalytics: vi.fn(),
+  adminAnalyticsLive: vi.fn(),
+  getAdminNotificationHealth: vi.fn(),
   searchAdminUsers: vi.fn(),
   setUserRole: vi.fn(),
   listAdminAudit: vi.fn(),
@@ -75,6 +78,29 @@ beforeEach(() => {
   vi.clearAllMocks()
   asPermissions(ALL_PERMISSIONS)
   vi.mocked(searchAdminUsers).mockResolvedValue({ users: [ADMIN, LEARNER] })
+  vi.mocked(adminAnalytics).mockResolvedValue({
+    range: '7d',
+    from: '2026-11-08T00:00:00Z',
+    to: '2026-11-15T12:00:00Z',
+    bucket_seconds: 86400,
+    generated_at: '2026-11-15T12:00:01Z',
+    partial_last_bucket: true,
+    totals: {
+      unique_learners: 9, unique_registered: 6, unique_guests: 2, unique_unclassified: 1,
+      answers: 20, correct: 12, new_registrations: 2,
+      diagnostic_cohort_registered: 2, diagnostic_cohort_completed: 1,
+      quiz_completions: 1, timed_quiz_completions: 1, xp_awarded: 10, xp_deducted: 0,
+      diagnostic_completions: 1, reports_opened: 0, reports_resolved: 0,
+    },
+  })
+  vi.mocked(adminAnalyticsLive).mockResolvedValue({
+    online_now: 1, online_window_seconds: 300, practicing_now: 9,
+    guest_practice_now: 2, answers_15m: 3, active_sessions: 2,
+    generated_at: '2026-11-15T12:00:01Z',
+  })
+  vi.mocked(getAdminNotificationHealth).mockResolvedValue({
+    stats: [], problems: [], engagement: [], suppressions: [],
+  })
 })
 
 // The role picker for one row, then confirm. The select sends nothing until the dialog confirms.
@@ -297,11 +323,10 @@ describe('the overview is a landing page', () => {
     expect(screen.getByText('120')).toBeTruthy()
     expect(screen.getByText('Reports needing attention')).toBeTruthy()
     // Live usage sits beside the static counts, split from guest seats.
-    expect(screen.getByText('Active now')).toBeTruthy()
-    expect(screen.getByText('Guests today')).toBeTruthy()
+    expect(screen.getByText('Practicing now (15m)')).toBeTruthy()
+    expect(screen.getByText('Guests practicing')).toBeTruthy()
     expect(screen.getByText('Online now')).toBeTruthy()
-    expect(screen.getByText('9')).toBeTruthy()
-    for (const word of ['retention', 'cohort', 'revenue', 'churn', 'engagement']) {
+    for (const word of ['retention', 'revenue', 'churn']) {
       expect(document.body.textContent?.toLowerCase()).not.toContain(word)
     }
   })

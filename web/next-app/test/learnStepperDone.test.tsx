@@ -663,7 +663,9 @@ describe('LearnStepper question handoff', () => {
     fireEvent.click(await screen.findByRole('button', { name: 'Next →' }))
     const previous = await findMathField()
     await answerCurrent(value)
-    expect(await screen.findByText('4 + 1 = ?')).toBeTruthy()
+    // React 19 can take longer than the default second to hand off the next
+    // card when the full suite is running in parallel.
+    expect(await screen.findByText('4 + 1 = ?', undefined, { timeout: 3000 })).toBeTruthy()
     const input = await findMathField()
     expect(input).not.toBe(previous)
     await waitFor(() => expect(input).toHaveFocus())
