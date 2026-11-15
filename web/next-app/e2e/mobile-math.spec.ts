@@ -450,16 +450,15 @@ test.describe('the whole loop on a phone', () => {
       }
     })
 
-    // A heading: not focusable, so tapping it cannot move focus out of the field.
-    //
-    // `:visible` matters now. `/learn` carries a collapsed reference panel whose own headings sit
-    // earlier in the document than anything else, and a heading inside a closed `<details>` is
-    // display:none, so the first match was a heading no one can see or tap. Filtering by
-    // visibility keeps the locator pointing at something a finger could actually reach, which is
-    // what the rest of the test assumes.
-    const heading = page.locator('h1:visible, h2:visible, h3:visible').first()
-    await expect(heading).toBeVisible()
-    await heading.tap()
+    // A non-focusable line beside the field, so tapping it cannot move focus
+    // out of the field. Do not use the first visible heading: at 320px the
+    // footer's "Learn" heading can win, and tapping it scrolls the page far
+    // enough for MathLive's own 300ms focusout timer to fire before the
+    // assertion below. The section counter sits in the main column next to
+    // the answer.
+    const outside = page.getByText(/Section \d+ of \d+/).first()
+    await expect(outside).toBeVisible()
+    await outside.tap()
 
     expect(await page.evaluate(() => (window as unknown as { __hideCalls?: number }).__hideCalls ?? 0)).toBe(0)
 
