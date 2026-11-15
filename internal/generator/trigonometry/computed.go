@@ -223,31 +223,68 @@ func (g *cofunctionGen) Generate(ctx generator.GeneratorContext) generator.Probl
 	}
 }
 
-// heronAreaGen uses triples whose area by Heron's formula is whole.
+// pythagoreanPair returns a primitive Pythagorean triple by Euclid's formula.
+// The legs are m^2-n^2 and 2mn and the hypotenuse is m^2+n^2, with m and n
+// coprime and of opposite parity so that the triple is primitive. The bounded
+// retry is a guard rather than the normal path: n = m-1 always satisfies both
+// conditions.
+func pythagoreanPair(maxM int) (int, int, int) {
+	if maxM < 2 {
+		maxM = 2
+	}
+	for attempt := 0; attempt < 40; attempt++ {
+		m := 2 + rand.Intn(maxM-1)
+		n := 1 + rand.Intn(m-1)
+		if gcd(m, n) != 1 || (m-n)%2 == 0 {
+			continue
+		}
+		return m*m - n*n, 2 * m * n, m*m + n*n
+	}
+	return 3, 4, 5
+}
+
+// heronAreaGen uses Heronian triangles: integer sides with an integer area. The
+// three knowledge points build them from three different constructions rather
+// than from a fixed table, because a table of nine was the whole supply a
+// learner could meet.
 type heronAreaGen struct{}
 
 func (g *heronAreaGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type tri struct{ a, b, c, area int }
-	// Heronian triples: integer sides and integer area.
-	table := []tri{
-		{3, 4, 5, 6},
-		{5, 12, 13, 30},
-		{6, 8, 10, 24},
-		{8, 15, 17, 60},
-		{7, 24, 25, 84},
-		{13, 14, 15, 84},
-		{10, 24, 26, 120},
-		{15, 20, 25, 150},
-		{9, 40, 41, 180},
+	o := trigOrdinal(ctx)
+	var a, b, c, area int
+	switch o {
+	case 1:
+		// A primitive right triangle. One leg is even, so half their product,
+		// which is the area, is already an integer.
+		a, b, c = pythagoreanPair(9)
+		area = a * b / 2
+	case 2:
+		// The same construction scaled by k. Scaling multiplies the area by
+		// k squared, which keeps it whole.
+		x, y, z := pythagoreanPair(7)
+		k := 1 + rand.Intn(5)
+		a, b, c = k*x, k*y, k*z
+		area = k * k * x * y / 2
+	default:
+		// Gluing a right triangle to its mirror image across a leg gives an
+		// isosceles triangle with sides c, c and 2a, height b and area ab.
+		x, y, z := pythagoreanPair(9)
+		if rand.Intn(2) == 0 {
+			a, b, c = z, z, 2*x
+			area = x * y
+		} else {
+			a, b, c = z, z, 2*y
+			area = x * y
+		}
 	}
-	tr := table[rand.Intn(len(table))]
-	semi := (tr.a + tr.b + tr.c) / 2
+	semi := (a + b + c) / 2
 	return generator.Problem{
-		Question: fmt.Sprintf("A triangle has side lengths %d, %d and %d. What is its area?", tr.a, tr.b, tr.c),
-		Answer:   strconv.Itoa(tr.area),
+		Question: fmt.Sprintf("A triangle has side lengths %d, %d and %d. What is its area?", a, b, c),
+		Answer:   strconv.Itoa(area),
 		Explanation: fmt.Sprintf("Heron's formula is \\(A = \\sqrt{s(s-a)(s-b)(s-c)}\\) with \\(s\\) the semiperimeter. Here the semiperimeter is %d, so \\(A = \\sqrt{%d \\cdot %d \\cdot %d \\cdot %d} = %d\\). Three sides determine the triangle, so an area is recoverable from them even though no height was given; the law of cosines is what lets Heron's formula be derived from the sides.",
-			semi, semi, semi-tr.a, semi-tr.b, semi-tr.c, tr.area),
-		Facts: map[string]string{"value": strconv.Itoa(tr.area), "a": strconv.Itoa(tr.a), "b": strconv.Itoa(tr.b), "c": strconv.Itoa(tr.c)},
+			semi, semi, semi-a, semi-b, semi-c, area),
+		Facts:     map[string]string{"value": strconv.Itoa(area), "a": strconv.Itoa(a), "b": strconv.Itoa(b), "c": strconv.Itoa(c)},
+		KPOrdinal: o,
 	}
 }
 

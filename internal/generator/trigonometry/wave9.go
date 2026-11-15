@@ -154,28 +154,32 @@ func w9Factoring(kp int) generator.Problem {
 }
 
 func w9Reciprocal(kp int) generator.Problem {
-	triples := [][3]int{{3, 4, 5}, {5, 12, 13}, {8, 15, 17}, {7, 24, 25}, {9, 40, 41}, {20, 21, 29}}
-	t := triples[rand.Intn(len(triples))]
+	// A Pythagorean triple keeps the ratio, the two legs and the hypotenuse
+	// consistent, which is what the authored solution schema reads.
+	a, b, h := pythagoreanPair(9)
+	if rand.Intn(2) == 0 {
+		a, b = b, a
+	}
 	f := map[string]string{}
-	w9I(f, "a", t[0])
-	w9I(f, "b", t[1])
-	w9I(f, "h", t[2])
+	w9I(f, "a", a)
+	w9I(f, "b", b)
+	w9I(f, "h", h)
 	switch kp {
 	case 1:
 		return w9P(kp,
-			fmt.Sprintf("If sec(theta) = %d/%d, what is the numerator of cos(theta) in lowest terms? (enter a number)", t[2], t[0]),
-			strconv.Itoa(t[0]),
-			fmt.Sprintf("cos(theta) = 1/sec(theta) = %d/%d, so the numerator is %d.", t[0], t[2], t[0]), f)
+			fmt.Sprintf("If sec(theta) = %d/%d, what is the numerator of cos(theta) in lowest terms? (enter a number)", h, a),
+			strconv.Itoa(a),
+			fmt.Sprintf("cos(theta) = 1/sec(theta) = %d/%d, so the numerator is %d.", a, h, a), f)
 	case 2:
 		return w9P(kp,
-			fmt.Sprintf("If csc(theta) = %d/%d, what is the numerator of sin(theta) in lowest terms? (enter a number)", t[2], t[1]),
-			strconv.Itoa(t[1]),
-			fmt.Sprintf("sin(theta) = 1/csc(theta) = %d/%d, so the numerator is %d.", t[1], t[2], t[1]), f)
+			fmt.Sprintf("If csc(theta) = %d/%d, what is the numerator of sin(theta) in lowest terms? (enter a number)", h, b),
+			strconv.Itoa(b),
+			fmt.Sprintf("sin(theta) = 1/csc(theta) = %d/%d, so the numerator is %d.", b, h, b), f)
 	default:
 		return w9P(kp,
-			fmt.Sprintf("If cot(theta) = %d/%d, what is the numerator of tan(theta) in lowest terms? (enter a number)", t[0], t[1]),
-			strconv.Itoa(t[1]),
-			fmt.Sprintf("tan(theta) = 1/cot(theta) = %d/%d, so the numerator is %d.", t[1], t[0], t[1]), f)
+			fmt.Sprintf("If cot(theta) = %d/%d, what is the numerator of tan(theta) in lowest terms? (enter a number)", a, b),
+			strconv.Itoa(b),
+			fmt.Sprintf("tan(theta) = 1/cot(theta) = %d/%d, so the numerator is %d.", b, a, b), f)
 	}
 }
 
@@ -279,23 +283,41 @@ func w9Taylor(kp int) generator.Problem {
 	f := map[string]string{}
 	switch kp {
 	case 1:
-		n := w9R(1, 6)
+		n := w9R(1, 9)
 		w9I(f, "n", n)
-		ans := w9Fact(2*n + 1)
+		if rand.Intn(2) == 0 {
+			f["want"] = "denominator"
+			ans := w9Fact(2*n + 1)
+			return w9P(kp,
+				fmt.Sprintf("The Taylor series of sin x has term x^(2n+1)/(2n+1)!. Give the denominator for n = %d. (enter a number)", n),
+				strconv.Itoa(ans),
+				fmt.Sprintf("(2n+1)! = %d! = %d.", 2*n+1, ans), f)
+		}
+		f["want"] = "exponent"
+		ans := 2*n + 1
 		return w9P(kp,
-			fmt.Sprintf("The Taylor series of sin x has term x^(2n+1)/(2n+1)!. Give the denominator for n = %d. (enter a number)", n),
+			fmt.Sprintf("The Taylor series of sin x has term x^(2n+1)/(2n+1)!. Give the exponent of x for n = %d. (enter a number)", n),
 			strconv.Itoa(ans),
-			fmt.Sprintf("(2n+1)! = %d! = %d.", 2*n+1, ans), f)
+			fmt.Sprintf("2n+1 = 2(%d) + 1 = %d, so the powers of x are odd.", n, ans), f)
 	case 2:
-		n := w9R(2, 7)
+		n := w9R(1, 9)
 		w9I(f, "n", n)
-		ans := w9Fact(2 * n)
+		if rand.Intn(2) == 0 {
+			f["want"] = "denominator"
+			ans := w9Fact(2 * n)
+			return w9P(kp,
+				fmt.Sprintf("The Taylor series of cos x has term x^(2n)/(2n)!. Give the denominator for n = %d. (enter a number)", n),
+				strconv.Itoa(ans),
+				fmt.Sprintf("(2n)! = %d! = %d.", 2*n, ans), f)
+		}
+		f["want"] = "exponent"
+		ans := 2 * n
 		return w9P(kp,
-			fmt.Sprintf("The Taylor series of cos x has term x^(2n)/(2n)!. Give the denominator for n = %d. (enter a number)", n),
+			fmt.Sprintf("The Taylor series of cos x has term x^(2n)/(2n)!. Give the exponent of x for n = %d. (enter a number)", n),
 			strconv.Itoa(ans),
-			fmt.Sprintf("(2n)! = %d! = %d.", 2*n, ans), f)
+			fmt.Sprintf("2n = 2(%d) = %d, so the powers of x are even.", n, ans), f)
 	default:
-		a := w9R(2, 8)
+		a := w9R(2, 20)
 		w9I(f, "a", a)
 		ans := a * a * a
 		return w9P(kp,
@@ -317,15 +339,17 @@ func w9PowerIntegrals(kp int) generator.Problem {
 	f := map[string]string{}
 	switch kp {
 	case 1:
-		n := 1 + 2*rand.Intn(6)
+		n := 1 + 2*rand.Intn(16)
 		w9I(f, "n", n)
 		ans := w9DoubleFact(n - 1)
+		// The odd case contributes no factor of pi/2, and the value is
+		// (n-1)!!/n!!: the double factorial of n-1 is the numerator.
 		return w9P(kp,
-			fmt.Sprintf("For odd n, the integral from 0 to pi/2 of sin^n x dx has denominator (n-1)!!. Give the denominator for n = %d. (enter a number)", n),
+			fmt.Sprintf("For odd n, the integral from 0 to pi/2 of sin^n x dx equals (n-1)!!/n!!. Give the numerator (n-1)!! for n = %d. (enter a number)", n),
 			strconv.Itoa(ans),
-			fmt.Sprintf("(%d-1)!! = %d.", n, ans), f)
+			fmt.Sprintf("(%d-1)!! = %d, and the denominator n!! is %d, so the integral is %d/%d.", n, ans, w9DoubleFact(n), ans, w9DoubleFact(n)), f)
 	case 2:
-		n := 2 + 2*rand.Intn(6)
+		n := 2 + 2*rand.Intn(15)
 		w9I(f, "n", n)
 		ans := w9DoubleFact(n)
 		return w9P(kp,
@@ -333,13 +357,18 @@ func w9PowerIntegrals(kp int) generator.Problem {
 			strconv.Itoa(ans),
 			fmt.Sprintf("%d!! = %d.", n, ans), f)
 	default:
-		n := 4 + 2*rand.Intn(6)
+		n := 4 + 2*rand.Intn(13)
 		w9I(f, "n", n)
-		ans := w9DoubleFact(n - 1)
+		// I_n = ((n-1)!!/n!!)(pi/2) for even n. The fraction is reported in
+		// lowest terms, so the numerator is the raw double factorial divided by
+		// its common factor with n!!.
+		rawNum, rawDen := w9DoubleFact(n-1), w9DoubleFact(n)
+		d := gcd(rawNum, rawDen)
+		ans := rawNum / d
 		return w9P(kp,
 			fmt.Sprintf("With I_n the integral from 0 to pi/2 of sin^n x dx, I_n = ((n-1)/n) I_(n-2). Give the numerator of the rational factor of I_%d after reducing the product of all factors. (enter a number)", n),
 			strconv.Itoa(ans),
-			fmt.Sprintf("The rational factor of I_%d is %d/%d, so the numerator is %d.", n, ans, w9DoubleFact(n), ans), f)
+			fmt.Sprintf("The rational factor of I_%d is %d/%d, which reduces to %d/%d, so the numerator is %d.", n, rawNum, rawDen, rawNum/d, rawDen/d, ans), f)
 	}
 }
 
@@ -440,8 +469,16 @@ func w9Beats(kp int) generator.Problem {
 }
 
 func w9Catenary(kp int) generator.Problem {
-	a := w9R(2, 9)
+	var a int
 	f := map[string]string{}
+	switch kp {
+	case 1:
+		a = w9R(2, 15)
+	case 2:
+		a = w9R(3, 20)
+	default:
+		a = w9R(2, 25)
+	}
 	w9I(f, "a", a)
 	switch kp {
 	case 1:
@@ -758,7 +795,7 @@ func w9TangentTriple(kp int) generator.Problem {
 	f := map[string]string{}
 	switch kp {
 	case 1:
-		n := w9R(2, 8)
+		n := w9R(2, 20)
 		w9I(f, "n", n)
 		ans := 3*n*n - 1
 		return w9P(kp,
@@ -766,7 +803,7 @@ func w9TangentTriple(kp int) generator.Problem {
 			strconv.Itoa(ans),
 			fmt.Sprintf("3 times %d squared minus 1 is %d.", n, ans), f)
 	case 2:
-		n := w9R(2, 8)
+		n := w9R(2, 20)
 		w9I(f, "n", n)
 		ans := n * (n*n - 3)
 		return w9P(kp,
@@ -774,7 +811,7 @@ func w9TangentTriple(kp int) generator.Problem {
 			strconv.Itoa(ans),
 			fmt.Sprintf("%d times (%d squared minus 3) is %d.", n, n, ans), f)
 	default:
-		n := w9R(2, 7)
+		n := w9R(2, 20)
 		w9I(f, "n", n)
 		ans := 3*n - n*n*n
 		return w9P(kp,
