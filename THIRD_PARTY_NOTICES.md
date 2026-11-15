@@ -86,8 +86,7 @@ Upstream: <https://cortexjs.io/compute-engine/>
 
 ### Other npm dependencies
 
-KaTeX (MIT) renders question text, answers and lesson content; three.js and
-`@react-three/fiber` (MIT) render the landing concept graph; dagre, lucide-react,
+KaTeX (MIT) renders question text, answers and lesson content; dagre, lucide-react,
 remark-math and rehype-katex (MIT) support layout, icons and Markdown. Their licence
 texts ship inside each package under `node_modules/`, and are reproduced here on
 upgrade by the package manager.
