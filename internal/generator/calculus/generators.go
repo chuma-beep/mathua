@@ -1162,72 +1162,93 @@ func formatPoly(terms []term) string {
 type rolleGen struct{}
 
 func (g *rolleGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	mode := selectMode(ctx, 5)
-	switch mode {
-	case 0:
-		// Quadratic f(x) = x^2 - (r1+r2)x + r1*r2 on [r1, r2] with r1, r2 same parity
-		r1 := mathutil.ScaleInt(ctx.Difficulty, 1, 6)
-		span := 2 * mathutil.ScaleInt(ctx.Difficulty, 1, 4)
-		r2 := r1 + span
-		b := r1 + r2
-		cVal := r1 * r2
-		cMid := b / 2
-		return generator.Problem{
-			Question: fmt.Sprintf("For the function \\(f(x) = x^2 - %d x + %d\\) on the interval \\([%d, %d]\\), find the value \\(c \\in (%d, %d)\\) guaranteed by Rolle's Theorem such that \\(f'(c) = 0\\).", b, cVal, r1, r2, r1, r2),
-			Answer:   fmt.Sprintf("%d", cMid),
-			Explanation: fmt.Sprintf("Subgoal 1: State Rolle's Theorem: if \\(f\\) is continuous on \\([a, b]\\), differentiable on \\((a, b)\\) and \\(f(a) = f(b)\\), there exists \\(c \\in (a, b)\\) with \\(f'(c) = 0\\).\\n"+
-				"Subgoal 2: Compute the derivative \\(f'(x) = 2x - %d\\) and set it to zero.\\n"+
-				"Subgoal 3: Solve for \\(c\\): \\(2c - %d = 0 \\implies c = %d\\).", b, b, cMid),
-		}
+	kp := calcKP(ctx)
+	switch kp {
 	case 1:
-		// Inverted quadratic f(x) = -x^2 + 2kx on [0, 2k]
-		k := mathutil.ScaleInt(ctx.Difficulty, 1, 8)
-		b := 2 * k
-		return generator.Problem{
-			Question: fmt.Sprintf("For \\(f(x) = -x^2 + %d x\\) on \\([0, %d]\\), find the critical point \\(c\\) guaranteed by Rolle's Theorem.", b, b),
-			Answer:   fmt.Sprintf("%d", k),
-			Explanation: fmt.Sprintf("Subgoal 1: Confirm the boundary condition \\(f(0) = 0\\) and \\(f(%d) = -(%d)^2 + %d(%d) = 0\\).\\n"+
-				"Subgoal 2: Compute \\(f'(x) = -2x + %d\\) and equate to zero.\\n"+
-				"Subgoal 3: Solve \\(-2c + %d = 0 \\implies c = %d\\).", b, b, b, b, b, b, k),
+		if rand.Intn(2) == 0 {
+			// Monic quadratic with integer roots r1 and r2. The roots share
+			// parity, so their midpoint is an integer.
+			r1 := randRange(ctx.Difficulty, 1, 20)
+			span := 2 * randRange(ctx.Difficulty, 1, 10)
+			r2 := r1 + span
+			b := r1 + r2
+			cVal := r1 * r2
+			cMid := b / 2
+			return generator.Problem{
+				Question: fmt.Sprintf("For the function \\(f(x) = x^2 - %d x + %d\\) on the interval \\([%d, %d]\\), find the value \\(c \\in (%d, %d)\\) guaranteed by Rolle's Theorem such that \\(f'(c) = 0\\).", b, cVal, r1, r2, r1, r2),
+				Answer:   fmt.Sprintf("%d", cMid),
+				Explanation: fmt.Sprintf("Subgoal 1: State Rolle's Theorem: if \\(f\\) is continuous on \\([a, b]\\), differentiable on \\((a, b)\\) and \\(f(a) = f(b)\\), there exists \\(c \\in (a, b)\\) with \\(f'(c) = 0\\).\\n"+
+					"Subgoal 2: Compute the derivative \\(f'(x) = 2x - %d\\) and set it to zero.\\n"+
+					"Subgoal 3: Solve for \\(c\\): \\(2c - %d = 0 \\implies c = %d\\).", b, b, cMid),
+				KPOrdinal: kp,
+			}
 		}
-	case 2:
-		// Shifted quadratic f(x) = -(x - c0)^2 + d^2 on [c0-d, c0+d]
-		c0 := mathutil.ScaleInt(ctx.Difficulty, 2, 8)
-		d := mathutil.ScaleInt(ctx.Difficulty, 1, 4)
-		aEnd := c0 - d
-		bEnd := c0 + d
-		lin := 2 * c0
-		constTerm := d*d - c0*c0
-		return generator.Problem{
-			Question: fmt.Sprintf("For \\(f(x) = -x^2 + %d x + (%d)\\) on \\([%d, %d]\\), find the point \\(c\\) guaranteed by Rolle's Theorem.", lin, constTerm, aEnd, bEnd),
-			Answer:   fmt.Sprintf("%d", c0),
-			Explanation: fmt.Sprintf("Subgoal 1: State Rolle's Theorem: since \\(f(%d) = f(%d) = 0\\), a point \\(c \\in (%d, %d)\\) satisfies \\(f'(c) = 0\\).\\n"+
-				"Subgoal 2: Differentiate: \\(f'(x) = -2x + %d\\).\\n"+
-				"Subgoal 3: Set \\(-2c + %d = 0\\) and solve for \\(c = %d\\).", aEnd, bEnd, aEnd, bEnd, lin, lin, c0),
-		}
-	case 3:
-		// Value of derivative guaranteed by Rolle
-		x1 := mathutil.ScaleInt(ctx.Difficulty, 1, 5)
-		x2 := x1 + mathutil.ScaleInt(ctx.Difficulty, 2, 6)
-		return generator.Problem{
-			Question: fmt.Sprintf("If a differentiable function \\(f(x)\\) satisfies \\(f(%d) = f(%d)\\) on \\([%d, %d]\\), what is the value of \\(f'(c)\\) at the point \\(c\\) guaranteed by Rolle's Theorem?", x1, x2, x1, x2),
-			Answer:   "0",
-			Explanation: "Subgoal 1: State the conclusion of Rolle's Theorem: the derivative must vanish at some interior point \\(c \\in (a, b)\\).\\n" +
-				"Subgoal 2: Identify the critical condition: \\(f'(c) = 0\\).\\n" +
-				"Subgoal 3: Conclude that the derivative value is 0.",
-		}
-	default:
-		// Scaled quadratic f(x) = 2x^2 - 4cx + K on [c-d, c+d]
-		c := mathutil.ScaleInt(ctx.Difficulty, 2, 7)
-		d := mathutil.ScaleInt(ctx.Difficulty, 1, 3)
+		// Scaled quadratic a x^2 - 2ac x is symmetric about c on [c-d, c+d].
+		a := randRange(ctx.Difficulty, 2, 4)
+		c := randRange(ctx.Difficulty, 2, 20)
+		d := randRange(ctx.Difficulty, 1, 6)
 		x1 := c - d
 		x2 := c + d
 		return generator.Problem{
-			Question: fmt.Sprintf("For \\(f(x) = 2x^2 - %d x\\) on \\([%d, %d]\\), find the value \\(c\\) where \\(f'(c) = 0\\) as guaranteed by Rolle's Theorem.", 4*c, x1, x2),
+			Question: fmt.Sprintf("For \\(f(x) = %d x^2 - %d x\\) on \\([%d, %d]\\), find the value \\(c\\) where \\(f'(c) = 0\\) as guaranteed by Rolle's Theorem.", a, 2*a*c, x1, x2),
 			Answer:   fmt.Sprintf("%d", c),
 			Explanation: fmt.Sprintf("Subgoal 1: State Rolle's Theorem: since \\(f(%d) = f(%d)\\), there exists \\(c \\in (%d, %d)\\) with \\(f'(c) = 0\\).\\n"+
-				"Subgoal 2: Differentiate \\(f(x)\\): \\(f'(x) = 4x - %d\\).\\n"+
-				"Subgoal 3: Solve \\(4c - %d = 0 \\implies c = %d\\).", x1, x2, x1, x2, 4*c, 4*c, c),
+				"Subgoal 2: Differentiate \\(f(x)\\): \\(f'(x) = %d x - %d\\).\\n"+
+				"Subgoal 3: Solve \\(%d c - %d = 0 \\implies c = %d\\).", x1, x2, x1, x2, 2*a, 2*a*c, 2*a, 2*a*c, c),
+			KPOrdinal: kp,
+		}
+	case 2:
+		if rand.Intn(2) == 0 {
+			// Inverted quadratic f(x) = -x^2 + 2kx on [0, 2k].
+			k := randRange(ctx.Difficulty, 1, 20)
+			b := 2 * k
+			return generator.Problem{
+				Question: fmt.Sprintf("For \\(f(x) = -x^2 + %d x\\) on \\([0, %d]\\), find the critical point \\(c\\) guaranteed by Rolle's Theorem.", b, b),
+				Answer:   fmt.Sprintf("%d", k),
+				Explanation: fmt.Sprintf("Subgoal 1: Confirm the boundary condition \\(f(0) = 0\\) and \\(f(%d) = -(%d)^2 + %d(%d) = 0\\).\\n"+
+					"Subgoal 2: Compute \\(f'(x) = -2x + %d\\) and equate to zero.\\n"+
+					"Subgoal 3: Solve \\(-2c + %d = 0 \\implies c = %d\\).", b, b, b, b, b, b, k),
+				KPOrdinal: kp,
+			}
+		}
+		// The same parabola scaled by a.
+		a := randRange(ctx.Difficulty, 2, 3)
+		k := randRange(ctx.Difficulty, 1, 15)
+		b := 2 * k
+		return generator.Problem{
+			Question: fmt.Sprintf("For \\(f(x) = -%d x^2 + %d x\\) on \\([0, %d]\\), find the critical point \\(c\\) guaranteed by Rolle's Theorem.", a, 2*a*k, b),
+			Answer:   fmt.Sprintf("%d", k),
+			Explanation: fmt.Sprintf("Subgoal 1: Confirm the boundary condition \\(f(0) = 0\\) and \\(f(%d) = -%d(%d)^2 + %d(%d) = 0\\).\\n"+
+				"Subgoal 2: Compute \\(f'(x) = -%d x + %d\\) and equate to zero.\\n"+
+				"Subgoal 3: Solve \\(-%d c + %d = 0 \\implies c = %d\\).", b, a, b, 2*a*k, b, 2*a, 2*a*k, 2*a, 2*a*k, k),
+			KPOrdinal: kp,
+		}
+	default:
+		if rand.Intn(2) == 0 {
+			// Value of the derivative guaranteed by Rolle.
+			x1 := randRange(ctx.Difficulty, 1, 20)
+			x2 := x1 + randRange(ctx.Difficulty, 1, 12)
+			return generator.Problem{
+				Question: fmt.Sprintf("If a differentiable function \\(f(x)\\) satisfies \\(f(%d) = f(%d)\\) on \\([%d, %d]\\), what is the value of \\(f'(c)\\) at the point \\(c\\) guaranteed by Rolle's Theorem?", x1, x2, x1, x2),
+				Answer:   "0",
+				Explanation: "Subgoal 1: State the conclusion of Rolle's Theorem: the derivative must vanish at some interior point \\(c \\in (a, b)\\).\\n" +
+					"Subgoal 2: Identify the critical condition: \\(f'(c) = 0\\).\\n" +
+					"Subgoal 3: Conclude that the derivative value is 0.",
+				KPOrdinal: kp,
+			}
+		}
+		// The common value is a different question surface, and the answer is
+		// still zero because Rolle's Theorem only needs equality at the ends.
+		x1 := randRange(ctx.Difficulty, 1, 15)
+		x2 := x1 + randRange(ctx.Difficulty, 2, 12)
+		v := randRange(ctx.Difficulty, 0, 20)
+		return generator.Problem{
+			Question: fmt.Sprintf("A differentiable function satisfies \\(f(%d) = f(%d) = %d\\) on \\([%d, %d]\\). What is the value of \\(f'(c)\\) at the point \\(c\\) guaranteed by Rolle's Theorem?", x1, x2, v, x1, x2),
+			Answer:   "0",
+			Explanation: fmt.Sprintf("Subgoal 1: The two endpoint values are equal, so Rolle's Theorem applies on \\([%d, %d]\\).\\n"+
+				"Subgoal 2: The theorem guarantees an interior point \\(c\\) with \\(f'(c) = 0\\).\\n"+
+				"Subgoal 3: The common value %d does not change the derivative at that point, so the answer is 0.", x1, x2, v),
+			KPOrdinal: kp,
 		}
 	}
 }
@@ -1310,68 +1331,82 @@ func (g *mvtGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type cauchyMVTGen struct{}
 
 func (g *cauchyMVTGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	mode := selectMode(ctx, 5)
-	switch mode {
-	case 0:
-		// f(x) = x^2, g(x) = x on [a, b]
-		a := mathutil.ScaleInt(ctx.Difficulty, 1, 5)
-		span := 2 * mathutil.ScaleInt(ctx.Difficulty, 1, 3)
-		b := a + span
-		cMid := (a + b) / 2
-		return generator.Problem{
-			Question: fmt.Sprintf("For \\(f(x) = x^2\\) and \\(g(x) = x\\) on \\([%d, %d]\\), find the value \\(c\\) satisfying Cauchy's Mean Value Theorem: \\(\\frac{f(b)-f(a)}{g(b)-g(a)} = \\frac{f'(c)}{g'(c)}\\).", a, b),
-			Answer:   fmt.Sprintf("%d", cMid),
-			Explanation: fmt.Sprintf("Subgoal 1: State Cauchy's Mean Value Theorem: \\(\\frac{f(b) - f(a)}{g(b) - g(a)} = \\frac{f'(c)}{g'(c)}\\).\\n"+
-				"Subgoal 2: Differentiate \\(f'(x) = 2x\\) and \\(g'(x) = 1\\), giving quotient \\(\\frac{2c}{1} = \\frac{(%d)^2 - (%d)^2}{%d - %d} = %d\\).\\n"+
-				"Subgoal 3: Solve for \\(c\\): \\(2c = %d \\implies c = %d\\).", a, b, a, b, a+b, a+b, cMid),
-		}
+	kp := calcKP(ctx)
+	switch kp {
 	case 1:
-		// f(x) = x^3, g(x) = x^2 on [0, 3k] -> c = 2k
+		if rand.Intn(2) == 0 {
+			// f(x) = x^2, g(x) = x on [a, b].
+			a := randRange(ctx.Difficulty, 1, 15)
+			span := 2 * randRange(ctx.Difficulty, 1, 8)
+			b := a + span
+			cMid := (a + b) / 2
+			return generator.Problem{
+				Question: fmt.Sprintf("For \\(f(x) = x^2\\) and \\(g(x) = x\\) on \\([%d, %d]\\), find the value \\(c\\) satisfying Cauchy's Mean Value Theorem: \\(\\frac{f(b)-f(a)}{g(b)-g(a)} = \\frac{f'(c)}{g'(c)}\\).", a, b),
+				Answer:   fmt.Sprintf("%d", cMid),
+				Explanation: fmt.Sprintf("Subgoal 1: State Cauchy's Mean Value Theorem: \\(\\frac{f(b) - f(a)}{g(b) - g(a)} = \\frac{f'(c)}{g'(c)}\\).\\n"+
+					"Subgoal 2: Differentiate \\(f'(x) = 2x\\) and \\(g'(x) = 1\\), giving quotient \\(\\frac{2c}{1} = \\frac{(%d)^2 - (%d)^2}{%d - %d} = %d\\).\\n"+
+					"Subgoal 3: Solve for \\(c\\): \\(2c = %d \\implies c = %d\\).", a, b, a, b, a+b, a+b, cMid),
+				KPOrdinal: kp,
+			}
+		}
+		// Consecutive powers: f(x) = x^n and g(x) = x^(n+1) on [0, (n+1)k].
+		// The Cauchy quotient is 1/b, and the derivative quotient is
+		// n/((n+1)c), so c = n b/(n+1) = n k.
+		n := 2 + rand.Intn(3)
+		k := randRange(ctx.Difficulty, 1, 8)
+		b := (n + 1) * k
+		cVal := n * k
+		return generator.Problem{
+			Question: fmt.Sprintf("For \\(f(x) = x^%d\\) and \\(g(x) = x^%d\\) on \\([0, %d]\\), find the value \\(c\\) satisfying Cauchy's Mean Value Theorem: \\(\\frac{f(b)-f(a)}{g(b)-g(a)} = \\frac{f'(c)}{g'(c)}\\).", n, n+1, b),
+			Answer:   fmt.Sprintf("%d", cVal),
+			Explanation: fmt.Sprintf("Subgoal 1: State Cauchy's Mean Value Theorem: \\(\\frac{f(b) - f(a)}{g(b) - g(a)} = \\frac{f'(c)}{g'(c)}\\).\\n"+
+				"Subgoal 2: The quotient is \\(\\frac{%d^%d}{%d^%d} = \\frac{1}{%d}\\), while the derivative quotient is \\(\\frac{%d c^%d}{%d c^%d} = \\frac{%d}{%d c}\\).\\n"+
+				"Subgoal 3: Solve \\(\\frac{%d}{%d c} = \\frac{1}{%d}\\), which gives \\(c = \\frac{%d·%d}{%d} = %d\\).", b, n, b, n+1, b, n, n-1, n+1, n, n, n+1, n, n+1, b, n, b, n+1, cVal),
+			KPOrdinal: kp,
+		}
+	case 2:
+		if rand.Intn(2) == 0 {
+			// f(x) = x^3, g(x) = x^2 on [0, 3k] gives c = 2k.
+			k := randRange(ctx.Difficulty, 1, 20)
+			b := 3 * k
+			cVal := 2 * k
+			return generator.Problem{
+				Question: fmt.Sprintf("For \\(f(x) = x^3\\) and \\(g(x) = x^2\\) on \\([0, %d]\\), find \\(c\\) satisfying Cauchy's Mean Value Theorem.", b),
+				Answer:   fmt.Sprintf("%d", cVal),
+				Explanation: fmt.Sprintf("Subgoal 1: State Cauchy's Mean Value Theorem: \\(\\frac{f(b) - f(a)}{g(b) - g(a)} = \\frac{f'(c)}{g'(c)}\\).\\n"+
+					"Subgoal 2: Substitute derivatives \\(f'(c) = 3c^2\\) and \\(g'(c) = 2c\\), so \\(\\frac{3c^2}{2c} = \\frac{3}{2}c\\).\\n"+
+					"Subgoal 3: Compute quotient \\(\\frac{(%d)^3 - 0}{(%d)^2 - 0} = %d\\) and solve \\(\\frac{3}{2}c = %d \\implies c = %d\\).", b, b, b, b, cVal),
+				KPOrdinal: kp,
+			}
+		}
+		// A coefficient on f cancels from both sides, so c is unchanged but the
+		// question is a different pair of functions.
+		m := randRange(ctx.Difficulty, 2, 3)
 		k := randRange(ctx.Difficulty, 1, 20)
 		b := 3 * k
 		cVal := 2 * k
 		return generator.Problem{
-			Question: fmt.Sprintf("For \\(f(x) = x^3\\) and \\(g(x) = x^2\\) on \\([0, %d]\\), find \\(c\\) satisfying Cauchy's Mean Value Theorem.", b),
+			Question: fmt.Sprintf("For \\(f(x) = %d x^3\\) and \\(g(x) = x^2\\) on \\([0, %d]\\), find \\(c\\) satisfying Cauchy's Mean Value Theorem.", m, b),
 			Answer:   fmt.Sprintf("%d", cVal),
 			Explanation: fmt.Sprintf("Subgoal 1: State Cauchy's Mean Value Theorem: \\(\\frac{f(b) - f(a)}{g(b) - g(a)} = \\frac{f'(c)}{g'(c)}\\).\\n"+
-				"Subgoal 2: Substitute derivatives \\(f'(c) = 3c^2\\) and \\(g'(c) = 2c\\), so \\(\\frac{3c^2}{2c} = \\frac{3}{2}c\\).\\n"+
-				"Subgoal 3: Compute quotient \\(\\frac{(%d)^3 - 0}{(%d)^2 - 0} = %d\\) and solve \\(\\frac{3}{2}c = %d \\implies c = %d\\).", b, b, b, b, cVal),
-		}
-	case 2:
-		// Cauchy quotient evaluation for f(x) = kx^2 and g(x) = x on [0, b]
-		k := mathutil.ScaleInt(ctx.Difficulty, 1, 5)
-		b := mathutil.ScaleInt(ctx.Difficulty, 2, 7)
-		ans := k * b
-		return generator.Problem{
-			Question: fmt.Sprintf("Compute the Cauchy quotient \\(\\frac{f(b)-f(a)}{g(b)-g(a)}\\) for \\(f(x) = %d x^2\\) and \\(g(x) = x\\) on \\([0, %d]\\).", k, b),
-			Answer:   fmt.Sprintf("%d", ans),
-			Explanation: fmt.Sprintf("Subgoal 1: State the Cauchy difference quotient: \\(\\frac{f(b) - f(a)}{g(b) - g(a)}\\).\\n"+
-				"Subgoal 2: Evaluate \\(f(%d) = %d(%d)^2 = %d\\) and \\(g(%d) = %d\\).\\n"+
-				"Subgoal 3: Divide: \\(\\frac{%d - 0}{%d - 0} = %d\\).", b, k, b, k*b*b, b, b, k*b*b, b, ans),
-		}
-	case 3:
-		// Cauchy ratio for f(x) = a*x, g(x) = b*x
-		m2 := mathutil.ScaleInt(ctx.Difficulty, 2, 4)
-		q := mathutil.ScaleInt(ctx.Difficulty, 2, 5)
-		m1 := m2 * q
-		return generator.Problem{
-			Question: fmt.Sprintf("For linear functions \\(f(x) = %d x\\) and \\(g(x) = %d x\\) on any interval \\([a, b]\\), what is the value of \\(\\frac{f'(c)}{g'(c)}\\)?", m1, m2),
-			Answer:   fmt.Sprintf("%d", q),
-			Explanation: fmt.Sprintf("Subgoal 1: Differentiate the linear functions: \\(f'(x) = %d\\) and \\(g'(x) = %d\\).\\n"+
-				"Subgoal 2: Form the derivative ratio: \\(\\frac{f'(c)}{g'(c)} = \\frac{%d}{%d}\\).\\n"+
-				"Subgoal 3: Divide to obtain %d.", m1, m2, m1, m2, q),
+				"Subgoal 2: The quotient is \\(\\frac{%d(%d)^3}{(%d)^2} = %d\\), and the derivative quotient is \\(\\frac{%d c^2}{2c} = \\frac{%d}{2}c\\).\\n"+
+				"Subgoal 3: Solve \\(\\frac{%d}{2}c = %d \\implies c = %d\\).", m, b, b, m*b, 3*m, 3*m, 3*m, m*b, cVal),
+			KPOrdinal: kp,
 		}
 	default:
-		// Denominator reduction when g(x) = x
-		x1 := mathutil.ScaleInt(ctx.Difficulty, 1, 5)
-		x2 := x1 + mathutil.ScaleInt(ctx.Difficulty, 2, 7)
-		width := x2 - x1
+		// Cauchy quotient evaluation for a general pair of powers.
+		p := 2 + rand.Intn(3)
+		q := 1 + rand.Intn(p-1)
+		k := randRange(ctx.Difficulty, 2, 6)
+		b := randRange(ctx.Difficulty, 2, 6)
+		ans := k * intPow(b, p-q)
 		return generator.Problem{
-			Question: fmt.Sprintf("In Cauchy's Mean Value Theorem on \\([%d, %d]\\) with \\(g(x) = x\\), what is the denominator value \\(g(b) - g(a)\\)?", x1, x2),
-			Answer:   fmt.Sprintf("%d", width),
-			Explanation: fmt.Sprintf("Subgoal 1: Substitute \\(g(x) = x\\) into the denominator \\(g(b) - g(a)\\).\\n"+
-				"Subgoal 2: Compute \\(b - a = %d - %d\\).\\n"+
-				"Subgoal 3: Evaluate the difference: %d.", x2, x1, width),
+			Question: fmt.Sprintf("Compute the Cauchy quotient \\(\\frac{f(b)-f(a)}{g(b)-g(a)}\\) for \\(f(x) = %d x^%d\\) and \\(g(x) = x^%d\\) on \\([0, %d]\\).", k, p, q, b),
+			Answer:   fmt.Sprintf("%d", ans),
+			Explanation: fmt.Sprintf("Subgoal 1: State the Cauchy difference quotient: \\(\\frac{f(b) - f(a)}{g(b) - g(a)}\\).\\n"+
+				"Subgoal 2: Evaluate \\(f(%d) = %d(%d)^%d = %d\\) and \\(g(%d) = (%d)^%d = %d\\).\\n"+
+				"Subgoal 3: Divide: \\(\\frac{%d}{%d} = %d\\).", b, k, b, p, k*intPow(b, p), b, b, q, intPow(b, q), k*intPow(b, p), intPow(b, q), ans),
+			KPOrdinal: kp,
 		}
 	}
 }
@@ -1520,73 +1555,76 @@ func (g *differenceQuotientGen) Generate(ctx generator.GeneratorContext) generat
 type differentialGen struct{}
 
 func (g *differentialGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	mode := selectMode(ctx, 5)
-	switch mode {
-	case 0:
-		// Differential dy = f'(x) dx for y = a x^2
-		a := mathutil.ScaleInt(ctx.Difficulty, 1, 4)
-		x0 := mathutil.ScaleInt(ctx.Difficulty, 1, 6)
-		dx := mathutil.ScaleInt(ctx.Difficulty, 1, 4)
-		dy := 2 * a * x0 * dx
-		return generator.Problem{
-			Question: fmt.Sprintf("If \\(y = %d x^2\\) at \\(x = %d\\), compute the differential \\(dy\\) for \\(dx = %d\\).", a, x0, dx),
-			Answer:   fmt.Sprintf("%d", dy),
-			Explanation: fmt.Sprintf("Subgoal 1: State the differential definition: \\(dy = f'(x) dx\\).\\n"+
-				"Subgoal 2: Compute derivative \\(f'(x) = 2(%d)x = %d x\\) and evaluate at \\(x = %d\\): \\(f'(%d) = %d\\).\\n"+
-				"Subgoal 3: Multiply by \\(dx = %d\\): \\(dy = (%d)(%d) = %d\\).", a, 2*a, x0, x0, 2*a*x0, dx, 2*a*x0, dx, dy),
-		}
+	kp := calcKP(ctx)
+
+	var question, explanation string
+	var answer int
+	switch kp {
 	case 1:
-		// Differential for y = a x^3
-		a := mathutil.ScaleInt(ctx.Difficulty, 1, 3)
-		x0 := mathutil.ScaleInt(ctx.Difficulty, 1, 4)
-		dx := mathutil.ScaleInt(ctx.Difficulty, 1, 3)
-		dy := 3 * a * x0 * x0 * dx
-		return generator.Problem{
-			Question: fmt.Sprintf("If \\(y = %d x^3\\) at \\(x = %d\\), compute the differential \\(dy\\) for \\(dx = %d\\).", a, x0, dx),
-			Answer:   fmt.Sprintf("%d", dy),
-			Explanation: fmt.Sprintf("Subgoal 1: State the differential formula: \\(dy = f'(x) dx\\).\\n"+
-				"Subgoal 2: Differentiate \\(f'(x) = 3(%d)x^2 = %d x^2\\) and evaluate at \\(x = %d\\): \\(f'(%d) = %d(%d)^2 = %d\\).\\n"+
-				"Subgoal 3: Multiply by \\(dx = %d\\): \\(dy = (%d)(%d) = %d\\).", a, 3*a, x0, x0, 3*a, x0, 3*a*x0*x0, dx, 3*a*x0*x0, dx, dy),
-		}
+		// Differential dy = f'(x) dx for y = a x^p.
+		p := 2 + rand.Intn(2)
+		a := randRange(ctx.Difficulty, 2, 5)
+		x0 := randRange(ctx.Difficulty, 1, 9)
+		dx := randRange(ctx.Difficulty, 1, 5)
+		deriv := p * a * intPow(x0, p-1)
+		answer = deriv * dx
+		question = fmt.Sprintf("If \\(y = %d x^%d\\) at \\(x = %d\\), compute the differential \\(dy\\) for \\(dx = %d\\).", a, p, x0, dx)
+		explanation = fmt.Sprintf("Subgoal 1: State the differential definition: \\(dy = f'(x) dx\\).\\n"+
+			"Subgoal 2: Differentiate: \\(f'(x) = %s\\) and evaluate at \\(x = %d\\): \\(f'(%d) = %d\\).\\n"+
+			"Subgoal 3: Multiply by \\(dx = %d\\): \\(dy = (%d)(%d) = %d\\).", calcPowerTerm(p*a, p-1), x0, x0, deriv, dx, deriv, dx, answer)
 	case 2:
-		// Linear approximation change Delta y approx f'(x) dx for f(x) = a x^2 + b x
-		a := mathutil.ScaleInt(ctx.Difficulty, 1, 3)
-		b := mathutil.ScaleInt(ctx.Difficulty, 1, 5)
-		x0 := mathutil.ScaleInt(ctx.Difficulty, 1, 5)
-		dx := mathutil.ScaleInt(ctx.Difficulty, 1, 3)
-		dy := (2*a*x0 + b) * dx
-		return generator.Problem{
-			Question: fmt.Sprintf("For \\(f(x) = %d x^2 + %d x\\) at \\(x = %d\\), compute the differential approximation \\(dy\\) for \\(dx = %d\\).", a, b, x0, dx),
-			Answer:   fmt.Sprintf("%d", dy),
-			Explanation: fmt.Sprintf("Subgoal 1: State the linear approximation differential: \\(dy = f'(x) dx\\).\\n"+
-				"Subgoal 2: Compute \\(f'(x) = 2(%d)x + %d = %d x + %d\\) and evaluate at \\(x = %d\\): \\(f'(%d) = %d\\).\\n"+
-				"Subgoal 3: Multiply by \\(dx = %d\\): \\(dy = (%d)(%d) = %d\\).", a, b, 2*a, b, x0, x0, 2*a*x0+b, dx, 2*a*x0+b, dx, dy),
-		}
-	case 3:
-		// Ratio of differentials dy / dx = f'(x)
-		a := mathutil.ScaleInt(ctx.Difficulty, 1, 4)
-		b := mathutil.ScaleInt(ctx.Difficulty, 1, 6)
-		x0 := mathutil.ScaleInt(ctx.Difficulty, 1, 6)
-		ans := 2*a*x0 + b
-		return generator.Problem{
-			Question: fmt.Sprintf("What is the ratio of differentials \\(\\frac{dy}{dx}\\) for \\(y = %d x^2 + %d x\\) evaluated at \\(x = %d\\)?", a, b, x0),
-			Answer:   fmt.Sprintf("%d", ans),
-			Explanation: fmt.Sprintf("Subgoal 1: Recall that the ratio of differentials equals the derivative: \\(\\frac{dy}{dx} = f'(x)\\).\\n"+
-				"Subgoal 2: Differentiate \\(f'(x) = 2(%d)x + %d = %d x + %d\\).\\n"+
-				"Subgoal 3: Evaluate at \\(x = %d\\): \\(f'(%d) = %d(%d) + %d = %d\\).", a, b, 2*a, b, x0, x0, 2*a, x0, b, ans),
-		}
+		// The cubic and quartic differentials keep the same rule and a larger
+		// evaluation point than the quadratic branch.
+		p := 3 + rand.Intn(2)
+		a := randRange(ctx.Difficulty, 2, 4)
+		x0 := randRange(ctx.Difficulty, 1, 6)
+		dx := randRange(ctx.Difficulty, 1, 4)
+		deriv := p * a * intPow(x0, p-1)
+		answer = deriv * dx
+		question = fmt.Sprintf("If \\(y = %d x^%d\\) at \\(x = %d\\), compute the differential \\(dy\\) for \\(dx = %d\\).", a, p, x0, dx)
+		explanation = fmt.Sprintf("Subgoal 1: State the differential formula: \\(dy = f'(x) dx\\).\\n"+
+			"Subgoal 2: Differentiate: \\(f'(x) = %s\\) and evaluate at \\(x = %d\\): \\(f'(%d) = %d\\).\\n"+
+			"Subgoal 3: Multiply by \\(dx = %d\\): \\(dy = (%d)(%d) = %d\\).", calcPowerTerm(p*a, p-1), x0, x0, deriv, dx, deriv, dx, answer)
 	default:
-		// Differential for affine function y = m x + c
-		m := mathutil.ScaleInt(ctx.Difficulty, 2, 9)
-		dx := mathutil.ScaleInt(ctx.Difficulty, 1, 5)
-		dy := m * dx
-		return generator.Problem{
-			Question: fmt.Sprintf("If \\(y = %d x + 7\\), compute \\(dy\\) for \\(dx = %d\\).", m, dx),
-			Answer:   fmt.Sprintf("%d", dy),
-			Explanation: fmt.Sprintf("Subgoal 1: State the differential rule: \\(dy = f'(x) dx\\).\\n"+
-				"Subgoal 2: Since \\(f(x) = %d x + 7\\), its derivative is constant: \\(f'(x) = %d\\).\\n"+
-				"Subgoal 3: Multiply by \\(dx = %d\\): \\(dy = %d \\times %d = %d\\).", m, m, dx, m, dx, dy),
-		}
+		// Linear approximation change for f(x) = a x^p + b x.
+		p := 2 + rand.Intn(2)
+		a := randRange(ctx.Difficulty, 2, 4)
+		b := randRange(ctx.Difficulty, 2, 6)
+		x0 := randRange(ctx.Difficulty, 1, 6)
+		dx := randRange(ctx.Difficulty, 1, 4)
+		deriv := p*a*intPow(x0, p-1) + b
+		answer = deriv * dx
+		question = fmt.Sprintf("For \\(f(x) = %d x^%d + %d x\\) at \\(x = %d\\), compute the differential approximation \\(dy\\) for \\(dx = %d\\).", a, p, b, x0, dx)
+		explanation = fmt.Sprintf("Subgoal 1: State the linear approximation differential: \\(dy = f'(x) dx\\).\\n"+
+			"Subgoal 2: Compute \\(f'(x) = %s + %d\\) and evaluate at \\(x = %d\\): \\(f'(%d) = %d\\).\\n"+
+			"Subgoal 3: Multiply by \\(dx = %d\\): \\(dy = (%d)(%d) = %d\\).", calcPowerTerm(p*a, p-1), b, x0, x0, deriv, dx, deriv, dx, answer)
+	}
+
+	return generator.Problem{
+		Question:    question,
+		Answer:      strconv.Itoa(answer),
+		Explanation: explanation,
+		Facts:       map[string]string{"answer": strconv.Itoa(answer)},
+		KPOrdinal:   kp,
+	}
+}
+
+// calcPowerTerm renders c x^k with a silent unit coefficient and no exponent
+// when k is one.
+func calcPowerTerm(c, k int) string {
+	switch {
+	case c == 1 && k == 0:
+		return "1"
+	case c == 1 && k == 1:
+		return "x"
+	case c == 1:
+		return fmt.Sprintf("x^%d", k)
+	case k == 0:
+		return strconv.Itoa(c)
+	case k == 1:
+		return fmt.Sprintf("%d x", c)
+	default:
+		return fmt.Sprintf("%d x^%d", c, k)
 	}
 }
 
