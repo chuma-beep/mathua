@@ -3,6 +3,12 @@ package complex
 // Wave 4 complex analysis: twenty concepts. Every family asks for an integer
 // invariant or a small exact value, and publishes the parameters in Facts so
 // wave4_test.go can recompute the answer.
+//
+// Each knowledge point draws its own parameters and, where the mathematics
+// offers more than one honest question, its own wording. The three ordinals
+// therefore pose different problems instead of the same three problems under
+// three labels, and one ordinal alone supplies well over ten distinct
+// questions.
 
 import (
 	"fmt"
@@ -88,7 +94,7 @@ func (g *w4ComplexGen) Generate(ctx generator.GeneratorContext) generator.Proble
 	case "jensen":
 		return w4Jensen(kp)
 	}
-	return generator.Problem{Question: "What is 2 + 2? (enter a number)", Answer: "4", Explanation: "2 + 2 = 4."}
+	return generator.Problem{Question: "What is 2 + 2? (enter a number)", Answer: "4", Explanation: "2 + 2 = 4.", KPOrdinal: kp}
 }
 
 func w4C(o int, q, a, ex string, facts map[string]string) generator.Problem {
@@ -126,17 +132,70 @@ func w4Fact(n int) int {
 	return r
 }
 
+// w4Point writes a complex point without decoration the reader does not need:
+// 3, 4i, -4i, 3+4i or 3-4i.
+func w4Point(re, im int) string {
+	switch {
+	case im == 0:
+		return strconv.Itoa(re)
+	case re == 0:
+		if im > 0 {
+			return fmt.Sprintf("%di", im)
+		}
+		return fmt.Sprintf("-%di", -im)
+	default:
+		return fmtComplex(re, im)
+	}
+}
+
+// w4SinZ writes sin z or sin(a z), keeping a unit coefficient implicit.
+func w4SinZ(a int) string {
+	if a == 1 {
+		return "sin z"
+	}
+	return fmt.Sprintf("sin(%d z)", a)
+}
+
+// w4ZPow writes z or z^a, keeping a unit exponent implicit.
+func w4ZPow(a int) string {
+	if a == 1 {
+		return "z"
+	}
+	return fmt.Sprintf("z^{%d}", a)
+}
+
+// w4PiMul writes pi or a pi, keeping a unit coefficient implicit.
+func w4PiMul(a int) string {
+	if a == 1 {
+		return "pi"
+	}
+	return fmt.Sprintf("%d pi", a)
+}
+
 func w4RootsUnity(kp int) generator.Problem {
-	n := w4CR(3, 9)
+	n := w4CR(3, 16)
 	f := map[string]string{}
 	w4CI(f, "n", n)
 	switch kp {
 	case 1:
-		return w4C(kp, fmt.Sprintf("How many distinct n-th roots of unity are there for n=%d? (enter a number)", n), strconv.Itoa(n),
-			fmt.Sprintf("The equation z^{%d}=1 has exactly %d distinct roots in the complex plane.", n, n), f)
+		if rand.Intn(2) == 0 {
+			return w4C(kp, fmt.Sprintf("How many distinct n-th roots of unity are there for n=%d? (enter a number)", n), strconv.Itoa(n),
+				fmt.Sprintf("The equation z^{%d}=1 has exactly %d distinct roots in the complex plane.", n, n), f)
+		}
+		return w4C(kp, fmt.Sprintf("The %d-th roots of unity are the vertices of a regular polygon. How many vertices does that polygon have? (enter a number)", n), strconv.Itoa(n),
+			fmt.Sprintf("Each of the %d roots is one vertex, and the roots are equally spaced around the unit circle.", n), f)
 	case 2:
-		return w4C(kp, fmt.Sprintf("For n=%d, what is the sum of all n-th roots of unity? (enter a number)", n), "0",
-			"The roots are the vertices of a regular polygon centred at the origin, so their vector sum is 0.", f)
+		if rand.Intn(2) == 0 {
+			return w4C(kp, fmt.Sprintf("For n=%d, what is the sum of all n-th roots of unity? (enter a number)", n), "0",
+				"The roots are the vertices of a regular polygon centred at the origin, so their vector sum is 0.", f)
+		}
+		product := 1
+		if n%2 == 0 {
+			product = -1
+		}
+		w4CI(f, "product", product)
+		return w4C(kp, fmt.Sprintf("For n=%d, what is the product of all n-th roots of unity? (enter a number)", n), strconv.Itoa(product),
+			fmt.Sprintf("The roots are the roots of z^{%d}-1, so their product is (-1)^{%d+1}=%d.", n, n, product), f)
 	default:
 		p := w4Phi(n)
 		return w4C(kp, fmt.Sprintf("For n=%d, how many n-th roots of unity are primitive? (enter a number)", n), strconv.Itoa(p),
@@ -144,25 +203,68 @@ func w4RootsUnity(kp int) generator.Problem {
 	}
 }
 
+// w4Dirs lists points on the eight compass directions of the complex plane and
+// the principal argument of each, in degrees. Principal arguments lie in
+// (-180, 180].
+var w4Dirs = []struct{ re, im, deg int }{
+	{1, 0, 0},
+	{1, 1, 45},
+	{0, 1, 90},
+	{-1, 1, 135},
+	{-1, 0, 180},
+	{-1, -1, -135},
+	{0, -1, -90},
+	{1, -1, -45},
+}
+
 func w4Branches(kp int) generator.Problem {
-	n := w4CR(2, 7)
 	f := map[string]string{}
-	w4CI(f, "n", n)
 	switch kp {
 	case 1:
-		return w4C(kp, fmt.Sprintf("What is the principal argument of -%d, in degrees? (enter a number)", n), "180",
-			"The point is on the negative real axis. Its principal argument is 180 degrees.", f)
+		d := w4Dirs[rand.Intn(len(w4Dirs))]
+		r := w4CR(2, 9)
+		re, im := r*d.re, r*d.im
+		w4CI(f, "n", r)
+		w4CI(f, "re", re)
+		w4CI(f, "im", im)
+		return w4C(kp, fmt.Sprintf("What is the principal argument of %s, in degrees? (enter a number)", w4Point(re, im)), strconv.Itoa(d.deg),
+			fmt.Sprintf("The point %s lies at %d degrees from the positive real axis, inside the principal range (-180, 180], so its principal argument is %d degrees.", w4Point(re, im), d.deg, d.deg), f)
 	case 2:
-		return w4C(kp, fmt.Sprintf("On the circle |z|=%d, how many points lie on the principal branch cut of Log? (enter a number)", n), "1",
-			"The principal logarithm is cut along the negative real axis. That ray meets the circle at one point.", f)
+		if rand.Intn(2) == 0 {
+			r := w4CR(2, 14)
+			w4CI(f, "n", r)
+			return w4C(kp, fmt.Sprintf("On the circle |z|=%d, how many points lie on the principal branch cut of Log? (enter a number)", r), "1",
+				"The principal logarithm is cut along the negative real axis. That ray meets the circle at exactly one point, z=-"+strconv.Itoa(r)+".", f)
+		}
+		d := w4Dirs[rand.Intn(len(w4Dirs))]
+		r := w4CR(2, 9)
+		re, im := r*d.re, r*d.im
+		onCut := 0
+		if d.deg == 180 {
+			onCut = 1
+		}
+		w4CI(f, "n", r)
+		w4CI(f, "re", re)
+		w4CI(f, "im", im)
+		w4CI(f, "on_cut", onCut)
+		place := "does not lie on"
+		if onCut == 1 {
+			place = "lies on"
+		}
+		return w4C(kp, fmt.Sprintf("For the principal Log, is the point %s on the branch cut? Enter 1 for yes and 0 for no.", w4Point(re, im)), strconv.Itoa(onCut),
+			fmt.Sprintf("The cut is the negative real axis. The point %s %s that ray.", w4Point(re, im), place), f)
 	default:
-		return w4C(kp, fmt.Sprintf("For z=-%d+0.1i and z=-%d-0.1i, is the principal logarithm continuous across the cut? Enter 1 for yes and 0 for no.", n, n), "0",
-			"The principal arguments approach +pi and -pi from the two sides, so the values jump by 2 pi i.", f)
+		r := w4CR(2, 14)
+		k := w4CR(1, 5)
+		w4CI(f, "n", r)
+		w4CI(f, "k", k)
+		return w4C(kp, fmt.Sprintf("For z=-%d+%di and z=-%d-%di, is the principal logarithm continuous across the cut? Enter 1 for yes and 0 for no.", r, k, r, k), "0",
+			"The principal arguments approach +180 degrees from above the cut and -180 degrees from below, so the values jump by 2 pi i and the function is not continuous across it.", f)
 	}
 }
 
 func w4ComplexPowers(kp int) generator.Problem {
-	n := w4CR(2, 9)
+	n := w4CR(1, 14)
 	f := map[string]string{}
 	w4CI(f, "n", n)
 	re, im := 0, 0
@@ -198,36 +300,81 @@ func w4ComplexPowers(kp int) generator.Problem {
 }
 
 func w4TrigZeros(kp int) generator.Problem {
-	k := w4CR(1, 6)
+	k := w4CR(1, 14)
 	f := map[string]string{}
 	w4CI(f, "k", k)
 	switch kp {
 	case 1:
-		return w4C(kp, fmt.Sprintf("How many zeros does sin z have in the interval [-%d pi, %d pi]? (enter a number)", k, k), strconv.Itoa(2*k+1),
+		return w4C(kp, fmt.Sprintf("How many zeros does sin z have in the interval [-%s, %s]? (enter a number)", w4PiMul(k), w4PiMul(k)), strconv.Itoa(2*k+1),
 			fmt.Sprintf("The zeros are the integer multiples of pi. There are %d of them in that interval.", 2*k+1), f)
 	case 2:
-		return w4C(kp, fmt.Sprintf("For sin(%d z), the period is 2 pi divided by %d. What is %d times that period, measured in units of pi? (enter a number)", k, k, k), "2",
-			fmt.Sprintf("The period is 2 pi/%d. Multiplying by %d gives 2 pi, which is 2 units of pi.", k, k), f)
+		period := "2 pi"
+		if k > 1 {
+			period = fmt.Sprintf("2 pi/%d", k)
+		}
+		return w4C(kp, fmt.Sprintf("How many complete periods of %s fit in the interval [0, 2 pi]? (enter a number)", w4SinZ(k)), strconv.Itoa(k),
+			fmt.Sprintf("The period of %s is %s, so exactly %d of them fit in an interval of length 2 pi.", w4SinZ(k), period, k), f)
 	default:
 		return w4C(kp, fmt.Sprintf("How many zeros does cos z have in the interval [0, %d pi]? (enter a number)", 2*k), strconv.Itoa(2*k),
 			fmt.Sprintf("The zeros of cosine are pi/2 plus integer multiples of pi. There are %d in the interval.", 2*k), f)
 	}
 }
 
+// w4HarmCase is one candidate for the harmonicity check. Every expression takes
+// exactly one integer parameter, and the Laplacian quoted in why decides the
+// answer.
+type w4HarmCase struct {
+	expr     string
+	harmonic bool
+	why      string
+}
+
+var w4HarmCases = []w4HarmCase{
+	{"%d(x^2-y^2)", true, "u_xx=2a and u_yy=-2a, so the Laplacian is zero."},
+	{"%d(x^2+y^2)", false, "u_xx=2a and u_yy=2a, so the Laplacian is 4a, which is not zero."},
+	{"%dxy", true, "u_xx=0 and u_yy=0, so the Laplacian is zero."},
+	{"%d(x^3-3xy^2)", true, "u_xx=6ax and u_yy=-6ax, so the Laplacian is zero."},
+	{"%d(x^3+y^3)", false, "u_xx=6ax and u_yy=6ay, so the Laplacian is 6a(x+y), not identically zero."},
+	{"%dx^2y", false, "u_xx=2ay, so the Laplacian is not identically zero."},
+	{"%de^x sin y", true, "u_xx=a e^x sin y and u_yy=-a e^x sin y, so the Laplacian is zero."},
+	{"%de^x cos y", true, "u_xx=a e^x cos y and u_yy=-a e^x cos y, so the Laplacian is zero."},
+	{"%dx^2y^2", false, "u_xx=2ay^2 and u_yy=2ax^2, so the Laplacian is not identically zero."},
+}
+
 func w4HarmonicConjugate(kp int) generator.Problem {
-	a := w4CR(1, 6)
 	f := map[string]string{}
-	w4CI(f, "a", a)
 	switch kp {
 	case 1:
+		a := w4CR(1, 14)
+		w4CI(f, "a", a)
 		return w4C(kp, fmt.Sprintf("For u=%d(x^2-y^2), what is the coefficient of xy in a harmonic conjugate v? (enter a number)", a), strconv.Itoa(2*a),
 			fmt.Sprintf("The Cauchy-Riemann equations give v=2*%d xy plus a constant, so the coefficient is %d.", a, 2*a), f)
 	case 2:
-		return w4C(kp, fmt.Sprintf("Is u=%d(x^2-y^2) harmonic? Enter 1 for yes and 0 for no.", a), "1",
-			fmt.Sprintf("The Laplacian is %d(2-2)=0, so the function is harmonic.", a), f)
+		a := w4CR(1, 12)
+		c := w4HarmCases[rand.Intn(len(w4HarmCases))]
+		expr := fmt.Sprintf(c.expr, a)
+		w4CI(f, "a", a)
+		if c.harmonic {
+			w4CI(f, "harmonic", 1)
+		} else {
+			w4CI(f, "harmonic", 0)
+		}
+		answer := "0"
+		if c.harmonic {
+			answer = "1"
+		}
+		return w4C(kp, fmt.Sprintf("Is u=%s harmonic? Enter 1 for yes and 0 for no.", expr), answer,
+			fmt.Sprintf("Write a=%d. Then %s", a, c.why), f)
 	default:
-		return w4C(kp, fmt.Sprintf("For u=%d(x^2-y^2), a harmonic conjugate is v=2*%d xy. What is v(1,2)? (enter a number)", a, a), strconv.Itoa(4*a),
-			fmt.Sprintf("Substitute x=1 and y=2: v=2*%d*1*2=%d.", a, 4*a), f)
+		a := w4CR(1, 6)
+		x0 := w4CR(1, 4)
+		y0 := w4CR(1, 4)
+		v := 2 * a * x0 * y0
+		w4CI(f, "a", a)
+		w4CI(f, "x0", x0)
+		w4CI(f, "y0", y0)
+		return w4C(kp, fmt.Sprintf("For u=%d(x^2-y^2), a harmonic conjugate is v=2*%d xy. What is v(%d,%d)? (enter a number)", a, a, x0, y0), strconv.Itoa(v),
+			fmt.Sprintf("Substitute x=%d and y=%d: v=2*%d*%d*%d=%d.", x0, y0, a, x0, y0, v), f)
 	}
 }
 
@@ -274,59 +421,150 @@ func w4Rouche(kp int) generator.Problem {
 	}
 }
 
+// w4AnalyticForms are entire nonconstant functions with one integer parameter.
+var w4AnalyticForms = []string{
+	"z^2+%d", "z^3+%dz", "e^z+%d", "sin z+%d", "cos z+%d", "z^4-%dz^2", "e^{%dz}",
+}
+
+// w4NonAnalyticForms are functions that fail the hypothesis of the open mapping
+// theorem because they are not analytic.
+var w4NonAnalyticForms = []string{"conjugate z", "|z|^2", "Re z", "Im z+%d"}
+
 func w4OpenMapping(kp int) generator.Problem {
-	a := w4CR(1, 7)
 	f := map[string]string{}
-	w4CI(f, "a", a)
 	switch kp {
 	case 1:
-		return w4C(kp, fmt.Sprintf("For the nonconstant analytic function f(z)=z^2+%d, is the image of an open set open? Enter 1 for yes and 0 for no.", a), "1",
+		a := w4CR(1, 12)
+		expr := fmt.Sprintf(w4AnalyticForms[rand.Intn(len(w4AnalyticForms))], a)
+		w4CI(f, "a", a)
+		w4CI(f, "applies", 1)
+		return w4C(kp, fmt.Sprintf("For the nonconstant analytic function f(z)=%s, is the image of an open set open? Enter 1 for yes and 0 for no.", expr), "1",
 			"The open mapping theorem says every nonconstant analytic function maps open sets to open sets.", f)
 	case 2:
+		a := w4CR(1, 9)
+		if rand.Intn(2) == 0 {
+			a = -a
+		}
+		w4CI(f, "a", a)
 		return w4C(kp, fmt.Sprintf("For the constant function f(z)=%d, is the image of the open unit disk open? Enter 1 for yes and 0 for no.", a), "0",
-			"A constant map sends the disk to a single point, and a point is not open in the plane.", f)
+			fmt.Sprintf("A constant map sends the disk to the single point %d, and a point is not open in the plane.", a), f)
 	default:
-		return w4C(kp, fmt.Sprintf("Does the open mapping theorem apply to f(z)=z^3+%d z? Enter 1 for yes and 0 for no.", a), "1",
-			"The function is nonconstant and analytic, so the theorem applies.", f)
+		a := w4CR(1, 12)
+		applies := 0
+		forms := w4NonAnalyticForms
+		why := "The function is not analytic, so the hypothesis of the open mapping theorem fails."
+		if rand.Intn(2) == 0 {
+			forms = w4AnalyticForms
+			applies = 1
+			why = "The function is nonconstant and analytic, so the theorem applies."
+		}
+		expr := fmt.Sprintf(forms[rand.Intn(len(forms))], a)
+		w4CI(f, "a", a)
+		w4CI(f, "applies", applies)
+		return w4C(kp, fmt.Sprintf("Does the open mapping theorem apply to f(z)=%s on the unit disk? Enter 1 for yes and 0 for no.", expr), strconv.Itoa(applies), why, f)
 	}
+}
+
+// w4SingCase is one function with an isolated singularity at 0. omitZero says
+// whether 0 is missing from its image near 0.
+type w4SingCase struct {
+	expr     string
+	omitZero bool
+	why      string
+}
+
+var w4CasoratiCases = []w4SingCase{
+	{"e^{%d/z}", true, "The exponential is never zero."},
+	{"%de^{1/z}", true, "A nonzero multiple of the exponential is never zero."},
+	{"e^{1/(%dz)}", true, "The exponential is never zero."},
+	{"e^{%d/z}+1", false, "It attains zero where e^{%d/z}=-1."},
+	{"e^{%d/z}-1", false, "It attains zero where e^{%d/z}=1."},
+	{"e^{%d/z}+i", false, "It attains zero where e^{%d/z}=-i."},
+	{"sin(%d/z)", false, "It attains zero wherever %d/z is an integer multiple of pi."},
+	{"cos(%d/z)", false, "It attains zero wherever %d/z is pi/2 plus an integer multiple of pi."},
+	{"sinh(%d/z)", false, "It attains zero wherever %d/z is an integer multiple of pi i."},
 }
 
 func w4Casorati(kp int) generator.Problem {
-	a := w4CR(1, 7)
 	f := map[string]string{}
-	w4CI(f, "a", a)
 	switch kp {
 	case 1:
-		return w4C(kp, fmt.Sprintf("The Laurent expansion of f(z)=e^{%d/z} has coefficient of z^{-1} equal to what? (enter a number)", a), strconv.Itoa(a),
+		a := w4CR(1, 14)
+		w4CI(f, "a", a)
+		w4CI(f, "coeff", a)
+		if rand.Intn(2) == 0 {
+			return w4C(kp, fmt.Sprintf("The Laurent expansion of f(z)=e^{%d/z} about 0 has coefficient of z^{-1} equal to what? (enter a number)", a), strconv.Itoa(a),
+				fmt.Sprintf("The expansion contains the term %d/z, so the coefficient of z^{-1} is %d.", a, a), f)
+		}
+		return w4C(kp, fmt.Sprintf("The Laurent expansion of f(z)=%de^{1/z} about 0 has coefficient of z^{-1} equal to what? (enter a number)", a), strconv.Itoa(a),
 			fmt.Sprintf("The expansion contains the term %d/z, so the coefficient of z^{-1} is %d.", a, a), f)
 	case 2:
-		return w4C(kp, fmt.Sprintf("Does e^{%d/z} omit the value 0? Enter 1 for yes and 0 for no.", a), "1",
-			"The exponential is never zero, so 0 is an omitted value.", f)
+		a := w4CR(1, 14)
+		c := w4CasoratiCases[rand.Intn(len(w4CasoratiCases))]
+		expr := fmt.Sprintf(c.expr, a)
+		w4CI(f, "a", a)
+		if c.omitZero {
+			w4CI(f, "omit_zero", 1)
+		} else {
+			w4CI(f, "omit_zero", 0)
+		}
+		answer := "0"
+		if c.omitZero {
+			answer = "1"
+		}
+		return w4C(kp, fmt.Sprintf("Does f(z)=%s omit the value 0 near 0? Enter 1 for yes and 0 for no.", expr), answer, c.why, f)
 	default:
-		return w4C(kp, fmt.Sprintf("By Casorati-Weierstrass, is the image of a punctured neighbourhood of 0 under e^{%d/z} dense in the plane? Enter 1 for yes and 0 for no.", a), "1",
-			"The theorem says the image is dense for an essential singularity.", f)
+		a := w4CR(1, 14)
+		c := w4CasoratiCases[rand.Intn(len(w4CasoratiCases))]
+		expr := fmt.Sprintf(c.expr, a)
+		w4CI(f, "a", a)
+		return w4C(kp, fmt.Sprintf("By Casorati-Weierstrass, is the image of a punctured neighbourhood of 0 under f(z)=%s dense in the plane? Enter 1 for yes and 0 for no.", expr), "1",
+			"The function has an essential singularity at 0, so Casorati-Weierstrass says its image on every punctured neighbourhood is dense.", f)
 	}
 }
 
+// w4PicardCases lists functions near an isolated singularity and how many
+// values each omits there.
+type w4PicardCase struct {
+	expr    string
+	omitted int
+	why     string
+}
+
+var w4PicardCases = []w4PicardCase{
+	{"e^{%d/z}", 1, "The exponential omits only 0."},
+	{"%de^{1/z}", 1, "A nonzero multiple of the exponential omits only 0."},
+	{"e^{1/(%dz)}", 1, "The exponential omits only 0."},
+	{"e^{%d/z}+1", 1, "The shifted exponential omits only 1."},
+	{"e^{%d/z}-1", 1, "The shifted exponential omits only -1."},
+	{"e^{%d/z}+i", 1, "The shifted exponential omits only -i."},
+	{"sin(%d/z)", 0, "The sine is surjective on the plane, so it omits no value."},
+	{"cos(%d/z)", 0, "The cosine is surjective on the plane, so it omits no value."},
+	{"sinh(%d/z)", 0, "The hyperbolic sine is surjective on the plane, so it omits no value."},
+	{"cosh(%d/z)", 0, "The hyperbolic cosine is surjective on the plane, so it omits no value."},
+}
+
 func w4Picard(kp int) generator.Problem {
-	a := w4CR(1, 7)
+	a := w4CR(1, 14)
+	c := w4PicardCases[rand.Intn(len(w4PicardCases))]
+	expr := fmt.Sprintf(c.expr, a)
 	f := map[string]string{}
 	w4CI(f, "a", a)
+	w4CI(f, "omitted", c.omitted)
 	switch kp {
 	case 1:
-		return w4C(kp, fmt.Sprintf("For e^{%d/z}, Picard's great theorem says an analytic function near an essential singularity omits at most how many values? (enter a number)", a), "1",
-			"At most one value can be omitted in every punctured neighbourhood.", f)
+		return w4C(kp, fmt.Sprintf("Picard's great theorem says that near the essential singularity of f(z)=%s, the function omits at most how many values? (enter a number)", expr), "1",
+			"At most one value can be omitted in every punctured neighbourhood of an essential singularity.", f)
 	case 2:
-		return w4C(kp, fmt.Sprintf("How many values does e^{%d/z} omit near 0? (enter a number)", a), "1",
-			"The exponential omits only 0.", f)
+		return w4C(kp, fmt.Sprintf("How many values does f(z)=%s omit near 0? (enter a number)", expr), strconv.Itoa(c.omitted), c.why, f)
 	default:
-		return w4C(kp, fmt.Sprintf("Can e^{%d/z} omit two distinct values near 0? Enter 1 for yes and 0 for no.", a), "0",
-			"Picard's theorem allows at most one omitted value, and the exponential already omits 0.", f)
+		return w4C(kp, fmt.Sprintf("Can f(z)=%s omit two distinct values near 0? Enter 1 for yes and 0 for no.", expr), "0",
+			"Picard's theorem allows at most one omitted value near an essential singularity, so two cannot be omitted.", f)
 	}
 }
 
 func w4AnalyticContinuation(kp int) generator.Problem {
-	a := w4CR(2, 8)
+	a := w4CR(2, 15)
 	f := map[string]string{}
 	w4CI(f, "a", a)
 	switch kp {
@@ -338,13 +576,13 @@ func w4AnalyticContinuation(kp int) generator.Problem {
 			fmt.Sprintf("1/(1-(%d)/%d)=1/(-1/%d)=-%d.", a+1, a, a, a), f)
 	default:
 		return w4C(kp, fmt.Sprintf("Can 1/(1-z/%d) be continued analytically through every point of the circle |z|=%d except z=%d? Enter 1 for yes and 0 for no.", a, a, a), "1",
-			fmt.Sprintf("The only obstruction on the circle is the pole at z=%d.", a), f)
+			fmt.Sprintf("The only obstruction on the circle is the pole at z=%d, so every other point of the circle is a regular point of the continuation.", a), f)
 	}
 }
 
 func w4Monodromy(kp int) generator.Problem {
-	m := w4CR(1, 6)
-	n := w4CR(1, 6)
+	m := w4CR(1, 14)
+	n := w4CR(1, 14)
 	f := map[string]string{}
 	w4CI(f, "m", m)
 	w4CI(f, "n", n)
@@ -357,64 +595,130 @@ func w4Monodromy(kp int) generator.Problem {
 			fmt.Sprintf("Each turn adds 2 pi i, so %d turns add %d times 2 pi i.", n, n), f)
 	default:
 		return w4C(kp, fmt.Sprintf("Does log(z^%d) return to its original branch after one loop around the origin? Enter 1 for yes and 0 for no.", m), "0",
-			"The branch changes by a nonzero multiple of 2 pi i, so monodromy is nontrivial.", f)
+			fmt.Sprintf("One loop adds %d times 2 pi i, which is nonzero, so monodromy is nontrivial.", m), f)
 	}
+}
+
+// w4RootExpr writes z^{1/n} or (z-a)^{1/n}, omitting a zero shift.
+func w4RootExpr(a, n int) string {
+	if a == 0 {
+		return fmt.Sprintf("z^{1/%d}", n)
+	}
+	return fmt.Sprintf("(z-%d)^{1/%d}", a, n)
 }
 
 func w4RiemannSurface(kp int) generator.Problem {
-	n := w4CR(2, 8)
+	n := w4CR(2, 15)
+	a := w4CR(0, 9)
 	f := map[string]string{}
 	w4CI(f, "n", n)
+	w4CI(f, "a", a)
 	switch kp {
 	case 1:
-		return w4C(kp, fmt.Sprintf("How many sheets does the Riemann surface of z^{1/%d} have? (enter a number)", n), strconv.Itoa(n),
-			fmt.Sprintf("Continuing z^{1/%d} once around 0 multiplies it by a primitive %d-th root of unity, so %d sheets are needed.", n, n, n), f)
+		return w4C(kp, fmt.Sprintf("How many sheets does the Riemann surface of %s have? (enter a number)", w4RootExpr(a, n)), strconv.Itoa(n),
+			fmt.Sprintf("Continuing %s once around its branch point multiplies it by a primitive %d-th root of unity, so %d sheets are needed.", w4RootExpr(a, n), n, n), f)
 	case 2:
-		return w4C(kp, fmt.Sprintf("For z^{1/%d}, at which real point is the branch point? (enter the coordinate)", n), "0",
-			"The branch point of z^{1/n} is the origin.", f)
+		return w4C(kp, fmt.Sprintf("For %s, at which real point is the branch point? (enter the coordinate)", w4RootExpr(a, n)), strconv.Itoa(a),
+			fmt.Sprintf("The function %s is singular at the point where its argument vanishes, namely z=%d.", w4RootExpr(a, n), a), f)
 	default:
-		return w4C(kp, fmt.Sprintf("For the local model w^{%d}=z near the branch point, what is the denominator of the exponent 1/%d? (enter a number)", n, n), strconv.Itoa(n),
-			fmt.Sprintf("The local model is an %d-sheeted cover, so the denominator is %d.", n, n), f)
+		model := fmt.Sprintf("w^{%d}=z", n)
+		where := "the origin"
+		if a != 0 {
+			model = fmt.Sprintf("w^{%d}=z-%d", n, a)
+			where = fmt.Sprintf("z=%d", a)
+		}
+		return w4C(kp, fmt.Sprintf("For the local model %s near the branch point %s, the projection to z is how many-to-one away from the branch point? (enter a number)", model, where), strconv.Itoa(n),
+			fmt.Sprintf("The local model is an %d-sheeted cover, so the projection is %d-to-one away from the branch point.", n, n), f)
 	}
+}
+
+// w4EllCases lists nonconstant elliptic functions and the order of their pole in
+// one fundamental parallelogram.
+type w4EllCase struct {
+	expr  string
+	poles int
+}
+
+var w4EllCases = []w4EllCase{
+	{"wp(z)+%d", 2},
+	{"wp(z)^2+%d", 4},
+	{"wp'(z)^2+%d", 6},
+	{"wp(z)wp'(z)+%d", 5},
+	{"%dwp(z)", 2},
+	{"wp(z)^3+%d", 6},
 }
 
 func w4Elliptic(kp int) generator.Problem {
-	c := w4CR(1, 6)
+	a := w4CR(1, 12)
+	c := w4EllCases[rand.Intn(len(w4EllCases))]
+	expr := fmt.Sprintf(c.expr, a)
 	f := map[string]string{}
-	w4CI(f, "c", c)
+	w4CI(f, "a", a)
+	w4CI(f, "poles", c.poles)
 	switch kp {
 	case 1:
-		return w4C(kp, fmt.Sprintf("How many independent periods does the nonconstant elliptic function wp(z)+%d have? (enter a number)", c), "2",
+		return w4C(kp, fmt.Sprintf("How many independent periods does the nonconstant elliptic function %s have? (enter a number)", expr), "2",
 			"An elliptic function is doubly periodic, so its period lattice has rank 2.", f)
 	case 2:
-		return w4C(kp, fmt.Sprintf("What is the sum of the residues of wp(z)+%d in one fundamental parallelogram? (enter a number)", c), "0",
-			"The sum of residues is zero because the boundary integrals cancel in pairs.", f)
+		return w4C(kp, fmt.Sprintf("What is the sum of the residues of %s in one fundamental parallelogram? (enter a number)", expr), "0",
+			"The sum of the residues is zero because the boundary integrals cancel in pairs.", f)
 	default:
-		return w4C(kp, fmt.Sprintf("Counting multiplicity, what is the minimum number of poles of a nonconstant elliptic function such as wp(z)+%d in one fundamental parallelogram? (enter a number)", c), "2",
-			"A nonconstant elliptic function has at least two poles counted with multiplicity.", f)
+		return w4C(kp, fmt.Sprintf("Counting multiplicity, how many poles does %s have in one fundamental parallelogram? (enter a number)", expr), strconv.Itoa(c.poles),
+			fmt.Sprintf("wp has a double pole at each lattice point and wp' has a triple pole, so this combination has a pole of order %d.", c.poles), f)
 	}
 }
 
+// w4WeightForm writes a modular form such as E4, E6 or Delta and omits a unit
+// exponent.
+func w4WeightForm(base string, n int) string {
+	if n == 1 {
+		return base
+	}
+	return fmt.Sprintf("%s^{%d}", base, n)
+}
+
 func w4ModularForms(kp int) generator.Problem {
-	k := w4CR(1, 6)
 	f := map[string]string{}
-	w4CI(f, "k", k)
 	switch kp {
 	case 1:
-		return w4C(kp, fmt.Sprintf("What is the weight of E4^{%d}? (enter a number)", k), strconv.Itoa(4*k),
-			fmt.Sprintf("Each E4 has weight 4, so the %d-th power has weight %d.", k, 4*k), f)
+		k := w4CR(1, 14)
+		w4CI(f, "k", k)
+		expr := w4WeightForm("E4", k)
+		why := "E4 has weight 4."
+		if k > 1 {
+			why = fmt.Sprintf("Each E4 has weight 4, so the %d-th power has weight %d.", k, 4*k)
+		}
+		return w4C(kp, fmt.Sprintf("What is the weight of %s? (enter a number)", expr), strconv.Itoa(4*k), why, f)
 	case 2:
-		return w4C(kp, fmt.Sprintf("What is the weight of E6^{%d}? (enter a number)", k), strconv.Itoa(6*k),
-			fmt.Sprintf("Each E6 has weight 6, so the %d-th power has weight %d.", k, 6*k), f)
+		p := w4CR(0, 4)
+		q := w4CR(1, 12)
+		w4CI(f, "p", p)
+		w4CI(f, "q", q)
+		expr := w4WeightForm("E6", q)
+		if p > 0 {
+			expr = w4WeightForm("E4", p) + " " + w4WeightForm("E6", q)
+		}
+		weight := 4*p + 6*q
+		return w4C(kp, fmt.Sprintf("What is the weight of %s? (enter a number)", expr), strconv.Itoa(weight),
+			fmt.Sprintf("E4 has weight 4 and E6 has weight 6, so the product has weight 4*%d+6*%d=%d.", p, q, weight), f)
 	default:
-		return w4C(kp, fmt.Sprintf("What is the weight of Delta^{%d}? (enter a number)", k), strconv.Itoa(12*k),
-			fmt.Sprintf("Delta has weight 12, so the %d-th power has weight %d.", k, 12*k), f)
+		k := w4CR(1, 12)
+		m := w4CR(0, 3)
+		w4CI(f, "k", k)
+		w4CI(f, "m", m)
+		expr := w4WeightForm("Delta", k)
+		if m > 0 {
+			expr = w4WeightForm("Delta", k) + " " + w4WeightForm("E4", m)
+		}
+		weight := 12*k + 4*m
+		return w4C(kp, fmt.Sprintf("What is the weight of %s? (enter a number)", expr), strconv.Itoa(weight),
+			fmt.Sprintf("Delta has weight 12 and E4 has weight 4, so the product has weight 12*%d+4*%d=%d.", k, m, weight), f)
 	}
 }
 
 func w4Gamma(kp int) generator.Problem {
-	n := w4CR(3, 9)
-	k := w4CR(1, 6)
+	n := w4CR(1, 12)
+	k := w4CR(1, 14)
 	f := map[string]string{}
 	w4CI(f, "n", n)
 	w4CI(f, "k", k)
@@ -432,50 +736,63 @@ func w4Gamma(kp int) generator.Problem {
 }
 
 func w4Weierstrass(kp int) generator.Problem {
-	a := w4CR(1, 7)
+	a := w4CR(1, 12)
 	f := map[string]string{}
 	w4CI(f, "a", a)
-	zeroWord := "zeros"
-	if 2*a-1 == 1 {
-		zeroWord = "zero"
-	}
 	switch kp {
 	case 1:
-		return w4C(kp, fmt.Sprintf("What is the order of the zero of sin(%d z) at z=0? (enter a number)", a), "1",
-			fmt.Sprintf("sin(%d z) behaves like %d z near 0, so the zero is simple.", a, a), f)
+		m := w4CR(1, 3)
+		w4CI(f, "m", m)
+		expr := w4SinZ(a)
+		if m > 1 {
+			expr = fmt.Sprintf("%s^%d", w4SinZ(a), m)
+		}
+		return w4C(kp, fmt.Sprintf("What is the order of the zero of %s at z=0? (enter a number)", expr), strconv.Itoa(m),
+			fmt.Sprintf("%s has a simple zero at 0, so its %d-th power has a zero of order %d.", w4SinZ(a), m, m), f)
 	case 2:
-		return w4C(kp, fmt.Sprintf("How many zeros does sin(%d z) have in |z|<pi? (enter a number)", a), strconv.Itoa(2*a-1),
-			fmt.Sprintf("The zeros are k pi/%d with |k|<%d. The integer k satisfying that inequality gives %d %s.", a, a, 2*a-1, zeroWord), f)
+		k := w4CR(1, 4)
+		w4CI(f, "k", k)
+		count := 2*k*a - 1
+		zeroWord := "zeros"
+		if count == 1 {
+			zeroWord = "zero"
+		}
+		disk := "pi"
+		if k > 1 {
+			disk = fmt.Sprintf("%d pi", k)
+		}
+		return w4C(kp, fmt.Sprintf("How many zeros does %s have in |z|<%s? (enter a number)", w4SinZ(a), disk), strconv.Itoa(count),
+			fmt.Sprintf("The zeros are m pi/%d with |m|<%d, so there are %d %s.", a, k*a, count, zeroWord), f)
 	default:
-		return w4C(kp, fmt.Sprintf("For sin(%d z), the elementary factor for the zero at 0 is z. Enter 1 for yes and 0 for no.", a), "1",
+		return w4C(kp, fmt.Sprintf("For %s, the elementary factor for the zero at 0 is z. Enter 1 for yes and 0 for no.", w4SinZ(a)), "1",
 			"The first Weierstrass elementary factor for a zero at 0 is z.", f)
 	}
 }
 
 func w4MittagLeffler(kp int) generator.Problem {
-	k := w4CR(1, 6)
+	k := w4CR(1, 14)
 	f := map[string]string{}
 	w4CI(f, "k", k)
 	switch kp {
 	case 1:
-		return w4C(kp, fmt.Sprintf("How many poles does csc z have in [-%d pi, %d pi]? (enter a number)", k, k), strconv.Itoa(2*k+1),
+		return w4C(kp, fmt.Sprintf("How many poles does csc z have in [-%s, %s]? (enter a number)", w4PiMul(k), w4PiMul(k)), strconv.Itoa(2*k+1),
 			fmt.Sprintf("The poles are the integer multiples of pi. There are %d of them in the interval.", 2*k+1), f)
 	case 2:
 		res := 1
 		if k%2 == 1 {
 			res = -1
 		}
-		return w4C(kp, fmt.Sprintf("What is the residue of csc z at z=%d pi? (enter a number)", k), strconv.Itoa(res),
+		return w4C(kp, fmt.Sprintf("What is the residue of csc z at z=%s? (enter a number)", w4PiMul(k)), strconv.Itoa(res),
 			fmt.Sprintf("The residue of csc z at an integer multiple k pi is (-1)^k. Here k=%d, so the residue is %d.", k, res), f)
 	default:
-		return w4C(kp, fmt.Sprintf("For the doubled interval [-%d pi, %d pi], how many poles does csc z have? (enter a number)", 2*k, 2*k), strconv.Itoa(4*k+1),
+		return w4C(kp, fmt.Sprintf("For the doubled interval [-%s, %s], how many poles does csc z have? (enter a number)", w4PiMul(2*k), w4PiMul(2*k)), strconv.Itoa(4*k+1),
 			fmt.Sprintf("The integer multiples of pi in the interval give %d poles.", 4*k+1), f)
 	}
 }
 
 func w4SchwarzChristoffel(kp int) generator.Problem {
-	n := w4CR(3, 8)
-	m := w4CR(2, 7)
+	n := w4CR(3, 15)
+	m := w4CR(2, 13)
 	f := map[string]string{}
 	w4CI(f, "n", n)
 	w4CI(f, "m", m)
@@ -484,8 +801,8 @@ func w4SchwarzChristoffel(kp int) generator.Problem {
 		return w4C(kp, fmt.Sprintf("A Schwarz-Christoffel map sends the upper half-plane to a polygon with %d sides. What is the sum of its interior angles in units of pi? (enter a number)", n), strconv.Itoa(n-2),
 			fmt.Sprintf("A polygon with %d sides has interior angles summing to (%d-2) pi, which is %d units of pi.", n, n, n-2), f)
 	case 2:
-		return w4C(kp, fmt.Sprintf("For an interior angle pi/%d at a vertex, the Schwarz-Christoffel exponent is alpha/pi-1. What is the denominator of that exponent when written with denominator %d? (enter a number)", m, m), strconv.Itoa(m),
-			fmt.Sprintf("The exponent is 1/%d-1=(1-%d)/%d, so its denominator is %d.", m, m, m, m), f)
+		return w4C(kp, fmt.Sprintf("For an interior angle pi/%d at a vertex, the Schwarz-Christoffel exponent is alpha/pi-1=(1-%d)/%d. What is its denominator? (enter a number)", m, m, m), strconv.Itoa(m),
+			fmt.Sprintf("The exponent is 1/%d-1=(1-%d)/%d, and that fraction is in lowest terms, so its denominator is %d.", m, m, m, m), f)
 	default:
 		return w4C(kp, fmt.Sprintf("For a polygon with %d vertices, what is the sum of the Schwarz-Christoffel exponents alpha/pi-1? (enter a number)", n), "-2",
 			"The sum of the exterior angles is 2 pi, so the sum of the exponents is -2.", f)
@@ -493,24 +810,26 @@ func w4SchwarzChristoffel(kp int) generator.Problem {
 }
 
 func w4Jensen(kp int) generator.Problem {
-	a := w4CR(1, 6)
-	r := w4CR(1, 6)
+	a := w4CR(1, 12)
 	f := map[string]string{}
 	w4CI(f, "a", a)
-	w4CI(f, "r", r)
-	zeroWord := "zeros"
-	if a == 1 {
-		zeroWord = "zero"
-	}
 	switch kp {
 	case 1:
-		return w4C(kp, fmt.Sprintf("How many zeros does z^{%d}(z-1) have inside |z|<1/2? (enter a number)", a), strconv.Itoa(a),
-			fmt.Sprintf("The factor z^{%d} contributes %d %s at 0, while z-1 has no zero inside the small disk.", a, a, zeroWord), f)
+		zeroWord := "zeros"
+		if a == 1 {
+			zeroWord = "zero"
+		}
+		return w4C(kp, fmt.Sprintf("How many zeros does %s(z-1) have inside |z|<1/2? (enter a number)", w4ZPow(a)), strconv.Itoa(a),
+			fmt.Sprintf("The factor %s contributes %d %s at 0, while z-1 has no zero inside the small disk.", w4ZPow(a), a, zeroWord), f)
 	case 2:
+		r := w4CR(1, 14)
+		w4CI(f, "r", r)
 		return w4C(kp, fmt.Sprintf("If an analytic function has no zeros in |z|<%d, does Jensen's formula reduce to log|f(0)| = the average of log|f(%d e^{i theta})|? Enter 1 for yes and 0 for no.", r, r), "1",
 			"With no zeros the sum over zeros is empty, so the formula reduces to the mean-value identity.", f)
 	default:
-		return w4C(kp, fmt.Sprintf("How many zeros does z^{%d}(z-1) have inside |z|<2? (enter a number)", a), strconv.Itoa(a+1),
-			fmt.Sprintf("The factor z^{%d} contributes %d %s and z-1 contributes one more, all inside the disk of radius 2.", a, a, zeroWord), f)
+		b := w4CR(2, 6)
+		w4CI(f, "b", b)
+		return w4C(kp, fmt.Sprintf("How many zeros does %s(z-1) have inside |z|<%d? (enter a number)", w4ZPow(a), b), strconv.Itoa(a+1),
+			fmt.Sprintf("The factor %s contributes %d zeros and z-1 contributes one more, all inside the disk of radius %d.", w4ZPow(a), a, b), f)
 	}
 }

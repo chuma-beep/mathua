@@ -324,24 +324,97 @@ func (g *rootsGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 
 type modulusGen struct{}
 
+// modulusTriples are Pythagorean triples, so |a+bi| is an integer and the
+// numeric answer stays typeable on a phone keypad.
+var modulusTriples = [][3]int{
+	{3, 4, 5}, {5, 12, 13}, {8, 15, 17}, {7, 24, 25},
+	{9, 40, 41}, {12, 35, 37}, {20, 21, 29}, {6, 8, 10},
+	{9, 12, 15}, {10, 24, 26}, {15, 20, 25}, {16, 30, 34},
+	{21, 28, 35}, {12, 16, 20}, {24, 32, 40}, {14, 48, 50},
+}
+
+func modulusAbs(v int) int {
+	if v < 0 {
+		return -v
+	}
+	return v
+}
+
 func (g *modulusGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type triple struct{ a, b, r int }
-	tableEasy := []triple{
-		{3, 4, 5}, {5, 12, 13}, {8, 6, 10}, {7, 24, 25}, {9, 12, 15},
+	kp := ctx.KPOrdinal
+	if kp < 1 || kp > 3 {
+		kp = 1 + rand.Intn(3)
 	}
-	tableHard := []triple{
-		{9, 40, 41}, {12, 35, 37}, {20, 21, 29},
+	switch kp {
+	case 2:
+		a := rand.Intn(19) - 9
+		b := rand.Intn(19) - 9
+		if a == 0 && b == 0 {
+			a = 3
+			b = 4
+		}
+		z := fmtComplex(a, b)
+		return generator.Problem{
+			Question:    fmt.Sprintf("What is \\(|%s|^2\\)? (enter a number)", z),
+			Answer:      strconv.Itoa(a*a + b*b),
+			Explanation: fmt.Sprintf("Multiply by the conjugate: z z̄ = %d² + (%d)² = %d.", a, b, a*a+b*b),
+			Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "answer": strconv.Itoa(a*a + b*b)},
+			KPOrdinal:   kp,
+		}
+	case 3:
+		t := modulusTriples[rand.Intn(len(modulusTriples))]
+		a, b, r := t[0], t[1], t[2]
+		z1 := fmtComplex(a, b)
+		var z2 string
+		c, d := 0, 0
+		holds := 1
+		switch rand.Intn(3) {
+		case 0:
+			// Same direction, so the triangle inequality is an equality.
+			k := 2 + rand.Intn(3)
+			c, d = k*a, k*b
+			z2 = fmtComplex(c, d)
+		case 1:
+			// A quarter turn, so the two vectors are not parallel.
+			c, d = -b, a
+			z2 = fmtComplex(c, d)
+			holds = 0
+		default:
+			// Opposite direction, which is also strict.
+			c, d = -a, -b
+			z2 = fmtComplex(c, d)
+			holds = 0
+		}
+		explanation := "The two vectors point in the same direction, so |z1+z2| equals |z1|+|z2|."
+		if holds == 0 {
+			explanation = "The two vectors are not parallel, so |z1+z2| is strictly less than |z1|+|z2|."
+		}
+		return generator.Problem{
+			Question:    fmt.Sprintf("Let z1=%s and z2=%s. Does |z1+z2| = |z1|+|z2| hold? Enter 1 for yes and 0 for no.", z1, z2),
+			Answer:      strconv.Itoa(holds),
+			Explanation: explanation,
+			Facts: map[string]string{
+				"a": strconv.Itoa(a), "b": strconv.Itoa(b), "r": strconv.Itoa(r),
+				"c": strconv.Itoa(c), "d": strconv.Itoa(d), "answer": strconv.Itoa(holds),
+			},
+			KPOrdinal: kp,
+		}
 	}
-	pool := tableEasy
-	if scale > 3 {
-		pool = append(tableEasy, tableHard...)
+	t := modulusTriples[rand.Intn(len(modulusTriples))]
+	a, b, r := t[0], t[1], t[2]
+	if rand.Intn(2) == 0 {
+		a = -a
 	}
-	e := pool[rand.Intn(len(pool))]
+	if rand.Intn(2) == 0 {
+		b = -b
+	}
+	aa, bb := modulusAbs(a), modulusAbs(b)
 	return generator.Problem{
-		Question:    fmt.Sprintf("What is \\(|%s|\\)?", fmtComplex(e.a, e.b)),
-		Answer:      fmt.Sprintf("%d", e.r),
-		Explanation: fmt.Sprintf("|%s| = √(%d²+%d²) = √%d = %d", fmtComplex(e.a, e.b), e.a, e.b, e.a*e.a+e.b*e.b, e.r),
+		Question:    fmt.Sprintf("What is \\(|%s|\\)? (enter a number)", fmtComplex(a, b)),
+		Answer:      strconv.Itoa(r),
+		Explanation: fmt.Sprintf("|%s| = √(%d²+%d²) = √%d = %d", fmtComplex(a, b), aa, bb, a*a+b*b, r),
+		Facts:       map[string]string{"a": strconv.Itoa(a), "b": strconv.Itoa(b), "r": strconv.Itoa(r), "answer": strconv.Itoa(r)},
+		KPOrdinal:   kp,
 	}
 }
 
@@ -557,27 +630,79 @@ func (g *powerSeriesGen) Generate(ctx generator.GeneratorContext) generator.Prob
 
 type logarithmGen struct{}
 
+// logRayAngles are the ray angles a branch cut may follow, in degrees.
+var logRayAngles = []int{0, 45, 90, 135, 180, 225, 270, 315}
+
+// logarithmGen asks about the principal value, about which points a chosen cut
+// removes and about the correction the product law needs. All three answers are
+// integers, so the question is gradable without a symbolic parser.
 func (g *logarithmGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	scale := int(1 + ctx.Difficulty*4)
-	type entry struct {
-		question string
-		answer   string
-		reason   string
+	kp := ctx.KPOrdinal
+	if kp < 1 || kp > 3 {
+		kp = 1 + rand.Intn(3)
 	}
-	tableEasy := []entry{
-		{"Does e^w = 0 have solutions? (yes/no)", "no", "The complex exponential never vanishes: |e^w| > 0 always, so 0 has no logarithm."},
-		{"What is the principal Log(1)? (enter a number)", "0", "ln|1| + i*Arg(1) = 0 + 0 = 0."},
-		{"Is the complex logarithm single-valued without a branch cut? (yes/no)", "no", "Values differ by 2*pi*i: a cut selects one branch."},
-		{"Does Log(e^w) = w hold for all w? (yes/no)", "no", "Only on the strip -pi < Im(w) <= pi; otherwise subtract 2*k*pi*i."},
+	switch kp {
+	case 1:
+		n := 1 + rand.Intn(14)
+		imag := 0
+		z := n
+		where := "on the positive real axis, where the principal argument is 0"
+		if rand.Intn(2) == 0 {
+			z = -n
+			imag = 1
+			where = "on the negative real axis, where the principal argument is pi"
+		}
+		return generator.Problem{
+			Question:    fmt.Sprintf("What is the imaginary part of the principal Log of z=%d, in units of pi? (enter a number)", z),
+			Answer:      strconv.Itoa(imag),
+			Explanation: fmt.Sprintf("Log(%d) = ln(%d) + i·(%d·pi): the point %d lies %s.", z, n, imag, z, where),
+			Facts:       map[string]string{"n": strconv.Itoa(n), "z": strconv.Itoa(z), "imag_pi": strconv.Itoa(imag), "answer": strconv.Itoa(imag)},
+			KPOrdinal:   kp,
+		}
+	case 2:
+		d := w4Dirs[rand.Intn(len(w4Dirs))]
+		r := 2 + rand.Intn(8)
+		re, im := r*d.re, r*d.im
+		ray := logRayAngles[rand.Intn(len(logRayAngles))]
+		dirDeg := (d.deg + 360) % 360
+		onRay := 0
+		word := "does not lie on"
+		if dirDeg == ray {
+			onRay = 1
+			word = "lies on"
+		}
+		return generator.Problem{
+			Question:    fmt.Sprintf("A branch of the logarithm is cut along the ray at angle %d degrees. Does that ray contain the point %s? Enter 1 for yes and 0 for no.", ray, w4Point(re, im)),
+			Answer:      strconv.Itoa(onRay),
+			Explanation: fmt.Sprintf("The point %s lies at %d degrees, so it %s the ray cut at %d degrees.", w4Point(re, im), dirDeg, word, ray),
+			Facts:       map[string]string{"re": strconv.Itoa(re), "im": strconv.Itoa(im), "ray": strconv.Itoa(ray), "on_ray": strconv.Itoa(onRay), "answer": strconv.Itoa(onRay)},
+			KPOrdinal:   kp,
+		}
+	default:
+		d1 := w4Dirs[rand.Intn(len(w4Dirs))]
+		d2 := w4Dirs[rand.Intn(len(w4Dirs))]
+		r1 := 2 + rand.Intn(4)
+		r2 := 2 + rand.Intn(4)
+		re1, im1 := r1*d1.re, r1*d1.im
+		re2, im2 := r2*d2.re, r2*d2.im
+		sum := d1.deg + d2.deg
+		m := 0
+		switch {
+		case sum > 180:
+			m = 1
+		case sum <= -180:
+			m = -1
+		}
+		principal := sum - 360*m
+		k := -m
+		return generator.Problem{
+			Question: fmt.Sprintf("For z1=%s and z2=%s, the product law Log(z1 z2) = Log z1 + Log z2 + 2 pi i k needs a correction. What is k? (enter a number)", w4Point(re1, im1), w4Point(re2, im2)),
+			Answer:   strconv.Itoa(k),
+			Explanation: fmt.Sprintf("Arg z1 + Arg z2 = %d degrees while the principal argument of z1 z2 is %d degrees. "+
+				"The sum is reduced by %d times 360 degrees, which is %d times 2 pi in the imaginary part, so k=%d.",
+				sum, principal, m, m, k),
+			Facts:     map[string]string{"k": strconv.Itoa(k), "sum": strconv.Itoa(sum), "answer": strconv.Itoa(k)},
+			KPOrdinal: kp,
+		}
 	}
-	tableHard := []entry{
-		{"Log(-1) + Log(-1) vs Log(1): the correction term is a multiple of pi. Which multiple of pi? (enter like 2pi)", "2pi", "i*pi + i*pi = 2*pi*i vs 0: differs by 2*pi*i."},
-		{"Principal Log(-1) equals? (enter like pi*i)", "pi*i", "ln|-1| + i*Arg(-1) = 0 + pi*i."},
-	}
-	pool := tableEasy
-	if scale > 3 {
-		pool = append(tableEasy, tableHard...)
-	}
-	e := pool[rand.Intn(len(pool))]
-	return generator.Problem{Question: e.question, Answer: e.answer, Explanation: e.reason}
 }
