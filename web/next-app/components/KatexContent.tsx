@@ -77,7 +77,6 @@ function warnFontOnce(): void {
   try {
     const fonts = (window as unknown as { fonts?: { check(spec: string): boolean } }).fonts
     if (fonts && !fonts.check('16px KaTeX_Main')) {
-      // eslint-disable-next-line no-console
       console.warn('[KatexContent] KaTeX_Main webfont not loaded, math symbols may show as boxes')
     }
   } catch {
@@ -124,7 +123,6 @@ function rehypeKatexFallback() {
           // Provenance for triage: route + span kind + full-ish source. The
           // `\[`-storm investigation showed a bare excerpt is unidentifiable.
           const route = window.location.pathname + window.location.search
-          // eslint-disable-next-line no-console
           console.error(
             `[KatexContent] KaTeX failed to render (${kind} @ ${route}); showing source fallback:`,
             source.slice(0, 500)

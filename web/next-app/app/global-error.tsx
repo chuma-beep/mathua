@@ -31,6 +31,7 @@ export default function GlobalError({
               >
                 ↻ Try again
               </button>
+              {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- the router is not mounted when this boundary renders, so a full reload is intentional */}
               <a href="/" style={{ border: '1px solid #444', color: '#e8e2d5', padding: '10px 20px', fontSize: '12px', textDecoration: 'none' }}>
                 ← Return home
               </a>
