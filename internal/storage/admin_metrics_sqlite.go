@@ -17,7 +17,7 @@ const adminSQLiteClass = `CASE
 	ELSE 'unclassified'
 END`
 
-func (s *SQLiteStore) AdminMetrics(since, until time.Time, bucket time.Duration) (*AdminMetrics, error) {
+func (s *SQLiteStore) AdminMetrics(since, until time.Time, bucket time.Duration, sections ...string) (*AdminMetrics, error) {
 	if !until.After(since) {
 		return nil, fmt.Errorf("admin metrics: until must be after since")
 	}
@@ -32,46 +32,80 @@ func (s *SQLiteStore) AdminMetrics(since, until time.Time, bucket time.Duration)
 		MasteredByConcept: map[string]int{},
 		ReportStatus:      map[string]int{},
 	}
-	if err := s.adminSQLiteAccounts(out); err != nil {
-		return nil, err
+	wantsTotals := adminSectionRequested(sections, "totals")
+	if adminSectionRequested(sections, "accounts") {
+		if err := s.adminSQLiteAccounts(out); err != nil {
+			return nil, err
+		}
 	}
-	if err := s.adminSQLiteActivity(out, sinceText, untilText, bucketSec); err != nil {
-		return nil, err
+	if adminSectionRequested(sections, "activity") || wantsTotals {
+		if err := s.adminSQLiteActivity(out, since, until, sinceText, untilText, bucketSec); err != nil {
+			return nil, err
+		}
 	}
-	if err := s.adminSQLiteSignups(out, sinceText, untilText, bucketSec); err != nil {
-		return nil, err
+	if adminSectionRequested(sections, "signups") || wantsTotals {
+		if err := s.adminSQLiteSignups(out, sinceText, untilText, bucketSec); err != nil {
+			return nil, err
+		}
 	}
-	if err := s.adminSQLiteMastery(out, sinceText, untilText, bucketSec); err != nil {
-		return nil, err
+	if adminSectionRequested(sections, "mastery") {
+		if err := s.adminSQLiteMastery(out, sinceText, untilText, bucketSec); err != nil {
+			return nil, err
+		}
 	}
-	if err := s.adminSQLiteXP(out, since.UnixNano(), until.UnixNano(), bucketSec); err != nil {
-		return nil, err
+	if adminSectionRequested(sections, "xp") || wantsTotals {
+		if err := s.adminSQLiteXP(out, since.UnixNano(), until.UnixNano(), bucketSec); err != nil {
+			return nil, err
+		}
 	}
-	if err := s.adminSQLiteQuizzes(out, sinceText, untilText, since.UnixNano(), until.UnixNano(), bucketSec); err != nil {
-		return nil, err
+	if adminSectionRequested(sections, "quizzes") || adminSectionRequested(sections, "diagnostics") || wantsTotals {
+		if err := s.adminSQLiteQuizzes(out, sinceText, untilText, since.UnixNano(), until.UnixNano(), bucketSec); err != nil {
+			return nil, err
+		}
 	}
-	if err := s.adminSQLiteReports(out, sinceText, untilText, bucketSec); err != nil {
-		return nil, err
+	if adminSectionRequested(sections, "reports") || adminSectionRequested(sections, "status") || wantsTotals {
+		if err := s.adminSQLiteReports(out, sinceText, untilText, bucketSec); err != nil {
+			return nil, err
+		}
 	}
-	if err := s.adminSQLiteConcepts(out, sinceText, untilText); err != nil {
-		return nil, err
+	if adminSectionRequested(sections, "concepts") {
+		if err := s.adminSQLiteConcepts(out, since, until, sinceText, untilText); err != nil {
+			return nil, err
+		}
 	}
-	out.Activity = adminFillActivity(out.Activity, adminBucketStarts(since, until, bucket))
-	out.Signups = adminFillSeries(out.Signups, adminBucketStarts(since, until, bucket))
-	out.Mastery = adminFillSeries(out.Mastery, adminBucketStarts(since, until, bucket))
-	out.XP = adminFillXP(out.XP, adminBucketStarts(since, until, bucket))
-	out.Reports = adminFillReports(out.Reports, adminBucketStarts(since, until, bucket))
-	out.Quizzes = adminFillSeries(out.Quizzes, adminBucketStarts(since, until, bucket))
-	out.TimedQuizzes = adminFillSeries(out.TimedQuizzes, adminBucketStarts(since, until, bucket))
-	out.Diagnostics = adminFillSeries(out.Diagnostics, adminBucketStarts(since, until, bucket))
+	starts := adminBucketStarts(since, until, bucket)
+	if adminSectionRequested(sections, "activity") {
+		out.Activity = adminFillActivity(out.Activity, starts)
+	}
+	if adminSectionRequested(sections, "signups") {
+		out.Signups = adminFillSeries(out.Signups, starts)
+	}
+	if adminSectionRequested(sections, "mastery") {
+		out.Mastery = adminFillSeries(out.Mastery, starts)
+	}
+	if adminSectionRequested(sections, "xp") {
+		out.XP = adminFillXP(out.XP, starts)
+	}
+	if adminSectionRequested(sections, "reports") {
+		out.Reports = adminFillReports(out.Reports, starts)
+	}
+	if adminSectionRequested(sections, "quizzes") {
+		out.Quizzes = adminFillSeries(out.Quizzes, starts)
+		out.TimedQuizzes = adminFillSeries(out.TimedQuizzes, starts)
+	}
+	if adminSectionRequested(sections, "diagnostics") {
+		out.DiagnosticCompletions = adminFillSeries(out.DiagnosticCompletions, starts)
+	}
 	return out, nil
 }
 
 func (s *SQLiteStore) AdminLiveMetrics(since time.Time) (AdminLiveMetrics, error) {
 	var live AdminLiveMetrics
+	dateLo, dateHi := adminDatePrefilter(since, time.Now().UTC())
 	if err := s.db.QueryRow(
-		`SELECT COUNT(*) FROM attempts WHERE datetime(timestamp) >= datetime(?)`,
-		since.UTC().Format(time.RFC3339)).Scan(&live.Answers15m); err != nil {
+		`SELECT COUNT(*) FROM attempts INDEXED BY idx_attempts_timestamp
+		 WHERE datetime(timestamp) >= datetime(?) AND timestamp >= ? AND timestamp < ?`,
+		since.UTC().Format(time.RFC3339), dateLo, dateHi).Scan(&live.Answers15m); err != nil {
 		return live, fmt.Errorf("admin live answers: %w", err)
 	}
 	if err := s.db.QueryRow(
@@ -103,7 +137,12 @@ func (s *SQLiteStore) adminSQLiteAccounts(out *AdminMetrics) error {
 	return nil
 }
 
-func (s *SQLiteStore) adminSQLiteActivity(out *AdminMetrics, since, until string, bucketSec int64) error {
+func (s *SQLiteStore) adminSQLiteActivity(out *AdminMetrics, sinceTime, untilTime time.Time, since, until string, bucketSec int64) error {
+	dateLo, dateHi := adminDatePrefilter(sinceTime, untilTime)
+	// The text range is the indexed prefilter; datetime() is the exact
+	// comparison. INDEXED BY is deliberate because SQLite otherwise prefers a
+	// covering index and scans every attempt, which is the behaviour the
+	// production EXPLAIN reproduced.
 	activity, err := s.db.Query(`SELECT bucket,
 		COUNT(DISTINCT CASE WHEN class = 'registered' THEN student_id END),
 		COUNT(DISTINCT CASE WHEN class = 'guest' THEN student_id END),
@@ -113,10 +152,11 @@ func (s *SQLiteStore) adminSQLiteActivity(out *AdminMetrics, since, until string
 			SELECT a.student_id, a.correct,
 				(CAST(strftime('%s', a.timestamp) AS INTEGER) / ?) * ? AS bucket,
 				`+adminSQLiteClass+` AS class
-			FROM attempts a LEFT JOIN students s ON s.id = a.student_id
+			FROM attempts a INDEXED BY idx_attempts_timestamp LEFT JOIN students s ON s.id = a.student_id
 			WHERE datetime(a.timestamp) >= datetime(?) AND datetime(a.timestamp) < datetime(?)
+			  AND a.timestamp >= ? AND a.timestamp < ?
 		)
-		GROUP BY bucket ORDER BY bucket`, bucketSec, bucketSec, since, until)
+		GROUP BY bucket ORDER BY bucket`, bucketSec, bucketSec, since, until, dateLo, dateHi)
 	if err != nil {
 		return fmt.Errorf("admin activity: %w", err)
 	}
@@ -146,9 +186,10 @@ func (s *SQLiteStore) adminSQLiteActivity(out *AdminMetrics, since, until string
 		COUNT(*), COALESCE(SUM(correct), 0)
 		FROM (
 			SELECT a.student_id, a.correct, `+adminSQLiteClass+` AS class
-			FROM attempts a LEFT JOIN students s ON s.id = a.student_id
+			FROM attempts a INDEXED BY idx_attempts_timestamp LEFT JOIN students s ON s.id = a.student_id
 			WHERE datetime(a.timestamp) >= datetime(?) AND datetime(a.timestamp) < datetime(?)
-		)`, since, until).Scan(&totals.all, &totals.registered, &totals.guests,
+			  AND a.timestamp >= ? AND a.timestamp < ?
+		)`, since, until, dateLo, dateHi).Scan(&totals.all, &totals.registered, &totals.guests,
 		&totals.unclassified, &totals.answers, &totals.correct); err != nil {
 		return fmt.Errorf("admin activity totals: %w", err)
 	}
@@ -186,7 +227,22 @@ func (s *SQLiteStore) adminSQLiteSignups(out *AdminMetrics, since, until string,
 		out.Signups = append(out.Signups, p)
 		out.Totals.NewRegistrations += p.Value
 	}
-	return rows.Err()
+	if err := rows.Err(); err != nil {
+		return err
+	}
+	// Cohort, current state: accounts registered in the window that have
+	// completed a diagnostic by the time of this request. Completion can
+	// happen after the window closes, which is why this is not an event rate.
+	if err := s.db.QueryRow(`SELECT COUNT(*) FROM students
+		WHERE diagnostic_completed_at <> ''
+		  AND datetime(created_at) >= datetime(?) AND datetime(created_at) < datetime(?)
+		  AND substr(id, 1, 6) <> 'guest_'
+		  AND (COALESCE(username, '') <> '' OR COALESCE(password_hash, '') <> ''
+		    OR COALESCE(email, '') <> '' OR COALESCE(google_id, '') <> '')`,
+		since, until).Scan(&out.Totals.RegisteredDiagnosticCohort); err != nil {
+		return fmt.Errorf("admin diagnostic cohort: %w", err)
+	}
+	return nil
 }
 
 func (s *SQLiteStore) adminSQLiteMastery(out *AdminMetrics, since, until string, bucketSec int64) error {
@@ -318,8 +374,8 @@ func (s *SQLiteStore) adminSQLiteQuizzes(out *AdminMetrics, since, until string,
 		if err := diag.Scan(&p.Start, &p.Value); err != nil {
 			return fmt.Errorf("admin diagnostics scan: %w", err)
 		}
-		out.Diagnostics = append(out.Diagnostics, p)
-		out.Totals.DiagnosticCompleted += p.Value
+		out.DiagnosticCompletions = append(out.DiagnosticCompletions, p)
+		out.Totals.DiagnosticCompletions += p.Value
 	}
 	return diag.Err()
 }
@@ -382,12 +438,14 @@ func (s *SQLiteStore) adminSQLiteReports(out *AdminMetrics, since, until string,
 	return status.Err()
 }
 
-func (s *SQLiteStore) adminSQLiteConcepts(out *AdminMetrics, since, until string) error {
+func (s *SQLiteStore) adminSQLiteConcepts(out *AdminMetrics, sinceTime, untilTime time.Time, since, until string) error {
+	dateLo, dateHi := adminDatePrefilter(sinceTime, untilTime)
 	byConcept := map[string]*AdminConceptMetric{}
 	rows, err := s.db.Query(`SELECT concept_id, COUNT(*), COALESCE(SUM(correct), 0)
-		FROM attempts
+		FROM attempts INDEXED BY idx_attempts_timestamp
 		WHERE datetime(timestamp) >= datetime(?) AND datetime(timestamp) < datetime(?)
-		GROUP BY concept_id`, since, until)
+		  AND timestamp >= ? AND timestamp < ?
+		GROUP BY concept_id`, since, until, dateLo, dateHi)
 	if err != nil {
 		return fmt.Errorf("admin concept attempts: %w", err)
 	}

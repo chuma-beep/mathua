@@ -8,6 +8,11 @@
 export type AdminMetricKind = 'event' | 'current' | 'derived'
 export type AdminMetricFormat = 'number' | 'percent'
 
+// Reset and delete remove attempts, XP events, progress and quiz rows. Every
+// metric derived from those tables describes the rows still present, not a
+// permanent history, and the info popover has to say so.
+const RETAINED_ROWS = 'Retained rows only; reset or delete removes history.'
+
 export interface AdminMetricDefinition {
   id: string
   label: string
@@ -18,7 +23,7 @@ export interface AdminMetricDefinition {
   caveat?: string
 }
 
-export const ADMIN_METRICS: AdminMetricDefinition[] = [
+const metrics: AdminMetricDefinition[] = [
   {
     id: 'online_now',
     label: 'Online now',
@@ -205,13 +210,13 @@ export const ADMIN_METRICS: AdminMetricDefinition[] = [
     caveat: 'Diagnostic starts are not measured: the session row is deleted when a run finishes.',
   },
   {
-    id: 'signup_to_diagnostic',
-    label: 'Signup to diagnostic',
-    definition: 'Registered signups that completed a diagnostic.',
-    kind: 'derived',
-    window: 'Selected range',
-    format: 'percent',
-    caveat: 'Visitor-to-signup is unavailable because no visitor event history exists.',
+    id: 'registered_diagnostic_cohort',
+    label: 'Registered in window, diagnostic completed to date',
+    definition: 'Accounts registered in the selected window that have completed a diagnostic by the time of this request.',
+    kind: 'current',
+    window: 'Registered in selected window; completion current',
+    format: 'number',
+    caveat: 'A cohort, not an event rate: completion may happen after the registration window closes. Visitor-to-signup is unavailable because no visitor event history exists.',
   },
   {
     id: 'domain_coverage',
@@ -290,6 +295,14 @@ export const ADMIN_METRICS: AdminMetricDefinition[] = [
     format: 'number',
   },
 ]
+
+// Event metrics and the derived rates built from them describe retained rows.
+// Current-state metrics do not: they describe the rows present right now.
+export const ADMIN_METRICS: AdminMetricDefinition[] = metrics.map(metric => {
+  const retained = metric.kind === 'event' || (metric.kind === 'derived' && metric.id !== 'registered_diagnostic_cohort')
+  if (!retained) return metric
+  return { ...metric, caveat: [metric.caveat, RETAINED_ROWS].filter(Boolean).join(' ') }
+})
 
 const byID = new Map(ADMIN_METRICS.map(metric => [metric.id, metric]))
 
