@@ -15,42 +15,19 @@
 
 import { useCallback, useEffect, useRef, type MutableRefObject } from 'react'
 // Side-effect import: this is what registers the <math-field> custom element.
-// The type import below is erased at runtime, so it cannot do this job.
 import 'mathlive'
-// A value import, not just the type: the two settings below are statics on the class,
-// and the instance accessors deliberately throw ("Use MathfieldElement.soundsDirectory
-// instead"), so there is no way to reach them from an element.
-import { MathfieldElement } from 'mathlive'
+// Type-only: the runtime class comes from the custom element registry below.
+// MathLive's SSR build does not export the class, so a value import breaks the
+// server render of this client component.
+import type { MathfieldElement } from 'mathlive'
 import { layoutsForMode } from './layouts'
 import type { MathKeyboardMode } from './keyboards'
 import { toPlainAnswer } from './plainAnswer'
 import type { MathInputValue } from './types'
 
-/*
- * `<math-field>` is a custom element MathLive registers at import time. React 18
- * has no JSX type for it and MathLive's types declare the class but not the
- * intrinsic element, so this is the one place that bridges the two. It lives here
- * rather than in a standalone .d.ts because a declaration file has no runtime
- * presence and the repo's orphan-module guard treats that as dead code.
- */
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'math-field': React.DetailedHTMLProps<React.HTMLAttributes<MathfieldElement>, MathfieldElement> & {
-        /** MathLive attribute: LaTeX rendered while the field is empty. */
-        placeholder?: string
-        /** MathLive attribute: 'auto' | 'manual' | 'sandboxed'. */
-        'math-virtual-keyboard-policy'?: string
-        /**
-         * `class`, not `className`. React 18 forwards props to custom elements
-         * verbatim instead of mapping className to class, so className would be
-         * written as the attribute `classname` and the theme CSS would never match.
-         */
-        class?: string
-      }
-    }
-  }
-}
+// The <math-field> intrinsic is declared in types/math-field.d.ts. React 19
+// moved JSX.IntrinsicElements into the react module's JSX namespace, so a
+// global JSX declaration no longer augments it.
 
 export interface MathLiveFieldHandle {
   focus: () => void
@@ -131,8 +108,10 @@ export default function MathLiveField({
   // is the documented way to prevent any sound from being loaded, and `keypressVibration`
   // is the same idea for the vibration API.
   useEffect(() => {
-    MathfieldElement.soundsDirectory = null
-    MathfieldElement.keypressVibration = false
+    const ctor = customElements.get('math-field') as typeof MathfieldElement | undefined
+    if (!ctor) return
+    ctor.soundsDirectory = null
+    ctor.keypressVibration = false
   }, [])
 
   const ref = useRef<MathfieldElement | null>(null)
@@ -238,7 +217,8 @@ export default function MathLiveField({
     if (disabled) {
       const active = document.activeElement
       if (active === el) el.blur()
-      if (active === el || !(active instanceof MathfieldElement)) window.mathVirtualKeyboard?.hide()
+      const ctor = customElements.get('math-field') as typeof MathfieldElement | undefined
+      if (active === el || !ctor || !(active instanceof ctor)) window.mathVirtualKeyboard?.hide()
     }
   }, [disabled])
 
