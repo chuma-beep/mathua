@@ -56,7 +56,7 @@ func (s *SQLiteStore) LeaderboardPage(view string, since time.Time, limit, offse
 		}
 		rows, err = s.db.Query(sqliteAllTimeRows+`
 			ORDER BY xp DESC, s.created_at ASC, s.id ASC
-			LIMIT ? OFFSET ?`, weekKey, since.UnixNano(), limit, offset)
+			LIMIT ? OFFSET ?`, weekKey, limit, offset)
 	default:
 		return nil, 0, fmt.Errorf("leaderboard view %q", view)
 	}
@@ -120,8 +120,9 @@ const sqliteWeeklyFiltered = `
 	         WHERE cp.student_id = s.id AND cp.status = 'MASTERED' AND cp.mastered_at >= ?),
 	       SUM(e.amount) AS xp,
 	       COALESCE((SELECT lm.tier FROM league_members lm
-	                 WHERE lm.student_id = s.id AND lm.week = ?), ''),
-	       SUM(e.amount),
+	                 WHERE lm.student_id = s.id AND lm.week <= ?
+	                 ORDER BY lm.week DESC LIMIT 1), ''),
+	       s.xp_total,
 	       s.created_at
 	FROM students s
 	JOIN xp_events e ON e.student_id = s.id AND e.created_at >= ?
@@ -137,9 +138,9 @@ const sqliteAllTimeRows = `
 	       0,
 	       s.xp_total AS xp,
 	       COALESCE((SELECT lm.tier FROM league_members lm
-	                 WHERE lm.student_id = s.id AND lm.week = ?), ''),
-	       COALESCE((SELECT SUM(e.amount) FROM xp_events e
-	                 WHERE e.student_id = s.id AND e.created_at >= ?), 0),
+	                 WHERE lm.student_id = s.id AND lm.week <= ?
+	                 ORDER BY lm.week DESC LIMIT 1), ''),
+	       s.xp_total,
 	       s.created_at
 	FROM students s
 	WHERE s.xp_total > 0 AND ` + rankedStudentWhere

@@ -37,7 +37,7 @@ func (s *PostgresStore) LeaderboardPage(view string, since time.Time, limit, off
 		}
 		rows, err = s.db.Query(pgAllTimeRows+`
 			ORDER BY xp DESC, s.created_at ASC, s.id ASC
-			LIMIT $3 OFFSET $4`, weekKey, since.UnixNano(), limit, offset)
+			LIMIT $3 OFFSET $4`, weekKey, limit, offset)
 	default:
 		return nil, 0, fmt.Errorf("leaderboard view %q", view)
 	}
@@ -95,8 +95,9 @@ const pgWeeklyFiltered = `
 	         WHERE cp.student_id = s.id AND cp.status = 'MASTERED' AND cp.mastered_at >= $2),
 	       SUM(e.amount) AS xp,
 	       COALESCE((SELECT lm.tier FROM league_members lm
-	                 WHERE lm.student_id = s.id AND lm.week = $3), ''),
-	       SUM(e.amount),
+	                 WHERE lm.student_id = s.id AND lm.week <= $3
+	                 ORDER BY lm.week DESC LIMIT 1), ''),
+	       s.xp_total,
 	       s.created_at
 	FROM students s
 	JOIN xp_events e ON e.student_id = s.id AND e.created_at >= $1
@@ -112,9 +113,9 @@ const pgAllTimeRows = `
 	       0,
 	       s.xp_total AS xp,
 	       COALESCE((SELECT lm.tier FROM league_members lm
-	                 WHERE lm.student_id = s.id AND lm.week = $1), ''),
-	       COALESCE((SELECT SUM(e.amount) FROM xp_events e
-	                 WHERE e.student_id = s.id AND e.created_at >= $2), 0),
+	                 WHERE lm.student_id = s.id AND lm.week <= $1
+	                 ORDER BY lm.week DESC LIMIT 1), ''),
+	       s.xp_total,
 	       s.created_at
 	FROM students s
 	WHERE s.xp_total > 0 AND ` + rankedStudentWhere
