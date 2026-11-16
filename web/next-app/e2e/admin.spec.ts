@@ -270,8 +270,9 @@ test.describe('administrator management', () => {
 
     await page.goto('/admin/users')
     await expect(page.getByText(/needs a staff role/)).toBeVisible()
-    await expect(page.getByRole('navigation', { name: 'Admin sections' })).toHaveCount(0)
-    await expect(page.locator('header a[href="/admin"]')).toHaveCount(0)
+    const adminNav = page.getByRole('navigation', { name: 'Admin sections' })
+    await expect(adminNav.getByRole('link')).toHaveCount(0)
+    await expect(page.getByRole('link', { name: 'Admin console' })).toHaveCount(0)
     await expect(page.getByRole('table')).toHaveCount(0)
   })
 
@@ -321,12 +322,16 @@ test.describe('administrator management', () => {
     stubLearnerApi(page)
     await signIn(page, 'owner')
     await page.goto('/profile')
-    await expect(page.getByTestId('profile-sidebar').getByRole('link', { name: 'Admin' })).toBeVisible()
+    await page.getByTestId('profile-sidebar').getByRole('button', { name: /account menu$/ }).click()
+    const admin = page.getByRole('menuitem', { name: 'Admin console' })
+    await expect(admin).toBeVisible()
+    await expect(admin).toHaveAttribute('target', '_blank')
 
     await signIn(page, 'student')
     await stubApi(page, [ROOT, CONTRIBUTOR], 'student')
     await page.goto('/profile')
-    await expect(page.getByTestId('profile-sidebar').getByRole('link', { name: 'Admin' })).toHaveCount(0)
+    await page.getByTestId('profile-sidebar').getByRole('button', { name: /account menu$/ }).click()
+    await expect(page.getByRole('menuitem', { name: 'Admin console' })).toHaveCount(0)
   })
 
   // The mobile case, on a phone viewport. The desktop rail on /profile has carried Admin since
@@ -341,12 +346,14 @@ test.describe('administrator management', () => {
     await page.goto('/learn')
 
     await page.locator('button:has(span:text-is("λ"))').first().click()
-    const admin = page.getByRole('dialog').getByRole('link', { name: 'Admin' })
+    await page.getByRole('dialog').getByRole('button', { name: /account menu$/ }).click()
+    const admin = page.getByRole('menuitem', { name: 'Admin console' })
     await expect(admin).toBeVisible()
-    await admin.click()
-    await expect(page).toHaveURL(/\/admin/)
+    const [popup] = await Promise.all([page.waitForEvent('popup'), admin.click()])
+    await popup.waitForLoadState()
+    await expect(popup).toHaveURL(/\/admin/)
     // Reaches the real page, not a 404 or a broken render.
-    await expect(page.getByRole('heading', { name: 'Overview' })).toBeVisible()
+    await expect(popup.getByRole('heading', { name: 'Overview' })).toBeVisible()
   })
 
   test('a learner is not offered the Admin entry on a phone', async ({ page }) => {
@@ -356,7 +363,8 @@ test.describe('administrator management', () => {
     await page.goto('/learn')
 
     await page.locator('button:has(span:text-is("λ"))').first().click()
-    await expect(page.getByRole('dialog').getByRole('link', { name: 'Admin' })).toHaveCount(0)
+    await page.getByRole('dialog').getByRole('button', { name: /account menu$/ }).click()
+    await expect(page.getByRole('menuitem', { name: 'Admin console' })).toHaveCount(0)
   })
 
   // The case that actually happened, and that every test above missed.
@@ -386,7 +394,8 @@ test.describe('administrator management', () => {
 
     await page.goto('/learn')
     await page.locator('button:has(span:text-is("λ"))').first().click()
-    await expect(page.getByRole('dialog').getByRole('link', { name: 'Admin' }))
+    await page.getByRole('dialog').getByRole('button', { name: /account menu$/ }).click()
+    await expect(page.getByRole('menuitem', { name: 'Admin console' }))
       .toBeVisible({ timeout: 10_000 })
 
     // …and the stale session is repaired, so the next page load needs no request.
@@ -404,11 +413,12 @@ test.describe('administrator management', () => {
     await signIn(page, 'owner')
 
     await page.goto('/profile')
-    // On a phone the sidebar is a sheet, mounted only while open (sidebar.tsx:190), so the entry
-    // lives inside it rather than on the page. The opener is the ghost SidebarTrigger /profile
-    // renders above the content on small screens, and it has no accessible name of its own.
+    // On a phone the sidebar is a sheet, mounted only while open (sidebar.tsx:190). Open it,
+    // then open the profile photo menu inside it; that menu is the admin entry point.
     await page.locator('button:has(span:text-is("λ"))').first().click()
-    await expect(page.getByRole('dialog').getByRole('link', { name: 'Admin' })).toBeVisible({ timeout: 10_000 })
+    const sheet = page.getByRole('dialog')
+    await sheet.getByRole('button', { name: /account menu$/ }).click()
+    await expect(page.getByRole('menuitem', { name: 'Admin console' })).toBeVisible({ timeout: 10_000 })
   })
 
   test('a staff member is still an ordinary learner', async ({ page }) => {
