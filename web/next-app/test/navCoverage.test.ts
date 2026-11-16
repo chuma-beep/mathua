@@ -51,7 +51,7 @@ function hasWayOff(src: string): boolean {
   // close, so the shell is held to the same rule in the test below: DocPage must contain the
   // back-link glyph. The exemption is verified, not assumed.
   const body = src.replace(/^import .*$/gm, '')
-  return /<Header\b/.test(body) || /<BottomTabs\b/.test(body) || /<AppShell\b/.test(body)
+  return /<Header\b/.test(body) || /<BottomTabs\b/.test(body) || /<AppShell\b/.test(body) || /<AdminShell\b/.test(body)
     || /\bredirect\(/.test(body) || /←/.test(body) || /<DocPage\b/.test(body)
 }
 
@@ -79,7 +79,8 @@ describe('every page offers navigation', () => {
       .filter(r => !hasWayOff(readFileSync(r, 'utf8')))
       .map(r => '/' + r.split('/').slice(1, -1).join('/'))
 
-    // <AppShell> renders BottomTabs and the mobile trigger, so it satisfies this.
+    // <AppShell> renders BottomTabs and the mobile trigger, and <AdminShell> is its own
+    // staff surface with a sidebar and a learner-site exit, so both satisfy this.
     expect(bare).toEqual([])
   })
 

@@ -9,7 +9,7 @@ import { useAuthState } from '../hooks/useAuthState'
 import { useChrome } from '../hooks/useChrome'
 import { useInertWhen } from '../hooks/useInertWhen'
 import { registerChromePart } from '../lib/chrome'
-import { signOut, isStaffRole } from '../lib/auth'
+import { canOpenAdminConsole, signOut } from '../lib/auth'
 import { resolveAvatar } from '../lib/dicebear'
 import Avatar from './Avatar'
 import ReportUpdatesBadge from './ReportUpdatesBadge'
@@ -161,7 +161,7 @@ export default function Header({ links }: HeaderProps) {
   // grants nothing, the admin routes re-check it server-side.
   const compassLinks = links
     ? displayLinks
-    : overflowLinks(loggedIn, isStaffRole(user?.role)).filter(showLink)
+    : overflowLinks(loggedIn).filter(showLink)
 
   return (
     // The header hides by sliding up, not by collapsing. Collapsing its height
@@ -457,6 +457,21 @@ export default function Header({ links }: HeaderProps) {
           >
             Contact
           </button>
+          {canOpenAdminConsole(user?.role) && (
+            <>
+              <div className="my-1 border-t border-mathua-border" />
+              <a
+                href="/admin"
+                target="_blank"
+                rel="noreferrer"
+                role="menuitem"
+                onClick={() => setOpen(false)}
+                className="block px-3 py-2 font-mono text-xs text-mathua-muted hover:text-mathua-blue hover:bg-mathua-surface-elevated transition-colors"
+              >
+                Admin console
+              </a>
+            </>
+          )}
           <button
             type="button"
             role="menuitem"

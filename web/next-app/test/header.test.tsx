@@ -414,31 +414,31 @@ describe('Header profile menu', () => {
 
 })
 
-// An administrator working from a phone had no route to administration: the desktop rail on
-// /profile carries the Admin entry, but /profile is one tap from the tab bar and no other surface
-// offered it, so the compass menu was the only place it could reach mobile. This is that test, on
-// the surface the phone actually renders.
-describe('Header compass menu and the Admin entry', () => {
+// The Admin entry now lives in the profile photo menu, not the compass. It is offered only to
+// owners and admins: moderators keep their existing server permissions but do not get the entry.
+describe('Header profile menu and the Admin entry', () => {
   afterEach(() => { mockUser = null })
 
+  const openProfile = () => fireEvent.click(screen.getByRole('button', { name: 'Open profile menu' }))
   const openCompass = () => fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }))
-  const hrefs = () => within(screen.getByRole('menu', { name: 'Site navigation' }))
-    .getAllByRole('menuitem').map(i => i.getAttribute('href'))
+  const profileItems = () => within(screen.getByRole('menu', { name: 'Profile' })).getAllByRole('menuitem')
+  const adminItem = () => profileItems().find(i => i.textContent?.includes('Admin console'))
 
-  // Every staff role, not only `admin`: the server's staff set is moderator-or-above
-  // (storage.Role.IsStaff), and a moderator is a legitimate administrator.
-  it.each(['moderator', 'admin', 'owner'])('offers Admin to an %s', (role) => {
+  it.each(['admin', 'owner'])('offers Admin console to an %s', (role) => {
     mockUser = { student_id: 's1', name: 'Nelson', username: 'wis', role }
     render(<Header />)
-    openCompass()
-    expect(hrefs()).toContain('/admin')
+    openProfile()
+    const item = adminItem()
+    expect(item).toBeTruthy()
+    expect(item).toHaveAttribute('href', '/admin')
+    expect(item).toHaveAttribute('target', '_blank')
   })
 
-  it('withholds it from a learner', () => {
-    mockUser = { student_id: 's1', name: 'Nelson', username: 'wis', role: 'student' }
+  it.each(['moderator', 'student'])('withholds it from a %s', (role) => {
+    mockUser = { student_id: 's1', name: 'Nelson', username: 'wis', role }
     render(<Header />)
-    openCompass()
-    expect(hrefs()).not.toContain('/admin')
+    openProfile()
+    expect(adminItem()).toBeUndefined()
   })
 
   // A stale or pre-Admin-V2 cached bundle leaves `role` undefined. Reading that as staff would
@@ -447,8 +447,17 @@ describe('Header compass menu and the Admin entry', () => {
   it('withholds it when the role is missing', () => {
     mockUser = { student_id: 's1', name: 'Nelson', username: 'wis' }
     render(<Header />)
-    openCompass()
-    expect(hrefs()).not.toContain('/admin')
+    openProfile()
+    expect(adminItem()).toBeUndefined()
+  })
+
+  it('does not also put Admin in the compass overflow', () => {
+    mockUser = { student_id: 's1', name: 'Nelson', username: 'wis', role: 'owner' }
+    render(<Header />)
+    fireEvent.click(screen.getByRole('button', { name: 'Open navigation menu' }))
+    const hrefs = within(screen.getByRole('menu', { name: 'Site navigation' }))
+      .getAllByRole('menuitem').map(i => i.getAttribute('href'))
+    expect(hrefs).not.toContain('/admin')
   })
 
   // The panel hangs off <header>, not off the trigger's wrapper, so the outside-mousedown test

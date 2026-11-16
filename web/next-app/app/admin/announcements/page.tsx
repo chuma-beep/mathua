@@ -1,9 +1,7 @@
 'use client'
 
+import AdminShell from '@/components/admin/AdminShell'
 import { useCallback, useEffect, useState } from 'react'
-import AppShell from '../../../components/app-shell'
-import AdminNav from '../../../components/AdminNav'
-import Footer from '../../../components/Footer'
 import KatexContent from '../../../components/KatexContent'
 import Loading from '../../../components/Loading'
 import SectionHeader from '../../../components/SectionHeader'
@@ -117,11 +115,10 @@ export default function AdminAnnouncementsPage() {
   const canManage = can('content.manage')
 
   return (
-    <AppShell>
-      <main className="mx-auto w-full max-w-[900px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
+    <AdminShell>
+      <main className="mx-auto w-full max-w-[1200px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
         <SectionHeader label="Administration" title="Announcements" />
-        <AdminNav />
-
+  
         {error && (
           <p role="alert" className="mb-4 border border-mathua-red bg-mathua-surface p-4 font-mono text-xs text-mathua-red">
             {error}
@@ -240,7 +237,6 @@ export default function AdminAnnouncementsPage() {
           </ul>
         )}
       </main>
-      <Footer />
-    </AppShell>
+    </AdminShell>
   )
 }

@@ -16,7 +16,6 @@ import {
   Layers,
   LogOut,
   Mail,
-  Shield,
   Network,
   Pencil,
   Play,
@@ -46,6 +45,7 @@ import {
   useSidebar,
 } from '@/components/ui/sidebar'
 import Avatar from './Avatar'
+import ProfileMenu from './ProfileMenu'
 import { useTheme } from '../hooks/useTheme'
 import { signOut } from '../lib/auth'
 
@@ -87,17 +87,11 @@ const NAV_ITEMS: SidebarNavItem[] = [
     { label: 'How it works', href: '/how-it-works', icon: House },
   ]
 
-const ADMIN_ITEM: SidebarNavItem = {
-  label: 'Admin',
-  href: '/admin',
-  icon: Shield,
-}
-
 export interface AppSidebarProps {
   name: string
   studentId: string
   /**
-   * Whether to offer the Admin entry.
+   * Whether to offer the Admin console in the profile photo menu.
    *
    * A convenience and nothing more, the server reads the role on every administrative request,
    * so a learner who types /admin/users reaches the page and is refused by the API with a 403.
@@ -127,7 +121,7 @@ export interface AppSidebarProps {
    */
   showFriends?: boolean
   notificationUnread?: number
-  /** Open reports in the moderation queue. Only used for the Admin entry. */
+  /** Open reports in the moderation queue. Shown on the Admin console item. */
   adminReports?: number
 }
 
@@ -223,11 +217,9 @@ export function AppSidebar({
           <SidebarGroupLabel>Navigate</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {/* Admin last, and only for an administrator. Last because it is a different
-                  surface rather than another destination in this one; conditional because
-                  offering it to everyone would be an invitation most of them cannot accept.
-                  The server refuses either way, see AppSidebarProps.isAdmin. */}
-              {(isAdmin ? [...NAV_ITEMS, ADMIN_ITEM] : NAV_ITEMS)
+              {/* The admin console is not here. It lives in the profile photo menu so
+                  administration stays out of the daily learning destinations. */}
+              {NAV_ITEMS
                 .filter((item) => showLeaderboards || item.href !== '/leaderboard')
                 .filter((item) => showFriends || item.href !== '/friends')
                 .map((item) => {
@@ -245,16 +237,6 @@ export function AppSidebar({
                           <Link href={item.href}>
                             <Icon className="shrink-0" />
                             <span className="group-data-[collapsible=icon]:hidden">{item.label}</span>
-                            {item.href === '/admin' && adminReports > 0 && (
-                              <>
-                                <span className="ml-auto h-2 w-2 shrink-0 rounded-full bg-mathua-red" aria-hidden="true" />
-                                <span className="sr-only">
-                                  {adminReports === 1
-                                    ? '1 report needs attention'
-                                    : `${adminReports} reports need attention`}
-                                </span>
-                              </>
-                            )}
                           </Link>
                         )}
                       </SidebarMenuButton>
@@ -374,25 +356,17 @@ export function AppSidebar({
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild tooltip={name}>
-              <Link href="/profile">
-                <Avatar
-                  seed={studentId}
-                  name={name}
-                  size={32}
-                  url={avatarPreset !== null && avatarPreset !== undefined ? undefined : avatarUrl}
-                  preset={avatarPreset ?? undefined}
-                />
-                <span className="min-w-0 flex-1 group-data-[collapsible=icon]:hidden">
-                  <span className="block truncate font-mono text-xs text-mathua-primary">{name}</span>
-                  <span className="block truncate font-mono text-[10px] text-mathua-muted">
-                    {[username ? `@${username}` : null, level, typeof streak === 'number' ? `${streak}d` : null]
-                      .filter(Boolean)
-                      .join(' · ')}
-                  </span>
-                </span>
-              </Link>
-            </SidebarMenuButton>
+            <ProfileMenu
+              name={name}
+              studentId={studentId}
+              username={username}
+              level={level}
+              streak={streak}
+              avatarUrl={avatarUrl}
+              avatarPreset={avatarPreset}
+              isAdmin={isAdmin}
+              adminReports={adminReports}
+            />
           </SidebarMenuItem>
           {mounted && (
             <SidebarMenuItem>

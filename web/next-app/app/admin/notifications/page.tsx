@@ -1,10 +1,8 @@
 'use client'
 
+import AdminShell from '@/components/admin/AdminShell'
 import { useCallback, useEffect, useState } from 'react'
-import AppShell from '../../../components/app-shell'
-import Footer from '../../../components/Footer'
 import SectionHeader from '../../../components/SectionHeader'
-import AdminNav from '../../../components/AdminNav'
 import Loading from '../../../components/Loading'
 import {
   getAdminNotificationHealth,
@@ -98,11 +96,10 @@ export default function AdminNotificationsPage() {
   }
 
   return (
-    <AppShell>
-      <main className="mx-auto w-full max-w-[900px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
+    <AdminShell>
+      <main className="mx-auto w-full max-w-[1200px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
         <SectionHeader label="Administration" title="Notifications" />
-        <AdminNav />
-
+  
         {error && <p role="alert" className="mb-4 border border-mathua-red bg-mathua-surface p-4 font-mono text-xs text-mathua-red">{error}</p>}
         {!stats && !error && <Loading label="LOADING DELIVERY HEALTH" />}
 
@@ -234,7 +231,6 @@ export default function AdminNotificationsPage() {
           </>
         )}
       </main>
-      <Footer />
-    </AppShell>
+    </AdminShell>
   )
 }

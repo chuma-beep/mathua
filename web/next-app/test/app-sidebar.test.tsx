@@ -55,9 +55,11 @@ describe('AppSidebar', () => {
     expect(screen.getByText('2 unread notifications')).toBeInTheDocument()
   })
 
-  it('shows the moderation queue alert on the Admin item', () => {
+  it('shows the moderation queue alert in the profile menu', () => {
     renderSidebar({ isAdmin: true, adminReports: 3 })
-    expect(screen.getByText('3 reports need attention')).toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: /Admin console/ })).toBeNull()
+    fireEvent.click(screen.getByRole('button', { name: 'Ada, account menu' }))
+    expect(screen.getByLabelText('3 reports need attention')).toBeInTheDocument()
   })
 
   it('renders Navigate group without a Diagnostic entry (no CTA duplication)', () => {
@@ -243,17 +245,19 @@ describe('AppSidebar', () => {
     expect(signOutIdx).toBeGreaterThan(themeIdx)
   })
 
-  it('offers the Admin entry to an administrator and to nobody else', () => {
-    // The component's half of the contract. The other half is that /profile passes `isAdmin` from
-    // the session role on *every* branch, the loading and error branches did, and the main one
-    // did not, so the entry appeared and then vanished once scores arrived. That wiring is what
-    // `e2e/admin.spec.ts` guards; this guards the prop.
+  it('offers the Admin console in the profile menu to an administrator and nobody else', () => {
+    // The entry is behind the profile photo, not in the daily navigation. The server still
+    // re-checks the role on every admin request; this guards the prop and the placement.
     const { unmount } = renderSidebar({ isAdmin: true })
-    expect(screen.getByRole('link', { name: /Admin/ })).toBeTruthy()
+    expect(screen.queryByRole('link', { name: /Admin console/ })).toBeNull()
+    fireEvent.click(screen.getByRole('button', { name: 'Ada, account menu' }))
+    const admin = screen.getByRole('menuitem', { name: /Admin console/ })
+    expect(admin).toHaveAttribute('target', '_blank')
     unmount()
 
     renderSidebar()
-    expect(screen.queryByRole('link', { name: /Admin/ })).toBeNull()
+    fireEvent.click(screen.getByRole('button', { name: 'Ada, account menu' }))
+    expect(screen.queryByRole('link', { name: /Admin console/ })).toBeNull()
   })
 
   // A learner who turns leaderboards off asked for the surface to go away, so the

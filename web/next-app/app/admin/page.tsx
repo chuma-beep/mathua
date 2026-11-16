@@ -1,11 +1,9 @@
 'use client'
 
+import AdminShell from '@/components/admin/AdminShell'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import AppShell from '../../components/app-shell'
-import Footer from '../../components/Footer'
 import SectionHeader from '../../components/SectionHeader'
-import AdminNav from '../../components/AdminNav'
 import AdminAnalyticsDashboard from '../../components/admin/analytics'
 import Loading from '../../components/Loading'
 import { adminOverview, getErrorMessage, type AdminOverview } from '../../lib/api'
@@ -32,11 +30,10 @@ export default function AdminOverviewPage() {
   }, [])
 
   return (
-    <AppShell>
+    <AdminShell>
       <main className="mx-auto w-full max-w-[1200px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
         <SectionHeader label="Administration" title="Overview" />
-        <AdminNav />
-
+  
         {!isStaff && (
           <p role="status" className="border border-mathua-border bg-mathua-surface p-4 font-mono text-xs text-mathua-secondary">
             This area needs a staff role. If you hold one, sign in with that account.
@@ -113,12 +110,8 @@ export default function AdminOverviewPage() {
           </>
         )}
 
-        <Link href="/profile" className="mt-10 inline-block font-mono text-xs text-mathua-secondary hover:text-mathua-blue">
-          ← Profile
-        </Link>
       </main>
-      <Footer />
-    </AppShell>
+    </AdminShell>
   )
 }
 

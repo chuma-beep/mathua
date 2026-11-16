@@ -1,11 +1,9 @@
 'use client'
 
+import AdminShell from '@/components/admin/AdminShell'
 import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
-import AppShell from '../../../components/app-shell'
-import Footer from '../../../components/Footer'
 import SectionHeader from '../../../components/SectionHeader'
-import AdminNav from '../../../components/AdminNav'
 import { useAdminMe } from '../../../hooks/useAdminMe'
 import { listAdminAudit, getErrorMessage, type AdminAuditEvent } from '../../../lib/api'
 
@@ -43,11 +41,10 @@ export default function AdminAuditPage() {
   const { isStaff } = useAdminMe()
 
   return (
-    <AppShell>
+    <AdminShell>
       <main className="mx-auto w-full max-w-[820px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
         <SectionHeader label="Administration" title="Audit" />
-        <AdminNav />
-
+  
         <form
           onSubmit={(event) => { event.preventDefault(); setAppliedQuery(query.trim()); setOffset(0) }}
           className="mb-4 flex flex-wrap gap-2"
@@ -162,8 +159,7 @@ export default function AdminAuditPage() {
           ← Overview
         </Link>
       </main>
-      <Footer />
-    </AppShell>
+    </AdminShell>
   )
 }
 

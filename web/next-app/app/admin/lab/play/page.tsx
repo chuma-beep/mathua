@@ -1,12 +1,10 @@
 'use client'
 
+import AdminShell from '@/components/admin/AdminShell'
 import { Suspense } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import AppShell from '../../../../components/app-shell'
-import Footer from '../../../../components/Footer'
 import SectionHeader from '../../../../components/SectionHeader'
-import AdminNav from '../../../../components/AdminNav'
 import LearnStepper from '../../../../components/LearnStepper'
 
 // The learner route for one concept, mounted from the lab.
@@ -55,15 +53,13 @@ function Playground() {
 
 export default function AdminLabPlayPage() {
   return (
-    <AppShell>
-      <main className="mx-auto w-full max-w-[900px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
+    <AdminShell>
+      <main className="mx-auto w-full max-w-[1200px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
         <SectionHeader label="Administration" title="Learner view" />
-        <AdminNav />
-        <Suspense fallback={<p className="font-mono text-xs text-mathua-muted">Loading…</p>}>
+          <Suspense fallback={<p className="font-mono text-xs text-mathua-muted">Loading…</p>}>
           <Playground />
         </Suspense>
       </main>
-      <Footer />
-    </AppShell>
+    </AdminShell>
   )
 }
