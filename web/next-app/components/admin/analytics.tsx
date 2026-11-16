@@ -197,9 +197,37 @@ function bucketRows(data: AdminAnalytics, range: Range): Row[] {
   return rows
 }
 
+const RANGE_VALUES = new Set(RANGES.map(item => item.value))
+const TAB_VALUES = new Set(TABS.map(item => item.value))
+
+function initialRange(): Range {
+  if (typeof window === 'undefined') return '7d'
+  const value = new URLSearchParams(window.location.search).get('range')
+  return value && RANGE_VALUES.has(value as Range) ? (value as Range) : '7d'
+}
+
+function initialTab(): Tab {
+  if (typeof window === 'undefined') return 'overview'
+  const value = new URLSearchParams(window.location.search).get('tab')
+  return value && TAB_VALUES.has(value as Tab) ? (value as Tab) : 'overview'
+}
+
+// The range and tab are part of the page URL so an operator can share exactly
+// what they are looking at. replaceState keeps the back button on the page
+// rather than stepping through every control change.
+function syncAnalyticsUrl(range: Range, tab: Tab) {
+  if (typeof window === 'undefined') return
+  const url = new URL(window.location.href)
+  if (range === '7d') url.searchParams.delete('range')
+  else url.searchParams.set('range', range)
+  if (tab === 'overview') url.searchParams.delete('tab')
+  else url.searchParams.set('tab', tab)
+  window.history.replaceState({}, '', url.toString())
+}
+
 export default function AdminAnalyticsDashboard() {
-  const [range, setRange] = useState<Range>('7d')
-  const [tab, setTab] = useState<Tab>('overview')
+  const [range, setRange] = useState<Range>(initialRange)
+  const [tab, setTab] = useState<Tab>(initialTab)
   const [data, setData] = useState<AdminAnalytics | null>(null)
   const [live, setLive] = useState<AdminAnalyticsLive | null>(null)
   const [error, setError] = useState('')
@@ -281,8 +309,8 @@ export default function AdminAnalyticsDashboard() {
           onValueChange={(value) => {
             if (!value || value === range) return
             requestId.current++
-            setData(null)
             setRange(value as Range)
+            syncAnalyticsUrl(value as Range, tab)
           }}
           aria-label="Analytics range"
           className="mt-3 flex justify-start gap-1 overflow-x-auto"
@@ -322,8 +350,8 @@ export default function AdminAnalyticsDashboard() {
         onValueChange={(value) => {
           if (value === tab) return
           requestId.current++
-          setData(null)
           setTab(value as Tab)
+          syncAnalyticsUrl(range, value as Tab)
         }}
         className="mt-6"
       >

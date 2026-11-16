@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useAdminMe } from '../../hooks/useAdminMe'
 import { useTheme } from '../../hooks/useTheme'
-import { ADMIN_ITEMS, isAdminNavActive } from './nav'
+import { ADMIN_GROUPS, ADMIN_ITEMS, adminBreadcrumb, isAdminNavActive } from './nav'
 import { House, SunMoon } from '../icons'
 
 // The admin surface is its own window, not a tab inside the learner shell. It
@@ -39,28 +39,39 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
           ) : items.length === 0 ? (
             <p className="px-2 font-mono text-[11px] text-mathua-muted">No staff sections for this account.</p>
           ) : (
-            <ul className="space-y-1">
-              {items.map((item) => {
-                const active = isAdminNavActive(pathname, item.href)
-                const Icon = item.icon
+            <div className="space-y-5">
+              {ADMIN_GROUPS.map((group) => {
+                const groupItems = items.filter((item) => item.group === group)
+                if (groupItems.length === 0) return null
                 return (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      aria-current={active ? 'page' : undefined}
-                      className={
-                        active
-                          ? 'flex h-10 items-center gap-2.5 bg-mathua-blue-faint px-3 font-mono text-xs text-mathua-blue'
-                          : 'flex h-10 items-center gap-2.5 px-3 font-mono text-xs text-mathua-secondary hover:bg-mathua-surface-elevated hover:text-mathua-primary'
-                      }
-                    >
-                      <Icon size={15} aria-hidden="true" />
-                      <span className="truncate">{item.label}</span>
-                    </Link>
-                  </li>
+                  <div key={group}>
+                    <p className="px-3 pb-1 font-mono text-[9px] uppercase tracking-[0.18em] text-mathua-muted">{group}</p>
+                    <ul className="space-y-1">
+                      {groupItems.map((item) => {
+                        const active = isAdminNavActive(pathname, item.href)
+                        const Icon = item.icon
+                        return (
+                          <li key={item.href}>
+                            <Link
+                              href={item.href}
+                              aria-current={active ? 'page' : undefined}
+                              className={
+                                active
+                                  ? 'flex h-10 items-center gap-2.5 bg-mathua-blue-faint px-3 font-mono text-xs text-mathua-blue'
+                                  : 'flex h-10 items-center gap-2.5 px-3 font-mono text-xs text-mathua-secondary hover:bg-mathua-surface-elevated hover:text-mathua-primary'
+                              }
+                            >
+                              <Icon size={15} aria-hidden="true" />
+                              <span className="truncate">{item.label}</span>
+                            </Link>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
                 )
               })}
-            </ul>
+            </div>
           )}
         </nav>
 
@@ -128,12 +139,39 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
         </header>
 
         <div className="flex min-h-screen flex-col">
-          <div className="flex-1">{children}</div>
+          <div className="flex-1">
+            <AdminBreadcrumb pathname={pathname} />
+            {children}
+          </div>
           <footer className="border-t border-mathua-border px-4 py-4 font-mono text-[10px] text-mathua-muted sm:px-6">
             Mathua administration. Actions here are audited.
           </footer>
         </div>
       </div>
     </div>
+  )
+}
+
+function AdminBreadcrumb({ pathname }: { pathname: string | null }) {
+  const crumbs = adminBreadcrumb(pathname ?? '')
+  if (crumbs.length === 0) return null
+  return (
+    <nav aria-label="Breadcrumb" className="px-4 pt-4 sm:px-6">
+      <ol className="flex flex-wrap items-center gap-1.5 font-mono text-[10px] text-mathua-muted">
+        <li>
+          <Link href="/admin" className="hover:text-mathua-blue">Administration</Link>
+        </li>
+        {crumbs.map((crumb, index) => (
+          <li key={crumb.href} className="flex items-center gap-1.5">
+            <span aria-hidden="true">/</span>
+            {index === crumbs.length - 1 ? (
+              <span aria-current="page" className="text-mathua-secondary">{crumb.label}</span>
+            ) : (
+              <Link href={crumb.href} className="hover:text-mathua-blue">{crumb.label}</Link>
+            )}
+          </li>
+        ))}
+      </ol>
+    </nav>
   )
 }
