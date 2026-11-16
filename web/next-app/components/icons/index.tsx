@@ -26,10 +26,13 @@ import {
   BellIcon,
   BookOpenIcon,
   ChartNoAxesColumnIcon,
+  CheckIcon,
+  ChevronRightIcon,
   ChevronsLeftIcon,
   ChevronsRightIcon,
   CompassIcon as CompassAnimatedIcon,
   Dice5Icon,
+  EllipsisIcon,
   EllipsisVerticalIcon,
   FileTextIcon,
   HandshakeIcon,
@@ -42,6 +45,7 @@ import {
   PencilIcon,
   PlayIcon,
   PlusIcon,
+  SearchIcon,
   SettingsIcon,
   ShieldIcon,
   SunMoonIcon,
@@ -145,6 +149,10 @@ export const User = wrap(UserIcon as never)
 export const Users = wrap(UsersIcon as never)
 export const ChevronDown = wrap(ChevronDownIcon as never)
 export const ChevronUp = wrap(ChevronUpIcon as never)
+export const ChevronRight = wrap(ChevronRightIcon as never)
+export const Check = wrap(CheckIcon as never)
+export const Search = wrap(SearchIcon as never)
+export const Ellipsis = wrap(EllipsisIcon as never)
 
 // The product assistant's dock. A speech pair rather than a single bubble: the
 // control opens a conversation, and one bubble reads as a notification badge.
@@ -192,6 +200,10 @@ export const ICON_NAMES = [
   'Users',
   'ChevronDown',
   'ChevronUp',
+  'ChevronRight',
+  'Check',
+  'Search',
+  'Ellipsis',
   'MessagesSquare',
   'Close',
   'ArrowUp',

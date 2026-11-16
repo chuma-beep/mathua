@@ -58,7 +58,7 @@ describe('AppSidebar', () => {
   it('shows the moderation queue alert in the profile menu', () => {
     renderSidebar({ isAdmin: true, adminReports: 3 })
     expect(screen.queryByRole('link', { name: /Admin console/ })).toBeNull()
-    fireEvent.click(screen.getByRole('button', { name: 'Ada, account menu' }))
+    fireEvent.pointerDown(screen.getByRole('button', { name: 'Ada, account menu' }), { button: 0 })
     expect(screen.getByLabelText('3 reports need attention')).toBeInTheDocument()
   })
 
@@ -250,13 +250,13 @@ describe('AppSidebar', () => {
     // re-checks the role on every admin request; this guards the prop and the placement.
     const { unmount } = renderSidebar({ isAdmin: true })
     expect(screen.queryByRole('link', { name: /Admin console/ })).toBeNull()
-    fireEvent.click(screen.getByRole('button', { name: 'Ada, account menu' }))
+    fireEvent.pointerDown(screen.getByRole('button', { name: 'Ada, account menu' }), { button: 0 })
     const admin = screen.getByRole('menuitem', { name: /Admin console/ })
     expect(admin).toHaveAttribute('target', '_blank')
     unmount()
 
     renderSidebar()
-    fireEvent.click(screen.getByRole('button', { name: 'Ada, account menu' }))
+    fireEvent.pointerDown(screen.getByRole('button', { name: 'Ada, account menu' }), { button: 0 })
     expect(screen.queryByRole('link', { name: /Admin console/ })).toBeNull()
   })
 
