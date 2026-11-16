@@ -10,6 +10,7 @@ import LeagueAvatar from '../../../components/LeagueAvatar'
 import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card'
 import { Skeleton } from '../../../components/ui/skeleton'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '../../../components/ui/table'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs'
 import { dicebearUrl, isDicebearStyle } from '../../../lib/dicebear'
 import { API_BASE, getAdminLeagueRange, getAdminLeagues, getErrorMessage, type AdminLeague, type AdminLeagueMember, type AdminLeagueRange } from '../../../lib/api'
 import { DateRangePicker } from '../../../components/ui/date-range-picker'
@@ -212,14 +213,10 @@ type PyramidRow = {
   onSelect?: () => void
 }
 
-function LeaguePyramid({ rows, label }: { rows: PyramidRow[]; label: string }) {
+function LeaguePyramid({ rows }: { rows: PyramidRow[] }) {
   const totalSeats = rows.reduce((n, r) => n + r.seats, 0)
   return (
     <>
-      <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-mathua-border pb-2">
-        <h2 className="font-mono text-xs uppercase tracking-wider text-mathua-primary">Tier pyramid</h2>
-        <span className="font-mono text-[10px] text-mathua-muted">{label}</span>
-      </div>
       <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
         {rows.map(row => {
           const fill = row.capacity > 0 ? Math.round((row.seats / row.capacity) * 100) : 0
@@ -252,6 +249,45 @@ function LeaguePyramid({ rows, label }: { rows: PyramidRow[]; label: string }) {
         ))}
       </div>
     </>
+  )
+}
+
+function TierMix({ rows }: { rows: PyramidRow[] }) {
+  const total = rows.reduce((n, r) => n + r.seats, 0)
+  const max = Math.max(1, ...rows.map(r => r.seats))
+  return (
+    <div className="mt-3 space-y-3">
+      {rows.map(row => {
+        const share = total > 0 ? (row.seats / total) * 100 : 0
+        return (
+          <div key={row.tier} className="grid grid-cols-[5.5rem_1fr_8rem] items-center gap-3">
+            <span className="font-mono text-[10px] uppercase tracking-wider text-mathua-secondary">{tierLabel(row.tier)}</span>
+            <span className="h-3 w-full bg-mathua-surface-elevated">
+              <span className="block h-3" style={{ width: `${(row.seats / max) * 100}%`, backgroundColor: TIER_COLOUR[row.tier] }} />
+            </span>
+            <span className="text-right font-mono text-[10px] tabular-nums text-mathua-muted">
+              {row.seats.toLocaleString()} seats · {share.toFixed(1)}%
+            </span>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
+function TierViews({ rows, label }: { rows: PyramidRow[]; label: string }) {
+  return (
+    <Tabs defaultValue="pyramid">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-mathua-border pb-2">
+        <TabsList className="h-9">
+          <TabsTrigger value="pyramid" className="font-mono text-[11px]">Tier pyramid</TabsTrigger>
+          <TabsTrigger value="mix" className="font-mono text-[11px]">Tier mix</TabsTrigger>
+        </TabsList>
+        <span className="font-mono text-[10px] text-mathua-muted">{label}</span>
+      </div>
+      <TabsContent value="pyramid"><LeaguePyramid rows={rows} /></TabsContent>
+      <TabsContent value="mix"><TierMix rows={rows} /></TabsContent>
+    </Tabs>
   )
 }
 
@@ -309,7 +345,7 @@ function RangePanel({
 
       <section className="mt-8" aria-labelledby="range-tiers">
         <div id="range-tiers">
-          <LeaguePyramid
+          <TierViews
             label="Seats, leagues and unique learners across the range"
             rows={TIER_ORDER.map(tier => {
               const row = data.tiers.find(t => t.tier === tier)
@@ -695,7 +731,7 @@ export default function AdminLeaguesPage() {
 
             <section className="mt-8" aria-labelledby="pyramid-heading">
               <div id="pyramid-heading">
-                <LeaguePyramid
+                <TierViews
                   label="Seats and fill by tier"
                   rows={TIER_ORDER.map(tier => {
                     const items = byTier.get(tier) ?? []
