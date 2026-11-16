@@ -310,7 +310,7 @@ func TestEngine_ShareLifecycle(t *testing.T) {
 
 func TestEngine_MyLeague(t *testing.T) {
 	e := testEngine(t)
-	st, err := e.CreateStudent("league_student")
+	st, err := e.repo.CreateUser("League Student", "league_student", "hash")
 	if err != nil {
 		t.Fatalf("CreateStudent: %v", err)
 	}

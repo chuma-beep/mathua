@@ -63,7 +63,7 @@ func (c *Computer) MyLeague(studentID string, now time.Time) (*MyLeague, error) 
 	end := start.AddDate(0, 0, 7)
 
 	out := &MyLeague{Week: week, WeekStart: start, WeekEnd: end, Members: []LeagueMemberLine{}}
-	if studentID == "" || storage.IsGuestID(studentID) {
+	if studentID == "" {
 		return out, nil
 	}
 	if err := c.repo.ResolveLeagueWeek(week, start.AddDate(0, 0, -7), start); err != nil {

@@ -133,7 +133,7 @@ func TestEnsureLeagueMembership_SeatsLateJoinersInBronze(t *testing.T) {
 	if err := store.ResolveLeagueWeek("2026-10-19", week.AddDate(0, 0, -7), week); err != nil {
 		t.Fatalf("bootstrap: %v", err)
 	}
-	late, err := store.CreateStudent("late")
+	late, err := store.CreateUser("Late", "late_learner", "hash")
 	if err != nil {
 		t.Fatalf("create late: %v", err)
 	}
@@ -179,7 +179,7 @@ func TestEnsureLeagueMembership_SkipsGuestsAndZeroXP(t *testing.T) {
 		t.Error("guest was seated in a league")
 	}
 
-	quiet, err := store.CreateStudent("quiet")
+	quiet, err := store.CreateUser("Quiet", "quiet_learner", "hash")
 	if err != nil {
 		t.Fatalf("create quiet: %v", err)
 	}
@@ -244,7 +244,7 @@ func TestLeagueRoster_OrdersByXPThenNameAndID(t *testing.T) {
 // active learner who never opened either had no tier and no avatar frame.
 func TestAwardXPSeatsAWeeklyLeague(t *testing.T) {
 	store := newTestStore(t)
-	st, err := store.CreateStudent("earner")
+	st, err := store.CreateUser("Earner", "earner", "hash")
 	if err != nil {
 		t.Fatalf("create: %v", err)
 	}
@@ -263,14 +263,14 @@ func TestAwardXPSeatsAWeeklyLeague(t *testing.T) {
 
 func TestBackfillLeagueMembershipsSeatsEligibleAccounts(t *testing.T) {
 	store := newTestStore(t)
-	earner, err := store.CreateStudent("legacy earner")
+	earner, err := store.CreateUser("Legacy Earner", "legacy_earner", "hash")
 	if err != nil {
 		t.Fatalf("create earner: %v", err)
 	}
 	if err := store.AwardXP(earner.ID, 25, "test", "legacy:1"); err != nil {
 		t.Fatalf("award: %v", err)
 	}
-	quiet, err := store.CreateStudent("quiet")
+	quiet, err := store.CreateUser("Quiet", "quiet_learner", "hash")
 	if err != nil {
 		t.Fatalf("create quiet: %v", err)
 	}
@@ -297,5 +297,27 @@ func TestBackfillLeagueMembershipsSeatsEligibleAccounts(t *testing.T) {
 	}
 	if _, _, found, err := store.LeagueMembershipOf(quiet.ID, week); err != nil || found {
 		t.Fatalf("quiet account found=%v err=%v, want no seat", found, err)
+	}
+}
+
+// Adopted guests keep their guest_ id but have credentials. The id prefix is
+// not the account type, so they must be seated and framed like any learner.
+func TestAdoptedGuestIsSeatedByAward(t *testing.T) {
+	store := newTestStore(t)
+	guest, err := store.ClaimGuestStudent("guest_adopted_league", "Guest")
+	if err != nil {
+		t.Fatalf("claim guest: %v", err)
+	}
+	adopted, err := store.AdoptGuestAsUser(guest.ID, "Adopted", "adopted", "hash")
+	if err != nil {
+		t.Fatalf("adopt: %v", err)
+	}
+	if err := store.AwardXP(adopted.ID, 30, "test", "adopt:1"); err != nil {
+		t.Fatalf("award: %v", err)
+	}
+	week := LeagueWeekKey(time.Now())
+	tier, _, found, err := store.LeagueMembershipOf(adopted.ID, week)
+	if err != nil || !found || tier != "bronze" {
+		t.Fatalf("adopted membership = %q found=%v err=%v, want bronze", tier, found, err)
 	}
 }
