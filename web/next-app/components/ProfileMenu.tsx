@@ -61,13 +61,13 @@ export default function ProfileMenu({
         </SidebarMenuButton>
       </DropdownMenuTrigger>
       <DropdownMenuContent side="top" align="start" className="w-56 rounded-none border-mathua-border bg-mathua-surface">
-        <DropdownMenuItem asChild className="font-mono text-xs text-mathua-secondary focus:bg-mathua-surface-elevated focus:text-mathua-primary">
+        <DropdownMenuItem asChild className="rounded-none font-mono text-xs text-mathua-secondary focus:bg-mathua-surface-elevated focus:text-mathua-primary">
           <Link href="/profile">
             <User size={15} aria-hidden="true" />
             Profile
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem asChild className="font-mono text-xs text-mathua-secondary focus:bg-mathua-surface-elevated focus:text-mathua-primary">
+        <DropdownMenuItem asChild className="rounded-none font-mono text-xs text-mathua-secondary focus:bg-mathua-surface-elevated focus:text-mathua-primary">
           <Link href="/settings">
             <Settings size={15} aria-hidden="true" />
             Settings
@@ -76,7 +76,7 @@ export default function ProfileMenu({
         {isAdmin && (
           <>
             <DropdownMenuSeparator className="bg-mathua-border" />
-            <DropdownMenuItem asChild className="font-mono text-xs text-mathua-secondary focus:bg-mathua-surface-elevated focus:text-mathua-blue">
+            <DropdownMenuItem asChild className="rounded-none font-mono text-xs text-mathua-secondary focus:bg-mathua-surface-elevated focus:text-mathua-blue">
               <a href="/admin" target="_blank" rel="noreferrer" aria-label="Admin console, opens in a new tab">
                 <Shield size={15} aria-hidden="true" />
                 <span className="flex-1">Admin console</span>

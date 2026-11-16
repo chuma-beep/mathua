@@ -50,8 +50,8 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
                       aria-current={active ? 'page' : undefined}
                       className={
                         active
-                          ? 'flex h-10 items-center gap-2.5 border-l-2 border-mathua-blue bg-mathua-blue-faint px-3 font-mono text-xs text-mathua-blue'
-                          : 'flex h-10 items-center gap-2.5 border-l-2 border-transparent px-3 font-mono text-xs text-mathua-secondary hover:border-mathua-border-strong hover:text-mathua-primary'
+                          ? 'flex h-10 items-center gap-2.5 bg-mathua-blue-faint px-3 font-mono text-xs text-mathua-blue'
+                          : 'flex h-10 items-center gap-2.5 px-3 font-mono text-xs text-mathua-secondary hover:bg-mathua-surface-elevated hover:text-mathua-primary'
                       }
                     >
                       <Icon size={15} aria-hidden="true" />
