@@ -203,6 +203,58 @@ function RosterPanel({
   )
 }
 
+type PyramidRow = {
+  tier: string
+  leagues: number
+  seats: number
+  capacity: number
+  unique: number
+  onSelect?: () => void
+}
+
+function LeaguePyramid({ rows, label }: { rows: PyramidRow[]; label: string }) {
+  const totalSeats = rows.reduce((n, r) => n + r.seats, 0)
+  return (
+    <>
+      <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-mathua-border pb-2">
+        <h2 className="font-mono text-xs uppercase tracking-wider text-mathua-primary">Tier pyramid</h2>
+        <span className="font-mono text-[10px] text-mathua-muted">{label}</span>
+      </div>
+      <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
+        {rows.map(row => {
+          const fill = row.capacity > 0 ? Math.round((row.seats / row.capacity) * 100) : 0
+          const content = (
+            <>
+              <div className="flex items-center justify-between gap-2">
+                <span className="font-mono text-[10px] uppercase tracking-wider text-mathua-secondary">{tierLabel(row.tier)}</span>
+                <span className="h-2 w-2" style={{ backgroundColor: TIER_COLOUR[row.tier] }} aria-hidden="true" />
+              </div>
+              <p className="mt-2 font-mono text-xl tabular-nums text-mathua-primary">{row.leagues}</p>
+              <p className="font-mono text-[10px] text-mathua-muted">league{row.leagues === 1 ? '' : 's'}</p>
+              <p className="mt-2 font-mono text-[10px] text-mathua-secondary">{row.seats.toLocaleString()} / {row.capacity.toLocaleString()} seats</p>
+              <p className="font-mono text-[10px] text-mathua-muted">{fill}% full{row.unique > 0 ? ` · ${row.unique.toLocaleString()} learners` : ''}</p>
+            </>
+          )
+          return row.onSelect ? (
+            <button key={row.tier} type="button" onClick={row.onSelect} className="border border-mathua-border bg-mathua-surface p-3 text-left hover:border-mathua-blue">
+              {content}
+            </button>
+          ) : (
+            <div key={row.tier} className={`border border-mathua-border bg-mathua-surface p-3 ${row.leagues === 0 ? 'opacity-55' : ''}`}>
+              {content}
+            </div>
+          )
+        })}
+      </div>
+      <div className="mt-3 flex h-2 w-full overflow-hidden border border-mathua-border" aria-hidden="true">
+        {rows.map(row => (
+          <span key={row.tier} style={{ width: `${totalSeats > 0 ? (row.seats / totalSeats) * 100 : 0}%`, backgroundColor: TIER_COLOUR[row.tier] }} />
+        ))}
+      </div>
+    </>
+  )
+}
+
 function RangePanel({
   data,
   loading,
@@ -210,6 +262,7 @@ function RangePanel({
   onRetry,
   rankBy,
   onRankBy,
+  onOpenWeek,
 }: {
   data: AdminLeagueRange | null
   loading: boolean
@@ -217,7 +270,20 @@ function RangePanel({
   onRetry: () => void
   rankBy: 'range' | 'latest'
   onRankBy: (value: 'range' | 'latest') => void
+  onOpenWeek: (week: string, tier: string, league: number) => void
 }) {
+  const [jumpWeek, setJumpWeek] = useState('')
+  const [jumpLeagues, setJumpLeagues] = useState<AdminLeague[]>([])
+  useEffect(() => {
+    if (!data || data.weeks_available.length === 0) { setJumpWeek(''); setJumpLeagues([]); return }
+    if (!jumpWeek || !data.weeks_available.includes(jumpWeek)) setJumpWeek(data.weeks_available[data.weeks_available.length - 1])
+  }, [data, jumpWeek])
+  useEffect(() => {
+    if (!jumpWeek) { setJumpLeagues([]); return }
+    let live = true
+    getAdminLeagues({ week: jumpWeek }).then(res => { if (live) setJumpLeagues(res.leagues) }).catch(() => { if (live) setJumpLeagues([]) })
+    return () => { live = false }
+  }, [jumpWeek])
   if (loading && !data) {
     return <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{Array.from({ length: 4 }, (_, i) => <Skeleton key={i} className="h-24 w-full" />)}</div>
   }
@@ -242,22 +308,16 @@ function RangePanel({
       </div>
 
       <section className="mt-8" aria-labelledby="range-tiers">
-        <div className="flex items-baseline justify-between border-b border-mathua-border pb-2">
-          <h2 id="range-tiers" className="font-mono text-xs uppercase tracking-wider text-mathua-primary">Tier mix</h2>
-          <span className="font-mono text-[10px] text-mathua-muted">Seats across the range</span>
-        </div>
-        <div className="mt-3 space-y-2">
-          {TIER_ORDER.map(tier => {
-            const row = data.tiers.find(t => t.tier === tier)
-            const seats = row?.seats ?? 0
-            return (
-              <div key={tier} className="grid grid-cols-[5rem_1fr_5rem] items-center gap-3">
-                <span className="font-mono text-[10px] uppercase tracking-wider text-mathua-secondary">{tierLabel(tier)}</span>
-                <span className="h-3 w-full bg-mathua-surface-elevated"><span className="block h-3" style={{ width: `${(seats / maxTier) * 100}%`, backgroundColor: TIER_COLOUR[tier] }} /></span>
-                <span className="text-right font-mono text-[11px] tabular-nums text-mathua-primary">{seats.toLocaleString()}</span>
-              </div>
-            )
-          })}
+        <div id="range-tiers">
+          <LeaguePyramid
+            label="Seats, leagues and unique learners across the range"
+            rows={TIER_ORDER.map(tier => {
+              const row = data.tiers.find(t => t.tier === tier)
+              const leagues = row?.leagues ?? 0
+              const seats = row?.seats ?? 0
+              return { tier, leagues, seats, capacity: leagues * LEAGUE_SIZE, unique: row?.unique_learners ?? 0 }
+            })}
+          />
         </div>
       </section>
 
@@ -309,6 +369,45 @@ function RangePanel({
             ))}
           </ol>
         )}
+      </section>
+
+      <section className="mt-8" aria-labelledby="range-open">
+        <div className="flex flex-wrap items-end justify-between gap-3 border-b border-mathua-border pb-2">
+          <h2 id="range-open" className="font-mono text-xs uppercase tracking-wider text-mathua-primary">Open a league roster</h2>
+          <span className="font-mono text-[10px] text-mathua-muted">Choose a week, then a league</span>
+        </div>
+        <div className="mt-3 flex flex-wrap items-center gap-2">
+          <label className="flex items-center gap-2 font-mono text-[10px] text-mathua-muted">
+            Week
+            <select aria-label="Roster week" value={jumpWeek} onChange={e => setJumpWeek(e.target.value)} className="h-9 border border-mathua-border bg-mathua-surface px-2 font-mono text-xs text-mathua-primary">
+              {data.weeks_available.map(w => <option key={w} value={w}>{weekLabel(w)}</option>)}
+            </select>
+          </label>
+          <label className="flex items-center gap-2 font-mono text-[10px] text-mathua-muted">
+            League
+            <select
+              aria-label="Roster league"
+              defaultValue=""
+              disabled={jumpLeagues.length === 0}
+              onChange={e => {
+                const [tier, league] = e.target.value.split('/')
+                if (tier && league) onOpenWeek(jumpWeek, tier, Number(league))
+              }}
+              className="h-9 border border-mathua-border bg-mathua-surface px-2 font-mono text-xs text-mathua-primary"
+            >
+              <option value="" disabled>Choose a league</option>
+              {TIER_ORDER.filter(tier => jumpLeagues.some(l => l.tier === tier)).map(tier => (
+                <optgroup key={tier} label={tierLabel(tier)}>
+                  {jumpLeagues.filter(l => l.tier === tier).map(l => (
+                    <option key={`${l.tier}/${l.league_no}`} value={`${l.tier}/${l.league_no}`}>
+                      {tierLabel(l.tier)} league {l.league_no} · {l.size} of {LEAGUE_SIZE}
+                    </option>
+                  ))}
+                </optgroup>
+              ))}
+            </select>
+          </label>
+        </div>
       </section>
     </>
   )
@@ -506,7 +605,19 @@ export default function AdminLeaguesPage() {
         </div>
 
         {scope !== 'week' && (
-          <RangePanel data={rangeData} loading={rangeLoading} error={rangeError} onRetry={() => setRangeRetry(n => n + 1)} rankBy={rankBy} onRankBy={setRankBy} />
+          <RangePanel
+            data={rangeData}
+            loading={rangeLoading}
+            error={rangeError}
+            onRetry={() => setRangeRetry(n => n + 1)}
+            rankBy={rankBy}
+            onRankBy={setRankBy}
+            onOpenWeek={(nextWeek, tier, league) => {
+              setScope('week')
+              setWeek(nextWeek)
+              setSelected({ tier, league })
+            }}
+          />
         )}
 
         {scope === 'week' && (<>
@@ -583,43 +694,23 @@ export default function AdminLeaguesPage() {
             </div>
 
             <section className="mt-8" aria-labelledby="pyramid-heading">
-              <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-mathua-border pb-2">
-                <h2 id="pyramid-heading" className="font-mono text-xs uppercase tracking-wider text-mathua-primary">Tier pyramid</h2>
-                <span className="font-mono text-[10px] text-mathua-muted">Seats and fill by tier</span>
-              </div>
-              <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
-                {TIER_ORDER.map(tier => {
-                  const items = byTier.get(tier) ?? []
-                  const tierSeats = items.reduce((n, l) => n + l.size, 0)
-                  const tierCapacity = items.length * LEAGUE_SIZE
-                  const tierFill = tierCapacity > 0 ? Math.round((tierSeats / tierCapacity) * 100) : 0
-                  const first = items[0]
-                  return (
-                    <button
-                      key={tier}
-                      type="button"
-                      disabled={!first}
-                      onClick={() => first && choose(first)}
-                      className={`border p-3 text-left transition-colors ${first ? 'border-mathua-border bg-mathua-surface hover:border-mathua-blue' : 'border-mathua-border bg-mathua-surface opacity-55'}`}
-                    >
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="font-mono text-[10px] uppercase tracking-wider text-mathua-secondary">{tierLabel(tier)}</span>
-                        <span className="h-2 w-2" style={{ backgroundColor: TIER_COLOUR[tier] }} aria-hidden="true" />
-                      </div>
-                      <p className="mt-2 font-mono text-xl tabular-nums text-mathua-primary">{items.length}</p>
-                      <p className="font-mono text-[10px] text-mathua-muted">league{items.length === 1 ? '' : 's'}</p>
-                      <p className="mt-2 font-mono text-[10px] text-mathua-secondary">{tierSeats} / {tierCapacity} seats</p>
-                      <p className="font-mono text-[10px] text-mathua-muted">{tierFill}% full</p>
-                    </button>
-                  )
-                })}
-              </div>
-              <div className="mt-3 flex h-2 w-full overflow-hidden border border-mathua-border" aria-hidden="true">
-                {TIER_ORDER.map(tier => {
-                  const tierSeats = (byTier.get(tier) ?? []).reduce((n, l) => n + l.size, 0)
-                  const width = seats > 0 ? (tierSeats / seats) * 100 : 0
-                  return <span key={tier} style={{ width: `${width}%`, backgroundColor: TIER_COLOUR[tier] }} />
-                })}
+              <div id="pyramid-heading">
+                <LeaguePyramid
+                  label="Seats and fill by tier"
+                  rows={TIER_ORDER.map(tier => {
+                    const items = byTier.get(tier) ?? []
+                    const tierSeats = items.reduce((n, l) => n + l.size, 0)
+                    const first = items[0]
+                    return {
+                      tier,
+                      leagues: items.length,
+                      seats: tierSeats,
+                      capacity: items.length * LEAGUE_SIZE,
+                      unique: 0,
+                      onSelect: first ? () => choose(first) : undefined,
+                    }
+                  })}
+                />
               </div>
             </section>
 
