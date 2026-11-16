@@ -7,6 +7,7 @@ import {
   CartesianGrid,
   ComposedChart,
   Line,
+  LineChart,
   XAxis,
   YAxis,
 } from 'recharts'
@@ -18,7 +19,7 @@ import type {
   AdminNotificationStat,
 } from '../../lib/api'
 import { adminMetric } from '../../lib/adminMetrics'
-import Loading from '../Loading'
+import { Skeleton } from '../ui/skeleton'
 import {
   ChartContainer,
   ChartLegend,
@@ -61,9 +62,12 @@ const ACTIVITY_CONFIG = {
   answers: { label: 'Answers', color: 'var(--chart-3)' },
 } satisfies ChartConfig
 
-const LEARNING_CONFIG = {
-  mastery: { label: 'Mastery events', color: 'var(--chart-1)' },
+const ACCURACY_CONFIG = {
   accuracy: { label: 'Accuracy', color: 'var(--chart-3)' },
+} satisfies ChartConfig
+
+const MASTERY_CONFIG = {
+  mastery: { label: 'Mastery events', color: 'var(--chart-1)' },
 } satisfies ChartConfig
 
 const REGISTRATION_CONFIG = {
@@ -255,7 +259,7 @@ export default function AdminAnalyticsDashboard() {
             <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-mathua-muted">Analytics</p>
             <h2 id="analytics-heading" className="mt-1 font-serif text-2xl text-mathua-primary">Growth and learning</h2>
             <p className="mt-1 max-w-2xl font-mono text-[10px] leading-5 text-mathua-muted">
-              User growth, practice and learning outcomes for the selected window. Event metrics describe retained rows only.
+              User growth, practice and learning outcomes for the selected window. Event metrics describe retained rows only. All times are UTC.
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -297,12 +301,19 @@ export default function AdminAnalyticsDashboard() {
       </div>
 
       {error && (
-        <p role="alert" className="mt-4 border border-mathua-red bg-mathua-surface p-3 font-mono text-[11px] text-mathua-red">
-          {error}
-        </p>
+        <div role="alert" className="mt-4 flex flex-wrap items-center justify-between gap-3 border border-mathua-red bg-mathua-surface p-3">
+          <p className="font-mono text-[11px] text-mathua-red">{error}</p>
+          <button
+            type="button"
+            onClick={() => void load()}
+            className="h-8 border border-mathua-red px-2.5 font-mono text-[11px] text-mathua-red hover:bg-mathua-red-faint"
+          >
+            Retry
+          </button>
+        </div>
       )}
 
-      {loading && !data && <div className="mt-4"><Loading label="LOADING ANALYTICS" /></div>}
+      {loading && !data && <AnalyticsSkeleton />}
 
       <LiveStrip live={live} />
 
@@ -334,6 +345,23 @@ export default function AdminAnalyticsDashboard() {
         <TabsContent value="operations">{data && <OperationsTab data={data} range={range} />}</TabsContent>
       </Tabs>
     </section>
+  )
+}
+
+function AnalyticsSkeleton() {
+  return (
+    <div className="mt-4 space-y-4" aria-busy="true">
+      <span className="sr-only">Loading analytics</span>
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
+        {Array.from({ length: 5 }, (_, index) => (
+          <Skeleton key={index} className="h-24 w-full rounded-none" />
+        ))}
+      </div>
+      <div className="grid gap-4 lg:grid-cols-3">
+        <Skeleton className="h-[290px] w-full rounded-none lg:col-span-2" />
+        <Skeleton className="h-[290px] w-full rounded-none" />
+      </div>
+    </div>
   )
 }
 
@@ -412,11 +440,11 @@ function OverviewTab({ data, range }: { data: AdminAnalytics; range: Range }) {
         </ChartCard>
       </div>
       <div className="mt-4 grid items-start gap-4 lg:grid-cols-3">
-        <ChartCard className="lg:col-span-2" title="Learning improvement" hint="Accuracy per bucket and mastery events recorded in that bucket.">
-          <ComposedTrend rows={rows} config={LEARNING_CONFIG} rightAxis="percent">
-            <Line yAxisId="left" type="monotone" dataKey="mastery" stroke="var(--color-mastery)" strokeWidth={2} dot={false} />
-            <Line yAxisId="right" type="monotone" dataKey="accuracy" stroke="var(--color-accuracy)" strokeWidth={2} dot={false} />
-          </ComposedTrend>
+        <ChartCard title="Accuracy" hint="Correct answers divided by answers in each bucket.">
+          <AccuracyTrend rows={rows} />
+        </ChartCard>
+        <ChartCard title="Mastery events" hint="Concepts recorded as mastered in each bucket.">
+          <MasteryTrend rows={rows} />
         </ChartCard>
         <ChartCard title="Practice intensity" hint="Answers divided by active learners in each bucket.">
           <IntensityTrend rows={rows} />
@@ -469,11 +497,11 @@ function LearningTab({ data, range }: { data: AdminAnalytics; range: Range }) {
     <>
       <PrimaryKpis data={data} />
       <div className="mt-5 grid items-start gap-4 lg:grid-cols-2">
-        <ChartCard title="Learning improvement" hint="Accuracy and mastery events per bucket.">
-          <ComposedTrend rows={rows} config={LEARNING_CONFIG} rightAxis="percent">
-            <Line yAxisId="left" type="monotone" dataKey="mastery" stroke="var(--color-mastery)" strokeWidth={2} dot={false} />
-            <Line yAxisId="right" type="monotone" dataKey="accuracy" stroke="var(--color-accuracy)" strokeWidth={2} dot={false} />
-          </ComposedTrend>
+        <ChartCard title="Accuracy" hint="Correct answers divided by answers in each bucket.">
+          <AccuracyTrend rows={rows} />
+        </ChartCard>
+        <ChartCard title="Mastery events" hint="Concepts recorded as mastered in each bucket.">
+          <MasteryTrend rows={rows} />
         </ChartCard>
         <ChartCard title="XP ledger" hint="Awarded and deducted events.">
           <XPTrend rows={rows} />
@@ -695,6 +723,38 @@ function IntensityTrend({ rows }: { rows: Row[] }) {
   )
 }
 
+function AccuracyTrend({ rows }: { rows: Row[] }) {
+  if (rows.length === 0) return <Empty />
+  return (
+    <ChartContainer config={ACCURACY_CONFIG} className="h-[220px] w-full">
+      <LineChart data={rows} margin={{ top: 8, right: 4, left: -18, bottom: 0 }}>
+        <CartesianGrid vertical={false} strokeDasharray="3 3" />
+        <XAxis dataKey="label" tickLine={false} axisLine={false} tickMargin={8} minTickGap={22} />
+        <YAxis domain={[0, 100]} allowDecimals={false} tickLine={false} axisLine={false} width={44} tickFormatter={value => `${value}%`} />
+        <ChartTooltip content={<ChartTooltipContent indicator="line" />} />
+        <ChartLegend content={<ChartLegendContent />} />
+        <Line type="monotone" dataKey="accuracy" stroke="var(--color-accuracy)" strokeWidth={2} dot={false} />
+      </LineChart>
+    </ChartContainer>
+  )
+}
+
+function MasteryTrend({ rows }: { rows: Row[] }) {
+  if (rows.length === 0) return <Empty />
+  return (
+    <ChartContainer config={MASTERY_CONFIG} className="h-[220px] w-full">
+      <LineChart data={rows} margin={{ top: 8, right: 4, left: -18, bottom: 0 }}>
+        <CartesianGrid vertical={false} strokeDasharray="3 3" />
+        <XAxis dataKey="label" tickLine={false} axisLine={false} tickMargin={8} minTickGap={22} />
+        <YAxis allowDecimals={false} tickLine={false} axisLine={false} width={44} />
+        <ChartTooltip content={<ChartTooltipContent indicator="line" />} />
+        <ChartLegend content={<ChartLegendContent />} />
+        <Line type="monotone" dataKey="mastery" stroke="var(--color-mastery)" strokeWidth={2} dot={false} />
+      </LineChart>
+    </ChartContainer>
+  )
+}
+
 function AccountMix({ data }: { data: AdminAnalytics }) {
   const accounts = data.accounts
   if (!accounts || accounts.total === 0) return <Empty />
@@ -837,13 +897,13 @@ function updatedLabel(value: string | undefined): string {
   if (!value) return 'unknown'
   const date = new Date(value)
   if (Number.isNaN(date.getTime())) return 'unknown'
-  return date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })
+  return `${date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' })} UTC`
 }
 
 function rangeLabel(start: number, range: Range): string {
   const date = new Date(start * 1000)
   if (range === '15m' || range === '1h' || range === '24h') {
-    return date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })
+    return date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' })
   }
-  return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
+  return date.toLocaleDateString('en-GB', { month: 'short', day: 'numeric', timeZone: 'UTC' })
 }

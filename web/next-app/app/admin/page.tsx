@@ -62,16 +62,12 @@ export default function AdminOverviewPage() {
 
             <AdminAnalyticsDashboard />
 
-            <dl className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-2">
-              <Stat label="Open" value={data.reports.open} />
-              <Stat label="Reviewing" value={data.reports.reviewing} />
-              <Stat label="Resolved" value={data.reports.resolved} />
-              <Stat label="Staff" value={data.staff} />
-              <Stat label="Owners" value={data.owners} />
-              <Stat label="Accounts" value={data.users} />
-              <Stat label="Concepts" value={data.concepts} />
-              <Stat label="Domains" value={data.domains} />
-              <Stat label="Stored questions" value={data.questions} />
+            <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-3 border-t border-mathua-border pt-4">
+              <ConsoleFact label="Staff" value={data.staff} />
+              <ConsoleFact label="Owners" value={data.owners} />
+              <ConsoleFact label="Concepts" value={data.concepts} />
+              <ConsoleFact label="Domains" value={data.domains} />
+              <ConsoleFact label="Stored questions" value={data.questions} />
             </dl>
 
             {/* Zero owners is a broken deployment: no owner means nobody can grant owner, and
@@ -115,11 +111,11 @@ export default function AdminOverviewPage() {
   )
 }
 
-function Stat({ label, value }: { label: string; value: number }) {
+function ConsoleFact({ label, value }: { label: string; value: number }) {
   return (
-    <div className="border border-mathua-border bg-mathua-surface p-4 min-w-0">
+    <div className="min-w-0">
       <dt className="font-mono text-[10px] uppercase tracking-wider text-mathua-muted">{label}</dt>
-      <dd className="mt-1 font-mono text-2xl text-mathua-primary tabular-nums">{value.toLocaleString()}</dd>
+      <dd className="mt-0.5 font-mono text-sm text-mathua-primary tabular-nums">{value.toLocaleString()}</dd>
     </div>
   )
 }

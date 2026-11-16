@@ -88,7 +88,8 @@ describe('admin analytics dashboard', () => {
   it('renders the growth and learning charts', async () => {
     render(<AdminAnalyticsDashboard />)
     await screen.findByText('User growth and participation')
-    expect(screen.getByText('Learning improvement')).toBeTruthy()
+    expect(screen.getAllByText('Accuracy').length).toBeGreaterThan(0)
+    expect(screen.getByText('Mastery events')).toBeTruthy()
     expect(screen.getAllByText('New registrations').length).toBeGreaterThan(0)
   })
 
