@@ -195,8 +195,8 @@ func (s *PostgresStore) EnsureLeagueMembership(studentID, week string) error {
 	}
 
 	if _, err := tx.Exec(
-		`INSERT INTO league_members (week, student_id, tier, league_no, xp, rank)
-		 VALUES ($1, $2, $3, $4, 0, 0)
+		`INSERT INTO league_members (week, student_id, tier, league_no, xp, rank, movement, from_tier)
+		 VALUES ($1, $2, $3, $4, 0, 0, 'new', '')
 		 ON CONFLICT (week, student_id) DO NOTHING`,
 		week, studentID, LeagueTiers[0], no); err != nil {
 		return fmt.Errorf("insert league member: %w", err)

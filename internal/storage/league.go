@@ -158,6 +158,7 @@ type leagueMember struct {
 	Name      string
 	XP        int
 	Movement  string
+	FromTier  string
 }
 
 // planWeek maps last week's cohorts to this week's tiers.
@@ -189,6 +190,7 @@ func planWeek(cohorts []leagueCohort) (map[string]string, map[string]string) {
 			default:
 				moveOf[m.StudentID] = "stay"
 			}
+			c.Members[i].FromTier = from
 		}
 	}
 	return tierOf, moveOf
@@ -335,21 +337,21 @@ func backfillLeagueMemberships(db *sql.DB, query, week string, ensure func(strin
 // promotion, so the comparison only runs between adjacent weeks.
 func (s *SQLiteStore) BackfillLeagueMovement() (int, error) {
 	return backfillLeagueMovement(s.db, `SELECT week, student_id, tier FROM league_members ORDER BY student_id, week`,
-		func(week, id, movement string) error {
-			_, err := s.db.Exec(`UPDATE league_members SET movement = ? WHERE week = ? AND student_id = ?`, movement, week, id)
+		func(week, id, movement, fromTier string) error {
+			_, err := s.db.Exec(`UPDATE league_members SET movement = ?, from_tier = ? WHERE week = ? AND student_id = ?`, movement, fromTier, week, id)
 			return err
 		})
 }
 
 func (s *PostgresStore) BackfillLeagueMovement() (int, error) {
 	return backfillLeagueMovement(s.db, `SELECT week, student_id, tier FROM league_members ORDER BY student_id, week`,
-		func(week, id, movement string) error {
-			_, err := s.db.Exec(`UPDATE league_members SET movement = $1 WHERE week = $2 AND student_id = $3`, movement, week, id)
+		func(week, id, movement, fromTier string) error {
+			_, err := s.db.Exec(`UPDATE league_members SET movement = $1, from_tier = $2 WHERE week = $3 AND student_id = $4`, movement, fromTier, week, id)
 			return err
 		})
 }
 
-func backfillLeagueMovement(db *sql.DB, query string, update func(week, id, movement string) error) (int, error) {
+func backfillLeagueMovement(db *sql.DB, query string, update func(week, id, movement, fromTier string) error) (int, error) {
 	rows, err := db.Query(query)
 	if err != nil {
 		return 0, fmt.Errorf("list league movement: %w", err)
@@ -375,7 +377,9 @@ func backfillLeagueMovement(db *sql.DB, query string, update func(week, id, move
 	changed := 0
 	for _, s := range seats {
 		movement := "new"
+		fromTier := ""
 		if prevWeek, ok := lastWeek[s.id]; ok && prevWeek == shiftWeekKey(s.week, -7) {
+			fromTier = lastTier[s.id]
 			switch {
 			case tierIndex(s.tier) > tierIndex(lastTier[s.id]):
 				movement = "up"
@@ -385,7 +389,7 @@ func backfillLeagueMovement(db *sql.DB, query string, update func(week, id, move
 				movement = "stay"
 			}
 		}
-		if err := update(s.week, s.id, movement); err != nil {
+		if err := update(s.week, s.id, movement, fromTier); err != nil {
 			return changed, fmt.Errorf("update league movement: %w", err)
 		}
 		changed++

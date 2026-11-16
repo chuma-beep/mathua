@@ -122,6 +122,7 @@ CREATE TABLE IF NOT EXISTS league_members (
     xp         INTEGER NOT NULL DEFAULT 0,
     rank       INTEGER NOT NULL DEFAULT 0,
     movement   TEXT    NOT NULL DEFAULT 'new',
+    from_tier  TEXT    NOT NULL DEFAULT '',
     PRIMARY KEY (week, student_id)
 );
 
@@ -791,6 +792,7 @@ func pgAuthMigrate(db *sql.DB) error {
 		"ALTER TABLE students ADD COLUMN IF NOT EXISTS email_verified INTEGER NOT NULL DEFAULT 0",
 		"ALTER TABLE notification_preferences ADD COLUMN IF NOT EXISTS push_enabled INTEGER NOT NULL DEFAULT 0",
 		"ALTER TABLE league_members ADD COLUMN IF NOT EXISTS movement TEXT NOT NULL DEFAULT 'new'",
+		"ALTER TABLE league_members ADD COLUMN IF NOT EXISTS from_tier TEXT NOT NULL DEFAULT ''",
 		"ALTER TABLE notification_preferences ADD COLUMN IF NOT EXISTS digest TEXT NOT NULL DEFAULT 'immediate'",
 		"CREATE INDEX IF NOT EXISTS idx_students_email ON students(email)",
 		"CREATE INDEX IF NOT EXISTS idx_students_google_id ON students(google_id)",

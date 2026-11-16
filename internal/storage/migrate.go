@@ -106,6 +106,7 @@ CREATE TABLE IF NOT EXISTS league_members (
     xp         INTEGER NOT NULL DEFAULT 0,
     rank       INTEGER NOT NULL DEFAULT 0,
     movement   TEXT    NOT NULL DEFAULT 'new',
+    from_tier  TEXT    NOT NULL DEFAULT '',
     PRIMARY KEY (week, student_id)
 );
 

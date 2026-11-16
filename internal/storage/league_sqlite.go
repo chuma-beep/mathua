@@ -152,8 +152,8 @@ func (s *SQLiteStore) bootstrapLeagues(tx *sql.Tx, week string) error {
 // statement used to hardcode `?`, which made a Postgres bootstrap fail with a
 // syntax error at the first comma, so a league week could never form there.
 func insertCohorts(tx *sql.Tx, week string, cohorts []leagueCohort, rebind func(string) string) error {
-	const insert = `INSERT INTO league_members (week, student_id, tier, league_no, xp, rank, movement)
-		 VALUES (?, ?, ?, ?, 0, 0, ?)
+	const insert = `INSERT INTO league_members (week, student_id, tier, league_no, xp, rank, movement, from_tier)
+		 VALUES (?, ?, ?, ?, 0, 0, ?, ?)
 		 ON CONFLICT(week, student_id) DO NOTHING`
 	query := rebind(insert)
 	for _, c := range cohorts {
@@ -162,7 +162,7 @@ func insertCohorts(tx *sql.Tx, week string, cohorts []leagueCohort, rebind func(
 			if movement == "" {
 				movement = "new"
 			}
-			if _, err := tx.Exec(query, week, m.StudentID, c.Tier, c.LeagueNo, movement); err != nil {
+			if _, err := tx.Exec(query, week, m.StudentID, c.Tier, c.LeagueNo, movement, m.FromTier); err != nil {
 				return fmt.Errorf("insert league member: %w", err)
 			}
 		}
@@ -238,8 +238,8 @@ func (s *SQLiteStore) EnsureLeagueMembership(studentID, week string) error {
 	}
 
 	if _, err := tx.Exec(
-		`INSERT INTO league_members (week, student_id, tier, league_no, xp, rank, movement)
-		 VALUES (?, ?, ?, ?, 0, 0, 'new')
+		`INSERT INTO league_members (week, student_id, tier, league_no, xp, rank, movement, from_tier)
+		 VALUES (?, ?, ?, ?, 0, 0, 'new', '')
 		 ON CONFLICT(week, student_id) DO NOTHING`,
 		week, studentID, LeagueTiers[0], no); err != nil {
 		return fmt.Errorf("insert league member: %w", err)
