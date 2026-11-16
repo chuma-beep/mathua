@@ -7,7 +7,7 @@ import { Bell, ChevronsRight } from './icons'
 import BottomTabs from './BottomTabs'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from './ui/sidebar'
 import { useAuthState } from '../hooks/useAuthState'
-import { isStaffRole } from '../lib/auth'
+import { canOpenAdminConsole } from '../lib/auth'
 import { adminOverview, getConfig, getDueReviews, getNotificationUnreadCount, getSettings, listAnnouncements, listMyReports } from '../lib/api'
 import { resolveAvatar } from '../lib/dicebear'
 
@@ -209,7 +209,7 @@ export default function AppShell({ children, ...overrides }: AppShellProps) {
   }, [loggedIn])
 
   useEffect(() => {
-    if (!loggedIn || !user || !isStaffRole(user.role)) {
+    if (!loggedIn || !user || !canOpenAdminConsole(user.role)) {
       setAdminReports(0)
       return
     }
@@ -244,7 +244,7 @@ export default function AppShell({ children, ...overrides }: AppShellProps) {
         <AppSidebar
           name={overrides.name ?? user?.name ?? 'Guest'}
           studentId={overrides.studentId ?? user?.student_id ?? 'guest'}
-          isAdmin={overrides.isAdmin ?? isStaffRole(user?.role)}
+          isAdmin={overrides.isAdmin ?? canOpenAdminConsole(user?.role)}
           username={overrides.username ?? user?.username}
           level={overrides.level ?? user?.level}
           streak={overrides.streak ?? user?.current_streak}

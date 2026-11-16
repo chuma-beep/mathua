@@ -114,9 +114,9 @@ function changeRole(email: string, role: Role) {
 describe('the client offers administration without enforcing it', () => {
   it('offers the admin nav sections to a full staff member', async () => {
     render(<AdminUsersPage />)
-    await screen.findByRole('navigation', { name: 'Admin sections' })
+    const nav = await screen.findByRole('navigation', { name: 'Admin sections' })
     for (const label of ['Overview', 'Reports', 'Users', 'Contributors', 'Content', 'Audit Log']) {
-      expect(screen.getByRole('link', { name: label })).toBeTruthy()
+      expect(within(nav).getByRole('link', { name: label })).toBeTruthy()
     }
   })
 
@@ -125,19 +125,18 @@ describe('the client offers administration without enforcing it', () => {
   it('shows a moderator only the sections it can reach', async () => {
     asPermissions(['admin.access', 'reports.read', 'reports.moderate', 'content.read'])
     render(<AdminUsersPage />)
-    await screen.findByRole('navigation', { name: 'Admin sections' })
-    expect(screen.getByRole('link', { name: 'Reports' })).toBeTruthy()
-    expect(screen.getByRole('link', { name: 'Content' })).toBeTruthy()
-    expect(screen.queryByRole('link', { name: 'Contributors' })).toBeNull()
-    expect(screen.queryByRole('link', { name: 'Audit Log' })).toBeNull()
+    const nav = await screen.findByRole('navigation', { name: 'Admin sections' })
+    expect(within(nav).getByRole('link', { name: 'Reports' })).toBeTruthy()
+    expect(within(nav).getByRole('link', { name: 'Content' })).toBeTruthy()
+    expect(within(nav).queryByRole('link', { name: 'Contributors' })).toBeNull()
+    expect(within(nav).queryByRole('link', { name: 'Audit Log' })).toBeNull()
   })
 
   it('omits the nav for an account with no admin access and says so', async () => {
     asPermissions([])
     render(<AdminUsersPage />)
-    await waitFor(() => {
-      expect(screen.queryByRole('navigation', { name: 'Admin sections' })).toBeNull()
-    })
+    const nav = await screen.findByRole('navigation', { name: 'Admin sections' })
+    expect(within(nav).queryAllByRole('link')).toHaveLength(0)
     expect(screen.getByText(/needs a staff role/)).toBeTruthy()
   })
 

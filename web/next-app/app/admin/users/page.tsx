@@ -1,11 +1,9 @@
 'use client'
 
+import AdminShell from '@/components/admin/AdminShell'
 import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
-import AppShell from '../../../components/app-shell'
-import Footer from '../../../components/Footer'
 import SectionHeader from '../../../components/SectionHeader'
-import AdminNav from '../../../components/AdminNav'
 import ConfirmDialog from '../../../components/ConfirmDialog'
 import { searchAdminUsers, setUserRole, getErrorMessage, type AdminUser, type Role } from '../../../lib/api'
 import { useAuthState } from '../../../hooks/useAuthState'
@@ -97,11 +95,10 @@ export default function AdminUsersPage() {
   }
 
   return (
-    <AppShell>
-      <main className="mx-auto w-full max-w-[900px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
+    <AdminShell>
+      <main className="mx-auto w-full max-w-[1200px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
         <SectionHeader label="Administration" title="Users" />
-        <AdminNav />
-
+  
         {!isStaff && (
           <p role="status" className="border border-mathua-border bg-mathua-surface p-4 font-mono text-xs text-mathua-secondary">
             This area needs a staff role. If you hold one, sign in with that account.
@@ -239,7 +236,6 @@ export default function AdminUsersPage() {
           ← Overview
         </Link>
       </main>
-      <Footer />
 
       <ConfirmDialog
         open={pending !== null}
@@ -261,6 +257,6 @@ export default function AdminUsersPage() {
           </>
         )}
       </ConfirmDialog>
-    </AppShell>
+    </AdminShell>
   )
 }

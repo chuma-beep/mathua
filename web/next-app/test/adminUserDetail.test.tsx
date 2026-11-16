@@ -7,6 +7,7 @@ import type { AdminUserDetail } from '../lib/api'
 const params = new URLSearchParams('id=s1')
 
 vi.mock('next/navigation', () => ({
+  usePathname: () => '/admin/users/detail',
   useSearchParams: () => params,
 }))
 

@@ -1,12 +1,10 @@
 'use client'
 
+import AdminShell from '@/components/admin/AdminShell'
 import { Suspense, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import AppShell from '../../../../components/app-shell'
-import Footer from '../../../../components/Footer'
 import SectionHeader from '../../../../components/SectionHeader'
-import AdminNav from '../../../../components/AdminNav'
 import Avatar from '../../../../components/Avatar'
 import { dicebearUrl, isDicebearStyle } from '../../../../lib/dicebear'
 import {
@@ -94,11 +92,10 @@ function AccountDetail() {
   const activity = data?.activity
 
   return (
-    <AppShell>
-      <main className="mx-auto w-full max-w-[900px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
+    <AdminShell>
+      <main className="mx-auto w-full max-w-[1200px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
         <SectionHeader label="Administration" title="Account" />
-        <AdminNav />
-
+  
         <p className="mb-4">
           <Link href="/admin/users" className="font-mono text-xs text-mathua-blue hover:underline">
             ← All accounts
@@ -213,8 +210,7 @@ function AccountDetail() {
           </>
         )}
       </main>
-      <Footer />
-    </AppShell>
+    </AdminShell>
   )
 }
 

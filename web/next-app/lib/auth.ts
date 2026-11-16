@@ -181,6 +181,15 @@ export function isStaffRole(role?: string): boolean {
   return role === 'owner' || role === 'admin' || role === 'moderator'
 }
 
+/**
+ * Whether an account may open the admin console from the learner app. The
+ * console is offered to owners and admins only; moderators keep their existing
+ * permission model on direct navigation but do not get the entry.
+ */
+export function canOpenAdminConsole(role?: string): boolean {
+  return role === 'owner' || role === 'admin'
+}
+
 /** The four roles `storage.Role` defines. Anything else is not a role we offer. */
 export type AccountRole = 'student' | 'moderator' | 'admin' | 'owner'
 

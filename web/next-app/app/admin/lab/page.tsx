@@ -1,11 +1,9 @@
 'use client'
 
+import AdminShell from '@/components/admin/AdminShell'
 import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
-import AppShell from '../../../components/app-shell'
-import Footer from '../../../components/Footer'
 import SectionHeader from '../../../components/SectionHeader'
-import AdminNav from '../../../components/AdminNav'
 import Loading from '../../../components/Loading'
 import LabQuestionCard from '../../../components/LabQuestionCard'
 import {
@@ -89,11 +87,10 @@ export default function AdminLabPage() {
   }
 
   return (
-    <AppShell>
+    <AdminShell>
       <main className="mx-auto w-full max-w-[1100px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
         <SectionHeader label="Administration" title="Lab" />
-        <AdminNav />
-
+  
         <p className="mb-4 max-w-3xl font-mono text-[11px] leading-relaxed text-mathua-secondary">
           Generate any concept&rsquo;s questions, answer them with the field a learner gets, and grade them with the
           same engine. Nothing here writes an attempt, XP, streak or mastery.
@@ -331,7 +328,6 @@ export default function AdminLabPage() {
           </section>
         )}
       </main>
-      <Footer />
-    </AppShell>
+    </AdminShell>
   )
 }

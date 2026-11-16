@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { desktopLinks, overflowLinks, TAB_HREFS, LEARN_LINKS, ADMIN_LINKS } from '../lib/nav'
+import { desktopLinks, overflowLinks, TAB_HREFS, LEARN_LINKS } from '../lib/nav'
 
 // These assertions are about a product decision, not a rendering detail: Learn is the only
 // surface that asks a question, grades it and explains it, and nothing may offer the learner a
@@ -75,37 +75,17 @@ describe('navigation order', () => {
   })
 })
 
-// The Admin entry reached mobile only by typing a URL. The desktop rail on /profile has carried it
-// since Admin V2, but on a phone /profile is one tap from the tab bar and no other surface offered
-// it, so an administrator working from their phone had no route to administration at all. It belongs
-// in the mobile overflow, and only for staff.
-describe('the Admin entry reaches mobile', () => {
-  it('appears in the compass overflow for staff', () => {
-    const hrefs = overflowLinks(true, true).map(l => l.href)
-    expect(hrefs).toContain('/admin')
+// The admin console is not in the compass. It reaches staff only through the profile photo
+// menu, so a learner, a guest and a staff account all get the same compass destinations.
+describe('the compass does not carry the Admin entry', () => {
+  it('omits /admin for every caller', () => {
+    for (const loggedIn of [true, false]) {
+      expect(overflowLinks(loggedIn).map(l => l.href)).not.toContain('/admin')
+    }
   })
 
-  it('is withheld from a learner and from a guest', () => {
-    expect(overflowLinks(true, false).map(l => l.href)).not.toContain('/admin')
-    expect(overflowLinks(false, false).map(l => l.href)).not.toContain('/admin')
-  })
-
-  it('does not become a bottom tab, so nothing appears twice on one screen', () => {
+  it('does not reserve a bottom tab for it', () => {
     expect(TAB_HREFS.has('/admin')).toBe(false)
-    // …which is also why it must not collide with a tab href in the overflow.
-    const hrefs = overflowLinks(true, true).map(l => l.href)
-    expect(new Set(hrefs).size).toBe(hrefs.length)
-  })
-
-  it('leaves the learner overflow untouched', () => {
-    // Adding staff must not perturb what a learner sees.
-    expect(overflowLinks(true, false)).toEqual(overflowLinks(true))
-  })
-
-  it('is named the same way the desktop rail names it', () => {
-    // The rail calls it "Admin"; a second wording for one destination is how two surfaces came to
-    // disagree about it.
-    expect(ADMIN_LINKS.map(l => l.label)).toEqual(['Admin'])
   })
 })
 

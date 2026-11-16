@@ -1,10 +1,8 @@
 'use client'
 
+import AdminShell from '@/components/admin/AdminShell'
 import { useEffect, useState } from 'react'
-import AppShell from '../../../components/app-shell'
-import Footer from '../../../components/Footer'
 import SectionHeader from '../../../components/SectionHeader'
-import AdminNav from '../../../components/AdminNav'
 import Loading from '../../../components/Loading'
 import { listAdminContent, getErrorMessage, type AdminContentConcept } from '../../../lib/api'
 
@@ -31,11 +29,10 @@ export default function AdminContentPage() {
   }, [q])
 
   return (
-    <AppShell>
-      <main className="mx-auto w-full max-w-[900px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
+    <AdminShell>
+      <main className="mx-auto w-full max-w-[1200px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
         <SectionHeader label="Administration" title="Content" />
-        <AdminNav />
-
+  
         <input
           type="search"
           value={q}
@@ -67,7 +64,6 @@ export default function AdminContentPage() {
           </>
         )}
       </main>
-      <Footer />
-    </AppShell>
+    </AdminShell>
   )
 }
