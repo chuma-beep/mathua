@@ -17,11 +17,6 @@ vi.mock('../hooks/useAdminMe', () => ({
   }),
 }))
 
-vi.mock('../components/app-shell', () => ({
-  default: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
-}))
-vi.mock('../components/Footer', () => ({ default: () => <footer>footer</footer> }))
-vi.mock('../components/AdminNav', () => ({ default: () => <nav>sections</nav> }))
 
 // The owner's league page.
 //
@@ -103,38 +98,31 @@ beforeEach(() => {
 })
 
 describe('admin leagues', () => {
-  it('lists every league without loading a roster', async () => {
+  it('lists every league without loading every roster', async () => {
     render(<AdminLeaguesPage />)
 
-    expect(await screen.findByRole('button', { name: /^Bronze league 1/ })).toBeTruthy()
-    expect(screen.getByText('Bronze')).toBeTruthy()
-    expect(screen.getByText('Silver')).toBeTruthy()
-    // The rule travels with the data, so the page cannot state a rule the transition does not apply.
-    expect(screen.getByText(/30 learners, 5 up and 5 down/)).toBeTruthy()
-    expect(screen.getByText(/10 learners, 3 up and 3 down/)).toBeTruthy()
-    expect(screen.getByText(/2 leagues, 40 learners seated/)).toBeTruthy()
+    await screen.findByText('Tier pyramid')
+    expect(screen.getAllByRole('button', { name: /league 1,/ }).length).toBe(2)
+    expect(screen.getAllByText('Bronze').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('Silver').length).toBeGreaterThan(0)
+    expect(screen.getByText('5 / 5')).toBeTruthy()
+    expect(screen.getByText(/of 60 seats/)).toBeTruthy()
+    expect(screen.getByText(/67% full/)).toBeTruthy()
 
-    // One request: the pyramid. Rosters are not fetched until a league is opened.
-    expect(vi.mocked(getAdminLeagues)).toHaveBeenCalledTimes(1)
+    // The pyramid and the selected league's roster, not every roster.
+    expect(vi.mocked(getAdminLeagues)).toHaveBeenCalledTimes(2)
     expect(vi.mocked(getAdminLeagues).mock.calls[0][0]).not.toHaveProperty('tier')
   })
 
-  it('opens one roster on demand and links each row to its account', async () => {
+  it('loads one roster at a time and links each row to its account', async () => {
     render(<AdminLeaguesPage />)
 
-    const toggle = await screen.findByRole('button', { name: /^Bronze league 1/ })
-    expect(toggle.getAttribute('aria-expanded')).toBe('false')
-    fireEvent.click(toggle)
-
-    expect(await screen.findByText('Ada')).toBeTruthy()
+    const rows = await screen.findAllByRole('button', { name: /league 1,/ })
+    expect(screen.getByText('Ada')).toBeTruthy()
     expect(screen.getByText('@ada')).toBeTruthy()
-    // A learner without a name is shown by username rather than by raw id.
     expect(screen.getByText('ghostly')).toBeTruthy()
     expect(screen.getByText('120')).toBeTruthy()
 
-    // Profile pictures are rendered beside the account link. A custom or remote
-    // URL wins over the generated pick, so Ada is an image and ghostly is the
-    // DiceBear URL built from the style and seed.
     const adaAvatar = screen.getByRole('img', { name: 'Ada avatar' })
     expect(adaAvatar.getAttribute('src')).toBe('https://images.example/ada.jpg')
     const ghostAvatar = screen.getByRole('img', { name: 'ghostly avatar' })
@@ -146,27 +134,22 @@ describe('admin leagues', () => {
     const link = screen.getByRole('link', { name: 'Ada' })
     expect(link.getAttribute('href')).toBe('/admin/users/detail?id=stu_ada')
 
-    expect(vi.mocked(getAdminLeagues).mock.calls[1][0]).toMatchObject({ tier: 'bronze', league: 1 })
-
-    // Closing and reopening uses the cached roster rather than asking again.
-    fireEvent.click(toggle)
-    fireEvent.click(toggle)
-    await waitFor(() => expect(screen.getByText('Ada')).toBeTruthy())
-    expect(vi.mocked(getAdminLeagues)).toHaveBeenCalledTimes(2)
+    // Selecting the silver league asks for that roster, not every roster.
+    fireEvent.click(rows[1])
+    await waitFor(() => expect(vi.mocked(getAdminLeagues).mock.calls.at(-1)?.[0]).toMatchObject({ tier: 'silver', league: 1 }))
   })
 
   it('walks back to an earlier week and refuses to walk past the current one', async () => {
     render(<AdminLeaguesPage />)
-    await screen.findByRole('button', { name: /^Bronze league 1/ })
+    await screen.findByText('Tier pyramid')
 
-    const later = screen.getByRole('button', { name: 'Later week' }) as HTMLButtonElement
-    expect(later.disabled).toBe(true)
+    const next = screen.getByRole('button', { name: 'Next' }) as HTMLButtonElement
+    expect(next.disabled).toBe(true)
 
-    fireEvent.click(screen.getByRole('button', { name: 'Earlier week' }))
-    await waitFor(() => expect(vi.mocked(getAdminLeagues)).toHaveBeenCalledTimes(2))
-    const asked = String(vi.mocked(getAdminLeagues).mock.calls[1][0]?.week)
+    fireEvent.click(screen.getByRole('button', { name: 'Previous' }))
+    await waitFor(() => expect(vi.mocked(getAdminLeagues)).toHaveBeenCalledTimes(3))
+    const asked = String(vi.mocked(getAdminLeagues).mock.calls[2][0]?.week)
     expect(asked).toMatch(/^\d{4}-\d{2}-\d{2}$/)
-    // Every week key the page can send is a Monday, because the server refuses anything else.
     expect(new Date(`${asked}T00:00:00Z`).getUTCDay()).toBe(1)
   })
 
