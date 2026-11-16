@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useTheme } from '../../hooks/useTheme'
 import { getUserInfo, ensureGuestId, ensureGuestToken, getGuestId, isLoggedIn, isStaffRole, type UserInfo } from '../../lib/auth'
 import { ensureDicebearAvatar, resolveAvatar } from '../../lib/dicebear'
-import { getActivity, getProgress, getWeaknesses, getDueReviews, getEfficacy, getScores, getSettings, getMe, getTimedQuiz, getConfig } from '../../lib/api'
+import { getActivity, getProgress, getWeaknesses, getDueReviews, getEfficacy, getScores, getSettings, getMe, getTimedQuiz, getConfig, getMyLeague } from '../../lib/api'
 import type { DailyActivity, Scores, WeaknessRes, ConceptProgress, EfficacyReport, TimedQuizSummaryRes } from '../../lib/api'
 import ProfileHeader from '../../components/ProfileHeader'
 import ActivityHeatmap from '../../components/ActivityHeatmap'
@@ -92,6 +92,8 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [goalOverride, setGoalOverride] = useState<number | null>(null)
+  const [leagueTier, setLeagueTier] = useState<string | null>(null)
+  const [leagueWeeklyXp, setLeagueWeeklyXp] = useState(0)
   const [avatarUrl, setAvatarUrl] = useState<string | undefined>(undefined)
   const [avatarPreset, setAvatarPreset] = useState<number | null>(null)
   // /profile builds its own shell instead of using AppShell, so it has to read
@@ -227,6 +229,13 @@ export default function ProfilePage() {
           }).catch(() => {
             if (alive) setPlacementCompleted(info?.diagnostic_completed ?? false)
           })
+          // The frame is earned: only a current tier and positive weekly XP
+          // qualify. A missing league or a zero-XP week leaves the plain avatar.
+          getMyLeague().then(league => {
+            if (!alive || !league) return
+            setLeagueTier(league.tier || null)
+            setLeagueWeeklyXp(league.me?.xp ?? 0)
+          }).catch(() => {})
           // The recommendation is the engine's answer, not a re-ranking of the fetches above.
           // Fetched beside them rather than derived from them: the report's numbers and the
           // recommendation come from one authority each, and neither is computed from the other.
@@ -384,6 +393,8 @@ export default function ProfilePage() {
           avatarSeed={user.student_id}
           avatarUrl={avatarPreset !== null ? undefined : avatarUrl}
           avatarPreset={avatarPreset}
+          leagueTier={leagueTier}
+          leagueWeeklyXp={leagueWeeklyXp}
           catalogue={conceptCatalog}
           progress={progress}
           frontierLabel={frontierLabel}

@@ -7,6 +7,7 @@ import AppShell from '../../components/app-shell'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
 import Avatar from '../../components/Avatar'
+import LeagueAvatar from '../../components/LeagueAvatar'
 import { LeaderboardTableSkeleton } from '../../components/skeletons/LeaderboardSkeleton'
 import { useAuthState } from '../../hooks/useAuthState'
 import {
@@ -442,7 +443,7 @@ export default function LeaderboardPage() {
                           <td className="p-2.5 sm:p-[14px_20px] font-mono text-sm text-mathua-muted">{m.rank}</td>
                           <td className="p-2.5 sm:p-[14px_20px] text-mathua-primary text-sm font-medium max-w-[160px] sm:max-w-none">
                             <span className="flex items-center gap-2 min-w-0">
-                              <Avatar seed={m.id} name={nameOf(m)} size={26} url={avatarURL(m)} className="shrink-0" />
+                              <LeagueAvatar tier={league.tier} weeklyXp={m.xp} seed={m.id} name={nameOf(m)} size={26} url={avatarURL(m)} className="shrink-0" />
                               <span className="block truncate" title={nameOf(m)}>{nameOf(m)}</span>
                               {m.is_me && <span className="font-mono text-[10px] uppercase text-mathua-blue shrink-0">you</span>}
                             </span>

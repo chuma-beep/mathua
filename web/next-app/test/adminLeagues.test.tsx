@@ -59,7 +59,7 @@ const roster = {
       tier: 'bronze',
       league_no: 1,
       size: 3,
-      movers: 0,
+      movers: 1,
       members: [
         {
           rank: 1,
@@ -134,6 +134,11 @@ describe('admin leagues', () => {
 
     const link = screen.getByRole('link', { name: 'Ada' })
     expect(link.getAttribute('href')).toBe('/admin/users/detail?id=stu_ada')
+
+    // Movement is an arrow and a word, not a full-row tint. The row keeps the
+    // same surface as every other row.
+    const up = screen.getAllByText('Up')[0].closest('tr')!
+    expect(up.className).not.toMatch(/green|red/)
 
     // Selecting the silver league asks for that roster, not every roster.
     fireEvent.change(picker, { target: { value: 'silver/1' } })
