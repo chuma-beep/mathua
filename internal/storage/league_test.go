@@ -238,3 +238,64 @@ func TestLeagueRoster_OrdersByXPThenNameAndID(t *testing.T) {
 		t.Errorf("tie ranks = %d/%d/%d, want 1/1/1", rows[0].Rank, rows[1].Rank, rows[2].Rank)
 	}
 }
+
+// Awarding XP is the moment an account becomes eligible for a league. The
+// profile and My League used to be the only places that seated somebody, so an
+// active learner who never opened either had no tier and no avatar frame.
+func TestAwardXPSeatsAWeeklyLeague(t *testing.T) {
+	store := newTestStore(t)
+	st, err := store.CreateStudent("earner")
+	if err != nil {
+		t.Fatalf("create: %v", err)
+	}
+	if err := store.AwardXP(st.ID, 40, "test", "seat:1"); err != nil {
+		t.Fatalf("award: %v", err)
+	}
+	week := LeagueWeekKey(time.Now())
+	tier, _, found, err := store.LeagueMembershipOf(st.ID, week)
+	if err != nil {
+		t.Fatalf("membership: %v", err)
+	}
+	if !found || tier != "bronze" {
+		t.Fatalf("membership = %q found=%v, want bronze", tier, found)
+	}
+}
+
+func TestBackfillLeagueMembershipsSeatsEligibleAccounts(t *testing.T) {
+	store := newTestStore(t)
+	earner, err := store.CreateStudent("legacy earner")
+	if err != nil {
+		t.Fatalf("create earner: %v", err)
+	}
+	if err := store.AwardXP(earner.ID, 25, "test", "legacy:1"); err != nil {
+		t.Fatalf("award: %v", err)
+	}
+	quiet, err := store.CreateStudent("quiet")
+	if err != nil {
+		t.Fatalf("create quiet: %v", err)
+	}
+	week := LeagueWeekKey(time.Now())
+	// Simulate the old lazy behaviour: the XP exists, the seat does not.
+	execSeed(t, store, `DELETE FROM league_members WHERE student_id = ?`, earner.ID)
+
+	backfiller, ok := store.(interface {
+		BackfillLeagueMemberships(string) (int, error)
+	})
+	if !ok {
+		t.Fatal("store does not support league backfill")
+	}
+	seated, err := backfiller.BackfillLeagueMemberships(week)
+	if err != nil {
+		t.Fatalf("backfill: %v", err)
+	}
+	if seated != 1 {
+		t.Fatalf("seated = %d, want 1", seated)
+	}
+	tier, _, found, err := store.LeagueMembershipOf(earner.ID, week)
+	if err != nil || !found || tier != "bronze" {
+		t.Fatalf("earner membership = %q found=%v err=%v, want bronze", tier, found, err)
+	}
+	if _, _, found, err := store.LeagueMembershipOf(quiet.ID, week); err != nil || found {
+		t.Fatalf("quiet account found=%v err=%v, want no seat", found, err)
+	}
+}

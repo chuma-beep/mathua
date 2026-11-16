@@ -853,6 +853,13 @@ func (s *SQLiteStore) AwardXP(studentID string, amount int, reason, eventKey str
 	if err := tx.Commit(); err != nil {
 		return fmt.Errorf("award xp: %w", err)
 	}
+	// Seating is a best-effort follow-up, not part of the award. The XP is
+	// already durable, and a league failure must not turn a successful answer
+	// into an error the learner sees. The call is idempotent and cheap after
+	// the first award in a week.
+	if err := s.EnsureLeagueMembership(studentID, LeagueWeekKey(time.Now())); err != nil {
+		log.Printf("award xp: seat %s in league: %v", studentID, err)
+	}
 	return nil
 }
 

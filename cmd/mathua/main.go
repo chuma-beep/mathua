@@ -102,12 +102,12 @@ const adminActorCLI = "cli"
 
 func adminCommand(args []string) error {
 	if len(args) == 0 {
-		return errors.New("usage: mathua admin promote <email>")
+		return errors.New("usage: mathua admin promote <email> | backfill-leagues [week]")
 	}
 	switch args[0] {
 	case "promote":
 		if len(args) != 2 {
-			return errors.New("usage: mathua admin promote <email>")
+			return errors.New("usage: mathua admin promote <email> | backfill-leagues [week]")
 		}
 		email := strings.TrimSpace(args[1])
 		if email == "" {
@@ -146,8 +146,33 @@ func adminCommand(args []string) error {
 		fmt.Printf("promoted %s (%s) to owner, audit %s by %s\n",
 			email, st.ID, res.Action, adminActorCLI)
 		return nil
+	case "backfill-leagues":
+		if len(args) > 2 {
+			return errors.New("usage: mathua admin backfill-leagues [week]")
+		}
+		week := storage.LeagueWeekKey(time.Now())
+		if len(args) == 2 {
+			week = strings.TrimSpace(args[1])
+		}
+		repo, _, err := openRepo()
+		if err != nil {
+			return err
+		}
+		defer repo.Close()
+		backfiller, ok := repo.(interface {
+			BackfillLeagueMemberships(string) (int, error)
+		})
+		if !ok {
+			return errors.New("this store cannot backfill leagues")
+		}
+		seated, err := backfiller.BackfillLeagueMemberships(week)
+		if err != nil {
+			return err
+		}
+		fmt.Printf("seated %d learners in leagues for week %s\n", seated, week)
+		return nil
 	default:
-		return fmt.Errorf("unknown admin command %q. Available: promote <email>", args[0])
+		return fmt.Errorf("unknown admin command %q. Available: promote <email>, backfill-leagues [week]", args[0])
 	}
 }
 
