@@ -44,7 +44,6 @@ import {
   SidebarRail,
   useSidebar,
 } from '@/components/ui/sidebar'
-import Avatar from './Avatar'
 import ProfileMenu from './ProfileMenu'
 import { useTheme } from '../hooks/useTheme'
 import { signOut } from '../lib/auth'
