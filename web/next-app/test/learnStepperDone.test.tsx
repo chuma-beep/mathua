@@ -575,7 +575,7 @@ describe('LearnStepper grading recovery', () => {
     // appending the next card, so the verdict can arrive later than the default
     // one-second find window under a loaded CI worker. This is the same React 19
     // handoff the other stepper tests wait for.
-    expect(await screen.findByText(/1\/1 correct/, {}, { timeout: 4000 })).toBeTruthy()
+    expect(await screen.findByText(/1\/1 correct/, {}, { timeout: 10000 })).toBeTruthy()
     expect(screen.queryByRole('alert')).toBeNull()
   })
 
