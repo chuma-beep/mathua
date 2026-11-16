@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor, within } from '@testing-library/react'
 import AdminLeaguesPage from '../app/admin/leagues/page'
 import { getAdminLeagues, API_BASE } from '../lib/api'
 
@@ -102,7 +102,8 @@ describe('admin leagues', () => {
     render(<AdminLeaguesPage />)
 
     await screen.findByText('Tier pyramid')
-    expect(screen.getAllByRole('button', { name: /league 1,/ }).length).toBe(2)
+    const picker = screen.getByRole('combobox', { name: 'League roster' })
+    expect(within(picker).getAllByRole('option').length).toBe(2)
     expect(screen.getAllByText('Bronze').length).toBeGreaterThan(0)
     expect(screen.getAllByText('Silver').length).toBeGreaterThan(0)
     expect(screen.getByText('5 / 5')).toBeTruthy()
@@ -110,15 +111,15 @@ describe('admin leagues', () => {
     expect(screen.getByText(/67% full/)).toBeTruthy()
 
     // The pyramid and the selected league's roster, not every roster.
-    expect(vi.mocked(getAdminLeagues)).toHaveBeenCalledTimes(2)
+    await waitFor(() => expect(vi.mocked(getAdminLeagues)).toHaveBeenCalledTimes(2))
     expect(vi.mocked(getAdminLeagues).mock.calls[0][0]).not.toHaveProperty('tier')
   })
 
   it('loads one roster at a time and links each row to its account', async () => {
     render(<AdminLeaguesPage />)
 
-    const rows = await screen.findAllByRole('button', { name: /league 1,/ })
-    expect(screen.getByText('Ada')).toBeTruthy()
+    const picker = await screen.findByRole('combobox', { name: 'League roster' })
+    expect(await screen.findByText('Ada')).toBeTruthy()
     expect(screen.getByText('@ada')).toBeTruthy()
     expect(screen.getByText('ghostly')).toBeTruthy()
     expect(screen.getByText('120')).toBeTruthy()
@@ -135,7 +136,7 @@ describe('admin leagues', () => {
     expect(link.getAttribute('href')).toBe('/admin/users/detail?id=stu_ada')
 
     // Selecting the silver league asks for that roster, not every roster.
-    fireEvent.click(rows[1])
+    fireEvent.change(picker, { target: { value: 'silver/1' } })
     await waitFor(() => expect(vi.mocked(getAdminLeagues).mock.calls.at(-1)?.[0]).toMatchObject({ tier: 'silver', league: 1 }))
   })
 

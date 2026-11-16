@@ -7,8 +7,6 @@ import SectionHeader from '../../../components/SectionHeader'
 import Avatar from '../../../components/Avatar'
 import { Badge } from '../../../components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card'
-import { ScrollArea } from '../../../components/ui/scroll-area'
-import { Sheet, SheetClose, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '../../../components/ui/sheet'
 import { Skeleton } from '../../../components/ui/skeleton'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '../../../components/ui/table'
 import { dicebearUrl, isDicebearStyle } from '../../../lib/dicebear'
@@ -144,31 +142,27 @@ function RosterPanel({
   loading,
   error,
   onRetry,
-  compact = false,
 }: {
   league: AdminLeague | null
   members: AdminLeagueMember[]
   loading: boolean
   error: string
   onRetry: () => void
-  compact?: boolean
 }) {
   if (!league) {
     return <p className="py-10 text-center font-mono text-[11px] text-mathua-muted">Choose a league to read its roster.</p>
   }
   return (
     <div>
-      {!compact && (
-        <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
-          <div>
-            <p className="font-mono text-[10px] uppercase tracking-wider text-mathua-muted">{tierLabel(league.tier)}</p>
-            <h3 className="font-serif text-lg text-mathua-primary">League {league.league_no}</h3>
-          </div>
-          <p className="font-mono text-[10px] text-mathua-muted">
-            {league.size} of {LEAGUE_SIZE} seats
-          </p>
+      <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
+        <div>
+          <p className="font-mono text-[10px] uppercase tracking-wider text-mathua-muted">{tierLabel(league.tier)}</p>
+          <h3 className="font-serif text-lg text-mathua-primary">League {league.league_no}</h3>
         </div>
-      )}
+        <p className="font-mono text-[10px] text-mathua-muted">
+          {league.size} of {LEAGUE_SIZE} seats
+        </p>
+      </div>
       {error ? (
         <div className="border border-mathua-red bg-mathua-surface p-3">
           <p role="alert" className="font-mono text-[11px] text-mathua-red">{error}</p>
@@ -198,7 +192,6 @@ export default function AdminLeaguesPage() {
   const [roster, setRoster] = useState<AdminLeagueMember[]>([])
   const [rosterLoading, setRosterLoading] = useState(false)
   const [rosterError, setRosterError] = useState('')
-  const [sheetOpen, setSheetOpen] = useState(false)
   const [retryToken, setRetryToken] = useState(0)
 
   // The static export cannot know today's Monday at build time, so the week is
@@ -290,7 +283,6 @@ export default function AdminLeaguesPage() {
 
   function choose(l: AdminLeague) {
     setSelected({ tier: l.tier, league: l.league_no })
-    if (window.matchMedia('(max-width: 767px)').matches) setSheetOpen(true)
   }
 
   return (
@@ -411,40 +403,33 @@ export default function AdminLeaguesPage() {
               </div>
             </section>
 
-            <section className="mt-8 grid gap-4 lg:grid-cols-[320px_minmax(0,1fr)]" aria-labelledby="rosters-heading">
-              <div className="min-w-0">
-                <h2 id="rosters-heading" className="border-b border-mathua-border pb-2 font-mono text-xs uppercase tracking-wider text-mathua-primary">Leagues</h2>
-                <ScrollArea className="mt-3 max-h-[560px] pr-2">
-                  <div className="space-y-4">
+            <section className="mt-8" aria-labelledby="rosters-heading">
+              <div className="flex flex-wrap items-end justify-between gap-3 border-b border-mathua-border pb-2">
+                <h2 id="rosters-heading" className="font-mono text-xs uppercase tracking-wider text-mathua-primary">League roster</h2>
+                <label className="flex items-center gap-2 font-mono text-[10px] text-mathua-muted">
+                  League
+                  <select
+                    aria-label="League roster"
+                    value={selected ? `${selected.tier}/${selected.league}` : ''}
+                    onChange={e => {
+                      const [tier, league] = e.target.value.split('/')
+                      setSelected({ tier, league: Number(league) })
+                    }}
+                    className="h-9 border border-mathua-border bg-mathua-surface px-2 font-mono text-xs text-mathua-primary"
+                  >
                     {TIER_ORDER.filter(t => byTier.has(t)).map(tier => (
-                      <div key={tier}>
-                        <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-mathua-muted">{tierLabel(tier)}</p>
-                        <ul className="space-y-1">
-                          {(byTier.get(tier) ?? []).map(l => {
-                            const active = selected?.tier === l.tier && selected.league === l.league_no
-                            return (
-                              <li key={leagueKey(l)}>
-                                <button
-                                  type="button"
-                                  aria-pressed={active}
-                                  aria-label={`${tierLabel(l.tier)} league ${l.league_no}, ${l.size} of ${LEAGUE_SIZE} seats`}
-                                  onClick={() => choose(l)}
-                                  className={`flex w-full items-baseline justify-between gap-2 border px-3 py-2 text-left ${active ? 'border-mathua-blue bg-mathua-blue-faint' : 'border-mathua-border bg-mathua-surface hover:border-mathua-blue'}`}
-                                >
-                                  <span className="font-mono text-xs text-mathua-primary">League {l.league_no}</span>
-                                  <span className="font-mono text-[10px] text-mathua-muted">{l.size} / {LEAGUE_SIZE}{l.movers > 0 ? ` · ${l.movers} up` : ''}</span>
-                                </button>
-                              </li>
-                            )
-                          })}
-                        </ul>
-                      </div>
+                      <optgroup key={tier} label={tierLabel(tier)}>
+                        {(byTier.get(tier) ?? []).map(l => (
+                          <option key={leagueKey(l)} value={`${l.tier}/${l.league_no}`}>
+                            {tierLabel(l.tier)} league {l.league_no} · {l.size} of {LEAGUE_SIZE}
+                          </option>
+                        ))}
+                      </optgroup>
                     ))}
-                  </div>
-                </ScrollArea>
+                  </select>
+                </label>
               </div>
-
-              <Card className="hidden min-w-0 md:block">
+              <Card className="mt-3">
                 <CardContent className="pt-4">
                   <RosterPanel
                     league={selectedLeague}
@@ -455,40 +440,6 @@ export default function AdminLeaguesPage() {
                   />
                 </CardContent>
               </Card>
-
-              <div className="md:hidden">
-                <button
-                  type="button"
-                  disabled={!selectedLeague}
-                  onClick={() => setSheetOpen(true)}
-                  className="h-10 w-full border border-mathua-border font-mono text-xs text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue disabled:opacity-50"
-                >
-                  View roster
-                </button>
-                <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
-                  <SheetContent side="right" className="w-full overflow-y-auto p-4 sm:max-w-md">
-                    <SheetHeader>
-                      <SheetTitle>{selectedLeague ? `${tierLabel(selectedLeague.tier)} league ${selectedLeague.league_no}` : 'League roster'}</SheetTitle>
-                      <SheetDescription>Top and bottom learners move when the week closes.</SheetDescription>
-                    </SheetHeader>
-                    <div className="mt-4">
-                      <RosterPanel
-                        league={selectedLeague}
-                        members={roster}
-                        loading={rosterLoading}
-                        error={rosterError}
-                        onRetry={() => setRetryToken(t => t + 1)}
-                        compact
-                      />
-                    </div>
-                    <SheetClose asChild>
-                      <button type="button" className="mt-4 h-9 w-full border border-mathua-border font-mono text-xs text-mathua-secondary">
-                        Close
-                      </button>
-                    </SheetClose>
-                  </SheetContent>
-                </Sheet>
-              </div>
             </section>
           </>
         )}
