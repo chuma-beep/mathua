@@ -316,7 +316,7 @@ describe('the overview is a landing page', () => {
 
   it('shows only counts the backend already has', async () => {
     render(<AdminOverviewPage />)
-    await waitFor(() => expect(screen.getByText('Accounts')).toBeTruthy())
+    await waitFor(() => expect(screen.getByText('Concepts')).toBeTruthy())
     expect(screen.getByText('657')).toBeTruthy()
     expect(screen.getByText('15')).toBeTruthy()
     expect(screen.getByText('120')).toBeTruthy()
