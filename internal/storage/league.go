@@ -1,6 +1,7 @@
 package storage
 
 import (
+	"database/sql"
 	"fmt"
 	"sort"
 	"strings"
@@ -123,6 +124,15 @@ func validTier(tier string) string {
 		return LeagueTiers[0]
 	}
 	return t
+}
+
+// leagueWeekKey is the Monday that opens the competition containing now. It
+// mirrors leaderboard.WeekStart without importing that package, because the
+// leaderboard already imports storage.
+func LeagueWeekKey(now time.Time) string {
+	d := now.UTC()
+	offset := (int(d.Weekday()) + 6) % 7
+	return d.AddDate(0, 0, -offset).Format("2006-01-02")
 }
 
 // WeekFromString parses a competition week key (a Monday, YYYY-MM-DD, UTC).
@@ -248,4 +258,63 @@ func rankInCohort(rows []LeagueRow) {
 		}
 		rows[i].Rank = i + 1
 	}
+}
+
+// BackfillLeagueMemberships seats every non-guest account with positive
+// lifetime XP that has no row in week. It exists because membership used to be
+// created lazily by MyLeague, so an account that earned XP but never opened
+// My League or its profile had no tier. The call is idempotent and returns the
+// number of accounts it seated.
+func (s *SQLiteStore) BackfillLeagueMemberships(week string) (int, error) {
+	return backfillLeagueMemberships(s.db,
+		`SELECT id FROM students
+		 WHERE xp_total > 0
+		   AND substr(id, 1, 6) <> 'guest_'
+		   AND NOT EXISTS (SELECT 1 FROM league_members lm
+		                   WHERE lm.student_id = students.id AND lm.week = ?)
+		 ORDER BY id`, week, s.EnsureLeagueMembership)
+}
+
+func (s *PostgresStore) BackfillLeagueMemberships(week string) (int, error) {
+	return backfillLeagueMemberships(s.db, rebindDollars(
+		`SELECT id FROM students
+		 WHERE xp_total > 0
+		   AND substr(id, 1, 6) <> 'guest_'
+		   AND NOT EXISTS (SELECT 1 FROM league_members lm
+		                   WHERE lm.student_id = students.id AND lm.week = $1)
+		 ORDER BY id`), week, s.EnsureLeagueMembership)
+}
+
+// backfillLeagueMemberships reads the ids before seating anyone: SQLite holds a
+// read lock for the life of an open rows cursor, and EnsureLeagueMembership
+// writes. Closing the cursor first also keeps one failed insert from aborting
+// the rest of the batch.
+func backfillLeagueMemberships(db *sql.DB, query, week string, ensure func(string, string) error) (int, error) {
+	rows, err := db.Query(query, week)
+	if err != nil {
+		return 0, fmt.Errorf("list league backfill: %w", err)
+	}
+	var ids []string
+	for rows.Next() {
+		var id string
+		if err := rows.Scan(&id); err != nil {
+			rows.Close()
+			return 0, fmt.Errorf("scan league backfill: %w", err)
+		}
+		ids = append(ids, id)
+	}
+	if err := rows.Err(); err != nil {
+		rows.Close()
+		return 0, fmt.Errorf("league backfill rows: %w", err)
+	}
+	rows.Close()
+
+	seated := 0
+	for _, id := range ids {
+		if err := ensure(id, week); err != nil {
+			return seated, fmt.Errorf("seat %s: %w", id, err)
+		}
+		seated++
+	}
+	return seated, nil
 }

@@ -738,6 +738,16 @@ func (s *Server) adminUserDetail(w http.ResponseWriter, r *http.Request, id stri
 		writeError(w, "failed to read reports", 500)
 		return
 	}
+	// A nil slice encodes as JSON null, and the client's contract is arrays. Most
+	// accounts have no audit history or no reports, so the common case was the
+	// one that failed validation. Empty arrays are the honest shape: this account
+	// has no rows, not an unknown answer.
+	if history == nil {
+		history = []storage.AdminAuditRecord{}
+	}
+	if reports == nil {
+		reports = []storage.QuestionReport{}
+	}
 	writeJSON(w, map[string]interface{}{
 		"user": user, "avatar": avatar, "history": history, "activity": activity, "reports": reports,
 	})

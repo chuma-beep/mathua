@@ -1449,6 +1449,11 @@ func (s *PostgresStore) AwardXP(studentID string, amount int, reason, eventKey s
 	if err := tx.Commit(); err != nil {
 		return fmt.Errorf("award xp: %w", err)
 	}
+	// Best effort: the award is already durable, and a league error must not
+	// turn a successful answer into a failure. Idempotent after the first award.
+	if err := s.EnsureLeagueMembership(studentID, LeagueWeekKey(time.Now())); err != nil {
+		log.Printf("award xp: seat %s in league: %v", studentID, err)
+	}
 	return nil
 }
 

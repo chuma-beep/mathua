@@ -31,6 +31,26 @@ var staffOnlyRoutes = []struct{ method, path string }{
 	{"PATCH", "/api/admin/announcements/someone"},
 }
 
+func TestAdminUserDetailReturnsArraysForAnEmptyAccount(t *testing.T) {
+	e := newAdminEnv(t)
+	rec := e.do(t, "GET", "/api/admin/users/"+e.studentID, e.adminTok, "")
+	if rec.Code != 200 {
+		t.Fatalf("detail: %d %s", rec.Code, rec.Body.String())
+	}
+	var body map[string]json.RawMessage
+	if err := json.Unmarshal(rec.Body.Bytes(), &body); err != nil {
+		t.Fatalf("decode: %v", err)
+	}
+	// A nil Go slice encodes as null. The client contract is an array, so an
+	// account with no reports and no role changes must send [] rather than null.
+	if got := string(body["history"]); got != "[]" {
+		t.Fatalf("history = %s, want []", got)
+	}
+	if got := string(body["reports"]); got != "[]" {
+		t.Fatalf("reports = %s, want []", got)
+	}
+}
+
 func TestAdminUserDetailCarriesActivityAndReports(t *testing.T) {
 	e := newAdminEnv(t)
 
