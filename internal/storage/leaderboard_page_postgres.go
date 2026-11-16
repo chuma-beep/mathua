@@ -17,18 +17,19 @@ func (s *PostgresStore) LeaderboardPage(view string, since time.Time, limit, off
 	if offset < 0 {
 		offset = 0
 	}
+	weekKey := since.UTC().Format("2006-01-02")
 	var rows *sql.Rows
 	var err error
 	var total int
 	switch view {
 	case "weekly":
 		if err := s.db.QueryRow(
-			`SELECT COUNT(*) FROM (`+pgWeeklyFiltered+`) AS ranked`, since.UnixNano(), since).Scan(&total); err != nil {
+			`SELECT COUNT(*) FROM (`+pgWeeklyFiltered+`) AS ranked`, since.UnixNano(), since, weekKey).Scan(&total); err != nil {
 			return nil, 0, fmt.Errorf("weekly leaderboard total: %w", err)
 		}
 		rows, err = s.db.Query(pgWeeklyFiltered+`
 			ORDER BY xp DESC, s.xp_total DESC, s.created_at ASC, s.id ASC
-			LIMIT $3 OFFSET $4`, since.UnixNano(), since, limit, offset)
+			LIMIT $4 OFFSET $5`, since.UnixNano(), since, weekKey, limit, offset)
 	case "all_time":
 		if err := s.db.QueryRow(
 			`SELECT COUNT(*) FROM students s WHERE s.xp_total > 0 AND ` + rankedStudentWhere).Scan(&total); err != nil {
@@ -36,7 +37,7 @@ func (s *PostgresStore) LeaderboardPage(view string, since time.Time, limit, off
 		}
 		rows, err = s.db.Query(pgAllTimeRows+`
 			ORDER BY xp DESC, s.created_at ASC, s.id ASC
-			LIMIT $1 OFFSET $2`, limit, offset)
+			LIMIT $3 OFFSET $4`, weekKey, since.UnixNano(), limit, offset)
 	default:
 		return nil, 0, fmt.Errorf("leaderboard view %q", view)
 	}
@@ -93,6 +94,9 @@ const pgWeeklyFiltered = `
 	       (SELECT COUNT(*) FROM concept_progress cp
 	         WHERE cp.student_id = s.id AND cp.status = 'MASTERED' AND cp.mastered_at >= $2),
 	       SUM(e.amount) AS xp,
+	       COALESCE((SELECT lm.tier FROM league_members lm
+	                 WHERE lm.student_id = s.id AND lm.week = $3), ''),
+	       SUM(e.amount),
 	       s.created_at
 	FROM students s
 	JOIN xp_events e ON e.student_id = s.id AND e.created_at >= $1
@@ -107,6 +111,10 @@ const pgAllTimeRows = `
 	         WHERE cp.student_id = s.id AND cp.status = 'MASTERED'),
 	       0,
 	       s.xp_total AS xp,
+	       COALESCE((SELECT lm.tier FROM league_members lm
+	                 WHERE lm.student_id = s.id AND lm.week = $1), ''),
+	       COALESCE((SELECT SUM(e.amount) FROM xp_events e
+	                 WHERE e.student_id = s.id AND e.created_at >= $2), 0),
 	       s.created_at
 	FROM students s
 	WHERE s.xp_total > 0 AND ` + rankedStudentWhere

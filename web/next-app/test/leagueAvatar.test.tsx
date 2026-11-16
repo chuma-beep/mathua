@@ -32,8 +32,8 @@ describe('LeagueAvatar', () => {
     }
   })
 
-  it('collapses the detailed geometry below 28 pixels', () => {
-    const { container, unmount } = render(<LeagueAvatar {...base} tier="diamond" weeklyXp={12} size={24} />)
+  it('collapses the detailed geometry below 20 pixels', () => {
+    const { container, unmount } = render(<LeagueAvatar {...base} tier="diamond" weeklyXp={12} size={18} />)
     expect(container.querySelector('[data-league-frame]')).toHaveAttribute('data-collapsed', 'true')
     expect(container.querySelectorAll('path')).toHaveLength(0)
     unmount()

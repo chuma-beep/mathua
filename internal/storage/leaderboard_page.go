@@ -36,18 +36,19 @@ func (s *SQLiteStore) LeaderboardPage(view string, since time.Time, limit, offse
 	if offset < 0 {
 		offset = 0
 	}
+	weekKey := since.UTC().Format("2006-01-02")
 	var rows *sql.Rows
 	var err error
 	var total int
 	switch view {
 	case "weekly":
 		if err := s.db.QueryRow(
-			`SELECT COUNT(*) FROM (`+sqliteWeeklyFiltered+`)`, since, since.UnixNano()).Scan(&total); err != nil {
+			`SELECT COUNT(*) FROM (`+sqliteWeeklyFiltered+`)`, since, weekKey, since.UnixNano()).Scan(&total); err != nil {
 			return nil, 0, fmt.Errorf("weekly leaderboard total: %w", err)
 		}
 		rows, err = s.db.Query(sqliteWeeklyFiltered+`
 			ORDER BY xp DESC, s.xp_total DESC, s.created_at ASC, s.id ASC
-			LIMIT ? OFFSET ?`, since, since.UnixNano(), limit, offset)
+			LIMIT ? OFFSET ?`, since, weekKey, since.UnixNano(), limit, offset)
 	case "all_time":
 		if err := s.db.QueryRow(
 			`SELECT COUNT(*) FROM students s WHERE s.xp_total > 0 AND ` + rankedStudentWhere).Scan(&total); err != nil {
@@ -55,7 +56,7 @@ func (s *SQLiteStore) LeaderboardPage(view string, since time.Time, limit, offse
 		}
 		rows, err = s.db.Query(sqliteAllTimeRows+`
 			ORDER BY xp DESC, s.created_at ASC, s.id ASC
-			LIMIT ? OFFSET ?`, limit, offset)
+			LIMIT ? OFFSET ?`, weekKey, since.UnixNano(), limit, offset)
 	default:
 		return nil, 0, fmt.Errorf("leaderboard view %q", view)
 	}
@@ -118,6 +119,9 @@ const sqliteWeeklyFiltered = `
 	       (SELECT COUNT(*) FROM concept_progress cp
 	         WHERE cp.student_id = s.id AND cp.status = 'MASTERED' AND cp.mastered_at >= ?),
 	       SUM(e.amount) AS xp,
+	       COALESCE((SELECT lm.tier FROM league_members lm
+	                 WHERE lm.student_id = s.id AND lm.week = ?), ''),
+	       SUM(e.amount),
 	       s.created_at
 	FROM students s
 	JOIN xp_events e ON e.student_id = s.id AND e.created_at >= ?
@@ -132,6 +136,10 @@ const sqliteAllTimeRows = `
 	         WHERE cp.student_id = s.id AND cp.status = 'MASTERED'),
 	       0,
 	       s.xp_total AS xp,
+	       COALESCE((SELECT lm.tier FROM league_members lm
+	                 WHERE lm.student_id = s.id AND lm.week = ?), ''),
+	       COALESCE((SELECT SUM(e.amount) FROM xp_events e
+	                 WHERE e.student_id = s.id AND e.created_at >= ?), 0),
 	       s.created_at
 	FROM students s
 	WHERE s.xp_total > 0 AND ` + rankedStudentWhere
@@ -142,7 +150,8 @@ func scanLeaderboardRows(rows *sql.Rows) ([]LeaderboardRow, error) {
 		var r LeaderboardRow
 		if err := rows.Scan(
 			&r.StudentID, &r.Name, &r.Username, &r.AvatarURL, &r.AvatarSettings,
-			&r.XPTotal, &r.TotalMastered, &r.WeeklyMastered, &r.XP, &r.CreatedAt,
+			&r.XPTotal, &r.TotalMastered, &r.WeeklyMastered, &r.XP, &r.League,
+			&r.LeagueXP, &r.CreatedAt,
 		); err != nil {
 			return nil, fmt.Errorf("scan leaderboard row: %w", err)
 		}

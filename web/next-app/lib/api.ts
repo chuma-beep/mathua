@@ -186,6 +186,8 @@ export interface LeaderboardEntry {
   xp_total: number
   mastered: number
   level: string
+  league?: string
+  league_xp?: number
   is_me?: boolean
 }
 
