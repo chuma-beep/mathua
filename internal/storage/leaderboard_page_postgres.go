@@ -37,7 +37,7 @@ func (s *PostgresStore) LeaderboardPage(view string, since time.Time, limit, off
 		}
 		rows, err = s.db.Query(pgAllTimeRows+`
 			ORDER BY xp DESC, s.created_at ASC, s.id ASC
-			LIMIT $3 OFFSET $4`, weekKey, limit, offset)
+			LIMIT $2 OFFSET $3`, weekKey, limit, offset)
 	default:
 		return nil, 0, fmt.Errorf("leaderboard view %q", view)
 	}
