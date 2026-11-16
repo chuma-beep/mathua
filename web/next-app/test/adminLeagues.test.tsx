@@ -194,5 +194,10 @@ describe('league time scopes', () => {
     expect(await screen.findByText('League weeks')).toBeTruthy()
     expect(screen.getByText('Unique learners')).toBeTruthy()
     expect(screen.getByRole('button', { name: 'Latest week' })).toBeTruthy()
+
+    const mix = screen.getByRole('tab', { name: 'Tier mix' })
+    fireEvent.mouseDown(mix)
+    await waitFor(() => expect(mix).toHaveAttribute('aria-selected', 'true'))
+    expect(mix.className).toContain('data-[state=active]:border-mathua-blue')
   })
 })
