@@ -2255,6 +2255,7 @@ export type AdminLeagues = z.infer<typeof AdminLeaguesSchema>
 
 const AdminLeagueRangeTierSchema = z.object({
 	tier: z.string(),
+	leagues: z.number(),
 	seats: z.number(),
 	unique_learners: z.number(),
 })
@@ -2284,6 +2285,7 @@ const AdminLeagueRangeSchema = z.object({
 	to: z.string(),
 	group: z.string(),
 	weeks: z.number(),
+	weeks_available: z.array(z.string()),
 	seats: z.number(),
 	unique_learners: z.number(),
 	promoted: z.number(),

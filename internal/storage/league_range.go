@@ -10,26 +10,28 @@ import (
 // Movement is read from the seat rows, so a promotion is counted where it
 // happened rather than recomputed from two tier snapshots.
 type LeagueRange struct {
-	From    string               `json:"from"`
-	To      string               `json:"to"`
-	Group   string               `json:"group"`
-	Weeks   int                  `json:"weeks"`
-	Seats   int                  `json:"seats"`
-	Unique  int                  `json:"unique_learners"`
-	Up      int                  `json:"promoted"`
-	Down    int                  `json:"demoted"`
-	Stay    int                  `json:"stayed"`
-	New     int                  `json:"new"`
-	Tiers   []LeagueRangeTier    `json:"tiers"`
-	Buckets []LeagueRangeBucket  `json:"buckets"`
-	Top     []LeagueRangeLearner `json:"top_range"`
-	Latest  []LeagueRangeLearner `json:"top_latest"`
+	From     string               `json:"from"`
+	To       string               `json:"to"`
+	Group    string               `json:"group"`
+	Weeks    int                  `json:"weeks"`
+	WeekKeys []string             `json:"weeks_available"`
+	Seats    int                  `json:"seats"`
+	Unique   int                  `json:"unique_learners"`
+	Up       int                  `json:"promoted"`
+	Down     int                  `json:"demoted"`
+	Stay     int                  `json:"stayed"`
+	New      int                  `json:"new"`
+	Tiers    []LeagueRangeTier    `json:"tiers"`
+	Buckets  []LeagueRangeBucket  `json:"buckets"`
+	Top      []LeagueRangeLearner `json:"top_range"`
+	Latest   []LeagueRangeLearner `json:"top_latest"`
 }
 
 type LeagueRangeTier struct {
-	Tier   string `json:"tier"`
-	Seats  int    `json:"seats"`
-	Unique int    `json:"unique_learners"`
+	Tier    string `json:"tier"`
+	Leagues int    `json:"leagues"`
+	Seats   int    `json:"seats"`
+	Unique  int    `json:"unique_learners"`
 }
 
 type LeagueRangeBucket struct {
@@ -61,7 +63,7 @@ func (s *PostgresStore) LeagueRange(from, to, group string) (*LeagueRange, error
 }
 
 func leagueRange(db *sql.DB, from, to, group string, rebind func(string) string) (*LeagueRange, error) {
-	out := &LeagueRange{From: from, To: to, Group: group, Tiers: []LeagueRangeTier{}, Buckets: []LeagueRangeBucket{}, Top: []LeagueRangeLearner{}, Latest: []LeagueRangeLearner{}}
+	out := &LeagueRange{From: from, To: to, Group: group, Tiers: []LeagueRangeTier{}, Buckets: []LeagueRangeBucket{}, Top: []LeagueRangeLearner{}, Latest: []LeagueRangeLearner{}, WeekKeys: []string{}}
 	bucketExpr := "week"
 	if group == "month" {
 		bucketExpr = "substr(week, 1, 7)"
@@ -96,10 +98,23 @@ func leagueRange(db *sql.DB, from, to, group string, rebind func(string) string)
 	if err := rows.Err(); err != nil {
 		return nil, fmt.Errorf("league range bucket rows: %w", err)
 	}
+	wrows, err := db.Query(rebind(`SELECT DISTINCT week FROM league_members WHERE week >= ? AND week <= ? ORDER BY week`), from, to)
+	if err != nil {
+		return nil, fmt.Errorf("league range weeks: %w", err)
+	}
+	for wrows.Next() {
+		var w string
+		if err := wrows.Scan(&w); err != nil {
+			wrows.Close()
+			return nil, fmt.Errorf("scan league range week: %w", err)
+		}
+		out.WeekKeys = append(out.WeekKeys, w)
+	}
+	wrows.Close()
 	if err := db.QueryRow(rebind(`SELECT COUNT(DISTINCT student_id) FROM league_members WHERE week >= ? AND week <= ?`), from, to).Scan(&out.Unique); err != nil {
 		return nil, fmt.Errorf("league range uniques: %w", err)
 	}
-	trows, err := db.Query(rebind(`SELECT tier, COUNT(*), COUNT(DISTINCT student_id)
+	trows, err := db.Query(rebind(`SELECT tier, COUNT(*), COUNT(DISTINCT student_id), COUNT(DISTINCT league_no)
 		FROM league_members WHERE week >= ? AND week <= ? GROUP BY tier`), from, to)
 	if err != nil {
 		return nil, fmt.Errorf("league range tiers: %w", err)
@@ -107,7 +122,7 @@ func leagueRange(db *sql.DB, from, to, group string, rebind func(string) string)
 	defer trows.Close()
 	for trows.Next() {
 		var t LeagueRangeTier
-		if err := trows.Scan(&t.Tier, &t.Seats, &t.Unique); err != nil {
+		if err := trows.Scan(&t.Tier, &t.Seats, &t.Unique, &t.Leagues); err != nil {
 			return nil, fmt.Errorf("scan league range tier: %w", err)
 		}
 		out.Tiers = append(out.Tiers, t)
