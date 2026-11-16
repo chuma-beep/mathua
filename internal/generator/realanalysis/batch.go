@@ -16,7 +16,6 @@ package realanalysis
 // the tests recompute the answer rather than trusting the author's arithmetic.
 
 import (
-	"math"
 	"math/rand"
 	"strconv"
 	"strings"
@@ -70,30 +69,7 @@ func pickMC(claims []mcClaim) generator.Problem {
 type supremumGen struct{}
 
 func (g *supremumGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		lo, hi int
-		set    string
-	}
-	claims := []claim{
-		{lo: 0, hi: 1, set: "the open interval of all x with 0 < x < 1"},
-		{lo: -2, hi: 3, set: "the half-open interval of all x with −2 < x ≤ 3"},
-		{lo: 1, hi: 5, set: "the half-open interval of all x with 1 ≤ x < 5"},
-		{lo: 2, hi: 4, set: "the open interval of all x with 2 < x < 4"},
-		{lo: 0, hi: 10, set: "the closed interval of all x with 0 ≤ x ≤ 10"},
-		{lo: -5, hi: -1, set: "the open interval of all x with −5 < x < −1"},
-	}
-	c := claims[rand.Intn(len(claims))]
-	answer := strconv.Itoa(c.hi)
-	return generator.Problem{
-		Question: "What is the supremum of " + c.set + "? (enter a decimal)",
-		Answer:   answer,
-		Explanation: "The supremum is the least upper bound: it is an upper bound, and no smaller number is. Every " +
-			c.set + " is at most " + strconv.Itoa(c.hi) + ", and numbers just below it are exceeded by elements of the set, so the least upper bound is " +
-			strconv.Itoa(c.hi) + ".",
-		Facts: map[string]string{
-			"lo": strconv.Itoa(c.lo), "hi": strconv.Itoa(c.hi), "answer": answer,
-		},
-	}
+	return raW2HSupremum(raW2HOrdinal(ctx))
 }
 
 // ---------------------------------------------------------------------------
@@ -103,34 +79,7 @@ func (g *supremumGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type archimedeanGen struct{}
 
 func (g *archimedeanGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		pn, pd int
-	}
-	claims := []claim{
-		{pn: 1, pd: 100},
-		{pn: 1, pd: 10},
-		{pn: 2, pd: 5},
-		{pn: 1, pd: 1000},
-		{pn: 3, pd: 4},
-		{pn: 1, pd: 7},
-	}
-	c := claims[rand.Intn(len(claims))]
-	n := c.pd/c.pn + 1
-	if c.pd%c.pn == 0 {
-		n = c.pd/c.pn + 1
-	} else {
-		n = int(math.Floor(float64(c.pd)/float64(c.pn))) + 1
-	}
-	answer := strconv.Itoa(n)
-	return generator.Problem{
-		Question: "By the Archimedean property there is a positive integer N with 1/N < ε. For ε = " +
-			strconv.Itoa(c.pn) + "/" + strconv.Itoa(c.pd) + ", what is the smallest such N? (enter a whole number)",
-		Answer:      answer,
-		Explanation: "The inequality 1/N < ε is the same as N > 1/ε, so the smallest integer N is the floor of 1/ε plus one; here 1/ε = " + strconv.Itoa(c.pd) + "/" + strconv.Itoa(c.pn) + ", giving N = " + answer + ".",
-		Facts: map[string]string{
-			"pn": strconv.Itoa(c.pn), "pd": strconv.Itoa(c.pd), "answer": answer,
-		},
-	}
+	return raW2HArchimedean(raW2HOrdinal(ctx))
 }
 
 // ---------------------------------------------------------------------------
@@ -175,20 +124,7 @@ func (g *sequenceGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type monotoneGen struct{}
 
 func (g *monotoneGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	// a = L(L-1) makes the fixed point of L = sqrt(a + L) equal to L.
-	claims := []int{2, 6, 12, 20, 30, 42}
-	a := claims[rand.Intn(len(claims))]
-	l := int((1 + math.Sqrt(1+4*float64(a))) / 2)
-	answer := strconv.Itoa(l)
-	return generator.Problem{
-		Question: "The increasing sequence x_1 = 0, x_{n+1} = sqrt(a + x_n) is bounded above and converges. Its limit L satisfies L = sqrt(a + L). For a = " +
-			strconv.Itoa(a) + ", what is L? (enter a decimal)",
-		Answer:      answer,
-		Explanation: "Squaring the fixed-point equation gives L² − L − a = 0, whose positive root is (1 + sqrt(1 + 4a))/2; the increasing sequence starting at zero converges to that root.",
-		Facts: map[string]string{
-			"a": strconv.Itoa(a), "answer": answer,
-		},
-	}
+	return raW2HMonotone(raW2HOrdinal(ctx))
 }
 
 // ---------------------------------------------------------------------------
@@ -198,29 +134,7 @@ func (g *monotoneGen) Generate(ctx generator.GeneratorContext) generator.Problem
 type seriesGen struct{}
 
 func (g *seriesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		pn, pd int
-	}
-	claims := []claim{
-		{pn: 1, pd: 2},
-		{pn: 1, pd: 3},
-		{pn: 1, pd: 4},
-		{pn: 2, pd: 3},
-		{pn: 1, pd: 5},
-		{pn: 3, pd: 5},
-	}
-	c := claims[rand.Intn(len(claims))]
-	r := float64(c.pn) / float64(c.pd)
-	answer := decimal6(1 / (1 - r))
-	return generator.Problem{
-		Question: "The geometric series with first term one and ratio r = " + strconv.Itoa(c.pn) + "/" + strconv.Itoa(c.pd) +
-			" converges to 1/(1 − r). What is its sum? (enter a decimal)",
-		Answer:      answer,
-		Explanation: "A geometric series with ratio of absolute value less than one converges to the first term divided by one minus the ratio, which is the limit of its partial sums.",
-		Facts: map[string]string{
-			"pn": strconv.Itoa(c.pn), "pd": strconv.Itoa(c.pd), "answer": answer,
-		},
-	}
+	return raW2HSeries(raW2HOrdinal(ctx))
 }
 
 // ---------------------------------------------------------------------------
@@ -230,29 +144,7 @@ func (g *seriesGen) Generate(ctx generator.GeneratorContext) generator.Problem {
 type functionLimitGen struct{}
 
 func (g *functionLimitGen) Generate(ctx generator.GeneratorContext) generator.Problem {
-	type claim struct {
-		m, en, ed int
-	}
-	claims := []claim{
-		{m: 3, en: 1, ed: 1},
-		{m: 2, en: 1, ed: 1},
-		{m: 4, en: 1, ed: 1},
-		{m: 5, en: 2, ed: 1},
-		{m: 3, en: 2, ed: 1},
-		{m: 2, en: 3, ed: 1},
-	}
-	c := claims[rand.Intn(len(claims))]
-	eps := float64(c.en) / float64(c.ed)
-	answer := decimal6(eps / float64(c.m))
-	return generator.Problem{
-		Question: "For the linear function f(x) = " + strconv.Itoa(c.m) + "x − 1 and its limit at x = 2, the largest δ that makes |f(x) − f(2)| < ε whenever |x − 2| < δ is ε divided by the slope. For ε = " +
-			strconv.Itoa(c.en) + "/" + strconv.Itoa(c.ed) + ", what is δ? (enter a decimal)",
-		Answer:      answer,
-		Explanation: "Because the function is linear, |f(x) − f(2)| = m|x − 2|, so the condition is m|x − 2| < ε, that is |x − 2| < ε/m; the largest such δ is exactly ε/m.",
-		Facts: map[string]string{
-			"m": strconv.Itoa(c.m), "en": strconv.Itoa(c.en), "ed": strconv.Itoa(c.ed), "answer": answer,
-		},
-	}
+	return raW2HFunctionLimit(raW2HOrdinal(ctx))
 }
 
 // ---------------------------------------------------------------------------

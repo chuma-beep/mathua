@@ -13,6 +13,7 @@ package realanalysis
 
 import (
 	"math"
+	"strconv"
 	"testing"
 
 	"github.com/chuma-beep/mathua/internal/grader"
@@ -118,41 +119,125 @@ func TestRABatch2MultipleChoiceRejectsEveryDistractor(t *testing.T) {
 func TestRABatch2NumericRecompute(t *testing.T) {
 	reg := raRegistry(t)
 
-	for i := 0; i < 200; i++ {
-		p := raSample(t, reg, "ra.deriv.mvt", 100+i)
-		b := raFactInt(t, p, "b")
-		if want := decimal6(float64(b) / 2); p.Answer != want {
-			t.Fatalf("mvt: b=%d answers %s, want %s", b, p.Answer, want)
+	for kp := 1; kp <= 3; kp++ {
+		for i := 0; i < 100; i++ {
+			p := raSampleKP(t, reg, "ra.deriv.mvt", kp, i)
+			switch p.Facts["kind"] {
+			case "square_from_zero":
+				b := raFactInt(t, p, "b")
+				if want := decimal6(float64(b) / 2); p.Answer != want {
+					t.Fatalf("mvt KP%d: b=%d answers %s, want %s", kp, b, p.Answer, want)
+				}
+			case "square_general":
+				a := raFactInt(t, p, "a")
+				b := raFactInt(t, p, "b")
+				if want := decimal6(float64(a+b) / 2); p.Answer != want {
+					t.Fatalf("mvt KP%d: a=%d b=%d answers %s, want %s", kp, a, b, p.Answer, want)
+				}
+			case "derivative_bound":
+				m := raFactInt(t, p, "m")
+				a := raFactInt(t, p, "a")
+				b := raFactInt(t, p, "b")
+				if want := strconv.Itoa(m * (b - a)); p.Answer != want {
+					t.Fatalf("mvt KP%d: m=%d a=%d b=%d answers %s, want %s", kp, m, a, b, p.Answer, want)
+				}
+			default:
+				t.Fatalf("mvt KP%d: unknown kind %q", kp, p.Facts["kind"])
+			}
 		}
 	}
 
-	for i := 0; i < 200; i++ {
-		p := raSample(t, reg, "ra.deriv.chain", 100+i)
-		a := raFactInt(t, p, "a")
-		b := raFactInt(t, p, "b")
-		n := raFactInt(t, p, "n")
-		x0 := raFactInt(t, p, "x0")
-		want := decimal6(float64(n * a * raIntPow(a*x0+b, n-1)))
-		if p.Answer != want {
-			t.Fatalf("chain: a=%d b=%d n=%d x0=%d answers %s, want %s", a, b, n, x0, p.Answer, want)
+	for kp := 1; kp <= 3; kp++ {
+		for i := 0; i < 100; i++ {
+			p := raSampleKP(t, reg, "ra.deriv.chain", kp, i)
+			switch p.Facts["kind"] {
+			case "power_of_linear":
+				a := raFactInt(t, p, "a")
+				b := raFactInt(t, p, "b")
+				n := raFactInt(t, p, "n")
+				x0 := raFactInt(t, p, "x0")
+				want := decimal6(float64(n * a * raIntPow(a*x0+b, n-1)))
+				if p.Answer != want {
+					t.Fatalf("chain KP%d: a=%d b=%d n=%d x0=%d answers %s, want %s", kp, a, b, n, x0, p.Answer, want)
+				}
+			case "square_root":
+				a := raFactInt(t, p, "a")
+				b := raFactInt(t, p, "b")
+				x0 := raFactInt(t, p, "x0")
+				inner := raFactInt(t, p, "inner")
+				if inner != a*x0+b || inner <= 0 {
+					t.Fatalf("chain KP%d: inner=%d but a*x0+b=%d", kp, inner, a*x0+b)
+				}
+				want := decimal6(float64(a) / (2 * math.Sqrt(float64(inner))))
+				if p.Answer != want {
+					t.Fatalf("chain KP%d: a=%d b=%d x0=%d answers %s, want %s", kp, a, b, x0, p.Answer, want)
+				}
+			case "double_chain":
+				b := raFactInt(t, p, "b")
+				n := raFactInt(t, p, "n")
+				c := raFactInt(t, p, "c")
+				m := raFactInt(t, p, "m")
+				x0 := raFactInt(t, p, "x0")
+				u := x0 + b
+				v := raIntPow(u, n) + c
+				want := strconv.Itoa(m * raIntPow(v, m-1) * n * raIntPow(u, n-1))
+				if p.Answer != want {
+					t.Fatalf("chain KP%d: b=%d n=%d c=%d m=%d x0=%d answers %s, want %s", kp, b, n, c, m, x0, p.Answer, want)
+				}
+			default:
+				t.Fatalf("chain KP%d: unknown kind %q", kp, p.Facts["kind"])
+			}
 		}
 	}
 
-	for i := 0; i < 200; i++ {
-		p := raSample(t, reg, "ra.deriv.lhopital", 100+i)
-		a := raFactInt(t, p, "a")
-		if want := decimal6(float64(a*a) / 2); p.Answer != want {
-			t.Fatalf("lhopital: a=%d answers %s, want %s", a, p.Answer, want)
+	for kp := 1; kp <= 3; kp++ {
+		for i := 0; i < 100; i++ {
+			p := raSampleKP(t, reg, "ra.deriv.lhopital", kp, i)
+			a := raFactInt(t, p, "a")
+			switch p.Facts["kind"] {
+			case "cosine", "exponential_remainder":
+				if want := decimal6(float64(a*a) / 2); p.Answer != want {
+					t.Fatalf("lhopital KP%d: a=%d answers %s, want %s", kp, a, p.Answer, want)
+				}
+			case "sine_remainder":
+				if want := decimal6(float64(a*a*a) / 6); p.Answer != want {
+					t.Fatalf("lhopital KP%d: a=%d answers %s, want %s", kp, a, p.Answer, want)
+				}
+			default:
+				t.Fatalf("lhopital KP%d: unknown kind %q", kp, p.Facts["kind"])
+			}
 		}
 	}
 
-	for i := 0; i < 200; i++ {
-		p := raSample(t, reg, "ra.deriv.riemann", 100+i)
-		b := raFactInt(t, p, "b")
-		n := raFactInt(t, p, "n")
-		want := decimal6(float64(b*b) * float64(n+1) / (2 * float64(n)))
-		if p.Answer != want {
-			t.Fatalf("riemann: b=%d n=%d answers %s, want %s", b, n, p.Answer, want)
+	for kp := 1; kp <= 3; kp++ {
+		for i := 0; i < 100; i++ {
+			p := raSampleKP(t, reg, "ra.deriv.riemann", kp, i)
+			switch p.Facts["kind"] {
+			case "right_endpoint_linear":
+				b := raFactInt(t, p, "b")
+				n := raFactInt(t, p, "n")
+				want := decimal6(float64(b*b) * float64(n+1) / (2 * float64(n)))
+				if p.Answer != want {
+					t.Fatalf("riemann KP%d: b=%d n=%d answers %s, want %s", kp, b, n, p.Answer, want)
+				}
+			case "upper_lower_gap":
+				a := raFactInt(t, p, "a")
+				b := raFactInt(t, p, "b")
+				n := raFactInt(t, p, "n")
+				want := decimal6(float64((b-a)*(b-a)) / float64(n))
+				if p.Answer != want {
+					t.Fatalf("riemann KP%d: a=%d b=%d n=%d answers %s, want %s", kp, a, b, n, p.Answer, want)
+				}
+			case "right_endpoint_square":
+				b := raFactInt(t, p, "b")
+				n := raFactInt(t, p, "n")
+				want := decimal6(float64(b*b*b) * float64(n+1) * float64(2*n+1) / (6 * float64(n*n)))
+				if p.Answer != want {
+					t.Fatalf("riemann KP%d: b=%d n=%d answers %s, want %s", kp, b, n, p.Answer, want)
+				}
+			default:
+				t.Fatalf("riemann KP%d: unknown kind %q", kp, p.Facts["kind"])
+			}
 		}
 	}
 
@@ -167,12 +252,38 @@ func TestRABatch2NumericRecompute(t *testing.T) {
 		}
 	}
 
-	for i := 0; i < 200; i++ {
-		p := raSample(t, reg, "ra.deriv.parts", 100+i)
-		b := raFactInt(t, p, "b")
-		want := decimal4(float64(b-1)*math.Exp(float64(b)) + 1)
-		if p.Answer != want {
-			t.Fatalf("parts: b=%d answers %s, want %s", b, p.Answer, want)
+	for kp := 1; kp <= 3; kp++ {
+		for i := 0; i < 100; i++ {
+			p := raSampleKP(t, reg, "ra.deriv.parts", kp, i)
+			b := raFactInt(t, p, "b")
+			switch p.Facts["kind"] {
+			case "linear_times_exponential":
+				if want := decimal4(float64(b-1)*math.Exp(float64(b)) + 1); p.Answer != want {
+					t.Fatalf("parts KP%d: b=%d answers %s, want %s", kp, b, p.Answer, want)
+				}
+			case "quadratic_times_exponential":
+				want := decimal4(math.Exp(float64(b))*(float64(b*b)-2*float64(b)+2) - 2)
+				if p.Answer != want {
+					t.Fatalf("parts KP%d: b=%d answers %s, want %s", kp, b, p.Answer, want)
+				}
+			case "cubic_times_exponential":
+				want := decimal4(math.Exp(float64(b))*(float64(b*b*b)-3*float64(b*b)+6*float64(b)-6) + 6)
+				if p.Answer != want {
+					t.Fatalf("parts KP%d: b=%d answers %s, want %s", kp, b, p.Answer, want)
+				}
+			default:
+				t.Fatalf("parts KP%d: unknown kind %q", kp, p.Facts["kind"])
+			}
+		}
+	}
+
+	for kp := 1; kp <= 3; kp++ {
+		for i := 0; i < 100; i++ {
+			p := raSampleKP(t, reg, "ra.deriv.power_series", kp, i)
+			c := raFactInt(t, p, "c")
+			if want := decimal6(1 / float64(c)); p.Answer != want {
+				t.Fatalf("power_series KP%d: c=%d answers %s, want %s", kp, c, p.Answer, want)
+			}
 		}
 	}
 
@@ -187,33 +298,59 @@ func TestRABatch2NumericRecompute(t *testing.T) {
 		}
 	}
 
-	for i := 0; i < 200; i++ {
-		p := raSample(t, reg, "ra.deriv.power_series", 100+i)
-		c := raFactInt(t, p, "c")
-		if want := decimal6(1 / float64(c)); p.Answer != want {
-			t.Fatalf("power_series: c=%d answers %s, want %s", c, p.Answer, want)
+	for kp := 1; kp <= 3; kp++ {
+		for i := 0; i < 100; i++ {
+			p := raSampleKP(t, reg, "ra.deriv.taylor", kp, i)
+			switch p.Facts["kind"] {
+			case "exponential_coefficient":
+				a := raFactInt(t, p, "a")
+				k := raFactInt(t, p, "k")
+				want := decimal6(float64(raIntPow(a, k)) / float64(raBridgeFactorial(k)))
+				if p.Answer != want {
+					t.Fatalf("taylor KP%d: a=%d k=%d answers %s, want %s", kp, a, k, p.Answer, want)
+				}
+			case "radius":
+				a := raFactInt(t, p, "a")
+				if want := decimal6(1 / float64(a)); p.Answer != want {
+					t.Fatalf("taylor KP%d: a=%d answers %s, want %s", kp, a, p.Answer, want)
+				}
+			case "binomial_coefficient":
+				m := raFactInt(t, p, "m")
+				n := raFactInt(t, p, "n")
+				want := raBridgeFactorial(m) / (raBridgeFactorial(n) * raBridgeFactorial(m-n))
+				if p.Answer != strconv.Itoa(want) {
+					t.Fatalf("taylor KP%d: m=%d n=%d answers %s, want %d", kp, m, n, p.Answer, want)
+				}
+			default:
+				t.Fatalf("taylor KP%d: unknown kind %q", kp, p.Facts["kind"])
+			}
 		}
 	}
 
-	for i := 0; i < 200; i++ {
-		p := raSample(t, reg, "ra.deriv.taylor", 100+i)
-		a := raFactInt(t, p, "a")
-		if want := decimal6(float64(a*a*a) / 6); p.Answer != want {
-			t.Fatalf("taylor: a=%d answers %s, want %s", a, p.Answer, want)
-		}
-	}
-
-	for i := 0; i < 200; i++ {
-		p := raSample(t, reg, "ra.metric.contraction", 100+i)
-		pn := raFactInt(t, p, "pn")
-		pd := raFactInt(t, p, "pd")
-		b := raFactInt(t, p, "b")
-		if pn >= pd {
-			t.Fatalf("contraction: %d/%d is not a contraction", pn, pd)
-		}
-		want := decimal6(float64(b) / (1 - float64(pn)/float64(pd)))
-		if p.Answer != want {
-			t.Fatalf("contraction: pn=%d pd=%d b=%d answers %s, want %s", pn, pd, b, p.Answer, want)
+	for kp := 1; kp <= 3; kp++ {
+		for i := 0; i < 100; i++ {
+			p := raSampleKP(t, reg, "ra.metric.contraction", kp, i)
+			pn := raFactInt(t, p, "pn")
+			pd := raFactInt(t, p, "pd")
+			if pn >= pd {
+				t.Fatalf("contraction KP%d: %d/%d is not a contraction", kp, pn, pd)
+			}
+			switch p.Facts["kind"] {
+			case "fixed_point", "iterate_limit":
+				b := raFactInt(t, p, "b")
+				want := decimal6(float64(b) / (1 - float64(pn)/float64(pd)))
+				if p.Answer != want {
+					t.Fatalf("contraction KP%d: pn=%d pd=%d b=%d answers %s, want %s", kp, pn, pd, b, p.Answer, want)
+				}
+			case "error_rate":
+				k := raFactInt(t, p, "k")
+				want := decimal6(math.Pow(float64(pn)/float64(pd), float64(k)))
+				if p.Answer != want {
+					t.Fatalf("contraction KP%d: pn=%d pd=%d k=%d answers %s, want %s", kp, pn, pd, k, p.Answer, want)
+				}
+			default:
+				t.Fatalf("contraction KP%d: unknown kind %q", kp, p.Facts["kind"])
+			}
 		}
 	}
 }

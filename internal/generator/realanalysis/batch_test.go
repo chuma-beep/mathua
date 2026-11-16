@@ -101,6 +101,21 @@ func raSample(t *testing.T, reg *generator.Registry, id string, i int) generator
 	return p
 }
 
+// raSampleKP pins the knowledge-point ordinal, which the numeric recompute
+// tests need because each ordinal now asks a different question shape.
+func raSampleKP(t *testing.T, reg *generator.Registry, id string, kp, i int) generator.Problem {
+	t.Helper()
+	p, err := reg.GenerateContext(id, generator.GeneratorContext{
+		Difficulty: float64(i%20) / 19,
+		Seed:       int64(381000 + i),
+		KPOrdinal:  kp,
+	})
+	if err != nil {
+		t.Fatalf("%s KP%d: generate: %v", id, kp, err)
+	}
+	return p
+}
+
 var raOptionLine = regexp.MustCompile(`\n\n([A-E])\) ([^\n]*)`)
 
 func raOptionsOf(q string) []string {
@@ -200,34 +215,49 @@ func TestRAMultipleChoiceRejectsEveryDistractor(t *testing.T) {
 
 func TestRASupremumRecomputes(t *testing.T) {
 	reg := raRegistry(t)
-	for i := 0; i < 200; i++ {
-		p := raSample(t, reg, "ra.order.supremum", i)
-		lo := raFactInt(t, p, "lo")
-		hi := raFactInt(t, p, "hi")
-		if lo >= hi {
-			t.Fatalf("supremum: lo=%d is not below hi=%d", lo, hi)
-		}
-		// The interval is bounded above by hi and approaches it, so the least
-		// upper bound is hi.
-		if p.Answer != strconv.Itoa(hi) {
-			t.Fatalf("supremum: lo=%d hi=%d answers %s, want %d", lo, hi, p.Answer, hi)
+	for kp := 1; kp <= 3; kp++ {
+		for i := 0; i < 100; i++ {
+			p := raSampleKP(t, reg, "ra.order.supremum", kp, i)
+			lo := raFactInt(t, p, "lo")
+			hi := raFactInt(t, p, "hi")
+			if lo >= hi {
+				t.Fatalf("supremum KP%d: lo=%d is not below hi=%d", kp, lo, hi)
+			}
+			// Every shape is bounded above by hi and approaches it, so the
+			// least upper bound is hi even when the set has no maximum.
+			if p.Answer != strconv.Itoa(hi) {
+				t.Fatalf("supremum KP%d: lo=%d hi=%d answers %s, want %d", kp, lo, hi, p.Answer, hi)
+			}
 		}
 	}
 }
 
 func TestRAArchimedeanRecomputes(t *testing.T) {
 	reg := raRegistry(t)
-	for i := 0; i < 200; i++ {
-		p := raSample(t, reg, "ra.order.archimedean", i)
-		pn := raFactInt(t, p, "pn")
-		pd := raFactInt(t, p, "pd")
-		if pn <= 0 || pd <= 0 {
-			t.Fatalf("archimedean: pn=%d pd=%d are not positive", pn, pd)
-		}
-		// 1/N < pn/pd is N > pd/pn, so the smallest integer N is floor(pd/pn)+1.
-		want := pd/pn + 1
-		if p.Answer != strconv.Itoa(want) {
-			t.Fatalf("archimedean: pn=%d pd=%d answers %s, want %d", pn, pd, p.Answer, want)
+	for kp := 1; kp <= 3; kp++ {
+		for i := 0; i < 100; i++ {
+			p := raSampleKP(t, reg, "ra.order.archimedean", kp, i)
+			pn := raFactInt(t, p, "pn")
+			pd := raFactInt(t, p, "pd")
+			if pn <= 0 || pd <= 0 || pn >= pd {
+				t.Fatalf("archimedean KP%d: pn=%d pd=%d are not a positive proper fraction", kp, pn, pd)
+			}
+			switch p.Facts["kind"] {
+			case "smallest_reciprocal", "integer_above":
+				// 1/N < pn/pd is N > pd/pn, so the smallest integer N is
+				// floor(pd/pn)+1.
+				if want := pd/pn + 1; p.Answer != strconv.Itoa(want) {
+					t.Fatalf("archimedean KP%d: pn=%d pd=%d answers %s, want %d", kp, pn, pd, p.Answer, want)
+				}
+			case "largest_reciprocal":
+				// 1/N ≥ pn/pd is N ≤ pd/pn, so the largest integer N is
+				// floor(pd/pn).
+				if want := pd / pn; p.Answer != strconv.Itoa(want) {
+					t.Fatalf("archimedean KP%d: pn=%d pd=%d answers %s, want %d", kp, pn, pd, p.Answer, want)
+				}
+			default:
+				t.Fatalf("archimedean KP%d: unknown kind %q", kp, p.Facts["kind"])
+			}
 		}
 	}
 }
@@ -250,45 +280,125 @@ func TestRASequenceRecomputes(t *testing.T) {
 
 func TestRAMonotoneRecomputes(t *testing.T) {
 	reg := raRegistry(t)
-	for i := 0; i < 200; i++ {
-		p := raSample(t, reg, "ra.seq.monotone", i)
-		a := raFactInt(t, p, "a")
-		want := strconv.Itoa(int((1 + math.Sqrt(1+4*float64(a))) / 2))
-		if p.Answer != want {
-			t.Fatalf("monotone: a=%d answers %s, want %s", a, p.Answer, want)
+	for kp := 1; kp <= 3; kp++ {
+		for i := 0; i < 100; i++ {
+			p := raSampleKP(t, reg, "ra.seq.monotone", kp, i)
+			switch p.Facts["kind"] {
+			case "sqrt_linear":
+				a := raFactInt(t, p, "a")
+				want := strconv.Itoa(int((1 + math.Sqrt(1+4*float64(a))) / 2))
+				if p.Answer != want {
+					t.Fatalf("monotone KP%d: a=%d answers %s, want %s", kp, a, p.Answer, want)
+				}
+			case "sqrt_affine":
+				a := raFactInt(t, p, "a")
+				b := raFactInt(t, p, "b")
+				want := strconv.Itoa(int((float64(b) + math.Sqrt(float64(b*b+4*a))) / 2))
+				if p.Answer != want {
+					t.Fatalf("monotone KP%d: a=%d b=%d answers %s, want %s", kp, a, b, p.Answer, want)
+				}
+			case "affine_average":
+				c := raFactInt(t, p, "c")
+				q := raFactInt(t, p, "q")
+				start := raFactInt(t, p, "start")
+				if q <= 1 || c%(q-1) != 0 {
+					t.Fatalf("monotone KP%d: c=%d q=%d do not give an integer limit", kp, c, q)
+				}
+				limit := c / (q - 1)
+				if start >= limit {
+					t.Fatalf("monotone KP%d: start=%d is not below the limit %d", kp, start, limit)
+				}
+				if p.Answer != strconv.Itoa(limit) {
+					t.Fatalf("monotone KP%d: c=%d q=%d answers %s, want %d", kp, c, q, p.Answer, limit)
+				}
+			default:
+				t.Fatalf("monotone KP%d: unknown kind %q", kp, p.Facts["kind"])
+			}
 		}
 	}
 }
 
 func TestRASeriesRecomputes(t *testing.T) {
 	reg := raRegistry(t)
-	for i := 0; i < 200; i++ {
-		p := raSample(t, reg, "ra.seq.series", i)
-		pn := raFactInt(t, p, "pn")
-		pd := raFactInt(t, p, "pd")
-		if pd == pn {
-			t.Fatalf("series: ratio pn/pd is one, the series diverges")
-		}
-		want := decimal6(float64(pd) / float64(pd-pn))
-		if p.Answer != want {
-			t.Fatalf("series: pn=%d pd=%d answers %s, want %s", pn, pd, p.Answer, want)
+	for kp := 1; kp <= 3; kp++ {
+		for i := 0; i < 100; i++ {
+			p := raSampleKP(t, reg, "ra.seq.series", kp, i)
+			switch p.Facts["kind"] {
+			case "partial_sum":
+				a := raFactInt(t, p, "a")
+				pn := raFactInt(t, p, "pn")
+				pd := raFactInt(t, p, "pd")
+				n := raFactInt(t, p, "n")
+				if pn >= pd {
+					t.Fatalf("series KP%d: ratio %d/%d is not below one", kp, pn, pd)
+				}
+				r := float64(pn) / float64(pd)
+				want := decimal6(float64(a) * (1 - math.Pow(r, float64(n))) / (1 - r))
+				if p.Answer != want {
+					t.Fatalf("series KP%d: a=%d pn=%d pd=%d n=%d answers %s, want %s", kp, a, pn, pd, n, p.Answer, want)
+				}
+			case "infinite_sum":
+				a := raFactInt(t, p, "a")
+				pn := raFactInt(t, p, "pn")
+				pd := raFactInt(t, p, "pd")
+				if pd == pn {
+					t.Fatalf("series KP%d: ratio pn/pd is one, the series diverges", kp)
+				}
+				want := decimal6(float64(a) * float64(pd) / float64(pd-pn))
+				if p.Answer != want {
+					t.Fatalf("series KP%d: a=%d pn=%d pd=%d answers %s, want %s", kp, a, pn, pd, p.Answer, want)
+				}
+			case "term_limit":
+				a := raFactInt(t, p, "a")
+				c := raFactInt(t, p, "c")
+				if a == 0 || c == 0 {
+					t.Fatalf("series KP%d: leading coefficients a=%d c=%d", kp, a, c)
+				}
+				want := decimal6(float64(a) / float64(c))
+				if p.Answer != want {
+					t.Fatalf("series KP%d: a=%d c=%d answers %s, want %s", kp, a, c, p.Answer, want)
+				}
+			default:
+				t.Fatalf("series KP%d: unknown kind %q", kp, p.Facts["kind"])
+			}
 		}
 	}
 }
 
 func TestRAFunctionLimitRecomputes(t *testing.T) {
 	reg := raRegistry(t)
-	for i := 0; i < 200; i++ {
-		p := raSample(t, reg, "ra.limit.function", i)
-		m := raFactInt(t, p, "m")
-		en := raFactInt(t, p, "en")
-		ed := raFactInt(t, p, "ed")
-		if m == 0 || ed == 0 {
-			t.Fatalf("function limit: m=%d ed=%d", m, ed)
-		}
-		want := decimal6((float64(en) / float64(ed)) / float64(m))
-		if p.Answer != want {
-			t.Fatalf("function limit: m=%d eps=%d/%d answers %s, want %s", m, en, ed, p.Answer, want)
+	for kp := 1; kp <= 3; kp++ {
+		for i := 0; i < 100; i++ {
+			p := raSampleKP(t, reg, "ra.limit.function", kp, i)
+			switch p.Facts["kind"] {
+			case "linear_at_zero", "linear_at_point":
+				m := raFactInt(t, p, "m")
+				en := raFactInt(t, p, "en")
+				ed := raFactInt(t, p, "ed")
+				if m == 0 || ed == 0 {
+					t.Fatalf("function limit KP%d: m=%d ed=%d", kp, m, ed)
+				}
+				want := decimal6((float64(en) / float64(ed)) / float64(m))
+				if p.Answer != want {
+					t.Fatalf("function limit KP%d: m=%d eps=%d/%d answers %s, want %s", kp, m, en, ed, p.Answer, want)
+				}
+			case "factor_cancel":
+				a := raFactInt(t, p, "a")
+				switch p.Facts["degree"] {
+				case "2":
+					if want := strconv.Itoa(2 * a); p.Answer != want {
+						t.Fatalf("function limit KP%d: a=%d answers %s, want %s", kp, a, p.Answer, want)
+					}
+				case "3":
+					if want := strconv.Itoa(3 * a * a); p.Answer != want {
+						t.Fatalf("function limit KP%d: a=%d answers %s, want %s", kp, a, p.Answer, want)
+					}
+				default:
+					t.Fatalf("function limit KP%d: unknown degree %q", kp, p.Facts["degree"])
+				}
+			default:
+				t.Fatalf("function limit KP%d: unknown kind %q", kp, p.Facts["kind"])
+			}
 		}
 	}
 }
