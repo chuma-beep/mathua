@@ -2253,6 +2253,52 @@ export type AdminLeague = z.infer<typeof AdminLeagueSchema>
 export type AdminLeagueMember = z.infer<typeof AdminLeagueMemberSchema>
 export type AdminLeagues = z.infer<typeof AdminLeaguesSchema>
 
+const AdminLeagueRangeTierSchema = z.object({
+	tier: z.string(),
+	seats: z.number(),
+	unique_learners: z.number(),
+})
+
+const AdminLeagueRangeBucketSchema = z.object({
+	key: z.string(),
+	label: z.string(),
+	weeks: z.number(),
+	seats: z.number(),
+	unique_learners: z.number(),
+	promoted: z.number(),
+	demoted: z.number(),
+	stayed: z.number(),
+	new: z.number(),
+})
+
+const AdminLeagueRangeLearnerSchema = z.object({
+	student_id: z.string(),
+	name: z.string(),
+	username: z.string(),
+	xp: z.number(),
+	tier: z.string(),
+})
+
+const AdminLeagueRangeSchema = z.object({
+	from: z.string(),
+	to: z.string(),
+	group: z.string(),
+	weeks: z.number(),
+	seats: z.number(),
+	unique_learners: z.number(),
+	promoted: z.number(),
+	demoted: z.number(),
+	stayed: z.number(),
+	new: z.number(),
+	tiers: z.array(AdminLeagueRangeTierSchema),
+	buckets: z.array(AdminLeagueRangeBucketSchema),
+	top_range: z.array(AdminLeagueRangeLearnerSchema),
+	top_latest: z.array(AdminLeagueRangeLearnerSchema),
+})
+
+export type AdminLeagueRange = z.infer<typeof AdminLeagueRangeSchema>
+
+
 /**
  * Read the week's leagues, or one league's standings.
  *
@@ -2273,6 +2319,18 @@ export async function getAdminLeagues(
 	const res = await authedFetch(`${API_BASE}/api/admin/leagues${qs ? `?${qs}` : ''}`, { cache: 'no-store' })
 	if (!res.ok) await throwWithResponse(res, 'Could not load leagues')
 	return validateResponse(AdminLeaguesSchema, await res.json(), 'adminLeagues')
+}
+
+
+export async function getAdminLeagueRange(
+	from: string,
+	to: string,
+	group: 'week' | 'month',
+): Promise<AdminLeagueRange> {
+	const params = new URLSearchParams({ from, to, group })
+	const res = await authedFetch(`${API_BASE}/api/admin/leagues/range?${params.toString()}`, { cache: 'no-store' })
+	if (!res.ok) await throwWithResponse(res, 'Could not load league range')
+	return validateResponse(AdminLeagueRangeSchema, await res.json(), 'adminLeagueRange')
 }
 
 export interface AdminNotificationStat {

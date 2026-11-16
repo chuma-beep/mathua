@@ -157,6 +157,7 @@ type leagueMember struct {
 	StudentID string
 	Name      string
 	XP        int
+	Movement  string
 }
 
 // planWeek maps last week's cohorts to this week's tiers.
@@ -165,12 +166,14 @@ type leagueMember struct {
 // id). The result is one tier per learner. Pure and deterministic: the same
 // input always yields the same mapping, so a retried transition cannot quietly
 // move somebody else.
-func planWeek(cohorts []leagueCohort) map[string]string {
+func planWeek(cohorts []leagueCohort) (map[string]string, map[string]string) {
 	tierOf := make(map[string]string, len(cohorts)*LeagueSize)
+	moveOf := make(map[string]string, len(cohorts)*LeagueSize)
 	for _, c := range cohorts {
 		k := moversFor(len(c.Members))
 		for i, m := range c.Members {
-			tier := validTier(c.Tier)
+			from := validTier(c.Tier)
+			tier := from
 			switch {
 			case k > 0 && i < k:
 				tier = nextTier(tier, +1)
@@ -178,9 +181,17 @@ func planWeek(cohorts []leagueCohort) map[string]string {
 				tier = nextTier(tier, -1)
 			}
 			tierOf[m.StudentID] = tier
+			switch {
+			case tierIndex(tier) > tierIndex(from):
+				moveOf[m.StudentID] = "up"
+			case tierIndex(tier) < tierIndex(from):
+				moveOf[m.StudentID] = "down"
+			default:
+				moveOf[m.StudentID] = "stay"
+			}
 		}
 	}
-	return tierOf
+	return tierOf, moveOf
 }
 
 // cutCohorts orders one tier's learners and cuts them into leagues of
@@ -317,4 +328,77 @@ func backfillLeagueMemberships(db *sql.DB, query, week string, ensure func(strin
 		seated++
 	}
 	return seated, nil
+}
+
+// BackfillLeagueMovement reconstructs movement for weeks written before the
+// column existed. A learner who was absent for a week returns as new, not as a
+// promotion, so the comparison only runs between adjacent weeks.
+func (s *SQLiteStore) BackfillLeagueMovement() (int, error) {
+	return backfillLeagueMovement(s.db, `SELECT week, student_id, tier FROM league_members ORDER BY student_id, week`,
+		func(week, id, movement string) error {
+			_, err := s.db.Exec(`UPDATE league_members SET movement = ? WHERE week = ? AND student_id = ?`, movement, week, id)
+			return err
+		})
+}
+
+func (s *PostgresStore) BackfillLeagueMovement() (int, error) {
+	return backfillLeagueMovement(s.db, `SELECT week, student_id, tier FROM league_members ORDER BY student_id, week`,
+		func(week, id, movement string) error {
+			_, err := s.db.Exec(`UPDATE league_members SET movement = $1 WHERE week = $2 AND student_id = $3`, movement, week, id)
+			return err
+		})
+}
+
+func backfillLeagueMovement(db *sql.DB, query string, update func(week, id, movement string) error) (int, error) {
+	rows, err := db.Query(query)
+	if err != nil {
+		return 0, fmt.Errorf("list league movement: %w", err)
+	}
+	type seat struct{ week, id, tier string }
+	var seats []seat
+	for rows.Next() {
+		var s seat
+		if err := rows.Scan(&s.week, &s.id, &s.tier); err != nil {
+			rows.Close()
+			return 0, fmt.Errorf("scan league movement: %w", err)
+		}
+		seats = append(seats, s)
+	}
+	if err := rows.Err(); err != nil {
+		rows.Close()
+		return 0, fmt.Errorf("league movement rows: %w", err)
+	}
+	rows.Close()
+
+	lastWeek := map[string]string{}
+	lastTier := map[string]string{}
+	changed := 0
+	for _, s := range seats {
+		movement := "new"
+		if prevWeek, ok := lastWeek[s.id]; ok && prevWeek == shiftWeekKey(s.week, -7) {
+			switch {
+			case tierIndex(s.tier) > tierIndex(lastTier[s.id]):
+				movement = "up"
+			case tierIndex(s.tier) < tierIndex(lastTier[s.id]):
+				movement = "down"
+			default:
+				movement = "stay"
+			}
+		}
+		if err := update(s.week, s.id, movement); err != nil {
+			return changed, fmt.Errorf("update league movement: %w", err)
+		}
+		changed++
+		lastWeek[s.id] = s.week
+		lastTier[s.id] = s.tier
+	}
+	return changed, nil
+}
+
+func shiftWeekKey(week string, days int) string {
+	t, err := time.Parse("2006-01-02", week)
+	if err != nil {
+		return ""
+	}
+	return t.AddDate(0, 0, days).Format("2006-01-02")
 }

@@ -1,11 +1,12 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, fireEvent, waitFor, within } from '@testing-library/react'
 import AdminLeaguesPage from '../app/admin/leagues/page'
-import { getAdminLeagues, API_BASE } from '../lib/api'
+import { getAdminLeagues, getAdminLeagueRange, API_BASE } from '../lib/api'
 
 vi.mock('../lib/api', async (importOriginal) => ({
   ...(await importOriginal<typeof import('../lib/api')>()),
   getAdminLeagues: vi.fn(),
+  getAdminLeagueRange: vi.fn(),
 }))
 
 vi.mock('../hooks/useAdminMe', () => ({
@@ -164,5 +165,33 @@ describe('admin leagues', () => {
     render(<AdminLeaguesPage />)
     expect(await screen.findByRole('status')).toBeTruthy()
     expect(screen.getByText(/No league was formed in this week/)).toBeTruthy()
+  })
+})
+
+
+describe('league time scopes', () => {
+  it('switches to the monthly aggregate', async () => {
+    vi.mocked(getAdminLeagues).mockResolvedValue(pyramid)
+    vi.mocked(getAdminLeagueRange).mockResolvedValue({
+      from: thisWeek,
+      to: thisWeek,
+      group: 'week',
+      weeks: 2,
+      seats: 40,
+      unique_learners: 12,
+      promoted: 3,
+      demoted: 2,
+      stayed: 30,
+      new: 5,
+      tiers: [{ tier: 'bronze', seats: 30, unique_learners: 10 }],
+      buckets: [{ key: thisWeek, label: thisWeek, weeks: 1, seats: 20, unique_learners: 8, promoted: 2, demoted: 1, stayed: 15, new: 2 }],
+      top_range: [{ student_id: 's1', name: 'Ada', username: 'ada', xp: 120, tier: 'bronze' }],
+      top_latest: [],
+    })
+    render(<AdminLeaguesPage />)
+    fireEvent.click(screen.getByRole('button', { name: 'month' }))
+    expect(await screen.findByText('League weeks')).toBeTruthy()
+    expect(screen.getByText('Unique learners')).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Latest week' })).toBeTruthy()
   })
 })

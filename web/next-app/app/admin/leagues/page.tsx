@@ -11,13 +11,17 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui
 import { Skeleton } from '../../../components/ui/skeleton'
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '../../../components/ui/table'
 import { dicebearUrl, isDicebearStyle } from '../../../lib/dicebear'
-import { API_BASE, getAdminLeagues, getErrorMessage, type AdminLeague, type AdminLeagueMember } from '../../../lib/api'
+import { API_BASE, getAdminLeagueRange, getAdminLeagues, getErrorMessage, type AdminLeague, type AdminLeagueMember, type AdminLeagueRange } from '../../../lib/api'
+import { DateRangePicker } from '../../../components/ui/date-range-picker'
+import type { DateRange } from 'react-day-picker'
 
 // The league console is a reading surface, not a queue. A week has five tiers,
 // each with zero or more leagues, and a league has up to thirty seats. The page
 // therefore separates the week summary, the tier pyramid and one roster, and
 // reads only the selected roster. Nothing here changes a league: XP decides the
 // seats and the server applies movement when the week closes.
+
+type Scope = 'week' | 'month' | 'year' | 'custom'
 
 const LEAGUE_SIZE = 30
 const TIER_ORDER = ['bronze', 'silver', 'gold', 'platinum', 'diamond']
@@ -199,6 +203,117 @@ function RosterPanel({
   )
 }
 
+function RangePanel({
+  data,
+  loading,
+  error,
+  onRetry,
+  rankBy,
+  onRankBy,
+}: {
+  data: AdminLeagueRange | null
+  loading: boolean
+  error: string
+  onRetry: () => void
+  rankBy: 'range' | 'latest'
+  onRankBy: (value: 'range' | 'latest') => void
+}) {
+  if (loading && !data) {
+    return <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{Array.from({ length: 4 }, (_, i) => <Skeleton key={i} className="h-24 w-full" />)}</div>
+  }
+  if (error) {
+    return (
+      <div className="border border-mathua-red bg-mathua-surface p-3">
+        <p role="alert" className="font-mono text-[11px] text-mathua-red">{error}</p>
+        <button type="button" onClick={onRetry} className="mt-2 h-8 border border-mathua-border px-2.5 font-mono text-[11px] text-mathua-secondary hover:border-mathua-blue hover:text-mathua-blue">Retry</button>
+      </div>
+    )
+  }
+  if (!data) return null
+  const learners = rankBy === 'range' ? data.top_range : data.top_latest
+  const maxTier = Math.max(1, ...data.tiers.map(t => t.seats))
+  return (
+    <>
+      <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+        <Card><CardHeader><CardTitle>League weeks</CardTitle></CardHeader><CardContent><p className="font-mono text-2xl tabular-nums text-mathua-primary">{data.weeks}</p><p className="mt-1 font-mono text-[10px] text-mathua-muted">{data.seats.toLocaleString()} seats</p></CardContent></Card>
+        <Card><CardHeader><CardTitle>Unique learners</CardTitle></CardHeader><CardContent><p className="font-mono text-2xl tabular-nums text-mathua-primary">{data.unique_learners.toLocaleString()}</p><p className="mt-1 font-mono text-[10px] text-mathua-muted">Across the range</p></CardContent></Card>
+        <Card><CardHeader><CardTitle>Promoted</CardTitle></CardHeader><CardContent><p className="font-mono text-2xl tabular-nums text-mathua-green">{data.promoted.toLocaleString()}</p><p className="mt-1 font-mono text-[10px] text-mathua-muted">{data.demoted.toLocaleString()} demoted · {data.stayed.toLocaleString()} stayed</p></CardContent></Card>
+        <Card><CardHeader><CardTitle>New seats</CardTitle></CardHeader><CardContent><p className="font-mono text-2xl tabular-nums text-mathua-primary">{data.new.toLocaleString()}</p><p className="mt-1 font-mono text-[10px] text-mathua-muted">First appearance in a league</p></CardContent></Card>
+      </div>
+
+      <section className="mt-8" aria-labelledby="range-tiers">
+        <div className="flex items-baseline justify-between border-b border-mathua-border pb-2">
+          <h2 id="range-tiers" className="font-mono text-xs uppercase tracking-wider text-mathua-primary">Tier mix</h2>
+          <span className="font-mono text-[10px] text-mathua-muted">Seats across the range</span>
+        </div>
+        <div className="mt-3 space-y-2">
+          {TIER_ORDER.map(tier => {
+            const row = data.tiers.find(t => t.tier === tier)
+            const seats = row?.seats ?? 0
+            return (
+              <div key={tier} className="grid grid-cols-[5rem_1fr_5rem] items-center gap-3">
+                <span className="font-mono text-[10px] uppercase tracking-wider text-mathua-secondary">{tierLabel(tier)}</span>
+                <span className="h-3 w-full bg-mathua-surface-elevated"><span className="block h-3" style={{ width: `${(seats / maxTier) * 100}%`, backgroundColor: TIER_COLOUR[tier] }} /></span>
+                <span className="text-right font-mono text-[11px] tabular-nums text-mathua-primary">{seats.toLocaleString()}</span>
+              </div>
+            )
+          })}
+        </div>
+      </section>
+
+      <section className="mt-8" aria-labelledby="range-weeks">
+        <div className="flex items-baseline justify-between border-b border-mathua-border pb-2">
+          <h2 id="range-weeks" className="font-mono text-xs uppercase tracking-wider text-mathua-primary">Weekly breakdown</h2>
+          <span className="font-mono text-[10px] text-mathua-muted">Select a row to open that week</span>
+        </div>
+        <div className="mt-3 overflow-x-auto">
+          <Table>
+            <TableHeader><TableRow><TableHead>Period</TableHead><TableHead className="text-right">Weeks</TableHead><TableHead className="text-right">Seats</TableHead><TableHead className="text-right">Unique</TableHead><TableHead className="text-right">Up</TableHead><TableHead className="text-right">Down</TableHead></TableRow></TableHeader>
+            <TableBody>
+              {data.buckets.map(b => (
+                <TableRow key={b.key}>
+                  <TableCell>
+                    {/^\d{4}-\d{2}-\d{2}$/.test(b.key) ? (
+                      <Link href={`/admin/leagues?week=${b.key}`} className="text-mathua-blue hover:underline">{weekLabel(b.key)}</Link>
+                    ) : b.key}
+                  </TableCell>
+                  <TableCell className="text-right tabular-nums">{b.weeks}</TableCell>
+                  <TableCell className="text-right tabular-nums">{b.seats}</TableCell>
+                  <TableCell className="text-right tabular-nums">{b.unique_learners}</TableCell>
+                  <TableCell className="text-right tabular-nums text-mathua-green">{b.promoted}</TableCell>
+                  <TableCell className="text-right tabular-nums text-mathua-red">{b.demoted}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </section>
+
+      <section className="mt-8" aria-labelledby="range-top">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-mathua-border pb-2">
+          <h2 id="range-top" className="font-mono text-xs uppercase tracking-wider text-mathua-primary">Top learners</h2>
+          <div className="flex gap-1" role="group" aria-label="Ranking basis">
+            <button type="button" aria-pressed={rankBy === 'range'} onClick={() => onRankBy('range')} className={`h-8 border px-2.5 font-mono text-[11px] ${rankBy === 'range' ? 'border-mathua-blue text-mathua-blue' : 'border-mathua-border text-mathua-secondary'}`}>XP in range</button>
+            <button type="button" aria-pressed={rankBy === 'latest'} onClick={() => onRankBy('latest')} className={`h-8 border px-2.5 font-mono text-[11px] ${rankBy === 'latest' ? 'border-mathua-blue text-mathua-blue' : 'border-mathua-border text-mathua-secondary'}`}>Latest week</button>
+          </div>
+        </div>
+        {learners.length === 0 ? <p className="py-8 text-center font-mono text-[11px] text-mathua-muted">No ranked learners in this range.</p> : (
+          <ol className="mt-3 divide-y divide-mathua-border border border-mathua-border bg-mathua-surface">
+            {learners.map((l, i) => (
+              <li key={l.student_id} className="flex items-center gap-3 px-3 py-2">
+                <span className="w-6 font-mono text-[11px] text-mathua-muted">{i + 1}</span>
+                <span className="min-w-0 flex-1 truncate font-mono text-[11px] text-mathua-primary">{l.name || l.username || l.student_id}</span>
+                <span className="font-mono text-[10px] uppercase tracking-wider text-mathua-muted">{l.tier || '—'}</span>
+                <span className="w-20 text-right font-mono text-[11px] tabular-nums text-mathua-primary">{l.xp.toLocaleString()}</span>
+              </li>
+            ))}
+          </ol>
+        )}
+      </section>
+    </>
+  )
+}
+
 export default function AdminLeaguesPage() {
   const [week, setWeek] = useState<string | null>(null)
   const [leagues, setLeagues] = useState<AdminLeague[] | null>(null)
@@ -211,11 +326,29 @@ export default function AdminLeaguesPage() {
   const [rosterLoading, setRosterLoading] = useState(false)
   const [rosterError, setRosterError] = useState('')
   const [retryToken, setRetryToken] = useState(0)
+  const [scope, setScope] = useState<Scope>('week')
+  const [month, setMonth] = useState(() => new Date().toISOString().slice(0, 7))
+  const [year, setYear] = useState(() => String(new Date().getUTCFullYear()))
+  const [custom, setCustom] = useState<DateRange | undefined>(undefined)
+  const [rangeData, setRangeData] = useState<AdminLeagueRange | null>(null)
+  const [rangeLoading, setRangeLoading] = useState(false)
+  const [rangeError, setRangeError] = useState('')
+  const [rangeRetry, setRangeRetry] = useState(0)
+  const [rankBy, setRankBy] = useState<'range' | 'latest'>('range')
 
   // The static export cannot know today's Monday at build time, so the week is
   // read from the URL in the browser and only then fetched.
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
+    const rawScope = params.get('scope')
+    if (rawScope === 'week' || rawScope === 'month' || rawScope === 'year' || rawScope === 'custom') setScope(rawScope)
+    const rawMonth = params.get('month')
+    if (rawMonth && /^\d{4}-\d{2}$/.test(rawMonth)) setMonth(rawMonth)
+    const rawYear = params.get('year')
+    if (rawYear && /^\d{4}$/.test(rawYear)) setYear(rawYear)
+    const rawFrom = params.get('from')
+    const rawTo = params.get('to')
+    if (rawFrom && rawTo) setCustom({ from: new Date(`${rawFrom}T00:00:00Z`), to: new Date(`${rawTo}T00:00:00Z`) })
     const rawWeek = params.get('week')
     const parsedWeek = rawWeek && /^\d{4}-\d{2}-\d{2}$/.test(rawWeek) ? rawWeek : weekKeyOf(new Date())
     const rawTier = params.get('tier')
@@ -248,13 +381,23 @@ export default function AdminLeaguesPage() {
   useEffect(() => {
     if (!week) return
     const params = new URLSearchParams()
-    params.set('week', week)
-    if (selected) {
-      params.set('tier', selected.tier)
-      params.set('league', String(selected.league))
+    params.set('scope', scope)
+    if (scope === 'week') {
+      params.set('week', week)
+      if (selected) {
+        params.set('tier', selected.tier)
+        params.set('league', String(selected.league))
+      }
+    } else if (scope === 'month') {
+      params.set('month', month)
+    } else if (scope === 'year') {
+      params.set('year', year)
+    } else if (custom?.from && custom?.to) {
+      params.set('from', custom.from.toISOString().slice(0, 10))
+      params.set('to', custom.to.toISOString().slice(0, 10))
     }
     window.history.replaceState(null, '', `?${params.toString()}`)
-  }, [week, selected])
+  }, [week, selected, scope, month, year, custom])
 
   // A week with leagues should open on something rather than an empty roster.
   useEffect(() => {
@@ -278,6 +421,35 @@ export default function AdminLeaguesPage() {
       .finally(() => { if (live) setRosterLoading(false) })
     return () => { live = false }
   }, [week, selected, retryToken])
+
+  const rangeBounds = useMemo(() => {
+    if (scope === 'month') {
+      const [y, m] = month.split('-').map(Number)
+      const first = new Date(Date.UTC(y, m - 1, 1))
+      const last = new Date(Date.UTC(y, m, 0))
+      return { from: weekKeyOf(first), to: weekKeyOf(last), group: 'week' as const }
+    }
+    if (scope === 'year') {
+      return { from: weekKeyOf(new Date(Date.UTC(Number(year), 0, 1))), to: weekKeyOf(new Date(Date.UTC(Number(year), 11, 31))), group: 'month' as const }
+    }
+    if (scope === 'custom' && custom?.from && custom?.to) {
+      const days = Math.round((custom.to.getTime() - custom.from.getTime()) / 86400000)
+      return { from: weekKeyOf(custom.from), to: weekKeyOf(custom.to), group: days > 90 ? 'month' as const : 'week' as const }
+    }
+    return null
+  }, [scope, month, year, custom])
+
+  useEffect(() => {
+    if (scope === 'week' || !rangeBounds) { setRangeData(null); return }
+    let live = true
+    setRangeLoading(true)
+    setRangeError('')
+    getAdminLeagueRange(rangeBounds.from, rangeBounds.to, rangeBounds.group)
+      .then(data => { if (live) setRangeData(data) })
+      .catch(e => { if (live) { setRangeData(null); setRangeError(getErrorMessage(e)) } })
+      .finally(() => { if (live) setRangeLoading(false) })
+    return () => { live = false }
+  }, [scope, rangeBounds, rangeRetry])
 
   const byTier = useMemo(() => {
     const map = new Map<string, AdminLeague[]>()
@@ -308,6 +480,36 @@ export default function AdminLeaguesPage() {
       <main className="mx-auto w-full max-w-[1200px] min-w-0 px-4 sm:px-6 py-8 sm:py-12 overflow-x-hidden">
         <SectionHeader label="Administration" title="Leagues" />
 
+        <div className="mb-4 flex flex-wrap items-center gap-1" role="group" aria-label="League time scope">
+          {(['week', 'month', 'year', 'custom'] as Scope[]).map(item => (
+            <button
+              key={item}
+              type="button"
+              aria-pressed={scope === item}
+              onClick={() => setScope(item)}
+              className={`h-9 border px-3 font-mono text-xs capitalize ${scope === item ? 'border-mathua-blue bg-mathua-blue-faint text-mathua-blue' : 'border-mathua-border text-mathua-secondary hover:border-mathua-blue'}`}
+            >
+              {item}
+            </button>
+          ))}
+          {scope === 'month' && (
+            <input type="month" aria-label="League month" value={month} onChange={e => setMonth(e.target.value)} className="ml-2 h-9 border border-mathua-border bg-mathua-surface px-2 font-mono text-xs text-mathua-primary" />
+          )}
+          {scope === 'year' && (
+            <select aria-label="League year" value={year} onChange={e => setYear(e.target.value)} className="ml-2 h-9 border border-mathua-border bg-mathua-surface px-2 font-mono text-xs text-mathua-primary">
+              {Array.from({ length: 5 }, (_, i) => String(new Date().getUTCFullYear() - i)).map(y => <option key={y} value={y}>{y}</option>)}
+            </select>
+          )}
+          {scope === 'custom' && (
+            <span className="ml-2"><DateRangePicker value={custom} onChange={setCustom} max={new Date()} /></span>
+          )}
+        </div>
+
+        {scope !== 'week' && (
+          <RangePanel data={rangeData} loading={rangeLoading} error={rangeError} onRetry={() => setRangeRetry(n => n + 1)} rankBy={rankBy} onRankBy={setRankBy} />
+        )}
+
+        {scope === 'week' && (<>
         <div className="mb-5 flex flex-wrap items-center gap-2">
           <button
             type="button"
@@ -461,6 +663,7 @@ export default function AdminLeaguesPage() {
             </section>
           </>
         )}
+        </>)}
       </main>
     </AdminShell>
   )

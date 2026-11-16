@@ -73,7 +73,7 @@ func (s *PostgresStore) ResolveLeagueWeek(week string, prevFrom, prevTo time.Tim
 	}
 
 	cohorts := groupCohorts(flat)
-	tierOf := planWeek(cohorts)
+	tierOf, moveOf := planWeek(cohorts)
 
 	for _, c := range cohorts {
 		for i, m := range c.Members {
@@ -89,6 +89,7 @@ func (s *PostgresStore) ResolveLeagueWeek(week string, prevFrom, prevTo time.Tim
 	for _, c := range cohorts {
 		for _, m := range c.Members {
 			tier := tierOf[m.StudentID]
+			m.Movement = moveOf[m.StudentID]
 			byTier[tier] = append(byTier[tier], m)
 		}
 	}

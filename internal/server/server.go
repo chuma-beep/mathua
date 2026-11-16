@@ -634,6 +634,7 @@ func (s *Server) Register(mux *http.ServeMux) {
 	// its week: an administrator who may not look an account up does not get to enumerate the
 	// same people by cohort instead.
 	mux.HandleFunc("/api/admin/leagues", logRequest(cors(s.requirePermission(admin.UsersRead, s.handleAdminLeagues))))
+	mux.HandleFunc("/api/admin/leagues/range", logRequest(cors(s.requirePermission(admin.UsersRead, s.handleAdminLeagueRange))))
 	// Delivery health is read under the account grant: a delivery row names one
 	// learner and one message, and an operator who may not look an account up
 	// does not get to enumerate the same people through the delivery queue.
