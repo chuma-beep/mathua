@@ -140,6 +140,14 @@ describe('the client offers administration without enforcing it', () => {
     expect(screen.getByText(/needs a staff role/)).toBeTruthy()
   })
 
+  it('offers the same sections in the mobile sidebar sheet', async () => {
+    render(<AdminUsersPage />)
+    fireEvent.click(await screen.findByRole('button', { name: 'Open admin navigation' }))
+    const sheet = await screen.findByRole('dialog')
+    expect(within(sheet).getByRole('link', { name: 'Overview' })).toBeTruthy()
+    expect(within(sheet).getByRole('link', { name: 'Users' })).toBeTruthy()
+  })
+
   it('sends only the role it is changing to', async () => {
     vi.mocked(setUserRole).mockResolvedValue({ user: { ...LEARNER, role: 'admin' }, changed: true })
     render(<AdminUsersPage />)
