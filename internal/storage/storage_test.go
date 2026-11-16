@@ -639,6 +639,13 @@ func TestLeaderboardCarriesUsernameAndAvatar(t *testing.T) {
 	if err := store.ResolveLeagueWeek(week, start.AddDate(0, 0, -7), start); err != nil {
 		t.Fatalf("resolve week: %v", err)
 	}
+	page, _, err := store.LeaderboardPage("weekly", start, 10, 0)
+	if err != nil {
+		t.Fatalf("weekly page: %v", err)
+	}
+	if len(page) != 1 || page[0].League != "bronze" || page[0].LeagueXP != 20 {
+		t.Fatalf("expected current league and weekly xp on the board row, got %+v", page)
+	}
 	tier, no, found, err := store.LeagueMembershipOf(st.ID, week)
 	if err != nil || !found {
 		t.Fatalf("membership: %v found=%v", err, found)

@@ -39,7 +39,11 @@ type Entry struct {
 	XPTotal  int     `json:"xp_total"`
 	Mastered int     `json:"mastered"`
 	Level    string  `json:"level"`
-	IsMe     bool    `json:"is_me,omitempty"`
+	// League carries the earned frame. It is empty when the row has no seat in
+	// the week being ranked, so a stale tier never decorates an avatar.
+	League   string `json:"league,omitempty"`
+	LeagueXP int    `json:"league_xp,omitempty"`
+	IsMe     bool   `json:"is_me,omitempty"`
 }
 
 // Avatar is the small amount the board needs to draw a face. Generated avatars
@@ -154,6 +158,8 @@ func entryFromRow(r storage.LeaderboardRow, rank int, meID string) Entry {
 		XPTotal:  r.XPTotal,
 		Mastered: r.TotalMastered,
 		Level:    levels.Compute(r.TotalMastered),
+		League:   r.League,
+		LeagueXP: r.LeagueXP,
 		IsMe:     meID != "" && r.StudentID == meID,
 		Avatar:   avatarFor(r, id),
 	}

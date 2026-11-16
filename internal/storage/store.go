@@ -305,8 +305,14 @@ type LeaderboardRow struct {
 	// XP is the score for the requested view: the week's ledger sum for
 	// "weekly", lifetime total for "all_time". XPTotal is always the lifetime
 	// total, so a weekly board can break a tie on earned history.
-	XP        int
-	XPTotal   int
+	XP      int
+	XPTotal int
+	// League and LeagueXP travel with a public row so a browser can draw the
+	// earned frame without a second lookup. League is empty unless the row's
+	// league_week is the week being ranked, so a stale tier never decorates an
+	// avatar.
+	League    string
+	LeagueXP  int
 	CreatedAt string
 }
 

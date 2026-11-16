@@ -10,7 +10,7 @@ import Avatar from './Avatar'
 export const LEAGUE_TIER_ORDER = ['bronze', 'silver', 'gold', 'platinum', 'diamond'] as const
 export type LeagueTier = (typeof LEAGUE_TIER_ORDER)[number]
 
-const MIN_GEOMETRY_SIZE = 28
+const MIN_GEOMETRY_SIZE = 20
 
 const TIER_COLOUR: Record<LeagueTier, { main: string; soft: string }> = {
   bronze: { main: 'var(--league-bronze)', soft: 'var(--league-bronze-soft)' },

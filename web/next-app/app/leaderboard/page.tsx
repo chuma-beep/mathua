@@ -6,7 +6,6 @@ import Link from 'next/link'
 import AppShell from '../../components/app-shell'
 import SectionHeader from '../../components/SectionHeader'
 import Footer from '../../components/Footer'
-import Avatar from '../../components/Avatar'
 import LeagueAvatar from '../../components/LeagueAvatar'
 import { LeaderboardTableSkeleton } from '../../components/skeletons/LeaderboardSkeleton'
 import { useAuthState } from '../../hooks/useAuthState'
@@ -80,7 +79,7 @@ function Podium({ entries }: { entries: LeaderboardEntry[] }) {
           className={`border border-mathua-border bg-mathua-surface px-4 py-3 flex items-center gap-3 min-w-0 ${i === 0 ? 'sm:order-2' : i === 1 ? 'sm:order-1' : 'sm:order-3'}`}
         >
           <span className="font-mono text-lg text-mathua-blue w-5 shrink-0">{row.rank}</span>
-          <Avatar seed={row.id} name={nameOf(row)} size={30} url={avatarURL(row)} className="shrink-0" />
+          <LeagueAvatar tier={row.league} weeklyXp={row.league_xp} seed={row.id} name={nameOf(row)} size={30} url={avatarURL(row)} className="shrink-0" />
           <span className="min-w-0 flex-1">
             <span className="block text-sm text-mathua-primary truncate" title={nameOf(row)}>{nameOf(row)}</span>
             <span className="block font-mono text-[10px] uppercase tracking-wider text-mathua-muted">
@@ -188,7 +187,7 @@ function BoardTable({ board, view }: { board: LeaderboardBoard; view: Leaderboar
               <td className="p-2.5 sm:p-[14px_20px] font-mono text-sm text-mathua-muted">{row.rank}</td>
               <td className="p-2.5 sm:p-[14px_20px] text-mathua-primary text-sm font-medium max-w-[160px] sm:max-w-none">
                 <span className="flex items-center gap-2 min-w-0">
-                  <Avatar seed={row.id} name={nameOf(row)} size={28} url={avatarURL(row)} className="shrink-0" />
+                  <LeagueAvatar tier={row.league} weeklyXp={row.league_xp} seed={row.id} name={nameOf(row)} size={28} url={avatarURL(row)} className="shrink-0" />
                   <span className="block truncate" title={nameOf(row)}>{nameOf(row)}</span>
                   {row.is_me && (
                     <span className="font-mono text-[10px] uppercase text-mathua-blue shrink-0">you</span>
